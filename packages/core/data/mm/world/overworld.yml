@@ -2363,7 +2363,7 @@
     "Zora Cape Near Hall": "has_mask_zora"
     "Zora Cape Peninsula": "has_mask_zora || trick(MM_ZORA_HALL_HUMAN)"
     "Waterfall Cliffs": "can_hookshot"
-    "Great Bay Near Fairy Fountain": "can_hookshot" #|| (can_use_ice_arrows && (has_mask_zora || can_hookshot_short))
+    "Great Bay Near Fairy Fountain": "can_hookshot && (has_explosives || trick_keg_explosives || short_hook_anywhere)" #|| (can_use_ice_arrows && (has_mask_zora || can_hookshot_short))
     "Zora Cape Grotto": "can_break_boulders"
   locations:
     "Zora Cape Underwater Chest": "has_mask_zora"
@@ -2411,8 +2411,8 @@
 "Great Bay Near Fairy Fountain":
   region: ZORA_CAPE
   exits:
-    "Zora Cape": "true"
-    "Great Bay Fairy Fountain": "has_explosives || trick_keg_explosives || short_hook_anywhere"
+    "Zora Cape": "cond(setting(erIndoorsMajor), has_explosives || trick_keg_explosives, true)"
+    "Great Bay Fairy Fountain": "true"
 "Great Bay Fairy Fountain":
   region: ENTRANCE
   exits:

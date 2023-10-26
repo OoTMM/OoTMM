@@ -1258,7 +1258,7 @@
     "Goron City Shortcut": "event(GORON_CITY_SHORTCUT) || climb_anywhere || hookshot_anywhere"
     "Death Mountain": "true"
     "Darunia Chamber": "(is_adult && (has_explosives || can_use_bow || has(STRENGTH)) && soul_npc(SOUL_NPC_GORON_CHILD)) || (is_child && can_play_zelda)"
-    "Goron Shop": "has_bombflowers || (can_use_bow && (is_adult || time_travel_at_will)) || ((can_use_din || event(DARUNIA_TORCH)) && (is_child || time_travel_at_will))"
+    "Goron Shop": "(has_bombflowers && (is_child || time_travel_at_will || (is_adult && soul_npc(SOUL_NPC_GORON_CHILD)))) || (can_use_bow && soul_npc(SOUL_NPC_GORON_CHILD) && (is_adult || time_travel_at_will)) || ((can_use_din || event(DARUNIA_TORCH)) && (is_child || time_travel_at_will))"
     "Goron City Grotto": "(is_adult && can_play_time) || (can_hookshot && (has_tunic_goron_strict || can_use_nayru)) || climb_anywhere"
   events:
     GORON_CITY_SHORTCUT: "has_bombflowers || can_hammer || can_use_bow || can_use_din || event(DARUNIA_TORCH)"
