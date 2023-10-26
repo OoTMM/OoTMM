@@ -1225,6 +1225,57 @@ MQ Deku Tree GS Back Room,                                  gs,             NONE
 MQ Deku Tree GS Lobby Crate,                                gs,             NONE,                 INSIDE_DEKU_TREE,               0x09,                       GS_TOKEN
 MQ Deku Tree GS Song of Time Blocks,                        gs,             NONE,                 INSIDE_DEKU_TREE,               0x0a,                       GS_TOKEN
 MQ Deku Tree GS Compass Room,                               gs,             NONE,                 INSIDE_DEKU_TREE,               0x0b,                       GS_TOKEN
+MQ Deku Tree Grass Entrance Lower 1,                        grass,          NONE,                 INSIDE_DEKU_TREE,               0x00005,                    DEKU_SEEDS_5
+MQ Deku Tree Grass Entrance Lower 2,                        grass,          NONE,                 INSIDE_DEKU_TREE,               0x00006,                    RECOVERY_HEART
+MQ Deku Tree Grass Entrance Lower 3,                        grass,          NONE,                 INSIDE_DEKU_TREE,               0x00007,                    DEKU_SEEDS_5
+MQ Deku Tree Grass Entrance Lower 4,                        grass,          NONE,                 INSIDE_DEKU_TREE,               0x00014,                    RANDOM
+MQ Deku Tree Grass Entrance Lower 5,                        grass,          NONE,                 INSIDE_DEKU_TREE,               0x00015,                    RANDOM
+MQ Deku Tree Grass Entrance Upper 1,                        grass,          NONE,                 INSIDE_DEKU_TREE,               0x00008,                    RECOVERY_HEART
+MQ Deku Tree Grass Entrance Upper 2,                        grass,          NONE,                 INSIDE_DEKU_TREE,               0x00009,                    DEKU_SEEDS_5
+MQ Deku Tree Grass Room Before Compass 1,                   grass,          NONE,                 INSIDE_DEKU_TREE,               0x00100,                    RECOVERY_HEART
+MQ Deku Tree Grass Room Before Compass 2,                   grass,          NONE,                 INSIDE_DEKU_TREE,               0x00101,                    DEKU_SEEDS_5
+MQ Deku Tree Grass Room Before Compass 3,                   grass,          NONE,                 INSIDE_DEKU_TREE,               0x00102,                    RECOVERY_HEART
+MQ Deku Tree Grass Room Before Compass 4,                   grass,          NONE,                 INSIDE_DEKU_TREE,               0x00105,                    RANDOM
+MQ Deku Tree Grass Room Before Compass 5,                   grass,          NONE,                 INSIDE_DEKU_TREE,               0x00106,                    RANDOM
+MQ Deku Tree Grass Room Before Compass 6,                   grass,          NONE,                 INSIDE_DEKU_TREE,               0x00107,                    RANDOM
+MQ Deku Tree Grass Room Before Compass 7,                   grass,          NONE,                 INSIDE_DEKU_TREE,               0x00108,                    RANDOM
+MQ Deku Tree Grass Compass Room 1,                          grass,          NONE,                 INSIDE_DEKU_TREE,               0x00203,                    DEKU_SEEDS_5
+MQ Deku Tree Grass Compass Room 2,                          grass,          NONE,                 INSIDE_DEKU_TREE,               0x00204,                    RECOVERY_HEART
+MQ Deku Tree Grass Compass Room 3,                          grass,          NONE,                 INSIDE_DEKU_TREE,               0x00205,                    DEKU_SEEDS_5
+MQ Deku Tree Grass Compass Room 4,                          grass,          NONE,                 INSIDE_DEKU_TREE,               0x00206,                    RECOVERY_HEART
+MQ Deku Tree Grass Basement Lower 1,                        grass,          NONE,                 INSIDE_DEKU_TREE,               0x00301,                    DEKU_SEEDS_5
+MQ Deku Tree Grass Basement Lower 2,                        grass,          NONE,                 INSIDE_DEKU_TREE,               0x00302,                    RECOVERY_HEART
+MQ Deku Tree Grass Basement Lower 3,                        grass,          NONE,                 INSIDE_DEKU_TREE,               0x0030b,                    RANDOM
+MQ Deku Tree Grass Basement Lower 4,                        grass,          NONE,                 INSIDE_DEKU_TREE,               0x0030c,                    RANDOM
+MQ Deku Tree Grass Basement Upper 1,                        grass,          NONE,                 INSIDE_DEKU_TREE,               0x00303,                    DEKU_SEEDS_5
+MQ Deku Tree Grass Basement Upper 2,                        grass,          NONE,                 INSIDE_DEKU_TREE,               0x00304,                    RECOVERY_HEART
+MQ Deku Tree Grass Basement Upper 3,                        grass,          NONE,                 INSIDE_DEKU_TREE,               0x00305,                    DEKU_SEEDS_5
+MQ Deku Tree Grass Room Before Spike 1,                     grass,          NONE,                 INSIDE_DEKU_TREE,               0x00400,                    RECOVERY_HEART
+MQ Deku Tree Grass Room Before Spike 2,                     grass,          NONE,                 INSIDE_DEKU_TREE,               0x00401,                    DEKU_SEEDS_5
+MQ Deku Tree Grass Room Before Spike 3,                     grass,          NONE,                 INSIDE_DEKU_TREE,               0x00402,                    RECOVERY_HEART
+MQ Deku Tree Grass Room Before Spike 4,                     grass,          NONE,                 INSIDE_DEKU_TREE,               0x00403,                    DEKU_SEEDS_5
+MQ Deku Tree Grass Spike Room Back 1,                       grass,          NONE,                 INSIDE_DEKU_TREE,               0x00502,                    RECOVERY_HEART
+MQ Deku Tree Grass Spike Room Back 2,                       grass,          NONE,                 INSIDE_DEKU_TREE,               0x00503,                    DEKU_SEEDS_5
+MQ Deku Tree Grass Spike Room Front 1,                      grass,          NONE,                 INSIDE_DEKU_TREE,               0x00504,                    RANDOM
+MQ Deku Tree Grass Spike Room Front 2,                      grass,          NONE,                 INSIDE_DEKU_TREE,               0x00505,                    RANDOM
+MQ Deku Tree Grass Spike Room Front 3,                      grass,          NONE,                 INSIDE_DEKU_TREE,               0x00506,                    RANDOM
+MQ Deku Tree Grass Larvae Room 1,                           grass,          NONE,                 INSIDE_DEKU_TREE,               0x00601,                    RECOVERY_HEART
+MQ Deku Tree Grass Larvae Room 2,                           grass,          NONE,                 INSIDE_DEKU_TREE,               0x00602,                    DEKU_SEEDS_5
+MQ Deku Tree Grass Gravestone Room 1,                       grass,          NONE,                 INSIDE_DEKU_TREE,               0x00705,                    RECOVERY_HEART
+MQ Deku Tree Grass Gravestone Room 2,                       grass,          NONE,                 INSIDE_DEKU_TREE,               0x0070d,                    RANDOM
+MQ Deku Tree Grass Gravestone Room 3,                       grass,          NONE,                 INSIDE_DEKU_TREE,               0x0070e,                    RANDOM
+MQ Deku Tree Grass Gravestone Room 4,                       grass,          NONE,                 INSIDE_DEKU_TREE,               0x0070f,                    RANDOM
+MQ Deku Tree Grass Gravestone Room 5,                       grass,          NONE,                 INSIDE_DEKU_TREE,               0x00710,                    RANDOM
+MQ Deku Tree Grass Back Room 1,                             grass,          NONE,                 INSIDE_DEKU_TREE,               0x00804,                    RANDOM
+MQ Deku Tree Grass Back Room 2,                             grass,          NONE,                 INSIDE_DEKU_TREE,               0x00805,                    RANDOM
+MQ Deku Tree Grass Back Room 3,                             grass,          NONE,                 INSIDE_DEKU_TREE,               0x00806,                    RANDOM
+MQ Deku Tree Grass Room Before Boss 1,                      grass,          NONE,                 INSIDE_DEKU_TREE,               0x00900,                    DEKU_SEEDS_5
+MQ Deku Tree Grass Room Before Boss 2,                      grass,          NONE,                 INSIDE_DEKU_TREE,               0x00901,                    RECOVERY_HEART
+MQ Deku Tree Grass Room Before Boss 3,                      grass,          NONE,                 INSIDE_DEKU_TREE,               0x00902,                    DEKU_SEEDS_5
+MQ Deku Tree Grass Slingshot Room Back 1,                   grass,          NONE,                 INSIDE_DEKU_TREE,               0x00a00,                    RECOVERY_HEART
+MQ Deku Tree Grass Slingshot Room Back 2,                   grass,          NONE,                 INSIDE_DEKU_TREE,               0x00a01,                    DEKU_SEEDS_5
+MQ Deku Tree Grass Slingshot Room Front 1,                  grass,          NONE,                 INSIDE_DEKU_TREE,               0x00a02,                    RECOVERY_HEART
+MQ Deku Tree Grass Slingshot Room Front 2,                  grass,          NONE,                 INSIDE_DEKU_TREE,               0x00a03,                    DEKU_SEEDS_5
 MQ Dodongo Cavern Map Chest,                                chest,          NONE,                 DODONGO_CAVERN,                 0x00,                       MAP_DC
 MQ Dodongo Cavern Compass Chest,                            chest,          NONE,                 DODONGO_CAVERN,                 0x05,                       COMPASS_DC
 MQ Dodongo Cavern Larvae Room Chest,                        chest,          NONE,                 DODONGO_CAVERN,                 0x02,                       RUPEE_BLUE
@@ -1275,6 +1326,14 @@ MQ Dodongo Cavern Pot After Miniboss 1,                     pot,            NONE
 MQ Dodongo Cavern Pot After Miniboss 2,                     pot,            NONE,                 DODONGO_CAVERN,                 0x0c06,                     RUPEE_BLUE
 MQ Dodongo Cavern Pot Before Boss Loop Side Room 1,         pot,            NONE,                 DODONGO_CAVERN,                 0x0e02,                     BOMB
 MQ Dodongo Cavern Pot Before Boss Loop Side Room 2,         pot,            NONE,                 DODONGO_CAVERN,                 0x0e03,                     BOMB
+MQ Dodongo Cavern Grass Compass Room 1,                     grass,          NONE,                 DODONGO_CAVERN,                 0x00500,                    RECOVERY_HEART
+MQ Dodongo Cavern Grass Compass Room 2,                     grass,          NONE,                 DODONGO_CAVERN,                 0x00501,                    DEKU_SEEDS_5
+MQ Dodongo Cavern Grass Compass Room 3,                     grass,          NONE,                 DODONGO_CAVERN,                 0x00502,                    RECOVERY_HEART
+MQ Dodongo Cavern Grass Compass Room 4,                     grass,          NONE,                 DODONGO_CAVERN,                 0x00503,                    DEKU_SEEDS_5
+MQ Dodongo Cavern Grass Boss Loop,                          grass,          NONE,                 DODONGO_CAVERN,                 0x00809,                    RECOVERY_HEART
+MQ Dodongo Cavern Grass Green Corridor Side Room 1,         grass,          NONE,                 DODONGO_CAVERN,                 0x00d00,                    DEKU_SEEDS_5
+MQ Dodongo Cavern Grass Green Corridor Side Room 2,         grass,          NONE,                 DODONGO_CAVERN,                 0x00d01,                    RECOVERY_HEART
+MQ Dodongo Cavern Grass Boss Loop Side Room,                grass,          NONE,                 DODONGO_CAVERN,                 0x00e00,                    DEKU_SEEDS_5
 MQ Jabu-Jabu Map Chest,                                     chest,          NONE,                 INSIDE_JABU_JABU,               0x03,                       MAP_JJ
 MQ Jabu-Jabu Entry Chest,                                   chest,          NONE,                 INSIDE_JABU_JABU,               0x05,                       NUTS_5
 MQ Jabu-Jabu Compass Chest,                                 chest,          NONE,                 INSIDE_JABU_JABU,               0x00,                       COMPASS_JJ
@@ -1300,6 +1359,20 @@ MQ Jabu-Jabu Pot Like-Like Room 1,                          pot,            NONE
 MQ Jabu-Jabu Pot Like-Like Room 2,                          pot,            NONE,                 INSIDE_JABU_JABU,               0x0b1e,                     BOMBS_5
 MQ Jabu-Jabu Pot Boomerang Room 1,                          pot,            NONE,                 INSIDE_JABU_JABU,               0x0e0a,                     BOMB
 MQ Jabu-Jabu Pot Boomerang Room 2,                          pot,            NONE,                 INSIDE_JABU_JABU,               0x0e0e,                     ARROWS_5
+MQ Jabu-Jabu Grass Entrance 1,                              grass,          NONE,                 INSIDE_JABU_JABU,               0x00001,                    RECOVERY_HEART
+MQ Jabu-Jabu Grass Entrance 2,                              grass,          NONE,                 INSIDE_JABU_JABU,               0x00002,                    DEKU_SEEDS_5
+MQ Jabu-Jabu Grass Main Room Top 1,                         grass,          NONE,                 INSIDE_JABU_JABU,               0x00200,                    RECOVERY_HEART
+MQ Jabu-Jabu Grass Main Room Top 2,                         grass,          NONE,                 INSIDE_JABU_JABU,               0x00201,                    DEKU_SEEDS_5
+MQ Jabu-Jabu Grass Main Room Bottom 1,                      grass,          NONE,                 INSIDE_JABU_JABU,               0x00300,                    RECOVERY_HEART
+MQ Jabu-Jabu Grass Main Room Bottom 2,                      grass,          NONE,                 INSIDE_JABU_JABU,               0x00301,                    DEKU_SEEDS_5
+MQ Jabu-Jabu Grass Main Room Bottom 3,                      grass,          NONE,                 INSIDE_JABU_JABU,               0x00302,                    RECOVERY_HEART
+MQ Jabu-Jabu Grass Room After Big Octo,                     grass,          NONE,                 INSIDE_JABU_JABU,               0x00404,                    DEKU_SEEDS_5
+MQ Jabu-Jabu Grass Before Boss 1,                           grass,          NONE,                 INSIDE_JABU_JABU,               0x00502,                    RECOVERY_HEART
+MQ Jabu-Jabu Grass Before Boss 2,                           grass,          NONE,                 INSIDE_JABU_JABU,               0x00503,                    DEKU_SEEDS_5
+MQ Jabu-Jabu Grass Big Octo Top 1,                          grass,          NONE,                 INSIDE_JABU_JABU,               0x00604,                    RECOVERY_HEART
+MQ Jabu-Jabu Grass Big Octo Top 2,                          grass,          NONE,                 INSIDE_JABU_JABU,               0x00605,                    DEKU_SEEDS_5
+MQ Jabu-Jabu Grass Torch Room,                              grass,          NONE,                 INSIDE_JABU_JABU,               0x00b04,                    RECOVERY_HEART
+MQ Jabu-Jabu Grass Boomerang Room,                          grass,          NONE,                 INSIDE_JABU_JABU,               0x00e02,                    DEKU_SEEDS_5
 MQ Bottom of the Well Map Chest,                            chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x03,                       MAP_BOTW
 MQ Bottom of the Well Compass Chest,                        chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x02,                       COMPASS_BOTW
 MQ Bottom of the Well Lens Chest,                           chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x01,                       LENS
@@ -1315,6 +1388,10 @@ MQ Bottom of the Well Pot Lobby Alcove,                     pot,            NONE
 MQ Bottom of the Well Pot Side Room 1,                      pot,            NONE,                 BOTTOM_OF_THE_WELL,             0x0506,                     RECOVERY_HEART
 MQ Bottom of the Well Pot Side Room 2,                      pot,            NONE,                 BOTTOM_OF_THE_WELL,             0x0507,                     RECOVERY_HEART
 MQ Bottom of the Well Pot Side Room 3,                      pot,            NONE,                 BOTTOM_OF_THE_WELL,             0x0508,                     RECOVERY_HEART
+MQ Bottom of the Well Grass Dead-Hand 1,                    grass,          NONE,                 BOTTOM_OF_THE_WELL,             0x00400,                    RECOVERY_HEART
+MQ Bottom of the Well Grass Dead-Hand 2,                    grass,          NONE,                 BOTTOM_OF_THE_WELL,             0x00401,                    DEKU_SEEDS_5
+MQ Bottom of the Well Grass Dead-Hand 3,                    grass,          NONE,                 BOTTOM_OF_THE_WELL,             0x00402,                    RECOVERY_HEART
+MQ Bottom of the Well Grass Dead-Hand 4,                    grass,          NONE,                 BOTTOM_OF_THE_WELL,             0x00403,                    DEKU_SEEDS_5
 MQ Ice Cavern Map Chest,                                    chest,          NONE,                 ICE_CAVERN,                     0x01,                       MAP_IC
 MQ Ice Cavern Compass Chest,                                chest,          NONE,                 ICE_CAVERN,                     0x00,                       COMPASS_IC
 MQ Ice Cavern Iron Boots,                                   chest,          ICE_CAVERN_CHEST,     ICE_CAVERN,                     0x02,                       BOOTS_IRON
