@@ -1364,7 +1364,7 @@ export const SETTINGS = [{
   ],
   description: 'Allows separate shuffling of the warp songs and soaring spots. This setting is disabled if both are selected in "Shuffle One-Way Entrances".',
   default: 'none',
-  cond: (s: any) => s.erOneWaysSongs === false && s.erOneWaysStatues === false
+  cond: (s: any) => !s.erOneWaysSongs || !s.erOneWaysStatues
 }, {
   key: 'erOneWays',
   name: 'Shuffle One-Way Entrances',
