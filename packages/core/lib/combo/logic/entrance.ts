@@ -473,6 +473,8 @@ export class LogicPassEntrances {
     if (this.input.settings.erWarps === 'mmOnly') {
       pool.delete('one-way-song');
     }
+
+    this.placePool(worldId, Array.from(pool), { ownGame: this.input.settings.erWarps === 'ownGame' });
   }
 
   private placeOneWays(worldId: number) {

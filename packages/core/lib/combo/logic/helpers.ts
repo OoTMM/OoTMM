@@ -3,6 +3,8 @@ import { Settings } from "../settings";
 export function isEntranceShuffle(settings: Settings) {
   if (settings.erBoss !== 'none')
     return true;
+  if (settings.erMajorDungeons)
+    return true;
   if (settings.erMinorDungeons)
     return true;
   if (settings.erSpiderHouses)
@@ -20,6 +22,8 @@ export function isEntranceShuffle(settings: Settings) {
   if (settings.erGanonTower)
     return true;
   if (settings.erRegions !== 'none')
+    return true;
+  if (settings.erIndoorsMajor)
     return true;
   if (settings.erIndoorsExtra)
     return true;
