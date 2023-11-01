@@ -21,6 +21,7 @@ static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
 #define SWITCH_WINTER       3
 #define SWITCH_SWAMP_CURSED 4
 #define SWITCH_COAST_CURSED 5
+#define SWITCH_IKANA_CURSED 6
 
 static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
 {
@@ -42,16 +43,20 @@ static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
         play->nextEntrance = ENTR_MM_GREAT_BAY_COAST_FROM_LABORATORY;
         break;
     case SWITCH_WINTER:
-        MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH);
+        !MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH);
         play->nextEntrance = 0x9a80;
         break;
     case SWITCH_SWAMP_CURSED:
-        MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF);
+        !MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF);
         play->nextEntrance = 0x84a0;
         break;
     case SWITCH_COAST_CURSED:
-        MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_GB);
+        !MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_GB);
         play->nextEntrance = ENTR_MM_GREAT_BAY_COAST_FROM_LABORATORY;
+        break;
+    case SWITCH_IKANA_CURSED:
+        !MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_ST);
+        play->nextEntrance = 2040;
         break;
     }
 }
@@ -182,6 +187,14 @@ void comboSpawnCustomWarps(GameState_Play* play)
         x = -3020.f;
         y = 240.f;
         z = 3921.f;
+    }
+
+    if (comboConfig(CFG_ER_MAJOR_DUNGEONS) && play->sceneId == SCE_MM_IKANA_CANYON && MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_ST) && gMiscFlags.erIkanaClear)
+    {
+        variable = SWITCH_IKANA_CURSED;
+        x = -300.f;
+        y = 200.f;
+        z = 2560.f;
     }
 #endif
 
