@@ -18,6 +18,9 @@ static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
 #define SWITCH_SPRING       0
 #define SWITCH_SWAMP_CLEAR  1
 #define SWITCH_COAST_CLEAR  2
+#define SWITCH_WINTER       3
+#define SWITCH_SWAMP_CURSED 4
+#define SWITCH_COAST_CURSED 5
 
 static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
 {
@@ -28,13 +31,25 @@ static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
     {
     case SWITCH_SPRING:
         MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH);
-        play->nextEntrance = 0xae70;
+        play->nextEntrance = 0xae80;
         break;
     case SWITCH_SWAMP_CLEAR:
         MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF);
         play->nextEntrance = 0x0ca0;
         break;
     case SWITCH_COAST_CLEAR:
+        MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_GB);
+        play->nextEntrance = ENTR_MM_GREAT_BAY_COAST_FROM_LABORATORY;
+        break;
+    case SWITCH_WINTER:
+        MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH);
+        play->nextEntrance = 0x9a80;
+        break;
+    case SWITCH_SWAMP_CURSED:
+        MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF);
+        play->nextEntrance = 0x84a0;
+        break;
+    case SWITCH_COAST_CURSED:
         MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_GB);
         play->nextEntrance = ENTR_MM_GREAT_BAY_COAST_FROM_LABORATORY;
         break;
@@ -124,9 +139,9 @@ void comboSpawnCustomWarps(GameState_Play* play)
     if ((comboConfig(CFG_ER_MAJOR_DUNGEONS) || gComboData.preCompleted & (1 << DUNGEONID_TEMPLE_SNOWHEAD)) && play->sceneId == SCE_MM_MOUNTAIN_VILLAGE_WINTER && gMiscFlags.erSpring)
     {
         variable = SWITCH_SPRING;
-        x = -1200.f;
+        x = -970.f;
         y = 30.f;
-        z = 600.f;
+        z = 50.f;
     }
 
     if ((comboConfig(CFG_ER_MAJOR_DUNGEONS) || gComboData.preCompleted & (1 << DUNGEONID_TEMPLE_WOODFALL)) && play->sceneId == SCE_MM_SOUTHERN_SWAMP && !MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF) && gMiscFlags.erSwampClear)
@@ -140,6 +155,30 @@ void comboSpawnCustomWarps(GameState_Play* play)
     if ((comboConfig(CFG_ER_MAJOR_DUNGEONS) || gComboData.preCompleted & (1 << DUNGEONID_TEMPLE_GREAT_BAY)) && play->sceneId == SCE_MM_GREAT_BAY_COAST && !MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_GB) && gMiscFlags.erCoastClear)
     {
         variable = SWITCH_COAST_CLEAR;
+        x = -3020.f;
+        y = 240.f;
+        z = 3921.f;
+    }
+
+    if ((comboConfig(CFG_ER_MAJOR_DUNGEONS) || gComboData.preCompleted & (1 << DUNGEONID_TEMPLE_SNOWHEAD)) && play->sceneId == SCE_MM_MOUNTAIN_VILLAGE_SPRING && gMiscFlags.erSpring)
+    {
+        variable = SWITCH_WINTER;
+        x = -970.f;
+        y = 30.f;
+        z = 50.f;
+    }
+
+    if ((comboConfig(CFG_ER_MAJOR_DUNGEONS) || gComboData.preCompleted & (1 << DUNGEONID_TEMPLE_WOODFALL)) && play->sceneId == SCE_MM_SOUTHERN_SWAMP && MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF) && gMiscFlags.erSwampClear)
+    {
+        variable = SWITCH_SWAMP_CURSED;
+        x = -910.f;
+        y = 50.f;
+        z = -550.f;
+    }
+
+    if ((comboConfig(CFG_ER_MAJOR_DUNGEONS) || gComboData.preCompleted & (1 << DUNGEONID_TEMPLE_GREAT_BAY)) && play->sceneId == SCE_MM_GREAT_BAY_COAST && MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_GB) && gMiscFlags.erCoastClear)
+    {
+        variable = SWITCH_COAST_CURSED;
         x = -3020.f;
         y = 240.f;
         z = 3921.f;
