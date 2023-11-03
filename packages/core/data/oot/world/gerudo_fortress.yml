@@ -9,7 +9,7 @@
     SEEDS: "is_child"
     CARPENTER_1: "can_rescue_carpenter"
   locations:
-    "Gerudo Fortress Jail 1": "has_weapon || ((can_boomerang || has_nuts) && can_use_sticks) && soul_npc(SOUL_NPC_CARPENTERS)"
+    "Gerudo Fortress Jail 1": "(has_weapon || ((can_boomerang || has_nuts) && can_use_sticks)) && soul_npc(SOUL_NPC_CARPENTERS)"
     "Gerudo Member Card": "carpenters_rescued"
     "Gerudo Fortress Pot Jail 1 1": "true"
     "Gerudo Fortress Pot Jail 1 2": "true"
@@ -28,7 +28,7 @@
     RUPEES: "true"
     CARPENTER_2: "can_rescue_carpenter"
   locations:
-    "Gerudo Fortress Jail 2": "has_weapon || ((can_boomerang || has_nuts) && can_use_sticks) && soul_npc(SOUL_NPC_CARPENTERS)"
+    "Gerudo Fortress Jail 2": "(has_weapon || ((can_boomerang || has_nuts) && can_use_sticks)) && soul_npc(SOUL_NPC_CARPENTERS)"
     "Gerudo Member Card": "carpenters_rescued"
     "Gerudo Fortress Pot Jail 2 1": "true"
     "Gerudo Fortress Pot Jail 2 2": "true"
@@ -56,7 +56,7 @@
     RUPEES: "true"
     CARPENTER_3: "can_rescue_carpenter"
   locations:
-    "Gerudo Fortress Jail 3": "has_weapon || ((can_boomerang || has_nuts) && can_use_sticks) && soul_npc(SOUL_NPC_CARPENTERS)"
+    "Gerudo Fortress Jail 3": "(has_weapon || ((can_boomerang || has_nuts) && can_use_sticks)) && soul_npc(SOUL_NPC_CARPENTERS)"
     "Gerudo Member Card": "carpenters_rescued"
 "Gerudo Fortress Kitchen Tunnel End":
   dungeon: GF
@@ -97,7 +97,7 @@
   events:
     CARPENTER_4: "can_rescue_carpenter"
   locations:
-    "Gerudo Fortress Jail 4": "has_weapon || ((can_boomerang || has_nuts) && can_use_sticks) && soul_npc(SOUL_NPC_CARPENTERS)"
+    "Gerudo Fortress Jail 4": "(has_weapon || ((can_boomerang || has_nuts) && can_use_sticks)) && soul_npc(SOUL_NPC_CARPENTERS)"
     "Gerudo Member Card": "carpenters_rescued"
     "Gerudo Fortress Pot Jail 4 1": "true"
     "Gerudo Fortress Pot Jail 4 2": "true"
