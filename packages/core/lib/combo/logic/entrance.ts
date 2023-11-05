@@ -478,10 +478,10 @@ export class LogicPassEntrances {
   }
 
   private placeOneWays(worldId: number) {
-    const pool = new Set(['']);
+    const pool = new Set(['one-way']);
 
-    if (this.input.settings.erOneWaysMajor) {
-      pool.add('one-way');
+    if (!this.input.settings.erOneWaysMajor) {
+      pool.delete('one-way');
     }
     if (this.input.settings.erOneWaysIkana) {
       pool.add('one-way-ikana');
