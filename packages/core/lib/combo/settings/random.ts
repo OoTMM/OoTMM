@@ -512,7 +512,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
       base.erBoss = sampleWeighted(random, { none: 10, full: 10, ownGame: 10 });
       base.erRegions = sampleWeighted(random, { none: 10, full: 10, ownGame: 10 });
       base.erIndoors = sampleWeighted(random, { none: 10, full: 10, ownGame: 10 });
-      base.erWarps = sampleWeighted(random, { none: 10, ootOnly: 10, mmOnly: 10, full: 10 });
+      base.erWarps = sampleWeighted(random, { none: 10, ootOnly: 10, mmOnly: 10, ownGame: 10, full: 10 });
       base.erOneWays = sampleWeighted(random, { none: 10, full: 10, ownGame: 10 });
     }
 
