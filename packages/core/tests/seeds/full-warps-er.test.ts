@@ -1,7 +1,7 @@
 import { makeTestSeed } from '../helper';
 
-test("Can make a seed - Full ER", () => {
-  makeTestSeed("FULL ER", {
+test("Can make a seed - Full ER: Separated Warps", () => {
+  makeTestSeed("FULL ER SEPARATED WARPS", {
     songs: 'anywhere',
     erDungeons: 'full',
     erBoss: 'full',
@@ -9,15 +9,12 @@ test("Can make a seed - Full ER", () => {
     //erRegionsExtra: true,
     erRegionsShortcuts: true,
     erIndoors: 'full',
-    erIndoorsMajor: true,
     erIndoorsExtra: true,
+    erWarps: 'full',
     erOneWays: 'full',
     erOneWaysMajor: true,
     erOneWaysIkana: true,
-    erOneWaysSongs: true,
-    erOneWaysStatues: true,
     erOneWaysOwls: true,
-    erMajorDungeons: true,
     erMinorDungeons: true,
     erSpiderHouses: true,
     erPirateFortress: true,

@@ -314,8 +314,12 @@ const PRESET_ALLSANITY = makeSettings({
   erIndoors: 'full',
   erIndoorsMajor: true,
   erIndoorsExtra: true,
-  erWarps: 'full',
-  erWarpsOwls: true,
+  erOneWays: 'full',
+  erOneWaysMajor: true,
+  erOneWaysIkana: true,
+  erOneWaysSongs: true,
+  erOneWaysStatues: true,
+  erOneWaysOwls: true,
 });
 
 const PRESET_HELL = makeSettings({
@@ -385,8 +389,12 @@ const PRESET_HELL = makeSettings({
   erIndoors: 'full',
   erIndoorsMajor: true,
   erIndoorsExtra: true,
-  erWarps: 'full',
-  erWarpsOwls: true,
+  erOneWays: 'full',
+  erOneWaysMajor: true,
+  erOneWaysIkana: true,
+  erOneWaysSongs: true,
+  erOneWaysStatues: true,
+  erOneWaysOwls: true,
   erGanonCastle: true,
   erGanonTower: true,
   specialConds: {

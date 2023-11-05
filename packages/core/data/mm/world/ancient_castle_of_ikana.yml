@@ -51,7 +51,7 @@
     "Ancient Castle of Ikana Roof Interior": "can_goron_bomb_jump || short_hook_anywhere"
     "Ikana Castle Exterior": "true"
   events:
-    IKANA_CASTLE_LIGHT: "cond(setting(erIkanaCastle), has(MASK_DEKU) || short_hook_anywhere, true)" #|| (has_mask_zora && can_gainer) Can press the switch trivially, but can't get back to the roof without these.
+    IKANA_CASTLE_LIGHT: "true" #Due to being able to save-warp in MM now, this is no longer an issue.
     IKANA_CASTLE_LIGHT2: "can_use_keg"
     NUTS: "true"
   locations:
@@ -59,8 +59,8 @@
 "Ancient Castle of Ikana Interior South":
   dungeon: ACoI
   exits:
-    "Ancient Castle of Ikana Interior": "true"
-    "Ancient Castle of Ikana Wizzrobe": "((has_mirror_shield && event(IKANA_CASTLE_LIGHT)) || can_use_light_arrows) || short_hook_anywhere"
+    "Ancient Castle of Ikana": "true"
+    "Ancient Castle of Ikana Wizzrobe": "can_reset_time && (((has_mirror_shield && event(IKANA_CASTLE_LIGHT)) || can_use_light_arrows) || short_hook_anywhere)"
 "Ancient Castle of Ikana Wizzrobe":
   dungeon: ACoI
   exits:
@@ -77,7 +77,8 @@
 "Ancient Castle of Ikana Roof Interior":
   dungeon: ACoI
   exits:
-    "Ancient Castle of Ikana Interior": "event(IKANA_CASTLE_LIGHT2)"
+    "Ancient Castle of Ikana": "event(IKANA_CASTLE_LIGHT2)"
+    "Ancient Castle of Ikana Interior South": "event(IKANA_CASTLE_LIGHT)"
     "Ancient Castle of Ikana South Last": "true"
     "Ancient Castle of Ikana Roof Exterior": "trick(MM_IKANA_ROOF_PARKOUR) || short_hook_anywhere"
   events:
