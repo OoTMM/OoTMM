@@ -1,142 +1,142 @@
-id,                                                 type,             to,                                 from,                                       reverse
-BOSS_TEMPLE_WOODFALL,                               boss,             Woodfall Temple Boss,               Woodfall Temple Boss Access,                NONE
-BOSS_TEMPLE_SNOWHEAD,                               boss,             Snowhead Temple Boss,               Snowhead Temple Boss Access,                NONE
-BOSS_TEMPLE_GREAT_BAY,                              boss,             Great Bay Temple Boss,              Great Bay Temple Boss Access,               NONE
-BOSS_TEMPLE_STONE_TOWER,                            boss,             Stone Tower Temple Boss,            Stone Tower Temple Boss Access,             NONE
-TEMPLE_WOODFALL,                                    dungeon,          Woodfall Temple,                    Woodfall Front of Temple,                   WOODFALL_FROM_TEMPLE
-WOODFALL_FROM_TEMPLE,                               dungeon,          Woodfall Front of Temple,           Woodfall Temple,                            TEMPLE_WOODFALL
-TEMPLE_SNOWHEAD,                                    dungeon,          Snowhead Temple,                    Snowhead,                                   SNOWHEAD_FROM_TEMPLE
-SNOWHEAD_FROM_TEMPLE,                               dungeon,          Snowhead,                           Snowhead Temple,                            TEMPLE_SNOWHEAD
-TEMPLE_GREAT_BAY,                                   dungeon,          Great Bay Temple,                   Zora Cape Peninsula,                        GREAT_BAY_FROM_TEMPLE
-GREAT_BAY_FROM_TEMPLE,                              dungeon,          Zora Cape Peninsula,                Great Bay Temple,                           TEMPLE_GREAT_BAY
-TEMPLE_STONE_TOWER_INVERTED,                        dungeon,          Stone Tower Temple Inverted,        Stone Tower Top Inverted,                   STONE_TOWER_INVERTED_FROM_TEMPLE
-STONE_TOWER_INVERTED_FROM_TEMPLE,                   dungeon,          Stone Tower Top Inverted,           Stone Tower Temple Inverted,                TEMPLE_STONE_TOWER_INVERTED
-TEMPLE_STONE_TOWER,                                 dungeon,          Stone Tower Temple,                 Stone Tower Front of Temple,                STONE_TOWER_FROM_TEMPLE
-STONE_TOWER_FROM_TEMPLE,                            dungeon,          Stone Tower Front of Temple,        Stone Tower Temple,                         TEMPLE_STONE_TOWER
-SPIDER_HOUSE_SWAMP,                                 dungeon,          Swamp Spider House,                 Near Swamp Spider House,                    SWAMP_FROM_SPIDER_HOUSE
-SWAMP_FROM_SPIDER_HOUSE,                            dungeon,          Near Swamp Spider House,            Swamp Spider House,                         SPIDER_HOUSE_SWAMP
-SPIDER_HOUSE_OCEAN,                                 dungeon,          Ocean Spider House,                 Great Bay Coast,                            GREAT_BAY_FROM_SPIDER_HOUSE
-GREAT_BAY_FROM_SPIDER_HOUSE,                        dungeon,          Great Bay Coast,                    Ocean Spider House,                         SPIDER_HOUSE_OCEAN
-BENEATH_THE_WELL,                                   dungeon,          Beneath The Well Entrance,          Ikana Canyon,                               IKANA_CANYON_FROM_WELL
-IKANA_CANYON_FROM_WELL,                             dungeon,          Ikana Canyon,                       Beneath The Well Entrance,                  BENEATH_THE_WELL
-IKANA_CASTLE,                                       dungeon,          Ancient Castle of Ikana,            Ikana Castle Exterior,                      IKANA_CASTLE_EXTERIOR_FROM_CASTLE
-IKANA_CASTLE_EXTERIOR_FROM_CASTLE,                  dungeon,          Ikana Castle Exterior,              Ancient Castle of Ikana,                    IKANA_CASTLE
-SECRET_SHRINE,                                      dungeon,          Secret Shrine,                      Ikana Valley,                               IKANA_VALLEY_FROM_SHRINE
-IKANA_VALLEY_FROM_SHRINE,                           dungeon,          Ikana Valley,                       Secret Shrine,                              SECRET_SHRINE
-BENEATH_THE_WELL_BACK,                              dungeon,          Beneath The Well End,               Ikana Castle Exterior,                      IKANA_CASTLE_EXTERIOR_FROM_WELL
-IKANA_CASTLE_EXTERIOR_FROM_WELL,                    dungeon,          Ikana Castle Exterior,              Beneath The Well End,                       BENEATH_THE_WELL_BACK
-PIRATE_FORTRESS,                                    dungeon,          Pirate Fortress,                    Great Bay Coast Fortress,                   GREAT_BAY_FROM_PIRATE_FORTRESS
-GREAT_BAY_FROM_PIRATE_FORTRESS,                     dungeon,          Great Bay Coast Fortress,           Pirate Fortress,                            PIRATE_FORTRESS
-SWAMP_FROM_ROAD,                                    region,           Swamp Front,                        Road to Southern Swamp,                     SWAMP_ROAD_FROM_SWAMP
-MOUNTAIN_VILLAGE_FROM_PATH,                         region,           Mountain Village,                   Mountain Village Path Upper,                PATH_FROM_MOUNTAIN_VILLAGE
-GREAT_BAY_COAST_FROM_FIELD,                         region,           Great Bay Coast,                    Great Bay Fence,                            FIELD_FROM_GREAT_BAY_COAST
-IKANA_VALLEY_FROM_ROAD,                             region,           Ikana Valley,                       Road to Ikana Top,                          IKANA_ROAD_FROM_VALLEY
-ROMANI_RANCH_FROM_MILK_ROAD,                        region,           Romani Ranch,                       Near Romani Ranch,                          MILK_ROAD_FROM_ROMANI_RANCH
-SWAMP_ROAD_FROM_SWAMP,                              overworld,        Road to Southern Swamp,             Swamp Front,                                SWAMP_FROM_ROAD
-PATH_FROM_MOUNTAIN_VILLAGE,                         overworld,        Mountain Village Path Upper,        Mountain Village,                           MOUNTAIN_VILLAGE_FROM_PATH
-FIELD_FROM_GREAT_BAY_COAST,                         overworld,        Great Bay Fence,                    Great Bay Coast,                            GREAT_BAY_COAST_FROM_FIELD
-IKANA_ROAD_FROM_VALLEY,                             overworld,        Road to Ikana Top,                  Ikana Valley,                               IKANA_VALLEY_FROM_ROAD
-MILK_ROAD_FROM_ROMANI_RANCH,                        overworld,        Near Romani Ranch,                  Romani Ranch,                               ROMANI_RANCH_FROM_MILK_ROAD
-SWAMP_FROM_IKANA_CANYON,                            one-way,          Swamp Front,                        Ikana Valley,                               NONE
-IKANA_CASTLE_INTERIOR_KEG,                          one-way-ikana,    Ancient Castle of Ikana,            Ancient Castle of Ikana Roof Interior,      NONE
-IKANA_CASTLE_INTERIOR_BLOCK,                        one-way-ikana,    Ancient Castle of Ikana Interior South,Ancient Castle of Ikana Roof Interior,   NONE   
-WARP_OWL_GREAT_BAY,                                 one-way-statue,   Owl Great Bay,                      SOARING,                                    NONE
-WARP_OWL_ZORA_CAPE,                                 one-way-statue,   Owl Zora Cape,                      SOARING,                                    NONE
-WARP_OWL_SNOWHEAD,                                  one-way-statue,   Owl Snowhead,                       SOARING,                                    NONE
-WARP_OWL_MOUNTAIN_VILLAGE,                          one-way-statue,   Owl Mountain,                       SOARING,                                    NONE
-WARP_OWL_CLOCK_TOWN,                                one-way-statue,   Owl Clock Town,                     SOARING,                                    NONE
-WARP_OWL_MILK_ROAD,                                 one-way-statue,   Owl Milk Road,                      SOARING,                                    NONE
-WARP_OWL_WOODFALL,                                  one-way-statue,   Owl Woodfall,                       SOARING,                                    NONE
-WARP_OWL_SOUTHERN_SWAMP,                            one-way-statue,   Owl Swamp,                          SOARING,                                    NONE
-WARP_OWL_IKANA_CANYON,                              one-way-statue,   Owl Ikana,                          SOARING,                                    NONE
-WARP_OWL_STONE_TOWER,                               one-way-statue,   Owl Stone Tower,                    SOARING,                                    NONE
-CHEST_GAME,                                         indoors,          Chest Game,                         Clock Town East,                            CLOCK_TOWN_EAST_FROM_CHEST_GAME
-HONEY_AND_DARLING_GAME,                             indoors,          Honey & Darling Game,               Clock Town East,                            CLOCK_TOWN_EAST_FROM_HONEY_AND_DARLING
-MAYORS_OFFICE,                                      indoors,          Mayor's Office,                     Clock Town East,                            CLOCK_TOWN_EAST_FROM_MAYORS_OFFICE
-TOWN_ARCHERY,                                       indoors,          Town Archery,                       Clock Town East,                            CLOCK_TOWN_EAST_FROM_TOWN_ARCHERY
-MILK_BAR,                                           indoors,          Milk Bar,                           Clock Town East,                            CLOCK_TOWN_EAST_FROM_MILK_BAR
-SWORDSMAN_SCHOOL,                                   indoors,          Swordsman School,                   Clock Town West,                            CLOCK_TOWN_WEST_FROM_SWORDSMAN_SCHOOL
-CURIOSITY_SHOP,                                     indoors,          Curiosity Shop,                     Clock Town West,                            CLOCK_TOWN_WEST_FROM_CURIOSITY_SHOP
-TRADING_POST,                                       indoors,          Trading Post,                       Clock Town West,                            CLOCK_TOWN_WEST_FROM_TRADING_POST
-BOMB_SHOP,                                          indoors,          Bomb Shop,                          Clock Town West,                            CLOCK_TOWN_WEST_FROM_BOMB_SHOP
-POST_OFFICE,                                        indoors,          Post Office,                        Clock Town West,                            CLOCK_TOWN_WEST_FROM_POST_OFFICE
-LOTTERY,                                            indoors,          Lottery,                            Clock Town West,                            CLOCK_TOWN_WEST_FROM_LOTTERY
-KAFEI_HIDEOUT,                                      indoors,          Kafei Hideout,                      Laundry Pool,                               LAUNDRY_POOL_FROM_KAFEI_HIDEOUT
-POTION_SHOP,                                        indoors,          Swamp Potion Shop,                  Swamp Front,                                SWAMP_FROM_POTION_SHOP
-DEKU_SHRINE,                                        indoors,          Deku Shrine,                        Near Deku Shrine,                           DEKU_PALACE_EXTERIOR_FROM_SHRINE
-GORON_SHOP,                                         indoors,          Goron Shop,                         Goron Shrine,                               GORON_SHRINE_FROM_SHOP
-FISHER_HUT,                                         indoors,          Fisher's Hut,                       Great Bay Coast,                            GREAT_BAY_COAST_FROM_FISHER_HUT
-LABORATORY,                                         indoors,          Laboratory,                         Great Bay Coast,                            GREAT_BAY_COAST_FROM_LABORATORY
-ROOM_EVANS,                                         indoors,          Evan's Room,                        Zora Hall,                                  ZORA_HALL_FROM_EVANS
-ROOM_JAPAS,                                         indoors,          Japas' Room,                        Zora Hall,                                  ZORA_HALL_FROM_JAPAS
-ROOM_TIJO,                                          indoors,          Tijo's Room,                        Zora Hall,                                  ZORA_HALL_FROM_TIJO
-ROOM_LULU,                                          indoors,          Lulu's Room,                        Zora Hall,                                  ZORA_HALL_FROM_LULU
-ZORA_SHOP,                                          indoors,          Zora Shop,                          Zora Hall,                                  ZORA_HALL_FROM_SHOP
-CUCCO_SHACK,                                        indoors,          Cucco Shack,                        Romani Ranch,                               ROMANI_RANCH_FROM_CUCCO_SHACK
-DOGGY_RACETRACK,                                    indoors,          Doggy Racetrack,                    Romani Ranch,                               ROMANI_RANCH_FROM_DOGGY_RACETRACK
-STABLES,                                            indoors,          Stables,                            Romani Ranch,                               ROMANI_RANCH_FROM_STABLES
-RANCH_HOUSE,                                        indoors,          Ranch House,                        Romani Ranch,                               ROMANI_RANCH_FROM_RANCH_HOUSE
-FAIRY_FOUNTAIN_TOWN,                                indoors,          Clock Town Fairy Fountain,          Clock Town North,                           CLOCK_TOWN_NORTH_FROM_FAIRY_FOUNTAIN
-FAIRY_FOUNTAIN_WOODFALL,                            indoors,          Woodfall Fairy Fountain,            Woodfall Near Fairy Fountain,               WOODFALL_FROM_FAIRY_FOUNTAIN
-FAIRY_FOUNTAIN_SNOWHEAD,                            indoors,          Snowhead Fairy Fountain,            Snowhead Near Fairy Fountain,               SNOWHEAD_FROM_FAIRY_FOUNTAIN
-FAIRY_FOUNTAIN_GREAT_BAY,                           indoors,          Great Bay Fairy Fountain,           Great Bay Near Fairy Fountain,              GREAT_BAY_FROM_FAIRY_FOUNTAIN
-FAIRY_FOUNTAIN_IKANA,                               indoors,          Ikana Fairy Fountain,               Ikana Canyon,                               IKANA_CANYON_FROM_FAIRY_FOUNTAIN
-BLACKSMITH,                                         indoors,          Blacksmith,                         Mountain Village,                           MOUNTAIN_VILLAGE_FROM_BLACKSMITH
-GORON_GRAVEYARD,                                    indoors,          Goron Graveyard,                    Near Goron Graveyard,                       MOUNTAIN_VILLAGE_FROM_GORON_GRAVEYARD
-GHOST_HUT,                                          indoors,          Ghost Hut,                          Ikana Canyon,                               IKANA_CANYON_FROM_GHOST_HUT
-SWAMP_ARCHERY,                                      indoors,          Swamp Archery,                      Road to Southern Swamp,                     SWAMP_ROAD_FROM_ARCHERY
-STOCK_POT_INN,                                      indoors-extra,    Stock Pot Inn,                      Clock Town East,                            CLOCK_TOWN_EAST_FROM_STOCK_POT_INN
-STOCK_POT_INN_ROOF,                                 indoors-extra,    Stock Pot Inn,                      Stock Pot Inn Roof,                         CLOCK_TOWN_EAST_FROM_STOCK_POT_INN_ROOF
-IKANA_CAVERN,                                       indoors-extra,    Ikana Spring Water Cave,            Ikana Canyon,                               IKANA_CANYON_FROM_CAVERN
-TOURIST_INFORMATION,                                indoors-extra,    Tourist Information,                Swamp Front,                                SWAMP_FROM_TOURIST_INFORMATION
-ASTRAL_OBSERVATORY_FROM_CLOCK_TOWN_EAST,            indoors-extra,    Astral Observatory Passage,         Clock Town East,                            CLOCK_TOWN_EAST_FROM_ASTRAL_OBSERVATORY
-ASTRAL_OBSERVATORY_FROM_FIELD,                      indoors-extra,    Astral Observatory,                 Astral Observatory Balcony,                 FIELD_FROM_ASTRAL_OBSERVATORY
-CLOCK_TOWN_EAST_FROM_HONEY_AND_DARLING,             indoors-exit,     Clock Town East,                    Honey & Darling Game,                       HONEY_AND_DARLING_GAME
-CLOCK_TOWN_EAST_FROM_MAYORS_OFFICE,                 indoors-exit,     Clock Town East,                    Mayor's Office,                             MAYORS_OFFICE
-CLOCK_TOWN_EAST_FROM_TOWN_ARCHERY,                  indoors-exit,     Clock Town East,                    Town Archery,                               TOWN_ARCHERY
-CLOCK_TOWN_EAST_FROM_STOCK_POT_INN,                 indoors-exit,     Clock Town East,                    Stock Pot Inn,                              STOCK_POT_INN
-CLOCK_TOWN_EAST_FROM_STOCK_POT_INN_ROOF,            indoors-exit,     Stock Pot Inn Roof,                 Stock Pot Inn,                              STOCK_POT_INN_ROOF
-CLOCK_TOWN_EAST_FROM_MILK_BAR,                      indoors-exit,     Clock Town East,                    Milk Bar,                                   MILK_BAR
-CLOCK_TOWN_NORTH_FROM_FAIRY_FOUNTAIN,               indoors-exit,     Clock Town North,                   Clock Town Fairy Fountain,                  FAIRY_FOUNTAIN_TOWN
-CLOCK_TOWN_EAST_FROM_CHEST_GAME,                    indoors-exit,     Clock Town East,                    Chest Game,                                 CHEST_GAME
-CLOCK_TOWN_WEST_FROM_SWORDSMAN_SCHOOL,              indoors-exit,     Clock Town West,                    Swordsman School,                           SWORDSMAN_SCHOOL
-CLOCK_TOWN_WEST_FROM_CURIOSITY_SHOP,                indoors-exit,     Clock Town West,                    Curiosity Shop,                             CURIOSITY_SHOP
-CLOCK_TOWN_WEST_FROM_TRADING_POST,                  indoors-exit,     Clock Town West,                    Trading Post,                               TRADING_POST
-CLOCK_TOWN_WEST_FROM_BOMB_SHOP,                     indoors-exit,     Clock Town West,                    Bomb Shop,                                  BOMB_SHOP
-CLOCK_TOWN_WEST_FROM_POST_OFFICE,                   indoors-exit,     Clock Town West,                    Post Office,                                POST_OFFICE
-CLOCK_TOWN_WEST_FROM_LOTTERY,                       indoors-exit,     Clock Town West,                    Lottery,                                    LOTTERY
-LAUNDRY_POOL_FROM_KAFEI_HIDEOUT,                    indoors-exit,     Laundry Pool,                       Kafei Hideout,                              KAFEI_HIDEOUT
-SWAMP_FROM_POTION_SHOP,                             indoors-exit,     Swamp Front,                        Swamp Potion Shop,                          POTION_SHOP
-DEKU_PALACE_EXTERIOR_FROM_SHRINE,                   indoors-exit,     Near Deku Shrine,                   Deku Shrine,                                DEKU_SHRINE
-GORON_SHRINE_FROM_SHOP,                             indoors-exit,     Goron Shrine,                       Goron Shop,                                 GORON_SHOP
-GREAT_BAY_COAST_FROM_FISHER_HUT,                    indoors-exit,     Great Bay Coast,                    Fisher's Hut,                               FISHER_HUT
-GREAT_BAY_COAST_FROM_LABORATORY,                    indoors-exit,     Great Bay Coast,                    Laboratory,                                 LABORATORY
-ZORA_HALL_FROM_EVANS,                               indoors-exit,     Zora Hall,                          Evan's Room,                                ROOM_EVANS
-ZORA_HALL_FROM_JAPAS,                               indoors-exit,     Zora Hall,                          Japas' Room,                                ROOM_JAPAS
-ZORA_HALL_FROM_TIJO,                                indoors-exit,     Zora Hall,                          Tijo's Room,                                ROOM_TIJO
-ZORA_HALL_FROM_LULU,                                indoors-exit,     Zora Hall,                          Lulu's Room,                                ROOM_LULU
-ZORA_HALL_FROM_SHOP,                                indoors-exit,     Zora Hall,                          Zora Shop,                                  ZORA_SHOP
-IKANA_CANYON_FROM_GHOST_HUT,                        indoors-exit,     Ikana Canyon,                       Ghost Hut,                                  GHOST_HUT
-IKANA_CANYON_FROM_FAIRY_FOUNTAIN,                   indoors-exit,     Ikana Canyon,                       Ikana Fairy Fountain,                       FAIRY_FOUNTAIN_IKANA
-ROMANI_RANCH_FROM_CUCCO_SHACK,                      indoors-exit,     Romani Ranch,                       Cucco Shack,                                CUCCO_SHACK
-ROMANI_RANCH_FROM_DOGGY_RACETRACK,                  indoors-exit,     Romani Ranch,                       Doggy Racetrack,                            DOGGY_RACETRACK
-ROMANI_RANCH_FROM_STABLES,                          indoors-exit,     Romani Ranch,                       Stables,                                    STABLES
-ROMANI_RANCH_FROM_RANCH_HOUSE,                      indoors-exit,     Romani Ranch,                       Ranch House,                                RANCH_HOUSE
-IKANA_CANYON_FROM_CAVERN,                           indoors-exit,     Ikana Canyon,                       Ikana Spring Water Cave,                    IKANA_CAVERN
-GREAT_BAY_FROM_FAIRY_FOUNTAIN,                      indoors-exit,     Great Bay Near Fairy Fountain,      Great Bay Fairy Fountain,                   FAIRY_FOUNTAIN_GREAT_BAY
-SNOWHEAD_FROM_FAIRY_FOUNTAIN,                       indoors-exit,     Snowhead Near Fairy Fountain,       Snowhead Fairy Fountain,                    FAIRY_FOUNTAIN_SNOWHEAD
-SWAMP_FROM_TOURIST_INFORMATION,                     indoors-exit,     Swamp Front,                        Tourist Information,                        TOURIST_INFORMATION
-WOODFALL_FROM_FAIRY_FOUNTAIN,                       indoors-exit,     Woodfall Near Fairy Fountain,       Woodfall Fairy Fountain,                    FAIRY_FOUNTAIN_WOODFALL
-MOUNTAIN_VILLAGE_FROM_BLACKSMITH,                   indoors-exit,     Mountain Village,                   Blacksmith,                                 BLACKSMITH
-CLOCK_TOWN_EAST_FROM_ASTRAL_OBSERVATORY,            indoors-exit,     Clock Town East,                    Astral Observatory Passage,                 ASTRAL_OBSERVATORY_FROM_CLOCK_TOWN_EAST
-FIELD_FROM_ASTRAL_OBSERVATORY,                      indoors-exit,     Astral Observatory Balcony,         Astral Observatory,                         ASTRAL_OBSERVATORY_FROM_FIELD
-MOUNTAIN_VILLAGE_FROM_GORON_GRAVEYARD,              indoors-exit,     Near Goron Graveyard,               Goron Graveyard,                            GORON_GRAVEYARD
-SWAMP_ROAD_FROM_ARCHERY,                            indoors-exit,     Road to Southern Swamp,             Swamp Archery,                              SWAMP_ARCHERY
-SAKON_HIDEOUT,                                      indoors-special,  Sakon Hideout,                      Ikana Valley,                               IKANA_CANYON_FROM_SAKON_HIDEOUT
-IKANA_CANYON_FROM_SAKON_HIDEOUT,                    indoors-special,  Ikana Valley,                       Sakon Hideout,                              SAKON_HIDEOUT
-DEKU_PALACE_THRONE,                                 indoors-special,  Deku Palace Throne,                 Deku Palace Main,                           DEKU_PALACE_EXTERIOR_FROM_THRONE
-DEKU_PALACE_EXTERIOR_FROM_THRONE,                   indoors-special,  Deku Palace Main,                   Deku Palace Throne,                         DEKU_PALACE_THRONE
-DEKU_PALACE_THRONE_CAGE,                            indoors-special,  Deku Palace Cage,                   Deku Palace Near Cage,                      DEKU_PALACE_EXTERIOR_FROM_THRONE_CAGE
-DEKU_PALACE_EXTERIOR_FROM_THRONE_CAGE,              indoors-special,  Deku Palace Near Cage,              Deku Palace Cage,                           DEKU_PALACE_THRONE_CAGE
-MUSIC_BOX_HOUSE,                                    indoors-special,  Music Box House,                    Ikana Canyon,                               IKANA_CANYON_FROM_MUSIC_BOX_HOUSE
-IKANA_CANYON_FROM_MUSIC_BOX_HOUSE,                  indoors-special,  Ikana Canyon,                       Music Box House,                            MUSIC_BOX_HOUSE
+id,                                                 type,             to,                                     from,                                       reverse
+BOSS_TEMPLE_WOODFALL,                               boss,             Woodfall Temple Boss,                   Woodfall Temple Boss Access,                NONE
+BOSS_TEMPLE_SNOWHEAD,                               boss,             Snowhead Temple Boss,                   Snowhead Temple Boss Access,                NONE
+BOSS_TEMPLE_GREAT_BAY,                              boss,             Great Bay Temple Boss,                  Great Bay Temple Boss Access,               NONE
+BOSS_TEMPLE_STONE_TOWER,                            boss,             Stone Tower Temple Boss,                Stone Tower Temple Boss Access,             NONE
+TEMPLE_WOODFALL,                                    dungeon,          Woodfall Temple,                        Woodfall Front of Temple,                   WOODFALL_FROM_TEMPLE
+WOODFALL_FROM_TEMPLE,                               dungeon,          Woodfall Front of Temple,               Woodfall Temple,                            TEMPLE_WOODFALL
+TEMPLE_SNOWHEAD,                                    dungeon,          Snowhead Temple,                        Snowhead,                                   SNOWHEAD_FROM_TEMPLE
+SNOWHEAD_FROM_TEMPLE,                               dungeon,          Snowhead,                               Snowhead Temple,                            TEMPLE_SNOWHEAD
+TEMPLE_GREAT_BAY,                                   dungeon,          Great Bay Temple,                       Zora Cape Peninsula,                        GREAT_BAY_FROM_TEMPLE
+GREAT_BAY_FROM_TEMPLE,                              dungeon,          Zora Cape Peninsula,                    Great Bay Temple,                           TEMPLE_GREAT_BAY
+TEMPLE_STONE_TOWER_INVERTED,                        dungeon,          Stone Tower Temple Inverted,            Stone Tower Top Inverted,                   STONE_TOWER_INVERTED_FROM_TEMPLE
+STONE_TOWER_INVERTED_FROM_TEMPLE,                   dungeon,          Stone Tower Top Inverted,               Stone Tower Temple Inverted,                TEMPLE_STONE_TOWER_INVERTED
+TEMPLE_STONE_TOWER,                                 dungeon,          Stone Tower Temple,                     Stone Tower Front of Temple,                STONE_TOWER_FROM_TEMPLE
+STONE_TOWER_FROM_TEMPLE,                            dungeon,          Stone Tower Front of Temple,            Stone Tower Temple,                         TEMPLE_STONE_TOWER
+SPIDER_HOUSE_SWAMP,                                 dungeon,          Swamp Spider House,                     Near Swamp Spider House,                    SWAMP_FROM_SPIDER_HOUSE
+SWAMP_FROM_SPIDER_HOUSE,                            dungeon,          Near Swamp Spider House,                Swamp Spider House,                         SPIDER_HOUSE_SWAMP
+SPIDER_HOUSE_OCEAN,                                 dungeon,          Ocean Spider House,                     Great Bay Coast,                            GREAT_BAY_FROM_SPIDER_HOUSE
+GREAT_BAY_FROM_SPIDER_HOUSE,                        dungeon,          Great Bay Coast,                        Ocean Spider House,                         SPIDER_HOUSE_OCEAN
+BENEATH_THE_WELL,                                   dungeon,          Beneath The Well Entrance,              Ikana Canyon,                               IKANA_CANYON_FROM_WELL
+IKANA_CANYON_FROM_WELL,                             dungeon,          Ikana Canyon,                           Beneath The Well Entrance,                  BENEATH_THE_WELL
+IKANA_CASTLE,                                       dungeon,          Ancient Castle of Ikana,                Ikana Castle Exterior,                      IKANA_CASTLE_EXTERIOR_FROM_CASTLE
+IKANA_CASTLE_EXTERIOR_FROM_CASTLE,                  dungeon,          Ikana Castle Exterior,                  Ancient Castle of Ikana,                    IKANA_CASTLE
+SECRET_SHRINE,                                      dungeon,          Secret Shrine,                          Ikana Valley,                               IKANA_VALLEY_FROM_SHRINE
+IKANA_VALLEY_FROM_SHRINE,                           dungeon,          Ikana Valley,                           Secret Shrine,                              SECRET_SHRINE
+BENEATH_THE_WELL_BACK,                              dungeon,          Beneath The Well End,                   Ikana Castle Exterior,                      IKANA_CASTLE_EXTERIOR_FROM_WELL
+IKANA_CASTLE_EXTERIOR_FROM_WELL,                    dungeon,          Ikana Castle Exterior,                  Beneath The Well End,                       BENEATH_THE_WELL_BACK
+PIRATE_FORTRESS,                                    dungeon,          Pirate Fortress,                        Great Bay Coast Fortress,                   GREAT_BAY_FROM_PIRATE_FORTRESS
+GREAT_BAY_FROM_PIRATE_FORTRESS,                     dungeon,          Great Bay Coast Fortress,               Pirate Fortress,                            PIRATE_FORTRESS
+SWAMP_FROM_ROAD,                                    region,           Swamp Front,                            Road to Southern Swamp,                     SWAMP_ROAD_FROM_SWAMP
+MOUNTAIN_VILLAGE_FROM_PATH,                         region,           Mountain Village,                       Mountain Village Path Upper,                PATH_FROM_MOUNTAIN_VILLAGE
+GREAT_BAY_COAST_FROM_FIELD,                         region,           Great Bay Coast,                        Great Bay Fence,                            FIELD_FROM_GREAT_BAY_COAST
+IKANA_VALLEY_FROM_ROAD,                             region,           Ikana Valley,                           Road to Ikana Top,                          IKANA_ROAD_FROM_VALLEY
+ROMANI_RANCH_FROM_MILK_ROAD,                        region,           Romani Ranch,                           Near Romani Ranch,                          MILK_ROAD_FROM_ROMANI_RANCH
+SWAMP_ROAD_FROM_SWAMP,                              overworld,        Road to Southern Swamp,                 Swamp Front,                                SWAMP_FROM_ROAD
+PATH_FROM_MOUNTAIN_VILLAGE,                         overworld,        Mountain Village Path Upper,            Mountain Village,                           MOUNTAIN_VILLAGE_FROM_PATH
+FIELD_FROM_GREAT_BAY_COAST,                         overworld,        Great Bay Fence,                        Great Bay Coast,                            GREAT_BAY_COAST_FROM_FIELD
+IKANA_ROAD_FROM_VALLEY,                             overworld,        Road to Ikana Top,                      Ikana Valley,                               IKANA_VALLEY_FROM_ROAD
+MILK_ROAD_FROM_ROMANI_RANCH,                        overworld,        Near Romani Ranch,                      Romani Ranch,                               ROMANI_RANCH_FROM_MILK_ROAD
+SWAMP_FROM_IKANA_CANYON,                            one-way,          Swamp Front,                            Ikana Valley,                               NONE
+IKANA_CASTLE_INTERIOR_KEG,                          one-way-ikana,    Ancient Castle of Ikana,                Ancient Castle of Ikana Roof Interior,      NONE
+IKANA_CASTLE_INTERIOR_BLOCK,                        one-way-ikana,    Ancient Castle of Ikana Interior South, Ancient Castle of Ikana Roof Interior,      NONE   
+WARP_OWL_GREAT_BAY,                                 one-way-statue,   Owl Great Bay,                          SOARING,                                    NONE
+WARP_OWL_ZORA_CAPE,                                 one-way-statue,   Owl Zora Cape,                          SOARING,                                    NONE
+WARP_OWL_SNOWHEAD,                                  one-way-statue,   Owl Snowhead,                           SOARING,                                    NONE
+WARP_OWL_MOUNTAIN_VILLAGE,                          one-way-statue,   Owl Mountain,                           SOARING,                                    NONE
+WARP_OWL_CLOCK_TOWN,                                one-way-statue,   Owl Clock Town,                         SOARING,                                    NONE
+WARP_OWL_MILK_ROAD,                                 one-way-statue,   Owl Milk Road,                          SOARING,                                    NONE
+WARP_OWL_WOODFALL,                                  one-way-statue,   Owl Woodfall,                           SOARING,                                    NONE
+WARP_OWL_SOUTHERN_SWAMP,                            one-way-statue,   Owl Swamp,                              SOARING,                                    NONE
+WARP_OWL_IKANA_CANYON,                              one-way-statue,   Owl Ikana,                              SOARING,                                    NONE
+WARP_OWL_STONE_TOWER,                               one-way-statue,   Owl Stone Tower,                        SOARING,                                    NONE
+CHEST_GAME,                                         indoors,          Chest Game,                             Clock Town East,                            CLOCK_TOWN_EAST_FROM_CHEST_GAME
+HONEY_AND_DARLING_GAME,                             indoors,          Honey & Darling Game,                   Clock Town East,                            CLOCK_TOWN_EAST_FROM_HONEY_AND_DARLING
+MAYORS_OFFICE,                                      indoors,          Mayor's Office,                         Clock Town East,                            CLOCK_TOWN_EAST_FROM_MAYORS_OFFICE
+TOWN_ARCHERY,                                       indoors,          Town Archery,                           Clock Town East,                            CLOCK_TOWN_EAST_FROM_TOWN_ARCHERY
+MILK_BAR,                                           indoors,          Milk Bar,                               Clock Town East,                            CLOCK_TOWN_EAST_FROM_MILK_BAR
+SWORDSMAN_SCHOOL,                                   indoors,          Swordsman School,                       Clock Town West,                            CLOCK_TOWN_WEST_FROM_SWORDSMAN_SCHOOL
+CURIOSITY_SHOP,                                     indoors,          Curiosity Shop,                         Clock Town West,                            CLOCK_TOWN_WEST_FROM_CURIOSITY_SHOP
+TRADING_POST,                                       indoors,          Trading Post,                           Clock Town West,                            CLOCK_TOWN_WEST_FROM_TRADING_POST
+BOMB_SHOP,                                          indoors,          Bomb Shop,                              Clock Town West,                            CLOCK_TOWN_WEST_FROM_BOMB_SHOP
+POST_OFFICE,                                        indoors,          Post Office,                            Clock Town West,                            CLOCK_TOWN_WEST_FROM_POST_OFFICE
+LOTTERY,                                            indoors,          Lottery,                                Clock Town West,                            CLOCK_TOWN_WEST_FROM_LOTTERY
+KAFEI_HIDEOUT,                                      indoors,          Kafei Hideout,                          Laundry Pool,                               LAUNDRY_POOL_FROM_KAFEI_HIDEOUT
+POTION_SHOP,                                        indoors,          Swamp Potion Shop,                      Swamp Front,                                SWAMP_FROM_POTION_SHOP
+DEKU_SHRINE,                                        indoors,          Deku Shrine,                            Near Deku Shrine,                           DEKU_PALACE_EXTERIOR_FROM_SHRINE
+GORON_SHOP,                                         indoors,          Goron Shop,                             Goron Shrine,                               GORON_SHRINE_FROM_SHOP
+FISHER_HUT,                                         indoors,          Fisher's Hut,                           Great Bay Coast,                            GREAT_BAY_COAST_FROM_FISHER_HUT
+LABORATORY,                                         indoors,          Laboratory,                             Great Bay Coast,                            GREAT_BAY_COAST_FROM_LABORATORY
+ROOM_EVANS,                                         indoors,          Evan's Room,                            Zora Hall,                                  ZORA_HALL_FROM_EVANS
+ROOM_JAPAS,                                         indoors,          Japas' Room,                            Zora Hall,                                  ZORA_HALL_FROM_JAPAS
+ROOM_TIJO,                                          indoors,          Tijo's Room,                            Zora Hall,                                  ZORA_HALL_FROM_TIJO
+ROOM_LULU,                                          indoors,          Lulu's Room,                            Zora Hall,                                  ZORA_HALL_FROM_LULU
+ZORA_SHOP,                                          indoors,          Zora Shop,                              Zora Hall,                                  ZORA_HALL_FROM_SHOP
+CUCCO_SHACK,                                        indoors,          Cucco Shack,                            Romani Ranch,                               ROMANI_RANCH_FROM_CUCCO_SHACK
+DOGGY_RACETRACK,                                    indoors,          Doggy Racetrack,                        Romani Ranch,                               ROMANI_RANCH_FROM_DOGGY_RACETRACK
+STABLES,                                            indoors,          Stables,                                Romani Ranch,                               ROMANI_RANCH_FROM_STABLES
+RANCH_HOUSE,                                        indoors,          Ranch House,                            Romani Ranch,                               ROMANI_RANCH_FROM_RANCH_HOUSE
+FAIRY_FOUNTAIN_TOWN,                                indoors,          Clock Town Fairy Fountain,              Clock Town North,                           CLOCK_TOWN_NORTH_FROM_FAIRY_FOUNTAIN
+FAIRY_FOUNTAIN_WOODFALL,                            indoors,          Woodfall Fairy Fountain,                Woodfall Near Fairy Fountain,               WOODFALL_FROM_FAIRY_FOUNTAIN
+FAIRY_FOUNTAIN_SNOWHEAD,                            indoors,          Snowhead Fairy Fountain,                Snowhead Near Fairy Fountain,               SNOWHEAD_FROM_FAIRY_FOUNTAIN
+FAIRY_FOUNTAIN_GREAT_BAY,                           indoors,          Great Bay Fairy Fountain,               Great Bay Near Fairy Fountain,              GREAT_BAY_FROM_FAIRY_FOUNTAIN
+FAIRY_FOUNTAIN_IKANA,                               indoors,          Ikana Fairy Fountain,                   Ikana Canyon,                               IKANA_CANYON_FROM_FAIRY_FOUNTAIN
+BLACKSMITH,                                         indoors,          Blacksmith,                             Mountain Village,                           MOUNTAIN_VILLAGE_FROM_BLACKSMITH
+GORON_GRAVEYARD,                                    indoors,          Goron Graveyard,                        Near Goron Graveyard,                       MOUNTAIN_VILLAGE_FROM_GORON_GRAVEYARD
+GHOST_HUT,                                          indoors,          Ghost Hut,                              Ikana Canyon,                               IKANA_CANYON_FROM_GHOST_HUT
+SWAMP_ARCHERY,                                      indoors,          Swamp Archery,                          Road to Southern Swamp,                     SWAMP_ROAD_FROM_ARCHERY
+STOCK_POT_INN,                                      indoors-extra,    Stock Pot Inn,                          Clock Town East,                            CLOCK_TOWN_EAST_FROM_STOCK_POT_INN
+STOCK_POT_INN_ROOF,                                 indoors-extra,    Stock Pot Inn,                          Stock Pot Inn Roof,                         CLOCK_TOWN_EAST_FROM_STOCK_POT_INN_ROOF
+IKANA_CAVERN,                                       indoors-extra,    Ikana Spring Water Cave,                Ikana Canyon,                               IKANA_CANYON_FROM_CAVERN
+TOURIST_INFORMATION,                                indoors-extra,    Tourist Information,                    Swamp Front,                                SWAMP_FROM_TOURIST_INFORMATION
+ASTRAL_OBSERVATORY_FROM_CLOCK_TOWN_EAST,            indoors-extra,    Astral Observatory Passage,             Clock Town East,                            CLOCK_TOWN_EAST_FROM_ASTRAL_OBSERVATORY
+ASTRAL_OBSERVATORY_FROM_FIELD,                      indoors-extra,    Astral Observatory,                     Astral Observatory Balcony,                 FIELD_FROM_ASTRAL_OBSERVATORY
+CLOCK_TOWN_EAST_FROM_HONEY_AND_DARLING,             indoors-exit,     Clock Town East,                        Honey & Darling Game,                       HONEY_AND_DARLING_GAME
+CLOCK_TOWN_EAST_FROM_MAYORS_OFFICE,                 indoors-exit,     Clock Town East,                        Mayor's Office,                             MAYORS_OFFICE
+CLOCK_TOWN_EAST_FROM_TOWN_ARCHERY,                  indoors-exit,     Clock Town East,                        Town Archery,                               TOWN_ARCHERY
+CLOCK_TOWN_EAST_FROM_STOCK_POT_INN,                 indoors-exit,     Clock Town East,                        Stock Pot Inn,                              STOCK_POT_INN
+CLOCK_TOWN_EAST_FROM_STOCK_POT_INN_ROOF,            indoors-exit,     Stock Pot Inn Roof,                     Stock Pot Inn,                              STOCK_POT_INN_ROOF
+CLOCK_TOWN_EAST_FROM_MILK_BAR,                      indoors-exit,     Clock Town East,                        Milk Bar,                                   MILK_BAR
+CLOCK_TOWN_NORTH_FROM_FAIRY_FOUNTAIN,               indoors-exit,     Clock Town North,                       Clock Town Fairy Fountain,                  FAIRY_FOUNTAIN_TOWN
+CLOCK_TOWN_EAST_FROM_CHEST_GAME,                    indoors-exit,     Clock Town East,                        Chest Game,                                 CHEST_GAME
+CLOCK_TOWN_WEST_FROM_SWORDSMAN_SCHOOL,              indoors-exit,     Clock Town West,                        Swordsman School,                           SWORDSMAN_SCHOOL
+CLOCK_TOWN_WEST_FROM_CURIOSITY_SHOP,                indoors-exit,     Clock Town West,                        Curiosity Shop,                             CURIOSITY_SHOP
+CLOCK_TOWN_WEST_FROM_TRADING_POST,                  indoors-exit,     Clock Town West,                        Trading Post,                               TRADING_POST
+CLOCK_TOWN_WEST_FROM_BOMB_SHOP,                     indoors-exit,     Clock Town West,                        Bomb Shop,                                  BOMB_SHOP
+CLOCK_TOWN_WEST_FROM_POST_OFFICE,                   indoors-exit,     Clock Town West,                        Post Office,                                POST_OFFICE
+CLOCK_TOWN_WEST_FROM_LOTTERY,                       indoors-exit,     Clock Town West,                        Lottery,                                    LOTTERY
+LAUNDRY_POOL_FROM_KAFEI_HIDEOUT,                    indoors-exit,     Laundry Pool,                           Kafei Hideout,                              KAFEI_HIDEOUT
+SWAMP_FROM_POTION_SHOP,                             indoors-exit,     Swamp Front,                            Swamp Potion Shop,                          POTION_SHOP
+DEKU_PALACE_EXTERIOR_FROM_SHRINE,                   indoors-exit,     Near Deku Shrine,                       Deku Shrine,                                DEKU_SHRINE
+GORON_SHRINE_FROM_SHOP,                             indoors-exit,     Goron Shrine,                           Goron Shop,                                 GORON_SHOP
+GREAT_BAY_COAST_FROM_FISHER_HUT,                    indoors-exit,     Great Bay Coast,                        Fisher's Hut,                               FISHER_HUT
+GREAT_BAY_COAST_FROM_LABORATORY,                    indoors-exit,     Great Bay Coast,                        Laboratory,                                 LABORATORY
+ZORA_HALL_FROM_EVANS,                               indoors-exit,     Zora Hall,                              Evan's Room,                                ROOM_EVANS
+ZORA_HALL_FROM_JAPAS,                               indoors-exit,     Zora Hall,                              Japas' Room,                                ROOM_JAPAS
+ZORA_HALL_FROM_TIJO,                                indoors-exit,     Zora Hall,                              Tijo's Room,                                ROOM_TIJO
+ZORA_HALL_FROM_LULU,                                indoors-exit,     Zora Hall,                              Lulu's Room,                                ROOM_LULU
+ZORA_HALL_FROM_SHOP,                                indoors-exit,     Zora Hall,                              Zora Shop,                                  ZORA_SHOP
+IKANA_CANYON_FROM_GHOST_HUT,                        indoors-exit,     Ikana Canyon,                           Ghost Hut,                                  GHOST_HUT
+IKANA_CANYON_FROM_FAIRY_FOUNTAIN,                   indoors-exit,     Ikana Canyon,                           Ikana Fairy Fountain,                       FAIRY_FOUNTAIN_IKANA
+ROMANI_RANCH_FROM_CUCCO_SHACK,                      indoors-exit,     Romani Ranch,                           Cucco Shack,                                CUCCO_SHACK
+ROMANI_RANCH_FROM_DOGGY_RACETRACK,                  indoors-exit,     Romani Ranch,                           Doggy Racetrack,                            DOGGY_RACETRACK
+ROMANI_RANCH_FROM_STABLES,                          indoors-exit,     Romani Ranch,                           Stables,                                    STABLES
+ROMANI_RANCH_FROM_RANCH_HOUSE,                      indoors-exit,     Romani Ranch,                           Ranch House,                                RANCH_HOUSE
+IKANA_CANYON_FROM_CAVERN,                           indoors-exit,     Ikana Canyon,                           Ikana Spring Water Cave,                    IKANA_CAVERN
+GREAT_BAY_FROM_FAIRY_FOUNTAIN,                      indoors-exit,     Great Bay Near Fairy Fountain,          Great Bay Fairy Fountain,                   FAIRY_FOUNTAIN_GREAT_BAY
+SNOWHEAD_FROM_FAIRY_FOUNTAIN,                       indoors-exit,     Snowhead Near Fairy Fountain,           Snowhead Fairy Fountain,                    FAIRY_FOUNTAIN_SNOWHEAD
+SWAMP_FROM_TOURIST_INFORMATION,                     indoors-exit,     Swamp Front,                            Tourist Information,                        TOURIST_INFORMATION
+WOODFALL_FROM_FAIRY_FOUNTAIN,                       indoors-exit,     Woodfall Near Fairy Fountain,           Woodfall Fairy Fountain,                    FAIRY_FOUNTAIN_WOODFALL
+MOUNTAIN_VILLAGE_FROM_BLACKSMITH,                   indoors-exit,     Mountain Village,                       Blacksmith,                                 BLACKSMITH
+CLOCK_TOWN_EAST_FROM_ASTRAL_OBSERVATORY,            indoors-exit,     Clock Town East,                        Astral Observatory Passage,                 ASTRAL_OBSERVATORY_FROM_CLOCK_TOWN_EAST
+FIELD_FROM_ASTRAL_OBSERVATORY,                      indoors-exit,     Astral Observatory Balcony,             Astral Observatory,                         ASTRAL_OBSERVATORY_FROM_FIELD
+MOUNTAIN_VILLAGE_FROM_GORON_GRAVEYARD,              indoors-exit,     Near Goron Graveyard,                   Goron Graveyard,                            GORON_GRAVEYARD
+SWAMP_ROAD_FROM_ARCHERY,                            indoors-exit,     Road to Southern Swamp,                 Swamp Archery,                              SWAMP_ARCHERY
+SAKON_HIDEOUT,                                      indoors-special,  Sakon Hideout,                          Ikana Valley,                               IKANA_CANYON_FROM_SAKON_HIDEOUT
+IKANA_CANYON_FROM_SAKON_HIDEOUT,                    indoors-special,  Ikana Valley,                           Sakon Hideout,                              SAKON_HIDEOUT
+DEKU_PALACE_THRONE,                                 indoors-special,  Deku Palace Throne,                     Deku Palace Main,                           DEKU_PALACE_EXTERIOR_FROM_THRONE
+DEKU_PALACE_EXTERIOR_FROM_THRONE,                   indoors-special,  Deku Palace Main,                       Deku Palace Throne,                         DEKU_PALACE_THRONE
+DEKU_PALACE_THRONE_CAGE,                            indoors-special,  Deku Palace Cage,                       Deku Palace Near Cage,                      DEKU_PALACE_EXTERIOR_FROM_THRONE_CAGE
+DEKU_PALACE_EXTERIOR_FROM_THRONE_CAGE,              indoors-special,  Deku Palace Near Cage,                  Deku Palace Cage,                           DEKU_PALACE_THRONE_CAGE
+MUSIC_BOX_HOUSE,                                    indoors-special,  Music Box House,                        Ikana Canyon,                               IKANA_CANYON_FROM_MUSIC_BOX_HOUSE
+IKANA_CANYON_FROM_MUSIC_BOX_HOUSE,                  indoors-special,  Ikana Canyon,                           Music Box House,                            MUSIC_BOX_HOUSE
