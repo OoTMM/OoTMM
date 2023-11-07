@@ -343,3 +343,4 @@ X(ITEM_CUSTOM,              0x80,  DRAWGI_SOUL_NPC,                     0xb4, 0x
 X(ITEM_CUSTOM,              0x80,  DRAWGI_SOUL_NPC,                     0xb4, 0x015c, "the " C1 "Soul of Dampe"),
 X(ITEM_CUSTOM,              0x80,  DRAWGI_SOUL_NPC,                     0xb4, 0x015c, "the " C1 "Soul of Graveyard Kid"),
 X(ITEM_CUSTOM,              0x80,  DRAWGI_SOUL_NPC,                     0xb4, 0x015c, "the " C1 "Soul of Poe Collector"),
+X(ITEM_CUSTOM,              0x80,  DRAWGI_BOTTLE_POTION_RED,            0xb4, 0x1196, "a " C1 "bottle of Red Potion"),

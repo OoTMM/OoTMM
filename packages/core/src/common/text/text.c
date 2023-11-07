@@ -286,6 +286,7 @@ static int isItemAmbiguousOot(s16 gi)
     case GI_OOT_POTION_RED:
     case GI_OOT_POTION_GREEN:
     case GI_OOT_POTION_BLUE:
+    case GI_OOT_BOTTLE_POTION_RED:
     case GI_OOT_FAIRY:
     case GI_OOT_BUG:
     case GI_OOT_FISH:

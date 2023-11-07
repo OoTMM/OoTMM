@@ -140,7 +140,7 @@
 /* MM        Rupee (Purple)                    */ { Shader_Opa10_Xlu32,            { 0x6000620, 0x6000500, 0x6000730, 0x60005c0 }},
 /* MM        Rupee (Silver)                    */ { Shader_Opa10_Xlu32,            { 0x6000620, 0x6000520, 0x6000730, 0x60005e0 }},
 /* MM        Kokiri Sword                      */ { Shader_Opa01,                  { 0x6000998, 0x6000850 }},
-/* MM        Red Potion in a bottle            */ { Shader_Opa0_Xlu1,              { 0x6000cc0, 0x60009b0 }},
+/* Common    Red Potion in a bottle            */ { Shader_Opa0_Xlu1,              { 0x6000cc0, 0x60009b0 }},
 /* MM        Zora Egg in a bottle              */ { Shader_Opa0_Xlu1,              { 0x6001010, 0x6000cf0 }},
 /* MM        Moon's Tear                       */ { Shader_MoonTear,               { 0x6000d78, 0x6000c80 }},
 /* MM        Land Title Deed                   */ { Shader_Opa01,                  { 0x6000a08, 0x6000968 }},

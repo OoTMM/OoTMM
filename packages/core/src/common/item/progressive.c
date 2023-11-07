@@ -117,6 +117,9 @@ s16 comboRenewable(s16 gi, s16 def)
         case GI_OOT_BOTTLE_MILK:
             gi = GI_OOT_MILK;
             break;
+        case GI_OOT_BOTTLE_POTION_RED:
+            gi = GI_OOT_POTION_RED;
+            break;
         default:
             return def;
         }

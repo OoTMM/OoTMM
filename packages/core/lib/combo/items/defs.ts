@@ -598,6 +598,7 @@ const ITEM_IDS = [
   'OOT_SOUL_NPC_DAMPE',
   'OOT_SOUL_NPC_GRAVEYARD_KID',
   'OOT_SOUL_NPC_POE_COLLECTOR',
+  'OOT_BOTTLE_POTION_RED',
 ] as const;
 
 export type ItemID = typeof ITEM_IDS[number];

@@ -119,6 +119,7 @@ static int csmcFromItemOot(s16 gi)
     case GI_OOT_BUTTON_C_LEFT:
     case GI_OOT_BUTTON_C_UP:
     case GI_OOT_BUTTON_C_DOWN:
+    case GI_OOT_BOTTLE_POTION_RED:
         return CSMC_MAJOR;
     case GI_OOT_SMALL_KEY:
     case GI_OOT_SMALL_KEY_FOREST:

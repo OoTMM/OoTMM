@@ -341,6 +341,7 @@ OOT_SOUL_NPC_SHOOTING_GALLERY_OWNER:      0x156
 OOT_SOUL_NPC_DAMPE:                       0x157
 OOT_SOUL_NPC_GRAVEYARD_KID:               0x158
 OOT_SOUL_NPC_POE_COLLECTOR:               0x159
+OOT_BOTTLE_POTION_RED:                    0x15a
 
 MM_RUPEE_GREEN:               0x01
 MM_RUPEE_BLUE:                0x02

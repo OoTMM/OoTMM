@@ -161,7 +161,7 @@ extern const Shader kShaders[256];
 #define DRAWGI_MM_RUPEE_PURPLE              0x8c
 #define DRAWGI_MM_RUPEE_SILVER              0x8d
 #define DRAWGI_MM_SWORD_KOKIRI              0x8e
-#define DRAWGI_MM_BOTTLE_POTION_RED         0x8f
+#define DRAWGI_BOTTLE_POTION_RED            0x8f
 #define DRAWGI_MM_ZORA_EGG                  0x90
 #define DRAWGI_MM_MOON_TEAR                 0x91
 #define DRAWGI_MM_DEED_LAND                 0x92

@@ -26,6 +26,7 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   MM_BOTTLE_EMPTY: "Empty Bottle (MM)",
   MM_BOTTLE_MILK: "Bottle of Milk (MM)",
   MM_BOTTLE_POTION_RED: "Bottle of Red Potion (MM)",
+  OOT_BOTTLE_POTION_RED: "Bottle of Red Potion (OoT)",
   MM_BOTTLED_GOLD_DUST: "Bottle of Gold Dust",
   MM_BOW: "Hero's Bow (MM)",
   MM_BUGS: "Bugs (MM)",
