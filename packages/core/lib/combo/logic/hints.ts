@@ -138,6 +138,7 @@ export type HintClass = 'path' | 'item' | 'location';
 
 export class LogicPassHints {
   private hintedLocations = new Set<Location>();
+  private stronglyHintedLocations = new Set<Location>();
   private gossip: {[k: string]: HintGossip}[];
   private woth: Set<Location>;
   private pathfinder: Pathfinder;
@@ -449,7 +450,7 @@ export class LogicPassHints {
     const world = this.state.worlds[worldId];
     const checkWorld = this.state.worlds[checkWorldId];
     const locations = (checkWorld.checkHints[checkHint] || []).map(x => makeLocation(x, checkWorldId));
-    if (locations.every(l => this.hintedLocations.has(l))) {
+    if (locations.every(l => this.hintedLocations.has(l)) || locations.some(l => this.stronglyHintedLocations.has(l))) {
       return false;
     }
     const items = locations.map(l => this.state.items.get(l)!);
@@ -593,6 +594,7 @@ export class LogicPassHints {
       if (gossip !== null) {
         const locD = locationData(loc);
         this.hintedLocations.add(loc);
+        this.stronglyHintedLocations.add(loc);
         const paths = mapPaths.get(loc)!;
         const path = sample(this.state.random, Array.from(paths));
         const hint: HintGossip = { game: world.gossip[gossip].game, type: 'path', path, region: makeRegion(world.regions[locD.id], locD.world as number), location: loc };
@@ -619,6 +621,7 @@ export class LogicPassHints {
       if (gossip !== null) {
         const locD = locationData(loc);
         this.hintedLocations.add(loc);
+        this.stronglyHintedLocations.add(loc);
         const hint: HintGossip = { game: world.gossip[gossip].game, type: 'path', path: 'woth', region: makeRegion(world.regions[locD.id], locD.world as number), location: loc };
         this.placeWithExtra(worldId, gossip, hint, extra);
         placed++;
