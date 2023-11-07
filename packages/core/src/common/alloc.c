@@ -8,181 +8,120 @@
 # define HEAP_SIZE 0x40000
 #endif
 
-typedef struct
-{
-    u32     free:1;
-    u32     size:31;
-    void*   base;
-}
-HeapBlock;
+typedef struct HeapBlockHeader HeapBlockHeader;
 
-typedef struct
+struct HeapBlockHeader
 {
-    u32         count;
-    HeapBlock   blocks[128];
-}
-Heap;
+    HeapBlockHeader*    next;
+    HeapBlockHeader*    prev;
+    u32                 size;
+    u32                 free;
+};
 
-static Heap gHeap;
+static HeapBlockHeader* gHeapFirstBlock;
 
 void initHeap(void)
 {
-    gHeap.count = 1;
-    gHeap.blocks[0].free = 1;
-    gHeap.blocks[0].size = HEAP_SIZE;
-    gHeap.blocks[0].base = (void*)HEAP_BASE;
+    gHeapFirstBlock = (HeapBlockHeader*)HEAP_BASE;
+    gHeapFirstBlock->next = NULL;
+    gHeapFirstBlock->prev = NULL;
+    gHeapFirstBlock->size = HEAP_SIZE;
+    gHeapFirstBlock->free = 1;
 }
 
-/* Very dumb linear allocator */
+/* Dumb linear allocator */
 static void* _malloc(size_t size)
 {
-    HeapBlock* best;
-    HeapBlock* newBlock;
+    HeapBlockHeader* best;
+    HeapBlockHeader* block;
 
     /* Round up to multiple of 16 */
     size = (size + 15) & ~15;
 
+    /* Add header size */
+    size += sizeof(HeapBlockHeader);
+
     /* Search for the smallest block */
     best = NULL;
-    for (int i = 0; i < gHeap.count; ++i)
+    block = gHeapFirstBlock;
+    while (block)
     {
-        HeapBlock* block = &gHeap.blocks[i];
-        if (block->free && block->size >= size)
-        {
-            if (!best || block->size < best->size)
-                best = block;
-        }
+        /* Check for a smaller block */
+        if (block->free && block->size >= size && (!best || block->size < best->size))
+            best = block;
+
+        /* Next block */
+        block = block->next;
     }
 
     /* No block found */
     if (!best)
         return NULL;
 
-    /* If the block is an exact match, mark it as used */
-    if (best->size == size)
+    /* If the block is an exact match, or splitting would make the next block be smaller than 32 bytes, return it directly */
+    if (best->size - size <= 32)
     {
         best->free = 0;
-        return best->base;
+        return &best[1];
     }
 
-    /* Otherwise, split the block */
-    newBlock = &gHeap.blocks[gHeap.count++];
-    newBlock->free = 1;
-    newBlock->size = best->size - size;
-    newBlock->base = (void*)((u32)best->base + size);
-    best->size = size;
-    best->free = 0;
-    return best->base;
-}
-
-static void removeBlock(int blockId)
-{
-    /* If we're removing the last block, just decrement the count */
-    if (blockId == (gHeap.count - 1))
+    /* We need to split the block */
+    block = (HeapBlockHeader*)((u32)best + size);
+    if (best->next)
     {
-        --gHeap.count;
-        return;
-    }
-
-    /* Otherwise, move the last block to the removed block's position */
-    memcpy(&gHeap.blocks[blockId], &gHeap.blocks[gHeap.count - 1], sizeof(HeapBlock));
-    --gHeap.count;
-}
-
-static int mergeBlocks(int blockIdLeft, int blockIdRight)
-{
-    u32 size;
-    void* base;
-    int lowId;
-    int highId;
-
-    if (blockIdLeft < blockIdRight)
-    {
-        lowId = blockIdLeft;
-        highId = blockIdRight;
+        best->next->prev = block;
+        block->next = best->next;
     }
     else
     {
-        lowId = blockIdRight;
-        highId = blockIdLeft;
+        block->next = NULL;
     }
+    block->prev = best;
+    best->next = block;
 
-    base = gHeap.blocks[blockIdLeft].base;
-    size = gHeap.blocks[blockIdLeft].size + gHeap.blocks[blockIdRight].size;
+    block->size = best->size - size;
+    block->free = 1;
+    best->size = size;
+    best->free = 0;
 
-    gHeap.blocks[lowId].base = base;
-    gHeap.blocks[lowId].size = size;
-    gHeap.blocks[lowId].free = 1;
+    return &best[1];
+}
 
-    removeBlock(highId);
+static void mergeFreeBlocks(HeapBlockHeader* block)
+{
+    for (;;)
+    {
+        /* Check for end of allocs or a non-free block */
+        if (!block->next || !block->next->free)
+            return;
 
-    return lowId;
+        /* The next block can be merged */
+        block->size += block->next->size;
+        block->next = block->next->next;
+        if (block->next)
+        {
+            block->next->prev = block;
+        }
+    }
 }
 
 static void _free(void* data)
 {
-    int blockId;
-    int nextBlockId;
+    HeapBlockHeader* block;
 
-    /* Check for NULL */
     if (!data)
         return;
 
-    /* Find the block */
-    blockId = -1;
-    for (int i = 0; i < gHeap.count; ++i)
-    {
-        if (gHeap.blocks[i].base == data)
-        {
-            blockId = i;
-            break;
-        }
-    }
-
-    /* Not found */
-    if (blockId == -1)
-        return;
+    /* Get the block header */
+    block = (HeapBlockHeader*)data - 1;
 
     /* Mark the block as free */
-    gHeap.blocks[blockId].free = 1;
+    block->free = 1;
 
-    /* Merge right blocks */
-    for (;;)
-    {
-        nextBlockId = -1;
-        for (int i = 0; i < gHeap.count; ++i)
-        {
-            if (gHeap.blocks[i].base == (void*)((u32)gHeap.blocks[blockId].base + gHeap.blocks[blockId].size) && gHeap.blocks[i].free)
-            {
-                nextBlockId = i;
-                break;
-            }
-        }
-
-        if (nextBlockId == -1)
-            break;
-
-        blockId = mergeBlocks(blockId, nextBlockId);
-    }
-
-    /* Merge left blocks */
-    for (;;)
-    {
-        nextBlockId = -1;
-        for (int i = 0; i < gHeap.count; ++i)
-        {
-            if (gHeap.blocks[i].base == (void*)((u32)gHeap.blocks[blockId].base - gHeap.blocks[i].size) && gHeap.blocks[i].free)
-            {
-                nextBlockId = i;
-                break;
-            }
-        }
-
-        if (nextBlockId == -1)
-            break;
-
-        blockId = mergeBlocks(nextBlockId, blockId);
-    }
+    /* If the previous block is free, merge from it */
+    if (block->prev && block->prev->free)
+        block = block->prev;
+    mergeFreeBlocks(block);
 }
 
 void* malloc(size_t size)
