@@ -1025,7 +1025,7 @@
     "Kakariko Cow": "can_play_epona"
     "Kakariko Impa House HP": "true"
 "Windmill":
-  region: KAKARIKO
+  region: ENTRANCE
   exits:
     "Kakariko": "true"
     "Dampe Grave Entrance": "trick(OOT_REVERSE_DAMPE) && climb_anywhere && (is_child || can_play_time)"
@@ -1034,6 +1034,10 @@
   locations:
     "Windmill HP": "can_boomerang || event(WINDMILL_TOP) || (is_adult && trick(OOT_WINDMILL_HP_NOTHING)) || climb_anywhere || hookshot_anywhere"
     "Windmill Song of Storms": "is_adult && has_ocarina && soul_npc(SOUL_NPC_GURU_GURU)"
+"Windmill Exit":
+  region: NONE
+  exits:
+    "Windmill": "true"
 "Kakariko Carpenter House":
   region: ENTRANCE
   exits:
@@ -1143,7 +1147,7 @@
   region: GRAVEYARD
   exits:
     "Dampe Grave Entrance": "true"
-    "Windmill": "is_adult && can_play_time && soul_npc(SOUL_NPC_DAMPE)"
+    "Windmill Exit": "is_adult && can_play_time && soul_npc(SOUL_NPC_DAMPE)"
   events:
     NUTS: "true"
     RUPEES: "true"
