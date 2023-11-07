@@ -642,6 +642,18 @@ export const TRIFORCE = new Set([
   ...NAMED_TRIFORCE,
 ]);
 
+export const BOTTLES_OOT = new Set([
+  Items.OOT_BOTTLE_EMPTY,
+  Items.OOT_BOTTLE_MILK,
+]);
+
+export const BOTTLES_MM = new Set([
+  Items.MM_BOTTLE_EMPTY,
+  Items.MM_BOTTLE_MILK,
+  Items.MM_BOTTLE_CHATEAU,
+  Items.MM_BOTTLE_POTION_RED,
+]);
+
 export const REQUIRED = new Set([
   ...OWLS,
   ...RUPEES_SILVER,

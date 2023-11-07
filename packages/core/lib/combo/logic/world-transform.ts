@@ -2,6 +2,7 @@ import { Confvar } from '../confvars';
 import { DATA_POOL } from '../data';
 import { Item, ItemGroups, ItemHelpers, Items, PlayerItem, PlayerItems, makePlayerItem } from '../items';
 import { Monitor } from '../monitor';
+import { sample, Random } from '../random';
 import { Settings } from '../settings';
 import { countMapAdd, gameId } from '../util';
 import { exprTrue } from './expr';
@@ -259,6 +260,7 @@ export class LogicPassWorldTransform {
 
   constructor(
     private readonly state: {
+      random: Random;
       monitor: Monitor;
       worlds: World[];
       settings: Settings;
@@ -805,6 +807,25 @@ export class LogicPassWorldTransform {
     }
   }
 
+  private randomizeGroup(group: Set<Item>) {
+    for (let i = 0; i < this.state.worlds.length; ++i) {
+      let count = 0;
+      for (const item of group) {
+        const pi = makePlayerItem(item, i);
+        const amount = this.pool.get(pi) || 0;
+        count += amount;
+
+        this.removePlayerItem(pi);
+      }
+
+      for (let j = 0; j < count; ++j) {
+        const item = sample(this.state.random, Array.from(group));
+        const pi = makePlayerItem(item, i);
+        this.addPlayerItem(pi);
+      }
+    }
+  }
+
   run() {
     const { settings } = this.state;
     this.state.monitor.log('Logic: World Transform');
@@ -1114,6 +1135,12 @@ export class LogicPassWorldTransform {
     case 'plentiful':
       this.plentifulPool();
       break;
+    }
+
+    /* handle random bottle contents */
+    if (settings.bottleContentShuffle) {
+      this.randomizeGroup(ItemGroups.BOTTLES_OOT);
+      this.randomizeGroup(ItemGroups.BOTTLES_MM);
     }
 
     /* Handle fixed locations */

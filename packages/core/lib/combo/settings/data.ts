@@ -893,6 +893,13 @@ export const SETTINGS = [{
   ],
   default: 'progressive'
 }, {
+  key: 'bottleContentShuffle',
+  name: 'Random Bottle Contents',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Randomize the content of the bottles',
+  default: false
+}, {
   key: 'sunSongMm',
   name: 'Sun\'s Song in MM',
   category: 'items.extensions',
