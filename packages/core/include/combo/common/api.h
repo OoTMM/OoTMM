@@ -96,6 +96,9 @@ void PlayerDisplayTextBox(GameState_Play* play, u16 messageId, void* unk);
 
 #if defined(GAME_MM)
 void Message_ShowMessageAtYPosition(GameState_Play* play, u16 messageId, u8 yPosition);
+void PictoUpdateFlags(GameState_Play* play);
+extern u16 gPictoboxState;
+extern u16 gPictoboxPhotoTaken;
 #endif
 
 #define TEXT_STATE_NONE     0
