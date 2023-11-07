@@ -75,14 +75,22 @@ void comboShopSetupItem(GameState_Play* play, Actor_EnGirlA* girlA)
 void comboShopDisplayTextBox(GameState_Play* play, Actor_EnGirlA* girlA)
 {
     ComboItemOverride o;
+    int flags;
 
     EnGirlA_ItemOverride(&o, girlA);
     DisplayTextBox2(play, girlA->base.messageId);
+    flags = 0;
     if (o.gi == SOLD_OUT)
     {
         girlA->disabled = 1;
     }
-    comboTextHijackItemShop(play, &o, girlA->price, 0);
+#if defined(GAME_MM)
+    if (girlA->base.variable == 2 && o.gi != SOLD_OUT && !(MM_GET_EVENT_WEEK(EV_MM_WEEK_WITCH_MUSHROOM)))
+    {
+        flags |= TFS_MUSHROOM;
+    }
+#endif
+    comboTextHijackItemShop(play, &o, girlA->price, flags);
 }
 
 void comboShopDisplayTextBoxConfirm(GameState_Play* play, Actor_EnGirlA* girlA)

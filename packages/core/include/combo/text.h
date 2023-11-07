@@ -50,6 +50,9 @@
 #define TF_SIGNAL       (1 << 3)
 #define TF_PLURAL       (1 << 4)
 
+#define TFS_CONFIRM     (1 << 0)
+#define TFS_MUSHROOM    (1 << 1)
+
 typedef struct GameState_Play GameState_Play;
 typedef struct ComboItemQuery ComboItemQuery;
 typedef struct ComboItemOverride ComboItemOverride;
