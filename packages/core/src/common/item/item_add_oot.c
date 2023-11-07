@@ -991,6 +991,12 @@ int comboAddItemOot(s16 gi, int noEffect)
     case GI_OOT_BOTTLE_POTION_RED:
         addNewBottle(ITEM_OOT_POTION_RED);
         break;
+    case GI_OOT_BOTTLE_POTION_GREEN:
+        addNewBottle(ITEM_OOT_POTION_GREEN);
+        break;
+    case GI_OOT_BOTTLE_POTION_BLUE:
+        addNewBottle(ITEM_OOT_POTION_BLUE);
+        break;
     case GI_OOT_POTION_RED:
         fillBottle(ITEM_OOT_POTION_RED);
         break;

@@ -257,6 +257,8 @@ int comboAddItemEffect(GameState_Play* play, s16 gi)
     case GI_OOT_POTION_GREEN:
     case GI_OOT_BOTTLE_MILK:
     case GI_OOT_BOTTLE_POTION_RED:
+    case GI_OOT_BOTTLE_POTION_GREEN:
+    case GI_OOT_BOTTLE_POTION_BLUE:
     case GI_OOT_FISH:
     case GI_OOT_BLUE_FIRE:
     case GI_OOT_BUG:

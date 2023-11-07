@@ -646,6 +646,8 @@ export const BOTTLES_OOT = new Set([
   Items.OOT_BOTTLE_EMPTY,
   Items.OOT_BOTTLE_MILK,
   Items.OOT_BOTTLE_POTION_RED,
+  Items.OOT_BOTTLE_POTION_GREEN,
+  Items.OOT_BOTTLE_POTION_BLUE,
 ]);
 
 export const BOTTLES_MM = new Set([
@@ -653,6 +655,8 @@ export const BOTTLES_MM = new Set([
   Items.MM_BOTTLE_MILK,
   Items.MM_BOTTLE_CHATEAU,
   Items.MM_BOTTLE_POTION_RED,
+  Items.MM_BOTTLE_POTION_GREEN,
+  Items.MM_BOTTLE_POTION_BLUE,
 ]);
 
 export const REQUIRED = new Set([

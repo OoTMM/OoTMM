@@ -61,7 +61,7 @@
 "can_longshot": "can_hookshot_n(2)"
 "can_boomerang": "age_boomerang && has(BOOMERANG)"
 "can_hammer": "age_hammer && has(HAMMER)"
-"has_bottle": "has(BOTTLE_EMPTY) || has(BOTTLE_MILK) || has(BOTTLE_POTION_RED) || event(KING_ZORA_LETTER)"
+"has_bottle": "has(BOTTLE_EMPTY) || has(BOTTLE_MILK) || has(BOTTLE_POTION_RED) || has(BOTTLE_POTION_GREEN) || has(BOTTLE_POTION_BLUE) || event(KING_ZORA_LETTER)"
 "can_use_beans": "is_child && has(MAGIC_BEAN)"
 
 # Age macros
@@ -111,7 +111,9 @@
 "can_lift_gold": "is_adult && has(STRENGTH, 3)"
 
 #Magic Item Macros
-"has_magic": "(has(MAGIC_UPGRADE) || has(SHARED_MAGIC_UPGRADE)) && (event(MAGIC) || (setting(sharedMagic) && event(MM_MAGIC)) || (has_bottle && (renewable(POTION_GREEN) || renewable(POTION_BLUE))))"
+"has_green_potion": "has_bottle && (renewable(POTION_GREEN) || renewable(BOTTLE_POTION_GREEN))"
+"has_blue_potion": "has_bottle && (renewable(POTION_BLUE) || renewable(BOTTLE_POTION_BLUE))"
+"has_magic": "(has(MAGIC_UPGRADE) || has(SHARED_MAGIC_UPGRADE)) && (event(MAGIC) || (setting(sharedMagic) && event(MM_MAGIC)) || has_green_potion || has_blue_potion)"
 "can_use_din": "has_magic && has(SPELL_FIRE)"
 "can_use_nayru": "has_magic && has(SPELL_LOVE)"
 "has_light_arrows": "can_use_bow && (has(ARROW_LIGHT) || has(SHARED_ARROW_LIGHT)) && has_magic"

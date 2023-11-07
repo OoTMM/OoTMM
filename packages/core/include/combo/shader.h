@@ -245,5 +245,7 @@ extern const Shader kShaders[256];
 #define DRAWGI_BUTTON_C_UP                  0xe0
 #define DRAWGI_BUTTON_C_DOWN                0xe1
 #define DRAWGI_SOUL_NPC                     0xe2
+#define DRAWGI_BOTTLE_POTION_GREEN          0xe3
+#define DRAWGI_BOTTLE_POTION_BLUE           0xe4
 
 #endif

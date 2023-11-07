@@ -342,6 +342,8 @@ OOT_SOUL_NPC_DAMPE:                       0x157
 OOT_SOUL_NPC_GRAVEYARD_KID:               0x158
 OOT_SOUL_NPC_POE_COLLECTOR:               0x159
 OOT_BOTTLE_POTION_RED:                    0x15a
+OOT_BOTTLE_POTION_GREEN:                  0x15b
+OOT_BOTTLE_POTION_BLUE:                   0x15c
 
 MM_RUPEE_GREEN:               0x01
 MM_RUPEE_BLUE:                0x02
@@ -581,6 +583,8 @@ MM_BUTTON_C_RIGHT:                       0x131
 MM_BUTTON_C_LEFT:                        0x132
 MM_BUTTON_C_UP:                          0x133
 MM_BUTTON_C_DOWN:                        0x134
+MM_BOTTLE_POTION_GREEN:                  0x135
+MM_BOTTLE_POTION_BLUE:                   0x136
 
 # Special
 # MM_SOUL_SKULL_KID:                       0xf7

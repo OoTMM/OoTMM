@@ -872,6 +872,12 @@ int comboAddItemMm(s16 gi, int noEffect)
     case GI_MM_BOTTLE_POTION_RED:
         addNewBottle(ITEM_MM_POTION_RED);
         break;
+    case GI_MM_BOTTLE_POTION_GREEN:
+        addNewBottle(ITEM_MM_POTION_GREEN);
+        break;
+    case GI_MM_BOTTLE_POTION_BLUE:
+        addNewBottle(ITEM_MM_POTION_BLUE);
+        break;
     case GI_MM_POTION_RED:
         fillBottle(ITEM_MM_POTION_RED);
         break;

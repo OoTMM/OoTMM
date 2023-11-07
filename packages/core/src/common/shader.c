@@ -625,6 +625,39 @@ typedef struct
 }
 GsColors;
 
+void Shader_CustomBottlePotion(GameState_Play* play, s16 index)
+{
+    static const u32 kPrimColors[] = {
+        0xff0000ff,
+        0x00ff00ff,
+        0x0000ffff,
+    };
+    static const u32 kEnvColors[] = {
+        0xff8888ff,
+        0x88ff88ff,
+        0x8888ffff,
+    };
+
+    const Shader* shader;
+
+    u8 r;
+    u8 g;
+    u8 b;
+    u8 a;
+
+    shader = &kShaders[index];
+    OPEN_DISPS(play->gs.gfx);
+    InitListPolyXlu(play->gs.gfx);
+    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    color4(&r, &g, &b, &a, kPrimColors[shader->lists[0]]);
+    gDPSetPrimColor(POLY_XLU_DISP++, 0, 0x80, r, g, b, a);
+    color4(&r, &g, &b, &a, kEnvColors[shader->lists[0]]);
+    gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, a);
+    gSPDisplayList(POLY_XLU_DISP++, shader->lists[1]);
+
+    CLOSE_DISPS();
+}
+
 void Shader_CustomGS(GameState_Play* play, s16 index)
 {
     static const GsColors kColors[] = {

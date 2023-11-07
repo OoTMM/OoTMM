@@ -66,6 +66,12 @@ s16 comboRenewable(s16 gi, s16 def)
         case GI_MM_BOTTLE_POTION_RED:
             gi = GI_MM_POTION_RED;
             break;
+        case GI_MM_BOTTLE_POTION_GREEN:
+            gi = GI_MM_POTION_GREEN;
+            break;
+        case GI_MM_BOTTLE_POTION_BLUE:
+            gi = GI_MM_POTION_BLUE;
+            break;
         case GI_MM_BOTTLE_CHATEAU:
             gi = GI_MM_CHATEAU;
             break;
@@ -119,6 +125,12 @@ s16 comboRenewable(s16 gi, s16 def)
             break;
         case GI_OOT_BOTTLE_POTION_RED:
             gi = GI_OOT_POTION_RED;
+            break;
+        case GI_OOT_BOTTLE_POTION_GREEN:
+            gi = GI_OOT_POTION_GREEN;
+            break;
+        case GI_OOT_BOTTLE_POTION_BLUE:
+            gi = GI_OOT_POTION_BLUE;
             break;
         default:
             return def;
