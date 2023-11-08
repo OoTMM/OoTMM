@@ -219,7 +219,9 @@ typedef struct
     u16             magicToConsume;
     u16             magicToAdd;
     u16             dungeonId2;
-    char            unk_3f38[0x8];
+    char            unk_3f38[0x2];
+    u16             minigameCounter[2];
+    char            unk_3f3e[0x2];
     SaveOptions     options;
     char            unk_3f46[0x4];
     u16             nextCutscene;
@@ -241,6 +243,7 @@ ASSERT_OFFSET(MmSaveContext, unk_3cb0,          0x3cb0);
 ASSERT_OFFSET(MmSaveContext, grottoChestFlag,   0x3d27);
 ASSERT_OFFSET(MmSaveContext, unk_3d28,          0x3d28);
 ASSERT_OFFSET(MmSaveContext, dungeonId2,        0x3f36);
+ASSERT_OFFSET(MmSaveContext, minigameCounter,   0x3f3a);
 ASSERT_OFFSET(MmSaveContext, options,           0x3f40);
 ASSERT_OFFSET(MmSaveContext, unk_3f4c,          0x3f4c);
 ASSERT_OFFSET(MmSaveContext, healthDelta,       0x3f5a);
