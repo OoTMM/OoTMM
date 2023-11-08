@@ -721,7 +721,7 @@
   time: night
   exits:
     "Market Castle Entry": "true"
-    "Ganon Castle Exterior After Bridge": "special(BRIDGE) || longshot_anywhere"
+    "Ganon Castle Exterior After Bridge": "special(BRIDGE) || (longshot_anywhere && trick(OOT_GANON_CASTLE_ENTRY))"
     "Near Fairy Fountain Defense": "can_lift_gold"
   locations:
     "Ganon Castle Exterior GS": "true"
@@ -1121,7 +1121,7 @@
   region: GRAVEYARD
   exits:
     "Graveyard": "true"
-    "Shadow Temple": "can_use_din || (has_fire_arrows && (trick(OOT_SHADOW_FIRE_ARROW) || can_use_sticks))"
+    "Shadow Temple": "can_use_din || (has_fire_arrows && (trick(OOT_SHADOW_FIRE_ARROW) || (trick(OOT_SHADOW_TEMPLE_STICKS) && can_use_sticks)))"
   gossip:
     "Graveyard Gossip": "true"
 "Graveyard Royal Tomb":
