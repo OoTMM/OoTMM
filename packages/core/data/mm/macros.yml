@@ -136,8 +136,10 @@
 "has_hot_water_mtn": "has_bottle && event(GORON_GRAVEYARD_HOT_WATER)"
 "has_hot_water_mtn_spring": "has_bottle && (event(GORON_GRAVEYARD_HOT_WATER) || event(TWIN_ISLANDS_HOT_WATER))" # Temporary hack until we have something better
 "has_hot_water_well": "has_bottle && event(WELL_HOT_WATER)"
-"has_hot_water_distance": "can_play_soaring && (has_hot_water_mtn_spring || has_hot_water_well)"
-"has_hot_water_er": "er_enabled && (has_hot_water_mtn_spring || has_hot_water_well)"
+"has_hot_water_distance": "can_play_soaring && (has_hot_water_mtn || has_hot_water_well)"
+"has_hot_water_distance_spring": "can_play_soaring && (has_hot_water_mtn_spring || has_hot_water_well)"
+"has_hot_water_er": "er_enabled && (has_hot_water_mtn || has_hot_water_well)"
+"has_hot_water_er_spring": "er_enabled && (has_hot_water_mtn_spring || has_hot_water_well)"
 "has_bugs": "has_bottle && event(BUGS)"
 "has_fish": "has_bottle && event(FISH)"
 "has_water": "has_bottle && event(WATER)"
