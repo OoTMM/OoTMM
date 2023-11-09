@@ -102,7 +102,7 @@
   dungeon: DC
   exits:
     "Dodongo Cavern Stairs Top": "true"
-    "Dodongo Cavern Bomb Bag Room 2": "can_longshot || has_hover_boots || (is_adult && trick(OOT_DC_JUMP)) || climb_anywhere || hookshot_anywhere"
+    "Dodongo Cavern Bomb Bag Room 2": "can_longshot || (is_adult && has_hover_boots) || (is_adult && trick(OOT_DC_JUMP)) || climb_anywhere || hookshot_anywhere"
     "Dodongo Cavern Miniboss 2": "can_hit_triggers_distance || climb_anywhere || hookshot_anywhere"
     "Dodongo Cavern Bomb Bag Side Room": "has_explosives_or_hammer || has_blue_fire_arrows_mudwall"
   locations:
