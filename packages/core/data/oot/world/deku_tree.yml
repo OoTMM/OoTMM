@@ -6,7 +6,7 @@
 "Deku Tree Lobby":
   dungeon: DT
   exits:
-    "Deku Tree Slingshot Room": "soul_deku_scrub && has_shield_for_scrubs"
+    "Deku Tree Slingshot Room": "soul_deku_scrub && (has_shield_for_scrubs || can_hammer)"
     "Deku Tree Basement": "has_fire || has_nuts || has_weapon || has_explosives_or_hammer || has_ranged_weapon || can_use_sticks"
   events:
     STICKS: "can_kill_baba_sticks"
