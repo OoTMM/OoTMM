@@ -357,5 +357,4 @@ extern u8 gFogState;
 
 #if defined(GAME_MM)
 void SpawnCollectible2(GameState_Play* play, int unk, void* unk2, u16 unk3);
-f32 VectDist(Vec3f* vec1, Vec3f* vec2);
 #endif
