@@ -44,6 +44,7 @@
 #  include <combo/mm/actor_enossan.h>
 #  include <combo/mm/actor_ensuttari.h>
 #  include <combo/mm/actor_arms_hook.h>
+#  include <combo/mm/actor_objboat.h>
 #  include <combo/mm/actors/Obj_Tsubo.h>
 #  include <combo/mm/actors/Obj_Grass.h>
 #  include <combo/mm/actors/Obj_Grass_Carry.h>
