@@ -447,7 +447,7 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
         throw new Error(`Unknown named check: ${hint.check}`);
       }
       const items = hint.items;
-      const itemsGI = hint.items.map((item) => gi(settings, 'oot', item.item, true));
+      const itemsGI = hint.items.map((item) => gi(settings, 'oot', item.item, false));
       data.writeUInt8(id, HINT_OFFSETS.KEY);
       data.writeUInt8(0x02, HINT_OFFSETS.TYPE);
       data.writeUInt8(check, HINT_OFFSETS.REGION);
@@ -475,7 +475,7 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
         if (region === undefined) {
           throw new Error(`Unknown region ${hint.region}`);
         }
-        const itemGI = gi(settings, 'oot', item.item, true);
+        const itemGI = gi(settings, 'oot', item.item, false);
         data.writeUInt8(id, HINT_OFFSETS.KEY);
         data.writeUInt8(0x03, HINT_OFFSETS.TYPE);
         data.writeUInt8(region, HINT_OFFSETS.REGION);
