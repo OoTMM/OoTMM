@@ -66,8 +66,8 @@ Lost Woods Memory Game,                                     npc,            NONE
 Lost Woods Scrub Sticks Upgrade,                            scrub,          NONE,                 LOST_WOODS,                     0x00,                       STICK_UPGRADE
 Lost Woods Scrub Near Theater Left,                         scrub,          NONE,                 LOST_WOODS,                     0x01,                       STICK
 Lost Woods Scrub Near Theater Right,                        scrub,          NONE,                 LOST_WOODS,                     0x02,                       NUTS_5
-Lost Woods Odd Mushroom,                                    npc,            NONE,                 LOST_WOODS,                     TRADE_ODD_MUSHROOM,         ODD_MUSHROOM
-Lost Woods Poacher's Saw,                                   npc,            NONE,                 LOST_WOODS,                     TRADE_POACHER_SAW,          POACHER_SAW
+Lost Woods Odd Mushroom,                                    npc,            LOST_WOODS_TRADE,     LOST_WOODS,                     TRADE_ODD_MUSHROOM,         ODD_MUSHROOM
+Lost Woods Poacher's Saw,                                   npc,            LOST_WOODS_TRADE,     LOST_WOODS,                     TRADE_POACHER_SAW,          POACHER_SAW
 Lost Woods Grass 1,                                         grass,          NONE,                 LOST_WOODS,                     0x00202,                    RANDOM
 Lost Woods Grass 2,                                         grass,          NONE,                 LOST_WOODS,                     0x00203,                    RANDOM
 Lost Woods Grass 3,                                         grass,          NONE,                 LOST_WOODS,                     0x00204,                    RANDOM
@@ -233,7 +233,7 @@ Death Mountain Crater Grotto Grass 1,                       grass,          NONE
 Death Mountain Crater Grotto Grass 2,                       grass,          NONE,                 GROTTOS,                        0x03a03,                    RANDOM
 Death Mountain Crater Grotto Grass 3,                       grass,          NONE,                 GROTTOS,                        0x03a04,                    RANDOM
 Death Mountain Crater Grotto Grass 4,                       grass,          NONE,                 GROTTOS,                        0x03a05,                    RANDOM
-Death Mountain Crater Scrub Child,                          scrub,          NONE,                 DEATH_MOUNTAIN_CRATER,          0x0e,                       BOMBS_5
+Death Mountain Crater Scrub Child,                          scrub,          DMC_SCRUB,            DEATH_MOUNTAIN_CRATER,          0x0e,                       BOMBS_5
 Death Mountain Crater Grotto Left Scrub,                    scrub,          NONE,                 GROTTOS,                        0x0f,                       NUTS_5
 Death Mountain Crater Grotto Center Scrub,                  scrub,          NONE,                 GROTTOS,                        0x10,                       DEKU_SEEDS_30
 Death Mountain Crater Grotto Right Scrub,                   scrub,          NONE,                 GROTTOS,                        0x11,                       BOMBS_5
@@ -635,7 +635,7 @@ Deku Tree Basement Chest,                                   chest,          NONE
 Deku Tree GS Compass,                                       gs,             NONE,                 INSIDE_DEKU_TREE,               0x0b,                       GS_TOKEN
 Deku Tree GS Basement Vines,                                gs,             NONE,                 INSIDE_DEKU_TREE,               0x0a,                       GS_TOKEN
 Deku Tree GS Basement Gate,                                 gs,             NONE,                 INSIDE_DEKU_TREE,               0x09,                       GS_TOKEN
-Deku Tree GS Basement Back Room,                            gs,             NONE,                 INSIDE_DEKU_TREE,               0x08,                       GS_TOKEN
+Deku Tree GS Basement Back Room,                            gs,             DEKU_BACK_SKULL,      INSIDE_DEKU_TREE,               0x08,                       GS_TOKEN
 Deku Tree Grass Lobby 1,                                    grass,          NONE,                 INSIDE_DEKU_TREE,               0x00006,                    DEKU_SEEDS_5
 Deku Tree Grass Lobby 2,                                    grass,          NONE,                 INSIDE_DEKU_TREE,               0x00007,                    RECOVERY_HEART
 Deku Tree Grass Lobby 3,                                    grass,          NONE,                 INSIDE_DEKU_TREE,               0x00008,                    DEKU_SEEDS_5
@@ -724,7 +724,7 @@ Dodongo Cavern Boss Container,                              collectible,    NONE
 Dodongo Cavern Boss,                                        npc,            NONE,                 LAIR_KING_DODONGO,              BLUE_WARP_KING_DODONGO,     STONE_RUBY
 Jabu-Jabu Map Chest,                                        chest,          NONE,                 INSIDE_JABU_JABU,               0x02,                       MAP_JJ
 Jabu-Jabu Compass Chest,                                    chest,          NONE,                 INSIDE_JABU_JABU,               0x04,                       COMPASS_JJ
-Jabu-Jabu Boomerang Chest,                                  chest,          NONE,                 INSIDE_JABU_JABU,               0x01,                       BOOMERANG
+Jabu-Jabu Boomerang Chest,                                  chest,          JABU_BOOMERANG,                 INSIDE_JABU_JABU,               0x01,                       BOOMERANG
 Jabu-Jabu Scrub,                                            scrub,          NONE,                 INSIDE_JABU_JABU,               0x20,                       NUTS_5
 Jabu-Jabu GS Water Switch,                                  gs,             NONE,                 INSIDE_JABU_JABU,               0x1b,                       GS_TOKEN
 Jabu-Jabu GS Bottom Lower,                                  gs,             NONE,                 INSIDE_JABU_JABU,               0x18,                       GS_TOKEN
@@ -760,7 +760,7 @@ Forest Temple Bow,                                          chest,          NONE
 Forest Temple Compass,                                      chest,          NONE,                 TEMPLE_FOREST,                  0x0f,                       COMPASS_FOREST
 Forest Temple Checkerboard,                                 chest,          NONE,                 TEMPLE_FOREST,                  0x07,                       ARROWS_10
 Forest Temple Boss Key,                                     chest,          NONE,                 TEMPLE_FOREST,                  0x0e,                       BOSS_KEY_FOREST
-Forest Temple Floormaster,                                  chest,          NONE,                 TEMPLE_FOREST,                  0x02,                       SMALL_KEY_FOREST
+Forest Temple Floormaster,                                  chest,          FOREST_FLOORMASTER,   TEMPLE_FOREST,                  0x02,                       SMALL_KEY_FOREST
 Forest Temple Antichamber,                                  chest,          NONE,                 TEMPLE_FOREST,                  0x0b,                       ARROWS_5
 Forest Temple GS Entrance,                                  gs,             NONE,                 TEMPLE_FOREST,                  0x21,                       GS_TOKEN
 Forest Temple GS Main,                                      gs,             NONE,                 TEMPLE_FOREST,                  0x23,                       GS_TOKEN
@@ -860,7 +860,7 @@ Water Temple Bombable Chest,                                chest,          NONE
 Water Temple Shell Chest,                                   chest,          NONE,                 TEMPLE_WATER,                   0x01,                       SMALL_KEY_WATER
 Water Temple Map,                                           chest,          NONE,                 TEMPLE_WATER,                   0x02,                       MAP_WATER
 Water Temple Corridor Chest,                                chest,          NONE,                 TEMPLE_WATER,                   0x08,                       SMALL_KEY_WATER
-Water Temple River Chest,                                   chest,          NONE,                 TEMPLE_WATER,                   0x03,                       SMALL_KEY_WATER
+Water Temple River Chest,                                   chest,          WATER_RIVER,          TEMPLE_WATER,                   0x03,                       SMALL_KEY_WATER
 Water Temple GS River,                                      gs,             NONE,                 TEMPLE_WATER,                   0x34,                       GS_TOKEN
 Water Temple GS Center,                                     gs,             NONE,                 TEMPLE_WATER,                   0x32,                       GS_TOKEN
 Water Temple GS Large Pit,                                  gs,             NONE,                 TEMPLE_WATER,                   0x31,                       GS_TOKEN
@@ -957,7 +957,7 @@ Shadow Temple Falling Spikes Upper 2,                       chest,          NONE
 Shadow Temple Invisible Spike Room,                         chest,          NONE,                 TEMPLE_SHADOW,                  0x09,                       RUPEE_BLUE
 Shadow Temple Boss Key Room 1,                              chest,          NONE,                 TEMPLE_SHADOW,                  0x0a,                       RUPEE_BLUE
 Shadow Temple Boss Key Room 2,                              chest,          NONE,                 TEMPLE_SHADOW,                  0x0b,                       BOSS_KEY_SHADOW
-Shadow Temple Skull,                                        collectible,    NONE,                 TEMPLE_SHADOW,                  0x01,                       SMALL_KEY_SHADOW
+Shadow Temple Skull,                                        collectible,    SHADOW_SKULL_POT,     TEMPLE_SHADOW,                  0x01,                       SMALL_KEY_SHADOW
 Shadow Temple Spinning Blades Visible,                      chest,          NONE,                 TEMPLE_SHADOW,                  0x0c,                       RUPEE_BLUE
 Shadow Temple Spinning Blades Invisible,                    chest,          NONE,                 TEMPLE_SHADOW,                  0x16,                       ARROWS_30
 Shadow Temple Invisible Floormaster,                        chest,          NONE,                 TEMPLE_SHADOW,                  0x0d,                       SMALL_KEY_SHADOW
@@ -1219,7 +1219,7 @@ MQ Deku Tree Slingshot Chest,                               chest,          NONE
 MQ Deku Tree Slingshot Room Far Chest,                      chest,          NONE,                 INSIDE_DEKU_TREE,               0x02,                       RUPEE_BLUE
 MQ Deku Tree Basement Chest,                                chest,          NONE,                 INSIDE_DEKU_TREE,               0x04,                       RUPEE_BLUE
 MQ Deku Tree Before Water Platform Chest,                   chest,          NONE,                 INSIDE_DEKU_TREE,               0x05,                       RECOVERY_HEART
-MQ Deku Tree After Water Platform Chest,                    chest,          NONE,                 INSIDE_DEKU_TREE,               0x00,                       RUPEE_PURPLE
+MQ Deku Tree After Water Platform Chest,                    chest,          MQ_DEKU_TIME_BLOCK,                 INSIDE_DEKU_TREE,               0x00,                       RUPEE_PURPLE
 MQ Deku Tree Scrub,                                         scrub,          NONE,                 INSIDE_DEKU_TREE,               0x1b,                       SHIELD_DEKU
 MQ Deku Tree GS Back Room,                                  gs,             NONE,                 INSIDE_DEKU_TREE,               0x08,                       GS_TOKEN
 MQ Deku Tree GS Lobby Crate,                                gs,             NONE,                 INSIDE_DEKU_TREE,               0x09,                       GS_TOKEN
@@ -1548,7 +1548,7 @@ MQ Shadow Temple Spike Curtain Ground Chest,                chest,          NONE
 MQ Shadow Temple Spike Curtain Upper Cage Chest,            chest,          NONE,                 TEMPLE_SHADOW,                  0x06,                       RUPEE_BLUE
 MQ Shadow Temple Spike Curtain Upper Switch Chest,          chest,          NONE,                 TEMPLE_SHADOW,                  0x04,                       SMALL_KEY_SHADOW
 MQ Shadow Temple Invisible Spike Floor Chest,               chest,          NONE,                 TEMPLE_SHADOW,                  0x09,                       RUPEE_BLUE
-MQ Shadow Temple Stalfos Room Chest,                        chest,          NONE,                 TEMPLE_SHADOW,                  0x10,                       RUPEE_RED
+MQ Shadow Temple Stalfos Room Chest,                        chest,          MQ_SHADOW_STALFOS,    TEMPLE_SHADOW,                  0x10,                       RUPEE_RED
 MQ Shadow Temple Wind Hint Chest,                           chest,          NONE,                 TEMPLE_SHADOW,                  0x15,                       SMALL_KEY_SHADOW
 MQ Shadow Temple After Wind Gibdos Chest,                   chest,          NONE,                 TEMPLE_SHADOW,                  0x08,                       RUPEE_BLUE
 MQ Shadow Temple After Wind Bomb Chest,                     chest,          NONE,                 TEMPLE_SHADOW,                  0x14,                       ARROWS_5
@@ -1629,7 +1629,7 @@ MQ Spirit Temple Chest in Box,                              chest,          NONE
 MQ Spirit Temple Statue Room Ledge Chest,                   chest,          NONE,                 TEMPLE_SPIRIT,                  0x02,                       RECOVERY_HEART
 MQ Spirit Temple Lobby Front-Right Chest,                   chest,          NONE,                 TEMPLE_SPIRIT,                  0x1b,                       SMALL_KEY_SPIRIT
 MQ Spirit Temple Purple Leever Chest,                       chest,          NONE,                 TEMPLE_SPIRIT,                  0x04,                       RUPEE_PURPLE
-MQ Spirit Temple Symphony Room Chest,                       chest,          NONE,                 TEMPLE_SPIRIT,                  0x07,                       RUPEE_PURPLE
+MQ Spirit Temple Symphony Room Chest,                       chest,          MQ_SPIRIT_SYMPHONY,   TEMPLE_SPIRIT,                  0x07,                       RUPEE_PURPLE
 MQ Spirit Temple Beamos Room Chest,                         chest,          NONE,                 TEMPLE_SPIRIT,                  0x19,                       ARROWS_30
 MQ Spirit Temple Dinolfos Room Chest,                       chest,          NONE,                 TEMPLE_SPIRIT,                  0x18,                       ICE_TRAP
 MQ Spirit Temple Boss Key Chest,                            chest,          NONE,                 TEMPLE_SPIRIT,                  0x05,                       BOSS_KEY_SPIRIT

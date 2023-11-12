@@ -60,6 +60,14 @@ const HINTS_ITEMS_SOMETIMES = [
   'OOT_ICE_CAVERN_CHEST',
   'OOT_TREASURE_GAME',
   'OOT_SHOOT_SUN',
+  'OOT_FOREST_FLOORMASTER',
+  'OOT_SHADOW_SKULL_POT',
+  'OOT_MQ_SHADOW_STALFOS',
+  'OOT_WATER_RIVER',
+  'OOT_LOST_WOODS_TRADE',
+  'OOT_JABU_RANG',
+  'OOT_MQ_SPIRIT_SYMPHONY',
+  'OOT_MQ_DEKU_TIME_BLOCK',
   'MM_BANK_3',
   'MM_SOUND_CHECK',
   'MM_BOAT_ARCHERY',
@@ -74,6 +82,12 @@ const HINTS_ITEMS_SOMETIMES = [
   'MM_CUCCOS',
   'MM_KAFEI',
   'MM_INVISIBLE_SOLDIER',
+  'MM_GBT_ICE_ARROW',
+  'MM_SHT_BOSS_KEY',
+  'MM_WFT_BOSS_KEY',
+  'MM_ISTT_BOSS_KEY',
+  'MM_HUNGRY_GORON',
+  'MM_KAMARO'
 ];
 
 export const HINTS_PATHS = {
@@ -200,7 +214,19 @@ export class LogicPassHints {
 
     if (settings.cowShuffleMm) {
       sometimesHints.push('MM_COW_WELL');
+    },
+
+    if (settings.scrubShuffleOot) {
+      sometimesHints.push('OOT_DMC_SCRUB');
+    },
+
+    if (settings.goldSkulltulaTokens === 'dungeons' || settings.goldSkulltulaTokens === 'all') {
+      sometimesHints.push('OOT_DEKU_BACK_SKULL');
     }
+
+    if (settings.strayFairyChestShuffle === 'starting' || settings.strayFairyChestShuffle === 'anywhere') {
+      sometimesHints.push('MM_WFT_DARK');
+    },
 
     return sometimesHints;
   }

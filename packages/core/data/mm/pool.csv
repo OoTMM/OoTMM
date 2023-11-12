@@ -101,7 +101,7 @@ Deku Playground Reward 2,                               npc,            NONE,   
 Termina Field Water Chest,                              chest,          NONE,                   TERMINA_FIELD,                0x00,                       RUPEE_RED
 Termina Field Tall Grass Chest,                         chest,          NONE,                   TERMINA_FIELD,                0x01,                       RUPEE_RED
 Termina Field Tree Stump Chest,                         chest,          NONE,                   TERMINA_FIELD,                0x02,                       RUPEE_RED
-Termina Field Kamaro Mask,                              npc,            NONE,                   TERMINA_FIELD,                MASK_KAMARO,                MASK_KAMARO
+Termina Field Kamaro Mask,                              npc,            KAMARO,                 TERMINA_FIELD,                MASK_KAMARO,                MASK_KAMARO
 Termina Field Tall Grass Grotto,                        chest,          NONE,                   GROTTOS,                      0x1f,                       RUPEE_RED
 Termina Field Tall Grass Grotto Grass 01,               grass,          NONE,                   GROTTOS,                      0x03f00,                    RANDOM
 Termina Field Tall Grass Grotto Grass 02,               grass,          NONE,                   GROTTOS,                      0x03f01,                    RANDOM
@@ -681,7 +681,7 @@ Swamp Spider House Pot Jar Room 5,                      pot,            NONE,   
 Swamp Spider House Pot Jar Room 6,                      pot,            NONE,                   SPIDER_HOUSE_SWAMP,           0x0417,                     RECOVERY_HEART
 Swamp Spider House Pot Jar Room 7,                      pot,            NONE,                   SPIDER_HOUSE_SWAMP,           0x0418,                     RECOVERY_HEART
 Mountain Village Waterfall Chest,                       chest,          NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x00,                       RUPEE_RED
-Mountain Village Don Gero Mask,                         npc,            NONE,                   MOUNTAIN_VILLAGE_WINTER,      MASK_DON_GERO,              MASK_DON_GERO
+Mountain Village Don Gero Mask,                         npc,            HUNGRY_GORON,           MOUNTAIN_VILLAGE_WINTER,      MASK_DON_GERO,              MASK_DON_GERO
 Mountain Village Frog Choir HP,                         npc,            DON_GERO_CHOIR,         MOUNTAIN_VILLAGE_WINTER,      FROG_HEART_PIECE,           HEART_PIECE
 Mountain Village Tunnel Grotto,                         chest,          NONE,                   GROTTOS,                      0x1b,                       RUPEE_RED
 Mountain Village Tunnel Grotto Grass 01,                grass,          NONE,                   GROTTOS,                      0x03b00,                    RANDOM
@@ -1338,10 +1338,10 @@ Woodfall Temple Entrance Chest,                         chest,          NONE,   
 Woodfall Temple Water Chest,                            chest,          NONE,                   TEMPLE_WOODFALL,              0x01,                       SMALL_KEY_WF
 Woodfall Temple Map,                                    chest,          NONE,                   TEMPLE_WOODFALL,              0x1d,                       MAP_WF
 Woodfall Temple Compass,                                chest,          NONE,                   TEMPLE_WOODFALL,              0x1c,                       COMPASS_WF
-Woodfall Temple Dark Chest,                             chest,          NONE,                   TEMPLE_WOODFALL,              0x19,                       STRAY_FAIRY_WF
+Woodfall Temple Dark Chest,                             chest,          WFT_DARK,               TEMPLE_WOODFALL,              0x19,                       STRAY_FAIRY_WF
 Woodfall Temple Center Chest,                           chest,          NONE,                   TEMPLE_WOODFALL,              0x17,                       STRAY_FAIRY_WF
 Woodfall Temple Bow,                                    chest,          NONE,                   TEMPLE_WOODFALL,              0x1b,                       BOW
-Woodfall Temple Boss Key Chest,                         chest,          NONE,                   TEMPLE_WOODFALL,              0x1e,                       BOSS_KEY_WF
+Woodfall Temple Boss Key Chest,                         chest,          WFT_BOS_KEY,            TEMPLE_WOODFALL,              0x1e,                       BOSS_KEY_WF
 Woodfall Temple SF Entrance,                            sf,             NONE,                   TEMPLE_WOODFALL,              0x2b,                       STRAY_FAIRY_WF
 Woodfall Temple SF Main Pot,                            sf,             NONE,                   TEMPLE_WOODFALL,              0x1c,                       STRAY_FAIRY_WF
 Woodfall Temple SF Main Deku Baba,                      sf,             NONE,                   TEMPLE_WOODFALL,              0x2e,                       STRAY_FAIRY_WF
@@ -1433,7 +1433,7 @@ Snowhead Temple Bridge Room,                            chest,          NONE,   
 Snowhead Temple Block Room,                             chest,          NONE,                   TEMPLE_SNOWHEAD,              0x03,                       SMALL_KEY_SH
 Snowhead Temple Block Room Ledge,                       chest,          NONE,                   TEMPLE_SNOWHEAD,              0x15,                       STRAY_FAIRY_SH
 Snowhead Temple Central Room Bottom,                    chest,          NONE,                   TEMPLE_SNOWHEAD,              0x14,                       STRAY_FAIRY_SH
-Snowhead Temple Boss Key,                               chest,          NONE,                   TEMPLE_SNOWHEAD,              0x1e,                       BOSS_KEY_SH
+Snowhead Temple Boss Key,                               chest,          SHT_BOSS_KEY,           TEMPLE_SNOWHEAD,              0x1e,                       BOSS_KEY_SH
 Snowhead Temple Central Room Alcove,                    chest,          NONE,                   TEMPLE_SNOWHEAD,              0x17,                       STRAY_FAIRY_SH
 Snowhead Temple Pillars Room,                           chest,          NONE,                   TEMPLE_SNOWHEAD,              0x18,                       STRAY_FAIRY_SH
 Snowhead Temple Fire Arrow,                             chest,          NONE,                   TEMPLE_SNOWHEAD,              0x1b,                       ARROW_FIRE
@@ -1555,7 +1555,7 @@ Great Bay Temple Baba Chest,                            chest,          NONE,   
 Great Bay Temple Boss Key,                              chest,          NONE,                   TEMPLE_GREAT_BAY,             0x1e,                       BOSS_KEY_GB
 Great Bay Temple Compass,                               chest,          NONE,                   TEMPLE_GREAT_BAY,             0x1c,                       COMPASS_GB
 Great Bay Temple Compass Room Underwater,               chest,          NONE,                   TEMPLE_GREAT_BAY,             0x01,                       SMALL_KEY_GB
-Great Bay Temple Ice Arrow,                             chest,          NONE,                   TEMPLE_GREAT_BAY,             0x1b,                       ARROW_ICE
+Great Bay Temple Ice Arrow,                             chest,          GBT_ICE_ARROW,          TEMPLE_GREAT_BAY,             0x1b,                       ARROW_ICE
 Great Bay Temple Green Pipe 1 Chest,                    chest,          NONE,                   TEMPLE_GREAT_BAY,             0x15,                       STRAY_FAIRY_GB
 Great Bay Temple Green Pipe 2 Lower Chest,              chest,          NONE,                   TEMPLE_GREAT_BAY,             0x17,                       STRAY_FAIRY_GB
 Great Bay Temple Green Pipe 2 Upper Chest,              chest,          NONE,                   TEMPLE_GREAT_BAY,             0x14,                       STRAY_FAIRY_GB
@@ -1741,7 +1741,7 @@ Stone Tower Temple Inverted East Middle Chest,          chest,          NONE,   
 Stone Tower Temple Inverted East Upper Chest,           chest,          NONE,                   TEMPLE_STONE_TOWER,           0x0e,                       STRAY_FAIRY_ST
 Stone Tower Temple Inverted Wizzrobe Chest,             chest,          NONE,                   TEMPLE_STONE_TOWER,           0x11,                       STRAY_FAIRY_ST
 Stone Tower Temple Inverted Death Armos Chest,          chest,          NONE,                   TEMPLE_STONE_TOWER,           0x05,                       SMALL_KEY_ST
-Stone Tower Temple Inverted Boss Key,                   chest,          NONE,                   TEMPLE_STONE_TOWER,           0x1e,                       BOSS_KEY_ST
+Stone Tower Temple Inverted Boss Key,                   chest,          ISTT_BOSS_KEY,          TEMPLE_STONE_TOWER,           0x1e,                       BOSS_KEY_ST
 Stone Tower Temple Inverted Giant Mask,                 chest,          NONE,                   TEMPLE_STONE_TOWER,           0x1a,                       MASK_GIANT
 Stone Tower Temple Inverted Pot Poe Maze Side 1,        pot,            NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x0209,                     RECOVERY_HEART
 Stone Tower Temple Inverted Pot Poe Maze Side 2,        pot,            NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x020b,                     ARROWS_10

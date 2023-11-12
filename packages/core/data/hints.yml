@@ -16,6 +16,16 @@ OOT_BIGGORON:               0x0c
 OOT_ICE_CAVERN_CHEST:       0x0d
 OOT_TREASURE_GAME:          0x0e
 OOT_SHOOT_SUN:              0x0f
+OOT_FOREST_FLOORMASTER:     0x10
+OOT_SHADOW_SKULL_POT:       0x11
+OOT_MQ_SHADOW_STALFOS:      0x12
+OOT_WATER_RIVER:            0x13
+OOT_LOST_WOODS_TRADE:       0x14
+OOT_JABU_BOOMERANG:         0x15
+OOT_MQ_SPIRIT_SYMPHONY:     0x16
+OOT_MQ_DEKU_TIME_BLOCK:     0x17
+OOT_DMC_SCRUB:              0x18
+OOT_DEKU_BACK_SKULL:        0x19
 
 MM_RANCH_DEFENSE:     0x81
 MM_BUTLER_RACE:       0x82
@@ -40,3 +50,10 @@ MM_MADAME_AROMA_BAR:          0x93
 MM_CUCCOS:                    0x94
 MM_KAFEI:                     0x95
 MM_INVISIBLE_SOLDIER:         0x96
+MM_GBT_ICE_ARROW:             0x97
+MM_SHT_BOSS_KEY:              0x98
+MM_WFT_BOSS_KEY:              0x99
+MM_ISTT_BOSS_KEY:             0x9a
+MM_HUNGRY_GORON:              0x9b
+MM_KAMARO:                    0x9c
+MM_WFT_DARK:                  0x9d
