@@ -214,11 +214,11 @@ export class LogicPassHints {
 
     if (settings.cowShuffleMm) {
       sometimesHints.push('MM_COW_WELL');
-    },
+    }
 
     if (settings.scrubShuffleOot) {
       sometimesHints.push('OOT_DMC_SCRUB');
-    },
+    }
 
     if (settings.goldSkulltulaTokens === 'dungeons' || settings.goldSkulltulaTokens === 'all') {
       sometimesHints.push('OOT_DEKU_BACK_SKULL');
@@ -226,7 +226,7 @@ export class LogicPassHints {
 
     if (settings.strayFairyChestShuffle === 'starting' || settings.strayFairyChestShuffle === 'anywhere') {
       sometimesHints.push('MM_WFT_DARK');
-    },
+    }
 
     return sometimesHints;
   }
