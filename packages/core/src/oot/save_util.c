@@ -122,7 +122,6 @@ void comboCreateSaveMM(void)
 
     /* Set some events */
     MM_SET_EVENT_WEEK(EV_MM_WEEK_FIRST_CYCLE);
-    MM_SET_EVENT_WEEK(EV_MM_WEEK_FOREST_WITCH);
 
     /* Set the high scores */
     gMmSave.dekuPlaygroundHighScores[0] = 7500;
