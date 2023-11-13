@@ -1,8 +1,8 @@
 import { Item, ItemGroups, Items, ItemsCount } from '../items';
-import { GLITCHES, Settings, TRICKS } from '../settings';
+import { GLITCHES, SETTINGS, Settings, TRICKS } from '../settings';
 import { Age } from './pathfind';
 import { PRICE_RANGES } from './price';
-import { World } from './world';
+import { ResolvedWorldFlags, WORLD_FLAGS, World } from './world';
 
 type RecursiveArray<T> = Array<T | RecursiveArray<T>>;
 
@@ -347,12 +347,31 @@ export const exprMasks = (count: number): Expr => state => {
 
 export const exprSpecial = (settings: Settings, special: string): Expr => state => resolveSpecialCond(settings, state, special);
 
-export const exprSetting = (settings: Settings, setting: string, value: any): Expr => {
-  const v = (settings as any)[setting];
-  if (v === undefined) {
-    throw new Error(`Setting ${setting} not found`);
+export const exprSetting = (settings: Settings, resolvedFlags: ResolvedWorldFlags, setting: string, value: any): Expr => {
+  if ((WORLD_FLAGS as readonly string[]).includes(setting)) {
+    /* World flag */
+    if (!resolvedFlags.hasOwnProperty(setting)) {
+      throw new Error(`Unknown world flag: ${setting}`);
+    }
+    const f = resolvedFlags[setting as keyof typeof resolvedFlags];
+    const s = SETTINGS.find(x => x.key === f.setting)!;
+    if (!((s as any).values as any[]).some(x => x.value === value)) {
+      throw new Error(`Invalid world flag value: ${value} (for flag: ${setting})`);
+    }
+
+    if (f.has(value)) {
+      return exprTrue();
+    } else {
+      return exprFalse();
+    }
+  } else {
+    /* Normal setting */
+    const v = (settings as any)[setting];
+    if (v === undefined) {
+      throw new Error(`Setting ${setting} not found`);
+    }
+    return v === value ? exprTrue() : exprFalse();
   }
-  return v === value ? exprTrue() : exprFalse();
 };
 
 export const exprTrick = (settings: Settings, trick: string): Expr => {

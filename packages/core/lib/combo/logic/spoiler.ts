@@ -1,9 +1,9 @@
 import { sortBy } from 'lodash';
 
 import { Options } from '../options';
-import { Glitch, GLITCHES, Settings, Trick, TRICKS } from '../settings';
+import { Glitch, GLITCHES, SETTINGS, Settings, Trick, TRICKS } from '../settings';
 import { HintGossipFoolish, HintGossipPath, HintGossipItemExact, HintGossipItemRegion, Hints, HINTS_PATHS } from './hints';
-import { World } from './world';
+import { World, WORLD_FLAGS } from './world';
 import { itemName } from '../names';
 import { Monitor } from '../monitor';
 import { Analysis } from './analysis';
@@ -82,6 +82,9 @@ export class LogicPassSpoiler {
         continue;
       }
       if (this.state.settings.goal !== 'triforce' && (s === 'triforceGoal' || s === 'triforcePieces')) {
+        continue;
+      }
+      if (WORLD_FLAGS.includes(s as any)) {
         continue;
       }
       const v = (this.state.settings as any)[s];
@@ -175,6 +178,41 @@ export class LogicPassSpoiler {
 
       for (const d of worlds[i].mq) {
         this.write(`${d}`);
+      }
+
+      if (worlds.length > 1) {
+        this.unindent('');
+      }
+    }
+    this.unindent('');
+  }
+
+  private writeWorldFlags() {
+    let worlds = this.state.worlds;
+    if (!this.state.settings.distinctWorlds) {
+      worlds = [this.state.worlds[0]];
+    }
+
+    this.indent('World Flags');
+    for (let i = 0; i < worlds.length; ++i) {
+      const world = worlds[i];
+      if (worlds.length > 1) {
+        this.indent(`World ${i + 1}`);
+      }
+
+      for (const s of WORLD_FLAGS) {
+        const v = world.resolvedFlags[s as keyof typeof world.resolvedFlags];
+        if (v.value === 'specific') {
+          this.indent(`${s}:`);
+          const setting = SETTINGS.find(x => x.key === v.setting)!;
+          const values = ((setting as any).values as any[]).filter(x => v.has(x.value));
+          for (const value of values) {
+            this.write(`- ${value.value}`);
+          }
+          this.unindent('');
+        } else {
+          this.write(`${s}: ${v.value}`);
+        }
       }
 
       if (worlds.length > 1) {
@@ -384,6 +422,7 @@ export class LogicPassSpoiler {
     this.writeGlitches();
     this.writeStartingItems();
     this.writeJunkLocations();
+    this.writeWorldFlags();
     this.writeMQ();
     this.writePreCompleted();
     this.writeEntrances();

@@ -264,7 +264,6 @@ export class LogicPassWorldTransform {
       monitor: Monitor;
       worlds: World[];
       settings: Settings;
-      config: Set<Confvar>;
       fixedLocations: Set<Location>;
     }
   ) {
@@ -532,8 +531,9 @@ export class LogicPassWorldTransform {
    * Setup the shared items.
    */
   private setupSharedItems() {
-    const { config, settings } = this.state;
-    if (config.has('SHARED_BOWS')) {
+    const { settings } = this.state;
+
+    if (settings.sharedBows) {
       /* Bows and quivers */
       this.replaceItem(Items.OOT_BOW, Items.SHARED_BOW);
       this.replaceItem(Items.MM_BOW, Items.SHARED_BOW);
@@ -548,7 +548,7 @@ export class LogicPassWorldTransform {
       this.replaceItem(Items.MM_ARROWS_40, Items.SHARED_ARROWS_40);
     }
 
-    if (config.has('SHARED_BOMB_BAGS')) {
+    if (settings.sharedBombBags) {
       /* Bomb Bags */
       this.replaceItem(Items.OOT_BOMB_BAG, Items.SHARED_BOMB_BAG);
       this.replaceItem(Items.MM_BOMB_BAG, Items.SHARED_BOMB_BAG);
@@ -567,7 +567,7 @@ export class LogicPassWorldTransform {
       this.replaceItem(Items.MM_BOMBS_30,   Items.SHARED_BOMBS_30);
     }
 
-    if (config.has('SHARED_MAGIC')) {
+    if (settings.sharedMagic) {
       this.replaceItem(Items.OOT_MAGIC_UPGRADE, Items.SHARED_MAGIC_UPGRADE);
       this.replaceItem(Items.MM_MAGIC_UPGRADE,  Items.SHARED_MAGIC_UPGRADE);
       this.removeItem(Items.SHARED_MAGIC_UPGRADE, 2);
@@ -613,7 +613,7 @@ export class LogicPassWorldTransform {
       this.replaceItem(Items.OOT_SONG_SUN, Items.SHARED_SONG_SUN);
     }
 
-    if (config.has('SHARED_NUTS_STICKS')) {
+    if (settings.sharedNutsSticks) {
       /* Nuts */
       this.replaceItem(Items.OOT_NUTS_5,      Items.SHARED_NUTS_5);
       this.replaceItem(Items.OOT_NUTS_5_ALT,  Items.SHARED_NUTS_5);
@@ -629,7 +629,7 @@ export class LogicPassWorldTransform {
       this.replaceItem(Items.MM_STICK,        Items.SHARED_STICK);
     }
 
-    if (config.has('SHARED_HOOKSHOT')) {
+    if (settings.sharedHookshot) {
       this.replaceItem(Items.OOT_HOOKSHOT, Items.SHARED_HOOKSHOT);
       this.replaceItem(Items.MM_HOOKSHOT,  Items.SHARED_HOOKSHOT);
       this.removeItem(Items.SHARED_HOOKSHOT, 1);
@@ -637,13 +637,13 @@ export class LogicPassWorldTransform {
       this.addItem(Items.MM_HOOKSHOT);
     }
 
-    if (config.has('SHARED_LENS')) {
+    if (settings.sharedLens) {
       this.replaceItem(Items.OOT_LENS, Items.SHARED_LENS);
       this.replaceItem(Items.MM_LENS,  Items.SHARED_LENS);
       this.removeItem(Items.SHARED_LENS, 1);
     }
 
-    if (config.has('SHARED_OCARINA')) {
+    if (settings.sharedOcarina) {
       this.replaceItem(Items.OOT_OCARINA, Items.SHARED_OCARINA);
       this.replaceItem(Items.MM_OCARINA,  Items.SHARED_OCARINA);
       this.removeItem(Items.SHARED_OCARINA, 1);
@@ -681,7 +681,7 @@ export class LogicPassWorldTransform {
       this.removeItem(Items.SHARED_MASK_KEATON, 1);
     }
 
-    if (config.has('SHARED_WALLETS')) {
+    if (settings.sharedWallets) {
       /* Wallets */
       this.replaceItem(Items.OOT_WALLET,  Items.SHARED_WALLET);
       this.replaceItem(Items.MM_WALLET,   Items.SHARED_WALLET);
@@ -705,7 +705,7 @@ export class LogicPassWorldTransform {
       this.replaceItem(Items.MM_RUPEE_GOLD,     Items.SHARED_RUPEE_GOLD);
     }
 
-    if (config.has('SHARED_HEALTH')) {
+    if (settings.sharedHealth) {
       /* Pieces and containers */
       this.replaceItem(Items.OOT_HEART_CONTAINER, Items.SHARED_HEART_CONTAINER);
       this.replaceItem(Items.MM_HEART_CONTAINER,  Items.SHARED_HEART_CONTAINER);
@@ -949,13 +949,13 @@ export class LogicPassWorldTransform {
       this.addItem(Items.OOT_SHIELD, 2);
     }
 
-    if (this.state.config.has('MM_PROGRESSIVE_SHIELDS')) {
+    if (settings.progressiveShieldsMm === 'progressive') {
       this.replaceItem(Items.MM_SHIELD_MIRROR, Items.MM_SHIELD);
       this.addItem(Items.MM_SHIELD);
     }
 
     /* Handle non-MQ Fire */
-    if (!this.state.config.has('SMALL_KEY_SHUFFLE')) {
+    if (settings.smallKeyShuffleOot !== 'anywhere') {
       for (let i = 0; i < this.state.worlds.length; ++i) {
         const world = this.state.worlds[i];
         if (!world.mq.has('Fire')) {
@@ -1070,12 +1070,12 @@ export class LogicPassWorldTransform {
     if (settings.startingAge === 'adult') {
       this.removeItem(Items.OOT_SWORD_MASTER);
     }
-    if (this.state.config.has('OOT_PROGRESSIVE_SWORDS')) {
+    if (settings.progressiveSwordsOot === 'progressive') {
       this.replaceItem(Items.OOT_SWORD_KOKIRI,    Items.OOT_SWORD);
       this.replaceItem(Items.OOT_SWORD_MASTER,    Items.OOT_SWORD);
       this.replaceItem(Items.OOT_SWORD_KNIFE,     Items.OOT_SWORD);
       this.replaceItem(Items.OOT_SWORD_BIGGORON,  Items.OOT_SWORD);
-    } else if (this.state.config.has('OOT_PROGRESSIVE_SWORDS_GORON')) {
+    } else if (settings.progressiveSwordsOot === 'goron') {
       this.replaceItem(Items.OOT_SWORD_KNIFE,     Items.OOT_SWORD_GORON);
       this.replaceItem(Items.OOT_SWORD_BIGGORON,  Items.OOT_SWORD_GORON);
     }
@@ -1086,7 +1086,7 @@ export class LogicPassWorldTransform {
     }
 
     /* Handle MM Lullaby */
-    if (this.state.config.has('MM_PROGRESSIVE_LULLABY')) {
+    if (settings.progressiveGoronLullaby === 'progressive') {
       this.replaceItem(Items.MM_SONG_GORON, Items.MM_SONG_GORON_HALF);
     } else {
       this.removeItem(Items.MM_SONG_GORON_HALF);

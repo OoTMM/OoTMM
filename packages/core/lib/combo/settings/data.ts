@@ -502,11 +502,15 @@ export const SETTINGS = [{
   key: 'ganonTrials',
   name: 'Ganon Trials',
   category: 'main.events',
-  type: 'enum',
+  type: 'set',
   description: 'Enables or disables the trials in Ganon\'s Castle',
   values: [
-    { value: 'none', name: 'None', description: 'Trials are not required to enter the tower' },
-    { value: 'all', name: 'All', description: 'All trials are required to enter the tower' },
+    { value: 'Light',   name: 'Light Trial' },
+    { value: 'Forest',  name: 'Forest Trial' },
+    { value: 'Fire',    name: 'Fire Trial' },
+    { value: 'Water',   name: 'Water Trial' },
+    { value: 'Shadow',  name: 'Shadow Trial' },
+    { value: 'Spirit',  name: 'Spirit Trial' },
   ],
   default: 'none'
 }, {

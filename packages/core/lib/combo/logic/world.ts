@@ -10,6 +10,71 @@ import { Item, itemByID, ItemHelpers, Items } from '../items';
 import { Random } from '../random';
 import { cloneDeep } from 'lodash';
 
+export const WORLD_FLAGS = [
+  'ganonTrials'
+] as const;
+
+type WorldFlag = typeof WORLD_FLAGS[number];
+
+class ResolvedWorldFlag {
+  private values: Set<string>;
+  constructor(
+    public readonly setting: keyof Settings,
+    public readonly value: 'all' | 'none' | 'specific'
+  ) {
+    this.values = new Set;
+  }
+
+  add(value: string) {
+    this.values.add(value);
+  }
+
+  has(value: string) {
+    if (this.value === 'all') {
+      return true;
+    }
+    if (this.value === 'none') {
+      return false;
+    }
+    return this.values.has(value);
+  }
+}
+
+export type ResolvedWorldFlags = {[k in WorldFlag]: ResolvedWorldFlag};
+
+function resolveWorldFlag<T extends WorldFlag>(settings: Settings, random: Random, flag: T): ResolvedWorldFlag {
+  const v = settings[flag];
+  let type = v.type;
+  let wf: ResolvedWorldFlag;
+  if (type === 'random') {
+    wf = new ResolvedWorldFlag(flag, 'specific');
+    const setting = SETTINGS.find(x => x.key === flag)!;
+    const values = ((setting as any).values as any[]).map(x => x.value) as string[];
+    for (const v of values) {
+      if (random.next() & 0x1000) {
+        wf.add(v);
+      }
+    }
+  } else {
+    wf = new ResolvedWorldFlag(flag, type);
+    if (v.type === 'specific') {
+      for (const k of v.values) {
+        wf.add(k);
+      }
+    }
+  }
+
+  return wf;
+}
+
+function resolveWorldFlags(settings: Settings, random: Random): ResolvedWorldFlags {
+  const result = {} as ResolvedWorldFlags;
+  for (const flag of WORLD_FLAGS) {
+    result[flag] = resolveWorldFlag(settings, random, flag);
+  }
+  return result;
+}
+
 export type ExprMap = {
   [k: string]: Expr;
 }
@@ -59,6 +124,11 @@ export type WorldEntrance = {
   game: Game;
 };
 
+export type ExprParsers = {
+  oot: ExprParser;
+  mm: ExprParser;
+}
+
 export type World = {
   areas: { [k: string]: WorldArea };
   checks: { [k: string]: WorldCheck };
@@ -76,6 +146,8 @@ export type World = {
   dungeonIds: number[];
   entranceOverrides: Map<string, string>;
   preCompleted: Set<string>;
+  resolvedFlags: ResolvedWorldFlags;
+  exprParsers: ExprParsers;
 };
 
 export const DUNGEONS_REGIONS: { [k: string]: string } = {
@@ -143,17 +215,13 @@ export function cloneWorld(world: World): World {
     bossIds: [...world.bossIds],
     dungeonIds: [...world.dungeonIds],
     entranceOverrides: new Map(world.entranceOverrides),
+    resolvedFlags: world.resolvedFlags,
+    exprParsers: world.exprParsers,
   };
-}
-
-export type ExprParsers = {
-  oot: ExprParser;
-  mm: ExprParser;
 }
 
 export class LogicPassWorld {
   private world!: World;
-  private exprParsers!: ExprParsers;
 
   constructor(
     private readonly state: {
@@ -167,7 +235,6 @@ export class LogicPassWorld {
   run() {
     const worlds: World[] = [];
     this.state.monitor.log('Logic: World Building');
-    this.makeExprParsers();
 
     if (this.state.settings.distinctWorlds) {
       for (let i = 0; i < this.state.settings.players; ++i) {
@@ -180,7 +247,7 @@ export class LogicPassWorld {
       }
     }
 
-    return { worlds, exprParsers: this.exprParsers };
+    return { worlds };
   }
 
   private createWorld(): World {
@@ -191,16 +258,18 @@ export class LogicPassWorld {
     return this.world;
   }
 
-  private makeExprParsers() {
-    this.exprParsers = {} as ExprParsers;
-    for (const g of GAMES) {
-      const parser = new ExprParser(this.state.settings, g);
-      this.loadMacros(g, parser);
-      this.exprParsers[g] = parser;
-    }
-  }
-
   private makeDefaultWorld(): World {
+    /* Resolve flags */
+    const resolvedFlags = resolveWorldFlags(this.state.settings, this.state.random);
+
+    /* Create expr parsers */
+    const exprParsers = {} as ExprParsers;
+    for (const g of GAMES) {
+      const parser = new ExprParser(this.state.settings, resolvedFlags, g);
+      this.loadMacros(g, parser);
+      exprParsers[g] = parser;
+    }
+
     /* MQ */
     const mq = new Set<string>;
     let d: keyof typeof DUNGEONS;
@@ -234,12 +303,14 @@ export class LogicPassWorld {
       bossIds: [],
       dungeonIds: [],
       entranceOverrides: new Map,
+      resolvedFlags,
+      exprParsers,
     };
   }
 
   private loadGame(game: Game) {
     /* Create the expr parser */
-    this.loadAreas(game, this.exprParsers[game]);
+    this.loadAreas(game, this.world.exprParsers[game]);
     this.loadPool(game);
     this.loadEntrances(game);
   }

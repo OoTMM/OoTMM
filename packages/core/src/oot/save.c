@@ -135,6 +135,8 @@ static void applyStartingItems(void)
 
 static void applyStartingEvents(void)
 {
+    int skippedTrials;
+
     if (comboConfig(CFG_DOOR_OF_TIME_OPEN))
     {
         SetEventChk(EV_OOT_CHK_DOOR_TIME);
@@ -182,16 +184,45 @@ static void applyStartingEvents(void)
     }
 
     /* Ganon trials */
-    if (!comboConfig(CFG_OOT_TRIALS))
+    skippedTrials = 0;
+    if (!comboConfig(CFG_OOT_TRIAL_LIGHT))
     {
         SetEventChk(EV_OOT_CHK_TRIAL_LIGHT);
-        SetEventChk(EV_OOT_CHK_TRIAL_FIRE);
-        SetEventChk(EV_OOT_CHK_TRIAL_SHADOW);
-        SetEventChk(EV_OOT_CHK_TRIAL_WATER);
-        SetEventChk(EV_OOT_CHK_TRIAL_FOREST);
-        SetEventChk(EV_OOT_CHK_TRIAL_SPIRIT);
-        SetEventChk(EN_OOT_CHK_GANON_BARRIER);
+        skippedTrials++;
     }
+
+    if (!comboConfig(CFG_OOT_TRIAL_FOREST))
+    {
+        SetEventChk(EV_OOT_CHK_TRIAL_FOREST);
+        skippedTrials++;
+    }
+
+    if (!comboConfig(CFG_OOT_TRIAL_FIRE))
+    {
+        SetEventChk(EV_OOT_CHK_TRIAL_FIRE);
+        skippedTrials++;
+    }
+
+    if (!comboConfig(CFG_OOT_TRIAL_WATER))
+    {
+        SetEventChk(EV_OOT_CHK_TRIAL_WATER);
+        skippedTrials++;
+    }
+
+    if (!comboConfig(CFG_OOT_TRIAL_SHADOW))
+    {
+        SetEventChk(EV_OOT_CHK_TRIAL_SHADOW);
+        skippedTrials++;
+    }
+
+    if (!comboConfig(CFG_OOT_TRIAL_SPIRIT))
+    {
+        SetEventChk(EV_OOT_CHK_TRIAL_SPIRIT);
+        skippedTrials++;
+    }
+
+    if (skippedTrials == 6)
+        SetEventChk(EN_OOT_CHK_GANON_BARRIER);
 
     if (comboConfig(CFG_OOT_FREE_SCARECROW))
     {
