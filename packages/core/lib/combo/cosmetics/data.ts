@@ -38,4 +38,8 @@ export const COSMETICS = [{
   key: 'modelOotAdultLink',
   name: 'Player Model - Adult Link (OoT)',
   type: 'zobj',
+}, {
+  key: 'music',
+  name: 'Custom Music ZIP',
+  type: 'zip',
 }] as const;

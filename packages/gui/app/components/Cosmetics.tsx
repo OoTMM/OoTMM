@@ -34,6 +34,16 @@ function Cosmetic({ cosmetic }: { cosmetic: keyof Cosmetics }) {
         onChange={(f) => setCosmetics({ [cosmetic]: f })}
       />
     );
+  case 'zip':
+    return (
+      <FileSelect
+        logo="oot"
+        label={data.name}
+        accept=".zip"
+        file={`cosmetics.${cosmetic}`}
+        onChange={(f) => setCosmetics({ [cosmetic]: f })}
+      />
+    );
   default:
     return null;
   }
@@ -43,7 +53,7 @@ export function CosmeticsEditor() {
   const options: { name: string, value: string}[] = Object.entries(COLORS).map(([key, x]) => ({ name: x.name, value: key }));
   options.push({ name: "Random", value: "random" });
   const dropdowns = COSMETICS.filter(c => c.type === 'color');
-  const fileSelects = COSMETICS.filter(c => c.type === 'zobj');
+  const fileSelects = COSMETICS.filter(c => ['zobj', 'zip'].includes(c.type));
 
 
   return (

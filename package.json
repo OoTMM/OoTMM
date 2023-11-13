@@ -12,6 +12,9 @@
     "serve": "nx run-many -t serve",
     "typecheck": "nx run-many -t typecheck"
   },
+  "dependencies": {
+    "jszip": "^3.10.1"
+  },
   "devDependencies": {
     "@nrwl/jest": "^15.9.2",
     "@types/jest": "^29.5.1",

@@ -34,7 +34,6 @@
     "cross-env": "^7.0.3",
     "csv": "^6.2.8",
     "glob": "^9.3.2",
-    "jszip": "^3.10.1",
     "rollup": "^3.20.2",
     "rollup-plugin-node-externals": "^5.1.2",
     "type-fest": "^3.7.2",

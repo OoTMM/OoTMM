@@ -16,8 +16,13 @@ type CosmeticsDataZobj = CosmeticsDataCommon & {
   readonly type: 'zobj';
 }
 
+type CosmeticsDataZip = CosmeticsDataCommon & {
+  readonly type: 'zip';
+}
+
 type InputToShape<T> = T extends CosmeticsDataColor ? { [K in T['key']]: ColorArg }
   : T extends CosmeticsDataZobj ? { [K in T['key']]: BufferPath | null }
+  : T extends CosmeticsDataZip ? { [K in T['key']]: BufferPath | null }
   : never;
 
 type CosmeticsDataEntry = typeof COSMETICS[number];

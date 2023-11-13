@@ -12,6 +12,7 @@ import { recolorImage } from '../image';
 import fs from 'fs/promises';
 import { enableModelOotLinkChild, enableModelOotLinkAdult } from './model';
 import { BufferPath } from './type';
+import { randomizeMusic } from './music';
 
 export { makeCosmetics } from './util';
 export { COSMETICS } from './data';
@@ -44,11 +45,11 @@ class CosmeticsPass {
     this.vrom = 0xc0000000;
   }
 
-  private addNewFile(data: Buffer) {
+  private addNewFile(data: Buffer, compressed = true) {
     const size = (data.length + 0xf) & ~0xf;
     const vrom = this.vrom;
     this.vrom = (this.vrom + size) >>> 0;
-    this.patch.addNewFile(vrom, data, true);
+    this.patch.addNewFile(vrom, data, compressed);
     return [vrom, (vrom + size) >>> 0];
   }
 
@@ -280,6 +281,13 @@ class CosmeticsPass {
     /* Models */
     await this.patchOotChildModel();
     await this.patchOotAdultModel();
+
+    /* Custom Music */
+    if (cosmetics.music) {
+      const data = await this.getPathBuffer(cosmetics.music);
+      if (data)
+        await randomizeMusic(this.roms, this.patch, this.random, data);
+    }
 
     return this.patch;
   }

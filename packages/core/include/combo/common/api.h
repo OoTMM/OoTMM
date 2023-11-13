@@ -213,6 +213,8 @@ void DrawSimpleOpa(GameState_Play* play, u32 segAddr);
 
 void AddRupees(s16 delta);
 
+void AudioLoad_InitTable(void* unk1, u32 unk2, u32 unk3);
+
 /* Shaders */
 void Shader_Opa0_Xlu1(GameState_Play*, s16);
 void Shader_Opa0_Xlu12(GameState_Play*, s16);

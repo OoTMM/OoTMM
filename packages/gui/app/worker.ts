@@ -72,7 +72,7 @@ function onTaskGenerate(task: WorkerTaskGenerate) {
   let { oot, mm, patch, options } = task;
   options.cosmetics = { ...options.cosmetics };
   for (const c of COSMETICS) {
-    if (c.type === 'zobj' && options.cosmetics[c.key]) {
+    if ((c.type === 'zobj' || c.type === 'zip') && options.cosmetics[c.key]) {
       options.cosmetics[c.key] = Buffer.from(options.cosmetics[c.key] as any);
     }
   }
