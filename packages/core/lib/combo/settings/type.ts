@@ -25,6 +25,12 @@ type SettingDataEnum = SettingDataCommon & {
   readonly default: string;
 };
 
+type SettingDataSet = SettingDataCommon & {
+  readonly type: 'set';
+  readonly values: ReadonlyArray<SettingDataEnumValue>;
+  readonly default: 'none' | 'all';
+};
+
 type SettingDataBoolean = SettingDataCommon & {
   readonly type: 'boolean';
   readonly default: boolean;
@@ -38,6 +44,7 @@ type SettingDataNumber = SettingDataCommon & {
 };
 
 type InputToShape<T> = T extends SettingDataEnum ? { [K in T['key']]: T['values'][number]['value'] }
+  : T extends SettingDataSet ? { [K in T['key']]: { type: 'all' | 'none' | 'random' } | { type: 'specific', values: T['values'][number]['value'][] } }
   : T extends SettingDataBoolean ? { [K in T['key']]: boolean }
   : T extends SettingDataNumber ? { [K in T['key']]: number }
   : never;

@@ -255,4 +255,10 @@
 "longshot_anywhere": "can_longshot && setting(hookshotAnywhereOot)"
 
 # Events
-"ganon_barrier": "setting(ganonTrials, none) || (event(GANON_TRIAL_LIGHT) && event(GANON_TRIAL_FOREST) && event(GANON_TRIAL_FIRE) && event(GANON_TRIAL_WATER) && event(GANON_TRIAL_SHADOW) && event(GANON_TRIAL_SPIRIT))"
+"ganon_trial_light": "!setting(ganonTrials, Light) || event(GANON_TRIAL_LIGHT)"
+"ganon_trial_forest": "!setting(ganonTrials, Forest) || event(GANON_TRIAL_FOREST)"
+"ganon_trial_fire": "!setting(ganonTrials, Fire) || event(GANON_TRIAL_FIRE)"
+"ganon_trial_water": "!setting(ganonTrials, Water) || event(GANON_TRIAL_WATER)"
+"ganon_trial_shadow": "!setting(ganonTrials, Shadow) || event(GANON_TRIAL_SHADOW)"
+"ganon_trial_spirit": "!setting(ganonTrials, Spirit) || event(GANON_TRIAL_SPIRIT)"
+"ganon_barrier": "ganon_trial_light && ganon_trial_forest && ganon_trial_fire && ganon_trial_water && ganon_trial_shadow && ganon_trial_spirit"

@@ -3,6 +3,7 @@ import { itemByID } from '../items';
 import { Settings } from '../settings';
 import { gameId } from '../util';
 import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprAge, exprHas, exprRenewable, exprEvent, exprMasks, exprSetting, exprNot, exprCond, exprTrick, exprSpecial, exprOotTime, exprMmTime, exprLicense, exprPrice, exprGlitch } from './expr';
+import { ResolvedWorldFlags } from './world';
 
 const SIMPLE_TOKENS = ['||', '&&', '(', ')', ',', 'true', 'false', '!', '+', '-'] as const;
 
@@ -31,7 +32,7 @@ export class ExprParser {
   private ctx: ParseContext[] = [];
   private macros: {[k: string]: Macro} = {};
 
-  constructor(private settings: Settings, private game: Game) {}
+  constructor(private settings: Settings, private resolvedFlags: ResolvedWorldFlags, private game: Game) {}
 
   addMacro(name: string, args: string[], buffer: string) {
     this.macros[name] = { args, buffer };
@@ -238,7 +239,7 @@ export class ExprParser {
       value = this.expect('identifier');
     }
     this.expect(')');
-    return exprSetting(this.settings, key, value);
+    return exprSetting(this.settings, this.resolvedFlags, key, value);
   }
 
   private parseExprTrick(): Expr | undefined {

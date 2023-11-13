@@ -1,6 +1,7 @@
 import { Buffer } from 'buffer';
 
 import { LogicResult } from '../logic';
+import { isEntranceShuffle } from '../logic/helpers';
 import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_REGIONS, DATA_HINTS_POOL, DATA_HINTS, DATA_ENTRANCES } from '../data';
 import { Game } from "../config";
 import { World, WorldCheck } from '../logic/world';
@@ -618,7 +619,124 @@ function randomizerWarps(worldId: number, logic: LogicResult): Buffer {
   return Buffer.concat([warpSongs, owlStatuesBuffer]);
 }
 
-export const randomizerConfig = (config: Set<Confvar>): Buffer => {
+function worldConfig(world: World, settings: Settings): Set<Confvar> {
+  const config = new Set<Confvar>;
+
+  const exprs: {[k in Confvar]: boolean} = {
+    GANON_NO_BOSS_KEY: settings.ganonBossKey === 'removed',
+    SMALL_KEY_SHUFFLE: settings.smallKeyShuffleOot === 'anywhere',
+    CSMC: settings.csmc === 'always',
+    CSMC_EXTRA: settings.csmcExtra,
+    CSMC_AGONY: settings.csmc === 'agony',
+    OOT_PROGRESSIVE_SHIELDS: settings.progressiveShieldsOot === 'progressive',
+    OOT_PROGRESSIVE_SWORDS: settings.progressiveSwordsOot === 'progressive',
+    OOT_PROGRESSIVE_SWORDS_GORON: settings.progressiveSwordsOot === 'goron',
+    MM_PROGRESSIVE_SHIELDS: settings.progressiveShieldsMm === 'progressive',
+    MM_PROGRESSIVE_LULLABY: settings.progressiveGoronLullaby === 'progressive',
+    DOOR_OF_TIME_OPEN: settings.doorOfTime === 'open',
+    OOT_OPEN_DEKU: settings.dekuTree === 'open',
+    ER_DUNGEONS: settings.erDungeons !== 'none',
+    ER_MAJOR_DUNGEONS: settings.erMajorDungeons,
+    ER_BOSS: settings.erBoss !== 'none',
+    ER_ANY: isEntranceShuffle(settings),
+    SHARED_BOWS: settings.sharedBows,
+    SHARED_BOMB_BAGS: settings.sharedBombBags,
+    SHARED_MAGIC: settings.sharedMagic,
+    SHARED_MAGIC_ARROW_FIRE: settings.sharedMagicArrowFire,
+    SHARED_MAGIC_ARROW_ICE: settings.sharedMagicArrowIce,
+    SHARED_MAGIC_ARROW_LIGHT: settings.sharedMagicArrowLight,
+    SHARED_SONG_EPONA: settings.sharedSongEpona,
+    SHARED_SONG_STORMS: settings.sharedSongStorms,
+    SHARED_SONG_TIME: settings.sharedSongTime,
+    SHARED_SONG_SUN: settings.sharedSongSun,
+    SHARED_NUTS_STICKS: settings.sharedNutsSticks,
+    SHARED_HOOKSHOT: settings.sharedHookshot,
+    SHARED_LENS: settings.sharedLens,
+    SHARED_OCARINA: settings.sharedOcarina,
+    SHARED_MASK_GORON: settings.sharedMaskGoron,
+    SHARED_MASK_ZORA: settings.sharedMaskZora,
+    SHARED_MASK_BUNNY: settings.sharedMaskBunny,
+    SHARED_MASK_TRUTH: settings.sharedMaskTruth,
+    SHARED_MASK_KEATON: settings.sharedMaskKeaton,
+    SHARED_WALLETS: settings.sharedWallets,
+    SHARED_HEALTH: settings.sharedHealth,
+    SHARED_SOULS_ENEMY: settings.sharedSoulsEnemy,
+    SHARED_OCARINA_BUTTONS: settings.sharedOcarinaButtons,
+    OOT_CROSS_WARP: settings.crossWarpOot,
+    MM_CROSS_WARP: settings.crossWarpMm !== 'none',
+    MM_CROSS_WARP_ADULT: settings.crossWarpMm === 'full',
+    MM_OCARINA_FAIRY: settings.fairyOcarinaMm,
+    MM_HOOKSHOT_SHORT: settings.shortHookshotMm,
+    MM_SONG_SUN: settings.sunSongMm,
+    OOT_SKIP_ZELDA: settings.skipZelda,
+    OOT_OPEN_KAKARIKO_GATE: settings.kakarikoGate === 'open',
+    OOT_LACS_CUSTOM: settings.lacs === 'custom',
+    OOT_GANON_BK_CUSTOM: settings.ganonBossKey === 'custom',
+    OOT_KZ_OPEN: settings.zoraKing === 'open',
+    OOT_KZ_OPEN_ADULT: settings.zoraKing === 'adult',
+    GOAL_GANON: settings.goal === 'ganon' || settings.goal === 'both',
+    GOAL_MAJORA: settings.goal === 'majora' || settings.goal === 'both',
+    GOAL_TRIFORCE: settings.goal === 'triforce',
+    GOAL_TRIFORCE3: settings.goal === 'triforce3',
+    MM_MAJORA_CHILD_CUSTOM: settings.majoraChild === 'custom',
+    FILL_WALLETS: settings.fillWallets,
+    CHILD_WALLET: settings.childWallets,
+    OOT_ADULT_WELL: settings.wellAdult,
+    COLOSSAL_WALLET: settings.colossalWallets,
+    BOTTOMLESS_WALLET: settings.bottomlessWallets,
+    OOT_AGELESS_BOOTS: settings.agelessBoots,
+    MM_OWL_SHUFFLE: settings.owlShuffle === 'anywhere',
+    OOT_CARPENTERS_ONE: settings.gerudoFortress === 'single',
+    OOT_CARPENTERS_NONE: settings.gerudoFortress === 'open',
+    OOT_NO_BOSS_KEY: settings.bossKeyShuffleOot === 'removed',
+    OOT_NO_SMALL_KEY: settings.smallKeyShuffleOot === 'removed',
+    MM_NO_BOSS_KEY: settings.bossKeyShuffleMm === 'removed',
+    MM_NO_SMALL_KEY: settings.smallKeyShuffleMm === 'removed',
+    CSMC_HEARTS: settings.csmcHearts,
+    OOT_BLUE_FIRE_ARROWS: settings.blueFireArrows,
+    OOT_SILVER_RUPEE_SHUFFLE: settings.silverRupeeShuffle !== 'vanilla',
+    OOT_FREE_SCARECROW: settings.freeScarecrowOot,
+    OOT_SOULS_ENEMY: settings.soulsEnemyOot,
+    MM_SOULS_ENEMY: settings.soulsEnemyMm,
+    OOT_SOULS_BOSS: settings.soulsBossOot,
+    MM_SOULS_BOSS: settings.soulsBossMm,
+    OOT_SOULS_NPC: settings.soulsNpcOot,
+    MM_REMOVED_FAIRIES: settings.strayFairyOtherShuffle === 'removed',
+    SHARED_SKELETON_KEY: settings.sharedSkeletonKey,
+    OOT_SHUFFLE_POTS: settings.shufflePotsOot,
+    MM_SHUFFLE_POTS: settings.shufflePotsMm,
+    OOT_SHUFFLE_GRASS: settings.shuffleGrassOot,
+    MM_SHUFFLE_GRASS: settings.shuffleGrassMm,
+    MENU_NOTEBOOK: settings.menuNotebook,
+    OOT_AGELESS_CHILD_TRADE: settings.agelessChildTrade,
+    OOT_START_ADULT: settings.startingAge === 'adult',
+    HINT_IMPORTANCE: settings.hintImportance,
+    OOT_OCARINA_BUTTONS: settings.ocarinaButtonsShuffleOot,
+    MM_OCARINA_BUTTONS: settings.ocarinaButtonsShuffleMm,
+    OOT_AGE_CHANGE: settings.ageChange !== 'none',
+    OOT_AGE_CHANGE_NEEDS_OOT: settings.ageChange === 'oot',
+    MM_PROGRESSIVE_GFS: settings.progressiveGFS === 'progressive',
+    OOT_CHEST_GAME_SHUFFLE: settings.smallKeyShuffleChestGame !== 'vanilla',
+    MM_CLIMB_MOST_SURFACES: settings.climbMostSurfacesMm,
+    OOT_TRIAL_LIGHT: world.resolvedFlags.ganonTrials.has('Light'),
+    OOT_TRIAL_FOREST: world.resolvedFlags.ganonTrials.has('Forest'),
+    OOT_TRIAL_FIRE: world.resolvedFlags.ganonTrials.has('Fire'),
+    OOT_TRIAL_WATER: world.resolvedFlags.ganonTrials.has('Water'),
+    OOT_TRIAL_SHADOW: world.resolvedFlags.ganonTrials.has('Shadow'),
+    OOT_TRIAL_SPIRIT: world.resolvedFlags.ganonTrials.has('Spirit'),
+  };
+
+  for (const v in exprs) {
+    if (exprs[v as Confvar]) {
+      config.add(v as Confvar);
+    }
+  }
+
+  return config;
+}
+
+export const randomizerConfig = (world: World, settings: Settings): Buffer => {
+  const config = worldConfig(world, settings);
   const bits = Array.from(config).map((c) => {
     const bit = CONFVARS_VALUES[c];
     if (bit === undefined) {
@@ -679,7 +797,7 @@ export const randomizerData = (worldId: number, logic: LogicResult): Buffer => {
   buffers.push(toU8Buffer([worldId + 1, 0, 0, 0]));
   buffers.push(randomizerDungeonsBits(worldId, logic));
   buffers.push(randomizerWarps(worldId, logic));
-  buffers.push(randomizerConfig(logic.config));
+  buffers.push(randomizerConfig(logic.worlds[worldId], logic.settings));
   buffers.push(specialConds(logic.settings));
   buffers.push(toU16Buffer([logic.settings.coinsRed, logic.settings.coinsGreen, logic.settings.coinsBlue, logic.settings.coinsYellow]));
   buffers.push(prices(worldId, logic));

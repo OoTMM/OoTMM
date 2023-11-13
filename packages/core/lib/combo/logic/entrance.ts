@@ -65,7 +65,6 @@ export class LogicPassEntrances {
   constructor(
     private readonly input: {
       worlds: World[];
-      exprParsers: ExprParsers;
       settings: Settings;
       random: Random;
       monitor: Monitor;
@@ -374,8 +373,8 @@ export class LogicPassEntrances {
     }
   }
 
-  private songOfTime(e: Expr): Expr {
-    const subcond = this.input.exprParsers.mm.parse('can_reset_time');
+  private songOfTime(worldId: number, e: Expr): Expr {
+    const subcond = this.worlds[worldId].exprParsers.mm.parse('can_reset_time');
     return exprAnd([e, subcond]);
   }
 
@@ -392,7 +391,7 @@ export class LogicPassEntrances {
         world.areas[entranceOriginal.from].exits['MM GLOBAL'] = expr;
       }
       if (!opts.noSongOfTime) {
-        expr = this.songOfTime(expr);
+        expr = this.songOfTime(worldId, expr);
       }
     }
     world.areas[entranceOriginal.from].exits[entranceReplacement.to] = expr;

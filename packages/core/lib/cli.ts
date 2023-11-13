@@ -1,9 +1,33 @@
 import fs from 'fs/promises';
 import YAML from 'yaml';
 
-import { generate } from "./combo";
+import { SETTINGS, generate } from "./combo";
 import { OptionsInput } from "./combo/options";
 import { makeSettings } from './combo';
+
+function parseSettings(data: any): any {
+  const result = {} as any;
+  for (const key in data) {
+    const setting = SETTINGS.find((x) => x.key === key);
+    if (!setting) {
+      console.log(`warn: Unknown setting: ${key}`);
+      continue;
+    }
+    switch (setting.type) {
+    case 'set':
+      if (data[key] instanceof Array) {
+        result[key] = { type: 'specific', values: Array.from(new Set(data[key])) };
+      } else {
+        result[key] = { type: data[key] };
+      }
+      break;
+    default:
+      result[key] = data[key];
+      break;
+    }
+  }
+  return result;
+}
 
 const makeOptions = async (args: string[]): Promise<OptionsInput> => {
   const opts: OptionsInput = {};
@@ -25,7 +49,7 @@ const makeOptions = async (args: string[]): Promise<OptionsInput> => {
       const configFile = await fs.readFile(args[++i]);
       const config = YAML.parse(configFile.toString());
       if (config.settings) {
-        opts.settings = config.settings;
+        opts.settings = parseSettings(config.settings);
       }
       if (config.cosmetics) {
         opts.cosmetics = config.cosmetics;
