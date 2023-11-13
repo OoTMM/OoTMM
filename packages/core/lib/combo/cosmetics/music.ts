@@ -9,6 +9,9 @@ import { Game } from '../config';
 const OOT_AUDIOSEQ_ADDR = 0x29de0;
 const OOT_AUDIOSEQ_SIZE = 0x4f690;
 
+const MM_AUDIOSEQ_ADDR = 0x46af0;
+const MM_AUDIOSEQ_SIZE = 0x51480;
+
 const OOT_MUSICS = {
   "Hyrule Field": 0x02,
   "Dodongos Cavern": 0x18,
@@ -59,6 +62,54 @@ const OOT_MUSICS = {
   "Mini-game": 0x6C,
 };
 
+const MM_MUSICS = {
+  "Termina Field": 0x02,
+  "Stone Tower Temple": 0x06,
+  "Stone Tower Temple Inverted": 0x07,
+  "Southern Swamp": 0x0c,
+  "Aliens": 0x0d,
+  "Mini Game": 0x0e,
+  "Sharp's Curse": 0x0f,
+  "Great Bay Coast": 0x10,
+  "Ikana Valley": 0x11,
+  "Court of the Deku King": 0x12,
+  "Mountain Village": 0x13,
+  "Pirates' Fortress": 0x14,
+  "Clock Town Day 1": 0x15,
+  "Clock Town Day 2": 0x16,
+  "Clock Town Day 3": 0x17,
+  "Boss Battle": 0x1b,
+  "Woodfall Temple": 0x1c,
+  "Goron Race": 0x26,
+  "Music Box House": 0x27,
+  "Fairy's Fountain": 0x28,
+  "Marine Research Laboratory": 0x2c,
+  "Romani Ranch": 0x2f,
+  "Goron Village": 0x30,
+  "Mayor Dotour": 0x31,
+  "Zora Hall": 0x36,
+  "Mini Boss": 0x38,
+  "Astral Observatory": 0x3a,
+  "Clock Town Cavern": 0x3b,
+  "Milk Bar Latte": 0x3c,
+  "Woods of Mystery": 0x3e,
+  "Gorman Race": 0x40,
+  "Gorman Bros.": 0x42,
+  "Kotake's Potion Shop": 0x43,
+  "Store": 0x44,
+  "Target Practice": 0x46,
+  "Sword Training": 0x50,
+  "Final Hours": 0x57,
+  "Snowhead Temple": 0x65,
+  "Great Bay Temple": 0x66,
+  "Majora's Wrath": 0x69,
+  "Majora's Incarnation": 0x6a,
+  "Majora's Mask": 0x6b,
+  "Ikana Castle": 0x6f,
+  "Woodfall Clear": 0x78,
+  "Snowhead Clear": 0x79,
+};
+
 type MusicFile = {
   type: 'bgm';
   seq: Buffer;
@@ -67,9 +118,16 @@ type MusicFile = {
   game: Game;
 }
 
+type AudioSeq = {
+  buffers: Buffer[];
+  size: number;
+}
+
 class MusicInjector {
-  private audioSeqSize: number;
-  private audioSeqBuffers: Buffer[];
+  private audioSeq: {
+    oot: AudioSeq;
+    mm: AudioSeq;
+  };
   private musics: MusicFile[];
 
   constructor(
@@ -78,15 +136,21 @@ class MusicInjector {
     private patch: Patchfile,
     private musicZipData: Buffer,
   ) {
-    this.audioSeqSize = 0;
-    this.audioSeqBuffers = [];
+    this.audioSeq = {
+      oot: {
+        buffers: [],
+        size: 0,
+      },
+      mm: {
+        buffers: [],
+        size: 0,
+      },
+    }
     this.musics = [];
   }
 
-  private async loadMusics(data: Buffer) {
-    const zip = await JSZip.loadAsync(data);
-    const ootrs = zip.file(/\.ootrs$/);
-    for (const f of ootrs) {
+  private async loadMusicsOotrs(files: JSZip.JSZipObject[]) {
+    for (const f of files) {
       /* Get the music zip */
       const musicZipBuffer = await f.async('nodebuffer');
       const musicZip = await JSZip.loadAsync(musicZipBuffer);
@@ -114,8 +178,8 @@ class MusicInjector {
       const meta = metaRaw.split(/\r?\n/);
       const name = meta[0];
       const bankId = Number(meta[1]);
-      const game = 'oot';
       const type = meta[2];
+      const game = 'oot';
       if (type !== 'bgm') {
         continue;
       }
@@ -127,23 +191,70 @@ class MusicInjector {
     }
   }
 
+  private async loadMusicsMmrs(files: JSZip.JSZipObject[]) {
+    for (const f of files) {
+      /* Get the music zip */
+      const musicZipBuffer = await f.async('nodebuffer');
+      const musicZip = await JSZip.loadAsync(musicZipBuffer);
+
+      /* Look for unsupported stuff */
+      const badFiles = musicZip.file(/\.z?(bank|bankmeta|sound|)$/);
+      if (badFiles.length > 0) {
+        continue;
+      }
+
+      /* Find the zseq file */
+      const zseqFiles = musicZip.file(/\.zseq$/);
+      if (zseqFiles.length !== 1) {
+        continue;
+      }
+
+      /* Extract the bank ID from the zseq filename */
+      let zseqFilename = zseqFiles[0].name;
+      if (zseqFilename.includes('/')) {
+        zseqFilename = zseqFilename.split('/').pop()!;
+      }
+      const bankIdRaw = zseqFilename.split('.')[0];
+      const bankId = parseInt(bankIdRaw, 16);
+
+      /* Add the music */
+      const seq = await zseqFiles[0].async('nodebuffer');
+      const game = 'mm';
+      const type = 'bgm';
+      const name = '???';
+      const music: MusicFile = { type, seq, bankId, name, game };
+      this.musics.push(music);
+    }
+  }
+
+  private async loadMusics(data: Buffer) {
+    const zip = await JSZip.loadAsync(data);
+    await this.loadMusicsOotrs(zip.file(/\.ootrs$/));
+    await this.loadMusicsMmrs(zip.file(/\.mmrs$/));
+  }
+
+  private appendAudioSeq(s: AudioSeq, seq: Buffer) {
+    const size = s.size;
+    s.size += seq.length;
+    s.buffers.push(seq);
+    if (s.size % 16) {
+      const rem = 16 - (s.size % 16);
+      const z = Buffer.alloc(rem);
+      s.buffers.push(z);
+      s.size += rem;
+    }
+    return size;
+  }
+
   private async injectMusicOot(slot: string, music: MusicFile) {
+    /* Add the seq data in the rom */
+    const offset = this.appendAudioSeq(this.audioSeq.oot, music.seq);
+
     /* Patch the bank ID */
     const bankVrom = 0xB89911 + 0xDD + (OOT_MUSICS[slot as keyof typeof OOT_MUSICS] * 2);
     const bankIdBuf = Buffer.alloc(1);
     bankIdBuf.writeUInt8(music.bankId);
     this.patch.addDataPatch('oot', bankVrom, bankIdBuf);
-
-    /* Add the seq data in the rom */
-    const offset = this.audioSeqSize;
-    this.audioSeqSize += music.seq.length;
-    this.audioSeqBuffers.push(music.seq);
-    if (this.audioSeqSize % 16) {
-      const rem = 16 - (this.audioSeqSize % 16);
-      const z = Buffer.alloc(rem);
-      this.audioSeqBuffers.push(z);
-      this.audioSeqSize += rem;
-    }
 
     /* Add the pointer */
     const seqTablePtr = 0x00B89AE0 + 0x10 * OOT_MUSICS[slot as keyof typeof OOT_MUSICS];
@@ -151,9 +262,48 @@ class MusicInjector {
     this.patch.addDataPatch('oot', seqTablePtr, seqTableData);
   }
 
+  private async injectMusicMmOffsetId(slot: number, seqOffset: number, seqLength: number, bankId: number) {
+    /* Patch the bank ID */
+    const bankVrom = 0xC77961 + 0x101 + (slot * 2);
+    const bankIdBuf = Buffer.alloc(1);
+    bankIdBuf.writeUInt8(bankId);
+    this.patch.addDataPatch('mm', bankVrom, bankIdBuf);
+
+    /* Add the pointer */
+    const seqTablePtr = 0xC77B80 + 0x10 * slot;
+    const seqTableData = toU32Buffer([seqOffset, seqLength]);
+    this.patch.addDataPatch('mm', seqTablePtr, seqTableData);
+  }
+
+  private async injectMusicMm(slot: string, music: MusicFile) {
+    /* Add the seq data in the rom */
+    const offset = this.appendAudioSeq(this.audioSeq.mm, music.seq);
+
+    /* Patch the music */
+    const slotId = MM_MUSICS[slot as keyof typeof MM_MUSICS];
+    await this.injectMusicMmOffsetId(slotId, offset, music.seq.length, music.bankId);
+
+    /* Special cases */
+    if (slot === 'Clock Town Day 1') {
+      await this.injectMusicMmOffsetId(0x1d, offset, music.seq.length, music.bankId);
+    }
+
+    if (slot === 'Clock Town Day 2') {
+      await this.injectMusicMmOffsetId(0x23, offset, music.seq.length, music.bankId);
+    }
+  }
+
+  private async injectMusic(game: Game, slot: string, music: MusicFile) {
+    if (game === 'oot') {
+      return this.injectMusicOot(slot, music);
+    } else {
+      return this.injectMusicMm(slot, music);
+    }
+  }
+
   private replaceAudioseqOot() {
     /* Add the merged audioseq at a fixed fake vrom ADDR */
-    const data = Buffer.concat(this.audioSeqBuffers);
+    const data = Buffer.concat(this.audioSeq.oot.buffers);
     const vrom = 0xe0000000;
     this.patch.addNewFile(vrom, data, false);
 
@@ -163,17 +313,22 @@ class MusicInjector {
     this.patch.addDataPatch('oot', 0xbe447F, z);
   }
 
-  async run() {
-    /* Init the audio seq data */
-    this.audioSeqSize = OOT_AUDIOSEQ_SIZE;
-    this.audioSeqBuffers = [this.roms.oot.rom.subarray(OOT_AUDIOSEQ_ADDR, OOT_AUDIOSEQ_ADDR + OOT_AUDIOSEQ_SIZE)];
+  private replaceAudioseqMm() {
+    /* Add the merged audioseq at a fixed fake vrom ADDR */
+    const data = Buffer.concat(this.audioSeq.mm.buffers);
+    const vrom = 0xe8000000;
+    this.patch.addNewFile(vrom, data, false);
 
-    /* Extract the list of musics */
-    await this.loadMusics(this.musicZipData);
+    /* Disable battle music */
+    const z = Buffer.alloc(2);
+    z.writeUInt16BE(0x1000);
+    this.patch.addDataPatch('mm', 0xCBE718, z);
+  }
 
-    /* Bind a custom music to every OoT track */
-    const musics = shuffle(this.random, this.musics);
-    const slots = shuffle(this.random, Object.keys(OOT_MUSICS));
+  private async shuffleMusics(game: Game) {
+    const musicsDefs = game === 'oot' ? OOT_MUSICS : MM_MUSICS;
+    const musics = shuffle(this.random, this.musics.filter(m => m.game === game));
+    const slots = shuffle(this.random, Object.keys(musicsDefs));
 
     for (;;) {
       if (musics.length === 0 || slots.length === 0) {
@@ -183,10 +338,27 @@ class MusicInjector {
       const music = musics.pop()!;
       const slot = slots.pop()!;
 
-      await this.injectMusicOot(slot, music);
+      await this.injectMusic(game, slot, music);
     }
+  }
 
+  async run() {
+    /* Init the audio seq data */
+    this.audioSeq.oot.size = OOT_AUDIOSEQ_SIZE;
+    this.audioSeq.oot.buffers = [this.roms.oot.rom.subarray(OOT_AUDIOSEQ_ADDR, OOT_AUDIOSEQ_ADDR + OOT_AUDIOSEQ_SIZE)];
+    this.audioSeq.mm.size = MM_AUDIOSEQ_SIZE;
+    this.audioSeq.mm.buffers = [this.roms.mm.rom.subarray(MM_AUDIOSEQ_ADDR, MM_AUDIOSEQ_ADDR + MM_AUDIOSEQ_SIZE)];
+
+    /* Extract the list of musics */
+    await this.loadMusics(this.musicZipData);
+
+    /* Shuffle musics */
+    await this.shuffleMusics('oot');
+    await this.shuffleMusics('mm');
+
+    /* Inject the new audioseq */
     this.replaceAudioseqOot();
+    this.replaceAudioseqMm();
   }
 }
 

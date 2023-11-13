@@ -18,6 +18,8 @@ osInvalICache = 0x8008f270;
 osWritebackDCache = 0x8008a5e0;
 osWritebackDCacheAll = 0x800955c0;
 
+AudioLoad_InitTable = 0x8018f478;
+
 PictoUpdateFlags = 0x8013a240;
 gPictoboxState = 0x801bf884;
 gPictoboxPhotoTaken = 0x801bf888;
