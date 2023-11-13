@@ -126,6 +126,11 @@ class MusicInjector {
     const data = Buffer.concat(this.audioSeqBuffers);
     const vrom = 0xe0000000;
     this.patch.addNewFile(vrom, data, false);
+
+    /* Disable battle music */
+    const z = Buffer.alloc(1);
+    z.writeUInt8(0);
+    this.patch.addDataPatch('oot', 0xbe447F, z);
   }
 
   async run() {
