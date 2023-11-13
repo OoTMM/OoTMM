@@ -16,7 +16,7 @@ function parseSettings(data: any): any {
     switch (setting.type) {
     case 'set':
       if (data[key] instanceof Array) {
-        result[key] = { type: 'specific', values: new Set(data[key]) };
+        result[key] = { type: 'specific', values: Array.from(new Set(data[key])) };
       } else {
         result[key] = { type: data[key] };
       }

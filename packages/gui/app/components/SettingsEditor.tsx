@@ -1,5 +1,6 @@
 import React from 'react';
-import { SETTINGS, SETTINGS_CATEGORIES } from '@ootmm/core';
+import Select, { MultiValue } from 'react-select';
+import { SETTINGS, SETTINGS_CATEGORIES, Settings, SettingsPatch } from '@ootmm/core';
 
 import { Dropdown } from './Dropdown';
 import { Checkbox } from './Checkbox';
@@ -8,6 +9,51 @@ import { Tooltip } from './Tooltip';
 import { InputNumber } from './InputNumber';
 import { Group } from './Group';
 import { Text } from './Text';
+
+const SET_OPTIONS = [
+  { value: 'none', name: 'None' },
+  { value: 'all', name: 'All' },
+  { value: 'specific', name: 'Specific' },
+  { value: 'random', name: 'Random' },
+];
+
+function SettingSet({ setting }: { setting: string }) {
+  const [settings, setSettings] = useSettings();
+  const data = SETTINGS.find(x => x.key === setting)!;
+  const s = settings[data.key] as any;
+
+  let options: { value: string, label: string }[] = [];
+  let values: typeof options = [];
+
+  if (s.type === 'specific') {
+    options = (data as any).values.map((x: any) => ({ value: x.value, label: x.name }));
+    values = options.filter(x => s.values.includes(x.value));
+  }
+
+  const handleChange = (v: MultiValue<{ value: string, label: string }>) => {
+    const newValues = Array.from(new Set(v.map(x => x.value)));
+    setSettings({ [data.key]: { type: 'specific', values: newValues } as any });
+  };
+
+  return (
+    <span>
+      <Dropdown
+        value={(settings[data.key] as any).type as string}
+        label={data.name}
+        options={SET_OPTIONS}
+        tooltip={(data as any).description ? data.key : undefined}
+        onChange={(v) => setSettings({ [data.key]: { type: v, values: s.values } as any })}
+      />
+      {s.type === 'specific' &&
+        <Select
+          isMulti
+          options={options} value={values}
+          onChange={(v) => handleChange(v)}
+        />
+      }
+    </span>
+  );
+}
 
 function Setting({ setting }: { setting: string }) {
   const [settings, setSettings] = useSettings();
@@ -29,6 +75,7 @@ function Setting({ setting }: { setting: string }) {
         onChange={(v) => setSettings({ [data.key]: v })}
       />
     );
+  case 'set': return <SettingSet setting={setting}/>;
   case 'boolean':
     return (
       <Checkbox
@@ -143,7 +190,7 @@ export function SettingsPanel({ category }: SettingsPanelProps) {
           {booleans.map(setting => <SettingTooltip key={setting.key} setting={setting.key}/>)}
         </div>
       </Group>
-       
+
     </form>
   );
 };

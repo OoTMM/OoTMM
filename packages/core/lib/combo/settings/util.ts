@@ -117,7 +117,7 @@ function applyBaseSettings(dest: SettingsBase, src: PartialDeep<SettingsBase>) {
         if (newValue instanceof Object && (['all', 'none', 'random', 'specific'].includes(newValue.type!))) {
           (dest as any)[key] = { ...newValue };
           if (newValue.type === 'specific') {
-            (dest[key] as any).values = new Set(Array.from(newValue.values || []).filter(x => setting.values.some(v => v.value === x)));
+            (dest[key] as any).values = Array.from(new Set(Array.from(newValue.values || []).filter(x => setting.values.some(v => v.value === x))));
           }
         }
         break;
