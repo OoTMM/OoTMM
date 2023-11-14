@@ -81,6 +81,7 @@ const MM_MUSICS = {
   "Boss Battle": 0x1b,
   "Woodfall Temple": 0x1c,
   "Stock Pot Inn": 0x1f,
+  "Mini-game": 0x25,
   "Goron Race": 0x26,
   "Music Box House": 0x27,
   "Fairy's Fountain": 0x28,
