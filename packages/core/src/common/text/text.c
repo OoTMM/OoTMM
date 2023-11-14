@@ -133,16 +133,16 @@ static const CheckName kCheckNamesOot[] = {
     { "the " TEXT_COLOR_TEAL "Ice Cavern Final Chest", TF_NONE },
     { "the " TEXT_COLOR_YELLOW "Market Treasure Game", TF_NONE },
     { TEXT_COLOR_RED "Shooting at the Sun", TF_NONE },
-    { "the " TEXT_COLOR_GREEN "shadows in the Forest Temple", TF_NONE },
-    { "a " TEXT_COLOR_PINK "large skull pot", TF_NONE },
+    { "the " TEXT_COLOR_GREEN "Floormaster in the Forest Temple", TF_NONE },
+    { "a " TEXT_COLOR_PINK "bombing a fiery skull pot", TF_NONE },
     { "a " TEXT_COLOR_PINK "Stalfos duel near spikes", TF_NONE },
-    { "the " TEXT_COLOR_BLUE "River Serpent's treasure", TF_NONE },
-    { TEXT_COLOR_GREEN "trading in the woods", TF_NONE },
-    { TEXT_COLOR_BLUE "Stingers in a belly", TF_NONE },
-    { "a " TEXT_COLOR_YELLOW "spiritual symphony", TF_NONE },
-    { "the " TEXT_COLOR_GREEN "Deku Tree's time block", TF_NONE },
-    { "a " TEXT_COLOR_RED "scrub in the crater", TF_NONE },
-    { "the " TEXT_COLOR_GREEN "Deku Tree back room spider", TF_NONE },
+    { "the " TEXT_COLOR_BLUE "Water Temple River Chest", TF_NONE },
+    { TEXT_COLOR_GREEN "trading a bird and a mixture in the Lost Woods", TF_NONE },
+    { TEXT_COLOR_BLUE "Stingers in Jabu-Jabu's Belly", TF_NONE },
+    { "playing " TEXT_COLOR_YELLOW "a symphony in Spirit Temple", TF_NONE },
+    { "a " TEXT_COLOR_GREEN "chest hidden by a time block in Deku Tree", TF_NONE },
+    { "a " TEXT_COLOR_RED "singular scrub in Death Mountain Crater", TF_NONE },
+    { "a " TEXT_COLOR_GREEN "spider deep within Deku Tree", TF_NONE },
 };
 
 static const CheckName kCheckNamesMm[] = {
@@ -171,10 +171,10 @@ static const CheckName kCheckNamesMm[] = {
     { "the " TEXT_COLOR_BLUE "Great Bay Temple Wart", TF_NONE },
     { "the " TEXT_COLOR_TEAL "second Snowhead Wizzrobe", TF_NONE },
     { "the " TEXT_COLOR_GREEN "Woodfall Temple Gekko", TF_NONE },
-    { TEXT_COLOR_YELLOW "Gomess", TF_NONE },
-    { TEXT_COLOR_TEAL "feeding a goron", TF_NONE },
+    { TEXT_COLOR_YELLOW "defeating Gomess", TF_NONE },
+    { TEXT_COLOR_TEAL "feeding a freezing Goron", TF_NONE },
     { TEXT_COLOR_PINK "healing Kamaro", TF_NONE },
-    { "the " TEXT_COLOR_GREEN "Woodfall Temple dark room", TF_NONE },
+    { "the " TEXT_COLOR_GREEN "Woodfall Temple Dark Room", TF_NONE },
 };
 
 static int isItemAmbiguousOot(s16 gi)
