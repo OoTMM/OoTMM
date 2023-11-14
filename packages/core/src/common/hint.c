@@ -21,22 +21,30 @@ typedef struct PACKED ALIGNED(2)
 Hint;
 
 static const char* kJunkHints[] = {
-    "THEW ORLD ISSQ UARE",                              /* Final Fantasy 6 */
-    "SWITCH targeting is the superior option",          /* Blatant truth */
-    "getting 100 coins gives you a star",               /* Mario 64 */
-    "the main character is not actually called Zelda",  /* ... */
-    "nothing is forever",                               /* Useful life advice */
-    "the yes needs the no, to win against the no",      /* French politics */
-    "a winner is you",                                  /* Meme */
-    "your princess is in another castle",               /* Mario 1 */
-    "it's a secret to everybody",                       /* Zelda 1 */
-    "Ocarina of Time is the better game",               /* OoTMM */
-    "Majora's Mask is the better game",                 /* OoTMM */
-    "the cake is a lie",                                /* Portal */
-    "I am Error",                                       /* Zelda 2 */
-    "plundering Area 51 is a foolish choice",           /* Useful life advice */
-    "there are 118 known elements",                     /* Chemistry */
-    "Nax's House is on the Way of the Hero",            /* OoTMM */
+    "THEW ORLD ISSQ UARE",                                      /* Final Fantasy 6 */
+    "SWITCH targeting is the superior option",                  /* Blatant truth */
+    "getting 100 coins gives you a star",                       /* Mario 64 */
+    "the main character is not actually called Zelda",          /* ... */
+    "nothing is forever",                                       /* Useful life advice */
+    "the yes needs the no, to win against the no",              /* French politics */
+    "a winner is you",                                          /* Meme */
+    "your princess is in another castle",                       /* Mario 1 */
+    "it's a secret to everybody",                               /* Zelda 1 */
+    "Ocarina of Time is the better game",                       /* OoTMM */
+    "Majora's Mask is the better game",                         /* OoTMM */
+    "the cake is a lie",                                        /* Portal */
+    "I am Error",                                               /* Zelda 2 */
+    "plundering Area 51 is a foolish choice",                   /* Useful life advice */
+    "there are 118 known elements",                             /* Chemistry */
+    "Nax's House is on the Way of the Hero",                    /* OoTMM */
+    "this is not the hint you are looking for",                 /* OoTMM */
+    "you can find Luigi in Super Mario 64",                     /* Mario 64 */
+    "using the Fishing Pole in Twilight Princess is WoTH",      /* Twilight Princess */
+    "23 is number 1",                                           /* Deku Tree */
+    "keys are always in the last place you look in",            /* Facts */
+    "a famous code is UUDD LRLR BAS",                           /* Konami Code */
+    "there's only 151 Pokemons",                                /* Pokemon Gen 1 */
+    "you can unlock Sonic and Tails in Super Smash Bros Melee", /* SSBM */
 };
 
 static Hint* gHints;
