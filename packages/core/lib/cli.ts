@@ -8,6 +8,10 @@ import { makeSettings } from './combo';
 function parseSettings(data: any): any {
   const result = {} as any;
   for (const key in data) {
+    if (['startingItems', 'tricks', 'glitches', 'junkLocations', 'dungeon', 'specialConds', 'plando', 'hints'].includes(key)) {
+      result[key] = data[key];
+      continue;
+    }
     const setting = SETTINGS.find((x) => x.key === key);
     if (!setting) {
       console.log(`warn: Unknown setting: ${key}`);
