@@ -10,8 +10,12 @@ import { SETTINGS_DEFAULT_HINTS } from './hints';
 import { DEFAULT_GLITCHES, GLITCHES } from './glitches';
 
 export const DEFAULT_SETTINGS: Settings = { ...SETTINGS.map(s => {
-  return {[s.key]: s.default};
-}).reduce((a, b) => ({...a, ...b}), {}),
+  if (s.type === 'set') {
+    return {[s.key]: { type: s.default }};
+  } else {
+    return {[s.key]: s.default};
+  }
+}).reduce((a, b) => ({...a, ...b} as any), {}),
   startingItems: {},
   junkLocations: [] as string[],
   tricks: [ ...DEFAULT_TRICKS ],
