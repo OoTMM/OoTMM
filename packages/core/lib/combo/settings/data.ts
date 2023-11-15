@@ -265,24 +265,34 @@ export const SETTINGS = [{
   key: 'smallKeyRingOot',
   name: 'Small Key Ring (OoT)',
   category: 'main.shuffle',
-  type: 'enum',
+  type: 'set',
   description: 'Controls the grouping of keys into keyrings, for OoT',
   values: [
-    { value: 'disabled', name: 'Disabled', description: 'Small keys are found individually, like in the base game.' },
-    { value: 'keyRings', name: 'Key Rings', description: 'Small keys are grouped into key rings.' },
+    { value: 'Forest', name: 'Forest Temple' },
+    { value: 'Fire',   name: 'Fire Temple' },
+    { value: 'Water',  name: 'Water Temple' },
+    { value: 'Shadow', name: 'Shadow Temple' },
+    { value: 'Spirit', name: 'Spirit Temple' },
+    { value: 'BotW',   name: 'Bottom of the Well' },
+    { value: 'GTG',    name: 'Gerudo Training Grounds' },
+    { value: 'Ganon',  name: 'Ganon\'s Castle' },
+    { value: 'GF',     name: 'Hideout' },
+    { value: 'TCG',    name: 'Chest Game' },
   ],
-  default: 'disabled'
+  default: 'none'
 }, {
   key: 'smallKeyRingMm',
   name: 'Small Key Ring (MM)',
   category: 'main.shuffle',
-  type: 'enum',
+  type: 'set',
   description: 'Controls the grouping of keys into keyrings, for MM',
   values: [
-    { value: 'disabled', name: 'Disabled', description: 'Small keys are found individually, like in the base game.' },
-    { value: 'keyRings', name: 'Key Rings', description: 'Small keys are grouped into key rings.' },
+    { value: 'WF', name: 'Woodfall Temple' },
+    { value: 'SH', name: 'Snowhead Temple' },
+    { value: 'GB', name: 'Great Bay Temple' },
+    { value: 'ST', name: 'Stone Tower Temple' },
   ],
-  default: 'disabled'
+  default: 'none'
 }, {
   key: 'silverRupeeShuffle',
   name: 'Silver Rupee Shuffle',

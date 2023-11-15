@@ -11,7 +11,9 @@ import { Random } from '../random';
 import { cloneDeep } from 'lodash';
 
 export const WORLD_FLAGS = [
-  'ganonTrials'
+  'ganonTrials',
+  'smallKeyRingOot',
+  'smallKeyRingMm',
 ] as const;
 
 type WorldFlag = typeof WORLD_FLAGS[number];

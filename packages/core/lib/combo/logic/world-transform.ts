@@ -826,6 +826,16 @@ export class LogicPassWorldTransform {
     }
   }
 
+  private keyRing(worldId: number, key: Item, keyRing: Item) {
+    const playerKey = makePlayerItem(key, worldId);
+    const playerKeyRing = makePlayerItem(keyRing, worldId);
+    const count = this.pool.get(playerKey) || 0;
+    if (count) {
+      this.removePlayerItem(playerKey);
+      this.addPlayerItem(playerKeyRing);
+    }
+  }
+
   run() {
     const { settings } = this.state;
     this.state.monitor.log('Logic: World Transform');
@@ -1009,42 +1019,31 @@ export class LogicPassWorldTransform {
     }
 
     /* Handle key rings */
-    if (settings.smallKeyRingOot === 'keyRings') {
-      for (let worldId = 0; worldId < this.state.worlds.length; ++worldId) {
-        for (const [key, ring] of KEY_RINGS_OOT.entries()) {
-          const piKey = makePlayerItem(key, worldId);
-          const piRing = makePlayerItem(ring, worldId);
-          if (this.pool.has(piKey)) {
-            this.removePlayerItem(piKey);
-            this.addPlayerItem(piRing);
-          }
-        }
+    for (let worldId = 0; worldId < this.state.worlds.length; ++worldId) {
+      const world = this.state.worlds[worldId];
+      const rf = world.resolvedFlags;
 
-        /* Hideout keys need special handling */
-        if (settings.smallKeyShuffleHideout !== 'vanilla') {
-          this.removePlayerItem(makePlayerItem(Items.OOT_SMALL_KEY_GF, worldId));
-          this.addPlayerItem(makePlayerItem(Items.OOT_KEY_RING_GF, worldId));
-        }
+      const oot = rf.smallKeyRingOot;
+      if (oot.has('Forest')) this.keyRing(worldId, Items.OOT_SMALL_KEY_FOREST, Items.OOT_KEY_RING_FOREST);
+      if (oot.has('Fire'))   this.keyRing(worldId, Items.OOT_SMALL_KEY_FIRE,   Items.OOT_KEY_RING_FIRE);
+      if (oot.has('Water'))  this.keyRing(worldId, Items.OOT_SMALL_KEY_WATER,  Items.OOT_KEY_RING_WATER);
+      if (oot.has('Spirit')) this.keyRing(worldId, Items.OOT_SMALL_KEY_SPIRIT, Items.OOT_KEY_RING_SPIRIT);
+      if (oot.has('Shadow')) this.keyRing(worldId, Items.OOT_SMALL_KEY_SHADOW, Items.OOT_KEY_RING_SHADOW);
+      if (oot.has('BotW'))   this.keyRing(worldId, Items.OOT_SMALL_KEY_BOTW,   Items.OOT_KEY_RING_BOTW);
+      if (oot.has('GTG'))    this.keyRing(worldId, Items.OOT_SMALL_KEY_GTG,    Items.OOT_KEY_RING_GTG);
+      if (oot.has('Ganon'))  this.keyRing(worldId, Items.OOT_SMALL_KEY_GANON,  Items.OOT_KEY_RING_GANON);
 
-        /* TCG keys need special handling */
-        if (settings.smallKeyShuffleChestGame !== 'vanilla') {
-          this.removePlayerItem(makePlayerItem(Items.OOT_SMALL_KEY_TCG, worldId));
-          this.addPlayerItem(makePlayerItem(Items.OOT_KEY_RING_TCG, worldId));
-        }
-      }
-    }
+      if (oot.has('GF') && settings.smallKeyShuffleHideout !== 'vanilla')
+        this.keyRing(worldId, Items.OOT_SMALL_KEY_GF,     Items.OOT_KEY_RING_GF);
 
-    if (settings.smallKeyRingMm === 'keyRings') {
-      for (let worldId = 0; worldId < this.state.worlds.length; ++worldId) {
-        for (const [key, ring] of KEY_RINGS_MM.entries()) {
-          const piKey = makePlayerItem(key, worldId);
-          const piRing = makePlayerItem(ring, worldId);
-          if (this.pool.has(piKey)) {
-            this.removePlayerItem(piKey);
-            this.addPlayerItem(piRing);
-          }
-        }
-      }
+      if (oot.has('TCG') && settings.smallKeyShuffleChestGame !== 'vanilla')
+        this.keyRing(worldId, Items.OOT_SMALL_KEY_TCG,    Items.OOT_KEY_RING_TCG);
+
+      const mm = rf.smallKeyRingMm;
+      if (mm.has('WF')) this.keyRing(worldId, Items.MM_SMALL_KEY_WF, Items.MM_KEY_RING_WF);
+      if (mm.has('SH')) this.keyRing(worldId, Items.MM_SMALL_KEY_SH, Items.MM_KEY_RING_SH);
+      if (mm.has('GB')) this.keyRing(worldId, Items.MM_SMALL_KEY_GB, Items.MM_KEY_RING_GB);
+      if (mm.has('ST')) this.keyRing(worldId, Items.MM_SMALL_KEY_ST, Items.MM_KEY_RING_ST);
     }
 
     /* Handle silver pouches */
