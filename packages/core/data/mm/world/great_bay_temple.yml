@@ -1,7 +1,7 @@
 "Great Bay Temple":
   dungeon: GB
   exits:
-    "Great Bay Temple Entrance": "can_reset_time"
+    "Great Bay Temple Entrance": "can_reset_time && cond(setting(erMoon), before(NIGHT3_AM_12_00), true)"
     "Zora Cape Peninsula": "can_hookshot || short_hook_anywhere"
 "Great Bay Temple Entrance":
   dungeon: GB

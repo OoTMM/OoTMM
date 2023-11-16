@@ -2,8 +2,8 @@
   dungeon: BtW
   exits:
     "Ikana Canyon": "true"
-    "Beneath The Well North Section": "can_reset_time && can_pass_gibdo && has_blue_potion"
-    "Beneath The Well East Section": "can_reset_time && can_pass_gibdo && has_beans"
+    "Beneath The Well North Section": "can_reset_time && can_pass_gibdo && has_blue_potion && cond(setting(erMoon), before(NIGHT3_AM_12_00), true)"
+    "Beneath The Well East Section": "can_reset_time && can_pass_gibdo && has_beans && cond(setting(erMoon), before(NIGHT3_AM_12_00), true)"
 "Beneath The Well North Section":
   dungeon: BtW
   events:
@@ -95,5 +95,5 @@
 "Beneath The Well End":
   dungeon: BtWE
   exits:
-    "Beneath The Well Sun Block": "can_reset_time && can_use_light_arrows"
+    "Beneath The Well Sun Block": "can_reset_time && can_use_light_arrows && cond(setting(erMoon), before(NIGHT3_AM_12_00), true)"
     "Ikana Castle Exterior": "true"
