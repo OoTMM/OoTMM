@@ -42,7 +42,6 @@
 #define DUNGEONID_PIRATE_FORTRESS                   0x16
 #define DUNGEONID_GANON_CASTLE                      0x17
 #define DUNGEONID_GANON_TOWER                       0x18
-#define DUNGEONID_MOON                              0x19
 
 /* MQ IDs */
 #define MQ_DEKU_TREE                0

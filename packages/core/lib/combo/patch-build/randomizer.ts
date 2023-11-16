@@ -566,7 +566,6 @@ const randomizerDungeonsBits = (worldId: number, logic: LogicResult): Buffer => 
     'PF',
     'Ganon',
     'Tower',
-    'MOON',
   ]
   let mq = 0;
   let preCompleted = 0;

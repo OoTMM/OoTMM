@@ -219,6 +219,7 @@ static void menuSave(GameState_Play* play)
     /* Can't save in some scenes */
     switch (play->sceneId)
     {
+    case SCE_MM_CLOCK_TOWER_ROOFTOP:
     case SCE_MM_MOON:
     case SCE_MM_MOON_DEKU:
     case SCE_MM_MOON_GORON:
