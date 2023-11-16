@@ -6,12 +6,12 @@
     "Moon": "can_play_order && special(MOON)"
     "OOT Market": "false"
   locations:
-    "Clock Tower Roof Skull Kid Ocarina": "cond(!setting(shufflePotsMm), (has(MASK_DEKU) && (has(MAGIC_UPGRADE) || has(SHARED_MAGIC_UPGRADE))) || has_weapon_range, has_weapon_range)"
-    "Clock Tower Roof Skull Kid Song of Time": "cond(!setting(shufflePotsMm), (has(MASK_DEKU) && (has(MAGIC_UPGRADE) || has(SHARED_MAGIC_UPGRADE))) || has_weapon_range, has_weapon_range)"
-    "Clock Tower Roof Pot 1": "true"
-    "Clock Tower Roof Pot 2": "true"
-    "Clock Tower Roof Pot 3": "true"
-    "Clock Tower Roof Pot 4": "true"
+    "Clock Tower Roof Skull Kid Ocarina": "cond(!setting(shufflePotsMm), (has(MASK_DEKU) && (has(MAGIC_UPGRADE) || has(SHARED_MAGIC_UPGRADE))) || has_weapon_range, has_weapon_range) && (can_play_time || event(MAJORA) || setting(erMoon) || trick(MM_TIMELESS_CLOCK))"
+    "Clock Tower Roof Skull Kid Song of Time": "cond(!setting(shufflePotsMm), (has(MASK_DEKU) && (has(MAGIC_UPGRADE) || has(SHARED_MAGIC_UPGRADE))) || has_weapon_range, has_weapon_range) && (can_play_time || event(MAJORA) || setting(erMoon) || trick(MM_TIMELESS_CLOCK))"
+    "Clock Tower Roof Pot 1": "(can_play_time || event(MAJORA) || setting(erMoon) || trick(MM_TIMELESS_CLOCK))"
+    "Clock Tower Roof Pot 2": "(can_play_time || event(MAJORA) || setting(erMoon) || trick(MM_TIMELESS_CLOCK))"
+    "Clock Tower Roof Pot 3": "(can_play_time || event(MAJORA) || setting(erMoon) || trick(MM_TIMELESS_CLOCK))"
+    "Clock Tower Roof Pot 4": "(can_play_time || event(MAJORA) || setting(erMoon) || trick(MM_TIMELESS_CLOCK))"
 "Moon":
   dungeon: MOON
   events:
