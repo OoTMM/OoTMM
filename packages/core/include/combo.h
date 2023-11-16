@@ -147,7 +147,7 @@ typedef struct
     s8              staticHintsImportance[20];
     u16             giZoraSapphire;
     u8              boss[12];
-    u8              dungeons[25];
+    u8              dungeons[26];
 }
 ComboData;
 

@@ -50,6 +50,7 @@ const DUNGEON_INDEX = {
   PF: 22,
   Ganon: 23,
   Tower: 24,
+  CTM: 25,
 } as {[k: string]: number};;
 
 type PlaceOpts = {
@@ -298,6 +299,9 @@ export class LogicPassEntrances {
     }
     if (this.input.settings.erSecretShrine) {
       shuffledDungeons.add('SS');
+    }
+    if (this.input.settings.erMoon) {
+      shuffledDungeons.add('CTM');
     }
 
     /* Get the transitions and exprs */

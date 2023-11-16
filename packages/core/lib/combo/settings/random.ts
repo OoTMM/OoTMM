@@ -527,6 +527,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
       base.erIkanaCastle = true;
       base.erMajorDungeons = true;
       base.erMinorDungeons = true;
+      base.erMoon = true;
       base.erPirateFortress = true;
       base.erSecretShrine = true;
       base.erSpiderHouses = true;
@@ -547,6 +548,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
       base.erIkanaCastle = booleanWeighted(random, 0.5);
       base.erMajorDungeons = booleanWeighted(random, 0.5);
       base.erMinorDungeons = booleanWeighted(random, 0.5);
+      base.erMoon = booleanWeighted(random, 0.5);
       base.erPirateFortress = booleanWeighted(random, 0.5);
       base.erSecretShrine = booleanWeighted(random, 0.5);
       base.erSpiderHouses = booleanWeighted(random, 0.5);

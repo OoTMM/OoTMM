@@ -21,6 +21,8 @@ export function isEntranceShuffle(settings: Settings) {
     return true;
   if (settings.erGanonTower)
     return true;
+  if (settings.erMoon)
+    return true;
   if (settings.erRegions !== 'none')
     return true;
   if (settings.erIndoorsMajor)
