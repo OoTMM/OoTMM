@@ -56,6 +56,7 @@
   exits:
     "Clock Town South": "can_reset_time"
     "OOT Market": "true"
+    "Clock Tower Roof": "after(NIGHT3_AM_12_00)"
   locations:
     "Clock Town Owl Statue": "has_sticks || has_weapon"
 "Owl Milk Road":
@@ -197,6 +198,7 @@
     "Clock Town South Lower East": "true"
     "Clock Town North": "true"
     "Laundry Pool": "true"
+    "Clock Tower Roof": "after(NIGHT3_AM_12_00)"
     "Owl Clock Town": "true"
   events:
     CLOCK_TOWN_SCRUB: "has(MOON_TEAR)"
@@ -350,6 +352,19 @@
   locations:
     "Clock Town Great Fairy": "has(STRAY_FAIRY_TOWN)"
     "Clock Town Great Fairy Alt": "has(STRAY_FAIRY_TOWN) && (has(MASK_DEKU) || has_mask_goron || has_mask_zora)"
+"Clock Tower Roof":
+  region: CLOCK_TOWER_ROOF
+  events:
+    MAGIC: "(can_play_time || event(MAJORA))"
+  exits:
+    "Moon": "can_play_order && special(MOON)"
+  locations:
+    "Clock Tower Roof Skull Kid Ocarina": "has_weapon_range && (can_play_time || event(MAJORA))"
+    "Clock Tower Roof Skull Kid Song of Time": "has_weapon_range && (can_play_time || event(MAJORA))"
+    "Clock Tower Roof Pot 1": "(can_play_time || event(MAJORA))"
+    "Clock Tower Roof Pot 2": "(can_play_time || event(MAJORA))"
+    "Clock Tower Roof Pot 3": "(can_play_time || event(MAJORA))"
+    "Clock Tower Roof Pot 4": "(can_play_time || event(MAJORA))"
 "Bomb Shop":
   region: ENTRANCE
   events:

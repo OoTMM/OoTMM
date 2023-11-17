@@ -397,7 +397,6 @@ const PRESET_HELL = makeSettings({
   erOneWaysOwls: true,
   erGanonCastle: true,
   erGanonTower: true,
-  erMoon: true,
   specialConds: {
     GANON_BK: {
       count: 266,

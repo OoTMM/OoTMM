@@ -186,8 +186,6 @@ MM_BENEATH_THE_WELL_BACK:                   0x9010
 MM_IKANA_CASTLE_EXTERIOR_FROM_WELL:         0x3400
 MM_PIRATE_FORTRESS:                         0x7000
 MM_GREAT_BAY_FROM_PIRATE_FORTRESS:          0x6850
-MM_CLOCK_TOWER:                             0x2c00
-MM_CLOCK_TOWN_FROM_CLOCK_TOWER:             0xd880
 MM_SWAMP_FROM_ROAD:                         0x8400
 MM_SWAMP_ROAD_FROM_SWAMP:                   0x7a10
 MM_MOUNTAIN_VILLAGE_FROM_PATH:              0x9a60

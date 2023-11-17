@@ -44,7 +44,7 @@ const MM_REGION_NAMES: {[k: string]: string} = {
   'MM_CLOCK_TOWN_WEST': 'West Clock Town',
   'MM_CLOCK_TOWN_EAST': 'East Clock Town',
   'MM_LAUNDRY_POOL': 'Laundry Pool',
-  'MM_CLOCK_TOWER_ROOFTOP': 'Clock Tower Roof',
+  'MM_CLOCK_TOWER_ROOF': 'Clock Tower Roof',
   'MM_STOCK_POT_INN': 'Stock Pot Inn',
   'MM_TERMINA_FIELD': 'Termina Field',
   'MM_ROAD_TO_SWAMP': 'Road to Southern Swamp',

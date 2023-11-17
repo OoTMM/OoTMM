@@ -1360,13 +1360,6 @@ export const SETTINGS = [{
   default: false,
   cond: (x: any) => x.erDungeons !== 'none'
 }, {
-  key: 'erMoon',
-  name: 'Shuffle Clock Tower and Moon with Dungeons',
-  category: 'entrances',
-  type: 'boolean',
-  default: false,
-  cond: (x: any) => x.erDungeons !== 'none'
-}, {
   key: 'erSpiderHouses',
   name: 'Shuffle Spider Houses with Dungeons',
   category: 'entrances',
