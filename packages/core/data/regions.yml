@@ -48,7 +48,7 @@ MM_CLOCK_TOWN_EAST:           0x87
 MM_CLOCK_TOWN_WEST:           0x88
 MM_LAUNDRY_POOL:              0x89
 MM_GIANT_DREAM:               0x8a
-MM_CLOCK_TOWER_ROOF:          0x8b
+MM_CLOCK_TOWER_ROOFTOP:       0x8b
 MM_STOCK_POT_INN:             0x8c
 MM_TERMINA_FIELD:             0x8d
 MM_ROAD_TO_SWAMP:             0x8e

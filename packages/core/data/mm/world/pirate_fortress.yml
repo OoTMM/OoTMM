@@ -2,7 +2,7 @@
   dungeon: PF
   exits:
     "Great Bay Coast Fortress": "has_mask_zora"
-    "Pirate Fortress Entrance": "can_reset_time"
+    "Pirate Fortress Entrance": "cond(setting(erMoon) && trick(MM_MAJORA_LOGIC), (event(MAJORA) && before(NIGHT3_AM_12_00)) || can_play_time, can_reset_time)"
 "Pirate Fortress Entrance":
   dungeon: PF
   exits:

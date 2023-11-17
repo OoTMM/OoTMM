@@ -2,7 +2,7 @@
   dungeon: ACoI
   exits:
     "Ikana Castle Exterior": "true"
-    "Ancient Castle of Ikana Interior": "can_reset_time"
+    "Ancient Castle of Ikana Interior": "cond(setting(erMoon) && trick(MM_MAJORA_LOGIC), (event(MAJORA) && before(NIGHT3_AM_12_00)) || can_play_time, can_reset_time)"
 "Ancient Castle of Ikana Interior":
   dungeon: ACoI
   events:

@@ -73,6 +73,7 @@ void comboGetDungeonExit(EntranceDescr* dst, int dungeonId)
         { 0x6850, 1 }, /* DUNGEONID_PIRATE_FORTRESS */
         {  0x23d, 0 }, /* DUNGEONID_GANON_CASTLE */
         {  0x534, 0 }, /* DUNGEONID_GANON_TOWER */
+        {  0xd880, 0 }, /* DUNGEONID_MOON */
     };
 
     memcpy(dst, &kDungeonExits[dungeonId], sizeof(EntranceDescr));

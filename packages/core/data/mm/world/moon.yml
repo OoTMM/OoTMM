@@ -1,5 +1,19 @@
+"Clock Tower Roof":
+  dungeon: CTM
+  events:
+    MAGIC: "true"
+  exits:
+    "Moon": "can_play_order && special(MOON)"
+    "OOT Market": "false"
+  locations:
+    "Clock Tower Roof Skull Kid Ocarina": "cond(!setting(shufflePotsMm), (has(MASK_DEKU) && (has(MAGIC_UPGRADE) || has(SHARED_MAGIC_UPGRADE))) || has_weapon_range, has_weapon_range) && (can_play_time || event(MAJORA) || setting(erMoon) || trick(MM_TIMELESS_CLOCK))"
+    "Clock Tower Roof Skull Kid Song of Time": "cond(!setting(shufflePotsMm), (has(MASK_DEKU) && (has(MAGIC_UPGRADE) || has(SHARED_MAGIC_UPGRADE))) || has_weapon_range, has_weapon_range) && (can_play_time || event(MAJORA) || setting(erMoon) || trick(MM_TIMELESS_CLOCK))"
+    "Clock Tower Roof Pot 1": "(can_play_time || event(MAJORA) || setting(erMoon) || trick(MM_TIMELESS_CLOCK))"
+    "Clock Tower Roof Pot 2": "(can_play_time || event(MAJORA) || setting(erMoon) || trick(MM_TIMELESS_CLOCK))"
+    "Clock Tower Roof Pot 3": "(can_play_time || event(MAJORA) || setting(erMoon) || trick(MM_TIMELESS_CLOCK))"
+    "Clock Tower Roof Pot 4": "(can_play_time || event(MAJORA) || setting(erMoon) || trick(MM_TIMELESS_CLOCK))"
 "Moon":
-  region: MOON
+  dungeon: MOON
   events:
     MAJORA_PRE_BOSS: "true"
   exits:
@@ -11,7 +25,7 @@
   locations:
     "Moon Fierce Deity Mask": "can_reset_time && masks(20) && event(MOON_TRIAL_DEKU) && event(MOON_TRIAL_GORON) && event(MOON_TRIAL_ZORA) && event(MOON_TRIAL_LINK)"
 "Moon Trial Deku Entrance":
-  region: MOON
+  dungeon: MOON
   exits:
     "Moon": "true"
     "Moon Trial Deku Exit": "has(MASK_DEKU)"
@@ -24,14 +38,14 @@
     "Moon Trial Deku Gossip Mid-Right": "has(MASK_DEKU) || short_hook_anywhere"
     "Moon Trial Deku Gossip Back": "has(MASK_DEKU) || hookshot_anywhere"
 "Moon Trial Deku Exit":
-  region: MOON
+  dungeon: MOON
   exits:
     "Moon": "true"
     "Moon Trial Deku Entrance": "has(MASK_DEKU)"
   events:
     MOON_TRIAL_DEKU: "true"
 "Moon Trial Goron Entrance":
-  region: MOON
+  dungeon: MOON
   exits:
     "Moon": "true"
     "Moon Trial Goron Exit": "goron_fast_roll || hookshot_anywhere"
@@ -59,14 +73,14 @@
     "Moon Trial Goron Gossip West Right": "goron_fast_roll || hookshot_anywhere"
     "Moon Trial Goron Gossip By Heart Piece": "goron_fast_roll || hookshot_anywhere"
 "Moon Trial Goron Exit":
-  region: MOON
+  dungeon: MOON
   exits:
     "Moon": "true"
     "Moon Trial Goron Entrance": "goron_fast_roll"
   events:
     MOON_TRIAL_GORON: "true"
 "Moon Trial Zora":
-  region: MOON
+  dungeon: MOON
   exits:
     "Moon": "true"
   events:
@@ -80,7 +94,7 @@
     "Moon Trial Zora Gossip Middle Right": "has_mask_zora"
     "Moon Trial Zora Gossip Outer Right": "has_mask_zora"
 "Moon Trial Link Entrance":
-  region: MOON
+  dungeon: MOON
   exits:
     "Moon": "true"
     "Moon Trial Link Dinalfos Fight": "true"
@@ -94,33 +108,33 @@
     "Moon Trial Link Pot 7": "true"
     "Moon Trial Link Pot 8": "true"
 "Moon Trial Link Dinalfos Fight":
-  region: MOON
+  dungeon: MOON
   exits:
     "Moon Trial Link Entrance": "soul_lizalfos_dinalfos && (can_fight || can_use_deku_bubble || has_arrows)"
     "Moon Trial Link Rest 1": "soul_lizalfos_dinalfos && (can_fight || can_use_deku_bubble || has_arrows)"
 "Moon Trial Link Rest 1":
-  region: MOON
+  dungeon: MOON
   exits:
     "Moon Trial Link Dinalfos Fight": "true"
     "Moon Trial Link Garo Fight": "true"
   gossip:
     "Moon Trial Link Gossip 1": "true"
 "Moon Trial Link Garo Fight":
-  region: MOON
+  dungeon: MOON
   exits:
     "Moon Trial Link Rest 1": "soul_enemy(SOUL_ENEMY_GARO) && (has_weapon || has_mask_goron || can_use_deku_bubble || has_arrows)"
     "Moon Trial Link Rest 2": "soul_enemy(SOUL_ENEMY_GARO) && (has_weapon || has_mask_goron || can_use_deku_bubble || has_arrows) && can_hookshot_short"
   locations:
     "Moon Trial Link Garo Master Chest": "soul_enemy(SOUL_ENEMY_GARO) && (has_weapon || has_mask_goron || can_use_deku_bubble || has_arrows) && can_hookshot_short"
 "Moon Trial Link Rest 2":
-  region: MOON
+  dungeon: MOON
   exits:
     "Moon Trial Link Garo Fight": "true"
     "Moon Trial Link Iron Knuckle Fight": "true"
   gossip:
     "Moon Trial Link Gossip 2": "true"
 "Moon Trial Link Iron Knuckle Fight":
-  region: MOON
+  dungeon: MOON
   exits:
     "Moon Trial Link Rest 2": "soul_iron_knuckle && (has_weapon || has_mask_goron || has_bombs || has_bombchu || (has(MASK_BLAST) && masks(5)))"
     "Moon Trial Link Rest 3": "soul_iron_knuckle && (has_weapon || has_mask_goron || has_bombs || has_bombchu || (has(MASK_BLAST) && masks(5))) && ((has_bombchu && has_arrows) || short_hook_anywhere)"
@@ -130,7 +144,7 @@
     "Moon Trial Link Gossip Left": "short_hook_anywhere || (has_bombchu && has_arrows)"
     "Moon Trial Link Gossip Right": "short_hook_anywhere || (has_bombchu && has_arrows)"
 "Moon Trial Link Rest 3":
-  region: MOON
+  dungeon: MOON
   exits:
     "Moon Trial Link Iron Knuckle Fight": "true"
     "Moon Trial Link Exit": "(has_bombchu || (short_hook_anywhere && has(MASK_BLAST) && masks(5))) && can_use_fire_arrows"
@@ -139,14 +153,14 @@
   gossip:
     "Moon Trial Link Gossip Last": "true"
 "Moon Trial Link Exit":
-  region: MOON
+  dungeon: MOON
   exits:
     "Moon Trial Link Rest 3": "true"
     "Moon": "true"
   events:
     MOON_TRIAL_LINK: "true"
 "Moon Boss":
-  region: MOON
+  dungeon: MOON
   events:
     MAJORA_PHASE_1: "has_arrows || has_mask_zora || (has(MASK_FIERCE_DEITY) && has_magic)"
     MAJORA: "!is_goal_triforce && event(MAJORA_PHASE_1) && (has_weapon || has_mask_zora || (has(MASK_FIERCE_DEITY) && has_magic))"
