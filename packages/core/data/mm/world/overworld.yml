@@ -56,6 +56,7 @@
   exits:
     "Clock Town South": "can_reset_time"
     "OOT Market": "true"
+    "Clock Tower Platform": "true"
   locations:
     "Clock Town Owl Statue": "has_sticks || has_weapon"
 "Owl Milk Road":
@@ -181,11 +182,11 @@
   exits:
     "GLOBAL": "true"
     "Clock Town South": "can_reset_time"
-    "Clock Town Platform": "true"
+    "Clock Tower Platform": "true"
     "Owl Clock Town": "true"
   locations:
     "Initial Song of Healing": "true"
-"Clock Town Platform":
+"Clock Tower Platform":
   region: CLOCK_TOWN_SOUTH
   exits:
     "Clock Town South": "can_reset_time"
