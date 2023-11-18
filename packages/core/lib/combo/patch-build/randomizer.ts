@@ -640,7 +640,6 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     ER_MAJOR_DUNGEONS: settings.erMajorDungeons,
     ER_BOSS: settings.erBoss !== 'none',
     ER_ANY: isEntranceShuffle(settings),
-    ER_MOON: settings.erMoon,
     SHARED_BOWS: settings.sharedBows,
     SHARED_BOMB_BAGS: settings.sharedBombBags,
     SHARED_MAGIC: settings.sharedMagic,

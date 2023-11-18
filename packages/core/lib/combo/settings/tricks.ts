@@ -87,7 +87,6 @@ export const TRICKS = {
   MM_GBT_CENTRAL_GEYSER: "GBT Central Room without Zora using Fire & Ice Arrows",
   MM_BANK_ONE_WALLET: "Bank Rewards Require One Less Wallet",
   MM_BANK_NO_WALLET: "Bank Rewards Require No Wallets",
-  MM_TIMELESS_CLOCK: "Clock Tower Items do not Require Time Reset",
 };
 
 export type Trick = keyof typeof TRICKS;

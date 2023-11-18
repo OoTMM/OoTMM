@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/dma.h>
+#include <combo/dungeon.h>
 #include <combo/menu.h>
 #include <combo/item.h>
 
@@ -226,6 +227,15 @@ static void menuSave(GameState_Play* play)
     case SCE_MM_MOON_ZORA:
     case SCE_MM_LAIR_MAJORA:
         return;
+    case SCE_MM_CLOCK_TOWER_ROOFTOP:
+        if (gComboData.dungeons[DUNGEONID_MOON] == DUNGEONID_MOON)
+        {
+            return;
+        }
+        else
+        {
+            break;
+        }
     }
 
     /* Save the game */

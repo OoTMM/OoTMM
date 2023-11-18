@@ -181,10 +181,18 @@
   exits:
     "GLOBAL": "true"
     "Clock Town South": "can_reset_time"
-    "Clock Tower Roof": "after(NIGHT3_AM_12_00)"
+    "Clock Town Platform": "true"
     "Owl Clock Town": "true"
   locations:
     "Initial Song of Healing": "true"
+"Clock Town Platform":
+  region: CLOCK_TOWN_SOUTH
+  exits:
+    "Clock Town South": "can_reset_time"
+    "Clock Tower Roof": "after(NIGHT3_AM_12_00)"
+    "Owl Clock Town": "true"
+    "OOT Market": "true"
+  locations:
     "Clock Town Platform HP": "true"
 "Clock Town South":
   region: CLOCK_TOWN_SOUTH
