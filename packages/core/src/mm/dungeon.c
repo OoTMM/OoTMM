@@ -37,6 +37,7 @@ int comboCurrentDungeon(GameState_Play* play)
     case SCE_MM_MOON_GORON:
     case SCE_MM_MOON_ZORA:
     case SCE_MM_MOON_LINK:
+    case SCE_MM_LAIR_MAJORA:
         return DUNGEONID_MOON;
 
 
