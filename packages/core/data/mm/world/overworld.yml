@@ -199,6 +199,7 @@
   region: CLOCK_TOWN_SOUTH
   exits:
     "OOT Market": "true"
+    "Clock Tower Platform": "true"
     "Termina Field": "true"
     "Clock Town South Upper West": "true"
     "Clock Town South Lower West": "true"
@@ -213,7 +214,6 @@
   locations:
     "Clock Town South Chest Lower": "can_hookshot || short_hook_anywhere || (has(MASK_DEKU) && event(CLOCK_TOWN_SCRUB)) || trick(MM_SCT_NOTHING) || can_goron_bomb_jump"
     "Clock Town South Chest Upper": "(can_hookshot || short_hook_anywhere || (has(MASK_DEKU) && event(CLOCK_TOWN_SCRUB)) || (can_goron_bomb_jump && can_hookshot_short)) && final_day"
-    "Clock Town Platform HP": "true"
     "Clock Town Business Scrub": "event(CLOCK_TOWN_SCRUB)"
     "Clock Town Post Box": "has(MASK_POSTMAN)"
 "Clock Town South Upper West":
