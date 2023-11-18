@@ -180,7 +180,6 @@ export const DUNGEONS_REGIONS: { [k: string]: string } = {
   BtWE: "MM_BENEATH_THE_WELL",
   PF: "MM_PIRATE_FORTRESS_EXTERIOR",
   CTM: "MM_CLOCK_TOWER_ROOFTOP",
-  MOON: "MM_MOON",
   TCG: "ENTRANCE",
 };
 

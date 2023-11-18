@@ -125,6 +125,7 @@ const worldMm = {
   SSH: worldMmSwampSpiderHouse,
   OSH: worldMmOceanSpiderHouse,
   CTM: worldMmMoon,
+  MOON: worldMmMoon,
 };
 
 export const DATA_WORLD = {
