@@ -78,7 +78,7 @@
   exits:
     "Dodongo Cavern Main": "true"
     "Dodongo Cavern Compass Room": "true"
-    "Dodongo Cavern Stairs Top": "has_bombflowers || can_use_din || has_blue_fire_arrows_mudwall || climb_anywhere || hookshot_anywhere"
+    "Dodongo Cavern Stairs Top": "has_bombflowers || can_use_din || climb_anywhere || hookshot_anywhere"
 "Dodongo Cavern Stairs Top":
   dungeon: DC
   exits:
