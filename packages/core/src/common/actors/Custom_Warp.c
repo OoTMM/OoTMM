@@ -18,6 +18,7 @@ static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
 #define SWITCH_SPRING       0
 #define SWITCH_SWAMP_CLEAR  1
 #define SWITCH_COAST_CLEAR  2
+#define SWITCH_OPEN_MOON    3
 
 static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
 {
@@ -37,6 +38,10 @@ static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
     case SWITCH_COAST_CLEAR:
         MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_GB);
         play->nextEntrance = ENTR_MM_GREAT_BAY_COAST_FROM_LABORATORY;
+        break;
+    case SWITCH_OPEN_MOON:
+        play->nextEntrance = 0xc800;
+        gSaveContext.timerStates[3] = 0;
         break;
     }
 }
@@ -143,6 +148,14 @@ void comboSpawnCustomWarps(GameState_Play* play)
         x = -3020.f;
         y = 240.f;
         z = 3921.f;
+    }
+
+    if (comboConfig(CFG_MM_OPEN_MOON) && comboSpecialCond(SPECIAL_MOON) && play->sceneId == SCE_MM_CLOCK_TOWER_ROOFTOP)
+    {
+        variable = SWITCH_OPEN_MOON;
+        x = 212.f;
+        y = 30.f;
+        z = 0.f;
     }
 #endif
 
