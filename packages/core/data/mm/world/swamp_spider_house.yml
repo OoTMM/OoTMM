@@ -2,7 +2,7 @@
   dungeon: SSH
   exits:
     "Near Swamp Spider House": "true"
-    "Swamp Spider House Main": "can_reset_time"
+    "Swamp Spider House Main": "cond(setting(erMoon) && trick(MM_MAJORA_LOGIC), (event(MAJORA) && before(NIGHT3_AM_12_00)) || can_play_time, can_reset_time)"
   locations:
     "Swamp Spider House Mask of Truth": "has(GS_TOKEN_SWAMP, 30)"
 "Swamp Spider House Main":

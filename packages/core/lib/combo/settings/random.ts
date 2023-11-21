@@ -524,6 +524,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
       base.erBeneathWell = true;
       base.erGanonCastle = true;
       base.erGanonTower = true;
+      base.erMoon = true;
       base.erIkanaCastle = true;
       base.erMajorDungeons = true;
       base.erMinorDungeons = true;
@@ -544,6 +545,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
       base.erBeneathWell = booleanWeighted(random, 0.5);
       base.erGanonCastle = booleanWeighted(random, 0.5);
       base.erGanonTower = booleanWeighted(random, 0.5);
+      base.erMoon = booleanWeighted(random, 0.5);
       base.erIkanaCastle = booleanWeighted(random, 0.5);
       base.erMajorDungeons = booleanWeighted(random, 0.5);
       base.erMinorDungeons = booleanWeighted(random, 0.5);

@@ -48,6 +48,8 @@ export const TRICKS = {
   OOT_GTG_CHILD_TT: "Enter Gerudo Training Grounds as Child with Time Travel",
   OOT_REVERSE_DAMPE: "Navigate Dampe's Grave in Reverse",
   OOT_GANON_FAIRY_TT: "Ganon's Great Fairy with Age Swap and without Gold Gauntlets",
+  OOT_GANON_CASTLE_ENTRY: "Enter Ganon's Castle with Longshot Anywhere",
+  OOT_SHADOW_TEMPLE_STICKS: "Enter Shadow Temple with Sticks & Fire Arrows",
   MM_LENS: "Fewer Lens Requirements (MM)",
   MM_PALACE_BEAN_SKIP: "Skip Planting Beans in Deku Palace",
   MM_DARMANI_WALL: "Climb Mountain Village Wall Blind",
@@ -85,8 +87,6 @@ export const TRICKS = {
   MM_GBT_CENTRAL_GEYSER: "GBT Central Room without Zora using Fire & Ice Arrows",
   MM_BANK_ONE_WALLET: "Bank Rewards Require One Less Wallet",
   MM_BANK_NO_WALLET: "Bank Rewards Require No Wallets",
-  OOT_GANON_CASTLE_ENTRY: "Enter Ganon's Castle with Longshot Anywhere",
-  OOT_SHADOW_TEMPLE_STICKS: "Enter Shadow Temple with Sticks & Fire Arrows",
 };
 
 export type Trick = keyof typeof TRICKS;

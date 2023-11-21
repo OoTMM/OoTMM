@@ -1,7 +1,7 @@
 "Snowhead Temple":
   dungeon: SH
   exits:
-    "Snowhead Temple Entrance": "can_reset_time"
+    "Snowhead Temple Entrance": "can_reset_time && cond(setting(erMoon), before(NIGHT3_AM_12_00), true)"
     "Snowhead": "true"
 "Snowhead Temple Entrance":
   dungeon: SH

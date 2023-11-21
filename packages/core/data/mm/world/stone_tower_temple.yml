@@ -1,7 +1,7 @@
 "Stone Tower Temple":
   dungeon: ST
   exits:
-    "Stone Tower Temple Entrance": "can_reset_time"
+    "Stone Tower Temple Entrance": "cond(setting(erMoon) && trick(MM_MAJORA_LOGIC), (event(MAJORA) && before(NIGHT3_AM_12_00)) || can_play_time, can_reset_time)"
     "Stone Tower Front of Temple": "true"
 "Stone Tower Temple Entrance":
   dungeon: ST

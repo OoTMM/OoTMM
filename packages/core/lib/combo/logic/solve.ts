@@ -196,6 +196,7 @@ const DUNGEON_ITEMS = {
   BtWE: [],
   ACoI: [],
   SS: [],
+  Moon: [],
 }
 
 const REWARDS_DUNGEONS = [

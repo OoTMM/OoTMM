@@ -2,7 +2,7 @@
   dungeon: WF
   exits:
     "Woodfall Front of Temple": "true"
-    "Woodfall Temple Entrance": "can_reset_time"
+    "Woodfall Temple Entrance": "cond(setting(erMoon) && trick(MM_MAJORA_LOGIC), (event(MAJORA) && before(NIGHT3_AM_12_00)) || can_play_time, can_reset_time)"
 "Woodfall Temple Entrance":
   dungeon: WF
   events:

@@ -1,7 +1,7 @@
 "Stone Tower Temple Inverted":
   dungeon: IST
   exits:
-    "Stone Tower Temple Inverted Entrance": "can_reset_time"
+    "Stone Tower Temple Inverted Entrance": "cond(setting(erMoon) && trick(MM_MAJORA_LOGIC), (event(MAJORA) && before(NIGHT3_AM_12_00)) || can_play_time, can_reset_time)"
     "Stone Tower Top Inverted": "true"
 "Stone Tower Temple Inverted Entrance":
   dungeon: IST

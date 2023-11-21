@@ -1,7 +1,7 @@
 "Great Bay Temple":
   dungeon: GB
   exits:
-    "Great Bay Temple Entrance": "can_reset_time"
+    "Great Bay Temple Entrance": "cond(setting(erMoon) && trick(MM_MAJORA_LOGIC), (event(MAJORA) && before(NIGHT3_AM_12_00)) || can_play_time, can_reset_time)"
     "Zora Cape Peninsula": "can_hookshot || short_hook_anywhere"
 "Great Bay Temple Entrance":
   dungeon: GB

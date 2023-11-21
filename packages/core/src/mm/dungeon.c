@@ -31,6 +31,14 @@ int comboCurrentDungeon(GameState_Play* play)
         return DUNGEONID_IKANA_CASTLE;
     case SCE_MM_SECRET_SHRINE:
         return DUNGEONID_SECRET_SHRINE;
+    case SCE_MM_CLOCK_TOWER_ROOFTOP:
+    case SCE_MM_MOON:
+    case SCE_MM_MOON_DEKU:
+    case SCE_MM_MOON_GORON:
+    case SCE_MM_MOON_ZORA:
+    case SCE_MM_MOON_LINK:
+    case SCE_MM_LAIR_MAJORA:
+        return DUNGEONID_MOON;
 
     /* Boss lairs */
     case SCE_MM_LAIR_ODOLWA:
