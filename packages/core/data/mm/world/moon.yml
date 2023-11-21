@@ -1,5 +1,5 @@
 "Clock Tower Roof":
-  dungeon: CTM
+  dungeon: Moon
   events:
     MAGIC: "true"
   exits:

@@ -50,7 +50,7 @@ const DUNGEON_INDEX = {
   PF: 22,
   Ganon: 23,
   Tower: 24,
-  CTM: 25,
+  Moon: 25,
 } as {[k: string]: number};;
 
 type PlaceOpts = {
