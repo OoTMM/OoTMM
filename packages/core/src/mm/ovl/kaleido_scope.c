@@ -215,9 +215,8 @@ static void KaleidoScope_DrawDungeonUnk2(void* unk)
 PATCH_CALL(0x80822a00, KaleidoScope_DrawDungeonUnk2);
 PATCH_CALL(0x80822f68, KaleidoScope_DrawDungeonUnk2);
 
-static void menuSave(GameState_Play* play)
+static int canSave(GameState_Play* play)
 {
-    /* Can't save in some scenes */
     switch (play->sceneId)
     {
     case SCE_MM_MOON:
@@ -226,17 +225,19 @@ static void menuSave(GameState_Play* play)
     case SCE_MM_MOON_LINK:
     case SCE_MM_MOON_ZORA:
     case SCE_MM_LAIR_MAJORA:
-        return;
+        return 0;
     case SCE_MM_CLOCK_TOWER_ROOFTOP:
-        if (gComboData.dungeons[DUNGEONID_MOON] == DUNGEONID_MOON)
-        {
-            return;
-        }
-        else
-        {
-            break;
-        }
+        return !!comboConfig(CFG_ER_MOON);
+    default:
+        return 1;
     }
+}
+
+static void menuSave(GameState_Play* play)
+{
+    /* Can't save in some scenes */
+    if (!canSave(play))
+        return;
 
     /* Save the game */
     comboSave(play, SF_OWL);

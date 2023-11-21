@@ -40,7 +40,6 @@ int comboCurrentDungeon(GameState_Play* play)
     case SCE_MM_LAIR_MAJORA:
         return DUNGEONID_MOON;
 
-
     /* Boss lairs */
     case SCE_MM_LAIR_ODOLWA:
         return gComboData.boss[BOSSID_ODOLWA];
