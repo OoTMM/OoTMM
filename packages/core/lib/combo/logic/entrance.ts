@@ -301,7 +301,7 @@ export class LogicPassEntrances {
       shuffledDungeons.add('SS');
     }
     if (this.input.settings.erMoon) {
-      shuffledDungeons.add('CTM');
+      shuffledDungeons.add('Moon');
     }
 
     /* Get the transitions and exprs */
