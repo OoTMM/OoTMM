@@ -1056,7 +1056,7 @@
   exits:
     "Kakariko": "true"
   locations:
-    "Kakariko Grotto Front": "soul_redead_gibdo && (has_weapon || can_use_sticks || can_use_din || can_hammer)"
+    "Kakariko Grotto Front": "soul_redead_gibdo && (has_weapon || can_use_sticks || can_use_din)"
 "Kakariko Generic Grotto":
   region: ENTRANCE
   age_change: false
