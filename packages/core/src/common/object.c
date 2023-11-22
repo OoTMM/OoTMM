@@ -338,3 +338,100 @@ void comboObjectsGC(void)
         }
     }
 }
+
+#if defined(GAME_OOT)
+
+#define EX_OBJECT_SLOTS_NORMAL      19
+#define EX_OBJECT_SLOTS_EXTENDED    (128 - EX_OBJECT_SLOTS_NORMAL)
+
+static u16 sExObjectsIds[EX_OBJECT_SLOTS_EXTENDED];
+static void* sExObjectsAddr[EX_OBJECT_SLOTS_EXTENDED];
+
+void comboExObjectsReset(void)
+{
+    u64 mask;
+
+    mask = osSetIntMask(1);
+    for (int i = 0; i < EX_OBJECT_SLOTS_EXTENDED; ++i)
+    {
+        if (sExObjectsAddr[i])
+        {
+            free(sExObjectsAddr[i]);
+            sExObjectsAddr[i] = NULL;
+        }
+    }
+    memset(sExObjectsIds, 0xff, sizeof(sExObjectsIds));
+    osSetIntMask(mask);
+}
+
+int comboGetObjectSlot(ObjectContext* objectCtx, u16 objectId)
+{
+    u64 mask;
+    int slot;
+    int freeSlot;
+    void* data;
+    u32 size;
+
+    /* Forward */
+    slot = GetObjectSlot(objectCtx, objectId);
+    if (slot >= 0)
+        return slot;
+
+    /* Sanity checks */
+    switch (objectId)
+    {
+    case 0x00:
+    case 0x01:
+    case 0x02:
+    case 0x03:
+    case 0x14:
+    case 0x15:
+        return -1;
+    }
+
+    slot = -1;
+    freeSlot = -1;
+    mask = osSetIntMask(1);
+
+    for (int i = 0; i < EX_OBJECT_SLOTS_EXTENDED; ++i)
+    {
+        if (sExObjectsIds[i] == objectId)
+        {
+            slot = EX_OBJECT_SLOTS_NORMAL + i;
+            break;
+        }
+
+        if (sExObjectsIds[i] == 0xffff && freeSlot == -1)
+        {
+            freeSlot = i;
+        }
+    }
+
+    /* Load the object */
+    if (slot == -1 && freeSlot != -1)
+    {
+        size = comboLoadObject(NULL, objectId);
+        data = malloc(size);
+        if (data)
+        {
+            comboLoadObject(data, objectId);
+            sExObjectsIds[freeSlot] = objectId;
+            sExObjectsAddr[freeSlot] = data;
+            slot = EX_OBJECT_SLOTS_NORMAL + freeSlot;
+        }
+    }
+
+    osSetIntMask(mask);
+    return slot;
+}
+
+int comboIsObjectSlotLoaded(ObjectContext* objectCtx, int slot)
+{
+    if (slot < EX_OBJECT_SLOTS_NORMAL)
+        return IsObjectSlotLoaded(objectCtx, slot);
+    else
+        //return (sExObjectsAddr[slot - EX_OBJECT_SLOTS_NORMAL] != NULL);
+        return 0;
+}
+
+#endif

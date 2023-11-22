@@ -243,6 +243,7 @@ void    comboObjectsGC(void);
 void*   comboGetObject(u16 objectId);
 u32     comboLoadObject(void* buffer, u16 objectId);
 void    comboLoadCustomKeep(void);
+void    comboExObjectsReset(void);
 
 /* Custom_Warp */
 void comboSpawnCustomWarps(GameState_Play*);

@@ -260,6 +260,6 @@ Actor* comboSpawnActor(void* unk, GameState_Play *play, short actorId, float x, 
 
     actor = SpawnActor(unk, play, actorId, x, y, z, rx, ry, rz, variable);
     if (actorId == AC_ARMS_HOOK && gSave.age == AGE_ADULT)
-        actor->objTableIndex = GetObject(&play->objectCtx, 0x14);
+        actor->objTableIndex = GetObjectSlot(&play->objectCtx, 0x14);
     return actor;
 }

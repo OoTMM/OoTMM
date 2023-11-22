@@ -75,7 +75,8 @@ IsSceneValidEpona = 0x8005a3c0;
 _SpawnActor = 0x80025110;
 gActorOvl = 0x800e8530;
 LoadObject = 0x800812f0;
-GetObject = 0x80081628;
+_GetObjectSlot = 0x80081628;
+_IsObjectSlotLoaded = 0x80081688;
 ActorSetScale = 0x80020f88;
 ActorSetUnk = 0x80020f04;
 
