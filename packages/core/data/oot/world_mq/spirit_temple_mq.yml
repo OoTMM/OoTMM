@@ -30,16 +30,16 @@
   events:
     SPIRIT_PARADOX: "can_hammer"
   locations:
-    "MQ Spirit Temple Map Chest": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (can_use_sticks || has_weapon || (has_explosives && has_nuts))"
-    "MQ Spirit Temple Map Room Back Chest": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && soul_redead_gibdo && soul_enemy(SOUL_ENEMY_STALFOS) && soul_keese && soul_enemy(SOUL_ENEMY_ANUBIS) && has_weapon && has_bombchu && can_use_slingshot && can_use_din"
+    "MQ Spirit Temple Map Chest": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (!setting(restoreBrokenActors) || soul_enemy(SOUL_ENEMY_KEESE)) && (can_use_sticks || has_weapon || (has_explosives && has_nuts))"
+    "MQ Spirit Temple Map Room Back Chest": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (!setting(restoreBrokenActors) || soul_enemy(SOUL_ENEMY_KEESE)) && soul_redead_gibdo && soul_enemy(SOUL_ENEMY_STALFOS) && soul_keese && soul_enemy(SOUL_ENEMY_ANUBIS) && has_weapon && has_bombchu && can_use_slingshot && can_use_din"
     "MQ Spirit Temple Paradox Chest": "event(SPIRIT_PARADOX)"
     "MQ Spirit Temple Pot Child Entrance": "true"
-    "MQ Spirit Temple Pot Child Boulders 1": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (can_use_sticks || has_weapon || (has_explosives && has_nuts)) && has_bombchu && can_use_slingshot"
-    "MQ Spirit Temple Pot Child Boulders 2": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (can_use_sticks || has_weapon || (has_explosives && has_nuts)) && has_bombchu && can_use_slingshot"
-    "MQ Spirit Temple Pot Child Back 1": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && soul_redead_gibdo && soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon && has_bombchu && can_use_slingshot"
-    "MQ Spirit Temple Pot Child Back 2": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && soul_redead_gibdo && soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon && has_bombchu && can_use_slingshot"
-    "MQ Spirit Temple Pot Child Back 3": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && soul_redead_gibdo && soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon && has_bombchu && can_use_slingshot"
-    "MQ Spirit Temple Pot Child Back 4": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && soul_redead_gibdo && soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon && has_bombchu && can_use_slingshot"
+    "MQ Spirit Temple Pot Child Boulders 1": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (!setting(restoreBrokenActors) || soul_enemy(SOUL_ENEMY_KEESE)) && (can_use_sticks || has_weapon || (has_explosives && has_nuts)) && has_bombchu && can_use_slingshot"
+    "MQ Spirit Temple Pot Child Boulders 2": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (!setting(restoreBrokenActors) || soul_enemy(SOUL_ENEMY_KEESE)) && (can_use_sticks || has_weapon || (has_explosives && has_nuts)) && has_bombchu && can_use_slingshot"
+    "MQ Spirit Temple Pot Child Back 1": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (!setting(restoreBrokenActors) || soul_enemy(SOUL_ENEMY_KEESE)) && soul_redead_gibdo && soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon && has_bombchu && can_use_slingshot"
+    "MQ Spirit Temple Pot Child Back 2": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (!setting(restoreBrokenActors) || soul_enemy(SOUL_ENEMY_KEESE)) && soul_redead_gibdo && soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon && has_bombchu && can_use_slingshot"
+    "MQ Spirit Temple Pot Child Back 3": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (!setting(restoreBrokenActors) || soul_enemy(SOUL_ENEMY_KEESE)) && soul_redead_gibdo && soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon && has_bombchu && can_use_slingshot"
+    "MQ Spirit Temple Pot Child Back 4": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (!setting(restoreBrokenActors) || soul_enemy(SOUL_ENEMY_KEESE)) && soul_redead_gibdo && soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon && has_bombchu && can_use_slingshot"
 "Spirit Temple Child Upper":
 #All paths into this room guarantee explosives.
   dungeon: Spirit
