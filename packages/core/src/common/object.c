@@ -338,3 +338,136 @@ void comboObjectsGC(void)
         }
     }
 }
+
+#if defined(GAME_OOT)
+
+#define EX_OBJECT_SLOTS_NORMAL      19
+#define EX_OBJECT_SLOTS_TOTAL       128
+#define EX_OBJECT_SLOTS_EXTENDED    (EX_OBJECT_SLOTS_TOTAL - EX_OBJECT_SLOTS_NORMAL)
+
+static u16 sExObjectsIds[EX_OBJECT_SLOTS_EXTENDED];
+void* gExObjectsAddr[EX_OBJECT_SLOTS_TOTAL];
+
+void comboExObjectsReset(void)
+{
+    u64 mask;
+
+    mask = osSetIntMask(1);
+    for (int i = 0; i < EX_OBJECT_SLOTS_EXTENDED; ++i)
+    {
+        if (gExObjectsAddr[EX_OBJECT_SLOTS_NORMAL + i])
+        {
+            free(gExObjectsAddr[EX_OBJECT_SLOTS_NORMAL + i]);
+            gExObjectsAddr[EX_OBJECT_SLOTS_NORMAL + i] = NULL;
+        }
+    }
+    memset(sExObjectsIds, 0xff, sizeof(sExObjectsIds));
+    osSetIntMask(mask);
+}
+
+int comboGetObjectSlot(ObjectContext* objectCtx, u16 objectId)
+{
+    u64 mask;
+    int slot;
+    int freeSlot;
+    void* data;
+    u32 size;
+
+    /* Forward */
+    slot = GetObjectSlot(objectCtx, objectId);
+    if (slot >= 0)
+        return slot;
+
+    /* Sanity checks */
+    switch (objectId)
+    {
+    case 0x00:
+    case 0x01:
+    case 0x02:
+    case 0x03:
+    case 0x14:
+    case 0x15:
+        return -1;
+    }
+
+    slot = -1;
+    freeSlot = -1;
+    mask = osSetIntMask(1);
+
+    for (int i = 0; i < EX_OBJECT_SLOTS_EXTENDED; ++i)
+    {
+        if (sExObjectsIds[i] == objectId)
+        {
+            slot = EX_OBJECT_SLOTS_NORMAL + i;
+            break;
+        }
+
+        if (sExObjectsIds[i] == 0xffff && freeSlot == -1)
+        {
+            freeSlot = i;
+        }
+    }
+
+    /* Load the object */
+    if (slot == -1 && freeSlot != -1)
+    {
+        size = comboLoadObject(NULL, objectId);
+        data = malloc(size);
+        if (data)
+        {
+            comboLoadObject(data, objectId);
+            sExObjectsIds[freeSlot] = objectId;
+            gExObjectsAddr[EX_OBJECT_SLOTS_NORMAL + freeSlot] = data;
+            slot = EX_OBJECT_SLOTS_NORMAL + freeSlot;
+        }
+    }
+
+    osSetIntMask(mask);
+    return slot;
+}
+
+int comboIsObjectSlotLoaded(ObjectContext* objectCtx, int slot)
+{
+    if (slot < EX_OBJECT_SLOTS_NORMAL)
+        return IsObjectSlotLoaded(objectCtx, slot);
+    else
+        return (gExObjectsAddr[slot] != NULL);
+        //return 0;
+}
+
+static void comboActorSetObjectSegment(GameState_Play* play, Actor* actor)
+{
+    int slot;
+    void* segment;
+
+    slot = actor->objTableIndex;
+    if (slot < EX_OBJECT_SLOTS_NORMAL)
+        segment = play->objectCtx.status[actor->objTableIndex].segment;
+    else
+        segment = gExObjectsAddr[slot];
+    segment = (void*)((u32)segment - 0x80000000);
+
+    gSegments[6] = (u32)segment;
+}
+
+PATCH_FUNC(0x80020fa4, comboActorSetObjectSegment);
+
+static void comboActorSetObjectSegmentWithRSP(GameState_Play* play, Actor* actor)
+{
+    comboActorSetObjectSegment(play, actor);
+
+    OPEN_DISPS(play->gs.gfx);
+    gSPSegment(POLY_OPA_DISP++, 0x06, gSegments[6] + 0x80000000);
+    gSPSegment(POLY_XLU_DISP++, 0x06, gSegments[6] + 0x80000000);
+    CLOSE_DISPS();
+}
+
+PATCH_CALL(0x80024394, comboActorSetObjectSegmentWithRSP);
+
+void comboAfterRoomObjectLoad(void)
+{
+    for (int i = 0; i < EX_OBJECT_SLOTS_NORMAL; ++i)
+        gExObjectsAddr[i] = gPlay->objectCtx.status[i].segment;
+}
+
+#endif

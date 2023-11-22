@@ -58,6 +58,23 @@ typedef struct
 }
 MqPolyTypePatch;
 
+typedef struct
+{
+    u8  dungeonId;
+    u8  roomId;
+    u16 actorIndex;
+}
+MqBrokenActor;
+
+static const MqBrokenActor kMqBrokenActors[] = {
+    { 0x1, 0x9, 0x0 },
+    { 0x1, 0xa, 0x6 },
+    { 0x2, 0x7, 0x1 },
+    { 0x6, 0x1, 0x2 },
+    { 0x6, 0x1, 0x3 },
+    { 0x6, 0x17, 0x0 },
+};
+
 #define ROOM_ACTORS_MAX     64
 #define ROOM_OBJECTS_MAX    15
 #define ROOM_BUFFER_SIZE    (0x10 * ROOM_ACTORS_MAX + 2 * ROOM_OBJECTS_MAX)
@@ -380,6 +397,20 @@ static void loadMqRoomMaybe(GameState_Play* play)
             break;
         }
         roomHeader++;
+    }
+
+    /* Remove broken actors */
+    if (comboConfig(CFG_NO_BROKEN_ACTORS))
+    {
+        for (int i = 0; i < ARRAY_SIZE(kMqBrokenActors); ++i)
+        {
+            const MqBrokenActor* ba = &kMqBrokenActors[i];
+
+            if (ba->dungeonId == mqHeader.dungeonId && ba->roomId == mqHeader.roomId)
+            {
+                *(u16*)(sMqBufferRoomPtr + mqHeader.actorOffset + 0x10 * ba->actorIndex) = 0xffff;
+            }
+        }
     }
 }
 

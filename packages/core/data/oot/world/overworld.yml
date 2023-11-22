@@ -664,8 +664,8 @@
     "Hyrule Castle Grass 1": "can_cut_grass"
     "Hyrule Castle Grass 2": "can_cut_grass"
     # These pots fail to load
-    #"Hyrule Castle Pot 1": "true"
-    #"Hyrule Castle Pot 2": "true"
+    "Hyrule Castle Pot 1": "true"
+    "Hyrule Castle Pot 2": "true"
   gossip:
     "Hyrule Castle Gossip After Climb": "true"
     "Hyrule Castle Gossip Before Moat": "true"
@@ -1492,8 +1492,8 @@
     "Lake Hylia GS Soil": "gs_soil && can_damage_skull"
     "Lake Hylia GS Big Tree": "is_adult && gs_night && (can_longshot || climb_anywhere)"
     # These pots do exist in the vanilla game but they fail to load
-    #"Lake Hylia Pot 1": "is_child"
-    #"Lake Hylia Pot 2": "is_child"
+    "Lake Hylia Pot 1": "is_child"
+    "Lake Hylia Pot 2": "is_child"
     "Lake Hylia Grass 1": "can_cut_grass"
     "Lake Hylia Grass 2": "can_cut_grass"
     "Lake Hylia Grass Child 1": "is_child && can_cut_grass"

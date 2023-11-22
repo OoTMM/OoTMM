@@ -342,7 +342,8 @@ void Magic_Update(GameState_Play* play);
 void SetTextFlags(u16 bits);
 
 typedef struct ObjectContext ObjectContext;
-int GetObject(ObjectContext* ctx, int objectId);
+int GetObjectSlot(ObjectContext* ctx, int objectId);
+int IsObjectSlotLoaded(ObjectContext* ctx, int slot);
 
 typedef struct Actor_EnItem00 Actor_EnItem00;
 

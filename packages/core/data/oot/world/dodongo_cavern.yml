@@ -36,8 +36,8 @@
     "Dodongo Cavern Right Corridor": "true"
   locations:
     "Dodongo Cavern GS Side Room": "can_damage_skull"
-    # This grass fail to load
-    #"Dodongo Cavern Grass East Corridor Side Room": "can_cut_grass"
+    # Normally fails to load
+    "Dodongo Cavern Grass East Corridor Side Room": "can_cut_grass"
 "Dodongo Cavern Miniboss 1":
   dungeon: DC
   exits:

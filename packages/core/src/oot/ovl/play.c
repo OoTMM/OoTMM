@@ -320,6 +320,7 @@ void hookPlay_Init(GameState_Play* play)
 
     comboCacheClear();
     comboObjectsReset();
+    comboExObjectsReset();
     debugCheat(play);
     eventFixes(play);
 

@@ -235,14 +235,10 @@ Actor* comboSpawnActor(void* unk, GameState_Play *play, short actorId, float x, 
     int ret;
     Actor* actor;
 
-    if (!canSpawnActor(play, actorId, variable))
+    if (actorId < 0 || !canSpawnActor(play, actorId, variable))
         return NULL;
 
     ret = canSpawnSoul(play, actorId, variable);
-
-    /* MQ Spirit has some fire keese that fails to load */
-    if (play->sceneId == SCE_OOT_TEMPLE_SPIRIT && (gComboData.mq & (1 << MQ_TEMPLE_SPIRIT)) && actorId == AC_EN_FIREFLY && play->roomCtx.curRoom.num == 0x01)
-        ret = -1;
 
     if (ret <= 0)
     {
@@ -260,6 +256,6 @@ Actor* comboSpawnActor(void* unk, GameState_Play *play, short actorId, float x, 
 
     actor = SpawnActor(unk, play, actorId, x, y, z, rx, ry, rz, variable);
     if (actorId == AC_ARMS_HOOK && gSave.age == AGE_ADULT)
-        actor->objTableIndex = GetObject(&play->objectCtx, 0x14);
+        actor->objTableIndex = GetObjectSlot(&play->objectCtx, 0x14);
     return actor;
 }

@@ -10,6 +10,16 @@ import { LOCATIONS_ZELDA, Location, isLocationOtherFairy, isLocationRenewable, l
 import { ItemSharedDef, SharedItemGroups } from './shared';
 import { World } from './world';
 
+const BROKEN_ACTORS_CHECKS = [
+  'OOT Dodongo Cavern Grass East Corridor Side Room',
+  'OOT Lake Hylia Pot 1',
+  'OOT Lake Hylia Pot 2',
+  'OOT Hyrule Castle Pot 1',
+  'OOT Hyrule Castle Pot 2',
+  'OOT MQ Dodongo Cavern Grass Vanilla Bomb Bag Room',
+  'OOT MQ Dodongo Cavern Grass Room Before Miniboss',
+];
+
 const EXTRA_ITEMS = new Set([
   Items.OOT_MASK_SKULL,
   Items.OOT_MASK_SPOOKY,
@@ -839,6 +849,11 @@ export class LogicPassWorldTransform {
   run() {
     const { settings } = this.state;
     this.state.monitor.log('Logic: World Transform');
+
+    /* Broken actors */
+    if (!settings.restoreBrokenActors) {
+      this.removeLocations(BROKEN_ACTORS_CHECKS);
+    }
 
     /* Potsanity */
     if (!settings.shufflePotsOot) {
