@@ -40,3 +40,8 @@ PATCH_END
 PATCH_START 0x8002440c
   nop
 PATCH_END
+
+/* Hook after object loading */
+PATCH_START 0x80081e84
+  j comboAfterRoomObjectLoad
+PATCH_END

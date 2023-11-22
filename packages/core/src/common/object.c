@@ -342,10 +342,11 @@ void comboObjectsGC(void)
 #if defined(GAME_OOT)
 
 #define EX_OBJECT_SLOTS_NORMAL      19
-#define EX_OBJECT_SLOTS_EXTENDED    (128 - EX_OBJECT_SLOTS_NORMAL)
+#define EX_OBJECT_SLOTS_TOTAL       128
+#define EX_OBJECT_SLOTS_EXTENDED    (EX_OBJECT_SLOTS_TOTAL - EX_OBJECT_SLOTS_NORMAL)
 
 static u16 sExObjectsIds[EX_OBJECT_SLOTS_EXTENDED];
-static void* sExObjectsAddr[EX_OBJECT_SLOTS_EXTENDED];
+void* gExObjectsAddr[EX_OBJECT_SLOTS_TOTAL];
 
 void comboExObjectsReset(void)
 {
@@ -354,10 +355,10 @@ void comboExObjectsReset(void)
     mask = osSetIntMask(1);
     for (int i = 0; i < EX_OBJECT_SLOTS_EXTENDED; ++i)
     {
-        if (sExObjectsAddr[i])
+        if (gExObjectsAddr[EX_OBJECT_SLOTS_NORMAL + i])
         {
-            free(sExObjectsAddr[i]);
-            sExObjectsAddr[i] = NULL;
+            free(gExObjectsAddr[EX_OBJECT_SLOTS_NORMAL + i]);
+            gExObjectsAddr[EX_OBJECT_SLOTS_NORMAL + i] = NULL;
         }
     }
     memset(sExObjectsIds, 0xff, sizeof(sExObjectsIds));
@@ -416,7 +417,7 @@ int comboGetObjectSlot(ObjectContext* objectCtx, u16 objectId)
         {
             comboLoadObject(data, objectId);
             sExObjectsIds[freeSlot] = objectId;
-            sExObjectsAddr[freeSlot] = data;
+            gExObjectsAddr[EX_OBJECT_SLOTS_NORMAL + freeSlot] = data;
             slot = EX_OBJECT_SLOTS_NORMAL + freeSlot;
         }
     }
@@ -430,7 +431,7 @@ int comboIsObjectSlotLoaded(ObjectContext* objectCtx, int slot)
     if (slot < EX_OBJECT_SLOTS_NORMAL)
         return IsObjectSlotLoaded(objectCtx, slot);
     else
-        return (sExObjectsAddr[slot - EX_OBJECT_SLOTS_NORMAL] != NULL);
+        return (gExObjectsAddr[slot] != NULL);
         //return 0;
 }
 
@@ -443,7 +444,7 @@ static void comboActorSetObjectSegment(GameState_Play* play, Actor* actor)
     if (slot < EX_OBJECT_SLOTS_NORMAL)
         segment = play->objectCtx.status[actor->objTableIndex].segment;
     else
-        segment = sExObjectsAddr[slot - EX_OBJECT_SLOTS_NORMAL];
+        segment = gExObjectsAddr[slot];
     segment = (void*)((u32)segment - 0x80000000);
 
     gSegments[6] = (u32)segment;
@@ -462,5 +463,11 @@ static void comboActorSetObjectSegmentWithRSP(GameState_Play* play, Actor* actor
 }
 
 PATCH_CALL(0x80024394, comboActorSetObjectSegmentWithRSP);
+
+void comboAfterRoomObjectLoad(void)
+{
+    for (int i = 0; i < EX_OBJECT_SLOTS_NORMAL; ++i)
+        gExObjectsAddr[i] = gPlay->objectCtx.status[i].segment;
+}
 
 #endif
