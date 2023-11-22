@@ -594,7 +594,6 @@ function checkRooms(rooms: Room[]) {
   for (const r of rooms) {
     for (const a of r.actors) {
       if (!canActorLoad(a, r)) {
-        const addrBase =
         console.log(`Actor 0x${a.typeId.toString(16)} cannot load in room ${r.sceneId.toString(16)}-${r.roomId.toString(16)}-${r.setupId} (Addr: 0x${r.vromBase.toString(16)} + 0x${a.offset.toString(16)})`);
       }
     }
