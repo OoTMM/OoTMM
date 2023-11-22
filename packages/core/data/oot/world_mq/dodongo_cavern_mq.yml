@@ -83,6 +83,8 @@
     "MQ Dodongo Cavern Upper Ledge Chest": "true"
     "MQ Dodongo Cavern Pot Vanilla Bomb Bag Room 1": "true"
     "MQ Dodongo Cavern Pot Vanilla Bomb Bag Room 2": "true"
+    # Fails to load
+    "MQ Dodongo Cavern Grass Vanilla Bomb Bag Room": "can_cut_grass"
 "Dodongo Cavern Lower Tunnel":
   dungeon: DC
   exits:
@@ -143,6 +145,8 @@
   locations:
     "MQ Dodongo Cavern Pot Before Miniboss 1": "true"
     "MQ Dodongo Cavern Pot Before Miniboss 2": "true"
+    # Fails to load
+    "MQ Dodongo Cavern Grass Room Before Miniboss": "can_cut_grass"
 "Dodongo Cavern Room After Upper Lizalfos":
   dungeon: DC
   exits:

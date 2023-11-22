@@ -855,6 +855,13 @@ export const SETTINGS = [{
   description: 'Forces the default target system to HOLD instead of SWITCH',
   default: true
 }, {
+  key: 'restoreBrokenActors',
+  name: 'Restore Broken Actors',
+  category: 'main.misc',
+  type: 'boolean',
+  description: 'In vanilla OoT, some actors fails to load properly in some rooms due to errors in the room files. When this is on, these actors will load.',
+  default: false
+}, {
   key: 'fillWallets',
   name: 'Fill Wallets',
   category: 'items',
