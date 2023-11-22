@@ -633,6 +633,13 @@ export const SETTINGS = [{
   description: 'This changes the beginning of the child trade quest. True means you\'ll start having already met Zelda and got her item along the one from Impa. And the Chicken is also removed from the game',
   default: false,
 }, {
+  key: 'openMoon',
+  name: 'Skip Oath to Order',
+  category: 'main.events',
+  type: 'boolean',
+  description: 'Skip playing Oath to Order to reach the Moon.',
+  default: false,
+}, {
   key: 'lacs',
   name: 'Light Arrow Cutscene',
   category: 'main.events',

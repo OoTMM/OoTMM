@@ -239,6 +239,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
   switch (randomInt(random, 4)) {
   case 0:
     base.skipZelda = true;
+    base.openMoon = true;
     base.doorOfTime = 'open';
     base.dekuTree = 'open';
     base.kakarikoGate = 'open';
@@ -247,6 +248,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
     break;
   case 1:
     base.skipZelda = false;
+    base.openMoon = false;
     base.doorOfTime = 'closed';
     base.dekuTree = 'closed';
     base.kakarikoGate = 'closed';
@@ -255,6 +257,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
     break;
   default:
     base.skipZelda = booleanWeighted(random, 0.3);
+    base.openMoon = booleanWeighted(random, 0.3);
     base.doorOfTime = sampleWeighted(random, { closed: 10, open: 7 });
     base.dekuTree = sampleWeighted(random, { open: 10, closed: 7 });
     base.kakarikoGate = sampleWeighted(random, { closed: 10, open: 7 });
