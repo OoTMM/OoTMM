@@ -240,10 +240,6 @@ Actor* comboSpawnActor(void* unk, GameState_Play *play, short actorId, float x, 
 
     ret = canSpawnSoul(play, actorId, variable);
 
-    /* MQ Spirit has some fire keese that fails to load */
-    if (play->sceneId == SCE_OOT_TEMPLE_SPIRIT && (gComboData.mq & (1 << MQ_TEMPLE_SPIRIT)) && actorId == AC_EN_FIREFLY && play->roomCtx.curRoom.num == 0x01)
-        ret = -1;
-
     if (ret <= 0)
     {
         if (ret == 0)

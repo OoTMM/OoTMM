@@ -102,6 +102,7 @@ export const CONFVARS = [
   'MM_CLIMB_MOST_SURFACES',
   'ER_MOON',
   'MM_OPEN_MOON',
+  'NO_BROKEN_ACTORS',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

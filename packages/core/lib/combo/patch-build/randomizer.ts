@@ -726,6 +726,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     OOT_TRIAL_SPIRIT: world.resolvedFlags.ganonTrials.has('Spirit'),
     ER_MOON: settings.erMoon,
     MM_OPEN_MOON: settings.openMoon,
+    NO_BROKEN_ACTORS: !settings.restoreBrokenActors,
   };
 
   for (const v in exprs) {

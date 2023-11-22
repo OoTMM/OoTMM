@@ -592,9 +592,11 @@ function canActorLoad(actor: Actor, room: Room): boolean {
 
 function checkRooms(rooms: Room[]) {
   for (const r of rooms) {
-    for (const a of r.actors) {
+    for (let ai = 0; ai < r.actors.length; ++ai) {
+      const a = r.actors[ai];
       if (!canActorLoad(a, r)) {
-        console.log(`Actor 0x${a.typeId.toString(16)} cannot load in room ${r.sceneId.toString(16)}-${r.roomId.toString(16)}-${r.setupId} (Addr: 0x${r.vromBase.toString(16)} + 0x${a.offset.toString(16)})`);
+        console.log(`{ 0x${r.sceneId.toString(16)}, 0x${r.roomId.toString(16)}, 0x${ai.toString(16)} },`);
+        //console.log(`Actor 0x${a.typeId.toString(16)} cannot load in room ${r.sceneId.toString(16)}-${r.roomId.toString(16)}-${r.setupId} (Addr: 0x${r.vromBase.toString(16)} + 0x${a.offset.toString(16)})`);
       }
     }
   }
@@ -720,7 +722,7 @@ async function run() {
 
   //console.log(ootRooms);
 
-  checkRooms(ootRooms);
+  checkRooms(mqRooms);
 }
 
 run().catch(e => {
