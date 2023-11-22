@@ -275,6 +275,19 @@ export class LogicPassSpoiler {
     this.unindent('');
   }
 
+  private writePlando() {
+    const { plando } = this.state.settings;
+    if (Object.keys(plando.locations).length >= 1) {
+      this.indent('Plando');
+      for (let loc in plando.locations) {
+        let item = plando.locations[loc];
+        if (item)
+          this.write(`${loc}: ${itemName(item)}`)
+      }
+      this.unindent('');
+    }
+  }
+
   private writeHints() {
     const globalHints = this.state.hints;
     this.indent('Hints');
@@ -427,6 +440,7 @@ export class LogicPassSpoiler {
     this.writePreCompleted();
     this.writeEntrances();
     this.writeHints();
+    this.writePlando();
     if (this.state.opts.settings.logic !== 'none') {
       this.writeSpheres();
     }
