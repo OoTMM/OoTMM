@@ -35,6 +35,7 @@ type RawRoom = {
 }
 
 type Actor = {
+  offset: number;
   actorId: number;
   typeId: number;
   rz: number;
@@ -45,6 +46,7 @@ type Room = {
   sceneId: number;
   roomId: number;
   setupId: number;
+  vromBase: number;
   actors: Actor[];
   objects: number[];
 }
@@ -592,7 +594,8 @@ function checkRooms(rooms: Room[]) {
   for (const r of rooms) {
     for (const a of r.actors) {
       if (!canActorLoad(a, r)) {
-        console.log(`Actor 0x${a.typeId.toString(16)} cannot load in room ${r.sceneId.toString(16)}-${r.roomId.toString(16)}-${r.setupId}`);
+        const addrBase =
+        console.log(`Actor 0x${a.typeId.toString(16)} cannot load in room ${r.sceneId.toString(16)}-${r.roomId.toString(16)}-${r.setupId} (Addr: 0x${r.vromBase.toString(16)} + 0x${a.offset.toString(16)})`);
       }
     }
   }
@@ -618,13 +621,14 @@ function parseRoom(rom: Buffer, raw: RawRoom, game: Game): Room[] {
   const actorHeaders = findHeaderOffset(rom, raw.vromHeader, 0x01);
   if (actorHeaders !== null) {
     const actorCount = (rom.readUInt32BE(actorHeaders) >> 16) & 0xff;
-    const actorsVrom = raw.vromBase + (rom.readUInt32BE(actorHeaders + 4) & 0xffffff);
+    const actorVromDelta = (rom.readUInt32BE(actorHeaders + 4) & 0xffffff);
+    const actorsVrom = raw.vromBase + actorVromDelta;
     for (let actorId = 0; actorId < actorCount; actorId++) {
-      const actorVromBase = 0x10 * actorId + actorsVrom;
+      const actorVromBase = actorsVrom +  0x10 * actorId;
       const typeId = rom.readUInt16BE(actorVromBase + 0x00) & typeIdMask;
       const rz = rom.readUInt16BE(actorVromBase + 0x0c);
       const params = rom.readUInt16BE(actorVromBase + 0x0e);
-      actors.push({ actorId, typeId, rz, params });
+      actors.push({ actorId, typeId, rz, params, offset: actorVromDelta + 0x10 * actorId });
     }
   }
 
@@ -640,7 +644,7 @@ function parseRoom(rom: Buffer, raw: RawRoom, game: Game): Room[] {
     }
   }
 
-  return [{ sceneId: raw.sceneId, setupId: raw.setupId, roomId: raw.roomId, actors, objects }];
+  return [{ sceneId: raw.sceneId, setupId: raw.setupId, roomId: raw.roomId, actors, objects, vromBase: raw.vromBase }];
 }
 
 function getRawRooms(rom: Buffer, game: Game) {

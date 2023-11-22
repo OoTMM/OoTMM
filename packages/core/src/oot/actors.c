@@ -235,7 +235,7 @@ Actor* comboSpawnActor(void* unk, GameState_Play *play, short actorId, float x, 
     int ret;
     Actor* actor;
 
-    if (!canSpawnActor(play, actorId, variable))
+    if (actorId < 0 || !canSpawnActor(play, actorId, variable))
         return NULL;
 
     ret = canSpawnSoul(play, actorId, variable);
