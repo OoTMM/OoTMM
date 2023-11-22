@@ -21,3 +21,22 @@ IsObjectSlotLoaded:
   sll   t6,a1,0x4
   j     _IsObjectSlotLoaded+0x8
    addu t6,a1
+
+/* Disable some actor draw code */
+PATCH_START 0x800243b8
+  nop
+  nop
+PATCH_END
+
+PATCH_START 0x800243d8
+  nop
+PATCH_END
+
+PATCH_START 0x800243ec
+  nop
+  nop
+PATCH_END
+
+PATCH_START 0x8002440c
+  nop
+PATCH_END

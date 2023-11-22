@@ -430,8 +430,37 @@ int comboIsObjectSlotLoaded(ObjectContext* objectCtx, int slot)
     if (slot < EX_OBJECT_SLOTS_NORMAL)
         return IsObjectSlotLoaded(objectCtx, slot);
     else
-        //return (sExObjectsAddr[slot - EX_OBJECT_SLOTS_NORMAL] != NULL);
-        return 0;
+        return (sExObjectsAddr[slot - EX_OBJECT_SLOTS_NORMAL] != NULL);
+        //return 0;
 }
+
+static void comboActorSetObjectSegment(GameState_Play* play, Actor* actor)
+{
+    int slot;
+    void* segment;
+
+    slot = actor->objTableIndex;
+    if (slot < EX_OBJECT_SLOTS_NORMAL)
+        segment = play->objectCtx.status[actor->objTableIndex].segment;
+    else
+        segment = sExObjectsAddr[slot - EX_OBJECT_SLOTS_NORMAL];
+    segment = (void*)((u32)segment - 0x80000000);
+
+    gSegments[6] = (u32)segment;
+}
+
+PATCH_FUNC(0x80020fa4, comboActorSetObjectSegment);
+
+static void comboActorSetObjectSegmentWithRSP(GameState_Play* play, Actor* actor)
+{
+    comboActorSetObjectSegment(play, actor);
+
+    OPEN_DISPS(play->gs.gfx);
+    gSPSegment(POLY_OPA_DISP++, 0x06, gSegments[6] + 0x80000000);
+    gSPSegment(POLY_XLU_DISP++, 0x06, gSegments[6] + 0x80000000);
+    CLOSE_DISPS();
+}
+
+PATCH_CALL(0x80024394, comboActorSetObjectSegmentWithRSP);
 
 #endif
