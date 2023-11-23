@@ -307,7 +307,7 @@ export class LogicPassEntrances {
     /* Get the transitions and exprs */
     const dungeonTransitions = [...world.entrances.values()]
       .filter(e => e.type === 'dungeon')
-      .filter(e => shuffledDungeons.has(world.areas[e.from].dungeon!) || shuffledDungeons.has(world.areas[e.to].dungeon!));
+      .filter(e => shuffledDungeons.has(world.areas[e.to].dungeon!));
 
     const dungeonEntrances = new Map<string, WorldEntrance>();
 
