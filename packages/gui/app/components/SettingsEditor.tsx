@@ -153,6 +153,9 @@ function SettingTooltip({ setting }: { setting: string }) {
 
     def = data.default.toString();
     break;
+  case 'set':
+    def = SET_OPTIONS.find(x => x.value == data.default)!.name;
+    break;
   }
 
   return (
