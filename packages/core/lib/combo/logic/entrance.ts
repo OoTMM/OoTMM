@@ -137,15 +137,15 @@ export class LogicPassEntrances {
       locations = Array.from(world.dungeons[dungeon]);
     }
 
-    /* Turn into world 0 locations */
-    const worldLocs = locations.map(l => makeLocation(l, 0));
+    /* Turn into locations */
+    const worldLocs = locations.map(l => makeLocation(l, worldId));
 
     /* Check if the new world is valid */
     if (!(worldLocs.every(l => pathfinderState.locations.has(l))))
       return false;
 
     /* Ganon's tower check */
-    if (dungeon === 'Tower' && ['ganon', 'both'].includes(this.input.settings.goal) && !pathfinderState.ws[0].events.has('OOT_GANON'))
+    if (dungeon === 'Tower' && ['ganon', 'both'].includes(this.input.settings.goal) && !pathfinderState.ws[worldId].events.has('OOT_GANON'))
       return false;
 
     return true;
