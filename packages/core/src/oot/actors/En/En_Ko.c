@@ -29,8 +29,8 @@ void EnKo_SpawnHook(Actor* this)
         return;
     }
 
-    /* Check for Odd Potion */
-    if (!(gOotExtraTrade.adult & (1 << XITEM_OOT_ADULT_ODD_POTION)))
+    /* Check for Odd Potion or selected cojiro */
+    if ((!(gOotExtraTrade.adult & (1 << XITEM_OOT_ADULT_ODD_POTION))) || gSave.inventory.items[ITS_OOT_TRADE_ADULT] == ITEM_OOT_COJIRO)
         ActorDestroy(this);
 }
 
