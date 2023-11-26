@@ -27,6 +27,7 @@ const char* const kDungeonNames[] = {
     TEXT_COLOR_BLUE "Pirate Fortress",
     TEXT_COLOR_RED "Ganon's Castle",
     TEXT_COLOR_RED "Ganon's Tower",
+    TEXT_COLOR_YELLOW "Clock Tower Roof",
 };
 
 const char* const kBossNames[] = {
