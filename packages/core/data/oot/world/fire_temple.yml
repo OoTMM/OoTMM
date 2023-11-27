@@ -9,7 +9,7 @@
   dungeon: Fire
   exits:
     "Fire Temple": "true"
-    "Fire Temple Boss": "boss_key(BOSS_KEY_FIRE) && (((is_adult || time_travel_at_will) && event(FIRE_TEMPLE_PILLAR_HAMMER)) || has_hover_boots || climb_anywhere || hookshot_anywhere) && has_tunic_goron"
+    "Fire Temple Boss": "boss_key(BOSS_KEY_FIRE) && has_tunic_goron && (((is_adult || time_travel_at_will) && event(FIRE_TEMPLE_PILLAR_HAMMER)) || has_hover_boots || climb_anywhere || hookshot_anywhere)"
   events:
     BOMBS: "has_tunic_goron"
   locations:
@@ -90,7 +90,7 @@
 "Fire Temple Before Miniboss":
   dungeon: Fire
   exits:
-    "Fire Temple After Miniboss": "soul_enemy(SOUL_ENEMY_FLARE_DANCER) && has_explosives && (has_bombs || can_hammer || can_hookshot) && (has_weapon || can_hammer || can_use_sticks)"
+    "Fire Temple After Miniboss": "soul_enemy(SOUL_ENEMY_FLARE_DANCER) && has_explosives && (has_weapon || can_hammer || can_use_sticks)"
     "Fire Temple Pillar Ledge": "can_play_time || hookshot_anywhere || climb_anywhere"
   locations:
     "Fire Temple Ring Jail": "can_hammer && can_play_time"
@@ -101,7 +101,7 @@
 "Fire Temple Pillar Ledge":
   dungeon: Fire
   exits:
-    "Fire Temple Before Miniboss": "can_hammer || hookshot_anywhere || climb_anywhere"
+    "Fire Temple Before Miniboss": "can_hammer"
     "Fire Temple Ring": "true"
   events:
     FIRE_TEMPLE_PILLAR_HAMMER: "can_hammer"
