@@ -17,3 +17,9 @@ PATCH_END
 PATCH_START 0x8086a278
 .int 0
 PATCH_END
+
+/* Disable the ice effect */
+PATCH_START 0x80869884
+  jr ra
+   nop
+PATCH_END
