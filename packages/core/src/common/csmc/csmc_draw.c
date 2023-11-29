@@ -27,6 +27,8 @@ static u32 csmcResolveTexture(u8 custom, u32 seg)
         return seg;
 
     addr = comboCacheGetFile(seg);
+    if (!addr)
+        return 0;
     return ((u32)addr - 0x80000000);
 }
 
