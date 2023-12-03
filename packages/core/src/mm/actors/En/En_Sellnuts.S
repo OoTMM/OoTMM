@@ -5,6 +5,10 @@ PATCH_START 0x80add204
   nop
 PATCH_END
 
+PATCH_START 0x80add0e0
+  li t1,0
+PATCH_END
+
 /* Faster TF fly path and disable the flying away cutscene lock */
 PATCH_START 0x80ADC4FC
   nop
