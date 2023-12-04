@@ -179,8 +179,6 @@ const gi = (settings: Settings, game: Game, item: Item, generic: boolean) => {
       itemId = gameId(game, 'MAP', '_');
     } else if (ItemHelpers.isCompass(item) && settings.mapCompassShuffle === 'ownDungeon' && settings.erBoss === 'none') {
       itemId = gameId(game, 'COMPASS', '_');
-    } else if (ItemHelpers.isFishingPondFish(item) && settings.pondFishShuffle) {
-      itemId = gameId(game, 'FISHING_FISH', '_');
     }
   }
 
