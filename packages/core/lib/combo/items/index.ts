@@ -16,6 +16,15 @@ export function itemByID(id: string): Item {
   if (['MM_ARROWS_20'].includes(id)) {
     id = 'MM_ARROWS_30';
   }
+  if (id === 'OOT_FISHING_POND_CHILD_FISH') {
+    id = 'OOT_FISHING_POND_CHILD_FISH_2LBS'
+  } else if (id === 'OOT_FISHING_POND_ADULT_FISH') {
+    id = 'OOT_FISHING_POND_CHILD_FISH_4LBS'
+  } else if (id === 'OOT_FISHING_POND_CHILD_LOACH') {
+    id = 'OOT_FISHING_POND_CHILD_LOACH_14LBS'
+  } else if (id === 'OOT_FISHING_POND_ADULT_LOACH') {
+    id = 'OOT_FISHING_POND_ADULT_LOACH_29LBS'
+  }
   if (Object.hasOwn(Items, id)) {
     return Items[id as keyof typeof Items];
   }

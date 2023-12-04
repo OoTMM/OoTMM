@@ -1,8 +1,9 @@
 import { Confvar } from '../confvars';
 import { DATA_POOL } from '../data';
 import { Item, ItemGroups, ItemHelpers, Items, PlayerItem, PlayerItems, makePlayerItem } from '../items';
+import { ItemID } from '../items/defs';
 import { Monitor } from '../monitor';
-import { sample, Random } from '../random';
+import { sample, Random, randomInt } from '../random';
 import { Settings } from '../settings';
 import { countMapAdd, gameId } from '../util';
 import { exprTrue } from './expr';
@@ -505,6 +506,10 @@ export class LogicPassWorldTransform {
     if (settings.silverRupeeShuffle === 'anywhere') {
       items = [...items, ...ItemGroups.RUPEES_SILVER];
     }
+
+    // if (settings.pondFishShuffle) {
+    //   items.push(Items.OOT_FISHING_FISH);
+    // }
 
     /* Add extra items */
     for (let i = 0; i < this.state.worlds.length; ++i) {
@@ -1155,6 +1160,59 @@ export class LogicPassWorldTransform {
     if (settings.bottleContentShuffle) {
       this.randomizeGroup(ItemGroups.BOTTLES_OOT);
       this.randomizeGroup(ItemGroups.BOTTLES_MM);
+    }
+
+    if (settings.pondFishShuffle) {
+      for (let i = 0; i < this.state.worlds.length; ++i) {
+        const addFish = (isAdult: boolean) => {
+          let count = 0;
+          const item = isAdult ? Items.OOT_FISHING_POND_ADULT_FISH : Items.OOT_FISHING_POND_CHILD_FISH;
+          const pi = makePlayerItem(item, i);
+          const amount = this.pool.get(pi) || 0;
+          count += amount;
+
+          this.removePlayerItem(pi);
+
+          const baseFishWeights = [38, 36, 41, 35, 39, 44, 40, 34, 54, 47, 42, 33, 57, 63, 71];
+          const baseLoachWeights = isAdult ? [45] : [45, 43];
+
+          const addFishOrLoach = (type: 'FISH' | 'LOACH', baseWeights: number[]) => {
+            for (const baseWeight of baseWeights) {
+              let weight = baseWeight;
+              weight += randomInt(this.state.random, 5);
+              if (weight >= 65 && randomInt(this.state.random, 20) === 0) {
+                weight += randomInt(this.state.random, 8);
+              }
+
+              if (!isAdult) {
+                weight *= 0.73;
+              }
+
+              if (type === 'LOACH') {
+                weight *= 2;
+              }
+
+              const lbs = Math.floor((weight * weight * 0.0036) + 0.5);
+
+              const itemKey = [
+                'OOT_FISHING_POND',
+                isAdult ? 'ADULT' : 'CHILD',
+                type,
+                '' + lbs + 'LBS'
+              ].join('_') as ItemID; // maybe needs validation?
+              const item = Items[itemKey];
+              const pi = makePlayerItem(item, i);
+              this.addPlayerItem(pi);
+            }
+          }
+
+          addFishOrLoach('FISH', baseFishWeights);
+          addFishOrLoach('LOACH', baseLoachWeights);
+        }
+
+        addFish(false);
+        addFish(true);
+      }
     }
 
     /* Handle fixed locations */
