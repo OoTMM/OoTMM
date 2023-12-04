@@ -648,11 +648,11 @@
   exits:
     "Market Castle Entry": "true"
     "Near Fairy Fountain Din": "has_explosives_or_hammer"
-    "Hyrule Castle Courtyard": "woke_talon_child || has_hover_boots || climb_anywhere"
+    "Hyrule Castle Courtyard": "woke_talon_child || (has_hover_boots && (soul_npc(SOUL_NPC_TALON) || setting(skipZelda))) || climb_anywhere || hookshot_anywhere"
     "Hyrule Castle Grotto": "hidden_grotto_storms"
   events:
     MALON: "soul_npc(SOUL_NPC_MALON)"
-    TALON_CHILD: "has(CHICKEN)"
+    TALON_CHILD: "has(CHICKEN) && soul_npc(SOUL_NPC_TALON)"
     BOMBS: "true"
     RUPEES: "true"
     SEEDS: "is_child"
