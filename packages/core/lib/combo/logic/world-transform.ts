@@ -507,9 +507,12 @@ export class LogicPassWorldTransform {
       items = [...items, ...ItemGroups.RUPEES_SILVER];
     }
 
-    // if (settings.pondFishShuffle) {
-    //   items.push(Items.OOT_FISHING_FISH);
-    // }
+    if (settings.pondFishShuffle) {
+      items.push(Items.OOT_FISHING_POND_CHILD_FISH);
+      items.push(Items.OOT_FISHING_POND_ADULT_FISH);
+      items.push(Items.OOT_FISHING_POND_CHILD_LOACH);
+      items.push(Items.OOT_FISHING_POND_ADULT_LOACH);
+    }
 
     /* Add extra items */
     for (let i = 0; i < this.state.worlds.length; ++i) {
@@ -1163,55 +1166,86 @@ export class LogicPassWorldTransform {
     }
 
     if (settings.pondFishShuffle) {
+      const baseFishWeights = [38, 36, 41, 35, 39, 44, 40, 34, 54, 47, 42, 33, 57, 63, 71];
+      const baseChildLoachWeights = [45, 43];
+      const baseAdultLoachWeights = [45];
       for (let i = 0; i < this.state.worlds.length; ++i) {
-        const addFish = (isAdult: boolean) => {
-          let count = 0;
-          const item = isAdult ? Items.OOT_FISHING_POND_ADULT_FISH : Items.OOT_FISHING_POND_CHILD_FISH;
+        const addFish = (type: 'OOT_FISHING_POND_CHILD_FISH' | 'OOT_FISHING_POND_ADULT_FISH' | 'OOT_FISHING_POND_CHILD_LOACH' | 'OOT_FISHING_POND_ADULT_LOACH') => {
+          const item = Items[type];
           const pi = makePlayerItem(item, i);
           const amount = this.pool.get(pi) || 0;
-          count += amount;
 
           this.removePlayerItem(pi);
 
-          const baseFishWeights = [38, 36, 41, 35, 39, 44, 40, 34, 54, 47, 42, 33, 57, 63, 71];
-          const baseLoachWeights = isAdult ? [45] : [45, 43];
-
-          const addFishOrLoach = (type: 'FISH' | 'LOACH', baseWeights: number[]) => {
-            for (const baseWeight of baseWeights) {
-              let weight = baseWeight;
-              weight += randomInt(this.state.random, 5);
-              if (weight >= 65 && randomInt(this.state.random, 20) === 0) {
-                weight += randomInt(this.state.random, 8);
-              }
-
-              if (!isAdult) {
-                weight *= 0.73;
-              }
-
-              if (type === 'LOACH') {
-                weight *= 2;
-              }
-
-              const lbs = Math.floor((weight * weight * 0.0036) + 0.5);
-
-              const itemKey = [
-                'OOT_FISHING_POND',
-                isAdult ? 'ADULT' : 'CHILD',
-                type,
-                '' + lbs + 'LBS'
-              ].join('_') as ItemID; // maybe needs validation?
-              const item = Items[itemKey];
-              const pi = makePlayerItem(item, i);
-              this.addPlayerItem(pi);
-            }
+          let baseWeights: number[];
+          let rewardFish: number[];
+          let isAdult = false;
+          let isLoach = false;
+          switch (type) {
+            case 'OOT_FISHING_POND_CHILD_FISH':
+              baseWeights = baseFishWeights;
+              rewardFish = baseWeights.filter(x => x >= 59); // 58 * 0.73 = 42 would be converted to 6 pounds which converts to 39 weight
+              break;
+            case 'OOT_FISHING_POND_ADULT_FISH':
+              baseWeights = baseFishWeights;
+              rewardFish = baseWeights.filter(x => x >= 46); // 45 would be converted to 7 pounds which converts to 42 weight
+              isAdult = true;
+              break;
+            case 'OOT_FISHING_POND_CHILD_LOACH':
+              baseWeights = baseChildLoachWeights;
+              rewardFish = baseWeights;
+              isLoach = true;
+              break;
+            case 'OOT_FISHING_POND_ADULT_LOACH':
+              baseWeights = baseAdultLoachWeights;
+              rewardFish = baseWeights;
+              isAdult = true;
+              isLoach = true;
+              break;
           }
 
-          addFishOrLoach('FISH', baseFishWeights);
-          addFishOrLoach('LOACH', baseLoachWeights);
+          const numFishToAdd = amount - baseWeights.length;
+
+          if (numFishToAdd > 0) {
+            // increase amount of fish
+            const fishToAdd: number[] = []
+            for (let fishIndex = 0; fishIndex < numFishToAdd; fishIndex++) {
+              fishToAdd.push(sample(this.state.random, rewardFish));
+            }
+            baseWeights = baseWeights.concat(fishToAdd);
+          } else if (numFishToAdd < 0) {
+            // reduce amount of fish
+            baseWeights = baseWeights.slice(-numFishToAdd);
+          }
+
+          for (const baseWeight of baseWeights) {
+            let weight = baseWeight;
+            weight += randomInt(this.state.random, 5);
+            if (weight >= 65 && randomInt(this.state.random, 20) === 0) {
+              weight += randomInt(this.state.random, 8);
+            }
+
+            if (!isAdult) {
+              weight *= 0.73;
+            }
+
+            if (isLoach) {
+              weight *= 2;
+            }
+
+            const lbs = Math.floor((weight * weight * 0.0036) + 0.5);
+
+            const itemKey = `${type}_${lbs}LBS` as ItemID; // maybe needs validation?
+            const item = Items[itemKey];
+            const pi = makePlayerItem(item, i);
+            this.addPlayerItem(pi);
+          }
         }
 
-        addFish(false);
-        addFish(true);
+        addFish('OOT_FISHING_POND_CHILD_FISH');
+        addFish('OOT_FISHING_POND_ADULT_FISH');
+        addFish('OOT_FISHING_POND_CHILD_LOACH');
+        addFish('OOT_FISHING_POND_ADULT_LOACH');
       }
     }
 
