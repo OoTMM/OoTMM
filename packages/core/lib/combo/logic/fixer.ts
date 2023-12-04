@@ -103,6 +103,10 @@ export class LogicPassFixer {
       return true;
     }
 
+    if (ItemHelpers.isFishingPondFish(item) && !this.state.settings.pondFishShuffle) {
+      return true;
+    }
+
     return false;
   }
 

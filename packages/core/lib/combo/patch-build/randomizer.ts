@@ -179,6 +179,8 @@ const gi = (settings: Settings, game: Game, item: Item, generic: boolean) => {
       itemId = gameId(game, 'MAP', '_');
     } else if (ItemHelpers.isCompass(item) && settings.mapCompassShuffle === 'ownDungeon' && settings.erBoss === 'none') {
       itemId = gameId(game, 'COMPASS', '_');
+    } else if (ItemHelpers.isFishingPondFish(item) && settings.pondFishShuffle) {
+      itemId = gameId(game, 'FISHING_FISH', '_');
     }
   }
 
@@ -320,6 +322,9 @@ function checkKey(check: WorldCheck): number {
     break;
   case 'sr':
     typeId = 0x09;
+    break;
+  case 'fish':
+    typeId = 0x0A;
     break;
   case 'pot':
   case 'grass':

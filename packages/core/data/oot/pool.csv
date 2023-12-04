@@ -362,6 +362,39 @@ Laboratory Eye Drops,                                       npc,            NONE
 Laboratory GS Crate,                                        gs,             NONE,                 LABORATORY,                     0x9b,                       GS_TOKEN
 Fishing Pond Child,                                         npc,            FISHING,              FISHING_POND,                   FISH_CHILD,                 HEART_PIECE
 Fishing Pond Adult,                                         npc,            FISHING,              FISHING_POND,                   FISH_ADULT,                 SCALE
+Fishing Pond Child Fish 1,                                  fish,           NONE,                 FISHING_POND,                   0x00,                       FISHING_POND_CHILD_FISH
+Fishing Pond Child Fish 2,                                  fish,           NONE,                 FISHING_POND,                   0x01,                       FISHING_POND_CHILD_FISH
+Fishing Pond Child Fish 3,                                  fish,           NONE,                 FISHING_POND,                   0x02,                       FISHING_POND_CHILD_FISH
+Fishing Pond Child Fish 4,                                  fish,           NONE,                 FISHING_POND,                   0x03,                       FISHING_POND_CHILD_FISH
+Fishing Pond Child Fish 5,                                  fish,           NONE,                 FISHING_POND,                   0x04,                       FISHING_POND_CHILD_FISH
+Fishing Pond Child Fish 6,                                  fish,           NONE,                 FISHING_POND,                   0x05,                       FISHING_POND_CHILD_FISH
+Fishing Pond Child Fish 7,                                  fish,           NONE,                 FISHING_POND,                   0x06,                       FISHING_POND_CHILD_FISH
+Fishing Pond Child Fish 8,                                  fish,           NONE,                 FISHING_POND,                   0x07,                       FISHING_POND_CHILD_FISH
+Fishing Pond Child Fish 9,                                  fish,           NONE,                 FISHING_POND,                   0x08,                       FISHING_POND_CHILD_FISH
+Fishing Pond Child Fish 10,                                 fish,           NONE,                 FISHING_POND,                   0x09,                       FISHING_POND_CHILD_FISH
+Fishing Pond Child Fish 11,                                 fish,           NONE,                 FISHING_POND,                   0x0A,                       FISHING_POND_CHILD_FISH
+Fishing Pond Child Fish 12,                                 fish,           NONE,                 FISHING_POND,                   0x0B,                       FISHING_POND_CHILD_FISH
+Fishing Pond Child Fish 13,                                 fish,           NONE,                 FISHING_POND,                   0x0C,                       FISHING_POND_CHILD_FISH
+Fishing Pond Child Fish 14,                                 fish,           NONE,                 FISHING_POND,                   0x0D,                       FISHING_POND_CHILD_FISH
+Fishing Pond Child Fish 15,                                 fish,           NONE,                 FISHING_POND,                   0x0E,                       FISHING_POND_CHILD_FISH
+Fishing Pond Child Loach 1,                                 fish,           NONE,                 FISHING_POND,                   0x0F,                       FISHING_POND_CHILD_LOACH
+Fishing Pond Child Loach 2,                                 fish,           NONE,                 FISHING_POND,                   0x10,                       FISHING_POND_CHILD_LOACH
+Fishing Pond Adult Fish 1,                                  fish,           NONE,                 FISHING_POND,                   0x11,                       FISHING_POND_ADULT_FISH
+Fishing Pond Adult Fish 2,                                  fish,           NONE,                 FISHING_POND,                   0x12,                       FISHING_POND_ADULT_FISH
+Fishing Pond Adult Fish 3,                                  fish,           NONE,                 FISHING_POND,                   0x13,                       FISHING_POND_ADULT_FISH
+Fishing Pond Adult Fish 4,                                  fish,           NONE,                 FISHING_POND,                   0x14,                       FISHING_POND_ADULT_FISH
+Fishing Pond Adult Fish 5,                                  fish,           NONE,                 FISHING_POND,                   0x15,                       FISHING_POND_ADULT_FISH
+Fishing Pond Adult Fish 6,                                  fish,           NONE,                 FISHING_POND,                   0x16,                       FISHING_POND_ADULT_FISH
+Fishing Pond Adult Fish 7,                                  fish,           NONE,                 FISHING_POND,                   0x17,                       FISHING_POND_ADULT_FISH
+Fishing Pond Adult Fish 8,                                  fish,           NONE,                 FISHING_POND,                   0x18,                       FISHING_POND_ADULT_FISH
+Fishing Pond Adult Fish 9,                                  fish,           NONE,                 FISHING_POND,                   0x19,                       FISHING_POND_ADULT_FISH
+Fishing Pond Adult Fish 10,                                 fish,           NONE,                 FISHING_POND,                   0x1A,                       FISHING_POND_ADULT_FISH
+Fishing Pond Adult Fish 11,                                 fish,           NONE,                 FISHING_POND,                   0x1B,                       FISHING_POND_ADULT_FISH
+Fishing Pond Adult Fish 12,                                 fish,           NONE,                 FISHING_POND,                   0x1C,                       FISHING_POND_ADULT_FISH
+Fishing Pond Adult Fish 13,                                 fish,           NONE,                 FISHING_POND,                   0x1D,                       FISHING_POND_ADULT_FISH
+Fishing Pond Adult Fish 14,                                 fish,           NONE,                 FISHING_POND,                   0x1E,                       FISHING_POND_ADULT_FISH
+Fishing Pond Adult Fish 15,                                 fish,           NONE,                 FISHING_POND,                   0x1F,                       FISHING_POND_ADULT_FISH
+Fishing Pond Adult Loach,                                   fish,           NONE,                 FISHING_POND,                   0x20,                       FISHING_POND_ADULT_LOACH
 Lon Lon Ranch Malon Song,                                   npc,            NONE,                 LON_LON_RANCH,                  MALON_SONG,                 SONG_EPONA
 Lon Lon Ranch Silo HP,                                      collectible,    NONE,                 RANCH_HOUSE_SILO,               0x01,                       HEART_PIECE
 Lon Lon Ranch Talon Bottle,                                 npc,            NONE,                 RANCH_HOUSE_SILO,               TALON_BOTTLE,               BOTTLE_MILK

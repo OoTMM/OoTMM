@@ -204,3 +204,5 @@ Item_DropCollectible = 0x800a7730;
 SpawnCollectible2 = 0x800a7d28;
 
 VectDist = 0x800ff92c;
+
+sqrtf = 0x8008D700;
