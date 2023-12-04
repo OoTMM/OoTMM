@@ -171,6 +171,10 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
     case AC_EN_MA2:
     case AC_EN_MA3:
         return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_MALON));
+    case AC_BG_SPOT15_RRBOX:
+        if(play->sceneId != SCE_OOT_HYRULE_CASTLE)
+            return 1;
+        /* Fallthrough */
     case AC_EN_TA:
         return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_TALON));
     case AC_EN_FISHING:
