@@ -1,20 +1,20 @@
-#ifndef COMBO_SHADER_H
-#define COMBO_SHADER_H
+#ifndef COMBO_DRAWGI_H
+#define COMBO_DRAWGI_H
 
 #if !defined(__ASSEMBLER__)
 # include <combo/game_state.h>
 # include <combo/types.h>
 
-typedef void (*ShaderFunc)(GameState_Play* play, s16 index);
+typedef void (*DrawGiFunc)(GameState_Play* play, s16 index);
 
 typedef struct PACKED ALIGNED(4)
 {
-    ShaderFunc  func;
+    DrawGiFunc  func;
     u32         lists[8];
 }
-Shader;
+DrawGi;
 
-extern const Shader kShaders[256];
+extern const DrawGi kDrawGi[];
 #endif
 
 #define DRAWGI_NONE 0

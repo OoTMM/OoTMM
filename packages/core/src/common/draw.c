@@ -19,7 +19,7 @@ void comboSetObjectSegment(GfxContext* gfx, void* buffer)
     gSegments[0x06] = (u32)buffer - 0x80000000;
 }
 
-void comboDrawObject(GameState_Play* play, Actor* actor, u16 objectId, u16 shaderId, int flags)
+void comboDrawObject(GameState_Play* play, Actor* actor, u16 objectId, u16 drawGiId, int flags)
 {
     void* objBuffer;
 
@@ -32,7 +32,7 @@ void comboDrawObject(GameState_Play* play, Actor* actor, u16 objectId, u16 shade
         PreDraw1(actor, play, 0);
     if (!(flags & DRAW_NO_PRE2))
         PreDraw2(actor, play, 0);
-    kShaders[shaderId - 1].func(play, shaderId - 1);
+    kDrawGi[drawGiId - 1].func(play, drawGiId - 1);
 }
 
 void comboDrawGI(GameState_Play* play, Actor* actor, int gi, int flags)
@@ -40,7 +40,7 @@ void comboDrawGI(GameState_Play* play, Actor* actor, int gi, int flags)
     const GetItem* giEntry;
 
     giEntry = kExtendedGetItems + gi - 1;
-    comboDrawObject(play, actor, giEntry->objectId, giEntry->shaderId, flags);
+    comboDrawObject(play, actor, giEntry->objectId, giEntry->drawGiId, flags);
 }
 
 void comboDrawInit2D(Gfx** dl)

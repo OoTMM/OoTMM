@@ -25,7 +25,7 @@ struct Actor_EnGirlA
     ShopBuyFn       postBuy;
     s16             price;
     s16             count;
-    s16             shaderId;
+    s16             drawGiId;
     s16             unk;
     void*           func1;
 

@@ -1,7 +1,7 @@
 #include <combo.h>
 
-/* Relocations for kShaders */
-PATCH_REL_HILO(kShaders)
+/* Relocations for kDrawGi */
+PATCH_REL_HILO(kDrawGi)
 .int 0x800ee340
 .int 0x800ee348
 .int 0x800ee458
@@ -38,8 +38,8 @@ PATCH_REL_HILO(kShaders)
 .int 0x800efc64
 PATCH_END
 
-/* Relocations for kShaders[0].lists[0] */
-PATCH_REL_HILO(kShaders+4)
+/* Relocations for kDrawGi[0].lists[0] */
+PATCH_REL_HILO(kDrawGi+4)
 .int 0x800ee3c8
 .int 0x800ee3ec
 .int 0x800eece4

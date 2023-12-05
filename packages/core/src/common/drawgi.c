@@ -63,20 +63,20 @@ static void color4(u8* r, u8* g, u8* b, u8* a, u32 color)
     *a = color & 0xff;
 }
 
-/* Custom Shaders */
-void Shader_Xlu0(GameState_Play* play, s16 shaderId)
+/* Custom DrawGi */
+void DrawGi_Xlu0(GameState_Play* play, s16 drawGiId)
 {
-    const Shader* shader;
+    const DrawGi* drawGi;
 
-    shader = &kShaders[shaderId];
+    drawGi = &kDrawGi[drawGiId];
     OPEN_DISPS(play->gs.gfx);
     InitListPolyXlu(play->gs.gfx);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPDisplayList(POLY_XLU_DISP++, shader->lists[0]);
+    gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[0]);
     CLOSE_DISPS();
 }
 
-void Shader_CustomNote(GameState_Play* play, s16 shaderId)
+void DrawGi_CustomNote(GameState_Play* play, s16 drawGiId)
 {
     static const u32 kColors[] = {
         0x8000ffff /* Purple */,
@@ -87,18 +87,18 @@ void Shader_CustomNote(GameState_Play* play, s16 shaderId)
         0xff0000ff /* Red */,
     };
 
-    const Shader* shader;
+    const DrawGi* drawGi;
     float angle;
     u8 r;
     u8 g;
     u8 b;
     u8 a;
 
-    shader = &kShaders[shaderId];
+    drawGi = &kDrawGi[drawGiId];
     angle = M_PI / 16;
-    if (shader->lists[1] & 0x10)
+    if (drawGi->lists[1] & 0x10)
         angle += M_PI;
-    color4(&r, &g, &b, &a, kColors[shader->lists[1] & 0xf]);
+    color4(&r, &g, &b, &a, kColors[drawGi->lists[1] & 0xf]);
 
     ModelViewRotateZ(angle, MAT_MUL);
 
@@ -106,11 +106,11 @@ void Shader_CustomNote(GameState_Play* play, s16 shaderId)
     InitListPolyXlu(play->gs.gfx);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, a);
-    gSPDisplayList(POLY_XLU_DISP++, shader->lists[0]);
+    gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[0]);
     CLOSE_DISPS();
 }
 
-void Shader_CustomHeartContainer(GameState_Play* play, s16 shaderId)
+void DrawGi_CustomHeartContainer(GameState_Play* play, s16 drawGiId)
 {
     static const u32 colors[] = {
         /* Normal */
@@ -126,15 +126,15 @@ void Shader_CustomHeartContainer(GameState_Play* play, s16 shaderId)
         0xffffffff,
     };
 
-    const Shader* shader;
+    const DrawGi* drawGi;
     u8 r;
     u8 g;
     u8 b;
     u8 a;
     u32 c;
 
-    shader = &kShaders[shaderId];
-    c = shader->lists[0];
+    drawGi = &kDrawGi[drawGiId];
+    c = drawGi->lists[0];
 
     OPEN_DISPS(play->gs.gfx);
     InitListPolyXlu(play->gs.gfx);
@@ -143,12 +143,12 @@ void Shader_CustomHeartContainer(GameState_Play* play, s16 shaderId)
     gDPSetPrimColor(POLY_XLU_DISP++, 0, 0x80, r, g, b, a);
     color4(&r, &g, &b, &a, colors[c * 4 + 1]);
     gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, a);
-    gSPDisplayList(POLY_XLU_DISP++, shader->lists[1]);
+    gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[1]);
     color4(&r, &g, &b, &a, colors[c * 4 + 2]);
     gDPSetPrimColor(POLY_XLU_DISP++, 0, 0x80, r, g, b, a);
     color4(&r, &g, &b, &a, colors[c * 4 + 3]);
     gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, a);
-    gSPDisplayList(POLY_XLU_DISP++, shader->lists[2]);
+    gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[2]);
     CLOSE_DISPS();
 }
 
@@ -265,62 +265,62 @@ static const u32 kNutStickEnvColors[] = {
     0xaaaa00ff,
 };
 
-void Shader_CustomStick(GameState_Play* play, s16 shaderId)
+void DrawGi_CustomStick(GameState_Play* play, s16 drawGiId)
 {
-    const Shader* shader;
+    const DrawGi* drawGi;
     u8 r;
     u8 g;
     u8 b;
     u8 a;
 
-    shader = &kShaders[shaderId];
+    drawGi = &kDrawGi[drawGiId];
 
     OPEN_DISPS(play->gs.gfx);
     InitListPolyOpa(play->gs.gfx);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    color4(&r, &g, &b, &a, kNutStickPrimColors[shader->lists[1]]);
+    color4(&r, &g, &b, &a, kNutStickPrimColors[drawGi->lists[1]]);
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, r, g, b, a);
-    color4(&r, &g, &b, &a, kNutStickEnvColors[shader->lists[1]]);
+    color4(&r, &g, &b, &a, kNutStickEnvColors[drawGi->lists[1]]);
     gDPSetEnvColor(POLY_OPA_DISP++, r, g, b, a);
-    gSPDisplayList(POLY_OPA_DISP++, shader->lists[0]);
+    gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
 
     /* Draw fire */
-    if (shader->lists[1])
+    if (drawGi->lists[1])
     {
         InitListPolyXlu(play->gs.gfx);
-        shaderFlameEffect(play, shader->lists[1] - 1, 1.f, 0.f);
+        shaderFlameEffect(play, drawGi->lists[1] - 1, 1.f, 0.f);
     }
 
     CLOSE_DISPS();
 }
 
-void Shader_CustomNut(GameState_Play* play, s16 shaderId)
+void DrawGi_CustomNut(GameState_Play* play, s16 drawGiId)
 {
-    const Shader* shader;
+    const DrawGi* drawGi;
     u8 r;
     u8 g;
     u8 b;
     u8 a;
     u32 fc;
 
-    shader = &kShaders[shaderId];
+    drawGi = &kDrawGi[drawGiId];
     fc = play->gs.frameCount * 6;
 
     OPEN_DISPS(play->gs.gfx);
     InitListPolyOpa(play->gs.gfx);
     gSPSegment(POLY_OPA_DISP++, 0x09, DisplaceTexture(play->gs.gfx, 0, fc, fc, 0x20, 0x20, 1, fc, fc, 0x20, 0x20));
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    color4(&r, &g, &b, &a, kNutStickPrimColors[shader->lists[1]]);
+    color4(&r, &g, &b, &a, kNutStickPrimColors[drawGi->lists[1]]);
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, r, g, b, a);
-    color4(&r, &g, &b, &a, kNutStickEnvColors[shader->lists[1]]);
+    color4(&r, &g, &b, &a, kNutStickEnvColors[drawGi->lists[1]]);
     gDPSetEnvColor(POLY_OPA_DISP++, r, g, b, a);
-    gSPDisplayList(POLY_OPA_DISP++, shader->lists[0]);
+    gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
 
     /* Draw fire */
-    if (shader->lists[1])
+    if (drawGi->lists[1])
     {
         InitListPolyXlu(play->gs.gfx);
-        shaderFlameEffect(play, shader->lists[1] - 1, 1.f, 0.f);
+        shaderFlameEffect(play, drawGi->lists[1] - 1, 1.f, 0.f);
     }
 
     CLOSE_DISPS();
@@ -341,7 +341,7 @@ ALIGNED(16) static const Gfx kEmptyList[] = {
     gsSPEndDisplayList(),
 };
 
-void Shader_BossRemains(GameState_Play* play, s16 shaderId)
+void DrawGi_BossRemains(GameState_Play* play, s16 drawGiId)
 {
     static const float scale = 0.03f;
     static const float kMatrixScale[] = {
@@ -350,18 +350,18 @@ void Shader_BossRemains(GameState_Play* play, s16 shaderId)
         0.f, 0.f, scale, 0.f,
         0.f, 0.f, 0.f,   1.f,
     };
-    const Shader* shader;
+    const DrawGi* drawGi;
 
-    shader = &kShaders[shaderId];
+    drawGi = &kDrawGi[drawGiId];
     OPEN_DISPS(play->gs.gfx);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPMatrix(POLY_OPA_DISP++, pushMatrix(play->gs.gfx, kMatrixScale), G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     InitListPolyOpa(play->gs.gfx);
-    gSPDisplayList(POLY_OPA_DISP++, shader->lists[0]);
+    gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
     CLOSE_DISPS();
 }
 
-void Shader_SpiritualStones(GameState_Play* play, s16 shaderId)
+void DrawGi_SpiritualStones(GameState_Play* play, s16 drawGiId)
 {
     static const u32 kPrimColors[] = {
         0xffffa0ff,
@@ -383,11 +383,11 @@ void Shader_SpiritualStones(GameState_Play* play, s16 shaderId)
     };
 
     u8 r, g, b, a;
-    const Shader* shader;
+    const DrawGi* drawGi;
     int colorIndex;
 
-    shader = &kShaders[shaderId];
-    colorIndex = shader->lists[0];
+    drawGi = &kDrawGi[drawGiId];
+    colorIndex = drawGi->lists[0];
 
     OPEN_DISPS(play->gs.gfx);
 
@@ -406,17 +406,17 @@ void Shader_SpiritualStones(GameState_Play* play, s16 shaderId)
     gDPSetPrimColor(POLY_XLU_DISP++, 0x00, 0x80, r, g, b, a);
     color4(&r, &g, &b, &a, kEnvColors[colorIndex]);
     gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, a);
-    gSPDisplayList(POLY_XLU_DISP++, shader->lists[1]);
+    gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[1]);
 
     InitListPolyOpa(play->gs.gfx);
     gDPSetPrimColor(POLY_OPA_DISP++, 0x00, 0x80, 0xff, 0xff, 0xaa, 0xff);
     gDPSetEnvColor(POLY_OPA_DISP++, 0x96, 0x78, 0x00, 0xFF);
-    gSPDisplayList(POLY_OPA_DISP++, shader->lists[2]);
+    gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[2]);
 
     CLOSE_DISPS();
 }
 
-void Shader_MasterSword(GameState_Play* play, s16 shaderId)
+void DrawGi_MasterSword(GameState_Play* play, s16 drawGiId)
 {
     /* TODO: Pre-multiply the matrices */
     static const float scale = 0.07f;
@@ -434,9 +434,9 @@ void Shader_MasterSword(GameState_Play* play, s16 shaderId)
         0.f, 0.f, 0.f, 1.f,
     };
 
-    const Shader* shader;
+    const DrawGi* drawGi;
 
-    shader = &kShaders[shaderId];
+    drawGi = &kDrawGi[drawGiId];
 
     OPEN_DISPS(play->gs.gfx);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
@@ -444,15 +444,15 @@ void Shader_MasterSword(GameState_Play* play, s16 shaderId)
     gSPMatrix(POLY_OPA_DISP++, pushMatrix(play->gs.gfx, kMatrixScale), G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gSPSegment(POLY_OPA_DISP++, 8, kEmptyList);
     InitListPolyOpa(play->gs.gfx);
-    gSPDisplayList(POLY_OPA_DISP++, shader->lists[0]);
+    gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
     CLOSE_DISPS();
 }
 
-void Shader_CustomSpin(GameState_Play* play, s16 shaderId)
+void DrawGi_CustomSpin(GameState_Play* play, s16 drawGiId)
 {
-    const Shader* shader;
+    const DrawGi* drawGi;
 
-    shader = &kShaders[shaderId];
+    drawGi = &kDrawGi[drawGiId];
     float rot;
 
 
@@ -463,25 +463,25 @@ void Shader_CustomSpin(GameState_Play* play, s16 shaderId)
     ModelViewRotateZ(rot * 7, MAT_MUL);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     InitListPolyOpa(play->gs.gfx);
-    gSPDisplayList(POLY_OPA_DISP++, shader->lists[0]);
-    gSPDisplayList(POLY_OPA_DISP++, shader->lists[1]);
+    gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
+    gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[1]);
 
     InitListPolyXlu(play->gs.gfx);
     shaderFlameEffect(play, 2, 1.f, 0.f);
     CLOSE_DISPS();
 }
 
-void Shader_CustomOwl(GameState_Play* play, s16 shaderId)
+void DrawGi_CustomOwl(GameState_Play* play, s16 drawGiId)
 {
-    const Shader* shader;
+    const DrawGi* drawGi;
     static const float scale = 0.01f;
 
-    shader = &kShaders[shaderId];
+    drawGi = &kDrawGi[drawGiId];
     OPEN_DISPS(play->gs.gfx);
     ModelViewScale(scale, scale, scale, MAT_MUL);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     InitListPolyOpa(play->gs.gfx);
-    gSPDisplayList(POLY_OPA_DISP++, shader->lists[0]);
+    gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
     CLOSE_DISPS();
 }
 
@@ -565,7 +565,7 @@ CustomStrayFairyObj kStrayFairyObj =
     }
 };
 
-static void Shader_CustomStrayFairy(GameState_Play* play, s16 shaderId)
+static void DrawGi_CustomStrayFairy(GameState_Play* play, s16 drawGiId)
 {
     static u32 kEnvColors[] = {
         0xba5084ff,
@@ -583,15 +583,15 @@ static void Shader_CustomStrayFairy(GameState_Play* play, s16 shaderId)
         0xf1e5d9ff,
     };
 
-    const Shader* shader;
+    const DrawGi* drawGi;
     int index;
     u8 r;
     u8 g;
     u8 b;
     u8 a;
 
-    shader = &kShaders[shaderId];
-    index = shader->lists[0];
+    drawGi = &kDrawGi[drawGiId];
+    index = drawGi->lists[0];
 #if defined(GAME_MM)
     if (index == 0)
     {
@@ -625,7 +625,7 @@ typedef struct
 }
 GsColors;
 
-void Shader_CustomBottlePotion(GameState_Play* play, s16 index)
+void DrawGi_CustomBottlePotion(GameState_Play* play, s16 index)
 {
     static const u32 kPrimColors[] = {
         0xff0000ff,
@@ -638,27 +638,27 @@ void Shader_CustomBottlePotion(GameState_Play* play, s16 index)
         0x8888ffff,
     };
 
-    const Shader* shader;
+    const DrawGi* drawGi;
 
     u8 r;
     u8 g;
     u8 b;
     u8 a;
 
-    shader = &kShaders[index];
+    drawGi = &kDrawGi[index];
     OPEN_DISPS(play->gs.gfx);
     InitListPolyXlu(play->gs.gfx);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    color4(&r, &g, &b, &a, kPrimColors[shader->lists[0]]);
+    color4(&r, &g, &b, &a, kPrimColors[drawGi->lists[0]]);
     gDPSetPrimColor(POLY_XLU_DISP++, 0, 0x80, r, g, b, a);
-    color4(&r, &g, &b, &a, kEnvColors[shader->lists[0]]);
+    color4(&r, &g, &b, &a, kEnvColors[drawGi->lists[0]]);
     gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, a);
-    gSPDisplayList(POLY_XLU_DISP++, shader->lists[1]);
+    gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[1]);
 
     CLOSE_DISPS();
 }
 
-void Shader_CustomGS(GameState_Play* play, s16 index)
+void DrawGi_CustomGS(GameState_Play* play, s16 index)
 {
     static const GsColors kColors[] = {
         { 0x967800ff, 0xffffaaff, 0xffd86eff, 0xffd86eff }, /* GS Token */
@@ -669,7 +669,7 @@ void Shader_CustomGS(GameState_Play* play, s16 index)
         { 0xaaaaaaff, 0xffffffff, 0x00ff00ff, 0x00ff00ff }, /* NPC Soul */
     };
 
-    const Shader* shader;
+    const DrawGi* drawGi;
     const GsColors* gsc;
     float fc;
     u8 r;
@@ -677,8 +677,8 @@ void Shader_CustomGS(GameState_Play* play, s16 index)
     u8 b;
     u8 a;
 
-    shader = &kShaders[index];
-    gsc = &kColors[shader->lists[0]];
+    drawGi = &kDrawGi[index];
+    gsc = &kColors[drawGi->lists[0]];
     fc = play->gs.frameCount;
 
     OPEN_DISPS(play->gs.gfx);
@@ -707,7 +707,7 @@ void Shader_CustomGS(GameState_Play* play, s16 index)
     CLOSE_DISPS();
 }
 
-void Shader_CustomPotion(GameState_Play* play, s16 index)
+void DrawGi_CustomPotion(GameState_Play* play, s16 index)
 {
     static const u32 kPrimColors1[] = {
         0x326400ff,
@@ -765,7 +765,7 @@ void Shader_CustomPotion(GameState_Play* play, s16 index)
         0x400,
     };
 
-    const Shader* shader;
+    const DrawGi* drawGi;
     int colorIndex;
     s32 fc;
     u8 r;
@@ -773,8 +773,8 @@ void Shader_CustomPotion(GameState_Play* play, s16 index)
     u8 b;
     u8 a;
 
-    shader = &kShaders[index];
-    colorIndex = shader->lists[0];
+    drawGi = &kDrawGi[index];
+    colorIndex = drawGi->lists[0];
     fc = play->gs.frameCount;
     OPEN_DISPS(play->gs.gfx);
     /* Opa */
@@ -870,12 +870,12 @@ static void drawColoredRupee(GameState_Play* play, u32 color)
     CLOSE_DISPS();
 }
 
-void Shader_SilverRupee(GameState_Play* play, s16 index)
+void DrawGi_SilverRupee(GameState_Play* play, s16 index)
 {
     drawColoredRupee(play, 0xffffffff);
 }
 
-void Shader_MagicalRupee(GameState_Play* play, s16 index)
+void DrawGi_MagicalRupee(GameState_Play* play, s16 index)
 {
     float h;
     u32 color;
@@ -885,33 +885,33 @@ void Shader_MagicalRupee(GameState_Play* play, s16 index)
     drawColoredRupee(play, color);
 }
 
-void Shader_RutosLetter(GameState_Play* play, s16 index)
+void DrawGi_RutosLetter(GameState_Play* play, s16 index)
 {
-    const Shader* shader;
-    shader = &kShaders[index];
+    const DrawGi* drawGi;
+    drawGi = &kDrawGi[index];
     OPEN_DISPS(play->gs.gfx);
     ModelViewRotateZ((M_PI / 2.f), 1);
 
     InitListPolyOpa(play->gs.gfx);
 
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
-    gSPDisplayList(POLY_OPA_DISP++, shader->lists[0]);
+    gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
 
     InitListPolyXlu(play->gs.gfx);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
-    gSPDisplayList(POLY_XLU_DISP++, shader->lists[1]);
+    gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[1]);
     CLOSE_DISPS();
 }
 
-void Shader_CustomSmallKey(GameState_Play* play, s16 index)
+void DrawGi_CustomSmallKey(GameState_Play* play, s16 index)
 {
-    const Shader* shader;
+    const DrawGi* drawGi;
 
-    shader = &kShaders[index];
+    drawGi = &kDrawGi[index];
     OPEN_DISPS(play->gs.gfx);
     InitListPolyOpa(play->gs.gfx);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
-    switch (shader->lists[1])
+    switch (drawGi->lists[1])
     {
     case 0:
         /* Silver */
@@ -924,27 +924,27 @@ void Shader_CustomSmallKey(GameState_Play* play, s16 index)
         gDPSetEnvColor(POLY_OPA_DISP++, 60, 80, 0, 255);
         break;
     }
-    gSPDisplayList(POLY_OPA_DISP++, shader->lists[0]);
+    gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
     CLOSE_DISPS();
 }
 
-void Shader_Coin(GameState_Play* play, s16 index)
+void DrawGi_Coin(GameState_Play* play, s16 index)
 {
-    const Shader* shader;
+    const DrawGi* drawGi;
     static const float scale = 2.f;
 
-    shader = &kShaders[index];
+    drawGi = &kDrawGi[index];
     OPEN_DISPS(play->gs.gfx);
     InitListPolyOpa(play->gs.gfx);
     ModelViewScale(scale, scale, scale, MAT_MUL);
 
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
-    gSPDisplayList(POLY_OPA_DISP++, shader->lists[1]);
-    gSPDisplayList(POLY_OPA_DISP++, shader->lists[0]);
+    gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[1]);
+    gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
 
     InitListPolyXlu(play->gs.gfx);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
-    gSPDisplayList(POLY_XLU_DISP++, shader->lists[2]);
+    gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[2]);
     CLOSE_DISPS();
 }
 
@@ -966,18 +966,18 @@ static const Gfx kMagicJarColorGold[] = {
     gsSPEndDisplayList(),
 };
 
-void Shader_MagicJar(GameState_Play* play, s16 index)
+void DrawGi_MagicJar(GameState_Play* play, s16 index)
 {
-    const Shader* shader;
+    const DrawGi* drawGi;
     int isUpgrade;
     int isLarge;
     const Gfx* colorJar;
     const Gfx* colorDetail;
     const Gfx* tmp;
 
-    shader = &kShaders[index];
-    isUpgrade = shader->lists[1];
-    isLarge = shader->lists[2];
+    drawGi = &kDrawGi[index];
+    isUpgrade = drawGi->lists[1];
+    isLarge = drawGi->lists[2];
 
     colorJar = kMagicJarColorGreen;
     colorDetail = isLarge ? kMagicJarColorGold : kMagicJarColorSilver;
@@ -993,7 +993,7 @@ void Shader_MagicJar(GameState_Play* play, s16 index)
     gSPSegment(POLY_OPA_DISP++, 0x08, colorJar);
     gSPSegment(POLY_OPA_DISP++, 0x09, colorDetail);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
-    gSPDisplayList(POLY_OPA_DISP++, shader->lists[0]);
+    gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
     CLOSE_DISPS();
 
     if (isUpgrade)
@@ -1003,19 +1003,19 @@ void Shader_MagicJar(GameState_Play* play, s16 index)
     }
 }
 
-void Shader_Triforce(GameState_Play* play, s16 index)
+void DrawGi_Triforce(GameState_Play* play, s16 index)
 {
-    const Shader* shader;
+    const DrawGi* drawGi;
     int type;
     u32 color;
 
-    shader = &kShaders[index];
-    type = shader->lists[1];
+    drawGi = &kDrawGi[index];
+    type = drawGi->lists[1];
 
     OPEN_DISPS(play->gs.gfx);
     InitListPolyOpa(play->gs.gfx);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
-    gSPDisplayList(POLY_OPA_DISP++, shader->lists[0]);
+    gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
     CLOSE_DISPS();
 
     if (type == 0)
@@ -1110,36 +1110,36 @@ static const Gfx* const kWalletBody[] = {
     kWalletBodyGray,
 };
 
-void Shader_Wallet(GameState_Play* play, s16 index)
+void DrawGi_Wallet(GameState_Play* play, s16 index)
 {
-    const Shader* shader;
-    shader = &kShaders[index];
+    const DrawGi* drawGi;
+    drawGi = &kDrawGi[index];
 
     OPEN_DISPS(play->gs.gfx);
     InitListPolyOpa(play->gs.gfx);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
-    gSPDisplayList(POLY_OPA_DISP++, LIST_PTR(kWalletBody[shader->lists[1]]));
-    gSPDisplayList(POLY_OPA_DISP++, shader->lists[0]);
-    gSPDisplayList(POLY_OPA_DISP++, shader->lists[2]);
-    gSPDisplayList(POLY_OPA_DISP++, shader->lists[3]);
-    gSPDisplayList(POLY_OPA_DISP++, shader->lists[4]);
-    gSPDisplayList(POLY_OPA_DISP++, shader->lists[5]);
-    gSPDisplayList(POLY_OPA_DISP++, LIST_PTR(kWalletRupee[shader->lists[6]]));
-    gSPDisplayList(POLY_OPA_DISP++, shader->lists[7]);
+    gSPDisplayList(POLY_OPA_DISP++, LIST_PTR(kWalletBody[drawGi->lists[1]]));
+    gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
+    gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[2]);
+    gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[3]);
+    gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[4]);
+    gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[5]);
+    gSPDisplayList(POLY_OPA_DISP++, LIST_PTR(kWalletRupee[drawGi->lists[6]]));
+    gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[7]);
     CLOSE_DISPS();
 }
 
-void Shader_Button(GameState_Play* play, s16 index)
+void DrawGi_Button(GameState_Play* play, s16 index)
 {
-    const Shader* shader;
-    shader = &kShaders[index];
+    const DrawGi* drawGi;
+    drawGi = &kDrawGi[index];
 
     OPEN_DISPS(play->gs.gfx);
     InitListPolyOpa(play->gs.gfx);
-    if (shader->lists[1])
+    if (drawGi->lists[1])
         ModelViewRotateZ(M_PI, 1);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
-    if (shader->lists[0])
+    if (drawGi->lists[0])
     {
         gDPSetPrimColor(POLY_OPA_DISP++, 0, 0x80, 255, 255, 0, 255);
     }
@@ -1147,10 +1147,10 @@ void Shader_Button(GameState_Play* play, s16 index)
     {
         gDPSetPrimColor(POLY_OPA_DISP++, 0, 0x80, 0, 0, 255, 255);
     }
-    gSPDisplayList(POLY_OPA_DISP++, shader->lists[2]);
+    gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[2]);
     CLOSE_DISPS();
 }
 
-const Shader kShaders[] = {
-#include "data/shaders.inc"
+const DrawGi kDrawGi[] = {
+#include "data/drawgi.inc"
 };

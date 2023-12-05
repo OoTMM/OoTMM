@@ -71,7 +71,7 @@
 #include <combo/entrances.h>
 #include <combo/common/events.h>
 #include <combo/scenes.h>
-#include <combo/shader.h>
+#include <combo/drawgi.h>
 #include <combo/config.h>
 #if defined (GAME_OOT)
 # include <combo/oot/pause_state_defs.h>
@@ -254,7 +254,7 @@ void comboSpawnCustomWarps(GameState_Play*);
 #define DRAW_RAW        (DRAW_NO_PRE1 | DRAW_NO_PRE2)
 
 void comboSetObjectSegment(GfxContext* gfx, void* buffer);
-void comboDrawObject(GameState_Play* play, Actor* actor, u16 objectId, u16 shaderId, int flags);
+void comboDrawObject(GameState_Play* play, Actor* actor, u16 objectId, u16 drawGiId, int flags);
 void comboDrawGI(GameState_Play* play, Actor* actor, int gi, int flags);
 void comboDrawInit2D(Gfx** dl);
 void comboDrawBlit2D(Gfx** dl, u32 segAddr, int w, int h, float x, float y, float scale);
@@ -353,8 +353,8 @@ extern s32 gLastScene;
 /* Warp */
 void comboTriggerWarp(GameState_Play* play, int index);
 
-/* Custom Shaders */
-void Shader_Xlu0(GameState_Play* play, s16 shaderId);
+/* Custom DrawGI */
+void DrawGI_Xlu0(GameState_Play* play, s16 drawGiId);
 
 /* MQ */
 void comboMqKaleidoHook(GameState_Play* play);

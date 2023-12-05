@@ -215,35 +215,35 @@ void AddRupees(s16 delta);
 
 void AudioLoad_InitTable(void* unk1, u32 unk2, u32 unk3);
 
-/* Shaders */
-void Shader_Opa0_Xlu1(GameState_Play*, s16);
-void Shader_Opa0_Xlu12(GameState_Play*, s16);
-void Shader_Opa0(GameState_Play*, s16);
-void Shader_Opa01(GameState_Play*, s16);
-void Shader_Opa1023(GameState_Play*, s16);
-void Shader_Opa10_Xlu2(GameState_Play*, s16);
-void Shader_Opa10_Xlu234(GameState_Play*, s16);
-void Shader_Opa10_Xlu32(GameState_Play*, s16);
-void Shader_Opa10234567(GameState_Play*, s16);
-void Shader_Xlu01(GameState_Play*, s16);
-void Shader_BlueFire(GameState_Play*, s16);
-void Shader_BombchuMask(GameState_Play*, s16);
-void Shader_Compass(GameState_Play*, s16);
-void Shader_DekuNut(GameState_Play*, s16);
-void Shader_Fairy(GameState_Play*, s16);
-void Shader_Fish(GameState_Play*, s16);
-void Shader_GiantKnife(GameState_Play*, s16);
-void Shader_GS(GameState_Play*, s16);
-void Shader_Heart(GameState_Play*, s16);
-void Shader_Medallion(GameState_Play*, s16);
-void Shader_MirrorShield(GameState_Play*, s16);
-void Shader_Poe(GameState_Play*, s16);
-void Shader_Potion(GameState_Play*, s16);
-void Shader_Rupee(GameState_Play*, s16);
-void Shader_Scale(GameState_Play*, s16);
-void Shader_SoldOut(GameState_Play*, s16);
-void Shader_Spell(GameState_Play*, s16);
-void Shader_MoonTear(GameState_Play*, s16);
+/* DrawGi */
+void DrawGi_Opa0_Xlu1(GameState_Play*, s16);
+void DrawGi_Opa0_Xlu12(GameState_Play*, s16);
+void DrawGi_Opa0(GameState_Play*, s16);
+void DrawGi_Opa01(GameState_Play*, s16);
+void DrawGi_Opa1023(GameState_Play*, s16);
+void DrawGi_Opa10_Xlu2(GameState_Play*, s16);
+void DrawGi_Opa10_Xlu234(GameState_Play*, s16);
+void DrawGi_Opa10_Xlu32(GameState_Play*, s16);
+void DrawGi_Opa10234567(GameState_Play*, s16);
+void DrawGi_Xlu01(GameState_Play*, s16);
+void DrawGi_BlueFire(GameState_Play*, s16);
+void DrawGi_BombchuMask(GameState_Play*, s16);
+void DrawGi_Compass(GameState_Play*, s16);
+void DrawGi_DekuNut(GameState_Play*, s16);
+void DrawGi_Fairy(GameState_Play*, s16);
+void DrawGi_Fish(GameState_Play*, s16);
+void DrawGi_GiantKnife(GameState_Play*, s16);
+void DrawGi_GS(GameState_Play*, s16);
+void DrawGi_Heart(GameState_Play*, s16);
+void DrawGi_Medallion(GameState_Play*, s16);
+void DrawGi_MirrorShield(GameState_Play*, s16);
+void DrawGi_Poe(GameState_Play*, s16);
+void DrawGi_Potion(GameState_Play*, s16);
+void DrawGi_Rupee(GameState_Play*, s16);
+void DrawGi_Scale(GameState_Play*, s16);
+void DrawGi_SoldOut(GameState_Play*, s16);
+void DrawGi_Spell(GameState_Play*, s16);
+void DrawGi_MoonTear(GameState_Play*, s16);
 
 void SpawnRoomActors(GameState_Play* play, int id);
 

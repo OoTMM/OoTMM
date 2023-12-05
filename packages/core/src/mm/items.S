@@ -47,7 +47,7 @@ PATCH_START 0x80114750
   li t7,0xfff
 PATCH_END
 
-/* Fix references to remains ShaderIDs */
+/* Fix references to remains DrawGiIds */
 PATCH_START 0x80852c8c
   li v0,0
 PATCH_END

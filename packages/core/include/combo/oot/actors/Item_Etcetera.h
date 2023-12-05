@@ -11,7 +11,7 @@ struct PACKED ALIGNED(0x4) Actor_ItemEtcetera
 {
     Actor                       base;
     Actor_ItemEtcetera_Func     update;
-    u16                         shaderId;
+    u16                         drawGiId;
     s16                         gi;
     s8                          objIndex;
     char                        unk_145[3];
