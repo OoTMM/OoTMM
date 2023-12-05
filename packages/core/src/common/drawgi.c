@@ -1003,14 +1003,13 @@ void DrawGi_MagicJar(GameState_Play* play, s16 index)
     }
 }
 
-void DrawGi_Triforce(GameState_Play* play, s16 index)
+void DrawGi_Triforce(GameState_Play* play, s16 index, u8 param)
 {
     const DrawGi* drawGi;
     int type;
     u32 color;
 
     drawGi = &kDrawGi[index];
-    type = drawGi->lists[1];
 
     OPEN_DISPS(play->gs.gfx);
     InitListPolyOpa(play->gs.gfx);
@@ -1018,10 +1017,10 @@ void DrawGi_Triforce(GameState_Play* play, s16 index)
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
     CLOSE_DISPS();
 
-    if (type == 0)
+    if (param == 0)
         return;
 
-    switch (type)
+    switch (param)
     {
     case 1:
         color = 0xff0000c0;

@@ -219,20 +219,17 @@ extern const DrawGi kDrawGi[];
 #define DRAWGI_COIN_BLUE                    0xc6
 #define DRAWGI_MAGIC_UPGRADE                0xc7
 #define DRAWGI_MAGIC_UPGRADE2               0xc8
-#define DRAWGI_TRIFORCE_POWER               0xc9
-#define DRAWGI_TRIFORCE_COURAGE             0xca
-#define DRAWGI_TRIFORCE_WISDOM              0xcb
-#define DRAWGI_SOUL_BOSS                    0xcc
-#define DRAWGI_WALLET3                      0xcd
-#define DRAWGI_WALLET4                      0xce
-#define DRAWGI_WALLET5                      0xcf
-#define DRAWGI_OOT_SILVER_POUCH             0xd0
-#define DRAWGI_OOT_RUPEE_MAGICAL            0xd1
-#define DRAWGI_BUTTON_A                     0xd2
-#define DRAWGI_BUTTON_C_RIGHT               0xd3
-#define DRAWGI_BUTTON_C_LEFT                0xd4
-#define DRAWGI_BUTTON_C_UP                  0xd5
-#define DRAWGI_BUTTON_C_DOWN                0xd6
-#define DRAWGI_SOUL_NPC                     0xd7
+#define DRAWGI_SOUL_BOSS                    0xc9
+#define DRAWGI_WALLET3                      0xca
+#define DRAWGI_WALLET4                      0xcb
+#define DRAWGI_WALLET5                      0xcc
+#define DRAWGI_OOT_SILVER_POUCH             0xcd
+#define DRAWGI_OOT_RUPEE_MAGICAL            0xce
+#define DRAWGI_BUTTON_A                     0xcf
+#define DRAWGI_BUTTON_C_RIGHT               0xd0
+#define DRAWGI_BUTTON_C_LEFT                0xd1
+#define DRAWGI_BUTTON_C_UP                  0xd2
+#define DRAWGI_BUTTON_C_DOWN                0xd3
+#define DRAWGI_SOUL_NPC                     0xd4
 
 #endif
