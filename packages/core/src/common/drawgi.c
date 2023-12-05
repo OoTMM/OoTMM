@@ -76,7 +76,7 @@ void DrawGi_Xlu0(GameState_Play* play, s16 drawGiId)
     CLOSE_DISPS();
 }
 
-void DrawGi_CustomNote(GameState_Play* play, s16 drawGiId)
+void DrawGi_CustomNote(GameState_Play* play, s16 drawGiId, u8 param)
 {
     static const u32 kColors[] = {
         0x8000ffff /* Purple */,
@@ -96,9 +96,9 @@ void DrawGi_CustomNote(GameState_Play* play, s16 drawGiId)
 
     drawGi = &kDrawGi[drawGiId];
     angle = M_PI / 16;
-    if (drawGi->lists[1] & 0x10)
+    if (param & 0x80)
         angle += M_PI;
-    color4(&r, &g, &b, &a, kColors[drawGi->lists[1] & 0xf]);
+    color4(&r, &g, &b, &a, kColors[param & 0xf]);
 
     ModelViewRotateZ(angle, MAT_MUL);
 
@@ -1152,5 +1152,9 @@ void DrawGi_Button(GameState_Play* play, s16 index)
 }
 
 const DrawGi kDrawGi[] = {
+#define X(a, b) { (void*)a, b }
+#define Y(...) { __VA_ARGS__ }
 #include "data/drawgi.inc"
+#undef Y
+#undef X
 };

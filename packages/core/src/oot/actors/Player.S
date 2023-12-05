@@ -123,3 +123,14 @@ PATCH_START 0x8007b714
   jal ChildHookAim
    nop
 PATCH_END
+
+/* Use our handler to draw GI */
+PATCH_START 0x8007b3fc
+  jal comboPlayerDrawGI
+PATCH_END
+
+/* Use our handler to set the draw GI ID */
+PATCH_START 0x808312e4
+  j comboPlayerSetDrawGi
+   nop
+PATCH_END

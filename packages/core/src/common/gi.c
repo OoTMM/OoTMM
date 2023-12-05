@@ -2,7 +2,7 @@
 #include <combo/custom.h>
 
 const ExtendedItemTable kExtendedGetItemsTable = {
-#define X(a, b, c, d, e, text) {a, b, c, 8, Y(e)}
+#define X(a, b, c, drawGiParam, d, e, text) {a, b, c, 8, Y(e)}
 #define Y(x)                x
 
 {
@@ -27,6 +27,19 @@ const ExtendedItemTable kExtendedGetItemsTable = {
 #undef X
 #undef Y
 };
+
+/* Draw GI Params */
+#define X(a, b, c, drawGiParam, d, e, text) drawGiParam
+
+const u8 kGetItemDrawGiParamOot[] = {
+#include "data/oot/gi.inc"
+};
+
+const u8 kGetItemDrawGiParamMm[] = {
+#include "data/mm/gi.inc"
+};
+
+#undef X
 
 void comboLoadObjectGi(Actor_Player* player, u16 objectId)
 {

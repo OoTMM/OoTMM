@@ -17,16 +17,21 @@ typedef struct PACKED ALIGNED(4) Actor_Player
     OSMesgQueue     objMsgQueue;
     OSMesg          objMsg;
     void*           objBuffer;
-    char            unk_1a4[0x4c8];
+    char            unk_1a4[0x280];
+    s16             gi; /* Extended to s16 */
+    char            unk_426[0x246];
     u32             state;
     u32             state2;
-    /* 0x674 */ Actor*          unk_674;
-    /* 0x678 */ Actor*          boomerangActor;
-    /* 0x67C */ Actor*          naviActor;
-    /* 0x680 */ s16             naviTextId;
-    /* 0x682 */ u8              state3;
-    /* 0x683 */ s8              exchangeItemId;
-    char            unk_684[0x3e8];
+    Actor*          unk_674;
+    Actor*          boomerangActor;
+    Actor*          naviActor;
+    s16             naviTextId;
+    u8              state3;
+    s8              exchangeItemId;
+    char            unk_684[0x1ce];
+    u8              drawGiId;
+    char            unk_853[0x219];
+
 }
 Actor_Player;
 
@@ -39,5 +44,17 @@ ASSERT_OFFSET(Actor_Player, heldItemId,     0x142);
 ASSERT_OFFSET(Actor_Player, boots,          0x143);
 ASSERT_OFFSET(Actor_Player, heldItemAction, 0x144);
 ASSERT_OFFSET(Actor_Player, unk_145,        0x145);
+ASSERT_OFFSET(Actor_Player, unk_1a4,        0x1a4);
+ASSERT_OFFSET(Actor_Player, gi,             0x424);
+ASSERT_OFFSET(Actor_Player, unk_426,        0x426);
+ASSERT_OFFSET(Actor_Player, unk_674,        0x674);
+ASSERT_OFFSET(Actor_Player, boomerangActor, 0x678);
+ASSERT_OFFSET(Actor_Player, naviActor,      0x67c);
+ASSERT_OFFSET(Actor_Player, naviTextId,     0x680);
+ASSERT_OFFSET(Actor_Player, state3,         0x682);
+ASSERT_OFFSET(Actor_Player, exchangeItemId, 0x683);
+ASSERT_OFFSET(Actor_Player, unk_684,        0x684);
+ASSERT_OFFSET(Actor_Player, drawGiId,       0x852);
+ASSERT_OFFSET(Actor_Player, unk_853,        0x853);
 
 #endif

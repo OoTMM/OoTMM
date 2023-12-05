@@ -142,3 +142,14 @@ PATCH_START 0x8082da90 + 0x5880
   nop
 PATCH_END
 PATCH_GROUP_END
+
+/* Use our handler to draw GI */
+PATCH_START 0x80126964
+  jal comboPlayerDrawGI
+PATCH_END
+
+/* Use our handler to set the draw GI ID */
+PATCH_START 0x8082ece0
+  j comboPlayerSetDrawGi
+   nop
+PATCH_END

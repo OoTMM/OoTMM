@@ -27,7 +27,7 @@ PATCH_LOAD_STORE 16, 0
 .int 0x8084c8a8
 PATCH_END
 
-/* Make link's gi held item unsigned */
+/* Make link's drawGiId unsigned */
 PATCH_LOAD_STORE 8, 1
 .int 0x8007b438
 .int 0x8007b44c
@@ -48,15 +48,15 @@ PATCH_LOAD_STORE 8, 1
 PATCH_END
 
 /* Hook into our custom item adding function */
-PATCH_START(0x8084c11c)
+PATCH_START 0x8084c11c
   sw v1,0x24(sp)
 PATCH_END
 
-PATCH_START(0x8084c128)
+PATCH_START 0x8084c128
   lw a1,0x24(sp)
 PATCH_END
 
-PATCH_START(0x8084c130)
+PATCH_START 0x8084c130
   jal comboPlayerAddItem
    nop
 PATCH_END

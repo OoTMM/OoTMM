@@ -7,7 +7,7 @@
 #define C2   TEXT_COLOR_PINK
 #define C3   TEXT_COLOR_YELLOW
 
-#define X(a, b, c, d, e, text) text
+#define X(a, b, c, drawGiParam, d, e, text) text
 static const char* const kItemNamesOot[] = {
 #include "../data/oot/gi.inc"
 };

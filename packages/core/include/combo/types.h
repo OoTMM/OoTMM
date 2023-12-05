@@ -7,6 +7,7 @@
 #define PACKED      __attribute__((packed))
 #define ALIGNED(x)  __attribute__((aligned(x)))
 #define UNREACHABLE __builtin_unreachable
+#define UNUSED(x)   ((void)x)
 
 #define PALIGN(val, align)  ((void*)ALIGN(((u32)(val)), align))
 

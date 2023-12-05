@@ -26,6 +26,10 @@ ExtendedItemTable;
 
 extern const ExtendedItemTable kExtendedGetItemsTable;
 #define kExtendedGetItems ((const GetItem*)(kExtendedGetItemsTable.native))
+
+extern const u8 kGetItemDrawGiParamOot[];
+extern const u8 kGetItemDrawGiParamMm[];
+
 #endif
 
 #endif /* COMBO_COMMON_GI_H */

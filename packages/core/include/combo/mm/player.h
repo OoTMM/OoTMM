@@ -31,16 +31,29 @@ typedef struct PACKED ALIGNED(4)
     OSMesgQueue objMsgQueue;
     OSMesg      objMsg;
     void*       objBuffer;
-    char        unk_1fc[0x198];
+    char        unk_1fc[0x188];
+    s16         gi;
+    char        unk_386[0x00e];
     u8          csMode;
     char        unk_395[0x6D7];
     u32         state;
     u32         state2;
     u32         state3;
-    char        unk_a78[0x300];
+    char        unk_a78[0x0b2];
+    u8          drawGiId;
+    char        unk_b2b[0x24d];
 }
 Actor_Player;
 
 _Static_assert(sizeof(Actor_Player) == 0xd78, "MM Actor_Player size is wrong");
+
+ASSERT_OFFSET(Actor_Player, unk_1fc,        0x1fc);
+ASSERT_OFFSET(Actor_Player, gi,             0x384);
+ASSERT_OFFSET(Actor_Player, unk_386,        0x386);
+ASSERT_OFFSET(Actor_Player, csMode,         0x394);
+ASSERT_OFFSET(Actor_Player, unk_395,        0x395);
+ASSERT_OFFSET(Actor_Player, unk_a78,        0xa78);
+ASSERT_OFFSET(Actor_Player, drawGiId,       0xb2a);
+ASSERT_OFFSET(Actor_Player, unk_b2b,        0xb2b);
 
 #endif
