@@ -331,7 +331,6 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
 
 static int canSpawnActor(GameState_Play* play, s16 actorId, u16 variable)
 {
-
     switch (actorId)
     {
     case AC_EN_SYATEKI_OKUTA:

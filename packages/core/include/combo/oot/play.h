@@ -102,97 +102,186 @@ ASSERT_OFFSET(InterfaceContext, unk_258,      0x258);
 ASSERT_OFFSET(InterfaceContext, restrictions, 0x262);
 ASSERT_OFFSET(InterfaceContext, unk_26e,      0x26e);
 
-typedef struct PACKED
+typedef struct
 {
-    /* 0x0000 */ char view[0x128]; // View view;
-    /* 0x0128 */ u8* iconItemSegment;
-    /* 0x012C */ u8* iconItem24Segment;
-    /* 0x0130 */ u8* iconItemAltSegment;
-    /* 0x0134 */ u8* iconItemLangSegment;
-    /* 0x0138 */ u8* nameSegment;
-    /* 0x013C */ u8* playerSegment;
-    /* 0x0140 */ char unk_140[0x04];
-    /* 0x0144 */ Vtx* itemPageVtx;
-    /* 0x0148 */ Vtx* equipPageVtx;
-    /* 0x014C */ Vtx* mapPageVtx;
-    /* 0x0150 */ Vtx* questPageVtx;
-    /* 0x0154 */ Vtx* infoPanelVtx;
-    /* 0x0158 */ Vtx* itemVtx;
-    /* 0x015C */ Vtx* equipVtx;
-    /* 0x0160 */ char unk_160[0x04];
-    /* 0x0164 */ Vtx* questVtx;
-    /* 0x0168 */ Vtx* cursorVtx;
-    /* 0x016C */ Vtx* saveVtx;
-    /* 0x0170 */ char unk_170[0x24];
-    /* 0x0194 */ struct OcarinaStaff* ocarinaStaff;
-    /* 0x0198 */ char unk_198[0x20];
-    /* 0x01B8 */ OSMesgQueue loadQueue;
-    /* 0x01D0 */ OSMesg loadMsg;
-    /* 0x01D4 */ u16 state;
-    /* 0x01D6 */ u16 debugState;
-    /* 0x01D8 */ Vec3f eye;
-    /* 0x01E4 */ u16 changing;
-    /* 0x01E6 */ u16 screen_prev_idx;
-    /* 0x01E8 */ u16 screen_idx;
-    /* 0x01EA */ u16 switchPageTimer;
-    /* 0x01EC */ u16 savePromptState;
-    /* 0x01EE */ char pad_1ee[0x2];
-    /* 0x01F0 */ f32 unk_1F0;
-    /* 0x01F4 */ f32 itemPageRoll; // rotation (-z) of the item page into the screen
-    /* 0x01F8 */ f32 mapPageRoll; // rotation (+x) of the map page into the screen
-    /* 0x01FC */ f32 questPageRoll; // rotation (+z) of the quest page into the screen
-    /* 0x0200 */ f32 maskPageRoll; // rotation (-z) of the mask page into the screen
-    /* 0x0204 */ f32 roll;
-    /* 0x0208 */ u16 alpha;
-    /* 0x020A */ s16 offsetY;
-    /* 0x020C */ char unk_228[0x8];
-    /* 0x0214 */ s16 stickAdjX;
-    /* 0x0216 */ s16 stickAdjY;
-    /* 0x0218 */ s16 item_cursor;
-    /* 0x021A */ s16 map_cursor;
-    /* 0x021C */ s16 quest_cursor;
-    /* 0x021E */ s16 equip_cursor;
-    /* 0x0220 */ s16 world_map_cursor;
-    /* 0x0222 */ s16 item_x;
-    /* 0x0224 */ s16 map_x;
-    /* 0x0226 */ s16 quest_x;
-    /* 0x0228 */ s16 equipment_x;
-    /* 0x022A */ s16 world_map_x;
-    /* 0x022C */ s16 item_y;
-    /* 0x022E */ s16 map_y;
-    /* 0x0230 */ s16 quest_y;
-    /* 0x0232 */ s16 equipment_y;
-    /* 0x0234 */ s16 world_map_y;
-    /* 0x0236 */ s16 dungeonMapSlot;
-    /* 0x0238 */ s16 cursor_pos;
-    /* 0x023A */ char unk_09_[0x0002];
-    /* 0x023C */ s16 item_id;
-    /* 0x023E */ s16 item_item;
-    /* 0x0240 */ s16 map_item;
-    /* 0x0242 */ s16 quest_item;
-    /* 0x0244 */ s16 equip_item;
-    /* 0x0246 */ s16 item_hilite;
-    /* 0x0248 */ s16 map_hilite;
-    /* 0x024A */ s16 quest_hilite;
-    /* 0x024C */ s16 equipment_hilite;
-    /* 0x024E */ u16 equipTargetItem; // "sl_item_no"
-    /* 0x0250 */ u16 equipTargetSlot; // "sl_number"
-    /* 0x0252 */ u16 equipTargetCBtn;
-    /* 0x0254 */ s16 equipAnimX;
-    /* 0x0256 */ s16 equipAnimY;
-    /* 0x0258 */ s16 equipAnimAlpha;
-    /* 0x025A */ s16 infoPanelOffsetY;
-    /* 0x025C */ u16 nameDisplayTimer;
-    /* 0x025E */ u16 nameColorSet; // 0 = white; 1 = grey
-    /* 0x0260 */ s16 cursorColorSet; // 0 = white; 4 = yellow; 8 = green
-    /* 0x0262 */ s16 promptChoice; // save/continue choice: 0 = yes; 4 = no
-    /* 0x0264 */ s16 quest_song;
-    /* 0x0266 */ u8 worldMapPoints[20]; // 0 = hidden; 1 = displayed; 2 = highlighted
-    /* 0x027A */ u8 tradeQuestLocation;
-    /* 0x027B */ char    pad_27B;
-    char    s27C[0x0038];
+    char                    view[0x128]; // View view;
+    u8*                     iconItemSegment;
+    u8*                     iconItem24Segment;
+    u8*                     iconItemAltSegment;
+    u8*                     iconItemLangSegment;
+    u8*                     nameSegment;
+    u8*                     playerSegment;
+    char                    unk_140[0x04];
+    Vtx*                    itemPageVtx;
+    Vtx*                    equipPageVtx;
+    Vtx*                    mapPageVtx;
+    Vtx*                    questPageVtx;
+    Vtx*                    infoPanelVtx;
+    Vtx*                    itemVtx;
+    Vtx*                    equipVtx;
+    char                    unk_160[0x04];
+    Vtx*                    questVtx;
+    Vtx*                    cursorVtx;
+    Vtx*                    saveVtx;
+    char                    unk_170[0x24];
+    struct OcarinaStaff*    ocarinaStaff;
+    char                    unk_198[0x20];
+    OSMesgQueue             loadQueue;
+    OSMesg                  loadMsg;
+    u16                     state;
+    u16                     debugState;
+    Vec3f                   eye;
+    u16                     changing;
+    u16                     screen_prev_idx;
+    u16                     screen_idx;
+    u16                     switchPageTimer;
+    u16                     savePromptState;
+    char                    pad_1ee[0x2];
+    f32                     unk_1F0;
+    f32                     itemPageRoll; // rotation (-z) of the item page into the screen
+    f32                     mapPageRoll; // rotation (+x) of the map page into the screen
+    f32                     questPageRoll; // rotation (+z) of the quest page into the screen
+    f32                     maskPageRoll; // rotation (-z) of the mask page into the screen
+    f32                     roll;
+    u16                     alpha;
+    s16                     offsetY;
+    char                    unk_228[0x8];
+    s16                     stickAdjX;
+    s16                     stickAdjY;
+    s16                     item_cursor;
+    s16                     map_cursor;
+    s16                     quest_cursor;
+    s16                     equip_cursor;
+    s16                     world_map_cursor;
+    s16                     item_x;
+    s16                     map_x;
+    s16                     quest_x;
+    s16                     equipment_x;
+    s16                     world_map_x;
+    s16                     item_y;
+    s16                     map_y;
+    s16                     quest_y;
+    s16                     equipment_y;
+    s16                     world_map_y;
+    s16                     dungeonMapSlot;
+    s16                     cursor_pos;
+    char                    unk_09_[0x0002];
+    s16                     item_id;
+    s16                     item_item;
+    s16                     map_item;
+    s16                     quest_item;
+    s16                     equip_item;
+    s16                     item_hilite;
+    s16                     map_hilite;
+    s16                     quest_hilite;
+    s16                     equipment_hilite;
+    u16                     equipTargetItem; // "sl_item_no"
+    u16                     equipTargetSlot; // "sl_number"
+    u16                     equipTargetCBtn;
+    s16                     equipAnimX;
+    s16                     equipAnimY;
+    s16                     equipAnimAlpha;
+    s16                     infoPanelOffsetY;
+    u16                     nameDisplayTimer;
+    u16                     nameColorSet; // 0 = white; 1 = grey
+    s16                     cursorColorSet; // 0 = white; 4 = yellow; 8 = green
+    s16                     promptChoice; // save/continue choice: 0 = yes; 4 = no
+    s16                     quest_song;
+    u8                      worldMapPoints[20]; // 0 = hidden; 1 = displayed; 2 = highlighted
+    u8                      tradeQuestLocation;
+    char                    pad_27B;
+    char                    s27C[0x0038];
 }
 PauseContext;
+
+ASSERT_OFFSET(PauseContext, view,                       0x000);
+ASSERT_OFFSET(PauseContext, iconItemSegment,            0x128);
+ASSERT_OFFSET(PauseContext, iconItem24Segment,          0x12c);
+ASSERT_OFFSET(PauseContext, iconItemAltSegment,         0x130);
+ASSERT_OFFSET(PauseContext, iconItemLangSegment,        0x134);
+ASSERT_OFFSET(PauseContext, nameSegment,                0x138);
+ASSERT_OFFSET(PauseContext, playerSegment,              0x13c);
+ASSERT_OFFSET(PauseContext, unk_140,                    0x140);
+ASSERT_OFFSET(PauseContext, itemPageVtx,                0x144);
+ASSERT_OFFSET(PauseContext, equipPageVtx,               0x148);
+ASSERT_OFFSET(PauseContext, mapPageVtx,                 0x14c);
+ASSERT_OFFSET(PauseContext, questPageVtx,               0x150);
+ASSERT_OFFSET(PauseContext, infoPanelVtx,               0x154);
+ASSERT_OFFSET(PauseContext, itemVtx,                    0x158);
+ASSERT_OFFSET(PauseContext, equipVtx,                   0x15c);
+ASSERT_OFFSET(PauseContext, unk_160,                    0x160);
+ASSERT_OFFSET(PauseContext, questVtx,                   0x164);
+ASSERT_OFFSET(PauseContext, cursorVtx,                  0x168);
+ASSERT_OFFSET(PauseContext, saveVtx,                    0x16c);
+ASSERT_OFFSET(PauseContext, unk_170,                    0x170);
+ASSERT_OFFSET(PauseContext, ocarinaStaff,               0x194);
+ASSERT_OFFSET(PauseContext, unk_198,                    0x198);
+ASSERT_OFFSET(PauseContext, loadQueue,                  0x1b8);
+ASSERT_OFFSET(PauseContext, loadMsg,                    0x1d0);
+ASSERT_OFFSET(PauseContext, state,                      0x1d4);
+ASSERT_OFFSET(PauseContext, debugState,                 0x1d6);
+ASSERT_OFFSET(PauseContext, eye,                        0x1d8);
+ASSERT_OFFSET(PauseContext, changing,                   0x1e4);
+ASSERT_OFFSET(PauseContext, screen_prev_idx,            0x1e6);
+ASSERT_OFFSET(PauseContext, screen_idx,                 0x1e8);
+ASSERT_OFFSET(PauseContext, switchPageTimer,            0x1ea);
+ASSERT_OFFSET(PauseContext, savePromptState,            0x1ec);
+ASSERT_OFFSET(PauseContext, pad_1ee,                    0x1ee);
+ASSERT_OFFSET(PauseContext, unk_1F0,                    0x1f0);
+ASSERT_OFFSET(PauseContext, itemPageRoll,               0x1f4);
+ASSERT_OFFSET(PauseContext, mapPageRoll,                0x1f8);
+ASSERT_OFFSET(PauseContext, questPageRoll,              0x1fc);
+ASSERT_OFFSET(PauseContext, maskPageRoll,               0x200);
+ASSERT_OFFSET(PauseContext, roll,                       0x204);
+ASSERT_OFFSET(PauseContext, alpha,                      0x208);
+ASSERT_OFFSET(PauseContext, offsetY,                    0x20a);
+ASSERT_OFFSET(PauseContext, unk_228,                    0x20c);
+ASSERT_OFFSET(PauseContext, stickAdjX,                  0x214);
+ASSERT_OFFSET(PauseContext, stickAdjY,                  0x216);
+ASSERT_OFFSET(PauseContext, item_cursor,                0x218);
+ASSERT_OFFSET(PauseContext, map_cursor,                 0x21a);
+ASSERT_OFFSET(PauseContext, quest_cursor,               0x21c);
+ASSERT_OFFSET(PauseContext, equip_cursor,               0x21e);
+ASSERT_OFFSET(PauseContext, world_map_cursor,           0x220);
+ASSERT_OFFSET(PauseContext, item_x,                     0x222);
+ASSERT_OFFSET(PauseContext, map_x,                      0x224);
+ASSERT_OFFSET(PauseContext, quest_x,                    0x226);
+ASSERT_OFFSET(PauseContext, equipment_x,                0x228);
+ASSERT_OFFSET(PauseContext, world_map_x,                0x22a);
+ASSERT_OFFSET(PauseContext, item_y,                     0x22c);
+ASSERT_OFFSET(PauseContext, map_y,                      0x22e);
+ASSERT_OFFSET(PauseContext, quest_y,                    0x230);
+ASSERT_OFFSET(PauseContext, equipment_y,                0x232);
+ASSERT_OFFSET(PauseContext, world_map_y,                0x234);
+ASSERT_OFFSET(PauseContext, dungeonMapSlot,             0x236);
+ASSERT_OFFSET(PauseContext, cursor_pos,                 0x238);
+ASSERT_OFFSET(PauseContext, unk_09_,                    0x23a);
+ASSERT_OFFSET(PauseContext, item_id,                    0x23c);
+ASSERT_OFFSET(PauseContext, item_item,                  0x23e);
+ASSERT_OFFSET(PauseContext, map_item,                   0x240);
+ASSERT_OFFSET(PauseContext, quest_item,                 0x242);
+ASSERT_OFFSET(PauseContext, equip_item,                 0x244);
+ASSERT_OFFSET(PauseContext, item_hilite,                0x246);
+ASSERT_OFFSET(PauseContext, map_hilite,                 0x248);
+ASSERT_OFFSET(PauseContext, quest_hilite,               0x24a);
+ASSERT_OFFSET(PauseContext, equipment_hilite,           0x24c);
+ASSERT_OFFSET(PauseContext, equipTargetItem,            0x24e);
+ASSERT_OFFSET(PauseContext, equipTargetSlot,            0x250);
+ASSERT_OFFSET(PauseContext, equipTargetCBtn,            0x252);
+ASSERT_OFFSET(PauseContext, equipAnimX,                 0x254);
+ASSERT_OFFSET(PauseContext, equipAnimY,                 0x256);
+ASSERT_OFFSET(PauseContext, equipAnimAlpha,             0x258);
+ASSERT_OFFSET(PauseContext, infoPanelOffsetY,           0x25a);
+ASSERT_OFFSET(PauseContext, nameDisplayTimer,           0x25c);
+ASSERT_OFFSET(PauseContext, nameColorSet,               0x25e);
+ASSERT_OFFSET(PauseContext, cursorColorSet,             0x260);
+ASSERT_OFFSET(PauseContext, promptChoice,               0x262);
+ASSERT_OFFSET(PauseContext, quest_song,                 0x264);
+ASSERT_OFFSET(PauseContext, worldMapPoints,             0x266);
+ASSERT_OFFSET(PauseContext, tradeQuestLocation,         0x27a);
+ASSERT_OFFSET(PauseContext, pad_27B,                    0x27b);
+
+_Static_assert(sizeof(PauseContext) == 0x2b4, "OoT PauseContext size is wrong");
 
 /* Start: 0x11d30 */
 typedef struct PACKED

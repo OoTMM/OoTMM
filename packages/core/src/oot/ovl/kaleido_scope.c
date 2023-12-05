@@ -492,13 +492,12 @@ static void LoadMapName(void* dst, u32 mapNameId)
 
 static void KaleidoScope_UpdateOwlWarpNamePanel(GameState_Play* play)
 {
-    PauseContext* pauseCtx = &play->pauseCtx;
+    PauseContext* pauseCtx;
     u16 texIndex;
 
-    if ((pauseCtx->item_id != pauseCtx->map_item) ||
-        ((pauseCtx->screen_idx == 1) && (pauseCtx->cursor_pos != 0)))
+    pauseCtx = &play->pauseCtx;
+    if ((pauseCtx->item_id != pauseCtx->map_item) || ((pauseCtx->screen_idx == 1) && (pauseCtx->cursor_pos != 0)))
     {
-
         pauseCtx->item_id = pauseCtx->map_item;
         texIndex = pauseCtx->item_id;
 
