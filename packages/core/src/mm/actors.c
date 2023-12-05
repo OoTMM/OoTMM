@@ -55,7 +55,7 @@ static void Actor_ByteCode_GiveItem(Actor* actor, GameState_Play* play, s16 gi, 
         func = EnBjt_GiveItem;
         break;
     default:
-        func = GiveItem;
+        func = (void*)GiveItem;
         break;
     }
 
@@ -331,7 +331,7 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
 
 static int canSpawnActor(GameState_Play* play, s16 actorId, u16 variable)
 {
-    
+
     switch (actorId)
     {
     case AC_EN_SYATEKI_OKUTA:

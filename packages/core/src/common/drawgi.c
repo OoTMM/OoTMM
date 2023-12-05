@@ -1006,7 +1006,6 @@ void DrawGi_MagicJar(GameState_Play* play, s16 index)
 void DrawGi_Triforce(GameState_Play* play, s16 index, u8 param)
 {
     const DrawGi* drawGi;
-    int type;
     u32 color;
 
     drawGi = &kDrawGi[index];
