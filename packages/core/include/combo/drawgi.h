@@ -161,7 +161,7 @@ extern const DrawGi kDrawGi[];
 #define DRAWGI_MM_RUPEE_PURPLE              0x8c
 #define DRAWGI_MM_RUPEE_SILVER              0x8d
 #define DRAWGI_MM_SWORD_KOKIRI              0x8e
-#define DRAWGI_BOTTLE_POTION_RED            0x8f
+#define DRAWGI_BOTTLE_POTION                0x8f
 #define DRAWGI_MM_ZORA_EGG                  0x90
 #define DRAWGI_MM_MOON_TEAR                 0x91
 #define DRAWGI_MM_DEED_LAND                 0x92
@@ -234,7 +234,5 @@ extern const DrawGi kDrawGi[];
 #define DRAWGI_BUTTON_C_UP                  0xd5
 #define DRAWGI_BUTTON_C_DOWN                0xd6
 #define DRAWGI_SOUL_NPC                     0xd7
-#define DRAWGI_BOTTLE_POTION_GREEN          0xd8
-#define DRAWGI_BOTTLE_POTION_BLUE           0xd9
 
 #endif

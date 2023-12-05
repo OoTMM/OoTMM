@@ -625,7 +625,7 @@ typedef struct
 }
 GsColors;
 
-void DrawGi_CustomBottlePotion(GameState_Play* play, s16 index)
+void DrawGi_CustomBottlePotion(GameState_Play* play, s16 index, u8 param)
 {
     static const u32 kPrimColors[] = {
         0xff0000ff,
@@ -649,11 +649,11 @@ void DrawGi_CustomBottlePotion(GameState_Play* play, s16 index)
     OPEN_DISPS(play->gs.gfx);
     InitListPolyXlu(play->gs.gfx);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    color4(&r, &g, &b, &a, kPrimColors[drawGi->lists[0]]);
+    color4(&r, &g, &b, &a, kPrimColors[param]);
     gDPSetPrimColor(POLY_XLU_DISP++, 0, 0x80, r, g, b, a);
-    color4(&r, &g, &b, &a, kEnvColors[drawGi->lists[0]]);
+    color4(&r, &g, &b, &a, kEnvColors[param]);
     gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, a);
-    gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[1]);
+    gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[0]);
 
     CLOSE_DISPS();
 }
