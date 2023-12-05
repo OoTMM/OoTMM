@@ -1,7 +1,7 @@
 import fs from 'fs/promises';
 import YAML from 'yaml';
 
-import { SETTINGS, generate } from "./combo";
+import { SETTINGS, generate, importSettings } from "./combo";
 import { OptionsInput } from "./combo/options";
 import { makeSettings } from './combo';
 
@@ -66,9 +66,7 @@ const makeOptions = async (args: string[]): Promise<OptionsInput> => {
       break;
     }
     case "--settings": {
-      const newBuf = Buffer.from(args[++i], 'base64');
-      const newPartialSettings = JSON.parse(newBuf.toString());
-      opts.settings = makeSettings(newPartialSettings);
+      opts.settings = makeSettings(importSettings(args[++i]));
       break;
     }
     default:

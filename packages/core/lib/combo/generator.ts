@@ -13,6 +13,7 @@ import { Patchfile } from './patch-build/patchfile';
 import { makeAddresses } from './addresses';
 import { cosmetics } from './cosmetics';
 import { applyRandomSettings } from './settings/random';
+import { exportSettings } from './settings/string';
 
 export type GeneratorOutput = {
   hash: string;
