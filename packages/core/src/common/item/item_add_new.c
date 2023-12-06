@@ -12,6 +12,7 @@
 #define IA_BOMBS            0x02
 #define IA_NUTS             0x03
 #define IA_UPGRADE_NUTS     0x04
+#define IA_BOMBCHU          0x05
 #define IA_NONE             0xff
 
 typedef int (*AddItemFunc)(GameState_Play* play, s16 gi, u16 param);
@@ -291,12 +292,26 @@ static int addItemNutsUpgrade(GameState_Play* play, s16 gi, u16 param)
     return 0;
 }
 
+static int addItemBombchuOot(GameState_Play* play, s16 gi, u16 param)
+{
+    addAmmoOot(ITS_OOT_BOMBCHU, ITEM_OOT_BOMBCHU_10, 50, param);
+    return 0;
+}
+
+static int addItemBombchuMm(GameState_Play* play, s16 gi, u16 param)
+{
+    if (gMmSave.inventory.upgrades.bombBag)
+        addAmmoMm(ITS_MM_BOMBCHU, ITEM_MM_BOMBCHU, 40, param);
+    return 0;
+}
+
 static const AddItemHandler kAddItemHandlers[] = {
     { addItemRupeesOot,     addItemRupeesMm },
     { addItemWalletOot,     addItemWalletMm },
     { addItemBombsOot,      addItemBombsMm },
     { addItemNutsOot,       addItemNutsMm },
     { addItemNutsUpgrade,   NULL },
+    { addItemBombchuOot,    addItemBombchuMm },
 };
 
 #define X(a, b, c, drawGiParam, addItemId, addItemParam, d, e, text) addItemId

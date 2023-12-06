@@ -163,19 +163,6 @@ void comboAddSticksMm(int count)
         gMmSave.inventory.ammo[ITS_MM_STICKS] = max;
 }
 
-static void addBombchu(int count)
-{
-    u16 max;
-
-    if (gMmSave.inventory.upgrades.bombBag == 0)
-        return;
-    max = 40;
-    gMmSave.inventory.items[ITS_MM_BOMBCHU] = ITEM_MM_BOMBCHU;
-    gMmSave.inventory.ammo[ITS_MM_BOMBCHU] += count;
-    if (gMmSave.inventory.ammo[ITS_MM_BOMBCHU] > max)
-        gMmSave.inventory.ammo[ITS_MM_BOMBCHU] = max;
-}
-
 static void addNewBottle(u16 itemId)
 {
     int i;
@@ -763,18 +750,6 @@ int comboAddItemMm(s16 gi, int noEffect)
         break;
     case GI_MM_STICK:
         comboAddSticksMm(1);
-        break;
-    case GI_MM_BOMBCHU:
-        addBombchu(1);
-        break;
-    case GI_MM_BOMBCHU_5:
-        addBombchu(5);
-        break;
-    case GI_MM_BOMBCHU_10:
-        addBombchu(10);
-        break;
-    case GI_MM_BOMBCHU_20:
-        addBombchu(20);
         break;
     case GI_MM_MOON_TEAR:
         addTrade1(XITEM_MM_TRADE1_MOON_TEAR);

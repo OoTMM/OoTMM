@@ -152,11 +152,6 @@ static void addSeeds(u8 count)
     BITMAP16_SET(gOotSave.eventsItem, EV_OOT_ITEM_DEKU_SEEDS);
 }
 
-static void addBombchu(u8 count)
-{
-    addAmmo(ITS_OOT_BOMBCHU, ITEM_OOT_BOMBCHU_10, 50, count);
-}
-
 static void addNewBottle(u16 itemId)
 {
     for (int i = 0; i < 4; ++i)
@@ -763,15 +758,6 @@ int comboAddItemOot(s16 gi, int noEffect)
         break;
     case GI_OOT_OCARINA_TIME:
         comboAddCommonItemOot(SITEM_OCARINA_TIME, noEffect);
-        break;
-    case GI_OOT_BOMBCHU_5:
-        addBombchu(5);
-        break;
-    case GI_OOT_BOMBCHU_10:
-        addBombchu(10);
-        break;
-    case GI_OOT_BOMBCHU_20:
-        addBombchu(20);
         break;
     case GI_OOT_HOOKSHOT:
         comboAddCommonItemOot(SITEM_HOOKSHOT, noEffect);
