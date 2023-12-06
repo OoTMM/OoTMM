@@ -71,7 +71,7 @@ void    ActorUpdateVelocity(Actor* actor);
 int     ActorTalkedTo(Actor* actor);
 
 u32     GetChestFlag(GameState_Play* play, int flag);
-u32     SetChestFlag(GameState_Play* play, int flag);
+void    SetChestFlag(GameState_Play* play, int flag);
 u32     GetCollectibleFlag(GameState_Play* play, int flag);
 void    SetCollectibleFlag(GameState_Play* play, int flag);
 u32     GetSwitchFlag(GameState_Play* play, int flag);
