@@ -19,16 +19,11 @@ void comboSetObjectSegment(GfxContext* gfx, void* buffer)
     gSegments[0x06] = (u32)buffer - 0x80000000;
 }
 
-static s16 playerDisplayGi;
+static u8 playerDrawGiParam;
 
-static void drawGiParam(GameState_Play* play, s16 gi)
+static u8 paramForGi(s16 gi)
 {
-    const GetItem* giEntry;
-    u16 drawGiId;
     u8 param;
-
-    giEntry = kExtendedGetItems + gi - 1;
-    drawGiId = giEntry->drawGiId;
 
 #if defined(GAME_MM)
     gi ^= MASK_FOREIGN_GI;
@@ -39,7 +34,24 @@ static void drawGiParam(GameState_Play* play, s16 gi)
     else
         param = kGetItemDrawGiParamOot[gi - 1];
 
+    return param;
+}
+
+static void drawGiParamDrawId(GameState_Play* play, u8 drawGiId, u8 param)
+{
     kDrawGi[drawGiId - 1].func(play, drawGiId - 1, param);
+}
+
+static void drawGiParam(GameState_Play* play, s16 gi)
+{
+    const GetItem* giEntry;
+    u16 drawGiId;
+    u8 param;
+
+    giEntry = kExtendedGetItems + gi - 1;
+    drawGiId = giEntry->drawGiId;
+    param = paramForGi(gi);
+    drawGiParamDrawId(play, drawGiId, param);
 }
 
 void comboDrawGI(GameState_Play* play, Actor* actor, s16 gi, int flags)
@@ -65,13 +77,16 @@ void comboDrawGI(GameState_Play* play, Actor* actor, s16 gi, int flags)
 
 void comboPlayerDrawGI(GameState_Play* play)
 {
-    drawGiParam(play, playerDisplayGi);
+    Actor_Player* link;
+
+    link = GET_LINK(play);
+    drawGiParamDrawId(play, link->drawGiId, playerDrawGiParam);
 }
 
 void comboPlayerSetDrawGi(Actor_Player* link)
 {
-    playerDisplayGi = link->gi;
-    link->drawGiId = kExtendedGetItems[playerDisplayGi - 1].drawGiId;
+    playerDrawGiParam = paramForGi(link->gi);
+    link->drawGiId = kExtendedGetItems[link->gi - 1].drawGiId;
 }
 
 void comboDrawInit2D(Gfx** dl)

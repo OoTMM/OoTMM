@@ -35,7 +35,6 @@ PATCH_LOAD_STORE 8, 1
 .int 0x8007be18
 .int 0x8007bed0
 .int 0x8007bf04
-.int 0x8007bf04
 .int 0x8007bf80
 .int 0x80831318
 .int 0x8083131c
