@@ -237,10 +237,31 @@ void Fishing_OverrideInitFishLength(u8 linkAge, f32 childMultiplier, Actor* this
 }
 
 void Fishing_FishGiveItem(Actor* this, GameState_Play* play) {
-    ActorDestroy(this);
-
     ComboItemQuery q;
+    ComboItemOverride o;
+    int major;
 
     Fishing_Fish_ItemQuery(&q, this->variable);
-    comboAddItemEx(play, &q, 0);
+
+    comboItemOverride(&o, &q);
+    major = !isItemFastBuy(o.gi);
+    if (major)
+    {
+        // "It's smaller than your current fish. Are you sure?"
+        // Behavior overridden later
+        PlayerDisplayTextBox(play, 0x4098, NULL);
+        u8* keepState = (((u8*)this)+0x1C5);
+        *keepState = 1; // Wait for another dialog
+        s16* timer = (s16*)(((u8*)this) + 0x16A);
+        *timer = 60;
+    }
+    else
+    {
+        ActorDestroy(this);
+    }
+
+    /* Play the sound */
+    PlaySound(0x4824);
+
+    comboAddItemEx(play, &q, major);
 }
