@@ -56,6 +56,9 @@ Actor*  SpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x, fl
 Actor*  SpawnActorEx(void* const_1, GameState_Play* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int ex1, int ex2, int ex3);
 #endif
 
+void    SkelAnime_DrawFlexOpa(GameState_Play* play, void** skeleton, Vec3s* jointTable, s32 dListCount,
+                           void* overrideLimbDraw, void* postLimbDraw, void* arg);
+
 void    ActorDestroy(Actor* actor);
 int     Actor_HasParent(Actor* actor);
 void    ActorSetScale(Actor* actor, float scale);
@@ -68,7 +71,7 @@ void    ActorUpdateVelocity(Actor* actor);
 int     ActorTalkedTo(Actor* actor);
 
 u32     GetChestFlag(GameState_Play* play, int flag);
-u32     SetChestFlag(GameState_Play* play, int flag);
+void    SetChestFlag(GameState_Play* play, int flag);
 u32     GetCollectibleFlag(GameState_Play* play, int flag);
 void    SetCollectibleFlag(GameState_Play* play, int flag);
 u32     GetSwitchFlag(GameState_Play* play, int flag);
@@ -132,9 +135,11 @@ void ModelViewScale(float sx, float sy, float sz, int mode);
 
 f32 Math_CosS(s16 angle);
 f32 Math_SinS(s16 angle);
+f32 sqrtf(f32 value);
 
 void MatrixStackDup(void);
 void MatrixStackPop(void);
+void Matrix_MultVec3f(Vec3f* src, Vec3f* dest);
 
 float RandFloat(void);
 

@@ -69,6 +69,7 @@ Magic_Update            = 0x80072840;
 InitListPolyOpa         = 0x8007e298;
 InitListPolyXlu         = 0x8007e2c0;
 Gfx_SetupDL_42Opa       = 0x8007e868;
+Matrix_MultVec3f        = 0x800ab958;
 GetMatrixMV             = 0x800ab900;
 
 IsSceneValidEpona = 0x8005a3c0;
@@ -77,6 +78,7 @@ gActorOvl = 0x800e8530;
 LoadObject = 0x800812f0;
 _GetObjectSlot = 0x80081628;
 _IsObjectSlotLoaded = 0x80081688;
+SkelAnime_DrawFlexOpa = 0x80089D8C;
 ActorSetScale = 0x80020f88;
 ActorSetUnk = 0x80020f04;
 
@@ -134,6 +136,7 @@ ModelViewScale = 0x800aa8fc;
 
 RandFloat = 0x800cdccc;
 GetChestFlag = 0x8002060c;
+SetChestFlag = 0x80020624;
 GetActiveItem = 0x80022b04;
 
 AddItem = 0x8006fdcc;
@@ -212,3 +215,5 @@ EnItem00_CollectedHandler = 0x800127e0;
 EnItem00_SetHandler = 0x80011b40;
 
 ActorFind = 0x80025b0c;
+
+sqrtf = 0x800D0DC0;

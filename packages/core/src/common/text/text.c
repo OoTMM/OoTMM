@@ -1035,3 +1035,33 @@ void comboTextMessageCantBuy(GameState_Play* play, int flags)
     comboTextAppendStr(&b, TEXT_END);
     comboTextAutoLineBreaks(start);
 }
+
+#if defined(GAME_OOT)
+void comboTextHijackFishCaught(GameState_Play* play, const ComboItemOverride* o)
+{
+    char* b;
+    char* start;
+    int isSelf;
+
+    isSelf = (o->player == PLAYER_SELF) || (o->player == PLAYER_ALL) || (o->player == gComboData.playerId);
+
+    b = play->msgCtx.textBuffer;
+
+    comboTextAppendHeader(&b);
+    start = b;
+    comboTextAppendStr(&b, "You caught ");
+    comboTextAppendItemNameOverride(&b, o, TF_NONE);
+    comboTextAppendStr(&b, "!");
+    if (isSelf)
+    {
+        comboTextExtra(&b, play, o->gi);
+    }
+    comboTextAppendStr(&b, TEXT_BB TEXT_CZ);
+    comboTextAppendStr(&b, "Do you want to keep it?");
+    comboTextAppendStr(&b, TEXT_NL " " TEXT_NL TEXT_CHOICE2 TEXT_COLOR_GREEN);
+    comboTextAppendStr(&b, "Yes" TEXT_NL);
+    comboTextAppendStr(&b, "No");
+    comboTextAppendStr(&b, TEXT_END);
+    comboTextAutoLineBreaks(start);
+}
+#endif

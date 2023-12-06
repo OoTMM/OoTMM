@@ -321,6 +321,9 @@ function checkKey(check: WorldCheck): number {
   case 'sr':
     typeId = 0x09;
     break;
+  case 'fish':
+    typeId = 0x0A;
+    break;
   case 'pot':
   case 'grass':
     /* xflag */

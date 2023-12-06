@@ -2,7 +2,7 @@ import { Game } from '../config';
 import { itemByID } from '../items';
 import { Settings } from '../settings';
 import { gameId } from '../util';
-import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprAge, exprHas, exprRenewable, exprEvent, exprMasks, exprSetting, exprNot, exprCond, exprTrick, exprSpecial, exprOotTime, exprMmTime, exprLicense, exprPrice, exprGlitch } from './expr';
+import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprAge, exprHas, exprRenewable, exprEvent, exprMasks, exprSetting, exprNot, exprCond, exprTrick, exprSpecial, exprOotTime, exprMmTime, exprLicense, exprPrice, exprGlitch, exprFish } from './expr';
 import { ResolvedWorldFlags } from './world';
 
 const SIMPLE_TOKENS = ['||', '&&', '(', ')', ',', 'true', 'false', '!', '+', '-'] as const;
@@ -318,6 +318,21 @@ export class ExprParser {
     return exprPrice(range, id, max);
   }
 
+  private parseExprFish(): Expr | undefined {
+    if (this.peek('identifier') !== 'has_pond_fish') {
+      return undefined;
+    }
+    this.accept('identifier');
+    this.expect('(');
+    const ageAndType = this.expect('identifier');
+    this.expect(',');
+    const minPounds = this.expect('number');
+    this.expect(',');
+    const maxPounds = this.expect('number');
+    this.expect(')');
+    return exprFish(ageAndType, minPounds, maxPounds);
+  }
+
   private parseMacro(): Expr | undefined {
     /* Check for a macro with the given name */
     const name = this.peek('identifier');
@@ -395,6 +410,7 @@ export class ExprParser {
       || this.parseExprOotTime()
       || this.parseExprMmTime()
       || this.parseExprPrice()
+      || this.parseExprFish()
       || this.parseMacro();
   }
 

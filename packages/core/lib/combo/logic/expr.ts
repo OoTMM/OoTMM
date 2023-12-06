@@ -1,4 +1,5 @@
 import { Item, ItemGroups, Items, ItemsCount } from '../items';
+import { ItemID } from '../items/defs';
 import { GLITCHES, SETTINGS, Settings, TRICKS } from '../settings';
 import { Age } from './pathfind';
 import { PRICE_RANGES } from './price';
@@ -496,4 +497,24 @@ export const exprPrice = (range: string, id: number, max: number): Expr => state
   const price = state.world.prices[id + PRICE_RANGES[range]];
   const result = price <= max;
   return { result, depItems: [], depEvents: [] };
+}
+
+export const exprFish = (ageAndType: string, minPounds: number, maxPounds: number): Expr => state => {
+  let result = false;
+  let depItems: Item[] = [];
+
+  for (let i = minPounds; i <= maxPounds; i++) {
+    const key = `OOT_FISHING_POND_${ageAndType}_${i}LBS` as ItemID;
+    const item = Items[key];
+    depItems.push(item);
+    if (state.items.get(item)) {
+      result = true;
+    }
+  }
+
+  return {
+    result,
+    depItems,
+    depEvents: []
+  };
 }

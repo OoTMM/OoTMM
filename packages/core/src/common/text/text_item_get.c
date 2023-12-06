@@ -135,7 +135,7 @@ static void comboTextCompass(char** b, GameState_Play* play, s16 gi)
     comboTextAppendStr(b, ".");
 }
 
-static void comboTextExtra(char** b, GameState_Play* play, s16 gi)
+void comboTextExtra(char** b, GameState_Play* play, s16 gi)
 {
 #if defined(GAME_MM)
     gi ^= MASK_FOREIGN_GI;

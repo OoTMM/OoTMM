@@ -497,6 +497,13 @@ export const SETTINGS = [{
   description: 'Shuffle the Milk Bar and Gorman milk purchases in MM',
   default: false
 }, {
+  key: 'pondFishShuffle',
+  name: 'Fishing Pond Fish Shuffle',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the Fish (and the Loach) in the Fishing Pond are shuffled amongst all the items.',
+  default: false
+}, {
   key: 'eggShuffle',
   name: 'Weird / Pocket Egg Content Shuffle',
   category: 'main.shuffle',
