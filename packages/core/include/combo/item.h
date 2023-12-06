@@ -98,7 +98,8 @@ void comboAddCommonItemOot(int sid, int noEffect);
 void comboAddCommonItemMm(int sid, int noEffect);
 
 int  comboAddItem(GameState_Play* play, s16 gi);
-int  comboAddItemNoEffect(s16 gi);
+int  comboAddItemLegacy(GameState_Play* play, s16 gi);
+int  comboAddItemLegacyNoEffect(s16 gi);
 
 int comboAddItemEx(GameState_Play* play, const ComboItemQuery* q, int updateText);
 

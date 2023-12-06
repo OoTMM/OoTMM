@@ -34,7 +34,7 @@ static int isPlayerSelf(u8 playerId)
     return 0;
 }
 
-int comboAddItem(GameState_Play* play, s16 gi)
+int comboAddItemLegacy(GameState_Play* play, s16 gi)
 {
     int count;
     int count2;
@@ -63,7 +63,7 @@ int comboAddItem(GameState_Play* play, s16 gi)
     return count;
 }
 
-int comboAddItemNoEffect(s16 gi)
+int comboAddItemLegacyNoEffect(s16 gi)
 {
     int isForeign;
 
