@@ -440,21 +440,6 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
         case GI_MM_BOMB_BAG3:
             comboAddBombBagOot(3);
             break;
-        case GI_MM_BOMB:
-            comboAddBombsOot(1);
-            break;
-        case GI_MM_BOMBS_5:
-            comboAddBombsOot(5);
-            break;
-        case GI_MM_BOMBS_10:
-            comboAddBombsOot(10);
-            break;
-        case GI_MM_BOMBS_20:
-            comboAddBombsOot(20);
-            break;
-        case GI_MM_BOMBS_30:
-            comboAddBombsOot(30);
-            break;
         }
     }
 
@@ -789,21 +774,6 @@ int comboAddItemMm(s16 gi, int noEffect)
         break;
     case GI_MM_CHATEAU:
         fillBottle(ITEM_MM_BOTTLE_CHATEAU);
-        break;
-    case GI_MM_BOMB:
-        comboAddBombsMm(1);
-        break;
-    case GI_MM_BOMBS_5:
-        comboAddBombsMm(5);
-        break;
-    case GI_MM_BOMBS_10:
-        comboAddBombsMm(10);
-        break;
-    case GI_MM_BOMBS_20:
-        comboAddBombsMm(20);
-        break;
-    case GI_MM_BOMBS_30:
-        comboAddBombsMm(30);
         break;
     case GI_MM_ARROWS_10:
         comboAddArrowsMm(10);

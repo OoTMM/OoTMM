@@ -9,6 +9,7 @@
 
 #define IA_RUPEE    0x00
 #define IA_WALLET   0x01
+#define IA_BOMBS    0x02
 #define IA_NONE     0xff
 
 typedef int (*AddItemFunc)(GameState_Play* play, s16 gi, u16 param);
@@ -168,9 +169,72 @@ static int addItemWalletMm(GameState_Play* play, s16 gi, u16 param)
     return 0;
 }
 
+static void addAmmoOot(u8 slot, u16 item, u8 max, u8 count)
+{
+    gOotSave.inventory.items[slot] = item;
+    gOotSave.inventory.ammo[slot] += count;
+    if (gOotSave.inventory.ammo[slot] > max)
+        gOotSave.inventory.ammo[slot] = max;
+}
+
+static void addAmmoMm(u8 slot, u16 item, u8 max, u8 count)
+{
+    gMmSave.inventory.items[slot] = item;
+    gMmSave.inventory.ammo[slot] += count;
+    if (gMmSave.inventory.ammo[slot] > max)
+        gMmSave.inventory.ammo[slot] = max;
+}
+
+static void addBombsRawOot(u8 count)
+{
+    u8 max;
+
+    if (gOotSave.inventory.upgrades.bombBag == 0)
+        return;
+    max = kMaxBombs[gOotSave.inventory.upgrades.bombBag];
+    addAmmoOot(ITS_OOT_BOMBS, ITEM_OOT_BOMB, max, count);
+}
+
+static void addBombsRawMm(u8 count)
+{
+    u8 max;
+
+    if (gMmSave.inventory.upgrades.bombBag == 0)
+        return;
+    max = kMaxBombs[gMmSave.inventory.upgrades.bombBag];
+    addAmmoMm(ITS_MM_BOMBS, ITEM_MM_BOMB, max, count);
+}
+
+static void addBombsOot(u8 count)
+{
+    addBombsRawOot(count);
+    if (comboConfig(CFG_SHARED_BOMB_BAGS))
+        addBombsRawMm(count);
+}
+
+static void addBombsMm(u8 count)
+{
+    addBombsRawMm(count);
+    if (comboConfig(CFG_SHARED_BOMB_BAGS))
+        addBombsRawOot(count);
+}
+
+static int addItemBombsOot(GameState_Play* play, s16 gi, u16 param)
+{
+    addBombsOot(param);
+    return 0;
+}
+
+static int addItemBombsMm(GameState_Play* play, s16 gi, u16 param)
+{
+    addBombsMm(param);
+    return 0;
+}
+
 static const AddItemHandler kAddItemHandlers[] = {
     { addItemRupeesOot, addItemRupeesMm },
     { addItemWalletOot, addItemWalletMm },
+    { addItemBombsOot,  addItemBombsMm },
 };
 
 #define X(a, b, c, drawGiParam, addItemId, addItemParam, d, e, text) addItemId

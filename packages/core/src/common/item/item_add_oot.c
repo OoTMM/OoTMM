@@ -483,21 +483,6 @@ void comboAddItemSharedOot(s16 gi, int noEffect)
         case GI_OOT_BOMB_BAG3:
             comboAddBombBagMm(3);
             break;
-        case GI_OOT_BOMB:
-            comboAddBombsMm(1);
-            break;
-        case GI_OOT_BOMBS_5:
-            comboAddBombsMm(5);
-            break;
-        case GI_OOT_BOMBS_10:
-            comboAddBombsMm(10);
-            break;
-        case GI_OOT_BOMBS_20:
-            comboAddBombsMm(20);
-            break;
-        case GI_OOT_BOMBS_30:
-            comboAddBombsMm(30);
-            break;
         }
     }
 
@@ -787,21 +772,6 @@ int comboAddItemOot(s16 gi, int noEffect)
         break;
     case GI_OOT_NUTS_10:
         comboAddNutsOot(10);
-        break;
-    case GI_OOT_BOMB:
-        comboAddBombsOot(1);
-        break;
-    case GI_OOT_BOMBS_5:
-        comboAddBombsOot(5);
-        break;
-    case GI_OOT_BOMBS_10:
-        comboAddBombsOot(10);
-        break;
-    case GI_OOT_BOMBS_20:
-        comboAddBombsOot(20);
-        break;
-    case GI_OOT_BOMBS_30:
-        comboAddBombsOot(30);
         break;
     case GI_OOT_BOW:
         comboAddQuiverOot(1);
