@@ -8,6 +8,7 @@
 #endif
 
 #define IA_RUPEE    0x00
+#define IA_WALLET   0x01
 #define IA_NONE     0xff
 
 typedef int (*AddItemFunc)(GameState_Play* play, s16 gi, u16 param);
@@ -97,8 +98,79 @@ static int addItemRupeesMm(GameState_Play* play, s16 gi, u16 param)
     return 0;
 }
 
+static void addWalletRawOot(u16 index)
+{
+    if (index == 0)
+    {
+        gOotExtraFlags.childWallet = 1;
+        gOotMaxRupees[0] = 99;
+    }
+    else if (index == 4)
+    {
+        gOotExtraFlags.bottomlessWallet = 1;
+        gOotMaxRupees[3] = 9999;
+#if defined(GAME_OOT)
+        gWalletDigits[3] = 4;
+#endif
+    }
+    else
+        gOotSave.inventory.upgrades.wallet = index;
+}
+
+static void addWalletRawMm(u16 index)
+{
+    if (index == 0)
+    {
+        gMmExtraFlags2.childWallet = 1;
+        gMmMaxRupees[0] = 99;
+    }
+    else if (index == 4)
+    {
+        gMmExtraFlags3.bottomlessWallet = 1;
+        gMmMaxRupees[3] = 9999;
+#if defined(GAME_MM)
+        gWalletDigits[3] = 4;
+#endif
+    }
+    else
+        gMmSave.inventory.upgrades.wallet = index;
+}
+
+static void addWalletRawShared(u16 index)
+{
+    addWalletRawOot(index);
+    addWalletRawMm(index);
+}
+
+static int addItemWalletOot(GameState_Play* play, s16 gi, u16 param)
+{
+    if (comboConfig(CFG_SHARED_WALLETS))
+        addWalletRawShared(param);
+    else
+        addWalletRawOot(param);
+
+    if (comboConfig(CFG_FILL_WALLETS))
+        addRupeesOot(play, gOotMaxRupees[gOotSave.inventory.upgrades.wallet]);
+
+    return 0;
+}
+
+static int addItemWalletMm(GameState_Play* play, s16 gi, u16 param)
+{
+    if (comboConfig(CFG_SHARED_WALLETS))
+        addWalletRawShared(param);
+    else
+        addWalletRawMm(param);
+
+    if (comboConfig(CFG_FILL_WALLETS))
+        addRupeesMm(play, gMmMaxRupees[gMmSave.inventory.upgrades.wallet]);
+
+    return 0;
+}
+
 static const AddItemHandler kAddItemHandlers[] = {
     { addItemRupeesOot, addItemRupeesMm },
+    { addItemWalletOot, addItemWalletMm },
 };
 
 #define X(a, b, c, drawGiParam, addItemId, addItemParam, d, e, text) addItemId

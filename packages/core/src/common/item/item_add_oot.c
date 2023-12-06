@@ -313,27 +313,6 @@ static void addMagicalRupee(int noEffect)
         addSilverRupeePouch(i, noEffect);
 }
 
-static void addWallet(int index, int noEffect)
-{
-    if (index == 0)
-    {
-        gOotExtraFlags.childWallet = 1;
-        gOotMaxRupees[0] = 99;
-    }
-    else if (index == 4)
-    {
-        gOotExtraFlags.bottomlessWallet = 1;
-        gOotMaxRupees[3] = 9999;
-#if defined(GAME_OOT)
-        gWalletDigits[3] = 4;
-#endif
-    }
-    else
-        gOotSave.inventory.upgrades.wallet = index;
-    if (noEffect && comboConfig(CFG_FILL_WALLETS))
-        addRupees(gOotMaxRupees[gOotSave.inventory.upgrades.wallet]);
-}
-
 static void reloadSlotEquips(OotItemEquips* equips, int slot)
 {
     for (int i = 0; i < 3; ++i)
@@ -433,21 +412,6 @@ void comboAddCommonItemOot(int sid, int noEffect)
         break;
     case SITEM_MASK_TRUTH:
         addTradeChild(10);
-        break;
-    case SITEM_WALLET:
-        addWallet(0, noEffect);
-        break;
-    case SITEM_WALLET2:
-        addWallet(1, noEffect);
-        break;
-    case SITEM_WALLET3:
-        addWallet(2, noEffect);
-        break;
-    case SITEM_WALLET4:
-        addWallet(3, noEffect);
-        break;
-    case SITEM_WALLET5:
-        addWallet(4, noEffect);
         break;
     case SITEM_HEART_PIECE:
         gOotSave.inventory.quest.heartPieces++;
@@ -669,28 +633,6 @@ void comboAddItemSharedOot(s16 gi, int noEffect)
 
     if (comboConfig(CFG_SHARED_MASK_ZORA) && gi == GI_OOT_MASK_ZORA)
         comboAddCommonItemMm(SITEM_MASK_ZORA, noEffect);
-
-    if (comboConfig(CFG_SHARED_WALLETS))
-    {
-        switch (gi)
-        {
-        case GI_OOT_WALLET:
-            comboAddCommonItemMm(SITEM_WALLET, noEffect);
-            break;
-        case GI_OOT_WALLET2:
-            comboAddCommonItemMm(SITEM_WALLET2, noEffect);
-            break;
-        case GI_OOT_WALLET3:
-            comboAddCommonItemMm(SITEM_WALLET3, noEffect);
-            break;
-        case GI_OOT_WALLET4:
-            comboAddCommonItemMm(SITEM_WALLET4, noEffect);
-            break;
-        case GI_OOT_WALLET5:
-            comboAddCommonItemMm(SITEM_WALLET5, noEffect);
-            break;
-        }
-    }
 
     if (comboConfig(CFG_SHARED_HEALTH))
     {
@@ -1059,21 +1001,6 @@ int comboAddItemOot(s16 gi, int noEffect)
         break;
     case GI_OOT_BOMB_BAG3:
         comboAddBombBagOot(3);
-        break;
-    case GI_OOT_WALLET:
-        comboAddCommonItemOot(SITEM_WALLET, noEffect);
-        break;
-    case GI_OOT_WALLET2:
-        comboAddCommonItemOot(SITEM_WALLET2, noEffect);
-        break;
-    case GI_OOT_WALLET3:
-        comboAddCommonItemOot(SITEM_WALLET3, noEffect);
-        break;
-    case GI_OOT_WALLET4:
-        comboAddCommonItemOot(SITEM_WALLET4, noEffect);
-        break;
-    case GI_OOT_WALLET5:
-        comboAddCommonItemOot(SITEM_WALLET5, noEffect);
         break;
     case GI_OOT_MAGIC_UPGRADE:
         comboAddMagicUpgradeOot(1);

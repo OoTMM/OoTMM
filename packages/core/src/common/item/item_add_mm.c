@@ -229,37 +229,6 @@ static void fillBottle(u16 itemId)
     }
 }
 
-static void addRupees(s16 count)
-{
-    u16 max;
-
-    max = gMmMaxRupees[gMmSave.inventory.upgrades.wallet];
-    gMmSave.playerData.rupees += count;
-    if (gMmSave.playerData.rupees > max)
-        gMmSave.playerData.rupees = max;
-}
-
-static void addWallet(int index, int noEffect)
-{
-    if (index == 0)
-    {
-        gMmExtraFlags2.childWallet = 1;
-        gMmMaxRupees[0] = 99;
-    }
-    else if (index == 4)
-    {
-        gMmExtraFlags3.bottomlessWallet = 1;
-        gMmMaxRupees[3] = 9999;
-#if defined(GAME_MM)
-        gWalletDigits[3] = 4;
-#endif
-    }
-    else
-        gMmSave.inventory.upgrades.wallet = index;
-    if (noEffect && comboConfig(CFG_FILL_WALLETS))
-        addRupees(gMmMaxRupees[gMmSave.inventory.upgrades.wallet]);
-}
-
 static void addTrade1(u8 index)
 {
     u16 itemId;
@@ -399,21 +368,6 @@ void comboAddCommonItemMm(int sid, int noEffect)
         break;
     case SITEM_MASK_ZORA:
         gMmSave.inventory.items[ITS_MM_MASK_ZORA] = ITEM_MM_MASK_ZORA;
-        break;
-    case SITEM_WALLET:
-        addWallet(0, noEffect);
-        break;
-    case SITEM_WALLET2:
-        addWallet(1, noEffect);
-        break;
-    case SITEM_WALLET3:
-        addWallet(2, noEffect);
-        break;
-    case SITEM_WALLET4:
-        addWallet(3, noEffect);
-        break;
-    case SITEM_WALLET5:
-        addWallet(4, noEffect);
         break;
     case SITEM_HEART_PIECE:
         gMmSave.inventory.quest.heartPieces += 1;
@@ -619,28 +573,6 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
 
     if (comboConfig(CFG_SHARED_MASK_ZORA) && gi == GI_MM_MASK_ZORA)
         comboAddCommonItemOot(SITEM_MASK_ZORA, noEffect);
-
-    if (comboConfig(CFG_SHARED_WALLETS))
-    {
-        switch (gi)
-        {
-        case GI_MM_WALLET:
-            comboAddCommonItemOot(SITEM_WALLET, noEffect);
-            break;
-        case GI_MM_WALLET2:
-            comboAddCommonItemOot(SITEM_WALLET2, noEffect);
-            break;
-        case GI_MM_WALLET3:
-            comboAddCommonItemOot(SITEM_WALLET3, noEffect);
-            break;
-        case GI_MM_WALLET4:
-            comboAddCommonItemOot(SITEM_WALLET4, noEffect);
-            break;
-        case GI_MM_WALLET5:
-            comboAddCommonItemOot(SITEM_WALLET5, noEffect);
-            break;
-        }
-    }
 
     if (comboConfig(CFG_SHARED_HEALTH))
     {
@@ -1051,21 +983,6 @@ int comboAddItemMm(s16 gi, int noEffect)
         break;
     case GI_MM_QUIVER3:
         comboAddQuiverMm(3);
-        break;
-    case GI_MM_WALLET:
-        comboAddCommonItemMm(SITEM_WALLET, noEffect);
-        break;
-    case GI_MM_WALLET2:
-        comboAddCommonItemMm(SITEM_WALLET2, noEffect);
-        break;
-    case GI_MM_WALLET3:
-        comboAddCommonItemMm(SITEM_WALLET3, noEffect);
-        break;
-    case GI_MM_WALLET4:
-        comboAddCommonItemMm(SITEM_WALLET4, noEffect);
-        break;
-    case GI_MM_WALLET5:
-        comboAddCommonItemMm(SITEM_WALLET5, noEffect);
         break;
     case GI_MM_GS_TOKEN_SWAMP:
         count = ++gMmSave.skullCountSwamp;
