@@ -21,7 +21,6 @@ static void addHealth(u8 count)
     gSaveContext.healthDelta += count * 0x10;
 }
 
-
 static void addRupees(u16 count)
 {
     gSaveContext.rupeesDelta += count;
@@ -52,31 +51,6 @@ static void reloadIconsC(GameState_Play* play)
 
 void comboAddItemSharedForeignEffect(GameState_Play* play, s16 gi)
 {
-    if (comboConfig(CFG_SHARED_WALLETS))
-    {
-        switch (gi)
-        {
-        case GI_MM_RUPEE_GREEN:
-            addRupees(1);
-            break;
-        case GI_MM_RUPEE_BLUE:
-            addRupees(5);
-            break;
-        case GI_MM_RUPEE_RED:
-            addRupees(20);
-            break;
-        case GI_MM_RUPEE_PURPLE:
-            addRupees(50);
-            break;
-        case GI_MM_RUPEE_SILVER:
-            addRupees(100);
-            break;
-        case GI_MM_RUPEE_GOLD:
-            addRupees(200);
-            break;
-        }
-    }
-
     if (comboConfig(CFG_SHARED_HEALTH))
     {
         switch (gi)
@@ -101,12 +75,6 @@ int comboAddItemEffect(GameState_Play* play, s16 gi)
     count = 0;
     switch (gi)
     {
-    case GI_OOT_RUPEE_GREEN:
-    case GI_OOT_TC_RUPEE_GREEN:
-        addRupees(1);
-        break;
-    case GI_OOT_RUPEE_BLUE:
-    case GI_OOT_TC_RUPEE_BLUE:
     case GI_OOT_RUPEE_SILVER_DC:
     case GI_OOT_RUPEE_SILVER_BOTW:
     case GI_OOT_RUPEE_SILVER_SPIRIT_CHILD:
@@ -199,17 +167,6 @@ int comboAddItemEffect(GameState_Play* play, s16 gi)
         break;
     case GI_OOT_RUPEE_MAGICAL:
         addMagicalRupeeRupees();
-        break;
-    case GI_OOT_RUPEE_RED:
-    case GI_OOT_TC_RUPEE_RED:
-        addRupees(20);
-        break;
-    case GI_OOT_RUPEE_PURPLE:
-    case GI_OOT_TC_RUPEE_PURPLE:
-        addRupees(50);
-        break;
-    case GI_OOT_RUPEE_HUGE:
-        addRupees(200);
         break;
     case GI_OOT_MAGIC_UPGRADE:
         refillMagic(1);

@@ -449,30 +449,6 @@ void comboAddCommonItemOot(int sid, int noEffect)
     case SITEM_WALLET5:
         addWallet(4, noEffect);
         break;
-    case SITEM_RUPEE_GREEN:
-        if (noEffect)
-            addRupees(1);
-        break;
-    case SITEM_RUPEE_BLUE:
-        if (noEffect)
-            addRupees(5);
-        break;
-    case SITEM_RUPEE_RED:
-        if (noEffect)
-            addRupees(20);
-        break;
-    case SITEM_RUPEE_PURPLE:
-        if (noEffect)
-            addRupees(50);
-        break;
-    case SITEM_RUPEE_SILVER:
-        if (noEffect)
-            addRupees(100);
-        break;
-    case SITEM_RUPEE_GOLD:
-        if (noEffect)
-            addRupees(200);
-        break;
     case SITEM_HEART_PIECE:
         gOotSave.inventory.quest.heartPieces++;
         if (noEffect)
@@ -712,25 +688,6 @@ void comboAddItemSharedOot(s16 gi, int noEffect)
             break;
         case GI_OOT_WALLET5:
             comboAddCommonItemMm(SITEM_WALLET5, noEffect);
-            break;
-        case GI_OOT_RUPEE_GREEN:
-        case GI_OOT_TC_RUPEE_GREEN:
-            comboAddCommonItemMm(SITEM_RUPEE_GREEN, noEffect);
-            break;
-        case GI_OOT_RUPEE_BLUE:
-        case GI_OOT_TC_RUPEE_BLUE:
-            comboAddCommonItemMm(SITEM_RUPEE_BLUE, noEffect);
-            break;
-        case GI_OOT_RUPEE_RED:
-        case GI_OOT_TC_RUPEE_RED:
-            comboAddCommonItemMm(SITEM_RUPEE_RED, noEffect);
-            break;
-        case GI_OOT_RUPEE_PURPLE:
-        case GI_OOT_TC_RUPEE_PURPLE:
-            comboAddCommonItemMm(SITEM_RUPEE_PURPLE, noEffect);
-            break;
-        case GI_OOT_RUPEE_HUGE:
-            comboAddCommonItemMm(SITEM_RUPEE_GOLD, noEffect);
             break;
         }
     }
@@ -1223,25 +1180,6 @@ int comboAddItemOot(s16 gi, int noEffect)
         break;
     case GI_OOT_MEDALLION_FOREST:
         gOotSave.inventory.quest.medallionForest = 1;
-        break;
-    case GI_OOT_RUPEE_GREEN:
-    case GI_OOT_TC_RUPEE_GREEN:
-        comboAddCommonItemOot(SITEM_RUPEE_GREEN, noEffect);
-        break;
-    case GI_OOT_RUPEE_BLUE:
-    case GI_OOT_TC_RUPEE_BLUE:
-        comboAddCommonItemOot(SITEM_RUPEE_BLUE, noEffect);
-        break;
-    case GI_OOT_RUPEE_RED:
-    case GI_OOT_TC_RUPEE_RED:
-        comboAddCommonItemOot(SITEM_RUPEE_RED, noEffect);
-        break;
-    case GI_OOT_RUPEE_PURPLE:
-    case GI_OOT_TC_RUPEE_PURPLE:
-        comboAddCommonItemOot(SITEM_RUPEE_PURPLE, noEffect);
-        break;
-    case GI_OOT_RUPEE_HUGE:
-        comboAddCommonItemOot(SITEM_RUPEE_GOLD, noEffect);
         break;
     case GI_OOT_RECOVERY_HEART:
         comboAddCommonItemOot(SITEM_RECOVERY_HEART, noEffect);

@@ -1,6 +1,12 @@
 #include <combo.h>
 #include <combo/item.h>
 
+#if defined(GAME_OOT)
+# define addRupees  addRupeesOot
+#else
+# define addRupees  addRupeesMm
+#endif
+
 #define IA_RUPEE    0x00
 #define IA_NONE     0xff
 
@@ -12,41 +18,72 @@ typedef struct
 }
 AddItemHandler;
 
-static int addItemRupeesOot(GameState_Play* play, s16 gi, u16 param)
+static void addRupeesEffect(s16 delta)
+{
+#if defined(GAME_OOT)
+    gSaveContext.rupeesDelta += delta;
+#else
+    gSaveContext.save.rupeesDelta += delta;
+#endif
+}
+
+static void addRupeesOot(s16 delta)
 {
     u16 max;
 
-#if defined(GAME_OOT)
-    if (play)
-    {
-        gSaveContext.rupeesDelta += param;
-        return 0;
-    }
-#endif
-
     max = gOotMaxRupees[gOotSave.inventory.upgrades.wallet];
-    gOotSave.playerData.rupees += param;
+    gOotSave.playerData.rupees += delta;
     if (gOotSave.playerData.rupees > max)
         gOotSave.playerData.rupees = max;
+}
+
+static void addRupeesMm(s16 delta)
+{
+    u16 max;
+
+    max = gMmMaxRupees[gMmSave.inventory.upgrades.wallet];
+    gMmSave.playerData.rupees += delta;
+    if (gMmSave.playerData.rupees > max)
+        gMmSave.playerData.rupees = max;
+}
+
+static int addItemRupeesOot(GameState_Play* play, s16 gi, u16 param)
+{
+#if defined(GAME_MM)
+    if (!comboConfig(CFG_SHARED_WALLETS))
+        play = NULL;
+#endif
+
+    if (play)
+    {
+        addRupeesEffect(param);
+        return 0;
+    }
+
+    if (comboConfig(CFG_SHARED_WALLETS))
+        addRupees(param);
+    else
+        addRupeesOot(param);
     return 0;
 }
 
 static int addItemRupeesMm(GameState_Play* play, s16 gi, u16 param)
 {
-    u16 max;
-
-#if defined(GAME_MM)
-    if (play)
-    {
-        gSaveContext.save.rupeesDelta += param;
-        return 0;
-    }
+#if defined(GAME_OOT)
+    if (!comboConfig(CFG_SHARED_WALLETS))
+        play = NULL;
 #endif
 
-    max = gMmMaxRupees[gMmSave.inventory.upgrades.wallet];
-    gMmSave.playerData.rupees += param;
-    if (gMmSave.playerData.rupees > max)
-        gMmSave.playerData.rupees = max;
+    if (play)
+    {
+        addRupeesEffect(param);
+        return 0;
+    }
+
+    if (comboConfig(CFG_SHARED_WALLETS))
+        addRupees(param);
+    else
+        addRupeesMm(param);
     return 0;
 }
 
@@ -77,14 +114,12 @@ int comboAddItem(GameState_Play* play, s16 gi)
     GameState_Play* p;
     AddItemFunc func;
     int ret;
-    int isForeign;
     int isMm;
     s16 legacyGi;
     u16 addParam;
     u8 addId;
 
     legacyGi = gi;
-    isForeign = !!(gi & MASK_FOREIGN_GI);
 #if defined(GAME_MM)
     gi ^= MASK_FOREIGN_GI;
 #endif
@@ -105,8 +140,7 @@ int comboAddItem(GameState_Play* play, s16 gi)
     {
         /* New item handlers */
         func = isMm ? kAddItemHandlers[addId].mm : kAddItemHandlers[addId].oot;
-        p = isForeign ? NULL : play;
-        ret = func(p, gi, addParam);
+        ret = func(play, gi, addParam);
     }
 
     return ret;

@@ -415,30 +415,6 @@ void comboAddCommonItemMm(int sid, int noEffect)
     case SITEM_WALLET5:
         addWallet(4, noEffect);
         break;
-    case SITEM_RUPEE_GREEN:
-        if (noEffect)
-            addRupees(1);
-        break;
-    case SITEM_RUPEE_BLUE:
-        if (noEffect)
-            addRupees(5);
-        break;
-    case SITEM_RUPEE_RED:
-        if (noEffect)
-            addRupees(20);
-        break;
-    case SITEM_RUPEE_PURPLE:
-        if (noEffect)
-            addRupees(50);
-        break;
-    case SITEM_RUPEE_SILVER:
-        if (noEffect)
-            addRupees(100);
-        break;
-    case SITEM_RUPEE_GOLD:
-        if (noEffect)
-            addRupees(200);
-        break;
     case SITEM_HEART_PIECE:
         gMmSave.inventory.quest.heartPieces += 1;
         if (gMmSave.inventory.quest.heartPieces == 4)
@@ -662,24 +638,6 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
             break;
         case GI_MM_WALLET5:
             comboAddCommonItemOot(SITEM_WALLET5, noEffect);
-            break;
-        case GI_MM_RUPEE_GREEN:
-            comboAddCommonItemOot(SITEM_RUPEE_GREEN, noEffect);
-            break;
-        case GI_MM_RUPEE_BLUE:
-            comboAddCommonItemOot(SITEM_RUPEE_BLUE, noEffect);
-            break;
-        case GI_MM_RUPEE_RED:
-            comboAddCommonItemOot(SITEM_RUPEE_RED, noEffect);
-            break;
-        case GI_MM_RUPEE_PURPLE:
-            comboAddCommonItemOot(SITEM_RUPEE_PURPLE, noEffect);
-            break;
-        case GI_MM_RUPEE_SILVER:
-            comboAddCommonItemOot(SITEM_RUPEE_SILVER, noEffect);
-            break;
-        case GI_MM_RUPEE_GOLD:
-            comboAddCommonItemOot(SITEM_RUPEE_GOLD, noEffect);
             break;
         }
     }
@@ -1174,24 +1132,6 @@ int comboAddItemMm(s16 gi, int noEffect)
         break;
     case GI_MM_RECOVERY_HEART:
         comboAddCommonItemMm(SITEM_RECOVERY_HEART, noEffect);
-        break;
-    case GI_MM_RUPEE_GREEN:
-        comboAddCommonItemMm(SITEM_RUPEE_GREEN, noEffect);
-        break;
-    case GI_MM_RUPEE_BLUE:
-        comboAddCommonItemMm(SITEM_RUPEE_BLUE, noEffect);
-        break;
-    case GI_MM_RUPEE_RED:
-        comboAddCommonItemMm(SITEM_RUPEE_RED, noEffect);
-        break;
-    case GI_MM_RUPEE_PURPLE:
-        comboAddCommonItemMm(SITEM_RUPEE_PURPLE, noEffect);
-        break;
-    case GI_MM_RUPEE_SILVER:
-        comboAddCommonItemMm(SITEM_RUPEE_SILVER, noEffect);
-        break;
-    case GI_MM_RUPEE_GOLD:
-        comboAddCommonItemMm(SITEM_RUPEE_GOLD, noEffect);
         break;
     case GI_MM_SMALL_KEY_WF:
         count = comboAddSmallKeyMm(0);

@@ -51,12 +51,6 @@ void comboAddItemSharedForeignEffect(GameState_Play* play, s16 gi)
     {
         switch (gi)
         {
-        case GI_OOT_RUPEE_GREEN:
-        case GI_OOT_TC_RUPEE_GREEN:
-            addRupees(1);
-            break;
-        case GI_OOT_RUPEE_BLUE:
-        case GI_OOT_TC_RUPEE_BLUE:
         case GI_OOT_RUPEE_SILVER_DC:
         case GI_OOT_RUPEE_SILVER_BOTW:
         case GI_OOT_RUPEE_SILVER_SPIRIT_CHILD:
@@ -150,17 +144,6 @@ void comboAddItemSharedForeignEffect(GameState_Play* play, s16 gi)
         case GI_OOT_RUPEE_MAGICAL:
             addMagicalRupeeRupees();
             break;
-        case GI_OOT_RUPEE_RED:
-        case GI_OOT_TC_RUPEE_RED:
-            addRupees(20);
-            break;
-        case GI_OOT_RUPEE_PURPLE:
-        case GI_OOT_TC_RUPEE_PURPLE:
-            addRupees(50);
-            break;
-        case GI_OOT_RUPEE_HUGE:
-            addRupees(200);
-            break;
         }
     }
 
@@ -212,24 +195,6 @@ int comboAddItemEffect(GameState_Play* play, s16 gi)
     case GI_MM_HEART_CONTAINER:
     case GI_MM_DEFENSE_UPGRADE:
         addHealth(20);
-        break;
-    case GI_MM_RUPEE_GREEN:
-        addRupees(1);
-        break;
-    case GI_MM_RUPEE_BLUE:
-        addRupees(5);
-        break;
-    case GI_MM_RUPEE_RED:
-        addRupees(20);
-        break;
-    case GI_MM_RUPEE_PURPLE:
-        addRupees(50);
-        break;
-    case GI_MM_RUPEE_SILVER:
-        addRupees(100);
-        break;
-    case GI_MM_RUPEE_GOLD:
-        addRupees(200);
         break;
     case GI_MM_STRAY_FAIRY:
         if (play->sceneId == SCE_MM_LAUNDRY_POOL || play->sceneId == SCE_MM_CLOCK_TOWN_EAST)
