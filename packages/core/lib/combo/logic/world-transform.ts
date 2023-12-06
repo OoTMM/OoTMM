@@ -1,6 +1,6 @@
 import { Confvar } from '../confvars';
 import { DATA_POOL } from '../data';
-import { Item, ItemGroups, ItemHelpers, Items, PlayerItem, PlayerItems, makePlayerItem } from '../items';
+import { Item, ItemGroups, ItemHelpers, Items, PlayerItem, PlayerItems, itemByID, makePlayerItem } from '../items';
 import { ItemID } from '../items/defs';
 import { Monitor } from '../monitor';
 import { sample, Random, randomInt } from '../random';
@@ -863,6 +863,12 @@ export class LogicPassWorldTransform {
       this.removeLocations(BROKEN_ACTORS_CHECKS);
     }
 
+    /* Pond */
+    if (!settings.pondFishShuffle) {
+      const locs = DATA_POOL.oot.filter((x: any) => x.type === 'fish').map((x: any) => gameId('oot', x.location, ' ')) as string[];
+      this.removeLocations(locs);
+    }
+
     /* Potsanity */
     if (!settings.shufflePotsOot) {
       const pots = DATA_POOL.oot.filter((x: any) => x.type === 'pot').map((x: any) => gameId('oot', x.location, ' ')) as string[];
@@ -1236,9 +1242,10 @@ export class LogicPassWorldTransform {
             const lbs = Math.floor((weight * weight * 0.0036) + 0.5);
 
             const itemKey = `${type}_${lbs}LBS` as ItemID; // maybe needs validation?
-            const item = Items[itemKey];
+            const item = itemByID(itemKey);
             const pi = makePlayerItem(item, i);
             this.addPlayerItem(pi);
+            console.log(pi);
           }
         }
 

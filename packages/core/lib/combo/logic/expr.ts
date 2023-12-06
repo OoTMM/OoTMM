@@ -501,17 +501,20 @@ export const exprPrice = (range: string, id: number, max: number): Expr => state
 
 export const exprFish = (ageAndType: string, minPounds: number, maxPounds: number): Expr => state => {
   let result = false;
+  let depItems: Item[] = [];
+
   for (let i = minPounds; i <= maxPounds; i++) {
     const key = `OOT_FISHING_POND_${ageAndType}_${i}LBS` as ItemID;
     const item = Items[key];
+    depItems.push(item);
     if (state.items.get(item)) {
       result = true;
-      break;
     }
   }
+
   return {
     result,
-    depItems: [],
+    depItems,
     depEvents: []
   };
 }
