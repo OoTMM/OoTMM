@@ -2,9 +2,9 @@
 #include <combo/item.h>
 
 #if defined(GAME_OOT)
-# define addRupees  addRupeesOot
+# define addRupeesRaw  addRupeesRawOot
 #else
-# define addRupees  addRupeesMm
+# define addRupeesRaw  addRupeesRawMm
 #endif
 
 #define IA_RUPEE    0x00
@@ -27,7 +27,7 @@ static void addRupeesEffect(s16 delta)
 #endif
 }
 
-static void addRupeesOot(s16 delta)
+static void addRupeesRawOot(s16 delta)
 {
     u16 max;
 
@@ -37,7 +37,7 @@ static void addRupeesOot(s16 delta)
         gOotSave.playerData.rupees = max;
 }
 
-static void addRupeesMm(s16 delta)
+static void addRupeesRawMm(s16 delta)
 {
     u16 max;
 
@@ -47,7 +47,7 @@ static void addRupeesMm(s16 delta)
         gMmSave.playerData.rupees = max;
 }
 
-static int addItemRupeesOot(GameState_Play* play, s16 gi, u16 param)
+static void addRupeesOot(GameState_Play* play, s16 delta)
 {
 #if defined(GAME_MM)
     if (!comboConfig(CFG_SHARED_WALLETS))
@@ -56,18 +56,17 @@ static int addItemRupeesOot(GameState_Play* play, s16 gi, u16 param)
 
     if (play)
     {
-        addRupeesEffect(param);
-        return 0;
+        addRupeesEffect(delta);
+        return;
     }
 
     if (comboConfig(CFG_SHARED_WALLETS))
-        addRupees(param);
+        addRupeesRaw(delta);
     else
-        addRupeesOot(param);
-    return 0;
+        addRupeesRawOot(delta);
 }
 
-static int addItemRupeesMm(GameState_Play* play, s16 gi, u16 param)
+static void addRupeesMm(GameState_Play* play, s16 delta)
 {
 #if defined(GAME_OOT)
     if (!comboConfig(CFG_SHARED_WALLETS))
@@ -76,14 +75,25 @@ static int addItemRupeesMm(GameState_Play* play, s16 gi, u16 param)
 
     if (play)
     {
-        addRupeesEffect(param);
-        return 0;
+        addRupeesEffect(delta);
+        return;
     }
 
     if (comboConfig(CFG_SHARED_WALLETS))
-        addRupees(param);
+        addRupeesRaw(delta);
     else
-        addRupeesMm(param);
+        addRupeesRawMm(delta);
+}
+
+static int addItemRupeesOot(GameState_Play* play, s16 gi, u16 param)
+{
+    addRupeesOot(play, param);
+    return 0;
+}
+
+static int addItemRupeesMm(GameState_Play* play, s16 gi, u16 param)
+{
+    addRupeesMm(play, param);
     return 0;
 }
 
@@ -111,7 +121,6 @@ static const u16 kAddItemParamsMm[] = {
 
 int comboAddItem(GameState_Play* play, s16 gi)
 {
-    GameState_Play* p;
     AddItemFunc func;
     int ret;
     int isMm;
