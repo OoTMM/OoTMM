@@ -131,16 +131,6 @@ void comboAddBombsOot(int count)
     addAmmo(ITS_OOT_BOMBS, ITEM_OOT_BOMB, max, count);
 }
 
-void comboAddArrowsOot(int count)
-{
-    int max;
-
-    if (gOotSave.inventory.upgrades.quiver == 0)
-        return;
-    max = kMaxArrows[gOotSave.inventory.upgrades.quiver];
-    addAmmo(ITS_OOT_BOW, ITEM_OOT_BOW, max, count);
-}
-
 static void addSeeds(u8 count)
 {
     u8 max;
@@ -194,13 +184,6 @@ void comboAddBombBagOot(int level)
     gOotSave.inventory.items[ITS_OOT_BOMBS] = ITEM_OOT_BOMB;
     gOotSave.inventory.upgrades.bombBag = level;
     gOotSave.inventory.ammo[ITS_OOT_BOMBS] = kMaxBombs[level];
-}
-
-void comboAddQuiverOot(int level)
-{
-    gOotSave.inventory.items[ITS_OOT_BOW] = ITEM_OOT_BOW;
-    gOotSave.inventory.upgrades.quiver = level;
-    gOotSave.inventory.ammo[ITS_OOT_BOW] = kMaxArrows[level];
 }
 
 static void addBulletBag(u8 level)
@@ -417,31 +400,6 @@ void comboAddCommonItemOot(int sid, int noEffect)
 
 void comboAddItemSharedOot(s16 gi, int noEffect)
 {
-    if (comboConfig(CFG_SHARED_BOWS))
-    {
-        switch (gi)
-        {
-        case GI_OOT_BOW:
-            comboAddQuiverMm(1);
-            break;
-        case GI_OOT_QUIVER2:
-            comboAddQuiverMm(2);
-            break;
-        case GI_OOT_QUIVER3:
-            comboAddQuiverMm(3);
-            break;
-        case GI_OOT_ARROWS_5:
-            comboAddArrowsMm(5);
-            break;
-        case GI_OOT_ARROWS_10:
-            comboAddArrowsMm(10);
-            break;
-        case GI_OOT_ARROWS_30:
-            comboAddArrowsMm(30);
-            break;
-        }
-    }
-
     if (comboConfig(CFG_SHARED_BOMB_BAGS))
     {
         switch (gi)
@@ -725,18 +683,6 @@ int comboAddItemOot(s16 gi, int noEffect)
     case GI_OOT_STICKS_10:
         comboAddSticksOot(10);
         break;
-    case GI_OOT_BOW:
-        comboAddQuiverOot(1);
-        break;
-    case GI_OOT_ARROWS_5:
-        comboAddArrowsOot(5);
-        break;
-    case GI_OOT_ARROWS_10:
-        comboAddArrowsOot(10);
-        break;
-    case GI_OOT_ARROWS_30:
-        comboAddArrowsOot(30);
-        break;
     case GI_OOT_ARROW_FIRE:
         comboAddCommonItemOot(SITEM_ARROW_FIRE, noEffect);
         break;
@@ -899,12 +845,6 @@ int comboAddItemOot(s16 gi, int noEffect)
         break;
     case GI_OOT_BULLET_BAG3:
         addBulletBag(3);
-        break;
-    case GI_OOT_QUIVER2:
-        comboAddQuiverOot(2);
-        break;
-    case GI_OOT_QUIVER3:
-        comboAddQuiverOot(3);
         break;
     case GI_OOT_BOMB_BAG:
         comboAddBombBagOot(1);

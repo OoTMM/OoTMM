@@ -13,6 +13,8 @@
 #define IA_NUTS             0x03
 #define IA_UPGRADE_NUTS     0x04
 #define IA_BOMBCHU          0x05
+#define IA_ARROWS           0x06
+#define IA_BOW              0x07
 #define IA_NONE             0xff
 
 typedef int (*AddItemFunc)(GameState_Play* play, s16 gi, u16 param);
@@ -305,6 +307,82 @@ static int addItemBombchuMm(GameState_Play* play, s16 gi, u16 param)
     return 0;
 }
 
+static void addArrowsRawOot(u8 count)
+{
+    u8 max;
+
+    if (gOotSave.inventory.upgrades.quiver == 0)
+        return;
+    max = kMaxArrows[gOotSave.inventory.upgrades.quiver];
+    addAmmoOot(ITS_OOT_BOW, ITEM_OOT_BOW, max, count);
+}
+
+static void addArrowsRawMm(u8 count)
+{
+    u8 max;
+
+    if (gMmSave.inventory.upgrades.quiver == 0)
+        return;
+    max = kMaxArrows[gMmSave.inventory.upgrades.quiver];
+    addAmmoMm(ITS_MM_BOW, ITEM_MM_BOW, max, count);
+}
+
+static void addArrowsOot(u8 count)
+{
+    addArrowsRawOot(count);
+    if (comboConfig(CFG_SHARED_BOWS))
+        addArrowsRawMm(count);
+}
+
+static void addArrowsMm(u8 count)
+{
+    addBombsRawMm(count);
+    if (comboConfig(CFG_SHARED_BOWS))
+        addBombsRawOot(count);
+}
+
+static int addItemArrowsOot(GameState_Play* play, s16 gi, u16 param)
+{
+    addArrowsOot(param);
+    return 0;
+}
+
+static int addItemArrowsMm(GameState_Play* play, s16 gi, u16 param)
+{
+    addArrowsMm(param);
+    return 0;
+}
+
+static void addBowRawOot(u8 index)
+{
+    if (index > gOotSave.inventory.upgrades.quiver)
+        gOotSave.inventory.upgrades.quiver = index;
+    addArrowsRawOot(kMaxArrows[index]);
+}
+
+static void addBowRawMm(u8 index)
+{
+    if (index > gMmSave.inventory.upgrades.quiver)
+        gMmSave.inventory.upgrades.quiver = index;
+    addArrowsRawMm(kMaxArrows[index]);
+}
+
+static int addItemBowOot(GameState_Play* play, s16 gi, u16 param)
+{
+    addBowRawOot(param);
+    if (comboConfig(CFG_SHARED_BOWS))
+        addBowRawMm(param);
+    return 0;
+}
+
+static int addItemBowMm(GameState_Play* play, s16 gi, u16 param)
+{
+    addBowRawMm(param);
+    if (comboConfig(CFG_SHARED_BOWS))
+        addBowRawOot(param);
+    return 0;
+}
+
 static const AddItemHandler kAddItemHandlers[] = {
     { addItemRupeesOot,     addItemRupeesMm },
     { addItemWalletOot,     addItemWalletMm },
@@ -312,6 +390,8 @@ static const AddItemHandler kAddItemHandlers[] = {
     { addItemNutsOot,       addItemNutsMm },
     { addItemNutsUpgrade,   NULL },
     { addItemBombchuOot,    addItemBombchuMm },
+    { addItemArrowsOot,     addItemArrowsMm },
+    { addItemBowOot,        addItemBowMm },
 };
 
 #define X(a, b, c, drawGiParam, addItemId, addItemParam, d, e, text) addItemId

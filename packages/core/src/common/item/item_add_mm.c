@@ -116,13 +116,6 @@ void comboAddBombBagMm(int index)
     gMmSave.inventory.ammo[ITS_MM_BOMBS] = kMaxBombs[index];
 }
 
-void comboAddQuiverMm(int index)
-{
-    gMmSave.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
-    gMmSave.inventory.upgrades.quiver = index;
-    gMmSave.inventory.ammo[ITS_MM_BOW] = kMaxArrows[index];
-}
-
 void comboAddBombsMm(int count)
 {
     u16 max;
@@ -134,19 +127,6 @@ void comboAddBombsMm(int count)
     gMmSave.inventory.ammo[ITS_MM_BOMBS] += count;
     if (gMmSave.inventory.ammo[ITS_MM_BOMBS] > max)
         gMmSave.inventory.ammo[ITS_MM_BOMBS] = max;
-}
-
-void comboAddArrowsMm(int count)
-{
-    int max;
-
-    if (gMmSave.inventory.upgrades.quiver == 0)
-        return;
-    max = kMaxArrows[gMmSave.inventory.upgrades.quiver];
-    gMmSave.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
-    gMmSave.inventory.ammo[ITS_MM_BOW] += count;
-    if (gMmSave.inventory.ammo[ITS_MM_BOW] > max)
-        gMmSave.inventory.ammo[ITS_MM_BOW] = max;
 }
 
 void comboAddSticksMm(int count)
@@ -375,31 +355,6 @@ void comboAddCommonItemMm(int sid, int noEffect)
 
 void comboAddItemSharedMm(s16 gi, int noEffect)
 {
-    if (comboConfig(CFG_SHARED_BOWS))
-    {
-        switch (gi)
-        {
-        case GI_MM_BOW:
-            comboAddQuiverOot(1);
-            break;
-        case GI_MM_QUIVER2:
-            comboAddQuiverOot(2);
-            break;
-        case GI_MM_QUIVER3:
-            comboAddQuiverOot(3);
-            break;
-        case GI_MM_ARROWS_10:
-            comboAddArrowsOot(10);
-            break;
-        case GI_MM_ARROWS_30:
-            comboAddArrowsOot(30);
-            break;
-        case GI_MM_ARROWS_40:
-            comboAddArrowsOot(40);
-            break;
-        }
-    }
-
     if (comboConfig(CFG_SHARED_BOMB_BAGS))
     {
         switch (gi)
@@ -739,15 +694,6 @@ int comboAddItemMm(s16 gi, int noEffect)
     case GI_MM_CHATEAU:
         fillBottle(ITEM_MM_BOTTLE_CHATEAU);
         break;
-    case GI_MM_ARROWS_10:
-        comboAddArrowsMm(10);
-        break;
-    case GI_MM_ARROWS_30:
-        comboAddArrowsMm(30);
-        break;
-    case GI_MM_ARROWS_40:
-        comboAddArrowsMm(40);
-        break;
     case GI_MM_STICK:
         comboAddSticksMm(1);
         break;
@@ -887,15 +833,6 @@ int comboAddItemMm(s16 gi, int noEffect)
         break;
     case GI_MM_BOMB_BAG3:
         comboAddBombBagMm(3);
-        break;
-    case GI_MM_BOW:
-        comboAddQuiverMm(1);
-        break;
-    case GI_MM_QUIVER2:
-        comboAddQuiverMm(2);
-        break;
-    case GI_MM_QUIVER3:
-        comboAddQuiverMm(3);
         break;
     case GI_MM_GS_TOKEN_SWAMP:
         count = ++gMmSave.skullCountSwamp;
