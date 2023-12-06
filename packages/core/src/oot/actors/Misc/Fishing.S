@@ -343,4 +343,46 @@ PATCH_START 0x80a3f3a0
   nop
 PATCH_END
 
+/*
+Replaces:
+  ADDIU     AT, R0, 0x0004 // TEXT_STATE_CHOICE
+  BEQ       V0, AT, .+0x18
+  LW        A0, 0x004C (SP)
+  JAL       0x800DD464 // Message_GetState
+  NOP
+  BNEZ      V0, .+0x6C
+  NOP
+  JAL       0x800D6110 // Message_ShouldAdvance
+  OR        A0, S1, R0
+  BEQZ      V0, .+0x5C
+*/
+PATCH_START 0x80a3f4b4
+  addiu     at, zero, 0x0002 // TEXT_STATE_CLOSING
+  beq       v0, at, .+0x10
+  nop
+  bnez      v0, .+0x74
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+PATCH_END
+
+/*
+Replaces:
+  LUI       T4, 0x0001
+  ADDU      T4, T4, S1
+  LBU       T4, 0x04BD (T4)
+  BEQZ      T4, .+0x38
+  NOP
+*/
+PATCH_START 0x80a3f4e8
+  jal       ActorDestroy
+  or        a0, s0, zero
+  nop
+  b         .+0x38
+  nop
+PATCH_END
+
 PATCH_GROUP_END
