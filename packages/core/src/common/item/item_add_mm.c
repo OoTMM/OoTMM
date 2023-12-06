@@ -149,20 +149,6 @@ void comboAddArrowsMm(int count)
         gMmSave.inventory.ammo[ITS_MM_BOW] = max;
 }
 
-void comboAddNutsMm(int count)
-{
-    u16 max;
-
-    if (gMmSave.inventory.upgrades.dekuNut == 0)
-        gMmSave.inventory.upgrades.dekuNut = 1;
-
-    max = kMaxNuts[gMmSave.inventory.upgrades.dekuNut];
-    gMmSave.inventory.items[ITS_MM_NUTS] = ITEM_MM_NUT;
-    gMmSave.inventory.ammo[ITS_MM_NUTS] += count;
-    if (gMmSave.inventory.ammo[ITS_MM_NUTS] > max)
-        gMmSave.inventory.ammo[ITS_MM_NUTS] = max;
-}
-
 void comboAddSticksMm(int count)
 {
     u16 max;
@@ -495,15 +481,6 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
     {
         switch (gi)
         {
-        case GI_MM_NUT:
-            comboAddNutsOot(1);
-            break;
-        case GI_MM_NUTS_5:
-            comboAddNutsOot(5);
-            break;
-        case GI_MM_NUTS_10:
-            comboAddNutsOot(10);
-            break;
         case GI_MM_STICK:
             comboAddSticksOot(1);
             break;
@@ -783,15 +760,6 @@ int comboAddItemMm(s16 gi, int noEffect)
         break;
     case GI_MM_ARROWS_40:
         comboAddArrowsMm(40);
-        break;
-    case GI_MM_NUT:
-        comboAddNutsMm(1);
-        break;
-    case GI_MM_NUTS_5:
-        comboAddNutsMm(5);
-        break;
-    case GI_MM_NUTS_10:
-        comboAddNutsMm(10);
         break;
     case GI_MM_STICK:
         comboAddSticksMm(1);

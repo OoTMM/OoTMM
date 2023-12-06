@@ -121,17 +121,6 @@ void comboAddSticksOot(int count)
     addAmmo(ITS_OOT_STICKS, ITEM_OOT_STICK, max, count);
 }
 
-void comboAddNutsOot(int count)
-{
-    u8 max;
-
-    if (gOotSave.inventory.upgrades.dekuNut == 0)
-        gOotSave.inventory.upgrades.dekuNut = 1;
-
-    max = kMaxNuts[gOotSave.inventory.upgrades.dekuNut];
-    addAmmo(ITS_OOT_NUTS, ITEM_OOT_NUT, max, count);
-}
-
 void comboAddBombsOot(int count)
 {
     u8 max;
@@ -227,22 +216,10 @@ static void addBulletBag(u8 level)
     BITMAP16_SET(gOotSave.eventsItem, EV_OOT_ITEM_DEKU_SEEDS);
 }
 
-static void addNutUpgrade(int level)
-{
-    gOotSave.inventory.upgrades.dekuNut = level;
-    comboAddNutsOot(kMaxNuts[level]);
-}
-
 static void addStickUpgrade(int level)
 {
     gOotSave.inventory.upgrades.dekuStick = level;
     comboAddSticksOot(kMaxSticks[level]);
-}
-
-static void addNutUpgradeMm(int level)
-{
-    gMmSave.inventory.upgrades.dekuNut = level;
-    comboAddNutsMm(kMaxNuts[level]);
 }
 
 static void addStickUpgradeMm(int level)
@@ -538,13 +515,6 @@ void comboAddItemSharedOot(s16 gi, int noEffect)
     {
         switch (gi)
         {
-        case GI_OOT_NUTS_5:
-        case GI_OOT_NUTS_5_ALT:
-            comboAddNutsMm(5);
-            break;
-        case GI_OOT_NUTS_10:
-            comboAddNutsMm(10);
-            break;
         case GI_OOT_STICK:
             comboAddSticksMm(1);
             break;
@@ -553,12 +523,6 @@ void comboAddItemSharedOot(s16 gi, int noEffect)
             break;
         case GI_OOT_STICKS_10:
             comboAddSticksMm(10);
-            break;
-        case GI_OOT_NUT_UPGRADE:
-            addNutUpgradeMm(2);
-            break;
-        case GI_OOT_NUT_UPGRADE2:
-            addNutUpgradeMm(3);
             break;
         case GI_OOT_STICK_UPGRADE:
             addStickUpgradeMm(2);
@@ -765,13 +729,6 @@ int comboAddItemOot(s16 gi, int noEffect)
         break;
     case GI_OOT_STICKS_10:
         comboAddSticksOot(10);
-        break;
-    case GI_OOT_NUTS_5:
-    case GI_OOT_NUTS_5_ALT:
-        comboAddNutsOot(5);
-        break;
-    case GI_OOT_NUTS_10:
-        comboAddNutsOot(10);
         break;
     case GI_OOT_BOW:
         comboAddQuiverOot(1);
@@ -981,12 +938,6 @@ int comboAddItemOot(s16 gi, int noEffect)
         comboAddMagicUpgradeOot(2);
         if (noEffect)
             refillMagic(2);
-        break;
-    case GI_OOT_NUT_UPGRADE:
-        addNutUpgrade(2);
-        break;
-    case GI_OOT_NUT_UPGRADE2:
-        addNutUpgrade(3);
         break;
     case GI_OOT_STICK_UPGRADE:
         addStickUpgrade(2);

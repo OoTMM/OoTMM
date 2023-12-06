@@ -7,10 +7,12 @@
 # define addRupeesRaw  addRupeesRawMm
 #endif
 
-#define IA_RUPEE    0x00
-#define IA_WALLET   0x01
-#define IA_BOMBS    0x02
-#define IA_NONE     0xff
+#define IA_RUPEE            0x00
+#define IA_WALLET           0x01
+#define IA_BOMBS            0x02
+#define IA_NUTS             0x03
+#define IA_UPGRADE_NUTS     0x04
+#define IA_NONE             0xff
 
 typedef int (*AddItemFunc)(GameState_Play* play, s16 gi, u16 param);
 typedef struct
@@ -231,10 +233,70 @@ static int addItemBombsMm(GameState_Play* play, s16 gi, u16 param)
     return 0;
 }
 
+void addNutsRawOot(int count)
+{
+    u8 max;
+
+    if (gOotSave.inventory.upgrades.dekuNut == 0)
+        gOotSave.inventory.upgrades.dekuNut = 1;
+
+    max = kMaxNuts[gOotSave.inventory.upgrades.dekuNut];
+    addAmmoOot(ITS_OOT_NUTS, ITEM_OOT_NUT, max, count);
+}
+
+void addNutsRawMm(int count)
+{
+    u8 max;
+
+    if (gMmSave.inventory.upgrades.dekuNut == 0)
+        gMmSave.inventory.upgrades.dekuNut = 1;
+
+    max = kMaxNuts[gMmSave.inventory.upgrades.dekuNut];
+    addAmmoMm(ITS_MM_NUTS, ITEM_MM_NUT, max, count);
+}
+
+void addNutsOot(int count)
+{
+    addNutsRawOot(count);
+    if (comboConfig(CFG_SHARED_NUTS_STICKS))
+        addNutsRawMm(count);
+}
+
+void addNutsMm(int count)
+{
+    addNutsRawMm(count);
+    if (comboConfig(CFG_SHARED_NUTS_STICKS))
+        addNutsRawOot(count);
+}
+
+static int addItemNutsOot(GameState_Play* play, s16 gi, u16 param)
+{
+    addNutsOot(param);
+    return 0;
+}
+
+static int addItemNutsMm(GameState_Play* play, s16 gi, u16 param)
+{
+    addNutsMm(param);
+    return 0;
+}
+
+static int addItemNutsUpgrade(GameState_Play* play, s16 gi, u16 param)
+{
+    if (gOotSave.inventory.upgrades.dekuNut < param)
+        gOotSave.inventory.upgrades.dekuNut = param;
+    if (comboConfig(CFG_SHARED_NUTS_STICKS))
+        gMmSave.inventory.upgrades.dekuNut = gOotSave.inventory.upgrades.dekuNut;
+    addNutsOot(kMaxNuts[param]);
+    return 0;
+}
+
 static const AddItemHandler kAddItemHandlers[] = {
-    { addItemRupeesOot, addItemRupeesMm },
-    { addItemWalletOot, addItemWalletMm },
-    { addItemBombsOot,  addItemBombsMm },
+    { addItemRupeesOot,     addItemRupeesMm },
+    { addItemWalletOot,     addItemWalletMm },
+    { addItemBombsOot,      addItemBombsMm },
+    { addItemNutsOot,       addItemNutsMm },
+    { addItemNutsUpgrade,   NULL },
 };
 
 #define X(a, b, c, drawGiParam, addItemId, addItemParam, d, e, text) addItemId
