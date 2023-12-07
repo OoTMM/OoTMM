@@ -153,3 +153,8 @@ PATCH_START 0x8082ece0
   j comboPlayerSetDrawGi
    nop
 PATCH_END
+
+/* GI renumbering */
+PATCH_START 0x8085a878
+  li  a2,GI_MM_PENDANT_OF_MEMORIES
+PATCH_END

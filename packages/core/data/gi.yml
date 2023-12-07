@@ -499,9 +499,15 @@ MM_DEED_LAND:                 0x97
 MM_DEED_SWAMP:                0x98
 MM_DEED_MOUNTAIN:             0x99
 MM_DEED_OCEAN:                0x9a
+MM_UNK_9B:                    0x9b
+MM_UNK_9C:                    0x9c
+MM_UNK_9D:                    0x9d
+MM_UNK_9E:                    0x9e
+MM_UNK_9F:                    0x9f
 MM_ROOM_KEY:                  0xa0
 MM_LETTER_TO_MAMA:            0xa1
 MM_LETTER_TO_KAFEI:           0xaa
+MM_UNK_A9:                    0xa9
 MM_PENDANT_OF_MEMORIES:       0xab
 MM_WORLD_MAP_CLOCK_TOWN:      0xb4
 MM_WORLD_MAP_WOODFALL:        0xb5
@@ -509,6 +515,7 @@ MM_WORLD_MAP_SNOWHEAD:        0xb6
 MM_WORLD_MAP_ROMANI_RANCH:    0xb7
 MM_WORLD_MAP_GREAT_BAY:       0xb8
 MM_WORLD_MAP_STONE_TOWER:     0xb9
+MM_SCOOP:                     0xba
 
 MM_MAGIC_UPGRADE:             0xbb
 MM_MAGIC_UPGRADE2:            0xbc
