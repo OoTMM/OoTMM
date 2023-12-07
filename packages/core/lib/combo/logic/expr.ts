@@ -503,6 +503,10 @@ export const exprFish = (ageAndType: string, minPounds: number, maxPounds: numbe
   let result = false;
   let depItems: Item[] = [];
 
+  if (state.ignoreItems) {
+    return { result: true, depItems: [], depEvents: [] };
+  }
+
   for (let i = minPounds; i <= maxPounds; i++) {
     const key = `OOT_FISHING_POND_${ageAndType}_${i}LBS` as ItemID;
     const item = Items[key];
