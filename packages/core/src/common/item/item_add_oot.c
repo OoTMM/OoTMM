@@ -131,17 +131,6 @@ void comboAddBombsOot(int count)
     addAmmo(ITS_OOT_BOMBS, ITEM_OOT_BOMB, max, count);
 }
 
-static void addSeeds(u8 count)
-{
-    u8 max;
-
-    if (gOotSave.inventory.upgrades.bulletBag == 0)
-        return;
-    max = kMaxSeeds[gOotSave.inventory.upgrades.bulletBag];
-    addAmmo(ITS_OOT_SLINGSHOT, ITEM_OOT_SLINGSHOT, max, count);
-    BITMAP16_SET(gOotSave.eventsItem, EV_OOT_ITEM_DEKU_SEEDS);
-}
-
 static void addNewBottle(u16 itemId)
 {
     for (int i = 0; i < 4; ++i)
@@ -184,14 +173,6 @@ void comboAddBombBagOot(int level)
     gOotSave.inventory.items[ITS_OOT_BOMBS] = ITEM_OOT_BOMB;
     gOotSave.inventory.upgrades.bombBag = level;
     gOotSave.inventory.ammo[ITS_OOT_BOMBS] = kMaxBombs[level];
-}
-
-static void addBulletBag(u8 level)
-{
-    gOotSave.inventory.items[ITS_OOT_SLINGSHOT] = ITEM_OOT_SLINGSHOT;
-    gOotSave.inventory.upgrades.bulletBag = level;
-    gOotSave.inventory.ammo[ITS_OOT_SLINGSHOT] = kMaxSeeds[level];
-    BITMAP16_SET(gOotSave.eventsItem, EV_OOT_ITEM_DEKU_SEEDS);
 }
 
 static void addStickUpgrade(int level)
@@ -689,16 +670,6 @@ int comboAddItemOot(s16 gi, int noEffect)
     case GI_OOT_SPELL_FIRE:
         gOotSave.inventory.items[ITS_OOT_SPELL_FIRE] = ITEM_OOT_SPELL_FIRE;
         break;
-    case GI_OOT_SLINGSHOT:
-    case GI_OOT_BULLET_BAG:
-        addBulletBag(1);
-        break;
-    case GI_OOT_DEKU_SEEDS_5:
-        addSeeds(5);
-        break;
-    case GI_OOT_DEKU_SEEDS_30:
-        addSeeds(30);
-        break;
     case GI_OOT_OCARINA_FAIRY:
         addOcarina(1);
         break;
@@ -839,12 +810,6 @@ int comboAddItemOot(s16 gi, int noEffect)
         break;
     case GI_OOT_SCALE_GOLDEN:
         gOotSave.inventory.upgrades.dive = 2;
-        break;
-    case GI_OOT_BULLET_BAG2:
-        addBulletBag(2);
-        break;
-    case GI_OOT_BULLET_BAG3:
-        addBulletBag(3);
         break;
     case GI_OOT_BOMB_BAG:
         comboAddBombBagOot(1);

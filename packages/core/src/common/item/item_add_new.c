@@ -15,6 +15,8 @@
 #define IA_BOMBCHU          0x05
 #define IA_ARROWS           0x06
 #define IA_BOW              0x07
+#define IA_SEEDS            0x08
+#define IA_SLINGSHOT        0x09
 #define IA_NONE             0xff
 
 typedef int (*AddItemFunc)(GameState_Play* play, s16 gi, u16 param);
@@ -383,6 +385,30 @@ static int addItemBowMm(GameState_Play* play, s16 gi, u16 param)
     return 0;
 }
 
+static void addSeeds(u8 count)
+{
+    u8 max;
+
+    if (gOotSave.inventory.upgrades.bulletBag == 0)
+        return;
+    max = kMaxSeeds[gOotSave.inventory.upgrades.bulletBag];
+    addAmmoOot(ITS_OOT_SLINGSHOT, ITEM_OOT_SLINGSHOT, max, count);
+}
+
+static int addItemSeeds(GameState_Play* play, s16 gi, u16 param)
+{
+    addSeeds(param);
+    return 0;
+}
+
+static int addItemSlingshot(GameState_Play* play, s16 gi, u16 param)
+{
+    if (gOotSave.inventory.upgrades.bulletBag < param)
+        gOotSave.inventory.upgrades.bulletBag = param;
+    addSeeds(kMaxSeeds[param]);
+    return 0;
+}
+
 static const AddItemHandler kAddItemHandlers[] = {
     { addItemRupeesOot,     addItemRupeesMm },
     { addItemWalletOot,     addItemWalletMm },
@@ -392,6 +418,8 @@ static const AddItemHandler kAddItemHandlers[] = {
     { addItemBombchuOot,    addItemBombchuMm },
     { addItemArrowsOot,     addItemArrowsMm },
     { addItemBowOot,        addItemBowMm },
+    { addItemSeeds,         NULL },
+    { addItemSlingshot,     NULL },
 };
 
 #define X(a, b, c, drawGiParam, addItemId, addItemParam, d, e, text) addItemId
