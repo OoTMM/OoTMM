@@ -63,8 +63,17 @@ static void Fishing_Fish_ItemQuery(GameState_Play* playOrNull, ComboItemQuery* q
         q->id += 17;
     }
 
-    if (playOrNull != NULL && GetChestFlag(playOrNull, variable - 100)) {
-        q->ovFlags |= OVF_RENEW;
+    if (playOrNull != NULL) {
+        int flag = variable - 100;
+        if (gSave.age == AGE_ADULT) {
+            if (GetCollectibleFlag(playOrNull, flag)) {
+                q->ovFlags |= OVF_RENEW;
+            }
+        } else {
+            if (GetChestFlag(playOrNull, flag)) {
+                q->ovFlags |= OVF_RENEW;
+            }
+        }
     }
 }
 
@@ -270,7 +279,12 @@ void Fishing_FishGiveItem(Actor* this, GameState_Play* play) {
 
     comboAddItemEx(play, &q, major);
 
-    SetChestFlag(play, this->variable - 100);
+    int flag = this->variable - 100;
+    if (gSave.age == AGE_ADULT) {
+        SetCollectibleFlag(play, flag);
+    } else {
+        SetChestFlag(play, flag);
+    }
 
     this->draw = NULL;
 }
