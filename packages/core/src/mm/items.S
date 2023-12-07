@@ -18,7 +18,7 @@ PATCH_LOAD_STORE 8, 1
 .int 0x8082ed14
 .int 0x8084708c
 .int 0x80848264
-.int 0x80852c8c
+/*.int 0x80852c8c*/
 .int 0x80853ad4
 .int 0x80853b50
 .int 0x80853b54

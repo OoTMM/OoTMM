@@ -54,6 +54,7 @@ export class Generator {
       const logicResult = logic(this.monitor, this.opts);
       patchfile.setHash(logicResult.hash);
       patchfiles = buildPatchfiles({
+        opts: this.opts,
         patch: patchfile,
         monitor: this.monitor,
         roms,

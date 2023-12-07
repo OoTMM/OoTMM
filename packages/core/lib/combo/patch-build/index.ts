@@ -10,8 +10,10 @@ import { Patchfile } from "./patchfile";
 import { patchRandomizer } from "./randomizer";
 import { PatchGroup } from "./group";
 import { isEntranceShuffle } from "../logic/helpers";
+import { Options } from "../options";
 
 export type BuildPatchfileIn = {
+  opts: Options;
   patch: Patchfile;
   monitor: Monitor;
   roms: DecompressedRoms;
@@ -77,7 +79,7 @@ export function buildPatchfiles(args: BuildPatchfileIn): Patchfile[] {
   for (const game of GAMES) {
     /* Apply ASM patches */
     const rom = args.roms[game].rom;
-    const patcher = new Patcher(game, rom, groups, args.addresses, args.build[game].patches, file);
+    const patcher = new Patcher(args.opts, game, rom, groups, args.addresses, args.build[game].patches, file);
     patcher.run();
 
     /* Pack the payload */

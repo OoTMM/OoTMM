@@ -2,7 +2,7 @@
 
 /* Use out extended table */
 PATCH_REL_HILO kExtendedGetItemsTable
-.int 0x8082ece4
+/*.int 0x8082ece4*/
 .int 0x8082ece8
 .int 0x8083d288
 .int 0x8083d28c
