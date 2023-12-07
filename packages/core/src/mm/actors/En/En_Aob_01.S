@@ -14,3 +14,12 @@ PATCH_START 0x809c30e8
   nop
   sra     v1,a1,1
 PATCH_END
+
+/* GI renumbering */
+PATCH_START 0x809c2bc0
+  li a2,GI_MM_HEART_PIECE
+PATCH_END
+
+PATCH_START 0x809c2ba0
+  li a2,GI_MM_RUPEE_RED
+PATCH_END

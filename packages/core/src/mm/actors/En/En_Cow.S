@@ -42,3 +42,12 @@ PATCH_START 0x8099cbfc
   nop
   nop
 PATCH_END
+
+/* GI renumbering */
+PATCH_START 0x8099cbb0
+  li a2,GI_MM_MILK
+PATCH_END
+
+PATCH_START 0x8099cc4c
+  li a2,GI_MM_MILK
+PATCH_END
