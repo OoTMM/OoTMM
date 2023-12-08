@@ -24,34 +24,34 @@ static void Actor_ByteCode_GiveItem(Actor* actor, GameState_Play* play, s16 gi, 
 
     switch (actor->id)
     {
-    case 0x138:
+    case AC_EN_GO:
         func = EnGo_GiveItem;
         break;
-    case 0x168:
+    case AC_EN_DNH:
         func = EnDnh_GiveItem;
         break;
-    case 0x1c5:
+    case AC_EN_SHN:
         func = EnShn_GiveItem;
         break;
-    case 0x1d5:
+    case AC_EN_PM:
         func = EnPm_GiveItem;
         break;
-    case 0x1f2:
+    case AC_EN_PST:
         func = EnPst_GiveItem;
         break;
-    case 0x202:
+    case AC_EN_AN:
         func = EnAn_GiveItem;
         break;
-    case 0x243:
+    case AC_EN_NB:
         func = EnNb_GiveItem;
         break;
-    case 0x262:
+    case AC_EN_AL:
         func = EnAl_GiveItem;
         break;
     case AC_EN_TAB:
         func = EnTab_GiveItem;
         break;
-    case 0x27d:
+    case AC_EN_BJT:
         func = EnBjt_GiveItem;
         break;
     default:
@@ -81,22 +81,22 @@ static int Actor_ByteCode_HasParent(Actor* actor)
     {
         switch (actor->id)
         {
-        case 0x138:
+        case AC_EN_GO:
             func = EnGo_AfterGivingItem;
             break;
-        case 0x168:
+        case AC_EN_DNH:
             func = EnDnh_AfterGivingItem;
             break;
-        case 0x1d5:
+        case AC_EN_PM:
             func = EnPm_AfterGivingItem;
             break;
-        case 0x202:
+        case AC_EN_AN:
             func = EnAn_AfterGivingItem;
             break;
         case AC_EN_TAB:
             func = EnTab_AfterGivingItem;
             break;
-        case 0x243:
+        case AC_EN_NB:
             func = EnNb_AfterGivingItem;
             break;
         default:
@@ -169,7 +169,7 @@ static void Actor_ByteCode_DispatchTextBox(GameState_Play* play, s16 messageId)
     cb = NULL;
     switch (this->id)
     {
-    case 0x138:
+    case AC_EN_GO:
         cb = EnGo_AfterTextBox;
         break;
     case AC_EN_TAB:
