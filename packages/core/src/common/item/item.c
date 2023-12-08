@@ -38,12 +38,18 @@ int comboAddItem(GameState_Play* play, s16 gi)
 {
     int count;
     int count2;
+    int isForeign;
 
-    if (gi & MASK_FOREIGN_GI)
+    isForeign = (gi >= GI_MM_RUPEE_GREEN);
+#if defined(GAME_MM)
+    isForeign = !isForeign;
+#endif
+
+    if (isForeign)
     {
-        count = comboAddItemForeign(gi & ~MASK_FOREIGN_GI, 1);
-        comboAddItemSharedForeign(gi & ~MASK_FOREIGN_GI, 0);
-        comboAddItemSharedForeignEffect(play, gi & ~MASK_FOREIGN_GI);
+        count = comboAddItemForeign(gi, 1);
+        comboAddItemSharedForeign(gi, 0);
+        comboAddItemSharedForeignEffect(play, gi);
     }
     else
     {
@@ -59,16 +65,24 @@ int comboAddItem(GameState_Play* play, s16 gi)
 
 int comboAddItemNoEffect(s16 gi)
 {
-    if (gi & MASK_FOREIGN_GI)
+    int isForeign;
+
+    isForeign = (gi >= GI_MM_RUPEE_GREEN);
+#if defined(GAME_MM)
+    isForeign = !isForeign;
+#endif
+
+    if (isForeign)
     {
-        comboAddItemForeign(gi & ~MASK_FOREIGN_GI, 1);
-        comboAddItemSharedForeign(gi & ~MASK_FOREIGN_GI, 1);
+        comboAddItemForeign(gi, 1);
+        comboAddItemSharedForeign(gi, 1);
     }
     else
     {
         comboAddItemNative(gi, 1);
         comboAddItemSharedNative(gi, 1);
     }
+
     return -1;
 }
 
@@ -347,11 +361,10 @@ int comboAddItemEx(GameState_Play* play, const ComboItemQuery* q, int updateText
         net->cmdOut.itemSend.playerTo = o.player;
 #if defined(GAME_OOT)
         net->cmdOut.itemSend.game = 0;
-        net->cmdOut.itemSend.gi = o.gi;
 #else
         net->cmdOut.itemSend.game = 1;
-        net->cmdOut.itemSend.gi = o.gi ^ MASK_FOREIGN_GI;
 #endif
+        net->cmdOut.itemSend.gi = o.gi;
         net->cmdOut.itemSend.key = makeOverrideKey(q);
         net->cmdOut.itemSend.flags = (s16)q->ovFlags;
         netMutexUnlock();

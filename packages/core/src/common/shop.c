@@ -1,11 +1,11 @@
 #include <combo.h>
 #include <combo/item.h>
 
+#define SOLD_OUT GI_MM_SOLD_OUT
+
 #if defined(GAME_OOT)
-# define SOLD_OUT (GI_MM_SOLD_OUT | MASK_FOREIGN_GI)
 # define PRICES_SHOPS PRICES_OOT_SHOPS
 #else
-# define SOLD_OUT GI_MM_SOLD_OUT
 # define PRICES_SHOPS PRICES_MM_SHOPS
 #endif
 

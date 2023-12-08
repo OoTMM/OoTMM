@@ -14,7 +14,7 @@ void EnGirlA_Draw(Actor_EnGirlA* this, GameState_Play* play)
     comboShopUpdateItem(play, this);
     EnGirlA_ItemOverride(&o, this);
 
-    if (o.gi != (GI_MM_SOLD_OUT | MASK_FOREIGN_GI))
+    if (o.gi != GI_MM_SOLD_OUT)
         ModelViewRotateY(((this->angle * 360.f) / 65536.f) * 0.017453292f, MAT_MUL);
     comboDrawGI(play, &this->base, o.gi, 0);
 }

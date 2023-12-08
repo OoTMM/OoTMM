@@ -1,12 +1,6 @@
 #include <combo.h>
 #include <combo/item.h>
 
-#if defined(GAME_OOT)
-# define SOLD_OUT (GI_MM_SOLD_OUT | MASK_FOREIGN_GI)
-#else
-# define SOLD_OUT GI_MM_SOLD_OUT
-#endif
-
 int shopReadFlag(int);
 
 void EnGirlA_ItemQuery(ComboItemQuery* q, Actor_EnGirlA* girlA)
@@ -17,7 +11,7 @@ void EnGirlA_ItemQuery(ComboItemQuery* q, Actor_EnGirlA* girlA)
     q->id = girlA->shopId;
     q->ovFlags = OVF_PRECOND;
     q->gi = girlA->gi;
-    q->giRenew = SOLD_OUT;
+    q->giRenew = GI_MM_SOLD_OUT;
 
     if (shopReadFlag(girlA->shopId))
     {

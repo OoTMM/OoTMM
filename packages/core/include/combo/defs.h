@@ -41,7 +41,6 @@
 
 #define MM_BASE       0xa628f0
 
-#define MASK_FOREIGN_GI         0x0200
 #define MASK_FOREIGN_OBJECT     0x1000
 #define MASK_CUSTOM_OBJECT      0x2000
 #define MASK_FOREIGN_ENTRANCE   0x80000000

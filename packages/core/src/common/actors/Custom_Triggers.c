@@ -8,12 +8,8 @@
 #define TRIGGER_NET             0x03
 
 #if defined(GAME_OOT)
-# define GI_OOT 0
-# define GI_MM  MASK_FOREIGN_GI
 # define RECOVERY_HEART GI_OOT_RECOVERY_HEART
 #else
-# define GI_OOT MASK_FOREIGN_GI
-# define GI_MM  0
 # define RECOVERY_HEART GI_MM_RECOVERY_HEART
 #endif
 
@@ -156,7 +152,7 @@ static void CustomTriggers_HandleTrigger(Actor_CustomTriggers* this, GameState_P
     switch (gComboTriggersData.trigger)
     {
     case TRIGGER_GANON_BK:
-        if (CustomTrigger_ItemSafe(this, play) && CustomTriggers_GiveItemDirect(this, play, GI_OOT | GI_OOT_BOSS_KEY_GANON))
+        if (CustomTrigger_ItemSafe(this, play) && CustomTriggers_GiveItemDirect(this, play, GI_OOT_BOSS_KEY_GANON))
         {
             gOotExtraFlags.ganonBossKey = 1;
             gComboTriggersData.trigger = TRIGGER_NONE;
@@ -173,9 +169,6 @@ static void CustomTriggers_HandleTrigger(Actor_CustomTriggers* this, GameState_P
     case TRIGGER_NET:
         net = netMutexLock();
         gi = net->cmdIn.itemRecv.gi;
-#if defined(GAME_MM)
-        gi ^= MASK_FOREIGN_GI;
-#endif
         if (CustomTrigger_ItemSafeNet(this, play) && CustomTriggers_GiveItemNet(this, play, gi, net->cmdIn.itemRecv.playerFrom, net->cmdIn.itemRecv.flags))
         {
             bzero(&net->cmdIn, sizeof(net->cmdIn));

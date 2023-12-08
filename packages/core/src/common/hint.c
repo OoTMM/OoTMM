@@ -76,9 +76,6 @@ void comboInitHints(void)
 
 static void appendCorrectItemName(char** b, s16 gi, u8 player, u8 importance)
 {
-#if defined(GAME_MM)
-    gi ^= MASK_FOREIGN_GI;
-#endif
     comboTextAppendItemName(b, gi, TF_PROGRESSIVE);
 
     if (comboConfig(CFG_HINT_IMPORTANCE) && !isItemFastBuy(gi))

@@ -16,7 +16,7 @@ PATCH_START(0x8083c824)
 PATCH_END
 
 /* Use out extended table */
-PATCH_REL_HILO kExtendedGetItemsTable
+PATCH_REL_HILO kExtendedGetItems
 .int 0x808312ec
 .int 0x808312f0
 .int 0x808392b8
