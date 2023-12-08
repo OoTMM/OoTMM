@@ -36,13 +36,13 @@ PATCH_WRITE32(0x0)
 .int 0x80861c68
 PATCH_END
 
-/* Remove negative gi check */
-PATCH_START(0x8082ed08)
+/* Remove negative drawGiId check */
+PATCH_START 0x8082ed08
   move t0,v1
 PATCH_END
 
 /* Force chest kick */
-PATCH_START(0x8083d548)
+PATCH_START 0x8083d548
   li t5,-1
 PATCH_END
 

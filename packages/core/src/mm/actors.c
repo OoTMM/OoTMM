@@ -18,9 +18,38 @@ void EnTab_AfterTextBox(Actor* this, GameState_Play* play, s16 messageId);
 
 static Actor* sByteCodeActor;
 
+/* TODO: Patch every bytecode and remove this */
+static s16 convertGi(s16 initial)
+{
+    switch (initial)
+    {
+    case 0x01: return GI_MM_RUPEE_GREEN;
+    case 0x02: return GI_MM_RUPEE_BLUE;
+    case 0x04: return GI_MM_RUPEE_RED;
+    case 0x05: return GI_MM_RUPEE_PURPLE;
+    case 0x06: return GI_MM_RUPEE_SILVER;
+    case 0x07: return GI_MM_RUPEE_GOLD;
+    case 0x0a: return GI_MM_RECOVERY_HEART;
+    case 0x0c: return GI_MM_HEART_PIECE;
+    case 0x34: return GI_MM_POWDER_KEG;
+    case 0x43: return GI_MM_PICTOGRAPH_BOX;
+    case 0x6f: return GI_MM_BOTTLE_CHATEAU;
+    case 0x84: return GI_MM_MASK_POSTMAN;
+    case 0x8f: return GI_MM_MASK_KAFEI;
+    case 0x91: return GI_MM_CHATEAU;
+    case 0x92: return GI_MM_MILK;
+    case 0xa0: return GI_MM_ROOM_KEY;
+    case 0xaa: return GI_MM_LETTER_TO_KAFEI;
+    }
+
+    return initial;
+}
+
 static void Actor_ByteCode_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
     void (*func)(Actor*, GameState_Play*, s16, float, float);
+
+    gi = convertGi(gi);
 
     switch (actor->id)
     {
