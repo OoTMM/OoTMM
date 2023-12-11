@@ -75,12 +75,9 @@ void comboDrawGI(GameState_Play* play, Actor* actor, s16 gi, int flags)
     drawGiParam(play, gi);
 }
 
-void comboPlayerDrawGI(GameState_Play* play)
+void comboPlayerDrawGI(GameState_Play* play, int drawGiMinusOne)
 {
-    Actor_Player* link;
-
-    link = GET_LINK(play);
-    drawGiParamDrawId(play, link->drawGiId, playerDrawGiParam);
+    drawGiParamDrawId(play, (u8)(drawGiMinusOne + 1), playerDrawGiParam);
 }
 
 void comboPlayerSetDrawGi(Actor_Player* link)
