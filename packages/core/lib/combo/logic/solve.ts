@@ -1049,6 +1049,8 @@ export class LogicPassSolver {
           break;
         }
       }
+      if (item)
+        break;
     }
 
     if (!item) {
