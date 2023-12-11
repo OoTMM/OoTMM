@@ -115,6 +115,7 @@
 
 #define EV_MM_WEEK_WOODFALL_TEMPLE_RISE         MM_EV(20,   0)
 #define EV_MM_WEEK_DUNGEON_WF                   MM_EV(20,   1)
+#define EV_MM_WEEK_CURIOSITY_SHOP_BOUGHT        MM_EV(33,   2)
 #define EV_MM_WEEK_DUNGEON_SH                   MM_EV(33,   7)
 #define EV_MM_WEEK_DUNGEON_GB                   MM_EV(55,   7)
 #define EV_MM_WEEK_DUNGEON_ST                   MM_EV(52,   5)

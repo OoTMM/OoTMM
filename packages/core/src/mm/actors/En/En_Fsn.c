@@ -42,7 +42,12 @@ int EnFsn_HasGivenShopItem(Actor_EnFsn* this, GameState_Play* play)
     if (Actor_HasParent(&this->base))
     {
         if (this->mode == 1)
+        {
+            /* Set item count to zero */
+            *(u16*)((char*)this + 0x38c) = 0;
+            MM_SET_EVENT_WEEK(EV_MM_WEEK_CURIOSITY_SHOP_BOUGHT);
             comboShopAfterBuy(play, this->items[this->itemIndex]);
+        }
         else if (sIsSecondReward)
         {
             sIsSecondReward = 0;
