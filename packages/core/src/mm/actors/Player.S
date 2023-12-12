@@ -242,10 +242,11 @@ kItemToGi:
 .short 0x00
 
 PATCH_START 0x80853c38
-  lui t6,%HI(kItemToGi)
+  nop
 PATCH_END
 
 GiFromItem:
+  lui t6,%HI(kItemToGi)
   sll t5,1
   addu t6,t5
   jr ra
@@ -257,7 +258,7 @@ PATCH_START 0x80853c40
 PATCH_END
 
 PATCH_START 0x80853ab0
-  lui t2,%HI(kItemToGi)
+  nop
 PATCH_END
 
 PATCH_START 0x80853abc
@@ -265,6 +266,7 @@ PATCH_START 0x80853abc
 PATCH_END
 
 GiFromItem2:
+  lui t2,%HI(kItemToGi)
   sll v0,1
   addu t2,v0
   jr ra

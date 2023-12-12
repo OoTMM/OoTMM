@@ -46,11 +46,6 @@ PATCH_START 0x8083d548
   li t5,-1
 PATCH_END
 
-/* Remove another bad check */
-PATCH_START 0x8083d274
-  xori at,v0,0xba
-PATCH_END
-
 /* Disable special cases */
 PATCH_START 0x800b8aac
   nop
@@ -69,4 +64,17 @@ PATCH_END
 /* Disable blue rupee fallback */
 PATCH_START 0x8083d3f0
   li a0,0xff
+PATCH_END
+
+/* Scoop */
+PATCH_START 0x800b8ae0
+  slti at,a2,GI_MM_SCOOP
+PATCH_END
+
+PATCH_START 0x800b8b50
+  slti at,a2,GI_MM_SCOOP
+PATCH_END
+
+PATCH_START 0x8083d274
+  slti at,v0,GI_MM_SCOOP
 PATCH_END
