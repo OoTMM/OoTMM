@@ -1,11 +1,14 @@
 import { Buffer } from 'buffer';
 
+import { Options } from '../options';
 import { Game, CONFIG } from "../config";
 import { Patchfile } from '../patch-build/patchfile';
 import { Addresses, GameAddresses } from '../addresses';
 import { PATCH_GROUP_VALUES, PatchGroup } from './group';
 
 export class Patcher {
+  private ranges: [number, number][];
+  private opts: Options;
   private game: Game;
   private rom: Buffer;
   private patches: Buffer;
@@ -16,7 +19,9 @@ export class Patcher {
   private patchGroups: Set<number>;
   private enabled: boolean;
 
-  constructor(game: Game, rom: Buffer, patchGroups: PatchGroup[], addresses: GameAddresses, patches: Buffer, patchfile: Patchfile) {
+  constructor(opts: Options, game: Game, rom: Buffer, patchGroups: PatchGroup[], addresses: GameAddresses, patches: Buffer, patchfile: Patchfile) {
+    this.ranges = [];
+    this.opts = opts;
     this.game = game;
     this.rom = rom;
     this.patchGroups = new Set(patchGroups.map(x => PATCH_GROUP_VALUES[x]));
@@ -48,8 +53,24 @@ export class Patcher {
     return vstart + offset;
   }
 
+  private rangeCheck(start: number, size: number) {
+    if (!this.opts.debug)
+      return;
+
+    /* Check for an overlap with an existing range, in any order */
+    for (const [rstart, rsize] of this.ranges) {
+      if ((start >= rstart && start < rstart + rsize) || (rstart >= start && rstart < start + size)) {
+        throw new Error(`Overlapping range at VROM 0x${start.toString(16)} (${this.game})`);
+      }
+    }
+
+    /* Add the range */
+    this.ranges.push([start, size]);
+  }
+
   private patch(romAddr: number, data: Buffer) {
     if (this.enabled) {
+      this.rangeCheck(romAddr, data.length);
       this.patchfile.addDataPatch(this.game, romAddr, data);
     }
   }

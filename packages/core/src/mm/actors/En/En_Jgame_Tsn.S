@@ -28,7 +28,7 @@ Fisherman_ShouldPassTimerCheck_Hook:
     addiu   sp, sp, 0x18
 
 
-PATCH_START 0x80c13930 + 0x2d8 
+PATCH_START 0x80c13930 + 0x2d8
     lw      a3, 0x3e04 (v1)
     lw      a2, 0x3e00 (v1)
     jal     Fisherman_ShouldPassTimerCheck_Hook
@@ -46,4 +46,13 @@ PATCH_START 0x80c13930 + 0xb34
     lw      a1, 0x002c (sp)
     beqz    v0, .+0x54
     lw      a0, 0x002c (sp)
+PATCH_END
+
+/* GI renumbering */
+PATCH_START 0x80c145b0
+  li a2,GI_MM_HEART_PIECE
+PATCH_END
+
+PATCH_START 0x80c145c8
+  li a2,GI_MM_RUPEE_PURPLE
 PATCH_END

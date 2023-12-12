@@ -17,18 +17,8 @@ typedef struct PACKED ALIGNED(2)
 }
 GetItem;
 
-typedef struct PACKED ALIGNED(2)
-{
-    GetItem native[MASK_FOREIGN_GI];
-    GetItem foreign[];
-}
-ExtendedItemTable;
-
-extern const ExtendedItemTable kExtendedGetItemsTable;
-#define kExtendedGetItems ((const GetItem*)(kExtendedGetItemsTable.native))
-
-extern const u8 kGetItemDrawGiParamOot[];
-extern const u8 kGetItemDrawGiParamMm[];
+extern const GetItem kExtendedGetItems[];
+extern const u8 kGetItemDrawGiParam[];
 
 #endif
 

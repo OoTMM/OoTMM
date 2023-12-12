@@ -4,7 +4,7 @@
 PATCH_LOAD_STORE 16, 0
 .int 0x80022cd0
 .int 0x80830450
-.int 0x808312e8
+/*.int 0x808312e8*/
 .int 0x80831944
 .int 0x80838584
 .int 0x808385b8

@@ -27,16 +27,16 @@ static int mapDungeonId(GameState_Play* play, s16 gi)
         return DUNGEONID_BOTTOM_OF_THE_WELL;
     case GI_OOT_MAP_IC:
         return DUNGEONID_ICE_CAVERN;
-    case GI_MM_MAP_WF | MASK_FOREIGN_GI:
+    case GI_MM_MAP_WF:
         return DUNGEONID_TEMPLE_WOODFALL;
-    case GI_MM_MAP_SH | MASK_FOREIGN_GI:
+    case GI_MM_MAP_SH:
         return DUNGEONID_TEMPLE_SNOWHEAD;
-    case GI_MM_MAP_GB | MASK_FOREIGN_GI:
+    case GI_MM_MAP_GB:
         return DUNGEONID_TEMPLE_GREAT_BAY;
-    case GI_MM_MAP_ST | MASK_FOREIGN_GI:
+    case GI_MM_MAP_ST:
         return DUNGEONID_TEMPLE_STONE_TOWER;
     case GI_OOT_MAP:
-    case GI_MM_MAP | MASK_FOREIGN_GI:
+    case GI_MM_MAP:
         return comboCurrentDungeon(play);
     default:
         return -1;
@@ -67,16 +67,16 @@ static int compassDungeonId(GameState_Play* play, s16 gi)
         return DUNGEONID_BOTTOM_OF_THE_WELL;
     case GI_OOT_COMPASS_IC:
         return DUNGEONID_ICE_CAVERN;
-    case GI_MM_COMPASS_WF | MASK_FOREIGN_GI:
+    case GI_MM_COMPASS_WF:
         return DUNGEONID_TEMPLE_WOODFALL;
-    case GI_MM_COMPASS_SH | MASK_FOREIGN_GI:
+    case GI_MM_COMPASS_SH:
         return DUNGEONID_TEMPLE_SNOWHEAD;
-    case GI_MM_COMPASS_GB | MASK_FOREIGN_GI:
+    case GI_MM_COMPASS_GB:
         return DUNGEONID_TEMPLE_GREAT_BAY;
-    case GI_MM_COMPASS_ST | MASK_FOREIGN_GI:
+    case GI_MM_COMPASS_ST:
         return DUNGEONID_TEMPLE_STONE_TOWER;
     case GI_OOT_COMPASS:
-    case GI_MM_COMPASS | MASK_FOREIGN_GI:
+    case GI_MM_COMPASS:
         return comboCurrentDungeon(play);
     default:
         return -1;
@@ -137,10 +137,6 @@ static void comboTextCompass(char** b, GameState_Play* play, s16 gi)
 
 void comboTextExtra(char** b, GameState_Play* play, s16 gi)
 {
-#if defined(GAME_MM)
-    gi ^= MASK_FOREIGN_GI;
-#endif
-
     if (gi < 0)
         gi = -gi;
 

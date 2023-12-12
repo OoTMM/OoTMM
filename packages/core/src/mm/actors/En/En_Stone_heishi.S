@@ -1,0 +1,18 @@
+#include <combo.h>
+
+/* GI renumbering */
+PATCH_START 0x80bc9ccc
+  li a2,GI_MM_RUPEE_BLUE
+PATCH_END
+
+PATCH_START 0x80bc9cf0
+  li a2,GI_MM_MASK_STONE
+PATCH_END
+
+PATCH_START 0x80bc9e08
+  li a2,GI_MM_RUPEE_BLUE
+PATCH_END
+
+PATCH_START 0x80bc9e2c
+  li a2,GI_MM_MASK_STONE
+PATCH_END

@@ -106,7 +106,7 @@ static s32 progressiveHookshot(s32 gi)
     {
         if (!gOotExtraItems.hookshot)
             return GI_MM_HOOKSHOT;
-        return GI_OOT_LONGSHOT | MASK_FOREIGN_GI;
+        return GI_OOT_LONGSHOT;
     }
 
     /* Not progressive */

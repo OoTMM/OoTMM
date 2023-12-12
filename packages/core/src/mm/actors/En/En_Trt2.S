@@ -1,0 +1,10 @@
+#include <combo.h>
+
+/* GI renumbering */
+PATCH_START 0x80ad4070
+  li a2,GI_MM_POTION_RED
+PATCH_END
+
+PATCH_START 0x80ad408c
+  li a2,GI_MM_BOTTLE_POTION_RED
+PATCH_END

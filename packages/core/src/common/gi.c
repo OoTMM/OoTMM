@@ -1,45 +1,28 @@
 #include <combo.h>
 #include <combo/custom.h>
 
-const ExtendedItemTable kExtendedGetItemsTable = {
-#define X(a, b, c, drawGiParam, d, e, text) {a, b, c, 8, Y(e)}
-#define Y(x)                x
-
-{
+const GetItem kExtendedGetItems[] = {
+#define X(a, b, c, drawGiParam, d, e, text) {a, b, c, 8, e}
 #if defined(GAME_OOT)
-# include "data/oot/gi.inc"
+# define OOT(x)            x
+# define MM(x)             (x ^ MASK_FOREIGN_OBJECT)
 #else
-# include "data/mm/gi.inc"
+# define OOT(x)            (x ^ MASK_FOREIGN_OBJECT)
+# define MM(x)             x
 #endif
-},
-
-# undef Y
-# define Y(x)               ((((x) < 0x2000) * ((x) ^ MASK_FOREIGN_OBJECT)) | ((x) >= 0x2000) * (x))
-
-{
-#if defined(GAME_OOT)
-# include "data/mm/gi.inc"
-#else
-# include "data/oot/gi.inc"
-#endif
-},
-
+#include "data/gi.inc"
+#undef OOT
+#undef MM
 #undef X
-#undef Y
 };
 
 /* Draw GI Params */
+const u8 kGetItemDrawGiParam[] = {
 #define X(a, b, c, drawGiParam, d, e, text) drawGiParam
-
-const u8 kGetItemDrawGiParamOot[] = {
-#include "data/oot/gi.inc"
-};
-
-const u8 kGetItemDrawGiParamMm[] = {
-#include "data/mm/gi.inc"
-};
-
+#include "data/gi.inc"
 #undef X
+};
+
 
 void comboLoadObjectGi(Actor_Player* player, u16 objectId)
 {

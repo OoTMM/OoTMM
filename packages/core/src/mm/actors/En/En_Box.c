@@ -31,11 +31,29 @@ static s16 EnBox_Item(Actor* this, GameState_Play* play, s16 gi)
     return ov.gi;
 }
 
+static s16 convertGi(s16 initial)
+{
+    switch (initial)
+    {
+    case 0x01: return GI_MM_RUPEE_GREEN;
+    case 0x02: return GI_MM_RUPEE_BLUE;
+    case 0x04: return GI_MM_RUPEE_RED;
+    case 0x05: return GI_MM_RUPEE_PURPLE;
+    case 0x06: return GI_MM_RUPEE_SILVER;
+    case 0x07: return GI_MM_RUPEE_GOLD;
+    case 0x0c: return GI_MM_HEART_PIECE;
+    case 0x2a: return GI_MM_NUTS_10;
+    }
+
+    return initial;
+}
+
 static s16 EnBox_GetGI(Actor* this)
 {
-    s32 raw;
+    s16 raw;
 
-    raw = *(s32*)((char*)this + 0x21c);
+    raw = (s16)*(s32*)((char*)this + 0x21c);
+    raw = convertGi(raw);
     return (s16)(-raw);
 }
 

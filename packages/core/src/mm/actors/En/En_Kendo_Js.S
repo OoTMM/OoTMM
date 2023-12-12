@@ -1,0 +1,10 @@
+#include <combo.h>
+
+/* GI renumbering */
+PATCH_START 0x80b2772c
+  li a2,GI_MM_HEART_PIECE
+PATCH_END
+
+PATCH_START 0x80b27714
+  li a2,GI_MM_RUPEE_RED
+PATCH_END

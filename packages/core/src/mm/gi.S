@@ -1,8 +1,8 @@
 #include <combo.h>
 
 /* Use out extended table */
-PATCH_REL_HILO kExtendedGetItemsTable
-.int 0x8082ece4
+PATCH_REL_HILO kExtendedGetItems
+/*.int 0x8082ece4*/
 .int 0x8082ece8
 .int 0x8083d288
 .int 0x8083d28c
@@ -36,19 +36,14 @@ PATCH_WRITE32(0x0)
 .int 0x80861c68
 PATCH_END
 
-/* Remove negative gi check */
-PATCH_START(0x8082ed08)
+/* Remove negative drawGiId check */
+PATCH_START 0x8082ed08
   move t0,v1
 PATCH_END
 
 /* Force chest kick */
-PATCH_START(0x8083d548)
+PATCH_START 0x8083d548
   li t5,-1
-PATCH_END
-
-/* Remove another bad check */
-PATCH_START 0x8083d274
-  xori at,v0,0xba
 PATCH_END
 
 /* Disable special cases */
@@ -69,4 +64,17 @@ PATCH_END
 /* Disable blue rupee fallback */
 PATCH_START 0x8083d3f0
   li a0,0xff
+PATCH_END
+
+/* Scoop */
+PATCH_START 0x800b8ae0
+  slti at,a2,GI_MM_SCOOP
+PATCH_END
+
+PATCH_START 0x800b8b50
+  slti at,a2,GI_MM_SCOOP
+PATCH_END
+
+PATCH_START 0x8083d274
+  slti at,v0,GI_MM_SCOOP
 PATCH_END

@@ -21,7 +21,7 @@ static int hasFreeBottleMm(void)
     return 0;
 }
 
-static int isItemBuyableOot(s16 gi)
+int isItemBuyable(s16 gi)
 {
     switch (gi)
     {
@@ -72,15 +72,6 @@ static int isItemBuyableOot(s16 gi)
         return !(gOotSave.inventory.equipment.shields & EQ_OOT_SHIELD_DEKU);
     case GI_OOT_SHIELD_HYLIAN:
         return !(gOotSave.inventory.equipment.shields & EQ_OOT_SHIELD_HYLIAN);
-    default:
-        return 1;
-    }
-}
-
-static int isItemBuyableMm(s16 gi)
-{
-    switch (gi)
-    {
     case GI_MM_RECOVERY_HEART:
         return gMmSave.playerData.health < gMmSave.playerData.healthMax;
     case GI_MM_STICK:
@@ -126,16 +117,4 @@ static int isItemBuyableMm(s16 gi)
     default:
         return 1;
     }
-}
-
-int isItemBuyable(s16 gi)
-{
-#if defined(GAME_MM)
-    gi ^= MASK_FOREIGN_GI;
-#endif
-
-    if (gi & MASK_FOREIGN_GI)
-        return isItemBuyableMm(gi ^ MASK_FOREIGN_GI);
-    else
-        return isItemBuyableOot(gi);
 }

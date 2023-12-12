@@ -1,4 +1,3 @@
-export { default as DATA_GI } from '../../data/gi.yml';
 export { default as DATA_SCENES } from '../../data/scenes.yml';
 export { default as DATA_NPC } from '../../data/npc.yml';
 export { default as DATA_REGIONS } from '../../data/regions.yml';
@@ -30,6 +29,13 @@ export const DATA_ENTRANCES_POOL = {
   oot: entrancesOot,
   mm: entrancesMm,
 };
+
+import rawGi from '../../data/gi.csv';
+export let DATA_GI: {[k: string]: number} = {};
+for (let i = 0; i < rawGi.length; ++i) {
+  const v = rawGi[i];
+  DATA_GI[v.id] = i + 1;
+}
 
 import worldOotOverworld from '../../data/oot/world/overworld.yml';
 import worldOotBoss from '../../data/oot/world/boss.yml';

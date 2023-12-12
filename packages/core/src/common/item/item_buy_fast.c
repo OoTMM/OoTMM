@@ -1,6 +1,6 @@
 #include <combo.h>
 
-static int isItemFastBuyOot(s16 gi)
+int isItemFastBuy(s16 gi)
 {
     switch (gi)
     {
@@ -38,16 +38,6 @@ static int isItemFastBuyOot(s16 gi)
     case GI_OOT_POE:
     case GI_OOT_FAIRY:
     case GI_OOT_MILK:
-        return 1;
-    default:
-        return 0;
-    }
-}
-
-static int isItemFastBuyMm(s16 gi)
-{
-    switch (gi)
-    {
     case GI_MM_RECOVERY_HEART:
     case GI_MM_STICK:
     case GI_MM_NUT:
@@ -83,16 +73,4 @@ static int isItemFastBuyMm(s16 gi)
     default:
         return 0;
     }
-}
-
-int isItemFastBuy(s16 gi)
-{
-#if defined(GAME_MM)
-    gi ^= MASK_FOREIGN_GI;
-#endif
-
-    if (gi & MASK_FOREIGN_GI)
-        return isItemFastBuyMm(gi ^ MASK_FOREIGN_GI);
-    else
-        return isItemFastBuyOot(gi);
 }
