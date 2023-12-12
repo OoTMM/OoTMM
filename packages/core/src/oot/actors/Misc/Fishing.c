@@ -206,7 +206,7 @@ s32 Fishing_IsFishLoach(u16 variable) {
         return 1;
     }
 
-    return variable < 115;
+    return variable >= 115;
 }
 
 void Fishing_OverrideInitFishLength(u8 linkAge, f32 childMultiplier, Actor* this) {
