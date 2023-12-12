@@ -1721,9 +1721,8 @@ int comboAddItemOot(s16 gi, int noEffect)
     {
         u8 caughtListLength = gSharedCustomSave.caughtChildFishWeight[0];
         if (caughtListLength < ARRAY_SIZE(gSharedCustomSave.caughtChildFishWeight) - 1) {
-            f32 lbs = (f32)(gi - GI_OOT_FISHING_POND_CHILD_FISH_2LBS + 2);
-            s32 weight = FISH_WEIGHT_TO_LENGTH(lbs);
-            gSharedCustomSave.caughtChildFishWeight[++gSharedCustomSave.caughtChildFishWeight[0]] = weight & 0x7F;
+            s16 pounds = gi - GI_OOT_FISHING_POND_CHILD_FISH_2LBS + 2;
+            gSharedCustomSave.caughtChildFishWeight[++gSharedCustomSave.caughtChildFishWeight[0]] = pounds & 0x7F;
         }
     }
         break;
@@ -1736,9 +1735,8 @@ int comboAddItemOot(s16 gi, int noEffect)
     {
         u8 caughtListLength = gSharedCustomSave.caughtChildFishWeight[0];
         if (caughtListLength < ARRAY_SIZE(gSharedCustomSave.caughtChildFishWeight) - 1) {
-            f32 lbs = (f32)(gi - GI_OOT_FISHING_POND_CHILD_LOACH_14LBS + 14);
-            s32 weight = FISH_WEIGHT_TO_LENGTH(lbs);
-            gSharedCustomSave.caughtChildFishWeight[++gSharedCustomSave.caughtChildFishWeight[0]] = (weight & 0x7F) | 0x80;
+            s16 pounds = gi - GI_OOT_FISHING_POND_CHILD_LOACH_14LBS + 14;
+            gSharedCustomSave.caughtChildFishWeight[++gSharedCustomSave.caughtChildFishWeight[0]] = (pounds & 0x7F) | 0x80;
         }
     }
         break;
@@ -1767,9 +1765,8 @@ int comboAddItemOot(s16 gi, int noEffect)
     {
         u8 caughtListLength = gSharedCustomSave.caughtAdultFishWeight[0];
         if (caughtListLength < ARRAY_SIZE(gSharedCustomSave.caughtAdultFishWeight) - 1) {
-            f32 lbs = (f32)(gi - GI_OOT_FISHING_POND_ADULT_FISH_4LBS + 4);
-            s32 weight = FISH_WEIGHT_TO_LENGTH(lbs);
-            gSharedCustomSave.caughtAdultFishWeight[++gSharedCustomSave.caughtAdultFishWeight[0]] = weight & 0x7F;
+            s16 pounds = gi - GI_OOT_FISHING_POND_ADULT_FISH_4LBS + 4;
+            gSharedCustomSave.caughtAdultFishWeight[++gSharedCustomSave.caughtAdultFishWeight[0]] = pounds & 0x7F;
         }
     }
         break;
@@ -1784,9 +1781,8 @@ int comboAddItemOot(s16 gi, int noEffect)
     {
         u8 caughtListLength = gSharedCustomSave.caughtAdultFishWeight[0];
         if (caughtListLength < ARRAY_SIZE(gSharedCustomSave.caughtAdultFishWeight) - 1) {
-            f32 lbs = (f32)(gi - GI_OOT_FISHING_POND_ADULT_LOACH_29LBS + 29);
-            s32 weight = FISH_WEIGHT_TO_LENGTH(lbs);
-            gSharedCustomSave.caughtAdultFishWeight[++gSharedCustomSave.caughtAdultFishWeight[0]] = (weight & 0x7F) | 0x80;
+            s16 pounds = gi - GI_OOT_FISHING_POND_ADULT_LOACH_29LBS + 29;
+            gSharedCustomSave.caughtAdultFishWeight[++gSharedCustomSave.caughtAdultFishWeight[0]] = (pounds & 0x7F) | 0x80;
         }
     }
         break;

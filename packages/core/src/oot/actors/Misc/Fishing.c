@@ -109,33 +109,33 @@ PATCH_CALL(0x80a405d8, Fishing_DrawFish_SkelAnime);
 PATCH_CALL(0x80a4066c, Fishing_DrawFish_SkelAnime);
 
 static f32 Fishing_GetFishOnHand(u8* sFishOnHandIsLoach, s32 take) {
-    u8 weight = 0;
+    u8 pounds = 0;
     if (gSave.age == AGE_ADULT) {
         if (gSharedCustomSave.caughtAdultFishWeight[0]) {
-            weight = gSharedCustomSave.caughtAdultFishWeight[gSharedCustomSave.caughtAdultFishWeight[0]];
+            pounds = gSharedCustomSave.caughtAdultFishWeight[gSharedCustomSave.caughtAdultFishWeight[0]];
             if (take) {
                 gSharedCustomSave.caughtAdultFishWeight[0]--;
             }
         }
     } else {
         if (gSharedCustomSave.caughtChildFishWeight[0]) {
-            weight = gSharedCustomSave.caughtChildFishWeight[gSharedCustomSave.caughtChildFishWeight[0]];
+            pounds = gSharedCustomSave.caughtChildFishWeight[gSharedCustomSave.caughtChildFishWeight[0]];
             if (take) {
                 gSharedCustomSave.caughtChildFishWeight[0]--;
             }
         }
     }
 
-    if (weight) {
-        if (weight & 0x80) {
+    if (pounds) {
+        if (pounds & 0x80) {
             // Loach
             *sFishOnHandIsLoach = 1;
         } else {
             // Fish
             *sFishOnHandIsLoach = 0;
         }
-        weight &= 0x7F;
-        return (f32) weight;
+        pounds &= 0x7F;
+        return FISH_WEIGHT_TO_LENGTH(pounds);
     }
     return 0;
 }
@@ -206,11 +206,12 @@ s32 Fishing_IsFishLoach(u16 variable) {
         return 1;
     }
 
-    return variable < 115;
+    return variable >= 115;
 }
 
 void Fishing_OverrideInitFishLength(u8 linkAge, f32 childMultiplier, Actor* this) {
     f32* fishLength = (f32*)(((u8*)this)+0x19C);
+    u8* appearsAsLoach = (((u8*)this)+0x143); // unused padding in Fishing struct
 
     // Displaced code:
     if (linkAge == AGE_CHILD) {
@@ -234,10 +235,12 @@ void Fishing_OverrideInitFishLength(u8 linkAge, f32 childMultiplier, Actor* this
     else if (o.gi >= GI_OOT_FISHING_POND_CHILD_LOACH_14LBS && o.gi <= GI_OOT_FISHING_POND_CHILD_LOACH_19LBS)
     {
         pounds = o.gi - GI_OOT_FISHING_POND_CHILD_LOACH_14LBS + 14;
+        *appearsAsLoach = 1;
     }
     else if (o.gi >= GI_OOT_FISHING_POND_ADULT_LOACH_29LBS && o.gi <= GI_OOT_FISHING_POND_ADULT_LOACH_36LBS)
     {
         pounds = o.gi - GI_OOT_FISHING_POND_ADULT_LOACH_29LBS + 29;
+        *appearsAsLoach = 1;
     }
     else
     {
@@ -247,6 +250,9 @@ void Fishing_OverrideInitFishLength(u8 linkAge, f32 childMultiplier, Actor* this
     if (pounds)
     {
         *fishLength = FISH_WEIGHT_TO_LENGTH(pounds);
+        if (*appearsAsLoach) {
+            *fishLength *= 0.5f;
+        }
     }
 }
 
