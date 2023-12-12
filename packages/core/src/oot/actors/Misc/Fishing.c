@@ -109,33 +109,33 @@ PATCH_CALL(0x80a405d8, Fishing_DrawFish_SkelAnime);
 PATCH_CALL(0x80a4066c, Fishing_DrawFish_SkelAnime);
 
 static f32 Fishing_GetFishOnHand(u8* sFishOnHandIsLoach, s32 take) {
-    u8 weight = 0;
+    u8 pounds = 0;
     if (gSave.age == AGE_ADULT) {
         if (gSharedCustomSave.caughtAdultFishWeight[0]) {
-            weight = gSharedCustomSave.caughtAdultFishWeight[gSharedCustomSave.caughtAdultFishWeight[0]];
+            pounds = gSharedCustomSave.caughtAdultFishWeight[gSharedCustomSave.caughtAdultFishWeight[0]];
             if (take) {
                 gSharedCustomSave.caughtAdultFishWeight[0]--;
             }
         }
     } else {
         if (gSharedCustomSave.caughtChildFishWeight[0]) {
-            weight = gSharedCustomSave.caughtChildFishWeight[gSharedCustomSave.caughtChildFishWeight[0]];
+            pounds = gSharedCustomSave.caughtChildFishWeight[gSharedCustomSave.caughtChildFishWeight[0]];
             if (take) {
                 gSharedCustomSave.caughtChildFishWeight[0]--;
             }
         }
     }
 
-    if (weight) {
-        if (weight & 0x80) {
+    if (pounds) {
+        if (pounds & 0x80) {
             // Loach
             *sFishOnHandIsLoach = 1;
         } else {
             // Fish
             *sFishOnHandIsLoach = 0;
         }
-        weight &= 0x7F;
-        return (f32) weight;
+        pounds &= 0x7F;
+        return FISH_WEIGHT_TO_LENGTH(pounds);
     }
     return 0;
 }
