@@ -580,7 +580,6 @@ X(ITEM_MM_WORLD_MAP,                0xa0,  DRAWGI_MM_WORLD_MAP,                 
 X(ITEM_MM_WORLD_MAP,                0xa0,  DRAWGI_MM_WORLD_MAP,                 0x00, 0xb7, MM(0x024d), "a " C0 "World Map (Romani Ranch)"),
 X(ITEM_MM_WORLD_MAP,                0xa0,  DRAWGI_MM_WORLD_MAP,                 0x00, 0xb8, MM(0x024d), "a " C0 "World Map (Great Bay)"),
 X(ITEM_MM_WORLD_MAP,                0xa0,  DRAWGI_MM_WORLD_MAP,                 0x00, 0xb9, MM(0x024d), "a " C0 "World Map (Stone Tower)"),
-X(ITEM_NONE,                        0x00,  DRAWGI_NONE,                         0x00, 0x00, MM(0x0000), ""), /* Extra items below */
 X(ITEM_CUSTOM,                      0xa0,  DRAWGI_MAGIC_UPGRADE,                0x00, 0xb9, MM(0x00a4), "the " C1 "Magic Upgrade"),
 X(ITEM_CUSTOM,                      0xa0,  DRAWGI_MAGIC_UPGRADE2,               0x00, 0xb9, MM(0x00a4), "the " C1 "Larger Magic Upgrade"),
 X(ITEM_CUSTOM,                      0xa0,  DRAWGI_DEFENSE_UPGRADE,              0x00, 0x0d, MM(0x0096), "the " C1 "Defense Upgrade"),
@@ -705,3 +704,4 @@ X(ITEM_CUSTOM,                      0xa0,  DRAWGI_BUTTON_C_UP,                  
 X(ITEM_CUSTOM,                      0xa0,  DRAWGI_BUTTON_C_DOWN,                0x00, 0x3c, CUSTOM_OBJECT_ID_BTN_C_VERTICAL, "the " C1 "C-Down Button"),
 X(ITEM_CUSTOM,                      0xa0,  DRAWGI_BOTTLE_POTION,                0x01, 0x59, MM(0x0196), "a " C1 "bottle of Green Potion"),
 X(ITEM_CUSTOM,                      0xa0,  DRAWGI_BOTTLE_POTION,                0x02, 0x59, MM(0x0196), "a " C1 "bottle of Blue Potion"),
+X(ITEM_NONE,                        0x00,  DRAWGI_NONE,                         0x00, 0x00, 0x0000, ""), /* Scoop */
