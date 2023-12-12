@@ -211,6 +211,7 @@ s32 Fishing_IsFishLoach(u16 variable) {
 
 void Fishing_OverrideInitFishLength(u8 linkAge, f32 childMultiplier, Actor* this) {
     f32* fishLength = (f32*)(((u8*)this)+0x19C);
+    u8* appearsAsLoach = (((u8*)this)+0x143); // unused padding in Fishing struct
 
     // Displaced code:
     if (linkAge == AGE_CHILD) {
@@ -234,10 +235,12 @@ void Fishing_OverrideInitFishLength(u8 linkAge, f32 childMultiplier, Actor* this
     else if (o.gi >= GI_OOT_FISHING_POND_CHILD_LOACH_14LBS && o.gi <= GI_OOT_FISHING_POND_CHILD_LOACH_19LBS)
     {
         pounds = o.gi - GI_OOT_FISHING_POND_CHILD_LOACH_14LBS + 14;
+        *appearsAsLoach = 1;
     }
     else if (o.gi >= GI_OOT_FISHING_POND_ADULT_LOACH_29LBS && o.gi <= GI_OOT_FISHING_POND_ADULT_LOACH_36LBS)
     {
         pounds = o.gi - GI_OOT_FISHING_POND_ADULT_LOACH_29LBS + 29;
+        *appearsAsLoach = 1;
     }
     else
     {
@@ -247,6 +250,9 @@ void Fishing_OverrideInitFishLength(u8 linkAge, f32 childMultiplier, Actor* this
     if (pounds)
     {
         *fishLength = FISH_WEIGHT_TO_LENGTH(pounds);
+        if (*appearsAsLoach) {
+            *fishLength *= 0.5f;
+        }
     }
 }
 
