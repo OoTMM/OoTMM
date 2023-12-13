@@ -2,17 +2,6 @@
 #include <combo/text.h>
 #include <combo/item.h>
 
-#define C0   TEXT_COLOR_TEAL
-#define C1   TEXT_COLOR_RED
-#define C2   TEXT_COLOR_PINK
-#define C3   TEXT_COLOR_YELLOW
-
-static const char* const kItemNames[] = {
-#define X(a, b, c, drawGiParam, d, e, text) text
-#include "../data/gi.inc"
-#undef X
-};
-
 typedef struct
 {
     char* prepos;
@@ -609,14 +598,14 @@ void comboTextAppendItemNameEx(char** b, s16 gi, int flags, int importance)
     {
         if (comboConfig(CFG_OOT_BLUE_FIRE_ARROWS))
         {
-            itemName = "the " C1 "Blue Fire Arrows";
+            itemName = "the " TEXT_C1 "Blue Fire Arrows";
             ambiguous = 0;
         }
     }
     if(gi == GI_MM_BOMBER_NOTEBOOK)
     {
         if(comboConfig(CFG_MENU_NOTEBOOK))
-            itemName = "the " C1 "Bombers' Tracker";
+            itemName = "the " TEXT_C1 "Bombers' Tracker";
     }
     if (flags & TF_PROGRESSIVE)
     {
@@ -625,54 +614,54 @@ void comboTextAppendItemNameEx(char** b, s16 gi, int flags, int importance)
         case GI_OOT_SWORD_KOKIRI:
             if (comboConfig(CFG_OOT_PROGRESSIVE_SWORDS))
             {
-                itemName = "a " C1 "Progressive Sword";
+                itemName = "a " TEXT_C1 "Progressive Sword";
                 ambiguous = 1;
             }
             break;
         case GI_OOT_SWORD_KNIFE:
             if (comboConfig(CFG_OOT_PROGRESSIVE_SWORDS_GORON))
             {
-                itemName = "a " C1 "Progressive Goron Sword";
+                itemName = "a " TEXT_C1 "Progressive Goron Sword";
             }
             break;
         case GI_MM_SWORD_KOKIRI:
-            itemName = "a " C1 "Progressive Sword";
+            itemName = "a " TEXT_C1 "Progressive Sword";
             ambiguous = 1;
             break;
         case GI_OOT_PROGRESSIVE_SHIELD_DEKU:
         case GI_MM_PROGRESSIVE_SHIELD_HERO:
-            itemName = "a " C1 "Progressive Shield";
+            itemName = "a " TEXT_C1 "Progressive Shield";
             ambiguous = 1;
             break;
         case GI_OOT_OCARINA_FAIRY:
         case GI_MM_OCARINA_FAIRY:
-            itemName = "a " C1 "Progressive Ocarina";
+            itemName = "a " TEXT_C1 "Progressive Ocarina";
             ambiguous = !comboConfig(CFG_SHARED_OCARINA);
             break;
         case GI_OOT_HOOKSHOT:
         case GI_MM_HOOKSHOT_SHORT:
-            itemName = "a " C1 "Progressive Hookshot";
+            itemName = "a " TEXT_C1 "Progressive Hookshot";
             ambiguous = !comboConfig(CFG_SHARED_HOOKSHOT);
             break;
         case GI_OOT_WALLET:
         case GI_MM_WALLET:
-            itemName = "a " C1 "Progressive Wallet";
+            itemName = "a " TEXT_C1 "Progressive Wallet";
             ambiguous = !comboConfig(CFG_SHARED_WALLETS);
             break;
         case GI_MM_SONG_GORON_HALF:
-            itemName = "a " C2 "Progressive Goron Lullaby";
+            itemName = "a " TEXT_C2 "Progressive Goron Lullaby";
             break;
         case GI_OOT_SCALE_SILVER:
-            itemName = "a " C1 "Progressive Scale";
+            itemName = "a " TEXT_C1 "Progressive Scale";
             break;
         case GI_OOT_GORON_BRACELET:
-            itemName = "a " C1 "Progressive Strength";
+            itemName = "a " TEXT_C1 "Progressive Strength";
             break;
         case GI_OOT_BOW:
         case GI_MM_BOW:
             if (comboConfig(CFG_SHARED_BOWS))
             {
-                itemName = "a " C1 "Bow";
+                itemName = "a " TEXT_C1 "Bow";
                 ambiguous = 0;
             }
             break;

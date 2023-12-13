@@ -43,6 +43,11 @@
 # define TEXT_BB             "\x10"
 #endif
 
+#define TEXT_C0   TEXT_COLOR_TEAL
+#define TEXT_C1   TEXT_COLOR_RED
+#define TEXT_C2   TEXT_COLOR_PINK
+#define TEXT_C3   TEXT_COLOR_YELLOW
+
 #define TF_NONE         0
 #define TF_CAPITALIZE   (1 << 0)
 #define TF_PREPOS       (1 << 1)

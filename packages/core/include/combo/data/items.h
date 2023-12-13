@@ -177,6 +177,7 @@
 #define ITEM_MM_MILK_HALF                   0x19
 #define ITEM_MM_FISH                        0x1a
 #define ITEM_MM_BUG                         0x1b
+#define ITEM_MM_BLUE_FIRE                   0x1c
 #define ITEM_MM_POE                         0x1d
 #define ITEM_MM_BOTTLED_BIG_POE             0x1e
 #define ITEM_MM_BOTTLED_SPRING_WATER        0x1f
@@ -293,7 +294,6 @@
 #define ITEM_MM_GOLD_DUST                   0xa1
 #define ITEM_MM_SEAHORSE                    0xa3
 
-#define ITEM_CUSTOM     0xf0
 #define ITEM_NONE       0xff
 
 /* Item slots */
