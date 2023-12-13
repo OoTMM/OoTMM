@@ -294,7 +294,6 @@
 #define ITEM_MM_GOLD_DUST                   0xa1
 #define ITEM_MM_SEAHORSE                    0xa3
 
-#define ITEM_CUSTOM     0xf0
 #define ITEM_NONE       0xff
 
 /* Item slots */
