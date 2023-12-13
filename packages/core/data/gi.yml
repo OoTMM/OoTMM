@@ -3,14 +3,14 @@
 - { id: OOT_BOMBCHU_10, item: OOT_BOMBCHU_10, add: [OOT_BOMBCHU, 10], flags: 0x80, draw: BOMBCHU, object: [oot, 0x00d9], name: "<C0>10 Bombchu" }
 - { id: OOT_BOW, item: OOT_BOW, add: [OOT_BOW, 1], flags: 0x80, draw: OOT_BOW, object: [oot, 0x00e9], name: "the <C1>Fairy Bow" }
 - { id: OOT_SLINGSHOT, item: OOT_SLINGSHOT, add: [SLINGSHOT, 1], flags: 0x80, draw: OOT_SLINGSHOT, object: [oot, 0x00e7], name: "the <C1>Fairy Slingshot" }
-- { id: OOT_BOOMERANG, item: OOT_BOOMERANG, add: NONE, flags: 0x80, draw: OOT_BOOMERANG, object: [oot, 0x00e8], name: "the <C1>Boomerang" }
+- { id: OOT_BOOMERANG, item: OOT_BOOMERANG, add: OOT_NORMAL, flags: 0x80, draw: OOT_BOOMERANG, object: [oot, 0x00e8], name: "the <C1>Boomerang" }
 - { id: OOT_STICK, item: OOT_STICK, add: NONE, flags: 0x0d, draw: DEKU_STICK, object: [oot, 0x00c7], name: "a <C0>Deku Stick" }
 - { id: OOT_HOOKSHOT, item: OOT_HOOKSHOT, add: NONE, flags: 0x80, draw: OOT_HOOKSHOT, object: [oot, 0x00dd], name: "the <C1>Hookshot" }
 - { id: OOT_LONGSHOT, item: OOT_LONGSHOT, add: NONE, flags: 0x80, draw: OOT_LONGSHOT, object: [oot, 0x00dd], name: "the <C1>Longshot" }
 - { id: OOT_LENS, item: OOT_LENS, add: NONE, flags: 0x80, draw: LENS, object: [oot, 0x00ea], name: "the <C1>Lens of Truth" }
 - { id: OOT_ZELDA_LETTER, item: OOT_ZELDA_LETTER, add: NONE, flags: 0x80, draw: OOT_ZELDA_LETTER, object: [oot, 0x00ef], name: "<C1>Zelda's Letter" }
 - { id: OOT_OCARINA_TIME, item: OOT_OCARINA_TIME, add: NONE, flags: 0x80, draw: OCARINA_TIME, object: [oot, 0x00de], name: "the <C1>Ocarina of Time" }
-- { id: OOT_HAMMER, item: OOT_HAMMER, add: NONE, flags: 0x80, draw: OOT_MEGATON_HAMMER, object: [oot, 0x00f6], name: "the <C1>Megaton Hammer" }
+- { id: OOT_HAMMER, item: OOT_HAMMER, add: OOT_NORMAL, flags: 0x80, draw: OOT_MEGATON_HAMMER, object: [oot, 0x00f6], name: "the <C1>Megaton Hammer" }
 - { id: OOT_COJIRO, item: OOT_COJIRO, add: NONE, flags: 0x80, draw: OOT_COJIRO, object: [oot, 0x0109], name: "<C1>Cojiro" }
 - { id: OOT_BOTTLE_EMPTY, item: OOT_BOTTLE_EMPTY, add: NONE, flags: 0x80, draw: BOTTLE_EMPTY, object: [oot, 0x00c6], name: "an <C1>Empty Bottle" }
 - { id: OOT_POTION_RED, item: OOT_POTION_RED, add: NONE, flags: 0x80, draw: POTION_RED, object: [oot, 0x00eb], name: "a <C0>Red Potion" }
@@ -89,9 +89,9 @@
 - { id: OOT_ARROW_ICE, item: OOT_ARROW_ICE, add: NONE, flags: 0x80, draw: ARROW_ICE, object: [oot, 0x0158], name: "the <C1>Ice Arrow" }
 - { id: OOT_ARROW_LIGHT, item: OOT_ARROW_LIGHT, add: NONE, flags: 0x80, draw: ARROW_LIGHT, object: [oot, 0x0158], name: "the <C1>Light Arrow" }
 - { id: OOT_GS_TOKEN, item: OOT_GS_TOKEN, add: NONE, flags: 0x80, draw: OOT_GS_TOKEN, object: [oot, 0x015c], name: "a <C0>Gold Skulltula Token" }
-- { id: OOT_SPELL_FIRE, item: OOT_SPELL_FIRE, add: NONE, flags: 0x80, draw: OOT_SPELL_FIRE, object: [oot, 0x015d], name: "<C1>Din's Fire" }
-- { id: OOT_SPELL_WIND, item: OOT_SPELL_WIND, add: NONE, flags: 0x80, draw: OOT_SPELL_WIND, object: [oot, 0x015d], name: "<C1>Farore's Wind" }
-- { id: OOT_SPELL_LOVE, item: OOT_SPELL_LOVE, add: NONE, flags: 0x80, draw: OOT_SPELL_LOVE, object: [oot, 0x015d], name: "<C1>Nayru's Love" }
+- { id: OOT_SPELL_FIRE, item: OOT_SPELL_FIRE, add: OOT_NORMAL, flags: 0x80, draw: OOT_SPELL_FIRE, object: [oot, 0x015d], name: "<C1>Din's Fire" }
+- { id: OOT_SPELL_WIND, item: OOT_SPELL_WIND, add: OOT_NORMAL, flags: 0x80, draw: OOT_SPELL_WIND, object: [oot, 0x015d], name: "<C1>Farore's Wind" }
+- { id: OOT_SPELL_LOVE, item: OOT_SPELL_LOVE, add: OOT_NORMAL, flags: 0x80, draw: OOT_SPELL_LOVE, object: [oot, 0x015d], name: "<C1>Nayru's Love" }
 - { id: OOT_BULLET_BAG, item: OOT_BULLET_BAG, add: [SLINGSHOT, 1], flags: 0x80, draw: OOT_BULLET_BAG2, object: [oot, 0x017b] }
 - { id: OOT_BULLET_BAG2, item: OOT_BULLET_BAG2, add: [SLINGSHOT, 2], flags: 0x80, draw: OOT_BULLET_BAG2, object: [oot, 0x017b], name: "the <C1>Large Bullet Bag" }
 - { id: OOT_STICKS_5, item: OOT_STICKS_5, add: NONE, flags: 0x0d, draw: DEKU_STICK, object: [oot, 0x00c7], name: "<C0>5 Deku Sticks" }

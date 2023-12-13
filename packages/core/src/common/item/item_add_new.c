@@ -7,7 +7,30 @@
 # define addRupeesRaw  addRupeesRawMm
 #endif
 
-typedef int (*AddItemFunc)(GameState_Play* play, s16 gi, u16 param);
+static const u8 kItemSlotsOot[] = {
+    ITS_OOT_STICKS,
+    ITS_OOT_NUTS,
+    ITS_OOT_BOMBS,
+    ITS_OOT_BOW,
+    ITS_OOT_ARROW_FIRE,
+    ITS_OOT_SPELL_FIRE,
+    ITS_OOT_SLINGSHOT,
+    ITS_OOT_OCARINA,
+    ITS_OOT_OCARINA,
+    ITS_OOT_BOMBCHU,
+    ITS_OOT_HOOKSHOT,
+    ITS_OOT_HOOKSHOT,
+    ITS_OOT_ARROW_ICE,
+    ITS_OOT_SPELL_WIND,
+    ITS_OOT_BOOMERANG,
+    ITS_OOT_LENS,
+    ITS_OOT_MAGIC_BEAN,
+    ITS_OOT_HAMMER,
+    ITS_OOT_ARROW_LIGHT,
+    ITS_OOT_SPELL_LOVE,
+};
+
+typedef int (*AddItemFunc)(GameState_Play* play, u8 itemId, s16 gi, u16 param);
 
 static void addRupeesEffect(s16 delta)
 {
@@ -76,16 +99,17 @@ static void addRupeesMm(GameState_Play* play, s16 delta)
         addRupeesRawMm(delta);
 }
 
-static int addItemRupeesOot(GameState_Play* play, s16 gi, u16 param)
+static int addItemRupeesOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
     addRupeesOot(play, param);
     return 0;
 }
 
-static int addItemRupeesMm(GameState_Play* play, s16 gi, u16 param)
+static int addItemRupeesMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
     addRupeesMm(play, param);
     return 0;
+
 }
 
 static void addWalletRawOot(u16 index)
@@ -132,7 +156,7 @@ static void addWalletRawShared(u16 index)
     addWalletRawMm(index);
 }
 
-static int addItemWalletOot(GameState_Play* play, s16 gi, u16 param)
+static int addItemWalletOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
     if (comboConfig(CFG_SHARED_WALLETS))
         addWalletRawShared(param);
@@ -145,7 +169,7 @@ static int addItemWalletOot(GameState_Play* play, s16 gi, u16 param)
     return 0;
 }
 
-static int addItemWalletMm(GameState_Play* play, s16 gi, u16 param)
+static int addItemWalletMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
     if (comboConfig(CFG_SHARED_WALLETS))
         addWalletRawShared(param);
@@ -208,13 +232,13 @@ static void addBombsMm(u8 count)
         addBombsRawOot(count);
 }
 
-static int addItemBombsOot(GameState_Play* play, s16 gi, u16 param)
+static int addItemBombsOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
     addBombsOot(param);
     return 0;
 }
 
-static int addItemBombsMm(GameState_Play* play, s16 gi, u16 param)
+static int addItemBombsMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
     addBombsMm(param);
     return 0;
@@ -256,19 +280,19 @@ void addNutsMm(int count)
         addNutsRawOot(count);
 }
 
-static int addItemNutsOot(GameState_Play* play, s16 gi, u16 param)
+static int addItemNutsOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
     addNutsOot(param);
     return 0;
 }
 
-static int addItemNutsMm(GameState_Play* play, s16 gi, u16 param)
+static int addItemNutsMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
     addNutsMm(param);
     return 0;
 }
 
-static int addItemNutsUpgrade(GameState_Play* play, s16 gi, u16 param)
+static int addItemNutsUpgrade(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
     if (gOotSave.inventory.upgrades.dekuNut < param)
         gOotSave.inventory.upgrades.dekuNut = param;
@@ -278,13 +302,13 @@ static int addItemNutsUpgrade(GameState_Play* play, s16 gi, u16 param)
     return 0;
 }
 
-static int addItemBombchuOot(GameState_Play* play, s16 gi, u16 param)
+static int addItemBombchuOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
     addAmmoOot(ITS_OOT_BOMBCHU, ITEM_OOT_BOMBCHU_10, 50, param);
     return 0;
 }
 
-static int addItemBombchuMm(GameState_Play* play, s16 gi, u16 param)
+static int addItemBombchuMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
     if (gMmSave.inventory.upgrades.bombBag)
         addAmmoMm(ITS_MM_BOMBCHU, ITEM_MM_BOMBCHU, 40, param);
@@ -325,13 +349,13 @@ static void addArrowsMm(u8 count)
         addBombsRawOot(count);
 }
 
-static int addItemArrowsOot(GameState_Play* play, s16 gi, u16 param)
+static int addItemArrowsOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
     addArrowsOot(param);
     return 0;
 }
 
-static int addItemArrowsMm(GameState_Play* play, s16 gi, u16 param)
+static int addItemArrowsMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
     addArrowsMm(param);
     return 0;
@@ -351,7 +375,7 @@ static void addBowRawMm(u8 index)
     addArrowsRawMm(kMaxArrows[index]);
 }
 
-static int addItemBowOot(GameState_Play* play, s16 gi, u16 param)
+static int addItemBowOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
     addBowRawOot(param);
     if (comboConfig(CFG_SHARED_BOWS))
@@ -359,7 +383,7 @@ static int addItemBowOot(GameState_Play* play, s16 gi, u16 param)
     return 0;
 }
 
-static int addItemBowMm(GameState_Play* play, s16 gi, u16 param)
+static int addItemBowMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
     addBowRawMm(param);
     if (comboConfig(CFG_SHARED_BOWS))
@@ -377,17 +401,23 @@ static void addSeeds(u8 count)
     addAmmoOot(ITS_OOT_SLINGSHOT, ITEM_OOT_SLINGSHOT, max, count);
 }
 
-static int addItemSeeds(GameState_Play* play, s16 gi, u16 param)
+static int addItemSeeds(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
     addSeeds(param);
     return 0;
 }
 
-static int addItemSlingshot(GameState_Play* play, s16 gi, u16 param)
+static int addItemSlingshot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
     if (gOotSave.inventory.upgrades.bulletBag < param)
         gOotSave.inventory.upgrades.bulletBag = param;
     addSeeds(kMaxSeeds[param]);
+    return 0;
+}
+
+static int addItemNormalOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    gOotSave.inventory.items[kItemSlotsOot[itemId]] = itemId;
     return 0;
 }
 
@@ -409,6 +439,7 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemBowMm,
     addItemSeeds,
     addItemSlingshot,
+    addItemNormalOot,
 };
 
 extern const u8 kAddItemFuncs[];
@@ -436,7 +467,7 @@ int comboAddItem(GameState_Play* play, s16 gi)
     {
         /* New item handlers */
         func = kAddItemHandlers[addId];
-        ret = func(play, gi, addParam);
+        ret = func(play, kExtendedGetItems[gi - 1].itemId, gi, addParam);
     }
 
     return ret;

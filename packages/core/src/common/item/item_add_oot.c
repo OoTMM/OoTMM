@@ -667,9 +667,6 @@ int comboAddItemOot(s16 gi, int noEffect)
     case GI_OOT_ARROW_FIRE:
         comboAddCommonItemOot(SITEM_ARROW_FIRE, noEffect);
         break;
-    case GI_OOT_SPELL_FIRE:
-        gOotSave.inventory.items[ITS_OOT_SPELL_FIRE] = ITEM_OOT_SPELL_FIRE;
-        break;
     case GI_OOT_OCARINA_FAIRY:
         addOcarina(1);
         break;
@@ -685,12 +682,6 @@ int comboAddItemOot(s16 gi, int noEffect)
     case GI_OOT_ARROW_ICE:
         comboAddCommonItemOot(SITEM_ARROW_ICE, noEffect);
         break;
-    case GI_OOT_SPELL_WIND:
-        gOotSave.inventory.items[ITS_OOT_SPELL_WIND] = ITEM_OOT_SPELL_WIND;
-        break;
-    case GI_OOT_BOOMERANG:
-        gOotSave.inventory.items[ITS_OOT_BOOMERANG] = ITEM_OOT_BOOMERANG;
-        break;
     case GI_OOT_LENS:
         comboAddCommonItemOot(SITEM_LENS, noEffect);
         break;
@@ -698,14 +689,8 @@ int comboAddItemOot(s16 gi, int noEffect)
         gOotSave.inventory.items[ITS_OOT_MAGIC_BEAN] = ITEM_OOT_MAGIC_BEAN;
         gOotSave.inventory.ammo[ITS_OOT_MAGIC_BEAN] = 10;
         break;
-    case GI_OOT_HAMMER:
-        gOotSave.inventory.items[ITS_OOT_HAMMER] = ITEM_OOT_HAMMER;
-        break;
     case GI_OOT_ARROW_LIGHT:
         comboAddCommonItemOot(SITEM_ARROW_LIGHT, noEffect);
-        break;
-    case GI_OOT_SPELL_LOVE:
-        gOotSave.inventory.items[ITS_OOT_SPELL_LOVE] = ITEM_OOT_SPELL_LOVE;
         break;
     case GI_OOT_BOTTLE_EMPTY:
         addNewBottle(ITEM_OOT_BOTTLE_EMPTY);
