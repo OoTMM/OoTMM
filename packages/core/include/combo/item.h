@@ -4,6 +4,26 @@
 #include <combo/types.h>
 #include <combo/data/items.h>
 
+/* Add funcs */
+#define IA_OOT_RUPEE        0x00
+#define IA_MM_RUPEE         0x01
+#define IA_OOT_WALLET       0x02
+#define IA_MM_WALLET        0x03
+#define IA_OOT_BOMBS        0x04
+#define IA_MM_BOMBS         0x05
+#define IA_OOT_NUTS         0x06
+#define IA_MM_NUTS          0x07
+#define IA_NUT_UPGRADE      0x08
+#define IA_OOT_BOMBCHU      0x09
+#define IA_MM_BOMBCHU       0x0a
+#define IA_OOT_ARROWS       0x0b
+#define IA_MM_ARROWS        0x0c
+#define IA_OOT_BOW          0x0d
+#define IA_MM_BOW           0x0e
+#define IA_SEEDS            0x0f
+#define IA_SLINGSHOT        0x10
+#define IA_NONE             0xff
+
 typedef struct GameState_Play GameState_Play;
 
 typedef struct ComboItemQuery

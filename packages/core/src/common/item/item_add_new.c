@@ -7,25 +7,7 @@
 # define addRupeesRaw  addRupeesRawMm
 #endif
 
-#define IA_RUPEE            0x00
-#define IA_WALLET           0x01
-#define IA_BOMBS            0x02
-#define IA_NUTS             0x03
-#define IA_UPGRADE_NUTS     0x04
-#define IA_BOMBCHU          0x05
-#define IA_ARROWS           0x06
-#define IA_BOW              0x07
-#define IA_SEEDS            0x08
-#define IA_SLINGSHOT        0x09
-#define IA_NONE             0xff
-
 typedef int (*AddItemFunc)(GameState_Play* play, s16 gi, u16 param);
-typedef struct
-{
-    AddItemFunc oot;
-    AddItemFunc mm;
-}
-AddItemHandler;
 
 static void addRupeesEffect(s16 delta)
 {
@@ -409,67 +391,51 @@ static int addItemSlingshot(GameState_Play* play, s16 gi, u16 param)
     return 0;
 }
 
-static const AddItemHandler kAddItemHandlers[] = {
-    { addItemRupeesOot,     addItemRupeesMm },
-    { addItemWalletOot,     addItemWalletMm },
-    { addItemBombsOot,      addItemBombsMm },
-    { addItemNutsOot,       addItemNutsMm },
-    { addItemNutsUpgrade,   NULL },
-    { addItemBombchuOot,    addItemBombchuMm },
-    { addItemArrowsOot,     addItemArrowsMm },
-    { addItemBowOot,        addItemBowMm },
-    { addItemSeeds,         NULL },
-    { addItemSlingshot,     NULL },
+static const AddItemFunc kAddItemHandlers[] = {
+    addItemRupeesOot,
+    addItemRupeesMm,
+    addItemWalletOot,
+    addItemWalletMm,
+    addItemBombsOot,
+    addItemBombsMm,
+    addItemNutsOot,
+    addItemNutsMm,
+    addItemNutsUpgrade,
+    addItemBombchuOot,
+    addItemBombchuMm,
+    addItemArrowsOot,
+    addItemArrowsMm,
+    addItemBowOot,
+    addItemBowMm,
+    addItemSeeds,
+    addItemSlingshot,
 };
 
-#define X(a, b, c, drawGiParam, addItemId, addItemParam, d, e, text) addItemId
-static const u8 kAddItemIdsOot[] = {
-#include "../data/oot/gi.inc"
-};
-static const u8 kAddItemIdsMm[] = {
-#include "../data/mm/gi.inc"
-};
-#undef X
-
-#define X(a, b, c, drawGiParam, addItemId, addItemParam, d, e, text) addItemParam
-static const u16 kAddItemParamsOot[] = {
-#include "../data/oot/gi.inc"
-};
-static const u16 kAddItemParamsMm[] = {
-#include "../data/mm/gi.inc"
-};
-#undef X
+extern const u8 kAddItemFuncs[];
+extern const u16 kAddItemParams[];
 
 int comboAddItem(GameState_Play* play, s16 gi)
 {
     AddItemFunc func;
     int ret;
-    int isMm;
-    s16 legacyGi;
     u16 addParam;
     u8 addId;
 
-    legacyGi = gi;
-#if defined(GAME_MM)
-    gi ^= MASK_FOREIGN_GI;
-#endif
-    isMm = !!(gi & MASK_FOREIGN_GI);
-    gi &= ~MASK_FOREIGN_GI;
-    addId = isMm ? kAddItemIdsMm[gi - 1] : kAddItemIdsOot[gi - 1];
-    addParam = isMm ? kAddItemParamsMm[gi - 1] : kAddItemParamsOot[gi - 1];
+    addId = kAddItemFuncs[gi - 1];
+    addParam = kAddItemParams[gi - 1];
 
     if (addId == IA_NONE)
     {
         /* Legacy item add */
         if (play == NULL)
-            ret = comboAddItemLegacyNoEffect(legacyGi);
+            ret = comboAddItemLegacyNoEffect(gi);
         else
-            ret = comboAddItemLegacy(play, legacyGi);
+            ret = comboAddItemLegacy(play, gi);
     }
     else
     {
         /* New item handlers */
-        func = isMm ? kAddItemHandlers[addId].mm : kAddItemHandlers[addId].oot;
+        func = kAddItemHandlers[addId];
         ret = func(play, gi, addParam);
     }
 
