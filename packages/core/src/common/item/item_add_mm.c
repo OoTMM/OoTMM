@@ -274,15 +274,6 @@ void comboAddCommonItemMm(int sid, int noEffect)
 {
     switch (sid)
     {
-    case SITEM_ARROW_FIRE:
-        gMmSave.inventory.items[ITS_MM_ARROW_FIRE] = ITEM_MM_ARROW_FIRE;
-        break;
-    case SITEM_ARROW_ICE:
-        gMmSave.inventory.items[ITS_MM_ARROW_ICE] = ITEM_MM_ARROW_ICE;
-        break;
-    case SITEM_ARROW_LIGHT:
-        gMmSave.inventory.items[ITS_MM_ARROW_LIGHT] = ITEM_MM_ARROW_LIGHT;
-        break;
     case SITEM_SONG_EPONA:
         gMmSave.inventory.quest.songEpona = 1;
         break;
@@ -298,29 +289,11 @@ void comboAddCommonItemMm(int sid, int noEffect)
     case SITEM_LONGSHOT:
         addHookshot(2);
         break;
-    case SITEM_LENS:
-        gMmSave.inventory.items[ITS_MM_LENS] = ITEM_MM_LENS_OF_TRUTH;
-        break;
     case SITEM_OCARINA_FAIRY:
         addOcarina(1);
         break;
     case SITEM_OCARINA_TIME:
         addOcarina(2);
-        break;
-    case SITEM_MASK_KEATON:
-        gMmSave.inventory.items[ITS_MM_MASK_KEATON] = ITEM_MM_MASK_KEATON;
-        break;
-    case SITEM_MASK_BUNNY:
-        gMmSave.inventory.items[ITS_MM_MASK_BUNNY] = ITEM_MM_MASK_BUNNY;
-        break;
-    case SITEM_MASK_TRUTH:
-        gMmSave.inventory.items[ITS_MM_MASK_TRUTH] = ITEM_MM_MASK_TRUTH;
-        break;
-    case SITEM_MASK_GORON:
-        gMmSave.inventory.items[ITS_MM_MASK_GORON] = ITEM_MM_MASK_GORON;
-        break;
-    case SITEM_MASK_ZORA:
-        gMmSave.inventory.items[ITS_MM_MASK_ZORA] = ITEM_MM_MASK_ZORA;
         break;
     case SITEM_HEART_PIECE:
         gMmSave.inventory.quest.heartPieces += 1;
@@ -384,21 +357,6 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
         }
     }
 
-    if (comboConfig(CFG_SHARED_MAGIC_ARROW_FIRE) && gi == GI_MM_ARROW_FIRE)
-    {
-        comboAddCommonItemOot(SITEM_ARROW_FIRE, noEffect);
-    }
-
-    if (comboConfig(CFG_SHARED_MAGIC_ARROW_ICE) && gi == GI_MM_ARROW_ICE)
-    {
-        comboAddCommonItemOot(SITEM_ARROW_ICE, noEffect);
-    }
-
-    if (comboConfig(CFG_SHARED_MAGIC_ARROW_LIGHT) && gi == GI_MM_ARROW_LIGHT)
-    {
-        comboAddCommonItemOot(SITEM_ARROW_LIGHT, noEffect);
-    }
-
     if (comboConfig(CFG_SHARED_SONG_EPONA) && gi == GI_MM_SONG_EPONA)
     {
         comboAddCommonItemOot(SITEM_SONG_EPONA, noEffect);
@@ -445,11 +403,6 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
         }
     }
 
-    if (comboConfig(CFG_SHARED_LENS) && gi == GI_MM_LENS)
-    {
-        comboAddCommonItemOot(SITEM_LENS, noEffect);
-    }
-
     if (comboConfig(CFG_SHARED_OCARINA))
     {
         switch (gi)
@@ -462,21 +415,6 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
             break;
         }
     }
-
-    if (comboConfig(CFG_SHARED_MASK_BUNNY) && gi == GI_MM_MASK_BUNNY)
-        comboAddCommonItemOot(SITEM_MASK_BUNNY, noEffect);
-
-    if (comboConfig(CFG_SHARED_MASK_GORON) && gi == GI_MM_MASK_GORON)
-        comboAddCommonItemOot(SITEM_MASK_GORON, noEffect);
-
-    if (comboConfig(CFG_SHARED_MASK_KEATON) && gi == GI_MM_MASK_KEATON)
-        comboAddCommonItemOot(SITEM_MASK_KEATON, noEffect);
-
-    if (comboConfig(CFG_SHARED_MASK_TRUTH) && gi == GI_MM_MASK_TRUTH)
-        comboAddCommonItemOot(SITEM_MASK_TRUTH, noEffect);
-
-    if (comboConfig(CFG_SHARED_MASK_ZORA) && gi == GI_MM_MASK_ZORA)
-        comboAddCommonItemOot(SITEM_MASK_ZORA, noEffect);
 
     if (comboConfig(CFG_SHARED_HEALTH))
     {
@@ -618,15 +556,6 @@ int comboAddItemMm(s16 gi, int noEffect)
     case GI_MM_OCARINA_OF_TIME:
         comboAddCommonItemMm(SITEM_OCARINA_TIME, noEffect);
         break;
-    case GI_MM_ARROW_FIRE:
-        comboAddCommonItemMm(SITEM_ARROW_FIRE, noEffect);
-        break;
-    case GI_MM_ARROW_ICE:
-        comboAddCommonItemMm(SITEM_ARROW_ICE, noEffect);
-        break;
-    case GI_MM_ARROW_LIGHT:
-        comboAddCommonItemMm(SITEM_ARROW_LIGHT, noEffect);
-        break;
     case GI_MM_MAGIC_BEAN:
         gMmSave.inventory.items[ITS_MM_BEANS] = ITEM_MM_MAGIC_BEAN;
         gMmSave.inventory.ammo[ITS_MM_BEANS]++;
@@ -635,20 +564,11 @@ int comboAddItemMm(s16 gi, int noEffect)
         gMmSave.inventory.items[ITS_MM_KEG] = ITEM_MM_POWDER_KEG;
         gMmSave.inventory.ammo[ITS_MM_KEG] = 1;
         break;
-    case GI_MM_PICTOGRAPH_BOX:
-        gMmSave.inventory.items[ITS_MM_PICTOBOX] = ITEM_MM_PICTOGRAPH_BOX;
-        break;
-    case GI_MM_LENS:
-        comboAddCommonItemMm(SITEM_LENS, noEffect);
-        break;
     case GI_MM_HOOKSHOT_SHORT:
         comboAddCommonItemMm(SITEM_HOOKSHOT, noEffect);
         break;
     case GI_MM_HOOKSHOT:
         comboAddCommonItemMm(SITEM_LONGSHOT, noEffect);
-        break;
-    case GI_MM_GREAT_FAIRY_SWORD:
-        gMmSave.inventory.items[ITS_MM_GREAT_FAIRY_SWORD] = ITEM_MM_GREAT_FAIRY_SWORD;
         break;
     case GI_MM_BOTTLE_EMPTY:
         addNewBottle(ITEM_MM_BOTTLE_EMPTY);
@@ -723,78 +643,6 @@ int comboAddItemMm(s16 gi, int noEffect)
         break;
     case GI_MM_PENDANT_OF_MEMORIES:
         addTrade3(XITEM_MM_TRADE3_PENDANT_OF_MEMORIES);
-        break;
-    case GI_MM_MASK_POSTMAN:
-        gMmSave.inventory.items[ITS_MM_MASK_POSTMAN] = ITEM_MM_MASK_POSTMAN;
-        break;
-    case GI_MM_MASK_ALL_NIGHT:
-        gMmSave.inventory.items[ITS_MM_MASK_ALL_NIGHT] = ITEM_MM_MASK_ALL_NIGHT;
-        break;
-    case GI_MM_MASK_BLAST:
-        gMmSave.inventory.items[ITS_MM_MASK_BLAST] = ITEM_MM_MASK_BLAST;
-        break;
-    case GI_MM_MASK_STONE:
-        gMmSave.inventory.items[ITS_MM_MASK_STONE] = ITEM_MM_MASK_STONE;
-        break;
-    case GI_MM_MASK_GREAT_FAIRY:
-        gMmSave.inventory.items[ITS_MM_MASK_GREAT_FAIRY] = ITEM_MM_MASK_GREAT_FAIRY;
-        break;
-    case GI_MM_MASK_DEKU:
-        gMmSave.inventory.items[ITS_MM_MASK_DEKU] = ITEM_MM_MASK_DEKU;
-        break;
-    case GI_MM_MASK_KEATON:
-        comboAddCommonItemMm(SITEM_MASK_KEATON, noEffect);
-        break;
-    case GI_MM_MASK_BREMEN:
-        gMmSave.inventory.items[ITS_MM_MASK_BREMEN] = ITEM_MM_MASK_BREMEN;
-        break;
-    case GI_MM_MASK_BUNNY:
-        comboAddCommonItemMm(SITEM_MASK_BUNNY, noEffect);
-        break;
-    case GI_MM_MASK_DON_GERO:
-        gMmSave.inventory.items[ITS_MM_MASK_DON_GERO] = ITEM_MM_MASK_DON_GERO;
-        break;
-    case GI_MM_MASK_SCENTS:
-        gMmSave.inventory.items[ITS_MM_MASK_SCENTS] = ITEM_MM_MASK_SCENTS;
-        break;
-    case GI_MM_MASK_GORON:
-        comboAddCommonItemMm(SITEM_MASK_GORON, noEffect);
-        break;
-    case GI_MM_MASK_ROMANI:
-        gMmSave.inventory.items[ITS_MM_MASK_ROMANI] = ITEM_MM_MASK_ROMANI;
-        break;
-    case GI_MM_MASK_TROUPE_LEADER:
-        gMmSave.inventory.items[ITS_MM_MASK_TROUPE_LEADER] = ITEM_MM_MASK_TROUPE_LEADER;
-        break;
-    case GI_MM_MASK_KAFEI:
-        gMmSave.inventory.items[ITS_MM_MASK_KAFEI] = ITEM_MM_MASK_KAFEI;
-        break;
-    case GI_MM_MASK_COUPLE:
-        gMmSave.inventory.items[ITS_MM_MASK_COUPLE] = ITEM_MM_MASK_COUPLE;
-        break;
-    case GI_MM_MASK_TRUTH:
-        comboAddCommonItemMm(SITEM_MASK_TRUTH, noEffect);
-        break;
-    case GI_MM_MASK_ZORA:
-        comboAddCommonItemMm(SITEM_MASK_ZORA, noEffect);
-        break;
-    case GI_MM_MASK_KAMARO:
-        gMmSave.inventory.items[ITS_MM_MASK_KAMARO] = ITEM_MM_MASK_KAMARO;
-        break;
-    case GI_MM_MASK_GIBDO:
-        gMmSave.inventory.items[ITS_MM_MASK_GIBDO] = ITEM_MM_MASK_GIBDO;
-        break;
-    case GI_MM_MASK_GARO:
-        gMmSave.inventory.items[ITS_MM_MASK_GARO] = ITEM_MM_MASK_GARO;
-        break;
-    case GI_MM_MASK_CAPTAIN:
-        gMmSave.inventory.items[ITS_MM_MASK_CAPTAIN] = ITEM_MM_MASK_CAPTAIN;
-        break;
-    case GI_MM_MASK_GIANT:
-        gMmSave.inventory.items[ITS_MM_MASK_GIANT] = ITEM_MM_MASK_GIANT;
-        break;
-    case GI_MM_MASK_FIERCE_DEITY:
-        gMmSave.inventory.items[ITS_MM_MASK_FIERCE_DEITY] = ITEM_MM_MASK_FIERCE_DEITY;
         break;
     case GI_MM_MAGIC_UPGRADE:
         comboAddMagicUpgradeMm(1);

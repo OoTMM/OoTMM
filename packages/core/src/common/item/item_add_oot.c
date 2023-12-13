@@ -297,15 +297,6 @@ void comboAddCommonItemOot(int sid, int noEffect)
 {
     switch (sid)
     {
-    case SITEM_ARROW_FIRE:
-        gOotSave.inventory.items[ITS_OOT_ARROW_FIRE] = ITEM_OOT_ARROW_FIRE;
-        break;
-    case SITEM_ARROW_ICE:
-        gOotSave.inventory.items[ITS_OOT_ARROW_ICE] = ITEM_OOT_ARROW_ICE;
-        break;
-    case SITEM_ARROW_LIGHT:
-        gOotSave.inventory.items[ITS_OOT_ARROW_LIGHT] = ITEM_OOT_ARROW_LIGHT;
-        break;
     case SITEM_SONG_EPONA:
         gOotSave.inventory.quest.songEpona = 1;
         BITMAP16_SET(gOotSave.eventsChk, EV_OOT_CHK_EPONA);
@@ -324,9 +315,6 @@ void comboAddCommonItemOot(int sid, int noEffect)
         break;
     case SITEM_LONGSHOT:
         addHookshot(2);
-        break;
-    case SITEM_LENS:
-        gOotSave.inventory.items[ITS_OOT_LENS] = ITEM_OOT_LENS;
         break;
     case SITEM_OCARINA_FAIRY:
         addOcarina(1);
@@ -410,21 +398,6 @@ void comboAddItemSharedOot(s16 gi, int noEffect)
         }
     }
 
-    if (comboConfig(CFG_SHARED_MAGIC_ARROW_FIRE) && gi == GI_OOT_ARROW_FIRE)
-    {
-        comboAddCommonItemMm(SITEM_ARROW_FIRE, noEffect);
-    }
-
-    if (comboConfig(CFG_SHARED_MAGIC_ARROW_ICE) && gi == GI_OOT_ARROW_ICE)
-    {
-        comboAddCommonItemMm(SITEM_ARROW_ICE, noEffect);
-    }
-
-    if (comboConfig(CFG_SHARED_MAGIC_ARROW_LIGHT) && gi == GI_OOT_ARROW_LIGHT)
-    {
-        comboAddCommonItemMm(SITEM_ARROW_LIGHT, noEffect);
-    }
-
     if (comboConfig(CFG_SHARED_SONG_EPONA) && gi == GI_OOT_SONG_EPONA)
     {
         comboAddCommonItemMm(SITEM_SONG_EPONA, noEffect);
@@ -481,11 +454,6 @@ void comboAddItemSharedOot(s16 gi, int noEffect)
             comboAddCommonItemMm(SITEM_LONGSHOT, noEffect);
             break;
         }
-    }
-
-    if (comboConfig(CFG_SHARED_LENS) && gi == GI_OOT_LENS)
-    {
-        comboAddCommonItemMm(SITEM_LENS, noEffect);
     }
 
     if (comboConfig(CFG_SHARED_OCARINA))
@@ -664,9 +632,6 @@ int comboAddItemOot(s16 gi, int noEffect)
     case GI_OOT_STICKS_10:
         comboAddSticksOot(10);
         break;
-    case GI_OOT_ARROW_FIRE:
-        comboAddCommonItemOot(SITEM_ARROW_FIRE, noEffect);
-        break;
     case GI_OOT_OCARINA_FAIRY:
         addOcarina(1);
         break;
@@ -679,18 +644,9 @@ int comboAddItemOot(s16 gi, int noEffect)
     case GI_OOT_LONGSHOT:
         comboAddCommonItemOot(SITEM_LONGSHOT, noEffect);
         break;
-    case GI_OOT_ARROW_ICE:
-        comboAddCommonItemOot(SITEM_ARROW_ICE, noEffect);
-        break;
-    case GI_OOT_LENS:
-        comboAddCommonItemOot(SITEM_LENS, noEffect);
-        break;
     case GI_OOT_MAGIC_BEAN:
         gOotSave.inventory.items[ITS_OOT_MAGIC_BEAN] = ITEM_OOT_MAGIC_BEAN;
         gOotSave.inventory.ammo[ITS_OOT_MAGIC_BEAN] = 10;
-        break;
-    case GI_OOT_ARROW_LIGHT:
-        comboAddCommonItemOot(SITEM_ARROW_LIGHT, noEffect);
         break;
     case GI_OOT_BOTTLE_EMPTY:
         addNewBottle(ITEM_OOT_BOTTLE_EMPTY);

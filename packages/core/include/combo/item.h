@@ -23,6 +23,7 @@
 #define IA_SEEDS            0x0f
 #define IA_SLINGSHOT        0x10
 #define IA_OOT_NORMAL       0x11
+#define IA_MM_NORMAL        0x12
 #define IA_NONE             0xff
 
 typedef struct GameState_Play GameState_Play;

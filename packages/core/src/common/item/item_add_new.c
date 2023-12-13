@@ -30,6 +30,52 @@ static const u8 kItemSlotsOot[] = {
     ITS_OOT_SPELL_LOVE,
 };
 
+static const u8 kItemSlotsMm[] = {
+    ITS_MM_OCARINA,
+    ITS_MM_BOW,
+    ITS_MM_ARROW_FIRE,
+    ITS_MM_ARROW_ICE,
+    ITS_MM_ARROW_LIGHT,
+    ITS_MM_OCARINA,
+    ITS_MM_BOMBS,
+    ITS_MM_BOMBCHU,
+    ITS_MM_STICKS,
+    ITS_MM_NUTS,
+    ITS_MM_BEANS,
+    ITS_MM_KEG,
+    ITS_MM_PICTOBOX,
+    ITS_MM_LENS,
+    ITS_MM_HOOKSHOT,
+    ITS_MM_GREAT_FAIRY_SWORD,
+};
+
+static const u8 kItemSlotsMasksMm[] = {
+    ITS_MM_MASK_DEKU,
+    ITS_MM_MASK_GORON,
+    ITS_MM_MASK_ZORA,
+    ITS_MM_MASK_FIERCE_DEITY,
+    ITS_MM_MASK_TRUTH,
+    ITS_MM_MASK_KAFEI,
+    ITS_MM_MASK_ALL_NIGHT,
+    ITS_MM_MASK_BUNNY,
+    ITS_MM_MASK_KEATON,
+    ITS_MM_MASK_GARO,
+    ITS_MM_MASK_ROMANI,
+    ITS_MM_MASK_TROUPE_LEADER,
+    ITS_MM_MASK_POSTMAN,
+    ITS_MM_MASK_COUPLE,
+    ITS_MM_MASK_GREAT_FAIRY,
+    ITS_MM_MASK_GIBDO,
+    ITS_MM_MASK_DON_GERO,
+    ITS_MM_MASK_KAMARO,
+    ITS_MM_MASK_CAPTAIN,
+    ITS_MM_MASK_STONE,
+    ITS_MM_MASK_BREMEN,
+    ITS_MM_MASK_BLAST,
+    ITS_MM_MASK_SCENTS,
+    ITS_MM_MASK_GIANT,
+};
+
 typedef int (*AddItemFunc)(GameState_Play* play, u8 itemId, s16 gi, u16 param);
 
 static void addRupeesEffect(s16 delta)
@@ -421,6 +467,18 @@ static int addItemNormalOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
+static int addItemNormalMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    const u8* slots;
+
+    if (itemId >= ITEM_MM_MASK_DEKU)
+        slots = kItemSlotsMasksMm;
+    else
+        slots = kItemSlotsMm;
+    gMmSave.inventory.items[slots[itemId]] = itemId;
+    return 0;
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -440,12 +498,34 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemSeeds,
     addItemSlingshot,
     addItemNormalOot,
+    addItemNormalMm,
 };
 
 extern const u8 kAddItemFuncs[];
 extern const u16 kAddItemParams[];
 
-int comboAddItem(GameState_Play* play, s16 gi)
+typedef struct
+{
+    u16 cfg;
+    s16 gi;
+    s16 gi2;
+}
+SharedItem;
+
+/* Good for most purposes, doesn't work so well for items that can have cummulative effects like rupees */
+static const SharedItem kSimpleSharedItems[] = {
+    { CFG_SHARED_LENS,              GI_OOT_LENS,        GI_MM_LENS },
+    { CFG_SHARED_MAGIC_ARROW_FIRE,  GI_OOT_ARROW_FIRE,  GI_MM_ARROW_FIRE },
+    { CFG_SHARED_MAGIC_ARROW_ICE,   GI_OOT_ARROW_ICE,   GI_MM_ARROW_ICE },
+    { CFG_SHARED_MAGIC_ARROW_LIGHT, GI_OOT_ARROW_LIGHT, GI_MM_ARROW_LIGHT },
+    { CFG_SHARED_MASK_BUNNY,        GI_OOT_MASK_BUNNY,  GI_MM_MASK_BUNNY },
+    { CFG_SHARED_MASK_TRUTH,        GI_OOT_MASK_TRUTH,  GI_MM_MASK_TRUTH },
+    { CFG_SHARED_MASK_KEATON,       GI_OOT_MASK_KEATON, GI_MM_MASK_KEATON },
+    { CFG_SHARED_MASK_GORON,        GI_OOT_MASK_GORON,  GI_MM_MASK_GORON  },
+    { CFG_SHARED_MASK_ZORA,         GI_OOT_MASK_ZORA,   GI_MM_MASK_ZORA  },
+};
+
+static int addItem(GameState_Play* play, s16 gi)
 {
     AddItemFunc func;
     int ret;
@@ -471,4 +551,29 @@ int comboAddItem(GameState_Play* play, s16 gi)
     }
 
     return ret;
+}
+
+int comboAddItem(GameState_Play* play, s16 gi)
+{
+    const SharedItem* si;
+    int count;
+    s16 otherGi;
+
+    count = addItem(play, gi);
+    for (int i = 0; i < ARRAY_SIZE(kSimpleSharedItems); ++i)
+    {
+        si = &kSimpleSharedItems[i];
+        if (si->gi == gi)
+            otherGi = si->gi2;
+        else if (si->gi2 == gi)
+            otherGi = si->gi;
+        else
+            continue;
+        if (comboConfig(si->cfg))
+        {
+            addItem(play, otherGi);
+            break;
+        }
+    }
+    return count;
 }
