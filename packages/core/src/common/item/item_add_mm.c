@@ -129,20 +129,6 @@ void comboAddBombsMm(int count)
         gMmSave.inventory.ammo[ITS_MM_BOMBS] = max;
 }
 
-void comboAddSticksMm(int count)
-{
-    u16 max;
-
-    if (gMmSave.inventory.upgrades.dekuStick == 0)
-        gMmSave.inventory.upgrades.dekuStick = 1;
-
-    max = kMaxSticks[gMmSave.inventory.upgrades.dekuStick];
-    gMmSave.inventory.items[ITS_MM_STICKS] = ITEM_MM_STICK;
-    gMmSave.inventory.ammo[ITS_MM_STICKS] += count;
-    if (gMmSave.inventory.ammo[ITS_MM_STICKS] > max)
-        gMmSave.inventory.ammo[ITS_MM_STICKS] = max;
-}
-
 static void addNewBottle(u16 itemId)
 {
     int i;
@@ -377,16 +363,6 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
         comboAddCommonItemOot(SITEM_SONG_SUN, noEffect);
     }
 
-    if (comboConfig(CFG_SHARED_NUTS_STICKS))
-    {
-        switch (gi)
-        {
-        case GI_MM_STICK:
-            comboAddSticksOot(1);
-            break;
-        }
-    }
-
     if (comboConfig(CFG_SHARED_HOOKSHOT))
     {
         switch (gi)
@@ -613,9 +589,6 @@ int comboAddItemMm(s16 gi, int noEffect)
         break;
     case GI_MM_CHATEAU:
         fillBottle(ITEM_MM_BOTTLE_CHATEAU);
-        break;
-    case GI_MM_STICK:
-        comboAddSticksMm(1);
         break;
     case GI_MM_MOON_TEAR:
         addTrade1(XITEM_MM_TRADE1_MOON_TEAR);

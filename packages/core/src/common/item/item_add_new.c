@@ -479,6 +479,64 @@ static int addItemNormalMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
+void addSticksRawOot(int count)
+{
+    u8 max;
+
+    if (gOotSave.inventory.upgrades.dekuStick == 0)
+        gOotSave.inventory.upgrades.dekuStick = 1;
+
+    max = kMaxSticks[gOotSave.inventory.upgrades.dekuStick];
+    addAmmoOot(ITS_OOT_STICKS, ITEM_OOT_STICK, max, count);
+}
+
+void addSticksRawMm(int count)
+{
+    u8 max;
+
+    if (gMmSave.inventory.upgrades.dekuStick == 0)
+        gMmSave.inventory.upgrades.dekuStick = 1;
+
+    max = kMaxSticks[gMmSave.inventory.upgrades.dekuStick];
+    addAmmoMm(ITS_MM_STICKS, ITEM_MM_STICK, max, count);
+}
+
+void addSticksOot(int count)
+{
+    addSticksRawOot(count);
+    if (comboConfig(CFG_SHARED_NUTS_STICKS))
+        addSticksRawMm(count);
+}
+
+void addSticksMm(int count)
+{
+    addSticksRawMm(count);
+    if (comboConfig(CFG_SHARED_NUTS_STICKS))
+        addSticksRawOot(count);
+}
+
+static int addItemSticksOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    addSticksOot(param);
+    return 0;
+}
+
+static int addItemSticksMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    addSticksMm(param);
+    return 0;
+}
+
+static int addItemSticksUpgrade(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    if (gOotSave.inventory.upgrades.dekuStick < param)
+        gOotSave.inventory.upgrades.dekuStick = param;
+    if (comboConfig(CFG_SHARED_NUTS_STICKS))
+        gMmSave.inventory.upgrades.dekuStick = gOotSave.inventory.upgrades.dekuStick;
+    addSticksOot(kMaxNuts[param]);
+    return 0;
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -499,6 +557,9 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemSlingshot,
     addItemNormalOot,
     addItemNormalMm,
+    addItemSticksOot,
+    addItemSticksMm,
+    addItemSticksUpgrade,
 };
 
 extern const u8 kAddItemFuncs[];

@@ -4,7 +4,7 @@
 - { id: OOT_BOW, item: OOT_BOW, add: [OOT_BOW, 1], flags: 0x80, draw: OOT_BOW, object: [oot, 0x00e9], name: "the <C1>Fairy Bow" }
 - { id: OOT_SLINGSHOT, item: OOT_SLINGSHOT, add: [SLINGSHOT, 1], flags: 0x80, draw: OOT_SLINGSHOT, object: [oot, 0x00e7], name: "the <C1>Fairy Slingshot" }
 - { id: OOT_BOOMERANG, item: OOT_BOOMERANG, add: OOT_NORMAL, flags: 0x80, draw: OOT_BOOMERANG, object: [oot, 0x00e8], name: "the <C1>Boomerang" }
-- { id: OOT_STICK, item: OOT_STICK, add: NONE, flags: 0x0d, draw: DEKU_STICK, object: [oot, 0x00c7], name: "a <C0>Deku Stick" }
+- { id: OOT_STICK, item: OOT_STICK, add: [OOT_STICKS, 1], flags: 0x0d, draw: DEKU_STICK, object: [oot, 0x00c7], name: "a <C0>Deku Stick" }
 - { id: OOT_HOOKSHOT, item: OOT_HOOKSHOT, add: NONE, flags: 0x80, draw: OOT_HOOKSHOT, object: [oot, 0x00dd], name: "the <C1>Hookshot" }
 - { id: OOT_LONGSHOT, item: OOT_LONGSHOT, add: NONE, flags: 0x80, draw: OOT_LONGSHOT, object: [oot, 0x00dd], name: "the <C1>Longshot" }
 - { id: OOT_LENS, item: OOT_LENS, add: OOT_NORMAL, flags: 0x80, draw: LENS, object: [oot, 0x00ea], name: "the <C1>Lens of Truth" }
@@ -94,8 +94,8 @@
 - { id: OOT_SPELL_LOVE, item: OOT_SPELL_LOVE, add: OOT_NORMAL, flags: 0x80, draw: OOT_SPELL_LOVE, object: [oot, 0x015d], name: "<C1>Nayru's Love" }
 - { id: OOT_BULLET_BAG, item: OOT_BULLET_BAG, add: [SLINGSHOT, 1], flags: 0x80, draw: OOT_BULLET_BAG2, object: [oot, 0x017b] }
 - { id: OOT_BULLET_BAG2, item: OOT_BULLET_BAG2, add: [SLINGSHOT, 2], flags: 0x80, draw: OOT_BULLET_BAG2, object: [oot, 0x017b], name: "the <C1>Large Bullet Bag" }
-- { id: OOT_STICKS_5, item: OOT_STICKS_5, add: NONE, flags: 0x0d, draw: DEKU_STICK, object: [oot, 0x00c7], name: "<C0>5 Deku Sticks" }
-- { id: OOT_STICKS_10, item: OOT_STICKS_10, add: NONE, flags: 0x0d, draw: DEKU_STICK, object: [oot, 0x00c7], name: "<C0>10 Deku Sticks" }
+- { id: OOT_STICKS_5, item: OOT_STICKS_5, add: [OOT_STICKS, 5], flags: 0x0d, draw: DEKU_STICK, object: [oot, 0x00c7], name: "<C0>5 Deku Sticks" }
+- { id: OOT_STICKS_10, item: OOT_STICKS_10, add: [OOT_STICKS, 10], flags: 0x0d, draw: DEKU_STICK, object: [oot, 0x00c7], name: "<C0>10 Deku Sticks" }
 - { id: OOT_NUTS_5_ALT, item: OOT_NUTS_5, add: [OOT_NUTS, 5], flags: 0x0c, draw: DEKU_NUT, object: [oot, 0x00bb], name: "<C0>5 Deku Nuts" }
 - { id: OOT_NUTS_10, item: OOT_NUTS_10, add: [OOT_NUTS, 10], flags: 0x0c, draw: DEKU_NUT, object: [oot, 0x00bb], name: "<C0>10 Deku Nuts" }
 - { id: OOT_BOMB, item: OOT_BOMB, add: [OOT_BOMBS, 1], flags: 0x59, draw: BOMB, object: [oot, 0x00ce], name: "a <C0>Bomb" }
@@ -116,8 +116,8 @@
 - { id: OOT_TC_RUPEE_RED, item: OOT_RUPEE_RED, add: [OOT_RUPEE, 20], flags: 0x02, draw: OOT_RUPEE_RED, object: [oot, 0x017f], name: "a <C0>Red Rupee" }
 - { id: OOT_TC_RUPEE_PURPLE, item: OOT_RUPEE_PURPLE, add: [OOT_RUPEE, 50], flags: 0x14, draw: OOT_RUPEE_PURPLE, object: [oot, 0x017f], name: "a <C0>Purple Rupee" }
 - { id: OOT_TC_HEART_PIECE, item: OOT_HEART_PIECE, add: NONE, flags: 0x80, draw: HEART_PIECE, object: [oot, 0x00bd], name: "a <C0>Piece of Heart" }
-- { id: OOT_STICK_UPGRADE, item: OOT_STICK_UPGRADE, add: NONE, flags: 0x80, draw: OOT_STICK_UPGRADE, object: [oot, 0x00c7], name: "the <C1>Deku Stick Upgrade" }
-- { id: OOT_STICK_UPGRADE2, item: OOT_STICK_UPGRADE2, add: NONE, flags: 0x80, draw: OOT_STICK_UPGRADE2, object: [oot, 0x00c7], name: "the <C1>Second Deku Stick Upgrade" }
+- { id: OOT_STICK_UPGRADE, item: OOT_STICK_UPGRADE, add: [STICK_UPGRADE, 2], flags: 0x80, draw: OOT_STICK_UPGRADE, object: [oot, 0x00c7], name: "the <C1>Deku Stick Upgrade" }
+- { id: OOT_STICK_UPGRADE2, item: OOT_STICK_UPGRADE2, add: [STICK_UPGRADE, 3], flags: 0x80, draw: OOT_STICK_UPGRADE2, object: [oot, 0x00c7], name: "the <C1>Second Deku Stick Upgrade" }
 - { id: OOT_NUT_UPGRADE, item: OOT_NUT_UPGRADE, add: [NUT_UPGRADE, 2], flags: 0x80, draw: OOT_NUT_UPGRADE, object: [oot, 0x00bb], name: "the <C1>Deku Nut Upgrade" }
 - { id: OOT_NUT_UPGRADE2, item: OOT_NUT_UPGRADE2, add: [NUT_UPGRADE, 3], flags: 0x80, draw: OOT_NUT_UPGRADE2, object: [oot, 0x00bb], name: "the <C1>Second Deku Nut Upgrade" }
 - { id: OOT_BULLET_BAG3, item: OOT_BULLET_BAG3, add: [SLINGSHOT, 3], flags: 0x80, draw: OOT_BULLET_BAG3, object: [oot, 0x017b], name: "the <C1>Largest Bullet Bag" }
@@ -419,8 +419,8 @@
 - { id: MM_BOMBS_10, item: MM_BOMBS_10, add: [MM_BOMBS, 10], flags: 0x59, draw: BOMB, object: [mm, 0x00a5], name: "<C0>10 Bombs" }
 - { id: MM_BOMBS_20, item: MM_BOMBS_20, add: [MM_BOMBS, 20], flags: 0x59, draw: BOMB, object: [mm, 0x00a5], name: "<C0>20 Bombs" }
 - { id: MM_BOMBS_30, item: MM_BOMBS_30, add: [MM_BOMBS, 30], flags: 0x59, draw: BOMB, object: [mm, 0x00a5], name: "<C0>30 Bombs" }
-- { id: MM_STICK, item: MM_STICK, add: NONE, flags: 0x0d, draw: DEKU_STICK, object: [mm, 0x009f], name: "a <C0>Deku Stick" }
-- { id: MM_BOMBCHU_10, item: MM_BOMBCHU_10, add: NONE, flags: 0xc0, draw: BOMBCHU, object: [mm, 0x00b0], name: "<C0>10 Bombchu" }
+- { id: MM_STICK, item: MM_STICK, add: [MM_STICKS, 1], flags: 0x0d, draw: DEKU_STICK, object: [mm, 0x009f], name: "a <C0>Deku Stick" }
+- { id: MM_BOMBCHU_10, item: MM_BOMBCHU_10, add: [MM_BOMBCHU, 10], flags: 0xc0, draw: BOMBCHU, object: [mm, 0x00b0], name: "<C0>10 Bombchu" }
 - { id: MM_BOMB_BAG, item: MM_BOMB_BAG, add: NONE, flags: 0xa0, draw: BOMB_BAG, object: [mm, 0x0098], name: "the <C1>Bomb Bag" }
 - { id: MM_BOMB_BAG2, item: MM_BOMB_BAG2, add: NONE, flags: 0xa0, draw: BOMB_BAG2, object: [mm, 0x0098], name: "the <C1>Big Bomb Bag" }
 - { id: MM_BOMB_BAG3, item: MM_BOMB_BAG3, add: NONE, flags: 0xa0, draw: BOMB_BAG3, object: [mm, 0x0098], name: "the <C1>Biggest Bomb Bag" }
@@ -441,9 +441,9 @@
 - { id: MM_UNK_2C, item: MM_NUTS_30, add: [MM_NUTS, 30], flags: 0xa0, draw: DEKU_NUT, object: [mm, 0x0094], name: "<C0>30 Deku Nuts" }
 - { id: MM_UNK_2D, item: MM_NUTS_40, add: [MM_NUTS, 40], flags: 0xa0, draw: DEKU_NUT, object: [mm, 0x0094], name: "<C0>40 Deku Nuts" }
 - { id: MM_BOMBCHU_20, item: MM_BOMBCHU_20, add: [MM_BOMBCHU, 20], flags: 0xc0, draw: BOMBCHU, object: [mm, 0x00b0], name: "<C0>20 Bombchu" }
-- { id: MM_UNK_2F, item: MM_STICKS_20, add: NONE, flags: 0xa0, draw: DEKU_STICK, object: [mm, 0x009f], name: "<C0>20 Deku Sticks" }
-- { id: MM_UNK_30, item: MM_STICKS_20, add: NONE, flags: 0xa0, draw: DEKU_STICK, object: [mm, 0x009f], name: "<C0>20 Deku Sticks" }
-- { id: MM_UNK_31, item: MM_STICKS_30, add: NONE, flags: 0xa0, draw: DEKU_STICK, object: [mm, 0x009f], name: "<C0>30 Deku Sticks" }
+- { id: MM_UNK_2F, item: MM_STICKS_20, add: [MM_STICKS, 20], flags: 0xa0, draw: DEKU_STICK, object: [mm, 0x009f], name: "<C0>20 Deku Sticks" }
+- { id: MM_UNK_30, item: MM_STICKS_20, add: [MM_STICKS, 20], flags: 0xa0, draw: DEKU_STICK, object: [mm, 0x009f], name: "<C0>20 Deku Sticks" }
+- { id: MM_UNK_31, item: MM_STICKS_30, add: [MM_STICKS, 30], flags: 0xa0, draw: DEKU_STICK, object: [mm, 0x009f], name: "<C0>30 Deku Sticks" }
 - { id: MM_SHIELD_HERO, item: MM_SHIELD_HERO, add: NONE, flags: 0xa0, draw: MM_SHIELD_HERO, object: [mm, 0x00b3], name: "the <C1>Hero's Shield" }
 - { id: MM_SHIELD_MIRROR, item: MM_SHIELD_MIRROR, add: NONE, flags: 0xa0, draw: MM_SHIELD_MIRROR, object: [mm, 0x00c3], name: "the <C1>Mirror Shield" }
 - { id: MM_POWDER_KEG, item: MM_POWDER_KEG, add: NONE, flags: 0x80, draw: MM_KEG, object: [mm, 0x01ca], name: "a <C0>Powder Keg" }

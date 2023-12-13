@@ -110,17 +110,6 @@ static void addAmmo(u8 slot, u16 item, u8 max, u8 count)
         gOotSave.inventory.ammo[slot] = max;
 }
 
-void comboAddSticksOot(int count)
-{
-    u8 max;
-
-    if (gOotSave.inventory.upgrades.dekuStick == 0)
-        gOotSave.inventory.upgrades.dekuStick = 1;
-
-    max = kMaxSticks[gOotSave.inventory.upgrades.dekuStick];
-    addAmmo(ITS_OOT_STICKS, ITEM_OOT_STICK, max, count);
-}
-
 void comboAddBombsOot(int count)
 {
     u8 max;
@@ -173,18 +162,6 @@ void comboAddBombBagOot(int level)
     gOotSave.inventory.items[ITS_OOT_BOMBS] = ITEM_OOT_BOMB;
     gOotSave.inventory.upgrades.bombBag = level;
     gOotSave.inventory.ammo[ITS_OOT_BOMBS] = kMaxBombs[level];
-}
-
-static void addStickUpgrade(int level)
-{
-    gOotSave.inventory.upgrades.dekuStick = level;
-    comboAddSticksOot(kMaxSticks[level]);
-}
-
-static void addStickUpgradeMm(int level)
-{
-    gMmSave.inventory.upgrades.dekuStick = level;
-    comboAddSticksMm(kMaxSticks[level]);
 }
 
 static void addTradeChild(u8 index)
@@ -418,28 +395,6 @@ void comboAddItemSharedOot(s16 gi, int noEffect)
         comboAddCommonItemMm(SITEM_SONG_SUN, noEffect);
     }
 
-    if (comboConfig(CFG_SHARED_NUTS_STICKS))
-    {
-        switch (gi)
-        {
-        case GI_OOT_STICK:
-            comboAddSticksMm(1);
-            break;
-        case GI_OOT_STICKS_5:
-            comboAddSticksMm(5);
-            break;
-        case GI_OOT_STICKS_10:
-            comboAddSticksMm(10);
-            break;
-        case GI_OOT_STICK_UPGRADE:
-            addStickUpgradeMm(2);
-            break;
-        case GI_OOT_STICK_UPGRADE2:
-            addStickUpgradeMm(3);
-            break;
-        }
-    }
-
     if (comboConfig(CFG_SHARED_HOOKSHOT))
     {
         switch (gi)
@@ -623,15 +578,6 @@ int comboAddItemOot(s16 gi, int noEffect)
     (void)dungeonId;
     switch (gi)
     {
-    case GI_OOT_STICK:
-        comboAddSticksOot(1);
-        break;
-    case GI_OOT_STICKS_5:
-        comboAddSticksOot(5);
-        break;
-    case GI_OOT_STICKS_10:
-        comboAddSticksOot(10);
-        break;
     case GI_OOT_OCARINA_FAIRY:
         addOcarina(1);
         break;
@@ -770,12 +716,6 @@ int comboAddItemOot(s16 gi, int noEffect)
         comboAddMagicUpgradeOot(2);
         if (noEffect)
             refillMagic(2);
-        break;
-    case GI_OOT_STICK_UPGRADE:
-        addStickUpgrade(2);
-        break;
-    case GI_OOT_STICK_UPGRADE2:
-        addStickUpgrade(3);
         break;
     case GI_OOT_DEFENSE_UPGRADE:
         comboAddCommonItemOot(SITEM_DEFENSE_UPGRADE, noEffect);
