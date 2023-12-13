@@ -218,7 +218,7 @@ const gi = (settings: Settings, game: Game, item: Item, generic: boolean) => {
   if (!DATA_GI.hasOwnProperty(itemId)) {
     throw new Error(`Unknown item ${itemId}`);
   }
-  let value = DATA_GI[itemId] as number;
+  let value = DATA_GI[itemId].index;
 
   return value;
 };

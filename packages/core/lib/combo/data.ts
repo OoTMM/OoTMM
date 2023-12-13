@@ -1,3 +1,5 @@
+import { isArray } from 'lodash';
+
 export { default as DATA_SCENES } from '../../data/scenes.yml';
 export { default as DATA_NPC } from '../../data/npc.yml';
 export { default as DATA_REGIONS } from '../../data/regions.yml';
@@ -30,11 +32,53 @@ export const DATA_ENTRANCES_POOL = {
   mm: entrancesMm,
 };
 
-import rawGi from '../../data/gi.csv';
-export let DATA_GI: {[k: string]: number} = {};
+import rawGi from '../../data/gi.yml';
+
+type DataGi = {
+  index: number;
+  id: string;
+  item: string;
+  flags: number;
+  draw: string;
+  drawParam: number;
+  object: { type: 'oot' | 'mm', id: number } | { type: 'custom', id: string } | null;
+  name: string;
+};
+
+export let DATA_GI: {[k: string]: DataGi} = {};
 for (let i = 0; i < rawGi.length; ++i) {
   const v = rawGi[i];
-  DATA_GI[v.id] = i + 1;
+  const index = i + 1;
+  const id = v.id;
+  const item = `ITEM_${v.item || 'NONE'}`;
+  const flags = v.flags;
+  let draw: string;
+  let drawParam: number;
+  if (v.draw) {
+    if (isArray(v.draw)) {
+      draw = v.draw[0];
+      drawParam = v.draw[1];
+    } else {
+      draw = v.draw;
+      drawParam = 0;
+    }
+  } else {
+    draw = 'NONE';
+    drawParam = 0;
+  }
+  draw = `DRAWGI_${draw}`;
+  let object: DataGi['object'];
+  if (v.object) {
+    if (isArray(v.object)) {
+      object = { type: v.object[0], id: v.object[1] };
+    } else {
+      object = { type: 'custom', id: v.object };
+    }
+  } else {
+    object = null;
+  }
+  const name = v.name || "";
+  DATA_GI[id] = { index, id, item, flags, draw, drawParam, object, name };
 }
 
 import worldOotOverworld from '../../data/oot/world/overworld.yml';

@@ -35,6 +35,10 @@ export class CodeGen {
     this.data.push('');
   }
 
+  raw(data: string) {
+    this.data.push(data);
+  }
+
   async emit() {
     if (!process.env.ROLLUP) {
       const dir = path.dirname(this.filename);

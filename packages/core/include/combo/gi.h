@@ -1,7 +1,6 @@
 #ifndef COMBO_GI_H
 #define COMBO_GI_H
 
-#define GI_NONE 0x00
 #include <combo/gi_data.h>
 
 #if !defined(__ASSEMBLER__)
@@ -19,6 +18,7 @@ GetItem;
 
 extern const GetItem kExtendedGetItems[];
 extern const u8 kGetItemDrawGiParam[];
+extern const char* const kItemNames[];
 
 #endif
 
