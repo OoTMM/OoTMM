@@ -35,6 +35,24 @@ const u8 kOotTradeChild[] = {
     ITEM_OOT_MASK_OF_TRUTH,
 };
 
+const u8 kMmTrade1[] = {
+    ITEM_MM_MOON_TEAR,
+    ITEM_MM_DEED_LAND,
+    ITEM_MM_DEED_SWAMP,
+    ITEM_MM_DEED_MOUNTAIN,
+    ITEM_MM_DEED_OCEAN,
+};
+
+const u8 kMmTrade2[] = {
+    ITEM_MM_ROOM_KEY,
+    ITEM_MM_LETTER_TO_MAMA,
+};
+
+const u8 kMmTrade3[] = {
+    ITEM_MM_LETTER_TO_KAFEI,
+    ITEM_MM_PENDANT_OF_MEMORIES,
+};
+
 static const u8 kItemSlotsOot[] = {
     ITS_OOT_STICKS,
     ITS_OOT_NUTS,
@@ -711,11 +729,12 @@ static int addTradeOotChild(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     itemId = kOotTradeChild[param];
     mask = 1 << (u16)param;
     if (gOotExtraTradeSave.child & mask)
-        return;
+        return 0;
     if (gOotSave.inventory.items[ITS_OOT_TRADE_CHILD] == ITEM_NONE)
         gOotSave.inventory.items[ITS_OOT_TRADE_CHILD] = itemId;
     gOotExtraTrade.child |= mask;
     gOotExtraTradeSave.child |= mask;
+    return 0;
 }
 
 static int addTradeOotAdult(GameState_Play* play, u8 itemId, s16 gi, u16 param)
@@ -725,12 +744,45 @@ static int addTradeOotAdult(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     itemId = kOotTradeAdult[param];
     mask = 1 << (u16)param;
     if (gOotExtraTradeSave.adult & mask)
-        return;
+        return 0;
     if (gOotSave.inventory.items[ITS_OOT_TRADE_ADULT] == ITEM_NONE)
         gOotSave.inventory.items[ITS_OOT_TRADE_ADULT] = itemId;
     gOotExtraTrade.adult |= mask;
     gOotExtraTradeSave.adult |= mask;
+    return 0;
 }
+
+
+static int addTradeMm1(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    itemId = kMmTrade1[param];
+    if (gMmSave.inventory.items[ITS_MM_TRADE1] == ITEM_NONE)
+        gMmSave.inventory.items[ITS_MM_TRADE1] = itemId;
+    gMmExtraTrade.trade1 |= (1 << (u16)param);
+    gMmExtraTrade.tradeObtained1 |= (1 << (u16)param);
+    return 0;
+}
+
+static int addTradeMm2(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    itemId = kMmTrade2[param];
+    if (gMmSave.inventory.items[ITS_MM_TRADE2] == ITEM_NONE)
+        gMmSave.inventory.items[ITS_MM_TRADE2] = itemId;
+    gMmExtraTrade.trade2 |= (1 << (u16)param);
+    gMmExtraTrade.tradeObtained2 |= (1 << (u16)param);
+    return 0;
+}
+
+static int addTradeMm3(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    itemId = kMmTrade3[param];
+    if (gMmSave.inventory.items[ITS_MM_TRADE3] == ITEM_NONE)
+        gMmSave.inventory.items[ITS_MM_TRADE3] = itemId;
+    gMmExtraTrade.trade3 |= (1 << (u16)param);
+    gMmExtraTrade.tradeObtained3 |= (1 << (u16)param);
+    return 0;
+}
+
 
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
@@ -759,6 +811,9 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemHookshotMm,
     addTradeOotChild,
     addTradeOotAdult,
+    addTradeMm1,
+    addTradeMm2,
+    addTradeMm3,
 };
 
 extern const u8 kAddItemFuncs[];

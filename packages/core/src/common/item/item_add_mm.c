@@ -9,24 +9,6 @@ static const u16 kSwords[] = {
     ITEM_MM_SWORD_GILDED,
 };
 
-const u8 kMmTrade1[] = {
-    ITEM_MM_MOON_TEAR,
-    ITEM_MM_DEED_LAND,
-    ITEM_MM_DEED_SWAMP,
-    ITEM_MM_DEED_MOUNTAIN,
-    ITEM_MM_DEED_OCEAN,
-};
-
-const u8 kMmTrade2[] = {
-    ITEM_MM_ROOM_KEY,
-    ITEM_MM_LETTER_TO_MAMA,
-};
-
-const u8 kMmTrade3[] = {
-    ITEM_MM_LETTER_TO_KAFEI,
-    ITEM_MM_PENDANT_OF_MEMORIES,
-};
-
 int comboAddSmallKeyMm(u16 dungeonId)
 {
     s8 keyCount;
@@ -166,39 +148,6 @@ static void fillBottle(u16 itemId)
             gMmSave.itemEquips.buttonItems[0][i] = itemId;
         }
     }
-}
-
-static void addTrade1(u8 index)
-{
-    u16 itemId;
-
-    itemId = kMmTrade1[index];
-    if (gMmSave.inventory.items[ITS_MM_TRADE1] == ITEM_NONE)
-        gMmSave.inventory.items[ITS_MM_TRADE1] = itemId;
-    gMmExtraTrade.trade1 |= (1 << (u16)index);
-    gMmExtraTrade.tradeObtained1 |= (1 << (u16)index);
-}
-
-static void addTrade2(u8 index)
-{
-    u16 itemId;
-
-    itemId = kMmTrade2[index];
-    if (gMmSave.inventory.items[ITS_MM_TRADE2] == ITEM_NONE)
-        gMmSave.inventory.items[ITS_MM_TRADE2] = itemId;
-    gMmExtraTrade.trade2 |= (1 << (u16)index);
-    gMmExtraTrade.tradeObtained2 |= (1 << (u16)index);
-}
-
-static void addTrade3(u8 index)
-{
-    u16 itemId;
-
-    itemId = kMmTrade3[index];
-    if (gMmSave.inventory.items[ITS_MM_TRADE3] == ITEM_NONE)
-        gMmSave.inventory.items[ITS_MM_TRADE3] = itemId;
-    gMmExtraTrade.trade3 |= (1 << (u16)index);
-    gMmExtraTrade.tradeObtained3 |= (1 << (u16)index);
 }
 
 static void addOcarina(int level)
@@ -532,33 +481,6 @@ int comboAddItemMm(s16 gi, int noEffect)
         break;
     case GI_MM_CHATEAU:
         fillBottle(ITEM_MM_BOTTLE_CHATEAU);
-        break;
-    case GI_MM_MOON_TEAR:
-        addTrade1(XITEM_MM_TRADE1_MOON_TEAR);
-        break;
-    case GI_MM_DEED_LAND:
-        addTrade1(XITEM_MM_TRADE1_DEED_LAND);
-        break;
-    case GI_MM_DEED_SWAMP:
-        addTrade1(XITEM_MM_TRADE1_DEED_SWAMP);
-        break;
-    case GI_MM_DEED_MOUNTAIN:
-        addTrade1(XITEM_MM_TRADE1_DEED_MOUNTAIN);
-        break;
-    case GI_MM_DEED_OCEAN:
-        addTrade1(XITEM_MM_TRADE1_DEED_OCEAN);
-        break;
-    case GI_MM_ROOM_KEY:
-        addTrade2(XITEM_MM_TRADE2_ROOM_KEY);
-        break;
-    case GI_MM_LETTER_TO_MAMA:
-        addTrade2(XITEM_MM_TRADE2_LETTER_TO_MAMA);
-        break;
-    case GI_MM_LETTER_TO_KAFEI:
-        addTrade3(XITEM_MM_TRADE3_LETTER_TO_KAFEI);
-        break;
-    case GI_MM_PENDANT_OF_MEMORIES:
-        addTrade3(XITEM_MM_TRADE3_PENDANT_OF_MEMORIES);
         break;
     case GI_MM_MAGIC_UPGRADE:
         comboAddMagicUpgradeMm(1);

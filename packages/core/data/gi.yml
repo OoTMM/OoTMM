@@ -544,18 +544,18 @@
 - { id: MM_GOLD_DUST, item: MM_GOLD_DUST, add: NONE, flags: 0x80, draw: MM_GOLD_DUST, object: [mm, 0x01e8] }
 - { id: MM_UNK_94, add: NONE, flags: 0x00 }
 - { id: MM_SEAHORSE2, item: MM_SEAHORSE, add: NONE, flags: 0x80, draw: MM_SEAHORSE, object: [mm, 0x01f0], name: "a <C0>Seahorse" }
-- { id: MM_MOON_TEAR, item: MM_MOON_TEAR, add: NONE, flags: 0x80, draw: MM_MOON_TEAR, object: [mm, 0x01b1], name: "the <C1>Moon's Tear" }
-- { id: MM_DEED_LAND, item: MM_DEED_LAND, add: NONE, flags: 0x80, draw: MM_DEED_LAND, object: [mm, 0x01b2], name: "the <C1>Land Title Deed" }
-- { id: MM_DEED_SWAMP, item: MM_DEED_SWAMP, add: NONE, flags: 0x80, draw: MM_DEED_SWAMP, object: [mm, 0x01b2], name: "the <C1>Swamp Title Deed" }
-- { id: MM_DEED_MOUNTAIN, item: MM_DEED_MOUNTAIN, add: NONE, flags: 0x80, draw: MM_DEED_MOUNTAIN, object: [mm, 0x01b2], name: "the <C1>Mountain Title Deed" }
-- { id: MM_DEED_OCEAN, item: MM_DEED_OCEAN, add: NONE, flags: 0x80, draw: MM_DEED_OCEAN, object: [mm, 0x01b2], name: "the <C1>Ocean Title Deed" }
-- { id: MM_UNK_9B, item: MM_GREAT_FAIRY_SWORD, add: NONE, flags: 0xa0, draw: MM_GREAT_FAIRY_SWORD, object: [mm, 0x01fb], name: "the <C1>Great Fairy's Sword" }
+- { id: MM_MOON_TEAR, item: MM_MOON_TEAR, add: [MM_TRADE1, 0], flags: 0x80, draw: MM_MOON_TEAR, object: [mm, 0x01b1], name: "the <C1>Moon's Tear" }
+- { id: MM_DEED_LAND, item: MM_DEED_LAND, add: [MM_TRADE1, 1], flags: 0x80, draw: MM_DEED_LAND, object: [mm, 0x01b2], name: "the <C1>Land Title Deed" }
+- { id: MM_DEED_SWAMP, item: MM_DEED_SWAMP, add: [MM_TRADE1, 2], flags: 0x80, draw: MM_DEED_SWAMP, object: [mm, 0x01b2], name: "the <C1>Swamp Title Deed" }
+- { id: MM_DEED_MOUNTAIN, item: MM_DEED_MOUNTAIN, add: [MM_TRADE1, 3], flags: 0x80, draw: MM_DEED_MOUNTAIN, object: [mm, 0x01b2], name: "the <C1>Mountain Title Deed" }
+- { id: MM_DEED_OCEAN, item: MM_DEED_OCEAN, add: [MM_TRADE1, 4], flags: 0x80, draw: MM_DEED_OCEAN, object: [mm, 0x01b2], name: "the <C1>Ocean Title Deed" }
+- { id: MM_UNK_9B, item: MM_GREAT_FAIRY_SWORD, add: NONE, flags: 0xa0, draw: MM_GREAT_FAIRY_SWORD, object: [mm, 0x01fb], name: "" }
 - { id: MM_UNK_9C, item: MM_SWORD_KOKIRI, add: NONE, flags: 0xa0, draw: MM_SWORD_KOKIRI, object: [mm, 0x0148] }
 - { id: MM_UNK_9D, item: MM_SWORD_RAZOR, add: NONE, flags: 0xa0, draw: MM_SWORD_RAZOR, object: [mm, 0x01f9] }
 - { id: MM_UNK_9E, item: MM_SWORD_GILDED, add: NONE, flags: 0xa0, draw: MM_SWORD_GILDED, object: [mm, 0x01fa] }
 - { id: MM_UNK_9F, item: MM_SHIELD_HERO, add: NONE, flags: 0xa0, draw: MM_SHIELD_HERO, object: [mm, 0x00b3] }
-- { id: MM_ROOM_KEY, item: MM_ROOM_KEY, add: NONE, flags: 0x80, draw: MM_ROOM_KEY, object: [mm, 0x020f], name: "the <C1>Room Key" }
-- { id: MM_LETTER_TO_MAMA, item: MM_LETTER_TO_MAMA, add: NONE, flags: 0x80, draw: MM_LETTER_TO_MAMA, object: [mm, 0x0245], name: "the <C1>Letter to Mama" }
+- { id: MM_ROOM_KEY, item: MM_ROOM_KEY, add: [MM_TRADE2, 0], flags: 0x80, draw: MM_ROOM_KEY, object: [mm, 0x020f], name: "the <C1>Room Key" }
+- { id: MM_LETTER_TO_MAMA, item: MM_LETTER_TO_MAMA, add: [MM_TRADE2, 1], flags: 0x80, draw: MM_LETTER_TO_MAMA, object: [mm, 0x0245], name: "the <C1>Letter to Mama" }
 - { id: MM_UNK_A2, add: NONE, flags: 0x00 }
 - { id: MM_UNK_A3, add: NONE, flags: 0x00 }
 - { id: MM_UNK_A4, add: NONE, flags: 0x80, draw: MASK_KEATON, object: [mm, 0x0100] }
@@ -564,8 +564,8 @@
 - { id: MM_UNK_A7, add: NONE, flags: 0x00 }
 - { id: MM_UNK_A8, add: NONE, flags: 0x00 }
 - { id: MM_UNK_A9, item: MM_BOTTLE_EMPTY, add: NONE, flags: 0x80, draw: BOTTLE_EMPTY, object: [mm, 0x009e] }
-- { id: MM_LETTER_TO_KAFEI, item: MM_LETTER_TO_KAFEI, add: NONE, flags: 0x80, draw: MM_LETTER_TO_KAFEI, object: [mm, 0x0210], name: "the <C1>Letter to Kafei" }
-- { id: MM_PENDANT_OF_MEMORIES, item: MM_PENDANT_OF_MEMORIES, add: NONE, flags: 0x80, draw: MM_PENDANT_OF_MEMORIES, object: [mm, 0x0215], name: "the <C1>Pendant of Memories" }
+- { id: MM_LETTER_TO_KAFEI, item: MM_LETTER_TO_KAFEI, add: [MM_TRADE3, 0], flags: 0x80, draw: MM_LETTER_TO_KAFEI, object: [mm, 0x0210], name: "the <C1>Letter to Kafei" }
+- { id: MM_PENDANT_OF_MEMORIES, item: MM_PENDANT_OF_MEMORIES, add: [MM_TRADE3, 1], flags: 0x80, draw: MM_PENDANT_OF_MEMORIES, object: [mm, 0x0215], name: "the <C1>Pendant of Memories" }
 - { id: MM_UNK_AC, add: NONE, flags: 0x00 }
 - { id: MM_UNK_AD, add: NONE, flags: 0x00 }
 - { id: MM_UNK_AE, add: NONE, flags: 0x00 }

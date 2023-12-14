@@ -31,6 +31,9 @@
 #define IA_MM_HOOKSHOT      0x17
 #define IA_OOT_TRADE_CHILD  0x18
 #define IA_OOT_TRADE_ADULT  0x19
+#define IA_MM_TRADE1        0x1a
+#define IA_MM_TRADE2        0x1b
+#define IA_MM_TRADE3        0x1c
 #define IA_NONE             0xff
 
 typedef struct GameState_Play GameState_Play;
