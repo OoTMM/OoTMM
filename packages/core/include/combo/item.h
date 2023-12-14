@@ -29,6 +29,8 @@
 #define IA_STICK_UPGRADE    0x15
 #define IA_OOT_HOOKSHOT     0x16
 #define IA_MM_HOOKSHOT      0x17
+#define IA_OOT_TRADE_CHILD  0x18
+#define IA_OOT_TRADE_ADULT  0x19
 #define IA_NONE             0xff
 
 typedef struct GameState_Play GameState_Play;

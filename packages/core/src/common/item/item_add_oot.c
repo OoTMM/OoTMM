@@ -3,34 +3,6 @@
 #include <combo/sr.h>
 #include <combo/souls.h>
 
-const u8 kOotTradeAdult[] = {
-    ITEM_OOT_POCKET_EGG,
-    ITEM_OOT_POCKET_CUCCO,
-    ITEM_OOT_COJIRO,
-    ITEM_OOT_ODD_MUSHROOM,
-    ITEM_OOT_ODD_POTION,
-    ITEM_OOT_POACHER_SAW,
-    ITEM_OOT_GORON_SWORD_BROKEN,
-    ITEM_OOT_PRESCRIPTION,
-    ITEM_OOT_EYEBALL_FROG,
-    ITEM_OOT_EYE_DROPS,
-    ITEM_OOT_CLAIM_CHECK
-};
-
-const u8 kOotTradeChild[] = {
-    ITEM_OOT_WEIRD_EGG,
-    ITEM_OOT_CHICKEN,
-    ITEM_OOT_ZELDA_LETTER,
-    ITEM_OOT_KEATON_MASK,
-    ITEM_OOT_SKULL_MASK,
-    ITEM_OOT_SPOOKY_MASK,
-    ITEM_OOT_BUNNY_HOOD,
-    ITEM_OOT_GORON_MASK,
-    ITEM_OOT_ZORA_MASK,
-    ITEM_OOT_GERUDO_MASK,
-    ITEM_OOT_MASK_OF_TRUTH,
-};
-
 int comboAddSmallKeyOot(u16 dungeonId)
 {
     s8 keyCount;
@@ -164,36 +136,6 @@ void comboAddBombBagOot(int level)
     gOotSave.inventory.ammo[ITS_OOT_BOMBS] = kMaxBombs[level];
 }
 
-static void addTradeChild(u8 index)
-{
-    u16 itemId;
-    u16 mask;
-
-    itemId = kOotTradeChild[index];
-    mask = 1 << (u16)index;
-    if (gOotExtraTradeSave.child & mask)
-        return;
-    if (gOotSave.inventory.items[ITS_OOT_TRADE_CHILD] == ITEM_NONE)
-        gOotSave.inventory.items[ITS_OOT_TRADE_CHILD] = itemId;
-    gOotExtraTrade.child |= mask;
-    gOotExtraTradeSave.child |= mask;
-}
-
-static void addTradeAdult(u8 index)
-{
-    u16 itemId;
-    u16 mask;
-
-    itemId = kOotTradeAdult[index];
-    mask = 1 << (u16)index;
-    if (gOotExtraTradeSave.adult & mask)
-        return;
-    if (gOotSave.inventory.items[ITS_OOT_TRADE_ADULT] == ITEM_NONE)
-        gOotSave.inventory.items[ITS_OOT_TRADE_ADULT] = itemId;
-    gOotExtraTrade.adult |= mask;
-    gOotExtraTradeSave.adult |= mask;
-}
-
 static void addRupees(u16 count)
 {
     u16 max;
@@ -261,21 +203,6 @@ void comboAddCommonItemOot(int sid, int noEffect)
         break;
     case SITEM_OCARINA_TIME:
         addOcarina(2);
-        break;
-    case SITEM_MASK_KEATON:
-        addTradeChild(3);
-        break;
-    case SITEM_MASK_BUNNY:
-        addTradeChild(6);
-        break;
-    case SITEM_MASK_GORON:
-        addTradeChild(7);
-        break;
-    case SITEM_MASK_ZORA:
-        addTradeChild(8);
-        break;
-    case SITEM_MASK_TRUTH:
-        addTradeChild(10);
         break;
     case SITEM_HEART_PIECE:
         gOotSave.inventory.quest.heartPieces++;
@@ -371,21 +298,6 @@ void comboAddItemSharedOot(s16 gi, int noEffect)
             break;
         }
     }
-
-    if (comboConfig(CFG_SHARED_MASK_KEATON) && gi == GI_OOT_MASK_KEATON)
-        comboAddCommonItemMm(SITEM_MASK_KEATON, noEffect);
-
-    if (comboConfig(CFG_SHARED_MASK_BUNNY) && gi == GI_OOT_MASK_BUNNY)
-        comboAddCommonItemMm(SITEM_MASK_BUNNY, noEffect);
-
-    if (comboConfig(CFG_SHARED_MASK_TRUTH) && gi == GI_OOT_MASK_TRUTH)
-        comboAddCommonItemMm(SITEM_MASK_TRUTH, noEffect);
-
-    if (comboConfig(CFG_SHARED_MASK_GORON) && gi == GI_OOT_MASK_GORON)
-        comboAddCommonItemMm(SITEM_MASK_GORON, noEffect);
-
-    if (comboConfig(CFG_SHARED_MASK_ZORA) && gi == GI_OOT_MASK_ZORA)
-        comboAddCommonItemMm(SITEM_MASK_ZORA, noEffect);
 
     if (comboConfig(CFG_SHARED_HEALTH))
     {
@@ -744,72 +656,6 @@ int comboAddItemOot(s16 gi, int noEffect)
         break;
     case GI_OOT_RECOVERY_HEART:
         comboAddCommonItemOot(SITEM_RECOVERY_HEART, noEffect);
-        break;
-    case GI_OOT_WEIRD_EGG:
-        addTradeChild(0);
-        break;
-    case GI_OOT_CHICKEN:
-        addTradeChild(1);
-        break;
-    case GI_OOT_ZELDA_LETTER:
-        addTradeChild(2);
-        break;
-    case GI_OOT_MASK_KEATON:
-        comboAddCommonItemOot(SITEM_MASK_KEATON, noEffect);
-        break;
-    case GI_OOT_MASK_SKULL:
-        addTradeChild(4);
-        break;
-    case GI_OOT_MASK_SPOOKY:
-        addTradeChild(5);
-        break;
-    case GI_OOT_MASK_BUNNY:
-        comboAddCommonItemOot(SITEM_MASK_BUNNY, noEffect);
-        break;
-    case GI_OOT_MASK_GORON:
-        comboAddCommonItemOot(SITEM_MASK_GORON, noEffect);
-        break;
-    case GI_OOT_MASK_ZORA:
-        comboAddCommonItemOot(SITEM_MASK_ZORA, noEffect);
-        break;
-    case GI_OOT_MASK_GERUDO:
-        addTradeChild(9);
-        break;
-    case GI_OOT_MASK_TRUTH:
-        comboAddCommonItemOot(SITEM_MASK_TRUTH, noEffect);
-        break;
-    case GI_OOT_POCKET_EGG:
-        addTradeAdult(0);
-        break;
-    case GI_OOT_POCKET_CUCCO:
-        addTradeAdult(1);
-        break;
-    case GI_OOT_COJIRO:
-        addTradeAdult(2);
-        break;
-    case GI_OOT_ODD_MUSHROOM:
-        addTradeAdult(3);
-        break;
-    case GI_OOT_ODD_POTION:
-        addTradeAdult(4);
-        break;
-    case GI_OOT_POACHER_SAW:
-        addTradeAdult(5);
-        break;
-    case GI_OOT_BROKEN_GORON_SWORD:
-        addTradeAdult(6);
-        break;
-    case GI_OOT_PRESCRIPTION:
-        addTradeAdult(7);
-        break;
-    case GI_OOT_EYEBALL_FROG:
-        addTradeAdult(8);
-        break;
-    case GI_OOT_EYE_DROPS:
-        addTradeAdult(9);
-        break;
-    case GI_OOT_CLAIM_CHECK:
-        addTradeAdult(10);
         break;
     case GI_OOT_SMALL_KEY_FOREST:
         count = comboAddSmallKeyOot(SCE_OOT_TEMPLE_FOREST);

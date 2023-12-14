@@ -7,6 +7,34 @@
 # define addRupeesRaw  addRupeesRawMm
 #endif
 
+const u8 kOotTradeAdult[] = {
+    ITEM_OOT_POCKET_EGG,
+    ITEM_OOT_POCKET_CUCCO,
+    ITEM_OOT_COJIRO,
+    ITEM_OOT_ODD_MUSHROOM,
+    ITEM_OOT_ODD_POTION,
+    ITEM_OOT_POACHER_SAW,
+    ITEM_OOT_GORON_SWORD_BROKEN,
+    ITEM_OOT_PRESCRIPTION,
+    ITEM_OOT_EYEBALL_FROG,
+    ITEM_OOT_EYE_DROPS,
+    ITEM_OOT_CLAIM_CHECK
+};
+
+const u8 kOotTradeChild[] = {
+    ITEM_OOT_WEIRD_EGG,
+    ITEM_OOT_CHICKEN,
+    ITEM_OOT_ZELDA_LETTER,
+    ITEM_OOT_KEATON_MASK,
+    ITEM_OOT_SKULL_MASK,
+    ITEM_OOT_SPOOKY_MASK,
+    ITEM_OOT_BUNNY_HOOD,
+    ITEM_OOT_GORON_MASK,
+    ITEM_OOT_ZORA_MASK,
+    ITEM_OOT_GERUDO_MASK,
+    ITEM_OOT_MASK_OF_TRUTH,
+};
+
 static const u8 kItemSlotsOot[] = {
     ITS_OOT_STICKS,
     ITS_OOT_NUTS,
@@ -676,6 +704,34 @@ static int addItemHookshotMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
+static int addTradeOotChild(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    u16 mask;
+
+    itemId = kOotTradeChild[param];
+    mask = 1 << (u16)param;
+    if (gOotExtraTradeSave.child & mask)
+        return;
+    if (gOotSave.inventory.items[ITS_OOT_TRADE_CHILD] == ITEM_NONE)
+        gOotSave.inventory.items[ITS_OOT_TRADE_CHILD] = itemId;
+    gOotExtraTrade.child |= mask;
+    gOotExtraTradeSave.child |= mask;
+}
+
+static int addTradeOotAdult(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    u16 mask;
+
+    itemId = kOotTradeAdult[param];
+    mask = 1 << (u16)param;
+    if (gOotExtraTradeSave.adult & mask)
+        return;
+    if (gOotSave.inventory.items[ITS_OOT_TRADE_ADULT] == ITEM_NONE)
+        gOotSave.inventory.items[ITS_OOT_TRADE_ADULT] = itemId;
+    gOotExtraTrade.adult |= mask;
+    gOotExtraTradeSave.adult |= mask;
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -701,6 +757,8 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemSticksUpgrade,
     addItemHookshotOot,
     addItemHookshotMm,
+    addTradeOotChild,
+    addTradeOotAdult,
 };
 
 extern const u8 kAddItemFuncs[];

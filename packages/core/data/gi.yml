@@ -8,10 +8,10 @@
 - { id: OOT_HOOKSHOT, item: OOT_HOOKSHOT, add: [OOT_HOOKSHOT, 1], flags: 0x80, draw: OOT_HOOKSHOT, object: [oot, 0x00dd], name: "the <C1>Hookshot" }
 - { id: OOT_LONGSHOT, item: OOT_LONGSHOT, add: [OOT_HOOKSHOT, 2], flags: 0x80, draw: OOT_LONGSHOT, object: [oot, 0x00dd], name: "the <C1>Longshot" }
 - { id: OOT_LENS, item: OOT_LENS, add: OOT_NORMAL, flags: 0x80, draw: LENS, object: [oot, 0x00ea], name: "the <C1>Lens of Truth" }
-- { id: OOT_ZELDA_LETTER, item: OOT_ZELDA_LETTER, add: NONE, flags: 0x80, draw: OOT_ZELDA_LETTER, object: [oot, 0x00ef], name: "<C1>Zelda's Letter" }
+- { id: OOT_ZELDA_LETTER, item: OOT_ZELDA_LETTER, add: [OOT_TRADE_CHILD, 2], flags: 0x80, draw: OOT_ZELDA_LETTER, object: [oot, 0x00ef], name: "<C1>Zelda's Letter" }
 - { id: OOT_OCARINA_TIME, item: OOT_OCARINA_TIME, add: NONE, flags: 0x80, draw: OCARINA_TIME, object: [oot, 0x00de], name: "the <C1>Ocarina of Time" }
 - { id: OOT_HAMMER, item: OOT_HAMMER, add: OOT_NORMAL, flags: 0x80, draw: OOT_MEGATON_HAMMER, object: [oot, 0x00f6], name: "the <C1>Megaton Hammer" }
-- { id: OOT_COJIRO, item: OOT_COJIRO, add: NONE, flags: 0x80, draw: OOT_COJIRO, object: [oot, 0x0109], name: "<C1>Cojiro" }
+- { id: OOT_COJIRO, item: OOT_COJIRO, add: [OOT_TRADE_ADULT, 2], flags: 0x80, draw: OOT_COJIRO, object: [oot, 0x0109], name: "<C1>Cojiro" }
 - { id: OOT_BOTTLE_EMPTY, item: OOT_BOTTLE_EMPTY, add: NONE, flags: 0x80, draw: BOTTLE_EMPTY, object: [oot, 0x00c6], name: "an <C1>Empty Bottle" }
 - { id: OOT_POTION_RED, item: OOT_POTION_RED, add: NONE, flags: 0x80, draw: POTION_RED, object: [oot, 0x00eb], name: "a <C0>Red Potion" }
 - { id: OOT_POTION_GREEN, item: OOT_POTION_GREEN, add: NONE, flags: 0x80, draw: POTION_GREEN, object: [oot, 0x00eb], name: "a <C0>Green Potion" }
@@ -20,22 +20,22 @@
 - { id: OOT_BOTTLE_MILK, item: OOT_BOTTLE_MILK, add: NONE, flags: 0x80, draw: BOTTLE_MILK, object: [oot, 0x00df], name: "a <C1>bottle of Lon Lon Milk" }
 - { id: OOT_RUTO_LETTER, item: OOT_RUTO_LETTER, add: NONE, flags: 0x80, draw: OOT_RUTO_LETTER, object: [oot, 0x010b], name: "<C1>Ruto's Letter" }
 - { id: OOT_MAGIC_BEAN, item: OOT_MAGIC_BEAN, add: NONE, flags: 0x80, draw: MAGIC_BEAN, object: [oot, 0x00f3], name: "a <C0>Magic Bean" }
-- { id: OOT_MASK_SKULL, item: OOT_SKULL_MASK, add: NONE, flags: 0x80, draw: OOT_MASK_SKULL, object: [oot, 0x0136], name: "the <C1>Skull Mask" }
-- { id: OOT_MASK_SPOOKY, item: OOT_SPOOKY_MASK, add: NONE, flags: 0x80, draw: OOT_MASK_SPOOKY, object: [oot, 0x0135], name: "the <C1>Spooky Mask" }
-- { id: OOT_CHICKEN, item: OOT_CHICKEN, add: NONE, flags: 0x80, draw: OOT_CHICKEN, object: [oot, 0x0109], name: "the <C1>Chicken" }
-- { id: OOT_MASK_KEATON, item: OOT_KEATON_MASK, add: NONE, flags: 0x80, draw: MASK_KEATON, object: [oot, 0x0134], name: "the <C1>Keaton Mask" }
-- { id: OOT_MASK_BUNNY, item: OOT_BUNNY_HOOD, add: NONE, flags: 0x80, draw: MASK_BUNNY, object: [oot, 0x0137], name: "the <C1>Bunny Hood" }
-- { id: OOT_MASK_TRUTH, item: OOT_MASK_OF_TRUTH, add: NONE, flags: 0x80, draw: MASK_TRUTH, object: [oot, 0x0138], name: "the <C1>Mask of Truth" }
-- { id: OOT_POCKET_EGG, item: OOT_POCKET_EGG, add: NONE, flags: 0x80, draw: OOT_EGG, object: [oot, 0x00da], name: "the <C1>Pocket Egg" }
-- { id: OOT_POCKET_CUCCO, item: OOT_POCKET_CUCCO, add: NONE, flags: 0x80, draw: OOT_CHICKEN, object: [oot, 0x0109], name: "the <C1>Pocket Cucco" }
-- { id: OOT_ODD_MUSHROOM, item: OOT_ODD_MUSHROOM, add: NONE, flags: 0x80, draw: OOT_ODD_MUSHROOM, object: [oot, 0x0141], name: "the <C1>Odd Mushroom" }
-- { id: OOT_ODD_POTION, item: OOT_ODD_POTION, add: NONE, flags: 0x80, draw: OOT_ODD_POTION, object: [oot, 0x0140], name: "the <C1>Odd Potion" }
-- { id: OOT_POACHER_SAW, item: OOT_POACHER_SAW, add: NONE, flags: 0x80, draw: OOT_POACHER_SAW, object: [oot, 0x00f5], name: "the <C1>Poacher's Saw" }
-- { id: OOT_BROKEN_GORON_SWORD, item: OOT_GORON_SWORD_BROKEN, add: NONE, flags: 0x80, draw: OOT_BROKEN_GORON_SWORD, object: [oot, 0x0143], name: "the <C1>Broken Goron's Sword" }
-- { id: OOT_PRESCRIPTION, item: OOT_PRESCRIPTION, add: NONE, flags: 0x80, draw: OOT_PRESCRIPTION, object: [oot, 0x0146], name: "the <C1>Prescription" }
-- { id: OOT_EYEBALL_FROG, item: OOT_EYEBALL_FROG, add: NONE, flags: 0x80, draw: OOT_EYEBALL_FROG, object: [oot, 0x0149], name: "the <C1>Eyeball Frog" }
-- { id: OOT_EYE_DROPS, item: OOT_EYE_DROPS, add: NONE, flags: 0x80, draw: OOT_EYE_DROPS, object: [oot, 0x013f], name: "the <C1>Eye Drops" }
-- { id: OOT_CLAIM_CHECK, item: OOT_CLAIM_CHECK, add: NONE, flags: 0x80, draw: OOT_CLAIM_CHECK, object: [oot, 0x0142], name: "the <C1>Claim Check" }
+- { id: OOT_MASK_SKULL, item: OOT_SKULL_MASK, add: [OOT_TRADE_CHILD, 4], flags: 0x80, draw: OOT_MASK_SKULL, object: [oot, 0x0136], name: "the <C1>Skull Mask" }
+- { id: OOT_MASK_SPOOKY, item: OOT_SPOOKY_MASK, add: [OOT_TRADE_CHILD, 5], flags: 0x80, draw: OOT_MASK_SPOOKY, object: [oot, 0x0135], name: "the <C1>Spooky Mask" }
+- { id: OOT_CHICKEN, item: OOT_CHICKEN, add: [OOT_TRADE_CHILD, 1], flags: 0x80, draw: OOT_CHICKEN, object: [oot, 0x0109], name: "the <C1>Chicken" }
+- { id: OOT_MASK_KEATON, item: OOT_KEATON_MASK, add: [OOT_TRADE_CHILD, 3], flags: 0x80, draw: MASK_KEATON, object: [oot, 0x0134], name: "the <C1>Keaton Mask" }
+- { id: OOT_MASK_BUNNY, item: OOT_BUNNY_HOOD, add: [OOT_TRADE_CHILD, 6], flags: 0x80, draw: MASK_BUNNY, object: [oot, 0x0137], name: "the <C1>Bunny Hood" }
+- { id: OOT_MASK_TRUTH, item: OOT_MASK_OF_TRUTH, add: [OOT_TRADE_CHILD, 10], flags: 0x80, draw: MASK_TRUTH, object: [oot, 0x0138], name: "the <C1>Mask of Truth" }
+- { id: OOT_POCKET_EGG, item: OOT_POCKET_EGG, add: [OOT_TRADE_ADULT, 0], flags: 0x80, draw: OOT_EGG, object: [oot, 0x00da], name: "the <C1>Pocket Egg" }
+- { id: OOT_POCKET_CUCCO, item: OOT_POCKET_CUCCO, add: [OOT_TRADE_ADULT, 1], flags: 0x80, draw: OOT_CHICKEN, object: [oot, 0x0109], name: "the <C1>Pocket Cucco" }
+- { id: OOT_ODD_MUSHROOM, item: OOT_ODD_MUSHROOM, add: [OOT_TRADE_ADULT, 3], flags: 0x80, draw: OOT_ODD_MUSHROOM, object: [oot, 0x0141], name: "the <C1>Odd Mushroom" }
+- { id: OOT_ODD_POTION, item: OOT_ODD_POTION, add: [OOT_TRADE_ADULT, 4], flags: 0x80, draw: OOT_ODD_POTION, object: [oot, 0x0140], name: "the <C1>Odd Potion" }
+- { id: OOT_POACHER_SAW, item: OOT_POACHER_SAW, add: [OOT_TRADE_ADULT, 5], flags: 0x80, draw: OOT_POACHER_SAW, object: [oot, 0x00f5], name: "the <C1>Poacher's Saw" }
+- { id: OOT_BROKEN_GORON_SWORD, item: OOT_GORON_SWORD_BROKEN, add: [OOT_TRADE_ADULT, 6], flags: 0x80, draw: OOT_BROKEN_GORON_SWORD, object: [oot, 0x0143], name: "the <C1>Broken Goron's Sword" }
+- { id: OOT_PRESCRIPTION, item: OOT_PRESCRIPTION, add: [OOT_TRADE_ADULT, 7], flags: 0x80, draw: OOT_PRESCRIPTION, object: [oot, 0x0146], name: "the <C1>Prescription" }
+- { id: OOT_EYEBALL_FROG, item: OOT_EYEBALL_FROG, add: [OOT_TRADE_ADULT, 8], flags: 0x80, draw: OOT_EYEBALL_FROG, object: [oot, 0x0149], name: "the <C1>Eyeball Frog" }
+- { id: OOT_EYE_DROPS, item: OOT_EYE_DROPS, add: [OOT_TRADE_ADULT, 9], flags: 0x80, draw: OOT_EYE_DROPS, object: [oot, 0x013f], name: "the <C1>Eye Drops" }
+- { id: OOT_CLAIM_CHECK, item: OOT_CLAIM_CHECK, add: [OOT_TRADE_ADULT, 10], flags: 0x80, draw: OOT_CLAIM_CHECK, object: [oot, 0x0142], name: "the <C1>Claim Check" }
 - { id: OOT_SWORD_KOKIRI, item: OOT_SWORD_KOKIRI, add: NONE, flags: 0x80, draw: OOT_SWORD_KOKIRI, object: [oot, 0x018d], name: "the <C1>Kokiri Sword" }
 - { id: OOT_SWORD_KNIFE, item: OOT_SWORD_KNIFE_BIGGORON, add: NONE, flags: 0x80, draw: OOT_BIGGORON_SWORD, object: [oot, 0x00f8], name: "the <C1>Giant's Knife" }
 - { id: OOT_SHIELD_DEKU, item: OOT_SHIELD_DEKU, add: NONE, flags: 0xa0, draw: OOT_SHIELD_DEKU, object: [oot, 0x00cb], name: "the <C1>Deku Shield" }
@@ -68,7 +68,7 @@
 - { id: OOT_MAGIC_JAR_LARGE, item: OOT_MAGIC_JAR_LARGE, add: NONE, flags: 0x6e, draw: MAGIC_LARGE, object: [oot, 0x00cd], name: "a <C0>Large Magic Jar" }
 - { id: OOT_WALLET2, item: OOT_WALLET2, add: [OOT_WALLET, 2], flags: 0x80, draw: WALLET2, object: [oot, 0x00d1], name: "the <C1>Adult's Wallet" }
 - { id: OOT_WALLET3, item: OOT_WALLET3, add: [OOT_WALLET, 3], flags: 0x80, draw: WALLET3, object: [oot, 0x00d1], name: "the <C1>Giant's Wallet" }
-- { id: OOT_WEIRD_EGG, item: OOT_WEIRD_EGG, add: NONE, flags: 0x80, draw: OOT_EGG, object: [oot, 0x00da], name: "the <C1>Weird Egg" }
+- { id: OOT_WEIRD_EGG, item: OOT_WEIRD_EGG, add: [OOT_TRADE_CHILD, 0], flags: 0x80, draw: OOT_EGG, object: [oot, 0x00da], name: "the <C1>Weird Egg" }
 - { id: OOT_RECOVERY_HEART, item: OOT_RECOVERY_HEART, add: NONE, flags: 0x80, draw: RECOVERY_HEART, object: [oot, 0x00b7], name: "a <C0>Recovery Heart" }
 - { id: OOT_ARROWS_5, item: OOT_ARROWS_5, add: [OOT_ARROWS, 5], flags: 0x48, draw: ARROW, object: [oot, 0x00d8], name: "<C0>5 Arrows" }
 - { id: OOT_ARROWS_10, item: OOT_ARROWS_10, add: [OOT_ARROWS, 10], flags: 0x49, draw: ARROW2, object: [oot, 0x00d8], name: "<C0>10 Arrows" }
@@ -78,9 +78,9 @@
 - { id: OOT_RUPEE_RED, item: OOT_RUPEE_RED, add: [OOT_RUPEE, 20], flags: 0x02, draw: OOT_RUPEE_RED, object: [oot, 0x017f], name: "a <C0>Red Rupee" }
 - { id: OOT_HEART_CONTAINER2, item: OOT_HEART_CONTAINER, add: NONE, flags: 0x80, draw: HEART_CONTAINER, object: [oot, 0x00bd], name: "a <C0>Heart Container" }
 - { id: OOT_MILK, item: OOT_MILK, add: NONE, flags: 0x80, draw: MILK, object: [oot, 0x00eb], name: "some <C0>Lon Lon Milk" }
-- { id: OOT_MASK_GORON, item: OOT_GORON_MASK, add: NONE, flags: 0x80, draw: OOT_MASK_GORON, object: [oot, 0x0150], name: "the <C1>Goron Mask" }
-- { id: OOT_MASK_ZORA, item: OOT_ZORA_MASK, add: NONE, flags: 0x80, draw: OOT_MASK_ZORA, object: [oot, 0x0151], name: "the <C1>Zora Mask" }
-- { id: OOT_MASK_GERUDO, item: OOT_GERUDO_MASK, add: NONE, flags: 0x80, draw: OOT_MASK_GERUDO, object: [oot, 0x0152], name: "the <C1>Gerudo Mask" }
+- { id: OOT_MASK_GORON, item: OOT_GORON_MASK, add: [OOT_TRADE_CHILD, 7], flags: 0x80, draw: OOT_MASK_GORON, object: [oot, 0x0150], name: "the <C1>Goron Mask" }
+- { id: OOT_MASK_ZORA, item: OOT_ZORA_MASK, add: [OOT_TRADE_CHILD, 8], flags: 0x80, draw: OOT_MASK_ZORA, object: [oot, 0x0151], name: "the <C1>Zora Mask" }
+- { id: OOT_MASK_GERUDO, item: OOT_GERUDO_MASK, add: [OOT_TRADE_CHILD, 9], flags: 0x80, draw: OOT_MASK_GERUDO, object: [oot, 0x0152], name: "the <C1>Gerudo Mask" }
 - { id: OOT_GORON_BRACELET, item: OOT_GORON_BRACELET, add: NONE, flags: 0x80, draw: OOT_GORON_BRACELET, object: [oot, 0x0147], name: "the <C1>Goron's Bracelet" }
 - { id: OOT_RUPEE_PURPLE, item: OOT_RUPEE_PURPLE, add: [OOT_RUPEE, 50], flags: 0x14, draw: OOT_RUPEE_PURPLE, object: [oot, 0x017f], name: "a <C0>Purple Rupee" }
 - { id: OOT_RUPEE_HUGE, item: OOT_RUPEE_HUGE, add: [OOT_RUPEE, 200], flags: 0x13, draw: OOT_RUPEE_HUGE, object: [oot, 0x017f], name: "a <C0>Huge Rupee" }
