@@ -722,7 +722,7 @@ static int addItemHookshotMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static int addTradeOotChild(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemTradeOotChild(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
     u16 mask;
 
@@ -737,7 +737,7 @@ static int addTradeOotChild(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static int addTradeOotAdult(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemTradeOotAdult(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
     u16 mask;
 
@@ -753,7 +753,7 @@ static int addTradeOotAdult(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 }
 
 
-static int addTradeMm1(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemTradeMm1(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
     itemId = kMmTrade1[param];
     if (gMmSave.inventory.items[ITS_MM_TRADE1] == ITEM_NONE)
@@ -763,7 +763,7 @@ static int addTradeMm1(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static int addTradeMm2(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemTradeMm2(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
     itemId = kMmTrade2[param];
     if (gMmSave.inventory.items[ITS_MM_TRADE2] == ITEM_NONE)
@@ -773,7 +773,7 @@ static int addTradeMm2(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static int addTradeMm3(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemTradeMm3(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
     itemId = kMmTrade3[param];
     if (gMmSave.inventory.items[ITS_MM_TRADE3] == ITEM_NONE)
@@ -783,6 +783,50 @@ static int addTradeMm3(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
+static void addOcarinaRawOot(GameState_Play* play, int level)
+{
+    u16 itemId;
+
+    if (level >= 2)
+        itemId = ITEM_OOT_OCARINA_TIME;
+    else
+        itemId = ITEM_OOT_OCARINA_FAIRY;
+    gOotSave.inventory.items[ITS_OOT_OCARINA] = itemId;
+    gOotExtraItems.ocarina |= (1 << (level - 1));
+    reloadSlotOot(play, ITS_OOT_OCARINA);
+}
+
+static void addOcarinaRawMm(GameState_Play* play, int level)
+{
+    u8 itemId;
+
+    if (level >= 2)
+        itemId = ITEM_MM_OCARINA_OF_TIME;
+    else
+        itemId = ITEM_MM_OCARINA_FAIRY;
+    gMmSave.inventory.items[ITS_MM_OCARINA] = itemId;
+    gMmExtraItems.ocarina |= (1 << (level - 1));
+    reloadSlotMm(play, ITS_MM_OCARINA);
+}
+
+static int addItemOcarinaOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    addOcarinaRawOot(play, param);
+    if (comboConfig(CFG_SHARED_OCARINA))
+    {
+        if (param >= 2 || comboConfig(CFG_MM_OCARINA_FAIRY))
+            addOcarinaRawMm(play, param);
+    }
+    return 0;
+}
+
+static int addItemOcarinaMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    addOcarinaRawMm(play, param);
+    if (comboConfig(CFG_SHARED_OCARINA))
+        addOcarinaRawOot(play, param);
+    return 0;
+}
 
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
@@ -809,11 +853,13 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemSticksUpgrade,
     addItemHookshotOot,
     addItemHookshotMm,
-    addTradeOotChild,
-    addTradeOotAdult,
-    addTradeMm1,
-    addTradeMm2,
-    addTradeMm3,
+    addItemTradeOotChild,
+    addItemTradeOotAdult,
+    addItemTradeMm1,
+    addItemTradeMm2,
+    addItemTradeMm3,
+    addItemOcarinaOot,
+    addItemOcarinaMm,
 };
 
 extern const u8 kAddItemFuncs[];

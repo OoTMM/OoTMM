@@ -215,7 +215,6 @@ int comboAddItemEffect(GameState_Play* play, s16 gi)
     case GI_MM_SEAHORSE2:
     case GI_MM_MILK:
     case GI_MM_CHATEAU:
-    case GI_MM_OCARINA_OF_TIME:
     case GI_MM_FAIRY:
         reloadIconsC(play);
         break;

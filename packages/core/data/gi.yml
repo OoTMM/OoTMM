@@ -9,7 +9,7 @@
 - { id: OOT_LONGSHOT, item: OOT_LONGSHOT, add: [OOT_HOOKSHOT, 2], flags: 0x80, draw: OOT_LONGSHOT, object: [oot, 0x00dd], name: "the <C1>Longshot" }
 - { id: OOT_LENS, item: OOT_LENS, add: OOT_NORMAL, flags: 0x80, draw: LENS, object: [oot, 0x00ea], name: "the <C1>Lens of Truth" }
 - { id: OOT_ZELDA_LETTER, item: OOT_ZELDA_LETTER, add: [OOT_TRADE_CHILD, 2], flags: 0x80, draw: OOT_ZELDA_LETTER, object: [oot, 0x00ef], name: "<C1>Zelda's Letter" }
-- { id: OOT_OCARINA_TIME, item: OOT_OCARINA_TIME, add: NONE, flags: 0x80, draw: OCARINA_TIME, object: [oot, 0x00de], name: "the <C1>Ocarina of Time" }
+- { id: OOT_OCARINA_TIME, item: OOT_OCARINA_TIME, add: [OOT_OCARINA, 2], flags: 0x80, draw: OCARINA_TIME, object: [oot, 0x00de], name: "the <C1>Ocarina of Time" }
 - { id: OOT_HAMMER, item: OOT_HAMMER, add: OOT_NORMAL, flags: 0x80, draw: OOT_MEGATON_HAMMER, object: [oot, 0x00f6], name: "the <C1>Megaton Hammer" }
 - { id: OOT_COJIRO, item: OOT_COJIRO, add: [OOT_TRADE_ADULT, 2], flags: 0x80, draw: OOT_COJIRO, object: [oot, 0x0109], name: "<C1>Cojiro" }
 - { id: OOT_BOTTLE_EMPTY, item: OOT_BOTTLE_EMPTY, add: NONE, flags: 0x80, draw: BOTTLE_EMPTY, object: [oot, 0x00c6], name: "an <C1>Empty Bottle" }
@@ -56,7 +56,7 @@
 - { id: OOT_SCALE_GOLDEN, item: OOT_GOLDEN_SCALE, add: NONE, flags: 0x80, draw: OOT_SCALE_GOLD, object: [oot, 0x00db], name: "the <C1>Golden Scale" }
 - { id: OOT_STONE_OF_AGONY, item: OOT_STONE_OF_AGONY, add: NONE, flags: 0x80, draw: STONE_OF_AGONY, object: [oot, 0x00c8], name: "the <C1>Stone of Agony" }
 - { id: OOT_GERUDO_CARD, item: OOT_GERUDO_CARD, add: NONE, flags: 0x80, draw: OOT_GERUDO_CARD, object: [oot, 0x00d7], name: "the <C1>Gerudo's Card" }
-- { id: OOT_OCARINA_FAIRY, item: OOT_OCARINA_FAIRY, add: NONE, flags: 0x80, draw: OOT_OCARINA_FAIRY, object: [oot, 0x010e], name: "the <C1>Fairy Ocarina" }
+- { id: OOT_OCARINA_FAIRY, item: OOT_OCARINA_FAIRY, add: [OOT_OCARINA, 1], flags: 0x80, draw: OOT_OCARINA_FAIRY, object: [oot, 0x010e], name: "the <C1>Fairy Ocarina" }
 - { id: OOT_DEKU_SEEDS_5, item: OOT_SEEDS_5, add: NONE, flags: 0x50, draw: OOT_SEEDS, object: [oot, 0x0119], name: "<C0>5 Deku Seeds" }
 - { id: OOT_HEART_CONTAINER, item: OOT_HEART_CONTAINER, add: NONE, flags: 0x80, draw: HEART_CONTAINER, object: [oot, 0x00bd], name: "a <C0>Heart Container" }
 - { id: OOT_HEART_PIECE, item: OOT_HEART_PIECE, add: NONE, flags: 0x80, draw: HEART_PIECE, object: [oot, 0x00bd], name: "a <C0>Piece of Heart" }
@@ -470,7 +470,7 @@
 - { id: MM_UNK_49, add: NONE, flags: 0x00 }
 - { id: MM_UNK_4A, add: NONE, flags: 0x00 }
 - { id: MM_UNK_4B, add: NONE, flags: 0x00 }
-- { id: MM_OCARINA_OF_TIME, item: MM_OCARINA_OF_TIME, add: NONE, flags: 0xa0, draw: OCARINA_TIME, object: [mm, 0x00b5], name: "the <C1>Ocarina of Time" }
+- { id: MM_OCARINA_OF_TIME, item: MM_OCARINA_OF_TIME, add: [MM_OCARINA, 2], flags: 0xa0, draw: OCARINA_TIME, object: [mm, 0x00b5], name: "the <C1>Ocarina of Time" }
 - { id: MM_UNK_4D, add: NONE, flags: 0x00 }
 - { id: MM_UNK_4E, add: NONE, flags: 0x00 }
 - { id: MM_UNK_4F, add: NONE, flags: 0x00 }
@@ -624,7 +624,7 @@
 - { id: MM_COMPASS_SH, add: NONE, flags: 0xa0, draw: COMPASS, object: [mm, 0x0091], name: "the <C0>Compass (Snowhead)" }
 - { id: MM_COMPASS_GB, add: NONE, flags: 0xa0, draw: COMPASS, object: [mm, 0x0091], name: "the <C0>Compass (Great Bay)" }
 - { id: MM_COMPASS_ST, add: NONE, flags: 0xa0, draw: COMPASS, object: [mm, 0x0091], name: "the <C0>Compass (Stone Tower)" }
-- { id: MM_OCARINA_FAIRY, add: NONE, flags: 0xa0, draw: OOT_OCARINA_FAIRY, object: [oot, 0x010e], name: "the <C1>Fairy Ocarina" }
+- { id: MM_OCARINA_FAIRY, add: [MM_OCARINA, 1], flags: 0xa0, draw: OOT_OCARINA_FAIRY, object: [oot, 0x010e], name: "the <C1>Fairy Ocarina" }
 - { id: MM_HOOKSHOT_SHORT, add: [MM_HOOKSHOT, 1], flags: 0xa0, draw: OOT_HOOKSHOT, object: [oot, 0x00dd], name: "the <C1>Short Hookshot" }
 - { id: MM_SONG_SUN, add: NONE, flags: 0xa0, draw: [NOTE, 0x03], object: [mm, 0x008f], name: "the <C2>Sun's Song" }
 - { id: MM_WALLET, add: [MM_WALLET, 1], flags: 0xa0, draw: WALLET, object: [mm, 0x00a8], name: "the <C1>Child Wallet" }

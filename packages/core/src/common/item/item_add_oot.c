@@ -168,19 +168,6 @@ static void addMagicalRupee(int noEffect)
         addSilverRupeePouch(i, noEffect);
 }
 
-static void addOcarina(int level)
-{
-    u16 itemId;
-
-    if (level >= 2)
-        itemId = ITEM_OOT_OCARINA_TIME;
-    else
-        itemId = ITEM_OOT_OCARINA_FAIRY;
-    gOotSave.inventory.items[ITS_OOT_OCARINA] = itemId;
-    gOotExtraItems.ocarina |= (1 << (level - 1));
-    //reloadSlotOot(ITS_OOT_OCARINA);
-}
-
 void comboAddCommonItemOot(int sid, int noEffect)
 {
     switch (sid)
@@ -197,12 +184,6 @@ void comboAddCommonItemOot(int sid, int noEffect)
         break;
     case SITEM_SONG_SUN:
         gOotSave.inventory.quest.songSun = 1;
-        break;
-    case SITEM_OCARINA_FAIRY:
-        addOcarina(1);
-        break;
-    case SITEM_OCARINA_TIME:
-        addOcarina(2);
         break;
     case SITEM_HEART_PIECE:
         gOotSave.inventory.quest.heartPieces++;
@@ -283,20 +264,6 @@ void comboAddItemSharedOot(s16 gi, int noEffect)
     if (comboConfig(CFG_SHARED_SONG_SUN) && comboConfig(CFG_MM_SONG_SUN) && gi == GI_OOT_SONG_SUN)
     {
         comboAddCommonItemMm(SITEM_SONG_SUN, noEffect);
-    }
-
-    if (comboConfig(CFG_SHARED_OCARINA))
-    {
-        switch (gi)
-        {
-        case GI_OOT_OCARINA_FAIRY:
-            if (comboConfig(CFG_MM_OCARINA_FAIRY))
-                comboAddCommonItemMm(SITEM_OCARINA_FAIRY, noEffect);
-            break;
-        case GI_OOT_OCARINA_TIME:
-            comboAddCommonItemMm(SITEM_OCARINA_TIME, noEffect);
-            break;
-        }
     }
 
     if (comboConfig(CFG_SHARED_HEALTH))
@@ -437,12 +404,6 @@ int comboAddItemOot(s16 gi, int noEffect)
     (void)dungeonId;
     switch (gi)
     {
-    case GI_OOT_OCARINA_FAIRY:
-        addOcarina(1);
-        break;
-    case GI_OOT_OCARINA_TIME:
-        comboAddCommonItemOot(SITEM_OCARINA_TIME, noEffect);
-        break;
     case GI_OOT_MAGIC_BEAN:
         gOotSave.inventory.items[ITS_OOT_MAGIC_BEAN] = ITEM_OOT_MAGIC_BEAN;
         gOotSave.inventory.ammo[ITS_OOT_MAGIC_BEAN] = 10;

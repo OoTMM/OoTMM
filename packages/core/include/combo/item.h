@@ -34,6 +34,8 @@
 #define IA_MM_TRADE1        0x1a
 #define IA_MM_TRADE2        0x1b
 #define IA_MM_TRADE3        0x1c
+#define IA_OOT_OCARINA      0x1d
+#define IA_MM_OCARINA       0x1e
 #define IA_NONE             0xff
 
 typedef struct GameState_Play GameState_Play;

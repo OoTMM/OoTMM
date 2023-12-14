@@ -150,19 +150,6 @@ static void fillBottle(u16 itemId)
     }
 }
 
-static void addOcarina(int level)
-{
-    u8 itemId;
-
-    if (level >= 2)
-        itemId = ITEM_MM_OCARINA_OF_TIME;
-    else
-        itemId = ITEM_MM_OCARINA_FAIRY;
-    gMmSave.inventory.items[ITS_MM_OCARINA] = itemId;
-    gMmExtraItems.ocarina |= (1 << (level - 1));
-    //reloadSlotMm(ITS_MM_OCARINA);
-}
-
 void comboAddMagicUpgradeMm(int level)
 {
     gMmSave.playerData.magicAcquired = 1;
@@ -188,12 +175,6 @@ void comboAddCommonItemMm(int sid, int noEffect)
         break;
     case SITEM_SONG_STORMS:
         gMmSave.inventory.quest.songStorms = 1;
-        break;
-    case SITEM_OCARINA_FAIRY:
-        addOcarina(1);
-        break;
-    case SITEM_OCARINA_TIME:
-        addOcarina(2);
         break;
     case SITEM_HEART_PIECE:
         gMmSave.inventory.quest.heartPieces += 1;
@@ -275,19 +256,6 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
     if (comboConfig(CFG_SHARED_SONG_SUN) && gi == GI_MM_SONG_SUN)
     {
         comboAddCommonItemOot(SITEM_SONG_SUN, noEffect);
-    }
-
-    if (comboConfig(CFG_SHARED_OCARINA))
-    {
-        switch (gi)
-        {
-        case GI_MM_OCARINA_FAIRY:
-            comboAddCommonItemOot(SITEM_OCARINA_FAIRY, noEffect);
-            break;
-        case GI_MM_OCARINA_OF_TIME:
-            comboAddCommonItemOot(SITEM_OCARINA_TIME, noEffect);
-            break;
-        }
     }
 
     if (comboConfig(CFG_SHARED_HEALTH))
@@ -424,12 +392,6 @@ int comboAddItemMm(s16 gi, int noEffect)
     count = 0;
     switch (gi)
     {
-    case GI_MM_OCARINA_FAIRY:
-        comboAddCommonItemMm(SITEM_OCARINA_FAIRY, noEffect);
-        break;
-    case GI_MM_OCARINA_OF_TIME:
-        comboAddCommonItemMm(SITEM_OCARINA_TIME, noEffect);
-        break;
     case GI_MM_MAGIC_BEAN:
         gMmSave.inventory.items[ITS_MM_BEANS] = ITEM_MM_MAGIC_BEAN;
         gMmSave.inventory.ammo[ITS_MM_BEANS]++;
