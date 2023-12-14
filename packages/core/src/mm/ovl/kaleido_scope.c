@@ -73,7 +73,7 @@ void KaleidoScope_AfterSetCutsorColor(GameState_Play* play)
         if (press)
         {
             gSave.inventory.items[cursorSlot] = ITEM_MM_BOTTLED_SPRING_WATER;
-            reloadSlot(gPlay, cursorSlot);
+            reloadSlotOot(gPlay, cursorSlot);
             effect = 1;
         }
     }

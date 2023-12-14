@@ -25,15 +25,6 @@ static void reloadIconsC(GameState_Play* play)
         Interface_LoadItemIconImpl(play, i);
 }
 
-static void reloadHookshot(GameState_Play* play)
-{
-    Actor_Player* link;
-
-    link = GET_LINK(play);
-    link->state &= ~(PLAYER_ACTOR_STATE_HOLD_ITEM | PLAYER_ACTOR_STATE_USE_ITEM);
-    reloadIconsC(play);
-}
-
 static void addSilverPouchRupees(int id)
 {
     addRupees(gSilverRupeeData[id].count * 5);
@@ -227,9 +218,6 @@ int comboAddItemEffect(GameState_Play* play, s16 gi)
     case GI_MM_OCARINA_OF_TIME:
     case GI_MM_FAIRY:
         reloadIconsC(play);
-        break;
-    case GI_MM_HOOKSHOT:
-        reloadHookshot(play);
         break;
     }
 

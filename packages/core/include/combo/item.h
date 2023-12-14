@@ -27,6 +27,8 @@
 #define IA_OOT_STICKS       0x13
 #define IA_MM_STICKS        0x14
 #define IA_STICK_UPGRADE    0x15
+#define IA_OOT_HOOKSHOT     0x16
+#define IA_MM_HOOKSHOT      0x17
 #define IA_NONE             0xff
 
 typedef struct GameState_Play GameState_Play;
@@ -79,9 +81,8 @@ extern const u8 kMmTrade3[];
 
 void comboSyncItems(void);
 
-void reloadSlot(GameState_Play* play, int slot);
-void reloadSlotOot(int slot);
-void reloadSlotMm(int slot);
+void reloadSlotOot(GameState_Play* play, int slot);
+void reloadSlotMm(GameState_Play* play, int slot);
 
 int  comboAddItemMm(s16 gi, int noEffect);
 int  comboAddItemOot(s16 gi, int noEffect);

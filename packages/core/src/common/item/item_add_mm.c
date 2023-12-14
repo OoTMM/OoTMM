@@ -201,35 +201,6 @@ static void addTrade3(u8 index)
     gMmExtraTrade.tradeObtained3 |= (1 << (u16)index);
 }
 
-static void reloadSlotEquips(MmItemEquips* equips, int slot)
-{
-    for (int i = 0; i < 3; ++i)
-    {
-        if (equips->cButtonSlots[0][1 + i] == slot)
-        {
-            equips->buttonItems[0][1 + i] = gMmSave.inventory.items[slot];
-        }
-    }
-}
-
-void reloadSlotMm(int slot)
-{
-    reloadSlotEquips(&gMmSave.itemEquips, slot);
-}
-
-static void addHookshot(int level)
-{
-    u8 itemId;
-
-    if (level >= 2)
-        itemId = ITEM_MM_HOOKSHOT;
-    else
-        itemId = 0x11; // ITEM_MM_BOTTLE_POTION_RED but that enum is wrong
-    gMmSave.inventory.items[ITS_MM_HOOKSHOT] = itemId;
-    gMmExtraItems.hookshot |= (1 << (level - 1));
-    reloadSlotMm(ITS_MM_HOOKSHOT);
-}
-
 static void addOcarina(int level)
 {
     u8 itemId;
@@ -240,7 +211,7 @@ static void addOcarina(int level)
         itemId = ITEM_MM_OCARINA_FAIRY;
     gMmSave.inventory.items[ITS_MM_OCARINA] = itemId;
     gMmExtraItems.ocarina |= (1 << (level - 1));
-    reloadSlotMm(ITS_MM_OCARINA);
+    //reloadSlotMm(ITS_MM_OCARINA);
 }
 
 void comboAddMagicUpgradeMm(int level)
@@ -268,12 +239,6 @@ void comboAddCommonItemMm(int sid, int noEffect)
         break;
     case SITEM_SONG_STORMS:
         gMmSave.inventory.quest.songStorms = 1;
-        break;
-    case SITEM_HOOKSHOT:
-        addHookshot(1);
-        break;
-    case SITEM_LONGSHOT:
-        addHookshot(2);
         break;
     case SITEM_OCARINA_FAIRY:
         addOcarina(1);
@@ -361,22 +326,6 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
     if (comboConfig(CFG_SHARED_SONG_SUN) && gi == GI_MM_SONG_SUN)
     {
         comboAddCommonItemOot(SITEM_SONG_SUN, noEffect);
-    }
-
-    if (comboConfig(CFG_SHARED_HOOKSHOT))
-    {
-        switch (gi)
-        {
-        case GI_MM_HOOKSHOT_SHORT:
-            comboAddCommonItemOot(SITEM_HOOKSHOT, noEffect);
-            break;
-        case GI_MM_HOOKSHOT:
-            if (comboConfig(CFG_MM_HOOKSHOT_SHORT))
-                comboAddCommonItemOot(SITEM_LONGSHOT, noEffect);
-            else
-                comboAddCommonItemOot(SITEM_HOOKSHOT, noEffect);
-            break;
-        }
     }
 
     if (comboConfig(CFG_SHARED_OCARINA))
@@ -539,12 +488,6 @@ int comboAddItemMm(s16 gi, int noEffect)
     case GI_MM_POWDER_KEG:
         gMmSave.inventory.items[ITS_MM_KEG] = ITEM_MM_POWDER_KEG;
         gMmSave.inventory.ammo[ITS_MM_KEG] = 1;
-        break;
-    case GI_MM_HOOKSHOT_SHORT:
-        comboAddCommonItemMm(SITEM_HOOKSHOT, noEffect);
-        break;
-    case GI_MM_HOOKSHOT:
-        comboAddCommonItemMm(SITEM_LONGSHOT, noEffect);
         break;
     case GI_MM_BOTTLE_EMPTY:
         addNewBottle(ITEM_MM_BOTTLE_EMPTY);

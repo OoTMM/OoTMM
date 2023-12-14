@@ -78,6 +78,79 @@ static const u8 kItemSlotsMasksMm[] = {
 
 typedef int (*AddItemFunc)(GameState_Play* play, u8 itemId, s16 gi, u16 param);
 
+static void reloadSlotEquipsOot(OotItemEquips* equips, int slot)
+{
+    for (int i = 0; i < 3; ++i)
+    {
+        if (equips->cButtonSlots[i] == slot)
+        {
+            equips->buttonItems[1 + i] = gOotSave.inventory.items[slot];
+        }
+    }
+}
+
+void reloadSlotRawOot(int slot)
+{
+    reloadSlotEquipsOot(&gOotSave.equips, slot);
+    reloadSlotEquipsOot(&gOotSave.childEquips, slot);
+    reloadSlotEquipsOot(&gOotSave.adultEquips, slot);
+}
+
+static void reloadSlotEquipsMm(MmItemEquips* equips, int slot)
+{
+    for (int i = 0; i < 3; ++i)
+    {
+        if (equips->cButtonSlots[0][1 + i] == slot)
+        {
+            equips->buttonItems[0][1 + i] = gMmSave.inventory.items[slot];
+        }
+    }
+}
+
+static void reloadSlotRawMm(int slot)
+{
+    reloadSlotEquipsMm(&gMmSave.itemEquips, slot);
+}
+
+void reloadSlotOot(GameState_Play* play, int slot)
+{
+    reloadSlotRawOot(slot);
+
+#if defined(GAME_OOT)
+    if (play)
+    {
+        for (int i = 1; i < 4; ++i)
+            Interface_LoadItemIconImpl(play, i);
+    }
+#endif
+}
+
+void reloadSlotMm(GameState_Play* play, int slot)
+{
+    reloadSlotRawMm(slot);
+
+#if defined(GAME_MM)
+    if (play)
+    {
+        for (int i = 1; i < 4; ++i)
+            Interface_LoadItemIconImpl(play, i);
+    }
+#endif
+}
+
+#if defined(GAME_MM)
+static void reloadHookshot(GameState_Play* play)
+{
+    Actor_Player* link;
+
+    if (play)
+    {
+        link = GET_LINK(play);
+        link->state &= ~(PLAYER_ACTOR_STATE_HOLD_ITEM | PLAYER_ACTOR_STATE_USE_ITEM);
+    }
+}
+#endif
+
 static void addRupeesEffect(s16 delta)
 {
 #if defined(GAME_OOT)
@@ -537,6 +610,72 @@ static int addItemSticksUpgrade(GameState_Play* play, u8 itemId, s16 gi, u16 par
     return 0;
 }
 
+static void addHookshotRawOot(GameState_Play* play, int level)
+{
+    u16 itemId;
+
+    if (level >= 2)
+        itemId = ITEM_OOT_LONGSHOT;
+    else
+        itemId = ITEM_OOT_HOOKSHOT;
+    gOotSave.inventory.items[ITS_OOT_HOOKSHOT] = itemId;
+    gOotExtraItems.hookshot |= (1 << (level - 1));
+    reloadSlotOot(play, ITS_OOT_HOOKSHOT);
+}
+
+static void addHookshotRawMm(GameState_Play* play, int level)
+{
+    u8 itemId;
+
+    if (level >= 2)
+        itemId = ITEM_MM_HOOKSHOT;
+    else
+        itemId = 0x11; // ITEM_MM_BOTTLE_POTION_RED but that enum is wrong
+    gMmSave.inventory.items[ITS_MM_HOOKSHOT] = itemId;
+    gMmExtraItems.hookshot |= (1 << (level - 1));
+    reloadSlotMm(play, ITS_MM_HOOKSHOT);
+#if defined(GAME_MM)
+    if (comboConfig(CFG_MM_HOOKSHOT_SHORT) && level >= 2)
+        reloadHookshot(play);
+#endif
+}
+
+static void addHookshotOot(GameState_Play* play, int level)
+{
+    addHookshotRawOot(play, level);
+    if (comboConfig(CFG_SHARED_HOOKSHOT))
+    {
+        if (comboConfig(CFG_MM_HOOKSHOT_SHORT))
+            addHookshotRawMm(play, level);
+        else
+            addHookshotRawMm(play, 2);
+    }
+}
+
+static void addHookshotMm(GameState_Play* play, int level)
+{
+    addHookshotRawMm(play, level);
+    if (comboConfig(CFG_SHARED_HOOKSHOT))
+    {
+        if (comboConfig(CFG_MM_HOOKSHOT_SHORT))
+            addHookshotRawOot(play, level);
+        else
+            addHookshotRawOot(play, 1);
+    }
+}
+
+static int addItemHookshotOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    addHookshotOot(play, param);
+    return 0;
+}
+
+static int addItemHookshotMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    addHookshotMm(play, param);
+    return 0;
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -560,6 +699,8 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemSticksOot,
     addItemSticksMm,
     addItemSticksUpgrade,
+    addItemHookshotOot,
+    addItemHookshotMm,
 };
 
 extern const u8 kAddItemFuncs[];

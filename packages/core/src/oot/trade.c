@@ -4,13 +4,13 @@
 void comboToggleTradeAdult(void)
 {
     comboToggleTrade(gSave.inventory.items + ITS_OOT_TRADE_ADULT, gOotExtraTrade.adult, kOotTradeAdult, 11);
-    reloadSlot(gPlay, ITS_OOT_TRADE_ADULT);
+    reloadSlotOot(gPlay, ITS_OOT_TRADE_ADULT);
 }
 
 void comboToggleTradeChild(void)
 {
     comboToggleTrade(gSave.inventory.items + ITS_OOT_TRADE_CHILD, gOotExtraTrade.child, kOotTradeChild, 11);
-    reloadSlot(gPlay, ITS_OOT_TRADE_CHILD);
+    reloadSlotOot(gPlay, ITS_OOT_TRADE_CHILD);
 }
 
 void comboToggleOcarina(void)
@@ -26,7 +26,7 @@ void comboToggleOcarina(void)
     {
         *slot = ITEM_OOT_OCARINA_FAIRY;
     }
-    reloadSlot(gPlay, ITS_OOT_OCARINA);
+    reloadSlotOot(gPlay, ITS_OOT_OCARINA);
 }
 
 void comboToggleHookshot(void)
@@ -42,7 +42,7 @@ void comboToggleHookshot(void)
     {
         *slot = ITEM_OOT_HOOKSHOT;
     }
-    reloadSlot(gPlay, ITS_OOT_HOOKSHOT);
+    reloadSlotOot(gPlay, ITS_OOT_HOOKSHOT);
 }
 
 static void removeButtonItem(u16 itemId)

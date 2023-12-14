@@ -5,8 +5,8 @@
 - { id: OOT_SLINGSHOT, item: OOT_SLINGSHOT, add: [SLINGSHOT, 1], flags: 0x80, draw: OOT_SLINGSHOT, object: [oot, 0x00e7], name: "the <C1>Fairy Slingshot" }
 - { id: OOT_BOOMERANG, item: OOT_BOOMERANG, add: OOT_NORMAL, flags: 0x80, draw: OOT_BOOMERANG, object: [oot, 0x00e8], name: "the <C1>Boomerang" }
 - { id: OOT_STICK, item: OOT_STICK, add: [OOT_STICKS, 1], flags: 0x0d, draw: DEKU_STICK, object: [oot, 0x00c7], name: "a <C0>Deku Stick" }
-- { id: OOT_HOOKSHOT, item: OOT_HOOKSHOT, add: NONE, flags: 0x80, draw: OOT_HOOKSHOT, object: [oot, 0x00dd], name: "the <C1>Hookshot" }
-- { id: OOT_LONGSHOT, item: OOT_LONGSHOT, add: NONE, flags: 0x80, draw: OOT_LONGSHOT, object: [oot, 0x00dd], name: "the <C1>Longshot" }
+- { id: OOT_HOOKSHOT, item: OOT_HOOKSHOT, add: [OOT_HOOKSHOT, 1], flags: 0x80, draw: OOT_HOOKSHOT, object: [oot, 0x00dd], name: "the <C1>Hookshot" }
+- { id: OOT_LONGSHOT, item: OOT_LONGSHOT, add: [OOT_HOOKSHOT, 2], flags: 0x80, draw: OOT_LONGSHOT, object: [oot, 0x00dd], name: "the <C1>Longshot" }
 - { id: OOT_LENS, item: OOT_LENS, add: OOT_NORMAL, flags: 0x80, draw: LENS, object: [oot, 0x00ea], name: "the <C1>Lens of Truth" }
 - { id: OOT_ZELDA_LETTER, item: OOT_ZELDA_LETTER, add: NONE, flags: 0x80, draw: OOT_ZELDA_LETTER, object: [oot, 0x00ef], name: "<C1>Zelda's Letter" }
 - { id: OOT_OCARINA_TIME, item: OOT_OCARINA_TIME, add: NONE, flags: 0x80, draw: OCARINA_TIME, object: [oot, 0x00de], name: "the <C1>Ocarina of Time" }
@@ -459,7 +459,7 @@
 - { id: MM_MAP, item: MM_MAP, add: NONE, flags: 0xa0, draw: MAP, object: [mm, 0x00a0], name: "the <C0>Dungeon Map" }
 - { id: MM_COMPASS, item: MM_COMPASS, add: NONE, flags: 0xa0, draw: COMPASS, object: [mm, 0x0091], name: "the <C0>Compass" }
 - { id: MM_UNK_40, add: NONE, flags: 0x00 }
-- { id: MM_HOOKSHOT, item: MM_HOOKSHOT, add: NONE, flags: 0xa0, draw: MM_HOOKSHOT, object: [mm, 0x00b4], name: "the <C1>Hookshot" }
+- { id: MM_HOOKSHOT, item: MM_HOOKSHOT, add: [MM_HOOKSHOT, 2], flags: 0xa0, draw: MM_HOOKSHOT, object: [mm, 0x00b4], name: "the <C1>Hookshot" }
 - { id: MM_LENS, item: MM_LENS_OF_TRUTH, add: MM_NORMAL, flags: 0xa0, draw: LENS, object: [mm, 0x00c0], name: "the <C1>Lens of Truth" }
 - { id: MM_PICTOGRAPH_BOX, item: MM_PICTOGRAPH_BOX, add: MM_NORMAL, flags: 0xa0, draw: MM_PICTOBOX, object: [mm, 0x0228], name: "the <C1>Pictograph Box" }
 - { id: MM_UNK_44, add: NONE, flags: 0x00 }
@@ -625,7 +625,7 @@
 - { id: MM_COMPASS_GB, add: NONE, flags: 0xa0, draw: COMPASS, object: [mm, 0x0091], name: "the <C0>Compass (Great Bay)" }
 - { id: MM_COMPASS_ST, add: NONE, flags: 0xa0, draw: COMPASS, object: [mm, 0x0091], name: "the <C0>Compass (Stone Tower)" }
 - { id: MM_OCARINA_FAIRY, add: NONE, flags: 0xa0, draw: OOT_OCARINA_FAIRY, object: [oot, 0x010e], name: "the <C1>Fairy Ocarina" }
-- { id: MM_HOOKSHOT_SHORT, add: NONE, flags: 0xa0, draw: OOT_HOOKSHOT, object: [oot, 0x00dd], name: "the <C1>Short Hookshot" }
+- { id: MM_HOOKSHOT_SHORT, add: [MM_HOOKSHOT, 1], flags: 0xa0, draw: OOT_HOOKSHOT, object: [oot, 0x00dd], name: "the <C1>Short Hookshot" }
 - { id: MM_SONG_SUN, add: NONE, flags: 0xa0, draw: [NOTE, 0x03], object: [mm, 0x008f], name: "the <C2>Sun's Song" }
 - { id: MM_WALLET, add: [MM_WALLET, 1], flags: 0xa0, draw: WALLET, object: [mm, 0x00a8], name: "the <C1>Child Wallet" }
 - { id: MM_WALLET4, add: [MM_WALLET, 4], flags: 0xa0, draw: WALLET4, object: [mm, 0x00a8], name: "the <C1>Colossal Wallet" }

@@ -226,37 +226,6 @@ static void addMagicalRupee(int noEffect)
         addSilverRupeePouch(i, noEffect);
 }
 
-static void reloadSlotEquips(OotItemEquips* equips, int slot)
-{
-    for (int i = 0; i < 3; ++i)
-    {
-        if (equips->cButtonSlots[i] == slot)
-        {
-            equips->buttonItems[1 + i] = gOotSave.inventory.items[slot];
-        }
-    }
-}
-
-void reloadSlotOot(int slot)
-{
-    reloadSlotEquips(&gOotSave.equips, slot);
-    reloadSlotEquips(&gOotSave.childEquips, slot);
-    reloadSlotEquips(&gOotSave.adultEquips, slot);
-}
-
-static void addHookshot(int level)
-{
-    u16 itemId;
-
-    if (level >= 2)
-        itemId = ITEM_OOT_LONGSHOT;
-    else
-        itemId = ITEM_OOT_HOOKSHOT;
-    gOotSave.inventory.items[ITS_OOT_HOOKSHOT] = itemId;
-    gOotExtraItems.hookshot |= (1 << (level - 1));
-    reloadSlotOot(ITS_OOT_HOOKSHOT);
-}
-
 static void addOcarina(int level)
 {
     u16 itemId;
@@ -267,7 +236,7 @@ static void addOcarina(int level)
         itemId = ITEM_OOT_OCARINA_FAIRY;
     gOotSave.inventory.items[ITS_OOT_OCARINA] = itemId;
     gOotExtraItems.ocarina |= (1 << (level - 1));
-    reloadSlotOot(ITS_OOT_OCARINA);
+    //reloadSlotOot(ITS_OOT_OCARINA);
 }
 
 void comboAddCommonItemOot(int sid, int noEffect)
@@ -286,12 +255,6 @@ void comboAddCommonItemOot(int sid, int noEffect)
         break;
     case SITEM_SONG_SUN:
         gOotSave.inventory.quest.songSun = 1;
-        break;
-    case SITEM_HOOKSHOT:
-        addHookshot(1);
-        break;
-    case SITEM_LONGSHOT:
-        addHookshot(2);
         break;
     case SITEM_OCARINA_FAIRY:
         addOcarina(1);
@@ -393,22 +356,6 @@ void comboAddItemSharedOot(s16 gi, int noEffect)
     if (comboConfig(CFG_SHARED_SONG_SUN) && comboConfig(CFG_MM_SONG_SUN) && gi == GI_OOT_SONG_SUN)
     {
         comboAddCommonItemMm(SITEM_SONG_SUN, noEffect);
-    }
-
-    if (comboConfig(CFG_SHARED_HOOKSHOT))
-    {
-        switch (gi)
-        {
-        case GI_OOT_HOOKSHOT:
-            if (comboConfig(CFG_MM_HOOKSHOT_SHORT))
-                comboAddCommonItemMm(SITEM_HOOKSHOT, noEffect);
-            else
-                comboAddCommonItemMm(SITEM_LONGSHOT, noEffect);
-            break;
-        case GI_OOT_LONGSHOT:
-            comboAddCommonItemMm(SITEM_LONGSHOT, noEffect);
-            break;
-        }
     }
 
     if (comboConfig(CFG_SHARED_OCARINA))
@@ -583,12 +530,6 @@ int comboAddItemOot(s16 gi, int noEffect)
         break;
     case GI_OOT_OCARINA_TIME:
         comboAddCommonItemOot(SITEM_OCARINA_TIME, noEffect);
-        break;
-    case GI_OOT_HOOKSHOT:
-        comboAddCommonItemOot(SITEM_HOOKSHOT, noEffect);
-        break;
-    case GI_OOT_LONGSHOT:
-        comboAddCommonItemOot(SITEM_LONGSHOT, noEffect);
         break;
     case GI_OOT_MAGIC_BEAN:
         gOotSave.inventory.items[ITS_OOT_MAGIC_BEAN] = ITEM_OOT_MAGIC_BEAN;

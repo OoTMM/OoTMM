@@ -205,8 +205,6 @@ int comboAddItemEffect(GameState_Play* play, s16 gi)
         dungeonId = dungeon(play, 1);
         comboAddBossKeyOot(dungeonId);
         break;
-    case GI_OOT_HOOKSHOT:
-    case GI_OOT_LONGSHOT:
     case GI_OOT_OCARINA_FAIRY:
     case GI_OOT_OCARINA_TIME:
     case GI_OOT_POTION_RED:
