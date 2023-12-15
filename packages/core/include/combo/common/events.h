@@ -125,6 +125,7 @@
 # define MM_SET_EVENT_WEEK(x)       (gMmSave.weekEventReg[(x) / 8] |= (1 << ((x) % 8)))
 # define MM_CLEAR_EVENT_WEEK(x)     (gMmSave.weekEventReg[(x) / 8] &= ~(1 << ((x) % 8)))
 # define MM_GET_EVENT_WEEK(x)       (gMmSave.weekEventReg[(x) / 8] & (1 << ((x) % 8)))
+# define MM_CHECK_EVENT_INF(x)      (gMmSave.eventInf[(x) >> 4] & (1 << ((x) & 0xf)))
 int  GetEventChk(int index);
 void SetEventChk(int index);
 #endif

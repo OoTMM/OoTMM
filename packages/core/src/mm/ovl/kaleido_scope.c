@@ -228,6 +228,8 @@ static int canSave(GameState_Play* play)
         return 0;
     case SCE_MM_CLOCK_TOWER_ROOFTOP:
         return !!comboConfig(CFG_ER_MOON);
+    case SCE_MM_SOUTHERN_SWAMP:
+        return gSave.entranceIndex != 0x8460 && !MM_CHECK_EVENT_INF(0x35) && !MM_CHECK_EVENT_INF(0x41);
     default:
         return 1;
     }
