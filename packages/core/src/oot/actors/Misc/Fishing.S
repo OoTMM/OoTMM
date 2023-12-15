@@ -71,9 +71,12 @@ PATCH_START 0x80a35964
   nop
 PATCH_END
 
+/* Ugly fix to circumvent an overlapping range (TODO: find a better way)*/
+PATCH_GROUP PG_OOT_NOT_FISHING_POND_SHUFFLE
 PATCH_START 0x80a35988
   nop
 PATCH_END
+PATCH_GROUP_END
 
 PATCH_START 0x80a3d570
   jal     FishBite
