@@ -43,12 +43,6 @@ static void refillMagic(int level)
     gSaveContext.magicFillTarget = 0x30 * level;
 }
 
-static void reloadIconsC(GameState_Play* play)
-{
-    for (int i = 1; i < 4; i++)
-        Interface_LoadItemIconImpl(play, i);
-}
-
 void comboAddItemSharedForeignEffect(GameState_Play* play, s16 gi)
 {
     if (comboConfig(CFG_SHARED_HEALTH))
@@ -204,21 +198,6 @@ int comboAddItemEffect(GameState_Play* play, s16 gi)
     case GI_OOT_BOSS_KEY:
         dungeonId = dungeon(play, 1);
         comboAddBossKeyOot(dungeonId);
-        break;
-    case GI_OOT_POTION_RED:
-    case GI_OOT_POTION_BLUE:
-    case GI_OOT_POTION_GREEN:
-    case GI_OOT_BOTTLE_MILK:
-    case GI_OOT_BOTTLE_POTION_RED:
-    case GI_OOT_BOTTLE_POTION_GREEN:
-    case GI_OOT_BOTTLE_POTION_BLUE:
-    case GI_OOT_FISH:
-    case GI_OOT_BLUE_FIRE:
-    case GI_OOT_BUG:
-    case GI_OOT_MILK:
-    case GI_OOT_FAIRY:
-    case GI_OOT_POE:
-        reloadIconsC(play);
         break;
     }
 

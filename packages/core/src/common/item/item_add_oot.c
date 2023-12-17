@@ -92,43 +92,6 @@ void comboAddBombsOot(int count)
     addAmmo(ITS_OOT_BOMBS, ITEM_OOT_BOMB, max, count);
 }
 
-static void addNewBottle(u16 itemId)
-{
-    for (int i = 0; i < 4; ++i)
-    {
-        if (gOotSave.inventory.items[ITS_OOT_BOTTLE + i] == ITEM_NONE)
-        {
-            gOotSave.inventory.items[ITS_OOT_BOTTLE + i] = itemId;
-            return;
-        }
-    }
-}
-
-static void fillBottle(u16 itemId)
-{
-    int slot;
-
-    slot = -1;
-    for (int i = 0; i < 4; ++i)
-    {
-        if (gOotSave.inventory.items[ITS_OOT_BOTTLE + i] == ITEM_OOT_BOTTLE_EMPTY)
-        {
-            slot = i;
-            break;
-        }
-    }
-    if (slot == -1)
-        return;
-    gOotSave.inventory.items[ITS_OOT_BOTTLE + slot] = itemId;
-    for (int i = 0; i < 3; ++i)
-    {
-        if (gOotSave.equips.cButtonSlots[i] == ITS_OOT_BOTTLE + slot)
-        {
-            gOotSave.equips.buttonItems[1 + i] = itemId;
-        }
-    }
-}
-
 void comboAddBombBagOot(int level)
 {
     gOotSave.inventory.items[ITS_OOT_BOMBS] = ITEM_OOT_BOMB;
@@ -407,52 +370,6 @@ int comboAddItemOot(s16 gi, int noEffect)
     case GI_OOT_MAGIC_BEAN:
         gOotSave.inventory.items[ITS_OOT_MAGIC_BEAN] = ITEM_OOT_MAGIC_BEAN;
         gOotSave.inventory.ammo[ITS_OOT_MAGIC_BEAN] = 10;
-        break;
-    case GI_OOT_BOTTLE_EMPTY:
-        addNewBottle(ITEM_OOT_BOTTLE_EMPTY);
-        break;
-    case GI_OOT_RUTO_LETTER:
-        addNewBottle(ITEM_OOT_RUTO_LETTER);
-        gOotExtraItems.rutoLetter = 1;
-        break;
-    case GI_OOT_BOTTLE_MILK:
-        addNewBottle(ITEM_OOT_MILK);
-        break;
-    case GI_OOT_BOTTLE_POTION_RED:
-        addNewBottle(ITEM_OOT_POTION_RED);
-        break;
-    case GI_OOT_BOTTLE_POTION_GREEN:
-        addNewBottle(ITEM_OOT_POTION_GREEN);
-        break;
-    case GI_OOT_BOTTLE_POTION_BLUE:
-        addNewBottle(ITEM_OOT_POTION_BLUE);
-        break;
-    case GI_OOT_POTION_RED:
-        fillBottle(ITEM_OOT_POTION_RED);
-        break;
-    case GI_OOT_POTION_BLUE:
-        fillBottle(ITEM_OOT_POTION_BLUE);
-        break;
-    case GI_OOT_POTION_GREEN:
-        fillBottle(ITEM_OOT_POTION_GREEN);
-        break;
-    case GI_OOT_FISH:
-        fillBottle(ITEM_OOT_FISH);
-        break;
-    case GI_OOT_BLUE_FIRE:
-        fillBottle(ITEM_OOT_BLUE_FIRE);
-        break;
-    case GI_OOT_BUG:
-        fillBottle(ITEM_OOT_BUG);
-        break;
-    case GI_OOT_FAIRY:
-        fillBottle(ITEM_OOT_FAIRY);
-        break;
-    case GI_OOT_POE:
-        fillBottle(ITEM_OOT_POE);
-        break;
-    case GI_OOT_MILK:
-        fillBottle(ITEM_OOT_MILK);
         break;
     case GI_OOT_SWORD_KOKIRI:
         gOotSave.inventory.equipment.swords |= EQ_OOT_SWORD_KOKIRI;

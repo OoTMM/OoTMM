@@ -84,7 +84,11 @@ async function genGI() {
     cgSource.raw(`    IA_${gi.addFunc},`);
   }
   cgSource.raw('};');
-  cgSource.table('kAddItemParams', 'u16', Object.values(DATA_GI).map(gi => gi.addParam));
+  cgSource.raw('const u16 kAddItemParams[] = {');
+  for (const gi of Object.values(DATA_GI)) {
+    cgSource.raw(`    ${gi.addParam},`);
+  }
+  cgSource.raw('};');
   await cgSource.emit();
 }
 

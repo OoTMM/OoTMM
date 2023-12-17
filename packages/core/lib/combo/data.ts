@@ -42,7 +42,7 @@ type DataGi = {
   draw: string;
   drawParam: number;
   addFunc: string;
-  addParam: number;
+  addParam: string;
   object: { type: 'oot' | 'mm', id: number } | { type: 'custom', id: string } | null;
   name: string;
 };
@@ -81,18 +81,18 @@ for (let i = 0; i < rawGi.length; ++i) {
   }
   const name = v.name || "";
   let addFunc: string;
-  let addParam: number;
+  let addParam: string;
   if (v.add) {
     if (isArray(v.add)) {
       addFunc = v.add[0];
-      addParam = v.add[1];
+      addParam = v.add[1].toString();
     } else {
       addFunc = v.add;
-      addParam = 0;
+      addParam = '0';
     }
   } else {
     addFunc = 'NONE';
-    addParam = 0;
+    addParam = '0';
   }
   DATA_GI[id] = { index, id, item, flags, draw, drawParam, object, name, addFunc, addParam };
 }
