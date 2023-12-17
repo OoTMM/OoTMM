@@ -483,29 +483,29 @@
 - { id: MM_UNK_56, item: MM_REMAINS_GOHT, add: NONE, flags: 0x80, name: "<C3>Goht's Remains" }
 - { id: MM_UNK_57, item: MM_REMAINS_GYORG, add: NONE, flags: 0x80, name: "<C3>Gyorg's Remains" }
 - { id: MM_UNK_58, item: MM_REMAINS_TWINMOLD, add: NONE, flags: 0x80, name: "<C3>Twinmold's Remains" }
-- { id: MM_BOTTLE_POTION_RED, item: MM_BOTTLE_POTION_RED, add: NONE, flags: 0x80, draw: BOTTLE_POTION, object: [mm, 0x0196], name: "a <C1>bottle of Red Potion" }
-- { id: MM_BOTTLE_EMPTY, item: MM_BOTTLE_EMPTY, add: NONE, flags: 0x80, draw: BOTTLE_EMPTY, object: [mm, 0x009e], name: "an <C1>Empty Bottle" }
-- { id: MM_POTION_RED, item: MM_POTION_RED, add: NONE, flags: 0x80, draw: POTION_RED, object: [mm, 0x00c1], name: "a <C0>Red Potion" }
-- { id: MM_POTION_GREEN, item: MM_POTION_GREEN, add: NONE, flags: 0x80, draw: POTION_GREEN, object: [mm, 0x00c1], name: "a <C0>Green Potion" }
-- { id: MM_POTION_BLUE, item: MM_POTION_BLUE, add: NONE, flags: 0x80, draw: POTION_BLUE, object: [mm, 0x00c1], name: "a <C0>Blue Potion" }
-- { id: MM_FAIRY, item: MM_FAIRY, add: NONE, flags: 0x80, draw: FAIRY, object: [oot, 0x0177], name: "a <C0>Fairy" }
+- { id: MM_BOTTLE_POTION_RED, item: MM_POTION_RED, add: MM_BOTTLE_NEW, flags: 0x80, draw: BOTTLE_POTION, object: [mm, 0x0196], name: "a <C1>bottle of Red Potion" }
+- { id: MM_BOTTLE_EMPTY, item: MM_BOTTLE_EMPTY, add: MM_BOTTLE_NEW, flags: 0x80, draw: BOTTLE_EMPTY, object: [mm, 0x009e], name: "an <C1>Empty Bottle" }
+- { id: MM_POTION_RED, item: MM_POTION_RED, add: MM_BOTTLE_REFILL, flags: 0x80, draw: POTION_RED, object: [mm, 0x00c1], name: "a <C0>Red Potion" }
+- { id: MM_POTION_GREEN, item: MM_POTION_GREEN, add: MM_BOTTLE_REFILL, flags: 0x80, draw: POTION_GREEN, object: [mm, 0x00c1], name: "a <C0>Green Potion" }
+- { id: MM_POTION_BLUE, item: MM_POTION_BLUE, add: MM_BOTTLE_REFILL, flags: 0x80, draw: POTION_BLUE, object: [mm, 0x00c1], name: "a <C0>Blue Potion" }
+- { id: MM_FAIRY, item: MM_FAIRY, add: MM_BOTTLE_REFILL, flags: 0x80, draw: FAIRY, object: [oot, 0x0177], name: "a <C0>Fairy" }
 - { id: MM_UNK_5F, item: MM_FAIRY, add: NONE, flags: 0x80, draw: BOTTLE_EMPTY, object: [mm, 0x009e] }
-- { id: MM_BOTTLE_MILK, item: MM_MILK, add: NONE, flags: 0x80, draw: BOTTLE_MILK, object: [mm, 0x00b6], name: "a <C1>bottle of Milk" }
+- { id: MM_BOTTLE_MILK, item: MM_MILK, add: MM_BOTTLE_NEW, flags: 0x80, draw: BOTTLE_MILK, object: [mm, 0x00b6], name: "a <C1>bottle of Milk" }
 - { id: MM_UNK_61, item: MM_MILK_HALF, add: NONE, flags: 0x80, draw: BOTTLE_MILK, object: [mm, 0x00b6] }
-- { id: MM_FISH, item: MM_FISH, add: NONE, flags: 0x80, draw: FISH, object: [mm, 0x00c7], name: "a <C0>Fish" }
-- { id: MM_BUGS, item: MM_BUG, add: NONE, flags: 0x80, draw: BUG, object: [mm, 0x0137], name: "a <C0>Bug" }
-- { id: MM_UNK_64, item: MM_BLUE_FIRE, add: NONE, flags: 0x00 }
-- { id: MM_UNK_65, item: MM_BOTTLE_EMPTY, add: NONE, flags: 0x80, draw: BOTTLE_EMPTY, object: [mm, 0x009e] }
-- { id: MM_BIG_POE, item: MM_BOTTLED_BIG_POE, add: NONE, flags: 0x80, draw: BIG_POE, object: [mm, 0x0139], name: "a <C0>Big Poe" }
-- { id: MM_UNK_67, item: MM_BOTTLED_SPRING_WATER, add: NONE, flags: 0x00, name: "some <C0>Spring Water" }
-- { id: MM_UNK_68, item: MM_BOTTLED_SPRING_WATER_HOT, add: NONE, flags: 0x00, name: "some <C0>Hot Spring Water" }
-- { id: MM_ZORA_EGG, item: MM_BOTTLED_ZORA_EGG, add: NONE, flags: 0x80, draw: MM_ZORA_EGG, object: [mm, 0x01ae], name: "a <C1>Zora Egg" }
-- { id: MM_BOTTLED_GOLD_DUST, item: MM_BOTTLED_GOLD_DUST, add: NONE, flags: 0x80, draw: MM_BOTTLED_GOLD_DUST, object: [mm, 0x01e9], name: "a <C1>bottle of Gold Dust" }
-- { id: MM_WEIRD_MUSHROOM, item: MM_BOTTLED_MAGIC_MUSHROOM, add: NONE, flags: 0x80, draw: MM_MAGIC_MUSHROOM, object: [mm, 0x021d], name: "a <C0>Magic Mushroom" }
+- { id: MM_FISH, item: MM_FISH, add: MM_BOTTLE_REFILL, flags: 0x80, draw: FISH, object: [mm, 0x00c7], name: "a <C0>Fish" }
+- { id: MM_BUGS, item: MM_BUG, add: MM_BOTTLE_REFILL, flags: 0x80, draw: BUG, object: [mm, 0x0137], name: "a <C0>Bug" }
+- { id: MM_UNK_64, item: MM_BLUE_FIRE, add: MM_BOTTLE_REFILL, flags: 0x00 }
+- { id: MM_UNK_65, item: MM_BOTTLE_EMPTY, flags: 0x80, draw: BOTTLE_EMPTY, object: [mm, 0x009e] }
+- { id: MM_BIG_POE, item: MM_BIG_POE, add: MM_BOTTLE_REFILL, flags: 0x80, draw: BIG_POE, object: [mm, 0x0139], name: "a <C0>Big Poe" }
+- { id: MM_UNK_67, item: MM_SPRING_WATER, add: MM_BOTTLE_REFILL, flags: 0x00, name: "some <C0>Spring Water" }
+- { id: MM_UNK_68, item: MM_SPRING_WATER_HOT, add: MM_BOTTLE_REFILL, flags: 0x00, name: "some <C0>Hot Spring Water" }
+- { id: MM_ZORA_EGG, item: MM_ZORA_EGG, add: MM_BOTTLE_REFILL, flags: 0x80, draw: MM_ZORA_EGG, object: [mm, 0x01ae], name: "a <C1>Zora Egg" }
+- { id: MM_BOTTLED_GOLD_DUST, item: MM_GOLD_DUST, add: MM_BOTTLE_NEW, flags: 0x80, draw: MM_BOTTLED_GOLD_DUST, object: [mm, 0x01e9], name: "a <C1>bottle of Gold Dust" }
+- { id: MM_WEIRD_MUSHROOM, item: MM_MAGIC_MUSHROOM, add: MM_BOTTLE_REFILL, flags: 0x80, draw: MM_MAGIC_MUSHROOM, object: [mm, 0x021d], name: "a <C0>Magic Mushroom" }
 - { id: MM_UNK_6C, add: NONE, flags: 0x00 }
 - { id: MM_BOTTLE_EMPTY2, item: MM_BOTTLE_EMPTY, add: NONE, flags: 0x80, draw: BOTTLE_EMPTY, object: [mm, 0x009e] }
-- { id: MM_SEAHORSE, item: MM_BOTTLED_SEAHORSE, add: NONE, flags: 0x80, draw: MM_BOTTLED_GOLD_DUST, object: [mm, 0x01e9], name: "a <C0>Seahorse" }
-- { id: MM_BOTTLE_CHATEAU, item: MM_BOTTLE_CHATEAU, add: NONE, flags: 0x80, draw: MM_BOTTLE_CHATEAU, object: [mm, 0x0227], name: "a bottle of <C0>Chateau Romani" }
+- { id: MM_UNK_6E, item: MM_BOTTLE_SEAHORSE, add: NONE, flags: 0x80, draw: MM_BOTTLED_GOLD_DUST, object: [mm, 0x01e9], name: "" }
+- { id: MM_BOTTLE_CHATEAU, item: MM_CHATEAU, add: MM_BOTTLE_NEW, flags: 0x80, draw: MM_BOTTLE_CHATEAU, object: [mm, 0x0227], name: "a bottle of <C0>Chateau Romani" }
 - { id: MM_UNK_70, item: MM_BOTTLE_EMPTY, add: NONE, flags: 0x80, draw: BOTTLE_EMPTY, object: [mm, 0x009e] }
 - { id: MM_UNK_71, add: NONE, flags: 0x00 }
 - { id: MM_UNK_72, add: NONE, flags: 0x00 }
@@ -539,11 +539,11 @@
 - { id: MM_MASK_SCENTS, item: MM_MASK_SCENTS, add: MM_NORMAL, flags: 0xa0, draw: MM_MASK_SCENTS, object: [mm, 0x027e], name: "the <C1>Mask of Scents" }
 - { id: MM_MASK_KAFEI, item: MM_MASK_KAFEI, add: MM_NORMAL, flags: 0xa0, draw: MM_MASK_KAFEI, object: [mm, 0x0258], name: "the <C1>Kafei's Mask" }
 - { id: MM_UNK_90, add: NONE, flags: 0x00 }
-- { id: MM_CHATEAU, item: MM_CHATEAU_ROMANI, add: NONE, flags: 0x80, draw: MM_CHATEAU, object: [mm, 0x00c1], name: "some <C0>Chateau Romani" }
-- { id: MM_MILK, item: MM_MILK, add: NONE, flags: 0x80, draw: MILK, object: [mm, 0x00c1], name: "some <C0>Milk" }
-- { id: MM_GOLD_DUST, item: MM_GOLD_DUST, add: NONE, flags: 0x80, draw: MM_GOLD_DUST, object: [mm, 0x01e8] }
+- { id: MM_CHATEAU, item: MM_CHATEAU, add: MM_BOTTLE_REFILL, flags: 0x80, draw: MM_CHATEAU, object: [mm, 0x00c1], name: "some <C0>Chateau Romani" }
+- { id: MM_MILK, item: MM_MILK, add: MM_BOTTLE_REFILL, flags: 0x80, draw: MILK, object: [mm, 0x00c1], name: "some <C0>Milk" }
+- { id: MM_GOLD_DUST, item: MM_GOLD_DUST, add: MM_BOTTLE_REFILL, flags: 0x80, draw: MM_GOLD_DUST, object: [mm, 0x01e8] }
 - { id: MM_UNK_94, add: NONE, flags: 0x00 }
-- { id: MM_SEAHORSE2, item: MM_SEAHORSE, add: NONE, flags: 0x80, draw: MM_SEAHORSE, object: [mm, 0x01f0], name: "a <C0>Seahorse" }
+- { id: MM_SEAHORSE2, item: MM_SEAHORSE, add: MM_BOTTLE_REFILL, flags: 0x80, draw: MM_SEAHORSE, object: [mm, 0x01f0], name: "a <C0>Seahorse" }
 - { id: MM_MOON_TEAR, item: MM_MOON_TEAR, add: [MM_TRADE1, 0], flags: 0x80, draw: MM_MOON_TEAR, object: [mm, 0x01b1], name: "the <C1>Moon's Tear" }
 - { id: MM_DEED_LAND, item: MM_DEED_LAND, add: [MM_TRADE1, 1], flags: 0x80, draw: MM_DEED_LAND, object: [mm, 0x01b2], name: "the <C1>Land Title Deed" }
 - { id: MM_DEED_SWAMP, item: MM_DEED_SWAMP, add: [MM_TRADE1, 2], flags: 0x80, draw: MM_DEED_SWAMP, object: [mm, 0x01b2], name: "the <C1>Swamp Title Deed" }
@@ -702,6 +702,6 @@
 - { id: MM_BUTTON_C_LEFT, add: NONE, flags: 0xa0, draw: BUTTON_C_LEFT, object: BTN_C_HORIZONTAL, name: "the <C1>C-Left Button" }
 - { id: MM_BUTTON_C_UP, add: NONE, flags: 0xa0, draw: BUTTON_C_UP, object: BTN_C_VERTICAL, name: "the <C1>C-Up Button" }
 - { id: MM_BUTTON_C_DOWN, add: NONE, flags: 0xa0, draw: BUTTON_C_DOWN, object: BTN_C_VERTICAL, name: "the <C1>C-Down Button" }
-- { id: MM_BOTTLE_POTION_GREEN, add: NONE, flags: 0xa0, draw: [BOTTLE_POTION, 0x01], object: [mm, 0x0196], name: "a <C1>bottle of Green Potion" }
-- { id: MM_BOTTLE_POTION_BLUE, add: NONE, flags: 0xa0, draw: [BOTTLE_POTION, 0x02], object: [mm, 0x0196], name: "a <C1>bottle of Blue Potion" }
+- { id: MM_BOTTLE_POTION_GREEN, item: MM_POTION_GREEN, add: MM_BOTTLE_NEW, flags: 0xa0, draw: [BOTTLE_POTION, 0x01], object: [mm, 0x0196], name: "a <C1>bottle of Green Potion" }
+- { id: MM_BOTTLE_POTION_BLUE, item: MM_POTION_BLUE, add: MM_BOTTLE_NEW, flags: 0xa0, draw: [BOTTLE_POTION, 0x02], object: [mm, 0x0196], name: "a <C1>bottle of Blue Potion" }
 - { id: MM_SCOOP, add: NONE, flags: 0x00 } # Scoop

@@ -38,6 +38,8 @@
 #define IA_MM_OCARINA           0x1e
 #define IA_OOT_BOTTLE_NEW       0x1f
 #define IA_OOT_BOTTLE_REFILL    0x20
+#define IA_MM_BOTTLE_NEW        0x21
+#define IA_MM_BOTTLE_REFILL     0x22
 #define IA_NONE                 0xff
 
 typedef struct GameState_Play GameState_Play;

@@ -172,21 +172,21 @@
 #define ITEM_MM_POTION_GREEN                0x14
 #define ITEM_MM_POTION_BLUE                 0x15
 #define ITEM_MM_FAIRY                       0x16
-#define ITEM_MM_BOTTLED_DEKU_PRINCESS       0x17
+#define ITEM_MM_DEKU_PRINCESS               0x17
 #define ITEM_MM_MILK                        0x18
 #define ITEM_MM_MILK_HALF                   0x19
 #define ITEM_MM_FISH                        0x1a
 #define ITEM_MM_BUG                         0x1b
 #define ITEM_MM_BLUE_FIRE                   0x1c
 #define ITEM_MM_POE                         0x1d
-#define ITEM_MM_BOTTLED_BIG_POE             0x1e
-#define ITEM_MM_BOTTLED_SPRING_WATER        0x1f
-#define ITEM_MM_BOTTLED_SPRING_WATER_HOT    0x20
-#define ITEM_MM_BOTTLED_ZORA_EGG            0x21
-#define ITEM_MM_BOTTLED_GOLD_DUST           0x22
-#define ITEM_MM_BOTTLED_MAGIC_MUSHROOM      0x23
-#define ITEM_MM_BOTTLED_SEAHORSE            0x24
-#define ITEM_MM_BOTTLE_CHATEAU              0x25
+#define ITEM_MM_BIG_POE                     0x1e
+#define ITEM_MM_SPRING_WATER                0x1f
+#define ITEM_MM_SPRING_WATER_HOT            0x20
+#define ITEM_MM_ZORA_EGG                    0x21
+#define ITEM_MM_GOLD_DUST                   0x22
+#define ITEM_MM_MAGIC_MUSHROOM              0x23
+#define ITEM_MM_SEAHORSE                    0x24
+#define ITEM_MM_CHATEAU                     0x25
 #define ITEM_MM_MOON_TEAR                   0x28
 #define ITEM_MM_DEED_LAND                   0x29
 #define ITEM_MM_DEED_SWAMP                  0x2a
@@ -289,10 +289,10 @@
 #define ITEM_MM_STICKS_30                   0x9c
 #define ITEM_MM_NUTS_30                     0x9d
 #define ITEM_MM_NUTS_40                     0x9e
-#define ITEM_MM_CHATEAU_ROMANI              0x9f
+#define ITEM_MM_BOTTLE_CHATEAU              0x9f
 #define ITEM_MM_BOTTLE_MILK                 0xa0
-#define ITEM_MM_GOLD_DUST                   0xa1
-#define ITEM_MM_SEAHORSE                    0xa3
+#define ITEM_MM_BOTTLE_GOLD_DUST            0xa1
+#define ITEM_MM_BOTTLE_SEAHORSE             0xa3
 
 #define ITEM_NONE       0xff
 

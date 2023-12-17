@@ -124,7 +124,7 @@ void Sram_SaveEndOfCycleWrapper(GameState_Play* play)
         switch (*slot)
         {
         case ITEM_NONE:
-        case ITEM_MM_BOTTLED_GOLD_DUST:
+        case ITEM_MM_GOLD_DUST:
             break;
         default:
             *slot = ITEM_MM_BOTTLE_EMPTY;

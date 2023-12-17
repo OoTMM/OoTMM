@@ -857,6 +857,35 @@ static int addItemBottleRefillOot(GameState_Play* play, u8 itemId, s16 gi, u16 p
     return 0;
 }
 
+static int addItemBottleNewMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    for (int i = 0; i < 4; ++i)
+    {
+        if (gMmSave.inventory.items[ITS_MM_BOTTLE + i] == ITEM_NONE)
+        {
+            gMmSave.inventory.items[ITS_MM_BOTTLE + i] = itemId;
+            break;
+        }
+    }
+
+    return 0;
+}
+
+static int addItemBottleRefillMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    for (int i = 0; i < 4; ++i)
+    {
+        if (gMmSave.inventory.items[ITS_MM_BOTTLE + i] == ITEM_MM_BOTTLE_EMPTY)
+        {
+            gMmSave.inventory.items[ITS_MM_BOTTLE + i] = itemId;
+            reloadSlotMm(play, ITS_MM_BOTTLE + i);
+            break;
+        }
+    }
+
+    return 0;
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -891,6 +920,8 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemOcarinaMm,
     addItemBottleNewOot,
     addItemBottleRefillOot,
+    addItemBottleNewMm,
+    addItemBottleRefillMm,
 };
 
 extern const u8 kAddItemFuncs[];

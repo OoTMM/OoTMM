@@ -19,12 +19,6 @@ static void addRupees(s16 count)
     gSaveContext.save.rupeesDelta += count;
 }
 
-static void reloadIconsC(GameState_Play* play)
-{
-    for (int i = 1; i < 4; i++)
-        Interface_LoadItemIconImpl(play, i);
-}
-
 static void addSilverPouchRupees(int id)
 {
     addRupees(gSilverRupeeData[id].count * 5);
@@ -207,16 +201,6 @@ int comboAddItemEffect(GameState_Play* play, s16 gi)
         break;
     case GI_MM_COMPASS:
         comboAddCompassMm(gSaveContext.dungeonId);
-        break;
-    case GI_MM_POTION_RED:
-    case GI_MM_POTION_BLUE:
-    case GI_MM_POTION_GREEN:
-    case GI_MM_SEAHORSE:
-    case GI_MM_SEAHORSE2:
-    case GI_MM_MILK:
-    case GI_MM_CHATEAU:
-    case GI_MM_FAIRY:
-        reloadIconsC(play);
         break;
     }
 

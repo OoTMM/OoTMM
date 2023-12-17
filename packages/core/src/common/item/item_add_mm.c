@@ -111,45 +111,6 @@ void comboAddBombsMm(int count)
         gMmSave.inventory.ammo[ITS_MM_BOMBS] = max;
 }
 
-static void addNewBottle(u16 itemId)
-{
-    int i;
-
-    for (i = 0; i < 6; i++)
-    {
-        if (gMmSave.inventory.items[ITS_MM_BOTTLE + i] == ITEM_NONE)
-        {
-            gMmSave.inventory.items[ITS_MM_BOTTLE + i] = itemId;
-            break;
-        }
-    }
-}
-
-static void fillBottle(u16 itemId)
-{
-    int slot;
-
-    slot = -1;
-    for (int i = 0; i < 6; ++i)
-    {
-        if (gMmSave.inventory.items[ITS_MM_BOTTLE + i] == ITEM_MM_BOTTLE_EMPTY)
-        {
-            slot = i;
-            break;
-        }
-    }
-    if (slot == -1)
-        return;
-    gMmSave.inventory.items[ITS_MM_BOTTLE + slot] = itemId;
-    for (int i = 1; i <= 3; ++i)
-    {
-        if (gMmSave.itemEquips.cButtonSlots[0][i] == ITS_MM_BOTTLE + slot)
-        {
-            gMmSave.itemEquips.buttonItems[0][i] = itemId;
-        }
-    }
-}
-
 void comboAddMagicUpgradeMm(int level)
 {
     gMmSave.playerData.magicAcquired = 1;
@@ -399,50 +360,6 @@ int comboAddItemMm(s16 gi, int noEffect)
     case GI_MM_POWDER_KEG:
         gMmSave.inventory.items[ITS_MM_KEG] = ITEM_MM_POWDER_KEG;
         gMmSave.inventory.ammo[ITS_MM_KEG] = 1;
-        break;
-    case GI_MM_BOTTLE_EMPTY:
-        addNewBottle(ITEM_MM_BOTTLE_EMPTY);
-        break;
-    case GI_MM_BOTTLE_MILK:
-        addNewBottle(ITEM_MM_MILK);
-        break;
-    case GI_MM_BOTTLED_GOLD_DUST:
-        addNewBottle(ITEM_MM_BOTTLED_GOLD_DUST);
-        gMmExtraItems.goldDust = 1;
-        break;
-    case GI_MM_BOTTLE_CHATEAU:
-        addNewBottle(ITEM_MM_BOTTLE_CHATEAU);
-        break;
-    case GI_MM_BOTTLE_POTION_RED:
-        addNewBottle(ITEM_MM_POTION_RED);
-        break;
-    case GI_MM_BOTTLE_POTION_GREEN:
-        addNewBottle(ITEM_MM_POTION_GREEN);
-        break;
-    case GI_MM_BOTTLE_POTION_BLUE:
-        addNewBottle(ITEM_MM_POTION_BLUE);
-        break;
-    case GI_MM_POTION_RED:
-        fillBottle(ITEM_MM_POTION_RED);
-        break;
-    case GI_MM_POTION_BLUE:
-        fillBottle(ITEM_MM_POTION_BLUE);
-        break;
-    case GI_MM_POTION_GREEN:
-        fillBottle(ITEM_MM_POTION_GREEN);
-        break;
-    case GI_MM_SEAHORSE:
-    case GI_MM_SEAHORSE2:
-        fillBottle(ITEM_MM_BOTTLED_SEAHORSE);
-        break;
-    case GI_MM_MILK:
-        fillBottle(ITEM_MM_MILK);
-        break;
-    case GI_MM_FAIRY:
-        fillBottle(ITEM_MM_FAIRY);
-        break;
-    case GI_MM_CHATEAU:
-        fillBottle(ITEM_MM_BOTTLE_CHATEAU);
         break;
     case GI_MM_MAGIC_UPGRADE:
         comboAddMagicUpgradeMm(1);
