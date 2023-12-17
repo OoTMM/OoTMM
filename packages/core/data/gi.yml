@@ -19,7 +19,7 @@
 - { id: OOT_FAIRY, item: OOT_FAIRY, add: OOT_BOTTLE_REFILL, flags: 0x80, draw: FAIRY, object: [oot, 0x0177], name: "a <C0>Fairy" }
 - { id: OOT_BOTTLE_MILK, item: OOT_MILK, add: OOT_BOTTLE_NEW, flags: 0x80, draw: BOTTLE_MILK, object: [oot, 0x00df], name: "a <C1>bottle of Lon Lon Milk" }
 - { id: OOT_RUTO_LETTER, item: OOT_RUTO_LETTER, add: OOT_BOTTLE_NEW, flags: 0x80, draw: OOT_RUTO_LETTER, object: [oot, 0x010b], name: "<C1>Ruto's Letter" }
-- { id: OOT_MAGIC_BEAN, item: OOT_MAGIC_BEAN, add: NONE, flags: 0x80, draw: MAGIC_BEAN, object: [oot, 0x00f3], name: "a <C0>Magic Bean" }
+- { id: OOT_MAGIC_BEAN, item: OOT_MAGIC_BEAN, add: [OOT_BEANS, 10], flags: 0x80, draw: MAGIC_BEAN, object: [oot, 0x00f3], name: "a <C0>Magic Bean" }
 - { id: OOT_MASK_SKULL, item: OOT_SKULL_MASK, add: [OOT_TRADE_CHILD, 4], flags: 0x80, draw: OOT_MASK_SKULL, object: [oot, 0x0136], name: "the <C1>Skull Mask" }
 - { id: OOT_MASK_SPOOKY, item: OOT_SPOOKY_MASK, add: [OOT_TRADE_CHILD, 5], flags: 0x80, draw: OOT_MASK_SPOOKY, object: [oot, 0x0135], name: "the <C1>Spooky Mask" }
 - { id: OOT_CHICKEN, item: OOT_CHICKEN, add: [OOT_TRADE_CHILD, 1], flags: 0x80, draw: OOT_CHICKEN, object: [oot, 0x0109], name: "the <C1>Chicken" }
@@ -447,7 +447,7 @@
 - { id: MM_SHIELD_HERO, item: MM_SHIELD_HERO, add: NONE, flags: 0xa0, draw: MM_SHIELD_HERO, object: [mm, 0x00b3], name: "the <C1>Hero's Shield" }
 - { id: MM_SHIELD_MIRROR, item: MM_SHIELD_MIRROR, add: NONE, flags: 0xa0, draw: MM_SHIELD_MIRROR, object: [mm, 0x00c3], name: "the <C1>Mirror Shield" }
 - { id: MM_POWDER_KEG, item: MM_POWDER_KEG, add: NONE, flags: 0x80, draw: MM_KEG, object: [mm, 0x01ca], name: "a <C0>Powder Keg" }
-- { id: MM_MAGIC_BEAN, item: MM_MAGIC_BEAN, add: NONE, flags: 0x80, draw: MAGIC_BEAN, object: [mm, 0x00c6], name: "a <C0>Magic Bean" }
+- { id: MM_MAGIC_BEAN, item: MM_MAGIC_BEAN, add: [MM_BEANS, 1], flags: 0x80, draw: MAGIC_BEAN, object: [mm, 0x00c6], name: "a <C0>Magic Bean" }
 - { id: MM_BOMBCHU, item: MM_BOMBCHU_ALT, add: [MM_BOMBCHU, 1], flags: 0xc0, draw: BOMBCHU, object: [mm, 0x00b0], name: "a <C1>Bombchu" }
 - { id: MM_SWORD_KOKIRI, item: MM_SWORD_KOKIRI, add: NONE, flags: 0xa0, draw: MM_SWORD_KOKIRI, object: [mm, 0x0148], name: "the <C1>Kokiri Sword" }
 - { id: MM_SWORD_RAZOR, item: MM_SWORD_RAZOR, add: NONE, flags: 0xa0, draw: MM_SWORD_RAZOR, object: [mm, 0x01f9], name: "the <C1>Razor Sword" }

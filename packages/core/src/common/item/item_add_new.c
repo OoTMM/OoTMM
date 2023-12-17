@@ -886,6 +886,18 @@ static int addItemBottleRefillMm(GameState_Play* play, u8 itemId, s16 gi, u16 pa
     return 0;
 }
 
+static int addItemBeansOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    addAmmoOot(ITS_OOT_MAGIC_BEAN, ITEM_OOT_MAGIC_BEAN, 10, param);
+    return 0;
+}
+
+static int addItemBeansMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    addAmmoMm(ITS_MM_BEANS, ITEM_MM_MAGIC_BEAN, 20, param);
+    return 0;
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -922,6 +934,8 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemBottleRefillOot,
     addItemBottleNewMm,
     addItemBottleRefillMm,
+    addItemBeansOot,
+    addItemBeansMm,
 };
 
 extern const u8 kAddItemFuncs[];

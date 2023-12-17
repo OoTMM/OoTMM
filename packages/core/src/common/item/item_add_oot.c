@@ -367,10 +367,6 @@ int comboAddItemOot(s16 gi, int noEffect)
     (void)dungeonId;
     switch (gi)
     {
-    case GI_OOT_MAGIC_BEAN:
-        gOotSave.inventory.items[ITS_OOT_MAGIC_BEAN] = ITEM_OOT_MAGIC_BEAN;
-        gOotSave.inventory.ammo[ITS_OOT_MAGIC_BEAN] = 10;
-        break;
     case GI_OOT_SWORD_KOKIRI:
         gOotSave.inventory.equipment.swords |= EQ_OOT_SWORD_KOKIRI;
         break;

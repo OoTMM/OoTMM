@@ -353,10 +353,6 @@ int comboAddItemMm(s16 gi, int noEffect)
     count = 0;
     switch (gi)
     {
-    case GI_MM_MAGIC_BEAN:
-        gMmSave.inventory.items[ITS_MM_BEANS] = ITEM_MM_MAGIC_BEAN;
-        gMmSave.inventory.ammo[ITS_MM_BEANS]++;
-        break;
     case GI_MM_POWDER_KEG:
         gMmSave.inventory.items[ITS_MM_KEG] = ITEM_MM_POWDER_KEG;
         gMmSave.inventory.ammo[ITS_MM_KEG] = 1;
