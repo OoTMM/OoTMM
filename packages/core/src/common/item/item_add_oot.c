@@ -367,21 +367,6 @@ int comboAddItemOot(s16 gi, int noEffect)
     (void)dungeonId;
     switch (gi)
     {
-    case GI_OOT_SWORD_KOKIRI:
-        gOotSave.inventory.equipment.swords |= EQ_OOT_SWORD_KOKIRI;
-        break;
-    case GI_OOT_SWORD_MASTER:
-        gOotSave.inventory.equipment.swords |= EQ_OOT_SWORD_MASTER;
-        break;
-    case GI_OOT_SWORD_KNIFE:
-        gOotSave.inventory.equipment.swords |= EQ_OOT_SWORD_KNIFE;
-        gOotSave.playerData.swordHealth = 8;
-        break;
-    case GI_OOT_SWORD_BIGGORON:
-        gOotSave.inventory.equipment.swords |= EQ_OOT_SWORD_KNIFE;
-        gOotSave.inventory.equipment.swords &= ~(EQ_OOT_SWORD_KNIFE_BROKEN);
-        gOotSave.isBiggoronSword = 1;
-        break;
     case GI_OOT_PROGRESSIVE_SHIELD_DEKU:
         gOotExtraItems.shield |= EQ_OOT_SHIELD_DEKU;
         /* Fallthrough */

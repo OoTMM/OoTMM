@@ -36,8 +36,8 @@
 - { id: OOT_EYEBALL_FROG, item: OOT_EYEBALL_FROG, add: [OOT_TRADE_ADULT, 8], flags: 0x80, draw: OOT_EYEBALL_FROG, object: [oot, 0x0149], name: "the <C1>Eyeball Frog" }
 - { id: OOT_EYE_DROPS, item: OOT_EYE_DROPS, add: [OOT_TRADE_ADULT, 9], flags: 0x80, draw: OOT_EYE_DROPS, object: [oot, 0x013f], name: "the <C1>Eye Drops" }
 - { id: OOT_CLAIM_CHECK, item: OOT_CLAIM_CHECK, add: [OOT_TRADE_ADULT, 10], flags: 0x80, draw: OOT_CLAIM_CHECK, object: [oot, 0x0142], name: "the <C1>Claim Check" }
-- { id: OOT_SWORD_KOKIRI, item: OOT_SWORD_KOKIRI, add: NONE, flags: 0x80, draw: OOT_SWORD_KOKIRI, object: [oot, 0x018d], name: "the <C1>Kokiri Sword" }
-- { id: OOT_SWORD_KNIFE, item: OOT_SWORD_KNIFE_BIGGORON, add: NONE, flags: 0x80, draw: OOT_BIGGORON_SWORD, object: [oot, 0x00f8], name: "the <C1>Giant's Knife" }
+- { id: OOT_SWORD_KOKIRI, item: OOT_SWORD_KOKIRI, add: [OOT_SWORD, 1], flags: 0x80, draw: OOT_SWORD_KOKIRI, object: [oot, 0x018d], name: "the <C1>Kokiri Sword" }
+- { id: OOT_SWORD_KNIFE, item: OOT_SWORD_KNIFE_BIGGORON, add: [OOT_SWORD, 3], flags: 0x80, draw: OOT_BIGGORON_SWORD, object: [oot, 0x00f8], name: "the <C1>Giant's Knife" }
 - { id: OOT_SHIELD_DEKU, item: OOT_SHIELD_DEKU, add: NONE, flags: 0xa0, draw: OOT_SHIELD_DEKU, object: [oot, 0x00cb], name: "the <C1>Deku Shield" }
 - { id: OOT_SHIELD_HYLIAN, item: OOT_SHIELD_HYLIAN, add: NONE, flags: 0xa0, draw: OOT_SHIELD_HYLIAN, object: [oot, 0x00dc], name: "the <C1>Hylian Shield" }
 - { id: OOT_SHIELD_MIRROR, item: OOT_SHIELD_MIRROR, add: NONE, flags: 0x80, draw: OOT_SHIELD_MIRROR, object: [oot, 0x00ee], name: "the <C1>Mirror Shield" }
@@ -84,7 +84,7 @@
 - { id: OOT_GORON_BRACELET, item: OOT_GORON_BRACELET, add: NONE, flags: 0x80, draw: OOT_GORON_BRACELET, object: [oot, 0x0147], name: "the <C1>Goron's Bracelet" }
 - { id: OOT_RUPEE_PURPLE, item: OOT_RUPEE_PURPLE, add: [OOT_RUPEE, 50], flags: 0x14, draw: OOT_RUPEE_PURPLE, object: [oot, 0x017f], name: "a <C0>Purple Rupee" }
 - { id: OOT_RUPEE_HUGE, item: OOT_RUPEE_HUGE, add: [OOT_RUPEE, 200], flags: 0x13, draw: OOT_RUPEE_HUGE, object: [oot, 0x017f], name: "a <C0>Huge Rupee" }
-- { id: OOT_SWORD_BIGGORON, item: OOT_SWORD_KNIFE_BIGGORON, add: NONE, flags: 0x80, draw: OOT_BIGGORON_SWORD, object: [oot, 0x00f8], name: "<C1>Biggoron's Sword" }
+- { id: OOT_SWORD_BIGGORON, item: OOT_SWORD_KNIFE_BIGGORON, add: [OOT_SWORD, 4], flags: 0x80, draw: OOT_BIGGORON_SWORD, object: [oot, 0x00f8], name: "<C1>Biggoron's Sword" }
 - { id: OOT_ARROW_FIRE, item: OOT_ARROW_FIRE, add: OOT_NORMAL, flags: 0x80, draw: ARROW_FIRE, object: [oot, 0x0158], name: "the <C1>Fire Arrow" }
 - { id: OOT_ARROW_ICE, item: OOT_ARROW_ICE, add: OOT_NORMAL, flags: 0x80, draw: ARROW_ICE, object: [oot, 0x0158], name: "the <C1>Ice Arrow" }
 - { id: OOT_ARROW_LIGHT, item: OOT_ARROW_LIGHT, add: OOT_NORMAL, flags: 0x80, draw: ARROW_LIGHT, object: [oot, 0x0158], name: "the <C1>Light Arrow" }
@@ -137,7 +137,7 @@
 - { id: OOT_SONG_SUN, add: NONE, flags: 0x80, draw: [NOTE, 0x03], object: [oot, 0x00b6], name: "the <C2>Sun's Song" }
 - { id: OOT_SONG_TIME, add: NONE, flags: 0x80, draw: [NOTE, 0x01], object: [oot, 0x00b6], name: "the <C2>Song of Time" }
 - { id: OOT_SONG_STORMS, add: NONE, flags: 0x80, draw: [NOTE, 0x00], object: [oot, 0x00b6], name: "the <C2>Song of Storms" }
-- { id: OOT_SWORD_MASTER, add: NONE, flags: 0x80, draw: OOT_SWORD_MASTER, object: GI_MASTER_SWORD, name: "the <C1>Master Sword" }
+- { id: OOT_SWORD_MASTER, add: [OOT_SWORD, 2], flags: 0x80, draw: OOT_SWORD_MASTER, object: GI_MASTER_SWORD, name: "the <C1>Master Sword" }
 - { id: OOT_STONE_EMERALD, add: NONE, flags: 0x80, draw: OOT_STONE_EMERALD, object: GI_STONE_EMERALD, name: "the <C3>Kokiri's Emerald" }
 - { id: OOT_STONE_RUBY, add: NONE, flags: 0x80, draw: OOT_STONE_RUBY, object: GI_STONE_RUBY, name: "the <C3>Goron's Ruby" }
 - { id: OOT_STONE_SAPPHIRE, add: NONE, flags: 0x80, draw: OOT_STONE_SAPPHIRE, object: GI_STONE_SAPPHIRE, name: "the <C3>Zora's Sapphire" }
@@ -449,9 +449,9 @@
 - { id: MM_POWDER_KEG, item: MM_POWDER_KEG, add: NONE, flags: 0x80, draw: MM_KEG, object: [mm, 0x01ca], name: "a <C0>Powder Keg" }
 - { id: MM_MAGIC_BEAN, item: MM_MAGIC_BEAN, add: [MM_BEANS, 1], flags: 0x80, draw: MAGIC_BEAN, object: [mm, 0x00c6], name: "a <C0>Magic Bean" }
 - { id: MM_BOMBCHU, item: MM_BOMBCHU_ALT, add: [MM_BOMBCHU, 1], flags: 0xc0, draw: BOMBCHU, object: [mm, 0x00b0], name: "a <C1>Bombchu" }
-- { id: MM_SWORD_KOKIRI, item: MM_SWORD_KOKIRI, add: NONE, flags: 0xa0, draw: MM_SWORD_KOKIRI, object: [mm, 0x0148], name: "the <C1>Kokiri Sword" }
-- { id: MM_SWORD_RAZOR, item: MM_SWORD_RAZOR, add: NONE, flags: 0xa0, draw: MM_SWORD_RAZOR, object: [mm, 0x01f9], name: "the <C1>Razor Sword" }
-- { id: MM_SWORD_GILDED, item: MM_SWORD_GILDED, add: NONE, flags: 0xa0, draw: MM_SWORD_GILDED, object: [mm, 0x01fa], name: "the <C1>Gilded Sword" }
+- { id: MM_SWORD_KOKIRI, item: MM_SWORD_KOKIRI, add: [MM_SWORD, 1], flags: 0xa0, draw: MM_SWORD_KOKIRI, object: [mm, 0x0148], name: "the <C1>Kokiri Sword" }
+- { id: MM_SWORD_RAZOR, item: MM_SWORD_RAZOR, add: [MM_SWORD, 2], flags: 0xa0, draw: MM_SWORD_RAZOR, object: [mm, 0x01f9], name: "the <C1>Razor Sword" }
+- { id: MM_SWORD_GILDED, item: MM_SWORD_GILDED, add: [MM_SWORD, 3], flags: 0xa0, draw: MM_SWORD_GILDED, object: [mm, 0x01fa], name: "the <C1>Gilded Sword" }
 - { id: MM_BOMBCHU_5, item: MM_BOMBCHU_5, add: [MM_BOMBCHU, 5], flags: 0xc0, draw: BOMBCHU, object: [mm, 0x00b0], name: "<C0>5 Bombchu" }
 - { id: MM_GREAT_FAIRY_SWORD, item: MM_GREAT_FAIRY_SWORD, add: MM_NORMAL, flags: 0xa0, draw: MM_GREAT_FAIRY_SWORD, object: [mm, 0x01fb], name: "the <C1>Great Fairy's Sword" }
 - { id: MM_SMALL_KEY, item: MM_SMALL_KEY, add: NONE, flags: 0xa0, draw: SMALL_KEY, object: [mm, 0x0086], name: "a <C0>Small Key" }

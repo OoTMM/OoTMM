@@ -157,11 +157,6 @@ int comboAddItemEffect(GameState_Play* play, s16 gi)
     count = 0;
     switch (gi)
     {
-    case GI_MM_SWORD_KOKIRI:
-    case GI_MM_SWORD_RAZOR:
-    case GI_MM_SWORD_GILDED:
-        Interface_LoadItemIconImpl(play, 0);
-        break;
     case GI_MM_PROGRESSIVE_SHIELD_HERO:
     case GI_MM_SHIELD_HERO:
     case GI_MM_SHIELD_MIRROR:

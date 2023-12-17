@@ -2,13 +2,6 @@
 #include <combo/item.h>
 #include <combo/souls.h>
 
-static const u16 kSwords[] = {
-    ITEM_NONE,
-    ITEM_MM_SWORD_KOKIRI,
-    ITEM_MM_SWORD_RAZOR,
-    ITEM_MM_SWORD_GILDED,
-};
-
 int comboAddSmallKeyMm(u16 dungeonId)
 {
     s8 keyCount;
@@ -77,12 +70,6 @@ static void addHealth(u8 count)
     gMmSave.playerData.health += health;
     if (gMmSave.playerData.health > gMmSave.playerData.healthMax)
         gMmSave.playerData.health = gMmSave.playerData.healthMax;
-}
-
-static void addSword(int index)
-{
-    gMmSave.itemEquips.buttonItems[0][0] = kSwords[index];
-    gMmSave.itemEquips.sword = index;
 }
 
 static void addShield(int index)
@@ -366,16 +353,6 @@ int comboAddItemMm(s16 gi, int noEffect)
         comboAddMagicUpgradeMm(2);
         if (noEffect)
             refillMagic(2);
-        break;
-    case GI_MM_SWORD_KOKIRI:
-        addSword(1);
-        break;
-    case GI_MM_SWORD_RAZOR:
-        addSword(2);
-        gMmSave.playerData.swordHealth = 100;
-        break;
-    case GI_MM_SWORD_GILDED:
-        addSword(3);
         break;
     case GI_MM_PROGRESSIVE_SHIELD_HERO:
         gMmExtraFlags2.progressiveShield = 1;

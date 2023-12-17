@@ -42,6 +42,8 @@
 #define IA_MM_BOTTLE_REFILL     0x22
 #define IA_OOT_BEANS            0x23
 #define IA_MM_BEANS             0x24
+#define IA_OOT_SWORD            0x25
+#define IA_MM_SWORD             0x26
 #define IA_NONE                 0xff
 
 typedef struct GameState_Play GameState_Play;

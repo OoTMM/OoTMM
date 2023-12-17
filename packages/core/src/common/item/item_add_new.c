@@ -7,6 +7,13 @@
 # define addRupeesRaw  addRupeesRawMm
 #endif
 
+static const u8 kMmSwords[] = {
+    ITEM_NONE,
+    ITEM_MM_SWORD_KOKIRI,
+    ITEM_MM_SWORD_RAZOR,
+    ITEM_MM_SWORD_GILDED,
+};
+
 const u8 kOotTradeAdult[] = {
     ITEM_OOT_POCKET_EGG,
     ITEM_OOT_POCKET_CUCCO,
@@ -898,6 +905,40 @@ static int addItemBeansMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
+static int addItemSwordOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    int base;
+
+    base = param;
+    if (base > 3)
+        base = 3;
+    gOotSave.inventory.equipment.swords |= (1 << (base - 1));
+    if (param >= 3)
+    {
+        gOotSave.playerData.swordHealth = 8;
+        gOotSave.inventory.equipment.swords &= ~EQ_OOT_SWORD_KNIFE_BROKEN;
+    }
+    if (param >= 4)
+        gOotSave.isBiggoronSword = 1;
+    return 0;
+}
+
+static int addItemSwordMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    gMmSave.itemEquips.buttonItems[0][0] = kMmSwords[param];
+    gMmSave.itemEquips.sword = param;
+
+    if (param == 2)
+        gMmSave.playerData.swordHealth = 100;
+
+#if defined(GAME_MM)
+    if (play)
+        Interface_LoadItemIconImpl(play, 0);
+#endif
+
+    return 0;
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -936,6 +977,8 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemBottleRefillMm,
     addItemBeansOot,
     addItemBeansMm,
+    addItemSwordOot,
+    addItemSwordMm,
 };
 
 extern const u8 kAddItemFuncs[];
