@@ -60,12 +60,12 @@
 - { id: OOT_DEKU_SEEDS_5, item: OOT_SEEDS_5, add: [SEEDS, 5], flags: 0x50, draw: OOT_SEEDS, object: [oot, 0x0119], name: "<C0>5 Deku Seeds" }
 - { id: OOT_HEART_CONTAINER, item: OOT_HEART_CONTAINER, add: [OOT_HEART_PIECE, 4], flags: 0x80, draw: HEART_CONTAINER, object: [oot, 0x00bd], name: "a <C0>Heart Container" }
 - { id: OOT_HEART_PIECE, item: OOT_HEART_PIECE, add: [OOT_HEART_PIECE, 1], flags: 0x80, draw: HEART_PIECE, object: [oot, 0x00bd], name: "a <C0>Piece of Heart" }
-- { id: OOT_BOSS_KEY, item: OOT_BOSS_KEY, add: NONE, flags: 0x80, draw: BOSS_KEY, object: [oot, 0x00b9], name: "the <C0>Boss Key" }
-- { id: OOT_COMPASS, item: OOT_COMPASS, add: NONE, flags: 0x80, draw: COMPASS, object: [oot, 0x00b8], name: "the <C0>Compass" }
-- { id: OOT_MAP, item: OOT_MAP, add: NONE, flags: 0x80, draw: MAP, object: [oot, 0x00c8], name: "the <C0>Dungeon Map" }
+- { id: OOT_BOSS_KEY, item: OOT_BOSS_KEY, add: [OOT_BOSS_KEY, 0xffff], flags: 0x80, draw: BOSS_KEY, object: [oot, 0x00b9], name: "the <C0>Boss Key" }
+- { id: OOT_COMPASS, item: OOT_COMPASS, add: [OOT_COMPASS, 0xffff], flags: 0x80, draw: COMPASS, object: [oot, 0x00b8], name: "the <C0>Compass" }
+- { id: OOT_MAP, item: OOT_MAP, add: [OOT_MAP, 0xffff], flags: 0x80, draw: MAP, object: [oot, 0x00c8], name: "the <C0>Dungeon Map" }
 - { id: OOT_SMALL_KEY, item: OOT_SMALL_KEY, add: [OOT_SMALL_KEY, 0xffff], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C0>Small Key" }
-- { id: OOT_MAGIC_JAR_SMALL, item: OOT_MAGIC_JAR_SMALL, add: NONE, flags: 0x6f, draw: MAGIC_SMALL, object: [oot, 0x00cd], name: "a <C0>Small Magic Jar" }
-- { id: OOT_MAGIC_JAR_LARGE, item: OOT_MAGIC_JAR_LARGE, add: NONE, flags: 0x6e, draw: MAGIC_LARGE, object: [oot, 0x00cd], name: "a <C0>Large Magic Jar" }
+- { id: OOT_MAGIC_JAR_SMALL, item: OOT_MAGIC_JAR_SMALL, flags: 0x6f, draw: MAGIC_SMALL, object: [oot, 0x00cd], name: "a <C0>Small Magic Jar" }
+- { id: OOT_MAGIC_JAR_LARGE, item: OOT_MAGIC_JAR_LARGE, flags: 0x6e, draw: MAGIC_LARGE, object: [oot, 0x00cd], name: "a <C0>Large Magic Jar" }
 - { id: OOT_WALLET2, item: OOT_WALLET2, add: [OOT_WALLET, 2], flags: 0x80, draw: WALLET2, object: [oot, 0x00d1], name: "the <C1>Adult's Wallet" }
 - { id: OOT_WALLET3, item: OOT_WALLET3, add: [OOT_WALLET, 3], flags: 0x80, draw: WALLET3, object: [oot, 0x00d1], name: "the <C1>Giant's Wallet" }
 - { id: OOT_WEIRD_EGG, item: OOT_WEIRD_EGG, add: [OOT_TRADE_CHILD, 0], flags: 0x80, draw: OOT_EGG, object: [oot, 0x00da], name: "the <C1>Weird Egg" }
@@ -161,32 +161,32 @@
 - { id: OOT_SMALL_KEY_BOTW, add: [OOT_SMALL_KEY, SCE_OOT_BOTTOM_OF_THE_WELL], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C0>Small Key (Well)" }
 - { id: OOT_SMALL_KEY_GF, add: [OOT_SMALL_KEY, SCE_OOT_THIEVES_HIDEOUT], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C0>Small Key (Hideout)" }
 - { id: OOT_SMALL_KEY_GTG, add: [OOT_SMALL_KEY, SCE_OOT_GERUDO_TRAINING_GROUND], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C0>Small Key (GTG)" }
-- { id: OOT_BOSS_KEY_FOREST, add: NONE, flags: 0x80, draw: BOSS_KEY, object: [oot, 0x00b9], name: "the <C0>Boss Key (Forest)" }
-- { id: OOT_BOSS_KEY_FIRE, add: NONE, flags: 0x80, draw: BOSS_KEY, object: [oot, 0x00b9], name: "the <C0>Boss Key (Fire)" }
-- { id: OOT_BOSS_KEY_WATER, add: NONE, flags: 0x80, draw: BOSS_KEY, object: [oot, 0x00b9], name: "the <C0>Boss Key (Water)" }
-- { id: OOT_BOSS_KEY_SPIRIT, add: NONE, flags: 0x80, draw: BOSS_KEY, object: [oot, 0x00b9], name: "the <C0>Boss Key (Spirit)" }
-- { id: OOT_BOSS_KEY_SHADOW, add: NONE, flags: 0x80, draw: BOSS_KEY, object: [oot, 0x00b9], name: "the <C0>Boss Key (Shadow)" }
-- { id: OOT_BOSS_KEY_GANON, add: NONE, flags: 0x80, draw: BOSS_KEY, object: [oot, 0x00b9], name: "the <C0>Boss Key (Ganon)" }
-- { id: OOT_MAP_DT, add: NONE, flags: 0x80, draw: MAP, object: [oot, 0x00c8], name: "the <C0>Dungeon Map (Deku)" }
-- { id: OOT_MAP_DC, add: NONE, flags: 0x80, draw: MAP, object: [oot, 0x00c8], name: "the <C0>Dungeon Map (Dodongo)" }
-- { id: OOT_MAP_JJ, add: NONE, flags: 0x80, draw: MAP, object: [oot, 0x00c8], name: "the <C0>Dungeon Map (Jabu)" }
-- { id: OOT_MAP_FOREST, add: NONE, flags: 0x80, draw: MAP, object: [oot, 0x00c8], name: "the <C0>Dungeon Map (Forest)" }
-- { id: OOT_MAP_FIRE, add: NONE, flags: 0x80, draw: MAP, object: [oot, 0x00c8], name: "the <C0>Dungeon Map (Fire)" }
-- { id: OOT_MAP_WATER, add: NONE, flags: 0x80, draw: MAP, object: [oot, 0x00c8], name: "the <C0>Dungeon Map (Water)" }
-- { id: OOT_MAP_SPIRIT, add: NONE, flags: 0x80, draw: MAP, object: [oot, 0x00c8], name: "the <C0>Dungeon Map (Spirit)" }
-- { id: OOT_MAP_SHADOW, add: NONE, flags: 0x80, draw: MAP, object: [oot, 0x00c8], name: "the <C0>Dungeon Map (Shadow)" }
-- { id: OOT_MAP_BOTW, add: NONE, flags: 0x80, draw: MAP, object: [oot, 0x00c8], name: "the <C0>Dungeon Map (Well)" }
-- { id: OOT_MAP_IC, add: NONE, flags: 0x80, draw: MAP, object: [oot, 0x00c8], name: "the <C0>Dungeon Map (Ice)" }
-- { id: OOT_COMPASS_DT, add: NONE, flags: 0x80, draw: COMPASS, object: [oot, 0x00b8], name: "the <C0>Compass (Deku)" }
-- { id: OOT_COMPASS_DC, add: NONE, flags: 0x80, draw: COMPASS, object: [oot, 0x00b8], name: "the <C0>Compass (Dodongo)" }
-- { id: OOT_COMPASS_JJ, add: NONE, flags: 0x80, draw: COMPASS, object: [oot, 0x00b8], name: "the <C0>Compass (Jabu)" }
-- { id: OOT_COMPASS_FOREST, add: NONE, flags: 0x80, draw: COMPASS, object: [oot, 0x00b8], name: "the <C0>Compass (Forest)" }
-- { id: OOT_COMPASS_FIRE, add: NONE, flags: 0x80, draw: COMPASS, object: [oot, 0x00b8], name: "the <C0>Compass (Fire)" }
-- { id: OOT_COMPASS_WATER, add: NONE, flags: 0x80, draw: COMPASS, object: [oot, 0x00b8], name: "the <C0>Compass (Water)" }
-- { id: OOT_COMPASS_SPIRIT, add: NONE, flags: 0x80, draw: COMPASS, object: [oot, 0x00b8], name: "the <C0>Compass (Spirit)" }
-- { id: OOT_COMPASS_SHADOW, add: NONE, flags: 0x80, draw: COMPASS, object: [oot, 0x00b8], name: "the <C0>Compass (Shadow)" }
-- { id: OOT_COMPASS_BOTW, add: NONE, flags: 0x80, draw: COMPASS, object: [oot, 0x00b8], name: "the <C0>Compass (Well)" }
-- { id: OOT_COMPASS_IC, add: NONE, flags: 0x80, draw: COMPASS, object: [oot, 0x00b8], name: "the <C0>Compass (Ice)" }
+- { id: OOT_BOSS_KEY_FOREST, add: [OOT_BOSS_KEY, SCE_OOT_TEMPLE_FOREST], flags: 0x80, draw: BOSS_KEY, object: [oot, 0x00b9], name: "the <C0>Boss Key (Forest)" }
+- { id: OOT_BOSS_KEY_FIRE, add: [OOT_BOSS_KEY, SCE_OOT_TEMPLE_FIRE], flags: 0x80, draw: BOSS_KEY, object: [oot, 0x00b9], name: "the <C0>Boss Key (Fire)" }
+- { id: OOT_BOSS_KEY_WATER, add: [OOT_BOSS_KEY, SCE_OOT_TEMPLE_WATER], flags: 0x80, draw: BOSS_KEY, object: [oot, 0x00b9], name: "the <C0>Boss Key (Water)" }
+- { id: OOT_BOSS_KEY_SPIRIT, add: [OOT_BOSS_KEY, SCE_OOT_TEMPLE_SPIRIT], flags: 0x80, draw: BOSS_KEY, object: [oot, 0x00b9], name: "the <C0>Boss Key (Spirit)" }
+- { id: OOT_BOSS_KEY_SHADOW, add: [OOT_BOSS_KEY, SCE_OOT_TEMPLE_SHADOW], flags: 0x80, draw: BOSS_KEY, object: [oot, 0x00b9], name: "the <C0>Boss Key (Shadow)" }
+- { id: OOT_BOSS_KEY_GANON, add: [OOT_BOSS_KEY, SCE_OOT_GANON_TOWER], flags: 0x80, draw: BOSS_KEY, object: [oot, 0x00b9], name: "the <C0>Boss Key (Ganon)" }
+- { id: OOT_MAP_DT, add: [OOT_MAP, SCE_OOT_INSIDE_DEKU_TREE], flags: 0x80, draw: MAP, object: [oot, 0x00c8], name: "the <C0>Dungeon Map (Deku)" }
+- { id: OOT_MAP_DC, add: [OOT_MAP, SCE_OOT_DODONGO_CAVERN], flags: 0x80, draw: MAP, object: [oot, 0x00c8], name: "the <C0>Dungeon Map (Dodongo)" }
+- { id: OOT_MAP_JJ, add: [OOT_MAP, SCE_OOT_INSIDE_JABU_JABU], flags: 0x80, draw: MAP, object: [oot, 0x00c8], name: "the <C0>Dungeon Map (Jabu)" }
+- { id: OOT_MAP_FOREST, add: [OOT_MAP, SCE_OOT_TEMPLE_FOREST], flags: 0x80, draw: MAP, object: [oot, 0x00c8], name: "the <C0>Dungeon Map (Forest)" }
+- { id: OOT_MAP_FIRE, add: [OOT_MAP, SCE_OOT_TEMPLE_FIRE], flags: 0x80, draw: MAP, object: [oot, 0x00c8], name: "the <C0>Dungeon Map (Fire)" }
+- { id: OOT_MAP_WATER, add: [OOT_MAP, SCE_OOT_TEMPLE_WATER], flags: 0x80, draw: MAP, object: [oot, 0x00c8], name: "the <C0>Dungeon Map (Water)" }
+- { id: OOT_MAP_SPIRIT, add: [OOT_MAP, SCE_OOT_TEMPLE_SPIRIT], flags: 0x80, draw: MAP, object: [oot, 0x00c8], name: "the <C0>Dungeon Map (Spirit)" }
+- { id: OOT_MAP_SHADOW, add: [OOT_MAP, SCE_OOT_TEMPLE_SHADOW], flags: 0x80, draw: MAP, object: [oot, 0x00c8], name: "the <C0>Dungeon Map (Shadow)" }
+- { id: OOT_MAP_BOTW, add: [OOT_MAP, SCE_OOT_BOTTOM_OF_THE_WELL], flags: 0x80, draw: MAP, object: [oot, 0x00c8], name: "the <C0>Dungeon Map (Well)" }
+- { id: OOT_MAP_IC, add: [OOT_MAP, SCE_OOT_ICE_CAVERN], flags: 0x80, draw: MAP, object: [oot, 0x00c8], name: "the <C0>Dungeon Map (Ice)" }
+- { id: OOT_COMPASS_DT, add: [OOT_COMPASS, SCE_OOT_INSIDE_DEKU_TREE], flags: 0x80, draw: COMPASS, object: [oot, 0x00b8], name: "the <C0>Compass (Deku)" }
+- { id: OOT_COMPASS_DC, add: [OOT_COMPASS, SCE_OOT_DODONGO_CAVERN], flags: 0x80, draw: COMPASS, object: [oot, 0x00b8], name: "the <C0>Compass (Dodongo)" }
+- { id: OOT_COMPASS_JJ, add: [OOT_COMPASS, SCE_OOT_INSIDE_JABU_JABU], flags: 0x80, draw: COMPASS, object: [oot, 0x00b8], name: "the <C0>Compass (Jabu)" }
+- { id: OOT_COMPASS_FOREST, add: [OOT_COMPASS, SCE_OOT_TEMPLE_FOREST], flags: 0x80, draw: COMPASS, object: [oot, 0x00b8], name: "the <C0>Compass (Forest)" }
+- { id: OOT_COMPASS_FIRE, add: [OOT_COMPASS, SCE_OOT_TEMPLE_FIRE], flags: 0x80, draw: COMPASS, object: [oot, 0x00b8], name: "the <C0>Compass (Fire)" }
+- { id: OOT_COMPASS_WATER, add: [OOT_COMPASS, SCE_OOT_TEMPLE_WATER], flags: 0x80, draw: COMPASS, object: [oot, 0x00b8], name: "the <C0>Compass (Water)" }
+- { id: OOT_COMPASS_SPIRIT, add: [OOT_COMPASS, SCE_OOT_TEMPLE_SPIRIT], flags: 0x80, draw: COMPASS, object: [oot, 0x00b8], name: "the <C0>Compass (Spirit)" }
+- { id: OOT_COMPASS_SHADOW, add: [OOT_COMPASS, SCE_OOT_TEMPLE_SHADOW], flags: 0x80, draw: COMPASS, object: [oot, 0x00b8], name: "the <C0>Compass (Shadow)" }
+- { id: OOT_COMPASS_BOTW, add: [OOT_COMPASS, SCE_OOT_BOTTOM_OF_THE_WELL], flags: 0x80, draw: COMPASS, object: [oot, 0x00b8], name: "the <C0>Compass (Well)" }
+- { id: OOT_COMPASS_IC, add: [OOT_COMPASS, SCE_OOT_ICE_CAVERN], flags: 0x80, draw: COMPASS, object: [oot, 0x00b8], name: "the <C0>Compass (Ice)" }
 - { id: OOT_WALLET, add: [OOT_WALLET, 1], flags: 0x80, draw: WALLET, object: [oot, 0x00d1], name: "the <C1>Child's Wallet" }
 - { id: OOT_WALLET4, add: [OOT_WALLET, 4], flags: 0x80, draw: WALLET4, object: [oot, 0x00d1], name: "the <C1>Colossal Wallet" }
 - { id: OOT_TRIFORCE, add: NONE, flags: 0x80, draw: TRIFORCE, object: TRIFORCE, name: "a <C3>Triforce Piece" }
@@ -455,9 +455,9 @@
 - { id: MM_BOMBCHU_5, item: MM_BOMBCHU_5, add: [MM_BOMBCHU, 5], flags: 0xc0, draw: BOMBCHU, object: [mm, 0x00b0], name: "<C0>5 Bombchu" }
 - { id: MM_GREAT_FAIRY_SWORD, item: MM_GREAT_FAIRY_SWORD, add: MM_NORMAL, flags: 0xa0, draw: MM_GREAT_FAIRY_SWORD, object: [mm, 0x01fb], name: "the <C1>Great Fairy's Sword" }
 - { id: MM_SMALL_KEY, item: MM_SMALL_KEY, add: [MM_SMALL_KEY, 0xffff], flags: 0xa0, draw: SMALL_KEY, object: [mm, 0x0086], name: "a <C0>Small Key" }
-- { id: MM_BOSS_KEY, item: MM_BOSS_KEY, add: NONE, flags: 0xa0, draw: BOSS_KEY, object: [mm, 0x0092], name: "the <C0>Boss Key" }
-- { id: MM_MAP, item: MM_MAP, add: NONE, flags: 0xa0, draw: MAP, object: [mm, 0x00a0], name: "the <C0>Dungeon Map" }
-- { id: MM_COMPASS, item: MM_COMPASS, add: NONE, flags: 0xa0, draw: COMPASS, object: [mm, 0x0091], name: "the <C0>Compass" }
+- { id: MM_BOSS_KEY, item: MM_BOSS_KEY, add: [MM_BOSS_KEY, 0xffff], flags: 0xa0, draw: BOSS_KEY, object: [mm, 0x0092], name: "the <C0>Boss Key" }
+- { id: MM_MAP, item: MM_MAP, add: [MM_MAP, 0xffff], flags: 0xa0, draw: MAP, object: [mm, 0x00a0], name: "the <C0>Dungeon Map" }
+- { id: MM_COMPASS, item: MM_COMPASS, add: [MM_COMPASS, 0xffff], flags: 0xa0, draw: COMPASS, object: [mm, 0x0091], name: "the <C0>Compass" }
 - { id: MM_UNK_40, add: NONE, flags: 0x00 }
 - { id: MM_HOOKSHOT, item: MM_HOOKSHOT, add: [MM_HOOKSHOT, 2], flags: 0xa0, draw: MM_HOOKSHOT, object: [mm, 0x00b4], name: "the <C1>Hookshot" }
 - { id: MM_LENS, item: MM_LENS_OF_TRUTH, add: MM_NORMAL, flags: 0xa0, draw: LENS, object: [mm, 0x00c0], name: "the <C1>Lens of Truth" }
@@ -607,23 +607,23 @@
 - { id: MM_SMALL_KEY_SH, add: [MM_SMALL_KEY, 1], flags: 0xa0, draw: SMALL_KEY, object: [mm, 0x0086], name: "a <C0>Small Key (Snowhead)" }
 - { id: MM_SMALL_KEY_GB, add: [MM_SMALL_KEY, 2], flags: 0xa0, draw: SMALL_KEY, object: [mm, 0x0086], name: "a <C0>Small Key (Great Bay)" }
 - { id: MM_SMALL_KEY_ST, add: [MM_SMALL_KEY, 3], flags: 0xa0, draw: SMALL_KEY, object: [mm, 0x0086], name: "a <C0>Small Key (Stone Tower)" }
-- { id: MM_BOSS_KEY_WF, add: NONE, flags: 0xa0, draw: BOSS_KEY, object: [mm, 0x0092], name: "the <C0>Boss Key (Woodfall)" }
-- { id: MM_BOSS_KEY_SH, add: NONE, flags: 0xa0, draw: BOSS_KEY, object: [mm, 0x0092], name: "the <C0>Boss Key (Snowhead)" }
-- { id: MM_BOSS_KEY_GB, add: NONE, flags: 0xa0, draw: BOSS_KEY, object: [mm, 0x0092], name: "the <C0>Boss Key (Great Bay)" }
-- { id: MM_BOSS_KEY_ST, add: NONE, flags: 0xa0, draw: BOSS_KEY, object: [mm, 0x0092], name: "the <C0>Boss Key (Stone Tower)" }
+- { id: MM_BOSS_KEY_WF, add: [MM_BOSS_KEY, 0], flags: 0xa0, draw: BOSS_KEY, object: [mm, 0x0092], name: "the <C0>Boss Key (Woodfall)" }
+- { id: MM_BOSS_KEY_SH, add: [MM_BOSS_KEY, 1], flags: 0xa0, draw: BOSS_KEY, object: [mm, 0x0092], name: "the <C0>Boss Key (Snowhead)" }
+- { id: MM_BOSS_KEY_GB, add: [MM_BOSS_KEY, 2], flags: 0xa0, draw: BOSS_KEY, object: [mm, 0x0092], name: "the <C0>Boss Key (Great Bay)" }
+- { id: MM_BOSS_KEY_ST, add: [MM_BOSS_KEY, 3], flags: 0xa0, draw: BOSS_KEY, object: [mm, 0x0092], name: "the <C0>Boss Key (Stone Tower)" }
 - { id: MM_STRAY_FAIRY_WF, add: NONE, flags: 0x80, draw: MM_STRAY_FAIRY_WF, name: "a <C0>Stray Fairy (Woodfall)" }
 - { id: MM_STRAY_FAIRY_SH, add: NONE, flags: 0x80, draw: MM_STRAY_FAIRY_SH, name: "a <C0>Stray Fairy (Snowhead)" }
 - { id: MM_STRAY_FAIRY_GB, add: NONE, flags: 0x80, draw: MM_STRAY_FAIRY_GB, name: "a <C0>Stray Fairy (Great Bay)" }
 - { id: MM_STRAY_FAIRY_ST, add: NONE, flags: 0x80, draw: MM_STRAY_FAIRY_ST, name: "a <C0>Stray Fairy (Stone Tower)" }
 - { id: MM_STRAY_FAIRY_TOWN, add: NONE, flags: 0x80, draw: MM_STRAY_FAIRY_TOWN, name: "a <C0>Stray Fairy (Town)" }
-- { id: MM_MAP_WF, add: NONE, flags: 0xa0, draw: MAP, object: [mm, 0x00a0], name: "the <C0>Dungeon Map (Woodfall)" }
-- { id: MM_MAP_SH, add: NONE, flags: 0xa0, draw: MAP, object: [mm, 0x00a0], name: "the <C0>Dungeon Map (Snowhead)" }
-- { id: MM_MAP_GB, add: NONE, flags: 0xa0, draw: MAP, object: [mm, 0x00a0], name: "the <C0>Dungeon Map (Great Bay)" }
-- { id: MM_MAP_ST, add: NONE, flags: 0xa0, draw: MAP, object: [mm, 0x00a0], name: "the <C0>Dungeon Map (Stone Tower)" }
-- { id: MM_COMPASS_WF, add: NONE, flags: 0xa0, draw: COMPASS, object: [mm, 0x0091], name: "the <C0>Compass (Woodfall)" }
-- { id: MM_COMPASS_SH, add: NONE, flags: 0xa0, draw: COMPASS, object: [mm, 0x0091], name: "the <C0>Compass (Snowhead)" }
-- { id: MM_COMPASS_GB, add: NONE, flags: 0xa0, draw: COMPASS, object: [mm, 0x0091], name: "the <C0>Compass (Great Bay)" }
-- { id: MM_COMPASS_ST, add: NONE, flags: 0xa0, draw: COMPASS, object: [mm, 0x0091], name: "the <C0>Compass (Stone Tower)" }
+- { id: MM_MAP_WF, add: [MM_MAP, 0], flags: 0xa0, draw: MAP, object: [mm, 0x00a0], name: "the <C0>Dungeon Map (Woodfall)" }
+- { id: MM_MAP_SH, add: [MM_MAP, 1], flags: 0xa0, draw: MAP, object: [mm, 0x00a0], name: "the <C0>Dungeon Map (Snowhead)" }
+- { id: MM_MAP_GB, add: [MM_MAP, 2], flags: 0xa0, draw: MAP, object: [mm, 0x00a0], name: "the <C0>Dungeon Map (Great Bay)" }
+- { id: MM_MAP_ST, add: [MM_MAP, 3], flags: 0xa0, draw: MAP, object: [mm, 0x00a0], name: "the <C0>Dungeon Map (Stone Tower)" }
+- { id: MM_COMPASS_WF, add: [MM_COMPASS, 0], flags: 0xa0, draw: COMPASS, object: [mm, 0x0091], name: "the <C0>Compass (Woodfall)" }
+- { id: MM_COMPASS_SH, add: [MM_COMPASS, 1], flags: 0xa0, draw: COMPASS, object: [mm, 0x0091], name: "the <C0>Compass (Snowhead)" }
+- { id: MM_COMPASS_GB, add: [MM_COMPASS, 2], flags: 0xa0, draw: COMPASS, object: [mm, 0x0091], name: "the <C0>Compass (Great Bay)" }
+- { id: MM_COMPASS_ST, add: [MM_COMPASS, 3], flags: 0xa0, draw: COMPASS, object: [mm, 0x0091], name: "the <C0>Compass (Stone Tower)" }
 - { id: MM_OCARINA_FAIRY, add: [MM_OCARINA, 1], flags: 0xa0, draw: OOT_OCARINA_FAIRY, object: [oot, 0x010e], name: "the <C1>Fairy Ocarina" }
 - { id: MM_HOOKSHOT_SHORT, add: [MM_HOOKSHOT, 1], flags: 0xa0, draw: OOT_HOOKSHOT, object: [oot, 0x00dd], name: "the <C1>Short Hookshot" }
 - { id: MM_SONG_SUN, add: [MM_QUEST, QUEST_MM_SONG_SUN], flags: 0xa0, draw: [NOTE, 0x03], object: [mm, 0x008f], name: "the <C2>Sun's Song" }

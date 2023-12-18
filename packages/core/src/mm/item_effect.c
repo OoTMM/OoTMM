@@ -147,15 +147,6 @@ int comboAddItemEffect(GameState_Play* play, s16 gi)
         else
             count = comboAddStrayFairyMm(gSaveContext.dungeonId);
         break;
-    case GI_MM_BOSS_KEY:
-        comboAddBossKeyMm(gSaveContext.dungeonId);
-        break;
-    case GI_MM_MAP:
-        comboAddMapMm(gSaveContext.dungeonId);
-        break;
-    case GI_MM_COMPASS:
-        comboAddCompassMm(gSaveContext.dungeonId);
-        break;
     }
 
     return count;

@@ -2,20 +2,6 @@
 #include <combo/item.h>
 #include <combo/sr.h>
 
-static u16 dungeon(GameState_Play* play, int isBossKey)
-{
-    u16 mapIndex;
-
-    /* Desert colossus hands */
-    if (play->sceneId == SCE_OOT_DESERT_COLOSSUS)
-        return SCE_OOT_TEMPLE_SPIRIT;
-
-    mapIndex = gSaveContext.mapIndex;
-    if (mapIndex == SCE_OOT_GANON_TOWER || mapIndex == SCE_OOT_INSIDE_GANON_CASTLE)
-        return isBossKey ? SCE_OOT_GANON_TOWER : SCE_OOT_INSIDE_GANON_CASTLE;
-    return mapIndex;
-}
-
 static void addRupees(u16 count)
 {
     gSaveContext.rupeesDelta += count;
@@ -45,7 +31,6 @@ void comboAddItemSharedForeignEffect(GameState_Play* play, s16 gi)
 int comboAddItemEffect(GameState_Play* play, s16 gi)
 {
     int count;
-    u16 dungeonId;
 
     count = 0;
     switch (gi)
@@ -148,18 +133,6 @@ int comboAddItemEffect(GameState_Play* play, s16 gi)
         break;
     case GI_OOT_MAGIC_UPGRADE2:
         refillMagic(2);
-        break;
-    case GI_OOT_MAP:
-        dungeonId = dungeon(play, 0);
-        comboAddMapOot(dungeonId);
-        break;
-    case GI_OOT_COMPASS:
-        dungeonId = dungeon(play, 0);
-        comboAddCompassOot(dungeonId);
-        break;
-    case GI_OOT_BOSS_KEY:
-        dungeonId = dungeon(play, 1);
-        comboAddBossKeyOot(dungeonId);
         break;
     }
 

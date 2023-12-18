@@ -1303,6 +1303,72 @@ static int addItemSkeletonKeyMm(GameState_Play* play, u8 itemId, s16 gi, u16 par
     return 0;
 }
 
+static int addItemBossKeyOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+#if defined(GAME_OOT)
+    if (param == 0xffff)
+        param = dungeon(play, 1);
+#endif
+
+    gOotSave.inventory.dungeonItems[param].bossKey = 1;
+    return 0;
+}
+
+static int addItemBossKeyMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+#if defined(GAME_MM)
+    if (param == 0xffff)
+        param = gSaveContext.dungeonId;
+#endif
+
+    gMmSave.inventory.dungeonItems[param].bossKey = 1;
+    return 0;
+}
+
+static int addItemCompassOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+#if defined(GAME_OOT)
+    if (param == 0xffff)
+        param = dungeon(play, 0);
+#endif
+
+    gOotSave.inventory.dungeonItems[param].compass = 1;
+    return 0;
+}
+
+static int addItemCompassMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+#if defined(GAME_MM)
+    if (param == 0xffff)
+        param = gSaveContext.dungeonId;
+#endif
+
+    gMmSave.inventory.dungeonItems[param].compass = 1;
+    return 0;
+}
+
+static int addItemMapOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+#if defined(GAME_OOT)
+    if (param == 0xffff)
+        param = dungeon(play, 0);
+#endif
+
+    gOotSave.inventory.dungeonItems[param].map = 1;
+    return 0;
+}
+
+static int addItemMapMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+#if defined(GAME_MM)
+    if (param == 0xffff)
+        param = gSaveContext.dungeonId;
+#endif
+
+    gMmSave.inventory.dungeonItems[param].map = 1;
+    return 0;
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -1365,6 +1431,12 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemKeyRingMm,
     addItemSkeletonKeyOot,
     addItemSkeletonKeyMm,
+    addItemBossKeyOot,
+    addItemBossKeyMm,
+    addItemCompassOot,
+    addItemCompassMm,
+    addItemMapOot,
+    addItemMapMm,
 };
 
 extern const u8 kAddItemFuncs[];

@@ -66,6 +66,12 @@
 #define IA_MM_KEY_RING          0x3a
 #define IA_OOT_SKELETON_KEY     0x3b
 #define IA_MM_SKELETON_KEY      0x3c
+#define IA_OOT_BOSS_KEY         0x3d
+#define IA_MM_BOSS_KEY          0x3e
+#define IA_OOT_COMPASS          0x3f
+#define IA_MM_COMPASS           0x40
+#define IA_OOT_MAP              0x41
+#define IA_MM_MAP               0x42
 #define IA_NONE                 0xff
 
 typedef struct GameState_Play GameState_Play;
@@ -127,15 +133,7 @@ void comboAddItemSharedMm(s16 gi, int noEffect);
 void comboAddItemSharedOot(s16 gi, int noEffect);
 int  comboAddItemEffect(GameState_Play* play, s16 gi);
 void comboAddItemSharedForeignEffect(GameState_Play* play, s16 gi);
-
-void comboAddBossKeyOot(u16 dungeonId);
-void comboAddCompassOot(u16 dungeonId);
-void comboAddMapOot(u16 dungeonId);
-void comboAddBossKeyMm(u16 dungeonId);
 int  comboAddStrayFairyMm(u16 dungeonId);
-void comboAddMapMm(u16 dungeonId);
-void comboAddCompassMm(u16 dungeonId);
-
 void comboAddMagicUpgradeOot(int level);
 void comboAddMagicUpgradeMm(int level);
 

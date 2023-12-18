@@ -2,11 +2,6 @@
 #include <combo/item.h>
 #include <combo/souls.h>
 
-void comboAddBossKeyMm(u16 dungeonId)
-{
-    gMmSave.inventory.dungeonItems[dungeonId].bossKey = 1;
-}
-
 int comboAddStrayFairyMm(u16 dungeonId)
 {
     if (dungeonId == 4)
@@ -19,16 +14,6 @@ int comboAddStrayFairyMm(u16 dungeonId)
         gMmSave.inventory.strayFairies[dungeonId]++;
         return gMmSave.inventory.strayFairies[dungeonId];
     }
-}
-
-void comboAddMapMm(u16 dungeonId)
-{
-    gMmSave.inventory.dungeonItems[dungeonId].map = 1;
-}
-
-void comboAddCompassMm(u16 dungeonId)
-{
-    gMmSave.inventory.dungeonItems[dungeonId].compass = 1;
 }
 
 void comboAddMagicUpgradeMm(int level)
@@ -191,18 +176,6 @@ int comboAddItemMm(s16 gi, int noEffect)
     case GI_MM_GS_TOKEN_OCEAN:
         count = ++gMmSave.skullCountOcean;
         break;
-    case GI_MM_BOSS_KEY_WF:
-        comboAddBossKeyMm(0);
-        break;
-    case GI_MM_BOSS_KEY_SH:
-        comboAddBossKeyMm(1);
-        break;
-    case GI_MM_BOSS_KEY_GB:
-        comboAddBossKeyMm(2);
-        break;
-    case GI_MM_BOSS_KEY_ST:
-        comboAddBossKeyMm(3);
-        break;
     case GI_MM_STRAY_FAIRY_WF:
         count = comboAddStrayFairyMm(0);
         break;
@@ -220,30 +193,6 @@ int comboAddItemMm(s16 gi, int noEffect)
         break;
     case GI_MM_SPIN_UPGRADE:
         MM_SET_EVENT_WEEK(EV_MM_WEEK_SPIN_UPGRADE);
-        break;
-    case GI_MM_MAP_WF:
-        comboAddMapMm(0);
-        break;
-    case GI_MM_MAP_SH:
-        comboAddMapMm(1);
-        break;
-    case GI_MM_MAP_GB:
-        comboAddMapMm(2);
-        break;
-    case GI_MM_MAP_ST:
-        comboAddMapMm(3);
-        break;
-    case GI_MM_COMPASS_WF:
-        comboAddCompassMm(0);
-        break;
-    case GI_MM_COMPASS_SH:
-        comboAddCompassMm(1);
-        break;
-    case GI_MM_COMPASS_GB:
-        comboAddCompassMm(2);
-        break;
-    case GI_MM_COMPASS_ST:
-        comboAddCompassMm(3);
         break;
     case GI_MM_WORLD_MAP_CLOCK_TOWN:
         Inventory_SetWorldMapCloudVisibility(TINGLE_MAP_CLOCK_TOWN);
