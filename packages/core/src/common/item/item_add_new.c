@@ -1566,6 +1566,38 @@ static int addItemSoulMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
+static int addItemPondFish(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    u8 caughtListCapacity;
+    u8 caughtListLength;
+    u8  weight;
+    u8* caughtList;
+
+    weight = param & 0xff;
+    if (param & 0x2000)
+        weight |= 0x80;
+    if (param & 0x1000)
+    {
+        caughtList = gSharedCustomSave.caughtAdultFishWeight;
+        caughtListCapacity = (ARRAY_SIZE(gSharedCustomSave.caughtAdultFishWeight) - 1);
+    }
+    else
+    {
+        caughtList = gSharedCustomSave.caughtChildFishWeight;
+        caughtListCapacity = (ARRAY_SIZE(gSharedCustomSave.caughtChildFishWeight) - 1);
+    }
+
+    caughtListLength = caughtList[0];
+    if (caughtListLength < caughtListCapacity)
+    {
+        caughtListLength++;
+        caughtList[0] = caughtListLength;
+        caughtList[caughtListLength] = weight;
+    }
+
+    return 0;
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -1651,6 +1683,7 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemSpinUpgrade,
     addItemSoulOot,
     addItemSoulMm,
+    addItemPondFish,
 };
 
 extern const u8 kAddItemFuncs[];

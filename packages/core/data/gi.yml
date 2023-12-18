@@ -346,55 +346,55 @@
 - { id: OOT_BOTTLE_POTION_RED, item: OOT_POTION_RED, add: OOT_BOTTLE_NEW, flags: 0x80, draw: BOTTLE_POTION, object: [mm, 0x0196], name:  "a <C1>bottle of Red Potion" }
 - { id: OOT_BOTTLE_POTION_GREEN, item: OOT_POTION_GREEN, add: OOT_BOTTLE_NEW, flags: 0x80, draw: [BOTTLE_POTION, 0x01], object: [mm, 0x0196], name:  "a <C1>bottle of Green Potion" }
 - { id: OOT_BOTTLE_POTION_BLUE, item: OOT_POTION_BLUE, add: OOT_BOTTLE_NEW, flags: 0x80, draw: [BOTTLE_POTION, 0x02], object: [mm, 0x0196], name:  "a <C1>bottle of Blue Potion" }
-- { id: OOT_FISHING_POND_CHILD_FISH_2LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Fish (2 pounds)" }
-- { id: OOT_FISHING_POND_CHILD_FISH_3LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Fish (3 pounds)" }
-- { id: OOT_FISHING_POND_CHILD_FISH_4LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Fish (4 pounds)" }
-- { id: OOT_FISHING_POND_CHILD_FISH_5LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Fish (5 pounds)" }
-- { id: OOT_FISHING_POND_CHILD_FISH_6LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Fish (6 pounds)" }
-- { id: OOT_FISHING_POND_CHILD_FISH_7LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Fish (7 pounds)" }
-- { id: OOT_FISHING_POND_CHILD_FISH_8LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Fish (8 pounds)" }
-- { id: OOT_FISHING_POND_CHILD_FISH_9LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Fish (9 pounds)" }
-- { id: OOT_FISHING_POND_CHILD_FISH_10LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Fish (10 pounds)" }
-- { id: OOT_FISHING_POND_CHILD_FISH_11LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Fish (11 pounds)" }
-- { id: OOT_FISHING_POND_CHILD_FISH_12LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Fish (12 pounds)" }
-- { id: OOT_FISHING_POND_CHILD_FISH_13LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Fish (13 pounds)" }
-- { id: OOT_FISHING_POND_CHILD_FISH_14LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Fish (14 pounds)" }
-- { id: OOT_FISHING_POND_ADULT_FISH_4LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (4 pounds)" }
-- { id: OOT_FISHING_POND_ADULT_FISH_5LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (5 pounds)" }
-- { id: OOT_FISHING_POND_ADULT_FISH_6LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (6 pounds)" }
-- { id: OOT_FISHING_POND_ADULT_FISH_7LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (7 pounds)" }
-- { id: OOT_FISHING_POND_ADULT_FISH_8LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (8 pounds)" }
-- { id: OOT_FISHING_POND_ADULT_FISH_9LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (9 pounds)" }
-- { id: OOT_FISHING_POND_ADULT_FISH_10LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (10 pounds)" }
-- { id: OOT_FISHING_POND_ADULT_FISH_11LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (11 pounds)" }
-- { id: OOT_FISHING_POND_ADULT_FISH_12LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (12 pounds)" }
-- { id: OOT_FISHING_POND_ADULT_FISH_13LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (13 pounds)" }
-- { id: OOT_FISHING_POND_ADULT_FISH_14LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (14 pounds)" }
-- { id: OOT_FISHING_POND_ADULT_FISH_15LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (15 pounds)" }
-- { id: OOT_FISHING_POND_ADULT_FISH_16LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (16 pounds)" }
-- { id: OOT_FISHING_POND_ADULT_FISH_17LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (17 pounds)" }
-- { id: OOT_FISHING_POND_ADULT_FISH_18LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (18 pounds)" }
-- { id: OOT_FISHING_POND_ADULT_FISH_19LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (19 pounds)" }
-- { id: OOT_FISHING_POND_ADULT_FISH_20LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (20 pounds)" }
-- { id: OOT_FISHING_POND_ADULT_FISH_21LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (21 pounds)" }
-- { id: OOT_FISHING_POND_ADULT_FISH_22LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (22 pounds)" }
-- { id: OOT_FISHING_POND_ADULT_FISH_23LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (23 pounds)" }
-- { id: OOT_FISHING_POND_ADULT_FISH_24LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (24 pounds)" }
-- { id: OOT_FISHING_POND_ADULT_FISH_25LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (25 pounds)" }
-- { id: OOT_FISHING_POND_CHILD_LOACH_14LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Loach (14 pounds)" }
-- { id: OOT_FISHING_POND_CHILD_LOACH_15LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Loach (15 pounds)" }
-- { id: OOT_FISHING_POND_CHILD_LOACH_16LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Loach (16 pounds)" }
-- { id: OOT_FISHING_POND_CHILD_LOACH_17LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Loach (17 pounds)" }
-- { id: OOT_FISHING_POND_CHILD_LOACH_18LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Loach (18 pounds)" }
-- { id: OOT_FISHING_POND_CHILD_LOACH_19LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Loach (19 pounds)" }
-- { id: OOT_FISHING_POND_ADULT_LOACH_29LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Loach (29 pounds)" }
-- { id: OOT_FISHING_POND_ADULT_LOACH_30LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Loach (30 pounds)" }
-- { id: OOT_FISHING_POND_ADULT_LOACH_31LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Loach (31 pounds)" }
-- { id: OOT_FISHING_POND_ADULT_LOACH_32LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Loach (32 pounds)" }
-- { id: OOT_FISHING_POND_ADULT_LOACH_33LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Loach (33 pounds)" }
-- { id: OOT_FISHING_POND_ADULT_LOACH_34LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Loach (34 pounds)" }
-- { id: OOT_FISHING_POND_ADULT_LOACH_35LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Loach (35 pounds)" }
-- { id: OOT_FISHING_POND_ADULT_LOACH_36LBS, add: NONE, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Loach (36 pounds)" }
+- { id: OOT_FISHING_POND_CHILD_FISH_2LBS,  add: [POND_FISH, 0x0002], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Fish (2 pounds)" }
+- { id: OOT_FISHING_POND_CHILD_FISH_3LBS,  add: [POND_FISH, 0x0003], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Fish (3 pounds)" }
+- { id: OOT_FISHING_POND_CHILD_FISH_4LBS,  add: [POND_FISH, 0x0004], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Fish (4 pounds)" }
+- { id: OOT_FISHING_POND_CHILD_FISH_5LBS,  add: [POND_FISH, 0x0005], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Fish (5 pounds)" }
+- { id: OOT_FISHING_POND_CHILD_FISH_6LBS,  add: [POND_FISH, 0x0006], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Fish (6 pounds)" }
+- { id: OOT_FISHING_POND_CHILD_FISH_7LBS,  add: [POND_FISH, 0x0007], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Fish (7 pounds)" }
+- { id: OOT_FISHING_POND_CHILD_FISH_8LBS,  add: [POND_FISH, 0x0008], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Fish (8 pounds)" }
+- { id: OOT_FISHING_POND_CHILD_FISH_9LBS,  add: [POND_FISH, 0x0009], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Fish (9 pounds)" }
+- { id: OOT_FISHING_POND_CHILD_FISH_10LBS, add: [POND_FISH, 0x000a], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Fish (10 pounds)" }
+- { id: OOT_FISHING_POND_CHILD_FISH_11LBS, add: [POND_FISH, 0x000b], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Fish (11 pounds)" }
+- { id: OOT_FISHING_POND_CHILD_FISH_12LBS, add: [POND_FISH, 0x000c], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Fish (12 pounds)" }
+- { id: OOT_FISHING_POND_CHILD_FISH_13LBS, add: [POND_FISH, 0x000d], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Fish (13 pounds)" }
+- { id: OOT_FISHING_POND_CHILD_FISH_14LBS, add: [POND_FISH, 0x000e], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Fish (14 pounds)" }
+- { id: OOT_FISHING_POND_ADULT_FISH_4LBS,  add: [POND_FISH, 0x1004], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (4 pounds)" }
+- { id: OOT_FISHING_POND_ADULT_FISH_5LBS,  add: [POND_FISH, 0x1005], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (5 pounds)" }
+- { id: OOT_FISHING_POND_ADULT_FISH_6LBS,  add: [POND_FISH, 0x1006], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (6 pounds)" }
+- { id: OOT_FISHING_POND_ADULT_FISH_7LBS,  add: [POND_FISH, 0x1007], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (7 pounds)" }
+- { id: OOT_FISHING_POND_ADULT_FISH_8LBS,  add: [POND_FISH, 0x1008], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (8 pounds)" }
+- { id: OOT_FISHING_POND_ADULT_FISH_9LBS,  add: [POND_FISH, 0x1009], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (9 pounds)" }
+- { id: OOT_FISHING_POND_ADULT_FISH_10LBS, add: [POND_FISH, 0x100a], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (10 pounds)" }
+- { id: OOT_FISHING_POND_ADULT_FISH_11LBS, add: [POND_FISH, 0x100b], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (11 pounds)" }
+- { id: OOT_FISHING_POND_ADULT_FISH_12LBS, add: [POND_FISH, 0x100c], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (12 pounds)" }
+- { id: OOT_FISHING_POND_ADULT_FISH_13LBS, add: [POND_FISH, 0x100d], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (13 pounds)" }
+- { id: OOT_FISHING_POND_ADULT_FISH_14LBS, add: [POND_FISH, 0x100e], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (14 pounds)" }
+- { id: OOT_FISHING_POND_ADULT_FISH_15LBS, add: [POND_FISH, 0x100f], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (15 pounds)" }
+- { id: OOT_FISHING_POND_ADULT_FISH_16LBS, add: [POND_FISH, 0x1010], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (16 pounds)" }
+- { id: OOT_FISHING_POND_ADULT_FISH_17LBS, add: [POND_FISH, 0x1011], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (17 pounds)" }
+- { id: OOT_FISHING_POND_ADULT_FISH_18LBS, add: [POND_FISH, 0x1012], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (18 pounds)" }
+- { id: OOT_FISHING_POND_ADULT_FISH_19LBS, add: [POND_FISH, 0x1013], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (19 pounds)" }
+- { id: OOT_FISHING_POND_ADULT_FISH_20LBS, add: [POND_FISH, 0x1014], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (20 pounds)" }
+- { id: OOT_FISHING_POND_ADULT_FISH_21LBS, add: [POND_FISH, 0x1015], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (21 pounds)" }
+- { id: OOT_FISHING_POND_ADULT_FISH_22LBS, add: [POND_FISH, 0x1016], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (22 pounds)" }
+- { id: OOT_FISHING_POND_ADULT_FISH_23LBS, add: [POND_FISH, 0x1017], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (23 pounds)" }
+- { id: OOT_FISHING_POND_ADULT_FISH_24LBS, add: [POND_FISH, 0x1018], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (24 pounds)" }
+- { id: OOT_FISHING_POND_ADULT_FISH_25LBS, add: [POND_FISH, 0x1019], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Fish (25 pounds)" }
+- { id: OOT_FISHING_POND_CHILD_LOACH_14LBS, add: [POND_FISH, 0x200e], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Loach (14 pounds)" }
+- { id: OOT_FISHING_POND_CHILD_LOACH_15LBS, add: [POND_FISH, 0x200f], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Loach (15 pounds)" }
+- { id: OOT_FISHING_POND_CHILD_LOACH_16LBS, add: [POND_FISH, 0x2010], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Loach (16 pounds)" }
+- { id: OOT_FISHING_POND_CHILD_LOACH_17LBS, add: [POND_FISH, 0x2011], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Loach (17 pounds)" }
+- { id: OOT_FISHING_POND_CHILD_LOACH_18LBS, add: [POND_FISH, 0x2012], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Loach (18 pounds)" }
+- { id: OOT_FISHING_POND_CHILD_LOACH_19LBS, add: [POND_FISH, 0x2013], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Loach (19 pounds)" }
+- { id: OOT_FISHING_POND_ADULT_LOACH_29LBS, add: [POND_FISH, 0x301d], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Loach (29 pounds)" }
+- { id: OOT_FISHING_POND_ADULT_LOACH_30LBS, add: [POND_FISH, 0x301e], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Loach (30 pounds)" }
+- { id: OOT_FISHING_POND_ADULT_LOACH_31LBS, add: [POND_FISH, 0x301f], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Loach (31 pounds)" }
+- { id: OOT_FISHING_POND_ADULT_LOACH_32LBS, add: [POND_FISH, 0x3020], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Loach (32 pounds)" }
+- { id: OOT_FISHING_POND_ADULT_LOACH_33LBS, add: [POND_FISH, 0x3021], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Loach (33 pounds)" }
+- { id: OOT_FISHING_POND_ADULT_LOACH_34LBS, add: [POND_FISH, 0x3022], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Loach (34 pounds)" }
+- { id: OOT_FISHING_POND_ADULT_LOACH_35LBS, add: [POND_FISH, 0x3023], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Loach (35 pounds)" }
+- { id: OOT_FISHING_POND_ADULT_LOACH_36LBS, add: [POND_FISH, 0x3024], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "an <C1>Adult Loach (36 pounds)" }
 - { id: MM_RUPEE_GREEN, item: MM_RUPEE_GREEN, add: [MM_RUPEE, 1], flags: 0x00, draw: MM_RUPEE_GREEN, object: [mm, 0x013f], name: "a <C0>Green Rupee" }
 - { id: MM_RUPEE_BLUE, item: MM_RUPEE_BLUE, add: [MM_RUPEE, 5], flags: 0x01, draw: MM_RUPEE_BLUE, object: [mm, 0x013f], name: "a <C0>Blue Rupee" }
 - { id: MM_RUPEE_RED_10, item: MM_RUPEE_RED10, add: [MM_RUPEE, 10], flags: 0x02, draw: MM_RUPEE_RED, object: [mm, 0x013f], name: "a <C0>Red Rupee" }
