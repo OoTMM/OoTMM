@@ -1598,6 +1598,12 @@ static int addItemPondFish(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
+static int addItemWorldMap(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    Inventory_SetWorldMapCloudVisibility(param);
+    return 0;
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -1684,6 +1690,7 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemSoulOot,
     addItemSoulMm,
     addItemPondFish,
+    addItemWorldMap,
 };
 
 extern const u8 kAddItemFuncs[];

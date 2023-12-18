@@ -90,6 +90,7 @@
 #define IA_OOT_SOUL             0x52
 #define IA_MM_SOUL              0x53
 #define IA_POND_FISH            0x54
+#define IA_WORLD_MAP            0x55
 #define IA_NONE                 0xff
 
 typedef struct GameState_Play GameState_Play;

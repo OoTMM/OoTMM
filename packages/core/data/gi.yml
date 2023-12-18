@@ -574,12 +574,12 @@
 - { id: MM_UNK_B1, add: NONE, flags: 0x00 }
 - { id: MM_UNK_B2, add: NONE, flags: 0x00 }
 - { id: MM_UNK_B3, add: NONE, flags: 0x80, draw: MM_MASK_SUN, object: [mm, 0x026b] }
-- { id: MM_WORLD_MAP_CLOCK_TOWN, item: MM_WORLD_MAP, add: NONE, flags: 0xa0, draw: MM_WORLD_MAP, object: [mm, 0x024d], name: "a <C0>World Map (Clock Town)" }
-- { id: MM_WORLD_MAP_WOODFALL, item: MM_WORLD_MAP, add: NONE, flags: 0xa0, draw: MM_WORLD_MAP, object: [mm, 0x024d], name: "a <C0>World Map (Woodfall)" }
-- { id: MM_WORLD_MAP_SNOWHEAD, item: MM_WORLD_MAP, add: NONE, flags: 0xa0, draw: MM_WORLD_MAP, object: [mm, 0x024d], name: "a <C0>World Map (Snowhead)" }
-- { id: MM_WORLD_MAP_ROMANI_RANCH, item: MM_WORLD_MAP, add: NONE, flags: 0xa0, draw: MM_WORLD_MAP, object: [mm, 0x024d], name: "a <C0>World Map (Romani Ranch)" }
-- { id: MM_WORLD_MAP_GREAT_BAY, item: MM_WORLD_MAP, add: NONE, flags: 0xa0, draw: MM_WORLD_MAP, object: [mm, 0x024d], name: "a <C0>World Map (Great Bay)" }
-- { id: MM_WORLD_MAP_STONE_TOWER, item: MM_WORLD_MAP, add: NONE, flags: 0xa0, draw: MM_WORLD_MAP, object: [mm, 0x024d], name: "a <C0>World Map (Stone Tower)" }
+- { id: MM_WORLD_MAP_CLOCK_TOWN, item: MM_WORLD_MAP, add: [WORLD_MAP, 0], flags: 0xa0, draw: MM_WORLD_MAP, object: [mm, 0x024d], name: "a <C0>World Map (Clock Town)" }
+- { id: MM_WORLD_MAP_WOODFALL, item: MM_WORLD_MAP, add: [WORLD_MAP, 1], flags: 0xa0, draw: MM_WORLD_MAP, object: [mm, 0x024d], name: "a <C0>World Map (Woodfall)" }
+- { id: MM_WORLD_MAP_SNOWHEAD, item: MM_WORLD_MAP, add: [WORLD_MAP, 2], flags: 0xa0, draw: MM_WORLD_MAP, object: [mm, 0x024d], name: "a <C0>World Map (Snowhead)" }
+- { id: MM_WORLD_MAP_ROMANI_RANCH, item: MM_WORLD_MAP, add: [WORLD_MAP, 3], flags: 0xa0, draw: MM_WORLD_MAP, object: [mm, 0x024d], name: "a <C0>World Map (Romani Ranch)" }
+- { id: MM_WORLD_MAP_GREAT_BAY, item: MM_WORLD_MAP, add: [WORLD_MAP, 4], flags: 0xa0, draw: MM_WORLD_MAP, object: [mm, 0x024d], name: "a <C0>World Map (Great Bay)" }
+- { id: MM_WORLD_MAP_STONE_TOWER, item: MM_WORLD_MAP, add: [WORLD_MAP, 5], flags: 0xa0, draw: MM_WORLD_MAP, object: [mm, 0x024d], name: "a <C0>World Map (Stone Tower)" }
 - { id: MM_MAGIC_UPGRADE, add: [MM_MAGIC_UPGRADE, 1], flags: 0xa0, draw: MAGIC_UPGRADE, object: [mm, 0x00a4], name: "the <C1>Magic Upgrade" }
 - { id: MM_MAGIC_UPGRADE2, add: [MM_MAGIC_UPGRADE, 2], flags: 0xa0, draw: MAGIC_UPGRADE2, object: [mm, 0x00a4], name: "the <C1>Larger Magic Upgrade" }
 - { id: MM_DEFENSE_UPGRADE, add: MM_DEFENSE_UPGRADE, flags: 0xa0, draw: DEFENSE_UPGRADE, object: [mm, 0x0096], name: "the <C1>Defense Upgrade" }
