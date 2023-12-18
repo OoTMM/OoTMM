@@ -1,36 +1,40 @@
 #include <combo.h>
 #include <combo/souls.h>
 
+extern const u16 kAddItemParams[];
+
 static void soulInfosOot(u8** bm, int* index, s16 gi)
 {
-    if (gi >= GI_OOT_SOUL_NPC_SARIA)
+    u16 param;
+    u8 type;
+
+    param = kAddItemParams[gi];
+    *index = param & 0xfff;
+    type = param >> 12;
+
+    switch (type)
     {
-        *index = gi - GI_OOT_SOUL_NPC_SARIA;
-        *bm = gSharedCustomSave.soulsNpcOot;
-    }
-    else if (gi >= GI_OOT_SOUL_BOSS_QUEEN_GOHMA)
-    {
-        *index = gi - GI_OOT_SOUL_BOSS_QUEEN_GOHMA;
-        *bm = gSharedCustomSave.soulsBossOot;
-    }
-    else
-    {
-        *index = gi - GI_OOT_SOUL_ENEMY_STALFOS;
-        *bm = gSharedCustomSave.soulsEnemyOot;
+    case 0: *bm = gSharedCustomSave.soulsEnemyOot; break;
+    case 1: *bm = gSharedCustomSave.soulsBossOot; break;
+    case 2: *bm = gSharedCustomSave.soulsNpcOot; break;
+    default: UNREACHABLE(); break;
     }
 }
 
 static void soulInfosMm(u8** bm, int* index, s16 gi)
 {
-    if (gi >= GI_MM_SOUL_BOSS_ODOLWA)
+    u16 param;
+    u8 type;
+
+    param = kAddItemParams[gi];
+    *index = param & 0xfff;
+    type = param >> 12;
+
+    switch (type)
     {
-        *index = gi - GI_MM_SOUL_BOSS_ODOLWA;
-        *bm = gSharedCustomSave.soulsBossMm;
-    }
-    else
-    {
-        *index = gi - GI_MM_SOUL_ENEMY_OCTOROK;
-        *bm = gSharedCustomSave.soulsEnemyMm;
+    case 0: *bm = gSharedCustomSave.soulsEnemyMm; break;
+    case 1: *bm = gSharedCustomSave.soulsBossMm; break;
+    default: UNREACHABLE(); break;
     }
 }
 

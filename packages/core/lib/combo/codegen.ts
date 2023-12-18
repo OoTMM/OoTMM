@@ -42,6 +42,8 @@ async function genGI() {
   const cgSource = new CodeGen(path.resolve('build', 'src', 'common', 'gi_data.c'));
   cgSource.include('combo.h');
   cgSource.include('combo/custom.h');
+  cgSource.include('combo/item.h');
+  cgSource.include('combo/sr.h');
   cgSource.raw('');
   cgSource.raw('#if defined(GAME_OOT)');
   cgSource.raw('# define OBJECT_OOT(x) x');
@@ -76,6 +78,16 @@ async function genGI() {
   cgSource.raw('const char* const kItemNames[] = {');
   for (const gi of Object.values(DATA_GI)) {
     cgSource.raw(`    ${textMacro(gi.name)},`);
+  }
+  cgSource.raw('};');
+  cgSource.raw('const u8 kAddItemFuncs[] = {');
+  for (const gi of Object.values(DATA_GI)) {
+    cgSource.raw(`    IA_${gi.addFunc},`);
+  }
+  cgSource.raw('};');
+  cgSource.raw('const u16 kAddItemParams[] = {');
+  for (const gi of Object.values(DATA_GI)) {
+    cgSource.raw(`    ${gi.addParam},`);
   }
   cgSource.raw('};');
   await cgSource.emit();

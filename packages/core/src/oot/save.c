@@ -127,7 +127,7 @@ static void applyStartingItems(void)
             for (u16 j = 0; j < count; ++j)
             {
                 gi = comboProgressive(gi);
-                comboAddItemNoEffect(gi);
+                comboAddItem(NULL, gi);
             }
         }
     }

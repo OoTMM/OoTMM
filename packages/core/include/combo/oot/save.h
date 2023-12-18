@@ -108,6 +108,31 @@ typedef union
 }
 OotSaveQuest;
 
+#define QUEST_OOT_MEDALLION_FOREST  0
+#define QUEST_OOT_MEDALLION_FIRE    1
+#define QUEST_OOT_MEDALLION_WATER   2
+#define QUEST_OOT_MEDALLION_SPIRIT  3
+#define QUEST_OOT_MEDALLION_SHADOW  4
+#define QUEST_OOT_MEDALLION_LIGHT   5
+#define QUEST_OOT_SONG_TP_FOREST    6
+#define QUEST_OOT_SONG_TP_FIRE      7
+#define QUEST_OOT_SONG_TP_WATER     8
+#define QUEST_OOT_SONG_TP_SPIRIT    9
+#define QUEST_OOT_SONG_TP_SHADOW    10
+#define QUEST_OOT_SONG_TP_LIGHT     11
+#define QUEST_OOT_SONG_ZELDA        12
+#define QUEST_OOT_SONG_EPONA        13
+#define QUEST_OOT_SONG_SARIA        14
+#define QUEST_OOT_SONG_SUN          15
+#define QUEST_OOT_SONG_TIME         16
+#define QUEST_OOT_SONG_STORMS       17
+#define QUEST_OOT_STONE_EMERALD     18
+#define QUEST_OOT_STONE_RUBY        19
+#define QUEST_OOT_STONE_SAPPHIRE    20
+#define QUEST_OOT_STONE_AGONY       21
+#define QUEST_OOT_GERUDO_CARD       22
+#define QUEST_OOT_GOLD_TOKEN        23
+
 typedef struct
 {
     u8 maxKeys:5;

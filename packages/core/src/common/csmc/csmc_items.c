@@ -362,7 +362,6 @@ int csmcFromItem(s16 gi)
     case GI_MM_BOSS_KEY_ST:
         return CSMC_BOSS_KEY;
     case GI_OOT_GS_TOKEN:
-    case GI_MM_GS_TOKEN:
     case GI_MM_GS_TOKEN_OCEAN:
     case GI_MM_GS_TOKEN_SWAMP:
         return CSMC_SPIDER;

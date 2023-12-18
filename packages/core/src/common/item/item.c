@@ -4,18 +4,6 @@
 #include <combo/dma.h>
 
 #if defined(GAME_OOT)
-# define comboAddItemNative             comboAddItemOot
-# define comboAddItemSharedNative       comboAddItemSharedOot
-# define comboAddItemForeign            comboAddItemMm
-# define comboAddItemSharedForeign      comboAddItemSharedMm
-#else
-# define comboAddItemNative             comboAddItemMm
-# define comboAddItemSharedNative       comboAddItemSharedMm
-# define comboAddItemForeign            comboAddItemOot
-# define comboAddItemSharedForeign      comboAddItemSharedOot
-#endif
-
-#if defined(GAME_OOT)
 u16 gMmMaxRupees[] = { 0, 200, 500, 999 };
 #else
 u16 gOotMaxRupees[] = { 0, 200, 500, 999 };
@@ -32,58 +20,6 @@ static int isPlayerSelf(u8 playerId)
     if (playerId == PLAYER_SELF || playerId == gComboData.playerId)
         return 1;
     return 0;
-}
-
-int comboAddItem(GameState_Play* play, s16 gi)
-{
-    int count;
-    int count2;
-    int isForeign;
-
-    isForeign = (gi >= GI_MM_RUPEE_GREEN);
-#if defined(GAME_MM)
-    isForeign = !isForeign;
-#endif
-
-    if (isForeign)
-    {
-        count = comboAddItemForeign(gi, 1);
-        comboAddItemSharedForeign(gi, 0);
-        comboAddItemSharedForeignEffect(play, gi);
-    }
-    else
-    {
-        count = comboAddItemNative(gi, 0);
-        comboAddItemSharedNative(gi, 0);
-        count2 = comboAddItemEffect(play, gi);
-        if (!count)
-            count = count2;
-    }
-
-    return count;
-}
-
-int comboAddItemNoEffect(s16 gi)
-{
-    int isForeign;
-
-    isForeign = (gi >= GI_MM_RUPEE_GREEN);
-#if defined(GAME_MM)
-    isForeign = !isForeign;
-#endif
-
-    if (isForeign)
-    {
-        comboAddItemForeign(gi, 1);
-        comboAddItemSharedForeign(gi, 1);
-    }
-    else
-    {
-        comboAddItemNative(gi, 1);
-        comboAddItemSharedNative(gi, 1);
-    }
-
-    return -1;
 }
 
 void comboSyncItems(void)

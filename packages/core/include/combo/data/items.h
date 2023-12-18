@@ -172,21 +172,21 @@
 #define ITEM_MM_POTION_GREEN                0x14
 #define ITEM_MM_POTION_BLUE                 0x15
 #define ITEM_MM_FAIRY                       0x16
-#define ITEM_MM_BOTTLED_DEKU_PRINCESS       0x17
+#define ITEM_MM_DEKU_PRINCESS               0x17
 #define ITEM_MM_MILK                        0x18
 #define ITEM_MM_MILK_HALF                   0x19
 #define ITEM_MM_FISH                        0x1a
 #define ITEM_MM_BUG                         0x1b
 #define ITEM_MM_BLUE_FIRE                   0x1c
 #define ITEM_MM_POE                         0x1d
-#define ITEM_MM_BOTTLED_BIG_POE             0x1e
-#define ITEM_MM_BOTTLED_SPRING_WATER        0x1f
-#define ITEM_MM_BOTTLED_SPRING_WATER_HOT    0x20
-#define ITEM_MM_BOTTLED_ZORA_EGG            0x21
-#define ITEM_MM_BOTTLED_GOLD_DUST           0x22
-#define ITEM_MM_BOTTLED_MAGIC_MUSHROOM      0x23
-#define ITEM_MM_BOTTLED_SEAHORSE            0x24
-#define ITEM_MM_BOTTLE_CHATEAU              0x25
+#define ITEM_MM_BIG_POE                     0x1e
+#define ITEM_MM_SPRING_WATER                0x1f
+#define ITEM_MM_SPRING_WATER_HOT            0x20
+#define ITEM_MM_ZORA_EGG                    0x21
+#define ITEM_MM_GOLD_DUST                   0x22
+#define ITEM_MM_MAGIC_MUSHROOM              0x23
+#define ITEM_MM_SEAHORSE                    0x24
+#define ITEM_MM_CHATEAU                     0x25
 #define ITEM_MM_MOON_TEAR                   0x28
 #define ITEM_MM_DEED_LAND                   0x29
 #define ITEM_MM_DEED_SWAMP                  0x2a
@@ -289,10 +289,10 @@
 #define ITEM_MM_STICKS_30                   0x9c
 #define ITEM_MM_NUTS_30                     0x9d
 #define ITEM_MM_NUTS_40                     0x9e
-#define ITEM_MM_CHATEAU_ROMANI              0x9f
+#define ITEM_MM_BOTTLE_CHATEAU              0x9f
 #define ITEM_MM_BOTTLE_MILK                 0xa0
-#define ITEM_MM_GOLD_DUST                   0xa1
-#define ITEM_MM_SEAHORSE                    0xa3
+#define ITEM_MM_BOTTLE_GOLD_DUST            0xa1
+#define ITEM_MM_BOTTLE_SEAHORSE             0xa3
 
 #define ITEM_NONE       0xff
 
@@ -430,39 +430,5 @@
 # define ITS_FOREIGN_STICKS         ITS_OOT_STICKS
 # define ITS_FOREIGN_NUTS           ITS_OOT_NUTS
 #endif
-
-/* Common shared item IDs */
-#define SITEM_ARROW_FIRE                    0x00
-#define SITEM_ARROW_ICE                     0x01
-#define SITEM_ARROW_LIGHT                   0x02
-#define SITEM_SONG_EPONA                    0x03
-#define SITEM_SONG_TIME                     0x04
-#define SITEM_SONG_STORMS                   0x05
-#define SITEM_HOOKSHOT                      0x06
-#define SITEM_LONGSHOT                      0x07
-#define SITEM_LENS                          0x08
-#define SITEM_OCARINA_FAIRY                 0x09
-#define SITEM_OCARINA_TIME                  0x0a
-#define SITEM_MASK_GORON                    0x0b
-#define SITEM_MASK_ZORA                     0x0c
-#define SITEM_MASK_TRUTH                    0x0d
-#define SITEM_MASK_KEATON                   0x0e
-#define SITEM_MASK_BUNNY                    0x0f
-#define SITEM_WALLET2                       0x10
-#define SITEM_WALLET3                       0x11
-#define SITEM_RUPEE_GREEN                   0x12
-#define SITEM_RUPEE_BLUE                    0x13
-#define SITEM_RUPEE_RED                     0x14
-#define SITEM_RUPEE_PURPLE                  0x15
-#define SITEM_RUPEE_SILVER                  0x16
-#define SITEM_RUPEE_GOLD                    0x17
-#define SITEM_HEART_PIECE                   0x18
-#define SITEM_HEART_CONTAINER               0x19
-#define SITEM_RECOVERY_HEART                0x1a
-#define SITEM_DEFENSE_UPGRADE               0x1b
-#define SITEM_SONG_SUN                      0x1c
-#define SITEM_WALLET                        0x1d
-#define SITEM_WALLET4                       0x1e
-#define SITEM_WALLET5                       0x1f
 
 #endif

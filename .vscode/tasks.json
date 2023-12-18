@@ -4,7 +4,13 @@
 		{
 			"type": "npm",
 			"script": "start:core:debug",
-			"problemMatcher": ["$gcc"],
+			"problemMatcher": {
+        "base": "$gcc",
+        "fileLocation": [
+          "relative",
+          "${workspaceFolder}/packages/core"
+        ],
+      },
 			"label": "Generate Seed",
 		}
 	]
