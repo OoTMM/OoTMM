@@ -1261,6 +1261,48 @@ static int addItemSmallKeyMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return addSmallKeyMm(param);
 }
 
+static int addItemKeyRingOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+#if defined(GAME_OOT)
+    if (param == 0xffff)
+        param = dungeon(play, 0);
+#endif
+    for (int i = 0; i < g.maxKeysOot[param]; ++i)
+        addSmallKeyOot(param);
+    return 0;
+}
+
+static int addItemKeyRingMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+#if defined(GAME_MM)
+    if (param == 0xffff)
+        param = gSaveContext.dungeonId;
+#endif
+    for (int i = 0; i < g.maxKeysMm[param]; ++i)
+        addSmallKeyMm(param);
+    return 0;
+}
+
+static int addItemSkeletonKeyOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    for (int j = 0; j < ARRAY_SIZE(g.maxKeysOot); ++j)
+    {
+        for (int i = 0; i < g.maxKeysOot[j]; ++i)
+            addSmallKeyOot(param);
+    }
+    return 0;
+}
+
+static int addItemSkeletonKeyMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    for (int j = 0; j < ARRAY_SIZE(g.maxKeysMm); ++j)
+    {
+        for (int i = 0; i < g.maxKeysMm[j]; ++i)
+            addSmallKeyMm(param);
+    }
+    return 0;
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -1319,6 +1361,10 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemHeartPieceMm,
     addItemSmallKeyOot,
     addItemSmallKeyMm,
+    addItemKeyRingOot,
+    addItemKeyRingMm,
+    addItemSkeletonKeyOot,
+    addItemSkeletonKeyMm,
 };
 
 extern const u8 kAddItemFuncs[];
@@ -1334,19 +1380,20 @@ SharedItem;
 
 /* Good for most purposes, doesn't work so well for items that can have cummulative effects like rupees */
 static const SharedItem kSimpleSharedItems[] = {
-    { CFG_SHARED_LENS,              GI_OOT_LENS,        GI_MM_LENS },
-    { CFG_SHARED_MAGIC_ARROW_FIRE,  GI_OOT_ARROW_FIRE,  GI_MM_ARROW_FIRE },
-    { CFG_SHARED_MAGIC_ARROW_ICE,   GI_OOT_ARROW_ICE,   GI_MM_ARROW_ICE },
-    { CFG_SHARED_MAGIC_ARROW_LIGHT, GI_OOT_ARROW_LIGHT, GI_MM_ARROW_LIGHT },
-    { CFG_SHARED_MASK_BUNNY,        GI_OOT_MASK_BUNNY,  GI_MM_MASK_BUNNY },
-    { CFG_SHARED_MASK_TRUTH,        GI_OOT_MASK_TRUTH,  GI_MM_MASK_TRUTH },
-    { CFG_SHARED_MASK_KEATON,       GI_OOT_MASK_KEATON, GI_MM_MASK_KEATON },
-    { CFG_SHARED_MASK_GORON,        GI_OOT_MASK_GORON,  GI_MM_MASK_GORON  },
-    { CFG_SHARED_MASK_ZORA,         GI_OOT_MASK_ZORA,   GI_MM_MASK_ZORA  },
-    { CFG_SHARED_SONG_EPONA,        GI_OOT_SONG_EPONA,  GI_MM_SONG_EPONA  },
-    { CFG_SHARED_SONG_TIME,         GI_OOT_SONG_TIME,   GI_MM_SONG_TIME  },
-    { CFG_SHARED_SONG_STORMS,       GI_OOT_SONG_STORMS, GI_MM_SONG_STORMS  },
-    { CFG_SHARED_SONG_SUN,          GI_OOT_SONG_SUN,    GI_MM_SONG_SUN  },
+    { CFG_SHARED_LENS,              GI_OOT_LENS,            GI_MM_LENS },
+    { CFG_SHARED_MAGIC_ARROW_FIRE,  GI_OOT_ARROW_FIRE,      GI_MM_ARROW_FIRE },
+    { CFG_SHARED_MAGIC_ARROW_ICE,   GI_OOT_ARROW_ICE,       GI_MM_ARROW_ICE },
+    { CFG_SHARED_MAGIC_ARROW_LIGHT, GI_OOT_ARROW_LIGHT,     GI_MM_ARROW_LIGHT },
+    { CFG_SHARED_MASK_BUNNY,        GI_OOT_MASK_BUNNY,      GI_MM_MASK_BUNNY },
+    { CFG_SHARED_MASK_TRUTH,        GI_OOT_MASK_TRUTH,      GI_MM_MASK_TRUTH },
+    { CFG_SHARED_MASK_KEATON,       GI_OOT_MASK_KEATON,     GI_MM_MASK_KEATON },
+    { CFG_SHARED_MASK_GORON,        GI_OOT_MASK_GORON,      GI_MM_MASK_GORON  },
+    { CFG_SHARED_MASK_ZORA,         GI_OOT_MASK_ZORA,       GI_MM_MASK_ZORA  },
+    { CFG_SHARED_SONG_EPONA,        GI_OOT_SONG_EPONA,      GI_MM_SONG_EPONA  },
+    { CFG_SHARED_SONG_TIME,         GI_OOT_SONG_TIME,       GI_MM_SONG_TIME  },
+    { CFG_SHARED_SONG_STORMS,       GI_OOT_SONG_STORMS,     GI_MM_SONG_STORMS  },
+    { CFG_SHARED_SONG_SUN,          GI_OOT_SONG_SUN,        GI_MM_SONG_SUN  },
+    { CFG_SHARED_SKELETON_KEY,      GI_OOT_SKELETON_KEY,    GI_MM_SKELETON_KEY  },
 };
 
 static int addItem(GameState_Play* play, s16 gi)

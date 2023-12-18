@@ -62,6 +62,10 @@
 #define IA_MM_HEART_PIECE       0x36
 #define IA_OOT_SMALL_KEY        0x37
 #define IA_MM_SMALL_KEY         0x38
+#define IA_OOT_KEY_RING         0x39
+#define IA_MM_KEY_RING          0x3a
+#define IA_OOT_SKELETON_KEY     0x3b
+#define IA_MM_SKELETON_KEY      0x3c
 #define IA_NONE                 0xff
 
 typedef struct GameState_Play GameState_Play;
@@ -124,34 +128,16 @@ void comboAddItemSharedOot(s16 gi, int noEffect);
 int  comboAddItemEffect(GameState_Play* play, s16 gi);
 void comboAddItemSharedForeignEffect(GameState_Play* play, s16 gi);
 
-int  comboAddSmallKeyOot(u16 dungeonId);
-void comboAddKeyRingOot(u16 dungeonId);
-void comboAddSkeletonKeyOot(void);
 void comboAddBossKeyOot(u16 dungeonId);
 void comboAddCompassOot(u16 dungeonId);
 void comboAddMapOot(u16 dungeonId);
-int  comboAddSmallKeyMm(u16 dungeonId);
-void comboAddKeyRingMm(u16 dungeonId);
-void comboAddSkeletonKeyMm(void);
 void comboAddBossKeyMm(u16 dungeonId);
 int  comboAddStrayFairyMm(u16 dungeonId);
 void comboAddMapMm(u16 dungeonId);
 void comboAddCompassMm(u16 dungeonId);
 
-void comboAddQuiverOot(int level);
-void comboAddQuiverMm(int level);
-void comboAddArrowsOot(int count);
-void comboAddArrowsMm(int count);
-void comboAddBombBagOot(int level);
-void comboAddBombBagMm(int level);
-void comboAddBombsOot(int count);
-void comboAddBombsMm(int count);
 void comboAddMagicUpgradeOot(int level);
 void comboAddMagicUpgradeMm(int level);
-void comboAddSticksOot(int count);
-void comboAddSticksMm(int count);
-void comboAddNutsOot(int count);
-void comboAddNutsMm(int count);
 
 int  comboAddItem(GameState_Play* play, s16 gi);
 int  comboAddItemLegacy(GameState_Play* play, s16 gi);

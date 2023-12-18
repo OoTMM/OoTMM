@@ -149,10 +149,6 @@ int comboAddItemEffect(GameState_Play* play, s16 gi)
     case GI_OOT_MAGIC_UPGRADE2:
         refillMagic(2);
         break;
-    case GI_OOT_KEY_RING:
-        dungeonId = dungeon(play, 0);
-        comboAddKeyRingOot(dungeonId);
-        break;
     case GI_OOT_MAP:
         dungeonId = dungeon(play, 0);
         comboAddMapOot(dungeonId);

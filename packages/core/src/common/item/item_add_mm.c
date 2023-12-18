@@ -2,37 +2,6 @@
 #include <combo/item.h>
 #include <combo/souls.h>
 
-int comboAddSmallKeyMm(u16 dungeonId)
-{
-    s8 keyCount;
-
-    /* Max keys */
-    if (gMmSave.inventory.dungeonItems[dungeonId].maxKeys >= g.maxKeysMm[dungeonId])
-        return 0;
-
-    keyCount = gMmSave.inventory.dungeonKeys[dungeonId];
-    if (keyCount < 0)
-        keyCount = 1;
-    else
-        keyCount++;
-    gMmSave.inventory.dungeonKeys[dungeonId] = keyCount;
-    gMmSave.inventory.dungeonItems[dungeonId].maxKeys++;
-
-    return gMmSave.inventory.dungeonItems[dungeonId].maxKeys;
-}
-
-void comboAddKeyRingMm(u16 dungeonId)
-{
-    for (int i = 0; i < g.maxKeysMm[dungeonId]; i++)
-        comboAddSmallKeyMm(dungeonId);
-}
-
-void comboAddSkeletonKeyMm(void)
-{
-    for (int i = 0; i < ARRAY_SIZE(g.maxKeysMm); ++i)
-        comboAddKeyRingMm(i);
-}
-
 void comboAddBossKeyMm(u16 dungeonId)
 {
     gMmSave.inventory.dungeonItems[dungeonId].bossKey = 1;
@@ -172,9 +141,6 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
         }
     }
 
-    if (comboConfig(CFG_SHARED_SKELETON_KEY) && gi == GI_MM_SKELETON_KEY)
-        comboAddSkeletonKeyOot();
-
     if (comboConfig(CFG_SHARED_OCARINA_BUTTONS))
     {
         switch (gi)
@@ -224,21 +190,6 @@ int comboAddItemMm(s16 gi, int noEffect)
         break;
     case GI_MM_GS_TOKEN_OCEAN:
         count = ++gMmSave.skullCountOcean;
-        break;
-    case GI_MM_KEY_RING_WF:
-        comboAddKeyRingMm(0);
-        break;
-    case GI_MM_KEY_RING_SH:
-        comboAddKeyRingMm(1);
-        break;
-    case GI_MM_KEY_RING_GB:
-        comboAddKeyRingMm(2);
-        break;
-    case GI_MM_KEY_RING_ST:
-        comboAddKeyRingMm(3);
-        break;
-    case GI_MM_SKELETON_KEY:
-        comboAddSkeletonKeyMm();
         break;
     case GI_MM_BOSS_KEY_WF:
         comboAddBossKeyMm(0);
