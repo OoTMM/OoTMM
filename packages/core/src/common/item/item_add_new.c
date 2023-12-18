@@ -1541,6 +1541,18 @@ static int addItemButtonMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
+static int addItemKeg(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    addAmmoMm(ITS_MM_KEG, ITEM_MM_POWDER_KEG, 1, param);
+    return 0;
+}
+
+static int addItemSpinUpgrade(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    MM_SET_EVENT_WEEK(EV_MM_WEEK_SPIN_UPGRADE);
+    return 0;
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -1622,6 +1634,8 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemCoin,
     addItemButtonOot,
     addItemButtonMm,
+    addItemKeg,
+    addItemSpinUpgrade,
 };
 
 extern const u8 kAddItemFuncs[];

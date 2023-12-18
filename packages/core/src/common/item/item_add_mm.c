@@ -94,13 +94,6 @@ int comboAddItemMm(s16 gi, int noEffect)
     count = 0;
     switch (gi)
     {
-    case GI_MM_POWDER_KEG:
-        gMmSave.inventory.items[ITS_MM_KEG] = ITEM_MM_POWDER_KEG;
-        gMmSave.inventory.ammo[ITS_MM_KEG] = 1;
-        break;
-    case GI_MM_SPIN_UPGRADE:
-        MM_SET_EVENT_WEEK(EV_MM_WEEK_SPIN_UPGRADE);
-        break;
     case GI_MM_WORLD_MAP_CLOCK_TOWN:
         Inventory_SetWorldMapCloudVisibility(TINGLE_MAP_CLOCK_TOWN);
         break;

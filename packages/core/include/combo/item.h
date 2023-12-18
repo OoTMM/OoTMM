@@ -85,6 +85,8 @@
 #define IA_COIN                 0x4d
 #define IA_OOT_BUTTON           0x4e
 #define IA_MM_BUTTON            0x4f
+#define IA_KEG                  0x50
+#define IA_SPIN_UPGRADE         0x51
 #define IA_NONE                 0xff
 
 typedef struct GameState_Play GameState_Play;
