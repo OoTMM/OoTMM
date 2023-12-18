@@ -1044,6 +1044,73 @@ static int addItemQuestMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
+static void addHealthEffect(u8 count)
+{
+    gSaveContext.healthDelta += count * 0x10;
+}
+
+static void addHealthRawOot(u8 count)
+{
+    gOotSave.playerData.health += count * 0x10;
+    if (gOotSave.playerData.health > gOotSave.playerData.healthMax)
+        gOotSave.playerData.health = gOotSave.playerData.healthMax;
+}
+
+static void addHealthRawMm(u8 count)
+{
+    gMmSave.playerData.health += count * 0x10;
+    if (gMmSave.playerData.health > gMmSave.playerData.healthMax)
+        gMmSave.playerData.health = gMmSave.playerData.healthMax;
+}
+
+static void addHealthOot(GameState_Play* play, u8 count)
+{
+#if defined(GAME_MM)
+    if (!comboConfig(CFG_SHARED_HEALTH))
+        play = NULL;
+#endif
+
+    if (play)
+    {
+        addHealthEffect(count);
+        return;
+    }
+
+    if (comboConfig(CFG_SHARED_HEALTH))
+        addHealthRawMm(count);
+    addHealthRawOot(count);
+}
+
+static void addHealthMm(GameState_Play* play, u8 count)
+{
+#if defined(GAME_OOT)
+    if (!comboConfig(CFG_SHARED_HEALTH))
+        play = NULL;
+#endif
+
+    if (play)
+    {
+        addHealthEffect(count);
+        return;
+    }
+
+    if (comboConfig(CFG_SHARED_HEALTH))
+        addHealthRawOot(count);
+    addHealthRawMm(count);
+}
+
+static int addItemHeartOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    addHealthOot(play, param);
+    return 0;
+}
+
+static int addItemHeartMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    addHealthMm(play, param);
+    return 0;
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -1094,6 +1161,8 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemScale,
     addItemQuestOot,
     addItemQuestMm,
+    addItemHeartOot,
+    addItemHeartMm,
 };
 
 extern const u8 kAddItemFuncs[];

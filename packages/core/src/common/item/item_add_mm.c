@@ -104,10 +104,6 @@ void comboAddCommonItemMm(int sid, int noEffect)
         if (noEffect)
             addHealth(20);
         break;
-    case SITEM_RECOVERY_HEART:
-        if (noEffect)
-            addHealth(1);
-        break;
     case SITEM_DEFENSE_UPGRADE:
         gMmSave.playerData.doubleDefense = 1;
         gMmSave.inventory.defenseHearts = 20;
@@ -136,9 +132,6 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
     {
         switch (gi)
         {
-        case GI_MM_RECOVERY_HEART:
-            comboAddCommonItemOot(SITEM_RECOVERY_HEART, noEffect);
-            break;
         case GI_MM_HEART_CONTAINER:
             comboAddCommonItemOot(SITEM_HEART_CONTAINER, noEffect);
             break;
@@ -291,9 +284,6 @@ int comboAddItemMm(s16 gi, int noEffect)
         break;
     case GI_MM_HEART_CONTAINER:
         comboAddCommonItemMm(SITEM_HEART_CONTAINER, noEffect);
-        break;
-    case GI_MM_RECOVERY_HEART:
-        comboAddCommonItemMm(SITEM_RECOVERY_HEART, noEffect);
         break;
     case GI_MM_SMALL_KEY_WF:
         count = comboAddSmallKeyMm(0);

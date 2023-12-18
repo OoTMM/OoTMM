@@ -126,10 +126,6 @@ void comboAddCommonItemOot(int sid, int noEffect)
         if (noEffect)
             addHealth(20);
         break;
-    case SITEM_RECOVERY_HEART:
-        if (noEffect)
-            addHealth(1);
-        break;
     case SITEM_DEFENSE_UPGRADE:
         gOotSave.playerData.doubleDefense = 1;
         gOotSave.inventory.doubleDefenseHearts = 20;
@@ -158,9 +154,6 @@ void comboAddItemSharedOot(s16 gi, int noEffect)
     {
         switch (gi)
         {
-        case GI_OOT_RECOVERY_HEART:
-            comboAddCommonItemMm(SITEM_RECOVERY_HEART, noEffect);
-            break;
         case GI_OOT_HEART_CONTAINER:
         case GI_OOT_HEART_CONTAINER2:
             comboAddCommonItemMm(SITEM_HEART_CONTAINER, noEffect);
@@ -316,9 +309,6 @@ int comboAddItemOot(s16 gi, int noEffect)
     case GI_OOT_GS_TOKEN:
         gOotSave.inventory.quest.goldToken = 1;
         count = ++gOotSave.inventory.goldTokens;
-        break;
-    case GI_OOT_RECOVERY_HEART:
-        comboAddCommonItemOot(SITEM_RECOVERY_HEART, noEffect);
         break;
     case GI_OOT_SMALL_KEY_FOREST:
         count = comboAddSmallKeyOot(SCE_OOT_TEMPLE_FOREST);

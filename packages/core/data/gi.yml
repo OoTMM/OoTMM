@@ -69,7 +69,7 @@
 - { id: OOT_WALLET2, item: OOT_WALLET2, add: [OOT_WALLET, 2], flags: 0x80, draw: WALLET2, object: [oot, 0x00d1], name: "the <C1>Adult's Wallet" }
 - { id: OOT_WALLET3, item: OOT_WALLET3, add: [OOT_WALLET, 3], flags: 0x80, draw: WALLET3, object: [oot, 0x00d1], name: "the <C1>Giant's Wallet" }
 - { id: OOT_WEIRD_EGG, item: OOT_WEIRD_EGG, add: [OOT_TRADE_CHILD, 0], flags: 0x80, draw: OOT_EGG, object: [oot, 0x00da], name: "the <C1>Weird Egg" }
-- { id: OOT_RECOVERY_HEART, item: OOT_RECOVERY_HEART, add: NONE, flags: 0x80, draw: RECOVERY_HEART, object: [oot, 0x00b7], name: "a <C0>Recovery Heart" }
+- { id: OOT_RECOVERY_HEART, item: OOT_RECOVERY_HEART, add: [OOT_HEART, 1], flags: 0x80, draw: RECOVERY_HEART, object: [oot, 0x00b7], name: "a <C0>Recovery Heart" }
 - { id: OOT_ARROWS_5, item: OOT_ARROWS_5, add: [OOT_ARROWS, 5], flags: 0x48, draw: ARROW, object: [oot, 0x00d8], name: "<C0>5 Arrows" }
 - { id: OOT_ARROWS_10, item: OOT_ARROWS_10, add: [OOT_ARROWS, 10], flags: 0x49, draw: ARROW2, object: [oot, 0x00d8], name: "<C0>10 Arrows" }
 - { id: OOT_ARROWS_30, item: OOT_ARROWS_30, add: [OOT_ARROWS, 30], flags: 0x4a, draw: ARROW3, object: [oot, 0x00d8], name: "<C0>30 Arrows" }
@@ -404,7 +404,7 @@
 - { id: MM_RUPEE_GOLD, item: MM_RUPEE_GOLD, add: [MM_RUPEE, 200], flags: 0x13, draw: MM_RUPEE_GOLD, object: [mm, 0x013f], name: "a <C0>Gold Rupee" }
 - { id: MM_WALLET2, item: MM_WALLET2, add: [MM_WALLET, 2], flags: 0xa0, draw: WALLET2, object: [mm, 0x00a8], name: "the <C1>Adult Wallet" }
 - { id: MM_WALLET3, item: MM_WALLET3, add: [MM_WALLET, 3], flags: 0xa0, draw: WALLET3, object: [mm, 0x00a8], name: "the <C1>Giant Wallet" }
-- { id: MM_RECOVERY_HEART, item: MM_RECOVERY_HEART, add: NONE, flags: 0x80, draw: RECOVERY_HEART, object: [mm, 0x0090], name: "a <C0>Recovery Heart" }
+- { id: MM_RECOVERY_HEART, item: MM_RECOVERY_HEART, add: [MM_HEART, 1], flags: 0x80, draw: RECOVERY_HEART, object: [mm, 0x0090], name: "a <C0>Recovery Heart" }
 - { id: MM_UNK_0B, item: MM_RECOVERY_HEART, add: NONE, flags: 0xa0, draw: RECOVERY_HEART, object: [mm, 0x0090], name: "a <C0>Recovery Heart" }
 - { id: MM_HEART_PIECE, item: MM_HEART_PIECE, add: NONE, flags: 0xa0, draw: HEART_PIECE, object: [mm, 0x0096], name: "a <C0>Piece of Heart" }
 - { id: MM_HEART_CONTAINER, item: MM_HEART_CONTAINER, add: NONE, flags: 0xa0, draw: HEART_CONTAINER, object: [mm, 0x0096], name: "a <C0>Heart Container" }

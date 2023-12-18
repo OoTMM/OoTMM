@@ -136,9 +136,6 @@ void comboAddItemSharedForeignEffect(GameState_Play* play, s16 gi)
     {
         switch (gi)
         {
-        case GI_OOT_RECOVERY_HEART:
-            addHealth(1);
-            break;
         case GI_OOT_HEART_PIECE:
         case GI_OOT_TC_HEART_PIECE:
         case GI_OOT_HEART_CONTAINER:
@@ -162,9 +159,6 @@ int comboAddItemEffect(GameState_Play* play, s16 gi)
         break;
     case GI_MM_MAGIC_UPGRADE2:
         refillMagic(2);
-        break;
-    case GI_MM_RECOVERY_HEART:
-        addHealth(1);
         break;
     case GI_MM_HEART_PIECE:
     case GI_MM_HEART_CONTAINER:
