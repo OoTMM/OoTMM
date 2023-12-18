@@ -4,14 +4,6 @@
 #include <combo/dma.h>
 
 #if defined(GAME_OOT)
-# define comboAddItemNative             comboAddItemOot
-# define comboAddItemForeign            comboAddItemMm
-#else
-# define comboAddItemNative             comboAddItemMm
-# define comboAddItemForeign            comboAddItemOot
-#endif
-
-#if defined(GAME_OOT)
 u16 gMmMaxRupees[] = { 0, 200, 500, 999 };
 #else
 u16 gOotMaxRupees[] = { 0, 200, 500, 999 };
@@ -28,49 +20,6 @@ static int isPlayerSelf(u8 playerId)
     if (playerId == PLAYER_SELF || playerId == gComboData.playerId)
         return 1;
     return 0;
-}
-
-int comboAddItemLegacy(GameState_Play* play, s16 gi)
-{
-    int count;
-    int isForeign;
-
-    isForeign = (gi >= GI_MM_RUPEE_GREEN);
-#if defined(GAME_MM)
-    isForeign = !isForeign;
-#endif
-
-    if (isForeign)
-    {
-        count = comboAddItemForeign(gi, 1);
-    }
-    else
-    {
-        count = comboAddItemNative(gi, 0);
-    }
-
-    return count;
-}
-
-int comboAddItemLegacyNoEffect(s16 gi)
-{
-    int isForeign;
-
-    isForeign = (gi >= GI_MM_RUPEE_GREEN);
-#if defined(GAME_MM)
-    isForeign = !isForeign;
-#endif
-
-    if (isForeign)
-    {
-        comboAddItemForeign(gi, 1);
-    }
-    else
-    {
-        comboAddItemNative(gi, 1);
-    }
-
-    return -1;
 }
 
 void comboSyncItems(void)

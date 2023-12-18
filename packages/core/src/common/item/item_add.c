@@ -1772,19 +1772,10 @@ static int addItem(GameState_Play* play, s16 gi)
     addParam = kAddItemParams[gi - 1];
 
     if (addId == IA_NONE)
-    {
-        /* Legacy item add */
-        if (play == NULL)
-            ret = comboAddItemLegacyNoEffect(gi);
-        else
-            ret = comboAddItemLegacy(play, gi);
-    }
-    else
-    {
-        /* New item handlers */
-        func = kAddItemHandlers[addId];
-        ret = func(play, kExtendedGetItems[gi - 1].itemId, gi, addParam);
-    }
+        return 0;
+
+    func = kAddItemHandlers[addId];
+    ret = func(play, kExtendedGetItems[gi - 1].itemId, gi, addParam);
 
     return ret;
 }
@@ -1806,10 +1797,8 @@ int comboAddItem(GameState_Play* play, s16 gi)
         else
             continue;
         if (comboConfig(si->cfg))
-        {
             addItem(play, otherGi);
-            break;
-        }
+        break;
     }
     return count;
 }
