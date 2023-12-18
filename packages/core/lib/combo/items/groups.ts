@@ -277,6 +277,7 @@ export const JUNK = new Set([
   Items.SHARED_BOMBCHU_5,
   Items.SHARED_BOMBCHU_10,
   Items.SHARED_BOMBCHU_20,
+  Items.NOTHING,
 ]);
 
 export const LICENSES = new Set([

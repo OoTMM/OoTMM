@@ -656,6 +656,7 @@ const ITEM_IDS = [
   'OOT_FISHING_POND_ADULT_LOACH_34LBS',
   'OOT_FISHING_POND_ADULT_LOACH_35LBS',
   'OOT_FISHING_POND_ADULT_LOACH_36LBS',
+  'NOTHING',
 ] as const;
 
 export type ItemID = typeof ITEM_IDS[number];

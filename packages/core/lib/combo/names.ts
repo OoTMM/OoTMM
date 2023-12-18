@@ -656,6 +656,7 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   OOT_FISHING_POND_ADULT_LOACH_34LBS: 'Adult Loach (34 pounds)',
   OOT_FISHING_POND_ADULT_LOACH_35LBS: 'Adult Loach (35 pounds)',
   OOT_FISHING_POND_ADULT_LOACH_36LBS: 'Adult Loach (36 pounds)',
+  NOTHING: 'Nothing',
 };
 
 export function itemName(item: string) {

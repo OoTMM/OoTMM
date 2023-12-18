@@ -228,10 +228,11 @@ type ItemPools = {
   required: PlayerItems,
   nice: PlayerItems,
   junk: PlayerItems,
+  nothing: PlayerItems,
 };
 
 const removeItemPools = (pools: ItemPools, item: PlayerItem) => {
-  const keys = ['extra', 'required', 'nice', 'junk'] as const;
+  const keys = ['extra', 'required', 'nice', 'junk', 'nothing'] as const;
   for (const key of keys) {
     const items = pools[key];
     if (items.has(item)) {
@@ -258,6 +259,7 @@ const cloneState = (state: SolverState) => {
       required: new Map(state.pools.required),
       nice: new Map(state.pools.nice),
       junk: new Map(state.pools.junk),
+      nothing: new Map(state.pools.nothing),
     },
     criticalRenewables: new Set(state.criticalRenewables),
     placedCount: state.placedCount,
@@ -292,7 +294,7 @@ export class LogicPassSolver {
     this.state = {
       startingItems: new Map(this.input.startingItems),
       items: new Map,
-      pools: { extra: new Map, required: new Map, nice: new Map, junk: new Map },
+      pools: { extra: new Map, required: new Map, nice: new Map, junk: new Map, nothing: new Map },
       criticalRenewables: new Set,
       placedCount: 0,
     }
@@ -442,7 +444,9 @@ export class LogicPassSolver {
        */
       const junk = ItemHelpers.isJunk(pi.item);
 
-      if (ItemHelpers.isNamedTriforce(pi.item)) {
+      if (pi.item === Items.NOTHING) {
+        this.state.pools.nothing.set(pi, amount);
+      } else if (ItemHelpers.isNamedTriforce(pi.item)) {
         this.state.pools.extra.set(pi, amount);
       } else if (ItemHelpers.isItemMajor(pi.item)) {
         if (junk && ItemHelpers.isItemConsumable(pi.item)) {
@@ -560,35 +564,6 @@ export class LogicPassSolver {
         }
       }
     }
-  }
-
-  private getWeightedLocationList(worldId: number) {
-    const worldLocs = this.locations.filter(x => locationData(x).world === worldId);
-    const locs = new Map<Location, number>();
-    const worldItems = countMapArray(this.state.pools.required).filter(x => x.player === worldId);
-    const items = shuffle(this.input.random, worldItems);
-    const assumed = countMapCombine(this.state.pools.required, this.state.pools.nice);
-    for (const item of items) {
-      const assumedWithoutItem = new Map(assumed);
-      countMapRemove(assumedWithoutItem, item, 1);
-      const state = this.pathfinder.run(null, { recursive: true, assumedItems: assumedWithoutItem, items: this.state.items });
-      for (const loc of worldLocs) {
-        if (!state.locations.has(loc) && !this.state.items.has(loc)) {
-          countMapAdd(locs, loc, 1);
-        }
-      }
-    }
-
-    const cutoff = Math.floor(Array.from(locs.values()).reduce((acc, x) => acc + x, 0) / locs.size);
-
-    /* Boost checks above the cutoff */
-    for (const [loc, count] of locs.entries()) {
-      if (count >= cutoff) {
-        locs.set(loc, count * 2);
-      }
-    }
-
-    return locs;
   }
 
   private getSpheres() {
@@ -1163,6 +1138,9 @@ export class LogicPassSolver {
   private fillJunk(locs: Iterable<Location>) {
     /* Fill using the junk pool */
     this.fill(locs, this.state.pools.junk, false);
+
+    /* Fill with the nothing pool */
+    this.fill(locs, this.state.pools.nothing, false);
 
     /* Junk pool empty - fill with extra junk */
     locs = shuffle(this.input.random, Array.from(locs).filter(loc => !this.state.items.has(loc)));

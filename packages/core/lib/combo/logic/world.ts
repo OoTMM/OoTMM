@@ -433,7 +433,12 @@ export class LogicPassWorld {
       } else {
         id = Number(record.id);
       }
-      const item = itemByID(gameId(game, String(record.item), '_'));
+      let item: Item;
+      if (record.item === 'NOTHING') {
+        item = Items.NOTHING;
+      } else {
+        item = itemByID(gameId(game, String(record.item), '_'));
+      }
       let hint = String(record.hint);
       if (hint !== 'NONE') {
         hint = gameId(game, hint, '_');

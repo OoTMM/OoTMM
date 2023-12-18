@@ -207,6 +207,7 @@ ActorInit CustomItem_gActorInit = {
 Actor_CustomItem* DropCustomItem(GameState_Play* play, const Vec3f* pos, const Xflag* xflag)
 {
     Actor_CustomItem* item;
+    ComboItemOverride o;
 
     /* Check if the xflag item is already spawned */
     item = g.customItemsList;
@@ -215,6 +216,14 @@ Actor_CustomItem* DropCustomItem(GameState_Play* play, const Vec3f* pos, const X
         if (memcmp(&item->xflag, xflag, sizeof(Xflag)) == 0)
             return NULL;
         item = item->next;
+    }
+
+    /* Check if the item to be spawned is literaly Nothing */
+    comboXflagItemOverride(&o, xflag, 0);
+    if (o.gi == GI_NOTHING)
+    {
+        comboXflagsSet(xflag);
+        return NULL;
     }
 
     /* Spawn the custom actor */

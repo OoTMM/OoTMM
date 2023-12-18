@@ -114,6 +114,8 @@ int isItemBuyable(s16 gi)
         return hasFreeBottleMm();
     case GI_MM_SHIELD_HERO:
         return gMmSave.itemEquips.shield == 0;
+    case GI_NOTHING:
+        return 0;
     default:
         return 1;
     }
