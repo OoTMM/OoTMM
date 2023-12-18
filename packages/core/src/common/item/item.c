@@ -5,14 +5,10 @@
 
 #if defined(GAME_OOT)
 # define comboAddItemNative             comboAddItemOot
-# define comboAddItemSharedNative       comboAddItemSharedOot
 # define comboAddItemForeign            comboAddItemMm
-# define comboAddItemSharedForeign      comboAddItemSharedMm
 #else
 # define comboAddItemNative             comboAddItemMm
-# define comboAddItemSharedNative       comboAddItemSharedMm
 # define comboAddItemForeign            comboAddItemOot
-# define comboAddItemSharedForeign      comboAddItemSharedOot
 #endif
 
 #if defined(GAME_OOT)
@@ -47,12 +43,10 @@ int comboAddItemLegacy(GameState_Play* play, s16 gi)
     if (isForeign)
     {
         count = comboAddItemForeign(gi, 1);
-        comboAddItemSharedForeign(gi, 0);
     }
     else
     {
         count = comboAddItemNative(gi, 0);
-        comboAddItemSharedNative(gi, 0);
     }
 
     return count;
@@ -70,12 +64,10 @@ int comboAddItemLegacyNoEffect(s16 gi)
     if (isForeign)
     {
         comboAddItemForeign(gi, 1);
-        comboAddItemSharedForeign(gi, 1);
     }
     else
     {
         comboAddItemNative(gi, 1);
-        comboAddItemSharedNative(gi, 1);
     }
 
     return -1;

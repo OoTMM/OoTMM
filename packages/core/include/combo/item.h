@@ -87,6 +87,8 @@
 #define IA_MM_BUTTON            0x4f
 #define IA_KEG                  0x50
 #define IA_SPIN_UPGRADE         0x51
+#define IA_OOT_SOUL             0x52
+#define IA_MM_SOUL              0x53
 #define IA_NONE                 0xff
 
 typedef struct GameState_Play GameState_Play;
@@ -144,8 +146,6 @@ void reloadSlotMm(GameState_Play* play, int slot);
 
 int  comboAddItemMm(s16 gi, int noEffect);
 int  comboAddItemOot(s16 gi, int noEffect);
-void comboAddItemSharedMm(s16 gi, int noEffect);
-void comboAddItemSharedOot(s16 gi, int noEffect);
 
 int  comboAddItem(GameState_Play* play, s16 gi);
 int  comboAddItemLegacy(GameState_Play* play, s16 gi);
