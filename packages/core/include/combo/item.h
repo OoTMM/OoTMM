@@ -46,6 +46,8 @@
 #define IA_MM_SWORD             0x26
 #define IA_OOT_BOMB_BAG         0x27
 #define IA_MM_BOMB_BAG          0x28
+#define IA_OOT_SHIELD           0x29
+#define IA_MM_SHIELD            0x2a
 #define IA_NONE                 0xff
 
 typedef struct GameState_Play GameState_Play;

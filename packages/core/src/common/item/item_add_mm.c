@@ -72,12 +72,6 @@ static void addHealth(u8 count)
         gMmSave.playerData.health = gMmSave.playerData.healthMax;
 }
 
-static void addShield(int index)
-{
-    if (index > gMmSave.itemEquips.shield)
-        gMmSave.itemEquips.shield = index;
-}
-
 void comboAddMagicUpgradeMm(int level)
 {
     gMmSave.playerData.magicAcquired = 1;
@@ -317,15 +311,6 @@ int comboAddItemMm(s16 gi, int noEffect)
         comboAddMagicUpgradeMm(2);
         if (noEffect)
             refillMagic(2);
-        break;
-    case GI_MM_PROGRESSIVE_SHIELD_HERO:
-        gMmExtraFlags2.progressiveShield = 1;
-        /* Fallthrough */
-    case GI_MM_SHIELD_HERO:
-        addShield(1);
-        break;
-    case GI_MM_SHIELD_MIRROR:
-        addShield(2);
         break;
     case GI_MM_GS_TOKEN_SWAMP:
         count = ++gMmSave.skullCountSwamp;

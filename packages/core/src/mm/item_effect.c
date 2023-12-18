@@ -157,11 +157,6 @@ int comboAddItemEffect(GameState_Play* play, s16 gi)
     count = 0;
     switch (gi)
     {
-    case GI_MM_PROGRESSIVE_SHIELD_HERO:
-    case GI_MM_SHIELD_HERO:
-    case GI_MM_SHIELD_MIRROR:
-        UpdateEquipment(play, GET_LINK(play));
-        break;
     case GI_MM_MAGIC_UPGRADE:
         refillMagic(1);
         break;

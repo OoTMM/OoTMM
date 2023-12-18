@@ -969,6 +969,41 @@ static int addItemBombBagMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
+static int addItemShieldOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    u8 shieldType;
+    u8 isProgressive;
+    u8 mask;
+
+    shieldType = (param & 0xff);
+    isProgressive = !!((param >> 8) & 0xff);
+    mask = 1 << (shieldType - 1);
+    gOotSave.inventory.equipment.shields |= mask;
+    if (isProgressive)
+        gOotExtraItems.shield |= mask;
+    return 0;
+}
+
+static int addItemShieldMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    u8 shieldType;
+    u8 isProgressive;
+
+    shieldType = (param & 0xff);
+    isProgressive = !!((param >> 8) & 0xff);
+    if (shieldType > gMmSave.itemEquips.shield)
+        gMmSave.itemEquips.shield = shieldType;
+    if (isProgressive)
+        gMmExtraFlags2.progressiveShield = 1;
+
+#if defined(GAME_MM)
+    if (play)
+        UpdateEquipment(play, GET_LINK(play));
+#endif
+
+    return 0;
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -1011,6 +1046,8 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemSwordMm,
     addItemBombBagOot,
     addItemBombBagMm,
+    addItemShieldOot,
+    addItemShieldMm,
 };
 
 extern const u8 kAddItemFuncs[];

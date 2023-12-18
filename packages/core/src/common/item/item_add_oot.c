@@ -325,22 +325,6 @@ int comboAddItemOot(s16 gi, int noEffect)
     (void)dungeonId;
     switch (gi)
     {
-    case GI_OOT_PROGRESSIVE_SHIELD_DEKU:
-        gOotExtraItems.shield |= EQ_OOT_SHIELD_DEKU;
-        /* Fallthrough */
-    case GI_OOT_SHIELD_DEKU:
-        gOotSave.inventory.equipment.shields |= EQ_OOT_SHIELD_DEKU;
-        break;
-    case GI_OOT_PROGRESSIVE_SHIELD_HYLIAN:
-        gOotExtraItems.shield |= EQ_OOT_SHIELD_HYLIAN;
-        /* Fallthrough */
-    case GI_OOT_SHIELD_HYLIAN:
-        gOotSave.inventory.equipment.shields |= EQ_OOT_SHIELD_HYLIAN;
-        break;
-    case GI_OOT_SHIELD_MIRROR:
-        gOotSave.inventory.equipment.shields |= EQ_OOT_SHIELD_MIRROR;
-        gOotExtraItems.shield |= EQ_OOT_SHIELD_MIRROR;
-        break;
     case GI_OOT_TUNIC_GORON:
         gOotSave.inventory.equipment.tunics |= EQ_OOT_TUNIC_GORON;
         break;
