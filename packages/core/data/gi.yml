@@ -273,10 +273,10 @@
 - { id: OOT_KEY_RING_GF, add: [OOT_KEY_RING, SCE_OOT_THIEVES_HIDEOUT], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "the <C0>Key Ring (Hideout)" }
 - { id: OOT_KEY_RING_GTG, add: [OOT_KEY_RING, SCE_OOT_GERUDO_TRAINING_GROUND], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "the <C0>Key Ring (GTG)" }
 - { id: OOT_SKELETON_KEY, add: OOT_SKELETON_KEY, flags: 0x80, draw: SKELETON_KEY, object: [oot, 0x00aa], name: "the <C1>Skeleton Key" }
-- { id: OOT_COIN_YELLOW, add: [COIN, 0], flags: 0x80, draw: COIN_YELLOW, object: [oot, 0x012e], name: "a <C1>Yellow Coin" }
-- { id: OOT_COIN_RED, add: [COIN, 1], flags: 0x80, draw: COIN_RED, object: [oot, 0x012e], name: "a <C1>Red Coin" }
-- { id: OOT_COIN_GREEN, add: [COIN, 2], flags: 0x80, draw: COIN_GREEN, object: [oot, 0x012e], name: "a <C1>Green Coin" }
-- { id: OOT_COIN_BLUE, add: [COIN, 3], flags: 0x80, draw: COIN_BLUE, object: [oot, 0x012e], name: "a <C1>Blue Coin" }
+- { id: OOT_COIN_RED, add: [COIN, 0], flags: 0x80, draw: COIN_RED, object: [oot, 0x012e], name: "a <C1>Red Coin" }
+- { id: OOT_COIN_GREEN, add: [COIN, 1], flags: 0x80, draw: COIN_GREEN, object: [oot, 0x012e], name: "a <C1>Green Coin" }
+- { id: OOT_COIN_BLUE, add: [COIN, 2], flags: 0x80, draw: COIN_BLUE, object: [oot, 0x012e], name: "a <C1>Blue Coin" }
+- { id: OOT_COIN_YELLOW, add: [COIN, 3], flags: 0x80, draw: COIN_YELLOW, object: [oot, 0x012e], name: "a <C1>Yellow Coin" }
 - { id: OOT_TRIFORCE_POWER, add: TRIFORCE, flags: 0x80, draw: [TRIFORCE, 0x01], object: TRIFORCE, name: "the <C3>Triforce of Power" }
 - { id: OOT_TRIFORCE_COURAGE, add: TRIFORCE, flags: 0x80, draw: [TRIFORCE, 0x02], object: TRIFORCE, name: "the <C3>Triforce of Courage" }
 - { id: OOT_TRIFORCE_WISDOM, add: TRIFORCE, flags: 0x80, draw: [TRIFORCE, 0x03], object: TRIFORCE, name: "the <C3>Triforce of Wisdom" }
