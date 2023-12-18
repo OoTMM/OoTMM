@@ -509,7 +509,6 @@
 - { id: MM_LETTER_TO_MAMA, item: MM_LETTER_TO_MAMA, add: [MM_TRADE2, 1], flags: 0x80, draw: MM_LETTER_TO_MAMA, object: [mm, 0x0245], name: "the <C1>Letter to Mama" }
 - { id: MM_LETTER_TO_KAFEI, item: MM_LETTER_TO_KAFEI, add: [MM_TRADE3, 0], flags: 0x80, draw: MM_LETTER_TO_KAFEI, object: [mm, 0x0210], name: "the <C1>Letter to Kafei" }
 - { id: MM_PENDANT_OF_MEMORIES, item: MM_PENDANT_OF_MEMORIES, add: [MM_TRADE3, 1], flags: 0x80, draw: MM_PENDANT_OF_MEMORIES, object: [mm, 0x0215], name: "the <C1>Pendant of Memories" }
-- { id: MM_UNK_B3, add: NONE, flags: 0x80, draw: MM_MASK_SUN, object: [mm, 0x026b] }
 - { id: MM_WORLD_MAP_CLOCK_TOWN, item: MM_WORLD_MAP, add: [WORLD_MAP, 0], flags: 0xa0, draw: MM_WORLD_MAP, object: [mm, 0x024d], name: "a <C0>World Map (Clock Town)" }
 - { id: MM_WORLD_MAP_WOODFALL, item: MM_WORLD_MAP, add: [WORLD_MAP, 1], flags: 0xa0, draw: MM_WORLD_MAP, object: [mm, 0x024d], name: "a <C0>World Map (Woodfall)" }
 - { id: MM_WORLD_MAP_SNOWHEAD, item: MM_WORLD_MAP, add: [WORLD_MAP, 2], flags: 0xa0, draw: MM_WORLD_MAP, object: [mm, 0x024d], name: "a <C0>World Map (Snowhead)" }
