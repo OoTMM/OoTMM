@@ -1188,6 +1188,79 @@ static int addItemHeartPieceMm(GameState_Play* play, u8 itemId, s16 gi, u16 para
     return 0;
 }
 
+#if defined(GAME_OOT)
+static u16 dungeon(GameState_Play* play, int isBossKey)
+{
+    u16 mapIndex;
+
+    /* Desert colossus hands */
+    if (play->sceneId == SCE_OOT_DESERT_COLOSSUS)
+        return SCE_OOT_TEMPLE_SPIRIT;
+
+    mapIndex = gSaveContext.mapIndex;
+    if (mapIndex == SCE_OOT_GANON_TOWER || mapIndex == SCE_OOT_INSIDE_GANON_CASTLE)
+        return isBossKey ? SCE_OOT_GANON_TOWER : SCE_OOT_INSIDE_GANON_CASTLE;
+    return mapIndex;
+}
+#endif
+
+static int addSmallKeyOot(u16 dungeonId)
+{
+    s8 keyCount;
+
+    /* Check for max keys */
+    if ((dungeonId != SCE_OOT_TREASURE_SHOP || comboConfig(CFG_OOT_CHEST_GAME_SHUFFLE)) && gOotSave.inventory.dungeonItems[dungeonId].maxKeys >= g.maxKeysOot[dungeonId])
+        return 0;
+
+    keyCount = gOotSave.inventory.dungeonKeys[dungeonId];
+    if (keyCount < 0)
+        keyCount = 1;
+    else
+        keyCount++;
+    gOotSave.inventory.dungeonKeys[dungeonId] = keyCount;
+    if (dungeonId == SCE_OOT_TREASURE_SHOP && !comboConfig(CFG_OOT_CHEST_GAME_SHUFFLE))
+        return 0;
+    else
+        return ++gOotSave.inventory.dungeonItems[dungeonId].maxKeys;
+}
+
+int addSmallKeyMm(u16 dungeonId)
+{
+    s8 keyCount;
+
+    /* Max keys */
+    if (gMmSave.inventory.dungeonItems[dungeonId].maxKeys >= g.maxKeysMm[dungeonId])
+        return 0;
+
+    keyCount = gMmSave.inventory.dungeonKeys[dungeonId];
+    if (keyCount < 0)
+        keyCount = 1;
+    else
+        keyCount++;
+    gMmSave.inventory.dungeonKeys[dungeonId] = keyCount;
+    gMmSave.inventory.dungeonItems[dungeonId].maxKeys++;
+
+    return gMmSave.inventory.dungeonItems[dungeonId].maxKeys;
+}
+
+static int addItemSmallKeyOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+#if defined(GAME_OOT)
+    if (param == 0xffff)
+        param = dungeon(play, 0);
+#endif
+    return addSmallKeyOot(param);
+}
+
+static int addItemSmallKeyMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+#if defined(GAME_MM)
+    if (param == 0xffff)
+        param = gSaveContext.dungeonId;
+#endif
+    return addSmallKeyMm(param);
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -1244,6 +1317,8 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemDefenseUpgradeMm,
     addItemHeartPieceOot,
     addItemHeartPieceMm,
+    addItemSmallKeyOot,
+    addItemSmallKeyMm,
 };
 
 extern const u8 kAddItemFuncs[];

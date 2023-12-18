@@ -62,16 +62,6 @@ void comboAddCompassMm(u16 dungeonId)
     gMmSave.inventory.dungeonItems[dungeonId].compass = 1;
 }
 
-static void addHealth(u8 count)
-{
-    u16 health;
-
-    health = (u16)count * 0x10;
-    gMmSave.playerData.health += health;
-    if (gMmSave.playerData.health > gMmSave.playerData.healthMax)
-        gMmSave.playerData.health = gMmSave.playerData.healthMax;
-}
-
 void comboAddMagicUpgradeMm(int level)
 {
     gMmSave.playerData.magicAcquired = 1;
@@ -234,18 +224,6 @@ int comboAddItemMm(s16 gi, int noEffect)
         break;
     case GI_MM_GS_TOKEN_OCEAN:
         count = ++gMmSave.skullCountOcean;
-        break;
-    case GI_MM_SMALL_KEY_WF:
-        count = comboAddSmallKeyMm(0);
-        break;
-    case GI_MM_SMALL_KEY_SH:
-        count = comboAddSmallKeyMm(1);
-        break;
-    case GI_MM_SMALL_KEY_GB:
-        count = comboAddSmallKeyMm(2);
-        break;
-    case GI_MM_SMALL_KEY_ST:
-        count = comboAddSmallKeyMm(3);
         break;
     case GI_MM_KEY_RING_WF:
         comboAddKeyRingMm(0);

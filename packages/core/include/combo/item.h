@@ -60,6 +60,8 @@
 #define IA_MM_DEFENSE_UPGRADE   0x34
 #define IA_OOT_HEART_PIECE      0x35
 #define IA_MM_HEART_PIECE       0x36
+#define IA_OOT_SMALL_KEY        0x37
+#define IA_MM_SMALL_KEY         0x38
 #define IA_NONE                 0xff
 
 typedef struct GameState_Play GameState_Play;

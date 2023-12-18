@@ -50,16 +50,6 @@ void comboAddMapOot(u16 dungeonId)
     gOotSave.inventory.dungeonItems[dungeonId].map = 1;
 }
 
-static void addHealth(u8 count)
-{
-    u16 health;
-
-    health = (u16)count * 0x10;
-    gOotSave.playerData.health += health;
-    if (gOotSave.playerData.health > gOotSave.playerData.healthMax)
-        gOotSave.playerData.health = gOotSave.playerData.healthMax;
-}
-
 void comboAddMagicUpgradeOot(int level)
 {
     gOotSave.playerData.magicUpgrade = 1;
@@ -250,36 +240,6 @@ int comboAddItemOot(s16 gi, int noEffect)
     case GI_OOT_GS_TOKEN:
         gOotSave.inventory.quest.goldToken = 1;
         count = ++gOotSave.inventory.goldTokens;
-        break;
-    case GI_OOT_SMALL_KEY_FOREST:
-        count = comboAddSmallKeyOot(SCE_OOT_TEMPLE_FOREST);
-        break;
-    case GI_OOT_SMALL_KEY_FIRE:
-        count = comboAddSmallKeyOot(SCE_OOT_TEMPLE_FIRE);
-        break;
-    case GI_OOT_SMALL_KEY_WATER:
-        count = comboAddSmallKeyOot(SCE_OOT_TEMPLE_WATER);
-        break;
-    case GI_OOT_SMALL_KEY_SPIRIT:
-        count = comboAddSmallKeyOot(SCE_OOT_TEMPLE_SPIRIT);
-        break;
-    case GI_OOT_SMALL_KEY_SHADOW:
-        count = comboAddSmallKeyOot(SCE_OOT_TEMPLE_SHADOW);
-        break;
-    case GI_OOT_SMALL_KEY_GANON:
-        count = comboAddSmallKeyOot(SCE_OOT_INSIDE_GANON_CASTLE);
-        break;
-    case GI_OOT_SMALL_KEY_BOTW:
-        count = comboAddSmallKeyOot(SCE_OOT_BOTTOM_OF_THE_WELL);
-        break;
-    case GI_OOT_SMALL_KEY_GF:
-        count = comboAddSmallKeyOot(SCE_OOT_THIEVES_HIDEOUT);
-        break;
-    case GI_OOT_SMALL_KEY_GTG:
-        count = comboAddSmallKeyOot(SCE_OOT_GERUDO_TRAINING_GROUND);
-        break;
-    case GI_OOT_SMALL_KEY_TCG:
-        count = comboAddSmallKeyOot(SCE_OOT_TREASURE_SHOP);
         break;
     case GI_OOT_KEY_RING_FOREST:
         comboAddKeyRingOot(SCE_OOT_TEMPLE_FOREST);

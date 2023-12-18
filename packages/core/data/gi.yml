@@ -63,7 +63,7 @@
 - { id: OOT_BOSS_KEY, item: OOT_BOSS_KEY, add: NONE, flags: 0x80, draw: BOSS_KEY, object: [oot, 0x00b9], name: "the <C0>Boss Key" }
 - { id: OOT_COMPASS, item: OOT_COMPASS, add: NONE, flags: 0x80, draw: COMPASS, object: [oot, 0x00b8], name: "the <C0>Compass" }
 - { id: OOT_MAP, item: OOT_MAP, add: NONE, flags: 0x80, draw: MAP, object: [oot, 0x00c8], name: "the <C0>Dungeon Map" }
-- { id: OOT_SMALL_KEY, item: OOT_SMALL_KEY, add: NONE, flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C0>Small Key" }
+- { id: OOT_SMALL_KEY, item: OOT_SMALL_KEY, add: [OOT_SMALL_KEY, 0xffff], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C0>Small Key" }
 - { id: OOT_MAGIC_JAR_SMALL, item: OOT_MAGIC_JAR_SMALL, add: NONE, flags: 0x6f, draw: MAGIC_SMALL, object: [oot, 0x00cd], name: "a <C0>Small Magic Jar" }
 - { id: OOT_MAGIC_JAR_LARGE, item: OOT_MAGIC_JAR_LARGE, add: NONE, flags: 0x6e, draw: MAGIC_LARGE, object: [oot, 0x00cd], name: "a <C0>Large Magic Jar" }
 - { id: OOT_WALLET2, item: OOT_WALLET2, add: [OOT_WALLET, 2], flags: 0x80, draw: WALLET2, object: [oot, 0x00d1], name: "the <C1>Adult's Wallet" }
@@ -110,7 +110,7 @@
 - { id: OOT_BLUE_FIRE, item: OOT_BLUE_FIRE, add: OOT_BOTTLE_REFILL, flags: 0x80, draw: OOT_BLUE_FIRE, object: [oot, 0x0173], name: "some <C0>Blue Fire" }
 - { id: OOT_POE, item: OOT_POE, add: OOT_BOTTLE_REFILL, flags: 0x80, draw: POE, object: [oot, 0x0176], name: "a <C0>Poe" }
 - { id: OOT_BIG_POE, item: OOT_BIG_POE, add: OOT_BOTTLE_REFILL, flags: 0x80, draw: BIG_POE, object: [oot, 0x0176], name: "a <C0>Big Poe" }
-- { id: OOT_TC_SMALL_KEY, item: OOT_SMALL_KEY, add: NONE, flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C0>Small Key" }
+- { id: OOT_TC_SMALL_KEY, item: OOT_SMALL_KEY, add: [OOT_SMALL_KEY, 0xffff], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C0>Small Key" }
 - { id: OOT_TC_RUPEE_GREEN, item: OOT_RUPEE_GREEN, add: [OOT_RUPEE, 1], flags: 0x00, draw: OOT_RUPEE_GREEN, object: [oot, 0x017f], name: "a <C0>Green Rupee" }
 - { id: OOT_TC_RUPEE_BLUE, item: OOT_RUPEE_BLUE, add: [OOT_RUPEE, 5], flags: 0x01, draw: OOT_RUPEE_BLUE, object: [oot, 0x017f], name: "a <C0>Blue Rupee" }
 - { id: OOT_TC_RUPEE_RED, item: OOT_RUPEE_RED, add: [OOT_RUPEE, 20], flags: 0x02, draw: OOT_RUPEE_RED, object: [oot, 0x017f], name: "a <C0>Red Rupee" }
@@ -152,15 +152,15 @@
 - { id: OOT_DEFENSE_UPGRADE, add: MM_DEFENSE_UPGRADE, flags: 0x80, draw: DEFENSE_UPGRADE, object: [oot, 0x00bd], name: "the <C1>Defense Upgrade" }
 - { id: OOT_PROGRESSIVE_SHIELD_DEKU, add: [OOT_SHIELD, 0x101], flags: 0xa0, draw: OOT_SHIELD_DEKU, object: [oot, 0x00cb], name: "the <C1>Progressive Deku Shield" }
 - { id: OOT_PROGRESSIVE_SHIELD_HYLIAN, add: [OOT_SHIELD, 0x102], flags: 0xa0, draw: OOT_SHIELD_HYLIAN, object: [oot, 0x00dc], name: "the <C1>Progressive Hylian Shield" }
-- { id: OOT_SMALL_KEY_FOREST, add: NONE, flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C0>Small Key (Forest)" }
-- { id: OOT_SMALL_KEY_FIRE, add: NONE, flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C0>Small Key (Fire)" }
-- { id: OOT_SMALL_KEY_WATER, add: NONE, flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C0>Small Key (Water)" }
-- { id: OOT_SMALL_KEY_SPIRIT, add: NONE, flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C0>Small Key (Spirit)" }
-- { id: OOT_SMALL_KEY_SHADOW, add: NONE, flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C0>Small Key (Shadow)" }
-- { id: OOT_SMALL_KEY_GANON, add: NONE, flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C0>Small Key (Ganon)" }
-- { id: OOT_SMALL_KEY_BOTW, add: NONE, flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C0>Small Key (Well)" }
-- { id: OOT_SMALL_KEY_GF, add: NONE, flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C0>Small Key (Hideout)" }
-- { id: OOT_SMALL_KEY_GTG, add: NONE, flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C0>Small Key (GTG)" }
+- { id: OOT_SMALL_KEY_FOREST, add: [OOT_SMALL_KEY, SCE_OOT_TEMPLE_FOREST], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C0>Small Key (Forest)" }
+- { id: OOT_SMALL_KEY_FIRE, add: [OOT_SMALL_KEY, SCE_OOT_TEMPLE_FIRE], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C0>Small Key (Fire)" }
+- { id: OOT_SMALL_KEY_WATER, add: [OOT_SMALL_KEY, SCE_OOT_TEMPLE_WATER], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C0>Small Key (Water)" }
+- { id: OOT_SMALL_KEY_SPIRIT, add: [OOT_SMALL_KEY, SCE_OOT_TEMPLE_SPIRIT], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C0>Small Key (Spirit)" }
+- { id: OOT_SMALL_KEY_SHADOW, add: [OOT_SMALL_KEY, SCE_OOT_TEMPLE_SHADOW], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C0>Small Key (Shadow)" }
+- { id: OOT_SMALL_KEY_GANON, add: [OOT_SMALL_KEY, SCE_OOT_INSIDE_GANON_CASTLE], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C0>Small Key (Ganon)" }
+- { id: OOT_SMALL_KEY_BOTW, add: [OOT_SMALL_KEY, SCE_OOT_BOTTOM_OF_THE_WELL], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C0>Small Key (Well)" }
+- { id: OOT_SMALL_KEY_GF, add: [OOT_SMALL_KEY, SCE_OOT_THIEVES_HIDEOUT], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C0>Small Key (Hideout)" }
+- { id: OOT_SMALL_KEY_GTG, add: [OOT_SMALL_KEY, SCE_OOT_GERUDO_TRAINING_GROUND], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C0>Small Key (GTG)" }
 - { id: OOT_BOSS_KEY_FOREST, add: NONE, flags: 0x80, draw: BOSS_KEY, object: [oot, 0x00b9], name: "the <C0>Boss Key (Forest)" }
 - { id: OOT_BOSS_KEY_FIRE, add: NONE, flags: 0x80, draw: BOSS_KEY, object: [oot, 0x00b9], name: "the <C0>Boss Key (Fire)" }
 - { id: OOT_BOSS_KEY_WATER, add: NONE, flags: 0x80, draw: BOSS_KEY, object: [oot, 0x00b9], name: "the <C0>Boss Key (Water)" }
@@ -308,7 +308,7 @@
 - { id: OOT_BUTTON_C_LEFT, add: NONE, flags: 0x80, draw: BUTTON_C_LEFT, object: BTN_C_HORIZONTAL, name: "the <C1>C-Left Button" }
 - { id: OOT_BUTTON_C_UP, add: NONE, flags: 0x80, draw: BUTTON_C_UP, object: BTN_C_VERTICAL, name: "the <C1>C-Up Button" }
 - { id: OOT_BUTTON_C_DOWN, add: NONE, flags: 0x80, draw: BUTTON_C_DOWN, object: BTN_C_VERTICAL, name: "the <C1>C-Down Button" }
-- { id: OOT_SMALL_KEY_TCG, add: NONE, flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C0>Small Key (Chest Game)" }
+- { id: OOT_SMALL_KEY_TCG, add: [OOT_SMALL_KEY, SCE_OOT_TREASURE_SHOP], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C0>Small Key (Chest Game)" }
 - { id: OOT_KEY_RING_TCG, add: NONE, flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "the <C0>Key Ring (Chest Game)" }
 - { id: OOT_SOUL_NPC_SARIA, add: NONE, flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of Saria" }
 - { id: OOT_SOUL_NPC_DARUNIA, add: NONE, flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of Darunia" }
@@ -454,7 +454,7 @@
 - { id: MM_SWORD_GILDED, item: MM_SWORD_GILDED, add: [MM_SWORD, 3], flags: 0xa0, draw: MM_SWORD_GILDED, object: [mm, 0x01fa], name: "the <C1>Gilded Sword" }
 - { id: MM_BOMBCHU_5, item: MM_BOMBCHU_5, add: [MM_BOMBCHU, 5], flags: 0xc0, draw: BOMBCHU, object: [mm, 0x00b0], name: "<C0>5 Bombchu" }
 - { id: MM_GREAT_FAIRY_SWORD, item: MM_GREAT_FAIRY_SWORD, add: MM_NORMAL, flags: 0xa0, draw: MM_GREAT_FAIRY_SWORD, object: [mm, 0x01fb], name: "the <C1>Great Fairy's Sword" }
-- { id: MM_SMALL_KEY, item: MM_SMALL_KEY, add: NONE, flags: 0xa0, draw: SMALL_KEY, object: [mm, 0x0086], name: "a <C0>Small Key" }
+- { id: MM_SMALL_KEY, item: MM_SMALL_KEY, add: [MM_SMALL_KEY, 0xffff], flags: 0xa0, draw: SMALL_KEY, object: [mm, 0x0086], name: "a <C0>Small Key" }
 - { id: MM_BOSS_KEY, item: MM_BOSS_KEY, add: NONE, flags: 0xa0, draw: BOSS_KEY, object: [mm, 0x0092], name: "the <C0>Boss Key" }
 - { id: MM_MAP, item: MM_MAP, add: NONE, flags: 0xa0, draw: MAP, object: [mm, 0x00a0], name: "the <C0>Dungeon Map" }
 - { id: MM_COMPASS, item: MM_COMPASS, add: NONE, flags: 0xa0, draw: COMPASS, object: [mm, 0x0091], name: "the <C0>Compass" }
@@ -603,10 +603,10 @@
 - { id: MM_PROGRESSIVE_SHIELD_HERO, add: [MM_SHIELD, 0x101], flags: 0xa0, draw: MM_SHIELD_HERO, object: [mm, 0x00b3], name: "the <C1>Progressive Hero's Shield" }
 - { id: MM_GS_TOKEN_SWAMP, add: NONE, flags: 0x80, draw: MM_GS_TOKEN_SWAMP, object: [mm, 0x0125], name: "a <C0>Swamp Skulltula Token" }
 - { id: MM_GS_TOKEN_OCEAN, add: NONE, flags: 0x80, draw: MM_GS_TOKEN_OCEAN, object: [mm, 0x0125], name: "an <C0>Ocean Skulltula Token" }
-- { id: MM_SMALL_KEY_WF, add: NONE, flags: 0xa0, draw: SMALL_KEY, object: [mm, 0x0086], name: "a <C0>Small Key (Woodfall)" }
-- { id: MM_SMALL_KEY_SH, add: NONE, flags: 0xa0, draw: SMALL_KEY, object: [mm, 0x0086], name: "a <C0>Small Key (Snowhead)" }
-- { id: MM_SMALL_KEY_GB, add: NONE, flags: 0xa0, draw: SMALL_KEY, object: [mm, 0x0086], name: "a <C0>Small Key (Great Bay)" }
-- { id: MM_SMALL_KEY_ST, add: NONE, flags: 0xa0, draw: SMALL_KEY, object: [mm, 0x0086], name: "a <C0>Small Key (Stone Tower)" }
+- { id: MM_SMALL_KEY_WF, add: [MM_SMALL_KEY, 0], flags: 0xa0, draw: SMALL_KEY, object: [mm, 0x0086], name: "a <C0>Small Key (Woodfall)" }
+- { id: MM_SMALL_KEY_SH, add: [MM_SMALL_KEY, 1], flags: 0xa0, draw: SMALL_KEY, object: [mm, 0x0086], name: "a <C0>Small Key (Snowhead)" }
+- { id: MM_SMALL_KEY_GB, add: [MM_SMALL_KEY, 2], flags: 0xa0, draw: SMALL_KEY, object: [mm, 0x0086], name: "a <C0>Small Key (Great Bay)" }
+- { id: MM_SMALL_KEY_ST, add: [MM_SMALL_KEY, 3], flags: 0xa0, draw: SMALL_KEY, object: [mm, 0x0086], name: "a <C0>Small Key (Stone Tower)" }
 - { id: MM_BOSS_KEY_WF, add: NONE, flags: 0xa0, draw: BOSS_KEY, object: [mm, 0x0092], name: "the <C0>Boss Key (Woodfall)" }
 - { id: MM_BOSS_KEY_SH, add: NONE, flags: 0xa0, draw: BOSS_KEY, object: [mm, 0x0092], name: "the <C0>Boss Key (Snowhead)" }
 - { id: MM_BOSS_KEY_GB, add: NONE, flags: 0xa0, draw: BOSS_KEY, object: [mm, 0x0092], name: "the <C0>Boss Key (Great Bay)" }
