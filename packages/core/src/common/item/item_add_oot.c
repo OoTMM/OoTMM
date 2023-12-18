@@ -325,21 +325,6 @@ int comboAddItemOot(s16 gi, int noEffect)
     (void)dungeonId;
     switch (gi)
     {
-    case GI_OOT_GORON_BRACELET:
-        gOotSave.inventory.upgrades.strength = 1;
-        break;
-    case GI_OOT_SILVER_GAUNTLETS:
-        gOotSave.inventory.upgrades.strength = 2;
-        break;
-    case GI_OOT_GOLDEN_GAUNTLETS:
-        gOotSave.inventory.upgrades.strength = 3;
-        break;
-    case GI_OOT_SCALE_SILVER:
-        gOotSave.inventory.upgrades.dive = 1;
-        break;
-    case GI_OOT_SCALE_GOLDEN:
-        gOotSave.inventory.upgrades.dive = 2;
-        break;
     case GI_OOT_MAGIC_UPGRADE:
         comboAddMagicUpgradeOot(1);
         if (noEffect)

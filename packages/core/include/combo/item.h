@@ -50,6 +50,8 @@
 #define IA_MM_SHIELD            0x2a
 #define IA_TUNIC                0x2b
 #define IA_BOOTS                0x2c
+#define IA_STRENGTH             0x2d
+#define IA_SCALE                0x2e
 #define IA_NONE                 0xff
 
 typedef struct GameState_Play GameState_Play;

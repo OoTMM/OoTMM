@@ -1016,6 +1016,20 @@ static int addItemBoots(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
+static int addItemStrength(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    if (param > gOotSave.inventory.upgrades.strength)
+        gOotSave.inventory.upgrades.strength = param;
+    return 0;
+}
+
+static int addItemScale(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    if (param > gOotSave.inventory.upgrades.dive)
+        gOotSave.inventory.upgrades.dive = param;
+    return 0;
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -1062,6 +1076,8 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemShieldMm,
     addItemTunic,
     addItemBoots,
+    addItemStrength,
+    addItemScale,
 };
 
 extern const u8 kAddItemFuncs[];
