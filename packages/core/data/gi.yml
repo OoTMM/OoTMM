@@ -408,8 +408,8 @@
 - { id: MM_UNK_0B, item: MM_RECOVERY_HEART, add: NONE, flags: 0xa0, draw: RECOVERY_HEART, object: [mm, 0x0090], name: "a <C0>Recovery Heart" }
 - { id: MM_HEART_PIECE, item: MM_HEART_PIECE, add: [MM_HEART_PIECE, 1], flags: 0xa0, draw: HEART_PIECE, object: [mm, 0x0096], name: "a <C0>Piece of Heart" }
 - { id: MM_HEART_CONTAINER, item: MM_HEART_CONTAINER, add: [MM_HEART_PIECE, 4], flags: 0xa0, draw: HEART_CONTAINER, object: [mm, 0x0096], name: "a <C0>Heart Container" }
-- { id: MM_UNK_0E, item: MM_MAGIC_JAR_SMALL, add: NONE, flags: 0x6f, draw: MAGIC_SMALL, object: [mm, 0x00a4], name: "a <C0>Small Magic Jar" }
-- { id: MM_UNK_0F, item: MM_MAGIC_JAR_LARGE, add: NONE, flags: 0x6e, draw: MAGIC_LARGE, object: [mm, 0x00a4], name: "a <C0>Large Magic Jar" }
+- { id: MM_UNK_0E, item: MM_MAGIC_JAR_SMALL, flags: 0x6f, draw: MAGIC_SMALL, object: [mm, 0x00a4], name: "a <C0>Small Magic Jar" }
+- { id: MM_UNK_0F, item: MM_MAGIC_JAR_LARGE, flags: 0x6e, draw: MAGIC_LARGE, object: [mm, 0x00a4], name: "a <C0>Large Magic Jar" }
 - { id: MM_UNK_10, item: MM_RECOVERY_HEART, add: NONE, flags: 0x80, draw: RECOVERY_HEART, object: [mm, 0x0090], name: "a <C0>Recovery Heart" }
 - { id: MM_STRAY_FAIRY, item: MM_STRAY_FAIRY, add: [STRAY_FAIRY, 0xffff], flags: 0x80, draw: MM_STRAY_FAIRY, name: "a <C0>Stray Fairy" }
 - { id: MM_UNK_12, item: MM_RECOVERY_HEART, add: NONE, flags: 0x80, draw: RECOVERY_HEART, object: [mm, 0x0090], name: "a <C0>Recovery Heart" }
@@ -629,16 +629,16 @@
 - { id: MM_SONG_SUN, add: [MM_QUEST, QUEST_MM_SONG_SUN], flags: 0xa0, draw: [NOTE, 0x03], object: [mm, 0x008f], name: "the <C2>Sun's Song" }
 - { id: MM_WALLET, add: [MM_WALLET, 1], flags: 0xa0, draw: WALLET, object: [mm, 0x00a8], name: "the <C1>Child Wallet" }
 - { id: MM_WALLET4, add: [MM_WALLET, 4], flags: 0xa0, draw: WALLET4, object: [mm, 0x00a8], name: "the <C1>Colossal Wallet" }
-- { id: MM_OWL_GREAT_BAY, add: NONE, flags: 0xa0, draw: MM_OWL, object: [mm, 0x0170], name: "an <C2>Owl Statue (Great Bay)" }
-- { id: MM_OWL_ZORA_CAPE, add: NONE, flags: 0xa0, draw: MM_OWL, object: [mm, 0x0170], name: "an <C2>Owl Statue (Zora Cape)" }
-- { id: MM_OWL_SNOWHEAD, add: NONE, flags: 0xa0, draw: MM_OWL, object: [mm, 0x0170], name: "an <C2>Owl Statue (Snowhead)" }
-- { id: MM_OWL_MOUNTAIN_VILLAGE, add: NONE, flags: 0xa0, draw: MM_OWL, object: [mm, 0x0170], name: "an <C2>Owl Statue (Mountain Village)" }
-- { id: MM_OWL_CLOCK_TOWN, add: NONE, flags: 0xa0, draw: MM_OWL, object: [mm, 0x0170], name: "an <C2>Owl Statue (Clock Town)" }
-- { id: MM_OWL_MILK_ROAD, add: NONE, flags: 0xa0, draw: MM_OWL, object: [mm, 0x0170], name: "an <C2>Owl Statue (Milk Road)" }
-- { id: MM_OWL_WOODFALL, add: NONE, flags: 0xa0, draw: MM_OWL, object: [mm, 0x0170], name: "an <C2>Owl Statue (Woodfall)" }
-- { id: MM_OWL_SOUTHERN_SWAMP, add: NONE, flags: 0xa0, draw: MM_OWL, object: [mm, 0x0170], name: "an <C2>Owl Statue (Southern Swamp)" }
-- { id: MM_OWL_IKANA_CANYON, add: NONE, flags: 0xa0, draw: MM_OWL, object: [mm, 0x0170], name: "an <C2>Owl Statue (Ikana Canyon)" }
-- { id: MM_OWL_STONE_TOWER, add: NONE, flags: 0xa0, draw: MM_OWL, object: [mm, 0x0170], name: "an <C2>Owl Statue (Stone Tower)" }
+- { id: MM_OWL_GREAT_BAY, add: [OWL, 0], flags: 0xa0, draw: MM_OWL, object: [mm, 0x0170], name: "an <C2>Owl Statue (Great Bay)" }
+- { id: MM_OWL_ZORA_CAPE, add: [OWL, 1], flags: 0xa0, draw: MM_OWL, object: [mm, 0x0170], name: "an <C2>Owl Statue (Zora Cape)" }
+- { id: MM_OWL_SNOWHEAD, add: [OWL, 2], flags: 0xa0, draw: MM_OWL, object: [mm, 0x0170], name: "an <C2>Owl Statue (Snowhead)" }
+- { id: MM_OWL_MOUNTAIN_VILLAGE, add: [OWL, 3], flags: 0xa0, draw: MM_OWL, object: [mm, 0x0170], name: "an <C2>Owl Statue (Mountain Village)" }
+- { id: MM_OWL_CLOCK_TOWN, add: [OWL, 4], flags: 0xa0, draw: MM_OWL, object: [mm, 0x0170], name: "an <C2>Owl Statue (Clock Town)" }
+- { id: MM_OWL_MILK_ROAD, add: [OWL, 5], flags: 0xa0, draw: MM_OWL, object: [mm, 0x0170], name: "an <C2>Owl Statue (Milk Road)" }
+- { id: MM_OWL_WOODFALL, add: [OWL, 6], flags: 0xa0, draw: MM_OWL, object: [mm, 0x0170], name: "an <C2>Owl Statue (Woodfall)" }
+- { id: MM_OWL_SOUTHERN_SWAMP, add: [OWL, 7], flags: 0xa0, draw: MM_OWL, object: [mm, 0x0170], name: "an <C2>Owl Statue (Southern Swamp)" }
+- { id: MM_OWL_IKANA_CANYON, add: [OWL, 8], flags: 0xa0, draw: MM_OWL, object: [mm, 0x0170], name: "an <C2>Owl Statue (Ikana Canyon)" }
+- { id: MM_OWL_STONE_TOWER, add: [OWL, 9], flags: 0xa0, draw: MM_OWL, object: [mm, 0x0170], name: "an <C2>Owl Statue (Stone Tower)" }
 - { id: MM_WALLET5, add: [MM_WALLET, 5], flags: 0xa0, draw: WALLET5, object: [mm, 0x00a8], name: "the <C1>Bottomless Wallet" }
 - { id: MM_SOUL_ENEMY_OCTOROK, add: [MM_SOUL, 0x0000], flags: 0xa0, draw: SOUL, object: [mm, 0x0125], name: "the <C1>Soul of Octoroks" }
 - { id: MM_SOUL_ENEMY_WALLMASTER, add: [MM_SOUL, 0x0001], flags: 0xa0, draw: SOUL, object: [mm, 0x0125], name: "the <C1>Soul of Wallmasters" }

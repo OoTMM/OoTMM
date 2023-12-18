@@ -1604,6 +1604,12 @@ static int addItemWorldMap(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
+static int addItemOwl(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    gMmOwlFlags |= (1 << param);
+    return 0;
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -1691,6 +1697,7 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemSoulMm,
     addItemPondFish,
     addItemWorldMap,
+    addItemOwl,
 };
 
 extern const u8 kAddItemFuncs[];
