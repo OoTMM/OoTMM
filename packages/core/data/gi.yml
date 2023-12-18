@@ -191,28 +191,28 @@
 - { id: OOT_WALLET4, add: [OOT_WALLET, 4], flags: 0x80, draw: WALLET4, object: [oot, 0x00d1], name: "the <C1>Colossal Wallet" }
 - { id: OOT_TRIFORCE, add: NONE, flags: 0x80, draw: TRIFORCE, object: TRIFORCE, name: "a <C3>Triforce Piece" }
 - { id: OOT_WALLET5, add: [OOT_WALLET, 5], flags: 0x80, draw: WALLET5, object: [oot, 0x00d1], name: "the <C1>Bottomless Wallet" }
-- { id: OOT_RUPEE_SILVER_DC, add: NONE, flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (DC)" }
-- { id: OOT_RUPEE_SILVER_BOTW, add: NONE, flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (Well)" }
-- { id: OOT_RUPEE_SILVER_SPIRIT_CHILD, add: NONE, flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (Spirit Child)" }
-- { id: OOT_RUPEE_SILVER_SPIRIT_SUN, add: NONE, flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (Spirit Sun)" }
-- { id: OOT_RUPEE_SILVER_SPIRIT_BOULDERS, add: NONE, flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (Spirit Boulders)" }
-- { id: OOT_RUPEE_SILVER_SPIRIT_LOBBY, add: NONE, flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (Spirit Lobby)" }
-- { id: OOT_RUPEE_SILVER_SPIRIT_ADULT, add: NONE, flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (Spirit Adult)" }
-- { id: OOT_RUPEE_SILVER_SHADOW_SCYTHE, add: NONE, flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (Shadow Scythe)" }
-- { id: OOT_RUPEE_SILVER_SHADOW_PIT, add: NONE, flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (Shadow Pit)" }
-- { id: OOT_RUPEE_SILVER_SHADOW_SPIKES, add: NONE, flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (Shadow Spikes)" }
-- { id: OOT_RUPEE_SILVER_SHADOW_BLADES, add: NONE, flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (Shadow Blades)" }
-- { id: OOT_RUPEE_SILVER_IC_SCYTHE, add: NONE, flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (Ice Scythe)" }
-- { id: OOT_RUPEE_SILVER_IC_BLOCK, add: NONE, flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (Ice Block)" }
-- { id: OOT_RUPEE_SILVER_GTG_SLOPES, add: NONE, flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (GTG Slopes)" }
-- { id: OOT_RUPEE_SILVER_GTG_LAVA, add: NONE, flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (GTG Lava)" }
-- { id: OOT_RUPEE_SILVER_GTG_WATER, add: NONE, flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (GTG Water)" }
-- { id: OOT_RUPEE_SILVER_GANON_SPIRIT, add: NONE, flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (Ganon Spirit)" }
-- { id: OOT_RUPEE_SILVER_GANON_LIGHT, add: NONE, flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (Ganon Light)" }
-- { id: OOT_RUPEE_SILVER_GANON_FIRE, add: NONE, flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (Ganon Fire)" }
-- { id: OOT_RUPEE_SILVER_GANON_FOREST, add: NONE, flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (Ganon Forest)" }
-- { id: OOT_RUPEE_SILVER_GANON_SHADOW, add: NONE, flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (Ganon Shadow)" }
-- { id: OOT_RUPEE_SILVER_GANON_WATER, add: NONE, flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (Ganon Water)" }
+- { id: OOT_RUPEE_SILVER_DC, add: [SILVER_RUPEE, SR_DC], flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (DC)" }
+- { id: OOT_RUPEE_SILVER_BOTW, add: [SILVER_RUPEE, SR_BOTW], flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (Well)" }
+- { id: OOT_RUPEE_SILVER_SPIRIT_CHILD, add: [SILVER_RUPEE, SR_SPIRIT1], flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (Spirit Child)" }
+- { id: OOT_RUPEE_SILVER_SPIRIT_SUN, add: [SILVER_RUPEE, SR_SPIRIT2], flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (Spirit Sun)" }
+- { id: OOT_RUPEE_SILVER_SPIRIT_BOULDERS, add: [SILVER_RUPEE, SR_SPIRIT3], flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (Spirit Boulders)" }
+- { id: OOT_RUPEE_SILVER_SPIRIT_LOBBY, add: [SILVER_RUPEE, SR_SPIRIT1], flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (Spirit Lobby)" }
+- { id: OOT_RUPEE_SILVER_SPIRIT_ADULT, add: [SILVER_RUPEE, SR_SPIRIT2], flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (Spirit Adult)" }
+- { id: OOT_RUPEE_SILVER_SHADOW_SCYTHE, add: [SILVER_RUPEE, SR_SHADOW1], flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (Shadow Scythe)" }
+- { id: OOT_RUPEE_SILVER_SHADOW_PIT, add: [SILVER_RUPEE, SR_SHADOW3], flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (Shadow Pit)" }
+- { id: OOT_RUPEE_SILVER_SHADOW_SPIKES, add: [SILVER_RUPEE, SR_SHADOW4], flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (Shadow Spikes)" }
+- { id: OOT_RUPEE_SILVER_SHADOW_BLADES, add: [SILVER_RUPEE, SR_SHADOW2], flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (Shadow Blades)" }
+- { id: OOT_RUPEE_SILVER_IC_SCYTHE, add: [SILVER_RUPEE, SR_IC1], flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (Ice Scythe)" }
+- { id: OOT_RUPEE_SILVER_IC_BLOCK, add: [SILVER_RUPEE, SR_IC2], flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (Ice Block)" }
+- { id: OOT_RUPEE_SILVER_GTG_SLOPES, add: [SILVER_RUPEE, SR_GTG1], flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (GTG Slopes)" }
+- { id: OOT_RUPEE_SILVER_GTG_LAVA, add: [SILVER_RUPEE, SR_GTG2], flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (GTG Lava)" }
+- { id: OOT_RUPEE_SILVER_GTG_WATER, add: [SILVER_RUPEE, SR_GTG3], flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (GTG Water)" }
+- { id: OOT_RUPEE_SILVER_GANON_SPIRIT, add: [SILVER_RUPEE, SR_GANON1], flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (Ganon Spirit)" }
+- { id: OOT_RUPEE_SILVER_GANON_LIGHT, add: [SILVER_RUPEE, SR_GANON2], flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (Ganon Light)" }
+- { id: OOT_RUPEE_SILVER_GANON_FIRE, add: [SILVER_RUPEE, SR_GANON3], flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (Ganon Fire)" }
+- { id: OOT_RUPEE_SILVER_GANON_FOREST, add: [SILVER_RUPEE, SR_GANON4], flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (Ganon Forest)" }
+- { id: OOT_RUPEE_SILVER_GANON_SHADOW, add: [SILVER_RUPEE, SR_GANON1], flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (Ganon Shadow)" }
+- { id: OOT_RUPEE_SILVER_GANON_WATER, add: [SILVER_RUPEE, SR_GANON2], flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (Ganon Water)" }
 - { id: OOT_SOUL_ENEMY_STALFOS, add: NONE, flags: 0x80, draw: SOUL, object: [oot, 0x015c], name: "the <C1>Soul of Stalfos" }
 - { id: OOT_SOUL_ENEMY_OCTOROK, add: NONE, flags: 0x80, draw: SOUL, object: [oot, 0x015c], name: "the <C1>Soul of Octoroks" }
 - { id: OOT_SOUL_ENEMY_WALLMASTER, add: NONE, flags: 0x80, draw: SOUL, object: [oot, 0x015c], name: "the <C1>Soul of Wallmasters" }
@@ -280,29 +280,29 @@
 - { id: OOT_TRIFORCE_POWER, add: NONE, flags: 0x80, draw: [TRIFORCE, 0x01], object: TRIFORCE, name: "the <C3>Triforce of Power" }
 - { id: OOT_TRIFORCE_COURAGE, add: NONE, flags: 0x80, draw: [TRIFORCE, 0x02], object: TRIFORCE, name: "the <C3>Triforce of Courage" }
 - { id: OOT_TRIFORCE_WISDOM, add: NONE, flags: 0x80, draw: [TRIFORCE, 0x03], object: TRIFORCE, name: "the <C3>Triforce of Wisdom" }
-- { id: OOT_POUCH_SILVER_DC, add: NONE, flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (DC)" }
-- { id: OOT_POUCH_SILVER_BOTW, add: NONE, flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Well)" }
-- { id: OOT_POUCH_SILVER_SPIRIT_CHILD, add: NONE, flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Spirit Child)" }
-- { id: OOT_POUCH_SILVER_SPIRIT_SUN, add: NONE, flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Spirit Sun)" }
-- { id: OOT_POUCH_SILVER_SPIRIT_BOULDERS, add: NONE, flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Spirit Boulders)" }
-- { id: OOT_POUCH_SILVER_SPIRIT_LOBBY, add: NONE, flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Spirit Lobby)" }
-- { id: OOT_POUCH_SILVER_SPIRIT_ADULT, add: NONE, flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Spirit Adult)" }
-- { id: OOT_POUCH_SILVER_SHADOW_SCYTHE, add: NONE, flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Shadow Scythe)" }
-- { id: OOT_POUCH_SILVER_SHADOW_PIT, add: NONE, flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Shadow Pit)" }
-- { id: OOT_POUCH_SILVER_SHADOW_SPIKES, add: NONE, flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Shadow Spikes)" }
-- { id: OOT_POUCH_SILVER_SHADOW_BLADES, add: NONE, flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Shadow Blades)" }
-- { id: OOT_POUCH_SILVER_IC_SCYTHE, add: NONE, flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Ice Scythe)" }
-- { id: OOT_POUCH_SILVER_IC_BLOCK, add: NONE, flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Ice Block)" }
-- { id: OOT_POUCH_SILVER_GTG_SLOPES, add: NONE, flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (GTG Slopes)" }
-- { id: OOT_POUCH_SILVER_GTG_LAVA, add: NONE, flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (GTG Lava)" }
-- { id: OOT_POUCH_SILVER_GTG_WATER, add: NONE, flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (GTG Water)" }
-- { id: OOT_POUCH_SILVER_GANON_SPIRIT, add: NONE, flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Ganon Spirit)" }
-- { id: OOT_POUCH_SILVER_GANON_LIGHT, add: NONE, flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Ganon Light)" }
-- { id: OOT_POUCH_SILVER_GANON_FIRE, add: NONE, flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Ganon Fire)" }
-- { id: OOT_POUCH_SILVER_GANON_FOREST, add: NONE, flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Ganon Forest)" }
-- { id: OOT_POUCH_SILVER_GANON_SHADOW, add: NONE, flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Ganon Shadow)" }
-- { id: OOT_POUCH_SILVER_GANON_WATER, add: NONE, flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Ganon Water)" }
-- { id: OOT_RUPEE_MAGICAL, add: NONE, flags: 0x80, draw: OOT_RUPEE_MAGICAL, name: "the <C1>Magical Rupee" }
+- { id: OOT_POUCH_SILVER_DC, add: [SILVER_POUCH, SR_DC], flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (DC)" }
+- { id: OOT_POUCH_SILVER_BOTW, add: [SILVER_POUCH, SR_BOTW], flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Well)" }
+- { id: OOT_POUCH_SILVER_SPIRIT_CHILD, add: [SILVER_POUCH, SR_SPIRIT1], flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Spirit Child)" }
+- { id: OOT_POUCH_SILVER_SPIRIT_SUN, add: [SILVER_POUCH, SR_SPIRIT2], flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Spirit Sun)" }
+- { id: OOT_POUCH_SILVER_SPIRIT_BOULDERS, add: [SILVER_POUCH, SR_SPIRIT3], flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Spirit Boulders)" }
+- { id: OOT_POUCH_SILVER_SPIRIT_LOBBY, add: [SILVER_POUCH, SR_SPIRIT1], flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Spirit Lobby)" }
+- { id: OOT_POUCH_SILVER_SPIRIT_ADULT, add: [SILVER_POUCH, SR_SPIRIT2], flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Spirit Adult)" }
+- { id: OOT_POUCH_SILVER_SHADOW_SCYTHE, add: [SILVER_POUCH, SR_SHADOW1], flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Shadow Scythe)" }
+- { id: OOT_POUCH_SILVER_SHADOW_PIT, add: [SILVER_POUCH, SR_SHADOW3], flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Shadow Pit)" }
+- { id: OOT_POUCH_SILVER_SHADOW_SPIKES, add: [SILVER_POUCH, SR_SHADOW4], flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Shadow Spikes)" }
+- { id: OOT_POUCH_SILVER_SHADOW_BLADES, add: [SILVER_POUCH, SR_SHADOW2], flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Shadow Blades)" }
+- { id: OOT_POUCH_SILVER_IC_SCYTHE, add: [SILVER_POUCH, SR_IC1], flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Ice Scythe)" }
+- { id: OOT_POUCH_SILVER_IC_BLOCK, add: [SILVER_POUCH, SR_IC2], flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Ice Block)" }
+- { id: OOT_POUCH_SILVER_GTG_SLOPES, add: [SILVER_POUCH, SR_GTG1], flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (GTG Slopes)" }
+- { id: OOT_POUCH_SILVER_GTG_LAVA, add: [SILVER_POUCH, SR_GTG2], flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (GTG Lava)" }
+- { id: OOT_POUCH_SILVER_GTG_WATER, add: [SILVER_POUCH, SR_GTG3], flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (GTG Water)" }
+- { id: OOT_POUCH_SILVER_GANON_SPIRIT, add: [SILVER_POUCH, SR_GANON1], flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Ganon Spirit)" }
+- { id: OOT_POUCH_SILVER_GANON_LIGHT, add: [SILVER_POUCH, SR_GANON2], flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Ganon Light)" }
+- { id: OOT_POUCH_SILVER_GANON_FIRE, add: [SILVER_POUCH, SR_GANON3], flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Ganon Fire)" }
+- { id: OOT_POUCH_SILVER_GANON_FOREST, add: [SILVER_POUCH, SR_GANON4], flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Ganon Forest)" }
+- { id: OOT_POUCH_SILVER_GANON_SHADOW, add: [SILVER_POUCH, SR_GANON1], flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Ganon Shadow)" }
+- { id: OOT_POUCH_SILVER_GANON_WATER, add: [SILVER_POUCH, SR_GANON2], flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Ganon Water)" }
+- { id: OOT_RUPEE_MAGICAL, add: MAGICAL_RUPEE, flags: 0x80, draw: OOT_RUPEE_MAGICAL, name: "the <C1>Magical Rupee" }
 - { id: OOT_BUTTON_A, add: NONE, flags: 0x80, draw: BUTTON_A, object: BTN_A, name: "the <C1>A Button" }
 - { id: OOT_BUTTON_C_RIGHT, add: NONE, flags: 0x80, draw: BUTTON_C_RIGHT, object: BTN_C_HORIZONTAL, name: "the <C1>C-Right Button" }
 - { id: OOT_BUTTON_C_LEFT, add: NONE, flags: 0x80, draw: BUTTON_C_LEFT, object: BTN_C_HORIZONTAL, name: "the <C1>C-Left Button" }

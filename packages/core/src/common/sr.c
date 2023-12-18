@@ -91,7 +91,7 @@ int comboSilverRupeesGetCount(int id)
     return ((*(kSilverRupeeCounts[id >> 2])) >> ((id & 3) * 8)) & 0xff;
 }
 
-int comboSilverRupeesIncCount(int id, int noEffect)
+int comboSilverRupeesIncCount(GameState_Play* play, int id)
 {
     const ComboSilverRupeeData* data;
     int tmp;
@@ -115,15 +115,15 @@ int comboSilverRupeesIncCount(int id, int noEffect)
 #if defined(GAME_OOT)
         Actor_Player* link;
 
-        if (!noEffect && gPlay->sceneId == data->sceneId)
+        if (play && play->sceneId == data->sceneId)
         {
-            link = GET_LINK(gPlay);
+            link = GET_LINK(play);
             if (link->state & (PLAYER_ACTOR_STATE_CLIMB | PLAYER_ACTOR_STATE_CLIMB2))
             {
                 g.delayedSwitchFlag = data->flag;
             }
             else
-                SetSwitchFlag(gPlay, data->flag);
+                SetSwitchFlag(play, data->flag);
         }
 #endif
     }

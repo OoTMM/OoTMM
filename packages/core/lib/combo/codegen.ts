@@ -43,6 +43,7 @@ async function genGI() {
   cgSource.include('combo.h');
   cgSource.include('combo/custom.h');
   cgSource.include('combo/item.h');
+  cgSource.include('combo/sr.h');
   cgSource.raw('');
   cgSource.raw('#if defined(GAME_OOT)');
   cgSource.raw('# define OBJECT_OOT(x) x');

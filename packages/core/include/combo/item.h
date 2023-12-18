@@ -72,6 +72,9 @@
 #define IA_MM_COMPASS           0x40
 #define IA_OOT_MAP              0x41
 #define IA_MM_MAP               0x42
+#define IA_SILVER_RUPEE         0x43
+#define IA_SILVER_POUCH         0x44
+#define IA_MAGICAL_RUPEE        0x45
 #define IA_NONE                 0xff
 
 typedef struct GameState_Play GameState_Play;
@@ -132,7 +135,6 @@ int  comboAddItemOot(s16 gi, int noEffect);
 void comboAddItemSharedMm(s16 gi, int noEffect);
 void comboAddItemSharedOot(s16 gi, int noEffect);
 int  comboAddItemEffect(GameState_Play* play, s16 gi);
-void comboAddItemSharedForeignEffect(GameState_Play* play, s16 gi);
 int  comboAddStrayFairyMm(u16 dungeonId);
 void comboAddMagicUpgradeOot(int level);
 void comboAddMagicUpgradeMm(int level);

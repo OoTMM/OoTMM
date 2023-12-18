@@ -49,7 +49,6 @@ int comboAddItemLegacy(GameState_Play* play, s16 gi)
     {
         count = comboAddItemForeign(gi, 1);
         comboAddItemSharedForeign(gi, 0);
-        comboAddItemSharedForeignEffect(play, gi);
     }
     else
     {

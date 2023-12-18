@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/sr.h>
 
 #if defined(GAME_OOT)
 # define addRupeesRaw  addRupeesRawOot
@@ -1369,6 +1370,39 @@ static int addItemMapMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
+static int addSilverRupee(GameState_Play* play, int id)
+{
+    addRupeesOot(play, 5);
+    return comboSilverRupeesIncCount(play, id);
+}
+
+static void addSilverPouch(GameState_Play* play, int id)
+{
+    int max;
+
+    max = gSilverRupeeData[id].count;
+    for (int i = 0; i < max; ++i)
+        addSilverRupee(play, id);
+}
+
+static int addItemSilverRupee(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    return addSilverRupee(play, param);
+}
+
+static int addItemSilverPouch(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    addSilverPouch(play, param);
+    return 0;
+}
+
+static int addItemMagicalRupee(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    for (int i = 0; i < ARRAY_SIZE(gSilverRupeeData); ++i)
+        addSilverPouch(play, i);
+    return 0;
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -1437,6 +1471,9 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemCompassMm,
     addItemMapOot,
     addItemMapMm,
+    addItemSilverRupee,
+    addItemSilverPouch,
+    addItemMagicalRupee,
 };
 
 extern const u8 kAddItemFuncs[];
