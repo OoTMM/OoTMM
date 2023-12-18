@@ -170,12 +170,6 @@ int comboAddItemMm(s16 gi, int noEffect)
         if (noEffect)
             refillMagic(2);
         break;
-    case GI_MM_GS_TOKEN_SWAMP:
-        count = ++gMmSave.skullCountSwamp;
-        break;
-    case GI_MM_GS_TOKEN_OCEAN:
-        count = ++gMmSave.skullCountOcean;
-        break;
     case GI_MM_STRAY_FAIRY_WF:
         count = comboAddStrayFairyMm(0);
         break;

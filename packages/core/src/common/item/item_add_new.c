@@ -1403,6 +1403,22 @@ static int addItemMagicalRupee(GameState_Play* play, u8 itemId, s16 gi, u16 para
     return 0;
 }
 
+static int addItemGsToken(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    gOotSave.inventory.quest.goldToken = 1;
+    return ++gOotSave.inventory.goldTokens;
+}
+
+static int addItemGsTokenSwamp(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    return ++gMmSave.skullCountSwamp;
+}
+
+static int addItemGsTokenOcean(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    return ++gMmSave.skullCountOcean;
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -1474,6 +1490,9 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemSilverRupee,
     addItemSilverPouch,
     addItemMagicalRupee,
+    addItemGsToken,
+    addItemGsTokenSwamp,
+    addItemGsTokenOcean,
 };
 
 extern const u8 kAddItemFuncs[];

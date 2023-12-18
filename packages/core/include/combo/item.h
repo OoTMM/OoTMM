@@ -75,6 +75,9 @@
 #define IA_SILVER_RUPEE         0x43
 #define IA_SILVER_POUCH         0x44
 #define IA_MAGICAL_RUPEE        0x45
+#define IA_GS_TOKEN             0x46
+#define IA_GS_TOKEN_SWAMP       0x47
+#define IA_GS_TOKEN_OCEAN       0x48
 #define IA_NONE                 0xff
 
 typedef struct GameState_Play GameState_Play;

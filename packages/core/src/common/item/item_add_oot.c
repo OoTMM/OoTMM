@@ -155,10 +155,6 @@ int comboAddItemOot(s16 gi, int noEffect)
         if (noEffect)
             refillMagic(2);
         break;
-    case GI_OOT_GS_TOKEN:
-        gOotSave.inventory.quest.goldToken = 1;
-        count = ++gOotSave.inventory.goldTokens;
-        break;
     case GI_OOT_TRIFORCE:
     case GI_OOT_TRIFORCE_POWER:
     case GI_OOT_TRIFORCE_COURAGE:

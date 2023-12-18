@@ -88,7 +88,7 @@
 - { id: OOT_ARROW_FIRE, item: OOT_ARROW_FIRE, add: OOT_NORMAL, flags: 0x80, draw: ARROW_FIRE, object: [oot, 0x0158], name: "the <C1>Fire Arrow" }
 - { id: OOT_ARROW_ICE, item: OOT_ARROW_ICE, add: OOT_NORMAL, flags: 0x80, draw: ARROW_ICE, object: [oot, 0x0158], name: "the <C1>Ice Arrow" }
 - { id: OOT_ARROW_LIGHT, item: OOT_ARROW_LIGHT, add: OOT_NORMAL, flags: 0x80, draw: ARROW_LIGHT, object: [oot, 0x0158], name: "the <C1>Light Arrow" }
-- { id: OOT_GS_TOKEN, item: OOT_GS_TOKEN, add: NONE, flags: 0x80, draw: OOT_GS_TOKEN, object: [oot, 0x015c], name: "a <C0>Gold Skulltula Token" }
+- { id: OOT_GS_TOKEN, item: OOT_GS_TOKEN, add: GS_TOKEN, flags: 0x80, draw: OOT_GS_TOKEN, object: [oot, 0x015c], name: "a <C0>Gold Skulltula Token" }
 - { id: OOT_SPELL_FIRE, item: OOT_SPELL_FIRE, add: OOT_NORMAL, flags: 0x80, draw: OOT_SPELL_FIRE, object: [oot, 0x015d], name: "<C1>Din's Fire" }
 - { id: OOT_SPELL_WIND, item: OOT_SPELL_WIND, add: OOT_NORMAL, flags: 0x80, draw: OOT_SPELL_WIND, object: [oot, 0x015d], name: "<C1>Farore's Wind" }
 - { id: OOT_SPELL_LOVE, item: OOT_SPELL_LOVE, add: OOT_NORMAL, flags: 0x80, draw: OOT_SPELL_LOVE, object: [oot, 0x015d], name: "<C1>Nayru's Love" }
@@ -476,7 +476,7 @@
 - { id: MM_UNK_4F, add: NONE, flags: 0x00 }
 - { id: MM_BOMBER_NOTEBOOK, item: MM_BOMBER_NOTEBOOK, add: [MM_QUEST, QUEST_MM_NOTEBOOK], flags: 0x80, draw: MM_NOTEBOOK, object: [mm, 0x0253], name: "the <C1>Bomber's Notebook" }
 - { id: MM_UNK_51, add: NONE, flags: 0xa0, draw: STONE_OF_AGONY, object: [mm, 0x00a0] } # Stone of Agony
-- { id: MM_GS_TOKEN, item: MM_GS_TOKEN, add: NONE, flags: 0x80, draw: OOT_GS_TOKEN, object: [mm, 0x0125] }
+- { id: MM_GS_TOKEN, item: MM_GS_TOKEN, add: NONE, flags: 0x80, draw: OOT_GS_TOKEN, object: [mm, 0x0125] } # Unused
 - { id: MM_UNK_53, add: NONE, flags: 0x00 }
 - { id: MM_UNK_54, add: NONE, flags: 0x00 }
 - { id: MM_UNK_55, item: MM_REMAINS_ODOLWA, add: [MM_QUEST, QUEST_MM_REMAINS_ODOLWA], flags: 0x80, name: "<C3>Odolwa's Remains" }
@@ -601,8 +601,8 @@
 - { id: MM_REMAINS_TWINMOLD, add: [MM_QUEST, QUEST_MM_REMAINS_TWINMOLD], flags: 0xa0, draw: MM_REMAINS_TWINMOLD, object: GI_REMAINS_TWINMOLD, name: "<C3>Twinmold's Remains" }
 - { id: MM_SOLD_OUT, flags: 0xa0, draw: OOT_SOLD_OUT, object: [mm, 0x0113] }
 - { id: MM_PROGRESSIVE_SHIELD_HERO, add: [MM_SHIELD, 0x101], flags: 0xa0, draw: MM_SHIELD_HERO, object: [mm, 0x00b3], name: "the <C1>Progressive Hero's Shield" }
-- { id: MM_GS_TOKEN_SWAMP, add: NONE, flags: 0x80, draw: MM_GS_TOKEN_SWAMP, object: [mm, 0x0125], name: "a <C0>Swamp Skulltula Token" }
-- { id: MM_GS_TOKEN_OCEAN, add: NONE, flags: 0x80, draw: MM_GS_TOKEN_OCEAN, object: [mm, 0x0125], name: "an <C0>Ocean Skulltula Token" }
+- { id: MM_GS_TOKEN_SWAMP, add: GS_TOKEN_SWAMP, flags: 0x80, draw: MM_GS_TOKEN_SWAMP, object: [mm, 0x0125], name: "a <C0>Swamp Skulltula Token" }
+- { id: MM_GS_TOKEN_OCEAN, add: GS_TOKEN_OCEAN, flags: 0x80, draw: MM_GS_TOKEN_OCEAN, object: [mm, 0x0125], name: "an <C0>Ocean Skulltula Token" }
 - { id: MM_SMALL_KEY_WF, add: [MM_SMALL_KEY, 0], flags: 0xa0, draw: SMALL_KEY, object: [mm, 0x0086], name: "a <C0>Small Key (Woodfall)" }
 - { id: MM_SMALL_KEY_SH, add: [MM_SMALL_KEY, 1], flags: 0xa0, draw: SMALL_KEY, object: [mm, 0x0086], name: "a <C0>Small Key (Snowhead)" }
 - { id: MM_SMALL_KEY_GB, add: [MM_SMALL_KEY, 2], flags: 0xa0, draw: SMALL_KEY, object: [mm, 0x0086], name: "a <C0>Small Key (Great Bay)" }
