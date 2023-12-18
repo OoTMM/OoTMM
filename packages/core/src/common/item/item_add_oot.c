@@ -109,19 +109,6 @@ void comboAddCommonItemOot(int sid, int noEffect)
 {
     switch (sid)
     {
-    case SITEM_SONG_EPONA:
-        gOotSave.inventory.quest.songEpona = 1;
-        BITMAP16_SET(gOotSave.eventsChk, EV_OOT_CHK_EPONA);
-        break;
-    case SITEM_SONG_TIME:
-        gOotSave.inventory.quest.songTime = 1;
-        break;
-    case SITEM_SONG_STORMS:
-        gOotSave.inventory.quest.songStorms = 1;
-        break;
-    case SITEM_SONG_SUN:
-        gOotSave.inventory.quest.songSun = 1;
-        break;
     case SITEM_HEART_PIECE:
         gOotSave.inventory.quest.heartPieces++;
         if (noEffect)
@@ -165,26 +152,6 @@ void comboAddItemSharedOot(s16 gi, int noEffect)
             comboAddMagicUpgradeMm(2);
             break;
         }
-    }
-
-    if (comboConfig(CFG_SHARED_SONG_EPONA) && gi == GI_OOT_SONG_EPONA)
-    {
-        comboAddCommonItemMm(SITEM_SONG_EPONA, noEffect);
-    }
-
-    if (comboConfig(CFG_SHARED_SONG_STORMS) && gi == GI_OOT_SONG_STORMS)
-    {
-        comboAddCommonItemMm(SITEM_SONG_STORMS, noEffect);
-    }
-
-    if (comboConfig(CFG_SHARED_SONG_TIME) && gi == GI_OOT_SONG_TIME)
-    {
-        comboAddCommonItemMm(SITEM_SONG_TIME, noEffect);
-    }
-
-    if (comboConfig(CFG_SHARED_SONG_SUN) && comboConfig(CFG_MM_SONG_SUN) && gi == GI_OOT_SONG_SUN)
-    {
-        comboAddCommonItemMm(SITEM_SONG_SUN, noEffect);
     }
 
     if (comboConfig(CFG_SHARED_HEALTH))
@@ -349,75 +316,6 @@ int comboAddItemOot(s16 gi, int noEffect)
     case GI_OOT_GS_TOKEN:
         gOotSave.inventory.quest.goldToken = 1;
         count = ++gOotSave.inventory.goldTokens;
-        break;
-    case GI_OOT_GERUDO_CARD:
-        gOotSave.inventory.quest.gerudoCard = 1;
-        break;
-    case GI_OOT_STONE_OF_AGONY:
-        gOotSave.inventory.quest.agonyStone = 1;
-        break;
-    case GI_OOT_STONE_SAPPHIRE:
-        gOotSave.inventory.quest.stoneSapphire = 1;
-        break;
-    case GI_OOT_STONE_RUBY:
-        gOotSave.inventory.quest.stoneRuby = 1;
-        break;
-    case GI_OOT_STONE_EMERALD:
-        gOotSave.inventory.quest.stoneEmerald = 1;
-        break;
-    case GI_OOT_SONG_STORMS:
-        comboAddCommonItemOot(SITEM_SONG_STORMS, noEffect);
-        break;
-    case GI_OOT_SONG_TIME:
-        comboAddCommonItemOot(SITEM_SONG_TIME, noEffect);
-        break;
-    case GI_OOT_SONG_SUN:
-        comboAddCommonItemOot(SITEM_SONG_SUN, noEffect);
-        break;
-    case GI_OOT_SONG_SARIA:
-        gOotSave.inventory.quest.songSaria = 1;
-        break;
-    case GI_OOT_SONG_EPONA:
-        comboAddCommonItemOot(SITEM_SONG_EPONA, noEffect);
-        break;
-    case GI_OOT_SONG_ZELDA:
-        gOotSave.inventory.quest.songZelda = 1;
-        break;
-    case GI_OOT_SONG_TP_LIGHT:
-        gOotSave.inventory.quest.songTpLight = 1;
-        break;
-    case GI_OOT_SONG_TP_SHADOW:
-        gOotSave.inventory.quest.songTpShadow = 1;
-        break;
-    case GI_OOT_SONG_TP_SPIRIT:
-        gOotSave.inventory.quest.songTpSpirit = 1;
-        break;
-    case GI_OOT_SONG_TP_WATER:
-        gOotSave.inventory.quest.songTpWater = 1;
-        break;
-    case GI_OOT_SONG_TP_FIRE:
-        gOotSave.inventory.quest.songTpFire = 1;
-        break;
-    case GI_OOT_SONG_TP_FOREST:
-        gOotSave.inventory.quest.songTpForest = 1;
-        break;
-    case GI_OOT_MEDALLION_LIGHT:
-        gOotSave.inventory.quest.medallionLight = 1;
-        break;
-    case GI_OOT_MEDALLION_SHADOW:
-        gOotSave.inventory.quest.medallionShadow = 1;
-        break;
-    case GI_OOT_MEDALLION_SPIRIT:
-        gOotSave.inventory.quest.medallionSpirit = 1;
-        break;
-    case GI_OOT_MEDALLION_WATER:
-        gOotSave.inventory.quest.medallionWater = 1;
-        break;
-    case GI_OOT_MEDALLION_FIRE:
-        gOotSave.inventory.quest.medallionFire = 1;
-        break;
-    case GI_OOT_MEDALLION_FOREST:
-        gOotSave.inventory.quest.medallionForest = 1;
         break;
     case GI_OOT_RECOVERY_HEART:
         comboAddCommonItemOot(SITEM_RECOVERY_HEART, noEffect);

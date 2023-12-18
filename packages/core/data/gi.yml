@@ -54,8 +54,8 @@
 - { id: OOT_GOLDEN_GAUNTLETS, item: OOT_GOLDEN_GAUNTLETS, add: [STRENGTH, 3], flags: 0x80, draw: OOT_GAUNTLETS_GOLD, object: [oot, 0x012d], name: "the <C1>Golden Gauntlets" }
 - { id: OOT_SCALE_SILVER, item: OOT_SILVER_SCALE, add: [SCALE, 1], flags: 0x80, draw: OOT_SCALE_SILVER, object: [oot, 0x00db], name: "the <C1>Silver Scale" }
 - { id: OOT_SCALE_GOLDEN, item: OOT_GOLDEN_SCALE, add: [SCALE, 2], flags: 0x80, draw: OOT_SCALE_GOLD, object: [oot, 0x00db], name: "the <C1>Golden Scale" }
-- { id: OOT_STONE_OF_AGONY, item: OOT_STONE_OF_AGONY, add: NONE, flags: 0x80, draw: STONE_OF_AGONY, object: [oot, 0x00c8], name: "the <C1>Stone of Agony" }
-- { id: OOT_GERUDO_CARD, item: OOT_GERUDO_CARD, add: NONE, flags: 0x80, draw: OOT_GERUDO_CARD, object: [oot, 0x00d7], name: "the <C1>Gerudo's Card" }
+- { id: OOT_STONE_OF_AGONY, item: OOT_STONE_OF_AGONY, add: [OOT_QUEST, QUEST_OOT_STONE_AGONY], flags: 0x80, draw: STONE_OF_AGONY, object: [oot, 0x00c8], name: "the <C1>Stone of Agony" }
+- { id: OOT_GERUDO_CARD, item: OOT_GERUDO_CARD, add: [OOT_QUEST, QUEST_OOT_GERUDO_CARD], flags: 0x80, draw: OOT_GERUDO_CARD, object: [oot, 0x00d7], name: "the <C1>Gerudo's Card" }
 - { id: OOT_OCARINA_FAIRY, item: OOT_OCARINA_FAIRY, add: [OOT_OCARINA, 1], flags: 0x80, draw: OOT_OCARINA_FAIRY, object: [oot, 0x010e], name: "the <C1>Fairy Ocarina" }
 - { id: OOT_DEKU_SEEDS_5, item: OOT_SEEDS_5, add: [SEEDS, 5], flags: 0x50, draw: OOT_SEEDS, object: [oot, 0x0119], name: "<C0>5 Deku Seeds" }
 - { id: OOT_HEART_CONTAINER, item: OOT_HEART_CONTAINER, add: NONE, flags: 0x80, draw: HEART_CONTAINER, object: [oot, 0x00bd], name: "a <C0>Heart Container" }
@@ -125,28 +125,28 @@
 - { id: OOT_UNK_7D, add: NONE, flags: 0x00 }
 - { id: OOT_UNK_7E, add: NONE, flags: 0x00 }
 - { id: OOT_UNK_7F, add: NONE, flags: 0x00 }
-- { id: OOT_SONG_TP_FOREST, add: NONE, flags: 0x80, draw: [NOTE, 0x82], object: [oot, 0x00b6], name: "the <C2>Minuet of Forest" }
-- { id: OOT_SONG_TP_FIRE, add: NONE, flags: 0x80, draw: [NOTE, 0x85], object: [oot, 0x00b6], name: "the <C2>Bolero of Fire" }
-- { id: OOT_SONG_TP_WATER, add: NONE, flags: 0x80, draw: [NOTE, 0x81], object: [oot, 0x00b6], name: "the <C2>Serenade of Water" }
-- { id: OOT_SONG_TP_SPIRIT, add: NONE, flags: 0x80, draw: [NOTE, 0x84], object: [oot, 0x00b6], name: "the <C2>Requiem of Spirit" }
-- { id: OOT_SONG_TP_SHADOW, add: NONE, flags: 0x80, draw: [NOTE, 0x80], object: [oot, 0x00b6], name: "the <C2>Nocturne of Shadow" }
-- { id: OOT_SONG_TP_LIGHT, add: NONE, flags: 0x80, draw: [NOTE, 0x83], object: [oot, 0x00b6], name: "the <C2>Prelude of Light" }
-- { id: OOT_SONG_ZELDA, add: NONE, flags: 0x80, draw: [NOTE, 0x05], object: [oot, 0x00b6], name: "<C2>Zelda's Lullaby" }
-- { id: OOT_SONG_EPONA, add: NONE, flags: 0x80, draw: [NOTE, 0x04], object: [oot, 0x00b6], name: "<C2>Epona's Song" }
-- { id: OOT_SONG_SARIA, add: NONE, flags: 0x80, draw: [NOTE, 0x02], object: [oot, 0x00b6], name: "<C2>Saria's Song" }
-- { id: OOT_SONG_SUN, add: NONE, flags: 0x80, draw: [NOTE, 0x03], object: [oot, 0x00b6], name: "the <C2>Sun's Song" }
-- { id: OOT_SONG_TIME, add: NONE, flags: 0x80, draw: [NOTE, 0x01], object: [oot, 0x00b6], name: "the <C2>Song of Time" }
-- { id: OOT_SONG_STORMS, add: NONE, flags: 0x80, draw: [NOTE, 0x00], object: [oot, 0x00b6], name: "the <C2>Song of Storms" }
+- { id: OOT_SONG_TP_FOREST, add: [OOT_QUEST, QUEST_OOT_SONG_TP_FOREST], flags: 0x80, draw: [NOTE, 0x82], object: [oot, 0x00b6], name: "the <C2>Minuet of Forest" }
+- { id: OOT_SONG_TP_FIRE, add: [OOT_QUEST, QUEST_OOT_SONG_TP_FIRE], flags: 0x80, draw: [NOTE, 0x85], object: [oot, 0x00b6], name: "the <C2>Bolero of Fire" }
+- { id: OOT_SONG_TP_WATER, add: [OOT_QUEST, QUEST_OOT_SONG_TP_WATER], flags: 0x80, draw: [NOTE, 0x81], object: [oot, 0x00b6], name: "the <C2>Serenade of Water" }
+- { id: OOT_SONG_TP_SPIRIT, add: [OOT_QUEST, QUEST_OOT_SONG_TP_SPIRIT], flags: 0x80, draw: [NOTE, 0x84], object: [oot, 0x00b6], name: "the <C2>Requiem of Spirit" }
+- { id: OOT_SONG_TP_SHADOW, add: [OOT_QUEST, QUEST_OOT_SONG_TP_SHADOW], flags: 0x80, draw: [NOTE, 0x80], object: [oot, 0x00b6], name: "the <C2>Nocturne of Shadow" }
+- { id: OOT_SONG_TP_LIGHT, add: [OOT_QUEST, QUEST_OOT_SONG_TP_LIGHT], flags: 0x80, draw: [NOTE, 0x83], object: [oot, 0x00b6], name: "the <C2>Prelude of Light" }
+- { id: OOT_SONG_ZELDA, add: [OOT_QUEST, QUEST_OOT_SONG_ZELDA], flags: 0x80, draw: [NOTE, 0x05], object: [oot, 0x00b6], name: "<C2>Zelda's Lullaby" }
+- { id: OOT_SONG_EPONA, add: [OOT_QUEST, QUEST_OOT_SONG_EPONA], flags: 0x80, draw: [NOTE, 0x04], object: [oot, 0x00b6], name: "<C2>Epona's Song" }
+- { id: OOT_SONG_SARIA, add: [OOT_QUEST, QUEST_OOT_SONG_SARIA], flags: 0x80, draw: [NOTE, 0x02], object: [oot, 0x00b6], name: "<C2>Saria's Song" }
+- { id: OOT_SONG_SUN, add: [OOT_QUEST, QUEST_OOT_SONG_SUN], flags: 0x80, draw: [NOTE, 0x03], object: [oot, 0x00b6], name: "the <C2>Sun's Song" }
+- { id: OOT_SONG_TIME, add: [OOT_QUEST, QUEST_OOT_SONG_TIME], flags: 0x80, draw: [NOTE, 0x01], object: [oot, 0x00b6], name: "the <C2>Song of Time" }
+- { id: OOT_SONG_STORMS, add: [OOT_QUEST, QUEST_OOT_SONG_STORMS], flags: 0x80, draw: [NOTE, 0x00], object: [oot, 0x00b6], name: "the <C2>Song of Storms" }
 - { id: OOT_SWORD_MASTER, add: [OOT_SWORD, 2], flags: 0x80, draw: OOT_SWORD_MASTER, object: GI_MASTER_SWORD, name: "the <C1>Master Sword" }
-- { id: OOT_STONE_EMERALD, add: NONE, flags: 0x80, draw: OOT_STONE_EMERALD, object: GI_STONE_EMERALD, name: "the <C3>Kokiri's Emerald" }
-- { id: OOT_STONE_RUBY, add: NONE, flags: 0x80, draw: OOT_STONE_RUBY, object: GI_STONE_RUBY, name: "the <C3>Goron's Ruby" }
-- { id: OOT_STONE_SAPPHIRE, add: NONE, flags: 0x80, draw: OOT_STONE_SAPPHIRE, object: GI_STONE_SAPPHIRE, name: "the <C3>Zora's Sapphire" }
-- { id: OOT_MEDALLION_FOREST, add: NONE, flags: 0x80, draw: OOT_MEDALLION_FOREST, object: GI_MEDALLION_FOREST, name: "the <C3>Forest Medallion" }
-- { id: OOT_MEDALLION_FIRE, add: NONE, flags: 0x80, draw: OOT_MEDALLION_FIRE, object: GI_MEDALLION_FIRE, name: "the <C3>Fire Medallion" }
-- { id: OOT_MEDALLION_WATER, add: NONE, flags: 0x80, draw: OOT_MEDALLION_WATER, object: GI_MEDALLION_WATER, name: "the <C3>Water Medallion" }
-- { id: OOT_MEDALLION_SPIRIT, add: NONE, flags: 0x80, draw: OOT_MEDALLION_SPIRIT, object: GI_MEDALLION_SPIRIT, name: "the <C3>Spirit Medallion" }
-- { id: OOT_MEDALLION_SHADOW, add: NONE, flags: 0x80, draw: OOT_MEDALLION_SHADOW, object: GI_MEDALLION_SHADOW, name: "the <C3>Shadow Medallion" }
-- { id: OOT_MEDALLION_LIGHT, add: NONE, flags: 0x80, draw: OOT_MEDALLION_LIGHT, object: GI_MEDALLION_LIGHT, name: "the <C3>Light Medallion" }
+- { id: OOT_STONE_EMERALD, add: [OOT_QUEST, QUEST_OOT_STONE_EMERALD], flags: 0x80, draw: OOT_STONE_EMERALD, object: GI_STONE_EMERALD, name: "the <C3>Kokiri's Emerald" }
+- { id: OOT_STONE_RUBY, add: [OOT_QUEST, QUEST_OOT_STONE_RUBY], flags: 0x80, draw: OOT_STONE_RUBY, object: GI_STONE_RUBY, name: "the <C3>Goron's Ruby" }
+- { id: OOT_STONE_SAPPHIRE, add: [OOT_QUEST, QUEST_OOT_STONE_SAPPHIRE], flags: 0x80, draw: OOT_STONE_SAPPHIRE, object: GI_STONE_SAPPHIRE, name: "the <C3>Zora's Sapphire" }
+- { id: OOT_MEDALLION_FOREST, add: [OOT_QUEST, QUEST_OOT_MEDALLION_FOREST], flags: 0x80, draw: OOT_MEDALLION_FOREST, object: GI_MEDALLION_FOREST, name: "the <C3>Forest Medallion" }
+- { id: OOT_MEDALLION_FIRE, add: [OOT_QUEST, QUEST_OOT_MEDALLION_FIRE], flags: 0x80, draw: OOT_MEDALLION_FIRE, object: GI_MEDALLION_FIRE, name: "the <C3>Fire Medallion" }
+- { id: OOT_MEDALLION_WATER, add: [OOT_QUEST, QUEST_OOT_MEDALLION_WATER], flags: 0x80, draw: OOT_MEDALLION_WATER, object: GI_MEDALLION_WATER, name: "the <C3>Water Medallion" }
+- { id: OOT_MEDALLION_SPIRIT, add: [OOT_QUEST, QUEST_OOT_MEDALLION_SPIRIT], flags: 0x80, draw: OOT_MEDALLION_SPIRIT, object: GI_MEDALLION_SPIRIT, name: "the <C3>Spirit Medallion" }
+- { id: OOT_MEDALLION_SHADOW, add: [OOT_QUEST, QUEST_OOT_MEDALLION_SHADOW], flags: 0x80, draw: OOT_MEDALLION_SHADOW, object: GI_MEDALLION_SHADOW, name: "the <C3>Shadow Medallion" }
+- { id: OOT_MEDALLION_LIGHT, add: [OOT_QUEST, QUEST_OOT_MEDALLION_LIGHT], flags: 0x80, draw: OOT_MEDALLION_LIGHT, object: GI_MEDALLION_LIGHT, name: "the <C3>Light Medallion" }
 - { id: OOT_MAGIC_UPGRADE, add: NONE, flags: 0x80, draw: MAGIC_UPGRADE, object: [oot, 0x00cd], name: "the <C1>Magic Upgrade" }
 - { id: OOT_MAGIC_UPGRADE2, add: NONE, flags: 0x80, draw: MAGIC_UPGRADE2, object: [oot, 0x00cd], name: "the <C1>Larger Magic Upgrade" }
 - { id: OOT_DEFENSE_UPGRADE, add: NONE, flags: 0x80, draw: DEFENSE_UPGRADE, object: [oot, 0x00bd], name: "the <C1>Defense Upgrade" }

@@ -1030,6 +1030,14 @@ static int addItemScale(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
+static int addItemQuestOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    gOotSave.inventory.quest.value |= (1 << param);
+    if (param == QUEST_OOT_SONG_EPONA)
+        BITMAP16_SET(gOotSave.eventsChk, EV_OOT_CHK_EPONA);
+    return 0;
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -1078,6 +1086,7 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemBoots,
     addItemStrength,
     addItemScale,
+    addItemQuestOot,
 };
 
 extern const u8 kAddItemFuncs[];
@@ -1102,6 +1111,10 @@ static const SharedItem kSimpleSharedItems[] = {
     { CFG_SHARED_MASK_KEATON,       GI_OOT_MASK_KEATON, GI_MM_MASK_KEATON },
     { CFG_SHARED_MASK_GORON,        GI_OOT_MASK_GORON,  GI_MM_MASK_GORON  },
     { CFG_SHARED_MASK_ZORA,         GI_OOT_MASK_ZORA,   GI_MM_MASK_ZORA  },
+    { CFG_SHARED_SONG_EPONA,        GI_OOT_SONG_EPONA,  GI_MM_SONG_EPONA  },
+    { CFG_SHARED_SONG_TIME,         GI_OOT_SONG_TIME,   GI_MM_SONG_TIME  },
+    { CFG_SHARED_SONG_STORMS,       GI_OOT_SONG_STORMS, GI_MM_SONG_STORMS  },
+    { CFG_SHARED_SONG_SUN,          GI_OOT_SONG_SUN,    GI_MM_SONG_SUN  },
 };
 
 static int addItem(GameState_Play* play, s16 gi)
