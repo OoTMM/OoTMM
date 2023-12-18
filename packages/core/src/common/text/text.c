@@ -950,6 +950,31 @@ void comboTextMessageCantBuy(GameState_Play* play, int flags)
     comboTextAutoLineBreaks(start);
 }
 
+void comboTextAppendItemImportance(char** b, s16 gi, int importance)
+{
+    if (comboConfig(CFG_HINT_IMPORTANCE) && !isItemFastBuy(gi) && gi != GI_NOTHING)
+    {
+        switch (importance)
+        {
+        case 0:
+            comboTextAppendStr(b, " (" TEXT_COLOR_PINK "not required");
+            comboTextAppendClearColor(b);
+            comboTextAppendStr(b, ")");
+            break;
+        case 1:
+            comboTextAppendStr(b, " (" TEXT_COLOR_TEAL "sometimes required");
+            comboTextAppendClearColor(b);
+            comboTextAppendStr(b, ")");
+            break;
+        case 2:
+            comboTextAppendStr(b, " (" TEXT_COLOR_YELLOW "required");
+            comboTextAppendClearColor(b);
+            comboTextAppendStr(b, ")");
+            break;
+        }
+    }
+}
+
 #if defined(GAME_OOT)
 void comboTextHijackFishCaught(GameState_Play* play, const ComboItemOverride* o)
 {
@@ -978,30 +1003,4 @@ void comboTextHijackFishCaught(GameState_Play* play, const ComboItemOverride* o)
     comboTextAppendStr(&b, TEXT_END);
     comboTextAutoLineBreaks(start);
 }
-
-void comboTextAppendItemImportance(char** b, s16 gi, int importance)
-{
-    if (comboConfig(CFG_HINT_IMPORTANCE) && !isItemFastBuy(gi) && gi != GI_NOTHING)
-    {
-        switch (importance)
-        {
-        case 0:
-            comboTextAppendStr(b, " (" TEXT_COLOR_PINK "not required");
-            comboTextAppendClearColor(b);
-            comboTextAppendStr(b, ")");
-            break;
-        case 1:
-            comboTextAppendStr(b, " (" TEXT_COLOR_TEAL "sometimes required");
-            comboTextAppendClearColor(b);
-            comboTextAppendStr(b, ")");
-            break;
-        case 2:
-            comboTextAppendStr(b, " (" TEXT_COLOR_YELLOW "required");
-            comboTextAppendClearColor(b);
-            comboTextAppendStr(b, ")");
-            break;
-        }
-    }
-}
-
 #endif
