@@ -83,6 +83,8 @@
 #define IA_STRAY_FAIRY          0x4b
 #define IA_TRIFORCE             0x4c
 #define IA_COIN                 0x4d
+#define IA_OOT_BUTTON           0x4e
+#define IA_MM_BUTTON            0x4f
 #define IA_NONE                 0xff
 
 typedef struct GameState_Play GameState_Play;

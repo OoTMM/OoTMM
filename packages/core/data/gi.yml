@@ -303,11 +303,11 @@
 - { id: OOT_POUCH_SILVER_GANON_SHADOW, add: [SILVER_POUCH, SR_GANON1], flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Ganon Shadow)" }
 - { id: OOT_POUCH_SILVER_GANON_WATER, add: [SILVER_POUCH, SR_GANON2], flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Ganon Water)" }
 - { id: OOT_RUPEE_MAGICAL, add: MAGICAL_RUPEE, flags: 0x80, draw: OOT_RUPEE_MAGICAL, name: "the <C1>Magical Rupee" }
-- { id: OOT_BUTTON_A, add: NONE, flags: 0x80, draw: BUTTON_A, object: BTN_A, name: "the <C1>A Button" }
-- { id: OOT_BUTTON_C_RIGHT, add: NONE, flags: 0x80, draw: BUTTON_C_RIGHT, object: BTN_C_HORIZONTAL, name: "the <C1>C-Right Button" }
-- { id: OOT_BUTTON_C_LEFT, add: NONE, flags: 0x80, draw: BUTTON_C_LEFT, object: BTN_C_HORIZONTAL, name: "the <C1>C-Left Button" }
-- { id: OOT_BUTTON_C_UP, add: NONE, flags: 0x80, draw: BUTTON_C_UP, object: BTN_C_VERTICAL, name: "the <C1>C-Up Button" }
-- { id: OOT_BUTTON_C_DOWN, add: NONE, flags: 0x80, draw: BUTTON_C_DOWN, object: BTN_C_VERTICAL, name: "the <C1>C-Down Button" }
+- { id: OOT_BUTTON_A, add: [OOT_BUTTON, 0], flags: 0x80, draw: BUTTON_A, object: BTN_A, name: "the <C1>A Button" }
+- { id: OOT_BUTTON_C_RIGHT, add: [OOT_BUTTON, 1], flags: 0x80, draw: BUTTON_C_RIGHT, object: BTN_C_HORIZONTAL, name: "the <C1>C-Right Button" }
+- { id: OOT_BUTTON_C_LEFT, add: [OOT_BUTTON, 2], flags: 0x80, draw: BUTTON_C_LEFT, object: BTN_C_HORIZONTAL, name: "the <C1>C-Left Button" }
+- { id: OOT_BUTTON_C_UP, add: [OOT_BUTTON, 3], flags: 0x80, draw: BUTTON_C_UP, object: BTN_C_VERTICAL, name: "the <C1>C-Up Button" }
+- { id: OOT_BUTTON_C_DOWN, add: [OOT_BUTTON, 4], flags: 0x80, draw: BUTTON_C_DOWN, object: BTN_C_VERTICAL, name: "the <C1>C-Down Button" }
 - { id: OOT_SMALL_KEY_TCG, add: [OOT_SMALL_KEY, SCE_OOT_TREASURE_SHOP], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C0>Small Key (Chest Game)" }
 - { id: OOT_KEY_RING_TCG, add: [OOT_KEY_RING, SCE_OOT_TREASURE_SHOP], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "the <C0>Key Ring (Chest Game)" }
 - { id: OOT_SOUL_NPC_SARIA, add: NONE, flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of Saria" }
@@ -697,11 +697,11 @@
 - { id: MM_KEY_RING_GB, add: [MM_KEY_RING, 2], flags: 0xa0, draw: SMALL_KEY, object: [mm, 0x0086], name: "the <C0>Key Ring (Great Bay)" }
 - { id: MM_KEY_RING_ST, add: [MM_KEY_RING, 3], flags: 0xa0, draw: SMALL_KEY, object: [mm, 0x0086], name: "the <C0>Key Ring (Stone Tower)" }
 - { id: MM_SKELETON_KEY, add: MM_SKELETON_KEY, flags: 0xa0, draw: SKELETON_KEY, object: [mm, 0x0086], name: "the <C1>Skeleton Key" }
-- { id: MM_BUTTON_A, add: NONE, flags: 0xa0, draw: BUTTON_A, object: BTN_A, name: "the <C1>A Button" }
-- { id: MM_BUTTON_C_RIGHT, add: NONE, flags: 0xa0, draw: BUTTON_C_RIGHT, object: BTN_C_HORIZONTAL, name: "the <C1>C-Right Button" }
-- { id: MM_BUTTON_C_LEFT, add: NONE, flags: 0xa0, draw: BUTTON_C_LEFT, object: BTN_C_HORIZONTAL, name: "the <C1>C-Left Button" }
-- { id: MM_BUTTON_C_UP, add: NONE, flags: 0xa0, draw: BUTTON_C_UP, object: BTN_C_VERTICAL, name: "the <C1>C-Up Button" }
-- { id: MM_BUTTON_C_DOWN, add: NONE, flags: 0xa0, draw: BUTTON_C_DOWN, object: BTN_C_VERTICAL, name: "the <C1>C-Down Button" }
+- { id: MM_BUTTON_A, add: [MM_BUTTON, 0], flags: 0xa0, draw: BUTTON_A, object: BTN_A, name: "the <C1>A Button" }
+- { id: MM_BUTTON_C_RIGHT, add: [MM_BUTTON, 1], flags: 0xa0, draw: BUTTON_C_RIGHT, object: BTN_C_HORIZONTAL, name: "the <C1>C-Right Button" }
+- { id: MM_BUTTON_C_LEFT, add: [MM_BUTTON, 2], flags: 0xa0, draw: BUTTON_C_LEFT, object: BTN_C_HORIZONTAL, name: "the <C1>C-Left Button" }
+- { id: MM_BUTTON_C_UP, add: [MM_BUTTON, 3], flags: 0xa0, draw: BUTTON_C_UP, object: BTN_C_VERTICAL, name: "the <C1>C-Up Button" }
+- { id: MM_BUTTON_C_DOWN, add: [MM_BUTTON, 4], flags: 0xa0, draw: BUTTON_C_DOWN, object: BTN_C_VERTICAL, name: "the <C1>C-Down Button" }
 - { id: MM_BOTTLE_POTION_GREEN, item: MM_POTION_GREEN, add: MM_BOTTLE_NEW, flags: 0xa0, draw: [BOTTLE_POTION, 0x01], object: [mm, 0x0196], name: "a <C1>bottle of Green Potion" }
 - { id: MM_BOTTLE_POTION_BLUE, item: MM_POTION_BLUE, add: MM_BOTTLE_NEW, flags: 0xa0, draw: [BOTTLE_POTION, 0x02], object: [mm, 0x0196], name: "a <C1>bottle of Blue Potion" }
-- { id: MM_SCOOP, flags: 0x00 } # Scoop
+- { id: MM_SCOOP, flags: 0x00 } # Scoop, MUST be the last entry

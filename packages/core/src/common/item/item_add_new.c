@@ -8,6 +8,14 @@
 # define addRupeesRaw  addRupeesRawMm
 #endif
 
+static const u16 kButtonMasks[] = {
+    A_BUTTON,
+    R_CBUTTONS,
+    L_CBUTTONS,
+    U_CBUTTONS,
+    D_CBUTTONS,
+};
+
 static const u8 kMmSwords[] = {
     ITEM_NONE,
     ITEM_MM_SWORD_KOKIRI,
@@ -1521,6 +1529,18 @@ static int addItemCoin(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return ++gSharedCustomSave.coins[param];
 }
 
+static int addItemButtonOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    gSharedCustomSave.ocarinaButtonMaskOot |= kButtonMasks[param];
+    return 0;
+}
+
+static int addItemButtonMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    gSharedCustomSave.ocarinaButtonMaskMm |= kButtonMasks[param];
+    return 0;
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -1600,6 +1620,8 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemStrayFairy,
     addItemTriforce,
     addItemCoin,
+    addItemButtonOot,
+    addItemButtonMm,
 };
 
 extern const u8 kAddItemFuncs[];
@@ -1622,15 +1644,20 @@ static const SharedItem kSimpleSharedItems[] = {
     { CFG_SHARED_MASK_BUNNY,        GI_OOT_MASK_BUNNY,      GI_MM_MASK_BUNNY },
     { CFG_SHARED_MASK_TRUTH,        GI_OOT_MASK_TRUTH,      GI_MM_MASK_TRUTH },
     { CFG_SHARED_MASK_KEATON,       GI_OOT_MASK_KEATON,     GI_MM_MASK_KEATON },
-    { CFG_SHARED_MASK_GORON,        GI_OOT_MASK_GORON,      GI_MM_MASK_GORON  },
-    { CFG_SHARED_MASK_ZORA,         GI_OOT_MASK_ZORA,       GI_MM_MASK_ZORA  },
-    { CFG_SHARED_SONG_EPONA,        GI_OOT_SONG_EPONA,      GI_MM_SONG_EPONA  },
-    { CFG_SHARED_SONG_TIME,         GI_OOT_SONG_TIME,       GI_MM_SONG_TIME  },
-    { CFG_SHARED_SONG_STORMS,       GI_OOT_SONG_STORMS,     GI_MM_SONG_STORMS  },
-    { CFG_SHARED_SONG_SUN,          GI_OOT_SONG_SUN,        GI_MM_SONG_SUN  },
-    { CFG_SHARED_SKELETON_KEY,      GI_OOT_SKELETON_KEY,    GI_MM_SKELETON_KEY  },
-    { CFG_SHARED_MAGIC,             GI_OOT_MAGIC_UPGRADE,   GI_MM_MAGIC_UPGRADE  },
-    { CFG_SHARED_MAGIC,             GI_OOT_MAGIC_UPGRADE2,  GI_MM_MAGIC_UPGRADE2  },
+    { CFG_SHARED_MASK_GORON,        GI_OOT_MASK_GORON,      GI_MM_MASK_GORON },
+    { CFG_SHARED_MASK_ZORA,         GI_OOT_MASK_ZORA,       GI_MM_MASK_ZORA },
+    { CFG_SHARED_SONG_EPONA,        GI_OOT_SONG_EPONA,      GI_MM_SONG_EPONA },
+    { CFG_SHARED_SONG_TIME,         GI_OOT_SONG_TIME,       GI_MM_SONG_TIME },
+    { CFG_SHARED_SONG_STORMS,       GI_OOT_SONG_STORMS,     GI_MM_SONG_STORMS },
+    { CFG_SHARED_SONG_SUN,          GI_OOT_SONG_SUN,        GI_MM_SONG_SUN },
+    { CFG_SHARED_SKELETON_KEY,      GI_OOT_SKELETON_KEY,    GI_MM_SKELETON_KEY },
+    { CFG_SHARED_MAGIC,             GI_OOT_MAGIC_UPGRADE,   GI_MM_MAGIC_UPGRADE },
+    { CFG_SHARED_MAGIC,             GI_OOT_MAGIC_UPGRADE2,  GI_MM_MAGIC_UPGRADE2 },
+    { CFG_SHARED_OCARINA_BUTTONS,   GI_OOT_BUTTON_A,        GI_MM_BUTTON_A },
+    { CFG_SHARED_OCARINA_BUTTONS,   GI_OOT_BUTTON_C_RIGHT,  GI_MM_BUTTON_C_RIGHT },
+    { CFG_SHARED_OCARINA_BUTTONS,   GI_OOT_BUTTON_C_LEFT,   GI_MM_BUTTON_C_LEFT },
+    { CFG_SHARED_OCARINA_BUTTONS,   GI_OOT_BUTTON_C_UP,     GI_MM_BUTTON_C_UP },
+    { CFG_SHARED_OCARINA_BUTTONS,   GI_OOT_BUTTON_C_DOWN,   GI_MM_BUTTON_C_DOWN },
 };
 
 static int addItem(GameState_Play* play, s16 gi)

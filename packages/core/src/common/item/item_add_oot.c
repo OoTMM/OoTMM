@@ -86,28 +86,6 @@ void comboAddItemSharedOot(s16 gi, int noEffect)
             break;
         }
     }
-
-    if (comboConfig(CFG_SHARED_OCARINA_BUTTONS))
-    {
-        switch (gi)
-        {
-        case GI_OOT_BUTTON_A:
-            gSharedCustomSave.ocarinaButtonMaskMm |= A_BUTTON;
-            break;
-        case GI_OOT_BUTTON_C_RIGHT:
-            gSharedCustomSave.ocarinaButtonMaskMm |= R_CBUTTONS;
-            break;
-        case GI_OOT_BUTTON_C_LEFT:
-            gSharedCustomSave.ocarinaButtonMaskMm |= L_CBUTTONS;
-            break;
-        case GI_OOT_BUTTON_C_UP:
-            gSharedCustomSave.ocarinaButtonMaskMm |= U_CBUTTONS;
-            break;
-        case GI_OOT_BUTTON_C_DOWN:
-            gSharedCustomSave.ocarinaButtonMaskMm |= D_CBUTTONS;
-            break;
-        }
-    }
 }
 
 int comboAddItemOot(s16 gi, int noEffect)
@@ -202,21 +180,6 @@ int comboAddItemOot(s16 gi, int noEffect)
     case GI_OOT_SOUL_NPC_GRAVEYARD_KID:
     case GI_OOT_SOUL_NPC_POE_COLLECTOR:
         comboAddSoulOot(gi);
-        break;
-    case GI_OOT_BUTTON_A:
-        gSharedCustomSave.ocarinaButtonMaskOot |= A_BUTTON;
-        break;
-    case GI_OOT_BUTTON_C_RIGHT:
-        gSharedCustomSave.ocarinaButtonMaskOot |= R_CBUTTONS;
-        break;
-    case GI_OOT_BUTTON_C_LEFT:
-        gSharedCustomSave.ocarinaButtonMaskOot |= L_CBUTTONS;
-        break;
-    case GI_OOT_BUTTON_C_UP:
-        gSharedCustomSave.ocarinaButtonMaskOot |= U_CBUTTONS;
-        break;
-    case GI_OOT_BUTTON_C_DOWN:
-        gSharedCustomSave.ocarinaButtonMaskOot |= D_CBUTTONS;
         break;
     case GI_OOT_FISHING_POND_CHILD_FISH_2LBS:
     case GI_OOT_FISHING_POND_CHILD_FISH_3LBS:

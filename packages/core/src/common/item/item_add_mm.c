@@ -85,28 +85,6 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
             break;
         }
     }
-
-    if (comboConfig(CFG_SHARED_OCARINA_BUTTONS))
-    {
-        switch (gi)
-        {
-        case GI_MM_BUTTON_A:
-            gSharedCustomSave.ocarinaButtonMaskOot |= A_BUTTON;
-            break;
-        case GI_MM_BUTTON_C_RIGHT:
-            gSharedCustomSave.ocarinaButtonMaskOot |= R_CBUTTONS;
-            break;
-        case GI_MM_BUTTON_C_LEFT:
-            gSharedCustomSave.ocarinaButtonMaskOot |= L_CBUTTONS;
-            break;
-        case GI_MM_BUTTON_C_UP:
-            gSharedCustomSave.ocarinaButtonMaskOot |= U_CBUTTONS;
-            break;
-        case GI_MM_BUTTON_C_DOWN:
-            gSharedCustomSave.ocarinaButtonMaskOot |= D_CBUTTONS;
-            break;
-        }
-    }
 }
 
 int comboAddItemMm(s16 gi, int noEffect)
@@ -223,21 +201,6 @@ int comboAddItemMm(s16 gi, int noEffect)
     case GI_MM_SOUL_BOSS_TWINMOLD:
     case GI_MM_SOUL_BOSS_IGOS:
         comboAddSoulMm(gi);
-        break;
-    case GI_MM_BUTTON_A:
-        gSharedCustomSave.ocarinaButtonMaskMm |= A_BUTTON;
-        break;
-    case GI_MM_BUTTON_C_RIGHT:
-        gSharedCustomSave.ocarinaButtonMaskMm |= R_CBUTTONS;
-        break;
-    case GI_MM_BUTTON_C_LEFT:
-        gSharedCustomSave.ocarinaButtonMaskMm |= L_CBUTTONS;
-        break;
-    case GI_MM_BUTTON_C_UP:
-        gSharedCustomSave.ocarinaButtonMaskMm |= U_CBUTTONS;
-        break;
-    case GI_MM_BUTTON_C_DOWN:
-        gSharedCustomSave.ocarinaButtonMaskMm |= D_CBUTTONS;
         break;
     }
 
