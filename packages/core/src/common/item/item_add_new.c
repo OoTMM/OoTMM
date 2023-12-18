@@ -1487,6 +1487,30 @@ static int addItemMagicUpgradeMm(GameState_Play* play, u8 itemId, s16 gi, u16 pa
     return 0;
 }
 
+static int addItemStrayFairy(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+#if defined(GAME_MM)
+    if (param == 0xffff)
+    {
+        if (play->sceneId == SCE_MM_LAUNDRY_POOL || play->sceneId == SCE_MM_CLOCK_TOWN_EAST)
+            param = 4;
+        else
+            param = gSaveContext.dungeonId;
+    }
+#endif
+
+    if (param == 4)
+    {
+        MM_SET_EVENT_WEEK(EV_MM_WEEK_TOWN_FAIRY);
+        return 0;
+    }
+    else
+    {
+        gMmSave.inventory.strayFairies[param]++;
+        return gMmSave.inventory.strayFairies[param];
+    }
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -1563,6 +1587,7 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemGsTokenOcean,
     addItemMagicUpgradeOot,
     addItemMagicUpgradeMm,
+    addItemStrayFairy,
 };
 
 extern const u8 kAddItemFuncs[];

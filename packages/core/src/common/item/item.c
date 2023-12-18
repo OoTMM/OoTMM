@@ -37,7 +37,6 @@ static int isPlayerSelf(u8 playerId)
 int comboAddItemLegacy(GameState_Play* play, s16 gi)
 {
     int count;
-    int count2;
     int isForeign;
 
     isForeign = (gi >= GI_MM_RUPEE_GREEN);
@@ -54,9 +53,6 @@ int comboAddItemLegacy(GameState_Play* play, s16 gi)
     {
         count = comboAddItemNative(gi, 0);
         comboAddItemSharedNative(gi, 0);
-        count2 = comboAddItemEffect(play, gi);
-        if (!count)
-            count = count2;
     }
 
     return count;

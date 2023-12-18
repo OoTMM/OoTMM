@@ -80,6 +80,7 @@
 #define IA_GS_TOKEN_OCEAN       0x48
 #define IA_OOT_MAGIC_UPGRADE    0x49
 #define IA_MM_MAGIC_UPGRADE     0x4a
+#define IA_STRAY_FAIRY          0x4b
 #define IA_NONE                 0xff
 
 typedef struct GameState_Play GameState_Play;
@@ -139,10 +140,6 @@ int  comboAddItemMm(s16 gi, int noEffect);
 int  comboAddItemOot(s16 gi, int noEffect);
 void comboAddItemSharedMm(s16 gi, int noEffect);
 void comboAddItemSharedOot(s16 gi, int noEffect);
-int  comboAddItemEffect(GameState_Play* play, s16 gi);
-int  comboAddStrayFairyMm(u16 dungeonId);
-void comboAddMagicUpgradeOot(int level);
-void comboAddMagicUpgradeMm(int level);
 
 int  comboAddItem(GameState_Play* play, s16 gi);
 int  comboAddItemLegacy(GameState_Play* play, s16 gi);

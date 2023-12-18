@@ -2,20 +2,6 @@
 #include <combo/item.h>
 #include <combo/souls.h>
 
-int comboAddStrayFairyMm(u16 dungeonId)
-{
-    if (dungeonId == 4)
-    {
-        MM_SET_EVENT_WEEK(EV_MM_WEEK_TOWN_FAIRY);
-        return 0;
-    }
-    else
-    {
-        gMmSave.inventory.strayFairies[dungeonId]++;
-        return gMmSave.inventory.strayFairies[dungeonId];
-    }
-}
-
 void comboAddItemSharedMm(s16 gi, int noEffect)
 {
     if (comboConfig(CFG_SHARED_SOULS_ENEMY))
@@ -133,21 +119,6 @@ int comboAddItemMm(s16 gi, int noEffect)
     case GI_MM_POWDER_KEG:
         gMmSave.inventory.items[ITS_MM_KEG] = ITEM_MM_POWDER_KEG;
         gMmSave.inventory.ammo[ITS_MM_KEG] = 1;
-        break;
-    case GI_MM_STRAY_FAIRY_WF:
-        count = comboAddStrayFairyMm(0);
-        break;
-    case GI_MM_STRAY_FAIRY_SH:
-        count = comboAddStrayFairyMm(1);
-        break;
-    case GI_MM_STRAY_FAIRY_GB:
-        count = comboAddStrayFairyMm(2);
-        break;
-    case GI_MM_STRAY_FAIRY_ST:
-        count = comboAddStrayFairyMm(3);
-        break;
-    case GI_MM_STRAY_FAIRY_TOWN:
-        count = comboAddStrayFairyMm(4);
         break;
     case GI_MM_SPIN_UPGRADE:
         MM_SET_EVENT_WEEK(EV_MM_WEEK_SPIN_UPGRADE);
