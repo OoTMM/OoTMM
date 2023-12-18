@@ -297,12 +297,12 @@ static int addItemRupeesMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 
 static void addWalletRawOot(u16 index)
 {
-    if (index == 0)
+    if (index == 1)
     {
         gOotExtraFlags.childWallet = 1;
         gOotMaxRupees[0] = 99;
     }
-    else if (index == 4)
+    else if (index == 5)
     {
         gOotExtraFlags.bottomlessWallet = 1;
         gOotMaxRupees[3] = 9999;
@@ -311,17 +311,17 @@ static void addWalletRawOot(u16 index)
 #endif
     }
     else
-        gOotSave.inventory.upgrades.wallet = index;
+        gOotSave.inventory.upgrades.wallet = (index - 1);
 }
 
 static void addWalletRawMm(u16 index)
 {
-    if (index == 0)
+    if (index == 1)
     {
         gMmExtraFlags2.childWallet = 1;
         gMmMaxRupees[0] = 99;
     }
-    else if (index == 4)
+    else if (index == 5)
     {
         gMmExtraFlags3.bottomlessWallet = 1;
         gMmMaxRupees[3] = 9999;
@@ -330,7 +330,7 @@ static void addWalletRawMm(u16 index)
 #endif
     }
     else
-        gMmSave.inventory.upgrades.wallet = index;
+        gMmSave.inventory.upgrades.wallet = (index - 1);
 }
 
 static void addWalletRawShared(u16 index)
