@@ -1004,6 +1004,18 @@ static int addItemShieldMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
+static int addItemTunic(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    gOotSave.inventory.equipment.tunics |= (1 << (param - 1));
+    return 0;
+}
+
+static int addItemBoots(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    gOotSave.inventory.equipment.boots |= (1 << (param - 1));
+    return 0;
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -1048,6 +1060,8 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemBombBagMm,
     addItemShieldOot,
     addItemShieldMm,
+    addItemTunic,
+    addItemBoots,
 };
 
 extern const u8 kAddItemFuncs[];

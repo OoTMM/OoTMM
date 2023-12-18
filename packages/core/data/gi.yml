@@ -41,10 +41,10 @@
 - { id: OOT_SHIELD_DEKU, item: OOT_SHIELD_DEKU, add: [OOT_SHIELD, 1], flags: 0xa0, draw: OOT_SHIELD_DEKU, object: [oot, 0x00cb], name: "the <C1>Deku Shield" }
 - { id: OOT_SHIELD_HYLIAN, item: OOT_SHIELD_HYLIAN, add: [OOT_SHIELD, 2], flags: 0xa0, draw: OOT_SHIELD_HYLIAN, object: [oot, 0x00dc], name: "the <C1>Hylian Shield" }
 - { id: OOT_SHIELD_MIRROR, item: OOT_SHIELD_MIRROR, add: [OOT_SHIELD, 3], flags: 0x80, draw: OOT_SHIELD_MIRROR, object: [oot, 0x00ee], name: "the <C1>Mirror Shield" }
-- { id: OOT_TUNIC_GORON, item: OOT_TUNIC_GORON, add: NONE, flags: 0xa0, draw: OOT_TUNIC_GORON, object: [oot, 0x00f2], name: "the <C1>Goron Tunic" }
-- { id: OOT_TUNIC_ZORA, item: OOT_TUNIC_ZORA, add: NONE, flags: 0xa0, draw: OOT_TUNIC_ZORA, object: [oot, 0x00f2], name: "the <C1>Zora Tunic" }
-- { id: OOT_BOOTS_IRON, item: OOT_BOOTS_IRON, add: NONE, flags: 0x80, draw: OOT_BOOTS_IRON, object: [oot, 0x0118], name: "the <C1>Iron Boots" }
-- { id: OOT_BOOTS_HOVER, item: OOT_BOOTS_HOVER, add: NONE, flags: 0x80, draw: OOT_BOOTS_HOVER, object: [oot, 0x0157], name: "the <C1>Hover Boots" }
+- { id: OOT_TUNIC_GORON, item: OOT_TUNIC_GORON, add: [TUNIC, 2], flags: 0xa0, draw: OOT_TUNIC_GORON, object: [oot, 0x00f2], name: "the <C1>Goron Tunic" }
+- { id: OOT_TUNIC_ZORA, item: OOT_TUNIC_ZORA, add: [TUNIC, 3], flags: 0xa0, draw: OOT_TUNIC_ZORA, object: [oot, 0x00f2], name: "the <C1>Zora Tunic" }
+- { id: OOT_BOOTS_IRON, item: OOT_BOOTS_IRON, add: [BOOTS, 2], flags: 0x80, draw: OOT_BOOTS_IRON, object: [oot, 0x0118], name: "the <C1>Iron Boots" }
+- { id: OOT_BOOTS_HOVER, item: OOT_BOOTS_HOVER, add: [BOOTS, 3], flags: 0x80, draw: OOT_BOOTS_HOVER, object: [oot, 0x0157], name: "the <C1>Hover Boots" }
 - { id: OOT_QUIVER2, item: OOT_QUIVER2, add: [OOT_BOW, 2], flags: 0x80, draw: QUIVER2, object: [oot, 0x00be], name: "the <C1>Big Quiver" }
 - { id: OOT_QUIVER3, item: OOT_QUIVER3, add: [OOT_BOW, 3], flags: 0x80, draw: QUIVER3, object: [oot, 0x00be], name: "the <C1>Biggest Quiver" }
 - { id: OOT_BOMB_BAG, item: OOT_BOMB_BAG, add: [OOT_BOMB_BAG, 1], flags: 0x80, draw: BOMB_BAG, object: [oot, 0x00bf], name: "the <C1>Bomb Bag" }

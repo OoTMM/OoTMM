@@ -48,6 +48,8 @@
 #define IA_MM_BOMB_BAG          0x28
 #define IA_OOT_SHIELD           0x29
 #define IA_MM_SHIELD            0x2a
+#define IA_TUNIC                0x2b
+#define IA_BOOTS                0x2c
 #define IA_NONE                 0xff
 
 typedef struct GameState_Play GameState_Play;

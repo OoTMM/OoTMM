@@ -325,18 +325,6 @@ int comboAddItemOot(s16 gi, int noEffect)
     (void)dungeonId;
     switch (gi)
     {
-    case GI_OOT_TUNIC_GORON:
-        gOotSave.inventory.equipment.tunics |= EQ_OOT_TUNIC_GORON;
-        break;
-    case GI_OOT_TUNIC_ZORA:
-        gOotSave.inventory.equipment.tunics |= EQ_OOT_TUNIC_ZORA;
-        break;
-    case GI_OOT_BOOTS_IRON:
-        gOotSave.inventory.equipment.boots |= EQ_OOT_BOOTS_IRON;
-        break;
-    case GI_OOT_BOOTS_HOVER:
-        gOotSave.inventory.equipment.boots |= EQ_OOT_BOOTS_HOVER;
-        break;
     case GI_OOT_GORON_BRACELET:
         gOotSave.inventory.upgrades.strength = 1;
         break;
