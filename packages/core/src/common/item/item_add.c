@@ -99,12 +99,13 @@ static const u8 kItemSlotsMm[] = {
     ITS_MM_ARROW_FIRE,
     ITS_MM_ARROW_ICE,
     ITS_MM_ARROW_LIGHT,
-    ITS_MM_OCARINA,
+    ITS_MM_OCARINA, // needed padding??
     ITS_MM_BOMBS,
     ITS_MM_BOMBCHU,
     ITS_MM_STICKS,
     ITS_MM_NUTS,
     ITS_MM_BEANS,
+    ITS_MM_OCARINA, // needed padding??
     ITS_MM_KEG,
     ITS_MM_PICTOBOX,
     ITS_MM_LENS,
