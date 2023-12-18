@@ -189,7 +189,7 @@
 - { id: OOT_COMPASS_IC, add: [OOT_COMPASS, SCE_OOT_ICE_CAVERN], flags: 0x80, draw: COMPASS, object: [oot, 0x00b8], name: "the <C0>Compass (Ice)" }
 - { id: OOT_WALLET, add: [OOT_WALLET, 1], flags: 0x80, draw: WALLET, object: [oot, 0x00d1], name: "the <C1>Child's Wallet" }
 - { id: OOT_WALLET4, add: [OOT_WALLET, 4], flags: 0x80, draw: WALLET4, object: [oot, 0x00d1], name: "the <C1>Colossal Wallet" }
-- { id: OOT_TRIFORCE, add: NONE, flags: 0x80, draw: TRIFORCE, object: TRIFORCE, name: "a <C3>Triforce Piece" }
+- { id: OOT_TRIFORCE, add: TRIFORCE, flags: 0x80, draw: TRIFORCE, object: TRIFORCE, name: "a <C3>Triforce Piece" }
 - { id: OOT_WALLET5, add: [OOT_WALLET, 5], flags: 0x80, draw: WALLET5, object: [oot, 0x00d1], name: "the <C1>Bottomless Wallet" }
 - { id: OOT_RUPEE_SILVER_DC, add: [SILVER_RUPEE, SR_DC], flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (DC)" }
 - { id: OOT_RUPEE_SILVER_BOTW, add: [SILVER_RUPEE, SR_BOTW], flags: 0x80, draw: OOT_RUPEE_SILVER, name: "a <C1>Silver Rupee (Well)" }
@@ -273,13 +273,13 @@
 - { id: OOT_KEY_RING_GF, add: [OOT_KEY_RING, SCE_OOT_THIEVES_HIDEOUT], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "the <C0>Key Ring (Hideout)" }
 - { id: OOT_KEY_RING_GTG, add: [OOT_KEY_RING, SCE_OOT_GERUDO_TRAINING_GROUND], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "the <C0>Key Ring (GTG)" }
 - { id: OOT_SKELETON_KEY, add: OOT_SKELETON_KEY, flags: 0x80, draw: SKELETON_KEY, object: [oot, 0x00aa], name: "the <C1>Skeleton Key" }
-- { id: OOT_COIN_YELLOW, add: NONE, flags: 0x80, draw: COIN_YELLOW, object: [oot, 0x012e], name: "a <C1>Yellow Coin" }
-- { id: OOT_COIN_RED, add: NONE, flags: 0x80, draw: COIN_RED, object: [oot, 0x012e], name: "a <C1>Red Coin" }
-- { id: OOT_COIN_GREEN, add: NONE, flags: 0x80, draw: COIN_GREEN, object: [oot, 0x012e], name: "a <C1>Green Coin" }
-- { id: OOT_COIN_BLUE, add: NONE, flags: 0x80, draw: COIN_BLUE, object: [oot, 0x012e], name: "a <C1>Blue Coin" }
-- { id: OOT_TRIFORCE_POWER, add: NONE, flags: 0x80, draw: [TRIFORCE, 0x01], object: TRIFORCE, name: "the <C3>Triforce of Power" }
-- { id: OOT_TRIFORCE_COURAGE, add: NONE, flags: 0x80, draw: [TRIFORCE, 0x02], object: TRIFORCE, name: "the <C3>Triforce of Courage" }
-- { id: OOT_TRIFORCE_WISDOM, add: NONE, flags: 0x80, draw: [TRIFORCE, 0x03], object: TRIFORCE, name: "the <C3>Triforce of Wisdom" }
+- { id: OOT_COIN_YELLOW, add: [COIN, 0], flags: 0x80, draw: COIN_YELLOW, object: [oot, 0x012e], name: "a <C1>Yellow Coin" }
+- { id: OOT_COIN_RED, add: [COIN, 1], flags: 0x80, draw: COIN_RED, object: [oot, 0x012e], name: "a <C1>Red Coin" }
+- { id: OOT_COIN_GREEN, add: [COIN, 2], flags: 0x80, draw: COIN_GREEN, object: [oot, 0x012e], name: "a <C1>Green Coin" }
+- { id: OOT_COIN_BLUE, add: [COIN, 3], flags: 0x80, draw: COIN_BLUE, object: [oot, 0x012e], name: "a <C1>Blue Coin" }
+- { id: OOT_TRIFORCE_POWER, add: TRIFORCE, flags: 0x80, draw: [TRIFORCE, 0x01], object: TRIFORCE, name: "the <C3>Triforce of Power" }
+- { id: OOT_TRIFORCE_COURAGE, add: TRIFORCE, flags: 0x80, draw: [TRIFORCE, 0x02], object: TRIFORCE, name: "the <C3>Triforce of Courage" }
+- { id: OOT_TRIFORCE_WISDOM, add: TRIFORCE, flags: 0x80, draw: [TRIFORCE, 0x03], object: TRIFORCE, name: "the <C3>Triforce of Wisdom" }
 - { id: OOT_POUCH_SILVER_DC, add: [SILVER_POUCH, SR_DC], flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (DC)" }
 - { id: OOT_POUCH_SILVER_BOTW, add: [SILVER_POUCH, SR_BOTW], flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Well)" }
 - { id: OOT_POUCH_SILVER_SPIRIT_CHILD, add: [SILVER_POUCH, SR_SPIRIT1], flags: 0x80, draw: OOT_SILVER_POUCH, object: [oot, 0x00d1], name: "the <C1>Silver Pouch (Spirit Child)" }
@@ -704,4 +704,4 @@
 - { id: MM_BUTTON_C_DOWN, add: NONE, flags: 0xa0, draw: BUTTON_C_DOWN, object: BTN_C_VERTICAL, name: "the <C1>C-Down Button" }
 - { id: MM_BOTTLE_POTION_GREEN, item: MM_POTION_GREEN, add: MM_BOTTLE_NEW, flags: 0xa0, draw: [BOTTLE_POTION, 0x01], object: [mm, 0x0196], name: "a <C1>bottle of Green Potion" }
 - { id: MM_BOTTLE_POTION_BLUE, item: MM_POTION_BLUE, add: MM_BOTTLE_NEW, flags: 0xa0, draw: [BOTTLE_POTION, 0x02], object: [mm, 0x0196], name: "a <C1>bottle of Blue Potion" }
-- { id: MM_SCOOP, add: NONE, flags: 0x00 } # Scoop
+- { id: MM_SCOOP, flags: 0x00 } # Scoop

@@ -1511,6 +1511,16 @@ static int addItemStrayFairy(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     }
 }
 
+static int addItemTriforce(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    return ++gTriforceCount;
+}
+
+static int addItemCoin(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    return ++gSharedCustomSave.coins[param];
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -1588,6 +1598,8 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemMagicUpgradeOot,
     addItemMagicUpgradeMm,
     addItemStrayFairy,
+    addItemTriforce,
+    addItemCoin,
 };
 
 extern const u8 kAddItemFuncs[];

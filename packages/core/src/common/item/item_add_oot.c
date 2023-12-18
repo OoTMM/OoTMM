@@ -119,24 +119,6 @@ int comboAddItemOot(s16 gi, int noEffect)
     (void)dungeonId;
     switch (gi)
     {
-    case GI_OOT_TRIFORCE:
-    case GI_OOT_TRIFORCE_POWER:
-    case GI_OOT_TRIFORCE_COURAGE:
-    case GI_OOT_TRIFORCE_WISDOM:
-        count = ++gTriforceCount;
-        break;
-    case GI_OOT_COIN_RED:
-        count = ++gSharedCustomSave.coins[0];
-        break;
-    case GI_OOT_COIN_GREEN:
-        count = ++gSharedCustomSave.coins[1];
-        break;
-    case GI_OOT_COIN_BLUE:
-        count = ++gSharedCustomSave.coins[2];
-        break;
-    case GI_OOT_COIN_YELLOW:
-        count = ++gSharedCustomSave.coins[3];
-        break;
     case GI_OOT_SOUL_ENEMY_STALFOS:
     case GI_OOT_SOUL_ENEMY_OCTOROK:
     case GI_OOT_SOUL_ENEMY_WALLMASTER:

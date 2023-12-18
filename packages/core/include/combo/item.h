@@ -81,6 +81,8 @@
 #define IA_OOT_MAGIC_UPGRADE    0x49
 #define IA_MM_MAGIC_UPGRADE     0x4a
 #define IA_STRAY_FAIRY          0x4b
+#define IA_TRIFORCE             0x4c
+#define IA_COIN                 0x4d
 #define IA_NONE                 0xff
 
 typedef struct GameState_Play GameState_Play;
