@@ -688,27 +688,7 @@ void comboTextAppendItemNameEx(char** b, s16 gi, int flags, int importance)
         comboTextAppendStr(b, ")");
     }
 
-    if (comboConfig(CFG_HINT_IMPORTANCE) && !isItemFastBuy(gi) && gi != GI_NOTHING)
-    {
-        switch (importance)
-        {
-        case 0:
-            comboTextAppendStr(b, " (" TEXT_COLOR_PINK "not required");
-            comboTextAppendClearColor(b);
-            comboTextAppendStr(b, ")");
-            break;
-        case 1:
-            comboTextAppendStr(b, " (" TEXT_COLOR_TEAL "sometimes required");
-            comboTextAppendClearColor(b);
-            comboTextAppendStr(b, ")");
-            break;
-        case 2:
-            comboTextAppendStr(b, " (" TEXT_COLOR_YELLOW "required");
-            comboTextAppendClearColor(b);
-            comboTextAppendStr(b, ")");
-            break;
-        }
-    }
+    comboTextAppendItemImportance(b, gi, importance);
 
     if (flags & TF_CAPITALIZE)
     {
@@ -998,4 +978,30 @@ void comboTextHijackFishCaught(GameState_Play* play, const ComboItemOverride* o)
     comboTextAppendStr(&b, TEXT_END);
     comboTextAutoLineBreaks(start);
 }
+
+void comboTextAppendItemImportance(char** b, s16 gi, int importance)
+{
+    if (comboConfig(CFG_HINT_IMPORTANCE) && !isItemFastBuy(gi) && gi != GI_NOTHING)
+    {
+        switch (importance)
+        {
+        case 0:
+            comboTextAppendStr(b, " (" TEXT_COLOR_PINK "not required");
+            comboTextAppendClearColor(b);
+            comboTextAppendStr(b, ")");
+            break;
+        case 1:
+            comboTextAppendStr(b, " (" TEXT_COLOR_TEAL "sometimes required");
+            comboTextAppendClearColor(b);
+            comboTextAppendStr(b, ")");
+            break;
+        case 2:
+            comboTextAppendStr(b, " (" TEXT_COLOR_YELLOW "required");
+            comboTextAppendClearColor(b);
+            comboTextAppendStr(b, ")");
+            break;
+        }
+    }
+}
+
 #endif

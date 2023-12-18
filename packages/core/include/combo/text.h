@@ -30,6 +30,7 @@
 # define TEXT_COLOR_YELLOW   "\x04"
 # define TEXT_COLOR_TEAL     "\x05"
 # define TEXT_COLOR_PINK     "\x06"
+# define TEXT_COLOR_SILVER   "\x07"
 # define TEXT_COLOR_ORANGE   "\x08"
 # define TEXT_END            "\xbf"
 # define TEXT_CHOICE2        "\xc2"
@@ -82,5 +83,6 @@ void comboTextMessageCantBuy(GameState_Play* play, int flags);
 void comboTextAppendDungeonName(char** buffer, u8 dungeonId);
 void comboTextAppendBossName(char** buffer, u8 bossId);
 void comboTextAppendOrd(char** b, int num);
+void comboTextAppendItemImportance(char** b, s16 gi, int importance);
 
 #endif

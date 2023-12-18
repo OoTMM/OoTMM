@@ -78,27 +78,7 @@ static void appendCorrectItemName(char** b, s16 gi, u8 player, u8 importance)
 {
     comboTextAppendItemName(b, gi, TF_PROGRESSIVE);
 
-    if (comboConfig(CFG_HINT_IMPORTANCE) && !isItemFastBuy(gi) && gi != GI_NOTHING)
-    {
-        switch (importance)
-        {
-        case 0:
-            comboTextAppendStr(b, " (" TEXT_COLOR_PINK "not required");
-            comboTextAppendClearColor(b);
-            comboTextAppendStr(b, ")");
-            break;
-        case 1:
-            comboTextAppendStr(b, " (" TEXT_COLOR_TEAL "sometimes required");
-            comboTextAppendClearColor(b);
-            comboTextAppendStr(b, ")");
-            break;
-        case 2:
-            comboTextAppendStr(b, " (" TEXT_COLOR_YELLOW "required");
-            comboTextAppendClearColor(b);
-            comboTextAppendStr(b, ")");
-            break;
-        }
-    }
+    comboTextAppendItemImportance(b, gi, importance);
 
     if (player != 0 && player != 0xff && player != gComboData.playerId)
     {
