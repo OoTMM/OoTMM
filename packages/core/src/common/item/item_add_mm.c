@@ -16,34 +16,8 @@ int comboAddStrayFairyMm(u16 dungeonId)
     }
 }
 
-void comboAddMagicUpgradeMm(int level)
-{
-    gMmSave.playerData.magicAcquired = 1;
-    if (level >= 2)
-        gMmSave.playerData.doubleMagic = 1;
-}
-
-static void refillMagic(int level)
-{
-    gMmSave.playerData.magicLevel = level;
-    gMmSave.playerData.magicAmount = level * 0x30;
-}
-
 void comboAddItemSharedMm(s16 gi, int noEffect)
 {
-    if (comboConfig(CFG_SHARED_MAGIC))
-    {
-        switch (gi)
-        {
-        case GI_MM_MAGIC_UPGRADE:
-            comboAddMagicUpgradeOot(1);
-            break;
-        case GI_MM_MAGIC_UPGRADE2:
-            comboAddMagicUpgradeOot(2);
-            break;
-        }
-    }
-
     if (comboConfig(CFG_SHARED_SOULS_ENEMY))
     {
         switch (gi)
@@ -159,16 +133,6 @@ int comboAddItemMm(s16 gi, int noEffect)
     case GI_MM_POWDER_KEG:
         gMmSave.inventory.items[ITS_MM_KEG] = ITEM_MM_POWDER_KEG;
         gMmSave.inventory.ammo[ITS_MM_KEG] = 1;
-        break;
-    case GI_MM_MAGIC_UPGRADE:
-        comboAddMagicUpgradeMm(1);
-        if (noEffect)
-            refillMagic(1);
-        break;
-    case GI_MM_MAGIC_UPGRADE2:
-        comboAddMagicUpgradeMm(2);
-        if (noEffect)
-            refillMagic(2);
         break;
     case GI_MM_STRAY_FAIRY_WF:
         count = comboAddStrayFairyMm(0);

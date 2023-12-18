@@ -78,6 +78,8 @@
 #define IA_GS_TOKEN             0x46
 #define IA_GS_TOKEN_SWAMP       0x47
 #define IA_GS_TOKEN_OCEAN       0x48
+#define IA_OOT_MAGIC_UPGRADE    0x49
+#define IA_MM_MAGIC_UPGRADE     0x4a
 #define IA_NONE                 0xff
 
 typedef struct GameState_Play GameState_Play;

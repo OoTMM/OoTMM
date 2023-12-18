@@ -760,7 +760,6 @@ static int addItemTradeOotAdult(GameState_Play* play, u8 itemId, s16 gi, u16 par
     return 0;
 }
 
-
 static int addItemTradeMm1(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
     itemId = kMmTrade1[param];
@@ -1419,6 +1418,75 @@ static int addItemGsTokenOcean(GameState_Play* play, u8 itemId, s16 gi, u16 para
     return ++gMmSave.skullCountOcean;
 }
 
+static void fillMagicOot(GameState_Play* play)
+{
+    int level;
+    int max;
+
+    if (!gOotSave.playerData.magicUpgrade)
+        return;
+    level = gOotSave.playerData.magicUpgrade2 ? 2 : 1;
+    max = level * 0x30;
+
+    /* Handle the effect */
+#if defined(GAME_OOT)
+    if (play)
+    {
+        gOotSave.playerData.magicSize = 0;
+        gSaveContext.magicFillTarget = max;
+        return;
+    }
+#endif
+
+    /* No effect - add the magic directly */
+    gOotSave.playerData.magicSize = level;
+    gSaveContext.magicFillTarget = max;
+}
+
+static void fillMagicMm(GameState_Play* play)
+{
+    int level;
+    int max;
+
+    if (!gMmSave.playerData.magicAcquired)
+        return;
+    level = gMmSave.playerData.doubleMagic ? 2 : 1;
+    max = level * 0x30;
+
+    /* Handle the effect */
+#if defined(GAME_MM)
+    if (play)
+    {
+        gMmSave.playerData.magicLevel = 0;
+        gMmSave.playerData.magicAmount = max;
+        gSaveContext.magicFillTarget = max;
+        return;
+    }
+#endif
+
+    /* No effect - add the magic directly */
+    gMmSave.playerData.magicLevel = level;
+    gMmSave.playerData.magicAmount = max;
+}
+
+static int addItemMagicUpgradeOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    gOotSave.playerData.magicUpgrade = 1;
+    if (param >= 2)
+        gOotSave.playerData.magicUpgrade2 = 1;
+    fillMagicOot(play);
+    return 0;
+}
+
+static int addItemMagicUpgradeMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    gMmSave.playerData.magicAcquired = 1;
+    if (param >= 2)
+        gMmSave.playerData.doubleMagic = 1;
+    fillMagicMm(play);
+    return 0;
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -1493,6 +1561,8 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemGsToken,
     addItemGsTokenSwamp,
     addItemGsTokenOcean,
+    addItemMagicUpgradeOot,
+    addItemMagicUpgradeMm,
 };
 
 extern const u8 kAddItemFuncs[];
@@ -1522,6 +1592,8 @@ static const SharedItem kSimpleSharedItems[] = {
     { CFG_SHARED_SONG_STORMS,       GI_OOT_SONG_STORMS,     GI_MM_SONG_STORMS  },
     { CFG_SHARED_SONG_SUN,          GI_OOT_SONG_SUN,        GI_MM_SONG_SUN  },
     { CFG_SHARED_SKELETON_KEY,      GI_OOT_SKELETON_KEY,    GI_MM_SKELETON_KEY  },
+    { CFG_SHARED_MAGIC,             GI_OOT_MAGIC_UPGRADE,   GI_MM_MAGIC_UPGRADE  },
+    { CFG_SHARED_MAGIC,             GI_OOT_MAGIC_UPGRADE2,  GI_MM_MAGIC_UPGRADE2  },
 };
 
 static int addItem(GameState_Play* play, s16 gi)

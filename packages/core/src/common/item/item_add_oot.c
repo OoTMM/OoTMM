@@ -3,34 +3,8 @@
 #include <combo/sr.h>
 #include <combo/souls.h>
 
-void comboAddMagicUpgradeOot(int level)
-{
-    gOotSave.playerData.magicUpgrade = 1;
-    if (level >= 2)
-        gOotSave.playerData.magicUpgrade2 = 1;
-}
-
-static void refillMagic(int level)
-{
-    gOotSave.playerData.magicSize = level;
-    gOotSave.playerData.magicAmount = level * 0x30;
-}
-
 void comboAddItemSharedOot(s16 gi, int noEffect)
 {
-    if (comboConfig(CFG_SHARED_MAGIC))
-    {
-        switch (gi)
-        {
-        case GI_OOT_MAGIC_UPGRADE:
-            comboAddMagicUpgradeMm(1);
-            break;
-        case GI_OOT_MAGIC_UPGRADE2:
-            comboAddMagicUpgradeMm(2);
-            break;
-        }
-    }
-
     if (comboConfig(CFG_SHARED_SOULS_ENEMY))
     {
         switch (gi)
@@ -145,16 +119,6 @@ int comboAddItemOot(s16 gi, int noEffect)
     (void)dungeonId;
     switch (gi)
     {
-    case GI_OOT_MAGIC_UPGRADE:
-        comboAddMagicUpgradeOot(1);
-        if (noEffect)
-            refillMagic(1);
-        break;
-    case GI_OOT_MAGIC_UPGRADE2:
-        comboAddMagicUpgradeOot(2);
-        if (noEffect)
-            refillMagic(2);
-        break;
     case GI_OOT_TRIFORCE:
     case GI_OOT_TRIFORCE_POWER:
     case GI_OOT_TRIFORCE_COURAGE:

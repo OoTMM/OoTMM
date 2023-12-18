@@ -121,10 +121,10 @@
 - { id: OOT_NUT_UPGRADE, item: OOT_NUT_UPGRADE, add: [NUT_UPGRADE, 2], flags: 0x80, draw: OOT_NUT_UPGRADE, object: [oot, 0x00bb], name: "the <C1>Deku Nut Upgrade" }
 - { id: OOT_NUT_UPGRADE2, item: OOT_NUT_UPGRADE2, add: [NUT_UPGRADE, 3], flags: 0x80, draw: OOT_NUT_UPGRADE2, object: [oot, 0x00bb], name: "the <C1>Second Deku Nut Upgrade" }
 - { id: OOT_BULLET_BAG3, item: OOT_BULLET_BAG3, add: [SLINGSHOT, 3], flags: 0x80, draw: OOT_BULLET_BAG3, object: [oot, 0x017b], name: "the <C1>Largest Bullet Bag" }
-- { id: OOT_ICE_TRAP, add: NONE, flags: 0x00 }
-- { id: OOT_UNK_7D, add: NONE, flags: 0x00 }
-- { id: OOT_UNK_7E, add: NONE, flags: 0x00 }
-- { id: OOT_UNK_7F, add: NONE, flags: 0x00 }
+- { id: OOT_ICE_TRAP, flags: 0x00 }
+- { id: OOT_UNK_7D, flags: 0x00 }
+- { id: OOT_UNK_7E, flags: 0x00 }
+- { id: OOT_UNK_7F, flags: 0x00 }
 - { id: OOT_SONG_TP_FOREST, add: [OOT_QUEST, QUEST_OOT_SONG_TP_FOREST], flags: 0x80, draw: [NOTE, 0x82], object: [oot, 0x00b6], name: "the <C2>Minuet of Forest" }
 - { id: OOT_SONG_TP_FIRE, add: [OOT_QUEST, QUEST_OOT_SONG_TP_FIRE], flags: 0x80, draw: [NOTE, 0x85], object: [oot, 0x00b6], name: "the <C2>Bolero of Fire" }
 - { id: OOT_SONG_TP_WATER, add: [OOT_QUEST, QUEST_OOT_SONG_TP_WATER], flags: 0x80, draw: [NOTE, 0x81], object: [oot, 0x00b6], name: "the <C2>Serenade of Water" }
@@ -147,9 +147,9 @@
 - { id: OOT_MEDALLION_SPIRIT, add: [OOT_QUEST, QUEST_OOT_MEDALLION_SPIRIT], flags: 0x80, draw: OOT_MEDALLION_SPIRIT, object: GI_MEDALLION_SPIRIT, name: "the <C3>Spirit Medallion" }
 - { id: OOT_MEDALLION_SHADOW, add: [OOT_QUEST, QUEST_OOT_MEDALLION_SHADOW], flags: 0x80, draw: OOT_MEDALLION_SHADOW, object: GI_MEDALLION_SHADOW, name: "the <C3>Shadow Medallion" }
 - { id: OOT_MEDALLION_LIGHT, add: [OOT_QUEST, QUEST_OOT_MEDALLION_LIGHT], flags: 0x80, draw: OOT_MEDALLION_LIGHT, object: GI_MEDALLION_LIGHT, name: "the <C3>Light Medallion" }
-- { id: OOT_MAGIC_UPGRADE, add: NONE, flags: 0x80, draw: MAGIC_UPGRADE, object: [oot, 0x00cd], name: "the <C1>Magic Upgrade" }
-- { id: OOT_MAGIC_UPGRADE2, add: NONE, flags: 0x80, draw: MAGIC_UPGRADE2, object: [oot, 0x00cd], name: "the <C1>Larger Magic Upgrade" }
-- { id: OOT_DEFENSE_UPGRADE, add: MM_DEFENSE_UPGRADE, flags: 0x80, draw: DEFENSE_UPGRADE, object: [oot, 0x00bd], name: "the <C1>Defense Upgrade" }
+- { id: OOT_MAGIC_UPGRADE, add: [OOT_MAGIC_UPGRADE, 1], flags: 0x80, draw: MAGIC_UPGRADE, object: [oot, 0x00cd], name: "the <C1>Magic Upgrade" }
+- { id: OOT_MAGIC_UPGRADE2, add: [OOT_MAGIC_UPGRADE, 2], flags: 0x80, draw: MAGIC_UPGRADE2, object: [oot, 0x00cd], name: "the <C1>Larger Magic Upgrade" }
+- { id: OOT_DEFENSE_UPGRADE, add: OOT_DEFENSE_UPGRADE, flags: 0x80, draw: DEFENSE_UPGRADE, object: [oot, 0x00bd], name: "the <C1>Defense Upgrade" }
 - { id: OOT_PROGRESSIVE_SHIELD_DEKU, add: [OOT_SHIELD, 0x101], flags: 0xa0, draw: OOT_SHIELD_DEKU, object: [oot, 0x00cb], name: "the <C1>Progressive Deku Shield" }
 - { id: OOT_PROGRESSIVE_SHIELD_HYLIAN, add: [OOT_SHIELD, 0x102], flags: 0xa0, draw: OOT_SHIELD_HYLIAN, object: [oot, 0x00dc], name: "the <C1>Progressive Hylian Shield" }
 - { id: OOT_SMALL_KEY_FOREST, add: [OOT_SMALL_KEY, SCE_OOT_TEMPLE_FOREST], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C0>Small Key (Forest)" }
@@ -580,8 +580,8 @@
 - { id: MM_WORLD_MAP_ROMANI_RANCH, item: MM_WORLD_MAP, add: NONE, flags: 0xa0, draw: MM_WORLD_MAP, object: [mm, 0x024d], name: "a <C0>World Map (Romani Ranch)" }
 - { id: MM_WORLD_MAP_GREAT_BAY, item: MM_WORLD_MAP, add: NONE, flags: 0xa0, draw: MM_WORLD_MAP, object: [mm, 0x024d], name: "a <C0>World Map (Great Bay)" }
 - { id: MM_WORLD_MAP_STONE_TOWER, item: MM_WORLD_MAP, add: NONE, flags: 0xa0, draw: MM_WORLD_MAP, object: [mm, 0x024d], name: "a <C0>World Map (Stone Tower)" }
-- { id: MM_MAGIC_UPGRADE, add: NONE, flags: 0xa0, draw: MAGIC_UPGRADE, object: [mm, 0x00a4], name: "the <C1>Magic Upgrade" }
-- { id: MM_MAGIC_UPGRADE2, add: NONE, flags: 0xa0, draw: MAGIC_UPGRADE2, object: [mm, 0x00a4], name: "the <C1>Larger Magic Upgrade" }
+- { id: MM_MAGIC_UPGRADE, add: [MM_MAGIC_UPGRADE, 1], flags: 0xa0, draw: MAGIC_UPGRADE, object: [mm, 0x00a4], name: "the <C1>Magic Upgrade" }
+- { id: MM_MAGIC_UPGRADE2, add: [MM_MAGIC_UPGRADE, 2], flags: 0xa0, draw: MAGIC_UPGRADE2, object: [mm, 0x00a4], name: "the <C1>Larger Magic Upgrade" }
 - { id: MM_DEFENSE_UPGRADE, add: MM_DEFENSE_UPGRADE, flags: 0xa0, draw: DEFENSE_UPGRADE, object: [mm, 0x0096], name: "the <C1>Defense Upgrade" }
 - { id: MM_SPIN_UPGRADE, add: NONE, flags: 0xa0, draw: MM_SPIN_UPGRADE, object: [mm, 0x0148], name: "the <C1>Spin Attack Upgrade" }
 - { id: MM_SONG_AWAKENING, add: [MM_QUEST, QUEST_MM_SONG_AWAKENING], flags: 0xa0, draw: [NOTE, 0x82], object: [mm, 0x008f], name: "the <C2>Sonata of Awakening" }
