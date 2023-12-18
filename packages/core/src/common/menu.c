@@ -854,7 +854,7 @@ static void printDungeonData(GameState_Play* play, int base, int index)
             printNumColored(play, data.fairies, 15, 2, x + 186.f, y, 0);
         }
 
-        if (comboConfig(CFG_OOT_SILVER_RUPEE_SHUFFLE))
+        if (comboConfig(CFG_OOT_SILVER_RUPEE_SHUFFLE) && srBase != -1)
             printDungeonSilverRupees(play, x + 170.f, y, srBase, srCount);
     }
     CLOSE_DISPS();
