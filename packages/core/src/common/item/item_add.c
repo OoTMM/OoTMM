@@ -606,12 +606,19 @@ static int addItemNormalOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 static int addItemNormalMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
     const u8* slots;
+    u8 slotIndex;
 
     if (itemId >= ITEM_MM_MASK_DEKU)
+    {
         slots = kItemSlotsMasksMm;
+        slotIndex = itemId - ITEM_MM_MASK_DEKU;
+    }
     else
+    {
         slots = kItemSlotsMm;
-    gMmSave.inventory.items[slots[itemId]] = itemId;
+        slotIndex = itemId;
+    }
+    gMmSave.inventory.items[slots[slotIndex]] = itemId;
     return 0;
 }
 
@@ -848,7 +855,7 @@ static int addItemBottleNewOot(GameState_Play* play, u8 itemId, s16 gi, u16 para
 {
     if (itemId == ITEM_OOT_RUTO_LETTER)
         gOotExtraItems.rutoLetter = 1;
-    
+
     for (int i = 0; i < 4; ++i)
     {
         if (gOotSave.inventory.items[ITS_OOT_BOTTLE + i] == ITEM_NONE)
