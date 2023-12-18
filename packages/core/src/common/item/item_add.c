@@ -1305,7 +1305,7 @@ static int addItemSkeletonKeyOot(GameState_Play* play, u8 itemId, s16 gi, u16 pa
     for (int j = 0; j < ARRAY_SIZE(g.maxKeysOot); ++j)
     {
         for (int i = 0; i < g.maxKeysOot[j]; ++i)
-            addSmallKeyOot(param);
+            addSmallKeyOot(j);
     }
     return 0;
 }
@@ -1315,7 +1315,7 @@ static int addItemSkeletonKeyMm(GameState_Play* play, u8 itemId, s16 gi, u16 par
     for (int j = 0; j < ARRAY_SIZE(g.maxKeysMm); ++j)
     {
         for (int i = 0; i < g.maxKeysMm[j]; ++i)
-            addSmallKeyMm(param);
+            addSmallKeyMm(j);
     }
     return 0;
 }
