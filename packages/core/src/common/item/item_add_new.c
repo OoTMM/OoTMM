@@ -1038,6 +1038,12 @@ static int addItemQuestOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
+static int addItemQuestMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    gMmSave.inventory.quest.value |= (1 << param);
+    return 0;
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -1087,6 +1093,7 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemStrength,
     addItemScale,
     addItemQuestOot,
+    addItemQuestMm,
 };
 
 extern const u8 kAddItemFuncs[];

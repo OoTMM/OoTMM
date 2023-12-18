@@ -474,15 +474,15 @@
 - { id: MM_UNK_4D, add: NONE, flags: 0x00 }
 - { id: MM_UNK_4E, add: NONE, flags: 0x00 }
 - { id: MM_UNK_4F, add: NONE, flags: 0x00 }
-- { id: MM_BOMBER_NOTEBOOK, item: MM_BOMBER_NOTEBOOK, add: NONE, flags: 0x80, draw: MM_NOTEBOOK, object: [mm, 0x0253], name: "the <C1>Bomber's Notebook" }
+- { id: MM_BOMBER_NOTEBOOK, item: MM_BOMBER_NOTEBOOK, add: [MM_QUEST, QUEST_MM_NOTEBOOK], flags: 0x80, draw: MM_NOTEBOOK, object: [mm, 0x0253], name: "the <C1>Bomber's Notebook" }
 - { id: MM_UNK_51, add: NONE, flags: 0xa0, draw: STONE_OF_AGONY, object: [mm, 0x00a0] } # Stone of Agony
 - { id: MM_GS_TOKEN, item: MM_GS_TOKEN, add: NONE, flags: 0x80, draw: OOT_GS_TOKEN, object: [mm, 0x0125] }
 - { id: MM_UNK_53, add: NONE, flags: 0x00 }
 - { id: MM_UNK_54, add: NONE, flags: 0x00 }
-- { id: MM_UNK_55, item: MM_REMAINS_ODOLWA, add: NONE, flags: 0x80, name: "<C3>Odolwa's Remains" }
-- { id: MM_UNK_56, item: MM_REMAINS_GOHT, add: NONE, flags: 0x80, name: "<C3>Goht's Remains" }
-- { id: MM_UNK_57, item: MM_REMAINS_GYORG, add: NONE, flags: 0x80, name: "<C3>Gyorg's Remains" }
-- { id: MM_UNK_58, item: MM_REMAINS_TWINMOLD, add: NONE, flags: 0x80, name: "<C3>Twinmold's Remains" }
+- { id: MM_UNK_55, item: MM_REMAINS_ODOLWA, add: [MM_QUEST, QUEST_MM_REMAINS_ODOLWA], flags: 0x80, name: "<C3>Odolwa's Remains" }
+- { id: MM_UNK_56, item: MM_REMAINS_GOHT, add: [MM_QUEST, QUEST_MM_REMAINS_GOHT], flags: 0x80, name: "<C3>Goht's Remains" }
+- { id: MM_UNK_57, item: MM_REMAINS_GYORG, add: [MM_QUEST, QUEST_MM_REMAINS_GYORG], flags: 0x80, name: "<C3>Gyorg's Remains" }
+- { id: MM_UNK_58, item: MM_REMAINS_TWINMOLD, add: [MM_QUEST, QUEST_MM_REMAINS_TWINMOLD], flags: 0x80, name: "<C3>Twinmold's Remains" }
 - { id: MM_BOTTLE_POTION_RED, item: MM_POTION_RED, add: MM_BOTTLE_NEW, flags: 0x80, draw: BOTTLE_POTION, object: [mm, 0x0196], name: "a <C1>bottle of Red Potion" }
 - { id: MM_BOTTLE_EMPTY, item: MM_BOTTLE_EMPTY, add: MM_BOTTLE_NEW, flags: 0x80, draw: BOTTLE_EMPTY, object: [mm, 0x009e], name: "an <C1>Empty Bottle" }
 - { id: MM_POTION_RED, item: MM_POTION_RED, add: MM_BOTTLE_REFILL, flags: 0x80, draw: POTION_RED, object: [mm, 0x00c1], name: "a <C0>Red Potion" }
@@ -584,22 +584,22 @@
 - { id: MM_MAGIC_UPGRADE2, add: NONE, flags: 0xa0, draw: MAGIC_UPGRADE2, object: [mm, 0x00a4], name: "the <C1>Larger Magic Upgrade" }
 - { id: MM_DEFENSE_UPGRADE, add: NONE, flags: 0xa0, draw: DEFENSE_UPGRADE, object: [mm, 0x0096], name: "the <C1>Defense Upgrade" }
 - { id: MM_SPIN_UPGRADE, add: NONE, flags: 0xa0, draw: MM_SPIN_UPGRADE, object: [mm, 0x0148], name: "the <C1>Spin Attack Upgrade" }
-- { id: MM_SONG_AWAKENING, add: NONE, flags: 0xa0, draw: [NOTE, 0x82], object: [mm, 0x008f], name: "the <C2>Sonata of Awakening" }
-- { id: MM_SONG_GORON, add: NONE, flags: 0xa0, draw: [NOTE, 0x85], object: [mm, 0x008f], name: "the <C2>Goron Lullaby" }
-- { id: MM_SONG_ZORA, add: NONE, flags: 0xa0, draw: [NOTE, 0x81], object: [mm, 0x008f], name: "the <C2>New Wave Bossa Nova" }
-- { id: MM_SONG_EMPTINESS, add: NONE, flags: 0xa0, draw: [NOTE, 0x84], object: [mm, 0x008f], name: "the <C2>Elegy of Emptiness" }
-- { id: MM_SONG_ORDER, add: NONE, flags: 0xa0, draw: [NOTE, 0x80], object: [mm, 0x008f], name: "the <C2>Oath to Order" }
-- { id: MM_SONG_TIME, add: NONE, flags: 0xa0, draw: [NOTE, 0x01], object: [mm, 0x008f], name: "the <C2>Song of Time" }
-- { id: MM_SONG_HEALING, add: NONE, flags: 0xa0, draw: [NOTE, 0x02], object: [mm, 0x008f], name: "the <C2>Song of Healing" }
-- { id: MM_SONG_EPONA, add: NONE, flags: 0xa0, draw: [NOTE, 0x04], object: [mm, 0x008f], name: "<C2>Epona's Song" }
-- { id: MM_SONG_SOARING, add: NONE, flags: 0xa0, draw: [NOTE, 0x05], object: [mm, 0x008f], name: "the <C2>Song of Soaring" }
-- { id: MM_SONG_STORMS, add: NONE, flags: 0xa0, draw: [NOTE, 0x00], object: [mm, 0x008f], name: "the <C2>Song of Storms" }
-- { id: MM_SONG_GORON_HALF, add: NONE, flags: 0xa0, draw: [NOTE, 0x85], object: [mm, 0x008f], name: "the <C2>Lullaby Intro" }
-- { id: MM_REMAINS_ODOLWA, add: NONE, flags: 0xa0, draw: MM_REMAINS_ODOLWA, object: GI_REMAINS_ODOLWA, name: "<C3>Odolwa's Remains" }
-- { id: MM_REMAINS_GOHT, add: NONE, flags: 0xa0, draw: MM_REMAINS_GOHT, object: GI_REMAINS_GOHT, name: "<C3>Goht's Remains" }
-- { id: MM_REMAINS_GYORG, add: NONE, flags: 0xa0, draw: MM_REMAINS_GYORG, object: GI_REMAINS_GYORG, name: "<C3>Gyorg's Remains" }
-- { id: MM_REMAINS_TWINMOLD, add: NONE, flags: 0xa0, draw: MM_REMAINS_TWINMOLD, object: GI_REMAINS_TWINMOLD, name: "<C3>Twinmold's Remains" }
-- { id: MM_SOLD_OUT, add: NONE, flags: 0xa0, draw: OOT_SOLD_OUT, object: [mm, 0x0113] }
+- { id: MM_SONG_AWAKENING, add: [MM_QUEST, QUEST_MM_SONG_AWAKENING], flags: 0xa0, draw: [NOTE, 0x82], object: [mm, 0x008f], name: "the <C2>Sonata of Awakening" }
+- { id: MM_SONG_GORON, add: [MM_QUEST, QUEST_MM_SONG_GORON], flags: 0xa0, draw: [NOTE, 0x85], object: [mm, 0x008f], name: "the <C2>Goron Lullaby" }
+- { id: MM_SONG_ZORA, add: [MM_QUEST, QUEST_MM_SONG_ZORA], flags: 0xa0, draw: [NOTE, 0x81], object: [mm, 0x008f], name: "the <C2>New Wave Bossa Nova" }
+- { id: MM_SONG_EMPTINESS, add: [MM_QUEST, QUEST_MM_SONG_EMPTINESS], flags: 0xa0, draw: [NOTE, 0x84], object: [mm, 0x008f], name: "the <C2>Elegy of Emptiness" }
+- { id: MM_SONG_ORDER, add: [MM_QUEST, QUEST_MM_SONG_ORDER], flags: 0xa0, draw: [NOTE, 0x80], object: [mm, 0x008f], name: "the <C2>Oath to Order" }
+- { id: MM_SONG_TIME, add: [MM_QUEST, QUEST_MM_SONG_TIME], flags: 0xa0, draw: [NOTE, 0x01], object: [mm, 0x008f], name: "the <C2>Song of Time" }
+- { id: MM_SONG_HEALING, add: [MM_QUEST, QUEST_MM_SONG_HEALING], flags: 0xa0, draw: [NOTE, 0x02], object: [mm, 0x008f], name: "the <C2>Song of Healing" }
+- { id: MM_SONG_EPONA, add: [MM_QUEST, QUEST_MM_SONG_EPONA], flags: 0xa0, draw: [NOTE, 0x04], object: [mm, 0x008f], name: "<C2>Epona's Song" }
+- { id: MM_SONG_SOARING, add: [MM_QUEST, QUEST_MM_SONG_SOARING], flags: 0xa0, draw: [NOTE, 0x05], object: [mm, 0x008f], name: "the <C2>Song of Soaring" }
+- { id: MM_SONG_STORMS, add: [MM_QUEST, QUEST_MM_SONG_STORMS], flags: 0xa0, draw: [NOTE, 0x00], object: [mm, 0x008f], name: "the <C2>Song of Storms" }
+- { id: MM_SONG_GORON_HALF, add: [MM_QUEST, QUEST_MM_SONG_GORON_HALF], flags: 0xa0, draw: [NOTE, 0x85], object: [mm, 0x008f], name: "the <C2>Lullaby Intro" }
+- { id: MM_REMAINS_ODOLWA, add: [MM_QUEST, QUEST_MM_REMAINS_ODOLWA], flags: 0xa0, draw: MM_REMAINS_ODOLWA, object: GI_REMAINS_ODOLWA, name: "<C3>Odolwa's Remains" }
+- { id: MM_REMAINS_GOHT, add: [MM_QUEST, QUEST_MM_REMAINS_GOHT], flags: 0xa0, draw: MM_REMAINS_GOHT, object: GI_REMAINS_GOHT, name: "<C3>Goht's Remains" }
+- { id: MM_REMAINS_GYORG, add: [MM_QUEST, QUEST_MM_REMAINS_GYORG], flags: 0xa0, draw: MM_REMAINS_GYORG, object: GI_REMAINS_GYORG, name: "<C3>Gyorg's Remains" }
+- { id: MM_REMAINS_TWINMOLD, add: [MM_QUEST, QUEST_MM_REMAINS_TWINMOLD], flags: 0xa0, draw: MM_REMAINS_TWINMOLD, object: GI_REMAINS_TWINMOLD, name: "<C3>Twinmold's Remains" }
+- { id: MM_SOLD_OUT, flags: 0xa0, draw: OOT_SOLD_OUT, object: [mm, 0x0113] }
 - { id: MM_PROGRESSIVE_SHIELD_HERO, add: [MM_SHIELD, 0x101], flags: 0xa0, draw: MM_SHIELD_HERO, object: [mm, 0x00b3], name: "the <C1>Progressive Hero's Shield" }
 - { id: MM_GS_TOKEN_SWAMP, add: NONE, flags: 0x80, draw: MM_GS_TOKEN_SWAMP, object: [mm, 0x0125], name: "a <C0>Swamp Skulltula Token" }
 - { id: MM_GS_TOKEN_OCEAN, add: NONE, flags: 0x80, draw: MM_GS_TOKEN_OCEAN, object: [mm, 0x0125], name: "an <C0>Ocean Skulltula Token" }
@@ -626,7 +626,7 @@
 - { id: MM_COMPASS_ST, add: NONE, flags: 0xa0, draw: COMPASS, object: [mm, 0x0091], name: "the <C0>Compass (Stone Tower)" }
 - { id: MM_OCARINA_FAIRY, add: [MM_OCARINA, 1], flags: 0xa0, draw: OOT_OCARINA_FAIRY, object: [oot, 0x010e], name: "the <C1>Fairy Ocarina" }
 - { id: MM_HOOKSHOT_SHORT, add: [MM_HOOKSHOT, 1], flags: 0xa0, draw: OOT_HOOKSHOT, object: [oot, 0x00dd], name: "the <C1>Short Hookshot" }
-- { id: MM_SONG_SUN, add: NONE, flags: 0xa0, draw: [NOTE, 0x03], object: [mm, 0x008f], name: "the <C2>Sun's Song" }
+- { id: MM_SONG_SUN, add: [MM_QUEST, QUEST_MM_SONG_SUN], flags: 0xa0, draw: [NOTE, 0x03], object: [mm, 0x008f], name: "the <C2>Sun's Song" }
 - { id: MM_WALLET, add: [MM_WALLET, 1], flags: 0xa0, draw: WALLET, object: [mm, 0x00a8], name: "the <C1>Child Wallet" }
 - { id: MM_WALLET4, add: [MM_WALLET, 4], flags: 0xa0, draw: WALLET4, object: [mm, 0x00a8], name: "the <C1>Colossal Wallet" }
 - { id: MM_OWL_GREAT_BAY, add: NONE, flags: 0xa0, draw: MM_OWL, object: [mm, 0x0170], name: "an <C2>Owl Statue (Great Bay)" }

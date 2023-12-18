@@ -59,32 +59,55 @@ typedef struct
 }
 MmDungeonItems;
 
-typedef struct
+typedef union
 {
-    u32 heartPieces:4;
-    u32 unused:3;
-    u32 songLullabyIntro:1;
-    u32 unused2:5;
-    u32 notebook:1;
-    u32 songSun:1;
-    u32 songStorms:1;
-    u32 songSoaring:1;
-    u32 songEpona:1;
-    u32 songHealing:1;
-    u32 songTime:1;
-    u32 songSaria:1;
-    u32 songOrder:1;
-    u32 songEmpty:1;
-    u32 songNewWave:1;
-    u32 songLullaby:1;
-    u32 songAwakening:1;
-    u32 unused3:2;
-    u32 remainsTwinmold:1;
-    u32 remainsGyorg:1;
-    u32 remainsGoht:1;
-    u32 remainsOdolwa:1;
+    struct
+    {
+        u32 heartPieces:4;
+        u32 unused:3;
+        u32 songLullabyIntro:1;
+        u32 unused2:5;
+        u32 notebook:1;
+        u32 songSun:1;
+        u32 songStorms:1;
+        u32 songSoaring:1;
+        u32 songEpona:1;
+        u32 songHealing:1;
+        u32 songTime:1;
+        u32 songSaria:1;
+        u32 songOrder:1;
+        u32 songEmpty:1;
+        u32 songNewWave:1;
+        u32 songLullaby:1;
+        u32 songAwakening:1;
+        u32 unused3:2;
+        u32 remainsTwinmold:1;
+        u32 remainsGyorg:1;
+        u32 remainsGoht:1;
+        u32 remainsOdolwa:1;
+    };
+    u32 value;
 }
 MmQuestItems;
+
+#define QUEST_MM_REMAINS_ODOLWA         0
+#define QUEST_MM_REMAINS_GOHT           1
+#define QUEST_MM_REMAINS_GYORG          2
+#define QUEST_MM_REMAINS_TWINMOLD       3
+#define QUEST_MM_SONG_AWAKENING         6
+#define QUEST_MM_SONG_GORON             7
+#define QUEST_MM_SONG_ZORA              8
+#define QUEST_MM_SONG_EMPTINESS         9
+#define QUEST_MM_SONG_ORDER             10
+#define QUEST_MM_SONG_SARIA             11
+#define QUEST_MM_SONG_TIME              12
+#define QUEST_MM_SONG_HEALING           13
+#define QUEST_MM_SONG_EPONA             14
+#define QUEST_MM_SONG_SOARING           15
+#define QUEST_MM_SONG_STORMS            16
+#define QUEST_MM_SONG_SUN               17
+#define QUEST_MM_NOTEBOOK               18
+#define QUEST_MM_SONG_GORON_HALF        24
 
 typedef struct
 {

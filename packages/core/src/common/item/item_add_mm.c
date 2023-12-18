@@ -89,15 +89,6 @@ void comboAddCommonItemMm(int sid, int noEffect)
 {
     switch (sid)
     {
-    case SITEM_SONG_EPONA:
-        gMmSave.inventory.quest.songEpona = 1;
-        break;
-    case SITEM_SONG_TIME:
-        gMmSave.inventory.quest.songTime = 1;
-        break;
-    case SITEM_SONG_STORMS:
-        gMmSave.inventory.quest.songStorms = 1;
-        break;
     case SITEM_HEART_PIECE:
         gMmSave.inventory.quest.heartPieces += 1;
         if (gMmSave.inventory.quest.heartPieces == 4)
@@ -123,9 +114,6 @@ void comboAddCommonItemMm(int sid, int noEffect)
         if (noEffect)
             addHealth(20);
         break;
-    case SITEM_SONG_SUN:
-        gMmSave.inventory.quest.songSun = 1;
-        break;
     }
 }
 
@@ -142,26 +130,6 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
             comboAddMagicUpgradeOot(2);
             break;
         }
-    }
-
-    if (comboConfig(CFG_SHARED_SONG_EPONA) && gi == GI_MM_SONG_EPONA)
-    {
-        comboAddCommonItemOot(SITEM_SONG_EPONA, noEffect);
-    }
-
-    if (comboConfig(CFG_SHARED_SONG_STORMS) && gi == GI_MM_SONG_STORMS)
-    {
-        comboAddCommonItemOot(SITEM_SONG_STORMS, noEffect);
-    }
-
-    if (comboConfig(CFG_SHARED_SONG_TIME) && gi == GI_MM_SONG_TIME)
-    {
-        comboAddCommonItemOot(SITEM_SONG_TIME, noEffect);
-    }
-
-    if (comboConfig(CFG_SHARED_SONG_SUN) && gi == GI_MM_SONG_SUN)
-    {
-        comboAddCommonItemOot(SITEM_SONG_SUN, noEffect);
     }
 
     if (comboConfig(CFG_SHARED_HEALTH))
@@ -317,57 +285,6 @@ int comboAddItemMm(s16 gi, int noEffect)
         break;
     case GI_MM_GS_TOKEN_OCEAN:
         count = ++gMmSave.skullCountOcean;
-        break;
-    case GI_MM_SONG_AWAKENING:
-        gMmSave.inventory.quest.songAwakening = 1;
-        break;
-    case GI_MM_SONG_GORON:
-        gMmSave.inventory.quest.songLullaby = 1;
-        break;
-    case GI_MM_SONG_ZORA:
-        gMmSave.inventory.quest.songNewWave = 1;
-        break;
-    case GI_MM_SONG_EMPTINESS:
-        gMmSave.inventory.quest.songEmpty = 1;
-        break;
-    case GI_MM_SONG_ORDER:
-        gMmSave.inventory.quest.songOrder = 1;
-        break;
-    case GI_MM_SONG_TIME:
-        comboAddCommonItemMm(SITEM_SONG_TIME, noEffect);
-        break;
-    case GI_MM_SONG_HEALING:
-        gMmSave.inventory.quest.songHealing = 1;
-        break;
-    case GI_MM_SONG_EPONA:
-        comboAddCommonItemMm(SITEM_SONG_EPONA, noEffect);
-        break;
-    case GI_MM_SONG_SOARING:
-        gMmSave.inventory.quest.songSoaring = 1;
-        break;
-    case GI_MM_SONG_STORMS:
-        comboAddCommonItemMm(SITEM_SONG_STORMS, noEffect);
-        break;
-    case GI_MM_SONG_GORON_HALF:
-        gMmSave.inventory.quest.songLullabyIntro = 1;
-        break;
-    case GI_MM_SONG_SUN:
-        comboAddCommonItemMm(SITEM_SONG_SUN, noEffect);
-        break;
-    case GI_MM_BOMBER_NOTEBOOK:
-        gMmSave.inventory.quest.notebook = 1;
-        break;
-    case GI_MM_REMAINS_ODOLWA:
-        gMmSave.inventory.quest.remainsOdolwa = 1;
-        break;
-    case GI_MM_REMAINS_GOHT:
-        gMmSave.inventory.quest.remainsGoht = 1;
-        break;
-    case GI_MM_REMAINS_GYORG:
-        gMmSave.inventory.quest.remainsGyorg = 1;
-        break;
-    case GI_MM_REMAINS_TWINMOLD:
-        gMmSave.inventory.quest.remainsTwinmold = 1;
         break;
     case GI_MM_HEART_PIECE:
         comboAddCommonItemMm(SITEM_HEART_PIECE, noEffect);
