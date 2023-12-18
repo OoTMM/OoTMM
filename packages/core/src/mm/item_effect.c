@@ -140,7 +140,6 @@ void comboAddItemSharedForeignEffect(GameState_Play* play, s16 gi)
         case GI_OOT_TC_HEART_PIECE:
         case GI_OOT_HEART_CONTAINER:
         case GI_OOT_HEART_CONTAINER2:
-        case GI_OOT_DEFENSE_UPGRADE:
             addHealth(20);
             break;
         }
@@ -162,7 +161,6 @@ int comboAddItemEffect(GameState_Play* play, s16 gi)
         break;
     case GI_MM_HEART_PIECE:
     case GI_MM_HEART_CONTAINER:
-    case GI_MM_DEFENSE_UPGRADE:
         addHealth(20);
         break;
     case GI_MM_STRAY_FAIRY:

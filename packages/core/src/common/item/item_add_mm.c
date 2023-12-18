@@ -104,12 +104,6 @@ void comboAddCommonItemMm(int sid, int noEffect)
         if (noEffect)
             addHealth(20);
         break;
-    case SITEM_DEFENSE_UPGRADE:
-        gMmSave.playerData.doubleDefense = 1;
-        gMmSave.inventory.defenseHearts = 20;
-        if (noEffect)
-            addHealth(20);
-        break;
     }
 }
 
@@ -137,9 +131,6 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
             break;
         case GI_MM_HEART_PIECE:
             comboAddCommonItemOot(SITEM_HEART_PIECE, noEffect);
-            break;
-        case GI_MM_DEFENSE_UPGRADE:
-            comboAddCommonItemOot(SITEM_DEFENSE_UPGRADE, noEffect);
             break;
         }
     }
@@ -338,9 +329,6 @@ int comboAddItemMm(s16 gi, int noEffect)
         break;
     case GI_MM_STRAY_FAIRY_TOWN:
         count = comboAddStrayFairyMm(4);
-        break;
-    case GI_MM_DEFENSE_UPGRADE:
-        comboAddCommonItemMm(SITEM_DEFENSE_UPGRADE, noEffect);
         break;
     case GI_MM_SPIN_UPGRADE:
         MM_SET_EVENT_WEEK(EV_MM_WEEK_SPIN_UPGRADE);

@@ -126,12 +126,6 @@ void comboAddCommonItemOot(int sid, int noEffect)
         if (noEffect)
             addHealth(20);
         break;
-    case SITEM_DEFENSE_UPGRADE:
-        gOotSave.playerData.doubleDefense = 1;
-        gOotSave.inventory.doubleDefenseHearts = 20;
-        if (noEffect)
-            addHealth(20);
-        break;
     }
 }
 
@@ -161,9 +155,6 @@ void comboAddItemSharedOot(s16 gi, int noEffect)
         case GI_OOT_HEART_PIECE:
         case GI_OOT_TC_HEART_PIECE:
             comboAddCommonItemMm(SITEM_HEART_PIECE, noEffect);
-            break;
-        case GI_OOT_DEFENSE_UPGRADE:
-            comboAddCommonItemMm(SITEM_DEFENSE_UPGRADE, noEffect);
             break;
         }
     }
@@ -294,9 +285,6 @@ int comboAddItemOot(s16 gi, int noEffect)
         comboAddMagicUpgradeOot(2);
         if (noEffect)
             refillMagic(2);
-        break;
-    case GI_OOT_DEFENSE_UPGRADE:
-        comboAddCommonItemOot(SITEM_DEFENSE_UPGRADE, noEffect);
         break;
     case GI_OOT_HEART_PIECE:
     case GI_OOT_TC_HEART_PIECE:

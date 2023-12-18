@@ -56,6 +56,8 @@
 #define IA_MM_QUEST             0x30
 #define IA_OOT_HEART            0x31
 #define IA_MM_HEART             0x32
+#define IA_OOT_DEFENSE_UPGRADE  0x33
+#define IA_MM_DEFENSE_UPGRADE   0x34
 #define IA_NONE                 0xff
 
 typedef struct GameState_Play GameState_Play;

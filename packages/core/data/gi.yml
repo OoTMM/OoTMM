@@ -149,7 +149,7 @@
 - { id: OOT_MEDALLION_LIGHT, add: [OOT_QUEST, QUEST_OOT_MEDALLION_LIGHT], flags: 0x80, draw: OOT_MEDALLION_LIGHT, object: GI_MEDALLION_LIGHT, name: "the <C3>Light Medallion" }
 - { id: OOT_MAGIC_UPGRADE, add: NONE, flags: 0x80, draw: MAGIC_UPGRADE, object: [oot, 0x00cd], name: "the <C1>Magic Upgrade" }
 - { id: OOT_MAGIC_UPGRADE2, add: NONE, flags: 0x80, draw: MAGIC_UPGRADE2, object: [oot, 0x00cd], name: "the <C1>Larger Magic Upgrade" }
-- { id: OOT_DEFENSE_UPGRADE, add: NONE, flags: 0x80, draw: DEFENSE_UPGRADE, object: [oot, 0x00bd], name: "the <C1>Defense Upgrade" }
+- { id: OOT_DEFENSE_UPGRADE, add: MM_DEFENSE_UPGRADE, flags: 0x80, draw: DEFENSE_UPGRADE, object: [oot, 0x00bd], name: "the <C1>Defense Upgrade" }
 - { id: OOT_PROGRESSIVE_SHIELD_DEKU, add: [OOT_SHIELD, 0x101], flags: 0xa0, draw: OOT_SHIELD_DEKU, object: [oot, 0x00cb], name: "the <C1>Progressive Deku Shield" }
 - { id: OOT_PROGRESSIVE_SHIELD_HYLIAN, add: [OOT_SHIELD, 0x102], flags: 0xa0, draw: OOT_SHIELD_HYLIAN, object: [oot, 0x00dc], name: "the <C1>Progressive Hylian Shield" }
 - { id: OOT_SMALL_KEY_FOREST, add: NONE, flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C0>Small Key (Forest)" }
@@ -582,7 +582,7 @@
 - { id: MM_WORLD_MAP_STONE_TOWER, item: MM_WORLD_MAP, add: NONE, flags: 0xa0, draw: MM_WORLD_MAP, object: [mm, 0x024d], name: "a <C0>World Map (Stone Tower)" }
 - { id: MM_MAGIC_UPGRADE, add: NONE, flags: 0xa0, draw: MAGIC_UPGRADE, object: [mm, 0x00a4], name: "the <C1>Magic Upgrade" }
 - { id: MM_MAGIC_UPGRADE2, add: NONE, flags: 0xa0, draw: MAGIC_UPGRADE2, object: [mm, 0x00a4], name: "the <C1>Larger Magic Upgrade" }
-- { id: MM_DEFENSE_UPGRADE, add: NONE, flags: 0xa0, draw: DEFENSE_UPGRADE, object: [mm, 0x0096], name: "the <C1>Defense Upgrade" }
+- { id: MM_DEFENSE_UPGRADE, add: MM_DEFENSE_UPGRADE, flags: 0xa0, draw: DEFENSE_UPGRADE, object: [mm, 0x0096], name: "the <C1>Defense Upgrade" }
 - { id: MM_SPIN_UPGRADE, add: NONE, flags: 0xa0, draw: MM_SPIN_UPGRADE, object: [mm, 0x0148], name: "the <C1>Spin Attack Upgrade" }
 - { id: MM_SONG_AWAKENING, add: [MM_QUEST, QUEST_MM_SONG_AWAKENING], flags: 0xa0, draw: [NOTE, 0x82], object: [mm, 0x008f], name: "the <C2>Sonata of Awakening" }
 - { id: MM_SONG_GORON, add: [MM_QUEST, QUEST_MM_SONG_GORON], flags: 0xa0, draw: [NOTE, 0x85], object: [mm, 0x008f], name: "the <C2>Goron Lullaby" }

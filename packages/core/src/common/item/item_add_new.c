@@ -1111,6 +1111,36 @@ static int addItemHeartMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
+static void addDefenseUpgradeRawOot(void)
+{
+    gOotSave.playerData.doubleDefense = 1;
+    gOotSave.inventory.doubleDefenseHearts = 20;
+}
+
+static void addDefenseUpgradeRawMm(void)
+{
+    gMmSave.playerData.doubleDefense = 1;
+    gMmSave.inventory.defenseHearts = 20;
+}
+
+static int addItemDefenseUpgradeOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    addDefenseUpgradeRawOot();
+    if (comboConfig(CFG_SHARED_HEALTH))
+        addDefenseUpgradeRawMm();
+    addHealthOot(play, 20);
+    return 0;
+}
+
+static int addItemDefenseUpgradeMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    addDefenseUpgradeRawMm();
+    if (comboConfig(CFG_SHARED_HEALTH))
+        addDefenseUpgradeRawOot();
+    addHealthMm(play, 20);
+    return 0;
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -1163,6 +1193,8 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemQuestMm,
     addItemHeartOot,
     addItemHeartMm,
+    addItemDefenseUpgradeOot,
+    addItemDefenseUpgradeMm,
 };
 
 extern const u8 kAddItemFuncs[];
