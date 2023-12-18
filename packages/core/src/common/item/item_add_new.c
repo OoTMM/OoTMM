@@ -939,6 +939,36 @@ static int addItemSwordMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
+static void addBombBagRawOot(u8 index)
+{
+    if (index > gOotSave.inventory.upgrades.bombBag)
+        gOotSave.inventory.upgrades.bombBag = index;
+    addBombsRawOot(kMaxBombs[index]);
+}
+
+static void addBombBagRawMm(u8 index)
+{
+    if (index > gMmSave.inventory.upgrades.bombBag)
+        gMmSave.inventory.upgrades.bombBag = index;
+    addBombsRawMm(kMaxBombs[index]);
+}
+
+static int addItemBombBagOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    addBombBagRawOot(param);
+    if (comboConfig(CFG_SHARED_BOMB_BAGS))
+        addBombBagRawMm(param);
+    return 0;
+}
+
+static int addItemBombBagMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    addBombBagRawMm(param);
+    if (comboConfig(CFG_SHARED_BOMB_BAGS))
+        addBombBagRawOot(param);
+    return 0;
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -979,6 +1009,8 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemBeansMm,
     addItemSwordOot,
     addItemSwordMm,
+    addItemBombBagOot,
+    addItemBombBagMm,
 };
 
 extern const u8 kAddItemFuncs[];

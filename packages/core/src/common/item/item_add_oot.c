@@ -73,32 +73,6 @@ static void refillMagic(int level)
     gOotSave.playerData.magicAmount = level * 0x30;
 }
 
-
-static void addAmmo(u8 slot, u16 item, u8 max, u8 count)
-{
-    gOotSave.inventory.items[slot] = item;
-    gOotSave.inventory.ammo[slot] += count;
-    if (gOotSave.inventory.ammo[slot] > max)
-        gOotSave.inventory.ammo[slot] = max;
-}
-
-void comboAddBombsOot(int count)
-{
-    u8 max;
-
-    if (gOotSave.inventory.upgrades.bombBag == 0)
-        return;
-    max = kMaxBombs[gOotSave.inventory.upgrades.bombBag];
-    addAmmo(ITS_OOT_BOMBS, ITEM_OOT_BOMB, max, count);
-}
-
-void comboAddBombBagOot(int level)
-{
-    gOotSave.inventory.items[ITS_OOT_BOMBS] = ITEM_OOT_BOMB;
-    gOotSave.inventory.upgrades.bombBag = level;
-    gOotSave.inventory.ammo[ITS_OOT_BOMBS] = kMaxBombs[level];
-}
-
 static void addRupees(u16 count)
 {
     u16 max;
@@ -180,22 +154,6 @@ void comboAddCommonItemOot(int sid, int noEffect)
 
 void comboAddItemSharedOot(s16 gi, int noEffect)
 {
-    if (comboConfig(CFG_SHARED_BOMB_BAGS))
-    {
-        switch (gi)
-        {
-        case GI_OOT_BOMB_BAG:
-            comboAddBombBagMm(1);
-            break;
-        case GI_OOT_BOMB_BAG2:
-            comboAddBombBagMm(2);
-            break;
-        case GI_OOT_BOMB_BAG3:
-            comboAddBombBagMm(3);
-            break;
-        }
-    }
-
     if (comboConfig(CFG_SHARED_MAGIC))
     {
         switch (gi)
@@ -409,15 +367,6 @@ int comboAddItemOot(s16 gi, int noEffect)
         break;
     case GI_OOT_SCALE_GOLDEN:
         gOotSave.inventory.upgrades.dive = 2;
-        break;
-    case GI_OOT_BOMB_BAG:
-        comboAddBombBagOot(1);
-        break;
-    case GI_OOT_BOMB_BAG2:
-        comboAddBombBagOot(2);
-        break;
-    case GI_OOT_BOMB_BAG3:
-        comboAddBombBagOot(3);
         break;
     case GI_OOT_MAGIC_UPGRADE:
         comboAddMagicUpgradeOot(1);

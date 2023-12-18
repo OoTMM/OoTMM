@@ -78,26 +78,6 @@ static void addShield(int index)
         gMmSave.itemEquips.shield = index;
 }
 
-void comboAddBombBagMm(int index)
-{
-    gMmSave.inventory.items[ITS_MM_BOMBS] = ITEM_MM_BOMB;
-    gMmSave.inventory.upgrades.bombBag = index;
-    gMmSave.inventory.ammo[ITS_MM_BOMBS] = kMaxBombs[index];
-}
-
-void comboAddBombsMm(int count)
-{
-    u16 max;
-
-    if (gMmSave.inventory.upgrades.bombBag == 0)
-        return;
-    max = kMaxBombs[gMmSave.inventory.upgrades.bombBag];
-    gMmSave.inventory.items[ITS_MM_BOMBS] = ITEM_MM_BOMB;
-    gMmSave.inventory.ammo[ITS_MM_BOMBS] += count;
-    if (gMmSave.inventory.ammo[ITS_MM_BOMBS] > max)
-        gMmSave.inventory.ammo[ITS_MM_BOMBS] = max;
-}
-
 void comboAddMagicUpgradeMm(int level)
 {
     gMmSave.playerData.magicAcquired = 1;
@@ -157,22 +137,6 @@ void comboAddCommonItemMm(int sid, int noEffect)
 
 void comboAddItemSharedMm(s16 gi, int noEffect)
 {
-    if (comboConfig(CFG_SHARED_BOMB_BAGS))
-    {
-        switch (gi)
-        {
-        case GI_MM_BOMB_BAG:
-            comboAddBombBagOot(1);
-            break;
-        case GI_MM_BOMB_BAG2:
-            comboAddBombBagOot(2);
-            break;
-        case GI_MM_BOMB_BAG3:
-            comboAddBombBagOot(3);
-            break;
-        }
-    }
-
     if (comboConfig(CFG_SHARED_MAGIC))
     {
         switch (gi)
@@ -362,15 +326,6 @@ int comboAddItemMm(s16 gi, int noEffect)
         break;
     case GI_MM_SHIELD_MIRROR:
         addShield(2);
-        break;
-    case GI_MM_BOMB_BAG:
-        comboAddBombBagMm(1);
-        break;
-    case GI_MM_BOMB_BAG2:
-        comboAddBombBagMm(2);
-        break;
-    case GI_MM_BOMB_BAG3:
-        comboAddBombBagMm(3);
         break;
     case GI_MM_GS_TOKEN_SWAMP:
         count = ++gMmSave.skullCountSwamp;
