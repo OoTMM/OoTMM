@@ -2,11 +2,6 @@
 #include <combo/item.h>
 #include <combo/sr.h>
 
-static void addHealth(u8 count)
-{
-    gSaveContext.healthDelta += count * 0x10;
-}
-
 static void refillMagic(int level)
 {
     gSave.playerData.magicLevel = 0;
@@ -131,19 +126,6 @@ void comboAddItemSharedForeignEffect(GameState_Play* play, s16 gi)
             break;
         }
     }
-
-    if (comboConfig(CFG_SHARED_HEALTH))
-    {
-        switch (gi)
-        {
-        case GI_OOT_HEART_PIECE:
-        case GI_OOT_TC_HEART_PIECE:
-        case GI_OOT_HEART_CONTAINER:
-        case GI_OOT_HEART_CONTAINER2:
-            addHealth(20);
-            break;
-        }
-    }
 }
 
 int comboAddItemEffect(GameState_Play* play, s16 gi)
@@ -158,10 +140,6 @@ int comboAddItemEffect(GameState_Play* play, s16 gi)
         break;
     case GI_MM_MAGIC_UPGRADE2:
         refillMagic(2);
-        break;
-    case GI_MM_HEART_PIECE:
-    case GI_MM_HEART_CONTAINER:
-        addHealth(20);
         break;
     case GI_MM_STRAY_FAIRY:
         if (play->sceneId == SCE_MM_LAUNDRY_POOL || play->sceneId == SCE_MM_CLOCK_TOWN_EAST)

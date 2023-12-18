@@ -105,30 +105,6 @@ static void addMagicalRupee(int noEffect)
         addSilverRupeePouch(i, noEffect);
 }
 
-void comboAddCommonItemOot(int sid, int noEffect)
-{
-    switch (sid)
-    {
-    case SITEM_HEART_PIECE:
-        gOotSave.inventory.quest.heartPieces++;
-        if (noEffect)
-        {
-            if (gOotSave.inventory.quest.heartPieces >= 4)
-            {
-                gOotSave.inventory.quest.heartPieces -= 4;
-                gOotSave.playerData.healthMax += 0x10;
-            }
-            addHealth(20);
-        }
-        break;
-    case SITEM_HEART_CONTAINER:
-        gOotSave.playerData.healthMax += 0x10;
-        if (noEffect)
-            addHealth(20);
-        break;
-    }
-}
-
 void comboAddItemSharedOot(s16 gi, int noEffect)
 {
     if (comboConfig(CFG_SHARED_MAGIC))
@@ -140,21 +116,6 @@ void comboAddItemSharedOot(s16 gi, int noEffect)
             break;
         case GI_OOT_MAGIC_UPGRADE2:
             comboAddMagicUpgradeMm(2);
-            break;
-        }
-    }
-
-    if (comboConfig(CFG_SHARED_HEALTH))
-    {
-        switch (gi)
-        {
-        case GI_OOT_HEART_CONTAINER:
-        case GI_OOT_HEART_CONTAINER2:
-            comboAddCommonItemMm(SITEM_HEART_CONTAINER, noEffect);
-            break;
-        case GI_OOT_HEART_PIECE:
-        case GI_OOT_TC_HEART_PIECE:
-            comboAddCommonItemMm(SITEM_HEART_PIECE, noEffect);
             break;
         }
     }
@@ -285,14 +246,6 @@ int comboAddItemOot(s16 gi, int noEffect)
         comboAddMagicUpgradeOot(2);
         if (noEffect)
             refillMagic(2);
-        break;
-    case GI_OOT_HEART_PIECE:
-    case GI_OOT_TC_HEART_PIECE:
-        comboAddCommonItemOot(SITEM_HEART_PIECE, noEffect);
-        break;
-    case GI_OOT_HEART_CONTAINER:
-    case GI_OOT_HEART_CONTAINER2:
-        comboAddCommonItemOot(SITEM_HEART_CONTAINER, noEffect);
         break;
     case GI_OOT_GS_TOKEN:
         gOotSave.inventory.quest.goldToken = 1;

@@ -16,11 +16,6 @@ static u16 dungeon(GameState_Play* play, int isBossKey)
     return mapIndex;
 }
 
-static void addHealth(u8 count)
-{
-    gSaveContext.healthDelta += count * 0x10;
-}
-
 static void addRupees(u16 count)
 {
     gSaveContext.rupeesDelta += count;
@@ -45,16 +40,6 @@ static void refillMagic(int level)
 
 void comboAddItemSharedForeignEffect(GameState_Play* play, s16 gi)
 {
-    if (comboConfig(CFG_SHARED_HEALTH))
-    {
-        switch (gi)
-        {
-        case GI_MM_HEART_CONTAINER:
-        case GI_MM_HEART_PIECE:
-            addHealth(20);
-            break;
-        }
-    }
 }
 
 int comboAddItemEffect(GameState_Play* play, s16 gi)
@@ -163,12 +148,6 @@ int comboAddItemEffect(GameState_Play* play, s16 gi)
         break;
     case GI_OOT_MAGIC_UPGRADE2:
         refillMagic(2);
-        break;
-    case GI_OOT_HEART_PIECE:
-    case GI_OOT_TC_HEART_PIECE:
-    case GI_OOT_HEART_CONTAINER:
-    case GI_OOT_HEART_CONTAINER2:
-        addHealth(20);
         break;
     case GI_OOT_SMALL_KEY:
     case GI_OOT_TC_SMALL_KEY:

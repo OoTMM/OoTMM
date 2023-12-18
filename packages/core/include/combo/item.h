@@ -58,6 +58,8 @@
 #define IA_MM_HEART             0x32
 #define IA_OOT_DEFENSE_UPGRADE  0x33
 #define IA_MM_DEFENSE_UPGRADE   0x34
+#define IA_OOT_HEART_PIECE      0x35
+#define IA_MM_HEART_PIECE       0x36
 #define IA_NONE                 0xff
 
 typedef struct GameState_Play GameState_Play;
@@ -148,9 +150,6 @@ void comboAddSticksOot(int count);
 void comboAddSticksMm(int count);
 void comboAddNutsOot(int count);
 void comboAddNutsMm(int count);
-
-void comboAddCommonItemOot(int sid, int noEffect);
-void comboAddCommonItemMm(int sid, int noEffect);
 
 int  comboAddItem(GameState_Play* play, s16 gi);
 int  comboAddItemLegacy(GameState_Play* play, s16 gi);

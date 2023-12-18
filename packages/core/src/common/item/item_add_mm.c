@@ -85,28 +85,6 @@ static void refillMagic(int level)
     gMmSave.playerData.magicAmount = level * 0x30;
 }
 
-void comboAddCommonItemMm(int sid, int noEffect)
-{
-    switch (sid)
-    {
-    case SITEM_HEART_PIECE:
-        gMmSave.inventory.quest.heartPieces += 1;
-        if (gMmSave.inventory.quest.heartPieces == 4)
-        {
-            gMmSave.inventory.quest.heartPieces = 0;
-            gMmSave.playerData.healthMax += 0x10;
-        }
-        if (noEffect)
-            addHealth(20);
-        break;
-    case SITEM_HEART_CONTAINER:
-        gMmSave.playerData.healthMax += 0x10;
-        if (noEffect)
-            addHealth(20);
-        break;
-    }
-}
-
 void comboAddItemSharedMm(s16 gi, int noEffect)
 {
     if (comboConfig(CFG_SHARED_MAGIC))
@@ -118,19 +96,6 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
             break;
         case GI_MM_MAGIC_UPGRADE2:
             comboAddMagicUpgradeOot(2);
-            break;
-        }
-    }
-
-    if (comboConfig(CFG_SHARED_HEALTH))
-    {
-        switch (gi)
-        {
-        case GI_MM_HEART_CONTAINER:
-            comboAddCommonItemOot(SITEM_HEART_CONTAINER, noEffect);
-            break;
-        case GI_MM_HEART_PIECE:
-            comboAddCommonItemOot(SITEM_HEART_PIECE, noEffect);
             break;
         }
     }
@@ -269,12 +234,6 @@ int comboAddItemMm(s16 gi, int noEffect)
         break;
     case GI_MM_GS_TOKEN_OCEAN:
         count = ++gMmSave.skullCountOcean;
-        break;
-    case GI_MM_HEART_PIECE:
-        comboAddCommonItemMm(SITEM_HEART_PIECE, noEffect);
-        break;
-    case GI_MM_HEART_CONTAINER:
-        comboAddCommonItemMm(SITEM_HEART_CONTAINER, noEffect);
         break;
     case GI_MM_SMALL_KEY_WF:
         count = comboAddSmallKeyMm(0);

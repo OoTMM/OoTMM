@@ -837,6 +837,9 @@ static int addItemOcarinaMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 
 static int addItemBottleNewOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
+    if (itemId == ITEM_OOT_RUTO_LETTER)
+        gOotExtraItems.rutoLetter = 1;
+    
     for (int i = 0; i < 4; ++i)
     {
         if (gOotSave.inventory.items[ITS_OOT_BOTTLE + i] == ITEM_NONE)
@@ -1141,6 +1144,50 @@ static int addItemDefenseUpgradeMm(GameState_Play* play, u8 itemId, s16 gi, u16 
     return 0;
 }
 
+static void addHeartPieceRawOot(void)
+{
+    gOotSave.inventory.quest.heartPieces++;
+    if (gOotSave.inventory.quest.heartPieces >= 4)
+    {
+        gOotSave.inventory.quest.heartPieces -= 4;
+        gOotSave.playerData.healthMax += 0x10;
+    }
+}
+
+static void addHeartPieceRawMm(void)
+{
+    gMmSave.inventory.quest.heartPieces++;
+    if (gMmSave.inventory.quest.heartPieces >= 4)
+    {
+        gMmSave.inventory.quest.heartPieces -= 4;
+        gMmSave.playerData.healthMax += 0x10;
+    }
+}
+
+static int addItemHeartPieceOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    for (int i = 0; i < param; ++i)
+    {
+        addHeartPieceRawOot();
+        if (comboConfig(CFG_SHARED_HEALTH))
+            addHeartPieceRawMm();
+    }
+    addHealthOot(play, 20);
+    return 0;
+}
+
+static int addItemHeartPieceMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    for (int i = 0; i < param; ++i)
+    {
+        addHeartPieceRawMm();
+        if (comboConfig(CFG_SHARED_HEALTH))
+            addHeartPieceRawOot();
+    }
+    addHealthMm(play, 20);
+    return 0;
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -1195,6 +1242,8 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemHeartMm,
     addItemDefenseUpgradeOot,
     addItemDefenseUpgradeMm,
+    addItemHeartPieceOot,
+    addItemHeartPieceMm,
 };
 
 extern const u8 kAddItemFuncs[];
