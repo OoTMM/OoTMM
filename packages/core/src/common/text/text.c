@@ -688,7 +688,7 @@ void comboTextAppendItemNameEx(char** b, s16 gi, int flags, int importance)
         comboTextAppendStr(b, ")");
     }
 
-    if (comboConfig(CFG_HINT_IMPORTANCE) && !isItemFastBuy(gi))
+    if (comboConfig(CFG_HINT_IMPORTANCE) && !isItemFastBuy(gi) && gi != GI_NOTHING)
     {
         switch (importance)
         {
