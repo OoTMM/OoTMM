@@ -603,6 +603,16 @@ void comboTextAppendItemNameEx(char** b, s16 gi, int flags, int importance)
             ambiguous = 0;
         }
     }
+
+    if (gi == GI_OOT_ARROW_LIGHT)
+    {
+        if (comboConfig(CFG_OOT_SUNLIGHT_ARROWS))
+        {
+            itemName = "the " TEXT_C1 "Sunlight Arrows";
+            ambiguous = 0;
+        }
+    }
+
     if(gi == GI_MM_BOMBER_NOTEBOOK)
     {
         if(comboConfig(CFG_MENU_NOTEBOOK))

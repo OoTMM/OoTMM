@@ -17,7 +17,7 @@
   dungeon: Spirit
   exits:
     "Spirit Temple": "is_child"
-    "Spirit Temple Child Climb": "is_child && cond(climb_anywhere, (small_keys_spirit(1) && has_mirror_shield && has_explosives) || small_keys_spirit(2), small_keys_spirit(1))" #1 is safe if you have the means to lower the light platform, otherwise 2 is safe.
+    "Spirit Temple Child Climb": "is_child && cond(climb_anywhere, (small_keys_spirit(1) && can_reflect_light && has_explosives) || small_keys_spirit(2), small_keys_spirit(1))" #1 is safe if you have the means to lower the light platform, otherwise 2 is safe.
     "Spirit Temple Child Left": "soul_keese && soul_armos && (can_use_sticks || has_explosives_or_hammer || ((can_boomerang || has_nuts) && (has_weapon || can_use_slingshot)) || time_travel_at_will)"
     "Spirit Temple Child Right": "soul_keese && soul_armos && (can_use_sticks || has_explosives_or_hammer || ((can_boomerang || has_nuts) && (has_weapon || can_use_slingshot)) || time_travel_at_will)"
 "Spirit Temple Child Left":
@@ -83,13 +83,13 @@
     "Spirit Temple SR Sun 3": "true"
     "Spirit Temple SR Sun 4": "true"
     "Spirit Temple SR Sun 5": "true"
-    "Spirit Temple GS Iron Knuckle": "(event(SPIRIT_CHILD_DOOR) && has_explosives && can_collect_distance) || (event(SPIRIT_ADULT_DOOR) && can_collect_distance) || cond(climb_anywhere, ((has_explosives && has_mirror_shield && small_keys_spirit(1)) || small_keys_spirit(3)) && (can_collect_distance || has_ranged_weapon || has_explosives || can_use_din), can_collect_ageless && (has_explosives || small_keys_spirit(2)))"
+    "Spirit Temple GS Iron Knuckle": "(event(SPIRIT_CHILD_DOOR) && has_explosives && can_collect_distance) || (event(SPIRIT_ADULT_DOOR) && can_collect_distance) || cond(climb_anywhere, ((has_explosives && can_reflect_light && small_keys_spirit(1)) || small_keys_spirit(3)) && (can_collect_distance || has_ranged_weapon || has_explosives || can_use_din), can_collect_ageless && (has_explosives || small_keys_spirit(2)))"
     "Spirit Temple Pot Child Hand Stairway 1": "true"
     "Spirit Temple Pot Child Hand Stairway 2": "true"
 "Spirit Temple Child Hand":
   dungeon: Spirit
   exits:
-    "Spirit Temple Child Upper": "cond(climb_anywhere, (has_explosives && has_mirror_shield && small_keys_spirit(1)) || small_keys_spirit(3), small_keys_spirit(5))"
+    "Spirit Temple Child Upper": "cond(climb_anywhere, (has_explosives && can_reflect_light && small_keys_spirit(1)) || small_keys_spirit(3), small_keys_spirit(5))"
     "Spirit Temple Adult Hand": "longshot_anywhere"
     "Desert Colossus": "true"
     "Spirit Temple": "true"
@@ -98,7 +98,7 @@
 "Spirit Temple Adult Entrance":
   dungeon: Spirit
   exits:
-    "Spirit Temple Adult Climb": "cond(climb_anywhere, (has_explosives && has_mirror_shield && small_keys_spirit(1)) || small_keys_spirit(3), small_keys_spirit(1))"
+    "Spirit Temple Adult Climb": "cond(climb_anywhere, (has_explosives && can_reflect_light && small_keys_spirit(1)) || small_keys_spirit(3), small_keys_spirit(1))"
     "Spirit Temple Adult Boulders": "has_ranged_weapon || can_boomerang || has_bombchu"
   locations:
     "Spirit Temple Adult Lullaby": "can_play_zelda && (can_hookshot || climb_anywhere)"
@@ -156,7 +156,7 @@
   exits:
     "Spirit Temple Adult Upper 2": "has_explosives && soul_beamos && soul_enemy(SOUL_ENEMY_ANUBIS)"
     "Spirit Temple Adult Climb 2": "small_keys_spirit(5)"
-    "Spirit Temple Statue Adult": "has_explosives && soul_beamos && soul_enemy(SOUL_ENEMY_ANUBIS) && ((small_keys_spirit(1) && has_mirror_shield) || small_keys_spirit(2))"
+    "Spirit Temple Statue Adult": "has_explosives && soul_beamos && soul_enemy(SOUL_ENEMY_ANUBIS) && ((small_keys_spirit(1) && can_reflect_light) || small_keys_spirit(2))"
   locations:
     "Spirit Temple Pot Adult Upper": "has_explosives && soul_beamos && soul_enemy(SOUL_ENEMY_ANUBIS)"
 "Spirit Temple Adult Upper 2":
@@ -165,7 +165,7 @@
     "Spirit Temple Adult Upper": "true"
     "Spirit Temple Adult Hand": "soul_armos && soul_iron_knuckle"
   locations:
-    "Spirit Temple Adult Late Sun on Wall": "has_mirror_shield"
+    "Spirit Temple Adult Late Sun on Wall": "can_reflect_light"
     "Spirit Temple Adult Invisible 1": "has_lens && soul_armos"
     "Spirit Temple Adult Invisible 2": "has_lens && soul_armos"
 "Spirit Temple Adult Hand":
@@ -183,7 +183,7 @@
     SPIRIT_LIGHT_STATUE: "has_mirror_shield && has_explosives"
   locations:
     "Spirit Temple Adult Boss Key Chest": "can_play_zelda && (can_hookshot && can_hit_triggers_distance) || climb_anywhere || hookshot_anywhere"
-    "Spirit Temple Adult Topmost Sun on Wall": "has_mirror_shield"
+    "Spirit Temple Adult Topmost Sun on Wall": "can_reflect_light"
     "Spirit Temple Flying Pot Topmost 1": "soul_flying_pot"
     "Spirit Temple Flying Pot Topmost 2": "soul_flying_pot"
     "Spirit Temple Flying Pot Topmost 3": "soul_flying_pot"

@@ -956,6 +956,13 @@ export const SETTINGS = [{
   description: 'Changes the OoT Ice Arrows to have Blue Fire properties',
   default: false,
 }, {
+  key: 'sunlightArrows',
+  name: 'Sunlight Arrows',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Changes the OoT Light Arrows to have "beams of light" properties',
+  default: false,
+}, {
   key: 'shortHookshotMm',
   name: 'Short Hookshot in MM',
   category: 'items.extensions',

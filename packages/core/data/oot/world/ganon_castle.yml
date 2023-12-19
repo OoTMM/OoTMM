@@ -120,7 +120,7 @@
 "Ganon Castle Spirit 2":
   dungeon: Ganon
   exits:
-    "Ganon Castle Spirit End": "(has_bombchu || climb_anywhere || hookshot_anywhere) && has_mirror_shield && can_use_bow"
+    "Ganon Castle Spirit End": "(has_bombchu || climb_anywhere || hookshot_anywhere) && can_reflect_light && can_use_bow"
   locations:
     "Ganon Castle Spirit Chest 1": "can_use_sticks || can_use_sword || has_bombchu || hookshot_anywhere || (climb_anywhere && (has_ranged_weapon || has_explosives))"
     "Ganon Castle Spirit Chest 2": "(has_bombchu || climb_anywhere || hookshot_anywhere) && has_lens"

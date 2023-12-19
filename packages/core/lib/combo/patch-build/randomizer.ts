@@ -700,6 +700,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MM_NO_SMALL_KEY: settings.smallKeyShuffleMm === 'removed',
     CSMC_HEARTS: settings.csmcHearts,
     OOT_BLUE_FIRE_ARROWS: settings.blueFireArrows,
+    OOT_SUNLIGHT_ARROWS: settings.sunlightArrows,
     OOT_SILVER_RUPEE_SHUFFLE: settings.silverRupeeShuffle !== 'vanilla',
     OOT_FREE_SCARECROW: settings.freeScarecrowOot,
     OOT_SOULS_ENEMY: settings.soulsEnemyOot,

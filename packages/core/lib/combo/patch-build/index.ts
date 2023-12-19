@@ -53,6 +53,7 @@ function asmPatchGroups(settings: Settings) {
     OOT_AGELESS_HOOKSHOT: settings.agelessHookshot,
     OOT_AGELESS_CHILD_TRADE: settings.agelessChildTrade,
     OOT_BLUE_FIRE_ARROWS: settings.blueFireArrows,
+    OOT_SUNLIGHT_ARROWS: settings.sunlightArrows,
     ER: isEntranceShuffle(settings),
     DEFAULT_HOLD: settings.defaultHoldTarget,
     OOT_SILVER_RUPEE_SHUFFLE: settings.silverRupeeShuffle !== 'vanilla',

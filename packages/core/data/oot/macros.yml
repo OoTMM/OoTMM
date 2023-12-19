@@ -98,6 +98,8 @@
 "has_mirror_shield": "age_shield_adult && cond(setting(sharedShields), has_mirror_shield_raw_shared, has_mirror_shield_raw_nonshared)"
 "has_one_hand_shield": "has_shield_for_scrubs || has_mirror_shield"
 
+"can_reflect_light": "has_sunlight_arrows || has_mirror_shield"
+
 #Equipment Use Macros
 "has_rupees": "event(RUPEES) || (setting(sharedWallets) && event(MM_RUPEES))"
 "stone_of_agony": "has(STONE_OF_AGONY) || trick(OOT_HIDDEN_GROTTOS)"
@@ -122,6 +124,7 @@
 "has_light_arrows": "can_use_bow && (has(ARROW_LIGHT) || has(SHARED_ARROW_LIGHT)) && has_magic"
 "has_blue_fire_arrows": "can_use_bow && (setting(blueFireArrows) && (has(ARROW_ICE) || has(SHARED_ARROW_ICE))) && has_magic"
 "has_blue_fire_arrows_mudwall": "trick(OOT_BFA_MUDWALLS) && has_blue_fire_arrows"
+"has_sunlight_arrows": "can_use_bow && (setting(sunlightArrows) && (has(ARROW_LIGHT) || has(SHARED_ARROW_LIGHT))) && has_magic"
 "has_fire_arrows": "can_use_bow && (has(ARROW_FIRE) || has(SHARED_ARROW_FIRE)) && has_magic"
 "has_lens_strict": "has_magic && (has(LENS) || has(SHARED_LENS))"
 
@@ -173,7 +176,7 @@
 #Specialty Macros
 "met_zelda": "event(MEET_ZELDA) || setting(skipZelda)"
 "woke_talon_child": "event(TALON_CHILD) || setting(skipZelda)"
-"has_fire_spirit_ageless": "has_magic && ((has_arrows && (has(ARROW_FIRE) || has(SHARED_ARROW_FIRE)) && has_sticks) || has(SPELL_FIRE)) && cond(climb_anywhere, (has_explosives && has_mirror_shield) || small_keys_spirit(3), has_explosives || small_keys_spirit(2))"
+"has_fire_spirit_ageless": "has_magic && ((has_arrows && (has(ARROW_FIRE) || has(SHARED_ARROW_FIRE)) && has_sticks) || has(SPELL_FIRE)) && cond(climb_anywhere, (has_explosives && can_reflect_light) || small_keys_spirit(3), has_explosives || small_keys_spirit(2))"
 "has_fire_spirit": "(time_travel_at_will && has_fire_or_sticks) || has_fire_spirit_ageless"
 "has_ranged_weapon_both_ageless": "has_explosives || (((has(SLINGSHOT) && (event(SEEDS) || renewable(DEKU_SEEDS_30))) || has(BOOMERANG)) && (has_hookshot(1) || has_arrows))"
 "has_ranged_weapon_both": "(time_travel_at_will && has_ranged_weapon) || has_ranged_weapon_both_ageless"
