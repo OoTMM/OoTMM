@@ -56,7 +56,7 @@
   exits:
     "Spirit Temple Child Upper": "small_keys_spirit(7)"
     "Spirit Temple Sun Block Room": "is_adult || can_play_time || has_hover_boots" #Adult's long legs make the jumps easy
-    "Spirit Temple Adult Lower": "has_fire_arrows && has_mirror_shield && soul_enemy(SOUL_ENEMY_STALFOS) && soul_wallmaster && has_weapon"
+    "Spirit Temple Adult Lower": "has_fire_arrows && can_reflect_light && soul_enemy(SOUL_ENEMY_STALFOS) && soul_wallmaster && has_weapon"
     "Spirit Temple Adult Upper": "is_adult && small_keys_spirit(5)"
     "Spirit Temple Boss": "event(SPIRIT_TEMPLE_LIGHT) && has_mirror_shield && boss_key(BOSS_KEY_SPIRIT) && is_adult"
   events:
@@ -115,7 +115,7 @@
     "Spirit Temple Child Hand": "can_longshot && has_lens && soul_iron_knuckle && soul_floormaster"
   locations:
     "MQ Spirit Temple Dinolfos Room Chest": "true"
-    "MQ Spirit Temple Boss Key Chest": "has_mirror_shield"
+    "MQ Spirit Temple Boss Key Chest": "can_reflect_light"
     "Spirit Temple Mirror Shield": "has_lens && soul_iron_knuckle && soul_floormaster"
 "Spirit Temple Adult Climb":
   dungeon: Spirit
