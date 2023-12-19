@@ -639,5 +639,5 @@
 - { id: MM_BUTTON_C_DOWN, add: [MM_BUTTON, 4], flags: 0xa0, draw: BUTTON_C_DOWN, object: BTN_C_VERTICAL, name: "the <C1>C-Down Button" }
 - { id: MM_BOTTLE_POTION_GREEN, item: MM_POTION_GREEN, add: MM_BOTTLE_NEW, flags: 0xa0, draw: [BOTTLE_POTION, 0x01], object: [mm, 0x0196], name: "a <C1>bottle of Green Potion" }
 - { id: MM_BOTTLE_POTION_BLUE, item: MM_POTION_BLUE, add: MM_BOTTLE_NEW, flags: 0xa0, draw: [BOTTLE_POTION, 0x02], object: [mm, 0x0196], name: "a <C1>bottle of Blue Potion" }
-- { id: NOTHING,  flags: 0xa0, name: "<C0>Nothing" }
+- { id: NOTHING,  flags: 0xa0, name: "<C0>literally nothing" }
 - { id: MM_SCOOP, flags: 0x00 } # Scoop, MUST be the last entry
