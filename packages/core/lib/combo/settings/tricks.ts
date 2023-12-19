@@ -24,7 +24,7 @@ export const TRICKS = {
   OOT_PASS_COLLISION: "Pass through Visible One-Way Collisions",
   OOT_DMT_RED_ROCK_GS: "DMT Red Rock Skulls without Hammer",
   OOT_DEAD_HAND_STICKS: "Child Dead Hand without Kokiri Sword",
-  OOT_BFA_MUDWALLS: "Break mud walls with blue fire arrows",
+  OOT_BFA_MUDWALLS: "Break Mud Walls with Blue Fire Arrows",
   OOT_JABU_BOSS_HOVER: "Access Jabu-Jabu Pre-Boss using Hover Boots",
   OOT_SPIRIT_CHILD_HOVER: "Access Adult Spirit as Child using Hover Boots",
   OOT_VALLEY_GATE_HOVER: "Reach Gerudo Fortress as Child using Hover Boots",
