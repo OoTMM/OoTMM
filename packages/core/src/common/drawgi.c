@@ -565,7 +565,7 @@ CustomStrayFairyObj kStrayFairyObj =
     }
 };
 
-static void DrawGi_CustomStrayFairy(GameState_Play* play, s16 drawGiId)
+void DrawGi_CustomStrayFairy(GameState_Play* play, s16 drawGiId)
 {
     static u32 kEnvColors[] = {
         0xba5084ff,
@@ -1148,11 +1148,3 @@ void DrawGi_Button(GameState_Play* play, s16 index)
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[2]);
     CLOSE_DISPS();
 }
-
-const DrawGi kDrawGi[] = {
-#define X(a, b) { (void*)a, b }
-#define Y(...) { __VA_ARGS__ }
-#include "data/drawgi.inc"
-#undef Y
-#undef X
-};

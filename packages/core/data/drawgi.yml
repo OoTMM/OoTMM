@@ -1,0 +1,212 @@
+- { id: BOTTLE_EMPTY, func: Opa0_Xlu1, params: [0x6000670, 0x6000750] }
+- { id: SMALL_KEY, func: CustomSmallKey, params: [0x6000800, 0] }
+- { id: RECOVERY_HEART, func: Heart, params: [0x60000e0] }
+- { id: BOSS_KEY, func: Opa0_Xlu1, params: [0x6000ca0, 0x6000f08] }
+- { id: COMPASS, func: Compass, params: [0x6000960, 0x6000c50] }
+- { id: OOT_MEDALLION_FOREST, func: Medallion, params: [GI_MEDALLION_FOREST_0, GI_MEDALLION_FOREST_1] }
+- { id: OOT_MEDALLION_FIRE, func: Medallion, params: [GI_MEDALLION_FIRE_0, GI_MEDALLION_FIRE_1] }
+- { id: OOT_MEDALLION_WATER, func: Medallion, params: [GI_MEDALLION_WATER_0, GI_MEDALLION_WATER_1] }
+- { id: OOT_MEDALLION_SPIRIT, func: Medallion, params: [GI_MEDALLION_SPIRIT_0, GI_MEDALLION_SPIRIT_1] }
+- { id: OOT_MEDALLION_SHADOW, func: Medallion, params: [GI_MEDALLION_SHADOW_0, GI_MEDALLION_SHADOW_1] }
+- { id: OOT_MEDALLION_LIGHT, func: Medallion, params: [GI_MEDALLION_LIGHT_0, GI_MEDALLION_LIGHT_1] }
+- { id: DEKU_NUT, func: CustomNut, params: [0x6000e90, 0] }
+- { id: HEART_CONTAINER, func: CustomHeartContainer, params: [0x0, 0x6001290, 0x6001470] }
+- { id: HEART_PIECE, func: CustomHeartContainer, params: [0x0, 0x6001290, 0x6001590] }
+- { id: QUIVER, func: Opa1023, params: [0x6000990, 0x60008d0, 0x6000930, 0x6000a80] }
+- { id: QUIVER2, func: Opa1023, params: [0x6000990, 0x60008f0, 0x6000950, 0x6000a80] }
+- { id: QUIVER3, func: Opa1023, params: [0x6000990, 0x6000910, 0x6000970, 0x6000a80] }
+- { id: BOMB_BAG, func: Opa1023, params: [0x6000b90, 0x6000ad0, 0x6000b30, 0x6000d98] }
+- { id: BOMB_BAG2, func: Opa1023, params: [0x6000b90, 0x6000af0, 0x6000b50, 0x6000d98] }
+- { id: BOMB_BAG3, func: Opa1023, params: [0x6000b90, 0x6000b10, 0x6000b70, 0x6000d98] }
+- { id: DEKU_STICK, func: CustomStick, params: [0x60004d0, 0] }
+- { id: MAP, func: Opa0, params: [0x60003c0] }
+- { id: OOT_SHIELD_DEKU, func: Opa0, params: [0x6000a50] }
+- { id: MAGIC_SMALL, func: MagicJar, params: [0x6000580, 0, 0] }
+- { id: MAGIC_LARGE, func: MagicJar, params: [0x6000ee0, 0, 1] }
+- { id: BOMB, func: Opa0, params: [0x60009a0] }
+- { id: STONE_OF_AGONY, func: Opa0, params: [0x6000b70] }
+- { id: WALLET, func: Wallet, params: [0x6001850, 0, 0x6001790, 0x60019a0, 0x60017b0, 0x6001a28, 0, 0x6001ad8] }
+- { id: WALLET2, func: Wallet, params: [0x6001850, 0, 0x6001790, 0x60019a0, 0x60017b0, 0x6001a28, 1, 0x6001ad8] }
+- { id: OOT_GERUDO_CARD, func: Opa0, params: [0x6000f60] }
+- { id: ARROW, func: Opa0, params: [0x6000340] }
+- { id: ARROW2, func: Opa0, params: [0x6000b90] }
+- { id: ARROW3, func: Opa0, params: [0x6001830] }
+- { id: BOMBCHU, func: BombchuMask, params: [0x60004b0] }
+- { id: OOT_EGG, func: Medallion, params: [0x6000fd0, 0x6001008] }
+- { id: OOT_SCALE_SILVER, func: Scale, params: [0x6000aa0, 0x6000a20, 0x6000a60, 0x6000cc8] }
+- { id: OOT_SCALE_GOLD, func: Scale, params: [0x6000aa0, 0x6000a40, 0x6000a80, 0x6000cc8] }
+- { id: OOT_SHIELD_HYLIAN, func: Opa0, params: [0x6000c70] }
+- { id: OOT_HOOKSHOT, func: Opa0, params: [0x6000750] }
+- { id: OOT_LONGSHOT, func: Opa0, params: [0x6001240] }
+- { id: OCARINA_TIME, func: Opa0_Xlu1, params: [0x60008c0, 0x6000af8] }
+- { id: BOTTLE_MILK, func: Opa0_Xlu1, params: [0x6001060, 0x6001288] }
+- { id: MASK_KEATON, func: Opa0_Xlu1, params: [0x6000ac0, 0x6000d50] }
+- { id: OOT_MASK_SPOOKY, func: Opa0, params: [0x60007e0] }
+- { id: OOT_SLINGSHOT, func: Opa0, params: [0x6000940] }
+- { id: OOT_BOOMERANG, func: Opa0, params: [0x6000a30] }
+- { id: OOT_BOW, func: Opa0, params: [0x6000990] }
+- { id: LENS, func: Opa0_Xlu1, params: [0x6000d80, 0x6001010] }
+- { id: POTION_GREEN, func: CustomPotion, params: [0] }
+- { id: POTION_RED, func: CustomPotion, params: [1] }
+- { id: POTION_BLUE, func: CustomPotion, params: [2] }
+- { id: OOT_SHIELD_MIRROR, func: MirrorShield, params: [0x6000fb0, 0x60011c8] }
+- { id: OOT_ZELDA_LETTER, func: Opa0_Xlu1, params: [0x6000cc0, 0x6000d60] }
+- { id: OOT_TUNIC_GORON, func: Opa1023, params: [0x6001560, 0x60014e0, 0x6001520, 0x6001608] }
+- { id: OOT_TUNIC_ZORA, func: Opa1023, params: [0x6001560, 0x6001500, 0x6001540, 0x6001608] }
+- { id: MAGIC_BEAN, func: Opa0, params: [0x6000580] }
+- { id: FISH, func: Fish, params: [0x6000600] }
+- { id: OOT_POACHER_SAW, func: Opa0, params: [0x60007e0] }
+- { id: OOT_MEGATON_HAMMER, func: Opa0, params: [0x60009d0] }
+- { id: OOT_BIGGORON_SWORD, func: GiantKnife, params: [0x6000600] }
+- { id: OOT_CHICKEN, func: Opa10_Xlu2, params: [0x6001630, 0x60015f0, 0x6001948] }
+- { id: OOT_RUTO_LETTER, func: RutosLetter, params: [0x60008e0, 0x6000ae0] }
+- { id: OOT_OCARINA_FAIRY, func: Opa0_Xlu1, params: [0x60008e0, 0x6000b58] }
+- { id: OOT_BOOTS_IRON, func: Opa0_Xlu1, params: [0x6001630, 0x6001a98] }
+- { id: OOT_SEEDS, func: Opa0, params: [0x6000810] }
+- { id: OOT_GAUNTLETS_SILVER, func: Opa10_Xlu32, params: [0x6001540, 0x60014c0, 0x6001860, 0x6001500] }
+- { id: OOT_GAUNTLETS_GOLD, func: Opa10_Xlu32, params: [0x6001540, 0x60014e0, 0x6001860, 0x6001520] }
+- { id: OOT_MASK_SKULL, func: Opa0, params: [0x60009d0] }
+- { id: MASK_BUNNY, func: Opa0_Xlu1, params: [0x6000bc0, 0x6000e58] }
+- { id: MASK_TRUTH, func: Opa0_Xlu1, params: [0x60013d0, 0x60016b0] }
+- { id: OOT_EYE_DROPS, func: Opa0_Xlu1, params: [0x6000680, 0x6000768] }
+- { id: OOT_ODD_POTION, func: Opa0, params: [0x60008b0] }
+- { id: OOT_ODD_MUSHROOM, func: Opa0, params: [0x60009d0] }
+- { id: OOT_CLAIM_CHECK, func: Opa0_Xlu1, params: [0x6000f00, 0x6001188] }
+- { id: OOT_BROKEN_GORON_SWORD, func: GiantKnife, params: [0x60006e0] }
+- { id: OOT_PRESCRIPTION, func: Opa0_Xlu1, params: [0x60009c0, 0x6000af0] }
+- { id: OOT_GORON_BRACELET, func: Opa0, params: [0x6000960] }
+- { id: OOT_SOLD_OUT, func: SoldOut, params: [0x6000440] }
+- { id: OOT_EYEBALL_FROG, func: Opa0_Xlu1, params: [0x6000d60, 0x6001060] }
+- { id: OOT_MASK_GORON, func: BombchuMask, params: [0x60014f8] }
+- { id: OOT_MASK_ZORA, func: BombchuMask, params: [0x6001398] }
+- { id: OOT_MASK_GERUDO, func: BombchuMask, params: [0x60010e8] }
+- { id: OOT_COJIRO, func: Opa10_Xlu2, params: [0x6001630, 0x6001610, 0x6001948] }
+- { id: OOT_BOOTS_HOVER, func: Opa0, params: [0x6001850] }
+- { id: ARROW_FIRE, func: Opa0_Xlu12, params: [0x6000ae0, 0x6000ca0, 0x6000d00] }
+- { id: ARROW_ICE, func: Opa0_Xlu12, params: [0x6000ae0, 0x6000cc0, 0x6000d00] }
+- { id: ARROW_LIGHT, func: Opa0_Xlu12, params: [0x6000ae0, 0x6000ce0, 0x6000d00] }
+- { id: OOT_GS_TOKEN, func: CustomGS, params: [0] }
+- { id: OOT_SPELL_FIRE, func: Spell, params: [0x6000920, 0x60009e0, 0x6000a40] }
+- { id: OOT_SPELL_WIND, func: Spell, params: [0x6000920, 0x6000a00, 0x6000a40] }
+- { id: OOT_SPELL_LOVE, func: Spell, params: [0x6000920, 0x6000a20, 0x6000a40] }
+- { id: OOT_BLUE_FIRE, func: BlueFire, params: [0x6000c60, 0x6000f08] }
+- { id: BUG, func: Opa0_Xlu1, params: [0x6000830, 0x6000b20] }
+- { id: POE, func: Poe, params: [0x6000990, 0x6000be0, 0x6000cf0, 0x6000950] }
+- { id: FAIRY, func: Fairy, params: [0x6000bd0, 0x6000db8, 0x6000ef0] }
+- { id: OOT_BULLET_BAG2, func: Opa10_Xlu234, params: [0x6000b70, 0x6000af0, 0x6000f48, 0x6000b30, 0x6000ff0] }
+- { id: OOT_RUPEE_GREEN, func: Rupee, params: [0x60005e0, 0x60004a0, 0x60006f0, 0x6000540] }
+- { id: OOT_RUPEE_BLUE, func: Rupee, params: [0x60005e0, 0x60004c0, 0x60006f0, 0x6000560] }
+- { id: OOT_RUPEE_RED, func: Rupee, params: [0x60005e0, 0x60004e0, 0x60006f0, 0x6000580] }
+- { id: BIG_POE, func: Poe, params: [0x6000990, 0x6000be0, 0x6000cf0, 0x6000970] }
+- { id: OOT_RUPEE_PURPLE, func: Opa10_Xlu32, params: [0x60005e0, 0x6000500, 0x60006f0, 0x60005a0] }
+- { id: OOT_RUPEE_HUGE, func: Opa10_Xlu32, params: [0x60005e0, 0x6000520, 0x60006f0, 0x60005c0] }
+- { id: OOT_BULLET_BAG3, func: Opa10_Xlu234, params: [0x6000b70, 0x6000b10, 0x6000f48, 0x6000b50, 0x6000ff0] }
+- { id: OOT_SWORD_KOKIRI, func: Opa0, params: [0x6000960] }
+- { id: GS_TOKEN2, func: GS, params: [0x6004db0, 0x6004eb8] }
+- { id: OOT_SWORD_MASTER, func: MasterSword, params: [GI_MASTER_SWORD_0] }
+- { id: OOT_STONE_EMERALD, func: SpiritualStones, params: [0, GI_STONE_EMERALD_0, GI_STONE_EMERALD_1] }
+- { id: OOT_STONE_RUBY, func: SpiritualStones, params: [1, GI_STONE_RUBY_0, GI_STONE_RUBY_1] }
+- { id: OOT_STONE_SAPPHIRE, func: SpiritualStones, params: [2, GI_STONE_SAPPHIRE_0, GI_STONE_SAPPHIRE_1] }
+- { id: DEFENSE_UPGRADE, func: CustomHeartContainer, params: [0x1, 0x6001290, 0x6001470] }
+- { id: MM_MASK_KAMARO, func: Opa01, params: [0x6000fd8, 0x6000fd0] }
+- { id: MM_MASK_COUPLE, func: Opa0_Xlu1, params: [0x60006a0, 0x60005a0] }
+- { id: MM_NOTEBOOK, func: Opa0_Xlu1, params: [0x6000b78, 0x60006c0] }
+- { id: MM_MASK_STONE, func: Opa0_Xlu1, params: [0x6000e48, 0x6000a10] }
+- { id: MM_MASK_KAFEI, func: Opa01, params: [0x6001048, 0x6001040] }
+- { id: MM_MASK_TROUPE_LEADER, func: Opa0_Xlu1, params: [0x6000c00, 0x6000b50] }
+- { id: MM_MASK_BREMEN, func: Opa01, params: [0x6000808, 0x6000800] }
+- { id: MM_MASK_ALL_NIGHT, func: Opa0_Xlu1, params: [0x6000968, 0x60006f0] }
+- { id: MM_MASK_DON_GERO, func: Opa0_Xlu1, params: [0x6001438, 0x6001040] }
+- { id: MM_SHIELD_HERO, func: Opa0_Xlu1, params: [0x6000d28, 0x60009f0] }
+- { id: MM_HOOKSHOT, func: Opa01, params: [0x6000e48, 0x6000a10] }
+- { id: MM_WORLD_MAP, func: Opa01, params: [0x60006e8, 0x60006e0] }
+- { id: MM_BOW, func: Opa01, params: [0x6000c80, 0x6000f40] }
+- { id: MM_SHIELD_MIRROR, func: Opa0_Xlu1, params: [0x6000bf8, 0x6000770] }
+- { id: MM_LETTER_TO_MAMA, func: Opa0_Xlu1, params: [0x6000948, 0x6000820] }
+- { id: MM_MASK_SUN, func: Opa0_Xlu1, params: [0x6000df0, 0x6000c00] }
+- { id: MM_MASK_BLAST, func: Opa0_Xlu1, params: [0x6000aa8, 0x6000830] }
+- { id: MM_BOTTLE_FAIRY, func: 0x800ef4d4, params: [0x6000b10, 0x60008b8, 0x60007f0, 0x60007b0] }
+- { id: MM_MASK_SCENTS, func: Opa01, params: [0x6000918, 0x6000880] }
+- { id: MM_MASK_CAPTAIN, func: Opa01, params: [0x6000fa0, 0x6000cf0] }
+- { id: MM_DEED_SWAMP, func: Opa01, params: [0x6000a08, 0x6000990] }
+- { id: MM_DEED_MOUNTAIN, func: Opa01, params: [0x6000a08, 0x60009b8] }
+- { id: MM_RUPEE_GOLD, func: Opa10_Xlu32, params: [0x6000620, 0x6000540, 0x6000730, 0x6000600] }
+- { id: MM_DEED_OCEAN, func: Opa01, params: [0x6000a08, 0x60009e0] }
+- { id: MM_MASK_GORON, func: Opa0_Xlu1, params: [0x60010d0, 0x6000ba0] }
+- { id: MM_MASK_ZORA, func: Opa01, params: [0x6000c10, 0x60007d0] }
+- { id: MM_RUPEE_GREEN, func: Rupee, params: [0x6000620, 0x60004a0, 0x6000730, 0x6000560] }
+- { id: MM_RUPEE_BLUE, func: Rupee, params: [0x6000620, 0x60004c0, 0x6000730, 0x6000580] }
+- { id: MM_RUPEE_RED, func: Rupee, params: [0x6000620, 0x60004e0, 0x6000730, 0x60005a0] }
+- { id: MM_RUPEE_PURPLE, func: Opa10_Xlu32, params: [0x6000620, 0x6000500, 0x6000730, 0x60005c0] }
+- { id: MM_RUPEE_SILVER, func: Opa10_Xlu32, params: [0x6000620, 0x6000520, 0x6000730, 0x60005e0] }
+- { id: MM_SWORD_KOKIRI, func: Opa01, params: [0x6000998, 0x6000850] }
+- { id: BOTTLE_POTION, func: CustomBottlePotion, params: [0x60009b0] }
+- { id: MM_ZORA_EGG, func: Opa0_Xlu1, params: [0x6001010, 0x6000cf0] }
+- { id: MM_MOON_TEAR, func: MoonTear, params: [0x6000d78, 0x6000c80] }
+- { id: MM_DEED_LAND, func: Opa01, params: [0x6000a08, 0x6000968] }
+- { id: MM_MASK_DEKU, func: Opa0_Xlu1, params: [0x6000f20, 0x6000b50] }
+- { id: MM_REMAINS_ODOLWA, func: BossRemains, params: [GI_REMAINS_ODOLWA_0] }
+- { id: MM_KEG, func: Opa0_Xlu1, params: [0x6000da0, 0x6000bc0] }
+- { id: MM_GOLD_DUST, func: Opa01, params: [0x6000888, 0x6000880] }
+- { id: MM_BOTTLED_GOLD_DUST, func: Opa0_Xlu1, params: [0x6000d18, 0x60009a0] }
+- { id: MM_UNK8, func: Opa0_Xlu1, params: [0x6000fb8, 0x6000c90] }
+- { id: MM_UNK9, func: Opa0_Xlu1, params: [0x6000d30, 0x60007f0] }
+- { id: MM_SEAHORSE, func: 0x800ef364, params: [0x6000f08, 0x6000b20, 0x6000a90, 0x6000a50] }
+- { id: MM_REMAINS_GOHT, func: BossRemains, params: [GI_REMAINS_GOHT_0] }
+- { id: MM_REMAINS_GYORG, func: BossRemains, params: [GI_REMAINS_GYORG_0] }
+- { id: MM_REMAINS_TWINMOLD, func: BossRemains, params: [GI_REMAINS_TWINMOLD_0] }
+- { id: MM_SWORD_RAZOR, func: Opa01, params: [0x6000c08, 0x6000c00] }
+- { id: MM_SWORD_GILDED, func: Opa01, params: [0x60009e8, 0x60009e0] }
+- { id: MM_GREAT_FAIRY_SWORD, func: Opa0_Xlu1, params: [0x6000ad8, 0x6000940] }
+- { id: MM_MASK_GARO, func: Opa0_Xlu1, params: [0x60008f0, 0x60007a0] }
+- { id: MM_MASK_GREAT_FAIRY, func: Opa0_Xlu1, params: [0x6001000, 0x6000ed0] }
+- { id: MM_MASK_GIBDO, func: Opa0_Xlu1, params: [0x6000f58, 0x6000b30] }
+- { id: MM_ROOM_KEY, func: Opa0_Xlu1, params: [0x6000c20, 0x60007d0] }
+- { id: MM_LETTER_TO_KAFEI, func: Opa0_Xlu1, params: [0x60005f0, 0x60004a0] }
+- { id: MM_PENDANT_OF_MEMORIES, func: Opa0_Xlu1, params: [0x6000c78, 0x6000750] }
+- { id: MM_MAGIC_MUSHROOM, func: Opa0_Xlu1, params: [0x6000958, 0x6000640] }
+- { id: MM_MASK_ROMANI, func: Opa0_Xlu1, params: [0x6000b60, 0x6000a30] }
+- { id: MM_MASK_POSTMAN, func: Opa0_Xlu1, params: [0x6000608, 0x6000570] }
+- { id: MM_MASK_GIANT, func: Opa01, params: [0x6000c00, 0x60008c0] }
+- { id: MM_BOTTLE_CHATEAU, func: Opa0_Xlu1, params: [0x6000e90, 0x6000a50] }
+- { id: MM_PICTOBOX, func: Opa0_Xlu1, params: [0x6000ec8, 0x6000bc0] }
+- { id: MM_MASK_FIERCE_DEITY, func: Opa01, params: [0x6000b90, 0x60009b0] }
+- { id: NOTE, func: CustomNote, params: [0x6000ae0] }
+- { id: OOT_STICK_UPGRADE, func: CustomStick, params: [0x60004d0, 1] }
+- { id: OOT_STICK_UPGRADE2, func: CustomStick, params: [0x60004d0, 2] }
+- { id: OOT_NUT_UPGRADE, func: CustomNut, params: [0x6000e90, 1] }
+- { id: OOT_NUT_UPGRADE2, func: CustomNut, params: [0x6000e90, 2] }
+- { id: MM_SPIN_UPGRADE, func: CustomSpin, params: [0x6000998, 0x6000850] }
+- { id: MM_STRAY_FAIRY, func: CustomStrayFairy, params: [0] }
+- { id: MM_GS_TOKEN_SWAMP, func: CustomGS, params: [1] }
+- { id: MM_GS_TOKEN_OCEAN, func: CustomGS, params: [2] }
+- { id: MM_STRAY_FAIRY_WF, func: CustomStrayFairy, params: [1] }
+- { id: MM_STRAY_FAIRY_SH, func: CustomStrayFairy, params: [2] }
+- { id: MM_STRAY_FAIRY_GB, func: CustomStrayFairy, params: [3] }
+- { id: MM_STRAY_FAIRY_ST, func: CustomStrayFairy, params: [4] }
+- { id: MM_STRAY_FAIRY_TOWN, func: CustomStrayFairy, params: [5] }
+- { id: MILK, func: CustomPotion, params: [3] }
+- { id: MM_CHATEAU, func: CustomPotion, params: [4] }
+- { id: MM_OWL, func: CustomOwl, params: [0x6003770] }
+- { id: TRIFORCE, func: Triforce, params: [TRIFORCE_0] }
+- { id: OOT_RUPEE_SILVER, func: SilverRupee, params: [0] }
+- { id: SOUL, func: CustomGS, params: [3] }
+- { id: SKELETON_KEY, func: CustomSmallKey, params: [0x6000800, 1] }
+- { id: COIN_YELLOW, func: Coin, params: [0x060005e0, 0x06000560, 0x06000768] }
+- { id: COIN_RED, func: Coin, params: [0x060005e0, 0x06000580, 0x06000768] }
+- { id: COIN_GREEN, func: Coin, params: [0x060005e0, 0x060005a0, 0x06000768] }
+- { id: COIN_BLUE, func: Coin, params: [0x060005e0, 0x060005c0, 0x06000768] }
+- { id: MAGIC_UPGRADE, func: MagicJar, params: [0x6000580, 1, 0] }
+- { id: MAGIC_UPGRADE2, func: MagicJar, params: [0x6000ee0, 1, 1] }
+- { id: SOUL_BOSS, func: CustomGS, params: [4] }
+- { id: WALLET3, func: Wallet, params: [0x6001850, 0, 0x6001790, 0x60019a0, 0x60017b0, 0x6001a28, 2, 0x6001ad8] }
+- { id: WALLET4, func: Wallet, params: [0x6001850, 1, 0x60017f0, 0x60019a0, 0x6001810, 0x6001a28, 3, 0x6001ad8] }
+- { id: WALLET5, func: Wallet, params: [0x6001850, 1, 0x60017f0, 0x60019a0, 0x6001810, 0x6001a28, 4, 0x6001ad8] }
+- { id: OOT_SILVER_POUCH, func: Wallet, params: [0x6001850, 2, 0x6001790, 0x60019a0, 0x60017b0, 0x6001a28, 4, 0x6001ad8] }
+- { id: OOT_RUPEE_MAGICAL, func: MagicalRupee, params: [0] }
+- { id: BUTTON_A, func: Button, params: [0, 0, BTN_A_0] }
+- { id: BUTTON_C_RIGHT, func: Button, params: [1, 0, BTN_C_HORIZONTAL_0] }
+- { id: BUTTON_C_LEFT, func: Button, params: [1, 1, BTN_C_HORIZONTAL_0] }
+- { id: BUTTON_C_UP, func: Button, params: [1, 0, BTN_C_VERTICAL_0] }
+- { id: BUTTON_C_DOWN, func: Button, params: [1, 1, BTN_C_VERTICAL_0] }
+- { id: SOUL_NPC, func: CustomGS, params: [5] }

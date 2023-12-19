@@ -1,5 +1,5 @@
 import path from 'path';
-import { DATA_ENTRANCES, DATA_GI, DATA_NPC, DATA_SCENES } from './data';
+import { DATA_DRAWGI, DATA_ENTRANCES, DATA_GI, DATA_NPC, DATA_SCENES } from './data';
 import { Monitor } from './monitor';
 import { PATCH_GROUP_VALUES } from './patch-build/group';
 import { CONFVARS_VALUES } from './confvars';
@@ -93,10 +93,35 @@ async function genGI() {
   await cgSource.emit();
 }
 
+async function genDrawGI() {
+  if (process.env.ROLLUP)
+    return;
+
+  /* Header */
+  const cgHeader = new CodeGen(path.resolve('build', 'include', 'combo', 'drawgi_data.h'), "GENERATED_DRAWGI_DATA_H");
+  cgHeader.define('DRAWGI_NONE', 0);
+  for (const dgi of Object.values(DATA_DRAWGI)) {
+    cgHeader.define(`DRAWGI_${dgi.id}`, dgi.index);
+  }
+  await cgHeader.emit();
+
+  /* Source */
+  const cgSource = new CodeGen(path.resolve('build', 'src', 'common', 'drawgi_data.c'));
+  cgSource.include('combo.h');
+  cgSource.include('combo/custom.h');
+  cgSource.raw('const DrawGi kDrawGi[] = {');
+  for (const dgi of Object.values(DATA_DRAWGI)) {
+    cgSource.raw(`    { (void*)${dgi.func}, { ${dgi.params.join(', ')} } },`);
+  }
+  cgSource.raw('};');
+  await cgSource.emit();
+}
+
 export const codegen = async (monitor: Monitor) => {
   monitor.log("Codegen");
   return Promise.all([
     genGI(),
+    genDrawGI(),
     codegenFile(DATA_SCENES,          "SCE",      "scenes.h",       "GENERATED_SCENES_H"),
     codegenFile(DATA_NPC,             "NPC",      "npc.h",          "GENERATED_NPC_H"),
     codegenFile(DATA_ENTRANCES,       "ENTR",     "entrances.h",    "GENERATED_ENTRANCES_H"),

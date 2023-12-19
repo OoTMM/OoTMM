@@ -97,6 +97,42 @@ for (let i = 0; i < rawGi.length; ++i) {
   DATA_GI[id] = { index, id, item, flags, draw, drawParam, object, name, addFunc, addParam };
 }
 
+import rawDrawGi from '../../data/drawgi.yml';
+
+type DataDrawGi = {
+  index: number;
+  id: string;
+  func: string;
+  params: string[];
+};
+
+export let DATA_DRAWGI: {[k: string]: DataDrawGi} = {};
+for (let i = 0; i < rawDrawGi.length; ++i) {
+  const v = rawDrawGi[i];
+  const index = i + 1;
+  const id = v.id;
+  let func: string;
+  const params: string[] = [];
+
+  if (typeof v.func === 'string') {
+    func = `DrawGi_${v.func}`;
+  } else {
+    func = `0x${v.func.toString(16)}`;
+  }
+
+  if (v.params) {
+    for (const p of v.params) {
+      if (typeof p === 'string') {
+        params.push(`CUSTOM_OBJECT_${p}`);
+      } else {
+        params.push(`0x${p.toString(16)}`);
+      }
+    }
+  }
+
+  DATA_DRAWGI[id] = { index, id, func, params };
+}
+
 import worldOotOverworld from '../../data/oot/world/overworld.yml';
 import worldOotBoss from '../../data/oot/world/boss.yml';
 import worldOotDekuTree from '../../data/oot/world/deku_tree.yml';
