@@ -358,15 +358,18 @@ static int isItemAmbiguous(s16 gi)
     case GI_MM_BUTTON_C_DOWN:
     case GI_MM_BUTTON_C_UP:
         return !comboConfig(CFG_SHARED_OCARINA_BUTTONS);
+    case GI_OOT_SHIELD_HYLIAN:
+    case GI_OOT_SHIELD_MIRROR:
+    case GI_MM_SHIELD_HERO:
+    case GI_MM_SHIELD_MIRROR:
+        return !comboConfig(CFG_SHARED_SHIELDS);
     case GI_OOT_BOMBCHU_10:
     case GI_OOT_MAGIC_BEAN:
     case GI_OOT_BOTTLE_EMPTY:
     case GI_OOT_BOTTLE_MILK:
     case GI_OOT_SWORD_KOKIRI:
-    case GI_OOT_SHIELD_HYLIAN:
     case GI_OOT_BOMBCHU_5:
     case GI_OOT_BOMBCHU_20:
-    case GI_OOT_SHIELD_MIRROR:
     case GI_OOT_MILK:
     case GI_OOT_POTION_RED:
     case GI_OOT_POTION_GREEN:
@@ -384,12 +387,10 @@ static int isItemAmbiguous(s16 gi)
     case GI_MM_BOTTLE_POTION_BLUE:
     case GI_MM_BOTTLE_EMPTY:
     case GI_MM_SWORD_KOKIRI:
-    case GI_MM_SHIELD_HERO:
     case GI_MM_BOMBCHU_20:
     case GI_MM_BOMBCHU_10:
     case GI_MM_BOMBCHU_5:
     case GI_MM_BOTTLE_MILK:
-    case GI_MM_SHIELD_MIRROR:
     case GI_MM_MILK:
     case GI_MM_POTION_RED:
     case GI_MM_POTION_GREEN:
@@ -631,7 +632,7 @@ void comboTextAppendItemNameEx(char** b, s16 gi, int flags, int importance)
         case GI_OOT_PROGRESSIVE_SHIELD_DEKU:
         case GI_MM_PROGRESSIVE_SHIELD_HERO:
             itemName = "a " TEXT_C1 "Progressive Shield";
-            ambiguous = 1;
+            ambiguous = !comboConfig(CFG_SHARED_SHIELDS);
             break;
         case GI_OOT_OCARINA_FAIRY:
         case GI_MM_OCARINA_FAIRY:

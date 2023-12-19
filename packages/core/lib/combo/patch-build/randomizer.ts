@@ -75,6 +75,9 @@ const SHARED_ITEMS_OOT = new Map([
   ['SHARED_HEART_CONTAINER',  'OOT_HEART_CONTAINER'],
   ['SHARED_RECOVERY_HEART',   'OOT_RECOVERY_HEART'],
   ['SHARED_DEFENSE_UPGRADE',  'OOT_DEFENSE_UPGRADE'],
+  ['SHARED_SHIELD_HYLIAN',    'OOT_SHIELD_HYLIAN'],
+  ['SHARED_SHIELD_MIRROR',    'OOT_SHIELD_MIRROR'],
+  ['SHARED_SHIELD',           'OOT_SHIELD'],
 ]);
 
 const SHARED_ITEMS_MM = new Map([
@@ -122,6 +125,9 @@ const SHARED_ITEMS_MM = new Map([
   ['SHARED_HEART_CONTAINER',  'MM_HEART_CONTAINER'],
   ['SHARED_RECOVERY_HEART',   'MM_RECOVERY_HEART'],
   ['SHARED_DEFENSE_UPGRADE',  'MM_DEFENSE_UPGRADE'],
+  ['SHARED_SHIELD_HYLIAN',    'MM_SHIELD_HERO'],
+  ['SHARED_SHIELD_MIRROR',    'MM_SHIELD_MIRROR'],
+  ['SHARED_SHIELD',           'OOT_SHIELD'], /* Progressive */
 ]);
 
 const SHARED_ITEMS = {
@@ -661,6 +667,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     SHARED_HEALTH: settings.sharedHealth,
     SHARED_SOULS_ENEMY: settings.sharedSoulsEnemy,
     SHARED_OCARINA_BUTTONS: settings.sharedOcarinaButtons,
+    SHARED_SHIELDS: settings.sharedShields,
     OOT_CROSS_WARP: settings.crossWarpOot,
     MM_CROSS_WARP: settings.crossWarpMm !== 'none',
     MM_CROSS_WARP_ADULT: settings.crossWarpMm === 'full',

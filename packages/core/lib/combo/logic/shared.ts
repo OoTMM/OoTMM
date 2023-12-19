@@ -46,5 +46,11 @@ const OCARINA_BUTTONS: ItemSharedDef[] = [
   { shared: Items.SHARED_BUTTON_C_DOWN, oot: Items.OOT_BUTTON_C_DOWN, mm: Items.MM_BUTTON_C_DOWN },
 ];
 
+/* Junk shields handled separately */
+const SHIELDS: ItemSharedDef[] = [
+  { shared: Items.SHARED_SHIELD, oot: Items.OOT_SHIELD, mm: Items.MM_SHIELD },
+  { shared: Items.SHARED_SHIELD_MIRROR, oot: Items.OOT_SHIELD_MIRROR, mm: Items.MM_SHIELD_MIRROR },
+];
 
-export const SharedItemGroups = { SOULS_ENEMY, SKELETON_KEY, OCARINA_BUTTONS };
+
+export const SharedItemGroups = { SOULS_ENEMY, SKELETON_KEY, OCARINA_BUTTONS, SHIELDS };

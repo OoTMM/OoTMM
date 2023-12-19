@@ -1244,6 +1244,13 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false
 }, {
+  key: 'sharedShields',
+  name: 'Shared Shields',
+  category: 'items.shared',
+  type: 'boolean',
+  default: false,
+  cond: (s: any) => s.progressiveShieldsOot === s.progressiveShieldsMm,
+}, {
   key: 'sharedSoulsEnemy',
   name: 'Shared Enemy Souls',
   category: 'items.shared',

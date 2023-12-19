@@ -656,6 +656,10 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   OOT_FISHING_POND_ADULT_LOACH_34LBS: 'Adult Loach (34 pounds)',
   OOT_FISHING_POND_ADULT_LOACH_35LBS: 'Adult Loach (35 pounds)',
   OOT_FISHING_POND_ADULT_LOACH_36LBS: 'Adult Loach (36 pounds)',
+  SHARED_SHIELD_HYLIAN: "Hylian/Hero Shield",
+  SHARED_SHIELD_MIRROR: "Mirror Shield",
+  SHARED_SHIELD: "Progressive Shield",
+
   NOTHING: 'Nothing',
 };
 

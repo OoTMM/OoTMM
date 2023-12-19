@@ -230,6 +230,7 @@ export const JUNK = new Set([
   Items.OOT_STICKS_10,
   Items.OOT_SHIELD_DEKU,
   Items.OOT_SHIELD_HYLIAN,
+  Items.SHARED_SHIELD_HYLIAN,
   Items.OOT_BOMBCHU_5,
   Items.OOT_BOMBCHU_10,
   Items.OOT_BOMBCHU_20,
@@ -306,6 +307,7 @@ export const CONSUMABLES = new Set([
   Items.OOT_BOMBCHU_20,
   Items.OOT_SHIELD_DEKU,
   Items.OOT_SHIELD_HYLIAN,
+  Items.SHARED_SHIELD_HYLIAN,
   Items.OOT_MILK,
   Items.OOT_POTION_RED,
   Items.OOT_POTION_GREEN,
@@ -371,6 +373,7 @@ export const CRITICAL_RENEWABLES = new Set([
   Items.MM_MILK,
   Items.OOT_SHIELD_DEKU,
   Items.OOT_SHIELD_HYLIAN,
+  Items.SHARED_SHIELD_HYLIAN,
 ]);
 
 export const TINGLE_MAPS = new Set([
@@ -747,6 +750,9 @@ export const REQUIRED = new Set([
   Items.OOT_POCKET_EGG,
   Items.OOT_SHIELD_DEKU,
   Items.OOT_SHIELD_HYLIAN,
+  Items.SHARED_SHIELD,
+  Items.SHARED_SHIELD_HYLIAN,
+  Items.SHARED_SHIELD_MIRROR,
   Items.OOT_GS_TOKEN,
   Items.OOT_ARROW_FIRE,
   Items.OOT_ARROW_ICE,

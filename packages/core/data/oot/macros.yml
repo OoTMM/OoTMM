@@ -90,9 +90,12 @@
 "can_use_sword": "can_use_sword_kokiri || can_use_sword_master || can_use_sword_goron"
 
 # Shields
-"has_shield": "renewable(SHIELD_HYLIAN) || has_mirror_shield || (age_shield_child && renewable(SHIELD_DEKU))"
-"has_shield_for_scrubs": "(is_adult && renewable(SHIELD_HYLIAN)) || (age_shield_child && renewable(SHIELD_DEKU))"
-"has_mirror_shield": "age_shield_adult && cond(setting(progressiveShieldsOot, progressive), has(SHIELD, 3), has(SHIELD_MIRROR))"
+"has_shield_hylian": "cond(setting(sharedShields), renewable(SHARED_SHIELD_HYLIAN), renewable(SHIELD_HYLIAN))"
+"has_shield": "has_shield_hylian || has_mirror_shield || (age_shield_child && renewable(SHIELD_DEKU))"
+"has_shield_for_scrubs": "(is_adult && has_shield_hylian) || (age_shield_child && renewable(SHIELD_DEKU))"
+"has_mirror_shield_raw_nonshared": "cond(setting(progressiveShieldsOot, progressive), has(SHIELD, 3), has(SHIELD_MIRROR))"
+"has_mirror_shield_raw_shared": "cond(setting(progressiveShieldsOot, progressive), has(SHARED_SHIELD, 3), has(SHARED_SHIELD_MIRROR))"
+"has_mirror_shield": "age_shield_adult && cond(setting(sharedShields), has_mirror_shield_raw_shared, has_mirror_shield_raw_nonshared)"
 "has_one_hand_shield": "has_shield_for_scrubs || has_mirror_shield"
 
 #Equipment Use Macros

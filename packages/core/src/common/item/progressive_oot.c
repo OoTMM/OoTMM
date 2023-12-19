@@ -87,7 +87,19 @@ static s32 progressiveShield(void)
     if (!(gOotExtraItems.shield & EQ_OOT_SHIELD_DEKU))
         return GI_OOT_PROGRESSIVE_SHIELD_DEKU;
     if (!(gOotExtraItems.shield & EQ_OOT_SHIELD_HYLIAN))
+    {
+#if defined(GAME_MM)
+        if (comboConfig(CFG_SHARED_SHIELDS))
+            return GI_MM_PROGRESSIVE_SHIELD_HERO;
+#endif
         return GI_OOT_PROGRESSIVE_SHIELD_HYLIAN;
+    }
+
+#if defined(GAME_MM)
+    if (comboConfig(CFG_SHARED_SHIELDS))
+        return GI_MM_SHIELD_MIRROR;
+#endif
+
     return GI_OOT_SHIELD_MIRROR;
 }
 
