@@ -582,6 +582,7 @@ static void addSeeds(u8 count)
         return;
     max = kMaxSeeds[gOotSave.inventory.upgrades.bulletBag];
     addAmmoOot(ITS_OOT_SLINGSHOT, ITEM_OOT_SLINGSHOT, max, count);
+    BITMAP16_SET(gOotSave.eventsItem, EV_OOT_ITEM_DEKU_SEEDS);
 }
 
 static int addItemSeeds(GameState_Play* play, u8 itemId, s16 gi, u16 param)
