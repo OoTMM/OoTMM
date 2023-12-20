@@ -8,7 +8,7 @@ static void soulInfosOot(u8** bm, int* index, s16 gi)
     u16 param;
     u8 type;
 
-    param = kAddItemParams[gi];
+    param = kAddItemParams[gi - 1];
     *index = param & 0xfff;
     type = param >> 12;
 
@@ -26,7 +26,7 @@ static void soulInfosMm(u8** bm, int* index, s16 gi)
     u16 param;
     u8 type;
 
-    param = kAddItemParams[gi];
+    param = kAddItemParams[gi - 1];
     *index = param & 0xfff;
     type = param >> 12;
 
