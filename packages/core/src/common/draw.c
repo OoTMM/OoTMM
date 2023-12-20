@@ -28,6 +28,9 @@ static u8 paramForGi(s16 gi)
 
 static void drawGiParamDrawId(GameState_Play* play, u8 drawGiId, u8 param)
 {
+    if (drawGiId == DRAWGI_NONE)
+        return;
+
     kDrawGi[drawGiId - 1].func(play, drawGiId - 1, param);
 }
 
