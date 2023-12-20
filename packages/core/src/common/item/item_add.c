@@ -1458,7 +1458,7 @@ static void fillMagicOot(GameState_Play* play)
 
     /* No effect - add the magic directly */
     gOotSave.playerData.magicSize = level;
-    gSaveContext.magicFillTarget = max;
+    gOotSave.playerData.magicAmount = max;
 }
 
 static void fillMagicMm(GameState_Play* play)
