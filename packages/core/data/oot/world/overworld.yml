@@ -475,7 +475,7 @@
   events:
     RUPEES: "true"
   locations:
-    "Market Pot House Big Poes": "is_adult && event(BIG_POE) && soul_npc(SOUL_NPC_POE_COLLECTOR)"
+    "Market Pot House Big Poes": "is_adult && has_big_poe && soul_npc(SOUL_NPC_POE_COLLECTOR)"
     "Market Pot House GS": "is_child"
     "Market Pot House Child Pot Ground 1": "is_child"
     "Market Pot House Child Pot Ground 2": "is_child"

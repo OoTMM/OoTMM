@@ -1154,6 +1154,7 @@ void DrawGi_CustomBottleFairy(GameState_Play* play, s16 drawGiId, u8 param)
     static const u32 kColors[] = {
         0xcd69cdff,
         0x1a082eff,
+        0xcdcd00ff,
     };
 
     const DrawGi* drawGi;

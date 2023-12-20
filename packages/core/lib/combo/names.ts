@@ -319,7 +319,7 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   OOT_POACHER_SAW: "Poacher's Saw",
   OOT_POCKET_CUCCO: "Pocket Cucco",
   OOT_POCKET_EGG: "Pocket Egg",
-  OOT_POE: "Poe Spirit (OoT)",
+  OOT_POE: "Poe (OoT)",
   OOT_POTION_BLUE: "Blue Potion (OoT)",
   OOT_POTION_GREEN: "Green Potion (OoT)",
   OOT_POTION_RED: "Red Potion (OoT)",
@@ -663,6 +663,11 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   MM_BOTTLE_FAIRY: "Bottled Fairy (MM)",
   OOT_BOTTLE_POE: "Bottled Poe (OoT)",
   MM_BOTTLE_POE: "Bottled Poe (MM)",
+  OOT_BOTTLE_BIG_POE: "Bottled Big Poe (OoT)",
+  MM_BOTTLE_BIG_POE: "Bottled Big Poe (MM)",
+  MM_POE: "Poe (MM)",
+  OOT_BIG_POE: "Big Poe (OoT)",
+  MM_BIG_POE: "Big Poe (MM)",
   NOTHING: 'Nothing',
 };
 

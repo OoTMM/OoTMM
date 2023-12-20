@@ -379,10 +379,12 @@ static int isItemAmbiguous(s16 gi)
     case GI_OOT_BOTTLE_POTION_BLUE:
     case GI_OOT_BOTTLE_FAIRY:
     case GI_OOT_BOTTLE_POE:
+    case GI_OOT_BOTTLE_BIG_POE:
     case GI_OOT_FAIRY:
     case GI_OOT_BUG:
     case GI_OOT_FISH:
     case GI_OOT_POE:
+    case GI_OOT_BIG_POE:
     case GI_MM_BOMBCHU:
     case GI_MM_MAGIC_BEAN:
     case GI_MM_BOTTLE_POTION_RED:
@@ -390,6 +392,7 @@ static int isItemAmbiguous(s16 gi)
     case GI_MM_BOTTLE_POTION_BLUE:
     case GI_MM_BOTTLE_FAIRY:
     case GI_MM_BOTTLE_POE:
+    case GI_MM_BOTTLE_BIG_POE:
     case GI_MM_BOTTLE_EMPTY:
     case GI_MM_SWORD_KOKIRI:
     case GI_MM_BOMBCHU_20:
@@ -404,6 +407,7 @@ static int isItemAmbiguous(s16 gi)
     case GI_MM_BUGS:
     case GI_MM_FISH:
     case GI_MM_POE:
+    case GI_MM_BIG_POE:
         return 1;
     default:
         return 0;

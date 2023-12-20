@@ -65,6 +65,7 @@ int isItemBuyable(s16 gi)
     case GI_OOT_BUG:
     case GI_OOT_BLUE_FIRE:
     case GI_OOT_POE:
+    case GI_OOT_BIG_POE:
     case GI_OOT_FAIRY:
     case GI_OOT_MILK:
         return hasFreeBottleOot();
@@ -112,6 +113,7 @@ int isItemBuyable(s16 gi)
     case GI_MM_BUGS:
     case GI_MM_FISH:
     case GI_MM_POE:
+    case GI_MM_BIG_POE:
         return hasFreeBottleMm();
     case GI_MM_SHIELD_HERO:
         return gMmSave.itemEquips.shield == 0;

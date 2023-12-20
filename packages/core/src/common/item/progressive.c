@@ -112,6 +112,12 @@ s16 comboRenewable(s16 gi, s16 def)
     case GI_MM_BOTTLE_POE:
         gi = GI_MM_POE;
         break;
+    case GI_OOT_BOTTLE_BIG_POE:
+        gi = GI_OOT_BIG_POE;
+        break;
+    case GI_MM_BOTTLE_BIG_POE:
+        gi = GI_MM_BIG_POE;
+        break;
     default:
         return def;
     }

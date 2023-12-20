@@ -348,6 +348,7 @@
 - { id: OOT_BOTTLE_POTION_BLUE, item: OOT_POTION_BLUE, add: OOT_BOTTLE_NEW, flags: 0x80, draw: [BOTTLE_POTION, 0x02], object: [mm, 0x0196], name:  "a <C1>bottle of Blue Potion" }
 - { id: OOT_BOTTLE_FAIRY, item: OOT_FAIRY, add: OOT_BOTTLE_NEW, flags: 0x80, draw: [MM_BOTTLE_FAIRY, 0], object: [mm, 0x0272], name:  "a <C1>bottled Fairy" }
 - { id: OOT_BOTTLE_POE, item: OOT_POE, add: OOT_BOTTLE_NEW, flags: 0x80, draw: [MM_BOTTLE_FAIRY, 1], object: [mm, 0x0272], name:  "a <C1>bottled Poe" }
+- { id: OOT_BOTTLE_BIG_POE, item: OOT_BIG_POE, add: OOT_BOTTLE_NEW, flags: 0x80, draw: [MM_BOTTLE_FAIRY, 2], object: [mm, 0x0272], name:  "a <C1>bottled Big Poe" }
 - { id: OOT_FISHING_POND_CHILD_FISH_2LBS,  add: [POND_FISH, 0x0002], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Fish (2 pounds)" }
 - { id: OOT_FISHING_POND_CHILD_FISH_3LBS,  add: [POND_FISH, 0x0003], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Fish (3 pounds)" }
 - { id: OOT_FISHING_POND_CHILD_FISH_4LBS,  add: [POND_FISH, 0x0004], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Fish (4 pounds)" }
@@ -644,5 +645,6 @@
 - { id: MM_BOTTLE_FAIRY, item: MM_FAIRY, add: MM_BOTTLE_NEW, flags: 0x80, draw: [MM_BOTTLE_FAIRY, 0], object: [mm, 0x0272], name:  "a <C1>bottled Fairy" }
 - { id: MM_POE, item: MM_POE, add: MM_BOTTLE_REFILL, flags: 0x80, draw: POE, object: [oot, 0x0176], name: "a <C0>Poe" }
 - { id: MM_BOTTLE_POE, item: MM_POE, add: MM_BOTTLE_NEW, flags: 0x80, draw: [MM_BOTTLE_FAIRY, 1], object: [mm, 0x0272], name:  "a <C1>bottled Poe" }
+- { id: MM_BOTTLE_BIG_POE, item: MM_BIG_POE, add: MM_BOTTLE_NEW, flags: 0x80, draw: [MM_BOTTLE_FAIRY, 2], object: [mm, 0x0272], name:  "a <C1>bottled Big Poe" }
 - { id: NOTHING,  flags: 0xa0, name: "<C0>Nothing" }
 - { id: MM_SCOOP, flags: 0x00 } # Scoop, MUST be the last entry
