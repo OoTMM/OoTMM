@@ -76,6 +76,7 @@ u32     GetCollectibleFlag(GameState_Play* play, int flag);
 void    SetCollectibleFlag(GameState_Play* play, int flag);
 u32     GetSwitchFlag(GameState_Play* play, int flag);
 u32     SetSwitchFlag(GameState_Play* play, int flag);
+void    ClearSwitchFlag(GameState_Play* play, int flag);
 void    SetRoomClear(GameState_Play* play, int flag);
 
 #if defined(GAME_MM)

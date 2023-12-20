@@ -97,6 +97,7 @@ SetCollectibleFlag = 0x8002071c;
 GetCollectibleFlag = 0x800206e8;
 GetSwitchFlag = 0x8002049c;
 SetSwitchFlag = 0x800204d0;
+ClearSwitchFlag = 0x80020510;
 
 DisplaceTexture = 0x8007eb84;
 ConvertMatrix = 0x800ab6bc;

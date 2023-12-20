@@ -2,6 +2,7 @@
 #include <combo/custom.h>
 #include <combo/menu.h>
 #include <combo/dma.h>
+#include <combo/item.h>
 
 static int checkItemToggle(GameState_Play* play)
 {
@@ -39,6 +40,22 @@ static int checkItemToggle(GameState_Play* play)
         ret = 1;
         if (press)
             comboToggleTradeChild();
+    }
+
+    if (p->item_cursor >= ITS_OOT_BOTTLE && p->item_cursor <= ITS_OOT_BOTTLE4 && gSave.inventory.items[p->item_cursor] == ITEM_OOT_BIG_POE)
+    {
+        ret = 1;
+        if (press)
+        {
+            gSave.inventory.items[p->item_cursor] = ITEM_OOT_BOTTLE_EMPTY;
+            reloadSlotOot(play, p->item_cursor);
+
+            /* Reset one big poe */
+            if (play->sceneId == SCE_OOT_HYRULE_FIELD)
+                ClearSwitchFlag(play, 0x18);
+            else
+                gSave.perm[SCE_OOT_HYRULE_FIELD].switches &= ~(1 << 0x18);
+        }
     }
 
     if (ret && press)
