@@ -15,6 +15,7 @@ const BROKEN_ACTORS_CHECKS = [
   'OOT Dodongo Cavern Grass East Corridor Side Room',
   'OOT Lake Hylia Pot 1',
   'OOT Lake Hylia Pot 2',
+  'OOT Lake Hylia Grass 5',
   'OOT Hyrule Castle Pot 1',
   'OOT Hyrule Castle Pot 2',
   'OOT MQ Dodongo Cavern Grass Vanilla Bomb Bag Room',
