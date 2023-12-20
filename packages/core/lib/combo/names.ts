@@ -661,6 +661,8 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   SHARED_SHIELD: "Progressive Shield",
   OOT_BOTTLE_FAIRY: "Bottled Fairy (OoT)",
   MM_BOTTLE_FAIRY: "Bottled Fairy (MM)",
+  OOT_BOTTLE_POE: "Bottled Poe (OoT)",
+  MM_BOTTLE_POE: "Bottled Poe (MM)",
   NOTHING: 'Nothing',
 };
 

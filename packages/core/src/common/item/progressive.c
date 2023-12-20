@@ -86,6 +86,7 @@ s16 comboRenewable(s16 gi, s16 def)
     case GI_OOT_BUG:
     case GI_OOT_BLUE_FIRE:
     case GI_OOT_POE:
+    case GI_MM_POE:
         break;
     case GI_OOT_BOTTLE_MILK:
         gi = GI_OOT_MILK;
@@ -104,6 +105,12 @@ s16 comboRenewable(s16 gi, s16 def)
         break;
     case GI_MM_BOTTLE_FAIRY:
         gi = GI_MM_FAIRY;
+        break;
+    case GI_OOT_BOTTLE_POE:
+        gi = GI_OOT_POE;
+        break;
+    case GI_MM_BOTTLE_POE:
+        gi = GI_MM_POE;
         break;
     default:
         return def;

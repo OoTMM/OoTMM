@@ -1148,3 +1148,30 @@ void DrawGi_Button(GameState_Play* play, s16 index)
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[2]);
     CLOSE_DISPS();
 }
+
+void DrawGi_CustomBottleFairy(GameState_Play* play, s16 drawGiId, u8 param)
+{
+    static const u32 kColors[] = {
+        0xcd69cdff,
+        0x1a082eff,
+    };
+
+    const DrawGi* drawGi;
+    drawGi = &kDrawGi[drawGiId];
+    u8 c[4];
+
+    OPEN_DISPS(play->gs.gfx);
+    InitListPolyOpa(play->gs.gfx);
+    InitListPolyXlu(play->gs.gfx);
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
+    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[1]);
+    ModelViewUnkTransform((float*)((char*)play + kMatTransformOffset));
+    ModelViewTranslate(0.f, -8.f, 0.f, MAT_MUL);
+    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    color4(&c[0], &c[1], &c[2], &c[3], kColors[param]);
+    gDPSetEnvColor(POLY_XLU_DISP++, c[0], c[1], c[2], c[3]);
+    gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[2]);
+    CLOSE_DISPS();
+}

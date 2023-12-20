@@ -61,7 +61,7 @@
 "can_longshot": "can_hookshot_n(2)"
 "can_boomerang": "age_boomerang && has(BOOMERANG)"
 "can_hammer": "age_hammer && has(HAMMER)"
-"has_bottle": "has(BOTTLE_EMPTY) || has(BOTTLE_MILK) || has(BOTTLE_POTION_RED) || has(BOTTLE_POTION_GREEN) || has(BOTTLE_POTION_BLUE) || event(KING_ZORA_LETTER) || has(BOTTLE_FAIRY)"
+"has_bottle": "has(BOTTLE_EMPTY) || has(BOTTLE_MILK) || has(BOTTLE_POTION_RED) || has(BOTTLE_POTION_GREEN) || has(BOTTLE_POTION_BLUE) || event(KING_ZORA_LETTER) || has(BOTTLE_FAIRY) || has(BOTTLE_POE)"
 "can_use_beans": "is_child && has(MAGIC_BEAN)"
 
 # Age macros
