@@ -59,6 +59,7 @@ DrawGi_Poe                  = 0x800ee400;
 DrawGi_Potion               = 0x800eea48;
 DrawGi_Rupee                = 0x800efab8;
 DrawGi_MoonTear             = 0x800ef65c;
+DrawGi_BottleFairy          = 0x800ef4d4;
 
 InitListPolyOpa = 0x8012c28c;
 InitListPolyXlu = 0x8012c2dc;

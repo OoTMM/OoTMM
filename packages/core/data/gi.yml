@@ -346,6 +346,7 @@
 - { id: OOT_BOTTLE_POTION_RED, item: OOT_POTION_RED, add: OOT_BOTTLE_NEW, flags: 0x80, draw: BOTTLE_POTION, object: [mm, 0x0196], name:  "a <C1>bottle of Red Potion" }
 - { id: OOT_BOTTLE_POTION_GREEN, item: OOT_POTION_GREEN, add: OOT_BOTTLE_NEW, flags: 0x80, draw: [BOTTLE_POTION, 0x01], object: [mm, 0x0196], name:  "a <C1>bottle of Green Potion" }
 - { id: OOT_BOTTLE_POTION_BLUE, item: OOT_POTION_BLUE, add: OOT_BOTTLE_NEW, flags: 0x80, draw: [BOTTLE_POTION, 0x02], object: [mm, 0x0196], name:  "a <C1>bottle of Blue Potion" }
+- { id: OOT_BOTTLE_FAIRY, item: OOT_FAIRY, add: OOT_BOTTLE_NEW, flags: 0x80, draw: MM_BOTTLE_FAIRY, object: [mm, 0x0272], name:  "a <C1>bottled Fairy" }
 - { id: OOT_FISHING_POND_CHILD_FISH_2LBS,  add: [POND_FISH, 0x0002], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Fish (2 pounds)" }
 - { id: OOT_FISHING_POND_CHILD_FISH_3LBS,  add: [POND_FISH, 0x0003], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Fish (3 pounds)" }
 - { id: OOT_FISHING_POND_CHILD_FISH_4LBS,  add: [POND_FISH, 0x0004], flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C1>Child Fish (4 pounds)" }
@@ -639,5 +640,6 @@
 - { id: MM_BUTTON_C_DOWN, add: [MM_BUTTON, 4], flags: 0xa0, draw: BUTTON_C_DOWN, object: BTN_C_VERTICAL, name: "the <C1>C-Down Button" }
 - { id: MM_BOTTLE_POTION_GREEN, item: MM_POTION_GREEN, add: MM_BOTTLE_NEW, flags: 0xa0, draw: [BOTTLE_POTION, 0x01], object: [mm, 0x0196], name: "a <C1>bottle of Green Potion" }
 - { id: MM_BOTTLE_POTION_BLUE, item: MM_POTION_BLUE, add: MM_BOTTLE_NEW, flags: 0xa0, draw: [BOTTLE_POTION, 0x02], object: [mm, 0x0196], name: "a <C1>bottle of Blue Potion" }
+- { id: MM_BOTTLE_FAIRY, item: MM_FAIRY, add: MM_BOTTLE_NEW, flags: 0x80, draw: MM_BOTTLE_FAIRY, object: [mm, 0x0272], name:  "a <C1>bottled Fairy" }
 - { id: NOTHING,  flags: 0xa0, name: "<C0>Nothing" }
 - { id: MM_SCOOP, flags: 0x00 } # Scoop, MUST be the last entry

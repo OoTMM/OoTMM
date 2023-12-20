@@ -377,6 +377,7 @@ static int isItemAmbiguous(s16 gi)
     case GI_OOT_BOTTLE_POTION_RED:
     case GI_OOT_BOTTLE_POTION_GREEN:
     case GI_OOT_BOTTLE_POTION_BLUE:
+    case GI_OOT_BOTTLE_FAIRY:
     case GI_OOT_FAIRY:
     case GI_OOT_BUG:
     case GI_OOT_FISH:
@@ -385,6 +386,7 @@ static int isItemAmbiguous(s16 gi)
     case GI_MM_BOTTLE_POTION_RED:
     case GI_MM_BOTTLE_POTION_GREEN:
     case GI_MM_BOTTLE_POTION_BLUE:
+    case GI_MM_BOTTLE_FAIRY:
     case GI_MM_BOTTLE_EMPTY:
     case GI_MM_SWORD_KOKIRI:
     case GI_MM_BOMBCHU_20:

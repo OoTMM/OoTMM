@@ -249,6 +249,7 @@ void DrawGi_Scale(GameState_Play*, s16);
 void DrawGi_SoldOut(GameState_Play*, s16);
 void DrawGi_Spell(GameState_Play*, s16);
 void DrawGi_MoonTear(GameState_Play*, s16);
+void DrawGi_BottleFairy(GameState_Play*, s16);
 
 void SpawnRoomActors(GameState_Play* play, int id);
 

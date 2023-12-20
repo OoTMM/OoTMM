@@ -125,7 +125,7 @@
 - { id: MM_LETTER_TO_MAMA, func: Opa0_Xlu1, params: [0x6000948, 0x6000820] }
 - { id: MM_MASK_SUN, func: Opa0_Xlu1, params: [0x6000df0, 0x6000c00] }
 - { id: MM_MASK_BLAST, func: Opa0_Xlu1, params: [0x6000aa8, 0x6000830] }
-- { id: MM_BOTTLE_FAIRY, func: 0x800ef4d4, params: [0x6000b10, 0x60008b8, 0x60007f0, 0x60007b0] }
+- { id: MM_BOTTLE_FAIRY, func: BottleFairy, params: [0x6000b10, 0x60008b8, 0x60007f0, 0x60007b0] }
 - { id: MM_MASK_SCENTS, func: Opa01, params: [0x6000918, 0x6000880] }
 - { id: MM_MASK_CAPTAIN, func: Opa01, params: [0x6000fa0, 0x6000cf0] }
 - { id: MM_DEED_SWAMP, func: Opa01, params: [0x6000a08, 0x6000990] }

@@ -659,7 +659,8 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   SHARED_SHIELD_HYLIAN: "Hylian/Hero Shield",
   SHARED_SHIELD_MIRROR: "Mirror Shield",
   SHARED_SHIELD: "Progressive Shield",
-
+  OOT_BOTTLE_FAIRY: "Bottled Fairy (OoT)",
+  MM_BOTTLE_FAIRY: "Bottled Fairy (MM)",
   NOTHING: 'Nothing',
 };
 

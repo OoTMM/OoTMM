@@ -99,6 +99,12 @@ s16 comboRenewable(s16 gi, s16 def)
     case GI_OOT_BOTTLE_POTION_BLUE:
         gi = GI_OOT_POTION_BLUE;
         break;
+    case GI_OOT_BOTTLE_FAIRY:
+        gi = GI_OOT_FAIRY;
+        break;
+    case GI_MM_BOTTLE_FAIRY:
+        gi = GI_MM_FAIRY;
+        break;
     default:
         return def;
     }

@@ -35,3 +35,22 @@ void DrawGi_MoonTear(GameState_Play* play, s16 drawGiId)
     gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[1]);
     CLOSE_DISPS();
 }
+
+void DrawGi_BottleFairy(GameState_Play* play, s16 drawGiId)
+{
+    const DrawGi* drawGi;
+    drawGi = &kDrawGi[drawGiId];
+
+    OPEN_DISPS(play->gs.gfx);
+    InitListPolyOpa(play->gs.gfx);
+    InitListPolyXlu(play->gs.gfx);
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
+    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[1]);
+    ModelViewUnkTransform((float*)((char*)play + 0x11da0));
+    ModelViewTranslate(0.f, -8.f, 0.f, MAT_MUL);
+    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[2]);
+    CLOSE_DISPS();
+}
