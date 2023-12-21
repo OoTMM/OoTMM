@@ -146,7 +146,8 @@ static void patchTextureList(Gfx* gfx, u32 vaddr)
     u32 addr;
 
     addr = (u32)comboCacheGetFile(vaddr);
-    addr -= 0x80000000;
+    if (addr)
+        addr -= 0x80000000;
     gfx->words.w1 = addr;
 }
 

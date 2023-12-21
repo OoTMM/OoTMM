@@ -274,7 +274,7 @@ u32 comboLoadObject(void* buffer, u16 objectId)
     return vromEnd - vromStart;
 }
 
-void* comboGetObject(u16 objectId)
+static void* comboGetObjectImpl(u16 objectId)
 {
     u32 size;
     void* addr;
@@ -308,8 +308,23 @@ void* comboGetObject(u16 objectId)
     return NULL;
 }
 
+void* comboGetObject(u16 objectId)
+{
+    OSIntMask imask;
+    void* data;
+
+    imask = osSetIntMask(1);
+    data = comboGetObjectImpl(objectId);
+    osSetIntMask(imask);
+
+    return data;
+}
+
 void comboObjectsReset(void)
 {
+    OSIntMask imask;
+
+    imask = osSetIntMask(1);
     for (int i = 0; i < OBJECT_COUNT; ++i)
     {
         free(sObjectsAddr[i]);
@@ -317,10 +332,14 @@ void comboObjectsReset(void)
         sObjectsAddr[i] = NULL;
         sObjectsTTL[i] = 0;
     }
+    osSetIntMask(imask);
 }
 
 void comboObjectsGC(void)
 {
+    OSIntMask imask;
+
+    imask = osSetIntMask(1);
     for (int i = 0; i < OBJECT_COUNT; ++i)
     {
         if (sObjectsAddr[i] == NULL)
@@ -337,6 +356,7 @@ void comboObjectsGC(void)
             sObjectsTTL[i]--;
         }
     }
+    osSetIntMask(imask);
 }
 
 #if defined(GAME_OOT)
