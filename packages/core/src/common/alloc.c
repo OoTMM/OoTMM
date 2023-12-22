@@ -8,6 +8,8 @@
 # define HEAP_SIZE 0x40000
 #endif
 
+#define SENTINEL 0x99999999
+
 typedef struct HeapBlockHeader HeapBlockHeader;
 
 struct HeapBlockHeader
@@ -27,6 +29,10 @@ void initHeap(void)
     gHeapFirstBlock->prev = NULL;
     gHeapFirstBlock->size = HEAP_SIZE;
     gHeapFirstBlock->free = 1;
+
+#if defined(DEBUG_ALLOC)
+    memset((char*)HEAP_BASE + 0x10, 0x99, HEAP_SIZE - 0x10);
+#endif
 }
 
 /* Dumb linear allocator */
@@ -122,6 +128,10 @@ static void _free(void* data)
     if (block->prev && block->prev->free)
         block = block->prev;
     mergeFreeBlocks(block);
+
+#if defined(DEBUG_ALLOC)
+    memset((char*)block + 16, 0x99, block->size - sizeof(HeapBlockHeader));
+#endif
 }
 
 void* malloc(size_t size)
@@ -144,3 +154,46 @@ void free(void* data)
     _free(data);
     osSetIntMask(mask);
 }
+
+void crash(void* ptr)
+{
+    u32* d;
+
+    d = NULL;
+    *d = (u32)ptr;
+}
+
+#if defined(DEBUG_ALLOC)
+void malloc_check(void)
+{
+    u64 mask;
+    HeapBlockHeader* block;
+    u32 count;
+    u32* base;
+
+    mask = osSetIntMask(1);
+    block = gHeapFirstBlock;
+    while (block)
+    {
+        if (!block->free)
+        {
+            block = block->next;
+            continue;
+        }
+
+        /* Check the sentinel */
+        count = (block->size - sizeof(HeapBlockHeader)) / 4;
+        base = (u32*)&block[1];
+        for (u32 i = 0; i < count; ++i)
+        {
+            if (base[i] != SENTINEL)
+            {
+                for (;;) {}
+            }
+        }
+
+        block = block->next;
+    }
+    osSetIntMask(mask);
+}
+#endif
