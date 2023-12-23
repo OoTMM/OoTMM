@@ -20,6 +20,7 @@ Play_InitEnvironment = 0x8009cda0;
 gFogState = 0x800f1640;
 
 __osPiTable = 0x800fc0b0;
+__osPiHandle = 0x80006260;
 
 InitDmaManager = 0x80000e6c;
 

@@ -17,6 +17,10 @@ static const u32 kColorSpider   = 0xffffffff;
 static const u32 kColorFairy    = 0xff7afbff;
 static const u32 kColorHeart    = 0xff0000ff;
 
+static const Gfx kNothing[] = {
+    gsSPEndDisplayList(),
+};
+
 static const CsmcDisplayList kGrassStandardDlist[] = {
     { TEXTURE_ADDR_STANDARD,    0xffffffff,    CTF_COLOR | CTF_CLAMP,                       G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32 },
     { CUSTOM_GRASS_ADDR,        kColorBossKey, CTF_CUSTOM_TEXTURE | CTF_COLOR | CTF_CLAMP,  G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32 },

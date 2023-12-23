@@ -11,6 +11,7 @@ osEPiStartDma = 0x8008ee30;
 osRecvMesg = 0x80087ed0;
 osSendMesg = 0x80087b10;
 __osPiTable = 0x801fd080;
+__osPiHandle = 0x80096b40;
 osEPiWriteIo = 0x80093bb0;
 osEPiReadIo = 0x800920b0;
 osInvalDCache = 0x8008f2f0;

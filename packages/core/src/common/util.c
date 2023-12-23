@@ -57,10 +57,10 @@ s16 comboReadPhysI16(u32 paddr)
 
 u32 comboReadPhysU32(u32 paddr)
 {
-    u32* addr;
+    u32 tmp;
 
-    addr = (u32*)(0xb0000000 | paddr);
-    return *addr;
+    osEPiReadIo(__osPiHandle, paddr | PI_DOM1_ADDR2, &tmp);
+    return tmp;
 }
 
 s32 comboReadPhysI32(u32 paddr)

@@ -81,6 +81,13 @@
 #endif
 
 #if !defined(__ASSEMBLER__)
+
+#if defined(DEBUG_ALLOC)
+void malloc_check(void);
+#else
+# define malloc_check() do {} while (0)
+#endif
+
 void comboDisableInterrupts(void);
 void comboDma(void* addr, u32 cartAddr, u32 size);
 void comboDma_NoCacheInval(void* addr, u32 cartAddr, u32 size);
