@@ -120,7 +120,7 @@ ComboOverrideData;
 
 static ComboOverrideData sComboOverridesCache[64];
 static int sComboOverridesCacheCursor;
-static const ComboOverrideData* sComboOverridesFile;
+static u32 sComboOverridesDevAddr;
 static u32 sComboOverridesCount;
 
 void comboInitOverride(void)
@@ -131,7 +131,7 @@ void comboInitOverride(void)
     mask = osSetIntMask(1);
     comboDmaLookup(&e, COMBO_VROM_CHECKS);
     sComboOverridesCount = comboDmaLoadFile(NULL, COMBO_VROM_CHECKS) / sizeof(ComboOverrideData);
-    sComboOverridesFile = (void*)(0xb0000000 | e.pstart);
+    sComboOverridesDevAddr = e.pstart | PI_DOM1_ADDR2;
     memset(sComboOverridesCache, 0xff, sizeof(sComboOverridesCache));
     sComboOverridesCacheCursor = 0;
     osSetIntMask(mask);
@@ -185,6 +185,7 @@ static int overrideData(ComboOverrideData* data, u32 key)
     u32 min;
     u32 max;
     u32 cursor;
+    u32 ovData[2];
 
     /* Check the cache */
     for (int i = 0; i < ARRAY_SIZE(sComboOverridesCache); ++i)
@@ -204,7 +205,13 @@ static int overrideData(ComboOverrideData* data, u32 key)
         if (min >= max)
             return 0;
         cursor = (min + max) / 2;
-        memcpy(&d, sComboOverridesFile + cursor, sizeof(d));
+
+        /* Read from cart */
+        /* TODO: Have a generic helper for this */
+        ovData[0] = comboReadPhysU32(sComboOverridesDevAddr + cursor * sizeof(ComboOverrideData) + 0x00);
+        ovData[1] = comboReadPhysU32(sComboOverridesDevAddr + cursor * sizeof(ComboOverrideData) + 0x04);
+        memcpy(&d, ovData, sizeof(d));
+    
         if (d.key == key)
         {
             /* Copy and add to cache */
