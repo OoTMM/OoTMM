@@ -155,14 +155,6 @@ void free(void* data)
     osSetIntMask(mask);
 }
 
-void crash(void* ptr)
-{
-    u32* d;
-
-    d = NULL;
-    *d = (u32)ptr;
-}
-
 #if defined(DEBUG_ALLOC)
 void malloc_check(void)
 {
