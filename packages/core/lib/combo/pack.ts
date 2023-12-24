@@ -154,7 +154,7 @@ class Packer {
 
     /* Patch rom header */
     Buffer.from('OOT+MM COMBO       ').copy(this.rom, 0x20);
-    Buffer.from('ZZE').copy(this.rom, 0x3c);
+    Buffer.from('NEDEP').copy(this.rom, 0x3b);
 
     this.fixChecksum();
 
