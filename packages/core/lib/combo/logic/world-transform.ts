@@ -1058,25 +1058,25 @@ export class LogicPassWorldTransform {
       this.removeItems(ItemGroups.SMALL_KEYS_MM);
     }
 
-    /* Handle key rings */
+    /* Handle alt items */
     for (let worldId = 0; worldId < this.state.worlds.length; ++worldId) {
       const world = this.state.worlds[worldId];
       const rf = world.resolvedFlags;
 
-      const oot = rf.smallKeyRingOot;
-      if (oot.has('Forest')) this.keyRing(worldId, Items.OOT_SMALL_KEY_FOREST, Items.OOT_KEY_RING_FOREST);
-      if (oot.has('Fire'))   this.keyRing(worldId, Items.OOT_SMALL_KEY_FIRE,   Items.OOT_KEY_RING_FIRE);
-      if (oot.has('Water'))  this.keyRing(worldId, Items.OOT_SMALL_KEY_WATER,  Items.OOT_KEY_RING_WATER);
-      if (oot.has('Spirit')) this.keyRing(worldId, Items.OOT_SMALL_KEY_SPIRIT, Items.OOT_KEY_RING_SPIRIT);
-      if (oot.has('Shadow')) this.keyRing(worldId, Items.OOT_SMALL_KEY_SHADOW, Items.OOT_KEY_RING_SHADOW);
-      if (oot.has('BotW'))   this.keyRing(worldId, Items.OOT_SMALL_KEY_BOTW,   Items.OOT_KEY_RING_BOTW);
-      if (oot.has('GTG'))    this.keyRing(worldId, Items.OOT_SMALL_KEY_GTG,    Items.OOT_KEY_RING_GTG);
-      if (oot.has('Ganon'))  this.keyRing(worldId, Items.OOT_SMALL_KEY_GANON,  Items.OOT_KEY_RING_GANON);
+      const ootKeys = rf.smallKeyRingOot;
+      if (ootKeys.has('Forest')) this.keyRing(worldId, Items.OOT_SMALL_KEY_FOREST, Items.OOT_KEY_RING_FOREST);
+      if (ootKeys.has('Fire'))   this.keyRing(worldId, Items.OOT_SMALL_KEY_FIRE,   Items.OOT_KEY_RING_FIRE);
+      if (ootKeys.has('Water'))  this.keyRing(worldId, Items.OOT_SMALL_KEY_WATER,  Items.OOT_KEY_RING_WATER);
+      if (ootKeys.has('Spirit')) this.keyRing(worldId, Items.OOT_SMALL_KEY_SPIRIT, Items.OOT_KEY_RING_SPIRIT);
+      if (ootKeys.has('Shadow')) this.keyRing(worldId, Items.OOT_SMALL_KEY_SHADOW, Items.OOT_KEY_RING_SHADOW);
+      if (ootKeys.has('BotW'))   this.keyRing(worldId, Items.OOT_SMALL_KEY_BOTW,   Items.OOT_KEY_RING_BOTW);
+      if (ootKeys.has('GTG'))    this.keyRing(worldId, Items.OOT_SMALL_KEY_GTG,    Items.OOT_KEY_RING_GTG);
+      if (ootKeys.has('Ganon'))  this.keyRing(worldId, Items.OOT_SMALL_KEY_GANON,  Items.OOT_KEY_RING_GANON);
 
-      if (oot.has('GF') && settings.smallKeyShuffleHideout !== 'vanilla')
+      if (ootKeys.has('GF') && settings.smallKeyShuffleHideout !== 'vanilla')
         this.keyRing(worldId, Items.OOT_SMALL_KEY_GF,     Items.OOT_KEY_RING_GF);
 
-      if (oot.has('TCG') && settings.smallKeyShuffleChestGame !== 'vanilla')
+      if (ootKeys.has('TCG') && settings.smallKeyShuffleChestGame !== 'vanilla')
         this.keyRing(worldId, Items.OOT_SMALL_KEY_TCG,    Items.OOT_KEY_RING_TCG);
 
       const mm = rf.smallKeyRingMm;
@@ -1084,20 +1084,30 @@ export class LogicPassWorldTransform {
       if (mm.has('SH')) this.keyRing(worldId, Items.MM_SMALL_KEY_SH, Items.MM_KEY_RING_SH);
       if (mm.has('GB')) this.keyRing(worldId, Items.MM_SMALL_KEY_GB, Items.MM_KEY_RING_GB);
       if (mm.has('ST')) this.keyRing(worldId, Items.MM_SMALL_KEY_ST, Items.MM_KEY_RING_ST);
-    }
 
-    /* Handle silver pouches */
-    if (settings.silverRupeePouches) {
-      for (let worldId = 0; worldId < this.state.worlds.length; ++worldId) {
-        for (const [rupee, pouch] of SILVER_POUCHES.entries()) {
-          const piRupee = makePlayerItem(rupee, worldId);
-          const piPouch = makePlayerItem(pouch, worldId);
-          if (this.pool.has(piRupee)) {
-            this.removePlayerItem(piRupee);
-            this.addPlayerItem(piPouch);
-          }
-        }
-      }
+      const srp = rf.silverRupeePouches;
+      if (srp.has('DC')) this.keyRing(worldId, Items.OOT_RUPEE_SILVER_DC, Items.OOT_POUCH_SILVER_DC);
+      if (srp.has('BotW')) this.keyRing(worldId, Items.OOT_RUPEE_SILVER_BOTW, Items.OOT_POUCH_SILVER_BOTW);
+      if (srp.has('Spirit_Child')) this.keyRing(worldId, Items.OOT_RUPEE_SILVER_SPIRIT_CHILD, Items.OOT_POUCH_SILVER_SPIRIT_CHILD);
+      if (srp.has('Spirit_Sun')) this.keyRing(worldId, Items.OOT_RUPEE_SILVER_SPIRIT_SUN, Items.OOT_POUCH_SILVER_SPIRIT_SUN);
+      if (srp.has('Spirit_Boulders')) this.keyRing(worldId, Items.OOT_RUPEE_SILVER_SPIRIT_BOULDERS, Items.OOT_POUCH_SILVER_SPIRIT_BOULDERS);
+      if (srp.has('Spirit_Lobby')) this.keyRing(worldId, Items.OOT_RUPEE_SILVER_SPIRIT_LOBBY, Items.OOT_POUCH_SILVER_SPIRIT_LOBBY);
+      if (srp.has('Spirit_Adult')) this.keyRing(worldId, Items.OOT_RUPEE_SILVER_SPIRIT_ADULT, Items.OOT_POUCH_SILVER_SPIRIT_ADULT);
+      if (srp.has('Shadow_Scythe')) this.keyRing(worldId, Items.OOT_RUPEE_SILVER_SHADOW_SCYTHE, Items.OOT_POUCH_SILVER_SHADOW_SCYTHE);
+      if (srp.has('Shadow_Pit')) this.keyRing(worldId, Items.OOT_RUPEE_SILVER_SHADOW_PIT, Items.OOT_POUCH_SILVER_SHADOW_PIT);
+      if (srp.has('Shadow_Spikes')) this.keyRing(worldId, Items.OOT_RUPEE_SILVER_SHADOW_SPIKES, Items.OOT_POUCH_SILVER_SHADOW_SPIKES);
+      if (srp.has('Shadow_Blades')) this.keyRing(worldId, Items.OOT_RUPEE_SILVER_SHADOW_BLADES, Items.OOT_POUCH_SILVER_SHADOW_BLADES);
+      if (srp.has('IC_Scythe')) this.keyRing(worldId, Items.OOT_RUPEE_SILVER_IC_SCYTHE, Items.OOT_POUCH_SILVER_IC_SCYTHE);
+      if (srp.has('IC_Block')) this.keyRing(worldId, Items.OOT_RUPEE_SILVER_IC_BLOCK, Items.OOT_POUCH_SILVER_IC_BLOCK);
+      if (srp.has('GTG_Slopes')) this.keyRing(worldId, Items.OOT_RUPEE_SILVER_GTG_SLOPES, Items.OOT_POUCH_SILVER_GTG_SLOPES);
+      if (srp.has('GTG_Lava')) this.keyRing(worldId, Items.OOT_RUPEE_SILVER_GTG_LAVA, Items.OOT_POUCH_SILVER_GTG_LAVA);
+      if (srp.has('GTG_Water')) this.keyRing(worldId, Items.OOT_RUPEE_SILVER_GTG_WATER, Items.OOT_POUCH_SILVER_GTG_WATER);
+      if (srp.has('Ganon_Light')) this.keyRing(worldId, Items.OOT_RUPEE_SILVER_GANON_LIGHT, Items.OOT_POUCH_SILVER_GANON_LIGHT);
+      if (srp.has('Ganon_Forest')) this.keyRing(worldId, Items.OOT_RUPEE_SILVER_GANON_FOREST, Items.OOT_POUCH_SILVER_GANON_FOREST);
+      if (srp.has('Ganon_Fire')) this.keyRing(worldId, Items.OOT_RUPEE_SILVER_GANON_FIRE, Items.OOT_POUCH_SILVER_GANON_FIRE);
+      if (srp.has('Ganon_Water')) this.keyRing(worldId, Items.OOT_RUPEE_SILVER_GANON_WATER, Items.OOT_POUCH_SILVER_GANON_WATER);
+      if (srp.has('Ganon_Shadow')) this.keyRing(worldId, Items.OOT_RUPEE_SILVER_GANON_SHADOW, Items.OOT_POUCH_SILVER_GANON_SHADOW);
+      if (srp.has('Ganon_Spirit')) this.keyRing(worldId, Items.OOT_RUPEE_SILVER_GANON_SPIRIT, Items.OOT_POUCH_SILVER_GANON_SPIRIT);
     }
 
     if (settings.zoraKing === 'open') {
