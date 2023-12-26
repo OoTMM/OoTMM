@@ -8,7 +8,7 @@ static void debugCheat(GameState_Play* play)
 #if defined(DEBUG)
     //if (play->gs.input[0].current.buttons & L_TRIG)
     {
-        gSave.itemEquips.sword = 3;
+        gSave.itemEquips.sword = 1;
         gSave.itemEquips.shield = 2;
         gMmExtraFlags2.progressiveShield = 1;
         gSave.inventory.upgrades.quiver = 3;
@@ -19,7 +19,7 @@ static void debugCheat(GameState_Play* play)
         gMmExtraFlags3.bottomlessWallet = 1;
         gSave.inventory.upgrades.bombBag = 3;
 
-        gSave.itemEquips.buttonItems[0][0] = ITEM_MM_SWORD_GILDED;
+        gSave.itemEquips.buttonItems[0][0] = ITEM_MM_SWORD_KOKIRI;
         gSave.inventory.items[ITS_MM_OCARINA] = ITEM_MM_OCARINA_OF_TIME;
         gSave.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
         gSave.inventory.items[ITS_MM_ARROW_FIRE] = ITEM_MM_ARROW_FIRE;

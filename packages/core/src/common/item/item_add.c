@@ -889,7 +889,7 @@ static int addItemBottleNewMm(GameState_Play* play, u8 itemId, s16 gi, u16 param
 {
     if (itemId == ITEM_MM_GOLD_DUST)
         gMmExtraItems.goldDust = 1;
-    
+
     for (int i = 0; i < 4; ++i)
     {
         if (gMmSave.inventory.items[ITS_MM_BOTTLE + i] == ITEM_NONE)
@@ -949,7 +949,16 @@ static int addItemSwordOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 
 static int addItemSwordMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
-    gMmSave.itemEquips.buttonItems[0][0] = kMmSwords[param];
+    int shouldChangeBtn;
+
+    shouldChangeBtn = 1;
+#if defined(GAME_MM)
+    if (gSave.playerForm == MM_PLAYER_FORM_FIERCE_DEITY)
+        shouldChangeBtn = 0;
+#endif
+
+    if (shouldChangeBtn)
+        gMmSave.itemEquips.buttonItems[0][0] = kMmSwords[param];
     gMmSave.itemEquips.sword = param;
 
     if (param == 2)

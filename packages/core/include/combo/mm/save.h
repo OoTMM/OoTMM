@@ -393,9 +393,11 @@ typedef struct
 }
 MmExtraFlags3;
 
-#define MM_PLAYER_FORM_GORON    1
-#define MM_PLAYER_FORM_ZORA     2
-#define MM_PLAYER_FORM_HUMAN    4
+#define MM_PLAYER_FORM_FIERCE_DEITY 0
+#define MM_PLAYER_FORM_GORON        1
+#define MM_PLAYER_FORM_ZORA         2
+#define MM_PLAYER_FORM_DEKU         3
+#define MM_PLAYER_FORM_HUMAN        4
 
 typedef struct ALIGNED(16)
 {
