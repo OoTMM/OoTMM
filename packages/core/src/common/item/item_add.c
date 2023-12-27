@@ -890,7 +890,7 @@ static int addItemBottleNewMm(GameState_Play* play, u8 itemId, s16 gi, u16 param
     if (itemId == ITEM_MM_GOLD_DUST)
         gMmExtraItems.goldDust = 1;
 
-    for (int i = 0; i < 4; ++i)
+    for (int i = 0; i < 6; ++i)
     {
         if (gMmSave.inventory.items[ITS_MM_BOTTLE + i] == ITEM_NONE)
         {
@@ -904,7 +904,7 @@ static int addItemBottleNewMm(GameState_Play* play, u8 itemId, s16 gi, u16 param
 
 static int addItemBottleRefillMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
-    for (int i = 0; i < 4; ++i)
+    for (int i = 0; i < 6; ++i)
     {
         if (gMmSave.inventory.items[ITS_MM_BOTTLE + i] == ITEM_MM_BOTTLE_EMPTY)
         {
