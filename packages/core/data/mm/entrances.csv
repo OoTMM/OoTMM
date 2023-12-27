@@ -10,7 +10,7 @@ SNOWHEAD_FROM_TEMPLE,                               dungeon,          Snowhead, 
 TEMPLE_GREAT_BAY,                                   dungeon,          Great Bay Temple,                       Zora Cape Peninsula,                        GREAT_BAY_FROM_TEMPLE
 GREAT_BAY_FROM_TEMPLE,                              dungeon,          Zora Cape Peninsula,                    Great Bay Temple,                           TEMPLE_GREAT_BAY
 TEMPLE_STONE_TOWER_INVERTED,                        dungeon,          Stone Tower Temple Inverted,            Stone Tower Top Inverted,                   STONE_TOWER_INVERTED_FROM_TEMPLE
-STONE_TOWER_INVERTED_FROM_TEMPLE,                   dungeon,          Stone Tower Top Inverted,               Stone Tower Temple Inverted,                TEMPLE_STONE_TOWER_INVERTED
+STONE_TOWER_INVERTED_FROM_TEMPLE,                   dungeon,          Stone Tower Flipping,                   Stone Tower Temple Inverted,                TEMPLE_STONE_TOWER_INVERTED
 TEMPLE_STONE_TOWER,                                 dungeon,          Stone Tower Temple,                     Stone Tower Front of Temple,                STONE_TOWER_FROM_TEMPLE
 STONE_TOWER_FROM_TEMPLE,                            dungeon,          Stone Tower Front of Temple,            Stone Tower Temple,                         TEMPLE_STONE_TOWER
 SPIDER_HOUSE_SWAMP,                                 dungeon,          Swamp Spider House,                     Near Swamp Spider House,                    SWAMP_FROM_SPIDER_HOUSE
