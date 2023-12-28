@@ -528,6 +528,13 @@ export const SETTINGS = [{
   description: 'Controls whether or not the Fish (and the Loach) in the Fishing Pond are shuffled amongst all the items.',
   default: false
 }, {
+  key: 'divingGameRupeeShuffle',
+  name: 'Diving Game Rupee Shuffle',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the Zora\'s Domain Diving Game has 5 random items instead of green, blue, red, purple and 500 rupees.',
+  default: false
+}, {
   key: 'eggShuffle',
   name: 'Weird / Pocket Egg Content Shuffle',
   category: 'main.shuffle',

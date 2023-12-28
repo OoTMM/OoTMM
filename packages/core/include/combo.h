@@ -36,6 +36,8 @@
 #  include <combo/oot/actors/En_Kusa.h>
 #  include <combo/oot/actors/En_Tubo_Trap.h>
 #  include <combo/oot/actors/En_Ossan.h>
+#  include <combo/oot/actors/En_Ex_Ruppy.h>
+#  include <combo/oot/actors/En_Diving_Game.h>
 # endif
 
 # if defined(GAME_MM)

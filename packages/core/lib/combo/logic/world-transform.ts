@@ -1035,6 +1035,22 @@ export class LogicPassWorldTransform {
       this.removeLocations(['OOT Hatch Chicken', 'OOT Hatch Pocket Cucco']);
     }
 
+    /* Handle Diving Game Rupees */
+    if (!settings.divingGameRupeeShuffle) {
+      this.removeItem(Items.OOT_RUPEE_GREEN);
+      this.removeItem(Items.OOT_RUPEE_BLUE);
+      this.removeItem(Items.OOT_RUPEE_RED);
+      this.removeItem(Items.OOT_RUPEE_PURPLE);
+      this.removeItem(Items.OOT_RUPEE_HUGE);
+      this.removeLocations([
+        'OOT Zora Domain Diving Game Green Rupee',
+        'OOT Zora Domain Diving Game Blue Rupee',
+        'OOT Zora Domain Diving Game Red Rupee',
+        'OOT Zora Domain Diving Game Purple Rupee',
+        'OOT Zora Domain Diving Game Huge Rupee',
+      ]);
+    }
+
     /* Handle Ganon BK */
     if (settings.ganonBossKey === 'removed' || settings.ganonBossKey === 'custom') {
       this.removeItem(Items.OOT_BOSS_KEY_GANON);
