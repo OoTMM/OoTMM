@@ -190,7 +190,7 @@
   region: CLOCK_TOWN_SOUTH
   exits:
     "Clock Town South": "can_reset_time"
-    "Clock Tower Roof": "after(NIGHT3_AM_12_00)"
+    "Clock Tower Roof": "after(NIGHT3_AM_12_00) && cond(setting(erMoon), trick(MM_CLOCK_TOWER_WAIT) || can_play_time || can_play_sun, true)"
     "Owl Clock Town": "true"
     "OOT Market": "true"
   locations:
