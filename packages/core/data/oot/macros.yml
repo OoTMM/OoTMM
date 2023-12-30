@@ -201,6 +201,7 @@
 "small_keys_extra(type, x, y, count)": "has_skeleton_key || (setting(smallKeyShuffleOot, removed) || cond(setting(smallKeyRingOot, type), has(y), has(x, count + 1)))"
 "small_keys_forest(n)": "small_keys(Forest, SMALL_KEY_FOREST, KEY_RING_FOREST, n)"
 "small_keys_fire(n)": "cond(setting(smallKeyShuffleOot, anywhere), small_keys_extra(Fire, SMALL_KEY_FIRE, KEY_RING_FIRE, n), small_keys(Fire, SMALL_KEY_FIRE, KEY_RING_FIRE, n))"
+"small_keys_fire_mq(n)": "small_keys(Fire, SMALL_KEY_FIRE, KEY_RING_FIRE, n)"
 "small_keys_water(n)": "small_keys(Water, SMALL_KEY_WATER, KEY_RING_WATER, n)"
 "small_keys_shadow(n)": "small_keys(Shadow, SMALL_KEY_SHADOW, KEY_RING_SHADOW, n)"
 "small_keys_spirit(n)": "small_keys(Spirit, SMALL_KEY_SPIRIT, KEY_RING_SPIRIT, n)"
