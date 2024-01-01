@@ -1395,7 +1395,7 @@ export const SETTINGS = [{
   type: 'boolean',
   description: 'If turned on, it means the boss-containing dungeons and uninverted Stone Tower Temple will be shuffled.',
   default: false,
-  cond: (x: any) => (x.erDungeons !== 'none' && !x.preCompletedDungeons
+  cond: (x: any) => (x.erDungeons !== 'none' && !x.preCompletedDungeons)
 }, {
   key: 'erMinorDungeons',
   name: 'Shuffle OoT Minor Dungeons with Dungeons',
