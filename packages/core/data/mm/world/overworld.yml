@@ -1743,7 +1743,7 @@
   region: TWIN_ISLANDS
   exits:
     "Twin Islands": "true"
-    "Goron Race": "can_use_keg || event(POWDER_KEG_TRIAL) || short_hook_anywhere"
+    "Goron Race": "can_use_keg || event(POWDER_KEG_TRIAL) || (short_hook_anywhere && trick(MM_HARD_HOOKSHOT))"
     "Near Ramp Grotto": "true"
 "Near Ramp Grotto":
   region: TWIN_ISLANDS
@@ -2408,7 +2408,7 @@
 "Great Bay Near Fairy Fountain":
   region: ZORA_CAPE
   exits:
-    "Zora Cape": "cond(setting(erIndoorsMajor), has_explosives || trick_keg_explosives, true)"
+    "Zora Cape": "has_explosives || trick_keg_explosives || !setting(erIndoorsMajor)"
     "Great Bay Fairy Fountain": "true"
 "Great Bay Fairy Fountain":
   region: ENTRANCE
@@ -2547,7 +2547,7 @@
     "Road to Ikana Grotto": "has_mask_goron"
     "Road to Ikana Center": "can_play_epona || short_hook_anywhere || (can_goron_bomb_jump && has_bombs)"
   locations:
-    "Road to Ikana Chest": "can_hookshot || (can_hookshot_short && trick(MM_SHORT_HOOK_HARD))"
+    "Road to Ikana Chest": "can_hookshot || (can_hookshot_short && trick(MM_HARD_HOOKSHOT))"
 "Road to Ikana Grotto":
   region: ENTRANCE
   events:
@@ -2584,7 +2584,7 @@
     FAIRY: "can_get_gossip_fairy || scarecrow_hookshot || short_hook_anywhere"
   exits:
     "Road to Ikana Front": "can_play_epona || short_hook_anywhere || (can_goron_bomb_jump && has_bombs)"
-    "Road to Ikana Top": "((has(MASK_GARO) || has(MASK_GIBDO)) && (can_hookshot || (can_hookshot_short && trick(MM_SHORT_HOOK_HARD)))) || short_hook_anywhere"
+    "Road to Ikana Top": "((has(MASK_GARO) || has(MASK_GIBDO)) && (can_hookshot || (can_hookshot_short && trick(MM_HARD_HOOKSHOT)))) || short_hook_anywhere"
     "Ikana Graveyard": "true"
   locations:
     "Road to Ikana Stone Mask": "can_use_lens_strict && has_red_or_blue_potion"

@@ -737,7 +737,7 @@
   age_change: false
   exits:
     "Ganon Castle Exterior": "is_adult"
-    "Fairy Fountain Defense": "is_adult && (can_lift_gold || trick(OOT_GANON_FAIRY_TT))"
+    "Fairy Fountain Defense": "is_adult && (can_lift_gold || (!setting(erIndoorsMajor) && trick(OOT_GANON_FAIRY_TT)))"
     "Near Fairy Fountain Din": "is_child"
 "Fairy Fountain Defense":
   region: ENTRANCE

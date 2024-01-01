@@ -63,7 +63,7 @@ export const TRICKS = {
   MM_BOMBER_SKIP: "Guess Bomber Code",
   MM_CAPTAIN_SKIP: "Guess Oceanside Spider House Code",
   MM_ISTT_ENTRY_JUMP: "Inverted Stone Tower Temple Long Jump to Death Armos",
-  MM_SHORT_HOOK_HARD: "Precise Short Hookshot Usage",
+  MM_HARD_HOOKSHOT: "Precise Hookshot Usage",
   MM_PFI_BOAT_HOOK: "Enter Pirate Fortress Interior using Hookshot from the Boats",
   MM_PALACE_GUARD_SKIP: "Backflip over Deku Palace Guards",
   MM_SHT_FIRELESS: "Complete Snowhead Temple without Fire Arrows",
