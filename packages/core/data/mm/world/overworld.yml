@@ -1006,10 +1006,11 @@
   events:
     BUGS: "true"
     MUSHROOM: "has(MASK_SCENTS)"
-    SWAMP_SONG: "has_ocarina && ((has_mask_goron && has_goron_song) || (has(MASK_DEKU) && has(SONG_AWAKENING)) || (has_mask_zora && has(SONG_ZORA)))"
+    SWAMP_SONG: "has_ocarina && ((has_mask_goron && can_play_goron) || (has(MASK_DEKU) && can_play_awakening) || (has_mask_zora && can_play_zora))"
     FAIRY: "can_get_gossip_fairy"
   exits:
     "Termina Field": "true"
+    #"Musical Gossip Stones": "true"
   locations:
     "Termina Field Gossip Stones HP": "event(SWAMP_SONG) && event(MOUNTAIN_SONG) && event(OCEAN_SONG) && event(CANYON_SONG)"
   gossip:
@@ -1021,10 +1022,11 @@
   region: ENTRANCE
   events:
     BUGS: "true"
-    MOUNTAIN_SONG: "has_ocarina && ((has_mask_goron && has_goron_song) || (has(MASK_DEKU) && has(SONG_AWAKENING)) || (has_mask_zora && has(SONG_ZORA)))"
+    MOUNTAIN_SONG: "has_ocarina && ((has_mask_goron && can_play_goron) || (has(MASK_DEKU) && can_play_awakening) || (has_mask_zora && can_play_zora))"
     FAIRY: "can_get_gossip_fairy"
   exits:
     "Termina Field": "true"
+    #"Musical Gossip Stones": "true"
   locations:
     "Termina Field Gossip Stones HP": "event(SWAMP_SONG) && event(MOUNTAIN_SONG) && event(OCEAN_SONG) && event(CANYON_SONG)"
   gossip:
@@ -1041,10 +1043,11 @@
     ARROWS: "true"
     BUGS: "true"
     MUSHROOM: "has(MASK_SCENTS)"
-    OCEAN_SONG: "has_ocarina && ((has_mask_goron && has_goron_song) || (has(MASK_DEKU) && has(SONG_AWAKENING)) || (has_mask_zora && has(SONG_ZORA)))"
+    OCEAN_SONG: "has_ocarina && ((has_mask_goron && can_play_goron) || (has(MASK_DEKU) && can_play_awakening) || (has_mask_zora && can_play_zora))"
     FAIRY: "can_get_gossip_fairy"
   exits:
     "Termina Field": "true"
+    #"Musical Gossip Stones": "true"
   locations:
     "Termina Field Gossip Stones HP": "event(SWAMP_SONG) && event(MOUNTAIN_SONG) && event(OCEAN_SONG) && event(CANYON_SONG)"
     "Ocean Gossip Grotto Grass 1": "true"
@@ -1066,10 +1069,11 @@
     ARROWS: "true"
     BUGS: "true"
     MUSHROOM: "has(MASK_SCENTS)"
-    CANYON_SONG: "has_ocarina && ((has_mask_goron && has_goron_song) || (has(MASK_DEKU) && has(SONG_AWAKENING)) || (has_mask_zora && has(SONG_ZORA)))"
+    CANYON_SONG: "has_ocarina && ((has_mask_goron && can_play_goron) || (has(MASK_DEKU) && can_play_awakening) || (has_mask_zora && can_play_zora))"
     FAIRY: "can_get_gossip_fairy"
   exits:
     "Termina Field": "true"
+    #"Musical Gossip Stones": "true"
   locations:
     "Termina Field Gossip Stones HP": "event(SWAMP_SONG) && event(MOUNTAIN_SONG) && event(OCEAN_SONG) && event(CANYON_SONG)"
     "Canyon Gossip Grotto Grass 1": "true"
