@@ -25,7 +25,7 @@
 "Fire Temple Vanilla Hammer Loop":
   dungeon: Fire
   locations:
-    "MQ Fire Temple Hammer Chest": "has_weapon && soul_keese && soul_enemy(SOUL_ENEMY_STALFOS) && soul_iron_knuckle && soul_enemy(SOUL_ENEMY_FLARE_DANCER) && (has_bombs || can_hammer || can_hookshot)"
+    "MQ Fire Temple Hammer Chest": "(is_adult || can_hookshot || climb_anywhere) && has_weapon && soul_keese && soul_enemy(SOUL_ENEMY_STALFOS) && soul_iron_knuckle && soul_enemy(SOUL_ENEMY_FLARE_DANCER) && (has_bombs || can_hammer || can_hookshot)"
     "MQ Fire Temple Map Chest": "can_hammer && has_weapon && soul_keese && soul_enemy(SOUL_ENEMY_STALFOS) && soul_iron_knuckle && soul_enemy(SOUL_ENEMY_FLARE_DANCER)"
     "MQ Fire Temple Pot Hammer Loop 1": "has_weapon && soul_keese && soul_enemy(SOUL_ENEMY_STALFOS)"
     "MQ Fire Temple Pot Hammer Loop 2": "has_weapon && soul_keese && soul_enemy(SOUL_ENEMY_STALFOS)"
