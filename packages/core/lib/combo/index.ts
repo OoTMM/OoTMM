@@ -24,6 +24,7 @@ export type { Presets } from './presets';
 export type { Cosmetics } from './cosmetics';
 export type { OptionRandomSettings } from './settings/random';
 export type { SettingHint, SettingHintType } from './settings/hints';
+export type { ItemsCount } from './items';
 
 export type GeneratorParams = {
   oot: Buffer,
@@ -45,7 +46,9 @@ export const generate = (params: GeneratorParams): Generator => {
 
 export { SETTINGS, DEFAULT_SETTINGS, SETTINGS_CATEGORIES, TRICKS, GLITCHES, itemName, DUNGEONS, mergeSettings, makeSettings, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS };
 
-export const itemPool = (aSettings: Partial<Settings>): {[k: string]: number} => {
+export type Items = {[k: string]: number};
+
+export const itemPool = (aSettings: Partial<Settings>): Items => {
   const settings: Settings = { ...DEFAULT_SETTINGS, ...aSettings };
   const cosmetics = makeCosmetics({});
   const monitor = new Monitor({ onLog: () => {} });
@@ -77,7 +80,7 @@ export const itemPool = (aSettings: Partial<Settings>): {[k: string]: number} =>
   }
 
   /* Make the item pool */
-  const itemPool: {[k: string]: number} = {};
+  const itemPool: Items = {};
   for (const [item, count] of items) {
     itemPool[item.id] = count;
   }

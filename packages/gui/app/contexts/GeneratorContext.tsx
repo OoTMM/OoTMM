@@ -32,7 +32,7 @@ type GeneratorContext = {
   state: GeneratorState;
   setState: React.Dispatch<React.SetStateAction<GeneratorState>>;
   setFile: (key: string, file: File) => void;
-  setFileBuffer: (key: keyof GeneratorState['romConfig']['files'], file: Buffer) => void;
+  setFileBuffer: (key: keyof GeneratorState['romConfig']['files'], file: ArrayBuffer) => void;
   setSeed: (seed: string) => void;
   setIsPatch: (isPatch: boolean) => void;
   setSettings: (settings: SettingsPatch) => Settings;
@@ -76,7 +76,7 @@ function createState(): GeneratorState {
 export function GeneratorContextProvider({ children }: { children: React.ReactNode }) {
   const [state, setState] = useState(createState);
 
-  const setFileBuffer = (key: keyof GeneratorState['romConfig']['files'], file: Buffer) => {
+  const setFileBuffer = (key: keyof GeneratorState['romConfig']['files'], file: ArrayBuffer) => {
     setState(state => ({ ...state, romConfig: { ...state.romConfig, files: { ...state.romConfig.files, [key]: file } }}));
   };
 

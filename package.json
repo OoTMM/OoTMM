@@ -10,7 +10,7 @@
     "build": "nx run @ootmm/gui:build",
     "test": "CI=true nx run-many --target=test",
     "serve": "nx run-many -t serve",
-    "typecheck": "nx run-many -t typecheck"
+    "typecheck": "tsc --module es2020 --jsx react --noEmit"
   },
   "dependencies": {
     "jszip": "^3.10.1",
