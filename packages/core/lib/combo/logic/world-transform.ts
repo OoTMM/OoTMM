@@ -928,6 +928,17 @@ export class LogicPassWorldTransform {
       }
     }
 
+    /* Handle Diving Game Rupees */
+    if (!settings.divingGameRupeeShuffle) {
+      this.removeLocations([
+        'OOT Zora Domain Diving Game Green Rupee',
+        'OOT Zora Domain Diving Game Blue Rupee',
+        'OOT Zora Domain Diving Game Red Rupee',
+        'OOT Zora Domain Diving Game Purple Rupee',
+        'OOT Zora Domain Diving Game Huge Rupee',
+      ]);
+    }
+
     /* Make the basic item pool */
     this.makePools();
 
@@ -1033,22 +1044,6 @@ export class LogicPassWorldTransform {
       this.removeItem(Items.OOT_WEIRD_EGG);
       this.removeItem(Items.OOT_POCKET_EGG);
       this.removeLocations(['OOT Hatch Chicken', 'OOT Hatch Pocket Cucco']);
-    }
-
-    /* Handle Diving Game Rupees */
-    if (!settings.divingGameRupeeShuffle) {
-      this.removeItem(Items.OOT_RUPEE_GREEN);
-      this.removeItem(Items.OOT_RUPEE_BLUE);
-      this.removeItem(Items.OOT_RUPEE_RED);
-      this.removeItem(Items.OOT_RUPEE_PURPLE);
-      this.removeItem(Items.OOT_RUPEE_HUGE);
-      this.removeLocations([
-        'OOT Zora Domain Diving Game Green Rupee',
-        'OOT Zora Domain Diving Game Blue Rupee',
-        'OOT Zora Domain Diving Game Red Rupee',
-        'OOT Zora Domain Diving Game Purple Rupee',
-        'OOT Zora Domain Diving Game Huge Rupee',
-      ]);
     }
 
     /* Handle Ganon BK */
