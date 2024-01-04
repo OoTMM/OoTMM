@@ -1839,14 +1839,14 @@
     "Gerudo Fortress Exterior": "true"
     "Gerudo Fortress Lower-Center Ledge": "true" #This jump is a little tight as kid, but kid has infinite tries.
     "Gerudo Fortress Kitchen Tunnel Mid": "true"
-    "Gerudo Fortress Carpenter 3 Bottom": "true"
+    "Gerudo Fortress Carpenter 4 Bottom": "true"
 "Gerudo Fortress Lower-Center Ledge":
   region: GERUDO_FORTRESS
   exits:
     "Gerudo Fortress Exterior": "true"
     "Gerudo Fortress Lower-Right Ledge": "true"
     "Gerudo Fortress Carpenter 2 Top": "true"
-    "Gerudo Fortress Carpenter 3 Top": "true"
+    "Gerudo Fortress Carpenter 4 Top": "true"
     "Gerudo Fortress Kitchen Ledge Near Tunnel": "true"
     "Gerudo Fortress Upper-Right Ledge": "(trick(OOT_FORTRESS_JUMPS) && is_adult) || climb_anywhere || hookshot_anywhere"
 "Gerudo Fortress Upper-Center Ledge":
@@ -1876,7 +1876,7 @@
 "Gerudo Fortress Center Ledge":
   region: GERUDO_FORTRESS
   exits:
-    "Gerudo Fortress Carpenter 4": "true"
+    "Gerudo Fortress Carpenter 3": "true"
     "Gerudo Fortress Lower-Center Ledge": "true"
 "Gerudo Fortress Lower-Left Ledge":
   region: GERUDO_FORTRESS
