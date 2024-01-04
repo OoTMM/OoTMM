@@ -1001,9 +1001,6 @@ export class LogicPassWorldTransform {
       this.addItem(Items.MM_WALLET);
     }
 
-    /* Setup shared items */
-    this.setupSharedItems();
-
     /* Handle progressive shields */
     if (this.state.settings.progressiveShieldsOot === 'progressive') {
       this.replaceItem(Items.OOT_SHIELD_MIRROR, Items.OOT_SHIELD);
@@ -1014,6 +1011,9 @@ export class LogicPassWorldTransform {
       this.replaceItem(Items.MM_SHIELD_MIRROR, Items.MM_SHIELD);
       this.addItem(Items.MM_SHIELD);
     }
+
+    /* Setup shared items */
+    this.setupSharedItems();
 
     /* Handle non-MQ Fire */
     if (settings.smallKeyShuffleOot !== 'anywhere') {
