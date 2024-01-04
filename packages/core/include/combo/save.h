@@ -4,35 +4,31 @@
 #if !defined(__ASSEMBLER__)
 # include <combo/oot/save.h>
 # include <combo/mm/save.h>
-# define CUSTOM_SAVE_OFFSET_OOT 0
-# define CUSTOM_SAVE_OFFSET_MM      (CUSTOM_SAVE_OFFSET_OOT + ((sizeof(OotCustomSave) + 15) & 0xffffff0))
-# define CUSTOM_SAVE_OFFSET_SHARED  (CUSTOM_SAVE_OFFSET_MM +  ((sizeof(MmCustomSave) + 15) & 0xffffff0))
-
-# if defined(GAME_OOT)
-typedef OotCustomSave CustomSave;
-#  define CUSTOM_SAVE_OFFSET CUSTOM_SAVE_OFFSET_OOT
-# else
-typedef MmCustomSave CustomSave;
-#  define CUSTOM_SAVE_OFFSET CUSTOM_SAVE_OFFSET_MM
-# endif
-extern CustomSave gCustomSave;
 
 typedef struct ALIGNED(16)
 {
-    u16 coins[4];
-    u16 ocarinaButtonMaskOot;
-    u16 ocarinaButtonMaskMm;
-    u8  soulsEnemyOot[8];
-    u8  soulsEnemyMm[8];
-    u8  soulsBossOot[2];
-    u8  soulsBossMm[1];
-    u8  soulsNpcOot[8];
-    u8  caughtChildFishWeight[20]; // first item is length. should this be in OotCustomSave?
-    u8  caughtAdultFishWeight[20]; // first item is length. should this be in OotCustomSave?
+    OotCustomSave   oot;
+    MmCustomSave    mm;
+    u16             coins[4];
+    u16             ocarinaButtonMaskOot;
+    u16             ocarinaButtonMaskMm;
+    u8              soulsEnemyOot[8];
+    u8              soulsEnemyMm[8];
+    u8              soulsBossOot[2];
+    u8              soulsBossMm[1];
+    u8              soulsNpcOot[8];
+    u8              caughtChildFishWeight[20]; // first item is length. should this be in OotCustomSave?
+    u8              caughtAdultFishWeight[20]; // first item is length. should this be in OotCustomSave?
 }
 SharedCustomSave;
 
 extern SharedCustomSave gSharedCustomSave;
+
+# if defined(GAME_OOT)
+#  define gCustomSave gSharedCustomSave.oot
+# else
+#  define gCustomSave gSharedCustomSave.mm
+# endif
 #endif
 
 #define SAVE_OFFSET_MM_1            0x08000

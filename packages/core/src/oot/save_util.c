@@ -87,7 +87,7 @@ void comboCreateSaveMM(void)
 
     /* Custom save things */
     initCustomSave();
-    bzero(&gCustomSave, sizeof(CustomSave));
+    bzero(&gSharedCustomSave, sizeof(gSharedCustomSave));
 
     /* Actual MM save */
     bzero(&gMmSave, sizeof(MmSave));
