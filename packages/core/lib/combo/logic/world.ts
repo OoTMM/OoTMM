@@ -1,11 +1,11 @@
 import { cloneDeep } from 'lodash';
-import { MACROS, WORLD, REGIONS, POOL } from '@ootmm/data';
+import { MACROS, WORLD, REGIONS, POOL, ENTRANCES_DATA } from '@ootmm/data';
 
 import { Game, GAMES } from '../config';
 import { gameId } from '../util';
 import { Expr, exprTrue, MM_TIME_SLICES } from './expr';
 import { ExprParser } from './expr-parser';
-import { DATA_ENTRANCES_POOL, DATA_HINTS_POOL } from '../data';
+import { DATA_HINTS_POOL } from '../data';
 import { DUNGEONS, SETTINGS, Settings } from '../settings';
 import { Monitor } from '../monitor';
 import { defaultPrices } from './price';
@@ -463,7 +463,7 @@ export class LogicPassWorld {
   }
 
   private loadEntrances(game: Game) {
-    for (const record of DATA_ENTRANCES_POOL[game]) {
+    for (const record of ENTRANCES_DATA[game]) {
       const id = gameId(game, String(record.id), '_');
       const reverseRaw = String(record.reverse);
       let reverse: string | null = null;

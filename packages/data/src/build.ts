@@ -93,6 +93,16 @@ const POOL = {
   mm: loadCsv('pool/pool_mm.csv'),
 };
 
+const ENTRANCES_DATA = {
+  oot: loadCsv('entrances/entrances_oot.csv'),
+  mm: loadCsv('entrances/entrances_mm.csv'),
+};
+
+const HINTS_DATA = {
+  oot: loadCsv('hints/hints_oot.csv'),
+  mm: loadCsv('hints/hints_mm.csv'),
+};
+
 emit('WORLD', 'data-world', DATA_WORLD);
 emit('SCENES', 'data-scenes', loadYaml('defs/scenes.yml'));
 emit('NPC', 'data-npc', loadYaml('defs/npc.yml'));
@@ -104,5 +114,7 @@ emit('RAW_DRAWGI', 'data-drawgi', loadYaml('defs/drawgi.yml'));
 emit('FILES', 'data-files', DATA_FILES);
 emit('MACROS', 'data-macros', MACROS);
 emit('POOL', 'data-pool', POOL);
+emit('ENTRANCES_DATA', 'data-entrances-data', ENTRANCES_DATA);
+emit('RAW_HINTS_DATA', 'data-hints-raw', HINTS_DATA);
 
 writeFileSync(join(__dirname, '..', 'dist', 'index.ts'), importBuf.join('\n') + '\n');

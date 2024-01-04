@@ -2,10 +2,9 @@
   "name": "@ootmm/core",
   "version": "0.0.1",
   "scripts": {
-    "build": "ts-node -T ./lib/rollup.ts",
-    "start": "ts-node -T ./lib/index.ts",
-    "start:debug": "ts-node -T ./lib/index.ts --debug --config config.yml",
-    "profile": "TS_NODE_TRANSPILE_ONLY=true node -r ts-node/register --prof ./lib/index.ts --debug --config config.yml && node --prof-process isolate-0x*.log > processed.log && rm -rf isolate-0x*.log",
+    "build": "tsx ./lib/rollup.ts",
+    "start": "tsx ./lib/cli.ts",
+    "start:debug": "tsx ./lib/cli.ts --debug --config config.yml",
     "test": "cross-env NODE_ENV=test jest",
     "typecheck": "tsc --noEmit"
   },

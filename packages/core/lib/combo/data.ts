@@ -1,13 +1,8 @@
 import { isArray } from 'lodash';
-import { RAW_GI, RAW_DRAWGI } from '@ootmm/data';
+import { RAW_GI, RAW_DRAWGI, RAW_HINTS_DATA } from '@ootmm/data';
 
-import entrancesOot from '../../data/oot/entrances.csv';
-import entrancesMm from '../../data/mm/entrances.csv';
-
-export const DATA_ENTRANCES_POOL = {
-  oot: entrancesOot,
-  mm: entrancesMm,
-};
+import { Game } from './config';
+import { gameId } from './util';
 
 const mapGossip = (game: Game, data: any[]) => {
   const result: {[k: string]: any} = {};
@@ -18,14 +13,9 @@ const mapGossip = (game: Game, data: any[]) => {
   return result;
 };
 
-import hintsOot from '../../data/oot/hints.csv';
-import hintsMm from '../../data/mm/hints.csv';
-import { Game } from './config';
-import { gameId } from './util';
-
 export const DATA_HINTS_POOL = {
-  oot: mapGossip('oot', hintsOot),
-  mm: mapGossip('mm', hintsMm),
+  oot: mapGossip('oot', RAW_HINTS_DATA.oot),
+  mm: mapGossip('mm', RAW_HINTS_DATA.mm),
 };
 
 type DataGi = {
