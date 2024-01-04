@@ -6,7 +6,7 @@ import jsonPlugin from '@rollup/plugin-json';
 import replace from '@rollup/plugin-replace';
 import externals from 'rollup-plugin-node-externals';
 import terser from '@rollup/plugin-terser';
-import { globSync } from 'glob';
+import { sync as globSync } from 'glob';
 import JSZip from 'jszip';
 
 import { build as comboBuild } from './combo/build';

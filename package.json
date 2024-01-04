@@ -17,6 +17,7 @@
     "pako": "^2.1.0"
   },
   "devDependencies": {
+    "glob": "^10.3.10",
     "@nrwl/jest": "^17.2.8",
     "@types/jest": "^29.5.11",
     "@types/microtime": "^2.1.2",

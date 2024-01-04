@@ -30,7 +30,6 @@
     "@types/webpack-env": "^1.18.4",
     "cross-env": "^7.0.3",
     "csv": "^6.3.6",
-    "glob": "^10.3.10",
     "rollup": "^4.9.2",
     "rollup-plugin-node-externals": "^6.1.2",
     "type-fest": "^4.9.0",
