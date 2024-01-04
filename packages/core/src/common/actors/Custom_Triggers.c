@@ -234,6 +234,7 @@ static void CustomTriggers_CheckTrigger(Actor_CustomTriggers* this, GameState_Pl
 
 static void CustomTriggers_Init(Actor_CustomTriggers* this, GameState_Play* play)
 {
+    this->base.room = 0xff;
 }
 
 static void CustomTriggers_Fini(Actor_CustomTriggers* this, GameState_Play* play)
