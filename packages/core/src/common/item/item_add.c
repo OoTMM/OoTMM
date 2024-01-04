@@ -527,9 +527,9 @@ static void addArrowsOot(u8 count)
 
 static void addArrowsMm(u8 count)
 {
-    addBombsRawMm(count);
+    addArrowsRawMm(count);
     if (comboConfig(CFG_SHARED_BOWS))
-        addBombsRawOot(count);
+        addArrowsRawOot(count);
 }
 
 static int addItemArrowsOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
