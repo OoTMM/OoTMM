@@ -51,6 +51,7 @@ module.exports = {
       fs: false,
       path: false,
       child_process: false,
+      os: false,
     },
   },
   plugins: [

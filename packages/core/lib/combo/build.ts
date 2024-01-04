@@ -1,6 +1,7 @@
 import { spawn } from "child_process";
 import fs from "fs/promises";
-import path from "path";
+import path from 'path';
+import os from 'os';
 import { Buffer } from "buffer";
 
 import { GAMES } from "./config";
@@ -36,7 +37,7 @@ const cloneDependencies = async () => {
 const make = async (opts: Options) => {
   await cloneDependencies();
   return new Promise((resolve, reject) => {
-    const args = ['-j', '32'];
+    const args = ['-j', os.availableParallelism().toString()];
     if (opts.debug) {
       args.push('DEBUG=1');
     }

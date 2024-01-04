@@ -51,7 +51,5 @@ const dummyMonitor = new Monitor({});
 
 build().catch((err) => {
   console.error(err);
-  /* DEBUG */
-  setTimeout(() => process.exit(2), 10000);
-  //process.exit(1);
+  process.exit(1);
 });
