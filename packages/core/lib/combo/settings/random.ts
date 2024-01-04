@@ -103,6 +103,8 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
   base.shuffleMerchantsMm = booleanWeighted(random, 0.50);
   base.eggShuffle = booleanWeighted(random, 0.50);
   base.songs = sampleWeighted(random, { songLocations: 6, anywhere: 4 });
+  base.divingGameRupeeShuffle = booleanWeighted(random, 0.50);
+  base.pondFishShuffle = booleanWeighted(random, 0.50);
 
   /* Tokens - 25% disabled, 25% enabled, 50% individual */
   switch (randomInt(random, 4)) {

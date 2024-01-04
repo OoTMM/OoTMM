@@ -928,6 +928,17 @@ export class LogicPassWorldTransform {
       }
     }
 
+    /* Handle Diving Game Rupees */
+    if (!settings.divingGameRupeeShuffle) {
+      this.removeLocations([
+        'OOT Zora Domain Diving Game Green Rupee',
+        'OOT Zora Domain Diving Game Blue Rupee',
+        'OOT Zora Domain Diving Game Red Rupee',
+        'OOT Zora Domain Diving Game Purple Rupee',
+        'OOT Zora Domain Diving Game Huge Rupee',
+      ]);
+    }
+
     /* Make the basic item pool */
     this.makePools();
 

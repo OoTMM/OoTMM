@@ -18,6 +18,8 @@ test("Can make a seed - allsanity", () => {
     shopShuffleOot: "full",
     shopShuffleMm: "full",
     eggShuffle: true,
+    divingGameRupeeShuffle: true,
+    pondFishShuffle: true,
     scrubShuffleOot: true,
     childWallets: true,
     colossalWallets: true,
