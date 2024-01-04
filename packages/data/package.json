@@ -4,14 +4,13 @@
   "description": "",
   "main": "dist/index.ts",
   "scripts": {
-    "build": "tsx src/build.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsx src/build.ts"
   },
   "author": "Nax",
   "license": "MIT",
   "devDependencies": {
     "yaml": "^2.3.4",
-    "csv": "^6.2.8"
+    "csv": "^6.3.6"
   },
   "nx": {
     "targets": {
@@ -20,7 +19,7 @@
           "{projectRoot}/**/*"
         ],
         "outputs": [
-          "dist"
+          "{workspaceRoot}/dist"
         ],
         "dependsOn": [
           "^build"

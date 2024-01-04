@@ -9,8 +9,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@ootmm/data": "*",
-    "core-js": "^3.29.1",
+    "@ootmm/data": "^0.0.1",
+    "core-js": "^3.35.0",
     "crc-32": "^1.2.2",
     "lodash": "^4.17.21",
     "pngjs": "^7.0.0",
@@ -20,24 +20,21 @@
   "main": "dist/index.node.min.js",
   "types": "dist/lib/combo/index.d.ts",
   "devDependencies": {
-    "@rollup/plugin-dsv": "^3.0.2",
-    "@rollup/plugin-json": "^6.0.0",
-    "@rollup/plugin-replace": "^5.0.2",
-    "@rollup/plugin-terser": "^0.4.0",
-    "@rollup/plugin-typescript": "^11.0.0",
-    "@rollup/plugin-yaml": "^4.0.1",
-    "@types/glob": "^8.1.0",
-    "@types/lodash": "^4.14.192",
-    "@types/pngjs": "^6.0.1",
-    "@types/randombytes": "^2.0.0",
-    "@types/webpack-env": "^1.18.0",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-replace": "^5.0.5",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "@types/lodash": "^4.14.202",
+    "@types/pngjs": "^6.0.4",
+    "@types/randombytes": "^2.0.3",
+    "@types/webpack-env": "^1.18.4",
     "cross-env": "^7.0.3",
-    "csv": "^6.2.8",
-    "glob": "^9.3.2",
-    "rollup": "^3.20.2",
-    "rollup-plugin-node-externals": "^5.1.2",
-    "type-fest": "^3.7.2",
-    "yaml": "^2.2.1"
+    "csv": "^6.3.6",
+    "glob": "^10.3.10",
+    "rollup": "^4.9.2",
+    "rollup-plugin-node-externals": "^6.1.2",
+    "type-fest": "^4.9.0",
+    "yaml": "^2.3.4"
   },
   "files": [
     "dist/data"
@@ -62,24 +59,32 @@
           "version"
         ],
         "outputs": [
-          "build",
-          "dist",
-          "include/combo/custom.h"
+          "{workspaceRoot}/build",
+          "{workspaceRoot}/dist",
+          "{workspaceRoot}/include/combo/custom.h"
         ],
-        "dependsOn": ["^build"]
+        "dependsOn": [
+          "^build"
+        ]
       },
       "test": {
         "inputs": [
           "default"
         ],
         "outputs": [],
-        "dependsOn": ["^build"]
+        "dependsOn": [
+          "^build"
+        ]
       },
       "start": {
-        "dependsOn": ["^build"]
+        "dependsOn": [
+          "^build"
+        ]
       },
       "start:debug": {
-        "dependsOn": ["^build"]
+        "dependsOn": [
+          "^build"
+        ]
       }
     }
   }

@@ -1,16 +1,12 @@
-import './register';
-
 import fs from 'fs/promises';
 import path from 'path';
 import rollup from 'rollup';
 import typescript from '@rollup/plugin-typescript';
 import jsonPlugin from '@rollup/plugin-json';
 import replace from '@rollup/plugin-replace';
-import yamlPlugin from '@rollup/plugin-yaml';
-import dsvPlugin from '@rollup/plugin-dsv';
 import externals from 'rollup-plugin-node-externals';
 import terser from '@rollup/plugin-terser';
-import glob from 'glob';
+import { globSync } from 'glob';
 import JSZip from 'jszip';
 
 import { build as comboBuild } from './combo/build';
@@ -37,17 +33,6 @@ async function build() {
       typescript({ tsconfig: './tsconfig.json', declaration: true, declarationDir: 'dist' }),
       externals({ builtinsPrefix: 'strip' }),
       jsonPlugin(),
-      yamlPlugin(),
-      dsvPlugin({
-        processRow: (row) => {
-          const data: any = {};
-          Object.keys(row).forEach((key) => {
-            const value = row[key];
-            data[key.trim()] = (value || "").trim();
-          });
-          return data;
-        }
-      }),
       terser(),
     ],
   };
@@ -55,7 +40,7 @@ async function build() {
     file: 'dist/index.node.min.js',
     format: 'es',
   } as const;
-  const bundle = await rollup.rollup(inputOptions);
+  const bundle = await rollup.rollup(inputOptions as any);
   await bundle.write(outputOptions);
 }
 
@@ -82,7 +67,7 @@ async function copyData() {
   await customAssetsKeep(opts);
   await customFiles(opts);
   for (const basePath of ["build/assets", "data/static"]) {
-    const matches = glob.sync(['**/*.bin', '**/*.zobj'], { cwd: basePath });
+    const matches = globSync(['**/*.bin', '**/*.zobj'], { cwd: basePath });
     for (const filename of matches) {
       const data = await fs.readFile(path.join(basePath, filename));
       zip.file(filename, data);
