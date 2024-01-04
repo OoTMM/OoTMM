@@ -14,6 +14,7 @@ import { DEFAULT_RANDOM_SETTINGS } from './combo/settings/random';
 
 async function build() {
   const opts = {} as any;
+  const dummyMonitor = new Monitor({});
 
   await Promise.all([
     comboCodegen(dummyMonitor),
@@ -48,8 +49,6 @@ async function build() {
   await fs.mkdir('dist', { recursive: true });
   await fs.writeFile('dist/data.zip', zipBuf);
 }
-
-const dummyMonitor = new Monitor({});
 
 build().catch((err) => {
   console.error(err);
