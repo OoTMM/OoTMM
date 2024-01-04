@@ -58,14 +58,14 @@ class CosmeticsPass {
       return null;
     }
 
-    if (Buffer.isBuffer(path)) {
-      return path;
-    }
-
-    if (!process.env.BROWSER) {
-      return fs.readFile(path);
+    if (typeof path === 'string') {
+      if (!process.env.BROWSER) {
+        return fs.readFile(path);
+      } else {
+        throw new Error(`Cannot load buffers from path`);
+      }
     } else {
-      throw new Error(`Cannot load buffers from path`);
+      return Buffer.from(path);
     }
   }
 

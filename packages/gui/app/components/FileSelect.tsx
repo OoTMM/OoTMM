@@ -18,7 +18,7 @@ type FileSelectProps = {
   label: string;
   accept: string;
   file: string;
-  onChange: (file: Buffer) => void;
+  onChange: (file: ArrayBuffer) => void;
 }
 
 export const FileSelect = ({ logo, label, accept, onChange, file }: FileSelectProps) => {
@@ -32,7 +32,7 @@ export const FileSelect = ({ logo, label, accept, onChange, file }: FileSelectPr
     const reader = new FileReader();
     reader.onload = () => {
       setPending(false);
-      onChange(Buffer.from(reader.result as ArrayBuffer));
+      onChange(reader.result as ArrayBuffer);
     };
     reader.readAsArrayBuffer(f);
   };

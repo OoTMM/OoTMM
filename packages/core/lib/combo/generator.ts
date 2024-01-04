@@ -13,7 +13,6 @@ import { Patchfile } from './patch-build/patchfile';
 import { makeAddresses } from './addresses';
 import { cosmetics } from './cosmetics';
 import { applyRandomSettings } from './settings/random';
-import { exportSettings } from './settings/string';
 
 export type GeneratorOutput = {
   hash: string;
@@ -24,13 +23,19 @@ export type GeneratorOutput = {
 
 export class Generator {
   private monitor: Monitor;
+  private oot: Buffer;
+  private mm: Buffer;
+  private opts: Options;
 
   constructor(
-    private oot: Buffer,
-    private mm: Buffer,
-    private opts: Options,
+    oot: Buffer | ArrayBuffer,
+    mm: Buffer | ArrayBuffer,
+    opts: Options,
     monitorCallbacks: MonitorCallbacks,
   ) {
+    this.oot = Buffer.from(oot);
+    this.mm = Buffer.from(mm);
+    this.opts = opts;
     this.monitor = new Monitor(monitorCallbacks, opts.debug);
   }
 
@@ -65,7 +70,7 @@ export class Generator {
       });
       log = logicResult.log;
     } else {
-      patchfiles = [new Patchfile(this.opts.patch)];
+      patchfiles = [new Patchfile(Buffer.from(this.opts.patch))];
     }
 
     const cosmeticsPatchfile = await cosmetics(this.opts, addresses, roms);

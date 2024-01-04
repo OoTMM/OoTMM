@@ -11,7 +11,7 @@ export type Options = {
   settings: Settings;
   cosmetics: Cosmetics;
   random: OptionRandomSettings;
-  patch?: Buffer;
+  patch?: Buffer | ArrayBuffer;
   fetch?: FetchFunc;
 };
 

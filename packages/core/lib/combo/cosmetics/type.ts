@@ -1,7 +1,7 @@
-import { Color, ColorArg, ColorRandom } from './color';
+import { ColorArg } from './color';
 import { COSMETICS } from './data';
 
-export type BufferPath = string | Buffer;
+export type BufferPath = string | Buffer | ArrayBuffer;
 
 type CosmeticsDataCommon = {
   readonly key: string;
