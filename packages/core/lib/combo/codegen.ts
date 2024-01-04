@@ -1,5 +1,7 @@
 import path from 'path';
-import { DATA_DRAWGI, DATA_ENTRANCES, DATA_GI, DATA_NPC, DATA_SCENES } from './data';
+import { ENTRANCES, NPC, SCENES } from '@ootmm/data';
+
+import { DRAWGI, GI } from './data';
 import { Monitor } from './monitor';
 import { PATCH_GROUP_VALUES } from './patch-build/group';
 import { CONFVARS_VALUES } from './confvars';
@@ -33,7 +35,7 @@ async function genGI() {
   /* Header */
   const cgHeader = new CodeGen(path.resolve('build', 'include', 'combo', 'gi_data.h'), "GENERATED_GI_DATA_H");
   cgHeader.define('GI_NONE', 0);
-  for (const gi of Object.values(DATA_GI)) {
+  for (const gi of Object.values(GI)) {
     cgHeader.define(`GI_${gi.id}`, gi.index);
   }
   await cgHeader.emit();
@@ -54,7 +56,7 @@ async function genGI() {
   cgSource.raw('#endif');
   cgSource.raw('');
   cgSource.raw('const GetItem kExtendedGetItems[] = {');
-  for (const gi of Object.values(DATA_GI)) {
+  for (const gi of Object.values(GI)) {
     let fields: string[] = [];
     fields.push(gi.item);
     fields.push(`0x${gi.flags.toString(16)}`);
@@ -73,20 +75,20 @@ async function genGI() {
   }
   cgSource.raw('};');
   cgSource.raw('');
-  cgSource.table('kGetItemDrawGiParam', 'u8', Object.values(DATA_GI).map(gi => gi.drawParam));
+  cgSource.table('kGetItemDrawGiParam', 'u8', Object.values(GI).map(gi => gi.drawParam));
   cgSource.raw('');
   cgSource.raw('const char* const kItemNames[] = {');
-  for (const gi of Object.values(DATA_GI)) {
+  for (const gi of Object.values(GI)) {
     cgSource.raw(`    ${textMacro(gi.name)},`);
   }
   cgSource.raw('};');
   cgSource.raw('const u8 kAddItemFuncs[] = {');
-  for (const gi of Object.values(DATA_GI)) {
+  for (const gi of Object.values(GI)) {
     cgSource.raw(`    IA_${gi.addFunc},`);
   }
   cgSource.raw('};');
   cgSource.raw('const u16 kAddItemParams[] = {');
-  for (const gi of Object.values(DATA_GI)) {
+  for (const gi of Object.values(GI)) {
     cgSource.raw(`    ${gi.addParam},`);
   }
   cgSource.raw('};');
@@ -100,7 +102,7 @@ async function genDrawGI() {
   /* Header */
   const cgHeader = new CodeGen(path.resolve('build', 'include', 'combo', 'drawgi_data.h'), "GENERATED_DRAWGI_DATA_H");
   cgHeader.define('DRAWGI_NONE', 0);
-  for (const dgi of Object.values(DATA_DRAWGI)) {
+  for (const dgi of Object.values(DRAWGI)) {
     cgHeader.define(`DRAWGI_${dgi.id}`, dgi.index);
   }
   await cgHeader.emit();
@@ -110,7 +112,7 @@ async function genDrawGI() {
   cgSource.include('combo.h');
   cgSource.include('combo/custom.h');
   cgSource.raw('const DrawGi kDrawGi[] = {');
-  for (const dgi of Object.values(DATA_DRAWGI)) {
+  for (const dgi of Object.values(DRAWGI)) {
     cgSource.raw(`    { (void*)${dgi.func}, { ${dgi.params.join(', ')} } },`);
   }
   cgSource.raw('};');
@@ -122,9 +124,9 @@ export const codegen = async (monitor: Monitor) => {
   return Promise.all([
     genGI(),
     genDrawGI(),
-    codegenFile(DATA_SCENES,          "SCE",      "scenes.h",       "GENERATED_SCENES_H"),
-    codegenFile(DATA_NPC,             "NPC",      "npc.h",          "GENERATED_NPC_H"),
-    codegenFile(DATA_ENTRANCES,       "ENTR",     "entrances.h",    "GENERATED_ENTRANCES_H"),
+    codegenFile(SCENES,               "SCE",      "scenes.h",       "GENERATED_SCENES_H"),
+    codegenFile(NPC,                  "NPC",      "npc.h",          "GENERATED_NPC_H"),
+    codegenFile(ENTRANCES,            "ENTR",     "entrances.h",    "GENERATED_ENTRANCES_H"),
     codegenFile(CONFVARS_VALUES,      "CFG",      "config.h",       "GENERATED_CONFIG_H"),
     codegenFile(PATCH_GROUP_VALUES,   "PG",       "patch_group.h",  "GENERATED_PATCH_GROUP_H"),
     codegenFile(PRICE_RANGES,         "PRICES",   "prices.h",       "GENERATED_PRICES_H"),

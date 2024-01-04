@@ -1,0 +1,31 @@
+{
+  "name": "@ootmm/data",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/index.ts",
+  "scripts": {
+    "build": "tsx src/build.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nax",
+  "license": "MIT",
+  "devDependencies": {
+    "yaml": "^2.3.4",
+    "csv": "^6.2.8"
+  },
+  "nx": {
+    "targets": {
+      "build": {
+        "inputs": [
+          "{projectRoot}/**/*"
+        ],
+        "outputs": [
+          "dist"
+        ],
+        "dependsOn": [
+          "^build"
+        ]
+      }
+    }
+  }
+}

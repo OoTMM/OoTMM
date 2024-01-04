@@ -1,14 +1,16 @@
+import { cloneDeep } from 'lodash';
+import { MACROS, WORLD, REGIONS, POOL } from '@ootmm/data';
+
 import { Game, GAMES } from '../config';
 import { gameId } from '../util';
 import { Expr, exprTrue, MM_TIME_SLICES } from './expr';
 import { ExprParser } from './expr-parser';
-import { DATA_POOL, DATA_MACROS, DATA_WORLD, DATA_REGIONS, DATA_ENTRANCES_POOL, DATA_HINTS_POOL } from '../data';
+import { DATA_ENTRANCES_POOL, DATA_HINTS_POOL } from '../data';
 import { DUNGEONS, SETTINGS, Settings } from '../settings';
 import { Monitor } from '../monitor';
 import { defaultPrices } from './price';
 import { Item, itemByID, ItemHelpers, Items } from '../items';
 import { Random } from '../random';
-import { cloneDeep } from 'lodash';
 
 export const WORLD_FLAGS = [
   'ganonTrials',
@@ -336,17 +338,17 @@ export class LogicPassWorld {
   }
 
   private loadMacros(game: Game, exprParser: ExprParser) {
-    this.loadMacrosFile(exprParser, DATA_MACROS.common);
-    this.loadMacrosFile(exprParser, DATA_MACROS[game]);
+    this.loadMacrosFile(exprParser, MACROS.common);
+    this.loadMacrosFile(exprParser, MACROS[game]);
   }
 
   private loadAreas(game: Game, exprParser: ExprParser) {
-    const data = DATA_WORLD[game];
+    const data = WORLD[game];
     for (let areaSetName in data) {
       let areaSet = (data as any)[areaSetName];
       /* Handle MQ */
       if (game === 'oot' && this.world.mq.has(areaSetName)) {
-        areaSet = (DATA_WORLD.mq as any)[areaSetName];
+        areaSet = (WORLD.mq as any)[areaSetName];
       }
       for (let name in areaSet) {
         const area = areaSet[name];
@@ -381,7 +383,7 @@ export class LogicPassWorld {
           throw new Error(`Undefined region for area ${name}`);
         }
 
-        if (region !== 'ENTRANCE' && DATA_REGIONS[region] === undefined) {
+        if (region !== 'ENTRANCE' && REGIONS[region as keyof typeof REGIONS] === undefined) {
           throw new Error(`Unknown region ${region}`);
         }
 
@@ -422,7 +424,7 @@ export class LogicPassWorld {
   }
 
   private loadPool(game: Game) {
-    for (const record of DATA_POOL[game]) {
+    for (const record of POOL[game]) {
       const location = gameId(game, String(record.location), ' ');
       if (!this.world.locations.has(location))
         continue;

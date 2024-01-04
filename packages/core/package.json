@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@ootmm/data": "*",
     "core-js": "^3.29.1",
     "crc-32": "^1.2.2",
     "lodash": "^4.17.21",
@@ -65,14 +66,21 @@
           "build",
           "dist",
           "include/combo/custom.h"
-        ]
+        ],
+        "dependsOn": ["^build"]
       },
       "test": {
         "inputs": [
           "default"
         ],
         "outputs": [],
-        "dependsOn": []
+        "dependsOn": ["^build"]
+      },
+      "start": {
+        "dependsOn": ["^build"]
+      },
+      "start:debug": {
+        "dependsOn": ["^build"]
       }
     }
   }
