@@ -35,8 +35,7 @@ void initHeap(void)
 #endif
 }
 
-/* Dumb linear allocator */
-static void* _malloc(size_t size)
+void* malloc(size_t size)
 {
     HeapBlockHeader* best;
     HeapBlockHeader* block;
@@ -111,7 +110,7 @@ static void mergeFreeBlocks(HeapBlockHeader* block)
     }
 }
 
-static void _free(void* data)
+void free(void* data)
 {
     HeapBlockHeader* block;
 
@@ -134,36 +133,13 @@ static void _free(void* data)
 #endif
 }
 
-void* malloc(size_t size)
-{
-    u64 mask;
-    void* ret;
-
-    mask = osSetIntMask(1);
-    ret = _malloc(size);
-    osSetIntMask(mask);
-
-    return ret;
-}
-
-void free(void* data)
-{
-    u64 mask;
-
-    mask = osSetIntMask(1);
-    _free(data);
-    osSetIntMask(mask);
-}
-
 #if defined(DEBUG_ALLOC)
 void malloc_check(void)
 {
-    u64 mask;
     HeapBlockHeader* block;
     u32 count;
     u32* base;
 
-    mask = osSetIntMask(1);
     block = gHeapFirstBlock;
     while (block)
     {
@@ -186,6 +162,5 @@ void malloc_check(void)
 
         block = block->next;
     }
-    osSetIntMask(mask);
 }
 #endif

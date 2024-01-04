@@ -274,7 +274,7 @@ u32 comboLoadObject(void* buffer, u16 objectId)
     return vromEnd - vromStart;
 }
 
-static void* comboGetObjectImpl(u16 objectId)
+void* comboGetObject(u16 objectId)
 {
     u32 size;
     void* addr;
@@ -308,23 +308,8 @@ static void* comboGetObjectImpl(u16 objectId)
     return NULL;
 }
 
-void* comboGetObject(u16 objectId)
-{
-    OSIntMask imask;
-    void* data;
-
-    imask = osSetIntMask(1);
-    data = comboGetObjectImpl(objectId);
-    osSetIntMask(imask);
-
-    return data;
-}
-
 void comboObjectsReset(void)
 {
-    OSIntMask imask;
-
-    imask = osSetIntMask(1);
     for (int i = 0; i < OBJECT_COUNT; ++i)
     {
         free(sObjectsAddr[i]);
@@ -332,14 +317,10 @@ void comboObjectsReset(void)
         sObjectsAddr[i] = NULL;
         sObjectsTTL[i] = 0;
     }
-    osSetIntMask(imask);
 }
 
 void comboObjectsGC(void)
 {
-    OSIntMask imask;
-
-    imask = osSetIntMask(1);
     for (int i = 0; i < OBJECT_COUNT; ++i)
     {
         if (sObjectsAddr[i] == NULL)
@@ -356,7 +337,6 @@ void comboObjectsGC(void)
             sObjectsTTL[i]--;
         }
     }
-    osSetIntMask(imask);
 }
 
 #if defined(GAME_OOT)
@@ -370,9 +350,6 @@ void* gExObjectsAddr[EX_OBJECT_SLOTS_TOTAL];
 
 void comboExObjectsReset(void)
 {
-    u64 mask;
-
-    mask = osSetIntMask(1);
     for (int i = 0; i < EX_OBJECT_SLOTS_EXTENDED; ++i)
     {
         if (gExObjectsAddr[EX_OBJECT_SLOTS_NORMAL + i])
@@ -382,12 +359,10 @@ void comboExObjectsReset(void)
         }
     }
     memset(sExObjectsIds, 0xff, sizeof(sExObjectsIds));
-    osSetIntMask(mask);
 }
 
 int comboGetObjectSlot(ObjectContext* objectCtx, u16 objectId)
 {
-    u64 mask;
     int slot;
     int freeSlot;
     void* data;
@@ -412,7 +387,6 @@ int comboGetObjectSlot(ObjectContext* objectCtx, u16 objectId)
 
     slot = -1;
     freeSlot = -1;
-    mask = osSetIntMask(1);
 
     for (int i = 0; i < EX_OBJECT_SLOTS_EXTENDED; ++i)
     {
@@ -442,7 +416,6 @@ int comboGetObjectSlot(ObjectContext* objectCtx, u16 objectId)
         }
     }
 
-    osSetIntMask(mask);
     return slot;
 }
 
