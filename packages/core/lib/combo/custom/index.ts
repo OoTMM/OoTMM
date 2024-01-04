@@ -1,8 +1,9 @@
 import path from 'path';
 import fs from 'fs/promises';
 import { Buffer } from 'buffer';
+import { FILES } from '@ootmm/data';
 
-import { Game, DATA_FILES } from '../config';
+import { Game } from '../config';
 import { DmaData } from '../dma';
 import { splitObject } from './split';
 import { arrayToIndexMap, toU32Buffer } from '../util';
@@ -17,11 +18,9 @@ import { Options } from '../options';
 import { Patchfile } from '../patch-build/patchfile';
 import { grayscale } from '../image';
 
-const FILES_TO_INDEX_OOT = arrayToIndexMap(DATA_FILES.oot);
-const FILES_TO_INDEX_MM = arrayToIndexMap(DATA_FILES.mm);
 const FILES_TO_INDEX = {
-  oot: FILES_TO_INDEX_OOT,
-  mm: FILES_TO_INDEX_MM,
+  oot: arrayToIndexMap(FILES.oot),
+  mm: arrayToIndexMap(FILES.mm),
 };
 
 type CustomEntry = {

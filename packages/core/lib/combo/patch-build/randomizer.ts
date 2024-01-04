@@ -1,8 +1,9 @@
 import { Buffer } from 'buffer';
+import { HINTS, ENTRANCES, REGIONS, SCENES, NPC } from '@ootmm/data';
 
 import { LogicResult } from '../logic';
 import { isEntranceShuffle } from '../logic/helpers';
-import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_REGIONS, DATA_HINTS_POOL, DATA_HINTS, DATA_ENTRANCES } from '../data';
+import { GI, DATA_HINTS_POOL } from '../data';
 import { Game } from "../config";
 import { World, WorldCheck } from '../logic/world';
 import { DUNGEONS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS } from '../settings';
@@ -221,10 +222,10 @@ const gi = (settings: Settings, game: Game, item: Item, generic: boolean) => {
     }
   }
 
-  if (!DATA_GI.hasOwnProperty(itemId)) {
+  if (!GI.hasOwnProperty(itemId)) {
     throw new Error(`Unknown item ${itemId}`);
   }
-  let value = DATA_GI[itemId].index;
+  let value = GI[itemId].index;
 
   return value;
 };
@@ -233,7 +234,7 @@ function entrance(srcName: string, world: World) {
   const dstName = world.entranceOverrides.get(srcName) || srcName;
   const srcGame: Game = (/^OOT_/.test(srcName) ? 'oot' : 'mm');
   const dstGame: Game = (/^OOT_/.test(dstName) ? 'oot' : 'mm');
-  let data = DATA_ENTRANCES[dstName] as number;
+  let data = (ENTRANCES as any)[dstName] as number;
   if (data === undefined) {
     throw new Error(`Unknown entrance ${name}`);
   }
@@ -244,7 +245,7 @@ function entrance(srcName: string, world: World) {
 }
 
 const entrance2 = (srcGame: Game, dstGame: Game, name: string) => {
-  let data = DATA_ENTRANCES[name] as number;
+  let data = (ENTRANCES as any)[name] as number;
   if (data === undefined) {
     throw new Error(`Unknown entrance ${name}`);
   }
@@ -256,10 +257,10 @@ const entrance2 = (srcGame: Game, dstGame: Game, name: string) => {
 
 const checkId = (check: WorldCheck) => {
   if (check.type === 'npc') {
-    if (!DATA_NPC.hasOwnProperty(check.id)) {
+    if (!NPC.hasOwnProperty(check.id)) {
       throw new Error(`Unknown NPC ${check.id}`);
     }
-    return DATA_NPC[check.id];
+    return (NPC as any)[check.id];
   }
   return check.id;
 }
@@ -341,7 +342,7 @@ function checkKey(check: WorldCheck): number {
   case 'sf':
   case 'pot':
   case 'grass':
-    sceneId = DATA_SCENES[check.scene];
+    sceneId = (SCENES as any)[check.scene];
     if (sceneId === undefined) {
       throw new Error(`Unknown scene ${check.scene}`);
     }
@@ -421,7 +422,7 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
   case 'path':
     {
       const regionD = regionData(hint.region);
-      const region = DATA_REGIONS[regionD.id];
+      const region = (REGIONS as any)[regionD.id];
       const pathId = HINTS_PATHS[hint.path].id;
       if (region === undefined) {
         throw new Error(`Unknown region ${hint.region}`);
@@ -436,7 +437,7 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
   case 'foolish':
     {
       const regionD = regionData(hint.region);
-      const region = DATA_REGIONS[regionD.id];
+      const region = (REGIONS as any)[regionD.id];
       if (region === undefined) {
         throw new Error(`Unknown region ${hint.region}`);
       }
@@ -448,7 +449,7 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
     break;
   case 'item-exact':
     {
-      const check = DATA_HINTS[hint.check];
+      const check = (HINTS as any)[hint.check];
       if (check === undefined) {
         throw new Error(`Unknown named check: ${hint.check}`);
       }
@@ -476,7 +477,7 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
   case 'item-region':
       {
         const regionD = regionData(hint.region);
-        const region = DATA_REGIONS[regionD.id];
+        const region = (REGIONS as any)[regionD.id];
         const item = hint.item;
         if (region === undefined) {
           throw new Error(`Unknown region ${hint.region}`);
@@ -517,7 +518,7 @@ const gameHints = (settings: Settings, game: Game, hints: WorldHints): Buffer =>
 
 const regionsBuffer = (regions: Region[]) => {
   const data = regions.map((region) => {
-    const regionId = DATA_REGIONS[regionData(region).id];
+    const regionId = (REGIONS as any)[regionData(region).id];
     if (regionId === undefined) {
       throw new Error(`Unknown region ${region}`);
     }
