@@ -13,12 +13,17 @@ import { makeRandomSettings } from './settings/random';
 import { ItemHelpers, ItemsCount, makePlayerItem } from './items';
 import { makeLocation } from './logic/locations';
 
-export { Presets, PRESETS } from './presets';
-export { COSMETICS, makeCosmetics, Cosmetics } from './cosmetics';
+export { PRESETS } from './presets';
+export { COSMETICS, makeCosmetics } from './cosmetics';
 export { COLORS } from './cosmetics/color';
-export { OptionRandomSettings, makeRandomSettings } from './settings/random';
-export { SettingHint, SettingHintType, SETTINGS_DEFAULT_HINTS, HINT_TYPES } from './settings/hints';
+export { makeRandomSettings } from './settings/random';
+export { SETTINGS_DEFAULT_HINTS, HINT_TYPES } from './settings/hints';
 export { exportSettings, importSettings } from './settings/string';
+
+export type { Presets } from './presets';
+export type { Cosmetics } from './cosmetics';
+export type { OptionRandomSettings } from './settings/random';
+export type { SettingHint, SettingHintType } from './settings/hints';
 
 export type GeneratorParams = {
   oot: Buffer,

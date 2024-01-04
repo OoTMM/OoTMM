@@ -48,12 +48,16 @@ module.exports = {
       buffer: require.resolve('buffer/'),
       crypto: require.resolve('crypto-browserify'),
       stream: require.resolve('stream-browserify'),
+      fs: false,
+      path: false,
+      child_process: false,
     },
   },
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(env),
       'process.env.VERSION': JSON.stringify(VERSION),
+      'process.env.BROWSER': JSON.stringify(true),
     }),
     new CopyWebpackPlugin({
       patterns: [

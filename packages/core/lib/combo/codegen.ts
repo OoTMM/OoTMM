@@ -9,7 +9,7 @@ import { PRICE_RANGES } from './logic/price';
 import { CodeGen } from './util/codegen';
 
 const codegenFile = async (data: {[k: string]: number}, prefix: string, filename: string, guard: string) => {
-  if (!process.env.ROLLUP) {
+  if (!process.env.BROWSER) {
     const cg = new CodeGen(path.resolve('build', 'include', 'combo', filename), guard);
     for (const [k, v] of Object.entries(data)) {
       cg.define(prefix + "_" + k, v);
@@ -29,7 +29,7 @@ function textMacro(data: string) {
 }
 
 async function genGI() {
-  if (process.env.ROLLUP)
+  if (process.env.BROWSER)
     return;
 
   /* Header */
@@ -96,7 +96,7 @@ async function genGI() {
 }
 
 async function genDrawGI() {
-  if (process.env.ROLLUP)
+  if (process.env.BROWSER)
     return;
 
   /* Header */

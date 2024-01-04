@@ -44,7 +44,7 @@ export class Generator {
     this.opts.settings = applyRandomSettings(this.opts.random, this.opts.settings);
 
     if (!this.opts.patch) {
-      if (!process.env.ROLLUP) {
+      if (!process.env.BROWSER) {
         await codegen(this.monitor);
       }
       const patchfile = new Patchfile;

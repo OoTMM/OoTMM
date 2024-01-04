@@ -22,7 +22,7 @@ function fsRetry<T>(fn: () => Promise<T>, retries = 5): Promise<T> {
 export const compressFile = async (data: Buffer): Promise<Buffer> => {
   let filename = "";
 
-  if (!process.env.ROLLUP) {
+  if (!process.env.BROWSER) {
     const hash = crypto.createHash('sha256').update(data).digest('hex');
     const dir = path.resolve('build', 'cache', 'yaz0', hash.slice(0, 2));
     filename = path.resolve(dir, hash);
@@ -36,7 +36,7 @@ export const compressFile = async (data: Buffer): Promise<Buffer> => {
 
   /* Cache miss - compress */
   const compressed = await Yaz0.compress(data, 7);
-  if (!process.env.ROLLUP) {
+  if (!process.env.BROWSER) {
     await fsRetry(() => fs.writeFile(filename, compressed));
   }
   return compressed;

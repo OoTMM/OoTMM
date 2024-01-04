@@ -64,7 +64,7 @@ const makeSplitObject = async (roms: DecompressedRoms, entry: CustomEntry) => {
   const buf = await getObjectBuffer(roms, entry.game, entry.file);
   const obj = splitObject(buf, entry.offsets);
 
-  if (!process.env.ROLLUP) {
+  if (!process.env.BROWSER) {
     const outDir = path.resolve('build', 'custom');
     const outBasename = entry.name.toLowerCase();
     const outFilename = path.resolve(outDir, `${outBasename}.zobj`);
@@ -152,7 +152,7 @@ class CustomAssetsBuilder {
     private roms: DecompressedRoms,
     private patch: Patchfile,
   ) {
-    const cgPath = process.env.ROLLUP ? '' : path.resolve('include', 'combo', 'custom.h');
+    const cgPath = process.env.BROWSER ? '' : path.resolve('include', 'combo', 'custom.h');
     this.cg = new CodeGen(cgPath, 'CUSTOM_H');
     this.vrom = 0x08000000;
     this.objectId = 0x2000;
@@ -266,7 +266,7 @@ class CustomAssetsBuilder {
     this.cg.define('CUSTOM_OBJECT_TABLE_VROM', objectTableVrom);
     this.cg.define('CUSTOM_OBJECT_TABLE_SIZE', this.objectVroms.length);
 
-    if (!process.env.ROLLUP) {
+    if (!process.env.BROWSER) {
       await this.cg.emit();
     }
   }

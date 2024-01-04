@@ -2,7 +2,7 @@
   "name": "@ootmm/core",
   "version": "0.0.1",
   "scripts": {
-    "build": "tsx ./lib/rollup.ts",
+    "build": "tsx ./lib/build.ts",
     "start": "tsx ./lib/cli.ts",
     "start:debug": "tsx ./lib/cli.ts --debug --config config.yml",
     "test": "cross-env NODE_ENV=test jest",
@@ -17,23 +17,16 @@
     "randombytes": "^2.1.0",
     "yaz0": "^2.0.5"
   },
-  "main": "dist/index.node.min.js",
+  "main": "lib/combo/index.ts",
   "types": "dist/lib/combo/index.d.ts",
   "devDependencies": {
-    "@rollup/plugin-json": "^6.1.0",
-    "@rollup/plugin-replace": "^5.0.5",
-    "@rollup/plugin-terser": "^0.4.4",
-    "@rollup/plugin-typescript": "^11.1.5",
     "@types/lodash": "^4.14.202",
     "@types/pngjs": "^6.0.4",
     "@types/randombytes": "^2.0.3",
     "@types/webpack-env": "^1.18.4",
     "cross-env": "^7.0.3",
     "csv": "^6.3.6",
-    "rollup": "^4.9.2",
-    "rollup-plugin-node-externals": "^6.1.2",
-    "type-fest": "^4.9.0",
-    "yaml": "^2.3.4"
+    "type-fest": "^4.9.0"
   },
   "files": [
     "dist/data"

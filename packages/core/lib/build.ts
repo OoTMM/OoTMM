@@ -1,11 +1,5 @@
 import fs from 'fs/promises';
 import path from 'path';
-import rollup from 'rollup';
-import typescript from '@rollup/plugin-typescript';
-import jsonPlugin from '@rollup/plugin-json';
-import replace from '@rollup/plugin-replace';
-import externals from 'rollup-plugin-node-externals';
-import terser from '@rollup/plugin-terser';
 import { sync as globSync } from 'glob';
 import JSZip from 'jszip';
 
@@ -18,39 +12,13 @@ import { cosmeticsAssets } from './combo/cosmetics';
 import { DEFAULT_COSMETICS } from './combo/cosmetics/util';
 import { DEFAULT_RANDOM_SETTINGS } from './combo/settings/random';
 
-const VERSION = process.env.VERSION || 'XXX';
-
 async function build() {
-  const inputOptions = {
-    input: 'lib/combo/index.ts',
-    plugins: [
-      replace({
-        preventAssignment: true,
-        'process.env.NODE_ENV': JSON.stringify('production'),
-        'process.env.ROLLUP': JSON.stringify(true),
-        'process.env.VERSION': JSON.stringify(VERSION),
-      }),
-      typescript({ tsconfig: './tsconfig.json', declaration: true, declarationDir: 'dist' }),
-      externals({ builtinsPrefix: 'strip' }),
-      jsonPlugin(),
-      terser(),
-    ],
-  };
-  const outputOptions = {
-    file: 'dist/index.node.min.js',
-    format: 'es',
-  } as const;
-  const bundle = await rollup.rollup(inputOptions as any);
-  await bundle.write(outputOptions);
-}
-
-async function copyData() {
   const opts = {} as any;
   await Promise.all([
     comboCodegen(dummyMonitor),
     cosmeticsAssets(opts),
   ]);
-  const b = await comboBuild({ debug: false, seed: 'ROLLUP', settings: DEFAULT_SETTINGS, cosmetics: DEFAULT_COSMETICS, random: DEFAULT_RANDOM_SETTINGS });
+  const b = await comboBuild({ debug: false, seed: 'BUILD', settings: DEFAULT_SETTINGS, cosmetics: DEFAULT_COSMETICS, random: DEFAULT_RANDOM_SETTINGS });
 
   /* Create the zip */
   const zip = new JSZip();
@@ -81,7 +49,7 @@ async function copyData() {
 
 const dummyMonitor = new Monitor({});
 
-build().then(copyData).catch((err) => {
+build().catch((err) => {
   console.error(err);
   process.exit(1);
 });

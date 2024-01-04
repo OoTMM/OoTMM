@@ -74,7 +74,7 @@ const fetchBuildArtifacts = async (opts: Options): Promise<BuildOutput> => {
 };
 
 export const build = async (opts: Options): Promise<BuildOutput> => {
-  if (!process.env.ROLLUP) {
+  if (!process.env.BROWSER) {
     await make(opts);
     return getBuildArtifacts('build' + (opts.debug ? '/Debug' : '/Release'));
   } else {

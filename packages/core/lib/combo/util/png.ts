@@ -3,7 +3,7 @@ import path from 'path';
 import { Options } from '../options';
 
 let PNG: any = null;
-if (!process.env.ROLLUP) {
+if (!process.env.BROWSER) {
   PNG = require('pngjs').PNG;
 };
 
@@ -73,7 +73,7 @@ const parsePngBitmask = async (data: Buffer) => {
 };
 
 export const png = async (opts: Options, filename: string, mode: 'rgba32' | 'rgba16' | 'i4' | 'bitmask') => {
-  if (process.env.ROLLUP) {
+  if (process.env.BROWSER) {
     return opts.fetch!(`${filename}.bin`);
   } else {
     const data = await fs.readFile(__dirname + '/../../../data/assets/' + filename + '.png');

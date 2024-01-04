@@ -16,7 +16,7 @@ import { randomizeMusic } from './music';
 
 export { makeCosmetics } from './util';
 export { COSMETICS } from './data';
-export { Cosmetics } from './type';
+export type { Cosmetics } from './type';
 
 const OBJECTS_TABLE_ADDR = 0x800f8ff8;
 
@@ -62,7 +62,7 @@ class CosmeticsPass {
       return path;
     }
 
-    if (!process.env.ROLLUP) {
+    if (!process.env.BROWSER) {
       return fs.readFile(path);
     } else {
       throw new Error(`Cannot load buffers from path`);
