@@ -14,6 +14,7 @@ import { DEFAULT_RANDOM_SETTINGS } from './combo/settings/random';
 
 async function build() {
   const opts = {} as any;
+
   await Promise.all([
     comboCodegen(dummyMonitor),
     cosmeticsAssets(opts),
@@ -44,6 +45,7 @@ async function build() {
 
   /* Compress the data */
   const zipBuf = await zip.generateAsync({ type: 'nodebuffer', compression: 'DEFLATE', compressionOptions: { level: 9 } });
+  await fs.mkdir('dist', { recursive: true });
   await fs.writeFile('dist/data.zip', zipBuf);
 }
 
