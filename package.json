@@ -7,7 +7,7 @@
   "scripts": {
     "start:core": "nx run @ootmm/core:start",
     "start:core:debug": "nx run @ootmm/core:start:debug",
-    "build": "nx run-many -t build",
+    "build": "nx run --output-style=static @ootmm/gui:build",
     "test": "nx run-many --target=test --output-style=stream-without-prefixes",
     "serve": "nx run-many -t serve",
     "typecheck": "nx run-many -t typecheck"
