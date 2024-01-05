@@ -1306,7 +1306,7 @@ export class LogicPassWorldTransform {
     /* Handle required junks */
     const renewableJunks: PlayerItems = new Map;
     for (const pi of this.pool.keys()) {
-      if (this.state.itemProperties.junk.has && ItemHelpers.isItemConsumable(pi.item)) {
+      if (this.state.itemProperties.junk.has(pi.item) && ItemHelpers.isItemConsumable(pi.item)) {
         for (const loc of this.locsByItem.get(pi) || []) {
           const world = this.state.worlds[locationData(loc).world as number];
           if (isLocationRenewable(world, loc) && !this.fixedLocations.has(loc)) {
