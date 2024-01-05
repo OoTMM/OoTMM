@@ -92,7 +92,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.ammo[ITS_MM_KEG] = 1;
         gSave.inventory.ammo[ITS_MM_BEANS] = 10;
         gSave.inventory.ammo[ITS_MM_BOW] = 50;
-        gSave.inventory.ammo[ITS_MM_BOMBCHU] = 40;
+        gSave.inventory.ammo[ITS_MM_BOMBCHU] = 50;
         gSave.inventory.ammo[ITS_MM_BOMBS] = 40;
 
         gSave.playerData.healthMax = 0x10 * 20;

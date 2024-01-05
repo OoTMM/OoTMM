@@ -68,6 +68,7 @@ function asmPatchGroups(settings: Settings) {
     NO_BROKEN_ACTORS: !settings.restoreBrokenActors,
     OOT_FISHING_POND_SHUFFLE: settings.pondFishShuffle,
     OOT_NOT_FISHING_POND_SHUFFLE: !settings.pondFishShuffle,
+    MM_BOMBCHU_BAG: settings.bombchuBagMm,
   };
   const keys = Object.keys(groups) as PatchGroup[];
   return keys.filter((k) => groups[k]);
