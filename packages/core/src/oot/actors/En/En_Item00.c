@@ -81,3 +81,10 @@ void EnItem00_DrawHeartPieceSmallKey(Actor_EnItem00* this, GameState_Play* play)
 }
 
 PATCH_FUNC(0x80013498, EnItem00_DrawHeartPieceSmallKey);
+
+s16 EnItem00_FixDrop(s16 dropId)
+{
+    return 0x05;
+}
+
+PATCH_FUNC(0x80013530, EnItem00_FixDrop);
