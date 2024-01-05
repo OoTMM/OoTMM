@@ -25,6 +25,8 @@ void EnExItem_RewardByIndex(ComboItemQuery* q, int index)
     case 0x07:
         /* Bombchu */
         q->gi = GI_OOT_BOMBCHU_10;
+        if (comboConfig(CFG_OOT_BOMBCHU_BAG) && gOotSave.inventory.items[ITS_OOT_BOMBCHU] != ITEM_OOT_BOMBCHU_10)
+            q->gi = GI_OOT_RUPEE_PURPLE;
         break;
     case 0x03:
     case 0x08:
