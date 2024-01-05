@@ -123,6 +123,7 @@ static s16 bombDrop(s16 dropId)
     return dropId;
 }
 
+/* TODO: Flexible drops would ideally need to be patched on top of this */
 static s16 EnItem00_FixDropWrapper(s16 dropId)
 {
     switch (dropId)

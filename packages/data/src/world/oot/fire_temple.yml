@@ -11,7 +11,7 @@
     "Fire Temple": "true"
     "Fire Temple Boss": "boss_key(BOSS_KEY_FIRE) && has_tunic_goron && (((is_adult || time_travel_at_will) && event(FIRE_TEMPLE_PILLAR_HAMMER)) || has_hover_boots || climb_anywhere || hookshot_anywhere)"
   events:
-    BOMBS: "has_tunic_goron"
+    BOMBS_OR_BOMBCHU: "has_tunic_goron"
   locations:
     "Fire Temple Jail 1 Chest": "has_tunic_goron"
     "Fire Temple Pot Pre-Boss Room 1": "has_tunic_goron && ((is_adult && (has_hover_boots || can_hookshot || glitch_megaflip)) || climb_anywhere || hookshot_anywhere)"

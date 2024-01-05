@@ -85,7 +85,7 @@
     "Kokiri Forest Storms Grotto": "hidden_grotto_storms"
     "Kokiri Forest Near Deku Tree": "event(MIDO_MOVED) || is_adult || climb_anywhere || hookshot_anywhere"
   events:
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     RUPEES: "true"
     SEEDS: "is_child"
     ARROWS: "is_adult"
@@ -183,7 +183,7 @@
   exits:
     "Kokiri Forest": "true"
   events:
-    BOMBS: "can_cut_grass"
+    BOMBS_OR_BOMBCHU: "can_cut_grass"
     RUPEES: "can_cut_grass"
     SEEDS: "is_child && can_cut_grass"
     ARROWS: "is_adult"
@@ -220,7 +220,7 @@
   events:
     BIG_POE: "can_ride_epona && can_use_bow && has_bottle"
     #There are rocks near Gerudo Valley you can farm for drops
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     RUPEES: "true"
     SEEDS: "is_child"
     ARROWS: "is_adult"
@@ -294,7 +294,7 @@
   exits:
     "Hyrule Field": "true"
   events:
-    BOMBS: "can_cut_grass"
+    BOMBS_OR_BOMBCHU: "can_cut_grass"
     RUPEES: "can_cut_grass"
     SEEDS: "is_child && can_cut_grass"
     ARROWS: "is_adult"
@@ -315,7 +315,7 @@
   exits:
     "Hyrule Field": "true"
   events:
-    BOMBS: "can_cut_grass"
+    BOMBS_OR_BOMBCHU: "can_cut_grass"
     RUPEES: "can_cut_grass"
     SEEDS: "is_child && can_cut_grass"
     ARROWS: "is_adult"
@@ -336,7 +336,7 @@
   exits:
     "Hyrule Field": "true"
   events:
-    BOMBS: "can_cut_grass"
+    BOMBS_OR_BOMBCHU: "can_cut_grass"
     RUPEES: "can_cut_grass"
     SEEDS: "is_child && can_cut_grass"
     ARROWS: "is_adult"
@@ -561,7 +561,7 @@
     "Market": "true"
   events:
     BOMBS: "can_use_wallet(2)"
-    BOMBCHUS: "can_use_wallet(1)"
+    BOMBCHU: "can_use_wallet(1)"
   locations:
     "Bombchu Bowling Reward 1": "has_bomb_bag && can_use_wallet(1) && soul_npc(SOUL_NPC_BOMBCHU_BOWLING_LADY)"
     "Bombchu Bowling Reward 2": "has_bomb_bag && can_use_wallet(1) && soul_npc(SOUL_NPC_BOMBCHU_BOWLING_LADY)"
@@ -653,7 +653,7 @@
   events:
     MALON: "soul_npc(SOUL_NPC_MALON)"
     TALON_CHILD: "has(CHICKEN) && soul_npc(SOUL_NPC_TALON)"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     RUPEES: "true"
     SEEDS: "is_child"
     MAGIC: "true"
@@ -705,7 +705,7 @@
     NUTS: "has_explosives_or_hammer"
     SEEDS: "has_explosives_or_hammer && is_child"
     ARROWS: "has_explosives_or_hammer && is_adult"
-    BOMBS: "can_hammer"
+    BOMBS_OR_BOMBCHU: "can_hammer"
     BUGS: "has_explosives_or_hammer && has_bottle"
   locations:
     "Hyrule Castle GS Grotto": "has_explosives_or_hammer && can_collect_distance"
@@ -759,7 +759,7 @@
   events:
     BEAN_LOST_WOODS_EARLY: "can_use_beans"
     RUPEES: "true"
-    BOMBS: "can_cut_grass"
+    BOMBS_OR_BOMBCHU: "can_cut_grass"
     SEEDS: "is_child && can_cut_grass"
     ARROWS: "is_adult"
     MAGIC: "can_cut_grass"
@@ -783,7 +783,7 @@
   exits:
     "Lost Woods": "true"
   events:
-    BOMBS: "can_cut_grass"
+    BOMBS_OR_BOMBCHU: "can_cut_grass"
     RUPEES: "can_cut_grass"
     SEEDS: "is_child && can_cut_grass"
     ARROWS: "is_adult"
@@ -823,7 +823,7 @@
   events:
     BEAN_LOST_WOODS_LATE: "can_use_beans"
     RUPEES: "can_cut_grass"
-    BOMBS: "can_cut_grass"
+    BOMBS_OR_BOMBCHU: "can_cut_grass"
     SEEDS: "is_child && can_cut_grass"
     ARROWS: "is_adult"
     MAGIC: "can_cut_grass"
@@ -896,7 +896,7 @@
   events:
     KAKARIKO_GATE_OPEN: "is_child && has(ZELDA_LETTER) && soul_npc(SOUL_NPC_HYLIAN_GUARD)"
     BUGS: "has_bottle"
-    BOMBS: "can_cut_grass"
+    BOMBS_OR_BOMBCHU: "can_cut_grass"
     RUPEES: "can_cut_grass"
     SEEDS: "is_child && can_cut_grass"
     ARROWS: "is_adult"
@@ -1067,7 +1067,7 @@
   exits:
     "Kakariko Back": "true"
   events:
-    BOMBS: "can_cut_grass"
+    BOMBS_OR_BOMBCHU: "can_cut_grass"
     RUPEES: "can_cut_grass"
     SEEDS: "is_child && can_cut_grass"
     ARROWS: "is_adult"
@@ -1095,7 +1095,7 @@
   events:
     BEAN_GRAVEYARD: "can_use_beans"
     BUGS: "has_bottle"
-    BOMBS: "can_cut_grass"
+    BOMBS_OR_BOMBCHU: "can_cut_grass"
     RUPEES: "can_cut_grass"
     SEEDS: "is_child && can_cut_grass"
     ARROWS: "is_adult"
@@ -1152,7 +1152,7 @@
     NUTS: "true"
     RUPEES: "true"
     MAGIC: "true"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     SEEDS: "is_child"
     ARROWS: "is_adult"
     WINDMILL_TOP: "is_adult && can_play_time"
@@ -1215,7 +1215,7 @@
   exits:
     "Death Mountain": "true"
   events:
-    BOMBS: "can_cut_grass"
+    BOMBS_OR_BOMBCHU: "can_cut_grass"
     RUPEES: "can_cut_grass"
     SEEDS: "is_child && can_cut_grass"
     ARROWS: "is_adult"
@@ -1331,7 +1331,7 @@
     "Hyrule Field": "true"
     "Zora River": "is_adult || has_explosives_or_hammer || has_hover_boots || climb_anywhere || hookshot_anywhere"
   events:
-    BOMBS: "can_cut_grass"
+    BOMBS_OR_BOMBCHU: "can_cut_grass"
     RUPEES: "can_cut_grass"
     SEEDS: "is_child && can_cut_grass"
     ARROWS: "is_adult"
@@ -1361,7 +1361,7 @@
     "Zora River Open Grotto": "true"
     "Zora River Boulder Grotto": "has_explosives_or_hammer"
   events:
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     RUPEES: "true"
     SEEDS: "is_child"
     ARROWS: "is_adult"
@@ -1392,7 +1392,7 @@
   exits:
     "Zora River": "true"
   events:
-    BOMBS: "can_cut_grass"
+    BOMBS_OR_BOMBCHU: "can_cut_grass"
     RUPEES: "can_cut_grass"
     SEEDS: "is_child && can_cut_grass"
     ARROWS: "is_adult"
@@ -1482,7 +1482,7 @@
     SCARECROW_CHILD: "is_child && can_play_scarecrow"
     SCARECROW: "is_adult && event(SCARECROW_CHILD)"
     BEAN_LAKE_HYLIA: "can_use_beans"
-    BOMBS: "can_cut_grass"
+    BOMBS_OR_BOMBCHU: "can_cut_grass"
     RUPEES: "can_cut_grass"
     SEEDS: "is_child && can_cut_grass"
     ARROWS: "is_adult"
@@ -1669,7 +1669,7 @@
     "Fairy Fountain Double Magic": "glitch_megaflip"
   events:
     #Having to farm these rocks for drops without heat resistance isn't fair without access to the grotto
-    BOMBS: "has_tunic_goron_strict || can_hammer"
+    BOMBS_OR_BOMBCHU: "has_tunic_goron_strict || can_hammer"
     RUPEES: "has_tunic_goron_strict || has_explosives_or_hammer"
     ARROWS: "has_tunic_goron_strict || has_explosives_or_hammer"
     MAGIC: "has_tunic_goron_strict || has_explosives_or_hammer"
@@ -1717,7 +1717,7 @@
   exits:
     "Death Mountain Crater Top": "true"
   events:
-    BOMBS: "can_cut_grass"
+    BOMBS_OR_BOMBCHU: "can_cut_grass"
     RUPEES: "can_cut_grass"
     SEEDS: "is_child && can_cut_grass"
     ARROWS: "is_adult"
@@ -1759,7 +1759,7 @@
     "Octorok Grotto Ledge": "true"
   events:
     RUPEES: "true"
-    BOMBS: "is_child"
+    BOMBS_OR_BOMBCHU: "is_child"
     SEEDS: "is_child"
     MAGIC: "is_child"
     BUGS: "is_child && has_bottle"
@@ -1919,7 +1919,7 @@
     "Haunted Wasteland Start": "can_longshot || has_hover_boots || trick(OOT_SAND_RIVER_NOTHING)"
     "Haunted Wasteland End": "has_lens_strict || trick(OOT_BLIND_WASTELAND)"
   events:
-    BOMBCHUS: "can_use_wallet(2)"
+    BOMBCHU: "can_use_wallet(2)"
   locations:
     "Haunted Wasteland Chest": "has_fire"
     "Haunted Wasteland GS": "can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_sword || can_use_sticks || can_use_din))"

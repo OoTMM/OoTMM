@@ -10,7 +10,7 @@
     "Shadow Temple First Beamos": "has_fire_arrows || has_hover_boots || glitch_megaflip"
   events:
     ARROWS: "true"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     MAGIC: "true"
 "Shadow Temple First Locked Door":
   dungeon: Shadow
