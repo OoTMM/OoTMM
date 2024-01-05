@@ -243,7 +243,7 @@ void comboTextHijackOathToOrder(GameState_Play* play);
 #endif
 
 /* Progressive */
-s32 comboProgressive(s32 gi, int ovflags);
+s16 comboProgressive(s16 gi, int ovflags);
 
 /* Cache */
 void    comboCacheClear(void);

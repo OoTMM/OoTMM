@@ -1,21 +1,21 @@
 #include <combo.h>
 #include <combo/item.h>
 
-static s32 progressiveRutoLetter(void)
+static s16 progressiveRutoLetter(void)
 {
     if (gOotExtraItems.rutoLetter)
         return GI_OOT_BOTTLE_EMPTY;
     return GI_OOT_RUTO_LETTER;
 }
 
-static s32 progressiveGoldDustBottle(void)
+static s16 progressiveGoldDustBottle(void)
 {
     if (gMmExtraItems.goldDust)
         return GI_MM_BOTTLE_EMPTY;
     return GI_MM_BOTTLED_GOLD_DUST;
 }
 
-static s32 progressiveBombBagOot(void)
+static s16 progressiveBombBagOot(void)
 {
     if (gOotSave.inventory.items[ITS_OOT_BOMBS] == ITEM_NONE)
         return GI_OOT_BOMB_BAG;
@@ -30,7 +30,7 @@ static s32 progressiveBombBagOot(void)
     }
 }
 
-static s32 progressiveBombBagMm(void)
+static s16 progressiveBombBagMm(void)
 {
     switch (gMmSave.inventory.upgrades.bombBag)
     {
@@ -43,7 +43,7 @@ static s32 progressiveBombBagMm(void)
     }
 }
 
-static s32 progressiveBowOot(void)
+static s16 progressiveBowOot(void)
 {
     if (gOotSave.inventory.items[ITS_OOT_BOW] == ITEM_NONE)
         return GI_OOT_BOW;
@@ -57,7 +57,7 @@ static s32 progressiveBowOot(void)
     }
 }
 
-static s32 progressiveBowMm(void)
+static s16 progressiveBowMm(void)
 {
     switch (gMmSave.inventory.upgrades.quiver)
     {
@@ -70,7 +70,7 @@ static s32 progressiveBowMm(void)
     }
 }
 
-static s32 progressiveSlingshot(void)
+static s16 progressiveSlingshot(void)
 {
     if (gOotSave.inventory.items[ITS_OOT_SLINGSHOT] == ITEM_NONE)
         return GI_OOT_SLINGSHOT;
@@ -85,21 +85,21 @@ static s32 progressiveSlingshot(void)
     }
 }
 
-static s32 progressiveOcarinaOot(void)
+static s16 progressiveOcarinaOot(void)
 {
     if (gOotExtraItems.ocarina == 0)
         return GI_OOT_OCARINA_FAIRY;
     return GI_OOT_OCARINA_TIME;
 }
 
-static s32 progressiveOcarinaMm(void)
+static s16 progressiveOcarinaMm(void)
 {
     if (!gMmExtraItems.ocarina)
         return GI_MM_OCARINA_FAIRY;
     return GI_MM_OCARINA_OF_TIME;
 }
 
-static s32 progressiveHookshotOot(void)
+static s16 progressiveHookshotOot(void)
 {
     if (gOotExtraItems.hookshot == 0)
         return GI_OOT_HOOKSHOT;
@@ -107,7 +107,7 @@ static s32 progressiveHookshotOot(void)
 }
 
 /* This is only called when hookshots are shared */
-static s32 progressiveHookshotMm(s32 gi)
+static s16 progressiveHookshotMm(s16 gi)
 {
     /* Short hookshot enabled - ignore shared items */
     if (comboConfig(CFG_MM_HOOKSHOT_SHORT))
@@ -129,14 +129,14 @@ static s32 progressiveHookshotMm(s32 gi)
     return gi;
 }
 
-static s32 progressiveSwordGoron(void)
+static s16 progressiveSwordGoron(void)
 {
     if (!(gOotSave.inventory.equipment.swords & (EQ_OOT_SWORD_KNIFE | EQ_OOT_SWORD_KNIFE_BROKEN)))
         return GI_OOT_SWORD_KNIFE;
     return GI_OOT_SWORD_BIGGORON;
 }
 
-static s32 progressiveSwordOot(void)
+static s16 progressiveSwordOot(void)
 {
     if (!(gOotSave.inventory.equipment.swords & EQ_OOT_SWORD_KOKIRI))
         return GI_OOT_SWORD_KOKIRI;
@@ -145,7 +145,7 @@ static s32 progressiveSwordOot(void)
     return progressiveSwordGoron();
 }
 
-static s32 progressiveSwordMm(void)
+static s16 progressiveSwordMm(void)
 {
     switch (gMmSave.itemEquips.sword)
     {
@@ -161,7 +161,7 @@ static s32 progressiveSwordMm(void)
 }
 
 /* We use an extra field to know which shields we got from shops */
-static s32 progressiveShieldOot(void)
+static s16 progressiveShieldOot(void)
 {
     if (!(gOotExtraItems.shield & EQ_OOT_SHIELD_DEKU))
         return GI_OOT_PROGRESSIVE_SHIELD_DEKU;
@@ -182,14 +182,14 @@ static s32 progressiveShieldOot(void)
     return GI_OOT_SHIELD_MIRROR;
 }
 
-static s32 progressiveShieldMm(void)
+static s16 progressiveShieldMm(void)
 {
     if (gMmExtraFlags2.progressiveShield)
         return GI_MM_SHIELD_MIRROR;
     return GI_MM_PROGRESSIVE_SHIELD_HERO;
 }
 
-static s32 progressiveStrength(void)
+static s16 progressiveStrength(void)
 {
     switch (gOotSave.inventory.upgrades.strength)
     {
@@ -202,14 +202,14 @@ static s32 progressiveStrength(void)
     }
 }
 
-static s32 progressiveDive(void)
+static s16 progressiveDive(void)
 {
     if (gOotSave.inventory.upgrades.dive)
         return GI_OOT_SCALE_GOLDEN;
     return GI_OOT_SCALE_SILVER;
 }
 
-static s32 progressiveWalletOot(void)
+static s16 progressiveWalletOot(void)
 {
     if (!gOotExtraFlags.childWallet)
         return GI_OOT_WALLET;
@@ -222,7 +222,7 @@ static s32 progressiveWalletOot(void)
     }
 }
 
-static s32 progressiveWalletMm(void)
+static s16 progressiveWalletMm(void)
 {
     if (!gMmExtraFlags2.childWallet)
         return GI_MM_WALLET;
@@ -235,14 +235,14 @@ static s32 progressiveWalletMm(void)
     }
 }
 
-static s32 progressiveMagicOot(void)
+static s16 progressiveMagicOot(void)
 {
     if (gOotSave.playerData.magicUpgrade)
         return GI_OOT_MAGIC_UPGRADE2;
     return GI_OOT_MAGIC_UPGRADE;
 }
 
-static s32 progressiveMagicMm(void)
+static s16 progressiveMagicMm(void)
 {
     switch (gMmSave.playerData.magicAcquired)
     {
@@ -253,21 +253,21 @@ static s32 progressiveMagicMm(void)
     }
 }
 
-static s32 progressiveUpgradeNut(void)
+static s16 progressiveUpgradeNut(void)
 {
     if (gOotSave.inventory.upgrades.dekuNut < 2)
         return GI_OOT_NUT_UPGRADE;
     return GI_OOT_NUT_UPGRADE2;
 }
 
-static s32 progressiveUpgradeStick(void)
+static s16 progressiveUpgradeStick(void)
 {
     if (gOotSave.inventory.upgrades.dekuStick < 2)
         return GI_OOT_STICK_UPGRADE;
     return GI_OOT_STICK_UPGRADE2;
 }
 
-static s32 progressiveSongLullaby(void)
+static s16 progressiveSongLullaby(void)
 {
     switch (gMmSave.inventory.quest.songLullabyIntro)
     {
@@ -278,11 +278,30 @@ static s32 progressiveSongLullaby(void)
     }
 }
 
-s32 comboProgressive(s32 gi, int ovflags)
+static s16 progressiveBombchuBagOot(s16 gi, int ovflags)
+{
+    if (!comboConfig(CFG_OOT_BOMBCHU_BAG) || (gOotSave.inventory.items[ITS_OOT_BOMBCHU] == ITEM_OOT_BOMBCHU_10) || (ovflags & OVF_PRECOND))
+        return gi;
+
+    switch (gi)
+    {
+    case GI_OOT_BOMBCHU_5:  return GI_OOT_BOMBCHU_BAG_5;
+    case GI_OOT_BOMBCHU_10: return GI_OOT_BOMBCHU_BAG_10;
+    case GI_OOT_BOMBCHU_20: return GI_OOT_BOMBCHU_BAG_20;
+    default: return gi;
+    }
+}
+
+s16 comboProgressive(s16 gi, int ovflags)
 {
     switch (gi)
     {
     /* Items */
+    case GI_OOT_BOMBCHU_5:
+    case GI_OOT_BOMBCHU_10:
+    case GI_OOT_BOMBCHU_20:
+        gi = progressiveBombchuBagOot(gi, ovflags);
+        break;
     case GI_OOT_BOMB_BAG:
     case GI_OOT_BOMB_BAG2:
     case GI_OOT_BOMB_BAG3:
