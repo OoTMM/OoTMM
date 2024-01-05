@@ -8,6 +8,7 @@ import { Monitor } from '../monitor';
 import { Location, isLocationChestFairy, isLocationOtherFairy, isLocationRenewable, locationData, makeLocation } from './locations';
 import { Item, ItemGroups, ItemHelpers, Items, ItemsCount, PlayerItem, PlayerItems, itemByID, makePlayerItem } from '../items';
 import { exprTrue } from './expr';
+import { ItemProperties } from './item-properties';
 
 const VALIDATION_CRITICAL_ITEMS = [
   Items.MM_SONG_TIME,
@@ -287,6 +288,7 @@ export class LogicPassSolver {
       pool: PlayerItems;
       renewableJunks: PlayerItems;
       startingItems: PlayerItems;
+      itemProperties: ItemProperties;
     }
   ) {
     this.monitor = this.input.monitor;
@@ -442,7 +444,7 @@ export class LogicPassSolver {
        * Some items are both junk and important.
        * Right now it only concerns sticks.
        */
-      const junk = ItemHelpers.isJunk(pi.item);
+      const junk = this.input.itemProperties.junk.has(pi.item);
 
       if (pi.item === Items.NOTHING) {
         this.state.pools.nothing.set(pi, amount);
@@ -710,7 +712,7 @@ export class LogicPassSolver {
     for (const l of locations) {
       const item = this.state.items.get(l);
       if (item) {
-        if (ItemHelpers.isJunk(item.item)) {
+        if (this.input.itemProperties.junk.has(item.item)) {
           continue;
         }
         if (this.input.fixedLocations.has(l)) {

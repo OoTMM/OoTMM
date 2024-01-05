@@ -231,9 +231,6 @@ export const JUNK = new Set([
   Items.OOT_SHIELD_DEKU,
   Items.OOT_SHIELD_HYLIAN,
   Items.SHARED_SHIELD_HYLIAN,
-  Items.OOT_BOMBCHU_5,
-  Items.OOT_BOMBCHU_10,
-  Items.OOT_BOMBCHU_20,
   Items.MM_RUPEE_GREEN,
   Items.MM_RUPEE_BLUE,
   Items.MM_RUPEE_RED,
@@ -288,7 +285,13 @@ export const JUNK = new Set([
 ]);
 
 export const LICENSES = new Set([
-  Items.MM_MAGIC_BEAN,
+  Items.MM_MAGIC_BEAN
+]);
+
+export const OOT_BOMBCHU = new Set([
+  Items.OOT_BOMBCHU_5,
+  Items.OOT_BOMBCHU_10,
+  Items.OOT_BOMBCHU_20,
 ]);
 
 export const CONSUMABLES = new Set([
