@@ -563,8 +563,8 @@
     BOMBS: "can_use_wallet(2)"
     BOMBCHU: "can_use_wallet(1)"
   locations:
-    "Bombchu Bowling Reward 1": "has_bomb_bag && can_use_wallet(1) && soul_npc(SOUL_NPC_BOMBCHU_BOWLING_LADY)"
-    "Bombchu Bowling Reward 2": "has_bomb_bag && can_use_wallet(1) && soul_npc(SOUL_NPC_BOMBCHU_BOWLING_LADY)"
+    "Bombchu Bowling Reward 1": "(has_bomb_bag || has_bombchu_license) && can_use_wallet(1) && soul_npc(SOUL_NPC_BOMBCHU_BOWLING_LADY)"
+    "Bombchu Bowling Reward 2": "(has_bomb_bag || has_bombchu_license) && can_use_wallet(1) && soul_npc(SOUL_NPC_BOMBCHU_BOWLING_LADY)"
 "Shooting Gallery Child":
   region: ENTRANCE
   exits:
