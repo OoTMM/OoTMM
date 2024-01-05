@@ -36,7 +36,7 @@ export const TRICKS = {
   OOT_ENTER_JABU: "Enter Jabu-Jabu with Head Collision",
   OOT_JABU_BOSS_HIGH_SWITCH: "Jabu Boss Switch without Boomerang or Climb Anywhere",
   OOT_WATER_REVERSE_RIVER: "Water Temple Reverse River with Hookshot Anywhere",
-  OOT_WATER_PIT_GS_CHU: "Water Temple Large Pit GS with Bombchus",
+  OOT_WATER_PIT_GS_CHU: "Water Temple Large Pit GS with Bombchu",
   OOT_SHADOW_BOAT_EARLY: "Reach Shadow Temple Boat with Climb Anywhere",
   OOT_SPIRIT_BOSS_CLIMB_NO_HOOK: "Reach Twinrova using Climb Anywhere and Hover Boots",
   OOT_DC_BOULDER: "Skip Dodongo Cavern's Boulder using Ageless Hookshot Anywhere",

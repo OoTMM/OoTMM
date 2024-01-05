@@ -210,3 +210,4 @@
 - { id: BUTTON_C_UP, func: Button, params: [1, 0, BTN_C_VERTICAL_0] }
 - { id: BUTTON_C_DOWN, func: Button, params: [1, 1, BTN_C_VERTICAL_0] }
 - { id: SOUL_NPC, func: CustomGS, params: [5] }
+- { id: BOMBCHU_BAG, func: BombchuBag, params: [BOMBCHU_BAG_0, BOMBCHU_BAG_1, BOMBCHU_BAG_2] }

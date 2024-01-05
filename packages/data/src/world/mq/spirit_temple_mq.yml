@@ -6,7 +6,7 @@
     "Spirit Temple Statue": "can_longshot && has_bombchu && can_lift_silver"
   events:
     SPIRIT_LOBBY_BOULDERS: "has_explosives_or_hammer"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     MAGIC: "true"
   locations:
     "MQ Spirit Temple Entrance Initial Chest": "true"

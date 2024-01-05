@@ -277,6 +277,13 @@ int csmcFromItem(s16 gi)
     case GI_MM_BUTTON_C_UP:
     case GI_MM_BUTTON_C_DOWN:
         return CSMC_MAJOR;
+    case GI_OOT_BOMBCHU_5:
+    case GI_OOT_BOMBCHU_10:
+    case GI_OOT_BOMBCHU_20:
+    case GI_OOT_BOMBCHU_BAG_5:
+    case GI_OOT_BOMBCHU_BAG_10:
+    case GI_OOT_BOMBCHU_BAG_20:
+        return comboConfig(CFG_OOT_BOMBCHU_BAG) ? CSMC_MAJOR : CSMC_NORMAL;
     case GI_OOT_SMALL_KEY:
     case GI_OOT_SMALL_KEY_FOREST:
     case GI_OOT_SMALL_KEY_FIRE:

@@ -179,7 +179,7 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   MM_SOUL_ENEMY_OCTOROK: "Soul of Octoroks (MM)",
   MM_SOUL_BOSS_ODOLWA: "Soul of Odolwa (MM)",
   MM_SOUL_ENEMY_PEAHAT: "Soul of Peahats (MM)",
-  MM_SOUL_ENEMY_REAL_BOMBCHU: "Soul of Real Bombchus (MM)",
+  MM_SOUL_ENEMY_REAL_BOMBCHU: "Soul of Real Bombchu (MM)",
   MM_SOUL_ENEMY_REDEAD_GIBDO: "Soul of ReDeads/Gibdos (MM)",
   MM_SOUL_ENEMY_SHELL_BLADE: "Soul of Shell Blades (MM)",
   MM_SOUL_ENEMY_SKULLFISH: "Soul of Skullfish (MM)",

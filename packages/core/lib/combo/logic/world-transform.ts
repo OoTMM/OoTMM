@@ -10,6 +10,7 @@ import { exprTrue } from './expr';
 import { LOCATIONS_ZELDA, Location, isLocationOtherFairy, isLocationRenewable, locationData, makeLocation } from './locations';
 import { ItemSharedDef, SharedItemGroups } from './shared';
 import { World } from './world';
+import { ItemProperties } from './item-properties';
 
 const BROKEN_ACTORS_CHECKS = [
   'OOT Dodongo Cavern Grass East Corridor Side Room',
@@ -277,6 +278,7 @@ export class LogicPassWorldTransform {
       worlds: World[];
       settings: Settings;
       fixedLocations: Set<Location>;
+      itemProperties: ItemProperties;
     }
   ) {
     this.fixedLocations = new Set(state.fixedLocations);
@@ -1304,7 +1306,7 @@ export class LogicPassWorldTransform {
     /* Handle required junks */
     const renewableJunks: PlayerItems = new Map;
     for (const pi of this.pool.keys()) {
-      if (ItemHelpers.isJunk(pi.item) && ItemHelpers.isItemConsumable(pi.item)) {
+      if (this.state.itemProperties.junk.has(pi.item) && ItemHelpers.isItemConsumable(pi.item)) {
         for (const loc of this.locsByItem.get(pi) || []) {
           const world = this.state.worlds[locationData(loc).world as number];
           if (isLocationRenewable(world, loc) && !this.fixedLocations.has(loc)) {

@@ -1045,6 +1045,13 @@ export const SETTINGS = [{
   default: false,
   cond: (s: any) => s.silverRupeeShuffle !== 'vanilla',
 }, {
+  key: 'bombchuBagOot',
+  name: 'Bombchu Bag (OoT)',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Turns the first out-of-shop bombchu pack you find into the bombchu bag. Has logical implications.',
+  default: false,
+}, {
   key: 'ocarinaButtonsShuffleOot',
   name: 'Ocarina Buttons Shuffle (OoT)',
   category: 'items.extensions',

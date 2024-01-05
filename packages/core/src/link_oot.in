@@ -16,6 +16,7 @@ AudioLoad_InitTable = 0x800b70c8;
 Magic_Refill = 0x80072500;
 
 ActorRemove = 0x80025648;
+EnItem00_FixDrop = 0x80013530;
 
 Play_InitEnvironment = 0x8009cda0;
 gFogState = 0x800f1640;
