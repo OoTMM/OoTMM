@@ -8,6 +8,7 @@ import { Expr, exprAge, exprAnd, exprFalse, exprTrue } from './expr';
 import { Location, makeLocation } from './locations';
 import { LogicPassSolver } from './solve';
 import { ItemsCount, PlayerItems } from '../items';
+import { ItemProperties } from './item-properties';
 
 const BOSS_INDEX_BY_DUNGEON = {
   DT: 0,
@@ -73,6 +74,7 @@ export class LogicPassEntrances {
       pool: PlayerItems;
       renewableJunks: PlayerItems;
       startingItems: PlayerItems;
+      itemProperties: ItemProperties;
     },
   ) {
   }
