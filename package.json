@@ -8,18 +8,20 @@
     "start:core": "nx run @ootmm/core:start",
     "start:core:debug": "nx run @ootmm/core:start:debug",
     "build": "nx run @ootmm/gui:build",
-    "test": "CI=true nx run-many --target=test",
+    "test": "nx run-many --output-style=stream-without-prefix --target=test",
     "serve": "nx run-many -t serve",
     "typecheck": "tsc --module es2020 --jsx react --noEmit"
   },
   "dependencies": {
     "jszip": "^3.10.1",
-    "pako": "^2.1.0"
+    "pako": "^2.1.0",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "glob": "^10.3.10",
     "@nrwl/jest": "^17.2.8",
     "@types/jest": "^29.5.11",
+    "@types/lodash": "^4.14.202",
     "@types/microtime": "^2.1.2",
     "@types/node": "^20.10.6",
     "@types/pako": "^2.0.3",

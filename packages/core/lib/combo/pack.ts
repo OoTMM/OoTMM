@@ -1,4 +1,3 @@
-import { Buffer } from 'buffer';
 
 import { compressFile } from './compress';
 import { CONFIG, GAMES, Game } from './config';

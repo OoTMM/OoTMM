@@ -1,4 +1,3 @@
-import { Buffer } from 'buffer';
 
 import { build } from "./build";
 import { codegen } from "./codegen";

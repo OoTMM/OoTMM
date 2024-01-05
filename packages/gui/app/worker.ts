@@ -1,8 +1,6 @@
-import { Buffer } from 'buffer';
 import JSZip from 'jszip';
 import { Settings, itemPool, Items, OptionsInput, GeneratorOutput, generate } from '@ootmm/core';
-
-const VERSION = process.env.VERSION as string;
+import dataVersionZipFile from '@ootmm/core/dist/data.zip?url';
 
 async function makeDataPromise(path: string) {
   const reply = await fetch(path);
@@ -14,7 +12,7 @@ async function makeDataPromise(path: string) {
   }
 }
 
-const dataPromise = makeDataPromise(`/data-${VERSION}.zip`).then(data => JSZip.loadAsync(data));
+const dataPromise = makeDataPromise(dataVersionZipFile).then(data => JSZip.loadAsync(data));
 
 async function fetchFunc(path: string) {
   const zip = await dataPromise;

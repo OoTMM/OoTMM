@@ -1,6 +1,5 @@
 import Yaz0 from 'yaz0';
 import CRC32 from 'crc-32';
-import { Buffer } from 'buffer';
 
 import { DmaData } from './dma';
 import { CONFIG, Game, GAMES } from './config';

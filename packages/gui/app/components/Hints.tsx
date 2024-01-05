@@ -1,7 +1,7 @@
 import React from 'react';
 import Select from 'react-select';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { faXmark, faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 
 import { useItemPool, useSettings } from '../contexts/GeneratorContext';
 import { Dropdown } from './Dropdown';
@@ -95,9 +95,9 @@ export function HintEditor({ index }: HintEditorProps) {
   return (
     <tr className="hint">
       <td>
-        <span className="plando-remove" onClick={onRemove}><FontAwesomeIcon icon={solid('xmark')}/></span>
-        <span className="plando-remove" onClick={onMoveUp}><FontAwesomeIcon icon={solid('arrow-up')}/></span>
-        <span className="plando-remove" onClick={onMoveDown}><FontAwesomeIcon icon={solid('arrow-down')}/></span>
+        <span className="plando-remove" onClick={onRemove}><FontAwesomeIcon icon={faXmark}/></span>
+        <span className="plando-remove" onClick={onMoveUp}><FontAwesomeIcon icon={faArrowUp}/></span>
+        <span className="plando-remove" onClick={onMoveDown}><FontAwesomeIcon icon={faArrowDown}/></span>
       </td>
       <td>
         <Dropdown options={hintOptions} value={hint.type} onChange={onChangeType as any}/>

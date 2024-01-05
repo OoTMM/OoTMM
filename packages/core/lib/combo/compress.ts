@@ -1,7 +1,6 @@
-import fs from 'fs/promises';
+import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
-import { Buffer } from 'buffer';
 import Yaz0 from 'yaz0';
 
 import { fileExists } from './util';
@@ -28,16 +27,16 @@ export const compressFile = async (data: Buffer): Promise<Buffer> => {
     filename = path.resolve(dir, hash);
 
     /* Check for the file in cache */
-    await fs.mkdir(dir, { recursive: true });
+    await fs.promises.mkdir(dir, { recursive: true });
     if (await fileExists(filename)) {
-      return fsRetry(() => fs.readFile(filename));
+      return fsRetry(() => fs.promises.readFile(filename));
     }
   }
 
   /* Cache miss - compress */
   const compressed = await Yaz0.compress(data, 7);
   if (!process.env.BROWSER) {
-    await fsRetry(() => fs.writeFile(filename, compressed));
+    await fsRetry(() => fs.promises.writeFile(filename, compressed));
   }
   return compressed;
 };

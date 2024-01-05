@@ -2,10 +2,12 @@
   "name": "@ootmm/gui",
   "version": "0.0.1",
   "description": "The graphical OoTMM generator widget",
+  "type": "module",
   "main": "app/index.ts",
   "scripts": {
-    "serve": "cross-env NODE_ENV=development webpack-dev-server",
-    "build": "cross-env NODE_ENV=production webpack"
+    "serve": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "repository": {
     "type": "git",
@@ -18,46 +20,27 @@
   },
   "homepage": "https://github.com/OoTMM/gui#readme",
   "dependencies": {
+    "@ootmm/core": "*",
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
-    "@ootmm/core": "^0.0.1",
-    "buffer": "^6.0.3",
-    "core-js": "^3.35.0",
-    "crypto-browserify": "^3.12.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-select": "^5.8.0",
-    "react-tooltip": "^5.25.1",
-    "stream-browserify": "^3.0.0",
-    "tmp": "^0.2.1"
+    "react-tooltip": "^5.25.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.23.7",
-    "@babel/preset-env": "^7.23.7",
-    "@babel/preset-react": "^7.23.3",
-    "@babel/preset-typescript": "^7.23.3",
-    "@types/lodash": "^4.14.202",
     "@types/react": "^18.2.46",
     "@types/react-dom": "^18.2.18",
-    "babel-loader": "^9.1.3",
-    "babel-plugin-macros": "^3.1.0",
-    "copy-webpack-plugin": "^11.0.0",
-    "cross-env": "^7.0.3",
-    "css-loader": "^6.8.1",
+    "@vitejs/plugin-react": "^4.2.1",
     "cssnano": "^6.0.3",
-    "file-loader": "^6.2.0",
-    "html-webpack-plugin": "^5.6.0",
-    "mini-css-extract-plugin": "^2.7.6",
     "postcss": "^8.4.32",
     "postcss-import": "^16.0.0",
     "postcss-loader": "^7.3.4",
     "postcss-preset-env": "^9.3.0",
     "reset-css": "^5.0.2",
-    "style-loader": "^3.3.3",
-    "webpack": "^5.89.0",
-    "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^4.15.1"
+    "vite": "^5.0.10",
+    "vite-plugin-node-polyfills": "^0.19.0"
   },
   "nx": {
     "namedInputs": {

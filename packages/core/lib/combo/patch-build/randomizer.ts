@@ -1,4 +1,3 @@
-import { Buffer } from 'buffer';
 import { HINTS, ENTRANCES, REGIONS, SCENES, NPC } from '@ootmm/data';
 
 import { LogicResult } from '../logic';

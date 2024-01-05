@@ -1,6 +1,5 @@
 import path from 'path';
-import fs from 'fs/promises';
-import { Buffer } from 'buffer';
+import fs from 'fs';
 import { FILES } from '@ootmm/data';
 
 import { Game } from '../config';
@@ -68,8 +67,8 @@ const makeSplitObject = async (roms: DecompressedRoms, entry: CustomEntry) => {
     const outDir = path.resolve('build', 'custom');
     const outBasename = entry.name.toLowerCase();
     const outFilename = path.resolve(outDir, `${outBasename}.zobj`);
-    await fs.mkdir(outDir, { recursive: true });
-    await fs.writeFile(outFilename, obj.data);
+    await fs.promises.mkdir(outDir, { recursive: true });
+    await fs.promises.writeFile(outFilename, obj.data);
   }
 
   return obj;

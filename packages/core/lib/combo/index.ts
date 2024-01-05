@@ -1,4 +1,3 @@
-import { Buffer } from 'buffer';
 
 import { options, OptionsInput } from './options';
 import { Generator, GeneratorOutput } from './generator';

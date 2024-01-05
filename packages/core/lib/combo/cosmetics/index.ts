@@ -9,7 +9,7 @@ import { toU32Buffer } from '../util';
 import { png } from '../util/png';
 import { Color, ColorArg, ColorRandom, COLORS } from './color';
 import { recolorImage } from '../image';
-import fs from 'fs/promises';
+import fs from 'fs';
 import { enableModelOotLinkChild, enableModelOotLinkAdult } from './model';
 import { BufferPath } from './type';
 import { randomizeMusic } from './music';
@@ -60,7 +60,7 @@ class CosmeticsPass {
 
     if (typeof path === 'string') {
       if (!process.env.BROWSER) {
-        return fs.readFile(path);
+        return fs.promises.readFile(path);
       } else {
         throw new Error(`Cannot load buffers from path`);
       }
