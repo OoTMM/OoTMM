@@ -82,9 +82,63 @@ void EnItem00_DrawHeartPieceSmallKey(Actor_EnItem00* this, GameState_Play* play)
 
 PATCH_FUNC(0x80013498, EnItem00_DrawHeartPieceSmallKey);
 
-s16 EnItem00_FixDrop(s16 dropId)
+static s16 bombDrop(s16 dropId)
 {
-    return 0x05;
+    int hasChuBag;
+    int hasBombBag;
+    u8  bombCount;
+    u8  bombchuCount;
+
+    if (!comboConfig(CFG_OOT_BOMBCHU_BAG))
+        return dropId;
+
+    hasChuBag = (gOotSave.inventory.items[ITS_OOT_BOMBCHU] == ITEM_OOT_BOMBCHU_10);
+    hasBombBag = (gOotSave.inventory.upgrades.bombBag > 0);
+
+    if (!hasChuBag)
+    {
+        if (!hasBombBag)
+            return -1;
+        return dropId;
+    }
+
+    if (!hasBombBag)
+        return ITEM00_BOMBCHU;
+
+    /* We have both, check for ammo */
+    bombCount = gOotSave.inventory.ammo[ITS_OOT_BOMBS];
+    bombchuCount = gOotSave.inventory.ammo[ITS_OOT_BOMBCHU];
+
+    /* Low on ammo */
+    if (bombCount < 15 || bombchuCount < 15)
+    {
+        if (bombchuCount < bombCount)
+            return ITEM00_BOMBCHU;
+        return dropId;
+    }
+
+    /* Not low, return at random */
+    if (RandFloat() < 0.5f)
+        return ITEM00_BOMBCHU;
+    return dropId;
 }
 
-PATCH_FUNC(0x80013530, EnItem00_FixDrop);
+static s16 EnItem00_FixDropWrapper(s16 dropId)
+{
+    switch (dropId)
+    {
+    case ITEM00_BOMB:
+    case ITEM00_BOMBS_5:
+    case ITEM00_BOMBS_5_ALT:
+        dropId = bombDrop(dropId);
+        break;
+    default:
+        break;
+    }
+
+    return EnItem00_FixDrop(dropId);
+}
+
+PATCH_CALL(0x8001376c, EnItem00_FixDropWrapper);
+PATCH_CALL(0x80013998, EnItem00_FixDropWrapper);
+PATCH_CALL(0x80013dec, EnItem00_FixDropWrapper);
