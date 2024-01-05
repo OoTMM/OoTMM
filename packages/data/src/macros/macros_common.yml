@@ -1,3 +1,6 @@
+# Misc
+"has_magic_jar": "cond(setting(sharedMagic), renewable(SHARED_MAGIC_JAR_SMALL) || renewable(SHARED_MAGIC_JAR_LARGE), renewable(MAGIC_JAR_SMALL) || renewable(MAGIC_JAR_LARGE))"
+
 # Shared Souls
 "soul_octorok": "soul_enemy(SOUL_ENEMY_OCTOROK) || soul_enemy(SHARED_SOUL_ENEMY_OCTOROK)"
 "soul_wallmaster": "soul_enemy(SOUL_ENEMY_WALLMASTER) || soul_enemy(SHARED_SOUL_ENEMY_WALLMASTER)"

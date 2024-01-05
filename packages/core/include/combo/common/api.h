@@ -146,6 +146,10 @@ float RandFloat(void);
 
 int GetActiveItem(GameState_Play* play);
 
+#if defined(GAME_MM)
+void AddMagic(GameState_Play* play, s16 amount);
+#endif
+
 u8 AddItem(GameState_Play* play, u8 itemId);
 u8 AddItemWithIcon(GameState_Play* play, Actor_Player* link, const GetItem* giEntry);
 u8 GetItemCollectBehavior(s16 itemId);
@@ -344,6 +348,7 @@ typedef enum {
 
 s32 Magic_RequestChange(GameState_Play* play, s16 amount, s16 type);
 void Magic_Update(GameState_Play* play);
+void Magic_Refill(GameState_Play*);
 
 /* Unsure what this does */
 void SetTextFlags(u16 bits);

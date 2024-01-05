@@ -38,6 +38,8 @@ int isItemFastBuy(s16 gi)
     case GI_OOT_POE:
     case GI_OOT_FAIRY:
     case GI_OOT_MILK:
+    case GI_OOT_MAGIC_JAR_SMALL:
+    case GI_OOT_MAGIC_JAR_LARGE:
     case GI_MM_RECOVERY_HEART:
     case GI_MM_STICK:
     case GI_MM_NUT:
@@ -70,6 +72,8 @@ int isItemFastBuy(s16 gi)
     case GI_MM_FISH:
     case GI_MM_BUGS:
     case GI_MM_POE:
+    case GI_MM_MAGIC_JAR_SMALL:
+    case GI_MM_MAGIC_JAR_LARGE:
     case GI_OOT_BIG_POE:
     case GI_MM_BIG_POE:
         return 1;

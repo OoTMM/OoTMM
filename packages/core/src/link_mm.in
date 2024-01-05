@@ -5,6 +5,7 @@ gSaveContext = 0x801ef670;
 DMARomToRam = 0x80080790;
 
 ActorRemove = 0x800BB498;
+AddMagic = 0x80115d14;
 
 osCreateMesgQueue = 0x8008f240;
 osEPiStartDma = 0x8008ee30;

@@ -92,6 +92,8 @@
 #define IA_POND_FISH            0x54
 #define IA_WORLD_MAP            0x55
 #define IA_OWL                  0x56
+#define IA_OOT_MAGIC            0x57
+#define IA_MM_MAGIC             0x58
 #define IA_NONE                 0xff
 
 typedef struct GameState_Play GameState_Play;

@@ -668,6 +668,12 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   MM_POE: "Poe (MM)",
   OOT_BIG_POE: "Big Poe (OoT)",
   MM_BIG_POE: "Big Poe (MM)",
+  OOT_MAGIC_JAR_SMALL: "Small Magic Jar (OoT)",
+  OOT_MAGIC_JAR_LARGE: "Large Magic Jar (OoT)",
+  MM_MAGIC_JAR_SMALL: "Small Magic Jar (MM)",
+  MM_MAGIC_JAR_LARGE: "Large Magic Jar (MM)",
+  SHARED_MAGIC_JAR_SMALL: "Small Magic Jar",
+  SHARED_MAGIC_JAR_LARGE: "Large Magic Jar",
   NOTHING: 'Nothing',
 };
 

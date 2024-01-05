@@ -278,6 +278,12 @@ export const JUNK = new Set([
   Items.SHARED_BOMBCHU_5,
   Items.SHARED_BOMBCHU_10,
   Items.SHARED_BOMBCHU_20,
+  Items.OOT_MAGIC_JAR_SMALL,
+  Items.OOT_MAGIC_JAR_LARGE,
+  Items.MM_MAGIC_JAR_SMALL,
+  Items.MM_MAGIC_JAR_LARGE,
+  Items.SHARED_MAGIC_JAR_SMALL,
+  Items.SHARED_MAGIC_JAR_LARGE,
   Items.NOTHING,
 ]);
 
@@ -317,6 +323,9 @@ export const CONSUMABLES = new Set([
   Items.OOT_BUG,
   Items.OOT_BLUE_FIRE,
   Items.OOT_POE,
+  Items.OOT_BIG_POE,
+  Items.OOT_MAGIC_JAR_SMALL,
+  Items.OOT_MAGIC_JAR_LARGE,
   Items.MM_RECOVERY_HEART,
   Items.MM_STICK,
   Items.MM_NUT,
@@ -343,6 +352,10 @@ export const CONSUMABLES = new Set([
   Items.MM_POTION_RED,
   Items.MM_POTION_GREEN,
   Items.MM_POTION_BLUE,
+  Items.MM_POE,
+  Items.MM_BIG_POE,
+  Items.MM_MAGIC_JAR_SMALL,
+  Items.MM_MAGIC_JAR_LARGE,
   Items.SHARED_RECOVERY_HEART,
   Items.SHARED_STICK,
   Items.SHARED_STICKS_5,
@@ -363,6 +376,8 @@ export const CONSUMABLES = new Set([
   Items.SHARED_BOMBCHU_5,
   Items.SHARED_BOMBCHU_10,
   Items.SHARED_BOMBCHU_20,
+  Items.SHARED_MAGIC_JAR_SMALL,
+  Items.SHARED_MAGIC_JAR_LARGE,
 ]);
 
 export const CRITICAL_RENEWABLES = new Set([
@@ -1002,4 +1017,10 @@ export const REQUIRED = new Set([
   Items.SHARED_BUTTON_C_LEFT,
   Items.SHARED_BUTTON_C_UP,
   Items.SHARED_BUTTON_C_DOWN,
+  Items.OOT_MAGIC_JAR_SMALL,
+  Items.OOT_MAGIC_JAR_LARGE,
+  Items.MM_MAGIC_JAR_SMALL,
+  Items.MM_MAGIC_JAR_LARGE,
+  Items.SHARED_MAGIC_JAR_SMALL,
+  Items.SHARED_MAGIC_JAR_LARGE,
 ]);

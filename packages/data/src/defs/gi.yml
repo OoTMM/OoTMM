@@ -64,8 +64,8 @@
 - { id: OOT_COMPASS, item: OOT_COMPASS, add: [OOT_COMPASS, 0xffff], flags: 0x80, draw: COMPASS, object: [oot, 0x00b8], name: "the <C0>Compass" }
 - { id: OOT_MAP, item: OOT_MAP, add: [OOT_MAP, 0xffff], flags: 0x80, draw: MAP, object: [oot, 0x00c8], name: "the <C0>Dungeon Map" }
 - { id: OOT_SMALL_KEY, item: OOT_SMALL_KEY, add: [OOT_SMALL_KEY, 0xffff], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "a <C0>Small Key" }
-- { id: OOT_MAGIC_JAR_SMALL, item: OOT_MAGIC_JAR_SMALL, flags: 0x6f, draw: MAGIC_SMALL, object: [oot, 0x00cd], name: "a <C0>Small Magic Jar" }
-- { id: OOT_MAGIC_JAR_LARGE, item: OOT_MAGIC_JAR_LARGE, flags: 0x6e, draw: MAGIC_LARGE, object: [oot, 0x00cd], name: "a <C0>Large Magic Jar" }
+- { id: OOT_MAGIC_JAR_SMALL, item: OOT_MAGIC_JAR_SMALL, add: [OOT_MAGIC, 1], flags: 0x6f, draw: MAGIC_SMALL, object: [oot, 0x00cd], name: "a <C0>Small Magic Jar" }
+- { id: OOT_MAGIC_JAR_LARGE, item: OOT_MAGIC_JAR_LARGE, add: [OOT_MAGIC, 2], flags: 0x6e, draw: MAGIC_LARGE, object: [oot, 0x00cd], name: "a <C0>Large Magic Jar" }
 - { id: OOT_WALLET2, item: OOT_WALLET2, add: [OOT_WALLET, 2], flags: 0x80, draw: WALLET2, object: [oot, 0x00d1], name: "the <C1>Adult's Wallet" }
 - { id: OOT_WALLET3, item: OOT_WALLET3, add: [OOT_WALLET, 3], flags: 0x80, draw: WALLET3, object: [oot, 0x00d1], name: "the <C1>Giant's Wallet" }
 - { id: OOT_WEIRD_EGG, item: OOT_WEIRD_EGG, add: [OOT_TRADE_CHILD, 0], flags: 0x80, draw: OOT_EGG, object: [oot, 0x00da], name: "the <C1>Weird Egg" }
@@ -410,8 +410,8 @@
 - { id: MM_RECOVERY_HEART, item: MM_RECOVERY_HEART, add: [MM_HEART, 1], flags: 0x80, draw: RECOVERY_HEART, object: [mm, 0x0090], name: "a <C0>Recovery Heart" }
 - { id: MM_HEART_PIECE, item: MM_HEART_PIECE, add: [MM_HEART_PIECE, 1], flags: 0xa0, draw: HEART_PIECE, object: [mm, 0x0096], name: "a <C0>Piece of Heart" }
 - { id: MM_HEART_CONTAINER, item: MM_HEART_CONTAINER, add: [MM_HEART_PIECE, 4], flags: 0xa0, draw: HEART_CONTAINER, object: [mm, 0x0096], name: "a <C0>Heart Container" }
-- { id: MM_UNK_0E, item: MM_MAGIC_JAR_SMALL, flags: 0x6f, draw: MAGIC_SMALL, object: [mm, 0x00a4], name: "a <C0>Small Magic Jar" }
-- { id: MM_UNK_0F, item: MM_MAGIC_JAR_LARGE, flags: 0x6e, draw: MAGIC_LARGE, object: [mm, 0x00a4], name: "a <C0>Large Magic Jar" }
+- { id: MM_MAGIC_JAR_SMALL, item: MM_MAGIC_JAR_SMALL, add: [MM_MAGIC, 1], flags: 0x6f, draw: MAGIC_SMALL, object: [mm, 0x00a4], name: "a <C0>Small Magic Jar" }
+- { id: MM_MAGIC_JAR_LARGE, item: MM_MAGIC_JAR_LARGE, add: [MM_MAGIC, 2], flags: 0x6e, draw: MAGIC_LARGE, object: [mm, 0x00a4], name: "a <C0>Large Magic Jar" }
 - { id: MM_STRAY_FAIRY, item: MM_STRAY_FAIRY, add: [STRAY_FAIRY, 0xffff], flags: 0x80, draw: MM_STRAY_FAIRY, name: "a <C0>Stray Fairy" }
 - { id: MM_BOMB, item: MM_BOMB, add: [MM_BOMBS, 1], flags: 0x59, draw: BOMB, object: [mm, 0x00a5], name: "a <C1>Bomb" }
 - { id: MM_BOMBS_5, item: MM_BOMBS_5, add: [MM_BOMBS, 5], flags: 0x59, draw: BOMB, object: [mm, 0x00a5], name: "<C0>5 Bombs" }

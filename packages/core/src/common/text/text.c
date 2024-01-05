@@ -198,8 +198,12 @@ static int isItemAmbiguous(s16 gi)
         return !comboConfig(CFG_SHARED_BOMB_BAGS);
     case GI_OOT_MAGIC_UPGRADE:
     case GI_OOT_MAGIC_UPGRADE2:
+    case GI_OOT_MAGIC_JAR_SMALL:
+    case GI_OOT_MAGIC_JAR_LARGE:
     case GI_MM_MAGIC_UPGRADE:
     case GI_MM_MAGIC_UPGRADE2:
+    case GI_MM_MAGIC_JAR_SMALL:
+    case GI_MM_MAGIC_JAR_LARGE:
         return !comboConfig(CFG_SHARED_MAGIC);
     case GI_OOT_ARROW_FIRE:
     case GI_MM_ARROW_FIRE:

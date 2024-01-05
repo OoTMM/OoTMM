@@ -12,49 +12,6 @@ s16 comboRenewable(s16 gi, s16 def)
 {
     switch (gi)
     {
-    case GI_MM_RECOVERY_HEART:
-    case GI_MM_STICK:
-    case GI_MM_NUT:
-    case GI_MM_NUTS_5:
-    case GI_MM_NUTS_10:
-    case GI_MM_BOMB:
-    case GI_MM_BOMBS_5:
-    case GI_MM_BOMBS_10:
-    case GI_MM_BOMBS_20:
-    case GI_MM_BOMBS_30:
-    case GI_MM_BOMBCHU:
-    case GI_MM_BOMBCHU_5:
-    case GI_MM_BOMBCHU_10:
-    case GI_MM_BOMBCHU_20:
-    case GI_MM_ARROWS_10:
-    case GI_MM_ARROWS_30:
-    case GI_MM_ARROWS_40:
-    case GI_MM_SHIELD_HERO:
-    case GI_MM_MILK:
-    case GI_MM_CHATEAU:
-    case GI_MM_FISH:
-    case GI_MM_BUGS:
-    case GI_MM_FAIRY:
-    case GI_MM_POTION_RED:
-    case GI_MM_POTION_GREEN:
-    case GI_MM_POTION_BLUE:
-    case GI_MM_MAGIC_BEAN:
-        break;
-    case GI_MM_BOTTLE_POTION_RED:
-        gi = GI_MM_POTION_RED;
-        break;
-    case GI_MM_BOTTLE_POTION_GREEN:
-        gi = GI_MM_POTION_GREEN;
-        break;
-    case GI_MM_BOTTLE_POTION_BLUE:
-        gi = GI_MM_POTION_BLUE;
-        break;
-    case GI_MM_BOTTLE_CHATEAU:
-        gi = GI_MM_CHATEAU;
-        break;
-    case GI_MM_BOTTLE_MILK:
-        gi = GI_MM_MILK;
-        break;
     case GI_OOT_RECOVERY_HEART:
     case GI_OOT_STICK:
     case GI_OOT_STICKS_5:
@@ -86,7 +43,53 @@ s16 comboRenewable(s16 gi, s16 def)
     case GI_OOT_BUG:
     case GI_OOT_BLUE_FIRE:
     case GI_OOT_POE:
+    case GI_OOT_MAGIC_JAR_SMALL:
+    case GI_OOT_MAGIC_JAR_LARGE:
+    case GI_MM_RECOVERY_HEART:
+    case GI_MM_STICK:
+    case GI_MM_NUT:
+    case GI_MM_NUTS_5:
+    case GI_MM_NUTS_10:
+    case GI_MM_BOMB:
+    case GI_MM_BOMBS_5:
+    case GI_MM_BOMBS_10:
+    case GI_MM_BOMBS_20:
+    case GI_MM_BOMBS_30:
+    case GI_MM_BOMBCHU:
+    case GI_MM_BOMBCHU_5:
+    case GI_MM_BOMBCHU_10:
+    case GI_MM_BOMBCHU_20:
+    case GI_MM_ARROWS_10:
+    case GI_MM_ARROWS_30:
+    case GI_MM_ARROWS_40:
+    case GI_MM_SHIELD_HERO:
+    case GI_MM_MILK:
+    case GI_MM_CHATEAU:
+    case GI_MM_FISH:
+    case GI_MM_BUGS:
+    case GI_MM_FAIRY:
+    case GI_MM_POTION_RED:
+    case GI_MM_POTION_GREEN:
+    case GI_MM_POTION_BLUE:
+    case GI_MM_MAGIC_BEAN:
     case GI_MM_POE:
+    case GI_MM_MAGIC_JAR_SMALL:
+    case GI_MM_MAGIC_JAR_LARGE:
+        break;
+    case GI_MM_BOTTLE_POTION_RED:
+        gi = GI_MM_POTION_RED;
+        break;
+    case GI_MM_BOTTLE_POTION_GREEN:
+        gi = GI_MM_POTION_GREEN;
+        break;
+    case GI_MM_BOTTLE_POTION_BLUE:
+        gi = GI_MM_POTION_BLUE;
+        break;
+    case GI_MM_BOTTLE_CHATEAU:
+        gi = GI_MM_CHATEAU;
+        break;
+    case GI_MM_BOTTLE_MILK:
+        gi = GI_MM_MILK;
         break;
     case GI_OOT_BOTTLE_MILK:
         gi = GI_OOT_MILK;

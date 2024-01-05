@@ -594,6 +594,10 @@ export class LogicPassWorldTransform {
       this.replaceItem(Items.OOT_MAGIC_UPGRADE, Items.SHARED_MAGIC_UPGRADE);
       this.replaceItem(Items.MM_MAGIC_UPGRADE,  Items.SHARED_MAGIC_UPGRADE);
       this.removeItem(Items.SHARED_MAGIC_UPGRADE, 2);
+      this.replaceItem(Items.OOT_MAGIC_JAR_SMALL, Items.SHARED_MAGIC_JAR_SMALL);
+      this.replaceItem(Items.OOT_MAGIC_JAR_LARGE, Items.SHARED_MAGIC_JAR_LARGE);
+      this.replaceItem(Items.MM_MAGIC_JAR_SMALL, Items.SHARED_MAGIC_JAR_SMALL);
+      this.replaceItem(Items.MM_MAGIC_JAR_LARGE, Items.SHARED_MAGIC_JAR_LARGE);
     }
 
     if (settings.sharedMagicArrowFire) {
