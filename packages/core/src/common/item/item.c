@@ -264,7 +264,7 @@ void comboItemOverride(ComboItemOverride* dst, const ComboItemQuery* q)
 
     if (isPlayerSelf(dst->player))
     {
-        gi = comboProgressive(gi);
+        gi = comboProgressive(gi, q->ovFlags);
     }
 
     if (neg)

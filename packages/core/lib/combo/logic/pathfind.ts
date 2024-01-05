@@ -2,12 +2,12 @@ import { cloneDeep } from 'lodash';
 import { Settings } from '../settings';
 import { AreaData, Expr, ExprResult, isDefaultRestrictions, MM_TIME_SLICES } from './expr';
 
-import { Location, locationData, makeLocation, makePlayerLocations } from './locations';
+import { Location, locationData, makeLocation } from './locations';
 import { World } from './world';
 import { isLocationLicenseGranting, isLocationRenewable } from './locations';
 import { ItemPlacement } from './solve';
-import { CountMap, countMapAdd } from '../util';
-import { Item, itemByID, Items, ItemsCount, PlayerItems } from '../items';
+import { countMapAdd } from '../util';
+import { Item, Items, ItemsCount, PlayerItems } from '../items';
 
 export const AGES = ['child', 'adult'] as const;
 
