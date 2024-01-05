@@ -1176,3 +1176,34 @@ void DrawGi_CustomBottleFairy(GameState_Play* play, s16 drawGiId, u8 param)
     gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[2]);
     CLOSE_DISPS();
 }
+
+void DrawGi_BombchuBag(GameState_Play* play, s16 drawGiId, u8 param)
+{
+    static const u32 kPrimColor = 0xBA3F3AFF;
+    static const u32 kEnvColor = 0xA5231EFF;
+    static const u32 kPrimColor2 = 0x1695D2FF;
+    static const u32 kEnvColor2 = 0x054C7FFF;
+
+    const DrawGi* drawGi;
+    u8 r, g, b, a;
+
+    drawGi = &kDrawGi[drawGiId];
+
+    OPEN_DISPS(play->gs.gfx);
+    InitListPolyXlu(play->gs.gfx);
+    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    color4(&r, &g, &b, &a, kPrimColor2);
+    gDPSetPrimColor(POLY_XLU_DISP++, 0, 0x80, r, g, b, a);
+    color4(&r, &g, &b, &a, kEnvColor2);
+    gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, a);
+    gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[0]);
+    color4(&r, &g, &b, &a, kPrimColor);
+    gDPSetPrimColor(POLY_XLU_DISP++, 0, 0x80, r, g, b, a);
+    color4(&r, &g, &b, &a, kEnvColor);
+    gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, a);
+    gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[1]);
+    InitListPolyOpa(play->gs.gfx);
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[2]);
+    CLOSE_DISPS();
+}
