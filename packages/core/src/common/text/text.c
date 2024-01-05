@@ -367,6 +367,9 @@ static int isItemAmbiguous(s16 gi)
     case GI_MM_SHIELD_HERO:
     case GI_MM_SHIELD_MIRROR:
         return !comboConfig(CFG_SHARED_SHIELDS);
+    case GI_OOT_BOMBCHU_BAG_5:
+    case GI_OOT_BOMBCHU_BAG_10:
+    case GI_OOT_BOMBCHU_BAG_20:
     case GI_OOT_BOMBCHU_10:
     case GI_OOT_MAGIC_BEAN:
     case GI_OOT_BOTTLE_EMPTY:
