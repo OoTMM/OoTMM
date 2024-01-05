@@ -95,6 +95,7 @@
 #define IA_OOT_MAGIC            0x57
 #define IA_MM_MAGIC             0x58
 #define IA_OOT_BOMBCHU_BAG      0x59
+#define IA_MM_BOMBCHU_BAG       0x5a
 #define IA_NONE                 0xff
 
 typedef struct GameState_Play GameState_Play;

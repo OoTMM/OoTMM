@@ -292,6 +292,21 @@ static s16 progressiveBombchuBagOot(s16 gi, int ovflags)
     }
 }
 
+static s16 progressiveBombchuBagMm(s16 gi, int ovflags)
+{
+    if (!comboConfig(CFG_MM_BOMBCHU_BAG) || (gMmSave.inventory.items[ITS_MM_BOMBCHU] == ITEM_MM_BOMBCHU) || (ovflags & OVF_PRECOND))
+        return gi;
+
+    switch (gi)
+    {
+    case GI_MM_BOMBCHU:    return GI_MM_BOMBCHU_BAG;
+    case GI_MM_BOMBCHU_5:  return GI_MM_BOMBCHU_BAG_5;
+    case GI_MM_BOMBCHU_10: return GI_MM_BOMBCHU_BAG_10;
+    case GI_MM_BOMBCHU_20: return GI_MM_BOMBCHU_BAG_20;
+    default: return gi;
+    }
+}
+
 s16 comboProgressive(s16 gi, int ovflags)
 {
     switch (gi)
@@ -374,6 +389,12 @@ s16 comboProgressive(s16 gi, int ovflags)
         break;
     case GI_OOT_RUTO_LETTER:
         gi = progressiveRutoLetter();
+        break;
+    case GI_MM_BOMBCHU:
+    case GI_MM_BOMBCHU_5:
+    case GI_MM_BOMBCHU_10:
+    case GI_MM_BOMBCHU_20:
+        gi = progressiveBombchuBagMm(gi, ovflags);
         break;
     case GI_MM_BOTTLED_GOLD_DUST:
         gi = progressiveGoldDustBottle();

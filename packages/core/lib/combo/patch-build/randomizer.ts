@@ -739,6 +739,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MM_OPEN_MOON: settings.openMoon,
     NO_BROKEN_ACTORS: !settings.restoreBrokenActors,
     OOT_BOMBCHU_BAG: settings.bombchuBagOot,
+    MM_BOMBCHU_BAG: settings.bombchuBagMm,
   };
 
   for (const v in exprs) {

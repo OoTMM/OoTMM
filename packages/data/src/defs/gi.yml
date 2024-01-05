@@ -645,9 +645,13 @@
 - { id: MM_BUTTON_C_DOWN, add: [MM_BUTTON, 4], flags: 0xa0, draw: BUTTON_C_DOWN, object: BTN_C_VERTICAL, name: "the <C1>C-Down Button" }
 - { id: MM_BOTTLE_POTION_GREEN, item: MM_POTION_GREEN, add: MM_BOTTLE_NEW, flags: 0xa0, draw: [BOTTLE_POTION, 0x01], object: [mm, 0x0196], name: "a <C1>bottle of Green Potion" }
 - { id: MM_BOTTLE_POTION_BLUE, item: MM_POTION_BLUE, add: MM_BOTTLE_NEW, flags: 0xa0, draw: [BOTTLE_POTION, 0x02], object: [mm, 0x0196], name: "a <C1>bottle of Blue Potion" }
-- { id: MM_BOTTLE_FAIRY, item: MM_FAIRY, add: MM_BOTTLE_NEW, flags: 0x80, draw: [MM_BOTTLE_FAIRY, 0], object: [mm, 0x0272], name:  "a <C1>bottled Fairy" }
-- { id: MM_POE, item: MM_POE, add: MM_BOTTLE_REFILL, flags: 0x80, draw: POE, object: [oot, 0x0176], name: "a <C0>Poe" }
-- { id: MM_BOTTLE_POE, item: MM_POE, add: MM_BOTTLE_NEW, flags: 0x80, draw: [MM_BOTTLE_FAIRY, 1], object: [mm, 0x0272], name:  "a <C1>bottled Poe" }
-- { id: MM_BOTTLE_BIG_POE, item: MM_BIG_POE, add: MM_BOTTLE_NEW, flags: 0x80, draw: [MM_BOTTLE_FAIRY, 2], object: [mm, 0x0272], name:  "a <C1>bottled Big Poe" }
+- { id: MM_BOTTLE_FAIRY, item: MM_FAIRY, add: MM_BOTTLE_NEW, flags: 0xa0, draw: [MM_BOTTLE_FAIRY, 0], object: [mm, 0x0272], name:  "a <C1>bottled Fairy" }
+- { id: MM_POE, item: MM_POE, add: MM_BOTTLE_REFILL, flags: 0xa0, draw: POE, object: [oot, 0x0176], name: "a <C0>Poe" }
+- { id: MM_BOTTLE_POE, item: MM_POE, add: MM_BOTTLE_NEW, flags: 0xa0, draw: [MM_BOTTLE_FAIRY, 1], object: [mm, 0x0272], name:  "a <C1>bottled Poe" }
+- { id: MM_BOTTLE_BIG_POE, item: MM_BIG_POE, add: MM_BOTTLE_NEW, flags: 0xa0, draw: [MM_BOTTLE_FAIRY, 2], object: [mm, 0x0272], name:  "a <C1>bottled Big Poe" }
+- { id: MM_BOMBCHU_BAG,    add: [MM_BOMBCHU_BAG, 1],  flags: 0xa0, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Bombchu Bag" }
+- { id: MM_BOMBCHU_BAG_5,  add: [MM_BOMBCHU_BAG, 5],  flags: 0xa0, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Bombchu Bag" }
+- { id: MM_BOMBCHU_BAG_10, add: [MM_BOMBCHU_BAG, 10], flags: 0xa0, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Bombchu Bag" }
+- { id: MM_BOMBCHU_BAG_20, add: [MM_BOMBCHU_BAG, 20], flags: 0xa0, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Bombchu Bag" }
 - { id: NOTHING,  flags: 0xa0, name: "<C0>Nothing" }
 - { id: MM_SCOOP, flags: 0x00 } # Scoop, MUST be the last entry
