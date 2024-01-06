@@ -31,7 +31,7 @@ void comboSyncItems(void)
         gForeignSave.inventory.ammo[ITS_FOREIGN_BOMBS] = gSave.inventory.ammo[ITS_NATIVE_BOMBS];
 
     if (comboConfig(CFG_SHARED_BOMBCHU))
-        gForeignSave.inventory.ammo[ITS_FOREIGN_BOMBCHU] = gSave.inventory.ammo[ITS_FOREIGN_BOMBCHU];
+        gForeignSave.inventory.ammo[ITS_FOREIGN_BOMBCHU] = gSave.inventory.ammo[ITS_NATIVE_BOMBCHU];
 
 
     if (comboConfig(CFG_SHARED_MAGIC))
