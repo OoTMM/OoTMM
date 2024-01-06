@@ -137,6 +137,9 @@ static s16 EnItem00_FixDropWrapper(s16 dropId)
         break;
     }
 
+    if (dropId == ITEM00_BOMBCHU)
+        return dropId;
+
     return EnItem00_FixDrop(dropId);
 }
 
