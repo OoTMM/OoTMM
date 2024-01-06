@@ -56,7 +56,6 @@ const DUNGEON_INDEX = {
 
 type PlaceOpts = {
   overworld?: boolean;
-  noSongOfTime?: boolean;
   ownGame?: boolean;
 };
 
@@ -247,7 +246,7 @@ export class LogicPassEntrances {
       /* Place the boss */
       const src = bossEntrancesByDungeon.get(loc)!;
       const dst = bossEntrancesByDungeon.get(boss)!;
-      this.place(worldId, src.id, dst.id, { noSongOfTime: true });
+      this.place(worldId, src.id, dst.id);
       world.bossIds[BOSS_INDEX_BY_DUNGEON[boss]] = BOSS_INDEX_BY_DUNGEON[loc];
 
       /* Add the events */
@@ -372,7 +371,7 @@ export class LogicPassEntrances {
       const sourceEntranceId = dungeonEntrances.get(loc)!.id;
       const destEntranceId = dungeonEntrances.get(dungeon)!.id;
 
-      this.place(worldId, sourceEntranceId, destEntranceId, { noSongOfTime: true });
+      this.place(worldId, sourceEntranceId, destEntranceId);
 
       /* Store the dungeon */
       world.dungeonIds[DUNGEON_INDEX[dungeon]] = DUNGEON_INDEX[loc];
@@ -392,11 +391,11 @@ export class LogicPassEntrances {
 
     /* Change the world */
     let expr = this.getExpr(worldId, original);
-    if (entranceOriginal.game === 'oot' && entranceReplacement.game === 'mm') {
-      if (opts.overworld) {
+    if ((entranceOriginal.game === 'oot' || entranceOriginal.type === 'one-way-statue') && entranceReplacement.game === 'mm') {
+      if (entranceOriginal.game === 'oot' && opts.overworld) {
         world.areas[entranceOriginal.from].exits['MM GLOBAL'] = expr;
       }
-      if (!opts.noSongOfTime) {
+      if (!(['boss', 'one-way-statue'].includes(entranceReplacement.type))) {
         expr = this.songOfTime(worldId, expr);
       }
     }
