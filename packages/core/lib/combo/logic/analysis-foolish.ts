@@ -17,6 +17,7 @@ type ZigZagState = {
 export class LogicPassAnalysisFoolish {
   private pathfinder: Pathfinder;
   private conditionallyRequiredLocations: Set<string>;
+  private zigZagCount: number = 0;
 
   constructor(
     private state: {
@@ -34,8 +35,9 @@ export class LogicPassAnalysisFoolish {
     this.conditionallyRequiredLocations = new Set();
   }
 
-  private progress(x: number, slope: number) {
-    this.state.monitor.setProgress(x, x + slope);
+  private progress() {
+    this.zigZagCount++;
+    this.state.monitor.setProgress(this.zigZagCount, this.zigZagCount + 30);
   }
 
   private markAsSometimesRequired(loc: Location) {
@@ -132,6 +134,7 @@ export class LogicPassAnalysisFoolish {
       for (const zz of downStates) {
         for (;;) {
           const step = this.monteCarloZigZagDown(zz);
+          this.progress();
           if (step) {
             result = true;
             zzStack.push(step);
@@ -150,6 +153,7 @@ export class LogicPassAnalysisFoolish {
       for (const zz of upStates) {
         for (;;) {
           const step = this.monteCarloZigZagUp(zz);
+          this.progress();
           if (step) {
             zzStack.push(step);
           } else {
@@ -162,6 +166,8 @@ export class LogicPassAnalysisFoolish {
         break;
       }
     }
+
+    return result;
   }
 
   private uselessLocs() {
@@ -216,15 +222,15 @@ export class LogicPassAnalysisFoolish {
 
     /* Prune */
     let failures = 0;
-    let count = 0;
     for (;;) {
-      this.progress(count++, 30);
       if (this.monteCarloZigZag(locsSet)) {
         failures = 0;
       } else {
         failures++;
       }
-      if (failures >= 10 && count >= 20) {
+      if (failures >= 3) {
+        /* With the new system, a single pass seems to always gather all the items */
+        /* But just in case, we run 2 more */
         break;
       }
     }
