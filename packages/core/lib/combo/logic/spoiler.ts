@@ -13,6 +13,7 @@ import { ItemPlacement } from './solve';
 import { Location, locationData, makeLocation } from './locations';
 import { Region, regionData } from './regions';
 import { PlayerItem, PlayerItems } from '../items';
+import { exportSettings } from '../settings/string';
 
 const VERSION = process.env.VERSION || 'XXX';
 
@@ -72,6 +73,7 @@ export class LogicPassSpoiler {
   private writeHeader() {
     this.write(`Seed: ${this.state.opts.seed}`);
     this.write(`Version: ${VERSION}`);
+    this.write(`SettingsString: ${exportSettings(this.state.settings)}`);
     this.write('');
   }
 
