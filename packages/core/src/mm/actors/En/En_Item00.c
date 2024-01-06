@@ -63,3 +63,13 @@ void EnItem00_DrawHeartPiece(Actor_EnItem00* this, GameState_Play* play)
 }
 
 PATCH_FUNC(0x800a75b8, EnItem00_DrawHeartPiece);
+
+/* TODO: Flexible drops would ideally need to be patched on top of this */
+static s16 EnItem00_FixDropWrapper(s16 dropId)
+{
+    return ITEM00_BOMBCHU;
+}
+
+PATCH_CALL(0x800a7994, EnItem00_FixDropWrapper);
+PATCH_CALL(0x800a7c44, EnItem00_FixDropWrapper);
+PATCH_CALL(0x800a8024, EnItem00_FixDropWrapper);

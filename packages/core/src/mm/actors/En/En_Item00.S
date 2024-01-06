@@ -65,3 +65,35 @@ PATCH_END
 PATCH_START 0x800a6fd0
   li t7,GI_MM_COMPASS
 PATCH_END
+
+/* Bombchu drops GFX */
+PATCH_START 0x800a740e
+.short 0xa
+PATCH_END
+
+PATCH_START 0x801adf6c
+.int 0x0405d6f0
+PATCH_END
+
+/* Bombchu drops effect */
+EnItem00_Init_BombchuCase:
+  lw    a0,0x4c(sp)
+  jal   AddItem
+   li   a1,ITEM_MM_BOMBCHU_5
+  j     0x800a6318
+   lw   t6,0x34(sp)
+
+PATCH_START 0x801dbf08
+.int EnItem00_Init_BombchuCase
+PATCH_END
+
+EnItem00_Update_BombchuCase:
+  move  a0,a2
+  jal   AddItem
+   li   a1,ITEM_MM_BOMBCHU_5
+  j     0x800a6fd8
+   lw   a2,0x4c(sp)
+
+PATCH_START 0x801dbf88
+.int EnItem00_Update_BombchuCase
+PATCH_END

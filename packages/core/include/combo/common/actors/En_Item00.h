@@ -31,6 +31,27 @@
 # define ITEM00_TUNIC_ZORA      0x17
 # define ITEM00_TUNIC_GORON     0x18
 # define ITEM00_BOMBS_5_ALT     0x19
+#else
+# define ITEM00_RUPEE_GREEN     0x00
+# define ITEM00_RUPEE_BLUE      0x01
+# define ITEM00_RUPEE_RED       0x02
+# define ITEM00_RECOVERY_HEART  0x03
+# define ITEM00_BOMB            0x04
+# define ITEM00_ARROWS_10       0x05
+# define ITEM00_HEART_PIECE     0x06
+# define ITEM00_HEART_CONTAINER 0x07
+# define ITEM00_ARROWS_20       0x08
+# define ITEM00_ARROWS_30       0x09
+# define ITEM00_ARROWS_30_ALT   0x0a
+# define ITEM00_BOMBS_5         0x0b
+# define ITEM00_NUT             0x0c
+# define ITEM00_STICK           0x0d
+# define ITEM00_MAGIC_LARGE     0x0e
+# define ITEM00_MAGIC_SMALL     0x0f
+# define ITEM00_KEY             0x11
+# define ITEM00_RUPEE_ORANGE    0x13
+# define ITEM00_RUPEE_PURPLE    0x14
+# define ITEM00_BOMBCHU         0x19
 #endif
 
 typedef struct ALIGNED(4) Actor_EnItem00
