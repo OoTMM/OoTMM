@@ -414,10 +414,12 @@
 # define ITS_NATIVE_BOMBS           ITS_OOT_BOMBS
 # define ITS_NATIVE_STICKS          ITS_OOT_STICKS
 # define ITS_NATIVE_NUTS            ITS_OOT_NUTS
+# define ITS_NATIVE_BOMBCHU         ITS_OOT_BOMBCHU
 # define ITS_FOREIGN_BOW            ITS_MM_BOW
 # define ITS_FOREIGN_BOMBS          ITS_MM_BOMBS
 # define ITS_FOREIGN_STICKS         ITS_MM_STICKS
 # define ITS_FOREIGN_NUTS           ITS_MM_NUTS
+# define ITS_FOREIGN_BOMBCHU        ITS_MM_BOMBCHU
 #endif
 
 #if defined(GAME_MM)
@@ -425,10 +427,12 @@
 # define ITS_NATIVE_BOMBS           ITS_MM_BOMBS
 # define ITS_NATIVE_STICKS          ITS_MM_STICKS
 # define ITS_NATIVE_NUTS            ITS_MM_NUTS
+# define ITS_NATIVE_BOMBCHU         ITS_MM_BOMBCHU
 # define ITS_FOREIGN_BOW            ITS_OOT_BOW
 # define ITS_FOREIGN_BOMBS          ITS_OOT_BOMBS
 # define ITS_FOREIGN_STICKS         ITS_OOT_STICKS
 # define ITS_FOREIGN_NUTS           ITS_OOT_NUTS
+# define ITS_FOREIGN_BOMBCHU        ITS_OOT_BOMBCHU
 #endif
 
 #endif

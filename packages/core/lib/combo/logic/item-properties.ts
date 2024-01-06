@@ -26,15 +26,15 @@ export class LogicPassItemProperties {
     this.properties.license = new Set(ItemGroups.LICENSES);
 
     if (this.state.settings.bombchuBagOot) {
-      this.properties.license = new Set([...this.properties.license, ...ItemGroups.OOT_BOMBCHU]);
+      this.properties.license = new Set([...this.properties.license, ...ItemGroups.OOT_BOMBCHU, ...ItemGroups.SHARED_BOMBCHU]);
     } else {
-      this.properties.junk = new Set([...this.properties.junk, ...ItemGroups.OOT_BOMBCHU]);
+      this.properties.junk = new Set([...this.properties.junk, ...ItemGroups.OOT_BOMBCHU, ...ItemGroups.SHARED_BOMBCHU]);
     }
 
     if (this.state.settings.bombchuBagMm) {
-      this.properties.license = new Set([...this.properties.license, ...ItemGroups.MM_BOMBCHU]);
+      this.properties.license = new Set([...this.properties.license, ...ItemGroups.MM_BOMBCHU, ...ItemGroups.SHARED_BOMBCHU]);
     } else {
-      this.properties.junk = new Set([...this.properties.junk, ...ItemGroups.MM_BOMBCHU]);
+      this.properties.junk = new Set([...this.properties.junk, ...ItemGroups.MM_BOMBCHU, ...ItemGroups.SHARED_BOMBCHU]);
     }
 
     this.properties.important = new Set([...ItemGroups.REQUIRED, ...ItemGroups.CONSUMABLES, ...this.properties.license]);

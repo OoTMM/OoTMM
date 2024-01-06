@@ -80,6 +80,10 @@ const SHARED_ITEMS_OOT = new Map([
   ['SHARED_SHIELD',           'OOT_SHIELD'],
   ['SHARED_MAGIC_JAR_SMALL',  'OOT_MAGIC_JAR_SMALL'],
   ['SHARED_MAGIC_JAR_LARGE',  'OOT_MAGIC_JAR_LARGE'],
+  ['SHARED_BOMBCHU',          'MM_BOMBCHU'], /* OoT lacks single bombchu */
+  ['SHARED_BOMBCHU_5',        'OOT_BOMBCHU_5'],
+  ['SHARED_BOMBCHU_10',       'OOT_BOMBCHU_10'],
+  ['SHARED_BOMBCHU_20',       'OOT_BOMBCHU_20'],
 ]);
 
 const SHARED_ITEMS_MM = new Map([
@@ -132,6 +136,10 @@ const SHARED_ITEMS_MM = new Map([
   ['SHARED_SHIELD',           'OOT_SHIELD'], /* Progressive */
   ['SHARED_MAGIC_JAR_SMALL',  'MM_MAGIC_JAR_SMALL'],
   ['SHARED_MAGIC_JAR_LARGE',  'MM_MAGIC_JAR_LARGE'],
+  ['SHARED_BOMBCHU',          'MM_BOMBCHU'],
+  ['SHARED_BOMBCHU_5',        'MM_BOMBCHU_5'],
+  ['SHARED_BOMBCHU_10',       'MM_BOMBCHU_10'],
+  ['SHARED_BOMBCHU_20',       'MM_BOMBCHU_20'],
 ]);
 
 const SHARED_ITEMS = {
@@ -740,6 +748,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     NO_BROKEN_ACTORS: !settings.restoreBrokenActors,
     OOT_BOMBCHU_BAG: settings.bombchuBagOot,
     MM_BOMBCHU_BAG: settings.bombchuBagMm,
+    SHARED_BOMBCHU: settings.sharedBombchuBags,
   };
 
   for (const v in exprs) {

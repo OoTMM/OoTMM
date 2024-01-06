@@ -1324,6 +1324,13 @@ export const SETTINGS = [{
   default: false,
   cond: (s: any) => s.skeletonKeyOot && s.skeletonKeyMm,
 }, {
+  key: 'sharedBombchuBags',
+  name: 'Shared Bombchu Bags',
+  category: 'items.shared',
+  type: 'boolean',
+  default: false,
+  cond: (s: any) => s.bombchuBagOot && s.bombchuBagMm,
+}, {
   key: 'agelessSwords',
   name: 'Ageless Swords',
   category: 'items.ageless',

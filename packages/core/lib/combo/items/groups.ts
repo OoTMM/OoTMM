@@ -267,10 +267,6 @@ export const JUNK = new Set([
   Items.SHARED_RUPEE_BLUE,
   Items.SHARED_RUPEE_RED,
   Items.SHARED_RECOVERY_HEART,
-  Items.SHARED_BOMBCHU,
-  Items.SHARED_BOMBCHU_5,
-  Items.SHARED_BOMBCHU_10,
-  Items.SHARED_BOMBCHU_20,
   Items.OOT_MAGIC_JAR_SMALL,
   Items.OOT_MAGIC_JAR_LARGE,
   Items.MM_MAGIC_JAR_SMALL,
@@ -282,6 +278,13 @@ export const JUNK = new Set([
 
 export const LICENSES = new Set([
   Items.MM_MAGIC_BEAN
+]);
+
+export const SHARED_BOMBCHU = new Set([
+  Items.SHARED_BOMBCHU,
+  Items.SHARED_BOMBCHU_5,
+  Items.SHARED_BOMBCHU_10,
+  Items.SHARED_BOMBCHU_20,
 ]);
 
 export const OOT_BOMBCHU = new Set([
@@ -298,6 +301,9 @@ export const MM_BOMBCHU = new Set([
 ]);
 
 export const CONSUMABLES = new Set([
+  ...OOT_BOMBCHU,
+  ...MM_BOMBCHU,
+  ...SHARED_BOMBCHU,
   Items.OOT_RECOVERY_HEART,
   Items.OOT_STICK,
   Items.OOT_STICKS_5,
@@ -314,9 +320,6 @@ export const CONSUMABLES = new Set([
   Items.OOT_ARROWS_30,
   Items.OOT_DEKU_SEEDS_5,
   Items.OOT_DEKU_SEEDS_30,
-  Items.OOT_BOMBCHU_5,
-  Items.OOT_BOMBCHU_10,
-  Items.OOT_BOMBCHU_20,
   Items.OOT_SHIELD_DEKU,
   Items.OOT_SHIELD_HYLIAN,
   Items.SHARED_SHIELD_HYLIAN,
@@ -342,10 +345,6 @@ export const CONSUMABLES = new Set([
   Items.MM_BOMBS_10,
   Items.MM_BOMBS_20,
   Items.MM_BOMBS_30,
-  Items.MM_BOMBCHU,
-  Items.MM_BOMBCHU_5,
-  Items.MM_BOMBCHU_10,
-  Items.MM_BOMBCHU_20,
   Items.MM_ARROWS_10,
   Items.MM_ARROWS_30,
   Items.MM_ARROWS_40,
@@ -378,10 +377,6 @@ export const CONSUMABLES = new Set([
   Items.SHARED_ARROWS_10,
   Items.SHARED_ARROWS_30,
   Items.SHARED_ARROWS_40,
-  Items.SHARED_BOMBCHU,
-  Items.SHARED_BOMBCHU_5,
-  Items.SHARED_BOMBCHU_10,
-  Items.SHARED_BOMBCHU_20,
   Items.SHARED_MAGIC_JAR_SMALL,
   Items.SHARED_MAGIC_JAR_LARGE,
 ]);
@@ -767,6 +762,9 @@ export const REQUIRED = new Set([
   ...BOTTLES_OOT,
   ...BOTTLES_MM,
   ...FISHING_POND_FISH,
+  ...OOT_BOMBCHU,
+  ...MM_BOMBCHU,
+  ...SHARED_BOMBCHU,
   Items.OOT_BOSS_KEY_GANON,
   Items.OOT_SMALL_KEY_GF,
   Items.OOT_KEY_RING_GF,
@@ -863,9 +861,6 @@ export const REQUIRED = new Set([
   Items.OOT_ARROWS_30,
   Items.OOT_DEKU_SEEDS_5,
   Items.OOT_DEKU_SEEDS_30,
-  Items.OOT_BOMBCHU_5,
-  Items.OOT_BOMBCHU_10,
-  Items.OOT_BOMBCHU_20,
   Items.OOT_POTION_GREEN,
   Items.OOT_POTION_BLUE,
   Items.OOT_FISH,
@@ -956,10 +951,6 @@ export const REQUIRED = new Set([
   Items.MM_BOMBS_10,
   Items.MM_BOMBS_20,
   Items.MM_BOMBS_30,
-  Items.MM_BOMBCHU,
-  Items.MM_BOMBCHU_5,
-  Items.MM_BOMBCHU_10,
-  Items.MM_BOMBCHU_20,
   Items.MM_ARROWS_10,
   Items.MM_ARROWS_30,
   Items.MM_ARROWS_40,
@@ -998,10 +989,6 @@ export const REQUIRED = new Set([
   Items.SHARED_ARROWS_10,
   Items.SHARED_ARROWS_30,
   Items.SHARED_ARROWS_40,
-  Items.SHARED_BOMBCHU,
-  Items.SHARED_BOMBCHU_5,
-  Items.SHARED_BOMBCHU_10,
-  Items.SHARED_BOMBCHU_20,
   Items.SHARED_SKELETON_KEY,
   Items.OOT_COIN_RED,
   Items.OOT_COIN_GREEN,

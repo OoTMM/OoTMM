@@ -485,7 +485,7 @@ static int addItemNutsUpgrade(GameState_Play* play, u8 itemId, s16 gi, u16 param
     return 0;
 }
 
-static void addBombchuOot(u8 count)
+static void addBombchuRawOot(u8 count)
 {
     if (comboConfig(CFG_OOT_BOMBCHU_BAG) && gOotSave.inventory.items[ITS_OOT_BOMBCHU] != ITEM_OOT_BOMBCHU_10)
         return;
@@ -493,7 +493,7 @@ static void addBombchuOot(u8 count)
     addAmmoOot(ITS_OOT_BOMBCHU, ITEM_OOT_BOMBCHU_10, 50, count);
 }
 
-static void addBombchuMm(u8 count)
+static void addBombchuRawMm(u8 count)
 {
     if (comboConfig(CFG_MM_BOMBCHU_BAG))
     {
@@ -505,6 +505,20 @@ static void addBombchuMm(u8 count)
         if (gMmSave.inventory.upgrades.bombBag)
             addAmmoMm(ITS_MM_BOMBCHU, ITEM_MM_BOMBCHU, kMaxBombs[gMmSave.inventory.upgrades.bombBag], count);
     }
+}
+
+static void addBombchuOot(u8 count)
+{
+    addBombchuRawOot(count);
+    if (comboConfig(CFG_SHARED_BOMBCHU))
+        addBombchuRawMm(count);
+}
+
+static void addBombchuMm(u8 count)
+{
+    addBombchuRawMm(count);
+    if (comboConfig(CFG_SHARED_BOMBCHU))
+        addBombchuRawOot(count);
 }
 
 static int addItemBombchuOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
@@ -1740,17 +1754,41 @@ static int addItemMagicMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static int addItemBombchuBagOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static void addBombchuBagRawOot(void)
 {
     gOotSave.inventory.items[ITS_OOT_BOMBCHU] = ITEM_OOT_BOMBCHU_10;
-    addBombchuOot(param);
+}
+
+static void addBombchuBagRawMm(void)
+{
+    gMmSave.inventory.items[ITS_MM_BOMBCHU] = ITEM_MM_BOMBCHU;
+}
+
+static void addBombchuBagOot(u8 count)
+{
+    addBombchuBagRawOot();
+    if (comboConfig(CFG_SHARED_BOMBCHU))
+        addBombchuBagRawMm();
+    addBombchuOot(count);
+}
+
+static void addBombchuBagMm(u8 count)
+{
+    addBombchuBagRawMm();
+    if (comboConfig(CFG_SHARED_BOMBCHU))
+        addBombchuBagRawOot();
+    addBombchuMm(count);
+}
+
+static int addItemBombchuBagOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    addBombchuBagOot(param);
     return 0;
 }
 
 static int addItemBombchuBagMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
-    gMmSave.inventory.items[ITS_MM_BOMBCHU] = ITEM_MM_BOMBCHU;
-    addBombchuMm(param);
+    addBombchuBagMm(param);
     return 0;
 }
 

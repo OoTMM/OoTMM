@@ -592,6 +592,16 @@ export class LogicPassWorldTransform {
       this.replaceItem(Items.MM_BOMBS_30,   Items.SHARED_BOMBS_30);
     }
 
+    if (settings.sharedBombchuBags) {
+      this.replaceItem(Items.OOT_BOMBCHU_5,   Items.SHARED_BOMBCHU_5);
+      this.replaceItem(Items.OOT_BOMBCHU_10,  Items.SHARED_BOMBCHU_10);
+      this.replaceItem(Items.OOT_BOMBCHU_20,  Items.SHARED_BOMBCHU_20);
+      this.replaceItem(Items.MM_BOMBCHU,      Items.SHARED_BOMBCHU);
+      this.replaceItem(Items.MM_BOMBCHU_5,    Items.SHARED_BOMBCHU_5);
+      this.replaceItem(Items.MM_BOMBCHU_10,   Items.SHARED_BOMBCHU_10);
+      this.replaceItem(Items.MM_BOMBCHU_20,   Items.SHARED_BOMBCHU_20);
+    }
+
     if (settings.sharedMagic) {
       this.replaceItem(Items.OOT_MAGIC_UPGRADE, Items.SHARED_MAGIC_UPGRADE);
       this.replaceItem(Items.MM_MAGIC_UPGRADE,  Items.SHARED_MAGIC_UPGRADE);
