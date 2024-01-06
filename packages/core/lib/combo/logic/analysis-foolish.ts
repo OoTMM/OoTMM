@@ -122,22 +122,46 @@ export class LogicPassAnalysisFoolish {
     const allowed = new Set(locations);
     const forbidden = new Set<Location>();
     let zz: ZigZagState = { allowed, forbidden };
-
-    const step = this.monteCarloZigZagDown(zz);
-    if (!step) return false;
-    zz = step;
+    let zzStack: ZigZagState[] = [];
+    let result = false;
+    zzStack.push(zz);
 
     for (;;) {
-      const stepUp = this.monteCarloZigZagUp(zz);
-      if (!stepUp) break;
-      zz = stepUp;
+      const downStates = zzStack;
+      zzStack = [];
+      for (const zz of downStates) {
+        for (;;) {
+          const step = this.monteCarloZigZagDown(zz);
+          if (step) {
+            result = true;
+            zzStack.push(step);
+          } else {
+            break;
+          }
+        }
+      }
 
-      const stepDown = this.monteCarloZigZagDown(zz);
-      if (!stepDown) break;
-      zz = stepDown;
+      if (zzStack.length === 0) {
+        break;
+      }
+
+      const upStates = zzStack;
+      zzStack = [];
+      for (const zz of upStates) {
+        for (;;) {
+          const step = this.monteCarloZigZagUp(zz);
+          if (step) {
+            zzStack.push(step);
+          } else {
+            break;
+          }
+        }
+      }
+
+      if (zzStack.length === 0) {
+        break;
+      }
     }
-
-    return true;
   }
 
   private uselessLocs() {
@@ -200,7 +224,7 @@ export class LogicPassAnalysisFoolish {
       } else {
         failures++;
       }
-      if (failures === 10) {
+      if (failures >= 10 && count >= 20) {
         break;
       }
     }
