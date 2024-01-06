@@ -237,7 +237,7 @@ export function useCosmetics() {
     const savedCosmetics = { ...newCosmetics };
     for (const key of Object.keys(savedCosmetics)) {
       const v = (savedCosmetics as any)[key];
-      if (Buffer.isBuffer(v)) {
+      if (v instanceof ArrayBuffer) {
         delete (savedCosmetics as any)[key];
       }
     }
