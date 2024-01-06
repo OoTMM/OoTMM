@@ -76,7 +76,11 @@ function validateSettingsStep(settings: Settings): Settings {
     const max = (data as any).max;
 
     if (cond && !cond(s)) {
-      (s as any)[key] = data.default;
+      if (data.type === 'set') {
+        (s as any)[key] = { type: data.default };
+      } else {
+        (s as any)[key] = data.default;
+      }
     }
 
     if (min !== undefined) {
