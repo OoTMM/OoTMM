@@ -153,10 +153,10 @@ OOT_WARP_SONG_TEMPLE:                           { game: oot, id: 0x5f4, type: on
 OOT_VILLAGE_OWL:                                { game: oot, id: 0x554, type: one-way-owl, areas: ["OOT Death Mountain Summit", "OOT Kakariko Rooftop"] }
 OOT_FIELD_OWL:                                  { game: oot, id: 0x27e, type: one-way-owl, areas: ["OOT Lake Hylia", "OOT Hyrule Field Drawbridge"] }
 OOT_OUTSIDE_GANON_FROM_FAIRY:                   { game: oot, id: 0xf00, type: indoors-exit, areas: ["OOT Fairy Fountain Defense", "OOT Near Fairy Fountain Defense"], reverse: OOT_FAIRY_DEFENSE }
-MM_BOSS_TEMPLE_WOODFALL:                        { game: mm, id: 0x3800, type: boss, areas: ["MM Woodfall Temple Boss Access", "MM Woodfall Temple Boss"] }
-MM_BOSS_TEMPLE_SNOWHEAD:                        { game: mm, id: 0x8200, type: boss, areas: ["MM Snowhead Temple Boss Access", "MM Snowhead Temple Boss"] }
-MM_BOSS_TEMPLE_GREAT_BAY:                       { game: mm, id: 0xb800, type: boss, areas: ["MM Great Bay Temple Boss Access", "MM Great Bay Temple Boss"] }
-MM_BOSS_TEMPLE_STONE_TOWER:                     { game: mm, id: 0x6600, type: boss, areas: ["MM Stone Tower Temple Boss Access", "MM Stone Tower Temple Boss"] }
+MM_BOSS_TEMPLE_WOODFALL:                        { game: mm, id: 0x3800, type: boss, flags: [no-sot], areas: ["MM Woodfall Temple Boss Access", "MM Woodfall Temple Boss"] }
+MM_BOSS_TEMPLE_SNOWHEAD:                        { game: mm, id: 0x8200, type: boss, flags: [no-sot], areas: ["MM Snowhead Temple Boss Access", "MM Snowhead Temple Boss"] }
+MM_BOSS_TEMPLE_GREAT_BAY:                       { game: mm, id: 0xb800, type: boss, flags: [no-sot], areas: ["MM Great Bay Temple Boss Access", "MM Great Bay Temple Boss"] }
+MM_BOSS_TEMPLE_STONE_TOWER:                     { game: mm, id: 0x6600, type: boss, flags: [no-sot], areas: ["MM Stone Tower Temple Boss Access", "MM Stone Tower Temple Boss"] }
 MM_TEMPLE_WOODFALL:                             { game: mm, id: 0x3000, type: dungeon, areas: ["MM Woodfall Front of Temple", "MM Woodfall Temple"], reverse: MM_WOODFALL_FROM_TEMPLE }
 MM_WOODFALL_FROM_TEMPLE:                        { game: mm, id: 0x8610, type: dungeon, areas: ["MM Woodfall Temple", "MM Woodfall Front of Temple"], reverse: MM_TEMPLE_WOODFALL }
 MM_TEMPLE_SNOWHEAD:                             { game: mm, id: 0x3c00, type: dungeon, areas: ["MM Snowhead", "MM Snowhead Temple"], reverse: MM_SNOWHEAD_FROM_TEMPLE }
@@ -286,13 +286,13 @@ MM_ASTRAL_OBSERVATORY_FROM_FIELD:               { game: mm, id: 0x4c10, type: in
 MM_FIELD_FROM_ASTRAL_OBSERVATORY:               { game: mm, id: 0x5490, type: indoors-exit, areas: ["MM Astral Observatory", "MM Astral Observatory Balcony"], reverse: MM_ASTRAL_OBSERVATORY_FROM_FIELD }
 MM_SWAMP_ARCHERY:                               { game: mm, id: 0x4200, type: indoors, areas: ["MM Road to Southern Swamp", "MM Swamp Archery"], reverse: MM_SWAMP_ROAD_FROM_ARCHERY }
 MM_SWAMP_ROAD_FROM_ARCHERY:                     { game: mm, id: 0x7a20, type: indoors-exit, areas: ["MM Swamp Archery", "MM Road to Southern Swamp"], reverse: MM_SWAMP_ARCHERY }
-MM_WARP_OWL_GREAT_BAY:                          { game: mm, id: 0x68b0, type: one-way-statue, areas: ["MM SOARING", "MM Owl Great Bay"] }
-MM_WARP_OWL_ZORA_CAPE:                          { game: mm, id: 0x6a60, type: one-way-statue, areas: ["MM SOARING", "MM Owl Zora Cape"] }
-MM_WARP_OWL_SNOWHEAD:                           { game: mm, id: 0xb230, type: one-way-statue, areas: ["MM SOARING", "MM Owl Snowhead"] }
-MM_WARP_OWL_MOUNTAIN_VILLAGE:                   { game: mm, id: 0x9a80, type: one-way-statue, areas: ["MM SOARING", "MM Owl Mountain"] }
-MM_WARP_OWL_CLOCK_TOWN:                         { game: mm, id: 0xd890, type: one-way-statue, areas: ["MM SOARING", "MM Owl Clock Town"] }
-MM_WARP_OWL_MILK_ROAD:                          { game: mm, id: 0x3e40, type: one-way-statue, areas: ["MM SOARING", "MM Owl Milk Road"] }
-MM_WARP_OWL_WOODFALL:                           { game: mm, id: 0x8640, type: one-way-statue, areas: ["MM SOARING", "MM Owl Woodfall"] }
-MM_WARP_OWL_SOUTHERN_SWAMP:                     { game: mm, id: 0x84a0, type: one-way-statue, areas: ["MM SOARING", "MM Owl Swamp"] }
-MM_WARP_OWL_IKANA_CANYON:                       { game: mm, id: 0x2040, type: one-way-statue, areas: ["MM SOARING", "MM Owl Ikana"] }
-MM_WARP_OWL_STONE_TOWER:                        { game: mm, id: 0xaa30, type: one-way-statue, areas: ["MM SOARING", "MM Owl Stone Tower"] }
+MM_WARP_OWL_GREAT_BAY:                          { game: mm, id: 0x68b0, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Great Bay"] }
+MM_WARP_OWL_ZORA_CAPE:                          { game: mm, id: 0x6a60, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Zora Cape"] }
+MM_WARP_OWL_SNOWHEAD:                           { game: mm, id: 0xb230, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Snowhead"] }
+MM_WARP_OWL_MOUNTAIN_VILLAGE:                   { game: mm, id: 0x9a80, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Mountain"] }
+MM_WARP_OWL_CLOCK_TOWN:                         { game: mm, id: 0xd890, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Clock Town"] }
+MM_WARP_OWL_MILK_ROAD:                          { game: mm, id: 0x3e40, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Milk Road"] }
+MM_WARP_OWL_WOODFALL:                           { game: mm, id: 0x8640, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Woodfall"] }
+MM_WARP_OWL_SOUTHERN_SWAMP:                     { game: mm, id: 0x84a0, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Swamp"] }
+MM_WARP_OWL_IKANA_CANYON:                       { game: mm, id: 0x2040, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Ikana"] }
+MM_WARP_OWL_STONE_TOWER:                        { game: mm, id: 0xaa30, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Stone Tower"] }

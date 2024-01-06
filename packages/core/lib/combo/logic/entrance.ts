@@ -401,7 +401,7 @@ export class LogicPassEntrances {
       if (entranceOriginal.game === 'oot' && opts.overworld) {
         world.areas[entranceOriginal.from].exits['MM GLOBAL'] = expr;
       }
-      if (!(['boss', 'one-way-statue'].includes(entranceReplacement.type))) {
+      if (!((entranceReplacement.flags as string[]).includes('no-sot'))) {
         expr = this.songOfTime(worldId, expr);
       }
     }
