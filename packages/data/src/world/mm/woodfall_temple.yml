@@ -33,7 +33,7 @@
     WOODFALL_TEMPLE_MAIN_FLOWER: "can_use_fire_arrows"
     STICKS: "soul_deku_baba"
     NUTS: "soul_deku_baba && (has(MASK_DEKU) || has_arrows || has_explosives || can_fight)"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     ARROWS: "true"
   locations:
     "Woodfall Temple SF Main Pot": "true"

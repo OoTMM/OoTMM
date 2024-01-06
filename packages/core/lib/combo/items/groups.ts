@@ -248,10 +248,6 @@ export const JUNK = new Set([
   Items.MM_NUTS_10,
   Items.MM_STICK,
   Items.MM_SHIELD_HERO,
-  Items.MM_BOMBCHU,
-  Items.MM_BOMBCHU_5,
-  Items.MM_BOMBCHU_10,
-  Items.MM_BOMBCHU_20,
   Items.SHARED_ARROWS_5,
   Items.SHARED_ARROWS_10,
   Items.SHARED_ARROWS_30,
@@ -292,6 +288,13 @@ export const OOT_BOMBCHU = new Set([
   Items.OOT_BOMBCHU_5,
   Items.OOT_BOMBCHU_10,
   Items.OOT_BOMBCHU_20,
+]);
+
+export const MM_BOMBCHU = new Set([
+  Items.MM_BOMBCHU,
+  Items.MM_BOMBCHU_5,
+  Items.MM_BOMBCHU_10,
+  Items.MM_BOMBCHU_20,
 ]);
 
 export const CONSUMABLES = new Set([

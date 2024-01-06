@@ -7,7 +7,7 @@
   dungeon: GB
   events:
     ARROWS: "true"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     RUPEES: "true"
     FAIRY: "true"
   exits:
