@@ -1,14 +1,17 @@
+import { ENTRANCES } from '@ootmm/data';
 import { Random, sample, shuffle } from '../random';
 import { Settings } from '../settings';
-import { DUNGEONS_REGIONS, ExprMap, ExprParsers, World, WorldEntrance, cloneWorld } from './world';
+import { DUNGEONS_REGIONS, ExprMap, World, cloneWorld } from './world';
 import { Pathfinder } from './pathfind';
 import { Monitor } from '../monitor';
 import { LogicEntranceError, LogicError } from './error';
 import { Expr, exprAge, exprAnd, exprFalse, exprTrue } from './expr';
 import { Location, makeLocation } from './locations';
 import { LogicPassSolver } from './solve';
-import { ItemsCount, PlayerItems } from '../items';
+import { PlayerItems } from '../items';
 import { ItemProperties } from './item-properties';
+
+type Entrance = keyof typeof ENTRANCES;
 
 const BOSS_INDEX_BY_DUNGEON = {
   DT: 0,
@@ -78,23 +81,23 @@ export class LogicPassEntrances {
   ) {
   }
 
-  private getExpr(worldId: number, original: string) {
+  private getExpr(worldId: number, original: Entrance) {
     const world = this.worlds[worldId];
     const originalWorld = this.input.worlds[worldId];
-    const entrance = world.entrances.get(original)!;
-    const from = originalWorld.areas[entrance.from];
-    const expr = from.exits[entrance.to];
+    const eData = ENTRANCES[original];
+    const from = originalWorld.areas[eData.from];
+    const expr = from.exits[eData.to];
     if (!expr) {
       throw new Error(`No expr for ${original}`);
     }
     return expr;
   }
 
-  private isAssignableNew(worldId: number, original: string, replacement: string, opts?: { ownGame?: boolean, locations?: string[] }) {
+  private isAssignableNew(worldId: number, original: Entrance, replacement: Entrance, opts?: { ownGame?: boolean, locations?: string[] }) {
     const world = this.worlds[worldId];
     const originalWorld = this.input.worlds[worldId];
-    const originalEntrance = world.entrances.get(original)!;
-    const replacementEntrance = world.entrances.get(replacement)!;
+    const originalEntrance = ENTRANCES[original];
+    const replacementEntrance = ENTRANCES[replacement];
     const dungeon = originalWorld.areas[replacementEntrance.to].dungeon!;
 
     /* Reject wrong game */
@@ -154,8 +157,8 @@ export class LogicPassEntrances {
 
   private fixBosses(worldId: number) {
     const world = this.worlds[worldId];
-    const bossEntrances = [...world.entrances.values()].filter(e => e.type === 'boss');
-    const bossEntrancesByDungeon = new Map<string, WorldEntrance>();
+    const bossEntrances = (Object.keys(ENTRANCES) as Entrance[]).filter(x => ENTRANCES[x].type === 'boss');
+    const bossEntrancesByDungeon = new Map<string, Entrance>();
     const bossEvents = new Map<string, ExprMap>();
     const bossAreas = new Map<string, string[]>();
     const bossLocations = new Map<string, string[]>();
@@ -193,13 +196,14 @@ export class LogicPassEntrances {
     }
 
     /* Collect the entrances and delete the original ones */
-    for (const e of bossEntrances) {
+    for (const eName of bossEntrances) {
+      const e = ENTRANCES[eName];
       const areaFrom = world.areas[e.from];
       const areaTo = world.areas[e.to];
 
       /* We have a boss entrance */
       const dungeon = areaTo.dungeon!;
-      bossEntrancesByDungeon.set(dungeon, e);
+      bossEntrancesByDungeon.set(dungeon, eName);
 
       /* Remove the entrance */
       delete areaFrom.exits[e.to];
@@ -220,7 +224,7 @@ export class LogicPassEntrances {
           if (locs.has(loc)) {
             continue;
           }
-          if (this.isAssignableNew(worldId, bossEntrancesByDungeon.get(loc)!.id, bossEntrancesByDungeon.get(boss)!.id, { ownGame: this.input.settings.erBoss === 'ownGame', locations: bossLocations.get(boss)! })) {
+          if (this.isAssignableNew(worldId, bossEntrancesByDungeon.get(loc)!, bossEntrancesByDungeon.get(boss)!, { ownGame: this.input.settings.erBoss === 'ownGame', locations: bossLocations.get(boss)! })) {
             locs.add(loc);
           }
         }
@@ -246,7 +250,7 @@ export class LogicPassEntrances {
       /* Place the boss */
       const src = bossEntrancesByDungeon.get(loc)!;
       const dst = bossEntrancesByDungeon.get(boss)!;
-      this.place(worldId, src.id, dst.id);
+      this.place(worldId, src, dst);
       world.bossIds[BOSS_INDEX_BY_DUNGEON[boss]] = BOSS_INDEX_BY_DUNGEON[loc];
 
       /* Add the events */
@@ -306,15 +310,17 @@ export class LogicPassEntrances {
     }
 
     /* Get the transitions and exprs */
-    const dungeonTransitions = [...world.entrances.values()]
-      .filter(e => e.type === 'dungeon')
-      .filter(e => shuffledDungeons.has(world.areas[e.to].dungeon!));
+    const dungeonTransitions = (Object.keys(ENTRANCES) as Entrance[])
+      .filter(e => ENTRANCES[e].type === 'dungeon')
+      .filter(e => shuffledDungeons.has(world.areas[ENTRANCES[e].to].dungeon!));
 
-    const dungeonEntrances = new Map<string, WorldEntrance>();
+    const dungeonEntrances = new Map<string, Entrance>();
 
-    for (const e of dungeonTransitions) {
+    for (const eName of dungeonTransitions) {
+      const e = ENTRANCES[eName];
       /* Get the exit */
-      const exit = world.entrances.get(e.reverse!)!;
+      const reverse = (e as any).reverse as Entrance | undefined;
+      const exit = ENTRANCES[reverse!];
 
       /* Get the various areas */
       const entranceAreaFrom = world.areas[e.from];
@@ -322,7 +328,7 @@ export class LogicPassEntrances {
       const exitAreaFrom = world.areas[exit.from];
 
       /* Save the entrance */
-      dungeonEntrances.set(entranceAreaTo.dungeon!, e);
+      dungeonEntrances.set(entranceAreaTo.dungeon!, eName);
 
       /* Remove the transitions */
       delete entranceAreaFrom.exits[e.to];
@@ -344,7 +350,7 @@ export class LogicPassEntrances {
           if (locs.has(loc)) {
             continue;
           }
-          if (this.isAssignableNew(worldId, dungeonEntrances.get(loc)!.id, dungeonEntrances.get(dungeon)!.id, { ownGame: this.input.settings.erDungeons === 'ownGame' })) {
+          if (this.isAssignableNew(worldId, dungeonEntrances.get(loc)!, dungeonEntrances.get(dungeon)!, { ownGame: this.input.settings.erDungeons === 'ownGame' })) {
             locs.add(loc);
           }
         }
@@ -368,8 +374,8 @@ export class LogicPassEntrances {
       unplacedLocs.delete(loc);
 
       /* Change the world */
-      const sourceEntranceId = dungeonEntrances.get(loc)!.id;
-      const destEntranceId = dungeonEntrances.get(dungeon)!.id;
+      const sourceEntranceId = dungeonEntrances.get(loc)!;
+      const destEntranceId = dungeonEntrances.get(dungeon)!;
 
       this.place(worldId, sourceEntranceId, destEntranceId);
 
@@ -383,11 +389,11 @@ export class LogicPassEntrances {
     return exprAnd([e, subcond]);
   }
 
-  private placeSingle(worldId: number, original: string, replacement: string, opts?: PlaceOpts) {
+  private placeSingle(worldId: number, original: Entrance, replacement: Entrance, opts?: PlaceOpts) {
     opts = opts || {};
     const world = this.worlds[worldId];
-    const entranceOriginal = world.entrances.get(original)!;
-    const entranceReplacement = world.entrances.get(replacement)!;
+    const entranceOriginal = ENTRANCES[original];
+    const entranceReplacement = ENTRANCES[replacement];
 
     /* Change the world */
     let expr = this.getExpr(worldId, original);
@@ -405,28 +411,29 @@ export class LogicPassEntrances {
     world.entranceOverrides.set(original, replacement);
   }
 
-  private place(worldId: number, original: string, replacement: string, opts?: PlaceOpts) {
+  private place(worldId: number, original: Entrance, replacement: Entrance, opts?: PlaceOpts) {
     const world = this.worlds[worldId];
-    const entranceOriginal = world.entrances.get(original)!;
-    const entranceReplacement = world.entrances.get(replacement)!;
+    const entranceOriginal = ENTRANCES[original];
+    const entranceReplacement = ENTRANCES[replacement];
 
     this.placeSingle(worldId, original, replacement, opts);
-    if (entranceOriginal.reverse && entranceReplacement.reverse) {
-      this.placeSingle(worldId, entranceReplacement.reverse, entranceOriginal.reverse, opts);
+    if ((entranceOriginal as any).reverse && (entranceReplacement as any).reverse) {
+      this.placeSingle(worldId, (entranceReplacement as any).reverse, (entranceOriginal as any).reverse, opts);
     }
   }
 
   private placePool(worldId: number, pool: string[], opts?: PlaceOpts) {
     const world = this.worlds[worldId];
     /* Get overworld entrances */
-    const entrances = new Set([...world.entrances.values()].filter(e => pool.includes(e.type)));
+    const entrances = new Set((Object.keys(ENTRANCES) as Entrance[]).filter(x => pool.includes(ENTRANCES[x].type)));
 
     /* Delete the overworld entrances from the world */
-    for (const e of entrances) {
+    for (const eName of entrances) {
+      const e = ENTRANCES[eName];
       delete world.areas[e.from].exits[e.to];
-      const reverse = e.reverse;
+      const reverse = (e as any).reverse as Entrance | undefined;
       if (reverse) {
-        const r = world.entrances.get(reverse)!;
+        const r = ENTRANCES[reverse];
         delete world.areas[r.from].exits[r.to];
       }
     }
@@ -438,10 +445,10 @@ export class LogicPassEntrances {
     for (let e of shuffledEntrances) {
       let candidates = [...entrances];
       if (opts?.ownGame) {
-        candidates = candidates.filter(c => c.game === e.game);
+        candidates = candidates.filter(c => ENTRANCES[c].game === ENTRANCES[e].game);
       }
       const newE = sample(this.input.random, candidates);
-      this.place(worldId, e.id, newE.id, opts);
+      this.place(worldId, e, newE, opts);
       entrances.delete(newE);
     }
   }

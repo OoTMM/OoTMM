@@ -119,14 +119,23 @@ async function genDrawGI() {
   await cgSource.emit();
 }
 
+async function genEntrances() {
+  const data: {[k: string]: number} = {};
+  data['NONE'] = 0xffff;
+  for (const [k, v] of Object.entries(ENTRANCES)) {
+    data[k] = v.id;
+  }
+  await codegenFile(data, "ENTR", "entrances.h", "GENERATED_ENTRANCES_H");
+}
+
 export const codegen = async (monitor: Monitor) => {
   monitor.log("Codegen");
   return Promise.all([
     genGI(),
     genDrawGI(),
+    genEntrances(),
     codegenFile(SCENES,               "SCE",      "scenes.h",       "GENERATED_SCENES_H"),
     codegenFile(NPC,                  "NPC",      "npc.h",          "GENERATED_NPC_H"),
-    codegenFile(ENTRANCES,            "ENTR",     "entrances.h",    "GENERATED_ENTRANCES_H"),
     codegenFile(CONFVARS_VALUES,      "CFG",      "config.h",       "GENERATED_CONFIG_H"),
     codegenFile(PATCH_GROUP_VALUES,   "PG",       "patch_group.h",  "GENERATED_PATCH_GROUP_H"),
     codegenFile(PRICE_RANGES,         "PRICES",   "prices.h",       "GENERATED_PRICES_H"),

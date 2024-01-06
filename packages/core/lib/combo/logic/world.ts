@@ -1,5 +1,5 @@
 import { cloneDeep } from 'lodash';
-import { MACROS, WORLD, REGIONS, POOL, ENTRANCES_DATA } from '@ootmm/data';
+import { MACROS, WORLD, REGIONS, POOL, ENTRANCES } from '@ootmm/data';
 
 import { Game, GAMES } from '../config';
 import { gameId } from '../util';
@@ -120,15 +120,6 @@ export type WorldGossip = {
   type: 'gossip' | 'gossip-grotto' | 'gossip-moon';
 };
 
-export type WorldEntrance = {
-  id: string;
-  type: 'boss' | 'dungeon' | 'overworld' | 'region' | 'region-extra' | 'region-shortcut' | 'one-way' | 'one-way-ikana' | 'one-way-song' | 'one-way-statue' | 'one-way-owl' | 'indoors' | 'indoors-extra' | 'indoors-exit' | 'indoors-special';
-  from: string;
-  to: string;
-  reverse: string | null;
-  game: Game;
-};
-
 export type ExprParsers = {
   oot: ExprParser;
   mm: ExprParser;
@@ -141,7 +132,6 @@ export type World = {
   regions: { [k: string]: string };
   gossip: { [k: string]: WorldGossip };
   checkHints: { [k: string]: string[] };
-  entrances: Map<string, WorldEntrance>;
   locations: Set<string>;
   songLocations: Set<string>;
   warpLocations: Set<string>;
@@ -211,7 +201,6 @@ export function cloneWorld(world: World): World {
     regions: cloneDeep(world.regions),
     gossip: cloneDeep(world.gossip),
     checkHints: cloneDeep(world.checkHints),
-    entrances: new Map(world.entrances),
     locations: new Set(world.locations),
     songLocations: new Set(world.songLocations),
     warpLocations: new Set(world.warpLocations),
@@ -299,7 +288,6 @@ export class LogicPassWorld {
       regions: {},
       gossip: {},
       checkHints: {},
-      entrances: new Map,
       locations: new Set(),
       songLocations: new Set(),
       warpLocations: new Set(),
@@ -318,7 +306,6 @@ export class LogicPassWorld {
     /* Create the expr parser */
     this.loadAreas(game, this.world.exprParsers[game]);
     this.loadPool(game);
-    this.loadEntrances(game);
   }
 
   private loadMacrosFile(exprParser: ExprParser, data: any) {
@@ -459,21 +446,6 @@ export class LogicPassWorld {
       } else if (ItemHelpers.isDungeonReward(item)) {
         this.world.warpLocations.add(location);
       }
-    }
-  }
-
-  private loadEntrances(game: Game) {
-    for (const record of ENTRANCES_DATA[game]) {
-      const id = gameId(game, String(record.id), '_');
-      const reverseRaw = String(record.reverse);
-      let reverse: string | null = null;
-      if (reverseRaw !== 'NONE') {
-        reverse = gameId(game, reverseRaw, '_');
-      }
-      const from = gameId(game, String(record.from), ' ');
-      const to = gameId(game, String(record.to), ' ');
-      const type = String(record.type) as WorldEntrance['type'];
-      this.world.entrances.set(id, { id, from, to, type, reverse, game });
     }
   }
 }

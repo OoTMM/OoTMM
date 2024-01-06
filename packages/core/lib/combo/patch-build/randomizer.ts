@@ -256,7 +256,7 @@ function entrance(srcName: string, world: World) {
 }
 
 const entrance2 = (srcGame: Game, dstGame: Game, name: string) => {
-  let data = (ENTRANCES as any)[name] as number;
+  let data = ENTRANCES[name as keyof typeof ENTRANCES].id;
   if (data === undefined) {
     throw new Error(`Unknown entrance ${name}`);
   }
@@ -543,12 +543,12 @@ const gameEntrances = (worldId: number, game: Game, logic: LogicResult) => {
   const data: number[] = [];
   const world = logic.worlds[worldId];
   for (const [src, dst] of world.entranceOverrides) {
-    const srcEntrance = world.entrances.get(src)!;
-    const dstEntrance = world.entrances.get(dst)!;
+    const srcEntrance = ENTRANCES[src as keyof typeof ENTRANCES];
+    const dstEntrance = ENTRANCES[dst as keyof typeof ENTRANCES];
     if (srcEntrance.game !== game)
       continue;
-    const srcId = entrance2(srcEntrance.game, srcEntrance.game, src);
-    const dstId = entrance2(srcEntrance.game, dstEntrance.game, dst);
+    const srcId = entrance2(srcEntrance.game, srcEntrance.game as Game, src);
+    const dstId = entrance2(srcEntrance.game, dstEntrance.game as Game, dst);
     data.push(srcId, dstId);
   }
   data.push(0xffffffff);
