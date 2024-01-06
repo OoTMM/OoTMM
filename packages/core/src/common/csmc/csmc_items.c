@@ -284,6 +284,15 @@ int csmcFromItem(s16 gi)
     case GI_OOT_BOMBCHU_BAG_10:
     case GI_OOT_BOMBCHU_BAG_20:
         return comboConfig(CFG_OOT_BOMBCHU_BAG) ? CSMC_MAJOR : CSMC_NORMAL;
+    case GI_MM_BOMBCHU:
+    case GI_MM_BOMBCHU_5:
+    case GI_MM_BOMBCHU_10:
+    case GI_MM_BOMBCHU_20:
+    case GI_MM_BOMBCHU_BAG:
+    case GI_MM_BOMBCHU_BAG_5:
+    case GI_MM_BOMBCHU_BAG_10:
+    case GI_MM_BOMBCHU_BAG_20:
+        return comboConfig(CFG_MM_BOMBCHU_BAG) ? CSMC_MAJOR : CSMC_NORMAL;
     case GI_OOT_SMALL_KEY:
     case GI_OOT_SMALL_KEY_FOREST:
     case GI_OOT_SMALL_KEY_FIRE:

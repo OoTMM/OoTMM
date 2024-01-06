@@ -63,3 +63,64 @@ void EnItem00_DrawHeartPiece(Actor_EnItem00* this, GameState_Play* play)
 }
 
 PATCH_FUNC(0x800a75b8, EnItem00_DrawHeartPiece);
+
+static s16 bombDrop(s16 dropId)
+{
+    int hasChuBag;
+    int hasBombBag;
+    u8  bombCount;
+    u8  bombchuCount;
+
+    if (!comboConfig(CFG_MM_BOMBCHU_BAG))
+        return dropId;
+
+    hasChuBag = (gMmSave.inventory.items[ITS_MM_BOMBCHU] == ITEM_MM_BOMBCHU);
+    hasBombBag = (gMmSave.inventory.upgrades.bombBag > 0);
+
+    if (!hasChuBag)
+    {
+        if (!hasBombBag)
+            return -1;
+        return dropId;
+    }
+
+    if (!hasBombBag)
+        return ITEM00_BOMBCHU;
+
+    /* We have both, check for ammo */
+    bombCount = gMmSave.inventory.ammo[ITS_MM_BOMBS];
+    bombchuCount = gMmSave.inventory.ammo[ITS_MM_BOMBCHU];
+
+    /* Low on ammo */
+    if (bombCount < 15 || bombchuCount < 15)
+    {
+        if (bombchuCount < bombCount)
+            return ITEM00_BOMBCHU;
+        return dropId;
+    }
+
+    /* Not low, return at random */
+    if (RandFloat() < 0.5f)
+        return ITEM00_BOMBCHU;
+    return dropId;
+}
+
+/* TODO: Flexible drops would ideally need to be patched on top of this */
+static s16 EnItem00_FixDropWrapper(s16 dropId)
+{
+    switch (dropId)
+    {
+    case ITEM00_BOMB:
+    case ITEM00_BOMBS_5:
+        dropId = bombDrop(dropId);
+        break;
+    default:
+        break;
+    }
+
+    return EnItem00_FixDrop(dropId);
+}
+
+PATCH_CALL(0x800a7994, EnItem00_FixDropWrapper);
+PATCH_CALL(0x800a7c44, EnItem00_FixDropWrapper);
+PATCH_CALL(0x800a8024, EnItem00_FixDropWrapper);

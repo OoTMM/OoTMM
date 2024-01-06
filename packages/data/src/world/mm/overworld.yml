@@ -104,7 +104,7 @@
   events:
     MAGIC: "true"
     ARROWS: "true"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     FAIRY: "true"
   locations:
     "Mountain Village Owl Statue": "has_sticks || has_weapon"
@@ -115,7 +115,7 @@
   events:
     MAGIC: "true"
     ARROWS: "true"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     FAIRY: "true"
   locations:
     "Snowhead Owl Statue": "has_sticks || has_weapon"
@@ -135,7 +135,7 @@
   events:
     MAGIC: "true"
     ARROWS: "true"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     FAIRY: "true"
   locations:
     "Zora Cape Owl Statue": "has_sticks || has_weapon"
@@ -150,7 +150,7 @@
   events:
     MAGIC: "true"
     ARROWS: "true"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     FAIRY: "true"
   locations:
     "Ikana Canyon Owl Statue": "has_sticks || has_weapon"
@@ -165,7 +165,7 @@
   events:
     MAGIC: "true"
     ARROWS: "true"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     FAIRY: "true"
   locations:
     "Stone Tower Owl Statue": "has_sticks || has_weapon"
@@ -479,7 +479,7 @@
 "Honey & Darling Game":
   region: ENTRANCE
   events:
-    HD_REWARD_1: "has_bomb_bag && before(NIGHT1_PM_10_00)"
+    HD_REWARD_1: "(has_bomb_bag || has_bombchu_license) && before(NIGHT1_PM_10_00)"
     HD_REWARD_2: "has_bomb_bag && between(DAY2_AM_06_00, NIGHT2_PM_10_00)"
     HD_REWARD_3: "(has_bow || can_use_deku_bubble) && is_day3"
   exits:
@@ -556,7 +556,7 @@
     NUTS: "soul_deku_baba"
     MAGIC: "soul_enemy(SOUL_ENEMY_CHUCHU)"
     RUPEES: "true"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     ARROWS: "true"
     FAIRY: "can_get_gossip_fairy"
   exits:
@@ -816,7 +816,7 @@
     NUTS: "soul_deku_baba"
     MAGIC: "true"
     RUPEES: "true"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     ARROWS: "true"
     FISH: "true"
     BUGS: "true"
@@ -883,7 +883,7 @@
     NUTS: "soul_deku_baba"
     MAGIC: "true"
     RUPEES: "true"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     ARROWS: "true"
     FISH: "true"
     BUGS: "true"
@@ -921,7 +921,7 @@
   events:
     MAGIC: "true"
     RUPEES: "true"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     ARROWS: "true"
     MUSHROOM: "has(MASK_SCENTS)"
   exits:
@@ -1039,7 +1039,7 @@
   events:
     MAGIC: "true"
     RUPEES: "true"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     ARROWS: "true"
     BUGS: "true"
     MUSHROOM: "has(MASK_SCENTS)"
@@ -1065,7 +1065,7 @@
   events:
     MAGIC: "true"
     RUPEES: "true"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     ARROWS: "true"
     BUGS: "true"
     MUSHROOM: "has(MASK_SCENTS)"
@@ -1093,7 +1093,7 @@
     NUTS: "soul_deku_baba"
     MAGIC: "true"
     RUPEES: "true"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     ARROWS: "true"
     FISH: "true"
     MUSHROOM: "has(MASK_SCENTS)"
@@ -1144,7 +1144,7 @@
     NUTS: "soul_deku_baba"
     MAGIC: "true"
     RUPEES: "true"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     ARROWS: "true"
     FISH: "true"
     MUSHROOM: "has(MASK_SCENTS)"
@@ -1182,7 +1182,7 @@
     STICKS: "true"
     NUTS: "soul_deku_baba"
     RUPEES: "true"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     ARROWS: "true"
     MAGIC: "true"
     WATER: "true"
@@ -1264,7 +1264,7 @@
     NUTS: "soul_deku_baba"
     MAGIC: "true"
     RUPEES: "true"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     ARROWS: "true"
     FISH: "true"
     BUGS: "true"
@@ -1343,7 +1343,7 @@
     NUTS: "soul_deku_baba"
     MAGIC: "true"
     RUPEES: "true"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     ARROWS: "true"
     FISH: "true"
     BUGS: "true"
@@ -1576,7 +1576,7 @@
   events:
     MAGIC: "true"
     ARROWS: "true"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     RUPEES: "event(BOSS_SNOWHEAD) || ((can_break_boulders || can_use_fire_arrows) && (second_day || final_day)) || ((can_break_boulders || can_use_fire_arrows) && can_use_light_arrows && first_day && soul_tektite)"
     FAIRY: "true"
   locations:
@@ -1636,7 +1636,7 @@
   events:
     MAGIC: "true"
     ARROWS: "true"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     RUPEES: "true"
     STICKS: "soul_deku_baba"
     NUTS: "soul_deku_baba"
@@ -1705,7 +1705,7 @@
   events:
     MAGIC: "true"
     ARROWS: "true"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     RUPEES: "true"
     STICKS: "soul_deku_baba"
     NUTS: "soul_deku_baba"
@@ -1763,7 +1763,7 @@
     BUY_KEG: "event(POWDER_KEG_TRIAL) && has(POWDER_KEG) && can_use_wallet(2)"
     MAGIC: "true"
     ARROWS: "true"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     NUTS: "true"
     STICKS: "true"
     RUPEES: "can_break_boulders || can_use_fire_arrows || (can_use_light_arrows && soul_tektite)"
@@ -1782,7 +1782,7 @@
   region: ENTRANCE
   events:
     MAGIC: "true"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     BUGS: "true"
   exits:
     "Front of Lone Peak Shrine": "true"
@@ -1889,7 +1889,7 @@
   events:
     MAGIC: "true"
     ARROWS: "true"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     RUPEES: "true"
     STICKS: "soul_deku_baba"
     NUTS: "soul_deku_baba"
@@ -1922,7 +1922,7 @@
   events:
     OPEN_SNOWHEAD_TEMPLE: "can_lullaby || (event(BOSS_SNOWHEAD) && has_mask_goron)"
     MAGIC: "true"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     ARROWS: "true"
     FAIRY: "true"
 "Snowhead":
@@ -2152,7 +2152,7 @@
     "Owl Great Bay": "true"
   events:
     MAGIC: "true"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     ARROWS: "true"
     RUPEES: "true"
     BUGS: "true"
@@ -2193,7 +2193,7 @@
   region: ENTRANCE
   events:
     MAGIC: "true"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     ARROWS: "true"
     RUPEES: "true"
     STICKS: "soul_deku_baba"
@@ -2227,7 +2227,7 @@
   region: ENTRANCE
   events:
     MAGIC: "true"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     ARROWS: "true"
     RUPEES: "true"
   exits:
@@ -2379,7 +2379,7 @@
   events:
     MAGIC: "true"
     ARROWS: "true"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     RUPEES: "true"
     STICKS: "soul_deku_baba"
     NUTS: "soul_deku_baba"
@@ -2552,7 +2552,7 @@
   region: ENTRANCE
   events:
     MAGIC: "true"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     ARROWS: "true"
     RUPEES: "true"
     FISH: "true"
@@ -2623,7 +2623,7 @@
   region: ENTRANCE
   events:
     MAGIC: "true"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     ARROWS: "true"
     RUPEES: "true"
     STICKS: "soul_deku_baba"
@@ -2731,7 +2731,7 @@
     "Ikana Valley": "true"
   events:
     MAGIC: "true"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     ARROWS: "true"
     RUPEES: "true"
     STICKS: "soul_deku_baba"
@@ -2781,7 +2781,7 @@
     "Owl Ikana": "true"
   events:
     MAGIC: "true"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     ARROWS: "true"
     RUPEES: "can_use_light_arrows && is_night && soul_bubble"
     FAIRY: "true"
@@ -2925,7 +2925,7 @@
   region: STONE_TOWER
   events:
     MAGIC: "true"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     RUPEES: "true"
     FAIRY: "true"
   exits:

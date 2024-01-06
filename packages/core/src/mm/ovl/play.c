@@ -17,7 +17,7 @@ static void debugCheat(GameState_Play* play)
         gMmExtraFlags2.childWallet = 1;
         gSave.inventory.upgrades.wallet = 3;
         gMmExtraFlags3.bottomlessWallet = 1;
-        gSave.inventory.upgrades.bombBag = 3;
+        gSave.inventory.upgrades.bombBag = 0;
 
         gSave.itemEquips.buttonItems[0][0] = ITEM_MM_SWORD_KOKIRI;
         gSave.inventory.items[ITS_MM_OCARINA] = ITEM_MM_OCARINA_OF_TIME;
@@ -92,7 +92,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.ammo[ITS_MM_KEG] = 1;
         gSave.inventory.ammo[ITS_MM_BEANS] = 10;
         gSave.inventory.ammo[ITS_MM_BOW] = 50;
-        gSave.inventory.ammo[ITS_MM_BOMBCHU] = 40;
+        gSave.inventory.ammo[ITS_MM_BOMBCHU] = 50;
         gSave.inventory.ammo[ITS_MM_BOMBS] = 40;
 
         gSave.playerData.healthMax = 0x10 * 20;

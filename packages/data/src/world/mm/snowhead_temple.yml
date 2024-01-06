@@ -27,7 +27,7 @@
   dungeon: SH
   events:
     MAGIC: "true"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
     RUPEES: "true"
   exits:
     "Snowhead Temple Main": "true"

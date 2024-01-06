@@ -97,7 +97,7 @@
   dungeon: IST
   events:
     ARROWS: "true"
-    BOMBS: "true"
+    BOMBS_OR_BOMBCHU: "true"
   exits:
     "Stone Tower Temple Inverted Center": "has(MASK_DEKU) || hookshot_anywhere"
     "Stone Tower Temple Inverted Center Bridge": "(trick(MM_ISTT_EYEGORE) && can_use_light_arrows && can_hookshot) || hookshot_anywhere"
@@ -135,7 +135,7 @@
   events:
     STONE_TOWER_BRIDGE_CHEST_SWITCH: "can_activate_crystal"
     MAGIC: "can_hookshot_short"
-    BOMBS: "can_hookshot_short"
+    BOMBS_OR_BOMBCHU: "can_hookshot_short"
     ARROWS: "can_hookshot_short"
   locations:
     "Stone Tower Temple Inverted Pot Pre-Boss 1": "can_hookshot_short"

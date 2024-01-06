@@ -495,8 +495,16 @@ static void addBombchuOot(u8 count)
 
 static void addBombchuMm(u8 count)
 {
-    if (gMmSave.inventory.upgrades.bombBag)
-        addAmmoMm(ITS_MM_BOMBCHU, ITEM_MM_BOMBCHU, 40, count);
+    if (comboConfig(CFG_MM_BOMBCHU_BAG))
+    {
+        if (gMmSave.inventory.items[ITS_MM_BOMBCHU] == ITEM_MM_BOMBCHU)
+            addAmmoMm(ITS_MM_BOMBCHU, ITEM_MM_BOMBCHU, 50, count);
+    }
+    else
+    {
+        if (gMmSave.inventory.upgrades.bombBag)
+            addAmmoMm(ITS_MM_BOMBCHU, ITEM_MM_BOMBCHU, kMaxBombs[gMmSave.inventory.upgrades.bombBag], count);
+    }
 }
 
 static int addItemBombchuOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
@@ -1739,6 +1747,13 @@ static int addItemBombchuBagOot(GameState_Play* play, u8 itemId, s16 gi, u16 par
     return 0;
 }
 
+static int addItemBombchuBagMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    gMmSave.inventory.items[ITS_MM_BOMBCHU] = ITEM_MM_BOMBCHU;
+    addBombchuMm(param);
+    return 0;
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -1830,6 +1845,7 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemMagicOot,
     addItemMagicMm,
     addItemBombchuBagOot,
+    addItemBombchuBagMm,
 };
 
 extern const u8 kAddItemFuncs[];

@@ -1052,6 +1052,13 @@ export const SETTINGS = [{
   description: 'Turns the first out-of-shop bombchu pack you find into the bombchu bag. Has logical implications.',
   default: false,
 }, {
+  key: 'bombchuBagMm',
+  name: 'Bombchu Bag (MM)',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Turns the first out-of-shop bombchu pack you find into the bombchu bag. Has logical implications.',
+  default: false,
+}, {
   key: 'ocarinaButtonsShuffleOot',
   name: 'Ocarina Buttons Shuffle (OoT)',
   category: 'items.extensions',

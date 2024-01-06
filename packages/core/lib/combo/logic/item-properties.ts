@@ -31,6 +31,12 @@ export class LogicPassItemProperties {
       this.properties.junk = new Set([...this.properties.junk, ...ItemGroups.OOT_BOMBCHU]);
     }
 
+    if (this.state.settings.bombchuBagMm) {
+      this.properties.license = new Set([...this.properties.license, ...ItemGroups.MM_BOMBCHU]);
+    } else {
+      this.properties.junk = new Set([...this.properties.junk, ...ItemGroups.MM_BOMBCHU]);
+    }
+
     this.properties.important = new Set([...ItemGroups.REQUIRED, ...ItemGroups.CONSUMABLES, ...this.properties.license]);
 
     return { itemProperties: this.properties };

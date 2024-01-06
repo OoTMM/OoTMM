@@ -11,7 +11,7 @@
     WATER: "true"
     FISH: "true"
     BUGS: "has_water && has_fire_sticks"
-    BOMBS: "has_water && has_fire_sticks"
+    BOMBS_OR_BOMBCHU: "has_water && has_fire_sticks"
     FAIRY: "has_water && has_bugs"
     RUPEES: "has_water && (((can_fight || has_weapon_range || has_explosives) && soul_wallmaster) || (has_bugs && can_use_light_arrows && soul_keese))"
   locations:
