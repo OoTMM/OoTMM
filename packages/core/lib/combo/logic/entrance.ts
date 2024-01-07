@@ -684,6 +684,11 @@ export class LogicPassEntrances {
     this.pathfinder = new Pathfinder(this.worlds, this.input.settings, this.input.startingItems);
 
     for (let i = 0; i < worldsCount; ++i) {
+      if (this.input.settings.erWallmasters !== 'none') {
+        anyEr = true;
+        this.placeWallmasters(i);
+      }
+
       if (this.input.settings.erRegions !== 'none') {
         anyEr = true;
         this.placeRegions(i);
@@ -712,11 +717,6 @@ export class LogicPassEntrances {
       if (this.input.settings.erBoss !== 'none') {
         anyEr = true;
         this.fixBosses(i);
-      }
-
-      if (this.input.settings.erWallmasters !== 'none') {
-        anyEr = true;
-        this.placeWallmasters(i);
       }
 
       if (anyEr) {
