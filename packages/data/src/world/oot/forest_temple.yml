@@ -6,6 +6,14 @@
   locations:
     "Forest Temple Tree Small Key": "true"
     "Forest Temple GS Entrance": "has_ranged_weapon || has_explosives || can_use_din"
+"Forest Temple Wallmaster West":
+  region: NONE
+  exits:
+    "VOID": "true"
+"Forest Temple Wallmaster East":
+  region: NONE
+  exits:
+    "VOID": "true"
 "Forest Temple Main":
   dungeon: Forest
   exits:
@@ -104,10 +112,12 @@
 "Forest Temple Twisted 1 Normal":
   dungeon: Forest
   exits:
+    "Forest Temple Wallmaster West": "soul_wallmaster"
     "Forest Temple Poe 1": "cond(setting(hookshotAnywhereOot) && !setting(ageChange, none), small_keys_forest(5), small_keys_forest(3))"
 "Forest Temple Twisted 1 Alt":
   dungeon: Forest
   exits:
+    "Forest Temple Wallmaster West": "soul_wallmaster"
     "Forest Temple Garden West Ledge": "soul_bubble && (can_use_bow || can_hammer || has_explosives || has_nuts || can_collect_distance || has_shield)"
   locations:
     "Forest Temple Boss Key": "true"
@@ -143,6 +153,7 @@
 "Forest Temple Twisted 2 Normal":
   dungeon: Forest
   exits:
+    "Forest Temple Wallmaster East": "soul_wallmaster"
     "Forest Temple Rotating Room": "small_keys_forest(5)"
 "Forest Temple Rotating Room":
   dungeon: Forest
@@ -154,6 +165,7 @@
 "Forest Temple Twisted 2 Alt":
   dungeon: Forest
   exits:
+    "Forest Temple Wallmaster East": "soul_wallmaster"
     "Forest Temple Checkerboard": "true"
 "Forest Temple Checkerboard":
   dungeon: Forest

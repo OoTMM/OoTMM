@@ -296,3 +296,10 @@ MM_WARP_OWL_WOODFALL:                           { game: mm, id: 0x8640, type: on
 MM_WARP_OWL_SOUTHERN_SWAMP:                     { game: mm, id: 0x84a0, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Swamp"] }
 MM_WARP_OWL_IKANA_CANYON:                       { game: mm, id: 0x2040, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Ikana"] }
 MM_WARP_OWL_STONE_TOWER:                        { game: mm, id: 0xaa30, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Stone Tower"] }
+OOT_WALLMASTER_FOREST_CORRIDOR_WEST:            { game: oot, id: 0xf10, type: wallmaster, areas: ["OOT Forest Temple Wallmaster West", "OOT VOID"] }
+OOT_WALLMASTER_FOREST_CORRIDOR_EAST:            { game: oot, id: 0xf11, type: wallmaster, areas: ["OOT Forest Temple Wallmaster East", "OOT VOID"] }
+OOT_WALLMASTER_GTG:                             { game: oot, id: 0xf12, type: wallmaster, areas: ["OOT Gerudo Training Grounds Wallmaster", "OOT VOID"] }
+OOT_WALLMASTER_SHADOW:                          { game: oot, id: 0xf13, type: wallmaster, areas: ["OOT Shadow Temple Wallmaster", "OOT VOID"] }
+OOT_WALLMASTER_SPIRIT_CHILD:                    { game: oot, id: 0xf14, type: wallmaster, areas: ["OOT Spirit Temple Wallmaster Child", "OOT VOID"] }
+OOT_WALLMASTER_SPIRIT_ADULT:                    { game: oot, id: 0xf15, type: wallmaster, areas: ["OOT Spirit Temple Wallmaster Adult", "OOT VOID"] }
+OOT_WALLMASTER_GANON:                           { game: oot, id: 0xf16, type: wallmaster, areas: ["OOT Ganon Castle Wallmaster", "OOT VOID"] }

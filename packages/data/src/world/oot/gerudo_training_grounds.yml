@@ -9,11 +9,16 @@
     "Gerudo Training Grounds Entrance 1": "can_hit_triggers_distance"
     "Gerudo Training Grounds Entrance 2": "can_hit_triggers_distance"
     "Gerudo Training Grounds Stalfos": "has_weapon && soul_enemy(SOUL_ENEMY_STALFOS)"
+"Gerudo Training Grounds Wallmaster":
+  region: NONE
+  exits:
+    "VOID": "true"
 "Gerudo Training Grounds Slopes":
   dungeon: GTG
   exits:
     "Gerudo Training Grounds": "true"
     "Gerudo Training Grounds Slopes End": "can_hookshot || climb_anywhere"
+    "Gerudo Training Grounds Wallmaster": "soul_wallmaster"
   locations:
     "Gerudo Training Grounds SR Slope Front Right": "true"
     "Gerudo Training Grounds SR Slope Front Left": "true"

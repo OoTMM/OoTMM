@@ -1,3 +1,5 @@
+"VOID":
+  region: NONE
 "SPAWN":
   region: NONE
   age_change: false

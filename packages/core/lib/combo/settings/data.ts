@@ -1417,6 +1417,18 @@ export const SETTINGS = [{
   description: 'Enable the ability to shuffle dungeons within their own game or across both.',
   default: 'none'
 }, {
+  key: 'erWallmasters',
+  name: 'Wallmaster Shuffle (WIP, OOT-ONLY, NO-MQ)',
+  category: 'entrances',
+  type: 'enum',
+  values: [
+    { value: 'none', name: 'None' },
+    { value: 'ownGame', name: 'Own Game' },
+    { value: 'full', name: 'Full' },
+  ],
+  description: 'TODO',
+  default: 'none'
+}, {
   key: 'erMajorDungeons',
   name: 'Shuffle Major Dungeons with Dungeons',
   category: 'entrances',

@@ -43,6 +43,7 @@ export const PATCH_GROUPS = [
   'OOT_FISHING_POND_SHUFFLE',
   'OOT_NOT_FISHING_POND_SHUFFLE',
   'MM_BOMBCHU_BAG',
+  'ER_WALLMASTERS',
 ] as const;
 
 export type PatchGroup = typeof PATCH_GROUPS[number];
