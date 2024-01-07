@@ -510,6 +510,55 @@ export class LogicPassEntrances {
     this.placePool(worldId, Array.from(pool), { ownGame: this.input.settings.erOneWays === 'ownGame' });
   }
 
+  private shuffledPools(def?: string[]) {
+    let pool: string[] = [];
+
+    if (this.input.settings.erOneWays !== 'none') {
+      pool = [...pool, 'one-way', 'one-way-ikana', 'one-way-song', 'one-way-statue', 'one-way-owl'];
+    }
+
+    if (this.input.settings.erDungeons !== 'none') {
+      pool = [...pool, 'dungeon'];
+    }
+
+    if (this.input.settings.erBoss !== 'none') {
+      pool = [...pool, 'boss'];
+    }
+
+    if (pool.length === 0) {
+      return def;
+    }
+
+    return pool;
+  }
+
+  private placeWallmasters(worldId: number) {
+    const pool = this.shuffledPools(['dungeon'])!;
+
+    const entrancesSrc = new Set((Object.keys(ENTRANCES) as Entrance[]).filter(x => ENTRANCES[x].type === 'wallmaster'));
+    const entrancesDst = new Set((Object.keys(ENTRANCES) as Entrance[]).filter(x => pool.includes(ENTRANCES[x].type)));
+
+    /* Sanity - TODO: base this on real ER settings */
+    entrancesDst.delete('MM_CLOCK_TOWER');
+    entrancesDst.delete('MM_CLOCK_TOWN_FROM_CLOCK_TOWER');
+    entrancesDst.delete('OOT_GANON_CASTLE');
+    entrancesDst.delete('OOT_GANON_CASTLE_EXTERIOR_FROM_CASTLE');
+    entrancesDst.delete('OOT_GANON_TOWER');
+    entrancesDst.delete('OOT_GANON_CASTLE_FROM_TOWER');
+
+    while (entrancesSrc.size > 0) {
+      const src = sample(this.input.random, [...entrancesSrc]);
+      let dstCandidates = [...entrancesDst];
+      if (this.input.settings.erWallmasters === 'ownGame') {
+        dstCandidates = dstCandidates.filter(x => ENTRANCES[x].game === ENTRANCES[src].game);
+      }
+      const dst = sample(this.input.random, dstCandidates);
+      this.place(worldId, src, dst);
+      entrancesSrc.delete(src);
+      entrancesDst.delete(dst);
+    }
+  }
+
   private propagateRegionsStep(worldId: number) {
     const world = this.worlds[worldId];
     let changed = false;
@@ -663,6 +712,11 @@ export class LogicPassEntrances {
       if (this.input.settings.erBoss !== 'none') {
         anyEr = true;
         this.fixBosses(i);
+      }
+
+      if (this.input.settings.erWallmasters !== 'none') {
+        anyEr = true;
+        this.placeWallmasters(i);
       }
 
       if (anyEr) {

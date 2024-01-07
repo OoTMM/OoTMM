@@ -69,6 +69,7 @@ function asmPatchGroups(settings: Settings) {
     OOT_FISHING_POND_SHUFFLE: settings.pondFishShuffle,
     OOT_NOT_FISHING_POND_SHUFFLE: !settings.pondFishShuffle,
     MM_BOMBCHU_BAG: settings.bombchuBagMm,
+    ER_WALLMASTERS: settings.erWallmasters !== 'none',
   };
   const keys = Object.keys(groups) as PatchGroup[];
   return keys.filter((k) => groups[k]);

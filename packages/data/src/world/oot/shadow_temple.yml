@@ -3,6 +3,10 @@
   exits:
     "Graveyard Upper": "true"
     "Shadow Temple Pit": "has_hover_boots || can_hookshot || climb_anywhere || glitch_megaflip"
+"Shadow Temple Wallmaster":
+  region: NONE
+  exits:
+    "VOID": "true"
 "Shadow Temple Pit":
   dungeon: Shadow
   exits:
@@ -48,6 +52,7 @@
   exits:
     "Shadow Temple Falling Spikes": "silver_rupees_shadow_pit"
     "Shadow Temple Invisible Spikes": "cond(climb_anywhere, small_keys_shadow(4), small_keys_shadow(2))"
+    "Shadow Temple Wallmaster": "soul_wallmaster"
   locations:
     "Shadow Temple Spinning Blades Visible": "event(SHADOW_INVISIBLE_SCYTHE_GATE)"
     "Shadow Temple Spinning Blades Invisible": "event(SHADOW_INVISIBLE_SCYTHE_GATE)"
