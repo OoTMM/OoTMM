@@ -217,6 +217,12 @@ PATCH_CALL(0x80822f68, KaleidoScope_DrawDungeonUnk2);
 
 static int canSave(GameState_Play* play)
 {
+    Actor_Player* link;
+
+    link = GET_LINK(play);
+    if (link->state & PLAYER_ACTOR_STATE_EPONA)
+        return 0;
+
     switch (play->sceneId)
     {
     case SCE_MM_MOON:
