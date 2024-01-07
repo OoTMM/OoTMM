@@ -533,9 +533,10 @@ export class LogicPassEntrances {
   }
 
   private placeWallmasters(worldId: number) {
+    const world = this.worlds[worldId];
     const pool = this.shuffledPools(['dungeon'])!;
 
-    const entrancesSrc = new Set((Object.keys(ENTRANCES) as Entrance[]).filter(x => ENTRANCES[x].type === 'wallmaster'));
+    const entrancesSrc = new Set((Object.keys(ENTRANCES) as Entrance[]).filter(x => ENTRANCES[x].type === 'wallmaster' && world.areas.hasOwnProperty(ENTRANCES[x].from)));
     const entrancesDst = new Set((Object.keys(ENTRANCES) as Entrance[]).filter(x => pool.includes(ENTRANCES[x].type)));
 
     /* Sanity - TODO: base this on real ER settings */
