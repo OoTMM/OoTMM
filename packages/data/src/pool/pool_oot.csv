@@ -95,6 +95,14 @@ Sacred Meadow Grotto,                                       chest,          NONE
 Sacred Meadow GS Night Adult,                               gs,             NONE,                 SACRED_FOREST_MEADOW,           0x73,                       GS_TOKEN
 Sacred Meadow Storms Grotto Front Scrub,                    scrub,          NONE,                 GROTTOS,                        0x05,                       POTION_GREEN
 Sacred Meadow Storms Grotto Back Scrub,                     scrub,          NONE,                 GROTTOS,                        0x06,                       POTION_RED
+Sacred Meadow Fairy Fountain Fairy 1,                       fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x02200,                    FAIRY
+Sacred Meadow Fairy Fountain Fairy 2,                       fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x12200,                    FAIRY
+Sacred Meadow Fairy Fountain Fairy 3,                       fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x22200,                    FAIRY
+Sacred Meadow Fairy Fountain Fairy 4,                       fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x32200,                    FAIRY
+Sacred Meadow Fairy Fountain Fairy 5,                       fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x42200,                    FAIRY
+Sacred Meadow Fairy Fountain Fairy 6,                       fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x52200,                    FAIRY
+Sacred Meadow Fairy Fountain Fairy 7,                       fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x62200,                    FAIRY
+Sacred Meadow Fairy Fountain Fairy 8,                       fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x72200,                    FAIRY
 Kakariko Anju Bottle,                                       npc,            NONE,                 KAKARIKO_VILLAGE,               ANJU_BOTTLE,                BOTTLE_EMPTY
 Kakariko Anju Egg,                                          npc,            NONE,                 KAKARIKO_VILLAGE,               TRADE_POCKET_EGG,           POCKET_CUCCO
 Kakariko Anju Cojiro,                                       npc,            NONE,                 KAKARIKO_VILLAGE,               TRADE_COJIRO,               COJIRO
@@ -155,6 +163,14 @@ Graveyard ReDead Tomb,                                      chest,          NONE
 Graveyard Royal Tomb Song,                                  npc,            NONE,                 TOMB_ROYAL,                     ROYAL_TOMB_SONG,            SONG_SUN
 Graveyard Royal Tomb Chest,                                 chest,          NONE,                 TOMB_ROYAL,                     0x00,                       BOMBS_5
 Graveyard Fairy Tomb,                                       chest,          NONE,                 TOMB_FAIRY,                     0x00,                       SHIELD_HYLIAN
+Graveyard Fairy Fountain Fairy 1,                           fairy,          NONE,                 TOMB_FAIRY,                     0x00005,                    FAIRY
+Graveyard Fairy Fountain Fairy 2,                           fairy,          NONE,                 TOMB_FAIRY,                     0x10005,                    FAIRY
+Graveyard Fairy Fountain Fairy 3,                           fairy,          NONE,                 TOMB_FAIRY,                     0x20005,                    FAIRY
+Graveyard Fairy Fountain Fairy 4,                           fairy,          NONE,                 TOMB_FAIRY,                     0x30005,                    FAIRY
+Graveyard Fairy Fountain Fairy 5,                           fairy,          NONE,                 TOMB_FAIRY,                     0x40005,                    FAIRY
+Graveyard Fairy Fountain Fairy 6,                           fairy,          NONE,                 TOMB_FAIRY,                     0x50005,                    FAIRY
+Graveyard Fairy Fountain Fairy 7,                           fairy,          NONE,                 TOMB_FAIRY,                     0x60005,                    FAIRY
+Graveyard Fairy Fountain Fairy 8,                           fairy,          NONE,                 TOMB_FAIRY,                     0x70005,                    FAIRY
 Graveyard Dampe Tomb Reward 1,                              chest,          NONE,                 TOMB_DAMPE_WINDMILL,            0x00,                       HOOKSHOT
 Graveyard Dampe Tomb Reward 2,                              collectible,    NONE,                 TOMB_DAMPE_WINDMILL,            0x07,                       HEART_PIECE
 Graveyard Dampe Tomb Pot 1,                                 pot,            NONE,                 TOMB_DAMPE_WINDMILL,            0x0000,                     RECOVERY_HEART
@@ -272,6 +288,14 @@ Zora River Grass Pack Bush 09,                              grass,          NONE
 Zora River Grass Pack Bush 10,                              grass,          NONE,                 ZORA_RIVER,                     0x90035,                    RANDOM
 Zora River Grass Pack Bush 11,                              grass,          NONE,                 ZORA_RIVER,                     0xa0035,                    RANDOM
 Zora River Grass Pack Bush 12,                              grass,          NONE,                 ZORA_RIVER,                     0xb0035,                    RANDOM
+Zora River Fairy Fountain Fairy 1,                          fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x02100,                    FAIRY
+Zora River Fairy Fountain Fairy 2,                          fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x12100,                    FAIRY
+Zora River Fairy Fountain Fairy 3,                          fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x22100,                    FAIRY
+Zora River Fairy Fountain Fairy 4,                          fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x32100,                    FAIRY
+Zora River Fairy Fountain Fairy 5,                          fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x42100,                    FAIRY
+Zora River Fairy Fountain Fairy 6,                          fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x52100,                    FAIRY
+Zora River Fairy Fountain Fairy 7,                          fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x62100,                    FAIRY
+Zora River Fairy Fountain Fairy 8,                          fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x72100,                    FAIRY
 Zora Domain Waterfall Chest,                                chest,          NONE,                 ZORA_DOMAIN,                    0x00,                       HEART_PIECE
 Zora Domain Diving Game,                                    npc,            NONE,                 ZORA_DOMAIN,                    ZORA_DIVING_GAME,           SCALE
 Zora Domain Diving Game Green Rupee,                        collectible,    NONE,                 ZORA_DOMAIN,                    0x0,                        RUPEE_GREEN
@@ -287,6 +311,14 @@ Zora Domain Pot 2,                                          pot,            NONE
 Zora Domain Pot 3,                                          pot,            NONE,                 ZORA_DOMAIN,                    0x0117,                     RECOVERY_HEART
 Zora Domain Pot 4,                                          pot,            NONE,                 ZORA_DOMAIN,                    0x0118,                     NUTS_5
 Zora Domain Pot 5,                                          pot,            NONE,                 ZORA_DOMAIN,                    0x0119,                     STICK
+Zora Domain Fairy Fountain Fairy 1,                         fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x02300,                    FAIRY
+Zora Domain Fairy Fountain Fairy 2,                         fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x12300,                    FAIRY
+Zora Domain Fairy Fountain Fairy 3,                         fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x22300,                    FAIRY
+Zora Domain Fairy Fountain Fairy 4,                         fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x32300,                    FAIRY
+Zora Domain Fairy Fountain Fairy 5,                         fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x42300,                    FAIRY
+Zora Domain Fairy Fountain Fairy 6,                         fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x52300,                    FAIRY
+Zora Domain Fairy Fountain Fairy 7,                         fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x62300,                    FAIRY
+Zora Domain Fairy Fountain Fairy 8,                         fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x72300,                    FAIRY
 Zora Shop Item 1,                                           shop,           NONE,                 ZORA_SHOP,                      0x10,                       POTION_RED
 Zora Shop Item 2,                                           shop,           NONE,                 ZORA_SHOP,                      0x11,                       ARROWS_30
 Zora Shop Item 3,                                           shop,           NONE,                 ZORA_SHOP,                      0x12,                       FISH
@@ -498,6 +530,14 @@ Hyrule Field Grass Pack 4 Bush 09,                          grass,          NONE
 Hyrule Field Grass Pack 4 Bush 10,                          grass,          NONE,                 HYRULE_FIELD,                   0x9003d,                    RANDOM
 Hyrule Field Grass Pack 4 Bush 11,                          grass,          NONE,                 HYRULE_FIELD,                   0xa003d,                    RANDOM
 Hyrule Field Grass Pack 4 Bush 12,                          grass,          NONE,                 HYRULE_FIELD,                   0xb003d,                    RANDOM
+Hyrule Field Fairy Fountain Fairy 1,                        fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x02000,                    FAIRY
+Hyrule Field Fairy Fountain Fairy 2,                        fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x12000,                    FAIRY
+Hyrule Field Fairy Fountain Fairy 3,                        fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x22000,                    FAIRY
+Hyrule Field Fairy Fountain Fairy 4,                        fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x32000,                    FAIRY
+Hyrule Field Fairy Fountain Fairy 5,                        fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x42000,                    FAIRY
+Hyrule Field Fairy Fountain Fairy 6,                        fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x52000,                    FAIRY
+Hyrule Field Fairy Fountain Fairy 7,                        fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x62000,                    FAIRY
+Hyrule Field Fairy Fountain Fairy 8,                        fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x72000,                    FAIRY
 Market Dog Lady HP,                                         npc,            NONE,                 BACK_ALLEY_HOUSE2,              DOG_LADY,                   HEART_PIECE
 Market Back Alley East House Pot 1,                         pot,            NONE,                 BACK_ALLEY_HOUSE,               0x0002,                     RECOVERY_HEART
 Market Back Alley East House Pot 2,                         pot,            NONE,                 BACK_ALLEY_HOUSE,               0x0003,                     RECOVERY_HEART
@@ -640,6 +680,14 @@ Gerudo Fortress Archery Reward 1,                           npc,            GERU
 Gerudo Fortress Archery Reward 2,                           npc,            GERUDO_ARCHERY,       GERUDO_FORTRESS,                GERUDO_ARCHERY_2,           BOW
 Gerudo Fortress GS Wall,                                    gs,             NONE,                 GERUDO_FORTRESS,                0xa9,                       GS_TOKEN
 Gerudo Fortress GS Target,                                  gs,             NONE,                 GERUDO_FORTRESS,                0xa8,                       GS_TOKEN
+Gerudo Fortress Fairy Fountain Fairy 1,                     fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x02400,                    FAIRY
+Gerudo Fortress Fairy Fountain Fairy 2,                     fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x12400,                    FAIRY
+Gerudo Fortress Fairy Fountain Fairy 3,                     fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x22400,                    FAIRY
+Gerudo Fortress Fairy Fountain Fairy 4,                     fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x32400,                    FAIRY
+Gerudo Fortress Fairy Fountain Fairy 5,                     fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x42400,                    FAIRY
+Gerudo Fortress Fairy Fountain Fairy 6,                     fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x52400,                    FAIRY
+Gerudo Fortress Fairy Fountain Fairy 7,                     fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x62400,                    FAIRY
+Gerudo Fortress Fairy Fountain Fairy 8,                     fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x72400,                    FAIRY
 Haunted Wasteland Chest,                                    chest,          HAUNTED_WASTELAND,    HAUNTED_WASTELAND,              0x00,                       RUPEE_PURPLE
 Haunted Wasteland GS,                                       gs,             NONE,                 HAUNTED_WASTELAND,              0xb1,                       GS_TOKEN
 Haunted Wasteland Pot 1,                                    pot,            NONE,                 HAUNTED_WASTELAND,              0x0000,                     RECOVERY_HEART
@@ -653,6 +701,14 @@ Desert Colossus Grotto Back Scrub,                          scrub,          NONE
 Desert Colossus GS Soil,                                    gs,             NONE,                 DESERT_COLOSSUS,                0xb0,                       GS_TOKEN
 Desert Colossus GS Tree,                                    gs,             NONE,                 DESERT_COLOSSUS,                0xb3,                       GS_TOKEN
 Desert Colossus GS Plateau,                                 gs,             NONE,                 DESERT_COLOSSUS,                0xb2,                       GS_TOKEN
+Desert Colossus Oasis Fairy 1,                              fairy,          NONE,                 DESERT_COLOSSUS,                0x00001,                    FAIRY
+Desert Colossus Oasis Fairy 2,                              fairy,          NONE,                 DESERT_COLOSSUS,                0x10001,                    FAIRY
+Desert Colossus Oasis Fairy 3,                              fairy,          NONE,                 DESERT_COLOSSUS,                0x20001,                    FAIRY
+Desert Colossus Oasis Fairy 4,                              fairy,          NONE,                 DESERT_COLOSSUS,                0x30001,                    FAIRY
+Desert Colossus Oasis Fairy 5,                              fairy,          NONE,                 DESERT_COLOSSUS,                0x40001,                    FAIRY
+Desert Colossus Oasis Fairy 6,                              fairy,          NONE,                 DESERT_COLOSSUS,                0x50001,                    FAIRY
+Desert Colossus Oasis Fairy 7,                              fairy,          NONE,                 DESERT_COLOSSUS,                0x60001,                    FAIRY
+Desert Colossus Oasis Fairy 8,                              fairy,          NONE,                 DESERT_COLOSSUS,                0x70001,                    FAIRY
 Skulltula House 10 Tokens,                                  npc,            NONE,                 HOUSE_OF_SKULLTULA,             GS_10,                      WALLET
 Skulltula House 20 Tokens,                                  npc,            NONE,                 HOUSE_OF_SKULLTULA,             GS_20,                      STONE_OF_AGONY
 Skulltula House 30 Tokens,                                  npc,            NONE,                 HOUSE_OF_SKULLTULA,             GS_30,                      WALLET
@@ -1233,6 +1289,14 @@ Ganon Castle Pot Fire End 1,                                pot,            NONE
 Ganon Castle Pot Fire End 2,                                pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0f05,                     MAGIC_JAR_SMALL
 Ganon Castle Pot Spirit End 1,                              pot,            NONE,                 INSIDE_GANON_CASTLE,            0x1304,                     NUTS_5
 Ganon Castle Pot Spirit End 2,                              pot,            NONE,                 INSIDE_GANON_CASTLE,            0x1305,                     MAGIC_JAR_SMALL
+Ganon Castle Fairy Fountain Fairy 1,                        fairy,          NONE,                 INSIDE_GANON_CASTLE,            0x11004,                    FAIRY
+Ganon Castle Fairy Fountain Fairy 2,                        fairy,          NONE,                 INSIDE_GANON_CASTLE,            0x11004,                    FAIRY
+Ganon Castle Fairy Fountain Fairy 3,                        fairy,          NONE,                 INSIDE_GANON_CASTLE,            0x21004,                    FAIRY
+Ganon Castle Fairy Fountain Fairy 4,                        fairy,          NONE,                 INSIDE_GANON_CASTLE,            0x31004,                    FAIRY
+Ganon Castle Fairy Fountain Fairy 5,                        fairy,          NONE,                 INSIDE_GANON_CASTLE,            0x41004,                    FAIRY
+Ganon Castle Fairy Fountain Fairy 6,                        fairy,          NONE,                 INSIDE_GANON_CASTLE,            0x51004,                    FAIRY
+Ganon Castle Fairy Fountain Fairy 7,                        fairy,          NONE,                 INSIDE_GANON_CASTLE,            0x61004,                    FAIRY
+Ganon Castle Fairy Fountain Fairy 8,                        fairy,          NONE,                 INSIDE_GANON_CASTLE,            0x71004,                    FAIRY
 Ganon Tower Pot 01,                                         pot,            NONE,                 GANON_TOWER,                    0x0801,                     MAGIC_JAR_LARGE
 Ganon Tower Pot 02,                                         pot,            NONE,                 GANON_TOWER,                    0x0802,                     RECOVERY_HEART
 Ganon Tower Pot 03,                                         pot,            NONE,                 GANON_TOWER,                    0x0803,                     MAGIC_JAR_SMALL

@@ -392,6 +392,15 @@
   age_change: false
   exits:
     "Hyrule Field": "true"
+  locations:
+    "Hyrule Field Fairy Fountain Fairy 1": "true"
+    "Hyrule Field Fairy Fountain Fairy 2": "true"
+    "Hyrule Field Fairy Fountain Fairy 3": "true"
+    "Hyrule Field Fairy Fountain Fairy 4": "true"
+    "Hyrule Field Fairy Fountain Fairy 5": "true"
+    "Hyrule Field Fairy Fountain Fairy 6": "true"
+    "Hyrule Field Fairy Fountain Fairy 7": "true"
+    "Hyrule Field Fairy Fountain Fairy 8": "true"
 "Market Entryway":
   region: MARKET
   age_change: false
@@ -877,6 +886,7 @@
     "Sacred Meadow Entryway": "true"
     "Forest Temple": "can_hookshot || (has_hookshot(1) && time_travel_at_will) || climb_anywhere"
     "Sacred Meadow Storms Grotto": "hidden_grotto_storms"
+    "Sacred Meadow Fairy Grotto": "true"
   locations:
     "Saria's Song": "met_zelda && is_child && soul_npc(SOUL_NPC_SARIA)"
     "Sacred Meadow Sheik Song": "is_adult && soul_npc(SOUL_NPC_SHEIK)"
@@ -893,6 +903,20 @@
   locations:
     "Sacred Meadow Storms Grotto Front Scrub": "can_hit_scrub && scrub_price(0x05)"
     "Sacred Meadow Storms Grotto Back Scrub": "can_hit_scrub && scrub_price(0x06)"
+"Sacred Meadow Fairy Grotto":
+  region: ENTRANCE
+  age_change: false
+  exits:
+    "Sacred Meadow": "true"
+  locations:
+    "Sacred Meadow Fairy Fountain Fairy 1": "true"
+    "Sacred Meadow Fairy Fountain Fairy 2": "true"
+    "Sacred Meadow Fairy Fountain Fairy 3": "true"
+    "Sacred Meadow Fairy Fountain Fairy 4": "true"
+    "Sacred Meadow Fairy Fountain Fairy 5": "true"
+    "Sacred Meadow Fairy Fountain Fairy 6": "true"
+    "Sacred Meadow Fairy Fountain Fairy 7": "true"
+    "Sacred Meadow Fairy Fountain Fairy 8": "true"
 "Kakariko":
   region: KAKARIKO
   events:
@@ -1139,6 +1163,14 @@
     "Graveyard": "true"
   locations:
     "Graveyard Fairy Tomb": "true"
+    "Graveyard Fairy Fountain Fairy 1": "true"
+    "Graveyard Fairy Fountain Fairy 2": "true"
+    "Graveyard Fairy Fountain Fairy 3": "true"
+    "Graveyard Fairy Fountain Fairy 4": "true"
+    "Graveyard Fairy Fountain Fairy 5": "true"
+    "Graveyard Fairy Fountain Fairy 6": "true"
+    "Graveyard Fairy Fountain Fairy 7": "true"
+    "Graveyard Fairy Fountain Fairy 8": "true"
 "Graveyard ReDead Grave":
   region: ENTRANCE
   exits:
@@ -1414,6 +1446,15 @@
   age_change: false
   exits:
     "Zora River": "true"
+  locations:
+    "Zora River Fairy Fountain Fairy 1": "true"
+    "Zora River Fairy Fountain Fairy 2": "true"
+    "Zora River Fairy Fountain Fairy 3": "true"
+    "Zora River Fairy Fountain Fairy 4": "true"
+    "Zora River Fairy Fountain Fairy 5": "true"
+    "Zora River Fairy Fountain Fairy 6": "true"
+    "Zora River Fairy Fountain Fairy 7": "true"
+    "Zora River Fairy Fountain Fairy 8": "true"
 "Zora Domain":
   region: ZORA_DOMAIN
   exits:
@@ -1469,6 +1510,15 @@
   age_change: false
   exits:
     "Zora Domain": "true"
+  locations:
+    "Zora Domain Fairy Fountain Fairy 1": "true"
+    "Zora Domain Fairy Fountain Fairy 2": "true"
+    "Zora Domain Fairy Fountain Fairy 3": "true"
+    "Zora Domain Fairy Fountain Fairy 4": "true"
+    "Zora Domain Fairy Fountain Fairy 5": "true"
+    "Zora Domain Fairy Fountain Fairy 6": "true"
+    "Zora Domain Fairy Fountain Fairy 7": "true"
+    "Zora Domain Fairy Fountain Fairy 8": "true"
 "Lake Hylia":
   region: LAKE_HYLIA
   time: flow
@@ -1910,6 +1960,15 @@
   age_change: false
   exits:
     "Gerudo Fortress Exterior": "true"
+  locations:
+    "Gerudo Fortress Fairy Fountain Fairy 1": "true"
+    "Gerudo Fortress Fairy Fountain Fairy 2": "true"
+    "Gerudo Fortress Fairy Fountain Fairy 3": "true"
+    "Gerudo Fortress Fairy Fountain Fairy 4": "true"
+    "Gerudo Fortress Fairy Fountain Fairy 5": "true"
+    "Gerudo Fortress Fairy Fountain Fairy 6": "true"
+    "Gerudo Fortress Fairy Fountain Fairy 7": "true"
+    "Gerudo Fortress Fairy Fountain Fairy 8": "true"
 "Haunted Wasteland Start":
   region: HAUNTED_WASTELAND
   exits:
@@ -1951,6 +2010,14 @@
     "Desert Colossus GS Soil": "gs_soil && can_damage_skull"
     "Desert Colossus GS Tree": "is_adult && gs_night && (can_collect_distance || (climb_anywhere && (has_explosives || has_ranged_weapon || can_use_din)))"
     "Desert Colossus GS Plateau": "is_adult && gs_night && ((can_collect_distance && trick(OOT_COLOSSUS_GS_NO_BEAN)) || can_ride_bean(BEAN_DESERT_COLOSSUS))"
+    "Desert Colossus Oasis Fairy 1": "can_play_storms"
+    "Desert Colossus Oasis Fairy 2": "can_play_storms"
+    "Desert Colossus Oasis Fairy 3": "can_play_storms"
+    "Desert Colossus Oasis Fairy 4": "can_play_storms"
+    "Desert Colossus Oasis Fairy 5": "can_play_storms"
+    "Desert Colossus Oasis Fairy 6": "can_play_storms"
+    "Desert Colossus Oasis Fairy 7": "can_play_storms"
+    "Desert Colossus Oasis Fairy 8": "can_play_storms"
   gossip:
     "Desert Colossus Gossip": "true"
 "Desert Colossus Spirit Exit":

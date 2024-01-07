@@ -342,6 +342,7 @@ function checkKey(check: WorldCheck): number {
     break;
   case 'pot':
   case 'grass':
+  case 'fairy':
     /* xflag */
     typeId = 0x10 + ((id >> 16) & 0xf);
     break;
@@ -355,6 +356,7 @@ function checkKey(check: WorldCheck): number {
   case 'sf':
   case 'pot':
   case 'grass':
+  case 'fairy':
     sceneId = (SCENES as any)[check.scene];
     if (sceneId === undefined) {
       throw new Error(`Unknown scene ${check.scene}`);

@@ -535,6 +535,13 @@ export const SETTINGS = [{
   description: 'Controls whether or not the Zora\'s Domain Diving Game has 5 random items instead of green, blue, red, purple and 500 rupees.',
   default: false
 }, {
+  key: 'fairyFountainFairyShuffleOot',
+  name: 'Fairy Fountain Fairy Shuffle (OoT)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not fairies in fairy fountains are shuffled.',
+  default: false
+}, {
   key: 'eggShuffle',
   name: 'Weird / Pocket Egg Content Shuffle',
   category: 'main.shuffle',

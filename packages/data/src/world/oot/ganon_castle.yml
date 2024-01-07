@@ -9,15 +9,26 @@
     "Ganon Castle Spirit": "true"
     "Ganon Castle Shadow": "true"
     "Ganon Castle Stairs": "ganon_barrier"
-  locations:
-    "Ganon Castle Leftmost Scrub": "has_lens && can_hit_scrub && scrub_price(0x21)"
-    "Ganon Castle Left-Center Scrub": "has_lens && can_hit_scrub && scrub_price(0x22)"
-    "Ganon Castle Right-Center Scrub": "has_lens && can_hit_scrub && scrub_price(0x23)"
-    "Ganon Castle Rightmost Scrub": "has_lens && can_hit_scrub && scrub_price(0x24)"
+    "Ganon Castle Fairy Fountain": "has_lens"
 "Ganon Castle Wallmaster":
   region: NONE
   exits:
     "VOID": "true"
+"Ganon Castle Fairy Fountain":
+  dungeon: Ganon
+  locations:
+    "Ganon Castle Leftmost Scrub": "can_hit_scrub && scrub_price(0x21)"
+    "Ganon Castle Left-Center Scrub": "can_hit_scrub && scrub_price(0x22)"
+    "Ganon Castle Right-Center Scrub": "can_hit_scrub && scrub_price(0x23)"
+    "Ganon Castle Rightmost Scrub": "can_hit_scrub && scrub_price(0x24)"
+    "Ganon Castle Fairy Fountain Fairy 1": "true"
+    "Ganon Castle Fairy Fountain Fairy 2": "true"
+    "Ganon Castle Fairy Fountain Fairy 3": "true"
+    "Ganon Castle Fairy Fountain Fairy 4": "true"
+    "Ganon Castle Fairy Fountain Fairy 5": "true"
+    "Ganon Castle Fairy Fountain Fairy 6": "true"
+    "Ganon Castle Fairy Fountain Fairy 7": "true"
+    "Ganon Castle Fairy Fountain Fairy 8": "true"
 "Ganon Castle Light":
   dungeon: Ganon
   exits:
