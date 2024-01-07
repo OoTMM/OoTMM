@@ -19,6 +19,10 @@
     "MQ Gerudo Training Grounds Pot 2": "true"
     "MQ Gerudo Training Grounds Pot 3": "true"
     "MQ Gerudo Training Grounds Pot 4": "true"
+"Gerudo Training Grounds Wallmaster":
+  region: NONE
+  exits:
+    "VOID": "true"
 "Gerudo Training Grounds Right Path":
   dungeon: GTG
   exits:
@@ -63,6 +67,7 @@
 "Gerudo Training Grounds Slopes":
   dungeon: GTG
   exits:
+    "Gerudo Training Grounds Wallmaster": "soul_wallmaster"
     "Gerudo Training Grounds Left Path": "true"
     "Gerudo Training Grounds Stalfos Room": "silver_rupees_gtg_slopes"
   locations:

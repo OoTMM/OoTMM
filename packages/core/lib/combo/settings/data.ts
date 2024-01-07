@@ -1418,7 +1418,7 @@ export const SETTINGS = [{
   default: 'none'
 }, {
   key: 'erWallmasters',
-  name: 'Wallmaster Shuffle (WIP, OOT-ONLY, NO-MQ)',
+  name: 'Wallmaster Shuffle (WIP, OOT-ONLY)',
   category: 'entrances',
   type: 'enum',
   values: [

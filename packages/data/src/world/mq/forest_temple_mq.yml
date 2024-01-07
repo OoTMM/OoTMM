@@ -6,6 +6,14 @@
   locations:
     "MQ Forest Temple First Room Chest": "can_hit_triggers_distance || can_hookshot || has_explosives || has_hover_boots || can_use_din || (has_weapon && (has(MAGIC_UPGRADE) || has(SHARED_MAGIC_UPGRADE)))" #Many ways to deal with the Skulltula in the way.
     "MQ Forest Temple GS Entryway": "can_collect_distance"
+"Forest Temple Wallmaster West":
+  region: NONE
+  exits:
+    "VOID": "true"
+"Forest Temple Wallmaster East":
+  region: NONE
+  exits:
+    "VOID": "true"
 "Forest Temple Main":
   dungeon: Forest
   exits:
@@ -38,6 +46,7 @@
 "Forest Temple Straightened Hallway":
   dungeon: Forest
   exits:
+    "Forest Temple Wallmaster West": "soul_wallmaster"
     "Forest Temple West Garden Ledge": "soul_floormaster"
   locations:
     "MQ Forest Temple Boss Key Chest": "true"
@@ -89,10 +98,13 @@
 "Forest Temple Twisted Hallway":
   dungeon: Forest
   exits:
+    "Forest Temple Wallmaster West": "soul_wallmaster"
     "Forest Temple Bow Region": "small_keys_forest(4)"
 "Forest Temple Bow Region":
   dungeon: Forest
   exits:
+    # FIXME: Simple implem as we don't have the 2nd hallway
+    "Forest Temple Wallmaster East": "soul_wallmaster && soul_enemy(SOUL_ENEMY_STALFOS) && soul_wolfos && has_weapon && small_keys_forest(5)"
     "Forest Temple Falling Ceiling": "soul_enemy(SOUL_ENEMY_STALFOS) && soul_wolfos && has_weapon && small_keys_forest(5) && (can_use_bow || can_use_din)" #Only 5 keys is safe because, if you wasted a key in falling ceiling, you can go there otherwise.
   events:
     FOREST_POE_1: "can_use_bow"

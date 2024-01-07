@@ -751,6 +751,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     OOT_BOMBCHU_BAG: settings.bombchuBagOot,
     MM_BOMBCHU_BAG: settings.bombchuBagMm,
     SHARED_BOMBCHU: settings.sharedBombchuBags,
+    ER_WALLMASTERS: settings.erWallmasters !== 'none',
   };
 
   for (const v in exprs) {

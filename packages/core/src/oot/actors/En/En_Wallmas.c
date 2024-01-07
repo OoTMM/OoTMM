@@ -16,9 +16,22 @@ static int EnWallmas_GetDestEr(Actor* this, GameState_Play* play)
     case SCE_OOT_TEMPLE_SHADOW:
         return ENTR_OOT_WALLMASTER_SHADOW;
     case SCE_OOT_TEMPLE_SPIRIT:
-        return room == 0x02 ? ENTR_OOT_WALLMASTER_SPIRIT_CHILD : ENTR_OOT_WALLMASTER_SPIRIT_ADULT;
+        switch (room)
+        {
+        case 0x02: return ENTR_OOT_WALLMASTER_SPIRIT_CHILD_RUPEES;
+        case 0x05: return ENTR_OOT_WALLMASTER_SPIRIT_STATUE;
+        case 0x08: return ENTR_OOT_WALLMASTER_SPIRIT_CHILD_SUN;
+        case 0x0f: return ENTR_OOT_WALLMASTER_SPIRIT_ADULT_CLIMB;
+        default: UNREACHABLE();
+        }
     case SCE_OOT_BOTTOM_OF_THE_WELL:
-        return ENTR_OOT_WALLMASTER_BOTW;
+        switch (room)
+        {
+        case 0x00: return ENTR_OOT_WALLMASTER_BOTW_MAIN;
+        case 0x01: return ENTR_OOT_WALLMASTER_BOTW_BASEMENT;
+        case 0x03: return ENTR_OOT_WALLMASTER_BOTW_PIT;
+        default: UNREACHABLE();
+        }
     case SCE_OOT_GERUDO_TRAINING_GROUND:
         return ENTR_OOT_WALLMASTER_GTG;
     case SCE_OOT_INSIDE_GANON_CASTLE:
