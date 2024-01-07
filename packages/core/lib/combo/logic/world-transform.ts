@@ -955,6 +955,12 @@ export class LogicPassWorldTransform {
       ]);
     }
 
+    /* Handle Fairy Fountains */
+    if (!settings.fairyFountainFairyShuffleOot) {
+      const fairies = POOL.oot.filter((x: any) => x.type === 'fairy').map((x: any) => gameId('oot', x.location, ' ')) as string[];
+      this.removeLocations(fairies);
+    }
+
     /* Make the basic item pool */
     this.makePools();
 

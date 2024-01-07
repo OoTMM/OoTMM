@@ -184,6 +184,7 @@ void Sram_CopySave(void*, void*);
 void Play_Init(GameState_Play*);
 void Play_Draw(GameState_Play*);
 
+s32 Player_InCsMode(GameState_Play*);
 void Interface_LoadItemIconImpl(GameState_Play* play, int slot);
 void UpdateEquipment(GameState_Play* play, Actor_Player* link);
 
@@ -347,6 +348,7 @@ typedef enum {
 } MagicChangeType;
 #endif
 
+s32 Health_ChangeBy(GameState_Play* play, s16 amount);
 s32 Magic_RequestChange(GameState_Play* play, s16 amount, s16 type);
 void Magic_Update(GameState_Play* play);
 void Magic_Refill(GameState_Play*);

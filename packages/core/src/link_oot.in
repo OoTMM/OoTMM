@@ -68,6 +68,7 @@ DrawGi_Scale            = 0x80058b34;
 DrawGi_SoldOut          = 0x8005719c;
 DrawGi_Spell            = 0x80058698;
 
+Health_ChangeBy         = 0x800720bc;
 Magic_RequestChange     = 0x80072588;
 Magic_Update            = 0x80072840;
 
@@ -167,6 +168,8 @@ Player_Update = 0x80097740;
 Play_SetupRespawnPoint = 0x8009D94C;
 
 OverlayAddr = 0x80099dbc;
+
+Player_InCsMode = 0x8007943c;
 
 UpdateEquipment = 0x80079764;
 
