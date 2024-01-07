@@ -1163,14 +1163,14 @@
     "Graveyard": "true"
   locations:
     "Graveyard Fairy Tomb": "true"
-    "Graveyard Fairy Fountain Fairy 1": "true"
-    "Graveyard Fairy Fountain Fairy 2": "true"
-    "Graveyard Fairy Fountain Fairy 3": "true"
-    "Graveyard Fairy Fountain Fairy 4": "true"
-    "Graveyard Fairy Fountain Fairy 5": "true"
-    "Graveyard Fairy Fountain Fairy 6": "true"
-    "Graveyard Fairy Fountain Fairy 7": "true"
-    "Graveyard Fairy Fountain Fairy 8": "true"
+    "Graveyard Fairy Fountain Fairy 1": "has_explosives_or_hammer || has_blue_fire_arrows_mudwall"
+    "Graveyard Fairy Fountain Fairy 2": "has_explosives_or_hammer || has_blue_fire_arrows_mudwall"
+    "Graveyard Fairy Fountain Fairy 3": "has_explosives_or_hammer || has_blue_fire_arrows_mudwall"
+    "Graveyard Fairy Fountain Fairy 4": "has_explosives_or_hammer || has_blue_fire_arrows_mudwall"
+    "Graveyard Fairy Fountain Fairy 5": "has_explosives_or_hammer || has_blue_fire_arrows_mudwall"
+    "Graveyard Fairy Fountain Fairy 6": "has_explosives_or_hammer || has_blue_fire_arrows_mudwall"
+    "Graveyard Fairy Fountain Fairy 7": "has_explosives_or_hammer || has_blue_fire_arrows_mudwall"
+    "Graveyard Fairy Fountain Fairy 8": "has_explosives_or_hammer || has_blue_fire_arrows_mudwall"
 "Graveyard ReDead Grave":
   region: ENTRANCE
   exits:
