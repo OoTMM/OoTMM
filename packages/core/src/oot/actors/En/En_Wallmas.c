@@ -17,6 +17,8 @@ static int EnWallmas_GetDestEr(Actor* this, GameState_Play* play)
         return ENTR_OOT_WALLMASTER_SHADOW;
     case SCE_OOT_TEMPLE_SPIRIT:
         return room == 0x02 ? ENTR_OOT_WALLMASTER_SPIRIT_CHILD : ENTR_OOT_WALLMASTER_SPIRIT_ADULT;
+    case SCE_OOT_BOTTOM_OF_THE_WELL:
+        return ENTR_OOT_WALLMASTER_BOTW;
     case SCE_OOT_GERUDO_TRAINING_GROUND:
         return ENTR_OOT_WALLMASTER_GTG;
     case SCE_OOT_INSIDE_GANON_CASTLE:
