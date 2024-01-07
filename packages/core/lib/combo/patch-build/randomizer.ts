@@ -245,10 +245,11 @@ function entrance(srcName: string, world: World) {
   const dstName = world.entranceOverrides.get(srcName) || srcName;
   const srcGame: Game = (/^OOT_/.test(srcName) ? 'oot' : 'mm');
   const dstGame: Game = (/^OOT_/.test(dstName) ? 'oot' : 'mm');
-  let data = (ENTRANCES as any)[dstName] as number;
-  if (data === undefined) {
-    throw new Error(`Unknown entrance ${name}`);
+  const entr = ENTRANCES[dstName as keyof typeof ENTRANCES];
+  if (entr === undefined) {
+    throw new Error(`Unknown entrance ${dstName}`);
   }
+  let data = entr.id;
   if (srcGame !== dstGame) {
     data = (data | 0x80000000) >>> 0;
   }
@@ -256,10 +257,11 @@ function entrance(srcName: string, world: World) {
 }
 
 const entrance2 = (srcGame: Game, dstGame: Game, name: string) => {
-  let data = ENTRANCES[name as keyof typeof ENTRANCES].id;
-  if (data === undefined) {
+  const entr = ENTRANCES[name as keyof typeof ENTRANCES];
+  if (entr === undefined) {
     throw new Error(`Unknown entrance ${name}`);
   }
+  let data = entr.id;
   if (srcGame !== dstGame) {
     data = (data | 0x80000000) >>> 0;
   }
