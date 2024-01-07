@@ -6,6 +6,7 @@ DMARomToRam = 0x80080790;
 
 ActorRemove = 0x800BB498;
 AddMagic = 0x80115d14;
+GetRoomClearFlag = 0x800b5cc4;
 
 osCreateMesgQueue = 0x8008f240;
 osEPiStartDma = 0x8008ee30;

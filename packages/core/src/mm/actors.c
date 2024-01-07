@@ -371,6 +371,8 @@ static int canSpawnActor(GameState_Play* play, s16 actorId, u16 variable)
     }
 }
 
+static s16 sActorIdToSpawn;
+
 Actor* comboSpawnActorEx(void* unk, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int ex1, int ex2, int ex3)
 {
     int ret;
@@ -385,5 +387,18 @@ Actor* comboSpawnActorEx(void* unk, GameState_Play *play, short actorId, float x
             g.roomEnemyLackSoul = 1;
         return NULL;
     }
+    sActorIdToSpawn = actorId;
     return SpawnActorEx(unk, play, actorId, x, y, z, rx, ry, rz, variable, ex1, ex2, ex3);
 }
+
+static int GetRoomClearFlagForActor(GameState_Play* play, int flag)
+{
+    int res;
+
+    res = GetRoomClearFlag(play, flag);
+    if (comboConfig(CFG_ER_WALLMASTERS) && sActorIdToSpawn == AC_EN_WALLMAS)
+        res = 0;
+    return res;
+}
+
+PATCH_CALL(0x800baea0, GetRoomClearFlagForActor);

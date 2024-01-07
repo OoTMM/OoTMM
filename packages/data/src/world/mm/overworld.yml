@@ -1,3 +1,5 @@
+"VOID":
+  region: NONE
 "GLOBAL":
   region: NONE
   exits:
@@ -2688,6 +2690,7 @@
     DAMPE_BIG_POE: "has_weapon_range && is_night3"
   exits:
     "Ikana Graveyard": "true"
+    "Beneath The Graveyard Night 3 Wallmaster": "soul_wallmaster"
   locations:
     "Beneath The Graveyard Dampe Chest": "has_weapon_range && is_night3"
     "Beneath The Graveyard Pot Dampe 01": "true"
@@ -2700,6 +2703,10 @@
     "Beneath The Graveyard Pot Dampe 08": "true"
     "Beneath The Graveyard Pot Dampe 09": "true"
     "Beneath The Graveyard Pot Dampe 10": "true"
+"Beneath The Graveyard Night 3 Wallmaster":
+  region: NONE
+  exits:
+    "VOID": "true"
 "Road to Ikana Top":
   region: ROAD_TO_IKANA
   events:
