@@ -4,6 +4,18 @@
     "Ikana Canyon": "true"
     "Beneath The Well North Section": "can_pass_gibdo && has_blue_potion && cond(setting(erMoon) && trick(MM_MAJORA_LOGIC), (event(MAJORA) && before(NIGHT3_AM_12_00)) || can_play_time, can_reset_time)"
     "Beneath The Well East Section": "can_pass_gibdo && has_beans && cond(setting(erMoon) && trick(MM_MAJORA_LOGIC), (event(MAJORA) && before(NIGHT3_AM_12_00)) || can_play_time, can_reset_time)"
+"Beneath The Well Wallmaster Near Entrance":
+  region: NONE
+  exits:
+    "VOID": "true"
+"Beneath The Well Wallmaster Near Fountain":
+  region: NONE
+  exits:
+    "VOID": "true"
+"Beneath The Well Wallmaster Near Exit":
+  region: NONE
+  exits:
+    "VOID": "true"
 "Beneath The Well North Section":
   dungeon: BtW
   events:
@@ -14,6 +26,8 @@
     BOMBS_OR_BOMBCHU: "has_water && has_fire_sticks"
     FAIRY: "has_water && has_bugs"
     RUPEES: "has_water && (((can_fight || has_weapon_range || has_explosives) && soul_wallmaster) || (has_bugs && can_use_light_arrows && soul_keese))"
+  exits:
+    "Beneath The Well Wallmaster Near Fountain": "soul_wallmaster && has_water"
   locations:
     "Beneath The Well Keese Chest": "has_water && has_bugs && can_use_lens"
     "Beneath The Well Pot Left Side 1": "has_water && has_fire_sticks"
@@ -26,6 +40,7 @@
 "Beneath The Well East Section":
   dungeon: BtW
   exits:
+    "Beneath The Well Wallmaster Near Entrance": "soul_wallmaster"
     "Beneath The Well Entrance": "true"
     "Beneath The Well Middle Section": "can_pass_gibdo && has_fish"
     "Beneath The Well Cow Hall": "can_pass_gibdo && has_nuts"
@@ -74,6 +89,7 @@
 "Beneath The Well Final Hall":
   dungeon: BtW
   exits:
+    "Beneath The Well Wallmaster Near Exit": "soul_wallmaster"
     "Beneath The Well Middle Section": "true"
     "Beneath The Well Sun Block": "can_pass_gibdo && has_milk"
   events:
