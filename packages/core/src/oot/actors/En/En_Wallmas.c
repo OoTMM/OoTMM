@@ -16,7 +16,14 @@ static int EnWallmas_GetDestEr(Actor* this, GameState_Play* play)
     case SCE_OOT_TEMPLE_SHADOW:
         return ENTR_OOT_WALLMASTER_SHADOW;
     case SCE_OOT_TEMPLE_SPIRIT:
-        return room == 0x02 ? ENTR_OOT_WALLMASTER_SPIRIT_CHILD : ENTR_OOT_WALLMASTER_SPIRIT_ADULT;
+        switch (room)
+        {
+        case 0x02: return ENTR_OOT_WALLMASTER_SPIRIT_CHILD_RUPEES;
+        case 0x05: return ENTR_OOT_WALLMASTER_SPIRIT_STATUE;
+        case 0x08: return ENTR_OOT_WALLMASTER_SPIRIT_CHILD_SUN;
+        case 0x0f: return ENTR_OOT_WALLMASTER_SPIRIT_ADULT_CLIMB;
+        default: UNREACHABLE();
+        }
     case SCE_OOT_BOTTOM_OF_THE_WELL:
         switch (room)
         {

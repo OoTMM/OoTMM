@@ -13,11 +13,11 @@
     "Spirit Temple Pot Lobby 2": "true"
     "Spirit Temple Flying Pot Lobby 1": "soul_flying_pot"
     "Spirit Temple Flying Pot Lobby 2": "soul_flying_pot"
-"Spirit Temple Wallmaster Child":
+"Spirit Temple Wallmaster Child Rupees":
   region: NONE
   exits:
     "VOID": "true"
-"Spirit Temple Wallmaster Adult":
+"Spirit Temple Wallmaster Adult Climb":
   region: NONE
   exits:
     "VOID": "true"
@@ -58,7 +58,7 @@
   dungeon: Spirit
   exits:
     "Spirit Temple Child Back Left": "soul_enemy(SOUL_ENEMY_ANUBIS)"
-    "Spirit Temple Wallmaster Child": "soul_wallmaster"
+    "Spirit Temple Wallmaster Child Rupees": "soul_wallmaster"
   locations:
     "Spirit Temple Child Second Chest": "event(SPIRIT_CHEST_CHILD)"
     "Spirit Temple GS Child Fence": "(has_ranged_weapon || has_explosives || can_use_din || can_use_sticks || can_use_sword_master || (age_sword_adult && has(SWORD_BIGGORON))) && silver_rupees_spirit_child"
@@ -124,7 +124,7 @@
 "Spirit Temple Adult Climb":
   dungeon: Spirit
   exits:
-    "Spirit Temple Wallmaster Adult": "soul_wallmaster"
+    "Spirit Temple Wallmaster Adult Climb": "soul_wallmaster"
     "Spirit Temple Statue Adult": "true"
     "Spirit Temple Adult Entrance": "small_keys_spirit(5)" #The only possible ways this would be necessary is if you do not have adult with silver gauntlets, and have either ageless boots/hookshot or climb anywhere, both of which give access to all doors
   locations:
