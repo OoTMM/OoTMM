@@ -108,6 +108,7 @@ export const CONFVARS = [
   'OOT_BOMBCHU_BAG',
   'MM_BOMBCHU_BAG',
   'SHARED_BOMBCHU',
+  'ER_WALLMASTERS',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

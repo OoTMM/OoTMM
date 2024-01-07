@@ -2,6 +2,8 @@
 #include <combo/dungeon.h>
 #include <combo/souls.h>
 
+static s16 sActorIdToSpawn;
+
 static int opt(int x)
 {
     return x > 0 ? 1 : -1;
@@ -258,8 +260,21 @@ Actor* comboSpawnActor(void* unk, GameState_Play *play, short actorId, float x, 
         variable = 0xff00;
     }
 
+    sActorIdToSpawn = actorId;
     actor = SpawnActor(unk, play, actorId, x, y, z, rx, ry, rz, variable);
     if (actorId == AC_ARMS_HOOK && gSave.age == AGE_ADULT)
         actor->objTableIndex = GetObjectSlot(&play->objectCtx, 0x14);
     return actor;
 }
+
+static int GetRoomClearFlagForActor(GameState_Play* play, int flag)
+{
+    int res;
+
+    res = GetRoomClearFlag(play, flag);
+    if (comboConfig(CFG_ER_WALLMASTERS) && sActorIdToSpawn == AC_EN_WALLMAS)
+        res = 0;
+    return res;
+}
+
+PATCH_CALL(0x80025284, GetRoomClearFlagForActor);

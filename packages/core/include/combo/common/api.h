@@ -78,6 +78,7 @@ u32     GetSwitchFlag(GameState_Play* play, int flag);
 u32     SetSwitchFlag(GameState_Play* play, int flag);
 void    ClearSwitchFlag(GameState_Play* play, int flag);
 void    SetRoomClear(GameState_Play* play, int flag);
+u32     GetRoomClearFlag(GameState_Play* play, int flag);
 
 #if defined(GAME_MM)
 Actor*  SpawnActorEx(void* const_1, GameState_Play* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int, int, int);
