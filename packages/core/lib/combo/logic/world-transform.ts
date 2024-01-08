@@ -961,6 +961,12 @@ export class LogicPassWorldTransform {
       this.removeLocations(fairies);
     }
 
+    /* Handle Fairy Fountains */
+    if (!settings.fairyFountainFairyShuffleMm) {
+      const fairies = POOL.mm.filter((x: any) => x.type === 'fairy').map((x: any) => gameId('mm', x.location, ' ')) as string[];
+      this.removeLocations(fairies);
+    }
+
     /* Make the basic item pool */
     this.makePools();
 

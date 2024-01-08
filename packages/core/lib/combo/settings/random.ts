@@ -106,6 +106,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
   base.divingGameRupeeShuffle = booleanWeighted(random, 0.50);
   base.pondFishShuffle = booleanWeighted(random, 0.50);
   base.fairyFountainFairyShuffleOot = booleanWeighted(random, 0.50);
+  base.fairyFountainFairyShuffleMm = booleanWeighted(random, 0.50);
 
   /* Tokens - 25% disabled, 25% enabled, 50% individual */
   switch (randomInt(random, 4)) {

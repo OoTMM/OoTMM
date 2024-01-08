@@ -37,6 +37,14 @@
     "Beneath The Well Pot Left Side 5": "has_water && has_fire_sticks"
     "Beneath The Well Grass Left Side 1": "has_water && has_fire_sticks"
     "Beneath The Well Grass Left Side 2": "has_water && has_fire_sticks"
+    "Beneath The Well Fairy Fountain Fairy 1": "has_water && has_bugs"
+    "Beneath The Well Fairy Fountain Fairy 2": "has_water && has_bugs"
+    "Beneath The Well Fairy Fountain Fairy 3": "has_water && has_bugs"
+    "Beneath The Well Fairy Fountain Fairy 4": "has_water && has_bugs"
+    "Beneath The Well Fairy Fountain Fairy 5": "has_water && has_bugs"
+    "Beneath The Well Fairy Fountain Fairy 6": "has_water && has_bugs"
+    "Beneath The Well Fairy Fountain Fairy 7": "has_water && has_bugs"
+    "Beneath The Well Fairy Fountain Fairy 8": "has_water && has_bugs"
 "Beneath The Well East Section":
   dungeon: BtW
   exits:

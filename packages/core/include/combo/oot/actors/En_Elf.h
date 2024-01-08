@@ -10,7 +10,7 @@ typedef void (*EnElfUnkFunc)(Actor_EnElf*, GameState_Play*);
 
 struct Actor_EnElf
 {
-    /* 0x0000 */ Actor actor;
+    /* 0x0000 */ Actor base;
     /* 0x013C */ u8 skelAnime[0x44]; // SkelAnime
     /* 0x0180 */ Vec3s jointTable[15];
     /* 0x01DA */ Vec3s morphTable[15];
@@ -44,8 +44,8 @@ struct Actor_EnElf
 
     /* Extended flags */
     /* 0x02C0 */ Xflag xflag;
-    /* 0x02C8 */ s16 itemGiven;
-    /* 0x02CA */ s16 extendedGiDraw;
+    /* 0x02C6 */ s16 itemGiven;
+    /* 0x02C8 */ s16 extendedGiDraw;
 };
 
 _Static_assert(sizeof(Actor_EnElf) == 0x02CC, "OoT Actor_EnElf size is wrong");

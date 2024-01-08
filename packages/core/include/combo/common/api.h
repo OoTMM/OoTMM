@@ -204,6 +204,8 @@ int Player_UsingItem(Actor_Player* link);
 void PlaySound(u16 soundId);
 void PlaySoundSpecial(u16 soundId);
 void PlayMusic(int arg0, int arg1, int arg2, int arg3, int arg4);
+void Actor_PlaySfx(Actor* actor, u32 id);
+void PlayLoopingSfxAtActor(Actor* actor, u32 id);
 
 #if defined(GAME_MM)
 void AudioOcarina_SetInstrument(u8 ocarinaInstrumentId);
@@ -377,5 +379,7 @@ extern u8 gFogState;
 void SpawnCollectible2(GameState_Play* play, int unk, void* unk2, u16 unk3);
 f32 VectDist(Vec3f* vec1, Vec3f* vec2);
 #endif
+
+void EffectSsIceSmoke_Spawn(GameState_Play* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, s16 scale);
 
 extern void* __osPiHandle;
