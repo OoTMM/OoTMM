@@ -138,6 +138,9 @@ void EnElf_GiveItem(Actor_EnElf* this, GameState_Play* play)
     if (o.gi == EN_ELF_DEFAULT_GI)
     {
         Health_ChangeBy(play, 0x80);
+#if defined(GAME_MM)
+        gSaveContext.save.jinxTimer = 0;
+#endif
         return;
     }
 
