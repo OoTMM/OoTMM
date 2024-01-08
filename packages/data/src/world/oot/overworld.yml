@@ -1270,8 +1270,8 @@
     "Death Mountain GS Entrance": "has_explosives || (can_hammer && (is_adult || can_use_sticks || (age_sword_adult && has(SWORD_BIGGORON)) || has_ranged_weapon_child || can_use_din))"
     "Death Mountain GS Soil": "gs_soil && has_bombflowers && can_damage_skull"
     "Death Mountain GS Above Dodongo":  "gs_night && is_adult && (can_hammer || trick(OOT_DMT_RED_ROCK_GS))"
-    "Death Mountain Rupee Upper": "event(BOULDER_DEATH_MOUNTAIN)"
-    "Death Mountain Rupee Lower": "event(BOULDER_DEATH_MOUNTAIN) && is_child"
+    "Death Mountain Rupee Upper": "is_child && event(BOULDER_DEATH_MOUNTAIN)"
+    "Death Mountain Rupee Lower": "is_child && has_explosives_or_hammer"
 "Death Mountain Summit":
   region: DEATH_MOUNTAIN_TRAIL
   time: flow
