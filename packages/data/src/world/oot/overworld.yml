@@ -1619,6 +1619,9 @@
     "Laboratory Dive": "has(SCALE, 2) || (trick(OOT_LAB_DIVE_NO_GOLD_SCALE) && has_iron_boots && can_hookshot)"
     "Laboratory Eye Drops": "adult_trade(EYEBALL_FROG)"
     "Laboratory GS Crate": "has_iron_boots && can_hookshot"
+    "Laboratory Rupee 1": "can_dive_big"
+    "Laboratory Rupee 2": "can_dive_big"
+    "Laboratory Rupee 3": "can_dive_big"
 "Fishing Pond":
   region: ENTRANCE
   age_change: false
