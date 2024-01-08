@@ -1,5 +1,15 @@
 #include <combo.h>
 
+/* Resize */
+PATCH_START 0x800e775c
+.int 0x1a4
+PATCH_END
+
+/* Use custom init */
+PATCH_START 0x800e7760
+.int EnItem00_InitWrapper
+PATCH_END
+
 /* Make small keys use the same draw function as heart pieces */
 PATCH_START 0x80105fe0
 .int 0x80013014
@@ -41,4 +51,11 @@ PATCH_END
 
 PATCH_START 0x80012d6e
 .short ITEM_OOT_BOMBCHU_5
+PATCH_END
+
+/* use our custom type 0 add hook */
+PATCH_START 0x80012cac
+  move a0,s0
+  jal EnItem00_AddXflag
+   move a1,s1
 PATCH_END

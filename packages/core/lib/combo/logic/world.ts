@@ -99,7 +99,7 @@ export type WorldArea = {
 };
 
 type WorldCheckNumeric = {
-  type: 'chest' | 'collectible' | 'gs' | 'sf' | 'cow' | 'shop' | 'scrub' | 'sr' | 'pot' | 'grass' | 'fish' | 'fairy';
+  type: 'chest' | 'collectible' | 'gs' | 'sf' | 'cow' | 'shop' | 'scrub' | 'sr' | 'pot' | 'grass' | 'fish' | 'fairy' | 'rupee';
   id: number;
 };
 

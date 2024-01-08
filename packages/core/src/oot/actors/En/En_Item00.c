@@ -2,9 +2,26 @@
 #include <combo/item.h>
 #include <combo/player.h>
 
+void EnItem00_InitWrapper(Actor_EnItem00* this, GameState_Play* play)
+{
+    /* Forward */
+    EnItem00_Init(this, play);
+
+    /* Set extended fields */
+    bzero(&this->xflag, sizeof(this->xflag));
+    this->xflagGi = 0;
+    this->isExtended = 0;
+}
+
 static void EnItem00_ItemQuery(ComboItemQuery* q, Actor_EnItem00* this, GameState_Play* play, s16 gi)
 {
     memset(q, 0, sizeof(*q));
+
+    if (this->isExtended)
+    {
+        comboXflagItemQuery(q, &this->xflag, gi);
+        return;
+    }
 
     switch (this->base.variable)
     {
@@ -146,3 +163,62 @@ static s16 EnItem00_FixDropWrapper(s16 dropId)
 PATCH_CALL(0x8001376c, EnItem00_FixDropWrapper);
 PATCH_CALL(0x80013998, EnItem00_FixDropWrapper);
 PATCH_CALL(0x80013dec, EnItem00_FixDropWrapper);
+
+void EnItem00_DrawXflag(Actor_EnItem00* this, GameState_Play* play)
+{
+    ComboItemOverride o;
+
+    comboXflagItemOverride(&o, &this->xflag, 0);
+    ModelViewTranslate(this->base.position.x, this->base.position.y + 35.f, this->base.position.z, MAT_SET);
+    ModelViewScale(0.35f, 0.35f, 0.35f, MAT_MUL);
+    ModelViewRotateY(this->base.rot2.y * ((M_PI * 2.f) / 32767.f), MAT_MUL);
+    comboDrawGI(play, &this->base, o.gi, 0);
+}
+
+void EnItem00_AddXflag(Actor_EnItem00* this, GameState_Play* play)
+{
+    ComboItemQuery q;
+
+    if (!this->isExtended)
+    {
+        AddItem(play, 0x84);
+        return;
+    }
+
+    EnItem00_ItemQuery(&q, this, play, 0);
+    comboAddItemEx(play, &q, 0);
+    comboXflagsSet(&this->xflag);
+}
+
+void EnItem00_XflagInitFreestanding(Actor_EnItem00* this, GameState_Play* play, u8 actorIndex, u8 slice)
+{
+    ComboItemOverride o;
+    Xflag xflag;
+
+    /* Setup the xflag */
+    bzero(&xflag, sizeof(xflag));
+    xflag.sceneId = play->sceneId;
+    xflag.setupId = g.sceneSetupId;
+    xflag.roomId = this->base.room;
+    xflag.sliceId = slice;
+    xflag.id = actorIndex;
+
+    /* Query */
+    comboXflagItemOverride(&o, &xflag, 0);
+
+    /* Check if there is an override */
+    if (o.gi == 0)
+        return;
+    if (comboXflagsGet(&xflag))
+        return;
+
+    /* It's an actual item - mark it as such */
+    memcpy(&this->xflag, &xflag, sizeof(xflag));
+    this->xflagGi = o.gi;
+    this->isExtended = 1;
+
+    /* Use our draw func */
+    ActorSetScale(&this->base, 3.f);
+    this->base.draw = EnItem00_DrawXflag;
+    this->base.variable = 0;
+}

@@ -87,6 +87,14 @@ Lost Woods Grotto Generic Grass 4,                          grass,          NONE
 Lost Woods GS Soil Bridge,                                  gs,             NONE,                 LOST_WOODS,                     0x70,                       GS_TOKEN
 Lost Woods GS Soil Theater,                                 gs,             NONE,                 LOST_WOODS,                     0x71,                       GS_TOKEN
 Lost Woods GS Bean Ride,                                    gs,             NONE,                 LOST_WOODS,                     0x72,                       GS_TOKEN
+Lost Woods Rupee Arrow 1,                                   rupee,          NONE,                 LOST_WOODS,                     0x00304,                    RUPEE_GREEN
+Lost Woods Rupee Arrow 2,                                   rupee,          NONE,                 LOST_WOODS,                     0x00305,                    RUPEE_GREEN
+Lost Woods Rupee Arrow 3,                                   rupee,          NONE,                 LOST_WOODS,                     0x00306,                    RUPEE_GREEN
+Lost Woods Rupee Arrow 4,                                   rupee,          NONE,                 LOST_WOODS,                     0x00307,                    RUPEE_GREEN
+Lost Woods Rupee Arrow 5,                                   rupee,          NONE,                 LOST_WOODS,                     0x00308,                    RUPEE_GREEN
+Lost Woods Rupee Arrow 6,                                   rupee,          NONE,                 LOST_WOODS,                     0x00309,                    RUPEE_GREEN
+Lost Woods Rupee Arrow 7,                                   rupee,          NONE,                 LOST_WOODS,                     0x0030a,                    RUPEE_GREEN
+Lost Woods Rupee Arrow 8,                                   rupee,          NONE,                 LOST_WOODS,                     0x0030b,                    RUPEE_GREEN
 Deku Theater Sticks Upgrade,                                npc,            NONE,                 GROTTOS,                        THEATER_STICKS,             STICK_UPGRADE
 Deku Theater Nuts Upgrade,                                  npc,            NONE,                 GROTTOS,                        THEATER_NUTS,               NUT_UPGRADE
 Saria's Song,                                               npc,            NONE,                 SACRED_FOREST_MEADOW,           SARIA_SONG,                 SONG_SARIA
