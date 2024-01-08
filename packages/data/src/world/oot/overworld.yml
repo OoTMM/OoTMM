@@ -1212,6 +1212,14 @@
     "Graveyard Dampe Tomb Pot 4": "true"
     "Graveyard Dampe Tomb Pot 5": "true"
     "Graveyard Dampe Tomb Pot 6": "true"
+    "Graveyard Dampe Tomb Rupee 1": "true"
+    "Graveyard Dampe Tomb Rupee 2": "true"
+    "Graveyard Dampe Tomb Rupee 3": "true"
+    "Graveyard Dampe Tomb Rupee 4": "true"
+    "Graveyard Dampe Tomb Rupee 5": "true"
+    "Graveyard Dampe Tomb Rupee 6": "true"
+    "Graveyard Dampe Tomb Rupee 7": "true"
+    "Graveyard Dampe Tomb Rupee 8": "true"
 "Dampe Grave Entrance":
   region: NONE
   exits:

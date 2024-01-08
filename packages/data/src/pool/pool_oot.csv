@@ -188,6 +188,14 @@ Graveyard Dampe Tomb Pot 3,                                 pot,            NONE
 Graveyard Dampe Tomb Pot 4,                                 pot,            NONE,                 TOMB_DAMPE_WINDMILL,            0x0003,                     ARROWS_5
 Graveyard Dampe Tomb Pot 5,                                 pot,            NONE,                 TOMB_DAMPE_WINDMILL,            0x0004,                     MAGIC_JAR_SMALL
 Graveyard Dampe Tomb Pot 6,                                 pot,            NONE,                 TOMB_DAMPE_WINDMILL,            0x0005,                     RUPEE_RED
+Graveyard Dampe Tomb Rupee 1,                               rupee,          NONE,                 TOMB_DAMPE_WINDMILL,            0x00100,                    RUPEE_GREEN
+Graveyard Dampe Tomb Rupee 2,                               rupee,          NONE,                 TOMB_DAMPE_WINDMILL,            0x00101,                    RUPEE_GREEN
+Graveyard Dampe Tomb Rupee 3,                               rupee,          NONE,                 TOMB_DAMPE_WINDMILL,            0x00102,                    RUPEE_GREEN
+Graveyard Dampe Tomb Rupee 4,                               rupee,          NONE,                 TOMB_DAMPE_WINDMILL,            0x00200,                    RUPEE_GREEN
+Graveyard Dampe Tomb Rupee 5,                               rupee,          NONE,                 TOMB_DAMPE_WINDMILL,            0x00201,                    RUPEE_GREEN
+Graveyard Dampe Tomb Rupee 6,                               rupee,          NONE,                 TOMB_DAMPE_WINDMILL,            0x00202,                    RUPEE_GREEN
+Graveyard Dampe Tomb Rupee 7,                               rupee,          NONE,                 TOMB_DAMPE_WINDMILL,            0x00300,                    RUPEE_GREEN
+Graveyard Dampe Tomb Rupee 8,                               rupee,          NONE,                 TOMB_DAMPE_WINDMILL,            0x00301,                    RUPEE_GREEN
 Graveyard Crate HP,                                         collectible,    NONE,                 GRAVEYARD,                      0x04,                       HEART_PIECE
 Graveyard GS Soil,                                          gs,             NONE,                 GRAVEYARD,                      0x88,                       GS_TOKEN
 Graveyard GS Wall,                                          gs,             NONE,                 GRAVEYARD,                      0x8f,                       GS_TOKEN
