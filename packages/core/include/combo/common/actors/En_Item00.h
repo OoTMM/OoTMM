@@ -57,14 +57,18 @@
 typedef struct ALIGNED(4) Actor_EnItem00
 {
     Actor   base;
-    char    unk_13c[0x4];
+    void*   handler;
     u16     collectibleFlag;
-    char    unk_142[0x5a];
+    char    unk_142[0x8];
+    s16     timer;
+    char    unk_14c[0x50];
 #if defined(GAME_MM)
     char    unk_mm[0x4];
 #endif
     Xflag   xflag;
-    u8      isExtended;
+    u8      isExtended:1;
+    u8      isExtendedCollected:1;
+    u8      isExtendedMajor:1;
     s16     xflagGi;
 }
 Actor_EnItem00;

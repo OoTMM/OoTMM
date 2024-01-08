@@ -11,6 +11,8 @@ void EnItem00_InitWrapper(Actor_EnItem00* this, GameState_Play* play)
     bzero(&this->xflag, sizeof(this->xflag));
     this->xflagGi = 0;
     this->isExtended = 0;
+    this->isExtendedCollected = 0;
+    this->isExtendedMajor = 0;
 }
 
 static void EnItem00_ItemQuery(ComboItemQuery* q, Actor_EnItem00* this, GameState_Play* play, s16 gi)
@@ -167,17 +169,26 @@ PATCH_CALL(0x80013dec, EnItem00_FixDropWrapper);
 void EnItem00_DrawXflag(Actor_EnItem00* this, GameState_Play* play)
 {
     ComboItemOverride o;
+    s16 gi;
 
-    comboXflagItemOverride(&o, &this->xflag, 0);
+    if (this->isExtendedCollected)
+        gi = this->xflagGi;
+    else
+    {
+        comboXflagItemOverride(&o, &this->xflag, 0);
+        gi = o.gi;
+    }
+
     ModelViewTranslate(this->base.position.x, this->base.position.y + 35.f, this->base.position.z, MAT_SET);
     ModelViewScale(0.35f, 0.35f, 0.35f, MAT_MUL);
     ModelViewRotateY(this->base.rot2.y * ((M_PI * 2.f) / 32767.f), MAT_MUL);
-    comboDrawGI(play, &this->base, o.gi, 0);
+    comboDrawGI(play, &this->base, gi, 0);
 }
 
 void EnItem00_AddXflag(Actor_EnItem00* this, GameState_Play* play)
 {
     ComboItemQuery q;
+    ComboItemOverride o;
 
     if (!this->isExtended)
     {
@@ -185,9 +196,18 @@ void EnItem00_AddXflag(Actor_EnItem00* this, GameState_Play* play)
         return;
     }
 
+    /* Collect the item */
     EnItem00_ItemQuery(&q, this, play, 0);
-    comboAddItemEx(play, &q, 0);
+    comboItemOverride(&o, &q);
+    if (!isItemFastBuy(o.gi))
+    {
+        PlayerDisplayTextBox(play, 0xb4, NULL);
+        FreezePlayer(play);
+        this->isExtendedMajor = 1;
+    }
+    comboAddItemEx(play, &q, this->isExtendedMajor);
     comboXflagsSet(&this->xflag);
+    this->isExtendedCollected = 1;
 }
 
 void EnItem00_XflagInitFreestanding(Actor_EnItem00* this, GameState_Play* play, u8 actorIndex, u8 slice)
@@ -222,3 +242,29 @@ void EnItem00_XflagInitFreestanding(Actor_EnItem00* this, GameState_Play* play, 
     this->base.draw = EnItem00_DrawXflag;
     this->base.variable = 0;
 }
+
+static void EnItem00_XflagCollectedHandler(Actor_EnItem00* this, GameState_Play* play)
+{
+    this->timer = 1;
+    EnItem00_CollectedHandler(this, play);
+    if (Message_IsClosed(&this->base, play))
+    {
+        UnfreezePlayer(play);
+        this->handler = EnItem00_CollectedHandler;
+    }
+    else
+        FreezePlayer(play);
+}
+
+static void EnItem00_SetXflagCollectedHandler(Actor_EnItem00* this)
+{
+    if (!this->isExtendedMajor)
+    {
+        this->handler = EnItem00_CollectedHandler;
+        return;
+    }
+
+    this->handler = EnItem00_XflagCollectedHandler;
+}
+
+PATCH_CALL(0x80012f9c, EnItem00_SetXflagCollectedHandler);
