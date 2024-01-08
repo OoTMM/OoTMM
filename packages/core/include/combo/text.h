@@ -48,6 +48,7 @@
 #define TEXT_C1   TEXT_COLOR_RED
 #define TEXT_C2   TEXT_COLOR_PINK
 #define TEXT_C3   TEXT_COLOR_YELLOW
+#define TEXT_C4   TEXT_COLOR_BLUE
 
 #define TF_NONE         0
 #define TF_CAPITALIZE   (1 << 0)

@@ -47,6 +47,7 @@ void DrawGi_Button(GameState_Play* play, s16 index);
 void DrawGi_CustomBottleFairy(GameState_Play* play, s16 index, u8 param);
 void DrawGi_BombchuBag(GameState_Play* play, s16 index, u8 param);
 void DrawGi_BigFairy(GameState_Play* play, s16 index);
+void DrawGi_Rupoor(GameState_Play* play, s16 index);
 
 #endif
 

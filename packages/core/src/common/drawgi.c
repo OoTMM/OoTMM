@@ -1346,3 +1346,8 @@ void DrawGi_Clock(GameState_Play* play, s16 index)
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[3]);
     CLOSE_DISPS();
 }
+
+void DrawGi_Rupoor(GameState_Play* play, s16 index)
+{
+    drawColoredRupee(play, 0x353535c0);
+}

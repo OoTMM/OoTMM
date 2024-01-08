@@ -216,3 +216,4 @@
 - { id: FAIRY_BIG, func: BigFairy, params: [0x6000bd0, 0x6000db8, 0x6000ef0] }
 - { id: BOTTLE_BLUE_FIRE, func: BottleBlueFire, params: [0x6000670, 0x6000750] }
 - { id: CLOCK, func: Clock, params: [GI_CLOCK_0, GI_CLOCK_1, GI_CLOCK_2, GI_CLOCK_3] }
+- { id: RUPOOR, func: Rupoor, params: [0] }

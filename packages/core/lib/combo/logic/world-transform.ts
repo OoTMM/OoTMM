@@ -825,12 +825,14 @@ export class LogicPassWorldTransform {
       this.replaceItem(Items.OOT_RUPEE_RED,     Items.SHARED_RUPEE_RED);
       this.replaceItem(Items.OOT_RUPEE_PURPLE,  Items.SHARED_RUPEE_PURPLE);
       this.replaceItem(Items.OOT_RUPEE_HUGE,    Items.SHARED_RUPEE_GOLD);
+      this.replaceItem(Items.OOT_TRAP_RUPOOR,   Items.SHARED_TRAP_RUPOOR);
       this.replaceItem(Items.MM_RUPEE_GREEN,    Items.SHARED_RUPEE_GREEN);
       this.replaceItem(Items.MM_RUPEE_BLUE,     Items.SHARED_RUPEE_BLUE);
       this.replaceItem(Items.MM_RUPEE_RED,      Items.SHARED_RUPEE_RED);
       this.replaceItem(Items.MM_RUPEE_PURPLE,   Items.SHARED_RUPEE_PURPLE);
       this.replaceItem(Items.MM_RUPEE_SILVER,   Items.SHARED_RUPEE_SILVER);
       this.replaceItem(Items.MM_RUPEE_GOLD,     Items.SHARED_RUPEE_GOLD);
+      this.replaceItem(Items.MM_TRAP_RUPOOR,    Items.SHARED_TRAP_RUPOOR);
     }
 
     if (settings.sharedHealth) {
