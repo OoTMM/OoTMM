@@ -1578,6 +1578,9 @@ MQ Jabu-Jabu Grass Big Octo Top 1,                          grass,          NONE
 MQ Jabu-Jabu Grass Big Octo Top 2,                          grass,          NONE,                 INSIDE_JABU_JABU,               0x00605,                    DEKU_SEEDS_5
 MQ Jabu-Jabu Grass Torch Room,                              grass,          NONE,                 INSIDE_JABU_JABU,               0x00b04,                    RECOVERY_HEART
 MQ Jabu-Jabu Grass Boomerang Room,                          grass,          NONE,                 INSIDE_JABU_JABU,               0x00e02,                    DEKU_SEEDS_5
+MQ Jabu-Jabu Rupee 1,                                       rupee,          NONE,                 INSIDE_JABU_JABU,               0x00100,                    RUPEE_GREEN
+MQ Jabu-Jabu Rupee 2,                                       rupee,          NONE,                 INSIDE_JABU_JABU,               0x00101,                    RUPEE_GREEN
+MQ Jabu-Jabu Rupee 3,                                       rupee,          NONE,                 INSIDE_JABU_JABU,               0x00102,                    RUPEE_GREEN
 MQ Bottom of the Well Map Chest,                            chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x03,                       MAP_BOTW
 MQ Bottom of the Well Compass Chest,                        chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x02,                       COMPASS_BOTW
 MQ Bottom of the Well Lens Chest,                           chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x01,                       LENS

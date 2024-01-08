@@ -45,6 +45,9 @@
     "MQ Jabu-Jabu Grass Big Octo Top 1": "event(JABU_BIG_OCTO) && can_cut_grass"
     "MQ Jabu-Jabu Grass Big Octo Top 2": "event(JABU_BIG_OCTO) && can_cut_grass"
     "MQ Jabu-Jabu Grass Room After Big Octo": "event(JABU_BIG_OCTO) && can_cut_grass && can_use_slingshot"
+    "MQ Jabu-Jabu Rupee 1": "can_use_slingshot && (is_child || (is_adult && can_dive_small))"
+    "MQ Jabu-Jabu Rupee 2": "can_use_slingshot && (is_child || (is_adult && can_dive_small))"
+    "MQ Jabu-Jabu Rupee 3": "can_use_slingshot && (is_child || (is_adult && can_dive_small))"
 "Jabu-Jabu Back":
   dungeon: JJ
   exits:

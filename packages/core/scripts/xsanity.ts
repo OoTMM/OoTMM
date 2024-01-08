@@ -1017,7 +1017,7 @@ async function run() {
   //outputKeatonGrassPoolMm(mmRooms);
   //outputGrassPoolOot(mqRooms);
   //outputFairyPoolOot(ootRooms);
-  outputRupeesOot(ootRooms);
+  outputRupeesOot(mqRooms);
 }
 
 run().catch(e => {
