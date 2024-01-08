@@ -56,6 +56,7 @@
 #  include <combo/mm/actors/Obj_Grass_Carry.h>
 #  include <combo/mm/actors/En_Tubo_Trap.h>
 #  include <combo/mm/actors/En_Kusa.h>
+#  include <combo/mm/actors/En_Elf.h>
 # endif
 
 # include <combo/common/actors/En_Item00.h>

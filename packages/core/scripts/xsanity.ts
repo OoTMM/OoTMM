@@ -138,6 +138,7 @@ const ACTORS_MM = {
   OBJ_GRASS: 0x10b,
   OBJ_GRASS_UNIT: 0x10d,
   EN_KUSA2: 0x171,
+  EN_ELF: 0x10,
 };
 
 const ACTOR_SLICES_OOT = {
@@ -150,6 +151,7 @@ const ACTOR_SLICES_MM = {
   [ACTORS_MM.OBJ_MURE2]: 12,
   [ACTORS_MM.OBJ_GRASS_UNIT]: 12,
   [ACTORS_MM.EN_KUSA2]: 9,
+  [ACTORS_MM.EN_ELF]: 8,
 }
 
 const INTERESTING_ACTORS_OOT = Object.values(ACTORS_OOT);
@@ -632,6 +634,33 @@ function outputFairyPoolOot(roomActors: RoomActors[]) {
   }
 }
 
+function outputFairyPoolMm(roomActors: RoomActors[]) {
+  let lastSceneId = -1;
+  let lastSetupId = -1;
+  for (const room of roomActors) {
+    for (const actor of room.actors) {
+      if (actor.typeId === ACTORS_MM.EN_ELF) {
+        var validFairy = actor.typeId === ACTORS_MM.EN_ELF && actor.params === 4;
+        if (!validFairy) {
+          console.log("Fairy not valid: " + JSON.stringify(actor));
+          continue;
+        }
+        const item = 'FAIRY';
+        if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
+          console.log('');
+          lastSceneId = room.sceneId;
+          lastSetupId = room.setupId;
+        }
+        const count = 8;
+        for (let i = 0; i < count; ++i) {
+          const key = (i << 16) | ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
+          console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Fairy Group ${decPad(actor.actorId + 1, 2)} Fairy ${decPad(i + 1, 2)},             fairy,            NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
+        }
+      }
+    }
+  }
+}
+
 function outputGrassPoolOot(roomActors: RoomActors[]) {
   let lastSceneId = -1;
   let lastSetupId = -1;
@@ -963,7 +992,8 @@ async function run() {
   //outputGrassPoolMm(mmRooms);
   //outputKeatonGrassPoolMm(mmRooms);
   //outputGrassPoolOot(mqRooms);
-  outputFairyPoolOot(ootRooms);
+  //outputFairyPoolOot(ootRooms);
+  outputFairyPoolMm(mmRooms);
 }
 
 run().catch(e => {

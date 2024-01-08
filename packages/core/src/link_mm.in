@@ -6,6 +6,7 @@ DMARomToRam = 0x80080790;
 
 ActorRemove = 0x800BB498;
 AddMagic = 0x80115d14;
+Health_ChangeBy = 0x80115908;
 GetRoomClearFlag = 0x800b5cc4;
 
 osCreateMesgQueue = 0x8008f240;
@@ -110,6 +111,8 @@ ModelViewUnkTransform = 0x801820a0;
 PrepareSave = 0x8014546c;
 AudioOcarina_SetInstrument = 0x8019C300;
 PlaySound = 0x8019f0c8;
+Actor_PlaySfx = 0x800b8ec8;
+PlayLoopingSfxAtActor = 0x800B9010;
 Message_Close = 0x801477b4;
 
 RandIntRange = 0x800ff450;
@@ -211,3 +214,8 @@ SpawnCollectible2 = 0x800a7d28;
 VectDist = 0x800ff92c;
 
 sqrtf = 0x8008D700;
+
+Math_CosS = 0x800FED44;
+Math_SinS = 0x800FED84;
+
+EffectSsIceSmoke_Spawn = 0x800B320C;

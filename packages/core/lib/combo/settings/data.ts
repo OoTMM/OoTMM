@@ -539,7 +539,14 @@ export const SETTINGS = [{
   name: 'Fairy Fountain Fairy Shuffle (OoT)',
   category: 'main.shuffle',
   type: 'boolean',
-  description: 'Controls whether or not fairies in fairy fountains are shuffled.',
+  description: 'Controls whether or not fairies in fairy fountains are shuffled (OoT).',
+  default: false
+}, {
+  key: 'fairyFountainFairyShuffleMm',
+  name: 'Fairy Fountain Fairy Shuffle (MM)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not fairies in fairy fountains are shuffled (MM).',
   default: false
 }, {
   key: 'eggShuffle',

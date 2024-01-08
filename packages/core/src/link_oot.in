@@ -90,6 +90,8 @@ ActorSetUnk = 0x80020f04;
 
 PlaySound = 0x800646f0;
 PlaySound6 = 0x800c806c;
+Actor_PlaySfx = 0x80022fd0;
+PlayLoopingSfxAtActor = 0x8002313c;
 
 Actor_HasParent = 0x80022bb0;
 ActorDestroy = 0x80020eb4;
@@ -226,3 +228,5 @@ EnItem00_SetHandler = 0x80011b40;
 ActorFind = 0x80025b0c;
 
 sqrtf = 0x800D0DC0;
+
+EffectSsIceSmoke_Spawn = 0x8001e560;
