@@ -1319,6 +1319,13 @@
     "Death Mountain Cow": "can_play_epona"
     "Death Mountain Cow Grotto Grass 1": "can_cut_grass"
     "Death Mountain Cow Grotto Grass 2": "can_cut_grass"
+    "Death Mountain Cow Grotto Rupee 1": "true"
+    "Death Mountain Cow Grotto Rupee 2": "true"
+    "Death Mountain Cow Grotto Rupee 3": "true"
+    "Death Mountain Cow Grotto Rupee 4": "true"
+    "Death Mountain Cow Grotto Rupee 5": "true"
+    "Death Mountain Cow Grotto Rupee 6": "true"
+    "Death Mountain Cow Grotto Rupee 7": "true"
 "Fairy Fountain Magic":
   region: ENTRANCE
   exits:
@@ -1954,6 +1961,15 @@
     "Octorok Grotto Ledge": "true"
   events:
     RUPEES: "true"
+  locations:
+    "Gerudo Valley Octorok Grotto Rupee 1": "true"
+    "Gerudo Valley Octorok Grotto Rupee 2": "true"
+    "Gerudo Valley Octorok Grotto Rupee 3": "true"
+    "Gerudo Valley Octorok Grotto Rupee 4": "true"
+    "Gerudo Valley Octorok Grotto Rupee 5": "true"
+    "Gerudo Valley Octorok Grotto Rupee 6": "true"
+    "Gerudo Valley Octorok Grotto Rupee 7": "true"
+    "Gerudo Valley Octorok Grotto Rupee 8": "true"
 "Gerudo Valley Falls":
   region: GERUDO_VALLEY
   time: flow
