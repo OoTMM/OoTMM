@@ -19,8 +19,8 @@
   dungeon: BotW
   exits:
     "Bottom of the Well Wallmaster Main": "soul_wallmaster && (can_play_zelda || (has_explosives_or_hammer && has_hover_boots))"
-    "Bottom of the Well Wallmaster Basement": "soul_wallmaster && (can_play_zelda || has_hover_boots) && small_keys_botw(2) && has_explosives"
-    "Bottom of the Well Wallmaster Pit": "soul_wallmaster"
+    "Bottom of the Well Wallmaster Basement": "soul_wallmaster"
+    "Bottom of the Well Wallmaster Pit": "soul_wallmaster && (can_hit_triggers_distance || can_boomerang || has_explosives || can_hookshot)"
     "Bottom of the Well": "true"
   locations:
     "MQ Bottom of the Well Map Chest": "can_play_zelda || (has_explosives_or_hammer && has_hover_boots)"
