@@ -256,7 +256,7 @@
 "glitch_equip_swap": "glitch(OOT_EQUIP_SWAP) && (has(SPELL_FIRE) || (has_sticks && (is_child || setting(agelessSticks))))"
 "glitch_equip_swap_anyage": "glitch(OOT_EQUIP_SWAP) && (has(SPELL_FIRE) || (has_sticks && setting(agelessSticks)))"
 "glitch_ocarina_items": "glitch(OOT_OCARINA_ITEMS) && (has_bugs || has_fish)"
-"glitch_megaflip": "glitch(OOT_MEGAFLIP) && has_bombs && has_one_hand_shield"
+"glitch_megaflip": "glitch(OOT_MEGAFLIP) && has_explosives && has_one_hand_shield"
 
 # Misc
 "soul_enemy(x)": "(!setting(soulsEnemyOot)) || has(x)"
