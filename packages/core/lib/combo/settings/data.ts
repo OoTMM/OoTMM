@@ -2023,4 +2023,12 @@ export const SETTINGS = [{
   description: 'Shuffle the Lost Woods entrances added by "Alter Lost Woods Exits" among one-way entrances.',
   default: false,
   cond: (x: any) => x.erOneWays !== 'none' && x.alterLostWoodsExits
+}, {
+  key: 'erOneWaysVoids',
+  name: 'Shuffle Void points',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'Shuffle some void among one-way entrances.',
+  default: false,
+  cond: (x: any) => x.erOneWays !== 'none'
 }] as const;

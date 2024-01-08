@@ -2242,6 +2242,7 @@
     "Great Bay Grotto": "true"
     "GBC Near Cow Grotto": "can_hookshot"
     "Owl Great Bay": "true"
+    "VOID": "true"
   events:
     MAGIC: "true"
     BOMBS_OR_BOMBCHU: "true"
@@ -2410,10 +2411,12 @@
   exits:
     "Pinnacle Rock": "underwater_walking_strict && (event(SEAHORSE) || trick(MM_NO_SEAHORSE))"
     "Great Bay Coast": "true"
+    "Pinnacle Rock Void": "true"
 "Pinnacle Rock":
   region: PINNACLE_ROCK
   exits:
     "Pinnacle Rock Entrance": "true"
+    "Pinnacle Rock Void": "true"
   events:
     ZORA_EGGS_PINNACLE_ROCK: "true"
     MAGIC: "true"
@@ -2433,6 +2436,10 @@
     "Pinnacle Rock Pot 09": "true"
     "Pinnacle Rock Pot 10": "true"
     "Pinnacle Rock Pot 11": "true"
+"Pinnacle Rock Void":
+  region: PINNACLE_ROCK
+  exits:
+    "VOID": "true"
 "Laboratory":
   region: ENTRANCE
   exits:
@@ -2454,6 +2461,7 @@
     "Waterfall Cliffs": "can_hookshot"
     "Great Bay Near Fairy Fountain": "can_hookshot && (has_explosives || trick_keg_explosives || short_hook_anywhere)" #|| (can_use_ice_arrows && (has_mask_zora || can_hookshot_short))
     "Zora Cape Grotto": "can_break_boulders"
+    "VOID": "true"
   locations:
     "Zora Cape Underwater Chest": "underwater_walking"
     "Zora Cape Waterfall HP": "has_mask_zora || (has_iron_boots && has_tunic_zora && (has_arrows || has_bombchu || has_mask_blast))"

@@ -343,3 +343,8 @@ MM_GORON_VILLAGE_FROM_TWIN_SPRING:              { game: mm,  id: 0x8a00, type: n
 MM_GORON_VILLAGE_FROM_TWIN_WINTER:              { game: mm,  id: 0x9400, type: none }
 MM_WOODFALL_FROM_SWAMP:                         { game: mm,  id: 0x8600, type: none }
 MM_COAST_FROM_MIKAU_CS:                         { game: mm,  id: 0x68a0, type: none }
+MM_VOID_GREAT_BAY_COAST:                        { game: mm,  id: 0x6820, type: one-way-void, areas: ["MM Great Bay Coast", "MM VOID"] }
+MM_VOID_PINNACLE_ROCK:                          { game: mm,  id: 0x4410, type: one-way-void, areas: ["MM Pinnacle Rock Void", "MM VOID"] }
+MM_VOID_ZORA_CAPE:                              { game: mm,  id: 0x6a30, type: one-way-void, areas: ["MM Zora Cape", "MM VOID"] }
+MM_VOID_SEWERS:                                 { game: mm,  id: 0x7030, type: one-way-void, areas: ["MM Pirate Fortress Sewers Void", "MM VOID"] }
+
