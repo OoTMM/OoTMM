@@ -221,6 +221,13 @@ static void EnItem00_AliasFreestandingRupee(Xflag* xflag)
             xflag->id = 4;
         }
         break;
+    case SCE_OOT_KOKIRI_FOREST:
+        if (xflag->setupId == 3)
+        {
+            xflag->setupId = 2;
+            xflag->id += 2;
+        }
+        break;
     }
 }
 

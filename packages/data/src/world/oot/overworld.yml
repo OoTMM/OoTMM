@@ -86,6 +86,7 @@
     "Kokiri Shop": "true"
     "Kokiri Forest Storms Grotto": "hidden_grotto_storms"
     "Kokiri Forest Near Deku Tree": "event(MIDO_MOVED) || is_adult || climb_anywhere || hookshot_anywhere"
+    "Kokiri Forest Adult Rupees": "can_ride_bean(BEAN_KOKIRI_FOREST)"
   events:
     BOMBS_OR_BOMBCHU: "true"
     RUPEES: "true"
@@ -93,6 +94,7 @@
     ARROWS: "is_adult"
     MAGIC: "true"
     MIDO_MOVED: "can_move_mido"
+    BEAN_KOKIRI_FOREST: "can_use_beans"
   locations:
     "Kokiri Forest Kokiri Sword Chest": "is_child"
     "Kokiri Forest GS Soil": "gs_soil && can_damage_skull"
@@ -126,8 +128,27 @@
     "Kokiri Forest Grass Adult 10": "is_adult && can_cut_grass"
     "Kokiri Forest Grass Adult 11": "is_adult && can_cut_grass"
     "Kokiri Forest Grass Adult 12": "is_adult && can_cut_grass"
+    # TODO: Add this back when we have wonder items
+    #"Kokiri Forest Invisible Rupee 1": "is_child"
+    #"Kokiri Forest Invisible Rupee 2": "is_child"
+    #"Kokiri Forest Invisible Rupee 3": "is_child"
+    #"Kokiri Forest Invisible Rupee 4": "is_child"
+    "Kokiri Forest Rupee Child 1": "is_child"
+    "Kokiri Forest Rupee Child 2": "is_child"
+    "Kokiri Forest Rupee Crawl 1": "is_child"
+    "Kokiri Forest Rupee Crawl 2": "is_child"
   gossip:
     "Kokiri Gossip Near Lost Woods Open": "true"
+"Kokiri Forest Adult Rupees":
+  region: KOKIRI_FOREST
+  locations:
+    "Kokiri Forest Rupee Adult 1": "true"
+    "Kokiri Forest Rupee Adult 2": "true"
+    "Kokiri Forest Rupee Adult 3": "true"
+    "Kokiri Forest Rupee Adult 4": "true"
+    "Kokiri Forest Rupee Adult 5": "true"
+    "Kokiri Forest Rupee Adult 6": "true"
+    "Kokiri Forest Rupee Adult 7": "true"
 "Kokiri Forest Near Deku Tree":
   region: KOKIRI_FOREST
   exits:
@@ -1249,6 +1270,8 @@
     "Death Mountain GS Entrance": "has_explosives || (can_hammer && (is_adult || can_use_sticks || (age_sword_adult && has(SWORD_BIGGORON)) || has_ranged_weapon_child || can_use_din))"
     "Death Mountain GS Soil": "gs_soil && has_bombflowers && can_damage_skull"
     "Death Mountain GS Above Dodongo":  "gs_night && is_adult && (can_hammer || trick(OOT_DMT_RED_ROCK_GS))"
+    "Death Mountain Rupee Upper": "event(BOULDER_DEATH_MOUNTAIN)"
+    "Death Mountain Rupee Lower": "event(BOULDER_DEATH_MOUNTAIN)"
 "Death Mountain Summit":
   region: DEATH_MOUNTAIN_TRAIL
   time: flow
@@ -1772,6 +1795,7 @@
     "Death Mountain Crater Warp": "has_tunic_goron_strict && ((is_adult && scarecrow_longshot) || longshot_anywhere || glitch_megaflip)"
     "Death Mountain Crater Generic Grotto": "has_explosives_or_hammer"
     "Fairy Fountain Double Magic": "glitch_megaflip"
+    "Death Mountain Crater Bottom Adult Rupees": "is_adult"
   events:
     #Having to farm these rocks for drops without heat resistance isn't fair without access to the grotto
     BOMBS_OR_BOMBCHU: "has_tunic_goron_strict || can_hammer"
@@ -1800,11 +1824,34 @@
     "Death Mountain Crater Pot 2": "true"
     "Death Mountain Crater Pot 3": "true"
     "Death Mountain Crater Pot 4": "true"
+"Death Mountain Crater Bottom Child":
+  region: DEATH_MOUNTAIN_CRATER
+  locations:
+    "Death Mountain Crater Rupee Child 1": "true"
+    "Death Mountain Crater Rupee Child 2": "true"
+    "Death Mountain Crater Rupee Child 3": "true"
+    "Death Mountain Crater Rupee Child 4": "true"
+    "Death Mountain Crater Rupee Child 5": "true"
+    "Death Mountain Crater Rupee Child 6": "true"
+    "Death Mountain Crater Rupee Child 7": "true"
+    "Death Mountain Crater Rupee Child 8": "true"
+"Death Mountain Crater Bottom Adult Rupees":
+  region: DEATH_MOUNTAIN_CRATER
+  locations:
+    "Death Mountain Crater Rupee Adult 1": "true"
+    "Death Mountain Crater Rupee Adult 2": "true"
+    "Death Mountain Crater Rupee Adult 3": "true"
+    "Death Mountain Crater Rupee Adult 4": "true"
+    "Death Mountain Crater Rupee Adult 5": "true"
+    "Death Mountain Crater Rupee Adult 6": "true"
+    "Death Mountain Crater Rupee Adult 7": "true"
 "Death Mountain Crater Warp":
   region: DEATH_MOUNTAIN_CRATER
   exits:
     "Death Mountain Crater Near Temple": "has_tunic_goron && (is_adult || setting(fireChild) || has_hover_boots || climb_anywhere || hookshot_anywhere)"
     "Death Mountain Crater Bottom": "can_hookshot || has_hover_boots || can_ride_bean(BEAN_DEATH_MOUNTAIN_CRATER)"
+    "Death Mountain Crater Bottom Child": "is_child"
+    "Death Mountain Crater Bottom Adult Rupees": "is_adult && scarecrow_longshot"
   events:
     BEAN_DEATH_MOUNTAIN_CRATER: "can_use_beans"
   locations:
