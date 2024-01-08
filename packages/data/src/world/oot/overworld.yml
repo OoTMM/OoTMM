@@ -86,7 +86,7 @@
     "Kokiri Shop": "true"
     "Kokiri Forest Storms Grotto": "hidden_grotto_storms"
     "Kokiri Forest Near Deku Tree": "event(MIDO_MOVED) || is_adult || climb_anywhere || hookshot_anywhere"
-    "Kokiri Forest Adult Rupees": "can_ride_bean(BEAN_KOKIRI_FOREST)"
+    "Kokiri Forest Adult Rupees": "can_ride_bean(BEAN_KOKIRI_FOREST) || (is_adult && (has_hover_boots || hookshot_anywhere || climb_anywhere)"
   events:
     BOMBS_OR_BOMBCHU: "true"
     RUPEES: "true"
@@ -1236,11 +1236,11 @@
     "Graveyard Dampe Tomb Rupee 1": "true"
     "Graveyard Dampe Tomb Rupee 2": "true"
     "Graveyard Dampe Tomb Rupee 3": "true"
-    "Graveyard Dampe Tomb Rupee 4": "true"
-    "Graveyard Dampe Tomb Rupee 5": "true"
-    "Graveyard Dampe Tomb Rupee 6": "true"
-    "Graveyard Dampe Tomb Rupee 7": "true"
-    "Graveyard Dampe Tomb Rupee 8": "true"
+    "Graveyard Dampe Tomb Rupee 4": "soul_npc(SOUL_NPC_DAMPE)"
+    "Graveyard Dampe Tomb Rupee 5": "soul_npc(SOUL_NPC_DAMPE)"
+    "Graveyard Dampe Tomb Rupee 6": "soul_npc(SOUL_NPC_DAMPE)"
+    "Graveyard Dampe Tomb Rupee 7": "soul_npc(SOUL_NPC_DAMPE)"
+    "Graveyard Dampe Tomb Rupee 8": "soul_npc(SOUL_NPC_DAMPE)"
 "Dampe Grave Entrance":
   region: NONE
   exits:
@@ -1271,7 +1271,7 @@
     "Death Mountain GS Soil": "gs_soil && has_bombflowers && can_damage_skull"
     "Death Mountain GS Above Dodongo":  "gs_night && is_adult && (can_hammer || trick(OOT_DMT_RED_ROCK_GS))"
     "Death Mountain Rupee Upper": "event(BOULDER_DEATH_MOUNTAIN)"
-    "Death Mountain Rupee Lower": "event(BOULDER_DEATH_MOUNTAIN)"
+    "Death Mountain Rupee Lower": "event(BOULDER_DEATH_MOUNTAIN) && is_child"
 "Death Mountain Summit":
   region: DEATH_MOUNTAIN_TRAIL
   time: flow
@@ -1649,7 +1649,7 @@
     "Lake Hylia Grass Pack 3 Bush 10": "can_cut_grass"
     "Lake Hylia Grass Pack 3 Bush 11": "can_cut_grass"
     "Lake Hylia Grass Pack 3 Bush 12": "can_cut_grass"
-    "Lake Hylia Rupee 1": "is_child && can_dive_small"
+    "Lake Hylia Rupee 1": "is_child" #this rupee can be gotten with base dive distance
     "Lake Hylia Rupee 2": "is_child && can_dive_small"
     "Lake Hylia Rupee 3": "is_child && can_dive_small"
   gossip:

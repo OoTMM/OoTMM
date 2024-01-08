@@ -12,7 +12,7 @@
   exits:
     "Bottom of the Well": "true"
     "Bottom of the Well Wallmaster Main": "soul_wallmaster && has_lens"
-    "Bottom of the Well Basement Platform": "has_lens"
+    "Bottom of the Well Basement Platform": "has_lens || climb_anywhere || hookshot_anywhere"
   events:
     STICKS: "true"
   locations:
