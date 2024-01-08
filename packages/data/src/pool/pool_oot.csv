@@ -1037,6 +1037,10 @@ Ice Cavern Pot Red Ice 1,                                   pot,            NONE
 Ice Cavern Pot Red Ice 2,                                   pot,            NONE,                 ICE_CAVERN,                     0x0601,                     RECOVERY_HEART
 Ice Cavern Pot Map Room,                                    pot,            NONE,                 ICE_CAVERN,                     0x0909,                     RUPEE_PURPLE
 Ice Cavern Flying Pot Scythe Room,                          pot,            NONE,                 ICE_CAVERN,                     0x030b,                     RECOVERY_HEART
+Ice Cavern Rupee Ice,                                       rupee,          NONE,                 ICE_CAVERN,                     0x00100,                    RUPEE_BLUE
+Ice Cavern Rupee Midair 1,                                  rupee,          NONE,                 ICE_CAVERN,                     0x00500,                    RUPEE_RED
+Ice Cavern Rupee Midair 2,                                  rupee,          NONE,                 ICE_CAVERN,                     0x00501,                    RUPEE_RED
+Ice Cavern Rupee Midair 3,                                  rupee,          NONE,                 ICE_CAVERN,                     0x00502,                    RUPEE_RED
 Water Temple Under Center,                                  chest,          NONE,                 TEMPLE_WATER,                   0x06,                       RUPEE_BLUE
 Water Temple Compass,                                       chest,          NONE,                 TEMPLE_WATER,                   0x09,                       COMPASS_WATER
 Water Temple Longshot,                                      chest,          NONE,                 TEMPLE_WATER,                   0x07,                       HOOKSHOT
