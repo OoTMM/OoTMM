@@ -54,6 +54,7 @@ static void debugCheat(GameState_Play* play)
 
         gSave.inventory.ammo[ITS_OOT_STICKS] = 10;
         gSave.inventory.ammo[ITS_OOT_SLINGSHOT] = 50;
+        gSave.inventory.ammo[ITS_OOT_NUTS] = 40;
         gSave.inventory.ammo[ITS_OOT_BOMBS] = 40;
         gSave.inventory.ammo[ITS_OOT_BOW] = 50;
         gSave.inventory.ammo[ITS_OOT_BOMBCHU] = 50;
