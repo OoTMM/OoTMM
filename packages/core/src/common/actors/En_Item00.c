@@ -2,6 +2,12 @@
 #include <combo/item.h>
 #include <combo/player.h>
 
+#if defined(GAME_OOT)
+# define DUMMY_MSG 0xb4
+#else
+# define DUMMY_MSG 0x52
+#endif
+
 void EnItem00_AliasFreestandingRupee(Xflag* xflag);
 
 void EnItem00_InitWrapper(Actor_EnItem00* this, GameState_Play* play)
@@ -52,7 +58,7 @@ void EnItem00_AddXflag(Actor_EnItem00* this)
     comboItemOverride(&o, &q);
     if (!isItemFastBuy(o.gi))
     {
-        PlayerDisplayTextBox(gPlay, 0xb4, NULL); // TODO: Change this?
+        PlayerDisplayTextBox(gPlay, DUMMY_MSG, NULL);
         FreezePlayer(gPlay);
         this->isExtendedMajor = 1;
     }
@@ -118,6 +124,10 @@ void EnItem00_SetXflagCollectedHandler(Actor_EnItem00* this)
         this->handler = EnItem00_CollectedHandler;
         return;
     }
+
+#if defined(GAME_MM)
+    this->base.flags |= 0x100000;
+#endif
 
     this->handler = EnItem00_XflagCollectedHandler;
 }

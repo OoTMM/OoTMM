@@ -1380,6 +1380,7 @@
     "Swamp Potion Shop Item 1": "has_mushroom && shop_price(0x0d) && (first_day || event(MEET_KOUME))"
     "Swamp Potion Shop Item 2": "shop_price(0x0e) && (first_day || event(MEET_KOUME))"
     "Swamp Potion Shop Item 3": "shop_price(0x0f) && (first_day || event(MEET_KOUME))"
+    "Swamp Potion Shop Rupee": "true"
 "Deku Palace Front":
   region: DEKU_PALACE
   exits:

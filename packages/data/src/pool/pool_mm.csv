@@ -590,6 +590,7 @@ Swamp Potion Shop Kotake,                               npc,            NONE,   
 Swamp Potion Shop Item 1,                               shop,           NONE,                   POTION_SHOP,                  0x0d,                       POTION_BLUE
 Swamp Potion Shop Item 2,                               shop,           NONE,                   POTION_SHOP,                  0x0e,                       POTION_GREEN
 Swamp Potion Shop Item 3,                               shop,           NONE,                   POTION_SHOP,                  0x0f,                       POTION_RED
+Swamp Potion Shop Rupee,                                rupee,          NONE,                   POTION_SHOP,                  0x00001,                    RUPEE_GREEN
 Tourist Information Pictobox,                           npc,            NONE,                   TOURIST_INFORMATION,          KOUME_PICTOGRAPH_BOX,       PICTOGRAPH_BOX
 Tourist Information Boat Archery,                       npc,            BOAT_ARCHERY,           TOURIST_INFORMATION,          KOUME_HEART_PIECE,          HEART_PIECE
 Tourist Information Tingle Picture,                     npc,            NONE,                   TOURIST_INFORMATION,          TOUR_GUIDE_HEART_PIECE,     HEART_PIECE

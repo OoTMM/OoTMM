@@ -12,19 +12,16 @@ PATCH_END
 
 UpdateEnd:
   /* Original */
-  addiu t3,t3,0x6a40
   sh    zero,0x14a(s0)
 
-  jal EnItem00_SetXflagCollectedHandler
+  j EnItem00_SetXflagCollectedHandler
    move  a0,s0
-  jr ra
-   nop
 
 /* Use our xflag post-collection handler */
 PATCH_START 0x800a7108
-  nop
-  jal UpdateEnd
-   nop
+  sh    zero,0x14a(s0)
+  jal   EnItem00_SetXflagCollectedHandler
+   move  a0,s0
 PATCH_END
 
 /* Use our xflag add handler */
