@@ -127,3 +127,8 @@ static s16 EnItem00_FixDropWrapper(s16 dropId)
 PATCH_CALL(0x800a7994, EnItem00_FixDropWrapper);
 PATCH_CALL(0x800a7c44, EnItem00_FixDropWrapper);
 PATCH_CALL(0x800a8024, EnItem00_FixDropWrapper);
+
+void EnItem00_AliasFreestandingRupee(Xflag* xflag)
+{
+
+}
