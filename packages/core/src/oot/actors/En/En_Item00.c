@@ -210,6 +210,20 @@ void EnItem00_AddXflag(Actor_EnItem00* this, GameState_Play* play)
     this->isExtendedCollected = 1;
 }
 
+static void EnItem00_AliasFreestandingRupee(Xflag* xflag)
+{
+    switch (xflag->sceneId)
+    {
+    case SCE_OOT_LOST_WOODS:
+        if (xflag->roomId == 7)
+        {
+            xflag->setupId = 0;
+            xflag->id = 4;
+        }
+        break;
+    }
+}
+
 void EnItem00_XflagInitFreestanding(Actor_EnItem00* this, GameState_Play* play, u8 actorIndex, u8 slice)
 {
     ComboItemOverride o;
@@ -222,6 +236,10 @@ void EnItem00_XflagInitFreestanding(Actor_EnItem00* this, GameState_Play* play, 
     xflag.roomId = this->base.room;
     xflag.sliceId = slice;
     xflag.id = actorIndex;
+
+    /* Alias as required */
+    if ((this->base.variable & 0x1f) < 4)
+        EnItem00_AliasFreestandingRupee(&xflag);
 
     /* Query */
     comboXflagItemOverride(&o, &xflag, 0);

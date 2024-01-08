@@ -862,6 +862,7 @@
     "Lost Woods Grass Deep 4": "can_cut_grass"
     "Lost Woods Grass Deep 5": "can_cut_grass"
     "Lost Woods Grass Deep 6": "can_cut_grass"
+    "Lost Woods Rupee Boulder": "has_explosives_or_hammer"
 "Deku Theater":
   region: ENTRANCE
   exits:

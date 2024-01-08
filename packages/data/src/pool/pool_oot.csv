@@ -95,6 +95,7 @@ Lost Woods Rupee Arrow 5,                                   rupee,          NONE
 Lost Woods Rupee Arrow 6,                                   rupee,          NONE,                 LOST_WOODS,                     0x00309,                    RUPEE_GREEN
 Lost Woods Rupee Arrow 7,                                   rupee,          NONE,                 LOST_WOODS,                     0x0030a,                    RUPEE_GREEN
 Lost Woods Rupee Arrow 8,                                   rupee,          NONE,                 LOST_WOODS,                     0x0030b,                    RUPEE_GREEN
+Lost Woods Rupee Boulder,                                   rupee,          NONE,                 LOST_WOODS,                     0x00704,                    RUPEE_BLUE
 Deku Theater Sticks Upgrade,                                npc,            NONE,                 GROTTOS,                        THEATER_STICKS,             STICK_UPGRADE
 Deku Theater Nuts Upgrade,                                  npc,            NONE,                 GROTTOS,                        THEATER_NUTS,               NUT_UPGRADE
 Saria's Song,                                               npc,            NONE,                 SACRED_FOREST_MEADOW,           SARIA_SONG,                 SONG_SARIA
