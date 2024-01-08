@@ -179,7 +179,7 @@ void EnItem00_DrawXflag(Actor_EnItem00* this, GameState_Play* play)
         gi = o.gi;
     }
 
-    ModelViewTranslate(this->base.position.x, this->base.position.y + 35.f, this->base.position.z, MAT_SET);
+    ModelViewTranslate(this->base.position.x, this->base.position.y + 20.f, this->base.position.z, MAT_SET);
     ModelViewScale(0.35f, 0.35f, 0.35f, MAT_MUL);
     ModelViewRotateY(this->base.rot2.y * ((M_PI * 2.f) / 32767.f), MAT_MUL);
     comboDrawGI(play, &this->base, gi, 0);
