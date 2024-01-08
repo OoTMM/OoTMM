@@ -500,6 +500,13 @@ export const SETTINGS = [{
   description: 'Controls whether or not the freestanding rupees are shuffled (OoT)',
   default: false
 }, {
+  key: 'shuffleFreeRupeesMm',
+  name: 'Freestanding Rupees Shuffle (MM)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the freestanding rupees are shuffled (MM)',
+  default: false
+}, {
   key: 'shuffleOcarinasOot',
   name: 'Ocarina Shuffle (OoT)',
   category: 'main.shuffle',
