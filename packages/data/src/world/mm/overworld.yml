@@ -1109,7 +1109,7 @@
     "Road to Southern Swamp Grotto": "true"
     "Tingle Swamp": "has_weapon_range"
   locations:
-    "Road to Southern Swamp HP": "has_weapon_range"
+    "Road to Southern Swamp HP": "has_weapon_range || has_bombchu"
     "Road to Southern Swamp Grass Pack 1 Grass 01": "true"
     "Road to Southern Swamp Grass Pack 1 Grass 02": "true"
     "Road to Southern Swamp Grass Pack 1 Grass 03": "true"
