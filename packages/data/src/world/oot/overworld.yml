@@ -1189,7 +1189,7 @@
     BOMBS_OR_BOMBCHU: "true"
     SEEDS: "is_child"
     ARROWS: "is_adult"
-    WINDMILL_TOP: "is_adult && can_play_time"
+    WINDMILL_TOP: "is_adult && can_play_time && soul_npc(SOUL_NPC_DAMPE)"
   locations:
     "Graveyard Dampe Tomb Reward 1": "soul_npc(SOUL_NPC_DAMPE)"
     "Graveyard Dampe Tomb Reward 2": "is_adult && soul_npc(SOUL_NPC_DAMPE)" #It's very hard to finish this race sub-1 as kid.
