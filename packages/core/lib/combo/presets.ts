@@ -160,6 +160,8 @@ const PRESET_BLITZ_PRECOMPLETED = makeSettings({
   sunlightArrows: true,
   shortHookshotMm: true,
   lenientSpikes: false,
+  bombchuBagOot: true,
+  bombchuBagMm: true,
   sharedBows: true,
   sharedBombBags: true,
   sharedMagic: true,
@@ -177,6 +179,7 @@ const PRESET_BLITZ_PRECOMPLETED = makeSettings({
   sharedWallets: true,
   sharedHealth: true,
   sharedShields: true,
+  sharedBombchuBags: true,
   startingItems: {
     OOT_NUTS_10: 2,
     OOT_SHIELD_DEKU: 1,
