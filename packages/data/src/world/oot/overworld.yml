@@ -1431,6 +1431,10 @@
     "Zora River GS Near Grotto": "is_adult && gs_night && (can_collect_distance || climb_anywhere)"
     "Zora River GS Near Bridge": "is_adult && gs_night && (can_hookshot || (climb_anywhere && (has_ranged_weapon || has_bombchu)))"
     "Zora River Grass": "(is_child || has_hover_boots || hookshot_anywhere || climb_anywhere) && can_cut_grass"
+    "Zora River Rupee 1": "is_adult"
+    "Zora River Rupee 2": "is_adult"
+    "Zora River Rupee 3": "is_adult"
+    "Zora River Rupee 4": "is_adult"
   gossip:
     "Zora River Gossip High Pillar": "true"
     "Zora River Gossip Near Domain": "true"
@@ -1615,6 +1619,9 @@
     "Lake Hylia Grass Pack 3 Bush 10": "can_cut_grass"
     "Lake Hylia Grass Pack 3 Bush 11": "can_cut_grass"
     "Lake Hylia Grass Pack 3 Bush 12": "can_cut_grass"
+    "Lake Hylia Rupee 1": "is_child && can_dive_small"
+    "Lake Hylia Rupee 2": "is_child && can_dive_small"
+    "Lake Hylia Rupee 3": "is_child && can_dive_small"
   gossip:
     "Lake Hylia Gossip Near River": "true"
     "Lake Hylia Gossip Southeast Lake": "true"
@@ -1687,11 +1694,11 @@
     "Jabu-Jabu": "is_child && ((has_bottle && (has(FISH) || event(FISH))) || (trick(OOT_ENTER_JABU) && (climb_anywhere || hookshot_anywhere || has_weapon || can_use_sticks || time_travel_at_will)))"
     "Zora Fountain Frozen": "is_adult || climb_anywhere || longshot_anywhere"
     "Fairy Fountain Farore": "has_explosives"
+    "Zora Fountain Deep": "is_adult && has_tunic_zora && has_iron_boots"
   events:
     SEEDS: "is_child"
   locations:
     "Zora Fountain Iceberg HP": "is_adult"
-    "Zora Fountain Bottom HP": "is_adult && has_tunic_zora && has_iron_boots"
     "Zora Fountain GS Wall": "is_child && gs_night && (can_collect_distance || (climb_anywhere && (can_use_sword || can_use_sticks || has_ranged_weapon || has_explosives || can_use_din)))"
     "Zora Fountain GS Tree": "is_child && can_damage_skull"
     "Zora Fountain GS Upper": "is_adult && gs_night && ((has_explosives_or_hammer && can_collect_distance && can_lift_silver) || (climb_anywhere && (has_explosives || has(SWORD_BIGGORON) || has_ranged_weapon || can_use_din)))"
@@ -1705,6 +1712,28 @@
   gossip:
     "Zora Fountain Gossip Northwest": "true"
     "Zora Fountain Gossip Near Fairy": "true"
+"Zora Fountain Deep":
+  region: ZORA_FOUNTAIN
+  locations:
+    "Zora Fountain Bottom HP": "true"
+    "Zora Fountain Rupee 01": "true"
+    "Zora Fountain Rupee 02": "true"
+    "Zora Fountain Rupee 03": "true"
+    "Zora Fountain Rupee 04": "true"
+    "Zora Fountain Rupee 05": "true"
+    "Zora Fountain Rupee 06": "true"
+    "Zora Fountain Rupee 07": "true"
+    "Zora Fountain Rupee 08": "true"
+    "Zora Fountain Rupee 09": "true"
+    "Zora Fountain Rupee 10": "true"
+    "Zora Fountain Rupee 11": "true"
+    "Zora Fountain Rupee 12": "true"
+    "Zora Fountain Rupee 13": "true"
+    "Zora Fountain Rupee 14": "true"
+    "Zora Fountain Rupee 15": "true"
+    "Zora Fountain Rupee 16": "true"
+    "Zora Fountain Rupee 17": "true"
+    "Zora Fountain Rupee 18": "true"
 "Zora Fountain Frozen":
   region: ZORA_FOUNTAIN
   exits:
