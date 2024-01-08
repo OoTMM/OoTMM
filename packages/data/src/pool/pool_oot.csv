@@ -1133,6 +1133,11 @@ Bottom of the Well Grass 09,                                grass,          NONE
 Bottom of the Well Grass 10,                                grass,          NONE,                 BOTTOM_OF_THE_WELL,             0x0010a,                    DEKU_SEEDS_5
 Bottom of the Well Grass 11,                                grass,          NONE,                 BOTTOM_OF_THE_WELL,             0x0010b,                    RECOVERY_HEART
 Bottom of the Well Grass 12,                                grass,          NONE,                 BOTTOM_OF_THE_WELL,             0x0010c,                    DEKU_SEEDS_5
+Bottom of the Well Rupee 1,                                 rupee,          NONE,                 BOTTOM_OF_THE_WELL,             0x0011a,                    RUPEE_BLUE
+Bottom of the Well Rupee 2,                                 rupee,          NONE,                 BOTTOM_OF_THE_WELL,             0x0011b,                    RUPEE_BLUE
+Bottom of the Well Rupee 3,                                 rupee,          NONE,                 BOTTOM_OF_THE_WELL,             0x0011c,                    RUPEE_BLUE
+Bottom of the Well Rupee 4,                                 rupee,          NONE,                 BOTTOM_OF_THE_WELL,             0x0011d,                    RUPEE_BLUE
+Bottom of the Well Rupee 5,                                 rupee,          NONE,                 BOTTOM_OF_THE_WELL,             0x0011e,                    RUPEE_BLUE
 Shadow Temple Map,                                          chest,          NONE,                 TEMPLE_SHADOW,                  0x01,                       MAP_SHADOW
 Shadow Temple Hover Boots,                                  chest,          NONE,                 TEMPLE_SHADOW,                  0x07,                       BOOTS_HOVER
 Shadow Temple Silver Rupees,                                chest,          NONE,                 TEMPLE_SHADOW,                  0x02,                       SMALL_KEY_SHADOW

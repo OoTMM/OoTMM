@@ -12,6 +12,7 @@
   exits:
     "Bottom of the Well": "true"
     "Bottom of the Well Wallmaster Main": "soul_wallmaster && has_lens"
+    "Bottom of the Well Basement Platform": "has_lens"
   events:
     STICKS: "true"
   locations:
@@ -71,3 +72,11 @@
     "Bottom of the Well Grass 10": "can_cut_grass"
     "Bottom of the Well Grass 11": "can_cut_grass"
     "Bottom of the Well Grass 12": "can_cut_grass"
+"Bottom of the Well Basement Platform":
+  dungeon: BotW
+  locations:
+    "Bottom of the Well Rupee 1": "true"
+    "Bottom of the Well Rupee 2": "true"
+    "Bottom of the Well Rupee 3": "true"
+    "Bottom of the Well Rupee 4": "true"
+    "Bottom of the Well Rupee 5": "true"
