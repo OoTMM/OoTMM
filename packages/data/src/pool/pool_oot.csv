@@ -44,6 +44,21 @@ Kokiri Forest Storms Grotto Grass 1,                        grass,          NONE
 Kokiri Forest Storms Grotto Grass 2,                        grass,          NONE,                 GROTTOS,                        0x02c03,                    RANDOM
 Kokiri Forest Storms Grotto Grass 3,                        grass,          NONE,                 GROTTOS,                        0x02c04,                    RANDOM
 Kokiri Forest Storms Grotto Grass 4,                        grass,          NONE,                 GROTTOS,                        0x02c05,                    RANDOM
+Kokiri Forest Invisible Rupee 1,                            rupee,          NONE,                 KOKIRI_FOREST,                  0x00001,                    RUPEE_GREEN
+Kokiri Forest Invisible Rupee 2,                            rupee,          NONE,                 KOKIRI_FOREST,                  0x00002,                    RUPEE_GREEN
+Kokiri Forest Invisible Rupee 3,                            rupee,          NONE,                 KOKIRI_FOREST,                  0x00003,                    RUPEE_GREEN
+Kokiri Forest Invisible Rupee 4,                            rupee,          NONE,                 KOKIRI_FOREST,                  0x00004,                    RUPEE_GREEN
+Kokiri Forest Rupee Child 1,                                rupee,          NONE,                 KOKIRI_FOREST,                  0x00005,                    RUPEE_BLUE
+Kokiri Forest Rupee Child 2,                                rupee,          NONE,                 KOKIRI_FOREST,                  0x00006,                    RUPEE_BLUE
+Kokiri Forest Rupee Crawl 1,                                rupee,          NONE,                 KOKIRI_FOREST,                  0x00200,                    RUPEE_BLUE
+Kokiri Forest Rupee Crawl 2,                                rupee,          NONE,                 KOKIRI_FOREST,                  0x00201,                    RUPEE_BLUE
+Kokiri Forest Rupee Adult 1,                                rupee,          NONE,                 KOKIRI_FOREST,                  0x0800b,                    RUPEE_GREEN
+Kokiri Forest Rupee Adult 2,                                rupee,          NONE,                 KOKIRI_FOREST,                  0x1800b,                    RUPEE_GREEN
+Kokiri Forest Rupee Adult 3,                                rupee,          NONE,                 KOKIRI_FOREST,                  0x2800b,                    RUPEE_GREEN
+Kokiri Forest Rupee Adult 4,                                rupee,          NONE,                 KOKIRI_FOREST,                  0x3800b,                    RUPEE_GREEN
+Kokiri Forest Rupee Adult 5,                                rupee,          NONE,                 KOKIRI_FOREST,                  0x4800b,                    RUPEE_GREEN
+Kokiri Forest Rupee Adult 6,                                rupee,          NONE,                 KOKIRI_FOREST,                  0x5800b,                    RUPEE_GREEN
+Kokiri Forest Rupee Adult 7,                                rupee,          NONE,                 KOKIRI_FOREST,                  0x6800b,                    RUPEE_RED
 Kokiri Shop Item 1,                                         shop,           NONE,                 KOKIRI_FOREST,                  0x00,                       RECOVERY_HEART
 Kokiri Shop Item 2,                                         shop,           NONE,                 KOKIRI_FOREST,                  0x01,                       ARROWS_10
 Kokiri Shop Item 3,                                         shop,           NONE,                 KOKIRI_FOREST,                  0x02,                       ARROWS_30
@@ -87,6 +102,15 @@ Lost Woods Grotto Generic Grass 4,                          grass,          NONE
 Lost Woods GS Soil Bridge,                                  gs,             NONE,                 LOST_WOODS,                     0x70,                       GS_TOKEN
 Lost Woods GS Soil Theater,                                 gs,             NONE,                 LOST_WOODS,                     0x71,                       GS_TOKEN
 Lost Woods GS Bean Ride,                                    gs,             NONE,                 LOST_WOODS,                     0x72,                       GS_TOKEN
+Lost Woods Rupee Arrow 1,                                   rupee,          NONE,                 LOST_WOODS,                     0x00304,                    RUPEE_GREEN
+Lost Woods Rupee Arrow 2,                                   rupee,          NONE,                 LOST_WOODS,                     0x00305,                    RUPEE_GREEN
+Lost Woods Rupee Arrow 3,                                   rupee,          NONE,                 LOST_WOODS,                     0x00306,                    RUPEE_GREEN
+Lost Woods Rupee Arrow 4,                                   rupee,          NONE,                 LOST_WOODS,                     0x00307,                    RUPEE_GREEN
+Lost Woods Rupee Arrow 5,                                   rupee,          NONE,                 LOST_WOODS,                     0x00308,                    RUPEE_GREEN
+Lost Woods Rupee Arrow 6,                                   rupee,          NONE,                 LOST_WOODS,                     0x00309,                    RUPEE_GREEN
+Lost Woods Rupee Arrow 7,                                   rupee,          NONE,                 LOST_WOODS,                     0x0030a,                    RUPEE_GREEN
+Lost Woods Rupee Arrow 8,                                   rupee,          NONE,                 LOST_WOODS,                     0x0030b,                    RUPEE_GREEN
+Lost Woods Rupee Boulder,                                   rupee,          NONE,                 LOST_WOODS,                     0x00704,                    RUPEE_BLUE
 Deku Theater Sticks Upgrade,                                npc,            NONE,                 GROTTOS,                        THEATER_STICKS,             STICK_UPGRADE
 Deku Theater Nuts Upgrade,                                  npc,            NONE,                 GROTTOS,                        THEATER_NUTS,               NUT_UPGRADE
 Saria's Song,                                               npc,            NONE,                 SACRED_FOREST_MEADOW,           SARIA_SONG,                 SONG_SARIA
@@ -179,6 +203,14 @@ Graveyard Dampe Tomb Pot 3,                                 pot,            NONE
 Graveyard Dampe Tomb Pot 4,                                 pot,            NONE,                 TOMB_DAMPE_WINDMILL,            0x0003,                     ARROWS_5
 Graveyard Dampe Tomb Pot 5,                                 pot,            NONE,                 TOMB_DAMPE_WINDMILL,            0x0004,                     MAGIC_JAR_SMALL
 Graveyard Dampe Tomb Pot 6,                                 pot,            NONE,                 TOMB_DAMPE_WINDMILL,            0x0005,                     RUPEE_RED
+Graveyard Dampe Tomb Rupee 1,                               rupee,          NONE,                 TOMB_DAMPE_WINDMILL,            0x00100,                    RUPEE_GREEN
+Graveyard Dampe Tomb Rupee 2,                               rupee,          NONE,                 TOMB_DAMPE_WINDMILL,            0x00101,                    RUPEE_GREEN
+Graveyard Dampe Tomb Rupee 3,                               rupee,          NONE,                 TOMB_DAMPE_WINDMILL,            0x00102,                    RUPEE_GREEN
+Graveyard Dampe Tomb Rupee 4,                               rupee,          NONE,                 TOMB_DAMPE_WINDMILL,            0x00200,                    RUPEE_GREEN
+Graveyard Dampe Tomb Rupee 5,                               rupee,          NONE,                 TOMB_DAMPE_WINDMILL,            0x00201,                    RUPEE_GREEN
+Graveyard Dampe Tomb Rupee 6,                               rupee,          NONE,                 TOMB_DAMPE_WINDMILL,            0x00202,                    RUPEE_GREEN
+Graveyard Dampe Tomb Rupee 7,                               rupee,          NONE,                 TOMB_DAMPE_WINDMILL,            0x00300,                    RUPEE_GREEN
+Graveyard Dampe Tomb Rupee 8,                               rupee,          NONE,                 TOMB_DAMPE_WINDMILL,            0x00301,                    RUPEE_GREEN
 Graveyard Crate HP,                                         collectible,    NONE,                 GRAVEYARD,                      0x04,                       HEART_PIECE
 Graveyard GS Soil,                                          gs,             NONE,                 GRAVEYARD,                      0x88,                       GS_TOKEN
 Graveyard GS Wall,                                          gs,             NONE,                 GRAVEYARD,                      0x8f,                       GS_TOKEN
@@ -211,6 +243,15 @@ Death Mountain GS Before Climb,                             gs,             NONE
 Death Mountain Cow,                                         cow,            NONE,                 DEATH_MOUNTAIN_TRAIL,           0x07,                       MILK
 Death Mountain Cow Grotto Grass 1,                          grass,          NONE,                 GROTTOS,                        0x00301,                    RANDOM
 Death Mountain Cow Grotto Grass 2,                          grass,          NONE,                 GROTTOS,                        0x00302,                    RANDOM
+Death Mountain Cow Grotto Rupee 1,                          rupee,          NONE,                 GROTTOS,                        0x00305,                    RUPEE_GREEN
+Death Mountain Cow Grotto Rupee 2,                          rupee,          NONE,                 GROTTOS,                        0x10305,                    RUPEE_GREEN
+Death Mountain Cow Grotto Rupee 3,                          rupee,          NONE,                 GROTTOS,                        0x20305,                    RUPEE_GREEN
+Death Mountain Cow Grotto Rupee 4,                          rupee,          NONE,                 GROTTOS,                        0x30305,                    RUPEE_GREEN
+Death Mountain Cow Grotto Rupee 5,                          rupee,          NONE,                 GROTTOS,                        0x40305,                    RUPEE_GREEN
+Death Mountain Cow Grotto Rupee 6,                          rupee,          NONE,                 GROTTOS,                        0x50305,                    RUPEE_GREEN
+Death Mountain Cow Grotto Rupee 7,                          rupee,          NONE,                 GROTTOS,                        0x60305,                    RUPEE_RED
+Death Mountain Rupee Upper,                                 rupee,          NONE,                 DEATH_MOUNTAIN_TRAIL,           0x00001,                    RUPEE_RED
+Death Mountain Rupee Lower,                                 rupee,          NONE,                 DEATH_MOUNTAIN_TRAIL,           0x00002,                    RUPEE_BLUE
 Darunia,                                                    npc,            NONE,                 GORON_CITY,                     DARUNIA_BRACELET,           STRENGTH
 Goron City Maze Center 1,                                   chest,          NONE,                 GORON_CITY,                     0x02,                       RUPEE_PURPLE
 Goron City Maze Center 2,                                   chest,          NONE,                 GORON_CITY,                     0x01,                       RUPEE_PURPLE
@@ -259,6 +300,21 @@ Death Mountain Crater Pot 1,                                pot,            NONE
 Death Mountain Crater Pot 2,                                pot,            NONE,                 DEATH_MOUNTAIN_CRATER,          0x810e,                     ARROWS_5
 Death Mountain Crater Pot 3,                                pot,            NONE,                 DEATH_MOUNTAIN_CRATER,          0x810f,                     RUPEE_BLUE
 Death Mountain Crater Pot 4,                                pot,            NONE,                 DEATH_MOUNTAIN_CRATER,          0x8110,                     MAGIC_JAR_SMALL
+Death Mountain Crater Rupee Child 1,                        rupee,          NONE,                 DEATH_MOUNTAIN_CRATER,          0x00101,                    RUPEE_RED
+Death Mountain Crater Rupee Child 2,                        rupee,          NONE,                 DEATH_MOUNTAIN_CRATER,          0x00102,                    RUPEE_RED
+Death Mountain Crater Rupee Child 3,                        rupee,          NONE,                 DEATH_MOUNTAIN_CRATER,          0x00103,                    RUPEE_BLUE
+Death Mountain Crater Rupee Child 4,                        rupee,          NONE,                 DEATH_MOUNTAIN_CRATER,          0x00104,                    RUPEE_BLUE
+Death Mountain Crater Rupee Child 5,                        rupee,          NONE,                 DEATH_MOUNTAIN_CRATER,          0x00105,                    RUPEE_BLUE
+Death Mountain Crater Rupee Child 6,                        rupee,          NONE,                 DEATH_MOUNTAIN_CRATER,          0x00106,                    RUPEE_BLUE
+Death Mountain Crater Rupee Child 7,                        rupee,          NONE,                 DEATH_MOUNTAIN_CRATER,          0x00107,                    RUPEE_BLUE
+Death Mountain Crater Rupee Child 8,                        rupee,          NONE,                 DEATH_MOUNTAIN_CRATER,          0x00108,                    RUPEE_BLUE
+Death Mountain Crater Rupee Adult 1,                        rupee,          NONE,                 DEATH_MOUNTAIN_CRATER,          0x08112,                    RUPEE_GREEN
+Death Mountain Crater Rupee Adult 2,                        rupee,          NONE,                 DEATH_MOUNTAIN_CRATER,          0x18112,                    RUPEE_GREEN
+Death Mountain Crater Rupee Adult 3,                        rupee,          NONE,                 DEATH_MOUNTAIN_CRATER,          0x28112,                    RUPEE_GREEN
+Death Mountain Crater Rupee Adult 4,                        rupee,          NONE,                 DEATH_MOUNTAIN_CRATER,          0x38112,                    RUPEE_GREEN
+Death Mountain Crater Rupee Adult 5,                        rupee,          NONE,                 DEATH_MOUNTAIN_CRATER,          0x48112,                    RUPEE_GREEN
+Death Mountain Crater Rupee Adult 6,                        rupee,          NONE,                 DEATH_MOUNTAIN_CRATER,          0x58112,                    RUPEE_GREEN
+Death Mountain Crater Rupee Adult 7,                        rupee,          NONE,                 DEATH_MOUNTAIN_CRATER,          0x68112,                    RUPEE_RED
 Zora River HP Pillar,                                       collectible,    NONE,                 ZORA_RIVER,                     0x04,                       HEART_PIECE
 Zora River HP Platform,                                     collectible,    NONE,                 ZORA_RIVER,                     0x0b,                       HEART_PIECE
 Zora River Bean Seller,                                     npc,            NONE,                 ZORA_RIVER,                     BEAN_SELLER,                MAGIC_BEAN
@@ -296,6 +352,10 @@ Zora River Fairy Fountain Fairy 5,                          fairy,          NONE
 Zora River Fairy Fountain Fairy 6,                          fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x52100,                    FAIRY
 Zora River Fairy Fountain Fairy 7,                          fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x62100,                    FAIRY
 Zora River Fairy Fountain Fairy 8,                          fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x72100,                    FAIRY
+Zora River Rupee 1,                                         rupee,          NONE,                 ZORA_RIVER,                     0x08101,                    RUPEE_RED
+Zora River Rupee 2,                                         rupee,          NONE,                 ZORA_RIVER,                     0x08102,                    RUPEE_RED
+Zora River Rupee 3,                                         rupee,          NONE,                 ZORA_RIVER,                     0x08103,                    RUPEE_RED
+Zora River Rupee 4,                                         rupee,          NONE,                 ZORA_RIVER,                     0x08104,                    RUPEE_RED
 Zora Domain Waterfall Chest,                                chest,          NONE,                 ZORA_DOMAIN,                    0x00,                       HEART_PIECE
 Zora Domain Diving Game,                                    npc,            NONE,                 ZORA_DOMAIN,                    ZORA_DIVING_GAME,           SCALE
 Zora Domain Diving Game Green Rupee,                        collectible,    NONE,                 ZORA_DOMAIN,                    0x0,                        RUPEE_GREEN
@@ -339,6 +399,24 @@ Zora Fountain Child Pot 4,                                  pot,            NONE
 Zora Fountain Adult Pot 1,                                  pot,            NONE,                 ZORA_FOUNTAIN,                  0x802a,                     MAGIC_JAR_LARGE
 Zora Fountain Adult Pot 2,                                  pot,            NONE,                 ZORA_FOUNTAIN,                  0x802b,                     MAGIC_JAR_LARGE
 Zora Fountain Adult Pot 3,                                  pot,            NONE,                 ZORA_FOUNTAIN,                  0x802c,                     ARROWS_10
+Zora Fountain Rupee 01,                                     rupee,          NONE,                 ZORA_FOUNTAIN,                  0x08000,                    RUPEE_GREEN
+Zora Fountain Rupee 02,                                     rupee,          NONE,                 ZORA_FOUNTAIN,                  0x08001,                    RUPEE_GREEN
+Zora Fountain Rupee 03,                                     rupee,          NONE,                 ZORA_FOUNTAIN,                  0x08002,                    RUPEE_GREEN
+Zora Fountain Rupee 04,                                     rupee,          NONE,                 ZORA_FOUNTAIN,                  0x08003,                    RUPEE_GREEN
+Zora Fountain Rupee 05,                                     rupee,          NONE,                 ZORA_FOUNTAIN,                  0x08004,                    RUPEE_GREEN
+Zora Fountain Rupee 06,                                     rupee,          NONE,                 ZORA_FOUNTAIN,                  0x08005,                    RUPEE_GREEN
+Zora Fountain Rupee 07,                                     rupee,          NONE,                 ZORA_FOUNTAIN,                  0x08006,                    RUPEE_GREEN
+Zora Fountain Rupee 08,                                     rupee,          NONE,                 ZORA_FOUNTAIN,                  0x08007,                    RUPEE_GREEN
+Zora Fountain Rupee 09,                                     rupee,          NONE,                 ZORA_FOUNTAIN,                  0x08008,                    RUPEE_GREEN
+Zora Fountain Rupee 10,                                     rupee,          NONE,                 ZORA_FOUNTAIN,                  0x08009,                    RUPEE_GREEN
+Zora Fountain Rupee 11,                                     rupee,          NONE,                 ZORA_FOUNTAIN,                  0x0800a,                    RUPEE_GREEN
+Zora Fountain Rupee 12,                                     rupee,          NONE,                 ZORA_FOUNTAIN,                  0x0800b,                    RUPEE_GREEN
+Zora Fountain Rupee 13,                                     rupee,          NONE,                 ZORA_FOUNTAIN,                  0x0800c,                    RUPEE_GREEN
+Zora Fountain Rupee 14,                                     rupee,          NONE,                 ZORA_FOUNTAIN,                  0x0800d,                    RUPEE_GREEN
+Zora Fountain Rupee 15,                                     rupee,          NONE,                 ZORA_FOUNTAIN,                  0x0800e,                    RUPEE_GREEN
+Zora Fountain Rupee 16,                                     rupee,          NONE,                 ZORA_FOUNTAIN,                  0x0800f,                    RUPEE_GREEN
+Zora Fountain Rupee 17,                                     rupee,          NONE,                 ZORA_FOUNTAIN,                  0x08010,                    RUPEE_GREEN
+Zora Fountain Rupee 18,                                     rupee,          NONE,                 ZORA_FOUNTAIN,                  0x08011,                    RUPEE_GREEN
 Lake Hylia Underwater Bottle,                               npc,            NONE,                 LAKE_HYLIA,                     RUTO_LETTER,                RUTO_LETTER
 Lake Hylia Fire Arrow,                                      npc,            SHOOT_SUN,            LAKE_HYLIA,                     FIRE_ARROW,                 ARROW_FIRE
 Lake Hylia HP,                                              collectible,    NONE,                 LAKE_HYLIA,                     0x1e,                       HEART_PIECE
@@ -394,9 +472,15 @@ Lake Hylia Grass Pack 3 Bush 09,                            grass,          NONE
 Lake Hylia Grass Pack 3 Bush 10,                            grass,          NONE,                 LAKE_HYLIA,                     0x90020,                    RANDOM
 Lake Hylia Grass Pack 3 Bush 11,                            grass,          NONE,                 LAKE_HYLIA,                     0xa0020,                    RANDOM
 Lake Hylia Grass Pack 3 Bush 12,                            grass,          NONE,                 LAKE_HYLIA,                     0xb0020,                    RANDOM
+Lake Hylia Rupee 1,                                         rupee,          NONE,                 LAKE_HYLIA,                     0x00031,                    RUPEE_GREEN
+Lake Hylia Rupee 2,                                         rupee,          NONE,                 LAKE_HYLIA,                     0x00032,                    RUPEE_GREEN
+Lake Hylia Rupee 3,                                         rupee,          NONE,                 LAKE_HYLIA,                     0x00033,                    RUPEE_GREEN
 Laboratory Dive,                                            npc,            NONE,                 LABORATORY,                     LABORATORY_DIVE,            HEART_PIECE
 Laboratory Eye Drops,                                       npc,            NONE,                 LABORATORY,                     TRADE_EYE_DROPS,            EYE_DROPS
 Laboratory GS Crate,                                        gs,             NONE,                 LABORATORY,                     0x9b,                       GS_TOKEN
+Laboratory Rupee 1,                                         rupee,          NONE,                 LABORATORY,                     0x00001,                    RUPEE_RED
+Laboratory Rupee 2,                                         rupee,          NONE,                 LABORATORY,                     0x00002,                    RUPEE_RED
+Laboratory Rupee 3,                                         rupee,          NONE,                 LABORATORY,                     0x00003,                    RUPEE_RED
 Fishing Pond Child,                                         npc,            FISHING,              FISHING_POND,                   FISH_CHILD,                 HEART_PIECE
 Fishing Pond Adult,                                         npc,            FISHING,              FISHING_POND,                   FISH_ADULT,                 SCALE
 Fishing Pond Child Fish 1,                                  fish,           NONE,                 FISHING_POND,                   0x00,                       FISHING_POND_CHILD_FISH
@@ -675,6 +759,14 @@ Gerudo Valley GS Wall,                                      gs,             NONE
 Gerudo Valley GS Tent,                                      gs,             NONE,                 GERUDO_VALLEY,                  0xa3,                       GS_TOKEN
 Gerudo Valley GS Pillar,                                    gs,             NONE,                 GERUDO_VALLEY,                  0xa2,                       GS_TOKEN
 Gerudo Valley Cow,                                          cow,            NONE,                 GERUDO_VALLEY,                  0x08,                       MILK
+Gerudo Valley Octorok Grotto Rupee 1,                       rupee,          NONE,                 GROTTOS,                        0x00501,                    RUPEE_BLUE
+Gerudo Valley Octorok Grotto Rupee 2,                       rupee,          NONE,                 GROTTOS,                        0x00502,                    RUPEE_BLUE
+Gerudo Valley Octorok Grotto Rupee 3,                       rupee,          NONE,                 GROTTOS,                        0x00503,                    RUPEE_BLUE
+Gerudo Valley Octorok Grotto Rupee 4,                       rupee,          NONE,                 GROTTOS,                        0x00504,                    RUPEE_GREEN
+Gerudo Valley Octorok Grotto Rupee 5,                       rupee,          NONE,                 GROTTOS,                        0x00505,                    RUPEE_GREEN
+Gerudo Valley Octorok Grotto Rupee 6,                       rupee,          NONE,                 GROTTOS,                        0x00506,                    RUPEE_GREEN
+Gerudo Valley Octorok Grotto Rupee 7,                       rupee,          NONE,                 GROTTOS,                        0x00507,                    RUPEE_GREEN
+Gerudo Valley Octorok Grotto Rupee 8,                       rupee,          NONE,                 GROTTOS,                        0x00508,                    RUPEE_RED
 Gerudo Fortress Chest,                                      chest,          NONE,                 GERUDO_FORTRESS,                0x00,                       HEART_PIECE
 Gerudo Fortress Archery Reward 1,                           npc,            GERUDO_ARCHERY,       GERUDO_FORTRESS,                GERUDO_ARCHERY_1,           HEART_PIECE
 Gerudo Fortress Archery Reward 2,                           npc,            GERUDO_ARCHERY,       GERUDO_FORTRESS,                GERUDO_ARCHERY_2,           BOW
@@ -945,6 +1037,10 @@ Ice Cavern Pot Red Ice 1,                                   pot,            NONE
 Ice Cavern Pot Red Ice 2,                                   pot,            NONE,                 ICE_CAVERN,                     0x0601,                     RECOVERY_HEART
 Ice Cavern Pot Map Room,                                    pot,            NONE,                 ICE_CAVERN,                     0x0909,                     RUPEE_PURPLE
 Ice Cavern Flying Pot Scythe Room,                          pot,            NONE,                 ICE_CAVERN,                     0x030b,                     RECOVERY_HEART
+Ice Cavern Rupee Ice,                                       rupee,          NONE,                 ICE_CAVERN,                     0x00100,                    RUPEE_BLUE
+Ice Cavern Rupee Midair 1,                                  rupee,          NONE,                 ICE_CAVERN,                     0x00500,                    RUPEE_RED
+Ice Cavern Rupee Midair 2,                                  rupee,          NONE,                 ICE_CAVERN,                     0x00501,                    RUPEE_RED
+Ice Cavern Rupee Midair 3,                                  rupee,          NONE,                 ICE_CAVERN,                     0x00502,                    RUPEE_RED
 Water Temple Under Center,                                  chest,          NONE,                 TEMPLE_WATER,                   0x06,                       RUPEE_BLUE
 Water Temple Compass,                                       chest,          NONE,                 TEMPLE_WATER,                   0x09,                       COMPASS_WATER
 Water Temple Longshot,                                      chest,          NONE,                 TEMPLE_WATER,                   0x07,                       HOOKSHOT
@@ -1041,6 +1137,11 @@ Bottom of the Well Grass 09,                                grass,          NONE
 Bottom of the Well Grass 10,                                grass,          NONE,                 BOTTOM_OF_THE_WELL,             0x0010a,                    DEKU_SEEDS_5
 Bottom of the Well Grass 11,                                grass,          NONE,                 BOTTOM_OF_THE_WELL,             0x0010b,                    RECOVERY_HEART
 Bottom of the Well Grass 12,                                grass,          NONE,                 BOTTOM_OF_THE_WELL,             0x0010c,                    DEKU_SEEDS_5
+Bottom of the Well Rupee 1,                                 rupee,          NONE,                 BOTTOM_OF_THE_WELL,             0x0011a,                    RUPEE_BLUE
+Bottom of the Well Rupee 2,                                 rupee,          NONE,                 BOTTOM_OF_THE_WELL,             0x0011b,                    RUPEE_BLUE
+Bottom of the Well Rupee 3,                                 rupee,          NONE,                 BOTTOM_OF_THE_WELL,             0x0011c,                    RUPEE_BLUE
+Bottom of the Well Rupee 4,                                 rupee,          NONE,                 BOTTOM_OF_THE_WELL,             0x0011d,                    RUPEE_BLUE
+Bottom of the Well Rupee 5,                                 rupee,          NONE,                 BOTTOM_OF_THE_WELL,             0x0011e,                    RUPEE_BLUE
 Shadow Temple Map,                                          chest,          NONE,                 TEMPLE_SHADOW,                  0x01,                       MAP_SHADOW
 Shadow Temple Hover Boots,                                  chest,          NONE,                 TEMPLE_SHADOW,                  0x07,                       BOOTS_HOVER
 Shadow Temple Silver Rupees,                                chest,          NONE,                 TEMPLE_SHADOW,                  0x02,                       SMALL_KEY_SHADOW
@@ -1477,6 +1578,9 @@ MQ Jabu-Jabu Grass Big Octo Top 1,                          grass,          NONE
 MQ Jabu-Jabu Grass Big Octo Top 2,                          grass,          NONE,                 INSIDE_JABU_JABU,               0x00605,                    DEKU_SEEDS_5
 MQ Jabu-Jabu Grass Torch Room,                              grass,          NONE,                 INSIDE_JABU_JABU,               0x00b04,                    RECOVERY_HEART
 MQ Jabu-Jabu Grass Boomerang Room,                          grass,          NONE,                 INSIDE_JABU_JABU,               0x00e02,                    DEKU_SEEDS_5
+MQ Jabu-Jabu Rupee 1,                                       rupee,          NONE,                 INSIDE_JABU_JABU,               0x00100,                    RUPEE_GREEN
+MQ Jabu-Jabu Rupee 2,                                       rupee,          NONE,                 INSIDE_JABU_JABU,               0x00101,                    RUPEE_GREEN
+MQ Jabu-Jabu Rupee 3,                                       rupee,          NONE,                 INSIDE_JABU_JABU,               0x00102,                    RUPEE_GREEN
 MQ Bottom of the Well Map Chest,                            chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x03,                       MAP_BOTW
 MQ Bottom of the Well Compass Chest,                        chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x02,                       COMPASS_BOTW
 MQ Bottom of the Well Lens Chest,                           chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x01,                       LENS

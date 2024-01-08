@@ -84,6 +84,8 @@ Actor* SpawnRoomActor(void* unk, GameState_Play *play, short actorId, float x, f
     Actor* a;
 
     a = comboSpawnActor(unk, play, actorId, x, y, z, rx, ry, rz, variable);
+    if (a != NULL && actorId == AC_EN_ITEM00)
+        EnItem00_XflagInitFreestanding((Actor_EnItem00*)a, play, g.actorIndex, 0);
     g.actorIndex++;
     return a;
 }

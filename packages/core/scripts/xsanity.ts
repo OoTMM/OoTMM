@@ -121,6 +121,7 @@ const MM_SCENES_WITH_EXTRA_SETUPS: {[k: number]: number} = {
 };
 
 const ACTORS_OOT = {
+  EN_ITEM00: 0x15,
   POT: 0x111,
   FLYING_POT: 0x11d,
   ROCK_BUSH_GROUP: 0x151,
@@ -128,6 +129,7 @@ const ACTORS_OOT = {
   OBJ_HANA: 0x14f,
   EN_ELF: 0x18,
   BG_SPOT11_OASIS: 0x1C2,
+  OBJ_MURE3: 0x1ab,
 };
 
 const ACTORS_MM = {
@@ -145,6 +147,7 @@ const ACTOR_SLICES_OOT = {
   [ACTORS_OOT.ROCK_BUSH_GROUP]: 12,
   [ACTORS_OOT.EN_ELF]: 8,
   [ACTORS_OOT.BG_SPOT11_OASIS]: 8,
+  [ACTORS_OOT.OBJ_MURE3]: 9,
 }
 
 const ACTOR_SLICES_MM = {
@@ -177,6 +180,14 @@ const CONFIGS = {
     SLICES: ACTOR_SLICES_MM,
   }
 }
+
+const RUPEES = new Set([
+  'RUPEE_GREEN',
+  'RUPEE_BLUE',
+  'RUPEE_RED',
+  'RUPEE_PURPLE',
+  'RUPEE_HUGE',
+]);
 
 const ITEM00_DROPS = [
   'RUPEE_GREEN',
@@ -634,27 +645,40 @@ function outputFairyPoolOot(roomActors: RoomActors[]) {
   }
 }
 
-function outputFairyPoolMm(roomActors: RoomActors[]) {
+
+function outputRupeesOot(roomActors: RoomActors[]) {
   let lastSceneId = -1;
   let lastSetupId = -1;
   for (const room of roomActors) {
     for (const actor of room.actors) {
-      if (actor.typeId === ACTORS_MM.EN_ELF) {
-        var validFairy = actor.typeId === ACTORS_MM.EN_ELF && actor.params === 4;
-        if (!validFairy) {
-          console.log("Fairy not valid: " + JSON.stringify(actor));
+      if (actor.typeId === ACTORS_OOT.EN_ITEM00) {
+        const item00arg = (actor.params >> 0) & 0xff;
+        const item = ITEM00_DROPS[item00arg];
+        if (!RUPEES.has(item)) {
           continue;
         }
-        const item = 'FAIRY';
+        const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
         if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
           console.log('');
           lastSceneId = room.sceneId;
           lastSetupId = room.setupId;
         }
-        const count = 8;
-        for (let i = 0; i < count; ++i) {
+        /* PRINT */
+        console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Rupee ${decPad(actor.actorId + 1, 2)},        rupee,            NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
+      }
+
+      if (actor.typeId === ACTORS_OOT.OBJ_MURE3) {
+        let items: string[] = [];
+        switch (actor.params & 0xe000) {
+        case 0x0000: items = ['RUPEE_BLUE', 'RUPEE_BLUE', 'RUPEE_BLUE', 'RUPEE_BLUE', 'RUPEE_BLUE']; break;
+        case 0x2000: items = ['RUPEE_GREEN', 'RUPEE_GREEN', 'RUPEE_GREEN', 'RUPEE_GREEN', 'RUPEE_GREEN']; break;
+        case 0x4000: items = ['RUPEE_GREEN', 'RUPEE_GREEN', 'RUPEE_GREEN', 'RUPEE_GREEN', 'RUPEE_GREEN', 'RUPEE_GREEN', 'RUPEE_RED']; break;
+        }
+
+        for (let i = 0; i < items.length; ++i) {
+          const item = items[i];
           const key = (i << 16) | ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
-          console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Fairy Group ${decPad(actor.actorId + 1, 2)} Fairy ${decPad(i + 1, 2)},             fairy,            NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
+          console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Rupee Circle ${decPad(actor.actorId + 1, 2)} Rupee ${decPad(i + 1, 2)},             rupee,            NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
         }
       }
     }
@@ -993,7 +1017,7 @@ async function run() {
   //outputKeatonGrassPoolMm(mmRooms);
   //outputGrassPoolOot(mqRooms);
   //outputFairyPoolOot(ootRooms);
-  outputFairyPoolMm(mmRooms);
+  outputRupeesOot(mqRooms);
 }
 
 run().catch(e => {

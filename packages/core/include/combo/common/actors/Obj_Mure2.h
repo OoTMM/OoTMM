@@ -16,8 +16,6 @@ typedef struct ALIGNED(4)
 }
 Actor_ObjMure2;
 
-static const int x = sizeof(Actor_ObjMure2);
-
 _Static_assert(sizeof(Actor_ObjMure2) == (sizeof(Actor) + 0x44), "Actor_ObjMure2 size is wrong");
 
 #endif

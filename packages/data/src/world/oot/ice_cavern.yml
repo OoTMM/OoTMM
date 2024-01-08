@@ -4,6 +4,8 @@
     "Zora Fountain Frozen": "true"
     "Ice Cavern Scythe": "soul_freezard && (can_use_sword_master || can_use_sword_goron || can_use_sticks || has_explosives)"
     "Ice Cavern End": "has_iron_boots && (climb_anywhere || hookshot_anywhere)"
+  locations:
+    "Ice Cavern Rupee Ice": "has_blue_fire"
 "Ice Cavern Scythe":
   dungeon: IC
   exits:
@@ -54,6 +56,9 @@
     "Ice Cavern SR Blocks Front Left": "true"
     "Ice Cavern Pot Red Ice 1": "silver_rupees_ic_block"
     "Ice Cavern Pot Red Ice 2": "silver_rupees_ic_block"
+    "Ice Cavern Rupee Midair 1": "can_play_time"
+    "Ice Cavern Rupee Midair 2": "can_play_time"
+    "Ice Cavern Rupee Midair 3": "can_play_time"
 "Ice Cavern End":
   dungeon: IC
   exits:
