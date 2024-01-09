@@ -130,5 +130,24 @@ PATCH_CALL(0x800a8024, EnItem00_FixDropWrapper);
 
 void EnItem00_AliasFreestandingRupee(Xflag* xflag)
 {
-
+    switch (xflag->sceneId)
+    {
+    case SCE_MM_LAUNDRY_POOL:
+        switch (xflag->id)
+        {
+        case 0x14:
+        case 0x15:
+            xflag->id = 0x13;
+            break;
+        case 0x17:
+        case 0x18:
+            xflag->id = 0x16;
+            break;
+        case 0x1a:
+        case 0x1b:
+            xflag->id = 0x19;
+            break;
+        }
+        break;
+    }
 }
