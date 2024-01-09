@@ -26,11 +26,11 @@
   locations:
     "Great Bay Temple SF Water Wheel Platform": "has_mask_zora || (has(MASK_GREAT_FAIRY) && (has_arrows || can_hookshot)) || (short_hook_anywhere && trick(MM_GBT_FAIRY2_HOOK))"
     "Great Bay Temple SF Water Wheel Skulltula": "soul_skulltula && (can_fight || has_weapon_range || has_explosives)"
-    "Great Bay Temple Rupee Entrance 1": "has_mask_zora"
-    "Great Bay Temple Rupee Entrance 2": "has_mask_zora"
-    "Great Bay Temple Rupee Entrance 3": "has_mask_zora"
-    "Great Bay Temple Rupee Entrance 4": "has_mask_zora"
-    "Great Bay Temple Rupee Entrance 5": "has_mask_zora"
+    "Great Bay Temple Rupee Entrance 1": "true"
+    "Great Bay Temple Rupee Entrance 2": "true"
+    "Great Bay Temple Rupee Entrance 3": "true"
+    "Great Bay Temple Rupee Entrance 4": "true"
+    "Great Bay Temple Rupee Entrance 5": "true"
 "Great Bay Temple Central Room":
   dungeon: GB
   exits:
@@ -96,8 +96,8 @@
     "Great Bay Temple Pot Compass Room Water 1": "has_mask_zora || short_hook_anywhere"
     "Great Bay Temple Pot Compass Room Water 2": "has_mask_zora || short_hook_anywhere"
     "Great Bay Temple Pot Compass Room Water 3": "has_mask_zora || short_hook_anywhere"
-    "Great Bay Temple Rupee Compass Room 1": "true"
-    "Great Bay Temple Rupee Compass Room 2": "true"
+    "Great Bay Temple Rupee Compass Room 1": "has_mask_zora || short_hook_anywhere"
+    "Great Bay Temple Rupee Compass Room 2": "has_mask_zora || short_hook_anywhere"
 "Great Bay Temple Red Pipe 1":
   dungeon: GB
   exits:
@@ -165,8 +165,8 @@
     "Great Bay Temple Pot Green Pipe 1 2": "has_mask_zora || hookshot_anywhere"
     "Great Bay Temple Pot Green Pipe 1 3": "has_mask_zora || hookshot_anywhere"
     "Great Bay Temple Pot Green Pipe 1 4": "has_mask_zora || hookshot_anywhere"
-    "Great Bay Temple Rupee Hookshot 1": "can_hookshot"
-    "Great Bay Temple Rupee Hookshot 2": "can_hookshot"
+    "Great Bay Temple Rupee Hookshot 1": "can_hookshot || short_hook_anywhere"
+    "Great Bay Temple Rupee Hookshot 2": "can_hookshot || short_hook_anywhere"
 "Great Bay Temple Green Pipe 2":
   dungeon: GB
   exits:

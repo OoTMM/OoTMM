@@ -188,8 +188,8 @@
   locations:
     "Woodfall Temple Pot Pre-Boss 1": "true"
     "Woodfall Temple Pot Pre-Boss 2": "true"
-    "Woodfall Temple Rupee Upper 1": "has(MASK_DEKU) || has_mask_zora"
-    "Woodfall Temple Rupee Upper 2": "has(MASK_DEKU) || has_mask_zora"
+    "Woodfall Temple Rupee Upper Left": "has_mask_zora || short_hook_anywhere || (can_use_ice_arrows && trick(MM_WFT_RUPEES_ICE))"
+    "Woodfall Temple Rupee Upper Right": "has(MASK_DEKU) || has_mask_zora || hookshot_anywhere || (can_use_ice_arrows && trick(MM_WFT_RUPEES_ICE))"
 "Woodfall Temple Princess Jail":
   dungeon: WF
   events:

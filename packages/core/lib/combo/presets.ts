@@ -699,6 +699,8 @@ const PRESET_HELL = makeSettings({
     'MM_GBT_CENTRAL_GEYSER',
     'MM_BANK_NO_WALLET',
     'MM_CLOCK_TOWER_WAIT',
+    'MM_WFT_RUPEES_ICE',
+    'MM_ISTT_RUPEES_GORON',
   ]
 });
 

@@ -354,9 +354,9 @@
     "Clock Town Laundry Pool Grass 1": "true"
     "Clock Town Laundry Pool Grass 2": "true"
     "Clock Town Laundry Pool Grass 3": "true"
-    "Clock Town Laundry Pool Rupee 1": "true"
-    "Clock Town Laundry Pool Rupee 2": "true"
-    "Clock Town Laundry Pool Rupee 3": "true"
+    "Clock Town Laundry Pool Rupee 1": "second_day"
+    "Clock Town Laundry Pool Rupee 2": "second_day"
+    "Clock Town Laundry Pool Rupee 3": "second_day"
 "Clock Town Fairy Fountain":
   region: ENTRANCE
   exits:
@@ -1238,8 +1238,8 @@
     "Southern Swamp Grass Near Witch Pack 2 Grass 09": "true"
     "Southern Swamp Grass Near Witch 1": "true"
     "Southern Swamp Grass Near Witch 2": "true"
-    "Southern Swamp Rupee 1": "has(MASK_DEKU)"
-    "Southern Swamp Rupee 2": "has(MASK_DEKU)"
+    "Southern Swamp Rupee 1": "has(MASK_DEKU) || has_mask_zora || short_hook_anywhere"
+    "Southern Swamp Rupee 2": "has(MASK_DEKU) || has_mask_zora || short_hook_anywhere"
   gossip:
     "Southern Swamp Gossip": "true"
 "Swamp Back":
@@ -1529,7 +1529,7 @@
     "Woodfall Grass 4": "true"
     "Woodfall Grass 5": "true"
     "Woodfall Grass 6": "true"
-    "Woodfall Rupee": "has(MASK_DEKU)"
+    "Woodfall Rupee": "(has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP))) || hookshot_anywhere"
 "Woodfall Front of Temple":
   region: WOODFALL
   exits:
@@ -1539,7 +1539,7 @@
 "Woodfall Shrine":
   region: WOODFALL
   exits:
-    "Woodfall": "(has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP))) || event(CLEAN_SWAMP) || hookshot_anywhere"
+    "Woodfall": "(has(MASK_DEKU) && soul_deku_scrub) || event(CLEAN_SWAMP) || hookshot_anywhere"
     "Woodfall Near Fairy Fountain": "(has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP) || short_hook_anywhere)) || hookshot_anywhere"
     "Woodfall Front of Temple": "event(OPEN_WOODFALL_TEMPLE)"
     "Owl Woodfall": "true"
@@ -1699,7 +1699,7 @@
     "Mountain Village Keaton Grass Reward 7": "event(BOSS_SNOWHEAD) && keaton_grass_hard"
     "Mountain Village Keaton Grass Reward 8": "event(BOSS_SNOWHEAD) && keaton_grass_hard"
     "Mountain Village Keaton Grass Reward 9": "event(BOSS_SNOWHEAD) && keaton_grass_hard"
-    "Mountain Village Rupee": "event(BOSS_SNOWHEAD)"
+    "Mountain Village Rupee": "event(BOSS_SNOWHEAD) && has_mask_goron"
 "Near Village Grotto":
   region: MOUNTAIN_VILLAGE
   exits:

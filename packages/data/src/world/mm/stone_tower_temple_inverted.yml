@@ -27,8 +27,8 @@
   locations:
     "Stone Tower Temple Inverted East Lower Chest": "(has(MASK_DEKU) || short_hook_anywhere) && can_use_fire_arrows"
     "Stone Tower Temple Inverted East Upper Chest": "(has(MASK_DEKU) || hookshot_anywhere) && can_use_elegy && event(STONE_TOWER_WATER_CHEST_SWITCH)"
-    "Stone Tower Temple Inverted Rupee Alcove 1": "can_use_light_arrows && can_hookshot"
-    "Stone Tower Temple Inverted Rupee Alcove 2": "can_use_light_arrows && can_hookshot"
+    "Stone Tower Temple Inverted Rupee Alcove 1": "(can_use_light_arrows && can_hookshot_short) || short_hook_anywhere"
+    "Stone Tower Temple Inverted Rupee Alcove 2": "(can_use_light_arrows && can_hookshot_short) || short_hook_anywhere"
 "Stone Tower Temple Inverted East Bridge":
   dungeon: IST
   events:
@@ -158,14 +158,14 @@
     "Stone Tower Temple Inverted Rupee Pre-Boss Top 1": "can_hookshot_short"
     "Stone Tower Temple Inverted Rupee Pre-Boss Top 2": "can_hookshot_short"
     "Stone Tower Temple Inverted Rupee Pre-Boss Top 3": "can_hookshot_short"
-    "Stone Tower Temple Inverted Rupee Pre-Boss Bottom 1": "can_hookshot_short"
-    "Stone Tower Temple Inverted Rupee Pre-Boss Bottom 2": "can_hookshot_short"
-    "Stone Tower Temple Inverted Rupee Pre-Boss Bottom 3": "can_hookshot_short"
-    "Stone Tower Temple Inverted Rupee Pre-Boss Bottom 4": "can_hookshot_short"
-    "Stone Tower Temple Inverted Rupee Pre-Boss Bottom 5": "can_hookshot_short"
-    "Stone Tower Temple Inverted Rupee Pre-Boss Bottom 6": "can_hookshot_short"
-    "Stone Tower Temple Inverted Rupee Pre-Boss Bottom 7": "can_hookshot_short"
-    "Stone Tower Temple Inverted Rupee Pre-Boss Bottom 8": "can_hookshot_short"
+    "Stone Tower Temple Inverted Rupee Pre-Boss Front 1": "can_hookshot_short"
+    "Stone Tower Temple Inverted Rupee Pre-Boss Front 2": "can_hookshot_short"
+    "Stone Tower Temple Inverted Rupee Pre-Boss Front 3": "can_hookshot_short"
+    "Stone Tower Temple Inverted Rupee Pre-Boss Front 4": "can_hookshot_short"
+    "Stone Tower Temple Inverted Rupee Pre-Boss Back 1": "(can_hookshot_short && has_mask_zora) || (has_mask_goron && trick(MM_ISTT_RUPEES_GORON)) || short_hook_anywhere"
+    "Stone Tower Temple Inverted Rupee Pre-Boss Back 2": "(can_hookshot_short && has_mask_zora) || (has_mask_goron && trick(MM_ISTT_RUPEES_GORON)) || short_hook_anywhere"
+    "Stone Tower Temple Inverted Rupee Pre-Boss Back 3": "(can_hookshot_short && has_mask_zora) || (has_mask_goron && trick(MM_ISTT_RUPEES_GORON)) || short_hook_anywhere"
+    "Stone Tower Temple Inverted Rupee Pre-Boss Back 4": "(can_hookshot_short && has_mask_zora) || (has_mask_goron && trick(MM_ISTT_RUPEES_GORON)) || short_hook_anywhere"
 "Stone Tower Temple Boss Access":
   dungeon: IST
   exits:
