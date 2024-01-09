@@ -1237,6 +1237,8 @@
     "Southern Swamp Grass Near Witch Pack 2 Grass 09": "true"
     "Southern Swamp Grass Near Witch 1": "true"
     "Southern Swamp Grass Near Witch 2": "true"
+    "Southern Swamp Rupee 1": "has(MASK_DEKU)"
+    "Southern Swamp Rupee 2": "has(MASK_DEKU)"
   gossip:
     "Southern Swamp Gossip": "true"
 "Swamp Back":
