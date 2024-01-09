@@ -1611,6 +1611,14 @@ Pirate Fortress Sewers Pot Waterway 1,                  pot,            NONE,   
 Pirate Fortress Sewers Pot Waterway 2,                  pot,            NONE,                   PIRATE_FORTRESS_INTERIOR,     0x0a09,                     ARROWS_10
 Pirate Fortress Sewers Pot Heart Piece Room 1,          pot,            NONE,                   PIRATE_FORTRESS_INTERIOR,     0x0b22,                     ARROWS_20
 Pirate Fortress Sewers Pot Heart Piece Room 2,          pot,            NONE,                   PIRATE_FORTRESS_INTERIOR,     0x0b23,                     NOTHING
+Pirate Fortress Sewers Rupee Water Elevator 1,          rupee,          NONE,                   PIRATE_FORTRESS_INTERIOR,     0x0090b,                    RUPEE_BLUE
+Pirate Fortress Sewers Rupee Water Elevator 2,          rupee,          NONE,                   PIRATE_FORTRESS_INTERIOR,     0x0090c,                    RUPEE_BLUE
+Pirate Fortress Sewers Rupee Water Elevator 3,          rupee,          NONE,                   PIRATE_FORTRESS_INTERIOR,     0x0090d,                    RUPEE_BLUE
+Pirate Fortress Sewers Rupee Near Cage 1,               rupee,          NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b17,                    RUPEE_GREEN
+Pirate Fortress Sewers Rupee Near Cage 2,               rupee,          NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b1a,                    RUPEE_GREEN
+Pirate Fortress Sewers Rupee Near Cage 3,               rupee,          NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b1e,                    RUPEE_GREEN
+Pirate Fortress Sewers Rupee Near Cage 4,               rupee,          NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b21,                    RUPEE_GREEN
+Pirate Fortress Sewers Rupee Cage,                      rupee,          NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b24,                    RUPEE_BLUE
 Pirate Fortress Interior Hookshot,                      chest,          NONE,                   PIRATE_FORTRESS_INTERIOR,     0x02,                       HOOKSHOT
 Pirate Fortress Interior Aquarium,                      chest,          NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00,                       RUPEE_RED
 Pirate Fortress Interior Silver Rupee Chest,            chest,          NONE,                   PIRATE_FORTRESS_INTERIOR,     0x03,                       RUPEE_SILVER
