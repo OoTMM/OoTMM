@@ -63,6 +63,9 @@ Kokiri Forest Rupee Adult 4,                                rupee,          NONE
 Kokiri Forest Rupee Adult 5,                                rupee,          NONE,                 KOKIRI_FOREST,                  0x4800b,                    RUPEE_GREEN
 Kokiri Forest Rupee Adult 6,                                rupee,          NONE,                 KOKIRI_FOREST,                  0x5800b,                    RUPEE_GREEN
 Kokiri Forest Rupee Adult 7,                                rupee,          NONE,                 KOKIRI_FOREST,                  0x6800b,                    RUPEE_RED
+Kokiri Forest Heart 1,                                      heart,          NONE,                 KOKIRI_FOREST,                  0x00013,                    RECOVERY_HEART
+Kokiri Forest Heart 2,                                      heart,          NONE,                 KOKIRI_FOREST,                  0x00014,                    RECOVERY_HEART
+Kokiri Forest Heart 3,                                      heart,          NONE,                 KOKIRI_FOREST,                  0x00015,                    RECOVERY_HEART
 Kokiri Shop Item 1,                                         shop,           NONE,                 KOKIRI_FOREST,                  0x00,                       RECOVERY_HEART
 Kokiri Shop Item 2,                                         shop,           NONE,                 KOKIRI_FOREST,                  0x01,                       ARROWS_10
 Kokiri Shop Item 3,                                         shop,           NONE,                 KOKIRI_FOREST,                  0x02,                       ARROWS_30
@@ -254,6 +257,10 @@ Death Mountain Cow Grotto Rupee 4,                          rupee,          NONE
 Death Mountain Cow Grotto Rupee 5,                          rupee,          NONE,                 GROTTOS,                        0x40305,                    RUPEE_GREEN
 Death Mountain Cow Grotto Rupee 6,                          rupee,          NONE,                 GROTTOS,                        0x50305,                    RUPEE_GREEN
 Death Mountain Cow Grotto Rupee 7,                          rupee,          NONE,                 GROTTOS,                        0x60305,                    RUPEE_RED
+Death Mountain Cow Grotto Heart 1,                          heart,          NONE,                 GROTTOS,                        0x00306,                    RECOVERY_HEART
+Death Mountain Cow Grotto Heart 2,                          heart,          NONE,                 GROTTOS,                        0x00307,                    RECOVERY_HEART
+Death Mountain Cow Grotto Heart 3,                          heart,          NONE,                 GROTTOS,                        0x00308,                    RECOVERY_HEART
+Death Mountain Cow Grotto Heart 4,                          heart,          NONE,                 GROTTOS,                        0x00309,                    RECOVERY_HEART
 Death Mountain Rupee Upper,                                 rupee,          NONE,                 DEATH_MOUNTAIN_TRAIL,           0x00001,                    RUPEE_RED
 Death Mountain Rupee Lower,                                 rupee,          NONE,                 DEATH_MOUNTAIN_TRAIL,           0x00002,                    RUPEE_BLUE
 Darunia,                                                    npc,            NONE,                 GORON_CITY,                     DARUNIA_BRACELET,           STRENGTH
@@ -852,6 +859,11 @@ Deku Tree Grass Pre-Boss Room 2,                            grass,          NONE
 Deku Tree Grass Pre-Boss Room 3,                            grass,          NONE,                 INSIDE_DEKU_TREE,               0x00902,                    RECOVERY_HEART
 Deku Tree Grass Compass Room 1,                             grass,          NONE,                 INSIDE_DEKU_TREE,               0x00a02,                    DEKU_SEEDS_5
 Deku Tree Grass Compass Room 2,                             grass,          NONE,                 INSIDE_DEKU_TREE,               0x00a03,                    RECOVERY_HEART
+Deku Tree Heart Main Room Lower,                            heart,          NONE,                 INSIDE_DEKU_TREE,               0x00019,                    RECOVERY_HEART
+Deku Tree Heart Main Room Upper,                            heart,          NONE,                 INSIDE_DEKU_TREE,               0x0001a,                    RECOVERY_HEART
+Deku Tree Heart Pre-Boss 1,                                 heart,          NONE,                 INSIDE_DEKU_TREE,               0x00906,                    RECOVERY_HEART
+Deku Tree Heart Pre-Boss 2,                                 heart,          NONE,                 INSIDE_DEKU_TREE,               0x00907,                    RECOVERY_HEART
+Deku Tree Heart Pre-Boss 3,                                 heart,          NONE,                 INSIDE_DEKU_TREE,               0x00908,                    RECOVERY_HEART
 Deku Tree Boss Container,                                   collectible,    NONE,                 LAIR_GOHMA,                     0x1f,                       HEART_CONTAINER
 Deku Tree Boss,                                             npc,            NONE,                 LAIR_GOHMA,                     BLUE_WARP_GOHMA,            STONE_EMERALD
 Deku Tree Boss Grass 1,                                     grass,          NONE,                 LAIR_GOHMA,                     0x00101,                    RECOVERY_HEART
