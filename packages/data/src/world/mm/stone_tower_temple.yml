@@ -77,6 +77,9 @@
   locations:
     "Stone Tower Temple Center Across Water Chest": "true"
     "Stone Tower Temple Center Sun Block Chest": "((has_mask_zora || (can_goron_bomb_jump && can_use_ice_arrows)) && can_use_light_arrows) || short_hook_anywhere"
+    # TODO: From the left you don't need zora probably
+    "Stone Tower Temple Rupee Center Room Right": "has_mask_zora && can_use_light_arrows"
+    "Stone Tower Temple Rupee Center Room Left": "has_mask_zora && can_use_light_arrows"
 "Stone Tower Temple Water Room":
   dungeon: ST
   exits:
@@ -117,6 +120,12 @@
     "Stone Tower Temple Pot Wind Room 2": "has(MASK_DEKU) || can_use_light_arrows || (short_hook_anywhere && has_weapon && trick(MM_ST_UPDRAFTS)) || hookshot_anywhere"
     "Stone Tower Temple Pot Wind Room 3": "has(MASK_DEKU) || can_use_light_arrows || (short_hook_anywhere && has_weapon && trick(MM_ST_UPDRAFTS)) || hookshot_anywhere"
     "Stone Tower Temple Pot Wind Room 4": "has(MASK_DEKU) || can_use_light_arrows || (short_hook_anywhere && has_weapon && trick(MM_ST_UPDRAFTS)) || hookshot_anywhere"
+    "Stone Tower Temple Rupee Wind Room 1": "has(MASK_DEKU)"
+    "Stone Tower Temple Rupee Wind Room 2": "has(MASK_DEKU)"
+    "Stone Tower Temple Rupee Wind Room 3": "has(MASK_DEKU)"
+    "Stone Tower Temple Rupee Wind Room 4": "has(MASK_DEKU)"
+    "Stone Tower Temple Rupee Wind Room 5": "has(MASK_DEKU)"
+    "Stone Tower Temple Rupee Wind Room 6": "has(MASK_DEKU)"
 "Stone Tower Temple Light Arrow Room":
   dungeon: ST
   exits:
@@ -139,6 +148,14 @@
     "Stone Tower Temple Pot Before Water Bridge 6": "true"
     "Stone Tower Temple Pot Before Water Bridge 7": "true"
     "Stone Tower Temple Pot Before Water Bridge 8": "true"
+    "Stone Tower Temple Rupee Before Water Bridge 1": "true"
+    "Stone Tower Temple Rupee Before Water Bridge 2": "true"
+    "Stone Tower Temple Rupee Before Water Bridge 3": "true"
+    "Stone Tower Temple Rupee Before Water Bridge 4": "true"
+    "Stone Tower Temple Rupee Before Water Bridge 5": "true"
+    "Stone Tower Temple Rupee Before Water Bridge 6": "true"
+    "Stone Tower Temple Rupee Before Water Bridge 7": "true"
+    "Stone Tower Temple Rupee Before Water Bridge 8": "true"
 "Stone Tower Temple Water Bridge":
   dungeon: ST
   exits:

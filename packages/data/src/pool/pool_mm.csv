@@ -1845,6 +1845,22 @@ Stone Tower Temple Wind Room Jail Chest,                chest,          NONE,   
 Stone Tower Temple Light Arrow,                         chest,          NONE,                   TEMPLE_STONE_TOWER,           0x1b,                       ARROW_LIGHT
 Stone Tower Temple Before Water Bridge Chest,           chest,          NONE,                   TEMPLE_STONE_TOWER,           0x14,                       STRAY_FAIRY_ST
 Stone Tower Temple Water Bridge Chest,                  chest,          NONE,                   TEMPLE_STONE_TOWER,           0x0c,                       STRAY_FAIRY_ST
+Stone Tower Temple Rupee Center Room Right,             rupee,          NONE,                   TEMPLE_STONE_TOWER,           0x00100,                    RUPEE_RED
+Stone Tower Temple Rupee Center Room Left,              rupee,          NONE,                   TEMPLE_STONE_TOWER,           0x00101,                    RUPEE_RED
+Stone Tower Temple Rupee Before Water Bridge 1,         rupee,          NONE,                   TEMPLE_STONE_TOWER,           0x00800,                    RUPEE_BLUE
+Stone Tower Temple Rupee Before Water Bridge 2,         rupee,          NONE,                   TEMPLE_STONE_TOWER,           0x00801,                    RUPEE_BLUE
+Stone Tower Temple Rupee Before Water Bridge 3,         rupee,          NONE,                   TEMPLE_STONE_TOWER,           0x00802,                    RUPEE_BLUE
+Stone Tower Temple Rupee Before Water Bridge 4,         rupee,          NONE,                   TEMPLE_STONE_TOWER,           0x00803,                    RUPEE_BLUE
+Stone Tower Temple Rupee Before Water Bridge 5,         rupee,          NONE,                   TEMPLE_STONE_TOWER,           0x00804,                    RUPEE_BLUE
+Stone Tower Temple Rupee Before Water Bridge 6,         rupee,          NONE,                   TEMPLE_STONE_TOWER,           0x00805,                    RUPEE_BLUE
+Stone Tower Temple Rupee Before Water Bridge 7,         rupee,          NONE,                   TEMPLE_STONE_TOWER,           0x00806,                    RUPEE_BLUE
+Stone Tower Temple Rupee Before Water Bridge 8,         rupee,          NONE,                   TEMPLE_STONE_TOWER,           0x00807,                    RUPEE_BLUE
+Stone Tower Temple Rupee Wind Room 1,                   rupee,          NONE,                   TEMPLE_STONE_TOWER,           0x00900,                    RUPEE_RED
+Stone Tower Temple Rupee Wind Room 2,                   rupee,          NONE,                   TEMPLE_STONE_TOWER,           0x00901,                    RUPEE_GREEN
+Stone Tower Temple Rupee Wind Room 3,                   rupee,          NONE,                   TEMPLE_STONE_TOWER,           0x00902,                    RUPEE_GREEN
+Stone Tower Temple Rupee Wind Room 4,                   rupee,          NONE,                   TEMPLE_STONE_TOWER,           0x00903,                    RUPEE_GREEN
+Stone Tower Temple Rupee Wind Room 5,                   rupee,          NONE,                   TEMPLE_STONE_TOWER,           0x00904,                    RUPEE_BLUE
+Stone Tower Temple Rupee Wind Room 6,                   rupee,          NONE,                   TEMPLE_STONE_TOWER,           0x00905,                    RUPEE_BLUE
 Stone Tower Temple Inverted Entrance Chest,             chest,          NONE,                   TEMPLE_STONE_TOWER,           0x10,                       STRAY_FAIRY_ST
 Stone Tower Temple Inverted East Lower Chest,           chest,          NONE,                   TEMPLE_STONE_TOWER,           0x13,                       STRAY_FAIRY_ST
 Stone Tower Temple Inverted East Middle Chest,          chest,          NONE,                   TEMPLE_STONE_TOWER,           0x04,                       SMALL_KEY_ST
