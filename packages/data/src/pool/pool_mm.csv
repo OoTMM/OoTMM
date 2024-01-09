@@ -1740,6 +1740,15 @@ Great Bay Temple Pot Before Wart 09,                    pot,            NONE,   
 Great Bay Temple Pot Before Wart 10,                    pot,            NONE,                   TEMPLE_GREAT_BAY,             0x0e0c,                     RECOVERY_HEART
 Great Bay Temple Pot Before Wart 11,                    pot,            NONE,                   TEMPLE_GREAT_BAY,             0x0e0d,                     RECOVERY_HEART
 Great Bay Temple Pot Before Wart 12,                    pot,            NONE,                   TEMPLE_GREAT_BAY,             0x0e0e,                     RECOVERY_HEART
+Great Bay Temple Rupee Compass Room 1,                  rupee,          NONE,                   TEMPLE_GREAT_BAY,             0x00400,                    RUPEE_RED
+Great Bay Temple Rupee Compass Room 2,                  rupee,          NONE,                   TEMPLE_GREAT_BAY,             0x00401,                    RUPEE_RED
+Great Bay Temple Rupee Entrance 1,                      rupee,          NONE,                   TEMPLE_GREAT_BAY,             0x00800,                    RUPEE_RED
+Great Bay Temple Rupee Entrance 2,                      rupee,          NONE,                   TEMPLE_GREAT_BAY,             0x00801,                    RUPEE_GREEN
+Great Bay Temple Rupee Entrance 3,                      rupee,          NONE,                   TEMPLE_GREAT_BAY,             0x00802,                    RUPEE_GREEN
+Great Bay Temple Rupee Entrance 4,                      rupee,          NONE,                   TEMPLE_GREAT_BAY,             0x00803,                    RUPEE_BLUE
+Great Bay Temple Rupee Entrance 5,                      rupee,          NONE,                   TEMPLE_GREAT_BAY,             0x00804,                    RUPEE_BLUE
+Great Bay Temple Rupee Hookshot 1,                      rupee,          NONE,                   TEMPLE_GREAT_BAY,             0x00c00,                    RUPEE_RED
+Great Bay Temple Rupee Hookshot 2,                      rupee,          NONE,                   TEMPLE_GREAT_BAY,             0x00c01,                    RUPEE_RED
 Beneath The Well Skulltulla Chest,                      chest,          NONE,                   BENEATH_THE_WELL,             0x01,                       RUPEE_PURPLE
 Beneath The Well Keese Chest,                           chest,          NONE,                   BENEATH_THE_WELL,             0x02,                       RUPEE_PURPLE
 Beneath The Well Mirror Shield,                         chest,          NONE,                   BENEATH_THE_WELL,             0x1b,                       SHIELD_MIRROR
