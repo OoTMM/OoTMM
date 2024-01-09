@@ -1,4 +1,5 @@
 import { promises as fs } from 'fs';
+import { SCENES } from '@ootmm/data';
 
 import { CodeGen } from '../lib/combo/util/codegen';
 import { decompressGame } from '../lib/combo/decompress';
@@ -46,6 +47,21 @@ const SLICES = 12;
 /* OOT Grass Scatter: 12 */
 
 type Game = 'oot' | 'mq' | 'mm';
+
+function scenesById(game: 'oot' | 'mm') {
+  const data: {[k: number]: string} = {};
+  for (const [name, id] of Object.entries(SCENES)) {
+    if (name.startsWith(`${game.toUpperCase()}_`)) {
+      data[id] = name;
+    }
+  }
+  return data;
+}
+
+const SCENES_BY_ID = {
+  oot: scenesById('oot'),
+  mm: scenesById('mm'),
+}
 
 const MM_EXTRA_SCENES = {
   0x71: 5,
@@ -649,17 +665,15 @@ function outputFairyPoolOot(roomActors: RoomActors[]) {
 }
 
 
-function outputRupeesMm(roomActors: RoomActors[]) {
+function outputHeartsOot(roomActors: RoomActors[]) {
   let lastSceneId = -1;
   let lastSetupId = -1;
   for (const room of roomActors) {
     for (const actor of room.actors) {
-      if (actor.typeId === ACTORS_MM.EN_ITEM00) {
+      if (actor.typeId === ACTORS_OOT.EN_ITEM00) {
         const item00arg = (actor.params >> 0) & 0xff;
-        const item = ITEM00_DROPS_MM[item00arg];
-        if (!RUPEES.has(item)) {
-          continue;
-        }
+        const item = ITEM00_DROPS[item00arg];
+        if (item !== 'RECOVERY_HEART') continue;
         const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
         if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
           console.log('');
@@ -667,28 +681,7 @@ function outputRupeesMm(roomActors: RoomActors[]) {
           lastSetupId = room.setupId;
         }
         /* PRINT */
-        console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Rupee ${decPad(actor.actorId + 1, 2)},        rupee,            NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
-      }
-
-      if (actor.typeId === ACTORS_MM.OBJ_MURE3) {
-        let items: string[] = [];
-        switch (actor.params & 0xe000) {
-        case 0x0000: items = ['RUPEE_BLUE', 'RUPEE_BLUE', 'RUPEE_BLUE', 'RUPEE_BLUE', 'RUPEE_BLUE']; break;
-        case 0x2000: items = ['RUPEE_GREEN', 'RUPEE_GREEN', 'RUPEE_GREEN', 'RUPEE_GREEN', 'RUPEE_GREEN']; break;
-        case 0x4000: items = ['RUPEE_GREEN', 'RUPEE_GREEN', 'RUPEE_GREEN', 'RUPEE_GREEN', 'RUPEE_GREEN', 'RUPEE_GREEN', 'RUPEE_RED']; break;
-        }
-
-        if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
-          console.log('');
-          lastSceneId = room.sceneId;
-          lastSetupId = room.setupId;
-        }
-
-        for (let i = 0; i < items.length; ++i) {
-          const item = items[i];
-          const key = (i << 16) | ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
-          console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Rupee Circle ${decPad(actor.actorId + 1, 2)} Rupee ${decPad(i + 1, 2)},             rupee,            NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
-        }
+        console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Heart ${decPad(actor.actorId + 1, 2)},        heart,            NONE,                 ${SCENES_BY_ID.oot[room.sceneId]}, ${hexPad(key, 5)}, ${item}`);
       }
     }
   }
@@ -1026,7 +1019,8 @@ async function run() {
   //outputKeatonGrassPoolMm(mmRooms);
   //outputGrassPoolOot(mqRooms);
   //outputFairyPoolOot(ootRooms);
-  outputRupeesMm(mmRooms);
+  //outputRupeesMm(mmRooms);
+  outputHeartsOot(ootRooms);
 }
 
 run().catch(e => {

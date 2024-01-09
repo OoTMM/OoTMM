@@ -137,6 +137,9 @@
     "Kokiri Forest Rupee Child 2": "is_child"
     "Kokiri Forest Rupee Crawl 1": "is_child"
     "Kokiri Forest Rupee Crawl 2": "is_child"
+    "Kokiri Forest Heart 1": "is_child"
+    "Kokiri Forest Heart 2": "is_child"
+    "Kokiri Forest Heart 3": "is_child"
   gossip:
     "Kokiri Gossip Near Lost Woods Open": "true"
 "Kokiri Forest Adult Rupees":
@@ -186,6 +189,11 @@
   region: ENTRANCE
   exits:
     "Kokiri Forest": "true"
+  locations:
+    "Saria's House Heart 1": "true"
+    "Saria's House Heart 2": "true"
+    "Saria's House Heart 3": "true"
+    "Saria's House Heart 4": "true"
 "House of Twins":
   region: ENTRANCE
   exits:
@@ -1326,6 +1334,10 @@
     "Death Mountain Cow Grotto Rupee 5": "true"
     "Death Mountain Cow Grotto Rupee 6": "true"
     "Death Mountain Cow Grotto Rupee 7": "true"
+    "Death Mountain Cow Grotto Heart 1": "true"
+    "Death Mountain Cow Grotto Heart 2": "true"
+    "Death Mountain Cow Grotto Heart 3": "true"
+    "Death Mountain Cow Grotto Heart 4": "true"
 "Fairy Fountain Magic":
   region: ENTRANCE
   exits:

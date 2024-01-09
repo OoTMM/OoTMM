@@ -149,6 +149,10 @@
     "Water Temple GS River": "has_iron_boots"
     "Water Temple Pot River 1": "true"
     "Water Temple Pot River 2": "true"
+    "Water Temple Heart 1": "true"
+    "Water Temple Heart 2": "true"
+    "Water Temple Heart 3": "true"
+    "Water Temple Heart 4": "true"
 "Water Temple Dragon Room Ledge":
   dungeon: Water
   exits:

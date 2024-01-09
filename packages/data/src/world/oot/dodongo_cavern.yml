@@ -49,6 +49,7 @@
     "Dodongo Cavern Pot Miniboss 2": "true"
     "Dodongo Cavern Pot Miniboss 3": "true"
     "Dodongo Cavern Pot Miniboss 4": "true"
+    "Dodongo Cavern Heart Miniboss Lava": "true"
 "Dodongo Cavern Green Room":
   dungeon: DC
   exits:
@@ -111,6 +112,7 @@
     "Dodongo Cavern Pot Room Before Miniboss 2": "true"
     "Dodongo Cavern Grass Bomb Bag Room": "can_cut_grass"
     "Dodongo Cavern Grass Pre-Miniboss": "can_cut_grass"
+    "Dodongo Cavern Heart Bomb Bag Room": "true"
 "Dodongo Cavern Bomb Bag Side Room":
   dungeon: DC
   exits:
@@ -129,6 +131,8 @@
     "Dodongo Cavern Pot Miniboss 2": "true"
     "Dodongo Cavern Pot Miniboss 3": "true"
     "Dodongo Cavern Pot Miniboss 4": "true"
+    "Dodongo Cavern Heart Miniboss Upper 1": "true"
+    "Dodongo Cavern Heart Miniboss Upper 2": "true"
 "Dodongo Cavern Bomb Bag Room 2":
   dungeon: DC
   exits:

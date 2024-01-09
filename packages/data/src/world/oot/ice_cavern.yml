@@ -40,6 +40,9 @@
   locations:
     "Ice Cavern Map": "has_blue_fire"
     "Ice Cavern Pot Map Room": "has_blue_fire"
+    "Ice Cavern Heart 1": "true"
+    "Ice Cavern Heart 2": "true"
+    "Ice Cavern Heart 3": "true"
 "Ice Cavern Block Room":
   dungeon: IC
   exits:

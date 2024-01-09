@@ -52,15 +52,25 @@
     "Fire Temple Pot Lava Room 1": "has_tunic_goron"
     "Fire Temple Pot Lava Room 2": "has_tunic_goron"
     "Fire Temple Pot Lava Room 3": "has_tunic_goron"
+    "Fire Temple Heart Elevator 1": "small_keys_fire(2) && has_tunic_goron_strict"
+    "Fire Temple Heart Elevator 2": "small_keys_fire(2) && has_tunic_goron_strict"
+    "Fire Temple Heart Elevator 3": "small_keys_fire(2) && has_tunic_goron_strict"
 "Fire Temple Maze":
   dungeon: Fire
   exits:
     "Fire Temple Maze Upper": "small_keys_fire(5) || climb_anywhere || hookshot_anywhere"
+    "Fire Temple Ledge Above Main": "small_keys_fire(4) || climb_anywhere || hookshot_anywhere"
   locations:
     "Fire Temple Maze Chest": "true"
     "Fire Temple Maze Jail Chest": "true"
     "Fire Temple GS Maze": "has_explosives && (climb_anywhere || can_collect_distance)"
     "Fire Temple Map": "can_hit_triggers_distance && small_keys_fire(4)"
+"Fire Temple Ledge Above Main":
+  dungeon: Fire
+  locations:
+    "Fire Temple Heart Ledge Above Main 1": "true"
+    "Fire Temple Heart Ledge Above Main 2": "true"
+    "Fire Temple Heart Ledge Above Main 3": "true"
 "Fire Temple Maze Upper":
   dungeon: Fire
   exits:
@@ -70,6 +80,9 @@
     "Fire Temple Map": "true" #while Child can't climb into it normally, the only way child can even be here is with climb or hook anywhere.
     "Fire Temple Above Maze Chest": "true"
     "Fire Temple Below Maze Chest": "has_explosives"
+    "Fire Temple Heart Map Room 1": "true"
+    "Fire Temple Heart Map Room 2": "true"
+    "Fire Temple Heart Map Room 3": "true"
 "Fire Temple Scarecrow":
   dungeon: Fire
   locations:

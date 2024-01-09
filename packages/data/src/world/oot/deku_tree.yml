@@ -23,6 +23,8 @@
     "Deku Tree Grass Lobby 5": "can_cut_grass"
     "Deku Tree Grass Compass Room 1": "can_cut_grass"
     "Deku Tree Grass Compass Room 2": "can_cut_grass"
+    "Deku Tree Heart Main Room Lower": "true"
+    "Deku Tree Heart Main Room Upper": "has_nuts || has_weapon || has_explosives_or_hammer || has_ranged_weapon || can_use_sticks"
 "Deku Tree Slingshot Room":
   dungeon: DT
   exits:
@@ -81,3 +83,6 @@
     "Deku Tree Grass Pre-Boss Room 1": "can_cut_grass"
     "Deku Tree Grass Pre-Boss Room 2": "can_cut_grass"
     "Deku Tree Grass Pre-Boss Room 3": "can_cut_grass"
+    "Deku Tree Heart Pre-Boss 1": "true"
+    "Deku Tree Heart Pre-Boss 2": "true"
+    "Deku Tree Heart Pre-Boss 3": "true"

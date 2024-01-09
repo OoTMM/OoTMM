@@ -61,6 +61,9 @@
     "Forest Temple Twisted 1 Alt": "event(FOREST_TWISTED_HALL) && hookshot_anywhere && climb_anywhere"
   events:
     FOREST_LEDGE_REACHED: "true"
+  locations:
+    "Forest Temple Heart Garden 1": "true"
+    "Forest Temple Heart Garden 2": "true"
 "Forest Temple Floormaster":
   dungeon: Forest
   locations:
@@ -98,6 +101,8 @@
     "Forest Temple Garden East": "true"
   locations:
     "Forest Temple Well": "event(FOREST_WELL)"
+    "Forest Temple Heart Well 1": "event(FOREST_WELL) || has_iron_boots"
+    "Forest Temple Heart Well 2": "event(FOREST_WELL) || has_iron_boots"
 "Forest Temple Maze":
   dungeon: Forest
   exits:

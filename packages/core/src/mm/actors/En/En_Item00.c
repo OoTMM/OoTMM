@@ -173,3 +173,7 @@ void EnItem00_AliasFreestandingRupee(Xflag* xflag)
         break;
     }
 }
+
+void EnItem00_AliasFreestandingHeart(Xflag* xflag)
+{
+}
