@@ -743,6 +743,7 @@ Mountain Village Keaton Grass Reward 6,                 grass,          NONE,   
 Mountain Village Keaton Grass Reward 7,                 grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x6002c,                    RUPEE_GREEN
 Mountain Village Keaton Grass Reward 8,                 grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x7002c,                    RUPEE_GREEN
 Mountain Village Keaton Grass Reward 9,                 grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x8002c,                    RUPEE_RED
+Mountain Village Rupee,                                 rupee,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x00028,                    RUPEE_RED
 Blacksmith Razor Blade,                                 npc,            BLACKSMITH,             BLACKSMITH,                   SWORD_RAZOR,                SWORD
 Blacksmith Gilded Sword,                                npc,            BLACKSMITH,             BLACKSMITH,                   SWORD_GILDED,               SWORD
 Lone Peak Shrine Lens Chest,                            chest,          NONE,                   GROTTOS,                      0x01,                       LENS

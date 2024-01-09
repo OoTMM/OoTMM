@@ -1633,6 +1633,7 @@
     "Mountain Village Keaton Grass Reward 7": "event(BOSS_SNOWHEAD) && keaton_grass_hard"
     "Mountain Village Keaton Grass Reward 8": "event(BOSS_SNOWHEAD) && keaton_grass_hard"
     "Mountain Village Keaton Grass Reward 9": "event(BOSS_SNOWHEAD) && keaton_grass_hard"
+    "Mountain Village Rupee": "event(BOSS_SNOWHEAD)"
 "Near Village Grotto":
   region: MOUNTAIN_VILLAGE
   exits:
