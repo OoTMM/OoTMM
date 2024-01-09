@@ -186,6 +186,11 @@
   region: ENTRANCE
   exits:
     "Kokiri Forest": "true"
+  locations:
+    "Saria's House Heart 1": "true"
+    "Saria's House Heart 2": "true"
+    "Saria's House Heart 3": "true"
+    "Saria's House Heart 4": "true"
 "House of Twins":
   region: ENTRANCE
   exits:

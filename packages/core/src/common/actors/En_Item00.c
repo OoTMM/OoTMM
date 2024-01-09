@@ -9,6 +9,7 @@
 #endif
 
 void EnItem00_AliasFreestandingRupee(Xflag* xflag);
+void EnItem00_AliasFreestandingHeart(Xflag* xflag);
 
 void EnItem00_InitWrapper(Actor_EnItem00* this, GameState_Play* play)
 {
@@ -82,8 +83,17 @@ void EnItem00_XflagInitFreestanding(Actor_EnItem00* this, GameState_Play* play, 
     xflag.id = actorIndex;
 
     /* Alias as required */
-    if ((this->base.variable & 0x1f) < 4)
+    switch (this->base.variable & 0xff)
+    {
+    case ITEM00_RUPEE_GREEN:
+    case ITEM00_RUPEE_BLUE:
+    case ITEM00_RUPEE_RED:
         EnItem00_AliasFreestandingRupee(&xflag);
+        break;
+    case ITEM00_RECOVERY_HEART:
+        EnItem00_AliasFreestandingHeart(&xflag);
+        break;
+    }
 
     /* Query */
     comboXflagItemOverride(&o, &xflag, 0);
