@@ -1032,6 +1032,15 @@ Fire Temple Pot Ring 1,                                     pot,            NONE
 Fire Temple Pot Ring 2,                                     pot,            NONE,                 TEMPLE_FIRE,                    0x0a38,                     RECOVERY_HEART
 Fire Temple Pot Ring 3,                                     pot,            NONE,                 TEMPLE_FIRE,                    0x0a39,                     RECOVERY_HEART
 Fire Temple Pot Ring 4,                                     pot,            NONE,                 TEMPLE_FIRE,                    0x0a3a,                     RECOVERY_HEART
+Fire Temple Heart Ledge Above Main 1,                       heart,          NONE,                 TEMPLE_FIRE,                    0x00600,                    RECOVERY_HEART
+Fire Temple Heart Ledge Above Main 2,                       heart,          NONE,                 TEMPLE_FIRE,                    0x00601,                    RECOVERY_HEART
+Fire Temple Heart Ledge Above Main 3,                       heart,          NONE,                 TEMPLE_FIRE,                    0x00602,                    RECOVERY_HEART
+Fire Temple Heart Map Room 1,                               heart,          NONE,                 TEMPLE_FIRE,                    0x01007,                    RECOVERY_HEART
+Fire Temple Heart Map Room 2,                               heart,          NONE,                 TEMPLE_FIRE,                    0x01008,                    RECOVERY_HEART
+Fire Temple Heart Map Room 3,                               heart,          NONE,                 TEMPLE_FIRE,                    0x01009,                    RECOVERY_HEART
+Fire Temple Heart Elevator 1,                               heart,          NONE,                 TEMPLE_FIRE,                    0x01506,                    RECOVERY_HEART
+Fire Temple Heart Elevator 2,                               heart,          NONE,                 TEMPLE_FIRE,                    0x01507,                    RECOVERY_HEART
+Fire Temple Heart Elevator 3,                               heart,          NONE,                 TEMPLE_FIRE,                    0x01508,                    RECOVERY_HEART
 Fire Temple Boss Container,                                 collectible,    NONE,                 LAIR_VOLVAGIA,                  0x1f,                       HEART_CONTAINER
 Fire Temple Boss,                                           npc,            NONE,                 LAIR_VOLVAGIA,                  BLUE_WARP_VOLVAGIA,         MEDALLION_FIRE
 Ice Cavern Iron Boots,                                      chest,          ICE_CAVERN_CHEST,     ICE_CAVERN,                     0x02,                       BOOTS_IRON
