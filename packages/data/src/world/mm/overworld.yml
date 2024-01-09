@@ -393,13 +393,17 @@
   region: ENTRANCE
   exits:
     "Clock Town West": "true"
+    "Curiosity Shop 2": "true"
   locations:
-    "Bomb Shop Bomb Bag 2": "shop_ex_price(0x00) && is_night3"
     "Curiosity Shop All-Night Mask": "(event(SAKON_BOMB_BAG) || event(SAKON_BOOM)) && shop_price(0x04) && is_night3"
     #"Curiostiy Shop 5r Trade": "(has_milk || event(MUSHROOM)) && is_night"
     #"Curiostiy Shop 20r Trade": "(event(WATER) || event(BUGS) || event(FISH) || has_milk || has_red_or_blue_potion || has_green_potion || has_zora_egg) && is_night"
     #"Curiostiy Shop 50r Trade": "(event(POE)) && is_night"
     #"Curiostiy Shop 200r Trade": "(has_chateau || has_big_poe)) && is_night"
+"Curiosity Shop 2":
+  region: NONE
+  locations:
+    "Bomb Shop Bomb Bag 2": "shop_ex_price(0x00) && is_night3"
 "Kafei Hideout":
   region: ENTRANCE
   exits:
