@@ -1603,6 +1603,9 @@ Snowhead Temple Grass 07,                               grass,          NONE,   
 Snowhead Temple Grass 08,                               grass,          NONE,                   TEMPLE_SNOWHEAD,              0x00443,                    RANDOM
 Snowhead Temple Grass 09,                               grass,          NONE,                   TEMPLE_SNOWHEAD,              0x00444,                    RANDOM
 Snowhead Temple Grass 10,                               grass,          NONE,                   TEMPLE_SNOWHEAD,              0x00445,                    RANDOM
+Snowhead Temple Rupee 1,                                rupee,          NONE,                   TEMPLE_SNOWHEAD,              0x00700,                    RUPEE_RED
+Snowhead Temple Rupee 2,                                rupee,          NONE,                   TEMPLE_SNOWHEAD,              0x00701,                    RUPEE_RED
+Snowhead Temple Rupee 3,                                rupee,          NONE,                   TEMPLE_SNOWHEAD,              0x00702,                    RUPEE_RED
 Pirate Fortress Entrance Chest 1,                       chest,          NONE,                   PIRATE_FORTRESS_ENTRANCE,     0x00,                       RUPEE_RED
 Pirate Fortress Entrance Chest 2,                       chest,          NONE,                   PIRATE_FORTRESS_ENTRANCE,     0x01,                       RUPEE_RED
 Pirate Fortress Entrance Chest 3,                       chest,          NONE,                   PIRATE_FORTRESS_ENTRANCE,     0x02,                       RUPEE_RED
