@@ -1245,6 +1245,13 @@ Shadow Temple Pot Boat After Bridge 2,                      pot,            NONE
 Shadow Temple Flying Pot Early Maze,                        pot,            NONE,                 TEMPLE_SHADOW,                  0x0006,                     RECOVERY_HEART
 Shadow Temple Flying Pot After Wind 1,                      pot,            NONE,                 TEMPLE_SHADOW,                  0x1404,                     RECOVERY_HEART
 Shadow Temple Flying Pot After Wind 2,                      pot,            NONE,                 TEMPLE_SHADOW,                  0x1405,                     NUTS_5
+Shadow Temple Heart Scythe 1,                               heart,          NONE,                 TEMPLE_SHADOW,                  0x01004,                    RECOVERY_HEART
+Shadow Temple Heart Scythe 2,                               heart,          NONE,                 TEMPLE_SHADOW,                  0x01005,                    RECOVERY_HEART
+Shadow Temple Heart Shortcut 1,                             heart,          NONE,                 TEMPLE_SHADOW,                  0x01506,                    RECOVERY_HEART
+Shadow Temple Heart Shortcut 2,                             heart,          NONE,                 TEMPLE_SHADOW,                  0x01507,                    RECOVERY_HEART
+Shadow Temple Heart Pre-Boss 1,                             heart,          NONE,                 TEMPLE_SHADOW,                  0x01508,                    RECOVERY_HEART
+Shadow Temple Heart Pre-Boss 2,                             heart,          NONE,                 TEMPLE_SHADOW,                  0x01509,                    RECOVERY_HEART
+Shadow Temple Heart Pre-Boss 3,                             heart,          NONE,                 TEMPLE_SHADOW,                  0x0150a,                    RECOVERY_HEART
 Shadow Temple Boss HC,                                      collectible,    NONE,                 LAIR_BONGO_BONGO,               0x1f,                       HEART_CONTAINER
 Shadow Temple Boss,                                         npc,            NONE,                 LAIR_BONGO_BONGO,               BLUE_WARP_BONGO_BONGO,      MEDALLION_SHADOW
 Gerudo Fortress Jail 1,                                     collectible,    NONE,                 THIEVES_HIDEOUT,                0x0c,                       SMALL_KEY_GF

@@ -939,7 +939,7 @@ export class LogicPassWorldTransform {
     }
 
     if (!settings.shuffleFreeHeartsOot) {
-      const locs = POOL.oot.filter((x: any) => x.type === 'hearts').map((x: any) => gameId('oot', x.location, ' ')) as string[];
+      const locs = POOL.oot.filter((x: any) => x.type === 'heart').map((x: any) => gameId('oot', x.location, ' ')) as string[];
       this.removeLocations(locs);
     }
 
