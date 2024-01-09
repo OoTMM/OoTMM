@@ -1542,10 +1542,48 @@
   region: ENTRANCE
   exits:
     "Near Deku Shrine": "true"
+    "Deku Shrine Main": "event(RETURN_PRINCESS)"
+"Deku Shrine Main":
+  region: ENTRANCE
+  exits:
+    "Deku Shrine End": "has_weapon_range"
   locations:
-    "Deku Shrine Mask of Scents": "event(RETURN_PRINCESS) && has_weapon_range"
-    "Deku Shrine Pot 1": "event(RETURN_PRINCESS)"
-    "Deku Shrine Pot 2": "event(RETURN_PRINCESS)"
+    "Deku Shrine Pot 1": "true"
+    "Deku Shrine Pot 2": "true"
+    "Deku Shrine Rupee Main 01": "true"
+    "Deku Shrine Rupee Main 02": "true"
+    "Deku Shrine Rupee Main 03": "true"
+    "Deku Shrine Rupee Main 04": "true"
+    "Deku Shrine Rupee Main 05": "true"
+    "Deku Shrine Rupee Main 06": "true"
+    "Deku Shrine Rupee Main 07": "true"
+    "Deku Shrine Rupee Main 08": "true"
+    "Deku Shrine Rupee Main 09": "true"
+    "Deku Shrine Rupee Main 10": "true"
+    "Deku Shrine Rupee Main 11": "true"
+    "Deku Shrine Rupee Main 12": "true"
+    "Deku Shrine Rupee Main 13": "true"
+    "Deku Shrine Rupee Main 14": "true"
+    "Deku Shrine Rupee Main 15": "true"
+    "Deku Shrine Rupee Main 16": "true"
+    "Deku Shrine Rupee Main 17": "true"
+    "Deku Shrine Rupee Main 18": "true"
+    "Deku Shrine Rupee Main 19": "true"
+    "Deku Shrine Rupee Main 20": "true"
+"Deku Shrine End":
+  region: ENTRANCE
+  locations:
+    "Deku Shrine Mask of Scents": "true"
+    "Deku Shrine Rupee End 01": "true"
+    "Deku Shrine Rupee End 02": "true"
+    "Deku Shrine Rupee End 03": "true"
+    "Deku Shrine Rupee End 04": "true"
+    "Deku Shrine Rupee End 05": "true"
+    "Deku Shrine Rupee End 06": "true"
+    "Deku Shrine Rupee End 07": "true"
+    "Deku Shrine Rupee End 08": "true"
+    "Deku Shrine Rupee End 09": "true"
+    "Deku Shrine Rupee End 10": "true"
 "Behind Large Icicles":
   region: TERMINA_FIELD
   exits:

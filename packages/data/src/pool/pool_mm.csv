@@ -617,6 +617,36 @@ Deku Palace Grotto Grass 12,                            grass,          NONE,   
 Deku Shrine Mask of Scents,                             npc,            BUTLER_RACE,            DEKU_SHRINE,                  MASK_SCENTS,                MASK_SCENTS
 Deku Shrine Pot 1,                                      pot,            NONE,                   DEKU_SHRINE,                  0x000e,                     RUPEE_GREEN
 Deku Shrine Pot 2,                                      pot,            NONE,                   DEKU_SHRINE,                  0x000f,                     RUPEE_GREEN
+Deku Shrine Rupee Main 01,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00200,                    RUPEE_GREEN
+Deku Shrine Rupee Main 02,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00201,                    RUPEE_GREEN
+Deku Shrine Rupee Main 03,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00202,                    RUPEE_GREEN
+Deku Shrine Rupee Main 04,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00203,                    RUPEE_GREEN
+Deku Shrine Rupee Main 05,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00204,                    RUPEE_GREEN
+Deku Shrine Rupee Main 06,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00205,                    RUPEE_GREEN
+Deku Shrine Rupee Main 07,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00206,                    RUPEE_RED
+Deku Shrine Rupee Main 08,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00207,                    RUPEE_RED
+Deku Shrine Rupee Main 09,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00300,                    RUPEE_GREEN
+Deku Shrine Rupee Main 10,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00301,                    RUPEE_GREEN
+Deku Shrine Rupee Main 11,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00302,                    RUPEE_GREEN
+Deku Shrine Rupee Main 12,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00303,                    RUPEE_GREEN
+Deku Shrine Rupee Main 13,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00304,                    RUPEE_GREEN
+Deku Shrine Rupee Main 14,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00305,                    RUPEE_GREEN
+Deku Shrine Rupee Main 15,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00400,                    RUPEE_GREEN
+Deku Shrine Rupee Main 16,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00401,                    RUPEE_GREEN
+Deku Shrine Rupee Main 17,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00402,                    RUPEE_GREEN
+Deku Shrine Rupee Main 18,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00403,                    RUPEE_GREEN
+Deku Shrine Rupee Main 19,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00404,                    RUPEE_GREEN
+Deku Shrine Rupee Main 20,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00405,                    RUPEE_GREEN
+Deku Shrine Rupee End 01,                               rupee,          NONE,                   DEKU_SHRINE,                  0x00800,                    RUPEE_GREEN
+Deku Shrine Rupee End 02,                               rupee,          NONE,                   DEKU_SHRINE,                  0x00801,                    RUPEE_GREEN
+Deku Shrine Rupee End 03,                               rupee,          NONE,                   DEKU_SHRINE,                  0x00802,                    RUPEE_GREEN
+Deku Shrine Rupee End 04,                               rupee,          NONE,                   DEKU_SHRINE,                  0x00803,                    RUPEE_GREEN
+Deku Shrine Rupee End 05,                               rupee,          NONE,                   DEKU_SHRINE,                  0x00804,                    RUPEE_GREEN
+Deku Shrine Rupee End 06,                               rupee,          NONE,                   DEKU_SHRINE,                  0x00805,                    RUPEE_GREEN
+Deku Shrine Rupee End 07,                               rupee,          NONE,                   DEKU_SHRINE,                  0x00806,                    RUPEE_GREEN
+Deku Shrine Rupee End 08,                               rupee,          NONE,                   DEKU_SHRINE,                  0x00807,                    RUPEE_GREEN
+Deku Shrine Rupee End 09,                               rupee,          NONE,                   DEKU_SHRINE,                  0x00808,                    RUPEE_GREEN
+Deku Shrine Rupee End 10,                               rupee,          NONE,                   DEKU_SHRINE,                  0x00809,                    RUPEE_GREEN
 Woodfall Owl Statue,                                    npc,            NONE,                   WOODFALL,                     OWL_WOODFALL,               OWL_WOODFALL
 Woodfall Near Owl Chest,                                chest,          NONE,                   WOODFALL,                     0x02,                       RUPEE_RED
 Woodfall Entrance Chest,                                chest,          NONE,                   WOODFALL,                     0x00,                       RUPEE_RED
