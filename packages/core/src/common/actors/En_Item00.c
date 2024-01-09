@@ -34,6 +34,7 @@ void EnItem00_DrawXflag(Actor_EnItem00* this, GameState_Play* play)
     {
         comboXflagItemOverride(&o, &this->xflag, 0);
         gi = o.gi;
+        this->xflagGi = gi;
     }
 
     ModelViewTranslate(this->base.position.x, this->base.position.y + 20.f, this->base.position.z, MAT_SET);
@@ -99,7 +100,6 @@ void EnItem00_XflagInitFreestanding(Actor_EnItem00* this, GameState_Play* play, 
     this->isExtended = 1;
 
     /* Use our draw func */
-    ActorSetScale(&this->base, 3.f);
     this->base.draw = EnItem00_DrawXflag;
     this->base.variable = 0;
 }

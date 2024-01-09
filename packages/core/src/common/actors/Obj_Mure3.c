@@ -1,19 +1,23 @@
 #include <combo.h>
 
-static void ObjMure3_InitHijack(Actor_ObjMure3* this, void* data)
+#if defined(GAME_OOT)
+# define ADDR_HANDLER_POST_SPAWN 0x80b5579c
+#else
+# define ADDR_HANDLER_POST_SPAWN 0x8098f680
+#endif
+
+void ObjMure3_InitHijack(Actor_ObjMure3* this, void* data)
 {
     Actor_ProcessInitChain(&this->base, data);
     this->actorIndex = g.actorIndex;
 }
 
-PATCH_CALL(0x80b55684, ObjMure3_InitHijack);
-
-static void ObjMure3_SetPostSpawnHandler(Actor_ObjMure3* this)
+void ObjMure3_SetPostSpawnHandler(Actor_ObjMure3* this)
 {
     int count;
 
     /* Default */
-    this->handler = actorAddr(AC_OBJ_MURE3, 0x80b5579c);
+    this->handler = actorAddr(AC_OBJ_MURE3, ADDR_HANDLER_POST_SPAWN);
 
     /* Upgrade spawns */
     count = ((this->base.variable & 0xe000) == 0x4000) ? 7 : 5;
@@ -25,5 +29,3 @@ static void ObjMure3_SetPostSpawnHandler(Actor_ObjMure3* this)
         }
     }
 }
-
-PATCH_CALL(0x80b55770, ObjMure3_SetPostSpawnHandler);

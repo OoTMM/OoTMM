@@ -2687,6 +2687,13 @@
     "Beneath The Graveyard Pot Night 2 After Pit 2": "can_use_lens || short_hook_anywhere"
     "Beneath The Graveyard Pot Night 2 After Pit 3": "can_use_lens || short_hook_anywhere"
     "Beneath The Graveyard Pot Night 2 After Pit 4": "can_use_lens || short_hook_anywhere"
+    "Beneath The Graveyard Rupee 1": "true"
+    "Beneath The Graveyard Rupee 2": "true"
+    "Beneath The Graveyard Rupee 3": "true"
+    "Beneath The Graveyard Rupee 4": "true"
+    "Beneath The Graveyard Rupee 5": "true"
+    "Beneath The Graveyard Rupee 6": "true"
+    "Beneath The Graveyard Rupee 7": "true"
 "Beneath The Graveyard Night 3":
   region: ENTRANCE
   events:

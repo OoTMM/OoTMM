@@ -1272,6 +1272,13 @@ Beneath The Graveyard Pot Dampe 07,                     pot,            NONE,   
 Beneath The Graveyard Pot Dampe 08,                     pot,            NONE,                   DAMPE_HOUSE,                  0x0017,                     ARROWS_10
 Beneath The Graveyard Pot Dampe 09,                     pot,            NONE,                   DAMPE_HOUSE,                  0x0018,                     ARROWS_10
 Beneath The Graveyard Pot Dampe 10,                     pot,            NONE,                   DAMPE_HOUSE,                  0x0019,                     RECOVERY_HEART
+Beneath The Graveyard Rupee 1,                          rupee,          NONE,                   BENEATH_THE_GRAVEYARD,        0x00000,                    RUPEE_GREEN
+Beneath The Graveyard Rupee 2,                          rupee,          NONE,                   BENEATH_THE_GRAVEYARD,        0x10000,                    RUPEE_GREEN
+Beneath The Graveyard Rupee 3,                          rupee,          NONE,                   BENEATH_THE_GRAVEYARD,        0x20000,                    RUPEE_GREEN
+Beneath The Graveyard Rupee 4,                          rupee,          NONE,                   BENEATH_THE_GRAVEYARD,        0x30000,                    RUPEE_GREEN
+Beneath The Graveyard Rupee 5,                          rupee,          NONE,                   BENEATH_THE_GRAVEYARD,        0x40000,                    RUPEE_GREEN
+Beneath The Graveyard Rupee 6,                          rupee,          NONE,                   BENEATH_THE_GRAVEYARD,        0x50000,                    RUPEE_GREEN
+Beneath The Graveyard Rupee 7,                          rupee,          NONE,                   BENEATH_THE_GRAVEYARD,        0x60000,                    RUPEE_RED
 Ikana Valley Scrub Rupee,                               npc,            NONE,                   IKANA_CANYON,                 SCRUB_VALLEY,               RUPEE_GOLD
 Ikana Valley Scrub Shop,                                npc,            NONE,                   IKANA_CANYON,                 SCRUB_SHOP_POTION_BLUE,     POTION_BLUE
 Ikana Valley Scrub HP,                                  collectible,    NONE,                   IKANA_CANYON,                 0x1e,                       HEART_PIECE
