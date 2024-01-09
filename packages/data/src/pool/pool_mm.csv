@@ -1902,6 +1902,22 @@ Stone Tower Temple Inverted Flying Pot Pre-Boss 1,      pot,            NONE,   
 Stone Tower Temple Inverted Flying Pot Pre-Boss 2,      pot,            NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x081b,                     NOTHING
 Stone Tower Temple Inverted Flying Pot Pre-Boss 3,      pot,            NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x081c,                     NOTHING
 Stone Tower Temple Inverted Flying Pot Pre-Boss 4,      pot,            NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x081d,                     NOTHING
+Stone Tower Temple Inverted Rupee Dexihand 1,           rupee,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x00100,                    RUPEE_RED
+Stone Tower Temple Inverted Rupee Dexihand 2,           rupee,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x00101,                    RUPEE_GREEN
+Stone Tower Temple Inverted Rupee Dexihand 3,           rupee,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x00102,                    RUPEE_BLUE
+Stone Tower Temple Inverted Rupee Alcove 1,             rupee,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x00301,                    RUPEE_RED
+Stone Tower Temple Inverted Rupee Alcove 2,             rupee,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x00302,                    RUPEE_RED
+Stone Tower Temple Inverted Rupee Pre-Boss Top 1,       rupee,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x00800,                    RUPEE_BLUE
+Stone Tower Temple Inverted Rupee Pre-Boss Top 2,       rupee,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x00801,                    RUPEE_BLUE
+Stone Tower Temple Inverted Rupee Pre-Boss Top 3,       rupee,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x00802,                    RUPEE_BLUE
+Stone Tower Temple Inverted Rupee Pre-Boss Bottom 1,    rupee,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x00803,                    RUPEE_BLUE
+Stone Tower Temple Inverted Rupee Pre-Boss Bottom 2,    rupee,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x00804,                    RUPEE_BLUE
+Stone Tower Temple Inverted Rupee Pre-Boss Bottom 3,    rupee,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x00805,                    RUPEE_BLUE
+Stone Tower Temple Inverted Rupee Pre-Boss Bottom 4,    rupee,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x00806,                    RUPEE_BLUE
+Stone Tower Temple Inverted Rupee Pre-Boss Bottom 5,    rupee,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x00807,                    RUPEE_BLUE
+Stone Tower Temple Inverted Rupee Pre-Boss Bottom 6,    rupee,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x00808,                    RUPEE_BLUE
+Stone Tower Temple Inverted Rupee Pre-Boss Bottom 7,    rupee,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x00809,                    RUPEE_BLUE
+Stone Tower Temple Inverted Rupee Pre-Boss Bottom 8,    rupee,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x0080a,                    RUPEE_BLUE
 Stone Tower Temple Pot Entrance 1,                      pot,            NONE,                   TEMPLE_STONE_TOWER,           0x0007,                     RECOVERY_HEART
 Stone Tower Temple Pot Entrance 2,                      pot,            NONE,                   TEMPLE_STONE_TOWER,           0x0008,                     FAIRY
 Stone Tower Temple Pot Water Room Underwater Lower 1,   pot,            NONE,                   TEMPLE_STONE_TOWER,           0x030a,                     MAGIC_JAR_LARGE

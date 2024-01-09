@@ -160,5 +160,16 @@ void EnItem00_AliasFreestandingRupee(Xflag* xflag)
         xflag->sceneId = SCE_MM_TWIN_ISLANDS_SPRING;
         xflag->id -= 18;
         break;
+    case SCE_MM_TEMPLE_STONE_TOWER_INVERTED:
+        if (xflag->roomId == 0x03)
+        {
+            switch (xflag->id)
+            {
+            case 0: xflag->roomId = 0x01; xflag->id = 0; break;
+            case 3: xflag->roomId = 0x01; xflag->id = 1; break;
+            case 4: xflag->roomId = 0x01; xflag->id = 2; break;
+            }
+        }
+        break;
     }
 }

@@ -27,6 +27,8 @@
   locations:
     "Stone Tower Temple Inverted East Lower Chest": "(has(MASK_DEKU) || short_hook_anywhere) && can_use_fire_arrows"
     "Stone Tower Temple Inverted East Upper Chest": "(has(MASK_DEKU) || hookshot_anywhere) && can_use_elegy && event(STONE_TOWER_WATER_CHEST_SWITCH)"
+    "Stone Tower Temple Inverted Rupee Alcove 1": "can_use_light_arrows && can_hookshot"
+    "Stone Tower Temple Inverted Rupee Alcove 2": "can_use_light_arrows && can_hookshot"
 "Stone Tower Temple Inverted East Bridge":
   dungeon: IST
   events:
@@ -39,6 +41,9 @@
     "Stone Tower Temple Inverted East Middle Chest": "true"
     "Stone Tower Temple Inverted Pot Updrafts Bridge 1": "true"
     "Stone Tower Temple Inverted Pot Updrafts Bridge 2": "true"
+    "Stone Tower Temple Inverted Rupee Dexihand 1": "true"
+    "Stone Tower Temple Inverted Rupee Dexihand 2": "true"
+    "Stone Tower Temple Inverted Rupee Dexihand 3": "true"
 "Stone Tower Temple Inverted East Ledge":
   dungeon: IST
   exits:
@@ -150,6 +155,17 @@
     "Stone Tower Temple Inverted Flying Pot Pre-Boss 2": "soul_flying_pot && can_hookshot_short"
     "Stone Tower Temple Inverted Flying Pot Pre-Boss 3": "soul_flying_pot && can_hookshot_short"
     "Stone Tower Temple Inverted Flying Pot Pre-Boss 4": "soul_flying_pot && can_hookshot_short"
+    "Stone Tower Temple Inverted Rupee Pre-Boss Top 1": "can_hookshot_short"
+    "Stone Tower Temple Inverted Rupee Pre-Boss Top 2": "can_hookshot_short"
+    "Stone Tower Temple Inverted Rupee Pre-Boss Top 3": "can_hookshot_short"
+    "Stone Tower Temple Inverted Rupee Pre-Boss Bottom 1": "can_hookshot_short"
+    "Stone Tower Temple Inverted Rupee Pre-Boss Bottom 2": "can_hookshot_short"
+    "Stone Tower Temple Inverted Rupee Pre-Boss Bottom 3": "can_hookshot_short"
+    "Stone Tower Temple Inverted Rupee Pre-Boss Bottom 4": "can_hookshot_short"
+    "Stone Tower Temple Inverted Rupee Pre-Boss Bottom 5": "can_hookshot_short"
+    "Stone Tower Temple Inverted Rupee Pre-Boss Bottom 6": "can_hookshot_short"
+    "Stone Tower Temple Inverted Rupee Pre-Boss Bottom 7": "can_hookshot_short"
+    "Stone Tower Temple Inverted Rupee Pre-Boss Bottom 8": "can_hookshot_short"
 "Stone Tower Temple Boss Access":
   dungeon: IST
   exits:
