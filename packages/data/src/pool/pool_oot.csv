@@ -1175,6 +1175,8 @@ Bottom of the Well Rupee 2,                                 rupee,          NONE
 Bottom of the Well Rupee 3,                                 rupee,          NONE,                 BOTTOM_OF_THE_WELL,             0x0011c,                    RUPEE_BLUE
 Bottom of the Well Rupee 4,                                 rupee,          NONE,                 BOTTOM_OF_THE_WELL,             0x0011d,                    RUPEE_BLUE
 Bottom of the Well Rupee 5,                                 rupee,          NONE,                 BOTTOM_OF_THE_WELL,             0x0011e,                    RUPEE_BLUE
+Bottom of the Well Heart 1,                                 heart,          NONE,                 BOTTOM_OF_THE_WELL,             0x0020d,                    RECOVERY_HEART
+Bottom of the Well Heart 2,                                 heart,          NONE,                 BOTTOM_OF_THE_WELL,             0x0020e,                    RECOVERY_HEART
 Shadow Temple Map,                                          chest,          NONE,                 TEMPLE_SHADOW,                  0x01,                       MAP_SHADOW
 Shadow Temple Hover Boots,                                  chest,          NONE,                 TEMPLE_SHADOW,                  0x07,                       BOOTS_HOVER
 Shadow Temple Silver Rupees,                                chest,          NONE,                 TEMPLE_SHADOW,                  0x02,                       SMALL_KEY_SHADOW
