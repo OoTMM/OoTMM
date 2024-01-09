@@ -1117,6 +1117,10 @@ Water Temple Pot Corridor 1,                                pot,            NONE
 Water Temple Pot Corridor 2,                                pot,            NONE,                 TEMPLE_WATER,                   0x1404,                     RECOVERY_HEART
 Water Temple Pot River 1,                                   pot,            NONE,                 TEMPLE_WATER,                   0x150d,                     ARROWS_10
 Water Temple Pot River 2,                                   pot,            NONE,                 TEMPLE_WATER,                   0x150e,                     FAIRY
+Water Temple Heart 1,                                       heart,          NONE,                 TEMPLE_WATER,                   0x0150b,                    RECOVERY_HEART
+Water Temple Heart 2,                                       heart,          NONE,                 TEMPLE_WATER,                   0x0150c,                    RECOVERY_HEART
+Water Temple Heart 3,                                       heart,          NONE,                 TEMPLE_WATER,                   0x0150f,                    RECOVERY_HEART
+Water Temple Heart 4,                                       heart,          NONE,                 TEMPLE_WATER,                   0x01510,                    RECOVERY_HEART
 Bottom of the Well Compass,                                 chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x01,                       COMPASS_BOTW
 Bottom of the Well Under Debris,                            chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x02,                       BOMBCHU_10
 Bottom of the Well Back West,                               chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x04,                       NUTS_10
