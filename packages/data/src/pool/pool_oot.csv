@@ -1451,6 +1451,11 @@ Ganon Castle Fairy Fountain Fairy 5,                        fairy,          NONE
 Ganon Castle Fairy Fountain Fairy 6,                        fairy,          NONE,                 INSIDE_GANON_CASTLE,            0x51004,                    FAIRY
 Ganon Castle Fairy Fountain Fairy 7,                        fairy,          NONE,                 INSIDE_GANON_CASTLE,            0x61004,                    FAIRY
 Ganon Castle Fairy Fountain Fairy 8,                        fairy,          NONE,                 INSIDE_GANON_CASTLE,            0x71004,                    FAIRY
+Ganon Castle Heart Shadow 1,                                heart,          NONE,                 INSIDE_GANON_CASTLE,            0x00c08,                    RECOVERY_HEART
+Ganon Castle Heart Shadow 2,                                heart,          NONE,                 INSIDE_GANON_CASTLE,            0x00c0a,                    RECOVERY_HEART
+Ganon Castle Heart Shadow 3,                                heart,          NONE,                 INSIDE_GANON_CASTLE,            0x00c0c,                    RECOVERY_HEART
+Ganon Castle Heart Fire,                                    heart,          NONE,                 INSIDE_GANON_CASTLE,            0x00e13,                    RECOVERY_HEART
+Ganon Castle Heart Spirit,                                  heart,          NONE,                 INSIDE_GANON_CASTLE,            0x0111b,                    RECOVERY_HEART
 Ganon Tower Pot 01,                                         pot,            NONE,                 GANON_TOWER,                    0x0801,                     MAGIC_JAR_LARGE
 Ganon Tower Pot 02,                                         pot,            NONE,                 GANON_TOWER,                    0x0802,                     RECOVERY_HEART
 Ganon Tower Pot 03,                                         pot,            NONE,                 GANON_TOWER,                    0x0803,                     MAGIC_JAR_SMALL

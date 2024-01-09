@@ -93,6 +93,7 @@
     "Ganon Castle SR Fire Far Right": "has_tunic_goron_strict && (can_lift_gold || climb_anywhere || hookshot_anywhere || glitch_megaflip)"
     "Ganon Castle SR Fire Front Right": "has_tunic_goron"
     "Ganon Castle SR Fire Black Pillar": "has_tunic_goron && can_lift_gold"
+    "Ganon Castle Heart Fire": "has_tunic_goron"
 "Ganon Castle Fire End":
   dungeon: Ganon
   events:
@@ -132,6 +133,7 @@
     "Ganon Castle SR Spirit Center Bottom": "true"
     "Ganon Castle SR Spirit Back Left": "true"
     "Ganon Castle SR Spirit Back Right": "true"
+    "Ganon Castle Heart Spirit": "true"
 "Ganon Castle Spirit 2":
   dungeon: Ganon
   exits:
@@ -163,6 +165,9 @@
   locations:
     "Ganon Castle Pot Shadow End 1": "true"
     "Ganon Castle Pot Shadow End 2": "true"
+    "Ganon Castle Heart Shadow 1": "true"
+    "Ganon Castle Heart Shadow 2": "true"
+    "Ganon Castle Heart Shadow 3": "true"
 "Ganon Castle Stairs":
   region: NONE
   exits:
