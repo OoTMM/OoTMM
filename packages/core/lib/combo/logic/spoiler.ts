@@ -273,6 +273,7 @@ export class LogicPassSpoiler {
         const dstEntry = ENTRANCES[dst as keyof typeof ENTRANCES];
         niceEntrances.push(`${srcEntry.from} to ${srcEntry.to} (${src}) -> ${dstEntry.to} from ${dstEntry.from} (${dst})`);
       }
+
       for (const niceE of niceEntrances.sort()) {
         this.write(`${niceE}`);
       }
