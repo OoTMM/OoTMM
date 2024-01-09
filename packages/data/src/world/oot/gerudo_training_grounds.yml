@@ -9,6 +9,8 @@
     "Gerudo Training Grounds Entrance 1": "can_hit_triggers_distance"
     "Gerudo Training Grounds Entrance 2": "can_hit_triggers_distance"
     "Gerudo Training Grounds Stalfos": "has_weapon && soul_enemy(SOUL_ENEMY_STALFOS)"
+    "Gerudo Training Grounds Heart 1": "true"
+    "Gerudo Training Grounds Heart 2": "true"
 "Gerudo Training Grounds Wallmaster":
   region: NONE
   exits:

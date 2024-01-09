@@ -1372,6 +1372,8 @@ Gerudo Training Grounds SR Water 2,                         sr,             NONE
 Gerudo Training Grounds SR Water 3,                         sr,             NONE,                 GERUDO_TRAINING_GROUND,         0x4e,                       RUPEE_SILVER_GTG_WATER
 Gerudo Training Grounds SR Water 4,                         sr,             NONE,                 GERUDO_TRAINING_GROUND,         0x4f,                       RUPEE_SILVER_GTG_WATER
 Gerudo Training Grounds SR Water 5,                         sr,             NONE,                 GERUDO_TRAINING_GROUND,         0x50,                       RUPEE_SILVER_GTG_WATER
+Gerudo Training Grounds Heart 1,                            heart,          NONE,                 GERUDO_TRAINING_GROUND,         0x0070a,                    RECOVERY_HEART
+Gerudo Training Grounds Heart 2,                            heart,          NONE,                 GERUDO_TRAINING_GROUND,         0x0070b,                    RECOVERY_HEART
 Ganon Castle Water Chest 1,                                 chest,          NONE,                 INSIDE_GANON_CASTLE,            0x06,                       RECOVERY_HEART
 Ganon Castle Water Chest 2,                                 chest,          NONE,                 INSIDE_GANON_CASTLE,            0x07,                       ICE_TRAP
 Ganon Castle Forest Chest,                                  chest,          NONE,                 INSIDE_GANON_CASTLE,            0x09,                       RUPEE_BLUE
