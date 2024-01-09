@@ -1882,6 +1882,23 @@ Secret Shrine Grass Garo Master 3,                      grass,          NONE,   
 Secret Shrine Grass Garo Master 4,                      grass,          NONE,                   SECRET_SHRINE,                0x00505,                    RANDOM
 Secret Shrine Grass Garo Master 5,                      grass,          NONE,                   SECRET_SHRINE,                0x00506,                    RANDOM
 Secret Shrine Grass Garo Master 6,                      grass,          NONE,                   SECRET_SHRINE,                0x00507,                    RANDOM
+Secret Shrine Rupee 01,                                 rupee,          NONE,                   SECRET_SHRINE,                0x00000,                    RUPEE_GREEN
+Secret Shrine Rupee 02,                                 rupee,          NONE,                   SECRET_SHRINE,                0x00001,                    RUPEE_GREEN
+Secret Shrine Rupee 03,                                 rupee,          NONE,                   SECRET_SHRINE,                0x00002,                    RUPEE_GREEN
+Secret Shrine Rupee 04,                                 rupee,          NONE,                   SECRET_SHRINE,                0x00003,                    RUPEE_GREEN
+Secret Shrine Rupee 05,                                 rupee,          NONE,                   SECRET_SHRINE,                0x00004,                    RUPEE_GREEN
+Secret Shrine Rupee 06,                                 rupee,          NONE,                   SECRET_SHRINE,                0x00005,                    RUPEE_GREEN
+Secret Shrine Rupee 07,                                 rupee,          NONE,                   SECRET_SHRINE,                0x00006,                    RUPEE_GREEN
+Secret Shrine Rupee 08,                                 rupee,          NONE,                   SECRET_SHRINE,                0x00007,                    RUPEE_GREEN
+Secret Shrine Rupee 09,                                 rupee,          NONE,                   SECRET_SHRINE,                0x00008,                    RUPEE_GREEN
+Secret Shrine Rupee 10,                                 rupee,          NONE,                   SECRET_SHRINE,                0x00009,                    RUPEE_GREEN
+Secret Shrine Rupee 11,                                 rupee,          NONE,                   SECRET_SHRINE,                0x0000a,                    RUPEE_GREEN
+Secret Shrine Rupee 12,                                 rupee,          NONE,                   SECRET_SHRINE,                0x0000b,                    RUPEE_GREEN
+Secret Shrine Rupee 13,                                 rupee,          NONE,                   SECRET_SHRINE,                0x0000c,                    RUPEE_GREEN
+Secret Shrine Rupee 14,                                 rupee,          NONE,                   SECRET_SHRINE,                0x0000d,                    RUPEE_GREEN
+Secret Shrine Rupee 15,                                 rupee,          NONE,                   SECRET_SHRINE,                0x0000e,                    RUPEE_GREEN
+Secret Shrine Rupee 16,                                 rupee,          NONE,                   SECRET_SHRINE,                0x0000f,                    RUPEE_GREEN
+Secret Shrine Rupee 17,                                 rupee,          NONE,                   SECRET_SHRINE,                0x00010,                    RUPEE_GREEN
 Sakon Hideout Pot Second Room 1,                        pot,            NONE,                   SAKON_HIDEOUT,                0x0127,                     RECOVERY_HEART
 Sakon Hideout Pot Second Room 2,                        pot,            NONE,                   SAKON_HIDEOUT,                0x0128,                     RECOVERY_HEART
 Sakon Hideout Pot First Room 1,                         pot,            NONE,                   SAKON_HIDEOUT,                0x0129,                     RECOVERY_HEART
