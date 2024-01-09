@@ -73,6 +73,9 @@
   locations:
     "Pirate Fortress Interior Lower Chest": "true"
     "Pirate Fortress Interior Upper Chest": "can_hookshot || short_hook_anywhere || (has_mask_goron && trick(MM_OOB_MOVEMENT))"
+    "Pirate Fortress Interior Heart 1": "can_hookshot || short_hook_anywhere"
+    "Pirate Fortress Interior Heart 2": "can_hookshot || short_hook_anywhere"
+    "Pirate Fortress Interior Heart 3": "can_hookshot || short_hook_anywhere"
 "Pirate Fortress Hookshot Room Upper":
   region: PIRATE_FORTRESS_INTERIOR
   exits:

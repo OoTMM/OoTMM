@@ -687,6 +687,28 @@ function outputHeartsOot(roomActors: RoomActors[]) {
   }
 }
 
+function outputHeartsMm(roomActors: RoomActors[]) {
+  let lastSceneId = -1;
+  let lastSetupId = -1;
+  for (const room of roomActors) {
+    for (const actor of room.actors) {
+      if (actor.typeId === ACTORS_MM.EN_ITEM00) {
+        const item00arg = (actor.params >> 0) & 0xff;
+        const item = ITEM00_DROPS_MM[item00arg];
+        if (item !== 'RECOVERY_HEART') continue;
+        const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
+        if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
+          console.log('');
+          lastSceneId = room.sceneId;
+          lastSetupId = room.setupId;
+        }
+        /* PRINT */
+        console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Heart ${decPad(actor.actorId + 1, 2)},        heart,            NONE,                 ${SCENES_BY_ID.mm[room.sceneId]}, ${hexPad(key, 5)}, ${item}`);
+      }
+    }
+  }
+}
+
 function outputGrassPoolOot(roomActors: RoomActors[]) {
   let lastSceneId = -1;
   let lastSetupId = -1;
@@ -1020,7 +1042,7 @@ async function run() {
   //outputGrassPoolOot(mqRooms);
   //outputFairyPoolOot(ootRooms);
   //outputRupeesMm(mmRooms);
-  outputHeartsOot(ootRooms);
+  outputHeartsMm(mmRooms);
 }
 
 run().catch(e => {

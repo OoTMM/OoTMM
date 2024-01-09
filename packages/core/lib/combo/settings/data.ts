@@ -505,14 +505,21 @@ export const SETTINGS = [{
   name: 'Freestanding Rupees Shuffle (MM)',
   category: 'main.shuffle',
   type: 'boolean',
-  description: 'Controls whether or not the freestanding hearts are shuffled (MM)',
+  description: 'Controls whether or not the freestanding rupees are shuffled (MM)',
   default: false
 }, {
   key: 'shuffleFreeHeartsOot',
   name: 'Freestanding Hearts Shuffle (OoT)',
   category: 'main.shuffle',
   type: 'boolean',
-  description: 'Controls whether or not the freestanding rupees are shuffled (OoT)',
+  description: 'Controls whether or not the freestanding hearts are shuffled (OoT)',
+  default: false
+}, {
+  key: 'shuffleFreeHeartsMm',
+  name: 'Freestanding Hearts Shuffle (MM)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the freestanding hearts are shuffled (MM)',
   default: false
 }, {
   key: 'shuffleOcarinasOot',
