@@ -1074,6 +1074,9 @@ Ice Cavern Rupee Ice,                                       rupee,          NONE
 Ice Cavern Rupee Midair 1,                                  rupee,          NONE,                 ICE_CAVERN,                     0x00500,                    RUPEE_RED
 Ice Cavern Rupee Midair 2,                                  rupee,          NONE,                 ICE_CAVERN,                     0x00501,                    RUPEE_RED
 Ice Cavern Rupee Midair 3,                                  rupee,          NONE,                 ICE_CAVERN,                     0x00502,                    RUPEE_RED
+Ice Cavern Heart 1,                                         heart,          NONE,                 ICE_CAVERN,                     0x00906,                    RECOVERY_HEART
+Ice Cavern Heart 2,                                         heart,          NONE,                 ICE_CAVERN,                     0x00907,                    RECOVERY_HEART
+Ice Cavern Heart 3,                                         heart,          NONE,                 ICE_CAVERN,                     0x00908,                    RECOVERY_HEART
 Water Temple Under Center,                                  chest,          NONE,                 TEMPLE_WATER,                   0x06,                       RUPEE_BLUE
 Water Temple Compass,                                       chest,          NONE,                 TEMPLE_WATER,                   0x09,                       COMPASS_WATER
 Water Temple Longshot,                                      chest,          NONE,                 TEMPLE_WATER,                   0x07,                       HOOKSHOT
