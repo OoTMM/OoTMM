@@ -1708,6 +1708,10 @@
     "Twin Islands Grass 10": "event(BOSS_SNOWHEAD)"
     "Twin Islands Grass 11": "event(BOSS_SNOWHEAD)"
     "Twin Islands Grass 12": "event(BOSS_SNOWHEAD)"
+    "Twin Islands Rupee 1": "event(BOSS_SNOWHEAD) && has_mask_zora"
+    "Twin Islands Rupee 2": "event(BOSS_SNOWHEAD) && has_mask_zora"
+    "Twin Islands Rupee 3": "event(BOSS_SNOWHEAD) && has_mask_zora"
+    "Twin Islands Rupee 4": "event(BOSS_SNOWHEAD) && has_mask_zora"
 "Twin Islands Ramp Grotto":
   region: ENTRANCE
   exits:

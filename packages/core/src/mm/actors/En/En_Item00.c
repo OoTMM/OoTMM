@@ -149,5 +149,9 @@ void EnItem00_AliasFreestandingRupee(Xflag* xflag)
             break;
         }
         break;
+    case SCE_MM_TWIN_ISLANDS_WINTER:
+        xflag->sceneId = SCE_MM_TWIN_ISLANDS_SPRING;
+        xflag->id -= 18;
+        break;
     }
 }
