@@ -617,6 +617,30 @@ Deku Palace Grotto Grass 09,                            grass,          NONE,   
 Deku Palace Grotto Grass 10,                            grass,          NONE,                   GROTTOS,                      0x90c03,                    RANDOM
 Deku Palace Grotto Grass 11,                            grass,          NONE,                   GROTTOS,                      0xa0c03,                    RANDOM
 Deku Palace Grotto Grass 12,                            grass,          NONE,                   GROTTOS,                      0xb0c03,                    RANDOM
+Deku Palace Rupee Right 01,                             rupee,          NONE,                   DEKU_PALACE,                  0x00100,                    RUPEE_GREEN
+Deku Palace Rupee Right 02,                             rupee,          NONE,                   DEKU_PALACE,                  0x00101,                    RUPEE_GREEN
+Deku Palace Rupee Right 03,                             rupee,          NONE,                   DEKU_PALACE,                  0x00102,                    RUPEE_GREEN
+Deku Palace Rupee Right 04,                             rupee,          NONE,                   DEKU_PALACE,                  0x00103,                    RUPEE_GREEN
+Deku Palace Rupee Right 05,                             rupee,          NONE,                   DEKU_PALACE,                  0x00104,                    RUPEE_GREEN
+Deku Palace Rupee Right 06,                             rupee,          NONE,                   DEKU_PALACE,                  0x00105,                    RUPEE_GREEN
+Deku Palace Rupee Right 07,                             rupee,          NONE,                   DEKU_PALACE,                  0x00111,                    RUPEE_GREEN
+Deku Palace Rupee Right 08,                             rupee,          NONE,                   DEKU_PALACE,                  0x10111,                    RUPEE_GREEN
+Deku Palace Rupee Right 09,                             rupee,          NONE,                   DEKU_PALACE,                  0x20111,                    RUPEE_GREEN
+Deku Palace Rupee Right 10,                             rupee,          NONE,                   DEKU_PALACE,                  0x30111,                    RUPEE_GREEN
+Deku Palace Rupee Right 11,                             rupee,          NONE,                   DEKU_PALACE,                  0x40111,                    RUPEE_GREEN
+Deku Palace Rupee Right 12,                             rupee,          NONE,                   DEKU_PALACE,                  0x50111,                    RUPEE_GREEN
+Deku Palace Rupee Right 13,                             rupee,          NONE,                   DEKU_PALACE,                  0x60111,                    RUPEE_RED
+Deku Palace Rupee Left 01,                              rupee,          NONE,                   DEKU_PALACE,                  0x00200,                    RUPEE_GREEN
+Deku Palace Rupee Left 02,                              rupee,          NONE,                   DEKU_PALACE,                  0x00201,                    RUPEE_GREEN
+Deku Palace Rupee Left 03,                              rupee,          NONE,                   DEKU_PALACE,                  0x00202,                    RUPEE_GREEN
+Deku Palace Rupee Left 05,                              rupee,          NONE,                   DEKU_PALACE,                  0x00204,                    RUPEE_GREEN
+Deku Palace Rupee Left 06,                              rupee,          NONE,                   DEKU_PALACE,                  0x00205,                    RUPEE_GREEN
+Deku Palace Rupee Left 07,                              rupee,          NONE,                   DEKU_PALACE,                  0x00206,                    RUPEE_GREEN
+Deku Palace Rupee Left 08,                              rupee,          NONE,                   DEKU_PALACE,                  0x00207,                    RUPEE_BLUE
+Deku Palace Rupee Left 09,                              rupee,          NONE,                   DEKU_PALACE,                  0x00208,                    RUPEE_BLUE
+Deku Palace Rupee Left 10,                              rupee,          NONE,                   DEKU_PALACE,                  0x00209,                    RUPEE_BLUE
+Deku Palace Rupee Left 11,                              rupee,          NONE,                   DEKU_PALACE,                  0x0020a,                    RUPEE_BLUE
+Deku Palace Rupee Left 12,                              rupee,          NONE,                   DEKU_PALACE,                  0x0020b,                    RUPEE_BLUE
 Deku Shrine Mask of Scents,                             npc,            BUTLER_RACE,            DEKU_SHRINE,                  MASK_SCENTS,                MASK_SCENTS
 Deku Shrine Pot 1,                                      pot,            NONE,                   DEKU_SHRINE,                  0x000e,                     RUPEE_GREEN
 Deku Shrine Pot 2,                                      pot,            NONE,                   DEKU_SHRINE,                  0x000f,                     RUPEE_GREEN
