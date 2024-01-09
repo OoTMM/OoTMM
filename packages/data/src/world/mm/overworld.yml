@@ -302,6 +302,7 @@
 "Clock Town East":
   region: CLOCK_TOWN_EAST
   exits:
+    "Clock Town North": "true"
     "Termina Field": "true"
     "Clock Town South Upper East": "true"
     "Clock Town South Lower East": "true"
