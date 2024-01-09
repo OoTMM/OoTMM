@@ -661,6 +661,7 @@ Woodfall Grass 3,                                       grass,          NONE,   
 Woodfall Grass 4,                                       grass,          NONE,                   WOODFALL,                     0x00014,                    RANDOM
 Woodfall Grass 5,                                       grass,          NONE,                   WOODFALL,                     0x00015,                    RANDOM
 Woodfall Grass 6,                                       grass,          NONE,                   WOODFALL,                     0x00016,                    RANDOM
+Woodfall Rupee,                                         rupee,          NONE,                   WOODFALL,                     0x00000,                    RUPEE_BLUE
 Swamp Spider House Mask of Truth,                       npc,            NONE,                   SPIDER_HOUSE_SWAMP,           SPIDER_HOUSE_SWAMP,         MASK_TRUTH
 Swamp Skulltula Main Room Near Ceiling,                 chest,          NONE,                   SPIDER_HOUSE_SWAMP,           0x00,                       GS_TOKEN_SWAMP
 Swamp Skulltula Main Room Lower Right Soft Soil,        chest,          NONE,                   SPIDER_HOUSE_SWAMP,           0x0c,                       GS_TOKEN_SWAMP

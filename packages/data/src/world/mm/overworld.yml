@@ -1502,6 +1502,7 @@
     "Woodfall Grass 4": "true"
     "Woodfall Grass 5": "true"
     "Woodfall Grass 6": "true"
+    "Woodfall Rupee": "has(MASK_DEKU)"
 "Woodfall Front of Temple":
   region: WOODFALL
   exits:
