@@ -1228,6 +1228,7 @@ export class LogicPassWorldTransform {
       this.scarcifyPool(1);
       break;
     case 'minimal':
+    case 'barren':
       this.scarcifyPool(2);
       break;
     case 'plentiful':

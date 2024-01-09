@@ -16,6 +16,7 @@ import { LogicPassFixer } from './fixer';
 import { LogicPassAnalysisFoolish } from './analysis-foolish';
 import { LogicPassPrice } from './price';
 import { LogicPassItemProperties } from './item-properties';
+import { LogicPassMinimize } from './minimize';
 
 interface LogicPass<Out> {
   run: () => Out;
@@ -62,6 +63,7 @@ export const solvedWorldState = (monitor: Monitor, opts: Options) => {
     .apply(LogicPassPrice)
     .apply(LogicPassEntrances)
     .apply(LogicPassSolver)
+    .apply(LogicPassMinimize)
     .exec();
 }
 

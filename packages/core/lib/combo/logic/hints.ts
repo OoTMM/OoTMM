@@ -11,6 +11,7 @@ import { Region, makeRegion } from './regions';
 import { CountMap, countMapArray } from '../util';
 import { ItemGroups, ItemHelpers, Items, PlayerItems, PlayerItem, itemByID, makePlayerItem } from '../items';
 import { isDungeonStrayFairy } from '../items/helpers';
+import { isLocationFullyShuffled } from './locations';
 
 const FIXED_HINTS_LOCATIONS = [
   'OOT Skulltula House 10 Tokens',
@@ -280,11 +281,12 @@ export class LogicPassHints {
       return false;
     }
 
-    /* No plando */
-    if (this.state.settings.noPlandoHints) {
-      if (this.state.settings.plando.locations[locD.id]) {
-        return false;
-      }
+    /* Not shuffled */
+    if (!isLocationFullyShuffled(this.state.settings, this.state.fixedLocations, this.state.items, loc, {
+      noPlando: this.state.settings.noPlandoHints,
+      songs: klass === 'path',
+    })) {
+      return false;
     }
 
     /* These specific locations are always ignored */
@@ -292,81 +294,8 @@ export class LogicPassHints {
       return false;
     }
 
-    /* Non-shuffled items are ignored */
-    if (this.state.fixedLocations.has(loc)) {
-      return false;
-    }
-
     /* CHecks with no region are ignored (skip zelda) */
     if (!region || region === 'NONE') {
-      return false;
-    }
-
-    /* Non-shuffled hideout keys */
-    if ((ItemHelpers.isSmallKeyHideout(item.item) || ItemHelpers.isKeyRingHideout(item.item)) && this.state.settings.smallKeyShuffleHideout !== 'anywhere') {
-      return false;
-    }
-
-    /* Non-shuffled TCG keys */
-    if ((ItemHelpers.isSmallKeyTCG(item.item) || ItemHelpers.isKeyRingTCG(item.item)) && this.state.settings.smallKeyShuffleChestGame !== 'anywhere') {
-      return false;
-    }
-
-    /* Non-shuffled regular keys */
-    if ((ItemHelpers.isSmallKeyRegularOot(item.item) || ItemHelpers.isKeyRingRegularOot(item.item)) && this.state.settings.smallKeyShuffleOot !== 'anywhere') {
-      return false;
-    }
-    if ((ItemHelpers.isSmallKeyRegularMm(item.item) || ItemHelpers.isKeyRingRegularMm(item.item)) && this.state.settings.smallKeyShuffleMm !== 'anywhere') {
-      return false;
-    }
-
-    /* Non-shuffled silver rupees */
-    if (ItemHelpers.isSilverRupee(item.item) && this.state.settings.silverRupeeShuffle !== 'anywhere') {
-      return false;
-    }
-
-    /* Non-shuffled Ganon BK (doesn't really matter) */
-    if (ItemHelpers.isGanonBossKey(item.item) && this.state.settings.ganonBossKey !== 'anywhere') {
-      return false;
-    }
-
-    /* Non shuffled boss keys */
-    if (ItemHelpers.isRegularBossKeyOot(item.item) && this.state.settings.bossKeyShuffleOot !== 'anywhere') {
-      return false;
-    }
-
-    if (ItemHelpers.isRegularBossKeyMm(item.item) && this.state.settings.bossKeyShuffleMm !== 'anywhere') {
-      return false;
-    }
-
-    /* Non shuffled town fairy */
-    if (ItemHelpers.isTownStrayFairy(item.item) && this.state.settings.townFairyShuffle === 'vanilla') {
-      return false;
-    }
-
-    /* Non shuffled dungeon stray fairy */
-    if (isDungeonStrayFairy(item.item) && this.state.settings.strayFairyChestShuffle !== 'anywhere' && this.state.settings.strayFairyOtherShuffle !== 'anywhere') {
-      return false;
-    }
-
-    /* Non-shuffled map/compass (doesn't really matter) */
-    if (ItemHelpers.isMapCompass(item.item) && this.state.settings.mapCompassShuffle !== 'anywhere') {
-      return false;
-    }
-
-    /* Non-shuffled dungeon reward */
-    if (ItemHelpers.isDungeonReward(item.item) && this.state.settings.dungeonRewardShuffle === 'dungeonBlueWarps') {
-      return false;
-    }
-
-    /* Non shuffled GS token */
-    /* TODO: Handle dungeon/overworld better */
-    if (ItemHelpers.isGoldToken(item.item) && this.state.settings.goldSkulltulaTokens === 'none') {
-      return false;
-    }
-
-    /* Non shuffled House tokens */
-    if (ItemHelpers.isHouseToken(item.item) && this.state.settings.housesSkulltulaTokens === 'none') {
       return false;
     }
 
@@ -378,9 +307,6 @@ export class LogicPassHints {
     /* Additional restrictions for WotH */
     if (klass === 'path') {
       if (ItemHelpers.isKey(item.item) || ItemHelpers.isStrayFairy(item.item) || ItemHelpers.isSilverRupee(item.item) || ItemHelpers.isToken(item.item) || ItemHelpers.isDungeonReward(item.item)) {
-        return false;
-      }
-      if (ItemHelpers.isSong(item.item) && this.state.settings.songs !== 'anywhere') {
         return false;
       }
     }

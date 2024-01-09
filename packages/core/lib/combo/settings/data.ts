@@ -97,6 +97,7 @@ export const SETTINGS = [{
     { value: 'normal', name: 'Normal', description: 'The regular item count for each game.' },
     { value: 'scarce', name: 'Scarce', description: 'One less of every major item. No Heart Pieces.' },
     { value: 'minimal', name: 'Minimal', description: 'Only one of each major item. No Heart Pieces or Containers.' },
+    { value: 'barren', name: 'Barren', description: 'Minimal item pool, plus every shuffled item that is not strictly required to reach the goal (beatable only) or any location (all locations) gets removed.' },
   ],
   default: 'normal'
 }, {

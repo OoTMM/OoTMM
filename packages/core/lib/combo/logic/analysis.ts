@@ -619,7 +619,8 @@ export class LogicPassAnalysis {
       if (this.requiredLocs.has(loc) || this.uselessLocs.has(loc) || this.unreachableLocs.has(loc)) {
         continue;
       }
-      if (!this.state.itemProperties.important.has(this.state.items.get(loc)!.item) || this.isLocUselessNonRenewable(loc) || this.isLocUselessHeuristicCount(loc) || this.isLocUselessHeuristicDependencies(loc)) {
+      const item = this.state.items.get(loc)!;
+      if (!this.state.itemProperties.important.has(item.item) || this.isLocUselessNonRenewable(loc) || this.isLocUselessHeuristicCount(loc) || this.isLocUselessHeuristicDependencies(loc)) {
         this.uselessLocs.add(loc);
       }
     }
