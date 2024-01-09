@@ -1485,6 +1485,12 @@ Woodfall Temple Grass Pits Room 08,                     grass,          NONE,   
 Woodfall Temple Grass Pits Room 09,                     grass,          NONE,                   TEMPLE_WOODFALL,              0x00a0e,                    RANDOM
 Woodfall Temple Grass Pits Room 10,                     grass,          NONE,                   TEMPLE_WOODFALL,              0x00a0f,                    RANDOM
 Woodfall Temple Grass Pits Room 11,                     grass,          NONE,                   TEMPLE_WOODFALL,              0x00a10,                    RANDOM
+Woodfall Temple Rupee Upper 1,                          rupee,          NONE,                   TEMPLE_WOODFALL,              0x00000,                    RUPEE_RED
+Woodfall Temple Rupee Upper 2,                          rupee,          NONE,                   TEMPLE_WOODFALL,              0x00001,                    RUPEE_RED
+Woodfall Temple Rupee Lower 1,                          rupee,          NONE,                   TEMPLE_WOODFALL,              0x00002,                    RUPEE_BLUE
+Woodfall Temple Rupee Lower 2,                          rupee,          NONE,                   TEMPLE_WOODFALL,              0x00003,                    RUPEE_BLUE
+Woodfall Temple Rupee Lower 3,                          rupee,          NONE,                   TEMPLE_WOODFALL,              0x00004,                    RUPEE_BLUE
+Woodfall Temple Rupee Lower 4,                          rupee,          NONE,                   TEMPLE_WOODFALL,              0x00005,                    RUPEE_BLUE
 Woodfall Temple Boss Container,                         collectible,    NONE,                   LAIR_ODOLWA,                  0x1f,                       HEART_CONTAINER
 Woodfall Temple Boss,                                   npc,            NONE,                   LAIR_ODOLWA,                  REMAINS_ODOLWA,             REMAINS_ODOLWA
 Woodfall Temple Boss Grass 01,                          grass,          NONE,                   LAIR_ODOLWA,                  0x0000a,                    RANDOM
