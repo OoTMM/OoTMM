@@ -921,12 +921,16 @@ Dodongo Cavern Grass Pre-Boss,                              grass,          NONE
 Dodongo Cavern Grass Bomb Bag Room,                         grass,          NONE,                 DODONGO_CAVERN,                 0x00900,                    DEKU_SEEDS_5
 Dodongo Cavern Grass Pre-Miniboss,                          grass,          NONE,                 DODONGO_CAVERN,                 0x00a00,                    RECOVERY_HEART
 Dodongo Cavern Grass East Corridor Side Room,               grass,          NONE,                 DODONGO_CAVERN,                 0x00b03,                    DEKU_SEEDS_5
+Dodongo Cavern Heart Miniboss Lava,                         heart,          NONE,                 DODONGO_CAVERN,                 0x00305,                    RECOVERY_HEART
+Dodongo Cavern Heart Miniboss Upper 1,                      heart,          NONE,                 DODONGO_CAVERN,                 0x00306,                    RECOVERY_HEART
+Dodongo Cavern Heart Miniboss Upper 2,                      heart,          NONE,                 DODONGO_CAVERN,                 0x00307,                    RECOVERY_HEART
+Dodongo Cavern Heart Bomb Bag Room,                         heart,          NONE,                 DODONGO_CAVERN,                 0x0090d,                    RECOVERY_HEART
 Dodongo Cavern Boss Chest,                                  chest,          NONE,                 LAIR_KING_DODONGO,              0x00,                       BOMBS_10
 Dodongo Cavern Boss Container,                              collectible,    NONE,                 LAIR_KING_DODONGO,              0x1f,                       HEART_CONTAINER
 Dodongo Cavern Boss,                                        npc,            NONE,                 LAIR_KING_DODONGO,              BLUE_WARP_KING_DODONGO,     STONE_RUBY
 Jabu-Jabu Map Chest,                                        chest,          NONE,                 INSIDE_JABU_JABU,               0x02,                       MAP_JJ
 Jabu-Jabu Compass Chest,                                    chest,          NONE,                 INSIDE_JABU_JABU,               0x04,                       COMPASS_JJ
-Jabu-Jabu Boomerang Chest,                                  chest,          JABU_BOOMERANG,                 INSIDE_JABU_JABU,               0x01,                       BOOMERANG
+Jabu-Jabu Boomerang Chest,                                  chest,          JABU_BOOMERANG,       INSIDE_JABU_JABU,               0x01,                       BOOMERANG
 Jabu-Jabu Scrub,                                            scrub,          NONE,                 INSIDE_JABU_JABU,               0x20,                       NUTS_5
 Jabu-Jabu GS Water Switch,                                  gs,             NONE,                 INSIDE_JABU_JABU,               0x1b,                       GS_TOKEN
 Jabu-Jabu GS Bottom Lower,                                  gs,             NONE,                 INSIDE_JABU_JABU,               0x18,                       GS_TOKEN
