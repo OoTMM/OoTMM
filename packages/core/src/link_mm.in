@@ -4,6 +4,11 @@ Play_Init = 0x8016a2c8;
 gSaveContext = 0x801ef670;
 DMARomToRam = 0x80080790;
 
+EnItem00_Init = 0x800a5d70;
+EnItem00_CollectedHandler = 0x800a6a40;
+
+Actor_ProcessInitChain = 0x800ffadc;
+
 ActorRemove = 0x800BB498;
 AddMagic = 0x80115d14;
 Health_ChangeBy = 0x80115908;

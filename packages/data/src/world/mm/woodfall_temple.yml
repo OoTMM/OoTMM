@@ -177,6 +177,10 @@
     "Woodfall Temple Grass Pre-Boss 3": "true"
     "Woodfall Temple Grass Pre-Boss 4": "true"
     "Woodfall Temple Grass Pre-Boss 5": "true"
+    "Woodfall Temple Rupee Lower 1": "true"
+    "Woodfall Temple Rupee Lower 2": "true"
+    "Woodfall Temple Rupee Lower 3": "true"
+    "Woodfall Temple Rupee Lower 4": "true"
 "Woodfall Temple Pre-Boss Ledge":
   dungeon: WF
   exits:
@@ -184,6 +188,8 @@
   locations:
     "Woodfall Temple Pot Pre-Boss 1": "true"
     "Woodfall Temple Pot Pre-Boss 2": "true"
+    "Woodfall Temple Rupee Upper 1": "has(MASK_DEKU) || has_mask_zora"
+    "Woodfall Temple Rupee Upper 2": "has(MASK_DEKU) || has_mask_zora"
 "Woodfall Temple Princess Jail":
   dungeon: WF
   events:

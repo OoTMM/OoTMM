@@ -1,5 +1,36 @@
 #include <combo.h>
 
+/* Resize */
+PATCH_START 0x801adecc
+.int 0x1b0
+PATCH_END
+
+/* Use our init */
+PATCH_START 0x801aded0
+.int EnItem00_InitWrapper
+PATCH_END
+
+UpdateEnd:
+  /* Original */
+  sh    zero,0x14a(s0)
+
+  j EnItem00_SetXflagCollectedHandler
+   move  a0,s0
+
+/* Use our xflag post-collection handler */
+PATCH_START 0x800a7108
+  sh    zero,0x14a(s0)
+  jal   EnItem00_SetXflagCollectedHandler
+   move  a0,s0
+PATCH_END
+
+/* Use our xflag add handler */
+PATCH_START 0x800a6e38
+  move a0,s0
+  jal EnItem00_AddXflag
+   nop
+PATCH_END
+
 /* Patch DrawGI */
 PATCH_START 0x800a7248
   li a1,(DRAWGI_RECOVERY_HEART - 1)

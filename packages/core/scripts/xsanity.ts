@@ -133,10 +133,12 @@ const ACTORS_OOT = {
 };
 
 const ACTORS_MM = {
+  EN_ITEM00: 0x0e,
   POT: 0x82,
   FLYING_POT: 0x8d,
   EN_KUSA: 0x90,
   OBJ_MURE2: 0xb3,
+  OBJ_MURE3: 0xe8,
   OBJ_GRASS: 0x10b,
   OBJ_GRASS_UNIT: 0x10d,
   EN_KUSA2: 0x171,
@@ -147,7 +149,7 @@ const ACTOR_SLICES_OOT = {
   [ACTORS_OOT.ROCK_BUSH_GROUP]: 12,
   [ACTORS_OOT.EN_ELF]: 8,
   [ACTORS_OOT.BG_SPOT11_OASIS]: 8,
-  [ACTORS_OOT.OBJ_MURE3]: 9,
+  [ACTORS_OOT.OBJ_MURE3]: 7,
 }
 
 const ACTOR_SLICES_MM = {
@@ -155,6 +157,7 @@ const ACTOR_SLICES_MM = {
   [ACTORS_MM.OBJ_GRASS_UNIT]: 12,
   [ACTORS_MM.EN_KUSA2]: 9,
   [ACTORS_MM.EN_ELF]: 8,
+  [ACTORS_MM.OBJ_MURE3]: 7,
 }
 
 const INTERESTING_ACTORS_OOT = Object.values(ACTORS_OOT);
@@ -646,14 +649,14 @@ function outputFairyPoolOot(roomActors: RoomActors[]) {
 }
 
 
-function outputRupeesOot(roomActors: RoomActors[]) {
+function outputRupeesMm(roomActors: RoomActors[]) {
   let lastSceneId = -1;
   let lastSetupId = -1;
   for (const room of roomActors) {
     for (const actor of room.actors) {
-      if (actor.typeId === ACTORS_OOT.EN_ITEM00) {
+      if (actor.typeId === ACTORS_MM.EN_ITEM00) {
         const item00arg = (actor.params >> 0) & 0xff;
-        const item = ITEM00_DROPS[item00arg];
+        const item = ITEM00_DROPS_MM[item00arg];
         if (!RUPEES.has(item)) {
           continue;
         }
@@ -667,12 +670,18 @@ function outputRupeesOot(roomActors: RoomActors[]) {
         console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Rupee ${decPad(actor.actorId + 1, 2)},        rupee,            NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
       }
 
-      if (actor.typeId === ACTORS_OOT.OBJ_MURE3) {
+      if (actor.typeId === ACTORS_MM.OBJ_MURE3) {
         let items: string[] = [];
         switch (actor.params & 0xe000) {
         case 0x0000: items = ['RUPEE_BLUE', 'RUPEE_BLUE', 'RUPEE_BLUE', 'RUPEE_BLUE', 'RUPEE_BLUE']; break;
         case 0x2000: items = ['RUPEE_GREEN', 'RUPEE_GREEN', 'RUPEE_GREEN', 'RUPEE_GREEN', 'RUPEE_GREEN']; break;
         case 0x4000: items = ['RUPEE_GREEN', 'RUPEE_GREEN', 'RUPEE_GREEN', 'RUPEE_GREEN', 'RUPEE_GREEN', 'RUPEE_GREEN', 'RUPEE_RED']; break;
+        }
+
+        if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
+          console.log('');
+          lastSceneId = room.sceneId;
+          lastSetupId = room.setupId;
         }
 
         for (let i = 0; i < items.length; ++i) {
@@ -1017,7 +1026,7 @@ async function run() {
   //outputKeatonGrassPoolMm(mmRooms);
   //outputGrassPoolOot(mqRooms);
   //outputFairyPoolOot(ootRooms);
-  outputRupeesOot(mqRooms);
+  outputRupeesMm(mmRooms);
 }
 
 run().catch(e => {

@@ -171,6 +171,10 @@
   locations:
     "Snowhead Temple Icicle Room Alcove": "can_use_lens"
     "Snowhead Temple Icicle Room": "((has_arrows || has_mask_zora || can_use_lens) && can_break_boulders) || (can_hookshot_short && (has_explosives || trick_keg_explosives))"
+    # TODO: Does this require fire arrows?
+    "Snowhead Temple Rupee 1": "can_use_fire_arrows"
+    "Snowhead Temple Rupee 2": "can_use_fire_arrows"
+    "Snowhead Temple Rupee 3": "can_use_fire_arrows"
 "Snowhead Temple Dual Switches":
   dungeon: SH
   exits:

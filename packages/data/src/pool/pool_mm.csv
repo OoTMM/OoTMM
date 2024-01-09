@@ -36,6 +36,9 @@ Clock Town Stray Fairy,                                 npc,            NONE,   
 Clock Town Laundry Pool Grass 1,                        grass,          NONE,                   LAUNDRY_POOL,                 0x0000d,                    RANDOM
 Clock Town Laundry Pool Grass 2,                        grass,          NONE,                   LAUNDRY_POOL,                 0x0000e,                    RANDOM
 Clock Town Laundry Pool Grass 3,                        grass,          NONE,                   LAUNDRY_POOL,                 0x0000f,                    RANDOM
+Clock Town Laundry Pool Rupee 1,                        rupee,          NONE,                   LAUNDRY_POOL,                 0x00013,                    RUPEE_RED
+Clock Town Laundry Pool Rupee 2,                        rupee,          NONE,                   LAUNDRY_POOL,                 0x00016,                    RUPEE_RED
+Clock Town Laundry Pool Rupee 3,                        rupee,          NONE,                   LAUNDRY_POOL,                 0x00019,                    RUPEE_RED
 Clock Town Great Fairy,                                 npc,            NONE,                   FAIRY_FOUNTAIN,               GREAT_FAIRY_TOWN,           MASK_GREAT_FAIRY
 Clock Town Great Fairy Alt,                             npc,            NONE,                   FAIRY_FOUNTAIN,               GREAT_FAIRY_TOWN_ALT,       MAGIC_UPGRADE
 Clock Tower Roof Skull Kid Ocarina,                     npc,            NONE,                   CLOCK_TOWER_ROOFTOP,          SKULL_KID_OCARINA,          OCARINA
@@ -357,6 +360,7 @@ Termina Field Grass Pack 18 Grass 09,                   grass,          NONE,   
 Termina Field Grass Pack 18 Grass 10,                   grass,          NONE,                   TERMINA_FIELD,                0x900bd,                    RANDOM
 Termina Field Grass Pack 18 Grass 11,                   grass,          NONE,                   TERMINA_FIELD,                0xa00bd,                    RANDOM
 Termina Field Grass Pack 18 Grass 12,                   grass,          NONE,                   TERMINA_FIELD,                0xb00bd,                    RANDOM
+Termina Field Rupee,                                    rupee,          NONE,                   TERMINA_FIELD,                0x00004,                    RUPEE_RED
 Termina Field Cow Grotto Grass 01,                      grass,          NONE,                   GROTTOS,                      0x00a00,                    RANDOM
 Termina Field Cow Grotto Grass 02,                      grass,          NONE,                   GROTTOS,                      0x10a00,                    RANDOM
 Termina Field Cow Grotto Grass 03,                      grass,          NONE,                   GROTTOS,                      0x20a00,                    RANDOM
@@ -546,6 +550,8 @@ Southern Swamp Grass Near Witch Pack 2 Grass 08,        grass,          NONE,   
 Southern Swamp Grass Near Witch Pack 2 Grass 09,        grass,          NONE,                   SOUTHERN_SWAMP,               0x80208,                    RANDOM
 Southern Swamp Grass Near Witch 1,                      grass,          NONE,                   SOUTHERN_SWAMP,               0x00211,                    RANDOM
 Southern Swamp Grass Near Witch 2,                      grass,          NONE,                   SOUTHERN_SWAMP,               0x00212,                    RANDOM
+Southern Swamp Rupee 1,                                 rupee,          NONE,                   SOUTHERN_SWAMP,               0x00028,                    RUPEE_BLUE
+Southern Swamp Rupee 2,                                 rupee,          NONE,                   SOUTHERN_SWAMP,               0x00029,                    RUPEE_BLUE
 Woods of Mystery Grotto,                                chest,          NONE,                   GROTTOS,                      0x1c,                       RUPEE_PURPLE
 Woods of Mystery Grotto Grass 01,                       grass,          NONE,                   GROTTOS,                      0x03c00,                    RANDOM
 Woods of Mystery Grotto Grass 02,                       grass,          NONE,                   GROTTOS,                      0x03c01,                    RANDOM
@@ -590,6 +596,7 @@ Swamp Potion Shop Kotake,                               npc,            NONE,   
 Swamp Potion Shop Item 1,                               shop,           NONE,                   POTION_SHOP,                  0x0d,                       POTION_BLUE
 Swamp Potion Shop Item 2,                               shop,           NONE,                   POTION_SHOP,                  0x0e,                       POTION_GREEN
 Swamp Potion Shop Item 3,                               shop,           NONE,                   POTION_SHOP,                  0x0f,                       POTION_RED
+Swamp Potion Shop Rupee,                                rupee,          NONE,                   POTION_SHOP,                  0x00001,                    RUPEE_GREEN
 Tourist Information Pictobox,                           npc,            NONE,                   TOURIST_INFORMATION,          KOUME_PICTOGRAPH_BOX,       PICTOGRAPH_BOX
 Tourist Information Boat Archery,                       npc,            BOAT_ARCHERY,           TOURIST_INFORMATION,          KOUME_HEART_PIECE,          HEART_PIECE
 Tourist Information Tingle Picture,                     npc,            NONE,                   TOURIST_INFORMATION,          TOUR_GUIDE_HEART_PIECE,     HEART_PIECE
@@ -610,9 +617,63 @@ Deku Palace Grotto Grass 09,                            grass,          NONE,   
 Deku Palace Grotto Grass 10,                            grass,          NONE,                   GROTTOS,                      0x90c03,                    RANDOM
 Deku Palace Grotto Grass 11,                            grass,          NONE,                   GROTTOS,                      0xa0c03,                    RANDOM
 Deku Palace Grotto Grass 12,                            grass,          NONE,                   GROTTOS,                      0xb0c03,                    RANDOM
+Deku Palace Rupee Right 01,                             rupee,          NONE,                   DEKU_PALACE,                  0x00100,                    RUPEE_GREEN
+Deku Palace Rupee Right 02,                             rupee,          NONE,                   DEKU_PALACE,                  0x00101,                    RUPEE_GREEN
+Deku Palace Rupee Right 03,                             rupee,          NONE,                   DEKU_PALACE,                  0x00102,                    RUPEE_GREEN
+Deku Palace Rupee Right 04,                             rupee,          NONE,                   DEKU_PALACE,                  0x00103,                    RUPEE_GREEN
+Deku Palace Rupee Right 05,                             rupee,          NONE,                   DEKU_PALACE,                  0x00104,                    RUPEE_GREEN
+Deku Palace Rupee Right 06,                             rupee,          NONE,                   DEKU_PALACE,                  0x00105,                    RUPEE_GREEN
+Deku Palace Rupee Right 07,                             rupee,          NONE,                   DEKU_PALACE,                  0x00111,                    RUPEE_GREEN
+Deku Palace Rupee Right 08,                             rupee,          NONE,                   DEKU_PALACE,                  0x10111,                    RUPEE_GREEN
+Deku Palace Rupee Right 09,                             rupee,          NONE,                   DEKU_PALACE,                  0x20111,                    RUPEE_GREEN
+Deku Palace Rupee Right 10,                             rupee,          NONE,                   DEKU_PALACE,                  0x30111,                    RUPEE_GREEN
+Deku Palace Rupee Right 11,                             rupee,          NONE,                   DEKU_PALACE,                  0x40111,                    RUPEE_GREEN
+Deku Palace Rupee Right 12,                             rupee,          NONE,                   DEKU_PALACE,                  0x50111,                    RUPEE_GREEN
+Deku Palace Rupee Right 13,                             rupee,          NONE,                   DEKU_PALACE,                  0x60111,                    RUPEE_RED
+Deku Palace Rupee Left 01,                              rupee,          NONE,                   DEKU_PALACE,                  0x00200,                    RUPEE_GREEN
+Deku Palace Rupee Left 02,                              rupee,          NONE,                   DEKU_PALACE,                  0x00201,                    RUPEE_GREEN
+Deku Palace Rupee Left 03,                              rupee,          NONE,                   DEKU_PALACE,                  0x00202,                    RUPEE_GREEN
+Deku Palace Rupee Left 05,                              rupee,          NONE,                   DEKU_PALACE,                  0x00204,                    RUPEE_GREEN
+Deku Palace Rupee Left 06,                              rupee,          NONE,                   DEKU_PALACE,                  0x00205,                    RUPEE_GREEN
+Deku Palace Rupee Left 07,                              rupee,          NONE,                   DEKU_PALACE,                  0x00206,                    RUPEE_GREEN
+Deku Palace Rupee Left 08,                              rupee,          NONE,                   DEKU_PALACE,                  0x00207,                    RUPEE_BLUE
+Deku Palace Rupee Left 09,                              rupee,          NONE,                   DEKU_PALACE,                  0x00208,                    RUPEE_BLUE
+Deku Palace Rupee Left 10,                              rupee,          NONE,                   DEKU_PALACE,                  0x00209,                    RUPEE_BLUE
+Deku Palace Rupee Left 11,                              rupee,          NONE,                   DEKU_PALACE,                  0x0020a,                    RUPEE_BLUE
+Deku Palace Rupee Left 12,                              rupee,          NONE,                   DEKU_PALACE,                  0x0020b,                    RUPEE_BLUE
 Deku Shrine Mask of Scents,                             npc,            BUTLER_RACE,            DEKU_SHRINE,                  MASK_SCENTS,                MASK_SCENTS
 Deku Shrine Pot 1,                                      pot,            NONE,                   DEKU_SHRINE,                  0x000e,                     RUPEE_GREEN
 Deku Shrine Pot 2,                                      pot,            NONE,                   DEKU_SHRINE,                  0x000f,                     RUPEE_GREEN
+Deku Shrine Rupee Main 01,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00200,                    RUPEE_GREEN
+Deku Shrine Rupee Main 02,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00201,                    RUPEE_GREEN
+Deku Shrine Rupee Main 03,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00202,                    RUPEE_GREEN
+Deku Shrine Rupee Main 04,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00203,                    RUPEE_GREEN
+Deku Shrine Rupee Main 05,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00204,                    RUPEE_GREEN
+Deku Shrine Rupee Main 06,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00205,                    RUPEE_GREEN
+Deku Shrine Rupee Main 07,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00206,                    RUPEE_RED
+Deku Shrine Rupee Main 08,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00207,                    RUPEE_RED
+Deku Shrine Rupee Main 09,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00300,                    RUPEE_GREEN
+Deku Shrine Rupee Main 10,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00301,                    RUPEE_GREEN
+Deku Shrine Rupee Main 11,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00302,                    RUPEE_GREEN
+Deku Shrine Rupee Main 12,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00303,                    RUPEE_GREEN
+Deku Shrine Rupee Main 13,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00304,                    RUPEE_GREEN
+Deku Shrine Rupee Main 14,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00305,                    RUPEE_GREEN
+Deku Shrine Rupee Main 15,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00400,                    RUPEE_GREEN
+Deku Shrine Rupee Main 16,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00401,                    RUPEE_GREEN
+Deku Shrine Rupee Main 17,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00402,                    RUPEE_GREEN
+Deku Shrine Rupee Main 18,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00403,                    RUPEE_GREEN
+Deku Shrine Rupee Main 19,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00404,                    RUPEE_GREEN
+Deku Shrine Rupee Main 20,                              rupee,          NONE,                   DEKU_SHRINE,                  0x00405,                    RUPEE_GREEN
+Deku Shrine Rupee End 01,                               rupee,          NONE,                   DEKU_SHRINE,                  0x00800,                    RUPEE_GREEN
+Deku Shrine Rupee End 02,                               rupee,          NONE,                   DEKU_SHRINE,                  0x00801,                    RUPEE_GREEN
+Deku Shrine Rupee End 03,                               rupee,          NONE,                   DEKU_SHRINE,                  0x00802,                    RUPEE_GREEN
+Deku Shrine Rupee End 04,                               rupee,          NONE,                   DEKU_SHRINE,                  0x00803,                    RUPEE_GREEN
+Deku Shrine Rupee End 05,                               rupee,          NONE,                   DEKU_SHRINE,                  0x00804,                    RUPEE_GREEN
+Deku Shrine Rupee End 06,                               rupee,          NONE,                   DEKU_SHRINE,                  0x00805,                    RUPEE_GREEN
+Deku Shrine Rupee End 07,                               rupee,          NONE,                   DEKU_SHRINE,                  0x00806,                    RUPEE_GREEN
+Deku Shrine Rupee End 08,                               rupee,          NONE,                   DEKU_SHRINE,                  0x00807,                    RUPEE_GREEN
+Deku Shrine Rupee End 09,                               rupee,          NONE,                   DEKU_SHRINE,                  0x00808,                    RUPEE_GREEN
+Deku Shrine Rupee End 10,                               rupee,          NONE,                   DEKU_SHRINE,                  0x00809,                    RUPEE_GREEN
 Woodfall Owl Statue,                                    npc,            NONE,                   WOODFALL,                     OWL_WOODFALL,               OWL_WOODFALL
 Woodfall Near Owl Chest,                                chest,          NONE,                   WOODFALL,                     0x02,                       RUPEE_RED
 Woodfall Entrance Chest,                                chest,          NONE,                   WOODFALL,                     0x00,                       RUPEE_RED
@@ -627,6 +688,7 @@ Woodfall Grass 3,                                       grass,          NONE,   
 Woodfall Grass 4,                                       grass,          NONE,                   WOODFALL,                     0x00014,                    RANDOM
 Woodfall Grass 5,                                       grass,          NONE,                   WOODFALL,                     0x00015,                    RANDOM
 Woodfall Grass 6,                                       grass,          NONE,                   WOODFALL,                     0x00016,                    RANDOM
+Woodfall Rupee,                                         rupee,          NONE,                   WOODFALL,                     0x00000,                    RUPEE_BLUE
 Swamp Spider House Mask of Truth,                       npc,            NONE,                   SPIDER_HOUSE_SWAMP,           SPIDER_HOUSE_SWAMP,         MASK_TRUTH
 Swamp Skulltula Main Room Near Ceiling,                 chest,          NONE,                   SPIDER_HOUSE_SWAMP,           0x00,                       GS_TOKEN_SWAMP
 Swamp Skulltula Main Room Lower Right Soft Soil,        chest,          NONE,                   SPIDER_HOUSE_SWAMP,           0x0c,                       GS_TOKEN_SWAMP
@@ -739,6 +801,7 @@ Mountain Village Keaton Grass Reward 6,                 grass,          NONE,   
 Mountain Village Keaton Grass Reward 7,                 grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x6002c,                    RUPEE_GREEN
 Mountain Village Keaton Grass Reward 8,                 grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x7002c,                    RUPEE_GREEN
 Mountain Village Keaton Grass Reward 9,                 grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x8002c,                    RUPEE_RED
+Mountain Village Rupee,                                 rupee,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x00028,                    RUPEE_RED
 Blacksmith Razor Blade,                                 npc,            BLACKSMITH,             BLACKSMITH,                   SWORD_RAZOR,                SWORD
 Blacksmith Gilded Sword,                                npc,            BLACKSMITH,             BLACKSMITH,                   SWORD_GILDED,               SWORD
 Lone Peak Shrine Lens Chest,                            chest,          NONE,                   GROTTOS,                      0x01,                       LENS
@@ -799,6 +862,10 @@ Twin Islands Grass 09,                                  grass,          NONE,   
 Twin Islands Grass 10,                                  grass,          NONE,                   TWIN_ISLANDS_SPRING,          0x9000b,                    RANDOM
 Twin Islands Grass 11,                                  grass,          NONE,                   TWIN_ISLANDS_SPRING,          0xa000b,                    RANDOM
 Twin Islands Grass 12,                                  grass,          NONE,                   TWIN_ISLANDS_SPRING,          0xb000b,                    RANDOM
+Twin Islands Rupee 1,                                   rupee,          NONE,                   TWIN_ISLANDS_SPRING,          0x0000e,                    RUPEE_BLUE
+Twin Islands Rupee 2,                                   rupee,          NONE,                   TWIN_ISLANDS_SPRING,          0x0000f,                    RUPEE_BLUE
+Twin Islands Rupee 3,                                   rupee,          NONE,                   TWIN_ISLANDS_SPRING,          0x00010,                    RUPEE_BLUE
+Twin Islands Rupee 4,                                   rupee,          NONE,                   TWIN_ISLANDS_SPRING,          0x00012,                    RUPEE_BLUE
 Goron Elder,                                            npc,            NONE,                   TWIN_ISLANDS_WINTER,          GORON_ELDER,                SONG_GORON_HALF
 Goron Baby,                                             npc,            NONE,                   GORON_SHRINE,                 GORON_BABY,                 SONG_GORON
 Goron Shrine Pot 01,                                    pot,            NONE,                   GORON_SHRINE,                 0x0023,                     STICK
@@ -887,6 +954,8 @@ Romani Ranch Cremia Escort,                             npc,            RANCH_DE
 Romani Ranch Barn Cow Left,                             cow,            NONE,                   ROMANI_RANCH,                 0x10,                       MILK
 Romani Ranch Barn Cow Right Front,                      cow,            NONE,                   ROMANI_RANCH,                 0x11,                       MILK
 Romani Ranch Barn Cow Right Back,                       cow,            NONE,                   ROMANI_RANCH,                 0x12,                       MILK
+Romani Ranch Barn Invisible Rupee 1,                    rupee,          NONE,                   RANCH_HOUSE_BARN,             0x00000,                    RUPEE_BLUE
+Romani Ranch Barn Invisible Rupee 2,                    rupee,          NONE,                   RANCH_HOUSE_BARN,             0x00001,                    RUPEE_BLUE
 Romani Ranch Grass Pack 1 Grass 01,                     grass,          NONE,                   ROMANI_RANCH,                 0x0001c,                    RANDOM
 Romani Ranch Grass Pack 1 Grass 02,                     grass,          NONE,                   ROMANI_RANCH,                 0x1001c,                    RANDOM
 Romani Ranch Grass Pack 1 Grass 03,                     grass,          NONE,                   ROMANI_RANCH,                 0x2001c,                    RANDOM
@@ -1271,6 +1340,13 @@ Beneath The Graveyard Pot Dampe 07,                     pot,            NONE,   
 Beneath The Graveyard Pot Dampe 08,                     pot,            NONE,                   DAMPE_HOUSE,                  0x0017,                     ARROWS_10
 Beneath The Graveyard Pot Dampe 09,                     pot,            NONE,                   DAMPE_HOUSE,                  0x0018,                     ARROWS_10
 Beneath The Graveyard Pot Dampe 10,                     pot,            NONE,                   DAMPE_HOUSE,                  0x0019,                     RECOVERY_HEART
+Beneath The Graveyard Rupee 1,                          rupee,          NONE,                   BENEATH_THE_GRAVEYARD,        0x00000,                    RUPEE_GREEN
+Beneath The Graveyard Rupee 2,                          rupee,          NONE,                   BENEATH_THE_GRAVEYARD,        0x10000,                    RUPEE_GREEN
+Beneath The Graveyard Rupee 3,                          rupee,          NONE,                   BENEATH_THE_GRAVEYARD,        0x20000,                    RUPEE_GREEN
+Beneath The Graveyard Rupee 4,                          rupee,          NONE,                   BENEATH_THE_GRAVEYARD,        0x30000,                    RUPEE_GREEN
+Beneath The Graveyard Rupee 5,                          rupee,          NONE,                   BENEATH_THE_GRAVEYARD,        0x40000,                    RUPEE_GREEN
+Beneath The Graveyard Rupee 6,                          rupee,          NONE,                   BENEATH_THE_GRAVEYARD,        0x50000,                    RUPEE_GREEN
+Beneath The Graveyard Rupee 7,                          rupee,          NONE,                   BENEATH_THE_GRAVEYARD,        0x60000,                    RUPEE_RED
 Ikana Valley Scrub Rupee,                               npc,            NONE,                   IKANA_CANYON,                 SCRUB_VALLEY,               RUPEE_GOLD
 Ikana Valley Scrub Shop,                                npc,            NONE,                   IKANA_CANYON,                 SCRUB_SHOP_POTION_BLUE,     POTION_BLUE
 Ikana Valley Scrub HP,                                  collectible,    NONE,                   IKANA_CANYON,                 0x1e,                       HEART_PIECE
@@ -1409,6 +1485,12 @@ Woodfall Temple Grass Pits Room 08,                     grass,          NONE,   
 Woodfall Temple Grass Pits Room 09,                     grass,          NONE,                   TEMPLE_WOODFALL,              0x00a0e,                    RANDOM
 Woodfall Temple Grass Pits Room 10,                     grass,          NONE,                   TEMPLE_WOODFALL,              0x00a0f,                    RANDOM
 Woodfall Temple Grass Pits Room 11,                     grass,          NONE,                   TEMPLE_WOODFALL,              0x00a10,                    RANDOM
+Woodfall Temple Rupee Upper 1,                          rupee,          NONE,                   TEMPLE_WOODFALL,              0x00000,                    RUPEE_RED
+Woodfall Temple Rupee Upper 2,                          rupee,          NONE,                   TEMPLE_WOODFALL,              0x00001,                    RUPEE_RED
+Woodfall Temple Rupee Lower 1,                          rupee,          NONE,                   TEMPLE_WOODFALL,              0x00002,                    RUPEE_BLUE
+Woodfall Temple Rupee Lower 2,                          rupee,          NONE,                   TEMPLE_WOODFALL,              0x00003,                    RUPEE_BLUE
+Woodfall Temple Rupee Lower 3,                          rupee,          NONE,                   TEMPLE_WOODFALL,              0x00004,                    RUPEE_BLUE
+Woodfall Temple Rupee Lower 4,                          rupee,          NONE,                   TEMPLE_WOODFALL,              0x00005,                    RUPEE_BLUE
 Woodfall Temple Boss Container,                         collectible,    NONE,                   LAIR_ODOLWA,                  0x1f,                       HEART_CONTAINER
 Woodfall Temple Boss,                                   npc,            NONE,                   LAIR_ODOLWA,                  REMAINS_ODOLWA,             REMAINS_ODOLWA
 Woodfall Temple Boss Grass 01,                          grass,          NONE,                   LAIR_ODOLWA,                  0x0000a,                    RANDOM
@@ -1521,6 +1603,9 @@ Snowhead Temple Grass 07,                               grass,          NONE,   
 Snowhead Temple Grass 08,                               grass,          NONE,                   TEMPLE_SNOWHEAD,              0x00443,                    RANDOM
 Snowhead Temple Grass 09,                               grass,          NONE,                   TEMPLE_SNOWHEAD,              0x00444,                    RANDOM
 Snowhead Temple Grass 10,                               grass,          NONE,                   TEMPLE_SNOWHEAD,              0x00445,                    RANDOM
+Snowhead Temple Rupee 1,                                rupee,          NONE,                   TEMPLE_SNOWHEAD,              0x00700,                    RUPEE_RED
+Snowhead Temple Rupee 2,                                rupee,          NONE,                   TEMPLE_SNOWHEAD,              0x00701,                    RUPEE_RED
+Snowhead Temple Rupee 3,                                rupee,          NONE,                   TEMPLE_SNOWHEAD,              0x00702,                    RUPEE_RED
 Pirate Fortress Entrance Chest 1,                       chest,          NONE,                   PIRATE_FORTRESS_ENTRANCE,     0x00,                       RUPEE_RED
 Pirate Fortress Entrance Chest 2,                       chest,          NONE,                   PIRATE_FORTRESS_ENTRANCE,     0x01,                       RUPEE_RED
 Pirate Fortress Entrance Chest 3,                       chest,          NONE,                   PIRATE_FORTRESS_ENTRANCE,     0x02,                       RUPEE_RED
@@ -1535,6 +1620,14 @@ Pirate Fortress Sewers Pot Waterway 1,                  pot,            NONE,   
 Pirate Fortress Sewers Pot Waterway 2,                  pot,            NONE,                   PIRATE_FORTRESS_INTERIOR,     0x0a09,                     ARROWS_10
 Pirate Fortress Sewers Pot Heart Piece Room 1,          pot,            NONE,                   PIRATE_FORTRESS_INTERIOR,     0x0b22,                     ARROWS_20
 Pirate Fortress Sewers Pot Heart Piece Room 2,          pot,            NONE,                   PIRATE_FORTRESS_INTERIOR,     0x0b23,                     NOTHING
+Pirate Fortress Sewers Rupee Water Elevator 1,          rupee,          NONE,                   PIRATE_FORTRESS_INTERIOR,     0x0090b,                    RUPEE_BLUE
+Pirate Fortress Sewers Rupee Water Elevator 2,          rupee,          NONE,                   PIRATE_FORTRESS_INTERIOR,     0x0090c,                    RUPEE_BLUE
+Pirate Fortress Sewers Rupee Water Elevator 3,          rupee,          NONE,                   PIRATE_FORTRESS_INTERIOR,     0x0090d,                    RUPEE_BLUE
+Pirate Fortress Sewers Rupee Near Cage 1,               rupee,          NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b17,                    RUPEE_GREEN
+Pirate Fortress Sewers Rupee Near Cage 2,               rupee,          NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b1a,                    RUPEE_GREEN
+Pirate Fortress Sewers Rupee Near Cage 3,               rupee,          NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b1e,                    RUPEE_GREEN
+Pirate Fortress Sewers Rupee Near Cage 4,               rupee,          NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b21,                    RUPEE_GREEN
+Pirate Fortress Sewers Rupee Cage,                      rupee,          NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b24,                    RUPEE_BLUE
 Pirate Fortress Interior Hookshot,                      chest,          NONE,                   PIRATE_FORTRESS_INTERIOR,     0x02,                       HOOKSHOT
 Pirate Fortress Interior Aquarium,                      chest,          NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00,                       RUPEE_RED
 Pirate Fortress Interior Silver Rupee Chest,            chest,          NONE,                   PIRATE_FORTRESS_INTERIOR,     0x03,                       RUPEE_SILVER
@@ -1647,6 +1740,15 @@ Great Bay Temple Pot Before Wart 09,                    pot,            NONE,   
 Great Bay Temple Pot Before Wart 10,                    pot,            NONE,                   TEMPLE_GREAT_BAY,             0x0e0c,                     RECOVERY_HEART
 Great Bay Temple Pot Before Wart 11,                    pot,            NONE,                   TEMPLE_GREAT_BAY,             0x0e0d,                     RECOVERY_HEART
 Great Bay Temple Pot Before Wart 12,                    pot,            NONE,                   TEMPLE_GREAT_BAY,             0x0e0e,                     RECOVERY_HEART
+Great Bay Temple Rupee Compass Room 1,                  rupee,          NONE,                   TEMPLE_GREAT_BAY,             0x00400,                    RUPEE_RED
+Great Bay Temple Rupee Compass Room 2,                  rupee,          NONE,                   TEMPLE_GREAT_BAY,             0x00401,                    RUPEE_RED
+Great Bay Temple Rupee Entrance 1,                      rupee,          NONE,                   TEMPLE_GREAT_BAY,             0x00800,                    RUPEE_RED
+Great Bay Temple Rupee Entrance 2,                      rupee,          NONE,                   TEMPLE_GREAT_BAY,             0x00801,                    RUPEE_GREEN
+Great Bay Temple Rupee Entrance 3,                      rupee,          NONE,                   TEMPLE_GREAT_BAY,             0x00802,                    RUPEE_GREEN
+Great Bay Temple Rupee Entrance 4,                      rupee,          NONE,                   TEMPLE_GREAT_BAY,             0x00803,                    RUPEE_BLUE
+Great Bay Temple Rupee Entrance 5,                      rupee,          NONE,                   TEMPLE_GREAT_BAY,             0x00804,                    RUPEE_BLUE
+Great Bay Temple Rupee Hookshot 1,                      rupee,          NONE,                   TEMPLE_GREAT_BAY,             0x00c00,                    RUPEE_RED
+Great Bay Temple Rupee Hookshot 2,                      rupee,          NONE,                   TEMPLE_GREAT_BAY,             0x00c01,                    RUPEE_RED
 Beneath The Well Skulltulla Chest,                      chest,          NONE,                   BENEATH_THE_WELL,             0x01,                       RUPEE_PURPLE
 Beneath The Well Keese Chest,                           chest,          NONE,                   BENEATH_THE_WELL,             0x02,                       RUPEE_PURPLE
 Beneath The Well Mirror Shield,                         chest,          NONE,                   BENEATH_THE_WELL,             0x1b,                       SHIELD_MIRROR
@@ -1743,6 +1845,22 @@ Stone Tower Temple Wind Room Jail Chest,                chest,          NONE,   
 Stone Tower Temple Light Arrow,                         chest,          NONE,                   TEMPLE_STONE_TOWER,           0x1b,                       ARROW_LIGHT
 Stone Tower Temple Before Water Bridge Chest,           chest,          NONE,                   TEMPLE_STONE_TOWER,           0x14,                       STRAY_FAIRY_ST
 Stone Tower Temple Water Bridge Chest,                  chest,          NONE,                   TEMPLE_STONE_TOWER,           0x0c,                       STRAY_FAIRY_ST
+Stone Tower Temple Rupee Center Room Right,             rupee,          NONE,                   TEMPLE_STONE_TOWER,           0x00100,                    RUPEE_RED
+Stone Tower Temple Rupee Center Room Left,              rupee,          NONE,                   TEMPLE_STONE_TOWER,           0x00101,                    RUPEE_RED
+Stone Tower Temple Rupee Before Water Bridge 1,         rupee,          NONE,                   TEMPLE_STONE_TOWER,           0x00800,                    RUPEE_BLUE
+Stone Tower Temple Rupee Before Water Bridge 2,         rupee,          NONE,                   TEMPLE_STONE_TOWER,           0x00801,                    RUPEE_BLUE
+Stone Tower Temple Rupee Before Water Bridge 3,         rupee,          NONE,                   TEMPLE_STONE_TOWER,           0x00802,                    RUPEE_BLUE
+Stone Tower Temple Rupee Before Water Bridge 4,         rupee,          NONE,                   TEMPLE_STONE_TOWER,           0x00803,                    RUPEE_BLUE
+Stone Tower Temple Rupee Before Water Bridge 5,         rupee,          NONE,                   TEMPLE_STONE_TOWER,           0x00804,                    RUPEE_BLUE
+Stone Tower Temple Rupee Before Water Bridge 6,         rupee,          NONE,                   TEMPLE_STONE_TOWER,           0x00805,                    RUPEE_BLUE
+Stone Tower Temple Rupee Before Water Bridge 7,         rupee,          NONE,                   TEMPLE_STONE_TOWER,           0x00806,                    RUPEE_BLUE
+Stone Tower Temple Rupee Before Water Bridge 8,         rupee,          NONE,                   TEMPLE_STONE_TOWER,           0x00807,                    RUPEE_BLUE
+Stone Tower Temple Rupee Wind Room 1,                   rupee,          NONE,                   TEMPLE_STONE_TOWER,           0x00900,                    RUPEE_RED
+Stone Tower Temple Rupee Wind Room 2,                   rupee,          NONE,                   TEMPLE_STONE_TOWER,           0x00901,                    RUPEE_GREEN
+Stone Tower Temple Rupee Wind Room 3,                   rupee,          NONE,                   TEMPLE_STONE_TOWER,           0x00902,                    RUPEE_GREEN
+Stone Tower Temple Rupee Wind Room 4,                   rupee,          NONE,                   TEMPLE_STONE_TOWER,           0x00903,                    RUPEE_GREEN
+Stone Tower Temple Rupee Wind Room 5,                   rupee,          NONE,                   TEMPLE_STONE_TOWER,           0x00904,                    RUPEE_BLUE
+Stone Tower Temple Rupee Wind Room 6,                   rupee,          NONE,                   TEMPLE_STONE_TOWER,           0x00905,                    RUPEE_BLUE
 Stone Tower Temple Inverted Entrance Chest,             chest,          NONE,                   TEMPLE_STONE_TOWER,           0x10,                       STRAY_FAIRY_ST
 Stone Tower Temple Inverted East Lower Chest,           chest,          NONE,                   TEMPLE_STONE_TOWER,           0x13,                       STRAY_FAIRY_ST
 Stone Tower Temple Inverted East Middle Chest,          chest,          NONE,                   TEMPLE_STONE_TOWER,           0x04,                       SMALL_KEY_ST
@@ -1784,6 +1902,22 @@ Stone Tower Temple Inverted Flying Pot Pre-Boss 1,      pot,            NONE,   
 Stone Tower Temple Inverted Flying Pot Pre-Boss 2,      pot,            NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x081b,                     NOTHING
 Stone Tower Temple Inverted Flying Pot Pre-Boss 3,      pot,            NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x081c,                     NOTHING
 Stone Tower Temple Inverted Flying Pot Pre-Boss 4,      pot,            NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x081d,                     NOTHING
+Stone Tower Temple Inverted Rupee Dexihand 1,           rupee,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x00100,                    RUPEE_RED
+Stone Tower Temple Inverted Rupee Dexihand 2,           rupee,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x00101,                    RUPEE_GREEN
+Stone Tower Temple Inverted Rupee Dexihand 3,           rupee,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x00102,                    RUPEE_BLUE
+Stone Tower Temple Inverted Rupee Alcove 1,             rupee,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x00301,                    RUPEE_RED
+Stone Tower Temple Inverted Rupee Alcove 2,             rupee,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x00302,                    RUPEE_RED
+Stone Tower Temple Inverted Rupee Pre-Boss Top 1,       rupee,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x00800,                    RUPEE_BLUE
+Stone Tower Temple Inverted Rupee Pre-Boss Top 2,       rupee,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x00801,                    RUPEE_BLUE
+Stone Tower Temple Inverted Rupee Pre-Boss Top 3,       rupee,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x00802,                    RUPEE_BLUE
+Stone Tower Temple Inverted Rupee Pre-Boss Bottom 1,    rupee,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x00803,                    RUPEE_BLUE
+Stone Tower Temple Inverted Rupee Pre-Boss Bottom 2,    rupee,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x00804,                    RUPEE_BLUE
+Stone Tower Temple Inverted Rupee Pre-Boss Bottom 3,    rupee,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x00805,                    RUPEE_BLUE
+Stone Tower Temple Inverted Rupee Pre-Boss Bottom 4,    rupee,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x00806,                    RUPEE_BLUE
+Stone Tower Temple Inverted Rupee Pre-Boss Bottom 5,    rupee,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x00807,                    RUPEE_BLUE
+Stone Tower Temple Inverted Rupee Pre-Boss Bottom 6,    rupee,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x00808,                    RUPEE_BLUE
+Stone Tower Temple Inverted Rupee Pre-Boss Bottom 7,    rupee,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x00809,                    RUPEE_BLUE
+Stone Tower Temple Inverted Rupee Pre-Boss Bottom 8,    rupee,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x0080a,                    RUPEE_BLUE
 Stone Tower Temple Pot Entrance 1,                      pot,            NONE,                   TEMPLE_STONE_TOWER,           0x0007,                     RECOVERY_HEART
 Stone Tower Temple Pot Entrance 2,                      pot,            NONE,                   TEMPLE_STONE_TOWER,           0x0008,                     FAIRY
 Stone Tower Temple Pot Water Room Underwater Lower 1,   pot,            NONE,                   TEMPLE_STONE_TOWER,           0x030a,                     MAGIC_JAR_LARGE
@@ -1869,6 +2003,23 @@ Secret Shrine Grass Garo Master 3,                      grass,          NONE,   
 Secret Shrine Grass Garo Master 4,                      grass,          NONE,                   SECRET_SHRINE,                0x00505,                    RANDOM
 Secret Shrine Grass Garo Master 5,                      grass,          NONE,                   SECRET_SHRINE,                0x00506,                    RANDOM
 Secret Shrine Grass Garo Master 6,                      grass,          NONE,                   SECRET_SHRINE,                0x00507,                    RANDOM
+Secret Shrine Rupee 01,                                 rupee,          NONE,                   SECRET_SHRINE,                0x00000,                    RUPEE_GREEN
+Secret Shrine Rupee 02,                                 rupee,          NONE,                   SECRET_SHRINE,                0x00001,                    RUPEE_GREEN
+Secret Shrine Rupee 03,                                 rupee,          NONE,                   SECRET_SHRINE,                0x00002,                    RUPEE_GREEN
+Secret Shrine Rupee 04,                                 rupee,          NONE,                   SECRET_SHRINE,                0x00003,                    RUPEE_GREEN
+Secret Shrine Rupee 05,                                 rupee,          NONE,                   SECRET_SHRINE,                0x00004,                    RUPEE_GREEN
+Secret Shrine Rupee 06,                                 rupee,          NONE,                   SECRET_SHRINE,                0x00005,                    RUPEE_GREEN
+Secret Shrine Rupee 07,                                 rupee,          NONE,                   SECRET_SHRINE,                0x00006,                    RUPEE_GREEN
+Secret Shrine Rupee 08,                                 rupee,          NONE,                   SECRET_SHRINE,                0x00007,                    RUPEE_GREEN
+Secret Shrine Rupee 09,                                 rupee,          NONE,                   SECRET_SHRINE,                0x00008,                    RUPEE_GREEN
+Secret Shrine Rupee 10,                                 rupee,          NONE,                   SECRET_SHRINE,                0x00009,                    RUPEE_GREEN
+Secret Shrine Rupee 11,                                 rupee,          NONE,                   SECRET_SHRINE,                0x0000a,                    RUPEE_GREEN
+Secret Shrine Rupee 12,                                 rupee,          NONE,                   SECRET_SHRINE,                0x0000b,                    RUPEE_GREEN
+Secret Shrine Rupee 13,                                 rupee,          NONE,                   SECRET_SHRINE,                0x0000c,                    RUPEE_GREEN
+Secret Shrine Rupee 14,                                 rupee,          NONE,                   SECRET_SHRINE,                0x0000d,                    RUPEE_GREEN
+Secret Shrine Rupee 15,                                 rupee,          NONE,                   SECRET_SHRINE,                0x0000e,                    RUPEE_GREEN
+Secret Shrine Rupee 16,                                 rupee,          NONE,                   SECRET_SHRINE,                0x0000f,                    RUPEE_GREEN
+Secret Shrine Rupee 17,                                 rupee,          NONE,                   SECRET_SHRINE,                0x00010,                    RUPEE_GREEN
 Sakon Hideout Pot Second Room 1,                        pot,            NONE,                   SAKON_HIDEOUT,                0x0127,                     RECOVERY_HEART
 Sakon Hideout Pot Second Room 2,                        pot,            NONE,                   SAKON_HIDEOUT,                0x0128,                     RECOVERY_HEART
 Sakon Hideout Pot First Room 1,                         pot,            NONE,                   SAKON_HIDEOUT,                0x0129,                     RECOVERY_HEART

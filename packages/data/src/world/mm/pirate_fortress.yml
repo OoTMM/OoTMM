@@ -34,6 +34,11 @@
     "Pirate Fortress Sewers HP": "has_mask_zora"
     "Pirate Fortress Sewers Pot Heart Piece Room 1": "has_mask_zora"
     "Pirate Fortress Sewers Pot Heart Piece Room 2": "has_mask_zora"
+    "Pirate Fortress Sewers Rupee Near Cage 1": "has_mask_zora && can_break_boulders"
+    "Pirate Fortress Sewers Rupee Near Cage 2": "has_mask_zora && can_break_boulders"
+    "Pirate Fortress Sewers Rupee Near Cage 3": "has_mask_zora && can_break_boulders"
+    "Pirate Fortress Sewers Rupee Near Cage 4": "has_mask_zora && can_break_boulders"
+    "Pirate Fortress Sewers Rupee Cage": "has_mask_zora && can_break_boulders"
 "Pirate Fortress Sewers End":
   region: PIRATE_FORTRESS_SEWERS
   events:
@@ -49,6 +54,9 @@
     "Pirate Fortress Sewers Pot End 3": "true"
     "Pirate Fortress Sewers Pot Waterway 1": "true"
     "Pirate Fortress Sewers Pot Waterway 2": "true"
+    "Pirate Fortress Sewers Rupee Water Elevator 1": "can_break_boulders"
+    "Pirate Fortress Sewers Rupee Water Elevator 2": "can_break_boulders"
+    "Pirate Fortress Sewers Rupee Water Elevator 3": "can_break_boulders"
 "Pirate Fortress Interior":
   region: PIRATE_FORTRESS_INTERIOR
   events:

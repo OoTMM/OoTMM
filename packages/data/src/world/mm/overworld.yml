@@ -354,6 +354,9 @@
     "Clock Town Laundry Pool Grass 1": "true"
     "Clock Town Laundry Pool Grass 2": "true"
     "Clock Town Laundry Pool Grass 3": "true"
+    "Clock Town Laundry Pool Rupee 1": "true"
+    "Clock Town Laundry Pool Rupee 2": "true"
+    "Clock Town Laundry Pool Rupee 3": "true"
 "Clock Town Fairy Fountain":
   region: ENTRANCE
   exits:
@@ -809,6 +812,7 @@
     "Termina Field Grass Pack 18 Grass 10": "true"
     "Termina Field Grass Pack 18 Grass 11": "true"
     "Termina Field Grass Pack 18 Grass 12": "true"
+    "Termina Field Rupee": "true"
   gossip:
     "Termina Field Gossip Southeast": "true"
     "Termina Field Gossip Southwest": "true"
@@ -1234,6 +1238,8 @@
     "Southern Swamp Grass Near Witch Pack 2 Grass 09": "true"
     "Southern Swamp Grass Near Witch 1": "true"
     "Southern Swamp Grass Near Witch 2": "true"
+    "Southern Swamp Rupee 1": "has(MASK_DEKU)"
+    "Southern Swamp Rupee 2": "has(MASK_DEKU)"
   gossip:
     "Southern Swamp Gossip": "true"
 "Swamp Back":
@@ -1380,6 +1386,7 @@
     "Swamp Potion Shop Item 1": "has_mushroom && shop_price(0x0d) && (first_day || event(MEET_KOUME))"
     "Swamp Potion Shop Item 2": "shop_price(0x0e) && (first_day || event(MEET_KOUME))"
     "Swamp Potion Shop Item 3": "shop_price(0x0f) && (first_day || event(MEET_KOUME))"
+    "Swamp Potion Shop Rupee": "true"
 "Deku Palace Front":
   region: DEKU_PALACE
   exits:
@@ -1400,6 +1407,30 @@
     "Deku Palace Upper": "trick(MM_PALACE_BEAN_SKIP) || short_hook_anywhere"
   locations:
     "Deku Palace HP": "true"
+    "Deku Palace Rupee Right 01": "true"
+    "Deku Palace Rupee Right 02": "true"
+    "Deku Palace Rupee Right 03": "true"
+    "Deku Palace Rupee Right 04": "true"
+    "Deku Palace Rupee Right 05": "true"
+    "Deku Palace Rupee Right 06": "true"
+    "Deku Palace Rupee Right 07": "true"
+    "Deku Palace Rupee Right 08": "true"
+    "Deku Palace Rupee Right 09": "true"
+    "Deku Palace Rupee Right 10": "true"
+    "Deku Palace Rupee Right 11": "true"
+    "Deku Palace Rupee Right 12": "true"
+    "Deku Palace Rupee Right 13": "true"
+    "Deku Palace Rupee Left 01": "true"
+    "Deku Palace Rupee Left 02": "true"
+    "Deku Palace Rupee Left 03": "true"
+    "Deku Palace Rupee Left 05": "true"
+    "Deku Palace Rupee Left 06": "true"
+    "Deku Palace Rupee Left 07": "true"
+    "Deku Palace Rupee Left 08": "true"
+    "Deku Palace Rupee Left 09": "true"
+    "Deku Palace Rupee Left 10": "true"
+    "Deku Palace Rupee Left 11": "true"
+    "Deku Palace Rupee Left 12": "true"
 "Deku Palace Upper":
   region: DEKU_PALACE
   events:
@@ -1498,6 +1529,7 @@
     "Woodfall Grass 4": "true"
     "Woodfall Grass 5": "true"
     "Woodfall Grass 6": "true"
+    "Woodfall Rupee": "has(MASK_DEKU)"
 "Woodfall Front of Temple":
   region: WOODFALL
   exits:
@@ -1538,10 +1570,48 @@
   region: ENTRANCE
   exits:
     "Near Deku Shrine": "true"
+    "Deku Shrine Main": "event(RETURN_PRINCESS)"
+"Deku Shrine Main":
+  region: ENTRANCE
+  exits:
+    "Deku Shrine End": "has_weapon_range"
   locations:
-    "Deku Shrine Mask of Scents": "event(RETURN_PRINCESS) && has_weapon_range"
-    "Deku Shrine Pot 1": "event(RETURN_PRINCESS)"
-    "Deku Shrine Pot 2": "event(RETURN_PRINCESS)"
+    "Deku Shrine Pot 1": "true"
+    "Deku Shrine Pot 2": "true"
+    "Deku Shrine Rupee Main 01": "true"
+    "Deku Shrine Rupee Main 02": "true"
+    "Deku Shrine Rupee Main 03": "true"
+    "Deku Shrine Rupee Main 04": "true"
+    "Deku Shrine Rupee Main 05": "true"
+    "Deku Shrine Rupee Main 06": "true"
+    "Deku Shrine Rupee Main 07": "true"
+    "Deku Shrine Rupee Main 08": "true"
+    "Deku Shrine Rupee Main 09": "true"
+    "Deku Shrine Rupee Main 10": "true"
+    "Deku Shrine Rupee Main 11": "true"
+    "Deku Shrine Rupee Main 12": "true"
+    "Deku Shrine Rupee Main 13": "true"
+    "Deku Shrine Rupee Main 14": "true"
+    "Deku Shrine Rupee Main 15": "true"
+    "Deku Shrine Rupee Main 16": "true"
+    "Deku Shrine Rupee Main 17": "true"
+    "Deku Shrine Rupee Main 18": "true"
+    "Deku Shrine Rupee Main 19": "true"
+    "Deku Shrine Rupee Main 20": "true"
+"Deku Shrine End":
+  region: ENTRANCE
+  locations:
+    "Deku Shrine Mask of Scents": "true"
+    "Deku Shrine Rupee End 01": "true"
+    "Deku Shrine Rupee End 02": "true"
+    "Deku Shrine Rupee End 03": "true"
+    "Deku Shrine Rupee End 04": "true"
+    "Deku Shrine Rupee End 05": "true"
+    "Deku Shrine Rupee End 06": "true"
+    "Deku Shrine Rupee End 07": "true"
+    "Deku Shrine Rupee End 08": "true"
+    "Deku Shrine Rupee End 09": "true"
+    "Deku Shrine Rupee End 10": "true"
 "Behind Large Icicles":
   region: TERMINA_FIELD
   exits:
@@ -1629,6 +1699,7 @@
     "Mountain Village Keaton Grass Reward 7": "event(BOSS_SNOWHEAD) && keaton_grass_hard"
     "Mountain Village Keaton Grass Reward 8": "event(BOSS_SNOWHEAD) && keaton_grass_hard"
     "Mountain Village Keaton Grass Reward 9": "event(BOSS_SNOWHEAD) && keaton_grass_hard"
+    "Mountain Village Rupee": "event(BOSS_SNOWHEAD)"
 "Near Village Grotto":
   region: MOUNTAIN_VILLAGE
   exits:
@@ -1704,6 +1775,10 @@
     "Twin Islands Grass 10": "event(BOSS_SNOWHEAD)"
     "Twin Islands Grass 11": "event(BOSS_SNOWHEAD)"
     "Twin Islands Grass 12": "event(BOSS_SNOWHEAD)"
+    "Twin Islands Rupee 1": "event(BOSS_SNOWHEAD) && has_mask_zora"
+    "Twin Islands Rupee 2": "event(BOSS_SNOWHEAD) && has_mask_zora"
+    "Twin Islands Rupee 3": "event(BOSS_SNOWHEAD) && has_mask_zora"
+    "Twin Islands Rupee 4": "event(BOSS_SNOWHEAD) && has_mask_zora"
 "Twin Islands Ramp Grotto":
   region: ENTRANCE
   exits:
@@ -2134,6 +2209,9 @@
     "Romani Ranch Barn Cow Left": "(before(NIGHT1_AM_02_30) || event(ALIENS)) && can_play_epona"
     "Romani Ranch Barn Cow Right Front": "(before(NIGHT1_AM_02_30) || event(ALIENS)) && can_play_epona"
     "Romani Ranch Barn Cow Right Back": "(before(NIGHT1_AM_02_30) || event(ALIENS)) && can_play_epona"
+    # TODO: Wonder items?
+    #"Romani Ranch Barn Invisible Rupee 1": "true"
+    #"Romani Ranch Barn Invisible Rupee 2": "true"
 "Ranch House":
   region: ENTRANCE
   exits:
@@ -2686,6 +2764,13 @@
     "Beneath The Graveyard Pot Night 2 After Pit 2": "can_use_lens || short_hook_anywhere"
     "Beneath The Graveyard Pot Night 2 After Pit 3": "can_use_lens || short_hook_anywhere"
     "Beneath The Graveyard Pot Night 2 After Pit 4": "can_use_lens || short_hook_anywhere"
+    "Beneath The Graveyard Rupee 1": "true"
+    "Beneath The Graveyard Rupee 2": "true"
+    "Beneath The Graveyard Rupee 3": "true"
+    "Beneath The Graveyard Rupee 4": "true"
+    "Beneath The Graveyard Rupee 5": "true"
+    "Beneath The Graveyard Rupee 6": "true"
+    "Beneath The Graveyard Rupee 7": "true"
 "Beneath The Graveyard Night 3":
   region: ENTRANCE
   events:
