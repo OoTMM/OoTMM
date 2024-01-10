@@ -7,7 +7,7 @@ GameState_Play* gPlay;
 static void debugCheat(GameState_Play* play)
 {
 #if defined(DEBUG)
-    if (play->gs.input[0].current.buttons & L_TRIG)
+    if (!gSaveContext.gameMode && play->gs.input[0].current.buttons & L_TRIG)
     {
         SetEventChk(EV_OOT_CHK_MASTER_SWORD_PULLED);
         SetEventChk(EV_OOT_CHK_MASTER_SWORD_CHAMBER);
@@ -364,7 +364,7 @@ void hookPlay_Init(GameState_Play* play)
     }
 
 #if defined(DEBUG)
-    if (play->gs.input[0].current.buttons & R_TRIG)
+    if (!gSaveContext.gameMode && (play->gs.input[0].current.buttons & R_TRIG))
     {
         gComboCtx.shuffledEntrance = 0;
         comboGameSwitch(play, 0xd800);
