@@ -58,6 +58,27 @@ static int checkItemToggle(GameState_Play* play)
         }
     }
 
+    if (p->equip_item >= ITEM_OOT_SHIELD_DEKU && p->equip_item <= ITEM_OOT_SHIELD_MIRROR && gSave.equips.equipment.shields == (p->equip_item-ITEM_OOT_SHIELD_DEKU)+1) 
+    {
+        ret = 1;
+        if (press)
+            gSave.equips.equipment.shields = 0;
+    }
+
+    if (gSave.age == AGE_CHILD && p->equip_item == ITEM_OOT_SWORD_KOKIRI && gSave.equips.equipment.swords == 1)
+    {
+        if (!(GET_LINK(play)->state2 & PLAYER_ACTOR_STATE_WATER))
+        {
+            ret = 1;
+            if (press)
+            {
+                gSave.equips.equipment.swords = 0;
+                gSave.equips.buttonItems[0] = ITEM_NONE;
+                gSave.eventsMisc[29] = 1;
+            }
+        }
+    }
+
     if (ret && press)
     {
         PlaySound(0x4809);
@@ -103,6 +124,12 @@ void KaleidoSetCursorColor(GameState_Play* play)
             r = 0x00;
             g = 0x00;
             b = 0xff;
+            if (checkItemToggle(play))
+            {
+                r = 0x00;
+                g = 0xff;
+                b = 0xff;
+            }
             break;
         }
     }
