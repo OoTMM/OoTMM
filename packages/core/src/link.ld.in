@@ -22,6 +22,10 @@ SECTIONS
     SORT(*)(.bss*);
   }
 
+  .MIPS.abiflags : {
+    SORT(*)(.MIPS.abiflags*);
+  }
+
   . = 0x80800000;
   .patch : {
     SORT(*)(.patch);

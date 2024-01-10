@@ -36,7 +36,7 @@ ifeq ($(DEBUG), 0)
 BUILD_DIR 	:= $(BUILD_DIR_ROOT)/Release
 else
 BUILD_DIR 	:= $(BUILD_DIR_ROOT)/Debug
-CFLAGS 		+= -DDEBUG=1
+CFLAGS 		+= -DDEBUG=1 -g3
 endif
 
 LDSCRIPT		:= $(SRC_DIR)/link.ld.in
