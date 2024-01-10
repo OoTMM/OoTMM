@@ -77,7 +77,8 @@ static void debugCheat(GameState_Play* play)
 
         gSave.playerData.magicUpgrade = 1;
         gSave.playerData.magicUpgrade2 = 1;
-        gSave.playerData.magicAmount = 0x60;
+        gOotSave.playerData.magicSize = 0;
+        gSaveContext.magicFillTarget = 0x60;
 
         gSave.inventory.dungeonKeys[SCE_OOT_TEMPLE_FOREST] = 9;
         gSave.inventory.dungeonKeys[SCE_OOT_INSIDE_GANON_CASTLE] = 9;
