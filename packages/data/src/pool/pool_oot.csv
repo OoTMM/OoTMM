@@ -1443,7 +1443,7 @@ Ganon Castle Pot Fire End 1,                                pot,            NONE
 Ganon Castle Pot Fire End 2,                                pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0f05,                     MAGIC_JAR_SMALL
 Ganon Castle Pot Spirit End 1,                              pot,            NONE,                 INSIDE_GANON_CASTLE,            0x1304,                     NUTS_5
 Ganon Castle Pot Spirit End 2,                              pot,            NONE,                 INSIDE_GANON_CASTLE,            0x1305,                     MAGIC_JAR_SMALL
-Ganon Castle Fairy Fountain Fairy 1,                        fairy,          NONE,                 INSIDE_GANON_CASTLE,            0x11004,                    FAIRY
+Ganon Castle Fairy Fountain Fairy 1,                        fairy,          NONE,                 INSIDE_GANON_CASTLE,            0x01004,                    FAIRY
 Ganon Castle Fairy Fountain Fairy 2,                        fairy,          NONE,                 INSIDE_GANON_CASTLE,            0x11004,                    FAIRY
 Ganon Castle Fairy Fountain Fairy 3,                        fairy,          NONE,                 INSIDE_GANON_CASTLE,            0x21004,                    FAIRY
 Ganon Castle Fairy Fountain Fairy 4,                        fairy,          NONE,                 INSIDE_GANON_CASTLE,            0x31004,                    FAIRY
@@ -2027,7 +2027,7 @@ MQ Ganon Pot Fire End 1,                                    pot,            NONE
 MQ Ganon Pot Fire End 2,                                    pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0f05,                     MAGIC_JAR_SMALL
 MQ Ganon Pot Spirit End 1,                                  pot,            NONE,                 INSIDE_GANON_CASTLE,            0x1304,                     NUTS_5
 MQ Ganon Pot Spirit End 2,                                  pot,            NONE,                 INSIDE_GANON_CASTLE,            0x1305,                     MAGIC_JAR_SMALL
-MQ Ganon Castle Fairy Fountain Fairy 1,                     fairy,          NONE,                 INSIDE_GANON_CASTLE,            0x11005,                    FAIRY
+MQ Ganon Castle Fairy Fountain Fairy 1,                     fairy,          NONE,                 INSIDE_GANON_CASTLE,            0x01005,                    FAIRY
 MQ Ganon Castle Fairy Fountain Fairy 2,                     fairy,          NONE,                 INSIDE_GANON_CASTLE,            0x11005,                    FAIRY
 MQ Ganon Castle Fairy Fountain Fairy 3,                     fairy,          NONE,                 INSIDE_GANON_CASTLE,            0x21005,                    FAIRY
 MQ Ganon Castle Fairy Fountain Fairy 4,                     fairy,          NONE,                 INSIDE_GANON_CASTLE,            0x31005,                    FAIRY
