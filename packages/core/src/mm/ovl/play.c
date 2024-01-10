@@ -37,8 +37,8 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_MM_GREAT_FAIRY_SWORD] = ITEM_MM_GREAT_FAIRY_SWORD;
         gSave.inventory.items[ITS_MM_BOTTLE + 0] = ITEM_MM_DEKU_PRINCESS;
         gSave.inventory.items[ITS_MM_BOTTLE + 1] = ITEM_MM_SPRING_WATER_HOT;
-        gSave.inventory.items[ITS_MM_BOTTLE + 2] = ITEM_MM_BOTTLE_EMPTY;
-        gSave.inventory.items[ITS_MM_BOTTLE + 3] = ITEM_MM_BOTTLE_EMPTY;
+        gSave.inventory.items[ITS_MM_BOTTLE + 2] = ITEM_MM_MAGIC_MUSHROOM;
+        gSave.inventory.items[ITS_MM_BOTTLE + 3] = ITEM_MM_POE;
         gSave.inventory.items[ITS_MM_BOTTLE + 4] = ITEM_MM_BOTTLE_EMPTY;
         gSave.inventory.items[ITS_MM_BOTTLE + 5] = ITEM_MM_BOTTLE_EMPTY;
 
