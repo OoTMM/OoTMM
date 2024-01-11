@@ -59,11 +59,11 @@ const checkGameHash = (game: Game, rom: Buffer) => {
   if (!hashes.includes(h)) {
     let romInfo = '';
     if (game == 'oot') {
-      romInfo = '. For OOT, use a ROM with version 1.0, U or J.';
+      romInfo = 'For OOT, use a ROM with version 1.0, U or J.';
     } else if (game == 'mm') {
-      romInfo = '. For MM, use a ROM with version U.';
+      romInfo = 'For MM, use a ROM with version U.';
     } 
-    throw new Error(`Incompatable ROM file for ${game} (hash: ${h.toString(16)})${romInfo}`);
+    throw new Error(`Incompatible ROM file for ${game} (hash: ${h.toString(16)}). ${romInfo}`);
   }
 };
 
