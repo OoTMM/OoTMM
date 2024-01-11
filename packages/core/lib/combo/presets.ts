@@ -6,6 +6,7 @@ const PRESET_DEFAULT = DEFAULT_SETTINGS;
 
 const PRESET_BLITZ = makeSettings({
   tingleShuffle: 'starting',
+  openMaskShop: true,
   mapCompassShuffle: 'starting',
   smallKeyShuffleMm: 'removed',
   smallKeyShuffleHideout: 'vanilla',
@@ -30,6 +31,8 @@ const PRESET_BLITZ = makeSettings({
   defaultHoldTarget: true,
   progressiveGoronLullaby: 'single',
   freeScarecrowOot: true,
+  bombchuBagMm: true,
+  bombchuBagOot: true,
   sharedBows: true,
   sharedBombBags: true,
   sharedMagic: true,
@@ -48,6 +51,7 @@ const PRESET_BLITZ = makeSettings({
   sharedHealth: true,
   noPlandoHints: true,
   hintImportance: true,
+  sharedBombchuBags: true,
   tricks: [
     'MM_LENS',
     'MM_NO_SEAHORSE',
@@ -131,6 +135,7 @@ const PRESET_BLITZ = makeSettings({
 
 const PRESET_BLITZ_PRECOMPLETED = makeSettings({
   hintImportance: true,
+  openMaskShop: true,
   tingleShuffle: "starting",
   mapCompassShuffle: "starting",
   smallKeyShuffleMm: "removed",
@@ -278,6 +283,7 @@ const PRESET_BLITZ_PRECOMPLETED = makeSettings({
 
 const PRESET_TRIFORCE_BLITZ = makeSettings({
   goal: "triforce3",
+  openMaskShop: true,
   hintImportance: true,
   tingleShuffle: "starting",
   mapCompassShuffle: "starting",
@@ -308,6 +314,8 @@ const PRESET_TRIFORCE_BLITZ = makeSettings({
   sunlightArrows: true,
   shortHookshotMm: true,
   lenientSpikes: false,
+  bombchuBagMm: true,
+  bombchuBagOot: true,
   sharedBows: true,
   sharedBombBags: true,
   sharedMagic: true,
@@ -325,6 +333,7 @@ const PRESET_TRIFORCE_BLITZ = makeSettings({
   sharedWallets: true,
   sharedHealth: true,
   sharedShields: true,
+  sharedBombchuBags: true,
   startingItems: {
     OOT_NUTS_10: 2,
     OOT_SHIELD_DEKU: 1,
