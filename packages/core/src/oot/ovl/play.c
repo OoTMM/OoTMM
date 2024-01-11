@@ -45,7 +45,7 @@ static void debugCheat(GameState_Play* play)
 
         gSave.inventory.upgrades.dekuStick = 3;
         gSave.inventory.upgrades.dekuNut = 3;
-        gSave.inventory.upgrades.bulletBag = 3;
+        //gSave.inventory.upgrades.bulletBag = 3;
         gSave.inventory.upgrades.bombBag = 3;
         gSave.inventory.upgrades.quiver = 3;
         gSave.inventory.upgrades.dive = 2;
