@@ -57,7 +57,13 @@ const checkGameHash = (game: Game, rom: Buffer) => {
   const h = CRC32.buf(rom, 0) >>> 0;
   const hashes = CONFIG[game].crc32;
   if (!hashes.includes(h)) {
-    throw new Error(`Bad hash for ${game}, got ${h.toString(16)}`);
+    let romInfo = '';
+    if (game == 'oot') {
+      romInfo = 'For OOT, use a ROM with version 1.0, U or J.';
+    } else if (game == 'mm') {
+      romInfo = 'For MM, use a ROM with version U.';
+    } 
+    throw new Error(`Incompatible ROM file for ${game} (hash: ${h.toString(16)}). ${romInfo}`);
   }
 };
 
