@@ -98,6 +98,19 @@
 #define IA_MM_BOMBCHU_BAG       0x5a
 #define IA_NONE                 0xff
 
+#define ITT_NONE        0x00
+#define ITT_NORMAL      0x01
+#define ITT_MINOR       0x02
+#define ITT_MAJOR       0x03
+#define ITT_RUPEE       0x04
+#define ITT_BOSS_KEY    0x05
+#define ITT_KEY         0x06
+#define ITT_SKULL       0x07
+#define ITT_FAIRY       0x08
+#define ITT_HEART       0x09
+#define ITT_SOUL        0x0a
+#define ITT_MASK        0x0b
+
 typedef struct GameState_Play GameState_Play;
 
 typedef struct ComboItemQuery
@@ -167,6 +180,7 @@ void comboGiveItem(Actor* actor, GameState_Play* play, const ComboItemQuery* q, 
 void comboGiveItemNpc(Actor* actor, GameState_Play* play, s16 gi, int npcId, float a, float b);
 void comboGiveItemNpcEx(Actor* actor, GameState_Play* play, s16 gi, int npcId, int flags, float a, float b);
 void comboItemOverride(ComboItemOverride* dst, const ComboItemQuery* q);
+u8   comboItemType(s16 gi);
 
 #endif
 

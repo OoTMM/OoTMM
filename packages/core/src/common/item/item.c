@@ -358,3 +358,12 @@ void comboPlayerAddItem(GameState_Play* play, s16 gi)
 
     comboAddItemEx(play, &q, 1);
 }
+
+u8 comboItemType(s16 gi)
+{
+    if (gi == 0)
+        return ITT_NONE;
+    if (gi < 0)
+        gi = -gi;
+    return kExtendedGetItems[gi - 1].type;
+}

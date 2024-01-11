@@ -46,6 +46,11 @@ PATCH_LOAD_STORE 8, 1
 .int 0x8084d360
 PATCH_END
 
+/* Always use a dummy text ID */
+PATCH_START 0x8084c110
+  li a1,0x01
+PATCH_END
+
 /* Hook into our custom item adding function */
 PATCH_START 0x8084c11c
   sw v1,0x24(sp)

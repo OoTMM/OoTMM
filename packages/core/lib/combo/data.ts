@@ -22,6 +22,7 @@ type DataGi = {
   index: number;
   id: string;
   item: string;
+  type: string;
   flags: number;
   draw: string;
   drawParam: number;
@@ -37,6 +38,7 @@ for (let i = 0; i < RAW_GI.length; ++i) {
   const index = i + 1;
   const id = v.id;
   const item = `ITEM_${v.item || 'NONE'}`;
+  const type = `ITT_${v.type || 'NONE'}`;
   const flags = v.flags;
   let draw: string;
   let drawParam: number;
@@ -78,7 +80,7 @@ for (let i = 0; i < RAW_GI.length; ++i) {
     addFunc = 'NONE';
     addParam = '0';
   }
-  GI[id] = { index, id, item, flags, draw, drawParam, object, name, addFunc, addParam };
+  GI[id] = { index, id, item, type, flags, draw, drawParam, object, name, addFunc, addParam };
 }
 
 type DataDrawGi = {

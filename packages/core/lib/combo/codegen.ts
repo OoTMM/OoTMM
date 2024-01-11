@@ -61,7 +61,7 @@ async function genGI() {
     fields.push(gi.item);
     fields.push(`0x${gi.flags.toString(16)}`);
     fields.push(gi.draw);
-    fields.push('0x01'); /* Dummy text ID */
+    fields.push(gi.type);
     if (!gi.object) {
       fields.push('0x0000');
     } else {
