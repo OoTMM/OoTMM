@@ -60,7 +60,7 @@ ActorInit ItemGiver_gActorInit = {
 void comboSpawnItemGiver(GameState_Play* play, u16 npcId)
 {
     SpawnActor(
-        (char*)play + 0x1ca0,
+        &play->actorCtx,
         play,
         AC_ITEM_GIVER,
         0, 0, 0,

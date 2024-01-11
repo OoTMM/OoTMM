@@ -266,11 +266,7 @@ void CustomTriggers_Spawn(GameState_Play* play)
         return;
 
     gActorCustomTriggers = (Actor_CustomTriggers*)SpawnActor(
-#if defined(GAME_OOT)
-        (char*)play + 0x1c24,
-#else
-        (char*)play + 0x1ca0,
-#endif
+        &play->actorCtx,
         play,
         AC_CUSTOM_TRIGGERS,
         0, 0, 0,

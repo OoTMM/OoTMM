@@ -163,7 +163,7 @@ void comboSpawnCustomWarps(GameState_Play* play)
         return;
 
     SpawnActor(
-        (char*)play + 0x1ca0,
+        &play->actorCtx,
         play,
         AC_CUSTOM_WARP,
         x, y, z,

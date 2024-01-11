@@ -228,11 +228,7 @@ Actor_CustomItem* DropCustomItem(GameState_Play* play, const Vec3f* pos, const X
 
     /* Spawn the custom actor */
     item = (Actor_CustomItem*)SpawnActor(
-#if defined(GAME_OOT)
-        (char*)play + 0x1c24,
-#else
-        (char*)play + 0x1ca0,
-#endif
+        &play->actorCtx,
         play,
         AC_CUSTOM_ITEM,
         pos->x, pos->y, pos->z,

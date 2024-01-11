@@ -44,7 +44,7 @@ void EnSth_AfterInit(Actor* this, GameState_Play* play)
     if ((this->variable & 0xf) == 4 && gSave.skullCountOcean < 30)
     {
         SpawnActor(
-            (char*)play + 0x1ca0,
+            &play->actorCtx,
             play,
             0xd4,
             -110.f, 650.f, 250.f,

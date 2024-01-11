@@ -51,9 +51,9 @@ typedef struct Actor Actor;
 
 int    LoadFile(void* dst, u32 vromAddr, u32 size);
 
-Actor*  SpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable);
+Actor*  SpawnActor(ActorContext* actorCtx, GameState_Play* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable);
 #if defined(GAME_MM)
-Actor*  SpawnActorEx(void* const_1, GameState_Play* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int ex1, int ex2, int ex3);
+Actor*  SpawnActorEx(ActorContext* actorCtx, GameState_Play* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int ex1, int ex2, int ex3);
 #endif
 
 void    SkelAnime_DrawFlexOpa(GameState_Play* play, void** skeleton, Vec3s* jointTable, s32 dListCount,
@@ -81,10 +81,6 @@ void    SetRoomClear(GameState_Play* play, int flag);
 u32     GetRoomClearFlag(GameState_Play* play, int flag);
 
 void Actor_ProcessInitChain(Actor* this, void* data);
-
-#if defined(GAME_MM)
-Actor*  SpawnActorEx(void* const_1, GameState_Play* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int, int, int);
-#endif
 
 void DMARomToRam(u32 romAddr, void* dramAddr, u32 size);
 void DmaCompressed(u32 pstart, void* dst, u32 size);

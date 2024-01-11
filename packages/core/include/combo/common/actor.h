@@ -1028,6 +1028,7 @@
 
 #if !defined(__ASSEMBLER__)
 typedef struct GameState_Play GameState_Play;
+typedef struct ActorContext ActorContext;
 typedef struct Actor Actor;
 
 typedef void (*ActorCallback)(Actor*, GameState_Play*);
@@ -1105,8 +1106,8 @@ _Static_assert(sizeof(Actor) == 0x144, "MM Actor size is wrong");
 _Static_assert(sizeof(ActorList) == 0xC, "MM ActorList size is wrong");
 #endif
 
-Actor* comboSpawnActor(void* unk, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable);
-Actor* comboSpawnActorEx(void* unk, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int ex1, int ex2, int ex3);
+Actor* comboSpawnActor(ActorContext* actorCtx, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable);
+Actor* comboSpawnActorEx(ActorContext* actorCtx, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int ex1, int ex2, int ex3);
 
 #endif
 
