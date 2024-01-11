@@ -213,6 +213,9 @@ static void writeFlash(u32 devAddr, void* dramAddr, u32 size)
     {
         writeFlashBlockMisaligned(devAddr, dramAddr, size);
     }
+
+    /* Ares seems to require this */
+    osEPiWriteIo(&sFlashHandle, sFlashHandle.baseAddress | FLASH_CMD_REG, FLASH_CMD_READ_ARRAY);
 }
 
 void comboReadWriteFlash(u32 devAddr, void* dramAddr, u32 size, s32 direction)
