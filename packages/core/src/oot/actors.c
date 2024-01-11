@@ -260,6 +260,10 @@ Actor* comboSpawnActor(void* unk, GameState_Play *play, short actorId, float x, 
         variable = 0xff00;
     }
 
+    if (comboConfig(CFG_OOT_OPEN_MASK_SHOP) && play->sceneId == SCE_OOT_MARKET_CHILD_NIGHT && actorId == AC_EN_DOOR)
+        if(((variable >> 7 & 7) == 0x5) && ((variable & 0x3f) == 0x10)) 
+            variable = 0x1bf;
+
     sActorIdToSpawn = actorId;
     actor = SpawnActor(unk, play, actorId, x, y, z, rx, ry, rz, variable);
     if (actorId == AC_ARMS_HOOK && gSave.age == AGE_ADULT)

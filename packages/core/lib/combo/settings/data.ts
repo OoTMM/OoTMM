@@ -810,6 +810,13 @@ export const SETTINGS = [{
   default: 0,
   cond: (s: any) => s.preCompletedDungeons,
 }, {
+  key: 'openMaskShop',
+  name: 'Open Mask Shop at night',
+  category: 'main.events',
+  type: 'boolean',
+  description: 'Makes the Mask Shop in Market open during the night',
+  default: false
+}, {
   key: 'crossWarpOot',
   name: 'Cross-Games OoT Warp Songs',
   category: 'main.cross',

@@ -758,6 +758,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MM_BOMBCHU_BAG: settings.bombchuBagMm,
     SHARED_BOMBCHU: settings.sharedBombchuBags,
     ER_WALLMASTERS: settings.erWallmasters !== 'none',
+    OOT_OPEN_MASK_SHOP: settings.openMaskShop,
   };
 
   for (const v in exprs) {
