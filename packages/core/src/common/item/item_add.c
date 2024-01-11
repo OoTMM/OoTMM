@@ -713,7 +713,7 @@ static int addItemSticksUpgrade(GameState_Play* play, u8 itemId, s16 gi, u16 par
         gOotSave.inventory.upgrades.dekuStick = param;
     if (comboConfig(CFG_SHARED_NUTS_STICKS))
         gMmSave.inventory.upgrades.dekuStick = gOotSave.inventory.upgrades.dekuStick;
-    addSticksOot(kMaxNuts[param]);
+    addSticksOot(kMaxSticks[param]);
     return 0;
 }
 
