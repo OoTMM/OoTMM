@@ -191,6 +191,11 @@ void comboPlayItemFanfare(s16 gi, int isShort)
         if (gMmSave.skullCountOcean >= 30)
             fanfare = FANFARE_MAJOR;
         break;
+    case GI_OOT_GS_TOKEN:
+        tmp = gOotSave.inventory.goldTokens;
+        if (tmp == 10 || tmp == 20 || tmp == 30 || tmp == 40 || tmp == 50 || tmp >= 100)
+            fanfare = FANFARE_MAJOR;
+        break;
     case GI_MM_STRAY_FAIRY_WF:
         if (gMmSave.inventory.strayFairies[0] >= 15)
             fanfare = FANFARE_MAJOR;
