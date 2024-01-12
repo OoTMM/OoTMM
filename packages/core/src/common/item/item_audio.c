@@ -159,6 +159,23 @@ void comboPlayItemFanfare(s16 gi, int isShort)
     case GI_MM_SONG_ORDER:
         fanfare = FANFARE_SONG_ORDER;
         break;
+    case GI_OOT_HEART_PIECE:
+    case GI_OOT_TC_HEART_PIECE:
+        if (gOotSave.inventory.quest.heartPieces)
+            fanfare = FANFARE_HEART_PIECE;
+        break;
+    case GI_MM_HEART_PIECE:
+        if (gMmSave.inventory.quest.heartPieces)
+            fanfare = FANFARE_HEART_PIECE;
+        break;
+    case GI_MM_GS_TOKEN_SWAMP:
+        if (gMmSave.skullCountSwamp >= 30)
+            fanfare = FANFARE_MAJOR;
+        break;
+    case GI_MM_GS_TOKEN_OCEAN:
+        if (gMmSave.skullCountOcean >= 30)
+            fanfare = FANFARE_MAJOR;
+        break;
     }
 
     if (fanfare == -1 && sfx == -1)
@@ -176,18 +193,9 @@ void comboPlayItemFanfare(s16 gi, int isShort)
             break;
         case ITT_HEART:
             fanfare = FANFARE_HEART_CONTAINER;
-            switch (gi)
-            {
-            case GI_OOT_HEART_PIECE:
-            case GI_OOT_TC_HEART_PIECE:
-                if (gOotSave.inventory.quest.heartPieces)
-                    fanfare = FANFARE_HEART_PIECE;
-                break;
-            case GI_MM_HEART_PIECE:
-                if (gMmSave.inventory.quest.heartPieces)
-                    fanfare = FANFARE_HEART_PIECE;
-                break;
-            }
+            break;
+        case ITT_SKULL:
+            fanfare = FANFARE_HEART_PIECE;
             break;
         default:
             fanfare = FANFARE_MAJOR;
