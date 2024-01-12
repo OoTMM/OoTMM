@@ -229,7 +229,7 @@ void EnGSwitch_GiveItemSilverRupee(Actor* this)
     EnGSwitch_SetFlag(EnGSwitch_ID(this, gPlay));
     PlayerDisplayTextBox(gPlay, 0xb4, NULL);
     comboAddItemEx(gPlay, &q, 1);
-    SetTextFlags(0x39);
+    Audio_PlayFanfare(0x39);
     SET_HANDLER(this, EnGSwitch_HandlerAfterCollected);
 }
 

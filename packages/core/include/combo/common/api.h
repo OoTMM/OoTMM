@@ -202,7 +202,6 @@ void LoadIcon(u32 vaddr, int iconId, void* buffer, int size);
 int Player_UsingItem(Actor_Player* link);
 
 void PlaySound(u16 soundId);
-void PlaySoundSpecial(u16 soundId);
 void PlayMusic(int arg0, int arg1, int arg2, int arg3, int arg4);
 void Actor_PlaySfx(Actor* actor, u32 id);
 void PlayLoopingSfxAtActor(Actor* actor, u32 id);
@@ -354,9 +353,6 @@ s32 Health_ChangeBy(GameState_Play* play, s16 amount);
 s32 Magic_RequestChange(GameState_Play* play, s16 amount, s16 type);
 void Magic_Update(GameState_Play* play);
 void Magic_Refill(GameState_Play*);
-
-/* Unsure what this does */
-void SetTextFlags(u16 bits);
 
 typedef struct ObjectContext ObjectContext;
 int GetObjectSlot(ObjectContext* ctx, int objectId);

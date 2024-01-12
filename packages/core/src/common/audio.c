@@ -7,12 +7,18 @@ void comboPlayFanfare(int fanfare)
     {
     case FF_NONE:
         break;
+    case FF_ITEM_MASK:
+#if defined(GAME_MM)
+        Audio_PlayFanfare(0x37);
+        break;
+#else
+    /* fallthrough */
+#endif
+    case FF_ITEM_MAJOR:
+        Audio_PlayFanfare(0x922);
+        break;
     case FF_ITEM_MINOR:
         PlaySound(0x4831);
-        break;
-    case FF_ITEM_MAJOR:
-    case FF_ITEM_MASK:
-        Audio_PlayFanfare(0x922);
         break;
     case FF_ITEM_HEART_CONTAINER:
         Audio_PlayFanfare(0x924);

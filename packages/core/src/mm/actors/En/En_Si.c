@@ -42,7 +42,7 @@ void EnSi_AddItem(Actor* this, GameState_Play* play)
     SetChestFlag(play, (this->variable & 0xfc) >> 2);
     PlayerDisplayTextBox(play, 0x52, NULL);
     comboAddItemEx(play, &q, 1);
-    PlaySoundSpecial(0x39);
+    Audio_PlayFanfare(0x39);
     FreezePlayer(play);
     SET_HANDLER(this, EnSi_WaitForPlayerToCloseMessage);
     this->draw = NULL;

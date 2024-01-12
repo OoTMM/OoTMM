@@ -167,7 +167,7 @@ PlayMusic = 0x801a3238;
 Player_UsingItem = 0x801240dc;
 Player_DrawHookshotReticle = 0x80124cc4;
 SetChestFlag = 0x800b5c90;
-PlaySoundSpecial = 0x801a3098;
+Audio_PlayFanfare = 0x801a3098;
 
 Actor_RunByteCode = 0x8010bf58;
 
