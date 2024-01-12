@@ -464,9 +464,7 @@ export class LogicPassEntrances {
       pool.add('region-shortcut');
     }
     if (this.input.settings.erRegionsFull) {
-      ['region-extra', 'region-full', 'region-shortcut'].forEach(region => {
-        pool.add(region);
-      });
+      pool.add('region-full')
     }
     this.placePool(worldId, Array.from(pool), { ownGame: this.input.settings.erRegions === 'ownGame' });
   }
@@ -536,6 +534,10 @@ export class LogicPassEntrances {
 
     if (this.input.settings.erBoss !== 'none') {
       pool = [...pool, 'boss'];
+    }
+
+    if (this.input.settings.erRegionsFull) {
+      pool = [...pool, 'region-full', 'region']
     }
 
     if (pool.length === 0) {
