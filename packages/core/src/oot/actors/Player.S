@@ -134,3 +134,8 @@ PATCH_START 0x808312e4
   j comboPlayerSetDrawGi
    nop
 PATCH_END
+
+/* Disable a check for heart container */
+PATCH_START 0x80838590
+  li at,0x7fff
+PATCH_END
