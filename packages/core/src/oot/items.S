@@ -65,6 +65,15 @@ PATCH_START 0x8084c130
    nop
 PATCH_END
 
+/* Disable default sound on item get */
+PATCH_START 0x8084c200
+  nop
+PATCH_END
+
+PATCH_START 0x8084c19c
+  nop
+PATCH_END
+
 /* Fix magic jars */
 PATCH_START 0x8007181c
   li t7,0xfff

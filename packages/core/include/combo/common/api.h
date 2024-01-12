@@ -80,6 +80,8 @@ void    ClearSwitchFlag(GameState_Play* play, int flag);
 void    SetRoomClear(GameState_Play* play, int flag);
 u32     GetRoomClearFlag(GameState_Play* play, int flag);
 
+void Audio_PlayFanfare(int fanfareId);
+
 void Actor_ProcessInitChain(Actor* this, void* data);
 
 void DMARomToRam(u32 romAddr, void* dramAddr, u32 size);
