@@ -185,3 +185,5 @@ u8   comboItemType(s16 gi);
 #endif
 
 u8 comboSceneKey(u8 sceneId);
+
+void comboPlayGetItemFanfare(s16 gi);

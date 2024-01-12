@@ -181,10 +181,10 @@
   exits:
     "Kokiri Forest": "true"
   locations:
-    "Kokiri Forest Mido Top Left": "true"
-    "Kokiri Forest Mido Top Right": "true"
-    "Kokiri Forest Mido Bottom Left": "true"
-    "Kokiri Forest Mido Bottom Right": "true"
+    "Mido's House Top Left": "true"
+    "Mido's House Top Right": "true"
+    "Mido's House Bottom Left": "true"
+    "Mido's House Bottom Right": "true"
 "Saria's House":
   region: ENTRANCE
   exits:

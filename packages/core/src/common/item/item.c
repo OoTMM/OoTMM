@@ -2,7 +2,6 @@
 #include <combo/item.h>
 #include <combo/net.h>
 #include <combo/dma.h>
-#include <combo/audio.h>
 
 #if defined(GAME_OOT)
 u16 gMmMaxRupees[] = { 0, 200, 500, 999 };
@@ -318,47 +317,6 @@ int comboAddItemEx(GameState_Play* play, const ComboItemQuery* q, int updateText
     return -1;
 }
 
-static void playGiveItemFanfare(const ComboItemQuery* q)
-{
-    ComboItemOverride o;
-    int fanfare;
-    s16 gi;
-
-    comboItemOverride(&o, q);
-    gi = o.gi;
-    if (gi < 0)
-        gi = -gi;
-    switch (comboItemType(gi))
-    {
-    case ITT_MASK:
-        fanfare = FF_ITEM_MASK;
-        break;
-    case ITT_MINOR:
-    case ITT_RUPEE:
-        fanfare = FF_ITEM_MINOR;
-        break;
-    case ITT_HEART:
-        fanfare = FF_ITEM_HEART_CONTAINER;
-        switch (gi)
-        {
-        case GI_OOT_HEART_PIECE:
-        case GI_OOT_TC_HEART_PIECE:
-            if (gOotSave.inventory.quest.heartPieces)
-                fanfare = FF_ITEM_HEART_PIECE;
-            break;
-        case GI_MM_HEART_PIECE:
-            if (gMmSave.inventory.quest.heartPieces)
-                fanfare = FF_ITEM_HEART_PIECE;
-            break;
-        }
-        break;
-    default:
-        fanfare = FF_ITEM_MAJOR;
-        break;
-    }
-    comboPlayFanfare(fanfare);
-}
-
 void comboPlayerAddItem(GameState_Play* play, s16 gi)
 {
 #if defined(GAME_MM)
@@ -370,6 +328,7 @@ void comboPlayerAddItem(GameState_Play* play, s16 gi)
     Actor* chest;
     Actor_Player* player;
     ComboItemQuery q = ITEM_QUERY_INIT;
+    ComboItemOverride o;
 
     /* Check for a chest */
     player = GET_LINK(play);
@@ -398,8 +357,9 @@ void comboPlayerAddItem(GameState_Play* play, s16 gi)
     if (q.gi < 0)
         q.gi = -q.gi;
 
+    comboItemOverride(&o, &q);
     comboAddItemEx(play, &q, 1);
-    playGiveItemFanfare(&q);
+    comboPlayGetItemFanfare(o.gi);
 }
 
 u8 comboItemType(s16 gi)

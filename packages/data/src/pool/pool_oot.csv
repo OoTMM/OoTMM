@@ -2,10 +2,10 @@ location,                                                   type,           hint
 Hatch Chicken,                                              npc,            NONE,                 GROTTOS,                        WEIRD_EGG,                  WEIRD_EGG
 Hatch Pocket Cucco,                                         npc,            NONE,                 GROTTOS,                        POCKET_EGG,                 POCKET_EGG
 Link's House Pot,                                           pot,            NONE,                 LINK_HOUSE,                     0x0002,                     RECOVERY_HEART
-Kokiri Forest Mido Top Left,                                chest,          NONE,                 KOKIRI_MIDO,                    0x00,                       RUPEE_BLUE
-Kokiri Forest Mido Top Right,                               chest,          NONE,                 KOKIRI_MIDO,                    0x01,                       RUPEE_BLUE
-Kokiri Forest Mido Bottom Left,                             chest,          NONE,                 KOKIRI_MIDO,                    0x02,                       RUPEE_GREEN
-Kokiri Forest Mido Bottom Right,                            chest,          NONE,                 KOKIRI_MIDO,                    0x03,                       RECOVERY_HEART
+Mido's House Top Left,                                      chest,          NONE,                 KOKIRI_MIDO,                    0x00,                       RUPEE_BLUE
+Mido's House Top Right,                                     chest,          NONE,                 KOKIRI_MIDO,                    0x01,                       RUPEE_BLUE
+Mido's House Bottom Left,                                   chest,          NONE,                 KOKIRI_MIDO,                    0x02,                       RUPEE_GREEN
+Mido's House Bottom Right,                                  chest,          NONE,                 KOKIRI_MIDO,                    0x03,                       RECOVERY_HEART
 Saria's House Heart 1,                                      heart,          NONE,                 KOKIRI_SARIA,                   0x00002,                    RECOVERY_HEART
 Saria's House Heart 2,                                      heart,          NONE,                 KOKIRI_SARIA,                   0x00003,                    RECOVERY_HEART
 Saria's House Heart 3,                                      heart,          NONE,                 KOKIRI_SARIA,                   0x00004,                    RECOVERY_HEART
