@@ -59,7 +59,7 @@ PATCH_START 0x80acd488
    move a1,s0
 PATCH_END
 
-/* Always play fanfare */
-PATCH_START 0x80acd4f4
-  li t0,99
+/* Disable the default fanfare */
+PATCH_START 0x80acd504
+  nop
 PATCH_END

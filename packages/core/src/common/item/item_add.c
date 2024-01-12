@@ -1556,12 +1556,7 @@ static int addItemStrayFairy(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
 #if defined(GAME_MM)
     if (param == 0xffff)
-    {
-        if (play->sceneId == SCE_MM_LAUNDRY_POOL || play->sceneId == SCE_MM_CLOCK_TOWN_EAST)
-            param = 4;
-        else
-            param = gSaveContext.dungeonId;
-    }
+        param = comboStrayFairyIndex();
 #endif
 
     if (param == 4)

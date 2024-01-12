@@ -66,12 +66,27 @@ void comboPlayItemFanfare(s16 gi, int isShort)
 {
     int fanfare;
     int sfx;
+    int tmp;
 
     if (gi < 0)
         gi = -gi;
 
     fanfare = -1;
     sfx = -1;
+
+    /* We need to resolve stray fairies */
+    if (gi == GI_MM_STRAY_FAIRY)
+    {
+        tmp = comboStrayFairyIndex();
+        switch (tmp)
+        {
+        case 0: gi = GI_MM_STRAY_FAIRY_WF; break;
+        case 1: gi = GI_MM_STRAY_FAIRY_SH; break;
+        case 2: gi = GI_MM_STRAY_FAIRY_GB; break;
+        case 3: gi = GI_MM_STRAY_FAIRY_ST; break;
+        case 4: gi = GI_MM_STRAY_FAIRY_TOWN; break;
+        }
+    }
 
     /* Special cases */
     switch (gi)
@@ -176,6 +191,25 @@ void comboPlayItemFanfare(s16 gi, int isShort)
         if (gMmSave.skullCountOcean >= 30)
             fanfare = FANFARE_MAJOR;
         break;
+    case GI_MM_STRAY_FAIRY_WF:
+        if (gMmSave.inventory.strayFairies[0] >= 15)
+            fanfare = FANFARE_MAJOR;
+        break;
+    case GI_MM_STRAY_FAIRY_SH:
+        if (gMmSave.inventory.strayFairies[1] >= 15)
+            fanfare = FANFARE_MAJOR;
+        break;
+    case GI_MM_STRAY_FAIRY_GB:
+        if (gMmSave.inventory.strayFairies[2] >= 15)
+            fanfare = FANFARE_MAJOR;
+        break;
+    case GI_MM_STRAY_FAIRY_ST:
+        if (gMmSave.inventory.strayFairies[3] >= 15)
+            fanfare = FANFARE_MAJOR;
+        break;
+    case GI_MM_STRAY_FAIRY_TOWN:
+        fanfare = FANFARE_MAJOR;
+        break;
     }
 
     if (fanfare == -1 && sfx == -1)
@@ -195,6 +229,7 @@ void comboPlayItemFanfare(s16 gi, int isShort)
             fanfare = FANFARE_HEART_CONTAINER;
             break;
         case ITT_SKULL:
+        case ITT_FAIRY:
             fanfare = FANFARE_HEART_PIECE;
             break;
         default:

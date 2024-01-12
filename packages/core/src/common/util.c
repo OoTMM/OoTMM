@@ -67,3 +67,15 @@ s32 comboReadPhysI32(u32 paddr)
 {
     return (s32)comboReadPhysU32(paddr);
 }
+
+int comboStrayFairyIndex(void)
+{
+#if defined(GAME_MM)
+    if (gPlay->sceneId == SCE_MM_LAUNDRY_POOL || gPlay->sceneId == SCE_MM_CLOCK_TOWN_EAST)
+        return 4;
+    else
+        return gSaveContext.dungeonId;
+#endif
+
+    return -1;
+}

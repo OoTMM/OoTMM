@@ -76,10 +76,13 @@ void EnElforg_DrawWrapper(Actor* this, GameState_Play* play)
 void EnElforg_GiveItem(GameState_Play* play, Actor* this)
 {
     ComboItemQuery q;
+    ComboItemOverride o;
 
     EnElforg_ItemQuery(&q, this, play);
+    comboItemOverride(&o, &q);
     PlayerDisplayTextBox(play, 0x579, NULL);
     comboAddItemEx(play, &q, 1);
+    comboPlayItemFanfare(o.gi, 1);
 
     // If it's a town fairy
     if ((this->variable & 0xF) == 3) {

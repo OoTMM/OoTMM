@@ -264,6 +264,9 @@ void    comboExObjectsReset(void);
 /* Custom_Warp */
 void comboSpawnCustomWarps(GameState_Play*);
 
+/* Util */
+int comboStrayFairyIndex(void);
+
 /* Draw */
 #define DRAW_NO_PRE1    0x01
 #define DRAW_NO_PRE2    0x02
