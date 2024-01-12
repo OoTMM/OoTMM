@@ -222,14 +222,15 @@ void EnGSwitch_HandlerAfterCollected(Actor* this, GameState_Play* play)
 
 void EnGSwitch_GiveItemSilverRupee(Actor* this)
 {
+    ComboItemOverride o;
     ComboItemQuery q;
 
-    PlaySound(0x4803);
     EnGSwitch_ItemQuery(&q, this, gPlay);
+    comboItemOverride(&o, &q);
     EnGSwitch_SetFlag(EnGSwitch_ID(this, gPlay));
     PlayerDisplayTextBox(gPlay, 0xb4, NULL);
     comboAddItemEx(gPlay, &q, 1);
-    Audio_PlayFanfare(0x39);
+    comboPlayItemFanfare(o.gi, 1);
     SET_HANDLER(this, EnGSwitch_HandlerAfterCollected);
 }
 
