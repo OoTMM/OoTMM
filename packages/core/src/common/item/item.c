@@ -359,7 +359,7 @@ void comboPlayerAddItem(GameState_Play* play, s16 gi)
 
     comboItemOverride(&o, &q);
     comboAddItemEx(play, &q, 1);
-    comboPlayGetItemFanfare(o.gi);
+    comboPlayItemFanfare(o.gi, 0);
 }
 
 u8 comboItemType(s16 gi)

@@ -4,7 +4,9 @@
 #define FANFARE_MAJOR               0x922
 #define FANFARE_HEART_CONTAINER     0x924
 #define FANFARE_HEART_PIECE         0x39
-#define SFX_MINOR                   0x4831
+#define SFX_RUPEE                   0x4803
+#define SFX_MINOR_GI                0x4824
+#define SFX_MINOR_QUICK             0x4831
 
 #if defined(GAME_OOT)
 # define FANFARE_MASK               FANFARE_MAJOR
@@ -60,7 +62,7 @@
 # define FANFARE_SONG_ORDER         0x95f
 #endif
 
-void comboPlayGetItemFanfare(s16 gi)
+void comboPlayItemFanfare(s16 gi, int isShort)
 {
     int fanfare;
     int sfx;
@@ -167,8 +169,10 @@ void comboPlayGetItemFanfare(s16 gi)
             fanfare = FANFARE_MASK;
             break;
         case ITT_MINOR:
+            sfx = isShort ? SFX_MINOR_QUICK : SFX_MINOR_GI;
+            break;
         case ITT_RUPEE:
-            sfx = SFX_MINOR;
+            sfx = isShort ? SFX_RUPEE : SFX_MINOR_GI;
             break;
         case ITT_HEART:
             fanfare = FANFARE_HEART_CONTAINER;

@@ -128,3 +128,9 @@ EnItem00_Update_BombchuCase:
 PATCH_START 0x801dbf88
 .int EnItem00_Update_BombchuCase
 PATCH_END
+
+/* Use our sound effect handler */
+PATCH_START 0x800a7080
+  jal EnItem00_PlaySoundXflag
+   move a0,s0
+PATCH_END

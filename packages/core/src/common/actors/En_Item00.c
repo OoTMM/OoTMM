@@ -69,6 +69,16 @@ void EnItem00_AddXflag(Actor_EnItem00* this)
     this->isExtendedCollected = 1;
 }
 
+void EnItem00_PlaySoundXflag(Actor_EnItem00* this)
+{
+    if (!this->isExtended)
+    {
+        PlaySound(0x4803);
+        return;
+    }
+    comboPlayItemFanfare(this->xflagGi, 1);
+}
+
 void EnItem00_XflagInitFreestanding(Actor_EnItem00* this, GameState_Play* play, u8 actorIndex, u8 slice)
 {
     ComboItemOverride o;
