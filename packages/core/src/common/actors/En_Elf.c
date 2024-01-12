@@ -163,7 +163,7 @@ void EnElf_GiveItem(Actor_EnElf* this, GameState_Play* play)
     comboXflagsSet(&this->xflag);
 
     /* Play the sound */
-    PlaySound(0x4824);
+    comboPlayItemFanfare(o.gi, 1);
 }
 
 void EnElf_InitWrapper(Actor_EnElf* this, GameState_Play* play)
