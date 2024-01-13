@@ -55,7 +55,7 @@ static int EnCow_GetCowID(Actor* cow, GameState_Play* play)
     case SCE_OOT_GERUDO_VALLEY:
         return 8;
     case SCE_OOT_INSIDE_JABU_JABU:
-        return 9;
+        return cow->room == 0x04 ? 9 : -1;
     }
     return -1;
 }
