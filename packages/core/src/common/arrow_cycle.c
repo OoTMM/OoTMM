@@ -224,18 +224,22 @@ static void HandleFrameDelay(Actor_Player* link, GameState_Play* play, Actor* ar
         }
 
         /* Refund the previous arrow magic */
-#if defined(GAME_OOT)
-    gSave.playerData.magicAmount += sArrowCycleState.magicCost;
-#else
-        if (prevEffectState >= 2)
+        if (!comboIsChateauActive())
         {
-            if (!MM_GET_EVENT_WEEK(EV_MM_WEEK_DRANK_CHATEAU_ROMANI))
-                gSave.playerData.magicAmount += sArrowCycleState.magicCost;
-        }
+#if defined(GAME_OOT)
+            gSave.playerData.magicAmount += sArrowCycleState.magicCost;
+#else
+            if (prevEffectState >= 2)
+            {
+                if (!MM_GET_EVENT_WEEK(EV_MM_WEEK_DRANK_CHATEAU_ROMANI))
+                    gSave.playerData.magicAmount += sArrowCycleState.magicCost;
+            }
 #endif
+        }
 
 #if defined(GAME_OOT)
-        gSave.playerData.magicAmount -= curInfo->magicCost;
+        if (!comboIsChateauActive())
+            gSave.playerData.magicAmount -= curInfo->magicCost;
 #else
         gSaveContext.magicToConsume = curInfo->magicCost;
 #endif
@@ -256,7 +260,7 @@ static Actor* ArrowCycle_FindArrow(Actor_Player* link, GameState_Play* play)
 
 void ArrowCycle_Handle(Actor_Player* link, GameState_Play* play)
 {
-    switch(play->sceneId) 
+    switch(play->sceneId)
     {
         case SCE_MM_SHOOTING_GALLERY:
         case SCE_MM_SHOOTING_GALLERY_SWAMP:

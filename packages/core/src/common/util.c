@@ -79,3 +79,13 @@ int comboStrayFairyIndex(void)
 
     return -1;
 }
+
+int comboIsChateauActive(void)
+{
+#if defined(GAME_OOT)
+    if (!comboConfig(CFG_SHARED_MAGIC))
+        return 0;
+#endif
+
+    return !!MM_GET_EVENT_WEEK(EV_MM_WEEK_DRANK_CHATEAU_ROMANI);
+}

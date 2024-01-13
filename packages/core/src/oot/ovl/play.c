@@ -9,6 +9,7 @@ static void debugCheat(GameState_Play* play)
 #if defined(DEBUG)
     if (!gSaveContext.gameMode && play->gs.input[0].current.buttons & L_TRIG)
     {
+        MM_SET_EVENT_WEEK(EV_MM_WEEK_DRANK_CHATEAU_ROMANI);
         SetEventChk(EV_OOT_CHK_MASTER_SWORD_PULLED);
         SetEventChk(EV_OOT_CHK_MASTER_SWORD_CHAMBER);
         gSave.playerData.swordHealth = 8;

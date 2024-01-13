@@ -266,6 +266,7 @@ void comboSpawnCustomWarps(GameState_Play*);
 
 /* Util */
 int comboStrayFairyIndex(void);
+int comboIsChateauActive(void);
 
 /* Draw */
 #define DRAW_NO_PRE1    0x01
