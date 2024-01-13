@@ -67,6 +67,13 @@ void Ocarina_HandleLastPlayedSong(GameState_Play* play, Actor_Player* player, s1
         canChangeAge = comboConfig(CFG_OOT_AGE_CHANGE) && GetEventChk(EV_OOT_CHK_MASTER_SWORD_CHAMBER) && GetEventChk(EV_OOT_CHK_MASTER_SWORD_PULLED);
         if (canChangeAge && comboConfig(CFG_OOT_AGE_CHANGE_NEEDS_OOT) && gSave.inventory.items[ITS_OOT_OCARINA] != ITEM_OOT_OCARINA_TIME)
             canChangeAge = 0;
+#if defined(DEBUG)
+        canChangeAge = 1;
+#endif
+        if (play->msgCtx.ocarinaAction != 0x29) // OCARINA_ACTION_FREE_PLAY_DONE
+        {
+            canChangeAge = 0;
+        }
         if (canChangeAge)
         {
             switch (play->sceneId)

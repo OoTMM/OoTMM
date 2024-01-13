@@ -36,7 +36,8 @@ typedef struct PACKED
     char unk_e3e6[0x06];
     u16  lastSongPlayed;
     u16  ocarinaMode;
-    char unk_e3f0[0x28];
+    u16  ocarinaAction;
+    char unk_e3f2[0x26];
 }
 MessageContext;
 
