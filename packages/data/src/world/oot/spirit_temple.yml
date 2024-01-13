@@ -192,7 +192,7 @@
   events:
     SPIRIT_LIGHT_STATUE: "has_mirror_shield && has_explosives"
   locations:
-    "Spirit Temple Adult Boss Key Chest": "can_play_zelda && (can_hookshot && can_hit_triggers_distance) || climb_anywhere || hookshot_anywhere"
+    "Spirit Temple Adult Boss Key Chest": "can_play_zelda && ((can_hookshot && can_hit_triggers_distance) || climb_anywhere || hookshot_anywhere)"
     "Spirit Temple Adult Topmost Sun on Wall": "can_reflect_light"
     "Spirit Temple Flying Pot Topmost 1": "soul_flying_pot"
     "Spirit Temple Flying Pot Topmost 2": "soul_flying_pot"
