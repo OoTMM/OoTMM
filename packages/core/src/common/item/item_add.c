@@ -1787,6 +1787,13 @@ static int addItemBombchuBagMm(GameState_Play* play, u8 itemId, s16 gi, u16 para
     return 0;
 }
 
+static int addItemBigFairyOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    addHealthOot(play, 8);
+    addMagicOot(play, 0x60);
+    return 0;
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -1879,6 +1886,7 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemMagicMm,
     addItemBombchuBagOot,
     addItemBombchuBagMm,
+    addItemBigFairyOot,
 };
 
 extern const u8 kAddItemFuncs[];

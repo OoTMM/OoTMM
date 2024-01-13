@@ -44,6 +44,7 @@
     "MQ Water Temple Pot Before Dark Link Ledge 1": "(soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon) || has_hover_boots" #This is why the Stalfos soul was removed from the main room requirements.
     "MQ Water Temple Pot Before Dark Link Ledge 2": "(soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon) || has_hover_boots" #This is why the Stalfos soul was removed from the main room requirements.
     "MQ Water Temple Pot Before Dark Link Ledge 3": "(soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon) || has_hover_boots" #This is why the Stalfos soul was removed from the main room requirements.
+    "MQ Water Temple Big Fairy Before Dark Link Ledge": "can_play_sun && (soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon) || has_hover_boots" #This is why the Stalfos soul was removed from the main room requirements.
     "MQ Water Temple Pot Before Dark Link Near Door 1": "soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon"
     "MQ Water Temple Pot Before Dark Link Near Door 2": "soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon"
     "MQ Water Temple Pot After Dark Link 1": "soul_enemy(SOUL_ENEMY_DARK_LINK) && has_weapon && soul_enemy(SOUL_ENEMY_STALFOS)"
@@ -51,6 +52,8 @@
     "MQ Water Temple Pot River 1": "soul_enemy(SOUL_ENEMY_DARK_LINK) && has_weapon && soul_enemy(SOUL_ENEMY_STALFOS)"
     "MQ Water Temple Pot River 2": "soul_enemy(SOUL_ENEMY_DARK_LINK) && has_weapon && soul_enemy(SOUL_ENEMY_STALFOS)"
     "MQ Water Temple Pot Boss Key Room": "soul_enemy(SOUL_ENEMY_DARK_LINK) && has_weapon && can_use_din && can_dive_small && soul_enemy(SOUL_ENEMY_STALFOS)"
+    "MQ Water Temple Big Fairy Before Dark Link Near Door 1": "can_play_sun && soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon"
+    "MQ Water Temple Big Fairy Before Dark Link Near Door 2": "can_play_storms && soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon"
 "Water Temple Three Torch Room":
   dungeon: Water
   locations:

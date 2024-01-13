@@ -675,6 +675,8 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   SHARED_MAGIC_JAR_SMALL: "Small Magic Jar",
   SHARED_MAGIC_JAR_LARGE: "Large Magic Jar",
   NOTHING: 'Nothing',
+  OOT_BIG_FAIRY: 'Big Fairy (OoT)',
+  SHARED_BIG_FAIRY: 'Big Fairy',
 };
 
 export function itemName(item: string) {

@@ -492,6 +492,7 @@ s16 comboRenewable(s16 gi, s16 def)
     case GI_OOT_POE:
     case GI_OOT_MAGIC_JAR_SMALL:
     case GI_OOT_MAGIC_JAR_LARGE:
+    case GI_OOT_BIG_FAIRY:
     case GI_MM_RECOVERY_HEART:
     case GI_MM_STICK:
     case GI_MM_NUT:

@@ -72,6 +72,7 @@
     "Bottom of the Well Grass 10": "can_cut_grass"
     "Bottom of the Well Grass 11": "can_cut_grass"
     "Bottom of the Well Grass 12": "can_cut_grass"
+    "Bottom of the Well Basement Big Fairy": "can_play_sun"
 "Bottom of the Well Coffin Room":
   dungeon: BotW
   exits:

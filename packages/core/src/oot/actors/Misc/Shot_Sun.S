@@ -22,3 +22,32 @@ PATCH_END
 PATCH_START 0x80b226c0 + 0x478
   nop
 PATCH_END
+
+/* Resize the actor */
+PATCH_START 0x80b22cbc
+.int 0x1A0
+PATCH_END
+
+PATCH_START 0x80b22cc0
+.int ShotSun_InitWrapper
+PATCH_END
+
+PATCH_START 0x80b22d6c
+.int 0
+PATCH_END
+
+/*
+Replaces:
+  addiu   a0, a1, 0x1c24
+*/
+PATCH_START 0x80b227f4
+  or      a0, s0, zero
+PATCH_END
+
+/*
+Replaces:
+  jal     SpawnActor
+*/
+PATCH_START 0x80b22844
+  jal     ShotSun_SpawnFairy
+PATCH_END

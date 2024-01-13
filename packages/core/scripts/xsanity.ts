@@ -146,6 +146,7 @@ const ACTORS_OOT = {
   EN_ELF: 0x18,
   BG_SPOT11_OASIS: 0x1C2,
   OBJ_MURE3: 0x1ab,
+  SHOT_SUN: 0x183,
 };
 
 const ACTORS_MM = {
@@ -635,6 +636,32 @@ function decPad(n: number, width: number) {
   return count > 0 ? '0'.repeat(width - s.length) + s : s;
 }
 
+function outputShotSunOot(roomActors: RoomActors[]) {
+  let lastSceneId = -1;
+  let lastSetupId = -1;
+  for (const room of roomActors) {
+    for (const actor of room.actors) {
+      if (actor.typeId === ACTORS_OOT.SHOT_SUN) {
+        const params = actor.params & 0xFF;
+        var validFairy = params === 0x40 || params === 0x41;
+        if (!validFairy) {
+          console.log("Fairy not valid: " + JSON.stringify(actor));
+          continue;
+        }
+        const item = 'BIG_FAIRY';
+        if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
+          console.log('');
+          lastSceneId = room.sceneId;
+          lastSetupId = room.setupId;
+        }
+        const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
+        console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Fairy Spot ${decPad(actor.actorId + 1, 2)},             fairy_spot,            NONE,                 ${SCENES_BY_ID.oot[room.sceneId]}, ${hexPad(key, 5)}, ${item}`);
+        console.log(params === 0x40 ? "Suns Song" : "Song of Storms");
+      }
+    }
+  }
+}
+
 function outputFairyPoolOot(roomActors: RoomActors[]) {
   let lastSceneId = -1;
   let lastSetupId = -1;
@@ -1042,7 +1069,9 @@ async function run() {
   //outputGrassPoolOot(mqRooms);
   //outputFairyPoolOot(ootRooms);
   //outputRupeesMm(mmRooms);
-  outputHeartsMm(mmRooms);
+  //outputHeartsMm(mmRooms);
+  outputShotSunOot(ootRooms);
+  outputShotSunOot(mqRooms);
 }
 
 run().catch(e => {

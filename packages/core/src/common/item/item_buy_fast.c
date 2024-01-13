@@ -76,6 +76,7 @@ int isItemFastBuy(s16 gi)
     case GI_MM_MAGIC_JAR_LARGE:
     case GI_OOT_BIG_POE:
     case GI_MM_BIG_POE:
+    case GI_OOT_BIG_FAIRY:
         return 1;
     default:
         return 0;

@@ -84,6 +84,7 @@ const SHARED_ITEMS_OOT = new Map([
   ['SHARED_BOMBCHU_5',        'OOT_BOMBCHU_5'],
   ['SHARED_BOMBCHU_10',       'OOT_BOMBCHU_10'],
   ['SHARED_BOMBCHU_20',       'OOT_BOMBCHU_20'],
+  ['SHARED_BIG_FAIRY',        'OOT_BIG_FAIRY'],
 ]);
 
 const SHARED_ITEMS_MM = new Map([
@@ -140,6 +141,7 @@ const SHARED_ITEMS_MM = new Map([
   ['SHARED_BOMBCHU_5',        'MM_BOMBCHU_5'],
   ['SHARED_BOMBCHU_10',       'MM_BOMBCHU_10'],
   ['SHARED_BOMBCHU_20',       'MM_BOMBCHU_20'],
+  ['SHARED_BIG_FAIRY',        'OOT_BIG_FAIRY'],
 ]);
 
 const SHARED_ITEMS = {
@@ -345,6 +347,7 @@ function checkKey(check: WorldCheck): number {
   case 'fairy':
   case 'rupee':
   case 'heart':
+  case 'fairy_spot':
     /* xflag */
     typeId = 0x10 + ((id >> 16) & 0xf);
     break;
@@ -361,6 +364,7 @@ function checkKey(check: WorldCheck): number {
   case 'fairy':
   case 'rupee':
   case 'heart':
+  case 'fairy_spot':
     sceneId = (SCENES as any)[check.scene];
     if (sceneId === undefined) {
       throw new Error(`Unknown scene ${check.scene}`);

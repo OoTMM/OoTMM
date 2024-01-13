@@ -130,6 +130,7 @@
     "Spirit Temple Child Hand": "can_longshot && has_lens && soul_iron_knuckle && soul_floormaster"
   locations:
     "MQ Spirit Temple Dinolfos Room Chest": "true"
+    "MQ Spirit Temple Dinolfos Room Big Fairy": "can_play_sun"
     "MQ Spirit Temple Boss Key Chest": "can_reflect_light"
     "Spirit Temple Mirror Shield": "has_lens && soul_iron_knuckle && soul_floormaster"
 "Spirit Temple Adult Climb":

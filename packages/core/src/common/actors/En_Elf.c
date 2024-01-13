@@ -61,10 +61,10 @@ void EnElf_Aliases(Actor_EnElf* this, GameState_Play* play)
 #endif
 }
 
-static void EnElf_ItemQuery(ComboItemQuery* q, Actor_EnElf* this)
+void EnElf_ItemQuery(ComboItemQuery* q, Actor_EnElf* this)
 {
-    comboXflagItemQuery(q, &this->xflag, EN_ELF_DEFAULT_GI);
-    q->giRenew = EN_ELF_DEFAULT_GI;
+    comboXflagItemQuery(q, &this->xflag, this->extendedGi);
+    q->giRenew = this->extendedGi;
     if (comboXflagsGet(&this->xflag)) {
         q->ovFlags = OVF_RENEW;
     }
@@ -135,11 +135,15 @@ void EnElf_GiveItem(Actor_EnElf* this, GameState_Play* play)
     EnElf_ItemQuery(&q, this);
     comboItemOverride(&o, &q);
 
-    if (o.gi == EN_ELF_DEFAULT_GI)
+    if (o.gi == this->extendedGi)
     {
         Health_ChangeBy(play, 0x80);
 #if defined(GAME_MM)
         gSaveContext.save.jinxTimer = 0;
+#else
+        if (this->extendedGi == GI_OOT_BIG_FAIRY) {
+            Magic_Refill(play);
+        }
 #endif
         return;
     }
@@ -194,11 +198,13 @@ void EnElf_SpawnFairyGroupMember(Actor_EnElf* spawner, GameState_Play* play, s16
     memcpy(&fairy->xflag, &spawner->xflag, sizeof(Xflag));
     fairy->xflag.sliceId = count;
 
+    fairy->extendedGi = EN_ELF_DEFAULT_GI;
+
     /* Query the item */
     EnElf_ItemQuery(&q, fairy);
     comboItemOverride(&o, &q);
 
-    if (o.gi != EN_ELF_DEFAULT_GI)
+    if (o.gi != fairy->extendedGi)
     {
         fairy->itemGiven = 0;
         fairy->extendedGiDraw = o.gi;
@@ -244,7 +250,7 @@ void Fairy_SetHealthAccumulator(Actor_EnElf* this, GameState_Play* play)
     this->unk_246++;
     // End displaced code
 
-    if (this->extendedGiDraw == EN_ELF_DEFAULT_GI)
+    if (this->extendedGiDraw == this->extendedGi)
     {
         gSaveContext.healthDelta = 0xA0;
     }

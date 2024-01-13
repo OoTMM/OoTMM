@@ -40,6 +40,7 @@
 #  include <combo/oot/actors/En_Ex_Ruppy.h>
 #  include <combo/oot/actors/En_Diving_Game.h>
 #  include <combo/oot/actors/En_Elf.h>
+#  include <combo/oot/actors/Shot_Sun.h>
 # endif
 
 # if defined(GAME_MM)

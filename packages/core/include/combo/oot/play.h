@@ -286,7 +286,9 @@ _Static_assert(sizeof(PauseContext) == 0x2b4, "OoT PauseContext size is wrong");
 /* Start: 0x11d30 */
 typedef struct PACKED
 {
-    char    unk_000[0xb8];
+    char    unk_000[0x70];
+    float   billboardMtxF[16];
+    char    unk_0b0[0x08];
     u8      age;
     char    unk_0b9[0x01];
     u8      spawnId;

@@ -766,6 +766,10 @@ export class LogicPassWorldTransform {
       this.replaceItem(Items.MM_RECOVERY_HEART,  Items.SHARED_RECOVERY_HEART);
     }
 
+    if (settings.sharedHealth && settings.sharedMagic) {
+      this.replaceItem(Items.OOT_BIG_FAIRY, Items.SHARED_BIG_FAIRY);
+    }
+
     if (settings.sharedSoulsEnemy) {
       this.shareItems(SharedItemGroups.SOULS_ENEMY, 'max');
     }
@@ -984,6 +988,12 @@ export class LogicPassWorldTransform {
     /* Handle Fairy Fountains */
     if (!settings.fairyFountainFairyShuffleMm) {
       const fairies = POOL.mm.filter((x: any) => x.type === 'fairy').map((x: any) => gameId('mm', x.location, ' ')) as string[];
+      this.removeLocations(fairies);
+    }
+
+    /* Handle Fairy Spots */
+    if (!settings.fairySpotShuffleOot) {
+      const fairies = POOL.oot.filter((x: any) => x.type === 'fairy_spot').map((x: any) => gameId('oot', x.location, ' ')) as string[];
       this.removeLocations(fairies);
     }
 

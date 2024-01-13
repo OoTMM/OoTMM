@@ -33,6 +33,7 @@
   locations:
     "MQ Shadow Temple First Gibdos Chest": "soul_redead_gibdo && (has_weapon || can_use_sticks || can_use_din)"
     "MQ Shadow Temple Boat Passage Chest": "true"
+    "MQ Shadow Temple Beamos Big Fairy": "can_play_storms"
 "Shadow Temple Scythe Room":
   dungeon: Shadow
   exits:
@@ -88,6 +89,7 @@
     "MQ Shadow Temple Pot Guillotines Room Lower 2": "true"
     "MQ Shadow Temple Pot Guillotines Room Upper 1": "has(STRENGTH) && is_adult"
     "MQ Shadow Temple Pot Guillotines Room Upper 2": "has(STRENGTH) && is_adult"
+    "MQ Shadow Temple Guillotines Room Big Fairy": "can_play_storms"
 "Shadow Temple Invisible Spike Floor":
   dungeon: Shadow
   exits:
@@ -119,6 +121,7 @@
     "MQ Shadow Temple Pot Room Before Boat 2": "has_weapon || can_use_sticks || can_use_din || can_play_sun" #It would be too unfair to get around the Gibdos otherwise
     "MQ Shadow Temple Flying Pot Room Before Boat 1": "soul_flying_pot && ((has_weapon || can_use_sticks || can_use_din) || (can_play_sun))" #It would be too unfair to get around the Gibdos otherwise
     "MQ Shadow Temple Flying Pot Room Before Boat 2": "soul_flying_pot && ((has_weapon || can_use_sticks || can_use_din) || (can_play_sun))" #It would be too unfair to get around the Gibdos otherwise
+    "MQ Shadow Temple Big Fairy After Wind": "can_play_sun"
 "Shadow Temple After Boat":
   dungeon: Shadow
   exits:

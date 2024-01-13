@@ -69,7 +69,7 @@ export function isLocationRenewable(world: World, loc: Location) {
   if (!check) {
     throw new Error(`Unknown location ${locationId}@${locationData(loc).world}`);
   }
-  if (['shop', 'cow', 'scrub', 'fairy', 'fish'].includes(check.type))
+  if (['shop', 'cow', 'scrub', 'fairy', 'fish', 'fairy_spot'].includes(check.type))
     return true;
   if (ItemHelpers.isTingleMap(check.item))
     return true;

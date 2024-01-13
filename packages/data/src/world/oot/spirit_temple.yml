@@ -116,6 +116,7 @@
   locations:
     "Spirit Temple GS Boulders": "can_play_time"
     "Spirit Temple Adult Silver Rupees": "silver_rupees_spirit_boulders"
+    "Spirit Temple Adult Silver Rupees Big Fairy": "silver_rupees_spirit_boulders && can_play_sun"
     "Spirit Temple SR Boulders 1": "true"
     "Spirit Temple SR Boulders 2": "true"
     "Spirit Temple SR Boulders 3": "true"
@@ -178,6 +179,7 @@
     "Spirit Temple Adult Late Sun on Wall": "can_reflect_light"
     "Spirit Temple Adult Invisible 1": "has_lens && soul_armos"
     "Spirit Temple Adult Invisible 2": "has_lens && soul_armos"
+    "Spirit Temple Adult Sunlight Big Fairy": "can_play_sun"
 "Spirit Temple Adult Hand":
   dungeon: Spirit
   exits:
