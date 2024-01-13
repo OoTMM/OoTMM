@@ -141,7 +141,7 @@ const SHARED_ITEMS_MM = new Map([
   ['SHARED_BOMBCHU_5',        'MM_BOMBCHU_5'],
   ['SHARED_BOMBCHU_10',       'MM_BOMBCHU_10'],
   ['SHARED_BOMBCHU_20',       'MM_BOMBCHU_20'],
-  ['SHARED_BIG_FAIRY',        'OOT_BIG_FAIRY'],
+  ['SHARED_BIG_FAIRY',        'MM_BIG_FAIRY'],
 ]);
 
 const SHARED_ITEMS = {
