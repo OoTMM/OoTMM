@@ -228,6 +228,8 @@ void AddRupees(s16 delta);
 
 void AudioLoad_InitTable(void* unk1, u32 unk2, u32 unk3);
 
+void ParseSceneRoomHeaders_SoundSettings(GameState_Play* play, void* cmd);
+
 /* DrawGi */
 void DrawGi_Opa0_Xlu1(GameState_Play*, s16);
 void DrawGi_Opa0_Xlu12(GameState_Play*, s16);

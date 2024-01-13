@@ -91,3 +91,12 @@ Actor* SpawnRoomActor(ActorContext* actorCtx, GameState_Play *play, short actorI
 }
 
 PATCH_CALL(0x8002562c, SpawnRoomActor);
+
+void ParseSceneRoomHeaders_SoundSettingsWrapper(GameState_Play* play, void* cmd)
+{
+    static u32 kMuteCmd[] = { 0x15000000, 0x00000000 };
+
+    if (gComboCtx.valid)
+        cmd = kMuteCmd;
+    ParseSceneRoomHeaders_SoundSettings(play, cmd);
+}
