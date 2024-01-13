@@ -95,25 +95,12 @@ const HINTS_DATA = {
   mm: loadCsv('hints/hints_mm.csv'),
 };
 
-const ENTRANCES = loadYaml('defs/entrances.yml');
-for (const e of Object.values(ENTRANCES)) {
-  const ee = e as any;
-  if (ee.flags === undefined) {
-    ee.flags = [];
-  }
-  if (ee.areas) {
-    ee.from = ee.areas[0];
-    ee.to = ee.areas[1];
-    delete ee.areas;
-  }
-}
-
 emit('WORLD', 'data-world', DATA_WORLD);
 emit('SCENES', 'data-scenes', loadYaml('defs/scenes.yml'));
 emit('NPC', 'data-npc', loadYaml('defs/npc.yml'));
 emit('REGIONS', 'data-regions', loadYaml('defs/regions.yml'));
 emit('HINTS', 'data-hints', loadYaml('defs/hints.yml'));
-emit('ENTRANCES', 'data-entrances', ENTRANCES);
+emit('ENTRANCES', 'data-entrances', loadYaml('defs/entrances.yml'));
 emit('RAW_GI', 'data-gi', loadYaml('defs/gi.yml'));
 emit('RAW_DRAWGI', 'data-drawgi', loadYaml('defs/drawgi.yml'));
 emit('FILES', 'data-files', DATA_FILES);

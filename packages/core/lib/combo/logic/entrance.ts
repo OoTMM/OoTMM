@@ -430,11 +430,11 @@ export class LogicPassEntrances {
     /* Delete the overworld entrances from the world */
     for (const eName of entrances) {
       const e = ENTRANCES[eName];
-      delete world.areas[e.from].exits[e.to];
+      delete world.areas[e.from].exits[e.to!];
       const reverse = (e as any).reverse as Entrance | undefined;
       if (reverse) {
         const r = ENTRANCES[reverse];
-        delete world.areas[r.from].exits[r.to];
+        delete world.areas[r.from!].exits[r.to!];
       }
     }
 
