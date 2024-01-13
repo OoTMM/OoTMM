@@ -185,7 +185,7 @@ void hookPlay_Init(GameState_Play* play)
         comboReadForeignSave();
     }
 
-    if (gSave.entranceIndex == 0xd800 && gLastEntrance == 0x1c00)
+    if (gSave.entranceIndex == ENTR_MM_CLOCK_TOWN && gLastEntrance == 0x1c00)
     {
         /* Song of Time */
         gSave.entranceIndex = entranceForOverride(g.initialEntrance);
@@ -198,6 +198,14 @@ void hookPlay_Init(GameState_Play* play)
         {
             gSave.entranceIndex = 0x8640;
         }
+    }
+
+    /* Fix an issue with first day prompt */
+    if ((gSave.day == 0 || (gSave.day == 1 && gSave.time == 0x4000)) && gSave.entranceIndex != ENTR_MM_CLOCK_TOWN)
+    {
+        gSave.day = 1;
+        gSave.time = 0x4040; /* Little leeway to avoid being in the night -> day transition state */
+        gSave.isNight = 0;
     }
 
     comboCacheClear();

@@ -312,4 +312,4 @@ MM_WALLMASTER_DAMPE:                            { game: mm,  id: 0xff00, type: w
 MM_WALLMASTER_BTW_ENTRANCE:                     { game: mm,  id: 0xff01, type: wallmaster, areas: ["MM Beneath The Well Wallmaster Near Entrance", "MM VOID"] }
 MM_WALLMASTER_BTW_FOUNTAIN:                     { game: mm,  id: 0xff02, type: wallmaster, areas: ["MM Beneath The Well Wallmaster Near Fountain", "MM VOID"] }
 MM_WALLMASTER_BTW_EXIT:                         { game: mm,  id: 0xff03, type: wallmaster, areas: ["MM Beneath The Well Wallmaster Near Exit", "MM VOID"] }
-
+MM_CLOCK_TOWN:                                  { game: mm,  id: 0xd800, type: none }

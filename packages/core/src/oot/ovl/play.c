@@ -345,7 +345,7 @@ void hookPlay_Init(GameState_Play* play)
     if (gSave.entrance == 0x0530)
     {
         gComboCtx.shuffledEntrance = 0;
-        comboGameSwitch(play, 0xd800);
+        comboGameSwitch(play, ENTR_MM_CLOCK_TOWN);
         return;
     }
 
@@ -367,7 +367,7 @@ void hookPlay_Init(GameState_Play* play)
     if (!gSaveContext.gameMode && (play->gs.input[0].current.buttons & R_TRIG))
     {
         gComboCtx.shuffledEntrance = 0;
-        comboGameSwitch(play, 0xd800);
+        comboGameSwitch(play, ENTR_MM_CLOCK_TOWN);
         return;
     }
 #endif

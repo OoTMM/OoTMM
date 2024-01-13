@@ -1,8 +1,6 @@
 #include <combo.h>
 #include <combo/net.h>
 
-#define ENTRANCE_CLOCKTOWN  0xd800
-
 static void Sram_LoadOptions(void)
 {
     u8 ootHeader[0x20];
@@ -28,7 +26,7 @@ void Sram_AfterOpenSave(void)
 
     gSave.playerForm = MM_PLAYER_FORM_HUMAN;
     gSave.equippedMask = 0;
-    gSave.entranceIndex = ENTRANCE_CLOCKTOWN;
+    gSave.entranceIndex = ENTR_MM_CLOCK_TOWN;
 
     /* Grace period */
     if (gSave.day == 3 && gSave.isNight && gSave.time > 0x3e20 && gSave.time < 0x4000)
@@ -45,23 +43,18 @@ void Sram_AfterOpenSave(void)
             if (comboConfig(CFG_ER_ANY))
                 g.initialEntrance = gComboCtx.entrance;
             else
-                g.initialEntrance = 0xd800;
+                g.initialEntrance = ENTR_MM_CLOCK_TOWN;
             gComboCtx.entrance = -1;
         }
 
         if (gComboCtx.shuffledEntrance)
         {
-            if (gSave.day == 0)
-            {
-                gSave.day = 1;
-                gSave.time = 0x4001;
-            }
             switch (gSave.entranceIndex)
             {
-            case 0x3800:
-            case 0x8200:
-            case 0xb800:
-            case 0x6600:
+            case ENTR_MM_BOSS_TEMPLE_WOODFALL:
+            case ENTR_MM_BOSS_TEMPLE_SNOWHEAD:
+            case ENTR_MM_BOSS_TEMPLE_GREAT_BAY:
+            case ENTR_MM_BOSS_TEMPLE_STONE_TOWER:
                 gNoTimeFlow = 1;
                 break;
             }
