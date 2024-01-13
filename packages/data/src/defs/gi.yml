@@ -655,4 +655,5 @@
 - { id: MM_BOMBCHU_BAG_20, type: MAJOR, add: [MM_BOMBCHU_BAG, 20], flags: 0xa0, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Bombchu Bag" }
 - { id: MM_SOLD_OUT, flags: 0xa0, draw: OOT_SOLD_OUT, object: [mm, 0x0113] }
 - { id: NOTHING,  flags: 0xa0, name: "<C0>Nothing" }
+- { id: MM_BIG_FAIRY, type: MINOR, add: MM_BIG_FAIRY, flags: 0x80, draw: BIG_FAIRY, object: [oot, 0x0177], name: "a <C0>Big Fairy" }
 - { id: MM_SCOOP, flags: 0x00 } # Scoop, MUST be the last entry

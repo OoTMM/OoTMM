@@ -64,3 +64,11 @@ PATCH_START 0x808872cc
   jal     EnElf_GiveItem
    or     a0, s0, zero
 PATCH_END
+
+/*
+Replaces:
+  JAL     Magic_Refill
+*/
+PATCH_START 0x808872e8
+  nop
+PATCH_END

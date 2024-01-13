@@ -97,6 +97,7 @@
 #define IA_OOT_BOMBCHU_BAG      0x59
 #define IA_MM_BOMBCHU_BAG       0x5a
 #define IA_OOT_BIG_FAIRY        0x5b
+#define IA_MM_BIG_FAIRY         0x5c
 #define IA_NONE                 0xff
 
 #define ITT_NONE        0x00

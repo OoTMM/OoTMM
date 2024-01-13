@@ -1,8 +1,6 @@
 #include <combo.h>
 #include <combo/item.h>
 
-#define SHOT_SUN_DEFAULT_GI GI_OOT_BIG_FAIRY
-
 int ShotSun_GiveFireArrow(Actor* actor, GameState_Play* play)
 {
     PlaySound(0x4802);
@@ -66,8 +64,6 @@ void ShotSun_SpawnFairy(Actor_ShotSun* this, GameState_Play* play, s16 actorId, 
 
     /* Copy the extended flag */
     memcpy(&fairy->xflag, &this->xflag, sizeof(Xflag));
-
-    fairy->extendedGi = SHOT_SUN_DEFAULT_GI;
 
     /* Query the item */
     EnElf_ItemQuery(&q, fairy);
