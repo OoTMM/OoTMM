@@ -3,13 +3,10 @@ import { join } from 'path';
 import { parse as parseYaml } from 'yaml';
 import * as CSV from 'csv/sync';
 
-let importBuf: string[] = [];
-
 function emit(name: string, filename: string, data: any) {
   const dir = join(__dirname, '..', 'dist');
   mkdirSync(dir, { recursive: true });
   writeFileSync(join(dir, `${filename}.json`), JSON.stringify(data));
-  importBuf.push(`export { default as ${name} } from './${filename}.json';`);
 }
 
 function loadYaml(name: string): any {
@@ -123,5 +120,3 @@ emit('FILES', 'data-files', DATA_FILES);
 emit('MACROS', 'data-macros', MACROS);
 emit('POOL', 'data-pool', POOL);
 emit('RAW_HINTS_DATA', 'data-hints-raw', HINTS_DATA);
-
-writeFileSync(join(__dirname, '..', 'dist', 'index.ts'), importBuf.join('\n') + '\n');
