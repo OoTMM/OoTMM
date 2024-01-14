@@ -1225,9 +1225,9 @@ void DrawGi_BigFairy(GameState_Play* play, s16 drawGiId)
     ModelViewTranslate(0.0f, -6.0f, 0.0f, MAT_MUL);
     ModelViewScale(2.0f, 2.0f, 2.0f, MAT_MUL);
 #if defined(GAME_OOT)
-    ModelViewUnkTransform(&play->transition.billboardMtxF);
+    ModelViewUnkTransform(play->transition.billboardMtxF);
 #else
-    ModelViewUnkTransform(&play->billboardMtxF);
+    ModelViewUnkTransform(play->billboardMtxF);
 #endif
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[2]);

@@ -285,7 +285,7 @@ ASSERT_OFFSET(PauseContext, pad_27B,                    0x27b);
 _Static_assert(sizeof(PauseContext) == 0x2b4, "OoT PauseContext size is wrong");
 
 /* Start: 0x11d30 */
-typedef struct PACKED
+typedef struct
 {
     char    unk_000[0x70];
     float   billboardMtxF[16];
@@ -302,6 +302,21 @@ typedef struct PACKED
     char    unk_12f[0x1];
 }
 TransitionContext;
+
+_Static_assert(sizeof(TransitionContext) == 0x130, "OoT TransitionContext size is wrong");
+ASSERT_OFFSET(TransitionContext, unk_000,       0x000);
+ASSERT_OFFSET(TransitionContext, billboardMtxF, 0x070);
+ASSERT_OFFSET(TransitionContext, unk_0b0,       0x0b0);
+ASSERT_OFFSET(TransitionContext, age,           0x0b8);
+ASSERT_OFFSET(TransitionContext, unk_0b9,       0x0b9);
+ASSERT_OFFSET(TransitionContext, spawnId,       0x0ba);
+ASSERT_OFFSET(TransitionContext, unk_0bb,       0x0bb);
+ASSERT_OFFSET(TransitionContext, type,          0x0e5);
+ASSERT_OFFSET(TransitionContext, unk_0e6,       0x0e6);
+ASSERT_OFFSET(TransitionContext, entrance,      0x0ea);
+ASSERT_OFFSET(TransitionContext, unk_0ec,       0x0ec);
+ASSERT_OFFSET(TransitionContext, gfx,           0x12e);
+ASSERT_OFFSET(TransitionContext, unk_12f,       0x12f);
 
 typedef struct
 {
