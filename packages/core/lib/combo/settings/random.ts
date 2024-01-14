@@ -59,7 +59,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
   base.hints = oldSettings.hints;
 
   /* Main Settings */
-  base.goal = sampleWeighted(random, { both: 10, triforce: 3 });
+  base.goal = sampleWeighted(random, { both: 10, triforce: 3, triforce3: 3 });
   if (base.goal === 'triforce') {
     base.triforcePieces = randomInt(random, 48) + 2;
     base.triforceGoal = randomInt(random, base.triforcePieces - 1) + 1;
@@ -170,7 +170,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
   }
 
   /* Ganon BK - 50% chance to follow OoT BK */
-  if (base.goal !== 'triforce') {
+  if (base.goal !== 'triforce' && base.goal !== 'triforce3') {
     if (booleanWeighted(random, 0.5)) {
       base.ganonBossKey = base.bossKeyShuffleOot === 'ownDungeon' ? 'ganon' : base.bossKeyShuffleOot;
     } else {
