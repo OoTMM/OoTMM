@@ -2,6 +2,7 @@
 #define COMBO_OOT_EN_ELF_H
 
 #include <combo/common/actor.h>
+#include <combo/item.h>
 
 typedef struct Actor_EnElf Actor_EnElf;
 
@@ -45,8 +46,12 @@ struct Actor_EnElf
     /* Extended flags */
     /* 0x02C0 */ Xflag xflag;
     /* 0x02C6 */ s16 itemGiven;
-    /* 0x02C8 */ s16 extendedGiDraw;
+    /* 0x02C8 */ s16 extendedGi;
+    /* 0x02CA */ s16 extendedGiDraw;
 };
+
+void EnElf_ItemQuery(ComboItemQuery* q, Actor_EnElf* this);
+void EnElf_Draw(Actor_EnElf* this, GameState_Play* play);
 
 _Static_assert(sizeof(Actor_EnElf) == 0x02CC, "OoT Actor_EnElf size is wrong");
 

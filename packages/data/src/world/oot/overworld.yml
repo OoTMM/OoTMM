@@ -307,6 +307,7 @@
     "Hyrule Field Grass Pack 4 Bush 10": "can_cut_grass"
     "Hyrule Field Grass Pack 4 Bush 11": "can_cut_grass"
     "Hyrule Field Grass Pack 4 Bush 12": "can_cut_grass"
+    "Hyrule Field River Big Fairy": "can_play_storms"
 "Hyrule Field Drawbridge":
   region: HYRULE_FIELD
   time: flow
@@ -319,6 +320,7 @@
     "Hyrule Field": "true"
   locations:
     "Hyrule Field Grotto Scrub HP": "can_hit_scrub && scrub_price(0x07)"
+    "Hyrule Field Grotto Scrub Big Fairy": "can_play_storms"
 "Hyrule Field Open Grotto":
   region: ENTRANCE
   age_change: false
@@ -816,6 +818,7 @@
     "Lost Woods Grass 1": "can_cut_grass"
     "Lost Woods Grass 2": "can_cut_grass"
     "Lost Woods Grass 3": "can_cut_grass"
+    "Lost Woods Pool Big Fairy": "can_play_storms"
   gossip:
     "Lost Woods Gossip Under Bridge": "true"
 "Lost Woods Rupee Arrow":
@@ -907,6 +910,7 @@
   locations:
     "Lost Woods Grotto Scrub Nuts Upgrade": "can_hit_scrub && scrub_price(0x03)"
     "Lost Woods Grotto Scrub Back": "can_hit_scrub && scrub_price(0x04)"
+    "Lost Woods Grotto Scrub Big Fairy": "can_play_sun"
 "Sacred Meadow Entryway":
   region: SACRED_MEADOW
   exits:
@@ -1200,6 +1204,7 @@
   locations:
     "Graveyard Royal Tomb Song": "soul_keese && (has_ranged_weapon || can_use_sword || has_explosives || can_hammer || can_use_sticks)"
     "Graveyard Royal Tomb Chest": "has_fire"
+    "Graveyard Royal Tomb Big Fairy": "can_play_sun"
 "Graveyard Shield Grave":
   region: ENTRANCE
   exits:
@@ -1281,6 +1286,7 @@
     "Death Mountain GS Above Dodongo":  "gs_night && is_adult && (can_hammer || trick(OOT_DMT_RED_ROCK_GS))"
     "Death Mountain Rupee Upper": "is_child && event(BOULDER_DEATH_MOUNTAIN)"
     "Death Mountain Rupee Lower": "is_child && has_explosives_or_hammer"
+    "Death Mountain Big Fairy": "can_play_sun"
 "Death Mountain Summit":
   region: DEATH_MOUNTAIN_TRAIL
   time: flow
@@ -1339,6 +1345,7 @@
     "Death Mountain Cow Grotto Heart 2": "true"
     "Death Mountain Cow Grotto Heart 3": "true"
     "Death Mountain Cow Grotto Heart 4": "true"
+    "Death Mountain Cow Grotto Big Fairy": "can_play_storms"
 "Fairy Fountain Magic":
   region: ENTRANCE
   exits:
@@ -1616,6 +1623,7 @@
     "Lake Hylia GS Island": "is_child && gs_night && can_damage_skull"
     "Lake Hylia GS Soil": "gs_soil && can_damage_skull"
     "Lake Hylia GS Big Tree": "is_adult && gs_night && (can_longshot || climb_anywhere)"
+    "Lake Hylia Island Big Fairy": "can_play_sun && (is_child || scarecrow_longshot || longshot_anywhere || climb_anywhere)"
     # These pots do exist in the vanilla game but they fail to load
     "Lake Hylia Pot 1": "is_child"
     "Lake Hylia Pot 2": "is_child"

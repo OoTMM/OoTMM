@@ -1207,3 +1207,36 @@ void DrawGi_BombchuBag(GameState_Play* play, s16 drawGiId, u8 param)
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[2]);
     CLOSE_DISPS();
 }
+
+void DrawGi_BigFairy(GameState_Play* play, s16 drawGiId) {
+    const DrawGi* drawGi;
+
+    drawGi = &kDrawGi[drawGiId];
+
+    OPEN_DISPS(play->gs.gfx);
+
+    InitListPolyOpa(play->gs.gfx);
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD);
+    gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
+
+    InitListPolyXlu(play->gs.gfx);
+    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD);
+    gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[1]);
+    gSPSegment(POLY_XLU_DISP++, 0x08,
+               DisplaceTexture(play->gs.gfx, G_TX_RENDERTILE, 0 * (play->gs.frameCount * 0),
+                                0 * (play->gs.frameCount * 0), 32, 32, 1, 1 * (play->gs.frameCount * 1),
+                                1 * -(play->gs.frameCount * 6), 32, 32));
+    MatrixStackDup();
+    ModelViewTranslate(0.0f, -6.0f, 0.0f, MAT_MUL);
+    ModelViewScale(2.0f, 2.0f, 2.0f, MAT_MUL);
+#if defined(GAME_OOT)
+    ModelViewUnkTransform(&play->transition.billboardMtxF);
+#else
+    ModelViewUnkTransform(&play->billboardMtxF);
+#endif
+    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD);
+    gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[2]);
+    MatrixStackPop();
+
+    CLOSE_DISPS();
+}

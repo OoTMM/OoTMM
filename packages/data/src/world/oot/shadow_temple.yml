@@ -33,6 +33,7 @@
     "Shadow Temple Scythe Silver Rupees": "true"
   locations:
     "Shadow Temple Compass": "soul_redead_gibdo && (has_weapon || can_use_sticks || can_use_din || can_hammer)"
+    "Shadow Temple Beamos Big Fairy": "can_play_storms"
 "Shadow Temple Scythe Silver Rupees":
   dungeon: Shadow
   exits:
@@ -62,6 +63,7 @@
     "Shadow Temple SR Pit 3": "true"
     "Shadow Temple SR Pit 4": "true"
     "Shadow Temple SR Pit 5": "true"
+    "Shadow Temple Stalfos Big Fairy": "can_play_storms"
     # TODO: Boomerang?
     "Shadow Temple Heart Scythe 1": "can_play_time && is_adult"
     "Shadow Temple Heart Scythe 2": "can_play_time && is_adult"
@@ -118,6 +120,7 @@
     "Shadow Temple Pot After Wind 2": "true"
     "Shadow Temple Flying Pot After Wind 1": "soul_flying_pot"
     "Shadow Temple Flying Pot After Wind 2": "soul_flying_pot"
+    "Shadow Temple Big Fairy After Wind": "can_play_sun"
 "Shadow Temple Boat":
   dungeon: Shadow
   exits:

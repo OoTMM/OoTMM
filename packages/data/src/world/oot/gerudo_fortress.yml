@@ -78,6 +78,7 @@
   locations:
     "Gerudo Fortress Pot Kitchen 1": "true"
     "Gerudo Fortress Pot Kitchen 2": "true"
+    "Gerudo Fortress Kitchen Big Fairy": "can_play_sun"
 "Gerudo Fortress Kitchen Ledge Near Tunnel":
   dungeon: GF
   exits:

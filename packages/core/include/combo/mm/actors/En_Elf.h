@@ -49,7 +49,8 @@ struct Actor_EnElf
     /* Extended flags */
     /* 0x0274 */ Xflag xflag;
     /* 0x027A */ s16 itemGiven;
-    /* 0x027C */ s16 extendedGiDraw;
+    /* 0x027C */ s16 extendedGi;
+    /* 0x027E */ s16 extendedGiDraw;
 };
 
 _Static_assert(sizeof(Actor_EnElf) == 0x0280, "MM Actor_EnElf size is wrong");

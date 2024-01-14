@@ -25,6 +25,7 @@
     "Ice Cavern Pot Scythe Room 2": "true"
     "Ice Cavern Pot Scythe Room 3": "true"
     "Ice Cavern Flying Pot Scythe Room": "soul_flying_pot"
+    "Ice Cavern Scythe Big Fairy": "can_play_storms"
 "Ice Cavern HP Room":
   dungeon: IC
   events:

@@ -134,6 +134,7 @@
     "Ganon Castle SR Spirit Back Left": "true"
     "Ganon Castle SR Spirit Back Right": "true"
     "Ganon Castle Heart Spirit": "true"
+    "Ganon Castle Spirit Big Fairy": "can_play_sun"
 "Ganon Castle Spirit 2":
   dungeon: Ganon
   exits:

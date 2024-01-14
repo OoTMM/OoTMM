@@ -30,6 +30,8 @@ int isItemBuyable(s16 gi)
     case GI_OOT_MAGIC_JAR_SMALL:
     case GI_OOT_MAGIC_JAR_LARGE:
         return (gOotSave.playerData.magicUpgrade && (gOotSave.playerData.magicAmount < (gOotSave.playerData.magicUpgrade2 ? 0x60 : 0x30)));
+    case GI_OOT_BIG_FAIRY:
+        return gOotSave.playerData.health < gOotSave.playerData.healthMax || (gOotSave.playerData.magicUpgrade && (gOotSave.playerData.magicAmount < (gOotSave.playerData.magicUpgrade2 ? 0x60 : 0x30)));
     case GI_OOT_STICK:
     case GI_OOT_STICKS_5:
     case GI_OOT_STICKS_10:
