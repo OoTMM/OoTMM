@@ -249,7 +249,7 @@
     "Hyrule Field Grotto Near Kak": "hidden_grotto_bomb"
     "Hyrule Field Fairy Grotto": "has_explosives_or_hammer"
   events:
-    BIG_POE: "can_ride_epona && can_use_bow && has_bottle"
+    BIG_POE: "can_ride_epona && can_use_bow && has_bottle && soul_enemy(SOUL_ENEMY_POE)"
     #There are rocks near Gerudo Valley you can farm for drops
     BOMBS_OR_BOMBCHU: "true"
     RUPEES: "true"
@@ -454,7 +454,7 @@
     "Market Potion Shop": "is_day && is_child"
     "MM Clock Town": "is_child && (is_day || setting(openMaskShop))"
   events:
-    RICHARD: "is_night && is_child"
+    RICHARD: "is_night && is_child && soul_npc(SOUL_NPC_DOG)"
     RUPEES: "is_child"
   locations:
     "Market Grass 1": "is_child && can_cut_grass_no_c_button"
@@ -1001,7 +1001,7 @@
     "Bottom of the Well": "(event(WELL_DRAIN) && cond(setting(wellAdult), true, is_child)) || (is_child && (has_iron_boots || longshot_anywhere || time_travel_at_will)) || (time_travel_at_will && trick(OOT_WELL_ADULT_TT))"
     "Skulltula House": "true"
     "Shooting Gallery Adult": "(is_adult && is_day) || (time_travel_at_will && trick(OOT_ADULT_GALLERY_TT))"
-    "Kakariko Rooftop": "(is_child && is_day) || can_hookshot || (is_adult && trick(OOT_PASS_COLLISION)) || climb_anywhere"
+    "Kakariko Rooftop": "(is_child && is_day && soul_npc(SOUL_NPC_CUCCO)) || can_hookshot || (is_adult && trick(OOT_PASS_COLLISION)) || climb_anywhere"
     "Kakariko Back": "can_hookshot || has_hover_boots || (is_day && is_child) || (trick(OOT_MAN_ON_ROOF) && (is_adult || can_use_slingshot || has_bombchu)) || climb_anywhere"
     "Kakariko Bazaar": "is_adult && is_day"
     "Kakariko Potion Shop": "is_day"
@@ -1010,7 +1010,7 @@
     "Impa House Front": "true"
     "ReDead Grotto": "hidden_grotto_bomb"
   locations:
-    "Kakariko Anju Bottle": "is_child && is_day && soul_npc(SOUL_NPC_CUCCO_LADY)"
+    "Kakariko Anju Bottle": "is_child && is_day && soul_npc(SOUL_NPC_CUCCO_LADY) && soul_npc(SOUL_NPC_CUCCO)"
     "Kakariko Anju Egg": "is_adult && is_day && soul_npc(SOUL_NPC_CUCCO_LADY)"
     "Kakariko Anju Cojiro": "event(TALON_AWAKE) && is_day && soul_npc(SOUL_NPC_CUCCO_LADY)"
     "Kakariko Song Shadow": "is_adult && soul_npc(SOUL_NPC_SHEIK) && has(MEDALLION_FOREST) && has(MEDALLION_FIRE) && has(MEDALLION_WATER)"
@@ -1097,7 +1097,7 @@
   events:
     MAGIC: "adult_trade(ODD_MUSHROOM) && can_use_wallet(2) && has_bottle"
   locations:
-    "Kakariko Potion Shop Odd Potion": "adult_trade(ODD_MUSHROOM)"
+    "Kakariko Potion Shop Odd Potion": "adult_trade(ODD_MUSHROOM) && soul_npc(SOUL_NPC_POTION_WITCH)"
 "Shooting Gallery Adult":
   region: ENTRANCE
   exits:
@@ -1313,7 +1313,7 @@
   time: flow
   exits:
     "Death Mountain": "true"
-    "Kakariko Rooftop": "is_child"
+    "Kakariko Rooftop": "is_child && soul_npc(SOUL_NPC_OWL)"
     "Death Mountain Crater Top": "true"
     "Fairy Fountain Magic": "has_explosives_or_hammer"
   locations:
@@ -1493,7 +1493,7 @@
     ARROWS: "is_adult"
     MAGIC: "true"
   locations:
-    "Zora River Bean Seller": "is_child && can_use_wallet(1)"
+    "Zora River Bean Seller": "is_child && can_use_wallet(1) && soul_npc(SOUL_NPC_BEAN_SALESMAN)"
     "Zora River HP Pillar": "is_child || has_hover_boots || climb_anywhere || hookshot_anywhere || glitch_megaflip"
     "Zora River HP Platform": "is_child || has_hover_boots || climb_anywhere || hookshot_anywhere || glitch_megaflip"
     "Zora River Frogs Storms": "is_child && can_play_storms"
@@ -1626,7 +1626,7 @@
   time: flow
   exits:
     "Hyrule Field": "true"
-    "Hyrule Field Drawbridge": "is_child"
+    "Hyrule Field Drawbridge": "is_child && soul_npc(SOUL_NPC_OWL)"
     "Zora Domain": "(is_child && (can_dive_small || longshot_anywhere || (trick(OOT_LAKE_SHORTCUT) && hookshot_anywhere))) || time_travel_at_will || (is_adult && setting(openZdShortcut))"
     "Laboratory": "true"
     "Water Temple": "(has_iron_boots && has_tunic_zora && can_hookshot) || (trick(OOT_WATER_GOLD_SCALE) && is_adult && can_longshot && has_scale_raw(2))"
@@ -1709,8 +1709,8 @@
   exits:
     "Lake Hylia": "true"
   locations:
-    "Laboratory Dive": "has_scale_raw(2) || (trick(OOT_LAB_DIVE_NO_GOLD_SCALE) && has_iron_boots && can_hookshot)"
-    "Laboratory Eye Drops": "adult_trade(EYEBALL_FROG)"
+    "Laboratory Dive": "soul_npc(SOUL_NPC_LAKESIDE_PROFESSOR) && (has_scale_raw(2) || (trick(OOT_LAB_DIVE_NO_GOLD_SCALE) && has_iron_boots && can_hookshot))"
+    "Laboratory Eye Drops": "soul_npc(SOUL_NPC_LAKESIDE_PROFESSOR) && adult_trade(EYEBALL_FROG)"
     "Laboratory GS Crate": "gs && has_iron_boots && can_hookshot"
     "Laboratory Rupee 1": "can_dive_big"
     "Laboratory Rupee 2": "can_dive_big"
@@ -2144,7 +2144,7 @@
     "Haunted Wasteland Start": "can_longshot || has_hover_boots || trick(OOT_SAND_RIVER_NOTHING)"
     "Haunted Wasteland End": "has_lens_strict || trick(OOT_BLIND_WASTELAND)"
   events:
-    BOMBCHU: "can_use_wallet(2)"
+    BOMBCHU: "can_use_wallet(2) && soul_npc(SOUL_NPC_MAGIC_CARPET_MAN)"
   locations:
     "Haunted Wasteland Chest": "has_fire"
     "Haunted Wasteland GS": "gs && (can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_sword || can_use_sticks || can_use_din)))"

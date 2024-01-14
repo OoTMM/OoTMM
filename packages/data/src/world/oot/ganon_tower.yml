@@ -15,8 +15,8 @@
   dungeon: Tower
   age_change: false
   events:
-    GANON_START: "!is_goal_triforce"
-    GANON: "event(GANON_START) && has_light_arrows && soul_npc(SOUL_NPC_ZELDA)"
+    GANON_START: "!is_goal_triforce && soul_boss(SOUL_BOSS_GANONDORF)"
+    GANON: "event(GANON_START) && has_light_arrows && soul_npc(SOUL_NPC_ZELDA) && soul_boss(SOUL_BOSS_GANONDORF)"
   locations:
     "Ganon Tower Pot 01": "true"
     "Ganon Tower Pot 02": "true"

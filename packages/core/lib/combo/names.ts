@@ -718,6 +718,19 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   MM_SOUL_MISC_BUSINESS_SCRUB: "Soul of Business Scrubs (MM)",
   SHARED_SOUL_MISC_GS: "Soul of Gold Skulltulas",
   SHARED_SOUL_MISC_BUSINESS_SCRUB: "Soul of Business Scrubs",
+  OOT_SOUL_NPC_LAKESIDE_PROFESSOR: 'Soul of Lakeside Professor (OoT)',
+  OOT_SOUL_NPC_BEAN_SALESMAN: 'Soul of Beans Salesman (OoT)',
+  OOT_SOUL_NPC_DOG: 'Soul of Dogs (OoT)',
+  OOT_SOUL_NPC_MAGIC_CARPET_MAN: 'Soul of Bombchu Merchant',
+  OOT_SOUL_NPC_INGO: 'Soul of Ingo',
+  OOT_SOUL_NPC_OWL: 'Soul of Kaepora Gaebora (OoT)',
+  OOT_SOUL_NPC_EPONA: 'Soul of Epona (OoT)',
+  OOT_SOUL_NPC_POTION_WITCH: 'Soul of the Potion Witch (OoT)',
+  OOT_SOUL_NPC_COMPOSER_BROS: 'Soul of Sharp and Flat (OoT)',
+  OOT_SOUL_NPC_CUCCO: 'Soul of Cuccos (OoT)',
+  OOT_SOUL_ENEMY_POE: 'Soul of Poes (OoT)',
+  OOT_SOUL_ENEMY_SPIKE_TRAPS: 'Soul of Spike Traps (OoT)',
+  OOT_SOUL_BOSS_GANONDORF: 'Soul of Ganondorf'
 };
 
 export function itemName(item: string) {

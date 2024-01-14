@@ -145,6 +145,7 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
         return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_CUCCO_LADY));
     case AC_EN_TORYO:
     case AC_EN_DAIKU:
+    case AC_EN_DAIKU_KAKARIKO:
         return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_CARPENTERS));
     case AC_EN_FU:
         return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_GURU_GURU));
@@ -171,6 +172,9 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
         return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_HYLIAN_GUARD));
     case AC_EN_HY:
     case AC_EN_ANI:
+    case AC_EN_MU:
+    case AC_EN_TG:
+    case AC_EN_NIW_GIRL:
         return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_HYLIAN_CITIZEN));
     case AC_EN_MA1:
     case AC_EN_MA2:
@@ -219,6 +223,44 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
     case AC_EN_ZL3:
     case AC_EN_ZL4:
         return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_ZELDA));
+    case AC_EN_MK:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_LAKESIDE_PROFESSOR));
+    case AC_EN_MS:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_BEAN_SALESMAN));
+    case AC_EN_DOG:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_DOG));
+    case AC_EN_JS:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_MAGIC_CARPET_MAN));
+    case AC_EN_IN:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_INGO));
+    case AC_EN_OWL:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_OWL));
+    case AC_EN_HORSE:
+    case AC_EN_HORSE_LINK_CHILD:
+        if (!gSaveContext.gameMode)
+            return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_EPONA));
+        else
+            return 1;
+    case AC_EN_DS:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_POTION_WITCH));
+    case AC_EN_TRAP:
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_SPIKE_TRAPS);
+    case AC_EN_POH:
+        switch(variable)
+        {
+            case 2:
+            case 3:
+                return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_COMPOSER_BROS));
+        }
+        /* Fallthrough */
+    case AC_EN_PO_FIELD:
+    case AC_EN_PO_DESERT:
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_POE);
+    case AC_EN_NIW:
+    case AC_EN_ATTACK_NIW:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_CUCCO));
+    case AC_BOSS_GANON:
+        return comboHasSoulOot(GI_OOT_SOUL_BOSS_GANONDORF);
     default:
         return 1;
     }
