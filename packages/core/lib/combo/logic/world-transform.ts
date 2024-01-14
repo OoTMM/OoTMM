@@ -767,7 +767,8 @@ export class LogicPassWorldTransform {
     }
 
     if (settings.sharedHealth && settings.sharedMagic) {
-      this.replaceItem(Items.OOT_BIG_FAIRY, Items.SHARED_BIG_FAIRY);
+      this.replaceItem(Items.OOT_FAIRY_BIG, Items.SHARED_FAIRY_BIG);
+      this.replaceItem(Items.MM_FAIRY_BIG, Items.SHARED_FAIRY_BIG);
     }
 
     if (settings.sharedSoulsEnemy) {

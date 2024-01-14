@@ -3,19 +3,19 @@
 #include <combo/player.h>
 
 #if defined(GAME_OOT)
-#define EN_ELF_INIT_VROM 0x808862f4
-#define EN_ELF_UPDATE_VROM 0x8088957c
-#define EN_ELF_DEFAULT_GI GI_OOT_FAIRY
-#define EN_ELF_BIG_GI GI_OOT_BIG_FAIRY
-#define EN_ELF_SFX_HEAL 0x20A8
-#define EN_ELF_SFX_ICE_TRAP 0x31F1
+# define EN_ELF_INIT_VROM        0x808862f4
+# define EN_ELF_UPDATE_VROM      0x8088957c
+# define EN_ELF_DEFAULT_GI       GI_OOT_FAIRY
+# define EN_ELF_BIG_GI           GI_OOT_FAIRY_BIG
+# define EN_ELF_SFX_HEAL         0x20a8
+# define EN_ELF_SFX_ICE_TRAP     0x31f1
 #else
-#define EN_ELF_INIT_VROM 0x8088cdac
-#define EN_ELF_UPDATE_VROM 0x80890438
-#define EN_ELF_DEFAULT_GI GI_MM_FAIRY
-#define EN_ELF_BIG_GI GI_MM_BIG_FAIRY
-#define EN_ELF_SFX_HEAL 0x20A8
-#define EN_ELF_SFX_ICE_TRAP 0x31A4
+# define EN_ELF_INIT_VROM        0x8088cdac
+# define EN_ELF_UPDATE_VROM      0x80890438
+# define EN_ELF_DEFAULT_GI       GI_MM_FAIRY
+# define EN_ELF_BIG_GI           GI_MM_FAIRY_BIG
+# define EN_ELF_SFX_HEAL         0x20a8
+# define EN_ELF_SFX_ICE_TRAP     0x31a4
 #endif
 
 void EnElf_Aliases(Actor_EnElf* this, GameState_Play* play)

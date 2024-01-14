@@ -648,7 +648,7 @@ function outputShotSunOot(roomActors: RoomActors[]) {
           console.log("Fairy not valid: " + JSON.stringify(actor));
           continue;
         }
-        const item = 'BIG_FAIRY';
+        const item = 'FAIRY_BIG';
         if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
           console.log('');
           lastSceneId = room.sceneId;

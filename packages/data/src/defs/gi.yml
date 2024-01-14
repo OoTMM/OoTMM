@@ -401,7 +401,7 @@
 - { id: OOT_BOMBCHU_BAG_5,  type: MAJOR, add: [OOT_BOMBCHU_BAG, 5],  flags: 0x80, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Bombchu Bag" }
 - { id: OOT_BOMBCHU_BAG_10, type: MAJOR, add: [OOT_BOMBCHU_BAG, 10], flags: 0x80, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Bombchu Bag" }
 - { id: OOT_BOMBCHU_BAG_20, type: MAJOR, add: [OOT_BOMBCHU_BAG, 20], flags: 0x80, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Bombchu Bag" }
-- { id: OOT_BIG_FAIRY, type: MINOR, add: OOT_BIG_FAIRY, flags: 0x80, draw: BIG_FAIRY, object: [oot, 0x0177], name: "a <C0>Big Fairy" }
+- { id: OOT_FAIRY_BIG, type: MINOR, add: OOT_FAIRY_BIG, flags: 0x80, draw: FAIRY_BIG, object: [oot, 0x0177], name: "a <C0>Big Fairy" }
 - { id: MM_RUPEE_GREEN, item: MM_RUPEE_GREEN, type: RUPEE, add: [MM_RUPEE, 1], flags: 0x00, draw: MM_RUPEE_GREEN, object: [mm, 0x013f], name: "a <C0>Green Rupee" }
 - { id: MM_RUPEE_BLUE, item: MM_RUPEE_BLUE, type: RUPEE, add: [MM_RUPEE, 5], flags: 0x01, draw: MM_RUPEE_BLUE, object: [mm, 0x013f], name: "a <C0>Blue Rupee" }
 - { id: MM_RUPEE_RED_10, item: MM_RUPEE_RED10, type: RUPEE, add: [MM_RUPEE, 10], flags: 0x02, draw: MM_RUPEE_RED, object: [mm, 0x013f], name: "a <C0>Red Rupee" }
@@ -653,7 +653,7 @@
 - { id: MM_BOMBCHU_BAG_5,  type: MAJOR, add: [MM_BOMBCHU_BAG, 5],  flags: 0xa0, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Bombchu Bag" }
 - { id: MM_BOMBCHU_BAG_10, type: MAJOR, add: [MM_BOMBCHU_BAG, 10], flags: 0xa0, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Bombchu Bag" }
 - { id: MM_BOMBCHU_BAG_20, type: MAJOR, add: [MM_BOMBCHU_BAG, 20], flags: 0xa0, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Bombchu Bag" }
+- { id: MM_FAIRY_BIG, type: MINOR, add: MM_FAIRY_BIG, flags: 0x80, draw: FAIRY_BIG, object: [oot, 0x0177], name: "a <C0>Big Fairy" }
 - { id: MM_SOLD_OUT, flags: 0xa0, draw: OOT_SOLD_OUT, object: [mm, 0x0113] }
 - { id: NOTHING,  flags: 0xa0, name: "<C0>Nothing" }
-- { id: MM_BIG_FAIRY, type: MINOR, add: MM_BIG_FAIRY, flags: 0x80, draw: BIG_FAIRY, object: [oot, 0x0177], name: "a <C0>Big Fairy" }
 - { id: MM_SCOOP, flags: 0x00 } # Scoop, MUST be the last entry

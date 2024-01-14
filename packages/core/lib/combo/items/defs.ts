@@ -675,8 +675,9 @@ const ITEM_IDS = [
   'SHARED_MAGIC_JAR_SMALL',
   'SHARED_MAGIC_JAR_LARGE',
   'NOTHING',
-  'OOT_BIG_FAIRY',
-  'SHARED_BIG_FAIRY',
+  'OOT_FAIRY_BIG',
+  'MM_FAIRY_BIG',
+  'SHARED_FAIRY_BIG',
 ] as const;
 
 export type ItemID = typeof ITEM_IDS[number];
