@@ -250,16 +250,6 @@ const PRESET_BLITZ_PRECOMPLETED = makeSettings({
       "stones": true,
       "medallions": false,
       "remains": true
-    },
-    "GANON_BK": {
-      "count": 5,
-      "stones": true
-    },
-    MAJORA: {
-      "count": 4,
-      "stones": true,
-      "medallions": false,
-      "remains": true
     }
   },
   plando: {
@@ -437,7 +427,7 @@ const PRESET_ALLSANITY = makeSettings({
   strayFairyChestShuffle: 'anywhere',
   strayFairyOtherShuffle: 'anywhere',
   ganonBossKey: 'anywhere',
-  rainbowBridge: 'custom',
+  rainbowBridge: 'medallions',
   dungeonRewardShuffle: 'anywhere',
   scrubShuffleOot: true,
   cowShuffleOot: true,
@@ -512,7 +502,7 @@ const PRESET_HELL = makeSettings({
   strayFairyChestShuffle: 'anywhere',
   strayFairyOtherShuffle: 'anywhere',
   ganonBossKey: 'custom',
-  rainbowBridge: 'custom',
+  rainbowBridge: 'medallions',
   majoraChild: 'custom',
   dungeonRewardShuffle: 'anywhere',
   scrubShuffleOot: true,
