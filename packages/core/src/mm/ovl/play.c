@@ -42,6 +42,9 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_MM_BOTTLE + 4] = ITEM_MM_BOTTLE_EMPTY;
         gSave.inventory.items[ITS_MM_BOTTLE + 5] = ITEM_MM_BOTTLE_EMPTY;
 
+        gSave.inventory.items[ITS_MM_STICKS] = ITEM_MM_STICK;
+        gSave.inventory.ammo[ITS_MM_STICKS] = 30;
+
         gSave.inventory.items[ITS_MM_MASK_POSTMAN] = ITEM_MM_MASK_POSTMAN;
         gSave.inventory.items[ITS_MM_MASK_ALL_NIGHT] = ITEM_MM_MASK_ALL_NIGHT;
         gSave.inventory.items[ITS_MM_MASK_BLAST] = ITEM_MM_MASK_BLAST;
@@ -69,6 +72,7 @@ static void debugCheat(GameState_Play* play)
 
         gSave.playerData.rupees = 9999;
 
+        gSave.inventory.quest.notebook = 1;
         gSave.inventory.quest.songHealing = 1;
         gSave.inventory.quest.songTime = 1;
         gSave.inventory.quest.songSoaring = 1;
@@ -87,6 +91,7 @@ static void debugCheat(GameState_Play* play)
         gMmSave.playerData.doubleMagic = 1;
         gMmSave.playerData.magicAmount = 2 * 0x30;
         gSaveContext.magicFillTarget = 0x60;
+
         gSave.inventory.ammo[ITS_MM_STICKS] = 30;
         gSave.inventory.ammo[ITS_MM_NUTS] = 40;
         gSave.inventory.ammo[ITS_MM_KEG] = 1;
@@ -273,5 +278,4 @@ void Play_DrawWrapper(GameState_Play* play)
     comboCacheGarbageCollect();
     comboObjectsGC();
     Play_Draw(play);
-    comboDpadDraw(play);
 }
