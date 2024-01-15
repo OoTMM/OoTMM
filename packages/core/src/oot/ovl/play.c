@@ -156,7 +156,7 @@ static void eventFixes(GameState_Play* play)
     }
 
     /* Set the rainbow bridge flag */
-    if (comboSpecialCond(SPECIAL_BRIDGE))
+    if ((!comboConfig(CFG_OOT_BRIDGE_VANILLA) && comboSpecialCond(SPECIAL_BRIDGE)) || (comboConfig(CFG_OOT_BRIDGE_VANILLA) && gOotSave.inventory.quest.medallionShadow && gOotSave.inventory.quest.medallionSpirit && gOotSave.inventory.items[ITS_OOT_ARROW_LIGHT] == ITEM_OOT_ARROW_LIGHT))
     {
         SetEventChk(EV_OOT_CHK_RAINBOW_BRIDGE);
     }

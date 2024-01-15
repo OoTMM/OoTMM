@@ -700,6 +700,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MM_SONG_SUN: settings.sunSongMm,
     OOT_SKIP_ZELDA: settings.skipZelda,
     OOT_OPEN_KAKARIKO_GATE: settings.kakarikoGate === 'open',
+    OOT_BRIDGE_VANILLA: settings.rainbowBridge === 'vanilla',
     OOT_LACS_CUSTOM: settings.lacs === 'custom',
     OOT_GANON_BK_CUSTOM: settings.ganonBossKey === 'custom',
     OOT_KZ_OPEN: settings.zoraKing === 'open',

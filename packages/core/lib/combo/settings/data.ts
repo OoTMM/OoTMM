@@ -739,6 +739,17 @@ export const SETTINGS = [{
   ],
   default: 'vanilla'
 }, {
+  key: 'rainbowBridge',
+  name: 'Rainbow Bridge',
+  category: 'main.events',
+  type: 'enum',
+  description: 'Alters how the Rainbow Bridge should be triggered',
+  values: [
+    { value: 'vanilla', name: 'Vanilla', description: 'Opens when you have the Light Arrows, Shadow Medallion, and Spirit Medallions' },
+    { value: 'custom', name: 'Custom', description: 'You will need to meet a special condition to open the bridge' },
+  ],
+  default: 'custom',
+}, {
   key: 'majoraChild',
   name: 'Majora Child Requirements',
   category: 'main.events',
