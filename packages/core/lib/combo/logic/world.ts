@@ -194,6 +194,9 @@ function cloneChecks(checks: { [k: string]: WorldCheck }): { [k: string]: WorldC
 }
 
 export function cloneWorld(world: World): World {
+  /* DEBUG */
+  return world;
+
   return {
     areas: cloneDeep(world.areas),
     checks: cloneChecks(world.checks),
