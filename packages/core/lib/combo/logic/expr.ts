@@ -75,6 +75,7 @@ type Keyless<T> = T extends any ? Omit<T, 'key'> : never;
 type ExprKeyless = Keyless<Expr>;
 
 const exprMap = new Map<string, Expr>();
+const exprKeyId = new Map<string, number>();
 
 function exprBuild(key: string, fn: () => ExprKeyless): Expr {
   if (exprMap.has(key)) {
@@ -84,6 +85,7 @@ function exprBuild(key: string, fn: () => ExprKeyless): Expr {
   const exprWithoutKey = fn();
   const expr: Expr = { ...exprWithoutKey, key };
   exprMap.set(key, expr);
+  exprKeyId.set(key, exprKeyId.size);
   return expr;
 }
 
@@ -97,11 +99,8 @@ export const EXPR_TIME_OOT_NIGHT = exprBuild('TIME-OOT(night)', () => ({ type: '
 export const exprTrue = () => EXPR_TRUE;
 export const exprFalse = () => EXPR_FALSE;
 
-function exprCompare(a: Expr, b: Expr): -1 | 0 | 1 {
-  if (a.key === b.key) {
-    return 0;
-  }
-  return a.key < b.key ? -1 : 1;
+function subkey(exprs: Expr[]): string {
+  return exprs.map(x => exprKeyId.get(x.key)).sort().join(',');
 }
 
 export const exprAnd = (exprs: Expr[]): Expr => {
@@ -113,12 +112,14 @@ export const exprAnd = (exprs: Expr[]): Expr => {
   if (exprs.some(x => x === EXPR_FALSE)) {
     return exprFalse();
   }
+
+  exprs = [...new Set(exprs)];
   if (exprs.length === 1) {
     return exprs[0];
   }
 
-  exprs = exprs.sort(exprCompare);
-  const key = `AND(${exprs.map(x => x.key).join(',')})`;
+  const sk = subkey(exprs);
+  const key = `AND(${sk})`;
 
   return exprBuild(key, () => ({ type: 'and', exprs }));
 };
@@ -132,12 +133,14 @@ export const exprOr = (exprs: Expr[]): Expr => {
   if (exprs.some(x => x === EXPR_TRUE)) {
     return exprTrue();
   }
+
+  exprs = [...new Set(exprs)];
   if (exprs.length === 1) {
     return exprs[0];
   }
 
-  exprs = exprs.sort(exprCompare);
-  const key = `OR(${exprs.map(x => x.key).join(',')})`;
+  const sk = subkey(exprs);
+  const key = `OR(${sk})`;
 
   return exprBuild(key, () => ({ type: 'or', exprs }));
 };
