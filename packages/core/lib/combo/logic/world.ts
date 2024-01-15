@@ -197,7 +197,7 @@ export function cloneWorld(world: World): World {
   return {
     areas: cloneDeep(world.areas),
     checks: cloneChecks(world.checks),
-    dungeons: cloneDeep(world.dungeons),
+    dungeons: Object.fromEntries(Object.entries(world.dungeons).map(([k, v]) => ([k, new Set(v)]))),
     regions: cloneDeep(world.regions),
     gossip: cloneDeep(world.gossip),
     checkHints: cloneDeep(world.checkHints),
