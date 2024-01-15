@@ -386,7 +386,7 @@ void Play_DrawWrapper(GameState_Play* play)
         gDPSetCycleType(OVERLAY_DISP++, G_CYC_FILL);
         gDPSetRenderMode(OVERLAY_DISP++, G_RM_NOOP, G_RM_NOOP2);
         gDPSetFillColor(OVERLAY_DISP++, 0);
-        gDPFillRectangle(OVERLAY_DISP++, 0, 0, 0xfff, 0xfff);
+        gDPFillRectangle(OVERLAY_DISP++, 0, 0, 319, 239);
         CLOSE_DISPS();
     }
     else
