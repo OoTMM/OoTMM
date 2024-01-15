@@ -117,6 +117,31 @@ static void debugCheat(GameState_Play* play)
 #endif
 }
 
+static int isRainbowBridgeOpen(void)
+{
+    if (comboConfig(CFG_OOT_BRIDGE_CUSTOM) && !comboSpecialCond(SPECIAL_BRIDGE))
+        return 0;
+
+    if (comboConfig(CFG_OOT_BRIDGE_VANILLA) && !(
+        gOotSave.inventory.quest.medallionShadow
+        && gOotSave.inventory.quest.medallionSpirit
+        && gOotSave.inventory.items[ITS_OOT_ARROW_LIGHT] == ITEM_OOT_ARROW_LIGHT
+    ))
+        return 0;
+
+    if (comboConfig(CFG_OOT_BRIDGE_MEDALLIONS) && !(
+        gOotSave.inventory.quest.medallionLight
+        && gOotSave.inventory.quest.medallionForest
+        && gOotSave.inventory.quest.medallionFire
+        && gOotSave.inventory.quest.medallionWater
+        && gOotSave.inventory.quest.medallionShadow
+        && gOotSave.inventory.quest.medallionSpirit
+    ))
+        return 0;
+
+    return 1;
+}
+
 static void eventFixes(GameState_Play* play)
 {
     /* Skip forest temple cutscene */
@@ -156,7 +181,7 @@ static void eventFixes(GameState_Play* play)
     }
 
     /* Set the rainbow bridge flag */
-    if ((!comboConfig(CFG_OOT_BRIDGE_VANILLA) && comboSpecialCond(SPECIAL_BRIDGE)) || (comboConfig(CFG_OOT_BRIDGE_VANILLA) && gOotSave.inventory.quest.medallionShadow && gOotSave.inventory.quest.medallionSpirit && gOotSave.inventory.items[ITS_OOT_ARROW_LIGHT] == ITEM_OOT_ARROW_LIGHT))
+    if (isRainbowBridgeOpen())
     {
         SetEventChk(EV_OOT_CHK_RAINBOW_BRIDGE);
     }

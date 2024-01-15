@@ -44,7 +44,6 @@ export const CONFVARS = [
   'OOT_SKIP_ZELDA',
   'OOT_OPEN_KAKARIKO_GATE',
   'ER_ANY',
-  'OOT_BRIDGE_VANILLA',
   'OOT_LACS_CUSTOM',
   'OOT_GANON_BK_CUSTOM',
   'OOT_KZ_OPEN',
@@ -111,6 +110,9 @@ export const CONFVARS = [
   'SHARED_BOMBCHU',
   'ER_WALLMASTERS',
   'OOT_OPEN_MASK_SHOP',
+  'OOT_BRIDGE_VANILLA',
+  'OOT_BRIDGE_MEDALLIONS',
+  'OOT_BRIDGE_CUSTOM',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

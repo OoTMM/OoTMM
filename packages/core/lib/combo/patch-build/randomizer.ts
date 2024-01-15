@@ -700,7 +700,6 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MM_SONG_SUN: settings.sunSongMm,
     OOT_SKIP_ZELDA: settings.skipZelda,
     OOT_OPEN_KAKARIKO_GATE: settings.kakarikoGate === 'open',
-    OOT_BRIDGE_VANILLA: settings.rainbowBridge === 'vanilla',
     OOT_LACS_CUSTOM: settings.lacs === 'custom',
     OOT_GANON_BK_CUSTOM: settings.ganonBossKey === 'custom',
     OOT_KZ_OPEN: settings.zoraKing === 'open',
@@ -764,6 +763,9 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     SHARED_BOMBCHU: settings.sharedBombchuBags,
     ER_WALLMASTERS: settings.erWallmasters !== 'none',
     OOT_OPEN_MASK_SHOP: settings.openMaskShop,
+    OOT_BRIDGE_VANILLA: settings.rainbowBridge === 'vanilla',
+    OOT_BRIDGE_MEDALLIONS: settings.rainbowBridge === 'medallions',
+    OOT_BRIDGE_CUSTOM: settings.rainbowBridge === 'custom',
   };
 
   for (const v in exprs) {
