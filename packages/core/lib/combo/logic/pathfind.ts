@@ -1,6 +1,7 @@
 import { cloneDeep } from 'lodash';
 import { Settings } from '../settings';
-import { AreaData, evalExpr, Expr, ExprResult, isDefaultRestrictions, MM_TIME_SLICES } from './expr';
+import { Expr, MM_TIME_SLICES } from './expr';
+import { AreaData, evalExpr, ExprResult, isDefaultRestrictions } from './expr-runtime';
 
 import { Location, locationData, makeLocation } from './locations';
 import { World } from './world';
