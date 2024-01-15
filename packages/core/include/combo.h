@@ -24,6 +24,7 @@
 # include <combo/npc.h>
 # include <combo/text.h>
 # include <combo/common/ocarina.h>
+# include <combo/common/color.h>
 # include <combo/common/actors/Obj_Mure2.h>
 # include <combo/common/actors/Obj_Mure3.h>
 

@@ -15,8 +15,8 @@ struct Actor_EnElf
     /* 0x013C */ u8 skelAnime[0x44]; // SkelAnime
     /* 0x0180 */ Vec3s jointTable[15];
     /* 0x01DA */ Vec3s morphTable[15];
-    /* 0x0234 */ f32 innerColor[4]; // Color_RGBAf
-    /* 0x0244 */ f32 outerColor[4]; // Color_RGBAf
+    /* 0x0234 */ Color_RGBAf innerColor;
+    /* 0x0244 */ Color_RGBAf outerColor;
     /* 0x0254 */ u8 lightInfoGlow[0x10]; // LightInfo
     /* 0x0264 */ void* lightNodeGlow; // LightNode
     /* 0x0268 */ u8 lightInfoNoGlow[0x10]; // LightInfo
