@@ -10,6 +10,8 @@ import { Location, makeLocation } from './locations';
 import { LogicPassSolver } from './solve';
 import { PlayerItems } from '../items';
 import { ItemProperties } from './item-properties';
+import { mapValues } from 'lodash';
+import { optimizeExpr } from './expr-optimizer';
 
 type Entrance = keyof typeof ENTRANCES;
 
@@ -732,6 +734,15 @@ export class LogicPassEntrances {
 
   run() {
     let attempts = 1;
+
+    /* TODO: Do this somewhere else */
+    for (const world of this.input.worlds) {
+      for (const area of Object.values(world.areas)) {
+        area.exits = mapValues(area.exits, e => optimizeExpr(e));
+        area.events = mapValues(area.events, e => optimizeExpr(e));
+        area.locations = mapValues(area.locations, e => optimizeExpr(e));
+      }
+    }
 
     for (;;) {
       try {
