@@ -1,39 +1,27 @@
-import { EXPR_FALSE, EXPR_TRUE, Expr, exprAge, exprAnd, exprOr } from './expr';
+import { EXPR_FALSE, EXPR_TRUE, Expr, ExprAge, ExprAnd, ExprContainer, ExprOr, exprAge, exprAnd, exprOr } from './expr';
 import { Age } from './pathfind';
 
 type ExprPartialEvalContext = {
   age?: Age;
 };
 
-function visitExprs(expr: Expr, cb: (e: Expr) => void) {
-  cb(expr);
-  if (expr.type === 'or' || expr.type === 'and') {
-    for (const e of expr.exprs) {
-      visitExprs(e, cb);
-    }
-  }
-}
-
 function exprComplexity(expr: Expr) {
   let c = 0;
-  visitExprs(expr, () => c++);
+  expr.visit(() => c++);
   return c;
 }
 
-function exprTree(op: 'and' | 'or', exprs: Expr[]): Expr {
-  switch (op) {
-  case 'and': return exprAnd(exprs);
-  case 'or': return exprOr(exprs);
-  }
-}
-
 function exprPartialEval(expr: Expr, ctx: ExprPartialEvalContext): Expr {
-  if (expr.type === 'and' || expr.type === 'or') {
+  if (expr instanceof ExprContainer) {
     const newExprs = expr.exprs.map(e => exprPartialEval(e, ctx));
-    return exprTree(expr.type, newExprs);
+    if (expr instanceof ExprAnd) {
+      return exprAnd(newExprs);
+    } else {
+      return exprOr(newExprs);
+    }
   }
 
-  if (expr.type === 'age' && ctx.age) {
+  if (expr instanceof ExprAge && ctx.age) {
     if (expr.age === ctx.age) {
       return EXPR_TRUE;
     } else {
@@ -45,15 +33,15 @@ function exprPartialEval(expr: Expr, ctx: ExprPartialEvalContext): Expr {
 }
 
 function exprOptBubbleAge(expr: Expr): Expr {
-  if (expr.type !== 'and' && expr.type !== 'or') {
+  if (!(expr instanceof ExprContainer)) {
     return expr;
   }
 
   let hasChild = false;
   let hasAdult = false;
 
-  visitExprs(expr, (e) => {
-    if (e.type === 'age') {
+  expr.visit((e) => {
+    if (e instanceof ExprAge) {
       if (e.age === 'child') {
         hasChild = true;
       } else if (e.age === 'adult') {
