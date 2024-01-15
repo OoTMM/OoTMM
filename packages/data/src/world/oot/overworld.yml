@@ -859,14 +859,12 @@
     "Kokiri Forest": "true"
     "Hyrule Field": "true"
     "Lost Woods": "can_longshot || hookshot_anywhere"
-  locations:
-    "Lost Woods Gift from Saria": "event(SARIA_GIFT)"
 "Lost Woods Bridge from Forest":
   region: LOST_WOODS
   exits:
-    "Lost Woods Bridge": "event(SARIA_GIFT)"
-  events:
-    SARIA_GIFT: "soul_npc(SOUL_NPC_SARIA)"
+    "Lost Woods Bridge": "true"
+  locations:
+    "Lost Woods Gift from Saria": "soul_npc(SOUL_NPC_SARIA)"
 "Lost Woods Deep":
   region: LOST_WOODS
   exits:
