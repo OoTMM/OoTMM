@@ -259,7 +259,7 @@ void Fairy_SetHealthAccumulator(Actor_EnElf* this, GameState_Play* play)
     this->unk_246++;
     // End displaced code
 
-    if (this->extendedGiDraw == this->extendedGi)
+    if (this->extendedGiDraw == 0 || this->extendedGiDraw == this->extendedGi)
     {
         gSaveContext.healthDelta = 0xA0;
     }
