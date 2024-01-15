@@ -269,7 +269,7 @@ export const exprCond = (cond: Expr, then: Expr, otherwise: Expr): Expr => {
     return otherwise;
   }
 
-  throw new Error(`Expression is not allowed at runtime ${cond}`);
+  throw new Error(`Expression is not allowed at runtime ` + cond.type);
 };
 
 export const exprNot = (expr: Expr): Expr => {
