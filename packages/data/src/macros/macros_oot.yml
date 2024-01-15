@@ -275,6 +275,6 @@
 "ganon_trial_spirit": "!setting(ganonTrials, Spirit) || event(GANON_TRIAL_SPIRIT)"
 "ganon_barrier": "ganon_trial_light && ganon_trial_forest && ganon_trial_fire && ganon_trial_water && ganon_trial_shadow && ganon_trial_spirit"
 
-"rainbow_bridge_vanilla": "has(MEDALLION_SPIRIT) && has(MEDALLION_SHADOW) && has_light_arrows"
+"rainbow_bridge_vanilla": "has(MEDALLION_SPIRIT) && has(MEDALLION_SHADOW) && (has(ARROW_LIGHT) || has(SHARED_ARROW_LIGHT))"
 "rainbow_bridge_medallions": "has(MEDALLION_LIGHT) && has(MEDALLION_FOREST) && has(MEDALLION_FIRE) && has(MEDALLION_WATER) && has(MEDALLION_SHADOW) && has(MEDALLION_SPIRIT)"
 "rainbow_bridge": "setting(rainbowBridge, open) || (setting(rainbowBridge, vanilla) && rainbow_bridge_vanilla) || (setting(rainbowBridge, medallions) && rainbow_bridge_medallions) || (setting(rainbowBridge, custom) && special(BRIDGE))"
