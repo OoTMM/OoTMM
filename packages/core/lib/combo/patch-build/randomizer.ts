@@ -763,6 +763,9 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     SHARED_BOMBCHU: settings.sharedBombchuBags,
     ER_WALLMASTERS: settings.erWallmasters !== 'none',
     OOT_OPEN_MASK_SHOP: settings.openMaskShop,
+    OOT_BRIDGE_VANILLA: settings.rainbowBridge === 'vanilla',
+    OOT_BRIDGE_MEDALLIONS: settings.rainbowBridge === 'medallions',
+    OOT_BRIDGE_CUSTOM: settings.rainbowBridge === 'custom',
   };
 
   for (const v in exprs) {

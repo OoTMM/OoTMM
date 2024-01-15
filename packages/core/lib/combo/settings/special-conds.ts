@@ -42,7 +42,7 @@ type SpecialCondDefiniton = {
 };
 
 export const SPECIAL_CONDS: {[k: string]: SpecialCondDefiniton} = {
-  BRIDGE: { name: "Rainbow Bridge" },
+  BRIDGE: { name: "Rainbow Bridge", cond: s => s.rainbowBridge === 'custom' },
   MOON: { name: "Moon Access" },
   LACS: { name: "Light Arrow Cutscene", cond: s => s.lacs === 'custom' },
   GANON_BK: { name: "Ganon Boss Key", cond: s => s.ganonBossKey === 'custom' },
@@ -50,7 +50,7 @@ export const SPECIAL_CONDS: {[k: string]: SpecialCondDefiniton} = {
 };
 
 export const DEFAULT_SPECIAL_CONDS: SpecialConds = {
-  BRIDGE: { ...DEFAULT_SPECIAL_COND, medallions: true, count: 6 },
+  BRIDGE: { ...DEFAULT_SPECIAL_COND },
   MOON: { ...DEFAULT_SPECIAL_COND, remains: true, count: 4 },
   LACS: { ...DEFAULT_SPECIAL_COND },
   GANON_BK: { ...DEFAULT_SPECIAL_COND },
