@@ -96,10 +96,7 @@ void ParseSceneRoomHeaders_SoundSettingsWrapper(GameState_Play* play, void* cmd)
 {
     static u32 kMuteCmd[] = { 0x15000000, 0x00000000 };
 
-    /* Disabled as it's suspected to cause ED64 crashes */
-    /*
     if (gComboCtx.valid)
         cmd = kMuteCmd;
-    */
     ParseSceneRoomHeaders_SoundSettings(play, cmd);
 }
