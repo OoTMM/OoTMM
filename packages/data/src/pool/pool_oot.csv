@@ -1085,7 +1085,7 @@ Ice Cavern Rupee Midair 3,                                  rupee,          NONE
 Ice Cavern Heart 1,                                         heart,          NONE,                 ICE_CAVERN,                     0x00906,                    RECOVERY_HEART
 Ice Cavern Heart 2,                                         heart,          NONE,                 ICE_CAVERN,                     0x00907,                    RECOVERY_HEART
 Ice Cavern Heart 3,                                         heart,          NONE,                 ICE_CAVERN,                     0x00908,                    RECOVERY_HEART
-Ice Cavern Scythe Big Fairy,                                fairy_spot,     NONE,                 ICE_CAVERN,                     0x0010d,                    FAIRY_BIG
+Ice Cavern Entrance Big Fairy,                              fairy_spot,     NONE,                 ICE_CAVERN,                     0x0010d,                    FAIRY_BIG
 Water Temple Under Center,                                  chest,          NONE,                 TEMPLE_WATER,                   0x06,                       RUPEE_BLUE
 Water Temple Compass,                                       chest,          NONE,                 TEMPLE_WATER,                   0x09,                       COMPASS_WATER
 Water Temple Longshot,                                      chest,          NONE,                 TEMPLE_WATER,                   0x07,                       HOOKSHOT

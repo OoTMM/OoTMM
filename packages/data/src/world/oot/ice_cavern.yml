@@ -6,6 +6,7 @@
     "Ice Cavern End": "has_iron_boots && (climb_anywhere || hookshot_anywhere)"
   locations:
     "Ice Cavern Rupee Ice": "has_blue_fire"
+    "Ice Cavern Entrance Big Fairy": "can_play_storms"
 "Ice Cavern Scythe":
   dungeon: IC
   exits:
@@ -25,7 +26,6 @@
     "Ice Cavern Pot Scythe Room 2": "true"
     "Ice Cavern Pot Scythe Room 3": "true"
     "Ice Cavern Flying Pot Scythe Room": "soul_flying_pot"
-    "Ice Cavern Scythe Big Fairy": "can_play_storms"
 "Ice Cavern HP Room":
   dungeon: IC
   events:
