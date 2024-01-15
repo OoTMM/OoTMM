@@ -745,7 +745,7 @@ export const SETTINGS = [{
   type: 'enum',
   description: 'Alters how the Rainbow Bridge should be triggered',
   values: [
-    { value: 'vanilla', name: 'Vanilla', description: 'Opens when you have the Light Arrows, Shadow Medallion, and Spirit Medallions' },
+    { value: 'vanilla', name: 'Vanilla', description: 'Opens when you have the Light Arrows, Shadow Medallion, and Spirit Medallion' },
     { value: 'custom', name: 'Custom', description: 'You will need to meet a special condition to open the bridge' },
   ],
   default: 'custom',
