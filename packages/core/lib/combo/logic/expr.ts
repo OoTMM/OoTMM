@@ -206,39 +206,59 @@ function resolveSpecialCond(settings: Settings, state: State, special: string): 
 const exprMap = new Map<string, Expr>();
 const exprKeyId = new Map<string, number>();
 
-export interface Expr {
+export abstract class Expr {
   readonly key: string;
-  readonly type: string;
 
-  eval(state: State): ExprResult;
+  constructor(k: string) {
+    this.key = k;
+  }
+  abstract eval(state: State): ExprResult;
+
+  visit(cb: (expr: Expr) => void) {
+    cb(this);
+  }
 };
 
-class ExprTrue implements Expr {
-  readonly type = 'true';
-  readonly key = 'TRUE';
+export abstract class ExprContainer extends Expr {
+  readonly exprs: Expr[];
+
+  constructor(k: string, exprs: Expr[]) {
+    super(k);
+    this.exprs = exprs;
+  }
+
+  visit(cb: (expr: Expr) => void) {
+    super.visit(cb);
+    for (const e of this.exprs) {
+      e.visit(cb);
+    }
+  }
+};
+
+class ExprTrue extends Expr {
+  constructor() {
+    super('TRUE');
+  }
 
   eval(_state: State): ExprResult {
     return { result: true, depItems: [], depEvents: [] };
   }
 };
 
-class ExprFalse implements Expr {
-  readonly type = 'false';
-  readonly key = 'FALSE';
+class ExprFalse extends Expr {
+  constructor() {
+    super('FALSE');
+  }
 
   eval(_state: State): ExprResult {
     return { result: false, depItems: [], depEvents: [] };
   }
 };
 
-class ExprAnd implements Expr {
-  readonly type = 'and';
-  readonly key: string;
-  readonly exprs: Expr[];
-
+export class ExprAnd extends ExprContainer {
   constructor(exprs: Expr[]) {
-    this.exprs = exprs;
-    this.key = `AND(${subkey(exprs)})`;
+    const key = `AND(${subkey(exprs)})`;
+    super(key, exprs);
   }
 
   eval(state: State): ExprResult {
@@ -262,14 +282,10 @@ class ExprAnd implements Expr {
   }
 };
 
-class ExprOr implements Expr {
-  readonly type = 'or';
-  readonly key: string;
-  readonly exprs: Expr[];
-
+export class ExprOr extends ExprContainer {
   constructor(exprs: Expr[]) {
-    this.exprs = exprs;
-    this.key = `OR(${subkey(exprs)})`;
+    const key = `OR(${subkey(exprs)})`;
+    super(key, exprs);
   }
 
   eval(state: State) {
@@ -300,14 +316,13 @@ class ExprOr implements Expr {
   }
 };
 
-class ExprAge implements Expr {
-  readonly type = 'age';
-  readonly key: string;
+export class ExprAge extends Expr {
   readonly age: Age;
 
   constructor(age: Age) {
+    const key = `AGE(${age})`;
+    super(key);
     this.age = age;
-    this.key = `AGE(${age})`;
   }
 
   eval(state: State): ExprResult {
@@ -316,16 +331,15 @@ class ExprAge implements Expr {
   }
 };
 
-class ExprHas implements Expr {
-  readonly type = 'has';
-  readonly key: string;
+class ExprHas extends Expr {
   readonly item: Item;
   readonly count: number;
 
   constructor(item: Item, count: number) {
+    const key = `HAS(${item.id},${count})`;
+    super(key);
     this.item = item;
     this.count = count;
-    this.key = `HAS(${item.id},${count})`;
   }
 
   eval(state: State): ExprResult {
@@ -334,14 +348,13 @@ class ExprHas implements Expr {
   }
 };
 
-class ExprRenewable implements Expr {
-  readonly type = 'renewable';
-  readonly key: string;
+class ExprRenewable extends Expr {
   readonly item: Item;
 
   constructor(item: Item) {
+    const key = `RENEWABLE(${item.id})`;
+    super(key);
     this.item = item;
-    this.key = `RENEWABLE(${item.id})`;
   }
 
   eval(state: State): ExprResult {
@@ -350,14 +363,13 @@ class ExprRenewable implements Expr {
   }
 };
 
-class ExprLicense implements Expr {
-  readonly type = 'license';
-  readonly key: string;
+class ExprLicense extends Expr {
   readonly item: Item;
 
   constructor(item: Item) {
+    const key = `LICENSE(${item.id})`;
+    super(key);
     this.item = item;
-    this.key = `LICENSE(${item.id})`;
   }
 
   eval(state: State): ExprResult {
@@ -366,14 +378,12 @@ class ExprLicense implements Expr {
   }
 };
 
-class ExprEvent implements Expr {
-  readonly type = 'event';
-  readonly key: string;
+class ExprEvent extends Expr {
   readonly event: string;
 
   constructor(event: string) {
+    super(`EVENT(${event})`);
     this.event = event;
-    this.key = `EVENT(${event})`;
   }
 
   eval(state: State): ExprResult {
@@ -382,14 +392,12 @@ class ExprEvent implements Expr {
   }
 };
 
-class ExprMasks implements Expr {
-  readonly type = 'masks';
-  readonly key: string;
+class ExprMasks extends Expr {
   readonly count: number;
 
   constructor(count: number) {
+    super(`MASKS(${count})`);
     this.count = count;
-    this.key = `MASKS(${count})`;
   }
 
   eval(state: State): ExprResult {
@@ -398,14 +406,13 @@ class ExprMasks implements Expr {
   }
 };
 
-class ExprSpecial implements Expr {
+class ExprSpecial extends Expr {
   readonly type = 'special';
-  readonly key: string;
   readonly special: string;
 
   constructor(special: string) {
+    super(`SPECIAL(${special})`);
     this.special = special;
-    this.key = `SPECIAL(${special})`;
   }
 
   eval(state: State): ExprResult {
@@ -413,32 +420,39 @@ class ExprSpecial implements Expr {
   }
 };
 
-class ExprTimeOot implements Expr {
-  readonly type = 'time-oot';
-  readonly key: string;
+class ExprTimeOot extends Expr {
   readonly time: 'day' | 'night';
 
   constructor(time: 'day' | 'night') {
+    super(`TIME-OOT(${time})`);
     this.time = time;
-    this.key = `TIME-OOT(${time})`;
   }
 
   eval(state: State): ExprResult {
-    const result = !!state.areaData.oot[this.time];
-    return { result, depItems: [], depEvents: [] };
+    const negation = this.time === 'day' ? 'night' : 'day';
+
+    if (state.areaData.oot[this.time]) {
+      const restrictions = defaultRestrictions();
+      restrictions.oot[negation] = true;
+      return { result: true, depItems: [], depEvents: [], restrictions };
+    } else {
+      return {
+        result: false,
+        depItems: [],
+        depEvents: [],
+      };
+    }
   }
 };
 
-class ExprTimeMm implements Expr {
-  readonly type = 'time-mm';
-  readonly key: string;
+class ExprTimeMm extends Expr {
   readonly value: number;
   readonly value2: number;
 
   constructor(value: number, value2: number) {
+    super(`TIME-MM(${value.toString(16)},${value2.toString(16)})`);
     this.value = value;
     this.value2 = value2;
-    this.key = `TIME-MM(${value.toString(16)},${value2.toString(16)})`;
   }
 
   eval(state: State): ExprResult {
@@ -457,16 +471,14 @@ class ExprTimeMm implements Expr {
   }
 };
 
-class ExprPrice implements Expr {
-  readonly type = 'price';
-  readonly key: string;
+class ExprPrice extends Expr {
   readonly slot: number;
   readonly max: number;
 
   constructor(slot: number, max: number) {
+    super(`PRICE(${slot},${max})`);
     this.slot = slot;
     this.max = max;
-    this.key = `PRICE(${slot},${max})`;
   }
 
   eval(state: State): ExprResult {
@@ -544,7 +556,7 @@ export const exprCond = (cond: Expr, then: Expr, otherwise: Expr): Expr => {
     return otherwise;
   }
 
-  throw new Error(`Expression is not allowed at runtime ` + cond.type);
+  throw new Error(`Expression is not allowed at runtime`);
 };
 
 export const exprNot = (expr: Expr): Expr => {
