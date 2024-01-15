@@ -75,7 +75,7 @@ const DEFAULT_PRICES = Object.values(PRICES).flat();
 
 const PRICE_COUNTS = Object.fromEntries(Object.entries(PRICES).map(([a, b]) => [a, b.length]));
 
-export const PRICE_RANGES: {[k: string] :number} = {};
+export const PRICE_RANGES: {[k: string]: number} = {};
 
 (function() {
   let offset = 0;

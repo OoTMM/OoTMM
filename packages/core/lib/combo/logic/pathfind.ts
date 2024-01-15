@@ -1,6 +1,6 @@
 import { cloneDeep } from 'lodash';
 import { Settings } from '../settings';
-import { AreaData, Expr, ExprResult, isDefaultRestrictions, MM_TIME_SLICES } from './expr';
+import { AreaData, evalExpr, Expr, ExprResult, isDefaultRestrictions, MM_TIME_SLICES } from './expr';
 
 import { Location, locationData, makeLocation } from './locations';
 import { World } from './world';
@@ -399,7 +399,8 @@ export class Pathfinder {
     const world = this.worlds[worldId];
     const ws = this.state.ws[worldId];
     const areaData = ws.areas[age].get(area)!;
-    const result = expr({ world, areaData, items: ws.items, renewables: ws.renewables, licenses: ws.licenses, age, events: ws.events, ignoreItems: this.opts.ignoreItems || false });
+    const state = { settings: this.settings, world, areaData, items: ws.items, renewables: ws.renewables, licenses: ws.licenses, age, events: ws.events, ignoreItems: this.opts.ignoreItems || false };
+    const result = evalExpr(expr, state);
     if (result.result) {
       if (!result.restrictions || isDefaultRestrictions(result.restrictions)) {
         result.depItems = [];
