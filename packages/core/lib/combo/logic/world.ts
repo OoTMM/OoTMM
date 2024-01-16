@@ -412,7 +412,10 @@ export class LogicPassWorld {
         }
 
         for (const loc in locations) {
-          this.world.regions[loc] = region;
+          const prevRegion = this.world.regions[loc];
+          if (!prevRegion || prevRegion === 'NONE') {
+            this.world.regions[loc] = region;
+          }
           this.world.locations.add(loc);
         }
 
