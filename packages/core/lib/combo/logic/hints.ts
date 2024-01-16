@@ -402,7 +402,7 @@ export class LogicPassHints {
     const world = this.state.worlds[worldId];
     const checkWorld = this.state.worlds[checkWorldId];
     const locations = (checkWorld.checkHints[checkHint] || []).map(x => makeLocation(x, checkWorldId));
-    if (locations.every(l => this.hintedLocations.has(l)) || locations.some(l => this.stronglyHintedLocations.has(l))) {
+    if ((!isMoon && this.state.settings.noPlandoHints && locations.every(l => this.state.settings.plando.locations[locationData(l).id])) || locations.every(l => this.hintedLocations.has(l)) || locations.some(l => this.stronglyHintedLocations.has(l))) {
       return false;
     }
     const items = locations.map(l => this.state.items.get(l)!);
