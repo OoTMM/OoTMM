@@ -671,6 +671,7 @@ export const BOTTLES_OOT = new Set([
   Items.OOT_BOTTLE_FAIRY,
   Items.OOT_BOTTLE_POE,
   Items.OOT_BOTTLE_BIG_POE,
+  Items.OOT_BOTTLE_BLUE_FIRE,
 ]);
 
 export const BOTTLES_MM = new Set([

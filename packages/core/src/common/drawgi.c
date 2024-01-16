@@ -211,6 +211,48 @@ static void shaderFlameEffectColor(GameState_Play* play, u32 color, float scale,
     CLOSE_DISPS();
 }
 
+static void drawFire(GameState_Play* play, u32 primColor, u32 envColor, float scale, float offsetY)
+{
+#if defined(GAME_OOT)
+    static const u32 kFlameDlist = 0x52a10;
+#else
+    static const u32 kFlameDlist = 0x7d590;
+#endif
+
+    u8 r;
+    u8 g;
+    u8 b;
+    u8 a;
+    float flameScale;
+
+    OPEN_DISPS(play->gs.gfx);
+
+    /* Set the correct billboard matrix*/
+    MatrixStackDup();
+    flameScale = 0.0055f * scale;
+    ModelViewTranslate(0.f, offsetY, 0.f, MAT_MUL);
+    ModelViewScale(flameScale * 1.7f, flameScale, flameScale, MAT_MUL);
+#if defined(GAME_OOT)
+    ModelViewUnkTransform(play->transition.billboardMtxF);
+#else
+    ModelViewUnkTransform(play->billboardMtxF);
+#endif
+    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    MatrixStackPop();
+
+    /* Set the texture and color */
+    gSPSegment(POLY_XLU_DISP++, 0x08, DisplaceTexture(play->gs.gfx, 0, 0, 0, 0x20, 0x40, 1, 0, (-play->gs.frameCount & 0x7f) << 2, 0x20, 0x80));
+    color4(&r, &g, &b, &a, primColor);
+    gDPSetPrimColor(POLY_XLU_DISP++, 0x80, 0x80, r, g, b, a);
+    color4(&r, &g, &b, &a, envColor);
+    gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, a);
+
+    /* Draw */
+    gSPDisplayList(POLY_XLU_DISP++, 0x04000000 | kFlameDlist);
+
+    CLOSE_DISPS();
+}
+
 static void shaderFlameEffect(GameState_Play* play, int colorIndex, float scale, float offsetY)
 {
 #if defined(GAME_OOT)
@@ -1238,6 +1280,27 @@ void DrawGi_BigFairy(GameState_Play* play, s16 drawGiId)
 #endif
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[2]);
+
+    CLOSE_DISPS();
+}
+
+void DrawGi_BottleBlueFire(GameState_Play* play, s16 drawGiId)
+{
+    const DrawGi* drawGi;
+
+    drawGi = &kDrawGi[drawGiId];
+
+    OPEN_DISPS(play->gs.gfx);
+
+    InitListPolyOpa(play->gs.gfx);
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
+
+    InitListPolyXlu(play->gs.gfx);
+    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[1]);
+
+    drawFire(play, 0x00ffffe0, 0x0000ffe0, 0.5f, -30.f);
 
     CLOSE_DISPS();
 }

@@ -677,6 +677,7 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   OOT_FAIRY_BIG: 'Big Fairy (OoT)',
   MM_FAIRY_BIG: 'Big Fairy (MM)',
   SHARED_FAIRY_BIG: 'Big Fairy',
+  OOT_BOTTLE_BLUE_FIRE: "Bottle of Blue Fire",
 };
 
 export function itemName(item: string) {
