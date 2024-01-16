@@ -194,17 +194,12 @@ export class LogicPassAnalysisFoolish {
     this.state.monitor.log("Logic: Probabilistic Foolish Analysis");
 
     /* Mark playthrough locs as conditionally required */
-    let atLeastOneConditionallyRequired = false;
     for (const sphere of this.state.analysis.spheres) {
       for (const loc of sphere) {
         if (!this.state.analysis.required.has(loc)) {
           this.conditionallyRequiredLocations.add(loc);
-          atLeastOneConditionallyRequired = true;
         }
       }
-    }
-    if (!atLeastOneConditionallyRequired) {
-      return {};
     }
 
     /* Get all candidates */
