@@ -59,7 +59,7 @@ static int EnItem00_XflagCanCollect(Actor_EnItem00* this, GameState_Play* play)
     return 1;
 }
 
-static void EnItem00_UpdateXflag(Actor_EnItem00* this, GameState_Play* play)
+static void EnItem00_UpdateXflagDrop(Actor_EnItem00* this, GameState_Play* play)
 {
     /* Artifically disable collisions if the items shouldn't be collected */
     if (!EnItem00_XflagCanCollect(this, play))
@@ -126,7 +126,6 @@ void EnItem00_XflagInit(Actor_EnItem00* this, const Xflag* xflag)
 
     /* Use our draw func */
     this->base.draw = EnItem00_DrawXflag;
-    this->base.update = EnItem00_UpdateXflag;
     this->base.variable = 0;
 }
 
@@ -219,6 +218,7 @@ Actor_EnItem00* EnItem00_DropCustom(GameState_Play* play, const Vec3f* pos, cons
 
     /* Init the custom fields */
     EnItem00_XflagInit(item, xflag);
+    item->base.update = EnItem00_UpdateXflagDrop;
 
     return item;
 }
