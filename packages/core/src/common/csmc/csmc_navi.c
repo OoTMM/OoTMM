@@ -16,6 +16,7 @@ typedef struct {
     /* 0x04 */ Color_RGBA8 outer;
 } NaviColor; // size = 0x8
 
+#if defined(GAME_OOT)
 static NaviColor sNaviColorList[] = {
     { { 0, 255, 0, 255 }, { 0, 255, 0, 0 } },
     { { 0, 0, 255, 255 }, { 0, 0, 255, 0 } },
@@ -50,7 +51,6 @@ static int csmcNaviId(s16 gi)
     }
 }
 
-#if defined(GAME_OOT)
 void Actor_AfterSetNaviToActor(TargetContext* targetCtx, Actor* actor, s32 actorCategory, GameState_Play* play) {
     int type;
     ComboItemOverride o;
