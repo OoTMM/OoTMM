@@ -3,27 +3,7 @@
 #include <combo/csmc.h>
 #include <combo/item.h>
 
-static int ObjTsubo_IsShuffled(Actor_ObjTsubo* this)
-{
-    u8 potType;
-
-    /* Check for stray fairy */
-    potType = (this->base.variable >> 7) & 3;
-    if ((potType == 0 || potType == 2) && ((this->base.variable & 0x1f) == 0x11))
-        return 0;
-
-    /* Check for enemy */
-    if ((this->base.initRot.z & 3) > 1)
-        return 0;
-
-    /* Check for dynamic pots */
-    if (this->xflag.id == 0xff)
-        return 0;
-
-    return 1;
-}
-
-static void ObjTsubo_Aliases(Actor_ObjTsubo* this)
+void ObjTsubo_Alias(Actor_ObjTsubo* this)
 {
     Xflag* xflag;
 
@@ -113,55 +93,33 @@ static void ObjTsubo_Aliases(Actor_ObjTsubo* this)
     }
 }
 
-void ObjTsubo_InitWrapper(Actor_ObjTsubo* this, GameState_Play* play)
-{
-    ActorFunc ObjTsubo_Init;
-
-    /* Setup the xflag */
-    this->xflag.sceneId = play->sceneId;
-    this->xflag.setupId = g.sceneSetupId;
-    this->xflag.roomId = this->base.room;
-    this->xflag.sliceId = 0;
-    this->xflag.id = g.actorIndex;
-
-    /* Resolve aliases */
-    ObjTsubo_Aliases(this);
-
-    /* Invoke init */
-    ObjTsubo_Init = (ActorFunc)actorAddr(AC_OBJ_TSUBO, 0x809278c0);
-    ObjTsubo_Init(&this->base, play);
-}
-
 void ObjTsubo_SpawnShuffledDrop(Actor_ObjTsubo* this, GameState_Play* play)
 {
     ActorFunc ObjTsubo_SpawnDrop;
 
-    if (!ObjTsubo_IsShuffled(this) || comboXflagsGet(&this->xflag))
+    if (ObjTsubo_IsShuffled(this))
     {
-        /* Already spawned */
-        ObjTsubo_SpawnDrop = (ActorFunc)actorAddr(AC_OBJ_TSUBO, 0x80927690);
-        ObjTsubo_SpawnDrop(&this->base, play);
+        EnItem00_DropCustom(play, &this->base.position, &this->xflag);
         return;
     }
 
-    /* Spawn a custom item */
-    EnItem00_DropCustom(play, &this->base.position, &this->xflag);
+    /* Already spawned */
+    ObjTsubo_SpawnDrop = (ActorFunc)actorAddr(AC_OBJ_TSUBO, 0x80927690);
+    ObjTsubo_SpawnDrop(&this->base, play);
 }
 
 void ObjTsubo_SpawnShuffledDropFlexible(Actor_ObjTsubo* this, GameState_Play* play)
 {
     ActorFunc ObjTsubo_SpawnDropFlexible;
 
-    if (!ObjTsubo_IsShuffled(this) || comboXflagsGet(&this->xflag))
+    if (ObjTsubo_IsShuffled(this))
     {
-        /* Already spawned */
-        ObjTsubo_SpawnDropFlexible = (ActorFunc)actorAddr(AC_OBJ_TSUBO, 0x8092762c);
-        ObjTsubo_SpawnDropFlexible(&this->base, play);
+        EnItem00_DropCustom(play, &this->base.position, &this->xflag);
         return;
     }
 
-    /* Spawn a custom item */
-    EnItem00_DropCustom(play, &this->base.position, &this->xflag);
+    ObjTsubo_SpawnDropFlexible = (ActorFunc)actorAddr(AC_OBJ_TSUBO, 0x8092762c);
+    ObjTsubo_SpawnDropFlexible(&this->base, play);
 }
 
 void ObjTsubo_Draw(Actor_ObjTsubo* this, GameState_Play* play)
@@ -188,7 +146,7 @@ void ObjTsubo_Draw(Actor_ObjTsubo* this, GameState_Play* play)
         break;
     }
 
-    if (comboConfig(CFG_MM_SHUFFLE_POTS) && ObjTsubo_IsShuffled(this) && !comboXflagsGet(&this->xflag))
+    if (ObjTsubo_IsShuffled(this))
         comboXflagItemOverride(&o, &this->xflag, 0);
     else
         o.gi = 0;

@@ -3,10 +3,12 @@
 #include <combo/item.h>
 #include <combo/csmc.h>
 
-static ActorFunc sDraw;
-
-static void ObjTsubo_Aliases(Xflag* xflag)
+void ObjTsubo_Alias(Actor_ObjTsubo* this)
 {
+    Xflag* xflag;
+
+    xflag = &this->xflag;
+
     switch (xflag->sceneId)
     {
     case SCE_OOT_KAKARIKO_VILLAGE:
@@ -68,53 +70,31 @@ static void ObjTsubo_Aliases(Xflag* xflag)
     }
 }
 
-void ObjTsubo_InitWrapper(Actor_ObjTsubo* this, GameState_Play* play)
-{
-    ActorFunc init;
-
-    /* Compute funcs */
-    sDraw = actorAddr(AC_OBJ_TSUBO, 0x80a65fbc);
-
-    /* Set the extended properties */
-    this->xflag.sceneId = play->sceneId;
-    this->xflag.setupId = g.sceneSetupId;
-    this->xflag.roomId = this->base.room;
-    this->xflag.sliceId = 0;
-    this->xflag.id = g.actorIndex;
-
-    /* Fix the aliases */
-    ObjTsubo_Aliases(&this->xflag);
-
-    /* Forward init */
-    init = actorAddr(AC_OBJ_TSUBO, 0x80a653a8);
-    init(&this->base, play);
-}
-
 void ObjTsubo_SpawnShuffledDrop(Actor_ObjTsubo* this, GameState_Play* play)
 {
     u16 var;
 
-    if (comboXflagsGet(&this->xflag))
+    if (ObjTsubo_IsShuffled(this))
     {
-        /* Already spawned */
-        var = this->base.variable;
-        if ((var & 0xff) < 0x1a)
-        {
-            Item_DropCollectible(play, &this->base.position, (var & 0xff) | (((var >> 9) & 0x3f) << 8));
-        }
+        EnItem00_DropCustom(play, &this->base.position, &this->xflag);
         return;
     }
 
-    /* Spawn a custom item */
-    EnItem00_DropCustom(play, &this->base.position, &this->xflag);
+    /* Already spawned */
+    var = this->base.variable;
+    if ((var & 0xff) < 0x1a)
+    {
+        Item_DropCollectible(play, &this->base.position, (var & 0xff) | (((var >> 9) & 0x3f) << 8));
+    }
 }
 
 void ObjTsubo_DrawWrapper(Actor_ObjTsubo* this, GameState_Play* play)
 {
+    ActorFunc draw;
     ComboItemOverride o;
     int type;
 
-    if (comboConfig(CFG_OOT_SHUFFLE_POTS) && !comboXflagsGet(&this->xflag))
+    if (ObjTsubo_IsShuffled(this))
         comboXflagItemOverride(&o, &this->xflag, 0);
     else
         o.gi = 0;
@@ -126,5 +106,6 @@ void ObjTsubo_DrawWrapper(Actor_ObjTsubo* this, GameState_Play* play)
     csmcPotPreDraw(&this->base, play, o.gi, type);
 
     /* Draw */
-    sDraw(&this->base, play);
+    draw = actorAddr(AC_OBJ_TSUBO, 0x80a65fbc);
+    draw(&this->base, play);
 }
