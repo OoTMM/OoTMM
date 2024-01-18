@@ -106,7 +106,7 @@ void ObjTsubo_SpawnShuffledDrop(Actor_ObjTsubo* this, GameState_Play* play)
     }
 
     /* Spawn a custom item */
-    DropCustomItem(play, &this->base.position, &this->xflag);
+    EnItem00_DropCustom(play, &this->base.position, &this->xflag);
 }
 
 void ObjTsubo_DrawWrapper(Actor_ObjTsubo* this, GameState_Play* play)

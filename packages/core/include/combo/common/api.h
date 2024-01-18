@@ -374,6 +374,8 @@ void Play_InitEnvironment(GameState_Play *play, u16 skyboxId);
 extern u8 gFogState;
 #endif
 
+Actor* SpawnCollectible(GameState_Play* play, const Vec3f* pos, u16 param);
+
 #if defined(GAME_MM)
 void SpawnCollectible2(GameState_Play* play, int unk, void* unk2, u16 unk3);
 f32 VectDist(Vec3f* vec1, Vec3f* vec2);

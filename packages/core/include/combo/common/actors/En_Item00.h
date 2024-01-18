@@ -87,5 +87,8 @@ void EnItem00_CollectedHandler(Actor_EnItem00* this, GameState_Play* play);
 void EnItem00_SetHandler(Actor_EnItem00* this, void* handler);
 s16  EnItem00_FixDrop(s16 dropType);
 
-void EnItem00_XflagInitFreestanding(Actor_EnItem00* this, GameState_Play* play, u8 actorIndex, u8 slice);
+void            EnItem00_XflagInit(Actor_EnItem00* this, const Xflag* xflag);
+void            EnItem00_XflagInitFreestanding(Actor_EnItem00* this, GameState_Play* play, u8 actorIndex, u8 slice);
+Actor_EnItem00* EnItem00_DropCustom(GameState_Play* play, const Vec3f* pos, const Xflag* xflag);
+
 #endif

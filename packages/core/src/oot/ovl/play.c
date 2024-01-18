@@ -261,7 +261,6 @@ void hookPlay_Init(GameState_Play* play)
 
     /* Init */
     gActorCustomTriggers = NULL;
-    g.customItemsList = NULL;
 
     /* Register play */
     gPlay = play;

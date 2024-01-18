@@ -5,7 +5,7 @@ PATCH_START 0x800e775c
 .int 0x1a4
 PATCH_END
 
-/* Use custom init */
+/* Use custom callbacks */
 PATCH_START 0x800e7760
 .int EnItem00_InitWrapper
 PATCH_END

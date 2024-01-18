@@ -65,8 +65,6 @@
 # include <combo/common/actors/En_Item00.h>
 # include <combo/common/actors/En_GirlA.h>
 # include <combo/common/actor_init.h>
-# include <combo/common/actor_item_custom.h>
-# include <combo/common/actors/Custom_Item.h>
 # include <combo/common/actors/Custom_Triggers.h>
 # include <combo/common/api.h>
 #endif
@@ -420,7 +418,6 @@ typedef struct
     u8                      maxKeysMm[4];
     u8                      actorIndex;
     u8                      sceneSetupId;
-    Actor_CustomItem*       customItemsList;
     s8                      keatonGrassMax;
 }
 ComboGlobal;

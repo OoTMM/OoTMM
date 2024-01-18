@@ -24,7 +24,7 @@ void EnItem00_InitWrapper(Actor_EnItem00* this, GameState_Play* play)
     this->isExtendedMajor = 0;
 }
 
-void EnItem00_DrawXflag(Actor_EnItem00* this, GameState_Play* play)
+static void EnItem00_DrawXflag(Actor_EnItem00* this, GameState_Play* play)
 {
     ComboItemOverride o;
     s16 gi;
@@ -42,6 +42,35 @@ void EnItem00_DrawXflag(Actor_EnItem00* this, GameState_Play* play)
     ModelViewScale(0.35f, 0.35f, 0.35f, MAT_MUL);
     ModelViewRotateY(this->base.rot2.y * ((M_PI * 2.f) / 32767.f), MAT_MUL);
     comboDrawGI(play, &this->base, gi, 0);
+}
+
+static int EnItem00_XflagCanCollect(Actor_EnItem00* this, GameState_Play* play)
+{
+    Actor_Player* link;
+
+    link = GET_LINK(play);
+    if (link->state & (PLAYER_ACTOR_STATE_FROZEN | PLAYER_ACTOR_STATE_EPONA))
+        return 0;
+
+    /* Check for textbox */
+    if (Message_GetState(&play->msgCtx) != 0)
+        return 0;
+
+    return 1;
+}
+
+static void EnItem00_UpdateXflag(Actor_EnItem00* this, GameState_Play* play)
+{
+    /* Artifically disable collisions if the items shouldn't be collected */
+    if (!EnItem00_XflagCanCollect(this, play))
+        this->base.xzDistanceFromLink = 100.f;
+
+    /* Item permanence */
+    if (!this->isExtendedCollected)
+        this->timer++;
+
+    /* Update */
+    EnItem00_Update(this, play);
 }
 
 void EnItem00_AddXflag(Actor_EnItem00* this)
@@ -77,9 +106,32 @@ void EnItem00_PlaySoundXflag(Actor_EnItem00* this)
     PlaySound(0x4803);
 }
 
-void EnItem00_XflagInitFreestanding(Actor_EnItem00* this, GameState_Play* play, u8 actorIndex, u8 slice)
+void EnItem00_XflagInit(Actor_EnItem00* this, const Xflag* xflag)
 {
     ComboItemOverride o;
+
+    /* Query */
+    comboXflagItemOverride(&o, xflag, 0);
+
+    /* Check if there is an override */
+    if (o.gi == 0)
+        return;
+    if (comboXflagsGet(xflag))
+        return;
+
+    /* It's an actual item - mark it as such */
+    memcpy(&this->xflag, xflag, sizeof(*xflag));
+    this->xflagGi = o.gi;
+    this->isExtended = 1;
+
+    /* Use our draw func */
+    this->base.draw = EnItem00_DrawXflag;
+    this->base.update = EnItem00_UpdateXflag;
+    this->base.variable = 0;
+}
+
+void EnItem00_XflagInitFreestanding(Actor_EnItem00* this, GameState_Play* play, u8 actorIndex, u8 slice)
+{
     Xflag xflag;
 
     /* Setup the xflag */
@@ -103,23 +155,8 @@ void EnItem00_XflagInitFreestanding(Actor_EnItem00* this, GameState_Play* play, 
         break;
     }
 
-    /* Query */
-    comboXflagItemOverride(&o, &xflag, 0);
-
-    /* Check if there is an override */
-    if (o.gi == 0)
-        return;
-    if (comboXflagsGet(&xflag))
-        return;
-
-    /* It's an actual item - mark it as such */
-    memcpy(&this->xflag, &xflag, sizeof(xflag));
-    this->xflagGi = o.gi;
-    this->isExtended = 1;
-
-    /* Use our draw func */
-    this->base.draw = EnItem00_DrawXflag;
-    this->base.variable = 0;
+    /* Init */
+    EnItem00_XflagInit(this, &xflag);
 }
 
 static void EnItem00_XflagCollectedHandler(Actor_EnItem00* this, GameState_Play* play)
@@ -148,4 +185,40 @@ void EnItem00_SetXflagCollectedHandler(Actor_EnItem00* this)
 #endif
 
     this->handler = EnItem00_XflagCollectedHandler;
+}
+
+Actor_EnItem00* EnItem00_DropCustom(GameState_Play* play, const Vec3f* pos, const Xflag* xflag)
+{
+    Actor* actor;
+    Actor_EnItem00* item;
+    ComboItemOverride o;
+
+    /* Check if the xflag item is already spawned */
+    for (actor = play->actorCtx.actors[0x08].first; actor != NULL; actor = actor->next)
+    {
+        if (actor->id != AC_EN_ITEM00)
+            continue;
+        item = (Actor_EnItem00*)actor;
+        if (memcmp(&item->xflag, xflag, sizeof(Xflag)) == 0)
+            return NULL;
+    }
+
+    /* Check if the item to be spawned is literaly Nothing */
+    comboXflagItemOverride(&o, xflag, 0);
+    if (o.gi == GI_NOTHING)
+    {
+        comboXflagsSet(xflag);
+        return NULL;
+    }
+
+    /* Spawn the item */
+    item = (Actor_EnItem00*)SpawnCollectible(play, pos, 0x0000);
+
+    if (!item)
+        return NULL;
+
+    /* Init the custom fields */
+    EnItem00_XflagInit(item, xflag);
+
+    return item;
 }

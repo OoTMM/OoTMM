@@ -38,7 +38,7 @@ static void EnKusa2_SpawnDrop(GameState_Play* play, Vec3f* pos, u16 dropIndex)
         /* Check if the reward was already collected */
         if (!comboXflagsGet(&xflag))
         {
-            DropCustomItem(gPlay, pos, &xflag);
+            EnItem00_DropCustom(gPlay, pos, &xflag);
             return;
         }
     }

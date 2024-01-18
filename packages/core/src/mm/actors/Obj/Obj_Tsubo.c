@@ -145,7 +145,7 @@ void ObjTsubo_SpawnShuffledDrop(Actor_ObjTsubo* this, GameState_Play* play)
     }
 
     /* Spawn a custom item */
-    DropCustomItem(play, &this->base.position, &this->xflag);
+    EnItem00_DropCustom(play, &this->base.position, &this->xflag);
 }
 
 void ObjTsubo_SpawnShuffledDropFlexible(Actor_ObjTsubo* this, GameState_Play* play)
@@ -161,7 +161,7 @@ void ObjTsubo_SpawnShuffledDropFlexible(Actor_ObjTsubo* this, GameState_Play* pl
     }
 
     /* Spawn a custom item */
-    DropCustomItem(play, &this->base.position, &this->xflag);
+    EnItem00_DropCustom(play, &this->base.position, &this->xflag);
 }
 
 void ObjTsubo_Draw(Actor_ObjTsubo* this, GameState_Play* play)

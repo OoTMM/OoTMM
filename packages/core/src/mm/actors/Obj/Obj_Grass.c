@@ -50,7 +50,7 @@ void ObjGrass_SpawnBushDropWrapper(Actor_ObjGrass_PackBush* bush, GameState_Play
         /* Check if the reward was already collected */
         if (!comboXflagsGet(&xflag))
         {
-            DropCustomItem(play, &bush->position, &xflag);
+            EnItem00_DropCustom(play, &bush->position, &xflag);
             return;
         }
     }

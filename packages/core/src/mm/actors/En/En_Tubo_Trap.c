@@ -45,5 +45,5 @@ void EnTuboTrap_SpawnShuffledDrop(Actor_EnTuboTrap* this, GameState_Play* play)
     }
 
     /* Spawn an extended item */
-    DropCustomItem(play, &this->base.position, &this->xflag);
+    EnItem00_DropCustom(play, &this->base.position, &this->xflag);
 }

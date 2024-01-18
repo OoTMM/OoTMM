@@ -6,6 +6,7 @@ DMARomToRam = 0x80080790;
 
 EnItem00_Init = 0x800a5d70;
 EnItem00_CollectedHandler = 0x800a6a40;
+EnItem00_Update = 0x800a6b98;
 
 Play_DrawHudButtons = 0x80117100;
 
@@ -217,6 +218,7 @@ ActorUpdateVelocity = 0x800b6a88;
 
 Item_DropCollectible = 0x800a7730;
 SpawnCollectible2 = 0x800a7d28;
+SpawnCollectible = 0x800a7730;
 
 VectDist = 0x800ff92c;
 

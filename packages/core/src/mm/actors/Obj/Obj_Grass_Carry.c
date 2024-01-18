@@ -16,7 +16,7 @@ void ObjGrassCarry_SpawnDropsWrapper(Actor_ObjGrassCarry* this)
         /* Check if the reward was already collected */
         if (!comboXflagsGet(&xflag))
         {
-            DropCustomItem(gPlay, &this->base.position, &xflag);
+            EnItem00_DropCustom(gPlay, &this->base.position, &xflag);
             return;
         }
     }
