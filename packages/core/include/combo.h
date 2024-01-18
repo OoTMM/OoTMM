@@ -28,6 +28,7 @@
 # include <combo/common/actors/Obj_Mure2.h>
 # include <combo/common/actors/Obj_Mure3.h>
 # include <combo/common/actors/Obj_Tsubo.h>
+# include <combo/common/actors/En_Tubo_Trap.h>
 
 # if defined(GAME_OOT)
 #  include <combo/oot/play.h>
@@ -36,7 +37,6 @@
 #  include <combo/oot/actors/Item_Etcetera.h>
 #  include <combo/oot/actors/Obj_Timeblock_Warp2Block.h>
 #  include <combo/oot/actors/En_Kusa.h>
-#  include <combo/oot/actors/En_Tubo_Trap.h>
 #  include <combo/oot/actors/En_Ossan.h>
 #  include <combo/oot/actors/En_Ex_Ruppy.h>
 #  include <combo/oot/actors/En_Diving_Game.h>
@@ -56,7 +56,6 @@
 #  include <combo/mm/actor_objboat.h>
 #  include <combo/mm/actors/Obj_Grass.h>
 #  include <combo/mm/actors/Obj_Grass_Carry.h>
-#  include <combo/mm/actors/En_Tubo_Trap.h>
 #  include <combo/mm/actors/En_Kusa.h>
 #  include <combo/mm/actors/En_Elf.h>
 # endif

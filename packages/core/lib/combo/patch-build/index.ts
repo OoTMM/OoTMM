@@ -58,8 +58,6 @@ function asmPatchGroups(settings: Settings) {
     DEFAULT_HOLD: settings.defaultHoldTarget,
     OOT_SILVER_RUPEE_SHUFFLE: settings.silverRupeeShuffle !== 'vanilla',
     OOT_FREE_SCARECROW: settings.freeScarecrowOot,
-    OOT_SHUFFLE_POTS: settings.shufflePotsOot,
-    MM_SHUFFLE_POTS: settings.shufflePotsMm,
     OOT_SHUFFLE_GRASS: settings.shuffleGrassOot,
     MM_SHUFFLE_GRASS: settings.shuffleGrassMm,
     MM_LENIENT_SPIKES: settings.lenientSpikes,

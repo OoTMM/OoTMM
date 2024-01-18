@@ -734,8 +734,6 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     OOT_SOULS_NPC: settings.soulsNpcOot,
     MM_REMOVED_FAIRIES: settings.strayFairyOtherShuffle === 'removed',
     SHARED_SKELETON_KEY: settings.sharedSkeletonKey,
-    OOT_SHUFFLE_POTS: settings.shufflePotsOot,
-    MM_SHUFFLE_POTS: settings.shufflePotsMm,
     OOT_SHUFFLE_GRASS: settings.shuffleGrassOot,
     MM_SHUFFLE_GRASS: settings.shuffleGrassMm,
     MENU_NOTEBOOK: settings.menuNotebook,
