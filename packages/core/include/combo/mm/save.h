@@ -418,6 +418,7 @@ MmExtraFlags3;
 typedef struct ALIGNED(16)
 {
     u8 xflags[XFLAGS_COUNT_MM];
+    u8 npc[32];
 }
 MmCustomSave;
 

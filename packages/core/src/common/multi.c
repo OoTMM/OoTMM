@@ -146,6 +146,9 @@ void multiSetMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u
     case OV_COLLECTIBLE:
         setCollectibleMarkOot(play, sceneId, id);
         break;
+    case OV_NPC:
+        BITMAP8_SET(gSharedCustomSave.oot.npc, id);
+        break;
     }
 }
 
@@ -162,6 +165,9 @@ void multiSetMarkedMm(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8
     case OV_COLLECTIBLE:
         setCollectibleMarkMm(play, sceneId, id);
         break;
+    case OV_NPC:
+        BITMAP8_SET(gSharedCustomSave.mm.npc, id);
+        break;
     }
 }
 
@@ -176,6 +182,8 @@ int multiIsMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 
         return getChestMarkOot(play, sceneId, id);
     case OV_COLLECTIBLE:
         return getCollectibleMarkOot(play, sceneId, id);
+    case OV_NPC:
+        return BITMAP8_GET(gSharedCustomSave.oot.npc, id);
     }
 
     return 0;
@@ -192,6 +200,8 @@ int multiIsMarkedMm(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 i
         return getChestMarkMm(play, sceneId, id);
     case OV_COLLECTIBLE:
         return getCollectibleMarkMm(play, sceneId, id);
+    case OV_NPC:
+        return BITMAP8_GET(gSharedCustomSave.mm.npc, id);
     }
 
     return 0;
