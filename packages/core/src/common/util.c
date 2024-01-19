@@ -80,6 +80,33 @@ int comboStrayFairyIndex(void)
     return -1;
 }
 
+int comboOotDungeonScene(GameState_Play* play, int isBossKey)
+{
+#if defined(GAME_OOT)
+    u16 mapIndex;
+
+    /* Desert colossus hands */
+    if (play->sceneId == SCE_OOT_DESERT_COLOSSUS)
+        return SCE_OOT_TEMPLE_SPIRIT;
+
+    mapIndex = gSaveContext.mapIndex;
+    if (mapIndex == SCE_OOT_GANON_TOWER || mapIndex == SCE_OOT_INSIDE_GANON_CASTLE)
+        return isBossKey ? SCE_OOT_GANON_TOWER : SCE_OOT_INSIDE_GANON_CASTLE;
+    return mapIndex;
+#endif
+
+    return -1;
+}
+
+int comboMmDungeonIndex(void)
+{
+#if defined(GAME_MM)
+    return gSaveContext.dungeonId;
+#endif
+
+    return -1;
+}
+
 int comboIsChateauActive(void)
 {
 #if defined(GAME_OOT)

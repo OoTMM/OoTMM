@@ -275,6 +275,8 @@ void comboSpawnCustomWarps(GameState_Play*);
 
 /* Util */
 int comboStrayFairyIndex(void);
+int comboOotDungeonScene(GameState_Play* play, int isBossKey);
+int comboMmDungeonIndex(void);
 int comboIsChateauActive(void);
 
 /* Draw */
