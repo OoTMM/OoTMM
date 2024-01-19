@@ -214,6 +214,22 @@ static void setStrayFairyMarkMm(GameState_Play* play, int sceneId, int id)
         setSwitch0MarkMm(play, sceneId, id & 0x1f);
 }
 
+static int getFiskMark(GameState_Play* play, int sceneId, int id)
+{
+    if (id >= 17)
+        return getCollectibleMarkOot(play, sceneId, id & 0x1f);
+    else
+        return getChestMarkOot(play, sceneId, id & 0x1f);
+}
+
+static void setFishMark(GameState_Play* play, int sceneId, int id)
+{
+    if (id >= 17)
+        setCollectibleMarkOot(play, sceneId, id & 0x1f);
+    else
+        setChestMarkOot(play, sceneId, id & 0x1f);
+}
+
 void multiSetMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
 {
     if (!comboConfig(CFG_MULTIPLAYER))
@@ -246,6 +262,9 @@ void multiSetMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u
         break;
     case OV_SR:
         BITMAP8_SET(gSharedCustomSave.oot.sr, id);
+        break;
+    case OV_FISH:
+        setFishMark(play, sceneId, id);
         break;
     }
 }
@@ -281,6 +300,8 @@ void multiSetMarkedMm(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8
         break;
     case OV_SR:
         break;
+    case OV_FISH:
+        break;
     }
 }
 
@@ -309,6 +330,8 @@ int multiIsMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 
         return BITMAP8_GET(gSharedCustomSave.oot.scrubs, id);
     case OV_SR:
         return BITMAP8_GET(gSharedCustomSave.oot.sr, id);
+    case OV_FISH:
+        return getFiskMark(play, sceneId, id);
     }
 
     return 0;
@@ -338,6 +361,8 @@ int multiIsMarkedMm(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 i
     case OV_SCRUB:
         break;
     case OV_SR:
+        break;
+    case OV_FISH:
         break;
     }
 
