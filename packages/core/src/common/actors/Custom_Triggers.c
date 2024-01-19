@@ -58,6 +58,7 @@ int CustomTriggers_GiveItemDirect(Actor_CustomTriggers* this, GameState_Play* pl
 int CustomTriggers_GiveItemNet(Actor_CustomTriggers* this, GameState_Play* play, s16 gi, u8 from, int flags)
 {
     ComboItemQuery q = ITEM_QUERY_INIT;
+    ComboItemOverride o;
 
     q.gi = gi;
     q.from = from;
@@ -69,7 +70,17 @@ int CustomTriggers_GiveItemNet(Actor_CustomTriggers* this, GameState_Play* play,
         q.gi = RECOVERY_HEART;
     }
 
-    return CustomTriggers_GiveItem(this, play, &q);
+    comboItemOverride(&o, &q);
+    if (isItemFastBuy(o.gi))
+    {
+        comboAddItemEx(play, &q, 0);
+        EnItem00_SpawnDecoy(play, o.gi);
+        return 1;
+    }
+    else
+    {
+        return CustomTriggers_GiveItem(this, play, &q);
+    }
 }
 
 int CustomTrigger_ItemSafe(Actor_CustomTriggers* this, GameState_Play* play)
