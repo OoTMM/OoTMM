@@ -114,7 +114,7 @@ static void setCollectibleMarkOot(GameState_Play* play, int sceneId, int flagId)
     }
 #endif
 
-    gOotSave.perm[sceneId].chests |= (1 << flagId);
+    gOotSave.perm[sceneId].collectibles |= (1 << flagId);
 }
 
 static void setCollectibleMarkMm(GameState_Play* play, int sceneId, int flagId)
@@ -131,7 +131,7 @@ static void setCollectibleMarkMm(GameState_Play* play, int sceneId, int flagId)
     gSaveContext.cycleSceneFlags[sceneId].collectible |= (1 << flagId);
 #endif
 
-    gMmSave.permanentSceneFlags[sceneId].chest |= (1 << flagId);
+    gMmSave.permanentSceneFlags[sceneId].collectible |= (1 << flagId);
 }
 
 static int getSwitch0MarkMm(GameState_Play* play, int sceneId, int flagId)
