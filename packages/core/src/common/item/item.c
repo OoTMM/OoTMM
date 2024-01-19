@@ -313,24 +313,21 @@ int comboAddItemEx(GameState_Play* play, const ComboItemQuery* q, int updateText
         }
 
         /* Send the item on the network */
-        if (o.gi != GI_NOTHING)
-        {
-            net = netMutexLock();
-            netWaitCmdClear();
-            bzero(&net->cmdOut, sizeof(net->cmdOut));
-            net->cmdOut.op = NET_OP_ITEM_SEND;
-            net->cmdOut.itemSend.playerFrom = gComboData.playerId;
-            net->cmdOut.itemSend.playerTo = o.player;
+        net = netMutexLock();
+        netWaitCmdClear();
+        bzero(&net->cmdOut, sizeof(net->cmdOut));
+        net->cmdOut.op = NET_OP_ITEM_SEND;
+        net->cmdOut.itemSend.playerFrom = gComboData.playerId;
+        net->cmdOut.itemSend.playerTo = o.player;
 #if defined(GAME_OOT)
-            net->cmdOut.itemSend.game = 0;
+        net->cmdOut.itemSend.game = 0;
 #else
-            net->cmdOut.itemSend.game = 1;
+        net->cmdOut.itemSend.game = 1;
 #endif
-            net->cmdOut.itemSend.gi = o.gi;
-            net->cmdOut.itemSend.key = makeOverrideKey(q);
-            net->cmdOut.itemSend.flags = (s16)q->ovFlags;
-            netMutexUnlock();
-        }
+        net->cmdOut.itemSend.gi = o.gi;
+        net->cmdOut.itemSend.key = makeOverrideKey(q);
+        net->cmdOut.itemSend.flags = (s16)q->ovFlags;
+        netMutexUnlock();
     }
 
     return -1;

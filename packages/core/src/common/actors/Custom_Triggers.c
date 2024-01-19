@@ -192,7 +192,7 @@ static void CustomTriggers_HandleTrigger(Actor_CustomTriggers* this, GameState_P
                 isMarked = multiIsMarkedOot(play, ovType, sceneId, roomId, id);
         }
 
-        if (isMarked || (CustomTrigger_ItemSafeNet(this, play) && CustomTriggers_GiveItemNet(this, play, gi, net->cmdIn.itemRecv.playerFrom, net->cmdIn.itemRecv.flags)))
+        if (isMarked || gi == GI_NOTHING || (CustomTrigger_ItemSafeNet(this, play) && CustomTriggers_GiveItemNet(this, play, gi, net->cmdIn.itemRecv.playerFrom, net->cmdIn.itemRecv.flags)))
         {
             /* Triggers the side-effect */
             if (needsMarking)
