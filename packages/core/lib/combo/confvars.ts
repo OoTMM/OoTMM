@@ -111,6 +111,7 @@ export const CONFVARS = [
   'OOT_BRIDGE_VANILLA',
   'OOT_BRIDGE_MEDALLIONS',
   'OOT_BRIDGE_CUSTOM',
+  'MULTIPLAYER',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

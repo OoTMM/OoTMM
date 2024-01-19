@@ -4,8 +4,10 @@
 #include <combo/dma.h>
 
 #if defined(GAME_OOT)
+# define multiIsMarked multiIsMarkedOot
 u16 gMmMaxRupees[] = { 0, 200, 500, 999 };
 #else
+# define multiIsMarked multiIsMarkedMm
 u16 gOotMaxRupees[] = { 0, 200, 500, 999 };
 #endif
 
@@ -267,7 +269,10 @@ void comboItemOverride(ComboItemOverride* dst, const ComboItemQuery* q)
 
     if (isPlayerSelf(dst->player))
     {
-        gi = comboProgressive(gi, q->ovFlags);
+        if (q->ovType != OV_NONE && !(q->ovFlags & OVF_RENEW) && multiIsMarked(gPlay, q->ovType, q->sceneId, q->roomId, q->id))
+            gi = GI_NOTHING;
+        else
+            gi = comboProgressive(gi, q->ovFlags);
     }
 
     if (neg)
@@ -290,9 +295,24 @@ int comboAddItemEx(GameState_Play* play, const ComboItemQuery* q, int updateText
     /* Add the item if it's for us */
     if (isPlayerSelf(o.player))
         count = comboAddItem(play, o.gi);
-    else
+
+    /* Update text */
+    if (updateText)
+        comboTextHijackItemEx(play, &o, count);
+
+    if (comboConfig(CFG_MULTIPLAYER) && q->ovType != OV_NONE)
     {
-        /* We need to send it */
+        /* Mark the item */
+        if (isPlayerSelf(o.player))
+        {
+#if defined(GAME_OOT)
+            multiSetMarkedOot(play, q->ovType, q->sceneId, q->roomId, q->id);
+#else
+            multiSetMarkedMm(play, q->ovType, q->sceneId, q->roomId, q->id);
+#endif
+        }
+
+        /* Send the item on the network */
         net = netMutexLock();
         netWaitCmdClear();
         bzero(&net->cmdOut, sizeof(net->cmdOut));
@@ -309,10 +329,6 @@ int comboAddItemEx(GameState_Play* play, const ComboItemQuery* q, int updateText
         net->cmdOut.itemSend.flags = (s16)q->ovFlags;
         netMutexUnlock();
     }
-
-    /* Update text */
-    if (updateText)
-        comboTextHijackItemEx(play, &o, count);
 
     return -1;
 }

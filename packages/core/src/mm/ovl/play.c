@@ -149,6 +149,7 @@ void hookPlay_Init(GameState_Play* play)
 
     /* Init */
     gActorCustomTriggers = NULL;
+    gChestMarkMulti = 0;
     g.keatonGrassMax = -1;
 
     /* Handle transition override */

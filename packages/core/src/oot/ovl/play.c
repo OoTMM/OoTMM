@@ -261,6 +261,7 @@ void hookPlay_Init(GameState_Play* play)
 
     /* Init */
     gActorCustomTriggers = NULL;
+    gChestMarkMulti = 0;
 
     /* Register play */
     gPlay = play;

@@ -148,6 +148,13 @@ static void CustomTriggers_HandleTrigger(Actor_CustomTriggers* this, GameState_P
 {
     NetContext* net;
     s16 gi;
+    u8 ovType;
+    u8 sceneId;
+    u8 roomId;
+    u8 id;
+    u8 isSamePlayer;
+    u8 isMarked;
+    u8 needsMarking;
 
     switch (gComboTriggersData.trigger)
     {
@@ -169,8 +176,34 @@ static void CustomTriggers_HandleTrigger(Actor_CustomTriggers* this, GameState_P
     case TRIGGER_NET:
         net = netMutexLock();
         gi = net->cmdIn.itemRecv.gi;
-        if (CustomTrigger_ItemSafeNet(this, play) && CustomTriggers_GiveItemNet(this, play, gi, net->cmdIn.itemRecv.playerFrom, net->cmdIn.itemRecv.flags))
+        isMarked = 0;
+        needsMarking = 0;
+        isSamePlayer = (net->cmdIn.itemRecv.playerFrom == gComboData.playerId);
+        if (isSamePlayer && !(net->cmdIn.itemRecv.flags & OVF_RENEW))
         {
+            needsMarking = 1;
+            ovType = (net->cmdIn.itemRecv.key >> 24) & 0xff;
+            sceneId = (net->cmdIn.itemRecv.key >> 16) & 0xff;
+            roomId = (net->cmdIn.itemRecv.key >> 8) & 0xff;
+            id = net->cmdIn.itemRecv.key & 0xff;
+            if (net->cmdIn.itemRecv.game)
+                isMarked = multiIsMarkedMm(play, ovType, sceneId, roomId, id);
+            else
+                isMarked = multiIsMarkedOot(play, ovType, sceneId, roomId, id);
+        }
+
+        if (isMarked || (CustomTrigger_ItemSafeNet(this, play) && CustomTriggers_GiveItemNet(this, play, gi, net->cmdIn.itemRecv.playerFrom, net->cmdIn.itemRecv.flags)))
+        {
+            /* Triggers the side-effect */
+            if (needsMarking)
+            {
+                if (net->cmdIn.itemRecv.game)
+                    multiSetMarkedMm(play, ovType, sceneId, roomId, id);
+                else
+                    multiSetMarkedOot(play, ovType, sceneId, roomId, id);
+            }
+
+            /* Mark as obtained on the network */
             bzero(&net->cmdIn, sizeof(net->cmdIn));
             gComboTriggersData.trigger = TRIGGER_NONE;
             gSaveLedgerBase++;

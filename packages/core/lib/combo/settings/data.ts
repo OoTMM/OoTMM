@@ -18,6 +18,7 @@ export const SETTINGS = [{
   description: 'The game mode.',
   values: [
     { value: 'single', name: 'Singleplayer', description: 'A regular, one player seed' },
+    { value: 'coop', name: 'Co-op', description: 'Everyone plays the same seed, all items are shared' },
     { value: 'multi', name: 'Multiworld', description: 'A multiplayer settings where players can find each other\'s items' },
   ],
   default: 'single'

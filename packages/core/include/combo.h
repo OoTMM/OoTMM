@@ -209,7 +209,7 @@ void swapFarore(void);
 #define OV_SHOP         0x07
 #define OV_SCRUB        0x08
 #define OV_SR           0x09
-#define OV_FISH         0x0A
+#define OV_FISH         0x0a
 
 #define OV_XFLAG0       0x10
 #define OV_XFLAG1       0x11
@@ -242,6 +242,20 @@ void comboTextHijackFishCaught(GameState_Play* play, const ComboItemOverride* o)
 void comboTextHijackDungeonRewardHints(GameState_Play* play, int hint);
 void comboTextHijackOathToOrder(GameState_Play* play);
 #endif
+
+/* Flags */
+int     comboGetChestFlagOot(GameState_Play* play, int sceneId, int flagId);
+int     comboGetChestFlagMm(GameState_Play* play, int sceneId, int flagId);
+void    comboSetChestFlagOot(GameState_Play* play, int sceneId, int flagId);
+void    comboSetChestFlagMm(GameState_Play* play, int sceneId, int flagId);
+
+/* Multi */
+extern u32 gChestMarkMulti;
+
+void    multiSetMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id);
+void    multiSetMarkedMm(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id);
+int     multiIsMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id);
+int     multiIsMarkedMm(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id);
 
 /* Progressive */
 s16 comboProgressive(s16 gi, int ovflags);
