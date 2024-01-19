@@ -39,23 +39,22 @@ PATCH_CALL(0x80ae3cd4, EnFsn_GiveNormalItem);
 
 int EnFsn_HasGivenShopItem(Actor_EnFsn* this, GameState_Play* play)
 {
-    if (Actor_HasParent(&this->base))
+    if (!Actor_HasParent(&this->base) || Message_GetState(&play->msgCtx) != 6)
+        return 0;
+
+    if (this->mode == 1)
     {
-        if (this->mode == 1)
-        {
-            /* Set item count to zero */
-            *(u16*)((char*)this + 0x38c) = 0;
-            MM_SET_EVENT_WEEK(EV_MM_WEEK_CURIOSITY_SHOP_BOUGHT);
-            comboShopAfterBuy(play, this->items[this->itemIndex]);
-        }
-        else if (sIsSecondReward)
-        {
-            sIsSecondReward = 0;
-            gMmExtraFlags2.letterMama = 1;
-        }
-        return 1;
+        /* Set item count to zero */
+        *(u16*)((char*)this + 0x38c) = 0;
+        MM_SET_EVENT_WEEK(EV_MM_WEEK_CURIOSITY_SHOP_BOUGHT);
+        comboShopAfterBuy(play, this->items[this->itemIndex]);
     }
-    return 0;
+    else if (sIsSecondReward)
+    {
+        sIsSecondReward = 0;
+        gMmExtraFlags2.letterMama = 1;
+    }
+    return 1;
 }
 
 PATCH_CALL(0x80ae3be0, EnFsn_HasGivenShopItem);
