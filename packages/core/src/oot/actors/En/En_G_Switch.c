@@ -4,33 +4,6 @@
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x13c) = (h); } while (0)
 
-static u32* const kFlags[] = {
-    &gOotSilverRupeeFlags1,
-    &gOotSilverRupeeFlags2,
-    &gOotSilverRupeeFlags3,
-    &gOotSilverRupeeFlags4,
-};
-
-static int EnGSwitch_GetFlag(int flag)
-{
-    u32* record;
-
-    record = kFlags[flag / 32];
-    flag %= 32;
-
-    return !!(*record & (1 << flag));
-}
-
-static void EnGSwitch_SetFlag(int flag)
-{
-    u32* record;
-
-    record = kFlags[flag / 32];
-    flag %= 32;
-
-    *record |= (1 << flag);
-}
-
 static u16 EnGSwitch_LocalID(Actor* this)
 {
     return *(u16*)((char*)this + 0x148);
@@ -168,7 +141,7 @@ int EnGSwitch_AlreadyTaken(GameState_Play* play, Actor* this)
     *(u16*)((char*)this + 0x148) = id;
 
     /* Check for flag */
-    return EnGSwitch_GetFlag(EnGSwitch_ID(this, play));
+    return BITMAP8_GET(gCustomSave.sr, EnGSwitch_ID(this, play));
 }
 
 void EnGSwitch_DrawSilverRupee(Actor* this, GameState_Play* play)
@@ -227,10 +200,10 @@ void EnGSwitch_GiveItemSilverRupee(Actor* this)
 
     EnGSwitch_ItemQuery(&q, this, gPlay);
     comboItemOverride(&o, &q);
-    EnGSwitch_SetFlag(EnGSwitch_ID(this, gPlay));
     PlayerDisplayTextBox(gPlay, 0xb4, NULL);
     comboAddItemEx(gPlay, &q, 1);
     comboPlayItemFanfare(o.gi, 1);
+    BITMAP8_SET(gCustomSave.sr, EnGSwitch_ID(this, gPlay));
     SET_HANDLER(this, EnGSwitch_HandlerAfterCollected);
 }
 

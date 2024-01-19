@@ -244,6 +244,9 @@ void multiSetMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u
     case OV_SCRUB:
         BITMAP8_SET(gSharedCustomSave.oot.scrubs, id);
         break;
+    case OV_SR:
+        BITMAP8_SET(gSharedCustomSave.oot.sr, id);
+        break;
     }
 }
 
@@ -274,6 +277,10 @@ void multiSetMarkedMm(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8
     case OV_SHOP:
         BITMAP8_SET(gSharedCustomSave.mm.shops, id);
         break;
+    case OV_SCRUB:
+        break;
+    case OV_SR:
+        break;
     }
 }
 
@@ -300,6 +307,8 @@ int multiIsMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 
         return BITMAP8_GET(gSharedCustomSave.oot.shops, id);
     case OV_SCRUB:
         return BITMAP8_GET(gSharedCustomSave.oot.scrubs, id);
+    case OV_SR:
+        return BITMAP8_GET(gSharedCustomSave.oot.sr, id);
     }
 
     return 0;
@@ -327,6 +336,8 @@ int multiIsMarkedMm(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 i
     case OV_SHOP:
         return BITMAP8_GET(gSharedCustomSave.mm.shops, id);
     case OV_SCRUB:
+        break;
+    case OV_SR:
         break;
     }
 
