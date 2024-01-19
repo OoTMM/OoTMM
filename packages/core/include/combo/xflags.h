@@ -4,6 +4,14 @@
 #include <combo/types.h>
 #include <combo/xflags_data.h>
 
+#if defined(GAME_OOT)
+# define comboXflagsGet     comboXflagsGetOot
+# define comboXflagsSet     comboXflagsSetOot
+#else
+# define comboXflagsGet     comboXflagsGetMm
+# define comboXflagsSet     comboXflagsSetMm
+#endif
+
 typedef struct ComboItemQuery ComboItemQuery;
 typedef struct ComboItemOverride ComboItemOverride;
 
@@ -17,9 +25,10 @@ typedef struct Xflag
 }
 Xflag;
 
-u16  comboXflagsBitPosLookup(const Xflag* xf);
-int  comboXflagsGet(const Xflag* xf);
-void comboXflagsSet(const Xflag* xf);
+int  comboXflagsGetOot(const Xflag* xf);
+int  comboXflagsGetMm(const Xflag* xf);
+void comboXflagsSetOot(const Xflag* xf);
+void comboXflagsSetMm(const Xflag* xf);
 void comboXflagItemQuery(ComboItemQuery* q, const Xflag* xf, s16 gi);
 void comboXflagItemOverride(ComboItemOverride* o, const Xflag* xf, s16 gi);
 

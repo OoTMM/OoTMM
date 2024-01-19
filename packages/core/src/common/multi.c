@@ -230,6 +230,48 @@ static void setFishMark(GameState_Play* play, int sceneId, int id)
         setChestMarkOot(play, sceneId, id & 0x1f);
 }
 
+static void markXflag(Xflag* xf, int sliceId, int sceneId, int roomId, int id)
+{
+    bzero(xf, sizeof(*xf));
+    xf->sliceId = sliceId;
+    xf->setupId = (roomId & 0xc0) >> 6;
+    xf->sceneId = sceneId;
+    xf->roomId = roomId & 0x3f;
+    xf->id = id;
+}
+
+static int getXflagsMarkOot(GameState_Play* play, int sliceId, int sceneId, int roomId, int id)
+{
+    Xflag xf;
+
+    markXflag(&xf, sliceId, sceneId, roomId, id);
+    return comboXflagsGetOot(&xf);
+}
+
+static int getXflagsMarkMm(GameState_Play* play, int sliceId, int sceneId, int roomId, int id)
+{
+    Xflag xf;
+
+    markXflag(&xf, sliceId, sceneId, roomId, id);
+    return comboXflagsGetMm(&xf);
+}
+
+static void setXflagsMarkOot(GameState_Play* play, int sliceId, int sceneId, int roomId, int id)
+{
+    Xflag xf;
+
+    markXflag(&xf, sliceId, sceneId, roomId, id);
+    comboXflagsSetOot(&xf);
+}
+
+static void setXflagsMarkMm(GameState_Play* play, int sliceId, int sceneId, int roomId, int id)
+{
+    Xflag xf;
+
+    markXflag(&xf, sliceId, sceneId, roomId, id);
+    comboXflagsSetMm(&xf);
+}
+
 void multiSetMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
 {
     if (!comboConfig(CFG_MULTIPLAYER))
@@ -237,6 +279,8 @@ void multiSetMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u
 
     switch (ovType)
     {
+    case OV_NONE:
+        break;
     case OV_CHEST:
         setChestMarkOot(play, sceneId, id);
         break;
@@ -266,6 +310,9 @@ void multiSetMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u
     case OV_FISH:
         setFishMark(play, sceneId, id);
         break;
+    default:
+        setXflagsMarkOot(play, ovType - OV_XFLAG0, sceneId, roomId, id);
+        break;
     }
 }
 
@@ -276,6 +323,8 @@ void multiSetMarkedMm(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8
 
     switch (ovType)
     {
+    case OV_NONE:
+        break;
     case OV_CHEST:
         setChestMarkMm(play, sceneId, id);
         break;
@@ -302,6 +351,9 @@ void multiSetMarkedMm(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8
         break;
     case OV_FISH:
         break;
+    default:
+        setXflagsMarkMm(play, ovType - OV_XFLAG0, sceneId, roomId, id);
+        break;
     }
 }
 
@@ -312,6 +364,8 @@ int multiIsMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 
 
     switch (ovType)
     {
+    case OV_NONE:
+        break;
     case OV_CHEST:
         return getChestMarkOot(play, sceneId, id);
     case OV_COLLECTIBLE:
@@ -332,6 +386,8 @@ int multiIsMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 
         return BITMAP8_GET(gSharedCustomSave.oot.sr, id);
     case OV_FISH:
         return getFiskMark(play, sceneId, id);
+    default:
+        return getXflagsMarkOot(play, ovType - OV_XFLAG0, sceneId, roomId, id);
     }
 
     return 0;
@@ -344,6 +400,8 @@ int multiIsMarkedMm(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 i
 
     switch (ovType)
     {
+    case OV_NONE:
+        break;
     case OV_CHEST:
         return getChestMarkMm(play, sceneId, id);
     case OV_COLLECTIBLE:
@@ -364,6 +422,8 @@ int multiIsMarkedMm(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 i
         break;
     case OV_FISH:
         break;
+    default:
+        return getXflagsMarkMm(play, ovType - OV_XFLAG0, sceneId, roomId, id);
     }
 
     return 0;
