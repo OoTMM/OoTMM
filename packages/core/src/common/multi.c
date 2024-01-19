@@ -235,6 +235,9 @@ void multiSetMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u
         break;
     case OV_SF:
         break;
+    case OV_COW:
+        gCowFlags |= (1 << id);
+        break;
     }
 }
 
@@ -259,6 +262,9 @@ void multiSetMarkedMm(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8
     case OV_SF:
         setStrayFairyMarkMm(play, sceneId, id);
         break;
+    case OV_COW:
+        gCowFlags |= (1 << id);
+        break;
     }
 }
 
@@ -279,6 +285,8 @@ int multiIsMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 
         return BITMAP32_GET(gOotSave.gsFlags, id - 8);
     case OV_SF:
         break;
+    case OV_COW:
+        return !!(gCowFlags & (1 << id));
     }
 
     return 0;
@@ -301,6 +309,8 @@ int multiIsMarkedMm(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 i
         break;
     case OV_SF:
         return getStrayFairyMarkMm(play, sceneId, id);
+    case OV_COW:
+        return !!(gCowFlags & (1 << id));
     }
 
     return 0;
