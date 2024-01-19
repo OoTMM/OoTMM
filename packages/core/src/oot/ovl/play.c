@@ -263,6 +263,8 @@ void hookPlay_Init(GameState_Play* play)
     gActorCustomTriggers = NULL;
     gMultiMarkChests = 0;
     gMultiMarkCollectibles = 0;
+    gMultiMarkSwitch0 = 0;
+    gMultiMarkSwitch1 = 0;
 
     /* Register play */
     gPlay = play;

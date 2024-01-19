@@ -189,3 +189,5 @@ u8   comboItemType(s16 gi);
 u8 comboSceneKey(u8 sceneId);
 
 void comboPlayItemFanfare(s16 gi, int isShort);
+
+s16 comboItemResolve(GameState_Play* play, s16 gi);

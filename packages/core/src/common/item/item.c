@@ -324,7 +324,7 @@ int comboAddItemEx(GameState_Play* play, const ComboItemQuery* q, int updateText
 #else
         net->cmdOut.itemSend.game = 1;
 #endif
-        net->cmdOut.itemSend.gi = o.gi;
+        net->cmdOut.itemSend.gi = comboItemResolve(play, o.gi);
         net->cmdOut.itemSend.key = makeOverrideKey(q);
         net->cmdOut.itemSend.flags = (s16)q->ovFlags;
         netMutexUnlock();

@@ -246,6 +246,8 @@ void comboTextHijackOathToOrder(GameState_Play* play);
 /* Multi */
 extern u32 gMultiMarkChests;
 extern u32 gMultiMarkCollectibles;
+extern u32 gMultiMarkSwitch0;
+extern u32 gMultiMarkSwitch1;
 
 void    multiSetMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id);
 void    multiSetMarkedMm(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id);
