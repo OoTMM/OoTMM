@@ -7,14 +7,16 @@ void ObjWarpstone_GiveItem(Actor* this, GameState_Play* play)
 {
     Actor_Player* link;
     void (*next)(Actor*, GameState_Play*);
-    s16 id;
+    int npc;
+    s16 gi;
+    u8 id;
 
     id = this->variable & 0xf;
 
-    if (!comboConfig(CFG_MM_OWL_SHUFFLE))
+    if (!comboConfig(CFG_MM_OWL_SHUFFLE) || (id == 0xf))
     {
-        gMmOwlFlags |= (1 << id);
-        next = actorAddr(0x223, 0x80b92c48);
+        gMmOwlFlags |= ((u32)1 << id);
+        next = actorAddr(AC_OBJ_WARPSTONE, 0x80b92c48);
         SET_HANDLER(this, next);
         next(this, play);
         return;
@@ -23,10 +25,13 @@ void ObjWarpstone_GiveItem(Actor* this, GameState_Play* play)
     link = GET_LINK(play);
     if (Actor_HasParent(this))
     {
+        /* Prevents duping */
+        EnableOwl(id);
+
         if (!(link->state & PLAYER_ACTOR_STATE_GET_ITEM))
         {
             this->attachedA = NULL;
-            next = actorAddr(0x223, 0x80b92c48);
+            next = actorAddr(AC_OBJ_WARPSTONE, 0x80b92c48);
             SET_HANDLER(this, next);
             next(this, play);
         }
@@ -34,7 +39,9 @@ void ObjWarpstone_GiveItem(Actor* this, GameState_Play* play)
     }
 
     /* Give the check */
-    comboGiveItemNpc(this, play, GI_MM_OWL_GREAT_BAY + id, NPC_MM_OWL_GREAT_BAY + id, 9999.f, 9999.f);
+    npc = NPC_MM_OWL_GREAT_BAY + id;
+    gi = GI_MM_OWL_GREAT_BAY + id;
+    comboGiveItemNpc(this, play, gi, npc, 9999.f, 9999.f);
 }
 
 static void ObjWarpstone_Text(GameState_Play* play)

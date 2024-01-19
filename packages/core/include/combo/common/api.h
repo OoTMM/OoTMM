@@ -70,6 +70,8 @@ void    Actor_SetCollisionCylinder(GameState_Play* play, Actor* actor, float unk
 void    ActorUpdateVelocity(Actor* actor);
 int     ActorTalkedTo(Actor* actor);
 
+void    EnableOwl(u8 owlId);
+
 u32     GetChestFlag(GameState_Play* play, int flag);
 void    SetChestFlag(GameState_Play* play, int flag);
 u32     GetCollectibleFlag(GameState_Play* play, int flag);
