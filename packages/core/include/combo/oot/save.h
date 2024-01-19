@@ -348,6 +348,7 @@ typedef struct ALIGNED(16)
 {
     u8  xflags[XFLAGS_COUNT_OOT];
     u8  npc[32];
+    u8  shops[8];
 }
 OotCustomSave;
 

@@ -47,32 +47,6 @@
 #define SHOP_POTION_RED_ALT         0x30
 #define SHOP_POTION_RED_ALT2        0x31
 
-void shopWriteFlag(int flag)
-{
-    u32* ptr;
-
-    ptr = &gOotExtraShopsLo;
-    if (flag >= 32)
-    {
-        ptr = &gOotExtraShopsHi;
-        flag -= 32;
-    }
-    (*ptr) |= (1 << flag);
-}
-
-int shopReadFlag(int flag)
-{
-    u32* ptr;
-
-    ptr = &gOotExtraShopsLo;
-    if (flag >= 32)
-    {
-        ptr = &gOotExtraShopsHi;
-        flag -= 32;
-    }
-    return ((*ptr) & (1 << flag)) != 0;
-}
-
 u8 comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
 {
     int ageMask;

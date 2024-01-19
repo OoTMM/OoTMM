@@ -117,7 +117,10 @@ static void EnCow_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, f
 
 static int EnCow_HasGivenItem(Actor* this)
 {
-    if (Actor_HasParent(this))
+    Actor_Player* link;
+
+    link = GET_LINK(gPlay);
+    if (Actor_HasParent(this) && !(link->state & PLAYER_ACTOR_STATE_GET_ITEM))
     {
         if (sCowID != -1)
         {

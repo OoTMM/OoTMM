@@ -179,17 +179,32 @@ static void CustomTriggers_HandleTrigger(Actor_CustomTriggers* this, GameState_P
         isMarked = 0;
         needsMarking = 0;
         isSamePlayer = (net->cmdIn.itemRecv.playerFrom == gComboData.playerId);
-        if (isSamePlayer && !(net->cmdIn.itemRecv.flags & OVF_RENEW))
+        if (isSamePlayer)
         {
-            needsMarking = 1;
-            ovType = (net->cmdIn.itemRecv.key >> 24) & 0xff;
-            sceneId = (net->cmdIn.itemRecv.key >> 16) & 0xff;
-            roomId = (net->cmdIn.itemRecv.key >> 8) & 0xff;
-            id = net->cmdIn.itemRecv.key & 0xff;
-            if (net->cmdIn.itemRecv.game)
-                isMarked = multiIsMarkedMm(play, ovType, sceneId, roomId, id);
+            if (!(net->cmdIn.itemRecv.flags & OVF_RENEW))
+            {
+                needsMarking = 1;
+                ovType = (net->cmdIn.itemRecv.key >> 24) & 0xff;
+                sceneId = (net->cmdIn.itemRecv.key >> 16) & 0xff;
+                roomId = (net->cmdIn.itemRecv.key >> 8) & 0xff;
+                id = net->cmdIn.itemRecv.key & 0xff;
+                if (net->cmdIn.itemRecv.game)
+                    isMarked = multiIsMarkedMm(play, ovType, sceneId, roomId, id);
+                else
+                    isMarked = multiIsMarkedOot(play, ovType, sceneId, roomId, id);
+            }
             else
-                isMarked = multiIsMarkedOot(play, ovType, sceneId, roomId, id);
+            {
+                for (int i = 0; i < ARRAY_SIZE(gSharedCustomSave.netGiSkip); ++i)
+                {
+                    if (gSharedCustomSave.netGiSkip[i] == gi)
+                    {
+                        isMarked = 1;
+                        gSharedCustomSave.netGiSkip[i] = GI_NONE;
+                        break;
+                    }
+                }
+            }
         }
 
         if (isMarked || gi == GI_NOTHING || (CustomTrigger_ItemSafeNet(this, play) && CustomTriggers_GiveItemNet(this, play, gi, net->cmdIn.itemRecv.playerFrom, net->cmdIn.itemRecv.flags)))

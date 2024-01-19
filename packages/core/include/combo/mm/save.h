@@ -419,6 +419,7 @@ typedef struct ALIGNED(16)
 {
     u8 xflags[XFLAGS_COUNT_MM];
     u8 npc[32];
+    u8 shops[4];
 }
 MmCustomSave;
 

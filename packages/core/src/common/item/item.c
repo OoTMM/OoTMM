@@ -310,6 +310,19 @@ int comboAddItemEx(GameState_Play* play, const ComboItemQuery* q, int updateText
 #else
             multiSetMarkedMm(play, q->ovType, q->sceneId, q->roomId, q->id);
 #endif
+
+            /* If the item was a renewable, add it to the GI skips */
+            if (q->ovFlags & OVF_RENEW)
+            {
+                for (int i = 0; i < ARRAY_SIZE(gSharedCustomSave.netGiSkip); ++i)
+                {
+                    if (gSharedCustomSave.netGiSkip[i] == GI_NONE)
+                    {
+                        gSharedCustomSave.netGiSkip[i] = o.gi;
+                        break;
+                    }
+                }
+            }
         }
 
         /* Send the item on the network */
