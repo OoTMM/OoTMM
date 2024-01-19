@@ -43,7 +43,8 @@ static int getChestMarkMm(GameState_Play* play, int sceneId, int flagId)
 #if defined(GAME_MM)
     if (play && mmSceneId(play->sceneId) == sceneId)
         return !!(gMultiMarkChests & (1 << flagId));
-    return !!(gSaveContext.cycleSceneFlags[sceneId].chest & (1 << flagId));
+    if (gSaveContext.cycleSceneFlags[sceneId].chest & (1 << flagId))
+        return 1;
 #endif
 
     return !!(gMmSave.permanentSceneFlags[sceneId].chest & (1 << flagId));
@@ -97,7 +98,8 @@ static int getCollectibleMarkMm(GameState_Play* play, int sceneId, int flagId)
 #if defined(GAME_MM)
     if (play && mmSceneId(play->sceneId) == sceneId)
         return !!(gMultiMarkCollectibles & (1 << flagId));
-    return !!(gSaveContext.cycleSceneFlags[sceneId].collectible & (1 << flagId));
+    if (gSaveContext.cycleSceneFlags[sceneId].collectible & (1 << flagId))
+        return 1;
 #endif
 
     return !!(gMmSave.permanentSceneFlags[sceneId].collectible & (1 << flagId));
@@ -141,7 +143,8 @@ static int getSwitch0MarkMm(GameState_Play* play, int sceneId, int flagId)
 #if defined(GAME_MM)
     if (play && mmSceneId(play->sceneId) == sceneId)
         return !!(gMultiMarkSwitch0 & (1 << flagId));
-    return !!(gSaveContext.cycleSceneFlags[sceneId].switch0 & (1 << flagId));
+    if (gSaveContext.cycleSceneFlags[sceneId].switch0 & (1 << flagId))
+        return 1;
 #endif
 
     return !!(gMmSave.permanentSceneFlags[sceneId].switch0 & (1 << flagId));
@@ -154,7 +157,8 @@ static int getSwitch1MarkMm(GameState_Play* play, int sceneId, int flagId)
 #if defined(GAME_MM)
     if (play && mmSceneId(play->sceneId) == sceneId)
         return !!(gMultiMarkSwitch1 & (1 << flagId));
-    return !!(gSaveContext.cycleSceneFlags[sceneId].switch1 & (1 << flagId));
+    if (gSaveContext.cycleSceneFlags[sceneId].switch1 & (1 << flagId))
+        return 1;
 #endif
 
     return !!(gMmSave.permanentSceneFlags[sceneId].switch1 & (1 << flagId));
