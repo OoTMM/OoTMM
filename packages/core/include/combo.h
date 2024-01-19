@@ -243,14 +243,9 @@ void comboTextHijackDungeonRewardHints(GameState_Play* play, int hint);
 void comboTextHijackOathToOrder(GameState_Play* play);
 #endif
 
-/* Flags */
-int     comboGetChestFlagOot(GameState_Play* play, int sceneId, int flagId);
-int     comboGetChestFlagMm(GameState_Play* play, int sceneId, int flagId);
-void    comboSetChestFlagOot(GameState_Play* play, int sceneId, int flagId);
-void    comboSetChestFlagMm(GameState_Play* play, int sceneId, int flagId);
-
 /* Multi */
-extern u32 gChestMarkMulti;
+extern u32 gMultiMarkChests;
+extern u32 gMultiMarkCollectibles;
 
 void    multiSetMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id);
 void    multiSetMarkedMm(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id);
