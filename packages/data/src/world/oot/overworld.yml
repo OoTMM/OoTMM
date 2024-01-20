@@ -1740,7 +1740,7 @@
   region: ZORA_FOUNTAIN
   exits:
     "Zora Domain Back": "true"
-    "Jabu-Jabu": "is_child && ((has_bottle && (has(FISH) || event(FISH))) || (trick(OOT_ENTER_JABU) && (climb_anywhere || hookshot_anywhere || has_weapon || can_use_sticks || time_travel_at_will)))"
+    "Jabu-Jabu": "is_child && (has_fish || (trick(OOT_ENTER_JABU) && (climb_anywhere || hookshot_anywhere || has_weapon || can_use_sticks || time_travel_at_will)))"
     "Zora Fountain Frozen": "is_adult || climb_anywhere || longshot_anywhere"
     "Fairy Fountain Farore": "has_explosives"
     "Zora Fountain Deep": "is_adult && has_tunic_zora && has_iron_boots"

@@ -159,7 +159,7 @@
 
 #Specific Interaction Macros:
 "can_ride_epona": "is_adult && can_play_epona"
-"gs_soil": "is_child && has_bottle && (renewable(BUG) || event(BUGS))"
+"gs_soil": "is_child && has_bugs"
 "adult_trade(x)": "is_adult && has(x)"
 "has_blue_fire": "has_blue_fire_arrows || (has_bottle && (event(BLUE_FIRE) || renewable(BLUE_FIRE) || renewable(BOTTLE_BLUE_FIRE)))"
 "can_ride_bean(x)": "is_adult && event(x)"
