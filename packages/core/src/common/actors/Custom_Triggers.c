@@ -270,6 +270,14 @@ static void CustomTriggers_CheckTrigger(Actor_CustomTriggers* this, GameState_Pl
         return;
     }
 
+    /* Endgame Item Win */
+    if (gOotExtraFlags.endgameItemIsWin && !gOotExtraFlags.triforceWin)
+    {
+        gComboTriggersData.acc = 0;
+        gComboTriggersData.trigger = TRIGGER_TRIFORCE;
+        return;
+    }
+
     /* Net */
     net = netMutexLock();
     if (net->cmdIn.op == NET_OP_ITEM_RECV)

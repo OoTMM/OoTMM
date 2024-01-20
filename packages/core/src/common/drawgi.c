@@ -1078,6 +1078,38 @@ void DrawGi_Triforce(GameState_Play* play, s16 index, u8 param)
     shaderFlameEffectColor(play, color, 1.5f, 20.f);
 }
 
+void DrawGi_TriforceFull(GameState_Play* play, s16 index, u8 param)
+{
+    static const float scale = 0.8f;
+    const DrawGi* drawGi;
+
+    drawGi = &kDrawGi[index];
+
+    OPEN_DISPS(play->gs.gfx);
+    InitListPolyOpa(play->gs.gfx);
+    ModelViewScale(scale, scale, scale, MAT_MUL);
+
+    MatrixStackDup();
+    ModelViewTranslate(0.f, 40.f, 0.f, MAT_MUL);
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+    gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
+    MatrixStackPop();
+
+    MatrixStackDup();
+    ModelViewTranslate(-23.f, 0.f, 0.f, MAT_MUL);
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+    gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
+    MatrixStackPop();
+
+    MatrixStackDup();
+    ModelViewTranslate(23.f, 0.f, 0.f, MAT_MUL);
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+    gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
+    MatrixStackPop();
+
+    CLOSE_DISPS();
+}
+
 #define LIST_PTR(x) ((u32)x & 0xffffff)
 
 static const Gfx kWalletRupeeGreen[] = {

@@ -402,6 +402,7 @@
 - { id: OOT_BOMBCHU_BAG_5,  type: MAJOR, add: [OOT_BOMBCHU_BAG, 5],  flags: 0x80, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Bombchu Bag" }
 - { id: OOT_BOMBCHU_BAG_10, type: MAJOR, add: [OOT_BOMBCHU_BAG, 10], flags: 0x80, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Bombchu Bag" }
 - { id: OOT_BOMBCHU_BAG_20, type: MAJOR, add: [OOT_BOMBCHU_BAG, 20], flags: 0x80, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Bombchu Bag" }
+- { id: OOT_TRIFORCE_FULL, type: MAJOR, add: [ENDGAME, 0], flags: 0x80, draw: TRIFORCE_FULL, object: TRIFORCE, name: "the <C3>Triforce" }
 - { id: OOT_FAIRY_BIG, type: MINOR, add: OOT_FAIRY_BIG, flags: 0x80, draw: FAIRY_BIG, object: [oot, 0x0177], name: "a <C0>Big Fairy" }
 - { id: MM_RUPEE_GREEN, item: MM_RUPEE_GREEN, type: RUPEE, add: [MM_RUPEE, 1], flags: 0x00, draw: MM_RUPEE_GREEN, object: [mm, 0x013f], name: "a <C0>Green Rupee" }
 - { id: MM_RUPEE_BLUE, item: MM_RUPEE_BLUE, type: RUPEE, add: [MM_RUPEE, 5], flags: 0x01, draw: MM_RUPEE_BLUE, object: [mm, 0x013f], name: "a <C0>Blue Rupee" }

@@ -1785,6 +1785,24 @@ static int addItemBigFairyMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
+static int addItemEndgame(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    switch (param)
+    {
+    case 0:
+        gOotExtraFlags.ganon = 1;
+        break;
+    case 1:
+        gMmExtraFlags2.majora = 1;
+        break;
+    }
+
+    if (comboGoalCond())
+        gOotExtraFlags.endgameItemIsWin = 1;
+
+    return 0;
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -1879,6 +1897,7 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemBombchuBagMm,
     addItemBigFairyOot,
     addItemBigFairyMm,
+    addItemEndgame,
 };
 
 extern const u8 kAddItemFuncs[];
