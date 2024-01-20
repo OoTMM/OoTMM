@@ -154,6 +154,7 @@ void hookPlay_Init(GameState_Play* play)
     gMultiMarkSwitch0 = 0;
     gMultiMarkSwitch1 = 0;
     g.keatonGrassMax = -1;
+    comboMultiResetWisps();
 
     /* Handle transition override */
     if (g.inGrotto)

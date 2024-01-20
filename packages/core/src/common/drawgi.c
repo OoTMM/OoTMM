@@ -158,7 +158,7 @@ static const u32 kMatTransformOffset = 0x11da0;
 static const u32 kMatTransformOffset = 0x187fc;
 #endif
 
-static void shaderFlameEffectColor(GameState_Play* play, u32 color, float scale, float offsetY)
+void shaderFlameEffectColor(GameState_Play* play, u32 color, float scale, float offsetY)
 {
 #if defined(GAME_OOT)
     static const u32 kFlameDlist = 0x52a10;

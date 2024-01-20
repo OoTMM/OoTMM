@@ -336,6 +336,11 @@ void CustomTriggers_Spawn(GameState_Play* play)
     );
 }
 
+void CustomTriggers_Draw(Actor* this, GameState_Play* play)
+{
+    comboMultiDrawWisps(play);
+}
+
 ActorInit CustomTriggers_gActorInit = {
     AC_CUSTOM_TRIGGERS,
     0x8,
@@ -345,5 +350,5 @@ ActorInit CustomTriggers_gActorInit = {
     (ActorFunc)CustomTriggers_Init,
     (ActorFunc)CustomTriggers_Fini,
     (ActorFunc)CustomTriggers_Update,
-    NULL,
+    (ActorFunc)CustomTriggers_Draw,
 };

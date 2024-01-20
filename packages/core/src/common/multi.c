@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/net.h>
 
 u32 gMultiMarkChests;
 u32 gMultiMarkCollectibles;
@@ -431,4 +432,187 @@ int multiIsMarkedMm(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 i
     }
 
     return 0;
+}
+
+static void processMessagesSendPlayerPos(GameState_Play* play, NetContext* net)
+{
+    Actor_Player* link;
+    int index;
+    NetMsg* msg;
+
+    /* Find a suitable index */
+    index = -1;
+    for (int i = 0; i < NET_MSG_MAX; ++i)
+    {
+        if (net->msgInSize[i] == 0 && net->msgOutSize[i] == 0)
+        {
+            index = i;
+            break;
+        }
+    }
+    if (index < 0)
+        return;
+
+    /* We have a suitable index, send the message */
+    link = GET_LINK(play);
+    if (!link || (link->base.id != AC_PLAYER))
+        return;
+
+    msg = &net->msgBuffer[index];
+    msg->op = NETMSG_PLAYER_POS;
+    msg->playerPos.frameCount = play->gs.frameCount;
+    msg->playerPos.sceneKey = play->sceneId;
+#if defined(GAME_MM)
+    msg->playerPos.sceneKey |= 0x8000;
+#endif
+    msg->playerPos.x = (s16)link->base.position.x;
+    msg->playerPos.y = (s16)link->base.position.y;
+    msg->playerPos.z = (s16)link->base.position.z;
+    net->msgOutSize[index] = 0x10;
+}
+
+typedef struct
+{
+    u16     clientId;
+    u8      ttl;
+    u32     frameCount;
+    Vec3f   pos;
+    Vec3f   target;
+}
+PlayerWisp;
+
+static PlayerWisp sPlayerWisps[16];
+
+static void updateWisp(PlayerWisp* wisp, NetMsgPlayerPos* playerPos)
+{
+    if (playerPos->frameCount < wisp->frameCount)
+        return;
+
+    wisp->ttl = 20;
+    wisp->frameCount = playerPos->frameCount;
+    wisp->target.x = playerPos->x;
+    wisp->target.y = playerPos->y;
+    wisp->target.z = playerPos->z;
+}
+
+static void processMessageInPlayerPos(GameState_Play* play, NetContext* net, NetMsgPlayerPos* playerPos, u16 clientId)
+{
+    u16 sceneKey;
+    int freeIndex;
+
+    sceneKey = play->sceneId;
+#if defined(GAME_MM)
+    sceneKey |= 0x8000;
+#endif
+    if (playerPos->sceneKey != sceneKey)
+        return;
+
+    freeIndex = -1;
+    for (int i = 0; i < ARRAY_SIZE(sPlayerWisps); ++i)
+    {
+        if (sPlayerWisps[i].ttl && sPlayerWisps[i].clientId == clientId)
+        {
+            updateWisp(&sPlayerWisps[i], playerPos);
+            return;
+        }
+        else if (!sPlayerWisps[i].ttl && freeIndex < 0)
+        {
+            freeIndex = i;
+        }
+    }
+
+    if (freeIndex >= 0)
+    {
+        sPlayerWisps[freeIndex].ttl = 20;
+        sPlayerWisps[freeIndex].clientId = clientId;
+        sPlayerWisps[freeIndex].frameCount = playerPos->frameCount;
+        sPlayerWisps[freeIndex].pos.x = playerPos->x;
+        sPlayerWisps[freeIndex].pos.y = playerPos->y;
+        sPlayerWisps[freeIndex].pos.z = playerPos->z;
+        sPlayerWisps[freeIndex].target.x = playerPos->x;
+        sPlayerWisps[freeIndex].target.y = playerPos->y;
+        sPlayerWisps[freeIndex].target.z = playerPos->z;
+    }
+}
+
+static void processMessageIn(GameState_Play* play, NetContext* net, NetMsg* msg, u16 clientId)
+{
+    if (msg->op == NETMSG_PLAYER_POS)
+        processMessageInPlayerPos(play, net, &msg->playerPos, clientId);
+}
+
+static void processMessages(GameState_Play* play, NetContext* net)
+{
+    /* Send pos */
+    if ((play->gs.frameCount & 3) == 0)
+        processMessagesSendPlayerPos(play, net);
+
+    /* Decrement wisps ttl */
+    for (int i = 0; i < ARRAY_SIZE(sPlayerWisps); ++i)
+    {
+        if (sPlayerWisps[i].ttl)
+            --sPlayerWisps[i].ttl;
+        if (sPlayerWisps[i].ttl)
+        {
+            sPlayerWisps[i].pos.x += (sPlayerWisps[i].target.x - sPlayerWisps[i].pos.x) * 0.25f;
+            sPlayerWisps[i].pos.y += (sPlayerWisps[i].target.y - sPlayerWisps[i].pos.y) * 0.25f;
+            sPlayerWisps[i].pos.z += (sPlayerWisps[i].target.z - sPlayerWisps[i].pos.z) * 0.25f;
+        }
+    }
+
+    for (int i = 0; i < NET_MSG_MAX; ++i)
+    {
+        if (net->msgInSize[i])
+        {
+            processMessageIn(play, net, &net->msgBuffer[i], net->msgClientId[i]);
+            net->msgInSize[i] = 0;
+        }
+    }
+}
+
+void comboMultiProcessMessages(GameState_Play* play)
+{
+    NetContext* ctx;
+
+    if (!comboConfig(CFG_MULTIPLAYER))
+        return;
+
+    ctx = netMutexLock();
+    processMessages(play, ctx);
+    netMutexUnlock();
+}
+
+static const u32 kWispColors[] = {
+    0xff0000cc, 0x00ff00cc, 0x0000ffcc, 0xffff00cc,
+    0xff00ffcc, 0x00ffffcc, 0x000000cc, 0xffffffcc,
+    0x7f0000cc, 0x007f00cc, 0x00007fcc, 0x7f7f00cc,
+    0x7f007fcc, 0x007f7fcc, 0x7f7f7fcc, 0x3f3f3fcc,
+};
+
+static void drawSingleWisp(GameState_Play* play, const PlayerWisp* wisp)
+{
+    OPEN_DISPS(play->gs.gfx);
+    ModelViewTranslate(wisp->pos.x, wisp->pos.y, wisp->pos.z, MAT_SET);
+    shaderFlameEffectColor(play, kWispColors[wisp->clientId & 0xf], 0.35f, -50.0f);
+    CLOSE_DISPS();
+}
+
+void comboMultiDrawWisps(GameState_Play* play)
+{
+    if (!comboConfig(CFG_MULTIPLAYER))
+        return;
+
+    InitListPolyXlu(play->gs.gfx);
+    for (int i = 0; i < ARRAY_SIZE(sPlayerWisps); ++i)
+    {
+        if (sPlayerWisps[i].ttl)
+            drawSingleWisp(play, &sPlayerWisps[i]);
+    }
+}
+
+void comboMultiResetWisps(void)
+{
+    if (!comboConfig(CFG_MULTIPLAYER))
+        return;
+    bzero(sPlayerWisps, sizeof(sPlayerWisps));
 }

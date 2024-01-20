@@ -227,6 +227,13 @@ void swapFarore(void);
 #define OVF_RENEW             (1 << 2)
 #define OVF_PRECOND           (1 << 3)
 
+/* Net */
+void comboMultiDrawWisps(GameState_Play* play);
+void comboMultiResetWisps(void);
+void comboMultiProcessMessages(GameState_Play* play);
+
+void shaderFlameEffectColor(GameState_Play* play, u32 color, float scale, float offsetY);
+
 /* Text */
 int  comboMultibyteCharSize(u8 c);
 void comboTextExtra(char** b, GameState_Play* play, s16 gi);

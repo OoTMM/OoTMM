@@ -50,7 +50,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.upgrades.bombBag = 3;
         gSave.inventory.upgrades.quiver = 3;
         gSave.inventory.upgrades.dive = 2;
-        gSave.inventory.upgrades.wallet = 2;
+        gSave.inventory.upgrades.wallet = 3;
         gSave.inventory.upgrades.strength = 3;
 
         gSave.inventory.ammo[ITS_OOT_STICKS] = 10;
@@ -265,6 +265,7 @@ void hookPlay_Init(GameState_Play* play)
     gMultiMarkCollectibles = 0;
     gMultiMarkSwitch0 = 0;
     gMultiMarkSwitch1 = 0;
+    comboMultiResetWisps();
 
     /* Register play */
     gPlay = play;
