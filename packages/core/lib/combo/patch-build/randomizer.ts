@@ -764,6 +764,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     OOT_BRIDGE_VANILLA: settings.rainbowBridge === 'vanilla',
     OOT_BRIDGE_MEDALLIONS: settings.rainbowBridge === 'medallions',
     OOT_BRIDGE_CUSTOM: settings.rainbowBridge === 'custom',
+    MULTIPLAYER: settings.mode !== 'single',
   };
 
   for (const v in exprs) {

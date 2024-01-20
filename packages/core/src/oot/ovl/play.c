@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/souls.h>
+#include <combo/net.h>
 
 extern void* gMmMag;
 GameState_Play* gPlay;
@@ -50,7 +51,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.upgrades.bombBag = 3;
         gSave.inventory.upgrades.quiver = 3;
         gSave.inventory.upgrades.dive = 2;
-        gSave.inventory.upgrades.wallet = 2;
+        gSave.inventory.upgrades.wallet = 3;
         gSave.inventory.upgrades.strength = 3;
 
         gSave.inventory.ammo[ITS_OOT_STICKS] = 10;
@@ -187,6 +188,34 @@ static void eventFixes(GameState_Play* play)
     }
 }
 
+static void sendSelfTriforce(void)
+{
+    NetContext* net;
+    int npc;
+    s16 gi;
+
+    if (!comboConfig(CFG_MULTIPLAYER))
+        return;
+
+    gi = GI_OOT_TRIFORCE_FULL;
+    npc = NPC_OOT_GANON;
+
+    net = netMutexLock();
+    netWaitCmdClear();
+    bzero(&net->cmdOut, sizeof(net->cmdOut));
+    net->cmdOut.op = NET_OP_ITEM_SEND;
+    net->cmdOut.itemSend.playerFrom = gComboData.playerId;
+    net->cmdOut.itemSend.playerTo = gComboData.playerId;
+    net->cmdOut.itemSend.game = 0;
+    net->cmdOut.itemSend.gi = gi;
+    net->cmdOut.itemSend.key = ((u32)OV_NPC << 24) | npc;
+    net->cmdOut.itemSend.flags = 0;
+    netMutexUnlock();
+
+    /* Mark the NPC as obtained */
+    BITMAP8_SET(gSharedCustomSave.oot.npc, npc);
+}
+
 static void endGame(void)
 {
     u8  tmpAge;
@@ -201,6 +230,9 @@ static void endGame(void)
 
     /* Flag ganon as beaten */
     gOotExtraFlags.ganon = 1;
+
+    /* Send self triforce */
+    sendSelfTriforce();
 
     /* Save tmp gameplay values (in case majora was beaten too) */
     tmpAge = gSave.age;
@@ -261,6 +293,11 @@ void hookPlay_Init(GameState_Play* play)
 
     /* Init */
     gActorCustomTriggers = NULL;
+    gMultiMarkChests = 0;
+    gMultiMarkCollectibles = 0;
+    gMultiMarkSwitch0 = 0;
+    gMultiMarkSwitch1 = 0;
+    comboMultiResetWisps();
 
     /* Register play */
     gPlay = play;

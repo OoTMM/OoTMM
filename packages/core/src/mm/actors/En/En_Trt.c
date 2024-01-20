@@ -3,7 +3,7 @@
 
 static int EnTrt_HasGivenItem(Actor_EnTrt* this, GameState_Play* play)
 {
-    if (!Actor_HasParent(&this->base))
+    if (!Actor_HasParent(&this->base) || Message_GetState(&play->msgCtx) != 6)
         return 0;
 
     comboShopAfterBuy(play, this->items[this->itemIndex]);

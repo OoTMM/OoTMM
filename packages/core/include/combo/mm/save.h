@@ -139,6 +139,20 @@ typedef union
 }
 MmPermanentSceneFlags;
 
+typedef union
+{
+    struct
+    {
+        u32 chest;
+        u32 switch0;
+        u32 switch1;
+        u32 clearedRoom;
+        u32 collectible;
+    };
+    char raw[0x14];
+}
+MmCycleSceneFlags;
+
 typedef struct
 {
     s16         scene;
@@ -226,34 +240,35 @@ SaveOptions;
 
 typedef struct
 {
-    MmSave          save;
-    u32             fileIndex;
-    char            unk_3ca4[0x4];
-    s32             gameMode;
-    s32             sceneSetupId;
-    char            unk_3cb0[0x077];
-    u8              grottoChestFlag;
-    char            unk_3d28[0xa8];
-    u8              timerStates[0x7];
-    char            unk_3dd7[0x151];
-    u16             magicState;
-    u16             isMagicRequested;
-    u16             magicFlag;
-    u16             magicCapacity;
-    u16             magicFillTarget;
-    u16             magicToConsume;
-    u16             magicToAdd;
-    u16             dungeonId2;
-    char            unk_3f38[0x2];
-    u16             minigameCounter[2];
-    char            unk_3f3e[0x2];
-    SaveOptions     options;
-    char            unk_3f46[0x4];
-    u16             nextCutscene;
-    char            unk_3f4c[0xe];
-    u16             healthDelta;
-    char            unk_3f5c[0x96c];
-    u16             dungeonId;
+    MmSave              save;
+    u32                 fileIndex;
+    char                unk_3ca4[0x4];
+    s32                 gameMode;
+    s32                 sceneSetupId;
+    char                unk_3cb0[0x077];
+    u8                  grottoChestFlag;
+    char                unk_3d28[0xa8];
+    u8                  timerStates[0x7];
+    char                unk_3dd7[0x151];
+    u16                 magicState;
+    u16                 isMagicRequested;
+    u16                 magicFlag;
+    u16                 magicCapacity;
+    u16                 magicFillTarget;
+    u16                 magicToConsume;
+    u16                 magicToAdd;
+    u16                 dungeonId2;
+    char                unk_3f38[0x2];
+    u16                 minigameCounter[2];
+    char                unk_3f3e[0x2];
+    SaveOptions         options;
+    char                unk_3f46[0x4];
+    u16                 nextCutscene;
+    char                unk_3f4c[0xe];
+    u16                 healthDelta;
+    char                unk_3f5c[0xc];
+    MmCycleSceneFlags   cycleSceneFlags[120];
+    u16                 dungeonId;
 }
 MmSaveContext;
 
@@ -275,6 +290,7 @@ ASSERT_OFFSET(MmSaveContext, options,           0x3f40);
 ASSERT_OFFSET(MmSaveContext, unk_3f4c,          0x3f4c);
 ASSERT_OFFSET(MmSaveContext, healthDelta,       0x3f5a);
 ASSERT_OFFSET(MmSaveContext, unk_3f5c,          0x3f5c);
+ASSERT_OFFSET(MmSaveContext, cycleSceneFlags,   0x3f68);
 ASSERT_OFFSET(MmSaveContext, dungeonId,         0x48c8);
 
 #if defined(GAME_MM)
@@ -402,6 +418,8 @@ MmExtraFlags3;
 typedef struct ALIGNED(16)
 {
     u8 xflags[XFLAGS_COUNT_MM];
+    u8 npc[32];
+    u8 shops[4];
 }
 MmCustomSave;
 

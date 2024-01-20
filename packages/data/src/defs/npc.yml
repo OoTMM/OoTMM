@@ -85,6 +85,7 @@ OOT_FAIRY_SPELL_LOVE:           0x53
 OOT_WEIRD_EGG:                  0x54
 OOT_POCKET_EGG:                 0x55
 OOT_CHEST_GAME_KEY:             0x56
+OOT_GANON:                      0x57
 
 MM_KOTAKE_RED_POTION:         0x00
 MM_KOUME_PICTOGRAPH_BOX:      0x01
@@ -206,3 +207,5 @@ MM_SCRUB_SHOP_POTION_BLUE:    0x74
 MM_GORMAN_MILK:               0x75
 MM_MILK_BAR_MILK:             0x76
 MM_MILK_BAR_CHATEAU:          0x77
+MM_OWL_HIDDEN:                0x78
+MM_MAJORA:                    0x79

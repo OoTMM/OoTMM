@@ -1,13 +1,13 @@
 #include <combo.h>
 #include <combo/item.h>
 
-void EnSob1_AfterBuy(Actor_EnSob1* sob1, GameState_Play* play)
+void EnSob1_AfterBuy(Actor_EnSob1* this, GameState_Play* play)
 {
-    if (Actor_HasParent(&sob1->base))
-    {
-        comboShopAfterBuy(play, sob1->items[sob1->itemIndex]);
-        sob1->base.attachedA = NULL;
-    }
+    if (!Actor_HasParent(&this->base) || Message_GetState(&play->msgCtx) != 6)
+        return;
+
+    comboShopAfterBuy(play, this->items[this->itemIndex]);
+    this->base.attachedA = NULL;
 }
 
 static void EnSob1_GiveItem(Actor_EnSob1* sob1, GameState_Play* play, s16 gi, float a, float b)

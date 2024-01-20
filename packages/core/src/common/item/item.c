@@ -4,8 +4,10 @@
 #include <combo/dma.h>
 
 #if defined(GAME_OOT)
+# define multiIsMarked multiIsMarkedOot
 u16 gMmMaxRupees[] = { 0, 200, 500, 999 };
 #else
+# define multiIsMarked multiIsMarkedMm
 u16 gOotMaxRupees[] = { 0, 200, 500, 999 };
 #endif
 
@@ -267,7 +269,10 @@ void comboItemOverride(ComboItemOverride* dst, const ComboItemQuery* q)
 
     if (isPlayerSelf(dst->player))
     {
-        gi = comboProgressive(gi, q->ovFlags);
+        if (q->ovType != OV_NONE && !(q->ovFlags & OVF_RENEW) && multiIsMarked(gPlay, q->ovType, q->sceneId, q->roomId, q->id))
+            gi = GI_NOTHING;
+        else
+            gi = comboProgressive(gi, q->ovFlags);
     }
 
     if (neg)
@@ -290,9 +295,37 @@ int comboAddItemEx(GameState_Play* play, const ComboItemQuery* q, int updateText
     /* Add the item if it's for us */
     if (isPlayerSelf(o.player))
         count = comboAddItem(play, o.gi);
-    else
+
+    /* Update text */
+    if (updateText)
+        comboTextHijackItemEx(play, &o, count);
+
+    if (comboConfig(CFG_MULTIPLAYER) && q->ovType != OV_NONE)
     {
-        /* We need to send it */
+        /* Mark the item */
+        if (isPlayerSelf(o.player))
+        {
+#if defined(GAME_OOT)
+            multiSetMarkedOot(play, q->ovType, q->sceneId, q->roomId, q->id);
+#else
+            multiSetMarkedMm(play, q->ovType, q->sceneId, q->roomId, q->id);
+#endif
+
+            /* If the item was a renewable, add it to the GI skips */
+            if (q->ovFlags & OVF_RENEW)
+            {
+                for (int i = 0; i < ARRAY_SIZE(gSharedCustomSave.netGiSkip); ++i)
+                {
+                    if (gSharedCustomSave.netGiSkip[i] == GI_NONE)
+                    {
+                        gSharedCustomSave.netGiSkip[i] = o.gi;
+                        break;
+                    }
+                }
+            }
+        }
+
+        /* Send the item on the network */
         net = netMutexLock();
         netWaitCmdClear();
         bzero(&net->cmdOut, sizeof(net->cmdOut));
@@ -304,15 +337,11 @@ int comboAddItemEx(GameState_Play* play, const ComboItemQuery* q, int updateText
 #else
         net->cmdOut.itemSend.game = 1;
 #endif
-        net->cmdOut.itemSend.gi = o.gi;
+        net->cmdOut.itemSend.gi = comboItemResolve(play, o.gi);
         net->cmdOut.itemSend.key = makeOverrideKey(q);
         net->cmdOut.itemSend.flags = (s16)q->ovFlags;
         netMutexUnlock();
     }
-
-    /* Update text */
-    if (updateText)
-        comboTextHijackItemEx(play, &o, count);
 
     return -1;
 }

@@ -9,6 +9,7 @@ typedef struct ALIGNED(16)
 {
     OotCustomSave   oot;
     MmCustomSave    mm;
+    s16             netGiSkip[16];
     u16             coins[4];
     u16             ocarinaButtonMaskOot;
     u16             ocarinaButtonMaskMm;
@@ -67,24 +68,15 @@ MiscFlags;
 #define gMmExtraFlags2              SAVE_EXTRA_RECORD(MmExtraFlags2,     7)
 #define gMiscFlags                  SAVE_EXTRA_RECORD(MiscFlags,         8)
 #define gCowFlags                   SAVE_EXTRA_RECORD(u32,               9)
-#define gOotExtraShopsLo            SAVE_EXTRA_RECORD(u32,              10)
-#define gOotExtraShopsHi            SAVE_EXTRA_RECORD(u32,              11)
-#define gMmExtraShops               SAVE_EXTRA_RECORD(u32,              12)
-#define gOotExtraScrubsLo           SAVE_EXTRA_RECORD(u32,              13)
-#define gOotExtraScrubsHi           SAVE_EXTRA_RECORD(u32,              14)
-#define gOotExtraTradeSave          SAVE_EXTRA_RECORD(OotExtraTrade,    15)
-#define gMmOwlFlags                 SAVE_EXTRA_RECORD(u32,              16)
-#define gSaveLedgerBase             SAVE_EXTRA_RECORD(u32,              17)
-#define gMmExtraFlags3              SAVE_EXTRA_RECORD(MmExtraFlags3,    18)
-#define gOotSilverRupeeFlags1       SAVE_EXTRA_RECORD(u32,              19)
-#define gOotSilverRupeeFlags2       SAVE_EXTRA_RECORD(u32,              20)
-#define gOotSilverRupeeFlags3       SAVE_EXTRA_RECORD(u32,              21)
-#define gOotSilverRupeeFlags4       SAVE_EXTRA_RECORD(u32,              22)
-#define gOotSilverRupeeCounts1      SAVE_EXTRA_RECORD(u32,              23)
-#define gOotSilverRupeeCounts2      SAVE_EXTRA_RECORD(u32,              24)
-#define gOotSilverRupeeCounts3      SAVE_EXTRA_RECORD(u32,              25)
-#define gOotSilverRupeeCounts4      SAVE_EXTRA_RECORD(u32,              26)
-#define gOotSilverRupeeCounts5      SAVE_EXTRA_RECORD(u32,              27)
-#define gTriforceCount              SAVE_EXTRA_RECORD(u32,              28)
+#define gOotExtraTradeSave          SAVE_EXTRA_RECORD(OotExtraTrade,    10)
+#define gMmOwlFlags                 SAVE_EXTRA_RECORD(u32,              11)
+#define gSaveLedgerBase             SAVE_EXTRA_RECORD(u32,              12)
+#define gMmExtraFlags3              SAVE_EXTRA_RECORD(MmExtraFlags3,    13)
+#define gOotSilverRupeeCounts1      SAVE_EXTRA_RECORD(u32,              14)
+#define gOotSilverRupeeCounts2      SAVE_EXTRA_RECORD(u32,              15)
+#define gOotSilverRupeeCounts3      SAVE_EXTRA_RECORD(u32,              16)
+#define gOotSilverRupeeCounts4      SAVE_EXTRA_RECORD(u32,              17)
+#define gOotSilverRupeeCounts5      SAVE_EXTRA_RECORD(u32,              18)
+#define gTriforceCount              SAVE_EXTRA_RECORD(u32,              19)
 
 #endif

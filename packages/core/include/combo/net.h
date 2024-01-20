@@ -9,6 +9,9 @@
 #define NET_OP_ITEM_RECV    0x01
 #define NET_OP_ITEM_SEND    0x02
 
+#define NET_MSG_MAX       32
+#define NETMSG_PLAYER_POS 0x01
+
 typedef struct
 {
     u8  playerFrom;
@@ -36,10 +39,36 @@ NetCmd;
 
 typedef struct
 {
+    u32 frameCount;
+    u16 sceneKey;
+    s16 x;
+    s16 y;
+    s16 z;
+}
+NetMsgPlayerPos;
+
+ALIGNED(4) typedef struct
+{
+    u8 op;
+    u8 pad[3];
+    union
+    {
+        u8              raw[28];
+        NetMsgPlayerPos playerPos;
+    };
+}
+NetMsg;
+
+typedef struct
+{
     u8*     uuid;
     u32     ledgerBase;
     NetCmd  cmdOut;
     NetCmd  cmdIn;
+    u8      msgInSize[NET_MSG_MAX];
+    u8      msgOutSize[NET_MSG_MAX];
+    u16     msgClientId[NET_MSG_MAX];
+    NetMsg  msgBuffer[NET_MSG_MAX];
 }
 NetContext;
 

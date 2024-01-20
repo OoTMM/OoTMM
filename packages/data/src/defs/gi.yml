@@ -402,6 +402,7 @@
 - { id: OOT_BOMBCHU_BAG_5,  type: MAJOR, add: [OOT_BOMBCHU_BAG, 5],  flags: 0x80, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Bombchu Bag" }
 - { id: OOT_BOMBCHU_BAG_10, type: MAJOR, add: [OOT_BOMBCHU_BAG, 10], flags: 0x80, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Bombchu Bag" }
 - { id: OOT_BOMBCHU_BAG_20, type: MAJOR, add: [OOT_BOMBCHU_BAG, 20], flags: 0x80, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Bombchu Bag" }
+- { id: OOT_TRIFORCE_FULL, type: MAJOR, add: [ENDGAME, 0], flags: 0x80, draw: TRIFORCE_FULL, object: TRIFORCE, name: "the <C3>Triforce" }
 - { id: OOT_FAIRY_BIG, type: MINOR, add: OOT_FAIRY_BIG, flags: 0x80, draw: FAIRY_BIG, object: [oot, 0x0177], name: "a <C0>Big Fairy" }
 - { id: MM_RUPEE_GREEN, item: MM_RUPEE_GREEN, type: RUPEE, add: [MM_RUPEE, 1], flags: 0x00, draw: MM_RUPEE_GREEN, object: [mm, 0x013f], name: "a <C0>Green Rupee" }
 - { id: MM_RUPEE_BLUE, item: MM_RUPEE_BLUE, type: RUPEE, add: [MM_RUPEE, 5], flags: 0x01, draw: MM_RUPEE_BLUE, object: [mm, 0x013f], name: "a <C0>Blue Rupee" }
@@ -581,6 +582,7 @@
 - { id: MM_OWL_SOUTHERN_SWAMP, type: MAJOR, add: [OWL, 7], flags: 0xa0, draw: MM_OWL, object: [mm, 0x0170], name: "an <C2>Owl Statue (Southern Swamp)" }
 - { id: MM_OWL_IKANA_CANYON, type: MAJOR, add: [OWL, 8], flags: 0xa0, draw: MM_OWL, object: [mm, 0x0170], name: "an <C2>Owl Statue (Ikana Canyon)" }
 - { id: MM_OWL_STONE_TOWER, type: MAJOR, add: [OWL, 9], flags: 0xa0, draw: MM_OWL, object: [mm, 0x0170], name: "an <C2>Owl Statue (Stone Tower)" }
+- { id: MM_OWL_HIDDEN, type: MAJOR, add: [OWL, 15], flags: 0xa0, draw: MM_OWL, object: [mm, 0x0170], name: "an <C2>Owl Statue (Hidden)" }
 - { id: MM_WALLET5, type: MAJOR, add: [MM_WALLET, 5], flags: 0xa0, draw: WALLET5, object: [mm, 0x00a8], name: "the <C1>Bottomless Wallet" }
 - { id: MM_SOUL_ENEMY_OCTOROK, type: SOUL, add: [MM_SOUL, 0x0000], flags: 0xa0, draw: SOUL, object: [mm, 0x0125], name: "the <C1>Soul of Octoroks" }
 - { id: MM_SOUL_ENEMY_WALLMASTER, type: SOUL, add: [MM_SOUL, 0x0001], flags: 0xa0, draw: SOUL, object: [mm, 0x0125], name: "the <C1>Soul of Wallmasters" }
@@ -654,7 +656,8 @@
 - { id: MM_BOMBCHU_BAG_5,  type: MAJOR, add: [MM_BOMBCHU_BAG, 5],  flags: 0xa0, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Bombchu Bag" }
 - { id: MM_BOMBCHU_BAG_10, type: MAJOR, add: [MM_BOMBCHU_BAG, 10], flags: 0xa0, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Bombchu Bag" }
 - { id: MM_BOMBCHU_BAG_20, type: MAJOR, add: [MM_BOMBCHU_BAG, 20], flags: 0xa0, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Bombchu Bag" }
-- { id: MM_FAIRY_BIG, type: MINOR, add: MM_FAIRY_BIG, flags: 0x80, draw: FAIRY_BIG, object: [oot, 0x0177], name: "a <C0>Big Fairy" }
+- { id: MM_FAIRY_BIG, type: MINOR, add: MM_FAIRY_BIG, flags: 0xa0, draw: FAIRY_BIG, object: [oot, 0x0177], name: "a <C0>Big Fairy" }
+- { id: MM_MASK_MAJORA, type: MAJOR, add: [ENDGAME, 1], flags: 0xa0, draw: MASK_MAJORA, object: GI_MASK_MAJORA, name: "<C3>Majora's Mask" }
 - { id: MM_SOLD_OUT, flags: 0xa0, draw: OOT_SOLD_OUT, object: [mm, 0x0113] }
 - { id: NOTHING,  flags: 0xa0, name: "<C0>Nothing" }
 - { id: MM_SCOOP, flags: 0x00 } # Scoop, MUST be the last entry

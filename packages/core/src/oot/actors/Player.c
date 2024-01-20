@@ -49,6 +49,8 @@ void Player_UpdateWrapper(Actor_Player* this, GameState_Play* play)
     {
         SetSwitchFlag(play, 0x37);
     }
+
+    comboMultiProcessMessages(play);
 }
 
 int Player_DpadHook(Actor_Player* this, GameState_Play* play)

@@ -1253,22 +1253,6 @@ static int addItemHeartPieceMm(GameState_Play* play, u8 itemId, s16 gi, u16 para
     return 0;
 }
 
-#if defined(GAME_OOT)
-static u16 dungeon(GameState_Play* play, int isBossKey)
-{
-    u16 mapIndex;
-
-    /* Desert colossus hands */
-    if (play->sceneId == SCE_OOT_DESERT_COLOSSUS)
-        return SCE_OOT_TEMPLE_SPIRIT;
-
-    mapIndex = gSaveContext.mapIndex;
-    if (mapIndex == SCE_OOT_GANON_TOWER || mapIndex == SCE_OOT_INSIDE_GANON_CASTLE)
-        return isBossKey ? SCE_OOT_GANON_TOWER : SCE_OOT_INSIDE_GANON_CASTLE;
-    return mapIndex;
-}
-#endif
-
 static int addSmallKeyOot(u16 dungeonId)
 {
     s8 keyCount;
@@ -1312,7 +1296,7 @@ static int addItemSmallKeyOot(GameState_Play* play, u8 itemId, s16 gi, u16 param
 {
 #if defined(GAME_OOT)
     if (param == 0xffff)
-        param = dungeon(play, 0);
+        param = comboOotDungeonScene(play, 0);
 #endif
     return addSmallKeyOot(param);
 }
@@ -1330,7 +1314,7 @@ static int addItemKeyRingOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
 #if defined(GAME_OOT)
     if (param == 0xffff)
-        param = dungeon(play, 0);
+        param = comboOotDungeonScene(play, 0);
 #endif
     for (int i = 0; i < g.maxKeysOot[param]; ++i)
         addSmallKeyOot(param);
@@ -1372,7 +1356,7 @@ static int addItemBossKeyOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
 #if defined(GAME_OOT)
     if (param == 0xffff)
-        param = dungeon(play, 1);
+        param = comboOotDungeonScene(play, 1);
 #endif
 
     gOotSave.inventory.dungeonItems[param].bossKey = 1;
@@ -1394,7 +1378,7 @@ static int addItemCompassOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
 #if defined(GAME_OOT)
     if (param == 0xffff)
-        param = dungeon(play, 0);
+        param = comboOotDungeonScene(play, 0);
 #endif
 
     gOotSave.inventory.dungeonItems[param].compass = 1;
@@ -1416,7 +1400,7 @@ static int addItemMapOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
 #if defined(GAME_OOT)
     if (param == 0xffff)
-        param = dungeon(play, 0);
+        param = comboOotDungeonScene(play, 0);
 #endif
 
     gOotSave.inventory.dungeonItems[param].map = 1;
@@ -1801,6 +1785,24 @@ static int addItemBigFairyMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
+static int addItemEndgame(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    switch (param)
+    {
+    case 0:
+        gOotExtraFlags.ganon = 1;
+        break;
+    case 1:
+        gMmExtraFlags2.majora = 1;
+        break;
+    }
+
+    if (comboGoalCond())
+        gOotExtraFlags.endgameItemIsWin = 1;
+
+    return 0;
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -1895,6 +1897,7 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemBombchuBagMm,
     addItemBigFairyOot,
     addItemBigFairyMm,
+    addItemEndgame,
 };
 
 extern const u8 kAddItemFuncs[];

@@ -56,7 +56,7 @@ static s16 EnBox_Item(Actor* this, GameState_Play* play)
     EnBox_ItemQuery(&q, this, play);
     comboItemOverride(&ov, &q);
 
-    return ov.gi;
+    return ov.giRaw;
 }
 
 void EnBox_GiveItemDefaultRange(Actor* actor, GameState_Play* play, s16 gi)

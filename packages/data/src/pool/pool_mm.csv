@@ -1417,7 +1417,7 @@ Woodfall Temple Compass,                                chest,          NONE,   
 Woodfall Temple Dark Chest,                             chest,          WFT_DARK,               TEMPLE_WOODFALL,              0x19,                       STRAY_FAIRY_WF
 Woodfall Temple Center Chest,                           chest,          NONE,                   TEMPLE_WOODFALL,              0x17,                       STRAY_FAIRY_WF
 Woodfall Temple Bow,                                    chest,          NONE,                   TEMPLE_WOODFALL,              0x1b,                       BOW
-Woodfall Temple Boss Key Chest,                         chest,          WFT_BOSS_KEY,            TEMPLE_WOODFALL,              0x1e,                       BOSS_KEY_WF
+Woodfall Temple Boss Key Chest,                         chest,          WFT_BOSS_KEY,           TEMPLE_WOODFALL,              0x1e,                       BOSS_KEY_WF
 Woodfall Temple SF Entrance,                            sf,             NONE,                   TEMPLE_WOODFALL,              0x2b,                       STRAY_FAIRY_WF
 Woodfall Temple SF Main Pot,                            sf,             NONE,                   TEMPLE_WOODFALL,              0x1c,                       STRAY_FAIRY_WF
 Woodfall Temple SF Main Deku Baba,                      sf,             NONE,                   TEMPLE_WOODFALL,              0x2e,                       STRAY_FAIRY_WF

@@ -169,6 +169,7 @@ PlayMusic = 0x801a3238;
 
 Player_UsingItem = 0x801240dc;
 Player_DrawHookshotReticle = 0x80124cc4;
+GetChestFlag = 0x800b5c78;
 SetChestFlag = 0x800b5c90;
 Audio_PlayFanfare = 0x801a3098;
 

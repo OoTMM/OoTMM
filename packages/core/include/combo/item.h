@@ -98,6 +98,7 @@
 #define IA_MM_BOMBCHU_BAG       0x5a
 #define IA_OOT_FAIRY_BIG        0x5b
 #define IA_MM_FAIRY_BIG         0x5c
+#define IA_ENDGAME              0x5d
 #define IA_NONE                 0xff
 
 #define ITT_NONE        0x00
@@ -189,3 +190,5 @@ u8   comboItemType(s16 gi);
 u8 comboSceneKey(u8 sceneId);
 
 void comboPlayItemFanfare(s16 gi, int isShort);
+
+s16 comboItemResolve(GameState_Play* play, s16 gi);

@@ -4,61 +4,100 @@
 #include <combo/custom.h>
 #include <combo/dma.h>
 
-#if defined(GAME_OOT)
-# define VROM_TABLE_SCENES CUSTOM_XFLAG_TABLE_OOT_SCENES_ADDR
-# define VROM_TABLE_SETUPS CUSTOM_XFLAG_TABLE_OOT_SETUPS_ADDR
-# define VROM_TABLE_ROOMS CUSTOM_XFLAG_TABLE_OOT_ROOMS_ADDR
-#else
-# define VROM_TABLE_SCENES CUSTOM_XFLAG_TABLE_MM_SCENES_ADDR
-# define VROM_TABLE_SETUPS CUSTOM_XFLAG_TABLE_MM_SETUPS_ADDR
-# define VROM_TABLE_ROOMS CUSTOM_XFLAG_TABLE_MM_ROOMS_ADDR
-#endif
-
-u16 comboXflagsBitPosLookup(const Xflag* xf)
+static u16 bitPosLookup(const Xflag* xf, u32 paddrTableScenes, u32 paddrTableSetups, u32 paddrTableRooms)
 {
-    static u32 paddrTableScenes;
-    static u32 paddrTableSetups;
-    static u32 paddrTableRooms;
-    DmaEntry dmaEntry;
     u16 setupIndex;
     u16 roomIndex;
-
-    /* Init */
-    if (paddrTableScenes == 0)
-    {
-        comboDmaLookup(&dmaEntry, VROM_TABLE_SCENES);
-        paddrTableScenes = dmaEntry.pstart;
-
-        comboDmaLookup(&dmaEntry, VROM_TABLE_SETUPS);
-        paddrTableSetups = dmaEntry.pstart;
-
-        comboDmaLookup(&dmaEntry, VROM_TABLE_ROOMS);
-        paddrTableRooms = dmaEntry.pstart;
-    }
 
     setupIndex = comboReadPhysU16(paddrTableScenes + xf->sceneId * 2) + xf->setupId;
     roomIndex = comboReadPhysU16(paddrTableSetups + setupIndex * 2) + (xf->roomId * 12) + xf->sliceId;
     return comboReadPhysI16(paddrTableRooms + roomIndex * 2) + xf->id;
 }
 
-int comboXflagsGet(const Xflag* xf)
+static u16 bitPosLookupOot(const Xflag* xf)
+{
+    static u32 paddrTableScenes;
+    static u32 paddrTableSetups;
+    static u32 paddrTableRooms;
+    DmaEntry dmaEntry;
+
+    /* Init */
+    if (paddrTableScenes == 0)
+    {
+        comboDmaLookup(&dmaEntry, CUSTOM_XFLAG_TABLE_OOT_SCENES_ADDR);
+        paddrTableScenes = dmaEntry.pstart;
+
+        comboDmaLookup(&dmaEntry, CUSTOM_XFLAG_TABLE_OOT_SETUPS_ADDR);
+        paddrTableSetups = dmaEntry.pstart;
+
+        comboDmaLookup(&dmaEntry, CUSTOM_XFLAG_TABLE_OOT_ROOMS_ADDR);
+        paddrTableRooms = dmaEntry.pstart;
+    }
+
+    return bitPosLookup(xf, paddrTableScenes, paddrTableSetups, paddrTableRooms);
+}
+
+static u16 bitPosLookupMm(const Xflag* xf)
+{
+    static u32 paddrTableScenes;
+    static u32 paddrTableSetups;
+    static u32 paddrTableRooms;
+    DmaEntry dmaEntry;
+
+    /* Init */
+    if (paddrTableScenes == 0)
+    {
+        comboDmaLookup(&dmaEntry, CUSTOM_XFLAG_TABLE_MM_SCENES_ADDR);
+        paddrTableScenes = dmaEntry.pstart;
+
+        comboDmaLookup(&dmaEntry, CUSTOM_XFLAG_TABLE_MM_SETUPS_ADDR);
+        paddrTableSetups = dmaEntry.pstart;
+
+        comboDmaLookup(&dmaEntry, CUSTOM_XFLAG_TABLE_MM_ROOMS_ADDR);
+        paddrTableRooms = dmaEntry.pstart;
+    }
+
+    return bitPosLookup(xf, paddrTableScenes, paddrTableSetups, paddrTableRooms);
+}
+
+int comboXflagsGetOot(const Xflag* xf)
 {
     u16 bitPos;
 
     if (xf->sceneId == 0xff)
         return 1;
-    bitPos = comboXflagsBitPosLookup(xf);
-    return !!BITMAP8_GET(gCustomSave.xflags, bitPos);
+    bitPos = bitPosLookupOot(xf);
+    return BITMAP8_GET(gSharedCustomSave.oot.xflags, bitPos);
 }
 
-void comboXflagsSet(const Xflag* xf)
+int comboXflagsGetMm(const Xflag* xf)
+{
+    u16 bitPos;
+
+    if (xf->sceneId == 0xff)
+        return 1;
+    bitPos = bitPosLookupMm(xf);
+    return BITMAP8_GET(gSharedCustomSave.mm.xflags, bitPos);
+}
+
+void comboXflagsSetOot(const Xflag* xf)
 {
     u16 bitPos;
 
     if (xf->sceneId == 0xff)
         return;
-    bitPos = comboXflagsBitPosLookup(xf);
-    BITMAP8_SET(gCustomSave.xflags, bitPos);
+    bitPos = bitPosLookupOot(xf);
+    BITMAP8_SET(gSharedCustomSave.oot.xflags, bitPos);
+}
+
+void comboXflagsSetMm(const Xflag* xf)
+{
+    u16 bitPos;
+
+    if (xf->sceneId == 0xff)
+        return;
+    bitPos = bitPosLookupMm(xf);
+    BITMAP8_SET(gSharedCustomSave.mm.xflags, bitPos);
 }
 
 void comboXflagItemQuery(ComboItemQuery* q, const Xflag* xf, s16 gi)
