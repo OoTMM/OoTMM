@@ -91,8 +91,6 @@ void EnExRuppy_GiveItem(Actor_EnExRuppy* this, GameState_Play* play, Actor_EnDiv
         this->actionFunc = EnExRuppy_HandlerCollected;
         this->actionFunc(this, play);
         this->actor.draw = NULL;
-
-        SetCollectibleFlag(play, this->colorIdx + 1);
     }
     else
     {
@@ -101,6 +99,7 @@ void EnExRuppy_GiveItem(Actor_EnExRuppy* this, GameState_Play* play, Actor_EnDiv
     }
 
     comboAddItemEx(play, &q, major);
+    SetCollectibleFlag(play, this->colorIdx + 1);
 
     /* Play the sound */
     comboPlayItemFanfare(o.gi, 1);
