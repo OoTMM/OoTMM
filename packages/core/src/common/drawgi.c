@@ -1110,6 +1110,23 @@ void DrawGi_TriforceFull(GameState_Play* play, s16 index, u8 param)
     CLOSE_DISPS();
 }
 
+void DrawGi_MaskMajora(GameState_Play* play, s16 index, u8 param)
+{
+    static const float scale = 0.03f;
+    const DrawGi* drawGi;
+
+    drawGi = &kDrawGi[index];
+
+    OPEN_DISPS(play->gs.gfx);
+    InitListPolyOpa(play->gs.gfx);
+    ModelViewScale(scale, scale, scale, MAT_MUL);
+    ModelViewRotateX(M_PI, MAT_MUL);
+    ModelViewTranslate(-300.f, 0.f, 0.f, MAT_MUL);
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+    gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
+    CLOSE_DISPS();
+}
+
 #define LIST_PTR(x) ((u32)x & 0xffffff)
 
 static const Gfx kWalletRupeeGreen[] = {

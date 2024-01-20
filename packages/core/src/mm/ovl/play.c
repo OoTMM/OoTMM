@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/net.h>
 
 GameState_Play* gPlay;
 int gNoTimeFlow;
@@ -140,6 +141,35 @@ static u32 entranceForOverride(u32 entrance)
     }
 }
 
+
+static void sendSelfMajorasMask(void)
+{
+    NetContext* net;
+    int npc;
+    s16 gi;
+
+    if (!comboConfig(CFG_MULTIPLAYER))
+        return;
+
+    gi = GI_MM_MASK_MAJORA;
+    npc = NPC_MM_MAJORA;
+
+    net = netMutexLock();
+    netWaitCmdClear();
+    bzero(&net->cmdOut, sizeof(net->cmdOut));
+    net->cmdOut.op = NET_OP_ITEM_SEND;
+    net->cmdOut.itemSend.playerFrom = gComboData.playerId;
+    net->cmdOut.itemSend.playerTo = gComboData.playerId;
+    net->cmdOut.itemSend.game = 1;
+    net->cmdOut.itemSend.gi = gi;
+    net->cmdOut.itemSend.key = ((u32)OV_NPC << 24) | npc;
+    net->cmdOut.itemSend.flags = 0;
+    netMutexUnlock();
+
+    /* Mark the NPC as obtained */
+    BITMAP8_SET(gSharedCustomSave.mm.npc, npc);
+}
+
 void hookPlay_Init(GameState_Play* play)
 {
     int isEndOfGame;
@@ -254,6 +284,7 @@ void hookPlay_Init(GameState_Play* play)
     {
         /* End game */
         gMmExtraFlags2.majora = 1;
+        sendSelfMajorasMask();
         if (!comboGoalCond() && !g.isCreditWarp)
         {
             gSave.playerForm = MM_PLAYER_FORM_HUMAN;
