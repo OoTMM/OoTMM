@@ -1072,6 +1072,9 @@ void DrawGi_Triforce(GameState_Play* play, s16 index, u8 param)
     case 3:
         color = 0x0000ffc0;
         break;
+    default:
+        UNREACHABLE();
+        break;
     }
 
     InitListPolyXlu(play->gs.gfx);
