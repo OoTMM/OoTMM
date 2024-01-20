@@ -98,6 +98,18 @@ void KaleidoScope_LoadNamedItemCustom(void* segment, u32 texIndex)
         isForeign = 1;
         texIndex = 0x7b + 0xA; // OoT OoT Hookshot
         break;
+    case ITEM_MM_SPELL_FIRE:
+        isForeign = 1;
+        texIndex = 0x7b + ITEM_OOT_SPELL_FIRE;
+        break;
+    case ITEM_MM_SPELL_WIND:
+        isForeign = 1;
+        texIndex = 0x7b + ITEM_OOT_SPELL_WIND;
+        break;
+    case ITEM_MM_SPELL_LOVE:
+        isForeign = 1;
+        texIndex = 0x7b + ITEM_OOT_SPELL_LOVE;
+        break;
     }
     if (isForeign)
     {
@@ -121,14 +133,41 @@ void KaleidoScope_ShowItemMessage(GameState_Play* play, u16 messageId, u8 yPosit
         messageId = 0x170f; // Use Hookshot message instead of broken OoT Hookshot message
     }
     Message_ShowMessageAtYPosition(play, messageId, yPosition);
-    if (messageId == 0x1705)
+    s16 itemId = messageId - 0x1700;
+    switch (itemId)
     {
+    case ITEM_MM_OCARINA_FAIRY:
         b = play->msgCtx.font.textBuffer.schar;
         b[2] = 0x4C; // Use Ocarina of Time icon.
         b += 11;
         comboTextAppendStr(&b, TEXT_COLOR_RED "Fairy Ocarina" TEXT_NL);
         comboTextAppendClearColor(&b);
         comboTextAppendStr(&b, "This is a memento from" TEXT_NL "Saria." TEXT_NL TEXT_BOX_BREAK_2 "Play it with \xB0 and the four \xB2" TEXT_NL "Buttons. Press \xB1 to stop." TEXT_END);
+        break;
+    case ITEM_MM_SPELL_WIND:
+        b = play->msgCtx.font.textBuffer.schar;
+        b[2] = 0xFE; // Use No Icon
+        b += 11;
+        comboTextAppendStr(&b, TEXT_COLOR_RED "Farore's Wind" TEXT_NL);
+        comboTextAppendClearColor(&b);
+        comboTextAppendStr(&b, "This is warp magic you can use" TEXT_NL "with \xB2. Warp when you are in" TEXT_NL "danger!" TEXT_END);
+        break;
+    case ITEM_MM_SPELL_LOVE:
+        b = play->msgCtx.font.textBuffer.schar;
+        b[2] = 0xFE; // Use No Icon
+        b += 11;
+        comboTextAppendStr(&b, TEXT_COLOR_RED "Nayru's Love" TEXT_NL);
+        comboTextAppendClearColor(&b);
+        comboTextAppendStr(&b, "Cast this to create a powerful" TEXT_NL "protective barrier. It's defensive" TEXT_NL "magic you can use with \xB2." TEXT_END);
+        break;
+    case ITEM_MM_SPELL_FIRE:
+        b = play->msgCtx.font.textBuffer.schar;
+        b[2] = 0xFE; // Use No Icon
+        b += 11;
+        comboTextAppendStr(&b, TEXT_COLOR_RED "Din's Fire" TEXT_NL);
+        comboTextAppendClearColor(&b);
+        comboTextAppendStr(&b, "Its fireball engulgs everything!" TEXT_NL "It's attack magic you can use" TEXT_NL "with \xB2." TEXT_END);
+        break;
     }
 }
 
@@ -267,3 +306,88 @@ static void KaleidoScope_UpdateSomeMenu(GameState_Play* play)
 }
 
 PATCH_CALL(0x8082ae10, KaleidoScope_UpdateSomeMenu);
+
+u32 gCustomIconAddr;
+
+static u32 sCustomIcons[] = {
+    ITEM_MM_SPELL_WIND,
+    ITEM_MM_SPELL_LOVE,
+    ITEM_MM_SPELL_FIRE,
+};
+
+u8 gPlayerFormCustomItemRestrictions[5][8] =
+{
+    { 0, 0, 0, 0, 0, 0, 0, 0 },
+    { 0, 0, 0, 0, 0, 0, 0, 0 },
+    { 0, 0, 0, 0, 0, 0, 0, 0 },
+    { 0, 0, 0, 0, 0, 0, 0, 0 },
+    { 1, 1, 1, 0, 0, 0, 0, 0 },
+};
+
+typedef void (*KaleidoScope_GrayOutTextureRGBA32)(u32*, u16);
+
+const size_t customIconSize = 0x1000;
+
+void KaleidoScope_LoadIcons(u32 vrom, void* dst, size_t* size)
+{
+    DmaEntry dma;
+    KaleidoScope_GrayOutTextureRGBA32 KaleidoScope_GrayOutTextureRGBA32 = OverlayAddr(0x808286D8);
+
+    CmpDma_LoadAllFiles(vrom, dst, *size);
+
+    gCustomIconAddr = (u32)dst + *size;
+
+    comboDmaLookupForeignId(&dma, 8);
+    u32 textureFileAddress = dma.pstart;
+
+    for (u32 i = 0; i < ARRAY_SIZE(sCustomIcons); i++)
+    {
+        u32 icon = sCustomIcons[i];
+        u32 foreignIcon;
+        switch (icon)
+        {
+        case ITEM_MM_SPELL_FIRE:
+            foreignIcon = ITEM_OOT_SPELL_FIRE;
+            break;
+        case ITEM_MM_SPELL_WIND:
+            foreignIcon = ITEM_OOT_SPELL_WIND;
+            break;
+        case ITEM_MM_SPELL_LOVE:
+            foreignIcon = ITEM_OOT_SPELL_LOVE;
+            break;
+        default:
+            continue;
+        }
+        u32 textureOffset = customIconSize * foreignIcon;
+        u32 customDestination = gCustomIconAddr + (i * customIconSize);
+        DMARomToRam((textureFileAddress + textureOffset) | PI_DOM1_ADDR2, (void*)customDestination, customIconSize);
+
+        u8 customItemIndex = icon - ITEM_MM_CUSTOM_MIN;
+        if (customItemIndex >= 8 || !gPlayerFormCustomItemRestrictions[gSaveContext.save.playerForm][customItemIndex])
+        {
+            KaleidoScope_GrayOutTextureRGBA32((u32*)customDestination, customIconSize);
+        }
+
+        *size += customIconSize;
+    }
+}
+
+typedef void (*KaleidoScope_DrawIcon)(GfxContext* gfxCtx, u32 texture, u16 width, u16 height, u16 point);
+
+void KaleidoScope_DrawIconCustom(GfxContext* gfxCtx, u8 item, u16 width, u16 height, u16 point)
+{
+    u32* gItemIcons = (u32*)0x801c1e6c;
+    KaleidoScope_DrawIcon KaleidoScope_DrawIcon = OverlayAddr(0x80821ad4);
+    u32 texture;
+    if (item < ITEM_MM_CUSTOM_MIN)
+    {
+        texture = gItemIcons[item];
+    }
+    else
+    {
+        u8 customItem = item - ITEM_MM_CUSTOM_MIN;
+        texture = gCustomIconAddr + (customIconSize * customItem);
+    }
+
+    KaleidoScope_DrawIcon(gfxCtx, texture, width, height, point);
+}

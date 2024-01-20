@@ -1130,6 +1130,13 @@ export const SETTINGS = [{
   description: 'Turns the first out-of-shop bombchu pack you find into the bombchu bag. Has logical implications.',
   default: false,
 }, {
+  key: 'magicSpellsMm',
+  name: 'Din\'s Fire, Farore\'s Wind, Nayru\'s Love (MM)',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Adds Din\'s Fire, Farore\'s Wind and Nayru\'s Love in MM (logic accounts for that).',
+  default: false
+}, {
   key: 'ocarinaButtonsShuffleOot',
   name: 'Ocarina Buttons Shuffle (OoT)',
   category: 'items.extensions',
@@ -1401,6 +1408,12 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false,
   cond: (s: any) => s.bombchuBagOot && s.bombchuBagMm,
+}, {
+  key: 'sharedMagicSpells',
+  name: 'Shared Magic Spells',
+  category: 'items.shared',
+  type: 'boolean',
+  default: false
 }, {
   key: 'agelessSwords',
   name: 'Ageless Swords',

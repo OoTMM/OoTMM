@@ -659,5 +659,8 @@
 - { id: MM_FAIRY_BIG, type: MINOR, add: MM_FAIRY_BIG, flags: 0xa0, draw: FAIRY_BIG, object: [oot, 0x0177], name: "a <C0>Big Fairy" }
 - { id: MM_MASK_MAJORA, type: MAJOR, add: [ENDGAME, 1], flags: 0xa0, draw: MASK_MAJORA, object: GI_MASK_MAJORA, name: "<C3>Majora's Mask" }
 - { id: MM_SOLD_OUT, flags: 0xa0, draw: OOT_SOLD_OUT, object: [mm, 0x0113] }
+- { id: MM_SPELL_FIRE, item: MM_SPELL_FIRE, type: MAJOR, add: [MM_TRADE1, 5], flags: 0x80, draw: OOT_SPELL_FIRE, object: [oot, 0x015d], name: "<C1>Din's Fire" }
+- { id: MM_SPELL_WIND, item: MM_SPELL_WIND, type: MAJOR, add: [MM_TRADE2, 2], flags: 0x80, draw: OOT_SPELL_WIND, object: [oot, 0x015d], name: "<C1>Farore's Wind" }
+- { id: MM_SPELL_LOVE, item: MM_SPELL_LOVE, type: MAJOR, add: [MM_TRADE3, 2], flags: 0x80, draw: OOT_SPELL_LOVE, object: [oot, 0x015d], name: "<C1>Nayru's Love" }
 - { id: NOTHING,  flags: 0xa0, name: "<C0>Nothing" }
 - { id: MM_SCOOP, flags: 0x00 } # Scoop, MUST be the last entry

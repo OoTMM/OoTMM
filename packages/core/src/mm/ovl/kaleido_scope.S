@@ -69,3 +69,37 @@ PATCH_END
 PATCH_START 0x8081c5e4
   jal   KaleidoScope_ShowItemMessage
 PATCH_END
+
+KaleidoScope_LoadIcons_Hook:
+  addiu   sp, sp, -0x20
+  sw      ra, 0x0014 (sp)
+
+  jal     KaleidoScope_LoadIcons
+   addiu  a2, sp, 0x4c
+
+  lw      ra, 0x0014 (sp)
+  jr      ra
+  addiu   sp, sp, 0x20
+
+/*
+Replaces:
+  jal   CmpDma_LoadAllFiles
+*/
+PATCH_START 0x80828ac4
+  jal   KaleidoScope_LoadIcons_Hook
+PATCH_END
+
+/*
+Replaces:
+  jal   KaleidoScope_DrawTexQuadRGBA32
+   lw   a1, 0x1e6c (a1)
+*/
+PATCH_START 0x8081bb70
+  jal   KaleidoScope_DrawIconCustom
+   or   a1, v0, zero
+PATCH_END
+
+// Reloc offset 0x5AD0
+PATCH_START 0x8082c944
+.int 0
+PATCH_END

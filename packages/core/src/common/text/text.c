@@ -421,6 +421,13 @@ static int isItemAmbiguous(s16 gi)
     case GI_MM_POE:
     case GI_MM_BIG_POE:
         return 1;
+    case GI_OOT_SPELL_FIRE:
+    case GI_OOT_SPELL_WIND:
+    case GI_OOT_SPELL_LOVE:
+    case GI_MM_SPELL_FIRE:
+    case GI_MM_SPELL_WIND:
+    case GI_MM_SPELL_LOVE:
+        return !comboConfig(CFG_SHARED_MAGIC_SPELLS);
     default:
         return 0;
     }

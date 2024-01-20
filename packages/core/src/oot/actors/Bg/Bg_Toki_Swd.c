@@ -15,8 +15,6 @@ static void BgTokiSwd_GiveItem(Actor* this, GameState_Play* play, s16 gi, int np
 
 void BgTokiSwd_Handler(Actor* this, GameState_Play* play)
 {
-    TransitionContext* t;
-
     if (gSave.age == AGE_CHILD && !GetEventChk(EV_OOT_CHK_MASTER_SWORD_CHAMBER))
     {
         BgTokiSwd_GiveItem(this, play, GI_OOT_SWORD_MASTER, NPC_OOT_MASTER_SWORD, EV_OOT_CHK_MASTER_SWORD_CHAMBER);
@@ -35,11 +33,10 @@ void BgTokiSwd_Handler(Actor* this, GameState_Play* play)
         swapFarore();
 
         /* Time Travel */
-        t = &play->transition;
-        t->type = TRANS_TYPE_NORMAL;
-        t->gfx = TRANS_GFX_SHORTCUT;
-        t->entrance = 0x02ca;
-        t->age = !(gSave.age);
+        play->transitionTrigger = TRANS_TYPE_NORMAL;
+        play->transitionType = TRANS_GFX_SHORTCUT;
+        play->nextEntranceIndex = 0x02ca;
+        play->linkAgeOnLoad = !(gSave.age);
 
         ActorDestroy(this);
     }

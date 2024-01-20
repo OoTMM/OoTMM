@@ -169,6 +169,9 @@ const ITEM_POOL_PLENTIFUL = new Set([
   Items.MM_GREAT_FAIRY_SWORD,
   Items.MM_SPIN_UPGRADE,
   Items.MM_SKELETON_KEY,
+  Items.MM_SPELL_FIRE,
+  Items.MM_SPELL_WIND,
+  Items.MM_SPELL_LOVE,
   Items.SHARED_BOW,
   Items.SHARED_BOMB_BAG,
   Items.SHARED_MAGIC_UPGRADE,
@@ -674,6 +677,16 @@ export class LogicPassWorldTransform {
       this.removeItem(Items.SHARED_HOOKSHOT, 1);
     } else if (this.state.settings.shortHookshotMm) {
       this.addItem(Items.MM_HOOKSHOT);
+    }
+
+    if (settings.sharedMagicSpells) {
+      this.replaceItem(Items.OOT_SPELL_FIRE, Items.SHARED_SPELL_FIRE);
+      this.replaceItem(Items.OOT_SPELL_WIND, Items.SHARED_SPELL_WIND);
+      this.replaceItem(Items.OOT_SPELL_LOVE, Items.SHARED_SPELL_LOVE);
+    } else if (settings.magicSpellsMm) {
+      this.addItem(Items.MM_SPELL_FIRE);
+      this.addItem(Items.MM_SPELL_WIND);
+      this.addItem(Items.MM_SPELL_LOVE);
     }
 
     if (settings.sharedLens) {

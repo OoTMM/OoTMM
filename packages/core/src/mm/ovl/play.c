@@ -104,9 +104,9 @@ static void debugCheat(GameState_Play* play)
         gSave.playerData.healthMax = 0x10 * 20;
         gSave.playerData.health = gSave.playerData.healthMax;
 
-        gMmExtraTrade.trade1 = 0x1f;
-        gMmExtraTrade.trade2 = 0x03;
-        gMmExtraTrade.trade3 = 0x03;
+        gMmExtraTrade.trade1 = 0x3f;
+        gMmExtraTrade.trade2 = 0x07;
+        gMmExtraTrade.trade3 = 0x07;
 
         gSave.inventory.items[ITS_MM_TRADE1] = ITEM_MM_DEED_LAND;
         gSave.inventory.items[ITS_MM_TRADE2] = ITEM_MM_ROOM_KEY;
@@ -295,7 +295,7 @@ void hookPlay_Init(GameState_Play* play)
             Sram_SaveNewDay(play);
             play->nextEntrance = entranceForOverride(g.initialEntrance);
             play->transitionTrigger = TRANS_TRIGGER_NORMAL;
-            play->transitionType = TRANS_TYPE_BLACK;
+            play->transitionType = TRANS_TYPE_FADE_BLACK;
             return;
         }
     }
