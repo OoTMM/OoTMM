@@ -378,6 +378,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
     base.sharedHealth = true;
     base.sharedSoulsEnemy = true;
     base.sharedSkeletonKey = true;
+    base.sharedMagicSpells = true;
     break;
   default:
     base.sharedNutsSticks = booleanWeighted(random, 0.5);
@@ -391,6 +392,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
     base.sharedHealth = booleanWeighted(random, 0.5);
     base.sharedSoulsEnemy = booleanWeighted(random, 0.5);
     base.sharedSkeletonKey = booleanWeighted(random, 0.5);
+    base.sharedMagicSpells = booleanWeighted(random, 0.5);
 
     /* Masks - grouping */
     switch (randomInt(random, 4)) {
@@ -449,6 +451,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
 
   base.fairyOcarinaMm = booleanWeighted(random, 0.5);
   base.shortHookshotMm = booleanWeighted(random, 0.25);
+  base.magicSpellsMm = booleanWeighted(random, 0.25);
 
   /* Extra Wallets - 25% none, 25% all, 50% individual */
   switch (randomInt(random, 4)) {

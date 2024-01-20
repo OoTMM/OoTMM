@@ -46,7 +46,7 @@ struct Actor_EnDivingGame
     /* 0x030F */ u8 unk_31F; // flag
     /* 0x0310 */ char unk_320[0x4]; // unused
     /* 0x0314 */ u8 interactInfo[0x28]; // NpcInteractInfo
-    /* 0x033C */ u8 collider[0x4C]; // ColliderCylinder
+    /* 0x033C */ ColliderCylinder collider;
 } ;
 
 _Static_assert(sizeof(Actor_EnDivingGame) == 0x0388, "OoT Actor_EnDivingGame size is wrong");

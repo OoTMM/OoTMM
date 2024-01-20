@@ -18,6 +18,6 @@ void comboCreditWarp(GameState_Play* play)
     link->state |= PLAYER_ACTOR_STATE_FROZEN;
     play->nextEntrance = 0x5400;
     play->transitionTrigger = TRANS_TRIGGER_NORMAL;
-    play->transitionType = TRANS_TYPE_BLACK;
+    play->transitionType = TRANS_TYPE_FADE_BLACK;
     gSaveContext.nextCutscene = 0xfff7;
 }

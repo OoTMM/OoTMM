@@ -294,6 +294,11 @@
 #define ITEM_MM_BOTTLE_GOLD_DUST            0xa1
 #define ITEM_MM_BOTTLE_SEAHORSE             0xa3
 
+#define ITEM_MM_CUSTOM_MIN                  0xb0
+#define ITEM_MM_SPELL_WIND                  0xb0
+#define ITEM_MM_SPELL_LOVE                  0xb1
+#define ITEM_MM_SPELL_FIRE                  0xb2
+
 #define ITEM_NONE       0xff
 
 /* Item slots */

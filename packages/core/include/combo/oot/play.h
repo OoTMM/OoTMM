@@ -285,39 +285,10 @@ ASSERT_OFFSET(PauseContext, pad_27B,                    0x27b);
 
 _Static_assert(sizeof(PauseContext) == 0x2b4, "OoT PauseContext size is wrong");
 
-/* Start: 0x11d30 */
-typedef struct
-{
-    char    unk_000[0x70];
-    float   billboardMtxF[16];
-    char    unk_0b0[0x08];
-    u8      age;
-    char    unk_0b9[0x01];
-    u8      spawnId;
-    char    unk_0bb[0x2a];
-    u8      type;
-    char    unk_0e6[0x04];
-    u16     entrance;
-    char    unk_0ec[0x42];
-    u8      gfx;
-    char    unk_12f[0x1];
-}
-TransitionContext;
-
-_Static_assert(sizeof(TransitionContext) == 0x130, "OoT TransitionContext size is wrong");
-ASSERT_OFFSET(TransitionContext, unk_000,       0x000);
-ASSERT_OFFSET(TransitionContext, billboardMtxF, 0x070);
-ASSERT_OFFSET(TransitionContext, unk_0b0,       0x0b0);
-ASSERT_OFFSET(TransitionContext, age,           0x0b8);
-ASSERT_OFFSET(TransitionContext, unk_0b9,       0x0b9);
-ASSERT_OFFSET(TransitionContext, spawnId,       0x0ba);
-ASSERT_OFFSET(TransitionContext, unk_0bb,       0x0bb);
-ASSERT_OFFSET(TransitionContext, type,          0x0e5);
-ASSERT_OFFSET(TransitionContext, unk_0e6,       0x0e6);
-ASSERT_OFFSET(TransitionContext, entrance,      0x0ea);
-ASSERT_OFFSET(TransitionContext, unk_0ec,       0x0ec);
-ASSERT_OFFSET(TransitionContext, gfx,           0x12e);
-ASSERT_OFFSET(TransitionContext, unk_12f,       0x12f);
+typedef struct {
+    /* 0x00 */ u8 numActors;
+    /* 0x04 */ TransitionActorEntry* list;
+} TransitionActorContext; // size = 0x8
 
 typedef struct
 {
@@ -346,10 +317,11 @@ typedef struct
     char            dmaRequest[0x20];
     OSMesgQueue     loadQueue;
     OSMesg          loadMsg;
+    s16             unk_74[2]; // context-specific data used by the current scene draw config
 }
 RoomContext;
 
-_Static_assert(sizeof(RoomContext) == 0x74, "OoT Room size is wrong");
+_Static_assert(sizeof(RoomContext) == 0x78, "OoT Room size is wrong");
 
 #define OBJECT_EXCHANGE_BANK_MAX 19
 
@@ -430,22 +402,58 @@ _Static_assert(sizeof(ActorContext) == 0x140, "OOT ActorContext size is wrong");
 
 typedef struct GameState_Play
 {
-    GameState           gs;
-    u16                 sceneId;
-    char                unk_000a6[0xa];
-    void*               sceneSegment;
-    char                unk_000b4[0x1b6e];
-    ActorContext        actorCtx;
-    CutsceneContext     cutscene;
-    char                unk_1d94[0x344];
-    MessageContext      msgCtx;
-    InterfaceContext    interfaceCtx;
-    PauseContext        pauseCtx;
-    char                unk_10a14[0xd90];
-    ObjectContext       objectCtx;
-    RoomContext         roomCtx;
-    TransitionContext   transition;
-    char                unk_11e60[0x6b8];
+    GameState              gs;
+    u16                    sceneId;
+    char                   unk_000a6[0xa];
+    void*                  sceneSegment;
+    char                   unk_000b4[0x1b6e];
+    ActorContext           actorCtx;
+    CutsceneContext        cutscene;
+    char                   unk_1d94[0x344];
+    MessageContext         msgCtx;
+    InterfaceContext       interfaceCtx;
+    PauseContext           pauseCtx;
+    char                   unk_10a14[0xd90];
+    ObjectContext          objectCtx;
+    RoomContext            roomCtx;
+    TransitionActorContext transiActorCtx;
+    /* 0x11D3C */ void (*playerInit)(Actor_Player* player, struct GameState_Play* play, FlexSkeletonHeader* skelHeader);
+    /* 0x11D40 */ void (*playerUpdate)(Actor_Player* player, struct GameState_Play* play, Input* input);
+    /* 0x11D44 */ int (*isPlayerDroppingFish)(struct GameState_Play* play);
+    /* 0x11D48 */ s32 (*startPlayerFishing)(struct GameState_Play* play);
+    /* 0x11D4C */ s32 (*grabPlayer)(struct GameState_Play* play, Actor_Player* player);
+    /* 0x11D50 */ s32 (*tryPlayerCsAction)(struct GameState_Play* play, Actor* actor, s32 csAction);
+    /* 0x11D54 */ void (*func_11D54)(Actor_Player* player, struct GameState_Play* play);
+    /* 0x11D58 */ s32 (*damagePlayer)(struct GameState_Play* play, s32 damage);
+    /* 0x11D5C */ void (*talkWithPlayer)(struct GameState_Play* play, Actor* actor);
+    /* 0x11D60 */ MtxF viewProjectionMtxF;
+    /* 0x11DA0 */ MtxF billboardMtxF;
+    /* 0x11DE0 */ Mtx* billboardMtx;
+    /* 0x11DE4 */ u32 gameplayFrames;
+    /* 0x11DE8 */ u8 linkAgeOnLoad;
+    /* 0x11DE9 */ u8 haltAllActors;
+    /* 0x11DEA */ u8 spawn;
+    /* 0x11DEB */ u8 numActorEntries;
+    /* 0x11DEC */ u8 numRooms;
+    /* 0x11DF0 */ RomFile* roomList;
+    /* 0x11DF4 */ ActorEntry* playerEntry;
+    /* 0x11DF8 */ ActorEntry* actorEntryList;
+    /* 0x11DFC */ void* unk_11DFC;
+    /* 0x11E00 */ Spawn* spawnList;
+    /* 0x11E04 */ s16* exitList;
+    /* 0x11E08 */ Path* pathList;
+    /* 0x11E0C */ QuestHintCmd* naviQuestHints;
+    /* 0x11E10 */ void* specialEffects;
+    /* 0x11E14 */ u8 skyboxId;
+    /* 0x11E15 */ s8 transitionTrigger; // "fade_direction"
+    /* 0x11E16 */ s16 unk_11E16;
+    /* 0x11E18 */ s16 bgCoverAlpha;
+    /* 0x11E1A */ s16 nextEntranceIndex;
+    /* 0x11E1C */ char unk_11E1C[0x40];
+    /* 0x11E5C */ s8 shootingGalleryStatus;
+    /* 0x11E5D */ s8 bombchuBowlingStatus; // "bombchu_game_flag"
+    /* 0x11E5E */ u8 transitionType;
+    char                   unk_11e60[0x6b8];
 }
 GameState_Play;
 
@@ -453,11 +461,10 @@ ASSERT_OFFSET(GameState_Play, sceneSegment,         0x000b0);
 ASSERT_OFFSET(GameState_Play, actorCtx,             0x01c24);
 ASSERT_OFFSET(GameState_Play, cutscene,             0x01d64);
 ASSERT_OFFSET(GameState_Play, roomCtx,              0x11cbc);
-ASSERT_OFFSET(GameState_Play, transition,           0x11d30);
-ASSERT_OFFSET(GameState_Play, transition.type,      0x11e15);
-ASSERT_OFFSET(GameState_Play, transition.entrance,  0x11e1a);
+ASSERT_OFFSET(GameState_Play, transiActorCtx,       0x11d34);
+ASSERT_OFFSET(GameState_Play, transitionTrigger,    0x11e15);
+ASSERT_OFFSET(GameState_Play, nextEntranceIndex,    0x11e1a);
 
-_Static_assert(sizeof(TransitionContext) == 0x130, "OoT TransitionContext size is wrong");
 _Static_assert(sizeof(GameState_Play) == 0x12518, "OoT GameState_Play size is wrong");
 
 typedef struct {

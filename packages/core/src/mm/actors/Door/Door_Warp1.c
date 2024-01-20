@@ -183,7 +183,7 @@ static void DoorWarp1_TriggerBossWarpPad(Actor* this, GameState_Play* play)
 
     play->nextEntrance = entrance;
     play->transitionTrigger = TRANS_TRIGGER_NORMAL;
-    play->transitionType = TRANS_TYPE_BLACK;
+    play->transitionType = TRANS_TYPE_FADE_BLACK;
 
     gIsEntranceOverride = 1;
 }

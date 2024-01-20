@@ -85,6 +85,9 @@ const SHARED_ITEMS_OOT = new Map([
   ['SHARED_BOMBCHU_10',       'OOT_BOMBCHU_10'],
   ['SHARED_BOMBCHU_20',       'OOT_BOMBCHU_20'],
   ['SHARED_FAIRY_BIG',        'OOT_FAIRY_BIG'],
+  ['SHARED_SPELL_FIRE',       'OOT_SPELL_FIRE'],
+  ['SHARED_SPELL_WIND',       'OOT_SPELL_WIND'],
+  ['SHARED_SPELL_LOVE',       'OOT_SPELL_LOVE'],
 ]);
 
 const SHARED_ITEMS_MM = new Map([
@@ -142,6 +145,9 @@ const SHARED_ITEMS_MM = new Map([
   ['SHARED_BOMBCHU_10',       'MM_BOMBCHU_10'],
   ['SHARED_BOMBCHU_20',       'MM_BOMBCHU_20'],
   ['SHARED_FAIRY_BIG',        'MM_FAIRY_BIG'],
+  ['SHARED_SPELL_FIRE',       'MM_SPELL_FIRE'],
+  ['SHARED_SPELL_WIND',       'MM_SPELL_WIND'],
+  ['SHARED_SPELL_LOVE',       'MM_SPELL_LOVE'],
 ]);
 
 const SHARED_ITEMS = {
@@ -692,6 +698,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     SHARED_SOULS_ENEMY: settings.sharedSoulsEnemy,
     SHARED_OCARINA_BUTTONS: settings.sharedOcarinaButtons,
     SHARED_SHIELDS: settings.sharedShields,
+    SHARED_MAGIC_SPELLS: settings.sharedMagicSpells,
     OOT_CROSS_WARP: settings.crossWarpOot,
     MM_CROSS_WARP: settings.crossWarpMm !== 'none',
     MM_CROSS_WARP_ADULT: settings.crossWarpMm === 'full',
@@ -764,6 +771,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     OOT_BRIDGE_VANILLA: settings.rainbowBridge === 'vanilla',
     OOT_BRIDGE_MEDALLIONS: settings.rainbowBridge === 'medallions',
     OOT_BRIDGE_CUSTOM: settings.rainbowBridge === 'custom',
+    MM_MAGIC_SPELLS: settings.magicSpellsMm,
     MULTIPLAYER: settings.mode !== 'single',
     MM_OPEN_WF: world.resolvedFlags.openDungeonsMm.has('WF'),
     MM_OPEN_SH: world.resolvedFlags.openDungeonsMm.has('SH'),

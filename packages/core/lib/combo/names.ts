@@ -453,9 +453,9 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   OOT_SOUL_BOSS_VOLVAGIA: "Soul of Volvagia",
   OOT_SOUL_ENEMY_WALLMASTER: "Soul of Wallmasters (OoT)",
   OOT_SOUL_ENEMY_WOLFOS: "Soul of Wolfoses (OoT)",
-  OOT_SPELL_FIRE: "Din's Fire",
-  OOT_SPELL_LOVE: "Nayru's Love",
-  OOT_SPELL_WIND: "Farore's Wind",
+  OOT_SPELL_FIRE: "Din's Fire (OoT)",
+  OOT_SPELL_LOVE: "Nayru's Love (OoT)",
+  OOT_SPELL_WIND: "Farore's Wind (OoT)",
   OOT_STICK_UPGRADE: "Deku Stick Upgrade",
   OOT_STICK: "Deku Stick (OoT)",
   OOT_STICKS_10: "10 Deku Sticks (OoT)",
@@ -554,6 +554,9 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   SHARED_TRIFORCE_WISDOM: "Triforce of Wisdom",
   SHARED_TRIFORCE: "Triforce Piece",
   SHARED_WALLET: "Progressive Wallet",
+  SHARED_SPELL_FIRE: "Din's Fire",
+  SHARED_SPELL_LOVE: "Nayru's Love",
+  SHARED_SPELL_WIND: "Farore's Wind",
   OOT_BUTTON_A: "A Button (OoT)",
   OOT_BUTTON_C_RIGHT: "C-Right Button (OoT)",
   OOT_BUTTON_C_LEFT: "C-Left Button (OoT)",
@@ -678,6 +681,9 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   MM_FAIRY_BIG: 'Big Fairy (MM)',
   SHARED_FAIRY_BIG: 'Big Fairy',
   OOT_BOTTLE_BLUE_FIRE: "Bottle of Blue Fire",
+  MM_SPELL_FIRE: "Din's Fire (MM)",
+  MM_SPELL_LOVE: "Nayru's Love (MM)",
+  MM_SPELL_WIND: "Farore's Wind (MM)",
 };
 
 export function itemName(item: string) {
