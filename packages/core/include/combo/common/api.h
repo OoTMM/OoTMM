@@ -431,4 +431,6 @@ LightNode* LightContext_InsertLight(GameState_Play* play, LightContext* lightCtx
 
 void Actor_DrawLensActors(GameState_Play* play, s32 numLensActors, Actor** lensActors);
 
+f32 Player_GetHeight(Actor_Player* player);
+
 extern void* __osPiHandle;
