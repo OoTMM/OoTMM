@@ -61,15 +61,29 @@ static Gfx sDiamondModelDL[8] = {
     gsSPEndDisplayList(),
 };
 
+static f32 MagicDark_GetScale(Actor_Player* player)
+{
+    switch (player->transformation)
+    {
+    case MM_PLAYER_FORM_FIERCE_DEITY:
+        return 0.8f;
+    case MM_PLAYER_FORM_GORON:
+        return 0.6f;
+    case MM_PLAYER_FORM_ZORA:
+        return 0.6f;
+    case MM_PLAYER_FORM_DEKU:
+        return 0.4f;
+    case MM_PLAYER_FORM_HUMAN:
+        return 0.4f;
+    }
+    return 0.0f;
+}
+
 void MagicDark_Init(Actor* thisx, GameState_Play* play) {
     MagicDark* this = (MagicDark*)thisx;
     Actor_Player* player = GET_LINK(play);
 
-    // if (!LINK_IS_ADULT) {
-        this->scale = 0.4f;
-    // } else {
-    //     this->scale = 0.6f;
-    // }
+    this->scale = MagicDark_GetScale(player);
 
     thisx->position = player->base.position;
     ActorSetScale(&this->actor, 0.0f);
@@ -118,6 +132,9 @@ void MagicDark_DiamondUpdate(Actor* thisx, GameState_Play* play) {
         ActorDestroy(thisx);
         return;
     }
+
+    f32 scaleTarget = MagicDark_GetScale(player);
+    Math_StepToF(&this->scale, scaleTarget, 0.01f);
 
     player->invincibilityTimer = -100;
     thisx->scale.x = thisx->scale.z = this->scale;
@@ -238,11 +255,12 @@ void MagicDark_DiamondDraw(Actor* thisx, GameState_Play* play) {
 
         this->actor.position.x = player->bodyPartsPos[PLAYER_BODYPART_WAIST].x;
         this->actor.position.z = player->bodyPartsPos[PLAYER_BODYPART_WAIST].z;
-        heightDiff = player->bodyPartsPos[PLAYER_BODYPART_WAIST].y - this->actor.position.y;
+        f32 y = player->base.position.y + Player_GetHeight(player) * 0.5f;
+        heightDiff = y - this->actor.position.y;
         if (heightDiff < -2.0f) {
-            this->actor.position.y = player->bodyPartsPos[PLAYER_BODYPART_WAIST].y + 2.0f;
+            this->actor.position.y = y + 2.0f;
         } else if (heightDiff > 2.0f) {
-            this->actor.position.y = player->bodyPartsPos[PLAYER_BODYPART_WAIST].y - 2.0f;
+            this->actor.position.y = y - 2.0f;
         }
         ModelViewTranslate(this->actor.position.x, this->actor.position.y, this->actor.position.z, MAT_SET);
         ModelViewScale(this->actor.scale.x, this->actor.scale.y, this->actor.scale.z, MAT_MUL);
