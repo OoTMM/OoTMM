@@ -245,6 +245,8 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
     base.skipZelda = true;
     base.openMoon = true;
     base.openWoodfall = true;
+    base.openSnowhead = true;
+    base.openGreatBay = true;
     base.openStoneTower = true;
     base.doorOfTime = 'open';
     base.dekuTree = 'open';
@@ -256,6 +258,8 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
     base.skipZelda = false;
     base.openMoon = false;
     base.openWoodfall = false;
+    base.openSnowhead = false;
+    base.openGreatBay = false;
     base.openStoneTower = false;
     base.doorOfTime = 'closed';
     base.dekuTree = 'closed';
@@ -267,6 +271,8 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
     base.skipZelda = booleanWeighted(random, 0.3);
     base.openMoon = booleanWeighted(random, 0.3);
     base.openWoodfall = booleanWeighted(random, 0.3);
+    base.openSnowhead = booleanWeighted(random, 0.3);
+    base.openGreatBay = booleanWeighted(random, 0.3);
     base.openStoneTower = booleanWeighted(random, 0.3);
     base.doorOfTime = sampleWeighted(random, { closed: 10, open: 7 });
     base.dekuTree = sampleWeighted(random, { open: 10, closed: 7 });

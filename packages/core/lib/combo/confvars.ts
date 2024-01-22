@@ -113,6 +113,8 @@ export const CONFVARS = [
   'OOT_BRIDGE_CUSTOM',
   'MULTIPLAYER',
   'MM_OPEN_WF',
+  'MM_OPEN_SH',
+  'MM_OPEN_GB',
   'MM_OPEN_ST',
 ] as const;
 

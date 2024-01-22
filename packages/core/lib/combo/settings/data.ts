@@ -687,6 +687,20 @@ export const SETTINGS = [{
   description: 'Raises the Woodfall Temple without needing to play the song.',
   default: false
 }, {
+  key: 'openSnowhead',
+  name: 'Stop Snowhead Blizzard',
+  category: 'main.events',
+  type: 'boolean',
+  description: 'Stops the blizzard at Snowhead without needing to play the song.',
+  default: false
+}, {
+  key: 'openGreatBay',
+  name: 'Raise Great Bay Turtle',
+  category: 'main.events',
+  type: 'boolean',
+  description: 'Raises the Great Bay turtle without needing to play the song.',
+  default: false
+}, {
   key: 'openStoneTower',
   name: 'Open Uninverted Stone Tower',
   category: 'main.events',

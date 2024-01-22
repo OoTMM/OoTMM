@@ -268,6 +268,18 @@ void hookPlay_Init(GameState_Play* play)
         MM_SET_EVENT_WEEK(EV_MM_WEEK_WOODFALL_TEMPLE_RISE);
     }
 
+    /* Make Biggoron move with setting enabled */
+    if (comboConfig(CFG_MM_OPEN_SH))
+    {
+        MM_SET_EVENT_WEEK(EV_MM_WEEK_SNOWHEAD_BLIZZARD);
+    }
+
+    /* Make turtle surface with setting enabled */
+    if (comboConfig(CFG_MM_OPEN_GB))
+    {
+        MM_SET_EVENT_WEEK(EV_MM_WEEK_GREAT_BAY_TURTLE);
+    }
+
     Play_Init(play);
     gPlay = play;
     gLastEntrance = gSave.entranceIndex;

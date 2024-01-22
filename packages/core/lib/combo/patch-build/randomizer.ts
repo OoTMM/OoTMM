@@ -766,6 +766,8 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     OOT_BRIDGE_CUSTOM: settings.rainbowBridge === 'custom',
     MULTIPLAYER: settings.mode !== 'single',
     MM_OPEN_WF: settings.openWoodfall,
+    MM_OPEN_SH: settings.openSnowhead,
+    MM_OPEN_GB: settings.openGreatBay,
     MM_OPEN_ST: settings.openStoneTower,
   };
 
