@@ -54,7 +54,7 @@ u32 Interface_GetCustomIconTexture(GameState_Play* play, PauseContext* pauseCtx)
 
 extern u8 gPlayerFormCustomItemRestrictions[5][8];
 
-u8 Interface_GetItemRestriction(u8 playerForm, u8 item)
+u8 Interface_GetItemRestriction(u8 playerForm, u8 item, GameState_Play* play)
 {
     u8 (*gPlayerFormItemRestrictions)[0x72] = (u8(*)[0x72])0x801c2410;
     if (item < ITEM_MM_CUSTOM_MIN)
@@ -63,6 +63,9 @@ u8 Interface_GetItemRestriction(u8 playerForm, u8 item)
     }
     else
     {
+        if (item == ITEM_MM_SPELL_WIND && play->interfaceCtx.restrictions.songOfSoaring) {
+            return 0;
+        }
         u8 customItem = item - ITEM_MM_CUSTOM_MIN;
         return gPlayerFormCustomItemRestrictions[playerForm][customItem];
     }
