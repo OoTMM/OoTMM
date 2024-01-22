@@ -341,14 +341,46 @@ void Player_Action_FaroresWindText(Actor_Player* this, GameState_Play* play)
 
         if (play->msgCtx.choiceIndex == 0)
         {
+            s32 entrance = gSaveContext.save.fw.entranceIndex & 0xFF00;
+            Vec3f* pos = &gSaveContext.save.fw.pos;
+            if (entrance == 0x8a00 || entrance == 0x9400) // Goron Village (Spring) or Goron Village (Winter)
+            {
+                if (MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH) && pos->x > 1100.0f) // from Lens Cave
+                {
+                    // spawn near the owl area instead
+                    pos->x = 1189.0f;
+                    pos->z = -911.0f;
+                }
+            }
+            else if (entrance == 0x8600) // Woodfall
+            {
+                if (!MM_GET_EVENT_WEEK(EV_MM_WEEK_WOODFALL_TEMPLE_RISE) && ABS(pos->z) < 500.0f)
+                {
+                    if (pos->z > 0) // from front of temple
+                    {
+                        // spawn at owl statue instead
+                        pos->x = 1.0f;
+                        pos->y = 200.0f;
+                        pos->z = 1094.0f;
+                    }
+                    else // from back of temple
+                    {
+                        // spawn near exit to southern swamp instead
+                        pos->x = -41.0f;
+                        pos->y = 12.0f;
+                        pos->z = -1353.0f;
+                    }
+                }
+            }
+
             gSaveContext.respawnFlag = 3;
             play->transitionTrigger = TRANS_TRIGGER_NORMAL;
-            play->nextEntrance = gSaveContext.save.fw.entranceIndex;
+            play->nextEntrance = entrance;
             play->transitionType = TRANS_TYPE_FADE_BLACK;
             gSaveContext.respawn[RESPAWN_MODE_TOP].pos = gSaveContext.save.fw.pos;
             gSaveContext.respawn[RESPAWN_MODE_TOP].yaw = gSaveContext.save.fw.yaw;
             gSaveContext.respawn[RESPAWN_MODE_TOP].playerParams = gSaveContext.save.fw.playerParams;
-            gSaveContext.respawn[RESPAWN_MODE_TOP].entrance = gSaveContext.save.fw.entranceIndex;
+            gSaveContext.respawn[RESPAWN_MODE_TOP].entrance = entrance;
             gSaveContext.respawn[RESPAWN_MODE_TOP].roomIndex = gSaveContext.save.fw.roomIndex;
             gSaveContext.respawn[RESPAWN_MODE_TOP].tempSwitchFlags = gSaveContext.save.fw.tempSwchFlags;
             gSaveContext.respawn[RESPAWN_MODE_TOP].tempCollectFlags = gSaveContext.save.fw.tempCollectFlags;
