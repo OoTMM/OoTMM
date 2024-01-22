@@ -680,6 +680,20 @@ export const SETTINGS = [{
   description: 'Allows access to the Fire Temple as child.',
   default: false
 }, {
+  key: 'openWoodfall',
+  name: 'Raise Woodfall Temple',
+  category: 'main.events',
+  type: 'boolean',
+  description: 'Raises the Woodfall Temple without needing to play the song.',
+  default: false
+}, {
+  key: 'openStoneTower',
+  name: 'Open Uninverted Stone Tower',
+  category: 'main.events',
+  type: 'boolean',
+  description: 'Enables a Wisp and aligns the top set of blocks in Stone Tower.',
+  default: false
+}, {
   key: 'kakarikoGate',
   name: 'Kakariko Gate',
   category: 'main.events',

@@ -262,6 +262,12 @@ void hookPlay_Init(GameState_Play* play)
     MM_SET_EVENT_WEEK(MM_EV(82, 0));
     MM_SET_EVENT_WEEK(MM_EV(82, 1));
 
+    /* Raise Woodfall Temple with setting enabled */
+    if (comboConfig(CFG_MM_OPEN_WF))
+    {
+        MM_SET_EVENT_WEEK(EV_MM_WEEK_WOODFALL_TEMPLE_RISE);
+    }
+
     Play_Init(play);
     gPlay = play;
     gLastEntrance = gSave.entranceIndex;
