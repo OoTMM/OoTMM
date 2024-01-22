@@ -433,4 +433,6 @@ void Actor_DrawLensActors(GameState_Play* play, s32 numLensActors, Actor** lensA
 
 f32 Player_GetHeight(Actor_Player* player);
 
+s32 Entrance_GetSceneIdAbsolute(u16 entrance);
+
 extern void* __osPiHandle;

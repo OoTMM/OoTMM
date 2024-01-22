@@ -550,16 +550,62 @@ void Actor_DrawFaroresWindPointer(GameState_Play* play)
 
         lightRadius = 500.0f * ratio;
 
-        // TODO draw in cleared/uncleared scene pairs.
-        if ((play->csCtx.state == CS_STATE_IDLE) && ((gSaveContext.save.fw.entranceIndex & 0xFF00) == (gSaveContext.save.entranceIndex & 0xFF00)))
+        s32 fwSceneId = Entrance_GetSceneIdAbsolute(gSaveContext.save.fw.entranceIndex);
+        s32 fwRoomId = gSaveContext.save.fw.roomIndex;
+
+        s32 sceneMatches = fwSceneId == play->sceneId;
+
+        f32 yPos = gFwPointerPos.y + yOffset;
+
+        if (!sceneMatches)
+        {
+            switch (play->sceneId)
+            {
+            case SCE_MM_TWIN_ISLANDS_WINTER:
+                sceneMatches = fwSceneId == SCE_MM_TWIN_ISLANDS_SPRING;
+                break;
+            case SCE_MM_GORON_VILLAGE_WINTER:
+                sceneMatches = fwSceneId == SCE_MM_GORON_VILLAGE_SPRING;
+                break;
+            case SCE_MM_MOUNTAIN_VILLAGE_WINTER:
+                sceneMatches = fwSceneId == SCE_MM_MOUNTAIN_VILLAGE_SPRING;
+                break;
+            case SCE_MM_TWIN_ISLANDS_SPRING:
+                sceneMatches = fwSceneId == SCE_MM_TWIN_ISLANDS_WINTER;
+                break;
+            case SCE_MM_GORON_VILLAGE_SPRING:
+                sceneMatches = fwSceneId == SCE_MM_GORON_VILLAGE_WINTER;
+                break;
+            case SCE_MM_MOUNTAIN_VILLAGE_SPRING:
+                sceneMatches = fwSceneId == SCE_MM_MOUNTAIN_VILLAGE_WINTER;
+                break;
+            case SCE_MM_SOUTHERN_SWAMP_CLEAR:
+                sceneMatches = fwSceneId == SCE_MM_SOUTHERN_SWAMP;
+                break;
+            case SCE_MM_SOUTHERN_SWAMP:
+                sceneMatches = fwSceneId == SCE_MM_SOUTHERN_SWAMP_CLEAR;
+                break;
+            case SCE_MM_TEMPLE_STONE_TOWER:
+                sceneMatches = fwSceneId == SCE_MM_TEMPLE_STONE_TOWER_INVERTED;
+                yPos *= -1.0f;
+                break;
+            case SCE_MM_TEMPLE_STONE_TOWER_INVERTED:
+                sceneMatches = fwSceneId == SCE_MM_TEMPLE_STONE_TOWER;
+                yPos *= -1.0f;
+                break;
+            }
+        }
+
+        s32 shouldDraw = sceneMatches
+                && (D_8015BC18 != 0.0f || fwRoomId == play->roomCtx.curRoom.id || fwRoomId == play->roomCtx.prefRoom.id);
+
+        if ((play->csCtx.state == CS_STATE_IDLE) && shouldDraw)
         {
             f32 scale = 0.025f * ratio;
 
             POLY_XLU_DISP = Gfx_SetupDL(POLY_XLU_DISP, 25); // SETUPDL_25
 
-            ModelViewTranslate(((void)0, gFwPointerPos.x),
-                             ((void)0, gFwPointerPos.y) + yOffset,
-                             ((void)0, gFwPointerPos.z), MAT_SET);
+            ModelViewTranslate(gFwPointerPos.x, yPos, gFwPointerPos.z, MAT_SET);
             ModelViewScale(scale, scale, scale, MAT_MUL);
             ModelViewMult(&play->billboardMtxF, MAT_MUL);
             MatrixStackDup();
@@ -580,9 +626,9 @@ void Actor_DrawFaroresWindPointer(GameState_Play* play)
                       G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
             gSPDisplayList(POLY_XLU_DISP++, 0x04000000 | 0x23210); // gEffFlash1DL
 
-            Lights_PointNoGlowSetInfo(&D_8015BC00, ((void)0, gFwPointerPos.x),
-                                    ((void)0, gFwPointerPos.y) + yOffset,
-                                    ((void)0, gFwPointerPos.z), 255, 255, 255, lightRadius);
+            Lights_PointNoGlowSetInfo(&D_8015BC00, gFwPointerPos.x,
+                                    yPos,
+                                    gFwPointerPos.z, 255, 255, 255, lightRadius);
         }
         CLOSE_DISPS();
     }
