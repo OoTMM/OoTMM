@@ -26,7 +26,7 @@ static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
 static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
 {
     play->transitionTrigger = TRANS_TRIGGER_NORMAL;
-    play->transitionType = TRANS_TYPE_BLACK;
+    play->transitionType = TRANS_TYPE_FADE_BLACK;
 
     switch (this->base.variable)
     {
@@ -76,12 +76,6 @@ static void CustomWarp_Update(Actor_CustomWarp* this, GameState_Play* play)
     }
 }
 
-#if defined(GAME_OOT)
-static const u32 kMatTransformOffset = 0x11da0;
-#else
-static const u32 kMatTransformOffset = 0x187fc;
-#endif
-
 /* TODO: Move this into a helper */
 static void shaderFlameEffect(GameState_Play* play)
 {
@@ -92,7 +86,7 @@ static void shaderFlameEffect(GameState_Play* play)
 #endif
 
     OPEN_DISPS(play->gs.gfx);
-    ModelViewUnkTransform((float*)((char*)play + kMatTransformOffset));
+    ModelViewUnkTransform(&play->billboardMtxF);
     gSPSegment(POLY_XLU_DISP++, 0x08, DisplaceTexture(play->gs.gfx, 0, 0, 0, 0x20, 0x40, 1, 0, (-play->gs.frameCount & 0x7f) << 2, 0x20, 0x80));
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gDPSetPrimColor(POLY_XLU_DISP++, 0x80, 0x80, 0xff, 0x00, 0xff, 0xff);

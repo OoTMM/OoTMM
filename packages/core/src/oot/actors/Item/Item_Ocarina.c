@@ -20,14 +20,11 @@ static void ItemOcarina_ItemOverride(ComboItemOverride* o, int index)
 
 void ItemOcarina_HandlerItem2(Actor* this, GameState_Play* play)
 {
-    TransitionContext* t;
-
     if (Message_IsClosed(this, play))
     {
-        t = &play->transition;
-        t->type = TRANS_TYPE_NORMAL;
-        t->gfx = TRANS_GFX_SHORTCUT;
-        t->entrance = 0x050f;
+        play->transitionTrigger = TRANS_TYPE_NORMAL;
+        play->transitionType = TRANS_GFX_SHORTCUT;
+        play->nextEntranceIndex = 0x050f;
         ActorDestroy(this);
     }
 }

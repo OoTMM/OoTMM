@@ -2,11 +2,11 @@
 
 void EnMag_BeforeUpdate(Actor* this, GameState_Play* play)
 {
-    if (gComboCtx.valid && play->transition.type == 0)
+    if (gComboCtx.valid && play->transitionTrigger == 0)
     {
         *(u32*)(((char*)&gSaveContext) + 4956) = 2;
-        play->transition.type = TRANS_TYPE_NORMAL;
-        play->transition.gfx = 4;
+        play->transitionTrigger = TRANS_TYPE_NORMAL;
+        play->transitionType = 4;
     }
 }
 

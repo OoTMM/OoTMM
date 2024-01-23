@@ -483,7 +483,10 @@
 # define AC_OBJ_WTURN           0x027
 # define AC_EN_RIVER_SOUND      0x028
 # define AC_EN_OSSAN            0x02a
+# define AC_CUSTOM_SPELL_FIRE   0x02b
+# define AC_CUSTOM_SPELL_WIND   0x02c
 # define AC_EN_FAMOS            0x02d
+# define AC_CUSTOM_SPELL_LOVE   0x02e
 # define AC_EN_BOMBF            0x02f
 # define AC_EN_AM               0x032
 # define AC_EN_DEKUBABA         0x033
@@ -1094,6 +1097,16 @@ ActorList;
 
 ASSERT_OFFSET(Actor, variable, 0x01c);
 
+typedef struct PosRot {
+    /* 0x00 */ Vec3f pos;
+    /* 0x0C */ Vec3s rot;
+} PosRot; // size = 0x14
+
+typedef struct BlinkInfo {
+    /* 0x0 */ s16 eyeTexIndex;
+    /* 0x2 */ s16 blinkTimer;
+} BlinkInfo; // size = 0x4
+
 #if defined(GAME_OOT)
 _Static_assert(sizeof(Actor) == 0x13c, "OoT Actor size is wrong");
 _Static_assert(sizeof(ActorList) == 0x8, "OoT ActorList size is wrong");
@@ -1106,6 +1119,22 @@ _Static_assert(sizeof(ActorList) == 0xC, "MM ActorList size is wrong");
 
 Actor* comboSpawnActor(ActorContext* actorCtx, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable);
 Actor* comboSpawnActorEx(ActorContext* actorCtx, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int ex1, int ex2, int ex3);
+
+typedef enum {
+    /* 0x00 */ ACTORCAT_SWITCH,
+    /* 0x01 */ ACTORCAT_BG,
+    /* 0x02 */ ACTORCAT_PLAYER,
+    /* 0x03 */ ACTORCAT_EXPLOSIVE,
+    /* 0x04 */ ACTORCAT_NPC,
+    /* 0x05 */ ACTORCAT_ENEMY,
+    /* 0x06 */ ACTORCAT_PROP,
+    /* 0x07 */ ACTORCAT_ITEMACTION,
+    /* 0x08 */ ACTORCAT_MISC,
+    /* 0x09 */ ACTORCAT_BOSS,
+    /* 0x0A */ ACTORCAT_DOOR,
+    /* 0x0B */ ACTORCAT_CHEST,
+    /* 0x0C */ ACTORCAT_MAX
+} ActorCategory;
 
 #endif
 

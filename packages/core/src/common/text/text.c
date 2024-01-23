@@ -382,6 +382,15 @@ static int isItemAmbiguous(s16 gi)
     case GI_MM_BOMBCHU_BAG_10:
     case GI_MM_BOMBCHU_BAG_20:
         return !comboConfig(CFG_SHARED_BOMBCHU);
+    case GI_OOT_SPELL_FIRE:
+    case GI_MM_SPELL_FIRE:
+        return (comboConfig(CFG_MM_SPELL_FIRE) && !comboConfig(CFG_SHARED_SPELL_FIRE));
+    case GI_OOT_SPELL_WIND:
+    case GI_MM_SPELL_WIND:
+        return (comboConfig(CFG_MM_SPELL_WIND) && !comboConfig(CFG_SHARED_SPELL_WIND));
+    case GI_OOT_SPELL_LOVE:
+    case GI_MM_SPELL_LOVE:
+        return (comboConfig(CFG_MM_SPELL_LOVE) && !comboConfig(CFG_SHARED_SPELL_LOVE));
     case GI_OOT_MAGIC_BEAN:
     case GI_OOT_BOTTLE_EMPTY:
     case GI_OOT_BOTTLE_MILK:

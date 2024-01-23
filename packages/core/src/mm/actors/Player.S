@@ -219,9 +219,9 @@ kItemToGi:
 .short 0xA7
 .short 0xA8
 .short GI_MM_PENDANT_OF_MEMORIES
-.short GI_MM_PENDANT_OF_MEMORIES
-.short GI_MM_PENDANT_OF_MEMORIES
-.short GI_MM_PENDANT_OF_MEMORIES
+.short GI_MM_SPELL_FIRE
+.short GI_MM_SPELL_WIND
+.short GI_MM_SPELL_LOVE
 .short GI_MM_MASK_TRUTH
 .short GI_MM_MASK_KAFEI
 .short GI_MM_MASK_ALL_NIGHT
@@ -293,4 +293,74 @@ PATCH_END
 PATCH_START 0x80861c5c
 .int 0
 .int 0
+PATCH_END
+
+/* Magic Spells. TODO PATCH_GROUP ? */
+
+/*
+Replaces:
+  JR    RA
+   NOP
+*/
+PATCH_START 0x8082F58C
+  j     Player_CustomItemToItemAction
+   or   a2, v0, zero
+PATCH_END
+
+Player_CustomCsItem_Hook:
+  addiu     sp, sp, -0x20
+  sw        ra, 0x0014 (sp)
+
+  jal       Player_CustomCsItem
+   or       a0, s0, zero
+
+  lb        a1, 0x014a (s0)
+  lw        ra, 0x0014 (sp)
+  jr        ra
+  addiu     sp, sp, 0x20
+
+/*
+Replaces:
+  lb        a1, 0x14a(s0)
+  slti      at, a1, 0x3a
+  bnez      at, .+0xE0
+   slti     at, a1, 0x52
+  beqzl     at, .+0xDC
+*/
+PATCH_START 0x80838b40
+  jal       Player_CustomCsItem_Hook
+   lw       a1, 0x003c (sp)
+  bgtzl     v0, .+0x67C
+   li       v0, 1
+  beqzl     v0, .+0xDC
+PATCH_END
+
+/*
+Replaces:
+  beq       a2, zero, 0x80831a8c
+   or       v1, a2, zero
+  slti      v1, s1, 0x52
+  beq       v1, zero, 0x80831a8c
+   nop
+  lbu       v1, 0x14b (s0)
+  xori      v1, v1, 0x4
+  sltu      v1, zero, v1
+  bne       v1, zero, 0x80831a8c
+   nop
+  slti      v1, s1, 0x4d
+  xori      v1, v1, 0x1
+*/
+PATCH_START 0x80831a5c
+  or        a0, s0, zero
+  jal       Player_CustomUseItem
+   or       a1, s1, zero
+  bgtzl     v0, .+0x4BC
+   lw        ra, 0x002c (sp)
+  sub      v1, zero, v0
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
 PATCH_END

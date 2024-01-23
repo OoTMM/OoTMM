@@ -35,6 +35,8 @@ DisplayListBuffer;
 
 #define GRAPH_ALLOC(gfxCtx, size) ((void*)((gfxCtx)->polyOpa.end = (Gfx*)((u8*)(gfxCtx)->polyOpa.end - ALIGN(size, 16))))
 
+Gfx*    Gfx_SetupDL(Gfx* gfx, u32 i);
+Gfx*    Gfx_SetupDL57(Gfx* gfx);
 void    InitListPolyOpa(GfxContext* gfx);
 void    InitListPolyXlu(GfxContext* gfx);
 void    Gfx_SetupDL_42Opa(GfxContext* gfx);

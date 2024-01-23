@@ -14,6 +14,8 @@ Actor_ProcessInitChain = 0x800ffadc;
 
 ActorRemove = 0x800BB498;
 AddMagic = 0x80115d14;
+Magic_RequestChange = 0x80115db4;
+Magic_Reset = 0x80115D5C;
 Health_ChangeBy = 0x80115908;
 GetRoomClearFlag = 0x800b5cc4;
 
@@ -74,11 +76,13 @@ DrawGi_Rupee                = 0x800efab8;
 DrawGi_MoonTear             = 0x800ef65c;
 DrawGi_BottleFairy          = 0x800ef4d4;
 
+Gfx_SetupDL57 = 0x8012BFC4;
 InitListPolyOpa = 0x8012c28c;
 InitListPolyXlu = 0x8012c2dc;
 Gfx_SetupDL_42Opa = 0x8012c8ac;
 GetMatrixMV     = 0x80181a40;
 DisplaceTexture = 0x8012cbd0;
+Gfx_SetupDL = 0x8012BF78;
 
 gOcarinaPressedButtons = 0x801fd450;
 
@@ -115,13 +119,17 @@ ModelViewRotateY = 0x80180b48;
 ModelViewRotateZ = 0x80180e90;
 ModelViewTranslate = 0x8018029c;
 ModelViewUnkTransform = 0x801820a0;
+ModelViewMult = 0x80180244;
 
 PrepareSave = 0x8014546c;
 AudioOcarina_SetInstrument = 0x8019C300;
 PlaySound = 0x8019f0c8;
+Player_PlaySfx = 0x800B8E58;
 Actor_PlaySfx = 0x800b8ec8;
+Audio_PlaySfx_AtPos = 0x8019F1C0;
 PlayLoopingSfxAtActor = 0x800B9010;
 Message_Close = 0x801477b4;
+Audio_PlaySfx_MessageDecide = 0x8019F208;
 
 RandIntRange = 0x800ff450;
 
@@ -162,6 +170,7 @@ Play_Draw = 0x80168f64;
 
 Player_Update = 0x80160b80;
 LoadIcon = 0x80178e3c;
+CmpDma_LoadAllFiles = 0x80178E7C;
 
 OverlayAddr = 0x801638d8;
 
@@ -189,6 +198,8 @@ MatrixStackPop = 0x801801cc;
 AddRupees = 0x801159ec;
 
 PlayStoreFlags = 0x80169d40;
+Play_GetCamera = 0x801696d4;
+Play_CamIsNotFixed = 0x80169FFC;
 
 gPlayedOcarinaSong = 0x801d8528;
 gIsOcarinaEnabled = 0x801d6fb4;
@@ -216,6 +227,7 @@ SetRoomClear = 0x800b5d30;
 RandFloat = 0x80086fdc;
 
 ActorUpdateVelocity = 0x800b6a88;
+Player_GetHeight = 0x800B6FC8;
 
 Item_DropCollectible = 0x800a7730;
 SpawnCollectible2 = 0x800a7d28;
@@ -223,11 +235,54 @@ SpawnCollectible = 0x800a7730;
 
 EnableOwl = 0x80143a10;
 
+Math_Vec3f_Copy = 0x800FF50C;
+Math_Vec3f_DistXYZAndStoreDiff = 0x800FF8D4;
 VectDist = 0x800ff92c;
 
 sqrtf = 0x8008D700;
 
 Math_CosS = 0x800FED44;
 Math_SinS = 0x800FED84;
+Math_StepToF = 0x800FF03C;
+Math_SmoothStepToF = 0x800FFCD8;
+
+Rand_CenteredFloat = 0x801795C0;
 
 EffectSsIceSmoke_Spawn = 0x800B320C;
+EffectSsKiraKira_SpawnDispersed = 0x800B16F4;
+
+PlayerAnimation_Update = 0x801360e0;
+PlayerAnimation_PlayOnce = 0x8013658C;
+PlayerAnimation_PlayOnceSetSpeed = 0x801365ec;
+PlayerAnimation_PlayLoopSetSpeed = 0x801366ac;
+PlayerAnimation_OnFrame = 0x80136a48;
+
+Camera_SetFinishedFlag = 0x800e0238;
+Camera_ChangeSetting = 0x800DFAC8;
+Camera_GetCamDirPitch = 0x800DFCB4;
+Camera_GetCamDirYaw = 0x800DFCDC;
+Camera_SetCameraData = 0x800E01DC;
+
+Collider_InitCylinder = 0x800E119C;
+Collider_SetCylinder = 0x800E130C;
+Collider_UpdateCylinder = 0x800E7DF8;
+
+CollisionCheck_SetAT = 0x800E2558;
+
+Map_SetAreaEntrypoint = 0x8010A2DC;
+
+SkelCurve_Init = 0x800F2650;
+SkelCurve_Destroy = 0x800F26C0;
+SkelCurve_SetAnim = 0x800F26F0;
+SkelCurve_Update = 0x800F2728;
+SkelCurve_Draw = 0x800F2CD8;
+
+Lights_PointNoGlowSetInfo = 0x801019FC;
+
+Actor_DrawLensActors = 0x800B9EF4;
+
+Play_SetupRespawnPoint = 0x80169E6C;
+
+LightContext_InsertLight = 0x80102624;
+
+Entrance_GetSceneIdAbsolute = 0x80132338;

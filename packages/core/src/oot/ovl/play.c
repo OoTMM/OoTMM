@@ -39,6 +39,8 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_OOT_HOOKSHOT] = ITEM_OOT_LONGSHOT;
         gSave.inventory.items[ITS_OOT_LENS] = ITEM_OOT_LENS;
         gSave.inventory.items[ITS_OOT_SPELL_WIND] = ITEM_OOT_SPELL_WIND;
+        gSave.inventory.items[ITS_OOT_SPELL_FIRE] = ITEM_OOT_SPELL_FIRE;
+        gSave.inventory.items[ITS_OOT_SPELL_LOVE] = ITEM_OOT_SPELL_LOVE;
 
         gSave.inventory.equipment.swords = 0x7;
         gSave.inventory.equipment.shields = 0x7;
@@ -417,7 +419,7 @@ void hookPlay_Init(GameState_Play* play)
     /* Title screen transition skip */
     if (gComboCtx.valid)
     {
-        play->transition.gfx = 11;
+        play->transitionType = 11;
     }
 
     if (!gCustomKeep)

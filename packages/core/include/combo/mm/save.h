@@ -161,6 +161,17 @@ typedef struct
 }
 MmHorseData;
 
+typedef struct {
+    /* 0x00 */ Vec3f pos; // Normally it's a Vec3i, but this is easier.
+    /* 0x0C */ s32 yaw;
+    /* 0x10 */ s32 playerParams;
+    /* 0x14 */ s32 entranceIndex;
+    /* 0x18 */ s32 roomIndex;
+    /* 0x1C */ s32 set;
+    /* 0x20 */ s32 tempSwchFlags;
+    /* 0x24 */ s32 tempCollectFlags;
+} FaroresWindData; // size = 0x28
+
 typedef struct
 {
     s32                     entranceIndex;
@@ -183,7 +194,8 @@ typedef struct
     MmItemEquips            itemEquips;
     MmInventory             inventory;
     MmPermanentSceneFlags   permanentSceneFlags[120];
-    u8                      unk_E18[0x54];
+    FaroresWindData         fw; /* TODO: Are we sure this isn't used? */
+    u8                      unk_E40[0x2C];
     u32                     dekuPlaygroundHighScores[3];
     u32                     pictoFlags0;
     u32                     pictoFlags1;
@@ -238,16 +250,39 @@ typedef struct
 }
 SaveOptions;
 
+typedef struct RespawnData {
+    /* 0x00 */ Vec3f pos;
+    /* 0x0C */ s16 yaw;
+    /* 0x0E */ s16 playerParams;
+    /* 0x10 */ u16 entrance;
+    /* 0x12 */ u8 roomIndex;
+    /* 0x13 */ s8 data;
+    /* 0x14 */ u32 tempSwitchFlags;
+    /* 0x18 */ u32 unk_18;
+    /* 0x1C */ u32 tempCollectFlags;
+} RespawnData; // size = 0x20
+
 typedef struct
 {
-    MmSave              save;
-    u32                 fileIndex;
-    char                unk_3ca4[0x4];
-    s32                 gameMode;
-    s32                 sceneSetupId;
-    char                unk_3cb0[0x077];
-    u8                  grottoChestFlag;
-    char                unk_3d28[0xa8];
+    /* 0x0000 */ MmSave save;
+    /* 0x3CA0 */ u32 fileIndex;
+    /* 0x3CA4 */ s16 powderKegTimer;                    // "big_bom_timer"
+    /* 0x3CA6 */ u8 unk_3CA6;
+    /* 0x3CA7 */ u8 unk_3CA7;                           // "day_night_flag"
+    /* 0x3CA8 */ s32 gameMode;
+    /* 0x3CAC */ s32 sceneSetupId;
+    /* 0x3CB0 */ s32 respawnFlag;                       // "restart_flag"
+    /* 0x3CB4 */ RespawnData respawn[RESPAWN_MODE_MAX]; // "restart_data"
+    /* 0x3DB4 */ f32 entranceSpeed;                     // "player_wipe_speedF"
+    /* 0x3DB8 */ u16 entranceSound;                     // "player_wipe_door_SE"
+    /* 0x3DBA */ u8 unk_3DBA;                           // "player_wipe_item"
+    /* 0x3DBB */ u8 retainWeatherMode;                  // "next_walk"
+    /* 0x3DBC */ s16 dogParams;                         // OoT leftover. "dog_flag"
+    /* 0x3DBE */ u8 envHazardTextTriggerFlags;          // "guide_status"
+    /* 0x3DBF */ u8 showTitleCard;                      // "name_display"
+    /* 0x3DC0 */ s16 nayrusLoveTimer;                   // remnant of OoT, "shield_magic_timer"
+    /* 0x3DC2 */ u8 unk_3DC2;                           // "pad1"
+    /* 0x3DC8 */ OSTime postmanTimerStopOsTime; // The osTime when the timer stops for the postman minigame. "get_time"
     u8                  timerStates[0x7];
     char                unk_3dd7[0x151];
     u16                 magicState;
@@ -273,15 +308,11 @@ typedef struct
 MmSaveContext;
 
 _Static_assert(sizeof(MmSave) == 0x3ca0, "MmSave size is wrong");
-_Static_assert(sizeof(MmSaveContext) == 0x48cc, "MmSaveContext size is wrong");
+_Static_assert(sizeof(MmSaveContext) == 0x48d0, "MmSaveContext size is wrong");
 
 ASSERT_OFFSET(MmSaveContext, fileIndex,         0x3ca0);
-ASSERT_OFFSET(MmSaveContext, unk_3ca4,          0x3ca4);
 ASSERT_OFFSET(MmSaveContext, gameMode,          0x3ca8);
 ASSERT_OFFSET(MmSaveContext, sceneSetupId,      0x3cac);
-ASSERT_OFFSET(MmSaveContext, unk_3cb0,          0x3cb0);
-ASSERT_OFFSET(MmSaveContext, grottoChestFlag,   0x3d27);
-ASSERT_OFFSET(MmSaveContext, unk_3d28,          0x3d28);
 ASSERT_OFFSET(MmSaveContext, timerStates,       0x3dd0);
 ASSERT_OFFSET(MmSaveContext, unk_3dd7,          0x3dd7);
 ASSERT_OFFSET(MmSaveContext, dungeonId2,        0x3f36);
@@ -324,12 +355,12 @@ MmExtraItems;
 
 typedef struct
 {
-    u32 trade1:5;
-    u32 trade2:2;
-    u32 trade3:2;
-    u32 tradeObtained1:5;
-    u32 tradeObtained2:2;
-    u32 tradeObtained3:2;
+    u32 trade1:6;
+    u32 trade2:3;
+    u32 trade3:3;
+    u32 tradeObtained1:6;
+    u32 tradeObtained2:3;
+    u32 tradeObtained3:3;
 }
 MmExtraTrade;
 

@@ -402,3 +402,246 @@ static int GetRoomClearFlagForActor(GameState_Play* play, int flag)
 }
 
 PATCH_CALL(0x800baea0, GetRoomClearFlagForActor);
+
+static LightInfo D_8015BC00;
+static LightNode* D_8015BC10;
+static s32 D_8015BC14;
+static f32 D_8015BC18;
+
+Vec3f gFwPointerPos;
+
+void Actor_InitFaroresWind(GameState_Play* play) {
+    Vec3f lightPos;
+
+    if (gSaveContext.save.fw.set)
+    {
+        gFwPointerPos = gSaveContext.save.fw.pos;
+    }
+
+    lightPos = gSaveContext.save.fw.pos;
+    lightPos.y += 60.0f;
+
+    Lights_PointNoGlowSetInfo(&D_8015BC00, lightPos.x, lightPos.y, lightPos.z, 0xFF, 0xFF, 0xFF, -1);
+
+    D_8015BC10 = LightContext_InsertLight(play, &play->lightCtx, &D_8015BC00);
+    D_8015BC14 = 0;
+    D_8015BC18 = 0.0f;
+}
+
+void Actor_DrawFaroresWindPointer(GameState_Play* play)
+{
+    s32 lightRadius = -1;
+    s32 params;
+
+    OPEN_DISPS(play->gs.gfx);
+
+    params = gSaveContext.save.fw.set;
+
+    if (params)
+    {
+        // f32 yOffset = LINK_IS_ADULT ? 80.0f : 60.0f;
+        f32 yOffset = 60.0f;
+        f32 ratio = 1.0f;
+        s32 alpha = 255;
+        s32 temp = params - 40;
+
+        if (temp < 0)
+        {
+            gSaveContext.save.fw.set = ++params;
+            ratio = ABS(params) * 0.025f;
+            D_8015BC14 = 60;
+            D_8015BC18 = 1.0f;
+        }
+        else if (D_8015BC14)
+        {
+            D_8015BC14--;
+        }
+        else if (D_8015BC18 > 0.0f)
+        {
+            static Vec3f effectVel = { 0.0f, -0.05f, 0.0f };
+            static Vec3f effectAccel = { 0.0f, -0.025f, 0.0f };
+            static Color_RGBA8 effectPrimCol = { 255, 255, 255, 0 };
+            static Color_RGBA8 effectEnvCol = { 100, 200, 0, 0 };
+            Vec3f* curPos = &gFwPointerPos;
+            Vec3f* nextPos = &gSaveContext.respawn[RESPAWN_MODE_DOWN].pos;
+            f32 prevNum = D_8015BC18;
+            Vec3f dist;
+            f32 diff = Math_Vec3f_DistXYZAndStoreDiff(nextPos, curPos, &dist);
+            Vec3f effectPos;
+            f32 factor;
+            f32 length;
+            f32 dx;
+            f32 speed;
+
+            if (diff < 20.0f)
+            {
+                D_8015BC18 = 0.0f;
+                Math_Vec3f_Copy(curPos, nextPos);
+            }
+            else
+            {
+                length = diff * (1.0f / D_8015BC18);
+                speed = 20.0f / length;
+                speed = CLAMP_MIN(speed, 0.05f);
+                Math_StepToF(&D_8015BC18, 0.0f, speed);
+                factor = (diff * (D_8015BC18 / prevNum)) / diff;
+                curPos->x = nextPos->x + (dist.x * factor);
+                curPos->y = nextPos->y + (dist.y * factor);
+                curPos->z = nextPos->z + (dist.z * factor);
+                length *= 0.5f;
+                dx = diff - length;
+                yOffset += sqrtf(SQ(length) - SQ(dx)) * 0.2f;
+            }
+
+            effectPos.x = curPos->x + Rand_CenteredFloat(6.0f);
+            effectPos.y = curPos->y + 80.0f + (6.0f * RandFloat());
+            effectPos.z = curPos->z + Rand_CenteredFloat(6.0f);
+
+            EffectSsKiraKira_SpawnDispersed(play, &effectPos, &effectVel, &effectAccel, &effectPrimCol, &effectEnvCol,
+                                            1000, 16);
+
+            if (D_8015BC18 == 0.0f)
+            {
+                gSaveContext.save.fw.pos = gSaveContext.respawn[RESPAWN_MODE_DOWN].pos;
+                gSaveContext.save.fw.yaw = gSaveContext.respawn[RESPAWN_MODE_DOWN].yaw;
+                gSaveContext.save.fw.playerParams = 0x6FF;
+                gSaveContext.save.fw.set = 40;
+                gSaveContext.save.fw.entranceIndex = gSaveContext.respawn[RESPAWN_MODE_DOWN].entrance;
+                gSaveContext.save.fw.roomIndex = gSaveContext.respawn[RESPAWN_MODE_DOWN].roomIndex;
+                gSaveContext.save.fw.tempSwchFlags = gSaveContext.respawn[RESPAWN_MODE_DOWN].tempSwitchFlags;
+                gSaveContext.save.fw.tempCollectFlags = gSaveContext.respawn[RESPAWN_MODE_DOWN].tempCollectFlags;
+            }
+        }
+        else if (temp > 0)
+        {
+            Vec3f* curPos = &gFwPointerPos;
+            f32 nextRatio = 1.0f - temp * 0.1f;
+            f32 curRatio = 1.0f - (f32)(temp - 1) * 0.1f;
+            Vec3f eye;
+            Vec3f dist;
+            f32 diff;
+
+            if (nextRatio > 0.0f)
+            {
+                eye.x = play->view.eye.x;
+                eye.y = play->view.eye.y - yOffset;
+                eye.z = play->view.eye.z;
+                diff = Math_Vec3f_DistXYZAndStoreDiff(&eye, curPos, &dist);
+                diff = (diff * (nextRatio / curRatio)) / diff;
+                curPos->x = eye.x + (dist.x * diff);
+                curPos->y = eye.y + (dist.y * diff);
+                curPos->z = eye.z + (dist.z * diff);
+            }
+
+            alpha = 255 - (temp * 30);
+
+            if (alpha < 0)
+            {
+                gSaveContext.save.fw.set = 0;
+                alpha = 0;
+            }
+            else
+            {
+                gSaveContext.save.fw.set = ++params;
+            }
+
+            ratio = 1.0f + ((f32)temp * 0.2); // required to match
+        }
+
+        lightRadius = 500.0f * ratio;
+
+        s32 fwSceneId = Entrance_GetSceneIdAbsolute(gSaveContext.save.fw.entranceIndex);
+        s32 fwRoomId = gSaveContext.save.fw.roomIndex;
+
+        s32 sceneMatches = fwSceneId == play->sceneId;
+
+        f32 yPos = gFwPointerPos.y + yOffset;
+
+        if (!sceneMatches)
+        {
+            switch (play->sceneId)
+            {
+            case SCE_MM_TWIN_ISLANDS_WINTER:
+                sceneMatches = fwSceneId == SCE_MM_TWIN_ISLANDS_SPRING;
+                break;
+            case SCE_MM_GORON_VILLAGE_WINTER:
+                sceneMatches = fwSceneId == SCE_MM_GORON_VILLAGE_SPRING;
+                break;
+            case SCE_MM_MOUNTAIN_VILLAGE_WINTER:
+                sceneMatches = fwSceneId == SCE_MM_MOUNTAIN_VILLAGE_SPRING;
+                break;
+            case SCE_MM_TWIN_ISLANDS_SPRING:
+                sceneMatches = fwSceneId == SCE_MM_TWIN_ISLANDS_WINTER;
+                break;
+            case SCE_MM_GORON_VILLAGE_SPRING:
+                sceneMatches = fwSceneId == SCE_MM_GORON_VILLAGE_WINTER;
+                break;
+            case SCE_MM_MOUNTAIN_VILLAGE_SPRING:
+                sceneMatches = fwSceneId == SCE_MM_MOUNTAIN_VILLAGE_WINTER;
+                break;
+            case SCE_MM_SOUTHERN_SWAMP_CLEAR:
+                sceneMatches = fwSceneId == SCE_MM_SOUTHERN_SWAMP;
+                break;
+            case SCE_MM_SOUTHERN_SWAMP:
+                sceneMatches = fwSceneId == SCE_MM_SOUTHERN_SWAMP_CLEAR;
+                break;
+            case SCE_MM_TEMPLE_STONE_TOWER:
+                sceneMatches = fwSceneId == SCE_MM_TEMPLE_STONE_TOWER_INVERTED;
+                yPos *= -1.0f;
+                break;
+            case SCE_MM_TEMPLE_STONE_TOWER_INVERTED:
+                sceneMatches = fwSceneId == SCE_MM_TEMPLE_STONE_TOWER;
+                yPos *= -1.0f;
+                break;
+            }
+        }
+
+        s32 shouldDraw = sceneMatches
+                && (D_8015BC18 != 0.0f || fwRoomId == play->roomCtx.curRoom.id || fwRoomId == play->roomCtx.prefRoom.id);
+
+        if ((play->csCtx.state == CS_STATE_IDLE) && shouldDraw)
+        {
+            f32 scale = 0.025f * ratio;
+
+            POLY_XLU_DISP = Gfx_SetupDL(POLY_XLU_DISP, 25); // SETUPDL_25
+
+            ModelViewTranslate(gFwPointerPos.x, yPos, gFwPointerPos.z, MAT_SET);
+            ModelViewScale(scale, scale, scale, MAT_MUL);
+            ModelViewMult(&play->billboardMtxF, MAT_MUL);
+            MatrixStackDup();
+
+            gDPPipeSync(POLY_XLU_DISP++);
+            gDPSetPrimColor(POLY_XLU_DISP++, 128, 128, 255, 255, 200, alpha);
+            gDPSetEnvColor(POLY_XLU_DISP++, 100, 200, 0, 255);
+
+            ModelViewRotateZ(BINANG_TO_RAD_ALT2((play->gameplayFrames * 1500) & 0xFFFF), MAT_MUL);
+            gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx),
+                      G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+            gSPDisplayList(POLY_XLU_DISP++, 0x04000000 | 0x23210); // gEffFlash1DL
+
+            MatrixStackPop();
+            ModelViewRotateZ(BINANG_TO_RAD_ALT2(~((play->gameplayFrames * 1200) & 0xFFFF)), MAT_MUL);
+
+            gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx),
+                      G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+            gSPDisplayList(POLY_XLU_DISP++, 0x04000000 | 0x23210); // gEffFlash1DL
+
+            Lights_PointNoGlowSetInfo(&D_8015BC00, gFwPointerPos.x,
+                                    yPos,
+                                    gFwPointerPos.z, 255, 255, 255, lightRadius);
+        }
+        CLOSE_DISPS();
+    }
+}
+
+void Actor_AfterDrawAll(GameState_Play* play)
+{
+    // Displaced code:
+    if (play->actorCtx.lensMaskSize != 0)
+    {
+        play->actorCtx.lensActorsDrawn = 1;
+        Actor_DrawLensActors(play, play->actorCtx.numLensActors, play->actorCtx.lensActors);
+    }
+
+    Actor_DrawFaroresWindPointer(play);
+}
