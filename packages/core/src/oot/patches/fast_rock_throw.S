@@ -6,7 +6,7 @@ override_changelinkanimdefaultstop:
   sw      a0, 0x0028(sp)
   sw      a1, 0x002c(sp)
   sw      a2, 0x0030(sp)
-  jal     0x8008a194      #SkelAnime_GetFrameCount
+  jal     0x8008a194      # SkelAnime_GetFrameCount
   lw      a0, 0x0030(sp)
   mtc1    v0, $f4
   mtc1    zero, $f0
@@ -19,13 +19,13 @@ override_changelinkanimdefaultstop:
   lui     a3, 0x3f80
 
   li      t0, 0x040032b0
-  bne     a2, t0, skip   #if next animation is heavy rock pickup, change speed
+  bne     a2, t0, skip   # if next animation is heavy rock pickup, change speed
   nop
-  lui     a3, 0x4040       #3.0f
+  lui     a3, 0x4040       # 3.0f
 skip:
   swc1    $f6, 0x0014(sp)
   swc1    $f0, 0x0010(sp)
-  jal     0x8008c000       #SkelAnime_ChangeLinkAnim
+  jal     0x8008c000       # SkelAnime_ChangeLinkAnim
   swc1    $f0, 0x001c(sp)
   lw      ra, 0x0024(sp)
   lw      ra, 0x0024(sp)
@@ -33,13 +33,13 @@ skip:
   addiu   sp, sp, 0x28
 
 heavy_block_set_switch:
-  addiu   a1, s0, 0x01a4 #displaced
+  addiu   a1, s0, 0x01a4 # displaced
   addiu   sp, sp, -0x20
   sw      ra, 0x14(sp)
   sw      a1, 0x18(sp)
   lh      a1, 0x1c(s1)
   sra     a1, a1, 8
-  jal     0x800204d0     #set switch flag
+  jal     0x800204d0     # set switch flag
   andi    a1, a1, 0x3f
   lw      a1, 0x18(sp)
   lw      ra, 0x14(sp)
@@ -47,49 +47,50 @@ heavy_block_set_switch:
   addiu   sp, sp, 0x20
 
 heavy_block_posrot:
-  sw      t9, 0x66c(s0)  #displaced
-  lw      t2, 0x428(s0)  #interactActor (block)
-  lw      t1, gPlay 
+  sw      t9, 0x66c(s0)  # displaced
+  lw      t2, 0x428(s0)  # interactActor (block)
+  lw      t1, gPlay
   lw      t1, 0x1c44(t1)
-  lh      t3, 0xB6(t2)   #block angle
-  addi    t3, t3, 0x8000 #180 deg
+  lh      t3, 0xB6(t2)   # block angle
+  addi    t3, t3, 0x8000 # 180 deg
   jr      ra
-   sh      t3, 0xB6(t1)   #store to links angle to make him face block
+   sh      t3, 0xB6(t1)   # store to links angle to make him face block
 
 heavy_block_set_link_action:
-  lw      t0, gPlay 
+  lw      t0, gPlay
   lw      t0, 0x1c44(t0)
   lb      t2, 0x0434(t0)
   li      t3, 0x08
   bne     t2, t3, return
-  li      t1, 0x07       #action 7
-  sb      t1, 0x0434(t0) #links action
+  li      t1, 0x07       # action 7
+  sb      t1, 0x0434(t0) # links action
 return:
   jr      ra
-   lwc1    $f6, 0x0c(s0)   #displaced
+   lwc1    $f6, 0x0c(s0)   # displaced
 
 heavy_block_shorten_anim:
-  lw      t0, gPlay 
+  lw      t0, gPlay
   lw      t0, 0x1c44(t0)
-  lw      t1, 0x01ac(t0)   #current animation
-  li      t2, 0x04002f98   #heavy block lift animation
-  bne     t1, t2, return1 #return if not heavy block lift
-  lw      t3, 0x1bc(t0)    #current animation frame
+  lw      t1, 0x01ac(t0)   # current animation
+  li      t2, 0x04002f98   # heavy block lift animation
+  bne     t1, t2, return1  # return if not heavy block lift
+  lw      t3, 0x1bc(t0)    # current animation frame
   li      t4, 0x42cf0000
   bne     t3, t4, check_end
-  li      t5, 0x43640000   #228.0f
+  li      t5, 0x43640000   # 228.0f
   b       return1
-  sw      t5, 0x1bc(t0)    #throw block
+  sw      t5, 0x1bc(t0)    # throw block
 check_end:
-  li      t4, 0x43790000   #249.0f
+  li      t4, 0x43790000   # 249.0f
   bne     t3, t4, return1
-  li      t1, 0x803a967c
+   lui    t1,%HI(0x803a967c) # KLUDGE: Split to shut up warning
+  addiu   t1,%LO(0x803a967c) # TODO: This is very unsafe, should be fixed ASAP
   sw      t1, 0x664(t0)
 return1:
   jr      ra
-  addiu   a1, s0, 0x01A4   #displaced
+  addiu   a1, s0, 0x01A4   # displaced
 
-/* Bg_Heavy_Block modifications */ 
+/* Bg_Heavy_Block modifications */
 PATCH_START 0x80941030 + 0xc9c
   nop
 PATCH_END

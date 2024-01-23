@@ -246,9 +246,8 @@ void MagicWind_Update(Actor* thisx, GameState_Play* play) {
     this->actionFunc(this, play);
 }
 
-s32 MagicWind_OverrideLimbDraw(GameState_Play* play, SkelCurve* skelCurve, s32 limbIndex, void* thisx) {
-    s32 pad;
-
+s32 MagicWind_OverrideLimbDraw(GameState_Play* play, SkelCurve* skelCurve, s32 limbIndex, void* thisx)
+{
     OPEN_DISPS(play->gs.gfx);
 
     if (limbIndex == 1) {
@@ -281,7 +280,7 @@ void MagicWind_Draw(Actor* thisx, GameState_Play* play) {
 
     if (this->actionFunc != MagicWind_WaitForTimer) {
         POLY_XLU_DISP = Gfx_SetupDL(POLY_XLU_DISP, 25); // SETUPDL_25
-        SkelCurve_Draw(&this->actor, play, &this->skelCurve, MagicWind_OverrideLimbDraw, NULL, 1, NULL);
+        SkelCurve_Draw(&this->actor, play, &this->skelCurve, (void*)MagicWind_OverrideLimbDraw, NULL, 1, NULL);
     }
 
     CLOSE_DISPS();
