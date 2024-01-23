@@ -263,19 +263,19 @@ void hookPlay_Init(GameState_Play* play)
     MM_SET_EVENT_WEEK(MM_EV(82, 1));
 
     /* Raise Woodfall Temple with setting enabled */
-    if (comboConfig(CFG_MM_OPEN_WF) && !comboConfig(CFG_MM_CLEAR_OPEN_WF))
+    if (comboConfig(CFG_MM_OPEN_WF))
     {
         MM_SET_EVENT_WEEK(EV_MM_WEEK_WOODFALL_TEMPLE_RISE);
     }
 
     /* Make Biggoron move with setting enabled */
-    if (comboConfig(CFG_MM_OPEN_SH) && !comboConfig(CFG_MM_CLEAR_OPEN_SH))
+    if (comboConfig(CFG_MM_OPEN_SH))
     {
         MM_SET_EVENT_WEEK(EV_MM_WEEK_SNOWHEAD_BLIZZARD);
     }
 
     /* Make turtle surface with setting enabled */
-    if (comboConfig(CFG_MM_OPEN_GB) && !comboConfig(CFG_MM_CLEAR_OPEN_GB))
+    if (comboConfig(CFG_MM_OPEN_GB))
     {
         MM_SET_EVENT_WEEK(EV_MM_WEEK_GREAT_BAY_TURTLE);
     }

@@ -684,7 +684,7 @@ export const SETTINGS = [{
   name: 'Open Dungeons (MM)',
   category: 'main.events',
   type: 'set',
-  description: 'Make some MM dungeons more readily accessible.',
+  description: 'Make some MM dungeons more readily accessible. This setting overrides Clear State Dungeons (MM)',
   values: [
     { value: 'WF', name: 'Woodfall Temple' },
     { value: 'SH', name: 'Snowhead Temple' },
@@ -697,7 +697,7 @@ export const SETTINGS = [{
   name: 'Clear State Dungeons (MM)',
   category: 'main.events',
   type: 'set',
-  description: 'Make some MM dungeons open during clear state. This setting overrides Open Dungeons (MM).',
+  description: 'Make some MM dungeons open during clear state..',
   values: [
     { value: 'WF', name: 'Woodfall Temple' },
     { value: 'SH', name: 'Snowhead Temple' },
