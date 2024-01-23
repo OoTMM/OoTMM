@@ -1444,7 +1444,7 @@ export const SETTINGS = [{
   cond: (s: any) => s.spellFireMm,
 }, {
   key: 'sharedSpellWind',
-  name: "Shared Farore's Fire",
+  name: "Shared Farore's Wind",
   category: 'items.shared',
   type: 'boolean',
   default: false,
