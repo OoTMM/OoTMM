@@ -117,7 +117,6 @@ export const CONFVARS = [
   'MM_OPEN_GB',
   'MM_OPEN_ST',
   'MM_CLEAR_OPEN_WF',
-  'MM_CLEAR_OPEN_SH',
   'MM_CLEAR_OPEN_GB',
 ] as const;
 

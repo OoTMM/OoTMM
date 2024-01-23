@@ -696,12 +696,13 @@ export const SETTINGS = [{
   key: 'clearStateDungeonsMm',
   name: 'Clear State Dungeons (MM)',
   category: 'main.events',
-  type: 'set',
+  type: 'enum',
   description: 'Make some MM dungeons open during clear state..',
   values: [
+    { value: 'none', name: 'None' },
     { value: 'WF', name: 'Woodfall Temple' },
-    { value: 'SH', name: 'Snowhead Temple' },
     { value: 'GB', name: 'Great Bay Temple' },
+    { value: 'both', name: 'Both' },
   ],
   default: 'none'
 }, {
