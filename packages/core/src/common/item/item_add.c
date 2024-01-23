@@ -53,24 +53,24 @@ const u8 kOotTradeChild[] = {
 };
 
 const u8 kMmTrade1[] = {
+    ITEM_MM_SPELL_FIRE,
     ITEM_MM_MOON_TEAR,
     ITEM_MM_DEED_LAND,
     ITEM_MM_DEED_SWAMP,
     ITEM_MM_DEED_MOUNTAIN,
     ITEM_MM_DEED_OCEAN,
-    ITEM_MM_SPELL_FIRE,
 };
 
 const u8 kMmTrade2[] = {
+    ITEM_MM_SPELL_WIND,
     ITEM_MM_ROOM_KEY,
     ITEM_MM_LETTER_TO_MAMA,
-    ITEM_MM_SPELL_WIND,
 };
 
 const u8 kMmTrade3[] = {
+    ITEM_MM_SPELL_LOVE,
     ITEM_MM_LETTER_TO_KAFEI,
     ITEM_MM_PENDANT_OF_MEMORIES,
-    ITEM_MM_SPELL_LOVE,
 };
 
 static const u8 kItemSlotsOot[] = {
