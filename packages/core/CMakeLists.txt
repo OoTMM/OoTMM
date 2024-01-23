@@ -34,12 +34,14 @@ function(build game)
   set(game_define "-DGAME_${game_upper}=1")
 
   # Linker script
-  set(ldscript "${CMAKE_BINARY_DIR}/link_${game}.ld")
+  set(ldscript_name "link_${game}.ld")
+  set(ldscript "${CMAKE_BINARY_DIR}/${ldscript_name}")
 
   add_custom_command(
     OUTPUT "${ldscript}"
-    COMMAND "${CMAKE_C_COMPILER}" ${game_define} -I "${CMAKE_SOURCE_DIR}/include" -E -P -x c "${LDSCRIPT_IN}" -o "${ldscript}"
+    COMMAND "${CMAKE_C_COMPILER}" ${game_define} -I "${CMAKE_SOURCE_DIR}/include" -E -P -x c "${LDSCRIPT_IN}" -o "${ldscript}" -MMD -MF "${ldscript}.d" -MT "${ldscript_name}"
     DEPENDS "${LDSCRIPT_IN}"
+    DEPFILE "${ldscript}.d"
     COMMENT "Generating linker script for ${game}"
     VERBATIM
   )
