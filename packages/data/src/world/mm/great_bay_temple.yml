@@ -15,7 +15,7 @@
     "Great Bay Temple Water Wheel": "true"
     "Great Bay Temple Boss Access": "setting(bossWarpPads, remains) && has(REMAINS_GYORG)"
   locations:
-    "Great Bay Temple Entrance Chest": "has_sticks || can_use_fire_arrows || (has_arrows && trick(MM_GBT_ENTRANCE_BOW))"
+    "Great Bay Temple Entrance Chest": "has_sticks || can_use_fire_short_range || (has_arrows && trick(MM_GBT_ENTRANCE_BOW))"
 "Great Bay Temple Water Wheel":
   dungeon: GB
   events:
@@ -35,11 +35,11 @@
   dungeon: GB
   exits:
     "Great Bay Temple Water Wheel": "true"
-    "Great Bay Temple Map Room": "has_mask_zora || hookshot_anywhere || (trick(MM_GBT_CENTRAL_GEYSER) && can_use_fire_arrows && can_use_ice_arrows)"
-    "Great Bay Temple Red Pipe 1": "has_mask_zora || (trick(MM_GBT_CENTRAL_GEYSER) && can_use_fire_arrows && can_use_ice_arrows)"
+    "Great Bay Temple Map Room": "has_mask_zora || hookshot_anywhere || (trick(MM_GBT_CENTRAL_GEYSER) && ((can_use_fire_arrows && can_use_ice_arrows) || can_use_din || can_use_farore || can_use_nayru))"
+    "Great Bay Temple Red Pipe 1": "has_mask_zora || (trick(MM_GBT_CENTRAL_GEYSER) && ((can_use_fire_arrows && can_use_ice_arrows) || can_use_din || can_use_farore || can_use_nayru))"
     "Great Bay Temple Green Pipe 1": "can_use_ice_arrows || short_hook_anywhere"
-    "Great Bay Temple Compass Room": "(has_mask_zora || hookshot_anywhere || (trick(MM_GBT_CENTRAL_GEYSER) && can_use_fire_arrows && can_use_ice_arrows)) && event(GB_WATER_WHEEL)"
-    "Great Bay Temple Pre-Boss": "(has_mask_zora || (trick(MM_GBT_CENTRAL_GEYSER) && can_use_fire_arrows && can_use_ice_arrows)) && event(GB_WATER_WHEEL)"
+    "Great Bay Temple Compass Room": "(has_mask_zora || hookshot_anywhere || (trick(MM_GBT_CENTRAL_GEYSER) && ((can_use_fire_arrows && can_use_ice_arrows) || can_use_din || can_use_farore || can_use_nayru))) && event(GB_WATER_WHEEL)"
+    "Great Bay Temple Pre-Boss": "(has_mask_zora || (trick(MM_GBT_CENTRAL_GEYSER) && ((can_use_fire_arrows && can_use_ice_arrows) || can_use_din || can_use_farore || can_use_nayru))) && event(GB_WATER_WHEEL)"
   events:
     MAGIC: "true"
   locations:
@@ -82,7 +82,7 @@
   exits:
     "Great Bay Temple Baba Room": "true"
     "Great Bay Temple Central Room": "true"
-    "Great Bay Temple Boss Key Room": "(can_use_ice_arrows && can_use_fire_arrows) || short_hook_anywhere"
+    "Great Bay Temple Boss Key Room": "(can_use_ice_arrows && (can_use_fire_short_range || has_hot_water_farore)) || short_hook_anywhere"
     "Great Bay Temple Green Pipe 2": "event(GB_WATER_WHEEL)"
   locations:
     "Great Bay Temple Compass": "soul_enemy(SOUL_ENEMY_BIO_BABA) || can_hookshot || can_use_ice_arrows || short_hook_anywhere" # The lilypads from the biobabas aren't here without their souls

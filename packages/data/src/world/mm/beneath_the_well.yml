@@ -102,7 +102,7 @@
     "Beneath The Well Sun Block": "can_pass_gibdo && has_milk"
   events:
     RUPEES: "(can_fight || has_weapon_range || has_explosives) && soul_wallmaster"
-    BUGS: "can_use_fire_arrows || (has_sticks && has_big_poe && can_pass_gibdo)"
+    BUGS: "can_use_fire_short_range || (has_sticks && has_big_poe && can_pass_gibdo)"
   locations:
     "Beneath The Well Grass Near End 1": "true"
     "Beneath The Well Grass Near End 2": "true"
@@ -115,7 +115,7 @@
     "Beneath The Well Final Hall": "true"
     "Beneath The Well End": "has_mirror_shield || can_use_light_arrows"
   locations:
-    "Beneath The Well Mirror Shield": "can_use_fire_arrows || (has_sticks && has_big_poe && has_milk && can_pass_gibdo)"
+    "Beneath The Well Mirror Shield": "can_use_fire_short_range || (has_sticks && has_big_poe && has_milk && can_pass_gibdo)"
 "Beneath The Well End":
   dungeon: BtWE
   exits:

@@ -25,7 +25,7 @@
   events:
     STONE_TOWER_WATER_CHEST_SUN: "can_use_light_arrows"
   locations:
-    "Stone Tower Temple Inverted East Lower Chest": "(has(MASK_DEKU) || short_hook_anywhere) && can_use_fire_arrows"
+    "Stone Tower Temple Inverted East Lower Chest": "(has(MASK_DEKU) || short_hook_anywhere) && can_use_fire_short_range"
     "Stone Tower Temple Inverted East Upper Chest": "(has(MASK_DEKU) || hookshot_anywhere) && can_use_elegy && event(STONE_TOWER_WATER_CHEST_SWITCH)"
     "Stone Tower Temple Inverted Rupee Alcove 1": "(can_use_light_arrows && can_hookshot_short) || short_hook_anywhere"
     "Stone Tower Temple Inverted Rupee Alcove 2": "(can_use_light_arrows && can_hookshot_short) || short_hook_anywhere"
