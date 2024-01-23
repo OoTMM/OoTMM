@@ -1181,7 +1181,7 @@
   exits:
     "Road to Southern Swamp": "true"
     "Tourist Information": "true"
-    "Swamp Back": "event(BOAT_RIDE) || event(CLEAN_SWAMP) || has_mask_zora || (has(MASK_DEKU) && (has_arrows || can_hookshot_short))"
+    "Swamp Back": "event(BOAT_RIDE) || event(CLEAN_SWAMP) || has_mask_zora || (has(MASK_DEKU) && (has_arrows || can_hookshot_short) || can_use_nayru)"
     "Swamp Potion Shop": "true"
     "Woods of Mystery": "true"
     "Owl Swamp": "true"
@@ -1248,16 +1248,16 @@
     PICTURE_SWAMP: "has(PICTOGRAPH_BOX)"
     PICTURE_BIG_OCTO: "has(PICTOGRAPH_BOX) && soul_octorok"
   exits:
-    "Swamp Front": "event(BOAT_RIDE) || event(CLEAN_SWAMP) || has_mask_zora || ((has_arrows || can_hookshot) && (has(MASK_DEKU) || has_mask_goron))"
+    "Swamp Front": "event(BOAT_RIDE) || event(CLEAN_SWAMP) || has_mask_zora || ((has_arrows || can_hookshot) && (has(MASK_DEKU) || has_mask_goron || can_use_nayru))"
     "Deku Palace Front": "true"
-    "Near Swamp Spider House": "has(MASK_DEKU) || has_mask_zora || event(CLEAN_SWAMP) || short_hook_anywhere"
+    "Near Swamp Spider House": "has(MASK_DEKU) || has_mask_zora || event(CLEAN_SWAMP) || short_hook_anywhere || can_use_nayru"
     "Swamp Canopy Back": "event(CLEAN_SWAMP) || short_hook_anywhere"
     "Swamp Canopy Front": "short_hook_anywhere"
 "Near Swamp Spider House":
   region: SOUTHERN_SWAMP
   exits:
     "Swamp Spider House": "has_sticks || has_arrows"
-    "Swamp Back": "has(MASK_DEKU) || has_mask_zora || event(CLEAN_SWAMP) || short_hook_anywhere"
+    "Swamp Back": "has(MASK_DEKU) || has_mask_zora || event(CLEAN_SWAMP) || short_hook_anywhere || can_use_nayru"
     "Near Swamp Grotto": "has(MASK_DEKU) || has_mask_zora || event(CLEAN_SWAMP) || short_hook_anywhere"
     "Swamp Canopy Front": "short_hook_anywhere"
 "Near Swamp Grotto":
@@ -1266,7 +1266,7 @@
     MUSHROOM: "has(MASK_SCENTS)"
   exits:
     "Swamp Front": "(has_arrows || can_hookshot) && has_mask_goron"
-    "Near Swamp Spider House": "has(MASK_DEKU) || has_mask_zora || event(CLEAN_SWAMP) || can_hookshot_short"
+    "Near Swamp Spider House": "has(MASK_DEKU) || has_mask_zora || event(CLEAN_SWAMP) || can_hookshot_short || can_use_nayru"
     "Southern Swamp Grotto": "true"
     "Swamp Canopy Front": "short_hook_anywhere"
 "Southern Swamp Grotto":
@@ -1392,11 +1392,10 @@
   exits:
     "Swamp Back": "true"
     "Deku Palace Cliff": "has(MASK_DEKU) || short_hook_anywhere"
-    "Near Deku Shrine": "event(CLEAN_SWAMP)"
+    "Near Deku Shrine": "event(CLEAN_SWAMP) || can_use_nayru"
     "Deku Palace Main": "has(MASK_DEKU) || trick(MM_PALACE_GUARD_SKIP) || short_hook_anywhere"
-    "Deku Palace Upper": "(event(CLEAN_SWAMP) || has(MASK_DEKU)) && can_use_beans"
+    "Deku Palace Upper": "(event(CLEAN_SWAMP) || has(MASK_DEKU) || can_use_nayru) && can_use_beans"
   events:
-    PICTURE_BIG_OCTO: "soul_octorok && has(MASK_DEKU) && has(PICTOGRAPH_BOX)"
     NUTS: "soul_deku_baba && (has(MASK_DEKU) || short_hook_anywhere || (event(CLEAN_SWAMP) && (can_fight || has_arrows || has_explosives || can_hookshot_short)))"
 "Deku Palace Main":
   region: DEKU_PALACE
@@ -1491,7 +1490,7 @@
 "Deku Palace Cliff":
   region: DEKU_PALACE
   exits:
-    "Deku Palace Front": "has(MASK_DEKU) || event(CLEAN_SWAMP) || short_hook_anywhere"
+    "Deku Palace Front": "has(MASK_DEKU) || event(CLEAN_SWAMP) || short_hook_anywhere || can_use_nayru"
     "Swamp Canopy Front": "true"
 "Swamp Canopy Front":
   region: SOUTHERN_SWAMP
@@ -1505,7 +1504,7 @@
   region: SOUTHERN_SWAMP
   exits:
     "Swamp Front": "(has(MASK_DEKU) || has_mask_goron) && (can_hookshot || has_arrows)"
-    "Swamp Back": "has(MASK_DEKU) || has_mask_zora || event(CLEAN_SWAMP)"
+    "Swamp Back": "has(MASK_DEKU) || has_mask_zora || event(CLEAN_SWAMP) || can_use_nayru"
     "Woodfall": "true"
     "Swamp Canopy Front": "has(MASK_DEKU) || short_hook_anywhere"
   locations:
@@ -1520,7 +1519,7 @@
     "Woodfall Temple Princess Jail": "event(CLEAN_SWAMP) && event(OPEN_WOODFALL_TEMPLE)"
     "Woodfall Near Fairy Fountain": "event(CLEAN_SWAMP) && short_hook_anywhere"
   locations:
-    "Woodfall Entrance Chest": "has(MASK_DEKU) || can_hookshot || event(CLEAN_SWAMP)"
+    "Woodfall Entrance Chest": "has(MASK_DEKU) || can_hookshot || event(CLEAN_SWAMP) || can_use_nayru"
     "Woodfall HP Chest": "(has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP))) || can_hookshot"
     "Woodfall Near Owl Chest": "(has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP))) || (event(CLEAN_SWAMP) && can_hookshot) || hookshot_anywhere"
     "Woodfall Grass 1": "true"
@@ -1539,7 +1538,7 @@
 "Woodfall Shrine":
   region: WOODFALL
   exits:
-    "Woodfall": "(has(MASK_DEKU) && soul_deku_scrub) || event(CLEAN_SWAMP) || hookshot_anywhere"
+    "Woodfall": "(has(MASK_DEKU) && soul_deku_scrub) || event(CLEAN_SWAMP) || hookshot_anywhere || can_use_nayru"
     "Woodfall Near Fairy Fountain": "(has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP) || short_hook_anywhere)) || hookshot_anywhere"
     "Woodfall Front of Temple": "event(OPEN_WOODFALL_TEMPLE)"
     "Owl Woodfall": "true"
@@ -1550,7 +1549,7 @@
 "Woodfall Near Fairy Fountain":
   region: WOODFALL
   exits:
-    "Woodfall": "(has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP))) || event(CLEAN_SWAMP) || hookshot_anywhere"
+    "Woodfall": "(has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP))) || event(CLEAN_SWAMP) || hookshot_anywhere || can_use_nayru"
     "Woodfall Shrine": "(has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP))) || hookshot_anywhere"
     "Woodfall Fairy Fountain": "true"
   locations:
@@ -1564,7 +1563,7 @@
 "Near Deku Shrine":
   region: DEKU_PALACE
   exits:
-    "Deku Palace Front": "event(CLEAN_SWAMP) || has(MASK_DEKU)"
+    "Deku Palace Front": "event(CLEAN_SWAMP) || has(MASK_DEKU) || can_use_nayru"
     "Deku Shrine": "true"
 "Deku Shrine":
   region: ENTRANCE
@@ -1620,12 +1619,12 @@
 "Mountain Village Path Lower":
   region: PATH_TO_MOUNTAIN_VILLAGE
   events:
-    RUPEES: "can_use_light_arrows && soul_tektite && (is_day || (can_break_boulders || can_use_fire_arrows))"
+    RUPEES: "can_use_light_arrows && soul_tektite && (is_day || (can_break_snowballs))"
     MAGIC: "event(BOSS_SNOWHEAD)"
     FAIRY: "can_get_gossip_fairy"
   exits:
     "Behind Large Icicles": "true"
-    "Mountain Village Path Upper": "can_break_boulders || can_use_fire_arrows || event(BOSS_SNOWHEAD) || short_hook_anywhere"
+    "Mountain Village Path Upper": "can_break_snowballs || event(BOSS_SNOWHEAD) || short_hook_anywhere"
   gossip:
     "Mountain Village Path Gossip": "true"
 "Mountain Village Path Upper":
@@ -1653,7 +1652,7 @@
     MAGIC: "true"
     ARROWS: "true"
     BOMBS_OR_BOMBCHU: "true"
-    RUPEES: "event(BOSS_SNOWHEAD) || ((can_break_boulders || can_use_fire_arrows) && (second_day || final_day)) || ((can_break_boulders || can_use_fire_arrows) && can_use_light_arrows && first_day && soul_tektite)"
+    RUPEES: "event(BOSS_SNOWHEAD) || (can_break_snowballs && (second_day || final_day)) || (can_break_snowballs && can_use_light_arrows && first_day && soul_tektite)"
     FAIRY: "true"
   locations:
     "Mountain Village Waterfall Chest": "event(BOSS_SNOWHEAD) && can_use_lens"
@@ -1741,7 +1740,7 @@
   exits:
     "Mountain Village": "true"
   events:
-    BLACKSMITH_ENABLED: "event(BOSS_SNOWHEAD) || can_use_fire_arrows || has_hot_water_mtn || has_hot_water_er || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE))"
+    BLACKSMITH_ENABLED: "event(BOSS_SNOWHEAD) || can_use_fire_short_range || has_hot_water_mtn || has_hot_water_er || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE))"
     GOLD_DUST_USED: "can_use_wallet(2) && has(BOTTLED_GOLD_DUST) && event(BLACKSMITH_ENABLED)"
   locations:
     "Blacksmith Razor Blade": "can_use_wallet(2) && event(BLACKSMITH_ENABLED)"
@@ -1751,18 +1750,18 @@
   events:
     PICTURE_TINGLE: "has(PICTOGRAPH_BOX)"
     MAGIC: "true"
-    RUPEES: "(can_use_light_arrows && (soul_tektite || soul_wolfos || ((can_break_boulders || can_use_fire_arrows) && soul_enemy(SOUL_ENEMY_SNAPPER)))) || event(BOSS_SNOWHEAD)"
+    RUPEES: "(can_use_light_arrows && (soul_tektite || soul_wolfos || (can_break_snowballs && soul_enemy(SOUL_ENEMY_SNAPPER)))) || event(BOSS_SNOWHEAD)"
   exits:
     "Mountain Village": "true"
     "Goron Village": "true"
     "Near Goron Race": "has_mask_goron || scarecrow_hookshot || short_hook_anywhere"
     "Near Ramp Grotto": "has_mask_goron || short_hook_anywhere"
-    "Twin Islands Frozen Grotto": "can_use_fire_arrows || event(BOSS_SNOWHEAD) || has_hot_water_mtn || has_hot_water_er || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE))"
+    "Twin Islands Frozen Grotto": "can_use_fire_short_range || event(BOSS_SNOWHEAD) || has_hot_water_mtn || has_hot_water_er || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE))"
     "Tingle Mountain": "has_weapon_range"
   locations:
     "Twin Islands Underwater Chest 1": "event(BOSS_SNOWHEAD) && has_mask_zora"
     "Twin Islands Underwater Chest 2": "event(BOSS_SNOWHEAD) && has_mask_zora"
-    "Goron Elder": "has_mask_goron && cond(!setting(erBoss, none), can_use_fire_arrows || (setting(bossWarpPads, bossBeaten) && has_hot_water_er), can_use_fire_arrows || has_hot_water_mtn || has_hot_water_er || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE))) && (first_day || second_day)"
+    "Goron Elder": "has_mask_goron && cond(!setting(erBoss, none), can_use_fire_short_range || (setting(bossWarpPads, bossBeaten) && has_hot_water_er), can_use_fire_short_range || has_hot_water_mtn || has_hot_water_er || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE))) && (first_day || second_day)"
     "Twin Islands Grass 01": "event(BOSS_SNOWHEAD)"
     "Twin Islands Grass 02": "event(BOSS_SNOWHEAD)"
     "Twin Islands Grass 03": "event(BOSS_SNOWHEAD)"
@@ -1840,14 +1839,14 @@
     "Front of Lone Peak Shrine": "true"
     "Goron Shrine": "first_day || has_mask_goron"
   events:
-    POWDER_KEG_TRIAL: "(event(BOSS_SNOWHEAD) || can_use_fire_arrows) && has_mask_goron"
+    POWDER_KEG_TRIAL: "(event(BOSS_SNOWHEAD) || can_use_fire_short_range) && has_mask_goron"
     BUY_KEG: "event(POWDER_KEG_TRIAL) && has(POWDER_KEG) && can_use_wallet(2)"
     MAGIC: "true"
     ARROWS: "true"
     BOMBS_OR_BOMBCHU: "true"
     NUTS: "true"
     STICKS: "true"
-    RUPEES: "can_break_boulders || can_use_fire_arrows || (can_use_light_arrows && soul_tektite)"
+    RUPEES: "can_break_snowballs || (can_use_light_arrows && soul_tektite)"
   locations:
     "Goron Village HP": "(has(DEED_SWAMP) && has(MASK_DEKU)) || short_hook_anywhere"
     "Goron Village Scrub Deed": "has(DEED_SWAMP) && has(MASK_DEKU)"
@@ -2442,7 +2441,7 @@
   exits:
     "Great Bay Coast": "true"
     "Zora Cape Near Hall": "has_mask_zora"
-    "Zora Cape Peninsula": "has_mask_zora || trick(MM_ZORA_HALL_HUMAN)"
+    "Zora Cape Peninsula": "has_mask_zora || can_use_nayru || trick(MM_ZORA_HALL_HUMAN)"
     "Waterfall Cliffs": "can_hookshot"
     "Great Bay Near Fairy Fountain": "can_hookshot && (has_explosives || trick_keg_explosives || short_hook_anywhere)" #|| (can_use_ice_arrows && (has_mask_zora || can_hookshot_short))
     "Zora Cape Grotto": "can_break_boulders"
@@ -2570,7 +2569,7 @@
 "Zora Cape Peninsula":
   region: ZORA_CAPE
   exits:
-    "Zora Cape": "has_mask_zora || trick(MM_ZORA_HALL_HUMAN)"
+    "Zora Cape": "has_mask_zora || can_use_nayru || trick(MM_ZORA_HALL_HUMAN)"
     "Zora Hall": "true"
     "Great Bay Temple": "has_mask_zora && can_hookshot && can_play_zora"
     "Owl Zora Cape": "true"
@@ -2741,7 +2740,7 @@
     "Beneath The Graveyard Night 2": "short_hook_anywhere"
   locations:
     "Beneath The Graveyard Chest": "soul_enemy(SOUL_ENEMY_BAD_BAT) && (can_fight || has_explosives || has_arrows || can_hookshot_short || has(MASK_DEKU))"
-    "Beneath The Graveyard Song of Storms": "soul_iron_knuckle && (has_weapon || has_mask_goron || has_explosives) && (has_sticks || can_use_fire_arrows)"
+    "Beneath The Graveyard Song of Storms": "soul_iron_knuckle && (has_weapon || has_mask_goron || has_explosives) && has_fire_sticks"
     "Beneath The Graveyard Pot Night 1 Early 1": "true"
     "Beneath The Graveyard Pot Night 1 Early 2": "true"
     "Beneath The Graveyard Pot Night 1 Bats 1": "true"
