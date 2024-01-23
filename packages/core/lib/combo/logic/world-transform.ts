@@ -679,13 +679,21 @@ export class LogicPassWorldTransform {
       this.addItem(Items.MM_HOOKSHOT);
     }
 
-    if (settings.sharedMagicSpells) {
+    if (settings.sharedSpellFire) {
       this.replaceItem(Items.OOT_SPELL_FIRE, Items.SHARED_SPELL_FIRE);
-      this.replaceItem(Items.OOT_SPELL_WIND, Items.SHARED_SPELL_WIND);
-      this.replaceItem(Items.OOT_SPELL_LOVE, Items.SHARED_SPELL_LOVE);
-    } else if (settings.magicSpellsMm) {
+    } else if (settings.spellFireMm) {
       this.addItem(Items.MM_SPELL_FIRE);
+    }
+
+    if (settings.sharedSpellWind) {
+      this.replaceItem(Items.OOT_SPELL_WIND, Items.SHARED_SPELL_WIND);
+    } else if (settings.spellWindMm) {
       this.addItem(Items.MM_SPELL_WIND);
+    }
+
+    if (settings.sharedSpellLove) {
+      this.replaceItem(Items.OOT_SPELL_LOVE, Items.SHARED_SPELL_LOVE);
+    } else if (settings.spellLoveMm) {
       this.addItem(Items.MM_SPELL_LOVE);
     }
 

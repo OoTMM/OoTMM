@@ -698,7 +698,9 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     SHARED_SOULS_ENEMY: settings.sharedSoulsEnemy,
     SHARED_OCARINA_BUTTONS: settings.sharedOcarinaButtons,
     SHARED_SHIELDS: settings.sharedShields,
-    SHARED_MAGIC_SPELLS: settings.sharedMagicSpells,
+    SHARED_SPELL_FIRE: settings.sharedSpellFire,
+    SHARED_SPELL_WIND: settings.sharedSpellWind,
+    SHARED_SPELL_LOVE: settings.sharedSpellLove,
     OOT_CROSS_WARP: settings.crossWarpOot,
     MM_CROSS_WARP: settings.crossWarpMm !== 'none',
     MM_CROSS_WARP_ADULT: settings.crossWarpMm === 'full',
@@ -771,12 +773,14 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     OOT_BRIDGE_VANILLA: settings.rainbowBridge === 'vanilla',
     OOT_BRIDGE_MEDALLIONS: settings.rainbowBridge === 'medallions',
     OOT_BRIDGE_CUSTOM: settings.rainbowBridge === 'custom',
-    MM_MAGIC_SPELLS: settings.magicSpellsMm,
     MULTIPLAYER: settings.mode !== 'single',
     MM_OPEN_WF: world.resolvedFlags.openDungeonsMm.has('WF'),
     MM_OPEN_SH: world.resolvedFlags.openDungeonsMm.has('SH'),
     MM_OPEN_GB: world.resolvedFlags.openDungeonsMm.has('GB'),
     MM_OPEN_ST: world.resolvedFlags.openDungeonsMm.has('ST'),
+    MM_SPELL_FIRE: settings.spellFireMm,
+    MM_SPELL_WIND: settings.spellWindMm,
+    MM_SPELL_LOVE: settings.spellLoveMm,
   };
 
   for (const v in exprs) {
