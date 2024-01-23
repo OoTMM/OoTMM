@@ -1,7 +1,9 @@
 cmake_minimum_required(VERSION 3.10)
 
-set(CMAKE_C_COMPILER "mips64-ultra-elf-gcc")
-set(CMAKE_CXX_COMPILER "mips64-ultra-elf-g++")
+set(ARCH "mips64-ultra-elf")
+set(CMAKE_C_COMPILER "${ARCH}-gcc")
+set(CMAKE_ASM_COMPILER "${ARCH}-gcc")
+set(CMAKE_CXX_COMPILER "${ARCH}-g++")
 
 project(OoTMM C ASM)
 
@@ -46,12 +48,42 @@ function(build game)
     ldscript_${game} DEPENDS "${ldscript}"
   )
 
+  # Build
   file(GLOB_RECURSE SOURCES "src/${game}/*.c" "src/${game}/*.S" "src/common/*.c" "src/common/*.S" "build/src/${game}/*.c" "build/src/${game}/*.S" "build/src/common/*.c" "build/src/common/*.S")
   add_link_options("-T${ldscript}")
   add_executable(${game} ${SOURCES})
   set_target_properties(${game} PROPERTIES LINK_DEPENDS "${ldscript}")
   add_dependencies(${game} ldscript_${game})
   target_compile_definitions(${game} PRIVATE ${game_define})
+
+  # Extract payload
+  set(game_payload "${CMAKE_BINARY_DIR}/${game}_payload.bin")
+  add_custom_command(
+    OUTPUT "${game_payload}"
+    COMMAND "${ARCH}-objcopy" --only-section=.text -O binary "$<TARGET_FILE:${game}>" ${game_payload}
+    DEPENDS ${game}
+    COMMENT "Extracting payload for ${game}"
+    VERBATIM
+  )
+  add_custom_target(
+    ${game}_payload ALL DEPENDS "${game_payload}"
+  )
+
+  # Extract patch
+  set(game_patch "${CMAKE_BINARY_DIR}/${game}_patch.bin")
+  add_custom_command(
+    OUTPUT "${game_patch}"
+    COMMAND "${ARCH}-objcopy" --only-section=.patch -O binary "$<TARGET_FILE:${game}>" ${game_patch}
+    DEPENDS ${game}
+    COMMENT "Extracting patch for ${game}"
+    VERBATIM
+  )
+  add_custom_target(
+    ${game}_patch ALL DEPENDS "${game_patch}"
+  )
+
+  # Install
+  install(FILES ${game_payload} ${game_patch} DESTINATION "bin")
 endfunction()
 
 build(oot)

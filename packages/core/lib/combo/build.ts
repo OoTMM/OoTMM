@@ -66,11 +66,13 @@ const runCommand = async (cmd: string, args: string[]) => {
 
 const make = async (opts: Options) => {
   await cloneDependencies();
-  const buildDir = path.resolve(__dirname, '..', '..', 'build', 'tree', opts.debug ? 'Debug' : 'Release');
+  const installDir = path.resolve(__dirname, '..', '..', 'build');
+  const buildDir = path.resolve(installDir, 'tree', opts.debug ? 'Debug' : 'Release');
   const sourceDir = path.resolve(__dirname, '..', '..');
   await fs.promises.mkdir(buildDir, { recursive: true });
+  await fs.promises.mkdir(installDir, { recursive: true });
   await runCommand('cmake', ['-B', buildDir, '-S', sourceDir, '-G', 'Ninja', `-DCMAKE_BUILD_TYPE=${opts.debug ? 'Debug' : 'Release'}`]);
-  await runCommand('cmake', ['--build', buildDir]);
+  await runCommand('cmake', ['--install', buildDir, '--prefix', installDir]);
 };
 
 const getBuildArtifacts = async (root: string): Promise<BuildOutput> => {
@@ -98,7 +100,7 @@ const fetchBuildArtifacts = async (opts: Options): Promise<BuildOutput> => {
 export const build = async (opts: Options): Promise<BuildOutput> => {
   if (!process.env.BROWSER) {
     await make(opts);
-    return getBuildArtifacts('build' + (opts.debug ? '/Debug' : '/Release'));
+    return getBuildArtifacts('build/bin');
   } else {
     return fetchBuildArtifacts(opts);
   }
