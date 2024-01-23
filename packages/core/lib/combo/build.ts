@@ -1,7 +1,6 @@
 import childProcess from "child_process";
 import fs from 'fs';
 import path from 'path';
-import os from 'os';
 
 import { GAMES } from "./config";
 import { Options } from "./options";
@@ -33,23 +32,37 @@ const cloneDependencies = async () => {
   });
 };
 
-const make = async (opts: Options) => {
-  await cloneDependencies();
+async function runCommand(cmd: string, args: string[]) {
   return new Promise((resolve, reject) => {
-    const args = ['-j', os.availableParallelism().toString()];
-    if (opts.debug) {
-      args.push('DEBUG=1');
-    }
-    const proc = childProcess.spawn('make', args, { stdio: 'inherit' });
+    const proc = childProcess.spawn(cmd, args, { stdio: 'inherit' });
     proc.on('close', (code) => {
       if (code === 0) {
         resolve(null);
       } else {
-        reject(new Error(`make exited with code ${code}`));
+        reject(new Error(`${cmd} exited with code ${code}`));
       }
     });
   });
-};
+}
+
+async function make(opts: Options) {
+  /* Clone dependencies */
+  await cloneDependencies();
+
+  /* Resolve paths */
+  const installDir = path.resolve(__dirname, '..', '..', 'build');
+  const buildDir = path.resolve(installDir, 'tree', opts.debug ? 'Debug' : 'Release');
+  const sourceDir = path.resolve(__dirname, '..', '..');
+
+  /* Make directories */
+  await fs.promises.mkdir(buildDir, { recursive: true });
+  await fs.promises.mkdir(installDir, { recursive: true });
+
+  /* Build and install with CMake */
+  await runCommand('cmake', ['-B', buildDir, '-S', sourceDir, '-G', 'Ninja', `-DCMAKE_BUILD_TYPE=${opts.debug ? 'Debug' : 'Release'}`]);
+  await runCommand('cmake', ['--build', buildDir]);
+  await runCommand('cmake', ['--install', buildDir, '--prefix', installDir]);
+}
 
 const getBuildArtifacts = async (root: string): Promise<BuildOutput> => {
   const [oot, mm] = await Promise.all(GAMES.map(async (g) => {
@@ -76,7 +89,7 @@ const fetchBuildArtifacts = async (opts: Options): Promise<BuildOutput> => {
 export const build = async (opts: Options): Promise<BuildOutput> => {
   if (!process.env.BROWSER) {
     await make(opts);
-    return getBuildArtifacts('build' + (opts.debug ? '/Debug' : '/Release'));
+    return getBuildArtifacts('build/bin');
   } else {
     return fetchBuildArtifacts(opts);
   }
