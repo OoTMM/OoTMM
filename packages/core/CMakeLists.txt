@@ -7,8 +7,9 @@ set(CMAKE_CXX_COMPILER "${ARCH}-g++")
 
 project(OoTMM C ASM)
 
-set(CMAKE_C_FLAGS "-EB -ffreestanding -nostdlib -fno-PIC -mabi=32 -mno-shared -mno-abicalls -march=vr4300 -mtune=vr4300 -mfix4300 -mfix-r4000 -G 0 -Os -Wall -Werror=implicit-function-declaration -Werror=implicit-int -Wimplicit-fallthrough")
-set(CMAKE_ASM_FLAGS "${CMAKE_C_FLAGS}")
+set(FLAGS "-EB -ffreestanding -nostdlib -fno-PIC -mabi=32 -mno-shared -mno-abicalls -march=vr4300 -mtune=vr4300 -mfix4300 -mfix-r4000 -G 0 -Os -Wall -Werror=implicit-function-declaration -Werror=implicit-int -Wimplicit-fallthrough")
+set(CMAKE_C_FLAGS "${FLAGS} -D_LANGUAGE_C=1")
+set(CMAKE_ASM_FLAGS "${FLAGS}")
 
 # Override default envs
 set(CMAKE_C_FLAGS_DEBUG "-DDEBUG=1 -g -g3")
@@ -50,11 +51,11 @@ function(build game)
 
   # Build
   file(GLOB_RECURSE SOURCES "src/${game}/*.c" "src/${game}/*.S" "src/common/*.c" "src/common/*.S" "build/src/${game}/*.c" "build/src/${game}/*.S" "build/src/common/*.c" "build/src/common/*.S")
-  add_link_options("-T${ldscript}")
   add_executable(${game} ${SOURCES})
   set_target_properties(${game} PROPERTIES LINK_DEPENDS "${ldscript}")
   add_dependencies(${game} ldscript_${game})
   target_compile_definitions(${game} PRIVATE ${game_define})
+  target_link_options(${game} PRIVATE "-T${ldscript}")
 
   # Extract payload
   set(game_payload "${CMAKE_BINARY_DIR}/${game}_payload.bin")

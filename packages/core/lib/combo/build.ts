@@ -72,6 +72,7 @@ const make = async (opts: Options) => {
   await fs.promises.mkdir(buildDir, { recursive: true });
   await fs.promises.mkdir(installDir, { recursive: true });
   await runCommand('cmake', ['-B', buildDir, '-S', sourceDir, '-G', 'Ninja', `-DCMAKE_BUILD_TYPE=${opts.debug ? 'Debug' : 'Release'}`]);
+  await runCommand('cmake', ['--build', buildDir]);
   await runCommand('cmake', ['--install', buildDir, '--prefix', installDir]);
 };
 
