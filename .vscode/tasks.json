@@ -8,6 +8,14 @@
         "base": "$gcc",
       },
 			"label": "Generate Seed",
+		},
+    {
+			"type": "npm",
+			"script": "serve",
+			"problemMatcher": {
+        "base": "$gcc",
+      },
+			"label": "Start Web",
 		}
 	]
 }
