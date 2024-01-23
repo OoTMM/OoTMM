@@ -1534,7 +1534,7 @@
   region: WOODFALL
   exits:
     "Woodfall Temple": "true"
-    "Woodfall Shrine": "true"
+    "Woodfall Shrine": "cond(setting(openWoodfall), has(MASK_DEKU) || hookshot_anywhere, true)"
     "Woodfall": "event(CLEAN_SWAMP)"
 "Woodfall Shrine":
   region: WOODFALL
