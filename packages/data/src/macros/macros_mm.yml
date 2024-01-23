@@ -16,6 +16,11 @@
 "final_day": "after(DAY3_AM_06_00)"
 "midnight": "between(NIGHT1_AM_12_00, DAY2_AM_06_00) || between(NIGHT2_AM_12_00, DAY3_AM_06_00) || after(NIGHT3_AM_12_00)"
 
+# Spells
+"can_use_din": "setting(spellFireMm) && can_use_din_raw"
+"can_use_farore": "setting(spellWindMm) && can_use_farore_raw"
+"can_use_nayru": "setting(spellLoveMm) && can_use_nayru_raw"
+
 # Ocarina
 "ocarina_button(x, y)": "cond(setting(ocarinaButtonsShuffleMm), cond(setting(sharedOcarinaButtons), has(y), has(x)), true)"
 "ocarina_button_a": "ocarina_button(BUTTON_A, SHARED_BUTTON_A)"
@@ -65,6 +70,8 @@
 "keaton_grass_hard": "keaton_grass_easy && (has(SPIN_UPGRADE) || has(GREAT_FAIRY_SWORD) || has(SWORD, 3))"
 
 "can_break_boulders": "has_explosives || has_mask_goron"
+"can_use_fire_short_range": "can_use_fire_arrows || can_use_din"
+"can_break_snowballs": "can_break_boulders || can_use_fire_short_range"
 "can_use_lens": "can_use_lens_strict || trick(MM_LENS)"
 "can_use_lens_strict": "has_magic && (has(LENS) || has(SHARED_LENS))"
 "has_explosives": "has_bombs || has(MASK_BLAST) || has_bombchu"
@@ -106,8 +113,8 @@
 "can_hookshot_short": "can_hookshot_n(1)"
 "can_hookshot": "cond(setting(shortHookshotMm), can_hookshot_n(2), can_hookshot_n(1))"
 "trick_keg_explosives": "can_use_keg && trick(MM_KEG_EXPLOSIVES)"
-"trick_sht_fireless": "((has_hot_water_distance && has(OWL_SNOWHEAD)) || has_hot_water_er) && trick(MM_SHT_FIRELESS)"
-"trick_sht_fireless_er": "has_hot_water_er && trick(MM_SHT_FIRELESS)"
+"trick_sht_fireless": "((has_hot_water_distance && has(OWL_SNOWHEAD)) || has_hot_water_er_spring || has_hot_water_farore) && trick(MM_SHT_FIRELESS)"
+"trick_sht_fireless_er": "(has_hot_water_er_spring || has_hot_water_farore) && trick(MM_SHT_FIRELESS)"
 "can_reset_time": "can_play_time || (event(MAJORA) && trick(MM_MAJORA_LOGIC) && !is_goal_triforce)"
 "has_sticks": "event(STICKS) || renewable(STICK) || renewable(SHARED_STICK) || renewable(SHARED_STICKS_5) || renewable(SHARED_STICKS_10) || (setting(sharedNutsSticks) && event(OOT_STICKS))"
 "has_nuts": "event(NUTS) || renewable(NUT) || renewable(NUTS_5) || renewable(NUTS_10) || renewable(SHARED_NUT) || renewable(SHARED_NUTS_5) || renewable(SHARED_NUTS_10) || (setting(sharedNutsSticks) && event(OOT_NUTS))"
@@ -123,7 +130,7 @@
 "bombers1": "event(BOMBERS_NORTH1) && event(BOMBERS_EAST1) && event(BOMBERS_WEST1)"
 "bombers2": "event(BOMBERS_NORTH2) && event(BOMBERS_EAST2) && event(BOMBERS_WEST2)"
 "bombers3": "event(BOMBERS_NORTH3) && event(BOMBERS_EAST3) && event(BOMBERS_WEST3)"
-"has_fire_sticks": "has_sticks || can_use_fire_arrows"
+"has_fire_sticks": "has_sticks || can_use_fire_short_range"
 "can_pass_gibdo": "has(MASK_GIBDO) && soul_redead_gibdo"
 "can_get_gossip_fairy": "can_play_healing || can_play_epona"
 "can_jumpslash": "has_weapon || has_sticks || has_mask_zora"
@@ -145,10 +152,11 @@
 "has_hot_water_mtn": "has_bottle && event(GORON_GRAVEYARD_HOT_WATER)"
 "has_hot_water_mtn_spring": "has_bottle && (event(GORON_GRAVEYARD_HOT_WATER) || event(TWIN_ISLANDS_HOT_WATER))" # Temporary hack until we have something better
 "has_hot_water_well": "has_bottle && event(WELL_HOT_WATER)"
-"has_hot_water_distance": "can_play_soaring && (has_hot_water_mtn || has_hot_water_well)"
-"has_hot_water_distance_spring": "can_play_soaring && (has_hot_water_mtn_spring || has_hot_water_well)"
+"has_hot_water_distance": "(can_play_soaring || can_use_farore) && (has_hot_water_mtn || has_hot_water_well)"
+"has_hot_water_distance_spring": "(can_play_soaring || can_use_farore) && (has_hot_water_mtn_spring || has_hot_water_well)"
 "has_hot_water_er": "er_enabled && (has_hot_water_mtn || has_hot_water_well)"
 "has_hot_water_er_spring": "er_enabled && (has_hot_water_mtn_spring || has_hot_water_well)"
+"has_hot_water_farore": "can_use_farore && (has_hot_water_mtn_spring || has_hot_water_well)"
 "has_bugs": "has_bottle && event(BUGS)"
 "has_fish": "has_bottle && event(FISH)"
 "has_water": "has_bottle && event(WATER)"

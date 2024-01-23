@@ -11,7 +11,7 @@ static void EnBsb_OnDeath(Actor* this, GameState_Play* play)
     /* Warp on top of the bridge */
     play->nextEntrance = ((SCE_MM_IKANA_GRAVEYARD - 3) << 9) | (5 << 4);
     play->transitionTrigger = TRANS_TRIGGER_NORMAL;
-    play->transitionType = TRANS_TYPE_BLACK;
+    play->transitionType = TRANS_TYPE_FADE_BLACK;
 }
 
 PATCH_FUNC(0x80c0d9b4, EnBsb_OnDeath);

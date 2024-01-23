@@ -10,7 +10,7 @@ void EnZog_GiveItem(Actor* this, GameState_Play* play)
         {
             play->nextEntrance = 0x68a0;
             play->transitionTrigger = TRANS_TRIGGER_NORMAL;
-            play->transitionType = TRANS_TYPE_BLACK;
+            play->transitionType = TRANS_TYPE_FADE_BLACK;
             ActorDestroy(this);
         }
         return;

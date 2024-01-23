@@ -9,8 +9,8 @@
     RUPEES: "true"
   exits:
     "Ancient Castle of Ikana": "true"
-    "Ancient Castle of Ikana Interior North": "can_use_fire_arrows"
-    "Ancient Castle of Ikana Interior South": "can_use_fire_arrows"
+    "Ancient Castle of Ikana Interior North": "can_use_fire_short_range"
+    "Ancient Castle of Ikana Interior South": "can_use_fire_short_range"
     "Ancient Castle of Ikana Behind Block": "(has_mirror_shield && event(IKANA_CASTLE_LIGHT2)) || can_use_light_arrows || short_hook_anywhere"
   locations:
     "Ancient Castle of Ikana Pot Entrance 1": "true"
@@ -19,7 +19,7 @@
   dungeon: ACoI
   exits:
     "Ancient Castle of Ikana Interior": "true"
-    "Ancient Castle of Ikana Interior North 2": "has(MASK_DEKU) || short_hook_anywhere"
+    "Ancient Castle of Ikana Interior North 2": "has(MASK_DEKU) || short_hook_anywhere || (can_use_nayru && has_mask_zora)"
   locations:
     "Ancient Castle of Ikana Pot Left First Room 1": "true"
     "Ancient Castle of Ikana Pot Left First Room 2": "true"

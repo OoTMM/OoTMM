@@ -168,12 +168,12 @@ static void HandleSongOfTime(GameState_Play* play)
         if (play->msgCtx.choice == 0)
         {
             /* Age swap */
-            play->transition.age = !gSaveContext.save.age;
+            play->linkAgeOnLoad = !gSaveContext.save.age;
             Play_SetupRespawnPoint(play, 1, 0xDFF);
             gSaveContext.respawnFlag = 2;
-            play->transition.type = TRANS_TYPE_NORMAL;
-            play->transition.entrance = gSaveContext.save.entrance;
-            play->transition.gfx = TRANS_GFX_SHORTCUT;
+            play->transitionTrigger = TRANS_TYPE_NORMAL;
+            play->nextEntranceIndex = gSaveContext.save.entrance;
+            play->transitionType = TRANS_GFX_SHORTCUT;
 
             /* Set the correct farore */
             swapFarore();

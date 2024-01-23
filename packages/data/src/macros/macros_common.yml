@@ -1,6 +1,10 @@
 # Misc
 "has_magic_jar": "cond(setting(sharedMagic), renewable(SHARED_MAGIC_JAR_SMALL) || renewable(SHARED_MAGIC_JAR_LARGE), renewable(MAGIC_JAR_SMALL) || renewable(MAGIC_JAR_LARGE))"
 
+"can_use_din_raw": "has_magic && cond(setting(sharedSpellFire), has(SHARED_SPELL_FIRE), has(SPELL_FIRE))"
+"can_use_farore_raw": "has_magic && cond(setting(sharedSpellWind), has(SHARED_SPELL_WIND), has(SPELL_WIND))"
+"can_use_nayru_raw": "has_magic && cond(setting(sharedSpellLove), has(SHARED_SPELL_LOVE), has(SPELL_LOVE))"
+
 # Shared Souls
 "soul_octorok": "soul_enemy(SOUL_ENEMY_OCTOROK) || soul_enemy(SHARED_SOUL_ENEMY_OCTOROK)"
 "soul_wallmaster": "soul_enemy(SOUL_ENEMY_WALLMASTER) || soul_enemy(SHARED_SOUL_ENEMY_WALLMASTER)"

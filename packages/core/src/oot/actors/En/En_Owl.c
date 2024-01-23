@@ -16,19 +16,16 @@ void EnOwl_AfterInit(Actor* this)
 
 static void EnOwl_StartCutscene(void)
 {
-    TransitionContext* t;
-
-    t = &gPlay->transition;
-    t->type = TRANS_TYPE_NORMAL;
-    t->gfx = TRANS_GFX_SHORTCUT;
+    gPlay->transitionTrigger = TRANS_TYPE_NORMAL;
+    gPlay->transitionType = TRANS_GFX_SHORTCUT;
 
     switch (gPlay->sceneId)
     {
     case SCE_OOT_LAKE_HYLIA:
-        t->entrance = 0x27e;
+        gPlay->nextEntranceIndex = 0x27e;
         break;
     case SCE_OOT_DEATH_MOUNTAIN_TRAIL:
-        t->entrance = 0x554;
+        gPlay->nextEntranceIndex = 0x554;
         break;
     }
 	gIsEntranceOverride = 1;

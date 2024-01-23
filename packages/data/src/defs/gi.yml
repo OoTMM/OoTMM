@@ -509,15 +509,15 @@
 - { id: MM_MILK, item: MM_MILK, type: MINOR, add: MM_BOTTLE_REFILL, flags: 0x80, draw: MILK, object: [mm, 0x00c1], name: "some <C0>Milk" }
 - { id: MM_GOLD_DUST, item: MM_GOLD_DUST, type: MINOR, add: MM_BOTTLE_REFILL, flags: 0x80, draw: MM_GOLD_DUST, object: [mm, 0x01e8] }
 - { id: MM_SEAHORSE2, item: MM_SEAHORSE, type: NORMAL, add: MM_BOTTLE_REFILL, flags: 0x80, draw: MM_SEAHORSE, object: [mm, 0x01f0], name: "a <C0>Seahorse" }
-- { id: MM_MOON_TEAR, item: MM_MOON_TEAR, type: MAJOR, add: [MM_TRADE1, 0], flags: 0x80, draw: MM_MOON_TEAR, object: [mm, 0x01b1], name: "the <C1>Moon's Tear" }
-- { id: MM_DEED_LAND, item: MM_DEED_LAND, type: MAJOR, add: [MM_TRADE1, 1], flags: 0x80, draw: MM_DEED_LAND, object: [mm, 0x01b2], name: "the <C1>Land Title Deed" }
-- { id: MM_DEED_SWAMP, item: MM_DEED_SWAMP, type: MAJOR, add: [MM_TRADE1, 2], flags: 0x80, draw: MM_DEED_SWAMP, object: [mm, 0x01b2], name: "the <C1>Swamp Title Deed" }
-- { id: MM_DEED_MOUNTAIN, item: MM_DEED_MOUNTAIN, type: MAJOR, add: [MM_TRADE1, 3], flags: 0x80, draw: MM_DEED_MOUNTAIN, object: [mm, 0x01b2], name: "the <C1>Mountain Title Deed" }
-- { id: MM_DEED_OCEAN, item: MM_DEED_OCEAN, type: MAJOR, add: [MM_TRADE1, 4], flags: 0x80, draw: MM_DEED_OCEAN, object: [mm, 0x01b2], name: "the <C1>Ocean Title Deed" }
-- { id: MM_ROOM_KEY, item: MM_ROOM_KEY, type: MAJOR, add: [MM_TRADE2, 0], flags: 0x80, draw: MM_ROOM_KEY, object: [mm, 0x020f], name: "the <C1>Room Key" }
-- { id: MM_LETTER_TO_MAMA, item: MM_LETTER_TO_MAMA, type: MAJOR, add: [MM_TRADE2, 1], flags: 0x80, draw: MM_LETTER_TO_MAMA, object: [mm, 0x0245], name: "the <C1>Letter to Mama" }
-- { id: MM_LETTER_TO_KAFEI, item: MM_LETTER_TO_KAFEI, type: MAJOR, add: [MM_TRADE3, 0], flags: 0x80, draw: MM_LETTER_TO_KAFEI, object: [mm, 0x0210], name: "the <C1>Letter to Kafei" }
-- { id: MM_PENDANT_OF_MEMORIES, item: MM_PENDANT_OF_MEMORIES, type: MAJOR, add: [MM_TRADE3, 1], flags: 0x80, draw: MM_PENDANT_OF_MEMORIES, object: [mm, 0x0215], name: "the <C1>Pendant of Memories" }
+- { id: MM_MOON_TEAR, item: MM_MOON_TEAR, type: MAJOR, add: [MM_TRADE1, 1], flags: 0x80, draw: MM_MOON_TEAR, object: [mm, 0x01b1], name: "the <C1>Moon's Tear" }
+- { id: MM_DEED_LAND, item: MM_DEED_LAND, type: MAJOR, add: [MM_TRADE1, 2], flags: 0x80, draw: MM_DEED_LAND, object: [mm, 0x01b2], name: "the <C1>Land Title Deed" }
+- { id: MM_DEED_SWAMP, item: MM_DEED_SWAMP, type: MAJOR, add: [MM_TRADE1, 3], flags: 0x80, draw: MM_DEED_SWAMP, object: [mm, 0x01b2], name: "the <C1>Swamp Title Deed" }
+- { id: MM_DEED_MOUNTAIN, item: MM_DEED_MOUNTAIN, type: MAJOR, add: [MM_TRADE1, 4], flags: 0x80, draw: MM_DEED_MOUNTAIN, object: [mm, 0x01b2], name: "the <C1>Mountain Title Deed" }
+- { id: MM_DEED_OCEAN, item: MM_DEED_OCEAN, type: MAJOR, add: [MM_TRADE1, 5], flags: 0x80, draw: MM_DEED_OCEAN, object: [mm, 0x01b2], name: "the <C1>Ocean Title Deed" }
+- { id: MM_ROOM_KEY, item: MM_ROOM_KEY, type: MAJOR, add: [MM_TRADE2, 1], flags: 0x80, draw: MM_ROOM_KEY, object: [mm, 0x020f], name: "the <C1>Room Key" }
+- { id: MM_LETTER_TO_MAMA, item: MM_LETTER_TO_MAMA, type: MAJOR, add: [MM_TRADE2, 2], flags: 0x80, draw: MM_LETTER_TO_MAMA, object: [mm, 0x0245], name: "the <C1>Letter to Mama" }
+- { id: MM_LETTER_TO_KAFEI, item: MM_LETTER_TO_KAFEI, type: MAJOR, add: [MM_TRADE3, 1], flags: 0x80, draw: MM_LETTER_TO_KAFEI, object: [mm, 0x0210], name: "the <C1>Letter to Kafei" }
+- { id: MM_PENDANT_OF_MEMORIES, item: MM_PENDANT_OF_MEMORIES, type: MAJOR, add: [MM_TRADE3, 2], flags: 0x80, draw: MM_PENDANT_OF_MEMORIES, object: [mm, 0x0215], name: "the <C1>Pendant of Memories" }
 - { id: MM_WORLD_MAP_CLOCK_TOWN, item: MM_WORLD_MAP, type: NORMAL, add: [WORLD_MAP, 0], flags: 0xa0, draw: MM_WORLD_MAP, object: [mm, 0x024d], name: "a <C0>World Map (Clock Town)" }
 - { id: MM_WORLD_MAP_WOODFALL, item: MM_WORLD_MAP, type: NORMAL, add: [WORLD_MAP, 1], flags: 0xa0, draw: MM_WORLD_MAP, object: [mm, 0x024d], name: "a <C0>World Map (Woodfall)" }
 - { id: MM_WORLD_MAP_SNOWHEAD, item: MM_WORLD_MAP, type: NORMAL, add: [WORLD_MAP, 2], flags: 0xa0, draw: MM_WORLD_MAP, object: [mm, 0x024d], name: "a <C0>World Map (Snowhead)" }
@@ -657,6 +657,9 @@
 - { id: MM_BOMBCHU_BAG_10, type: MAJOR, add: [MM_BOMBCHU_BAG, 10], flags: 0xa0, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Bombchu Bag" }
 - { id: MM_BOMBCHU_BAG_20, type: MAJOR, add: [MM_BOMBCHU_BAG, 20], flags: 0xa0, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Bombchu Bag" }
 - { id: MM_FAIRY_BIG, type: MINOR, add: MM_FAIRY_BIG, flags: 0xa0, draw: FAIRY_BIG, object: [oot, 0x0177], name: "a <C0>Big Fairy" }
+- { id: MM_SPELL_FIRE, item: MM_SPELL_FIRE, type: MAJOR, add: [MM_TRADE1, 0], flags: 0x80, draw: OOT_SPELL_FIRE, object: [oot, 0x015d], name: "<C1>Din's Fire" }
+- { id: MM_SPELL_WIND, item: MM_SPELL_WIND, type: MAJOR, add: [MM_TRADE2, 0], flags: 0x80, draw: OOT_SPELL_WIND, object: [oot, 0x015d], name: "<C1>Farore's Wind" }
+- { id: MM_SPELL_LOVE, item: MM_SPELL_LOVE, type: MAJOR, add: [MM_TRADE3, 0], flags: 0x80, draw: OOT_SPELL_LOVE, object: [oot, 0x015d], name: "<C1>Nayru's Love" }
 - { id: MM_MASK_MAJORA, type: MAJOR, add: [ENDGAME, 1], flags: 0xa0, draw: MASK_MAJORA, object: GI_MASK_MAJORA, name: "<C3>Majora's Mask" }
 - { id: MM_SOLD_OUT, flags: 0xa0, draw: OOT_SOLD_OUT, object: [mm, 0x0113] }
 - { id: NOTHING,  flags: 0xa0, name: "<C0>Nothing" }

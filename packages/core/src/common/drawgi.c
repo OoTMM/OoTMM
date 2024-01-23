@@ -152,12 +152,6 @@ void DrawGi_CustomHeartContainer(GameState_Play* play, s16 drawGiId)
     CLOSE_DISPS();
 }
 
-#if defined(GAME_OOT)
-static const u32 kMatTransformOffset = 0x11da0;
-#else
-static const u32 kMatTransformOffset = 0x187fc;
-#endif
-
 void shaderFlameEffectColor(GameState_Play* play, u32 color, float scale, float offsetY)
 {
 #if defined(GAME_OOT)
@@ -198,7 +192,7 @@ void shaderFlameEffectColor(GameState_Play* play, u32 color, float scale, float 
     envColor |= (primColor & 0xff);
 
     OPEN_DISPS(play->gs.gfx);
-    ModelViewUnkTransform((float*)((char*)play + kMatTransformOffset));
+    ModelViewUnkTransform(&play->billboardMtxF);
     ModelViewTranslate(0.f, -(30.f + offsetY), -15.f, MAT_MUL);
     ModelViewScale(flameScale * 1.7f, flameScale, flameScale, MAT_MUL);
     gSPSegment(POLY_XLU_DISP++, 0x08, DisplaceTexture(play->gs.gfx, 0, 0, 0, 0x20, 0x40, 1, 0, (-play->gs.frameCount & 0x7f) << 2, 0x20, 0x80));
@@ -232,11 +226,7 @@ static void drawFire(GameState_Play* play, u32 primColor, u32 envColor, float sc
     flameScale = 0.0055f * scale;
     ModelViewTranslate(0.f, offsetY, 0.f, MAT_MUL);
     ModelViewScale(flameScale * 1.7f, flameScale, flameScale, MAT_MUL);
-#if defined(GAME_OOT)
-    ModelViewUnkTransform(play->transition.billboardMtxF);
-#else
-    ModelViewUnkTransform(play->billboardMtxF);
-#endif
+    ModelViewUnkTransform(&play->billboardMtxF);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     MatrixStackPop();
 
@@ -283,7 +273,7 @@ static void shaderFlameEffect(GameState_Play* play, int colorIndex, float scale,
     u8 a;
 
     OPEN_DISPS(play->gs.gfx);
-    ModelViewUnkTransform((float*)((char*)play + kMatTransformOffset));
+    ModelViewUnkTransform(&play->billboardMtxF);
     ModelViewTranslate(0.f, -(30.f + offsetY), -15.f, MAT_MUL);
     ModelViewScale(flameScale * 1.7f, flameScale, flameScale, MAT_MUL);
     gSPSegment(POLY_XLU_DISP++, 0x08, DisplaceTexture(play->gs.gfx, 0, 0, 0, 0x20, 0x40, 1, 0, (-play->gs.frameCount & 0x7f) << 2, 0x20, 0x80));
@@ -647,7 +637,7 @@ void DrawGi_CustomStrayFairy(GameState_Play* play, s16 drawGiId)
     OPEN_DISPS(play->gs.gfx);
     gSPSegment(POLY_XLU_DISP++, 0x08, gCustomKeep);
     comboSetObjectSegment(play->gs.gfx, &kStrayFairyObj);
-    ModelViewUnkTransform((float*)((char*)play + kMatTransformOffset));
+    ModelViewUnkTransform(&play->billboardMtxF);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     InitListPolyXlu(play->gs.gfx);
     color4(&r, &g, &b, &a, kEnvColors[index - 1]);
@@ -1262,7 +1252,7 @@ void DrawGi_CustomBottleFairy(GameState_Play* play, s16 drawGiId, u8 param)
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[1]);
-    ModelViewUnkTransform((float*)((char*)play + kMatTransformOffset));
+    ModelViewUnkTransform(&play->billboardMtxF);
     ModelViewTranslate(0.f, -8.f, 0.f, MAT_MUL);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     color4(&c[0], &c[1], &c[2], &c[3], kColors[param]);
@@ -1325,11 +1315,7 @@ void DrawGi_BigFairy(GameState_Play* play, s16 drawGiId)
     gSPSegment(POLY_XLU_DISP++, 0x08, tex);
     ModelViewTranslate(0.0f, -6.0f, 0.0f, MAT_MUL);
     ModelViewScale(2.0f, 2.0f, 2.0f, MAT_MUL);
-#if defined(GAME_OOT)
-    ModelViewUnkTransform(play->transition.billboardMtxF);
-#else
-    ModelViewUnkTransform(play->billboardMtxF);
-#endif
+    ModelViewUnkTransform(&play->billboardMtxF);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[2]);
 

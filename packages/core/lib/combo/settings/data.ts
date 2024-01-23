@@ -1156,6 +1156,27 @@ export const SETTINGS = [{
   description: 'Turns the first out-of-shop bombchu pack you find into the bombchu bag. Has logical implications.',
   default: false,
 }, {
+  key: 'spellFireMm',
+  name: "Din's Fire (MM)",
+  category: 'items.extensions',
+  type: 'boolean',
+  description: "Adds Din's Fire in Majora's Mask.",
+  default: false
+}, {
+  key: 'spellWindMm',
+  name: "Farore's Wind (MM)",
+  category: 'items.extensions',
+  type: 'boolean',
+  description: "Adds Farore's Wind in Majora's Mask.",
+  default: false
+}, {
+  key: 'spellLoveMm',
+  name: "Nayru's Love (MM)",
+  category: 'items.extensions',
+  type: 'boolean',
+  description: "Adds Nayru's Love in Majora's Mask.",
+  default: false
+}, {
   key: 'ocarinaButtonsShuffleOot',
   name: 'Ocarina Buttons Shuffle (OoT)',
   category: 'items.extensions',
@@ -1427,6 +1448,27 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false,
   cond: (s: any) => s.bombchuBagOot && s.bombchuBagMm,
+}, {
+  key: 'sharedSpellFire',
+  name: "Shared Din's Fire",
+  category: 'items.shared',
+  type: 'boolean',
+  default: false,
+  cond: (s: any) => s.spellFireMm,
+}, {
+  key: 'sharedSpellWind',
+  name: "Shared Farore's Wind",
+  category: 'items.shared',
+  type: 'boolean',
+  default: false,
+  cond: (s: any) => s.spellWindMm,
+}, {
+  key: 'sharedSpellLove',
+  name: "Shared Nayru's Love",
+  category: 'items.shared',
+  type: 'boolean',
+  default: false,
+  cond: (s: any) => s.spellLoveMm,
 }, {
   key: 'agelessSwords',
   name: 'Ageless Swords',

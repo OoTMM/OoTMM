@@ -12,7 +12,7 @@ void EnGe1_AfterCaught(void)
     else
         entrance = 0x5f8;
 
-    gPlay->transition.entrance = entrance;
+    gPlay->nextEntranceIndex = entrance;
 }
 
 int EnGe1_IsPeaceful(void)

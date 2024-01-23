@@ -10,7 +10,7 @@ typedef void (*ShotSunActionFunc)(Actor_ShotSun*, GameState_Play*);
 struct Actor_ShotSun
 {
     /* 0x0000 */ Actor base;
-    /* 0x013C */ u8 collider[0x4C]; // ColliderCylinder
+    /* 0x013C */ ColliderCylinder collider;
     /* 0x0188 */ ShotSunActionFunc actionFunc;
     /* 0x018C */ Vec3s hitboxPos;
     /* 0x0192 */ s16 timer; // Frames until fairy spawns

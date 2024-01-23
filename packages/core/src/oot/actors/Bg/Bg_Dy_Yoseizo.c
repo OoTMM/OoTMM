@@ -26,7 +26,7 @@ void BgDyYoseizo_Update(Actor* this, GameState_Play* play)
 
     if (GetSwitchFlag(play, 0x38))
     {
-        index = play->transition.spawnId;
+        index = play->spawn;
         if (play->sceneId == SCE_OOT_GREAT_FAIRY_FOUNTAIN_SPELLS)
             index += 3;
         mask = 1 << index;

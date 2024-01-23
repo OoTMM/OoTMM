@@ -122,7 +122,7 @@ void DrawGi_BlueFire(GameState_Play* play, s16 index)
     gSPSegment(POLY_XLU_DISP++, 8, DisplaceTexture(play->gs.gfx, 0, 0, 0, 0x10, 0x20, 1, fc, -8 * fc, 0x10, 0x20));
     MatrixStackDup();
     ModelViewTranslate(-8.f, -2.f, 0.f, MAT_MUL);
-    ModelViewUnkTransform((float*)((char*)play + 0x187fc));
+    ModelViewUnkTransform(&play->billboardMtxF);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[1]);
     MatrixStackPop();

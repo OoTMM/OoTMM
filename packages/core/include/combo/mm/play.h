@@ -70,7 +70,8 @@ typedef struct
     char    unk_256[0x008];
     u16     cursorItem[5];
     u16     cursorSlot[5];
-    char    unk_272[0x012];
+    u16     equipTargetItem;
+    char    unk_274[0x010];
     s16     cursorColorIndex;
     char    unk_286[0x04a];
 }
@@ -86,30 +87,126 @@ typedef struct
 }
 GameOverContext;
 
+typedef struct {
+    /* 0x00 */ u8 ambientColor[3];
+    /* 0x03 */ s8 light1Dir[3];
+    /* 0x06 */ u8 light1Color[3];
+    /* 0x09 */ s8 light2Dir[3];
+    /* 0x0C */ u8 light2Color[3];
+    /* 0x0F */ u8 fogColor[3];
+    /* 0x12 */ s16 blendRateAndFogNear;
+    /* 0x14 */ s16 zFar;
+} EnvLightSettings; // size = 0x16
+
+typedef struct {
+    /* 0x00 */ u8 ambientColor[3];
+    /* 0x03 */ s8 light1Dir[3];
+    /* 0x06 */ u8 light1Color[3];
+    /* 0x09 */ s8 light2Dir[3];
+    /* 0x0C */ u8 light2Color[3];
+    /* 0x0F */ u8 fogColor[3];
+    /* 0x12 */ s16 fogNear; // ranges from 0-1000 (0: starts immediately, 1000: no fog), but is clamped to ENV_FOGNEAR_MAX
+    /* 0x14 */ s16 zFar; // Max depth (render distance) of the view as a whole. fogFar will always match zFar
+} CurrentEnvLightSettings; // size = 0x16
+
 typedef struct
 {
-    u16  unk_00;
-    u16  sceneTimeSpeed;
-    char unk_04[0xfc];
+    /* 0x00 */ u16 unk_0;
+    /* 0x02 */ u16 sceneTimeSpeed;
+    /* 0x04 */ Vec3f sunPos;
+    /* 0x10 */ u8 skybox1Index;
+    /* 0x11 */ u8 skybox2Index;
+    /* 0x12 */ u8 unk_12;
+    /* 0x13 */ u8 skyboxBlend;
+    /* 0x14 */ u8 unk_14;
+    /* 0x15 */ u8 skyboxDisabled;
+    /* 0x16 */ u8 sunDisabled;
+    /* 0x17 */ u8 skyboxConfig;
+    /* 0x18 */ u8 changeSkyboxNextConfig;
+    /* 0x19 */ u8 changeSkyboxState;
+    /* 0x1A */ u16 changeSkyboxTimer;
+    /* 0x1C */ u16 unk_1C;
+    /* 0x1E */ u8 lightMode;
+    /* 0x1F */ u8 lightConfig;
+    /* 0x20 */ u8 changeLightNextConfig;
+    /* 0x21 */ u8 changeLightEnabled;
+    /* 0x22 */ u16 changeLightTimer;
+    /* 0x24 */ u16 changeDuration;
+    /* 0x26 */ u8 unk_26;
+    /* 0x28 */ LightInfo dirLight1; // sun 1
+    /* 0x36 */ LightInfo dirLight2; // sun 2
+    /* 0x44 */ s8 skyboxDmaState;
+    /* 0x48 */ DmaRequest dmaRequest;
+    /* 0x68 */ OSMesgQueue loadQueue;
+    /* 0x80 */ OSMesg loadMsg[1];
+    /* 0x84 */ f32 glareAlpha;
+    /* 0x88 */ f32 lensFlareAlphaScale;
+    /* 0x8C */ AdjLightSettings adjLightSettings;
+    /* 0xA8 */ f32 unk_A8;
+    /* 0xAC */ Vec3s windDirection;
+    /* 0xB4 */ f32 windSpeed;
+    /* 0xB8 */ u8 numLightSettings;
+    /* 0xBC */ EnvLightSettings* lightSettingsList; // list of light settings from the scene file
+    /* 0xC0 */ u8 lightBlendEnabled; // only used with `LIGHT_MODE_SETTINGS` or on override
+    /* 0xC1 */ u8 lightSetting; // only used with `LIGHT_MODE_SETTINGS` or on override
+    /* 0xC2 */ u8 prevLightSetting;
+    /* 0xC3 */ u8 lightSettingOverride;
+    /* 0xC4 */ CurrentEnvLightSettings lightSettings; // settings for the currently "live" lights
+    /* 0xDA */ u16 lightBlendRateOverride;
+    /* 0xDC */ f32 lightBlend;
+    /* 0xE0 */ u8 lightBlendOverride;
+    /* 0xE1 */ u8 stormRequest;
+    /* 0xE2 */ u8 stormState;
+    /* 0xE3 */ u8 lightningState; // modified by unused func in EnWeatherTag
+    /* 0xE4 */ u8 timeSeqState;
+    /* 0xE5 */ u8 fillScreen;
+    /* 0xE6 */ u8 screenFillColor[4];
+    /* 0xEA */ u8 sandstormState;
+    /* 0xEB */ u8 sandstormPrimA;
+    /* 0xEC */ u8 sandstormEnvA;
+    /* 0xED */ u8 customSkyboxFilter;
+    /* 0xEE */ u8 skyboxFilterColor[4];
+    /* 0xF2 */ u8 precipitation[PRECIP_MAX];
+    /* 0xF7 */ u8 unk_FA[9];
 }
 EnvironmentContext;
 
+ASSERT_OFFSET(EnvironmentContext, skyboxDmaState,         0x044);
+ASSERT_OFFSET(EnvironmentContext, loadQueue,              0x068);
+ASSERT_OFFSET(EnvironmentContext, loadMsg,                0x080);
+
+_Static_assert(sizeof(EnvironmentContext) == 0x100, "MM EnvironmentContext size is wrong");
+
 typedef struct ActorContext
 {
-    char        unk_000[0xf];
+    /* 0x000 */ u8 freezeFlashTimer;
+    /* 0x001 */ u8 pad1;
+    /* 0x002 */ u8 unk2;
+    /* 0x003 */ u8 lensActive;
+    /* 0x004 */ s8 lensMaskSize; // The size of the circle when drawn the lens mask. Larger value leads to a smaller circle
+    /* 0x005 */ u8 flags;
+    /* 0x006 */ u8 pad6[0x5];
+    /* 0x00B */ s8 lensActorsDrawn;
+    /* 0x00C */ s16 halfDaysBit; // A single bit indicating the current half-day. It is one of HALFDAYBIT_DAYX_ macro values
+    /* 0x00E */ u8 totalLoadedActors;
+    /* 0x00F */ u8 numLensActors;
     ActorList   actors[12];
-    char        unk_a0[0x1b4];
+    /* 0x0A0 */ Actor* lensActors[32]; // LENS_ACTOR_MAX // Draws up to LENS_ACTOR_MAX number of invisible actors
+    char        unk_120[0x134];
     Actor*      elegyStatues[4];
-    char        unk_264[0x20];
+    char        unk_264[0x4];
+    u8          unk_268;
+    char        unk_269[0x1b];
 }
 ActorContext;
 
 ASSERT_OFFSET(ActorContext, actors,         0x010);
 ASSERT_OFFSET(ActorContext, elegyStatues,   0x254);
 ASSERT_OFFSET(ActorContext, unk_264,        0x264);
+ASSERT_OFFSET(ActorContext, unk_268,        0x268);
+ASSERT_OFFSET(ActorContext, unk_269,        0x269);
 
 _Static_assert(sizeof(ActorContext) == 0x284,       "MM ActorContext size is wrong");
-_Static_assert(sizeof(EnvironmentContext) == 0x100, "MM EnvironmentContext size is wrong");
 
 typedef struct Font
 {
@@ -339,13 +436,31 @@ ASSERT_OFFSET(RoomContext, unk_38, 0x38);
 _Static_assert(sizeof(RoomContext) == 0x80, "MM RoomContext size is wrong");
 
 
+typedef struct {
+    /* 0x0 */ u8   seqId;
+    /* 0x1 */ u8   ambienceId;
+} SequenceContext; // size = 0x2
+
 typedef struct GameState_Play
 {
     GameState           gs;
     u16                 sceneId;
-    char                unk_000a6[0x01bfa];
+    /* 0x000A6 */ u8 sceneConfig;
+    /* 0x000A7 */ char unk_A7[0x9];
+    /* 0x000B0 */ void* sceneSegment;
+    /* 0x000B4 */ char unk_B4[0x4];
+    /* 0x000B8 */ View view;
+    /* 0x00220 */ Camera mainCamera;
+    /* 0x00398 */ Camera subCameras[3]; // NUM_CAMS - CAM_ID_SUB_FIRST
+    /* 0x00800 */ Camera* cameraPtrs[4]; // NUM_CAMS
+    /* 0x00810 */ s16 activeCamId;
+    /* 0x00812 */ s16 nextCamera;
+    /* 0x00814 */ SequenceContext sequenceCtx;
+    /* 0x00818 */ LightContext lightCtx;
+    char                unk_00828[0x01478];
     ActorContext        actorCtx;
-    char                unk_01f24[0x02794];
+    /* 0x01F24 */ CutsceneContext csCtx;
+    char                unk_01f78[0x02740];
     SramContext         sramCtx;
     char                unk_046e0[0x228];
     MessageContext      msgCtx;
@@ -357,9 +472,9 @@ typedef struct GameState_Play
     RoomContext         roomCtx;
     char                unk_18760[0x3c];
     s16                 playerActorCsIds[10];
-    float               viewProjectionMtxF[16];
+    MtxF                viewProjectionMtxF;
     Vec3f               projectionMtxFDiagonal;
-    float               billboardMtxF[16];
+    MtxF                billboardMtxF;
     void*               billboardMtx;
     u32                 gameplayFrames;
     u8                  unk_18844;
@@ -385,7 +500,11 @@ typedef struct GameState_Play
     s8                  unk_1887d;
     s8                  unk_1887e;
     u8                  transitionType;
-    char                unk_18880[0x2ca];
+    /* 0x18880 */ u8 unk_18880;
+    /* 0x18884 */ CollisionCheckContext colChkCtx;
+    /* 0x18B20 */ u16 cutsceneFlags[20];
+    /* 0x18B48 */ u8 curSpawn;
+    /* 0x18B49 */ u8 unk_18B49;
     u8                  transitionMode;
     char                unk_18b4b[0x70d];
 }
@@ -401,7 +520,7 @@ GameData;
 extern GameData* gGameData;
 
 ASSERT_OFFSET(GameState_Play, actorCtx,                 0x01ca0);
-ASSERT_OFFSET(GameState_Play, unk_01f24,                0x01f24);
+ASSERT_OFFSET(GameState_Play, csCtx,                    0x01f24);
 ASSERT_OFFSET(GameState_Play, sramCtx,                  0x046b8);
 ASSERT_OFFSET(GameState_Play, msgCtx,                   0x04908);
 ASSERT_OFFSET(GameState_Play, interfaceCtx,             0x169e8);
@@ -414,8 +533,6 @@ ASSERT_OFFSET(GameState_Play, transitionMode,           0x18b4a);
 
 #define TRANS_TRIGGER_NONE          0x00
 #define TRANS_TRIGGER_NORMAL        0x14
-
-#define TRANS_TYPE_BLACK     0x02
 
 _Static_assert(sizeof(GameState_Play) == 0x19258, "MM GameState_Play size is wrong");
 
