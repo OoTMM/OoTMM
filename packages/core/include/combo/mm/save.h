@@ -194,7 +194,7 @@ typedef struct
     MmItemEquips            itemEquips;
     MmInventory             inventory;
     MmPermanentSceneFlags   permanentSceneFlags[120];
-    FaroresWindData         fw;
+    FaroresWindData         fw; /* TODO: Are we sure this isn't used? */
     u8                      unk_E40[0x2C];
     u32                     dekuPlaygroundHighScores[3];
     u32                     pictoFlags0;
