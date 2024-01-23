@@ -45,8 +45,8 @@ jobs:
           repo-name: practicerom
           keys-asc: https://practicerom.com/public/packages/debian/pgp.pub
 
-      - name: Add n64 toolchain
-        run: sudo apt-get install n64-ultra
+      - name: Install system dependencies
+        run: sudo apt-get install n64-ultra cmake ninja-build
 
       - name: Use Node.js 20.x
         uses: actions/setup-node@v3

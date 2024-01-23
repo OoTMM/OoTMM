@@ -3,7 +3,6 @@ cmake_minimum_required(VERSION 3.10)
 set(ARCH "mips64-ultra-elf")
 set(CMAKE_C_COMPILER "${ARCH}-gcc")
 set(CMAKE_ASM_COMPILER "${ARCH}-gcc")
-set(CMAKE_CXX_COMPILER "${ARCH}-g++")
 
 project(OoTMM C ASM)
 
