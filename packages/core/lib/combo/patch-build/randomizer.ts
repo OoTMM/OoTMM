@@ -778,6 +778,8 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MM_OPEN_SH: world.resolvedFlags.openDungeonsMm.has('SH'),
     MM_OPEN_GB: world.resolvedFlags.openDungeonsMm.has('GB'),
     MM_OPEN_ST: world.resolvedFlags.openDungeonsMm.has('ST'),
+    MM_CLEAR_OPEN_WF: settings.clearStateDungeonsMm === 'WF' || settings.clearStateDungeonsMm === 'both',
+    MM_CLEAR_OPEN_GB: settings.clearStateDungeonsMm === 'GB' || settings.clearStateDungeonsMm === 'both',
     MM_SPELL_FIRE: settings.spellFireMm,
     MM_SPELL_WIND: settings.spellWindMm,
     MM_SPELL_LOVE: settings.spellLoveMm,
