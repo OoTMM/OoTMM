@@ -256,7 +256,7 @@
     BOMBERS_NORTH3: "event(HIDE_SEEK3)"
     BOMBER_CODE: "bombers1 || bombers2 || bombers3"
     SAKON_BOMB_BAG: "can_fight && before(NIGHT1_AM_12_00)"
-    SAKON_BOOM: "(has_arrows || can_hookshot_short) && before(NIGHT1_AM_12_00)"
+    SAKON_BOOM: "(has_arrows || can_hookshot_short || can_use_din) && before(NIGHT1_AM_12_00)"
     MAIL_LETTER: "has(LETTER_TO_KAFEI) && before(DAY2_AM_11_30)"
     PICTURE_TINGLE: "has(PICTOGRAPH_BOX) && is_day"
     RUPEES: "true"
@@ -1181,7 +1181,7 @@
   exits:
     "Road to Southern Swamp": "true"
     "Tourist Information": "true"
-    "Swamp Back": "event(BOAT_RIDE) || event(CLEAN_SWAMP) || has_mask_zora || (has(MASK_DEKU) && (has_arrows || can_hookshot_short) || can_use_nayru)"
+    "Swamp Back": "event(BOAT_RIDE) || event(CLEAN_SWAMP) || has_mask_zora || ((has(MASK_DEKU) || can_use_nayru) && (has_arrows || can_hookshot_short || can_use_din))"
     "Swamp Potion Shop": "true"
     "Woods of Mystery": "true"
     "Owl Swamp": "true"
@@ -1392,7 +1392,7 @@
   exits:
     "Swamp Back": "true"
     "Deku Palace Cliff": "has(MASK_DEKU) || short_hook_anywhere"
-    "Near Deku Shrine": "event(CLEAN_SWAMP) || can_use_nayru"
+    "Near Deku Shrine": "event(CLEAN_SWAMP) || (can_use_nayru && has_mask_zora)"
     "Deku Palace Main": "has(MASK_DEKU) || trick(MM_PALACE_GUARD_SKIP) || short_hook_anywhere"
     "Deku Palace Upper": "(event(CLEAN_SWAMP) || has(MASK_DEKU) || can_use_nayru) && can_use_beans"
   events:
