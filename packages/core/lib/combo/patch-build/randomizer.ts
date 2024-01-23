@@ -765,6 +765,10 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     OOT_BRIDGE_MEDALLIONS: settings.rainbowBridge === 'medallions',
     OOT_BRIDGE_CUSTOM: settings.rainbowBridge === 'custom',
     MULTIPLAYER: settings.mode !== 'single',
+    MM_OPEN_WF: world.resolvedFlags.openDungeonsMm.has('WF'),
+    MM_OPEN_SH: world.resolvedFlags.openDungeonsMm.has('SH'),
+    MM_OPEN_GB: world.resolvedFlags.openDungeonsMm.has('GB'),
+    MM_OPEN_ST: world.resolvedFlags.openDungeonsMm.has('ST'),
   };
 
   for (const v in exprs) {

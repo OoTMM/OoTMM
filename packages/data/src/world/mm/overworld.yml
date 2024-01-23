@@ -1517,7 +1517,7 @@
   exits:
     "Swamp Canopy Back": "true"
     "Woodfall Shrine": "(has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP))) || hookshot_anywhere"
-    "Woodfall Temple Princess Jail": "event(CLEAN_SWAMP) && event(OPEN_WOODFALL_TEMPLE)"
+    "Woodfall Temple Princess Jail": "event(CLEAN_SWAMP) && (event(OPEN_WOODFALL_TEMPLE) || setting(openDungeonsMm, WF))"
     "Woodfall Near Fairy Fountain": "event(CLEAN_SWAMP) && short_hook_anywhere"
   locations:
     "Woodfall Entrance Chest": "has(MASK_DEKU) || can_hookshot || event(CLEAN_SWAMP)"
@@ -1534,17 +1534,17 @@
   region: WOODFALL
   exits:
     "Woodfall Temple": "true"
-    "Woodfall Shrine": "true"
+    "Woodfall Shrine": "cond(setting(openDungeonsMm, WF), has(MASK_DEKU) || hookshot_anywhere, true)"
     "Woodfall": "event(CLEAN_SWAMP)"
 "Woodfall Shrine":
   region: WOODFALL
   exits:
     "Woodfall": "(has(MASK_DEKU) && soul_deku_scrub) || event(CLEAN_SWAMP) || hookshot_anywhere"
     "Woodfall Near Fairy Fountain": "(has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP) || short_hook_anywhere)) || hookshot_anywhere"
-    "Woodfall Front of Temple": "event(OPEN_WOODFALL_TEMPLE)"
+    "Woodfall Front of Temple": "event(OPEN_WOODFALL_TEMPLE) && (has(MASK_DEKU) || hookshot_anywhere)"
     "Owl Woodfall": "true"
   events:
-    OPEN_WOODFALL_TEMPLE: "has(MASK_DEKU) && can_play_awakening"
+    OPEN_WOODFALL_TEMPLE: "(has(MASK_DEKU) && can_play_awakening) || setting(openDungeonsMm, WF)"
   locations:
     "Woodfall Near Owl Chest": "short_hook_anywhere"
 "Woodfall Near Fairy Fountain":
@@ -1997,8 +1997,8 @@
   region: SNOWHEAD
   exits:
     "Path to Snowhead Back": "true"
-    "Snowhead": "event(OPEN_SNOWHEAD_TEMPLE)"
-    "Snowhead Near Fairy Fountain": "event(OPEN_SNOWHEAD_TEMPLE)"
+    "Snowhead": "event(OPEN_SNOWHEAD_TEMPLE) || (setting(openDungeonsMm, SH) && has_mask_goron)"
+    "Snowhead Near Fairy Fountain": "event(OPEN_SNOWHEAD_TEMPLE) || (setting(openDungeonsMm, SH) && has_mask_goron)"
     "Owl Snowhead": "true"
   events:
     OPEN_SNOWHEAD_TEMPLE: "can_lullaby || (event(BOSS_SNOWHEAD) && has_mask_goron)"
@@ -2011,15 +2011,15 @@
   exits:
     "Snowhead Entrance": "true"
     "Snowhead Temple": "true"
-    "Snowhead Near Fairy Fountain": "event(BOSS_SNOWHEAD)"
+    "Snowhead Near Fairy Fountain": "event(BOSS_SNOWHEAD) || setting(openDungeonsMm, SH)"
 "Snowhead Near Fairy Fountain":
   region: SNOWHEAD
   events:
-    MAGIC: "(event(OPEN_SNOWHEAD_TEMPLE) && can_break_boulders) || event(BOSS_SNOWHEAD)"
-    RUPEES: "(event(OPEN_SNOWHEAD_TEMPLE) || event(BOSS_SNOWHEAD)) && (can_use_light_arrows && soul_wolfos)"
+    MAGIC: "((event(OPEN_SNOWHEAD_TEMPLE) || setting(openDungeonsMm, SH)) && can_break_boulders) || event(BOSS_SNOWHEAD)"
+    RUPEES: "((event(OPEN_SNOWHEAD_TEMPLE) || setting(openDungeonsMm, SH)) || event(BOSS_SNOWHEAD)) && (can_use_light_arrows && soul_wolfos)"
   exits:
     "Snowhead Entrance": "true"
-    "Snowhead": "event(BOSS_SNOWHEAD)"
+    "Snowhead": "event(BOSS_SNOWHEAD) || setting(openDungeonsMm, SH)"
     "Snowhead Fairy Fountain": "true"
 "Snowhead Fairy Fountain":
   region: ENTRANCE
@@ -2572,7 +2572,7 @@
   exits:
     "Zora Cape": "has_mask_zora || trick(MM_ZORA_HALL_HUMAN)"
     "Zora Hall": "true"
-    "Great Bay Temple": "has_mask_zora && can_hookshot && can_play_zora"
+    "Great Bay Temple": "((has_mask_zora && can_play_zora) || setting(openDungeonsMm, GB)) && can_hookshot"
     "Owl Zora Cape": "true"
 "Behind Gorman Fence":
   region: MILK_ROAD
@@ -2945,7 +2945,7 @@
   region: STONE_TOWER
   exits:
     "Ikana Canyon": "true"
-    "Stone Tower Top": "((can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER))) && can_hookshot) || (can_use_elegy3 && short_hook_anywhere && trick(MM_OOB_MOVEMENT)) || hookshot_anywhere"
+    "Stone Tower Top": "((can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER))) && can_hookshot) || (can_use_elegy3 && short_hook_anywhere && trick(MM_OOB_MOVEMENT)) || hookshot_anywhere || setting(openDungeonsMm, ST)"
     "Stone Tower Lower Scarecrow Ledge": "((can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER))) && scarecrow_hookshot) || hookshot_anywhere"
     "Stone Tower Upper Scarecrow Ledge": "((can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER))) && can_hookshot) || (can_use_elegy3 && short_hook_anywhere) || hookshot_anywhere"
   locations:
@@ -2955,7 +2955,7 @@
   region: STONE_TOWER
   exits:
     "Stone Tower": "true"
-    "Stone Tower Front of Temple": "can_use_elegy || (short_hook_anywhere && trick(MM_OOB_MOVEMENT)) || hookshot_anywhere"
+    "Stone Tower Front of Temple": "can_use_elegy || (short_hook_anywhere && trick(MM_OOB_MOVEMENT)) || hookshot_anywhere || setting(openDungeonsMm, ST)"
     "Stone Tower Top Inverted": "can_use_elegy && can_use_light_arrows"
     "Stone Tower Lower Scarecrow Ledge": "has_mask_goron || scarecrow_hookshot || hookshot_anywhere"
     "Stone Tower Upper Scarecrow Ledge": "scarecrow_hookshot || short_hook_anywhere"
@@ -2964,7 +2964,7 @@
   region: STONE_TOWER
   exits:
     "Stone Tower": "true"
-    "Stone Tower Top": "can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER) && short_hook_anywhere) || can_hookshot"
+    "Stone Tower Top": "can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER) && short_hook_anywhere) || can_hookshot || setting(openDungeonsMm, ST)"
     "Stone Tower Top Inverted": "can_use_elegy && can_use_light_arrows"
     "Stone Tower Temple": "true"
     "Stone Tower Lower Scarecrow Ledge": "has_mask_goron || has_mask_zora || scarecrow_hookshot || hookshot_anywhere || (short_hook_anywhere && trick(MM_OOB_MOVEMENT))" # || (can_jumpslash) # Can simply backwalk off the ledge, jumpslash and recoil down to the ledge, but that should be a trick.

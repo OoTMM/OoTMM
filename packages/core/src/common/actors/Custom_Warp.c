@@ -15,10 +15,13 @@ static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
 
 #if defined(GAME_MM)
 
-#define SWITCH_SPRING       0
-#define SWITCH_SWAMP_CLEAR  1
-#define SWITCH_COAST_CLEAR  2
-#define SWITCH_OPEN_MOON    3
+#define SWITCH_SPRING           0
+#define SWITCH_SWAMP_CLEAR      1
+#define SWITCH_COAST_CLEAR      2
+#define SWITCH_OPEN_MOON        3
+#define SWITCH_OPEN_ST_BOTTOM   4
+#define SWITCH_OPEN_ST_TOP      5
+#define SWITCH_OPEN_ST_TEMPLE   6
 
 static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
 {
@@ -42,6 +45,15 @@ static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
     case SWITCH_OPEN_MOON:
         play->nextEntrance = 0xc800;
         gSaveContext.timerStates[3] = 0;
+        break;
+    case SWITCH_OPEN_ST_BOTTOM:
+        play->nextEntrance = 0xaa10;
+        break;
+    case SWITCH_OPEN_ST_TOP:
+        play->nextEntrance = 0xaa20;
+        break;
+    case SWITCH_OPEN_ST_TEMPLE:
+        play->nextEntrance = 0xaa00;
         break;
     }
 }
@@ -156,6 +168,30 @@ void comboSpawnCustomWarps(GameState_Play* play)
         x = 212.f;
         y = 30.f;
         z = 0.f;
+    }
+
+    if (comboConfig(CFG_MM_OPEN_ST) && gSave.entranceIndex == 0xaa00)
+    {
+        variable = SWITCH_OPEN_ST_BOTTOM;
+        x = 100.f;
+        y = -2960.f;
+        z = 1482.f;
+    }
+
+    if (comboConfig(CFG_MM_OPEN_ST) && (gSave.entranceIndex == 0xaa10 || gSave.entranceIndex == 0xaa30))
+    {
+        variable = SWITCH_OPEN_ST_TOP;
+        x = 560.f;
+        y = -560.f;
+        z = 3000.f;
+    }
+
+    if (comboConfig(CFG_MM_OPEN_ST) && gSave.entranceIndex == 0xaa20)
+    {
+        variable = SWITCH_OPEN_ST_TEMPLE;
+        x = -266.f;
+        y = -580.f;
+        z = 1530.f;
     }
 #endif
 

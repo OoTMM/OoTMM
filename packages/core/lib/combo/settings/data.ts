@@ -680,6 +680,19 @@ export const SETTINGS = [{
   description: 'Allows access to the Fire Temple as child.',
   default: false
 }, {
+  key: 'openDungeonsMm',
+  name: 'Open Dungeons (MM)',
+  category: 'main.events',
+  type: 'set',
+  description: 'Make some MM dungeons more readily accessible.',
+  values: [
+    { value: 'WF', name: 'Woodfall Temple' },
+    { value: 'SH', name: 'Snowhead Temple' },
+    { value: 'GB', name: 'Great Bay Temple' },
+    { value: 'ST', name: 'Stone Tower Temple' },
+  ],
+  default: 'none'
+}, {
   key: 'kakarikoGate',
   name: 'Kakariko Gate',
   category: 'main.events',
