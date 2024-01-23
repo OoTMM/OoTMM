@@ -680,33 +680,18 @@ export const SETTINGS = [{
   description: 'Allows access to the Fire Temple as child.',
   default: false
 }, {
-  key: 'openWoodfall',
-  name: 'Raise Woodfall Temple',
+  key: 'openDungeonsMm',
+  name: 'Open Dungeons (MM)',
   category: 'main.events',
-  type: 'boolean',
-  description: 'Raises the Woodfall Temple without needing to play the song.',
-  default: false
-}, {
-  key: 'openSnowhead',
-  name: 'Stop Snowhead Blizzard',
-  category: 'main.events',
-  type: 'boolean',
-  description: 'Stops the blizzard at Snowhead without needing to play the song.',
-  default: false
-}, {
-  key: 'openGreatBay',
-  name: 'Raise Great Bay Turtle',
-  category: 'main.events',
-  type: 'boolean',
-  description: 'Raises the Great Bay turtle without needing to play the song.',
-  default: false
-}, {
-  key: 'openStoneTower',
-  name: 'Open Uninverted Stone Tower',
-  category: 'main.events',
-  type: 'boolean',
-  description: 'Enables Wisps to take you to and from Stone Tower Temple.',
-  default: false
+  type: 'set',
+  description: 'Make some MM dungeons more readily accessible.',
+  values: [
+    { value: 'WF', name: 'Woodfall Temple' },
+    { value: 'SH', name: 'Snowhead Temple' },
+    { value: 'GB', name: 'Great Bay Temple' },
+    { value: 'ST', name: 'Stone Tower Temple' },
+  ],
+  default: 'none'
 }, {
   key: 'kakarikoGate',
   name: 'Kakariko Gate',
