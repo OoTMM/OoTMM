@@ -33,7 +33,7 @@ const cloneDependencies = async () => {
   });
 };
 
-const make = async (opts: Options) => {
+const makeOld = async (opts: Options) => {
   await cloneDependencies();
   return new Promise((resolve, reject) => {
     const args = ['-j', os.availableParallelism().toString()];
@@ -49,6 +49,28 @@ const make = async (opts: Options) => {
       }
     });
   });
+};
+
+const runCommand = async (cmd: string, args: string[]) => {
+  return new Promise((resolve, reject) => {
+    const proc = childProcess.spawn(cmd, args, { stdio: 'inherit' });
+    proc.on('close', (code) => {
+      if (code === 0) {
+        resolve(null);
+      } else {
+        reject(new Error(`${cmd} exited with code ${code}`));
+      }
+    });
+  });
+};
+
+const make = async (opts: Options) => {
+  await cloneDependencies();
+  const buildDir = path.resolve(__dirname, '..', '..', 'build', 'tree', opts.debug ? 'Debug' : 'Release');
+  const sourceDir = path.resolve(__dirname, '..', '..');
+  await fs.promises.mkdir(buildDir, { recursive: true });
+  await runCommand('cmake', ['-B', buildDir, '-S', sourceDir, '-G', 'Ninja', `-DCMAKE_BUILD_TYPE=${opts.debug ? 'Debug' : 'Release'}`]);
+  await runCommand('cmake', ['--build', buildDir]);
 };
 
 const getBuildArtifacts = async (root: string): Promise<BuildOutput> => {
