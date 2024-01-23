@@ -1983,7 +1983,7 @@ static int addItem(GameState_Play* play, s16 gi)
     return ret;
 }
 
-int comboAddItem(GameState_Play* play, s16 gi)
+int comboAddItemRaw(GameState_Play* play, s16 gi)
 {
     const SharedItem* si;
     int count;

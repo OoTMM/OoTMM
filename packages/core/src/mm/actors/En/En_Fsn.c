@@ -39,7 +39,7 @@ PATCH_CALL(0x80ae3cd4, EnFsn_GiveNormalItem);
 
 int EnFsn_HasGivenShopItem(Actor_EnFsn* this, GameState_Play* play)
 {
-    if (!Actor_HasParent(&this->base) || Message_GetState(&play->msgCtx) != 6)
+    if (!Actor_HasParent(&this->base))
         return 0;
 
     if (this->mode == 1)

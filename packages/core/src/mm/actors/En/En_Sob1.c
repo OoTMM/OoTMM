@@ -3,7 +3,7 @@
 
 void EnSob1_AfterBuy(Actor_EnSob1* this, GameState_Play* play)
 {
-    if (!Actor_HasParent(&this->base) || Message_GetState(&play->msgCtx) != 6)
+    if (!Actor_HasParent(&this->base))
         return;
 
     comboShopAfterBuy(play, this->items[this->itemIndex]);

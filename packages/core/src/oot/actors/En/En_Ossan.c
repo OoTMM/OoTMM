@@ -3,7 +3,7 @@
 
 static int EnOssan_HasGivenItem(Actor_EnOssan* this, GameState_Play* play)
 {
-    if (!Actor_HasParent(&this->base) || Message_GetState(&play->msgCtx) != 6)
+    if (!Actor_HasParent(&this->base))
         return 0;
 
     comboShopAfterBuy(play, this->items[this->itemIndex]);

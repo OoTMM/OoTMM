@@ -167,7 +167,8 @@ void comboSyncItems(void);
 void reloadSlotOot(GameState_Play* play, int slot);
 void reloadSlotMm(GameState_Play* play, int slot);
 
-int comboAddItem(GameState_Play* play, s16 gi);
+int comboAddItemRaw(GameState_Play* play, s16 gi);
+int comboAddItemRawEx(GameState_Play* play, const ComboItemQuery* q, int updateText);
 int comboAddItemEx(GameState_Play* play, const ComboItemQuery* q, int updateText);
 
 int isItemLicensed(s16 gi);

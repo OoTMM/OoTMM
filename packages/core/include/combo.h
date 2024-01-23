@@ -256,6 +256,12 @@ extern u32 gMultiMarkCollectibles;
 extern u32 gMultiMarkSwitch0;
 extern u32 gMultiMarkSwitch1;
 
+#if defined(GAME_OOT)
+# define multiIsMarked multiIsMarkedOot
+#else
+# define multiIsMarked multiIsMarkedMm
+#endif
+
 void    multiSetMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id);
 void    multiSetMarkedMm(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id);
 int     multiIsMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id);

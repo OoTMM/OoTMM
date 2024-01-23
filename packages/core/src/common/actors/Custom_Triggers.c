@@ -73,7 +73,7 @@ int CustomTriggers_GiveItemNet(Actor_CustomTriggers* this, GameState_Play* play,
     comboItemOverride(&o, &q);
     if (isItemFastBuy(o.gi))
     {
-        comboAddItemEx(play, &q, 0);
+        comboAddItemRawEx(play, &q, 0);
         EnItem00_SpawnDecoy(play, o.gi);
         return 1;
     }
