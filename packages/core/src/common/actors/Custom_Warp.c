@@ -19,6 +19,7 @@ static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
 #define SWITCH_SWAMP_CLEAR  1
 #define SWITCH_COAST_CLEAR  2
 #define SWITCH_OPEN_MOON    3
+#define SWITCH_OPEN_ST      4
 
 static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
 {
@@ -42,6 +43,9 @@ static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
     case SWITCH_OPEN_MOON:
         play->nextEntrance = 0xc800;
         gSaveContext.timerStates[3] = 0;
+        break;
+    case SWITCH_OPEN_ST:
+        play->nextEntrance = 0xaa10;
         break;
     }
 }
@@ -156,6 +160,14 @@ void comboSpawnCustomWarps(GameState_Play* play)
         x = 212.f;
         y = 30.f;
         z = 0.f;
+    }
+
+    if (comboConfig(CFG_MM_OPEN_ST) && play->sceneId == SCE_MM_STONE_TOWER)
+    {
+        variable = SWITCH_OPEN_ST;
+        x = 100.f;
+        y = -2960.f;
+        z = 1482.f;
     }
 #endif
 
