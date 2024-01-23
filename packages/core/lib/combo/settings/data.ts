@@ -705,7 +705,7 @@ export const SETTINGS = [{
   name: 'Open Uninverted Stone Tower',
   category: 'main.events',
   type: 'boolean',
-  description: 'Enables a Wisp and aligns the top set of blocks in Stone Tower.',
+  description: 'Enables Wisps to take you to and from Stone Tower Temple.',
   default: false
 }, {
   key: 'kakarikoGate',
