@@ -1517,7 +1517,7 @@
   exits:
     "Swamp Canopy Back": "true"
     "Woodfall Shrine": "(has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP))) || hookshot_anywhere"
-    "Woodfall Temple Princess Jail": "event(CLEAN_SWAMP) && (event(OPEN_WOODFALL_TEMPLE) || setting(openDungeonsMm, WF))"
+    "Woodfall Temple Princess Jail": "event(CLEAN_SWAMP) && woodfall_raised"
     "Woodfall Near Fairy Fountain": "event(CLEAN_SWAMP) && short_hook_anywhere"
   locations:
     "Woodfall Entrance Chest": "has(MASK_DEKU) || can_hookshot || event(CLEAN_SWAMP)"
@@ -1534,17 +1534,17 @@
   region: WOODFALL
   exits:
     "Woodfall Temple": "true"
-    "Woodfall Shrine": "cond(setting(openDungeonsMm, WF), has(MASK_DEKU) || hookshot_anywhere, true)"
+    "Woodfall Shrine": "cond(setting(openDungeonsMm, WF), has(MASK_DEKU) || hookshot_anywhere, cond(setting(clearStateDungeonsMm, WF), event(CLEAN_SWAMP) && (has(MASK_DEKU) || hookshot_anywhere), true))"
     "Woodfall": "event(CLEAN_SWAMP)"
 "Woodfall Shrine":
   region: WOODFALL
   exits:
     "Woodfall": "(has(MASK_DEKU) && soul_deku_scrub) || event(CLEAN_SWAMP) || hookshot_anywhere"
     "Woodfall Near Fairy Fountain": "(has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP) || short_hook_anywhere)) || hookshot_anywhere"
-    "Woodfall Front of Temple": "event(OPEN_WOODFALL_TEMPLE) && (has(MASK_DEKU) || hookshot_anywhere)"
+    "Woodfall Front of Temple": "woodfall_raised && (has(MASK_DEKU) || hookshot_anywhere)"
     "Owl Woodfall": "true"
   events:
-    OPEN_WOODFALL_TEMPLE: "(has(MASK_DEKU) && can_play_awakening) || setting(openDungeonsMm, WF)"
+    OPEN_WOODFALL_TEMPLE: "has(MASK_DEKU) && can_play_awakening"
   locations:
     "Woodfall Near Owl Chest": "short_hook_anywhere"
 "Woodfall Near Fairy Fountain":
@@ -1997,11 +1997,11 @@
   region: SNOWHEAD
   exits:
     "Path to Snowhead Back": "true"
-    "Snowhead": "event(OPEN_SNOWHEAD_TEMPLE) || (setting(openDungeonsMm, SH) && has_mask_goron)"
-    "Snowhead Near Fairy Fountain": "event(OPEN_SNOWHEAD_TEMPLE) || (setting(openDungeonsMm, SH) && has_mask_goron)"
+    "Snowhead": "event(OPEN_SNOWHEAD_TEMPLE) || (blizzard_stopped && has_mask_goron)"
+    "Snowhead Near Fairy Fountain": "event(OPEN_SNOWHEAD_TEMPLE) || (blizzard_stopped && has_mask_goron)"
     "Owl Snowhead": "true"
   events:
-    OPEN_SNOWHEAD_TEMPLE: "can_lullaby || (event(BOSS_SNOWHEAD) && has_mask_goron)"
+    OPEN_SNOWHEAD_TEMPLE: "can_lullaby"
     MAGIC: "true"
     BOMBS_OR_BOMBCHU: "true"
     ARROWS: "true"
@@ -2011,15 +2011,15 @@
   exits:
     "Snowhead Entrance": "true"
     "Snowhead Temple": "true"
-    "Snowhead Near Fairy Fountain": "event(BOSS_SNOWHEAD) || setting(openDungeonsMm, SH)"
+    "Snowhead Near Fairy Fountain": "blizzard_stopped"
 "Snowhead Near Fairy Fountain":
   region: SNOWHEAD
   events:
-    MAGIC: "((event(OPEN_SNOWHEAD_TEMPLE) || setting(openDungeonsMm, SH)) && can_break_boulders) || event(BOSS_SNOWHEAD)"
-    RUPEES: "((event(OPEN_SNOWHEAD_TEMPLE) || setting(openDungeonsMm, SH)) || event(BOSS_SNOWHEAD)) && (can_use_light_arrows && soul_wolfos)"
+    MAGIC: "(blizzard_stopped && can_break_boulders) || event(BOSS_SNOWHEAD)"
+    RUPEES: "blizzard_stopped && can_use_light_arrows && soul_wolfos"
   exits:
     "Snowhead Entrance": "true"
-    "Snowhead": "event(BOSS_SNOWHEAD) || setting(openDungeonsMm, SH)"
+    "Snowhead": "blizzard_stopped"
     "Snowhead Fairy Fountain": "true"
 "Snowhead Fairy Fountain":
   region: ENTRANCE
@@ -2572,7 +2572,7 @@
   exits:
     "Zora Cape": "has_mask_zora || trick(MM_ZORA_HALL_HUMAN)"
     "Zora Hall": "true"
-    "Great Bay Temple": "((has_mask_zora && can_play_zora) || setting(openDungeonsMm, GB)) && can_hookshot"
+    "Great Bay Temple": "turtle_woken && can_hookshot"
     "Owl Zora Cape": "true"
 "Behind Gorman Fence":
   region: MILK_ROAD
