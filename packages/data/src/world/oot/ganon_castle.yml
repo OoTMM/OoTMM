@@ -159,6 +159,9 @@
     "Ganon Castle Shadow Chest 2": "(((can_longshot || has_fire_arrows) && (has_hover_boots || has_fire)) || (climb_anywhere && (has_hover_boots || hookshot_anywhere || has_lens)))"
     "Ganon Castle Pot Shadow 1": "(((can_longshot || has_fire_arrows) && (has_hover_boots || has_fire)) || (climb_anywhere && (has_hover_boots || hookshot_anywhere || (has_lens && has_fire_arrows))))"
     "Ganon Castle Pot Shadow 2": "(((can_longshot || has_fire_arrows) && (has_hover_boots || has_fire)) || (climb_anywhere && (has_hover_boots || hookshot_anywhere || (has_lens && has_fire_arrows))))"
+    "Ganon Castle Heart Shadow 1": "(((can_longshot || has_fire_arrows) && (has_hover_boots || has_fire)) || climb_anywhere) && has_lens"
+    "Ganon Castle Heart Shadow 2": "(((can_longshot || has_fire_arrows) && (has_hover_boots || has_fire)) || climb_anywhere) && has_lens"
+    "Ganon Castle Heart Shadow 3": "(((can_longshot || has_fire_arrows) && (has_hover_boots || has_fire)) || climb_anywhere) && has_lens"
 "Ganon Castle Shadow End":
   dungeon: Ganon
   events:
@@ -166,9 +169,6 @@
   locations:
     "Ganon Castle Pot Shadow End 1": "true"
     "Ganon Castle Pot Shadow End 2": "true"
-    "Ganon Castle Heart Shadow 1": "true"
-    "Ganon Castle Heart Shadow 2": "true"
-    "Ganon Castle Heart Shadow 3": "true"
 "Ganon Castle Stairs":
   region: NONE
   exits:
