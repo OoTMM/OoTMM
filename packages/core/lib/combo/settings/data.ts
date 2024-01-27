@@ -693,6 +693,19 @@ export const SETTINGS = [{
   ],
   default: 'none'
 }, {
+  key: 'clearStateDungeonsMm',
+  name: 'Clear State Dungeons (MM)',
+  category: 'main.events',
+  type: 'enum',
+  description: 'Make some MM dungeons open during clear state..',
+  values: [
+    { value: 'none', name: 'None' },
+    { value: 'WF', name: 'Woodfall Temple' },
+    { value: 'GB', name: 'Great Bay Temple' },
+    { value: 'both', name: 'Both' },
+  ],
+  default: 'none'
+}, {
   key: 'kakarikoGate',
   name: 'Kakariko Gate',
   category: 'main.events',
