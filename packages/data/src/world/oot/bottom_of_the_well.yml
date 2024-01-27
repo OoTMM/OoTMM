@@ -13,10 +13,10 @@
     "Bottom of the Well": "true"
     "Bottom of the Well Wallmaster Main": "soul_wallmaster && has_lens"
     "Bottom of the Well Basement Platform": "has_lens || climb_anywhere || hookshot_anywhere"
-    "Bottom of the Well Coffin Room": "true"
   events:
     STICKS: "true"
   locations:
+    "Bottom of the Well Coffin": "true"
     "Bottom of the Well Compass": "has_lens"
     "Bottom of the Well Under Debris": "has_explosives"
     "Bottom of the Well Back West": "has_explosives && has_lens"
@@ -72,18 +72,9 @@
     "Bottom of the Well Grass 10": "can_cut_grass"
     "Bottom of the Well Grass 11": "can_cut_grass"
     "Bottom of the Well Grass 12": "can_cut_grass"
-    "Bottom of the Well Basement Big Fairy": "can_play_sun"
-"Bottom of the Well Coffin Room":
-  dungeon: BotW
-  exits:
-    "Bottom of the Well Main": "true"
-    "Bottom of the Well Coffin Room Open": "has_fire_or_sticks"
-"Bottom of the Well Coffin Room Open":
-  dungeon: BotW
-  locations:
-    "Bottom of the Well Coffin": "true"
     "Bottom of the Well Heart 1": "true"
     "Bottom of the Well Heart 2": "true"
+    "Bottom of the Well Basement Big Fairy": "can_play_sun"
 "Bottom of the Well Basement Platform":
   dungeon: BotW
   locations:

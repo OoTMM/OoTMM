@@ -74,14 +74,14 @@
 "Fire Temple Maze Upper":
   dungeon: Fire
   exits:
-    "Fire Temple Ring": "small_keys_fire(6)"
+    "Fire Temple Ring": "small_keys_fire(6) && (is_adult || climb_anywhere || hookshot_anywhere)"
     "Fire Temple Scarecrow": "scarecrow_hookshot || hookshot_anywhere || climb_anywhere"
   locations:
     "Fire Temple Map": "true" #while Child can't climb into it normally, the only way child can even be here is with climb or hook anywhere.
     "Fire Temple Above Maze Chest": "true"
     "Fire Temple Below Maze Chest": "has_explosives"
-    "Fire Temple Heart Map Room 1": "true"
-    "Fire Temple Heart Map Room 2": "true"
+    "Fire Temple Heart Map Room 1": "is_adult || climb_anywhere || hookshot_anywhere || can_boomerang"
+    "Fire Temple Heart Map Room 2": "is_adult || climb_anywhere || hookshot_anywhere || can_boomerang"
     "Fire Temple Heart Map Room 3": "true"
 "Fire Temple Scarecrow":
   dungeon: Fire

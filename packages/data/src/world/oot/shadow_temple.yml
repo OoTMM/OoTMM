@@ -64,9 +64,8 @@
     "Shadow Temple SR Pit 4": "true"
     "Shadow Temple SR Pit 5": "true"
     "Shadow Temple Stalfos Big Fairy": "can_play_storms"
-    # TODO: Boomerang?
-    "Shadow Temple Heart Scythe 1": "can_play_time && is_adult"
-    "Shadow Temple Heart Scythe 2": "can_play_time && is_adult"
+    "Shadow Temple Heart Scythe 1": "(can_play_time && is_adult) || can_boomerang || hookshot_anywhere || climb_anywhere"
+    "Shadow Temple Heart Scythe 2": "(can_play_time && is_adult) || can_boomerang || hookshot_anywhere || climb_anywhere"
 "Shadow Temple Falling Spikes":
   dungeon: Shadow
   locations:
@@ -131,8 +130,8 @@
     SHADOW_SHORTCUT: "has(STRENGTH)"
   locations:
     "Shadow Temple GS Near Boat": "can_longshot || hookshot_anywhere || (climb_anywhere && (has_weapon || has_ranged_weapon || has_explosives || can_use_din))"
-    "Shadow Temple Heart Shortcut 1": "scarecrow_hookshot"
-    "Shadow Temple Heart Shortcut 2": "scarecrow_hookshot"
+    "Shadow Temple Heart Shortcut 1": "scarecrow_longshot || hookshot_anywhere || climb_anywhere"
+    "Shadow Temple Heart Shortcut 2": "scarecrow_longshot || hookshot_anywhere || climb_anywhere"
 "Shadow Temple After Boat":
   dungeon: Shadow
   exits:
