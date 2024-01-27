@@ -25,7 +25,7 @@
   age_change: false
   dungeon: DC
   exits:
-    "Dodongo Cavern After Boss": "has_explosives && soul_boss(SOUL_BOSS_KING_DODONGO) && (can_use_sticks || has_weapon)"
+    "Dodongo Cavern After Boss": "has_bombs && soul_boss(SOUL_BOSS_KING_DODONGO) && (can_use_sticks || has_weapon)"
   locations:
     "Dodongo Cavern Boss Chest": "true"
 "Dodongo Cavern After Boss":
