@@ -373,17 +373,17 @@ void Player_Action_FaroresWindText(Actor_Player* this, GameState_Play* play)
                 }
             }
 
-            gSaveContext.respawnFlag = 3;
+            gSaveContext.respawnFlag = -8;
             play->transitionTrigger = TRANS_TRIGGER_NORMAL;
             play->nextEntrance = entrance;
             play->transitionType = TRANS_TYPE_FADE_BLACK;
-            gSaveContext.respawn[RESPAWN_MODE_TOP].pos = gSaveContext.save.fw.pos;
-            gSaveContext.respawn[RESPAWN_MODE_TOP].yaw = gSaveContext.save.fw.yaw;
-            gSaveContext.respawn[RESPAWN_MODE_TOP].playerParams = gSaveContext.save.fw.playerParams;
-            gSaveContext.respawn[RESPAWN_MODE_TOP].entrance = entrance;
-            gSaveContext.respawn[RESPAWN_MODE_TOP].roomIndex = gSaveContext.save.fw.roomIndex;
-            gSaveContext.respawn[RESPAWN_MODE_TOP].tempSwitchFlags = gSaveContext.save.fw.tempSwchFlags;
-            gSaveContext.respawn[RESPAWN_MODE_TOP].tempCollectFlags = gSaveContext.save.fw.tempCollectFlags;
+            gSaveContext.respawn[RESPAWN_MODE_DOWN].pos = gSaveContext.save.fw.pos;
+            gSaveContext.respawn[RESPAWN_MODE_DOWN].yaw = gSaveContext.save.fw.yaw;
+            gSaveContext.respawn[RESPAWN_MODE_DOWN].playerParams = gSaveContext.save.fw.playerParams;
+            gSaveContext.respawn[RESPAWN_MODE_DOWN].entrance = entrance;
+            gSaveContext.respawn[RESPAWN_MODE_DOWN].roomIndex = gSaveContext.save.fw.roomIndex;
+            gSaveContext.respawn[RESPAWN_MODE_DOWN].tempSwitchFlags = gSaveContext.save.fw.tempSwchFlags;
+            gSaveContext.respawn[RESPAWN_MODE_DOWN].tempCollectFlags = gSaveContext.save.fw.tempCollectFlags;
 
             // TODO cancel timers?
 
@@ -523,7 +523,7 @@ void Player_AfterInit(GameState_Play* play)
     Actor_InitFaroresWind(play);
 
     u16 initMode = (player->base.variable & 0xF00) >> 8;
-    if (initMode == 6 && gSaveContext.respawnFlag == 3)
+    if (initMode == 6 && gSaveContext.respawnFlag == -8)
     {
         Player_InitFaroresWindRespawn(play, player);
     }

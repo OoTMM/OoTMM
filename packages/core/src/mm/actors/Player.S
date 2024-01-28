@@ -219,9 +219,9 @@ kItemToGi:
 .short 0xA7
 .short 0xA8
 .short GI_MM_PENDANT_OF_MEMORIES
-.short GI_MM_SPELL_FIRE
 .short GI_MM_SPELL_WIND
 .short GI_MM_SPELL_LOVE
+.short GI_MM_SPELL_FIRE
 .short GI_MM_MASK_TRUTH
 .short GI_MM_MASK_KAFEI
 .short GI_MM_MASK_ALL_NIGHT
