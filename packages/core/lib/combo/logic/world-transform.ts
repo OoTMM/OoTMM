@@ -172,6 +172,7 @@ const ITEM_POOL_PLENTIFUL = new Set([
   Items.MM_SPELL_FIRE,
   Items.MM_SPELL_WIND,
   Items.MM_SPELL_LOVE,
+  Items.MM_BOOTS_IRON,
   Items.SHARED_BOW,
   Items.SHARED_BOMB_BAG,
   Items.SHARED_MAGIC_UPGRADE,
@@ -209,6 +210,10 @@ const ITEM_POOL_PLENTIFUL = new Set([
   Items.SHARED_BUTTON_C_LEFT,
   Items.SHARED_BUTTON_C_UP,
   Items.SHARED_BUTTON_C_DOWN,
+  Items.SHARED_SPELL_FIRE,
+  Items.SHARED_SPELL_WIND,
+  Items.SHARED_SPELL_LOVE,
+  Items.SHARED_BOOTS_IRON,
 ]);
 
 const ITEMS_HEART_PIECES_CONTAINERS_BY_GAME = {
@@ -695,6 +700,12 @@ export class LogicPassWorldTransform {
       this.replaceItem(Items.OOT_SPELL_LOVE, Items.SHARED_SPELL_LOVE);
     } else if (settings.spellLoveMm) {
       this.addItem(Items.MM_SPELL_LOVE);
+    }
+
+    if (settings.sharedBootsIron) {
+      this.replaceItem(Items.OOT_BOOTS_IRON, Items.SHARED_BOOTS_IRON);
+    } else if (settings.bootsIronMm) {
+      this.addItem(Items.MM_BOOTS_IRON);
     }
 
     if (settings.sharedLens) {

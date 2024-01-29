@@ -110,6 +110,14 @@ void KaleidoScope_LoadNamedItemCustom(void* segment, u32 texIndex)
         isForeign = 1;
         texIndex = 0x7b + ITEM_OOT_SPELL_LOVE;
         break;
+    case ITEM_MM_BOOTS_IRON:
+        isForeign = 1;
+        texIndex = 0x7b + ITEM_OOT_BOOTS_IRON;
+        break;
+    case ITEM_MM_BOOTS_HOVER:
+        isForeign = 1;
+        texIndex = 0x7b + ITEM_OOT_BOOTS_HOVER;
+        break;
     }
     if (isForeign)
     {
@@ -167,6 +175,22 @@ void KaleidoScope_ShowItemMessage(GameState_Play* play, u16 messageId, u8 yPosit
         comboTextAppendStr(&b, TEXT_COLOR_RED "Din's Fire" TEXT_NL);
         comboTextAppendClearColor(&b);
         comboTextAppendStr(&b, "Its fireball engulfs everything!" TEXT_NL "It's attack magic you can use" TEXT_NL "with \xB2." TEXT_END);
+        break;
+    case ITEM_MM_BOOTS_IRON:
+        b = play->msgCtx.font.textBuffer.schar;
+        b[2] = 0xFE; // Use No Icon
+        b += 11;
+        comboTextAppendStr(&b, TEXT_COLOR_RED "Iron Boots" TEXT_NL);
+        comboTextAppendClearColor(&b);
+        comboTextAppendStr(&b, "So heavy, you can't run." TEXT_NL "So heavy, you can't float." TEXT_END);
+        break;
+    case ITEM_MM_BOOTS_HOVER:
+        b = play->msgCtx.font.textBuffer.schar;
+        b[2] = 0xFE; // Use No Icon
+        b += 11;
+        comboTextAppendStr(&b, TEXT_COLOR_RED "Hover Boots" TEXT_NL);
+        comboTextAppendClearColor(&b);
+        comboTextAppendStr(&b, "With these mysterious boots" TEXT_NL "you can hover above the ground." TEXT_NL "The downside? No traction!" TEXT_END);
         break;
     }
 }
@@ -313,6 +337,8 @@ static u32 sCustomIcons[] = {
     ITEM_MM_SPELL_WIND,
     ITEM_MM_SPELL_LOVE,
     ITEM_MM_SPELL_FIRE,
+    ITEM_MM_BOOTS_IRON,
+    ITEM_MM_BOOTS_HOVER,
 };
 
 u8 gPlayerFormCustomItemRestrictions[5][8] =
@@ -321,7 +347,7 @@ u8 gPlayerFormCustomItemRestrictions[5][8] =
     { 0, 0, 0, 0, 0, 0, 0, 0 },
     { 0, 0, 0, 0, 0, 0, 0, 0 },
     { 0, 0, 0, 0, 0, 0, 0, 0 },
-    { 1, 1, 1, 0, 0, 0, 0, 0 },
+    { 1, 1, 1, 1, 1, 0, 0, 0 },
 };
 
 typedef void (*KaleidoScope_GrayOutTextureRGBA32)(u32*, u16);
@@ -354,6 +380,12 @@ void KaleidoScope_LoadIcons(u32 vrom, void* dst, size_t* size)
             break;
         case ITEM_MM_SPELL_LOVE:
             foreignIcon = ITEM_OOT_SPELL_LOVE;
+            break;
+        case ITEM_MM_BOOTS_IRON:
+            foreignIcon = ITEM_OOT_BOOTS_IRON;
+            break;
+        case ITEM_MM_BOOTS_HOVER:
+            foreignIcon = ITEM_OOT_BOOTS_HOVER;
             break;
         default:
             continue;

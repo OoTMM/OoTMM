@@ -63,12 +63,14 @@ const u8 kMmTrade1[] = {
 
 const u8 kMmTrade2[] = {
     ITEM_MM_SPELL_WIND,
+    ITEM_MM_BOOTS_IRON,
     ITEM_MM_ROOM_KEY,
     ITEM_MM_LETTER_TO_MAMA,
 };
 
 const u8 kMmTrade3[] = {
     ITEM_MM_SPELL_LOVE,
+    ITEM_MM_BOOTS_HOVER,
     ITEM_MM_LETTER_TO_KAFEI,
     ITEM_MM_PENDANT_OF_MEMORIES,
 };
@@ -1968,6 +1970,7 @@ static const SharedItem kSimpleSharedItems[] = {
     { CFG_SHARED_SPELL_FIRE, GI_OOT_SPELL_FIRE, GI_MM_SPELL_FIRE },
     { CFG_SHARED_SPELL_WIND, GI_OOT_SPELL_WIND, GI_MM_SPELL_WIND },
     { CFG_SHARED_SPELL_LOVE, GI_OOT_SPELL_LOVE, GI_MM_SPELL_LOVE },
+    { CFG_SHARED_BOOTS_IRON, GI_OOT_BOOTS_IRON, GI_MM_BOOTS_IRON },
 };
 
 static int addItem(GameState_Play* play, s16 gi)

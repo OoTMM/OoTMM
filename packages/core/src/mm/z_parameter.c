@@ -21,6 +21,12 @@ void Interface_LoadItemIconCustom(u32 vrom, s32 id, void* dst, size_t size)
         case ITEM_MM_SPELL_LOVE:
             id = ITEM_OOT_SPELL_LOVE;
             break;
+        case ITEM_MM_BOOTS_IRON:
+            id = ITEM_OOT_BOOTS_IRON;
+            break;
+        case ITEM_MM_BOOTS_HOVER:
+            id = ITEM_OOT_BOOTS_HOVER;
+            break;
         }
 
         comboDmaLookupForeignId(&dma, 8);
@@ -69,4 +75,18 @@ u8 Interface_GetItemRestriction(u8 playerForm, u8 item, GameState_Play* play)
         u8 customItem = item - ITEM_MM_CUSTOM_MIN;
         return gPlayerFormCustomItemRestrictions[playerForm][customItem];
     }
+}
+
+s32 Items_ShouldCheckItemUsabilityWhileSwimming(GameState_Play* play, u8 item)
+{
+    Actor_Player* player = GET_LINK(play);
+    if (item == ITEM_MM_BOOTS_IRON && player->transformation == MM_PLAYER_FORM_HUMAN)
+    {
+        return 0;
+    }
+    if (Player_GetEnvironmentalHazard(play) == 4 && (item == ITEM_MM_HOOKSHOT || item == 0x11)) // Short Hookshot
+    {
+        return 0;
+    }
+    return 1;
 }
