@@ -4,6 +4,7 @@
 #include <combo/util.h>
 #include <combo/game_state.h>
 #include <combo/common/actor.h>
+#include <combo/mm/regs.h>
 #include <combo/common/ocarina.h>
 
 typedef struct
@@ -535,5 +536,15 @@ ASSERT_OFFSET(GameState_Play, transitionMode,           0x18b4a);
 #define TRANS_TRIGGER_NORMAL        0x14
 
 _Static_assert(sizeof(GameState_Play) == 0x19258, "MM GameState_Play size is wrong");
+
+typedef struct RegEditor {
+    /* 0x00 */ u8  regPage; // 0: no page selected (reg editor is not active); 1: first page; `REG_PAGES`: last page
+    /* 0x01 */ u8  regGroup; // Indexed from 0 to `REG_GROUPS`-1. Each group has its own character to identify it.
+    /* 0x02 */ u8  regCur; // Selected reg, indexed from 0 as the page start
+    /* 0x03 */ u8  dPadInputPrev;
+    /* 0x04 */ u32 inputRepeatTimer;
+    /* 0x08 */ s8 pad_08[0xC];
+    /* 0x14 */ s16 data[REG_GROUPS * REG_PER_GROUP]; // Accessed through *REG macros
+} RegEditor; // size = 0x15D4
 
 #endif

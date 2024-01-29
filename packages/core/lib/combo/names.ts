@@ -227,7 +227,7 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   OOT_BOMBS_5: "5 Bombs (OoT)",
   OOT_BOOMERANG: "Boomerang",
   OOT_BOOTS_HOVER: "Hover Boots",
-  OOT_BOOTS_IRON: "Iron Boots",
+  OOT_BOOTS_IRON: "Iron Boots (OoT)",
   OOT_BOSS_KEY_FIRE: "Boss Key (Fire Temple)",
   OOT_BOSS_KEY_FOREST: "Boss Key (Forest Temple)",
   OOT_BOSS_KEY_GANON: "Boss Key (Ganon's Castle)",
@@ -557,6 +557,7 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   SHARED_SPELL_FIRE: "Din's Fire",
   SHARED_SPELL_LOVE: "Nayru's Love",
   SHARED_SPELL_WIND: "Farore's Wind",
+  SHARED_BOOTS_IRON: 'Iron Boots',
   OOT_BUTTON_A: "A Button (OoT)",
   OOT_BUTTON_C_RIGHT: "C-Right Button (OoT)",
   OOT_BUTTON_C_LEFT: "C-Left Button (OoT)",
@@ -684,6 +685,7 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   MM_SPELL_FIRE: "Din's Fire (MM)",
   MM_SPELL_LOVE: "Nayru's Love (MM)",
   MM_SPELL_WIND: "Farore's Wind (MM)",
+  MM_BOOTS_IRON: 'Iron Boots (MM)',
 };
 
 export function itemName(item: string) {

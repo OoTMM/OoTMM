@@ -298,6 +298,8 @@
 #define ITEM_MM_SPELL_WIND                  0xb0
 #define ITEM_MM_SPELL_LOVE                  0xb1
 #define ITEM_MM_SPELL_FIRE                  0xb2
+#define ITEM_MM_BOOTS_IRON                  0xb3
+#define ITEM_MM_BOOTS_HOVER                 0xb4
 
 #define ITEM_NONE       0xff
 
@@ -409,12 +411,14 @@
 #define XITEM_MM_TRADE1_DEED_OCEAN          0x5
 
 #define XITEM_MM_TRADE2_SPELL_WIND      0x0
-#define XITEM_MM_TRADE2_ROOM_KEY        0x1
-#define XITEM_MM_TRADE2_LETTER_TO_MAMA  0x2
+#define XITEM_MM_TRADE2_BOOTS_IRON      0x1
+#define XITEM_MM_TRADE2_ROOM_KEY        0x2
+#define XITEM_MM_TRADE2_LETTER_TO_MAMA  0x3
 
 #define XITEM_MM_TRADE3_SPELL_LOVE          0x0
-#define XITEM_MM_TRADE3_LETTER_TO_KAFEI     0x1
-#define XITEM_MM_TRADE3_PENDANT_OF_MEMORIES 0x2
+#define XITEM_MM_TRADE3_BOOTS_HOVER         0x1
+#define XITEM_MM_TRADE3_LETTER_TO_KAFEI     0x2
+#define XITEM_MM_TRADE3_PENDANT_OF_MEMORIES 0x3
 
 /* Shared defs */
 #if defined(GAME_OOT)

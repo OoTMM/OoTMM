@@ -88,6 +88,7 @@ const SHARED_ITEMS_OOT = new Map([
   ['SHARED_SPELL_FIRE',       'OOT_SPELL_FIRE'],
   ['SHARED_SPELL_WIND',       'OOT_SPELL_WIND'],
   ['SHARED_SPELL_LOVE',       'OOT_SPELL_LOVE'],
+  ['SHARED_BOOTS_IRON',       'OOT_BOOTS_IRON'],
 ]);
 
 const SHARED_ITEMS_MM = new Map([
@@ -148,6 +149,7 @@ const SHARED_ITEMS_MM = new Map([
   ['SHARED_SPELL_FIRE',       'MM_SPELL_FIRE'],
   ['SHARED_SPELL_WIND',       'MM_SPELL_WIND'],
   ['SHARED_SPELL_LOVE',       'MM_SPELL_LOVE'],
+  ['SHARED_BOOTS_IRON',       'MM_BOOTS_IRON'],
 ]);
 
 const SHARED_ITEMS = {
@@ -701,6 +703,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     SHARED_SPELL_FIRE: settings.sharedSpellFire,
     SHARED_SPELL_WIND: settings.sharedSpellWind,
     SHARED_SPELL_LOVE: settings.sharedSpellLove,
+    SHARED_BOOTS_IRON: settings.sharedBootsIron,
     OOT_CROSS_WARP: settings.crossWarpOot,
     MM_CROSS_WARP: settings.crossWarpMm !== 'none',
     MM_CROSS_WARP_ADULT: settings.crossWarpMm === 'full',
@@ -783,6 +786,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MM_SPELL_FIRE: settings.spellFireMm,
     MM_SPELL_WIND: settings.spellWindMm,
     MM_SPELL_LOVE: settings.spellLoveMm,
+    MM_BOOTS_IRON: settings.bootsIronMm,
   };
 
   for (const v in exprs) {

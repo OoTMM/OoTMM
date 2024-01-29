@@ -79,6 +79,43 @@ typedef struct PlayerAnimationFrame {
     /* 0x108 */ s16 appearanceInfo; // bitpack containing the face and hands info
 } PlayerAnimationFrame; // size = 0x10A
 
+typedef struct PlayerAgeProperties {
+    /* 0x00 */ f32 ceilingCheckHeight;
+    /* 0x04 */ f32 shadowScale;
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14; // compared to yDistToLedge
+    /* 0x18 */ f32 unk_18; // compared to yDistToLedge
+    /* 0x1C */ f32 unk_1C; // compared to yDistToLedge
+    /* 0x20 */ f32 unk_20; // unused?
+    /* 0x24 */ f32 unk_24; // water stuff // depthInWater
+    /* 0x28 */ f32 unk_28; // water stuff // depthInWater
+    /* 0x2C */ f32 unk_2C; // water stuff // depthInWater
+    /* 0x30 */ f32 unk_30; // water stuff // depthInWater
+    /* 0x34 */ f32 unk_34; // height?
+    /* 0x38 */ f32 wallCheckRadius;
+    /* 0x3C */ f32 unk_3C;
+    /* 0x40 */ f32 unk_40;
+    /* 0x44 */ Vec3s unk_44;
+    /* 0x4A */ Vec3s unk_4A[4];
+    /* 0x62 */ Vec3s unk_62[4];
+    /* 0x7A */ Vec3s unk_7A[4];
+    /* 0x92 */ u16 voiceSfxIdOffset;
+    /* 0x94 */ u16 surfaceSfxIdOffset;
+    /* 0x98 */ f32 unk_98;
+    /* 0x9C */ f32 unk_9C;
+    /* 0xA0 */ PlayerAnimationHeader* openChestAnim;
+    /* 0xA4 */ PlayerAnimationHeader* unk_A4; // OoT leftovers to interact with the Master Sword
+    /* 0xA8 */ PlayerAnimationHeader* unk_A8; // OoT leftovers to interact with the Master Sword
+    /* 0xAC */ PlayerAnimationHeader* unk_AC;
+    /* 0xB0 */ PlayerAnimationHeader* unk_B0;
+    /* 0xB4 */ PlayerAnimationHeader* unk_B4[4];
+    /* 0xC4 */ PlayerAnimationHeader* unk_C4[2];
+    /* 0xCC */ PlayerAnimationHeader* unk_CC[2];
+    /* 0xD4 */ PlayerAnimationHeader* unk_D4[2];
+} PlayerAgeProperties; // size = 0xDC
+
 #define PLAYER_LIMB_BUF_SIZE (ALIGN16(sizeof(PlayerAnimationFrame)) + 0xF)
 
 typedef void (*PlayerActionFunc)(struct Actor_Player* this, struct GameState_Play* play);
@@ -184,7 +221,7 @@ typedef struct Actor_Player
     /* 0x88A */ u8 blendTableBuffer[PLAYER_LIMB_BUF_SIZE];
     /* 0x929 */ u8 jointTableUpperBuffer[PLAYER_LIMB_BUF_SIZE];
     /* 0x9C8 */ u8 morphTableUpperBuffer[PLAYER_LIMB_BUF_SIZE];
-    /* 0xA68 */ void* ageProperties; // PlayerAgeProperties
+    /* 0xA68 */ PlayerAgeProperties* ageProperties;
     /* 0xA6C */ u32 state;
     /* 0xA70 */ u32 state2;
     /* 0xA74 */ u32 state3;

@@ -1177,6 +1177,13 @@ export const SETTINGS = [{
   description: "Adds Nayru's Love in Majora's Mask.",
   default: false
 }, {
+  key: 'bootsIronMm',
+  name: "Iron Boots (MM)",
+  category: 'items.extensions',
+  type: 'boolean',
+  description: "Adds Iron Boots in Majora's Mask.",
+  default: false
+}, {
   key: 'ocarinaButtonsShuffleOot',
   name: 'Ocarina Buttons Shuffle (OoT)',
   category: 'items.extensions',
@@ -1469,6 +1476,13 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false,
   cond: (s: any) => s.spellLoveMm,
+}, {
+  key: 'sharedBootsIron',
+  name: "Shared Iron Boots",
+  category: 'items.shared',
+  type: 'boolean',
+  default: false,
+  cond: (s: any) => s.bootsIronMm,
 }, {
   key: 'agelessSwords',
   name: 'Ageless Swords',

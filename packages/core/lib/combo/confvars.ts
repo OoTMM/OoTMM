@@ -38,6 +38,7 @@ export const CONFVARS = [
   'SHARED_SPELL_FIRE',
   'SHARED_SPELL_WIND',
   'SHARED_SPELL_LOVE',
+  'SHARED_BOOTS_IRON',
   'OOT_CROSS_WARP',
   'MM_CROSS_WARP',
   'MM_CROSS_WARP_ADULT',
@@ -124,6 +125,7 @@ export const CONFVARS = [
   'MM_SPELL_FIRE',
   'MM_SPELL_WIND',
   'MM_SPELL_LOVE',
+  'MM_BOOTS_IRON',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

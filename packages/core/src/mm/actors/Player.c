@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/custom.h>
 #include "../actors.h"
 
 void ArrowCycle_Handle(Actor_Player* link, GameState_Play* play);
@@ -38,17 +39,28 @@ PATCH_CALL(0x80837bb0, Player_TalkDisplayTextBox);
 #define PLAYER_CUSTOM_IA_SPELL_LOVE 0x38
 #define PLAYER_CUSTOM_IA_SPELL_FIRE 0x39
 
+#define PLAYER_CUSTOM_IA_BOOTS_MIN   0x34
+#define PLAYER_CUSTOM_IA_BOOTS_IRON  0x34
+#define PLAYER_CUSTOM_IA_BOOTS_HOVER 0x35
+
 #define PLAYER_MAGIC_SPELL_MIN  0
 #define PLAYER_MAGIC_SPELL_WIND 0
 #define PLAYER_MAGIC_SPELL_LOVE 1
 #define PLAYER_MAGIC_SPELL_FIRE 2
 #define PLAYER_MAGIC_SPELL_MAX  2
 
+#define PLAYER_BOOTS_MIN   0
+#define PLAYER_BOOTS_IRON  0
+#define PLAYER_BOOTS_HOVER 1
+#define PLAYER_BOOTS_MAX   1
+
 static s32 sCustomItemActions[] =
 {
     PLAYER_CUSTOM_IA_SPELL_WIND,
     PLAYER_CUSTOM_IA_SPELL_LOVE,
     PLAYER_CUSTOM_IA_SPELL_FIRE,
+    PLAYER_CUSTOM_IA_BOOTS_IRON,
+    PLAYER_CUSTOM_IA_BOOTS_HOVER,
 };
 
 static u8 sMagicSpellCosts[] =
@@ -153,6 +165,20 @@ static s32 Player_ActionToMagicSpell(Actor_Player* this, s32 itemAction)
     if ((magicSpell >= PLAYER_MAGIC_SPELL_MIN) && (magicSpell <= PLAYER_MAGIC_SPELL_MAX))
     {
         return magicSpell;
+    }
+    else
+    {
+        return -1;
+    }
+}
+
+static s32 Player_ActionToBoots(Actor_Player* this, s32 itemAction)
+{
+    s32 boots = itemAction - PLAYER_CUSTOM_IA_BOOTS_MIN;
+
+    if ((boots >= PLAYER_BOOTS_MIN) && (boots <= PLAYER_BOOTS_MAX))
+    {
+        return boots;
     }
     else
     {
@@ -443,7 +469,83 @@ s32 Player_CustomCsItem(Actor_Player* this, GameState_Play* play)
     return 0;
 }
 
-s32 Player_CustomUseItem(Actor_Player* this, s32 itemAction)
+s16 sBootData[3][17] = {
+    { 200, 1000, 300, 700, 550, 270, 1000, 0, 800, 300, -160, 600, 590, 750, 125, 200, 130 },
+    { 200, 1000, 300, 700, 550, 270, 600, 600, 800, 550, -100, 600, 540, 270, 25, 0, 130 },
+    { 80, 800, 150, 700, 480, 270, 600, 50, 800, 550, -40, 400, 540, 270, 25, 0, 80 },
+};
+
+void Player_CheckCustomBoots(GameState_Play* play)
+{
+    Actor_Player* player = GET_LINK(play);
+    if (player->transformation == MM_PLAYER_FORM_HUMAN)
+    {
+        if (gSaveContext.save.itemEquips.boots > 0)
+        {
+            s32 currentBoots = gSaveContext.save.itemEquips.boots - 1;
+            s16* bootRegs;
+
+            REG(27) = 2000;
+            REG(48) = 370;
+
+            if (currentBoots == PLAYER_BOOTS_IRON)
+            {
+                if (player->state & PLAYER_ACTOR_STATE_WATER)
+                {
+                    currentBoots = 2; // Iron Underwater
+                }
+                REG(27) = 500;
+                REG(48) = 100;
+            }
+
+            bootRegs = sBootData[currentBoots];
+            REG(19) = bootRegs[0];
+            REG(30) = bootRegs[1];
+            REG(32) = bootRegs[2];
+            REG(34) = bootRegs[3];
+            REG(35) = bootRegs[4];
+            REG(36) = bootRegs[5];
+            REG(37) = bootRegs[6];
+            REG(38) = bootRegs[7];
+            REG(43) = bootRegs[8];
+            R_RUN_SPEED_LIMIT = bootRegs[9];
+            REG(68) = bootRegs[10];
+            REG(69) = bootRegs[11];
+            IREG(66) = bootRegs[12];
+            IREG(67) = bootRegs[13];
+            IREG(68) = bootRegs[14];
+            IREG(69) = bootRegs[15];
+            MREG(95) = bootRegs[16];
+
+            if (play->roomCtx.curRoom.behaviorType1 == ROOM_BEHAVIOR_TYPE1_2)
+            {
+                R_RUN_SPEED_LIMIT = 500;
+            }
+        }
+
+        player->base.flags &= ~(1 << 17); // ~ACTOR_FLAG_CAN_PRESS_HEAVY_SWITCH
+
+        switch(gSaveContext.save.itemEquips.boots)
+        {
+        case 0:
+            player->currentBoots = 1; // PLAYER_BOOTS_HYLIAN
+            break;
+        case PLAYER_BOOTS_IRON + 1:
+            player->currentBoots = 6; // PLAYER_BOOTS_GORON
+            player->base.flags |= (1 << 17); // ACTOR_FLAG_CAN_PRESS_HEAVY_SWITCH
+            break;
+        case PLAYER_BOOTS_HOVER + 1:
+            break;
+        }
+    }
+    else
+    {
+        gSaveContext.save.itemEquips.boots = 0;
+        player->base.flags &= ~(1 << 17); // ~ACTOR_FLAG_CAN_PRESS_HEAVY_SWITCH
+    }
+}
+
+s32 Player_CustomUseItem(Actor_Player* this, GameState_Play* play, s32 itemAction)
 {
     s32 magicSpell = Player_ActionToMagicSpell(this, itemAction);
     if (magicSpell >= 0)
@@ -459,6 +561,32 @@ s32 Player_CustomUseItem(Actor_Player* this, s32 itemAction)
         {
             PlaySound(0x4806); // NA_SE_SY_ERROR
         }
+        // Handled
+        return 1;
+    }
+
+    s32 boots = Player_ActionToBoots(this, itemAction);
+    if (boots >= 0)
+    {
+        if (this->transformation == MM_PLAYER_FORM_HUMAN)
+        {
+            u16 newBoots = boots + 1;
+            if (gSaveContext.save.itemEquips.boots == newBoots)
+            {
+                newBoots = 0;
+            }
+            gSaveContext.save.itemEquips.boots = newBoots;
+            if (newBoots > 0)
+            {
+                Player_CheckCustomBoots(play);
+            }
+            else
+            {
+                Player_SetBootData(play, this);
+            }
+            Player_PlaySfx(this, 0x835); // NA_SE_PL_CHANGE_ARMS
+        }
+
         // Handled
         return 1;
     }
@@ -530,3 +658,160 @@ void Player_AfterInit(GameState_Play* play)
 }
 
 PATCH_CALL(0x808424d8, Player_AfterInit);
+
+const u32 gLinkAdultIronBootTex = 0x08000000 | CUSTOM_KEEP_BOOTS_IRON_TEXTURE;
+const u32 gLinkAdultIronBootTLUT = 0x08000000 | CUSTOM_KEEP_BOOTS_IRON_TLUT;
+
+static Vtx sIronBootsVtx[87] = {
+#include "sIronBootsVtx.vtx.inc"
+};
+
+Gfx gLinkAdultLeftIronBootDL[] = {
+    gsSPMatrix(0x0D000180, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW),
+    gsDPPipeSync(),
+    gsDPSetTextureLUT(G_TT_RGBA16),
+    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
+    gsDPLoadTextureBlock(gLinkAdultIronBootTex, G_IM_FMT_CI, G_IM_SIZ_8b, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                         G_TX_NOMIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD),
+    gsDPLoadTLUT_pal256(gLinkAdultIronBootTLUT),
+    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, 1, COMBINED, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED),
+    gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_OPA_SURF2),
+    gsSPClearGeometryMode(G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR),
+    gsSPSetGeometryMode(G_FOG | G_LIGHTING),
+    gsSPDisplayList(0x0C000000),
+    gsDPSetPrimColor(0, 0, 255, 255, 255, 255),
+    gsSPVertex(&sIronBootsVtx[0], 32, 0),
+    gsSP2Triangles(0, 1, 2, 0, 2, 1, 3, 0),
+    gsSP2Triangles(2, 3, 4, 0, 5, 6, 7, 0),
+    gsSP2Triangles(5, 7, 8, 0, 4, 9, 10, 0),
+    gsSP2Triangles(4, 10, 11, 0, 12, 13, 14, 0),
+    gsSP2Triangles(12, 14, 15, 0, 12, 15, 5, 0),
+    gsSP2Triangles(12, 5, 8, 0, 16, 17, 18, 0),
+    gsSP2Triangles(19, 20, 21, 0, 18, 17, 22, 0),
+    gsSP2Triangles(0, 23, 24, 0, 11, 25, 21, 0),
+    gsSP2Triangles(23, 22, 26, 0, 26, 22, 17, 0),
+    gsSP2Triangles(23, 26, 24, 0, 27, 28, 29, 0),
+    gsSP2Triangles(29, 30, 31, 0, 29, 31, 27, 0),
+    gsSP1Triangle(25, 19, 21, 0),
+    gsSPVertex(&sIronBootsVtx[32], 11, 0),
+    gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+    gsSP2Triangles(4, 5, 6, 0, 3, 7, 0, 0),
+    gsSP1Triangle(8, 9, 10, 0),
+    gsSPEndDisplayList(),
+};
+
+Gfx gLinkAdultRightIronBootDL[] = {
+    gsSPMatrix(0x0D0000C0, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW),
+    gsDPPipeSync(),
+    gsDPSetTextureLUT(G_TT_RGBA16),
+    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
+    gsDPLoadTextureBlock(gLinkAdultIronBootTex, G_IM_FMT_CI, G_IM_SIZ_8b, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                         G_TX_NOMIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD),
+    gsDPLoadTLUT_pal256(gLinkAdultIronBootTLUT),
+    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, 1, COMBINED, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED),
+    gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_OPA_SURF2),
+    gsSPClearGeometryMode(G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR),
+    gsSPSetGeometryMode(G_FOG | G_LIGHTING),
+    gsSPDisplayList(0x0C000000),
+    gsDPSetPrimColor(0, 0, 255, 255, 255, 255),
+    gsSPVertex(&sIronBootsVtx[43], 32, 0),
+    gsSP2Triangles(0, 1, 2, 0, 3, 1, 0, 0),
+    gsSP2Triangles(4, 3, 0, 0, 5, 6, 7, 0),
+    gsSP2Triangles(5, 7, 8, 0, 9, 3, 4, 0),
+    gsSP2Triangles(10, 9, 4, 0, 5, 8, 11, 0),
+    gsSP2Triangles(5, 11, 12, 0, 5, 12, 13, 0),
+    gsSP2Triangles(5, 13, 14, 0, 15, 16, 17, 0),
+    gsSP2Triangles(18, 15, 17, 0, 19, 16, 15, 0),
+    gsSP2Triangles(20, 21, 2, 0, 18, 22, 10, 0),
+    gsSP2Triangles(23, 24, 21, 0, 16, 19, 25, 0),
+    gsSP2Triangles(20, 23, 21, 0, 26, 27, 28, 0),
+    gsSP2Triangles(28, 29, 30, 0, 28, 30, 26, 0),
+    gsSP1Triangle(18, 17, 22, 0),
+    gsSPVertex(&sIronBootsVtx[74], 13, 0),
+    gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+    gsSP2Triangles(4, 5, 6, 0, 7, 8, 9, 0),
+    gsSP1Triangle(10, 11, 12, 0),
+    gsSPEndDisplayList(),
+};
+
+void Player_SkelAnime_DrawFlexLod(GameState_Play* play, void** skeleton, Vec3s* jointTable, s32 dListCount,
+                                  OverrideLimbDrawOpa overrideLimbDraw, PostLimbDrawOpa postLimbDraw, Actor_Player* player, s32 lod)
+{
+    SkelAnime_DrawFlexLod(play, skeleton, jointTable, dListCount, overrideLimbDraw, postLimbDraw, &player->base, lod);
+
+    OPEN_DISPS(play->gs.gfx);
+
+    gSPSegment(POLY_OPA_DISP++, 0x08, gCustomKeep);
+
+    if (overrideLimbDraw != Player_OverrideLimbDrawGameplayFirstPerson && gSaveContext.gameMode != 3) // GAMEMODE_END_CREDITS
+    {
+        if (player->transformation == MM_PLAYER_FORM_HUMAN)
+        {
+            if (player->currentBoots == 6) // PLAYER_BOOTS_GORON
+            {
+                gSPDisplayList(POLY_OPA_DISP++, gLinkAdultLeftIronBootDL);
+                gSPDisplayList(POLY_OPA_DISP++, gLinkAdultRightIronBootDL);
+            }
+        }
+    }
+
+    CLOSE_DISPS();
+}
+
+PATCH_CALL(0x80124858, Player_SkelAnime_DrawFlexLod);
+
+u16 Player_GetFloorSfxByAge(Actor_Player* this, u16 sfxId) {
+    if (this->transformation == MM_PLAYER_FORM_HUMAN && this->currentBoots == 6)
+    {
+        switch (sfxId)
+        {
+        case 0x800: // NA_SE_PL_WALK_GROUND
+        case 0x810: // NA_SE_PL_JUMP_GROUND
+        case 0x820: // NA_SE_PL_LAND_GROUND
+            return 0x28DC; // NA_SE_EV_IRON_DOOR_CLOSE
+        }
+    }
+
+    return sfxId + this->floorSfxOffset + this->ageProperties->surfaceSfxIdOffset;
+}
+
+PATCH_FUNC(0x8082e0cc, Player_GetFloorSfxByAge);
+
+s32 Player_ShouldCheckItemUsabilityWhileSwimming(Actor_Player* player, u8 itemAction)
+{
+    // Displaced code:
+    if (itemAction == 0x50) // PLAYER_IA_MASK_ZORA
+    {
+        return 0;
+    }
+    // End displaced code
+
+    if (itemAction == PLAYER_CUSTOM_IA_BOOTS_IRON)
+    {
+        return 0;
+    }
+    return 1;
+}
+
+f32 Player_GetEnvironmentWindSpeed(GameState_Play* play)
+{
+    Actor_Player* player = GET_LINK(play);
+    if (player->transformation == MM_PLAYER_FORM_HUMAN && player->currentBoots == 6) // PLAYER_BOOTS_GORON
+    {
+        return 0.0f;
+    }
+
+    // Displaced code:
+    return play->envCtx.windSpeed;
+}
+
+s32 Player_IsBeingPushed(Actor_Player* this, GameState_Play* play)
+{
+    if (this->transformation == MM_PLAYER_FORM_HUMAN && this->currentBoots == 6) // PLAYER_BOOTS_GORON
+    {
+        return 0;
+    }
+
+    // Displaced code:
+    return this->pushedSpeed != 0.0f || this->windSpeed != 0.0f || play->envCtx.windSpeed >= 50.0f;
+}

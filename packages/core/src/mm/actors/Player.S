@@ -216,8 +216,8 @@ kItemToGi:
 .short GI_MM_DEED_OCEAN
 .short GI_MM_MOON_TEAR
 .short GI_MM_LETTER_TO_MAMA
-.short 0xA7
-.short 0xA8
+.short GI_MM_BOOTS_IRON
+.short GI_MM_BOOTS_HOVER
 .short GI_MM_PENDANT_OF_MEMORIES
 .short GI_MM_SPELL_WIND
 .short GI_MM_SPELL_LOVE
@@ -352,15 +352,163 @@ Replaces:
 */
 PATCH_START 0x80831a5c
   or        a0, s0, zero
+  lw        a1, 0x0068 (sp)
   jal       Player_CustomUseItem
-   or       a1, s1, zero
+   or       a2, s1, zero
   bgtzl     v0, .+0x4BC
    lw        ra, 0x002c (sp)
   sub      v1, zero, v0
+  slti     a2, s1, 0x003a
+  xori     a2, a2, 0x0001
+  nop
+  nop
+  nop
+PATCH_END
+
+/*
+Replaces:
+  JR      RA
+   NOP
+*/
+PATCH_START 0x80123350
+  J       Player_CheckCustomBoots
+   or     a0, a3, zero
+PATCH_END
+
+/*
+;==================================================================================================
+; Handle item use while swimming check
+;==================================================================================================
+*/
+
+Player_ShouldCheckItemUsabilityWhileSwimming_Hook:
+    addiu   sp, sp, -0x18
+    sw      ra, 0x0014 (sp)
+
+    jal     Player_ShouldCheckItemUsabilityWhileSwimming
+     sw     a2, 0x0020 (sp)
+
+    // Displaced code:
+    lb      t1, 0x0145 (s0)
+    slti    at, t1, 0x0005
+
+    lw      a2, 0x0020 (sp)
+    lw      ra, 0x0014 (sp)
+    jr      ra
+     addiu  sp, sp, 0x18
+
+/*
+; Replaces:
+;   ADDIU   AT, R0, 0x0050
+;   SLL     T0, T9, 4
+;   BGEZL   T0, 0x80831A5C
+;   XORI    A2, A2, 0x0001
+;   BEQL    S1, AT, 0x80831A5C
+;   XORI    A2, A2, 0x0001
+;   LB      T1, 0x0145 (S0)
+;   SLTI    AT, T1, 0x0005
+*/
+PATCH_START 0x80831A24
+    sll     t0, t9, 4
+    bgezl   t0, .+0x34
+     xori   a2, a2, 0x0001
+    or      a0, s0, zero
+    jal     Player_ShouldCheckItemUsabilityWhileSwimming_Hook
+     or     a1, s1, zero
+    beqzl   v0, .+0x20
+     xori   a2, a2, 0x0001
+PATCH_END
+
+/*
+; Replaces:
+;   ADDIU   V1, R0, 0x000C // CAM_MODE_SLINGSHOT
+*/
+PATCH_START 0x808386DC
+  addiu   v1, zero, 0x000D // CAM_MODE_BOWARROW
+PATCH_END
+
+Player_GetEnvironmentWindSpeed_Hook:
+  addiu   sp, sp, -0x20
+  sw      ra, 0x0014 (sp)
+
+  jal     Player_GetEnvironmentWindSpeed
+   nop
+
+  mov.s   $f18, $f0
+  lui     at, 0x4240
+  mtc1    at, $f8
+  lw      ra, 0x0014 (sp)
+  jr      ra
+   addiu  sp, sp, 0x20
+
+/*
+Replaces:
+  LW      V1, 0x0020 (SP)
+  LUI     AT, 0x4240
+  MTC1    AT, F8
+  LWC1    F18, 0x70B8 (V1)
+*/
+PATCH_START 0x80844B94
+  jal     Player_GetEnvironmentWindSpeed_Hook
+   lw     a0, 0x0070 (sp)
+  lw      v1, 0x0020 (sp)
+  nop
+PATCH_END
+
+/*
+Replaces:
+  LWC1    F6, 0x0B80 (S0)
+  C.EQ.S  F0, F6
+  NOP
+  BC1F    .+0x44
+  NOP
+  LWC1    F10, 0x0B2C (S0)
+  LW      T5, 0x0070 (SP)
+  LUI     AT, 0x0001
+  C.EQ.S  F0, F10
+  ADDU    AT, AT, T5
+  BC1F    .+0x28
+  NOP
+  LWC1    F4, 0x70B8 (AT)
+  LUI     AT, 0x4248
+  MTC1    AT, F8
+  NOP
+  C.LE.S  F8, F4
+  NOP
+  BC1F    .+0x3A0
+*/
+PATCH_START 0x8084497C
+  or      a0, s0, zero
+  jal     Player_IsBeingPushed
+   lw     a1, 0x0070 (sp)
+  beqz    v0, .+0x3DC
   nop
   nop
   nop
   nop
   nop
   nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+PATCH_END
+
+/*
+Allow player to pick up heart pieces underwater by changing
+this->currentBoots == PLAYER_BOOTS_ZORA_UNDERWATER
+to
+this->currentBoots >= PLAYER_BOOTS_ZORA_UNDERWATER
+Replaces:
+  ADDIU   AT, R0, 0x0005
+  BNEL    T5, AT, .+0x60
+*/
+PATCH_START 0x8083D2FC
+  slti    at, t5, 0x0005
+  bnezl   at, .+0x60
 PATCH_END

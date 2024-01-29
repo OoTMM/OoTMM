@@ -31,8 +31,9 @@ typedef struct
 {
     u8      buttonItems[4][4];
     u8      cButtonSlots[4][4];
-    u16     unused:10;
-    u16     shield:2;
+    u16     boots:4;
+    u16     tunic:4;
+    u16     shield:4;
     u16     sword:4;
 }
 MmItemEquips;
@@ -356,11 +357,11 @@ MmExtraItems;
 typedef struct
 {
     u32 trade1:6;
-    u32 trade2:3;
-    u32 trade3:3;
+    u32 trade2:4;
+    u32 trade3:4;
     u32 tradeObtained1:6;
-    u32 tradeObtained2:3;
-    u32 tradeObtained3:3;
+    u32 tradeObtained2:4;
+    u32 tradeObtained3:4;
 }
 MmExtraTrade;
 

@@ -21,6 +21,9 @@
 "can_use_farore": "setting(spellWindMm) && can_use_farore_raw"
 "can_use_nayru": "setting(spellLoveMm) && can_use_nayru_raw"
 
+# Boots
+"has_iron_boots": "setting(bootsIronMm) && has(BOOTS_IRON)"
+
 # Ocarina
 "ocarina_button(x, y)": "cond(setting(ocarinaButtonsShuffleMm), cond(setting(sharedOcarinaButtons), has(y), has(x)), true)"
 "ocarina_button_a": "ocarina_button(BUTTON_A, SHARED_BUTTON_A)"
