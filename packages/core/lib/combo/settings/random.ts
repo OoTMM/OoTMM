@@ -385,6 +385,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
     base.sharedSpellWind = true;
     base.sharedSpellLove = true;
     base.sharedBootsIron = true;
+    base.sharedBootsHover = true;
     break;
   default:
     base.sharedNutsSticks = booleanWeighted(random, 0.5);
@@ -405,9 +406,11 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
       break;
     case 1:
       base.sharedBootsIron = true;
+      base.sharedBootsHover = true;
       break;
     default:
       base.sharedBootsIron = booleanWeighted(random, 0.5);
+      base.sharedBootsHover = booleanWeighted(random, 0.5);
       break;
     }
 
@@ -490,12 +493,15 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
   case 0:
   case 1:
     base.bootsIronMm = false;
+    base.bootsHoverMm = false;
     break;
   case 2:
     base.bootsIronMm = true;
+    base.bootsHoverMm = true;
     break;
   default:
     base.bootsIronMm = booleanWeighted(random, 0.25);
+    base.bootsHoverMm = booleanWeighted(random, 0.25);
   }
 
   /* Magic spells - 50% disabled, 25% enabled, 25% individual */

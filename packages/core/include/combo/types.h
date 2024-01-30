@@ -1031,4 +1031,32 @@ typedef enum {
     /* 86 */ TRANS_TYPE_86 = 86
 } TransitionType;
 
+typedef struct {
+    /* 0x00 */ u16 type;
+    union {
+        u16 vtxData[3];
+        struct {
+            /* 0x02 */ u16 flags_vIA; // 0xE000 is poly exclusion flags (xpFlags), 0x1FFF is vtxId
+            /* 0x04 */ u16 flags_vIB; // 0xE000 is flags, 0x1FFF is vtxId
+                                      // 0x2000 = poly IsFloorConveyor surface
+            /* 0x06 */ u16 vIC;
+        };
+    };
+    /* 0x08 */ Vec3s normal; // Unit normal vector
+                             // Value ranges from -0x7FFF to 0x7FFF, representing -1.0 to 1.0; 0x8000 is invalid
+
+    /* 0x0E */ s16 dist; // Plane distance from origin along the normal
+} CollisionPoly; // size = 0x10
+
+#define BGCHECKFLAG_GROUND (1 << 0) // Standing on the ground
+#define BGCHECKFLAG_GROUND_TOUCH (1 << 1) // Has touched the ground (only active for 1 frame)
+#define BGCHECKFLAG_GROUND_LEAVE (1 << 2) // Has left the ground (only active for 1 frame)
+#define BGCHECKFLAG_WALL (1 << 3) // Touching a wall
+#define BGCHECKFLAG_CEILING (1 << 4) // Touching a ceiling
+#define BGCHECKFLAG_WATER (1 << 5) // In water
+#define BGCHECKFLAG_WATER_TOUCH (1 << 6) // Has touched water (reset when leaving water)
+#define BGCHECKFLAG_GROUND_STRICT (1 << 7) // Strictly on ground (BGCHECKFLAG_GROUND has some leeway)
+#define BGCHECKFLAG_CRUSHED (1 << 8) // Crushed between a floor and ceiling (triggers a void for player)
+#define BGCHECKFLAG_PLAYER_WALL_INTERACT (1 << 9) // Only set/used by player, related to interacting with walls
+
 #endif /* TYPES_H */

@@ -137,6 +137,7 @@ void ModelViewRotateZ(float angle, int mode);
 void ModelViewTranslate(float tx, float ty, float tz, int mode);
 void ModelViewScale(float sx, float sy, float sz, int mode);
 void ModelViewMult(MtxF* mf, s32 mode);
+void Matrix_SetTranslateRotateYXZ(f32 translateX, f32 translateY, f32 translateZ, Vec3s* rot);
 
 f32 Math_CosS(s16 angle);
 f32 Math_SinS(s16 angle);
@@ -214,6 +215,7 @@ void PlayMusic(int arg0, int arg1, int arg2, int arg3, int arg4);
 void Player_PlaySfx(Actor_Player* player, u16 sfxId);
 void Actor_PlaySfx(Actor* actor, u32 id);
 void PlayLoopingSfxAtActor(Actor* actor, u32 id);
+void Actor_PlaySfx_FlaggedCentered1(Actor* actor, u16 sfxId);
 void Audio_PlaySfx_AtPos(Vec3f* pos, u16 sfxId);
 void Audio_PlaySfx_MessageDecide(void);
 

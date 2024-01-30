@@ -118,6 +118,7 @@ ModelViewRotateX = 0x80180610;
 ModelViewRotateY = 0x80180b48;
 ModelViewRotateZ = 0x80180e90;
 ModelViewTranslate = 0x8018029c;
+Matrix_SetTranslateRotateYXZ = 0x80181650;
 ModelViewUnkTransform = 0x801820a0;
 ModelViewMult = 0x80180244;
 
@@ -128,6 +129,7 @@ Player_PlaySfx = 0x800B8E58;
 Actor_PlaySfx = 0x800b8ec8;
 Audio_PlaySfx_AtPos = 0x8019F1C0;
 PlayLoopingSfxAtActor = 0x800B9010;
+Actor_PlaySfx_FlaggedCentered1 = 0x800B8F98;
 Message_Close = 0x801477b4;
 Audio_PlaySfx_MessageDecide = 0x8019F208;
 
