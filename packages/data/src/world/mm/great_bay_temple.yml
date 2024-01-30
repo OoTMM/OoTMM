@@ -82,7 +82,8 @@
   exits:
     "Great Bay Temple Baba Room": "true"
     "Great Bay Temple Central Room": "true"
-    "Great Bay Temple Boss Key Room": "(can_use_ice_arrows && (can_use_fire_short_range || has_hot_water_farore)) || short_hook_anywhere"
+    "Great Bay Temple Boss Key Room": "can_use_ice_arrows && (can_use_fire_short_range || has_hot_water_farore)"
+    "Great Bay Temple After Boss Key": "(can_use_ice_arrows && trick(MM_GBT_FIRELESS) && has_mask_zora) || short_hook_anywhere"
     "Great Bay Temple Green Pipe 2": "event(GB_WATER_WHEEL)"
   locations:
     "Great Bay Temple Compass": "soul_enemy(SOUL_ENEMY_BIO_BABA) || can_hookshot || can_use_ice_arrows || short_hook_anywhere" # The lilypads from the biobabas aren't here without their souls
@@ -148,11 +149,16 @@
 "Great Bay Temple Boss Key Room":
   dungeon: GB
   exits:
-    "Great Bay Temple Compass Room": "soul_enemy(SOUL_ENEMY_GEKKO) && can_use_ice_arrows"
+    "Great Bay Temple After Boss Key": "soul_enemy(SOUL_ENEMY_GEKKO) && can_use_ice_arrows"
   events:
     FROG_4: "has(MASK_DON_GERO) && soul_enemy(SOUL_ENEMY_GEKKO) && can_use_ice_arrows"
+"Great Bay Temple After Boss Key":
+  dungeon: GB
+  exits:
+    "Great Bay Temple Boss Key Room": "true"
+    "Great Bay Temple Compass Room": "true"
   locations:
-    "Great Bay Temple Boss Key": "soul_enemy(SOUL_ENEMY_GEKKO) && can_use_ice_arrows"
+    "Great Bay Temple Boss Key": "true"
 "Great Bay Temple Green Pipe 1":
   dungeon: GB
   exits:
@@ -170,10 +176,10 @@
 "Great Bay Temple Green Pipe 2":
   dungeon: GB
   exits:
-    "Great Bay Temple Green Pipe 3": "(can_use_ice_arrows && (can_use_fire_arrows || short_hook_anywhere)) || hookshot_anywhere"
+    "Great Bay Temple Green Pipe 3": "(can_use_ice_arrows && (can_use_fire_arrows || short_hook_anywhere || trick(MM_GBT_FIRELESS))) || hookshot_anywhere"
   locations:
-    "Great Bay Temple Green Pipe 2 Lower Chest": "can_hookshot || (can_use_ice_arrows && can_hookshot_short)" #can just jump to the alcove after riding the platform
-    "Great Bay Temple Green Pipe 2 Upper Chest": "(can_hookshot && can_use_ice_arrows && can_use_fire_arrows) || short_hook_anywhere"
+    "Great Bay Temple Green Pipe 2 Lower Chest": "can_hookshot || (can_use_ice_arrows && can_hookshot_short)" #can just jump to the alcove after riding the platform, new trick?
+    "Great Bay Temple Green Pipe 2 Upper Chest": "(can_hookshot && can_use_ice_arrows && (can_use_fire_arrows || trick(MM_GBT_FIRELESS))) || short_hook_anywhere"
     "Great Bay Temple Pot Green Pipe 2 1": "has_mask_zora || hookshot_anywhere || (can_use_ice_arrows && short_hook_anywhere)"
     "Great Bay Temple Pot Green Pipe 2 2": "has_mask_zora || hookshot_anywhere || (can_use_ice_arrows && short_hook_anywhere)"
     "Great Bay Temple Pot Green Pipe 2 3": "has_mask_zora || hookshot_anywhere || (can_use_ice_arrows && short_hook_anywhere)"
@@ -186,14 +192,14 @@
   dungeon: GB
   exits:
     "Great Bay Temple Green Pipe 2": "true"
-    "Great Bay Temple Map Room": "(can_use_fire_arrows && can_use_ice_arrows) || short_hook_anywhere"
+    "Great Bay Temple Map Room": "((can_use_fire_arrows || trick(MM_GBT_FIRELESS)) && can_use_ice_arrows) || short_hook_anywhere"
   events:
-    GB_PIPE_GREEN2: "(can_use_ice_arrows && can_use_fire_arrows) || short_hook_anywhere"
+    GB_PIPE_GREEN2: "(can_use_ice_arrows && (can_use_fire_arrows || trick(MM_GBT_FIRELESS))) || short_hook_anywhere"
   locations:
-    "Great Bay Temple Green Pipe 3 Chest": "(can_use_ice_arrows && can_use_fire_arrows && can_hookshot) || short_hook_anywhere"
+    "Great Bay Temple Green Pipe 3 Chest": "(can_use_ice_arrows && (can_use_fire_arrows || trick(MM_GBT_FIRELESS)) && can_hookshot) || short_hook_anywhere"
     "Great Bay Temple SF Green Pipe 3 Barrel": "has_mask_zora || ((has_bombchu || has(MASK_BLAST)) && short_hook_anywhere)"
-    "Great Bay Temple Pot Green Pipe 3 Upper 1": "(can_use_ice_arrows && can_use_fire_arrows) || short_hook_anywhere"
-    "Great Bay Temple Pot Green Pipe 3 Upper 2": "(can_use_ice_arrows && can_use_fire_arrows) || short_hook_anywhere"
+    "Great Bay Temple Pot Green Pipe 3 Upper 1": "(can_use_ice_arrows && (can_use_fire_arrows || trick(MM_GBT_FIRELESS))) || short_hook_anywhere"
+    "Great Bay Temple Pot Green Pipe 3 Upper 2": "(can_use_ice_arrows && (can_use_fire_arrows || trick(MM_GBT_FIRELESS))) || short_hook_anywhere"
     "Great Bay Temple Pot Green Pipe 3 Lower": "true"
 "Great Bay Temple Pre-Boss":
   dungeon: GB
