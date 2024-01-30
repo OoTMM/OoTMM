@@ -341,13 +341,13 @@ static u32 sCustomIcons[] = {
     ITEM_MM_BOOTS_HOVER,
 };
 
-u8 gPlayerFormCustomItemRestrictions[5][8] =
+s8 gPlayerFormCustomItemRestrictions[5][8] =
 {
     { 0, 0, 0, 0, 0, 0, 0, 0 },
     { 0, 0, 0, 0, 0, 0, 0, 0 },
     { 0, 0, 0, 0, 0, 0, 0, 0 },
     { 0, 0, 0, 0, 0, 0, 0, 0 },
-    { 1, 1, 1, 1, 1, 0, 0, 0 },
+    { 1, 1, 1, -1, -1, 0, 0, 0 },
 };
 
 typedef void (*KaleidoScope_GrayOutTextureRGBA32)(u32*, u16);

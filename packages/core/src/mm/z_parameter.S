@@ -15,16 +15,18 @@ PATCH_END
 
 Interface_GetItemRestriction_Hook:
   HOOK_SAVE
-  or    a1, a2, zero
-  jal   Interface_GetItemRestriction
-   or   a2, s0, zero
-  sw    v0, 0x003c (sp) // store into HOOK_SAVE's T9
+  or      a1, s0, zero
+  jal     Interface_GetItemRestriction
+   addiu  a2, sp, 0x0024 // HOOK_SAVE's T3
+  sw      v0, 0x003c (sp) // store into HOOK_SAVE's T9
   HOOK_RESTORE
-  jr    ra
+  jr      ra
    nop
 
-PATCH_START 0x80110fd0
+PATCH_START 0x80110fc8
   jal     Interface_GetItemRestriction_Hook
+   nop
+  bltz    t9, .+0xC78
    nop
 PATCH_END
 
