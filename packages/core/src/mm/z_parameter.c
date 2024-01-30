@@ -58,23 +58,33 @@ u32 Interface_GetCustomIconTexture(GameState_Play* play, PauseContext* pauseCtx)
     return texture;
 }
 
-extern u8 gPlayerFormCustomItemRestrictions[5][8];
+extern s8 gPlayerFormCustomItemRestrictions[5][8];
 
-u8 Interface_GetItemRestriction(u8 playerForm, u8 item, GameState_Play* play)
+// button and item are stored in SP10 and SP14 by HOOK_SAVE
+s8 Interface_GetItemRestriction(u8 playerForm, GameState_Play* play, s16* restoreHudVisibility, s32 nothing, u8 item, s16 button)
 {
-    u8 (*gPlayerFormItemRestrictions)[0x72] = (u8(*)[0x72])0x801c2410;
+    s8 (*gPlayerFormItemRestrictions)[0x72] = (s8(*)[0x72])0x801c2410;
     if (item < ITEM_MM_CUSTOM_MIN)
     {
         return gPlayerFormItemRestrictions[playerForm][item];
     }
-    else
+
+    if (item == ITEM_MM_SPELL_WIND && play->interfaceCtx.restrictions.songOfSoaring)
     {
-        if (item == ITEM_MM_SPELL_WIND && play->interfaceCtx.restrictions.songOfSoaring) {
-            return 0;
-        }
-        u8 customItem = item - ITEM_MM_CUSTOM_MIN;
-        return gPlayerFormCustomItemRestrictions[playerForm][customItem];
+        return 0;
     }
+
+    u8 customItem = item - ITEM_MM_CUSTOM_MIN;
+    s8 result = gPlayerFormCustomItemRestrictions[playerForm][customItem];
+    if (result < 0)
+    {
+        if (gSaveContext.buttonStatus[button] == 0xFF) // BTN_DISABLED
+        {
+            *restoreHudVisibility = 1;
+            gSaveContext.buttonStatus[button] = 0; // BTN_ENABLED
+        }
+    }
+    return result;
 }
 
 s32 Items_ShouldCheckItemUsabilityWhileSwimming(GameState_Play* play, u8 item)
