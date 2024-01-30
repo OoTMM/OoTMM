@@ -23,6 +23,7 @@
 
 # Boots
 "has_iron_boots": "setting(bootsIronMm) && has(BOOTS_IRON)"
+"has_hover_boots": "setting(bootsHoverMm) && has(BOOTS_HOVER)"
 
 # Ocarina
 "ocarina_button(x, y)": "cond(setting(ocarinaButtonsShuffleMm), cond(setting(sharedOcarinaButtons), has(y), has(x)), true)"

@@ -512,3 +512,95 @@ PATCH_START 0x8083D2FC
   slti    at, t5, 0x0005
   bnezl   at, .+0x60
 PATCH_END
+
+PATCH_START 0x8083EA48
+  sw      s0, 0x0018 (sp)
+  or      s0, a0, zero
+  sw      ra, 0x001c (sp)
+  sw      a1, 0x002c (sp)
+  jal     Player_PlayHoverSound
+   addiu  a1, sp, 0x002c
+  bnez    v0, .+0xF4
+   lwc1   $f14, 0x002c (sp)
+  lui     a2, 0x41e8
+  lui     a3, 0x4120
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+PATCH_END
+
+Player_CheckHoverBoots_Hook:
+  addiu   sp, sp, -0x20
+  sw      ra, 0x0014 (sp)
+
+  jal     Player_CheckHoverBoots
+   nop
+
+  // Displaced code
+  lh      t9, 0x0AD4 (s0)
+  lh      t1, 0x00BE (s0)
+  or      a1, s0, zero
+
+  lw      ra, 0x0014 (sp)
+  jr      ra
+   addiu  sp, sp, 0x20
+
+PATCH_START 0x80838404
+  jal   Player_CheckHoverBoots_Hook
+   or   a0, s0, zero
+  bnez  v0, .+0x26C
+   lw   a0, 0x006C (sp)
+PATCH_END
+
+/*
+Replaces:
+  lhu       t6,0x90(s0)
+  lui       t8,0x8086
+  andi      t7,t6,0x1
+  beql      t7,zero,0x80844950
+   lwc1     f8,0xad0(s0)
+  lw        t8,0x2b08(t8)
+  li        at,0x5
+  bnel      t8,at,0x80844950
+   lwc1     f8,0xad0(s0)
+  lb        t9,0x145(s0)
+  lui       a2,0x3eb3
+  ori       a2,a2,0x3333
+  slti      at,t9,0x5
+  beq       at,zero,0x8084494c
+*/
+PATCH_START 0x80844798
+  nop
+  lui       a1, 0x8086
+  nop
+  or        a0, s0, zero
+  jal       Player_IsFloorSlippery
+   lw       a1, 0x2b08(a1)
+  beqz      v0, .+0x19C
+   nop
+  nop
+  nop
+  lui       a2,0x3eb3
+  ori       a2,a2,0x3333
+  nop
+  nop
+PATCH_END

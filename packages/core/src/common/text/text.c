@@ -394,6 +394,9 @@ static int isItemAmbiguous(s16 gi)
     case GI_OOT_BOOTS_IRON:
     case GI_MM_BOOTS_IRON:
         return (comboConfig(CFG_MM_BOOTS_IRON) && !comboConfig(CFG_SHARED_BOOTS_IRON));
+    case GI_OOT_BOOTS_HOVER:
+    case GI_MM_BOOTS_HOVER:
+        return (comboConfig(CFG_MM_BOOTS_HOVER) && !comboConfig(CFG_SHARED_BOOTS_HOVER));
     case GI_OOT_MAGIC_BEAN:
     case GI_OOT_BOTTLE_EMPTY:
     case GI_OOT_BOTTLE_MILK:

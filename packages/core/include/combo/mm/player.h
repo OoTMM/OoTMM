@@ -212,7 +212,15 @@ typedef struct Actor_Player
     /* 0x664 */ ColliderQuad shieldQuad;
     /* 0x6E4 */ ColliderCylinder shieldCylinder;
     /* 0x730 */ Actor* lockOnActor; // Z/L-Targeted actor
-    /* 0x734 */ char unk_734[4];
+    /* 0x734 */ union {
+                    char unk_734[4]; // unused?
+                    struct {
+                        u8 hoverBootsTimer;
+                        u8 pad_735;
+                        u8 pad_736;
+                        u8 pad_737;
+                    };
+                };
     /* 0x738 */ s32 unk_738;
     /* 0x73C */ s32 meleeWeaponEffectIndex[3];
     /* 0x748 */ PlayerActionFunc actionFunc;
