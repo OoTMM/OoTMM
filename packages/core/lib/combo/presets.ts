@@ -695,7 +695,7 @@ const PRESET_HELL = makeSettings({
     'MM_ISTT_EYEGORE',
     'MM_SCT_NOTHING',
     'MM_GORON_BOMB_JUMP',
-    'MM_BOMBER_SKIP',
+    'MM_BOMBER_GUESS',
     'MM_CAPTAIN_SKIP',
     'MM_ISTT_ENTRY_JUMP',
     'MM_HARD_HOOKSHOT',
@@ -723,6 +723,10 @@ const PRESET_HELL = makeSettings({
     'MM_CLOCK_TOWER_WAIT',
     'MM_WFT_RUPEES_ICE',
     'MM_ISTT_RUPEES_GORON',
+    'MM_BOMBER_BACKFLIP',
+    'MM_NCT_TINGLE',
+    'MM_GBT_FIRELESS',
+    'MM_IGOS_DINS',
   ]
 });
 

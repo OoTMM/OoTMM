@@ -60,7 +60,7 @@ export const TRICKS = {
   MM_ISTT_EYEGORE: "Inverted Stone Tower Temple Eyegore Skips",
   MM_SCT_NOTHING: "South Clock Town Chest with Nothing",
   MM_GORON_BOMB_JUMP: "Bomb Jump Fences as Goron",
-  MM_BOMBER_SKIP: "Guess Bomber Code",
+  MM_BOMBER_GUESS: "Guess Bomber Code",
   MM_CAPTAIN_SKIP: "Guess Oceanside Spider House Code",
   MM_ISTT_ENTRY_JUMP: "Inverted Stone Tower Temple Long Jump to Death Armos",
   MM_HARD_HOOKSHOT: "Precise Hookshot Usage",
@@ -90,6 +90,10 @@ export const TRICKS = {
   MM_CLOCK_TOWER_WAIT: "Wait for the Clock Tower to Open When Shuffled",
   MM_WFT_RUPEES_ICE: "Collect the Pillar Rupees in Woodfall Temple using Ice Arrows",
   MM_ISTT_RUPEES_GORON: "Collect the Floating Rupees in ISTT as Goron",
+  MM_BOMBER_BACKFLIP: "Backflip over the Bomber in East Clock Town",
+  MM_NCT_TINGLE: "Jump slash Tingle in North Clock Town",
+  MM_GBT_FIRELESS: "Great Bay Temple without Fire Arrows",
+  MM_IGOS_DINS: "Burn Igos' curtains with Din's Fire",
 };
 
 export type Trick = keyof typeof TRICKS;
