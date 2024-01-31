@@ -27,6 +27,12 @@ void Interface_LoadItemIconCustom(u32 vrom, s32 id, void* dst, size_t size)
         case ITEM_MM_BOOTS_HOVER:
             id = ITEM_OOT_BOOTS_HOVER;
             break;
+        case ITEM_MM_TUNIC_GORON:
+            id = ITEM_OOT_TUNIC_GORON;
+            break;
+        case ITEM_MM_TUNIC_ZORA:
+            id = ITEM_OOT_TUNIC_ZORA;
+            break;
         }
 
         comboDmaLookupForeignId(&dma, 8);
@@ -90,9 +96,14 @@ s8 Interface_GetItemRestriction(u8 playerForm, GameState_Play* play, s16* restor
 s32 Items_ShouldCheckItemUsabilityWhileSwimming(GameState_Play* play, u8 item)
 {
     Actor_Player* player = GET_LINK(play);
-    if (item == ITEM_MM_BOOTS_IRON && player->transformation == MM_PLAYER_FORM_HUMAN)
+    if (player->transformation == MM_PLAYER_FORM_HUMAN)
     {
-        return 0;
+        switch (item)
+        {
+        case ITEM_MM_BOOTS_IRON:
+        case ITEM_MM_TUNIC_ZORA:
+            return 0;
+        }
     }
     if (Player_GetEnvironmentalHazard(play) == 4 && (item == ITEM_MM_HOOKSHOT || item == 0x11)) // Short Hookshot
     {

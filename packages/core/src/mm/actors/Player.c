@@ -43,6 +43,10 @@ PATCH_CALL(0x80837bb0, Player_TalkDisplayTextBox);
 #define PLAYER_CUSTOM_IA_BOOTS_IRON  0x34
 #define PLAYER_CUSTOM_IA_BOOTS_HOVER 0x35
 
+#define PLAYER_CUSTOM_IA_TUNIC_MIN   0x53
+#define PLAYER_CUSTOM_IA_TUNIC_GORON 0x53
+#define PLAYER_CUSTOM_IA_TUNIC_ZORA  0x54
+
 #define PLAYER_MAGIC_SPELL_MIN  0
 #define PLAYER_MAGIC_SPELL_WIND 0
 #define PLAYER_MAGIC_SPELL_LOVE 1
@@ -54,6 +58,11 @@ PATCH_CALL(0x80837bb0, Player_TalkDisplayTextBox);
 #define PLAYER_BOOTS_HOVER 1
 #define PLAYER_BOOTS_MAX   1
 
+#define PLAYER_TUNIC_MIN    2
+#define PLAYER_TUNIC_GORON  2
+#define PLAYER_TUNIC_ZORA   3
+#define PLAYER_TUNIC_MAX    3
+
 static s32 sCustomItemActions[] =
 {
     PLAYER_CUSTOM_IA_SPELL_WIND,
@@ -61,6 +70,8 @@ static s32 sCustomItemActions[] =
     PLAYER_CUSTOM_IA_SPELL_FIRE,
     PLAYER_CUSTOM_IA_BOOTS_IRON,
     PLAYER_CUSTOM_IA_BOOTS_HOVER,
+    PLAYER_CUSTOM_IA_TUNIC_GORON,
+    PLAYER_CUSTOM_IA_TUNIC_ZORA,
 };
 
 static u8 sMagicSpellCosts[] =
@@ -179,6 +190,20 @@ static s32 Player_ActionToBoots(Actor_Player* this, s32 itemAction)
     if ((boots >= PLAYER_BOOTS_MIN) && (boots <= PLAYER_BOOTS_MAX))
     {
         return boots;
+    }
+    else
+    {
+        return -1;
+    }
+}
+
+static s32 Player_ActionToTunic(Actor_Player* this, s32 itemAction)
+{
+    s32 tunic = itemAction - PLAYER_CUSTOM_IA_TUNIC_MIN + PLAYER_TUNIC_MIN;
+
+    if ((tunic >= PLAYER_TUNIC_MIN) && (tunic <= PLAYER_TUNIC_MAX))
+    {
+        return tunic;
     }
     else
     {
@@ -589,6 +614,25 @@ s32 Player_CustomUseItem(Actor_Player* this, GameState_Play* play, s32 itemActio
         return 1;
     }
 
+    s32 tunic = Player_ActionToTunic(this, itemAction);
+    if (tunic >= 0)
+    {
+        if (this->transformation == MM_PLAYER_FORM_HUMAN)
+        {
+            u16 newTunic = tunic;
+            if (gSaveContext.save.itemEquips.tunic == newTunic)
+            {
+                newTunic = 0;
+            }
+            gSaveContext.save.itemEquips.tunic = newTunic;
+
+            Player_PlaySfx(this, 0x835); // NA_SE_PL_CHANGE_ARMS
+        }
+
+        // Handled
+        return 1;
+    }
+
     // PLAYER_IA_MASK_MIN = 0x3A,
     // PLAYER_IA_MASK_MAX = 0x51,
     // PLAYER_IA_MASK_GIANT = 0x4D,
@@ -878,12 +922,29 @@ const Gfx gHoverBootsCircleDL[] = {
 static Vec3s sHoverBootsRot = { 0, 0, 0 };
 static s32 sHoverBootCircleAlpha = 255;
 
+static Color_RGB8 sTunicColors[4] = {
+    { 30, 105, 27 }, // PLAYER_TUNIC_NONE (default in MM)
+    { 30, 105, 27 }, // PLAYER_TUNIC_KOKIRI (will not be used)
+    { 100, 20, 0 },  // PLAYER_TUNIC_GORON
+    { 0, 60, 100 },  // PLAYER_TUNIC_ZORA
+};
+
 void Player_SkelAnime_DrawFlexLod(GameState_Play* play, void** skeleton, Vec3s* jointTable, s32 dListCount,
                                   OverrideLimbDrawOpa overrideLimbDraw, PostLimbDrawOpa postLimbDraw, Actor_Player* player, s32 lod)
 {
-    SkelAnime_DrawFlexLod(play, skeleton, jointTable, dListCount, overrideLimbDraw, postLimbDraw, &player->base, lod);
-
     OPEN_DISPS(play->gs.gfx);
+
+    if (player->transformation == MM_PLAYER_FORM_HUMAN)
+    {
+        Color_RGB8 tunicColor;
+        u16 tunic;
+
+        tunic = CLAMP(gSaveContext.save.itemEquips.tunic, 0, 3);
+        tunicColor = sTunicColors[tunic];
+        gDPSetEnvColor(POLY_OPA_DISP++, tunicColor.r, tunicColor.g, tunicColor.b, 0xFF);
+    }
+
+    SkelAnime_DrawFlexLod(play, skeleton, jointTable, dListCount, overrideLimbDraw, postLimbDraw, &player->base, lod);
 
     gSPSegment(POLY_OPA_DISP++, 0x08, gCustomKeep);
     gSPSegment(POLY_XLU_DISP++, 0x08, gCustomKeep);
@@ -970,7 +1031,7 @@ s32 Player_ShouldCheckItemUsabilityWhileSwimming(Actor_Player* player, u8 itemAc
     }
     // End displaced code
 
-    if (itemAction == PLAYER_CUSTOM_IA_BOOTS_IRON)
+    if (itemAction == PLAYER_CUSTOM_IA_BOOTS_IRON || itemAction == PLAYER_CUSTOM_IA_TUNIC_ZORA)
     {
         return 0;
     }
@@ -993,7 +1054,7 @@ s32 Player_IsBeingPushed(Actor_Player* this, GameState_Play* play)
 {
     if (GET_PLAYER_CUSTOM_BOOTS(this) == PLAYER_BOOTS_IRON)
     {
-        return 0;
+        return this->pushedSpeed != 0.0f;
     }
 
     // Displaced code:
@@ -1029,6 +1090,19 @@ s32 Player_PlayHoverSound(Actor_Player* this, f32* arg1Ptr)
 typedef s32 (*Player_func_808340AC)(s32);
 typedef s32 (*Player_func_808340D4)(s32);
 typedef s32 (*Player_func_8083784C)(Actor_Player*);
+
+static void Player_IncrementFloorTypeTimer(Actor_Player* this, s32* sPlayerFloorType)
+{
+    if (this->prevFloorType == *sPlayerFloorType)
+    {
+        this->floorTypeTimer++;
+    }
+    else
+    {
+        this->prevFloorType = *sPlayerFloorType;
+        this->floorTypeTimer = 0;
+    }
+}
 
 s32 Player_UpdateHoverBoots(Actor_Player* this)
 {
@@ -1068,6 +1142,7 @@ s32 Player_UpdateHoverBoots(Actor_Player* this)
             this->hoverBootsTimer = 19;
         }
 
+        Player_IncrementFloorTypeTimer(this, sPlayerFloorType);
         return 0;
     }
 
@@ -1076,6 +1151,8 @@ s32 Player_UpdateHoverBoots(Actor_Player* this)
         *sPlayerFloorType = 0; // FLOOR_TYPE_0;
     }
     this->floorPitch = this->floorPitchAlt = *sPlayerFloorPitchShape = 0;
+
+    Player_IncrementFloorTypeTimer(this, sPlayerFloorType);
 
     return 1;
 }
@@ -1104,4 +1181,37 @@ s32 Player_IsFloorSlippery(Actor_Player* player, s32 floorType)
     // Displaced code:
     return (player->base.bgCheckFlags & BGCHECKFLAG_GROUND) && floorType == 5 && player->currentBoots < 5; // PLAYER_BOOTS_ZORA_UNDERWATER
     // End displaced code
+}
+
+s32 Player_IsGoronOrGoronTunic(Actor_Player* player)
+{
+    return player->transformation == MM_PLAYER_FORM_GORON || gSaveContext.save.itemEquips.tunic == PLAYER_TUNIC_GORON;
+}
+
+static u8 sFloorDamageDelay[] = { 120, 60 };
+s32 Player_ShouldTakeFloorDamage(Actor_Player* player, s32 isWallDamaging, s32 floorDamageType, s32 isFloorDamaging)
+{
+    // (floorDamageType < 0 && !isWallDamaging) never enters this code
+
+    if (isFloorDamaging || isWallDamaging)
+    {
+        player->floorTypeTimer = 0;
+        player->base.colChkInfo.damage = 4;
+        return 1;
+    }
+
+    // probably redundant, but better to be safe
+    if (floorDamageType < 0 || floorDamageType > 1)
+    {
+        return 0;
+    }
+
+    if (gSaveContext.save.itemEquips.tunic != PLAYER_TUNIC_GORON || player->floorTypeTimer >= sFloorDamageDelay[floorDamageType])
+    {
+        player->floorTypeTimer = 0;
+        player->base.colChkInfo.damage = 4;
+        return 1;
+    }
+
+    return 0;
 }

@@ -1048,6 +1048,39 @@ typedef struct {
     /* 0x0E */ s16 dist; // Plane distance from origin along the normal
 } CollisionPoly; // size = 0x10
 
+typedef struct DamageTable {
+    /* 0x00 */ u8 attack[32];
+} DamageTable; // size = 0x20
+
+typedef struct CollisionCheckInfoInit {
+    /* 0x0 */ u8 health;
+    /* 0x2 */ s16 cylRadius;
+    /* 0x4 */ s16 cylHeight;
+    /* 0x6 */ u8 mass;
+} CollisionCheckInfoInit; // size = 0x8
+
+typedef struct CollisionCheckInfoInit2 {
+    /* 0x0 */ u8 health;
+    /* 0x2 */ s16 cylRadius;
+    /* 0x4 */ s16 cylHeight;
+    /* 0x6 */ s16 cylYShift;
+    /* 0x8 */ u8 mass;
+} CollisionCheckInfoInit2; // size = 0xC
+
+typedef struct CollisionCheckInfo {
+    /* 0x00 */ DamageTable* damageTable;
+    /* 0x04 */ Vec3f displacement;
+    /* 0x10 */ s16 cylRadius;
+    /* 0x12 */ s16 cylHeight;
+    /* 0x14 */ s16 cylYShift;
+    /* 0x16 */ u8 mass;
+    /* 0x17 */ u8 health;
+    /* 0x18 */ u8 damage;
+    /* 0x19 */ u8 damageEffect;
+    /* 0x1A */ u8 atHitEffect;
+    /* 0x1B */ u8 acHitEffect;
+} CollisionCheckInfo; // size = 0x1C
+
 #define BGCHECKFLAG_GROUND (1 << 0) // Standing on the ground
 #define BGCHECKFLAG_GROUND_TOUCH (1 << 1) // Has touched the ground (only active for 1 frame)
 #define BGCHECKFLAG_GROUND_LEAVE (1 << 2) // Has left the ground (only active for 1 frame)

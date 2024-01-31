@@ -118,6 +118,14 @@ void KaleidoScope_LoadNamedItemCustom(void* segment, u32 texIndex)
         isForeign = 1;
         texIndex = 0x7b + ITEM_OOT_BOOTS_HOVER;
         break;
+    case ITEM_MM_TUNIC_GORON:
+        isForeign = 1;
+        texIndex = 0x7b + ITEM_OOT_TUNIC_GORON;
+        break;
+    case ITEM_MM_TUNIC_ZORA:
+        isForeign = 1;
+        texIndex = 0x7b + ITEM_OOT_TUNIC_ZORA;
+        break;
     }
     if (isForeign)
     {
@@ -191,6 +199,22 @@ void KaleidoScope_ShowItemMessage(GameState_Play* play, u16 messageId, u8 yPosit
         comboTextAppendStr(&b, TEXT_COLOR_RED "Hover Boots" TEXT_NL);
         comboTextAppendClearColor(&b);
         comboTextAppendStr(&b, "With these mysterious boots" TEXT_NL "you can hover above the ground." TEXT_NL "The downside? No traction!" TEXT_END);
+        break;
+    case ITEM_MM_TUNIC_GORON:
+        b = play->msgCtx.font.textBuffer.schar;
+        b[2] = 0xFE; // Use No Icon
+        b += 11;
+        comboTextAppendStr(&b, TEXT_COLOR_RED "Goron Tunic" TEXT_NL);
+        comboTextAppendClearColor(&b);
+        comboTextAppendStr(&b, "Wear this heat-resistant tunic" TEXT_NL "allows you to go to hot places." TEXT_END);
+        break;
+    case ITEM_MM_TUNIC_ZORA:
+        b = play->msgCtx.font.textBuffer.schar;
+        b[2] = 0xFE; // Use No Icon
+        b += 11;
+        comboTextAppendStr(&b, TEXT_COLOR_RED "Zora Tunic" TEXT_NL);
+        comboTextAppendClearColor(&b);
+        comboTextAppendStr(&b, "Wear this diving suit and you" TEXT_NL "won't drown underwater." TEXT_END);
         break;
     }
 }
@@ -339,6 +363,8 @@ static u32 sCustomIcons[] = {
     ITEM_MM_SPELL_FIRE,
     ITEM_MM_BOOTS_IRON,
     ITEM_MM_BOOTS_HOVER,
+    ITEM_MM_TUNIC_GORON,
+    ITEM_MM_TUNIC_ZORA,
 };
 
 s8 gPlayerFormCustomItemRestrictions[5][8] =
@@ -347,7 +373,7 @@ s8 gPlayerFormCustomItemRestrictions[5][8] =
     { 0, 0, 0, 0, 0, 0, 0, 0 },
     { 0, 0, 0, 0, 0, 0, 0, 0 },
     { 0, 0, 0, 0, 0, 0, 0, 0 },
-    { 1, 1, 1, -1, -1, 0, 0, 0 },
+    { 1, 1, 1, -1, -1, -1, -1, 0 },
 };
 
 typedef void (*KaleidoScope_GrayOutTextureRGBA32)(u32*, u16);
@@ -386,6 +412,12 @@ void KaleidoScope_LoadIcons(u32 vrom, void* dst, size_t* size)
             break;
         case ITEM_MM_BOOTS_HOVER:
             foreignIcon = ITEM_OOT_BOOTS_HOVER;
+            break;
+        case ITEM_MM_TUNIC_GORON:
+            foreignIcon = ITEM_OOT_TUNIC_GORON;
+            break;
+        case ITEM_MM_TUNIC_ZORA:
+            foreignIcon = ITEM_OOT_TUNIC_ZORA;
             break;
         default:
             continue;
