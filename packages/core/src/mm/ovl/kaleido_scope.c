@@ -166,7 +166,7 @@ void KaleidoScope_ShowItemMessage(GameState_Play* play, u16 messageId, u8 yPosit
         b += 11;
         comboTextAppendStr(&b, TEXT_COLOR_RED "Din's Fire" TEXT_NL);
         comboTextAppendClearColor(&b);
-        comboTextAppendStr(&b, "Its fireball engulgs everything!" TEXT_NL "It's attack magic you can use" TEXT_NL "with \xB2." TEXT_END);
+        comboTextAppendStr(&b, "Its fireball engulfs everything!" TEXT_NL "It's attack magic you can use" TEXT_NL "with \xB2." TEXT_END);
         break;
     }
 }
