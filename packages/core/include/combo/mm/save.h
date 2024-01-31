@@ -385,11 +385,11 @@ MmExtraItems;
 typedef struct
 {
     u32 trade1:6;
-    u32 trade2:4;
-    u32 trade3:4;
+    u32 trade2:5;
+    u32 trade3:5;
     u32 tradeObtained1:6;
-    u32 tradeObtained2:4;
-    u32 tradeObtained3:4;
+    u32 tradeObtained2:5;
+    u32 tradeObtained3:5;
 }
 MmExtraTrade;
 

@@ -1073,8 +1073,9 @@ typedef struct PACKED ALIGNED(0x4) Actor
     u16         bgCheckFlags; // Flags indicating how the actor is interacting with collision
     s16         yawTowardsPlayer; // Y rotation difference between the actor and the player
     f32         xyzDistToPlayerSq; // Squared distance between the actor and the player
-    float       xzDistanceFromLink;
-    char        unk_94[0x20];
+    f32         xzDistanceFromLink;
+    f32         yDistanceFromLink;
+    CollisionCheckInfo colChkInfo;
     Vec3s       rot2;
     char        unk_ba[2];
     float       modelOffsetY;

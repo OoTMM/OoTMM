@@ -247,6 +247,8 @@ kItemToGi:
 .short GI_MM_MASK_ZORA
 .short GI_MM_MASK_DEKU
 .short GI_MM_LENS
+.short GI_MM_TUNIC_GORON
+.short GI_MM_TUNIC_ZORA
 .short 0x00
 
 PATCH_START 0x80853c38
@@ -604,3 +606,308 @@ PATCH_START 0x80844798
   nop
   nop
 PATCH_END
+
+/*
+For checking how long should the player be on fire for.
+Replaces:
+  bne       v0, at, .+0x10
+   nop
+  b         .+0x28
+*/
+PATCH_START 0x808342a8
+  jal       Player_IsGoronOrGoronTunic
+   or       a0, s4, zero
+  bnezl     v0, .+0x28
+PATCH_END
+
+/*
+During check if player should burn when dying.
+Replaces:
+  LBU       t6, 0x014B (S0)
+  ADDIU     AT, R0, 0x0001
+  BEQ       T6, AT, .+0x80
+*/
+PATCH_START 0x8084BFF0
+  jal       Player_IsGoronOrGoronTunic
+   or       a0, s0, zero
+  bnez      v0, .+0x80
+PATCH_END
+
+Player_ShouldTakeFloorDamage_Hook:
+  addiu     sp, sp, -0x20
+  sw        ra, 0x0014 (sp)
+  sw        v1, 0x0018 (sp)
+  sw        a1, 0x0024 (sp)
+  or        a2, a0, zero
+
+  jal       Player_ShouldTakeFloorDamage
+   or       a0, s0, zero
+
+  lw        a1, 0x0024 (sp)
+  lw        v1, 0x0018 (sp)
+  lw        ra, 0x0014 (sp)
+  jr        ra
+   addiu    sp, sp, 0x20
+
+/*
+Timer for lava when wearing Goron Tunic.
+Replaces:
+  ADDIU     AT, R0, 0x0032
+  BNE       V1, AT, .+0x10
+  SB        T1, 0x00B8 (S0)
+  B         .+0xC
+  OR        A2, R0, R0
+  ADDIU     A2, R0, 0x0001
+  BEQZ      A1, .+0x10
+   LW       A0, 0x007C (SP)
+  B         .+0xC
+   LH       V1, 0x0086 (S0)
+  LH        V1, 0x00BE (S0)
+*/
+PATCH_START 0x80834C58
+  jal       Player_ShouldTakeFloorDamage_Hook
+   lw       a0, 0x0058 (sp)
+  beqz      v0, .+0x50
+   addiu    at, zero, 0x0032
+  bnel      v1, at, .+0xC
+   addiu    a2, zero, 0x0001
+  or        a2, zero, zero
+  beqzl     a1, .+0xC
+   lh       v1, 0x00BE (s0)
+  lh        v1, 0x0086 (s0)
+  lw        a0, 0x007C (sp)
+PATCH_END
+
+/* Change child link object to use EnvColor instead of PrimColor */
+
+PATCH_VROM 0x01166390
+.int 0xFC12FE04
+.int 0xFFFFFDFE
+PATCH_END
+
+PATCH_VROM 0x011668B8
+.int 0xFC12FE04
+.int 0xFFFFFDFE
+PATCH_END
+
+PATCH_VROM 0x01166DC0
+.int 0xFC12FE04
+.int 0xFFFFFDFE
+PATCH_END
+
+PATCH_VROM 0x01166F98
+.int 0xFC12FE04
+.int 0xFFFFFDFE
+PATCH_END
+
+PATCH_VROM 0x01167058
+.int 0xFC12FE04
+.int 0xFFFFFDFE
+PATCH_END
+
+PATCH_VROM 0x01167660
+.int 0xFC12FE04
+.int 0xFFFFFDFE
+PATCH_END
+
+PATCH_VROM 0x01167AD8
+.int 0xFC12FE04
+.int 0xFFFFFDFE
+PATCH_END
+
+PATCH_VROM 0x01167D10
+.int 0xFC12FE04
+.int 0xFFFFFDFE
+PATCH_END
+
+PATCH_VROM 0x01167E98
+.int 0xFC12FE04
+.int 0xFFFFFDFE
+PATCH_END
+
+PATCH_VROM 0x011681E0
+.int 0xFC12FE04
+.int 0xFFFFFDFE
+PATCH_END
+
+PATCH_VROM 0x01168368
+.int 0xFC12FE04
+.int 0xFFFFFDFE
+PATCH_END
+
+PATCH_VROM 0x011711D8
+.int 0xFC327604
+.int 0xFFFCFFF8
+PATCH_END
+
+PATCH_VROM 0x011711E8
+.int 0x00000000
+.int 0x00000000
+PATCH_END
+
+PATCH_VROM 0x01171280
+.int 0xFC327604
+.int 0xFFFCFFF8
+PATCH_END
+
+PATCH_VROM 0x01171290
+.int 0x00000000
+.int 0x00000000
+PATCH_END
+
+PATCH_VROM 0x01171330
+.int 0xFC327604
+.int 0xFFFCFFF8
+PATCH_END
+
+PATCH_VROM 0x01171340
+.int 0x00000000
+.int 0x00000000
+PATCH_END
+
+PATCH_VROM 0x011713E0
+.int 0xFC327604
+.int 0xFFFCFFF8
+PATCH_END
+
+PATCH_VROM 0x011713F0
+.int 0x00000000
+.int 0x00000000
+PATCH_END
+
+PATCH_VROM 0x01171618
+.int 0xFC327604
+.int 0xFFFCFFF8
+PATCH_END
+
+PATCH_VROM 0x01171628
+.int 0x00000000
+.int 0x00000000
+PATCH_END
+
+PATCH_VROM 0x01171708
+.int 0xFC327604
+.int 0xFFFCFFF8
+PATCH_END
+
+PATCH_VROM 0x01171718
+.int 0x00000000
+.int 0x00000000
+PATCH_END
+
+PATCH_VROM 0x011717E0
+.int 0xFC327604
+.int 0xFFFCFFF8
+PATCH_END
+
+PATCH_VROM 0x011717F0
+.int 0x00000000
+.int 0x00000000
+PATCH_END
+
+PATCH_VROM 0x011718D0
+.int 0xFC327604
+.int 0xFFFCFFF8
+PATCH_END
+
+PATCH_VROM 0x011718E0
+.int 0x00000000
+.int 0x00000000
+PATCH_END
+
+PATCH_VROM 0x01171960
+.int 0xFC327604
+.int 0xFFFCFFF8
+PATCH_END
+
+PATCH_VROM 0x01171970
+.int 0x00000000
+.int 0x00000000
+PATCH_END
+
+PATCH_VROM 0x01171C98
+.int 0xFC327604
+.int 0xFFFCFEF8
+.int 0xFA0000FF
+.int 0x181840FF
+.int 0x00000000
+.int 0x00000000
+PATCH_END
+
+PATCH_VROM 0x01171D68
+.int 0xFC327604
+.int 0xFFFCFFF8
+.int 0xFA0000FF
+.int 0x3C3C60FF
+.int 0x00000000
+.int 0x00000000
+PATCH_END
+
+PATCH_VROM 0x01171E20
+.int 0xFC327604
+.int 0xFFFCFFF8
+PATCH_END
+
+PATCH_VROM 0x01171E30
+.int 0x00000000
+.int 0x00000000
+PATCH_END
+
+PATCH_VROM 0x01171F48
+.int 0xFC327604
+.int 0xFFFCFFF8
+PATCH_END
+
+PATCH_VROM 0x01171F58
+.int 0x00000000
+.int 0x00000000
+PATCH_END
+
+PATCH_VROM 0x01171FD8
+.int 0xFC327604
+.int 0xFFFCFFF8
+PATCH_END
+
+PATCH_VROM 0x01171FE8
+.int 0x00000000
+.int 0x00000000
+PATCH_END
+
+PATCH_VROM 0x011720A0
+.int 0xFC327604
+.int 0xFFFCFFF8
+.int 0xFA0000FF
+.int 0x3C3C60FF
+.int 0x00000000
+.int 0x00000000
+PATCH_END
+
+PATCH_VROM 0x01172140
+.int 0xFC327604
+.int 0xFFFCFFF8
+.int 0xFA0000FF
+.int 0x3C3C60FF
+.int 0x00000000
+.int 0x00000000
+PATCH_END
+
+PATCH_VROM 0x011721E0
+.int 0xFC327604
+.int 0xFFFCFFF8
+PATCH_END
+
+PATCH_VROM 0x011721F0
+.int 0x00000000
+.int 0x00000000
+PATCH_END
+
+PATCH_VROM 0x01172280
+.int 0xFC327604
+.int 0xFFFCFFF8
+PATCH_END
+
+PATCH_VROM 0x01172290
+.int 0x00000000
+.int 0x00000000
+PATCH_END
+

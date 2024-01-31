@@ -471,8 +471,8 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   OOT_SWORD_KOKIRI: "Kokiri Sword (OoT)",
   OOT_SWORD_MASTER: "Master Sword",
   OOT_SWORD: "Progressive Sword (OoT)",
-  OOT_TUNIC_GORON: "Goron Tunic",
-  OOT_TUNIC_ZORA: "Zora Tunic",
+  OOT_TUNIC_GORON: "Goron Tunic (OoT)",
+  OOT_TUNIC_ZORA: "Zora Tunic (OoT)",
   OOT_WALLET: "Progressive Wallet (OoT)",
   OOT_WEIRD_EGG: "Weird Egg",
   OOT_ZELDA_LETTER: "Zelda's Letter",
@@ -559,6 +559,8 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   SHARED_SPELL_WIND: "Farore's Wind",
   SHARED_BOOTS_IRON: 'Iron Boots',
   SHARED_BOOTS_HOVER: 'Hover Boots',
+  SHARED_TUNIC_GORON: 'Goron Tunic',
+  SHARED_TUNIC_ZORA: 'Zora Tunic',
   OOT_BUTTON_A: "A Button (OoT)",
   OOT_BUTTON_C_RIGHT: "C-Right Button (OoT)",
   OOT_BUTTON_C_LEFT: "C-Left Button (OoT)",
@@ -688,6 +690,8 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   MM_SPELL_WIND: "Farore's Wind (MM)",
   MM_BOOTS_IRON: 'Iron Boots (MM)',
   MM_BOOTS_HOVER: 'Hover Boots (MM)',
+  MM_TUNIC_GORON: 'Goron Tunic (MM)',
+  MM_TUNIC_ZORA: 'Zora Tunic (MM)',
 };
 
 export function itemName(item: string) {

@@ -90,6 +90,8 @@ const SHARED_ITEMS_OOT = new Map([
   ['SHARED_SPELL_LOVE',       'OOT_SPELL_LOVE'],
   ['SHARED_BOOTS_IRON',       'OOT_BOOTS_IRON'],
   ['SHARED_BOOTS_HOVER',      'OOT_BOOTS_HOVER'],
+  ['SHARED_TUNIC_GORON',      'OOT_TUNIC_GORON'],
+  ['SHARED_TUNIC_ZORA',       'OOT_TUNIC_ZORA'],
 ]);
 
 const SHARED_ITEMS_MM = new Map([
@@ -152,6 +154,8 @@ const SHARED_ITEMS_MM = new Map([
   ['SHARED_SPELL_LOVE',       'MM_SPELL_LOVE'],
   ['SHARED_BOOTS_IRON',       'MM_BOOTS_IRON'],
   ['SHARED_BOOTS_HOVER',      'MM_BOOTS_HOVER'],
+  ['SHARED_TUNIC_GORON',      'MM_TUNIC_GORON'],
+  ['SHARED_TUNIC_ZORA',       'MM_TUNIC_ZORA'],
 ]);
 
 const SHARED_ITEMS = {
@@ -707,6 +711,8 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     SHARED_SPELL_LOVE: settings.sharedSpellLove,
     SHARED_BOOTS_IRON: settings.sharedBootsIron,
     SHARED_BOOTS_HOVER: settings.sharedBootsHover,
+    SHARED_TUNIC_GORON: settings.sharedTunicGoron,
+    SHARED_TUNIC_ZORA: settings.sharedTunicZora,
     OOT_CROSS_WARP: settings.crossWarpOot,
     MM_CROSS_WARP: settings.crossWarpMm !== 'none',
     MM_CROSS_WARP_ADULT: settings.crossWarpMm === 'full',
@@ -791,6 +797,8 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MM_SPELL_LOVE: settings.spellLoveMm,
     MM_BOOTS_IRON: settings.bootsIronMm,
     MM_BOOTS_HOVER: settings.bootsHoverMm,
+    MM_TUNIC_GORON: settings.tunicGoronMm,
+    MM_TUNIC_ZORA: settings.tunicZoraMm,
   };
 
   for (const v in exprs) {
