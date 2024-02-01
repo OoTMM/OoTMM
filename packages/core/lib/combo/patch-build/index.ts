@@ -1,6 +1,6 @@
 import { GameAddresses } from "../addresses";
 import { BuildOutput } from "../build";
-import { CONFIG, CUSTOM_ADDR, GAMES } from "../config";
+import { GAMES } from "../config";
 import { DecompressedRoms } from "../decompress";
 import { LogicResult } from "../logic";
 import { Monitor } from "../monitor";
@@ -11,6 +11,7 @@ import { patchRandomizer } from "./randomizer";
 import { PatchGroup } from "./group";
 import { isEntranceShuffle } from "../logic/helpers";
 import { Options } from "../options";
+import { World } from "../logic/world";
 
 export type BuildPatchfileIn = {
   opts: Options;
@@ -23,7 +24,7 @@ export type BuildPatchfileIn = {
   settings: Settings;
 };
 
-function asmPatchGroups(settings: Settings) {
+function asmPatchGroups(world: World, settings: Settings) {
   const groups: {[k in PatchGroup]: boolean} = {
     OOT_HOOKSHOT_ANYWHERE: settings.hookshotAnywhereOot,
     OOT_CLIMB_ANYWHERE: settings.climbMostSurfacesOot,
@@ -77,27 +78,26 @@ function asmPatchGroups(settings: Settings) {
 
 export function buildPatchfiles(args: BuildPatchfileIn): Patchfile[] {
   args.monitor.log("Building Patchfile");
-  const file = args.patch;
-  const groups = asmPatchGroups(args.settings);
-
-  for (const game of GAMES) {
-    /* Apply ASM patches */
-    const rom = args.roms[game].rom;
-    const patcher = new Patcher(args.opts, game, rom, groups, args.addresses, args.build[game].patches, file);
-    patcher.run();
-
-    /* Pack the payload */
-    const payload = args.build[game].payload;
-    if (payload.length > (game === 'mm' ? 0x40000 : 0x40000)) {
-      throw new Error(`Payload too large ${game}`);
-    }
-    file.addNewFile(game === 'oot' ? 0xf0000000 : 0xf0100000, payload, false);
-  }
-
-  /* Patch the randomized data */
   const patches: Patchfile[] = [];
+
   for (let world = 0; world < args.settings.players; ++world) {
-    const p = file.dup();
+    const p = args.patch.dup();
+    const groups = asmPatchGroups(args.logic.worlds[world], args.settings);
+
+    for (const game of GAMES) {
+      /* Apply ASM patches */
+      const rom = args.roms[game].rom;
+      const patcher = new Patcher(args.opts, game, rom, groups, args.addresses, args.build[game].patches, p);
+      patcher.run();
+
+      /* Pack the payload */
+      const payload = args.build[game].payload;
+      if (payload.length > (game === 'mm' ? 0x40000 : 0x40000)) {
+        throw new Error(`Payload too large ${game}`);
+      }
+      p.addNewFile(game === 'oot' ? 0xf0000000 : 0xf0100000, payload, false);
+    }
+
     patchRandomizer(world, args.logic, args.settings, p);
     patches.push(p);
   }
