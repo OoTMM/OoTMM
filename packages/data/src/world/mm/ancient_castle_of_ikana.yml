@@ -30,12 +30,12 @@
     FAIRY: "has(MASK_DEKU) || short_hook_anywhere"
   exits:
     "Ancient Castle of Ikana Interior North": "true"
-    "Ancient Castle of Ikana Interior North 3": "can_use_lens || short_hook_anywhere"
+    "Ancient Castle of Ikana Interior North 3": "can_use_lens || short_hook_anywhere || has_hover_boots"
   locations:
-    "Ancient Castle of Ikana Pot Left Second Room 1": "has(MASK_DEKU) || short_hook_anywhere"
-    "Ancient Castle of Ikana Pot Left Second Room 2": "has(MASK_DEKU) || short_hook_anywhere"
-    "Ancient Castle of Ikana Pot Left Second Room 3": "has(MASK_DEKU) || short_hook_anywhere"
-    "Ancient Castle of Ikana Pot Left Second Room 4": "has(MASK_DEKU) || short_hook_anywhere"
+    "Ancient Castle of Ikana Pot Left Second Room 1": "has(MASK_DEKU) || short_hook_anywhere || has_hover_boots"
+    "Ancient Castle of Ikana Pot Left Second Room 2": "has(MASK_DEKU) || short_hook_anywhere || has_hover_boots"
+    "Ancient Castle of Ikana Pot Left Second Room 3": "has(MASK_DEKU) || short_hook_anywhere || has_hover_boots"
+    "Ancient Castle of Ikana Pot Left Second Room 4": "has(MASK_DEKU) || short_hook_anywhere || has_hover_boots"
 "Ancient Castle of Ikana Interior North 3":
   dungeon: ACoI
   exits:

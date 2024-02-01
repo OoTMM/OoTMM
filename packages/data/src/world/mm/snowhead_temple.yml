@@ -31,9 +31,9 @@
     RUPEES: "true"
   exits:
     "Snowhead Temple Main": "true"
-    "Snowhead Temple Bridge Back": "goron_fast_roll || can_hookshot || short_hook_anywhere"
+    "Snowhead Temple Bridge Back": "goron_fast_roll || can_hookshot || short_hook_anywhere || has_hover_boots"
   locations:
-    "Snowhead Temple Bridge Room": "soul_freezard && can_hookshot_short"
+    "Snowhead Temple Bridge Room": "soul_freezard && (can_hookshot_short || (has_hover_boots && has_weapon))"
     "Snowhead Temple SF Bridge Under Platform": "(has_arrows || can_hookshot) && has(MASK_GREAT_FAIRY)"
     "Snowhead Temple SF Bridge Pillar": "can_use_lens && (has_arrows || can_hookshot_short) && has(MASK_GREAT_FAIRY)"
     "Snowhead Temple Pot Bridge Room 1": "true"
@@ -48,7 +48,7 @@
     "Snowhead Temple Bridge Front": "true"
     "Snowhead Temple Center Level 1": "true"
   locations:
-    "Snowhead Temple Bridge Room": "soul_freezard && can_use_fire_short_range"
+    "Snowhead Temple Bridge Room": "soul_freezard && (can_use_fire_short_range || (has_hover_boots && has_weapon))"
     "Snowhead Temple SF Bridge Under Platform": "has_weapon_range && has(MASK_GREAT_FAIRY)"
     "Snowhead Temple Pot Bridge Room After 1": "true"
     "Snowhead Temple Pot Bridge Room After 2": "true"
@@ -65,8 +65,8 @@
   exits:
     "Snowhead Temple Map Room": "true"
     "Snowhead Temple Center Level 1": "true"
-    "Snowhead Temple Center Level 2 Dual": "goron_fast_roll || short_hook_anywhere"
-    "Snowhead Temple Fire Arrow": "goron_fast_roll || (can_use_lens && scarecrow_hookshot && has(MASK_DEKU)) || short_hook_anywhere"
+    "Snowhead Temple Center Level 2 Dual": "goron_fast_roll || short_hook_anywhere || has_hover_boots"
+    "Snowhead Temple Fire Arrow": "goron_fast_roll || (can_use_lens && scarecrow_hookshot && has(MASK_DEKU)) || short_hook_anywhere || has_hover_boots"
     "Snowhead Temple Center Level 3 Iced": "can_use_fire_short_range || (trick_sht_fireless && (scarecrow_hookshot || short_hook_anywhere) && has_mask_goron) || trick_sht_fireless_er"
     "Snowhead Temple Center Level 3 Snow": "can_use_lens && scarecrow_hookshot"
   locations:
@@ -115,7 +115,7 @@
   events:
     FAIRY: "true"
   locations:
-    "Snowhead Temple Central Room Bottom": "has_mask_goron"
+    "Snowhead Temple Central Room Bottom": "has_mask_goron || has_iron_boots"
     "Snowhead Temple Pot Central Room Bottom 1": "true"
     "Snowhead Temple Pot Central Room Bottom 2": "true"
     "Snowhead Temple Grass 01": "true"
@@ -187,7 +187,7 @@
   dungeon: SH
   exits:
     "Snowhead Temple Dual Switches": "true"
-    "Snowhead Temple Map Room Upper": "goron_fast_roll || can_hookshot || short_hook_anywhere"
+    "Snowhead Temple Map Room Upper": "goron_fast_roll || can_hookshot || short_hook_anywhere || has_hover_boots"
     "Snowhead Temple Center Level 1": "true"
   locations:
     "Snowhead Temple Pot Central Room Scarecrow 1": "true"
@@ -195,7 +195,7 @@
 "Snowhead Temple Fire Arrow":
   dungeon: SH
   exits:
-    "Snowhead Temple Map Room Upper": "goron_fast_roll || (can_use_lens && scarecrow_hookshot && has(MASK_DEKU)) || short_hook_anywhere"
+    "Snowhead Temple Map Room Upper": "goron_fast_roll || (can_use_lens && scarecrow_hookshot && has(MASK_DEKU)) || short_hook_anywhere || has_hover_boots"
     "Snowhead Temple Center Level 3 Snow": "can_hookshot"
     "Snowhead Temple Center Level 1": "true"
   locations:
@@ -206,7 +206,7 @@
   exits:
     "Snowhead Temple Map Room Upper": "true"
     "Snowhead Temple Center Level 2 Dual": "true"
-    "Snowhead Temple Center Level 3 Iced": "has_mask_goron || can_hookshot || short_hook_anywhere"
+    "Snowhead Temple Center Level 3 Iced": "has_mask_goron || can_hookshot || short_hook_anywhere || has_hover_boots" # todo hover boots trick
     "Snowhead Temple Snow Room": "small_keys_sh(3)"
     "Snowhead Temple Fire Arrow": "true"
     "Snowhead Temple Center Level 4": "short_hook_anywhere && (can_use_fire_short_range || has(MASK_BLAST) || has_bombchu)"
@@ -221,7 +221,7 @@
     "Snowhead Temple Map Room Upper": "true"
     "Snowhead Temple Center Level 2 Dual": "has_weapon || has_mask_zora || has_mask_goron"
     "Snowhead Temple Fire Arrow": "true"
-    "Snowhead Temple Center Level 3 Snow": "has_mask_goron || can_hookshot || short_hook_anywhere"
+    "Snowhead Temple Center Level 3 Snow": "has_mask_goron || can_hookshot || short_hook_anywhere || has_hover_boots"
     "Snowhead Temple Center Level 4": "event(SNOWHEAD_RAISE_PILLAR)"
   locations:
     "Snowhead Temple Central Room Alcove": "can_use_lens"
