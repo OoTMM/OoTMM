@@ -34,35 +34,6 @@ void Player_TalkDisplayTextBox(GameState_Play* play, s16 textId, Actor* actor)
 
 PATCH_CALL(0x80837bb0, Player_TalkDisplayTextBox);
 
-#define PLAYER_CUSTOM_IA_SPELL_MIN  0x37
-#define PLAYER_CUSTOM_IA_SPELL_WIND 0x37
-#define PLAYER_CUSTOM_IA_SPELL_LOVE 0x38
-#define PLAYER_CUSTOM_IA_SPELL_FIRE 0x39
-
-#define PLAYER_CUSTOM_IA_BOOTS_MIN   0x34
-#define PLAYER_CUSTOM_IA_BOOTS_IRON  0x34
-#define PLAYER_CUSTOM_IA_BOOTS_HOVER 0x35
-
-#define PLAYER_CUSTOM_IA_TUNIC_MIN   0x53
-#define PLAYER_CUSTOM_IA_TUNIC_GORON 0x53
-#define PLAYER_CUSTOM_IA_TUNIC_ZORA  0x54
-
-#define PLAYER_MAGIC_SPELL_MIN  0
-#define PLAYER_MAGIC_SPELL_WIND 0
-#define PLAYER_MAGIC_SPELL_LOVE 1
-#define PLAYER_MAGIC_SPELL_FIRE 2
-#define PLAYER_MAGIC_SPELL_MAX  2
-
-#define PLAYER_BOOTS_MIN   0
-#define PLAYER_BOOTS_IRON  0
-#define PLAYER_BOOTS_HOVER 1
-#define PLAYER_BOOTS_MAX   1
-
-#define PLAYER_TUNIC_MIN    2
-#define PLAYER_TUNIC_GORON  2
-#define PLAYER_TUNIC_ZORA   3
-#define PLAYER_TUNIC_MAX    3
-
 static s32 sCustomItemActions[] =
 {
     PLAYER_CUSTOM_IA_SPELL_WIND,
@@ -506,27 +477,20 @@ void Player_CheckCustomBoots(GameState_Play* play)
     if (player->transformation == MM_PLAYER_FORM_HUMAN)
     {
         player->base.flags &= ~(1 << 17); // ~ACTOR_FLAG_CAN_PRESS_HEAVY_SWITCH
+        player->base.flags |= (1 << 26); // ACTOR_FLAG_CAN_PRESS_SWITCH
 
         if (gSaveContext.save.itemEquips.boots > 0)
         {
             s32 currentBoots = gSaveContext.save.itemEquips.boots - 1;
             s16* bootRegs;
 
+            REG(27) = 2000;
+            REG(48) = 370;
+
             switch(currentBoots)
             {
             case PLAYER_BOOTS_IRON:
                 player->currentBoots = 6; // PLAYER_BOOTS_GORON
-                break;
-            case PLAYER_BOOTS_HOVER:
-                player->currentBoots = 0; // PLAYER_BOOTS_FIERCE_DEITY
-                break;
-            }
-
-            REG(27) = 2000;
-            REG(48) = 370;
-
-            if (currentBoots == PLAYER_BOOTS_IRON)
-            {
                 player->base.flags |= (1 << 17); // ACTOR_FLAG_CAN_PRESS_HEAVY_SWITCH
                 if (player->state & PLAYER_ACTOR_STATE_WATER)
                 {
@@ -534,6 +498,11 @@ void Player_CheckCustomBoots(GameState_Play* play)
                 }
                 REG(27) = 500;
                 REG(48) = 100;
+                break;
+            case PLAYER_BOOTS_HOVER:
+                player->currentBoots = 0; // PLAYER_BOOTS_FIERCE_DEITY
+                player->base.flags &= ~(1 << 26); // ~ACTOR_FLAG_CAN_PRESS_SWITCH
+                break;
             }
 
             bootRegs = sBootData[currentBoots];
@@ -565,6 +534,7 @@ void Player_CheckCustomBoots(GameState_Play* play)
     else
     {
         gSaveContext.save.itemEquips.boots = 0;
+        gSaveContext.save.itemEquips.tunic = 0;
         player->base.flags &= ~(1 << 17); // ~ACTOR_FLAG_CAN_PRESS_HEAVY_SWITCH
     }
 }
@@ -917,8 +887,6 @@ const Gfx gHoverBootsCircleDL[] = {
     gsSPEndDisplayList(),
 };
 
-#define GET_PLAYER_CUSTOM_BOOTS(player) (player->transformation == MM_PLAYER_FORM_HUMAN ? (player->currentBoots == 6 ? PLAYER_BOOTS_IRON : (player->currentBoots == 0 ? PLAYER_BOOTS_HOVER : -1)) : -1)
-
 static Vec3s sHoverBootsRot = { 0, 0, 0 };
 static s32 sHoverBootCircleAlpha = 255;
 
@@ -1193,7 +1161,7 @@ s32 Player_ShouldTakeFloorDamage(Actor_Player* player, s32 isWallDamaging, s32 f
 {
     // (floorDamageType < 0 && !isWallDamaging) never enters this code
 
-    if (isFloorDamaging || isWallDamaging)
+    if (isFloorDamaging || isWallDamaging || player->base.yDistToWater > 0.0f)
     {
         player->floorTypeTimer = 0;
         player->base.colChkInfo.damage = 4;

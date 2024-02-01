@@ -1,6 +1,6 @@
 export const TRICKS = {
   OOT_LENS: "Fewer Lens Requirements (OoT)",
-  OOT_TUNICS: "Fewer Tunic Requirements",
+  OOT_TUNICS: "Fewer Tunic Requirements (OoT)",
   OOT_HIDDEN_GROTTOS: "Hidden Grottos (OoT) without Stone of Agony",
   OOT_MIDO_SKIP: "Backflip Over Mido",
   OOT_MAN_ON_ROOF: "Man on Roof with Nothing",
@@ -51,6 +51,7 @@ export const TRICKS = {
   OOT_GANON_CASTLE_ENTRY: "Enter Ganon's Castle with Longshot Anywhere",
   OOT_SHADOW_TEMPLE_STICKS: "Enter Shadow Temple with Sticks & Fire Arrows",
   MM_LENS: "Fewer Lens Requirements (MM)",
+  MM_TUNICS: "Fewer Tunic Requirements (MM)",
   MM_PALACE_BEAN_SKIP: "Skip Planting Beans in Deku Palace",
   MM_DARMANI_WALL: "Climb Mountain Village Wall Blind",
   MM_NO_SEAHORSE: "Pinnacle Rock without Seahorse",
