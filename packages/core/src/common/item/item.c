@@ -105,7 +105,7 @@ void comboGiveItem(Actor* actor, GameState_Play* play, const ComboItemQuery* q, 
     ComboItemQuery qNothing = ITEM_QUERY_INIT;
     const ComboItemQuery* qPtr;
 
-    if (multiIsMarked(play, q->ovType, q->sceneId, q->roomId, q->id))
+    if (multiIsMarked(play, q->ovType, q->sceneId, q->roomId, q->id) && !(q->ovFlags & OVF_RENEW))
     {
         qNothing.gi = GI_NOTHING;
         qPtr = &qNothing;
@@ -366,7 +366,7 @@ int comboAddItemEx(GameState_Play* play, const ComboItemQuery* q, int updateText
     ComboItemQuery qNothing = ITEM_QUERY_INIT;
     const ComboItemQuery* qPtr;
 
-    if (multiIsMarked(play, q->ovType, q->sceneId, q->roomId, q->id))
+    if (multiIsMarked(play, q->ovType, q->sceneId, q->roomId, q->id) && !(q->ovFlags & OVF_RENEW))
     {
         qNothing.gi = GI_NOTHING;
         qPtr = &qNothing;
