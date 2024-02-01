@@ -41,15 +41,7 @@ void Player_UpdateWrapper(Actor_Player* this, GameState_Play* play)
         }
     }
 
-    /* Spirit MQ silver rupee chest */
-    if (comboConfig(CFG_OOT_SILVER_RUPEE_SHUFFLE)
-        && (gComboData.mq & (1 << MQ_TEMPLE_SPIRIT))
-        && (play->sceneId == SCE_OOT_TEMPLE_SPIRIT)
-        && (comboSilverRupeesGetCount(SR_SPIRIT1) >= 5))
-    {
-        SetSwitchFlag(play, 0x37);
-    }
-
+    comboSrUpdate(play);
     comboMultiProcessMessages(play);
 }
 
