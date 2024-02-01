@@ -971,6 +971,21 @@ void Player_SkelAnime_DrawFlexLod(GameState_Play* play, void** skeleton, Vec3s* 
     CLOSE_DISPS();
 }
 
+void Player_ColorAfterMask(GfxContext* gfxCtx, s32 maskIDMinusOne, PlayerMaskDList* maskDList, Actor_Player* player) {
+    u32 dl = maskDList->maskDListEntry[maskIDMinusOne];
+    gSPDisplayList(gfxCtx->polyOpa.append++, dl);
+
+    if (player->transformation == MM_PLAYER_FORM_HUMAN)
+    {
+        Color_RGB8 tunicColor;
+        u16 tunic;
+
+        tunic = CLAMP(gSaveContext.save.itemEquips.tunic, 0, 3);
+        tunicColor = sTunicColors[tunic];
+        gDPSetEnvColor(gfxCtx->polyOpa.append++, tunicColor.r, tunicColor.g, tunicColor.b, 0xFF);
+    }
+}
+
 PATCH_CALL(0x80124858, Player_SkelAnime_DrawFlexLod);
 
 u16 Player_GetFloorSfxByAge(Actor_Player* this, u16 sfxId) {
