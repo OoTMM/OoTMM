@@ -678,6 +678,34 @@ PATCH_START 0x80834C58
   lw        a0, 0x007C (sp)
 PATCH_END
 
+/*
+Replaces:
+ lui     t8, 0xDE00
+ lui     t2, 0x801C
+ lw      v0, 0x02B0 (t5)
+ addiu   t6, v0, 0x0008
+ sw      t6, 0x02B0 (t5)
+ sw      t8, 0x0000 (v0)
+ lw      t9, 0x0154 (sp)
+ sll     t7, t9, 2
+ addiu   t2, t2, t7
+ lw      t2, 0x0B20 (t2)
+ sw      t2, 0x0004 (v0)
+*/
+PATCH_START 0x801296F4
+  ori     a0, t5, 0x0000 // gfxctx
+  lw      a1, 0x0154 (sp) // mask ID - 1
+  lui     a2, 0x801C
+  ori     a2, a2, 0x0B20 // mask DLs
+  jal     Player_ColorAfterMask
+   or     a3, s1, zero
+  nop
+  nop
+  nop
+  nop
+  nop
+PATCH_END
+
 /* Change child link object to use EnvColor instead of PrimColor */
 
 PATCH_VROM 0x01166390

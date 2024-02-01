@@ -368,6 +368,10 @@ ASSERT_OFFSET(Actor_Player, unk_a78,             0xa78);
 ASSERT_OFFSET(Actor_Player, drawGiId,            0xb2a);
 ASSERT_OFFSET(Actor_Player, unk_b2b,             0xb2b);
 
+typedef struct {
+    /* 0x00 */ u32 maskDListEntry[24];
+} PlayerMaskDList; // size = 0x60
+
 #define PLAYER_CUSTOM_IA_SPELL_MIN  0x37
 #define PLAYER_CUSTOM_IA_SPELL_WIND 0x37
 #define PLAYER_CUSTOM_IA_SPELL_LOVE 0x38
