@@ -25,6 +25,12 @@
 "has_iron_boots": "setting(bootsIronMm) && has(BOOTS_IRON)"
 "has_hover_boots": "setting(bootsHoverMm) && has(BOOTS_HOVER)"
 
+# Tunics
+"has_tunic_goron_strict": "has(TUNIC_GORON)"
+"has_tunic_zora_strict": "has(TUNIC_ZORA)"
+"has_tunic_goron": "has_tunic_goron_strict || trick(MM_TUNICS)"
+"has_tunic_zora": "has_tunic_zora_strict || trick(MM_TUNICS)"
+
 # Ocarina
 "ocarina_button(x, y)": "cond(setting(ocarinaButtonsShuffleMm), cond(setting(sharedOcarinaButtons), has(y), has(x)), true)"
 "ocarina_button_a": "ocarina_button(BUTTON_A, SHARED_BUTTON_A)"
@@ -141,6 +147,9 @@
 "woodfall_raised": "event(OPEN_WOODFALL_TEMPLE) || setting(openDungeonsMm, WF) || ((setting(clearStateDungeonsMm, WF) || setting(clearStateDungeonsMm, both)) && event(CLEAN_SWAMP))"
 "blizzard_stopped": "event(OPEN_SNOWHEAD_TEMPLE) || setting(openDungeonsMm, SH) || event(BOSS_SNOWHEAD)"
 "turtle_woken": "(can_play_zora && has_mask_zora) || setting(openDungeonsMm, GB) || ((setting(clearStateDungeonsMm, GB) || setting(clearStateDungeonsMm, both)) && event(BOSS_GREAT_BAY))"
+
+"underwater_walking": "has_mask_zora || (has_tunic_zora && has_iron_boots)"
+"underwater_walking_strict": "has_mask_zora || (has_tunic_zora_strict && has_iron_boots)"
 
 # Bottles
 "has_bottle": "has(BOTTLE_EMPTY) || has(BOTTLE_POTION_RED) || has(BOTTLE_POTION_GREEN) || has(BOTTLE_POTION_BLUE) || has(BOTTLE_MILK) || event(GOLD_DUST_USED) || has(BOTTLE_CHATEAU) || has(BOTTLE_FAIRY) || has(BOTTLE_POE) || has(BOTTLE_BIG_POE)"
