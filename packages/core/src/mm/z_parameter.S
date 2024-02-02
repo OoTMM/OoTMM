@@ -66,3 +66,34 @@ PATCH_START 0x80110890
      lw     a0, 0x0080 (sp)
     beqzl   v0, .+0x120
 PATCH_END
+
+/* Check environment hazard */
+
+Interface_ShouldStartHazardTimer_Hook:
+  HOOK_SAVE
+  jal       Interface_ShouldStartHazardTimer
+   nop
+  sw        v0,0x40(sp) // store into HOOK_SAVE's v0
+  HOOK_RESTORE
+  jr        ra
+   nop
+
+/*
+Replaces:
+  lui     v0, 0x801c
+  lh      v0, 0xf8dc (v0)
+  addiu   at, r0, 0x0001
+  beq     v0, at, .+0x10
+   addiu  at, r0, 0x0004
+  bnel    v0, at, .+0x9C
+   lhu    t4, 0x3f38 (t0)
+*/
+PATCH_START 0x80121B54
+  lw      a0, 0x0034 (sp)
+  lui     a1, 0x801c
+  jal     Interface_ShouldStartHazardTimer_Hook
+   lh     a1, -0x724 (a1) // 0xf8dc (a1)
+  beqzl   v0, .+0xa0
+   lhu    t4, 0x3f38 (t0)
+  nop
+PATCH_END

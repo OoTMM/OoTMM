@@ -74,6 +74,14 @@ typedef enum PlayerBodyPart {
     /* 0x12 */ PLAYER_BODYPART_MAX
 } PlayerBodyPart;
 
+typedef enum {
+    /* 0 */ PLAYER_ENV_HAZARD_NONE,
+    /* 1 */ PLAYER_ENV_HAZARD_HOTROOM,
+    /* 2 */ PLAYER_ENV_HAZARD_UNDERWATER_FLOOR,
+    /* 3 */ PLAYER_ENV_HAZARD_SWIMMING,
+    /* 4 */ PLAYER_ENV_HAZARD_UNDERWATER_FREE
+} PlayerEnvHazard;
+
 typedef struct PlayerAnimationFrame {
     /* 0x000 */ Vec3s frameTable[PLAYER_LIMB_MAX];
     /* 0x108 */ s16 appearanceInfo; // bitpack containing the face and hands info
