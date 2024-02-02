@@ -380,35 +380,6 @@ typedef struct {
     /* 0x00 */ u32 maskDListEntry[24];
 } PlayerMaskDList; // size = 0x60
 
-#define PLAYER_CUSTOM_IA_SPELL_MIN  0x37
-#define PLAYER_CUSTOM_IA_SPELL_WIND 0x37
-#define PLAYER_CUSTOM_IA_SPELL_LOVE 0x38
-#define PLAYER_CUSTOM_IA_SPELL_FIRE 0x39
-
-#define PLAYER_CUSTOM_IA_BOOTS_MIN   0x34
-#define PLAYER_CUSTOM_IA_BOOTS_IRON  0x34
-#define PLAYER_CUSTOM_IA_BOOTS_HOVER 0x35
-
-#define PLAYER_CUSTOM_IA_TUNIC_MIN   0x53
-#define PLAYER_CUSTOM_IA_TUNIC_GORON 0x53
-#define PLAYER_CUSTOM_IA_TUNIC_ZORA  0x54
-
-#define PLAYER_MAGIC_SPELL_MIN  0
-#define PLAYER_MAGIC_SPELL_WIND 0
-#define PLAYER_MAGIC_SPELL_LOVE 1
-#define PLAYER_MAGIC_SPELL_FIRE 2
-#define PLAYER_MAGIC_SPELL_MAX  2
-
-#define PLAYER_BOOTS_MIN   0
-#define PLAYER_BOOTS_IRON  0
-#define PLAYER_BOOTS_HOVER 1
-#define PLAYER_BOOTS_MAX   1
-
-#define PLAYER_TUNIC_MIN    2
-#define PLAYER_TUNIC_GORON  2
-#define PLAYER_TUNIC_ZORA   3
-#define PLAYER_TUNIC_MAX    3
-
 #define GET_PLAYER_CUSTOM_BOOTS(player) (player->transformation == MM_PLAYER_FORM_HUMAN ? (player->currentBoots == 6 ? PLAYER_BOOTS_IRON : (player->currentBoots == 0 ? PLAYER_BOOTS_HOVER : -1)) : -1)
 
 #endif

@@ -251,6 +251,14 @@ kItemToGi:
 .short GI_MM_TUNIC_ZORA
 .short 0x00
 
+/*
+Replaces:
+  SLTI    AT, V1, 0x0053
+*/
+PATCH_START 0x8085B8A4
+  slti    at, v1, PLAYER_CUSTOM_IA_MAX
+PATCH_END
+
 PATCH_START 0x80853c38
   nop
 PATCH_END
