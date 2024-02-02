@@ -81,6 +81,8 @@
 #include <combo/config.h>
 #if defined (GAME_OOT)
 # include <combo/oot/pause_state_defs.h>
+#else
+# include <combo/mm/asm_defs.h>
 #endif
 
 #if !defined(__ASSEMBLER__)
