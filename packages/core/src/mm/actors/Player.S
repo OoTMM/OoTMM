@@ -706,6 +706,29 @@ PATCH_START 0x801296F4
   nop
 PATCH_END
 
+Player_CanSurface_Hook:
+  HOOK_SAVE
+  jal       Player_CanSurface
+   nop
+  sw        v0,0x40(sp) // store into HOOK_SAVE's v0
+  HOOK_RESTORE
+  jr        ra
+   nop
+
+/*
+Replaces:
+  lw      t9, 0x0a6c (a3)
+  lw      t8, 0x0038 (sp)
+  sll     t6, t9, 4
+  bgezl   t6, .+0x1c
+*/
+PATCH_START 0x80842D60
+  lw      t8, 0x0038 (sp)
+  jal     Player_CanSurface_Hook
+   or     a0, a3, zero
+  beqzl   v0, .+0x1c
+PATCH_END
+
 /* Change child link object to use EnvColor instead of PrimColor */
 
 PATCH_VROM 0x01166390

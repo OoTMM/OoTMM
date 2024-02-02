@@ -103,11 +103,22 @@ s32 Items_ShouldCheckItemUsabilityWhileSwimming(GameState_Play* play, u8 item)
         case ITEM_MM_BOOTS_IRON:
         case ITEM_MM_TUNIC_ZORA:
             return 0;
+        case ITEM_MM_HOOKSHOT:
+        case 0x11: // Short Hookshot
+            return Player_GetEnvironmentalHazard(play) != PLAYER_ENV_HAZARD_UNDERWATER_FLOOR;
+        }
+
+        if (item >= ITEM_MM_BOTTLE_EMPTY && item <= ITEM_MM_CHATEAU)
+        {
+            return Player_GetEnvironmentalHazard(play) != PLAYER_ENV_HAZARD_UNDERWATER_FLOOR;
         }
     }
-    if (Player_GetEnvironmentalHazard(play) == 4 && (item == ITEM_MM_HOOKSHOT || item == 0x11)) // Short Hookshot
-    {
-        return 0;
-    }
     return 1;
+}
+
+s32 Interface_ShouldStartHazardTimer(Actor_Player* player, s16 envHazard)
+{
+    return envHazard == PLAYER_ENV_HAZARD_HOTROOM
+        || envHazard == PLAYER_ENV_HAZARD_UNDERWATER_FREE
+        || (player->transformation != MM_PLAYER_FORM_ZORA && envHazard == PLAYER_ENV_HAZARD_UNDERWATER_FLOOR);
 }

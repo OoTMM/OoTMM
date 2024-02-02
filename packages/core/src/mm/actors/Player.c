@@ -1198,3 +1198,46 @@ s32 Player_ShouldTakeFloorDamage(Actor_Player* player, s32 isWallDamaging, s32 f
 
     return 0;
 }
+
+// This skips the environment hazard text for hot rooms, but there are no hot rooms in MM.
+s32 Player_GetEnvironmentalHazardCustom(GameState_Play* play) {
+    Actor_Player* player = GET_LINK(play);
+
+    if (play->roomCtx.curRoom.behaviorType2 == ROOM_BEHAVIOR_TYPE2_HOT)
+    {
+        return PLAYER_ENV_HAZARD_HOTROOM;
+    }
+    else if (player->transformation != MM_PLAYER_FORM_ZORA && player->underwaterTimer > 80)
+    {
+        if (GET_PLAYER_CUSTOM_BOOTS(player) == PLAYER_BOOTS_IRON && (player->base.bgCheckFlags & BGCHECKFLAG_GROUND))
+        {
+            return PLAYER_ENV_HAZARD_UNDERWATER_FLOOR;
+        }
+        return PLAYER_ENV_HAZARD_UNDERWATER_FREE;
+    }
+    else if (player->state & 0x08000000) // PLAYER_STATE1_SWIM
+    {
+        if ((player->transformation == MM_PLAYER_FORM_ZORA)
+            && (player->currentBoots >= 5) // PLAYER_BOOTS_ZORA_UNDERWATER
+            && (player->base.bgCheckFlags & BGCHECKFLAG_GROUND))
+        {
+            return PLAYER_ENV_HAZARD_UNDERWATER_FLOOR;
+        }
+        else
+        {
+            return PLAYER_ENV_HAZARD_SWIMMING;
+        }
+    }
+    else
+    {
+        return PLAYER_ENV_HAZARD_NONE;
+    }
+}
+
+PATCH_FUNC(0x801242dc, Player_GetEnvironmentalHazardCustom);
+
+s32 Player_CanSurface(Actor_Player* player)
+{
+    return player->state & 0x08000000 // PLAYER_STATE1_SWIM
+        && player->transformation == MM_PLAYER_FORM_ZORA;
+}

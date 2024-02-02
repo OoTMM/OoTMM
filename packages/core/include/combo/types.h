@@ -809,6 +809,16 @@ typedef enum {
     /* 5 */ ROOM_BEHAVIOR_TYPE1_5
 } RoomBehaviorType1;
 
+typedef enum {
+    /* 0 */ ROOM_BEHAVIOR_TYPE2_0,
+    /* 1 */ ROOM_BEHAVIOR_TYPE2_1,
+    /* 2 */ ROOM_BEHAVIOR_TYPE2_2,
+    /* 3 */ ROOM_BEHAVIOR_TYPE2_HOT,
+    /* 4 */ ROOM_BEHAVIOR_TYPE2_4,
+    /* 5 */ ROOM_BEHAVIOR_TYPE2_5,
+    /* 6 */ ROOM_BEHAVIOR_TYPE2_6
+} RoomBehaviorType2;
+
 #define SQ(x) ((x)*(x))
 #define ABS(x) ((x) >= 0 ? (x) : -(x))
 #define DECR(x) ((x) == 0 ? 0 : --(x))
