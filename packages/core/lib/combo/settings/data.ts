@@ -1524,7 +1524,7 @@ export const SETTINGS = [{
   category: 'items.shared',
   type: 'boolean',
   default: false,
-  cond: (s: any) => s.tunicZoramm,
+  cond: (s: any) => s.tunicZoraMm,
 }, {
   key: 'agelessSwords',
   name: 'Ageless Swords',
