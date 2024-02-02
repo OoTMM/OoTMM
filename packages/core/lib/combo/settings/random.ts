@@ -386,6 +386,8 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
     base.sharedSpellLove = true;
     base.sharedBootsIron = true;
     base.sharedBootsHover = true;
+    base.sharedTunicGoron = true;
+    base.sharedTunicZora = true;
     break;
   default:
     base.sharedNutsSticks = booleanWeighted(random, 0.5);
@@ -411,6 +413,20 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
     default:
       base.sharedBootsIron = booleanWeighted(random, 0.5);
       base.sharedBootsHover = booleanWeighted(random, 0.5);
+      break;
+    }
+
+    /* Tunics - grouping */
+    switch (randomInt(random, 4)) {
+    case 0:
+      break;
+    case 1:
+      base.sharedTunicGoron = true;
+      base.sharedTunicZora = true;
+      break;
+    default:
+      base.sharedTunicGoron = booleanWeighted(random, 0.5);
+      base.sharedTunicZora = booleanWeighted(random, 0.5);
       break;
     }
 
@@ -502,6 +518,22 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
   default:
     base.bootsIronMm = booleanWeighted(random, 0.25);
     base.bootsHoverMm = booleanWeighted(random, 0.25);
+  }
+
+  /* Tunics - 50% disabled, 25% enabled, 25% individual */
+  switch (randomInt(random, 4)) {
+  case 0:
+  case 1:
+    base.tunicGoronMm = false;
+    base.tunicZoraMm = false;
+    break;
+  case 2:
+    base.tunicGoronMm = true;
+    base.tunicZoraMm = true;
+    break;
+  default:
+    base.tunicGoronMm = booleanWeighted(random, 0.25);
+    base.tunicZoraMm = booleanWeighted(random, 0.25);
   }
 
   /* Magic spells - 50% disabled, 25% enabled, 25% individual */
