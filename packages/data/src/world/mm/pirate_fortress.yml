@@ -70,7 +70,6 @@
     "Pirate Fortress Lone Guard Exit": "short_hook_anywhere"
     "Pirate Fortress Barrel Maze Exit": "short_hook_anywhere"
     "Pirate Fortress Treasure Room Exit": "short_hook_anywhere || has_hover_boots"
-    "Pirate Fortress Treasure Room Entry": "can_hookshot && can_evade_gerudo"
   locations:
     "Pirate Fortress Interior Lower Chest": "true"
     "Pirate Fortress Interior Upper Chest": "can_hookshot || short_hook_anywhere || (has_mask_goron && trick(MM_OOB_MOVEMENT))"
