@@ -75,8 +75,9 @@ Interface_ShouldStartHazardTimer_Hook:
    nop
   sw        v0,0x40(sp) // store into HOOK_SAVE's v0
   HOOK_RESTORE
+  lui       a1, 0x801f
   jr        ra
-   nop
+   addiu    a1, a1, 0x3f60
 
 /*
 Replaces:
