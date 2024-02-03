@@ -33,7 +33,7 @@
     "Snowhead Temple Main": "true"
     "Snowhead Temple Bridge Back": "goron_fast_roll || can_hookshot || short_hook_anywhere || has_hover_boots"
   locations:
-    "Snowhead Temple Bridge Room": "soul_freezard && (can_hookshot_short || (has_hover_boots && has_weapon))"
+    "Snowhead Temple Bridge Room": "soul_freezard && (can_hookshot_short || has_hover_boots)"
     "Snowhead Temple SF Bridge Under Platform": "(has_arrows || can_hookshot) && has(MASK_GREAT_FAIRY)"
     "Snowhead Temple SF Bridge Pillar": "can_use_lens && (has_arrows || can_hookshot_short) && has(MASK_GREAT_FAIRY)"
     "Snowhead Temple Pot Bridge Room 1": "true"
@@ -48,7 +48,7 @@
     "Snowhead Temple Bridge Front": "true"
     "Snowhead Temple Center Level 1": "true"
   locations:
-    "Snowhead Temple Bridge Room": "soul_freezard && (can_use_fire_short_range || (has_hover_boots && has_weapon))"
+    "Snowhead Temple Bridge Room": "soul_freezard && (can_use_fire_short_range || has_hover_boots)"
     "Snowhead Temple SF Bridge Under Platform": "has_weapon_range && has(MASK_GREAT_FAIRY)"
     "Snowhead Temple Pot Bridge Room After 1": "true"
     "Snowhead Temple Pot Bridge Room After 2": "true"
