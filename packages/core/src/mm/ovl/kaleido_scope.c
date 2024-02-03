@@ -206,7 +206,7 @@ void KaleidoScope_ShowItemMessage(GameState_Play* play, u16 messageId, u8 yPosit
         b += 11;
         comboTextAppendStr(&b, TEXT_COLOR_RED "Goron Tunic" TEXT_NL);
         comboTextAppendClearColor(&b);
-        comboTextAppendStr(&b, "Wear this heat-resistant tunic" TEXT_NL "allows you to go to hot places." TEXT_END);
+        comboTextAppendStr(&b, "Wearing this heat-resistant tunic" TEXT_NL "allows you to go to hot places." TEXT_END);
         break;
     case ITEM_MM_TUNIC_ZORA:
         b = play->msgCtx.font.textBuffer.schar;
