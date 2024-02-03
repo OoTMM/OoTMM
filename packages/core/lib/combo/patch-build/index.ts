@@ -103,7 +103,7 @@ export function buildPatchfiles(args: BuildPatchfileIn): Patchfile[] {
       meta.cosmetics = meta.cosmetics || {};
       meta.cosmetics[game] = gameCosmetics;
       const { cosmetic_name, cosmetic_addr } = args.build[game];
-      const names = cosmetic_name.toString('utf-8').split('\0');
+      const names = cosmetic_name.toString('utf-8').split(/\0+/);
       names.pop();
 
       for (let i = 0; i < names.length; i++) {
