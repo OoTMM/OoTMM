@@ -1,4 +1,5 @@
 NONE:                 0x00
+POCKET:               0xff
 
 OOT_SACRED_REALM:             0x01
 OOT_DEKU_TREE:                0x02

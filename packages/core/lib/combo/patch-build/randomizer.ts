@@ -799,6 +799,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MM_BOOTS_HOVER: settings.bootsHoverMm,
     MM_TUNIC_GORON: settings.tunicGoronMm,
     MM_TUNIC_ZORA: settings.tunicZoraMm,
+    OOT_GANON_BOSS_KEY_HINT: settings.ganonBossKey === 'anywhere',
   };
 
   for (const v in exprs) {

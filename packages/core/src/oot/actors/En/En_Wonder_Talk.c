@@ -59,7 +59,7 @@ static void hintDungeons(GameState_Play* play)
     else
     {
         /* Ganon BK hint */
-        if (gComboData.hints.ganonBossKey.region != 0)
+        if (comboConfig(CFG_OOT_GANON_BOSS_KEY_HINT))
         {
             comboTextAppendStr(&b, TEXT_BB TEXT_ICON "\x74" TEXT_FAST);
             comboTextAppendRegionName(&b, gComboData.hints.ganonBossKey.region, gComboData.hints.ganonBossKey.world, TF_PREPOS | TF_CAPITALIZE);

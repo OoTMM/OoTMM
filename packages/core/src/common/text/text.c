@@ -799,7 +799,8 @@ void comboTextAppendRegionName(char** b, u8 regionId, u8 world, int flags)
     char* start;
     const RegionName* regName;
 
-    if (regionId == 0)
+    start = *b;
+    if (regionId == 0xff)
     {
         if (flags & TF_PREPOS)
         {
@@ -807,6 +808,21 @@ void comboTextAppendRegionName(char** b, u8 regionId, u8 world, int flags)
         }
         comboTextAppendStr(b, TEXT_COLOR_YELLOW "Link's Pocket");
         comboTextAppendClearColor(b);
+        if (flags & TF_CAPITALIZE)
+        {
+            start[0] = toupper(start[0]);
+        }
+        return;
+    }
+
+    if (regionId == 0x00)
+    {
+        comboTextAppendStr(b, TEXT_COLOR_PINK "nowhere");
+        comboTextAppendClearColor(b);
+        if (flags & TF_CAPITALIZE)
+        {
+            start[0] = toupper(start[0]);
+        }
         return;
     }
 
@@ -819,7 +835,6 @@ void comboTextAppendRegionName(char** b, u8 regionId, u8 world, int flags)
         regName = &kRegionNamesOot[(regionId & 0x7f) - 1];
     }
 
-    start = *b;
     if (flags & TF_PREPOS)
     {
         comboTextAppendStr(b, regName->prepos);

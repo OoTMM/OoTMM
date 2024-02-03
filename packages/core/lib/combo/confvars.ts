@@ -132,6 +132,7 @@ export const CONFVARS = [
   'MM_BOOTS_HOVER',
   'MM_TUNIC_GORON',
   'MM_TUNIC_ZORA',
+  'OOT_GANON_BOSS_KEY_HINT',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];
