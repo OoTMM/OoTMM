@@ -126,7 +126,7 @@ void comboDpadDraw(GameState_Play* play)
 
     /* Draw */
     comboDrawInit2D(&OVERLAY_DISP);
-    comboDrawBlit2D(&OVERLAY_DISP, 0x06000000, 32, 32, kDpadPosX, kDpadPosY, 0.5f);
+    comboDrawBlit2D_RGBA16(&OVERLAY_DISP, 0x06000000, 32, 32, kDpadPosX, kDpadPosY, 0.5f);
 
     for (int i = 0; i < 4; ++i)
     {
@@ -143,7 +143,7 @@ void comboDpadDraw(GameState_Play* play)
             }
             x = kDpadPosX + kDpadOffX[i] * 32 * kDpadItemScale + 1.5f;
             y = kDpadPosY + kDpadOffY[i] * 32 * kDpadItemScale + 1;
-            comboDrawBlit2D(&OVERLAY_DISP, 0x07000000 | (i * 32 * 32 * 4), 32, 32, x, y, kDpadItemScale);
+            comboDrawBlit2D_RGBA32(&OVERLAY_DISP, 0x07000000 | (i * 32 * 32 * 4), 32, 32, x, y, kDpadItemScale);
         }
     }
     CLOSE_DISPS();
@@ -217,7 +217,7 @@ void comboDpadUpdate(GameState_Play* play)
     sDpadItems[DPAD_LEFT] = (gSave.inventory.equipment.boots & EQ_OOT_BOOTS_IRON) ? ITEM_OOT_BOOTS_IRON : ITEM_NONE;
     sDpadItems[DPAD_RIGHT] = (gSave.inventory.equipment.boots & EQ_OOT_BOOTS_HOVER) ? ITEM_OOT_BOOTS_HOVER : ITEM_NONE;
     sDpadItems[DPAD_UP] = gSave.inventory.items[ITS_OOT_TRADE_ADULT];
-    if (gSave.age == AGE_CHILD) 
+    if (gSave.age == AGE_CHILD)
     {
         sDpadItems[DPAD_UP] = gSave.inventory.items[ITS_OOT_TRADE_CHILD];
         if (!comboConfig(CFG_OOT_AGELESS_BOOTS))

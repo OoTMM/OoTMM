@@ -111,17 +111,17 @@ export const customFiles = async (opts: Options): Promise<{[k: string]: Buffer}>
 });
 
 export const customAssetsKeep = async (opts: Options): Promise<{[k: string]: Buffer}> => ({
-  DPAD: await png(opts, 'dpad', 'rgba32'),
+  DPAD: await png(opts, 'dpad', 'rgba16'),
   FONT: await font(opts, 'font_8x12'),
-  SMALL_ICON_KEY: await png(opts, 'small_icon_key', 'rgba32'),
-  SMALL_ICON_BOSS_KEY: await png(opts, 'small_icon_boss_key', 'rgba32'),
-  SMALL_ICON_MAP: await png(opts, 'small_icon_map', 'rgba32'),
-  SMALL_ICON_COMPASS: await png(opts, 'small_icon_compass', 'rgba32'),
-  SMALL_ICON_FAIRY: await png(opts, 'small_icon_fairy', 'rgba32'),
-  SMALL_ICON_SKULL: await png(opts, 'small_icon_skull', 'rgba32'),
-  SMALL_ICON_TRIFORCE: await png(opts, 'small_icon_triforce', 'rgba32'),
-  SMALL_ICON_RUPEE: await png(opts, 'small_icon_rupee', 'rgba32'),
-  SMALL_ICON_COIN: await png(opts, 'small_icon_coin', 'rgba32'),
+  SMALL_ICON_KEY: await png(opts, 'small_icon_key', 'rgba16'),
+  SMALL_ICON_BOSS_KEY: await png(opts, 'small_icon_boss_key', 'rgba16'),
+  SMALL_ICON_MAP: await png(opts, 'small_icon_map', 'rgba16'),
+  SMALL_ICON_COMPASS: await png(opts, 'small_icon_compass', 'rgba16'),
+  SMALL_ICON_FAIRY: await png(opts, 'small_icon_fairy', 'rgba16'),
+  SMALL_ICON_SKULL: await png(opts, 'small_icon_skull', 'rgba16'),
+  SMALL_ICON_TRIFORCE: await png(opts, 'small_icon_triforce', 'rgba16'),
+  SMALL_ICON_RUPEE: await png(opts, 'small_icon_rupee', 'rgba16'),
+  SMALL_ICON_COIN: await png(opts, 'small_icon_coin', 'rgba16'),
 });
 
 const extractRaw = async (roms: DecompressedRoms, game: Game, file: string, offset: number, size: number) => {
