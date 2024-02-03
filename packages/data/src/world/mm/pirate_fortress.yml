@@ -134,7 +134,7 @@
   exits:
     "Pirate Fortress Interior": "true"
     "Pirate Fortress Lone Guard": "true"
-    "Pirate Fortress Treasure Room Entry": "(can_hookshot || short_hook_anywhere) && can_evade_gerudo"
+    "Pirate Fortress Treasure Room Entry": "can_hookshot || short_hook_anywhere"
 "Pirate Fortress Lone Guard":
   region: PIRATE_FORTRESS_INTERIOR
   exits:
