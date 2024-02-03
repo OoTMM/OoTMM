@@ -95,6 +95,11 @@ s8 Interface_GetItemRestriction(u8 playerForm, GameState_Play* play, s16* restor
 
 s32 Items_ShouldCheckItemUsabilityWhileSwimming(GameState_Play* play, u8 item)
 {
+    if (item == ITEM_MM_MASK_ZORA)
+    {
+        return 0;
+    }
+
     Actor_Player* player = GET_LINK(play);
     if (player->transformation == MM_PLAYER_FORM_HUMAN)
     {
