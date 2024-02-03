@@ -294,10 +294,15 @@
 #define ITEM_MM_BOTTLE_GOLD_DUST            0xa1
 #define ITEM_MM_BOTTLE_SEAHORSE             0xa3
 
-#define ITEM_MM_CUSTOM_MIN                  0xb0
-#define ITEM_MM_SPELL_WIND                  0xb0
-#define ITEM_MM_SPELL_LOVE                  0xb1
-#define ITEM_MM_SPELL_FIRE                  0xb2
+#define ITEM_MM_CUSTOM_MIN                  0xae
+#define ITEM_MM_SPELL_WIND                  0xae
+#define ITEM_MM_SPELL_LOVE                  0xaf
+#define ITEM_MM_SPELL_FIRE                  0xb0
+#define ITEM_MM_BOOTS_IRON                  0xb1
+#define ITEM_MM_BOOTS_HOVER                 0xb2
+#define ITEM_MM_TUNIC_GORON                 0xb3
+#define ITEM_MM_TUNIC_ZORA                  0xb4
+// If we want to use values above 0xb5 we need to fix a lot of code related to magic arrows
 
 #define ITEM_NONE       0xff
 
@@ -409,12 +414,16 @@
 #define XITEM_MM_TRADE1_DEED_OCEAN          0x5
 
 #define XITEM_MM_TRADE2_SPELL_WIND      0x0
-#define XITEM_MM_TRADE2_ROOM_KEY        0x1
-#define XITEM_MM_TRADE2_LETTER_TO_MAMA  0x2
+#define XITEM_MM_TRADE2_BOOTS_IRON      0x1
+#define XITEM_MM_TRADE2_TUNIC_GORON     0x2
+#define XITEM_MM_TRADE2_ROOM_KEY        0x3
+#define XITEM_MM_TRADE2_LETTER_TO_MAMA  0x4
 
 #define XITEM_MM_TRADE3_SPELL_LOVE          0x0
-#define XITEM_MM_TRADE3_LETTER_TO_KAFEI     0x1
-#define XITEM_MM_TRADE3_PENDANT_OF_MEMORIES 0x2
+#define XITEM_MM_TRADE3_BOOTS_HOVER         0x1
+#define XITEM_MM_TRADE3_TUNIC_ZORA          0x2
+#define XITEM_MM_TRADE3_LETTER_TO_KAFEI     0x3
+#define XITEM_MM_TRADE3_PENDANT_OF_MEMORIES 0x4
 
 /* Shared defs */
 #if defined(GAME_OOT)

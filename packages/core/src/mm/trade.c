@@ -9,13 +9,13 @@ void comboToggleTrade1(void)
 
 void comboToggleTrade2(void)
 {
-    comboToggleTrade(gSave.inventory.items + ITS_MM_TRADE2, gMmExtraTrade.trade2, kMmTrade2, 3);
+    comboToggleTrade(gSave.inventory.items + ITS_MM_TRADE2, gMmExtraTrade.trade2, kMmTrade2, 5);
     reloadSlotMm(gPlay, ITS_MM_TRADE2);
 }
 
 void comboToggleTrade3(void)
 {
-    comboToggleTrade(gSave.inventory.items + ITS_MM_TRADE3, gMmExtraTrade.trade3, kMmTrade3, 3);
+    comboToggleTrade(gSave.inventory.items + ITS_MM_TRADE3, gMmExtraTrade.trade3, kMmTrade3, 5);
     reloadSlotMm(gPlay, ITS_MM_TRADE3);
 }
 

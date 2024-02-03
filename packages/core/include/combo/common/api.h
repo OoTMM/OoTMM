@@ -137,6 +137,7 @@ void ModelViewRotateZ(float angle, int mode);
 void ModelViewTranslate(float tx, float ty, float tz, int mode);
 void ModelViewScale(float sx, float sy, float sz, int mode);
 void ModelViewMult(MtxF* mf, s32 mode);
+void Matrix_SetTranslateRotateYXZ(f32 translateX, f32 translateY, f32 translateZ, Vec3s* rot);
 
 f32 Math_CosS(s16 angle);
 f32 Math_SinS(s16 angle);
@@ -207,12 +208,14 @@ void LoadIcon(u32 vaddr, int iconId, void* buffer, int size);
 void CmpDma_LoadAllFiles(u32 vrom, void* dst, size_t size);
 
 int Player_UsingItem(Actor_Player* link);
+int Player_GetEnvironmentalHazard(GameState_Play* play);
 
 void PlaySound(u16 soundId);
 void PlayMusic(int arg0, int arg1, int arg2, int arg3, int arg4);
 void Player_PlaySfx(Actor_Player* player, u16 sfxId);
 void Actor_PlaySfx(Actor* actor, u32 id);
 void PlayLoopingSfxAtActor(Actor* actor, u32 id);
+void Actor_PlaySfx_FlaggedCentered1(Actor* actor, u16 sfxId);
 void Audio_PlaySfx_AtPos(Vec3f* pos, u16 sfxId);
 void Audio_PlaySfx_MessageDecide(void);
 
@@ -426,6 +429,12 @@ void SkelCurve_SetAnim(SkelCurve* skelCurve, CurveAnimationHeader* animation, f3
 s32 SkelCurve_Update(struct GameState_Play* play, SkelCurve* skelCurve);
 void SkelCurve_Draw(Actor* actor, struct GameState_Play* play, SkelCurve* skelCurve, OverrideCurveLimbDraw overrideLimbDraw, PostCurveLimbDraw postLimbDraw, s32 lod, Actor* thisx);
 
+typedef s32 (*OverrideLimbDrawOpa)(struct GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, void*);
+typedef void (*PostLimbDrawOpa)(struct GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3s* rot, void*);
+
+void SkelAnime_DrawFlexLod(GameState_Play* play, void** skeleton, Vec3s* jointTable, s32 dListCount,
+                            OverrideLimbDrawOpa overrideLimbDraw, PostLimbDrawOpa postLimbDraw, Actor* actor, s32 lod);
+
 void Lights_PointNoGlowSetInfo(LightInfo* info, s16 x, s16 y, s16 z, u8 r, u8 g, u8 b, s16 radius);
 LightNode* LightContext_InsertLight(GameState_Play* play, LightContext* lightCtx, LightInfo* info);
 
@@ -434,5 +443,9 @@ void Actor_DrawLensActors(GameState_Play* play, s32 numLensActors, Actor** lensA
 f32 Player_GetHeight(Actor_Player* player);
 
 s32 Entrance_GetSceneIdAbsolute(u16 entrance);
+
+s32 Player_OverrideLimbDrawGameplayFirstPerson(struct GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, void*);
+
+void Player_SetBootData(GameState_Play* play, Actor_Player* player);
 
 extern void* __osPiHandle;

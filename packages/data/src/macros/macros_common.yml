@@ -4,6 +4,10 @@
 "can_use_din_raw": "has_magic && cond(setting(sharedSpellFire), has(SHARED_SPELL_FIRE), has(SPELL_FIRE))"
 "can_use_farore_raw": "has_magic && cond(setting(sharedSpellWind), has(SHARED_SPELL_WIND), has(SPELL_WIND))"
 "can_use_nayru_raw": "has_magic && cond(setting(sharedSpellLove), has(SHARED_SPELL_LOVE), has(SPELL_LOVE))"
+"has_iron_boots_raw": "cond(setting(sharedBootsIron), has(SHARED_BOOTS_IRON), has(BOOTS_IRON))"
+"has_hover_boots_raw": "cond(setting(sharedBootsHover), has(SHARED_BOOTS_HOVER), has(BOOTS_HOVER))"
+"has_tunic_goron_raw": "cond(setting(sharedTunicGoron), has(SHARED_TUNIC_GORON), has(TUNIC_GORON))"
+"has_tunic_zora_raw": "cond(setting(sharedTunicZora), has(SHARED_TUNIC_ZORA), has(TUNIC_ZORA))"
 
 # Shared Souls
 "soul_octorok": "soul_enemy(SOUL_ENEMY_OCTOROK) || soul_enemy(SHARED_SOUL_ENEMY_OCTOROK)"

@@ -21,6 +21,18 @@ void Interface_LoadItemIconCustom(u32 vrom, s32 id, void* dst, size_t size)
         case ITEM_MM_SPELL_LOVE:
             id = ITEM_OOT_SPELL_LOVE;
             break;
+        case ITEM_MM_BOOTS_IRON:
+            id = ITEM_OOT_BOOTS_IRON;
+            break;
+        case ITEM_MM_BOOTS_HOVER:
+            id = ITEM_OOT_BOOTS_HOVER;
+            break;
+        case ITEM_MM_TUNIC_GORON:
+            id = ITEM_OOT_TUNIC_GORON;
+            break;
+        case ITEM_MM_TUNIC_ZORA:
+            id = ITEM_OOT_TUNIC_ZORA;
+            break;
         }
 
         comboDmaLookupForeignId(&dma, 8);
@@ -52,21 +64,68 @@ u32 Interface_GetCustomIconTexture(GameState_Play* play, PauseContext* pauseCtx)
     return texture;
 }
 
-extern u8 gPlayerFormCustomItemRestrictions[5][8];
+extern s8 gPlayerFormCustomItemRestrictions[5][8];
 
-u8 Interface_GetItemRestriction(u8 playerForm, u8 item, GameState_Play* play)
+// button and item are stored in SP10 and SP14 by HOOK_SAVE
+s8 Interface_GetItemRestriction(u8 playerForm, GameState_Play* play, s16* restoreHudVisibility, s32 nothing, u8 item, s16 button)
 {
-    u8 (*gPlayerFormItemRestrictions)[0x72] = (u8(*)[0x72])0x801c2410;
+    s8 (*gPlayerFormItemRestrictions)[0x72] = (s8(*)[0x72])0x801c2410;
     if (item < ITEM_MM_CUSTOM_MIN)
     {
         return gPlayerFormItemRestrictions[playerForm][item];
     }
-    else
+
+    if (item == ITEM_MM_SPELL_WIND && play->interfaceCtx.restrictions.songOfSoaring)
     {
-        if (item == ITEM_MM_SPELL_WIND && play->interfaceCtx.restrictions.songOfSoaring) {
-            return 0;
-        }
-        u8 customItem = item - ITEM_MM_CUSTOM_MIN;
-        return gPlayerFormCustomItemRestrictions[playerForm][customItem];
+        return 0;
     }
+
+    u8 customItem = item - ITEM_MM_CUSTOM_MIN;
+    s8 result = gPlayerFormCustomItemRestrictions[playerForm][customItem];
+    if (result < 0)
+    {
+        if (gSaveContext.buttonStatus[button] == 0xFF) // BTN_DISABLED
+        {
+            *restoreHudVisibility = 1;
+            gSaveContext.buttonStatus[button] = 0; // BTN_ENABLED
+        }
+    }
+    return result;
+}
+
+s32 Items_ShouldCheckItemUsabilityWhileSwimming(GameState_Play* play, u8 item)
+{
+    if (item == ITEM_MM_MASK_ZORA)
+    {
+        return 0;
+    }
+
+    Actor_Player* player = GET_LINK(play);
+    if (player->transformation == MM_PLAYER_FORM_HUMAN)
+    {
+        switch (item)
+        {
+        case ITEM_MM_BOOTS_IRON:
+        case ITEM_MM_BOOTS_HOVER:
+        case ITEM_MM_TUNIC_ZORA:
+        case ITEM_MM_TUNIC_GORON:
+            return 0;
+        case ITEM_MM_HOOKSHOT:
+        case 0x11: // Short Hookshot
+            return Player_GetEnvironmentalHazard(play) != PLAYER_ENV_HAZARD_UNDERWATER_FLOOR;
+        }
+
+        if (item >= ITEM_MM_BOTTLE_EMPTY && item <= ITEM_MM_CHATEAU)
+        {
+            return Player_GetEnvironmentalHazard(play) != PLAYER_ENV_HAZARD_UNDERWATER_FLOOR;
+        }
+    }
+    return 1;
+}
+
+s32 Interface_ShouldStartHazardTimer(Actor_Player* player, s16 envHazard)
+{
+    return envHazard == PLAYER_ENV_HAZARD_HOTROOM
+        || envHazard == PLAYER_ENV_HAZARD_UNDERWATER_FREE
+        || (player->transformation != MM_PLAYER_FORM_ZORA && envHazard == PLAYER_ENV_HAZARD_UNDERWATER_FLOOR);
 }

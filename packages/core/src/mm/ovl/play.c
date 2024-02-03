@@ -105,8 +105,8 @@ static void debugCheat(GameState_Play* play)
         gSave.playerData.health = gSave.playerData.healthMax;
 
         gMmExtraTrade.trade1 = 0x3f;
-        gMmExtraTrade.trade2 = 0x07;
-        gMmExtraTrade.trade3 = 0x07;
+        gMmExtraTrade.trade2 = 0x1f;
+        gMmExtraTrade.trade3 = 0x1f;
 
         gSave.inventory.items[ITS_MM_TRADE1] = ITEM_MM_DEED_LAND;
         gSave.inventory.items[ITS_MM_TRADE2] = ITEM_MM_ROOM_KEY;

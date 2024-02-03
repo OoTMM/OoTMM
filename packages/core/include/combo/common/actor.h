@@ -1063,9 +1063,19 @@ typedef struct PACKED ALIGNED(0x4) Actor
     float       speedXZ;
     float       gravity;
     float       minVelocityY;
-    char        unk_74[0x1c];
-    float       xzDistanceFromLink;
-    char        unk_94[0x20];
+    CollisionPoly* wallPoly; // Wall polygon the actor is touching
+    CollisionPoly* floorPoly; // Floor polygon directly below the actor
+    u8          wallBgId; // Bg ID of the wall polygon the actor is touching
+    u8          floorBgId; // Bg ID of the floor polygon directly below the actor
+    s16         wallYaw; // Y rotation of the wall polygon the actor is touching
+    f32         floorHeight; // Y position of the floor polygon directly below the actor
+    f32         yDistToWater; // Distance to the surface of active waterbox. Negative value means above water
+    u16         bgCheckFlags; // Flags indicating how the actor is interacting with collision
+    s16         yawTowardsPlayer; // Y rotation difference between the actor and the player
+    f32         xyzDistToPlayerSq; // Squared distance between the actor and the player
+    f32         xzDistanceFromLink;
+    f32         yDistanceFromLink;
+    CollisionCheckInfo colChkInfo;
     Vec3s       rot2;
     char        unk_ba[2];
     float       modelOffsetY;

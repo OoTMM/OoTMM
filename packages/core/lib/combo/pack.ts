@@ -1,6 +1,7 @@
 
 import { compressFile } from './compress';
 import { CONFIG, GAMES, Game } from './config';
+import { CosmeticsOutput } from './cosmetics';
 import { DecompressedRoms } from './decompress';
 import { DmaData, DmaDataRecord } from './dma';
 import { Monitor } from './monitor';
@@ -63,7 +64,8 @@ class Packer {
   constructor(
     private monitor: Monitor,
     private roms: DecompressedRoms,
-    private patchfiles: Patchfile[],
+    private patchfile: Patchfile,
+    private cosmetics: CosmeticsOutput,
   ) {
     this.rom = Buffer.alloc(0x4000000);
     this.paddr = 0;
@@ -85,7 +87,8 @@ class Packer {
   async run() {
     /* Apply patches and compress */
     this.monitor.log("Pack: Pre-compress patches");
-    for (const p of this.patchfiles) {
+    const patchfiles = [this.patchfile, this.cosmetics.patch];
+    for (const p of patchfiles) {
       for (const g of GAMES) {
         const rom = this.roms[g].rom;
         for (const pp of p.gamePatches[g].data) {
@@ -106,13 +109,9 @@ class Packer {
     this.gs.oot.dma.data().copy(this.rom, CONFIG['oot'].dmaAddr);
     this.gs.mm.dma.data().copy(this.rom, CONFIG['mm'].dmaAddr + mmBase);
 
-    /* Post compress global patches */
-    this.monitor.log("Pack: Post-compress patches");
-    const patch = this.patchfiles[0];
-
     /* Add extra files */
     this.monitor.log("Pack: Add extra files");
-    for (const p of this.patchfiles) {
+    for (const p of patchfiles) {
       for (const f of p.newFiles) {
         await this.addFile(f.vrom, f.data, f.compressed);
       }
@@ -132,6 +131,22 @@ class Packer {
     meta.writeUInt32BE(ootPayload.psize, 0x0c);
     meta.writeUInt32BE(mmPayload.pstart, 0x10);
     meta.writeUInt32BE(mmPayload.psize, 0x14);
+
+    /* Apply cosmetics overrides */
+    for (const game of GAMES) {
+      const meta = this.patchfile.meta || {};
+      const metaCosmetics = meta.cosmetics || {};
+      const metaCosmeticsGame = metaCosmetics[game] || {};
+      const payloadStart = this.gs[game].payload!.pstart;
+      for (const [key, buffer] of Object.entries(this.cosmetics.overrides)) {
+        const addrs = metaCosmeticsGame[key];
+        if (!addrs) continue;
+        for (const addr of addrs) {
+          const paddr = payloadStart + addr;
+          buffer.copy(this.rom, paddr);
+        }
+      }
+    }
 
     /* Pack custom DMA */
     this.monitor.log("Pack: Write custom DMA");
@@ -210,7 +225,7 @@ class Packer {
     const uncompressedDma = new DmaData(gameRom.subarray(config.dmaAddr, config.dmaAddr + config.dmaCount * 0x10));
     const removedFiles = new Set<number>();
 
-    for (const p of this.patchfiles) {
+    for (const p of [this.patchfile, this.cosmetics.patch]) {
       for (const f of p.gamePatches[game].removedFiles) {
         removedFiles.add(f);
       }
@@ -290,7 +305,7 @@ class Packer {
   }
 }
 
-export function pack(monitor: Monitor, roms: DecompressedRoms, patchfiles: Patchfile[]) {
-  const packer = new Packer(monitor, roms, patchfiles);
+export function pack(monitor: Monitor, roms: DecompressedRoms, patchfile: Patchfile, cosmetics: CosmeticsOutput) {
+  const packer = new Packer(monitor, roms, patchfile, cosmetics);
   return packer.run();
 }

@@ -74,10 +74,55 @@ typedef enum PlayerBodyPart {
     /* 0x12 */ PLAYER_BODYPART_MAX
 } PlayerBodyPart;
 
+typedef enum {
+    /* 0 */ PLAYER_ENV_HAZARD_NONE,
+    /* 1 */ PLAYER_ENV_HAZARD_HOTROOM,
+    /* 2 */ PLAYER_ENV_HAZARD_UNDERWATER_FLOOR,
+    /* 3 */ PLAYER_ENV_HAZARD_SWIMMING,
+    /* 4 */ PLAYER_ENV_HAZARD_UNDERWATER_FREE
+} PlayerEnvHazard;
+
 typedef struct PlayerAnimationFrame {
     /* 0x000 */ Vec3s frameTable[PLAYER_LIMB_MAX];
     /* 0x108 */ s16 appearanceInfo; // bitpack containing the face and hands info
 } PlayerAnimationFrame; // size = 0x10A
+
+typedef struct PlayerAgeProperties {
+    /* 0x00 */ f32 ceilingCheckHeight;
+    /* 0x04 */ f32 shadowScale;
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14; // compared to yDistToLedge
+    /* 0x18 */ f32 unk_18; // compared to yDistToLedge
+    /* 0x1C */ f32 unk_1C; // compared to yDistToLedge
+    /* 0x20 */ f32 unk_20; // unused?
+    /* 0x24 */ f32 unk_24; // water stuff // depthInWater
+    /* 0x28 */ f32 unk_28; // water stuff // depthInWater
+    /* 0x2C */ f32 unk_2C; // water stuff // depthInWater
+    /* 0x30 */ f32 unk_30; // water stuff // depthInWater
+    /* 0x34 */ f32 unk_34; // height?
+    /* 0x38 */ f32 wallCheckRadius;
+    /* 0x3C */ f32 unk_3C;
+    /* 0x40 */ f32 unk_40;
+    /* 0x44 */ Vec3s unk_44;
+    /* 0x4A */ Vec3s unk_4A[4];
+    /* 0x62 */ Vec3s unk_62[4];
+    /* 0x7A */ Vec3s unk_7A[4];
+    /* 0x92 */ u16 voiceSfxIdOffset;
+    /* 0x94 */ u16 surfaceSfxIdOffset;
+    /* 0x98 */ f32 unk_98;
+    /* 0x9C */ f32 unk_9C;
+    /* 0xA0 */ PlayerAnimationHeader* openChestAnim;
+    /* 0xA4 */ PlayerAnimationHeader* unk_A4; // OoT leftovers to interact with the Master Sword
+    /* 0xA8 */ PlayerAnimationHeader* unk_A8; // OoT leftovers to interact with the Master Sword
+    /* 0xAC */ PlayerAnimationHeader* unk_AC;
+    /* 0xB0 */ PlayerAnimationHeader* unk_B0;
+    /* 0xB4 */ PlayerAnimationHeader* unk_B4[4];
+    /* 0xC4 */ PlayerAnimationHeader* unk_C4[2];
+    /* 0xCC */ PlayerAnimationHeader* unk_CC[2];
+    /* 0xD4 */ PlayerAnimationHeader* unk_D4[2];
+} PlayerAgeProperties; // size = 0xDC
 
 #define PLAYER_LIMB_BUF_SIZE (ALIGN16(sizeof(PlayerAnimationFrame)) + 0xF)
 
@@ -175,7 +220,15 @@ typedef struct Actor_Player
     /* 0x664 */ ColliderQuad shieldQuad;
     /* 0x6E4 */ ColliderCylinder shieldCylinder;
     /* 0x730 */ Actor* lockOnActor; // Z/L-Targeted actor
-    /* 0x734 */ char unk_734[4];
+    /* 0x734 */ union {
+                    char unk_734[4]; // unused?
+                    struct {
+                        u8 hoverBootsTimer;
+                        u8 pad_735;
+                        u8 pad_736;
+                        u8 pad_737;
+                    };
+                };
     /* 0x738 */ s32 unk_738;
     /* 0x73C */ s32 meleeWeaponEffectIndex[3];
     /* 0x748 */ PlayerActionFunc actionFunc;
@@ -184,7 +237,7 @@ typedef struct Actor_Player
     /* 0x88A */ u8 blendTableBuffer[PLAYER_LIMB_BUF_SIZE];
     /* 0x929 */ u8 jointTableUpperBuffer[PLAYER_LIMB_BUF_SIZE];
     /* 0x9C8 */ u8 morphTableUpperBuffer[PLAYER_LIMB_BUF_SIZE];
-    /* 0xA68 */ void* ageProperties; // PlayerAgeProperties
+    /* 0xA68 */ PlayerAgeProperties* ageProperties;
     /* 0xA6C */ u32 state;
     /* 0xA70 */ u32 state2;
     /* 0xA74 */ u32 state3;
@@ -322,5 +375,11 @@ ASSERT_OFFSET(Actor_Player, prevCsAction,        0x395);
 ASSERT_OFFSET(Actor_Player, unk_a78,             0xa78);
 ASSERT_OFFSET(Actor_Player, drawGiId,            0xb2a);
 ASSERT_OFFSET(Actor_Player, unk_b2b,             0xb2b);
+
+typedef struct {
+    /* 0x00 */ u32 maskDListEntry[24];
+} PlayerMaskDList; // size = 0x60
+
+#define GET_PLAYER_CUSTOM_BOOTS(player) (player->transformation == MM_PLAYER_FORM_HUMAN ? (player->currentBoots == 6 ? PLAYER_BOOTS_IRON : (player->currentBoots == 0 ? PLAYER_BOOTS_HOVER : -1)) : -1)
 
 #endif

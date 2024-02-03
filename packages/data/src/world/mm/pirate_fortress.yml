@@ -1,21 +1,21 @@
 "Pirate Fortress":
   dungeon: PF
   exits:
-    "Great Bay Coast Fortress": "has_mask_zora"
+    "Great Bay Coast Fortress": "underwater_walking"
     "Pirate Fortress Entrance": "cond(setting(erMoon) && trick(MM_MAJORA_LOGIC), (event(MAJORA) && before(NIGHT3_AM_12_00)) || can_play_time, can_reset_time)"
 "Pirate Fortress Entrance":
   dungeon: PF
   exits:
     "Pirate Fortress": "true"
-    "Pirate Fortress Sewers": "has_mask_zora && has_mask_goron"
+    "Pirate Fortress Sewers": "underwater_walking && has_mask_goron"
     "Pirate Fortress Entrance Balcony": "can_hookshot || (can_hookshot_short && trick(MM_PFI_BOAT_HOOK))"
     "Pirate Fortress Entrance Lookout": can_hookshot_short && trick(MM_PFI_BOAT_HOOK)
   events:
     PHOTO_GERUDO: "has(PICTOGRAPH_BOX)"
   locations:
-    "Pirate Fortress Entrance Chest 1": "has_mask_zora"
-    "Pirate Fortress Entrance Chest 2": "has_mask_zora"
-    "Pirate Fortress Entrance Chest 3": "has_mask_zora"
+    "Pirate Fortress Entrance Chest 1": "underwater_walking"
+    "Pirate Fortress Entrance Chest 2": "underwater_walking"
+    "Pirate Fortress Entrance Chest 3": "underwater_walking"
 "Pirate Fortress Entrance Balcony":
   dungeon: PF
   exits:
@@ -28,7 +28,7 @@
     "Pirate Fortress Entrance": "true"
     "Pirate Fortress Sewers End": "has_mask_zora"
   locations:
-    "Pirate Fortress Sewers Chest 1": "has_mask_zora"
+    "Pirate Fortress Sewers Chest 1": "underwater_walking_strict"
     "Pirate Fortress Sewers Chest 2": "has_mask_zora"
     "Pirate Fortress Sewers Chest 3": "has_mask_zora"
     "Pirate Fortress Sewers HP": "has_mask_zora"
@@ -69,13 +69,13 @@
     "Pirate Fortress Barrel Maze Entry": "can_hookshot_short"
     "Pirate Fortress Lone Guard Exit": "short_hook_anywhere"
     "Pirate Fortress Barrel Maze Exit": "short_hook_anywhere"
-    "Pirate Fortress Treasure Room Exit": "short_hook_anywhere"
+    "Pirate Fortress Treasure Room Exit": "short_hook_anywhere || has_hover_boots"
   locations:
     "Pirate Fortress Interior Lower Chest": "true"
     "Pirate Fortress Interior Upper Chest": "can_hookshot || short_hook_anywhere || (has_mask_goron && trick(MM_OOB_MOVEMENT))"
-    "Pirate Fortress Interior Heart 1": "can_hookshot || short_hook_anywhere"
-    "Pirate Fortress Interior Heart 2": "can_hookshot || short_hook_anywhere"
-    "Pirate Fortress Interior Heart 3": "can_hookshot || short_hook_anywhere"
+    "Pirate Fortress Interior Heart 1": "can_hookshot || short_hook_anywhere || has_hover_boots"
+    "Pirate Fortress Interior Heart 2": "can_hookshot || short_hook_anywhere || has_hover_boots"
+    "Pirate Fortress Interior Heart 3": "can_hookshot || short_hook_anywhere || has_hover_boots"
 "Pirate Fortress Hookshot Room Upper":
   region: PIRATE_FORTRESS_INTERIOR
   exits:
@@ -92,7 +92,7 @@
     "Pirate Fortress Interior": "true"
   events:
     FORTRESS_BEEHIVE: "has(MASK_STONE) && can_hookshot_short && (has_arrows || can_use_deku_bubble)"
-    ZORA_EGGS_HOOKSHOT_ROOM: "can_hookshot_short && has_mask_zora && event(FORTRESS_BEEHIVE)"
+    ZORA_EGGS_HOOKSHOT_ROOM: "can_hookshot_short && underwater_walking && event(FORTRESS_BEEHIVE)"
   locations:
     "Pirate Fortress Interior Hookshot": "event(FORTRESS_BEEHIVE)"
 "Pirate Fortress Barrel Maze Entry":
@@ -117,7 +117,7 @@
     "Pirate Fortress Barrel Maze": "can_fight && can_evade_gerudo"
     "Pirate Fortress Barrel Maze Exit": "true"
   events:
-    ZORA_EGGS_BARREL_MAZE: "can_hookshot_short && has_mask_zora"
+    ZORA_EGGS_BARREL_MAZE: "can_hookshot_short && underwater_walking"
     ARROWS: "true"
     RUPEES: "true"
   locations:
@@ -146,10 +146,10 @@
     "Pirate Fortress Lone Guard": "can_fight && can_evade_gerudo"
     "Pirate Fortress Lone Guard Exit": "true"
   events:
-    ZORA_EGGS_LONE_GUARD: "can_hookshot_short && has_mask_zora"
+    ZORA_EGGS_LONE_GUARD: "can_hookshot_short && underwater_walking"
     ARROWS: "true"
   locations:
-    "Pirate Fortress Interior Aquarium": "has_mask_zora && can_hookshot_short"
+    "Pirate Fortress Interior Aquarium": "underwater_walking && can_hookshot_short"
     "Pirate Fortress Interior Pot Chest Aquarium 1": "true"
     "Pirate Fortress Interior Pot Chest Aquarium 2": "true"
     "Pirate Fortress Interior Pot Chest Aquarium 3": "true"
@@ -176,7 +176,7 @@
     "Pirate Fortress Treasure Room": "can_fight && can_evade_gerudo"
     "Pirate Fortress Treasure Room Exit": "true"
   events:
-    ZORA_EGGS_TREASURE_ROOM: "can_hookshot_short && has_mask_zora"
+    ZORA_EGGS_TREASURE_ROOM: "can_hookshot_short && underwater_walking"
     ARROWS: "true"
   locations:
     "Pirate Fortress Interior Pot Guarded 1": "true"

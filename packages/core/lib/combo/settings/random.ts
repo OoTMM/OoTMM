@@ -384,6 +384,10 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
     base.sharedSpellFire = true;
     base.sharedSpellWind = true;
     base.sharedSpellLove = true;
+    base.sharedBootsIron = true;
+    base.sharedBootsHover = true;
+    base.sharedTunicGoron = true;
+    base.sharedTunicZora = true;
     break;
   default:
     base.sharedNutsSticks = booleanWeighted(random, 0.5);
@@ -397,6 +401,34 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
     base.sharedHealth = booleanWeighted(random, 0.5);
     base.sharedSoulsEnemy = booleanWeighted(random, 0.5);
     base.sharedSkeletonKey = booleanWeighted(random, 0.5);
+
+    /* Boots - grouping */
+    switch (randomInt(random, 4)) {
+    case 0:
+      break;
+    case 1:
+      base.sharedBootsIron = true;
+      base.sharedBootsHover = true;
+      break;
+    default:
+      base.sharedBootsIron = booleanWeighted(random, 0.5);
+      base.sharedBootsHover = booleanWeighted(random, 0.5);
+      break;
+    }
+
+    /* Tunics - grouping */
+    switch (randomInt(random, 4)) {
+    case 0:
+      break;
+    case 1:
+      base.sharedTunicGoron = true;
+      base.sharedTunicZora = true;
+      break;
+    default:
+      base.sharedTunicGoron = booleanWeighted(random, 0.5);
+      base.sharedTunicZora = booleanWeighted(random, 0.5);
+      break;
+    }
 
     /* Spells - grouping */
     switch (randomInt(random, 4)) {
@@ -471,6 +503,38 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
 
   base.fairyOcarinaMm = booleanWeighted(random, 0.5);
   base.shortHookshotMm = booleanWeighted(random, 0.25);
+
+  /* Boots - 50% disabled, 25% enabled, 25% individual */
+  switch (randomInt(random, 4)) {
+  case 0:
+  case 1:
+    base.bootsIronMm = false;
+    base.bootsHoverMm = false;
+    break;
+  case 2:
+    base.bootsIronMm = true;
+    base.bootsHoverMm = true;
+    break;
+  default:
+    base.bootsIronMm = booleanWeighted(random, 0.25);
+    base.bootsHoverMm = booleanWeighted(random, 0.25);
+  }
+
+  /* Tunics - 50% disabled, 25% enabled, 25% individual */
+  switch (randomInt(random, 4)) {
+  case 0:
+  case 1:
+    base.tunicGoronMm = false;
+    base.tunicZoraMm = false;
+    break;
+  case 2:
+    base.tunicGoronMm = true;
+    base.tunicZoraMm = true;
+    break;
+  default:
+    base.tunicGoronMm = booleanWeighted(random, 0.25);
+    base.tunicZoraMm = booleanWeighted(random, 0.25);
+  }
 
   /* Magic spells - 50% disabled, 25% enabled, 25% individual */
   switch (randomInt(random, 4)) {

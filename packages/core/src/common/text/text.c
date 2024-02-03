@@ -391,6 +391,20 @@ static int isItemAmbiguous(s16 gi)
     case GI_OOT_SPELL_LOVE:
     case GI_MM_SPELL_LOVE:
         return (comboConfig(CFG_MM_SPELL_LOVE) && !comboConfig(CFG_SHARED_SPELL_LOVE));
+    case GI_OOT_BOOTS_IRON:
+    case GI_MM_BOOTS_IRON:
+        return (comboConfig(CFG_MM_BOOTS_IRON) && !comboConfig(CFG_SHARED_BOOTS_IRON));
+    case GI_OOT_BOOTS_HOVER:
+    case GI_MM_BOOTS_HOVER:
+        return (comboConfig(CFG_MM_BOOTS_HOVER) && !comboConfig(CFG_SHARED_BOOTS_HOVER));
+    case GI_OOT_TUNIC_GORON:
+    case GI_MM_TUNIC_GORON:
+        return (comboConfig(CFG_MM_TUNIC_GORON) && !comboConfig(CFG_SHARED_TUNIC_GORON));
+        break;
+    case GI_OOT_TUNIC_ZORA:
+    case GI_MM_TUNIC_ZORA:
+        return (comboConfig(CFG_MM_TUNIC_ZORA) && !comboConfig(CFG_SHARED_TUNIC_ZORA));
+        break;
     case GI_OOT_MAGIC_BEAN:
     case GI_OOT_BOTTLE_EMPTY:
     case GI_OOT_BOTTLE_MILK:

@@ -1177,6 +1177,34 @@ export const SETTINGS = [{
   description: "Adds Nayru's Love in Majora's Mask.",
   default: false
 }, {
+  key: 'bootsIronMm',
+  name: "Iron Boots (MM)",
+  category: 'items.extensions',
+  type: 'boolean',
+  description: "Adds Iron Boots in Majora's Mask.",
+  default: false
+}, {
+  key: 'bootsHoverMm',
+  name: "Hover Boots (MM)",
+  category: 'items.extensions',
+  type: 'boolean',
+  description: "Adds Hover Boots in Majora's Mask.",
+  default: false
+}, {
+  key: 'tunicGoronMm',
+  name: "Goron Tunic (MM)",
+  category: 'items.extensions',
+  type: 'boolean',
+  description: "Adds Goron Tunic in Majora's Mask.",
+  default: false
+}, {
+  key: 'tunicZoraMm',
+  name: "Zora Tunic (MM)",
+  category: 'items.extensions',
+  type: 'boolean',
+  description: "Adds Zora Tunic in Majora's Mask.",
+  default: false
+}, {
   key: 'ocarinaButtonsShuffleOot',
   name: 'Ocarina Buttons Shuffle (OoT)',
   category: 'items.extensions',
@@ -1469,6 +1497,34 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false,
   cond: (s: any) => s.spellLoveMm,
+}, {
+  key: 'sharedBootsIron',
+  name: "Shared Iron Boots",
+  category: 'items.shared',
+  type: 'boolean',
+  default: false,
+  cond: (s: any) => s.bootsIronMm,
+}, {
+  key: 'sharedBootsHover',
+  name: "Shared Hover Boots",
+  category: 'items.shared',
+  type: 'boolean',
+  default: false,
+  cond: (s: any) => s.bootsHoverMm,
+}, {
+  key: 'sharedTunicGoron',
+  name: "Shared Goron Tunic",
+  category: 'items.shared',
+  type: 'boolean',
+  default: false,
+  cond: (s: any) => s.tunicGoronMm,
+}, {
+  key: 'sharedTunicZora',
+  name: "Shared Zora Tunic",
+  category: 'items.shared',
+  type: 'boolean',
+  default: false,
+  cond: (s: any) => s.tunicZoraMm,
 }, {
   key: 'agelessSwords',
   name: 'Ageless Swords',

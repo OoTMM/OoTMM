@@ -118,6 +118,7 @@ ModelViewRotateX = 0x80180610;
 ModelViewRotateY = 0x80180b48;
 ModelViewRotateZ = 0x80180e90;
 ModelViewTranslate = 0x8018029c;
+Matrix_SetTranslateRotateYXZ = 0x80181650;
 ModelViewUnkTransform = 0x801820a0;
 ModelViewMult = 0x80180244;
 
@@ -128,6 +129,7 @@ Player_PlaySfx = 0x800B8E58;
 Actor_PlaySfx = 0x800b8ec8;
 Audio_PlaySfx_AtPos = 0x8019F1C0;
 PlayLoopingSfxAtActor = 0x800B9010;
+Actor_PlaySfx_FlaggedCentered1 = 0x800B8F98;
 Message_Close = 0x801477b4;
 Audio_PlaySfx_MessageDecide = 0x8019F208;
 
@@ -177,6 +179,7 @@ OverlayAddr = 0x801638d8;
 PlayMusic = 0x801a3238;
 
 Player_UsingItem = 0x801240dc;
+Player_GetEnvironmentalHazard = 0x801242dc;
 Player_DrawHookshotReticle = 0x80124cc4;
 GetChestFlag = 0x800b5c78;
 SetChestFlag = 0x800b5c90;
@@ -277,6 +280,8 @@ SkelCurve_SetAnim = 0x800F26F0;
 SkelCurve_Update = 0x800F2728;
 SkelCurve_Draw = 0x800F2CD8;
 
+SkelAnime_DrawFlexLod = 0x80133710;
+
 Lights_PointNoGlowSetInfo = 0x801019FC;
 
 Actor_DrawLensActors = 0x800B9EF4;
@@ -286,3 +291,7 @@ Play_SetupRespawnPoint = 0x80169E6C;
 LightContext_InsertLight = 0x80102624;
 
 Entrance_GetSceneIdAbsolute = 0x80132338;
+
+Player_OverrideLimbDrawGameplayFirstPerson = 0x801262C8;
+
+Player_SetBootData = 0x80123140;

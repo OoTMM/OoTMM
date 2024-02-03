@@ -72,12 +72,12 @@ export class Generator {
       patchfiles = [new Patchfile(Buffer.from(this.opts.patch))];
     }
 
-    const cosmeticsPatchfile = await cosmetics(this.opts, addresses, roms);
+    const cosmeticsOut = await cosmetics(this.opts, addresses, roms);
 
     /* Build ROM(s) */
     let packedRoms: Buffer[] = [];
     if (patchfiles.length === 1 || this.opts.debug) {
-      packedRoms = await Promise.all(patchfiles.map(x => pack(this.monitor, roms, [x, cosmeticsPatchfile])));
+      packedRoms = await Promise.all(patchfiles.map(x => pack(this.monitor, roms, x, cosmeticsOut)));
     }
 
     /* Build patch(es) */

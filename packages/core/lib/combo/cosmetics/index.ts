@@ -28,10 +28,16 @@ export async function cosmeticsAssets(opts: Options) {
 
 type Unpromise<T extends Promise<any>> = T extends Promise<infer U> ? U : never;
 
+export type CosmeticsOutput = {
+  patch: Patchfile;
+  overrides: {[k: string]: Buffer};
+};
+
 class CosmeticsPass {
   private vrom: number;
   private random: Random;
   private patch: Patchfile;
+  private overrides: {[k: string]: Buffer} = {};
   private assets!: Unpromise<ReturnType<typeof cosmeticsAssets>>;
 
   constructor(
@@ -88,6 +94,14 @@ class CosmeticsPass {
     default:
       return COLORS[c].value;
     }
+  }
+
+  private colorBufferRGB(color: number) {
+    const buffer = Buffer.alloc(3);
+    buffer.writeUInt8(color >>> 16, 0);
+    buffer.writeUInt8((color >>> 8) & 0xff, 1);
+    buffer.writeUInt8(color & 0xff, 2);
+    return buffer;
   }
 
   private patchColorRGB(game: Game, addr: number, color: number) {
@@ -252,7 +266,7 @@ class CosmeticsPass {
     this.patch.addDataPatch('mm', paddr + lutOff, newLut);
   }
 
-  async run(): Promise<Patchfile> {
+  async run(): Promise<CosmeticsOutput> {
     const { cosmetics } = this.opts;
     this.assets = await cosmeticsAssets(this.opts);
 
@@ -278,6 +292,10 @@ class CosmeticsPass {
     this.patchMmTunicZora(colorMmTunicZora);
     this.patchMmTunicFierceDeity(colorMmTunicFierceDeity);
 
+    this.overrides['MM_COLOR_TUNIC_KOKIRI'] = this.colorBufferRGB(colorMmTunicHuman);
+    this.overrides['MM_COLOR_TUNIC_GORON'] = this.colorBufferRGB(colorOotTunicGoron);
+    this.overrides['MM_COLOR_TUNIC_ZORA'] = this.colorBufferRGB(colorOotTunicZora);
+
     /* Models */
     await this.patchOotChildModel();
     await this.patchOotAdultModel();
@@ -289,11 +307,11 @@ class CosmeticsPass {
         await randomizeMusic(this.roms, this.patch, this.random, data);
     }
 
-    return this.patch;
+    return { patch: this.patch, overrides: this.overrides };
   }
 }
 
-export async function cosmetics(opts: Options, addresses: GameAddresses, roms: DecompressedRoms): Promise<Patchfile> {
+export async function cosmetics(opts: Options, addresses: GameAddresses, roms: DecompressedRoms): Promise<CosmeticsOutput> {
   const pass = new CosmeticsPass(opts, addresses, roms)
   return pass.run();
 }
