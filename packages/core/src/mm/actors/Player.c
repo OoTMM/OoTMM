@@ -1007,18 +1007,17 @@ PATCH_FUNC(0x8082e0cc, Player_GetFloorSfxByAge);
 
 s32 Player_ShouldCheckItemUsabilityWhileSwimming(Actor_Player* player, u8 itemAction)
 {
-    // Displaced code:
-    if (itemAction == 0x50) // PLAYER_IA_MASK_ZORA
+    switch (itemAction)
     {
+    case 0x50: // PLAYER_IA_MASK_ZORA
+    case PLAYER_CUSTOM_IA_BOOTS_IRON:
+    case PLAYER_CUSTOM_IA_BOOTS_HOVER:
+    case PLAYER_CUSTOM_IA_TUNIC_ZORA:
+    case PLAYER_CUSTOM_IA_TUNIC_GORON:
         return 0;
+    default:
+        return 1;
     }
-    // End displaced code
-
-    if (itemAction == PLAYER_CUSTOM_IA_BOOTS_IRON || itemAction == PLAYER_CUSTOM_IA_TUNIC_ZORA)
-    {
-        return 0;
-    }
-    return 1;
 }
 
 f32 Player_GetEnvironmentWindSpeed(GameState_Play* play)
