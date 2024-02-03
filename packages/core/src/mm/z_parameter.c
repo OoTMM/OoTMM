@@ -106,7 +106,9 @@ s32 Items_ShouldCheckItemUsabilityWhileSwimming(GameState_Play* play, u8 item)
         switch (item)
         {
         case ITEM_MM_BOOTS_IRON:
+        case ITEM_MM_BOOTS_HOVER:
         case ITEM_MM_TUNIC_ZORA:
+        case ITEM_MM_TUNIC_GORON:
             return 0;
         case ITEM_MM_HOOKSHOT:
         case 0x11: // Short Hookshot
