@@ -83,6 +83,7 @@ export function buildPatchfiles(args: BuildPatchfileIn): Patchfile[] {
   for (let world = 0; world < args.settings.players; ++world) {
     const p = args.patch.dup();
     const groups = asmPatchGroups(args.logic.worlds[world], args.settings);
+    const meta: any = {};
 
     for (const game of GAMES) {
       /* Apply ASM patches */
@@ -96,9 +97,28 @@ export function buildPatchfiles(args: BuildPatchfileIn): Patchfile[] {
         throw new Error(`Payload too large ${game}`);
       }
       p.addNewFile(game === 'oot' ? 0xf0000000 : 0xf0100000, payload, false);
+
+      /* Handle cosmetics */
+      const gameCosmetics: {[k: string]: number[]} = {};
+      meta.cosmetics = meta.cosmetics || {};
+      meta.cosmetics[game] = gameCosmetics;
+      const { cosmetic_name, cosmetic_addr } = args.build[game];
+      const names = cosmetic_name.toString('utf-8').split('\0');
+      names.pop();
+
+      for (let i = 0; i < names.length; i++) {
+        const name = names[i];
+        const addr = cosmetic_addr.readUint32BE(i * 4);
+        if (gameCosmetics[name] === undefined) {
+          gameCosmetics[name] = [];
+        }
+        gameCosmetics[name].push(addr);
+      }
     }
 
     patchRandomizer(world, args.logic, args.settings, p);
+    p.setMeta(meta);
+
     patches.push(p);
   }
 

@@ -9,6 +9,8 @@ import { fileExists } from "./util";
 type BuildGameOutput = {
   payload: Buffer;
   patches: Buffer;
+  cosmetic_name: Buffer;
+  cosmetic_addr: Buffer;
 };
 
 export type BuildOutput = {
@@ -66,22 +68,26 @@ async function make(opts: Options) {
 
 const getBuildArtifacts = async (root: string): Promise<BuildOutput> => {
   const [oot, mm] = await Promise.all(GAMES.map(async (g) => {
-    const [payload, patches] = await Promise.all([
+    const [payload, patches, cosmetic_name, cosmetic_addr] = await Promise.all([
       fs.promises.readFile(path.resolve(root, g + '_payload.bin')),
       fs.promises.readFile(path.resolve(root, g + '_patch.bin')),
+      fs.promises.readFile(path.resolve(root, g + '_cosmetic_name.bin')),
+      fs.promises.readFile(path.resolve(root, g + '_cosmetic_addr.bin')),
     ]);
-    return { payload, patches };
+    return { payload, patches, cosmetic_name, cosmetic_addr};
   }));
   return { oot, mm };
 };
 
 const fetchBuildArtifacts = async (opts: Options): Promise<BuildOutput> => {
   const [oot, mm] = await Promise.all(GAMES.map(async (g) => {
-    const [payload, patches] = await Promise.all([
+    const [payload, patches, cosmetic_name, cosmetic_addr] = await Promise.all([
       opts.fetch!(`${g}_payload.bin`),
       opts.fetch!(`${g}_patch.bin`),
+      opts.fetch!(`${g}_cosmetic_name.bin`),
+      opts.fetch!(`${g}_cosmetic_addr.bin`),
     ]);
-    return { payload, patches };
+    return { payload, patches, cosmetic_name, cosmetic_addr };
   }));
   return { oot, mm };
 };

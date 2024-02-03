@@ -106,10 +106,6 @@ class Packer {
     this.gs.oot.dma.data().copy(this.rom, CONFIG['oot'].dmaAddr);
     this.gs.mm.dma.data().copy(this.rom, CONFIG['mm'].dmaAddr + mmBase);
 
-    /* Post compress global patches */
-    this.monitor.log("Pack: Post-compress patches");
-    const patch = this.patchfiles[0];
-
     /* Add extra files */
     this.monitor.log("Pack: Add extra files");
     for (const p of this.patchfiles) {
