@@ -300,7 +300,8 @@ int comboIsChateauActive(void);
 void comboSetObjectSegment(GfxContext* gfx, void* buffer);
 void comboDrawGI(GameState_Play* play, Actor* actor, s16 gi, int flags);
 void comboDrawInit2D(Gfx** dl);
-void comboDrawBlit2D(Gfx** dl, u32 segAddr, int w, int h, float x, float y, float scale);
+void comboDrawBlit2D_RGBA32(Gfx** dl, u32 segAddr, int w, int h, float x, float y, float scale);
+void comboDrawBlit2D_RGBA16(Gfx** dl, u32 segAddr, int w, int h, float x, float y, float scale);
 void comboDrawBlit2D_IA4(Gfx** dl, u32 segAddr, int w, int h, float x, float y, float scale);
 
 /* Event */

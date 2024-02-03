@@ -289,14 +289,14 @@ static const char* const kSoulsBossMm[] = {
     "Igos",
 };
 
-static const Gfx kDlistQuadRGBA32_12x12[] = {
+static const Gfx kDlistQuadRGBA16_12x12[] = {
     gsDPPipeSync(),
     gsSPVertex(SEG1_BASE, 4, 0),
     gsDPTileSync(),
     gsDPLoadTextureTile(
         SEG2_BASE,
         G_IM_FMT_RGBA,
-        G_IM_SIZ_32b,
+        G_IM_SIZ_16b,
         12, 12,
         0, 0,
         11, 11,
@@ -461,7 +461,7 @@ static void drawTexIA4_8x12(GameState_Play* play, const void* texPtr, float x, f
     CLOSE_DISPS();
 }
 
-static void drawTexRGBA32_12x12(GameState_Play* play, const void* texPtr, float x, float y)
+static void drawTexRGBA16_12x12(GameState_Play* play, const void* texPtr, float x, float y)
 {
     Vtx* v;
     int xx[4];
@@ -508,7 +508,7 @@ static void drawTexRGBA32_12x12(GameState_Play* play, const void* texPtr, float 
     OPEN_DISPS(play->gs.gfx);
     gSPSegment(POLY_OPA_DISP++, SEG1, v);
     gSPSegment(POLY_OPA_DISP++, SEG2, texPtr);
-    gSPDisplayList(POLY_OPA_DISP++, (u32)kDlistQuadRGBA32_12x12 & 0xffffff);
+    gSPDisplayList(POLY_OPA_DISP++, (u32)kDlistQuadRGBA16_12x12 & 0xffffff);
     CLOSE_DISPS();
 }
 
@@ -642,7 +642,7 @@ static void printDungeonSilverRupees(GameState_Play* play, float x, float y, int
 
     OPEN_DISPS(play->gs.gfx);
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, 255);
-    drawTexRGBA32_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_RUPEE), x, y);
+    drawTexRGBA16_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_RUPEE), x, y);
     x += 12.f;
 
     for (int i = 0; i < srCount; ++i)
@@ -773,53 +773,53 @@ static void printDungeonData(GameState_Play* play, int base, int index)
             /* Town Fairy */
             color4(&r, &g, &b, &a, kFairyColors[4]);
             gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, r, g, b, a);
-            drawTexRGBA32_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_FAIRY), x + 174.f, y);
+            drawTexRGBA16_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_FAIRY), x + 174.f, y);
             printNumColored(play, !!MM_GET_EVENT_WEEK(EV_MM_WEEK_TOWN_FAIRY), 1, 2, x + 186.f, y, 0);
             break;
         case 1:
             /* OoT skulls */
             gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 0, 255);
-            drawTexRGBA32_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_SKULL), x + 104.f, y);
+            drawTexRGBA16_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_SKULL), x + 104.f, y);
             printNumColored(play, gOotSave.inventory.goldTokens, 100, 3, x + 116.f, y, 0);
 
             /* MM skulls - swamp */
             gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0, 255, 0, 255);
-            drawTexRGBA32_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_SKULL), x + 144.f, y);
+            drawTexRGBA16_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_SKULL), x + 144.f, y);
             printNumColored(play, gMmSave.skullCountSwamp, 30, 2, x + 156.f, y, 0);
 
             /* MM skulls - ocean */
             gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0, 0, 255, 255);
-            drawTexRGBA32_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_SKULL), x + 184.f, y);
+            drawTexRGBA16_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_SKULL), x + 184.f, y);
             printNumColored(play, gMmSave.skullCountOcean, 30, 2, x + 196.f, y, 0);
             break;
         case 2:
             /* Triforce */
             gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, 255);
-            drawTexRGBA32_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_TRIFORCE), x + 104.f, y);
+            drawTexRGBA16_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_TRIFORCE), x + 104.f, y);
             printNumColored(play, gTriforceCount, triforceMax, triforceDigits, x + 116.f, y, 1);
             break;
         case 3:
             /* Red Coins */
             gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 0, 0, 255);
-            drawTexRGBA32_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_COIN), x + 104.f, y);
+            drawTexRGBA16_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_COIN), x + 104.f, y);
             printNumColored(play, gSharedCustomSave.coins[0], gComboData.maxCoins[0], digitCount(gComboData.maxCoins[0]), x + 116.f, y, 1);
             break;
         case 4:
             /* Green Coins */
             gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0, 255, 0, 255);
-            drawTexRGBA32_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_COIN), x + 104.f, y);
+            drawTexRGBA16_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_COIN), x + 104.f, y);
             printNumColored(play, gSharedCustomSave.coins[1], gComboData.maxCoins[1], digitCount(gComboData.maxCoins[1]), x + 116.f, y, 1);
             break;
         case 5:
             /* Blue Coins */
             gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0, 0, 255, 255);
-            drawTexRGBA32_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_COIN), x + 104.f, y);
+            drawTexRGBA16_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_COIN), x + 104.f, y);
             printNumColored(play, gSharedCustomSave.coins[2], gComboData.maxCoins[2], digitCount(gComboData.maxCoins[2]), x + 116.f, y, 1);
             break;
         case 6:
             /* Yellow Coins */
             gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 0, 255);
-            drawTexRGBA32_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_COIN), x + 104.f, y);
+            drawTexRGBA16_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_COIN), x + 104.f, y);
             printNumColored(play, gSharedCustomSave.coins[3], gComboData.maxCoins[3], digitCount(gComboData.maxCoins[3]), x + 116.f, y, 1);
             break;
         }
@@ -833,24 +833,24 @@ static void printDungeonData(GameState_Play* play, int base, int index)
         if (def->flags & DD_MAP_COMPASS)
         {
             if (data.map)
-                drawTexRGBA32_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_MAP), x + 104.f, y);
+                drawTexRGBA16_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_MAP), x + 104.f, y);
             if (data.compass)
-                drawTexRGBA32_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_COMPASS), x + 116.f, y);
+                drawTexRGBA16_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_COMPASS), x + 116.f, y);
         }
         if ((def->flags & DD_BOSS_KEY) && data.bossKey)
         {
-            drawTexRGBA32_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_BOSS_KEY), x + 128.f, y);
+            drawTexRGBA16_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_BOSS_KEY), x + 128.f, y);
         }
         if (data.maxKeys)
         {
-            drawTexRGBA32_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_KEY), x + 144.f, y);
+            drawTexRGBA16_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_KEY), x + 144.f, y);
             printNumColored(play, data.keys, data.maxKeys, 1, x + 156.f, y, 0);
         }
         if (def->flags & DD_FAIRIES)
         {
             color4(&r, &g, &b, &a, kFairyColors[def->id]);
             gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, r, g, b, a);
-            drawTexRGBA32_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_FAIRY), x + 174.f, y);
+            drawTexRGBA16_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_FAIRY), x + 174.f, y);
             printNumColored(play, data.fairies, 15, 2, x + 186.f, y, 0);
         }
 
