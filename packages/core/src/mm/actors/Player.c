@@ -897,6 +897,8 @@ static Color_RGB8 sTunicColors[4] = {
     { 0, 60, 100 },  // PLAYER_TUNIC_ZORA
 };
 
+COSMETIC(MM_COLOR_TUNICS, sTunicColors);
+
 void Player_SkelAnime_DrawFlexLod(GameState_Play* play, void** skeleton, Vec3s* jointTable, s32 dListCount,
                                   OverrideLimbDrawOpa overrideLimbDraw, PostLimbDrawOpa postLimbDraw, Actor_Player* player, s32 lod)
 {

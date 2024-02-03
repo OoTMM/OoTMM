@@ -60,32 +60,29 @@ function(build game)
 
   # Extract payload
   set(game_payload "${CMAKE_BINARY_DIR}/${game}_payload.bin")
-  add_custom_command(
-    OUTPUT "${game_payload}"
-    COMMAND "${ARCH}-objcopy" --only-section=.text -O binary "$<TARGET_FILE:${game}>" ${game_payload}
-    DEPENDS ${game}
-    COMMENT "Extracting payload for ${game}"
-    VERBATIM
-  )
-  add_custom_target(
-    ${game}_payload ALL DEPENDS "${game_payload}"
-  )
-
-  # Extract patch
   set(game_patch "${CMAKE_BINARY_DIR}/${game}_patch.bin")
+  set(game_cosmetic_name "${CMAKE_BINARY_DIR}/${game}_cosmetic_name.bin")
+  set(game_cosmetic_addr "${CMAKE_BINARY_DIR}/${game}_cosmetic_addr.bin")
   add_custom_command(
-    OUTPUT "${game_patch}"
+    OUTPUT
+      "${game_payload}"
+      "${game_patch}"
+      "${game_cosmetic_name}"
+      "${game_cosmetic_addr}"
+    COMMAND "${ARCH}-objcopy" --only-section=.text -O binary "$<TARGET_FILE:${game}>" ${game_payload}
     COMMAND "${ARCH}-objcopy" --only-section=.patch -O binary "$<TARGET_FILE:${game}>" ${game_patch}
+    COMMAND "${ARCH}-objcopy" --only-section=.cosmetic_name -O binary "$<TARGET_FILE:${game}>" ${game_cosmetic_name}
+    COMMAND "${ARCH}-objcopy" --only-section=.cosmetic_addr -O binary "$<TARGET_FILE:${game}>" ${game_cosmetic_addr}
     DEPENDS ${game}
-    COMMENT "Extracting patch for ${game}"
+    COMMENT "Extracting sections for ${game}"
     VERBATIM
   )
   add_custom_target(
-    ${game}_patch ALL DEPENDS "${game_patch}"
+    ${game}_sections ALL DEPENDS "${game_payload}" "${game_patch}" "${game_cosmetic_name}" "${game_cosmetic_addr}"
   )
 
   # Install
-  install(FILES ${game_payload} ${game_patch} DESTINATION "bin")
+  install(FILES ${game_payload} ${game_patch} ${game_cosmetic_name} ${game_cosmetic_addr} DESTINATION "bin")
 endfunction()
 
 build(oot)
