@@ -177,9 +177,9 @@
 "can_kill_baba_nuts": "soul_deku_baba && (can_fight || has(MASK_DEKU) || can_hookshot_short || has_explosives || has_arrows)"
 "can_kill_baba_sticks": "soul_deku_baba && (can_fight || has(MASK_DEKU) || can_hookshot_short || has_explosives || has_arrows)"
 "can_kill_baba_both_sticks": "soul_deku_baba && (has_weapon || has(MASK_DEKU))"
-"bombers1": "event(BOMBERS_NORTH1) && event(BOMBERS_EAST1) && event(BOMBERS_WEST1)"
-"bombers2": "event(BOMBERS_NORTH2) && event(BOMBERS_EAST2) && event(BOMBERS_WEST2)"
-"bombers3": "event(BOMBERS_NORTH3) && event(BOMBERS_EAST3) && event(BOMBERS_WEST3)"
+"bombers1": "event(BOMBERS_NORTH1) && event(BOMBERS_EAST1) && event(BOMBERS_WEST1) && soul_npc(SOUL_NPC_BOMBERS)"
+"bombers2": "event(BOMBERS_NORTH2) && event(BOMBERS_EAST2) && event(BOMBERS_WEST2) && soul_npc(SOUL_NPC_BOMBERS)"
+"bombers3": "event(BOMBERS_NORTH3) && event(BOMBERS_EAST3) && event(BOMBERS_WEST3) && soul_npc(SOUL_NPC_BOMBERS)"
 "has_fire_sticks": "has_sticks || can_use_fire_short_range"
 "can_pass_gibdo": "has(MASK_GIBDO) && soul_redead_gibdo"
 "can_get_gossip_fairy": "can_play_healing || can_play_epona"
@@ -192,6 +192,7 @@
 
 "underwater_walking": "has_mask_zora || (has_tunic_zora && has_iron_boots)"
 "underwater_walking_strict": "has_mask_zora || (has_tunic_zora_strict && has_iron_boots)"
+"can_ride_epona": "can_play_epona && soul_epona"
 
 # Bottles
 "has_bottle": "has(BOTTLE_EMPTY) || has(BOTTLE_POTION_RED) || has(BOTTLE_POTION_GREEN) || has(BOTTLE_POTION_BLUE) || has(BOTTLE_MILK) || event(GOLD_DUST_USED) || has(BOTTLE_CHATEAU) || has(BOTTLE_FAIRY) || has(BOTTLE_POE) || has(BOTTLE_BIG_POE)"
@@ -253,3 +254,5 @@
 "short_hook_anywhere": "can_hookshot_short && setting(hookshotAnywhereMm, logical)"
 "hookshot_anywhere": "can_hookshot && setting(hookshotAnywhereMm, logical)"
 "gs": "soul_gs"
+"soul_npc(x)": "(!setting(soulsNpcMm)) || has(x)"
+"can_shop_at_trading_post": "(soul_fishing_pond_owner && (between(DAY1_AM_06_00, NIGHT1_PM_09_00) || between(DAY2_AM_06_00, NIGHT2_PM_09_00))) || (soul_rooftop_man && (between(NIGHT1_PM_10_00, DAY2_AM_06_00) || between(NIGHT2_PM_10_00, NIGHT3_PM_09_00)))"

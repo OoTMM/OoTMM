@@ -2,7 +2,7 @@
   dungeon: GB
   exits:
     "Great Bay Temple Entrance": "can_reset_time_dungeon"
-    "Zora Cape Peninsula": "can_hookshot || short_hook_anywhere"
+    "Zora Cape Peninsula": "soul_npc(SOUL_NPC_TURTLE) && (can_hookshot || short_hook_anywhere)"
     "WARP_SONGS": "true"
 "Great Bay Temple Entrance":
   dungeon: GB

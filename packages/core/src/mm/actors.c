@@ -18,11 +18,6 @@ void EnTab_AfterTextBox(Actor* this, GameState_Play* play, s16 messageId);
 
 static Actor* sByteCodeActor;
 
-static int opt(int x)
-{
-    return x > 0 ? 1 : -1;
-}
-
 /* TODO: Patch every bytecode and remove this */
 static s16 convertGi(s16 initial)
 {
@@ -232,6 +227,11 @@ static void Actor_ByteCode_DisplayTextBox2_Hook(GameState_Play* play, s16 messag
 
 PATCH_CALL(0x8010af50, Actor_ByteCode_DisplayTextBox2_Hook);
 
+static int opt(int x)
+{
+    return x > 0 ? 1 : -1;
+}
+
 static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
 {
     switch (actorId)
@@ -364,6 +364,188 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
     case AC_EN_SCOPENUTS:
     case AC_EN_AKINDONUTS:
         return opt(comboHasSoulMm(GI_MM_SOUL_MISC_BUSINESS_SCRUB));
+    case AC_EN_AL:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_AROMA));
+    case AC_EN_SYATEKI_MAN:
+    case AC_EN_SYATEKI_OKUTA:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_SHOOTING_GALLERY_OWNER));
+    case AC_EN_GK:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_GORON_CHILD));
+    case AC_EN_JS:
+        switch (variable & 0x000f)
+        {
+            case 0: return opt(comboHasSoulMm(GI_MM_SOUL_NPC_CHILD_MAJORA));
+            case 1: return opt(comboHasSoulMm(GI_MM_SOUL_NPC_CHILD_ODOLWA));
+            case 2: return opt(comboHasSoulMm(GI_MM_SOUL_NPC_CHILD_GOHT));
+            case 3: return opt(comboHasSoulMm(GI_MM_SOUL_NPC_CHILD_GYORG));
+            case 4: return opt(comboHasSoulMm(GI_MM_SOUL_NPC_CHILD_TWINMOLD));
+            default: return 1;
+            // default: return opt(comboHasSoulMm(GI_MM_SOUL_NPC_MOON_CHILDREN));
+        }
+    case AC_EN_SOB1:
+        switch (variable & 0xf) {
+            case 0: return opt(comboHasSoulMm(GI_MM_SOUL_NPC_ZORA_SHOPKEEPER));
+            case 1: return opt(comboHasSoulMm(GI_MM_SOUL_NPC_GORON_SHOPKEEPER));
+            case 2: return opt(comboHasSoulMm(GI_MM_SOUL_NPC_BOMBCHU_SHOPKEEPER));
+            default: return 1;
+        }
+    case AC_EN_BOMBERS:
+    case AC_EN_BOMBERS2:
+    case AC_EN_BOMJIMA:
+    case AC_EN_BOMJIMB:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_BOMBERS));
+    case AC_EN_DNO:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_BUTLER_DEKU));
+    case AC_EN_STH:
+    case AC_EN_JA:
+    case AC_EN_YB:
+    case AC_EN_RZ:
+    case AC_EN_MM3:
+    case AC_EN_PM:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_CITIZEN));
+    case AC_EN_BEE:
+        return opt(comboHasSoulMm(GI_MM_SOUL_ENEMY_BEE));
+    case AC_EN_DNP:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_DEKU_PRINCESS));
+    case AC_EN_PO_SISTERS:
+    case AC_EN_BIGPO:
+    case AC_EN_POH:
+        return opt(comboHasSoulMm(GI_MM_SOUL_ENEMY_POE));
+    case AC_EN_RACEDOG:
+    case AC_EN_DG:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_DOG));
+    case AC_EN_NIW:
+    case AC_EN_ATTACK_NIW:
+    case AC_EN_NWC:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_CUCCO));
+    /* TODO:
+        check proper actors
+        mm biggoron
+        thieves
+        deku guards
+        hylian guards
+    */
+    case AC_EN_GE1:
+    case AC_EN_GE3:
+        return opt(comboHasSoulMm(GI_MM_SOUL_ENEMY_THIEVES));
+    case AC_EN_GE2:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_THIEVES));
+    case AC_EN_GM:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_GORMAN));
+    case AC_EN_MS:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_BEAN_SALESMAN));
+    case AC_EN_HS:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_GROG));
+    case AC_EN_MK:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_MARINE_SCIENTIST));
+    case AC_EN_FU:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_HONEY_DARLING));
+    case AC_OBJ_TOGE:
+    case AC_OBJ_SPINYROLL:
+    case AC_OBJ_VSPINYROLL:
+        return opt(comboHasSoulMm(GI_MM_SOUL_ENEMY_SPIKE_TRAPS));
+    case AC_EN_PO_COMPOSER:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_COMPOSER_BROS));
+    case AC_EN_TK:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_DAMPE));
+    case AC_EN_GG:
+    case AC_EN_GG2:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_DARUNIA));
+    case AC_EN_DNQ:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_DEKU_KING));
+    case AC_EN_LIFT_NUTS:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_DEKU_PLAYGROUND_SCRUBS));
+    case AC_EN_JG:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_GORON_ELDER));
+    case AC_EN_HORSE_LINK_CHILD:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_EPONA));
+    case AC_EN_TSN:
+    case AC_EN_JGAME_TSN:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_FISHERMAN));
+    case AC_EN_IN:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_GORMAN_BROS));
+    case AC_EN_RG:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_GORON_RACERS));
+    case AC_EN_TOTO:
+    case AC_EN_ZOV:
+    case AC_EN_ZOD:
+    case AC_EN_ZOS:
+    case AC_EN_ZOB:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_INDIE_GO_GO));
+    case AC_EN_TEST3:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_KAFEI));
+    case AC_EN_KITAN:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_KEATON));
+    case AC_EN_TRU:
+    case AC_EN_TRU_MT:
+    case AC_EN_TRT:
+    case AC_EN_TRT2:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_KOUME_KOTAKE));
+    case AC_EN_DT:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_MAYOR_DOTOUR));
+    case AC_EN_GO:
+        switch (variable & 0xf)
+        {
+            case 8: return opt(comboHasSoulMm(GI_MM_SOUL_NPC_MEDIGORON));
+            default: return opt(comboHasSoulMm(GI_MM_SOUL_NPC_GORON));
+        }
+    case AC_EN_ZOG:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_MIKAU));
+    case AC_EN_TAB:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_TALON));
+    case AC_EN_MNK:
+    case AC_EN_ONPUMAN:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_MONKEYS));
+    case AC_EN_BJI_01:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_ASTRAL_OBVSERVER));
+    case AC_EN_OWL:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_OWL));
+    case AC_EN_GB2:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_POE_COLLECTOR));
+    case AC_EN_OT:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_SEAHORSES));
+    case AC_EN_KBT:
+    case AC_EN_KGY:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_BLACKSMITHS));
+    case AC_EN_BOM_BOWL_MAN:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_BOMBCHU_BOWLING_LADY));
+    case AC_EN_BAL:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_TINGLE));
+    case AC_EN_BJT:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_TOILET_HAND));
+    case AC_EN_OSSAN:
+        switch (variable & 0xf)
+        {
+            case 0: return opt(comboHasSoulMm(GI_MM_SOUL_NPC_FISHING_POND_OWNER));
+            case 1: return opt(comboHasSoulMm(GI_MM_SOUL_NPC_ROOFTOP_MAN));
+            default: return 1;
+        }
+    case AC_DM_CHAR08:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_TURTLE));
+    case AC_EN_ZOT:
+    case AC_EN_ZOW:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_ZORA));
+    case AC_EN_MA_YTO:
+    case AC_EN_MA_YTS:
+    case AC_EN_MA4:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_MALON));
+    case AC_EN_DAIKU:
+    case AC_EN_DAIKU2:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_CARPENTERS));
+    case AC_EN_AN:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_ANJU));
+    case AC_EN_GURUGURU:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_GURU_GURU));
+    case AC_EN_SUTTARI:
+    case AC_EN_BABA:
+    case AC_EN_FSN:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_SAKON_BUNDLE));
+    case AC_EN_KENDO_JS:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_MAGIC_CARPET_MAN));
+    case AC_EN_NB:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_OLD_HAG));
+    case AC_EN_SHN:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_TOURIST_CENTER));
     default:
         return 1;
     }

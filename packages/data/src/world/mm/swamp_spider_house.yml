@@ -6,7 +6,7 @@
     "SOARING": "can_play_soaring"
     "WARP_SONGS": "true"
   locations:
-    "Swamp Spider House Mask of Truth": "has(GS_TOKEN_SWAMP, 30)"
+    "Swamp Spider House Mask of Truth": "soul_citizen && has(GS_TOKEN_SWAMP, 30)"
 "Swamp Spider House Main":
   dungeon: SSH
   events:

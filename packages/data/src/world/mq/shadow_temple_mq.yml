@@ -134,11 +134,6 @@
   locations:
     "MQ Shadow Temple GS After Boat": "gs"
     "MQ Shadow Temple GS Pre-Boss": "gs && can_use_bow"
-    "MQ Shadow Temple Pot After Boat Before Bridge 1": "true"
-    "MQ Shadow Temple Pot After Boat Before Bridge 2": "true"
-    "MQ Shadow Temple Pot After Boat After Bridge 1": "can_use_bow"
-    "MQ Shadow Temple Pot After Boat After Bridge 2": "can_use_bow"
-    "MQ Shadow Temple Heart Pre-Boss Upper 1": "(can_use_bow && ((can_play_time && can_longshot) || hookshot_anywhere)) || longshot_anywhere || climb_anywhere"
     "MQ Shadow Temple Heart Pre-Boss Upper 2": "(can_use_bow && ((can_play_time && can_longshot) || hookshot_anywhere)) || longshot_anywhere || climb_anywhere"
     "MQ Shadow Temple Heart Pre-Boss Lower": "can_use_bow || longshot_anywhere || climb_anywhere"
 "Shadow Temple Final Side Rooms":

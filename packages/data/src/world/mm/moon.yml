@@ -17,11 +17,11 @@
   events:
     MAJORA_PRE_BOSS: "true"
   exits:
-    "Moon Trial Deku Entrance":  "can_reset_time_on_moon && masks(1)"
-    "Moon Trial Goron Entrance": "can_reset_time_on_moon && masks(2)"
-    "Moon Trial Zora": "can_reset_time_on_moon && masks(3)"
-    "Moon Trial Link Entrance": "can_reset_time_on_moon && masks(4)"
-    "Moon Boss": "setting(majoraChild, none) || (setting(majoraChild, custom) && special(MAJORA))"
+    "Moon Trial Deku Entrance":  "soul_npc(SOUL_NPC_CHILDREN_MOON) && can_reset_time_on_moon && masks(1)"
+    "Moon Trial Goron Entrance": "soul_npc(SOUL_NPC_CHILDREN_MOON) && can_reset_time_on_moon && masks(2)"
+    "Moon Trial Zora": "soul_npc(SOUL_NPC_CHILDREN_MOON) && can_reset_time_on_moon && masks(3)"
+    "Moon Trial Link Entrance": "soul_npc(SOUL_NPC_CHILDREN_MOON) && can_reset_time_on_moon && masks(4)"
+    "Moon Boss": "soul_npc(SOUL_NPC_CHILD_MAJORA) && (setting(majoraChild, none) || (setting(majoraChild, custom) && special(MAJORA)))"
   locations:
     "Moon Fierce Deity Mask": "can_reset_time_on_moon && masks(20) && event(MOON_TRIAL_DEKU) && event(MOON_TRIAL_GORON) && event(MOON_TRIAL_ZORA) && event(MOON_TRIAL_LINK)"
 "Moon Trial Deku Entrance":
@@ -162,7 +162,7 @@
 "Moon Boss":
   region: MOON
   events:
-    MAJORA_PHASE_1: "has_arrows || has_mask_zora || (has(MASK_FIERCE_DEITY) && has_magic)"
+    MAJORA_PHASE_1: "soul_boss(SOUL_BOSS_MAJORA) && (has_arrows || has_mask_zora || (has(MASK_FIERCE_DEITY) && has_magic))"
     MAJORA: "!is_goal_triforce && event(MAJORA_PHASE_1) && (has_weapon || has_mask_zora || (has(MASK_FIERCE_DEITY) && has_magic))"
   locations:
     "Moon Majora Pot 1": "(can_play_time || event(MAJORA))"

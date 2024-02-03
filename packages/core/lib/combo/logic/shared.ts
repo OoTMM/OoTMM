@@ -32,12 +32,48 @@ const SOULS_ENEMY: ItemSharedDef[] = [
   { shared: Items.SHARED_SOUL_ENEMY_FLOORMASTER,         oot: Items.OOT_SOUL_ENEMY_FLOORMASTER,        mm: Items.MM_SOUL_ENEMY_FLOORMASTER },
   { shared: Items.SHARED_SOUL_ENEMY_LEEVER,              oot: Items.OOT_SOUL_ENEMY_LEEVER,             mm: Items.MM_SOUL_ENEMY_LEEVER },
   { shared: Items.SHARED_SOUL_ENEMY_STALCHILD,           oot: Items.OOT_SOUL_ENEMY_STALCHILD,          mm: Items.MM_SOUL_ENEMY_STALCHILD },
+  { shared: Items.SHARED_SOUL_ENEMY_POE,                 oot: Items.OOT_SOUL_ENEMY_POE,                mm: Items.MM_SOUL_ENEMY_POE },
+  { shared: Items.SHARED_SOUL_ENEMY_SPIKE_TRAPS,         oot: Items.OOT_SOUL_ENEMY_SPIKE_TRAPS,        mm: Items.MM_SOUL_ENEMY_SPIKE_TRAPS },
+  { shared: Items.SHARED_SOUL_ENEMY_THIEVES,             oot: Items.OOT_SOUL_ENEMY_THIEVES,            mm: Items.MM_SOUL_ENEMY_THIEVES },
 ];
 
 const SOULS_MISC: ItemSharedDef[] = [
   { shared: Items.SHARED_SOUL_MISC_GS,              oot: Items.OOT_SOUL_MISC_GS,              mm: Items.MM_SOUL_MISC_GS },
   { shared: Items.SHARED_SOUL_MISC_BUSINESS_SCRUB,  oot: Items.OOT_SOUL_MISC_BUSINESS_SCRUB,  mm: Items.MM_SOUL_MISC_BUSINESS_SCRUB },
 ];
+
+const SOULS_NPC: ItemSharedDef[] = [
+  { shared: Items.SHARED_SOUL_NPC_SHOOTING_GALLERY_OWNER,   oot: Items.OOT_SOUL_NPC_SHOOTING_GALLERY_OWNER,   mm: Items.MM_SOUL_NPC_SHOOTING_GALLERY_OWNER },
+  { shared: Items.SHARED_SOUL_NPC_GORON_CHILD,              oot: Items.OOT_SOUL_NPC_GORON_CHILD,              mm: Items.MM_SOUL_NPC_GORON_CHILD },
+  { shared: Items.SHARED_SOUL_NPC_BOMBCHU_SHOPKEEPER,       oot: Items.OOT_SOUL_NPC_BOMBCHU_SHOPKEEPER,       mm: Items.MM_SOUL_NPC_BOMBCHU_SHOPKEEPER },
+  { shared: Items.SHARED_SOUL_NPC_CITIZEN,                  oot: Items.OOT_SOUL_NPC_CITIZEN,                  mm: Items.MM_SOUL_NPC_CITIZEN },
+  { shared: Items.SHARED_SOUL_NPC_COMPOSER_BROS,            oot: Items.OOT_SOUL_NPC_COMPOSER_BROS,            mm: Items.MM_SOUL_NPC_COMPOSER_BROS },
+  { shared: Items.SHARED_SOUL_NPC_DAMPE,                    oot: Items.OOT_SOUL_NPC_DAMPE,                    mm: Items.MM_SOUL_NPC_DAMPE },
+  { shared: Items.SHARED_SOUL_NPC_DARUNIA,                  oot: Items.OOT_SOUL_NPC_DARUNIA,                  mm: Items.MM_SOUL_NPC_DARUNIA },
+  { shared: Items.SHARED_SOUL_NPC_EPONA,                    oot: Items.OOT_SONG_EPONA,                        mm: Items.MM_SONG_EPONA },
+  { shared: Items.SHARED_SOUL_NPC_GORON_SHOPKEEPER,         oot: Items.OOT_SOUL_NPC_GORON_SHOPKEEPER,         mm: Items.MM_SOUL_NPC_GORON_SHOPKEEPER },
+  { shared: Items.SHARED_SOUL_NPC_HONEY_DARLING,            oot: Items.OOT_SOUL_NPC_HONEY_DARLING,            mm: Items.MM_SOUL_NPC_HONEY_DARLING },
+  { shared: Items.SHARED_SOUL_NPC_MEDIGORON,                oot: Items.OOT_SOUL_NPC_MEDIGORON,                mm: Items.MM_SOUL_NPC_MEDIGORON },
+  { shared: Items.SHARED_SOUL_NPC_TALON,                    oot: Items.OOT_SOUL_NPC_TALON,                    mm: Items.MM_SOUL_NPC_TALON },
+  { shared: Items.SHARED_SOUL_NPC_OWL,                      oot: Items.OOT_SOUL_NPC_OWL,                      mm: Items.MM_SOUL_NPC_OWL },
+  { shared: Items.SHARED_SOUL_NPC_POE_COLLECTOR,            oot: Items.OOT_SOUL_NPC_POE_COLLECTOR,            mm: Items.MM_SOUL_NPC_POE_COLLECTOR },
+  { shared: Items.SHARED_SOUL_NPC_BOMBCHU_BOWLING_LADY,     oot: Items.OOT_SOUL_NPC_BOMBCHU_BOWLING_LADY,     mm: Items.MM_SOUL_NPC_BOMBCHU_BOWLING_LADY },
+  { shared: Items.SHARED_SOUL_NPC_ZORA,                     oot: Items.OOT_SOUL_NPC_ZORA,                     mm: Items.MM_SOUL_NPC_ZORA },
+  { shared: Items.SHARED_SOUL_NPC_ZORA_SHOPKEEPER,          oot: Items.OOT_SOUL_NPC_ZORA_SHOPKEEPER,          mm: Items.MM_SOUL_NPC_ZORA_SHOPKEEPER },
+  { shared: Items.SHARED_SOUL_NPC_MALON,                    oot: Items.OOT_SOUL_NPC_MALON,                    mm: Items.MM_SOUL_NPC_MALON },
+  { shared: Items.SHARED_SOUL_NPC_BEAN_SALESMAN,            oot: Items.OOT_SOUL_NPC_BEAN_SALESMAN,            mm: Items.MM_SOUL_NPC_BEAN_SALESMAN },
+  { shared: Items.SHARED_SOUL_NPC_CARPENTERS,               oot: Items.OOT_SOUL_NPC_CARPENTERS,               mm: Items.MM_SOUL_NPC_CARPENTERS },
+  { shared: Items.SHARED_SOUL_NPC_ANJU,                     oot: Items.OOT_SOUL_NPC_ANJU,                     mm: Items.MM_SOUL_NPC_ANJU },
+  { shared: Items.SHARED_SOUL_NPC_DOG,                      oot: Items.OOT_SOUL_NPC_DOG,                      mm: Items.MM_SOUL_NPC_DOG },
+  { shared: Items.SHARED_SOUL_NPC_CUCCO,                    oot: Items.OOT_SOUL_NPC_CUCCO,                    mm: Items.MM_SOUL_NPC_CUCCO },
+  { shared: Items.SHARED_SOUL_NPC_GURU_GURU,                oot: Items.OOT_SOUL_NPC_GURU_GURU,                mm: Items.MM_SOUL_NPC_GURU_GURU },
+  { shared: Items.SHARED_SOUL_NPC_MARINE_SCIENTIST,         oot: Items.OOT_SOUL_NPC_MARINE_SCIENTIST,         mm: Items.MM_SOUL_NPC_MARINE_SCIENTIST },
+  { shared: Items.SHARED_SOUL_NPC_DOG_OWNER,                oot: Items.OOT_SOUL_NPC_DOG_OWNER,                mm: Items.MM_SOUL_NPC_DOG_OWNER },
+  { shared: Items.SHARED_SOUL_NPC_ROOFTOP_MAN,              oot: Items.OOT_SOUL_NPC_ROOFTOP_MAN,              mm: Items.MM_SOUL_NPC_ROOFTOP_MAN },
+  { shared: Items.SHARED_SOUL_NPC_MAGIC_CARPET_MAN,         oot: Items.OOT_SOUL_NPC_MAGIC_CARPET_MAN,         mm: Items.MM_SOUL_NPC_MAGIC_CARPET_MAN },
+  { shared: Items.SHARED_SOUL_NPC_OLD_HAG,                  oot: Items.OOT_SOUL_NPC_OLD_HAG,                  mm: Items.MM_SOUL_NPC_OLD_HAG },
+  { shared: Items.SHARED_SOUL_NPC_FISHING_POND_OWNER,       oot: Items.OOT_SOUL_NPC_FISHING_POND_OWNER,       mm: Items.MM_SOUL_NPC_FISHING_POND_OWNER },
+]
 
 const SKELETON_KEY: ItemSharedDef[] = [
   { shared: Items.SHARED_SKELETON_KEY, oot: Items.OOT_SKELETON_KEY, mm: Items.MM_SKELETON_KEY },
@@ -57,5 +93,4 @@ const SHIELDS: ItemSharedDef[] = [
   { shared: Items.SHARED_SHIELD_MIRROR, oot: Items.OOT_SHIELD_MIRROR, mm: Items.MM_SHIELD_MIRROR },
 ];
 
-
-export const SharedItemGroups = { SOULS_ENEMY, SOULS_MISC, SKELETON_KEY, OCARINA_BUTTONS, SHIELDS };
+export const SharedItemGroups = { SOULS_ENEMY, SOULS_NPC, SOULS_MISC, SKELETON_KEY, OCARINA_BUTTONS, SHIELDS };

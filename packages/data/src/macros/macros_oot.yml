@@ -169,7 +169,7 @@
 "gs_night": "gs && is_night && (trick(OOT_NIGHT_GS) || can_play_sun)"
 
 #Specific Interaction Macros:
-"can_ride_epona": "is_adult && can_play_epona"
+"can_ride_epona": "is_adult && can_play_epona && soul_epona"
 "adult_trade(x)": "is_adult && has(x)"
 "has_blue_fire": "has_blue_fire_arrows || (has_bottle && (event(BLUE_FIRE) || renewable(BLUE_FIRE) || renewable(BOTTLE_BLUE_FIRE)))"
 "can_ride_bean(x)": "is_adult && event(x)"

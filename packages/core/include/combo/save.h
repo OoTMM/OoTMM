@@ -14,11 +14,12 @@ typedef struct ALIGNED(16)
     u16             ocarinaButtonMaskOot;
     u16             ocarinaButtonMaskMm;
     u8              soulsEnemyOot[8];
-    u8              soulsEnemyMm[8];
     u8              soulsBossOot[2];
-    u8              soulsBossMm[1];
     u8              soulsNpcOot[8];
     u8              soulsMiscOot[1];
+    u8              soulsEnemyMm[8];
+    u8              soulsBossMm[1];
+    u8              soulsNpcMm[9];
     u8              soulsMiscMm[1];
     u8              caughtChildFishWeight[20]; /* first item is length. should this be in OotCustomSave? */
     u8              caughtAdultFishWeight[20]; /* first item is length. should this be in OotCustomSave? */

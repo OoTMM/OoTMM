@@ -207,8 +207,10 @@ const ITEM_POOL_PLENTIFUL = new Set([
   ...ItemGroups.OOT_SOULS_MISC,
   ...ItemGroups.MM_SOULS_ENEMY,
   ...ItemGroups.MM_SOULS_BOSS,
+  ...ItemGroups.MM_SOULS_NPC,
   ...ItemGroups.MM_SOULS_MISC,
   ...ItemGroups.SHARED_SOULS_ENEMY,
+  ...ItemGroups.SHARED_SOULS_NPC,
   ...ItemGroups.SHARED_SOULS_MISC,
   Items.OOT_BUTTON_A,
   Items.OOT_BUTTON_C_RIGHT,
@@ -852,6 +854,10 @@ export class LogicPassWorldTransform {
       this.shareItems(SharedItemGroups.SOULS_ENEMY, 'max');
     }
 
+    if (settings.sharedSoulsNpc) {
+      this.shareItems(SharedItemGroups.SOULS_NPC, 'max');
+    }
+
     if (settings.sharedSoulsMisc) {
       this.shareItems(SharedItemGroups.SOULS_MISC, 'max');
     }
@@ -1094,6 +1100,7 @@ export class LogicPassWorldTransform {
     if (settings.soulsMiscOot) this.addItems(ItemGroups.OOT_SOULS_MISC);
     if (settings.soulsEnemyMm) this.addItems(ItemGroups.MM_SOULS_ENEMY);
     if (settings.soulsBossMm) this.addItems(ItemGroups.MM_SOULS_BOSS);
+    if (settings.soulsNpcMm) this.addItems(ItemGroups.MM_SOULS_NPC);
     if (settings.soulsMiscMm) this.addItems(ItemGroups.MM_SOULS_MISC);
 
     /* Add skeleton keys */

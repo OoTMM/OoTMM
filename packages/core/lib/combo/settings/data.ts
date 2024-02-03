@@ -1373,7 +1373,14 @@ export const SETTINGS = [{
   default: false
 }, {
   key: 'soulsNpcOot',
-  name: 'NPC Souls (OoT) (EXPERIMENTAL)',
+  name: 'NPC Souls (OoT)',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Add NPC souls into the item pool. NPCs won\'t spawn unless their soul is obtained.',
+  default: false
+}, {
+  key: 'soulsNpcMm',
+  name: 'NPC Souls (MM) (EXPERIMENTAL)',
   category: 'items.extensions',
   type: 'boolean',
   description: 'Add NPC souls into the item pool. NPCs won\'t spawn unless their soul is obtained.',
@@ -1629,6 +1636,13 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false,
   cond: (s: any) => s.soulsEnemyOot && s.soulsEnemyMm,
+}, {
+  key: 'sharedSoulsNpc',
+  name: 'Shared NPC Souls',
+  category: 'items.shared',
+  type: 'boolean',
+  default: false,
+  cond: (s: any) => s.soulsNpcOot && s.soulsNpcMm,
 }, {
   key: 'sharedSoulsMisc',
   name: 'Shared Misc. Souls',
