@@ -877,7 +877,7 @@
   exits:
     "Termina Field": "true"
   locations:
-    "Termina Field Bio Baba Grotto": "underwater_walking"
+    "Termina Field Bio Baba Grotto": "has_mask_zora || (underwater_walking && has_weapon_range)"
     "Bio Baba Grotto Grass 1": "true"
     "Bio Baba Grotto Grass 2": "true"
 "Dodongo Grotto":
