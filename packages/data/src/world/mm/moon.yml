@@ -84,15 +84,15 @@
   exits:
     "Moon": "true"
   events:
-    MOON_TRIAL_ZORA: "has_mask_zora"
+    MOON_TRIAL_ZORA: "underwater_walking"
   locations:
-    "Moon Trial Zora HP": "has_mask_zora"
+    "Moon Trial Zora HP": "underwater_walking"
   gossip:
-    "Moon Trial Zora Gossip Outer Left": "has_mask_zora"
-    "Moon Trial Zora Gossip Middle Left": "has_mask_zora"
-    "Moon Trial Zora Gossip Inner Right": "has_mask_zora"
-    "Moon Trial Zora Gossip Middle Right": "has_mask_zora"
-    "Moon Trial Zora Gossip Outer Right": "has_mask_zora"
+    "Moon Trial Zora Gossip Outer Left": "underwater_walking"
+    "Moon Trial Zora Gossip Middle Left": "underwater_walking"
+    "Moon Trial Zora Gossip Inner Right": "underwater_walking"
+    "Moon Trial Zora Gossip Middle Right": "underwater_walking"
+    "Moon Trial Zora Gossip Outer Right": "underwater_walking"
 "Moon Trial Link Entrance":
   region: MOON
   exits:
