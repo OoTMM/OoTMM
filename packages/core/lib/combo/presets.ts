@@ -573,7 +573,7 @@ const PRESET_HELL = makeSettings({
   ]
 });
 
-const PRESET_BEGGINER = makeSettings({
+const PRESET_BEGINNER = makeSettings({
   hintImportance: true,
   tingleShuffle: 'starting',
   mapCompassShuffle: 'starting',
@@ -670,7 +670,7 @@ const PRESET_BEGGINER = makeSettings({
 
 export const PRESETS: Presets = {
   'Default': PRESET_DEFAULT,
-  'Begginer': PRESET_BEGGINER,
+  'Beginner': PRESET_BEGINNER,
   'Blitz': PRESET_BLITZ,
   'Blitz (with pre-completed dungeons)': PRESET_BLITZ_PRECOMPLETED,
   'Triforce Blitz': PRESET_TRIFORCE_BLITZ,
