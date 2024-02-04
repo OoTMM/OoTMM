@@ -36,14 +36,28 @@ static void LoadMmIcon(void* dst, int iconId)
         DmaCompressed(iconAddr, dst, iconSize);
 }
 
+static void LoadCustomIcon(void* dst, int itemId)
+{
+    switch (itemId)
+    {
+    case ITEM_OOT_MASK_BLAST:
+        LoadMmIcon(dst, 0x47);
+        break;
+    default:
+        LoadFile(dst, 0x7bd000 + itemId * 0x1000, 0x1000);
+        break;
+    }
+}
+
 static void LoadCustomItemIconSlot(GameState_Play* play, int slot)
 {
     void* dst;
 
     dst = (*(char**)((char*)&play->interfaceCtx + 0x138)) + 0x1000 * slot;
-    //LoadFile(dst, 0x7bd000, 0x1000);
-    LoadMmIcon(dst, 0x47);
+    LoadCustomIcon(dst, gSave.equips.buttonItems[slot]);
 }
+
+PATCH_FUNC(0x8006fb50, LoadCustomItemIconSlot);
 
 static void LoadCustomItemIcon_C_Left(void)
 {
