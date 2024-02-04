@@ -36,7 +36,7 @@ static void LoadMmIcon(void* dst, int iconId)
         DmaCompressed(iconAddr, dst, iconSize);
 }
 
-static void LoadCustomIcon(void* dst, int itemId)
+void comboItemIcon(void* dst, int itemId)
 {
     switch (itemId)
     {
@@ -54,7 +54,7 @@ static void LoadCustomItemIconSlot(GameState_Play* play, int slot)
     void* dst;
 
     dst = (*(char**)((char*)&play->interfaceCtx + 0x138)) + 0x1000 * slot;
-    LoadCustomIcon(dst, gSave.equips.buttonItems[slot]);
+    comboItemIcon(dst, gSave.equips.buttonItems[slot]);
 }
 
 PATCH_FUNC(0x8006fb50, LoadCustomItemIconSlot);

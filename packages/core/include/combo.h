@@ -178,6 +178,8 @@ void comboInit(void);
 void comboInitOverride(void);
 void comboInitData(void);
 
+void comboItemIcon(void* dst, int itemId);
+
 /* Flash */
 void comboReadWriteFlash(u32 devAddr, void* dramAddr, u32 size, s32 direction);
 
