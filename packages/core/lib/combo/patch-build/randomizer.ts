@@ -805,6 +805,8 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     BLAST_MASK_DELAY_SHORT: settings.blastMaskCooldown === 'short',
     BLAST_MASK_DELAY_LONG: settings.blastMaskCooldown === 'long',
     BLAST_MASK_DELAY_VERYLONG: settings.blastMaskCooldown === 'verylong',
+    OOT_MASK_BLAST: settings.blastMaskOot,
+    SHARED_MASK_BLAST: settings.sharedMaskBlast,
   };
 
   for (const v in exprs) {

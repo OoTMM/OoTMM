@@ -1205,6 +1205,13 @@ export const SETTINGS = [{
   description: "Adds Zora Tunic in Majora's Mask.",
   default: false
 }, {
+  key: 'blastMaskOot',
+  name: "Blast Mask (OoT)",
+  category: 'items.extensions',
+  type: 'boolean',
+  description: "Add the Blast Mask in Ocarina of Time.",
+  default: false
+}, {
   key: 'ocarinaButtonsShuffleOot',
   name: 'Ocarina Buttons Shuffle (OoT)',
   category: 'items.extensions',
@@ -1429,6 +1436,13 @@ export const SETTINGS = [{
   category: 'items.shared',
   type: 'boolean',
   default: false
+}, {
+  key: 'sharedMaskBlast',
+  name: 'Shared Blast Mask',
+  category: 'items.shared',
+  type: 'boolean',
+  default: false,
+  cond: (s: any) => s.blastMaskOot,
 }, {
   key: 'sharedWallets',
   name: 'Shared Wallets',
