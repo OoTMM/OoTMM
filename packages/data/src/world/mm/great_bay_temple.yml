@@ -52,7 +52,7 @@
   events:
     MAGIC: "true"
   exits:
-    "Great Bay Temple Baba Room": "has_mask_zora || ((has_bombchu || has(MASK_BLAST)) && (short_hook_anywhere || underwater_walking)) || hookshot_anywhere"
+    "Great Bay Temple Baba Room": "has_mask_zora || ((has_bombchu || has_mask_blast) && (short_hook_anywhere || underwater_walking)) || hookshot_anywhere"
     "Great Bay Temple Red Pipe 2": "can_use_ice_arrows || short_hook_anywhere"
     "Great Bay Temple Green Pipe 3": "short_hook_anywhere"
   locations:
@@ -74,7 +74,7 @@
   exits:
     "Great Bay Temple Compass Room": "true"
   locations:
-    "Great Bay Temple Baba Chest": "soul_enemy(SOUL_ENEMY_BIO_BABA) && (has_mask_zora || has_arrows || (has(MASK_BLAST) && short_hook_anywhere))"
+    "Great Bay Temple Baba Chest": "soul_enemy(SOUL_ENEMY_BIO_BABA) && (has_mask_zora || has_arrows || (has_mask_blast && short_hook_anywhere))"
 "Great Bay Temple Compass Room":
   dungeon: GB
   events:
@@ -197,7 +197,7 @@
     GB_PIPE_GREEN2: "(can_use_ice_arrows && (can_use_fire_arrows || trick(MM_GBT_FIRELESS))) || short_hook_anywhere || has_hover_boots"
   locations:
     "Great Bay Temple Green Pipe 3 Chest": "(can_use_ice_arrows && (can_use_fire_arrows || trick(MM_GBT_FIRELESS)) && can_hookshot) || short_hook_anywhere || has_hover_boots"
-    "Great Bay Temple SF Green Pipe 3 Barrel": "underwater_walking || ((has_bombchu || has(MASK_BLAST)) && short_hook_anywhere)"
+    "Great Bay Temple SF Green Pipe 3 Barrel": "underwater_walking || ((has_bombchu || has_mask_blast) && short_hook_anywhere)"
     "Great Bay Temple Pot Green Pipe 3 Upper 1": "(can_use_ice_arrows && (can_use_fire_arrows || trick(MM_GBT_FIRELESS))) || short_hook_anywhere || has_hover_boots"
     "Great Bay Temple Pot Green Pipe 3 Upper 2": "(can_use_ice_arrows && (can_use_fire_arrows || trick(MM_GBT_FIRELESS))) || short_hook_anywhere || has_hover_boots"
     "Great Bay Temple Pot Green Pipe 3 Lower": "true"

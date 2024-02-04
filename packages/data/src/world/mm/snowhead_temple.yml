@@ -209,7 +209,7 @@
     "Snowhead Temple Center Level 3 Iced": "has_mask_goron || can_hookshot || short_hook_anywhere || has_hover_boots" # todo hover boots trick
     "Snowhead Temple Snow Room": "small_keys_sh(3)"
     "Snowhead Temple Fire Arrow": "true"
-    "Snowhead Temple Center Level 4": "short_hook_anywhere && (can_use_fire_short_range || has(MASK_BLAST) || has_bombchu)"
+    "Snowhead Temple Center Level 4": "short_hook_anywhere && (can_use_fire_short_range || has_mask_blast || has_bombchu)"
     "Snowhead Temple Dinolfos Room": "hookshot_anywhere"
   locations:
     "Snowhead Temple Central Room Alcove": "can_use_lens"

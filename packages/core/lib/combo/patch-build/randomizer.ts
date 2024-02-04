@@ -92,6 +92,7 @@ const SHARED_ITEMS_OOT = new Map([
   ['SHARED_BOOTS_HOVER',      'OOT_BOOTS_HOVER'],
   ['SHARED_TUNIC_GORON',      'OOT_TUNIC_GORON'],
   ['SHARED_TUNIC_ZORA',       'OOT_TUNIC_ZORA'],
+  ['SHARED_MASK_BLAST',       'OOT_MASK_BLAST'],
 ]);
 
 const SHARED_ITEMS_MM = new Map([
@@ -156,6 +157,7 @@ const SHARED_ITEMS_MM = new Map([
   ['SHARED_BOOTS_HOVER',      'MM_BOOTS_HOVER'],
   ['SHARED_TUNIC_GORON',      'MM_TUNIC_GORON'],
   ['SHARED_TUNIC_ZORA',       'MM_TUNIC_ZORA'],
+  ['SHARED_MASK_BLAST',       'MM_MASK_BLAST'],
 ]);
 
 const SHARED_ITEMS = {
