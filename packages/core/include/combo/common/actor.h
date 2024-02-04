@@ -1050,19 +1050,27 @@ typedef struct Actor
     PosRot      home;
     u16         variable;
     s8          objTableIndex;
-    char        unk3[5];
-    Vec3f       position;
-    Vec3s       speedRot;
-    u16         unk_36;
-#if defined(GAME_MM)
-    char         unk_mm0[4];
+    s8          targetMode;
+
+#if defined(GAME_OOT)
+    u16        sfx;
+    Vec3f      position;
+    Vec3s      speedRot;
+    PosRot     focus;
 #endif
-    Vec3f       pos3;
-    Vec3s       rot1;
+
 #if defined(GAME_MM)
-    char        unk_mm1[4];
+    s16        halfDaysBits;
+    Vec3f      position;
+    Vec3s      speedRot;
+    char       padding[2];
+    s8         csId;
+    u8         audioFlags;
+    PosRot     focus;
+    u16        sfx;
 #endif
-    char        unk_4a[0x06];
+
+    float       targetArrowOffset;
     Vec3f       scale;
     Vec3f       velocity;
     float       speedXZ;
