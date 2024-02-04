@@ -294,3 +294,10 @@ PATCH_END
 PATCH_START 0x8082f160
 .int 0
 PATCH_END
+
+/* Use our item name hook */
+PATCH_START 0x80822e6c
+  move a1,v1
+  nop
+  jal KaleidoScope_LoadItemName
+PATCH_END

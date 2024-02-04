@@ -1568,3 +1568,31 @@ void KaleidoScope_DrawItemHook(GfxContext* gfx, int slotId, int sizeX, int sizeY
     if (icon)
         KaleidoScope_DrawItem(gfx, icon, sizeX, sizeY, unk);
 }
+
+#define ITEM_OFFSET 123
+
+void KaleidoScope_LoadItemName(void* dst, s16 id)
+{
+    s16 itemId;
+
+    itemId = id - 123;
+    gSave.playerData.rupees = itemId;
+
+    if (itemId == ITEM_NONE)
+    {
+        memset(dst, 0, 0x400);
+    }
+    else if (itemId == ITEM_OOT_MASK_BLAST)
+    {
+        comboLoadMmIcon(dst, 0xa27660, ITEM_MM_MASK_BLAST);
+    }
+    else if (itemId == ITEM_OOT_KEATON_MASK)
+    {
+        /* Fixes 1.0 spelling mistake */
+        comboLoadMmIcon(dst, 0xa27660, ITEM_MM_MASK_KEATON);
+    }
+    else
+    {
+        LoadFile(dst, 0x880000 + 0x400 * id, 0x400);
+    }
+}

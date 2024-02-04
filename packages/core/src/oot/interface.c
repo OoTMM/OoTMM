@@ -23,17 +23,22 @@ static void lookupMmIcon(u32 pbase, int index, u32* outAddr, u32* outSize)
     }
 }
 
-static void LoadMmIcon(void* dst, int iconId)
+void comboLoadMmIcon(void* dst, u32 iconBank, int iconId)
 {
     DmaEntry entry;
     u32 iconAddr;
     u32 iconSize;
 
-    if (!comboDmaLookup(&entry, 0xa36c10 | VROM_FOREIGN_OFFSET))
+    if (!comboDmaLookup(&entry, iconBank | VROM_FOREIGN_OFFSET))
         return;
     lookupMmIcon(entry.pstart, iconId, &iconAddr, &iconSize);
     if (iconSize)
         DmaCompressed(iconAddr, dst, iconSize);
+}
+
+static void LoadMmItemIcon(void* dst, int iconId)
+{
+    comboLoadMmIcon(dst, 0xa36c10, iconId);
 }
 
 void comboItemIcon(void* dst, int itemId)
@@ -41,7 +46,7 @@ void comboItemIcon(void* dst, int itemId)
     switch (itemId)
     {
     case ITEM_OOT_MASK_BLAST:
-        LoadMmIcon(dst, 0x47);
+        LoadMmItemIcon(dst, 0x47);
         break;
     default:
         LoadFile(dst, 0x7bd000 + itemId * 0x1000, 0x1000);
