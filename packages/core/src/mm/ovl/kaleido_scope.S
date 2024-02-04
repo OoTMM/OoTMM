@@ -53,11 +53,10 @@ PATCH_END
 ==================================================================================================
 */
 
-PATCH_START 0x80824738 + 0xe0
-  jal   KaleidoScope_LoadNamedItemCustom
+PATCH_START 0x80824818
+  jal KaleidoScope_LoadNamedItemCustom
 PATCH_END
 
-// Reloc for above line
 PATCH_START 0x808160A0 + 0x1703c
 .int 0
 PATCH_END

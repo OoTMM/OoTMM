@@ -112,6 +112,10 @@ static void debugCheat(GameState_Play* play)
 
         SetEventChk(EV_OOT_CHK_EPONA);
 
+        gSave.equips.buttonItems[1] = ITEM_OOT_MASK_BLAST;
+        gSave.equips.cButtonSlots[0] = ITS_OOT_TRADE_CHILD;
+
+
 #if defined(DEBUG_AGE)
         gSave.age = DEBUG_AGE;
 #endif

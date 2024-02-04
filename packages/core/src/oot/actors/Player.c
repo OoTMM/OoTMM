@@ -36,7 +36,7 @@ static void DrawExtendedMaskBlast(GameState_Play* play, Actor_Player* link)
     if (!obj)
         return;
     OPEN_DISPS(play->gs.gfx);
-    gSPMatrix(POLY_OPA_DISP++, 0x0D0001C0, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_OPA_DISP++, 0x0d0001c0, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPSegment(POLY_OPA_DISP++, 0x09, kDListEmpty);
     gSPSegment(POLY_OPA_DISP++, 0x0a, obj);
     gDPSetEnvColor(POLY_OPA_DISP++, 0, 0, 0, 0xff);
