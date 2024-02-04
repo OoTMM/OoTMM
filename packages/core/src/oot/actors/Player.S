@@ -164,3 +164,12 @@ PATCH_END
 PATCH_START 0x80831e80
   li v0,0
 PATCH_END
+
+/* Use our wrapper */
+PATCH_START 0x808323a4
+  jal Player_ProcessItemButtonsWrapper
+PATCH_END
+
+PATCH_START 0x80853554
+.int 0
+PATCH_END

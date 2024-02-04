@@ -137,3 +137,33 @@ void Player_TalkDisplayTextBox(GameState_Play* play, s16 textId, Actor* actor)
 
 PATCH_CALL(0x80838464, Player_TalkDisplayTextBox);
 PATCH_CALL(0x80055d50, Player_TalkDisplayTextBox);
+
+static void Player_BlastMask(GameState_Play* play, Actor_Player* link)
+{
+
+}
+
+void Player_ProcessItemButtonsWrapper(Actor_Player* link, GameState_Play* play)
+{
+    void (*Player_ProcessItemButtons)(Actor_Player* link, GameState_Play* play);
+    ControllerInput* input;
+    int bPress;
+
+    input = *(ControllerInput**)(OverlayAddr(0x80856734));
+    Player_ProcessItemButtons = OverlayAddr(0x80831e64);
+    bPress = !!(input->pressed.buttons & B_BUTTON);
+
+    /* Handle masks that have B actions */
+    if (bPress && !(link->state & (PLAYER_ACTOR_STATE_HOLD_ITEM | PLAYER_ACTOR_STATE_CUTSCENE_FROZEN)) && !Player_UsingItem(link))
+    {
+        switch (link->mask)
+        {
+        case 9:
+            Player_BlastMask(play, link);
+            input->pressed.buttons &= ~B_BUTTON;
+            break;
+        }
+    }
+
+    Player_ProcessItemButtons(link, play);
+}
