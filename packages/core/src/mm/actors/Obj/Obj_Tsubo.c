@@ -99,7 +99,7 @@ void ObjTsubo_SpawnShuffledDrop(Actor_ObjTsubo* this, GameState_Play* play)
 
     if (ObjTsubo_IsShuffled(this))
     {
-        EnItem00_DropCustom(play, &this->base.position, &this->xflag);
+        EnItem00_DropCustom(play, &this->base.world.pos, &this->xflag);
         return;
     }
 
@@ -114,7 +114,7 @@ void ObjTsubo_SpawnShuffledDropFlexible(Actor_ObjTsubo* this, GameState_Play* pl
 
     if (ObjTsubo_IsShuffled(this))
     {
-        EnItem00_DropCustom(play, &this->base.position, &this->xflag);
+        EnItem00_DropCustom(play, &this->base.world.pos, &this->xflag);
         return;
     }
 

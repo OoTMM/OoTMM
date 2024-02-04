@@ -1054,16 +1054,13 @@ typedef struct Actor
 
 #if defined(GAME_OOT)
     u16        sfx;
-    Vec3f      position;
-    Vec3s      speedRot;
+    PosRot     world;
     PosRot     focus;
 #endif
 
 #if defined(GAME_MM)
     s16        halfDaysBits;
-    Vec3f      position;
-    Vec3s      speedRot;
-    char       padding[2];
+    PosRot     world;
     s8         csId;
     u8         audioFlags;
     PosRot     focus;

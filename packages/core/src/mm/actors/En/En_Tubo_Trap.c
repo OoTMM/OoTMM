@@ -3,5 +3,5 @@
 void EnTuboTrap_SpawnShuffledDrop(Actor_EnTuboTrap* this, GameState_Play* play)
 {
     if (EnTuboTrap_IsShuffled(this))
-        EnItem00_DropCustom(play, &this->base.position, &this->xflag);
+        EnItem00_DropCustom(play, &this->base.world.pos, &this->xflag);
 }

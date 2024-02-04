@@ -45,11 +45,11 @@ static int EnCow_GetCowID(Actor* cow, GameState_Play* play)
     case SCE_OOT_LINK_HOUSE:
         return 0;
     case SCE_OOT_GROTTOS:
-        return cow->position.x > 3000.f ? 1 : 7;
+        return cow->world.pos.x > 3000.f ? 1 : 7;
     case SCE_OOT_STABLE:
-        return cow->position.x < -50.f ? 2 : 3;
+        return cow->world.pos.x < -50.f ? 2 : 3;
     case SCE_OOT_RANCH_HOUSE_SILO:
-        return cow->position.z > -100.f ? 4 : 5;
+        return cow->world.pos.z > -100.f ? 4 : 5;
     case SCE_OOT_IMPA_HOUSE:
         return 6;
     case SCE_OOT_GERUDO_VALLEY:
@@ -73,11 +73,11 @@ static int EnCow_GetCowID(Actor* cow, GameState_Play* play)
     switch (sceneId)
     {
     case SCE_MM_TERMINA_FIELD:
-        return cow->position.z > 930.f ? 0x13 : 0x14;
+        return cow->world.pos.z > 930.f ? 0x13 : 0x14;
     case SCE_MM_GREAT_BAY_COAST:
-        return cow->position.z > 930.f ? 0x15 : 0x16;
+        return cow->world.pos.z > 930.f ? 0x15 : 0x16;
     case SCE_MM_RANCH_HOUSE_BARN:
-        return cow->position.x < -100.f ? 0x10 : cow->position.z < -100.f ? 0x12 : 0x11;
+        return cow->world.pos.x < -100.f ? 0x10 : cow->world.pos.z < -100.f ? 0x12 : 0x11;
     case SCE_MM_BENEATH_THE_WELL:
         return 0x17;
     }

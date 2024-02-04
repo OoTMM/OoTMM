@@ -16,7 +16,7 @@ void ObjGrassCarry_SpawnDropsWrapper(Actor_ObjGrassCarry* this)
         /* Check if the reward was already collected */
         if (!comboXflagsGet(&xflag))
         {
-            EnItem00_DropCustom(gPlay, &this->base.position, &xflag);
+            EnItem00_DropCustom(gPlay, &this->base.world.pos, &xflag);
             return;
         }
     }
@@ -24,7 +24,7 @@ void ObjGrassCarry_SpawnDropsWrapper(Actor_ObjGrassCarry* this)
     /* Run the default function */
     void (*ObjGrassCarry_SpawnDrops)(Vec3f*, u16, GameState_Play*);
     ObjGrassCarry_SpawnDrops = actorAddr(AC_OBJ_GRASS_CARRY, 0x809aaf9c);
-    ObjGrassCarry_SpawnDrops(&this->base.position, this->drop, gPlay);
+    ObjGrassCarry_SpawnDrops(&this->base.world.pos, this->drop, gPlay);
 }
 
 static void ObjGrassCarry_Draw(Actor_ObjGrassCarry* this, GameState_Play* play)

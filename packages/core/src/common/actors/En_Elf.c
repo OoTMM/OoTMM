@@ -221,34 +221,8 @@ void EnElf_SpawnFairyGroupMember(Actor_EnElf* spawner, GameState_Play* play, s16
     }
 }
 
-static void SpawnIceSmoke(Actor* actor, GameState_Play* play) {
-    Vec3f pos;
-    Vec3f velocity = { 0, 1.0f, 0 };
-    Vec3f accel = { 0, 0, 0 };
-    f32 randomf;
-
-    if (RandFloat() < 0.3f) {
-        randomf = 2.0f * RandFloat() - 1.0f;
-        pos = actor->position;
-        pos.x += randomf * 20.0f * Math_SinS(actor->speedRot.y + 0x4000);
-        pos.z += randomf * 20.0f * Math_CosS(actor->speedRot.y + 0x4000);
-
-        randomf = 2.0f * RandFloat() - 1.0f;
-        velocity.x = randomf * 1.6f * Math_SinS(actor->speedRot.y);
-        velocity.y = 1.8f;
-        velocity.z = randomf * 1.6f * Math_CosS(actor->speedRot.y);
-        EffectSsIceSmoke_Spawn(play, &pos, &velocity, &accel, 150);
-    }
-}
-
 void EnElf_PlayItemSfx(Actor_EnElf* this, GameState_Play* play)
 {
-    if (this->extendedGiDraw == GI_OOT_ICE_TRAP) // TODO handle MM too
-    {
-        PlayLoopingSfxAtActor(&this->base, EN_ELF_SFX_ICE_TRAP);
-        SpawnIceSmoke(&this->base, play);
-        return;
-    }
     Actor_PlaySfx(&this->base, EN_ELF_SFX_HEAL);
 }
 
