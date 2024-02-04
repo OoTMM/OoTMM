@@ -10,7 +10,6 @@ import { Location, locationData, makeLocation } from './locations';
 import { Region, makeRegion } from './regions';
 import { CountMap, countMapArray } from '../util';
 import { ItemGroups, ItemHelpers, Items, PlayerItems, PlayerItem, itemByID, makePlayerItem } from '../items';
-import { isDungeonStrayFairy } from '../items/helpers';
 import { isLocationFullyShuffled } from './locations';
 
 const FIXED_HINTS_LOCATIONS = [
@@ -815,7 +814,7 @@ export class LogicPassHints {
     /* Compute item hints */
     for (let world = 0; world < this.state.settings.players; ++world) {
       const locRegDungeonRewards = [...ItemGroups.DUNGEON_REWARDS].map(item => this.findItem(makePlayerItem(item, world)));
-      const locRegLightArrow = this.findItem(makePlayerItem(Items.OOT_ARROW_LIGHT, world)) || this.findItem(makePlayerItem(Items.SHARED_ARROW_LIGHT, world));
+      const locRegLightArrow = this.findItem([makePlayerItem(Items.OOT_ARROW_LIGHT, world), makePlayerItem(Items.SHARED_ARROW_LIGHT, world)]);
       const locRegOathToOrder = this.findItem(makePlayerItem(Items.MM_SONG_ORDER, world));
       let locRegGanonBossKey: LocRegion;
       if (this.state.settings.ganonBossKey === 'anywhere') {
