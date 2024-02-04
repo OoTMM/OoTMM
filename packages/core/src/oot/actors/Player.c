@@ -181,7 +181,7 @@ static void Player_BlastMask(GameState_Play* play, Actor_Player* link)
 
     if (gBlastMaskDelayAcc)
         return;
-    bomb = SpawnActor(&play->actorCtx, play, AC_EN_BOM, link->base.world.pos.x, link->base.world.pos.y, link->base.world.pos.z, 0, 0, 0, 0);
+    bomb = SpawnActor(&play->actorCtx, play, AC_EN_BOM, link->base.focus.pos.x, link->base.focus.pos.y, link->base.focus.pos.z, 0, 0, 0, 0);
     if (!bomb)
         return;
     bombTimer = (void*)((char*)bomb + 0x1e8);
