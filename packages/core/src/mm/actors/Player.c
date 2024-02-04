@@ -1244,3 +1244,26 @@ s32 Player_CanSurface(Actor_Player* player)
     return player->state & 0x08000000 // PLAYER_STATE1_SWIM
         && player->transformation == MM_PLAYER_FORM_ZORA;
 }
+
+s32 Player_GetItemCamMode(Actor_Player* this)
+{
+    if (this->transformation == MM_PLAYER_FORM_HUMAN)
+    {
+        if (this->heldItemAction == 0xD && (this->state & 0x8000000)) // PLAYER_IA_HOOKSHOT // PLAYER_STATE1_8000000 // Swimming
+        {
+            return CAM_MODE_BOWARROW;
+        }
+        else
+        {
+            return CAM_MODE_SLINGSHOT;
+        }
+    }
+    else if (this->transformation == MM_PLAYER_FORM_DEKU)
+    {
+        return CAM_MODE_DEKUSHOOT;
+    }
+    else
+    {
+        return CAM_MODE_BOWARROW;
+    }
+}

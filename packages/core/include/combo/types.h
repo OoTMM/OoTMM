@@ -1102,4 +1102,38 @@ typedef struct CollisionCheckInfo {
 #define BGCHECKFLAG_CRUSHED (1 << 8) // Crushed between a floor and ceiling (triggers a void for player)
 #define BGCHECKFLAG_PLAYER_WALL_INTERACT (1 << 9) // Only set/used by player, related to interacting with walls
 
+typedef enum {
+    /* 0x00 */ CAM_MODE_NORMAL, // "NORMAL"
+    /* 0x01 */ CAM_MODE_JUMP, // "JUMP"
+    /* 0x02 */ CAM_MODE_GORONDASH, // "GORONDASH"
+    /* 0x03 */ CAM_MODE_DEKUSHOOT, // "NUTSSHOT"
+    /* 0x04 */ CAM_MODE_BOWARROWZ, // "BOWARROWZ"
+    /* 0x05 */ CAM_MODE_DEKUFLY, // "NUTSFLY"
+    /* 0x06 */ CAM_MODE_FIRSTPERSON, // "SUBJECT"
+    /* 0x07 */ CAM_MODE_FOLLOWBOOMERANG, // "BOOKEEPON"
+    /* 0x08 */ CAM_MODE_ZORAFIN, // "ZORAFIN"
+    /* 0x09 */ CAM_MODE_FOLLOWTARGET, // "KEEPON"
+    /* 0x0A */ CAM_MODE_TARGET, // "PARALLEL"
+    /* 0x0B */ CAM_MODE_TALK, // "TALK"
+    /* 0x0C */ CAM_MODE_SLINGSHOT, // "PACHINCO"
+    /* 0x0D */ CAM_MODE_BOWARROW, // "BOWARROW"
+    /* 0x0E */ CAM_MODE_BATTLE, // "BATTLE"
+    /* 0x0F */ CAM_MODE_DEKUHIDE, // "NUTSHIDE"
+    /* 0x10 */ CAM_MODE_STILL, // "STILL"
+    /* 0x11 */ CAM_MODE_CHARGE, // "CHARGE"
+    /* 0x12 */ CAM_MODE_CLIMB, // "CLIMB"
+    /* 0x13 */ CAM_MODE_CLIMBZ, // "CLIMBZ"
+    /* 0x14 */ CAM_MODE_HOOKSHOT, // "FOOKSHOT"
+    /* 0x15 */ CAM_MODE_FREEFALL, // "FREEFALL"
+    /* 0x16 */ CAM_MODE_HANG, // "HANG"
+    /* 0x17 */ CAM_MODE_HANGZ, // "HANGZ
+    /* 0x18 */ CAM_MODE_PUSHPULL, // "PUSHPULL"
+    /* 0x19 */ CAM_MODE_DEKUFLYZ, // "CNUTSFLYZ"
+    /* 0x1A */ CAM_MODE_GORONJUMP, // "GORONJUMP"
+    /* 0x1B */ CAM_MODE_BOOMERANG, // "BOOMERANG"
+    /* 0x1C */ CAM_MODE_CHARGEZ, // "CHARGEZ"
+    /* 0x1D */ CAM_MODE_ZORAFINZ, // "ZORAFINZ"
+    /* 0x1E */ CAM_MODE_MAX
+} CameraModeType;
+
 #endif /* TYPES_H */
