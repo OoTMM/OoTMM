@@ -43,22 +43,43 @@ PATCH_CALL(0x8083212c, comboPlayerUseItem);
 static void DrawExtendedMaskBlast(GameState_Play* play, Actor_Player* link)
 {
     void* obj;
+    u8 opacity;
 
     obj = comboGetObject(0x01dd | MASK_FOREIGN_OBJECT);
     if (!obj)
         return;
+    if (gBlastMaskDelayAcc > 0x11)
+        opacity = 0;
+    else
+        opacity = 0xff - (gBlastMaskDelayAcc * 0x0f);
+
     OPEN_DISPS(play->gs.gfx);
     gSPMatrix(POLY_OPA_DISP++, 0x0d0001c0, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPSegment(POLY_OPA_DISP++, 0x09, kDListEmpty);
     gSPSegment(POLY_OPA_DISP++, 0x0a, obj);
-    gDPSetEnvColor(POLY_OPA_DISP++, 0, 0, 0, 0xff);
-    gSPDisplayList(POLY_OPA_DISP++, 0x0a0005c0);
+
+    if (opacity)
+    {
+        gDPSetEnvColor(POLY_OPA_DISP++, 0, 0, 0, opacity);
+        gSPDisplayList(POLY_OPA_DISP++, 0x0a0005c0);
+    }
+    else
+    {
+        gSPSegment(POLY_OPA_DISP++, 0x08, kDListEmpty);
+        gDPSetEnvColor(POLY_OPA_DISP++, 0, 0, 0, 0xff);
+        gSPDisplayList(POLY_OPA_DISP++, 0x0a000440);
+    }
     CLOSE_DISPS();
 }
 
 static void DrawExtendedMask(GameState_Play* play, Actor_Player* link)
 {
-    DrawExtendedMaskBlast(play, link);
+    switch (link->mask)
+    {
+    case 9:
+        DrawExtendedMaskBlast(play, link);
+        break;
+    }
 }
 
 static void DrawLinkWrapper(GameState_Play* play, void** skeleton, Vec3s* jointTable, s32 dListCount, s32 lod, s32 tunic, s32 boots, s32 face, void* overrideLimbDraw, void* postLimbDraw, void* data)
