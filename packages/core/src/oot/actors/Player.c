@@ -140,7 +140,14 @@ PATCH_CALL(0x80055d50, Player_TalkDisplayTextBox);
 
 static void Player_BlastMask(GameState_Play* play, Actor_Player* link)
 {
+    Actor* bomb;
+    s16* bombTimer;
 
+    bomb = SpawnActor(&play->actorCtx, play, AC_EN_BOM, link->base.position.x, link->base.position.y, link->base.position.z, 0, 0, 0, 0);
+    if (!bomb)
+        return;
+    bombTimer = (void*)((char*)bomb + 0x1e8);
+    *bombTimer = 2;
 }
 
 void Player_ProcessItemButtonsWrapper(Actor_Player* link, GameState_Play* play)
