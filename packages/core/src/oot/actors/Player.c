@@ -55,8 +55,8 @@ static void DrawLinkWrapper(GameState_Play* play, void** skeleton, Vec3s* jointT
 
     link = GET_LINK(play);
     DrawLink(play, skeleton, jointTable, dListCount, lod, tunic, boots, face, overrideLimbDraw, postLimbDraw, data);
-    //if (data == (void*)0x8007aa94 && link->mask >= 9)
-    //if (link->mask >= 9)
+    //if (data == (void*)0x8007aa94)
+    if (link->mask >= 9)
         DrawExtendedMask(play, link);
 }
 

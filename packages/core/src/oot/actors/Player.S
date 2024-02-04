@@ -159,3 +159,8 @@ PATCH_START 0x808482b8
   jal CheckMaskRange
    nop
 PATCH_END
+
+/* Disable a check for masks */
+PATCH_START 0x80831e80
+  li v0,0
+PATCH_END
