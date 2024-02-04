@@ -184,6 +184,10 @@ void comboLoadMmIcon(void* dst, u32 iconBank, int iconId);
 /* Flash */
 void comboReadWriteFlash(u32 devAddr, void* dramAddr, u32 size, s32 direction);
 
+#if defined(GAME_OOT)
+extern u16 gBlastMaskDelayAcc;
+#endif
+
 /* Save */
 #define SF_OWL          0x01
 #define SF_NOCOMMIT     0x02

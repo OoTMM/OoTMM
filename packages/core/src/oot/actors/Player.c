@@ -76,6 +76,9 @@ PATCH_CALL(0x8084829c, DrawLinkWrapper);
 
 void Player_UpdateWrapper(Actor_Player* this, GameState_Play* play)
 {
+    if (gBlastMaskDelayAcc)
+        gBlastMaskDelayAcc--;
+
     ArrowCycle_Handle(this, play);
     Player_Update(this, play);
     comboDpadUpdate(play);
@@ -138,16 +141,31 @@ void Player_TalkDisplayTextBox(GameState_Play* play, s16 textId, Actor* actor)
 PATCH_CALL(0x80838464, Player_TalkDisplayTextBox);
 PATCH_CALL(0x80055d50, Player_TalkDisplayTextBox);
 
+u16 gBlastMaskDelayAcc;
+
+static u16 blastMaskDelay(void)
+{
+    if (comboConfig(CFG_BLAST_MASK_DELAY_INSTANT)) return 0x001;
+    if (comboConfig(CFG_BLAST_MASK_DELAY_VERYSHORT)) return 0x020;
+    if (comboConfig(CFG_BLAST_MASK_DELAY_SHORT)) return 0x80;
+    if (comboConfig(CFG_BLAST_MASK_DELAY_LONG)) return 0x200;
+    if (comboConfig(CFG_BLAST_MASK_DELAY_VERYLONG)) return 0x400;
+    return 0x136;
+}
+
 static void Player_BlastMask(GameState_Play* play, Actor_Player* link)
 {
     Actor* bomb;
     s16* bombTimer;
 
+    if (gBlastMaskDelayAcc)
+        return;
     bomb = SpawnActor(&play->actorCtx, play, AC_EN_BOM, link->base.position.x, link->base.position.y, link->base.position.z, 0, 0, 0, 0);
     if (!bomb)
         return;
     bombTimer = (void*)((char*)bomb + 0x1e8);
     *bombTimer = 2;
+    gBlastMaskDelayAcc = blastMaskDelay();
 }
 
 void Player_ProcessItemButtonsWrapper(Actor_Player* link, GameState_Play* play)
