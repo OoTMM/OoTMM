@@ -1,23 +1,24 @@
+import { PartialDeep } from 'type-fest';
 import { Settings, DEFAULT_SETTINGS, makeSettings } from './settings';
 
 export type Presets = { [k: string]: Settings };
 
 const PRESET_DEFAULT = DEFAULT_SETTINGS;
 
-const PRESET_BLITZ = makeSettings({
+const BLITZ_BASE = {
   tingleShuffle: 'starting',
   openMaskShop: true,
+  hintImportance: true,
   mapCompassShuffle: 'starting',
   smallKeyShuffleMm: 'removed',
   smallKeyShuffleHideout: 'vanilla',
   bossKeyShuffleOot: 'ownDungeon',
   bossKeyShuffleMm: 'ownDungeon',
-  strayFairyChestShuffle: 'starting',
-  strayFairyOtherShuffle: 'vanilla',
-  rainbowBridge: 'custom',
   shuffleMasterSword: false,
   shuffleGerudoCard: false,
   shuffleMerchantsMm: false,
+  startingAge: 'random',
+  ageChange: 'always',
   doorOfTime: 'open',
   dekuTree: 'closed',
   kakarikoGate: 'open',
@@ -27,11 +28,13 @@ const PRESET_BLITZ = makeSettings({
   crossWarpOot: true,
   crossWarpMm: 'full',
   fastBunnyHood: true,
+  bottleContentShuffle: true,
   blueFireArrows: true,
-  startingAge: 'random',
-  defaultHoldTarget: true,
+  sunlightArrows: true,
   progressiveGoronLullaby: 'single',
   freeScarecrowOot: true,
+  lenientSpikes: false,
+  shortHookshotMm: true,
   bombchuBagMm: true,
   bombchuBagOot: true,
   spellFireMm: true,
@@ -53,29 +56,67 @@ const PRESET_BLITZ = makeSettings({
   sharedMaskTruth: true,
   sharedWallets: true,
   sharedHealth: true,
+  sharedShields: true,
   sharedBombchuBags: true,
   sharedSpellFire: true,
   sharedSpellWind: true,
   sharedSpellLove: true,
   noPlandoHints: true,
-  hintImportance: true,
+  bootsIronMm: true,
+  bootsHoverMm: true,
+  tunicGoronMm: true,
+  tunicZoraMm: true,
+  sharedBootsIron: true,
+  sharedBootsHover: true,
+  sharedTunicGoron: true,
+  sharedTunicZora: true,
+  startingItems: {
+    OOT_NUTS_10: 2,
+    OOT_SHIELD_DEKU: 1,
+    OOT_STICK: 10,
+    MM_SONG_EPONA: 1,
+    SHARED_SHIELD_HYLIAN: 1,
+    MM_OCARINA: 1,
+    OOT_OCARINA: 1,
+    MM_SWORD: 1,
+    MM_SONG_SOARING: 1
+  },
   tricks: [
-    'MM_LENS',
-    'MM_NO_SEAHORSE',
-    'MM_ONE_MASK_STONE_TOWER',
-    'MM_PALACE_BEAN_SKIP',
-    'OOT_DC_JUMP',
-    'OOT_DEAD_HAND_STICKS',
-    'OOT_FOREST_HOOK',
-    'OOT_HAMMER_WALLS',
-    'OOT_HIDDEN_GROTTOS',
-    'OOT_LENS',
-    'OOT_MAN_ON_ROOF',
-    'OOT_NIGHT_GS',
-    'OOT_TUNICS',
-    'OOT_VOLCANO_HOVERS',
-    'OOT_WINDMILL_HP_NOTHING'
+    "MM_LENS",
+    "MM_NO_SEAHORSE",
+    "MM_ONE_MASK_STONE_TOWER",
+    "MM_PALACE_BEAN_SKIP",
+    "MM_SOUTHERN_SWAMP_SCRUB_HP_GORON",
+    "MM_ZORA_HALL_SCRUB_HP_NO_DEKU",
+    "OOT_DC_JUMP",
+    "OOT_DEAD_HAND_STICKS",
+    "OOT_FOREST_HOOK",
+    "OOT_HAMMER_WALLS",
+    "OOT_HIDDEN_GROTTOS",
+    "OOT_LENS",
+    "OOT_MAN_ON_ROOF",
+    "OOT_NIGHT_GS",
+    "OOT_TUNICS",
+    "OOT_VOLCANO_HOVERS",
+    "OOT_WINDMILL_HP_NOTHING",
   ],
+  plando: {
+    locations: {
+      'OOT Zora River Bean Seller': 'OOT_MAGIC_BEAN',
+      'OOT Zelda\'s Letter': 'OOT_OCARINA',
+      'OOT Zelda\'s Song': 'OOT_SONG_TP_LIGHT',
+      'MM Initial Song of Healing': 'MM_SONG_TIME'
+    }
+  },
+} as const;
+
+const makeBlitz = (input: PartialDeep<Settings>): Settings => {
+  const x = Object.assign({}, BLITZ_BASE, input);
+  return makeSettings(x);
+};
+
+const PRESET_BLITZ = makeBlitz({
+  rainbowBridge: 'custom',
   specialConds: {
     BRIDGE: {
       count: 5,
@@ -87,17 +128,6 @@ const PRESET_BLITZ = makeSettings({
       stones: true,
       remains: true
     }
-  },
-  startingItems: {
-    OOT_NUTS_10: 2,
-    OOT_SHIELD_DEKU: 1,
-    OOT_STICK: 10,
-    MM_SONG_EPONA: 1,
-    MM_SHIELD_HERO: 1,
-    MM_OCARINA: 1,
-    OOT_OCARINA: 1,
-    MM_SWORD: 1,
-    MM_SONG_SOARING: 1
   },
   junkLocations: [
     'MM Deku Playground Reward 2',
@@ -122,14 +152,6 @@ const PRESET_BLITZ = makeSettings({
     'OOT Skulltula House 40 Tokens',
     'OOT Skulltula House 50 Tokens'
   ],
-  plando: {
-    locations: {
-      'OOT Zora River Bean Seller': 'OOT_MAGIC_BEAN',
-      'OOT Zelda\'s Letter': 'OOT_OCARINA',
-      'OOT Zelda\'s Song': 'OOT_SONG_TP_LIGHT',
-      'MM Initial Song of Healing': 'MM_SONG_TIME'
-    }
-  },
   hints: [
     { type: 'foolish', amount: 8, extra: 1 },
     { type: 'always', amount: 'max', extra: 1 },
@@ -140,76 +162,13 @@ const PRESET_BLITZ = makeSettings({
   ]
 });
 
-const PRESET_BLITZ_PRECOMPLETED = makeSettings({
-  hintImportance: true,
-  openMaskShop: true,
-  tingleShuffle: "starting",
-  mapCompassShuffle: "starting",
-  smallKeyShuffleMm: "removed",
-  smallKeyShuffleHideout: "vanilla",
-  strayFairyChestShuffle: "starting",
+const PRESET_BLITZ_PRECOMPLETED = makeBlitz({
   rainbowBridge: 'custom',
-  shuffleMasterSword: false,
-  shuffleGerudoCard: false,
-  startingAge: "random",
-  doorOfTime: "open",
-  ageChange: "always",
-  dekuTree: "closed",
-  kakarikoGate: "open",
-  gerudoFortress: "single",
-  skipZelda: true,
-  bossWarpPads: "remains",
-  freeScarecrowOot: true,
   preCompletedDungeons: true,
   preCompletedDungeonsMajor: 6,
   preCompletedDungeonsStones: 2,
   preCompletedDungeonsMedallions: 2,
   preCompletedDungeonsRemains: 2,
-  crossWarpOot: true,
-  crossWarpMm: "full",
-  progressiveGoronLullaby: "single",
-  bottleContentShuffle: true,
-  blueFireArrows: true,
-  sunlightArrows: true,
-  shortHookshotMm: true,
-  lenientSpikes: false,
-  bombchuBagOot: true,
-  bombchuBagMm: true,
-  spellFireMm: true,
-  spellWindMm: true,
-  spellLoveMm: true,
-  sharedBows: true,
-  sharedBombBags: true,
-  sharedMagic: true,
-  sharedMagicArrowFire: true,
-  sharedMagicArrowIce: true,
-  sharedMagicArrowLight: true,
-  sharedSongStorms: true,
-  sharedHookshot: true,
-  sharedLens: true,
-  sharedMaskGoron: true,
-  sharedMaskZora: true,
-  sharedMaskBunny: true,
-  sharedMaskKeaton: true,
-  sharedMaskTruth: true,
-  sharedWallets: true,
-  sharedHealth: true,
-  sharedShields: true,
-  sharedBombchuBags: true,
-  sharedSpellFire: true,
-  sharedSpellWind: true,
-  sharedSpellLove: true,
-  startingItems: {
-    OOT_NUTS_10: 2,
-    OOT_SHIELD_DEKU: 1,
-    OOT_STICK: 10,
-    MM_SONG_EPONA: 1,
-    SHARED_SHIELD_HYLIAN: 1,
-    MM_OCARINA: 1,
-    OOT_OCARINA: 1,
-    MM_SWORD: 1,
-    MM_SONG_SOARING: 1
-  },
   junkLocations: [
     "MM Beneath The Graveyard Dampe Chest",
     "MM Deku Playground Reward 2",
@@ -229,47 +188,20 @@ const PRESET_BLITZ_PRECOMPLETED = makeSettings({
     "MM Waterfall Rapids Beaver Race 2",
     "MM Woodfall Great Fairy",
     "OOT Skulltula House 40 Tokens",
-    "OOT Skulltula House 50 Tokens"
-  ],
-  tricks: [
-    "MM_LENS",
-    "MM_NO_SEAHORSE",
-    "MM_ONE_MASK_STONE_TOWER",
-    "MM_PALACE_BEAN_SKIP",
-    "MM_SOUTHERN_SWAMP_SCRUB_HP_GORON",
-    "MM_ZORA_HALL_SCRUB_HP_NO_DEKU",
-    "OOT_DC_JUMP",
-    "OOT_DEAD_HAND_STICKS",
-    "OOT_FOREST_HOOK",
-    "OOT_HAMMER_WALLS",
-    "OOT_HIDDEN_GROTTOS",
-    "OOT_LENS",
-    "OOT_MAN_ON_ROOF",
-    "OOT_NIGHT_GS",
-    "OOT_TUNICS",
-    "OOT_VOLCANO_HOVERS",
-    "OOT_WINDMILL_HP_NOTHING"
+    "OOT Skulltula House 50 Tokens",
   ],
   specialConds: {
     BRIDGE: {
-      "count": 9,
-      "stones": true,
-      "medallions": true,
-      "remains": false
+      count: 9,
+      stones: true,
+      medallions: true,
+      remains: false,
     },
     MOON: {
-      "count": 7,
-      "stones": true,
-      "medallions": false,
-      "remains": true
-    }
-  },
-  plando: {
-    locations: {
-      "OOT Zora River Bean Seller": "OOT_MAGIC_BEAN",
-      "OOT Zelda's Letter": "OOT_OCARINA",
-      "OOT Zelda's Song": "OOT_SONG_TP_LIGHT",
-      "MM Initial Song of Healing": "MM_SONG_TIME"
+      count: 7,
+      stones: true,
+      medallions: false,
+      remains: true,
     }
   },
   hints: [
@@ -285,77 +217,15 @@ const PRESET_BLITZ_PRECOMPLETED = makeSettings({
   ]
 });
 
-const PRESET_TRIFORCE_BLITZ = makeSettings({
+const PRESET_TRIFORCE_BLITZ = makeBlitz({
   goal: "triforce3",
-  openMaskShop: true,
-  hintImportance: true,
-  tingleShuffle: "starting",
-  mapCompassShuffle: "starting",
-  smallKeyShuffleMm: "removed",
-  smallKeyShuffleHideout: "vanilla",
   strayFairyChestShuffle: "starting",
   rainbowBridge: 'custom',
-  shuffleMasterSword: false,
-  shuffleGerudoCard: false,
-  startingAge: "random",
-  doorOfTime: "open",
-  ageChange: "always",
-  dekuTree: "closed",
-  kakarikoGate: "open",
-  gerudoFortress: "single",
-  skipZelda: true,
-  bossWarpPads: "remains",
-  freeScarecrowOot: true,
   preCompletedDungeons: true,
   preCompletedDungeonsMajor: 6,
   preCompletedDungeonsStones: 2,
   preCompletedDungeonsMedallions: 2,
   preCompletedDungeonsRemains: 2,
-  crossWarpOot: true,
-  crossWarpMm: "full",
-  progressiveGoronLullaby: "single",
-  bottleContentShuffle: true,
-  blueFireArrows: true,
-  sunlightArrows: true,
-  shortHookshotMm: true,
-  lenientSpikes: false,
-  bombchuBagMm: true,
-  bombchuBagOot: true,
-  spellFireMm: true,
-  spellWindMm: true,
-  spellLoveMm: true,
-  sharedBows: true,
-  sharedBombBags: true,
-  sharedMagic: true,
-  sharedMagicArrowFire: true,
-  sharedMagicArrowIce: true,
-  sharedMagicArrowLight: true,
-  sharedSongStorms: true,
-  sharedHookshot: true,
-  sharedLens: true,
-  sharedMaskGoron: true,
-  sharedMaskZora: true,
-  sharedMaskBunny: true,
-  sharedMaskKeaton: true,
-  sharedMaskTruth: true,
-  sharedWallets: true,
-  sharedHealth: true,
-  sharedShields: true,
-  sharedBombchuBags: true,
-  sharedSpellFire: true,
-  sharedSpellWind: true,
-  sharedSpellLove: true,
-  startingItems: {
-    OOT_NUTS_10: 2,
-    OOT_SHIELD_DEKU: 1,
-    OOT_STICK: 10,
-    MM_SONG_EPONA: 1,
-    SHARED_SHIELD_HYLIAN: 1,
-    MM_OCARINA: 1,
-    OOT_OCARINA: 1,
-    MM_SWORD: 1,
-    MM_SONG_SOARING: 1
-  },
   junkLocations: [
     "MM Beneath The Graveyard Dampe Chest",
     "MM Deku Playground Reward 2",
@@ -377,25 +247,6 @@ const PRESET_TRIFORCE_BLITZ = makeSettings({
     "OOT Skulltula House 40 Tokens",
     "OOT Skulltula House 50 Tokens"
   ],
-  tricks: [
-    "MM_LENS",
-    "MM_NO_SEAHORSE",
-    "MM_ONE_MASK_STONE_TOWER",
-    "MM_PALACE_BEAN_SKIP",
-    "MM_SOUTHERN_SWAMP_SCRUB_HP_GORON",
-    "MM_ZORA_HALL_SCRUB_HP_NO_DEKU",
-    "OOT_DC_JUMP",
-    "OOT_DEAD_HAND_STICKS",
-    "OOT_FOREST_HOOK",
-    "OOT_HAMMER_WALLS",
-    "OOT_HIDDEN_GROTTOS",
-    "OOT_LENS",
-    "OOT_MAN_ON_ROOF",
-    "OOT_NIGHT_GS",
-    "OOT_TUNICS",
-    "OOT_VOLCANO_HOVERS",
-    "OOT_WINDMILL_HP_NOTHING"
-  ],
   specialConds: {
     BRIDGE: {
       count: 10,
@@ -405,14 +256,6 @@ const PRESET_TRIFORCE_BLITZ = makeSettings({
     },
     MOON: {
       count: 0
-    }
-  },
-  plando: {
-    locations: {
-      "OOT Zora River Bean Seller": "OOT_MAGIC_BEAN",
-      "OOT Zelda's Letter": "OOT_OCARINA",
-      "OOT Zelda's Song": "OOT_SONG_TP_LIGHT",
-      "MM Initial Song of Healing": "MM_SONG_TIME"
     }
   },
   hints: [
