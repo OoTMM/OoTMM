@@ -139,3 +139,23 @@ PATCH_END
 PATCH_START 0x80838590
   li at,0x7fff
 PATCH_END
+
+/* Bound check for regular masks */
+CheckMaskRange:
+  lbu t4,0x14f(s0)
+  beqz t4,CheckMaskRange_Bad
+   nop
+  sltiu t5,t4,9
+  bnez t5,CheckMaskRange_Good
+   nop
+CheckMaskRange_Bad:
+  li t4,0
+CheckMaskRange_Good:
+  lw t5,0x88(sp)
+  jr ra
+   nop
+
+PATCH_START 0x808482b8
+  jal CheckMaskRange
+   nop
+PATCH_END

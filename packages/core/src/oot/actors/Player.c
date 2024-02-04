@@ -4,7 +4,7 @@
 
 void ArrowCycle_Handle(Actor_Player* link, GameState_Play* play);
 
-void Player_UseItemWrapper(GameState_Play* play, Actor_Player* link, s16 itemId)
+void comboPlayerUseItem(GameState_Play* play, Actor_Player* link, s16 itemId)
 {
     void (*Player_UseItem)(GameState_Play* play, Actor_Player* link, s16 itemId);
 
@@ -16,6 +16,9 @@ void Player_UseItemWrapper(GameState_Play* play, Actor_Player* link, s16 itemId)
     case ITEM_OOT_POCKET_EGG:
         gComboTriggersData.events.pocketEgg = 1;
         break;
+    case ITEM_OOT_MASK_BLAST:
+        link->mask = 9;
+        break;
     default:
         Player_UseItem = OverlayAddr(0x80834000);
         Player_UseItem(play, link, itemId);
@@ -23,7 +26,41 @@ void Player_UseItemWrapper(GameState_Play* play, Actor_Player* link, s16 itemId)
     }
 }
 
-PATCH_CALL(0x8083212c, Player_UseItemWrapper);
+PATCH_CALL(0x8083212c, comboPlayerUseItem);
+
+static void DrawExtendedMaskBlast(GameState_Play* play, Actor_Player* link)
+{
+    void* obj;
+
+    obj = comboGetObject(0x01dd | MASK_FOREIGN_OBJECT);
+    if (!obj)
+        return;
+    OPEN_DISPS(play->gs.gfx);
+    gSPMatrix(POLY_OPA_DISP++, 0x0D0001C0, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPSegment(POLY_OPA_DISP++, 0x09, kDListEmpty);
+    gSPSegment(POLY_OPA_DISP++, 0x0a, obj);
+    gDPSetEnvColor(POLY_OPA_DISP++, 0, 0, 0, 0xff);
+    gSPDisplayList(POLY_OPA_DISP++, 0x0a0005c0);
+    CLOSE_DISPS();
+}
+
+static void DrawExtendedMask(GameState_Play* play, Actor_Player* link)
+{
+    DrawExtendedMaskBlast(play, link);
+}
+
+static void DrawLinkWrapper(GameState_Play* play, void** skeleton, Vec3s* jointTable, s32 dListCount, s32 lod, s32 tunic, s32 boots, s32 face, void* overrideLimbDraw, void* postLimbDraw, void* data)
+{
+    Actor_Player* link;
+
+    link = GET_LINK(play);
+    DrawLink(play, skeleton, jointTable, dListCount, lod, tunic, boots, face, overrideLimbDraw, postLimbDraw, data);
+    //if (data == (void*)0x8007aa94 && link->mask >= 9)
+    //if (link->mask >= 9)
+        DrawExtendedMask(play, link);
+}
+
+PATCH_CALL(0x8084829c, DrawLinkWrapper);
 
 void Player_UpdateWrapper(Actor_Player* this, GameState_Play* play)
 {

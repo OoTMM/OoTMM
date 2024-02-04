@@ -9,7 +9,7 @@ void comboToggleTradeAdult(void)
 
 void comboToggleTradeChild(void)
 {
-    comboToggleTrade(gSave.inventory.items + ITS_OOT_TRADE_CHILD, gOotExtraTrade.child, kOotTradeChild, 11);
+    comboToggleTrade(gSave.inventory.items + ITS_OOT_TRADE_CHILD, gOotExtraTrade.child, kOotTradeChild, 12);
     reloadSlotOot(gPlay, ITS_OOT_TRADE_CHILD);
 }
 

@@ -168,6 +168,8 @@ ComboData;
 
 extern ComboData gComboData;
 
+ALIGNED(16) extern const Gfx kDListEmpty[];
+
 void comboLoadContext(void);
 void comboExportContext(void);
 
@@ -199,6 +201,8 @@ NORETURN void comboGameSwitch(GameState_Play* play, s32 entrance);
 #if defined(GAME_OOT)
 void swapFarore(void);
 #endif
+
+void comboPlayerUseItem(GameState_Play* play, Actor_Player* link, s16 itemId);
 
 /* Override */
 #define OV_NONE         0x00

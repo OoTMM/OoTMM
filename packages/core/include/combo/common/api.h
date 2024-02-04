@@ -96,6 +96,8 @@ void DisplayTextBox(GameState_Play* play, u16 textId);
 void DisplayTextBox2(GameState_Play* play, u16 textId);
 void DisplayTextBox3(GameState_Play* play, Actor* actor, u16 textId);
 
+void DrawLink(GameState_Play* play, void** skeleton, Vec3s* jointTable, s32 dListCount, s32 lod, s32 tunic, s32 boots, s32 face, void* overrideLimbDraw, void* postLimbDraw, void* data);
+
 int GiveItem(Actor* actor, GameState_Play* play, s16 itemId, float a, float b);
 void GiveItemDefaultRange(Actor* actor, GameState_Play* play, s16 itemId);
 

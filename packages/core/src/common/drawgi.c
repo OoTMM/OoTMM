@@ -369,10 +369,6 @@ static void* pushMatrix(GfxContext* gfx, const float* mat)
     return end;
 }
 
-ALIGNED(16) static const Gfx kEmptyList[] = {
-    gsSPEndDisplayList(),
-};
-
 void DrawGi_BossRemains(GameState_Play* play, s16 drawGiId)
 {
     static const float scale = 0.03f;
@@ -430,8 +426,8 @@ void DrawGi_SpiritualStones(GameState_Play* play, s16 drawGiId)
     gSPMatrix(POLY_OPA_DISP++, pushMatrix(play->gs.gfx, kMatrixRot), G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
     /* Segment setup */
-    gSPSegment(POLY_XLU_DISP++, 9, kEmptyList);
-    gSPSegment(POLY_OPA_DISP++, 8, kEmptyList);
+    gSPSegment(POLY_XLU_DISP++, 9, kDListEmpty);
+    gSPSegment(POLY_OPA_DISP++, 8, kDListEmpty);
 
     InitListPolyXlu(play->gs.gfx);
     color4(&r, &g, &b, &a, kPrimColors[colorIndex]);
@@ -474,7 +470,7 @@ void DrawGi_MasterSword(GameState_Play* play, s16 drawGiId)
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPMatrix(POLY_OPA_DISP++, pushMatrix(play->gs.gfx, kMatrixRot), G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gSPMatrix(POLY_OPA_DISP++, pushMatrix(play->gs.gfx, kMatrixScale), G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gSPSegment(POLY_OPA_DISP++, 8, kEmptyList);
+    gSPSegment(POLY_OPA_DISP++, 8, kDListEmpty);
     InitListPolyOpa(play->gs.gfx);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
     CLOSE_DISPS();
