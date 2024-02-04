@@ -4,6 +4,18 @@
 
 void ArrowCycle_Handle(Actor_Player* link, GameState_Play* play);
 
+static void maskToggle(Actor_Player* player, u8 maskId)
+{
+    /* Set the mask */
+    if (player->mask)
+        player->mask = 0;
+    else
+        player->mask = maskId;
+
+    /* Play a sfx */
+    PlaySound(0x835);
+}
+
 void comboPlayerUseItem(GameState_Play* play, Actor_Player* link, s16 itemId)
 {
     void (*Player_UseItem)(GameState_Play* play, Actor_Player* link, s16 itemId);
@@ -17,7 +29,7 @@ void comboPlayerUseItem(GameState_Play* play, Actor_Player* link, s16 itemId)
         gComboTriggersData.events.pocketEgg = 1;
         break;
     case ITEM_OOT_MASK_BLAST:
-        link->mask = 9;
+        maskToggle(link, 9);
         break;
     default:
         Player_UseItem = OverlayAddr(0x80834000);

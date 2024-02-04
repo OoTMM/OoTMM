@@ -9,6 +9,7 @@
 static int checkItemToggle(GameState_Play* play)
 {
     PauseContext* p;
+    Actor_Player* link;
     int ret;
     int press;
 
@@ -41,7 +42,11 @@ static int checkItemToggle(GameState_Play* play)
     {
         ret = 1;
         if (press)
+        {
+            link = GET_LINK(play);
+            link->mask = 0;
             comboToggleTradeChild();
+        }
     }
 
     if (p->item_cursor >= ITS_OOT_BOTTLE && p->item_cursor <= ITS_OOT_BOTTLE4 && gSave.inventory.items[p->item_cursor] == ITEM_OOT_BIG_POE)
