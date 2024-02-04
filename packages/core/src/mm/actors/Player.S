@@ -430,11 +430,35 @@ PATCH_START 0x80831A24
 PATCH_END
 
 /*
-; Replaces:
-;   ADDIU   V1, R0, 0x000C // CAM_MODE_SLINGSHOT
+Replaces:
+  LBU       V0, 0x0x14B (A2)
+  ADDIU     AT, R0, 0x0004
+  BNEL      V0, AT, .+0x14
+   ADDIU    AT, R0, 0x0003
+  B         .+0x2C
+   ADDIU    V1, R0, 0x000C
+  ADDIU     AT, R0, 0x0003
+  BNE       V0, AT, .+0x10
+   NOP
+  B         .+0x18
+   ADDIU    V1, R0, 0x0003
+  B         .+0x10
+   ADDIU    V1, R0, 0x000D
 */
-PATCH_START 0x808386DC
-  addiu   v1, zero, 0x000D // CAM_MODE_BOWARROW
+PATCH_START 0x808386C8
+  jal       Player_GetItemCamMode
+   or       a0, a2, zero
+  or        v1, v0, zero
+  lw        a2, 0x0024 (sp)
+  b         .+0x2C
+  lw        a3, 0x0020 (sp)
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
 PATCH_END
 
 Player_GetEnvironmentWindSpeed_Hook:
