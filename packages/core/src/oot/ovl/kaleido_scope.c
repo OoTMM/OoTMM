@@ -46,6 +46,7 @@ static int checkItemToggle(GameState_Play* play)
             link = GET_LINK(play);
             link->mask = 0;
             comboToggleTradeChild();
+            Interface_LoadItemIconImpl(play, 0);
         }
     }
 

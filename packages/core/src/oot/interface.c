@@ -54,12 +54,57 @@ void comboItemIcon(void* dst, int itemId)
     }
 }
 
+static void grayscale(void* dst, unsigned size)
+{
+    static const float rev = 1.f / 255.f;
+    Color_RGBA8* pixels;
+    Color_RGBA8* p;
+    float acc;
+    u8 v;
+
+    pixels = dst;
+    size /= 4;
+
+    for (int i = 0; i < size; i++)
+    {
+        p = &pixels[i];
+        acc = 0.f;
+        acc += (p->r * rev) * 0.33f;
+        acc += (p->g * rev) * 0.33f;
+        acc += (p->b * rev) * 0.33f;
+        if (acc > 1.f)
+            acc = 1.f;
+        v = (u8)(acc * 255.f);
+        p->r = v;
+        p->g = v;
+        p->b = v;
+    }
+}
+
 static void LoadCustomItemIconSlot(GameState_Play* play, int slot)
 {
+    Actor_Player* link;
     void* dst;
+    u8 itemId;
 
     dst = (*(char**)((char*)&play->interfaceCtx + 0x138)) + 0x1000 * slot;
-    comboItemIcon(dst, gSave.equips.buttonItems[slot]);
+    itemId = gSave.equips.buttonItems[slot];
+
+    if (slot == 0)
+    {
+        /* Masks can overwrite the B icon */
+        link = GET_LINK(play);
+        switch (link->mask)
+        {
+        case 9:
+            comboItemIcon(dst, ITEM_OOT_MASK_BLAST);
+            if (gBlastMaskDelayAcc)
+                grayscale(dst, 0x1000);
+            return;
+        }
+    }
+
+    comboItemIcon(dst, itemId);
 }
 
 PATCH_FUNC(0x8006fb50, LoadCustomItemIconSlot);

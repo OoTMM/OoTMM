@@ -4,7 +4,7 @@
 
 void ArrowCycle_Handle(Actor_Player* link, GameState_Play* play);
 
-static void maskToggle(Actor_Player* player, u8 maskId)
+static void maskToggle(GameState_Play* play, Actor_Player* player, u8 maskId)
 {
     /* Set the mask */
     if (player->mask)
@@ -14,6 +14,9 @@ static void maskToggle(Actor_Player* player, u8 maskId)
 
     /* Play a sfx */
     PlaySound(0x835);
+
+    /* update B button */
+    Interface_LoadItemIconImpl(play, 0);
 }
 
 void comboPlayerUseItem(GameState_Play* play, Actor_Player* link, s16 itemId)
@@ -29,7 +32,7 @@ void comboPlayerUseItem(GameState_Play* play, Actor_Player* link, s16 itemId)
         gComboTriggersData.events.pocketEgg = 1;
         break;
     case ITEM_OOT_MASK_BLAST:
-        maskToggle(link, 9);
+        maskToggle(play, link, 9);
         break;
     default:
         Player_UseItem = OverlayAddr(0x80834000);
@@ -98,7 +101,11 @@ PATCH_CALL(0x8084829c, DrawLinkWrapper);
 void Player_UpdateWrapper(Actor_Player* this, GameState_Play* play)
 {
     if (gBlastMaskDelayAcc)
+    {
         gBlastMaskDelayAcc--;
+        if (!gBlastMaskDelayAcc)
+            Interface_LoadItemIconImpl(play, 0);
+    }
 
     ArrowCycle_Handle(this, play);
     Player_Update(this, play);
@@ -187,6 +194,7 @@ static void Player_BlastMask(GameState_Play* play, Actor_Player* link)
     bombTimer = (void*)((char*)bomb + 0x1e8);
     *bombTimer = 2;
     gBlastMaskDelayAcc = blastMaskDelay();
+    Interface_LoadItemIconImpl(play, 0);
 }
 
 void Player_ProcessItemButtonsWrapper(Actor_Player* link, GameState_Play* play)
