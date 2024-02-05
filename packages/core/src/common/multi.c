@@ -465,9 +465,9 @@ static void processMessagesSendPlayerPos(GameState_Play* play, NetContext* net)
 #if defined(GAME_MM)
     msg->playerPos.sceneKey |= 0x8000;
 #endif
-    msg->playerPos.x = (s16)link->base.position.x;
-    msg->playerPos.y = (s16)link->base.position.y;
-    msg->playerPos.z = (s16)link->base.position.z;
+    msg->playerPos.x = (s16)link->base.world.pos.x;
+    msg->playerPos.y = (s16)link->base.world.pos.y;
+    msg->playerPos.z = (s16)link->base.world.pos.z;
     net->msgOutSize[index] = 0x10;
 }
 

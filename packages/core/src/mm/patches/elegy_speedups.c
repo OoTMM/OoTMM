@@ -1,8 +1,8 @@
 #include <combo.h>
 
-union ElegyLockParams 
+union ElegyLockParams
 {
-    struct 
+    struct
     {
         u16 frameCount;
         u16 spawnFrame;
@@ -51,7 +51,7 @@ void Elegy_Update(Actor* actor, GameState_Play* play)
     Actor* statue = play->actorCtx.elegyStatues[index];
     if (statue != NULL)
     {
-        actor->initPos = statue->initPos;
+        actor->home.pos = statue->home.pos;
     }
 }
 

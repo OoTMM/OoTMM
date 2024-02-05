@@ -7,7 +7,7 @@ void EnTuboTrap_SpawnShuffledDrop(Actor_EnTuboTrap* this, GameState_Play* play)
 
     if (EnTuboTrap_IsShuffled(this))
     {
-        EnItem00_DropCustom(play, &this->base.position, &this->xflag);
+        EnItem00_DropCustom(play, &this->base.world.pos, &this->xflag);
         return;
     }
 
@@ -15,6 +15,6 @@ void EnTuboTrap_SpawnShuffledDrop(Actor_EnTuboTrap* this, GameState_Play* play)
     unk = (var >> 6) & 0x3ff;
     if (unk < 0x1a)
     {
-        Item_DropCollectible(play, &this->base.position, unk | ((var & 0x3f) << 8));
+        Item_DropCollectible(play, &this->base.world.pos, unk | ((var & 0x3f) << 8));
     }
 }

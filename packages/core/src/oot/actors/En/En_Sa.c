@@ -24,7 +24,7 @@ void EnSa_HandlerMeadow(Actor* this, GameState_Play* play)
     {
         SET_HANDLER(this, EnSa_HandlerNull);
     }
-    else if (GET_LINK(play)->base.position.z < -2220.f)
+    else if (GET_LINK(play)->base.world.pos.z < -2220.f)
     {
         SET_HANDLER(this, EnSa_HandlerMeadow_GiveItem);
         EnSa_HandlerMeadow_GiveItem(this, play);

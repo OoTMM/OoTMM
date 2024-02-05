@@ -12,6 +12,8 @@ osWritebackDCacheAll = 0x800d5aa0;
 DMARomToRam = 0x8000085c;
 InitDom2Addr2 = 0x80091310;
 
+DrawLink = 0x80079f48;
+
 Actor_ProcessInitChain = 0x80063f7c;
 
 GetRoomClearFlag = 0x80020640;

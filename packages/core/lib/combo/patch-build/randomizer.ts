@@ -92,6 +92,7 @@ const SHARED_ITEMS_OOT = new Map([
   ['SHARED_BOOTS_HOVER',      'OOT_BOOTS_HOVER'],
   ['SHARED_TUNIC_GORON',      'OOT_TUNIC_GORON'],
   ['SHARED_TUNIC_ZORA',       'OOT_TUNIC_ZORA'],
+  ['SHARED_MASK_BLAST',       'OOT_MASK_BLAST'],
 ]);
 
 const SHARED_ITEMS_MM = new Map([
@@ -156,6 +157,7 @@ const SHARED_ITEMS_MM = new Map([
   ['SHARED_BOOTS_HOVER',      'MM_BOOTS_HOVER'],
   ['SHARED_TUNIC_GORON',      'MM_TUNIC_GORON'],
   ['SHARED_TUNIC_ZORA',       'MM_TUNIC_ZORA'],
+  ['SHARED_MASK_BLAST',       'MM_MASK_BLAST'],
 ]);
 
 const SHARED_ITEMS = {
@@ -800,6 +802,13 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MM_TUNIC_GORON: settings.tunicGoronMm,
     MM_TUNIC_ZORA: settings.tunicZoraMm,
     OOT_GANON_BOSS_KEY_HINT: settings.ganonBossKey === 'anywhere',
+    BLAST_MASK_DELAY_INSTANT: settings.blastMaskCooldown === 'instant',
+    BLAST_MASK_DELAY_VERYSHORT: settings.blastMaskCooldown === 'veryshort',
+    BLAST_MASK_DELAY_SHORT: settings.blastMaskCooldown === 'short',
+    BLAST_MASK_DELAY_LONG: settings.blastMaskCooldown === 'long',
+    BLAST_MASK_DELAY_VERYLONG: settings.blastMaskCooldown === 'verylong',
+    OOT_MASK_BLAST: settings.blastMaskOot,
+    SHARED_MASK_BLAST: settings.sharedMaskBlast,
   };
 
   for (const v in exprs) {

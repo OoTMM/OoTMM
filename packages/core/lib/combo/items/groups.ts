@@ -24,6 +24,7 @@ export const MASKS_REGULAR = new Set([
   Items.SHARED_MASK_TRUTH,
   Items.SHARED_MASK_BUNNY,
   Items.SHARED_MASK_KEATON,
+  Items.SHARED_MASK_BLAST,
 ]);
 
 export const MASKS_TRANSFORM = new Set([
@@ -44,11 +45,13 @@ export const MASKS_OOT = new Set([
   Items.OOT_MASK_GERUDO,
   Items.OOT_MASK_GORON,
   Items.OOT_MASK_ZORA,
+  Items.OOT_MASK_BLAST,
   Items.SHARED_MASK_KEATON,
   Items.SHARED_MASK_BUNNY,
   Items.SHARED_MASK_TRUTH,
   Items.SHARED_MASK_GORON,
   Items.SHARED_MASK_ZORA,
+  Items.SHARED_MASK_BLAST,
 ]);
 
 export const STONES = new Set([
@@ -1031,4 +1034,6 @@ export const REQUIRED = new Set([
   Items.MM_MAGIC_JAR_LARGE,
   Items.SHARED_MAGIC_JAR_SMALL,
   Items.SHARED_MAGIC_JAR_LARGE,
+  Items.OOT_MASK_BLAST,
+  Items.SHARED_MASK_BLAST,
 ]);

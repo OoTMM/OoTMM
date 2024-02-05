@@ -50,6 +50,7 @@ const u8 kOotTradeChild[] = {
     ITEM_OOT_ZORA_MASK,
     ITEM_OOT_GERUDO_MASK,
     ITEM_OOT_MASK_OF_TRUTH,
+    ITEM_OOT_MASK_BLAST,
 };
 
 const u8 kMmTrade1[] = {
@@ -1976,6 +1977,7 @@ static const SharedItem kSimpleSharedItems[] = {
     { CFG_SHARED_BOOTS_HOVER, GI_OOT_BOOTS_HOVER, GI_MM_BOOTS_HOVER },
     { CFG_SHARED_TUNIC_GORON, GI_OOT_TUNIC_GORON, GI_MM_TUNIC_GORON },
     { CFG_SHARED_TUNIC_ZORA, GI_OOT_TUNIC_ZORA, GI_MM_TUNIC_ZORA },
+    { CFG_SHARED_MASK_BLAST, GI_OOT_MASK_BLAST, GI_MM_MASK_BLAST },
 };
 
 static int addItem(GameState_Play* play, s16 gi)

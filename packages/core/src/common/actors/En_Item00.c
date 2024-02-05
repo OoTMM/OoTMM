@@ -39,7 +39,7 @@ static void EnItem00_DrawXflag(Actor_EnItem00* this, GameState_Play* play)
         this->xflagGi = gi;
     }
 
-    ModelViewTranslate(this->base.position.x, this->base.position.y + 20.f, this->base.position.z, MAT_SET);
+    ModelViewTranslate(this->base.world.pos.x, this->base.world.pos.y + 20.f, this->base.world.pos.z, MAT_SET);
     ModelViewScale(0.35f, 0.35f, 0.35f, MAT_MUL);
     ModelViewRotateY(this->base.rot2.y * ((M_PI * 2.f) / 32767.f), MAT_MUL);
     comboDrawGI(play, &this->base, gi, 0);
@@ -75,9 +75,9 @@ static void EnItem00_UpdateXflagDrop(Actor_EnItem00* this, GameState_Play* play)
     if (this->isDecoy && !this->isExtendedCollected)
     {
         link = GET_LINK(play);
-        this->base.position.x = link->base.position.x;
-        this->base.position.y = link->base.position.y;
-        this->base.position.z = link->base.position.z;
+        this->base.world.pos.x = link->base.world.pos.x;
+        this->base.world.pos.y = link->base.world.pos.y;
+        this->base.world.pos.z = link->base.world.pos.z;
         this->base.xzDistanceFromLink = 1.f;
     }
 
@@ -256,9 +256,9 @@ Actor_EnItem00* EnItem00_SpawnDecoy(GameState_Play* play, s16 gi)
         &play->actorCtx,
         play,
         AC_EN_ITEM00,
-        link->base.position.x,
-        link->base.position.y,
-        link->base.position.z,
+        link->base.world.pos.x,
+        link->base.world.pos.y,
+        link->base.world.pos.z,
         0,
         0,
         0,

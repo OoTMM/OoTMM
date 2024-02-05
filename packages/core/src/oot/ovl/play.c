@@ -55,6 +55,9 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.upgrades.dive = 2;
         gSave.inventory.upgrades.wallet = 3;
         gSave.inventory.upgrades.strength = 3;
+        gOotExtraFlags.bottomlessWallet = 1;
+        gOotMaxRupees[3] = 9999;
+        gWalletDigits[3] = 4;
 
         gSave.inventory.ammo[ITS_OOT_STICKS] = 10;
         gSave.inventory.ammo[ITS_OOT_SLINGSHOT] = 50;
@@ -108,8 +111,13 @@ static void debugCheat(GameState_Play* play)
         gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_EYE_DROPS);
         gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_CLAIM_CHECK);
         gSave.inventory.items[ITS_OOT_TRADE_ADULT] = ITEM_OOT_POCKET_EGG;
+        gSave.inventory.items[ITS_OOT_TRADE_CHILD] = ITEM_OOT_MASK_BLAST;
 
         SetEventChk(EV_OOT_CHK_EPONA);
+
+        gSave.equips.buttonItems[1] = ITEM_OOT_MASK_BLAST;
+        gSave.equips.cButtonSlots[0] = ITS_OOT_TRADE_CHILD;
+
 
 #if defined(DEBUG_AGE)
         gSave.age = DEBUG_AGE;

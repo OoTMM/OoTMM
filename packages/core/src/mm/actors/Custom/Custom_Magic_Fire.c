@@ -173,14 +173,14 @@ void MagicFire_UpdateBeforeCast(Actor* thisx, GameState_Play* play) {
         this->actor.update = MagicFire_Update;
         Player_PlaySfx(player, 0x879); // NA_SE_PL_MAGIC_FIRE
     }
-    this->actor.position = player->base.position;
+    this->actor.world.pos = player->base.world.pos;
 }
 
 void MagicFire_Update(Actor* thisx, GameState_Play* play) {
     MagicFire* this = (MagicFire*)thisx;
     Actor_Player* player = GET_LINK(play);
 
-    this->actor.position = player->base.position;
+    this->actor.world.pos = player->base.world.pos;
 
     // See `ACTOROVL_ALLOC_ABSOLUTE`
     //! @bug This condition is too broad, the actor will also be killed by warp songs. But warp songs do not use an
@@ -200,7 +200,7 @@ void MagicFire_Update(Actor* thisx, GameState_Play* play) {
         case DF_ACTION_INITIALIZE:
             this->actionTimer = 30;
             this->actor.scale.x = this->actor.scale.y = this->actor.scale.z = 0.0f;
-            this->actor.speedRot.x = this->actor.speedRot.y = this->actor.speedRot.z = 0;
+            this->actor.world.rot.x = this->actor.world.rot.y = this->actor.world.rot.z = 0;
             this->actor.rot2.x = this->actor.rot2.y = this->actor.rot2.z = 0;
             this->alphaMultiplier = 0.0f;
             this->scalingSpeed = 0.08f;

@@ -95,7 +95,7 @@ static void reloadIcons(GameState_Play* play)
         if (sDpadItems[i] != sDpadItemsOld[i] && sDpadItems[i] != ITEM_NONE)
         {
 #if defined(GAME_OOT)
-            DMARomToRam((gDmaData[8].pstart + 0x1000 * sDpadItems[i]) | PI_DOM1_ADDR2, sDpadIconBuffer + (i * 32 * 32 * 4), 32 * 32 * 4);
+            comboItemIcon(sDpadIconBuffer + (i * 32 * 32 * 4), sDpadItems[i]);
 #else
             LoadIcon(0xa36c10, sDpadItems[i], sDpadIconBuffer + (i * 32 * 32 * 4), 0x1000);
 #endif
@@ -168,30 +168,14 @@ static void toggleBoots(GameState_Play* play, s16 itemId)
 static void dpadUseItem(GameState_Play* play, int index, int flags)
 {
     s16 itemId;
-    void (*Player_UseItem)(GameState_Play* play, Actor_Player* link, s16 itemId);
 
     itemId = sDpadItems[index];
     if (!canUseDpadItem(play, itemId, flags))
         return;
     if (itemId == ITEM_OOT_BOOTS_HOVER || itemId == ITEM_OOT_BOOTS_IRON)
-    {
         toggleBoots(play, itemId);
-    }
     else
-    {
-        if (itemId == ITEM_OOT_WEIRD_EGG)
-        {
-            gComboTriggersData.events.weirdEgg = 1;
-            return;
-        }
-        if (itemId == ITEM_OOT_POCKET_EGG)
-        {
-            gComboTriggersData.events.pocketEgg = 1;
-            return;
-        }
-        Player_UseItem = OverlayAddr(0x80834000);
-        Player_UseItem(play, GET_LINK(play), itemId);
-    }
+        comboPlayerUseItem(play, GET_LINK(play), itemId);
 }
 #endif
 

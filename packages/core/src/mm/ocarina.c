@@ -156,7 +156,7 @@ void Ocarina_HandleWarp(Actor_Player* player, GameState_Play* play)
             play->interfaceCtx.unk_222 = 0;
             ActorCutscene_Stop(play->playerActorCsIds[0]);
             player->base.flags &= ~0x20000000; // ACTOR_FLAG_20000000
-            Actor* actor = SpawnActor(&play->actorCtx, play, 0x1CE, player->base.position.x, player->base.position.y, player->base.position.z, 0, 0, 0, 0x8000 | sWarpSongPlayed);
+            Actor* actor = SpawnActor(&play->actorCtx, play, 0x1CE, player->base.world.pos.x, player->base.world.pos.y, player->base.world.pos.z, 0, 0, 0, 0x8000 | sWarpSongPlayed);
             if (actor)
             {
                 player->state &= ~0x20000000; // PLAYER_STATE1_TIME_STOP

@@ -316,9 +316,9 @@ static void CustomTriggers_Update(Actor_CustomTriggers* this, GameState_Play* pl
     link = GET_LINK(play);
     if (link)
     {
-        this->base.position.x = link->base.position.x;
-        this->base.position.y = link->base.position.y;
-        this->base.position.z = link->base.position.z;
+        this->base.world.pos.x = link->base.world.pos.x;
+        this->base.world.pos.y = link->base.world.pos.y;
+        this->base.world.pos.z = link->base.world.pos.z;
     }
 
     if (gComboTriggersData.trigger == TRIGGER_NONE)

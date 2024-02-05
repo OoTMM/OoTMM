@@ -1034,30 +1034,40 @@ typedef struct Actor Actor;
 
 typedef void (*ActorCallback)(Actor*, GameState_Play*);
 
-typedef struct PACKED ALIGNED(0x4) Actor
+typedef struct
+{
+    Vec3f pos;
+    Vec3s rot;
+}
+PosRot;
+
+typedef struct Actor
 {
     u16         id;
     u8          type;
     u8          room;
     s32         flags;
-    Vec3f       initPos;
-    Vec3s       initRot;
-    char        unk2[0x02];
+    PosRot      home;
     u16         variable;
     s8          objTableIndex;
-    char        unk3[5];
-    Vec3f       position;
-    Vec3s       speedRot;
-    u16         unk_36;
-#if defined(GAME_MM)
-    u32         unk_mm0;
+    s8          targetMode;
+
+#if defined(GAME_OOT)
+    u16        sfx;
+    PosRot     world;
+    PosRot     focus;
 #endif
-    Vec3f       pos3;
-    Vec3s       rot1;
+
 #if defined(GAME_MM)
-    u32         unk_mm1;
+    s16        halfDaysBits;
+    PosRot     world;
+    s8         csId;
+    u8         audioFlags;
+    PosRot     focus;
+    u16        sfx;
 #endif
-    char        unk_4a[0x06];
+
+    float       targetArrowOffset;
     Vec3f       scale;
     Vec3f       velocity;
     float       speedXZ;
@@ -1105,17 +1115,29 @@ typedef struct
 }
 ActorList;
 
-ASSERT_OFFSET(Actor, variable, 0x01c);
+#if defined(GAME_OOT)
+# define X(x) (x)
+#else
+# define X(x) (x + 8)
+#endif
 
-typedef struct PosRot {
-    /* 0x00 */ Vec3f pos;
-    /* 0x0C */ Vec3s rot;
-} PosRot; // size = 0x14
+ASSERT_OFFSET(Actor, id,        0x000);
+ASSERT_OFFSET(Actor, type,      0x002);
+ASSERT_OFFSET(Actor, room,      0x003);
+ASSERT_OFFSET(Actor, home,      0x008);
+ASSERT_OFFSET(Actor, variable,  0x01c);
+ASSERT_OFFSET(Actor, attachedA, X(0x118));
+ASSERT_OFFSET(Actor, attachedB, X(0x11c));
+ASSERT_OFFSET(Actor, prev,      X(0x120));
+ASSERT_OFFSET(Actor, next,      X(0x124));
+ASSERT_OFFSET(Actor, init,      X(0x128));
+ASSERT_OFFSET(Actor, fini,      X(0x12c));
+ASSERT_OFFSET(Actor, update,    X(0x130));
+ASSERT_OFFSET(Actor, draw,      X(0x134));
+ASSERT_OFFSET(Actor, ovl,       X(0x138));
 
-typedef struct BlinkInfo {
-    /* 0x0 */ s16 eyeTexIndex;
-    /* 0x2 */ s16 blinkTimer;
-} BlinkInfo; // size = 0x4
+#undef X
+
 
 #if defined(GAME_OOT)
 _Static_assert(sizeof(Actor) == 0x13c, "OoT Actor size is wrong");
@@ -1126,6 +1148,11 @@ _Static_assert(sizeof(ActorList) == 0x8, "OoT ActorList size is wrong");
 _Static_assert(sizeof(Actor) == 0x144, "MM Actor size is wrong");
 _Static_assert(sizeof(ActorList) == 0xC, "MM ActorList size is wrong");
 #endif
+
+typedef struct BlinkInfo {
+    /* 0x0 */ s16 eyeTexIndex;
+    /* 0x2 */ s16 blinkTimer;
+} BlinkInfo; // size = 0x4
 
 Actor* comboSpawnActor(ActorContext* actorCtx, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable);
 Actor* comboSpawnActorEx(ActorContext* actorCtx, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int ex1, int ex2, int ex3);
