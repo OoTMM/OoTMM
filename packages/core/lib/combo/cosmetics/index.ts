@@ -33,6 +33,13 @@ export type CosmeticsOutput = {
   overrides: {[k: string]: Buffer};
 };
 
+function brightness(color: number, bright: number): number {
+  const r = (color >>> 16) * bright;
+  const g = ((color >>> 8) & 0xff) * bright;
+  const b = (color & 0xff) * bright;
+  return (r & 0xff) << 16 | (g & 0xff) << 8 | (b & 0xff);
+}
+
 class CosmeticsPass {
   private vrom: number;
   private random: Random;
@@ -113,6 +120,14 @@ class CosmeticsPass {
     this.patch.addDataPatch(game, paddr, buffer);
   }
 
+  private patchColorRGB_VROM(game: Game, addr: number, color: number) {
+    const buffer = Buffer.alloc(3);
+    buffer.writeUInt8(color >>> 16, 0);
+    buffer.writeUInt8((color >>> 8) & 0xff, 1);
+    buffer.writeUInt8(color & 0xff, 2);
+    this.patch.addDataPatch(game, addr, buffer);
+  }
+
   private patchOotTunic(index: number, color: number) {
     const defaultColors: Color[] = [
       'kokirigreen',
@@ -138,6 +153,20 @@ class CosmeticsPass {
     const icon = this.roms.oot.rom.subarray(paddr, paddr + 0x1000);
     const newIcon = recolorImage('rgba32', icon, this.assets.MASK_TUNIC, defaultColorIcon, color);
     this.patch.addDataPatch('oot', paddr, newIcon);
+
+    /* Patch the GI */
+    if (index !== 0) {
+      let giBase = 0x1638000 + 0x14e0 + (index - 1) * 0x20;
+      const colorPrim1 = brightness(color, 0.76);
+      const colorEnv1 = brightness(color, 0.53)
+      const colorPrim2 = color;
+      const colorEnv2 = brightness(color, 0.59);
+
+      this.patchColorRGB_VROM('oot', giBase + 0x0c, colorPrim1);
+      this.patchColorRGB_VROM('oot', giBase + 0x14, colorEnv1);
+      this.patchColorRGB_VROM('oot', giBase + 0x4c, colorPrim2);
+      this.patchColorRGB_VROM('oot', giBase + 0x54, colorEnv2);
+    }
   }
 
   private async patchOotChildModel() {
