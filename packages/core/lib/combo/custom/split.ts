@@ -42,6 +42,7 @@ class ObjectSplitter {
             bpp = 4;
             break;
           case 0x10:
+          case 0x70:
             bpp = 16;
             break;
           default:

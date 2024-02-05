@@ -63,39 +63,74 @@ static int prepareMask(GameState_Play* play, u16 objectId, int needsMatrix)
 
 static void DrawExtendedMaskKeaton(GameState_Play* play, Actor_Player* link)
 {
-    if (!prepareMask(play, 0x01da | MASK_FOREIGN_OBJECT, 1))
+    if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_KEATON, 1))
         return;
     OPEN_DISPS(play->gs.gfx);
-    gSPDisplayList(POLY_OPA_DISP++, 0x0a0004a0);
+    gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_MASK_OOT_KEATON_0);
     CLOSE_DISPS();
 }
 
 static void DrawExtendedMaskSkull(GameState_Play* play, Actor_Player* link)
 {
-    if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_SKULL, 1))
+    if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_SKULL, 1))
         return;
     OPEN_DISPS(play->gs.gfx);
-    gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_MASK_SKULL_0);
+    gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_MASK_OOT_SKULL_0);
+    CLOSE_DISPS();
+}
+
+static void DrawExtendedMaskSpooky(GameState_Play* play, Actor_Player* link)
+{
+    if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_SPOOKY, 1))
+        return;
+    OPEN_DISPS(play->gs.gfx);
+    gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_MASK_OOT_SPOOKY_0);
     CLOSE_DISPS();
 }
 
 static void DrawExtendedMaskBunny(GameState_Play* play, Actor_Player* link)
 {
-    if (!prepareMask(play, 0x1db | MASK_FOREIGN_OBJECT, 0))
+    if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_BUNNY, 0))
         return;
 
     OPEN_DISPS(play->gs.gfx);
-    gSPDisplayList(POLY_OPA_DISP++, 0x0a000610);
+    gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_MASK_OOT_BUNNY_0);
+    CLOSE_DISPS();
+}
+
+static void DrawExtendedMaskGoron(GameState_Play* play, Actor_Player* link)
+{
+    if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_GORON, 1))
+        return;
+    OPEN_DISPS(play->gs.gfx);
+    gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_MASK_OOT_GORON_0);
+    CLOSE_DISPS();
+}
+
+static void DrawExtendedMaskZora(GameState_Play* play, Actor_Player* link)
+{
+    if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_ZORA, 1))
+        return;
+    OPEN_DISPS(play->gs.gfx);
+    gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_MASK_OOT_ZORA_0);
+    CLOSE_DISPS();
+}
+
+static void DrawExtendedMaskGerudo(GameState_Play* play, Actor_Player* link)
+{
+    if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_GERUDO, 1))
+        return;
+    OPEN_DISPS(play->gs.gfx);
+    gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_MASK_OOT_GERUDO_0);
     CLOSE_DISPS();
 }
 
 static void DrawExtendedMaskTruth(GameState_Play* play, Actor_Player* link)
 {
-    if (!prepareMask(play, 0x1de | MASK_FOREIGN_OBJECT, 1))
+    if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_TRUTH, 1))
         return;
-
     OPEN_DISPS(play->gs.gfx);
-    gSPDisplayList(POLY_OPA_DISP++, 0x0a0001a0);
+    gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_MASK_OOT_TRUTH_0);
     CLOSE_DISPS();
 }
 
@@ -132,11 +167,11 @@ typedef void (*MaskCallback)(GameState_Play*, Actor_Player*);
 static const MaskCallback kMaskCallbacks[] = {
     DrawExtendedMaskKeaton,
     DrawExtendedMaskSkull,
-    NULL,
+    DrawExtendedMaskSpooky,
     DrawExtendedMaskBunny,
-    NULL,
-    NULL,
-    NULL,
+    DrawExtendedMaskGoron,
+    DrawExtendedMaskZora,
+    DrawExtendedMaskGerudo,
     DrawExtendedMaskTruth,
     DrawExtendedMaskBlast,
 };
