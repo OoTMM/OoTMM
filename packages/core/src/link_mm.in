@@ -154,6 +154,7 @@ ActorCutscene_GetCanPlayNext = 0x800f1be4;
 gActorOvl = 0x801aefd0;
 
 SetSwitchFlag = 0x800b5bf4;
+ClearSwitchFlag = 0x800b5c34;
 GetItemCollectBehavior = 0x801143cc;
 RemoveItem = 0x801149a0;
 

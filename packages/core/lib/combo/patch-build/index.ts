@@ -71,6 +71,7 @@ function asmPatchGroups(world: World, settings: Settings) {
     ER_WALLMASTERS: settings.erWallmasters !== 'none',
     OOT_SHUFFLE_FREE_RUPEES: settings.shuffleFreeRupeesOot,
     MM_SHUFFLE_FREE_RUPEES: settings.shuffleFreeRupeesMm,
+    MM_OPEN_STT: world.resolvedFlags.openDungeonsMm.has('ST'),
   };
   const keys = Object.keys(groups) as PatchGroup[];
   return keys.filter((k) => groups[k]);

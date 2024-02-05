@@ -2944,7 +2944,7 @@
   region: STONE_TOWER
   exits:
     "Ikana Canyon": "true"
-    "Stone Tower Top": "((can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER))) && can_hookshot) || (can_use_elegy3 && short_hook_anywhere && trick(MM_OOB_MOVEMENT)) || hookshot_anywhere || setting(openDungeonsMm, ST)"
+    "Stone Tower Top": "((can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER))) && can_hookshot) || (can_use_elegy3 && short_hook_anywhere && trick(MM_OOB_MOVEMENT)) || hookshot_anywhere || (setting(openDungeonsMm, ST) && (can_hookshot || (short_hook_anywhere && trick(MM_OOB_MOVEMENT))))"
     "Stone Tower Lower Scarecrow Ledge": "((can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER))) && scarecrow_hookshot) || hookshot_anywhere"
     "Stone Tower Upper Scarecrow Ledge": "((can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER))) && can_hookshot) || (can_use_elegy3 && short_hook_anywhere) || hookshot_anywhere"
   locations:
@@ -2955,7 +2955,7 @@
   exits:
     "Stone Tower": "true"
     "Stone Tower Front of Temple": "can_use_elegy || (short_hook_anywhere && trick(MM_OOB_MOVEMENT)) || hookshot_anywhere || setting(openDungeonsMm, ST)"
-    "Stone Tower Top Inverted": "can_use_elegy && can_use_light_arrows"
+    "Stone Tower Top Inverted": "(can_use_elegy && can_use_light_arrows) || setting(openDungeonsMm, ST)"
     "Stone Tower Lower Scarecrow Ledge": "has_mask_goron || scarecrow_hookshot || hookshot_anywhere"
     "Stone Tower Upper Scarecrow Ledge": "scarecrow_hookshot || short_hook_anywhere"
     "Owl Stone Tower": "true"
@@ -2964,7 +2964,7 @@
   exits:
     "Stone Tower": "true"
     "Stone Tower Top": "can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER) && short_hook_anywhere) || can_hookshot || setting(openDungeonsMm, ST)"
-    "Stone Tower Top Inverted": "can_use_elegy && can_use_light_arrows"
+    "Stone Tower Top Inverted": "(can_use_elegy && can_use_light_arrows) || setting(openDungeonsMm, ST)"
     "Stone Tower Temple": "true"
     "Stone Tower Lower Scarecrow Ledge": "has_mask_goron || has_mask_zora || scarecrow_hookshot || hookshot_anywhere || (short_hook_anywhere && trick(MM_OOB_MOVEMENT))" # || (can_jumpslash) # Can simply backwalk off the ledge, jumpslash and recoil down to the ledge, but that should be a trick.
     "Stone Tower Upper Scarecrow Ledge": "scarecrow_hookshot || short_hook_anywhere"
@@ -3014,7 +3014,7 @@
     BUGS: "true"
   exits:
     "Stone Tower Temple Inverted": "true"
-    "Stone Tower Top": "can_use_light_arrows"
+    "Stone Tower Top": "can_use_light_arrows || setting(openDungeonsMm, ST)"
     "Stone Tower Top Inverted Upper": "can_use_beans || hookshot_anywhere"
 "Stone Tower Top Inverted Upper":
   region: STONE_TOWER
@@ -3038,4 +3038,4 @@
   region: STONE_TOWER
   exits:
     "Stone Tower Top": "true"
-    "Stone Tower Top Inverted": "can_use_elegy && can_use_light_arrows"
+    "Stone Tower Top Inverted": "(can_use_elegy && can_use_light_arrows) || setting(openDungeonsMm, ST)"
