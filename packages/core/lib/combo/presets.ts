@@ -5,7 +5,7 @@ export type Presets = { [k: string]: Settings };
 
 const PRESET_DEFAULT = DEFAULT_SETTINGS;
 
-const BLITZ_BASE = {
+const BLITZ_BASE: PartialDeep<Settings> = {
   tingleShuffle: 'starting',
   openMaskShop: true,
   hintImportance: true,
@@ -70,6 +70,8 @@ const BLITZ_BASE = {
   sharedBootsHover: true,
   sharedTunicGoron: true,
   sharedTunicZora: true,
+  blastMaskOot: true,
+  sharedMaskBlast: true,
   startingItems: {
     OOT_NUTS_10: 2,
     OOT_SHIELD_DEKU: 1,
@@ -108,7 +110,7 @@ const BLITZ_BASE = {
       'MM Initial Song of Healing': 'MM_SONG_TIME'
     }
   },
-} as const;
+};
 
 const makeBlitz = (input: PartialDeep<Settings>): Settings => {
   const x = Object.assign({}, BLITZ_BASE, input);
