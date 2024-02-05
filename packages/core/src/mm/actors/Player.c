@@ -535,7 +535,6 @@ void Player_CheckCustomBoots(GameState_Play* play)
     {
         gSaveContext.save.itemEquips.boots = 0;
         gSaveContext.save.itemEquips.tunic = 0;
-        player->base.flags &= ~(1 << 17); // ~ACTOR_FLAG_CAN_PRESS_HEAVY_SWITCH
     }
 }
 
