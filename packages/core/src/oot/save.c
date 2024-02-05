@@ -254,10 +254,8 @@ void comboCreateSave(void* unk, void* buffer)
     {
         gOotExtraFlags.childWallet = 1;
         gMmExtraFlags2.childWallet = 1;
-
-        gOotMaxRupees[0] = 99;
-        gMmMaxRupees[0] = 99;
     }
+    comboWalletRefresh();
 
     /* Apply enemy souls */
     if (!comboConfig(CFG_OOT_SOULS_ENEMY))

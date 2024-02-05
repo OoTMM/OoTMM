@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/util.h>
+#include <combo/item.h>
 
 u32 popcount(u32 x)
 {
@@ -115,4 +116,29 @@ int comboIsChateauActive(void)
 #endif
 
     return !!MM_GET_EVENT_WEEK(EV_MM_WEEK_DRANK_CHATEAU_ROMANI);
+}
+
+void comboWalletRefresh(void)
+{
+    gOotMaxRupees[0] = gOotExtraFlags.childWallet ? 99 : 0;
+    gMmMaxRupees[0] = gMmExtraFlags2.childWallet ? 99 : 0;
+    gOotMaxRupees[3] = gOotExtraFlags.bottomlessWallet ? 9999 : 999;
+    gMmMaxRupees[3] = gMmExtraFlags3.bottomlessWallet ? 9999 : 999;
+
+    gWalletDigits[0] = 0;
+    gWalletDigits[3] = 3;
+
+#if defined(GAME_OOT)
+    if (gOotExtraFlags.childWallet)
+        gWalletDigits[0] = 2;
+    if (gOotExtraFlags.bottomlessWallet)
+        gWalletDigits[3] = 4;
+#endif
+
+#if defined(GAME_MM)
+    if (gMmExtraFlags2.childWallet)
+        gWalletDigits[0] = 2;
+    if (gMmExtraFlags3.bottomlessWallet)
+        gWalletDigits[3] = 4;
+#endif
 }

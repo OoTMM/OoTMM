@@ -308,18 +308,14 @@ static void addWalletRawOot(u16 index)
     if (index == 1)
     {
         gOotExtraFlags.childWallet = 1;
-        gOotMaxRupees[0] = 99;
     }
     else if (index == 5)
     {
         gOotExtraFlags.bottomlessWallet = 1;
-        gOotMaxRupees[3] = 9999;
-#if defined(GAME_OOT)
-        gWalletDigits[3] = 4;
-#endif
     }
     else
         gOotSave.inventory.upgrades.wallet = (index - 1);
+    comboWalletRefresh();
 }
 
 static void addWalletRawMm(u16 index)
@@ -327,18 +323,14 @@ static void addWalletRawMm(u16 index)
     if (index == 1)
     {
         gMmExtraFlags2.childWallet = 1;
-        gMmMaxRupees[0] = 99;
     }
     else if (index == 5)
     {
         gMmExtraFlags3.bottomlessWallet = 1;
-        gMmMaxRupees[3] = 9999;
-#if defined(GAME_MM)
-        gWalletDigits[3] = 4;
-#endif
     }
     else
         gMmSave.inventory.upgrades.wallet = (index - 1);
+    comboWalletRefresh();
 }
 
 static void addWalletRawShared(u16 index)

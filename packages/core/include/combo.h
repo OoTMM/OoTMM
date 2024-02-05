@@ -275,6 +275,8 @@ extern u32 gMultiMarkSwitch1;
 # define multiIsMarked multiIsMarkedMm
 #endif
 
+void    comboWalletRefresh(void);
+
 void    multiSetMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id);
 void    multiSetMarkedMm(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id);
 int     multiIsMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id);
