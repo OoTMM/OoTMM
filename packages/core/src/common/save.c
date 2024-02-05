@@ -14,7 +14,6 @@ ALIGNED(16) SharedCustomSave gSharedCustomSave;
 
 void comboOnSaveLoad(void)
 {
-    u16 walletsDigits;
     NetContext* net;
 
     /* Clear custom trigger data */
