@@ -79,6 +79,16 @@ static void DrawExtendedMaskBunny(GameState_Play* play, Actor_Player* link)
     CLOSE_DISPS();
 }
 
+static void DrawExtendedMaskTruth(GameState_Play* play, Actor_Player* link)
+{
+    if (!prepareMmMask(play, 0x1de, 1))
+        return;
+
+    OPEN_DISPS(play->gs.gfx);
+    gSPDisplayList(POLY_OPA_DISP++, 0x0a0001a0);
+    CLOSE_DISPS();
+}
+
 static void DrawExtendedMaskBlast(GameState_Play* play, Actor_Player* link)
 {
     u8 opacity;
@@ -117,7 +127,7 @@ static const MaskCallback kMaskCallbacks[] = {
     NULL,
     NULL,
     NULL,
-    NULL,
+    DrawExtendedMaskTruth,
     DrawExtendedMaskBlast,
 };
 
