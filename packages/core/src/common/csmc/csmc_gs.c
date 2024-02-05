@@ -44,6 +44,12 @@ static const Gfx kCsmcGsHeart[] = {
     gsSPEndDisplayList(),
 };
 
+static const Gfx kCsmcGsSoul[] = {
+    gsDPSetPrimColor(0x00, 0x00, 52, 11, 156, 255),
+    gsDPSetEnvColor(5, 1, 15, 255),
+    gsSPEndDisplayList(),
+};
+
 static const Gfx* const kCsmcGs[] = {
     kCsmcGsNormal,
     kCsmcGsBossKey,
@@ -52,7 +58,7 @@ static const Gfx* const kCsmcGs[] = {
     kCsmcGsSpider,
     kCsmcGsFairy,
     kCsmcGsHeart,
-    kCsmcGsBossKey,
+    kCsmcGsSoul,
 };
 
 static int csmcGsId(s16 gi)

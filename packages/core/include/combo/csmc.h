@@ -21,6 +21,7 @@
 #define CSMC_POT_KEY                0x06
 #define CSMC_POT_HEART              0x07
 #define CSMC_POT_BOSSKEY            0x08
+#define CSMC_POT_SOUL               0x09
 
 #define CSMC_GRASS_NORMAL     0x00
 #define CSMC_GRASS_BOSS_KEY   0x01

@@ -10,6 +10,7 @@
 #define CSMC_NAVI_SPIDER     0x04
 #define CSMC_NAVI_FAIRY      0x05
 #define CSMC_NAVI_HEART      0x06
+#define CSMC_NAVI_SOUL       0x07
 
 typedef struct {
     /* 0x00 */ Color_RGBA8 inner;
@@ -25,6 +26,7 @@ static NaviColor sNaviColorList[] = {
     { { 255, 255, 255, 255 }, { 255, 255, 255, 0 } },
     { { 255, 122, 251, 255 }, { 255, 122, 251, 0 } },
     { { 255, 0, 0, 255 }, { 255, 0, 0, 0 } },
+    { { 52, 11, 156, 255 }, { 52, 11, 156, 0 } },
 };
 
 static int csmcNaviId(s16 gi)
@@ -46,7 +48,7 @@ static int csmcNaviId(s16 gi)
     case CSMC_SPIDER:       return CSMC_NAVI_SPIDER;
     case CSMC_FAIRY:        return CSMC_NAVI_FAIRY;
     case CSMC_HEART:        return CSMC_NAVI_HEART;
-    case CSMC_SOUL:         return CSMC_NAVI_BOSS_KEY;
+    case CSMC_SOUL:         return CSMC_NAVI_SOUL;
     default:                return CSMC_NAVI_MAJOR;
     }
 }

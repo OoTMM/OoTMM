@@ -16,6 +16,7 @@ static const u32 kColorKey      = 0x444444ff;
 static const u32 kColorSpider   = 0xffffffff;
 static const u32 kColorFairy    = 0xff7afbff;
 static const u32 kColorHeart    = 0xff0000ff;
+static const u32 kColorSoul     = 0x340b9cff;
 
 static const CsmcDisplayList kGrassStandardDlist[] = {
     { TEXTURE_ADDR_STANDARD,    0xffffffff,    CTF_COLOR | CTF_CLAMP,                       G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32 },
@@ -25,6 +26,7 @@ static const CsmcDisplayList kGrassStandardDlist[] = {
     { CUSTOM_GRASS_ADDR,        kColorSpider,  CTF_CUSTOM_TEXTURE | CTF_COLOR | CTF_CLAMP,  G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32 },
     { CUSTOM_GRASS_ADDR,        kColorFairy,   CTF_CUSTOM_TEXTURE | CTF_COLOR | CTF_CLAMP,  G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32 },
     { CUSTOM_GRASS_ADDR,        kColorHeart,   CTF_CUSTOM_TEXTURE | CTF_COLOR | CTF_CLAMP,  G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32 },
+    { CUSTOM_GRASS_ADDR,        kColorSoul,    CTF_CUSTOM_TEXTURE | CTF_COLOR | CTF_CLAMP,  G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32 },
 };
 
 static const CsmcDisplayList kGrassAltDlist[] = {
@@ -35,6 +37,7 @@ static const CsmcDisplayList kGrassAltDlist[] = {
     { CUSTOM_GRASS_ALT_ADDR,    kColorSpider,  CTF_CUSTOM_TEXTURE | CTF_COLOR | CTF_CLAMP,  G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32 },
     { CUSTOM_GRASS_ALT_ADDR,    kColorFairy,   CTF_CUSTOM_TEXTURE | CTF_COLOR | CTF_CLAMP,  G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32 },
     { CUSTOM_GRASS_ALT_ADDR,    kColorHeart,   CTF_CUSTOM_TEXTURE | CTF_COLOR | CTF_CLAMP,  G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32 },
+    { CUSTOM_GRASS_ALT_ADDR,    kColorSoul,    CTF_CUSTOM_TEXTURE | CTF_COLOR | CTF_CLAMP,  G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32 },
 };
 
 static int csmcGrassId(s16 gi, int def)
@@ -56,7 +59,7 @@ static int csmcGrassId(s16 gi, int def)
     case CSMC_SPIDER:       return CSMC_GRASS_SPIDER;
     case CSMC_FAIRY:        return CSMC_GRASS_FAIRY;
     case CSMC_HEART:        return CSMC_GRASS_HEART;
-    case CSMC_SOUL:         return CSMC_GRASS_BOSS_KEY;
+    case CSMC_SOUL:         return CSMC_GRASS_SOUL;
     default:                return CSMC_GRASS_MAJOR;
     }
 }
