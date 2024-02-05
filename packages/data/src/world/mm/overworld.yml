@@ -1961,7 +1961,7 @@
   events:
     MAGIC: "can_break_boulders"
   exits:
-    "Path to Snowhead Middle": "goron_fast_roll || hookshot_anywhere || (has_hover_boots && trick(MM_PATH_SNOWHEAD_HOVERS))
+    "Path to Snowhead Middle": "goron_fast_roll || hookshot_anywhere || (has_hover_boots && trick(MM_PATH_SNOWHEAD_HOVERS))"
     "Snowhead Entrance": "true"
     "Path to Snowhead Grotto": "has_explosives || trick_keg_explosives"
 "Path to Snowhead Grotto":
@@ -2449,7 +2449,7 @@
     "Zora Cape Grotto": "can_break_boulders"
   locations:
     "Zora Cape Underwater Chest": "underwater_walking"
-    "Zora Cape Waterfall HP": "has_mask_zora || (has_iron_boots && has_tunic_zora && (has_arrows || has_bombchu || has(MASK_BLAST)))"
+    "Zora Cape Waterfall HP": "has_mask_zora || (has_iron_boots && has_tunic_zora && (has_arrows || has_bombchu || has_mask_blast))"
     "Zora Cape Pot Near Beavers 1": "true"
     "Zora Cape Pot Near Beavers 2": "true"
     "Zora Cape Pot Game 1": "is_day && (has_weapon || has_mask_zora || can_hookshot_short || has_bow)"

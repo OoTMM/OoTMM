@@ -44,7 +44,7 @@
     MAGIC: "true"
   locations:
     "Great Bay Temple SF Central Room Barrel": "true"
-    "Great Bay Temple SF Central Room Underwater Pot": "has_mask_zora || (has(MASK_GREAT_FAIRY) && (has_arrows || (underwater_walking_strict && has(MASK_BLAST))))"
+    "Great Bay Temple SF Central Room Underwater Pot": "has_mask_zora || (has(MASK_GREAT_FAIRY) && (has_arrows || (underwater_walking_strict && has_mask_blast)))"
     "Great Bay Temple Pot Central Room 1": "true"
     "Great Bay Temple Pot Central Room 2": "true"
 "Great Bay Temple Map Room":
@@ -88,7 +88,7 @@
   locations:
     "Great Bay Temple Compass": "soul_enemy(SOUL_ENEMY_BIO_BABA) || can_hookshot || can_use_ice_arrows || short_hook_anywhere" # The lilypads from the biobabas aren't here without their souls
     "Great Bay Temple Compass Room Underwater": "underwater_walking"
-    "Great Bay Temple SF Compass Room Pot": "has_mask_zora || short_hook_anywhere || ((has(MASK_GREAT_FAIRY) || underwater_walking || soul_enemy(SOUL_ENEMY_DEXIHAND)) && (has_weapon_range || has_bombchu)) || (underwater_walking && has(MASK_BLAST))"
+    "Great Bay Temple SF Compass Room Pot": "has_mask_zora || short_hook_anywhere || ((has(MASK_GREAT_FAIRY) || underwater_walking || soul_enemy(SOUL_ENEMY_DEXIHAND)) && (has_weapon_range || has_bombchu)) || (underwater_walking && has_mask_blast)"
     "Great Bay Temple Pot Compass Room Surface 1": "true"
     "Great Bay Temple Pot Compass Room Surface 2": "true"
     "Great Bay Temple Pot Compass Room Surface 3": "true"
