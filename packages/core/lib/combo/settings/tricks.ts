@@ -106,6 +106,7 @@ export const TRICKS = {
   MM_PATH_SNOWHEAD_HOVERS: "Cross Path to Snowhead using Hover Boots",
   MM_GBT_RED1_HOVERS: "Reach the first red pipe in GBT using Hover Boots, Bunny Hood, and a Jump Slash",
   MM_GBT_GREEN2_UPPER_HOVERS: "Reach the Upper Chest in GBT's Second Green Room using Hover Boots",
+  MM_GYORG_IRONS: "Fight Gyorg as Human using Iron Boots and Hookshot",
   MM_STT_LAVA_BLOCK_HOVERS: "Stone Tower Temple Map Chest using Hover Boots",
   MM_ISTT_ENTRY_HOVER: "Inverted Stone Tower Temple Death Armos using Hover Boots and Bunny Hood",
 };
