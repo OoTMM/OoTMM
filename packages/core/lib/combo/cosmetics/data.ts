@@ -11,6 +11,10 @@ export const COSMETICS = [{
   name: 'OoT Zora Tunic',
   type: 'color',
 }, {
+  key: 'ootShieldMirror',
+  name: 'OoT Mirror Shield',
+  type: 'color',
+}, {
   key: 'mmTunicHuman',
   name: 'MM Human Tunic',
   type: 'color',
