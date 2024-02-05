@@ -185,3 +185,15 @@ PATCH_END
 PATCH_START 0x80855664
 .int 0
 PATCH_END
+
+/* Use our handler to draw the deku stick */
+DrawDekuStickTrampoline:
+  HOOK_CALL Player_DrawDekuStick
+  jr ra
+   nop
+
+PATCH_START 0x8007b8b8
+  jal DrawDekuStickTrampoline
+   nop
+  nop
+PATCH_END

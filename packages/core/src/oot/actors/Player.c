@@ -320,3 +320,19 @@ void Player_ProcessItemButtonsWrapper(Actor_Player* link, GameState_Play* play)
 
     Player_ProcessItemButtons(link, play);
 }
+
+void Player_DrawDekuStick(void)
+{
+    GameState_Play* play;
+    void* obj;
+
+    play = gPlay;
+    obj = comboGetObject(CUSTOM_OBJECT_ID_EQ_DEKU_STICK);
+    if (!obj)
+        return;
+
+    OPEN_DISPS(play->gs.gfx);
+    gSPSegment(POLY_OPA_DISP++, 0x0a, obj);
+    gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_EQ_DEKU_STICK_0);
+    CLOSE_DISPS();
+}
