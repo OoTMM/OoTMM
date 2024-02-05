@@ -173,3 +173,9 @@ PATCH_END
 PATCH_START 0x80853554
 .int 0
 PATCH_END
+
+/* Disable NPC reactions to masks */
+PATCH_START 0x800597c0
+  jr ra
+   li v0,0
+PATCH_END
