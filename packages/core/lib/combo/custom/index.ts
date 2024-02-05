@@ -26,6 +26,7 @@ type CustomEntry = {
   game: Game,
   name: string,
   file: string,
+  seg?: { in: number, out: number },
   offsets: number[],
 };
 
@@ -46,6 +47,7 @@ const ENTRIES: CustomEntry[] = [
   { game: 'oot', name: "GI_MEDALLION_SPIRIT",   file: "objects/object_gi_medal",     offsets: [0x3610, 0x0e18] },
   { game: 'oot', name: "GI_MEDALLION_SHADOW",   file: "objects/object_gi_medal",     offsets: [0x4330, 0x0e18] },
   { game: 'oot', name: "GI_MEDALLION_LIGHT",    file: "objects/object_gi_medal",     offsets: [0x5220, 0x0e18] },
+  { game: 'oot', name: "MASK_SKULL",            file: "objects/object_link_child",   seg: { in: 0x06, out: 0x0a }, offsets: [0x2ad40] },
 ];
 
 const getObjectBuffer = async (roms: DecompressedRoms, game: Game, file: string) => {
@@ -62,7 +64,8 @@ const getObjectBuffer = async (roms: DecompressedRoms, game: Game, file: string)
 /* TODO: Cache this */
 const makeSplitObject = async (roms: DecompressedRoms, entry: CustomEntry) => {
   const buf = await getObjectBuffer(roms, entry.game, entry.file);
-  const obj = splitObject(buf, entry.offsets);
+  const seg = entry.seg || { in: 6, out: 6 };
+  const obj = splitObject(buf, entry.offsets, seg.in, seg.out);
 
   if (!process.env.BROWSER) {
     const outDir = path.resolve('build', 'custom');

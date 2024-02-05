@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/sr.h>
 #include <combo/dungeon.h>
+#include <combo/custom.h>
 
 void ArrowCycle_Handle(Actor_Player* link, GameState_Play* play);
 
@@ -43,11 +44,11 @@ void comboPlayerUseItem(GameState_Play* play, Actor_Player* link, s16 itemId)
 
 PATCH_CALL(0x8083212c, comboPlayerUseItem);
 
-static int prepareMmMask(GameState_Play* play, u16 objectId, int needsMatrix)
+static int prepareMask(GameState_Play* play, u16 objectId, int needsMatrix)
 {
     void* obj;
 
-    obj = comboGetObject(objectId | MASK_FOREIGN_OBJECT);
+    obj = comboGetObject(objectId);
     if (!obj)
         return 0;
 
@@ -62,16 +63,25 @@ static int prepareMmMask(GameState_Play* play, u16 objectId, int needsMatrix)
 
 static void DrawExtendedMaskKeaton(GameState_Play* play, Actor_Player* link)
 {
-    if (!prepareMmMask(play, 0x01da, 1))
+    if (!prepareMask(play, 0x01da | MASK_FOREIGN_OBJECT, 1))
         return;
     OPEN_DISPS(play->gs.gfx);
     gSPDisplayList(POLY_OPA_DISP++, 0x0a0004a0);
     CLOSE_DISPS();
 }
 
+static void DrawExtendedMaskSkull(GameState_Play* play, Actor_Player* link)
+{
+    if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_SKULL, 1))
+        return;
+    OPEN_DISPS(play->gs.gfx);
+    gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_MASK_SKULL_0);
+    CLOSE_DISPS();
+}
+
 static void DrawExtendedMaskBunny(GameState_Play* play, Actor_Player* link)
 {
-    if (!prepareMmMask(play, 0x1db, 0))
+    if (!prepareMask(play, 0x1db | MASK_FOREIGN_OBJECT, 0))
         return;
 
     OPEN_DISPS(play->gs.gfx);
@@ -81,7 +91,7 @@ static void DrawExtendedMaskBunny(GameState_Play* play, Actor_Player* link)
 
 static void DrawExtendedMaskTruth(GameState_Play* play, Actor_Player* link)
 {
-    if (!prepareMmMask(play, 0x1de, 1))
+    if (!prepareMask(play, 0x1de | MASK_FOREIGN_OBJECT, 1))
         return;
 
     OPEN_DISPS(play->gs.gfx);
@@ -93,7 +103,7 @@ static void DrawExtendedMaskBlast(GameState_Play* play, Actor_Player* link)
 {
     u8 opacity;
 
-    if (!prepareMmMask(play, 0x01dd, 1))
+    if (!prepareMask(play, 0x01dd | MASK_FOREIGN_OBJECT, 1))
         return;
     if (gBlastMaskDelayAcc > 0x11)
         opacity = 0;
@@ -121,7 +131,7 @@ typedef void (*MaskCallback)(GameState_Play*, Actor_Player*);
 
 static const MaskCallback kMaskCallbacks[] = {
     DrawExtendedMaskKeaton,
-    NULL,
+    DrawExtendedMaskSkull,
     NULL,
     DrawExtendedMaskBunny,
     NULL,
