@@ -325,6 +325,13 @@ class CosmeticsPass {
     const icon = this.roms.oot.rom.subarray(iconVrom, iconVrom + 0x1000);
     const newIcon = recolorImage('rgba32', icon, this.assets.MASK_OOT_SHIELD_MIRROR, 0xff1313, color);
     this.patch.addDataPatch('oot', iconVrom, newIcon);
+
+    /* Patch gi */
+    const giObj = 0x01616000;
+    const primColor = this.colorBufferRGB(color);
+    const envColor = this.colorBufferRGB(brightness(color, 0.2));
+    this.patch.addDataPatch('oot', giObj + 0xfc8 + 4, primColor);
+    this.patch.addDataPatch('oot', giObj + 0xfd0 + 4, envColor);
   }
 
   async run(): Promise<CosmeticsOutput> {
