@@ -168,6 +168,8 @@ ComboData;
 
 extern ComboData gComboData;
 
+ALIGNED(16) extern const Gfx kDListEmpty[];
+
 void comboLoadContext(void);
 void comboExportContext(void);
 
@@ -176,8 +178,15 @@ void comboInit(void);
 void comboInitOverride(void);
 void comboInitData(void);
 
+void comboItemIcon(void* dst, int itemId);
+void comboLoadMmIcon(void* dst, u32 iconBank, int iconId);
+
 /* Flash */
 void comboReadWriteFlash(u32 devAddr, void* dramAddr, u32 size, s32 direction);
+
+#if defined(GAME_OOT)
+extern u16 gBlastMaskDelayAcc;
+#endif
 
 /* Save */
 #define SF_OWL          0x01
@@ -199,6 +208,8 @@ NORETURN void comboGameSwitch(GameState_Play* play, s32 entrance);
 #if defined(GAME_OOT)
 void swapFarore(void);
 #endif
+
+void comboPlayerUseItem(GameState_Play* play, Actor_Player* link, s16 itemId);
 
 /* Override */
 #define OV_NONE         0x00

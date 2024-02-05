@@ -184,7 +184,7 @@ static s32 Player_ActionToTunic(Actor_Player* this, s32 itemAction)
 
 Actor* Player_SpawnMagicSpellActor(GameState_Play* play, Actor_Player* this, s8 magicSpell)
 {
-    return SpawnActor(&play->actorCtx, play, sMagicSpellActorIds[magicSpell], this->base.position.x, this->base.position.y, this->base.position.z, 0, 0, 0, 0);
+    return SpawnActor(&play->actorCtx, play, sMagicSpellActorIds[magicSpell], this->base.world.pos.x, this->base.world.pos.y, this->base.world.pos.z, 0, 0, 0, 0);
 }      // size = 0x4
 
 typedef void (*Player_PlayAnimSfx)(Actor_Player*, AnimSfxEntry*);
@@ -255,7 +255,7 @@ void Player_Action_CastingSpell(Actor_Player* this, GameState_Play* play)
 
             if (this->av2.actionVar2 == 0)
             {
-                gFwPointerPos = this->base.position;
+                gFwPointerPos = this->base.world.pos;
                 gSaveContext.save.fw.set = 1;
                 gSaveContext.save.fw.pos.x = gSaveContext.respawn[RESPAWN_MODE_DOWN].pos.x;
                 gSaveContext.save.fw.pos.y = gSaveContext.respawn[RESPAWN_MODE_DOWN].pos.y;
@@ -626,7 +626,7 @@ void Player_Action_FaroresWindSpawning(Actor_Player* this, GameState_Play* play)
     {
         Player_Draw = OverlayAddr(0x80846528);
         this->base.draw = Player_Draw;
-        this->base.position.y += 60.0f;
+        this->base.world.pos.y += 60.0f;
         Player_func_80833AA0 = OverlayAddr(0x80833AA0);
         Player_func_80833AA0(this, play);
         return;
@@ -958,8 +958,8 @@ void Player_SkelAnime_DrawFlexLod(GameState_Play* play, void** skeleton, Vec3s* 
                 sHoverBootCircleAlpha *= sp5C * (1.0f / 9.0f);
             }
 
-            Matrix_SetTranslateRotateYXZ(player->base.position.x, player->base.position.y + 2.0f,
-                                         player->base.position.z, &sHoverBootsRot);
+            Matrix_SetTranslateRotateYXZ(player->base.world.pos.x, player->base.world.pos.y + 2.0f,
+                                         player->base.world.pos.z, &sHoverBootsRot);
             ModelViewScale(4.0f, 4.0f, 4.0f, MAT_MUL);
 
             gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);

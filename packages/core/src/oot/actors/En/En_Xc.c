@@ -21,7 +21,7 @@ static void EnXc_Update_ForestMeadow(Actor* actor, GameState_Play* play)
 {
     if (checkSetEvent(actor, EV_OOT_CHK_SONG_TP_FOREST))
         return;
-    if (GET_LINK(play)->base.position.z < -2225.f)
+    if (GET_LINK(play)->base.world.pos.z < -2225.f)
         comboGiveItemNpc(actor, play, GI_OOT_SONG_TP_FOREST, NPC_OOT_SHEIK_FOREST, 10000.f, 50.f);
 }
 
@@ -34,9 +34,9 @@ static void EnXc_Update_DeathMountainCrater(Actor* actor, GameState_Play* play)
     if (checkSetEvent(actor, EV_OOT_CHK_SONG_TP_FIRE))
         return;
 
-    x = GET_LINK(play)->base.position.x;
-    y = GET_LINK(play)->base.position.y;
-    z = GET_LINK(play)->base.position.z;
+    x = GET_LINK(play)->base.world.pos.x;
+    y = GET_LINK(play)->base.world.pos.y;
+    z = GET_LINK(play)->base.world.pos.z;
 
     if (x <= -784.f || x >= -584.f)
         return;

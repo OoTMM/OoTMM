@@ -136,10 +136,10 @@
 "Moon Trial Link Iron Knuckle Fight":
   region: MOON
   exits:
-    "Moon Trial Link Rest 2": "soul_iron_knuckle && (has_weapon || has_mask_goron || has_bombs || has_bombchu || (has(MASK_BLAST) && masks(5)))"
-    "Moon Trial Link Rest 3": "soul_iron_knuckle && (has_weapon || has_mask_goron || has_bombs || has_bombchu || (has(MASK_BLAST) && masks(5))) && ((has_bombchu && has_arrows) || short_hook_anywhere)"
+    "Moon Trial Link Rest 2": "soul_iron_knuckle && (has_weapon || has_mask_goron || has_bombs || has_bombchu || (has_mask_blast && masks(5)))"
+    "Moon Trial Link Rest 3": "soul_iron_knuckle && (has_weapon || has_mask_goron || has_bombs || has_bombchu || (has_mask_blast && masks(5))) && ((has_bombchu && has_arrows) || short_hook_anywhere)"
   locations:
-    "Moon Trial Link Iron Knuckle Chest": "soul_iron_knuckle && (has_weapon || has_mask_goron || has_bombs || has_bombchu || (has(MASK_BLAST) && masks(5)))"
+    "Moon Trial Link Iron Knuckle Chest": "soul_iron_knuckle && (has_weapon || has_mask_goron || has_bombs || has_bombchu || (has_mask_blast && masks(5)))"
   gossip:
     "Moon Trial Link Gossip Left": "short_hook_anywhere || (has_bombchu && has_arrows)"
     "Moon Trial Link Gossip Right": "short_hook_anywhere || (has_bombchu && has_arrows)"
@@ -147,7 +147,7 @@
   region: MOON
   exits:
     "Moon Trial Link Iron Knuckle Fight": "true"
-    "Moon Trial Link Exit": "(has_bombchu || (short_hook_anywhere && has(MASK_BLAST) && masks(5))) && can_use_fire_arrows"
+    "Moon Trial Link Exit": "(has_bombchu || (short_hook_anywhere && has_mask_blast && masks(5))) && can_use_fire_arrows"
   locations:
     "Moon Trial Link HP": "true"
   gossip:

@@ -76,7 +76,7 @@ void ObjTsubo_SpawnShuffledDrop(Actor_ObjTsubo* this, GameState_Play* play)
 
     if (ObjTsubo_IsShuffled(this))
     {
-        EnItem00_DropCustom(play, &this->base.position, &this->xflag);
+        EnItem00_DropCustom(play, &this->base.world.pos, &this->xflag);
         return;
     }
 
@@ -84,7 +84,7 @@ void ObjTsubo_SpawnShuffledDrop(Actor_ObjTsubo* this, GameState_Play* play)
     var = this->base.variable;
     if ((var & 0xff) < 0x1a)
     {
-        Item_DropCollectible(play, &this->base.position, (var & 0xff) | (((var >> 9) & 0x3f) << 8));
+        Item_DropCollectible(play, &this->base.world.pos, (var & 0xff) | (((var >> 9) & 0x3f) << 8));
     }
 }
 

@@ -108,7 +108,7 @@ static void CustomWarp_Draw(Actor_CustomWarp* this, GameState_Play* play)
     static const float scale = 0.003f;
 
     /* Transform */
-    ModelViewTranslate(this->base.position.x, this->base.position.y, this->base.position.z, MAT_SET);
+    ModelViewTranslate(this->base.world.pos.x, this->base.world.pos.y, this->base.world.pos.z, MAT_SET);
     ModelViewScale(scale, scale, scale, MAT_MUL);
 
     /* Draw */

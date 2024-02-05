@@ -73,7 +73,7 @@ void EnKusa_SpawnShuffledDrop(Actor_EnKusa* this, GameState_Play* play)
     }
 
     /* Spawn a custom item */
-    EnItem00_DropCustom(play, &this->base.position, &this->xflag);
+    EnItem00_DropCustom(play, &this->base.world.pos, &this->xflag);
 }
 
 void EnKusa_DrawWrapper(Actor_EnKusa* this, GameState_Play* play)

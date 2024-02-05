@@ -4,9 +4,12 @@
 #include <combo/dma.h>
 #include <combo/item.h>
 
+
+
 static int checkItemToggle(GameState_Play* play)
 {
     PauseContext* p;
+    Actor_Player* link;
     int ret;
     int press;
 
@@ -39,7 +42,12 @@ static int checkItemToggle(GameState_Play* play)
     {
         ret = 1;
         if (press)
+        {
+            link = GET_LINK(play);
+            link->mask = 0;
             comboToggleTradeChild();
+            Interface_LoadItemIconImpl(play, 0);
+        }
     }
 
     if (p->item_cursor >= ITS_OOT_BOTTLE && p->item_cursor <= ITS_OOT_BOTTLE4 && gSave.inventory.items[p->item_cursor] == ITEM_OOT_BIG_POE)
@@ -58,7 +66,7 @@ static int checkItemToggle(GameState_Play* play)
         }
     }
 
-    if (p->equip_item >= ITEM_OOT_SHIELD_DEKU && p->equip_item <= ITEM_OOT_SHIELD_MIRROR && gSave.equips.equipment.shields == (p->equip_item-ITEM_OOT_SHIELD_DEKU)+1) 
+    if (p->equip_item >= ITEM_OOT_SHIELD_DEKU && p->equip_item <= ITEM_OOT_SHIELD_MIRROR && gSave.equips.equipment.shields == (p->equip_item-ITEM_OOT_SHIELD_DEKU)+1)
     {
         ret = 1;
         if (press)
@@ -1523,4 +1531,72 @@ s32 KaleidoScope_BeforeDraw(GameState_Play* play)
     }
 
     return 0;
+}
+
+
+void KaleidoScope_DrawItemHook(GfxContext* gfx, int slotId, int sizeX, int sizeY, int unk)
+{
+    static void* sExtraIconTradeChild;
+    static u8 sExtraIconTradeChildItem;
+
+    void (*KaleidoScope_DrawItem)(GfxContext*, u32, int, int, int);
+    u32* itemToIcon;
+    u32 icon;
+
+    KaleidoScope_DrawItem = OverlayAddr(0x8081f1e8);
+    itemToIcon = (u32*)0x800f8d2c;
+
+    icon = 0;
+    switch (slotId)
+    {
+    case ITS_OOT_TRADE_CHILD:
+        if (!sExtraIconTradeChild)
+        {
+            sExtraIconTradeChild = malloc(0x1000);
+            sExtraIconTradeChildItem = ITEM_NONE;
+        }
+        if (sExtraIconTradeChild)
+        {
+            if (sExtraIconTradeChildItem != gSave.inventory.items[slotId])
+            {
+                sExtraIconTradeChildItem = gSave.inventory.items[slotId];
+                comboItemIcon(sExtraIconTradeChild, sExtraIconTradeChildItem);
+            }
+            icon = (u32)sExtraIconTradeChild & 0x00ffffff;
+        }
+        break;
+    default:
+        icon = itemToIcon[gSave.inventory.items[slotId]];
+        KaleidoScope_DrawItem(gfx, itemToIcon[gSave.inventory.items[slotId]], sizeX, sizeY, unk);
+        break;
+    }
+
+    if (icon)
+        KaleidoScope_DrawItem(gfx, icon, sizeX, sizeY, unk);
+}
+
+#define ITEM_OFFSET 123
+
+void KaleidoScope_LoadItemName(void* dst, s16 id)
+{
+    s16 itemId;
+
+    itemId = id - 123;
+    if (itemId == ITEM_NONE)
+    {
+        memset(dst, 0, 0x400);
+    }
+    else if (itemId == ITEM_OOT_MASK_BLAST)
+    {
+        comboLoadMmIcon(dst, 0xa27660, ITEM_MM_MASK_BLAST);
+    }
+    else if (itemId == ITEM_OOT_KEATON_MASK)
+    {
+        /* Fixes 1.0 spelling mistake */
+        comboLoadMmIcon(dst, 0xa27660, ITEM_MM_MASK_KEATON);
+    }
+    else
+    {
+        LoadFile(dst, 0x880000 + 0x400 * id, 0x400);
+    }
 }

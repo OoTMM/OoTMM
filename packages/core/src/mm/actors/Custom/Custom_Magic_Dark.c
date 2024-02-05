@@ -85,7 +85,7 @@ void MagicDark_Init(Actor* thisx, GameState_Play* play) {
 
     this->scale = MagicDark_GetScale(player);
 
-    thisx->position = player->base.position;
+    thisx->world.pos = player->base.world.pos;
     ActorSetScale(&this->actor, 0.0f);
     thisx->room = -1;
 
@@ -167,8 +167,8 @@ void MagicDark_DiamondUpdate(Actor* thisx, GameState_Play* play) {
         this->primAlpha = phi_a0;
     }
 
-    thisx->speedRot.y += 0x3E8;
-    thisx->rot2.y = thisx->position.y + Camera_GetCamDirYaw(GET_ACTIVE_CAM(play));
+    thisx->world.rot.y += 0x3E8;
+    thisx->rot2.y = thisx->world.pos.y + Camera_GetCamDirYaw(GET_ACTIVE_CAM(play));
     this->timer++;
     gSaveContext.nayrusLoveTimer = nayrusLoveTimer + 1;
 
@@ -253,16 +253,16 @@ void MagicDark_DiamondDraw(Actor* thisx, GameState_Play* play) {
         Actor_Player* player = GET_LINK(play);
         f32 heightDiff;
 
-        this->actor.position.x = player->bodyPartsPos[PLAYER_BODYPART_WAIST].x;
-        this->actor.position.z = player->bodyPartsPos[PLAYER_BODYPART_WAIST].z;
-        f32 y = player->base.position.y + Player_GetHeight(player) * 0.5f;
-        heightDiff = y - this->actor.position.y;
+        this->actor.world.pos.x = player->bodyPartsPos[PLAYER_BODYPART_WAIST].x;
+        this->actor.world.pos.z = player->bodyPartsPos[PLAYER_BODYPART_WAIST].z;
+        f32 y = player->base.world.pos.y + Player_GetHeight(player) * 0.5f;
+        heightDiff = y - this->actor.world.pos.y;
         if (heightDiff < -2.0f) {
-            this->actor.position.y = y + 2.0f;
+            this->actor.world.pos.y = y + 2.0f;
         } else if (heightDiff > 2.0f) {
-            this->actor.position.y = y - 2.0f;
+            this->actor.world.pos.y = y - 2.0f;
         }
-        ModelViewTranslate(this->actor.position.x, this->actor.position.y, this->actor.position.z, MAT_SET);
+        ModelViewTranslate(this->actor.world.pos.x, this->actor.world.pos.y, this->actor.world.pos.z, MAT_SET);
         ModelViewScale(this->actor.scale.x, this->actor.scale.y, this->actor.scale.z, MAT_MUL);
         ModelViewRotateY(BINANG_TO_RAD(this->actor.rot2.y), MAT_MUL);
         gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx),

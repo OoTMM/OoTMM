@@ -101,7 +101,7 @@ u8 comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
         /* Goron shop */
         switch (girlA->base.variable)
         {
-        case SHOP_RECOVERY_HEART:   return girlA->base.position.x < -60.f ? 0x18 : 0x19;
+        case SHOP_RECOVERY_HEART:   return girlA->base.world.pos.x < -60.f ? 0x18 : 0x19;
         case SHOP_POTION_RED_ALT:   return 0x1a;
         case SHOP_TUNIC_GORON:      return 0x1b;
         case SHOP_BOMBS_5_ALT:      return 0x1c;

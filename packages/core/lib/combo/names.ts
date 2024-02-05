@@ -66,7 +66,7 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   MM_MAP_ST: "Map (Stone Tower Temple)",
   MM_MAP_WF: "Map (Woodfall Temple)",
   MM_MASK_ALL_NIGHT: "All-Night Mask",
-  MM_MASK_BLAST: "Blast Mask",
+  MM_MASK_BLAST: "Blast Mask (MM)",
   MM_MASK_BREMEN: "Bremen Mask",
   MM_MASK_BUNNY: "Bunny Hood (MM)",
   MM_MASK_CAPTAIN: "Captain's Hat",
@@ -692,6 +692,8 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   MM_BOOTS_HOVER: 'Hover Boots (MM)',
   MM_TUNIC_GORON: 'Goron Tunic (MM)',
   MM_TUNIC_ZORA: 'Zora Tunic (MM)',
+  OOT_MASK_BLAST: "Blast Mask (OoT)",
+  SHARED_MASK_BLAST: "Blast Mask",
 };
 
 export function itemName(item: string) {

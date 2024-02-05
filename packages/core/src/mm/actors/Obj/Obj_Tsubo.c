@@ -15,7 +15,7 @@ void ObjTsubo_Alias(Actor_ObjTsubo* this)
         xflag->sceneId = SCE_MM_EXTRA;
         xflag->setupId = 0;
         xflag->roomId = 0;
-        switch ((s16)(this->base.initPos.x))
+        switch ((s16)(this->base.home.pos.x))
         {
         case 0x04D0: xflag->id = 0; break;
         case 0x0560: xflag->id = 1; break;
@@ -99,7 +99,7 @@ void ObjTsubo_SpawnShuffledDrop(Actor_ObjTsubo* this, GameState_Play* play)
 
     if (ObjTsubo_IsShuffled(this))
     {
-        EnItem00_DropCustom(play, &this->base.position, &this->xflag);
+        EnItem00_DropCustom(play, &this->base.world.pos, &this->xflag);
         return;
     }
 
@@ -114,7 +114,7 @@ void ObjTsubo_SpawnShuffledDropFlexible(Actor_ObjTsubo* this, GameState_Play* pl
 
     if (ObjTsubo_IsShuffled(this))
     {
-        EnItem00_DropCustom(play, &this->base.position, &this->xflag);
+        EnItem00_DropCustom(play, &this->base.world.pos, &this->xflag);
         return;
     }
 

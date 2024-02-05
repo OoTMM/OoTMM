@@ -692,6 +692,8 @@ const ITEM_IDS = [
   'MM_BOOTS_HOVER',
   'MM_TUNIC_GORON',
   'MM_TUNIC_ZORA',
+  'OOT_MASK_BLAST',
+  'SHARED_MASK_BLAST',
 ] as const;
 
 export type ItemID = typeof ITEM_IDS[number];

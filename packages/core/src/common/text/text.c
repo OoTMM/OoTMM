@@ -265,6 +265,9 @@ static int isItemAmbiguous(s16 gi)
     case GI_OOT_MASK_TRUTH:
     case GI_MM_MASK_TRUTH:
         return !comboConfig(CFG_SHARED_MASK_TRUTH);
+    case GI_OOT_MASK_BLAST:
+    case GI_MM_MASK_BLAST:
+        return (comboConfig(CFG_OOT_MASK_BLAST) && !comboConfig(CFG_SHARED_MASK_BLAST));
     case GI_OOT_WALLET:
     case GI_OOT_WALLET2:
     case GI_OOT_WALLET3:

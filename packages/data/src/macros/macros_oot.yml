@@ -139,7 +139,7 @@
 #Item Combination Macros
 "has_explosives": "has_bombs || has_bombchu"
 "has_bombflowers": "has_explosives || has(STRENGTH)"
-"has_explosives_or_hammer": "has_explosives || can_hammer"
+"has_explosives_or_hammer": "has_explosives || can_hammer || can_use_mask_blast"
 "can_hit_triggers_distance": "can_use_slingshot || can_use_bow"
 "has_ranged_weapon_child": "can_use_slingshot || can_boomerang"
 "has_ranged_weapon_adult": "can_use_bow || can_hookshot"
@@ -254,6 +254,8 @@
 
 # Masks
 "has_mask_truth": "has(MASK_TRUTH) || has(SHARED_MASK_TRUTH)"
+"has_mask_blast": "setting(blastMaskOot) && cond(setting(sharedMaskBlast), has(SHARED_MASK_BLAST), has(MASK_BLAST))"
+"can_use_mask_blast": "age_child_trade && has_mask_blast"
 
 # Glitches
 "glitch_equip_swap": "glitch(OOT_EQUIP_SWAP) && (has(SPELL_FIRE) || (has_sticks && (is_child || setting(agelessSticks))))"
