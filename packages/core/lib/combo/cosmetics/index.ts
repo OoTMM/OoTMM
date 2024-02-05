@@ -23,6 +23,7 @@ const OBJECTS_TABLE_ADDR = 0x800f8ff8;
 export async function cosmeticsAssets(opts: Options) {
   return {
     MASK_TUNIC: await png(opts, 'masks/tunic', 'bitmask'),
+    MASK_OOT_SHIELD_MIRROR: await png(opts, 'masks/oot_shield_mirror', 'bitmask'),
   }
 }
 
@@ -318,6 +319,12 @@ class CosmeticsPass {
     for (const off of [0x21270, 0x21768, 0x24278, 0x26560, 0x26980, 0x28DD0]) {
       this.patch.addDataPatch('oot', objLinkBoyVrom + off + 4, buffer);
     }
+
+    /* Patch icon */
+    const iconVrom = 0x7fd000;
+    const icon = this.roms.oot.rom.subarray(iconVrom, iconVrom + 0x1000);
+    const newIcon = recolorImage('rgba32', icon, this.assets.MASK_OOT_SHIELD_MIRROR, 0xff1313, color);
+    this.patch.addDataPatch('oot', iconVrom, newIcon);
   }
 
   async run(): Promise<CosmeticsOutput> {
