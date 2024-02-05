@@ -103,6 +103,19 @@ class CosmeticsPass {
     }
   }
 
+  private colorArgNew(c: ColorArg, auto?: () => number | null): number | null {
+    switch (c) {
+    case 'default':
+      return null;
+    case 'random':
+      return sample(this.random, Object.values(COLORS)).value;
+    case 'auto':
+      return auto ? auto() : null;
+    default:
+      return COLORS[c].value;
+    }
+  }
+
   private colorBufferRGB(color: number) {
     const buffer = Buffer.alloc(3);
     buffer.writeUInt8(color >>> 16, 0);
@@ -295,6 +308,18 @@ class CosmeticsPass {
     this.patch.addDataPatch('mm', paddr + lutOff, newLut);
   }
 
+  private patchOotShieldMirror(color: number | null) {
+    if (color === null)
+      return;
+    const buffer = this.colorBufferRGB(color);
+
+    /* Patch the field model */
+    const objLinkBoyVrom = 0xf86000;
+    for (const off of [0x21270, 0x21768, 0x24278, 0x26560, 0x26980, 0x28DD0]) {
+      this.patch.addDataPatch('oot', objLinkBoyVrom + off + 4, buffer);
+    }
+  }
+
   async run(): Promise<CosmeticsOutput> {
     const { cosmetics } = this.opts;
     this.assets = await cosmeticsAssets(this.opts);
@@ -308,11 +333,13 @@ class CosmeticsPass {
     const colorMmTunicGoron = this.colorArg(cosmetics.mmTunicGoron, 'kokirigreen', () => colorMmTunicHuman);
     const colorMmTunicZora = this.colorArg(cosmetics.mmTunicZora, 'kokirigreen', () => colorMmTunicHuman);
     const colorMmTunicFierceDeity = this.colorArg(cosmetics.mmTunicFierceDeity, 'white', () => 'white');
+    const colorOotShieldMirror = this.colorArgNew(this.opts.cosmetics.ootShieldMirror);
 
     /* OoT tunics */
     this.patchOotTunic(0, colorOotTunicKokiri);
     this.patchOotTunic(1, colorOotTunicGoron);
     this.patchOotTunic(2, colorOotTunicZora);
+    this.patchOotShieldMirror(colorOotShieldMirror);
 
     /* MM tunics */
     this.patchMmTunic(0x0115b000, 'kokirigreen', colorMmTunicHuman, [0xb39c, 0xb8c4, 0xbdcc, 0xbfa4, 0xc064, 0xc66c, 0xcae4, 0xcd1c, 0xcea4, 0xd1ec, 0xd374]);
