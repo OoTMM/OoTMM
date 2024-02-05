@@ -11,7 +11,9 @@ class ObjectSplitter {
   private outOffsets: number[] = [];
 
   constructor(
-    private readonly object: Buffer
+    private readonly object: Buffer,
+    private readonly segIn: number,
+    private readonly segOut: number,
   ) {}
 
   splitList(offset: number) {
@@ -40,6 +42,7 @@ class ObjectSplitter {
             bpp = 4;
             break;
           case 0x10:
+          case 0x70:
             bpp = 16;
             break;
           default:
@@ -59,7 +62,7 @@ class ObjectSplitter {
         }
       }
     }
-    this.outOffsets.push(this.outSize | 0x06000000);
+    this.outOffsets.push(this.outSize | (this.segOut << 24));
     this.outSize += size;
     this.out.push(list);
     if (this.outSize % 16) {
@@ -91,7 +94,7 @@ class ObjectSplitter {
 
   private copy(addr: number, size: number): number {
     const seg = (addr >>> 24);
-    if (seg !== 0x06) {
+    if (seg !== this.segIn) {
       return addr;
     }
     addr &= 0xffffff;
@@ -99,7 +102,7 @@ class ObjectSplitter {
     if (seenAddr !== undefined) {
       return seenAddr;
     }
-    const newAddr = this.outSize | 0x06000000;
+    const newAddr = this.outSize | (this.segOut << 24);
     this.outSize += size;
     this.out.push(Buffer.from(this.object.subarray(addr, addr + size)));
     this.seen.set(addr, newAddr);
@@ -107,8 +110,8 @@ class ObjectSplitter {
   }
 };
 
-export const splitObject = (object: Buffer, offsets: number[]) => {
-  const splitter = new ObjectSplitter(object);
+export const splitObject = (object: Buffer, offsets: number[], segIn: number, segOut: number) => {
+  const splitter = new ObjectSplitter(object, segIn, segOut);
   for (const offset of offsets) {
     splitter.splitList(offset);
   }
