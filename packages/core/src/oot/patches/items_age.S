@@ -27,7 +27,9 @@ AdultMasks:
   jr      ra
    lb     t7,0x013f(s0)
 
+/*
 PATCH_START 0x808483dc
   jal AdultMasks
    nop
 PATCH_END
+*/

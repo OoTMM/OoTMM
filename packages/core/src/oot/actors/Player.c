@@ -43,7 +43,7 @@ void comboPlayerUseItem(GameState_Play* play, Actor_Player* link, s16 itemId)
 
 PATCH_CALL(0x8083212c, comboPlayerUseItem);
 
-static int prepareMmMask(GameState_Play* play, u16 objectId)
+static int prepareMmMask(GameState_Play* play, u16 objectId, int needsMatrix)
 {
     void* obj;
 
@@ -52,7 +52,8 @@ static int prepareMmMask(GameState_Play* play, u16 objectId)
         return 0;
 
     OPEN_DISPS(play->gs.gfx);
-    gSPMatrix(POLY_OPA_DISP++, 0x0d0001c0, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    if (needsMatrix)
+        gSPMatrix(POLY_OPA_DISP++, 0x0d0001c0, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPSegment(POLY_OPA_DISP++, 0x0a, obj);
     CLOSE_DISPS();
 
@@ -61,10 +62,20 @@ static int prepareMmMask(GameState_Play* play, u16 objectId)
 
 static void DrawExtendedMaskKeaton(GameState_Play* play, Actor_Player* link)
 {
-    if (!prepareMmMask(play, 0x01da))
+    if (!prepareMmMask(play, 0x01da, 1))
         return;
     OPEN_DISPS(play->gs.gfx);
     gSPDisplayList(POLY_OPA_DISP++, 0x0a0004a0);
+    CLOSE_DISPS();
+}
+
+static void DrawExtendedMaskBunny(GameState_Play* play, Actor_Player* link)
+{
+    if (!prepareMmMask(play, 0x1db, 0))
+        return;
+
+    OPEN_DISPS(play->gs.gfx);
+    gSPDisplayList(POLY_OPA_DISP++, 0x0a000610);
     CLOSE_DISPS();
 }
 
@@ -72,7 +83,7 @@ static void DrawExtendedMaskBlast(GameState_Play* play, Actor_Player* link)
 {
     u8 opacity;
 
-    if (!prepareMmMask(play, 0x01dd))
+    if (!prepareMmMask(play, 0x01dd, 1))
         return;
     if (gBlastMaskDelayAcc > 0x11)
         opacity = 0;
@@ -96,32 +107,40 @@ static void DrawExtendedMaskBlast(GameState_Play* play, Actor_Player* link)
     CLOSE_DISPS();
 }
 
-static void DrawExtendedMask(GameState_Play* play, Actor_Player* link)
-{
-    if (gSave.age == AGE_CHILD && link->mask < PLAYER_MASK_BLAST)
-        return;
+typedef void (*MaskCallback)(GameState_Play*, Actor_Player*);
 
-    switch (link->mask)
-    {
-    case PLAYER_MASK_KEATON:
-        DrawExtendedMaskKeaton(play, link);
-        break;
-    case PLAYER_MASK_BLAST:
-        DrawExtendedMaskBlast(play, link);
-        break;
-    }
-}
+static const MaskCallback kMaskCallbacks[] = {
+    DrawExtendedMaskKeaton,
+    NULL,
+    NULL,
+    DrawExtendedMaskBunny,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    DrawExtendedMaskBlast,
+};
 
-static void DrawLinkWrapper(GameState_Play* play, void** skeleton, Vec3s* jointTable, s32 dListCount, s32 lod, s32 tunic, s32 boots, s32 face, void* overrideLimbDraw, void* postLimbDraw, void* data)
+void comboDrawExtendedMask(void)
 {
+    GameState_Play* play;
     Actor_Player* link;
+    MaskCallback cb;
+    int index;
 
+    play = gPlay;
     link = GET_LINK(play);
-    DrawLink(play, skeleton, jointTable, dListCount, lod, tunic, boots, face, overrideLimbDraw, postLimbDraw, data);
-    DrawExtendedMask(play, link);
-}
 
-PATCH_CALL(0x8084829c, DrawLinkWrapper);
+    if (link->mask == 0)
+        return;
+    index = link->mask - 1;
+    if (index >= ARRAY_SIZE(kMaskCallbacks))
+        return;
+    cb = kMaskCallbacks[index];
+    if (!cb)
+        return;
+    cb(play, link);
+}
 
 void Player_UpdateWrapper(Actor_Player* this, GameState_Play* play)
 {
