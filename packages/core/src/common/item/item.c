@@ -209,6 +209,13 @@ static int overrideData(ComboOverrideData* data, u32 key)
     u32 cursor;
     u32 ovData[2];
 
+#if defined(DEBUG) && defined(DEBUG_MM_OVERRIDE) && defined(GAME_MM)
+    data->key = 0;
+    data->player = 1;
+    data->value = DEBUG_MM_OVERRIDE;
+    return 1;
+#endif
+
     /* Check the cache */
     for (int i = 0; i < ARRAY_SIZE(sComboOverridesCache); ++i)
     {

@@ -15,9 +15,9 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.upgrades.quiver = 3;
         gSave.inventory.upgrades.dekuStick = 3;
         gSave.inventory.upgrades.dekuNut = 3;
-        gMmExtraFlags2.childWallet = 1;
-        gSave.inventory.upgrades.wallet = 3;
-        gMmExtraFlags3.bottomlessWallet = 1;
+        //gMmExtraFlags2.childWallet = 1;
+        //gSave.inventory.upgrades.wallet = 3;
+        //gMmExtraFlags3.bottomlessWallet = 1;
         gSave.inventory.upgrades.bombBag = 0;
 
         gSave.itemEquips.buttonItems[0][0] = ITEM_MM_SWORD_KOKIRI;
