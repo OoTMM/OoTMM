@@ -43,13 +43,36 @@ void comboPlayerUseItem(GameState_Play* play, Actor_Player* link, s16 itemId)
 
 PATCH_CALL(0x8083212c, comboPlayerUseItem);
 
-static void DrawExtendedMaskBlast(GameState_Play* play, Actor_Player* link)
+static int prepareMmMask(GameState_Play* play, u16 objectId)
 {
     void* obj;
+
+    obj = comboGetObject(objectId | MASK_FOREIGN_OBJECT);
+    if (!obj)
+        return 0;
+
+    OPEN_DISPS(play->gs.gfx);
+    gSPMatrix(POLY_OPA_DISP++, 0x0d0001c0, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPSegment(POLY_OPA_DISP++, 0x0a, obj);
+    CLOSE_DISPS();
+
+    return 1;
+}
+
+static void DrawExtendedMaskKeaton(GameState_Play* play, Actor_Player* link)
+{
+    if (!prepareMmMask(play, 0x01da))
+        return;
+    OPEN_DISPS(play->gs.gfx);
+    gSPDisplayList(POLY_OPA_DISP++, 0x0a0004a0);
+    CLOSE_DISPS();
+}
+
+static void DrawExtendedMaskBlast(GameState_Play* play, Actor_Player* link)
+{
     u8 opacity;
 
-    obj = comboGetObject(0x01dd | MASK_FOREIGN_OBJECT);
-    if (!obj)
+    if (!prepareMmMask(play, 0x01dd))
         return;
     if (gBlastMaskDelayAcc > 0x11)
         opacity = 0;
@@ -57,9 +80,7 @@ static void DrawExtendedMaskBlast(GameState_Play* play, Actor_Player* link)
         opacity = 0xff - (gBlastMaskDelayAcc * 0x0f);
 
     OPEN_DISPS(play->gs.gfx);
-    gSPMatrix(POLY_OPA_DISP++, 0x0d0001c0, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPSegment(POLY_OPA_DISP++, 0x09, kDListEmpty);
-    gSPSegment(POLY_OPA_DISP++, 0x0a, obj);
 
     if (opacity)
     {
@@ -77,9 +98,15 @@ static void DrawExtendedMaskBlast(GameState_Play* play, Actor_Player* link)
 
 static void DrawExtendedMask(GameState_Play* play, Actor_Player* link)
 {
+    if (gSave.age == AGE_CHILD && link->mask < PLAYER_MASK_BLAST)
+        return;
+
     switch (link->mask)
     {
-    case 9:
+    case PLAYER_MASK_KEATON:
+        DrawExtendedMaskKeaton(play, link);
+        break;
+    case PLAYER_MASK_BLAST:
         DrawExtendedMaskBlast(play, link);
         break;
     }
@@ -91,9 +118,7 @@ static void DrawLinkWrapper(GameState_Play* play, void** skeleton, Vec3s* jointT
 
     link = GET_LINK(play);
     DrawLink(play, skeleton, jointTable, dListCount, lod, tunic, boots, face, overrideLimbDraw, postLimbDraw, data);
-    //if (data == (void*)0x8007aa94)
-    if (link->mask >= 9)
-        DrawExtendedMask(play, link);
+    DrawExtendedMask(play, link);
 }
 
 PATCH_CALL(0x8084829c, DrawLinkWrapper);

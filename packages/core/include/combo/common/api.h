@@ -17,6 +17,19 @@
 #define PLAYER_ACTOR_STATE_USE_ITEM             0x10000000
 #define PLAYER_ACTOR_STATE_CUTSCENE_FROZEN      0x20000000
 
+#if defined(GAME_OOT)
+# define PLAYER_MASK_NONE               0x00
+# define PLAYER_MASK_KEATON             0x01
+# define PLAYER_MASK_SKULL              0x02
+# define PLAYER_MASK_SPOOKY             0x03
+# define PLAYER_MASK_BUNNY              0x04
+# define PLAYER_MASK_GORON              0x05
+# define PLAYER_MASK_ZORA               0x06
+# define PLAYER_MASK_GERUDO             0x07
+# define PLAYER_MASK_TRUTH              0x08
+# define PLAYER_MASK_BLAST              0x09
+#endif
+
 #if defined(GAME_MM)
 # define PLAYER_MASK_NONE               0x00
 # define PLAYER_MASK_TRUTH              0x01
