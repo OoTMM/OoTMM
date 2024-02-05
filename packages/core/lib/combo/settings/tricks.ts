@@ -79,7 +79,7 @@ export const TRICKS = {
   MM_POST_OFFICE_GAME: "Post Office Timing Game without Bunny Hood",
   MM_WELL_HSW: "Well's Hot Spring Water without Killing Dexihand",
   MM_ISTT_CHUCHU_LESS: "ISTT Block Room without Chuchu jellies",
-  MM_GBT_WATERWHEEL_GORON: "Cross GBT WaterWheel Room as Goron",
+  MM_GBT_WATERWHEEL_GORON: "Cross GBT Waterwheel Room as Goron",
   MM_GBT_ENTRANCE_BOW: "Great Bay Temple Entrance Chest using only Bow",
   MM_OOB_MOVEMENT: "Walk Along Surfaces Out of Bounds",
   MM_ST_UPDRAFTS: "Stone Tower Updrafts without Deku Mask",
@@ -95,6 +95,19 @@ export const TRICKS = {
   MM_NCT_TINGLE: "Jump slash Tingle in North Clock Town",
   MM_GBT_FIRELESS: "Great Bay Temple without Fire Arrows",
   MM_IGOS_DINS: "Burn Igos' curtains with Din's Fire",
+  MM_BIO_BABA_CHU: "Destroy the Bio Baba Grotto Hive with a Bombchu",
+  MM_BIO_BABA_LUCK: "Get lucky with the Bio Baba Grotto item landing on a lilypad",
+  MM_WF_SHRINE_HOVERS: "Woodfall Owl Chest with Hover Boots and Jump Slash",
+  MM_WFT_LOBBY_HOVERS: "Woodfall Temple Lobby with Damage Boost and Hover Boots",
+  MM_SOARING_ZORA: "Zora Long Jump to the Soaring Tablet",
+  MM_SOARING_HOVERS: "Jump Slash or Damage Boost to the Soaring Tablet with Hover Boots and Bunny Hood",
+  MM_LULLABY_SKIP_IRONS: "Skip playing Goron Lullaby by using Iron Boots",
+  MM_GBT_WATERWHEEL_HOVERS: "Cross GBT Waterwheel Room using Hover Boots",
+  MM_PATH_SNOWHEAD_HOVERS: "Cross Path to Snowhead using Hover Boots",
+  MM_GBT_RED1_HOVERS: "Reach the first red pipe in GBT using Hover Boots, Bunny Hood, and a Jump Slash",
+  MM_GBT_GREEN2_UPPER_HOVERS: "Reach the Upper Chest in GBT's Second Green Room using Hover Boots",
+  MM_STT_LAVA_BLOCK_HOVERS: "Stone Tower Temple Map Chest using Hover Boots",
+  MM_ISTT_ENTRY_HOVER: "Inverted Stone Tower Temple Death Armos using Hover Boots and Bunny Hood",
 };
 
 export type Trick = keyof typeof TRICKS;
