@@ -62,12 +62,12 @@ static void PrepareSoaringScreen(GameState_Play* play)
     for (i = OWL_WARP_STONE_TOWER; i >= OWL_WARP_GREAT_BAY_COAST; i--) {
         if ((gMmOwlFlags >> i) & 1) {
             pauseCtx->worldMapPoints[i] = 1;
-            pauseCtx->world_map_cursor = i;
+            pauseCtx->cursorPoint[PAUSE_WORLD_MAP] = i;
         }
     }
 
     if ((gMmOwlFlags >> 4) & 1) {
-        pauseCtx->world_map_cursor = 4;
+        pauseCtx->cursorPoint[PAUSE_WORLD_MAP] = 4;
     }
 }
 
@@ -94,7 +94,7 @@ static void SetupSoaring(GameState_Play* play)
         else
         {
             gPrevPageIndex = pauseCtx->screen_idx;
-            gPrevCursorPoint = pauseCtx->world_map_cursor;
+            gPrevCursorPoint = pauseCtx->cursorPoint[PAUSE_WORLD_MAP];
             pauseCtx->screen_idx = 0;
             pauseCtx->state = PAUSE_STATE_OWLWARP_0;
             PrepareSoaringScreen(play);

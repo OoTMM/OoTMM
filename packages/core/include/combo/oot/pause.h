@@ -2,98 +2,86 @@
 #define INCLUDED_COMBO_OOT_PAUSE_H
 
 #include <combo/util.h>
+#include <combo/oot/types.h>
 
 typedef struct OcarinaStaff OcarinaStaff;
 
+#define PAUSE_ITEM      0
+#define PAUSE_MAP       1
+#define PAUSE_QUEST     2
+#define PAUSE_EQUIP     3
+#define PAUSE_WORLD_MAP 4
+
 typedef struct PauseContext
 {
-    char                    view[0x128]; // View view;
-    u8*                     iconItemSegment;
-    u8*                     iconItem24Segment;
-    u8*                     iconItemAltSegment;
-    u8*                     iconItemLangSegment;
-    u8*                     nameSegment;
-    u8*                     playerSegment;
-    char                    unk_140[0x04];
-    Vtx*                    itemPageVtx;
-    Vtx*                    equipPageVtx;
-    Vtx*                    mapPageVtx;
-    Vtx*                    questPageVtx;
-    Vtx*                    infoPanelVtx;
-    Vtx*                    itemVtx;
-    Vtx*                    equipVtx;
-    char                    unk_160[0x04];
-    Vtx*                    questVtx;
-    Vtx*                    cursorVtx;
-    Vtx*                    saveVtx;
-    char                    unk_170[0x24];
-    OcarinaStaff*           ocarinaStaff;
-    char                    unk_198[0x20];
-    OSMesgQueue             loadQueue;
-    OSMesg                  loadMsg;
-    u16                     state;
-    u16                     debugState;
-    Vec3f                   eye;
-    u16                     changing;
-    u16                     screen_prev_idx;
-    u16                     screen_idx;
-    u16                     switchPageTimer;
-    u16                     savePromptState;
-    char                    pad_1ee[0x2];
-    f32                     unk_1F0;
-    f32                     itemPageRoll; // rotation (-z) of the item page into the screen
-    f32                     mapPageRoll; // rotation (+x) of the map page into the screen
-    f32                     questPageRoll; // rotation (+z) of the quest page into the screen
-    f32                     maskPageRoll; // rotation (-z) of the mask page into the screen
-    f32                     roll;
-    u16                     alpha;
-    s16                     offsetY;
-    char                    unk_228[0x8];
-    s16                     stickAdjX;
-    s16                     stickAdjY;
-    s16                     item_cursor;
-    s16                     map_cursor;
-    s16                     quest_cursor;
-    s16                     equip_cursor;
-    s16                     world_map_cursor;
-    s16                     item_x;
-    s16                     map_x;
-    s16                     quest_x;
-    s16                     equipment_x;
-    s16                     world_map_x;
-    s16                     item_y;
-    s16                     map_y;
-    s16                     quest_y;
-    s16                     equipment_y;
-    s16                     world_map_y;
-    s16                     dungeonMapSlot;
-    s16                     cursor_pos;
-    char                    unk_09_[0x0002];
-    s16                     item_id;
-    s16                     item_item;
-    s16                     map_item;
-    s16                     quest_item;
-    s16                     equip_item;
-    s16                     item_hilite;
-    s16                     map_hilite;
-    s16                     quest_hilite;
-    s16                     equipment_hilite;
-    u16                     equipTargetItem; // "sl_item_no"
-    u16                     equipTargetSlot; // "sl_number"
-    u16                     equipTargetCBtn;
-    s16                     equipAnimX;
-    s16                     equipAnimY;
-    s16                     equipAnimAlpha;
-    s16                     infoPanelOffsetY;
-    u16                     nameDisplayTimer;
-    u16                     nameColorSet; // 0 = white; 1 = grey
-    s16                     cursorColorSet; // 0 = white; 4 = yellow; 8 = green
-    s16                     promptChoice; // save/continue choice: 0 = yes; 4 = no
-    s16                     quest_song;
-    u8                      worldMapPoints[20]; // 0 = hidden; 1 = displayed; 2 = highlighted
-    u8                      tradeQuestLocation;
-    char                    pad_27B;
-    char                    s27C[0x0044];
+    View            view;
+    u8*             iconItemSegment;
+    u8*             iconItem24Segment;
+    u8*             iconItemAltSegment;
+    u8*             iconItemLangSegment;
+    u8*             nameSegment;
+    u8*             playerSegment;
+    char            unk_140[0x04];
+    Vtx*            itemPageVtx;
+    Vtx*            equipPageVtx;
+    Vtx*            mapPageVtx;
+    Vtx*            questPageVtx;
+    Vtx*            infoPanelVtx;
+    Vtx*            itemVtx;
+    Vtx*            equipVtx;
+    char            unk_160[0x04];
+    Vtx*            questVtx;
+    Vtx*            cursorVtx;
+    Vtx*            saveVtx;
+    char            unk_170[0x24];
+    OcarinaStaff*   ocarinaStaff;
+    char            unk_198[0x20];
+    OSMesgQueue     loadQueue;
+    OSMesg          loadMsg;
+    u16             state;
+    u16             debugState;
+    Vec3f           eye;
+    u16             changing;
+    u16             screen_prev_idx;
+    u16             screen_idx;
+    u16             switchPageTimer;
+    u16             savePromptState;
+    char            pad_1ee[0x2];
+    f32             unk_1F0;
+    f32             itemPageRoll;   /* rotation (-z) of the item page into the screen  */
+    f32             mapPageRoll;    /* rotation (+x) of the map page into the screen   */
+    f32             questPageRoll;  /* rotation (+z) of the quest page into the screen */
+    f32             maskPageRoll;   /* rotation (-z) of the mask page into the screen  */
+    f32             roll;
+    u16             alpha;
+    s16             offsetY;
+    char            unk_228[0x8];
+    s16             stickAdjX;
+    s16             stickAdjY;
+    s16             cursorPoint[5];
+    s16             cursorX[5];
+    s16             cursorY[5];
+    s16             dungeonMapSlot;
+    s16             cursorSpecialPos;
+    s16             pageSwitchInputTimer;
+    u16             namedItem;
+    u16             cursorItem[4];
+    u16             cursorSlot[4];
+    u16             equipTargetItem; /* "sl_item_no" */
+    u16             equipTargetSlot; /* "sl_number" */
+    u16             equipTargetCBtn;
+    s16             equipAnimX;
+    s16             equipAnimY;
+    s16             equipAnimAlpha;
+    s16             infoPanelOffsetY;
+    u16             nameDisplayTimer;
+    u16             nameColorSet; /* 0 = white; 1 = grey */
+    s16             cursorColorSet; /* 0 = white; 4 = yellow; 8 = green */
+    s16             promptChoice; /* save/continue choice: 0 = yes; 4 = no */
+    s16             ocarinaSongIdx;
+    u8              worldMapPoints[20]; /* 0 = hidden; 1 = displayed; 2 = highlighted */
+    u8              tradeQuestLocation;
+    SkelAnime       playerSkelAnime;
 }
 PauseContext;
 
@@ -142,33 +130,15 @@ ASSERT_OFFSET(PauseContext, offsetY,                    0x20a);
 ASSERT_OFFSET(PauseContext, unk_228,                    0x20c);
 ASSERT_OFFSET(PauseContext, stickAdjX,                  0x214);
 ASSERT_OFFSET(PauseContext, stickAdjY,                  0x216);
-ASSERT_OFFSET(PauseContext, item_cursor,                0x218);
-ASSERT_OFFSET(PauseContext, map_cursor,                 0x21a);
-ASSERT_OFFSET(PauseContext, quest_cursor,               0x21c);
-ASSERT_OFFSET(PauseContext, equip_cursor,               0x21e);
-ASSERT_OFFSET(PauseContext, world_map_cursor,           0x220);
-ASSERT_OFFSET(PauseContext, item_x,                     0x222);
-ASSERT_OFFSET(PauseContext, map_x,                      0x224);
-ASSERT_OFFSET(PauseContext, quest_x,                    0x226);
-ASSERT_OFFSET(PauseContext, equipment_x,                0x228);
-ASSERT_OFFSET(PauseContext, world_map_x,                0x22a);
-ASSERT_OFFSET(PauseContext, item_y,                     0x22c);
-ASSERT_OFFSET(PauseContext, map_y,                      0x22e);
-ASSERT_OFFSET(PauseContext, quest_y,                    0x230);
-ASSERT_OFFSET(PauseContext, equipment_y,                0x232);
-ASSERT_OFFSET(PauseContext, world_map_y,                0x234);
+ASSERT_OFFSET(PauseContext, cursorPoint,                0x218);
+ASSERT_OFFSET(PauseContext, cursorX,                    0x222);
+ASSERT_OFFSET(PauseContext, cursorY,                    0x22c);
 ASSERT_OFFSET(PauseContext, dungeonMapSlot,             0x236);
-ASSERT_OFFSET(PauseContext, cursor_pos,                 0x238);
-ASSERT_OFFSET(PauseContext, unk_09_,                    0x23a);
-ASSERT_OFFSET(PauseContext, item_id,                    0x23c);
-ASSERT_OFFSET(PauseContext, item_item,                  0x23e);
-ASSERT_OFFSET(PauseContext, map_item,                   0x240);
-ASSERT_OFFSET(PauseContext, quest_item,                 0x242);
-ASSERT_OFFSET(PauseContext, equip_item,                 0x244);
-ASSERT_OFFSET(PauseContext, item_hilite,                0x246);
-ASSERT_OFFSET(PauseContext, map_hilite,                 0x248);
-ASSERT_OFFSET(PauseContext, quest_hilite,               0x24a);
-ASSERT_OFFSET(PauseContext, equipment_hilite,           0x24c);
+ASSERT_OFFSET(PauseContext, cursorSpecialPos,           0x238);
+ASSERT_OFFSET(PauseContext, pageSwitchInputTimer,       0x23a);
+ASSERT_OFFSET(PauseContext, namedItem,                  0x23c);
+ASSERT_OFFSET(PauseContext, cursorItem,                 0x23e);
+ASSERT_OFFSET(PauseContext, cursorSlot,                 0x246);
 ASSERT_OFFSET(PauseContext, equipTargetItem,            0x24e);
 ASSERT_OFFSET(PauseContext, equipTargetSlot,            0x250);
 ASSERT_OFFSET(PauseContext, equipTargetCBtn,            0x252);
@@ -180,9 +150,9 @@ ASSERT_OFFSET(PauseContext, nameDisplayTimer,           0x25c);
 ASSERT_OFFSET(PauseContext, nameColorSet,               0x25e);
 ASSERT_OFFSET(PauseContext, cursorColorSet,             0x260);
 ASSERT_OFFSET(PauseContext, promptChoice,               0x262);
-ASSERT_OFFSET(PauseContext, quest_song,                 0x264);
+ASSERT_OFFSET(PauseContext, ocarinaSongIdx,             0x264);
 ASSERT_OFFSET(PauseContext, worldMapPoints,             0x266);
 ASSERT_OFFSET(PauseContext, tradeQuestLocation,         0x27a);
-ASSERT_OFFSET(PauseContext, pad_27B,                    0x27b);
+ASSERT_OFFSET(PauseContext, playerSkelAnime,            0x27c);
 
 #endif
