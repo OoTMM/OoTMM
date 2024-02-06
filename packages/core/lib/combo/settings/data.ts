@@ -848,28 +848,28 @@ export const SETTINGS = [{
   name: 'Hookshot Anywhere (OoT)',
   category: 'main.misc',
   type: 'boolean',
-  description: 'Modifies all surfaces to be hooked onto',
+  description: 'Modifies all surfaces in OoT to be hooked onto',
   default: false
 }, {
   key: 'hookshotAnywhereMm',
   name: 'Hookshot Anywhere (MM)',
   category: 'main.misc',
   type: 'boolean',
-  description: 'Modifies all surfaces to be hooked onto',
+  description: 'Modifies all surfaces in MM to be hooked onto',
   default: false
 }, {
   key: 'climbMostSurfacesOot',
   name: 'Climb Most Surfaces (OoT)',
   category: 'main.misc',
   type: 'boolean',
-  description: 'Modifies most surface to be climbable',
+  description: 'Modifies most surfaces in OoT to be climbable',
   default: false
 }, {
   key: 'climbMostSurfacesMm',
   name: 'Climb Most Surfaces (MM)',
   category: 'main.misc',
   type: 'boolean',
-  description: 'Modifies most surface to be climbable',
+  description: 'Modifies most surfaces in MM to be climbable',
   default: false
 }, {
   key: 'fastBunnyHood',

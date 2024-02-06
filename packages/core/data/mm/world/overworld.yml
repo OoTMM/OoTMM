@@ -212,7 +212,7 @@
     CLOCK_TOWN_SCRUB: "has(MOON_TEAR)"
     MAIL_LETTER: "has(LETTER_TO_KAFEI) && before(DAY2_AM_11_30)"
   locations:
-    "Clock Town South Chest Lower": "can_hookshot || short_hook_anywhere || (has(MASK_DEKU) && event(CLOCK_TOWN_SCRUB)) || trick(MM_SCT_NOTHING) || can_goron_bomb_jump"
+    "Clock Town South Chest Lower": "can_hookshot || short_hook_anywhere || (has(MASK_DEKU) && event(CLOCK_TOWN_SCRUB)) || trick(MM_SCT_NOTHING) || can_goron_bomb_jump || climb_anywhere_MM"
     "Clock Town South Chest Upper": "(can_hookshot || short_hook_anywhere || (has(MASK_DEKU) && event(CLOCK_TOWN_SCRUB)) || (can_goron_bomb_jump && can_hookshot_short)) && final_day"
     "Clock Town Business Scrub": "event(CLOCK_TOWN_SCRUB)"
     "Clock Town Post Box": "has(MASK_POSTMAN)"
@@ -304,7 +304,7 @@
     "Chest Game": "before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || between(DAY3_AM_06_00, NIGHT3_PM_10_00)"
     "Honey & Darling Game": "before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || between(DAY3_AM_06_00, NIGHT3_PM_10_00)"
     "Stock Pot Inn": "has(ROOM_KEY) || between(DAY1_AM_08_00, NIGHT1_PM_08_00) || between(DAY2_AM_08_00, NIGHT2_PM_08_00) || after(DAY3_AM_08_00)"
-    "Stock Pot Inn Roof": "has(MASK_DEKU) || short_hook_anywhere"
+    "Stock Pot Inn Roof": "has(MASK_DEKU) || short_hook_anywhere || climb_anywhere_MM"
     "Milk Bar": "between(DAY1_AM_10_00, NIGHT1_PM_09_00) || between(DAY2_AM_10_00, NIGHT2_PM_09_00) || between(DAY3_AM_10_00, NIGHT3_PM_09_00) || (has(MASK_ROMANI) && (between(NIGHT1_PM_10_00, NIGHT1_AM_05_00) || between(NIGHT2_PM_10_00, NIGHT2_AM_05_00) || after(NIGHT3_PM_10_00)))"
     "Astral Observatory Passage": "event(BOMBER_CODE) || trick(MM_BOMBER_SKIP) || short_hook_anywhere"
   events:
@@ -541,7 +541,7 @@
 "Astral Observatory Balcony":
   region: TERMINA_FIELD
   exits:
-    "Termina Field": "can_use_beans || short_hook_anywhere || (can_goron_bomb_jump && has_bombs)"
+    "Termina Field": "can_use_beans || short_hook_anywhere || (can_goron_bomb_jump && has_bombs) || climb_anywhere_MM"
     "Astral Observatory": "true"
   events:
     FAIRY: "can_get_gossip_fairy"
@@ -569,7 +569,7 @@
     "Milk Road": "true"
     "Great Bay Fence": "can_play_epona || (can_goron_bomb_jump && has_bombs) || short_hook_anywhere"
     "Road to Ikana Front": "true"
-    "Astral Observatory Balcony": "has(MASK_DEKU) || short_hook_anywhere || (can_goron_bomb_jump && has_bombs)"
+    "Astral Observatory Balcony": "has(MASK_DEKU) || short_hook_anywhere || (can_goron_bomb_jump && has_bombs) || climb_anywhere_MM"
     "Grass Grotto": "true"
     "Peahat Grotto": "true"
     "Bio Baba Grotto": "can_break_boulders"
@@ -1991,7 +1991,7 @@
     "Gorman Track Front": "true"
     "Owl Milk Road": "true"
     "Near Romani Ranch": "after(DAY3_AM_06_00) || can_use_keg || (short_hook_anywhere && trick(MM_OOB_MOVEMENT))"
-    "Behind Gorman Fence": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || final_day || short_hook_anywhere"
+    "Behind Gorman Fence": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || final_day || short_hook_anywhere || climb_anywhere_MM"
     "Tingle Ranch": "has_weapon_range"
   events:
     PICTURE_TINGLE: "has(PICTOGRAPH_BOX)"
