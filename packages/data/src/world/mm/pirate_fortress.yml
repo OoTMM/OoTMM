@@ -68,7 +68,7 @@
     "Pirate Fortress Lone Guard Entry": "can_hookshot_short"
     "Pirate Fortress Barrel Maze Entry": "can_hookshot_short"
     "Pirate Fortress Lone Guard Exit": "short_hook_anywhere"
-    "Pirate Fortress Barrel Maze Exit": "short_hook_anywhere"
+    "Pirate Fortress Barrel Maze Exit": "short_hook_anywhere || (can_hookshot && has_hover_boots)"
     "Pirate Fortress Treasure Room Exit": "short_hook_anywhere || has_hover_boots"
   locations:
     "Pirate Fortress Interior Lower Chest": "true"
