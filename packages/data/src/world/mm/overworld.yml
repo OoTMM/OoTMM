@@ -2530,10 +2530,10 @@
     "Zora Hall Entrance": "true"
     "Zora Cape Peninsula": "true"
     "Zora Shop": "true"
-    "Tijo's Room": "has_mask_zora || event(BOSS_GREAT_BAY)"
-    "Japas' Room": "has_mask_zora || event(BOSS_GREAT_BAY)"
+    "Tijo's Room": "has_mask_zora || (short_hook_anywhere && trick(MM_ZORA_HALL_DOORS)) || event(BOSS_GREAT_BAY)"
+    "Japas' Room": "has_mask_zora || (short_hook_anywhere && trick(MM_ZORA_HALL_DOORS)) || event(BOSS_GREAT_BAY)"
     "Evan's Room": "can_enter_evans_before_gb_clear || event(BOSS_GREAT_BAY)"
-    "Lulu's Room": "has_mask_zora || event(BOSS_GREAT_BAY)"
+    "Lulu's Room": "has_mask_zora || (short_hook_anywhere && trick(MM_ZORA_HALL_DOORS)) || event(BOSS_GREAT_BAY)"
   locations:
     "Zora Hall Scene Lights": "can_use_fire_arrows || (has_arrows && can_use_din && can_hookshot)"
 "Zora Shop":
