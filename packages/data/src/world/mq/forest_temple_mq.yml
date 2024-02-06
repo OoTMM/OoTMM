@@ -1,0 +1,141 @@
+"Forest Temple":
+  dungeon: Forest
+  exits:
+    "Sacred Meadow": "true"
+    "Forest Temple Main": "small_keys_forest(1) && (is_adult || (has_nuts || has_weapon || has_explosives || has_ranged_weapon_child))"
+  locations:
+    "MQ Forest Temple First Room Chest": "can_hit_triggers_distance || can_hookshot || has_explosives || has_hover_boots || can_use_din || (has_weapon && (has(MAGIC_UPGRADE) || has(SHARED_MAGIC_UPGRADE)))" #Many ways to deal with the Skulltula in the way.
+    "MQ Forest Temple GS Entryway": "can_collect_distance"
+"Forest Temple Wallmaster West":
+  region: NONE
+  exits:
+    "VOID": "true"
+"Forest Temple Wallmaster East":
+  region: NONE
+  exits:
+    "VOID": "true"
+"Forest Temple Main":
+  dungeon: Forest
+  exits:
+    "Forest Temple": "true"
+    "Forest Temple Antichamber": "event(FOREST_POE_4)"
+    "Forest Temple West Wing": "has_weapon && soul_enemy(SOUL_ENEMY_STALFOS)"
+    "Forest Temple West Garden": "can_hit_triggers_distance"
+    "Forest Temple East Garden": "can_hit_triggers_distance"
+  events:
+    FOREST_POE_4: "event(FOREST_POE_1) && event(FOREST_POE_2) && event(FOREST_POE_3)"
+  locations:
+    "MQ Forest Temple Wolfos Chest": "soul_wolfos && can_play_time && (has_weapon || can_use_slingshot || has_explosives || can_use_din || can_use_sticks)"
+    "MQ Forest Temple Pot Main Room 1": "true"
+    "MQ Forest Temple Pot Main Room 2": "true"
+    "MQ Forest Temple Pot Main Room 3": "true"
+    "MQ Forest Temple Pot Main Room 4": "true"
+    "MQ Forest Temple Pot Main Room 5": "true"
+    "MQ Forest Temple Pot Main Room 6": "true"
+    "MQ Forest Temple Pot Bow Room Lower 1": "can_play_time"
+    "MQ Forest Temple Pot Bow Room Lower 2": "can_play_time"
+"Forest Temple West Wing":
+  dungeon: Forest
+  exits:
+    "Forest Temple Main": "has_weapon && soul_enemy(SOUL_ENEMY_STALFOS)"
+    "Forest Temple Straightened Hallway": "small_keys_forest(3) && is_adult && has(STRENGTH)"
+    "Forest Temple West Garden": "soul_floormaster && small_keys_forest(2) && is_adult && has(STRENGTH)" #This is sideways thinking, but you must have access to West Garden with 2 keys here because you cannot waste a third without access via another means.
+    "Forest Temple Twisted Hallway": "small_keys_forest(3) && is_adult && has(STRENGTH) && event(FOREST_TWIST_SWITCH)"
+  locations:
+    "MQ Forest Temple GS Climb Room": "can_damage_skull"
+"Forest Temple Straightened Hallway":
+  dungeon: Forest
+  exits:
+    "Forest Temple Wallmaster West": "soul_wallmaster"
+    "Forest Temple West Garden Ledge": "soul_floormaster"
+  locations:
+    "MQ Forest Temple Boss Key Chest": "true"
+"Forest Temple West Garden Ledge":
+  dungeon: Forest
+  exits:
+    "Forest Temple West Garden": "true"
+    "Forest Temple West Wing": "event(FOREST_TWIST_SWITCH)"
+  events:
+    FOREST_TWIST_SWITCH: "true"
+  locations:
+    "MQ Forest Temple ReDead Chest": "soul_redead_gibdo"
+"Forest Temple West Garden":
+  dungeon: Forest
+  exits:
+    "Forest Temple Main": "true"
+    "Forest Temple East Garden": "can_dive_big"
+    "Forest Temple Garden Ledges": "has_fire_arrows"
+  locations:
+    "MQ Forest Temple GS West Garden": "true"
+"Forest Temple East Garden":
+  dungeon: Forest
+  exits:
+    "Forest Temple Main": "true"
+    "Forest Temple Garden Ledges": "can_longshot || (can_hookshot && (trick(OOT_FOREST_HOOK) || can_play_time))"
+    "Forest Temple East Garden Ledge": "can_longshot"
+  events:
+    STICKS: "soul_deku_baba && (can_hookshot || can_hammer || can_boomerang || (has_nuts && has_weapon))"
+    NUTS: "soul_deku_baba && (has_weapon || has_explosives || can_use_slingshot)"
+  locations:
+    "MQ Forest Temple Well Chest": "can_hit_triggers_distance"
+    "MQ Forest Temple GS East Garden": "can_collect_distance"
+    "MQ Forest Temple GS Well": "can_hit_triggers_distance || (has_iron_boots && can_hookshot)"
+"Forest Temple Garden Ledges":
+  dungeon: Forest
+  exits:
+    "Forest Temple West Garden": "can_use_bow || can_use_din"
+    "Forest Temple East Garden": "true"
+  locations:
+    "MQ Forest Temple East Garden High Ledge Chest": "true"
+    "MQ Forest Temple GS East Garden": "can_play_time"
+"Forest Temple East Garden Ledge":
+  dungeon: Forest
+  exits:
+    "Forest Temple East Garden": "true"
+    "Forest Temple Falling Ceiling": "can_play_time"
+  locations:
+    "MQ Forest Temple East Garden Ledge Chest": "true"
+"Forest Temple Twisted Hallway":
+  dungeon: Forest
+  exits:
+    "Forest Temple Wallmaster West": "soul_wallmaster"
+    "Forest Temple Bow Region": "small_keys_forest(4)"
+"Forest Temple Bow Region":
+  dungeon: Forest
+  exits:
+    # FIXME: Simple implem as we don't have the 2nd hallway
+    "Forest Temple Wallmaster East": "soul_wallmaster && soul_enemy(SOUL_ENEMY_STALFOS) && soul_wolfos && has_weapon && small_keys_forest(5)"
+    "Forest Temple Falling Ceiling": "soul_enemy(SOUL_ENEMY_STALFOS) && soul_wolfos && has_weapon && small_keys_forest(5) && (can_use_bow || can_use_din)" #Only 5 keys is safe because, if you wasted a key in falling ceiling, you can go there otherwise.
+  events:
+    FOREST_POE_1: "can_use_bow"
+    FOREST_POE_2: "soul_enemy(SOUL_ENEMY_STALFOS) && soul_wolfos && can_use_bow"
+  locations:
+    "MQ Forest Temple Map Chest": "event(FOREST_POE_1)"
+    "MQ Forest Temple Bow Chest": "soul_enemy(SOUL_ENEMY_STALFOS) && soul_wolfos && has_weapon"
+    "MQ Forest Temple Compass Chest": "event(FOREST_POE_2)"
+    "MQ Forest Temple Pot Bow Room Upper 1": "true"
+    "MQ Forest Temple Pot Bow Room Upper 2": "true"
+    "MQ Forest Temple Pot Bow Room Upper 3": "true"
+    "MQ Forest Temple Pot Bow Room Upper 4": "true"
+    "MQ Forest Temple Pot Blue Poe 1": "soul_enemy(SOUL_ENEMY_STALFOS) && soul_wolfos"
+    "MQ Forest Temple Pot Blue Poe 2": "soul_enemy(SOUL_ENEMY_STALFOS) && soul_wolfos"
+    "MQ Forest Temple Pot Blue Poe 3": "soul_enemy(SOUL_ENEMY_STALFOS) && soul_wolfos"
+"Forest Temple Falling Ceiling":
+  dungeon: Forest
+  events:
+    FOREST_POE_3: "small_keys_forest(6) && can_use_bow"
+  locations:
+    "MQ Forest Temple Falling Ceiling Chest": "true"
+    "MQ Forest Temple East Garden Ledge Chest": "true"
+    "MQ Forest Temple Pot Green Poe 1": "small_keys_forest(6)"
+    "MQ Forest Temple Pot Green Poe 2": "small_keys_forest(6)"
+"Forest Temple Antichamber":
+  dungeon: Forest
+  exits:
+    "Forest Temple Boss": "boss_key(BOSS_KEY_FOREST)"
+  locations:
+    "MQ Forest Temple Antichamber": "true"
+    "MQ Forest Temple Pot Antichamber 1": "true"
+    "MQ Forest Temple Pot Antichamber 2": "true"
+    "MQ Forest Temple Pot Antichamber 3": "true"
+    "MQ Forest Temple Pot Antichamber 4": "true"

@@ -1,4 +1,4 @@
-import fs from 'fs/promises';
+import fs from 'fs';
 import { Game } from './config';
 
 export type Optional<T> = T extends {} ? {[K in keyof T]?: T[K]} : T | undefined;
@@ -53,9 +53,9 @@ export function createMemo<T>() {
 }
 
 export const fileExists = async (path: string) => {
-  if (!process.env.ROLLUP) {
+  if (!process.env.BROWSER) {
     try {
-      await fs.access(path, fs.constants.F_OK);
+      await fs.promises.access(path, fs.constants.F_OK);
       return true;
     } catch {
       return false;

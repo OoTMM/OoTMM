@@ -12,9 +12,17 @@ osWritebackDCacheAll = 0x800d5aa0;
 DMARomToRam = 0x8000085c;
 InitDom2Addr2 = 0x80091310;
 
+DrawLink = 0x80079f48;
+
+Actor_ProcessInitChain = 0x80063f7c;
+
+GetRoomClearFlag = 0x80020640;
+
 AudioLoad_InitTable = 0x800b70c8;
+Magic_Refill = 0x80072500;
 
 ActorRemove = 0x80025648;
+EnItem00_FixDrop = 0x80013530;
 
 Play_InitEnvironment = 0x8009cda0;
 gFogState = 0x800f1640;
@@ -36,6 +44,7 @@ DisplayTextBox2 = 0x800dce80;
 
 RequestDma = 0x80000d28;
 kObjectsTable = 0x800f8ff8;
+Audio_PlayFanfare = 0x800c69a0;
 
 DrawGi_Opa0_Xlu1        = 0x800582c0;
 DrawGi_Opa0_Xlu12       = 0x80058584;
@@ -64,6 +73,7 @@ DrawGi_Scale            = 0x80058b34;
 DrawGi_SoldOut          = 0x8005719c;
 DrawGi_Spell            = 0x80058698;
 
+Health_ChangeBy         = 0x800720bc;
 Magic_RequestChange     = 0x80072588;
 Magic_Update            = 0x80072840;
 
@@ -85,6 +95,8 @@ ActorSetUnk = 0x80020f04;
 
 PlaySound = 0x800646f0;
 PlaySound6 = 0x800c806c;
+Actor_PlaySfx = 0x80022fd0;
+PlayLoopingSfxAtActor = 0x8002313c;
 
 Actor_HasParent = 0x80022bb0;
 ActorDestroy = 0x80020eb4;
@@ -164,6 +176,8 @@ Play_SetupRespawnPoint = 0x8009D94C;
 
 OverlayAddr = 0x80099dbc;
 
+Player_InCsMode = 0x8007943c;
+
 UpdateEquipment = 0x80079764;
 
 Player_UsingItem = 0x80079bf8;
@@ -204,11 +218,13 @@ DrawHUD = 0x800756f0;
 
 gDmaData = 0x8000b140;
 
-DmaCompressed = 0x80001254;
+Sleep_Usec = 0x80001c7c;
+_DmaCompressed = 0x80001254;
 osSetThreadPri = 0x80004480;
 
-SetTextFlags = 0x800c69a0;
+ParseSceneRoomHeaders_SoundSettings = 0x80082478;
 
+SpawnCollectible = 0x80013678;
 EnItem00_Init = 0x80011b4c;
 Item_DropCollectible = 0x80013678;
 EnItem00_DrawRupee = 0x80013150;
@@ -219,3 +235,5 @@ EnItem00_SetHandler = 0x80011b40;
 ActorFind = 0x80025b0c;
 
 sqrtf = 0x800D0DC0;
+
+EffectSsIceSmoke_Spawn = 0x8001e560;

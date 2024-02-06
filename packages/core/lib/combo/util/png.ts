@@ -1,13 +1,17 @@
-import fs from 'fs/promises';
+import fs from 'fs';
 import path from 'path';
 import { Options } from '../options';
 
-let PNG: any = null;
-if (!process.env.ROLLUP) {
-  PNG = require('pngjs').PNG;
-};
+// import { PNG } from 'pngjs'
 
-const rawPng = async (data: Buffer) => new Promise<Buffer>((resolve, reject) => {
+// let PNG: any = null;
+// if (!process.env.BROWSER) {
+//   PNG = require('pngjs').PNG;
+// };
+
+const rawPng = async (data: Buffer) => new Promise<Buffer>(async (resolve, reject) => {
+  const { PNG } = await import('pngjs');
+
   const png = new PNG({
     colorType: 6,
     bitDepth: 8
@@ -73,10 +77,10 @@ const parsePngBitmask = async (data: Buffer) => {
 };
 
 export const png = async (opts: Options, filename: string, mode: 'rgba32' | 'rgba16' | 'i4' | 'bitmask') => {
-  if (process.env.ROLLUP) {
+  if (process.env.BROWSER) {
     return opts.fetch!(`${filename}.bin`);
   } else {
-    const data = await fs.readFile(__dirname + '/../../../data/assets/' + filename + '.png');
+    const data = await fs.promises.readFile(__dirname + '/../../../data/assets/' + filename + '.png');
     let pngBuffer: Buffer;
     switch (mode) {
     case 'rgba32':
@@ -94,8 +98,8 @@ export const png = async (opts: Options, filename: string, mode: 'rgba32' | 'rgb
     }
 
     const outPath = path.resolve(__dirname, '../../../build/assets', filename + '.bin');
-    await fs.mkdir(path.dirname(outPath), { recursive: true });
-    await fs.writeFile(outPath, pngBuffer);
+    await fs.promises.mkdir(path.dirname(outPath), { recursive: true });
+    await fs.promises.writeFile(outPath, pngBuffer);
     return pngBuffer;
   }
 };

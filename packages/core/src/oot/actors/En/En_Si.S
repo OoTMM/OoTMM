@@ -27,3 +27,12 @@ PATCH_END
 PATCH_START 0x80b4b29c
   nop
 PATCH_END
+
+/* Disable the default fanfare */
+PATCH_START 0x80b4b1b4
+  nop
+PATCH_END
+
+PATCH_START 0x80b4b2a4
+  nop
+PATCH_END

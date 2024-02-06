@@ -29,7 +29,6 @@
 # define AC_EN_HORSE                0x014
 # define AC_EN_ITEM00               0x015
 # define AC_EN_ARROW                0x016
-# define AC_CUSTOM_ITEM             0x017
 # define AC_EN_ELF                  0x018
 # define AC_EN_NIW                  0x019
 # define AC_EN_TITE                 0x01b
@@ -483,9 +482,11 @@
 # define AC_EN_A_OBJ            0x026
 # define AC_OBJ_WTURN           0x027
 # define AC_EN_RIVER_SOUND      0x028
-# define AC_CUSTOM_ITEM         0x029
 # define AC_EN_OSSAN            0x02a
+# define AC_CUSTOM_SPELL_FIRE   0x02b
+# define AC_CUSTOM_SPELL_WIND   0x02c
 # define AC_EN_FAMOS            0x02d
+# define AC_CUSTOM_SPELL_LOVE   0x02e
 # define AC_EN_BOMBF            0x02f
 # define AC_EN_AM               0x032
 # define AC_EN_DEKUBABA         0x033
@@ -1028,42 +1029,63 @@
 
 #if !defined(__ASSEMBLER__)
 typedef struct GameState_Play GameState_Play;
+typedef struct ActorContext ActorContext;
 typedef struct Actor Actor;
 
 typedef void (*ActorCallback)(Actor*, GameState_Play*);
 
-typedef struct PACKED ALIGNED(0x4) Actor
+typedef struct
+{
+    Vec3f pos;
+    Vec3s rot;
+}
+PosRot;
+
+typedef struct Actor
 {
     u16         id;
     u8          type;
     u8          room;
     s32         flags;
-    Vec3f       initPos;
-    Vec3s       initRot;
-    char        unk2[0x02];
+    PosRot      home;
     u16         variable;
     s8          objTableIndex;
-    char        unk3[5];
-    Vec3f       position;
-    Vec3s       speedRot;
-    u16         unk_36;
-#if defined(GAME_MM)
-    u32         unk_mm0;
+    s8          targetMode;
+
+#if defined(GAME_OOT)
+    u16        sfx;
+    PosRot     world;
+    PosRot     focus;
 #endif
-    Vec3f       pos3;
-    Vec3s       rot1;
+
 #if defined(GAME_MM)
-    u32         unk_mm1;
+    s16        halfDaysBits;
+    PosRot     world;
+    s8         csId;
+    u8         audioFlags;
+    PosRot     focus;
+    u16        sfx;
 #endif
-    char        unk_4a[0x06];
+
+    float       targetArrowOffset;
     Vec3f       scale;
     Vec3f       velocity;
     float       speedXZ;
     float       gravity;
     float       minVelocityY;
-    char        unk_74[0x1c];
-    float       xzDistanceFromLink;
-    char        unk_94[0x20];
+    CollisionPoly* wallPoly; // Wall polygon the actor is touching
+    CollisionPoly* floorPoly; // Floor polygon directly below the actor
+    u8          wallBgId; // Bg ID of the wall polygon the actor is touching
+    u8          floorBgId; // Bg ID of the floor polygon directly below the actor
+    s16         wallYaw; // Y rotation of the wall polygon the actor is touching
+    f32         floorHeight; // Y position of the floor polygon directly below the actor
+    f32         yDistToWater; // Distance to the surface of active waterbox. Negative value means above water
+    u16         bgCheckFlags; // Flags indicating how the actor is interacting with collision
+    s16         yawTowardsPlayer; // Y rotation difference between the actor and the player
+    f32         xyzDistToPlayerSq; // Squared distance between the actor and the player
+    f32         xzDistanceFromLink;
+    f32         yDistanceFromLink;
+    CollisionCheckInfo colChkInfo;
     Vec3s       rot2;
     char        unk_ba[2];
     float       modelOffsetY;
@@ -1093,7 +1115,29 @@ typedef struct
 }
 ActorList;
 
-ASSERT_OFFSET(Actor, variable, 0x01c);
+#if defined(GAME_OOT)
+# define X(x) (x)
+#else
+# define X(x) (x + 8)
+#endif
+
+ASSERT_OFFSET(Actor, id,        0x000);
+ASSERT_OFFSET(Actor, type,      0x002);
+ASSERT_OFFSET(Actor, room,      0x003);
+ASSERT_OFFSET(Actor, home,      0x008);
+ASSERT_OFFSET(Actor, variable,  0x01c);
+ASSERT_OFFSET(Actor, attachedA, X(0x118));
+ASSERT_OFFSET(Actor, attachedB, X(0x11c));
+ASSERT_OFFSET(Actor, prev,      X(0x120));
+ASSERT_OFFSET(Actor, next,      X(0x124));
+ASSERT_OFFSET(Actor, init,      X(0x128));
+ASSERT_OFFSET(Actor, fini,      X(0x12c));
+ASSERT_OFFSET(Actor, update,    X(0x130));
+ASSERT_OFFSET(Actor, draw,      X(0x134));
+ASSERT_OFFSET(Actor, ovl,       X(0x138));
+
+#undef X
+
 
 #if defined(GAME_OOT)
 _Static_assert(sizeof(Actor) == 0x13c, "OoT Actor size is wrong");
@@ -1105,8 +1149,29 @@ _Static_assert(sizeof(Actor) == 0x144, "MM Actor size is wrong");
 _Static_assert(sizeof(ActorList) == 0xC, "MM ActorList size is wrong");
 #endif
 
-Actor* comboSpawnActor(void* unk, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable);
-Actor* comboSpawnActorEx(void* unk, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int ex1, int ex2, int ex3);
+typedef struct BlinkInfo {
+    /* 0x0 */ s16 eyeTexIndex;
+    /* 0x2 */ s16 blinkTimer;
+} BlinkInfo; // size = 0x4
+
+Actor* comboSpawnActor(ActorContext* actorCtx, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable);
+Actor* comboSpawnActorEx(ActorContext* actorCtx, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int ex1, int ex2, int ex3);
+
+typedef enum {
+    /* 0x00 */ ACTORCAT_SWITCH,
+    /* 0x01 */ ACTORCAT_BG,
+    /* 0x02 */ ACTORCAT_PLAYER,
+    /* 0x03 */ ACTORCAT_EXPLOSIVE,
+    /* 0x04 */ ACTORCAT_NPC,
+    /* 0x05 */ ACTORCAT_ENEMY,
+    /* 0x06 */ ACTORCAT_PROP,
+    /* 0x07 */ ACTORCAT_ITEMACTION,
+    /* 0x08 */ ACTORCAT_MISC,
+    /* 0x09 */ ACTORCAT_BOSS,
+    /* 0x0A */ ACTORCAT_DOOR,
+    /* 0x0B */ ACTORCAT_CHEST,
+    /* 0x0C */ ACTORCAT_MAX
+} ActorCategory;
 
 #endif
 

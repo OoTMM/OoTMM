@@ -59,7 +59,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
   base.hints = oldSettings.hints;
 
   /* Main Settings */
-  base.goal = sampleWeighted(random, { both: 10, triforce: 3 });
+  base.goal = sampleWeighted(random, { both: 10, triforce: 3, triforce3: 3 });
   if (base.goal === 'triforce') {
     base.triforcePieces = randomInt(random, 48) + 2;
     base.triforceGoal = randomInt(random, base.triforcePieces - 1) + 1;
@@ -103,6 +103,10 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
   base.shuffleMerchantsMm = booleanWeighted(random, 0.50);
   base.eggShuffle = booleanWeighted(random, 0.50);
   base.songs = sampleWeighted(random, { songLocations: 6, anywhere: 4 });
+  base.divingGameRupeeShuffle = booleanWeighted(random, 0.50);
+  base.pondFishShuffle = booleanWeighted(random, 0.50);
+  base.fairyFountainFairyShuffleOot = booleanWeighted(random, 0.50);
+  base.fairyFountainFairyShuffleMm = booleanWeighted(random, 0.50);
 
   /* Tokens - 25% disabled, 25% enabled, 50% individual */
   switch (randomInt(random, 4)) {
@@ -166,7 +170,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
   }
 
   /* Ganon BK - 50% chance to follow OoT BK */
-  if (base.goal !== 'triforce') {
+  if (base.goal !== 'triforce' && base.goal !== 'triforce3') {
     if (booleanWeighted(random, 0.5)) {
       base.ganonBossKey = base.bossKeyShuffleOot === 'ownDungeon' ? 'ganon' : base.bossKeyShuffleOot;
     } else {
@@ -240,6 +244,8 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
   case 0:
     base.skipZelda = true;
     base.openMoon = true;
+    base.openDungeonsMm = { type: 'all' };
+    base.clearStateDungeonsMm = 'both';
     base.doorOfTime = 'open';
     base.dekuTree = 'open';
     base.kakarikoGate = 'open';
@@ -249,6 +255,8 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
   case 1:
     base.skipZelda = false;
     base.openMoon = false;
+    base.openDungeonsMm = { type: 'none' };
+    base.clearStateDungeonsMm = 'none';
     base.doorOfTime = 'closed';
     base.dekuTree = 'closed';
     base.kakarikoGate = 'closed';
@@ -258,6 +266,8 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
   default:
     base.skipZelda = booleanWeighted(random, 0.3);
     base.openMoon = booleanWeighted(random, 0.3);
+    base.openDungeonsMm = { type: 'random' };
+    base.clearStateDungeonsMm = sampleWeighted(random, { none: 5, WF: 1, GB: 1, both: 2 });
     base.doorOfTime = sampleWeighted(random, { closed: 10, open: 7 });
     base.dekuTree = sampleWeighted(random, { open: 10, closed: 7 });
     base.kakarikoGate = sampleWeighted(random, { closed: 10, open: 7 });
@@ -367,10 +377,18 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
     base.sharedMaskBunny = true;
     base.sharedMaskTruth = true;
     base.sharedMaskKeaton = true;
+    base.sharedMaskBlast = true;
     base.sharedWallets = true;
     base.sharedHealth = true;
     base.sharedSoulsEnemy = true;
     base.sharedSkeletonKey = true;
+    base.sharedSpellFire = true;
+    base.sharedSpellWind = true;
+    base.sharedSpellLove = true;
+    base.sharedBootsIron = true;
+    base.sharedBootsHover = true;
+    base.sharedTunicGoron = true;
+    base.sharedTunicZora = true;
     break;
   default:
     base.sharedNutsSticks = booleanWeighted(random, 0.5);
@@ -385,6 +403,50 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
     base.sharedSoulsEnemy = booleanWeighted(random, 0.5);
     base.sharedSkeletonKey = booleanWeighted(random, 0.5);
 
+    /* Boots - grouping */
+    switch (randomInt(random, 4)) {
+    case 0:
+      break;
+    case 1:
+      base.sharedBootsIron = true;
+      base.sharedBootsHover = true;
+      break;
+    default:
+      base.sharedBootsIron = booleanWeighted(random, 0.5);
+      base.sharedBootsHover = booleanWeighted(random, 0.5);
+      break;
+    }
+
+    /* Tunics - grouping */
+    switch (randomInt(random, 4)) {
+    case 0:
+      break;
+    case 1:
+      base.sharedTunicGoron = true;
+      base.sharedTunicZora = true;
+      break;
+    default:
+      base.sharedTunicGoron = booleanWeighted(random, 0.5);
+      base.sharedTunicZora = booleanWeighted(random, 0.5);
+      break;
+    }
+
+    /* Spells - grouping */
+    switch (randomInt(random, 4)) {
+    case 0:
+      break;
+    case 1:
+      base.sharedSpellFire = true;
+      base.sharedSpellWind = true;
+      base.sharedSpellLove = true;
+      break;
+    default:
+      base.sharedSpellFire = booleanWeighted(random, 0.5);
+      base.sharedSpellWind = booleanWeighted(random, 0.5);
+      base.sharedSpellLove = booleanWeighted(random, 0.5);
+      break;
+    }
+
     /* Masks - grouping */
     switch (randomInt(random, 4)) {
     case 0:
@@ -395,6 +457,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
       base.sharedMaskBunny = true;
       base.sharedMaskTruth = true;
       base.sharedMaskKeaton = true;
+      base.sharedMaskBlast = true;
       break;
     default:
       base.sharedMaskGoron = booleanWeighted(random, 0.5);
@@ -402,6 +465,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
       base.sharedMaskBunny = booleanWeighted(random, 0.5);
       base.sharedMaskTruth = booleanWeighted(random, 0.5);
       base.sharedMaskKeaton = booleanWeighted(random, 0.5);
+      base.sharedMaskBlast = booleanWeighted(random, 0.5);
       break;
     }
 
@@ -442,6 +506,58 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
 
   base.fairyOcarinaMm = booleanWeighted(random, 0.5);
   base.shortHookshotMm = booleanWeighted(random, 0.25);
+  base.blastMaskOot = booleanWeighted(random, 0.25);
+
+  /* Boots - 50% disabled, 25% enabled, 25% individual */
+  switch (randomInt(random, 4)) {
+  case 0:
+  case 1:
+    base.bootsIronMm = false;
+    base.bootsHoverMm = false;
+    break;
+  case 2:
+    base.bootsIronMm = true;
+    base.bootsHoverMm = true;
+    break;
+  default:
+    base.bootsIronMm = booleanWeighted(random, 0.25);
+    base.bootsHoverMm = booleanWeighted(random, 0.25);
+  }
+
+  /* Tunics - 50% disabled, 25% enabled, 25% individual */
+  switch (randomInt(random, 4)) {
+  case 0:
+  case 1:
+    base.tunicGoronMm = false;
+    base.tunicZoraMm = false;
+    break;
+  case 2:
+    base.tunicGoronMm = true;
+    base.tunicZoraMm = true;
+    break;
+  default:
+    base.tunicGoronMm = booleanWeighted(random, 0.25);
+    base.tunicZoraMm = booleanWeighted(random, 0.25);
+  }
+
+  /* Magic spells - 50% disabled, 25% enabled, 25% individual */
+  switch (randomInt(random, 4)) {
+  case 0:
+  case 1:
+    base.spellFireMm = false;
+    base.spellWindMm = false;
+    base.spellLoveMm = false;
+    break;
+  case 2:
+    base.spellFireMm = true;
+    base.spellWindMm = true;
+    base.spellLoveMm = true;
+    break;
+  default:
+    base.spellFireMm = booleanWeighted(random, 0.25);
+    base.spellWindMm = booleanWeighted(random, 0.25);
+    base.spellLoveMm = booleanWeighted(random, 0.25);
+  }
 
   /* Extra Wallets - 25% none, 25% all, 50% individual */
   switch (randomInt(random, 4)) {

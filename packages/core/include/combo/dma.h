@@ -23,26 +23,6 @@
 #define VROM_FOREIGN_OFFSET  0x04000000
 #define VROM_CUSTOM_OFFSET   0x08000000
 
-typedef struct
-{
-    u32 vstart;
-    u32 vend;
-    u32 pstart;
-    u32 pend;
-}
-DmaEntry;
-
-typedef struct
-{
-    u32     vromAddr;
-    void*   dramAddr;
-    u32     size;
-    char*   name;
-    s32     line;
-    u32     unk[3];
-}
-DmaRequest;
-
 extern DmaEntry gDmaData[DMA_COUNT];
 
 int  comboDmaLookup(DmaEntry* buf, u32 vromAddr);

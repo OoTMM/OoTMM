@@ -1,8 +1,8 @@
-import { Buffer } from 'buffer';
+import { HINTS, ENTRANCES, REGIONS, SCENES, NPC } from '@ootmm/data';
 
 import { LogicResult } from '../logic';
 import { isEntranceShuffle } from '../logic/helpers';
-import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_REGIONS, DATA_HINTS_POOL, DATA_HINTS, DATA_ENTRANCES } from '../data';
+import { GI, DATA_HINTS_POOL } from '../data';
 import { Game } from "../config";
 import { World, WorldCheck } from '../logic/world';
 import { DUNGEONS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS } from '../settings';
@@ -78,6 +78,21 @@ const SHARED_ITEMS_OOT = new Map([
   ['SHARED_SHIELD_HYLIAN',    'OOT_SHIELD_HYLIAN'],
   ['SHARED_SHIELD_MIRROR',    'OOT_SHIELD_MIRROR'],
   ['SHARED_SHIELD',           'OOT_SHIELD'],
+  ['SHARED_MAGIC_JAR_SMALL',  'OOT_MAGIC_JAR_SMALL'],
+  ['SHARED_MAGIC_JAR_LARGE',  'OOT_MAGIC_JAR_LARGE'],
+  ['SHARED_BOMBCHU',          'MM_BOMBCHU'], /* OoT lacks single bombchu */
+  ['SHARED_BOMBCHU_5',        'OOT_BOMBCHU_5'],
+  ['SHARED_BOMBCHU_10',       'OOT_BOMBCHU_10'],
+  ['SHARED_BOMBCHU_20',       'OOT_BOMBCHU_20'],
+  ['SHARED_FAIRY_BIG',        'OOT_FAIRY_BIG'],
+  ['SHARED_SPELL_FIRE',       'OOT_SPELL_FIRE'],
+  ['SHARED_SPELL_WIND',       'OOT_SPELL_WIND'],
+  ['SHARED_SPELL_LOVE',       'OOT_SPELL_LOVE'],
+  ['SHARED_BOOTS_IRON',       'OOT_BOOTS_IRON'],
+  ['SHARED_BOOTS_HOVER',      'OOT_BOOTS_HOVER'],
+  ['SHARED_TUNIC_GORON',      'OOT_TUNIC_GORON'],
+  ['SHARED_TUNIC_ZORA',       'OOT_TUNIC_ZORA'],
+  ['SHARED_MASK_BLAST',       'OOT_MASK_BLAST'],
 ]);
 
 const SHARED_ITEMS_MM = new Map([
@@ -128,6 +143,21 @@ const SHARED_ITEMS_MM = new Map([
   ['SHARED_SHIELD_HYLIAN',    'MM_SHIELD_HERO'],
   ['SHARED_SHIELD_MIRROR',    'MM_SHIELD_MIRROR'],
   ['SHARED_SHIELD',           'OOT_SHIELD'], /* Progressive */
+  ['SHARED_MAGIC_JAR_SMALL',  'MM_MAGIC_JAR_SMALL'],
+  ['SHARED_MAGIC_JAR_LARGE',  'MM_MAGIC_JAR_LARGE'],
+  ['SHARED_BOMBCHU',          'MM_BOMBCHU'],
+  ['SHARED_BOMBCHU_5',        'MM_BOMBCHU_5'],
+  ['SHARED_BOMBCHU_10',       'MM_BOMBCHU_10'],
+  ['SHARED_BOMBCHU_20',       'MM_BOMBCHU_20'],
+  ['SHARED_FAIRY_BIG',        'MM_FAIRY_BIG'],
+  ['SHARED_SPELL_FIRE',       'MM_SPELL_FIRE'],
+  ['SHARED_SPELL_WIND',       'MM_SPELL_WIND'],
+  ['SHARED_SPELL_LOVE',       'MM_SPELL_LOVE'],
+  ['SHARED_BOOTS_IRON',       'MM_BOOTS_IRON'],
+  ['SHARED_BOOTS_HOVER',      'MM_BOOTS_HOVER'],
+  ['SHARED_TUNIC_GORON',      'MM_TUNIC_GORON'],
+  ['SHARED_TUNIC_ZORA',       'MM_TUNIC_ZORA'],
+  ['SHARED_MASK_BLAST',       'MM_MASK_BLAST'],
 ]);
 
 const SHARED_ITEMS = {
@@ -221,10 +251,10 @@ const gi = (settings: Settings, game: Game, item: Item, generic: boolean) => {
     }
   }
 
-  if (!DATA_GI.hasOwnProperty(itemId)) {
+  if (!GI.hasOwnProperty(itemId)) {
     throw new Error(`Unknown item ${itemId}`);
   }
-  let value = DATA_GI[itemId].index;
+  let value = GI[itemId].index;
 
   return value;
 };
@@ -233,10 +263,11 @@ function entrance(srcName: string, world: World) {
   const dstName = world.entranceOverrides.get(srcName) || srcName;
   const srcGame: Game = (/^OOT_/.test(srcName) ? 'oot' : 'mm');
   const dstGame: Game = (/^OOT_/.test(dstName) ? 'oot' : 'mm');
-  let data = DATA_ENTRANCES[dstName] as number;
-  if (data === undefined) {
-    throw new Error(`Unknown entrance ${name}`);
+  const entr = ENTRANCES[dstName as keyof typeof ENTRANCES];
+  if (entr === undefined) {
+    throw new Error(`Unknown entrance ${dstName}`);
   }
+  let data = entr.id;
   if (srcGame !== dstGame) {
     data = (data | 0x80000000) >>> 0;
   }
@@ -244,10 +275,11 @@ function entrance(srcName: string, world: World) {
 }
 
 const entrance2 = (srcGame: Game, dstGame: Game, name: string) => {
-  let data = DATA_ENTRANCES[name] as number;
-  if (data === undefined) {
+  const entr = ENTRANCES[name as keyof typeof ENTRANCES];
+  if (entr === undefined) {
     throw new Error(`Unknown entrance ${name}`);
   }
+  let data = entr.id;
   if (srcGame !== dstGame) {
     data = (data | 0x80000000) >>> 0;
   }
@@ -256,10 +288,10 @@ const entrance2 = (srcGame: Game, dstGame: Game, name: string) => {
 
 const checkId = (check: WorldCheck) => {
   if (check.type === 'npc') {
-    if (!DATA_NPC.hasOwnProperty(check.id)) {
+    if (!NPC.hasOwnProperty(check.id)) {
       throw new Error(`Unknown NPC ${check.id}`);
     }
-    return DATA_NPC[check.id];
+    return (NPC as any)[check.id];
   }
   return check.id;
 }
@@ -328,6 +360,10 @@ function checkKey(check: WorldCheck): number {
     break;
   case 'pot':
   case 'grass':
+  case 'fairy':
+  case 'rupee':
+  case 'heart':
+  case 'fairy_spot':
     /* xflag */
     typeId = 0x10 + ((id >> 16) & 0xf);
     break;
@@ -341,7 +377,11 @@ function checkKey(check: WorldCheck): number {
   case 'sf':
   case 'pot':
   case 'grass':
-    sceneId = DATA_SCENES[check.scene];
+  case 'fairy':
+  case 'rupee':
+  case 'heart':
+  case 'fairy_spot':
+    sceneId = (SCENES as any)[check.scene];
     if (sceneId === undefined) {
       throw new Error(`Unknown scene ${check.scene}`);
     }
@@ -421,7 +461,7 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
   case 'path':
     {
       const regionD = regionData(hint.region);
-      const region = DATA_REGIONS[regionD.id];
+      const region = (REGIONS as any)[regionD.id];
       const pathId = HINTS_PATHS[hint.path].id;
       if (region === undefined) {
         throw new Error(`Unknown region ${hint.region}`);
@@ -436,7 +476,7 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
   case 'foolish':
     {
       const regionD = regionData(hint.region);
-      const region = DATA_REGIONS[regionD.id];
+      const region = (REGIONS as any)[regionD.id];
       if (region === undefined) {
         throw new Error(`Unknown region ${hint.region}`);
       }
@@ -448,7 +488,7 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
     break;
   case 'item-exact':
     {
-      const check = DATA_HINTS[hint.check];
+      const check = (HINTS as any)[hint.check];
       if (check === undefined) {
         throw new Error(`Unknown named check: ${hint.check}`);
       }
@@ -476,7 +516,7 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
   case 'item-region':
       {
         const regionD = regionData(hint.region);
-        const region = DATA_REGIONS[regionD.id];
+        const region = (REGIONS as any)[regionD.id];
         const item = hint.item;
         if (region === undefined) {
           throw new Error(`Unknown region ${hint.region}`);
@@ -517,7 +557,7 @@ const gameHints = (settings: Settings, game: Game, hints: WorldHints): Buffer =>
 
 const regionsBuffer = (regions: Region[]) => {
   const data = regions.map((region) => {
-    const regionId = DATA_REGIONS[regionData(region).id];
+    const regionId = (REGIONS as any)[regionData(region).id];
     if (regionId === undefined) {
       throw new Error(`Unknown region ${region}`);
     }
@@ -531,12 +571,12 @@ const gameEntrances = (worldId: number, game: Game, logic: LogicResult) => {
   const data: number[] = [];
   const world = logic.worlds[worldId];
   for (const [src, dst] of world.entranceOverrides) {
-    const srcEntrance = world.entrances.get(src)!;
-    const dstEntrance = world.entrances.get(dst)!;
+    const srcEntrance = ENTRANCES[src as keyof typeof ENTRANCES];
+    const dstEntrance = ENTRANCES[dst as keyof typeof ENTRANCES];
     if (srcEntrance.game !== game)
       continue;
-    const srcId = entrance2(srcEntrance.game, srcEntrance.game, src);
-    const dstId = entrance2(srcEntrance.game, dstEntrance.game, dst);
+    const srcId = entrance2(srcEntrance.game, srcEntrance.game as Game, src);
+    const dstId = entrance2(srcEntrance.game, dstEntrance.game as Game, dst);
     data.push(srcId, dstId);
   }
   data.push(0xffffffff);
@@ -668,6 +708,13 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     SHARED_SOULS_ENEMY: settings.sharedSoulsEnemy,
     SHARED_OCARINA_BUTTONS: settings.sharedOcarinaButtons,
     SHARED_SHIELDS: settings.sharedShields,
+    SHARED_SPELL_FIRE: settings.sharedSpellFire,
+    SHARED_SPELL_WIND: settings.sharedSpellWind,
+    SHARED_SPELL_LOVE: settings.sharedSpellLove,
+    SHARED_BOOTS_IRON: settings.sharedBootsIron,
+    SHARED_BOOTS_HOVER: settings.sharedBootsHover,
+    SHARED_TUNIC_GORON: settings.sharedTunicGoron,
+    SHARED_TUNIC_ZORA: settings.sharedTunicZora,
     OOT_CROSS_WARP: settings.crossWarpOot,
     MM_CROSS_WARP: settings.crossWarpMm !== 'none',
     MM_CROSS_WARP_ADULT: settings.crossWarpMm === 'full',
@@ -710,8 +757,6 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     OOT_SOULS_NPC: settings.soulsNpcOot,
     MM_REMOVED_FAIRIES: settings.strayFairyOtherShuffle === 'removed',
     SHARED_SKELETON_KEY: settings.sharedSkeletonKey,
-    OOT_SHUFFLE_POTS: settings.shufflePotsOot,
-    MM_SHUFFLE_POTS: settings.shufflePotsMm,
     OOT_SHUFFLE_GRASS: settings.shuffleGrassOot,
     MM_SHUFFLE_GRASS: settings.shuffleGrassMm,
     MENU_NOTEBOOK: settings.menuNotebook,
@@ -734,6 +779,36 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     ER_MOON: settings.erMoon,
     MM_OPEN_MOON: settings.openMoon,
     NO_BROKEN_ACTORS: !settings.restoreBrokenActors,
+    OOT_BOMBCHU_BAG: settings.bombchuBagOot,
+    MM_BOMBCHU_BAG: settings.bombchuBagMm,
+    SHARED_BOMBCHU: settings.sharedBombchuBags,
+    ER_WALLMASTERS: settings.erWallmasters !== 'none',
+    OOT_OPEN_MASK_SHOP: settings.openMaskShop,
+    OOT_BRIDGE_VANILLA: settings.rainbowBridge === 'vanilla',
+    OOT_BRIDGE_MEDALLIONS: settings.rainbowBridge === 'medallions',
+    OOT_BRIDGE_CUSTOM: settings.rainbowBridge === 'custom',
+    MULTIPLAYER: settings.mode !== 'single',
+    MM_OPEN_WF: world.resolvedFlags.openDungeonsMm.has('WF'),
+    MM_OPEN_SH: world.resolvedFlags.openDungeonsMm.has('SH'),
+    MM_OPEN_GB: world.resolvedFlags.openDungeonsMm.has('GB'),
+    MM_OPEN_ST: world.resolvedFlags.openDungeonsMm.has('ST'),
+    MM_CLEAR_OPEN_WF: settings.clearStateDungeonsMm === 'WF' || settings.clearStateDungeonsMm === 'both',
+    MM_CLEAR_OPEN_GB: settings.clearStateDungeonsMm === 'GB' || settings.clearStateDungeonsMm === 'both',
+    MM_SPELL_FIRE: settings.spellFireMm,
+    MM_SPELL_WIND: settings.spellWindMm,
+    MM_SPELL_LOVE: settings.spellLoveMm,
+    MM_BOOTS_IRON: settings.bootsIronMm,
+    MM_BOOTS_HOVER: settings.bootsHoverMm,
+    MM_TUNIC_GORON: settings.tunicGoronMm,
+    MM_TUNIC_ZORA: settings.tunicZoraMm,
+    OOT_GANON_BOSS_KEY_HINT: settings.ganonBossKey === 'anywhere',
+    BLAST_MASK_DELAY_INSTANT: settings.blastMaskCooldown === 'instant',
+    BLAST_MASK_DELAY_VERYSHORT: settings.blastMaskCooldown === 'veryshort',
+    BLAST_MASK_DELAY_SHORT: settings.blastMaskCooldown === 'short',
+    BLAST_MASK_DELAY_LONG: settings.blastMaskCooldown === 'long',
+    BLAST_MASK_DELAY_VERYLONG: settings.blastMaskCooldown === 'verylong',
+    OOT_MASK_BLAST: settings.blastMaskOot,
+    SHARED_MASK_BLAST: settings.sharedMaskBlast,
   };
 
   for (const v in exprs) {

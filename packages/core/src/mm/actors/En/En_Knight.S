@@ -5,6 +5,11 @@ PATCH_START 0x809b5854
   li t8,0
 PATCH_END
 
+/* Reloc */
+PATCH_START 0x809be550
+.int 0
+PATCH_END
+
 /* Remove the intro cutscene */
 PATCH_START 0x809b2c74
   lw t0,0x331c(t0)

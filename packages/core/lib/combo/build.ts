@@ -1,7 +1,6 @@
-import { spawn } from "child_process";
-import fs from "fs/promises";
-import path from "path";
-import { Buffer } from "buffer";
+import childProcess from "child_process";
+import fs from 'fs';
+import path from 'path';
 
 import { GAMES } from "./config";
 import { Options } from "./options";
@@ -10,6 +9,8 @@ import { fileExists } from "./util";
 type BuildGameOutput = {
   payload: Buffer;
   patches: Buffer;
+  cosmetic_name: Buffer;
+  cosmetic_addr: Buffer;
 };
 
 export type BuildOutput = {
@@ -22,61 +23,79 @@ const cloneDependencies = async () => {
   const stampFile = path.resolve(thirdPartyDir, '.stamp');
   if (await fileExists(stampFile))
     return;
-  await fs.mkdir(thirdPartyDir, { recursive: true });
+  await fs.promises.mkdir(thirdPartyDir, { recursive: true });
   return new Promise((resolve, reject) => {
-    const proc = spawn('git', ['clone', '--depth', '50', 'https://github.com/decompals/ultralib', thirdPartyDir + '/ultralib'], { stdio: 'inherit' });
+    const proc = childProcess.spawn('git', ['clone', '--depth', '50', 'https://github.com/decompals/ultralib', thirdPartyDir + '/ultralib'], { stdio: 'inherit' });
     proc.on('close', (code) => {
       if (code !== 0)
         return reject(new Error(`git clone failed with code ${code}`));
-      fs.writeFile(stampFile, '').then(_ => resolve(null));
+      fs.promises.writeFile(stampFile, '').then(_ => resolve(null));
     });
   });
 };
 
-const make = async (opts: Options) => {
-  await cloneDependencies();
+async function runCommand(cmd: string, args: string[]) {
   return new Promise((resolve, reject) => {
-    const args = ['-j', '32'];
-    if (opts.debug) {
-      args.push('DEBUG=1');
-    }
-    const proc = spawn('make', args, { stdio: 'inherit' });
+    const proc = childProcess.spawn(cmd, args, { stdio: 'inherit' });
     proc.on('close', (code) => {
       if (code === 0) {
         resolve(null);
       } else {
-        reject(new Error(`make exited with code ${code}`));
+        reject(new Error(`${cmd} exited with code ${code}`));
       }
     });
   });
-};
+}
+
+async function make(opts: Options) {
+  /* Clone dependencies */
+  await cloneDependencies();
+
+  /* Resolve paths */
+  const installDir = path.resolve(__dirname, '..', '..', 'build');
+  const buildDir = path.resolve(installDir, 'tree', opts.debug ? 'Debug' : 'Release');
+  const sourceDir = path.resolve(__dirname, '..', '..');
+
+  /* Make directories */
+  await fs.promises.mkdir(buildDir, { recursive: true });
+  await fs.promises.mkdir(installDir, { recursive: true });
+
+  /* Build and install with CMake */
+  await runCommand('cmake', ['-B', buildDir, '-S', sourceDir, '-G', 'Ninja', `-DCMAKE_BUILD_TYPE=${opts.debug ? 'Debug' : 'Release'}`]);
+  await runCommand('cmake', ['--build', buildDir]);
+  await runCommand('cmake', ['--install', buildDir, '--prefix', installDir]);
+}
 
 const getBuildArtifacts = async (root: string): Promise<BuildOutput> => {
   const [oot, mm] = await Promise.all(GAMES.map(async (g) => {
-    const [payload, patches] = await Promise.all([
-      fs.readFile(path.resolve(root, g + '_payload.bin')),
-      fs.readFile(path.resolve(root, g + '_patch.bin')),
+    const [payload, patches, cosmetic_name, cosmetic_addr] = await Promise.all([
+      fs.promises.readFile(path.resolve(root, g + '_payload.bin')),
+      fs.promises.readFile(path.resolve(root, g + '_patch.bin')),
+      fs.promises.readFile(path.resolve(root, g + '_cosmetic_name.bin')),
+      fs.promises.readFile(path.resolve(root, g + '_cosmetic_addr.bin')),
     ]);
-    return { payload, patches };
+    return { payload, patches, cosmetic_name, cosmetic_addr};
   }));
   return { oot, mm };
 };
 
 const fetchBuildArtifacts = async (opts: Options): Promise<BuildOutput> => {
   const [oot, mm] = await Promise.all(GAMES.map(async (g) => {
-    const [payload, patches] = await Promise.all([
+    const [payload, patches, cosmetic_name, cosmetic_addr] = await Promise.all([
       opts.fetch!(`${g}_payload.bin`),
       opts.fetch!(`${g}_patch.bin`),
+      opts.fetch!(`${g}_cosmetic_name.bin`),
+      opts.fetch!(`${g}_cosmetic_addr.bin`),
     ]);
-    return { payload, patches };
+    return { payload, patches, cosmetic_name, cosmetic_addr };
   }));
   return { oot, mm };
 };
 
 export const build = async (opts: Options): Promise<BuildOutput> => {
-  if (!process.env.ROLLUP) {
+  if (!process.env.BROWSER) {
     await make(opts);
-    return getBuildArtifacts('build' + (opts.debug ? '/Debug' : '/Release'));
+    return getBuildArtifacts('build/bin');
   } else {
     return fetchBuildArtifacts(opts);
   }

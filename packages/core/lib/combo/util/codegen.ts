@@ -1,5 +1,5 @@
 import { fileExists } from '../util';
-import fs from 'fs/promises';
+import fs from 'fs';
 import path from 'path';
 
 export class CodeGen {
@@ -40,9 +40,9 @@ export class CodeGen {
   }
 
   async emit() {
-    if (!process.env.ROLLUP) {
+    if (!process.env.BROWSER) {
       const dir = path.dirname(this.filename);
-      await fs.mkdir(dir, { recursive: true });
+      await fs.promises.mkdir(dir, { recursive: true });
       const lines: string[] = [];
       if (this.guard) {
         lines.push('#ifndef ' + this.guard);
@@ -59,10 +59,10 @@ export class CodeGen {
       const buf = lines.join('\n') + '\n';
       let previousBuf = undefined;
       if (await fileExists(this.filename)) {
-        previousBuf = await fs.readFile(this.filename, 'utf8');
+        previousBuf = await fs.promises.readFile(this.filename, 'utf8');
       }
       if (previousBuf !== buf) {
-        await fs.writeFile(this.filename, buf);
+        await fs.promises.writeFile(this.filename, buf);
       }
     }
   }

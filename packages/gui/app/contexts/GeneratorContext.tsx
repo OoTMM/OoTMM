@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
 import { GeneratorOutput, Items, Settings, itemPool, OptionsInput, mergeSettings, makeSettings, SettingsPatch, Cosmetics, OptionRandomSettings } from '@ootmm/core';
-import { Buffer } from 'buffer';
 import { merge } from 'lodash';
 
 import * as API from '../api';
@@ -32,7 +31,7 @@ type GeneratorContext = {
   state: GeneratorState;
   setState: React.Dispatch<React.SetStateAction<GeneratorState>>;
   setFile: (key: string, file: File) => void;
-  setFileBuffer: (key: keyof GeneratorState['romConfig']['files'], file: Buffer) => void;
+  setFileBuffer: (key: keyof GeneratorState['romConfig']['files'], file: ArrayBuffer) => void;
   setSeed: (seed: string) => void;
   setIsPatch: (isPatch: boolean) => void;
   setSettings: (settings: SettingsPatch) => Settings;
@@ -76,7 +75,7 @@ function createState(): GeneratorState {
 export function GeneratorContextProvider({ children }: { children: React.ReactNode }) {
   const [state, setState] = useState(createState);
 
-  const setFileBuffer = (key: keyof GeneratorState['romConfig']['files'], file: Buffer) => {
+  const setFileBuffer = (key: keyof GeneratorState['romConfig']['files'], file: ArrayBuffer) => {
     setState(state => ({ ...state, romConfig: { ...state.romConfig, files: { ...state.romConfig.files, [key]: file } }}));
   };
 
@@ -238,7 +237,7 @@ export function useCosmetics() {
     const savedCosmetics = { ...newCosmetics };
     for (const key of Object.keys(savedCosmetics)) {
       const v = (savedCosmetics as any)[key];
-      if (Buffer.isBuffer(v)) {
+      if (v instanceof ArrayBuffer) {
         delete (savedCosmetics as any)[key];
       }
     }

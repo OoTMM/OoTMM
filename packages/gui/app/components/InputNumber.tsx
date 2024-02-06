@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { Group } from './Group';
 
 type InputNumberProps = {
@@ -18,7 +18,7 @@ export const InputNumber = ({ label, value, onChange, min, max, tooltip }: Input
        <Group direction='vertical' spacing='xs'>
         <span>
           {label}
-          {tooltip && <a className="tooltip-link" id={tooltip} href="#"><FontAwesomeIcon icon={solid('question-circle')}/></a>}
+          {tooltip && <a className="tooltip-link" id={tooltip} href="#"><FontAwesomeIcon icon={faQuestionCircle}/></a>}
         </span>
         <input
           type="number"

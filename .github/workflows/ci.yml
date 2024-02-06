@@ -3,78 +3,36 @@ name: Continuous Integration Workflow
 on: [push, pull_request, workflow_dispatch]
 
 jobs:
-  deps:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Use Node.js 18.x
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18.x
-
-      - name: Use cached node_modules
-        id: cache-node-modules
-        uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-modules-
-
-      - name: Install dependencies
-        if: steps.cache-node-modules.outputs.cache-hit != 'true'
-        run: npm i
-
   test:
-    needs: deps
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 
-      - name: Use Node.js 18.x
+      - name: Use Node.js 20.x
         uses: actions/setup-node@v3
         with:
-          node-version: 18.x
-
-      - name: Use cached node_modules
-        id: cache-node-modules
-        uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-modules-
+          node-version: 20.x
 
       - name: Install dependencies
-        if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: npm i
-
-      - name: Use cached node_modules cache dir
-        uses: actions/cache@v3
-        with:
-          path: node_modules/.cache
-          key: ${{ runner.os }}-node-cache-${{ github.run_id }}
-          restore-keys: |
-            ${{ runner.os }}-node-cache-
 
       - name: Test
         run: npm test
   deploy:
-    if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/develop' || contains(github.ref, 'refs/tags/')) }}
+    if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/master' || contains(github.ref, 'refs/tags/')) }}
     needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 
-      - name: Env Config - Stable
+      - name: Extract Version (Tag)
         if: ${{ contains(github.ref, 'refs/tags/') }}
         run: |
           echo "VERSION=${{ github.ref_name }}" >> $GITHUB_ENV
           echo "NETLIFY_SITE_ID=${{ secrets.NETLIFY_SITE_ID_STABLE }}" >> $GITHUB_ENV
 
-      - name: Env Config - Dev
-        if: ${{ github.ref == 'refs/heads/develop' }}
+      - name: Extract Version (Commit)
+        if: ${{ !contains(github.ref, 'refs/tags/') }}
         run: |
           short_sha=$(echo ${{ github.sha }} | cut -c1-7)
           echo "VERSION=dev-${short_sha}" >> $GITHUB_ENV
@@ -87,42 +45,35 @@ jobs:
           repo-name: practicerom
           keys-asc: https://practicerom.com/public/packages/debian/pgp.pub
 
-      - name: Add n64 toolchain
-        run: sudo apt-get install n64-ultra
+      - name: Install system dependencies
+        run: sudo apt-get install n64-ultra cmake ninja-build
 
-      - name: Use Node.js 18.x
+      - name: Use Node.js 20.x
         uses: actions/setup-node@v3
         with:
-          node-version: 18.x
-
-      - name: Use cached node_modules
-        id: cache-node-modules
-        uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-modules-
+          node-version: 20.x
 
       - name: Install dependencies
-        if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: npm i
-
-      - name: Use cached node_modules cache dir
-        uses: actions/cache@v3
-        with:
-          path: node_modules/.cache
-          key: ${{ runner.os }}-node-cache-${{ github.run_id }}
-          restore-keys: |
-            ${{ runner.os }}-node-cache-
 
       - name: Build
         run: |
           npm run build
 
-      - name: Deploy to netlify
+      - name: Deploy to netlify (stable)
+        if: ${{ contains(github.ref, 'refs/tags/') }}
         run: |
           npm i -g netlify-cli
           cd packages/gui/dist && netlify deploy --filter @ootmm/gui --prod --dir ./
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_STABLE }}
+
+      - name: Deploy to netlify (dev)
+        if: ${{ github.ref == 'refs/heads/master' }}
+        run: |
+          npm i -g netlify-cli
+          cd packages/gui/dist && netlify deploy --filter @ootmm/gui --prod --dir ./
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_DEV }}

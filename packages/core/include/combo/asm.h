@@ -153,7 +153,7 @@
 .macro HOOK_CALL addr
 HOOK_SAVE
   jal \addr
-  nop
+   nop
 HOOK_RESTORE
 .endm
 

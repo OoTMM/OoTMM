@@ -337,7 +337,8 @@ typedef struct
     u32 ganonBossKey:1;
     u32 childWallet:1;
     u32 triforceWin:1;
-    u32 unused2:8;
+    u32 endgameItemIsWin:1;
+    u32 unused2:7;
     u32 bottomlessWallet:1;
     u32 chestGameKey:1;
     u32 unused:6;
@@ -347,6 +348,10 @@ OotExtraFlags;
 typedef struct ALIGNED(16)
 {
     u8  xflags[XFLAGS_COUNT_OOT];
+    u8  npc[32];
+    u8  shops[8];
+    u8  scrubs[8];
+    u8  sr[16];
 }
 OotCustomSave;
 

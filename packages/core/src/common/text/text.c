@@ -198,8 +198,12 @@ static int isItemAmbiguous(s16 gi)
         return !comboConfig(CFG_SHARED_BOMB_BAGS);
     case GI_OOT_MAGIC_UPGRADE:
     case GI_OOT_MAGIC_UPGRADE2:
+    case GI_OOT_MAGIC_JAR_SMALL:
+    case GI_OOT_MAGIC_JAR_LARGE:
     case GI_MM_MAGIC_UPGRADE:
     case GI_MM_MAGIC_UPGRADE2:
+    case GI_MM_MAGIC_JAR_SMALL:
+    case GI_MM_MAGIC_JAR_LARGE:
         return !comboConfig(CFG_SHARED_MAGIC);
     case GI_OOT_ARROW_FIRE:
     case GI_MM_ARROW_FIRE:
@@ -261,6 +265,9 @@ static int isItemAmbiguous(s16 gi)
     case GI_OOT_MASK_TRUTH:
     case GI_MM_MASK_TRUTH:
         return !comboConfig(CFG_SHARED_MASK_TRUTH);
+    case GI_OOT_MASK_BLAST:
+    case GI_MM_MASK_BLAST:
+        return (comboConfig(CFG_OOT_MASK_BLAST) && !comboConfig(CFG_SHARED_MASK_BLAST));
     case GI_OOT_WALLET:
     case GI_OOT_WALLET2:
     case GI_OOT_WALLET3:
@@ -363,13 +370,48 @@ static int isItemAmbiguous(s16 gi)
     case GI_MM_SHIELD_HERO:
     case GI_MM_SHIELD_MIRROR:
         return !comboConfig(CFG_SHARED_SHIELDS);
+    case GI_OOT_BOMBCHU_5:
     case GI_OOT_BOMBCHU_10:
+    case GI_OOT_BOMBCHU_20:
+    case GI_OOT_BOMBCHU_BAG_5:
+    case GI_OOT_BOMBCHU_BAG_10:
+    case GI_OOT_BOMBCHU_BAG_20:
+    case GI_MM_BOMBCHU:
+    case GI_MM_BOMBCHU_5:
+    case GI_MM_BOMBCHU_10:
+    case GI_MM_BOMBCHU_20:
+    case GI_MM_BOMBCHU_BAG:
+    case GI_MM_BOMBCHU_BAG_5:
+    case GI_MM_BOMBCHU_BAG_10:
+    case GI_MM_BOMBCHU_BAG_20:
+        return !comboConfig(CFG_SHARED_BOMBCHU);
+    case GI_OOT_SPELL_FIRE:
+    case GI_MM_SPELL_FIRE:
+        return (comboConfig(CFG_MM_SPELL_FIRE) && !comboConfig(CFG_SHARED_SPELL_FIRE));
+    case GI_OOT_SPELL_WIND:
+    case GI_MM_SPELL_WIND:
+        return (comboConfig(CFG_MM_SPELL_WIND) && !comboConfig(CFG_SHARED_SPELL_WIND));
+    case GI_OOT_SPELL_LOVE:
+    case GI_MM_SPELL_LOVE:
+        return (comboConfig(CFG_MM_SPELL_LOVE) && !comboConfig(CFG_SHARED_SPELL_LOVE));
+    case GI_OOT_BOOTS_IRON:
+    case GI_MM_BOOTS_IRON:
+        return (comboConfig(CFG_MM_BOOTS_IRON) && !comboConfig(CFG_SHARED_BOOTS_IRON));
+    case GI_OOT_BOOTS_HOVER:
+    case GI_MM_BOOTS_HOVER:
+        return (comboConfig(CFG_MM_BOOTS_HOVER) && !comboConfig(CFG_SHARED_BOOTS_HOVER));
+    case GI_OOT_TUNIC_GORON:
+    case GI_MM_TUNIC_GORON:
+        return (comboConfig(CFG_MM_TUNIC_GORON) && !comboConfig(CFG_SHARED_TUNIC_GORON));
+        break;
+    case GI_OOT_TUNIC_ZORA:
+    case GI_MM_TUNIC_ZORA:
+        return (comboConfig(CFG_MM_TUNIC_ZORA) && !comboConfig(CFG_SHARED_TUNIC_ZORA));
+        break;
     case GI_OOT_MAGIC_BEAN:
     case GI_OOT_BOTTLE_EMPTY:
     case GI_OOT_BOTTLE_MILK:
     case GI_OOT_SWORD_KOKIRI:
-    case GI_OOT_BOMBCHU_5:
-    case GI_OOT_BOMBCHU_20:
     case GI_OOT_MILK:
     case GI_OOT_POTION_RED:
     case GI_OOT_POTION_GREEN:
@@ -385,7 +427,6 @@ static int isItemAmbiguous(s16 gi)
     case GI_OOT_FISH:
     case GI_OOT_POE:
     case GI_OOT_BIG_POE:
-    case GI_MM_BOMBCHU:
     case GI_MM_MAGIC_BEAN:
     case GI_MM_BOTTLE_POTION_RED:
     case GI_MM_BOTTLE_POTION_GREEN:
@@ -395,9 +436,6 @@ static int isItemAmbiguous(s16 gi)
     case GI_MM_BOTTLE_BIG_POE:
     case GI_MM_BOTTLE_EMPTY:
     case GI_MM_SWORD_KOKIRI:
-    case GI_MM_BOMBCHU_20:
-    case GI_MM_BOMBCHU_10:
-    case GI_MM_BOMBCHU_5:
     case GI_MM_BOTTLE_MILK:
     case GI_MM_MILK:
     case GI_MM_POTION_RED:
@@ -764,7 +802,8 @@ void comboTextAppendRegionName(char** b, u8 regionId, u8 world, int flags)
     char* start;
     const RegionName* regName;
 
-    if (regionId == 0)
+    start = *b;
+    if (regionId == 0xff)
     {
         if (flags & TF_PREPOS)
         {
@@ -772,6 +811,21 @@ void comboTextAppendRegionName(char** b, u8 regionId, u8 world, int flags)
         }
         comboTextAppendStr(b, TEXT_COLOR_YELLOW "Link's Pocket");
         comboTextAppendClearColor(b);
+        if (flags & TF_CAPITALIZE)
+        {
+            start[0] = toupper(start[0]);
+        }
+        return;
+    }
+
+    if (regionId == 0x00)
+    {
+        comboTextAppendStr(b, TEXT_COLOR_PINK "nowhere");
+        comboTextAppendClearColor(b);
+        if (flags & TF_CAPITALIZE)
+        {
+            start[0] = toupper(start[0]);
+        }
         return;
     }
 
@@ -784,7 +838,6 @@ void comboTextAppendRegionName(char** b, u8 regionId, u8 world, int flags)
         regName = &kRegionNamesOot[(regionId & 0x7f) - 1];
     }
 
-    start = *b;
     if (flags & TF_PREPOS)
     {
         comboTextAppendStr(b, regName->prepos);

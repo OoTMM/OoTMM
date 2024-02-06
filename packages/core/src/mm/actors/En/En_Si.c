@@ -36,13 +36,15 @@ void EnSi_ItemOverride(ComboItemOverride* o, Actor* this, GameState_Play* play)
 
 void EnSi_AddItem(Actor* this, GameState_Play* play)
 {
+    ComboItemOverride o;
     ComboItemQuery q;
 
     EnSi_ItemQuery(&q, this, play);
+    comboItemOverride(&o, &q);
     SetChestFlag(play, (this->variable & 0xfc) >> 2);
     PlayerDisplayTextBox(play, 0x52, NULL);
     comboAddItemEx(play, &q, 1);
-    PlaySoundSpecial(0x39);
+    comboPlayItemFanfare(o.gi, 1);
     FreezePlayer(play);
     SET_HANDLER(this, EnSi_WaitForPlayerToCloseMessage);
     this->draw = NULL;

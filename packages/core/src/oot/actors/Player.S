@@ -134,3 +134,66 @@ PATCH_START 0x808312e4
   j comboPlayerSetDrawGi
    nop
 PATCH_END
+
+/* Disable a check for heart container */
+PATCH_START 0x80838590
+  li at,0x7fff
+PATCH_END
+
+/* Disable a check for masks */
+PATCH_START 0x80831e80
+  li v0,0
+PATCH_END
+
+/* Use our wrapper */
+PATCH_START 0x808323a4
+  jal Player_ProcessItemButtonsWrapper
+PATCH_END
+
+PATCH_START 0x80853554
+.int 0
+PATCH_END
+
+/* Disable NPC reactions to masks */
+PATCH_START 0x800597c0
+  jr ra
+   li v0,0
+PATCH_END
+
+/* Disable some mask-related rendering check */
+PATCH_START 0x808482b0
+  nop
+  nop
+PATCH_END
+
+DrawMaskTrampoline:
+  HOOK_CALL comboDrawExtendedMask
+  jr ra
+   nop
+
+/* Use our mask drawing hook */
+PATCH_START 0x808483c4
+  jal DrawMaskTrampoline
+   nop
+  nop
+  nop
+  nop
+  nop
+  nop
+PATCH_END
+
+PATCH_START 0x80855668
+.int 0
+PATCH_END
+
+/* Use our handler to draw the deku stick */
+DrawDekuStickTrampoline:
+  HOOK_CALL Player_DrawDekuStick
+  jr ra
+   nop
+
+PATCH_START 0x8007b8b8
+  jal DrawDekuStickTrampoline
+   nop
+  nop
+PATCH_END

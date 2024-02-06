@@ -280,10 +280,10 @@ void Fishing_FishGiveItem(Actor* this, GameState_Play* play) {
         ActorDestroy(this);
     }
 
-    /* Play the sound */
-    PlaySound(0x4824);
-
     comboAddItemEx(play, &q, major);
+
+    /* Play the sound */
+    comboPlayItemFanfare(o.gi, 0);
 
     int flag = this->variable - 100;
     if (gSave.age == AGE_ADULT) {

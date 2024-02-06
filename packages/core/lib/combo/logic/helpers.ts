@@ -41,5 +41,7 @@ export function isEntranceShuffle(settings: Settings) {
     return true;
   if (settings.erOneWaysOwls)
     return true;
+  if (settings.erWallmasters !== 'none')
+    return true;
   return false;
 }

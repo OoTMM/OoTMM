@@ -1,0 +1,29 @@
+{
+  "name": "@ootmm/data",
+  "version": "0.0.1",
+  "description": "",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "tsx src/build.ts"
+  },
+  "author": "Nax",
+  "license": "MIT",
+  "devDependencies": {
+    "csv": "^6.3.6"
+  },
+  "nx": {
+    "targets": {
+      "build": {
+        "inputs": [
+          "{projectRoot}/**/*"
+        ],
+        "outputs": [
+          "{workspaceRoot}/dist"
+        ],
+        "dependsOn": [
+          "^build"
+        ]
+      }
+    }
+  }
+}

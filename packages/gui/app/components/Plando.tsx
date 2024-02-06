@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Select from 'react-select';
 import { itemName, locationList } from '@ootmm/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 import { useItemPool, useSettings } from '../contexts/GeneratorContext';
 import { Group } from './Group';
@@ -45,7 +45,7 @@ export function Plando() {
       <Group direction='vertical' spacing='xs'>
         {Object.entries(settings.plando.locations || {}).filter(x => x[1]).map(([loc, item]) => (
           <Group direction='horizontal' key={loc}>
-            <span className="plando-remove" onClick={() => removeItem(loc)}><FontAwesomeIcon icon={solid('xmark')}/></span>
+            <span className="plando-remove" onClick={() => removeItem(loc)}><FontAwesomeIcon icon={faXmark}/></span>
             <span className="plando-item">{loc}: {itemName(item!)}</span>
           </Group>
         ))}

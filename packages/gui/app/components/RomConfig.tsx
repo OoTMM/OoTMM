@@ -53,7 +53,6 @@ export function RomConfig() {
           Generate
         </button>
       </Group>
-      
     </form>
   </Group>
 }

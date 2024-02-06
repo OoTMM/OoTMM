@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react';
-import { Buffer } from 'buffer';
 import { importSettings, exportSettings } from '@ootmm/core';
 
 import { useOverrideSettings, useSettings } from '../contexts/GeneratorContext';

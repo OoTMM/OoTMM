@@ -18,6 +18,7 @@ export const SETTINGS = [{
   description: 'The game mode.',
   values: [
     { value: 'single', name: 'Singleplayer', description: 'A regular, one player seed' },
+    { value: 'coop', name: 'Co-op', description: 'Everyone plays the same seed, all items are shared' },
     { value: 'multi', name: 'Multiworld', description: 'A multiplayer settings where players can find each other\'s items' },
   ],
   default: 'single'
@@ -97,6 +98,7 @@ export const SETTINGS = [{
     { value: 'normal', name: 'Normal', description: 'The regular item count for each game.' },
     { value: 'scarce', name: 'Scarce', description: 'One less of every major item. No Heart Pieces.' },
     { value: 'minimal', name: 'Minimal', description: 'Only one of each major item. No Heart Pieces or Containers.' },
+    { value: 'barren', name: 'Barren', description: 'Minimal item pool, plus every shuffled item that is not strictly required to reach the goal (beatable only) or any location (all locations) gets removed.' },
   ],
   default: 'normal'
 }, {
@@ -493,6 +495,34 @@ export const SETTINGS = [{
   description: 'Controls whether or not the grass is shuffled (MM)',
   default: false
 }, {
+  key: 'shuffleFreeRupeesOot',
+  name: 'Freestanding Rupees Shuffle (OoT)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the freestanding rupees are shuffled (OoT)',
+  default: false
+}, {
+  key: 'shuffleFreeRupeesMm',
+  name: 'Freestanding Rupees Shuffle (MM)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the freestanding rupees are shuffled (MM)',
+  default: false
+}, {
+  key: 'shuffleFreeHeartsOot',
+  name: 'Freestanding Hearts Shuffle (OoT)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the freestanding hearts are shuffled (OoT)',
+  default: false
+}, {
+  key: 'shuffleFreeHeartsMm',
+  name: 'Freestanding Hearts Shuffle (MM)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the freestanding hearts are shuffled (MM)',
+  default: false
+}, {
   key: 'shuffleOcarinasOot',
   name: 'Ocarina Shuffle (OoT)',
   category: 'main.shuffle',
@@ -526,6 +556,34 @@ export const SETTINGS = [{
   category: 'main.shuffle',
   type: 'boolean',
   description: 'Controls whether or not the Fish (and the Loach) in the Fishing Pond are shuffled amongst all the items.',
+  default: false
+}, {
+  key: 'divingGameRupeeShuffle',
+  name: 'Diving Game Rupee Shuffle',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the Zora\'s Domain Diving Game has 5 random items instead of green, blue, red, purple and 500 rupees.',
+  default: false
+}, {
+  key: 'fairyFountainFairyShuffleOot',
+  name: 'Fairy Fountain Fairy Shuffle (OoT)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not fairies in fairy fountains are shuffled (OoT).',
+  default: false
+}, {
+  key: 'fairyFountainFairyShuffleMm',
+  name: 'Fairy Fountain Fairy Shuffle (MM)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not fairies in fairy fountains are shuffled (MM).',
+  default: false
+}, {
+  key: 'fairySpotShuffleOot',
+  name: 'Fairy Spot Shuffle (OoT)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not big fairies in fairy spots are shuffled (OoT).',
   default: false
 }, {
   key: 'eggShuffle',
@@ -622,6 +680,32 @@ export const SETTINGS = [{
   description: 'Allows access to the Fire Temple as child.',
   default: false
 }, {
+  key: 'openDungeonsMm',
+  name: 'Open Dungeons (MM)',
+  category: 'main.events',
+  type: 'set',
+  description: 'Make some MM dungeons more readily accessible.',
+  values: [
+    { value: 'WF', name: 'Woodfall Temple' },
+    { value: 'SH', name: 'Snowhead Temple' },
+    { value: 'GB', name: 'Great Bay Temple' },
+    { value: 'ST', name: 'Stone Tower Temple' },
+  ],
+  default: 'none'
+}, {
+  key: 'clearStateDungeonsMm',
+  name: 'Clear State Dungeons (MM)',
+  category: 'main.events',
+  type: 'enum',
+  description: 'Make some MM dungeons open during clear state..',
+  values: [
+    { value: 'none', name: 'None' },
+    { value: 'WF', name: 'Woodfall Temple' },
+    { value: 'GB', name: 'Great Bay Temple' },
+    { value: 'both', name: 'Both' },
+  ],
+  default: 'none'
+}, {
   key: 'kakarikoGate',
   name: 'Kakariko Gate',
   category: 'main.events',
@@ -682,6 +766,19 @@ export const SETTINGS = [{
   ],
   default: 'vanilla'
 }, {
+  key: 'rainbowBridge',
+  name: 'Rainbow Bridge',
+  category: 'main.events',
+  type: 'enum',
+  description: 'Alters how the Rainbow Bridge should be triggered',
+  values: [
+    { value: 'open', name: 'Open', description: 'Always open' },
+    { value: 'vanilla', name: 'Vanilla', description: 'Opens when you have the Light Arrows, Shadow Medallion, and Spirit Medallion' },
+    { value: 'medallions', name: 'Medallions', description: 'Opens when you have all Medallions' },
+    { value: 'custom', name: 'Custom', description: 'You will need to meet a special condition to open the bridge' },
+  ],
+  default: 'medallions',
+}, {
   key: 'majoraChild',
   name: 'Majora Child Requirements',
   category: 'main.events',
@@ -718,7 +815,7 @@ export const SETTINGS = [{
   type: 'boolean',
   description: 'Allow dungeons to be pre-completed depending on rules.',
   default: false,
-  cond: (s: any) => ((s.mode !== 'multi' || s.distinctWorlds) && !s.erMajorDungeons),
+  cond: (s: any) => (s.mode !== 'multi' || s.distinctWorlds),
 }, {
   key: 'preCompletedDungeonsMajor',
   name: 'Pre-Completed Dungeons (Major)',
@@ -759,6 +856,13 @@ export const SETTINGS = [{
   description: 'Pre-completes dungeons containing at least one remain, until in reaches that many remains. Can be combined with other pre-completed dungeon rules.',
   default: 0,
   cond: (s: any) => s.preCompletedDungeons,
+}, {
+  key: 'openMaskShop',
+  name: 'Open Mask Shop at night',
+  category: 'main.events',
+  type: 'boolean',
+  description: 'Makes the Mask Shop in Market open during the night',
+  default: false
 }, {
   key: 'crossWarpOot',
   name: 'Cross-Games OoT Warp Songs',
@@ -1038,6 +1142,76 @@ export const SETTINGS = [{
   default: false,
   cond: (s: any) => s.silverRupeeShuffle !== 'vanilla',
 }, {
+  key: 'bombchuBagOot',
+  name: 'Bombchu Bag (OoT)',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Turns the first out-of-shop bombchu pack you find into the bombchu bag. Has logical implications.',
+  default: false,
+}, {
+  key: 'bombchuBagMm',
+  name: 'Bombchu Bag (MM)',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Turns the first out-of-shop bombchu pack you find into the bombchu bag. Has logical implications.',
+  default: false,
+}, {
+  key: 'spellFireMm',
+  name: "Din's Fire (MM)",
+  category: 'items.extensions',
+  type: 'boolean',
+  description: "Adds Din's Fire in Majora's Mask.",
+  default: false
+}, {
+  key: 'spellWindMm',
+  name: "Farore's Wind (MM)",
+  category: 'items.extensions',
+  type: 'boolean',
+  description: "Adds Farore's Wind in Majora's Mask.",
+  default: false
+}, {
+  key: 'spellLoveMm',
+  name: "Nayru's Love (MM)",
+  category: 'items.extensions',
+  type: 'boolean',
+  description: "Adds Nayru's Love in Majora's Mask.",
+  default: false
+}, {
+  key: 'bootsIronMm',
+  name: "Iron Boots (MM)",
+  category: 'items.extensions',
+  type: 'boolean',
+  description: "Adds Iron Boots in Majora's Mask.",
+  default: false
+}, {
+  key: 'bootsHoverMm',
+  name: "Hover Boots (MM)",
+  category: 'items.extensions',
+  type: 'boolean',
+  description: "Adds Hover Boots in Majora's Mask.",
+  default: false
+}, {
+  key: 'tunicGoronMm',
+  name: "Goron Tunic (MM)",
+  category: 'items.extensions',
+  type: 'boolean',
+  description: "Adds Goron Tunic in Majora's Mask.",
+  default: false
+}, {
+  key: 'tunicZoraMm',
+  name: "Zora Tunic (MM)",
+  category: 'items.extensions',
+  type: 'boolean',
+  description: "Adds Zora Tunic in Majora's Mask.",
+  default: false
+}, {
+  key: 'blastMaskOot',
+  name: "Blast Mask (OoT)",
+  category: 'items.extensions',
+  type: 'boolean',
+  description: "Add the Blast Mask in Ocarina of Time.",
+  default: false
+}, {
   key: 'ocarinaButtonsShuffleOot',
   name: 'Ocarina Buttons Shuffle (OoT)',
   category: 'items.extensions',
@@ -1263,6 +1437,13 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false
 }, {
+  key: 'sharedMaskBlast',
+  name: 'Shared Blast Mask',
+  category: 'items.shared',
+  type: 'boolean',
+  default: false,
+  cond: (s: any) => s.blastMaskOot,
+}, {
   key: 'sharedWallets',
   name: 'Shared Wallets',
   category: 'items.shared',
@@ -1302,6 +1483,62 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false,
   cond: (s: any) => s.skeletonKeyOot && s.skeletonKeyMm,
+}, {
+  key: 'sharedBombchuBags',
+  name: 'Shared Bombchu Bags',
+  category: 'items.shared',
+  type: 'boolean',
+  default: false,
+  cond: (s: any) => s.bombchuBagOot && s.bombchuBagMm,
+}, {
+  key: 'sharedSpellFire',
+  name: "Shared Din's Fire",
+  category: 'items.shared',
+  type: 'boolean',
+  default: false,
+  cond: (s: any) => s.spellFireMm,
+}, {
+  key: 'sharedSpellWind',
+  name: "Shared Farore's Wind",
+  category: 'items.shared',
+  type: 'boolean',
+  default: false,
+  cond: (s: any) => s.spellWindMm,
+}, {
+  key: 'sharedSpellLove',
+  name: "Shared Nayru's Love",
+  category: 'items.shared',
+  type: 'boolean',
+  default: false,
+  cond: (s: any) => s.spellLoveMm,
+}, {
+  key: 'sharedBootsIron',
+  name: "Shared Iron Boots",
+  category: 'items.shared',
+  type: 'boolean',
+  default: false,
+  cond: (s: any) => s.bootsIronMm,
+}, {
+  key: 'sharedBootsHover',
+  name: "Shared Hover Boots",
+  category: 'items.shared',
+  type: 'boolean',
+  default: false,
+  cond: (s: any) => s.bootsHoverMm,
+}, {
+  key: 'sharedTunicGoron',
+  name: "Shared Goron Tunic",
+  category: 'items.shared',
+  type: 'boolean',
+  default: false,
+  cond: (s: any) => s.tunicGoronMm,
+}, {
+  key: 'sharedTunicZora',
+  name: "Shared Zora Tunic",
+  category: 'items.shared',
+  type: 'boolean',
+  default: false,
+  cond: (s: any) => s.tunicZoraMm,
 }, {
   key: 'agelessSwords',
   name: 'Ageless Swords',
@@ -1389,13 +1626,25 @@ export const SETTINGS = [{
   description: 'Enable the ability to shuffle dungeons within their own game or across both.',
   default: 'none'
 }, {
+  key: 'erWallmasters',
+  name: 'Wallmaster Shuffle',
+  category: 'entrances',
+  type: 'enum',
+  values: [
+    { value: 'none', name: 'None' },
+    { value: 'ownGame', name: 'Own Game' },
+    { value: 'full', name: 'Full' },
+  ],
+  description: 'TODO',
+  default: 'none'
+}, {
   key: 'erMajorDungeons',
   name: 'Shuffle Major Dungeons with Dungeons',
   category: 'entrances',
   type: 'boolean',
   description: 'If turned on, it means the boss-containing dungeons and uninverted Stone Tower Temple will be shuffled.',
   default: false,
-  cond: (x: any) => (x.erDungeons !== 'none' && !x.preCompletedDungeons)
+  cond: (x: any) => x.erDungeons !== 'none',
 }, {
   key: 'erMinorDungeons',
   name: 'Shuffle OoT Minor Dungeons with Dungeons',

@@ -1,13 +1,13 @@
 import { cloneDeep } from 'lodash';
 import { Settings } from '../settings';
-import { AreaData, Expr, ExprResult, isDefaultRestrictions, MM_TIME_SLICES } from './expr';
+import { AreaData, Expr, ExprResult, MM_TIME_SLICES, isDefaultRestrictions } from './expr';
 
-import { Location, locationData, makeLocation, makePlayerLocations } from './locations';
+import { Location, locationData, makeLocation } from './locations';
 import { World } from './world';
 import { isLocationLicenseGranting, isLocationRenewable } from './locations';
 import { ItemPlacement } from './solve';
-import { CountMap, countMapAdd } from '../util';
-import { Item, itemByID, Items, ItemsCount, PlayerItems } from '../items';
+import { countMapAdd } from '../util';
+import { Item, Items, ItemsCount, PlayerItems } from '../items';
 
 export const AGES = ['child', 'adult'] as const;
 
@@ -399,7 +399,8 @@ export class Pathfinder {
     const world = this.worlds[worldId];
     const ws = this.state.ws[worldId];
     const areaData = ws.areas[age].get(area)!;
-    const result = expr({ world, areaData, items: ws.items, renewables: ws.renewables, licenses: ws.licenses, age, events: ws.events, ignoreItems: this.opts.ignoreItems || false });
+    const state = { settings: this.settings, world, areaData, items: ws.items, renewables: ws.renewables, licenses: ws.licenses, age, events: ws.events, ignoreItems: this.opts.ignoreItems || false };
+    const result = expr.eval(state);
     if (result.result) {
       if (!result.restrictions || isDefaultRestrictions(result.restrictions)) {
         result.depItems = [];

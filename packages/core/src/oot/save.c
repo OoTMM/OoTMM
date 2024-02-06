@@ -126,8 +126,8 @@ static void applyStartingItems(void)
                 return;
             for (u16 j = 0; j < count; ++j)
             {
-                gi = comboProgressive(gi);
-                comboAddItem(NULL, gi);
+                gi = comboProgressive(gi, 0);
+                comboAddItemRaw(NULL, gi);
             }
         }
     }
@@ -254,10 +254,8 @@ void comboCreateSave(void* unk, void* buffer)
     {
         gOotExtraFlags.childWallet = 1;
         gMmExtraFlags2.childWallet = 1;
-
-        gOotMaxRupees[0] = 99;
-        gMmMaxRupees[0] = 99;
     }
+    comboWalletRefresh();
 
     /* Apply enemy souls */
     if (!comboConfig(CFG_OOT_SOULS_ENEMY))

@@ -41,7 +41,7 @@ void comboSilverRupeesInit(void)
 {
     if (gComboData.mq & (1 << MQ_DODONGOS_CAVERN))
     {
-        updateSR(SR_DC, 5, 0x05);
+        updateSR(SR_DC, 5, 0x25);
     }
 
     if (gComboData.mq & (1 << MQ_BOTTOM_OF_THE_WELL))
@@ -129,4 +129,23 @@ int comboSilverRupeesIncCount(GameState_Play* play, int id)
     }
 
     return tmp;
+}
+
+/* Handle temp flags */
+void comboSrUpdate(GameState_Play* play)
+{
+    const ComboSilverRupeeData* data;
+
+    for (int sr = 0; sr < SR_MAX; ++sr)
+    {
+        data = &gSilverRupeeData[sr];
+        if (data->flag < 0x20)
+            continue;
+        if (play->sceneId != data->sceneId)
+            continue;
+        if (comboSilverRupeesGetCount(sr) < data->count)
+            continue;
+
+        SetSwitchFlag(play, data->flag);
+    }
 }

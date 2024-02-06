@@ -1,10 +1,26 @@
 #include <combo.h>
 #include <combo/sr.h>
 #include <combo/dungeon.h>
+#include <combo/custom.h>
 
 void ArrowCycle_Handle(Actor_Player* link, GameState_Play* play);
 
-void Player_UseItemWrapper(GameState_Play* play, Actor_Player* link, s16 itemId)
+static void maskToggle(GameState_Play* play, Actor_Player* player, u8 maskId)
+{
+    /* Set the mask */
+    if (player->mask)
+        player->mask = 0;
+    else
+        player->mask = maskId;
+
+    /* Play a sfx */
+    PlaySound(0x835);
+
+    /* update B button */
+    Interface_LoadItemIconImpl(play, 0);
+}
+
+void comboPlayerUseItem(GameState_Play* play, Actor_Player* link, s16 itemId)
 {
     void (*Player_UseItem)(GameState_Play* play, Actor_Player* link, s16 itemId);
 
@@ -16,6 +32,9 @@ void Player_UseItemWrapper(GameState_Play* play, Actor_Player* link, s16 itemId)
     case ITEM_OOT_POCKET_EGG:
         gComboTriggersData.events.pocketEgg = 1;
         break;
+    case ITEM_OOT_MASK_BLAST:
+        maskToggle(play, link, 9);
+        break;
     default:
         Player_UseItem = OverlayAddr(0x80834000);
         Player_UseItem(play, link, itemId);
@@ -23,11 +42,169 @@ void Player_UseItemWrapper(GameState_Play* play, Actor_Player* link, s16 itemId)
     }
 }
 
-PATCH_CALL(0x8083212c, Player_UseItemWrapper);
+PATCH_CALL(0x8083212c, comboPlayerUseItem);
+
+static int prepareMask(GameState_Play* play, u16 objectId, int needsMatrix)
+{
+    void* obj;
+
+    obj = comboGetObject(objectId);
+    if (!obj)
+        return 0;
+
+    OPEN_DISPS(play->gs.gfx);
+    if (needsMatrix)
+        gSPMatrix(POLY_OPA_DISP++, 0x0d0001c0, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPSegment(POLY_OPA_DISP++, 0x0a, obj);
+    CLOSE_DISPS();
+
+    return 1;
+}
+
+static void DrawExtendedMaskKeaton(GameState_Play* play, Actor_Player* link)
+{
+    if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_KEATON, 1))
+        return;
+    OPEN_DISPS(play->gs.gfx);
+    gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_MASK_OOT_KEATON_0);
+    CLOSE_DISPS();
+}
+
+static void DrawExtendedMaskSkull(GameState_Play* play, Actor_Player* link)
+{
+    if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_SKULL, 1))
+        return;
+    OPEN_DISPS(play->gs.gfx);
+    gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_MASK_OOT_SKULL_0);
+    CLOSE_DISPS();
+}
+
+static void DrawExtendedMaskSpooky(GameState_Play* play, Actor_Player* link)
+{
+    if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_SPOOKY, 1))
+        return;
+    OPEN_DISPS(play->gs.gfx);
+    gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_MASK_OOT_SPOOKY_0);
+    CLOSE_DISPS();
+}
+
+static void DrawExtendedMaskBunny(GameState_Play* play, Actor_Player* link)
+{
+    if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_BUNNY, 0))
+        return;
+
+    OPEN_DISPS(play->gs.gfx);
+    gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_MASK_OOT_BUNNY_0);
+    CLOSE_DISPS();
+}
+
+static void DrawExtendedMaskGoron(GameState_Play* play, Actor_Player* link)
+{
+    if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_GORON, 1))
+        return;
+    OPEN_DISPS(play->gs.gfx);
+    gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_MASK_OOT_GORON_0);
+    CLOSE_DISPS();
+}
+
+static void DrawExtendedMaskZora(GameState_Play* play, Actor_Player* link)
+{
+    if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_ZORA, 1))
+        return;
+    OPEN_DISPS(play->gs.gfx);
+    gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_MASK_OOT_ZORA_0);
+    CLOSE_DISPS();
+}
+
+static void DrawExtendedMaskGerudo(GameState_Play* play, Actor_Player* link)
+{
+    if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_GERUDO, 1))
+        return;
+    OPEN_DISPS(play->gs.gfx);
+    gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_MASK_OOT_GERUDO_0);
+    CLOSE_DISPS();
+}
+
+static void DrawExtendedMaskTruth(GameState_Play* play, Actor_Player* link)
+{
+    if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_TRUTH, 1))
+        return;
+    OPEN_DISPS(play->gs.gfx);
+    gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_MASK_OOT_TRUTH_0);
+    CLOSE_DISPS();
+}
+
+static void DrawExtendedMaskBlast(GameState_Play* play, Actor_Player* link)
+{
+    u8 opacity;
+
+    if (!prepareMask(play, 0x01dd | MASK_FOREIGN_OBJECT, 1))
+        return;
+    if (gBlastMaskDelayAcc > 0x11)
+        opacity = 0;
+    else
+        opacity = 0xff - (gBlastMaskDelayAcc * 0x0f);
+
+    OPEN_DISPS(play->gs.gfx);
+    gSPSegment(POLY_OPA_DISP++, 0x09, kDListEmpty);
+
+    if (opacity)
+    {
+        gDPSetEnvColor(POLY_OPA_DISP++, 0, 0, 0, opacity);
+        gSPDisplayList(POLY_OPA_DISP++, 0x0a0005c0);
+    }
+    else
+    {
+        gSPSegment(POLY_OPA_DISP++, 0x08, kDListEmpty);
+        gDPSetEnvColor(POLY_OPA_DISP++, 0, 0, 0, 0xff);
+        gSPDisplayList(POLY_OPA_DISP++, 0x0a000440);
+    }
+    CLOSE_DISPS();
+}
+
+typedef void (*MaskCallback)(GameState_Play*, Actor_Player*);
+
+static const MaskCallback kMaskCallbacks[] = {
+    DrawExtendedMaskKeaton,
+    DrawExtendedMaskSkull,
+    DrawExtendedMaskSpooky,
+    DrawExtendedMaskBunny,
+    DrawExtendedMaskGoron,
+    DrawExtendedMaskZora,
+    DrawExtendedMaskGerudo,
+    DrawExtendedMaskTruth,
+    DrawExtendedMaskBlast,
+};
+
+void comboDrawExtendedMask(void)
+{
+    GameState_Play* play;
+    Actor_Player* link;
+    MaskCallback cb;
+    int index;
+
+    play = gPlay;
+    link = GET_LINK(play);
+
+    if (link->mask == 0)
+        return;
+    index = link->mask - 1;
+    if (index >= ARRAY_SIZE(kMaskCallbacks))
+        return;
+    cb = kMaskCallbacks[index];
+    if (!cb)
+        return;
+    cb(play, link);
+}
 
 void Player_UpdateWrapper(Actor_Player* this, GameState_Play* play)
 {
-    CustomTriggers_Spawn(play);
+    if (gBlastMaskDelayAcc)
+    {
+        gBlastMaskDelayAcc--;
+        if (!gBlastMaskDelayAcc)
+            Interface_LoadItemIconImpl(play, 0);
+    }
 
     ArrowCycle_Handle(this, play);
     Player_Update(this, play);
@@ -43,14 +220,8 @@ void Player_UpdateWrapper(Actor_Player* this, GameState_Play* play)
         }
     }
 
-    /* Spirit MQ silver rupee chest */
-    if (comboConfig(CFG_OOT_SILVER_RUPEE_SHUFFLE)
-        && (gComboData.mq & (1 << MQ_TEMPLE_SPIRIT))
-        && (play->sceneId == SCE_OOT_TEMPLE_SPIRIT)
-        && (comboSilverRupeesGetCount(SR_SPIRIT1) >= 5))
-    {
-        SetSwitchFlag(play, 0x37);
-    }
+    comboSrUpdate(play);
+    comboMultiProcessMessages(play);
 }
 
 int Player_DpadHook(Actor_Player* this, GameState_Play* play)
@@ -96,3 +267,72 @@ void Player_TalkDisplayTextBox(GameState_Play* play, s16 textId, Actor* actor)
 
 PATCH_CALL(0x80838464, Player_TalkDisplayTextBox);
 PATCH_CALL(0x80055d50, Player_TalkDisplayTextBox);
+
+u16 gBlastMaskDelayAcc;
+
+static u16 blastMaskDelay(void)
+{
+    if (comboConfig(CFG_BLAST_MASK_DELAY_INSTANT)) return 0x001;
+    if (comboConfig(CFG_BLAST_MASK_DELAY_VERYSHORT)) return 0x020;
+    if (comboConfig(CFG_BLAST_MASK_DELAY_SHORT)) return 0x80;
+    if (comboConfig(CFG_BLAST_MASK_DELAY_LONG)) return 0x200;
+    if (comboConfig(CFG_BLAST_MASK_DELAY_VERYLONG)) return 0x400;
+    return 0x136;
+}
+
+static void Player_BlastMask(GameState_Play* play, Actor_Player* link)
+{
+    Actor* bomb;
+    s16* bombTimer;
+
+    if (gBlastMaskDelayAcc)
+        return;
+    bomb = SpawnActor(&play->actorCtx, play, AC_EN_BOM, link->base.focus.pos.x, link->base.focus.pos.y, link->base.focus.pos.z, 0, 0, 0, 0);
+    if (!bomb)
+        return;
+    bombTimer = (void*)((char*)bomb + 0x1e8);
+    *bombTimer = 2;
+    gBlastMaskDelayAcc = blastMaskDelay();
+    Interface_LoadItemIconImpl(play, 0);
+}
+
+void Player_ProcessItemButtonsWrapper(Actor_Player* link, GameState_Play* play)
+{
+    void (*Player_ProcessItemButtons)(Actor_Player* link, GameState_Play* play);
+    ControllerInput* input;
+    int bPress;
+
+    input = *(ControllerInput**)(OverlayAddr(0x80856734));
+    Player_ProcessItemButtons = OverlayAddr(0x80831e64);
+    bPress = !!(input->pressed.buttons & B_BUTTON);
+
+    /* Handle masks that have B actions */
+    if (bPress && !(link->state & (PLAYER_ACTOR_STATE_HOLD_ITEM | PLAYER_ACTOR_STATE_CUTSCENE_FROZEN)) && !Player_UsingItem(link))
+    {
+        switch (link->mask)
+        {
+        case 9:
+            Player_BlastMask(play, link);
+            input->pressed.buttons &= ~B_BUTTON;
+            break;
+        }
+    }
+
+    Player_ProcessItemButtons(link, play);
+}
+
+void Player_DrawDekuStick(void)
+{
+    GameState_Play* play;
+    void* obj;
+
+    play = gPlay;
+    obj = comboGetObject(CUSTOM_OBJECT_ID_EQ_DEKU_STICK);
+    if (!obj)
+        return;
+
+    OPEN_DISPS(play->gs.gfx);
+    gSPSegment(POLY_OPA_DISP++, 0x0a, obj);
+    gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_EQ_DEKU_STICK_0);
+    CLOSE_DISPS();
+}

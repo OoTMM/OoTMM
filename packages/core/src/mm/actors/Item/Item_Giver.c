@@ -60,7 +60,7 @@ ActorInit ItemGiver_gActorInit = {
 void comboSpawnItemGiver(GameState_Play* play, u16 npcId)
 {
     SpawnActor(
-        (char*)play + 0x1ca0,
+        &play->actorCtx,
         play,
         AC_ITEM_GIVER,
         0, 0, 0,
@@ -72,7 +72,7 @@ void comboSpawnItemGiver(GameState_Play* play, u16 npcId)
 void comboSpawnItemGivers(GameState_Play* play)
 {
     /* Song of Healing */
-    if (!gMmExtraFlags2.songHealing && gSave.entranceIndex == 0xd800)
+    if (!gMmExtraFlags2.songHealing && gSave.entranceIndex == ENTR_MM_CLOCK_TOWN)
     {
         comboSpawnItemGiver(play, NPC_MM_SONG_HEALING);
     }

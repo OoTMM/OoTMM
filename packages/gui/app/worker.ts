@@ -1,8 +1,6 @@
-import { Buffer } from 'buffer';
 import JSZip from 'jszip';
-import { Settings, itemPool, Items, OptionsInput, GeneratorOutput, generate, COSMETICS } from '@ootmm/core';
-
-const VERSION = process.env.VERSION as string;
+import { Settings, itemPool, Items, OptionsInput, GeneratorOutput, generate } from '@ootmm/core';
+import dataVersionZipFile from '@ootmm/core/dist/data.zip?url';
 
 async function makeDataPromise(path: string) {
   const reply = await fetch(path);
@@ -14,7 +12,7 @@ async function makeDataPromise(path: string) {
   }
 }
 
-const dataPromise = makeDataPromise(`/data-${VERSION}.zip`).then(data => JSZip.loadAsync(data));
+const dataPromise = makeDataPromise(dataVersionZipFile).then(data => JSZip.loadAsync(data));
 
 async function fetchFunc(path: string) {
   const zip = await dataPromise;
@@ -71,15 +69,6 @@ export type WorkerResult = WorkerResultItemPool | WorkerResultGenerate | WorkerR
 function onTaskGenerate(task: WorkerTaskGenerate) {
   let { oot, mm, patch, options } = task;
   options.cosmetics = { ...options.cosmetics };
-  for (const c of COSMETICS) {
-    if ((c.type === 'zobj' || c.type === 'zip') && options.cosmetics[c.key]) {
-      options.cosmetics[c.key] = Buffer.from(options.cosmetics[c.key] as any);
-    }
-  }
-  [oot, mm] = [oot, mm].map(b => Buffer.from(b));
-  if (patch) {
-    patch = Buffer.from(patch);
-  }
   const onLog = (msg: string) => {
     postMessage({
       type: 'generate-log',

@@ -48,10 +48,13 @@ PATCH_CALL(0x80b4b3f8, EnSi_Draw);
 void EnSi_GiveItem(GameState_Play* play, Actor* this)
 {
     ComboItemQuery q;
+    ComboItemOverride o;
 
     EnSi_ItemQuery(&q, this);
+    comboItemOverride(&o, &q);
     PlayerDisplayTextBox(play, 0xb4, NULL);
     comboAddItemEx(play, &q, 1);
+    comboPlayItemFanfare(o.gi, 1);
 }
 
 PATCH_CALL(0x80b4b190, EnSi_GiveItem);

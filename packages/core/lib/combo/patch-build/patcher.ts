@@ -1,4 +1,3 @@
-import { Buffer } from 'buffer';
 
 import { Options } from '../options';
 import { Game, CONFIG } from "../config";

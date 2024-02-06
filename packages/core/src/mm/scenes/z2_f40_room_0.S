@@ -1,0 +1,116 @@
+#include <combo.h>
+
+PATCH_GROUP PG_MM_OPEN_STT
+
+/* Replace some Elegy Switches with Elegy Blocks at end positions */
+
+PATCH_VROM 0x02BA9000 + 0x480
+
+.short AC_BG_F40_BLOCK
+.short 0x0002
+.short 0xF654
+.short 0x0869
+.short 0x0007
+.short 0x007F
+.short 0x007F
+.short 0x00FC
+
+.short AC_BG_F40_BLOCK
+.short 0x0004
+.short 0xF654
+.short 0x097F
+.short 0x0007
+.short 0x007F
+.short 0x007F
+.short 0x00FC
+
+PATCH_END
+
+PATCH_VROM 0x02BA9000 + 0x4B0
+
+.short AC_BG_F40_BLOCK
+.short 0x0004
+.short 0xF654
+.short 0x0750
+.short 0x0007
+.short 0x007F
+.short 0x007F
+.short 0x00FC
+
+PATCH_END
+
+/* Change position of some Elegy Blocks to be at end positions */
+
+PATCH_VROM 0x02BA9000 + 0x532
+
+.short 0x0004
+.short 0xF98C
+.short 0x0867
+.short 0x0007
+.short 0x007F
+.short 0x007F
+.short 0x00FC
+
+PATCH_END
+
+PATCH_VROM 0x02BA9000 + 0x562
+
+.short 0x0004
+.short 0xF98D
+.short 0x097F
+.short 0x0007
+.short 0x007F
+.short 0x007F
+.short 0x00FC
+
+PATCH_END
+
+PATCH_VROM 0x02BA9000 + 0x592
+
+.short 0x0004
+.short 0xF98D
+.short 0x074F
+.short 0x0007
+.short 0x007F
+.short 0x007F
+.short 0x00FC
+
+PATCH_END
+
+PATCH_VROM 0x02BA9000 + 0x5B2
+
+.short 0x0004
+.short 0xFD58
+.short 0x074F
+.short 0x0007
+.short 0x007F
+.short 0x007F
+.short 0x00FC
+
+PATCH_END
+
+PATCH_VROM 0x02BA9000 + 0x5E2
+
+.short 0x0004
+.short 0xFD58
+.short 0x0867
+.short 0x0007
+.short 0x007F
+.short 0x007F
+.short 0x00FC
+
+PATCH_END
+
+PATCH_VROM 0x02BA9000 + 0x602
+
+.short 0x0004
+.short 0xFD58
+.short 0x097F
+.short 0x0007
+.short 0x007F
+.short 0x007F
+.short 0x00FC
+
+PATCH_END
+
+PATCH_GROUP_END

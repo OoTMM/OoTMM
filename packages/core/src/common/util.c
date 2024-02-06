@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/util.h>
+#include <combo/item.h>
 
 u32 popcount(u32 x)
 {
@@ -66,4 +67,53 @@ u32 comboReadPhysU32(u32 paddr)
 s32 comboReadPhysI32(u32 paddr)
 {
     return (s32)comboReadPhysU32(paddr);
+}
+
+int comboStrayFairyIndex(void)
+{
+#if defined(GAME_MM)
+    if (gPlay->sceneId == SCE_MM_LAUNDRY_POOL || gPlay->sceneId == SCE_MM_CLOCK_TOWN_EAST)
+        return 4;
+    else
+        return gSaveContext.dungeonId;
+#endif
+
+    return -1;
+}
+
+int comboOotDungeonScene(GameState_Play* play, int isBossKey)
+{
+#if defined(GAME_OOT)
+    u16 mapIndex;
+
+    /* Desert colossus hands */
+    if (play->sceneId == SCE_OOT_DESERT_COLOSSUS)
+        return SCE_OOT_TEMPLE_SPIRIT;
+
+    mapIndex = gSaveContext.mapIndex;
+    if (mapIndex == SCE_OOT_GANON_TOWER || mapIndex == SCE_OOT_INSIDE_GANON_CASTLE)
+        return isBossKey ? SCE_OOT_GANON_TOWER : SCE_OOT_INSIDE_GANON_CASTLE;
+    return mapIndex;
+#endif
+
+    return -1;
+}
+
+int comboMmDungeonIndex(void)
+{
+#if defined(GAME_MM)
+    return gSaveContext.dungeonId;
+#endif
+
+    return -1;
+}
+
+int comboIsChateauActive(void)
+{
+#if defined(GAME_OOT)
+    if (!comboConfig(CFG_SHARED_MAGIC))
+        return 0;
+#endif
+
+    return !!MM_GET_EVENT_WEEK(EV_MM_WEEK_DRANK_CHATEAU_ROMANI);
 }

@@ -1,4 +1,3 @@
-import { Buffer } from 'buffer';
 
 import { options, OptionsInput } from './options';
 import { Generator, GeneratorOutput } from './generator';
@@ -13,12 +12,18 @@ import { makeRandomSettings } from './settings/random';
 import { ItemHelpers, ItemsCount, makePlayerItem } from './items';
 import { makeLocation } from './logic/locations';
 
-export { Presets, PRESETS } from './presets';
-export { COSMETICS, makeCosmetics, Cosmetics } from './cosmetics';
+export { PRESETS } from './presets';
+export { COSMETICS, makeCosmetics } from './cosmetics';
 export { COLORS } from './cosmetics/color';
-export { OptionRandomSettings, makeRandomSettings } from './settings/random';
-export { SettingHint, SettingHintType, SETTINGS_DEFAULT_HINTS, HINT_TYPES } from './settings/hints';
+export { makeRandomSettings } from './settings/random';
+export { SETTINGS_DEFAULT_HINTS, HINT_TYPES } from './settings/hints';
 export { exportSettings, importSettings } from './settings/string';
+
+export type { Presets } from './presets';
+export type { Cosmetics } from './cosmetics';
+export type { OptionRandomSettings } from './settings/random';
+export type { SettingHint, SettingHintType } from './settings/hints';
+export type { ItemsCount } from './items';
 
 export type GeneratorParams = {
   oot: Buffer,
@@ -40,16 +45,18 @@ export const generate = (params: GeneratorParams): Generator => {
 
 export { SETTINGS, DEFAULT_SETTINGS, SETTINGS_CATEGORIES, TRICKS, GLITCHES, itemName, DUNGEONS, mergeSettings, makeSettings, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS };
 
-export const itemPool = (aSettings: Partial<Settings>): {[k: string]: number} => {
+export type Items = {[k: string]: number};
+
+export const itemPool = (aSettings: Partial<Settings>): Items => {
   const settings: Settings = { ...DEFAULT_SETTINGS, ...aSettings };
   const cosmetics = makeCosmetics({});
   const monitor = new Monitor({ onLog: () => {} });
   const random = makeRandomSettings({});
-  const { pool, worlds } = worldState(monitor, { settings, cosmetics, debug: false, seed: "--- INTERNAL ---", random });
+  const { pool, worlds, itemProperties } = worldState(monitor, { settings, cosmetics, debug: false, seed: "--- INTERNAL ---", random });
 
   /* Extract relevant items from the pool */
   for (const pi of pool.keys()) {
-    if (pi.player !== 0 || ItemHelpers.isJunk(pi.item) || ItemHelpers.isDungeonItem(pi.item) || ItemHelpers.isToken(pi.item) || ItemHelpers.isStrayFairy(pi.item)) {
+    if (pi.player !== 0 || itemProperties.junk.has(pi.item) || ItemHelpers.isDungeonItem(pi.item) || ItemHelpers.isToken(pi.item) || ItemHelpers.isStrayFairy(pi.item)) {
       pool.delete(pi);
     }
   }
@@ -72,7 +79,7 @@ export const itemPool = (aSettings: Partial<Settings>): {[k: string]: number} =>
   }
 
   /* Make the item pool */
-  const itemPool: {[k: string]: number} = {};
+  const itemPool: Items = {};
   for (const [item, count] of items) {
     itemPool[item.id] = count;
   }

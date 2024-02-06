@@ -75,7 +75,7 @@ int DoorWarp1_Collide(Actor* this, GameState_Play* play)
         dist = -dist;
     if (dist < 60.f)
     {
-        dist = GET_LINK(play)->base.position.y - this->position.y;
+        dist = GET_LINK(play)->base.world.pos.y - this->world.pos.y;
         if (dist < 0.f)
             dist = -dist;
         if (dist < 20.f)
@@ -142,7 +142,7 @@ void DoorWarp1_AfterDrawWarp(Actor* this, GameState_Play* play)
     angle = (play->gs.frameCount % kRotDivisor) * (1.f / kRotDivisor) * M_PI * 2.f;
     gi = DoorWarp1_GetGI(data);
 
-    ModelViewTranslate(this->position.x, this->position.y + 35.f, this->position.z, MAT_SET);
+    ModelViewTranslate(this->world.pos.x, this->world.pos.y + 35.f, this->world.pos.z, MAT_SET);
     ModelViewScale(0.35f, 0.35f, 0.35f, MAT_MUL);
     ModelViewRotateY(angle, MAT_MUL);
     comboDrawGI(play, this, gi, DRAW_RAW);

@@ -7,6 +7,7 @@ import { Analysis } from './analysis';
 import { Monitor } from '../monitor';
 import { ItemPlacement } from './solve';
 import { ItemHelpers, PlayerItems } from '../items';
+import { ItemProperties } from './item-properties';
 
 type ZigZagState = {
   allowed: Set<Location>;
@@ -16,6 +17,7 @@ type ZigZagState = {
 export class LogicPassAnalysisFoolish {
   private pathfinder: Pathfinder;
   private conditionallyRequiredLocations: Set<string>;
+  private zigZagCount: number = 0;
 
   constructor(
     private state: {
@@ -26,14 +28,16 @@ export class LogicPassAnalysisFoolish {
       items: ItemPlacement;
       analysis: Analysis;
       startingItems: PlayerItems;
+      itemProperties: ItemProperties;
     }
   ) {
     this.pathfinder = new Pathfinder(this.state.worlds, this.state.settings, this.state.startingItems);
     this.conditionallyRequiredLocations = new Set();
   }
 
-  private progress(x: number, slope: number) {
-    this.state.monitor.setProgress(x, x + slope);
+  private progress() {
+    this.zigZagCount++;
+    this.state.monitor.setProgress(this.zigZagCount, this.zigZagCount + 30);
   }
 
   private markAsSometimesRequired(loc: Location) {
@@ -120,22 +124,50 @@ export class LogicPassAnalysisFoolish {
     const allowed = new Set(locations);
     const forbidden = new Set<Location>();
     let zz: ZigZagState = { allowed, forbidden };
-
-    const step = this.monteCarloZigZagDown(zz);
-    if (!step) return false;
-    zz = step;
+    let zzStack: ZigZagState[] = [];
+    let result = false;
+    zzStack.push(zz);
 
     for (;;) {
-      const stepUp = this.monteCarloZigZagUp(zz);
-      if (!stepUp) break;
-      zz = stepUp;
+      const downStates = zzStack;
+      zzStack = [];
+      for (const zz of downStates) {
+        for (;;) {
+          const step = this.monteCarloZigZagDown(zz);
+          this.progress();
+          if (step) {
+            result = true;
+            zzStack.push(step);
+          } else {
+            break;
+          }
+        }
+      }
 
-      const stepDown = this.monteCarloZigZagDown(zz);
-      if (!stepDown) break;
-      zz = stepDown;
+      if (zzStack.length === 0) {
+        break;
+      }
+
+      const upStates = zzStack;
+      zzStack = [];
+      for (const zz of upStates) {
+        for (;;) {
+          const step = this.monteCarloZigZagUp(zz);
+          this.progress();
+          if (step) {
+            zzStack.push(step);
+          } else {
+            break;
+          }
+        }
+      }
+
+      if (zzStack.length === 0) {
+        break;
+      }
     }
 
-    return true;
+    return result;
   }
 
   private uselessLocs() {
@@ -162,17 +194,12 @@ export class LogicPassAnalysisFoolish {
     this.state.monitor.log("Logic: Probabilistic Foolish Analysis");
 
     /* Mark playthrough locs as conditionally required */
-    let atLeastOneConditionallyRequired = false;
     for (const sphere of this.state.analysis.spheres) {
       for (const loc of sphere) {
         if (!this.state.analysis.required.has(loc)) {
           this.conditionallyRequiredLocations.add(loc);
-          atLeastOneConditionallyRequired = true;
         }
       }
-    }
-    if (!atLeastOneConditionallyRequired) {
-      return {};
     }
 
     /* Get all candidates */
@@ -184,21 +211,21 @@ export class LogicPassAnalysisFoolish {
       if (this.state.analysis.useless.has(loc)) continue;
       const item = this.state.items.get(loc)!;
       const locD = locationData(loc);
-      if (ItemHelpers.isItemConsumable(item.item) && !isLocationRenewable(this.state.worlds[locD.world as number], loc) && !ItemHelpers.isItemLicense(item.item)) continue;
+      if (ItemHelpers.isItemConsumable(item.item) && !isLocationRenewable(this.state.worlds[locD.world as number], loc) && !this.state.itemProperties.license.has(item.item)) continue;
       locsSet.add(loc);
     }
 
     /* Prune */
     let failures = 0;
-    let count = 0;
     for (;;) {
-      this.progress(count++, 30);
       if (this.monteCarloZigZag(locsSet)) {
         failures = 0;
       } else {
         failures++;
       }
-      if (failures === 10) {
+      if (failures >= 3) {
+        /* With the new system, a single pass seems to always gather all the items */
+        /* But just in case, we run 2 more */
         break;
       }
     }

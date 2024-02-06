@@ -259,3 +259,45 @@ PATCH_END
 PATCH_START 0x8081ab28
   li t8,0x5
 PATCH_END
+
+/* Fix the issue where adult link has hover boots in the quiver slot when slingshot wasn't obtained */
+PreventHoverBootsQuiverSlot:
+  and     t6,v1,t5
+  bnez    t6,PreventHoverBootsQuiverSlot_Return
+   lbu     t4,(t7)
+  addiu   ra,0x3c
+
+PreventHoverBootsQuiverSlot_Return:
+  jr ra
+   nop
+
+PATCH_START 0x808192d0
+  jal PreventHoverBootsQuiverSlot
+   nop
+PATCH_END
+
+/* Use our kaleido icon drawing */
+PATCH_START 0x8081a948
+  nop
+PATCH_END
+
+PATCH_START 0x8081a964
+  move a1,t1
+  nop
+PATCH_END
+
+PATCH_START 0x8081a970
+  jal KaleidoScope_DrawItemHook
+PATCH_END
+
+/* Relocs */
+PATCH_START 0x8082f160
+.int 0
+PATCH_END
+
+/* Use our item name hook */
+PATCH_START 0x80822e6c
+  move a1,v1
+  nop
+  jal KaleidoScope_LoadItemName
+PATCH_END

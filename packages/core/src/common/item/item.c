@@ -30,6 +30,9 @@ void comboSyncItems(void)
     if (comboConfig(CFG_SHARED_BOMB_BAGS))
         gForeignSave.inventory.ammo[ITS_FOREIGN_BOMBS] = gSave.inventory.ammo[ITS_NATIVE_BOMBS];
 
+    if (comboConfig(CFG_SHARED_BOMBCHU))
+        gForeignSave.inventory.ammo[ITS_FOREIGN_BOMBCHU] = gSave.inventory.ammo[ITS_NATIVE_BOMBCHU];
+
     if (comboConfig(CFG_SHARED_MAGIC))
        gForeignSave.playerData.magicAmount = gSave.playerData.magicAmount;
 
@@ -48,6 +51,13 @@ void comboSyncItems(void)
         gForeignSave.playerData.health = gSave.playerData.health;
         gForeignSave.inventory.quest.heartPieces = gSave.inventory.quest.heartPieces;
     }
+    /*
+    if (comboConfig(CFG_SHARED_SPELL_LOVE))
+    {
+        // TODO
+        // gForeignSave.nayrusLoveTimer = gSave.nayrusLoveTimer;
+    }
+    */
 }
 
 int comboItemPrecondEx(const ComboItemQuery* q, s16 price)
@@ -68,7 +78,7 @@ int comboItemPrecondEx(const ComboItemQuery* q, s16 price)
     return SC_OK;
 }
 
-void comboGiveItem(Actor* actor, GameState_Play* play, const ComboItemQuery* q, float a, float b)
+static void comboGiveItemRaw(Actor* actor, GameState_Play* play, const ComboItemQuery* q, float a, float b)
 {
     static ComboItemQuery sItemQ;
     static ComboItemQuery sItemQBox;
@@ -88,6 +98,21 @@ void comboGiveItem(Actor* actor, GameState_Play* play, const ComboItemQuery* q, 
             g.itemQuery = &sItemQ;
         }
     }
+}
+
+void comboGiveItem(Actor* actor, GameState_Play* play, const ComboItemQuery* q, float a, float b)
+{
+    ComboItemQuery qNothing = ITEM_QUERY_INIT;
+    const ComboItemQuery* qPtr;
+
+    if (multiIsMarked(play, q->ovType, q->sceneId, q->roomId, q->id) && !(q->ovFlags & OVF_RENEW))
+    {
+        qNothing.gi = GI_NOTHING;
+        qPtr = &qNothing;
+    }
+    else
+        qPtr = q;
+    comboGiveItemRaw(actor, play, qPtr, a, b);
 }
 
 void comboGiveItemNpc(Actor* actor, GameState_Play* play, s16 gi, int npc, float a, float b)
@@ -125,16 +150,13 @@ static u32 sComboOverridesCount;
 
 void comboInitOverride(void)
 {
-    u64 mask;
     DmaEntry e;
 
-    mask = osSetIntMask(1);
     comboDmaLookup(&e, COMBO_VROM_CHECKS);
     sComboOverridesCount = comboDmaLoadFile(NULL, COMBO_VROM_CHECKS) / sizeof(ComboOverrideData);
     sComboOverridesDevAddr = e.pstart | PI_DOM1_ADDR2;
     memset(sComboOverridesCache, 0xff, sizeof(sComboOverridesCache));
     sComboOverridesCacheCursor = 0;
-    osSetIntMask(mask);
 }
 
 u8 comboSceneKey(u8 sceneId)
@@ -187,6 +209,13 @@ static int overrideData(ComboOverrideData* data, u32 key)
     u32 cursor;
     u32 ovData[2];
 
+#if defined(DEBUG) && defined(DEBUG_MM_OVERRIDE) && defined(GAME_MM)
+    data->key = 0;
+    data->player = 1;
+    data->value = DEBUG_MM_OVERRIDE;
+    return 1;
+#endif
+
     /* Check the cache */
     for (int i = 0; i < ARRAY_SIZE(sComboOverridesCache); ++i)
     {
@@ -211,7 +240,7 @@ static int overrideData(ComboOverrideData* data, u32 key)
         ovData[0] = comboReadPhysU32(sComboOverridesDevAddr + cursor * sizeof(ComboOverrideData) + 0x00);
         ovData[1] = comboReadPhysU32(sComboOverridesDevAddr + cursor * sizeof(ComboOverrideData) + 0x04);
         memcpy(&d, ovData, sizeof(d));
-    
+
         if (d.key == key)
         {
             /* Copy and add to cache */
@@ -230,7 +259,6 @@ static int overrideData(ComboOverrideData* data, u32 key)
 void comboItemOverride(ComboItemOverride* dst, const ComboItemQuery* q)
 {
     ComboOverrideData data;
-    u64 mask;
     int isOverride;
     s16 gi;
     int neg;
@@ -252,9 +280,7 @@ void comboItemOverride(ComboItemOverride* dst, const ComboItemQuery* q)
         isOverride = 0;
     else
     {
-        mask = osSetIntMask(1);
         isOverride = overrideData(&data, makeOverrideKey(q));
-        osSetIntMask(mask);
     }
 
     if (isOverride)
@@ -269,9 +295,7 @@ void comboItemOverride(ComboItemOverride* dst, const ComboItemQuery* q)
     dst->giRaw = gi;
 
     if (isPlayerSelf(dst->player))
-    {
-        gi = comboProgressive(gi);
-    }
+        gi = comboProgressive(gi, q->ovFlags);
 
     if (neg)
         gi = -gi;
@@ -281,7 +305,7 @@ void comboItemOverride(ComboItemOverride* dst, const ComboItemQuery* q)
 }
 
 
-int comboAddItemEx(GameState_Play* play, const ComboItemQuery* q, int updateText)
+int comboAddItemRawEx(GameState_Play* play, const ComboItemQuery* q, int updateText)
 {
     ComboItemOverride o;
     NetContext* net;
@@ -292,10 +316,38 @@ int comboAddItemEx(GameState_Play* play, const ComboItemQuery* q, int updateText
 
     /* Add the item if it's for us */
     if (isPlayerSelf(o.player))
-        count = comboAddItem(play, o.gi);
-    else
+        count = comboAddItemRaw(play, o.gi);
+
+    /* Update text */
+    if (updateText)
+        comboTextHijackItemEx(play, &o, count);
+
+    if (comboConfig(CFG_MULTIPLAYER) && q->ovType != OV_NONE)
     {
-        /* We need to send it */
+        /* Mark the item */
+        if (isPlayerSelf(o.player))
+        {
+#if defined(GAME_OOT)
+            multiSetMarkedOot(play, q->ovType, q->sceneId, q->roomId, q->id);
+#else
+            multiSetMarkedMm(play, q->ovType, q->sceneId, q->roomId, q->id);
+#endif
+
+            /* If the item was a renewable, add it to the GI skips */
+            if (q->ovFlags & OVF_RENEW)
+            {
+                for (int i = 0; i < ARRAY_SIZE(gSharedCustomSave.netGiSkip); ++i)
+                {
+                    if (gSharedCustomSave.netGiSkip[i] == GI_NONE)
+                    {
+                        gSharedCustomSave.netGiSkip[i] = o.gi;
+                        break;
+                    }
+                }
+            }
+        }
+
+        /* Send the item on the network */
         net = netMutexLock();
         netWaitCmdClear();
         bzero(&net->cmdOut, sizeof(net->cmdOut));
@@ -307,17 +359,28 @@ int comboAddItemEx(GameState_Play* play, const ComboItemQuery* q, int updateText
 #else
         net->cmdOut.itemSend.game = 1;
 #endif
-        net->cmdOut.itemSend.gi = o.gi;
+        net->cmdOut.itemSend.gi = comboItemResolve(play, o.gi);
         net->cmdOut.itemSend.key = makeOverrideKey(q);
         net->cmdOut.itemSend.flags = (s16)q->ovFlags;
         netMutexUnlock();
     }
 
-    /* Update text */
-    if (updateText)
-        comboTextHijackItemEx(play, &o, count);
-
     return -1;
+}
+
+int comboAddItemEx(GameState_Play* play, const ComboItemQuery* q, int updateText)
+{
+    ComboItemQuery qNothing = ITEM_QUERY_INIT;
+    const ComboItemQuery* qPtr;
+
+    if (multiIsMarked(play, q->ovType, q->sceneId, q->roomId, q->id) && !(q->ovFlags & OVF_RENEW))
+    {
+        qNothing.gi = GI_NOTHING;
+        qPtr = &qNothing;
+    }
+    else
+        qPtr = q;
+    return comboAddItemRawEx(play, qPtr, updateText);
 }
 
 void comboPlayerAddItem(GameState_Play* play, s16 gi)
@@ -331,6 +394,7 @@ void comboPlayerAddItem(GameState_Play* play, s16 gi)
     Actor* chest;
     Actor_Player* player;
     ComboItemQuery q = ITEM_QUERY_INIT;
+    ComboItemOverride o;
 
     /* Check for a chest */
     player = GET_LINK(play);
@@ -359,5 +423,16 @@ void comboPlayerAddItem(GameState_Play* play, s16 gi)
     if (q.gi < 0)
         q.gi = -q.gi;
 
-    comboAddItemEx(play, &q, 1);
+    comboItemOverride(&o, &q);
+    comboAddItemRawEx(play, &q, 1);
+    comboPlayItemFanfare(o.gi, 0);
+}
+
+u8 comboItemType(s16 gi)
+{
+    if (gi == 0)
+        return ITT_NONE;
+    if (gi < 0)
+        gi = -gi;
+    return kExtendedGetItems[gi - 1].type;
 }

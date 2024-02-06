@@ -15,15 +15,17 @@ static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
 
 #if defined(GAME_MM)
 
-#define SWITCH_SPRING       0
-#define SWITCH_SWAMP_CLEAR  1
-#define SWITCH_COAST_CLEAR  2
-#define SWITCH_OPEN_MOON    3
+#define SWITCH_SPRING           0
+#define SWITCH_SWAMP_CLEAR      1
+#define SWITCH_COAST_CLEAR      2
+#define SWITCH_OPEN_MOON        3
+#define SWITCH_OPEN_ST_NORMAL   4
+#define SWITCH_OPEN_ST_INVERTED 5
 
 static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
 {
     play->transitionTrigger = TRANS_TRIGGER_NORMAL;
-    play->transitionType = TRANS_TYPE_BLACK;
+    play->transitionType = TRANS_TYPE_FADE_BLACK;
 
     switch (this->base.variable)
     {
@@ -33,15 +35,31 @@ static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
         break;
     case SWITCH_SWAMP_CLEAR:
         MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF);
+        if (comboConfig(CFG_MM_CLEAR_OPEN_WF))
+        {
+            MM_SET_EVENT_WEEK(EV_MM_WEEK_WOODFALL_TEMPLE_RISE);
+        }
         play->nextEntrance = 0x0ca0;
         break;
     case SWITCH_COAST_CLEAR:
         MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_GB);
+        if (comboConfig(CFG_MM_CLEAR_OPEN_GB))
+        {
+            MM_SET_EVENT_WEEK(EV_MM_WEEK_GREAT_BAY_TURTLE);
+        }
         play->nextEntrance = ENTR_MM_GREAT_BAY_COAST_FROM_LABORATORY;
         break;
     case SWITCH_OPEN_MOON:
         play->nextEntrance = 0xc800;
         gSaveContext.timerStates[3] = 0;
+        break;
+    case SWITCH_OPEN_ST_NORMAL:
+        play->nextEntrance = 0xac00;
+        SetSwitchFlag(play, 0x14);
+        break;
+    case SWITCH_OPEN_ST_INVERTED:
+        play->nextEntrance = 0xaa10;
+        ClearSwitchFlag(play, 0x14);
         break;
     }
 }
@@ -64,12 +82,6 @@ static void CustomWarp_Update(Actor_CustomWarp* this, GameState_Play* play)
     }
 }
 
-#if defined(GAME_OOT)
-static const u32 kMatTransformOffset = 0x11da0;
-#else
-static const u32 kMatTransformOffset = 0x187fc;
-#endif
-
 /* TODO: Move this into a helper */
 static void shaderFlameEffect(GameState_Play* play)
 {
@@ -80,7 +92,7 @@ static void shaderFlameEffect(GameState_Play* play)
 #endif
 
     OPEN_DISPS(play->gs.gfx);
-    ModelViewUnkTransform((float*)((char*)play + kMatTransformOffset));
+    ModelViewUnkTransform(&play->billboardMtxF);
     gSPSegment(POLY_XLU_DISP++, 0x08, DisplaceTexture(play->gs.gfx, 0, 0, 0, 0x20, 0x40, 1, 0, (-play->gs.frameCount & 0x7f) << 2, 0x20, 0x80));
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gDPSetPrimColor(POLY_XLU_DISP++, 0x80, 0x80, 0xff, 0x00, 0xff, 0xff);
@@ -94,7 +106,7 @@ static void CustomWarp_Draw(Actor_CustomWarp* this, GameState_Play* play)
     static const float scale = 0.003f;
 
     /* Transform */
-    ModelViewTranslate(this->base.position.x, this->base.position.y, this->base.position.z, MAT_SET);
+    ModelViewTranslate(this->base.world.pos.x, this->base.world.pos.y, this->base.world.pos.z, MAT_SET);
     ModelViewScale(scale, scale, scale, MAT_MUL);
 
     /* Draw */
@@ -157,13 +169,29 @@ void comboSpawnCustomWarps(GameState_Play* play)
         y = 30.f;
         z = 0.f;
     }
+
+    if (comboConfig(CFG_MM_OPEN_ST) && play->sceneId == SCE_MM_STONE_TOWER)
+    {
+        variable = SWITCH_OPEN_ST_NORMAL;
+        x = 560.f;
+        y = -560.f;
+        z = 3000.f;
+    }
+
+    if (comboConfig(CFG_MM_OPEN_ST) && play->sceneId == SCE_MM_STONE_TOWER_INVERTED)
+    {
+        variable = SWITCH_OPEN_ST_INVERTED;
+        x = 242.f;
+        y = 854.f;
+        z = -690.f;
+    }
 #endif
 
     if (variable == -1)
         return;
 
     SpawnActor(
-        (char*)play + 0x1ca0,
+        &play->actorCtx,
         play,
         AC_CUSTOM_WARP,
         x, y, z,

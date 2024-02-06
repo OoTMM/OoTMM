@@ -1,8 +1,9 @@
 import { Items, Settings, OptionsInput, makeSettings, makeCosmetics, makeRandomSettings } from '@ootmm/core';
 import type { WorkerResult, WorkerResultGenerate, WorkerResultGenerateError, WorkerResultItemPool } from './worker';
+import Worker from './worker?worker';
 
 let workerTaskId = 0;
-const worker = new Worker(new URL('./worker.ts', import.meta.url));
+const worker = new Worker();
 const resolversItemPool = new Map<number, (result: WorkerResultItemPool) => void>();
 const resolversGenerate = new Map<number, (result: WorkerResultGenerate | WorkerResultGenerateError) => void>();
 const loggersGenerate = new Map<number, (log: string) => void>();

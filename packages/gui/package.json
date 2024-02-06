@@ -2,10 +2,12 @@
   "name": "@ootmm/gui",
   "version": "0.0.1",
   "description": "The graphical OoTMM generator widget",
+  "type": "module",
   "main": "app/index.ts",
   "scripts": {
-    "serve": "cross-env NODE_ENV=development webpack-dev-server",
-    "build": "cross-env NODE_ENV=production webpack"
+    "serve": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "repository": {
     "type": "git",
@@ -18,46 +20,27 @@
   },
   "homepage": "https://github.com/OoTMM/gui#readme",
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.3.0",
-    "@fortawesome/free-solid-svg-icons": "^6.3.0",
-    "@fortawesome/react-fontawesome": "^0.2.0",
     "@ootmm/core": "*",
-    "buffer": "^6.0.3",
-    "core-js": "^3.26.1",
-    "crypto-browserify": "^3.12.0",
+    "@fortawesome/fontawesome-svg-core": "^6.5.1",
+    "@fortawesome/free-solid-svg-icons": "^6.5.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-select": "^5.7.2",
-    "react-tooltip": "^5.11.1",
-    "stream-browserify": "^3.0.0",
-    "tmp": "^0.2.1"
+    "react-select": "^5.8.0",
+    "react-tooltip": "^5.25.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.2",
-    "@babel/preset-env": "^7.20.2",
-    "@babel/preset-react": "^7.18.6",
-    "@babel/preset-typescript": "^7.21.0",
-    "@types/lodash": "^4.14.191",
-    "@types/react": "^18.0.28",
-    "@types/react-dom": "^18.0.11",
-    "babel-loader": "^9.1.0",
-    "babel-plugin-macros": "^3.1.0",
-    "copy-webpack-plugin": "^11.0.0",
-    "cross-env": "^7.0.3",
-    "css-loader": "^6.7.2",
-    "cssnano": "^5.1.14",
-    "file-loader": "^6.2.0",
-    "html-webpack-plugin": "^5.5.0",
-    "mini-css-extract-plugin": "^2.7.0",
-    "postcss": "^8.4.19",
-    "postcss-import": "^15.0.0",
-    "postcss-loader": "^7.0.1",
-    "postcss-preset-env": "^7.8.3",
-    "reset-css": "^5.0.1",
-    "style-loader": "^3.3.1",
-    "webpack": "^5.75.0",
-    "webpack-cli": "^5.0.0",
-    "webpack-dev-server": "^4.11.1"
+    "@types/react": "^18.2.46",
+    "@types/react-dom": "^18.2.18",
+    "@vitejs/plugin-react": "^4.2.1",
+    "cssnano": "^6.0.3",
+    "postcss": "^8.4.32",
+    "postcss-import": "^16.0.0",
+    "postcss-loader": "^7.3.4",
+    "postcss-preset-env": "^9.3.0",
+    "reset-css": "^5.0.2",
+    "vite": "^5.0.10",
+    "vite-plugin-node-polyfills": "^0.19.0"
   },
   "nx": {
     "namedInputs": {
@@ -77,7 +60,7 @@
           "version"
         ],
         "outputs": [
-          "dist"
+          "{workspaceRoot}/dist"
         ],
         "dependsOn": [
           "^build"

@@ -95,7 +95,7 @@ static void reloadIcons(GameState_Play* play)
         if (sDpadItems[i] != sDpadItemsOld[i] && sDpadItems[i] != ITEM_NONE)
         {
 #if defined(GAME_OOT)
-            DMARomToRam((gDmaData[8].pstart + 0x1000 * sDpadItems[i]) | PI_DOM1_ADDR2, sDpadIconBuffer + (i * 32 * 32 * 4), 32 * 32 * 4);
+            comboItemIcon(sDpadIconBuffer + (i * 32 * 32 * 4), sDpadItems[i]);
 #else
             LoadIcon(0xa36c10, sDpadItems[i], sDpadIconBuffer + (i * 32 * 32 * 4), 0x1000);
 #endif
@@ -126,7 +126,7 @@ void comboDpadDraw(GameState_Play* play)
 
     /* Draw */
     comboDrawInit2D(&OVERLAY_DISP);
-    comboDrawBlit2D(&OVERLAY_DISP, 0x06000000, 32, 32, kDpadPosX, kDpadPosY, 0.5f);
+    comboDrawBlit2D_RGBA16(&OVERLAY_DISP, 0x06000000, 32, 32, kDpadPosX, kDpadPosY, 0.5f);
 
     for (int i = 0; i < 4; ++i)
     {
@@ -143,7 +143,7 @@ void comboDpadDraw(GameState_Play* play)
             }
             x = kDpadPosX + kDpadOffX[i] * 32 * kDpadItemScale + 1.5f;
             y = kDpadPosY + kDpadOffY[i] * 32 * kDpadItemScale + 1;
-            comboDrawBlit2D(&OVERLAY_DISP, 0x07000000 | (i * 32 * 32 * 4), 32, 32, x, y, kDpadItemScale);
+            comboDrawBlit2D_RGBA32(&OVERLAY_DISP, 0x07000000 | (i * 32 * 32 * 4), 32, 32, x, y, kDpadItemScale);
         }
     }
     CLOSE_DISPS();
@@ -168,30 +168,14 @@ static void toggleBoots(GameState_Play* play, s16 itemId)
 static void dpadUseItem(GameState_Play* play, int index, int flags)
 {
     s16 itemId;
-    void (*Player_UseItem)(GameState_Play* play, Actor_Player* link, s16 itemId);
 
     itemId = sDpadItems[index];
     if (!canUseDpadItem(play, itemId, flags))
         return;
     if (itemId == ITEM_OOT_BOOTS_HOVER || itemId == ITEM_OOT_BOOTS_IRON)
-    {
         toggleBoots(play, itemId);
-    }
     else
-    {
-        if (itemId == ITEM_OOT_WEIRD_EGG)
-        {
-            gComboTriggersData.events.weirdEgg = 1;
-            return;
-        }
-        if (itemId == ITEM_OOT_POCKET_EGG)
-        {
-            gComboTriggersData.events.pocketEgg = 1;
-            return;
-        }
-        Player_UseItem = OverlayAddr(0x80834000);
-        Player_UseItem(play, GET_LINK(play), itemId);
-    }
+        comboPlayerUseItem(play, GET_LINK(play), itemId);
 }
 #endif
 
@@ -217,7 +201,7 @@ void comboDpadUpdate(GameState_Play* play)
     sDpadItems[DPAD_LEFT] = (gSave.inventory.equipment.boots & EQ_OOT_BOOTS_IRON) ? ITEM_OOT_BOOTS_IRON : ITEM_NONE;
     sDpadItems[DPAD_RIGHT] = (gSave.inventory.equipment.boots & EQ_OOT_BOOTS_HOVER) ? ITEM_OOT_BOOTS_HOVER : ITEM_NONE;
     sDpadItems[DPAD_UP] = gSave.inventory.items[ITS_OOT_TRADE_ADULT];
-    if (gSave.age == AGE_CHILD) 
+    if (gSave.age == AGE_CHILD)
     {
         sDpadItems[DPAD_UP] = gSave.inventory.items[ITS_OOT_TRADE_CHILD];
         if (!comboConfig(CFG_OOT_AGELESS_BOOTS))

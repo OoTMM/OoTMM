@@ -10,7 +10,7 @@ import { Location, locationData, makeLocation } from './locations';
 import { Region, makeRegion } from './regions';
 import { CountMap, countMapArray } from '../util';
 import { ItemGroups, ItemHelpers, Items, PlayerItems, PlayerItem, itemByID, makePlayerItem } from '../items';
-import { isDungeonStrayFairy } from '../items/helpers';
+import { isLocationFullyShuffled } from './locations';
 
 const FIXED_HINTS_LOCATIONS = [
   'OOT Skulltula House 10 Tokens',
@@ -150,6 +150,11 @@ export type Hints = WorldHints[];
 
 export type HintClass = 'path' | 'item' | 'location';
 
+type LocRegion = {
+  loc: Location | null;
+  region: Region;
+};
+
 export class LogicPassHints {
   private hintedLocations = new Set<Location>();
   private stronglyHintedLocations = new Set<Location>();
@@ -231,40 +236,50 @@ export class LogicPassHints {
     return sometimesHints;
   }
 
-  private findItems(item: PlayerItem) {
-    const locs: Location[] = [];
+  private toRegion(world: number, loc: Location) {
+
+    const locD = locationData(loc);
+    return makeRegion(this.state.worlds[locD.world as number].regions[locD.id], locD.world as number);
+  }
+
+  private findItems(item: PlayerItem | PlayerItem[]): LocRegion[] {
+    const locRegions: LocRegion[] = [];
+    const items = Array.isArray(item) ? item : [item];
 
     for (const sphere of this.state.analysis.spheres) {
       for (const loc of sphere) {
-        if (this.state.items.get(loc) === item) {
-          locs.push(loc);
+        const it = this.state.items.get(loc);
+        if (it && items.includes(it)) {
+          const locD = locationData(loc);
+          locRegions.push({ loc, region: this.toRegion(locD.world as number, loc) });
         }
       }
     }
 
     for (const loc of this.state.items.keys()) {
-      if (this.state.items.get(loc) === item) {
-        locs.push(loc);
+      const it = this.state.items.get(loc);
+      if (it && items.includes(it)) {
+        const locD = locationData(loc);
+        locRegions.push({ loc, region: this.toRegion(locD.world as number, loc) });
       }
     }
 
-    return [...new Set(locs)];
+    return locRegions;
   }
 
-  private findItem(item: PlayerItem) {
-    const items = this.findItems(item);
-    if (items.length === 0) {
-      return null;
+  private findItem(item: PlayerItem | PlayerItem[]): LocRegion {
+    const items = Array.isArray(item) ? item : [item];
+    const locs = this.findItems(item);
+    if (locs.length) {
+      return locs[0];
     }
-    return items[0];
-  }
 
-  private toRegion(world: number, loc: Location | null) {
-    if (loc === null) {
-      return makeRegion('NONE', world);
+    /* We found nothing, check if starting items have it */
+    let regName = 'NONE';
+    if (items.some(x => this.state.startingItems.has(x))) {
+      regName = 'POCKET';
     }
-    const locD = locationData(loc);
-    return makeRegion(this.state.worlds[locD.world as number].regions[locD.id], locD.world as number);
+    return { loc: null, region: makeRegion(regName, 0) };
   }
 
   private isLocationHintable(loc: Location, klass: HintClass) {
@@ -280,11 +295,12 @@ export class LogicPassHints {
       return false;
     }
 
-    /* No plando */
-    if (this.state.settings.noPlandoHints) {
-      if (this.state.settings.plando.locations[locD.id]) {
-        return false;
-      }
+    /* Not shuffled */
+    if (!isLocationFullyShuffled(this.state.settings, this.state.fixedLocations, this.state.items, loc, {
+      noPlando: this.state.settings.noPlandoHints,
+      songs: klass === 'path',
+    })) {
+      return false;
     }
 
     /* These specific locations are always ignored */
@@ -292,81 +308,8 @@ export class LogicPassHints {
       return false;
     }
 
-    /* Non-shuffled items are ignored */
-    if (this.state.fixedLocations.has(loc)) {
-      return false;
-    }
-
     /* CHecks with no region are ignored (skip zelda) */
     if (!region || region === 'NONE') {
-      return false;
-    }
-
-    /* Non-shuffled hideout keys */
-    if ((ItemHelpers.isSmallKeyHideout(item.item) || ItemHelpers.isKeyRingHideout(item.item)) && this.state.settings.smallKeyShuffleHideout !== 'anywhere') {
-      return false;
-    }
-
-    /* Non-shuffled TCG keys */
-    if ((ItemHelpers.isSmallKeyTCG(item.item) || ItemHelpers.isKeyRingTCG(item.item)) && this.state.settings.smallKeyShuffleChestGame !== 'anywhere') {
-      return false;
-    }
-
-    /* Non-shuffled regular keys */
-    if ((ItemHelpers.isSmallKeyRegularOot(item.item) || ItemHelpers.isKeyRingRegularOot(item.item)) && this.state.settings.smallKeyShuffleOot !== 'anywhere') {
-      return false;
-    }
-    if ((ItemHelpers.isSmallKeyRegularMm(item.item) || ItemHelpers.isKeyRingRegularMm(item.item)) && this.state.settings.smallKeyShuffleMm !== 'anywhere') {
-      return false;
-    }
-
-    /* Non-shuffled silver rupees */
-    if (ItemHelpers.isSilverRupee(item.item) && this.state.settings.silverRupeeShuffle !== 'anywhere') {
-      return false;
-    }
-
-    /* Non-shuffled Ganon BK (doesn't really matter) */
-    if (ItemHelpers.isGanonBossKey(item.item) && this.state.settings.ganonBossKey !== 'anywhere') {
-      return false;
-    }
-
-    /* Non shuffled boss keys */
-    if (ItemHelpers.isRegularBossKeyOot(item.item) && this.state.settings.bossKeyShuffleOot !== 'anywhere') {
-      return false;
-    }
-
-    if (ItemHelpers.isRegularBossKeyMm(item.item) && this.state.settings.bossKeyShuffleMm !== 'anywhere') {
-      return false;
-    }
-
-    /* Non shuffled town fairy */
-    if (ItemHelpers.isTownStrayFairy(item.item) && this.state.settings.townFairyShuffle === 'vanilla') {
-      return false;
-    }
-
-    /* Non shuffled dungeon stray fairy */
-    if (isDungeonStrayFairy(item.item) && this.state.settings.strayFairyChestShuffle !== 'anywhere' && this.state.settings.strayFairyOtherShuffle !== 'anywhere') {
-      return false;
-    }
-
-    /* Non-shuffled map/compass (doesn't really matter) */
-    if (ItemHelpers.isMapCompass(item.item) && this.state.settings.mapCompassShuffle !== 'anywhere') {
-      return false;
-    }
-
-    /* Non-shuffled dungeon reward */
-    if (ItemHelpers.isDungeonReward(item.item) && this.state.settings.dungeonRewardShuffle === 'dungeonBlueWarps') {
-      return false;
-    }
-
-    /* Non shuffled GS token */
-    /* TODO: Handle dungeon/overworld better */
-    if (ItemHelpers.isGoldToken(item.item) && this.state.settings.goldSkulltulaTokens === 'none') {
-      return false;
-    }
-
-    /* Non shuffled House tokens */
-    if (ItemHelpers.isHouseToken(item.item) && this.state.settings.housesSkulltulaTokens === 'none') {
       return false;
     }
 
@@ -378,9 +321,6 @@ export class LogicPassHints {
     /* Additional restrictions for WotH */
     if (klass === 'path') {
       if (ItemHelpers.isKey(item.item) || ItemHelpers.isStrayFairy(item.item) || ItemHelpers.isSilverRupee(item.item) || ItemHelpers.isToken(item.item) || ItemHelpers.isDungeonReward(item.item)) {
-        return false;
-      }
-      if (ItemHelpers.isSong(item.item) && this.state.settings.songs !== 'anywhere') {
         return false;
       }
     }
@@ -476,7 +416,7 @@ export class LogicPassHints {
     const world = this.state.worlds[worldId];
     const checkWorld = this.state.worlds[checkWorldId];
     const locations = (checkWorld.checkHints[checkHint] || []).map(x => makeLocation(x, checkWorldId));
-    if (locations.every(l => this.hintedLocations.has(l)) || locations.some(l => this.stronglyHintedLocations.has(l))) {
+    if ((!isMoon && this.state.settings.noPlandoHints && locations.every(l => this.state.settings.plando.locations[locationData(l).id])) || locations.every(l => this.hintedLocations.has(l)) || locations.some(l => this.stronglyHintedLocations.has(l))) {
       return false;
     }
     const items = locations.map(l => this.state.items.get(l)!);
@@ -720,7 +660,7 @@ export class LogicPassHints {
   private placeGossipItemName(world: number, itemId: string, count: number | 'max', extra: number) {
     const item = itemByID(itemId);
     const playerItem = makePlayerItem(item, world);
-    const locations = this.findItems(playerItem);
+    const locations = this.findItems(playerItem).map(x => x.loc);
     if (count === 'max') {
       count = locations.length;
     }
@@ -781,7 +721,7 @@ export class LogicPassHints {
 
   private placeMoonGossip(world: number) {
     for (const mask of ItemGroups.MASKS_REGULAR) {
-      const location = this.findItem(makePlayerItem(mask, world));
+      const location = this.findItem(makePlayerItem(mask, world)).loc;
       this.placeGossipItemRegion(world, location, 0, true);
     }
   }
@@ -873,35 +813,40 @@ export class LogicPassHints {
 
     /* Compute item hints */
     for (let world = 0; world < this.state.settings.players; ++world) {
-      const locDungeonRewards = [...ItemGroups.DUNGEON_REWARDS].map(item => this.findItem(makePlayerItem(item, world)));
-      const locLightArrow = this.findItem(makePlayerItem(Items.OOT_ARROW_LIGHT, world)) || this.findItem(makePlayerItem(Items.SHARED_ARROW_LIGHT, world));
-      const locOathToOrder = this.findItem(makePlayerItem(Items.MM_SONG_ORDER, world));
-      const locGanonBossKey = this.state.settings.ganonBossKey === 'anywhere' ? this.findItem(makePlayerItem(Items.OOT_BOSS_KEY_GANON, world)) : null;
+      const locRegDungeonRewards = [...ItemGroups.DUNGEON_REWARDS].map(item => this.findItem(makePlayerItem(item, world)));
+      const locRegLightArrow = this.findItem([makePlayerItem(Items.OOT_ARROW_LIGHT, world), makePlayerItem(Items.SHARED_ARROW_LIGHT, world)]);
+      const locRegOathToOrder = this.findItem(makePlayerItem(Items.MM_SONG_ORDER, world));
+      let locRegGanonBossKey: LocRegion;
+      if (this.state.settings.ganonBossKey === 'anywhere') {
+        locRegGanonBossKey = this.findItem(makePlayerItem(Items.OOT_BOSS_KEY_GANON, world));
+      } else {
+        locRegGanonBossKey = { loc: null, region: makeRegion('NONE', world) };
+      }
 
       /* We consider LAs hinted only if they don't lock the hint itself */
-      if (locLightArrow) {
+      if (locRegLightArrow.loc) {
         if (this.state.settings.logic === 'none') {
-          this.markLocation(locLightArrow);
+          this.markLocation(locRegLightArrow.loc);
         } else {
-          const pathfinderStateNoLA = this.pathfinder.run(null, { recursive: true, items: this.state.items, forbiddenLocations: new Set([locLightArrow]) });
+          const pathfinderStateNoLA = this.pathfinder.run(null, { recursive: true, items: this.state.items, forbiddenLocations: new Set([locRegLightArrow.loc]) });
           if (pathfinderStateNoLA.ws[world].events.has('OOT_GANON_START')) {
-            this.markLocation(locLightArrow);
+            this.markLocation(locRegLightArrow.loc);
           }
         }
       }
 
-      for (const l of [...locDungeonRewards, locOathToOrder, locGanonBossKey]) {
-        this.markLocation(l);
+      for (const lr of [...locRegDungeonRewards, locRegOathToOrder, locRegGanonBossKey]) {
+        this.markLocation(lr.loc);
       }
 
       /* Compute static hints importance */
       const staticHintsImportances = FIXED_HINTS_LOCATIONS.map(x => this.locImportance(makeLocation(x, world)));
 
       worldItemHints.push({
-        dungeonRewards: locDungeonRewards.map((x) => this.toRegion(world, x)),
-        lightArrow: this.toRegion(world, locLightArrow),
-        oathToOrder: this.toRegion(world, locOathToOrder),
-        ganonBossKey: this.toRegion(world, locGanonBossKey),
+        dungeonRewards: locRegDungeonRewards.map(x => x.region),
+        lightArrow: locRegLightArrow.region,
+        oathToOrder: locRegOathToOrder.region,
+        ganonBossKey: locRegGanonBossKey.region,
         staticHintsImportances,
       });
     }

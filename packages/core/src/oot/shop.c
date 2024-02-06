@@ -47,32 +47,6 @@
 #define SHOP_POTION_RED_ALT         0x30
 #define SHOP_POTION_RED_ALT2        0x31
 
-void shopWriteFlag(int flag)
-{
-    u32* ptr;
-
-    ptr = &gOotExtraShopsLo;
-    if (flag >= 32)
-    {
-        ptr = &gOotExtraShopsHi;
-        flag -= 32;
-    }
-    (*ptr) |= (1 << flag);
-}
-
-int shopReadFlag(int flag)
-{
-    u32* ptr;
-
-    ptr = &gOotExtraShopsLo;
-    if (flag >= 32)
-    {
-        ptr = &gOotExtraShopsHi;
-        flag -= 32;
-    }
-    return ((*ptr) & (1 << flag)) != 0;
-}
-
 u8 comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
 {
     int ageMask;
@@ -127,7 +101,7 @@ u8 comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
         /* Goron shop */
         switch (girlA->base.variable)
         {
-        case SHOP_RECOVERY_HEART:   return girlA->base.position.x < -60.f ? 0x18 : 0x19;
+        case SHOP_RECOVERY_HEART:   return girlA->base.world.pos.x < -60.f ? 0x18 : 0x19;
         case SHOP_POTION_RED_ALT:   return 0x1a;
         case SHOP_TUNIC_GORON:      return 0x1b;
         case SHOP_BOMBS_5_ALT:      return 0x1c;

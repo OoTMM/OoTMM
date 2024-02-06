@@ -11,7 +11,7 @@ typedef struct PACKED ALIGNED(2)
     u8  itemId;
     u8  flags;
     u8  drawGiId;
-    u8  textId;
+    u8  type; /* textId in vanilla */
     u16 objectId;
 }
 GetItem;

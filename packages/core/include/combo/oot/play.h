@@ -5,6 +5,7 @@
 #include <combo/game_state.h>
 #include <combo/common/actor.h>
 #include <combo/oot/regs.h>
+#include <combo/common/color.h>
 
 #define AGE_ADULT 0
 #define AGE_CHILD 1
@@ -36,7 +37,8 @@ typedef struct PACKED
     char unk_e3e6[0x06];
     u16  lastSongPlayed;
     u16  ocarinaMode;
-    char unk_e3f0[0x28];
+    u16  ocarinaAction;
+    char unk_e3f2[0x26];
 }
 MessageContext;
 
@@ -283,22 +285,10 @@ ASSERT_OFFSET(PauseContext, pad_27B,                    0x27b);
 
 _Static_assert(sizeof(PauseContext) == 0x2b4, "OoT PauseContext size is wrong");
 
-/* Start: 0x11d30 */
-typedef struct PACKED
-{
-    char    unk_000[0xb8];
-    u8      age;
-    char    unk_0b9[0x01];
-    u8      spawnId;
-    char    unk_0bb[0x2a];
-    u8      type;
-    char    unk_0e6[0x04];
-    u16     entrance;
-    char    unk_0ec[0x42];
-    u8      gfx;
-    char    unk_12f[0x1];
-}
-TransitionContext;
+typedef struct {
+    /* 0x00 */ u8 numActors;
+    /* 0x04 */ TransitionActorEntry* list;
+} TransitionActorContext; // size = 0x8
 
 typedef struct
 {
@@ -327,10 +317,11 @@ typedef struct
     char            dmaRequest[0x20];
     OSMesgQueue     loadQueue;
     OSMesg          loadMsg;
+    s16             unk_74[2]; // context-specific data used by the current scene draw config
 }
 RoomContext;
 
-_Static_assert(sizeof(RoomContext) == 0x74, "OoT Room size is wrong");
+_Static_assert(sizeof(RoomContext) == 0x78, "OoT Room size is wrong");
 
 #define OBJECT_EXCHANGE_BANK_MAX 19
 
@@ -356,15 +347,48 @@ ObjectContext; // size = 0x518
 
 _Static_assert(sizeof(ObjectContext) == 0x518, "ObjectContext size is wrong");
 
+typedef struct {
+    /* 0x00 */ Vec3f    pos;
+    /* 0x0C */ f32      unk_0C; // radius?
+    /* 0x10 */ Color_RGB8 color;
+} TargetContextEntry; // size = 0x14
+
+_Static_assert(sizeof(TargetContextEntry) == 0x14, "TargetContextEntry size is wrong");
+
+typedef struct {
+    /* 0x00 */ Vec3f    naviRefPos; // possibly wrong
+    /* 0x0C */ Vec3f    targetCenterPos;
+    /* 0x18 */ Color_RGBAf naviInner;
+    /* 0x28 */ Color_RGBAf naviOuter;
+    /* 0x38 */ Actor*   arrowPointedActor;
+    /* 0x3C */ Actor*   targetedActor;
+    /* 0x40 */ f32      unk_40;
+    /* 0x44 */ f32      unk_44;
+    /* 0x48 */ s16      unk_48;
+    /* 0x4A */ u8       activeCategory;
+    /* 0x4B */ u8       unk_4B;
+    /* 0x4C */ s8       unk_4C;
+    /* 0x4D */ char     unk_4D[0x03];
+    /* 0x50 */ TargetContextEntry arr_50[3];
+    /* 0x8C */ Actor*   unk_8C;
+    /* 0x90 */ Actor*   bgmEnemy; // The nearest enemy to player with the right flags that will trigger NA_BGM_ENEMY
+    /* 0x94 */ Actor*   unk_94;
+} TargetContext; // size = 0x98
+
+_Static_assert(sizeof(TargetContext) == 0x98, "TargetContext size is wrong");
+
 typedef struct ActorContext
 {
-    /* 0x000 */ char unk_000[0xb];
+    /* 0x000 */ char unk_000[0xc];
     /* 0x00c */ ActorList actors[12];
-    /* 0x06c */ char unk_06c[0xd4];
+    /* 0x06c */ TargetContext targetCtx;
+    /* 0x104 */ char unk_104[0x3c];
 }
 ActorContext;
 
 ASSERT_OFFSET(ActorContext, actors, 0x00c);
+ASSERT_OFFSET(ActorContext, targetCtx, 0x06c);
+ASSERT_OFFSET(ActorContext, unk_104, 0x104);
 _Static_assert(sizeof(ActorContext) == 0x140, "OOT ActorContext size is wrong");
 
 #define TRANS_TYPE_NONE     0x00
@@ -378,22 +402,58 @@ _Static_assert(sizeof(ActorContext) == 0x140, "OOT ActorContext size is wrong");
 
 typedef struct GameState_Play
 {
-    GameState           gs;
-    u16                 sceneId;
-    char                unk_000a6[0xa];
-    void*               sceneSegment;
-    char                unk_000b4[0x1b6e];
-    ActorContext        actorCtx;
-    CutsceneContext     cutscene;
-    char                unk_1d94[0x344];
-    MessageContext      msgCtx;
-    InterfaceContext    interfaceCtx;
-    PauseContext        pauseCtx;
-    char                unk_10a14[0xd90];
-    ObjectContext       objectCtx;
-    RoomContext         roomCtx;
-    TransitionContext   transition;
-    char                unk_11e60[0x6b8];
+    GameState              gs;
+    u16                    sceneId;
+    char                   unk_000a6[0xa];
+    void*                  sceneSegment;
+    char                   unk_000b4[0x1b6e];
+    ActorContext           actorCtx;
+    CutsceneContext        cutscene;
+    char                   unk_1d94[0x344];
+    MessageContext         msgCtx;
+    InterfaceContext       interfaceCtx;
+    PauseContext           pauseCtx;
+    char                   unk_10a14[0xd90];
+    ObjectContext          objectCtx;
+    RoomContext            roomCtx;
+    TransitionActorContext transiActorCtx;
+    /* 0x11D3C */ void (*playerInit)(Actor_Player* player, struct GameState_Play* play, FlexSkeletonHeader* skelHeader);
+    /* 0x11D40 */ void (*playerUpdate)(Actor_Player* player, struct GameState_Play* play, Input* input);
+    /* 0x11D44 */ int (*isPlayerDroppingFish)(struct GameState_Play* play);
+    /* 0x11D48 */ s32 (*startPlayerFishing)(struct GameState_Play* play);
+    /* 0x11D4C */ s32 (*grabPlayer)(struct GameState_Play* play, Actor_Player* player);
+    /* 0x11D50 */ s32 (*tryPlayerCsAction)(struct GameState_Play* play, Actor* actor, s32 csAction);
+    /* 0x11D54 */ void (*func_11D54)(Actor_Player* player, struct GameState_Play* play);
+    /* 0x11D58 */ s32 (*damagePlayer)(struct GameState_Play* play, s32 damage);
+    /* 0x11D5C */ void (*talkWithPlayer)(struct GameState_Play* play, Actor* actor);
+    /* 0x11D60 */ MtxF viewProjectionMtxF;
+    /* 0x11DA0 */ MtxF billboardMtxF;
+    /* 0x11DE0 */ Mtx* billboardMtx;
+    /* 0x11DE4 */ u32 gameplayFrames;
+    /* 0x11DE8 */ u8 linkAgeOnLoad;
+    /* 0x11DE9 */ u8 haltAllActors;
+    /* 0x11DEA */ u8 spawn;
+    /* 0x11DEB */ u8 numActorEntries;
+    /* 0x11DEC */ u8 numRooms;
+    /* 0x11DF0 */ RomFile* roomList;
+    /* 0x11DF4 */ ActorEntry* playerEntry;
+    /* 0x11DF8 */ ActorEntry* actorEntryList;
+    /* 0x11DFC */ void* unk_11DFC;
+    /* 0x11E00 */ Spawn* spawnList;
+    /* 0x11E04 */ s16* exitList;
+    /* 0x11E08 */ Path* pathList;
+    /* 0x11E0C */ QuestHintCmd* naviQuestHints;
+    /* 0x11E10 */ void* specialEffects;
+    /* 0x11E14 */ u8 skyboxId;
+    /* 0x11E15 */ s8 transitionTrigger; // "fade_direction"
+    /* 0x11E16 */ s16 unk_11E16;
+    /* 0x11E18 */ s16 bgCoverAlpha;
+    /* 0x11E1A */ s16 nextEntranceIndex;
+    /* 0x11E1C */ char unk_11E1C[0x40];
+    /* 0x11E5C */ s8 shootingGalleryStatus;
+    /* 0x11E5D */ s8 bombchuBowlingStatus; // "bombchu_game_flag"
+    /* 0x11E5E */ u8 transitionType;
+    char                   unk_11e60[0x6b8];
 }
 GameState_Play;
 
@@ -401,11 +461,10 @@ ASSERT_OFFSET(GameState_Play, sceneSegment,         0x000b0);
 ASSERT_OFFSET(GameState_Play, actorCtx,             0x01c24);
 ASSERT_OFFSET(GameState_Play, cutscene,             0x01d64);
 ASSERT_OFFSET(GameState_Play, roomCtx,              0x11cbc);
-ASSERT_OFFSET(GameState_Play, transition,           0x11d30);
-ASSERT_OFFSET(GameState_Play, transition.type,      0x11e15);
-ASSERT_OFFSET(GameState_Play, transition.entrance,  0x11e1a);
+ASSERT_OFFSET(GameState_Play, transiActorCtx,       0x11d34);
+ASSERT_OFFSET(GameState_Play, transitionTrigger,    0x11e15);
+ASSERT_OFFSET(GameState_Play, nextEntranceIndex,    0x11e1a);
 
-_Static_assert(sizeof(TransitionContext) == 0x130, "OoT TransitionContext size is wrong");
 _Static_assert(sizeof(GameState_Play) == 0x12518, "OoT GameState_Play size is wrong");
 
 typedef struct {

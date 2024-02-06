@@ -19,6 +19,10 @@ void comboDungeonSetFlags(int dungeonId, int mmCycle)
         if (mmCycle)
         {
             MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF);
+            if (comboConfig(CFG_MM_CLEAR_OPEN_WF))
+            {
+                MM_SET_EVENT_WEEK(EV_MM_WEEK_WOODFALL_TEMPLE_RISE);
+            }
         }
         gMiscFlags.erSwampClear = 1;
         break;
@@ -35,6 +39,10 @@ void comboDungeonSetFlags(int dungeonId, int mmCycle)
         if (mmCycle)
         {
             MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_GB);
+            if (comboConfig(CFG_MM_CLEAR_OPEN_GB))
+            {
+                MM_SET_EVENT_WEEK(EV_MM_WEEK_GREAT_BAY_TURTLE);
+            }
         }
         gMiscFlags.erCoastClear = 1;
         break;

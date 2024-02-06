@@ -1,4 +1,5 @@
-import fs from 'fs/promises';
+import { promises as fs } from 'fs';
+import { SCENES } from '@ootmm/data';
 
 import { CodeGen } from '../lib/combo/util/codegen';
 import { decompressGame } from '../lib/combo/decompress';
@@ -15,6 +16,14 @@ const OOT_GENERIC_GROTTOS = [
   0x02,
   0x03,
   0x00,
+];
+
+const OOT_FAIRY_FOUNTAINS = [
+  0x00,
+  0x01,
+  0x02,
+  0x03,
+  0x04,
 ];
 
 const MM_GENERIC_GROTTOS = [
@@ -38,6 +47,21 @@ const SLICES = 12;
 /* OOT Grass Scatter: 12 */
 
 type Game = 'oot' | 'mq' | 'mm';
+
+function scenesById(game: 'oot' | 'mm') {
+  const data: {[k: number]: string} = {};
+  for (const [name, id] of Object.entries(SCENES)) {
+    if (name.startsWith(`${game.toUpperCase()}_`)) {
+      data[id] = name;
+    }
+  }
+  return data;
+}
+
+const SCENES_BY_ID = {
+  oot: scenesById('oot'),
+  mm: scenesById('mm'),
+}
 
 const MM_EXTRA_SCENES = {
   0x71: 5,
@@ -113,31 +137,44 @@ const MM_SCENES_WITH_EXTRA_SETUPS: {[k: number]: number} = {
 };
 
 const ACTORS_OOT = {
+  EN_ITEM00: 0x15,
   POT: 0x111,
   FLYING_POT: 0x11d,
   ROCK_BUSH_GROUP: 0x151,
   EN_KUSA: 0x125,
   OBJ_HANA: 0x14f,
+  EN_ELF: 0x18,
+  BG_SPOT11_OASIS: 0x1C2,
+  OBJ_MURE3: 0x1ab,
+  SHOT_SUN: 0x183,
 };
 
 const ACTORS_MM = {
+  EN_ITEM00: 0x0e,
   POT: 0x82,
   FLYING_POT: 0x8d,
   EN_KUSA: 0x90,
   OBJ_MURE2: 0xb3,
+  OBJ_MURE3: 0xe8,
   OBJ_GRASS: 0x10b,
   OBJ_GRASS_UNIT: 0x10d,
   EN_KUSA2: 0x171,
+  EN_ELF: 0x10,
 };
 
 const ACTOR_SLICES_OOT = {
   [ACTORS_OOT.ROCK_BUSH_GROUP]: 12,
+  [ACTORS_OOT.EN_ELF]: 8,
+  [ACTORS_OOT.BG_SPOT11_OASIS]: 8,
+  [ACTORS_OOT.OBJ_MURE3]: 7,
 }
 
 const ACTOR_SLICES_MM = {
   [ACTORS_MM.OBJ_MURE2]: 12,
   [ACTORS_MM.OBJ_GRASS_UNIT]: 12,
   [ACTORS_MM.EN_KUSA2]: 9,
+  [ACTORS_MM.EN_ELF]: 8,
+  [ACTORS_MM.OBJ_MURE3]: 7,
 }
 
 const INTERESTING_ACTORS_OOT = Object.values(ACTORS_OOT);
@@ -163,6 +200,14 @@ const CONFIGS = {
     SLICES: ACTOR_SLICES_MM,
   }
 }
+
+const RUPEES = new Set([
+  'RUPEE_GREEN',
+  'RUPEE_BLUE',
+  'RUPEE_RED',
+  'RUPEE_PURPLE',
+  'RUPEE_HUGE',
+]);
 
 const ITEM00_DROPS = [
   'RUPEE_GREEN',
@@ -428,6 +473,17 @@ function parseRoomActors(rom: Buffer, raw: RawRoom, game: Game): RoomActors[] {
     return genericRooms;
   }
 
+  if (game !== 'mm' && raw.sceneId === 0x3c && raw.roomId === 0x00) {
+    /* OoT fairy fountains */
+    let genericRooms: RoomActors[] = [];
+    for (const genericId of OOT_FAIRY_FOUNTAINS) {
+      const genericRoomId = genericId | 0x20;
+      const genericActors = actors.map(x => ({...x, roomId: genericRoomId }));
+      genericRooms.push({ sceneId: raw.sceneId, setupId: raw.setupId, roomId: genericRoomId, actors: genericActors });
+    }
+    return genericRooms;
+  }
+
   if (game === 'mm' && raw.sceneId === 0x07 && raw.roomId === 0x04) {
     /* MM generic grottos */
     let genericRooms: RoomActors[] = [];
@@ -578,6 +634,106 @@ function decPad(n: number, width: number) {
   const s = n.toString();
   const count = width - s.length;
   return count > 0 ? '0'.repeat(width - s.length) + s : s;
+}
+
+function outputShotSunOot(roomActors: RoomActors[]) {
+  let lastSceneId = -1;
+  let lastSetupId = -1;
+  for (const room of roomActors) {
+    for (const actor of room.actors) {
+      if (actor.typeId === ACTORS_OOT.SHOT_SUN) {
+        const params = actor.params & 0xFF;
+        var validFairy = params === 0x40 || params === 0x41;
+        if (!validFairy) {
+          console.log("Fairy not valid: " + JSON.stringify(actor));
+          continue;
+        }
+        const item = 'FAIRY_BIG';
+        if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
+          console.log('');
+          lastSceneId = room.sceneId;
+          lastSetupId = room.setupId;
+        }
+        const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
+        console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Fairy Spot ${decPad(actor.actorId + 1, 2)},             fairy_spot,            NONE,                 ${SCENES_BY_ID.oot[room.sceneId]}, ${hexPad(key, 5)}, ${item}`);
+        console.log(params === 0x40 ? "Suns Song" : "Song of Storms");
+      }
+    }
+  }
+}
+
+function outputFairyPoolOot(roomActors: RoomActors[]) {
+  let lastSceneId = -1;
+  let lastSetupId = -1;
+  for (const room of roomActors) {
+    for (const actor of room.actors) {
+      if (actor.typeId === ACTORS_OOT.EN_ELF || actor.typeId === ACTORS_OOT.BG_SPOT11_OASIS) {
+        var validFairy = actor.typeId === ACTORS_OOT.EN_ELF && actor.params === 4
+          || actor.typeId === ACTORS_OOT.BG_SPOT11_OASIS;
+        const fairyType = actor.params;
+        if (!validFairy) {
+          console.log("Fairy not valid: " + JSON.stringify(actor));
+          continue;
+        }
+        const item = 'FAIRY';
+        if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
+          console.log('');
+          lastSceneId = room.sceneId;
+          lastSetupId = room.setupId;
+        }
+        const count = 8;
+        for (let i = 0; i < count; ++i) {
+          const key = (i << 16) | ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
+          console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Fairy Group ${decPad(actor.actorId + 1, 2)} Fairy ${decPad(i + 1, 2)},             fairy,            NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
+        }
+      }
+    }
+  }
+}
+
+
+function outputHeartsOot(roomActors: RoomActors[]) {
+  let lastSceneId = -1;
+  let lastSetupId = -1;
+  for (const room of roomActors) {
+    for (const actor of room.actors) {
+      if (actor.typeId === ACTORS_OOT.EN_ITEM00) {
+        const item00arg = (actor.params >> 0) & 0xff;
+        const item = ITEM00_DROPS[item00arg];
+        if (item !== 'RECOVERY_HEART') continue;
+        const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
+        if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
+          console.log('');
+          lastSceneId = room.sceneId;
+          lastSetupId = room.setupId;
+        }
+        /* PRINT */
+        console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Heart ${decPad(actor.actorId + 1, 2)},        heart,            NONE,                 ${SCENES_BY_ID.oot[room.sceneId]}, ${hexPad(key, 5)}, ${item}`);
+      }
+    }
+  }
+}
+
+function outputHeartsMm(roomActors: RoomActors[]) {
+  let lastSceneId = -1;
+  let lastSetupId = -1;
+  for (const room of roomActors) {
+    for (const actor of room.actors) {
+      if (actor.typeId === ACTORS_MM.EN_ITEM00) {
+        const item00arg = (actor.params >> 0) & 0xff;
+        const item = ITEM00_DROPS_MM[item00arg];
+        if (item !== 'RECOVERY_HEART') continue;
+        const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
+        if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
+          console.log('');
+          lastSceneId = room.sceneId;
+          lastSetupId = room.setupId;
+        }
+        /* PRINT */
+        console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Heart ${decPad(actor.actorId + 1, 2)},        heart,            NONE,                 ${SCENES_BY_ID.mm[room.sceneId]}, ${hexPad(key, 5)}, ${item}`);
+      }
+    }
+  }
 }
 
 function outputGrassPoolOot(roomActors: RoomActors[]) {
@@ -910,7 +1066,12 @@ async function run() {
   //outputGrassWeirdPoolOot(ootRooms);
   //outputGrassPoolMm(mmRooms);
   //outputKeatonGrassPoolMm(mmRooms);
-  outputGrassPoolOot(mqRooms);
+  //outputGrassPoolOot(mqRooms);
+  //outputFairyPoolOot(ootRooms);
+  //outputRupeesMm(mmRooms);
+  //outputHeartsMm(mmRooms);
+  outputShotSunOot(ootRooms);
+  outputShotSunOot(mqRooms);
 }
 
 run().catch(e => {

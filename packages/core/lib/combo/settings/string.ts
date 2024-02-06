@@ -1,10 +1,6 @@
 import { isEqual } from 'lodash';
 import { deflate, inflate } from 'pako';
-
 import { DEFAULT_SETTINGS, SETTINGS, Settings, makeSettings } from '../settings';
-import { DEFAULT_DUNGEONS } from './dungeons';
-import { DEFAULT_SPECIAL_CONDS } from './special-conds';
-import { SETTINGS_DEFAULT_HINTS } from './hints';
 
 export function exportSettings(settings: Settings): string {
   const diff: any = {};

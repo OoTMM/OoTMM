@@ -63,24 +63,20 @@ void Magic_FlashMeterBorder(void)
     }
 }
 
-s32 Magic_ChateauActive()
+s32 Magic_Decrement(void)
 {
-    return comboConfig(CFG_SHARED_MAGIC) && MM_GET_EVENT_WEEK(EV_MM_WEEK_DRANK_CHATEAU_ROMANI);
-}
-
-s32 Magic_Decrement()
-{
-    if (Magic_ChateauActive())
+    if (comboIsChateauActive())
     {
         return 0;
     }
+
     gSaveContext.save.playerData.magicAmount--;
     return 1;
 }
 
 s32 Magic_RequestChangeCustom(GameState_Play* play, s16 amount, s16 type)
 {
-    if (type != MAGIC_CONSUME_WAIT_PREVIEW && type != MAGIC_ADD && Magic_ChateauActive())
+    if (type != MAGIC_CONSUME_WAIT_PREVIEW && type != MAGIC_ADD && comboIsChateauActive())
     {
         amount = 0;
     }
@@ -89,7 +85,7 @@ s32 Magic_RequestChangeCustom(GameState_Play* play, s16 amount, s16 type)
 
 void Magic_UpdateCustom(GameState_Play* play)
 {
-    if (Magic_ChateauActive())
+    if (comboIsChateauActive())
     {
         // R_MAGIC_FILL_COLOR(0) = 0; // Red
         R_MAGIC_FILL_COLOR(1) = 0; // Green

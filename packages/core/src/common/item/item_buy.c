@@ -27,6 +27,13 @@ int isItemBuyable(s16 gi)
     {
     case GI_OOT_RECOVERY_HEART:
         return gOotSave.playerData.health < gOotSave.playerData.healthMax;
+    case GI_OOT_MAGIC_JAR_SMALL:
+    case GI_OOT_MAGIC_JAR_LARGE:
+        return (gOotSave.playerData.magicUpgrade && (gOotSave.playerData.magicAmount < (gOotSave.playerData.magicUpgrade2 ? 0x60 : 0x30)));
+    case GI_OOT_FAIRY_BIG:
+        return gOotSave.playerData.health < gOotSave.playerData.healthMax || (gOotSave.playerData.magicUpgrade && (gOotSave.playerData.magicAmount < (gOotSave.playerData.magicUpgrade2 ? 0x60 : 0x30)));
+    case GI_MM_FAIRY_BIG:
+        return gMmSave.playerData.health < gMmSave.playerData.healthMax || (gMmSave.playerData.magicAcquired && (gMmSave.playerData.magicAmount < (gMmSave.playerData.doubleMagic ? 0x60 : 0x30)));
     case GI_OOT_STICK:
     case GI_OOT_STICKS_5:
     case GI_OOT_STICKS_10:
@@ -75,6 +82,9 @@ int isItemBuyable(s16 gi)
         return !(gOotSave.inventory.equipment.shields & EQ_OOT_SHIELD_HYLIAN);
     case GI_MM_RECOVERY_HEART:
         return gMmSave.playerData.health < gMmSave.playerData.healthMax;
+    case GI_MM_MAGIC_JAR_SMALL:
+    case GI_MM_MAGIC_JAR_LARGE:
+        return (gMmSave.playerData.magicAcquired && (gMmSave.playerData.magicAmount < (gMmSave.playerData.doubleMagic ? 0x60 : 0x30)));
     case GI_MM_STICK:
         return (gMmSave.inventory.upgrades.dekuStick == 0) || (gMmSave.inventory.ammo[ITS_MM_STICKS] < kMaxSticks[gMmSave.inventory.upgrades.dekuStick]);
     case GI_MM_NUT:
@@ -90,7 +100,7 @@ int isItemBuyable(s16 gi)
     case GI_MM_BOMBCHU_5:
     case GI_MM_BOMBCHU_10:
     case GI_MM_BOMBCHU_20:
-        return (gMmSave.inventory.upgrades.bombBag > 0) && (gMmSave.inventory.ammo[ITS_MM_BOMBCHU] < 40);
+        return (gMmSave.inventory.ammo[ITS_MM_BOMBCHU] < (comboConfig(CFG_MM_BOMBCHU_BAG) ? 50 : kMaxBombs[gMmSave.inventory.upgrades.bombBag]));
     case GI_MM_ARROWS_10:
     case GI_MM_ARROWS_30:
     case GI_MM_ARROWS_40:

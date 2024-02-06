@@ -40,9 +40,13 @@ void DrawGi_CustomSmallKey(GameState_Play* play, s16 index);
 void DrawGi_Coin(GameState_Play* play, s16 index);
 void DrawGi_MagicJar(GameState_Play* play, s16 index);
 void DrawGi_Triforce(GameState_Play* play, s16 index, u8 param);
+void DrawGi_TriforceFull(GameState_Play* play, s16 index, u8 param);
+void DrawGi_MaskMajora(GameState_Play* play, s16 index, u8 param);
 void DrawGi_Wallet(GameState_Play* play, s16 index);
 void DrawGi_Button(GameState_Play* play, s16 index);
 void DrawGi_CustomBottleFairy(GameState_Play* play, s16 index, u8 param);
+void DrawGi_BombchuBag(GameState_Play* play, s16 index, u8 param);
+void DrawGi_BigFairy(GameState_Play* play, s16 index);
 
 #endif
 

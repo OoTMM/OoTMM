@@ -34,12 +34,30 @@ PATCH_LOAD_STORE 8, 1
 .int 0x80853b40
 PATCH_END
 
+/* Always use a dummy text ID */
+PATCH_START 0x80848334
+  li a1,1
+PATCH_END
+
 /* Use our item-inventory handler */
 PATCH_START 0x8084834c
   lw v0,0x24(sp)
   lw a0,0x20(sp)
   jal comboPlayerAddItem
    lh a1,0x384(v0)
+PATCH_END
+
+/* Disable default sound for get item */
+PATCH_START 0x80848378
+  nop
+PATCH_END
+
+PATCH_START 0x80848410
+  nop
+PATCH_END
+
+PATCH_START 0x808483a0
+  nop
 PATCH_END
 
 /* Fix magic jars */

@@ -1,8 +1,6 @@
 #include <combo.h>
 #include <combo/item.h>
 
-int shopReadFlag(int);
-
 void EnGirlA_ItemQuery(ComboItemQuery* q, Actor_EnGirlA* girlA)
 {
     bzero(q, sizeof(*q));
@@ -13,7 +11,7 @@ void EnGirlA_ItemQuery(ComboItemQuery* q, Actor_EnGirlA* girlA)
     q->gi = girlA->gi;
     q->giRenew = GI_MM_SOLD_OUT;
 
-    if (shopReadFlag(girlA->shopId))
+    if (BITMAP8_GET(gCustomSave.shops, girlA->shopId))
     {
         q->ovFlags |= OVF_RENEW;
 

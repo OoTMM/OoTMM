@@ -1,0 +1,4 @@
+0x80000000 - 0x803fffff: Vanilla
+0x80400000 - 0x804xxxxx: Payload
+0x80600000 - 0x8067ffff: Extended Audio Heap
+0x80700000 - 0x807fffff: Custom Heap

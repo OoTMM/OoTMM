@@ -1,7 +1,8 @@
 import React from 'react';
 import Select, { createFilter, components } from 'react-select';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
+
 import Group from './Group';
 
 const CustomOption = ({ children, ...props }: { children?: React.ReactNode, props: any }) => {
@@ -43,7 +44,7 @@ export function ArrayList({ options, selected, add, remove, clear }: ArrayListPr
       <Group direction='vertical' spacing='xs'>
         {selected.map(v => (
           <Group direction='horizontal' spacing='xs' key={v}>
-            <span className="plando-remove" onClick={() => remove(v)}><FontAwesomeIcon icon={solid('xmark')}/></span>
+            <span className="plando-remove" onClick={() => remove(v)}><FontAwesomeIcon icon={faXmark}/></span>
             <span className="plando-item">{options.find(x => x.value === v)?.label || v}</span>
           </Group>
         ))}

@@ -36,7 +36,7 @@ void EnKusa_Aliases(Xflag* xflag)
         break;
     case SCE_MM_GROTTOS:
         if (xflag->roomId == 0x04)
-            xflag->roomId = 0x20 | (gSaveContext.grottoChestFlag & 0x1f);
+            xflag->roomId = 0x20 | (GROTTO_CHEST_FLAG(gSaveContext) & 0x1f);
         break;
     }
 }
@@ -73,7 +73,7 @@ void EnKusa_SpawnShuffledDrop(Actor_EnKusa* this, GameState_Play* play)
     }
 
     /* Spawn a custom item */
-    DropCustomItem(play, &this->base.position, &this->xflag);
+    EnItem00_DropCustom(play, &this->base.world.pos, &this->xflag);
 }
 
 void EnKusa_DrawWrapper(Actor_EnKusa* this, GameState_Play* play)

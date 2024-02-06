@@ -1,8 +1,8 @@
 import path from 'path';
-import fs from 'fs/promises';
-import { Buffer } from 'buffer';
+import fs from 'fs';
+import { FILES } from '@ootmm/data';
 
-import { Game, DATA_FILES } from '../config';
+import { Game } from '../config';
 import { DmaData } from '../dma';
 import { splitObject } from './split';
 import { arrayToIndexMap, toU32Buffer } from '../util';
@@ -17,17 +17,16 @@ import { Options } from '../options';
 import { Patchfile } from '../patch-build/patchfile';
 import { grayscale } from '../image';
 
-const FILES_TO_INDEX_OOT = arrayToIndexMap(DATA_FILES.oot);
-const FILES_TO_INDEX_MM = arrayToIndexMap(DATA_FILES.mm);
 const FILES_TO_INDEX = {
-  oot: FILES_TO_INDEX_OOT,
-  mm: FILES_TO_INDEX_MM,
+  oot: arrayToIndexMap(FILES.oot),
+  mm: arrayToIndexMap(FILES.mm),
 };
 
 type CustomEntry = {
   game: Game,
   name: string,
   file: string,
+  seg?: { in: number, out: number },
   offsets: number[],
 };
 
@@ -36,6 +35,7 @@ const ENTRIES: CustomEntry[] = [
   { game: 'mm',  name: "GI_REMAINS_GOHT",       file: "objects/object_bsmask",       offsets: [0x3ad0] },
   { game: 'mm',  name: "GI_REMAINS_GYORG",      file: "objects/object_bsmask",       offsets: [0x1d80] },
   { game: 'mm',  name: "GI_REMAINS_TWINMOLD",   file: "objects/object_bsmask",       offsets: [0x5020] },
+  { game: 'mm',  name: "GI_MASK_MAJORA",        file: "objects/object_stk",          offsets: [0x6bb0] },
   /*{ game: 'mm',  name: "GI_OWL",                file: "objects/object_tsg",          offsets: [0x3770] },*/
   { game: 'oot', name: "GI_MASTER_SWORD",       file: "objects/object_toki_objects", offsets: [0x1bd0] },
   { game: 'oot', name: "GI_STONE_EMERALD",      file: "objects/object_gi_jewel",     offsets: [0x1240, 0x10e0] },
@@ -47,6 +47,18 @@ const ENTRIES: CustomEntry[] = [
   { game: 'oot', name: "GI_MEDALLION_SPIRIT",   file: "objects/object_gi_medal",     offsets: [0x3610, 0x0e18] },
   { game: 'oot', name: "GI_MEDALLION_SHADOW",   file: "objects/object_gi_medal",     offsets: [0x4330, 0x0e18] },
   { game: 'oot', name: "GI_MEDALLION_LIGHT",    file: "objects/object_gi_medal",     offsets: [0x5220, 0x0e18] },
+
+  /* Extracted OoT Masks - used for adult masks */
+  { game: 'oot', name: "MASK_OOT_SKULL",        file: "objects/object_link_child",   seg: { in: 0x06, out: 0x0a }, offsets: [0x2ad40] },
+  { game: 'oot', name: "MASK_OOT_SPOOKY",       file: "objects/object_link_child",   seg: { in: 0x06, out: 0x0a }, offsets: [0x2af70] },
+  { game: 'oot', name: "MASK_OOT_KEATON",       file: "objects/object_link_child",   seg: { in: 0x06, out: 0x0a }, offsets: [0x2b060] },
+  { game: 'oot', name: "MASK_OOT_TRUTH",        file: "objects/object_link_child",   seg: { in: 0x06, out: 0x0a }, offsets: [0x2b1f0] },
+  { game: 'oot', name: "MASK_OOT_GORON",        file: "objects/object_link_child",   seg: { in: 0x06, out: 0x0a }, offsets: [0x2b350] },
+  { game: 'oot', name: "MASK_OOT_ZORA",         file: "objects/object_link_child",   seg: { in: 0x06, out: 0x0a }, offsets: [0x2b580] },
+  { game: 'oot', name: "MASK_OOT_GERUDO",       file: "objects/object_link_child",   seg: { in: 0x06, out: 0x0a }, offsets: [0x2b788] },
+  { game: 'oot', name: "MASK_OOT_BUNNY",        file: "objects/object_link_child",   seg: { in: 0x06, out: 0x0a }, offsets: [0x2ca38] },
+
+  { game: 'oot', name: "EQ_DEKU_STICK",         file: "objects/object_link_child",   seg: { in: 0x06, out: 0x0a }, offsets: [0x6cc0] },
 ];
 
 const getObjectBuffer = async (roms: DecompressedRoms, game: Game, file: string) => {
@@ -63,14 +75,15 @@ const getObjectBuffer = async (roms: DecompressedRoms, game: Game, file: string)
 /* TODO: Cache this */
 const makeSplitObject = async (roms: DecompressedRoms, entry: CustomEntry) => {
   const buf = await getObjectBuffer(roms, entry.game, entry.file);
-  const obj = splitObject(buf, entry.offsets);
+  const seg = entry.seg || { in: 6, out: 6 };
+  const obj = splitObject(buf, entry.offsets, seg.in, seg.out);
 
-  if (!process.env.ROLLUP) {
+  if (!process.env.BROWSER) {
     const outDir = path.resolve('build', 'custom');
     const outBasename = entry.name.toLowerCase();
     const outFilename = path.resolve(outDir, `${outBasename}.zobj`);
-    await fs.mkdir(outDir, { recursive: true });
-    await fs.writeFile(outFilename, obj.data);
+    await fs.promises.mkdir(outDir, { recursive: true });
+    await fs.promises.writeFile(outFilename, obj.data);
   }
 
   return obj;
@@ -88,41 +101,45 @@ export const customExtractedFiles = async (roms: DecompressedRoms): Promise<{[k:
 });
 
 export const customFiles = async (opts: Options): Promise<{[k: string]: Buffer}> => ({
-  CHEST_MAJOR_FRONT: await png(opts, 'chest_front_major', 'rgba16'),
-  CHEST_MAJOR_SIDE: await png(opts, 'chest_side_major', 'rgba16'),
-  CHEST_KEY_FRONT: await png(opts, 'chest_front_key', 'rgba16'),
-  CHEST_KEY_SIDE: await png(opts, 'chest_side_key', 'rgba16'),
-  CHEST_SPIDER_FRONT: await png(opts, 'chest_front_spider', 'rgba16'),
-  CHEST_SPIDER_SIDE: await png(opts, 'chest_side_spider', 'rgba16'),
-  CHEST_FAIRY_FRONT: await png(opts, 'chest_front_fairy', 'rgba16'),
-  CHEST_FAIRY_SIDE: await png(opts, 'chest_side_fairy', 'rgba16'),
-  CHEST_HEART_FRONT: await png(opts, 'chest_front_heart', 'rgba16'),
-  CHEST_HEART_SIDE: await png(opts, 'chest_side_heart', 'rgba16'),
-  POT_MAJOR_SIDE: await png(opts, 'pots/side_major', 'rgba16'),
-  POT_MAJOR_TOP: await png(opts, 'pots/top_major', 'rgba16'),
-  POT_SPIDER_SIDE: await png(opts, 'pots/side_spider', 'rgba16'),
-  POT_SPIDER_TOP: await png(opts, 'pots/top_spider', 'rgba16'),
-  POT_KEY_SIDE: await png(opts, 'pots/side_key', 'rgba16'),
-  POT_FAIRY_SIDE: await png(opts, 'pots/side_fairy', 'rgba16'),
-  POT_FAIRY_TOP: await png(opts, 'pots/top_fairy', 'rgba16'),
-  POT_HEART_SIDE: await png(opts, 'pots/side_heart', 'rgba16'),
-  POT_HEART_TOP: await png(opts, 'pots/top_heart', 'rgba16'),
-  POT_BOSSKEY_SIDE: await png(opts, 'pots/side_bosskey', 'rgba16'),
-  POT_BOSSKEY_TOP: await png(opts, 'pots/top_bosskey', 'rgba16'),
+  CHEST_MAJOR_FRONT: await png(opts, 'chests/major_front', 'rgba16'),
+  CHEST_MAJOR_SIDE: await png(opts, 'chests/major_side', 'rgba16'),
+  CHEST_KEY_FRONT: await png(opts, 'chests/key_front', 'rgba16'),
+  CHEST_KEY_SIDE: await png(opts, 'chests/key_side', 'rgba16'),
+  CHEST_SPIDER_FRONT: await png(opts, 'chests/spider_front', 'rgba16'),
+  CHEST_SPIDER_SIDE: await png(opts, 'chests/spider_side', 'rgba16'),
+  CHEST_FAIRY_FRONT: await png(opts, 'chests/fairy_front', 'rgba16'),
+  CHEST_FAIRY_SIDE: await png(opts, 'chests/fairy_side', 'rgba16'),
+  CHEST_HEART_FRONT: await png(opts, 'chests/heart_front', 'rgba16'),
+  CHEST_HEART_SIDE: await png(opts, 'chests/heart_side', 'rgba16'),
+  CHEST_SOUL_FRONT: await png(opts, 'chests/soul_front', 'rgba16'),
+  CHEST_SOUL_SIDE: await png(opts, 'chests/soul_side', 'rgba16'),
+  POT_MAJOR_SIDE: await png(opts, 'pots/major_side', 'rgba16'),
+  POT_MAJOR_TOP: await png(opts, 'pots/major_top', 'rgba16'),
+  POT_SPIDER_SIDE: await png(opts, 'pots/spider_side', 'rgba16'),
+  POT_SPIDER_TOP: await png(opts, 'pots/spider_top', 'rgba16'),
+  POT_KEY_SIDE: await png(opts, 'pots/key_side', 'rgba16'),
+  POT_FAIRY_SIDE: await png(opts, 'pots/fairy_side', 'rgba16'),
+  POT_FAIRY_TOP: await png(opts, 'pots/fairy_top', 'rgba16'),
+  POT_HEART_SIDE: await png(opts, 'pots/heart_side', 'rgba16'),
+  POT_HEART_TOP: await png(opts, 'pots/heart_top', 'rgba16'),
+  POT_BOSSKEY_SIDE: await png(opts, 'pots/bosskey_side', 'rgba16'),
+  POT_BOSSKEY_TOP: await png(opts, 'pots/bosskey_top', 'rgba16'),
+  POT_SOUL_SIDE: await png(opts, 'pots/soul_side', 'rgba16'),
+  POT_SOUL_TOP: await png(opts, 'pots/soul_top', 'rgba16'),
 });
 
 export const customAssetsKeep = async (opts: Options): Promise<{[k: string]: Buffer}> => ({
-  DPAD: await png(opts, 'dpad', 'rgba32'),
+  DPAD: await png(opts, 'dpad', 'rgba16'),
   FONT: await font(opts, 'font_8x12'),
-  SMALL_ICON_KEY: await png(opts, 'small_icon_key', 'rgba32'),
-  SMALL_ICON_BOSS_KEY: await png(opts, 'small_icon_boss_key', 'rgba32'),
-  SMALL_ICON_MAP: await png(opts, 'small_icon_map', 'rgba32'),
-  SMALL_ICON_COMPASS: await png(opts, 'small_icon_compass', 'rgba32'),
-  SMALL_ICON_FAIRY: await png(opts, 'small_icon_fairy', 'rgba32'),
-  SMALL_ICON_SKULL: await png(opts, 'small_icon_skull', 'rgba32'),
-  SMALL_ICON_TRIFORCE: await png(opts, 'small_icon_triforce', 'rgba32'),
-  SMALL_ICON_RUPEE: await png(opts, 'small_icon_rupee', 'rgba32'),
-  SMALL_ICON_COIN: await png(opts, 'small_icon_coin', 'rgba32'),
+  SMALL_ICON_KEY: await png(opts, 'small_icon_key', 'rgba16'),
+  SMALL_ICON_BOSS_KEY: await png(opts, 'small_icon_boss_key', 'rgba16'),
+  SMALL_ICON_MAP: await png(opts, 'small_icon_map', 'rgba16'),
+  SMALL_ICON_COMPASS: await png(opts, 'small_icon_compass', 'rgba16'),
+  SMALL_ICON_FAIRY: await png(opts, 'small_icon_fairy', 'rgba16'),
+  SMALL_ICON_SKULL: await png(opts, 'small_icon_skull', 'rgba16'),
+  SMALL_ICON_TRIFORCE: await png(opts, 'small_icon_triforce', 'rgba16'),
+  SMALL_ICON_RUPEE: await png(opts, 'small_icon_rupee', 'rgba16'),
+  SMALL_ICON_COIN: await png(opts, 'small_icon_coin', 'rgba16'),
 });
 
 const extractRaw = async (roms: DecompressedRoms, game: Game, file: string, offset: number, size: number) => {
@@ -134,6 +151,15 @@ export const extractedAssets = async (roms: DecompressedRoms): Promise<{[k: stri
   SF_TEXTURE_1: await extractRaw(roms, 'mm', 'objects/gameplay_keep', 0x2c030, 16 * 32),
   SF_TEXTURE_2: await extractRaw(roms, 'mm', 'objects/gameplay_keep', 0x2c630, 16 * 16),
   SF_TEXTURE_3: await extractRaw(roms, 'mm', 'objects/gameplay_keep', 0x2bc30, 32 * 32),
+  MAGIC_WIND_TEXTURE: await extractRaw(roms, 'oot', 'actors/ovl_Magic_Wind', 0x8E0, 32 * 64),
+  MAGIC_DARK_TEXTURE: await extractRaw(roms, 'oot', 'actors/ovl_Magic_Dark', 0xC90, 32 * 64),
+  MAGIC_FIRE_TEXTURE: await extractRaw(roms, 'oot', 'actors/ovl_Magic_Fire', 0xB20, 64 * 64),
+  BOOTS_IRON_TEXTURE: await extractRaw(roms, 'oot', 'objects/object_link_boy', 0xd1b8, 16 * 16),
+  BOOTS_IRON_TLUT: await extractRaw(roms, 'oot', 'objects/object_link_boy', 0xcb40, 16 * 16 * 2),
+  BOOTS_HOVER_HEEL_TEXTURE: await extractRaw(roms, 'oot', 'objects/object_link_boy', 0xa580, 16 * 8 * 2),
+  BOOTS_HOVER_JET_TEXTURE: await extractRaw(roms, 'oot', 'objects/object_link_boy', 0xa680, 32 * 32 * 2),
+  BOOTS_HOVER_FEATHER_TEXTURE: await extractRaw(roms, 'oot', 'objects/object_link_boy', 0xae80, 32 * 16 * 2),
+  BOOTS_HOVER_CIRCLE_TEXTURE: await extractRaw(roms, 'oot', 'objects/gameplay_keep', 0x37e00, 16 * 32),
 });
 
 type ObjectRef = {
@@ -153,7 +179,7 @@ class CustomAssetsBuilder {
     private roms: DecompressedRoms,
     private patch: Patchfile,
   ) {
-    const cgPath = process.env.ROLLUP ? '' : path.resolve('include', 'combo', 'custom.h');
+    const cgPath = process.env.BROWSER ? '' : path.resolve('include', 'combo', 'custom.h');
     this.cg = new CodeGen(cgPath, 'CUSTOM_H');
     this.vrom = 0x08000000;
     this.objectId = 0x2000;
@@ -260,6 +286,7 @@ class CustomAssetsBuilder {
     await this.addObjectFile('BTN_A', 'btn_a.zobj', [0x06000da0]);
     await this.addObjectFile('BTN_C_HORIZONTAL', 'btn_c_horizontal.zobj', [0x06000e10]);
     await this.addObjectFile('BTN_C_VERTICAL', 'btn_c_vertical.zobj', [0x06000960]);
+    await this.addObjectFile('BOMBCHU_BAG', 'bombchu_bag.zobj', [0x060006A0, 0x060008E0, 0x06001280]);
 
     /* Add the object table */
     const objectTableBuffer = toU32Buffer(this.objectVroms.map(o => [o.vstart, o.vend]).flat());
@@ -267,7 +294,7 @@ class CustomAssetsBuilder {
     this.cg.define('CUSTOM_OBJECT_TABLE_VROM', objectTableVrom);
     this.cg.define('CUSTOM_OBJECT_TABLE_SIZE', this.objectVroms.length);
 
-    if (!process.env.ROLLUP) {
+    if (!process.env.BROWSER) {
       await this.cg.emit();
     }
   }

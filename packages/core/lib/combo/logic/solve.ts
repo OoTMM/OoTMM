@@ -8,6 +8,7 @@ import { Monitor } from '../monitor';
 import { Location, isLocationChestFairy, isLocationOtherFairy, isLocationRenewable, locationData, makeLocation } from './locations';
 import { Item, ItemGroups, ItemHelpers, Items, ItemsCount, PlayerItem, PlayerItems, itemByID, makePlayerItem } from '../items';
 import { exprTrue } from './expr';
+import { ItemProperties } from './item-properties';
 
 const VALIDATION_CRITICAL_ITEMS = [
   Items.MM_SONG_TIME,
@@ -287,6 +288,7 @@ export class LogicPassSolver {
       pool: PlayerItems;
       renewableJunks: PlayerItems;
       startingItems: PlayerItems;
+      itemProperties: ItemProperties;
     }
   ) {
     this.monitor = this.input.monitor;
@@ -442,7 +444,7 @@ export class LogicPassSolver {
        * Some items are both junk and important.
        * Right now it only concerns sticks.
        */
-      const junk = ItemHelpers.isJunk(pi.item);
+      const junk = this.input.itemProperties.junk.has(pi.item);
 
       if (pi.item === Items.NOTHING) {
         this.state.pools.nothing.set(pi, amount);
@@ -710,7 +712,7 @@ export class LogicPassSolver {
     for (const l of locations) {
       const item = this.state.items.get(l);
       if (item) {
-        if (ItemHelpers.isJunk(item.item)) {
+        if (this.input.itemProperties.junk.has(item.item)) {
           continue;
         }
         if (this.input.fixedLocations.has(l)) {
@@ -1015,7 +1017,10 @@ export class LogicPassSolver {
       throw new LogicError(`Unreachable locations: ${unreachableLocs.join(', ')}`);
     }
 
+    /* Try to find an item that unlocks at least two locations */
     let item: PlayerItem | null = null;
+    const availableLocsCount = [...this.pathfinderState.locations].filter(x => !this.state.items.has(x)).length;
+
     for (const candidate of VALIDATION_CRITICAL_ITEMS) {
       for (let playerId = 0; playerId < this.input.settings.players; ++playerId) {
         const pi = makePlayerItem(candidate, 0);
@@ -1026,6 +1031,29 @@ export class LogicPassSolver {
       }
       if (item)
         break;
+    }
+
+    if (item && availableLocsCount < 5) {
+      /* We want to place a validation critical item, but there are few locations left */
+
+      for (const pi of pool.keys()) {
+        /* Ignore critical renewables right now */
+        if (ItemHelpers.isItemCriticalRenewable(pi.item)) {
+          continue;
+        }
+
+        /* Pathfind to see how many locations this item unlocks */
+        const assumedItems: PlayerItems = new Map;
+        assumedItems.set(pi, 1);
+        const pathfindState = this.pathfinder.run(null, { recursive: true, items: this.state.items, assumedItems, stopAtGoal: true });
+        const newAvailableLocsCount = [...pathfindState.locations].filter(x => !this.state.items.has(x)).length;
+        const netGain = newAvailableLocsCount - availableLocsCount - 1;
+
+        if (netGain > 0) {
+          item = pi;
+          break;
+        }
+      }
     }
 
     if (!item) {

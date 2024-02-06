@@ -10,7 +10,6 @@ ALIGNED(16) OotSave gOotSave;
 ALIGNED(16) MmSave gMmSave;
 #endif
 
-ALIGNED(16) CustomSave gCustomSave;
 ALIGNED(16) SharedCustomSave gSharedCustomSave;
 
 void comboOnSaveLoad(void)
@@ -31,20 +30,7 @@ void comboOnSaveLoad(void)
     bzero(&net->cmdOut, sizeof(net->cmdOut));
     netMutexUnlock();
 
-    /* Child & Bottomless wallets */
-    gOotMaxRupees[0] = gOotExtraFlags.childWallet ? 99 : 0;
-    gOotMaxRupees[3] = gOotExtraFlags.bottomlessWallet ? 9999 : 999;
-    gMmMaxRupees[0] = gMmExtraFlags2.childWallet ? 99 : 0;
-    gMmMaxRupees[3] = gMmExtraFlags3.bottomlessWallet ? 9999 : 999;
-
-#if defined(GAME_OOT)
-    if (gOotExtraFlags.bottomlessWallet)
-#else
-    if (gMmExtraFlags3.bottomlessWallet)
-#endif
-        gWalletDigits[3] = 4;
-    else
-        gWalletDigits[3] = 3;
+    comboWalletRefresh();
 }
 
 static u16 computeChecksumOot(void* data, int len)
@@ -122,8 +108,7 @@ void comboReadForeignSave(void)
     comboReadWriteFlash(0x8000 + 0x8000 * fileIndex, &gMmSave, sizeof(gMmSave), OS_READ);
 #endif
 
-    comboReadWriteFlash(0x18000 + 0x4000 * fileIndex + CUSTOM_SAVE_OFFSET, &gCustomSave, sizeof(gCustomSave), OS_READ);
-    comboReadWriteFlash(0x18000 + 0x4000 * fileIndex + CUSTOM_SAVE_OFFSET_SHARED, &gSharedCustomSave, sizeof(gSharedCustomSave), OS_READ);
+    comboReadWriteFlash(0x18000 + 0x4000 * fileIndex, &gSharedCustomSave, sizeof(gSharedCustomSave), OS_READ);
 }
 
 static void saveFixup(void)
@@ -152,8 +137,7 @@ void comboWriteSave(void)
     saveMm();
 
     /* Write the custom save */
-    comboReadWriteFlash(0x18000 + 0x4000 * gSaveContext.fileIndex + CUSTOM_SAVE_OFFSET, &gCustomSave, sizeof(gCustomSave), OS_WRITE);
-    comboReadWriteFlash(0x18000 + 0x4000 * gSaveContext.fileIndex + CUSTOM_SAVE_OFFSET_SHARED, &gSharedCustomSave, sizeof(gSharedCustomSave), OS_WRITE);
+    comboReadWriteFlash(0x18000 + 0x4000 * gSaveContext.fileIndex, &gSharedCustomSave, sizeof(gSharedCustomSave), OS_WRITE);
 }
 
 static void copyRawSave(u32 dst, u32 src, int size)

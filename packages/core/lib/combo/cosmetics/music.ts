@@ -248,20 +248,31 @@ class MusicInjector {
     return size;
   }
 
+  private async injectMusicOotOffsetId(slot: number, seqOffset: number, seqLength: number, bankId: number) {
+    /* Patch the bank ID */
+    const bankVrom = 0xB89911 + 0xDD + (slot * 2);
+    const bankIdBuf = Buffer.alloc(1);
+    bankIdBuf.writeUInt8(bankId);
+    this.patch.addDataPatch('oot', bankVrom, bankIdBuf);
+
+    /* Add the pointer */
+    const seqTablePtr = 0x00B89AE0 + 0x10 * slot;
+    const seqTableData = toU32Buffer([seqOffset, seqLength]);
+    this.patch.addDataPatch('oot', seqTablePtr, seqTableData);
+  }
+
   private async injectMusicOot(slot: string, music: MusicFile) {
     /* Add the seq data in the rom */
     const offset = this.appendAudioSeq(this.audioSeq.oot, music.seq);
 
-    /* Patch the bank ID */
-    const bankVrom = 0xB89911 + 0xDD + (OOT_MUSICS[slot as keyof typeof OOT_MUSICS] * 2);
-    const bankIdBuf = Buffer.alloc(1);
-    bankIdBuf.writeUInt8(music.bankId);
-    this.patch.addDataPatch('oot', bankVrom, bankIdBuf);
+    /* Patch the music */
+    const slotId = OOT_MUSICS[slot as keyof typeof OOT_MUSICS];
+    await this.injectMusicOotOffsetId(slotId, offset, music.seq.length, music.bankId);
 
-    /* Add the pointer */
-    const seqTablePtr = 0x00B89AE0 + 0x10 * OOT_MUSICS[slot as keyof typeof OOT_MUSICS];
-    const seqTableData = toU32Buffer([offset, music.seq.length]);
-    this.patch.addDataPatch('oot', seqTablePtr, seqTableData);
+    /* Special cases */
+    if (slot === 'Fairy Fountain') {
+      await this.injectMusicOotOffsetId(0x57, offset, music.seq.length, music.bankId);
+    }
   }
 
   private async injectMusicMmOffsetId(slot: number, seqOffset: number, seqLength: number, bankId: number) {

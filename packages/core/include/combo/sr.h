@@ -37,5 +37,6 @@ extern ComboSilverRupeeData gSilverRupeeData[SR_MAX];
 void comboSilverRupeesInit(void);
 int comboSilverRupeesGetCount(int id);
 int comboSilverRupeesIncCount(GameState_Play* play, int id);
+void comboSrUpdate(GameState_Play* play);
 
 #endif

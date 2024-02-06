@@ -27,7 +27,7 @@ static s16 EnBox_Item(Actor* this, GameState_Play* play, s16 gi)
     EnBox_ItemQuery(&q, this, play, gi);
     comboItemOverride(&o, &q);
 
-    return o.gi;
+    return o.giRaw;
 }
 
 static s16 EnBox_GetGI(Actor* this)

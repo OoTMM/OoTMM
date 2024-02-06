@@ -1,4 +1,4 @@
-import fs from 'fs/promises';
+import { promises as fs } from 'fs';
 import YAML from 'yaml';
 
 import { SETTINGS, generate, importSettings } from "./combo";

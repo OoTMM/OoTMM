@@ -45,17 +45,17 @@ static int EnCow_GetCowID(Actor* cow, GameState_Play* play)
     case SCE_OOT_LINK_HOUSE:
         return 0;
     case SCE_OOT_GROTTOS:
-        return cow->position.x > 3000.f ? 1 : 7;
+        return cow->world.pos.x > 3000.f ? 1 : 7;
     case SCE_OOT_STABLE:
-        return cow->position.x < -50.f ? 2 : 3;
+        return cow->world.pos.x < -50.f ? 2 : 3;
     case SCE_OOT_RANCH_HOUSE_SILO:
-        return cow->position.z > -100.f ? 4 : 5;
+        return cow->world.pos.z > -100.f ? 4 : 5;
     case SCE_OOT_IMPA_HOUSE:
         return 6;
     case SCE_OOT_GERUDO_VALLEY:
         return 8;
     case SCE_OOT_INSIDE_JABU_JABU:
-        return 9;
+        return cow->room == 0x04 ? 9 : -1;
     }
     return -1;
 }
@@ -73,11 +73,11 @@ static int EnCow_GetCowID(Actor* cow, GameState_Play* play)
     switch (sceneId)
     {
     case SCE_MM_TERMINA_FIELD:
-        return cow->position.z > 930.f ? 0x13 : 0x14;
+        return cow->world.pos.z > 930.f ? 0x13 : 0x14;
     case SCE_MM_GREAT_BAY_COAST:
-        return cow->position.z > 930.f ? 0x15 : 0x16;
+        return cow->world.pos.z > 930.f ? 0x15 : 0x16;
     case SCE_MM_RANCH_HOUSE_BARN:
-        return cow->position.x < -100.f ? 0x10 : cow->position.z < -100.f ? 0x12 : 0x11;
+        return cow->world.pos.x < -100.f ? 0x10 : cow->world.pos.z < -100.f ? 0x12 : 0x11;
     case SCE_MM_BENEATH_THE_WELL:
         return 0x17;
     }
@@ -117,7 +117,10 @@ static void EnCow_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, f
 
 static int EnCow_HasGivenItem(Actor* this)
 {
-    if (Actor_HasParent(this))
+    Actor_Player* link;
+
+    link = GET_LINK(gPlay);
+    if (Actor_HasParent(this) && !(link->state & PLAYER_ACTOR_STATE_GET_ITEM))
     {
         if (sCowID != -1)
         {

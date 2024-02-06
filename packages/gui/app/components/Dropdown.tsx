@@ -1,6 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+
 import { Group } from './Group';
 import { Text } from './Text';
 
@@ -17,7 +18,7 @@ export const Dropdown = ({ label, options, value, tooltip, onChange }: DropdownP
       <Group direction='vertical'>
         <Group direction='horizontal'>
           <Text size='xl' className="label-main">{label}</Text>
-          {tooltip && <a className="tooltip-link" id={tooltip} href="#"><FontAwesomeIcon icon={solid('question-circle')}/></a>}
+          {tooltip && <a className="tooltip-link" id={tooltip} href="#"><FontAwesomeIcon icon={faQuestionCircle}/></a>}
         </Group>
         <select value={value} onChange={(e) => onChange(e.target.value)}>
           {options.map((option) => (

@@ -58,6 +58,7 @@ int CustomTriggers_GiveItemDirect(Actor_CustomTriggers* this, GameState_Play* pl
 int CustomTriggers_GiveItemNet(Actor_CustomTriggers* this, GameState_Play* play, s16 gi, u8 from, int flags)
 {
     ComboItemQuery q = ITEM_QUERY_INIT;
+    ComboItemOverride o;
 
     q.gi = gi;
     q.from = from;
@@ -69,7 +70,17 @@ int CustomTriggers_GiveItemNet(Actor_CustomTriggers* this, GameState_Play* play,
         q.gi = RECOVERY_HEART;
     }
 
-    return CustomTriggers_GiveItem(this, play, &q);
+    comboItemOverride(&o, &q);
+    if (isItemFastBuy(o.gi))
+    {
+        comboAddItemRawEx(play, &q, 0);
+        EnItem00_SpawnDecoy(play, o.gi);
+        return 1;
+    }
+    else
+    {
+        return CustomTriggers_GiveItem(this, play, &q);
+    }
 }
 
 int CustomTrigger_ItemSafe(Actor_CustomTriggers* this, GameState_Play* play)
@@ -148,6 +159,13 @@ static void CustomTriggers_HandleTrigger(Actor_CustomTriggers* this, GameState_P
 {
     NetContext* net;
     s16 gi;
+    u8 ovType;
+    u8 sceneId;
+    u8 roomId;
+    u8 id;
+    u8 isSamePlayer;
+    u8 isMarked;
+    u8 needsMarking;
 
     switch (gComboTriggersData.trigger)
     {
@@ -169,8 +187,49 @@ static void CustomTriggers_HandleTrigger(Actor_CustomTriggers* this, GameState_P
     case TRIGGER_NET:
         net = netMutexLock();
         gi = net->cmdIn.itemRecv.gi;
-        if (CustomTrigger_ItemSafeNet(this, play) && CustomTriggers_GiveItemNet(this, play, gi, net->cmdIn.itemRecv.playerFrom, net->cmdIn.itemRecv.flags))
+        isMarked = 0;
+        needsMarking = 0;
+        isSamePlayer = (net->cmdIn.itemRecv.playerFrom == gComboData.playerId);
+        if (isSamePlayer)
         {
+            if (!(net->cmdIn.itemRecv.flags & OVF_RENEW))
+            {
+                needsMarking = 1;
+                ovType = (net->cmdIn.itemRecv.key >> 24) & 0xff;
+                sceneId = (net->cmdIn.itemRecv.key >> 16) & 0xff;
+                roomId = (net->cmdIn.itemRecv.key >> 8) & 0xff;
+                id = net->cmdIn.itemRecv.key & 0xff;
+                if (net->cmdIn.itemRecv.game)
+                    isMarked = multiIsMarkedMm(play, ovType, sceneId, roomId, id);
+                else
+                    isMarked = multiIsMarkedOot(play, ovType, sceneId, roomId, id);
+            }
+            else
+            {
+                for (int i = 0; i < ARRAY_SIZE(gSharedCustomSave.netGiSkip); ++i)
+                {
+                    if (gSharedCustomSave.netGiSkip[i] == gi)
+                    {
+                        isMarked = 1;
+                        gSharedCustomSave.netGiSkip[i] = GI_NONE;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (isMarked || gi == GI_NOTHING || (CustomTrigger_ItemSafeNet(this, play) && CustomTriggers_GiveItemNet(this, play, gi, net->cmdIn.itemRecv.playerFrom, net->cmdIn.itemRecv.flags)))
+        {
+            /* Triggers the side-effect */
+            if (needsMarking)
+            {
+                if (net->cmdIn.itemRecv.game)
+                    multiSetMarkedMm(play, ovType, sceneId, roomId, id);
+                else
+                    multiSetMarkedOot(play, ovType, sceneId, roomId, id);
+            }
+
+            /* Mark as obtained on the network */
             bzero(&net->cmdIn, sizeof(net->cmdIn));
             gComboTriggersData.trigger = TRIGGER_NONE;
             gSaveLedgerBase++;
@@ -211,6 +270,14 @@ static void CustomTriggers_CheckTrigger(Actor_CustomTriggers* this, GameState_Pl
         return;
     }
 
+    /* Endgame Item Win */
+    if (gOotExtraFlags.endgameItemIsWin && !gOotExtraFlags.triforceWin)
+    {
+        gComboTriggersData.acc = 0;
+        gComboTriggersData.trigger = TRIGGER_TRIFORCE;
+        return;
+    }
+
     /* Net */
     net = netMutexLock();
     if (net->cmdIn.op == NET_OP_ITEM_RECV)
@@ -234,6 +301,7 @@ static void CustomTriggers_CheckTrigger(Actor_CustomTriggers* this, GameState_Pl
 
 static void CustomTriggers_Init(Actor_CustomTriggers* this, GameState_Play* play)
 {
+    this->base.room = 0xff;
 }
 
 static void CustomTriggers_Fini(Actor_CustomTriggers* this, GameState_Play* play)
@@ -248,9 +316,9 @@ static void CustomTriggers_Update(Actor_CustomTriggers* this, GameState_Play* pl
     link = GET_LINK(play);
     if (link)
     {
-        this->base.position.x = link->base.position.x;
-        this->base.position.y = link->base.position.y;
-        this->base.position.z = link->base.position.z;
+        this->base.world.pos.x = link->base.world.pos.x;
+        this->base.world.pos.y = link->base.world.pos.y;
+        this->base.world.pos.z = link->base.world.pos.z;
     }
 
     if (gComboTriggersData.trigger == TRIGGER_NONE)
@@ -264,18 +332,21 @@ void CustomTriggers_Spawn(GameState_Play* play)
     if (gActorCustomTriggers)
         return;
 
+    bzero(&gComboTriggersData, sizeof(gComboTriggersData));
+
     gActorCustomTriggers = (Actor_CustomTriggers*)SpawnActor(
-#if defined(GAME_OOT)
-        (char*)play + 0x1c24,
-#else
-        (char*)play + 0x1ca0,
-#endif
+        &play->actorCtx,
         play,
         AC_CUSTOM_TRIGGERS,
         0, 0, 0,
         0, 0, 0,
         0
     );
+}
+
+void CustomTriggers_Draw(Actor* this, GameState_Play* play)
+{
+    comboMultiDrawWisps(play);
 }
 
 ActorInit CustomTriggers_gActorInit = {
@@ -287,5 +358,5 @@ ActorInit CustomTriggers_gActorInit = {
     (ActorFunc)CustomTriggers_Init,
     (ActorFunc)CustomTriggers_Fini,
     (ActorFunc)CustomTriggers_Update,
-    NULL,
+    (ActorFunc)CustomTriggers_Draw,
 };

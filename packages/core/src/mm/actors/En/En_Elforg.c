@@ -45,7 +45,7 @@ static void EnElforg_Draw(Actor* this, GameState_Play* play)
     }
 
     angle = (play->gs.frameCount % kRotDivisor) * (1.f / kRotDivisor) * M_PI * 2.f;
-    ModelViewTranslate(this->position.x, this->position.y, this->position.z, MAT_SET);
+    ModelViewTranslate(this->world.pos.x, this->world.pos.y, this->world.pos.z, MAT_SET);
     ModelViewScale(0.35f, 0.35f, 0.35f, MAT_MUL);
     ModelViewRotateY(angle, MAT_MUL);
     comboDrawGI(play, this, o.gi, 0);
@@ -76,10 +76,13 @@ void EnElforg_DrawWrapper(Actor* this, GameState_Play* play)
 void EnElforg_GiveItem(GameState_Play* play, Actor* this)
 {
     ComboItemQuery q;
+    ComboItemOverride o;
 
     EnElforg_ItemQuery(&q, this, play);
+    comboItemOverride(&o, &q);
     PlayerDisplayTextBox(play, 0x579, NULL);
     comboAddItemEx(play, &q, 1);
+    comboPlayItemFanfare(o.gi, 1);
 
     // If it's a town fairy
     if ((this->variable & 0xF) == 3) {

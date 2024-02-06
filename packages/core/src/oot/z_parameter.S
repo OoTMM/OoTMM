@@ -19,18 +19,18 @@ Replaces:
   ADDIU   T7, T7, 0x7590
 */
 PATCH_START 0x80072E00
-  addiu   t9, zero, 0x0050
-  sh      t9, 0x0230 (v0)
+  li      t9,0x50
+  sh      t9,0x230(v0)
   jal     Magic_Decrement
-  nop
-  beqz    v0, .+0x2CC
-  nop
-  jal     Magic_ChateauActive
-  nop
+   nop
+  beqz    v0,.+0x2CC
+   nop
+  jal     comboIsChateauActive
+   nop
   bnez    v0, .+0x2BC
-  nop
+   nop
   jal     Magic_FlashMeterBorder
-  nop
+   nop
   b       .+0x2AC
-  nop
+   nop
 PATCH_END

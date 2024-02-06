@@ -1,0 +1,10 @@
+#include <combo.h>
+
+PATCH_GROUP PG_ER_WALLMASTERS
+
+PATCH_START 0x808726b8
+  j EnWallmas_TakePlayerEr
+   nop
+PATCH_END
+
+PATCH_GROUP_END

@@ -44,16 +44,6 @@
 #define SHOP_ITEM_9F                0x29
 #define SHOP_ITEM_SHIELD_MIRROR     0x2a
 
-void shopWriteFlag(int flag)
-{
-    gMmExtraShops |= 1 << flag;
-}
-
-int shopReadFlag(int flag)
-{
-    return !!(gMmExtraShops & (1 << flag));
-}
-
 u8 comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
 {
     switch (play->sceneId)

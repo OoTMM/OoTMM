@@ -1,20 +1,60 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/net.h>
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x1ac) = (h); } while (0)
+
+static void sendNetOwl(GameState_Play* play, int owlId)
+{
+    NetContext* net;
+    int npc;
+    s16 gi;
+
+    if (!comboConfig(CFG_MULTIPLAYER))
+        return;
+
+    if (owlId == 0xf)
+    {
+        gi = GI_MM_OWL_HIDDEN;
+        npc = NPC_MM_OWL_HIDDEN;
+    }
+    else
+    {
+        gi = GI_MM_OWL_GREAT_BAY + owlId;
+        npc = NPC_MM_OWL_GREAT_BAY + owlId;
+    }
+
+    net = netMutexLock();
+    netWaitCmdClear();
+    bzero(&net->cmdOut, sizeof(net->cmdOut));
+    net->cmdOut.op = NET_OP_ITEM_SEND;
+    net->cmdOut.itemSend.playerFrom = gComboData.playerId;
+    net->cmdOut.itemSend.playerTo = gComboData.playerId;
+    net->cmdOut.itemSend.game = 1;
+    net->cmdOut.itemSend.gi = gi;
+    net->cmdOut.itemSend.key = ((u32)OV_NPC << 24) | npc;
+    net->cmdOut.itemSend.flags = 0;
+    netMutexUnlock();
+
+    /* Mark the NPC as obtained */
+    BITMAP8_SET(gSharedCustomSave.mm.npc, npc);
+}
 
 void ObjWarpstone_GiveItem(Actor* this, GameState_Play* play)
 {
     Actor_Player* link;
     void (*next)(Actor*, GameState_Play*);
-    s16 id;
+    int npc;
+    s16 gi;
+    u8 id;
 
     id = this->variable & 0xf;
 
-    if (!comboConfig(CFG_MM_OWL_SHUFFLE))
+    if (!comboConfig(CFG_MM_OWL_SHUFFLE) || (id == 0xf))
     {
-        gMmOwlFlags |= (1 << id);
-        next = actorAddr(0x223, 0x80b92c48);
+        gMmOwlFlags |= ((u32)1 << id);
+        sendNetOwl(play, id);
+        next = actorAddr(AC_OBJ_WARPSTONE, 0x80b92c48);
         SET_HANDLER(this, next);
         next(this, play);
         return;
@@ -23,10 +63,13 @@ void ObjWarpstone_GiveItem(Actor* this, GameState_Play* play)
     link = GET_LINK(play);
     if (Actor_HasParent(this))
     {
+        /* Prevents duping */
+        EnableOwl(id);
+
         if (!(link->state & PLAYER_ACTOR_STATE_GET_ITEM))
         {
             this->attachedA = NULL;
-            next = actorAddr(0x223, 0x80b92c48);
+            next = actorAddr(AC_OBJ_WARPSTONE, 0x80b92c48);
             SET_HANDLER(this, next);
             next(this, play);
         }
@@ -34,7 +77,9 @@ void ObjWarpstone_GiveItem(Actor* this, GameState_Play* play)
     }
 
     /* Give the check */
-    comboGiveItemNpc(this, play, GI_MM_OWL_GREAT_BAY + id, NPC_MM_OWL_GREAT_BAY + id, 9999.f, 9999.f);
+    npc = NPC_MM_OWL_GREAT_BAY + id;
+    gi = GI_MM_OWL_GREAT_BAY + id;
+    comboGiveItemNpc(this, play, gi, npc, 9999.f, 9999.f);
 }
 
 static void ObjWarpstone_Text(GameState_Play* play)

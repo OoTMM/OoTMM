@@ -98,7 +98,7 @@ void comboDrawInit2D(Gfx** dl)
     gDPSetTextureFilter((*dl)++, G_TF_BILERP);
 }
 
-void comboDrawBlit2D(Gfx** dl, u32 segAddr, int w, int h, float x, float y, float scale)
+void comboDrawBlit2D_RGBA32(Gfx** dl, u32 segAddr, int w, int h, float x, float y, float scale)
 {
     float rScale;
 
@@ -109,6 +109,37 @@ void comboDrawBlit2D(Gfx** dl, u32 segAddr, int w, int h, float x, float y, floa
         (*dl)++,
         segAddr,
         G_IM_FMT_RGBA, G_IM_SIZ_32b,
+        w, h,
+        0, 0,
+        w - 1, h - 1,
+        0,
+        G_TX_WRAP, G_TX_WRAP,
+        G_TX_NOMASK, G_TX_NOMASK,
+        G_TX_NOLOD, G_TX_NOLOD
+    );
+    gDPTileSync((*dl)++);
+    gSPTextureRectangle(
+        (*dl)++,
+        x * 4, y * 4,
+        x * 4 + (w * 4) * scale, y * 4 + (h * 4) * scale,
+        0,
+        0, 0,
+        ((1 << 10) * rScale), ((1 << 10) * rScale)
+    );
+}
+
+
+void comboDrawBlit2D_RGBA16(Gfx** dl, u32 segAddr, int w, int h, float x, float y, float scale)
+{
+    float rScale;
+
+    rScale = 1.f / scale;
+    gDPPipeSync((*dl)++);
+    gDPTileSync((*dl)++);
+    gDPLoadTextureTile(
+        (*dl)++,
+        segAddr,
+        G_IM_FMT_RGBA, G_IM_SIZ_16b,
         w, h,
         0, 0,
         w - 1, h - 1,

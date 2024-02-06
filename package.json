@@ -7,28 +7,32 @@
   "scripts": {
     "start:core": "nx run @ootmm/core:start",
     "start:core:debug": "nx run @ootmm/core:start:debug",
-    "build": "nx run-many -t build",
-    "test": "nx run-many --target=test --output-style=stream-without-prefixes",
+    "build": "nx run @ootmm/gui:build",
+    "test": "nx run-many --output-style=stream-without-prefix --target=test",
     "serve": "nx run-many -t serve",
-    "typecheck": "nx run-many -t typecheck"
+    "typecheck": "tsc --module es2020 --jsx react --noEmit"
   },
   "dependencies": {
     "jszip": "^3.10.1",
-    "pako": "^2.1.0"
+    "pako": "^2.1.0",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "@nrwl/jest": "^15.9.2",
-    "@types/jest": "^29.5.1",
-    "@types/microtime": "^2.1.0",
-    "@types/node": "^18.15.12",
+    "glob": "^10.3.10",
+    "@nrwl/jest": "^17.2.8",
+    "@types/jest": "^29.5.11",
+    "@types/lodash": "^4.14.202",
+    "@types/microtime": "^2.1.2",
+    "@types/node": "^20.10.6",
     "@types/pako": "^2.0.3",
     "cross-env": "^7.0.3",
-    "jest": "^29.5.0",
+    "jest": "^29.7.0",
     "microtime": "^3.1.1",
-    "nx": "^15.9.2",
-    "ts-jest": "^29.1.0",
-    "ts-node": "^10.9.1",
-    "tslib": "^2.5.0",
-    "typescript": "^5.0.4"
+    "nx": "^17.2.8",
+    "ts-jest": "^29.1.1",
+    "tslib": "^2.6.2",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3",
+    "yaml": "^2.3.4"
   }
 }

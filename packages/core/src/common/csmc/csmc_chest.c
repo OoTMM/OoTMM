@@ -40,7 +40,7 @@ static const ChestCsmcData kCsmcData[] = {
     { 1, CUSTOM_CHEST_SPIDER_FRONT_ADDR, CUSTOM_CHEST_SPIDER_SIDE_ADDR },
     { 1, CUSTOM_CHEST_FAIRY_FRONT_ADDR, CUSTOM_CHEST_FAIRY_SIDE_ADDR },
     { 1, CUSTOM_CHEST_HEART_FRONT_ADDR, CUSTOM_CHEST_HEART_SIDE_ADDR },
-    { 0, CHEST_TEX_BOSS_KEY_FRONT, CHEST_TEX_BOSS_KEY_SIDE },
+    { 1, CUSTOM_CHEST_SOUL_FRONT_ADDR, CUSTOM_CHEST_SOUL_SIDE_ADDR },
 };
 
 static int csmcChestId(s16 gi)
@@ -99,7 +99,7 @@ void csmcChestInit(Actor* this, GameState_Play* play, s16 gi)
         if (play->sceneId == SCE_OOT_INSIDE_GANON_CASTLE)
         {
             if ((this->variable & 0x1f) == (gComboData.mq & (1 << MQ_GANON_CASTLE) ? 0x04 : 0x11))
-                this->position.z -= 10.f;
+                this->world.pos.z -= 10.f;
         }
 #endif
     }
@@ -110,8 +110,8 @@ void csmcChestInit(Actor* this, GameState_Play* play, s16 gi)
         /* Fix for spirit temple chest */
         if (play->sceneId == SCE_OOT_TEMPLE_SPIRIT && (this->variable & 0x1f) == 0x04)
         {
-            this->position.x += 40.f;
-            this->position.z += 40.f;
+            this->world.pos.x += 40.f;
+            this->world.pos.z += 40.f;
         }
 #else
         ActorSetScale(this, 0.0075f);

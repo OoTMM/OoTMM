@@ -9,9 +9,6 @@
 # define PRICES_SHOPS PRICES_MM_SHOPS
 #endif
 
-int shopReadFlag(int);
-void shopWriteFlag(int);
-
 int comboShopPrecond(GameState_Play* play, Actor_EnGirlA* girlA)
 {
     ComboItemQuery q;
@@ -22,7 +19,7 @@ int comboShopPrecond(GameState_Play* play, Actor_EnGirlA* girlA)
 
 void comboShopAfterBuy(GameState_Play* play, Actor_EnGirlA* girlA)
 {
-    shopWriteFlag(girlA->shopId);
+    BITMAP8_SET(gCustomSave.shops, girlA->shopId);
     comboShopUpdateItem(play, girlA);
 }
 

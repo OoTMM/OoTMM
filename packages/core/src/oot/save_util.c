@@ -87,13 +87,13 @@ void comboCreateSaveMM(void)
 
     /* Custom save things */
     initCustomSave();
-    bzero(&gCustomSave, sizeof(CustomSave));
+    bzero(&gSharedCustomSave, sizeof(gSharedCustomSave));
 
     /* Actual MM save */
     bzero(&gMmSave, sizeof(MmSave));
 
     /* Create some save data */
-    gMmSave.entranceIndex = 0xd800;
+    gMmSave.entranceIndex = ENTR_MM_CLOCK_TOWN;
     gMmSave.cutscene = 0;
     gMmSave.isFirstCycle = 1;
     gMmSave.hasTatl = 1;

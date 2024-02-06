@@ -52,7 +52,7 @@ void EnTimeTag_MoonCutscene(Actor* this, GameState_Play* play)
         gSave.time = 0x4000;
         play->nextEntrance = ((SCE_MM_MOON - 3) << 9);
         play->transitionTrigger = TRANS_TRIGGER_NORMAL;
-        play->transitionType = TRANS_TYPE_BLACK;
+        play->transitionType = TRANS_TYPE_FADE_BLACK;
     }
     else
     {

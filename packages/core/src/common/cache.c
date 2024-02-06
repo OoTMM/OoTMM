@@ -10,9 +10,6 @@ static u8    sCacheTTLs[CACHE_COUNT];
 
 void comboCacheClear(void)
 {
-    u64 imask;
-
-    imask = osSetIntMask(1);
     for (int i = 0; i < CACHE_COUNT; ++i)
     {
         free(sCacheAddrs[i]);
@@ -20,14 +17,10 @@ void comboCacheClear(void)
         sCacheVroms[i] = 0;
         sCacheTTLs[i] = 0;
     }
-    osSetIntMask(imask);
 }
 
 void comboCacheGarbageCollect(void)
 {
-    u64 imask;
-
-    imask = osSetIntMask(1);
     for (int i = 0; i < CACHE_COUNT; ++i)
     {
         if (sCacheTTLs[i])
@@ -41,7 +34,6 @@ void comboCacheGarbageCollect(void)
             }
         }
     }
-    osSetIntMask(imask);
 }
 
 static void* loadCacheFile(u32 vrom)
@@ -77,11 +69,9 @@ static void* loadCacheFile(u32 vrom)
 
 void* comboCacheGetFile(u32 vrom)
 {
-    u64 imask;
     void* addr;
 
     addr = NULL;
-    imask = osSetIntMask(1);
     for (int i = 0; i < CACHE_COUNT; ++i)
     {
         if (sCacheVroms[i] == vrom)
@@ -93,7 +83,6 @@ void* comboCacheGetFile(u32 vrom)
     }
     if (!addr)
         addr = loadCacheFile(vrom);
-    osSetIntMask(imask);
 
     return addr;
 }

@@ -3,16 +3,13 @@
 
 void EnZl4_Update6(Actor* actor, GameState_Play* play)
 {
-    TransitionContext* t;
-
     SetEventChk(EV_OOT_CHK_ZELDA_LETTER);
     SetEventChk(EV_OOT_CHK_SONG_ZELDA);
     ActorDestroy(actor);
 
-    t = &play->transition;
-    t->type = TRANS_TYPE_NORMAL;
-    t->gfx = TRANS_GFX_SHORTCUT;
-    t->entrance = 0x023d;
+    play->transitionTrigger = TRANS_TYPE_NORMAL;
+    play->transitionType = TRANS_GFX_SHORTCUT;
+    play->nextEntranceIndex = 0x023d;
 }
 
 void EnZl4_Update5(Actor* actor, GameState_Play* play)

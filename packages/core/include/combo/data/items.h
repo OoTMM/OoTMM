@@ -150,6 +150,9 @@
 #define ITEM_OOT_NUT_UPGRADE            0x9a
 #define ITEM_OOT_NUT_UPGRADE2           0x9b
 
+/* Custom */
+#define ITEM_OOT_MASK_BLAST             0x9c
+
 #define ITEM_MM_OCARINA_OF_TIME             0x00
 #define ITEM_MM_BOW                         0x01
 #define ITEM_MM_ARROW_FIRE                  0x02
@@ -294,6 +297,16 @@
 #define ITEM_MM_BOTTLE_GOLD_DUST            0xa1
 #define ITEM_MM_BOTTLE_SEAHORSE             0xa3
 
+#define ITEM_MM_CUSTOM_MIN                  0xae
+#define ITEM_MM_SPELL_WIND                  0xae
+#define ITEM_MM_SPELL_LOVE                  0xaf
+#define ITEM_MM_SPELL_FIRE                  0xb0
+#define ITEM_MM_BOOTS_IRON                  0xb1
+#define ITEM_MM_BOOTS_HOVER                 0xb2
+#define ITEM_MM_TUNIC_GORON                 0xb3
+#define ITEM_MM_TUNIC_ZORA                  0xb4
+// If we want to use values above 0xb5 we need to fix a lot of code related to magic arrows
+
 #define ITEM_NONE       0xff
 
 /* Item slots */
@@ -383,6 +396,7 @@
 #define XITEM_OOT_CHILD_ZORA_MASK       0x8
 #define XITEM_OOT_CHILD_GERUDO_MASK     0x9
 #define XITEM_OOT_CHILD_MASK_OF_TRUTH   0xa
+#define XITEM_OOT_CHILD_MASK_BLAST      0xb
 
 #define XITEM_OOT_ADULT_POCKET_EGG              0x0
 #define XITEM_OOT_ADULT_POCKET_CUCCO            0x1
@@ -396,17 +410,24 @@
 #define XITEM_OOT_ADULT_EYE_DROPS               0x9
 #define XITEM_OOT_ADULT_CLAIM_CHECK             0xa
 
-#define XITEM_MM_TRADE1_MOON_TEAR           0x0
-#define XITEM_MM_TRADE1_DEED_LAND           0x1
-#define XITEM_MM_TRADE1_DEED_SWAMP          0x2
-#define XITEM_MM_TRADE1_DEED_MOUNTAIN       0x3
-#define XITEM_MM_TRADE1_DEED_OCEAN          0x4
+#define XITEM_MM_TRADE1_SPELL_FIRE          0x0
+#define XITEM_MM_TRADE1_MOON_TEAR           0x1
+#define XITEM_MM_TRADE1_DEED_LAND           0x2
+#define XITEM_MM_TRADE1_DEED_SWAMP          0x3
+#define XITEM_MM_TRADE1_DEED_MOUNTAIN       0x4
+#define XITEM_MM_TRADE1_DEED_OCEAN          0x5
 
-#define XITEM_MM_TRADE2_ROOM_KEY        0x0
-#define XITEM_MM_TRADE2_LETTER_TO_MAMA  0x1
+#define XITEM_MM_TRADE2_SPELL_WIND      0x0
+#define XITEM_MM_TRADE2_BOOTS_IRON      0x1
+#define XITEM_MM_TRADE2_TUNIC_GORON     0x2
+#define XITEM_MM_TRADE2_ROOM_KEY        0x3
+#define XITEM_MM_TRADE2_LETTER_TO_MAMA  0x4
 
-#define XITEM_MM_TRADE3_LETTER_TO_KAFEI     0x0
-#define XITEM_MM_TRADE3_PENDANT_OF_MEMORIES 0x1
+#define XITEM_MM_TRADE3_SPELL_LOVE          0x0
+#define XITEM_MM_TRADE3_BOOTS_HOVER         0x1
+#define XITEM_MM_TRADE3_TUNIC_ZORA          0x2
+#define XITEM_MM_TRADE3_LETTER_TO_KAFEI     0x3
+#define XITEM_MM_TRADE3_PENDANT_OF_MEMORIES 0x4
 
 /* Shared defs */
 #if defined(GAME_OOT)
@@ -414,10 +435,12 @@
 # define ITS_NATIVE_BOMBS           ITS_OOT_BOMBS
 # define ITS_NATIVE_STICKS          ITS_OOT_STICKS
 # define ITS_NATIVE_NUTS            ITS_OOT_NUTS
+# define ITS_NATIVE_BOMBCHU         ITS_OOT_BOMBCHU
 # define ITS_FOREIGN_BOW            ITS_MM_BOW
 # define ITS_FOREIGN_BOMBS          ITS_MM_BOMBS
 # define ITS_FOREIGN_STICKS         ITS_MM_STICKS
 # define ITS_FOREIGN_NUTS           ITS_MM_NUTS
+# define ITS_FOREIGN_BOMBCHU        ITS_MM_BOMBCHU
 #endif
 
 #if defined(GAME_MM)
@@ -425,10 +448,29 @@
 # define ITS_NATIVE_BOMBS           ITS_MM_BOMBS
 # define ITS_NATIVE_STICKS          ITS_MM_STICKS
 # define ITS_NATIVE_NUTS            ITS_MM_NUTS
+# define ITS_NATIVE_BOMBCHU         ITS_MM_BOMBCHU
 # define ITS_FOREIGN_BOW            ITS_OOT_BOW
 # define ITS_FOREIGN_BOMBS          ITS_OOT_BOMBS
 # define ITS_FOREIGN_STICKS         ITS_OOT_STICKS
 # define ITS_FOREIGN_NUTS           ITS_OOT_NUTS
+# define ITS_FOREIGN_BOMBCHU        ITS_OOT_BOMBCHU
+#endif
+
+/* Common aliases */
+#if defined(GAME_OOT)
+# define ITEM_RUPEE_GREEN      ITEM_OOT_RUPEE_GREEN
+# define ITEM_RUPEE_BLUE       ITEM_OOT_RUPEE_BLUE
+# define ITEM_RUPEE_RED        ITEM_OOT_RUPEE_RED
+# define ITEM_RUPEE_PURPLE     ITEM_OOT_RUPEE_PURPLE
+# define ITEM_RECOVERY_HEART   ITEM_OOT_RECOVERY_HEART
+#endif
+
+#if defined(GAME_MM)
+# define ITEM_RUPEE_GREEN      ITEM_MM_RUPEE_GREEN
+# define ITEM_RUPEE_BLUE       ITEM_MM_RUPEE_BLUE
+# define ITEM_RUPEE_RED        ITEM_MM_RUPEE_RED
+# define ITEM_RUPEE_PURPLE     ITEM_MM_RUPEE_PURPLE
+# define ITEM_RECOVERY_HEART   ITEM_MM_RECOVERY_HEART
 #endif
 
 #endif

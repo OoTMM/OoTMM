@@ -18,7 +18,7 @@ void EnDekubaba_GiveItemDefaultRange(Actor* this, GameState_Play* play, s16 gi)
         dist = -dist;
     if (dist < 50.f)
     {
-        dist = this->position.y - link->base.position.y;
+        dist = this->world.pos.y - link->base.world.pos.y;
         if (dist < 0.f)
             dist = -dist;
         if (dist < 10.f)

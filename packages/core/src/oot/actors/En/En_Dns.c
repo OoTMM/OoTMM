@@ -100,35 +100,6 @@ static int EnDns_GetID(Actor* this)
     return 0;
 }
 
-static int EnDns_GetFlag(int flag)
-{
-    u32 flags;
-
-    if (flag >= 32)
-    {
-        flags = gOotExtraScrubsHi;
-        flag -= 32;
-    }
-    else
-    {
-        flags = gOotExtraScrubsLo;
-    }
-
-    return !!(flags & (1 << flag));
-}
-
-static void EnDns_SetFlag(int flag)
-{
-    if (flag >= 32)
-    {
-        gOotExtraScrubsHi |= (1 << (flag - 32));
-    }
-    else
-    {
-        gOotExtraScrubsLo |= (1 << flag);
-    }
-}
-
 static void EnDns_ItemQuery(ComboItemQuery* q, int id)
 {
     bzero(q, sizeof(*q));
@@ -138,7 +109,7 @@ static void EnDns_ItemQuery(ComboItemQuery* q, int id)
     q->ovFlags = OVF_PRECOND;
     q->id = id;
 
-    if (EnDns_GetFlag(id))
+    if (BITMAP8_GET(gCustomSave.scrubs, id))
         q->ovFlags |= OVF_RENEW;
 }
 
@@ -237,12 +208,14 @@ PATCH_CALL(0x80a75510, EnDns_TalkedTo);
 
 static int EnDns_HasGivenItem(Actor* this)
 {
+    Actor_Player* link;
     int id;
 
-    if (Actor_HasParent(this))
+    link = GET_LINK(gPlay);
+    if (Actor_HasParent(this) && !(link->state & PLAYER_ACTOR_STATE_GET_ITEM))
     {
         id = EnDns_GetID(this);
-        EnDns_SetFlag(id);
+        BITMAP8_SET(gCustomSave.scrubs, id);
         return 1;
     }
     return 0;

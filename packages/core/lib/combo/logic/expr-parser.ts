@@ -272,7 +272,7 @@ export class ExprParser {
     this.expect('(');
     const special = this.expect('identifier');
     this.expect(')');
-    return exprSpecial(this.settings, special);
+    return exprSpecial(special);
   }
 
   private parseExprOotTime(): Expr | undefined {
