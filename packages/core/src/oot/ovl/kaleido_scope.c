@@ -10,6 +10,8 @@ static int checkItemToggle(GameState_Play* play)
 {
     PauseContext* p;
     Actor_Player* link;
+    s16 itemId;
+    s16 itemCursor;
     int ret;
     int press;
 
@@ -17,28 +19,45 @@ static int checkItemToggle(GameState_Play* play)
     ret = 0;
     press = !!(play->gs.input[0].pressed.buttons & (L_TRIG | U_CBUTTONS));
 
-    if (p->cursorPoint[PAUSE_ITEM] == ITS_OOT_OCARINA && (popcount(gOotExtraItems.ocarina) >= 2))
+    itemId = ITEM_NONE;
+    itemCursor = -1;
+
+    if (p->cursorSpecialPos == 0)
+    {
+        switch (p->screen_idx)
+        {
+        case PAUSE_ITEM:
+            itemId = p->cursorItem[PAUSE_ITEM];
+            itemCursor = p->cursorPoint[PAUSE_ITEM];
+            break;
+        case PAUSE_EQUIP:
+            itemId = p->cursorItem[PAUSE_EQUIP];
+            break;
+        }
+    }
+
+    if (itemCursor == ITS_OOT_OCARINA && (popcount(gOotExtraItems.ocarina) >= 2))
     {
         ret = 1;
         if (press)
             comboToggleOcarina();
     }
 
-    if (p->cursorPoint[PAUSE_ITEM] == ITS_OOT_HOOKSHOT && (popcount(gOotExtraItems.hookshot) >= 2))
+    if (itemCursor == ITS_OOT_HOOKSHOT && (popcount(gOotExtraItems.hookshot) >= 2))
     {
         ret = 1;
         if (press)
             comboToggleHookshot();
     }
 
-    if (p->cursorPoint[PAUSE_ITEM] == ITS_OOT_TRADE_ADULT && (popcount(gOotExtraTrade.adult) >= 2))
+    if (itemCursor == ITS_OOT_TRADE_ADULT && (popcount(gOotExtraTrade.adult) >= 2))
     {
         ret = 1;
         if (press)
             comboToggleTradeAdult();
     }
 
-    if (p->cursorPoint[PAUSE_ITEM] == ITS_OOT_TRADE_CHILD && (popcount(gOotExtraTrade.child) >= 2))
+    if (itemCursor == ITS_OOT_TRADE_CHILD && (popcount(gOotExtraTrade.child) >= 2))
     {
         ret = 1;
         if (press)
@@ -50,13 +69,13 @@ static int checkItemToggle(GameState_Play* play)
         }
     }
 
-    if (p->cursorPoint[PAUSE_ITEM] >= ITS_OOT_BOTTLE && p->cursorPoint[PAUSE_ITEM] <= ITS_OOT_BOTTLE4 && gSave.inventory.items[p->cursorPoint[PAUSE_ITEM]] == ITEM_OOT_BIG_POE)
+    if (itemCursor >= ITS_OOT_BOTTLE && itemCursor <= ITS_OOT_BOTTLE4 && itemId == ITEM_OOT_BIG_POE)
     {
         ret = 1;
         if (press)
         {
-            gSave.inventory.items[p->cursorPoint[PAUSE_ITEM]] = ITEM_OOT_BOTTLE_EMPTY;
-            reloadSlotOot(play, p->cursorPoint[PAUSE_ITEM]);
+            gSave.inventory.items[itemCursor] = ITEM_OOT_BOTTLE_EMPTY;
+            reloadSlotOot(play, itemCursor);
 
             /* Reset one big poe */
             if (play->sceneId == SCE_OOT_HYRULE_FIELD)
@@ -66,14 +85,14 @@ static int checkItemToggle(GameState_Play* play)
         }
     }
 
-    if (p->cursorItem[PAUSE_EQUIP] >= ITEM_OOT_SHIELD_DEKU && p->cursorItem[PAUSE_EQUIP] <= ITEM_OOT_SHIELD_MIRROR && gSave.equips.equipment.shields == ((p->cursorItem[PAUSE_EQUIP] - ITEM_OOT_SHIELD_DEKU) + 1))
+    if (itemId >= ITEM_OOT_SHIELD_DEKU && itemId <= ITEM_OOT_SHIELD_MIRROR && gSave.equips.equipment.shields == ((itemId - ITEM_OOT_SHIELD_DEKU) + 1))
     {
         ret = 1;
         if (press)
             gSave.equips.equipment.shields = 0;
     }
 
-    if (gSave.age == AGE_CHILD && p->cursorItem[PAUSE_EQUIP]  == ITEM_OOT_SWORD_KOKIRI && gSave.equips.equipment.swords == 1)
+    if (gSave.age == AGE_CHILD && itemId == ITEM_OOT_SWORD_KOKIRI && gSave.equips.equipment.swords == 1)
     {
         if (!(GET_LINK(play)->state2 & PLAYER_ACTOR_STATE_WATER))
         {
@@ -115,7 +134,7 @@ void KaleidoSetCursorColor(GameState_Play* play)
     {
         switch (p->screen_idx)
         {
-        case 0:
+        case PAUSE_ITEM:
             /* Item select */
             r = 0xff;
             g = 0xff;
@@ -127,7 +146,7 @@ void KaleidoSetCursorColor(GameState_Play* play)
                 b = 0xff;
             }
             break;
-        case 3:
+        case PAUSE_EQUIP:
             /* Equipment */
             r = 0x00;
             g = 0x00;
