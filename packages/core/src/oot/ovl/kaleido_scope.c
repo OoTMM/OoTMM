@@ -707,7 +707,7 @@ void KaleidoScope_BeforeUpdate(GameState_Play* play)
             R_PAUSE_OWLWARP_ALPHA += 20;
             pauseCtx->infoPanelOffsetY += 10;
             pauseCtx->mapPageRoll -= 40.0f;
-            interfaceCtx->alpha.start += 63;
+            interfaceCtx->startAlpha += 63;
             VREG(88) -= 3;
             WREG(16) += WREG(25) / WREG(6);
             WREG(17) += WREG(26) / WREG(6);
@@ -715,7 +715,7 @@ void KaleidoScope_BeforeUpdate(GameState_Play* play)
 
             if (pauseCtx->mapPageRoll == 0)
             {
-                interfaceCtx->alpha.start = 255;
+                interfaceCtx->startAlpha = 255;
                 WREG(2) = 0;
                 pauseCtx->alpha = 255;
                 pauseCtx->changing = 0; // PAUSE_MAIN_STATE_IDLE;
@@ -761,7 +761,7 @@ void KaleidoScope_BeforeUpdate(GameState_Play* play)
                 }
                 pauseCtx->infoPanelOffsetY -= 10;
                 pauseCtx->mapPageRoll += 40.0f;
-                interfaceCtx->alpha.start -= 63;
+                interfaceCtx->startAlpha -= 63;
                 WREG(16) -= WREG(25) / WREG(6);
                 WREG(17) -= WREG(26) / WREG(6);
                 pauseCtx->alpha -= 63;
@@ -774,7 +774,7 @@ void KaleidoScope_BeforeUpdate(GameState_Play* play)
                 pauseCtx->itemPageRoll = pauseCtx->mapPageRoll = pauseCtx->questPageRoll = pauseCtx->maskPageRoll =
                     160.0f;
                 pauseCtx->namedItem = PAUSE_ITEM_NONE;
-                interfaceCtx->alpha.start = 0;
+                interfaceCtx->startAlpha = 0;
                 pauseCtx->screen_idx = gPrevPageIndex;
                 pauseCtx->cursorPoint[PAUSE_WORLD_MAP] = gPrevCursorPoint;
             }

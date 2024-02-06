@@ -55,7 +55,7 @@ typedef struct PauseContext
     f32             roll;
     u16             alpha;
     s16             offsetY;
-    char            unk_228[0x8];
+    char            unk_20c[0x8];
     s16             stickAdjX;
     s16             stickAdjY;
     s16             cursorPoint[5];
@@ -127,7 +127,7 @@ ASSERT_OFFSET(PauseContext, maskPageRoll,               0x200);
 ASSERT_OFFSET(PauseContext, roll,                       0x204);
 ASSERT_OFFSET(PauseContext, alpha,                      0x208);
 ASSERT_OFFSET(PauseContext, offsetY,                    0x20a);
-ASSERT_OFFSET(PauseContext, unk_228,                    0x20c);
+ASSERT_OFFSET(PauseContext, unk_20c,                    0x20c);
 ASSERT_OFFSET(PauseContext, stickAdjX,                  0x214);
 ASSERT_OFFSET(PauseContext, stickAdjY,                  0x216);
 ASSERT_OFFSET(PauseContext, cursorPoint,                0x218);
