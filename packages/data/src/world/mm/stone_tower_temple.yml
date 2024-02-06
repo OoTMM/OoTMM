@@ -114,18 +114,18 @@
   exits:
     "Stone Tower Temple Light Arrow Room": "has(MASK_DEKU) || can_use_light_arrows || (short_hook_anywhere && has_weapon && trick(MM_ST_UPDRAFTS)) || hookshot_anywhere"
   locations:
-    "Stone Tower Temple Wind Room Ledge Chest": "has(MASK_DEKU) || (short_hook_anywhere && trick(MM_ST_UPDRAFTS)) || hookshot_anywhere || (has_hover_boots && has_iron_boots)"
+    "Stone Tower Temple Wind Room Ledge Chest": "has(MASK_DEKU) || (trick(MM_ST_UPDRAFTS) && (short_hook_anywhere || (has_hover_boots && has_iron_boots))) || hookshot_anywhere"
     "Stone Tower Temple Wind Room Jail Chest": "(has(MASK_DEKU) || can_use_light_arrows || (short_hook_anywhere && has_weapon && trick(MM_ST_UPDRAFTS)) || hookshot_anywhere) && has_mask_goron"
     "Stone Tower Temple Pot Wind Room 1": "has(MASK_DEKU) || can_use_light_arrows || (short_hook_anywhere && has_weapon && trick(MM_ST_UPDRAFTS)) || hookshot_anywhere"
     "Stone Tower Temple Pot Wind Room 2": "has(MASK_DEKU) || can_use_light_arrows || (short_hook_anywhere && has_weapon && trick(MM_ST_UPDRAFTS)) || hookshot_anywhere"
     "Stone Tower Temple Pot Wind Room 3": "has(MASK_DEKU) || can_use_light_arrows || (short_hook_anywhere && has_weapon && trick(MM_ST_UPDRAFTS)) || hookshot_anywhere"
     "Stone Tower Temple Pot Wind Room 4": "has(MASK_DEKU) || can_use_light_arrows || (short_hook_anywhere && has_weapon && trick(MM_ST_UPDRAFTS)) || hookshot_anywhere"
-    "Stone Tower Temple Rupee Wind Room 1": "has(MASK_DEKU) || (short_hook_anywhere && trick(MM_ST_UPDRAFTS)) || hookshot_anywhere || (has_hover_boots && has_iron_boots)"
-    "Stone Tower Temple Rupee Wind Room 2": "has(MASK_DEKU) || (short_hook_anywhere && trick(MM_ST_UPDRAFTS)) || hookshot_anywhere || (has_hover_boots && has_iron_boots)"
-    "Stone Tower Temple Rupee Wind Room 3": "has(MASK_DEKU) || (short_hook_anywhere && trick(MM_ST_UPDRAFTS)) || hookshot_anywhere || (has_hover_boots && has_iron_boots)"
-    "Stone Tower Temple Rupee Wind Room 4": "has(MASK_DEKU) || (short_hook_anywhere && trick(MM_ST_UPDRAFTS)) || hookshot_anywhere || (has_hover_boots && has_iron_boots)"
-    "Stone Tower Temple Rupee Wind Room 5": "has(MASK_DEKU) || (short_hook_anywhere && trick(MM_ST_UPDRAFTS)) || hookshot_anywhere || (has_hover_boots && has_iron_boots)"
-    "Stone Tower Temple Rupee Wind Room 6": "has(MASK_DEKU) || (short_hook_anywhere && trick(MM_ST_UPDRAFTS)) || hookshot_anywhere || (has_hover_boots && has_iron_boots)"
+    "Stone Tower Temple Rupee Wind Room 1": "has(MASK_DEKU) || (trick(MM_ST_UPDRAFTS) && (short_hook_anywhere || (has_hover_boots && has_iron_boots))) || hookshot_anywhere"
+    "Stone Tower Temple Rupee Wind Room 2": "has(MASK_DEKU) || (trick(MM_ST_UPDRAFTS) && (short_hook_anywhere || (has_hover_boots && has_iron_boots))) || hookshot_anywhere"
+    "Stone Tower Temple Rupee Wind Room 3": "has(MASK_DEKU) || (trick(MM_ST_UPDRAFTS) && (short_hook_anywhere || (has_hover_boots && has_iron_boots))) || hookshot_anywhere"
+    "Stone Tower Temple Rupee Wind Room 4": "has(MASK_DEKU) || (trick(MM_ST_UPDRAFTS) && (short_hook_anywhere || (has_hover_boots && has_iron_boots))) || hookshot_anywhere"
+    "Stone Tower Temple Rupee Wind Room 5": "has(MASK_DEKU) || (trick(MM_ST_UPDRAFTS) && (short_hook_anywhere || (has_hover_boots && has_iron_boots))) || hookshot_anywhere"
+    "Stone Tower Temple Rupee Wind Room 6": "has(MASK_DEKU) || (trick(MM_ST_UPDRAFTS) && (short_hook_anywhere || (has_hover_boots && has_iron_boots))) || hookshot_anywhere"
 "Stone Tower Temple Light Arrow Room":
   dungeon: ST
   exits:
