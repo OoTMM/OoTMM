@@ -255,7 +255,22 @@ void MagicDark_DiamondDraw(Actor* thisx, GameState_Play* play) {
 
         this->actor.world.pos.x = player->bodyPartsPos[PLAYER_BODYPART_WAIST].x;
         this->actor.world.pos.z = player->bodyPartsPos[PLAYER_BODYPART_WAIST].z;
-        f32 y = player->base.world.pos.y + Player_GetHeight(player) * 0.5f;
+        f32 y;
+        if (player->transformation == MM_PLAYER_FORM_GORON)
+        {
+            if (player->state3 & 0x00001000) // PLAYER_STATE3_GORON_ROLL
+            {
+                y = player->base.world.pos.y + Player_GetHeight(player) * 0.5f;
+            }
+            else
+            {
+                y = player->bodyPartsPos[PLAYER_BODYPART_WAIST].y + 10.0f; // Goron's waist is really low
+            }
+        }
+        else
+        {
+            y = player->bodyPartsPos[PLAYER_BODYPART_WAIST].y;
+        }
         heightDiff = y - this->actor.world.pos.y;
         if (heightDiff < -2.0f) {
             this->actor.world.pos.y = y + 2.0f;
