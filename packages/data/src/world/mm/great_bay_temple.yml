@@ -44,7 +44,7 @@
     MAGIC: "true"
   locations:
     "Great Bay Temple SF Central Room Barrel": "true"
-    "Great Bay Temple SF Central Room Underwater Pot": "has_mask_zora || (has(MASK_GREAT_FAIRY) && (has_arrows || (underwater_walking_strict && has_mask_blast))) || (underwater_walking && (has_mask_blast || has_arrows) && trick(MM_GBT_CENTER_POT_IRONS))"
+    "Great Bay Temple SF Central Room Underwater Pot": "has_mask_zora || (has(MASK_GREAT_FAIRY) && (has_arrows || (underwater_walking_strict && has_mask_blast))) || (underwater_walking_strict && (has_mask_blast || has_arrows) && trick(MM_GBT_CENTER_POT_IRONS))"
     "Great Bay Temple Pot Central Room 1": "true"
     "Great Bay Temple Pot Central Room 2": "true"
 "Great Bay Temple Map Room":
