@@ -115,7 +115,12 @@ void comboDpadDraw(GameState_Play* play)
         return;
 
     reloadIcons(play);
+
+#if defined(GAME_OOT)
+    alpha = (u8)play->interfaceCtx.healthAlpha;
+#else
     alpha = (u8)play->interfaceCtx.alpha.health;
+#endif
 
     /* Init */
     OPEN_DISPS(play->gs.gfx);

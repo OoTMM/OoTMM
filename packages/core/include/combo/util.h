@@ -4,7 +4,8 @@
 #include <stddef.h>
 #include <combo/types.h>
 
-#define ASSERT_OFFSET(s,f,o) _Static_assert(offsetof(s,f) == o, "Offset of " #f " in " #s " is not " #o)
+#define ASSERT_SIZE(s, sz)      _Static_assert(sizeof(s) == sz, #s " size is wrong")
+#define ASSERT_OFFSET(s,f,o)    _Static_assert(offsetof(s,f) == o, "Offset of " #f " in " #s " is not " #o)
 
 #define BITMAP8_GET(m,b)   (!!((m)[(b) >> 3] & (1 << ((b) & 0x7))))
 #define BITMAP8_SET(m,b)   ((m)[(b) >> 3] |= (1 << ((b) & 0x7)))

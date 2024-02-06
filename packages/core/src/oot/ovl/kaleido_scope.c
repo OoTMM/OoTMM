@@ -17,28 +17,28 @@ static int checkItemToggle(GameState_Play* play)
     ret = 0;
     press = !!(play->gs.input[0].pressed.buttons & (L_TRIG | U_CBUTTONS));
 
-    if (p->item_cursor == ITS_OOT_OCARINA && (popcount(gOotExtraItems.ocarina) >= 2))
+    if (p->cursorPoint[PAUSE_ITEM] == ITS_OOT_OCARINA && (popcount(gOotExtraItems.ocarina) >= 2))
     {
         ret = 1;
         if (press)
             comboToggleOcarina();
     }
 
-    if (p->item_cursor == ITS_OOT_HOOKSHOT && (popcount(gOotExtraItems.hookshot) >= 2))
+    if (p->cursorPoint[PAUSE_ITEM] == ITS_OOT_HOOKSHOT && (popcount(gOotExtraItems.hookshot) >= 2))
     {
         ret = 1;
         if (press)
             comboToggleHookshot();
     }
 
-    if (p->item_cursor == ITS_OOT_TRADE_ADULT && (popcount(gOotExtraTrade.adult) >= 2))
+    if (p->cursorPoint[PAUSE_ITEM] == ITS_OOT_TRADE_ADULT && (popcount(gOotExtraTrade.adult) >= 2))
     {
         ret = 1;
         if (press)
             comboToggleTradeAdult();
     }
 
-    if (p->item_cursor == ITS_OOT_TRADE_CHILD && (popcount(gOotExtraTrade.child) >= 2))
+    if (p->cursorPoint[PAUSE_ITEM] == ITS_OOT_TRADE_CHILD && (popcount(gOotExtraTrade.child) >= 2))
     {
         ret = 1;
         if (press)
@@ -50,13 +50,13 @@ static int checkItemToggle(GameState_Play* play)
         }
     }
 
-    if (p->item_cursor >= ITS_OOT_BOTTLE && p->item_cursor <= ITS_OOT_BOTTLE4 && gSave.inventory.items[p->item_cursor] == ITEM_OOT_BIG_POE)
+    if (p->cursorPoint[PAUSE_ITEM] >= ITS_OOT_BOTTLE && p->cursorPoint[PAUSE_ITEM] <= ITS_OOT_BOTTLE4 && gSave.inventory.items[p->cursorPoint[PAUSE_ITEM]] == ITEM_OOT_BIG_POE)
     {
         ret = 1;
         if (press)
         {
-            gSave.inventory.items[p->item_cursor] = ITEM_OOT_BOTTLE_EMPTY;
-            reloadSlotOot(play, p->item_cursor);
+            gSave.inventory.items[p->cursorPoint[PAUSE_ITEM]] = ITEM_OOT_BOTTLE_EMPTY;
+            reloadSlotOot(play, p->cursorPoint[PAUSE_ITEM]);
 
             /* Reset one big poe */
             if (play->sceneId == SCE_OOT_HYRULE_FIELD)
@@ -66,14 +66,14 @@ static int checkItemToggle(GameState_Play* play)
         }
     }
 
-    if (p->equip_item >= ITEM_OOT_SHIELD_DEKU && p->equip_item <= ITEM_OOT_SHIELD_MIRROR && gSave.equips.equipment.shields == (p->equip_item-ITEM_OOT_SHIELD_DEKU)+1)
+    if (p->cursorItem[PAUSE_EQUIP] >= ITEM_OOT_SHIELD_DEKU && p->cursorItem[PAUSE_EQUIP] <= ITEM_OOT_SHIELD_MIRROR && gSave.equips.equipment.shields == ((p->cursorItem[PAUSE_EQUIP] - ITEM_OOT_SHIELD_DEKU) + 1))
     {
         ret = 1;
         if (press)
             gSave.equips.equipment.shields = 0;
     }
 
-    if (gSave.age == AGE_CHILD && p->equip_item == ITEM_OOT_SWORD_KOKIRI && gSave.equips.equipment.swords == 1)
+    if (gSave.age == AGE_CHILD && p->cursorItem[PAUSE_EQUIP]  == ITEM_OOT_SWORD_KOKIRI && gSave.equips.equipment.swords == 1)
     {
         if (!(GET_LINK(play)->state2 & PLAYER_ACTOR_STATE_WATER))
         {
@@ -111,7 +111,7 @@ void KaleidoSetCursorColor(GameState_Play* play)
     comboDpadUpdate(play);
 
     /* Not on Z/R */
-    if (p->cursor_pos == 0)
+    if (p->cursorSpecialPos == 0)
     {
         switch (p->screen_idx)
         {
@@ -486,34 +486,34 @@ static void KaleidoScope_UpdateSoaringMapCursor(GameState_Play* play)
     s16 oldCursorPoint;
 
     pauseCtx->cursorColorSet = 4; // PAUSE_CURSOR_COLOR_SET_BLUE;
-    oldCursorPoint = pauseCtx->world_map_cursor;
+    oldCursorPoint = pauseCtx->cursorPoint[PAUSE_WORLD_MAP];
 
     if (pauseCtx->stickAdjX > 30) {
         sCursorShrinkRate = 4.0f;
         do {
-            pauseCtx->world_map_cursor++;
-            if (pauseCtx->world_map_cursor > OWL_WARP_STONE_TOWER)
+            pauseCtx->cursorPoint[PAUSE_WORLD_MAP]++;
+            if (pauseCtx->cursorPoint[PAUSE_WORLD_MAP] > OWL_WARP_STONE_TOWER)
             {
-                pauseCtx->world_map_cursor = OWL_WARP_GREAT_BAY_COAST;
+                pauseCtx->cursorPoint[PAUSE_WORLD_MAP] = OWL_WARP_GREAT_BAY_COAST;
             }
-        } while (!pauseCtx->worldMapPoints[pauseCtx->world_map_cursor]);
+        } while (!pauseCtx->worldMapPoints[pauseCtx->cursorPoint[PAUSE_WORLD_MAP]]);
     } else if (pauseCtx->stickAdjX < -30) {
         sCursorShrinkRate = 4.0f;
         do {
-            pauseCtx->world_map_cursor--;
-            if (pauseCtx->world_map_cursor < OWL_WARP_GREAT_BAY_COAST)
+            pauseCtx->cursorPoint[PAUSE_WORLD_MAP]--;
+            if (pauseCtx->cursorPoint[PAUSE_WORLD_MAP] < OWL_WARP_GREAT_BAY_COAST)
             {
-                pauseCtx->world_map_cursor = OWL_WARP_STONE_TOWER;;
+                pauseCtx->cursorPoint[PAUSE_WORLD_MAP] = OWL_WARP_STONE_TOWER;;
             }
-        } while (!pauseCtx->worldMapPoints[pauseCtx->world_map_cursor]);
+        } while (!pauseCtx->worldMapPoints[pauseCtx->cursorPoint[PAUSE_WORLD_MAP]]);
     }
 
     //! TODO: Is the `0xA4` here related to `0xA3` being the last recored item in the `ItemId` enum?
-    pauseCtx->map_item = sOwlWarpPauseItems[pauseCtx->world_map_cursor] - 0xA4;
+    pauseCtx->cursorItem[PAUSE_MAP] = sOwlWarpPauseItems[pauseCtx->cursorPoint[PAUSE_WORLD_MAP]] - 0xA4;
     // Used as cursor vtxIndex
-    pauseCtx->map_hilite = 31 + pauseCtx->world_map_cursor;
+    pauseCtx->cursorSlot[PAUSE_MAP] = 31 + pauseCtx->cursorPoint[PAUSE_WORLD_MAP];
 
-    if (oldCursorPoint != pauseCtx->world_map_cursor) {
+    if (oldCursorPoint != pauseCtx->cursorPoint[PAUSE_WORLD_MAP]) {
         PlaySound(0x4809); // NA_SE_SY_CURSOR
     }
 }
@@ -548,10 +548,10 @@ static void KaleidoScope_UpdateOwlWarpNamePanel(GameState_Play* play)
     u16 texIndex;
 
     pauseCtx = &play->pauseCtx;
-    if ((pauseCtx->item_id != pauseCtx->map_item) || ((pauseCtx->screen_idx == 1) && (pauseCtx->cursor_pos != 0)))
+    if ((pauseCtx->namedItem != pauseCtx->cursorItem[PAUSE_MAP]) || ((pauseCtx->screen_idx == 1) && (pauseCtx->cursorSpecialPos != 0)))
     {
-        pauseCtx->item_id = pauseCtx->map_item;
-        texIndex = pauseCtx->item_id;
+        pauseCtx->namedItem = pauseCtx->cursorItem[PAUSE_MAP];
+        texIndex = pauseCtx->namedItem;
 
         osCreateMesgQueue(&pauseCtx->loadQueue, &pauseCtx->loadMsg, 1);
 
@@ -665,8 +665,8 @@ void KaleidoScope_BeforeUpdate(GameState_Play* play)
             sUnpausedButtonStatus[3] = gSaveContext.buttonStatus[3];
             sUnpausedButtonStatus[4] = gSaveContext.buttonStatus[4];
 
-            pauseCtx->map_x = 0;
-            pauseCtx->map_hilite = pauseCtx->map_cursor = pauseCtx->dungeonMapSlot = VREG(30) + 3;
+            pauseCtx->cursorX[PAUSE_MAP] = 0;
+            pauseCtx->cursorSlot[PAUSE_MAP] = pauseCtx->cursorPoint[PAUSE_MAP] = pauseCtx->dungeonMapSlot = VREG(30) + 3;
 
             WREG(16) = -175;
             WREG(17) = 155;
@@ -686,7 +686,7 @@ void KaleidoScope_BeforeUpdate(GameState_Play* play)
             dest = PALIGN(dest + size, 16);
 
             pauseCtx->nameSegment = dest;
-            LoadMapName(dest, pauseCtx->world_map_cursor);
+            LoadMapName(dest, pauseCtx->cursorPoint[PAUSE_WORLD_MAP]);
             dest = PALIGN(dest + 0xA00, 16);
 
             u32* srcMapPageBgTextures = (u32*)OverlayAddr(0x80829B74);
@@ -707,7 +707,7 @@ void KaleidoScope_BeforeUpdate(GameState_Play* play)
             R_PAUSE_OWLWARP_ALPHA += 20;
             pauseCtx->infoPanelOffsetY += 10;
             pauseCtx->mapPageRoll -= 40.0f;
-            interfaceCtx->alpha.start += 63;
+            interfaceCtx->startAlpha += 63;
             VREG(88) -= 3;
             WREG(16) += WREG(25) / WREG(6);
             WREG(17) += WREG(26) / WREG(6);
@@ -715,11 +715,11 @@ void KaleidoScope_BeforeUpdate(GameState_Play* play)
 
             if (pauseCtx->mapPageRoll == 0)
             {
-                interfaceCtx->alpha.start = 255;
+                interfaceCtx->startAlpha = 255;
                 WREG(2) = 0;
                 pauseCtx->alpha = 255;
                 pauseCtx->changing = 0; // PAUSE_MAIN_STATE_IDLE;
-                pauseCtx->cursor_pos = 0;
+                pauseCtx->cursorSpecialPos = 0;
                 pauseCtx->state = PAUSE_STATE_OWLWARP_SELECT;
                 R_PAUSE_OWLWARP_ALPHA = 120;
             }
@@ -743,7 +743,7 @@ void KaleidoScope_BeforeUpdate(GameState_Play* play)
                 pauseCtx->state = PAUSE_STATE_OWLWARP_6;
                 WREG(2) = -6240;
                 func_800C7200(0);
-                gSoaringIndexSelected = (u8)pauseCtx->world_map_cursor;
+                gSoaringIndexSelected = (u8)pauseCtx->cursorPoint[PAUSE_WORLD_MAP];
                 PlaySound(0x4808); // NA_SE_SY_DECIDE
             }
             else
@@ -761,7 +761,7 @@ void KaleidoScope_BeforeUpdate(GameState_Play* play)
                 }
                 pauseCtx->infoPanelOffsetY -= 10;
                 pauseCtx->mapPageRoll += 40.0f;
-                interfaceCtx->alpha.start -= 63;
+                interfaceCtx->startAlpha -= 63;
                 WREG(16) -= WREG(25) / WREG(6);
                 WREG(17) -= WREG(26) / WREG(6);
                 pauseCtx->alpha -= 63;
@@ -773,10 +773,10 @@ void KaleidoScope_BeforeUpdate(GameState_Play* play)
                 pauseCtx->state = 0x13; // PAUSE_STATE_UNPAUSE_CLOSE;
                 pauseCtx->itemPageRoll = pauseCtx->mapPageRoll = pauseCtx->questPageRoll = pauseCtx->maskPageRoll =
                     160.0f;
-                pauseCtx->item_id = PAUSE_ITEM_NONE;
-                interfaceCtx->alpha.start = 0;
+                pauseCtx->namedItem = PAUSE_ITEM_NONE;
+                interfaceCtx->startAlpha = 0;
                 pauseCtx->screen_idx = gPrevPageIndex;
-                pauseCtx->world_map_cursor = gPrevCursorPoint;
+                pauseCtx->cursorPoint[PAUSE_WORLD_MAP] = gPrevCursorPoint;
             }
             break;
     }
@@ -1043,7 +1043,7 @@ static void KaleidoScope_DrawOwlWarpInfoPanel(GameState_Play* play)
 
     pauseCtx->infoPanelVtx[5].v.ob[0] = pauseCtx->infoPanelVtx[7].v.ob[0] = pauseCtx->infoPanelVtx[4].v.ob[0] + 72;
 
-    if ((pauseCtx->cursor_pos == PAUSE_CURSOR_PAGE_LEFT) && (pauseCtx->changing == PAUSE_MAIN_STATE_IDLE)) {
+    if ((pauseCtx->cursorSpecialPos == PAUSE_CURSOR_PAGE_LEFT) && (pauseCtx->changing == PAUSE_MAIN_STATE_IDLE)) {
         pauseCtx->infoPanelVtx[8].v.ob[0] = pauseCtx->infoPanelVtx[10].v.ob[0] = WREG(16);
 
         pauseCtx->infoPanelVtx[9].v.ob[0] = pauseCtx->infoPanelVtx[11].v.ob[0] = pauseCtx->infoPanelVtx[8].v.ob[0] + 24;
@@ -1063,7 +1063,7 @@ static void KaleidoScope_DrawOwlWarpInfoPanel(GameState_Play* play)
             pauseCtx->infoPanelVtx[8].v.ob[1] - 26;
     }
 
-    if ((pauseCtx->cursor_pos == PAUSE_CURSOR_PAGE_RIGHT) && (pauseCtx->changing == PAUSE_MAIN_STATE_IDLE)) {
+    if ((pauseCtx->cursorSpecialPos == PAUSE_CURSOR_PAGE_RIGHT) && (pauseCtx->changing == PAUSE_MAIN_STATE_IDLE)) {
         pauseCtx->infoPanelVtx[12].v.ob[0] = pauseCtx->infoPanelVtx[14].v.ob[0] = WREG(17);
 
         pauseCtx->infoPanelVtx[13].v.ob[0] = pauseCtx->infoPanelVtx[15].v.ob[0] =
@@ -1103,8 +1103,8 @@ static void KaleidoScope_DrawOwlWarpInfoPanel(GameState_Play* play)
 
     gSPDisplayList(POLY_OPA_DISP++, 0x080885C0); // gItemNamePanelDL
 
-    if (pauseCtx->cursor_pos != 0) {
-        j = (pauseCtx->cursor_pos * 4) - 32;
+    if (pauseCtx->cursorSpecialPos != 0) {
+        j = (pauseCtx->cursorSpecialPos * 4) - 32;
         pauseCtx->cursorVtx[0].v.ob[0] = pauseCtx->infoPanelVtx[j].v.ob[0];
         pauseCtx->cursorVtx[0].v.ob[1] = pauseCtx->infoPanelVtx[j].v.ob[1];
     }
@@ -1121,7 +1121,7 @@ static void KaleidoScope_DrawOwlWarpInfoPanel(GameState_Play* play)
                       ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, PRIMITIVE, 0);
     gDPSetEnvColor(POLY_OPA_DISP++, 20, 30, 40, 0);
 
-    if ((pauseCtx->state == PAUSE_STATE_OWLWARP_SELECT) && (pauseCtx->item_id != PAUSE_ITEM_NONE) &&
+    if ((pauseCtx->state == PAUSE_STATE_OWLWARP_SELECT) && (pauseCtx->namedItem != PAUSE_ITEM_NONE) &&
         (pauseCtx->nameDisplayTimer < 40)) {
         pauseCtx->infoPanelVtx[16].v.ob[0] = pauseCtx->infoPanelVtx[18].v.ob[0] = -63;
 
@@ -1268,15 +1268,15 @@ static void KaleidoScope_UpdateCursorSize(GameState_Play* play)
     pauseCtx->cursorVtx[0].v.ob[1] = pauseCtx->cursorVtx[1].v.ob[1] = 8;
     pauseCtx->cursorVtx[2].v.ob[1] = pauseCtx->cursorVtx[3].v.ob[1] = pauseCtx->cursorVtx[0].v.ob[1] - 16;
 
-    if (pauseCtx->cursor_pos == 0) {
-        sCursorX = sOwlWarpWorldMapCursorsX[pauseCtx->world_map_cursor] - 4.0f;
-        sCursorY = sOwlWarpWorldMapCursorsY[pauseCtx->world_map_cursor] + 4.0f;
+    if (pauseCtx->cursorSpecialPos == 0) {
+        sCursorX = sOwlWarpWorldMapCursorsX[pauseCtx->cursorPoint[PAUSE_WORLD_MAP]] - 4.0f;
+        sCursorY = sOwlWarpWorldMapCursorsY[pauseCtx->cursorPoint[PAUSE_WORLD_MAP]] + 4.0f;
         sCursorHeight = 7.5f;
         sCursorWidth = 7.5f;
 
         // sCursorSpinPhase += 0x300;
     } else {
-        if (pauseCtx->cursor_pos == PAUSE_CURSOR_PAGE_LEFT) {
+        if (pauseCtx->cursorSpecialPos == PAUSE_CURSOR_PAGE_LEFT) {
             sCursorX = -93.0f;
         } else { // PAUSE_CURSOR_PAGE_RIGHT
             sCursorX = 101.0f;
