@@ -95,12 +95,17 @@ void    ClearSwitchFlag(GameState_Play* play, int flag);
 void    SetRoomClear(GameState_Play* play, int flag);
 u32     GetRoomClearFlag(GameState_Play* play, int flag);
 
+void Sleep_Usec(u32 delay);
+
 void Audio_PlayFanfare(int fanfareId);
 
 void Actor_ProcessInitChain(Actor* this, void* data);
 
 void DMARomToRam(u32 romAddr, void* dramAddr, u32 size);
 void DmaCompressed(u32 pstart, void* dst, u32 size);
+#if defined(GAME_OOT)
+void _DmaCompressed(u32 pstart, void* dst, u32 size);
+#endif
 
 void ConvertMatrix(const float* in, u16* out);
 void MatrixRotation(u16 angle, int unk_1);

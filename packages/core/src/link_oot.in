@@ -218,7 +218,8 @@ DrawHUD = 0x800756f0;
 
 gDmaData = 0x8000b140;
 
-DmaCompressed = 0x80001254;
+Sleep_Usec = 0x80001c7c;
+_DmaCompressed = 0x80001254;
 osSetThreadPri = 0x80004480;
 
 ParseSceneRoomHeaders_SoundSettings = 0x80082478;

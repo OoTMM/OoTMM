@@ -2,6 +2,24 @@
 #include <combo/custom.h>
 #include <combo/dma.h>
 
+#if defined(GAME_OOT)
+/* OoT doesn't have reentrancy in DmaCompressed, implement it */
+void DmaCompressed(u32 pstart, void* dst, u32 size)
+{
+    static volatile u32 sDecompressInProgress;
+
+    for (;;)
+    {
+        if (sDecompressInProgress == 0)
+            break;
+        Sleep_Usec(10);
+    }
+    sDecompressInProgress = 1;
+    _DmaCompressed(pstart, dst, size);
+    sDecompressInProgress = 0;
+}
+#endif
+
 static int dmaLookupNative(DmaEntry* buf, u32 vromAddr)
 {
     DmaEntry* e;
