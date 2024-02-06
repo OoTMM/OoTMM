@@ -1543,6 +1543,7 @@ static int addItemStrayFairy(GameState_Play* play, u8 itemId, s16 gi, u16 param)
         param = comboStrayFairyIndex();
 #endif
 
+    addHealthMm(play, 3);
     if (param == 4)
     {
         MM_SET_EVENT_WEEK(EV_MM_WEEK_TOWN_FAIRY);
