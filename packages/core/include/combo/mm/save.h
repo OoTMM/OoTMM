@@ -43,9 +43,10 @@ typedef struct
     u32     unused:9;
     u32     dekuNut:3;
     u32     dekuStick:3;
-    u32     unused2:3;
+    u32     unused2:3; // bullet bag
     u32     wallet:2;
-    u32     unused3:6;
+    u32     scale:3;
+    u32     strength:3;
     u32     bombBag:3;
     u32     quiver:3;
 }
