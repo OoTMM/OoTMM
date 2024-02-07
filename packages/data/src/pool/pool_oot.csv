@@ -1555,6 +1555,13 @@ MQ Deku Tree Grass Slingshot Room Back 1,                   grass,          NONE
 MQ Deku Tree Grass Slingshot Room Back 2,                   grass,          NONE,                 INSIDE_DEKU_TREE,               0x00a01,                    DEKU_SEEDS_5
 MQ Deku Tree Grass Slingshot Room Front 1,                  grass,          NONE,                 INSIDE_DEKU_TREE,               0x00a02,                    RECOVERY_HEART
 MQ Deku Tree Grass Slingshot Room Front 2,                  grass,          NONE,                 INSIDE_DEKU_TREE,               0x00a03,                    DEKU_SEEDS_5
+MQ Deku Tree Heart Lobby,                                   heart,          NONE,                 INSIDE_DEKU_TREE,               0x00012,                    RECOVERY_HEART
+MQ Deku Tree Heart Before Compass,                          heart,          NONE,                 INSIDE_DEKU_TREE,               0x00104,                    RECOVERY_HEART
+MQ Deku Tree Heart Compass Room,                            heart,          NONE,                 INSIDE_DEKU_TREE,               0x0020b,                    RECOVERY_HEART
+MQ Deku Tree Heart Before Boss 1,                           heart,          NONE,                 INSIDE_DEKU_TREE,               0x00906,                    RECOVERY_HEART
+MQ Deku Tree Heart Before Boss 2,                           heart,          NONE,                 INSIDE_DEKU_TREE,               0x00907,                    RECOVERY_HEART
+MQ Deku Tree Heart Before Boss 3,                           heart,          NONE,                 INSIDE_DEKU_TREE,               0x00908,                    RECOVERY_HEART
+MQ Deku Tree Heart Slingshot Room,                          heart,          NONE,                 INSIDE_DEKU_TREE,               0x00a05,                    RECOVERY_HEART
 MQ Dodongo Cavern Map Chest,                                chest,          NONE,                 DODONGO_CAVERN,                 0x00,                       MAP_DC
 MQ Dodongo Cavern Compass Chest,                            chest,          NONE,                 DODONGO_CAVERN,                 0x05,                       COMPASS_DC
 MQ Dodongo Cavern Larvae Room Chest,                        chest,          NONE,                 DODONGO_CAVERN,                 0x02,                       RUPEE_BLUE

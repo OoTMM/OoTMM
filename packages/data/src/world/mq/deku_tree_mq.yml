@@ -44,17 +44,27 @@
     "MQ Deku Tree Grass Room Before Spike 2": "can_cut_grass && (can_use_bow || (can_use_slingshot && (can_use_sticks || has_fire)))"
     "MQ Deku Tree Grass Room Before Spike 3": "can_cut_grass && (can_use_bow || (can_use_slingshot && (can_use_sticks || has_fire)))"
     "MQ Deku Tree Grass Room Before Spike 4": "can_cut_grass && (can_use_bow || (can_use_slingshot && (can_use_sticks || has_fire)))"
+    "MQ Deku Tree Heart Lobby": "true"
+    "MQ Deku Tree Heart Before Compass": "can_use_bow || can_use_sticks || can_use_din"
+    "MQ Deku Tree Heart Slingshot Room": "true"
 "Deku Tree Compass Room":
   dungeon: DT
   exits:
     "Deku Tree Lobby": "true"
+    "Deku Tree Compass Room Alcove": "has_bombchu || (can_play_time && has_explosives_or_hammer)"
   locations:
     "MQ Deku Tree Compass Chest": "true"
-    "MQ Deku Tree GS Compass Room": "(has_bombchu || (can_play_time && has_explosives_or_hammer)) && can_collect_distance"
     "MQ Deku Tree Grass Compass Room 1": "can_cut_grass"
     "MQ Deku Tree Grass Compass Room 2": "can_cut_grass"
     "MQ Deku Tree Grass Compass Room 3": "can_cut_grass"
     "MQ Deku Tree Grass Compass Room 4": "can_cut_grass"
+"Deku Tree Compass Room Alcove":
+  dungeon: DT
+  exits:
+    "Deku Tree Compass Room": "true"
+  locations:
+    "MQ Deku Tree GS Compass Room": "can_collect_distance"
+    "MQ Deku Tree Heart Compass Room": "true"
 "Deku Tree Water Room":
   dungeon: DT
   exits:
@@ -118,3 +128,6 @@
     "MQ Deku Tree Grass Room Before Boss 1": "can_cut_grass"
     "MQ Deku Tree Grass Room Before Boss 2": "can_cut_grass"
     "MQ Deku Tree Grass Room Before Boss 3": "can_cut_grass"
+    "MQ Deku Tree Heart Before Boss 1": "true"
+    "MQ Deku Tree Heart Before Boss 2": "true"
+    "MQ Deku Tree Heart Before Boss 3": "true"
