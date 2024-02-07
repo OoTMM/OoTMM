@@ -96,8 +96,8 @@
     "Stone Tower Temple Pot Water Room Underwater Lower 1": "underwater_walking || (hookshot_anywhere && can_use_ice_arrows)"
     "Stone Tower Temple Pot Water Room Underwater Lower 2": "underwater_walking || (hookshot_anywhere && can_use_ice_arrows)"
     "Stone Tower Temple Pot Water Room Underwater Lower 3": "underwater_walking || (hookshot_anywhere && can_use_ice_arrows)"
-    "Stone Tower Temple Pot Water Room Underwater Upper 1": "underwater_walking || hookshot_anywhere || (short_hook_anywhere && can_use_ice_arrows) || (can_dive_small && (has_weapon_range || has_bombchu))" # todo bombchu method should be a trick
-    "Stone Tower Temple Pot Water Room Underwater Upper 2": "underwater_walking || hookshot_anywhere || (short_hook_anywhere && can_use_ice_arrows) || (can_dive_small && (has_weapon_range || has_bombchu))" # todo bombchu method should be a trick
+    "Stone Tower Temple Pot Water Room Underwater Upper 1": "underwater_walking || hookshot_anywhere || (short_hook_anywhere && can_use_ice_arrows) || (can_dive_small && (has_weapon_range || (trick(MM_STT_POT_BOMBCHU_DIVE) && has_bombchu)))"
+    "Stone Tower Temple Pot Water Room Underwater Upper 2": "underwater_walking || hookshot_anywhere || (short_hook_anywhere && can_use_ice_arrows) || (can_dive_small && (has_weapon_range || (trick(MM_STT_POT_BOMBCHU_DIVE) && has_bombchu)))"
     "Stone Tower Temple Pot Water Room Bridge 1": "true"
     "Stone Tower Temple Pot Water Room Bridge 2": "true"
 "Stone Tower Temple Mirrors Room":

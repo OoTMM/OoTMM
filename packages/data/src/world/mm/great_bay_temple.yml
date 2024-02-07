@@ -52,7 +52,7 @@
   events:
     MAGIC: "true"
   exits:
-    "Great Bay Temple Baba Room": "has_mask_zora || ((has_bombchu || has_mask_blast) && (short_hook_anywhere || underwater_walking || can_dive_big)) || hookshot_anywhere"
+    "Great Bay Temple Baba Room": "has_mask_zora || ((has_bombchu || has_mask_blast) && (short_hook_anywhere || underwater_walking || (can_dive_big && has_tunic_zora))) || hookshot_anywhere"
     "Great Bay Temple Red Pipe 2": "can_use_ice_arrows || short_hook_anywhere"
     "Great Bay Temple Green Pipe 3": "short_hook_anywhere"
   locations:
@@ -179,14 +179,14 @@
   locations:
     "Great Bay Temple Green Pipe 2 Lower Chest": "can_hookshot || (can_use_ice_arrows && can_hookshot_short) || has_hover_boots" #can just jump to the alcove after riding the platform, new trick?
     "Great Bay Temple Green Pipe 2 Upper Chest": "(can_hookshot && can_use_ice_arrows && (can_use_fire_arrows || trick(MM_GBT_FIRELESS))) || short_hook_anywhere || (has_hover_boots && trick(MM_GBT_GREEN2_UPPER_HOVERS))"
-    "Great Bay Temple Pot Green Pipe 2 1": "(can_dive_small && (has_weapon_range || has_bombchu)) || underwater_walking || hookshot_anywhere || (can_use_ice_arrows && short_hook_anywhere)"
-    "Great Bay Temple Pot Green Pipe 2 2": "(can_dive_small && (has_weapon_range || has_bombchu)) || underwater_walking || hookshot_anywhere || (can_use_ice_arrows && short_hook_anywhere)"
-    "Great Bay Temple Pot Green Pipe 2 3": "(can_dive_small && (has_weapon_range || has_bombchu)) || underwater_walking || hookshot_anywhere || (can_use_ice_arrows && short_hook_anywhere)"
-    "Great Bay Temple Pot Green Pipe 2 4": "(can_dive_small && (has_weapon_range || has_bombchu)) || underwater_walking || hookshot_anywhere || (can_use_ice_arrows && short_hook_anywhere)"
-    "Great Bay Temple Pot Green Pipe 2 5": "(can_dive_small && (has_weapon_range || has_bombchu)) || underwater_walking || hookshot_anywhere || (can_use_ice_arrows && short_hook_anywhere)"
-    "Great Bay Temple Pot Green Pipe 2 6": "(can_dive_small && (has_weapon_range || has_bombchu)) || underwater_walking || hookshot_anywhere || (can_use_ice_arrows && short_hook_anywhere)"
-    "Great Bay Temple Pot Green Pipe 2 7": "(can_dive_small && (has_weapon_range || has_bombchu)) || underwater_walking || (can_use_ice_arrows && short_hook_anywhere)"
-    "Great Bay Temple Pot Green Pipe 2 8": "(can_dive_small && (has_weapon_range || has_bombchu)) || underwater_walking || (can_use_ice_arrows && short_hook_anywhere)"
+    "Great Bay Temple Pot Green Pipe 2 1": "(can_dive_small && (has_arrows || has_bombchu || can_hookshot)) || underwater_walking || hookshot_anywhere || (can_use_ice_arrows && (short_hook_anywhere || can_dive_small))"
+    "Great Bay Temple Pot Green Pipe 2 2": "(can_dive_small && (has_arrows || has_bombchu || can_hookshot)) || underwater_walking || hookshot_anywhere || (can_use_ice_arrows && (short_hook_anywhere || can_dive_small))"
+    "Great Bay Temple Pot Green Pipe 2 3": "(can_dive_small && (has_arrows || has_bombchu || can_hookshot)) || underwater_walking || hookshot_anywhere || (can_use_ice_arrows && (short_hook_anywhere || can_dive_small))"
+    "Great Bay Temple Pot Green Pipe 2 4": "(can_dive_small && (has_arrows || has_bombchu || can_hookshot)) || underwater_walking || hookshot_anywhere || (can_use_ice_arrows && (short_hook_anywhere || can_dive_small))"
+    "Great Bay Temple Pot Green Pipe 2 5": "(can_dive_small && (has_arrows || has_bombchu || can_hookshot)) || underwater_walking || hookshot_anywhere || (can_use_ice_arrows && (short_hook_anywhere || can_dive_small))"
+    "Great Bay Temple Pot Green Pipe 2 6": "(can_dive_small && (has_arrows || has_bombchu || can_hookshot)) || underwater_walking || hookshot_anywhere || (can_use_ice_arrows && (short_hook_anywhere || can_dive_small))"
+    "Great Bay Temple Pot Green Pipe 2 7": "(can_dive_small && (has_arrows || has_bombchu)) || underwater_walking || (can_use_ice_arrows && (short_hook_anywhere || can_dive_small))"
+    "Great Bay Temple Pot Green Pipe 2 8": "(can_dive_small && (has_arrows || has_bombchu)) || underwater_walking || (can_use_ice_arrows && (short_hook_anywhere || can_dive_small))"
 "Great Bay Temple Green Pipe 3":
   dungeon: GB
   exits:
@@ -229,10 +229,10 @@
     "Great Bay Temple Boss Pot 2": "true"
     "Great Bay Temple Boss Pot 3": "true"
     "Great Bay Temple Boss Pot 4": "true"
-    "Great Bay Temple Boss Pot Underwater 1": "underwater_walking || (has_mask_blast && can_dive_big)" # todo blast+dive should be a trick
-    "Great Bay Temple Boss Pot Underwater 2": "underwater_walking || (has_mask_blast && can_dive_big)" # todo blast+dive should be a trick
-    "Great Bay Temple Boss Pot Underwater 3": "underwater_walking || (has_mask_blast && can_dive_big)" # todo blast+dive should be a trick
-    "Great Bay Temple Boss Pot Underwater 4": "underwater_walking || (has_mask_blast && can_dive_big)" # todo blast+dive should be a trick
+    "Great Bay Temple Boss Pot Underwater 1": "underwater_walking"
+    "Great Bay Temple Boss Pot Underwater 2": "underwater_walking"
+    "Great Bay Temple Boss Pot Underwater 3": "underwater_walking"
+    "Great Bay Temple Boss Pot Underwater 4": "underwater_walking"
 "Great Bay Temple After Boss":
   boss: true
   dungeon: GB
@@ -243,3 +243,7 @@
   locations:
     "Great Bay Temple Boss HC": "true"
     "Great Bay Temple Boss": "true"
+    "Great Bay Temple Boss Pot Underwater 1": "underwater_walking || (has_mask_blast && can_dive_big && trick(MM_GYORG_POTS_DIVE))"
+    "Great Bay Temple Boss Pot Underwater 2": "underwater_walking || (has_mask_blast && can_dive_big && trick(MM_GYORG_POTS_DIVE))"
+    "Great Bay Temple Boss Pot Underwater 3": "underwater_walking || (has_mask_blast && can_dive_big && trick(MM_GYORG_POTS_DIVE))"
+    "Great Bay Temple Boss Pot Underwater 4": "underwater_walking || (has_mask_blast && can_dive_big && trick(MM_GYORG_POTS_DIVE))"

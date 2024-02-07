@@ -2272,7 +2272,7 @@
 "Great Bay Coast Fortress":
   region: GREAT_BAY_COAST
   exits:
-    "Great Bay Coast": "underwater_walking || can_dive_small"
+    "Great Bay Coast": "underwater_walking"
     "Pirate Fortress": "true"
 "Great Bay Grotto":
   region: ENTRANCE
@@ -2519,7 +2519,7 @@
 "Zora Cape Near Hall":
   region: ZORA_CAPE
   exits:
-    "Zora Cape": "underwater_walking || can_dive_small"
+    "Zora Cape": "underwater_walking || (can_dive_small && trick(MM_ZORA_HALL_HUMAN))"
     "Zora Hall Entrance": "underwater_walking || can_dive_small"
 "Zora Hall Entrance":
   region: ZORA_HALL
