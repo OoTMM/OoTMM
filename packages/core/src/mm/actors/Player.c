@@ -1209,7 +1209,8 @@ s32 Player_GetEnvironmentalHazardCustom(GameState_Play* play) {
     {
         return PLAYER_ENV_HAZARD_HOTROOM;
     }
-    else if (player->transformation != MM_PLAYER_FORM_ZORA && player->underwaterTimer > 80)
+    else if (player->transformation != MM_PLAYER_FORM_ZORA && player->underwaterTimer > 80
+        && (!comboConfig(CFG_MM_SCALES) || GET_PLAYER_CUSTOM_BOOTS(player) == PLAYER_BOOTS_IRON || player->underwaterTimer >= 300))
     {
         if (GET_PLAYER_CUSTOM_BOOTS(player) == PLAYER_BOOTS_IRON && (player->base.bgCheckFlags & BGCHECKFLAG_GROUND))
         {
@@ -1265,4 +1266,21 @@ s32 Player_GetItemCamMode(Actor_Player* this)
     {
         return CAM_MODE_BOWARROW;
     }
+}
+
+static f32 sDiveDepths[] = { 120.0f, 240.0f, 360.0f };
+
+static u8 sDiveDoActions[] = { DO_ACTION_1, DO_ACTION_2, DO_ACTION_3, DO_ACTION_4,
+                               DO_ACTION_5, DO_ACTION_6, DO_ACTION_7, DO_ACTION_8 };
+
+u8 Player_GetActionAWhileDiving(Actor_Player* this)
+{
+    s32 diveIndex = (sDiveDepths[gSaveContext.save.inventory.upgrades.scale] - this->base.yDistToWater) / 40.0f;
+    diveIndex = CLAMP(diveIndex, 0, ARRAY_SIZE(sDiveDoActions) - 1);
+    return sDiveDoActions[diveIndex];
+}
+
+f32 Player_GetMaxDiveDepth()
+{
+    return sDiveDepths[gSaveContext.save.inventory.upgrades.scale];
 }

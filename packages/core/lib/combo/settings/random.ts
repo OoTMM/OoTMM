@@ -540,6 +540,19 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
     base.tunicZoraMm = booleanWeighted(random, 0.25);
   }
 
+  /* Scales - 50% disabled, 25% enabled, 25% individual */
+  switch (randomInt(random, 4)) {
+  case 0:
+  case 1:
+    base.scalesMm = false;
+    break;
+  case 2:
+    base.scalesMm = true;
+    break;
+  default:
+    base.scalesMm = booleanWeighted(random, 0.25);
+  }
+
   /* Magic spells - 50% disabled, 25% enabled, 25% individual */
   switch (randomInt(random, 4)) {
   case 0:

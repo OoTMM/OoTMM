@@ -761,6 +761,40 @@ PATCH_START 0x80842D60
   beqzl   v0, .+0x1c
 PATCH_END
 
+PATCH_START 0x80842CC0
+  sw      a3, 0x0044 (sp)
+  jal     Player_GetActionAWhileDiving
+   or     a0, s0, zero
+  lw      a3, 0x0044 (sp)
+  b       .+0x350
+   or     t0, v0, zero
+  // next 18 lines are unreachable
+PATCH_END
+
+/*
+Replaces:
+  LUI     AT, 0x42F0
+  ANDI    T8, T7, 0x0001
+  BNEZL   T8, .+0x3C
+  LB      T9, 0x0AE7 (S0)
+  LWC1    F16, 0x008C (S0)
+  MTC1    AT, F18
+  LW      A0, 0x0034 (SP)
+  OR      A1, S0, R0
+  C.LT.S  F16, F18
+*/
+PATCH_START 0x80851838
+  andi    t8, t7, 0x0001
+  bnezl   t8, .+0x40
+  lb      t9, 0x0AE7 (s0)
+  jal     Player_GetMaxDiveDepth
+   nop
+  lwc1    $f16, 0x008C (s0)
+  lw      a0, 0x0034 (sp)
+  or      a1, s0, zero
+  c.lt.s  $f16, $f0
+PATCH_END
+
 /* Change child link object to use EnvColor instead of PrimColor */
 
 PATCH_VROM 0x01166390

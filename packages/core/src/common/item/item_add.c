@@ -1091,10 +1091,17 @@ static int addItemStrength(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static int addItemScale(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemScaleOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
     if (param > gOotSave.inventory.upgrades.dive)
         gOotSave.inventory.upgrades.dive = param;
+    return 0;
+}
+
+static int addItemScaleMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    if (param > gMmSave.inventory.upgrades.scale)
+        gMmSave.inventory.upgrades.scale = param;
     return 0;
 }
 
@@ -1851,7 +1858,7 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemTunic,
     addItemBoots,
     addItemStrength,
-    addItemScale,
+    addItemScaleOot,
     addItemQuestOot,
     addItemQuestMm,
     addItemHeartOot,
@@ -1898,6 +1905,7 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemBombchuBagMm,
     addItemBigFairyOot,
     addItemBigFairyMm,
+    addItemScaleMm,
     addItemEndgame,
 };
 
@@ -1971,6 +1979,8 @@ static const SharedItem kSimpleSharedItems[] = {
     { CFG_SHARED_TUNIC_GORON, GI_OOT_TUNIC_GORON, GI_MM_TUNIC_GORON },
     { CFG_SHARED_TUNIC_ZORA, GI_OOT_TUNIC_ZORA, GI_MM_TUNIC_ZORA },
     { CFG_SHARED_MASK_BLAST, GI_OOT_MASK_BLAST, GI_MM_MASK_BLAST },
+    { CFG_SHARED_SCALES, GI_OOT_SCALE_SILVER, GI_MM_SCALE_SILVER },
+    { CFG_SHARED_SCALES, GI_OOT_SCALE_GOLDEN, GI_MM_SCALE_GOLDEN },
 };
 
 static int addItem(GameState_Play* play, s16 gi)

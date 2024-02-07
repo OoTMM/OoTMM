@@ -31,6 +31,10 @@
 "has_tunic_goron": "has_tunic_goron_strict || trick(MM_TUNICS)"
 "has_tunic_zora": "has_tunic_zora_strict || trick(MM_TUNICS)"
 
+# Scales
+"can_dive_small": "has_scale_raw(1)"
+"can_dive_big": "has_scale_raw(2)"
+
 # Ocarina
 "ocarina_button(x, y)": "cond(setting(ocarinaButtonsShuffleMm), cond(setting(sharedOcarinaButtons), has(y), has(x)), true)"
 "ocarina_button_a": "ocarina_button(BUTTON_A, SHARED_BUTTON_A)"
