@@ -112,6 +112,7 @@ export const TRICKS = {
   MM_ISTT_ENTRY_HOVER: "Inverted Stone Tower Temple Death Armos using Hover Boots and Bunny Hood",
   MM_GYORG_POTS_DIVE: "Dive down to the pots in Gyorg's Lair, break the pots with a Blast Mask explosion, and collect the item before it before it lands on the ground.",
   MM_STT_POT_BOMBCHU_DIVE: "Position yourself precisely to launch a Bombchu that breaks the shallow underwater pots, then collect the items with a dive.",
+  MM_MR_BOULDER_SKIP_CLIMB: "Climb along the wall in Milk Road to get past the boulder on Day 1 without Powder Keg", //placeholder name/description feel free to change if needed -SciNrd
 };
 
 export type Trick = keyof typeof TRICKS;
