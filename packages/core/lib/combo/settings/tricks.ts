@@ -113,6 +113,7 @@ export const TRICKS = {
   MM_GYORG_POTS_DIVE: "Dive down to the pots in Gyorg's Lair, break the pots with a Blast Mask explosion, and collect the item before it before it lands on the ground.",
   MM_STT_POT_BOMBCHU_DIVE: "Position yourself precisely to launch a Bombchu that breaks the shallow underwater pots, then collect the items with a dive.",
   MM_MR_BOULDER_SKIP_CLIMB: "Climb along the wall in Milk Road to get past the boulder on Day 1 without Powder Keg", //placeholder name/description feel free to change if needed -SciNrd
+  MM_GBC_GREAT_FAIRY_CLIMB: "Climb up to the ledge where the Fairy Fountain entrance is and climb above the entrance to drop in past the boulders. Have to drop from the wall to work" //see above comment -SciNrd
 };
 
 export type Trick = keyof typeof TRICKS;
