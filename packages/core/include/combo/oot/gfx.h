@@ -11,7 +11,9 @@ typedef struct PACKED ALIGNED(4)
     DisplayListBuffer   overlay;
     DisplayListBuffer   polyOpa;
     DisplayListBuffer   polyXlu;
-    char                unk_2d8[0x1c];
+    u32                 displayListCounter;
+    char                unk_2dc[0x14];
+    GameState_Play*     play;
 }
 GfxContext;
 

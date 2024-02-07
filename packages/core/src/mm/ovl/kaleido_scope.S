@@ -89,16 +89,44 @@ PATCH_START 0x80828ac4
 PATCH_END
 
 /*
-Replaces:
-  jal   KaleidoScope_DrawTexQuadRGBA32
-   lw   a1, 0x1e6c (a1)
+==================================================================================================
+ Pause Menu (Select Item subscreen) - Icon Draw
+==================================================================================================
 */
-PATCH_START 0x8081bb70
-  jal   KaleidoScope_DrawIconCustom
-   or   a1, v0, zero
+
+KaleidoScope_DrawIconCustom_Hook:
+  addiu   sp, sp, -0x20
+  sw      ra, 0x001C (sp)
+
+  // Parameter 5 (inventory slot index)
+  sw      s1, 0x0010 (sp)
+
+  // Parameter 6 (vertices index for Quadrangle)
+  lw      at, 0x0030 (sp)
+  sw      at, 0x0014 (sp)
+
+  // Parameter 7 (Vertex buffer index)
+  sw      s2, 0x0018 (sp)
+
+  jal     KaleidoScope_DrawIconCustom
+  // Overwrite A1 with item Id in V0 (we can calculate A1 with it later)
+   or     a1, v0, zero
+
+  lw      ra, 0x001C (sp)
+
+  jr      ra
+   addiu  sp, sp, 0x20
+
+/*
+Hook draw for item textures on "Select Item" screen.
+Replaces:
+  jal     KaleidoScope_DrawTexQuadRGBA32
+*/
+PATCH_START 0x8081BB70
+  jal     KaleidoScope_DrawIconCustom_Hook
 PATCH_END
 
-// Reloc offset 0x5AD0
-PATCH_START 0x8082c944
-.int 0
+/* Remove relocations. */
+PATCH_START 0x8082C944
+.int 0x00000000 // Removes: 0x44005AD0
 PATCH_END

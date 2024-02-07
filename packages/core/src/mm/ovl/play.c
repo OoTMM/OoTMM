@@ -107,6 +107,8 @@ static void debugCheat(GameState_Play* play)
         gMmExtraTrade.trade1 = 0x3f;
         gMmExtraTrade.trade2 = 0x1f;
         gMmExtraTrade.trade3 = 0x1f;
+        gMmExtraItems.hookshot = 3;
+        gMmExtraItems.ocarina = 3;
 
         gSave.inventory.items[ITS_MM_TRADE1] = ITEM_MM_DEED_LAND;
         gSave.inventory.items[ITS_MM_TRADE2] = ITEM_MM_ROOM_KEY;
