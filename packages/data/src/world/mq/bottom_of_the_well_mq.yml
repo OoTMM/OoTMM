@@ -44,3 +44,10 @@
     "MQ Bottom of the Well Grass Dead-Hand 2": "can_cut_grass && (has_ranged_weapon || has_explosives_or_hammer || can_use_sticks || can_use_sword)" #Many ways to lower the water.
     "MQ Bottom of the Well Grass Dead-Hand 3": "can_cut_grass && (has_ranged_weapon || has_explosives_or_hammer || can_use_sticks || can_use_sword)" #Many ways to lower the water.
     "MQ Bottom of the Well Grass Dead-Hand 4": "can_cut_grass && (has_ranged_weapon || has_explosives_or_hammer || can_use_sticks || can_use_sword)" #Many ways to lower the water.
+    "MQ Bottom of the Well Heart Main Room 1": "has_explosives_or_hammer"
+    "MQ Bottom of the Well Heart Main Room 2": "has_explosives_or_hammer"
+    "MQ Bottom of the Well Heart Basement 1": "true"
+    "MQ Bottom of the Well Heart Basement 2": "true"
+    "MQ Bottom of the Well Heart Basement 3": "true"
+    "MQ Bottom of the Well Heart Coffin 1": "true"
+    "MQ Bottom of the Well Heart Coffin 2": "true"
