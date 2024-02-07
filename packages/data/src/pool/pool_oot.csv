@@ -1928,6 +1928,13 @@ MQ Shadow Temple Flying Pot Room Before Boat 2,             pot,            NONE
 MQ Shadow Temple Beamos Big Fairy,                          fairy_spot,     NONE,                 TEMPLE_SHADOW,                  0x00503,                    FAIRY_BIG
 MQ Shadow Temple Guillotines Room Big Fairy,                fairy_spot,     NONE,                 TEMPLE_SHADOW,                  0x0091d,                    FAIRY_BIG
 MQ Shadow Temple Big Fairy After Wind,                      fairy_spot,     NONE,                 TEMPLE_SHADOW,                  0x01305,                    FAIRY_BIG
+MQ Shadow Temple Heart Invisible Blades 1,                  heart,          NONE,                 TEMPLE_SHADOW,                  0x01004,                    RECOVERY_HEART
+MQ Shadow Temple Heart Invisible Blades 2,                  heart,          NONE,                 TEMPLE_SHADOW,                  0x01005,                    RECOVERY_HEART
+MQ Shadow Temple Heart Shortcut 1,                          heart,          NONE,                 TEMPLE_SHADOW,                  0x01509,                    RECOVERY_HEART
+MQ Shadow Temple Heart Shortcut 2,                          heart,          NONE,                 TEMPLE_SHADOW,                  0x0150a,                    RECOVERY_HEART
+MQ Shadow Temple Heart Pre-Boss Upper 1,                    heart,          NONE,                 TEMPLE_SHADOW,                  0x0150b,                    RECOVERY_HEART
+MQ Shadow Temple Heart Pre-Boss Upper 2,                    heart,          NONE,                 TEMPLE_SHADOW,                  0x0150c,                    RECOVERY_HEART
+MQ Shadow Temple Heart Pre-Boss Lower,                      heart,          NONE,                 TEMPLE_SHADOW,                  0x0150d,                    RECOVERY_HEART
 MQ Spirit Temple Entrance Initial Chest,                    chest,          NONE,                 TEMPLE_SPIRIT,                  0x1a,                       BOMBCHU_5
 MQ Spirit Temple Lobby Back-Left Chest,                     chest,          NONE,                 TEMPLE_SPIRIT,                  0x1e,                       SMALL_KEY_SPIRIT
 MQ Spirit Temple Lobby Back-Right Chest,                    chest,          NONE,                 TEMPLE_SPIRIT,                  0x1f,                       BOMBCHU_5
