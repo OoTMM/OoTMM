@@ -1555,6 +1555,13 @@ MQ Deku Tree Grass Slingshot Room Back 1,                   grass,          NONE
 MQ Deku Tree Grass Slingshot Room Back 2,                   grass,          NONE,                 INSIDE_DEKU_TREE,               0x00a01,                    DEKU_SEEDS_5
 MQ Deku Tree Grass Slingshot Room Front 1,                  grass,          NONE,                 INSIDE_DEKU_TREE,               0x00a02,                    RECOVERY_HEART
 MQ Deku Tree Grass Slingshot Room Front 2,                  grass,          NONE,                 INSIDE_DEKU_TREE,               0x00a03,                    DEKU_SEEDS_5
+MQ Deku Tree Heart Lobby,                                   heart,          NONE,                 INSIDE_DEKU_TREE,               0x00012,                    RECOVERY_HEART
+MQ Deku Tree Heart Before Compass,                          heart,          NONE,                 INSIDE_DEKU_TREE,               0x00104,                    RECOVERY_HEART
+MQ Deku Tree Heart Compass Room,                            heart,          NONE,                 INSIDE_DEKU_TREE,               0x0020b,                    RECOVERY_HEART
+MQ Deku Tree Heart Before Boss 1,                           heart,          NONE,                 INSIDE_DEKU_TREE,               0x00906,                    RECOVERY_HEART
+MQ Deku Tree Heart Before Boss 2,                           heart,          NONE,                 INSIDE_DEKU_TREE,               0x00907,                    RECOVERY_HEART
+MQ Deku Tree Heart Before Boss 3,                           heart,          NONE,                 INSIDE_DEKU_TREE,               0x00908,                    RECOVERY_HEART
+MQ Deku Tree Heart Slingshot Room,                          heart,          NONE,                 INSIDE_DEKU_TREE,               0x00a05,                    RECOVERY_HEART
 MQ Dodongo Cavern Map Chest,                                chest,          NONE,                 DODONGO_CAVERN,                 0x00,                       MAP_DC
 MQ Dodongo Cavern Compass Chest,                            chest,          NONE,                 DODONGO_CAVERN,                 0x05,                       COMPASS_DC
 MQ Dodongo Cavern Larvae Room Chest,                        chest,          NONE,                 DODONGO_CAVERN,                 0x02,                       RUPEE_BLUE
@@ -1615,6 +1622,8 @@ MQ Dodongo Cavern Grass Room Before Miniboss,               grass,          NONE
 MQ Dodongo Cavern Grass Green Corridor Side Room 1,         grass,          NONE,                 DODONGO_CAVERN,                 0x00d00,                    DEKU_SEEDS_5
 MQ Dodongo Cavern Grass Green Corridor Side Room 2,         grass,          NONE,                 DODONGO_CAVERN,                 0x00d01,                    RECOVERY_HEART
 MQ Dodongo Cavern Grass Boss Loop Side Room,                grass,          NONE,                 DODONGO_CAVERN,                 0x00e00,                    DEKU_SEEDS_5
+MQ Dodongo Cavern Heart Lizalfos Room,                      heart,          NONE,                 DODONGO_CAVERN,                 0x00305,                    RECOVERY_HEART
+MQ Dodongo Cavern Heart Vanilla Bomb Bag Room,              heart,          NONE,                 DODONGO_CAVERN,                 0x00905,                    RECOVERY_HEART
 MQ Jabu-Jabu Map Chest,                                     chest,          NONE,                 INSIDE_JABU_JABU,               0x03,                       MAP_JJ
 MQ Jabu-Jabu Entry Chest,                                   chest,          NONE,                 INSIDE_JABU_JABU,               0x05,                       NUTS_5
 MQ Jabu-Jabu Compass Chest,                                 chest,          NONE,                 INSIDE_JABU_JABU,               0x00,                       COMPASS_JJ
@@ -1657,6 +1666,8 @@ MQ Jabu-Jabu Grass Boomerang Room,                          grass,          NONE
 MQ Jabu-Jabu Rupee Bottom,                                  rupee,          NONE,                 INSIDE_JABU_JABU,               0x00100,                    RUPEE_GREEN
 MQ Jabu-Jabu Rupee Middle,                                  rupee,          NONE,                 INSIDE_JABU_JABU,               0x00101,                    RUPEE_GREEN
 MQ Jabu-Jabu Rupee Top,                                     rupee,          NONE,                 INSIDE_JABU_JABU,               0x00102,                    RUPEE_GREEN
+MQ Jabu-Jabu Heart 1,                                       heart,          NONE,                 INSIDE_JABU_JABU,               0x00108,                    RECOVERY_HEART
+MQ Jabu-Jabu Heart 2,                                       heart,          NONE,                 INSIDE_JABU_JABU,               0x00109,                    RECOVERY_HEART
 MQ Bottom of the Well Map Chest,                            chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x03,                       MAP_BOTW
 MQ Bottom of the Well Compass Chest,                        chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x02,                       COMPASS_BOTW
 MQ Bottom of the Well Lens Chest,                           chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x01,                       LENS
@@ -1678,6 +1689,13 @@ MQ Bottom of the Well Grass Dead-Hand 3,                    grass,          NONE
 MQ Bottom of the Well Grass Dead-Hand 4,                    grass,          NONE,                 BOTTOM_OF_THE_WELL,             0x00403,                    DEKU_SEEDS_5
 MQ Bottom of the Well Lobby Cage Big Fairy,                 fairy_spot,     NONE,                 BOTTOM_OF_THE_WELL,             0x0000d,                    FAIRY_BIG
 MQ Bottom of the Well Basement Big Fairy,                   fairy_spot,     NONE,                 BOTTOM_OF_THE_WELL,             0x00111,                    FAIRY_BIG
+MQ Bottom of the Well Heart Main Room 1,                    heart,          NONE,                 BOTTOM_OF_THE_WELL,             0x00024,                    RECOVERY_HEART
+MQ Bottom of the Well Heart Main Room 2,                    heart,          NONE,                 BOTTOM_OF_THE_WELL,             0x00025,                    RECOVERY_HEART
+MQ Bottom of the Well Heart Basement 1,                     heart,          NONE,                 BOTTOM_OF_THE_WELL,             0x0011b,                    RECOVERY_HEART
+MQ Bottom of the Well Heart Basement 2,                     heart,          NONE,                 BOTTOM_OF_THE_WELL,             0x0011c,                    RECOVERY_HEART
+MQ Bottom of the Well Heart Basement 3,                     heart,          NONE,                 BOTTOM_OF_THE_WELL,             0x0011d,                    RECOVERY_HEART
+MQ Bottom of the Well Heart Coffin 1,                       heart,          NONE,                 BOTTOM_OF_THE_WELL,             0x0020a,                    RECOVERY_HEART
+MQ Bottom of the Well Heart Coffin 2,                       heart,          NONE,                 BOTTOM_OF_THE_WELL,             0x0020b,                    RECOVERY_HEART
 MQ Ice Cavern Map Chest,                                    chest,          NONE,                 ICE_CAVERN,                     0x01,                       MAP_IC
 MQ Ice Cavern Compass Chest,                                chest,          NONE,                 ICE_CAVERN,                     0x00,                       COMPASS_IC
 MQ Ice Cavern Iron Boots,                                   chest,          ICE_CAVERN_CHEST,     ICE_CAVERN,                     0x02,                       BOOTS_IRON
@@ -1735,6 +1753,12 @@ MQ Forest Temple Pot Antichamber 1,                         pot,            NONE
 MQ Forest Temple Pot Antichamber 2,                         pot,            NONE,                 TEMPLE_FOREST,                  0x110c,                     RECOVERY_HEART
 MQ Forest Temple Pot Antichamber 3,                         pot,            NONE,                 TEMPLE_FOREST,                  0x110d,                     BOMBS_5
 MQ Forest Temple Pot Antichamber 4,                         pot,            NONE,                 TEMPLE_FOREST,                  0x110e,                     ARROWS_5
+MQ Forest Temple Heart Garden 1,                            heart,          NONE,                 TEMPLE_FOREST,                  0x0080a,                    RECOVERY_HEART
+MQ Forest Temple Heart Garden 2,                            heart,          NONE,                 TEMPLE_FOREST,                  0x0080b,                    RECOVERY_HEART
+MQ Forest Temple Heart Garden 3,                            heart,          NONE,                 TEMPLE_FOREST,                  0x0080c,                    RECOVERY_HEART
+MQ Forest Temple Heart Well 1,                              heart,          NONE,                 TEMPLE_FOREST,                  0x00904,                    RECOVERY_HEART
+MQ Forest Temple Heart Well 2,                              heart,          NONE,                 TEMPLE_FOREST,                  0x00905,                    RECOVERY_HEART
+MQ Forest Temple Heart Well 3,                              heart,          NONE,                 TEMPLE_FOREST,                  0x00906,                    RECOVERY_HEART
 MQ Fire Temple Early Lower Left Chest,                      chest,          NONE,                 TEMPLE_FIRE,                    0x02,                       RUPEE_BLUE
 MQ Fire Temple Pre-Boss Chest,                              chest,          NONE,                 TEMPLE_FIRE,                    0x07,                       SMALL_KEY_FIRE
 MQ Fire Temple Hammer Chest,                                chest,          NONE,                 TEMPLE_FIRE,                    0x00,                       HAMMER
@@ -1782,6 +1806,9 @@ MQ Fire Temple Pot Boss Key Room 1,                         pot,            NONE
 MQ Fire Temple Pot Boss Key Room 2,                         pot,            NONE,                 TEMPLE_FIRE,                    0x130e,                     MAGIC_JAR_SMALL
 MQ Fire Temple Hammer Loop Stalfos Big Fairy,               fairy_spot,     NONE,                 TEMPLE_FIRE,                    0x00f01,                    FAIRY_BIG
 MQ Fire Temple Hammer Loop Iron Knuckle Big Fairy,          fairy_spot,     NONE,                 TEMPLE_FIRE,                    0x01207,                    FAIRY_BIG
+MQ Fire Temple Heart 1,                                     heart,          NONE,                 TEMPLE_FIRE,                    0x01502,                    RECOVERY_HEART
+MQ Fire Temple Heart 2,                                     heart,          NONE,                 TEMPLE_FIRE,                    0x01503,                    RECOVERY_HEART
+MQ Fire Temple Heart 3,                                     heart,          NONE,                 TEMPLE_FIRE,                    0x01504,                    RECOVERY_HEART
 MQ Water Temple Map Chest,                                  chest,          NONE,                 TEMPLE_WATER,                   0x02,                       MAP_WATER
 MQ Water Temple Compass Chest,                              chest,          NONE,                 TEMPLE_WATER,                   0x01,                       COMPASS_WATER
 MQ Water Temple Longshot Chest,                             chest,          NONE,                 TEMPLE_WATER,                   0x00,                       HOOKSHOT
@@ -1908,6 +1935,13 @@ MQ Shadow Temple Flying Pot Room Before Boat 2,             pot,            NONE
 MQ Shadow Temple Beamos Big Fairy,                          fairy_spot,     NONE,                 TEMPLE_SHADOW,                  0x00503,                    FAIRY_BIG
 MQ Shadow Temple Guillotines Room Big Fairy,                fairy_spot,     NONE,                 TEMPLE_SHADOW,                  0x0091d,                    FAIRY_BIG
 MQ Shadow Temple Big Fairy After Wind,                      fairy_spot,     NONE,                 TEMPLE_SHADOW,                  0x01305,                    FAIRY_BIG
+MQ Shadow Temple Heart Invisible Blades 1,                  heart,          NONE,                 TEMPLE_SHADOW,                  0x01004,                    RECOVERY_HEART
+MQ Shadow Temple Heart Invisible Blades 2,                  heart,          NONE,                 TEMPLE_SHADOW,                  0x01005,                    RECOVERY_HEART
+MQ Shadow Temple Heart Shortcut 1,                          heart,          NONE,                 TEMPLE_SHADOW,                  0x01509,                    RECOVERY_HEART
+MQ Shadow Temple Heart Shortcut 2,                          heart,          NONE,                 TEMPLE_SHADOW,                  0x0150a,                    RECOVERY_HEART
+MQ Shadow Temple Heart Pre-Boss Upper 1,                    heart,          NONE,                 TEMPLE_SHADOW,                  0x0150b,                    RECOVERY_HEART
+MQ Shadow Temple Heart Pre-Boss Upper 2,                    heart,          NONE,                 TEMPLE_SHADOW,                  0x0150c,                    RECOVERY_HEART
+MQ Shadow Temple Heart Pre-Boss Lower,                      heart,          NONE,                 TEMPLE_SHADOW,                  0x0150d,                    RECOVERY_HEART
 MQ Spirit Temple Entrance Initial Chest,                    chest,          NONE,                 TEMPLE_SPIRIT,                  0x1a,                       BOMBCHU_5
 MQ Spirit Temple Lobby Back-Left Chest,                     chest,          NONE,                 TEMPLE_SPIRIT,                  0x1e,                       SMALL_KEY_SPIRIT
 MQ Spirit Temple Lobby Back-Right Chest,                    chest,          NONE,                 TEMPLE_SPIRIT,                  0x1f,                       BOMBCHU_5
@@ -1976,6 +2010,8 @@ MQ Spirit Temple Flying Pot Statue Room Upper,              pot,            NONE
 MQ Spirit Temple Flying Pot Statue Room Lower,              pot,            NONE,                 TEMPLE_SPIRIT,                  0x0513,                     NOTHING
 MQ Spirit Temple Flying Pot Statue Room Stairs,             pot,            NONE,                 TEMPLE_SPIRIT,                  0x0516,                     NOTHING
 MQ Spirit Temple Dinolfos Room Big Fairy,                   fairy_spot,     NONE,                 TEMPLE_SPIRIT,                  0x01202,                    FAIRY_BIG
+MQ Spirit Temple Heart 1,                                   heart,          NONE,                 TEMPLE_SPIRIT,                  0x0010d,                    RECOVERY_HEART
+MQ Spirit Temple Heart 2,                                   heart,          NONE,                 TEMPLE_SPIRIT,                  0x0010e,                    RECOVERY_HEART
 MQ Gerudo Training Grounds Entryway Left Chest,             chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x13,                       ARROWS_10
 MQ Gerudo Training Grounds Entryway Right Chest,            chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x07,                       BOMBCHU_10
 MQ Gerudo Training Grounds Maze First Chest,                chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x0b,                       RUPEE_PURPLE
@@ -2064,3 +2100,6 @@ MQ Ganon Castle Fairy Fountain Fairy 5,                     fairy,          NONE
 MQ Ganon Castle Fairy Fountain Fairy 6,                     fairy,          NONE,                 INSIDE_GANON_CASTLE,            0x51005,                    FAIRY
 MQ Ganon Castle Fairy Fountain Fairy 7,                     fairy,          NONE,                 INSIDE_GANON_CASTLE,            0x61005,                    FAIRY
 MQ Ganon Castle Fairy Fountain Fairy 8,                     fairy,          NONE,                 INSIDE_GANON_CASTLE,            0x71005,                    FAIRY
+MQ Ganon Castle Heart Water,                                heart,          NONE,                 INSIDE_GANON_CASTLE,            0x0021d,                    RECOVERY_HEART
+MQ Ganon Castle Heart Light 1,                              heart,          NONE,                 INSIDE_GANON_CASTLE,            0x00805,                    RECOVERY_HEART
+MQ Ganon Castle Heart Light 2,                              heart,          NONE,                 INSIDE_GANON_CASTLE,            0x00806,                    RECOVERY_HEART

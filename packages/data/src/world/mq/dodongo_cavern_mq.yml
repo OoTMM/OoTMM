@@ -85,6 +85,7 @@
     "MQ Dodongo Cavern Pot Vanilla Bomb Bag Room 2": "true"
     # Fails to load
     "MQ Dodongo Cavern Grass Vanilla Bomb Bag Room": "can_cut_grass"
+    "MQ Dodongo Cavern Heart Vanilla Bomb Bag Room": "true"
 "Dodongo Cavern Lower Tunnel":
   dungeon: DC
   exits:
@@ -100,6 +101,8 @@
   exits:
     "Dodongo Cavern Lower Tunnel": "soul_lizalfos_dinalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
     "Dodongo Cavern Poe Room": "soul_lizalfos_dinalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
+  locations:
+    "MQ Dodongo Cavern Heart Lizalfos Room": "true"
 "Dodongo Cavern Poe Room":
   dungeon: DC
   exits:

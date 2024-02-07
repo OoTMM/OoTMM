@@ -160,12 +160,6 @@ PATCH_START 0x800597c0
    li v0,0
 PATCH_END
 
-/* Disable some mask-related rendering check */
-PATCH_START 0x808482b0
-  nop
-  nop
-PATCH_END
-
 DrawMaskTrampoline:
   HOOK_CALL comboDrawExtendedMask
   jr ra

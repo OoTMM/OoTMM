@@ -11,7 +11,7 @@
   exits:
     "Stone Tower Temple Inverted": "true"
     "Stone Tower Temple Inverted East": "can_use_light_arrows || short_hook_anywhere"
-    "Stone Tower Temple Inverted Entrance Ledge": "(trick(MM_ISTT_ENTRY_JUMP) && (has_bombs || trick_keg_explosives)) || short_hook_anywhere"
+    "Stone Tower Temple Inverted Entrance Ledge": "(trick(MM_ISTT_ENTRY_JUMP) && (has_bombs || trick_keg_explosives)) || short_hook_anywhere || (trick(MM_ISTT_ENTRY_HOVER) && has_hover_boots && has_mask_bunny)"
     "Stone Tower Temple Inverted Entrance Top": "short_hook_anywhere"
     "Stone Tower Temple Boss Access": "setting(bossWarpPads, remains) && has(REMAINS_TWINMOLD)"
   locations:
@@ -128,8 +128,8 @@
   dungeon: IST
   exits:
     "Stone Tower Temple Inverted Pre-Boss": "soul_enemy(SOUL_ENEMY_EYEGORE) && (has_explosives || has_arrows || can_hookshot_short || has_mask_zora || has_mask_goron)"
-    "Stone Tower Temple Inverted Boss Key Room": "(trick(MM_ISTT_EYEGORE) && (has_mask_goron || has_explosives || has_hover_boots)) || short_hook_anywhere"
-    "Stone Tower Temple Inverted Center": "(trick(MM_ISTT_EYEGORE) && (has_mask_goron || has_explosives || has_hover_boots)) || short_hook_anywhere"
+    "Stone Tower Temple Inverted Boss Key Room": "(trick(MM_ISTT_EYEGORE) && has_explosives) || has_mask_goron || has_hover_boots || short_hook_anywhere"
+    "Stone Tower Temple Inverted Center": "(trick(MM_ISTT_EYEGORE) && has_explosives) || has_mask_goron || has_hover_boots || short_hook_anywhere"
     "Stone Tower Temple Inverted Entrance Top": "small_keys_st(4)"
   locations:
     "Stone Tower Temple Inverted Giant Mask": "soul_enemy(SOUL_ENEMY_EYEGORE) && (has_explosives || has_arrows || can_hookshot_short || has_mask_zora || has_mask_goron)"

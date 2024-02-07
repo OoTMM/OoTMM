@@ -1680,7 +1680,7 @@
   exits:
     "Lake Hylia": "true"
   locations:
-    "Laboratory Dive": "has(SCALE, 2) || (trick(OOT_LAB_DIVE_NO_GOLD_SCALE) && has_iron_boots && can_hookshot)"
+    "Laboratory Dive": "has_scale_raw(2) || (trick(OOT_LAB_DIVE_NO_GOLD_SCALE) && has_iron_boots && can_hookshot)"
     "Laboratory Eye Drops": "adult_trade(EYEBALL_FROG)"
     "Laboratory GS Crate": "has_iron_boots && can_hookshot"
     "Laboratory Rupee 1": "can_dive_big"

@@ -1,7 +1,7 @@
 "Pirate Fortress":
   dungeon: PF
   exits:
-    "Great Bay Coast Fortress": "underwater_walking"
+    "Great Bay Coast Fortress": "underwater_walking || can_dive_small"
     "Pirate Fortress Entrance": "cond(setting(erMoon) && trick(MM_MAJORA_LOGIC), (event(MAJORA) && before(NIGHT3_AM_12_00)) || can_play_time, can_reset_time)"
 "Pirate Fortress Entrance":
   dungeon: PF
@@ -68,7 +68,7 @@
     "Pirate Fortress Lone Guard Entry": "can_hookshot_short"
     "Pirate Fortress Barrel Maze Entry": "can_hookshot_short"
     "Pirate Fortress Lone Guard Exit": "short_hook_anywhere"
-    "Pirate Fortress Barrel Maze Exit": "short_hook_anywhere"
+    "Pirate Fortress Barrel Maze Exit": "short_hook_anywhere || (can_hookshot && has_hover_boots)"
     "Pirate Fortress Treasure Room Exit": "short_hook_anywhere || has_hover_boots"
   locations:
     "Pirate Fortress Interior Lower Chest": "true"

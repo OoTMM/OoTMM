@@ -1205,6 +1205,13 @@ export const SETTINGS = [{
   description: "Adds Zora Tunic in Majora's Mask.",
   default: false
 }, {
+  key: 'scalesMm',
+  name: "Scales (MM)",
+  category: 'items.extensions',
+  type: 'boolean',
+  description: "Adds Silver Scale and Golden Scale in Majora's Mask.",
+  default: false
+}, {
   key: 'blastMaskOot',
   name: "Blast Mask (OoT)",
   category: 'items.extensions',
@@ -1539,6 +1546,13 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false,
   cond: (s: any) => s.tunicZoraMm,
+}, {
+  key: 'sharedScales',
+  name: "Shared Scales",
+  category: 'items.shared',
+  type: 'boolean',
+  default: false,
+  cond: (s: any) => s.scalesMm,
 }, {
   key: 'agelessSwords',
   name: 'Ageless Swords',

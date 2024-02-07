@@ -48,6 +48,8 @@
     "MQ Jabu-Jabu Rupee Bottom": "(is_child && can_dive_small) || can_dive_big"
     "MQ Jabu-Jabu Rupee Middle": "can_dive_small"
     "MQ Jabu-Jabu Rupee Top": "is_child || can_dive_small"
+    "MQ Jabu-Jabu Heart 1": "true"
+    "MQ Jabu-Jabu Heart 2": "true"
 "Jabu-Jabu Back":
   dungeon: JJ
   exits:

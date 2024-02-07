@@ -1105,15 +1105,15 @@ typedef struct Actor
 }
 Actor;
 
+#if defined(GAME_MM)
 typedef struct
 {
     u32     count;
     Actor*  first;
-#if defined(GAME_MM)
     char    unk_8[0x4];
-#endif
 }
 ActorList;
+#endif
 
 #if defined(GAME_OOT)
 # define X(x) (x)
@@ -1141,7 +1141,6 @@ ASSERT_OFFSET(Actor, ovl,       X(0x138));
 
 #if defined(GAME_OOT)
 _Static_assert(sizeof(Actor) == 0x13c, "OoT Actor size is wrong");
-_Static_assert(sizeof(ActorList) == 0x8, "OoT ActorList size is wrong");
 #endif
 
 #if defined(GAME_MM)

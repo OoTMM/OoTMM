@@ -33,7 +33,7 @@
     "Swamp Skulltula Tree Room Tree 1": "true"
     "Swamp Skulltula Tree Room Tree 2": "true"
     "Swamp Skulltula Tree Room Tree 3": "true"
-    "Swamp Skulltula Monument Room Lower Wall": "can_hookshot_short || has_mask_zora || (can_use_beans && can_break_boulders)"
+    "Swamp Skulltula Monument Room Lower Wall": "can_hookshot_short || has_mask_zora || (can_use_beans && can_break_boulders) || (has_hover_boots && (has_weapon_range || has_explosives || has_weapon))"
     "Swamp Skulltula Monument Room On Monument": "true"
     "Swamp Skulltula Monument Room Crate 1": "true"
     "Swamp Skulltula Monument Room Crate 2": "true"

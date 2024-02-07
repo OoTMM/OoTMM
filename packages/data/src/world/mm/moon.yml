@@ -32,10 +32,10 @@
   locations:
     "Moon Trial Deku HP": "has(MASK_DEKU) || hookshot_anywhere"
   gossip:
-    "Moon Trial Deku Gossip Front-Left": "has(MASK_DEKU) || short_hook_anywhere"
-    "Moon Trial Deku Gossip Front-Right": "has(MASK_DEKU) || short_hook_anywhere"
-    "Moon Trial Deku Gossip Mid-Left": "has(MASK_DEKU) || short_hook_anywhere"
-    "Moon Trial Deku Gossip Mid-Right": "has(MASK_DEKU) || short_hook_anywhere"
+    "Moon Trial Deku Gossip Front-Left": "has(MASK_DEKU) || short_hook_anywhere || has_hover_boots"
+    "Moon Trial Deku Gossip Front-Right": "has(MASK_DEKU) || short_hook_anywhere || has_hover_boots"
+    "Moon Trial Deku Gossip Mid-Left": "has(MASK_DEKU) || short_hook_anywhere || has_hover_boots"
+    "Moon Trial Deku Gossip Mid-Right": "has(MASK_DEKU) || short_hook_anywhere || has_hover_boots"
     "Moon Trial Deku Gossip Back": "has(MASK_DEKU) || hookshot_anywhere"
 "Moon Trial Deku Exit":
   region: MOON
@@ -84,15 +84,15 @@
   exits:
     "Moon": "true"
   events:
-    MOON_TRIAL_ZORA: "underwater_walking"
+    MOON_TRIAL_ZORA: "underwater_walking || can_dive_small"
   locations:
-    "Moon Trial Zora HP": "underwater_walking"
+    "Moon Trial Zora HP": "underwater_walking || can_dive_small"
   gossip:
-    "Moon Trial Zora Gossip Outer Left": "underwater_walking"
-    "Moon Trial Zora Gossip Middle Left": "underwater_walking"
-    "Moon Trial Zora Gossip Inner Right": "underwater_walking"
-    "Moon Trial Zora Gossip Middle Right": "underwater_walking"
-    "Moon Trial Zora Gossip Outer Right": "underwater_walking"
+    "Moon Trial Zora Gossip Outer Left": "underwater_walking || can_dive_small"
+    "Moon Trial Zora Gossip Middle Left": "underwater_walking || can_dive_small"
+    "Moon Trial Zora Gossip Inner Right": "underwater_walking || can_dive_small"
+    "Moon Trial Zora Gossip Middle Right": "underwater_walking || can_dive_small"
+    "Moon Trial Zora Gossip Outer Right": "underwater_walking || can_dive_small"
 "Moon Trial Link Entrance":
   region: MOON
   exits:

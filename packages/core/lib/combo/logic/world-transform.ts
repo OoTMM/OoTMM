@@ -178,6 +178,7 @@ const ITEM_POOL_PLENTIFUL = new Set([
   Items.MM_BOOTS_HOVER,
   Items.MM_TUNIC_GORON,
   Items.MM_TUNIC_ZORA,
+  Items.MM_SCALE,
   Items.SHARED_BOW,
   Items.SHARED_BOMB_BAG,
   Items.SHARED_MAGIC_UPGRADE,
@@ -222,6 +223,7 @@ const ITEM_POOL_PLENTIFUL = new Set([
   Items.SHARED_BOOTS_HOVER,
   Items.SHARED_TUNIC_GORON,
   Items.SHARED_TUNIC_ZORA,
+  Items.SHARED_SCALE,
 ]);
 
 const ITEMS_HEART_PIECES_CONTAINERS_BY_GAME = {
@@ -732,6 +734,12 @@ export class LogicPassWorldTransform {
       this.replaceItem(Items.OOT_TUNIC_ZORA, Items.SHARED_TUNIC_ZORA);
     } else if (settings.tunicZoraMm) {
       this.addItem(Items.MM_TUNIC_ZORA);
+    }
+
+    if (settings.sharedScales) {
+      this.replaceItem(Items.OOT_SCALE, Items.SHARED_SCALE);
+    } else if (settings.scalesMm) {
+      this.addItem(Items.MM_SCALE, 2);
     }
 
     if (settings.sharedMaskBlast) {

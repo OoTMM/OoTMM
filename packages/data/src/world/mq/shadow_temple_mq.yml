@@ -70,6 +70,8 @@
     "MQ Shadow Temple SR Invisible Blades Time Block": "can_play_time && is_adult"
     "MQ Shadow Temple Second Silver Rupee Visible Chest": "silver_rupees_shadow_blades"
     "MQ Shadow Temple Second Silver Rupee Invisible Chest": "silver_rupees_shadow_blades"
+    "MQ Shadow Temple Heart Invisible Blades 1": "can_play_time && is_adult"
+    "MQ Shadow Temple Heart Invisible Blades 2": "can_play_time && is_adult"
 "Shadow Temple Lower Huge Pit":
   dungeon: Shadow
   exits:
@@ -122,6 +124,8 @@
     "MQ Shadow Temple Flying Pot Room Before Boat 1": "soul_flying_pot && ((has_weapon || can_use_sticks || can_use_din) || (can_play_sun))" #It would be too unfair to get around the Gibdos otherwise
     "MQ Shadow Temple Flying Pot Room Before Boat 2": "soul_flying_pot && ((has_weapon || can_use_sticks || can_use_din) || (can_play_sun))" #It would be too unfair to get around the Gibdos otherwise
     "MQ Shadow Temple Big Fairy After Wind": "can_play_sun"
+    "MQ Shadow Temple Heart Shortcut 1": "small_keys_shadow(5) && (scarecrow_longshot || hookshot_anywhere || climb_anywhere)"
+    "MQ Shadow Temple Heart Shortcut 2": "small_keys_shadow(5) && (scarecrow_longshot || hookshot_anywhere || climb_anywhere)"
 "Shadow Temple After Boat":
   dungeon: Shadow
   exits:
@@ -144,3 +148,6 @@
     "MQ Shadow Temple Pot Bomb Flowers Room 1": "true"
     "MQ Shadow Temple Pot Bomb Flowers Room 2": "true"
     "MQ Shadow Temple Pot Boss Key Room": "small_keys_shadow(6)"
+    "MQ Shadow Temple Heart Pre-Boss Upper 1": "scarecrow_longshot"
+    "MQ Shadow Temple Heart Pre-Boss Upper 2": "scarecrow_longshot"
+    "MQ Shadow Temple Heart Pre-Boss Lower": "scarecrow_longshot"

@@ -22,7 +22,7 @@ typedef struct
 }
 OcarinaSongButtons;
 
-typedef struct
+typedef struct OcarinaStaff
 {
     u8 buttonIndex;
     u8 state;

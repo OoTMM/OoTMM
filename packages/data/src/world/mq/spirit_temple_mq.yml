@@ -52,6 +52,8 @@
     "MQ Spirit Temple Pot Child Back 2": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (!setting(restoreBrokenActors) || soul_keese) && soul_redead_gibdo && soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon && has_bombchu && can_use_slingshot"
     "MQ Spirit Temple Pot Child Back 3": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (!setting(restoreBrokenActors) || soul_keese) && soul_redead_gibdo && soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon && has_bombchu && can_use_slingshot"
     "MQ Spirit Temple Pot Child Back 4": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (!setting(restoreBrokenActors) || soul_keese) && soul_redead_gibdo && soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon && has_bombchu && can_use_slingshot"
+    "MQ Spirit Temple Heart 1": "true"
+    "MQ Spirit Temple Heart 2": "true"
 "Spirit Temple Child Upper":
 #All paths into this room guarantee explosives.
   dungeon: Spirit

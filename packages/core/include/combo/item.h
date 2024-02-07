@@ -51,7 +51,7 @@
 #define IA_TUNIC                0x2b
 #define IA_BOOTS                0x2c
 #define IA_STRENGTH             0x2d
-#define IA_SCALE                0x2e
+#define IA_OOT_SCALE            0x2e
 #define IA_OOT_QUEST            0x2f
 #define IA_MM_QUEST             0x30
 #define IA_OOT_HEART            0x31
@@ -98,7 +98,8 @@
 #define IA_MM_BOMBCHU_BAG       0x5a
 #define IA_OOT_FAIRY_BIG        0x5b
 #define IA_MM_FAIRY_BIG         0x5c
-#define IA_ENDGAME              0x5d
+#define IA_MM_SCALE             0x5d
+#define IA_ENDGAME              0x5e
 #define IA_NONE                 0xff
 
 #define ITT_NONE        0x00

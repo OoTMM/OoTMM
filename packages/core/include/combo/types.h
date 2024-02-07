@@ -905,34 +905,6 @@ typedef struct Viewport {
     /* 0x0C */ s32 rightX;  // lrx (lower right x)
 } Viewport; // size = 0x10
 
-typedef struct View {
-    /* 0x000 */ u32 magic; // string literal "VIEW" / 0x56494557
-    /* 0x004 */ struct GraphicsContext* gfxCtx;
-    /* 0x008 */ Viewport viewport;
-    /* 0x018 */ f32 fovy;  // vertical field of view in degrees
-    /* 0x01C */ f32 zNear; // distance to near clipping plane
-    /* 0x020 */ f32 zFar;  // distance to far clipping plane
-    /* 0x024 */ f32 scale; // scale for matrix elements
-    /* 0x028 */ Vec3f eye;
-    /* 0x034 */ Vec3f at;
-    /* 0x040 */ Vec3f up;
-    /* 0x04C */ u8 pad4C[0x4];
-    /* 0x050 */ Vp vp;
-    /* 0x060 */ Mtx projection;
-    /* 0x0A0 */ Mtx viewing;
-    /* 0x0E0 */ Mtx unkE0;
-    /* 0x120 */ Mtx* projectionPtr;
-    /* 0x124 */ Mtx* viewingPtr;
-    /* 0x128 */ Vec3f distortionOrientation;
-    /* 0x134 */ Vec3f distortionScale;
-    /* 0x140 */ f32 distortionSpeed;
-    /* 0x144 */ Vec3f curDistortionOrientation;
-    /* 0x150 */ Vec3f curDistortionScale;
-    /* 0x15C */ u16 perspNorm; // used to normalize the projection matrix
-    /* 0x160 */ u32 flags;  // bit 3: Render to an orthographic perspective
-    /* 0x164 */ s32 unk164;
-} View; // size = 0x168
-
 typedef union {
     struct {
         /* 0x00 */ u16 id; // "dousa"
@@ -1135,5 +1107,54 @@ typedef enum {
     /* 0x1D */ CAM_MODE_ZORAFINZ, // "ZORAFINZ"
     /* 0x1E */ CAM_MODE_MAX
 } CameraModeType;
+
+typedef enum {
+    /* 0x00 */ DO_ACTION_ATTACK,
+    /* 0x01 */ DO_ACTION_CHECK,
+    /* 0x02 */ DO_ACTION_ENTER,
+    /* 0x03 */ DO_ACTION_RETURN,
+    /* 0x04 */ DO_ACTION_OPEN,
+    /* 0x05 */ DO_ACTION_JUMP,
+    /* 0x06 */ DO_ACTION_DECIDE,
+    /* 0x07 */ DO_ACTION_DIVE,
+    /* 0x08 */ DO_ACTION_FASTER,
+    /* 0x09 */ DO_ACTION_THROW,
+    /* 0x0A */ DO_ACTION_NONE,  // in do_action_static, the texture at this position is NAVI, however this value is in practice the "No Action" value
+    /* 0x0B */ DO_ACTION_CLIMB,
+    /* 0x0C */ DO_ACTION_DROP,
+    /* 0x0D */ DO_ACTION_DOWN,
+    /* 0x0E */ DO_ACTION_QUIT,
+    /* 0x0F */ DO_ACTION_SPEAK,
+    /* 0x10 */ DO_ACTION_NEXT,
+    /* 0x11 */ DO_ACTION_GRAB,
+    /* 0x12 */ DO_ACTION_STOP,
+    /* 0x13 */ DO_ACTION_PUTAWAY,
+    /* 0x14 */ DO_ACTION_REEL,
+    /* 0x15 */ DO_ACTION_INFO,
+    /* 0x16 */ DO_ACTION_WARP,
+    /* 0x17 */ DO_ACTION_SNAP,
+    /* 0x18 */ DO_ACTION_EXPLODE,
+    /* 0x19 */ DO_ACTION_DANCE,
+    /* 0x1A */ DO_ACTION_MARCH,
+    /* 0x1B */ DO_ACTION_1,
+    /* 0x1C */ DO_ACTION_2,
+    /* 0x1D */ DO_ACTION_3,
+    /* 0x1E */ DO_ACTION_4,
+    /* 0x1F */ DO_ACTION_5,
+    /* 0x20 */ DO_ACTION_6,
+    /* 0x21 */ DO_ACTION_7,
+    /* 0x22 */ DO_ACTION_8,
+    /* 0x23 */ DO_ACTION_CURL,
+    /* 0x24 */ DO_ACTION_SURFACE,
+    /* 0x25 */ DO_ACTION_SWIM,
+    /* 0x26 */ DO_ACTION_PUNCH,
+    /* 0x27 */ DO_ACTION_POUND,
+    /* 0x28 */ DO_ACTION_HOOK,
+    /* 0x29 */ DO_ACTION_SHOOT,
+    /* 0x2A */ DO_ACTION_MAX,
+    /* 0x2A */ TATL_STATE_2A = DO_ACTION_MAX,
+    /* 0x2B */ TATL_STATE_2B,
+    /* 0x2C */ TATL_STATE_2C
+} DoAction;
 
 #endif /* TYPES_H */

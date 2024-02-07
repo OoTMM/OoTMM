@@ -9,6 +9,8 @@
 "has_tunic_goron_raw": "cond(setting(sharedTunicGoron), has(SHARED_TUNIC_GORON), has(TUNIC_GORON))"
 "has_tunic_zora_raw": "cond(setting(sharedTunicZora), has(SHARED_TUNIC_ZORA), has(TUNIC_ZORA))"
 
+"has_scale_raw(x)": "cond(setting(sharedScales), has(SHARED_SCALE, x), has(SCALE, x))"
+
 # Shared Souls
 "soul_octorok": "soul_enemy(SOUL_ENEMY_OCTOROK) || soul_enemy(SHARED_SOUL_ENEMY_OCTOROK)"
 "soul_wallmaster": "soul_enemy(SOUL_ENEMY_WALLMASTER) || soul_enemy(SHARED_SOUL_ENEMY_WALLMASTER)"

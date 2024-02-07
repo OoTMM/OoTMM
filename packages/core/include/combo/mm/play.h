@@ -5,6 +5,7 @@
 #include <combo/game_state.h>
 #include <combo/common/actor.h>
 #include <combo/mm/regs.h>
+#include <combo/mm/types.h>
 #include <combo/common/ocarina.h>
 
 typedef struct
