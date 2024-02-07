@@ -1542,7 +1542,7 @@
   exits:
     "Woodfall": "(has(MASK_DEKU) && soul_deku_scrub) || event(CLEAN_SWAMP) || hookshot_anywhere || can_use_nayru"
     "Woodfall Near Fairy Fountain": "(has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP) || short_hook_anywhere)) || hookshot_anywhere"
-    "Woodfall Front of Temple": "woodfall_raised || hookshot_anywhere"
+    "Woodfall Front of Temple": "woodfall_raised && hookshot_anywhere"
     "Owl Woodfall": "true"
   events:
     OPEN_WOODFALL_TEMPLE: "has(MASK_DEKU) && can_play_awakening"
