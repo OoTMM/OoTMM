@@ -470,13 +470,9 @@ static void DrawIcon(GfxContext* gfxCtx, const Vtx* vtx, u32 segAddr, u16 width,
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0xFF, 0xFF, 0xFF, gfxCtx->play->pauseCtx.itemAlpha & 0xFF);
     gSPVertex(POLY_OPA_DISP++, vtx, 4, 0); // Loads 4 vertices from RDRAM
     // Instructions that happen during function.
-    gDPSetTextureImage(POLY_OPA_DISP++, G_IM_FMT_RGBA, G_IM_SIZ_32b, 1, (void*)segAddr);
-    gDPSetTile(POLY_OPA_DISP++, G_IM_FMT_RGBA, G_IM_SIZ_32b, 0, 0, G_TX_LOADTILE, 0, 0, 0, 0, 0, 0, 0);
-    gDPLoadSync(POLY_OPA_DISP++);
-    gDPLoadBlock(POLY_OPA_DISP++, 7, 0, 0, 0x400 - 1, 0x80);
-    gDPPipeSync(POLY_OPA_DISP++);
-    gDPSetTile(POLY_OPA_DISP++, G_IM_FMT_RGBA, G_IM_SIZ_32b, 8, 0, G_TX_RENDERTILE, 0, 0, 0, 0, 0, 0, 0);
-    gDPSetTileSize(POLY_OPA_DISP++, 0, 0, 0, (width - 1) * 4, (height - 1) * 4);
+    gDPLoadTextureBlock(POLY_OPA_DISP++, segAddr, G_IM_FMT_RGBA, G_IM_SIZ_32b, width, height, 0,
+                        G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
+                        G_TX_NOLOD);
     gSP1Quadrangle(POLY_OPA_DISP++, qidx + 0, qidx + 2, qidx + 3, qidx + 1, 0);
     CLOSE_DISPS();
 }
