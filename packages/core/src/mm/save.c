@@ -93,19 +93,19 @@ void Sram_SaveEndOfCycleWrapper(GameState_Play* play)
     if (gMmExtraTrade.trade1)
     {
         gSave.inventory.items[ITS_MM_TRADE1] = ITEM_MM_DEED_OCEAN;
-        comboToggleTrade1();
+        comboToggleSlot(ITS_MM_TRADE1);
     }
 
     if (gMmExtraTrade.trade2)
     {
         gSave.inventory.items[ITS_MM_TRADE2] = ITEM_MM_LETTER_TO_MAMA;
-        comboToggleTrade2();
+        comboToggleSlot(ITS_MM_TRADE2);
     }
 
     if (gMmExtraTrade.trade3)
     {
         gSave.inventory.items[ITS_MM_TRADE3] = ITEM_MM_PENDANT_OF_MEMORIES;
-        comboToggleTrade3();
+        comboToggleSlot(ITS_MM_TRADE3);
     }
 
     /* Empty bottles (except gold dust) */
