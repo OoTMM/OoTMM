@@ -719,7 +719,7 @@ void comboTextAppendItemNameEx(char** b, s16 gi, int flags, int importance)
         case GI_OOT_SCALE_SILVER:
         case GI_MM_SCALE_SILVER:
             itemName = "a " TEXT_C1 "Progressive Scale";
-            ambiguous = !comboConfig(CFG_SHARED_SCALES);
+            ambiguous = !comboConfig(CFG_SHARED_SCALES) && comboConfig(CFG_MM_SCALES);
             break;
         case GI_OOT_GORON_BRACELET:
             itemName = "a " TEXT_C1 "Progressive Strength";
