@@ -1666,6 +1666,8 @@ MQ Jabu-Jabu Grass Boomerang Room,                          grass,          NONE
 MQ Jabu-Jabu Rupee Bottom,                                  rupee,          NONE,                 INSIDE_JABU_JABU,               0x00100,                    RUPEE_GREEN
 MQ Jabu-Jabu Rupee Middle,                                  rupee,          NONE,                 INSIDE_JABU_JABU,               0x00101,                    RUPEE_GREEN
 MQ Jabu-Jabu Rupee Top,                                     rupee,          NONE,                 INSIDE_JABU_JABU,               0x00102,                    RUPEE_GREEN
+MQ Jabu-Jabu Heart 1,                                       heart,          NONE,                 INSIDE_JABU_JABU,               0x00108,                    RECOVERY_HEART
+MQ Jabu-Jabu Heart 2,                                       heart,          NONE,                 INSIDE_JABU_JABU,               0x00109,                    RECOVERY_HEART
 MQ Bottom of the Well Map Chest,                            chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x03,                       MAP_BOTW
 MQ Bottom of the Well Compass Chest,                        chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x02,                       COMPASS_BOTW
 MQ Bottom of the Well Lens Chest,                           chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x01,                       LENS
