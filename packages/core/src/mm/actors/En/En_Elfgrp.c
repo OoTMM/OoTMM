@@ -19,6 +19,23 @@ static const s16 kGreatFairyNPCs[] = {
     NPC_MM_GREAT_FAIRY_VALLEY,
 };
 
+static u8 fairyMax()
+{
+    if (comboConfig(CFG_MM_STRAY_COUNT_0))
+        return 0;
+    if (comboConfig(CFG_MM_STRAY_COUNT_3))
+        return 3;
+    if (comboConfig(CFG_MM_STRAY_COUNT_5))
+        return 5;
+    if (comboConfig(CFG_MM_STRAY_COUNT_7))
+        return 7;
+    if (comboConfig(CFG_MM_STRAY_COUNT_10))
+        return 10;
+    if (comboConfig(CFG_MM_STRAY_COUNT_13))
+        return 13;
+    return 15;
+};
+
 static void EnElfgrp_ItemQuery(ComboItemQuery* q, int index)
 {
     bzero(q, sizeof(*q));
@@ -68,7 +85,7 @@ static int EnElfgrp_GetFairyCount(GameState_Play* play, int type)
 {
     if (type == 0 || type > 4)
         return 0;
-    if (gSave.inventory.strayFairies[type - 1] >= 15)
+    if (gSave.inventory.strayFairies[type - 1] >= fairyMax())
         return 25;
     return 0;
 }
@@ -85,7 +102,9 @@ static void fairyHint(GameState_Play* play, int index)
     b = play->msgCtx.font.textBuffer.schar;
     comboTextAppendHeader(&b);
     start = b;
-    comboTextAppendStr(&b, "Young one, please help us! If you bring the " TEXT_COLOR_PINK "15 Stray Fairies");
+    comboTextAppendStr(&b, "Young one, please help us! If you bring us " TEXT_COLOR_PINK);
+    comboTextAppendNum(&b, fairyMax());
+    comboTextAppendStr(&b, " Stray Fairies");
     comboTextAppendClearColor(&b);
     comboTextAppendStr(&b, " here, we will give you ");
     comboTextAppendItemNameQueryEx(&b, &q, TF_PREPOS | TF_PROGRESSIVE, gComboData.staticHintsImportance[9 + (index - 2)]);
