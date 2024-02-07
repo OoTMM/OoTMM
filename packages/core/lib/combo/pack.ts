@@ -2,63 +2,18 @@
 import { compressFile } from './compress';
 import { CONFIG, GAMES, Game } from './config';
 import { CosmeticsOutput } from './cosmetics';
-import { DecompressedRoms } from './decompress';
+import { DecompressedGame, DecompressedRoms } from './decompress';
 import { DmaData, DmaDataRecord } from './dma';
 import { Monitor } from './monitor';
 import { Patchfile } from './patch-build/patchfile';
-
-const rol = (v: number, b: number) => (((v << b) | (v >>> (32 - b))) & 0xffffffff) >>> 0;
-
-function checksum(rom: Buffer) {
-  const seed = 0xdf26f436;
-  let t1 = seed;
-  let t2 = seed;
-  let t3 = seed;
-  let t4 = seed;
-  let t5 = seed;
-  let t6 = seed;
-
-  for (let i = 0; i < 0x100000 / 4; ++i) {
-    const offset = 0x1000 + i * 4;
-    const d = rom.readUInt32BE(offset);
-    if ((((t6 + d) & 0xffffffff) >>> 0) < t6) {
-      t4 = ((t4 + 1) & 0xffffffff) >>> 0;
-    }
-    t6 = ((t6 + d) & 0xffffffff) >>> 0;
-    t3 = ((t3 ^ d) & 0xffffffff) >>> 0;
-    const r = rol(d, ((d & 0x1f) >>> 0));
-    t5 = ((t5 + r) & 0xffffffff) >>> 0;
-    if (t2 > d) {
-      t2 = (t2 ^ r) >>> 0;
-    } else {
-      t2 = (t2 ^ t6 ^ d) >>> 0;
-    }
-    const offset2 = 0x750 + ((i * 4) & 0xff);
-    const x = rom.readUInt32BE(offset2);
-    t1 = ((t1 + ((x ^ d) >>> 0)) & 0xffffffff) >>> 0;
-  }
-
-  return [(t6 ^ t4 ^ t3) >>> 0, (t5 ^ t2 ^ t1) >>> 0];
-};
-
-type Payload = {
-  pstart: number;
-  psize: number;
-}
-
-type PackerGameState = {
-  dma: DmaData;
-  dmaAddr: number;
-  packedFiles: number;
-  payload?: Payload;
-}
+import { RomBuilder } from './rom-builder';
+import { FILES } from '@ootmm/data';
 
 type FileData = { type: 'uncompressed' | 'compressed', data: Buffer } | { type: 'dummy' };
 
 class Packer {
   private rom: Buffer;
   private paddr: number;
-  private gs: {[k in Game]: PackerGameState};
   private extraDma: DmaDataRecord[];
 
   constructor(
@@ -305,7 +260,71 @@ class Packer {
   }
 }
 
-export function pack(monitor: Monitor, roms: DecompressedRoms, patchfile: Patchfile, cosmetics: CosmeticsOutput) {
-  const packer = new Packer(monitor, roms, patchfile, cosmetics);
-  return packer.run();
+function extractFiles(game: Game, roms: DecompressedRoms, romBuilder: RomBuilder) {
+  const config = CONFIG[game];
+  const rom = roms[game].rom;
+  const compressedDma = new DmaData(roms[game].dma);
+  const uncompressedDma = new DmaData(rom.subarray(config.dmaAddr, config.dmaAddr + config.dmaCount * 0x10));
+
+  for (let i = 0; i < config.dmaCount; ++i) {
+    const uncompressedEntry = uncompressedDma.read(i);
+    const compressedEntry = compressedDma.read(i);
+    const name = `${game}/${FILES[game][i]}`;
+    if (compressedEntry.physEnd === 0xffffffff) {
+      romBuilder.addFile({ type: 'dummy', data: Buffer.alloc(0), name, game, index: i, vaddr: uncompressedEntry.virtStart });
+      continue;
+    }
+    const data = rom.subarray(uncompressedEntry.virtStart, uncompressedEntry.virtEnd);
+    const type = compressedEntry.physEnd === 0 ? 'uncompressed' : 'compressed';
+    romBuilder.addFile({ type, data, name, game, index: i, vaddr: uncompressedEntry.virtStart });
+  }
+}
+
+async function injectFirst(game: Game, romBuilder: RomBuilder, count: number) {
+  for (let i = 0; i < count; ++i) {
+    const file = romBuilder.fileByIndex(game, i);
+    await romBuilder.inject(file!);
+  }
+}
+
+export async function pack(monitor: Monitor, roms: DecompressedRoms, patchfile: Patchfile, cosmetics: CosmeticsOutput) {
+  const romBuilder = new RomBuilder();
+
+  monitor.log("Pack: Building ROM");
+  for (const game of GAMES) {
+    const dg = roms[game];
+    const patches = patchfile.gamePatches[game].data;
+
+    /* Apply patches */
+    for (const patch of patches) {
+      patch.data.copy(dg.rom, patch.addr);
+    }
+
+    /* Extract files */
+    extractFiles(game, roms, romBuilder);
+  }
+
+  /* We need to pack a few static files before we can pack the rest */
+  await injectFirst('oot', romBuilder, 27);
+  await injectFirst('mm', romBuilder, 31);
+
+  /* Add the extra files */
+  for (const newFiles of patchfile.newFiles) {
+    const type = newFiles.compressed ? 'compressed' : 'uncompressed';
+    const { data } = newFiles;
+    const vaddr = newFiles.vrom;
+    let name = `unk/${vaddr.toString(16)}`;
+    if (vaddr === 0xf0000000) {
+      name = 'oot/payload';
+    } else if (vaddr === 0xf0100000) {
+      name = 'mm/payload';
+    }
+    romBuilder.addFile({ type, data, name, game: 'custom', vaddr });
+  }
+
+  /* Build the final ROM */
+  monitor.log("Pack: Finishing up ROM");
+  const out = await romBuilder.run();
+
+  return out;
 }
