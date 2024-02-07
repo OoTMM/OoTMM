@@ -1746,12 +1746,12 @@ MQ Forest Temple Pot Antichamber 1,                         pot,            NONE
 MQ Forest Temple Pot Antichamber 2,                         pot,            NONE,                 TEMPLE_FOREST,                  0x110c,                     RECOVERY_HEART
 MQ Forest Temple Pot Antichamber 3,                         pot,            NONE,                 TEMPLE_FOREST,                  0x110d,                     BOMBS_5
 MQ Forest Temple Pot Antichamber 4,                         pot,            NONE,                 TEMPLE_FOREST,                  0x110e,                     ARROWS_5
-MQ Forest Heart Garden 1,                                   heart,          NONE,                 TEMPLE_FOREST,                  0x0080a,                    RECOVERY_HEART
-MQ Forest Heart Garden 2,                                   heart,          NONE,                 TEMPLE_FOREST,                  0x0080b,                    RECOVERY_HEART
-MQ Forest Heart Garden 3,                                   heart,          NONE,                 TEMPLE_FOREST,                  0x0080c,                    RECOVERY_HEART
-MQ Forest Heart Well 1,                                     heart,          NONE,                 TEMPLE_FOREST,                  0x00904,                    RECOVERY_HEART
-MQ Forest Heart Well 2,                                     heart,          NONE,                 TEMPLE_FOREST,                  0x00905,                    RECOVERY_HEART
-MQ Forest Heart Well 3,                                     heart,          NONE,                 TEMPLE_FOREST,                  0x00906,                    RECOVERY_HEART
+MQ Forest Temple Heart Garden 1,                            heart,          NONE,                 TEMPLE_FOREST,                  0x0080a,                    RECOVERY_HEART
+MQ Forest Temple Heart Garden 2,                            heart,          NONE,                 TEMPLE_FOREST,                  0x0080b,                    RECOVERY_HEART
+MQ Forest Temple Heart Garden 3,                            heart,          NONE,                 TEMPLE_FOREST,                  0x0080c,                    RECOVERY_HEART
+MQ Forest Temple Heart Well 1,                              heart,          NONE,                 TEMPLE_FOREST,                  0x00904,                    RECOVERY_HEART
+MQ Forest Temple Heart Well 2,                              heart,          NONE,                 TEMPLE_FOREST,                  0x00905,                    RECOVERY_HEART
+MQ Forest Temple Heart Well 3,                              heart,          NONE,                 TEMPLE_FOREST,                  0x00906,                    RECOVERY_HEART
 MQ Fire Temple Early Lower Left Chest,                      chest,          NONE,                 TEMPLE_FIRE,                    0x02,                       RUPEE_BLUE
 MQ Fire Temple Pre-Boss Chest,                              chest,          NONE,                 TEMPLE_FIRE,                    0x07,                       SMALL_KEY_FIRE
 MQ Fire Temple Hammer Chest,                                chest,          NONE,                 TEMPLE_FIRE,                    0x00,                       HAMMER
@@ -1799,6 +1799,9 @@ MQ Fire Temple Pot Boss Key Room 1,                         pot,            NONE
 MQ Fire Temple Pot Boss Key Room 2,                         pot,            NONE,                 TEMPLE_FIRE,                    0x130e,                     MAGIC_JAR_SMALL
 MQ Fire Temple Hammer Loop Stalfos Big Fairy,               fairy_spot,     NONE,                 TEMPLE_FIRE,                    0x00f01,                    FAIRY_BIG
 MQ Fire Temple Hammer Loop Iron Knuckle Big Fairy,          fairy_spot,     NONE,                 TEMPLE_FIRE,                    0x01207,                    FAIRY_BIG
+MQ Fire Temple Heart 1,                                     heart,          NONE,                 TEMPLE_FIRE,                    0x01502,                    RECOVERY_HEART
+MQ Fire Temple Heart 2,                                     heart,          NONE,                 TEMPLE_FIRE,                    0x01503,                    RECOVERY_HEART
+MQ Fire Temple Heart 3,                                     heart,          NONE,                 TEMPLE_FIRE,                    0x01504,                    RECOVERY_HEART
 MQ Water Temple Map Chest,                                  chest,          NONE,                 TEMPLE_WATER,                   0x02,                       MAP_WATER
 MQ Water Temple Compass Chest,                              chest,          NONE,                 TEMPLE_WATER,                   0x01,                       COMPASS_WATER
 MQ Water Temple Longshot Chest,                             chest,          NONE,                 TEMPLE_WATER,                   0x00,                       HOOKSHOT
