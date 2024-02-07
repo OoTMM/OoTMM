@@ -43,6 +43,8 @@
     "MQ Ganon Castle Light Trial Chest": "soul_lizalfos_dinalfos && soul_enemy(SOUL_ENEMY_TORCH_SLUG) && can_play_zelda && has_weapon"
     "MQ Ganon Pot Light End 1": "soul_lizalfos_dinalfos && soul_enemy(SOUL_ENEMY_TORCH_SLUG) && has_lens && can_hookshot && small_keys_ganon(3)"
     "MQ Ganon Pot Light End 2": "soul_lizalfos_dinalfos && soul_enemy(SOUL_ENEMY_TORCH_SLUG) && has_lens && can_hookshot && small_keys_ganon(3)"
+    "MQ Ganon Castle Heart Light 1": "small_keys_ganon(2) && soul_lizalfos_dinalfos && soul_enemy(SOUL_ENEMY_TORCH_SLUG) && can_play_zelda && has_weapon"
+    "MQ Ganon Castle Heart Light 2": "small_keys_ganon(2) && soul_lizalfos_dinalfos && soul_enemy(SOUL_ENEMY_TORCH_SLUG) && can_play_zelda && has_weapon"
 "Ganon Castle Forest":
   dungeon: Ganon
   events:
@@ -73,6 +75,7 @@
     "Ganon Castle Water Silver Rupees": "has_blue_fire && small_keys_ganon(3)"
   locations:
     "MQ Ganon Castle Water Trial Chest": "has_blue_fire"
+    "MQ Ganon Castle Heart Water": "has_blue_fire"
 "Ganon Castle Water Silver Rupees":
   dungeon: Ganon
   events:
