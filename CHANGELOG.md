@@ -89,7 +89,6 @@ All notable changes to this project will be documented in this file.
 - Add fairy spots big fairires shuffle.
 - Add freestanding rupees shuffle.
 - Add freestanding hearts shuffle.
-- Add a setting to randomize the initial content of bottles.
 - Add a setting to make the item pool extremely barren.
 - Add the ability to unequip the kokiri sword and the various shields in OoT.
 
@@ -110,6 +109,280 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - Make multiworld support the co-op improvements.
+
+## [17.3] - 2024-01-04
+
+### Fixed
+
+- Fix MM arrow drops actually giving bombs.
+- Fix a logic issue with gerudo fortress.
+
+## [17.2] - 2024-01-03
+
+### Added
+
+- Add the "Nothing" item, to model things that don't drop anything in vanilla.
+- Add shared shields.
+- Add sunlight arrows, replacing OoT's light arrows and being able to trigger sun switches.
+- Add bottled fairies, poes and big poes for random bottle contents.
+
+### Changed
+
+- Make some pots and grass use the new "Nothing" item.
+- Make OoTMM play a bit nicer with flashcarts and some emulators.
+- Make silver pouches able to be selected individually or randomly.
+- Minor logic improvements to Fire Temple.
+- Minor ER logic improvements.
+- Add constraints to Clock Tower Roof ER to be more fair.
+- Update presets.
+
+### Fixed
+
+- Fix an issue with Spirit MQ soul logic.
+- Fix a logic issue with King Dodongo's soul.
+- Fix logic issues when ISTT, SHT or GBT gets Gohma as the boss.
+- Fix a vanilla bug where collecting a sword while in Fierce Deity Link would caused link to swing the sword uncontrollably.
+- Fix a major cause of crashes on hardware.
+- Fix a major memory corruption issue in Majora's Mask.
+- Fix a broken grass not being shuffled if restore broken actors in enabled.
+- Fix OoT magic not filling if foung in Majora's Mask.
+- Fix the in-game tracker sometimes rendering silver rupee icons at random locations.
+- Fix a large number of minor item-related issues due to a complete rework of the item-adding system.
+- Fix being able to save while on the boat in Southern Swamp.
+- Fix various issues with Fish Pond Shuffle.
+
+## [17.1] - 2023-12-11
+
+### Added
+
+- Add Fish Pond Shuffle.
+- Add Clock Tower Roof ER.
+- Add Open Moon setting.
+- Add a setting to restore broken actors - actors that are in the game code but fail to spawn, in OoT.
+
+### Changed
+
+- Make setting strings much shorter.
+- Make having Cojiro as the active adult trade item force Grog to spawn over Fado.
+- Make the dpad-up item in OoT be the adult trade item when the player is adult.
+- Prevent the milk crates in hyrule castle from spawning without having Talon's soul.
+
+### Fixed
+
+- Fix talon logic.
+- Fix trading with the swamp scrub making the town scrub disappear.
+- Fix a crash when leaving a room while an ice-trap effect is active.
+- Fix minor internal issues with CSMC.
+- Fix the web generator not using the correct defaults for some settings.
+- Fix issues related to Dungeon ER.
+
+## [17.0] - 2023-11-16
+
+### Added
+
+- Add hookshot anywhere in Majora's Mask.
+- Add experimental NPC souls in OoT.
+- Add an always hint for the musical gossip stones.
+- Add logic support for Master Quest grass shuffle.
+- Add random bottle contents.
+- Add bottles of red/blue/green potion for both games.
+- Add various tricks.
+- Add various sometimes hints.
+- Add custom music support.
+- Add many junk hints.
+
+### Changed
+
+- Make dampe give his check in OoT even when not over soil.
+- Split souls into multiple settings.
+- Make the Majora's Mask debug screen come up immediately on crash.
+- Move the ocean wisp next to the ocean owl.
+- Skip the fleeing sakon cutscene.
+- Make bunny hood link faster.
+- Shorten dialogue with Link the Goron.
+- Make silver boulder throwing and monolith throwing faster.
+- Rework one-way ER.
+- Make the pictobox tell you the quality and subject of the picture.
+- Make the blue potion from the witch tell you that you need magic mushrooms.
+- Shorten carpenter cutscenes.
+- Make the boat minigame faster.
+- Make the fisherman minigame faster.
+- Make the OoT fishing hint a sometimes hint.
+- Rework the first cycle behavior of Kotake/Koume.
+- Allow selecting individual or random ganon trials/keyrings.
+
+### Fixed
+
+- Fix seed generation taking longer than expected in some cases.
+- Fix the elder goron logic.
+- Fix hammer logic.
+- Fix the windmill region not being hinted properly.
+- Fix an odd interaction between double/triple hints and WotH.
+- Fix the easier fishing QoL not working as intended.
+- Fix gerudo fortress logic issues.
+- Fix hint grammar issues.
+- Fix being able to arrow cycle while playing archery games.
+- Fix a typo in the beavers hint.
+- Fix logic issues around hot spring water and the frozen grotto.
+- Fix a crash when entering town archery on 4th day.
+- Fix item pool setting not respecting some settings.
+- Minor generator UI issues.
+
+## [16.0] - 2023-10-17
+
+### Added
+
+- Add treasure chest game shuffle.
+- Add the ability to swap age in Ocarina of Time by playing song of time.
+- Add a trick for reverse dampe grave.
+- Add gerudo valley in region ER.
+- Add hint importance for static hints.
+- Add a setting to control ganon's trials.
+- Add a setting to make the great fairy sword progressive.
+- Add arrow cycling.
+
+### Changed
+
+- Optimize the pathfinder.
+- Improve the moon logic.
+- Improve castle great fairy logic in ER.
+- Update presets.
+- Split a lot of ER settings into individual settings.
+- Re-enable the tatl dialogue near the ocean gate to allow for a glitch.
+
+### Fixed
+
+- Fix a specific Like-Like in Fire MQ destroying shields permanently.
+- Fix the fog glitch in OoT.
+- Fix a logic issue with Spirit MQ.
+- Fix a logic issue with gerudo fortress small keys.
+- Fix cosmetic issues with goron and zora.
+- Fix a logic issue with the gold skulltula on kakariko's ladder.
+- Fix a bunch of ER-related logic issues.
+- Fix logic for swordsman school in pot shuffle.
+- Fix the named triforce piece flames sometimes not rendering properly.
+- Fix the inventory and the C buttons being sometimes out of sync.
+- Fix being kicked out of the potion shop and the blacksmith leading to the wrong entrance in ER.
+- Fix a softlock when talking to the cucco lady while having the sword in hand.
+- Fix a softlock related to the zora pot minigame and pot shuffle.
+
+## [15.0] - 2023-09-16
+
+### Added
+
+- Add an extra CSMC option, which colors gold skulltulas depending on the kind of item they give.
+- Add grass shuffle in Majora's Mask.
+- Add coins, which are placeholder items that can be used by special conditions.
+- Add Master Quest support to pot shuffle.
+- Add silver pouches, which are similar to keyrings but for silver rupees.
+- Add the magical silver rupee, which is like the skeleton key but for silver rupees.
+- Add Ocarina button shuffle. The player needs to find the ocarina buttons before being able to play songs.
+- Add a random starting age/adult age setting.
+- Add a setting that tells the player if an item is required or not in hints.
+- Add a Triforce Quest setting, where players need to collect the 3 named Triforce pieces that are placed in difficult locations.
+- Add triple hints for kafei and biggoron.
+- Add hints for ice cavern final chest, the OoT treasure game heart piece, invisible soldier and shoot the sun.
+- Add pre-completed dungeons : rules can be set to make a certain number of sungeons start pre-completed. These dungeons will always be foolish.
+- Add megaflip to glitch logic.
+
+### Changed
+
+- Update the magic upgrade models.
+- update the wallets models.
+- Forbid silver rupees from being hinted WotH.
+- Update nice names.
+- Update presets.
+- Make boss souls use a distinct model.
+- Make the generator UI look a bit better.
+- Move the swamp wisp next to the swamp owl.
+- Make the UI hide some settings that contradict each other.
+
+### Fixed
+
+- Fix shadow temple logic.
+- Fix the "SOLD OUT" texture not rendering properly on hardware.
+- Fix warp shuffle sometimes not working as intended.
+- Fix some item models looking wrong in the opposite game.
+- Fix the Majora's Mask file select skybox being visible on game transitions.
+- Fix a seed generation issue when ganon tower is shuffled.
+- Fix minor hints issues.
+- Fix the in-game trakcer sometimes not rendering properly.
+- Fix the in-game tracker sometimes listing non-existent triforce pieces outside of Triforce Hunt.
+
+## [14.1] - 2023-09-12
+
+### Changed
+
+- Allow Shared Light Arrow to be hinted by gossip stones if they lock Ganondorf.
+- Put the child trade items on dpad-up.
+
+### Fixed
+
+- Fix the Majora's Mask time system being ignored by the logic in edge-cases.
+- Fix some key rings being ignored by logic.
+- Fix key rings being mislabeled in the spoiler log.
+- Fix a vanilla crash when using Din's Fire ina  certain room in Spirit Temple.
+- Fix an issue when using the ocarina in the bombchu bowling alley.
+
+## [14.0] - 2023-09-04
+
+### Added
+
+- Add pot shuffle : pots drop checks when broken.
+- Add grass shuffle for Ocarina of Time : grass drops checks when cut.
+- Add one-way entrances ER.
+- Add ageless hookshot.
+- Add the skeleton key, a key that can open any door.
+- Add keyrings.
+- Add tunic color and forms cosmetic settings for Majora's Mask.
+- Add souls for Jabu's Parasites, Dark Link, Leevers and Stalchildren.
+- Add more regions to Region ER.
+- Add Warp Shuffle ER.
+- Add the lenient goron spikes setting.
+- Add bomber's tracker setting.
+- Add logic for climb/hookshot anywhere in OoT.
+- Add logic for hookshot anywhere in MM.
+
+### Changed
+
+- Change the versioning scheme, as the previous major version field was largely useless.
+- Update presets.
+- Update the nice item names.
+- Shuffle the market in ER.
+- Make elegy much faster to use.
+- Make Ocarina of Time NPCs ignore masks.
+- Extend the CSMC system to support pots, as well as support more textures in the future.
+- Make the plentiful item pool have an extra copy of every soul.
+- Allow up to 999 triforce pieces in Triforce Hunt.
+- Optimize the in-game tracker to save memory.
+- Make leaving the castle courtyard in OoT send you back to the crawl space.
+- Make talon's cutscene in castle faster.
+- Improve Elder Goron logic.
+- Shorten the death cutscene in MM.
+- Allow Fierce Deity Link to spin attack with magic.
+- Update logic to consider MM souls for minor renewable things.
+- Shorten the fleeing pirates cutscene.
+- Skip the fire arrow cutscene in OoT.
+
+### Fixed
+
+- Fix Shadow MQ logic in Boss ER.
+- Fix the milk bar logic.
+- Fix Link the goron giving his check when talked to while he's still rolling.
+- Fix the logic for Great Bay Temple.
+- Fix the OoT poe refill not updating the bottle icon.
+- Fix the Majora's Mask fairy refill item not actually giving a fairy.
+- Fix goron elder logic in ER.
+- Fix OoT keysy breaking gerudo fortress.
+- Fix multiworld seeds failing to generate almost always when random MQ is enabled.
+- Fix multiworld seed failing to generate very often.
+- Fix various other multiworld generation issues.
+- Fix hints not working properly with some combinations of stray fairy shuffle settings.
+- Fix an odd interaction between triforce hunt and the beat majora to reset time trick.
+- Fix OoT silver rupees not giving 5 rupees when collected in MM with shared wallets.
+- Fix fill wallets not working with some settings combinations.
+- Fix switching games sometimes emptying the magic meter.
+- Various other logic fixes.
 
 ## [1.13.1] - 2023-07-31
 
@@ -711,6 +984,14 @@ All notable changes to this project will be documented in this file.
 [18.2]: https://github.com/OoTMM/OoTMM/compare/v18.1...v18.2
 [18.1]: https://github.com/OoTMM/OoTMM/compare/v18.0...v18.1
 [18.0]: https://github.com/OoTMM/OoTMM/compare/v17.3...v18.0
+[17.3]: https://github.com/OoTMM/OoTMM/compare/v17.2...v17.3
+[17.2]: https://github.com/OoTMM/OoTMM/compare/v17.1...v17.2
+[17.1]: https://github.com/OoTMM/OoTMM/compare/v17.0...v17.1
+[17.0]: https://github.com/OoTMM/OoTMM/compare/v16.0...v17.0
+[16.0]: https://github.com/OoTMM/OoTMM/compare/v15.0...v16.0
+[15.0]: https://github.com/OoTMM/OoTMM/compare/v14.1...v15.0
+[14.1]: https://github.com/OoTMM/OoTMM/compare/v14.0...v14.1
+[14.0]: https://github.com/OoTMM/OoTMM/compare/v1.13.0...v14.0
 [1.13.1]: https://github.com/OoTMM/OoTMM/compare/v1.13.0...v1.13.1
 [1.13.0]: https://github.com/OoTMM/OoTMM/compare/v1.12.4...v1.13.0
 [1.12.4]: https://github.com/OoTMM/OoTMM/compare/v1.12.3...v1.12.4
