@@ -44,7 +44,31 @@ function resolveColor(random: Random, c: ColorArg, auto?: () => number | null): 
   }
 }
 
-function patchOotTunic(builder: RomBuilder, assets: Assets, addresses: GameAddresses, index: number, color: number) {
+function patchOotShieldMirror(builder: RomBuilder, assets: Assets, color: number) {
+  const buffer = colorBufferRGB(color);
+  const fileObjectLinkBoy = builder.fileByNameRequired('oot/objects/object_link_boy');
+  const fileIconItemStatic = builder.fileByNameRequired('oot/icon_item_static');
+  const fileGi = builder.fileByNameRequired('oot/objects/object_gi_shield_3');
+
+  /* Patch the field model */
+  for (const off of [0x21270, 0x21768, 0x24278, 0x26560, 0x26980, 0x28dd0]) {
+    buffer.copy(fileObjectLinkBoy.data, off + 4);
+  }
+
+  /* Patch icon */
+  const iconOffset = 0x40 * 0x1000;
+  const icon = fileIconItemStatic.data.subarray(iconOffset, iconOffset + 0x1000);
+  const newIcon = recolorImage('rgba32', icon, assets.MASK_OOT_SHIELD_MIRROR, 0xff1313, color);
+  newIcon.copy(icon);
+
+  /* Patch gi */
+  const primColor = colorBufferRGB(color);
+  const envColor = colorBufferRGB(brightness(color, 0.2));
+  primColor.copy(fileGi.data, 0xfc8 + 4);
+  envColor.copy(fileGi.data, 0xfd0 + 4);
+}
+
+function patchOotTunic(builder: RomBuilder, assets: Assets, index: number, color: number) {
   const defaultColorIcons: number[] = [
     0x005a00,
     0x7a0000,
@@ -95,9 +119,13 @@ export async function cosmetics(opts: Options, addresses: GameAddresses, builder
   const colorOotTunicKokiri = resolveColor(random, c.ootTunicKokiri);
   const colorOotTunicGoron = resolveColor(random, c.ootTunicGoron);
   const colorOotTunicZora = resolveColor(random, c.ootTunicZora);
+  const colorOotShieldMirror = resolveColor(random, c.ootShieldMirror);
 
   /* Patch OoT tunics */
-  if (colorOotTunicKokiri !== null) patchOotTunic(builder, assets, addresses, 0, colorOotTunicKokiri);
-  if (colorOotTunicGoron !== null) patchOotTunic(builder, assets, addresses, 1, colorOotTunicGoron);
-  if (colorOotTunicZora !== null) patchOotTunic(builder, assets, addresses, 2, colorOotTunicZora);
+  if (colorOotTunicKokiri !== null) patchOotTunic(builder, assets, 0, colorOotTunicKokiri);
+  if (colorOotTunicGoron !== null) patchOotTunic(builder, assets, 1, colorOotTunicGoron);
+  if (colorOotTunicZora !== null) patchOotTunic(builder, assets, 2, colorOotTunicZora);
+
+  /* Patch OoT Mirror Shield */
+  if (colorOotShieldMirror !== null) patchOotShieldMirror(builder, assets, colorOotShieldMirror);
 }

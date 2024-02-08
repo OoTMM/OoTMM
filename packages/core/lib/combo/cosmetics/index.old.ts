@@ -1,13 +1,11 @@
 import { GameAddresses } from '../addresses';
-import { Game } from '../config';
 import { DecompressedRoms } from '../decompress';
 import { Options } from '../options';
 import { Patchfile } from '../patch-build/patchfile';
 import { randString } from '../random';
 import { Random, sample } from '../random';
 import { toU32Buffer } from '../util';
-import { png } from '../util/png';
-import { Color, ColorArg, ColorRandom, COLORS } from './color';
+import { Color, ColorArg, COLORS } from './color';
 import { recolorImage } from '../image';
 import fs from 'fs';
 import { enableModelOotLinkChild, enableModelOotLinkAdult } from './model';
@@ -24,13 +22,6 @@ export type CosmeticsOutput = {
   patch: Patchfile;
   overrides: {[k: string]: Buffer};
 };
-
-function brightness(color: number, bright: number): number {
-  const r = (color >>> 16) * bright;
-  const g = ((color >>> 8) & 0xff) * bright;
-  const b = (color & 0xff) * bright;
-  return (r & 0xff) << 16 | (g & 0xff) << 8 | (b & 0xff);
-}
 
 class CosmeticsPass {
   private vrom: number;
@@ -114,23 +105,6 @@ class CosmeticsPass {
     buffer.writeUInt8((color >>> 8) & 0xff, 1);
     buffer.writeUInt8(color & 0xff, 2);
     return buffer;
-  }
-
-  private patchColorRGB(game: Game, addr: number, color: number) {
-    const paddr = this.addresses[game].virtualToPhysical(addr);
-    const buffer = Buffer.alloc(3);
-    buffer.writeUInt8(color >>> 16, 0);
-    buffer.writeUInt8((color >>> 8) & 0xff, 1);
-    buffer.writeUInt8(color & 0xff, 2);
-    this.patch.addDataPatch(game, paddr, buffer);
-  }
-
-  private patchColorRGB_VROM(game: Game, addr: number, color: number) {
-    const buffer = Buffer.alloc(3);
-    buffer.writeUInt8(color >>> 16, 0);
-    buffer.writeUInt8((color >>> 8) & 0xff, 1);
-    buffer.writeUInt8(color & 0xff, 2);
-    this.patch.addDataPatch(game, addr, buffer);
   }
 
   private async patchOotChildModel() {
@@ -259,31 +233,6 @@ class CosmeticsPass {
     this.patch.addDataPatch('mm', paddr + lutOff, newLut);
   }
 
-  private patchOotShieldMirror(color: number | null) {
-    if (color === null)
-      return;
-    const buffer = this.colorBufferRGB(color);
-
-    /* Patch the field model */
-    const objLinkBoyVrom = 0xf86000;
-    for (const off of [0x21270, 0x21768, 0x24278, 0x26560, 0x26980, 0x28DD0]) {
-      this.patch.addDataPatch('oot', objLinkBoyVrom + off + 4, buffer);
-    }
-
-    /* Patch icon */
-    const iconVrom = 0x7fd000;
-    const icon = this.roms.oot.rom.subarray(iconVrom, iconVrom + 0x1000);
-    const newIcon = recolorImage('rgba32', icon, this.assets.MASK_OOT_SHIELD_MIRROR, 0xff1313, color);
-    this.patch.addDataPatch('oot', iconVrom, newIcon);
-
-    /* Patch gi */
-    const giObj = 0x01616000;
-    const primColor = this.colorBufferRGB(color);
-    const envColor = this.colorBufferRGB(brightness(color, 0.2));
-    this.patch.addDataPatch('oot', giObj + 0xfc8 + 4, primColor);
-    this.patch.addDataPatch('oot', giObj + 0xfd0 + 4, envColor);
-  }
-
   async run(): Promise<CosmeticsOutput> {
     const { cosmetics } = this.opts;
     //this.assets = await cosmeticsAssets(this.opts);
@@ -300,9 +249,6 @@ class CosmeticsPass {
     const colorOotShieldMirror = this.colorArgNew(this.opts.cosmetics.ootShieldMirror);
 
     /* OoT tunics */
-    this.patchOotTunic(0, colorOotTunicKokiri);
-    this.patchOotTunic(1, colorOotTunicGoron);
-    this.patchOotTunic(2, colorOotTunicZora);
     this.patchOotShieldMirror(colorOotShieldMirror);
 
     /* MM tunics */
