@@ -27,6 +27,8 @@ All notable changes to this project will be documented in this file.
 - Fix tunic color being off while having Razor Sword.
 - Fix nayru's effect being visually off from link in MM in some cases.
 - Fix items that don't exist in a given seed being hinted as being in Link's Pocket.
+- Fix being able to escape boss rooms as fierce deity by abusing OoT warp songs.
+- Fix being able to freeze the MM clock by abusing OoT warp songs.
 
 ### Changed
 
