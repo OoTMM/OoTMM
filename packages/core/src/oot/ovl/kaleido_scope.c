@@ -36,36 +36,22 @@ static int checkItemToggle(GameState_Play* play)
         }
     }
 
-    if (itemCursor == ITS_OOT_OCARINA && (popcount(gOotExtraItems.ocarina) >= 2))
-    {
-        ret = 1;
-        if (press)
-            comboToggleOcarina();
-    }
-
-    if (itemCursor == ITS_OOT_HOOKSHOT && (popcount(gOotExtraItems.hookshot) >= 2))
-    {
-        ret = 1;
-        if (press)
-            comboToggleHookshot();
-    }
-
-    if (itemCursor == ITS_OOT_TRADE_ADULT && (popcount(gOotExtraTrade.adult) >= 2))
-    {
-        ret = 1;
-        if (press)
-            comboToggleTradeAdult();
-    }
-
-    if (itemCursor == ITS_OOT_TRADE_CHILD && (popcount(gOotExtraTrade.child) >= 2))
+    u8* itemPtr;
+    u32 flags;
+    const u8* table;
+    u32 tableSize;
+    if (comboGetSlotExtras(itemCursor, &itemPtr, &flags, &table, &tableSize) >= 0 && play->pauseCtx.cursorItem[0] != 999 && popcount(flags))
     {
         ret = 1;
         if (press)
         {
-            link = GET_LINK(play);
-            link->mask = 0;
-            comboToggleTradeChild();
-            Interface_LoadItemIconImpl(play, 0);
+            comboToggleSlot(itemCursor);
+            if (itemCursor == ITS_OOT_TRADE_CHILD)
+            {
+                link = GET_LINK(play);
+                link->mask = 0;
+                Interface_LoadItemIconImpl(play, 0);
+            }
         }
     }
 
@@ -1552,46 +1538,120 @@ s32 KaleidoScope_BeforeDraw(GameState_Play* play)
     return 0;
 }
 
-
-void KaleidoScope_DrawItemHook(GfxContext* gfx, int slotId, int sizeX, int sizeY, int unk)
+static u32 GetItemTexture(u32 slotId, u8 item, u32 index)
 {
-    static void* sExtraIconTradeChild;
-    static u8 sExtraIconTradeChildItem;
-
-    void (*KaleidoScope_DrawItem)(GfxContext*, u32, int, int, int);
-    u32* itemToIcon;
-    u32 icon;
-
-    KaleidoScope_DrawItem = OverlayAddr(0x8081f1e8);
-    itemToIcon = (u32*)0x800f8d2c;
-
-    icon = 0;
+    static void* sExtraIconTradeChild[2];
+    static u8 sExtraIconTradeChildItem[2];
+    u32* itemToIcon = (u32*)0x800f8d2c;
     switch (slotId)
     {
     case ITS_OOT_TRADE_CHILD:
-        if (!sExtraIconTradeChild)
+        if (!sExtraIconTradeChild[index])
         {
-            sExtraIconTradeChild = malloc(0x1000);
-            sExtraIconTradeChildItem = ITEM_NONE;
+            sExtraIconTradeChild[index] = malloc(0x1000);
+            sExtraIconTradeChildItem[index] = ITEM_NONE;
         }
-        if (sExtraIconTradeChild)
+        if (sExtraIconTradeChild[index])
         {
-            if (sExtraIconTradeChildItem != gSave.inventory.items[slotId])
+            if (sExtraIconTradeChildItem[index] != item)
             {
-                sExtraIconTradeChildItem = gSave.inventory.items[slotId];
-                comboItemIcon(sExtraIconTradeChild, sExtraIconTradeChildItem);
+                sExtraIconTradeChildItem[index] = item;
+                comboItemIcon(sExtraIconTradeChild[index], sExtraIconTradeChildItem[index]);
             }
-            icon = (u32)sExtraIconTradeChild & 0x00ffffff;
+            return (u32)sExtraIconTradeChild[index] & 0x00ffffff;
         }
         break;
     default:
-        icon = itemToIcon[gSave.inventory.items[slotId]];
-        KaleidoScope_DrawItem(gfx, itemToIcon[gSave.inventory.items[slotId]], sizeX, sizeY, unk);
-        break;
+        return itemToIcon[item];
+    }
+    return 0;
+}
+
+static u8 GetNextItem(u32 slot, s32* outTableIndex)
+{
+    u32 flags;
+    const u8* table;
+    u32 tableSize;
+    u8* itemPtr;
+    *outTableIndex = comboGetSlotExtras(slot, &itemPtr, &flags, &table, &tableSize);
+    if (*outTableIndex >= 0)
+    {
+        return comboGetNextTrade(*itemPtr, flags, table, tableSize);
+    }
+    return ITEM_NONE;
+}
+
+// Vertex buffers.
+static Vtx gVertexBufs[(4 * 4) * 2];
+
+// Vertex buffer pointers.
+static Vtx* gVertex[4] = {
+    &gVertexBufs[(4 * 0) * 2],
+    &gVertexBufs[(4 * 1) * 2],
+    &gVertexBufs[(4 * 2) * 2],
+    &gVertexBufs[(4 * 3) * 2],
+};
+
+static Vtx* GetVtxBuffer(GameState_Play* play, u32 vertIdx, u32 slot) {
+    // Get vertex of current icon drawing to Item Select screen
+    const Vtx* srcVtx = play->pauseCtx.itemVtx + vertIdx;
+
+    // Get dest Vtx (factor in frame counter)
+    int framebufIdx = play->gs.gfx->displayListCounter & 1;
+    Vtx* dstVtx = gVertex[slot] + (framebufIdx * 4);
+
+    // Copy source Vtx over to dest Vtx
+    for (int i = 0; i < 4; i++) {
+        dstVtx[i] = srcVtx[i];
     }
 
+    // Adjust X position
+    dstVtx[0].v.ob[0] += 0x10;
+    dstVtx[2].v.ob[0] += 0x10;
+
+    // Adjust Y position
+    dstVtx[0].v.ob[1] -= 0x10;
+    dstVtx[1].v.ob[1] -= 0x10;
+
+    return dstVtx;
+}
+
+static void DrawIcon(GfxContext* gfxCtx, const Vtx* vtx, u32 segAddr, u16 width, u16 height, u16 qidx) {
+    OPEN_DISPS(gfxCtx);
+    // Instructions that happen before function
+    gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0xFF, 0xFF, 0xFF, gfxCtx->play->pauseCtx.alpha & 0xFF);
+    gSPVertex(POLY_OPA_DISP++, vtx, 4, 0); // Loads 4 vertices from RDRAM
+    // Instructions that happen during function.
+    gDPLoadTextureBlock(POLY_OPA_DISP++, segAddr, G_IM_FMT_RGBA, G_IM_SIZ_32b, width, height, 0,
+                        G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
+                        G_TX_NOLOD);
+    gSP1Quadrangle(POLY_OPA_DISP++, qidx + 0, qidx + 2, qidx + 3, qidx + 1, 0);
+    CLOSE_DISPS();
+}
+
+void KaleidoScope_DrawItemHook(GfxContext* gfx, int slotId, int sizeX, int sizeY, int vertIdx)
+{
+    void (*KaleidoScope_DrawItem)(GfxContext*, u32, int, int, int);
+    u32 icon;
+    u8 item;
+
+    item = gSave.inventory.items[slotId];
+
+    KaleidoScope_DrawItem = OverlayAddr(0x8081f1e8);
+
+    icon = GetItemTexture(slotId, item, 0);
+
     if (icon)
-        KaleidoScope_DrawItem(gfx, icon, sizeX, sizeY, unk);
+        KaleidoScope_DrawItem(gfx, icon, sizeX, sizeY, 0);
+
+    s32 tableIndex;
+    u8 next = GetNextItem(slotId, &tableIndex);
+    if (next != ITEM_NONE && next != item)
+    {
+        icon = GetItemTexture(slotId, next, 1);
+        Vtx* vtx = GetVtxBuffer(gfx->play, vertIdx, tableIndex);
+        DrawIcon(gfx, vtx, icon, sizeX, sizeY, 0);
+    }
 }
 
 #define ITEM_OFFSET 123

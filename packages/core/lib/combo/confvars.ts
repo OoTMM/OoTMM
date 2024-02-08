@@ -142,6 +142,7 @@ export const CONFVARS = [
   'BLAST_MASK_DELAY_VERYLONG',
   'OOT_MASK_BLAST',
   'SHARED_MASK_BLAST',
+  'MM_FD_ANYWHERE',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

@@ -288,6 +288,7 @@ PATCH_END
 
 PATCH_START 0x8081a970
   jal KaleidoScope_DrawItemHook
+  sw  t2, 0x0010 (sp)
 PATCH_END
 
 /* Relocs */

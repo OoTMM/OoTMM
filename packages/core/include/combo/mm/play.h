@@ -64,9 +64,20 @@ ASSERT_OFFSET(InterfaceContext, unk_31a,        0x31a);
 
 typedef struct
 {
-    char    unk_000[0x204];
-    u8      screenIndex;
-    char    unk_205[0x3d];
+    char    unk_000[0x190];
+    /* 0x190 */ Vtx* vtxBuf;
+    char    unk_194[0x70];
+    u16     screenIndex;
+    /* 0x206 */ u8 pad206[0x6];
+    /* 0x20C */ f32 unk20C;
+    /* 0x210 */ f32 unk210;
+    /* 0x214 */ f32 unk214;
+    /* 0x218 */ f32 unk218;
+    /* 0x21C */ f32 unk21C;
+    /* 0x220 */ f32 unk220;
+    /* 0x224 */ u16 itemAlpha;
+    /* 0x226 */ u8 pad226[0x12];
+    /* 0x238 */ u8 cells1[0xa]; // PauseCells
     s16     cursorIndexX[5];
     s16     cursorIndexY[5];
     char    unk_256[0x008];

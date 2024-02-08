@@ -17,52 +17,16 @@ void KaleidoScope_AfterSetCutsorColor(GameState_Play* play)
     press = !!(play->gs.input[0].pressed.buttons & (L_TRIG | U_CBUTTONS));
     effect = 0;
 
-    if (cursorSlot == ITS_MM_TRADE1 && popcount(gMmExtraTrade.trade1) > 1)
+    u8* itemPtr;
+    u32 flags;
+    const u8* table;
+    u32 tableSize;
+    if (comboGetSlotExtras(cursorSlot, &itemPtr, &flags, &table, &tableSize) >= 0 && play->pauseCtx.cursorItem[0] != 999 && popcount(flags))
     {
         play->pauseCtx.cursorColorIndex = 4;
         if (press)
         {
-            comboToggleTrade1();
-            effect = 1;
-        }
-    }
-
-    if (cursorSlot == ITS_MM_TRADE2 && popcount(gMmExtraTrade.trade2) > 1)
-    {
-        play->pauseCtx.cursorColorIndex = 4;
-        if (press)
-        {
-            comboToggleTrade2();
-            effect = 1;
-        }
-    }
-
-    if (cursorSlot == ITS_MM_TRADE3 && popcount(gMmExtraTrade.trade3) > 1)
-    {
-        play->pauseCtx.cursorColorIndex = 4;
-        if (press)
-        {
-            comboToggleTrade3();
-            effect = 1;
-        }
-    }
-
-    if (cursorSlot == ITS_MM_HOOKSHOT && popcount(gMmExtraItems.hookshot) > 1)
-    {
-        play->pauseCtx.cursorColorIndex = 4;
-        if (press)
-        {
-            comboToggleHookshot();
-            effect = 1;
-        }
-    }
-
-    if (cursorSlot == ITS_MM_OCARINA && play->pauseCtx.cursorItem[0] != 0x3e7 && popcount(gMmExtraItems.ocarina) > 1)
-    {
-        play->pauseCtx.cursorColorIndex = 4;
-        if (press)
-        {
-            comboToggleOcarina();
+            comboToggleSlot(cursorSlot);
             effect = 1;
         }
     }
@@ -73,7 +37,7 @@ void KaleidoScope_AfterSetCutsorColor(GameState_Play* play)
         if (press)
         {
             gSave.inventory.items[cursorSlot] = ITEM_MM_SPRING_WATER;
-            reloadSlotOot(gPlay, cursorSlot);
+            reloadSlotMm(gPlay, cursorSlot);
             effect = 1;
         }
     }
@@ -436,22 +400,98 @@ void KaleidoScope_LoadIcons(u32 vrom, void* dst, size_t* size)
     }
 }
 
-typedef void (*KaleidoScope_DrawIcon)(GfxContext* gfxCtx, u32 texture, u16 width, u16 height, u16 point);
-
-void KaleidoScope_DrawIconCustom(GfxContext* gfxCtx, u8 item, u16 width, u16 height, u16 point)
+static u32 GetItemTexture(u8 item)
 {
     u32* gItemIcons = (u32*)0x801c1e6c;
-    KaleidoScope_DrawIcon KaleidoScope_DrawIcon = OverlayAddr(0x80821ad4);
-    u32 texture;
     if (item < ITEM_MM_CUSTOM_MIN)
     {
-        texture = gItemIcons[item];
+        return gItemIcons[item];
     }
     else
     {
         u8 customItem = item - ITEM_MM_CUSTOM_MIN;
-        texture = gCustomIconAddr + (customIconSize * customItem);
+        return gCustomIconAddr + (customIconSize * customItem);
+    }
+}
+
+static u8 GetNextItem(u32 slot, s32* outTableIndex)
+{
+    u32 flags;
+    const u8* table;
+    u32 tableSize;
+    u8* itemPtr;
+    *outTableIndex = comboGetSlotExtras(slot, &itemPtr, &flags, &table, &tableSize);
+    if (*outTableIndex >= 0)
+    {
+        return comboGetNextTrade(*itemPtr, flags, table, tableSize);
+    }
+    return ITEM_NONE;
+}
+
+// Vertex buffers.
+static Vtx gVertexBufs[(4 * 5) * 2];
+
+// Vertex buffer pointers.
+static Vtx* gVertex[5] = {
+    &gVertexBufs[(4 * 0) * 2],
+    &gVertexBufs[(4 * 1) * 2],
+    &gVertexBufs[(4 * 2) * 2],
+    &gVertexBufs[(4 * 3) * 2],
+    &gVertexBufs[(4 * 4) * 2],
+};
+
+static Vtx* GetVtxBuffer(GameState_Play* play, u32 vertIdx, u32 slot) {
+    // Get vertex of current icon drawing to Item Select screen
+    const Vtx* srcVtx = play->pauseCtx.vtxBuf + vertIdx;
+
+    // Get dest Vtx (factor in frame counter)
+    int framebufIdx = play->gs.gfx->displayListCounter & 1;
+    Vtx* dstVtx = gVertex[slot] + (framebufIdx * 4);
+
+    // Copy source Vtx over to dest Vtx
+    for (int i = 0; i < 4; i++) {
+        dstVtx[i] = srcVtx[i];
     }
 
+    // Adjust X position
+    dstVtx[0].v.ob[0] += 0x10;
+    dstVtx[2].v.ob[0] += 0x10;
+
+    // Adjust Y position
+    dstVtx[0].v.ob[1] -= 0x10;
+    dstVtx[1].v.ob[1] -= 0x10;
+
+    return dstVtx;
+}
+
+static void DrawIcon(GfxContext* gfxCtx, const Vtx* vtx, u32 segAddr, u16 width, u16 height, u16 qidx) {
+    OPEN_DISPS(gfxCtx);
+    // Instructions that happen before function
+    gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0xFF, 0xFF, 0xFF, gfxCtx->play->pauseCtx.itemAlpha & 0xFF);
+    gSPVertex(POLY_OPA_DISP++, vtx, 4, 0); // Loads 4 vertices from RDRAM
+    // Instructions that happen during function.
+    gDPLoadTextureBlock(POLY_OPA_DISP++, segAddr, G_IM_FMT_RGBA, G_IM_SIZ_32b, width, height, 0,
+                        G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
+                        G_TX_NOLOD);
+    gSP1Quadrangle(POLY_OPA_DISP++, qidx + 0, qidx + 2, qidx + 3, qidx + 1, 0);
+    CLOSE_DISPS();
+}
+
+typedef void (*KaleidoScope_DrawIcon)(GfxContext* gfxCtx, u32 texture, u16 width, u16 height, u16 point);
+
+void KaleidoScope_DrawIconCustom(GfxContext* gfxCtx, u8 item, u16 width, u16 height, u32 slot, u16 point, u16 vertIdx)
+{
+    u32 texture = GetItemTexture(item);
+
+    KaleidoScope_DrawIcon KaleidoScope_DrawIcon = OverlayAddr(0x80821ad4);
     KaleidoScope_DrawIcon(gfxCtx, texture, width, height, point);
+
+    s32 tableIndex;
+    u8 next = GetNextItem(slot, &tableIndex);
+    if (next != ITEM_NONE && next != item)
+    {
+        texture = GetItemTexture(next);
+        Vtx* vtx = GetVtxBuffer(gfxCtx->play, vertIdx, tableIndex);
+        DrawIcon(gfxCtx, vtx, texture, width, height, point);
+    }
 }
