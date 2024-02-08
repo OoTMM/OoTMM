@@ -111,6 +111,27 @@ All notable changes to this project will be documented in this file.
 
 - Make multiworld support the co-op improvements.
 
+## [1.4.0] - 2023-02-28
+
+### Added
+
+- Add custom models for Milk and Chateau.
+- Add the option to generate a seed without a spoiler log.
+- Add shared items settings for bows, bomb bags, magic, magical arrows, songs, sticks and nuts, hookshot, lens, ocarinas, masks, wallets, and health.
+
+### Changed
+
+- Make dungeon ER honor beatable only logic.
+- Make the secret shrine hint a double hint.
+- Make game transitions a bit smoother on hardware.
+
+### Fixed
+
+- Fix grottos causing wrong warps in ER.
+- Fix the ISTT boss warp pad being enabled when it shoudn't.
+- Fix hints being sometimes wrong in ER.
+- Fix minor issues with stray fairies and hints.
+
 ## [1.3.0] - 2023-02-23
 
 ### Added
@@ -273,6 +294,7 @@ All notable changes to this project will be documented in this file.
 [18.2]: https://github.com/OoTMM/OoTMM/compare/v18.1...v18.2
 [18.1]: https://github.com/OoTMM/OoTMM/compare/v18.0...v18.1
 [18.0]: https://github.com/OoTMM/OoTMM/compare/v17.3...v18.0
+[1.4.0]: https://github.com/OoTMM/OoTMM/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/OoTMM/OoTMM/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/OoTMM/OoTMM/compare/v1.1.3...v1.2.0
 [1.1.3]: https://github.com/OoTMM/OoTMM/compare/v1.1.2...v1.1.3
