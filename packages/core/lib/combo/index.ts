@@ -7,20 +7,20 @@ import { itemName } from './names';
 import { isShuffled } from './logic/is-shuffled';
 import { DEFAULT_SETTINGS, DUNGEONS, GLITCHES, makeSettings, mergeSettings, SettingCategory, SETTINGS, Settings, SETTINGS_CATEGORIES, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS, TRICKS } from './settings';
 import { SettingsPatch } from './settings/patch';
-import { makeCosmetics } from './cosmetics';
+import { makeCosmetics } from './cosmetics/index.old';
 import { makeRandomSettings } from './settings/random';
 import { ItemHelpers, ItemsCount, makePlayerItem } from './items';
 import { makeLocation } from './logic/locations';
 
 export { PRESETS } from './presets';
-export { COSMETICS, makeCosmetics } from './cosmetics';
+export { COSMETICS, makeCosmetics } from './cosmetics/index.old';
 export { COLORS } from './cosmetics/color';
 export { makeRandomSettings } from './settings/random';
 export { SETTINGS_DEFAULT_HINTS, HINT_TYPES } from './settings/hints';
 export { exportSettings, importSettings } from './settings/string';
 
 export type { Presets } from './presets';
-export type { Cosmetics } from './cosmetics';
+export type { Cosmetics } from './cosmetics/index.old';
 export type { OptionRandomSettings } from './settings/random';
 export type { SettingHint, SettingHintType } from './settings/hints';
 export type { ItemsCount } from './items';

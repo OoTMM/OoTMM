@@ -158,6 +158,13 @@ export class RomBuilder {
     return null;
   }
 
+  fileByNameRequired(name: string): RomFile {
+    const file = this.fileByName(name);
+    if (!file)
+      throw new Error(`File not found: ${name}`);
+    return file;
+  }
+
   private fixChecksum() {
     const [c1, c2] = checksum(this.out);
     this.out.writeUInt32BE(c1, 0x10);

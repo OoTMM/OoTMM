@@ -2,12 +2,14 @@
 import { FILES } from '@ootmm/data';
 
 import { CONFIG, GAMES, Game } from './config';
-import { CosmeticsOutput } from './cosmetics';
+import { cosmetics } from './cosmetics';
 import { DecompressedRoms } from './decompress';
 import { DmaData } from './dma';
 import { Monitor } from './monitor';
 import { Patchfile } from './patch-build/patchfile';
 import { RomBuilder } from './rom-builder';
+import { Options } from './options';
+import { GameAddresses } from './addresses';
 
 function extractFiles(game: Game, roms: DecompressedRoms, romBuilder: RomBuilder) {
   const config = CONFIG[game];
@@ -36,7 +38,15 @@ async function injectFirst(game: Game, romBuilder: RomBuilder, count: number) {
   }
 }
 
-export async function pack(monitor: Monitor, roms: DecompressedRoms, patchfile: Patchfile, cosmetics: CosmeticsOutput) {
+type PackArgs = {
+  opts: Options;
+  monitor: Monitor;
+  roms: DecompressedRoms;
+  patchfile: Patchfile;
+  addresses: GameAddresses;
+};
+export async function pack(args: PackArgs) {
+  const { monitor, roms, patchfile } = args;
   const romBuilder = new RomBuilder();
 
   monitor.log("Pack: Building ROM");
@@ -70,6 +80,9 @@ export async function pack(monitor: Monitor, roms: DecompressedRoms, patchfile: 
     }
     romBuilder.addFile({ type, data, name, game: 'custom', vaddr });
   }
+
+  /* Apply cosmetics */
+  await cosmetics(args.opts, args.addresses, romBuilder);
 
   /* Build the final ROM */
   monitor.log("Pack: Finishing up ROM");

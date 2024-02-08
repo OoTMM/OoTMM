@@ -1,6 +1,6 @@
 import { makeSettings, Settings } from './settings';
 import { randString } from './random';
-import { Cosmetics, makeCosmetics } from './cosmetics';
+import { Cosmetics, makeCosmetics } from './cosmetics/index.old';
 import { makeRandomSettings, OptionRandomSettings } from './settings/random';
 
 export type FetchFunc = (filename: string) => Promise<Buffer>;
