@@ -66,8 +66,8 @@ const u8 kMmTrade3[] = {
 };
 
 const u8 kMmHookshot[] = {
-    ITEM_MM_HOOKSHOT,
     0x11, // ITEM_MM_BOTTLE_POTION_RED but that enum is wrong
+    ITEM_MM_HOOKSHOT,
 };
 
 const u8 kMmOcarina[] = {
