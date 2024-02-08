@@ -111,6 +111,41 @@ All notable changes to this project will be documented in this file.
 
 - Make multiworld support the co-op improvements.
 
+## [1.0.1] - 2023-01-30
+
+### Added
+
+- Add hashs to seeds.
+
+### Fixed
+
+- Fix a logic issue with the DMC bean.
+- Fix the open chests in the Moon's Goron Trial being affected by CSMC.
+- Fix the Mikau check sometimes not working.
+- Fix a duplication bug with the Fire Arrow check in OoT.
+- Fix MM trade items being permanently lost when duping bottles over them.
+- Fix Farore's Wind letting you warp across ages.
+- Fix a softlock when closing the scarecrow textbox too fast in OoT.
+- Fix drops not having icons when picked up.
+- Fix the town guards having inconsistent behavior in MM.
+- Fix the vanilla OoT 1.0 empty bomb glitch.
+- Fix adult link having initial equips that the player might not be supposed to have.
+- Fix a softlock in MM when voiding without having the Deku Mask.
+- Fix buying bomb in OoT sometimes not working.
+- Fix the ocarina making trumpet noises in MM after doing the monkey check.
+- Fix owls always grabbing you after being talked to in OoT.
+- Fix swordless link in OoT having weird behavior with the sword slot.
+- Worked around a Project64 bug that causes crashes when entering OoT adult Bazaar.
+- Fix collecting the ocarina check in MM while having the hookshot in hand causing major glitches and corruption.
+- Fix severe issues with the pathfinder causing it to be overly restrictive.
+- Fix a flag issue with the pictobox check.
+
+### Changed
+
+- Make tingle airborne even without magic.
+- Make time flow normally in MM irrespective of having an ocarina.
+- Make the monkey check kick you out of Deku palace.
+
 ## [1.0.0] - 2023-01-22
 
 ### Added
@@ -122,4 +157,5 @@ All notable changes to this project will be documented in this file.
 [18.2]: https://github.com/OoTMM/OoTMM/compare/v18.1...v18.2
 [18.1]: https://github.com/OoTMM/OoTMM/compare/v18.0...v18.1
 [18.0]: https://github.com/OoTMM/OoTMM/compare/v17.3...v18.0
+[1.0.1]: https://github.com/OoTMM/OoTMM/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/OoTMM/OoTMM/releases/tag/v1.0.0
