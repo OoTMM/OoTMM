@@ -111,6 +111,191 @@ All notable changes to this project will be documented in this file.
 
 - Make multiworld support the co-op improvements.
 
+## [1.12.0] - 2023-07-06
+
+### Added
+
+- Add price randomization.
+- Add the ability to save anywhere in MM, by pressing L or C-up on the Quest menu.
+- Add Indoors ER.
+- Add heart chests to CSMC.
+- Add various cutscene skips in OoT.
+- Add Blue Fire Arrow, replacing Ice Arrow and being bale to melt red ice.
+- Add Multiworld support. Players can generate a seed containing multiple worlds, one per player, and find each other's items.
+- Add more sometimes and junk hints.
+- Add the bottomless wallet, a wallet that can contain up to 9999 rupees.
+- Add a setting to make hold targeting the default.
+
+### Changed
+
+- Change the big octo sapphire behavior so that it honors boss ER.
+- Make compasses tell you the boss they are for in ER.
+- Make maps tell you the entrance they are for in ER.
+- Split shared masks into individual settings.
+- Large internal changes to the way items and checks work.
+- Improvements to ageless boomerang logic.
+- Various minor logic improvements.
+- Completely reworked the shop system to properly allow or deny buying certain items based on ammo, health, etc.
+- Remove save slot 3, which never worked properly.
+- Allow manual cooling of hot spring water.
+- Disable hot spring water cooling in ER.
+- Shorten the termina field scrub flight path.
+- Remove first-time transformation cutscenes.
+- Remove the shrinking screen in MM when the day is about to end.
+- Improve Stock Pot Inn logic.
+- Improve Milk Bar logic.
+- Improve the pathfinder to be able to model waiting in MM.
+- Aggressively optimize the generator.
+
+### Fixed
+
+- Fix hints sometimes not working at all in no logic.
+- Fix generating a seed while a new version of the generator is being deployed causing the seed to be corrupted.
+- Fix beating ganon allowing huge logic skips in ER.
+- Fix fishing sometimes causing the game to crash.
+- Fix ER sometimes causing no logic seeds to fail to generate.
+- Fix fishing sometimes giving the wrong reward.
+- Fix the Ganon Boss Key being spuriously given to the player in some cases.
+- Fix a logic issue for the GS above Dodongo's Cavern entrance.
+- Fix an issue with hints sometimes preventing seed generation.
+
+## [1.11.0] - 2023-06-09
+
+### Added
+
+- Add the Triforce Hunt game mode.
+
+### Changed
+
+- Update the chateau and milk models.
+- Improve logic with respect to soaring.
+- Update presets.
+
+### Fixed
+
+- Fix a logic issue with the Deku Tree entrance.
+- Do not show the warning about the spoiler log when the user opted-out of spoiler logs.
+
+## [1.10.1] - 2023-05-21
+
+### Fixed
+
+- Fix an issue preventing seed generation in some cases.
+
+## [1.10.0] - 2023-05-18
+
+### Added
+
+- Add custom hints.
+- Add the option to remove boss keys and/or small keys.
+- Add a setting to control the behavior of carpenters/gerudo fortress.
+- Add random settings.
+- Add hints for every mask on the Moon's gossip stones.
+- Add Ganon Tower ER.
+- Add Ganon Castle ER.
+- Add chests of agony as a CSMC variant.
+- Add a setting to shuffle Gorman Milk and the Milk Bar purchases.
+- Add scrub shuffle for Majora's Mask.
+- Add owl shuffle, where soaring destinations can be obtained as items and owl statues gives a check when hit.
+- Add logic for ageless items.
+- Add a sometimes hint for the Beneath the Well cow.
+- Add an always hint for the house cow.
+
+### Changed
+
+- Split small and boss key settings into OoT and MM variants.
+- Split ageless items into many settings.
+
+### Fixed
+
+- Fix various issues with shop shuffle.
+- Fix ageless items not showing up properly on the equipment screen.
+- Various fix for ageless items.
+
+## [1.9.0] - 2023-05-11
+
+### Added
+
+- Add ageless items.
+- Add fast bunny hood.
+- Add scarce, minimal and plentiful item pools.
+- Add child Fire Temple.
+- Add adult Bottom of the Well.
+- Add adult Deku Tree.
+- Add a setting controlling the behavior of Deku Tree's entrance.
+- Add various speedups to Majora's Mask.
+- Add a setting to control the behavior of boss warp pads in Majora's Mask.
+- Add a setting to climb anywhere in OoT.
+- Add a setting to control the clock speed in MM.
+- Add hookshot anywhere for both games.
+- Add FD anywhere.
+- Add cosmetic settings for OoT tunic colors.
+
+### Changed
+
+- Make the OoT inventory screen default to the item page.
+- Allow Zora to play the ocarina underwater using the dpad.
+- Make both swamp archery rewards obtainable immediately when getting a perfect with enough time left.
+- Make both town archery rewards obtainable immediately when getting 50 points.
+- Make both HBA rewards obtainable immediately when getting at least 1500 points.
+- Remove the pickup animation when getting deku seeds for the first time.
+- Make Farore's Wind remember where it was used when changing ages.
+- Update the blitz preset.
+- Make the sinking lure easier to obtain.
+- Make fishing much easier.
+- Make the cursed skulltula people spawn near the ground.
+- Spawn a gerudo guard on the other side of the fence.
+- Skip more OoT boss cutscenes.
+- Change the ice cavern camera to be more similar to later releases of the game.
+- Relax item restrictions in some scenes in OoT.
+- Make equipping the magical arrows in OoT faster.
+- Make the gold dog always win the race when having Mask of Truth.
+- Improvements to region ER.
+
+### Fixed
+
+- Fix gerudo behavior in ER.
+- Fix logical issues with lon lon scrubs.
+- Fix the OoT windmill with nothing trick not checking that Link is adult.
+- Fix the big rolling goron not giving his check if the player lacks a bomb bag.
+- Fix the gold skulltula static hints sometimes failing to display.
+- Fix small OoT 1.0 actor placement mistakes.
+- Fix small issues with MQ Spirit logic.
+
+## [1.8.0] - 2023-04-21
+
+### Added
+
+- Add a win condition setting.
+- Add tingle shuffle, along with Majora's Mask world maps.
+- Add special conditions for LACS, Ganon boss key and the Majora fight.
+- Add child wallet, giant wallet, and colossal wallet.
+- Add more settings controlling the placement of dungeon rewards.
+- Add a setting to make wallets filled upon obtaining them.
+- Add descriptions to the various settings.
+- Add the blast mask cooldown setting.
+- Add a setting to open King Zora.
+- Add setting strings.
+- Add presets support.
+- Add a few new tricks.
+
+### Changed
+
+- Reworked the web generator completely.
+- Improve region ER logic.
+- Make the big octo sapphire in Jabu-Jabu reflect the actual dungeon reward.
+- Make MM Sun's Song a major item for CSMC.
+
+### Fixed
+
+- Fix song of time sometimes interacting poorly with winter/spring.
+- Fix progressive items not updating in OoT shops in some cases.
+- Fix Boss/Dungeon ER being too restrictive logically in some cases.
+- Fix a softlock when obtaining Ganon's boss key in shops.
+- Fix the player permanently losing access to ruto.
+- Fix getting the longshot not updating the C-buttons.
+- Fix an issue with saves loading improperly.
+
 ## [1.7.0] - 2023-04-15
 
 ### Jokes
@@ -449,6 +634,12 @@ All notable changes to this project will be documented in this file.
 [18.2]: https://github.com/OoTMM/OoTMM/compare/v18.1...v18.2
 [18.1]: https://github.com/OoTMM/OoTMM/compare/v18.0...v18.1
 [18.0]: https://github.com/OoTMM/OoTMM/compare/v17.3...v18.0
+[1.12.0]: https://github.com/OoTMM/OoTMM/compare/v1.11.0...v1.12.0
+[1.11.0]: https://github.com/OoTMM/OoTMM/compare/v1.10.1...v1.11.0
+[1.10.1]: https://github.com/OoTMM/OoTMM/compare/v1.10.0...v1.10.1
+[1.10.0]: https://github.com/OoTMM/OoTMM/compare/v1.9.0...v1.10.0
+[1.9.0]: https://github.com/OoTMM/OoTMM/compare/v1.8.0...v1.9.0
+[1.8.0]: https://github.com/OoTMM/OoTMM/compare/v1.7.0...v1.8.0
 [1.7.0]: https://github.com/OoTMM/OoTMM/compare/v1.6.0...v1.7.0
 [1.6.0]: https://github.com/OoTMM/OoTMM/compare/v1.5.1...v1.6.0
 [1.5.1]: https://github.com/OoTMM/OoTMM/compare/v1.5.0...v1.5.1
