@@ -111,6 +111,83 @@ All notable changes to this project will be documented in this file.
 
 - Make multiworld support the co-op improvements.
 
+## [1.13.1] - 2023-07-31
+
+### Fixed
+
+- Fix a silver rupee softlock.
+
+## [1.13.0] - 2023-07-31
+
+### Added
+
+- Add soul shuffle : souls of enemies and bosses are items that the players need to collect before they can face said ennemies and bosses.
+- Add a soul list to the in-game tracker.
+- Add custom player models in OoT.
+- Add silver rupee shuffle.
+- Add glitch logic support, with Ocarina Item.
+- Add a setting to generate distinct worlds for each player in multiworld. Disctint worlds don't share ER, prices, etc.
+- Add a trick for adult spirit as child.
+- Add a trick for GBT  waterwheel as goron.
+- Add a setting controlling whether ocarinas are shuffled at all in OoT.
+- Add Free Scarecrow in OoT.
+- Add more entrances to Interiors ER.
+- Add the option to start with or remove stray fairies.
+
+### Changed
+
+- Make the chateau effect work in OoT if shared magic is enabled.
+- Split stray fairy shuffle into individual settings.
+- Make the bank able to store up to 9999 rupees.
+- Make the rupee counter color dynamic based on the wallet in OoT.
+- Improved seed generation to fail much less often.
+- Internal improvements to the ROM-building process.
+- Make ruto's letter model sideways.
+- Improvements to the ER algorithm.
+- Allow plandoing or starting with trifoce pieces.
+- Update the major item chest texture in CSMC.
+- Make very long hints break into multiple boxes.
+- Update the blitz preset.
+- Make soft soil skulltulas spawn faster.
+- Remove the Pierre spawning cutscene in OoT.
+- Shorten the gate opening cutscene in Water Temple.
+- Various logic improvements.
+
+### Fixed
+
+- Fix a bug where checks could rarely become corrupted by special conds triggering on the title screen.
+- Fix a logic issue with dog race and child wallet.
+- Fix the various bugs related to going to Majora's Mask from Ocarina of Time while riding Epona.
+- Fix the error message when an item couldn't be placed.
+- Fix scrubs sometimes being shuffled when they shouldn't.
+- Fix the dog race QoL not working.
+- Fix blue warps leading to wrong warps in some cases.
+- Fix the plando UI being broken in some cases.
+
+## [1.12.4] - 2023-07-20
+
+### Added
+
+- Add a safety preventing the use of incompatible patch files.
+
+## [1.12.3] - 2023-07-14
+
+### Fixed
+
+- Fix Triforce Hunt seeds sometimes failing to generate.
+
+## [1.12.2] - 2023-07-08
+
+### Fixed
+
+- Fix major logic issues with the Goron City shortcut.
+
+## [1.12.1] - 2023-07-08
+
+### Fixed
+
+- Fix an issue sometimes causing seeds to fail to generate.
+
 ## [1.12.0] - 2023-07-06
 
 ### Added
@@ -634,6 +711,12 @@ All notable changes to this project will be documented in this file.
 [18.2]: https://github.com/OoTMM/OoTMM/compare/v18.1...v18.2
 [18.1]: https://github.com/OoTMM/OoTMM/compare/v18.0...v18.1
 [18.0]: https://github.com/OoTMM/OoTMM/compare/v17.3...v18.0
+[1.13.1]: https://github.com/OoTMM/OoTMM/compare/v1.13.0...v1.13.1
+[1.13.0]: https://github.com/OoTMM/OoTMM/compare/v1.12.4...v1.13.0
+[1.12.4]: https://github.com/OoTMM/OoTMM/compare/v1.12.3...v1.12.4
+[1.12.3]: https://github.com/OoTMM/OoTMM/compare/v1.12.2...v1.12.3
+[1.12.2]: https://github.com/OoTMM/OoTMM/compare/v1.12.1...v1.12.2
+[1.12.1]: https://github.com/OoTMM/OoTMM/compare/v1.12.0...v1.12.1
 [1.12.0]: https://github.com/OoTMM/OoTMM/compare/v1.11.0...v1.12.0
 [1.11.0]: https://github.com/OoTMM/OoTMM/compare/v1.10.1...v1.11.0
 [1.10.1]: https://github.com/OoTMM/OoTMM/compare/v1.10.0...v1.10.1
