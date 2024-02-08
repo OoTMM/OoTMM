@@ -1176,12 +1176,12 @@
     "Road to Southern Swamp Grotto Grass 12": "true"
     "Road to Southern Swamp Grotto Grass 13": "true"
     "Road to Southern Swamp Grotto Grass 14": "true"
-"Swamp Front": # Swamp climb anywhere logic needs further in-game testing to determine what can and cannot be done with the setting. 
+"Swamp Front": # Swamp climb anywhere logic needs further in-game testing to determine what can and cannot be done with the setting. Also need to consider how Nayru's love will affect the logic. There is also the question of whether or not one can get past the big octo with climb anywhere
   region: SOUTHERN_SWAMP
   exits:
     "Road to Southern Swamp": "true"
     "Tourist Information": "true"
-    "Swamp Back": "event(BOAT_RIDE) || event(CLEAN_SWAMP) || has_mask_zora || ((has(MASK_DEKU) || can_use_nayru || has_hover_boots) && (has_arrows || can_hookshot_short || can_use_din))" # climb anywhere should be a trick for it to be a logical way to access this exit, as you have to take some damage to start climbing through tunnel near witch shop and then again after tunnel at a corner where two walls meet but leave a invisible gap between the two that prevents movement between the two. could be also logical with Nayru's love and magic --- to be discussed
+    "Swamp Back": "event(BOAT_RIDE) || event(CLEAN_SWAMP) || has_mask_zora || ((has(MASK_DEKU) || can_use_nayru || has_hover_boots) && (has_arrows || can_hookshot_short || can_use_din))" # climb anywhere should be a trick for it to be a logical way to access this exit, as you have to take some damage to start climbing through tunnel near witch shop and then again after tunnel at a corner where two walls meet but leave a invisible gap between the two that prevents movement between the two. could be also logical with Nayru's love and magic --- to be discussed. 
     "Swamp Potion Shop": "true"
     "Woods of Mystery": "true"
     "Owl Swamp": "true"
@@ -1389,7 +1389,7 @@
     "Swamp Potion Shop Item 2": "shop_price(0x0e) && (first_day || event(MEET_KOUME))"
     "Swamp Potion Shop Item 3": "shop_price(0x0f) && (first_day || event(MEET_KOUME))"
     "Swamp Potion Shop Rupee": "true"
-"Deku Palace Front":
+"Deku Palace Front": #climb anywhere logic needs in-game testing for determinations
   region: DEKU_PALACE
   exits:
     "Swamp Back": "true"
@@ -2411,7 +2411,7 @@
     ZORA_EGGS_PINNACLE_ROCK: "true"
     MAGIC: "true"
     FISH: "true"
-  locations: #will need to check if can climb anywhere underwater
+  locations: #climb anywhere does not work underwater
     "Pinnacle Rock Chest 1": "has_mask_zora || can_hookshot_short"
     "Pinnacle Rock Chest 2": "has_mask_zora || can_hookshot_short"
     "Pinnacle Rock HP": "soul_enemy(SOUL_ENEMY_DEEP_PYTHON) && event(SEAHORSE) && (has_mask_zora || can_hookshot_short)"
@@ -2446,7 +2446,7 @@
     "Zora Cape Peninsula": "underwater_walking || can_use_nayru || trick(MM_ZORA_HALL_HUMAN)"
     "Waterfall Cliffs": "can_hookshot"
     "Great Bay Near Fairy Fountain": "(climb_anywhere_MM && trick(MM_GBC_GREAT_FAIRY_CLIMB)) || (can_hookshot && (has_explosives || trick_keg_explosives || short_hook_anywhere))" #|| (can_use_ice_arrows && (has_mask_zora || can_hookshot_short))
-        #added climb anywhere behind a trick to check directly above this comment
+        #added climb anywhere behind a trick to the location check directly above this comment
     "Zora Cape Grotto": "can_break_boulders"
   locations:
     "Zora Cape Underwater Chest": "underwater_walking"
@@ -2579,13 +2579,13 @@
 "Behind Gorman Fence":
   region: MILK_ROAD
   exits:
-    "Milk Road": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || final_day || short_hook_anywhere"
+    "Milk Road": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || final_day || short_hook_anywhere || climb_anywhere_MM" #added climb anywhere
     "Gorman Track Back": "true"
 "Gorman Track Front":
   region: MILK_ROAD
   exits:
     "Milk Road": "true"
-    "Gorman Track": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || short_hook_anywhere"
+    "Gorman Track": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || short_hook_anywhere || climb_anywhere_MM" #added climb anywhere
   locations:
     "Gorman Track Garo Mask": "can_play_epona && can_use_wallet(1) && is_day"
     "Gorman Track Milk Purchase": "can_use_wallet(1) && is_day"
@@ -2593,12 +2593,12 @@
   region: MILK_ROAD
   exits:
     "Behind Gorman Fence": "true"
-    "Gorman Track": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || short_hook_anywhere"
+    "Gorman Track": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || short_hook_anywhere || climb_anywhere_MM" #added climb anywhere
 "Gorman Track":
   region: MILK_ROAD
   exits:
-    "Gorman Track Front": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || short_hook_anywhere"
-    "Gorman Track Back": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || short_hook_anywhere"
+    "Gorman Track Front": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || short_hook_anywhere || climb_anywhere_MM" #added climb anywhere
+    "Gorman Track Back": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || short_hook_anywhere || climb_anywhere_MM" #added climb anywhere
   locations:
     "Gorman Track Grass Pack 1 Grass 01": "true"
     "Gorman Track Grass Pack 1 Grass 02": "true"
@@ -2624,7 +2624,7 @@
     "Gorman Track Grass Pack 2 Grass 10": "true"
     "Gorman Track Grass Pack 2 Grass 11": "true"
     "Gorman Track Grass Pack 2 Grass 12": "true"
-"Road to Ikana Front":
+"Road to Ikana Front": #need to check what walls can be climbed here, especially with blue bubbles/real bombchus kept in consideration. This applies to everything bellow this comment.
   region: ROAD_TO_IKANA
   events:
     RUPEES: "can_use_light_arrows && is_night && soul_bubble"
