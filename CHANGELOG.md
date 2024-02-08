@@ -23,7 +23,7 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 
 - Fix a bug where you could unequip shields and swords or toggle items while hovering the wrong slot.
-- Fix stray fairies not restroring health.
+- Fix stray fairies not restoring health.
 - Fix tunic color being off while having Razor Sword.
 - Fix nayru's effect being visually off from link in MM in some cases.
 - Fix items that don't exist in a given seed being hinted as being in Link's Pocket.
