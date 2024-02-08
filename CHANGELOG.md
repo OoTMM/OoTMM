@@ -30,7 +30,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- OoT headers to make them closer to decomp.
+- Improve OoT headers to make them closer to decomp.
 - Improve MM boots logic.
 - Rebalance weighted prices to make it more fair.
 - Make the rupee counter color more consistent between games, and consistent with wallet colors.
@@ -110,6 +110,161 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - Make multiworld support the co-op improvements.
+
+## [1.7.0] - 2023-04-15
+
+### Jokes
+
+- (**April Fools**) Add "working zora mask" in OoT, turns every check into OoT's Zora Mask.
+
+### Added
+
+- Add the probabilistic foolish algorithm, that can detect foolish items in complex seeds.
+- Add a setting to change the kakariko gate behavior.
+- Add a setting to skip child zelda.
+- Add Region ER.
+- Add sun song in MM.
+- Add minor dungeon ER in Majora's Mask.
+- Add scrub shuffle in OoT.
+- Add a new batch of tricks.
+
+### Changed
+
+- Split shared magical arrows into individual settings.
+- Split shared songs into individual settings.
+- Make SoT always send the player back to Clock Town outside of ER.
+- Various improvements to the foolish heuristics.
+- Improvements to MM ranch logic.
+- Make the pathfinder aware of time constraints in both games.
+- Reimplemented the pathfinder to be faster and allow more complex logic.
+- Make a reset after playing MM song of time always place the player at spawn.
+- Update custom text for some shuffled checks.
+- Change the various CSMC textures.
+- Update internal dependencies.
+- Hints are documented better in the spoiler log.
+- Allow dungeon rewards in plando/starting items.
+- Rework the placement order for dungeon rewards/songs.
+
+### Fixed
+
+- Fix the eggs sometimes not hatching upon use.
+- Fix logic issues related to soaring.
+- Fix issues with winter/spring and warps in ER.
+- Fix two chests being swapped in MQ Jabu logic.
+- Fix logic issues with Milk Road.
+- Fix the chateau bottle never being considered a logical bottle.
+- Fix an issue with boss ER and small keys.
+- Fix starting items not checking item availability.
+- Fix various minor logic issues.
+- Fix a very large amount of ER-related logic issues.
+- Fix two MQ spirit chests being swapped in logic.
+- Fix the lake hylia owl not leaving.
+- Fix grottos in MM sometimes causing wrong warps when ER is on.
+- Fix various minor issues with hints.
+- Fix deku drowning sometimes softlocking.
+- Fix various dungeon ER issues.
+- Fix the colossus song check being impossible to obtain in some cases.
+- Fix MQ Ganon's light trial chest being impossible to open when big due to CSMC.
+- Add missing nice names.
+
+## [1.6.1] - 2023-03-28
+
+### Fixed
+
+- Fix the temple of time altar sometimes crashing the game when read.
+
+## [1.6.0] - 2023-03-27
+
+### Added
+
+- Add Plandomizer support, allowing the player to place specific items at specific locations.
+- Add Master Quest dungeons.
+- Add Special Conditions, configurable sets of items locking the Ganon bridge and the Moon.
+- Add the soaring map to OoT when cross-soaring is enabled.
+- Add shop shuffle in Majora's Mask.
+- Add Short Hookshot in Majora's Mask.
+- Add Fairy Ocarina in Majora's Mask.
+- Add shared settings for the new item extensions.
+- Add nicer names for shared items.
+- Add a static hint for Ganon Boss Key when it's set to anywhere.
+
+### Changed
+
+- Improve foolish hint heuristics.
+- Forbid buying bombchu in OoT when lacking a bomb bag and never having found bombchu before.
+- Make blue fire from shops logical.
+- Make it very unambiguous which shields, if any, are progressive in-game.
+- Make the spheres handle events a bit better.
+- Improves the spoiler log format.
+
+### Fixed
+
+- Fix some song locations being wrong in full-goron-lullaby.
+- Fix the distribution of junk items beingwrong sometimes.
+- Fix gyorg sometimes failing to spawn.
+- Fix progressive shields messing with the item pool.
+- Fix an issue where the player could be spuriously warped to OoT from MM some time after canceling a warp song.
+- Fix seeds sometimes failing to generate with some combination of settings related to shields.
+- Fix logic issues with ISTT.
+- Fix minor issues with Fire Temple logic.
+- Fix logic issues with bosses.
+
+## [1.5.1] - 2023-03-14
+
+### Fixed
+
+- Fix a logic issue with Magic Beans in MM.
+- Fix various issues with starting items.
+
+## [1.5.0] - 2023-03-12
+
+### Added
+
+- Add the ability to use song of soaring in OoT.
+- Add the ability to use warp songs in MM.
+- Add egg shuffle.
+- Add shop shuffle for OoT.
+- Add cow shuffle.
+- Add custom text to know what the bean seller is selling.
+- Add the ability to start with consumables.
+
+### Changed
+
+- Allow collecting some very limited checks in MM without song of time logically.
+- Make beatable only completely ignore unreachable items for hints.
+- Minor changes to region names.
+- Make the swamp shooting gallery score counting much faster.
+- Clarify if bugs/fish/milk/etc. are for OoT or for MM in-game.
+- Make most dungeons flags reset on Song of Time, like in vanilla.
+
+### Fixed
+
+- Fix a flag corruption bug.
+- Fix gossip stones sometimes being locked by the item they hint.
+- Fix great fairies not healing the player.
+- Fix the Meddigoron static hint being wrong in some cases.
+- Fix lake hylia gossip stones having their vanilla text when swimming.
+- Fix using the dpad while climbing a ladder sometimes softlocking.
+- Fix spring/winter mixup when exiting snowhead via blue warp in ER.
+- Fix minor logic issues in Beneath the Well.
+- Fix the seed generation sometimes favoring certain items.
+
+## [1.4.2] - 2023-03-04
+
+### Fixed
+
+- Fix crashes when completing some dungeons in ER.
+- Fix the stone tower blue warp sending you to the wrong location.
+- Fix seeds sometimes failing to generate when shared items are enabled.
+- Fix sometimes falling off the bridge after the Keeta cutscene.
+- Fix progressive hookshot sometimes upgrading into the wrong item.
+
+## [1.4.1] - 2023-03-02
+
+### Fixed
+
+- Fix the master sword being sometimes permanently lost in ER.
+- Fix own game ER not working.
 
 ## [1.4.0] - 2023-02-28
 
@@ -294,6 +449,12 @@ All notable changes to this project will be documented in this file.
 [18.2]: https://github.com/OoTMM/OoTMM/compare/v18.1...v18.2
 [18.1]: https://github.com/OoTMM/OoTMM/compare/v18.0...v18.1
 [18.0]: https://github.com/OoTMM/OoTMM/compare/v17.3...v18.0
+[1.7.0]: https://github.com/OoTMM/OoTMM/compare/v1.6.0...v1.7.0
+[1.6.0]: https://github.com/OoTMM/OoTMM/compare/v1.5.1...v1.6.0
+[1.5.1]: https://github.com/OoTMM/OoTMM/compare/v1.5.0...v1.5.1
+[1.5.0]: https://github.com/OoTMM/OoTMM/compare/v1.4.2...v1.5.0
+[1.4.2]: https://github.com/OoTMM/OoTMM/compare/v1.4.1...v1.4.2
+[1.4.1]: https://github.com/OoTMM/OoTMM/compare/v1.4.0...v1.4.1
 [1.4.0]: https://github.com/OoTMM/OoTMM/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/OoTMM/OoTMM/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/OoTMM/OoTMM/compare/v1.1.3...v1.2.0
