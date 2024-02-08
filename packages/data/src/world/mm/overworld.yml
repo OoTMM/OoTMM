@@ -2508,8 +2508,8 @@
     "Zora Cape": "true"
     "Waterfall Rapids": "true"
   locations:
-    "Zora Cape Ledge Chest 1": "can_hookshot"
-    "Zora Cape Ledge Chest 2": "can_hookshot"
+    "Zora Cape Ledge Chest 1": "can_hookshot || climb_anywhere_MM" #added climb anywhere
+    "Zora Cape Ledge Chest 2": "can_hookshot || climb_anywhere_MM" #added climb anywhere
 "Waterfall Rapids":
   region: ENTRANCE
   exits:
@@ -2631,7 +2631,7 @@
   exits:
     "Termina Field": "true"
     "Road to Ikana Grotto": "has_mask_goron"
-    "Road to Ikana Center": "can_play_epona || short_hook_anywhere || (can_goron_bomb_jump && has_bombs)"
+    "Road to Ikana Center": "can_play_epona || short_hook_anywhere || (can_goron_bomb_jump && has_bombs) || climb_anywhere_MM" #added climb anywhere
   locations:
     "Road to Ikana Chest": "can_hookshot || (can_hookshot_short && trick(MM_HARD_HOOKSHOT))"
 "Road to Ikana Grotto":
