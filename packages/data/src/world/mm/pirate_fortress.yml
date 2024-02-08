@@ -34,7 +34,7 @@
   exits:
     "Pirate Fortress Entrance": "true"
     "Pirate Fortress Sewers": "has_mask_zora || (underwater_walking_strict && can_lift_silver)"
-    "Pirate Fortress Sewers After Gate": "has_weapon_range || (has_hover_boots && (has_sticks || has_weapon))"
+    "Pirate Fortress Sewers After Gate": "has_weapon_range || (has_hover_boots && can_activate_crystal)"
   locations:
     "Pirate Fortress Sewers Chest 2": "underwater_walking"
     "Pirate Fortress Sewers Chest 3": "underwater_walking"
@@ -61,8 +61,7 @@
     ARROWS: "true"
     NUTS: "true"
   exits:
-    "Pirate Fortress Entrance": "true"
-    "Pirate Fortress Entrance Balcony": "true"
+    "Pirate Fortress Entrance Balcony": "has_weapon_range || (has_hover_boots && can_activate_crystal)"
     "Pirate Fortress Sewers After Gate": "true"
   locations:
     "Pirate Fortress Sewers Pot End 1": "true"

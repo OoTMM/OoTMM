@@ -178,7 +178,7 @@
   dungeon: SH
   exits:
     "Snowhead Temple Icicles": "small_keys_sh(3) || ((has_explosives || trick_keg_explosives) && small_keys_sh(2))"
-    "Snowhead Temple Dual Switches Unlocked": "has_mask_goron || has_mask_zora || short_hook_anywhere || has_hover_boots || can_use_fire_short_range || trick_sht_fireless_er"
+    "Snowhead Temple Dual Switches Unlocked": "has_mask_goron || has_mask_zora || short_hook_anywhere || can_hookshot || has_hover_boots || can_use_fire_short_range || trick_sht_fireless_er"
   locations:
     "Snowhead Temple SF Dual Switches": "can_use_lens && (((has_arrows || can_hookshot) && has(MASK_GREAT_FAIRY)) || hookshot_anywhere)"
     "Snowhead Temple Pot Dual Switches 1": "true"
