@@ -94,6 +94,7 @@ const SHARED_ITEMS_OOT = new Map([
   ['SHARED_TUNIC_ZORA',       'OOT_TUNIC_ZORA'],
   ['SHARED_MASK_BLAST',       'OOT_MASK_BLAST'],
   ['SHARED_SCALE',            'OOT_SCALE'],
+  ['SHARED_STRENGTH',         'OOT_STRENGTH'],
 ]);
 
 const SHARED_ITEMS_MM = new Map([
@@ -160,6 +161,7 @@ const SHARED_ITEMS_MM = new Map([
   ['SHARED_TUNIC_ZORA',       'MM_TUNIC_ZORA'],
   ['SHARED_MASK_BLAST',       'MM_MASK_BLAST'],
   ['SHARED_SCALE',            'MM_SCALE'],
+  ['SHARED_STRENGTH',         'MM_STRENGTH'],
 ]);
 
 const SHARED_ITEMS = {
@@ -179,6 +181,7 @@ const SUBSTITUTIONS: {[k: string]: string} = {
   MM_SHIELD: "MM_PROGRESSIVE_SHIELD_HERO",
   MM_OCARINA: "MM_OCARINA_OF_TIME",
   MM_SCALE: "MM_SCALE_SILVER",
+  MM_STRENGTH: "MM_GORON_BRACELET",
   SHARED_TRIFORCE: "OOT_TRIFORCE",
   SHARED_TRIFORCE_POWER: "OOT_TRIFORCE_POWER",
   SHARED_TRIFORCE_COURAGE: "OOT_TRIFORCE_COURAGE",
@@ -719,6 +722,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     SHARED_TUNIC_GORON: settings.sharedTunicGoron,
     SHARED_TUNIC_ZORA: settings.sharedTunicZora,
     SHARED_SCALES: settings.sharedScales,
+    SHARED_STRENGTH: settings.sharedStrength,
     OOT_CROSS_WARP: settings.crossWarpOot,
     MM_CROSS_WARP: settings.crossWarpMm !== 'none',
     MM_CROSS_WARP_ADULT: settings.crossWarpMm === 'full',
@@ -806,6 +810,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MM_TUNIC_GORON: settings.tunicGoronMm,
     MM_TUNIC_ZORA: settings.tunicZoraMm,
     MM_SCALES: settings.scalesMm,
+    MM_STRENGTH: settings.strengthMm,
     OOT_GANON_BOSS_KEY_HINT: settings.ganonBossKey === 'anywhere',
     BLAST_MASK_DELAY_INSTANT: settings.blastMaskCooldown === 'instant',
     BLAST_MASK_DELAY_VERYSHORT: settings.blastMaskCooldown === 'veryshort',

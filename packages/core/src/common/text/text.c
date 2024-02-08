@@ -414,6 +414,14 @@ static int isItemAmbiguous(s16 gi)
     case GI_MM_SCALE_GOLDEN:
         return (comboConfig(CFG_MM_SCALES) && !comboConfig(CFG_SHARED_SCALES));
         break;
+    case GI_OOT_GORON_BRACELET:
+    case GI_OOT_SILVER_GAUNTLETS:
+    case GI_OOT_GOLDEN_GAUNTLETS:
+    case GI_MM_GORON_BRACELET:
+    case GI_MM_SILVER_GAUNTLETS:
+    case GI_MM_GOLDEN_GAUNTLETS:
+        return (comboConfig(CFG_MM_STRENGTH) && !comboConfig(CFG_SHARED_STRENGTH));
+        break;
     case GI_OOT_MAGIC_BEAN:
     case GI_OOT_BOTTLE_EMPTY:
     case GI_OOT_BOTTLE_MILK:
@@ -722,7 +730,9 @@ void comboTextAppendItemNameEx(char** b, s16 gi, int flags, int importance)
             ambiguous = !comboConfig(CFG_SHARED_SCALES) && comboConfig(CFG_MM_SCALES);
             break;
         case GI_OOT_GORON_BRACELET:
+        case GI_MM_GORON_BRACELET:
             itemName = "a " TEXT_C1 "Progressive Strength";
+            ambiguous = !comboConfig(CFG_SHARED_STRENGTH) && comboConfig(CFG_MM_STRENGTH);
             break;
         case GI_OOT_BOW:
         case GI_MM_BOW:
