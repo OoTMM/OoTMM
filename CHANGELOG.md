@@ -116,3 +116,10 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - Initial public release.
+
+[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v18.3...HEAD
+[18.3]: https://github.com/OoTMM/OoTMM/compare/v18.2...v18.3
+[18.2]: https://github.com/OoTMM/OoTMM/compare/v18.1...v18.2
+[18.1]: https://github.com/OoTMM/OoTMM/compare/v18.0...v18.1
+[18.0]: https://github.com/OoTMM/OoTMM/compare/v17.3...v18.0
+[1.0.0]: https://github.com/OoTMM/OoTMM/releases/tag/v1.0.0
