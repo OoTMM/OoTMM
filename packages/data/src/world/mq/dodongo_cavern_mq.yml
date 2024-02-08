@@ -62,6 +62,7 @@
   locations:
     "MQ Dodongo Cavern Larvae Room Chest": "soul_enemy(SOUL_ENEMY_GOHMA_LARVA) && (can_use_sticks || has_fire)"
     "MQ Dodongo Cavern GS Larve Room": "can_use_sticks || has_fire"
+    "MQ Dodongo Cavern Heart Vanilla Bomb Bag Room": "true"
 "Dodongo Cavern Upper Lizalfos":
   dungeon: DC
   exits:
@@ -85,7 +86,6 @@
     "MQ Dodongo Cavern Pot Vanilla Bomb Bag Room 2": "true"
     # Fails to load
     "MQ Dodongo Cavern Grass Vanilla Bomb Bag Room": "can_cut_grass"
-    "MQ Dodongo Cavern Heart Vanilla Bomb Bag Room": "true"
 "Dodongo Cavern Lower Tunnel":
   dungeon: DC
   exits:

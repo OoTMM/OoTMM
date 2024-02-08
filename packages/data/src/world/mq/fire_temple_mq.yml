@@ -51,9 +51,9 @@
     "MQ Fire Temple Pot Lava Room Right": "has_tunic_goron && can_hookshot"
     "MQ Fire Temple Pot Boss Key Room 1": "has_tunic_goron && has_fire && can_hookshot"
     "MQ Fire Temple Pot Boss Key Room 2": "has_tunic_goron && has_fire && can_hookshot"
-    "MQ Fire Temple Heart 1": "has_tunic_goron" # TODO: Check this
-    "MQ Fire Temple Heart 2": "has_tunic_goron"
-    "MQ Fire Temple Heart 3": "has_tunic_goron"
+    "MQ Fire Temple Heart 1": "has_tunic_goron_strict && small_keys_fire_mq(2)"
+    "MQ Fire Temple Heart 2": "has_tunic_goron_strict && small_keys_fire_mq(2)"
+    "MQ Fire Temple Heart 3": "has_tunic_goron_strict && small_keys_fire_mq(2)"
 "Fire Temple Maze Lower":
   dungeon: Fire
   exits:
