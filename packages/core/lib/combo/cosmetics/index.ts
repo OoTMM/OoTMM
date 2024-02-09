@@ -11,6 +11,7 @@ import { COLORS, ColorArg } from './color';
 import { BufferPath } from './type';
 import { toU32Buffer } from '../util';
 import { enableModelOotLinkAdult, enableModelOotLinkChild } from './model';
+import { randomizeMusic } from './music';
 
 export async function cosmeticsAssets(opts: Options) {
   return {
@@ -315,6 +316,13 @@ class CosmeticsPass {
     /* Patch models */
     this.patchOotChildModel();
     this.patchOotAdultModel();
+
+    /* Custom music */
+    if (c.music) {
+      const data = await this.getPathBuffer(c.music);
+      if (data)
+        await randomizeMusic(this.builder, random, data);
+    }
   }
 }
 
