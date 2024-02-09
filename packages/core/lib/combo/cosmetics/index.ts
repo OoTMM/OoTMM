@@ -1,3 +1,5 @@
+import fs from 'fs';
+
 import { GameAddresses } from '../addresses';
 import { GAMES } from '../config';
 import { recolorImage } from '../image';
@@ -6,6 +8,9 @@ import { Random, randString, sample } from '../random';
 import { RomBuilder } from '../rom-builder';
 import { png } from '../util/png';
 import { COLORS, ColorArg } from './color';
+import { BufferPath } from './type';
+import { toU32Buffer } from '../util';
+import { enableModelOotLinkChild } from './model';
 
 export async function cosmeticsAssets(opts: Options) {
   return {
@@ -47,6 +52,7 @@ function resolveColor(random: Random, c: ColorArg, auto?: () => number | null): 
 
 class CosmeticsPass {
   private assetsPromise: Promise<Assets> | null;
+  private vrom: number;
 
   constructor(
     private opts: Options,
@@ -55,6 +61,7 @@ class CosmeticsPass {
     private meta: any,
   ) {
     this.assetsPromise = null;
+    this.vrom = 0xc0000000;
   }
 
   private asset(key: keyof Assets): Promise<Buffer> {
@@ -72,6 +79,14 @@ class CosmeticsPass {
       const payloadFile = this.builder.fileByNameRequired(`${game}/payload`);
       buffer.copy(payloadFile.data, addr);
     }
+  }
+
+  private addNewFile(data: Buffer, compressed = true) {
+    const size = (data.length + 0xf) & ~0xf;
+    const vrom = this.vrom;
+    this.vrom = (this.vrom + size) >>> 0;
+    this.builder.addFile({ vaddr: vrom, data, type: compressed ? 'compressed' : 'uncompressed', game: 'custom' })
+    return [vrom, (vrom + size) >>> 0];
   }
 
   private async patchMmTunicDeku(color: number) {
@@ -191,6 +206,43 @@ class CosmeticsPass {
     const envColor = colorBufferRGB(brightness(color, 0.2));
     primColor.copy(fileGi.data, 0xfc8 + 4);
     envColor.copy(fileGi.data, 0xfd0 + 4);
+  }
+
+  private async getPathBuffer(path: BufferPath | null): Promise<Buffer | null> {
+    if (path === null) {
+      return null;
+    }
+
+    if (typeof path === 'string') {
+      if (!process.env.BROWSER) {
+        return fs.promises.readFile(path);
+      } else {
+        throw new Error(`Cannot load buffers from path`);
+      }
+    } else {
+      return Buffer.from(path);
+    }
+  }
+
+  private async patchOotChildModel() {
+    const model = await this.getPathBuffer(this.opts.cosmetics.modelOotChildLink);
+    if (model) {
+      const magic = model.indexOf(Buffer.from('MODLOADER64'));
+      if (magic === -1) {
+        throw new Error('Invalid model file');
+      }
+
+      /* Inject the new model */
+      const code = this.builder.fileByNameRequired('oot/code');
+      const objEntryOffset = 0xe7f58 + 8 * 0x15;
+      const obj = this.addNewFile(model);
+      const objBuffer = toU32Buffer(obj);
+      objBuffer.copy(code.data, objEntryOffset);
+
+      /* Enable the PlayAs hooks */
+      const dfAddr = model.indexOf(Buffer.from([0xdf, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]));
+      enableModelOotLinkChild(this.builder, dfAddr);
+    }
   }
 
   async run() {
