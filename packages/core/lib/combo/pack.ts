@@ -80,7 +80,7 @@ export async function pack(args: PackArgs) {
   }
 
   /* Apply cosmetics */
-  await cosmetics(args.opts, args.addresses, romBuilder);
+  await cosmetics(args.opts, args.addresses, romBuilder, (patchfile.meta || {}).cosmetics);
 
   /* Build the final ROM */
   monitor.log("Pack: Finishing up ROM");

@@ -1,4 +1,5 @@
 import { GameAddresses } from '../addresses';
+import { GAMES } from '../config';
 import { recolorImage } from '../image';
 import { Options } from '../options';
 import { Random, randString, sample } from '../random';
@@ -22,6 +23,16 @@ function colorBufferRGB(color: number) {
   buffer.writeUInt8((color >>> 8) & 0xff, 1);
   buffer.writeUInt8(color & 0xff, 2);
   return buffer;
+}
+
+function patchSymbol(meta: any, name: string, builder: RomBuilder, buffer: Buffer) {
+  for (const game of GAMES) {
+    const syms = meta[game] || {};
+    const addr = syms[name];
+    if (!addr) continue;
+    const payloadFile = builder.fileByNameRequired(`${game}/payload`);
+    buffer.copy(payloadFile.data, addr);
+  }
 }
 
 function brightness(color: number, bright: number): number {
@@ -105,7 +116,7 @@ function patchOotTunic(builder: RomBuilder, assets: Assets, index: number, color
   }
 }
 
-export async function cosmetics(opts: Options, addresses: GameAddresses, builder: RomBuilder) {
+export async function cosmetics(opts: Options, addresses: GameAddresses, builder: RomBuilder, meta: any) {
   const c = opts.cosmetics;
 
   /* Create a random number generator */
@@ -119,12 +130,27 @@ export async function cosmetics(opts: Options, addresses: GameAddresses, builder
   const colorOotTunicKokiri = resolveColor(random, c.ootTunicKokiri);
   const colorOotTunicGoron = resolveColor(random, c.ootTunicGoron);
   const colorOotTunicZora = resolveColor(random, c.ootTunicZora);
+  const colorMmTunicHuman = resolveColor(random, c.mmTunicHuman, () => colorOotTunicKokiri);
   const colorOotShieldMirror = resolveColor(random, c.ootShieldMirror);
 
-  /* Patch OoT tunics */
-  if (colorOotTunicKokiri !== null) patchOotTunic(builder, assets, 0, colorOotTunicKokiri);
-  if (colorOotTunicGoron !== null) patchOotTunic(builder, assets, 1, colorOotTunicGoron);
-  if (colorOotTunicZora !== null) patchOotTunic(builder, assets, 2, colorOotTunicZora);
+  /* Patch human tunics */
+  if (colorOotTunicKokiri !== null) {
+    patchOotTunic(builder, assets, 0, colorOotTunicKokiri);
+  }
+
+  if (colorOotTunicGoron !== null) {
+    patchOotTunic(builder, assets, 1, colorOotTunicGoron);
+    patchSymbol(meta, 'MM_COLOR_TUNIC_GORON', builder, colorBufferRGB(colorOotTunicGoron));
+  }
+
+  if (colorOotTunicZora !== null) {
+    patchOotTunic(builder, assets, 2, colorOotTunicZora);
+    patchSymbol(meta, 'MM_COLOR_TUNIC_ZORA', builder, colorBufferRGB(colorOotTunicZora));
+  }
+
+  if (colorMmTunicHuman !== null) {
+    patchSymbol(meta, 'MM_COLOR_TUNIC_KOKIRI', builder, colorBufferRGB(colorMmTunicHuman));
+  }
 
   /* Patch OoT Mirror Shield */
   if (colorOotShieldMirror !== null) patchOotShieldMirror(builder, assets, colorOotShieldMirror);

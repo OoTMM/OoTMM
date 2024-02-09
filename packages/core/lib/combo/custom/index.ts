@@ -225,7 +225,6 @@ class CustomAssetsBuilder {
     await this.addCustomObject(name, file, defines);
   }
 
-
   async addCustomExtractedObject(entry: CustomEntry) {
     const obj = await makeSplitObject(this.roms, entry);
     await this.addCustomObject(entry.name, obj.data, obj.offsets);
