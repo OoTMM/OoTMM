@@ -74,6 +74,10 @@ const BLITZ_BASE: PartialDeep<Settings> = {
   blastMaskOot: true,
   sharedMaskBlast: true,
   agelessChildTrade: true,
+  scalesMm: true,
+  strengthMm: true,
+  sharedScales: true,
+  sharedStrength: true,
   startingItems: {
     OOT_NUTS_10: 2,
     OOT_SHIELD_DEKU: 1,
