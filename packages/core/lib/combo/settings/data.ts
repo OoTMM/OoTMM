@@ -802,6 +802,38 @@ export const SETTINGS = [{
   ],
   default: 'bossBeaten'
 }, {
+  key: 'strayCount',
+  name: 'Stray fairy requirement',
+  category: 'main.events',
+  type: 'enum',
+  description: 'Controls how many Stray Fairies are needed to get the rewards from the Great Fairies.',
+  values:[
+    {value: 'none', name: 'None', description: 'The reward is given for free'},
+    {value: 'few', name: 'Few', description: 'Requires 3 fairies to get the reward'},
+    {value: 'some', name: 'Some', description: 'Requires 5 fairies to get the reward'},
+    {value: 'half', name: 'Half', description: 'Requires 7 fairies to get the reward'},
+    {value: 'lots', name: 'Lots', description: 'Requires 10 fairies to get the reward'},
+    {value: 'most', name: 'Most', description: 'Requires 13 fairies to get the reward'},
+    {value: 'all', name: 'All', description: 'Requires all 15 fairies to get the reward'},
+  ],
+  default: 'all'
+},{
+  key: 'skullCount',
+  name: 'Skulltula token requirement (MM)',
+  category: 'main.events',
+  type: 'enum',
+  description: 'Controls how many Skulltula tokens are needed to get the rewards from the spider houses.',
+  values:[
+    {value: 'none', name: 'None', description: 'The reward is given for free'},
+    {value: 'few', name: 'Few', description: 'Requires 5 tokens to get the reward'},
+    {value: 'some', name: 'Some', description: 'Requires 10 tokens to get the reward'},
+    {value: 'half', name: 'Half', description: 'Requires 15 tokens to get the reward'},
+    {value: 'lots', name: 'Lots', description: 'Requires 20 tokens to get the reward'},
+    {value: 'most', name: 'Most', description: 'Requires 25 tokens to get the reward'},
+    {value: 'all', name: 'All', description: 'Requires all 30 tokens to get the reward'},
+  ],
+  default: 'all'
+},{
   key: 'freeScarecrowOot',
   name: 'Free Scarecrow (OoT)',
   category: 'main.events',
@@ -864,6 +896,14 @@ export const SETTINGS = [{
   description: 'Makes the Mask Shop in Market open during the night',
   default: false
 }, {
+  key: 'mmCountLogic', //not sure if this kind of thing makes the logic bad if its turned off, its easy to remove if it does
+  name: 'Stray Fairy and Skulltula token custom requirements in logic',
+  category: 'main.events',
+  type: 'boolean',
+  description: 'Changing the Stray Fairy or Skulltula token requirements is accounted for in logic, meaning less of them might be available to you logically.',
+  default: true,
+  cond: (s: any) => (s.strayCount != 'none' || s.skullCount != 'none'),
+},{
   key: 'crossWarpOot',
   name: 'Cross-Games OoT Warp Songs',
   category: 'main.cross',
