@@ -26,34 +26,19 @@
   region: PIRATE_FORTRESS_SEWERS
   exits:
     "Pirate Fortress Entrance": "true"
-    "Pirate Fortress Sewers Cage Room": "has_mask_zora || (underwater_walking_strict && can_lift_silver)"
+    "Pirate Fortress Sewers End": "has_mask_zora"
   locations:
     "Pirate Fortress Sewers Chest 1": "underwater_walking_strict"
-"Pirate Fortress Sewers Cage Room":
-  region: PIRATE_FORTRESS_SEWERS
-  exits:
-    "Pirate Fortress Entrance": "true"
-    "Pirate Fortress Sewers": "has_mask_zora || (underwater_walking_strict && can_lift_silver)"
-    "Pirate Fortress Sewers After Gate": "has_weapon_range || (has_hover_boots && can_activate_crystal)"
-  locations:
-    "Pirate Fortress Sewers Chest 2": "underwater_walking"
-    "Pirate Fortress Sewers Chest 3": "underwater_walking"
-    "Pirate Fortress Sewers HP": "true"
-    "Pirate Fortress Sewers Pot Heart Piece Room 1": "true"
-    "Pirate Fortress Sewers Pot Heart Piece Room 2": "true"
-    "Pirate Fortress Sewers Rupee Near Cage 1": "true"
-    "Pirate Fortress Sewers Rupee Near Cage 2": "true"
-    "Pirate Fortress Sewers Rupee Near Cage 3": "true"
-    "Pirate Fortress Sewers Rupee Near Cage 4": "true"
-    "Pirate Fortress Sewers Rupee Cage": "true"
-"Pirate Fortress Sewers After Gate":
-  region: PIRATE_FORTRESS_SEWERS
-  exits:
-    "Pirate Fortress Entrance": "true"
-    "Pirate Fortress Sewers End": "has_weapon_range || has_bombs || has_bombchu"
-  locations:
-    "Pirate Fortress Sewers Pot Waterway 1": "true"
-    "Pirate Fortress Sewers Pot Waterway 2": "true"
+    "Pirate Fortress Sewers Chest 2": "has_mask_zora"
+    "Pirate Fortress Sewers Chest 3": "has_mask_zora"
+    "Pirate Fortress Sewers HP": "has_mask_zora"
+    "Pirate Fortress Sewers Pot Heart Piece Room 1": "has_mask_zora"
+    "Pirate Fortress Sewers Pot Heart Piece Room 2": "has_mask_zora"
+    "Pirate Fortress Sewers Rupee Near Cage 1": "has_mask_zora"
+    "Pirate Fortress Sewers Rupee Near Cage 2": "has_mask_zora"
+    "Pirate Fortress Sewers Rupee Near Cage 3": "has_mask_zora"
+    "Pirate Fortress Sewers Rupee Near Cage 4": "has_mask_zora"
+    "Pirate Fortress Sewers Rupee Cage": "has_mask_zora"
 "Pirate Fortress Sewers End":
   region: PIRATE_FORTRESS_SEWERS
   events:
@@ -61,12 +46,14 @@
     ARROWS: "true"
     NUTS: "true"
   exits:
-    "Pirate Fortress Entrance Balcony": "has_weapon_range || (has_hover_boots && can_activate_crystal)"
-    "Pirate Fortress Sewers After Gate": "true"
+    "Pirate Fortress Entrance": "true"
+    "Pirate Fortress Entrance Balcony": "true"
   locations:
     "Pirate Fortress Sewers Pot End 1": "true"
     "Pirate Fortress Sewers Pot End 2": "true"
     "Pirate Fortress Sewers Pot End 3": "true"
+    "Pirate Fortress Sewers Pot Waterway 1": "true"
+    "Pirate Fortress Sewers Pot Waterway 2": "true"
     "Pirate Fortress Sewers Rupee Water Elevator 1": "true"
     "Pirate Fortress Sewers Rupee Water Elevator 2": "true"
     "Pirate Fortress Sewers Rupee Water Elevator 3": "true"

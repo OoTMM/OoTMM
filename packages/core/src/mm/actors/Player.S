@@ -795,38 +795,6 @@ PATCH_START 0x80851838
   c.lt.s  $f16, $f0
 PATCH_END
 
-/*
-Replaces:
-  jr         ra
-   nop
-*/
-PATCH_START 0x80124034
-  j         Player_GetStrengthCustom
-   or       a0, v0, zero
-PATCH_END
-
-/*
-Replaces:
-  beqzl     t6, .+0x20
-   addiu    at, r0, 0x0001
-*/
-PATCH_START 0x8083D5FC
-  beqzl     t6, .+0x18
-   nop
-PATCH_END
-
-/*
-Replaces:
-  lbu       v0, 0x014b (s0)
-  addiu     at, r0, 0x0001
-  beq       v0, at, .+0x4c
-*/
-PATCH_START 0x8083D614
-  jal       Player_HasStrength
-   addiu    a0, zero, 0x0003
-  bnez      v0, .+0x4c
-PATCH_END
-
 /* Change child link object to use EnvColor instead of PrimColor */
 
 PATCH_VROM 0x01166390

@@ -10,6 +10,7 @@ import { pack } from "./pack";
 import { buildPatchfiles } from './patch-build';
 import { Patchfile } from './patch-build/patchfile';
 import { makeAddresses } from './addresses';
+import { cosmetics } from './cosmetics';
 import { applyRandomSettings } from './settings/random';
 
 export type GeneratorOutput = {
@@ -71,10 +72,12 @@ export class Generator {
       patchfiles = [new Patchfile(Buffer.from(this.opts.patch))];
     }
 
+    const cosmeticsOut = await cosmetics(this.opts, addresses, roms);
+
     /* Build ROM(s) */
     let packedRoms: Buffer[] = [];
     if (patchfiles.length === 1 || this.opts.debug) {
-      packedRoms = await Promise.all(patchfiles.map(x => pack({ opts: this.opts, monitor: this.monitor, roms, patchfile: x, addresses })));
+      packedRoms = await Promise.all(patchfiles.map(x => pack(this.monitor, roms, x, cosmeticsOut)));
     }
 
     /* Build patch(es) */

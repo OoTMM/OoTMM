@@ -94,7 +94,6 @@ const SHARED_ITEMS_OOT = new Map([
   ['SHARED_TUNIC_ZORA',       'OOT_TUNIC_ZORA'],
   ['SHARED_MASK_BLAST',       'OOT_MASK_BLAST'],
   ['SHARED_SCALE',            'OOT_SCALE'],
-  ['SHARED_STRENGTH',         'OOT_STRENGTH'],
 ]);
 
 const SHARED_ITEMS_MM = new Map([
@@ -161,7 +160,6 @@ const SHARED_ITEMS_MM = new Map([
   ['SHARED_TUNIC_ZORA',       'MM_TUNIC_ZORA'],
   ['SHARED_MASK_BLAST',       'MM_MASK_BLAST'],
   ['SHARED_SCALE',            'MM_SCALE'],
-  ['SHARED_STRENGTH',         'MM_STRENGTH'],
 ]);
 
 const SHARED_ITEMS = {
@@ -181,7 +179,6 @@ const SUBSTITUTIONS: {[k: string]: string} = {
   MM_SHIELD: "MM_PROGRESSIVE_SHIELD_HERO",
   MM_OCARINA: "MM_OCARINA_OF_TIME",
   MM_SCALE: "MM_SCALE_SILVER",
-  MM_STRENGTH: "MM_GORON_BRACELET",
   SHARED_TRIFORCE: "OOT_TRIFORCE",
   SHARED_TRIFORCE_POWER: "OOT_TRIFORCE_POWER",
   SHARED_TRIFORCE_COURAGE: "OOT_TRIFORCE_COURAGE",
@@ -722,7 +719,6 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     SHARED_TUNIC_GORON: settings.sharedTunicGoron,
     SHARED_TUNIC_ZORA: settings.sharedTunicZora,
     SHARED_SCALES: settings.sharedScales,
-    SHARED_STRENGTH: settings.sharedStrength,
     OOT_CROSS_WARP: settings.crossWarpOot,
     MM_CROSS_WARP: settings.crossWarpMm !== 'none',
     MM_CROSS_WARP_ADULT: settings.crossWarpMm === 'full',
@@ -810,7 +806,6 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MM_TUNIC_GORON: settings.tunicGoronMm,
     MM_TUNIC_ZORA: settings.tunicZoraMm,
     MM_SCALES: settings.scalesMm,
-    MM_STRENGTH: settings.strengthMm,
     OOT_GANON_BOSS_KEY_HINT: settings.ganonBossKey === 'anywhere',
     BLAST_MASK_DELAY_INSTANT: settings.blastMaskCooldown === 'instant',
     BLAST_MASK_DELAY_VERYSHORT: settings.blastMaskCooldown === 'veryshort',
@@ -831,7 +826,6 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MM_SKULL_COUNT_15: settings.skullCount === 'half',
     MM_SKULL_COUNT_20: settings.skullCount === 'lots',
     MM_SKULL_COUNT_25: settings.skullCount === 'most',
-    MM_FD_ANYWHERE: settings.fierceDeityAnywhere,
     MM_INSTANT_TRANSFORM: settings.instantTransform,
   };
 
@@ -980,12 +974,12 @@ const randomizerStartingItems = (world: number, logic: LogicResult): Buffer => {
 };
 
 export function patchRandomizer(worldId: number, logic: LogicResult, settings: Settings, patchfile: Patchfile) {
-  patchfile.addNewFile(null, 0xf0200000, randomizerData(worldId, logic), true);
-  patchfile.addNewFile(null, 0xf0300000, randomizerStartingItems(worldId, logic), false);
-  patchfile.addNewFile(null, 0xf0400000, gameChecks(worldId, settings, 'oot', logic), false);
-  patchfile.addNewFile(null, 0xf0500000, gameChecks(worldId, settings, 'mm', logic), false);
-  patchfile.addNewFile(null, 0xf0600000, gameHints(settings, 'oot', logic.hints[worldId]), true);
-  patchfile.addNewFile(null, 0xf0700000, gameHints(settings, 'mm', logic.hints[worldId]), true);
-  patchfile.addNewFile(null, 0xf0800000, gameEntrances(worldId, 'oot', logic), true);
-  patchfile.addNewFile(null, 0xf0900000, gameEntrances(worldId, 'mm', logic), true);
+  patchfile.addNewFile(0xf0200000, randomizerData(worldId, logic), true);
+  patchfile.addNewFile(0xf0300000, randomizerStartingItems(worldId, logic), false);
+  patchfile.addNewFile(0xf0400000, gameChecks(worldId, settings, 'oot', logic), false);
+  patchfile.addNewFile(0xf0500000, gameChecks(worldId, settings, 'mm', logic), false);
+  patchfile.addNewFile(0xf0600000, gameHints(settings, 'oot', logic.hints[worldId]), true);
+  patchfile.addNewFile(0xf0700000, gameHints(settings, 'mm', logic.hints[worldId]), true);
+  patchfile.addNewFile(0xf0800000, gameEntrances(worldId, 'oot', logic), true);
+  patchfile.addNewFile(0xf0900000, gameEntrances(worldId, 'mm', logic), true);
 }

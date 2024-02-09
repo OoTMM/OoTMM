@@ -1030,17 +1030,10 @@ static int addItemBoots(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static int addItemStrengthOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemStrength(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
     if (param > gOotSave.inventory.upgrades.strength)
         gOotSave.inventory.upgrades.strength = param;
-    return 0;
-}
-
-static int addItemStrengthMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
-{
-    if (param > gMmSave.inventory.upgrades.strength)
-        gMmSave.inventory.upgrades.strength = param;
     return 0;
 }
 
@@ -1810,7 +1803,7 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemShieldMm,
     addItemTunic,
     addItemBoots,
-    addItemStrengthOot,
+    addItemStrength,
     addItemScaleOot,
     addItemQuestOot,
     addItemQuestMm,
@@ -1859,7 +1852,6 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemBigFairyOot,
     addItemBigFairyMm,
     addItemScaleMm,
-    addItemStrengthMm,
     addItemEndgame,
 };
 
@@ -1935,9 +1927,6 @@ static const SharedItem kSimpleSharedItems[] = {
     { CFG_SHARED_MASK_BLAST, GI_OOT_MASK_BLAST, GI_MM_MASK_BLAST },
     { CFG_SHARED_SCALES, GI_OOT_SCALE_SILVER, GI_MM_SCALE_SILVER },
     { CFG_SHARED_SCALES, GI_OOT_SCALE_GOLDEN, GI_MM_SCALE_GOLDEN },
-    { CFG_SHARED_STRENGTH, GI_OOT_GORON_BRACELET, GI_MM_GORON_BRACELET },
-    { CFG_SHARED_STRENGTH, GI_OOT_SILVER_GAUNTLETS, GI_MM_SILVER_GAUNTLETS },
-    { CFG_SHARED_STRENGTH, GI_OOT_GOLDEN_GAUNTLETS, GI_MM_GOLDEN_GAUNTLETS },
 };
 
 static int addItem(GameState_Play* play, s16 gi)

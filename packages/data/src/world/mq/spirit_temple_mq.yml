@@ -40,7 +40,7 @@
   exits:
     "Spirit Temple Child Upper": "has_bombchu && small_keys_spirit(6)" #Everything in this room that kid can do adult can do too, only 6 keys is safe.
   events:
-    SPIRIT_PARADOX: "has_bombchu && can_hammer"
+    SPIRIT_PARADOX: "can_hammer"
   locations:
     "MQ Spirit Temple Map Chest": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (!setting(restoreBrokenActors) || soul_keese) && (can_use_sticks || has_weapon || (has_explosives && has_nuts))"
     "MQ Spirit Temple Map Room Back Chest": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (!setting(restoreBrokenActors) || soul_keese) && soul_redead_gibdo && soul_enemy(SOUL_ENEMY_STALFOS) && soul_keese && soul_enemy(SOUL_ENEMY_ANUBIS) && has_weapon && has_bombchu && can_use_slingshot && can_use_din"
@@ -52,8 +52,8 @@
     "MQ Spirit Temple Pot Child Back 2": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (!setting(restoreBrokenActors) || soul_keese) && soul_redead_gibdo && soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon && has_bombchu && can_use_slingshot"
     "MQ Spirit Temple Pot Child Back 3": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (!setting(restoreBrokenActors) || soul_keese) && soul_redead_gibdo && soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon && has_bombchu && can_use_slingshot"
     "MQ Spirit Temple Pot Child Back 4": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (!setting(restoreBrokenActors) || soul_keese) && soul_redead_gibdo && soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon && has_bombchu && can_use_slingshot"
-    "MQ Spirit Temple Heart 1": "can_hit_triggers_distance"
-    "MQ Spirit Temple Heart 2": "can_hit_triggers_distance"
+    "MQ Spirit Temple Heart 1": "true"
+    "MQ Spirit Temple Heart 2": "true"
 "Spirit Temple Child Upper":
 #All paths into this room guarantee explosives.
   dungeon: Spirit
