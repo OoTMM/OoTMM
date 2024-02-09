@@ -122,8 +122,8 @@
 "has_iron_boots": "age_boots && has_iron_boots_raw"
 "has_hover_boots": "age_boots && has_hover_boots_raw"
 
-"can_lift_silver": "is_adult && has(STRENGTH, 2)"
-"can_lift_gold": "is_adult && has(STRENGTH, 3)"
+"can_lift_silver": "is_adult && has_strength_raw(2)"
+"can_lift_gold": "is_adult && has_strength_raw(3)"
 
 #Magic Item Macros
 "has_green_potion": "has_bottle && (renewable(POTION_GREEN) || renewable(BOTTLE_POTION_GREEN))"
@@ -138,7 +138,7 @@
 
 #Item Combination Macros
 "has_explosives": "has_bombs || has_bombchu"
-"has_bombflowers": "has_explosives || has(STRENGTH)"
+"has_bombflowers": "has_explosives || has_strength_raw(1)"
 "has_explosives_or_hammer": "has_explosives || can_hammer || can_use_mask_blast"
 "can_hit_triggers_distance": "can_use_slingshot || can_use_bow"
 "has_ranged_weapon_child": "can_use_slingshot || can_boomerang"
@@ -168,7 +168,7 @@
 "can_ride_bean(x)": "is_adult && event(x)"
 "can_damage": "has_weapon || can_use_sticks || has_explosives || can_use_slingshot || can_use_din"
 "can_damage_skull": "can_damage || can_collect_distance"
-"can_cut_grass_no_c_button": "has_weapon || has(STRENGTH)"
+"can_cut_grass_no_c_button": "has_weapon || has_strength_raw(1)"
 "can_cut_grass": "can_cut_grass_no_c_button || can_boomerang || has_explosives || can_hammer"
 "can_kill_baba_sticks": "soul_deku_baba && (can_boomerang || (has_weapon && (is_child || has_nuts || can_hookshot || can_hammer)))"
 "can_kill_baba_nuts": "soul_deku_baba && (has_weapon || has_explosives || can_use_slingshot)"

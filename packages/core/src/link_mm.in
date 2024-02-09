@@ -324,3 +324,4 @@ Entrance_GetSceneIdAbsolute = 0x80132338;
 Player_OverrideLimbDrawGameplayFirstPerson = 0x801262C8;
 
 Player_SetBootData = 0x80123140;
+Player_GetStrength = 0x80124020;

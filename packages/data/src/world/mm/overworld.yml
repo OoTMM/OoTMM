@@ -80,7 +80,7 @@
     "Swamp Front": "can_reset_time"
   events:
     STICKS: "true"
-    NUTS: "soul_deku_baba"
+    NUTS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_nuts)"
     FAIRY: "true"
     WATER: "true"
   locations:
@@ -562,7 +562,7 @@
   region: TERMINA_FIELD
   events:
     STICKS: "can_kill_baba_both_sticks"
-    NUTS: "soul_deku_baba"
+    NUTS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_nuts)"
     MAGIC: "soul_enemy(SOUL_ENEMY_CHUCHU)"
     RUPEES: "true"
     BOMBS_OR_BOMBCHU: "true"
@@ -822,8 +822,8 @@
 "Grass Grotto":
   region: ENTRANCE
   events:
-    STICKS: "soul_deku_baba"
-    NUTS: "soul_deku_baba"
+    STICKS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_sticks)"
+    NUTS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_nuts)"
     MAGIC: "true"
     RUPEES: "true"
     BOMBS_OR_BOMBCHU: "true"
@@ -889,8 +889,8 @@
 "Pillar Grotto":
   region: ENTRANCE
   events:
-    STICKS: "soul_deku_baba"
-    NUTS: "soul_deku_baba"
+    STICKS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_sticks)"
+    NUTS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_nuts)"
     MAGIC: "true"
     RUPEES: "true"
     BOMBS_OR_BOMBCHU: "true"
@@ -1099,8 +1099,8 @@
 "Road to Southern Swamp":
   region: ROAD_TO_SWAMP
   events:
-    STICKS: "soul_deku_baba"
-    NUTS: "soul_deku_baba"
+    STICKS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_sticks)"
+    NUTS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_nuts)"
     MAGIC: "true"
     RUPEES: "true"
     BOMBS_OR_BOMBCHU: "true"
@@ -1150,8 +1150,8 @@
 "Road to Southern Swamp Grotto":
   region: ENTRANCE
   events:
-    STICKS: "soul_deku_baba"
-    NUTS: "soul_deku_baba"
+    STICKS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_sticks)"
+    NUTS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_nuts)"
     MAGIC: "true"
     RUPEES: "true"
     BOMBS_OR_BOMBCHU: "true"
@@ -1190,7 +1190,7 @@
     PICTURE_SWAMP: "has(PICTOGRAPH_BOX)"
     PICTURE_BIG_OCTO: "has(PICTOGRAPH_BOX) && soul_octorok"
     STICKS: "true"
-    NUTS: "soul_deku_baba"
+    NUTS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_nuts)"
     RUPEES: "true"
     BOMBS_OR_BOMBCHU: "true"
     ARROWS: "true"
@@ -1274,8 +1274,8 @@
 "Southern Swamp Grotto":
   region: ENTRANCE
   events:
-    STICKS: "soul_deku_baba"
-    NUTS: "soul_deku_baba"
+    STICKS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_sticks)"
+    NUTS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_nuts)"
     MAGIC: "true"
     RUPEES: "true"
     BOMBS_OR_BOMBCHU: "true"
@@ -1353,8 +1353,8 @@
   exits:
     "Woods of Mystery": "second_day"
   events:
-    STICKS: "soul_deku_baba"
-    NUTS: "soul_deku_baba"
+    STICKS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_sticks)"
+    NUTS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_nuts)"
     MAGIC: "true"
     RUPEES: "true"
     BOMBS_OR_BOMBCHU: "true"
@@ -1716,8 +1716,8 @@
     ARROWS: "true"
     BOMBS_OR_BOMBCHU: "true"
     RUPEES: "true"
-    STICKS: "soul_deku_baba"
-    NUTS: "soul_deku_baba"
+    STICKS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_sticks)"
+    NUTS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_nuts)"
     BUGS: "true"
     FISH: "true"
     MUSHROOM: "has(MASK_SCENTS)"
@@ -1789,8 +1789,8 @@
     ARROWS: "true"
     BOMBS_OR_BOMBCHU: "true"
     RUPEES: "true"
-    STICKS: "soul_deku_baba"
-    NUTS: "soul_deku_baba"
+    STICKS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_sticks)"
+    NUTS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_nuts)"
     BUGS: "true"
     FISH: "true"
     MUSHROOM: "has(MASK_SCENTS)"
@@ -1912,8 +1912,8 @@
   locations:
     "Goron Graveyard Mask": "can_use_lens_strict && can_play_healing"
   events:
-    GORON_GRAVEYARD_HOT_WATER: "has_bottle && has_mask_goron"
-    WATER: "has_bottle && has_mask_goron"
+    GORON_GRAVEYARD_HOT_WATER: "has_bottle && (has_mask_goron || can_lift_gold)"
+    WATER: "has_bottle && (has_mask_goron || can_lift_gold)"
 "Goron Shrine":
   region: GORON_VILLAGE
   exits:
@@ -1973,8 +1973,8 @@
     ARROWS: "true"
     BOMBS_OR_BOMBCHU: "true"
     RUPEES: "true"
-    STICKS: "soul_deku_baba"
-    NUTS: "soul_deku_baba"
+    STICKS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_sticks)"
+    NUTS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_nuts)"
     BUGS: "true"
     FISH: "true"
     MUSHROOM: "has(MASK_SCENTS)"
@@ -2281,8 +2281,8 @@
     BOMBS_OR_BOMBCHU: "true"
     ARROWS: "true"
     RUPEES: "true"
-    STICKS: "soul_deku_baba"
-    NUTS: "soul_deku_baba"
+    STICKS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_sticks)"
+    NUTS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_nuts)"
     BUGS: "true"
     FISH: "true"
   exits:
@@ -2466,8 +2466,8 @@
     ARROWS: "true"
     BOMBS_OR_BOMBCHU: "true"
     RUPEES: "true"
-    STICKS: "soul_deku_baba"
-    NUTS: "soul_deku_baba"
+    STICKS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_sticks)"
+    NUTS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_nuts)"
     FISH: "true"
     BUGS: "true"
   exits:
@@ -2642,8 +2642,8 @@
     RUPEES: "true"
     FISH: "true"
     BUGS: "true"
-    STICKS: "soul_deku_baba"
-    NUTS: "soul_deku_baba"
+    STICKS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_sticks)"
+    NUTS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_nuts)"
   exits:
     "Road to Ikana Front": "true"
   locations:
@@ -2711,8 +2711,8 @@
     BOMBS_OR_BOMBCHU: "true"
     ARROWS: "true"
     RUPEES: "true"
-    STICKS: "soul_deku_baba"
-    NUTS: "soul_deku_baba"
+    STICKS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_sticks)"
+    NUTS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_nuts)"
     FISH: "true"
     BUGS: "true"
   exits:
@@ -2831,8 +2831,8 @@
     BOMBS_OR_BOMBCHU: "true"
     ARROWS: "true"
     RUPEES: "true"
-    STICKS: "soul_deku_baba"
-    NUTS: "soul_deku_baba"
+    STICKS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_sticks)"
+    NUTS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_nuts)"
     FISH: "true"
     BUGS: "true"
   locations:

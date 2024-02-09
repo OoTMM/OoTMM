@@ -1212,6 +1212,13 @@ export const SETTINGS = [{
   description: "Adds Silver Scale and Golden Scale in Majora's Mask.",
   default: false
 }, {
+  key: 'strengthMm',
+  name: "Strength (MM)",
+  category: 'items.extensions',
+  type: 'boolean',
+  description: "Adds Goron's Bracelet, Silver Gauntlets and Golden Gauntlets in Majora's Mask.",
+  default: false
+}, {
   key: 'blastMaskOot',
   name: "Blast Mask (OoT)",
   category: 'items.extensions',
@@ -1553,6 +1560,13 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false,
   cond: (s: any) => s.scalesMm,
+}, {
+  key: 'sharedStrength',
+  name: "Shared Strength",
+  category: 'items.shared',
+  type: 'boolean',
+  default: false,
+  cond: (s: any) => s.strengthMm,
 }, {
   key: 'agelessSwords',
   name: 'Ageless Swords',
