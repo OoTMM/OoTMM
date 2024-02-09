@@ -1,230 +1,407 @@
 #include <combo.h>
+#include <PR/os_internal_flash.h>
 
-#define FLASH_BLOCK_SIZE        128
-#define FLASH_CMD_REG           0x10000
-#define FLASH_CMD_CHIP_ERASE    0x3C000000
-#define FLASH_CMD_SECTOR_ERASE  0x4B000000
-#define FLASH_CMD_EXECUTE_ERASE 0x78000000
-#define FLASH_CMD_PROGRAM_PAGE  0xA5000000
-#define FLASH_CMD_PAGE_PROGRAM  0xB4000000
-#define FLASH_CMD_STATUS        0xD2000000
-#define FLASH_CMD_ID            0xE1000000
-#define FLASH_CMD_READ_ARRAY    0xF0000000
+#define FLASH_BLOCK_MASK (FLASH_BLOCK_SIZE - 1)
 
-ALIGNED(8) static OSMesgQueue   sFlashQueue;
-ALIGNED(8) static OSIoMesg      sFlashIoMesg;
-ALIGNED(8) static OSMesg        sFlashMesg[1];
-ALIGNED(8) static OSPiHandle    sFlashHandle;
-ALIGNED(8) static u32           sFlashId[2];
-static int                      sFlashInitialized;
-static int                      sFlashVersion;
+#if defined(GAME_OOT)
 
-static void flashWait(u32 mask)
+u32         __osFlashID[4] ALIGNED(8);
+OSIoMesg    __osFlashMsg ALIGNED(8);
+OSMesgQueue __osFlashMessageQ ALIGNED(8);
+OSPiHandle  __osFlashHandler ALIGNED(8);
+OSMesg      __osFlashMsgBuf[1];
+s32         __osFlashVersion;
+
+u64  __osDisableInt(void);
+void __osRestoreInt(u64);
+
+s32 osEPiLinkHandle(OSPiHandle* handle)
+{
+    u64 intmask;
+
+    intmask = __osDisableInt();
+    handle->next = __osPiTable;
+    __osPiTable = handle;
+    __osRestoreInt(intmask);
+
+    return 0;
+}
+
+u32 osFlashGetAddr(u32 pageNum)
+{
+    if (__osFlashVersion == OLD_FLASH)
+        return pageNum * (FLASH_BLOCK_SIZE >> 1);
+    else
+        return pageNum * FLASH_BLOCK_SIZE;
+}
+
+OSPiHandle* osFlashInit(void)
+{
+    u32 flash_type;
+    u32 flash_maker;
+
+    osCreateMesgQueue(&__osFlashMessageQ, __osFlashMsgBuf, 1);
+    if (__osFlashHandler.baseAddress == K0_TO_K1(FLASH_START_ADDR))
+        return &__osFlashHandler;
+
+    __osFlashHandler.type = DEVICE_TYPE_FLASH;
+    __osFlashHandler.baseAddress = K0_TO_K1(FLASH_START_ADDR);
+    __osFlashHandler.latency = FLASH_LATENCY;
+    __osFlashHandler.pulse = FLASH_PULSE;
+    __osFlashHandler.pageSize = FLASH_PAGE_SIZE;
+    __osFlashHandler.relDuration = FLASH_REL_DURATION;
+    __osFlashHandler.domain = PI_DOMAIN2;
+    __osFlashHandler.speed = 0;
+    bzero(&__osFlashHandler.transferInfo, sizeof(__osFlashHandler.transferInfo));
+    osEPiLinkHandle(&__osFlashHandler);
+
+    /* Read maker to determine flash version */
+    osFlashReadId(&flash_type, &flash_maker);
+    switch (flash_maker)
+    {
+    case FLASH_VERSION_MX_PROTO_A:
+    case FLASH_VERSION_MX_A:
+    case FLASH_VERSION_MX_C:
+        __osFlashVersion = OLD_FLASH;
+        break;
+    default:
+        __osFlashVersion = NEW_FLASH;
+        break;
+    }
+
+    return &__osFlashHandler;
+}
+
+void osFlashReadStatus(u8* status)
+{
+    u32 tmp;
+
+    osEPiWriteIo(&__osFlashHandler, __osFlashHandler.baseAddress | FLASH_CMD_REG, FLASH_CMD_STATUS);
+    osEPiReadIo(&__osFlashHandler, __osFlashHandler.baseAddress, &tmp);
+    osEPiWriteIo(&__osFlashHandler, __osFlashHandler.baseAddress | FLASH_CMD_REG, FLASH_CMD_STATUS);
+    osEPiReadIo(&__osFlashHandler, __osFlashHandler.baseAddress, &tmp);
+
+    *status = tmp & 0xff;
+}
+
+void osFlashReadId(u32 *flash_type, u32 *flash_maker)
+{
+    u8 status;
+
+    osFlashReadStatus(&status);
+    osEPiWriteIo(&__osFlashHandler, __osFlashHandler.baseAddress | FLASH_CMD_REG, FLASH_CMD_ID);
+    __osFlashMsg.hdr.pri = OS_MESG_PRI_NORMAL;
+    __osFlashMsg.hdr.retQueue = &__osFlashMessageQ;
+    __osFlashMsg.dramAddr = __osFlashID;
+    __osFlashMsg.devAddr = 0;
+    __osFlashMsg.size = 8;
+    osInvalDCache(__osFlashID, 0x10);
+    osEPiStartDma(&__osFlashHandler, &__osFlashMsg, OS_READ);
+    osRecvMesg(&__osFlashMessageQ, NULL, OS_MESG_BLOCK);
+    *flash_type = __osFlashID[0];
+    *flash_maker = __osFlashID[1];
+}
+
+void osFlashClearStatus(void)
+{
+    osEPiWriteIo(&__osFlashHandler, __osFlashHandler.baseAddress | FLASH_CMD_REG, FLASH_CMD_STATUS);
+    osEPiWriteIo(&__osFlashHandler, __osFlashHandler.baseAddress, 0);
+}
+
+s32 osFlashWriteBuffer(OSIoMesg* mb, s32 priority, void* dramAddr, OSMesgQueue* mq)
+{
+    osEPiWriteIo(&__osFlashHandler, __osFlashHandler.baseAddress | FLASH_CMD_REG, FLASH_CMD_PAGE_PROGRAM);
+    mb->hdr.pri = priority;
+    mb->hdr.retQueue = mq;
+    mb->dramAddr = dramAddr;
+    mb->devAddr = 0;
+    mb->size = FLASH_BLOCK_SIZE;
+
+    return osEPiStartDma(&__osFlashHandler, mb, OS_WRITE);
+}
+
+s32 osFlashWriteArray(u32 pageNum)
 {
     u32 status;
+    OSTimer timer;
+    OSMesgQueue mq;
+    OSMesg msg;
 
+    /* New flash somehow needs this init */
+    if (__osFlashVersion == NEW_FLASH)
+        osEPiWriteIo(&__osFlashHandler, __osFlashHandler.baseAddress | FLASH_CMD_REG, FLASH_CMD_PAGE_PROGRAM);
+
+    /* Start the transfer */
+    osEPiWriteIo(&__osFlashHandler, __osFlashHandler.baseAddress | FLASH_CMD_REG, FLASH_CMD_PROGRAM_PAGE | pageNum);
+
+    /* Wait for completion */
+    osCreateMesgQueue(&mq, &msg, 1);
     for (;;)
     {
-        osEPiReadIo(&sFlashHandle, sFlashHandle.baseAddress, &status);
-        if ((status & mask) != mask)
+        osSetTimer(&timer, OS_USEC_TO_CYCLES(200), 0, &mq, &msg);
+        osRecvMesg(&mq, &msg, OS_MESG_BLOCK);
+        osEPiReadIo(&__osFlashHandler, __osFlashHandler.baseAddress, &status);
+
+        if (!(status & FLASH_STATUS_WRITE_BUSY))
             break;
     }
-    osEPiReadIo(&sFlashHandle, sFlashHandle.baseAddress, &status);
+
+    /* Fetch the latched status reg */
+    osEPiReadIo(&__osFlashHandler, __osFlashHandler.baseAddress, &status);
+    osFlashClearStatus();
+
+    /* Check the status */
+    if ((status & 0xff) == 0x04) return FLASH_STATUS_WRITE_OK;
+    if ((status & 0xff) == 0x44) return FLASH_STATUS_WRITE_OK;
+    if ((status & 0x04) == 0x04) return FLASH_STATUS_WRITE_OK;
+
+    /* Status isn't good */
+    return FLASH_STATUS_WRITE_ERROR;
 }
 
-static void flashReadStatus(u8* out)
+s32 osFlashReadArray(OSIoMesg* mb, s32 priority, u32 pageNum, void* dramAddr, u32 pageCount, OSMesgQueue* mq)
 {
-    u32 status;
+    u32 dummy;
+    u32 last_page;
+    u32 pages;
 
-    osEPiWriteIo(&sFlashHandle, sFlashHandle.baseAddress | FLASH_CMD_REG, FLASH_CMD_STATUS);
-    osEPiReadIo(&sFlashHandle, sFlashHandle.baseAddress, &status);
-    osEPiWriteIo(&sFlashHandle, sFlashHandle.baseAddress | FLASH_CMD_REG, FLASH_CMD_STATUS);
-    osEPiReadIo(&sFlashHandle, sFlashHandle.baseAddress, &status);
+    /* select read array mode */
+    osEPiWriteIo(&__osFlashHandler, __osFlashHandler.baseAddress | FLASH_CMD_REG, FLASH_CMD_READ_ARRAY);
 
-    *out = status & 0xff;
-}
+    /* dummy read to initiate "fast-page" reads? */
+    osEPiReadIo(&__osFlashHandler, __osFlashHandler.baseAddress, &dummy);
 
-static void flashClearStatus(void)
-{
-    osEPiWriteIo(&sFlashHandle, sFlashHandle.baseAddress | FLASH_CMD_REG, FLASH_CMD_STATUS);
-    osEPiWriteIo(&sFlashHandle, sFlashHandle.baseAddress, 0);
-}
+    /* DMA requested pages */
+    mb->hdr.pri = priority;
+    mb->hdr.retQueue = mq;
+    mb->dramAddr = dramAddr;
 
-static void flashReadId(u32* type, u32* maker)
-{
-    u8 tmp;
+    last_page = pageNum + pageCount - 1;
 
-    flashReadStatus(&tmp);
-
-    // select silicon id read mode
-    osEPiWriteIo(&sFlashHandle, sFlashHandle.baseAddress | FLASH_CMD_REG, FLASH_CMD_ID);
-
-    // read silicon id using DMA
-    sFlashIoMesg.hdr.pri = OS_MESG_PRI_NORMAL;
-    sFlashIoMesg.hdr.retQueue = &sFlashQueue;
-    sFlashIoMesg.dramAddr = sFlashId;
-    sFlashIoMesg.devAddr = 0;
-    sFlashIoMesg.size = 2 * sizeof(u32);
-
-    osInvalDCache(sFlashId, sizeof(sFlashId));
-    osEPiStartDma(&sFlashHandle, &sFlashIoMesg, OS_READ);
-    osRecvMesg(&sFlashQueue, NULL, OS_MESG_BLOCK);
-
-    *type = sFlashId[0];
-    *maker = sFlashId[1];
-}
-
-static void flashInit(void)
-{
-    u32 type;
-    u32 maker;
-
-    osCreateMesgQueue(&sFlashQueue, sFlashMesg, 1);
-
-    sFlashHandle.type = DEVICE_TYPE_FLASH;
-    sFlashHandle.baseAddress = PHYS_TO_K1(FLASH_START_ADDR);
-    sFlashHandle.latency = FLASH_LATENCY;
-    sFlashHandle.pulse = FLASH_PULSE;
-    sFlashHandle.pageSize = FLASH_PAGE_SIZE;
-    sFlashHandle.relDuration = FLASH_REL_DURATION;
-    sFlashHandle.domain = PI_DOMAIN2;
-    sFlashHandle.speed = 0;
-
-    bzero(&sFlashHandle.transferInfo, sizeof(__OSTranxInfo));
-
-    flashReadId(&type, &maker);
-
-    if (maker == FLASH_VERSION_MX_C || maker == FLASH_VERSION_MX_A || maker == FLASH_VERSION_MX_PROTO_A)
-        sFlashVersion = OLD_FLASH;
-    else
-        sFlashVersion = NEW_FLASH;
-
-    sFlashInitialized = 1;
-}
-
-static void readFlash(u32 devAddr, void* dramAddr, u32 size)
-{
-    u32 readSize;
-
-    /* Writeback cache */
-    osWritebackDCache(dramAddr, size);
-
-    while (size)
+    if ((last_page & 0xF00) != (pageNum & 0xF00))
     {
-        readSize = 0x2000;
-        if (readSize > size)
-            readSize = size;
-
-        /* Set the flash to read mode */
-        osEPiWriteIo(&sFlashHandle, sFlashHandle.baseAddress | FLASH_CMD_REG, FLASH_CMD_READ_ARRAY);
-
-        /* Read */
-        sFlashIoMesg.dramAddr = dramAddr;
-        sFlashIoMesg.devAddr = (devAddr & 0x00ffffff) >> (sFlashVersion == OLD_FLASH ? 1 : 0);
-        sFlashIoMesg.size = readSize;
-        osInvalDCache(dramAddr, readSize);
-        osEPiStartDma(&sFlashHandle, &sFlashIoMesg, OS_READ);
-        osRecvMesg(&sFlashQueue, NULL, OS_MESG_BLOCK);
-
-        dramAddr = (void*)((u32)dramAddr + readSize);
-        devAddr += readSize;
-        size -= readSize;
-    }
-}
-
-static void writeFlashBlock(u32 blockId, void* data)
-{
-    /* Write into the internal flash buffer */
-    osEPiWriteIo(&sFlashHandle, sFlashHandle.baseAddress | FLASH_CMD_REG, FLASH_CMD_PAGE_PROGRAM);
-    sFlashIoMesg.dramAddr = data;
-    sFlashIoMesg.devAddr = 0;
-    sFlashIoMesg.size = FLASH_BLOCK_SIZE;
-    osEPiStartDma(&sFlashHandle, &sFlashIoMesg, OS_WRITE);
-    osRecvMesg(&sFlashQueue, NULL, OS_MESG_BLOCK);
-
-    /* Commit to flash memory */
-    if (sFlashVersion == NEW_FLASH)
-        osEPiWriteIo(&sFlashHandle, sFlashHandle.baseAddress | FLASH_CMD_REG, FLASH_CMD_PAGE_PROGRAM);
-    osEPiWriteIo(&sFlashHandle, sFlashHandle.baseAddress | FLASH_CMD_REG, FLASH_CMD_PROGRAM_PAGE | blockId);
-    flashWait(0x1);
-    flashClearStatus();
-}
-
-static s32 writeFlashBlockMisaligned(u32 devAddr, void* dramAddr, u32 size)
-{
-    char buffer[FLASH_BLOCK_SIZE];
-    u32 maxSize;
-    u32 devAddrSeg;
-    u32 devAddrOff;
-    u32 blockId;
-    u32 offset;
-
-    /* Calculate the segment and offset */
-    devAddrSeg = devAddr & 0xff000000;
-    devAddrOff = devAddr & 0x00ffffff;
-
-    /* Derive the block and the offset */
-    blockId = devAddrOff / FLASH_BLOCK_SIZE;
-    offset = devAddrOff & (FLASH_BLOCK_SIZE - 1);
-
-    /* Fixup the size */
-    maxSize = FLASH_BLOCK_SIZE - offset;
-    if (size > maxSize)
-    {
-        size = maxSize;
+        pages = 256 - (pageNum & 0xFF);
+        pageCount -= pages;
+        mb->size = pages * FLASH_BLOCK_SIZE;
+        mb->devAddr = osFlashGetAddr(pageNum);
+        osEPiStartDma(&__osFlashHandler, mb, OS_READ);
+        osRecvMesg(mq, NULL, OS_MESG_BLOCK);
+        pageNum = (pageNum + 256) & 0xF00;
+        mb->dramAddr = ((char*)mb->dramAddr + mb->size);
     }
 
-    /* Read the block */
-    readFlash(devAddrSeg | blockId * FLASH_BLOCK_SIZE, buffer, FLASH_BLOCK_SIZE);
+    while (pageCount > 256)
+    {
+        pages = 256;
+        pageCount -= 256;
+        mb->size = pages * FLASH_BLOCK_SIZE;
+        mb->devAddr = osFlashGetAddr(pageNum);
+        osEPiStartDma(&__osFlashHandler, mb, OS_READ);
+        osRecvMesg(mq, NULL, OS_MESG_BLOCK);
+        pageNum += 256;
+        mb->dramAddr = ((char*)mb->dramAddr + mb->size);
+    }
 
-    /* Copy the data */
-    memcpy(buffer + offset, dramAddr, size);
+    mb->size = pageCount * FLASH_BLOCK_SIZE;
+    mb->devAddr = osFlashGetAddr(pageNum);
+    return osEPiStartDma(&__osFlashHandler, mb, OS_READ);
+}
 
-    /* Write the block */
-    osWritebackDCache(buffer, FLASH_BLOCK_SIZE);
-    writeFlashBlock(blockId, buffer);
+static s32          sFlashromIsInit;
+static OSMesgQueue  sFlashromMesgQueue;
+static OSMesg       sFlashromMesg[1];
 
-    return size;
+s32 SysFlashrom_IsInit(void)
+{
+    return sFlashromIsInit;
+}
+
+s32 SysFlashrom_InitFlash(void)
+{
+    osCreateMesgQueue(&sFlashromMesgQueue, sFlashromMesg, 1);
+    osFlashInit();
+    sFlashromIsInit = 1;
+
+    return 0;
+}
+
+s32 SysFlashrom_ReadData(void* addr, u32 pageNum, u32 pageCount)
+{
+    OSIoMesg msg;
+
+    if (!SysFlashrom_IsInit()) {
+        return -1;
+    }
+    osInvalDCache(addr, pageCount * FLASH_BLOCK_SIZE);
+    osFlashReadArray(&msg, OS_MESG_PRI_NORMAL, pageNum, addr, pageCount, &sFlashromMesgQueue);
+    osRecvMesg(&sFlashromMesgQueue, NULL, OS_MESG_BLOCK);
+    return 0;
+}
+#else
+extern OSMesgQueue  sFlashromMesgQueue;
+#endif
+
+static char sFlashBuffer[FLASH_BLOCK_SIZE] ALIGNED(16);
+
+static s32 doWrite(void* addr, u32 pageNum, u32 pageCount)
+{
+    OSIoMesg msg;
+    s32 result;
+    u32 i;
+
+    if (!SysFlashrom_IsInit()) {
+        return -1;
+    }
+    osWritebackDCache(addr, pageCount * FLASH_BLOCK_SIZE);
+    for (i = 0; i < pageCount; i++)
+    {
+        osFlashWriteBuffer(&msg, OS_MESG_PRI_NORMAL, (u8*)addr + i * FLASH_BLOCK_SIZE, &sFlashromMesgQueue);
+        osRecvMesg(&sFlashromMesgQueue, NULL, OS_MESG_BLOCK);
+        result = osFlashWriteArray(i + pageNum);
+        if (result)
+            return result;
+    }
+    return 0;
+}
+
+static int tryWrite(void* addr, u32 pageNum, u32 pageCount)
+{
+    int errors;
+    int ret;
+
+    errors = 0;
+    for (;;)
+    {
+        ret = doWrite(addr, pageNum, pageCount);
+        if (ret == 0)
+            return 0;
+        errors++;
+        if (errors >= 3)
+            return ret;
+    }
 }
 
 static void writeFlash(u32 devAddr, void* dramAddr, u32 size)
 {
-    s32 ret;
-    u32 blockId;
+    u32 misalign;
+    u32 tmp;
 
-    osWritebackDCache(dramAddr, size);
-    if (size && ((devAddr % FLASH_BLOCK_SIZE) != 0))
+    /* Check for misaligned start */
+    misalign = devAddr & FLASH_BLOCK_MASK;
+    if (misalign)
     {
-        /* Misaligned write */
-        ret = writeFlashBlockMisaligned(devAddr, dramAddr, size);
-        size -= ret;
-        devAddr += ret;
-        dramAddr = ((char*)dramAddr + ret);
+        /* Read-edit-write cycle */
+        tmp = FLASH_BLOCK_SIZE - misalign;
+        if (tmp > size)
+            tmp = size;
+        SysFlashrom_ReadData(sFlashBuffer, devAddr / FLASH_BLOCK_SIZE, 1);
+        memcpy(sFlashBuffer + misalign, dramAddr, tmp);
+        tryWrite(sFlashBuffer, devAddr / FLASH_BLOCK_SIZE, 1);
+        SysFlashrom_ReadData(sFlashBuffer, devAddr / FLASH_BLOCK_SIZE, 1);
+        devAddr += tmp;
+        dramAddr = ((char*)dramAddr + tmp);
+        size -= tmp;
     }
-    while (size >= FLASH_BLOCK_SIZE)
+
+    if (size >= FLASH_BLOCK_SIZE)
     {
-        blockId = (devAddr & 0x00ffffff) / FLASH_BLOCK_SIZE;
-        writeFlashBlock(blockId, dramAddr);
-        devAddr += FLASH_BLOCK_SIZE;
-        dramAddr = ((char*)dramAddr + FLASH_BLOCK_SIZE);
-        size -= FLASH_BLOCK_SIZE;
+        if (!((u32)dramAddr & 7))
+        {
+            /* DMA-friendly */
+            tmp = size / FLASH_BLOCK_SIZE;
+            tryWrite(dramAddr, devAddr / FLASH_BLOCK_SIZE, tmp);
+            SysFlashrom_ReadData(dramAddr, devAddr / FLASH_BLOCK_SIZE, tmp);
+            devAddr += tmp * FLASH_BLOCK_SIZE;
+            dramAddr = ((char*)dramAddr + tmp * FLASH_BLOCK_SIZE);
+            size -= tmp * FLASH_BLOCK_SIZE;
+        }
+        else
+        {
+            /* Non-DMA-friendly */
+            while (size >= FLASH_BLOCK_SIZE)
+            {
+                memcpy(sFlashBuffer, dramAddr, FLASH_BLOCK_SIZE);
+                tryWrite(sFlashBuffer, devAddr / FLASH_BLOCK_SIZE, 1);
+                SysFlashrom_ReadData(sFlashBuffer, devAddr / FLASH_BLOCK_SIZE, 1);
+                devAddr += FLASH_BLOCK_SIZE;
+                dramAddr = ((char*)dramAddr + FLASH_BLOCK_SIZE);
+                size -= FLASH_BLOCK_SIZE;
+            }
+        }
     }
+
+    /* Misaligned end */
     if (size)
     {
-        writeFlashBlockMisaligned(devAddr, dramAddr, size);
+        SysFlashrom_ReadData(sFlashBuffer, devAddr / FLASH_BLOCK_SIZE, 1);
+        memcpy(sFlashBuffer, dramAddr, size);
+        tryWrite(sFlashBuffer, devAddr / FLASH_BLOCK_SIZE, 1);
+        SysFlashrom_ReadData(sFlashBuffer, devAddr / FLASH_BLOCK_SIZE, 1);
+    }
+}
+
+static void readFlash(u32 devAddr, void* dramAddr, u32 size)
+{
+    u32 misalign;
+    u32 tmp;
+
+    /* Check for misaligned start */
+    misalign = devAddr & FLASH_BLOCK_MASK;
+    if (misalign)
+    {
+        tmp = FLASH_BLOCK_SIZE - misalign;
+        if (tmp > size)
+            tmp = size;
+        SysFlashrom_ReadData(sFlashBuffer, devAddr / FLASH_BLOCK_SIZE, 1);
+        memcpy(dramAddr, sFlashBuffer + misalign, tmp);
+        devAddr += tmp;
+        dramAddr = ((char*)dramAddr + tmp);
+        size -= tmp;
     }
 
-    /* Ares seems to require this */
-    osEPiWriteIo(&sFlashHandle, sFlashHandle.baseAddress | FLASH_CMD_REG, FLASH_CMD_READ_ARRAY);
+    /* Check the middle part */
+    if (size >= FLASH_BLOCK_SIZE)
+    {
+        /* At this point we are aligned relative to the flash */
+        if (!((u32)dramAddr & 7))
+        {
+            /* DMA-friendly */
+            tmp = size / FLASH_BLOCK_SIZE;
+            SysFlashrom_ReadData(dramAddr, devAddr / FLASH_BLOCK_SIZE, tmp);
+            devAddr += tmp * FLASH_BLOCK_SIZE;
+            dramAddr = ((char*)dramAddr + tmp * FLASH_BLOCK_SIZE);
+            size -= tmp * FLASH_BLOCK_SIZE;
+        }
+        else
+        {
+            /* Non-DMA-friendly */
+            while (size >= FLASH_BLOCK_SIZE)
+            {
+                SysFlashrom_ReadData(sFlashBuffer, devAddr / FLASH_BLOCK_SIZE, 1);
+                memcpy(dramAddr, sFlashBuffer, FLASH_BLOCK_SIZE);
+                devAddr += FLASH_BLOCK_SIZE;
+                dramAddr = ((char*)dramAddr + FLASH_BLOCK_SIZE);
+                size -= FLASH_BLOCK_SIZE;
+            }
+        }
+    }
+
+    /* Check for misaligned end */
+    if (size)
+    {
+        SysFlashrom_ReadData(sFlashBuffer, devAddr / FLASH_BLOCK_SIZE, 1);
+        memcpy(dramAddr, sFlashBuffer, size);
+    }
 }
 
 void comboReadWriteFlash(u32 devAddr, void* dramAddr, u32 size, s32 direction)
 {
-    if (!sFlashInitialized)
-    {
-        flashInit();
-    }
+#if defined(GAME_OOT)
+    if (!SysFlashrom_IsInit())
+        SysFlashrom_InitFlash();
+#endif
 
+    devAddr &= 0x1ffff;
     if (direction == OS_READ)
         readFlash(devAddr, dramAddr, size);
     else

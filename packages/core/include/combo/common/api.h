@@ -468,4 +468,10 @@ s32 Player_OverrideLimbDrawGameplayFirstPerson(struct GameState_Play* play, s32 
 
 void Player_SetBootData(GameState_Play* play, Actor_Player* player);
 
-extern void* __osPiHandle;
+/* SysFlashrom */
+s32 SysFlashrom_IsInit(void);
+s32 SysFlashrom_InitFlash(void);
+s32 SysFlashrom_ReadData(void* addr, u32 pageNum, u32 pageCount);
+s32 SysFlashrom_ExecWrite(void* addr, u32 pageNum, u32 pageCount);
+
+extern OSPiHandle* gCartHandle;
