@@ -10,7 +10,7 @@ import { png } from '../util/png';
 import { COLORS, ColorArg } from './color';
 import { BufferPath } from './type';
 import { toU32Buffer } from '../util';
-import { enableModelOotLinkChild } from './model';
+import { enableModelOotLinkAdult, enableModelOotLinkChild } from './model';
 
 export async function cosmeticsAssets(opts: Options) {
   return {
@@ -245,6 +245,27 @@ class CosmeticsPass {
     }
   }
 
+  private async patchOotAdultModel() {
+    const model = await this.getPathBuffer(this.opts.cosmetics.modelOotAdultLink);
+    if (model) {
+      const magic = model.indexOf(Buffer.from('MODLOADER64'));
+      if (magic === -1) {
+        throw new Error('Invalid model file');
+      }
+
+      /* Inject the new model */
+      const code = this.builder.fileByNameRequired('oot/code');
+      const objEntryOffset = 0xe7f58 + 8 * 0x14;
+      const obj = this.addNewFile(model);
+      const objBuffer = toU32Buffer(obj);
+      objBuffer.copy(code.data, objEntryOffset);
+
+      /* Enable the PlayAs hooks */
+      const dfAddr = model.indexOf(Buffer.from([0xdf, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]));
+      enableModelOotLinkAdult(this.builder, dfAddr);
+    }
+  }
+
   async run() {
     const c = this.opts.cosmetics;
 
@@ -293,6 +314,7 @@ class CosmeticsPass {
 
     /* Patch models */
     this.patchOotChildModel();
+    this.patchOotAdultModel();
   }
 }
 
