@@ -164,28 +164,28 @@ const OOT_LINK_ADULT_OFFSETS = {
   HIERARCHY: 0x06005380,
 };
 
-function patchPtrOotHi(patch: Patchfile, base: number, offset: number, value: number) {
+function patchPtrHi(file: Buffer, offset: number, value: number) {
   const buf = Buffer.alloc(2);
   buf.writeUInt16BE(value >>> 16, 0);
-  patch.addDataPatch('oot', base + offset, buf);
+  buf.copy(file, offset);
 }
 
-function patchPtrOotLo(patch: Patchfile, base: number, offset: number, value: number) {
+function patchPtrLo(file: Buffer, offset: number, value: number) {
   const buf = Buffer.alloc(2);
   buf.writeUInt16BE((value & 0xffff) >>> 0, 0);
-  patch.addDataPatch('oot', base + offset, buf);
+  buf.copy(file, offset);
 }
 
-function patchPtrOot16(patch: Patchfile, base: number, offset: number, value: number) {
+function patchPtr16(file: Buffer, offset: number, value: number) {
   const buf = Buffer.alloc(2);
   buf.writeUInt16BE(value, 0);
-  patch.addDataPatch('oot', base + offset, buf);
+  buf.copy(file, offset);
 }
 
-function patchPtrOot(patch: Patchfile, base: number, offset: number, value: number) {
+function patchPtr(file: Buffer, offset: number, value: number) {
   const buf = Buffer.alloc(4);
   buf.writeUInt32BE(value, 0);
-  patch.addDataPatch('oot', base + offset, buf);
+  buf.copy(file, offset);
 }
 
 export function enableModelOotLinkChild(builder: RomBuilder, dfAddr: number) {
@@ -194,125 +194,131 @@ export function enableModelOotLinkChild(builder: RomBuilder, dfAddr: number) {
 
   /* Patch code */
   const fileCode = builder.fileByNameRequired('oot/code');
+  const fileEffStick = builder.fileByNameRequired('oot/actors/ovl_Effect_Ss_Stick');
+  const fileItemShield = builder.fileByNameRequired('oot/actors/ovl_Item_Shield'); /* Isn't this unused? */
+  const filePlayer = builder.fileByNameRequired('oot/ovl_player_actor');
+  const fileEnCs = builder.fileByNameRequired('oot/actors/ovl_En_Cs');
+  const fileEnHeishi2 = builder.fileByNameRequired('oot/actors/ovl_En_Heishi2');
+  const fileEnMm = builder.fileByNameRequired('oot/actors/ovl_En_Mm');
+
   base = 0xe671c;
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_RFIST, base + 0x0000);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_RFIST, base + 0x0008);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_RFIST, base + 0x0010);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_RFIST, base + 0x0018);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_RFIST_SHIELD_DEKU, base + 0x0010);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_RFIST_SHIELD_DEKU, base + 0x0018);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_RFIST, base + 0x0020);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_RFIST, base + 0x0028);
-  fileCode.data.writeInt32BE(dfAddr, base + 0x0030);
-  fileCode.data.writeInt32BE(dfAddr, base + 0x0038);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_SWORD_SHEATHED, base + 0x0040);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_SWORD_SHEATHED, base + 0x0048);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_SWORD_SHIELD_DEKU, base + 0x0050);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_SWORD_SHIELD_DEKU, base + 0x0058);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_SWORD_SHIELD_HYLIAN, base + 0x0060);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_SWORD_SHIELD_HYLIAN, base + 0x0068);
-  fileCode.data.writeInt32BE(dfAddr, base + 0x0070);
-  fileCode.data.writeInt32BE(dfAddr, base + 0x0078);
-  fileCode.data.writeInt32BE(0x00000000, base + 0x0080);
-  fileCode.data.writeInt32BE(0x00000000, base + 0x0088);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_SHIELD_DEKU_BACK, base + 0x0090);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_SHIELD_DEKU_BACK, base + 0x0098);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_SWORD_SHEATH, base + 0x00a0);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_SWORD_SHEATH, base + 0x00a8);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_SHEATH0_DEKU, base + 0x00b0);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_SHEATH0_DEKU, base + 0x00b8);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_SHEATH0_HYLIAN, base + 0x00c0);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_SHEATH0_HYLIAN, base + 0x00c8);
-  fileCode.data.writeInt32BE(dfAddr, base + 0x00d0);
-  fileCode.data.writeInt32BE(dfAddr, base + 0x00d8);
-  fileCode.data.writeInt32BE(0x00000000, base + 0x00e0);
-  fileCode.data.writeInt32BE(0x00000000, base + 0x00e8);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_SHIELD_DEKU_BACK, base + 0x00f0);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_SHIELD_DEKU_BACK, base + 0x00f8);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_LHAND_PEDESTALSWORD, base + 0x0100);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_LHAND_PEDESTALSWORD, base + 0x0108);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_LHAND_PEDESTALSWORD, base + 0x0110);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_LHAND_PEDESTALSWORD, base + 0x0118);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_LHAND, base + 0x0120);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_LHAND, base + 0x0128);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_LFIST, base + 0x0130);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_LFIST, base + 0x0138);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_LFIST_SWORD, base + 0x0140);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_LFIST_SWORD, base + 0x0148);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_LFIST_SWORD, base + 0x0150);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_LFIST_SWORD, base + 0x0158);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_RHAND, base + 0x0160);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_RHAND, base + 0x0168);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_RFIST, base + 0x0170);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_RFIST, base + 0x0178);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_RFIST_SLINGSHOT, base + 0x0180);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_RFIST_SLINGSHOT, base + 0x0188);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_SWORD_SHEATHED, base + 0x0190);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_SWORD_SHEATHED, base + 0x0198);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_SWORD_SHEATH, base + 0x01a0);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_SWORD_SHEATH, base + 0x01a8);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_WAIST, base + 0x01b0);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_WAIST, base + 0x01b8);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_RFIST_SLINGSHOT, base + 0x01c0);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_RFIST_SLINGSHOT, base + 0x01c8);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_RHAND_OCARINA_FAIRY, base + 0x01d0);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_RHAND_OCARINA_FAIRY, base + 0x01d8);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_RHAND_OCARINA_TIME, base + 0x01e0);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_RHAND_OCARINA_TIME, base + 0x01e8);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_RFIST, base + 0x01f0);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_RFIST, base + 0x01f8);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_LFIST, base + 0x0200);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_LFIST, base + 0x0208);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_LFIST_BOOMERANG, base + 0x0210);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_LFIST_BOOMERANG, base + 0x0218);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_LHAND_BOTTLE, base + 0x0220);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_LHAND_BOTTLE, base + 0x0228);
-  fileCode.data.writeInt32BE(0x00000000, base + 0x0230);
-  fileCode.data.writeInt32BE(0x00000000, base + 0x0238);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_RSHOULDER, base + 0x0240);
-  fileCode.data.writeInt32BE(0x00000000, base + 0x0248);
-  fileCode.data.writeInt32BE(OOT_LINK_CHILD_OFFSETS.LUT_DL_FPS_RARM_SLINGSHOT, base + 0x0250);
+  patchPtr(fileCode.data, base + 0x0000, OOT_LINK_CHILD_OFFSETS.LUT_DL_RFIST);
+  patchPtr(fileCode.data, base + 0x0008, OOT_LINK_CHILD_OFFSETS.LUT_DL_RFIST);
+  patchPtr(fileCode.data, base + 0x0010, OOT_LINK_CHILD_OFFSETS.LUT_DL_RFIST);
+  patchPtr(fileCode.data, base + 0x0018, OOT_LINK_CHILD_OFFSETS.LUT_DL_RFIST);
+  patchPtr(fileCode.data, base + 0x0010, OOT_LINK_CHILD_OFFSETS.LUT_DL_RFIST_SHIELD_DEKU);
+  patchPtr(fileCode.data, base + 0x0018, OOT_LINK_CHILD_OFFSETS.LUT_DL_RFIST_SHIELD_DEKU);
+  patchPtr(fileCode.data, base + 0x0020, OOT_LINK_CHILD_OFFSETS.LUT_DL_RFIST);
+  patchPtr(fileCode.data, base + 0x0028, OOT_LINK_CHILD_OFFSETS.LUT_DL_RFIST);
+  patchPtr(fileCode.data, base + 0x0030, dfAddr);
+  patchPtr(fileCode.data, base + 0x0038, dfAddr);
+  patchPtr(fileCode.data, base + 0x0040, OOT_LINK_CHILD_OFFSETS.LUT_DL_SWORD_SHEATHED);
+  patchPtr(fileCode.data, base + 0x0048, OOT_LINK_CHILD_OFFSETS.LUT_DL_SWORD_SHEATHED);
+  patchPtr(fileCode.data, base + 0x0050, OOT_LINK_CHILD_OFFSETS.LUT_DL_SWORD_SHIELD_DEKU);
+  patchPtr(fileCode.data, base + 0x0058, OOT_LINK_CHILD_OFFSETS.LUT_DL_SWORD_SHIELD_DEKU);
+  patchPtr(fileCode.data, base + 0x0060, OOT_LINK_CHILD_OFFSETS.LUT_DL_SWORD_SHIELD_HYLIAN);
+  patchPtr(fileCode.data, base + 0x0068, OOT_LINK_CHILD_OFFSETS.LUT_DL_SWORD_SHIELD_HYLIAN);
+  patchPtr(fileCode.data, base + 0x0070, dfAddr);
+  patchPtr(fileCode.data, base + 0x0078, dfAddr);
+  patchPtr(fileCode.data, base + 0x0080, 0x00000000);
+  patchPtr(fileCode.data, base + 0x0088, 0x00000000);
+  patchPtr(fileCode.data, base + 0x0090, OOT_LINK_CHILD_OFFSETS.LUT_DL_SHIELD_DEKU_BACK);
+  patchPtr(fileCode.data, base + 0x0098, OOT_LINK_CHILD_OFFSETS.LUT_DL_SHIELD_DEKU_BACK);
+  patchPtr(fileCode.data, base + 0x00a0, OOT_LINK_CHILD_OFFSETS.LUT_DL_SWORD_SHEATH);
+  patchPtr(fileCode.data, base + 0x00a8, OOT_LINK_CHILD_OFFSETS.LUT_DL_SWORD_SHEATH);
+  patchPtr(fileCode.data, base + 0x00b0, OOT_LINK_CHILD_OFFSETS.LUT_DL_SHEATH0_DEKU);
+  patchPtr(fileCode.data, base + 0x00b8, OOT_LINK_CHILD_OFFSETS.LUT_DL_SHEATH0_DEKU);
+  patchPtr(fileCode.data, base + 0x00c0, OOT_LINK_CHILD_OFFSETS.LUT_DL_SHEATH0_HYLIAN);
+  patchPtr(fileCode.data, base + 0x00c8, OOT_LINK_CHILD_OFFSETS.LUT_DL_SHEATH0_HYLIAN);
+  patchPtr(fileCode.data, base + 0x00d0, dfAddr);
+  patchPtr(fileCode.data, base + 0x00d8, dfAddr);
+  patchPtr(fileCode.data, base + 0x00e0, 0x00000000);
+  patchPtr(fileCode.data, base + 0x00e8, 0x00000000);
+  patchPtr(fileCode.data, base + 0x00f0, OOT_LINK_CHILD_OFFSETS.LUT_DL_SHIELD_DEKU_BACK);
+  patchPtr(fileCode.data, base + 0x00f8, OOT_LINK_CHILD_OFFSETS.LUT_DL_SHIELD_DEKU_BACK);
+  patchPtr(fileCode.data, base + 0x0100, OOT_LINK_CHILD_OFFSETS.LUT_DL_LHAND_PEDESTALSWORD);
+  patchPtr(fileCode.data, base + 0x0108, OOT_LINK_CHILD_OFFSETS.LUT_DL_LHAND_PEDESTALSWORD);
+  patchPtr(fileCode.data, base + 0x0110, OOT_LINK_CHILD_OFFSETS.LUT_DL_LHAND_PEDESTALSWORD);
+  patchPtr(fileCode.data, base + 0x0118, OOT_LINK_CHILD_OFFSETS.LUT_DL_LHAND_PEDESTALSWORD);
+  patchPtr(fileCode.data, base + 0x0120, OOT_LINK_CHILD_OFFSETS.LUT_DL_LHAND);
+  patchPtr(fileCode.data, base + 0x0128, OOT_LINK_CHILD_OFFSETS.LUT_DL_LHAND);
+  patchPtr(fileCode.data, base + 0x0130, OOT_LINK_CHILD_OFFSETS.LUT_DL_LFIST);
+  patchPtr(fileCode.data, base + 0x0138, OOT_LINK_CHILD_OFFSETS.LUT_DL_LFIST);
+  patchPtr(fileCode.data, base + 0x0140, OOT_LINK_CHILD_OFFSETS.LUT_DL_LFIST_SWORD);
+  patchPtr(fileCode.data, base + 0x0148, OOT_LINK_CHILD_OFFSETS.LUT_DL_LFIST_SWORD);
+  patchPtr(fileCode.data, base + 0x0150, OOT_LINK_CHILD_OFFSETS.LUT_DL_LFIST_SWORD);
+  patchPtr(fileCode.data, base + 0x0158, OOT_LINK_CHILD_OFFSETS.LUT_DL_LFIST_SWORD);
+  patchPtr(fileCode.data, base + 0x0160, OOT_LINK_CHILD_OFFSETS.LUT_DL_RHAND);
+  patchPtr(fileCode.data, base + 0x0168, OOT_LINK_CHILD_OFFSETS.LUT_DL_RHAND);
+  patchPtr(fileCode.data, base + 0x0170, OOT_LINK_CHILD_OFFSETS.LUT_DL_RFIST);
+  patchPtr(fileCode.data, base + 0x0178, OOT_LINK_CHILD_OFFSETS.LUT_DL_RFIST);
+  patchPtr(fileCode.data, base + 0x0180, OOT_LINK_CHILD_OFFSETS.LUT_DL_RFIST_SLINGSHOT);
+  patchPtr(fileCode.data, base + 0x0188, OOT_LINK_CHILD_OFFSETS.LUT_DL_RFIST_SLINGSHOT);
+  patchPtr(fileCode.data, base + 0x0190, OOT_LINK_CHILD_OFFSETS.LUT_DL_SWORD_SHEATHED);
+  patchPtr(fileCode.data, base + 0x0198, OOT_LINK_CHILD_OFFSETS.LUT_DL_SWORD_SHEATHED);
+  patchPtr(fileCode.data, base + 0x01a0, OOT_LINK_CHILD_OFFSETS.LUT_DL_SWORD_SHEATH);
+  patchPtr(fileCode.data, base + 0x01a8, OOT_LINK_CHILD_OFFSETS.LUT_DL_SWORD_SHEATH);
+  patchPtr(fileCode.data, base + 0x01b0, OOT_LINK_CHILD_OFFSETS.LUT_DL_WAIST);
+  patchPtr(fileCode.data, base + 0x01b8, OOT_LINK_CHILD_OFFSETS.LUT_DL_WAIST);
+  patchPtr(fileCode.data, base + 0x01c0, OOT_LINK_CHILD_OFFSETS.LUT_DL_RFIST_SLINGSHOT);
+  patchPtr(fileCode.data, base + 0x01c8, OOT_LINK_CHILD_OFFSETS.LUT_DL_RFIST_SLINGSHOT);
+  patchPtr(fileCode.data, base + 0x01d0, OOT_LINK_CHILD_OFFSETS.LUT_DL_RHAND_OCARINA_FAIRY);
+  patchPtr(fileCode.data, base + 0x01d8, OOT_LINK_CHILD_OFFSETS.LUT_DL_RHAND_OCARINA_FAIRY);
+  patchPtr(fileCode.data, base + 0x01e0, OOT_LINK_CHILD_OFFSETS.LUT_DL_RHAND_OCARINA_TIME);
+  patchPtr(fileCode.data, base + 0x01e8, OOT_LINK_CHILD_OFFSETS.LUT_DL_RHAND_OCARINA_TIME);
+  patchPtr(fileCode.data, base + 0x01f0, OOT_LINK_CHILD_OFFSETS.LUT_DL_RFIST);
+  patchPtr(fileCode.data, base + 0x01f8, OOT_LINK_CHILD_OFFSETS.LUT_DL_RFIST);
+  patchPtr(fileCode.data, base + 0x0200, OOT_LINK_CHILD_OFFSETS.LUT_DL_LFIST);
+  patchPtr(fileCode.data, base + 0x0208, OOT_LINK_CHILD_OFFSETS.LUT_DL_LFIST);
+  patchPtr(fileCode.data, base + 0x0210, OOT_LINK_CHILD_OFFSETS.LUT_DL_LFIST_BOOMERANG);
+  patchPtr(fileCode.data, base + 0x0218, OOT_LINK_CHILD_OFFSETS.LUT_DL_LFIST_BOOMERANG);
+  patchPtr(fileCode.data, base + 0x0220, OOT_LINK_CHILD_OFFSETS.LUT_DL_LHAND_BOTTLE);
+  patchPtr(fileCode.data, base + 0x0228, OOT_LINK_CHILD_OFFSETS.LUT_DL_LHAND_BOTTLE);
+  patchPtr(fileCode.data, base + 0x0230, 0x00000000);
+  patchPtr(fileCode.data, base + 0x0238, 0x00000000);
+  patchPtr(fileCode.data, base + 0x0240, OOT_LINK_CHILD_OFFSETS.LUT_DL_RSHOULDER);
+  patchPtr(fileCode.data, base + 0x0248, 0x00000000);
+  patchPtr(fileCode.data, base + 0x0250, OOT_LINK_CHILD_OFFSETS.LUT_DL_FPS_RARM_SLINGSHOT);
 
-  base = OOT_FILES.CODE + 0xE6B2C;
-  patchPtrOot(patch, base, 0x0000, OOT_LINK_CHILD_OFFSETS.LUT_DL_BOTTLE);
+  base = 0xe6b2c;
+  patchPtr(fileCode.data, base + 0x0000, OOT_LINK_CHILD_OFFSETS.LUT_DL_BOTTLE);
 
-  base = OOT_FILES.CODE + 0xE6B74;
-  patchPtrOot(patch, base, 0x0000, OOT_LINK_CHILD_OFFSETS.LUT_DL_SLINGSHOT_STRING)
-  patchPtrOot(patch, base, 0x0004, 0x44178000);
-  patchPtrOot(patch, base, 0x0008, 0x436C0000);
+  base = 0xe6b74;
+  patchPtr(fileCode.data, base + 0x0000, OOT_LINK_CHILD_OFFSETS.LUT_DL_SLINGSHOT_STRING);
+  patchPtr(fileCode.data, base + 0x0004, 0x44178000);
+  patchPtr(fileCode.data, base + 0x0008, 0x436C0000);
 
-  patchPtrOotHi(patch, OOT_FILES.CODE, 0x6922E, OOT_LINK_CHILD_OFFSETS.LUT_DL_GORON_BRACELET);
-  patchPtrOotLo(patch, OOT_FILES.CODE, 0x69232, OOT_LINK_CHILD_OFFSETS.LUT_DL_GORON_BRACELET);
-  patchPtrOotHi(patch, OOT_FILES.CODE, 0x6A80E, OOT_LINK_CHILD_OFFSETS.LUT_DL_DEKU_STICK);
-  patchPtrOotLo(patch, OOT_FILES.CODE, 0x6A812, OOT_LINK_CHILD_OFFSETS.LUT_DL_DEKU_STICK);
+  patchPtrHi(fileCode.data, 0x6922e, OOT_LINK_CHILD_OFFSETS.LUT_DL_GORON_BRACELET);
+  patchPtrLo(fileCode.data, 0x69232, OOT_LINK_CHILD_OFFSETS.LUT_DL_GORON_BRACELET);
+  patchPtrHi(fileCode.data, 0x6a80e, OOT_LINK_CHILD_OFFSETS.LUT_DL_DEKU_STICK);
+  patchPtrLo(fileCode.data, 0x6a812, OOT_LINK_CHILD_OFFSETS.LUT_DL_DEKU_STICK);
 
-  patchPtrOot(patch, OOT_FILES.STICK, 0x334, OOT_LINK_CHILD_OFFSETS.LUT_DL_DEKU_STICK);
-  patchPtrOot16(patch, OOT_FILES.STICK, 0x330, 0x0015);
+  patchPtr(fileEffStick.data, 0x334, OOT_LINK_CHILD_OFFSETS.LUT_DL_DEKU_STICK);
+  patchPtr16(fileEffStick.data, 0x330, 0x0015);
 
-  patchPtrOotHi(patch, OOT_FILES.SHIELD, 0x7EE, OOT_LINK_CHILD_OFFSETS.LUT_DL_SHIELD_DEKU_ODD);
-  patchPtrOotLo(patch, OOT_FILES.SHIELD, 0x7F2, OOT_LINK_CHILD_OFFSETS.LUT_DL_SHIELD_DEKU_ODD);
+  patchPtrHi(fileItemShield.data, 0x7ee, OOT_LINK_CHILD_OFFSETS.LUT_DL_SHIELD_DEKU_ODD);
+  patchPtrLo(fileItemShield.data, 0x7f2, OOT_LINK_CHILD_OFFSETS.LUT_DL_SHIELD_DEKU_ODD);
 
-  base = OOT_FILES.PLAYER + 0x2253C;
-  patchPtrOot(patch, base, 0x0000, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_KEATON);
-  patchPtrOot(patch, base, 0x0004, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_SKULL);
-  patchPtrOot(patch, base, 0x0008, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_SPOOKY);
-  patchPtrOot(patch, base, 0x000c, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_BUNNY);
-  patchPtrOot(patch, base, 0x0010, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_GORON);
-  patchPtrOot(patch, base, 0x0014, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_ZORA);
-  patchPtrOot(patch, base, 0x0018, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_GERUDO);
-  patchPtrOot(patch, base, 0x001c, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_TRUTH);
+  base = 0x2253c;
+  patchPtr(filePlayer.data, base + 0x0000, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_KEATON);
+  patchPtr(filePlayer.data, base + 0x0004, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_SKULL);
+  patchPtr(filePlayer.data, base + 0x0008, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_SPOOKY);
+  patchPtr(filePlayer.data, base + 0x000c, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_BUNNY);
+  patchPtr(filePlayer.data, base + 0x0010, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_GORON);
+  patchPtr(filePlayer.data, base + 0x0014, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_ZORA);
+  patchPtr(filePlayer.data, base + 0x0018, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_GERUDO);
+  patchPtr(filePlayer.data, base + 0x001c, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_TRUTH);
 
-  patchPtrOotHi(patch, OOT_FILES.GRAVEYARD_KID, 0xE62, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_SPOOKY);
-  patchPtrOotLo(patch, OOT_FILES.GRAVEYARD_KID, 0xE66, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_SPOOKY);
+  patchPtrHi(fileEnCs.data, 0xe62, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_SPOOKY);
+  patchPtrLo(fileEnCs.data, 0xe66, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_SPOOKY);
 
-  patchPtrOotHi(patch, OOT_FILES.GUARD, 0x1EA2, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_KEATON);
-  patchPtrOotLo(patch, OOT_FILES.GUARD, 0x1EA6, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_KEATON);
+  patchPtrHi(fileEnHeishi2.data, 0x1ea2, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_KEATON);
+  patchPtrLo(fileEnHeishi2.data, 0x1ea6, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_KEATON);
 
-  patchPtrOotHi(patch, OOT_FILES.RUNNING_MAN, 0x1142, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_BUNNY);
-  patchPtrOotLo(patch, OOT_FILES.RUNNING_MAN, 0x1146, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_BUNNY);
+  patchPtrHi(fileEnMm.data, 0x1142, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_BUNNY);
+  patchPtrLo(fileEnMm.data, 0x1146, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_BUNNY);
 
-  base = 0x00A87000 + 0xE65A4;
-  patchPtrOot(patch, base, 0x0000, OOT_LINK_CHILD_OFFSETS.HIERARCHY);
+  patchPtr(fileCode.data, 0xe65a4, OOT_LINK_CHILD_OFFSETS.HIERARCHY);
 }
 
 export function enableModelOotLinkAdult(patch: Patchfile, dfAddr: number) {

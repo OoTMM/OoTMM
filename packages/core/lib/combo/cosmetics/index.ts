@@ -290,6 +290,9 @@ class CosmeticsPass {
 
     /* Patch OoT Mirror Shield */
     if (colorOotShieldMirror !== null) this.patchOotShieldMirror(colorOotShieldMirror);
+
+    /* Patch models */
+    this.patchOotChildModel();
   }
 }
 
