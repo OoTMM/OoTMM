@@ -154,6 +154,7 @@ export const CONFVARS = [
   'MM_SKULL_COUNT_15',
   'MM_SKULL_COUNT_20',
   'MM_SKULL_COUNT_25',
+  'MM_INSTANT_TRANSFORM',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

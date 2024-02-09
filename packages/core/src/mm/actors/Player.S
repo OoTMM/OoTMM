@@ -1119,3 +1119,75 @@ PATCH_VROM 0x0108CD38
 .int 0x00000000
 .int 0x00000000
 PATCH_END
+
+Player_StartTransformation_Hook:
+    addiu   sp, sp, -0x18
+    sw      ra, 0x14 (sp)
+    or      a1, s0, zero
+
+    jal     Player_StartTransformation
+      or      a2, s1, zero
+
+    lw      ra, 0x14 (sp)
+    jr      ra
+    addiu   sp, sp, 0x18
+
+Player_AfterTransformInit_Hook:
+    addiu   sp, sp, -0x18
+    sw      ra, 0x14 (sp)
+
+    jal     Player_AfterTransformInit
+      or      a1, s1, zero
+
+    or      v1, v0, zero
+
+    // Displaced code:
+    or      a0, s1, zero
+    or      a1, s0, zero
+    lbu     v0, 0x0394 (s0)
+
+    lw      ra, 0x14 (sp)
+    jr      ra
+      addiu   sp, sp, 0x18
+/*================================================================================================
+ Override transformation behavior (again, copied from mmr, thanks again!)
+==================================================================================================
+
+Replaces:
+  BNEZL   T7, 0x80831BD8*/
+PATCH_START 0x80831BBC
+  bnez    t7, 0x18
+    nop
+PATCH_END
+
+/* Replaces:
+  ADDIU   A1, zero, 0x05
+  SB      S1, 0x014A (S0)*/
+PATCH_START 0x80831BD4
+  jal     Player_StartTransformation_Hook
+    lw      a0, 0x0068 (sp) //GlobalContext
+PATCH_END
+
+/* Replaces:
+  SB      A1, 0x0AA5 (S0)*/
+PATCH_START 0x80831BE0
+  nop
+PATCH_END
+
+/*==================================================================================================
+ Skip post-transformation init code if instant transformation is enabled
+==================================================================================================
+
+Replaces:
+  LBU     V0, 0x0394 (S0)
+  ADDIU   AT, R0, 0x0009
+  OR      A0, S1, R0
+  BEQ     V0, AT, 0x80841E98
+    OR      A1, S0, R0*/
+PATCH_START 0x80841E78
+  jal     Player_AfterTransformInit_Hook
+    or      a0, s0, zero
+  bnez    v1, 0x684
+    addiu   at, zero, 0x09
+  beq     v0, at, 0x20
+PATCH_END

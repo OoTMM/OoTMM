@@ -1284,3 +1284,94 @@ f32 Player_GetMaxDiveDepth()
 {
     return sDiveDepths[gSaveContext.save.inventory.upgrades.scale];
 }
+
+/*ported directly from MMR, huge credit to them*/
+static u8 sInstantTranformTimer = 0;
+static _Bool sSwimmingTransformation = 0;
+typedef void (*sPlayer_BackwalkBraking)(Actor_Player*);
+typedef void (*sPlayer_Idle)(Actor_Player*);
+typedef void (*sPlayer_Action_93)(Actor_Player*);
+typedef void (*sPlayer_Action_96)(Actor_Player*);
+typedef void (*Player_func_8083692C)(GameState_Play*);
+
+void Player_StartTransformation(GameState_Play* ctxt, Actor_Player* this, s8 actionParam) {
+    sPlayer_Action_93 sPlayer_Action_93;
+    sPlayer_Action_93 = OverlayAddr(0x808561B0);
+    if (sInstantTranformTimer) {
+        return;
+    }
+
+    if (!CFG_MM_INSTANT_TRANSFORM
+        || actionParam < GI_MM_MASK_FIERCE_DEITY
+        || actionParam > GI_MM_MASK_DEKU
+        || this->av1.actionVar1 != 0
+        || (this->talkActor != NULL && this->talkActor->flags & 0x10000)
+        || (this->state & 0x20000000) //PLAYER_STATE1_TIME_STOP
+        || (this->state2 & 0x00000800) //PLAYER_STATE2_DIVING
+        || (this->currentBoots == 4 && this->prevBoots == 5)
+        || (this->actionFunc == sPlayer_Action_93)
+        || ((u16)(u32)this->skelAnime.animation) == 0xE260
+            && this->skelAnime.playSpeed != 2.0/3.0
+            && this->skelAnime.curFrame == 1.5) {
+        // Displaced code:
+        this->itemAction = actionParam;
+        this->unk_AA5 = 5; // PLAYER_UNKAA5_5
+        return;
+    }
+
+    u8 playerForm;
+    s32 maskId = actionParam - 57;
+    if (maskId == this->currentMask) {
+        playerForm = MM_PLAYER_FORM_HUMAN;
+    } else {
+        playerForm = actionParam - GI_MM_MASK_FIERCE_DEITY;
+    }
+
+    gSave.playerForm = playerForm;
+    this->base.update = (ActorFunc)0x8012301C;
+    this->base.draw = NULL;
+    this->av1.actionVar1 = 1;
+    this->meleeWeaponState = 0;
+
+    this->state |= 0x00000002; //PLAYER_STATE1_TIME_STOP_3
+
+    // really hacky, but necessary to prevent certain softlocks. unkAA5 gets reset back to 0 after transformation.
+    this->itemAction = 0;
+    this->unk_AA5 = 5;
+    this->base.rot2.x = 0;
+
+    if (this->state2 & 0x00000400) { //PLAYER_STATE2_DIVING_2
+        sSwimmingTransformation = 1;
+        this->state2 &= ~0x00000400;
+    }
+}
+
+_Bool Player_AfterTransformInit(Actor_Player* this, GameState_Play* ctxt) {
+    sPlayer_BackwalkBraking sPlayer_BackwalkBraking;
+    sPlayer_Idle sPlayer_Idle;
+    sPlayer_Action_96 sPlayer_Action_96;
+    Player_func_8083692C Player_func_8083692C;
+    sPlayer_BackwalkBraking = OverlayAddr(0x8084A884); // z2_Player_Action_8
+    sPlayer_Idle = OverlayAddr(0x80849FE0);
+    sPlayer_Action_96 = OverlayAddr(0x80857BE8);
+    Player_func_8083692C = OverlayAddr(0x80857BE8);
+    if (sSwimmingTransformation) {
+        this->state2 |= 0x00000400;
+        sSwimmingTransformation = 0;
+    }
+    if (this->unk_AA5 == 5) {
+        this->unk_AA5 = 0;
+    }
+    if (CFG_MM_INSTANT_TRANSFORM && !(this->state2 & 0x00000040)) {
+        if (this->actionFunc == sPlayer_BackwalkBraking
+            || this->actionFunc == sPlayer_Action_96
+            || (this->actionFunc == sPlayer_Idle && this->av2.actionVar2 != 0)) {
+            Player_func_8083692C(this, ctxt);
+        }
+        this->state &= ~0x00000002;
+        this->av1.actionVar1 = 0;
+        sInstantTranformTimer = 2;
+        return 1;
+    }
+    return 0;
+}
