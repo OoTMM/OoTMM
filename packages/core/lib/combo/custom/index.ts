@@ -200,7 +200,7 @@ class CustomAssetsBuilder {
     const sizeAligned = (data.length + 0xf) & ~0xf;
     const vrom = this.vrom;
     this.vrom += sizeAligned;
-    this.patch.addNewFile(vrom, data, compressed);
+    this.patch.addNewFile(null, vrom, data, compressed);
     return vrom;
   }
 
@@ -224,7 +224,6 @@ class CustomAssetsBuilder {
     const file = await raw(this.opts, filename);
     await this.addCustomObject(name, file, defines);
   }
-
 
   async addCustomExtractedObject(entry: CustomEntry) {
     const obj = await makeSplitObject(this.roms, entry);
