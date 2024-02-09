@@ -6,6 +6,7 @@ export type Presets = { [k: string]: Settings };
 const PRESET_DEFAULT = DEFAULT_SETTINGS;
 
 const BLITZ_BASE: PartialDeep<Settings> = {
+  clearStateDungeonsMm: 'both',
   tingleShuffle: 'starting',
   openMaskShop: true,
   hintImportance: true,
@@ -597,6 +598,7 @@ const PRESET_HELL = makeSettings({
 });
 
 const PRESET_BEGINNER = makeSettings({
+  clearStateDungeonsMm: 'both',
   hintImportance: true,
   tingleShuffle: 'starting',
   mapCompassShuffle: 'starting',
@@ -607,7 +609,6 @@ const PRESET_BEGINNER = makeSettings({
   startingAge: 'random',
   doorOfTime: 'open',
   dekuTree: 'closed',
-  clearStateDungeonsMm: 'both',
   kakarikoGate: 'open',
   gerudoFortress: 'single',
   skipZelda: true,
