@@ -494,8 +494,8 @@
   exits:
     "Clock Town East": "true"
   locations:
-    "Honey & Darling Reward 1": "can_use_wallet(1) && (event(HD_REWARD_1) || event(HD_REWARD_2) || event(HD_REWARD_3))"
-    "Honey & Darling Reward 2": "can_use_wallet(1) && has_bow && event(HD_REWARD_1) && event(HD_REWARD_2) && event(HD_REWARD_3)"
+    "Honey & Darling Reward Any Day": "can_use_wallet(1) && (event(HD_REWARD_1) || event(HD_REWARD_2) || event(HD_REWARD_3))"
+    "Honey & Darling Reward All Days": "can_use_wallet(1) && has_bow && event(HD_REWARD_1) && event(HD_REWARD_2) && event(HD_REWARD_3)"
 "Stock Pot Inn":
   region: STOCK_POT_INN
   exits:
@@ -536,8 +536,8 @@
   exits:
     "Clock Town North": "true"
   locations:
-    "Deku Playground Reward 1": "has(MASK_DEKU) && can_use_wallet(1) && (event(DEKU_REWARD_1) || event(DEKU_REWARD_2) || event(DEKU_REWARD_3))"
-    "Deku Playground Reward 2": "has(MASK_DEKU) && can_use_wallet(1) && event(DEKU_REWARD_1) && event(DEKU_REWARD_2) && event(DEKU_REWARD_3)"
+    "Deku Playground Reward Any Day": "has(MASK_DEKU) && can_use_wallet(1) && (event(DEKU_REWARD_1) || event(DEKU_REWARD_2) || event(DEKU_REWARD_3))"
+    "Deku Playground Reward All Days": "has(MASK_DEKU) && can_use_wallet(1) && event(DEKU_REWARD_1) && event(DEKU_REWARD_2) && event(DEKU_REWARD_3)"
 "Astral Observatory":
   region: CLOCK_TOWN_EAST
   exits:
