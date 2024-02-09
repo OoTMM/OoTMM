@@ -10,7 +10,7 @@
     "Dodongo Cavern Skull": "has_explosives"
     "Dodongo Cavern Staircase": "has_bombflowers || can_hammer"
     "Dodongo Cavern Upper Ledges": "has_explosives_or_hammer || can_use_din"
-    "Dodongo Cavern Lower Tunnel": "has_explosives_or_hammer || (event(DC_MQ_SHORTCUT) && has(STRENGTH))"
+    "Dodongo Cavern Lower Tunnel": "has_explosives_or_hammer || (event(DC_MQ_SHORTCUT) && has_goron_bracelet)"
     "Dodongo Cavern Bomb Bag Ledge": "is_adult"
   events:
     STICKS: "(has_bombflowers || can_hammer) && (has_weapon || can_boomerang)"
@@ -143,7 +143,7 @@
 "Dodongo Cavern Room Before Upper Lizalfos":
   dungeon: DC
   exits:
-    "Dodongo Cavern Upper Lizalfos": "(can_use_sticks && has(STRENGTH)) || has_explosives_or_hammer || has_blue_fire_arrows_mudwall"
+    "Dodongo Cavern Upper Lizalfos": "(can_use_sticks && has_goron_bracelet) || has_explosives_or_hammer || has_blue_fire_arrows_mudwall"
     "Dodongo Cavern Torch Room": "true"
   locations:
     "MQ Dodongo Cavern Pot Before Miniboss 1": "true"
@@ -154,7 +154,7 @@
   dungeon: DC
   exits:
     "Dodongo Cavern Upper Lizalfos": "true"
-    "Dodongo Cavern Upper Ledges": "(has(STRENGTH) && (has_weapon || can_use_sticks || has_ranged_weapon)) || has_explosives_or_hammer || is_adult"
+    "Dodongo Cavern Upper Ledges": "(has_goron_bracelet && (has_weapon || can_use_sticks || has_ranged_weapon)) || has_explosives_or_hammer || is_adult"
   locations:
     "MQ Dodongo Cavern Pot After Miniboss 1": "true"
     "MQ Dodongo Cavern Pot After Miniboss 2": "true"

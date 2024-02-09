@@ -122,6 +122,7 @@
 "has_iron_boots": "age_boots && has_iron_boots_raw"
 "has_hover_boots": "age_boots && has_hover_boots_raw"
 
+"has_goron_bracelet": "has_strength_raw(1)"
 "can_lift_silver": "is_adult && has_strength_raw(2)"
 "can_lift_gold": "is_adult && has_strength_raw(3)"
 
