@@ -8,7 +8,7 @@ import { codegen as comboCodegen } from './combo/codegen';
 import { customAssetsKeep, customFiles } from './combo/custom';
 import { Monitor } from './combo/monitor';
 import { DEFAULT_SETTINGS } from './combo';
-import { cosmeticsAssets } from './combo/cosmetics/index.old';
+import { cosmeticsAssets } from './combo/cosmetics';
 import { DEFAULT_COSMETICS } from './combo/cosmetics/util';
 import { DEFAULT_RANDOM_SETTINGS } from './combo/settings/random';
 

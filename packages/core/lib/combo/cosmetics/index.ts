@@ -13,6 +13,10 @@ import { toU32Buffer } from '../util';
 import { enableModelOotLinkAdult, enableModelOotLinkChild } from './model';
 import { randomizeMusic } from './music';
 
+export { makeCosmetics } from './util';
+export { COSMETICS } from './data';
+export type { Cosmetics } from './type';
+
 export async function cosmeticsAssets(opts: Options) {
   return {
     MASK_TUNIC: await png(opts, 'masks/tunic', 'bitmask'),
