@@ -247,6 +247,11 @@ class CosmeticsPass {
       /* Enable the PlayAs hooks */
       const dfAddr = model.indexOf(Buffer.from([0xdf, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]));
       enableModelOotLinkChild(this.builder, dfAddr);
+
+      /* Delete the original */
+      const original = this.builder.fileByNameRequired('oot/objects/object_link_child');
+      original.type = 'dummy';
+      original.data = Buffer.alloc(0);
     }
   }
 
@@ -268,6 +273,11 @@ class CosmeticsPass {
       /* Enable the PlayAs hooks */
       const dfAddr = model.indexOf(Buffer.from([0xdf, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]));
       enableModelOotLinkAdult(this.builder, dfAddr);
+
+      /* Delete the original */
+      const original = this.builder.fileByNameRequired('oot/objects/object_link_boy');
+      original.type = 'dummy';
+      original.data = Buffer.alloc(0);
     }
   }
 
