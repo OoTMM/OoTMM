@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add Goron Bracelet/Silver Gauntlets/Golden Gauntlets to Majora's Mask.
 - Small preview for the next item when multiple items are in the same slot.
 - Silver Scale/Golden Scale in Majora's Mask.
 - Freestanding hearts shuffle for Master Quest.
