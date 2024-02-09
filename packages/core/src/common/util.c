@@ -60,7 +60,7 @@ u32 comboReadPhysU32(u32 paddr)
 {
     u32 tmp;
 
-    osEPiReadIo(__osPiHandle, paddr | PI_DOM1_ADDR2, &tmp);
+    osEPiReadIo(gCartHandle, paddr | PI_DOM1_ADDR2, &tmp);
     return tmp;
 }
 

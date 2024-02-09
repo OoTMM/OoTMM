@@ -95,6 +95,22 @@ void comboTransition(GameState_Play* play, u32 entrance)
 #endif
 
 #if defined(GAME_MM)
+    gNoTimeFlow = 0;
+    if (gSave.playerForm == MM_PLAYER_FORM_FIERCE_DEITY && !comboConfig(CFG_MM_FD_ANYWHERE))
+    {
+        switch (play->sceneId)
+        {
+        case SCE_MM_LAIR_ODOLWA:
+        case SCE_MM_LAIR_GOHT:
+        case SCE_MM_LAIR_GYORG:
+        case SCE_MM_LAIR_TWINMOLD:
+        case SCE_MM_LAIR_MAJORA:
+            gSave.playerForm = MM_PLAYER_FORM_HUMAN;
+            gSave.equippedMask = PLAYER_MASK_NONE;
+            break;
+        }
+    }
+
     if (!(entrance & MASK_FOREIGN_ENTRANCE))
     {
         play->nextEntrance = (u16)entrance;

@@ -189,7 +189,7 @@ static s16 progressiveShieldMm(void)
     return GI_MM_PROGRESSIVE_SHIELD_HERO;
 }
 
-static s16 progressiveStrength(void)
+static s16 progressiveStrengthOot(void)
 {
     switch (gOotSave.inventory.upgrades.strength)
     {
@@ -199,6 +199,19 @@ static s16 progressiveStrength(void)
         return GI_OOT_SILVER_GAUNTLETS;
     default:
         return GI_OOT_GOLDEN_GAUNTLETS;
+    }
+}
+
+static s16 progressiveStrengthMm(void)
+{
+    switch (gMmSave.inventory.upgrades.strength)
+    {
+    case 0:
+        return GI_MM_GORON_BRACELET;
+    case 1:
+        return GI_MM_SILVER_GAUNTLETS;
+    default:
+        return GI_MM_GOLDEN_GAUNTLETS;
     }
 }
 
@@ -369,7 +382,7 @@ s16 comboProgressive(s16 gi, int ovflags)
     case GI_OOT_GORON_BRACELET:
     case GI_OOT_SILVER_GAUNTLETS:
     case GI_OOT_GOLDEN_GAUNTLETS:
-        gi = progressiveStrength();
+        gi = progressiveStrengthOot();
         break;
     case GI_OOT_SCALE_SILVER:
     case GI_OOT_SCALE_GOLDEN:
@@ -434,6 +447,11 @@ s16 comboProgressive(s16 gi, int ovflags)
     case GI_MM_QUIVER2:
     case GI_MM_QUIVER3:
         gi = progressiveBowMm();
+        break;
+    case GI_MM_GORON_BRACELET:
+    case GI_MM_SILVER_GAUNTLETS:
+    case GI_MM_GOLDEN_GAUNTLETS:
+        gi = progressiveStrengthMm();
         break;
     case GI_MM_SCALE_SILVER:
     case GI_MM_SCALE_GOLDEN:

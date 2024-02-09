@@ -1,24 +1,21 @@
-import { GameAddresses } from '../addresses';
-import { Game } from '../config';
-import { DecompressedRoms } from '../decompress';
-import { Options } from '../options';
-import { Patchfile } from '../patch-build/patchfile';
-import { randString } from '../random';
-import { Random, sample } from '../random';
-import { toU32Buffer } from '../util';
-import { png } from '../util/png';
-import { Color, ColorArg, ColorRandom, COLORS } from './color';
-import { recolorImage } from '../image';
 import fs from 'fs';
-import { enableModelOotLinkChild, enableModelOotLinkAdult } from './model';
+
+import { GameAddresses } from '../addresses';
+import { GAMES } from '../config';
+import { recolorImage } from '../image';
+import { Options } from '../options';
+import { Random, randString, sample } from '../random';
+import { RomBuilder } from '../rom-builder';
+import { png } from '../util/png';
+import { COLORS, ColorArg } from './color';
 import { BufferPath } from './type';
+import { toU32Buffer } from '../util';
+import { enableModelOotLinkAdult, enableModelOotLinkChild } from './model';
 import { randomizeMusic } from './music';
 
 export { makeCosmetics } from './util';
 export { COSMETICS } from './data';
 export type { Cosmetics } from './type';
-
-const OBJECTS_TABLE_ADDR = 0x800f8ff8;
 
 export async function cosmeticsAssets(opts: Options) {
   return {
@@ -28,11 +25,15 @@ export async function cosmeticsAssets(opts: Options) {
 }
 
 type Unpromise<T extends Promise<any>> = T extends Promise<infer U> ? U : never;
+type Assets = Unpromise<ReturnType<typeof cosmeticsAssets>>;
 
-export type CosmeticsOutput = {
-  patch: Patchfile;
-  overrides: {[k: string]: Buffer};
-};
+function colorBufferRGB(color: number) {
+  const buffer = Buffer.alloc(3);
+  buffer.writeUInt8(color >>> 16, 0);
+  buffer.writeUInt8((color >>> 8) & 0xff, 1);
+  buffer.writeUInt8(color & 0xff, 2);
+  return buffer;
+}
 
 function brightness(color: number, bright: number): number {
   const r = (color >>> 16) * bright;
@@ -41,30 +42,175 @@ function brightness(color: number, bright: number): number {
   return (r & 0xff) << 16 | (g & 0xff) << 8 | (b & 0xff);
 }
 
+function resolveColor(random: Random, c: ColorArg, auto?: () => number | null): number | null {
+  switch (c) {
+  case 'default':
+    return null;
+  case 'random':
+    return sample(random, Object.values(COLORS)).value;
+  case 'auto':
+    return auto ? auto() : null;
+  default:
+    return COLORS[c].value;
+  }
+}
+
 class CosmeticsPass {
+  private assetsPromise: Promise<Assets> | null;
   private vrom: number;
-  private random: Random;
-  private patch: Patchfile;
-  private overrides: {[k: string]: Buffer} = {};
-  private assets!: Unpromise<ReturnType<typeof cosmeticsAssets>>;
 
   constructor(
     private opts: Options,
     private addresses: GameAddresses,
-    private roms: DecompressedRoms,
+    private builder: RomBuilder,
+    private meta: any,
   ) {
-    this.random = new Random();
-    this.random.seed(randString());
-    this.patch = new Patchfile;
+    this.assetsPromise = null;
     this.vrom = 0xc0000000;
+  }
+
+  private asset(key: keyof Assets): Promise<Buffer> {
+    if (this.assetsPromise === null) {
+      this.assetsPromise = cosmeticsAssets(this.opts);
+    }
+    return this.assetsPromise.then((assets) => assets[key]);
+  }
+
+  private patchSymbol(name: string, buffer: Buffer) {
+    for (const game of GAMES) {
+      const syms = this.meta[game] || {};
+      const addr = syms[name];
+      if (!addr) continue;
+      const payloadFile = this.builder.fileByNameRequired(`${game}/payload`);
+      buffer.copy(payloadFile.data, addr);
+    }
   }
 
   private addNewFile(data: Buffer, compressed = true) {
     const size = (data.length + 0xf) & ~0xf;
     const vrom = this.vrom;
     this.vrom = (this.vrom + size) >>> 0;
-    this.patch.addNewFile(vrom, data, compressed);
+    this.builder.addFile({ vaddr: vrom, data, type: compressed ? 'compressed' : 'uncompressed', game: 'custom' })
     return [vrom, (vrom + size) >>> 0];
+  }
+
+  private async patchMmTunicDeku(color: number) {
+    const file = this.builder.fileByNameRequired('mm/objects/object_link_nuts');
+    const lutOff = 0x4090;
+    const lut = file.data.subarray(lutOff, lutOff + 16 * 2);
+    const newLut = recolorImage('rgba16', lut, null, 0x00b439, color);
+    newLut.copy(lut);
+  }
+
+  private patchMmTunicGoron(color: number) {
+    const file = this.builder.fileByNameRequired('mm/objects/object_link_goron');
+
+    const texOff = 0x2780;
+    const tex = file.data.subarray(texOff, texOff + 8 * 16 * 2);
+    const newTex = recolorImage('rgba16', tex, null, 0x00b439, color);
+    newTex.copy(tex);
+
+    const texOff2 = 0xceb8;
+    const tex2 = file.data.subarray(texOff2, texOff2 + 8 * 16 * 2);
+    const newTex2 = recolorImage('rgba16', tex2, null, 0x00b439, color);
+    newTex2.copy(tex2);
+  }
+
+  private patchMmTunicZora(color: number) {
+    const fileLink = this.builder.fileByNameRequired('mm/objects/object_link_zora');
+    const fileKeep = this.builder.fileByNameRequired('mm/objects/gameplay_keep');
+
+    const lutOff = 0x5000 + 9 * 16 * 2;
+    const lut = fileLink.data.subarray(lutOff, lutOff + 16 * 2 * 2);
+    const newLut = recolorImage('rgba16', lut, null, 0x00b439, color);
+    newLut.copy(lut);
+
+    const lutOff2 = 0xc578 + 9 * 16 * 2;
+    const lut2 = fileLink.data.subarray(lutOff2, lutOff2 + 16 * 2 * 2);
+    const newLut2 = recolorImage('rgba16', lut2, null, 0x00b439, color);
+    newLut2.copy(lut2);
+
+    const texOff = 0x10228 + 7 * 16 * 2;
+    const tex = fileLink.data.subarray(texOff, texOff + (32 - 7) * 16 * 2);
+    const newTex = recolorImage('rgba16', tex, null, 0x00b439, color);
+    newTex.copy(tex);
+
+    /* Fin */
+    const texOff2 = 0x700b0 + 7 * 16 * 2;
+    const tex2 = fileKeep.data.subarray(texOff2, texOff2 + (32 - 7) * 16 * 2);
+    const newTex2 = recolorImage('rgba16', tex2, null, 0x00b439, color);
+    newTex2.copy(tex2);
+  }
+
+  private patchMmTunicFierceDeity(color: number) {
+    const file = this.builder.fileByNameRequired('mm/objects/object_link_boy');
+    const lutOff = 0x8128;
+    const lut = file.data.subarray(lutOff, lutOff + 16 * 2);
+    const newLut = recolorImage('rgba16', lut, null, 0xffffff, color);
+    newLut.copy(lut);
+  }
+
+  private async patchOotTunic(index: number, color: number) {
+    const defaultColorIcons: number[] = [
+      0x005a00,
+      0x7a0000,
+      0x0020b7,
+    ];
+    const defaultColorIcon = defaultColorIcons[index];
+    const fileOotCode = this.builder.fileByNameRequired('oot/code');
+    const fileOotIconItemStatic = this.builder.fileByNameRequired('oot/icon_item_static');
+    const mask = await this.asset('MASK_TUNIC');
+    const colorBuffer = colorBufferRGB(color);
+
+    /* Patch the in-game color */
+    colorBuffer.copy(fileOotCode.data, 0xe6a38 + index * 3);
+
+    /* Patch the icon */
+    const iconIndex = 0x41 + index;
+    const iconOffset = 0x1000 * iconIndex;
+    const icon = fileOotIconItemStatic.data.subarray(iconOffset, iconOffset + 0x1000);
+    const newIcon = recolorImage('rgba32', icon, mask, defaultColorIcon, color);
+    newIcon.copy(icon);
+
+    /* Patch the GI */
+    if (index !== 0) {
+      const file = this.builder.fileByNameRequired('oot/objects/object_gi_clothes');
+      let off = 0x14e0 + (index - 1) * 0x20;
+      const colorPrim1 = colorBufferRGB(brightness(color, 0.76));
+      const colorEnv1 = colorBufferRGB(brightness(color, 0.53));
+      const colorPrim2 = colorBuffer;
+      const colorEnv2 = colorBufferRGB(brightness(color, 0.59));
+
+      colorPrim1.copy(file.data, off + 0x0c);
+      colorEnv1.copy(file.data, off + 0x14);
+      colorPrim2.copy(file.data, off + 0x4c);
+      colorEnv2.copy(file.data, off + 0x54);
+    }
+  }
+
+  private async patchOotShieldMirror(color: number) {
+    const buffer = colorBufferRGB(color);
+    const fileObjectLinkBoy = this.builder.fileByNameRequired('oot/objects/object_link_boy');
+    const fileIconItemStatic = this.builder.fileByNameRequired('oot/icon_item_static');
+    const fileGi = this.builder.fileByNameRequired('oot/objects/object_gi_shield_3');
+    const mask = await this.asset('MASK_OOT_SHIELD_MIRROR');
+
+    /* Patch the field model */
+    for (const off of [0x21270, 0x21768, 0x24278, 0x26560, 0x26980, 0x28dd0]) {
+      buffer.copy(fileObjectLinkBoy.data, off + 4);
+    }
+
+    /* Patch icon */
+    const iconOffset = 0x40 * 0x1000;
+    const icon = fileIconItemStatic.data.subarray(iconOffset, iconOffset + 0x1000);
+    const newIcon = recolorImage('rgba32', icon, mask, 0xff1313, color);
+    newIcon.copy(icon);
+
+    /* Patch gi */
+    const primColor = colorBufferRGB(color);
+    const envColor = colorBufferRGB(brightness(color, 0.2));
+    primColor.copy(fileGi.data, 0xfc8 + 4);
+    envColor.copy(fileGi.data, 0xfd0 + 4);
   }
 
   private async getPathBuffer(path: BufferPath | null): Promise<Buffer | null> {
@@ -83,106 +229,6 @@ class CosmeticsPass {
     }
   }
 
-  private color(c: Color | number) {
-    if (typeof c === 'number') {
-      return c;
-    } else {
-      return COLORS[c].value;
-    }
-  }
-
-  private colorArg(c: ColorArg, def: Color | number, auto: () => Color | number): number {
-    switch (c) {
-    case 'default':
-      return this.color(def);
-    case 'random':
-      return sample(this.random, Object.values(COLORS)).value;
-    case 'auto':
-      return this.color(auto());
-    default:
-      return COLORS[c].value;
-    }
-  }
-
-  private colorArgNew(c: ColorArg, auto?: () => number | null): number | null {
-    switch (c) {
-    case 'default':
-      return null;
-    case 'random':
-      return sample(this.random, Object.values(COLORS)).value;
-    case 'auto':
-      return auto ? auto() : null;
-    default:
-      return COLORS[c].value;
-    }
-  }
-
-  private colorBufferRGB(color: number) {
-    const buffer = Buffer.alloc(3);
-    buffer.writeUInt8(color >>> 16, 0);
-    buffer.writeUInt8((color >>> 8) & 0xff, 1);
-    buffer.writeUInt8(color & 0xff, 2);
-    return buffer;
-  }
-
-  private patchColorRGB(game: Game, addr: number, color: number) {
-    const paddr = this.addresses[game].virtualToPhysical(addr);
-    const buffer = Buffer.alloc(3);
-    buffer.writeUInt8(color >>> 16, 0);
-    buffer.writeUInt8((color >>> 8) & 0xff, 1);
-    buffer.writeUInt8(color & 0xff, 2);
-    this.patch.addDataPatch(game, paddr, buffer);
-  }
-
-  private patchColorRGB_VROM(game: Game, addr: number, color: number) {
-    const buffer = Buffer.alloc(3);
-    buffer.writeUInt8(color >>> 16, 0);
-    buffer.writeUInt8((color >>> 8) & 0xff, 1);
-    buffer.writeUInt8(color & 0xff, 2);
-    this.patch.addDataPatch(game, addr, buffer);
-  }
-
-  private patchOotTunic(index: number, color: number) {
-    const defaultColors: Color[] = [
-      'kokirigreen',
-      'goronred',
-      'zorablue',
-    ];
-    const defaultColorIcons: number[] = [
-      0x005a00,
-      0x7a0000,
-      0x0020b7,
-    ];
-    const defaultColor = defaultColors[index];
-    const defaultColorIcon = defaultColorIcons[index];
-
-    if (color === this.color(defaultColor))
-      return;
-
-    /* Patch the in-game color */
-    this.patchColorRGB('oot', (0x800f7ad8 + index * 0x03) >>> 0, color);
-
-    /* Patch the icon */
-    const paddr = 0x7fe000 + 0x1000 * index;
-    const icon = this.roms.oot.rom.subarray(paddr, paddr + 0x1000);
-    const newIcon = recolorImage('rgba32', icon, this.assets.MASK_TUNIC, defaultColorIcon, color);
-    this.patch.addDataPatch('oot', paddr, newIcon);
-
-    /* Patch the GI */
-    if (index !== 0) {
-      let giBase = 0x1638000 + 0x14e0 + (index - 1) * 0x20;
-      const colorPrim1 = brightness(color, 0.76);
-      const colorEnv1 = brightness(color, 0.53)
-      const colorPrim2 = color;
-      const colorEnv2 = brightness(color, 0.59);
-
-      this.patchColorRGB_VROM('oot', giBase + 0x0c, colorPrim1);
-      this.patchColorRGB_VROM('oot', giBase + 0x14, colorEnv1);
-      this.patchColorRGB_VROM('oot', giBase + 0x4c, colorPrim2);
-      this.patchColorRGB_VROM('oot', giBase + 0x54, colorEnv2);
-    }
-  }
-
   private async patchOotChildModel() {
     const model = await this.getPathBuffer(this.opts.cosmetics.modelOotChildLink);
     if (model) {
@@ -192,18 +238,20 @@ class CosmeticsPass {
       }
 
       /* Inject the new model */
+      const code = this.builder.fileByNameRequired('oot/code');
+      const objEntryOffset = 0xe7f58 + 8 * 0x15;
       const obj = this.addNewFile(model);
       const objBuffer = toU32Buffer(obj);
-      const vram = OBJECTS_TABLE_ADDR + 8 * 0x15;
-      const vrom = this.addresses.oot.virtualToPhysical(vram);
-      this.patch.addDataPatch('oot', vrom, objBuffer);
-
-      /* Remove the old model */
-      this.patch.removeFile('oot', 0x1f7);
+      objBuffer.copy(code.data, objEntryOffset);
 
       /* Enable the PlayAs hooks */
       const dfAddr = model.indexOf(Buffer.from([0xdf, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]));
-      enableModelOotLinkChild(this.patch, dfAddr);
+      enableModelOotLinkChild(this.builder, dfAddr);
+
+      /* Delete the original */
+      const original = this.builder.fileByNameRequired('oot/objects/object_link_child');
+      original.type = 'dummy';
+      original.data = Buffer.alloc(0);
     }
   }
 
@@ -216,172 +264,83 @@ class CosmeticsPass {
       }
 
       /* Inject the new model */
+      const code = this.builder.fileByNameRequired('oot/code');
+      const objEntryOffset = 0xe7f58 + 8 * 0x14;
       const obj = this.addNewFile(model);
       const objBuffer = toU32Buffer(obj);
-      const vram = OBJECTS_TABLE_ADDR + 8 * 0x14;
-      const vrom = this.addresses.oot.virtualToPhysical(vram);
-      this.patch.addDataPatch('oot', vrom, objBuffer);
-
-      /* Remove the old model */
-      this.patch.removeFile('oot', 0x1f6);
+      objBuffer.copy(code.data, objEntryOffset);
 
       /* Enable the PlayAs hooks */
       const dfAddr = model.indexOf(Buffer.from([0xdf, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]));
-      enableModelOotLinkAdult(this.patch, dfAddr);
+      enableModelOotLinkAdult(this.builder, dfAddr);
+
+      /* Delete the original */
+      const original = this.builder.fileByNameRequired('oot/objects/object_link_boy');
+      original.type = 'dummy';
+      original.data = Buffer.alloc(0);
     }
   }
 
-  private patchMmTunic(vrom: number, def: Color, color: number, offsets: number[]) {
-    if (color === this.color(def)) {
-      return;
-    }
-    const rgba = (((color << 8) | 0xff) >>> 0);
+  async run() {
+    const c = this.opts.cosmetics;
 
-    /* Patch the in-game color */
-    const buffer = Buffer.alloc(4);
-    buffer.writeUInt32BE(rgba, 0);
-    for (const offset of offsets) {
-      this.patch.addDataPatch('mm', vrom + offset, buffer);
-    }
-  }
-
-  private patchMmTunicDeku(color: number) {
-    if (color === this.color('kokirigreen')) {
-      return;
-    }
-    const paddr = 0x011a5000;
-    const lutOff = 0x4090;
-    const lut = Buffer.from(this.roms.mm.rom.subarray(paddr + lutOff, paddr + lutOff + 16 * 2));
-    const newLut = recolorImage('rgba16', lut, null, 0x00b439, color);
-    this.patch.addDataPatch('mm', paddr + lutOff, newLut);
-  }
-
-  private patchMmTunicGoron(color: number) {
-    if (color === this.color('kokirigreen')) {
-      return;
-    }
-    const paddr = 0x0117a000;
-    const texOff = 0x2780;
-    const tex = Buffer.from(this.roms.mm.rom.subarray(paddr + texOff, paddr + texOff + 8 * 16 * 2));
-    const newTex = recolorImage('rgba16', tex, null, 0x00b439, color);
-    this.patch.addDataPatch('mm', paddr + texOff, newTex);
-    const texOff2 = 0xceb8;
-    const tex2 = Buffer.from(this.roms.mm.rom.subarray(paddr + texOff2, paddr + texOff2 + 8 * 16 * 2));
-    const newTex2 = recolorImage('rgba16', tex2, null, 0x00b439, color);
-    this.patch.addDataPatch('mm', paddr + texOff2, newTex2);
-  }
-
-  private patchMmTunicZora(color: number) {
-    if (color === this.color('kokirigreen')) {
-      return;
-    }
-    const paddr = 0x01192000;
-    const lutOff = 0x5000 + 9 * 16 * 2;
-    const lut = Buffer.from(this.roms.mm.rom.subarray(paddr + lutOff, paddr + lutOff + 16 * 2 * 2));
-    const newLut = recolorImage('rgba16', lut, null, 0x00b439, color);
-    this.patch.addDataPatch('mm', paddr + lutOff, newLut);
-    const lutOff2 = 0xc578 + 9 * 16 * 2;
-    const lut2 = Buffer.from(this.roms.mm.rom.subarray(paddr + lutOff2, paddr + lutOff2 + 16 * 2 * 2));
-    const newLut2 = recolorImage('rgba16', lut2, null, 0x00b439, color);
-    this.patch.addDataPatch('mm', paddr + lutOff2, newLut2);
-
-    const texOff = 0x10228 + 7 * 16 * 2;
-    const tex = Buffer.from(this.roms.mm.rom.subarray(paddr + texOff, paddr + texOff + (32 - 7) * 16 * 2));
-    const newTex = recolorImage('rgba16', tex, null, 0x00b439, color);
-    this.patch.addDataPatch('mm', paddr + texOff, newTex);
-
-    /* Fin */
-    const paddr2 = 0x0108b000;
-    const texOff2 = 0x700b0 + 7 * 16 * 2;
-    const tex2 = Buffer.from(this.roms.mm.rom.subarray(paddr2 + texOff2, paddr2 + texOff2 + (32 - 7) * 16 * 2));
-    const newTex2 = recolorImage('rgba16', tex2, null, 0x00b439, color);
-    this.patch.addDataPatch('mm', paddr2 + texOff2, newTex2);
-  }
-
-  private patchMmTunicFierceDeity(color: number) {
-    if (color === this.color('white')) {
-      return;
-    }
-    const paddr = 0x0114d000;
-    const lutOff = 0x8128;
-    const lut = Buffer.from(this.roms.mm.rom.subarray(paddr + lutOff, paddr + lutOff + 16 * 2));
-    const newLut = recolorImage('rgba16', lut, null, 0xffffff, color);
-    this.patch.addDataPatch('mm', paddr + lutOff, newLut);
-  }
-
-  private patchOotShieldMirror(color: number | null) {
-    if (color === null)
-      return;
-    const buffer = this.colorBufferRGB(color);
-
-    /* Patch the field model */
-    const objLinkBoyVrom = 0xf86000;
-    for (const off of [0x21270, 0x21768, 0x24278, 0x26560, 0x26980, 0x28DD0]) {
-      this.patch.addDataPatch('oot', objLinkBoyVrom + off + 4, buffer);
-    }
-
-    /* Patch icon */
-    const iconVrom = 0x7fd000;
-    const icon = this.roms.oot.rom.subarray(iconVrom, iconVrom + 0x1000);
-    const newIcon = recolorImage('rgba32', icon, this.assets.MASK_OOT_SHIELD_MIRROR, 0xff1313, color);
-    this.patch.addDataPatch('oot', iconVrom, newIcon);
-
-    /* Patch gi */
-    const giObj = 0x01616000;
-    const primColor = this.colorBufferRGB(color);
-    const envColor = this.colorBufferRGB(brightness(color, 0.2));
-    this.patch.addDataPatch('oot', giObj + 0xfc8 + 4, primColor);
-    this.patch.addDataPatch('oot', giObj + 0xfd0 + 4, envColor);
-  }
-
-  async run(): Promise<CosmeticsOutput> {
-    const { cosmetics } = this.opts;
-    this.assets = await cosmeticsAssets(this.opts);
+    /* Create a random number generator */
+    const random = new Random();
+    random.seed(randString());
 
     /* Resolve colors */
-    const colorOotTunicKokiri = this.colorArg(cosmetics.ootTunicKokiri, 'kokirigreen', () => 'kokirigreen');
-    const colorOotTunicGoron = this.colorArg(cosmetics.ootTunicGoron, 'goronred', () => 'goronred');
-    const colorOotTunicZora = this.colorArg(cosmetics.ootTunicZora, 'zorablue', () => 'zorablue');
-    const colorMmTunicHuman = this.colorArg(cosmetics.mmTunicHuman, 'kokirigreen', () => colorOotTunicKokiri);
-    const colorMmTunicDeku = this.colorArg(cosmetics.mmTunicDeku, 'kokirigreen', () => colorMmTunicHuman);
-    const colorMmTunicGoron = this.colorArg(cosmetics.mmTunicGoron, 'kokirigreen', () => colorMmTunicHuman);
-    const colorMmTunicZora = this.colorArg(cosmetics.mmTunicZora, 'kokirigreen', () => colorMmTunicHuman);
-    const colorMmTunicFierceDeity = this.colorArg(cosmetics.mmTunicFierceDeity, 'white', () => 'white');
-    const colorOotShieldMirror = this.colorArgNew(this.opts.cosmetics.ootShieldMirror);
+    const colorOotTunicKokiri = resolveColor(random, c.ootTunicKokiri);
+    const colorOotTunicGoron = resolveColor(random, c.ootTunicGoron);
+    const colorOotTunicZora = resolveColor(random, c.ootTunicZora);
+    const colorMmTunicHuman = resolveColor(random, c.mmTunicHuman, () => colorOotTunicKokiri);
+    const colorMmTunicDeku = resolveColor(random, c.mmTunicDeku, () => colorMmTunicHuman);
+    const colorMmTunicGoron = resolveColor(random, c.mmTunicGoron, () => colorMmTunicHuman);
+    const colorMmTunicZora = resolveColor(random, c.mmTunicZora, () => colorMmTunicHuman);
+    const colorMmTunicFierceDeity = resolveColor(random, c.mmTunicFierceDeity);
+    const colorOotShieldMirror = resolveColor(random, c.ootShieldMirror);
 
-    /* OoT tunics */
-    this.patchOotTunic(0, colorOotTunicKokiri);
-    this.patchOotTunic(1, colorOotTunicGoron);
-    this.patchOotTunic(2, colorOotTunicZora);
-    this.patchOotShieldMirror(colorOotShieldMirror);
-
-    /* MM tunics */
-    this.patchMmTunic(0x0115b000, 'kokirigreen', colorMmTunicHuman, [0xb39c, 0xb8c4, 0xbdcc, 0xbfa4, 0xc064, 0xc66c, 0xcae4, 0xcd1c, 0xcea4, 0xd1ec, 0xd374]);
-    this.patchMmTunicDeku(colorMmTunicDeku);
-    this.patchMmTunicGoron(colorMmTunicGoron);
-    this.patchMmTunicZora(colorMmTunicZora);
-    this.patchMmTunicFierceDeity(colorMmTunicFierceDeity);
-
-    this.overrides['MM_COLOR_TUNIC_KOKIRI'] = this.colorBufferRGB(colorMmTunicHuman);
-    this.overrides['MM_COLOR_TUNIC_GORON'] = this.colorBufferRGB(colorOotTunicGoron);
-    this.overrides['MM_COLOR_TUNIC_ZORA'] = this.colorBufferRGB(colorOotTunicZora);
-
-    /* Models */
-    await this.patchOotChildModel();
-    await this.patchOotAdultModel();
-
-    /* Custom Music */
-    if (cosmetics.music) {
-      const data = await this.getPathBuffer(cosmetics.music);
-      if (data)
-        await randomizeMusic(this.roms, this.patch, this.random, data);
+    /* Patch human tunics */
+    if (colorOotTunicKokiri !== null) {
+      await this.patchOotTunic(0, colorOotTunicKokiri);
     }
 
-    return { patch: this.patch, overrides: this.overrides };
+    if (colorOotTunicGoron !== null) {
+      await this.patchOotTunic(1, colorOotTunicGoron);
+      this.patchSymbol('MM_COLOR_TUNIC_GORON', colorBufferRGB(colorOotTunicGoron));
+    }
+
+    if (colorOotTunicZora !== null) {
+      await this.patchOotTunic(2, colorOotTunicZora);
+      this.patchSymbol('MM_COLOR_TUNIC_ZORA', colorBufferRGB(colorOotTunicZora));
+    }
+
+    if (colorMmTunicHuman !== null) {
+      this.patchSymbol('MM_COLOR_TUNIC_KOKIRI', colorBufferRGB(colorMmTunicHuman));
+    }
+
+    /* Forms */
+    if (colorMmTunicDeku !== null) this.patchMmTunicDeku(colorMmTunicDeku);
+    if (colorMmTunicGoron !== null) this.patchMmTunicGoron(colorMmTunicGoron);
+    if (colorMmTunicZora !== null) this.patchMmTunicZora(colorMmTunicZora);
+    if (colorMmTunicFierceDeity !== null) this.patchMmTunicFierceDeity(colorMmTunicFierceDeity);
+
+    /* Patch OoT Mirror Shield */
+    if (colorOotShieldMirror !== null) this.patchOotShieldMirror(colorOotShieldMirror);
+
+    /* Patch models */
+    this.patchOotChildModel();
+    this.patchOotAdultModel();
+
+    /* Custom music */
+    if (c.music) {
+      const data = await this.getPathBuffer(c.music);
+      if (data)
+        await randomizeMusic(this.builder, random, data);
+    }
   }
 }
 
-export async function cosmetics(opts: Options, addresses: GameAddresses, roms: DecompressedRoms): Promise<CosmeticsOutput> {
-  const pass = new CosmeticsPass(opts, addresses, roms)
-  return pass.run();
+export async function cosmetics(opts: Options, addresses: GameAddresses, builder: RomBuilder, meta: any) {
+  const x = new CosmeticsPass(opts, addresses, builder, meta);
+  await x.run();
 }

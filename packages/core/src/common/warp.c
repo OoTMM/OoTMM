@@ -91,7 +91,6 @@ void comboTriggerWarp(GameState_Play* play, int bossId)
     }
 
 #if defined(GAME_MM)
-    gNoTimeFlow = 0;
     gSave.playerForm = MM_PLAYER_FORM_HUMAN;
     gSave.equippedMask = 0;
 #endif

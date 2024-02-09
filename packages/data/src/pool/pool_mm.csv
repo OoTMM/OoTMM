@@ -56,8 +56,8 @@ Milk Bar Purchase Chateau,                              npc,            NONE,   
 Town Archery Reward 1,                                  npc,            NONE,                   SHOOTING_GALLERY,             SHOOTING_GAME_TOWN_1,       BOW
 Town Archery Reward 2,                                  npc,            NONE,                   SHOOTING_GALLERY,             SHOOTING_GAME_TOWN_2,       HEART_PIECE
 Chest Game HP,                                          npc,            NONE,                   TREASURE_SHOP,                CHEST_GAME,                 HEART_PIECE
-Honey & Darling Reward 1,                               npc,            NONE,                   HONEY_DARLING,                HONEY_DARLING_1,            RUPEE_PURPLE
-Honey & Darling Reward 2,                               npc,            NONE,                   HONEY_DARLING,                HONEY_DARLING_2,            HEART_PIECE
+Honey & Darling Reward Any Day,                         npc,            NONE,                   HONEY_DARLING,                HONEY_DARLING_1,            RUPEE_PURPLE
+Honey & Darling Reward All Days,                        npc,            NONE,                   HONEY_DARLING,                HONEY_DARLING_2,            HEART_PIECE
 Stock Pot Inn Guest Room Chest,                         chest,          NONE,                   STOCK_POT_INN,                0x00,                       RUPEE_SILVER
 Stock Pot Inn Staff Room Chest,                         chest,          NONE,                   STOCK_POT_INN,                0x01,                       RUPEE_SILVER
 Stock Pot Inn Room Key,                                 npc,            NONE,                   STOCK_POT_INN,                ROOM_KEY,                   ROOM_KEY
@@ -99,8 +99,8 @@ Swordsman School Pot 2,                                 pot,            NONE,   
 Swordsman School Pot 3,                                 pot,            NONE,                   SWORDSMAN_SCHOOL,             0x0008,                     RUPEE_BLUE
 Swordsman School Pot 4,                                 pot,            NONE,                   SWORDSMAN_SCHOOL,             0x0009,                     RUPEE_BLUE
 Swordsman School Pot 5,                                 pot,            NONE,                   SWORDSMAN_SCHOOL,             0x000a,                     RUPEE_BLUE
-Deku Playground Reward 1,                               npc,            NONE,                   DEKU_PLAYGROUND,              DEKU_PLAYGROUND_1,          RUPEE_PURPLE
-Deku Playground Reward 2,                               npc,            NONE,                   DEKU_PLAYGROUND,              DEKU_PLAYGROUND_2,          HEART_PIECE
+Deku Playground Reward Any Day,                         npc,            NONE,                   DEKU_PLAYGROUND,              DEKU_PLAYGROUND_1,          RUPEE_PURPLE
+Deku Playground Reward All Days,                        npc,            NONE,                   DEKU_PLAYGROUND,              DEKU_PLAYGROUND_2,          HEART_PIECE
 Termina Field Water Chest,                              chest,          NONE,                   TERMINA_FIELD,                0x00,                       RUPEE_RED
 Termina Field Tall Grass Chest,                         chest,          NONE,                   TERMINA_FIELD,                0x01,                       RUPEE_RED
 Termina Field Tree Stump Chest,                         chest,          NONE,                   TERMINA_FIELD,                0x02,                       RUPEE_RED

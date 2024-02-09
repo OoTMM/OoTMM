@@ -66,13 +66,13 @@ const u8 kMmTrade3[] = {
 };
 
 const u8 kMmHookshot[] = {
-    ITEM_MM_HOOKSHOT,
     0x11, // ITEM_MM_BOTTLE_POTION_RED but that enum is wrong
+    ITEM_MM_HOOKSHOT,
 };
 
 const u8 kMmOcarina[] = {
-    ITEM_MM_OCARINA_OF_TIME,
     ITEM_MM_OCARINA_FAIRY,
+    ITEM_MM_OCARINA_OF_TIME,
 };
 
 // Return value is used to index gVertex
