@@ -826,7 +826,6 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MM_SKULL_COUNT_15: settings.skullCount === 'half',
     MM_SKULL_COUNT_20: settings.skullCount === 'lots',
     MM_SKULL_COUNT_25: settings.skullCount === 'most',
-    MM_INSTANT_TRANSFORM: settings.instantTransform,
   };
 
   for (const v in exprs) {

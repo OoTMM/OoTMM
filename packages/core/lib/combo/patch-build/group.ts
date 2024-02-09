@@ -45,7 +45,6 @@ export const PATCH_GROUPS = [
   'OOT_SHUFFLE_FREE_RUPEES',
   'MM_SHUFFLE_FREE_RUPEES',
   'MM_OPEN_STT',
-  'MM_INSTANT_TRANSFORM',
 ] as const;
 
 export type PatchGroup = typeof PATCH_GROUPS[number];

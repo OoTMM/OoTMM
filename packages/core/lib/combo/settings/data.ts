@@ -1037,13 +1037,6 @@ export const SETTINGS = [{
   description: 'In vanilla OoT, some actors fails to load properly in some rooms due to errors in the room files. When this is on, these actors will load.',
   default: false
 }, {
-  key: 'instantTransform',
-  name: 'Instant Transform',
-  category: 'main.misc',
-  type: 'boolean',
-  description: 'Immediately transforms the player upon equiping the mask, skipping the animation.',
-  default: false
-},{
   key: 'fillWallets',
   name: 'Fill Wallets',
   category: 'items',
