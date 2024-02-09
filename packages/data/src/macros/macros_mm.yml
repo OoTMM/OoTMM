@@ -32,8 +32,13 @@
 "has_tunic_zora": "has_tunic_zora_strict || trick(MM_TUNICS)"
 
 # Scales
-"can_dive_small": "has_scale_raw(1)"
-"can_dive_big": "has_scale_raw(2)"
+"can_dive_small": "setting(scalesMm) && has_scale_raw(1)"
+"can_dive_big": "setting(scalesMm) && has_scale_raw(2)"
+
+# Strength
+"can_lift_bracelet": "!setting(strengthMm) || has_strength_raw(1)"
+"can_lift_silver": "setting(strengthMm) && has_strength_raw(2)"
+"can_lift_gold": "setting(strengthMm) && has_strength_raw(3)"
 
 # Ocarina
 "ocarina_button(x, y)": "cond(setting(ocarinaButtonsShuffleMm), cond(setting(sharedOcarinaButtons), has(y), has(x)), true)"
@@ -121,7 +126,7 @@
 "can_lullaby_half": "has_mask_goron && can_play_goron_half"
 "can_lullaby": "has_mask_goron && can_play_goron"
 "has_shield": "cond(setting(sharedShields), renewable(SHARED_SHIELD_HYLIAN), renewable(SHIELD_HERO)) || has_mirror_shield"
-"can_activate_crystal": "can_break_boulders || has_weapon || has_arrows || can_hookshot_short || has(MASK_DEKU) || has_mask_zora"
+"can_activate_crystal": "can_break_boulders || has_weapon || has_arrows || can_hookshot_short || has(MASK_DEKU) || has_mask_zora || has_sticks"
 "can_evade_gerudo": "has_arrows || can_hookshot_short || has_mask_zora || has(MASK_STONE)"
 "can_goron_bomb_jump": "trick(MM_GORON_BOMB_JUMP) && has_mask_goron && (has_bombs || trick_keg_explosives)"
 "can_hookshot_n(x)": "has(HOOKSHOT, x) || has(SHARED_HOOKSHOT, x)"
@@ -154,6 +159,7 @@
 "turtle_woken": "(can_play_zora && has_mask_zora) || setting(openDungeonsMm, GB) || ((setting(clearStateDungeonsMm, GB) || setting(clearStateDungeonsMm, both)) && event(BOSS_GREAT_BAY))"
 "can_check_gf(sf)": "has(sf, 15) || setting(mmCountLogic) && ((setting(strayCount, most) && has(sf, 13)) || (setting(strayCount, lots) && has(sf, 10)) || (setting(strayCount, half) && has(sf, 7)) || (setting(strayCount, some) && has(sf, 5)) || (setting(strayCount, few) && has(sf, 3)) || (setting(strayCount, none)))"
 "can_check_sh(st)": "has(st, 30) || setting(mmCountLogic) && ((setting(skullCount, most) && has(st, 25)) || (setting(skullCount, lots) && has(st, 20)) || (setting(skullCount, half) && has(st, 15)) || (setting(skullCount, some) && has(st, 10)) || (setting(skullCount, few) && has(st, 5)) || (setting(skullCount, none)))"
+"can_kill_freezard_short_range": "can_fight || can_use_light_arrows || can_use_fire_short_range || has_explosives || can_hookshot_short"
 
 "underwater_walking": "has_mask_zora || (has_tunic_zora && has_iron_boots)"
 "underwater_walking_strict": "has_mask_zora || (has_tunic_zora_strict && has_iron_boots)"

@@ -43,6 +43,7 @@ export const CONFVARS = [
   'SHARED_TUNIC_GORON',
   'SHARED_TUNIC_ZORA',
   'SHARED_SCALES',
+  'SHARED_STRENGTH',
   'OOT_CROSS_WARP',
   'MM_CROSS_WARP',
   'MM_CROSS_WARP_ADULT',
@@ -134,6 +135,7 @@ export const CONFVARS = [
   'MM_TUNIC_GORON',
   'MM_TUNIC_ZORA',
   'MM_SCALES',
+  'MM_STRENGTH',
   'OOT_GANON_BOSS_KEY_HINT',
   'BLAST_MASK_DELAY_INSTANT',
   'BLAST_MASK_DELAY_VERYSHORT',
@@ -154,6 +156,7 @@ export const CONFVARS = [
   'MM_SKULL_COUNT_15',
   'MM_SKULL_COUNT_20',
   'MM_SKULL_COUNT_25',
+  'MM_FD_ANYWHERE',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

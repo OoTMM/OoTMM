@@ -6,10 +6,10 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Use Node.js 20.x
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20.x
 
@@ -23,7 +23,7 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Extract Version (Tag)
         if: ${{ contains(github.ref, 'refs/tags/') }}
@@ -49,7 +49,7 @@ jobs:
         run: sudo apt-get install n64-ultra cmake ninja-build
 
       - name: Use Node.js 20.x
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20.x
 
