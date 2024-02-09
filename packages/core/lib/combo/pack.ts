@@ -52,7 +52,7 @@ export async function pack(args: PackArgs) {
   monitor.log("Pack: Building ROM");
   for (const game of GAMES) {
     const dg = roms[game];
-    const patches = patchfile.gamePatches[game].data;
+    const patches = patchfile.gamePatches[game];
 
     /* Apply patches */
     for (const patch of patches) {
@@ -68,15 +68,13 @@ export async function pack(args: PackArgs) {
   await injectFirst('mm', romBuilder, 31);
 
   /* Add the extra files */
-  for (const newFiles of patchfile.newFiles) {
-    const type = newFiles.compressed ? 'compressed' : 'uncompressed';
-    const { data } = newFiles;
-    const vaddr = newFiles.vrom;
-    let name = `unk/${vaddr.toString(16)}`;
-    if (vaddr === 0xf0000000) {
-      name = 'oot/payload';
-    } else if (vaddr === 0xf0100000) {
-      name = 'mm/payload';
+  for (const newFile of patchfile.newFiles) {
+    const type = newFile.compressed ? 'compressed' : 'uncompressed';
+    const { data } = newFile;
+    const vaddr = newFile.vrom;
+    let name = newFile.name;
+    if (name === null) {
+      name = `unk/${vaddr.toString(16)}`;
     }
     romBuilder.addFile({ type, data, name, game: 'custom', vaddr });
   }

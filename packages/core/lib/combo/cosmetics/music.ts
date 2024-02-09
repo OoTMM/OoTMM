@@ -318,7 +318,7 @@ class MusicInjector {
     /* Add the merged audioseq at a fixed fake vrom ADDR */
     const data = Buffer.concat(this.audioSeq.oot.buffers);
     const vrom = 0xe0000000;
-    this.patch.addNewFile(vrom, data, false);
+    this.patch.addNewFile(null, vrom, data, false);
 
     /* Disable battle music */
     const z = Buffer.alloc(1);
@@ -330,7 +330,7 @@ class MusicInjector {
     /* Add the merged audioseq at a fixed fake vrom ADDR */
     const data = Buffer.concat(this.audioSeq.mm.buffers);
     const vrom = 0xe8000000;
-    this.patch.addNewFile(vrom, data, false);
+    this.patch.addNewFile(null, vrom, data, false);
 
     /* Disable battle music */
     const z = Buffer.alloc(2);
