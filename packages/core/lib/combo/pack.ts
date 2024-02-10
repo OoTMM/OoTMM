@@ -13,6 +13,8 @@ import { GameAddresses } from './addresses';
 
 /* Files to alias (will use the OoT version) */
 const ALIASES_OOT = [
+  'icon_item_gameover_static',
+  'message_texture_static',
   'objects/object_wallmaster',
   'objects/object_firefly',
   'objects/object_dodongo',
@@ -111,8 +113,8 @@ export async function pack(args: PackArgs) {
   }
 
   /* We need to pack a few static files before we can pack the rest */
-  await injectFirst('oot', romBuilder, 27);
-  await injectFirst('mm', romBuilder, 31);
+  await injectFirst('oot', romBuilder, 6);
+  await injectFirst('mm', romBuilder,  6);
 
   /* Add the extra files */
   for (const newFile of patchfile.newFiles) {
