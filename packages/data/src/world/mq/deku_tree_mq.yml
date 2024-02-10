@@ -51,7 +51,7 @@
   dungeon: DT
   exits:
     "Deku Tree Lobby": "true"
-    "Deku Tree Compass Room Alcove": "has_bombchu || (can_play_time && has_explosives_or_hammer)"
+    "Deku Tree Compass Room Alcove": "has_bombchu || has_mask_blast || (can_play_time && has_explosives_or_hammer)"
   locations:
     "MQ Deku Tree Compass Chest": "true"
     "MQ Deku Tree Grass Compass Room 1": "can_cut_grass"

@@ -1,7 +1,7 @@
-import { Game } from "../config";
-import { toU32BufferLE } from "../util";
+import { Game } from '../config';
+import { toU32BufferLE } from '../util';
 
-const REVISION = 1;
+const REVISION = 2;
 const MAGIC = 'OoTMM-P2';
 
 type DataPatch = {
@@ -10,26 +10,22 @@ type DataPatch = {
 }
 
 type NewFile = {
+  name: string | null;
   vrom: number;
   data: Buffer;
   compressed: boolean;
 }
 
-type GamePatches = {
-  data: DataPatch[];
-  removedFiles: Set<number>;
-}
-
 export class Patchfile {
-  public gamePatches: {[k in Game]: GamePatches};
+  public gamePatches: {[k in Game]: DataPatch[] };
   public newFiles: NewFile[];
   public hash: string;
   public meta: any;
 
   constructor(data?: Buffer) {
     this.gamePatches = {
-      oot: { data: [], removedFiles: new Set() },
-      mm: { data: [], removedFiles: new Set() },
+      oot: [],
+      mm: [],
     };
     this.newFiles = [];
     this.hash = 'XXXXXXXX';
@@ -72,17 +68,21 @@ export class Patchfile {
     const size = data.readUInt32LE(offset + 4);
     const patch = data.subarray(offset + 8, offset + 8 + size);
     offset += 8 + size;
-    this.gamePatches[game].data.push({ addr, data: patch });
+    this.gamePatches[game].push({ addr, data: patch });
     return offset;
   }
 
   private parseNewFilePatch(data: Buffer, offset: number) {
-    const vrom = data.readUInt32LE(offset);
-    const compressed = data.readUInt32LE(offset + 4) === 1;
-    const size = data.readUInt32LE(offset + 8);
-    const patch = data.subarray(offset + 0x10, offset + 0x10 + size);
-    offset += 0x10 + size;
-    this.newFiles.push({ vrom, data: patch, compressed });
+    let name: string | null = data.toString('utf8', offset, offset + 0x40).replace(/\0/g, '');
+    if (name === '') {
+      name = null;
+    }
+    const vrom = data.readUInt32LE(offset + 0x40);
+    const compressed = data.readUInt32LE(offset + 0x44) === 1;
+    const size = data.readUInt32LE(offset + 0x48);
+    const patch = data.subarray(offset + 0x50, offset + 0x50 + size);
+    offset += 0x50 + size;
+    this.newFiles.push({ name, vrom, data: patch, compressed });
     return offset;
   }
 
@@ -95,15 +95,11 @@ export class Patchfile {
   }
 
   addDataPatch(game: Game, addr: number, data: Buffer) {
-    this.gamePatches[game].data.push({ addr, data });
+    this.gamePatches[game].push({ addr, data });
   }
 
-  addNewFile(vrom: number, data: Buffer, compressed: boolean) {
-    this.newFiles.push({ vrom, data, compressed });
-  }
-
-  removeFile(game: Game, id: number) {
-    this.gamePatches[game].removedFiles.add(id);
+  addNewFile(name: string | null, vrom: number, data: Buffer, compressed: boolean) {
+    this.newFiles.push({ name, vrom, data, compressed });
   }
 
   toBuffer(): Buffer {
@@ -112,12 +108,12 @@ export class Patchfile {
     header.write(MAGIC, 0x00, 0x08, 'utf8');
     header.write(this.hash, 0x08, 0x08, 'utf8');
     header.writeUInt32LE(REVISION, 0x10);
-    header.writeUInt32LE(this.gamePatches.oot.data.length, 0x14);
-    header.writeUInt32LE(this.gamePatches.mm.data.length, 0x18);
+    header.writeUInt32LE(this.gamePatches.oot.length, 0x14);
+    header.writeUInt32LE(this.gamePatches.mm.length, 0x18);
     header.writeUInt32LE(this.newFiles.length, 0x1c);
     buffers.push(header);
 
-    const gameDataPatches = [...this.gamePatches.oot.data, ...this.gamePatches.mm.data];
+    const gameDataPatches = [...this.gamePatches.oot, ...this.gamePatches.mm];
     for (const p of gameDataPatches) {
       const h = toU32BufferLE([p.addr, p.data.length]);
       buffers.push(h);
@@ -125,7 +121,12 @@ export class Patchfile {
     }
 
     for (const f of this.newFiles) {
+      const nameBuf = Buffer.alloc(0x40, 0);
+      if (f.name) {
+        nameBuf.write(f.name, 'utf-8');
+      }
       const h = toU32BufferLE([f.vrom, f.compressed ? 1 : 0, f.data.length, 0]);
+      buffers.push(nameBuf);
       buffers.push(h);
       buffers.push(f.data);
     }
@@ -145,8 +146,8 @@ export class Patchfile {
     const ret = new Patchfile();
     ret.hash = this.hash;
     ret.meta = JSON.parse(JSON.stringify(this.meta));
-    ret.gamePatches.oot = { data: [...this.gamePatches.oot.data], removedFiles: new Set(this.gamePatches.oot.removedFiles) };
-    ret.gamePatches.mm = { data: [...this.gamePatches.mm.data], removedFiles: new Set(this.gamePatches.mm.removedFiles) };
+    ret.gamePatches.oot = [...this.gamePatches.oot];
+    ret.gamePatches.mm = [...this.gamePatches.mm];
     ret.newFiles = [...this.newFiles];
     return ret;
   }

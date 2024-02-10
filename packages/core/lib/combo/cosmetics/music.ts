@@ -5,6 +5,7 @@ import { Patchfile } from '../patch-build/patchfile';
 import { toU32Buffer } from '../util';
 import { DecompressedRoms } from '../decompress';
 import { Game } from '../config';
+import { RomBuilder } from '../rom-builder';
 
 const OOT_AUDIOSEQ_ADDR = 0x29de0;
 const OOT_AUDIOSEQ_SIZE = 0x4f690;
@@ -133,9 +134,8 @@ class MusicInjector {
   private musics: MusicFile[];
 
   constructor(
-    private roms: DecompressedRoms,
+    private builder: RomBuilder,
     private random: Random,
-    private patch: Patchfile,
     private musicZipData: Buffer,
   ) {
     this.audioSeq = {
@@ -249,16 +249,18 @@ class MusicInjector {
   }
 
   private async injectMusicOotOffsetId(slot: number, seqOffset: number, seqLength: number, bankId: number) {
+    const fileCodeOot = this.builder.fileByNameRequired('oot/code');
+
     /* Patch the bank ID */
-    const bankVrom = 0xB89911 + 0xDD + (slot * 2);
+    const bankVrom = 0x102911 + 0xDD + (slot * 2);
     const bankIdBuf = Buffer.alloc(1);
     bankIdBuf.writeUInt8(bankId);
-    this.patch.addDataPatch('oot', bankVrom, bankIdBuf);
+    bankIdBuf.copy(fileCodeOot.data, bankVrom);
 
     /* Add the pointer */
-    const seqTablePtr = 0x00B89AE0 + 0x10 * slot;
+    const seqTablePtr = 0x102ae0 + 0x10 * slot;
     const seqTableData = toU32Buffer([seqOffset, seqLength]);
-    this.patch.addDataPatch('oot', seqTablePtr, seqTableData);
+    seqTableData.copy(fileCodeOot.data, seqTablePtr);
   }
 
   private async injectMusicOot(slot: string, music: MusicFile) {
@@ -276,16 +278,18 @@ class MusicInjector {
   }
 
   private async injectMusicMmOffsetId(slot: number, seqOffset: number, seqLength: number, bankId: number) {
+    const fileCodeMm = this.builder.fileByNameRequired('mm/code');
+
     /* Patch the bank ID */
-    const bankVrom = 0xC77961 + 0x101 + (slot * 2);
+    const bankVrom = 0x13b961 + 0x101 + (slot * 2);
     const bankIdBuf = Buffer.alloc(1);
     bankIdBuf.writeUInt8(bankId);
-    this.patch.addDataPatch('mm', bankVrom, bankIdBuf);
+    bankIdBuf.copy(fileCodeMm.data, bankVrom);
 
     /* Add the pointer */
-    const seqTablePtr = 0xC77B80 + 0x10 * slot;
+    const seqTablePtr = 0x13bb80 + 0x10 * slot;
     const seqTableData = toU32Buffer([seqOffset, seqLength]);
-    this.patch.addDataPatch('mm', seqTablePtr, seqTableData);
+    seqTableData.copy(fileCodeMm.data, seqTablePtr);
   }
 
   private async injectMusicMm(slot: string, music: MusicFile) {
@@ -318,24 +322,26 @@ class MusicInjector {
     /* Add the merged audioseq at a fixed fake vrom ADDR */
     const data = Buffer.concat(this.audioSeq.oot.buffers);
     const vrom = 0xe0000000;
-    this.patch.addNewFile(vrom, data, false);
+    this.builder.addFile({ game: 'custom', type: 'uncompressed', vaddr: vrom, data });
 
     /* Disable battle music */
+    const filePlayerActor = this.builder.fileByNameRequired('oot/ovl_player_actor');
     const z = Buffer.alloc(1);
     z.writeUInt8(0);
-    this.patch.addDataPatch('oot', 0xbe447F, z);
+    z.copy(filePlayerActor.data, 0x1690f);
   }
 
   private replaceAudioseqMm() {
     /* Add the merged audioseq at a fixed fake vrom ADDR */
     const data = Buffer.concat(this.audioSeq.mm.buffers);
     const vrom = 0xe8000000;
-    this.patch.addNewFile(vrom, data, false);
+    this.builder.addFile({ game: 'custom', type: 'uncompressed', vaddr: vrom, data });
 
     /* Disable battle music */
+    const filePlayerActor = this.builder.fileByNameRequired('mm/ovl_player_actor');
     const z = Buffer.alloc(2);
     z.writeUInt16BE(0x1000);
-    this.patch.addDataPatch('mm', 0xCBE718, z);
+    z.copy(filePlayerActor.data, 0x16818);
   }
 
   private async shuffleMusics(game: Game) {
@@ -357,10 +363,13 @@ class MusicInjector {
 
   async run() {
     /* Init the audio seq data */
-    this.audioSeq.oot.size = OOT_AUDIOSEQ_SIZE;
-    this.audioSeq.oot.buffers = [this.roms.oot.rom.subarray(OOT_AUDIOSEQ_ADDR, OOT_AUDIOSEQ_ADDR + OOT_AUDIOSEQ_SIZE)];
-    this.audioSeq.mm.size = MM_AUDIOSEQ_SIZE;
-    this.audioSeq.mm.buffers = [this.roms.mm.rom.subarray(MM_AUDIOSEQ_ADDR, MM_AUDIOSEQ_ADDR + MM_AUDIOSEQ_SIZE)];
+    const audioseqOot = this.builder.fileByNameRequired('oot/Audioseq');
+    const audioseqMm = this.builder.fileByNameRequired('mm/Audioseq');
+
+    this.audioSeq.oot.size = audioseqOot.data.length;
+    this.audioSeq.oot.buffers = [audioseqOot.data];
+    this.audioSeq.mm.size = audioseqMm.data.length;
+    this.audioSeq.mm.buffers = [audioseqMm.data];
 
     /* Extract the list of musics */
     await this.loadMusics(this.musicZipData);
@@ -375,7 +384,7 @@ class MusicInjector {
   }
 }
 
-export async function randomizeMusic(roms: DecompressedRoms, patch: Patchfile, random: Random, data: Buffer) {
-  const injector = new MusicInjector(roms, random, patch, data);
+export async function randomizeMusic(builder: RomBuilder, random: Random, data: Buffer) {
+  const injector = new MusicInjector(builder, random, data);
   await injector.run();
 }

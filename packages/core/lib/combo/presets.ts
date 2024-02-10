@@ -6,6 +6,7 @@ export type Presets = { [k: string]: Settings };
 const PRESET_DEFAULT = DEFAULT_SETTINGS;
 
 const BLITZ_BASE: PartialDeep<Settings> = {
+  clearStateDungeonsMm: 'both',
   tingleShuffle: 'starting',
   openMaskShop: true,
   hintImportance: true,
@@ -74,6 +75,10 @@ const BLITZ_BASE: PartialDeep<Settings> = {
   blastMaskOot: true,
   sharedMaskBlast: true,
   agelessChildTrade: true,
+  scalesMm: true,
+  strengthMm: true,
+  sharedScales: true,
+  sharedStrength: true,
   startingItems: {
     OOT_NUTS_10: 2,
     OOT_SHIELD_DEKU: 1,
@@ -134,11 +139,11 @@ const PRESET_BLITZ = makeBlitz({
     }
   },
   junkLocations: [
-    'MM Deku Playground Reward 2',
+    'MM Deku Playground Reward All Days',
     'MM Beneath The Graveyard Dampe Chest',
     'MM Goron Race Reward',
     'MM Great Bay Great Fairy',
-    'MM Honey & Darling Reward 2',
+    'MM Honey & Darling Reward All Days',
     'MM Ikana Great Fairy',
     'MM Laboratory Zora Song',
     'MM Moon Fierce Deity Mask',
@@ -175,10 +180,10 @@ const PRESET_BLITZ_PRECOMPLETED = makeBlitz({
   preCompletedDungeonsRemains: 2,
   junkLocations: [
     "MM Beneath The Graveyard Dampe Chest",
-    "MM Deku Playground Reward 2",
+    "MM Deku Playground Reward All Days",
     "MM Goron Race Reward",
     "MM Great Bay Great Fairy",
-    "MM Honey & Darling Reward 2",
+    "MM Honey & Darling Reward All Days",
     "MM Ikana Great Fairy",
     "MM Laboratory Zora Song",
     "MM Moon Fierce Deity Mask",
@@ -232,10 +237,10 @@ const PRESET_TRIFORCE_BLITZ = makeBlitz({
   preCompletedDungeonsRemains: 2,
   junkLocations: [
     "MM Beneath The Graveyard Dampe Chest",
-    "MM Deku Playground Reward 2",
+    "MM Deku Playground Reward All Days",
     "MM Goron Race Reward",
     "MM Great Bay Great Fairy",
-    "MM Honey & Darling Reward 2",
+    "MM Honey & Darling Reward All Days",
     "MM Ikana Great Fairy",
     "MM Laboratory Zora Song",
     "MM Moon Fierce Deity Mask",
@@ -593,6 +598,7 @@ const PRESET_HELL = makeSettings({
 });
 
 const PRESET_BEGINNER = makeSettings({
+  clearStateDungeonsMm: 'both',
   hintImportance: true,
   tingleShuffle: 'starting',
   mapCompassShuffle: 'starting',
@@ -603,7 +609,6 @@ const PRESET_BEGINNER = makeSettings({
   startingAge: 'random',
   doorOfTime: 'open',
   dekuTree: 'closed',
-  clearStateDungeonsMm: 'both',
   kakarikoGate: 'open',
   gerudoFortress: 'single',
   skipZelda: true,
@@ -647,10 +652,10 @@ const PRESET_BEGINNER = makeSettings({
   },
   junkLocations: [
     'MM Beneath The Graveyard Dampe Chest',
-    'MM Deku Playground Reward 2',
+    'MM Deku Playground Reward All Days',
     'MM Goron Race Reward',
     'MM Great Bay Great Fairy',
-    'MM Honey & Darling Reward 2',
+    'MM Honey & Darling Reward All Days',
     'MM Ikana Great Fairy',
     'MM Laboratory Zora Song',
     'MM Moon Fierce Deity Mask',

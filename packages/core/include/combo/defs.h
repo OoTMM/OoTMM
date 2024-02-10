@@ -39,7 +39,7 @@
 # define COMBO_CTX_ADDR_WRITE   COMBO_CTX_ADDR_OOT
 #endif
 
-#define MM_BASE       0xa628f0
+#define MM_BASE       0x4d9f40
 
 #define MASK_FOREIGN_OBJECT     0x1000
 #define MASK_CUSTOM_OBJECT      0x2000

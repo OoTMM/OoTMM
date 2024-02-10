@@ -70,13 +70,13 @@
   dungeon: Shadow
   locations:
     "Shadow Temple Falling Spikes Lower": "true"
-    "Shadow Temple Falling Spikes Upper 1": "(is_adult && has(STRENGTH)) || climb_anywhere || hookshot_anywhere"
-    "Shadow Temple Falling Spikes Upper 2": "(is_adult && has(STRENGTH)) || climb_anywhere || hookshot_anywhere"
+    "Shadow Temple Falling Spikes Upper 1": "(is_adult && has_goron_bracelet) || climb_anywhere || hookshot_anywhere"
+    "Shadow Temple Falling Spikes Upper 2": "(is_adult && has_goron_bracelet) || climb_anywhere || hookshot_anywhere"
     "Shadow Temple GS Falling Spikes": "can_collect_distance || (climb_anywhere && can_damage_skull)"
     "Shadow Temple Pot Falling Spikes Bottom 1": "true"
     "Shadow Temple Pot Falling Spikes Bottom 2": "true"
-    "Shadow Temple Pot Falling Spikes Top 1": "(is_adult && has(STRENGTH)) || climb_anywhere || hookshot_anywhere"
-    "Shadow Temple Pot Falling Spikes Top 2": "(is_adult && has(STRENGTH)) || climb_anywhere || hookshot_anywhere"
+    "Shadow Temple Pot Falling Spikes Top 1": "(is_adult && has_goron_bracelet) || climb_anywhere || hookshot_anywhere"
+    "Shadow Temple Pot Falling Spikes Top 2": "(is_adult && has_goron_bracelet) || climb_anywhere || hookshot_anywhere"
 "Shadow Temple Invisible Spikes":
   dungeon: Shadow
   exits:
@@ -94,7 +94,7 @@
   dungeon: Shadow
   locations:
     "Shadow Temple Skull": "has_bombflowers"
-    "Shadow Temple GS Skull Pot": "can_damage_skull || has(STRENGTH)"
+    "Shadow Temple GS Skull Pot": "can_damage_skull || has_goron_bracelet"
 "Shadow Temple Wind Front":
   dungeon: Shadow
   exits:
@@ -127,7 +127,7 @@
     "Shadow Temple Wind Gibdo": "small_keys_shadow(4)"
     "Shadow Temple Scythe Silver Rupees": "event(SHADOW_SHORTCUT) || (climb_anywhere && trick(OOT_SHADOW_BOAT_EARLY))"
   events:
-    SHADOW_SHORTCUT: "has(STRENGTH)"
+    SHADOW_SHORTCUT: "has_goron_bracelet"
   locations:
     "Shadow Temple GS Near Boat": "can_longshot || hookshot_anywhere || (climb_anywhere && (has_weapon || has_ranged_weapon || has_explosives || can_use_din))"
     "Shadow Temple Heart Shortcut 1": "scarecrow_longshot || hookshot_anywhere || climb_anywhere"

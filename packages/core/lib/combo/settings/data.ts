@@ -697,7 +697,7 @@ export const SETTINGS = [{
   name: 'Clear State Dungeons (MM)',
   category: 'main.events',
   type: 'enum',
-  description: 'Make some MM dungeons open during clear state..',
+  description: 'Make some MM dungeons open during clear state.',
   values: [
     { value: 'none', name: 'None' },
     { value: 'WF', name: 'Woodfall Temple' },
@@ -990,6 +990,13 @@ export const SETTINGS = [{
   description: 'Forces the default target system to HOLD instead of SWITCH',
   default: true
 }, {
+  key: 'critWiggleDisable',
+  name: 'Disable Crit Wiggle',
+  category: 'main.misc',
+  type: 'boolean',
+  description: 'Disables the camera zoom-in and weird movements when low on health',
+  default: true
+}, {
   key: 'restoreBrokenActors',
   name: 'Restore Broken Actors',
   category: 'main.misc',
@@ -1210,6 +1217,13 @@ export const SETTINGS = [{
   category: 'items.extensions',
   type: 'boolean',
   description: "Adds Silver Scale and Golden Scale in Majora's Mask.",
+  default: false
+}, {
+  key: 'strengthMm',
+  name: "Strength (MM)",
+  category: 'items.extensions',
+  type: 'boolean',
+  description: "Adds Goron's Bracelet, Silver Gauntlets and Golden Gauntlets in Majora's Mask.",
   default: false
 }, {
   key: 'blastMaskOot',
@@ -1553,6 +1567,13 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false,
   cond: (s: any) => s.scalesMm,
+}, {
+  key: 'sharedStrength',
+  name: "Shared Strength",
+  category: 'items.shared',
+  type: 'boolean',
+  default: false,
+  cond: (s: any) => s.strengthMm,
 }, {
   key: 'agelessSwords',
   name: 'Ageless Swords',

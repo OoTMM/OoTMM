@@ -1,7 +1,7 @@
 import { Random, sample, shuffle } from '../random';
 import { countMapAdd, countMapArray, countMapCombine, countMapRemove } from '../util';
 import { Pathfinder, PathfinderState } from './pathfind';
-import { World } from './world';
+import { World, cloneWorld } from './world';
 import { LogicError, LogicSeedError } from './error';
 import { Settings } from '../settings';
 import { Monitor } from '../monitor';
@@ -268,6 +268,7 @@ const cloneState = (state: SolverState) => {
 };
 
 export class LogicPassSolver {
+  private worlds: World[];
   private monitor: Monitor;
   private pathfinder!: Pathfinder;
   private junkDistribution!: PlayerItems;
@@ -292,7 +293,8 @@ export class LogicPassSolver {
     }
   ) {
     this.monitor = this.input.monitor;
-    this.locations = this.input.worlds.map((x, i) => [...x.locations].map(l => makeLocation(l, i))).flat();
+    this.worlds = this.input.worlds.map(x => cloneWorld(x));
+    this.locations = this.worlds.map((x, i) => [...x.locations].map(l => makeLocation(l, i))).flat();
     this.state = {
       startingItems: new Map(this.input.startingItems),
       items: new Map,
@@ -300,7 +302,7 @@ export class LogicPassSolver {
       criticalRenewables: new Set,
       placedCount: 0,
     }
-    this.pathfinder = new Pathfinder(this.input.worlds, this.input.settings, this.state.startingItems);
+    this.pathfinder = new Pathfinder(this.worlds, this.input.settings, this.state.startingItems);
     this.pathfinderState = this.pathfinder.run(null);
     this.makeItemPools();
   }
@@ -317,7 +319,7 @@ export class LogicPassSolver {
         if ((e instanceof LogicError) && this.attempts < this.attemptsMax) {
           this.attempts++;
           this.state = cloneState(stateBackup);
-          this.pathfinder = new Pathfinder(this.input.worlds, this.input.settings, this.state.startingItems);
+          this.pathfinder = new Pathfinder(this.worlds, this.input.settings, this.state.startingItems);
           this.monitor.log(`Logic: Solver (attempt ${this.attempts + 1})`);
           continue;
         } else {
@@ -336,11 +338,6 @@ export class LogicPassSolver {
 
   run() {
     this.monitor.log(`Logic: Solver`);
-
-    /* KLUDGE: Reset pre-completed dungeons */
-    for (const world of this.input.worlds) {
-      world.preCompleted = new Set;
-    }
 
     /* Place plando items */
     this.placePlando();
@@ -367,7 +364,7 @@ export class LogicPassSolver {
     });
 
     /* Handle dungeon items */
-    const allDungeons = new Set(this.input.worlds.map(x => Object.keys(x.dungeons)).flat());
+    const allDungeons = new Set(this.worlds.map(x => Object.keys(x.dungeons)).flat());
     for (const dungeon of allDungeons.values()) {
       this.retry(() => {
         this.fixDungeon(dungeon);
@@ -409,7 +406,7 @@ export class LogicPassSolver {
     /* At this point we have a beatable game */
     this.fillAll();
 
-    return { items: this.state.items, startingItems: this.state.startingItems };
+    return { items: this.state.items, startingItems: this.state.startingItems, worlds: this.worlds };
   }
 
   private placePlando() {
@@ -430,7 +427,7 @@ export class LogicPassSolver {
   private fixItems() {
     for (const loc of this.input.fixedLocations.values()) {
       const locD = locationData(loc);
-      const item = makePlayerItem(this.input.worlds[locD.world as number].checks[locD.id].item, locD.world as number);
+      const item = makePlayerItem(this.worlds[locD.world as number].checks[locD.id].item, locD.world as number);
       this.place(loc, item);
     }
   }
@@ -488,8 +485,8 @@ export class LogicPassSolver {
     const setting = this.input.settings.goldSkulltulaTokens;
     const shuffleInDungeons = ['dungeons', 'all'].includes(setting);
     const shuffleInOverworld = ['overworld', 'all'].includes(setting);
-    for (let worldId = 0; worldId < this.input.worlds.length; ++worldId) {
-      const world = this.input.worlds[worldId];
+    for (let worldId = 0; worldId < this.worlds.length; ++worldId) {
+      const world = this.worlds[worldId];
       const skullLocations = Object.keys(world.checks).filter(x => ItemHelpers.isGoldToken(world.checks[x].item));
       const dungeonLocations = Object.values(world.dungeons).reduce((acc, x) => new Set([...acc, ...x]));
 
@@ -506,8 +503,8 @@ export class LogicPassSolver {
 
   private houseTokenLocations() {
     const locations = new Set<Location>();
-    for (let worldId = 0; worldId < this.input.worlds.length; ++worldId) {
-      const world = this.input.worlds[worldId];
+    for (let worldId = 0; worldId < this.worlds.length; ++worldId) {
+      const world = this.worlds[worldId];
       for (const location in world.checks) {
         const item = world.checks[location].item;
         if (ItemHelpers.isHouseToken(item)) {
@@ -525,7 +522,7 @@ export class LogicPassSolver {
 
     for (let player = 0; player < this.input.settings.players; ++player) {
       const locations = [...gs, ...house].filter(x => locationData(x).world === player);
-      const world = this.input.worlds[player];
+      const world = this.worlds[player];
       const pool = shuffle(this.input.random, locations.map(loc => makePlayerItem(world.checks[locationData(loc).id].item, player)));
       for (const location of locations) {
         const item = pool.pop()!;
@@ -545,7 +542,7 @@ export class LogicPassSolver {
     /* Fix the non-shuffled GS */
     for (const location of gsLocations) {
       const locD = locationData(location);
-      const world = this.input.worlds[locD.world as number];
+      const world = this.worlds[locD.world as number];
       if (!this.state.items.has(location)) {
         const item = makePlayerItem(world.checks[locD.id].item, locD.world as number);
         this.place(location, item);
@@ -558,7 +555,7 @@ export class LogicPassSolver {
       for (const location of houseLocations) {
         const locD = locationData(location);
         const player = locD.world as number;
-        const world = this.input.worlds[player];
+        const world = this.worlds[player];
         if (!this.state.items.has(location)) {
           const item = makePlayerItem(world.checks[locD.id].item, player);
           this.place(location, item);
@@ -596,7 +593,7 @@ export class LogicPassSolver {
       return;
 
     this.retry(() => {
-      for (let worldId = 0; worldId < this.input.worlds.length; ++worldId) {
+      for (let worldId = 0; worldId < this.worlds.length; ++worldId) {
         let locs: Map<Location, number>;
         if (this.input.settings.logic !== 'none') {
           locs = this.getSpheres();
@@ -624,9 +621,9 @@ export class LogicPassSolver {
           if (!pi)
             break;
           const l = locsArray.pop()!;
-          const region = this.input.worlds[worldId].regions[locationData(l).id];
+          const region = this.worlds[worldId].regions[locationData(l).id];
           if (region !== 'NONE') {
-            locsArray = locsArray.filter(x => this.input.worlds[worldId].regions[locationData(x).id] !== region);
+            locsArray = locsArray.filter(x => this.worlds[worldId].regions[locationData(x).id] !== region);
           }
           this.place(l, pi);
           removeItemPools(this.state.pools, pi);
@@ -646,7 +643,7 @@ export class LogicPassSolver {
     const pool = countMapCombine(this.state.pools.required, this.state.pools.nice);
 
     for (let player = 0; player < settings.players; ++player) {
-      const world = this.input.worlds[player];
+      const world = this.worlds[player];
       let locationIds = world.dungeons[dungeon];
       if (dungeon === 'ST') {
         locationIds = new Set([...locationIds, ...world.dungeons['IST']]);
@@ -739,7 +736,7 @@ export class LogicPassSolver {
   }
 
   private selectPreCompletedDungeonsItem(worldId: number, items: PlayerItems, count: number, group: Set<Item>) {
-    const world = this.input.worlds[worldId];
+    const world = this.worlds[worldId];
     const dungeons = shuffle(this.input.random, [...NORMAL_DUNGEONS]);
 
     while (dungeons.length) {
@@ -768,7 +765,7 @@ export class LogicPassSolver {
   }
 
   private selectPreCompletedDungeonsMajor(worldId: number) {
-    const world = this.input.worlds[worldId];
+    const world = this.worlds[worldId];
     let dungeons = shuffle(this.input.random, [...NORMAL_DUNGEONS]);
 
     while (dungeons.length) {
@@ -784,7 +781,7 @@ export class LogicPassSolver {
   }
 
   private selectPreCompletedDungeons() {
-    for (let worldId = 0; worldId < this.input.worlds.length; ++worldId) {
+    for (let worldId = 0; worldId < this.worlds.length; ++worldId) {
       const items: PlayerItems = new Map;
       this.selectPreCompletedDungeonsItem(worldId, items, this.input.settings.preCompletedDungeonsStones, ItemGroups.STONES);
       this.selectPreCompletedDungeonsItem(worldId, items, this.input.settings.preCompletedDungeonsMedallions, ItemGroups.MEDALLIONS);
@@ -799,7 +796,7 @@ export class LogicPassSolver {
 
     this.selectPreCompletedDungeons();
 
-    for (let worldId = 0; worldId < this.input.worlds.length; ++worldId) {
+    for (let worldId = 0; worldId < this.worlds.length; ++worldId) {
       const WISPS = {
         'OOT_WATER_TEMPLE_CLEARED': 'OOT SPAWN',
         'MM_CLEAN_SWAMP': 'MM Swamp Front',
@@ -807,7 +804,7 @@ export class LogicPassSolver {
         'MM_BOSS_GREAT_BAY': 'MM Zora Cape Peninsula',
       };
 
-      const world = this.input.worlds[worldId];
+      const world = this.worlds[worldId];
       const dungeons = [...world.preCompleted];
       if (dungeons.includes('ST')) {
         dungeons.push('IST');
@@ -866,8 +863,8 @@ export class LogicPassSolver {
       }
     }
 
-    /* We need to reset the pathfinder as we changed the starting items */
-    this.pathfinder = new Pathfinder(this.input.worlds, this.input.settings, this.state.startingItems);
+    /* We need to reset the pathfinder as we changed the starting items and the world */
+    this.pathfinder = new Pathfinder(this.worlds, this.input.settings, this.state.startingItems);
     this.pathfinderState = this.pathfinder.run(null);
   }
 
@@ -880,13 +877,13 @@ export class LogicPassSolver {
 
     if (this.input.settings.songs === 'songLocations') {
       const songs = pool.filter(x => ItemHelpers.isSong(x.item));
-      songLocations = this.input.worlds.map((x, i) => [...x.songLocations].map(l => makeLocation(l, i))).flat();
+      songLocations = this.worlds.map((x, i) => [...x.songLocations].map(l => makeLocation(l, i))).flat();
       items = [ ...items, ...songs ];
     }
 
     if (this.input.settings.dungeonRewardShuffle === 'dungeonBlueWarps') {
       const rewards = pool.filter(x => ItemHelpers.isDungeonReward(x.item));
-      rewardsLocations = this.input.worlds.map((x, i) => [...x.warpLocations].map(l => makeLocation(l, i))).flat();
+      rewardsLocations = this.worlds.map((x, i) => [...x.warpLocations].map(l => makeLocation(l, i))).flat();
       items = [ ...items, ...rewards ];
     }
 
@@ -944,7 +941,7 @@ export class LogicPassSolver {
 
       for (const c of candidates) {
         const { player, dungeon } = c;
-        const world = this.input.worlds[player];
+        const world = this.worlds[player];
         /* We have a reward and a dungeon - try to place it */
         let rawLocations = world.dungeons[dungeon];
         if (dungeon === 'ST') {
@@ -1061,7 +1058,7 @@ export class LogicPassSolver {
     }
 
     if (this.input.settings.logic === 'allLocations' && ItemHelpers.isItemCriticalRenewable(item.item) && !this.state.criticalRenewables.has(item)) {
-      unplacedLocs = unplacedLocs.filter(x => isLocationRenewable(this.input.worlds[locationData(x).world as number], x));
+      unplacedLocs = unplacedLocs.filter(x => isLocationRenewable(this.worlds[locationData(x).world as number], x));
     }
 
     if (unplacedLocs.length === 0) {
@@ -1109,7 +1106,7 @@ export class LogicPassSolver {
 
         /* If the item is a critical renewable and it's all locations, ensure it lands correctly */
         if (this.input.settings.logic === 'allLocations' && ItemHelpers.isItemCriticalRenewable(requiredItem.item) && !this.state.criticalRenewables.has(requiredItem)) {
-          unplacedLocs = unplacedLocs.filter(x => isLocationRenewable(this.input.worlds[locationData(x).world as number], x));
+          unplacedLocs = unplacedLocs.filter(x => isLocationRenewable(this.worlds[locationData(x).world as number], x));
         }
 
         /* If there is nowhere to place an item, raise an error */
@@ -1176,7 +1173,7 @@ export class LogicPassSolver {
     const junkDistributionRenewable = countMapArray(this.junkDistribution).filter(x => !ItemHelpers.isItemMajor(x.item));
     for (const loc of locs) {
       const locD = locationData(loc);
-      const junkPool = isLocationRenewable(this.input.worlds[locD.world as number], loc) ? junkDistributionRenewable : junkDistribution;
+      const junkPool = isLocationRenewable(this.worlds[locD.world as number], loc) ? junkDistributionRenewable : junkDistribution;
       const item = sample(this.input.random, junkPool);
       this.place(loc, item);
     }
@@ -1200,7 +1197,7 @@ export class LogicPassSolver {
 
   private place(location: Location, item: PlayerItem) {
     const locD = locationData(location);
-    const world = this.input.worlds[locD.world as number];
+    const world = this.worlds[locD.world as number];
     if (world.checks[locationData(location).id] === undefined) {
       throw new Error('Invalid Location: ' + location);
     }

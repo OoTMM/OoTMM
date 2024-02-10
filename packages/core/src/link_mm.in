@@ -1,3 +1,8 @@
+__osDisableInt = 0x80091a60;
+__osRestoreInt = 0x80091ad0;
+
+sFlashromMesgQueue = 0x801fbe10;
+
 bzero = 0x80089630;
 InitDmaManager = 0x80080d0c;
 Play_Init = 0x8016a2c8;
@@ -23,8 +28,31 @@ osCreateMesgQueue = 0x8008f240;
 osEPiStartDma = 0x8008ee30;
 osRecvMesg = 0x80087ed0;
 osSendMesg = 0x80087b10;
-__osPiTable = 0x801fd080;
-__osPiHandle = 0x80096b40;
+__osPiTable = 0x80097e8c;
+
+__osFlashID = 0x801fd040;
+__osFlashMsg = 0x801fd050;
+__osFlashMessageQ = 0x801fd068;
+__osFlashHandler = 0x801fd080;
+__osFlashMsgBuf = 0x801fd0f4;
+__osFlashVersion = 0x801fd0f8;
+
+osFlashGetAddr = 0x80186a70;
+osFlashInit = 0x80186b78;
+osFlashReadStatus = 0x80186cac;
+osFlashReadId = 0x80186d60;
+osFlashClearStatus = 0x80186e64;
+osFlashWriteBuffer = 0x801872fc;
+osFlashWriteArray = 0x801873bc;
+osFlashReadArray = 0x8018752c;
+
+SysFlashrom_IsInit = 0x801857c0;
+SysFlashrom_InitFlash = 0x80185908;
+SysFlashrom_ReadData = 0x80185968;
+SysFlashrom_ExecWrite = 0x80185a2c;
+
+gCartHandle = 0x80096b40;
+
 osEPiWriteIo = 0x80093bb0;
 osEPiReadIo = 0x800920b0;
 osInvalDCache = 0x8008f2f0;
@@ -296,3 +324,4 @@ Entrance_GetSceneIdAbsolute = 0x80132338;
 Player_OverrideLimbDrawGameplayFirstPerson = 0x801262C8;
 
 Player_SetBootData = 0x80123140;
+Player_GetStrength = 0x80124020;

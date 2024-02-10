@@ -467,5 +467,12 @@ s32 Entrance_GetSceneIdAbsolute(u16 entrance);
 s32 Player_OverrideLimbDrawGameplayFirstPerson(struct GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, void*);
 
 void Player_SetBootData(GameState_Play* play, Actor_Player* player);
+u8 Player_GetStrength(void);
 
-extern void* __osPiHandle;
+/* SysFlashrom */
+s32 SysFlashrom_IsInit(void);
+s32 SysFlashrom_InitFlash(void);
+s32 SysFlashrom_ReadData(void* addr, u32 pageNum, u32 pageCount);
+s32 SysFlashrom_ExecWrite(void* addr, u32 pageNum, u32 pageCount);
+
+extern OSPiHandle* gCartHandle;
