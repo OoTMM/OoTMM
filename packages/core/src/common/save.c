@@ -165,6 +165,8 @@ void comboCopyMmSave(int fileIndexDst, int fileIndexSrc)
 void comboHandleAutoInvertClockSpeed(void)
 {
     s32 invertSpeed;
+
+    invertSpeed = -2;
     if(comboConfig(CFG_MM_CLOCK_SPEED_VERYSLOW))
         invertSpeed = 0;
     if(comboConfig(CFG_MM_CLOCK_SPEED_SLOW))
