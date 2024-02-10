@@ -155,6 +155,8 @@ void Sram_SaveEndOfCycleWrapper(GameState_Play* play)
             break;
         }
     }
+
+    comboHandleAutoInvertClockSpeed();
 }
 
 PATCH_CALL(0x80146f94, Sram_SaveEndOfCycleWrapper);

@@ -468,6 +468,8 @@ extern s8 gSoaringIndexSelected;
 
 void comboClearEpona(GameState_Play* play);
 
+void comboHandleAutoInvertClockSpeed(void);
+
 #else
 # include <combo/asm.h>
 #endif
