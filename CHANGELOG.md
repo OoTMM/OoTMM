@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add a way to disable crit wiggle.
 - Add Goron Bracelet/Silver Gauntlets/Golden Gauntlets to Majora's Mask.
 - Small preview for the next item when multiple items are in the same slot.
 - Silver Scale/Golden Scale in Majora's Mask.
@@ -23,6 +24,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix a long standing issue where pre-completed dungeons could interfere with the logic in some edge-cases.
 - Fix a bug where you could unequip shields and swords or toggle items while hovering the wrong slot.
 - Fix stray fairies not restoring health.
 - Fix tunic color being off while having Razor Sword.
