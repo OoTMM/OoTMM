@@ -11,6 +11,53 @@ import { RomBuilder } from './rom-builder';
 import { Options } from './options';
 import { GameAddresses } from './addresses';
 
+/* Files to alias (will use the OoT version) */
+const ALIASES_OOT = [
+  'objects/object_wallmaster',
+  'objects/object_firefly',
+  'objects/object_dodongo',
+  'objects/object_niw',
+  'objects/object_tite',
+  'objects/object_peehat',
+  'objects/object_zl1',
+  'objects/object_bubble',
+  'objects/object_bombf',
+  'objects/object_dekubaba',
+  'objects/object_b_heart',
+  'objects/object_Bb',
+  'objects/object_hata',
+  'objects/object_vm',
+  'objects/object_efc_star_field',
+  'objects/object_efc_tw',
+  'objects/object_ru2',
+  'objects/object_gi_purse',
+  'objects/object_rr',
+  'objects/object_mastergolon',
+  'objects/object_masterzoora',
+  'objects/object_cne',
+  'objects/object_bob',
+  'objects/object_yabusame_point',
+  'objects/object_d_hsblock',
+  'objects/object_toryo',
+  'objects/object_ms',
+  'objects/object_hs',
+  'objects/object_lightswitch',
+  'objects/object_kusa',
+  'objects/object_tsubo',
+  'objects/object_fu',
+  'objects/object_gi_soldout',
+  'objects/object_zg',
+  'objects/object_ds2',
+  'objects/object_bigokuta',
+  'objects/object_hintnuts',
+  'objects/object_gs',
+  'objects/object_crow',
+  'objects/object_cow',
+  'misc/elf_message_field',
+  'misc/elf_message_ydan',
+  'dummy/bump_texture_static',
+];
+
 function extractFiles(game: Game, roms: DecompressedRoms, romBuilder: RomBuilder) {
   const config = CONFIG[game];
   const rom = roms[game].rom;
@@ -79,12 +126,19 @@ export async function pack(args: PackArgs) {
     romBuilder.addFile({ type, data, name, game: 'custom', vaddr });
   }
 
+  /* Alias everything */
+  for (const a of ALIASES_OOT) {
+    romBuilder.alias(`oot/${a}`, `mm/${a}`);
+  }
+
   /* Apply cosmetics */
   await cosmetics(args.opts, args.addresses, romBuilder, (patchfile.meta || {}).cosmetics);
 
   /* Build the final ROM */
   monitor.log("Pack: Finishing up ROM");
-  const out = await romBuilder.run();
+  const { rom, size } = await romBuilder.run();
+  const sizeMB = (size / 1024 / 1024).toFixed(2);
+  monitor.debug(`Pack: ROM size: ${sizeMB}MiB`);
 
-  return out;
+  return rom;
 }

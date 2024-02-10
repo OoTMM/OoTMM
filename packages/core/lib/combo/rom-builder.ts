@@ -45,6 +45,8 @@ export type RomFile = {
   data: Buffer;
   paddr?: number;
   vaddr?: number;
+  alias?: RomFile;
+  dma?: DmaDataRecord;
 };
 
 type AddFileArgs = Omit<RomFile, 'injected'>;
@@ -73,46 +75,69 @@ export class RomBuilder {
     return this.paddr;
   }
 
+  private addPaddr(size: number) {
+    const oldAddr = this.paddr;
+    this.paddr += size;
+    if (this.paddr > 0x3fff000) {
+      throw new Error(`ROM too large`);
+    }
+    return oldAddr;
+  }
+
   async inject(file: RomFile) {
     if (file.injected)
       return;
 
     /* Inject */
     let dma: DmaDataRecord;
-    switch (file.type) {
-    case 'uncompressed': {
-      if (file.paddr === undefined) {
-        file.paddr = this.paddr;
-        this.paddr += (file.data.length + 0xf) & ~0xf;
-      }
+
+    if (file.alias) {
+      await this.inject(file.alias);
+      file.paddr = file.alias.paddr;
+      const originalDma = file.alias.dma!;
+      dma = { ...originalDma };
       const vaddr = file.vaddr || 0;
-      this.out.set(file.data, file.paddr);
-      dma = { physStart: file.paddr, physEnd: 0, virtStart: vaddr, virtEnd: vaddr + file.data.length };
-      /* Make the original data alias the copy */
-      file.data = this.out.subarray(file.paddr, file.paddr + file.data.length);
-      break;
-    }
-    case 'compressed': {
-      const uncompressedSize = file.data.length;
-      const uncompressedSizeAligned = (uncompressedSize + 0xf) & ~0xf;
-      const compressedData = await compressFile(file.data);
-      const compressedSize = compressedData.length;
-      const compressedSizeAligned = (compressedSize + 0xf) & ~0xf;
-      if (file.paddr === undefined) {
-        file.paddr = this.paddr;
-        this.paddr += compressedSizeAligned;
+      const vsize = file.alias.dma!.virtEnd - file.alias.dma!.virtStart;
+      dma.virtStart = vaddr;
+      dma.virtEnd = vaddr + vsize;
+    } else {
+      switch (file.type) {
+      case 'uncompressed': {
+        if (file.paddr === undefined) {
+          file.paddr = this.addPaddr((file.data.length + 0xf) & ~0xf);
+        }
+        const vaddr = file.vaddr || 0;
+        if (!file.alias) {
+          this.out.set(file.data, file.paddr);
+        }
+        dma = { physStart: file.paddr, physEnd: 0, virtStart: vaddr, virtEnd: vaddr + file.data.length };
+        /* Make the original data alias the copy */
+        file.data = this.out.subarray(file.paddr, file.paddr + file.data.length);
+        break;
       }
-      const vaddr = file.vaddr || 0;
-      this.out.set(compressedData, file.paddr);
-      dma = { physStart: file.paddr, physEnd: file.paddr + compressedSizeAligned, virtStart: vaddr, virtEnd: vaddr + uncompressedSizeAligned };
-      /* We cannot alias compressed data */
-      file.data = Buffer.alloc(0);
-      break;
+      case 'compressed': {
+        const uncompressedSize = file.data.length;
+        const uncompressedSizeAligned = (uncompressedSize + 0xf) & ~0xf;
+        const compressedData = await compressFile(file.data);
+        const compressedSize = compressedData.length;
+        const compressedSizeAligned = (compressedSize + 0xf) & ~0xf;
+        if (file.paddr === undefined) {
+          file.paddr = this.addPaddr(compressedSizeAligned);
+        }
+        const vaddr = file.vaddr || 0;
+        this.out.set(compressedData, file.paddr);
+        dma = { physStart: file.paddr, physEnd: file.paddr + compressedSizeAligned, virtStart: vaddr, virtEnd: vaddr + uncompressedSizeAligned };
+        /* We cannot alias compressed data */
+        file.data = Buffer.alloc(0);
+        break;
+      }
+      case 'dummy':
+        dma = { physStart: 0xffffffff, physEnd: 0xffffffff, virtStart: file.vaddr || 0, virtEnd: file.vaddr || 0 };
+        break;
+      }
     }
-    case 'dummy':
-      dma = { physStart: 0xffffffff, physEnd: 0xffffffff, virtStart: file.vaddr || 0, virtEnd: file.vaddr || 0 };
-      break;
-    }
+
+    file.dma = dma;
 
     /* Record the DMA */
     switch (file.game) {
@@ -140,6 +165,13 @@ export class RomBuilder {
       this.vaddr += sizeAligned;
     }
     this.files.push(file);
+  }
+
+  alias(to: string, from: string) {
+    const fileTo = this.fileByNameRequired(to);
+    const fileFrom = this.fileByNameRequired(from);
+    fileFrom.alias = fileTo;
+    fileFrom.data = fileTo.data;
   }
 
   fileByIndex(game: Game, index: number): RomFile | null {
@@ -213,6 +245,6 @@ export class RomBuilder {
     /* Fix checksum */
     this.fixChecksum();
 
-    return this.out;
+    return { rom: this.out, size: this.paddr };
   }
 };
