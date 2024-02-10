@@ -990,6 +990,13 @@ export const SETTINGS = [{
   description: 'Forces the default target system to HOLD instead of SWITCH',
   default: true
 }, {
+  key: 'critWiggleDisable',
+  name: 'Disable Crit Wiggle',
+  category: 'main.misc',
+  type: 'boolean',
+  description: 'Disables the camera zoom-in and weird movements when low on health',
+  default: true
+}, {
   key: 'restoreBrokenActors',
   name: 'Restore Broken Actors',
   category: 'main.misc',
