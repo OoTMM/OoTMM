@@ -2500,7 +2500,7 @@
   exits:
     "Great Bay Near Fairy Fountain": "true"
   locations:
-    "Great Bay Great Fairy": ""can_check_gf_sh(0x02, MM_GREAT_FAIRIES, STRAY_FAIRY_GB)""
+    "Great Bay Great Fairy": "can_check_gf_sh(0x02, MM_GREAT_FAIRIES, STRAY_FAIRY_GB)"
 "Waterfall Cliffs":
   region: ZORA_CAPE
   exits:
