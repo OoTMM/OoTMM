@@ -4,8 +4,6 @@
 #include <combo/dma.h>
 #include <combo/item.h>
 
-
-
 static int checkItemToggle(GameState_Play* play)
 {
     PauseContext* p;

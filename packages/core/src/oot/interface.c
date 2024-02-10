@@ -108,6 +108,7 @@ static void LoadCustomItemIconSlot(GameState_Play* play, int slot)
 }
 
 PATCH_FUNC(0x8006fb50, LoadCustomItemIconSlot);
+PATCH_FUNC(0x8006fc00, LoadCustomItemIconSlot);
 
 static void LoadCustomItemIcon_C_Left(void)
 {
