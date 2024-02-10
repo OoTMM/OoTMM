@@ -12,7 +12,7 @@ export const copyFile = async (src: Buffer, dst: Buffer, compressed: boolean) =>
   src.copy(dst);
 };
 
-type DecompressedGame = {
+export type DecompressedGame = {
   rom: Buffer,
   dma: Buffer,
 };
@@ -62,7 +62,7 @@ const checkGameHash = (game: Game, rom: Buffer) => {
       romInfo = 'For OOT, use a ROM with version 1.0, U or J.';
     } else if (game == 'mm') {
       romInfo = 'For MM, use a ROM with version U.';
-    } 
+    }
     throw new Error(`Incompatible ROM file for ${game} (hash: ${h.toString(16)}). ${romInfo}`);
   }
 };

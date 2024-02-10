@@ -886,6 +886,188 @@ const Gfx gHoverBootsCircleDL[] = {
     gsSPEndDisplayList(),
 };
 
+const Vtx sGoronBraceletVtx[] = {
+#include "sGoronBraceletVtx.vtx.inc"
+};
+
+const u32 gLinkChildGoronBraceletTex = 0x08000000 | CUSTOM_KEEP_GORON_BRACELET_TEXTURE;
+const u32 gLinkChildGoronSymbolTex = 0x08000000 | CUSTOM_KEEP_GORON_SYMBOL_TEXTURE;
+
+Gfx gLinkChildGoronBraceletDL[] = {
+    gsSPMatrix(0x0D0002C0, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW),
+    gsDPPipeSync(),
+    gsDPSetTextureLUT(G_TT_NONE),
+    gsSPTexture(0x012C, 0x0190, 0, G_TX_RENDERTILE, G_ON),
+    gsDPLoadTextureBlock(gLinkChildGoronBraceletTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 8, 0, G_TX_MIRROR | G_TX_WRAP,
+                         G_TX_MIRROR | G_TX_WRAP, 3, 3, G_TX_NOLOD, 15),
+    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, 1, COMBINED, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED),
+    gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_OPA_SURF2),
+    gsSPClearGeometryMode(G_CULL_BACK),
+    gsSPSetGeometryMode(G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR),
+    gsDPSetPrimColor(0, 0, 255, 255, 255, 255),
+    gsSPVertex(&sGoronBraceletVtx[0], 3, 0),
+    gsSP1Triangle(0, 1, 2, 0),
+    gsSPVertex(&sGoronBraceletVtx[3], 14, 0),
+    gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
+    gsSP2Triangles(6, 0, 2, 0, 6, 2, 7, 0),
+    gsSP2Triangles(8, 9, 1, 0, 10, 6, 7, 0),
+    gsSP2Triangles(10, 7, 3, 0, 11, 12, 8, 0),
+    gsSP2Triangles(5, 12, 11, 0, 11, 10, 3, 0),
+    gsSP2Triangles(11, 3, 5, 0, 13, 11, 1, 0),
+    gsSP1Triangle(1, 11, 8, 0),
+    gsDPPipeSync(),
+    gsDPSetTextureLUT(G_TT_NONE),
+    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
+    gsDPLoadTextureBlock(gLinkChildGoronSymbolTex, G_IM_FMT_IA, G_IM_SIZ_16b, 16, 32, 0, G_TX_NOMIRROR | G_TX_CLAMP,
+                         G_TX_NOMIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD),
+    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, COMBINED, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED),
+    gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_XLU_DECAL2),
+    gsSPClearGeometryMode(G_CULL_BACK | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR),
+    gsSPSetGeometryMode(G_FOG | G_LIGHTING),
+    gsDPSetPrimColor(0, 0, 255, 255, 255, 255),
+    gsSPVertex(&sGoronBraceletVtx[17], 8, 0),
+    gsSP2Triangles(0, 1, 2, 0, 2, 3, 0, 0),
+    gsSP2Triangles(4, 5, 6, 0, 7, 4, 6, 0),
+    gsSPEndDisplayList(),
+};
+
+const Vtx sGauntletVtx[] = {
+#include "sGauntletVtx.vtx.inc"
+};
+
+const u32 gLinkAdultGauntletPlate1Tex = 0x08000000 | CUSTOM_KEEP_GAUNTLET1_TEXTURE;
+
+Gfx gLinkAdultLeftGauntletPlate1DL[] = {
+    gsSPMatrix(0x0D0002C0, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW),
+    gsDPPipeSync(),
+    gsDPSetTextureLUT(G_TT_NONE),
+    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
+    gsDPLoadTextureBlock(gLinkAdultGauntletPlate1Tex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD),
+    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, COMBINED, 0, ENVIRONMENT, 0, 0, 0, 0, COMBINED),
+    gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_TEX_EDGE2),
+    gsSPClearGeometryMode(G_CULL_BOTH | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR),
+    gsSPSetGeometryMode(G_FOG | G_LIGHTING),
+    gsDPSetPrimColor(0, 0, 255, 255, 255, 255),
+    gsSPVertex(&sGauntletVtx[0], 24, 0),
+    gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+    gsSP2Triangles(4, 5, 6, 0, 5, 4, 7, 0),
+    gsSP2Triangles(8, 9, 10, 0, 11, 12, 13, 0),
+    gsSP2Triangles(11, 13, 14, 0, 8, 15, 9, 0),
+    gsSP2Triangles(16, 17, 18, 0, 19, 20, 21, 0),
+    gsSP2Triangles(18, 22, 16, 0, 19, 21, 23, 0),
+    gsSPEndDisplayList(),
+};
+
+const u32 gLinkAdultGauntletPlate2Tex = 0x08000000 | CUSTOM_KEEP_GAUNTLET2_TEXTURE;
+
+const u32 gHilite2Tex = 0x04000000 | 0xca30;
+
+// gLinkAdultLeftGauntletPlate2DL is omitted because we always render the "closed hand" variant so it doesn't clip into the link's hand
+
+Gfx gLinkAdultLeftGauntletPlate3DL[] = {
+    gsSPMatrix(0x0D000300, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW),
+    gsDPPipeSync(),
+    gsDPSetTextureLUT(G_TT_NONE),
+    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
+    gsDPLoadTextureBlock(gLinkAdultGauntletPlate2Tex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR |
+                         G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD),
+    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, COMBINED, 0, ENVIRONMENT, 0, 0, 0, 0, COMBINED),
+    gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_TEX_EDGE2),
+    gsSPClearGeometryMode(G_CULL_BOTH | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR),
+    gsSPSetGeometryMode(G_FOG | G_LIGHTING),
+    gsDPSetPrimColor(0, 0, 255, 255, 255, 255),
+    gsSPVertex(&sGauntletVtx[24], 26, 0),
+    gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+    gsSP2Triangles(4, 5, 6, 0, 7, 8, 9, 0),
+    gsSP2Triangles(10, 11, 12, 0, 6, 5, 13, 0),
+    gsSP2Triangles(2, 1, 14, 0, 11, 15, 12, 0),
+    gsSP2Triangles(15, 11, 16, 0, 8, 7, 17, 0),
+    gsSP2Triangles(18, 19, 20, 0, 20, 21, 18, 0),
+    gsSP2Triangles(22, 23, 24, 0, 24, 25, 22, 0),
+    gsDPPipeSync(),
+    gsSPTexture(0x2710, 0x2710, 0, G_TX_RENDERTILE, G_ON),
+    gsDPLoadTextureBlock(gHilite2Tex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR |
+                         G_TX_WRAP, 4, 4, 1, 15),
+    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, 1, COMBINED, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED),
+    gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_OPA_SURF2),
+    gsSPSetGeometryMode(G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR),
+    gsSPDisplayList(0x0C000000),
+    gsDPSetPrimColor(0, 0, 254, 15, 15, 255),
+    gsSPVertex(&sGauntletVtx[50], 3, 0),
+    gsSP1Triangle(0, 1, 2, 0),
+    gsSPVertex(&sGauntletVtx[53], 9, 0),
+    gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
+    gsSP1Triangle(6, 7, 8, 0),
+    gsSPEndDisplayList(),
+};
+
+Gfx gLinkAdultRightGauntletPlate1DL[] = {
+    gsSPMatrix(0x0D000380, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW),
+    gsDPPipeSync(),
+    gsDPSetTextureLUT(G_TT_NONE),
+    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
+    gsDPLoadTextureBlock(gLinkAdultGauntletPlate1Tex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+                         G_TX_MIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD),
+    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, COMBINED, 0, ENVIRONMENT, 0, 0, 0, 0, COMBINED),
+    gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_TEX_EDGE2),
+    gsSPClearGeometryMode(G_CULL_BOTH | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR),
+    gsSPSetGeometryMode(G_FOG | G_LIGHTING),
+    gsDPSetPrimColor(0, 0, 255, 255, 255, 255),
+    gsSPVertex(&sGauntletVtx[62], 24, 0),
+    gsSP2Triangles(0, 1, 2, 0, 3, 0, 2, 0),
+    gsSP2Triangles(4, 5, 6, 0, 7, 6, 5, 0),
+    gsSP2Triangles(8, 9, 10, 0, 11, 12, 13, 0),
+    gsSP2Triangles(14, 11, 13, 0, 9, 15, 10, 0),
+    gsSP2Triangles(16, 17, 18, 0, 19, 20, 21, 0),
+    gsSP2Triangles(18, 22, 16, 0, 23, 19, 21, 0),
+    gsSPEndDisplayList(),
+};
+
+// gLinkAdultRightGauntletPlate2DL is omitted because we always render the "closed hand" variant so it doesn't clip into the link's hand
+
+Gfx gLinkAdultRightGauntletPlate3DL[] = {
+    gsSPMatrix(0x0D0003C0, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW),
+    gsDPPipeSync(),
+    gsDPSetTextureLUT(G_TT_NONE),
+    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
+    gsDPLoadTextureBlock(gLinkAdultGauntletPlate2Tex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR |
+                         G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD),
+    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, COMBINED, 0, ENVIRONMENT, 0, 0, 0, 0, COMBINED),
+    gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_TEX_EDGE2),
+    gsSPClearGeometryMode(G_CULL_BOTH | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR),
+    gsSPSetGeometryMode(G_FOG | G_LIGHTING),
+    gsDPSetPrimColor(0, 0, 255, 255, 255, 255),
+    gsSPVertex(&sGauntletVtx[86], 26, 0),
+    gsSP2Triangles(0, 1, 2, 0, 3, 0, 2, 0),
+    gsSP2Triangles(4, 5, 6, 0, 7, 8, 9, 0),
+    gsSP2Triangles(10, 11, 12, 0, 13, 5, 4, 0),
+    gsSP2Triangles(14, 1, 0, 0, 10, 15, 11, 0),
+    gsSP2Triangles(16, 11, 15, 0, 17, 9, 8, 0),
+    gsSP2Triangles(18, 19, 20, 0, 20, 21, 18, 0),
+    gsSP2Triangles(22, 23, 24, 0, 24, 25, 22, 0),
+    gsDPPipeSync(),
+    gsSPTexture(0x2710, 0x2710, 0, G_TX_RENDERTILE, G_ON),
+    gsDPLoadTextureBlock(gHilite2Tex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR |
+                         G_TX_WRAP, 4, 4, 1, 15),
+    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, 1, COMBINED, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED),
+    gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_OPA_SURF2),
+    gsSPSetGeometryMode(G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR),
+    gsSPDisplayList(0x0C000000),
+    gsDPSetPrimColor(0, 0, 254, 15, 15, 255),
+    gsSPVertex(&sGauntletVtx[112], 3, 0),
+    gsSP1Triangle(0, 1, 2, 0),
+    gsSPVertex(&sGauntletVtx[115], 9, 0),
+    gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
+    gsSP1Triangle(6, 7, 8, 0),
+    gsSPEndDisplayList(),
+};
+
+static Color_RGB8 sGauntletColors[] = {
+    { 255, 255, 255 },
+    { 254, 207, 15 },
+};
+
 static Vec3s sHoverBootsRot = { 0, 0, 0 };
 static s32 sHoverBootCircleAlpha = 255;
 
@@ -907,12 +1089,12 @@ void Player_SkelAnime_DrawFlexLod(GameState_Play* play, void** skeleton, Vec3s* 
 
     if (player->transformation == MM_PLAYER_FORM_HUMAN)
     {
-        Color_RGB8 tunicColor;
+        Color_RGB8* tunicColor;
         u16 tunic;
 
         tunic = CLAMP(gSaveContext.save.itemEquips.tunic, 0, 3);
-        tunicColor = sTunicColors[tunic];
-        gDPSetEnvColor(POLY_OPA_DISP++, tunicColor.r, tunicColor.g, tunicColor.b, 0xFF);
+        tunicColor = &sTunicColors[tunic];
+        gDPSetEnvColor(POLY_OPA_DISP++, tunicColor->r, tunicColor->g, tunicColor->b, 0xFF);
     }
 
     SkelAnime_DrawFlexLod(play, skeleton, jointTable, dListCount, overrideLimbDraw, postLimbDraw, &player->base, lod);
@@ -932,6 +1114,29 @@ void Player_SkelAnime_DrawFlexLod(GameState_Play* play, void** skeleton, Vec3s* 
             gSPDisplayList(POLY_OPA_DISP++, gLinkAdultLeftHoverBootDL);
             gSPDisplayList(POLY_OPA_DISP++, gLinkAdultRightHoverBootDL);
             break;
+        }
+
+        if (player->transformation == MM_PLAYER_FORM_HUMAN && comboConfig(CFG_MM_STRENGTH))
+        {
+            Color_RGB8* gauntletColor;
+            s32 strength = gSaveContext.save.inventory.upgrades.strength;
+            switch (strength)
+            {
+                case 1:
+                    gSPDisplayList(POLY_OPA_DISP++, gLinkChildGoronBraceletDL);
+                    break;
+                case 2:
+                case 3:
+                    gauntletColor = &sGauntletColors[strength - 2];
+                    gDPPipeSync(POLY_OPA_DISP++);
+                    gDPSetEnvColor(POLY_OPA_DISP++, gauntletColor->r, gauntletColor->g, gauntletColor->b, 0);
+
+                    gSPDisplayList(POLY_OPA_DISP++, gLinkAdultLeftGauntletPlate1DL);
+                    gSPDisplayList(POLY_OPA_DISP++, gLinkAdultRightGauntletPlate1DL);
+                    gSPDisplayList(POLY_OPA_DISP++, gLinkAdultLeftGauntletPlate3DL);
+                    gSPDisplayList(POLY_OPA_DISP++, gLinkAdultRightGauntletPlate3DL);
+                    break;
+            }
         }
     }
 
@@ -1283,4 +1488,18 @@ u8 Player_GetActionAWhileDiving(Actor_Player* this)
 f32 Player_GetMaxDiveDepth()
 {
     return sDiveDepths[gSaveContext.save.inventory.upgrades.scale];
+}
+
+u8 Player_GetStrengthCustom(u8 formStrength)
+{
+    if (comboConfig(CFG_MM_STRENGTH) && gSaveContext.save.playerForm == MM_PLAYER_FORM_HUMAN) // || gSaveContext.save.playerForm == MM_PLAYER_FORM_FIERCE_DEITY)
+    {
+        return gSaveContext.save.inventory.upgrades.strength;
+    }
+    return formStrength;
+}
+
+s32 Player_HasStrength(u8 requiredStrength)
+{
+    return Player_GetStrength() >= requiredStrength;
 }

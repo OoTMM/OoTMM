@@ -72,6 +72,7 @@ function asmPatchGroups(world: World, settings: Settings) {
     OOT_SHUFFLE_FREE_RUPEES: settings.shuffleFreeRupeesOot,
     MM_SHUFFLE_FREE_RUPEES: settings.shuffleFreeRupeesMm,
     MM_OPEN_STT: world.resolvedFlags.openDungeonsMm.has('ST'),
+    CRIT_WIGGLE_DISABLE: settings.critWiggleDisable,
   };
   const keys = Object.keys(groups) as PatchGroup[];
   return keys.filter((k) => groups[k]);
@@ -97,7 +98,7 @@ export function buildPatchfiles(args: BuildPatchfileIn): Patchfile[] {
       if (payload.length > (game === 'mm' ? 0x40000 : 0x40000)) {
         throw new Error(`Payload too large ${game}`);
       }
-      p.addNewFile(game === 'oot' ? 0xf0000000 : 0xf0100000, payload, false);
+      p.addNewFile(`${game}/payload`, game === 'oot' ? 0xf0000000 : 0xf0100000, payload, false);
 
       /* Handle cosmetics */
       const gameCosmetics: {[k: string]: number[]} = {};

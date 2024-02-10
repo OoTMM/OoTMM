@@ -1,3 +1,6 @@
+__osDisableInt = 0x80005130;
+__osRestoreInt = 0x800051a0;
+
 bzero = 0x80002e80;
 osRecvMesg = 0x80002030;
 osSendMesg = 0x80001e20;
@@ -10,7 +13,6 @@ osInvalICache = 0x800041a0;
 osWritebackDCache = 0x80003440;
 osWritebackDCacheAll = 0x800d5aa0;
 DMARomToRam = 0x8000085c;
-InitDom2Addr2 = 0x80091310;
 
 DrawLink = 0x80079f48;
 
@@ -27,8 +29,8 @@ EnItem00_FixDrop = 0x80013530;
 Play_InitEnvironment = 0x8009cda0;
 gFogState = 0x800f1640;
 
-__osPiTable = 0x800fc0b0;
-__osPiHandle = 0x80006260;
+__osPiTable = 0x8000638c;
+gCartHandle = 0x80006260;
 
 InitDmaManager = 0x80000e6c;
 
@@ -221,6 +223,7 @@ gDmaData = 0x8000b140;
 Sleep_Usec = 0x80001c7c;
 _DmaCompressed = 0x80001254;
 osSetThreadPri = 0x80004480;
+osSetTimer = 0x80005a70;
 
 ParseSceneRoomHeaders_SoundSettings = 0x80082478;
 

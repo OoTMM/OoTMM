@@ -1,0 +1,15 @@
+#include <combo.h>
+
+
+/* Crit Wiggle */
+PATCH_GROUP PG_CRIT_WIGGLE_DISABLE
+
+PATCH_START 0x8003937c
+  mtc1 zero, $f0
+PATCH_END
+
+PATCH_START 0x8003941c
+  mov.S $f12, $f6
+PATCH_END
+
+PATCH_GROUP_END
