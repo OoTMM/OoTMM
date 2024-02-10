@@ -214,4 +214,5 @@
 "soul_boss(x)": "(!setting(soulsBossMm)) || has(x)"
 "short_hook_anywhere": "can_hookshot_short && setting(hookshotAnywhereMm)"
 "hookshot_anywhere": "can_hookshot && setting(hookshotAnywhereMm)"
-"climb_anywhere_MM": "setting(climbMostSurfacesMM)"
+"climb_anywhere": "setting(climbMostSurfacesMM)"
+"st_climb_anywhere_trick": "climb_anywhere && (trick(MM_ST_CLIMB_ANYWHERE))"
