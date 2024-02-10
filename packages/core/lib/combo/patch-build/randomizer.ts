@@ -819,18 +819,6 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     BLAST_MASK_DELAY_VERYLONG: settings.blastMaskCooldown === 'verylong',
     OOT_MASK_BLAST: settings.blastMaskOot,
     SHARED_MASK_BLAST: settings.sharedMaskBlast,
-    MM_STRAY_COUNT_0: settings.strayCount === 'none',
-    MM_STRAY_COUNT_3: settings.strayCount === 'few',
-    MM_STRAY_COUNT_5: settings.strayCount === 'some',
-    MM_STRAY_COUNT_7: settings.strayCount === 'half',
-    MM_STRAY_COUNT_10: settings.strayCount === 'lots',
-    MM_STRAY_COUNT_13: settings.strayCount === 'most',
-    MM_SKULL_COUNT_0: settings.skullCount === 'none',
-    MM_SKULL_COUNT_5: settings.skullCount === 'few',
-    MM_SKULL_COUNT_10: settings.skullCount === 'some',
-    MM_SKULL_COUNT_15: settings.skullCount === 'half',
-    MM_SKULL_COUNT_20: settings.skullCount === 'lots',
-    MM_SKULL_COUNT_25: settings.skullCount === 'most',
     MM_FD_ANYWHERE: settings.fierceDeityAnywhere,
   };
 
@@ -915,6 +903,8 @@ export const randomizerData = (worldId: number, logic: LogicResult): Buffer => {
   buffers.push(zoraSapphireBuffer(worldId, logic));
   buffers.push(randomizerBoss(worldId, logic));
   buffers.push(randomizerDungeons(worldId, logic));
+  buffers.push(toU8Buffer([logic.settings.strayCount]));
+  buffers.push(toU8Buffer([logic.settings.skullCount]));
   return Buffer.concat(buffers);
 };
 

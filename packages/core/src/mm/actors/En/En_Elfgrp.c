@@ -21,19 +21,7 @@ static const s16 kGreatFairyNPCs[] = {
 
 static u8 fairyMax()
 {
-    if (comboConfig(CFG_MM_STRAY_COUNT_0))
-        return 0;
-    if (comboConfig(CFG_MM_STRAY_COUNT_3))
-        return 3;
-    if (comboConfig(CFG_MM_STRAY_COUNT_5))
-        return 5;
-    if (comboConfig(CFG_MM_STRAY_COUNT_7))
-        return 7;
-    if (comboConfig(CFG_MM_STRAY_COUNT_10))
-        return 10;
-    if (comboConfig(CFG_MM_STRAY_COUNT_13))
-        return 13;
-    return 15;
+    return gComboData.strayCount;
 };
 
 static void EnElfgrp_ItemQuery(ComboItemQuery* q, int index)

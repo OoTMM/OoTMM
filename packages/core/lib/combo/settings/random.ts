@@ -122,7 +122,24 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
     base.goldSkulltulaTokens = sampleWeighted(random, { none: 5, dungeons: 3, overworld: 3, all: 2 });
     base.housesSkulltulaTokens = sampleWeighted(random, { none: 5, all: 3 });
   }
-
+  /* Required stray fairies and skull tokens - 25% vanilla, 25% weighted random, 50% random */
+  switch (randomInt(random, 4)) {
+    case 0:
+      base.strayCountSetter = 'vanilla';
+    case 1:
+      base.strayCountSetter = 'wrandom';
+    default:
+      base.strayCountSetter = 'random'
+    }
+  switch (randomInt(random, 4)) {
+    case 0:
+      base.skullCountSetter = 'vanilla';
+    case 1:
+      base.skullCountSetter = 'wrandom';
+    default:
+      base.skullCountSetter = 'random'
+    }
+  
   base.tingleShuffle = sampleWeighted(random, { vanilla: 10, anywhere: 7, starting: 7, removed: 5 });
   base.mapCompassShuffle = sampleWeighted(random, { ownDungeon: 10, anywhere: 7, starting: 7, removed: 5 });
 

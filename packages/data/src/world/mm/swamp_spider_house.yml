@@ -4,7 +4,7 @@
     "Near Swamp Spider House": "true"
     "Swamp Spider House Main": "cond(setting(erMoon) && trick(MM_MAJORA_LOGIC), (event(MAJORA) && before(NIGHT3_AM_12_00)) || can_play_time, can_reset_time)"
   locations:
-    "Swamp Spider House Mask of Truth": "can_check_sh(GS_TOKEN_SWAMP)"
+    "Swamp Spider House Mask of Truth": "can_check_gf_sh(0x00, MM_SPIDER_HOUSES, GS_TOKEN_SWAMP)"
 "Swamp Spider House Main":
   dungeon: SSH
   events:

@@ -157,8 +157,6 @@
 "woodfall_raised": "event(OPEN_WOODFALL_TEMPLE) || setting(openDungeonsMm, WF) || ((setting(clearStateDungeonsMm, WF) || setting(clearStateDungeonsMm, both)) && event(CLEAN_SWAMP))"
 "blizzard_stopped": "event(OPEN_SNOWHEAD_TEMPLE) || setting(openDungeonsMm, SH) || event(BOSS_SNOWHEAD)"
 "turtle_woken": "(can_play_zora && has_mask_zora) || setting(openDungeonsMm, GB) || ((setting(clearStateDungeonsMm, GB) || setting(clearStateDungeonsMm, both)) && event(BOSS_GREAT_BAY))"
-"can_check_gf(sf)": "has(sf, 15) || setting(mmCountLogic) && ((setting(strayCount, most) && has(sf, 13)) || (setting(strayCount, lots) && has(sf, 10)) || (setting(strayCount, half) && has(sf, 7)) || (setting(strayCount, some) && has(sf, 5)) || (setting(strayCount, few) && has(sf, 3)) || (setting(strayCount, none)))"
-"can_check_sh(st)": "has(st, 30) || setting(mmCountLogic) && ((setting(skullCount, most) && has(st, 25)) || (setting(skullCount, lots) && has(st, 20)) || (setting(skullCount, half) && has(st, 15)) || (setting(skullCount, some) && has(st, 10)) || (setting(skullCount, few) && has(st, 5)) || (setting(skullCount, none)))"
 "can_kill_freezard_short_range": "can_fight || can_use_light_arrows || can_use_fire_short_range || has_explosives || can_hookshot_short"
 
 "underwater_walking": "has_mask_zora || (has_tunic_zora && has_iron_boots)"
@@ -198,7 +196,10 @@
 "shop_price(id)": "wallet_price(MM_SHOPS, id)"
 "shop_ex_price(id)": "wallet_price(MM_SHOPS_EX, id)"
 "tingle_price(id)": "wallet_price(MM_TINGLE, id)"
-
+"gf_sh_rep(range, id, token, count)": "count(range, id, count) && has(token, count)"
+"can_check_gf_sh(range, id, token)": "has(token, 30) || gf_sh_rep(range, id, token, 29) || gf_sh_rep(range, id, token, 28) || gf_sh_rep(range, id, token, 27) || gf_sh_rep(range, id, token, 26) || gf_sh_rep(range, id, token, 25) || gf_sh_rep(range, id, token, 24) || gf_sh_rep(range, id, token, 23) || gf_sh_rep(range, id, token, 22) || gf_sh_rep(range, id, token, 21) ||
+gf_sh_rep(range, id, token, 20) || gf_sh_rep(range, id, token, 19) || gf_sh_rep(range, id, token, 18) || gf_sh_rep(range, id, token, 17) || gf_sh_rep(range, id, token, 16) || gf_sh_rep(range, id, token, 15) || gf_sh_rep(range, id, token, 14) || gf_sh_rep(range, id, token, 13) || gf_sh_rep(range, id, token, 12) || gf_sh_rep(range, id, token, 11) || gf_sh_rep(range, id, token, 10) ||
+|| gf_sh_rep(range, id, token, 9) || gf_sh_rep(range, id, token, 8) || gf_sh_rep(range, id, token, 7) || gf_sh_rep(range, id, token, 6) || gf_sh_rep(range, id, token, 5) || gf_sh_rep(range, id, token, 4) || gf_sh_rep(range, id, token, 3) || gf_sh_rep(range, id, token, 2) || gf_sh_rep(range, id, token, 1) || gf_sh_rep(range, id, token, 0)" #I'm sorry
 # Keys
 "has_skeleton_key": "setting(skeletonKeyMm) && cond(setting(sharedSkeletonKey), has(SHARED_SKELETON_KEY), has(SKELETON_KEY))"
 "boss_key(x)": "setting(bossKeyShuffleMm, removed) || has(x)"

@@ -4,7 +4,7 @@
     "Ocean Spider House Front": "(has_explosives || trick_keg_explosives) && cond(setting(erMoon) && trick(MM_MAJORA_LOGIC), (event(MAJORA) && before(NIGHT3_AM_12_00)) || can_play_time, can_reset_time)"
     "Great Bay Coast": "true"
   locations:
-    "Ocean Spider House Wallet": "can_check_sh(GS_TOKEN_OCEAN)"
+    "Ocean Spider House Wallet": "can_check_gf_sh(0x01, MM_SPIDER_HOUSES, GS_TOKEN_OCEAN)"
 "Ocean Spider House Front":
   dungeon: OSH
   events:

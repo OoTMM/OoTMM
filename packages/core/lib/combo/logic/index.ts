@@ -15,6 +15,7 @@ import { LogicPassWorldTransform } from './world-transform';
 import { LogicPassFixer } from './fixer';
 import { LogicPassAnalysisFoolish } from './analysis-foolish';
 import { LogicPassPrice } from './price';
+import { LogicPassCounts } from './token-fairies';
 import { LogicPassItemProperties } from './item-properties';
 import { LogicPassMinimize } from './minimize';
 
@@ -61,6 +62,7 @@ export const solvedWorldState = (monitor: Monitor, opts: Options) => {
   let state = worldState(monitor, opts);
   return pipeline(state)
     .apply(LogicPassPrice)
+    .apply(LogicPassCounts)
     .apply(LogicPassEntrances)
     .apply(LogicPassSolver)
     .apply(LogicPassMinimize)

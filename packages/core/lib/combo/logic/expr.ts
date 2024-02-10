@@ -3,6 +3,7 @@ import { ItemID } from '../items/defs';
 import { GLITCHES, SETTINGS, Settings, TRICKS } from '../settings';
 import { Age } from './pathfind';
 import { PRICE_RANGES } from './price';
+import { COUNT_RANGES } from './token-fairies';
 import { ResolvedWorldFlags, WORLD_FLAGS, World } from './world';
 
 export const MM_TIME_SLICES = [
@@ -488,6 +489,23 @@ class ExprPrice extends Expr {
   }
 };
 
+class ExprStraySkull extends Expr {
+  readonly slot: number;
+  readonly req: number;
+
+  constructor(slot: number, req: number) {
+    super(`COUNT(${slot},${req})`);
+    this.slot = slot;
+    this.req = req;
+  }
+
+  eval(state: State): ExprResult {
+    const count = state.world.straySkulls[this.slot];
+    const result = count <= this.req;
+    return { result, depItems: [], depEvents: [] };
+  }
+};
+
 function exprMemo(expr: Expr): Expr {
   const cached = exprMap.get(expr.key);
   if (cached) {
@@ -721,6 +739,11 @@ export const exprMmTime = (operator: string, sliceNames: string[]): Expr => {
 export const exprPrice = (range: string, id: number, max: number): Expr => {
   const slot = id + PRICE_RANGES[range];
   return exprMemo(new ExprPrice(slot, max));
+}
+
+export const exprStraySkull = (range: string, id: number, req: number): Expr => {
+  const slot = id + COUNT_RANGES[range];
+  return exprMemo(new ExprStraySkull(slot, req));
 }
 
 export const exprFish = (ageAndType: string, minPounds: number, maxPounds: number): Expr => {

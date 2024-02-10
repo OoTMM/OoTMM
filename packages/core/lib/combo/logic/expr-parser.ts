@@ -2,7 +2,7 @@ import { Game } from '../config';
 import { itemByID } from '../items';
 import { Settings } from '../settings';
 import { gameId } from '../util';
-import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprAge, exprHas, exprRenewable, exprEvent, exprMasks, exprSetting, exprNot, exprCond, exprTrick, exprSpecial, exprOotTime, exprMmTime, exprLicense, exprPrice, exprGlitch, exprFish } from './expr';
+import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprAge, exprHas, exprRenewable, exprEvent, exprMasks, exprSetting, exprNot, exprCond, exprTrick, exprSpecial, exprOotTime, exprMmTime, exprLicense, exprPrice, exprStraySkull, exprGlitch, exprFish } from './expr';
 import { ResolvedWorldFlags } from './world';
 
 const SIMPLE_TOKENS = ['||', '&&', '(', ')', ',', 'true', 'false', '!', '+', '-'] as const;
@@ -317,6 +317,20 @@ export class ExprParser {
     this.expect(')');
     return exprPrice(range, id, max);
   }
+  private parseExprStraySkull(): Expr | undefined {
+    if (this.peek('identifier') !== 'stray_skull') {
+      return undefined;
+    }
+    this.accept('identifier');
+    this.expect('(');
+    const range = this.expect('identifier');
+    this.expect(',');
+    const id = this.expect('number');
+    this.expect(',');
+    const req = this.expect('number');
+    this.expect(')');
+    return exprStraySkull(range, id, req);
+  }
 
   private parseExprFish(): Expr | undefined {
     if (this.peek('identifier') !== 'has_pond_fish') {
@@ -410,6 +424,7 @@ export class ExprParser {
       || this.parseExprOotTime()
       || this.parseExprMmTime()
       || this.parseExprPrice()
+      || this.parseExprStraySkull()
       || this.parseExprFish()
       || this.parseMacro();
   }

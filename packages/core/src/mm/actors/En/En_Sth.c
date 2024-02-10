@@ -3,19 +3,7 @@
 /*0x80B66D30 to 0x80B6D660*/
 u8 EnSth_skullMax()
 {
-    if (comboConfig(CFG_MM_SKULL_COUNT_0))
-        return 0x00;
-    if (comboConfig(CFG_MM_SKULL_COUNT_5))
-        return 0x05;
-    if (comboConfig(CFG_MM_SKULL_COUNT_10))
-        return 0x0a;
-    if (comboConfig(CFG_MM_SKULL_COUNT_15))
-        return 0x0f;
-    if (comboConfig(CFG_MM_SKULL_COUNT_20))
-        return 0x14;
-    if (comboConfig(CFG_MM_SKULL_COUNT_25))
-        return 0x19;
-    return 0x1e;
+    return gComboData.skullCount;
 }
 
 int EnSth_HasGivenItemMaskOfTruth(Actor* this)

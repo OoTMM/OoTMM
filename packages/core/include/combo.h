@@ -163,6 +163,8 @@ typedef struct
     u16             giZoraSapphire;
     u8              boss[12];
     u8              dungeons[26];
+    u8              strayCount;
+    u8              skullCount;
 }
 ComboData;
 
