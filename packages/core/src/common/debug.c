@@ -20,6 +20,9 @@
 #define OPTION_OK       1
 #define OPTION_CANCEL   2
 
+static const float kScale = 0.75f;
+static const float kScaleInv = 1.0f / kScale;
+
 typedef struct
 {
     const char* name;
@@ -161,11 +164,11 @@ static void debugDrawChar(int x, int y, char c)
     gSPDisplayList(POLY_OPA_DISP++, kDlistLoadIA4_8x12);
     gSPTextureRectangle(
         POLY_OPA_DISP++,
-        x * 2, y * 2,
-        x * 2 + 8 * 2, y * 2 + 12 * 2,
+        x * 4 * kScale, y * 4 * kScale,
+        (x + 8) * 4 * kScale, (y + 12) * 4 * kScale,
         0,
         0, 0,
-        (1 << 11), (1 << 11)
+        (1 << 10) * kScaleInv, (1 << 10) * kScaleInv
     );
     CLOSE_DISPS();
 }
