@@ -25,4 +25,5 @@ void comboInit(void)
     comboSilverRupeesInit();
     netInit();
     menuInit();
+    Debug_Init();
 }

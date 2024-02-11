@@ -465,6 +465,8 @@ void Play_DrawWrapper(GameState_Play* play)
         /* Need to draw dpad */
         comboDpadDraw(play);
     }
+
+    Debug_Update();
 }
 
 static void Play_LoadKaleidoScopeHook(void* unk)

@@ -333,4 +333,5 @@ void Play_DrawWrapper(GameState_Play* play)
     comboCacheGarbageCollect();
     comboObjectsGC();
     Play_Draw(play);
+    Debug_Update();
 }
