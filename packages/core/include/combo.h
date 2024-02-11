@@ -93,14 +93,19 @@ void malloc_check(void);
 # define malloc_check() do {} while (0)
 #endif
 
+#define CHEAT_HEALTH        0
+#define CHEAT_MAGIC         1
+
 #if defined(DEBUG)
 void Debug_Init(void);
 void Debug_Input(void);
 void Debug_Update(void);
+# define CHEAT_ON(x) (BITMAP8_GET(gSharedCustomSave.cheats, x))
 #else
 # define Debug_Init() do {} while (0)
 # define Debug_Input() do {} while (0)
 # define Debug_Update() do {} while (0)
+# define CHEAT_ON(x) (0)
 #endif
 
 void comboDisableInterrupts(void);

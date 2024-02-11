@@ -20,6 +20,9 @@ typedef struct ALIGNED(16)
     u8              soulsNpcOot[8];
     u8              caughtChildFishWeight[20]; // first item is length. should this be in OotCustomSave?
     u8              caughtAdultFishWeight[20]; // first item is length. should this be in OotCustomSave?
+#if defined(DEBUG)
+    u8              cheats[4];
+#endif
 }
 SharedCustomSave;
 

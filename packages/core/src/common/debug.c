@@ -6,11 +6,12 @@
 
 #define DEBUGMENU_PAGE_NONE     0
 #define DEBUGMENU_PAGE_MAIN     1
-#define DEBUGMENU_PAGE_WARP     2
-#define DEBUGMENU_PAGE_WARP2    3
-#define DEBUGMENU_PAGE_TIME     4
-#define DEBUGMENU_PAGE_AGE      5
-#define DEBUGMENU_PAGE_RELOAD   6
+#define DEBUGMENU_PAGE_CHEATS   2
+#define DEBUGMENU_PAGE_WARP     3
+#define DEBUGMENU_PAGE_WARP2    4
+#define DEBUGMENU_PAGE_TIME     5
+#define DEBUGMENU_PAGE_AGE      6
+#define DEBUGMENU_PAGE_RELOAD   7
 
 #define DEBUG_X 30
 #define DEBUG_Y 30
@@ -54,6 +55,11 @@ static const Gfx kDlistLoadIA4_8x12[] = {
     ),
     gsDPTileSync(),
     gsSPEndDisplayList(),
+};
+
+static const char* kCheats[] = {
+    "Infinite Health",
+    "Infinite Magic",
 };
 
 static const DebugMenuEntry kMenuWarpCommon[] = {
@@ -115,6 +121,7 @@ static const DebugMenuEntry kMenuWarp[] = {
 };
 
 static const DebugMenuEntry kMenuMain[] = {
+    { "Cheats", DEBUGMENU_PAGE_CHEATS },
     { "Warp", DEBUGMENU_PAGE_WARP },
 #if defined(GAME_MM)
     { "Time", DEBUGMENU_PAGE_TIME },
@@ -250,6 +257,44 @@ static void DebugHandler_Main(int trigger)
     case OPTION_CANCEL:
         setPage(DEBUGMENU_PAGE_NONE);
         break;
+    }
+}
+
+static void DebugHandler_Cheats(int trigger)
+{
+    if (trigger)
+        return;
+
+    if (btnPressed(B_BUTTON))
+    {
+        setPage(DEBUGMENU_PAGE_MAIN);
+        return;
+    }
+
+    /* Draw */
+    for (int i = 0; i < ARRAY_SIZE(kCheats); ++i)
+    {
+        debugDrawChar(2, i, '[');
+        if (BITMAP8_GET(gSharedCustomSave.cheats, i))
+            debugDrawChar(3, i, 'x');
+        debugDrawChar(4, i, ']');
+        debugDrawStr(6, i, kCheats[i]);
+    }
+
+    debugDrawChar(0, sCursor[1], '>');
+    if (btnPressed(D_JPAD)) sCursor[1]++;
+    if (btnPressed(U_JPAD)) sCursor[1]--;
+    if (btnPressed(R_JPAD)) sCursor[1] += 5;
+    if (btnPressed(L_JPAD)) sCursor[1] -= 5;
+    if (sCursor[1] < 0) sCursor[1] = 0;
+    if (sCursor[1] >= ARRAY_SIZE(kCheats)) sCursor[1] = ARRAY_SIZE(kCheats) - 1;
+
+    if (btnPressed(A_BUTTON))
+    {
+        if (BITMAP8_GET(gSharedCustomSave.cheats, sCursor[1]))
+            BITMAP8_CLEAR(gSharedCustomSave.cheats, sCursor[1]);
+        else
+            BITMAP8_SET(gSharedCustomSave.cheats, sCursor[1]);
     }
 }
 
@@ -407,6 +452,7 @@ static void DebugHandler_Age(int trigger)
 static const DebugMenuFunc kDebugMenuFuncs[] = {
     DebugHandler_None,
     DebugHandler_Main,
+    DebugHandler_Cheats,
     DebugHandler_Warp,
     DebugHandler_Warp2,
 #if defined(GAME_MM)
@@ -437,12 +483,29 @@ void Debug_Init(void)
     sDebugPage = DEBUGMENU_PAGE_NONE;
 }
 
+static void debugApplyCheats(void)
+{
+    if (CHEAT_ON(CHEAT_HEALTH))
+        gSave.playerData.health = gSave.playerData.healthMax;
+
+    if (CHEAT_ON(CHEAT_MAGIC))
+    {
+#if defined(GAME_OOT)
+        gSave.playerData.magicAmount = gSave.playerData.magicUpgrade2 ? 0x60 : gSave.playerData.magicUpgrade ? 0x30 : 0;
+#else
+        gSave.playerData.magicAmount = gSave.playerData.doubleMagic ? 0x60 : gSave.playerData.magicAcquired ? 0x30 : 0;
+#endif
+    }
+}
+
 void Debug_Update(void)
 {
     GfxContext* ctx;
     Gfx* opaOriginal;
     Gfx* opaTarget;
     Gfx* opaNew;
+
+    debugApplyCheats();
 
     if (sDebugPage)
     {
