@@ -10,6 +10,7 @@
 #define DEBUGMENU_PAGE_WARP2    3
 #define DEBUGMENU_PAGE_TIME     4
 #define DEBUGMENU_PAGE_AGE      5
+#define DEBUGMENU_PAGE_RELOAD   6
 
 #define DEBUG_X 30
 #define DEBUG_Y 30
@@ -121,6 +122,7 @@ static const DebugMenuEntry kMenuMain[] = {
 #if defined(GAME_OOT)
     { "Age Swap", DEBUGMENU_PAGE_AGE },
 #endif
+    { "Reload", DEBUGMENU_PAGE_RELOAD },
     { NULL, 0 },
 };
 
@@ -296,6 +298,18 @@ static void DebugHandler_Warp2(int trigger)
     comboTransition(gPlay, entrance);
 }
 
+static void DebugHandler_Reload(int trigger)
+{
+    setPage(DEBUGMENU_PAGE_NONE);
+    Play_SetupRespawnPoint(gPlay, 1, 0xdff);
+    gSaveContext.respawnFlag = 2;
+#if defined(GAME_OOT)
+    comboTransition(gPlay, gSave.entrance);
+#else
+    comboTransition(gPlay, gSave.entranceIndex);
+#endif
+}
+
 #if defined(GAME_MM)
 static void DebugHandler_Time(int trigger)
 {
@@ -373,7 +387,7 @@ static void DebugHandler_Time(int trigger)
     isNightNew = (timeNew >= 0xc000 || timeNew < 0x4000);
     isNightOld = (timeOld >= 0xc000 || timeOld < 0x4000);
     if (gSave.day != sTimeDay || isNightOld != isNightNew)
-        comboTransition(gPlay, gSave.entranceIndex); /* Needs a reload */
+        DebugHandler_Reload(1); /* Needs a reload */
     gSave.day = sTimeDay;
     gSave.time = timeNew;
     gSave.isNight = isNightNew;
@@ -405,6 +419,7 @@ static const DebugMenuFunc kDebugMenuFuncs[] = {
 #else
     NULL,
 #endif
+    DebugHandler_Reload,
 };
 
 void Debug_Input(void)
