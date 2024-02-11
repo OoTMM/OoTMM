@@ -93,6 +93,16 @@ void malloc_check(void);
 # define malloc_check() do {} while (0)
 #endif
 
+#if defined(DEBUG)
+void Debug_Init(void);
+void Debug_Input(void);
+void Debug_Update(void);
+#else
+# define Debug_Init() do {} while (0)
+# define Debug_Input() do {} while (0)
+# define Debug_Update() do {} while (0)
+#endif
+
 void comboDisableInterrupts(void);
 void comboDma(void* addr, u32 cartAddr, u32 size);
 void comboDma_NoCacheInval(void* addr, u32 cartAddr, u32 size);

@@ -329,8 +329,10 @@ void hookPlay_Init(GameState_Play* play)
 
 void Play_DrawWrapper(GameState_Play* play)
 {
+    Debug_Input();
     malloc_check();
     comboCacheGarbageCollect();
     comboObjectsGC();
     Play_Draw(play);
+    Debug_Update();
 }

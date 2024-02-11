@@ -447,6 +447,7 @@ void hookPlay_Init(GameState_Play* play)
 
 void Play_DrawWrapper(GameState_Play* play)
 {
+    Debug_Input();
     comboCacheGarbageCollect();
     comboObjectsGC();
     Play_Draw(play);
@@ -465,6 +466,8 @@ void Play_DrawWrapper(GameState_Play* play)
         /* Need to draw dpad */
         comboDpadDraw(play);
     }
+
+    Debug_Update();
 }
 
 static void Play_LoadKaleidoScopeHook(void* unk)
