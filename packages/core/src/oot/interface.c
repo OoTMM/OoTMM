@@ -3,6 +3,8 @@
 
 ALIGNED(16) static u32 sIconHeader[2];
 
+u32 GetItemTexture(u32 slotId, u8 item, u32 index);
+
 static void lookupMmIcon(u32 pbase, int index, u32* outAddr, u32* outSize)
 {
     u32 unk;
@@ -54,33 +56,6 @@ void comboItemIcon(void* dst, int itemId)
     }
 }
 
-static void grayscale(void* dst, unsigned size)
-{
-    static const float rev = 1.f / 255.f;
-    Color_RGBA8* pixels;
-    Color_RGBA8* p;
-    float acc;
-    u8 v;
-
-    pixels = dst;
-    size /= 4;
-
-    for (int i = 0; i < size; i++)
-    {
-        p = &pixels[i];
-        acc = 0.f;
-        acc += (p->r * rev) * 0.33f;
-        acc += (p->g * rev) * 0.33f;
-        acc += (p->b * rev) * 0.33f;
-        if (acc > 1.f)
-            acc = 1.f;
-        v = (u8)(acc * 255.f);
-        p->r = v;
-        p->g = v;
-        p->b = v;
-    }
-}
-
 static void LoadCustomItemIconSlot(GameState_Play* play, int slot)
 {
     Actor_Player* link;
@@ -99,7 +74,7 @@ static void LoadCustomItemIconSlot(GameState_Play* play, int slot)
         case 9:
             comboItemIcon(dst, ITEM_OOT_MASK_BLAST);
             if (gBlastMaskDelayAcc)
-                grayscale(dst, 0x1000);
+                Grayscale(dst, 0x400);
             return;
         }
     }
@@ -108,6 +83,7 @@ static void LoadCustomItemIconSlot(GameState_Play* play, int slot)
 }
 
 PATCH_FUNC(0x8006fb50, LoadCustomItemIconSlot);
+PATCH_FUNC(0x8006fc00, LoadCustomItemIconSlot);
 
 static void LoadCustomItemIcon_C_Left(void)
 {
@@ -129,3 +105,20 @@ static void LoadCustomItemIcon_C_Right(void)
 }
 
 PATCH_CALL(0x800e1e88, LoadCustomItemIcon_C_Right);
+
+void LoadEquipItemTexture(void)
+{
+    u32 tex;
+    GameState_Play* play;
+    PauseContext* pauseCtx;
+
+    play = gPlay;
+    pauseCtx = &play->pauseCtx;
+    tex = GetItemTexture(pauseCtx->equipTargetSlot, pauseCtx->equipTargetItem, 0);
+
+    if (!tex) return;
+
+    OPEN_DISPS(play->gs.gfx);
+    gDPLoadTextureBlock(OVERLAY_DISP++, tex, G_IM_FMT_RGBA, G_IM_SIZ_32b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+    CLOSE_DISPS();
+}

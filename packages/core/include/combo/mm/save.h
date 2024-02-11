@@ -7,7 +7,7 @@
 typedef struct
 {
     char    newf[6];
-    u16     deaths;
+    u16     songOfTimeCount;
     u8      playerName[8];
     s16     healthMax;
     s16     health;

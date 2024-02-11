@@ -4,8 +4,6 @@
 #include <combo/dma.h>
 #include <combo/item.h>
 
-
-
 static int checkItemToggle(GameState_Play* play)
 {
     PauseContext* p;
@@ -1538,7 +1536,7 @@ s32 KaleidoScope_BeforeDraw(GameState_Play* play)
     return 0;
 }
 
-static u32 GetItemTexture(u32 slotId, u8 item, u32 index)
+u32 GetItemTexture(u32 slotId, u8 item, u32 index)
 {
     static void* sExtraIconTradeChild[2];
     static u8 sExtraIconTradeChildItem[2];
@@ -1557,6 +1555,8 @@ static u32 GetItemTexture(u32 slotId, u8 item, u32 index)
             {
                 sExtraIconTradeChildItem[index] = item;
                 comboItemIcon(sExtraIconTradeChild[index], sExtraIconTradeChildItem[index]);
+                if (!comboConfig(CFG_OOT_AGELESS_CHILD_TRADE) && gSave.age != AGE_CHILD)
+                    Grayscale(sExtraIconTradeChild[index], 0x400);
             }
             return (u32)sExtraIconTradeChild[index] & 0x00ffffff;
         }

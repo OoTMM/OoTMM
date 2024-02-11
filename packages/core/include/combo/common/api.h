@@ -190,6 +190,7 @@ void Sram_SaveEndOfCycle(GameState_Play* play);
 void Sram_SaveNewDay(GameState_Play* play);
 #endif
 
+void Grayscale(void* buffer, u16 size);
 s16 RandIntRange(s16 base, s16 amplitude);
 
 extern u32 gSegments[16];

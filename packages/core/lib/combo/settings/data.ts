@@ -1004,6 +1004,18 @@ export const SETTINGS = [{
   description: 'In vanilla OoT, some actors fails to load properly in some rooms due to errors in the room files. When this is on, these actors will load.',
   default: false
 }, {
+  key: 'autoInvert',
+  name: 'Auto-Invert Time (MM)',
+  category: 'main.misc',
+  type: 'enum',
+  description: 'Auto-inverts time at the start of a cycle',
+  values: [
+    { value: 'never', name: 'Never' },
+    { value: 'firstCycle', name: 'First Cycle' },
+    { value: 'always', name: 'Always' },
+  ],
+  default: 'never'
+}, {
   key: 'fillWallets',
   name: 'Fill Wallets',
   category: 'items',

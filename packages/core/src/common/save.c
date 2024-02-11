@@ -161,3 +161,23 @@ void comboCopyMmSave(int fileIndexDst, int fileIndexSrc)
     /* Copy the custom save */
     copyRawSave(0x18000 + 0x4000 * fileIndexDst, 0x18000 + 0x4000 * fileIndexSrc, 0x4000);
 }
+
+void comboHandleAutoInvertClockSpeed(void)
+{
+    s32 invertSpeed;
+
+    invertSpeed = -2;
+    if(comboConfig(CFG_MM_CLOCK_SPEED_VERYSLOW))
+        invertSpeed = 0;
+    if(comboConfig(CFG_MM_CLOCK_SPEED_SLOW))
+        invertSpeed = -1;
+    if(comboConfig(CFG_MM_CLOCK_SPEED_FAST))
+        invertSpeed = -4;
+    if(comboConfig(CFG_MM_CLOCK_SPEED_VERYFAST))
+        invertSpeed = -6;
+    if(comboConfig(CFG_MM_CLOCK_SPEED_SUPERFAST))
+        invertSpeed = -12;
+
+    if (comboConfig(CFG_MM_AUTO_INVERT_ALWAYS) || (comboConfig(CFG_MM_AUTO_INVERT_FIRST_CYCLE) && gMmSave.playerData.songOfTimeCount == 0))
+        gMmSave.daySpeed = invertSpeed;
+}

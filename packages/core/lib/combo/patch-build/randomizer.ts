@@ -820,6 +820,13 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     OOT_MASK_BLAST: settings.blastMaskOot,
     SHARED_MASK_BLAST: settings.sharedMaskBlast,
     MM_FD_ANYWHERE: settings.fierceDeityAnywhere,
+    MM_CLOCK_SPEED_VERYSLOW: settings.clockSpeed === 'veryslow',
+    MM_CLOCK_SPEED_SLOW: settings.clockSpeed === 'slow',
+    MM_CLOCK_SPEED_FAST: settings.clockSpeed === 'fast',
+    MM_CLOCK_SPEED_VERYFAST: settings.clockSpeed === 'veryfast',
+    MM_CLOCK_SPEED_SUPERFAST: settings.clockSpeed === 'superfast',
+    MM_AUTO_INVERT_ALWAYS: settings.autoInvert === 'always',
+    MM_AUTO_INVERT_FIRST_CYCLE: settings.autoInvert === 'firstCycle',
   };
 
   for (const v in exprs) {

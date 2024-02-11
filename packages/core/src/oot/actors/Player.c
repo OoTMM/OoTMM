@@ -15,15 +15,14 @@ static void maskToggle(GameState_Play* play, Actor_Player* player, u8 maskId)
 
     /* Play a sfx */
     PlaySound(0x835);
-
-    /* update B button */
-    Interface_LoadItemIconImpl(play, 0);
 }
 
 void comboPlayerUseItem(GameState_Play* play, Actor_Player* link, s16 itemId)
 {
     void (*Player_UseItem)(GameState_Play* play, Actor_Player* link, s16 itemId);
+    u8 prevMask;
 
+    prevMask = link->mask;
     switch (itemId)
     {
     case ITEM_OOT_WEIRD_EGG:
@@ -40,6 +39,9 @@ void comboPlayerUseItem(GameState_Play* play, Actor_Player* link, s16 itemId)
         Player_UseItem(play, link, itemId);
         break;
     }
+
+    if (prevMask != link->mask)
+        Interface_LoadItemIconImpl(play, 0);
 }
 
 PATCH_CALL(0x8083212c, comboPlayerUseItem);

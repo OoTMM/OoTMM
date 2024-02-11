@@ -801,7 +801,7 @@ export class LogicPassSolver {
         'OOT_WATER_TEMPLE_CLEARED': 'OOT SPAWN',
         'MM_CLEAN_SWAMP': 'MM Swamp Front',
         'MM_BOSS_SNOWHEAD': 'MM Mountain Village',
-        'MM_BOSS_GREAT_BAY': 'MM Zora Cape Peninsula',
+        'MM_BOSS_GREAT_BAY': 'MM Great Bay Coast',
       };
 
       const world = this.worlds[worldId];

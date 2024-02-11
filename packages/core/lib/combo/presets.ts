@@ -598,6 +598,7 @@ const PRESET_HELL = makeSettings({
 });
 
 const PRESET_BEGINNER = makeSettings({
+  autoInvert: 'firstCycle',
   clearStateDungeonsMm: 'both',
   hintImportance: true,
   tingleShuffle: 'starting',
