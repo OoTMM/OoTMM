@@ -9,6 +9,7 @@
 #define DEBUGMENU_PAGE_WARP     2
 #define DEBUGMENU_PAGE_WARP2    3
 #define DEBUGMENU_PAGE_TIME     4
+#define DEBUGMENU_PAGE_AGE      5
 
 #define DEBUG_X 30
 #define DEBUG_Y 30
@@ -31,12 +32,12 @@ static ControllerInput sInput;
 static const DebugMenuEntry* sMenuWarp;
 
 #if defined(GAME_MM)
-static int sTimeDay = 1;
-static int sTimeHour = 6;
-static int sTimeMinute = 0;
+static int sTimeDay;
+static int sTimeHour;
+static int sTimeMinute;
 #endif
 
-typedef void (*DebugMenuFunc)(void);
+typedef void (*DebugMenuFunc)(int);
 
 static const Gfx kDlistLoadIA4_8x12[] = {
     gsDPLoadTextureTile_4b(
@@ -117,6 +118,9 @@ static const DebugMenuEntry kMenuMain[] = {
 #if defined(GAME_MM)
     { "Time", DEBUGMENU_PAGE_TIME },
 #endif
+#if defined(GAME_OOT)
+    { "Age Swap", DEBUGMENU_PAGE_AGE },
+#endif
     { NULL, 0 },
 };
 
@@ -128,6 +132,14 @@ int btnHeld(u16 but)
 int btnPressed(u16 but)
 {
     return ((sInput.pressed.buttons & but) == but);
+}
+
+static const DebugMenuFunc kDebugMenuFuncs[];
+
+static void setPage(int page)
+{
+    sDebugPage = page;
+    kDebugMenuFuncs[page](1);
 }
 
 static void debugDrawChar(int x, int y, char c)
@@ -208,57 +220,69 @@ static u8 menu(const DebugMenuEntry* entries, s16* cursor, u32* data)
     return OPTION_NONE;
 }
 
-static void DebugHandler_None(void)
+static void DebugHandler_None(int trigger)
 {
+    if (trigger)
+        return;
+
     if (btnHeld(Z_TRIG | L_TRIG))
     {
-        sDebugPage = DEBUGMENU_PAGE_MAIN;
         sCursor[0] = 0;
+        setPage(DEBUGMENU_PAGE_MAIN);
     }
 }
 
-static void DebugHandler_Main(void)
+static void DebugHandler_Main(int trigger)
 {
     u32 data;
+
+    if (trigger)
+        return;
 
     switch (menu(kMenuMain, &sCursor[0], &data))
     {
     case OPTION_OK:
-        sDebugPage = data;
         sCursor[1] = 0;
+        setPage(data);
         break;
     case OPTION_CANCEL:
-        sDebugPage = DEBUGMENU_PAGE_NONE;
+        setPage(DEBUGMENU_PAGE_NONE);
         break;
     }
 }
 
-static void DebugHandler_Warp(void)
+static void DebugHandler_Warp(int trigger)
 {
     u32 data;
+
+    if (trigger)
+        return;
 
     switch (menu(kMenuWarp, &sCursor[1], &data))
     {
     case OPTION_OK:
-        sMenuWarp = (const DebugMenuEntry*)data;
-        sDebugPage = DEBUGMENU_PAGE_WARP2;
         sCursor[2] = 0;
+        sMenuWarp = (const DebugMenuEntry*)data;
+        setPage(DEBUGMENU_PAGE_WARP2);
         break;
     case OPTION_CANCEL:
-        sDebugPage = DEBUGMENU_PAGE_MAIN;
+        setPage(DEBUGMENU_PAGE_MAIN);
         break;
     }
 }
 
-static void DebugHandler_Warp2(void)
+static void DebugHandler_Warp2(int trigger)
 {
     u32 entrance;
     u8 ret;
 
+    if (trigger)
+        return;
+
     ret = menu(sMenuWarp, &sCursor[2], &entrance);
     if (ret == OPTION_CANCEL)
     {
-        sDebugPage = DEBUGMENU_PAGE_WARP;
+        setPage(DEBUGMENU_PAGE_WARP);
         return;
     }
 
@@ -273,13 +297,23 @@ static void DebugHandler_Warp2(void)
 }
 
 #if defined(GAME_MM)
-static void DebugHandler_Time(void)
+static void DebugHandler_Time(int trigger)
 {
     int isNightOld;
     int isNightNew;
     u16 timeOld;
     u16 timeNew;
     int delta;
+
+    if (trigger)
+    {
+        /* Extract current time */
+        sTimeDay = gSave.day;
+        sTimeHour = gSave.time / (0x10000 / 24);
+        sTimeMinute = (gSave.time % (0x10000 / 24)) / (0x10000 / 24 / 60);
+        sTimeMinute = (sTimeMinute / 10) * 10;
+        return;
+    }
 
     /* Cursor */
     if (btnPressed(D_JPAD)) sCursor[1]++;
@@ -346,6 +380,16 @@ static void DebugHandler_Time(void)
 }
 #endif
 
+#if defined(GAME_OOT)
+void ageSwap(GameState_Play* play);
+
+static void DebugHandler_Age(int trigger)
+{
+    setPage(DEBUGMENU_PAGE_NONE);
+    ageSwap(gPlay);
+}
+#endif
+
 static const DebugMenuFunc kDebugMenuFuncs[] = {
     DebugHandler_None,
     DebugHandler_Main,
@@ -353,6 +397,11 @@ static const DebugMenuFunc kDebugMenuFuncs[] = {
     DebugHandler_Warp2,
 #if defined(GAME_MM)
     DebugHandler_Time,
+#else
+    NULL,
+#endif
+#if defined(GAME_OOT)
+    DebugHandler_Age,
 #else
     NULL,
 #endif
@@ -397,7 +446,7 @@ void Debug_Update(void)
         gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0xff, 0xff, 0xff, 0xff);
         gDPSetEnvColor(POLY_OPA_DISP++, 0, 0, 0, 0);
         CLOSE_DISPS();
-        kDebugMenuFuncs[sDebugPage]();
+        kDebugMenuFuncs[sDebugPage](0);
         gSPEndDisplayList(ctx->polyOpa.append++);
 
         opaNew = ctx->polyOpa.append;
@@ -406,7 +455,7 @@ void Debug_Update(void)
     }
     else
     {
-        DebugHandler_None();
+        DebugHandler_None(0);
     }
 }
 #endif
