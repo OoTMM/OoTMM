@@ -8,6 +8,7 @@
 #define DEBUGMENU_PAGE_MAIN     1
 #define DEBUGMENU_PAGE_WARP     2
 #define DEBUGMENU_PAGE_WARP2    3
+#define DEBUGMENU_PAGE_TIME     4
 
 #define DEBUG_X 30
 #define DEBUG_Y 30
@@ -24,10 +25,16 @@ typedef struct
 DebugMenuEntry;
 
 u8 gDebugMenuOpen;
-static u16 sCursor[3];
+static s16 sCursor[3];
 static u8 sDebugPage;
 static ControllerInput sInput;
 static const DebugMenuEntry* sMenuWarp;
+
+#if defined(GAME_MM)
+static int sTimeDay = 1;
+static int sTimeHour = 6;
+static int sTimeMinute = 0;
+#endif
 
 typedef void (*DebugMenuFunc)(void);
 
@@ -107,6 +114,9 @@ static const DebugMenuEntry kMenuWarp[] = {
 
 static const DebugMenuEntry kMenuMain[] = {
     { "Warp", DEBUGMENU_PAGE_WARP },
+#if defined(GAME_MM)
+    { "Time", DEBUGMENU_PAGE_TIME },
+#endif
     { NULL, 0 },
 };
 
@@ -155,7 +165,7 @@ static void debugDrawStr(int x, int y, const char* str)
     }
 }
 
-static u8 menu(const DebugMenuEntry* entries, u16* cursor, u32* data)
+static u8 menu(const DebugMenuEntry* entries, s16* cursor, u32* data)
 {
     int entryCount;
     int tmpCursor;
@@ -168,15 +178,6 @@ static u8 menu(const DebugMenuEntry* entries, u16* cursor, u32* data)
             break;
         entryCount++;
     }
-
-    OPEN_DISPS(gPlay->gs.gfx);
-    gDPSetRenderMode(POLY_OPA_DISP++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
-    gDPSetCombineMode(POLY_OPA_DISP++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
-    gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0, 0, 0, 0x80);
-    gDPFillRectangle(POLY_OPA_DISP++, 0, 0, 319, 239);
-    gDPSetCombineMode(POLY_OPA_DISP++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
-    gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, 0xff);
-    CLOSE_DISPS();
 
     for (int i = 0; i < entryCount; ++i)
     {
@@ -271,11 +272,90 @@ static void DebugHandler_Warp2(void)
     comboTransition(gPlay, entrance);
 }
 
+#if defined(GAME_MM)
+static void DebugHandler_Time(void)
+{
+    int isNightOld;
+    int isNightNew;
+    u16 timeOld;
+    u16 timeNew;
+    int delta;
+
+    /* Cursor */
+    if (btnPressed(D_JPAD)) sCursor[1]++;
+    if (btnPressed(U_JPAD)) sCursor[1]--;
+    if (sCursor[1] < 0) sCursor[1] = 2;
+    if (sCursor[1] > 2) sCursor[1] = 0;
+
+    /* Change */
+    delta = 0;
+    if (btnPressed(L_JPAD)) delta--;
+    if (btnPressed(R_JPAD)) delta++;
+    switch (sCursor[1])
+    {
+    case 0:
+        sTimeDay += delta;
+        if (sTimeDay < 1) sTimeDay = 1;
+        if (sTimeDay > 4) sTimeDay = 4;
+        break;
+    case 1:
+        sTimeHour += delta;
+        if (sTimeHour < 0) sTimeHour = 23;
+        if (sTimeHour > 23) sTimeHour = 0;
+        break;
+    case 2:
+        sTimeMinute += delta * 10;
+        if (sTimeMinute < 0) sTimeMinute = 50;
+        if (sTimeMinute > 50) sTimeMinute = 0;
+        break;
+    }
+
+    /* Draw */
+    debugDrawStr(2, 0, "Day");
+    debugDrawStr(2, 1, "Hour");
+    debugDrawStr(2, 2, "Minute");
+
+    debugDrawChar(11, 0, '0' + sTimeDay);
+    debugDrawChar(10, 1, '0' + sTimeHour / 10);
+    debugDrawChar(11, 1, '0' + sTimeHour % 10);
+    debugDrawChar(10, 2, '0' + sTimeMinute / 10);
+    debugDrawChar(11, 2, '0' + sTimeMinute % 10);
+
+    debugDrawChar(0, sCursor[1], '>');
+
+    /* Actions */
+    if (btnPressed(B_BUTTON))
+    {
+        sDebugPage = DEBUGMENU_PAGE_MAIN;
+        return;
+    }
+
+    if (!btnPressed(A_BUTTON))
+        return;
+
+    sDebugPage = DEBUGMENU_PAGE_NONE;
+    timeNew = (((s32)sTimeHour * 60 + sTimeMinute) * 0x10000) / (24 * 60);
+    timeOld = gSave.time;
+    isNightNew = (timeNew >= 0xc000 || timeNew < 0x4000);
+    isNightOld = (timeOld >= 0xc000 || timeOld < 0x4000);
+    if (gSave.day != sTimeDay || isNightOld != isNightNew)
+        comboTransition(gPlay, gSave.entranceIndex); /* Needs a reload */
+    gSave.day = sTimeDay;
+    gSave.time = timeNew;
+    gSave.isNight = isNightNew;
+}
+#endif
+
 static const DebugMenuFunc kDebugMenuFuncs[] = {
     DebugHandler_None,
     DebugHandler_Main,
     DebugHandler_Warp,
     DebugHandler_Warp2,
+#if defined(GAME_MM)
+    DebugHandler_Time,
+#else
+    NULL,
+#endif
 };
 
 void Debug_Input(void)
@@ -300,14 +380,33 @@ void Debug_Update(void)
     Gfx* opaTarget;
     Gfx* opaNew;
 
-    ctx = gPlay->gs.gfx;
-    opaOriginal = ctx->polyOpa.append;
-    ctx->polyOpa.append++;
-    opaTarget = ctx->polyOpa.append;
-    kDebugMenuFuncs[sDebugPage]();
-    gSPEndDisplayList(ctx->polyOpa.append++);
-    opaNew = ctx->polyOpa.append;
-    gSPBranchList(opaOriginal, opaNew);
-    gSPDisplayList(ctx->overlay.append++, opaTarget);
+    if (sDebugPage)
+    {
+        ctx = gPlay->gs.gfx;
+        opaOriginal = ctx->polyOpa.append;
+        ctx->polyOpa.append++;
+        opaTarget = ctx->polyOpa.append;
+
+        OPEN_DISPS(gPlay->gs.gfx);
+        gDPSetRenderMode(POLY_OPA_DISP++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
+        gDPSetCombineMode(POLY_OPA_DISP++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
+        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0, 0, 0, 0xc0);
+        gDPFillRectangle(POLY_OPA_DISP++, 0, 0, 319, 239);
+        gDPPipeSync(POLY_OPA_DISP++);
+        gDPSetCombineMode(POLY_OPA_DISP++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
+        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0xff, 0xff, 0xff, 0xff);
+        gDPSetEnvColor(POLY_OPA_DISP++, 0, 0, 0, 0);
+        CLOSE_DISPS();
+        kDebugMenuFuncs[sDebugPage]();
+        gSPEndDisplayList(ctx->polyOpa.append++);
+
+        opaNew = ctx->polyOpa.append;
+        gSPBranchList(opaOriginal, opaNew);
+        gSPDisplayList(ctx->overlay.append++, opaTarget);
+    }
+    else
+    {
+        DebugHandler_None();
+    }
 }
 #endif
