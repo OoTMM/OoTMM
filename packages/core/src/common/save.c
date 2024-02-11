@@ -96,6 +96,19 @@ static void saveMm(void)
     comboReadWriteFlash(base + 0x4000, &gMmSave, sizeof(gMmSave), OS_WRITE);
 }
 
+void comboReadOwnSave(void)
+{
+    u32 fileIndex = gSaveContext.fileIndex;
+
+#if defined(GAME_OOT)
+    comboReadWriteFlash(0x20 + 0x1450 * fileIndex, &gOotSave, sizeof(gOotSave), OS_READ);
+#endif
+
+#if defined(GAME_MM)
+    comboReadWriteFlash(0x8000 + 0x8000 * fileIndex, &gMmSave, sizeof(gMmSave), OS_READ);
+#endif
+}
+
 void comboReadForeignSave(void)
 {
     u32 fileIndex = gSaveContext.fileIndex;

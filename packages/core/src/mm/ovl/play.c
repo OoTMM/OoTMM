@@ -222,8 +222,12 @@ void hookPlay_Init(GameState_Play* play)
     if (gSave.entranceIndex == 0xc030)
     {
         /* Moon crash */
-        gSave.entranceIndex = entranceForOverride(g.initialEntrance);
+        comboReadOwnSave();
         comboReadForeignSave();
+        gSave.entranceIndex = entranceForOverride(g.initialEntrance);
+        comboOnSaveLoad();
+        hookPlay_Init(play);
+        return;
     }
 
     if (gSave.entranceIndex == ENTR_MM_CLOCK_TOWN && gLastEntrance == 0x1c00)

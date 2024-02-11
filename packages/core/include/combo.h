@@ -208,6 +208,7 @@ extern u16 gBlastMaskDelayAcc;
 #define SF_NOCOMMIT     0x02
 #define SF_PASSIVE      0x04
 
+void comboReadOwnSave(void);
 void comboReadForeignSave(void);
 void comboWriteSave(void);
 void comboCopyMmSave(int dst, int src);
