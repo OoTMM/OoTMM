@@ -1555,6 +1555,8 @@ u32 GetItemTexture(u32 slotId, u8 item, u32 index)
             {
                 sExtraIconTradeChildItem[index] = item;
                 comboItemIcon(sExtraIconTradeChild[index], sExtraIconTradeChildItem[index]);
+                if (!comboConfig(CFG_OOT_AGELESS_CHILD_TRADE) && gSave.age != AGE_CHILD)
+                    Grayscale(sExtraIconTradeChild[index], 0x400);
             }
             return (u32)sExtraIconTradeChild[index] & 0x00ffffff;
         }
