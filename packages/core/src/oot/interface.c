@@ -3,6 +3,8 @@
 
 ALIGNED(16) static u32 sIconHeader[2];
 
+u32 GetItemTexture(u32 slotId, u8 item, u32 index);
+
 static void lookupMmIcon(u32 pbase, int index, u32* outAddr, u32* outSize)
 {
     u32 unk;
@@ -130,3 +132,20 @@ static void LoadCustomItemIcon_C_Right(void)
 }
 
 PATCH_CALL(0x800e1e88, LoadCustomItemIcon_C_Right);
+
+void LoadEquipItemTexture(void)
+{
+    u32 tex;
+    GameState_Play* play;
+    PauseContext* pauseCtx;
+
+    play = gPlay;
+    pauseCtx = &play->pauseCtx;
+    tex = GetItemTexture(pauseCtx->equipTargetSlot, pauseCtx->equipTargetItem, 0);
+
+    if (!tex) return;
+
+    OPEN_DISPS(play->gs.gfx);
+    gDPLoadTextureBlock(OVERLAY_DISP++, tex, G_IM_FMT_RGBA, G_IM_SIZ_32b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+    CLOSE_DISPS();
+}

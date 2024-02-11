@@ -1536,7 +1536,7 @@ s32 KaleidoScope_BeforeDraw(GameState_Play* play)
     return 0;
 }
 
-static u32 GetItemTexture(u32 slotId, u8 item, u32 index)
+u32 GetItemTexture(u32 slotId, u8 item, u32 index)
 {
     static void* sExtraIconTradeChild[2];
     static u8 sExtraIconTradeChildItem[2];
