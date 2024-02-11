@@ -95,9 +95,11 @@ void malloc_check(void);
 
 #if defined(DEBUG)
 void Debug_Init(void);
+void Debug_Input(void);
 void Debug_Update(void);
 #else
 # define Debug_Init() do {} while (0)
+# define Debug_Input() do {} while (0)
 # define Debug_Update() do {} while (0)
 #endif
 
