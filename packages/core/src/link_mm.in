@@ -325,3 +325,5 @@ Player_OverrideLimbDrawGameplayFirstPerson = 0x801262C8;
 
 Player_SetBootData = 0x80123140;
 Player_GetStrength = 0x80124020;
+
+Entrance_GetTableEntry = 0x801322c0;

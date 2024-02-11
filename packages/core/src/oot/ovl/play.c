@@ -299,8 +299,6 @@ static u32 entranceForOverride(u32 entrance)
 
 void hookPlay_Init(GameState_Play* play)
 {
-    s32 override;
-
     /* Init */
     gActorCustomTriggers = NULL;
     gMultiMarkChests = 0;
@@ -311,29 +309,6 @@ void hookPlay_Init(GameState_Play* play)
 
     /* Register play */
     gPlay = play;
-
-    /* Handle transition override */
-    if (g.inGrotto)
-        gIsEntranceOverride = 0;
-    if (gIsEntranceOverride)
-    {
-        gIsEntranceOverride = 0;
-        override = comboEntranceOverride(entranceForOverride(gSave.entrance));
-        if (override != -1)
-        {
-            if (override >= 0)
-                gSave.entrance = override;
-            else
-            {
-                gSave.entrance = gLastEntrance;
-                Play_Init(play);
-                gComboCtx.shuffledEntrance = 1;
-                comboClearEpona(play);
-                comboGameSwitch(play, override);
-                return;
-            }
-        }
-    }
 
     /* Handle custom entrance IDs */
     switch (gSave.entrance)
@@ -491,5 +466,45 @@ void comboClearEpona(GameState_Play* play)
 
         /* Reload the B button icon */
         Interface_LoadItemIconImpl(play, 0);
+    }
+}
+
+NORETURN static void Play_GameSwitch(GameState_Play* play, s32 entrance)
+{
+    gComboCtx.shuffledEntrance = 1;
+    comboClearEpona(play);
+    comboGameSwitch(play, entrance);
+}
+
+void Play_TransitionDone(GameState_Play* play)
+{
+    s32 override;
+
+    /* Handle transition override */
+    if (g.inGrotto)
+        gIsEntranceOverride = 0;
+    if (gIsEntranceOverride)
+    {
+        gIsEntranceOverride = 0;
+        override = comboEntranceOverride(entranceForOverride(play->nextEntranceIndex));
+        if (override != -1)
+        {
+            if (override >= 0)
+            {
+                play->nextEntranceIndex = override;
+            }
+            else
+            {
+                Play_GameSwitch(play, override);
+            }
+        }
+    }
+
+    u16 entrance = (u16)play->nextEntranceIndex;
+
+    if (entrance >= 0x1000)
+    {
+        u16 mmEntrance = entrance - 0x1000;
+        Play_GameSwitch(play, mmEntrance);
     }
 }

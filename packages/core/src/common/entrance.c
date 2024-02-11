@@ -82,16 +82,16 @@ void comboGetDungeonExit(EntranceDescr* dst, int dungeonId)
 void comboTransition(GameState_Play* play, u32 entrance)
 {
 #if defined(GAME_OOT)
-    if (!(entrance & MASK_FOREIGN_ENTRANCE))
+    if (entrance & MASK_FOREIGN_ENTRANCE)
     {
-        play->transitionTrigger = TRANS_TYPE_NORMAL;
-        play->transitionType = TRANS_GFX_BLACK;
-        play->nextEntranceIndex = (u16)entrance;
+        play->nextEntranceIndex = 0x1000 + (entrance ^ MASK_FOREIGN_ENTRANCE);
     }
     else
     {
-        comboGameSwitch(play, entrance ^ MASK_FOREIGN_ENTRANCE);
+        play->nextEntranceIndex = (u16)entrance;
     }
+    play->transitionTrigger = TRANS_TYPE_NORMAL;
+    play->transitionType = TRANS_GFX_BLACK;
 #endif
 
 #if defined(GAME_MM)
@@ -111,16 +111,16 @@ void comboTransition(GameState_Play* play, u32 entrance)
         }
     }
 
-    if (!(entrance & MASK_FOREIGN_ENTRANCE))
+    if (entrance & MASK_FOREIGN_ENTRANCE)
     {
-        play->nextEntrance = (u16)entrance;
-        play->transitionTrigger = TRANS_TRIGGER_NORMAL;
-        play->transitionType = TRANS_TYPE_FADE_BLACK;
+        play->nextEntrance = 0xF000 + (entrance & 0xFFF);
     }
     else
     {
-        comboGameSwitch(play, entrance ^ MASK_FOREIGN_ENTRANCE);
+        play->nextEntrance = (u16)entrance;
     }
+    play->transitionTrigger = TRANS_TRIGGER_NORMAL;
+    play->transitionType = TRANS_TYPE_FADE_BLACK;
 #endif
 }
 

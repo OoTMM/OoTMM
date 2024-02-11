@@ -476,4 +476,6 @@ s32 SysFlashrom_InitFlash(void);
 s32 SysFlashrom_ReadData(void* addr, u32 pageNum, u32 pageCount);
 s32 SysFlashrom_ExecWrite(void* addr, u32 pageNum, u32 pageCount);
 
+EntranceTableEntry* Entrance_GetTableEntry(u16 entrance);
+
 extern OSPiHandle* gCartHandle;
