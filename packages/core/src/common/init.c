@@ -26,4 +26,3 @@ void comboInit(void)
     netInit();
     menuInit();
 }
-

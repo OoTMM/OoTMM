@@ -1,6 +1,6 @@
 #include <combo.h>
 
-/* Skip the button check */
+/* Debug screen on crash */
 PATCH_START 0x800af360
   jal osWritebackDCacheAll
 PATCH_END
