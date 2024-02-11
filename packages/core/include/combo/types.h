@@ -1157,4 +1157,10 @@ typedef enum {
     /* 0x2C */ TATL_STATE_2C
 } DoAction;
 
+typedef struct {
+    /* 0x0 */ s8 sceneId;
+    /* 0x1 */ s8 spawnNum;
+    /* 0x2 */ u16 flags;
+} EntranceTableEntry; // size = 0x4
+
 #endif /* TYPES_H */

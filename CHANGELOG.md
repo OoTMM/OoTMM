@@ -43,6 +43,7 @@ All notable changes to this project will be documented in this file.
 - Improve the behavior of open dungeons with Stone Tower Temple.
 - Update the blitz presets.
 - Make tunics cosmetics affect their item models.
+- Move entrance based game switching from play init to transition done to eliminate jump cuts when changing games.
 
 ## [18.3] - 2024-02-05
 
