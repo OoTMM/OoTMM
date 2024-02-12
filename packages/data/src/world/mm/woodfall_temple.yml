@@ -11,17 +11,17 @@
     FAIRY: "true"
   exits:
     "Woodfall Temple": "true"
-    "Woodfall Temple Main": "has(MASK_DEKU) || can_hookshot_short || (has_hover_boots && has_weapon && has_explosives && has_mask_bunny && (has_arrows || has(MASK_STONE)) && trick(MM_WFT_LOBBY_HOVERS))"
+    "Woodfall Temple Main": "has(MASK_DEKU) || can_hookshot_short || (has_hover_boots && has_weapon && has_explosives && has_mask_bunny && (has_arrows || has(MASK_STONE)) && trick(MM_WFT_LOBBY_HOVERS)) || climb_anywhere" #added climb anywhere
     "Woodfall Temple Boss Access": "setting(bossWarpPads, remains) && has(REMAINS_ODOLWA)"
   locations:
-    "Woodfall Temple Entrance Chest": "has(MASK_DEKU) || can_hookshot_short"
+    "Woodfall Temple Entrance Chest": "has(MASK_DEKU) || can_hookshot_short || climb_anywhere" #added climb anywhere
     "Woodfall Temple SF Entrance": "true"
     "Woodfall Temple Pot Entrance": "true"
     "Woodfall Temple Grass Entrance Bottom 1": "true"
     "Woodfall Temple Grass Entrance Bottom 2": "true"
     "Woodfall Temple Grass Entrance Bottom 3": "true"
-    "Woodfall Temple Grass Entrance Ledge 1": "has(MASK_DEKU) || can_hookshot_short"
-    "Woodfall Temple Grass Entrance Ledge 2": "has(MASK_DEKU) || can_hookshot_short"
+    "Woodfall Temple Grass Entrance Ledge 1": "has(MASK_DEKU) || can_hookshot_short || climb_anywhere" #added climb anywhere
+    "Woodfall Temple Grass Entrance Ledge 2": "has(MASK_DEKU) || can_hookshot_short || climb_anywhere" #added climb anywhere
 "Woodfall Temple Main":
   dungeon: WF
   exits:

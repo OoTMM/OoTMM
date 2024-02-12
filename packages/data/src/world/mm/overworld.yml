@@ -1181,7 +1181,7 @@
   exits:
     "Road to Southern Swamp": "true"
     "Tourist Information": "true"
-    "Swamp Back": "event(BOAT_RIDE) || event(CLEAN_SWAMP) || has_mask_zora || ((has(MASK_DEKU) || can_use_nayru || has_hover_boots) && (has_arrows || can_hookshot_short || can_use_din))" # climb anywhere should be a trick for it to be a logical way to access this exit, as you have to take some damage to start climbing through tunnel near witch shop and then again after tunnel at a corner where two walls meet but leave a invisible gap between the two that prevents movement between the two. could be also logical with Nayru's love and magic --- to be discussed. 
+    "Swamp Back": "event(BOAT_RIDE) || event(CLEAN_SWAMP) || has_mask_zora || ((has(MASK_DEKU) || can_use_nayru || has_hover_boots) && (has_arrows || can_hookshot_short || can_use_din)) || climb_anywhere" #added climb anywhere 
     "Swamp Potion Shop": "true"
     "Woods of Mystery": "true"
     "Owl Swamp": "true"
@@ -1248,7 +1248,7 @@
     PICTURE_SWAMP: "has(PICTOGRAPH_BOX)"
     PICTURE_BIG_OCTO: "has(PICTOGRAPH_BOX) && soul_octorok"
   exits:
-    "Swamp Front": "event(BOAT_RIDE) || event(CLEAN_SWAMP) || has_mask_zora || ((has_arrows || can_hookshot) && (has(MASK_DEKU) || has_mask_goron || can_use_nayru || has_hover_boots))"
+    "Swamp Front": "event(BOAT_RIDE) || event(CLEAN_SWAMP) || has_mask_zora || ((has_arrows || can_hookshot) && (has(MASK_DEKU) || has_mask_goron || can_use_nayru || has_hover_boots)) || climb_anywhere" #added climb anywhere
     "Deku Palace Front": "true"
     "Near Swamp Spider House": "has(MASK_DEKU) || has_mask_zora || event(CLEAN_SWAMP) || short_hook_anywhere || can_use_nayru || has_hover_boots"
     "Swamp Canopy Back": "event(CLEAN_SWAMP) || short_hook_anywhere"
@@ -2734,7 +2734,7 @@
     "Ikana Graveyard Grotto Grass 12": "true"
     "Ikana Graveyard Grotto Grass 13": "true"
     "Ikana Graveyard Grotto Grass 14": "true"
-"Beneath The Graveyard Night 1": #need to figure out climb anywhere stuff for beneath the graveyard
+"Beneath The Graveyard Night 1": 
   region: ENTRANCE
   events:
     ARROWS: "true"
@@ -2913,7 +2913,7 @@
 "Ikana Castle Entrance": #more testing needed
   region: IKANA_CASTLE
   exits:
-    "Ikana Castle Exterior": "(has_mirror_shield && event(IKANA_CASTLE_LIGHT_ENTRANCE)) || can_use_light_arrows || short_hook_anywhere"
+    "Ikana Castle Exterior": "(has_mirror_shield && event(IKANA_CASTLE_LIGHT_ENTRANCE)) || can_use_light_arrows || short_hook_anywhere || climb_anywhere" #added climb anywhere
     "Ikana Canyon": "true"
   events:
     IKANA_CASTLE_LIGHT_ENTRANCE: "can_activate_crystal"
@@ -2926,7 +2926,7 @@
     FAIRY: "true"
   exits:
     "Beneath The Well End": "true"
-    "Ikana Castle Entrance": "can_use_light_arrows || short_hook_anywhere"
+    "Ikana Castle Entrance": "can_use_light_arrows || short_hook_anywhere || climb_anywhere" #added climb anywhere
     "Ancient Castle of Ikana": "true"
     "Ancient Castle of Ikana Roof Exterior": "short_hook_anywhere"
   locations:
