@@ -728,6 +728,13 @@ export const SETTINGS = [{
   ],
   default: 'closed'
 }, {
+  key: 'openZdShortcut',
+  name: 'Open Zora\'s Domain Shortcut',
+  category: 'main.events',
+  type: 'boolean',
+  description: 'Removes the ice blocking Zora\'s Domain in Lake Hylia as adult',
+  default: false
+}, {
   key: 'zoraKing',
   name: 'King Zora',
   category: 'main.events',

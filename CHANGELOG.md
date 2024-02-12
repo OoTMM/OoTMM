@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add an Open Zora's Domain Shortcut setting, removing the ice block leading to Zora's Domain from Lake Hylia- 
 - Add a Wisp to control the water level in Lake Hylia given you've beaten Water Temple.
 - Add a Moon Crash setting, letting player keep going after a moon crash.
 - Add the ability to auto invert MM Clock Speed either on all cycles or only the first one.
