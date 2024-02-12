@@ -5,6 +5,15 @@
 
 void ArrowCycle_Handle(Actor_Player* link, GameState_Play* play);
 
+void* Player_AllocObjectBuffer(u32 size)
+{
+    static void* sBuffer;
+
+    if (!sBuffer)
+        sBuffer = malloc(size);
+    return sBuffer;
+}
+
 static void maskToggle(GameState_Play* play, Actor_Player* player, u8 maskId)
 {
     /* Set the mask */

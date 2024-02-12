@@ -29,6 +29,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix the hyrule field glitch happening much more often compared to the vanilla game in OoT.
 - Fix a long standing issue where pre-completed dungeons could interfere with the logic in some edge-cases.
 - Fix a bug where you could unequip shields and swords or toggle items while hovering the wrong slot.
 - Fix stray fairies not restoring health.
