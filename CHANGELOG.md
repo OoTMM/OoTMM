@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- Add the ability to auto invert MM Clock Speed either on all cycles or only the first one. 
+- Add the ability to auto invert MM Clock Speed either on all cycles or only the first one.
 - Add a way to disable crit wiggle.
 - Add Goron Bracelet/Silver Gauntlets/Golden Gauntlets to Majora's Mask.
 - Small preview for the next item when multiple items are in the same slot.
@@ -33,6 +33,7 @@ All notable changes to this project will be documented in this file.
 - Fix items that don't exist in a given seed being hinted as being in Link's Pocket.
 - Fix being able to escape boss rooms as fierce deity by abusing OoT warp songs.
 - Fix being able to freeze the MM clock by abusing OoT warp songs.
+- Fix zora diving game rupees not working correctly in coop/multiworld.
 
 ### Changed
 
