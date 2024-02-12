@@ -742,6 +742,9 @@ void comboTextAppendItemNameEx(char** b, s16 gi, int flags, int importance)
                 ambiguous = 0;
             }
             break;
+        case GI_MM_CLOCK2:
+            itemName = "a " TEXT_C1 "Progressive Clock";
+            break;
         }
 
     }

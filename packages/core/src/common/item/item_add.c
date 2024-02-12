@@ -1746,6 +1746,13 @@ static int addItemBigFairyMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
+static int addItemClock(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    if (gSharedCustomSave.mm.halfDays < (u8)param)
+        gSharedCustomSave.mm.halfDays = (u8)param;
+    return 0;
+}
+
 static int addItemEndgame(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
     switch (param)
@@ -1860,6 +1867,7 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemBigFairyMm,
     addItemScaleMm,
     addItemStrengthMm,
+    addItemClock,
     addItemEndgame,
 };
 

@@ -829,6 +829,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MM_AUTO_INVERT_FIRST_CYCLE: settings.autoInvert === 'firstCycle',
     MM_MOON_CRASH_CYCLE: settings.moonCrash === 'cycle',
     OOT_OPEN_ZD_SHORTCUT: settings.openZdShortcut,
+    MM_CLOCKS: settings.clocks,
   };
 
   for (const v in exprs) {

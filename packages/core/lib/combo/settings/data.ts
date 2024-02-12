@@ -1312,6 +1312,13 @@ export const SETTINGS = [{
   description: 'Add NPC souls into the item pool. NPCs won\'t spawn unless their soul is obtained.',
   default: false
 }, {
+  key: 'clocks',
+  name: 'Clocks as Items',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Add items representing every Majora\'s Mask half day into the pool. The moon will crash early unless you collect these items.',
+  default: false
+}, {
   key: 'lenientSpikes',
   name: 'Lenient Goron Spikes',
   category: 'items.extensions',
