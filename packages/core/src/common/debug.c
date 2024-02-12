@@ -32,6 +32,7 @@ DebugMenuEntry;
 
 u8 gDebugMenuOpen;
 static s16 sCursor[3];
+static s16 sScroll[3];
 static u8 sDebugPage;
 static ControllerInput sInput;
 static const DebugMenuEntry* sMenuWarp;
@@ -189,9 +190,10 @@ static void debugDrawStr(int x, int y, const char* str)
     }
 }
 
-static u8 menu(const DebugMenuEntry* entries, s16* cursor, u32* data)
+static u8 menu(const DebugMenuEntry* entries, s16* cursor, s16* scroll, u32* data)
 {
     int entryCount;
+    int displayCount;
     int tmpCursor;
 
     /* Count entries */
@@ -202,12 +204,15 @@ static u8 menu(const DebugMenuEntry* entries, s16* cursor, u32* data)
             break;
         entryCount++;
     }
+    displayCount = entryCount;
+    if (displayCount > 21)
+        displayCount = 21;
 
-    for (int i = 0; i < entryCount; ++i)
+    for (int i = 0; i < displayCount; ++i)
     {
-        debugDrawStr(2, i, entries[i].name);
+        debugDrawStr(2, i, entries[(*scroll) + i].name);
     }
-    debugDrawChar(0, *cursor, '>');
+    debugDrawChar(0, *cursor - *scroll, '>');
 
     /* Movement */
     tmpCursor = *cursor;
@@ -218,6 +223,12 @@ static u8 menu(const DebugMenuEntry* entries, s16* cursor, u32* data)
     if (tmpCursor < 0) tmpCursor = 0;
     if (tmpCursor >= entryCount) tmpCursor = entryCount - 1;
     *cursor = (u16)tmpCursor;
+
+    /* Scrolling */
+    if (*cursor < *scroll)
+        *scroll = *cursor;
+    if (*cursor >= *scroll + displayCount)
+        *scroll = *cursor - displayCount + 1;
 
     if (btnPressed(A_BUTTON))
     {
@@ -240,6 +251,7 @@ static void DebugHandler_None(int trigger)
     if (btnHeld(Z_TRIG | L_TRIG))
     {
         sCursor[0] = 0;
+        sScroll[0] = 0;
         setPage(DEBUGMENU_PAGE_MAIN);
     }
 }
@@ -251,10 +263,11 @@ static void DebugHandler_Main(int trigger)
     if (trigger)
         return;
 
-    switch (menu(kMenuMain, &sCursor[0], &data))
+    switch (menu(kMenuMain, &sCursor[0], &sScroll[0], &data))
     {
     case OPTION_OK:
         sCursor[1] = 0;
+        sScroll[1] = 0;
         setPage(data);
         break;
     case OPTION_CANCEL:
@@ -308,10 +321,11 @@ static void DebugHandler_Warp(int trigger)
     if (trigger)
         return;
 
-    switch (menu(kMenuWarp, &sCursor[1], &data))
+    switch (menu(kMenuWarp, &sCursor[1], &sScroll[1], &data))
     {
     case OPTION_OK:
         sCursor[2] = 0;
+        sScroll[2] = 0;
         sMenuWarp = (const DebugMenuEntry*)data;
         setPage(DEBUGMENU_PAGE_WARP2);
         break;
@@ -329,7 +343,7 @@ static void DebugHandler_Warp2(int trigger)
     if (trigger)
         return;
 
-    ret = menu(sMenuWarp, &sCursor[2], &entrance);
+    ret = menu(sMenuWarp, &sCursor[2], &sScroll[2], &entrance);
     if (ret == OPTION_CANCEL)
     {
         setPage(DEBUGMENU_PAGE_WARP);
