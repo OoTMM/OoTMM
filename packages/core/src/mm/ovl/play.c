@@ -348,9 +348,9 @@ void Play_TransitionDone(GameState_Play* play)
         }
     }
 
-    if (play->nextEntrance > 0xF000)
+    if (play->nextEntrance >= 0xf000)
     {
-        u16 ootEntrance = play->nextEntrance & 0xFFF;
+        u16 ootEntrance = play->nextEntrance & 0xfff;
         Play_GameSwitch(play, ootEntrance);
     }
 }
