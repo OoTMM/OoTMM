@@ -69,6 +69,10 @@ static int canUseDpadItem(GameState_Play* play, s16 itemId, int flags)
 #if defined(GAME_MM)
     if (gSave.equippedMask == PLAYER_MASK_GIANT)
         return 0;
+    
+    /* These states seem to handle minigames - and everything should be disabled during these */
+    if(link->state3 & (1 << 22) || link->state & (1 << 5))
+        return 0;
 #endif
 
     /* Underwater - disable everything except zora mask */
