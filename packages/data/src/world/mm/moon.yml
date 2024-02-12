@@ -6,24 +6,24 @@
     "Moon": "(can_play_order || setting(openMoon)) && special(MOON)"
     "Clock Tower Platform": "false"
   locations:
-    "Clock Tower Roof Skull Kid Ocarina": "cond(!setting(shufflePotsMm), (has(MASK_DEKU) && (has(MAGIC_UPGRADE) || has(SHARED_MAGIC_UPGRADE))) || has_weapon_range, has_weapon_range) && (can_play_time || event(MAJORA) || (setting(erMoon) && dungeon_er))"
-    "Clock Tower Roof Skull Kid Song of Time": "cond(!setting(shufflePotsMm), (has(MASK_DEKU) && (has(MAGIC_UPGRADE) || has(SHARED_MAGIC_UPGRADE))) || has_weapon_range, has_weapon_range) && (can_play_time || event(MAJORA) || (setting(erMoon) && dungeon_er))"
-    "Clock Tower Roof Pot 1": "(can_play_time || event(MAJORA) || (setting(erMoon) && dungeon_er))"
-    "Clock Tower Roof Pot 2": "(can_play_time || event(MAJORA) || (setting(erMoon) && dungeon_er))"
-    "Clock Tower Roof Pot 3": "(can_play_time || event(MAJORA) || (setting(erMoon) && dungeon_er))"
-    "Clock Tower Roof Pot 4": "(can_play_time || event(MAJORA) || (setting(erMoon) && dungeon_er))"
+    "Clock Tower Roof Skull Kid Ocarina": "cond(!setting(shufflePotsMm), (has(MASK_DEKU) && (has(MAGIC_UPGRADE) || has(SHARED_MAGIC_UPGRADE))) || has_weapon_range, has_weapon_range) && (can_play_time || event(MAJORA) || (setting(erMoon) && dungeon_er) || setting(moonCrash, cycle))"
+    "Clock Tower Roof Skull Kid Song of Time": "cond(!setting(shufflePotsMm), (has(MASK_DEKU) && (has(MAGIC_UPGRADE) || has(SHARED_MAGIC_UPGRADE))) || has_weapon_range, has_weapon_range) && (can_play_time || event(MAJORA) || (setting(erMoon) && dungeon_er) || setting(moonCrash, cycle))"
+    "Clock Tower Roof Pot 1": "(can_play_time || event(MAJORA) || (setting(erMoon) && dungeon_er) || setting(moonCrash, cycle))"
+    "Clock Tower Roof Pot 2": "(can_play_time || event(MAJORA) || (setting(erMoon) && dungeon_er) || setting(moonCrash, cycle))"
+    "Clock Tower Roof Pot 3": "(can_play_time || event(MAJORA) || (setting(erMoon) && dungeon_er) || setting(moonCrash, cycle))"
+    "Clock Tower Roof Pot 4": "(can_play_time || event(MAJORA) || (setting(erMoon) && dungeon_er) || setting(moonCrash, cycle))"
 "Moon":
   region: MOON
   events:
     MAJORA_PRE_BOSS: "true"
   exits:
-    "Moon Trial Deku Entrance":  "can_reset_time && masks(1)"
-    "Moon Trial Goron Entrance": "can_reset_time && masks(2)"
-    "Moon Trial Zora": "can_reset_time && masks(3)"
-    "Moon Trial Link Entrance": "can_reset_time && masks(4)"
+    "Moon Trial Deku Entrance":  "can_reset_time_on_moon && masks(1)"
+    "Moon Trial Goron Entrance": "can_reset_time_on_moon && masks(2)"
+    "Moon Trial Zora": "can_reset_time_on_moon && masks(3)"
+    "Moon Trial Link Entrance": "can_reset_time_on_moon && masks(4)"
     "Moon Boss": "setting(majoraChild, none) || (setting(majoraChild, custom) && special(MAJORA))"
   locations:
-    "Moon Fierce Deity Mask": "can_reset_time && masks(20) && event(MOON_TRIAL_DEKU) && event(MOON_TRIAL_GORON) && event(MOON_TRIAL_ZORA) && event(MOON_TRIAL_LINK)"
+    "Moon Fierce Deity Mask": "can_reset_time_on_moon && masks(20) && event(MOON_TRIAL_DEKU) && event(MOON_TRIAL_GORON) && event(MOON_TRIAL_ZORA) && event(MOON_TRIAL_LINK)"
 "Moon Trial Deku Entrance":
   region: MOON
   exits:
