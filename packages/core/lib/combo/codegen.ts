@@ -144,18 +144,18 @@ async function genEntrances() {
     debug.raw(`static const DebugMenuEntry kDebugMenuWarp_${name}[] = {`);
     for (const [k, v] of Object.entries(ENTRANCES)) {
       if (v.debug && v.debug[0] === name) {
-        debug.raw(` { "${v.debug[1]}", ENTR_${k} ${v.game === 'mm' ? ' | MASK_FOREIGN_ENTRANCE' : ''} }, `);
+        debug.raw(`  { "${v.debug[1]}", ENTR_${k} ${v.game === 'mm' ? '| MASK_FOREIGN_ENTRANCE ' : ''}}, `);
       }
     }
-    debug.raw('   { NULL, 0 },');
+    debug.raw('  { NULL, 0 },');
     debug.raw('};');
     debug.raw('');
   }
   debug.raw(`const DebugMenuEntry kDebugMenuWarp[] = {`);
   for (const [name, str] of Object.entries(ENTRANCES_DEBUG_CATEGORIES)) {
-    debug.raw(` { "${str}", (u32)kDebugMenuWarp_${name} }, `);
+    debug.raw(`  { "${str}", (u32)kDebugMenuWarp_${name} }, `);
   }
-  debug.raw('   { NULL, 0 },');
+  debug.raw('  { NULL, 0 },');
   debug.raw('};');
   debug.raw('#endif');
   await debug.emit();
