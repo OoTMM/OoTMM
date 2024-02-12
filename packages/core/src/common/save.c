@@ -12,6 +12,10 @@ ALIGNED(16) MmSave gMmSave;
 
 ALIGNED(16) SharedCustomSave gSharedCustomSave;
 
+#if defined(GAME_MM)
+void moonCrashTime(u8* day, u16* time);
+#endif
+
 void comboOnSaveLoad(void)
 {
     NetContext* net;
@@ -31,6 +35,21 @@ void comboOnSaveLoad(void)
     netMutexUnlock();
 
     comboWalletRefresh();
+
+#if defined(GAME_MM)
+# define GRACE 0x1e0
+    u8 mcDay;
+    u16 mcTime;
+
+    moonCrashTime(&mcDay, &mcTime);
+    if (mcTime == 0x4000)
+        mcDay--;
+    /* Grace period */
+    if (gSave.day == mcDay && gSave.time > (mcTime - GRACE) && gSave.time < mcTime)
+    {
+        gSave.time = mcTime - GRACE;
+    }
+#endif
 }
 
 static u16 computeChecksumOot(void* data, int len)
