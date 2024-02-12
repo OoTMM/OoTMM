@@ -353,7 +353,7 @@ static void color4(u8* r, u8* g, u8* b, u8* a, u32 color)
     *a = color & 0xff;
 }
 
-Vtx gVtxBuffer[2048];
+Vtx gVtxBuffer[1024 + 512];
 static int gVtxBufferIndex;
 
 static Vtx* vtxAlloc(GameState_Play* play, int count)

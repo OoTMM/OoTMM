@@ -1,36 +1,36 @@
-OOT_BOSS_DEKU_TREE:                             { game: oot, id: 0x40f, type: boss, areas: ["OOT Deku Tree Before Boss", "OOT Deku Tree Boss"] }
-OOT_BOSS_DODONGO_CAVERN:                        { game: oot, id: 0x40b, type: boss, areas: ["OOT Dodongo Cavern Skull", "OOT Dodongo Cavern Boss"] }
-OOT_BOSS_JABU_JABU:                             { game: oot, id: 0x301, type: boss, areas: ["OOT Jabu-Jabu Pre-Boss", "OOT Jabu-Jabu Boss"] }
-OOT_BOSS_TEMPLE_FOREST:                         { game: oot, id: 0x00c, type: boss, areas: ["OOT Forest Temple Antichamber", "OOT Forest Temple Boss"] }
-OOT_BOSS_TEMPLE_FIRE:                           { game: oot, id: 0x305, type: boss, areas: ["OOT Fire Temple Pre-Boss", "OOT Fire Temple Boss"] }
-OOT_BOSS_TEMPLE_WATER:                          { game: oot, id: 0x417, type: boss, areas: ["OOT Water Temple Antichamber", "OOT Water Temple Boss"] }
-OOT_BOSS_TEMPLE_SHADOW:                         { game: oot, id: 0x413, type: boss, areas: ["OOT Shadow Temple After Boat", "OOT Shadow Temple Boss"] }
-OOT_BOSS_TEMPLE_SPIRIT:                         { game: oot, id: 0x08d, type: boss, areas: ["OOT Spirit Temple Statue", "OOT Spirit Temple Boss"] }
-OOT_DEKU_TREE:                                  { game: oot, id: 0x000, type: dungeon, areas: ["OOT Kokiri Forest Near Deku Tree", "OOT Deku Tree"], reverse: OOT_KOKIRI_FOREST_FROM_DEKU_TREE }
+OOT_BOSS_DEKU_TREE:                             { game: oot, id: 0x40f, type: boss, areas: ["OOT Deku Tree Before Boss", "OOT Deku Tree Boss"], debug: ['BOSS', 'Gohma'] }
+OOT_BOSS_DODONGO_CAVERN:                        { game: oot, id: 0x40b, type: boss, areas: ["OOT Dodongo Cavern Skull", "OOT Dodongo Cavern Boss"], debug: ['BOSS', 'King Dodongo'] }
+OOT_BOSS_JABU_JABU:                             { game: oot, id: 0x301, type: boss, areas: ["OOT Jabu-Jabu Pre-Boss", "OOT Jabu-Jabu Boss"], debug: ['BOSS', 'Barinade'] }
+OOT_BOSS_TEMPLE_FOREST:                         { game: oot, id: 0x00c, type: boss, areas: ["OOT Forest Temple Antichamber", "OOT Forest Temple Boss"], debug: ['BOSS', 'Phantom Ganon'] }
+OOT_BOSS_TEMPLE_FIRE:                           { game: oot, id: 0x305, type: boss, areas: ["OOT Fire Temple Pre-Boss", "OOT Fire Temple Boss"], debug: ['BOSS', 'Volvagia'] }
+OOT_BOSS_TEMPLE_WATER:                          { game: oot, id: 0x417, type: boss, areas: ["OOT Water Temple Antichamber", "OOT Water Temple Boss"], debug: ['BOSS', 'Morpha'] }
+OOT_BOSS_TEMPLE_SHADOW:                         { game: oot, id: 0x413, type: boss, areas: ["OOT Shadow Temple After Boat", "OOT Shadow Temple Boss"], debug: ['BOSS', 'Bongo-Bongo'] }
+OOT_BOSS_TEMPLE_SPIRIT:                         { game: oot, id: 0x08d, type: boss, areas: ["OOT Spirit Temple Statue", "OOT Spirit Temple Boss"], debug: ['BOSS', 'Twinrova'] }
+OOT_DEKU_TREE:                                  { game: oot, id: 0x000, type: dungeon, areas: ["OOT Kokiri Forest Near Deku Tree", "OOT Deku Tree"], reverse: OOT_KOKIRI_FOREST_FROM_DEKU_TREE, debug: ['DUNGEON', 'Deku Tree'] }
 OOT_KOKIRI_FOREST_FROM_DEKU_TREE:               { game: oot, id: 0x209, type: dungeon, areas: ["OOT Deku Tree", "OOT Kokiri Forest Near Deku Tree"], reverse: OOT_DEKU_TREE }
-OOT_DODONGO_CAVERN:                             { game: oot, id: 0x004, type: dungeon, areas: ["OOT Death Mountain", "OOT Dodongo Cavern"], reverse: OOT_MOUNTAIN_TRAIL_FROM_DODONGO_CAVERN }
+OOT_DODONGO_CAVERN:                             { game: oot, id: 0x004, type: dungeon, areas: ["OOT Death Mountain", "OOT Dodongo Cavern"], reverse: OOT_MOUNTAIN_TRAIL_FROM_DODONGO_CAVERN, debug: ['DUNGEON', 'Dodongo Cavern'] }
 OOT_MOUNTAIN_TRAIL_FROM_DODONGO_CAVERN:         { game: oot, id: 0x242, type: dungeon, areas: ["OOT Dodongo Cavern", "OOT Death Mountain"], reverse: OOT_DODONGO_CAVERN }
-OOT_JABU_JABU:                                  { game: oot, id: 0x028, type: dungeon, areas: ["OOT Zora Fountain", "OOT Jabu-Jabu"], reverse: OOT_ZORA_FOUNTAIN_FROM_JABU_JABU }
+OOT_JABU_JABU:                                  { game: oot, id: 0x028, type: dungeon, areas: ["OOT Zora Fountain", "OOT Jabu-Jabu"], reverse: OOT_ZORA_FOUNTAIN_FROM_JABU_JABU, debug: ['DUNGEON', 'Jabu-Jabu'] }
 OOT_ZORA_FOUNTAIN_FROM_JABU_JABU:               { game: oot, id: 0x221, type: dungeon, areas: ["OOT Jabu-Jabu", "OOT Zora Fountain"], reverse: OOT_JABU_JABU }
-OOT_TEMPLE_FOREST:                              { game: oot, id: 0x169, type: dungeon, areas: ["OOT Sacred Meadow", "OOT Forest Temple"], reverse: OOT_SACRED_MEADOW_FROM_TEMPLE_FOREST }
+OOT_TEMPLE_FOREST:                              { game: oot, id: 0x169, type: dungeon, areas: ["OOT Sacred Meadow", "OOT Forest Temple"], reverse: OOT_SACRED_MEADOW_FROM_TEMPLE_FOREST, debug: ['DUNGEON', 'Forest'] }
 OOT_SACRED_MEADOW_FROM_TEMPLE_FOREST:           { game: oot, id: 0x215, type: dungeon, areas: ["OOT Forest Temple", "OOT Sacred Meadow"], reverse: OOT_TEMPLE_FOREST }
-OOT_TEMPLE_FIRE:                                { game: oot, id: 0x165, type: dungeon, areas: ["OOT Death Mountain Crater Near Temple", "OOT Fire Temple"], reverse: OOT_DEATH_CRATER_FROM_TEMPLE_FIRE }
+OOT_TEMPLE_FIRE:                                { game: oot, id: 0x165, type: dungeon, areas: ["OOT Death Mountain Crater Near Temple", "OOT Fire Temple"], reverse: OOT_DEATH_CRATER_FROM_TEMPLE_FIRE, debug: ['DUNGEON', 'Fire'] }
 OOT_DEATH_CRATER_FROM_TEMPLE_FIRE:              { game: oot, id: 0x24a, type: dungeon, areas: ["OOT Fire Temple", "OOT Death Mountain Crater Near Temple"], reverse: OOT_TEMPLE_FIRE }
-OOT_TEMPLE_WATER:                               { game: oot, id: 0x010, type: dungeon, areas: ["OOT Lake Hylia", "OOT Water Temple"], reverse: OOT_LAKE_HYLIA_FROM_TEMPLE_WATER }
+OOT_TEMPLE_WATER:                               { game: oot, id: 0x010, type: dungeon, areas: ["OOT Lake Hylia", "OOT Water Temple"], reverse: OOT_LAKE_HYLIA_FROM_TEMPLE_WATER, debug: ['DUNGEON', 'Water'] }
 OOT_LAKE_HYLIA_FROM_TEMPLE_WATER:               { game: oot, id: 0x21d, type: dungeon, areas: ["OOT Water Temple", "OOT Lake Hylia"], reverse: OOT_TEMPLE_WATER }
-OOT_TEMPLE_SHADOW:                              { game: oot, id: 0x037, type: dungeon, areas: ["OOT Graveyard Upper", "OOT Shadow Temple"], reverse: OOT_GRAVEYARD_FROM_TEMPLE_SHADOW }
+OOT_TEMPLE_SHADOW:                              { game: oot, id: 0x037, type: dungeon, areas: ["OOT Graveyard Upper", "OOT Shadow Temple"], reverse: OOT_GRAVEYARD_FROM_TEMPLE_SHADOW, debug: ['DUNGEON', 'Shadow'] }
 OOT_GRAVEYARD_FROM_TEMPLE_SHADOW:               { game: oot, id: 0x205, type: dungeon, areas: ["OOT Shadow Temple", "OOT Graveyard Upper"], reverse: OOT_TEMPLE_SHADOW }
-OOT_TEMPLE_SPIRIT:                              { game: oot, id: 0x082, type: dungeon, areas: ["OOT Desert Colossus", "OOT Spirit Temple"], reverse: OOT_DESERT_COLOSSUS_FROM_TEMPLE_SPIRIT }
+OOT_TEMPLE_SPIRIT:                              { game: oot, id: 0x082, type: dungeon, areas: ["OOT Desert Colossus", "OOT Spirit Temple"], reverse: OOT_DESERT_COLOSSUS_FROM_TEMPLE_SPIRIT, debug: ['DUNGEON', 'Spirit'] }
 OOT_DESERT_COLOSSUS_FROM_TEMPLE_SPIRIT:         { game: oot, id: 0x1e1, type: dungeon, areas: ["OOT Spirit Temple", "OOT Desert Colossus Spirit Exit"], reverse: OOT_TEMPLE_SPIRIT }
-OOT_BOTTOM_OF_THE_WELL:                         { game: oot, id: 0x098, type: dungeon, areas: ["OOT Kakariko", "OOT Bottom of the Well"], reverse: OOT_KAKARIKO_FROM_BOTTOM_OF_THE_WELL }
+OOT_BOTTOM_OF_THE_WELL:                         { game: oot, id: 0x098, type: dungeon, areas: ["OOT Kakariko", "OOT Bottom of the Well"], reverse: OOT_KAKARIKO_FROM_BOTTOM_OF_THE_WELL, debug: ['DUNGEON', 'BotW'] }
 OOT_KAKARIKO_FROM_BOTTOM_OF_THE_WELL:           { game: oot, id: 0x2a6, type: dungeon, areas: ["OOT Bottom of the Well", "OOT Kakariko"], reverse: OOT_BOTTOM_OF_THE_WELL }
-OOT_ICE_CAVERN:                                 { game: oot, id: 0x088, type: dungeon, areas: ["OOT Zora Fountain Frozen", "OOT Ice Cavern"], reverse: OOT_ZORA_FOUNTAIN_FROM_ICE_CAVERN }
+OOT_ICE_CAVERN:                                 { game: oot, id: 0x088, type: dungeon, areas: ["OOT Zora Fountain Frozen", "OOT Ice Cavern"], reverse: OOT_ZORA_FOUNTAIN_FROM_ICE_CAVERN, debug: ['DUNGEON', 'Ice'] }
 OOT_ZORA_FOUNTAIN_FROM_ICE_CAVERN:              { game: oot, id: 0x3d4, type: dungeon, areas: ["OOT Ice Cavern", "OOT Zora Fountain Frozen"], reverse: OOT_ICE_CAVERN }
-OOT_GERUDO_TRAINING_GROUNDS:                    { game: oot, id: 0x008, type: dungeon, areas: ["OOT Gerudo Fortress Exterior", "OOT Gerudo Training Grounds"], reverse: OOT_GERUDO_FORTRESS_FROM_GERUDO_TRAINING }
+OOT_GERUDO_TRAINING_GROUNDS:                    { game: oot, id: 0x008, type: dungeon, areas: ["OOT Gerudo Fortress Exterior", "OOT Gerudo Training Grounds"], reverse: OOT_GERUDO_FORTRESS_FROM_GERUDO_TRAINING, debug: ['DUNGEON', 'GtG'] }
 OOT_GERUDO_FORTRESS_FROM_GERUDO_TRAINING:       { game: oot, id: 0x3a8, type: dungeon, areas: ["OOT Gerudo Training Grounds", "OOT Gerudo Fortress Exterior"], reverse: OOT_GERUDO_TRAINING_GROUNDS }
-OOT_GANON_CASTLE:                               { game: oot, id: 0x467, type: dungeon, areas: ["OOT Ganon Castle Exterior After Bridge", "OOT Ganon Castle"], reverse: OOT_GANON_CASTLE_EXTERIOR_FROM_CASTLE }
+OOT_GANON_CASTLE:                               { game: oot, id: 0x467, type: dungeon, areas: ["OOT Ganon Castle Exterior After Bridge", "OOT Ganon Castle"], reverse: OOT_GANON_CASTLE_EXTERIOR_FROM_CASTLE, debug: ['DUNGEON', 'Ganon Castle'] }
 OOT_GANON_CASTLE_EXTERIOR_FROM_CASTLE:          { game: oot, id: 0x23d, type: dungeon, areas: ["OOT Ganon Castle", "OOT Ganon Castle Exterior After Bridge"], reverse: OOT_GANON_CASTLE }
-OOT_GANON_TOWER:                                { game: oot, id: 0x41b, type: dungeon, areas: ["OOT Ganon Castle Stairs", "OOT Ganon Castle Tower"], reverse: OOT_GANON_CASTLE_FROM_TOWER }
+OOT_GANON_TOWER:                                { game: oot, id: 0x41b, type: dungeon, areas: ["OOT Ganon Castle Stairs", "OOT Ganon Castle Tower"], reverse: OOT_GANON_CASTLE_FROM_TOWER, debug: ['DUNGEON', 'Ganon Tower'] }
 OOT_GANON_CASTLE_FROM_TOWER:                    { game: oot, id: 0x534, type: dungeon, areas: ["OOT Ganon Castle Tower", "OOT Ganon Castle Stairs"], reverse: OOT_GANON_TOWER }
 OOT_LOST_WOODS_BRIDGE_FROM_FIELD:               { game: oot, id: 0x4de, type: region, areas: ["OOT Hyrule Field", "OOT Lost Woods Bridge"], reverse: OOT_FIELD_FROM_LOST_WOODS_BRIDGE }
 OOT_FIELD_FROM_LOST_WOODS_BRIDGE:               { game: oot, id: 0x185, type: overworld, areas: ["OOT Lost Woods Bridge", "OOT Hyrule Field"], reverse: OOT_LOST_WOODS_BRIDGE_FROM_FIELD }
@@ -97,9 +97,9 @@ OOT_STABLES:                                    { game: oot, id: 0x2f9, type: in
 OOT_LON_LON_RANCH_FROM_STABLES:                 { game: oot, id: 0x42f, type: indoors-exit, areas: ["OOT Lon Lon Ranch Stables", "OOT Lon Lon Ranch"], reverse: OOT_STABLES }
 OOT_SILO:                                       { game: oot, id: 0x5d0, type: indoors, areas: ["OOT Lon Lon Ranch", "OOT Lon Lon Ranch Silo"], reverse: OOT_LON_LON_RANCH_FROM_SILO }
 OOT_LON_LON_RANCH_FROM_SILO:                    { game: oot, id: 0x5d4, type: indoors-exit, areas: ["OOT Lon Lon Ranch Silo", "OOT Lon Lon Ranch"], reverse: OOT_SILO }
-OOT_HOUSE_LINK:                                 { game: oot, id: 0x272, type: indoors-extra, areas: ["OOT Kokiri Forest", "OOT Link's House"], reverse: OOT_KOKIRI_FOREST_FROM_LINK }
+OOT_HOUSE_LINK:                                 { game: oot, id: 0x272, type: indoors-extra, areas: ["OOT Kokiri Forest", "OOT Link's House"], reverse: OOT_KOKIRI_FOREST_FROM_LINK, debug: ['COMMON', 'Link House'] }
 OOT_KOKIRI_FOREST_FROM_LINK:                    { game: oot, id: 0x211, type: indoors-exit, areas: ["OOT Link's House", "OOT Kokiri Forest"], reverse: OOT_HOUSE_LINK }
-OOT_TEMPLE_OF_TIME:                             { game: oot, id: 0x053, type: indoors-extra, areas: ["OOT Temple of Time Entryway", "OOT Temple of Time"], reverse: OOT_TEMPLE_OF_TIME_ENTRYWAY_FROM_TEMPLE }
+OOT_TEMPLE_OF_TIME:                             { game: oot, id: 0x053, type: indoors-extra, areas: ["OOT Temple of Time Entryway", "OOT Temple of Time"], reverse: OOT_TEMPLE_OF_TIME_ENTRYWAY_FROM_TEMPLE, debug: ['COMMON', 'Temple of Time'] }
 OOT_TEMPLE_OF_TIME_ENTRYWAY_FROM_TEMPLE:        { game: oot, id: 0x472, type: indoors-exit, areas: ["OOT Temple of Time", "OOT Temple of Time Entryway"], reverse: OOT_TEMPLE_OF_TIME }
 OOT_WINDMILL:                                   { game: oot, id: 0x453, type: indoors-extra, areas: ["OOT Kakariko", "OOT Windmill"], reverse: OOT_KAKARIKO_FROM_WINDMILL }
 OOT_KAKARIKO_FROM_WINDMILL:                     { game: oot, id: 0x351, type: indoors-exit, areas: ["OOT Windmill", "OOT Kakariko"], reverse: OOT_WINDMILL }
@@ -144,42 +144,42 @@ OOT_GRAVE_ROYAL:                                { game: oot, id: 0x02d, type: gr
 OOT_GRAVEYARD_FROM_GRAVE_ROYAL:                 { game: oot, id: 0x50b, type: grave-exit, areas: ["OOT Graveyard Royal Tomb", "OOT Graveyard"], reverse: OOT_GRAVE_ROYAL }
 OOT_GRAVE_DAMPE:                                { game: oot, id: 0x44f, type: grave, areas: ["OOT Graveyard", "OOT Dampe Grave"], reverse: OOT_GRAVEYARD_FROM_GRAVE_DAMPE }
 OOT_GRAVEYARD_FROM_GRAVE_DAMPE:                 { game: oot, id: 0x359, type: grave-exit, areas: ["OOT Dampe Grave", "OOT Graveyard"], reverse: OOT_GRAVE_DAMPE }
-OOT_WARP_SONG_MEADOW:                           { game: oot, id: 0x600, type: one-way-song, areas: ["OOT SONG_TP_FOREST", "OOT Sacred Meadow"] }
-OOT_WARP_SONG_CRATER:                           { game: oot, id: 0x4f6, type: one-way-song, areas: ["OOT SONG_TP_FIRE", "OOT Death Mountain Crater Warp"] }
-OOT_WARP_SONG_LAKE:                             { game: oot, id: 0x604, type: one-way-song, areas: ["OOT SONG_TP_WATER", "OOT Lake Hylia"] }
-OOT_WARP_SONG_GRAVE:                            { game: oot, id: 0x568, type: one-way-song, areas: ["OOT SONG_TP_SHADOW", "OOT Graveyard Upper"] }
-OOT_WARP_SONG_DESERT:                           { game: oot, id: 0x1f1, type: one-way-song, areas: ["OOT SONG_TP_SPIRIT", "OOT Desert Colossus"] }
-OOT_WARP_SONG_TEMPLE:                           { game: oot, id: 0x5f4, type: one-way-song, areas: ["OOT SONG_TP_LIGHT", "OOT Temple of Time"] }
+OOT_WARP_SONG_MEADOW:                           { game: oot, id: 0x600, type: one-way-song, areas: ["OOT SONG_TP_FOREST", "OOT Sacred Meadow"], debug: ['WARP', 'Minuet'] }
+OOT_WARP_SONG_CRATER:                           { game: oot, id: 0x4f6, type: one-way-song, areas: ["OOT SONG_TP_FIRE", "OOT Death Mountain Crater Warp"], debug: ['WARP', 'Bolero'] }
+OOT_WARP_SONG_LAKE:                             { game: oot, id: 0x604, type: one-way-song, areas: ["OOT SONG_TP_WATER", "OOT Lake Hylia"], debug: ['WARP', 'Serenade'] }
+OOT_WARP_SONG_GRAVE:                            { game: oot, id: 0x568, type: one-way-song, areas: ["OOT SONG_TP_SHADOW", "OOT Graveyard Upper"], debug: ['WARP', 'Nocturne'] }
+OOT_WARP_SONG_DESERT:                           { game: oot, id: 0x1f1, type: one-way-song, areas: ["OOT SONG_TP_SPIRIT", "OOT Desert Colossus"], debug: ['WARP', 'Requiem'] }
+OOT_WARP_SONG_TEMPLE:                           { game: oot, id: 0x5f4, type: one-way-song, areas: ["OOT SONG_TP_LIGHT", "OOT Temple of Time"], debug: ['WARP', 'Prelude'] }
 OOT_VILLAGE_OWL:                                { game: oot, id: 0x554, type: one-way-owl, areas: ["OOT Death Mountain Summit", "OOT Kakariko Rooftop"] }
 OOT_FIELD_OWL:                                  { game: oot, id: 0x27e, type: one-way-owl, areas: ["OOT Lake Hylia", "OOT Hyrule Field Drawbridge"] }
 OOT_OUTSIDE_GANON_FROM_FAIRY:                   { game: oot, id: 0xf00, type: indoors-exit, areas: ["OOT Fairy Fountain Defense", "OOT Near Fairy Fountain Defense"], reverse: OOT_FAIRY_DEFENSE }
-MM_BOSS_TEMPLE_WOODFALL:                        { game: mm, id: 0x3800, type: boss, flags: [no-sot], areas: ["MM Woodfall Temple Boss Access", "MM Woodfall Temple Boss"] }
-MM_BOSS_TEMPLE_SNOWHEAD:                        { game: mm, id: 0x8200, type: boss, flags: [no-sot], areas: ["MM Snowhead Temple Boss Access", "MM Snowhead Temple Boss"] }
-MM_BOSS_TEMPLE_GREAT_BAY:                       { game: mm, id: 0xb800, type: boss, flags: [no-sot], areas: ["MM Great Bay Temple Boss Access", "MM Great Bay Temple Boss"] }
-MM_BOSS_TEMPLE_STONE_TOWER:                     { game: mm, id: 0x6600, type: boss, flags: [no-sot], areas: ["MM Stone Tower Temple Boss Access", "MM Stone Tower Temple Boss"] }
-MM_TEMPLE_WOODFALL:                             { game: mm, id: 0x3000, type: dungeon, areas: ["MM Woodfall Front of Temple", "MM Woodfall Temple"], reverse: MM_WOODFALL_FROM_TEMPLE }
+MM_BOSS_TEMPLE_WOODFALL:                        { game: mm, id: 0x3800, type: boss, flags: [no-sot], areas: ["MM Woodfall Temple Boss Access", "MM Woodfall Temple Boss"], debug: ['BOSS', 'Odolwa'] }
+MM_BOSS_TEMPLE_SNOWHEAD:                        { game: mm, id: 0x8200, type: boss, flags: [no-sot], areas: ["MM Snowhead Temple Boss Access", "MM Snowhead Temple Boss"], debug: ['BOSS', 'Goht'] }
+MM_BOSS_TEMPLE_GREAT_BAY:                       { game: mm, id: 0xb800, type: boss, flags: [no-sot], areas: ["MM Great Bay Temple Boss Access", "MM Great Bay Temple Boss"], debug: ['BOSS', 'Gyorg'] }
+MM_BOSS_TEMPLE_STONE_TOWER:                     { game: mm, id: 0x6600, type: boss, flags: [no-sot], areas: ["MM Stone Tower Temple Boss Access", "MM Stone Tower Temple Boss"], debug: ['BOSS', 'Twinmold'] }
+MM_TEMPLE_WOODFALL:                             { game: mm, id: 0x3000, type: dungeon, areas: ["MM Woodfall Front of Temple", "MM Woodfall Temple"], reverse: MM_WOODFALL_FROM_TEMPLE, debug: ['DUNGEON', 'WFT'] }
 MM_WOODFALL_FROM_TEMPLE:                        { game: mm, id: 0x8610, type: dungeon, areas: ["MM Woodfall Temple", "MM Woodfall Front of Temple"], reverse: MM_TEMPLE_WOODFALL }
-MM_TEMPLE_SNOWHEAD:                             { game: mm, id: 0x3c00, type: dungeon, areas: ["MM Snowhead", "MM Snowhead Temple"], reverse: MM_SNOWHEAD_FROM_TEMPLE }
+MM_TEMPLE_SNOWHEAD:                             { game: mm, id: 0x3c00, type: dungeon, areas: ["MM Snowhead", "MM Snowhead Temple"], reverse: MM_SNOWHEAD_FROM_TEMPLE, debug: ['DUNGEON', 'SHT'] }
 MM_SNOWHEAD_FROM_TEMPLE:                        { game: mm, id: 0xb210, type: dungeon, areas: ["MM Snowhead Temple", "MM Snowhead"], reverse: MM_TEMPLE_SNOWHEAD }
-MM_TEMPLE_GREAT_BAY:                            { game: mm, id: 0x8c00, type: dungeon, areas: ["MM Zora Cape Peninsula", "MM Great Bay Temple"], reverse: MM_GREAT_BAY_FROM_TEMPLE }
+MM_TEMPLE_GREAT_BAY:                            { game: mm, id: 0x8c00, type: dungeon, areas: ["MM Zora Cape Peninsula", "MM Great Bay Temple"], reverse: MM_GREAT_BAY_FROM_TEMPLE, debug: ['DUNGEON', 'GBT'] }
 MM_GREAT_BAY_FROM_TEMPLE:                       { game: mm, id: 0x6a70, type: dungeon, areas: ["MM Great Bay Temple", "MM Zora Cape Peninsula"], reverse: MM_TEMPLE_GREAT_BAY }
-MM_TEMPLE_STONE_TOWER_INVERTED:                 { game: mm, id: 0x2a00, type: dungeon, areas: ["MM Stone Tower Top Inverted", "MM Stone Tower Temple Inverted"], reverse: MM_STONE_TOWER_INVERTED_FROM_TEMPLE }
+MM_TEMPLE_STONE_TOWER_INVERTED:                 { game: mm, id: 0x2a00, type: dungeon, areas: ["MM Stone Tower Top Inverted", "MM Stone Tower Temple Inverted"], reverse: MM_STONE_TOWER_INVERTED_FROM_TEMPLE, debug: ['DUNGEON', 'ISTT'] }
 MM_STONE_TOWER_INVERTED_FROM_TEMPLE:            { game: mm, id: 0xac10, type: dungeon, areas: ["MM Stone Tower Temple Inverted", "MM Stone Tower Flipping"], reverse: MM_TEMPLE_STONE_TOWER_INVERTED }
-MM_TEMPLE_STONE_TOWER:                          { game: mm, id: 0x2600, type: dungeon, areas: ["MM Stone Tower Front of Temple", "MM Stone Tower Temple"], reverse: MM_STONE_TOWER_FROM_TEMPLE }
+MM_TEMPLE_STONE_TOWER:                          { game: mm, id: 0x2600, type: dungeon, areas: ["MM Stone Tower Front of Temple", "MM Stone Tower Temple"], reverse: MM_STONE_TOWER_FROM_TEMPLE, debug: ['DUNGEON', 'STT'] }
 MM_STONE_TOWER_FROM_TEMPLE:                     { game: mm, id: 0xaa20, type: dungeon, areas: ["MM Stone Tower Temple", "MM Stone Tower Front of Temple"], reverse: MM_TEMPLE_STONE_TOWER }
-MM_SPIDER_HOUSE_SWAMP:                          { game: mm, id: 0x4800, type: dungeon, areas: ["MM Near Swamp Spider House", "MM Swamp Spider House"], reverse: MM_SWAMP_FROM_SPIDER_HOUSE }
+MM_SPIDER_HOUSE_SWAMP:                          { game: mm, id: 0x4800, type: dungeon, areas: ["MM Near Swamp Spider House", "MM Swamp Spider House"], reverse: MM_SWAMP_FROM_SPIDER_HOUSE, debug: ['DUNGEON', 'SSH'] }
 MM_SWAMP_FROM_SPIDER_HOUSE:                     { game: mm, id: 0x8480, type: dungeon, areas: ["MM Swamp Spider House", "MM Near Swamp Spider House"], reverse: MM_SPIDER_HOUSE_SWAMP }
-MM_SPIDER_HOUSE_OCEAN:                          { game: mm, id: 0x4a00, type: dungeon, areas: ["MM Great Bay Coast", "MM Ocean Spider House"], reverse: MM_GREAT_BAY_FROM_SPIDER_HOUSE }
+MM_SPIDER_HOUSE_OCEAN:                          { game: mm, id: 0x4a00, type: dungeon, areas: ["MM Great Bay Coast", "MM Ocean Spider House"], reverse: MM_GREAT_BAY_FROM_SPIDER_HOUSE, debug: ['DUNGEON', 'OSH'] }
 MM_GREAT_BAY_FROM_SPIDER_HOUSE:                 { game: mm, id: 0x6880, type: dungeon, areas: ["MM Ocean Spider House", "MM Great Bay Coast"], reverse: MM_SPIDER_HOUSE_OCEAN }
-MM_BENEATH_THE_WELL:                            { game: mm, id: 0x9000, type: dungeon, areas: ["MM Ikana Canyon", "MM Beneath The Well Entrance"], reverse: MM_IKANA_CANYON_FROM_WELL }
+MM_BENEATH_THE_WELL:                            { game: mm, id: 0x9000, type: dungeon, areas: ["MM Ikana Canyon", "MM Beneath The Well Entrance"], reverse: MM_IKANA_CANYON_FROM_WELL, debug: ['DUNGEON', 'BtW (F)'] }
 MM_IKANA_CANYON_FROM_WELL:                      { game: mm, id: 0x2050, type: dungeon, areas: ["MM Beneath The Well Entrance", "MM Ikana Canyon"], reverse: MM_BENEATH_THE_WELL }
-MM_IKANA_CASTLE:                                { game: mm, id: 0x3430, type: dungeon, areas: ["MM Ikana Castle Exterior", "MM Ancient Castle of Ikana"], reverse: MM_IKANA_CASTLE_EXTERIOR_FROM_CASTLE }
+MM_IKANA_CASTLE:                                { game: mm, id: 0x3430, type: dungeon, areas: ["MM Ikana Castle Exterior", "MM Ancient Castle of Ikana"], reverse: MM_IKANA_CASTLE_EXTERIOR_FROM_CASTLE, debug: ['DUNGEON', 'ACoI'] }
 MM_IKANA_CASTLE_EXTERIOR_FROM_CASTLE:           { game: mm, id: 0x3420, type: dungeon, areas: ["MM Ancient Castle of Ikana", "MM Ikana Castle Exterior"], reverse: MM_IKANA_CASTLE }
-MM_SECRET_SHRINE:                               { game: mm, id: 0xba00, type: dungeon, areas: ["MM Ikana Valley", "MM Secret Shrine"], reverse: MM_IKANA_VALLEY_FROM_SHRINE }
+MM_SECRET_SHRINE:                               { game: mm, id: 0xba00, type: dungeon, areas: ["MM Ikana Valley", "MM Secret Shrine"], reverse: MM_IKANA_VALLEY_FROM_SHRINE, debug: ['DUNGEON', 'SS'] }
 MM_IKANA_VALLEY_FROM_SHRINE:                    { game: mm, id: 0x20c0, type: dungeon, areas: ["MM Secret Shrine", "MM Ikana Valley"], reverse: MM_SECRET_SHRINE }
-MM_BENEATH_THE_WELL_BACK:                       { game: mm, id: 0x9010, type: dungeon, areas: ["MM Ikana Castle Exterior", "MM Beneath The Well End"], reverse: MM_IKANA_CASTLE_EXTERIOR_FROM_WELL }
+MM_BENEATH_THE_WELL_BACK:                       { game: mm, id: 0x9010, type: dungeon, areas: ["MM Ikana Castle Exterior", "MM Beneath The Well End"], reverse: MM_IKANA_CASTLE_EXTERIOR_FROM_WELL, debug: ['DUNGEON', 'BtW (B)'] }
 MM_IKANA_CASTLE_EXTERIOR_FROM_WELL:             { game: mm, id: 0x3400, type: dungeon, areas: ["MM Beneath The Well End", "MM Ikana Castle Exterior"], reverse: MM_BENEATH_THE_WELL_BACK }
-MM_PIRATE_FORTRESS:                             { game: mm, id: 0x7000, type: dungeon, areas: ["MM Great Bay Coast Fortress", "MM Pirate Fortress"], reverse: MM_GREAT_BAY_FROM_PIRATE_FORTRESS }
+MM_PIRATE_FORTRESS:                             { game: mm, id: 0x7000, type: dungeon, areas: ["MM Great Bay Coast Fortress", "MM Pirate Fortress"], reverse: MM_GREAT_BAY_FROM_PIRATE_FORTRESS, debug: ['DUNGEON', 'PFE'] }
 MM_GREAT_BAY_FROM_PIRATE_FORTRESS:              { game: mm, id: 0x6850, type: dungeon, areas: ["MM Pirate Fortress", "MM Great Bay Coast Fortress"], reverse: MM_PIRATE_FORTRESS }
 MM_CLOCK_TOWER:                                 { game: mm, id: 0x2c00, type: dungeon, areas: ["MM Clock Tower Platform", "MM Clock Tower Roof"], reverse: MM_CLOCK_TOWN_FROM_CLOCK_TOWER }
 MM_CLOCK_TOWN_FROM_CLOCK_TOWER:                 { game: mm, id: 0xd880, type: dungeon, areas: ["MM Clock Tower Roof", "MM Clock Tower Platform"], reverse: MM_CLOCK_TOWER }
@@ -286,16 +286,16 @@ MM_ASTRAL_OBSERVATORY_FROM_FIELD:               { game: mm, id: 0x4c10, type: in
 MM_FIELD_FROM_ASTRAL_OBSERVATORY:               { game: mm, id: 0x5490, type: indoors-exit, areas: ["MM Astral Observatory", "MM Astral Observatory Balcony"], reverse: MM_ASTRAL_OBSERVATORY_FROM_FIELD }
 MM_SWAMP_ARCHERY:                               { game: mm, id: 0x4200, type: indoors, areas: ["MM Road to Southern Swamp", "MM Swamp Archery"], reverse: MM_SWAMP_ROAD_FROM_ARCHERY }
 MM_SWAMP_ROAD_FROM_ARCHERY:                     { game: mm, id: 0x7a20, type: indoors-exit, areas: ["MM Swamp Archery", "MM Road to Southern Swamp"], reverse: MM_SWAMP_ARCHERY }
-MM_WARP_OWL_GREAT_BAY:                          { game: mm, id: 0x68b0, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Great Bay"] }
-MM_WARP_OWL_ZORA_CAPE:                          { game: mm, id: 0x6a60, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Zora Cape"] }
-MM_WARP_OWL_SNOWHEAD:                           { game: mm, id: 0xb230, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Snowhead"] }
-MM_WARP_OWL_MOUNTAIN_VILLAGE:                   { game: mm, id: 0x9a80, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Mountain"] }
-MM_WARP_OWL_CLOCK_TOWN:                         { game: mm, id: 0xd890, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Clock Town"] }
-MM_WARP_OWL_MILK_ROAD:                          { game: mm, id: 0x3e40, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Milk Road"] }
-MM_WARP_OWL_WOODFALL:                           { game: mm, id: 0x8640, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Woodfall"] }
-MM_WARP_OWL_SOUTHERN_SWAMP:                     { game: mm, id: 0x84a0, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Swamp"] }
-MM_WARP_OWL_IKANA_CANYON:                       { game: mm, id: 0x2040, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Ikana"] }
-MM_WARP_OWL_STONE_TOWER:                        { game: mm, id: 0xaa30, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Stone Tower"] }
+MM_WARP_OWL_GREAT_BAY:                          { game: mm, id: 0x68b0, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Great Bay"], debug: ['WARP', 'Great Bay'] }
+MM_WARP_OWL_ZORA_CAPE:                          { game: mm, id: 0x6a60, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Zora Cape"], debug: ['WARP', 'Zora Cape'] }
+MM_WARP_OWL_SNOWHEAD:                           { game: mm, id: 0xb230, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Snowhead"], debug: ['WARP', 'Snowhead'] }
+MM_WARP_OWL_MOUNTAIN_VILLAGE:                   { game: mm, id: 0x9a80, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Mountain"], debug: ['WARP', 'Mountain'] }
+MM_WARP_OWL_CLOCK_TOWN:                         { game: mm, id: 0xd890, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Clock Town"], debug: ['WARP', 'Clock Town'] }
+MM_WARP_OWL_MILK_ROAD:                          { game: mm, id: 0x3e40, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Milk Road"], debug: ['WARP', 'Milk Road'] }
+MM_WARP_OWL_WOODFALL:                           { game: mm, id: 0x8640, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Woodfall"], debug: ['WARP', 'Woodfall'] }
+MM_WARP_OWL_SOUTHERN_SWAMP:                     { game: mm, id: 0x84a0, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Swamp"], debug: ['WARP', 'Swamp'] }
+MM_WARP_OWL_IKANA_CANYON:                       { game: mm, id: 0x2040, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Ikana"], debug: ['WARP', 'Ikana'] }
+MM_WARP_OWL_STONE_TOWER:                        { game: mm, id: 0xaa30, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Stone Tower"], debug: ['WARP', 'Stone Tower'] }
 OOT_WALLMASTER_FOREST_CORRIDOR_WEST:            { game: oot, id: 0xf10, type: wallmaster, areas: ["OOT Forest Temple Wallmaster West", "OOT VOID"] }
 OOT_WALLMASTER_FOREST_CORRIDOR_EAST:            { game: oot, id: 0xf11, type: wallmaster, areas: ["OOT Forest Temple Wallmaster East", "OOT VOID"] }
 OOT_WALLMASTER_SHADOW:                          { game: oot, id: 0xf12, type: wallmaster, areas: ["OOT Shadow Temple Wallmaster", "OOT VOID"] }
@@ -312,4 +312,5 @@ MM_WALLMASTER_DAMPE:                            { game: mm,  id: 0xff00, type: w
 MM_WALLMASTER_BTW_ENTRANCE:                     { game: mm,  id: 0xff01, type: wallmaster, areas: ["MM Beneath The Well Wallmaster Near Entrance", "MM VOID"] }
 MM_WALLMASTER_BTW_FOUNTAIN:                     { game: mm,  id: 0xff02, type: wallmaster, areas: ["MM Beneath The Well Wallmaster Near Fountain", "MM VOID"] }
 MM_WALLMASTER_BTW_EXIT:                         { game: mm,  id: 0xff03, type: wallmaster, areas: ["MM Beneath The Well Wallmaster Near Exit", "MM VOID"] }
-MM_CLOCK_TOWN:                                  { game: mm,  id: 0xd800, type: none }
+MM_CLOCK_TOWN:                                  { game: mm,  id: 0xd800, type: none, debug: ['COMMON', 'Clock Town'] }
+MM_MOON:                                        { game: mm,  id: 0xc800, type: none, debug: ['COMMON', 'Moon'] }

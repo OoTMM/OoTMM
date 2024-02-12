@@ -23,15 +23,10 @@ static int EnWallmas_GetDestEr(Actor* this, GameState_Play* play)
     }
 }
 
-static void EnWallmas_Nop(Actor* this, GameState_Play* play)
+void EnWallmas_TakePlayerEr(GameState_Play* play, Actor* this)
 {
-}
-
-void EnWallmas_TakePlayerEr(Actor* this, GameState_Play* play)
-{
-    int entrance;
-
-    entrance = comboEntranceOverride(EnWallmas_GetDestEr(this, play));
-    comboTransition(play, entrance);
-    SET_HANDLER(this, EnWallmas_Nop);
+    play->nextEntrance = EnWallmas_GetDestEr(this, play);
+    play->transitionTrigger = TRANS_TRIGGER_NORMAL;
+    play->transitionType = TRANS_TYPE_FADE_BLACK;
+    gIsEntranceOverride = 1;
 }

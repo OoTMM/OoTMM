@@ -93,6 +93,32 @@ void malloc_check(void);
 # define malloc_check() do {} while (0)
 #endif
 
+#define CHEAT_HEALTH        0
+#define CHEAT_MAGIC         1
+
+#if defined(DEBUG)
+typedef struct
+{
+    const char* name;
+    u32         data;
+}
+DebugMenuEntry;
+
+void Debug_Init(void);
+void Debug_Input(void);
+void Debug_Update(void);
+
+extern const DebugMenuEntry kDebugMenuWarp[];
+
+# define CHEAT_ON(x) (BITMAP8_GET(gSharedCustomSave.cheats, x))
+
+#else
+# define Debug_Init() do {} while (0)
+# define Debug_Input() do {} while (0)
+# define Debug_Update() do {} while (0)
+# define CHEAT_ON(x) (0)
+#endif
+
 void comboDisableInterrupts(void);
 void comboDma(void* addr, u32 cartAddr, u32 size);
 void comboDma_NoCacheInval(void* addr, u32 cartAddr, u32 size);
@@ -193,6 +219,7 @@ extern u16 gBlastMaskDelayAcc;
 #define SF_NOCOMMIT     0x02
 #define SF_PASSIVE      0x04
 
+void comboReadOwnSave(void);
 void comboReadForeignSave(void);
 void comboWriteSave(void);
 void comboCopyMmSave(int dst, int src);

@@ -10,7 +10,6 @@ LoadRupeeColor:
   or t6,t5
   jr ra
    sw t6,0x4(s1)
-PATCH_END
 
 PATCH_START 0x80075824
   jal LoadRupeeColor

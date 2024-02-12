@@ -155,6 +155,20 @@ static void HandleSoaring(GameState_Play* play)
     }
 }
 
+void ageSwap(GameState_Play* play)
+{
+    /* Age swap */
+    play->linkAgeOnLoad = !gSaveContext.save.age;
+    Play_SetupRespawnPoint(play, 1, 0xDFF);
+    gSaveContext.respawnFlag = 2;
+    play->transitionTrigger = TRANS_TYPE_NORMAL;
+    play->nextEntranceIndex = gSaveContext.save.entrance;
+    play->transitionType = TRANS_GFX_SHORTCUT;
+
+    /* Set the correct farore */
+    swapFarore();
+}
+
 static void HandleSongOfTime(GameState_Play* play)
 {
     int msgState;
@@ -167,16 +181,7 @@ static void HandleSongOfTime(GameState_Play* play)
 
         if (play->msgCtx.choice == 0)
         {
-            /* Age swap */
-            play->linkAgeOnLoad = !gSaveContext.save.age;
-            Play_SetupRespawnPoint(play, 1, 0xDFF);
-            gSaveContext.respawnFlag = 2;
-            play->transitionTrigger = TRANS_TYPE_NORMAL;
-            play->nextEntranceIndex = gSaveContext.save.entrance;
-            play->transitionType = TRANS_GFX_SHORTCUT;
-
-            /* Set the correct farore */
-            swapFarore();
+            ageSwap(play);
         }
         else
         {

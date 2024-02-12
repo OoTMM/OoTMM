@@ -175,7 +175,6 @@ static void sendSelfMajorasMask(void)
 void hookPlay_Init(GameState_Play* play)
 {
     int isEndOfGame;
-    s32 override;
 
     isEndOfGame = 0;
 
@@ -187,27 +186,6 @@ void hookPlay_Init(GameState_Play* play)
     gMultiMarkSwitch1 = 0;
     g.keatonGrassMax = -1;
     comboMultiResetWisps();
-
-    /* Handle transition override */
-    if (g.inGrotto)
-        gIsEntranceOverride = 0;
-    if (gIsEntranceOverride)
-    {
-        gIsEntranceOverride = 0;
-        override = comboEntranceOverride(entranceForOverride(gSave.entranceIndex));
-        if (override != -1)
-        {
-            if (override >= 0)
-                gSave.entranceIndex = override;
-            else
-            {
-                gSave.entranceIndex = gLastEntrance;
-                Play_Init(play);
-                comboGameSwitch(play, override);
-                return;
-            }
-        }
-    }
 
     if (!gCustomKeep)
     {
@@ -222,8 +200,12 @@ void hookPlay_Init(GameState_Play* play)
     if (gSave.entranceIndex == 0xc030)
     {
         /* Moon crash */
-        gSave.entranceIndex = entranceForOverride(g.initialEntrance);
+        comboReadOwnSave();
         comboReadForeignSave();
+        gSave.entranceIndex = entranceForOverride(g.initialEntrance);
+        comboOnSaveLoad();
+        hookPlay_Init(play);
+        return;
     }
 
     if (gSave.entranceIndex == ENTR_MM_CLOCK_TOWN && gLastEntrance == 0x1c00)
@@ -329,8 +311,46 @@ void hookPlay_Init(GameState_Play* play)
 
 void Play_DrawWrapper(GameState_Play* play)
 {
+    Debug_Input();
     malloc_check();
     comboCacheGarbageCollect();
     comboObjectsGC();
     Play_Draw(play);
+    Debug_Update();
+}
+
+NORETURN static void Play_GameSwitch(GameState_Play* play, s32 entrance)
+{
+    comboGameSwitch(play, entrance);
+}
+
+void Play_TransitionDone(GameState_Play* play)
+{
+    s32 override;
+
+    /* Handle transition override */
+    if (g.inGrotto)
+        gIsEntranceOverride = 0;
+    if (gIsEntranceOverride)
+    {
+        gIsEntranceOverride = 0;
+        override = comboEntranceOverride(entranceForOverride(play->nextEntrance));
+        if (override != -1)
+        {
+            if (override >= 0)
+            {
+                play->nextEntrance = override;
+            }
+            else
+            {
+                Play_GameSwitch(play, override);
+            }
+        }
+    }
+
+    if (play->nextEntrance >= 0xf000)
+    {
+        u16 ootEntrance = play->nextEntrance & 0xfff;
+        Play_GameSwitch(play, ootEntrance);
+    }
 }
