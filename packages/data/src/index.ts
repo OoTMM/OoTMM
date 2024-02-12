@@ -19,6 +19,7 @@ export type EntranceData = {
   from: string;
   to: string;
   flags: string[];
+  debug?: any;
 };
 
 export type Entrance = keyof typeof DATA_ENTRANCES;

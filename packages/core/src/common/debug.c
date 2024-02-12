@@ -23,13 +23,6 @@
 static const float kScale = 0.75f;
 static const float kScaleInv = 1.0f / kScale;
 
-typedef struct
-{
-    const char* name;
-    u32         data;
-}
-DebugMenuEntry;
-
 u8 gDebugMenuOpen;
 static s16 sCursor[3];
 static s16 sScroll[3];
@@ -64,64 +57,6 @@ static const Gfx kDlistLoadIA4_8x12[] = {
 static const char* kCheats[] = {
     "Infinite Health",
     "Infinite Magic",
-};
-
-static const DebugMenuEntry kMenuWarpCommon[] = {
-    { "Link's House",   ENTR_OOT_HOUSE_LINK },
-    { "Temple of Time", ENTR_OOT_TEMPLE_OF_TIME },
-    { "Clock Town",     MASK_FOREIGN_ENTRANCE | ENTR_MM_CLOCK_TOWN },
-    { NULL, 0 },
-};
-
-static const DebugMenuEntry kMenuWarpDungeons[] = {
-    { "Deku Tree",              ENTR_OOT_DEKU_TREE },
-    { "Dodongo Cavern",         ENTR_OOT_DODONGO_CAVERN },
-    { "Jabu-Jabu",              ENTR_OOT_JABU_JABU },
-    { "Forest",                 ENTR_OOT_TEMPLE_FOREST },
-    { "Fire",                   ENTR_OOT_TEMPLE_FIRE },
-    { "Water",                  ENTR_OOT_TEMPLE_WATER },
-    { "Shadow",                 ENTR_OOT_TEMPLE_SHADOW },
-    { "Spirit",                 ENTR_OOT_TEMPLE_SPIRIT },
-    { "Ganon",                  ENTR_OOT_GANON_CASTLE },
-    { "Tower",                  ENTR_OOT_GANON_TOWER },
-    { "BotW",                   ENTR_OOT_BOTTOM_OF_THE_WELL },
-    { "Ice Cavern",             ENTR_OOT_ICE_CAVERN },
-    { "GTG",                    ENTR_OOT_GERUDO_TRAINING_GROUNDS },
-    { "Woodfall",               MASK_FOREIGN_ENTRANCE | ENTR_MM_TEMPLE_WOODFALL },
-    { "Snowhead",               MASK_FOREIGN_ENTRANCE | ENTR_MM_TEMPLE_SNOWHEAD },
-    { "Great Bay",              MASK_FOREIGN_ENTRANCE | ENTR_MM_TEMPLE_GREAT_BAY },
-    { "Stone Tower",            MASK_FOREIGN_ENTRANCE | ENTR_MM_TEMPLE_STONE_TOWER },
-    { "Stone Tower Inverted",   MASK_FOREIGN_ENTRANCE | ENTR_MM_TEMPLE_STONE_TOWER_INVERTED },
-    { "SSH",                    MASK_FOREIGN_ENTRANCE | ENTR_MM_SPIDER_HOUSE_SWAMP },
-    { "OSH",                    MASK_FOREIGN_ENTRANCE | ENTR_MM_SPIDER_HOUSE_OCEAN },
-    { "Pirates",                MASK_FOREIGN_ENTRANCE | ENTR_MM_PIRATE_FORTRESS },
-    { "Ikana Castle",           MASK_FOREIGN_ENTRANCE | ENTR_MM_IKANA_CASTLE },
-    { "BtW",                    MASK_FOREIGN_ENTRANCE | ENTR_MM_BENEATH_THE_WELL },
-    { "BtW End",                MASK_FOREIGN_ENTRANCE | ENTR_MM_BENEATH_THE_WELL_BACK },
-    { NULL, 0 },
-};
-
-static const DebugMenuEntry kMenuWarpBoss[] = {
-    { "Gohma",           ENTR_OOT_BOSS_DEKU_TREE },
-    { "King Dodongo",    ENTR_OOT_BOSS_DODONGO_CAVERN },
-    { "Barinade",        ENTR_OOT_BOSS_JABU_JABU },
-    { "Phantom Ganon",   ENTR_OOT_BOSS_TEMPLE_FOREST },
-    { "Volvagia",        ENTR_OOT_BOSS_TEMPLE_FIRE },
-    { "Morpha",          ENTR_OOT_BOSS_TEMPLE_WATER },
-    { "Bongo Bongo",     ENTR_OOT_BOSS_TEMPLE_SHADOW },
-    { "Twinrova",        ENTR_OOT_BOSS_TEMPLE_SPIRIT },
-    { "Odolwa",          MASK_FOREIGN_ENTRANCE | ENTR_MM_BOSS_TEMPLE_WOODFALL },
-    { "Goht",            MASK_FOREIGN_ENTRANCE | ENTR_MM_BOSS_TEMPLE_SNOWHEAD },
-    { "Gyorg",           MASK_FOREIGN_ENTRANCE | ENTR_MM_BOSS_TEMPLE_GREAT_BAY },
-    { "Twinmold",        MASK_FOREIGN_ENTRANCE | ENTR_MM_BOSS_TEMPLE_STONE_TOWER },
-    { NULL, 0 },
-};
-
-static const DebugMenuEntry kMenuWarp[] = {
-    { "Common",     (u32)&kMenuWarpCommon },
-    { "Boss",       (u32)&kMenuWarpBoss },
-    { "Dungeons",   (u32)&kMenuWarpDungeons },
-    { NULL, 0 },
 };
 
 static const DebugMenuEntry kMenuMain[] = {
@@ -321,7 +256,7 @@ static void DebugHandler_Warp(int trigger)
     if (trigger)
         return;
 
-    switch (menu(kMenuWarp, &sCursor[1], &sScroll[1], &data))
+    switch (menu(kDebugMenuWarp, &sCursor[1], &sScroll[1], &data))
     {
     case OPTION_OK:
         sCursor[2] = 0;

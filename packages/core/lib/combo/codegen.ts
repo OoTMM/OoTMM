@@ -8,6 +8,13 @@ import { CONFVARS_VALUES } from './confvars';
 import { PRICE_RANGES } from './logic/price';
 import { CodeGen } from './util/codegen';
 
+const ENTRANCES_DEBUG_CATEGORIES = {
+  COMMON: 'Common',
+  DUNGEON: 'Dungeon',
+  BOSS: 'Boss',
+  WARP: 'Songs/Owls',
+};
+
 const codegenFile = async (data: {[k: string]: number}, prefix: string, filename: string, guard: string) => {
   if (!process.env.BROWSER) {
     const cg = new CodeGen(path.resolve('build', 'include', 'combo', filename), guard);
@@ -120,12 +127,38 @@ async function genDrawGI() {
 }
 
 async function genEntrances() {
+  /* Codegen header */
   const data: {[k: string]: number} = {};
   data['NONE'] = 0xffff;
   for (const [k, v] of Object.entries(ENTRANCES)) {
     data[k] = v.id;
   }
   await codegenFile(data, "ENTR", "entrances.h", "GENERATED_ENTRANCES_H");
+
+  /* Codegen debug data */
+  const debug = new CodeGen(path.resolve('build', 'src', 'common', 'entrances_debug.c'));
+  debug.include('combo.h');
+  debug.raw('');
+  debug.raw('#if defined(DEBUG)');
+  for (const [name, _] of Object.entries(ENTRANCES_DEBUG_CATEGORIES)) {
+    debug.raw(`static const DebugMenuEntry kDebugMenuWarp_${name}[] = {`);
+    for (const [k, v] of Object.entries(ENTRANCES)) {
+      if (v.debug && v.debug[0] === name) {
+        debug.raw(` { "${v.debug[1]}", ENTR_${k} ${v.game === 'mm' ? ' | MASK_FOREIGN_ENTRANCE' : ''} }, `);
+      }
+    }
+    debug.raw('   { NULL, 0 },');
+    debug.raw('};');
+    debug.raw('');
+  }
+  debug.raw(`const DebugMenuEntry kDebugMenuWarp[] = {`);
+  for (const [name, str] of Object.entries(ENTRANCES_DEBUG_CATEGORIES)) {
+    debug.raw(` { "${str}", (u32)kDebugMenuWarp_${name} }, `);
+  }
+  debug.raw('   { NULL, 0 },');
+  debug.raw('};');
+  debug.raw('#endif');
+  await debug.emit();
 }
 
 export const codegen = async (monitor: Monitor) => {
