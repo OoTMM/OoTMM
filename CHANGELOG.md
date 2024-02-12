@@ -34,6 +34,7 @@ All notable changes to this project will be documented in this file.
 - Fix being able to escape boss rooms as fierce deity by abusing OoT warp songs.
 - Fix being able to freeze the MM clock by abusing OoT warp songs.
 - Fix zora diving game rupees not working correctly in coop/multiworld.
+- Fix bombchu bag looking odd in Majora's Mask.
 
 ### Changed
 
