@@ -199,20 +199,9 @@ void hookPlay_Init(GameState_Play* play)
         isEndOfGame = 1;
     }
 
-    if (gSave.entranceIndex == 0xc030)
+    if ((gSave.entranceIndex == ENTR_MM_CLOCK_TOWN && gLastEntrance == 0x1c00) || gSave.entranceIndex == 0xc030)
     {
-        /* Moon crash */
-        comboReadOwnSave();
-        comboReadForeignSave();
-        gSave.entranceIndex = entranceForOverride(g.initialEntrance);
-        comboOnSaveLoad();
-        hookPlay_Init(play);
-        return;
-    }
-
-    if (gSave.entranceIndex == ENTR_MM_CLOCK_TOWN && gLastEntrance == 0x1c00)
-    {
-        /* Song of Time */
+        /* Song of Time / Moon crash */
         gSave.entranceIndex = entranceForOverride(g.initialEntrance);
     }
 

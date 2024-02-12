@@ -195,3 +195,29 @@ void comboSave(GameState_Play* play, int saveFlags)
         comboWriteSave();
     }
 }
+
+void Sram_ResetSaveFromMoonCrash(void)
+{
+    s32 cutscene;
+
+    /* Read save */
+    cutscene = gSave.cutscene;
+    comboReadOwnSave();
+    comboReadForeignSave();
+    gSave.cutscene = cutscene;
+
+    /* Reset flags */
+    for (int i = 0; i < ARRAY_SIZE(gSaveContext.cycleSceneFlags); ++i)
+    {
+        gSaveContext.cycleSceneFlags[i].chest = gSave.permanentSceneFlags[i].chest;
+        gSaveContext.cycleSceneFlags[i].collectible = gSave.permanentSceneFlags[i].collectible;
+        gSaveContext.cycleSceneFlags[i].switch0 = gSave.permanentSceneFlags[i].switch0;
+        gSaveContext.cycleSceneFlags[i].switch1 = gSave.permanentSceneFlags[i].switch1;
+        gSaveContext.cycleSceneFlags[i].clearedRoom = gSave.permanentSceneFlags[i].clearedRoom;
+    }
+
+    /* Trigger save load */
+    comboOnSaveLoad();
+}
+
+PATCH_FUNC(0x80144a94, Sram_ResetSaveFromMoonCrash);
