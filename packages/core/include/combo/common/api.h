@@ -210,7 +210,7 @@ void  ActorFree(void* data);
 void Sram_CopySave(void*, void*);
 
 void Play_Init(GameState_Play*);
-void Play_Draw(GameState_Play*);
+void Play_Update(GameState_Play*);
 
 s32 Player_InCsMode(GameState_Play*);
 void Interface_LoadItemIconImpl(GameState_Play* play, int slot);

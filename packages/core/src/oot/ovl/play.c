@@ -420,12 +420,12 @@ void hookPlay_Init(GameState_Play* play)
 #endif
 }
 
-void Play_DrawWrapper(GameState_Play* play)
+void Play_UpdateWrapper(GameState_Play* play)
 {
     Debug_Input();
     comboCacheGarbageCollect();
     comboObjectsGC();
-    Play_Draw(play);
+    Play_Update(play);
 
     if (gComboCtx.valid)
     {

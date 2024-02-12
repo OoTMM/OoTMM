@@ -197,7 +197,7 @@ Message_ShouldAdvance = 0x80147624;
 Interface_LoadItemIconImpl = 0x80112b40;
 UpdateEquipment = 0x80123c90;
 
-Play_Draw = 0x80168f64;
+Play_Update = 0x80168f64;
 
 Player_Update = 0x80160b80;
 LoadIcon = 0x80178e3c;
