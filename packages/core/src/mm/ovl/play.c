@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/net.h>
 #include <combo/menu.h>
+#include <combo/entrance.h>
 
 GameState_Play* gPlay;
 int gNoTimeFlow;
@@ -328,7 +329,13 @@ NORETURN static void Play_GameSwitch(GameState_Play* play, s32 entrance)
 
 void Play_TransitionDone(GameState_Play* play)
 {
+    u32 entrance;
     s32 override;
+
+    /* Resolve extended entrance */
+    entrance = play->nextEntrance;
+    if (entrance == ENTR_EXTENDED)
+        entrance = g.nextEntrance;
 
     /* Handle transition override */
     if (g.inGrotto)
@@ -336,23 +343,18 @@ void Play_TransitionDone(GameState_Play* play)
     if (gIsEntranceOverride)
     {
         gIsEntranceOverride = 0;
-        override = comboEntranceOverride(entranceForOverride(play->nextEntrance));
+        override = comboEntranceOverride(entranceForOverride(entrance));
         if (override != -1)
-        {
-            if (override >= 0)
-            {
-                play->nextEntrance = override;
-            }
-            else
-            {
-                Play_GameSwitch(play, override);
-            }
-        }
+            entrance = (u32)override;
     }
 
-    if (play->nextEntrance >= 0xf000)
+    /* Check for foreign */
+    if (entrance & MASK_FOREIGN_ENTRANCE)
     {
-        u16 ootEntrance = play->nextEntrance & 0xfff;
-        Play_GameSwitch(play, ootEntrance);
+        Play_GameSwitch(play, entrance & ~MASK_FOREIGN_ENTRANCE);
+    }
+    else
+    {
+        play->nextEntrance = entrance & 0xffff;
     }
 }
