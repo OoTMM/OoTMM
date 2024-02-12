@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add a Moon Crash setting, letting player keep going after a moon crash.
 - Add the ability to auto invert MM Clock Speed either on all cycles or only the first one.
 - Add a way to disable crit wiggle.
 - Add Goron Bracelet/Silver Gauntlets/Golden Gauntlets to Majora's Mask.

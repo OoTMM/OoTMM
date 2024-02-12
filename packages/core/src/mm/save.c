@@ -196,7 +196,7 @@ void comboSave(GameState_Play* play, int saveFlags)
     }
 }
 
-void Sram_ResetSaveFromMoonCrash(void)
+static void MoonCrashReset(void)
 {
     s32 cutscene;
 
@@ -218,6 +218,29 @@ void Sram_ResetSaveFromMoonCrash(void)
 
     /* Trigger save load */
     comboOnSaveLoad();
+}
+
+static void MoonCrashCycle(void)
+{
+    s32 cutscene;
+
+    /* Start a new cycle */
+    cutscene = gSave.cutscene;
+    gSave.playerForm = MM_PLAYER_FORM_HUMAN;
+    gSave.equippedMask = 0;
+    gSave.day = 0;
+    gSave.time = 0x3fff;
+    comboSave(gPlay, SF_NOCOMMIT);
+    Sram_SaveNewDay(gPlay);
+    gSave.cutscene = cutscene;
+}
+
+void Sram_ResetSaveFromMoonCrash(void)
+{
+    if (comboConfig(CFG_MM_MOON_CRASH_CYCLE))
+        MoonCrashCycle();
+    else
+        MoonCrashReset();
 }
 
 PATCH_FUNC(0x80144a94, Sram_ResetSaveFromMoonCrash);
