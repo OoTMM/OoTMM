@@ -149,6 +149,20 @@ static void checkEarlyMoonCrash(GameState_Play* play)
     if (gSharedCustomSave.mm.halfDays >= 6)
         return;
 
+    if (gNoTimeFlow)
+        return;
+
+    switch (play->sceneId)
+    {
+    case SCE_MM_MOON:
+    case SCE_MM_MOON_DEKU:
+    case SCE_MM_MOON_GORON:
+    case SCE_MM_MOON_ZORA:
+    case SCE_MM_MOON_LINK:
+    case SCE_MM_LAIR_MAJORA:
+        return;
+    }
+
     if (gSave.day && gSave.day < 4)
     {
         moonCrashTime(&day, &time);
