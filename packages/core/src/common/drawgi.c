@@ -1323,3 +1323,26 @@ void DrawGi_BottleBlueFire(GameState_Play* play, s16 drawGiId)
 
     CLOSE_DISPS();
 }
+
+void DrawGi_Clock(GameState_Play* play, s16 index)
+{
+    static const float scale = 0.015f;
+    const DrawGi* drawGi;
+
+    drawGi = &kDrawGi[index];
+
+    OPEN_DISPS(play->gs.gfx);
+    ModelViewScale(scale, scale, scale, MAT_MUL);
+    MatrixStackDup();
+    ModelViewRotateZ(M_PI, MAT_MUL);
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
+    gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[1]);
+    MatrixStackPop();
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[2]);
+    ModelViewTranslate(0.f, 1100.f, -50.f, MAT_MUL);
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[3]);
+    CLOSE_DISPS();
+}
