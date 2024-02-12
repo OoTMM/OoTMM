@@ -275,6 +275,11 @@ void comboCreateSave(void* unk, void* buffer)
     if (!comboConfig(CFG_MM_OCARINA_BUTTONS))
         gSharedCustomSave.ocarinaButtonMaskMm = 0xffff;
 
+    if (comboConfig(CFG_MM_CLOCKS))
+        gSharedCustomSave.mm.halfDays = 1;
+    else
+        gSharedCustomSave.mm.halfDays = 6;
+
     gOotSave.childEquips.buttonItems[0] = ITEM_NONE;
     gOotSave.adultEquips.buttonItems[0] = ITEM_NONE;
 

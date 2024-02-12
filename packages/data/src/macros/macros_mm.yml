@@ -1,19 +1,37 @@
 # Time
-"at(x)": "mm_time(at, x)"
-"after(x)": "mm_time(after, x)"
-"before(x)": "mm_time(before, x)"
-"between(a, b)": "mm_time(between, a, b)"
-"is_day1": "before(NIGHT1_PM_06_00)"
-"is_day2": "between(DAY2_AM_06_00, NIGHT2_PM_06_00)"
-"is_day3": "between(DAY3_AM_06_00, NIGHT3_PM_06_00)"
+"clock(x)": "!setting(clocks) || has(CLOCK, x)"
+"clock_day1": "true"
+"clock_night1": "clock(1)"
+"clock_day2": "clock(2)"
+"clock_night2": "clock(3)"
+"clock_day3": "clock(4)"
+"clock_night3": "clock(5)"
+
+"raw_at(x)": "mm_time(at, x)"
+"raw_after(x)": "mm_time(after, x)"
+"raw_before(x)": "mm_time(before, x)"
+"raw_between(a, b)": "mm_time(between, a, b)"
+
+"is_day1": "raw_before(NIGHT1_PM_06_00) && clock_day1"
+"is_night1": "raw_between(NIGHT1_PM_06_00, DAY2_AM_06_00) && clock_night1"
+"is_day2": "raw_between(DAY2_AM_06_00, NIGHT2_PM_06_00) && clock_day2"
+"is_night2": "raw_between(NIGHT2_PM_06_00, DAY3_AM_06_00) && clock_night2"
+"is_day3": "raw_between(DAY3_AM_06_00, NIGHT3_PM_06_00) && clock_day3"
+"is_night3": "raw_after(NIGHT3_PM_06_00) && clock_night3"
+
+"clock_filter": "!setting(clocks) || is_day1 || is_night1 || is_day2 || is_night2 || is_day3 || is_night3"
+
 "is_day": "is_day1 || is_day2 || is_day3"
-"is_night1": "between(NIGHT1_PM_06_00, DAY2_AM_06_00)"
-"is_night2": "between(NIGHT2_PM_06_00, DAY3_AM_06_00)"
-"is_night3": "after(NIGHT3_PM_06_00)"
 "is_night": "is_night1 || is_night2 || is_night3"
-"first_day": "before(DAY2_AM_06_00)"
-"second_day": "between(DAY2_AM_06_00, DAY3_AM_06_00)"
-"final_day": "after(DAY3_AM_06_00)"
+"first_day": "is_day1 || is_night1"
+"second_day": "is_day2 || is_night2"
+"final_day": "is_day3 || is_night3"
+
+"between(a, b)": "raw_between(a, b) && clock_filter"
+"after(a)": "raw_after(a) && clock_filter"
+"before(a)": "raw_before(a) && clock_filter"
+"at(a)": "raw_at(a) && clock_filter"
+
 "midnight": "between(NIGHT1_AM_12_00, DAY2_AM_06_00) || between(NIGHT2_AM_12_00, DAY3_AM_06_00) || after(NIGHT3_AM_12_00)"
 
 # Spells

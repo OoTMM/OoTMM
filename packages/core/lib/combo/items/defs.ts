@@ -698,6 +698,7 @@ const ITEM_IDS = [
   'MM_STRENGTH',
   'OOT_MASK_BLAST',
   'SHARED_MASK_BLAST',
+  'MM_CLOCK',
 ] as const;
 
 export type ItemID = typeof ITEM_IDS[number];

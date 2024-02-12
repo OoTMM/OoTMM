@@ -670,6 +670,11 @@
 - { id: MM_GORON_BRACELET, type: MAJOR, add: [MM_STRENGTH, 1], flags: 0x80, draw: OOT_GORON_BRACELET, object: [oot, 0x0147], name: "the <C1>Goron's Bracelet" }
 - { id: MM_SILVER_GAUNTLETS, type: MAJOR, add: [MM_STRENGTH, 2], flags: 0x80, draw: OOT_GAUNTLETS_SILVER, object: [oot, 0x012d], name: "the <C1>Silver Gauntlets" }
 - { id: MM_GOLDEN_GAUNTLETS, type: MAJOR, add: [MM_STRENGTH, 3], flags: 0x80, draw: OOT_GAUNTLETS_GOLD, object: [oot, 0x012d], name: "the <C1>Golden Gauntlets" }
+- { id: MM_CLOCK2, type: MAJOR, add: [MM_CLOCK, 2], flags: 0xa0, draw: CLOCK, object: GI_CLOCK, name: "a <C1>Clock (Night 1)" }
+- { id: MM_CLOCK3, type: MAJOR, add: [MM_CLOCK, 3], flags: 0xa0, draw: CLOCK, object: GI_CLOCK, name: "a <C1>Clock (Day 2)" }
+- { id: MM_CLOCK4, type: MAJOR, add: [MM_CLOCK, 4], flags: 0xa0, draw: CLOCK, object: GI_CLOCK, name: "a <C1>Clock (Night 2)" }
+- { id: MM_CLOCK5, type: MAJOR, add: [MM_CLOCK, 5], flags: 0xa0, draw: CLOCK, object: GI_CLOCK, name: "a <C1>Clock (Day 3)" }
+- { id: MM_CLOCK6, type: MAJOR, add: [MM_CLOCK, 6], flags: 0xa0, draw: CLOCK, object: GI_CLOCK, name: "a <C1>Clock (Night 3)" }
 - { id: MM_MASK_MAJORA, type: MAJOR, add: [ENDGAME, 1], flags: 0xa0, draw: MASK_MAJORA, object: GI_MASK_MAJORA, name: "<C3>Majora's Mask" }
 - { id: MM_SOLD_OUT, flags: 0xa0, draw: OOT_SOLD_OUT, object: [mm, 0x0113] }
 - { id: NOTHING,  flags: 0xa0, name: "<C0>Nothing" }

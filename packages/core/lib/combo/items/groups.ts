@@ -769,6 +769,7 @@ export const REQUIRED = new Set([
   ...OOT_BOMBCHU,
   ...MM_BOMBCHU,
   ...SHARED_BOMBCHU,
+  Items.MM_CLOCK,
   Items.OOT_BOSS_KEY_GANON,
   Items.OOT_SMALL_KEY_GF,
   Items.OOT_KEY_RING_GF,
