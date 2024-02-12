@@ -36,6 +36,7 @@ ObjectTexturePatch;
 
 static const ObjectTexturePatch kObjectTexturePatches[] = {
     { 0x224b0, 0x35fb0 },
+    { 0x32530, 0x443b0 },
     { 0x32930, 0x447b0 },
     { 0x32d30, 0x44bb0 },
     { 0x33130, 0x44fb0 },
@@ -160,6 +161,8 @@ static const ObjectPatch kObjectPatches[] = {
     { CUSTOM_OBJECT_ID_GI_MEDALLION_SPIRIT, { 0x3b8, 0xe58 } },
     { CUSTOM_OBJECT_ID_GI_MEDALLION_SHADOW, { 0x308, 0xd78 } },
     { CUSTOM_OBJECT_ID_GI_MEDALLION_LIGHT,  { 0x508, 0xf98 } },
+    { CUSTOM_OBJECT_ID_BOMBCHU_BAG,         { 0x6a8, 0x8f0 } },
+    { CUSTOM_OBJECT_ID_GI_MASTER_SWORD,     { 0x11a8, 0x12a8 } }
 #endif
 };
 

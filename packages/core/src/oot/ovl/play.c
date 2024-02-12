@@ -1,6 +1,8 @@
 #include <combo.h>
 #include <combo/souls.h>
 #include <combo/net.h>
+#include <combo/menu.h>
+#include <combo/entrance.h>
 
 extern void* gMmMag;
 GameState_Play* gPlay;
@@ -420,12 +422,13 @@ void hookPlay_Init(GameState_Play* play)
 #endif
 }
 
-void Play_DrawWrapper(GameState_Play* play)
+void Play_UpdateWrapper(GameState_Play* play)
 {
+    comboMenuTick();
     Debug_Input();
     comboCacheGarbageCollect();
     comboObjectsGC();
-    Play_Draw(play);
+    Play_Update(play);
 
     if (gComboCtx.valid)
     {
@@ -478,7 +481,13 @@ NORETURN static void Play_GameSwitch(GameState_Play* play, s32 entrance)
 
 void Play_TransitionDone(GameState_Play* play)
 {
+    u32 entrance;
     s32 override;
+
+    /* Resolve extended entrance */
+    entrance = play->nextEntranceIndex;
+    if (entrance == ENTR_EXTENDED)
+        entrance = g.nextEntrance;
 
     /* Handle transition override */
     if (g.inGrotto)
@@ -486,25 +495,18 @@ void Play_TransitionDone(GameState_Play* play)
     if (gIsEntranceOverride)
     {
         gIsEntranceOverride = 0;
-        override = comboEntranceOverride(entranceForOverride(play->nextEntranceIndex));
+        override = comboEntranceOverride(entranceForOverride(entrance));
         if (override != -1)
-        {
-            if (override >= 0)
-            {
-                play->nextEntranceIndex = override;
-            }
-            else
-            {
-                Play_GameSwitch(play, override);
-            }
-        }
+            entrance = (u32)override;
     }
 
-    u16 entrance = (u16)play->nextEntranceIndex;
-
-    if (entrance >= 0x1000)
+    /* Check for foreign */
+    if (entrance & MASK_FOREIGN_ENTRANCE)
     {
-        u16 mmEntrance = entrance - 0x1000;
-        Play_GameSwitch(play, mmEntrance);
+        Play_GameSwitch(play, entrance & ~MASK_FOREIGN_ENTRANCE);
+    }
+    else
+    {
+        play->nextEntranceIndex = entrance & 0xffff;
     }
 }

@@ -210,7 +210,7 @@ void  ActorFree(void* data);
 void Sram_CopySave(void*, void*);
 
 void Play_Init(GameState_Play*);
-void Play_Draw(GameState_Play*);
+void Play_Update(GameState_Play*);
 
 s32 Player_InCsMode(GameState_Play*);
 void Interface_LoadItemIconImpl(GameState_Play* play, int slot);
@@ -295,6 +295,9 @@ void DrawGi_Spell(GameState_Play*, s16);
 void DrawGi_MoonTear(GameState_Play*, s16);
 void DrawGi_BottleFairy(GameState_Play*, s16);
 void DrawGi_BottleBlueFire(GameState_Play*, s16);
+
+/* GFX */
+Gfx* Gfx_TexScroll(GfxContext* ctx, u32 x, u32 y, s32 width, s32 height);
 
 void SpawnRoomActors(GameState_Play* play, int id);
 

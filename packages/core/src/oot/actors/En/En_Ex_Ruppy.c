@@ -7,7 +7,7 @@ void EnExRuppy_ItemQuery(ComboItemQuery* q, Actor_EnExRuppy* this, GameState_Pla
     memset(q, 0, sizeof(*q));
 
     q->ovType = OV_COLLECTIBLE;
-    q->id = this->colorIdx;
+    q->id = this->colorIdx + 1;
     q->sceneId = play->sceneId;
 
     switch (this->colorIdx)
@@ -31,7 +31,7 @@ void EnExRuppy_ItemQuery(ComboItemQuery* q, Actor_EnExRuppy* this, GameState_Pla
         break;
     }
     q->giRenew = q->gi;
-    if (GetCollectibleFlag(play, this->colorIdx + 1)) {
+    if (GetCollectibleFlag(play, q->id)) {
         q->ovFlags |= OVF_RENEW;
     }
 }

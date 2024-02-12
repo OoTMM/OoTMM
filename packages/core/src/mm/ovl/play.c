@@ -1,5 +1,7 @@
 #include <combo.h>
 #include <combo/net.h>
+#include <combo/menu.h>
+#include <combo/entrance.h>
 
 GameState_Play* gPlay;
 int gNoTimeFlow;
@@ -197,20 +199,9 @@ void hookPlay_Init(GameState_Play* play)
         isEndOfGame = 1;
     }
 
-    if (gSave.entranceIndex == 0xc030)
+    if ((gSave.entranceIndex == ENTR_MM_CLOCK_TOWN && gLastEntrance == 0x1c00) || gSave.entranceIndex == 0xc030)
     {
-        /* Moon crash */
-        comboReadOwnSave();
-        comboReadForeignSave();
-        gSave.entranceIndex = entranceForOverride(g.initialEntrance);
-        comboOnSaveLoad();
-        hookPlay_Init(play);
-        return;
-    }
-
-    if (gSave.entranceIndex == ENTR_MM_CLOCK_TOWN && gLastEntrance == 0x1c00)
-    {
-        /* Song of Time */
+        /* Song of Time / Moon crash */
         gSave.entranceIndex = entranceForOverride(g.initialEntrance);
     }
 
@@ -309,13 +300,14 @@ void hookPlay_Init(GameState_Play* play)
     }
 }
 
-void Play_DrawWrapper(GameState_Play* play)
+void Play_UpdateWrapper(GameState_Play* play)
 {
+    comboMenuTick();
     Debug_Input();
     malloc_check();
     comboCacheGarbageCollect();
     comboObjectsGC();
-    Play_Draw(play);
+    Play_Update(play);
     Debug_Update();
 }
 
@@ -326,7 +318,13 @@ NORETURN static void Play_GameSwitch(GameState_Play* play, s32 entrance)
 
 void Play_TransitionDone(GameState_Play* play)
 {
+    u32 entrance;
     s32 override;
+
+    /* Resolve extended entrance */
+    entrance = play->nextEntrance;
+    if (entrance == ENTR_EXTENDED)
+        entrance = g.nextEntrance;
 
     /* Handle transition override */
     if (g.inGrotto)
@@ -334,23 +332,18 @@ void Play_TransitionDone(GameState_Play* play)
     if (gIsEntranceOverride)
     {
         gIsEntranceOverride = 0;
-        override = comboEntranceOverride(entranceForOverride(play->nextEntrance));
+        override = comboEntranceOverride(entranceForOverride(entrance));
         if (override != -1)
-        {
-            if (override >= 0)
-            {
-                play->nextEntrance = override;
-            }
-            else
-            {
-                Play_GameSwitch(play, override);
-            }
-        }
+            entrance = (u32)override;
     }
 
-    if (play->nextEntrance >= 0xf000)
+    /* Check for foreign */
+    if (entrance & MASK_FOREIGN_ENTRANCE)
     {
-        u16 ootEntrance = play->nextEntrance & 0xfff;
-        Play_GameSwitch(play, ootEntrance);
+        Play_GameSwitch(play, entrance & ~MASK_FOREIGN_ENTRANCE);
+    }
+    else
+    {
+        play->nextEntrance = entrance & 0xffff;
     }
 }
