@@ -199,6 +199,8 @@ UpdateEquipment = 0x80123c90;
 
 Play_Update = 0x80168f64;
 
+Gfx_TexScroll = 0x8012cb4c;
+
 Player_Update = 0x80160b80;
 LoadIcon = 0x80178e3c;
 CmpDma_LoadAllFiles = 0x80178E7C;

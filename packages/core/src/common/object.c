@@ -162,6 +162,7 @@ static const ObjectPatch kObjectPatches[] = {
     { CUSTOM_OBJECT_ID_GI_MEDALLION_SHADOW, { 0x308, 0xd78 } },
     { CUSTOM_OBJECT_ID_GI_MEDALLION_LIGHT,  { 0x508, 0xf98 } },
     { CUSTOM_OBJECT_ID_BOMBCHU_BAG,         { 0x6a8, 0x8f0 } },
+    { CUSTOM_OBJECT_ID_GI_MASTER_SWORD,     { 0x11a8, 0x12a8 } }
 #endif
 };
 

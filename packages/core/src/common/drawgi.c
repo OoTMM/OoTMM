@@ -446,31 +446,16 @@ void DrawGi_SpiritualStones(GameState_Play* play, s16 drawGiId)
 
 void DrawGi_MasterSword(GameState_Play* play, s16 drawGiId)
 {
-    /* TODO: Pre-multiply the matrices */
     static const float scale = 0.07f;
-    static const float kMatrixScale[] = {
-        scale, 0.f, 0.f, 0.f,
-        0.f, scale, 0.f, 0.f,
-        0.f, 0.f, scale, 0.f,
-        0.f, 0.f, 0.f,   1.f,
-    };
-
-    static const float kMatrixRot[] = {
-        -M_SQRT1_2, -M_SQRT1_2, 0.f, 0.f,
-        M_SQRT1_2, -M_SQRT1_2, 0.f, 0.f,
-        0.f, 0.f, 1.f, 0.f,
-        0.f, 0.f, 0.f, 1.f,
-    };
-
     const DrawGi* drawGi;
 
     drawGi = &kDrawGi[drawGiId];
 
     OPEN_DISPS(play->gs.gfx);
+    ModelViewScale(scale, scale, scale, MAT_MUL);
+    ModelViewRotateZ(3.f * M_PI * 0.25f, MAT_MUL);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPMatrix(POLY_OPA_DISP++, pushMatrix(play->gs.gfx, kMatrixRot), G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gSPMatrix(POLY_OPA_DISP++, pushMatrix(play->gs.gfx, kMatrixScale), G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gSPSegment(POLY_OPA_DISP++, 8, kDListEmpty);
+    gSPSegment(POLY_OPA_DISP++, 8, Gfx_TexScroll(play->gs.gfx, 0, -(play->gameplayFrames & 0x7f), 32, 32));
     InitListPolyOpa(play->gs.gfx);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
     CLOSE_DISPS();

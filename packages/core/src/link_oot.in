@@ -48,6 +48,8 @@ RequestDma = 0x80000d28;
 kObjectsTable = 0x800f8ff8;
 Audio_PlayFanfare = 0x800c69a0;
 
+Gfx_TexScroll = 0x8007eb00;
+
 DrawGi_Opa0_Xlu1        = 0x800582c0;
 DrawGi_Opa0_Xlu12       = 0x80058584;
 DrawGi_Opa0             = 0x80058228;

@@ -296,6 +296,9 @@ void DrawGi_MoonTear(GameState_Play*, s16);
 void DrawGi_BottleFairy(GameState_Play*, s16);
 void DrawGi_BottleBlueFire(GameState_Play*, s16);
 
+/* GFX */
+Gfx* Gfx_TexScroll(GfxContext* ctx, u32 x, u32 y, s32 width, s32 height);
+
 void SpawnRoomActors(GameState_Play* play, int id);
 
 extern u8 gPlayedOcarinaSong;
