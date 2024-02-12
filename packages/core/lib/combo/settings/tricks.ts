@@ -112,6 +112,7 @@ export const TRICKS = {
   MM_ISTT_ENTRY_HOVER: "Inverted Stone Tower Temple Death Armos using Hover Boots and Bunny Hood",
   MM_GYORG_POTS_DIVE: "Dive down to the pots in Gyorg's Lair, break the pots with a Blast Mask explosion, and collect the item before it before it lands on the ground.",
   MM_STT_POT_BOMBCHU_DIVE: "Position yourself precisely to launch a Bombchu that breaks the shallow underwater pots, then collect the items with a dive.",
+  OOT_WATER_GOLD_SCALE: "Enter Water Temple with Gold Scale and Longshot",
 };
 
 export type Trick = keyof typeof TRICKS;

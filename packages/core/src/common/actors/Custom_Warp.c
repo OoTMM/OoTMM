@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/dungeon.h>
+#include <combo/entrance.h>
 
 typedef struct
 {
@@ -7,9 +8,33 @@ typedef struct
 }
 Actor_CustomWarp;
 
+static void CustomWarp_Reload(void)
+{
+    Play_SetupRespawnPoint(gPlay, 1, 0xdff);
+    gSaveContext.respawnFlag = 2;
 #if defined(GAME_OOT)
+    comboTransition(gPlay, gSave.entrance);
+#else
+    comboTransition(gPlay, gSave.entranceIndex);
+#endif
+}
+
+#if defined(GAME_OOT)
+
+#define SWITCH_LAKE_HYLIA_WATER 0
+
 static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
 {
+    switch (this->base.variable)
+    {
+    case SWITCH_LAKE_HYLIA_WATER:
+        CustomWarp_Reload();
+        if(BITMAP16_GET(gOotSave.eventsChk, EV_OOT_CHK_LAKE_HYLIA_WATER))
+            BITMAP16_CLEAR(gOotSave.eventsChk, EV_OOT_CHK_LAKE_HYLIA_WATER);
+        else 
+            BITMAP16_SET(gOotSave.eventsChk, EV_OOT_CHK_LAKE_HYLIA_WATER);
+        break;
+    }
 }
 #endif
 
@@ -36,18 +61,14 @@ static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
     case SWITCH_SWAMP_CLEAR:
         MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF);
         if (comboConfig(CFG_MM_CLEAR_OPEN_WF))
-        {
             MM_SET_EVENT_WEEK(EV_MM_WEEK_WOODFALL_TEMPLE_RISE);
-        }
-        play->nextEntrance = 0x0ca0;
+        CustomWarp_Reload();
         break;
     case SWITCH_COAST_CLEAR:
         MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_GB);
         if (comboConfig(CFG_MM_CLEAR_OPEN_GB))
-        {
             MM_SET_EVENT_WEEK(EV_MM_WEEK_GREAT_BAY_TURTLE);
-        }
-        play->nextEntrance = ENTR_MM_GREAT_BAY_COAST_FROM_LABORATORY;
+        CustomWarp_Reload();
         break;
     case SWITCH_OPEN_MOON:
         play->nextEntrance = 0xc800;
@@ -184,6 +205,16 @@ void comboSpawnCustomWarps(GameState_Play* play)
         x = 242.f;
         y = 854.f;
         z = -690.f;
+    }
+#endif
+
+#if defined(GAME_OOT)
+    if (play->sceneId == SCE_OOT_LAKE_HYLIA && gMiscFlags.erWaterBeaten && gSave.age == AGE_ADULT)
+    {
+        variable = SWITCH_LAKE_HYLIA_WATER;
+        x = -850.f;
+        y = -1223.f;
+        z = 6950.f;
     }
 #endif
 

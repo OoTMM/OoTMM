@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add a Wisp to control the water level in Lake Hylia given you've beaten Water Temple.
 - Add a Moon Crash setting, letting player keep going after a moon crash.
 - Add the ability to auto invert MM Clock Speed either on all cycles or only the first one.
 - Add a way to disable crit wiggle.
