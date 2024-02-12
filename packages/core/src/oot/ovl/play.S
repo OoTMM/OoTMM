@@ -5,17 +5,16 @@ PATCH_START 0x800f13e8
   .long hookPlay_Init
 PATCH_END
 
-/* hook Play_Draw */
+/* hook Play_Update */
 PATCH_START 0x8009ac90
-  lui t1,%HI(Play_DrawWrapper)
+  lui t1,%HI(Play_UpdateWrapper)
 PATCH_END
 
 PATCH_START 0x8009ac98
-  addiu t1,%LO(Play_DrawWrapper)
+  addiu t1,%LO(Play_UpdateWrapper)
 PATCH_END
 
 /* Transition hooks */
-
 Play_TransitionDone_Hook:
   sw      zero, 0x0098 (s0)
   HOOK_SAVE

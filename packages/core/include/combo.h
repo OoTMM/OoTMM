@@ -480,6 +480,7 @@ typedef struct
     u8                      actorIndex;
     u8                      sceneSetupId;
     s8                      keatonGrassMax;
+    u32                     nextEntrance;
 }
 ComboGlobal;
 

@@ -90,7 +90,7 @@ typedef struct GameState_Play
     s8              transitionTrigger; /* "fade_direction" */
     s16             unk_11E16;
     s16             bgCoverAlpha;
-    s16             nextEntranceIndex;
+    u16             nextEntranceIndex;
     char            unk_11E1C[0x40];
     s8              shootingGalleryStatus;
     s8              bombchuBowlingStatus; /* "bombchu_game_flag" */

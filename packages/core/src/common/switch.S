@@ -2,7 +2,7 @@
 
 .globl comboGameSwitch2
 comboGameSwitch2:
-  la sp,(gVtxBuffer + 0x20002000)
+  la sp,0xa0800000
   la t0,(comboGameSwitch3 + 0x20000000)
   jr t0
    nop

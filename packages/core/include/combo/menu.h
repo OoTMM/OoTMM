@@ -1,6 +1,8 @@
 #ifndef COMBO_MENU_H
 #define COMBO_MENU_H
 
+#include <PR/gbi.h>
+
 #define MENU_NONE               0
 #define MENU_INFO               1
 #define MENU_SOULS_OOT_ENEMY    2
@@ -13,6 +15,7 @@
 typedef struct GameState_Play GameState_Play;
 
 /* Menu */
+void comboMenuTick(void);
 void comboMenuUpdate(GameState_Play* play);
 void comboMenuDraw(GameState_Play* play);
 void comboMenuNext(void);

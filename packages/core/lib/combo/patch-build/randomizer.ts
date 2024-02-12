@@ -827,6 +827,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MM_CLOCK_SPEED_SUPERFAST: settings.clockSpeed === 'superfast',
     MM_AUTO_INVERT_ALWAYS: settings.autoInvert === 'always',
     MM_AUTO_INVERT_FIRST_CYCLE: settings.autoInvert === 'firstCycle',
+    MM_MOON_CRASH_CYCLE: settings.moonCrash === 'cycle',
   };
 
   for (const v in exprs) {

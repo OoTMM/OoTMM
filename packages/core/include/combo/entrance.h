@@ -3,6 +3,8 @@
 
 #include <combo/types.h>
 
+#define ENTR_EXTENDED 0xfffe
+
 typedef struct GameState_Play GameState_Play;
 
 typedef struct

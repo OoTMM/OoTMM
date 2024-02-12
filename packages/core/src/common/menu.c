@@ -5,6 +5,8 @@
 #include <combo/sr.h>
 #include <combo/souls.h>
 
+#define VTX_COUNT 2048
+
 #if defined(GAME_OOT)
 # define SEG1        0x0a
 # define SEG2        0x0b
@@ -26,6 +28,9 @@
 #define DD_FAIRIES      0x10
 
 #define CK_PTR(addr)    ((const char*)gCustomKeep + (addr))
+
+Vtx* gMenuVtx;
+int  gMenuVtxTTL;
 
 typedef struct
 {
@@ -353,15 +358,14 @@ static void color4(u8* r, u8* g, u8* b, u8* a, u32 color)
     *a = color & 0xff;
 }
 
-Vtx gVtxBuffer[1024 + 512];
 static int gVtxBufferIndex;
 
 static Vtx* vtxAlloc(GameState_Play* play, int count)
 {
     Vtx* v;
 
-    v = gVtxBuffer + gVtxBufferIndex;
-    gVtxBufferIndex = (gVtxBufferIndex + count) % ARRAY_SIZE(gVtxBuffer);
+    v = &gMenuVtx[gVtxBufferIndex];
+    gVtxBufferIndex = (gVtxBufferIndex + count) % VTX_COUNT;
 
     return v;
 }
@@ -945,8 +949,32 @@ static void drawMenuInfo(GameState_Play* play)
     CLOSE_DISPS();
 }
 
+void comboMenuTick(void)
+{
+    if (gMenuVtxTTL)
+    {
+        gMenuVtxTTL--;
+    }
+    else
+    {
+        if (gMenuVtx)
+        {
+            free(gMenuVtx);
+            gMenuVtx = NULL;
+        }
+    }
+}
+
 void comboMenuDraw(GameState_Play* play)
 {
+    if (!gMenuVtx)
+    {
+        gMenuVtx = malloc(sizeof(Vtx) * VTX_COUNT);
+        if (!gMenuVtx)
+            return;
+        gMenuVtxTTL = 3;
+    }
+
     /* Draw the black background */
     OPEN_DISPS(play->gs.gfx);
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0, 0, 0, 255);

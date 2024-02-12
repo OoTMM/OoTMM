@@ -36,7 +36,7 @@ InitDmaManager = 0x80000e6c;
 
 gSaveContext = 0x8011a5d0;
 Play_Init = 0x8009a750;
-Play_Draw = 0x8009cac8;
+Play_Update = 0x8009cac8;
 
 PlayMusic = 0x800c6b54;
 GiveItem = 0x80022bd4;
@@ -47,6 +47,8 @@ DisplayTextBox2 = 0x800dce80;
 RequestDma = 0x80000d28;
 kObjectsTable = 0x800f8ff8;
 Audio_PlayFanfare = 0x800c69a0;
+
+Gfx_TexScroll = 0x8007eb00;
 
 DrawGi_Opa0_Xlu1        = 0x800582c0;
 DrawGi_Opa0_Xlu12       = 0x80058584;
