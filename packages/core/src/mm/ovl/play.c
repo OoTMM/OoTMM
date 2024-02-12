@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/net.h>
+#include <combo/menu.h>
 
 GameState_Play* gPlay;
 int gNoTimeFlow;
@@ -311,6 +312,7 @@ void hookPlay_Init(GameState_Play* play)
 
 void Play_UpdateWrapper(GameState_Play* play)
 {
+    comboMenuTick();
     Debug_Input();
     malloc_check();
     comboCacheGarbageCollect();

@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/souls.h>
 #include <combo/net.h>
+#include <combo/menu.h>
 
 extern void* gMmMag;
 GameState_Play* gPlay;
@@ -422,6 +423,7 @@ void hookPlay_Init(GameState_Play* play)
 
 void Play_UpdateWrapper(GameState_Play* play)
 {
+    comboMenuTick();
     Debug_Input();
     comboCacheGarbageCollect();
     comboObjectsGC();
