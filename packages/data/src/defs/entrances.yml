@@ -34,17 +34,17 @@ OOT_GANON_TOWER:                                { game: oot, id: 0x41b, type: du
 OOT_GANON_CASTLE_FROM_TOWER:                    { game: oot, id: 0x534, type: dungeon, areas: ["OOT Ganon Castle Tower", "OOT Ganon Castle Stairs"], reverse: OOT_GANON_TOWER }
 OOT_LOST_WOODS_BRIDGE_FROM_FIELD:               { game: oot, id: 0x4de, type: region, areas: ["OOT Hyrule Field", "OOT Lost Woods Bridge"], reverse: OOT_FIELD_FROM_LOST_WOODS_BRIDGE }
 OOT_FIELD_FROM_LOST_WOODS_BRIDGE:               { game: oot, id: 0x185, type: overworld, areas: ["OOT Lost Woods Bridge", "OOT Hyrule Field"], reverse: OOT_LOST_WOODS_BRIDGE_FROM_FIELD }
-OOT_ZORA_RIVER_FROM_FIELD:                      { game: oot, id: 0x0ea, type: region, areas: ["OOT Hyrule Field", "OOT Zora River Front"], reverse: OOT_FIELD_FROM_ZORA_RIVER }
+OOT_ZORA_RIVER_FROM_FIELD:                      { game: oot, id: 0x0ea, type: region, areas: ["OOT Hyrule Field", "OOT Zora River Front"], reverse: OOT_FIELD_FROM_ZORA_RIVER, debug: ['REGION', 'Zora River'] }
 OOT_FIELD_FROM_ZORA_RIVER:                      { game: oot, id: 0x181, type: overworld, areas: ["OOT Zora River Front", "OOT Hyrule Field"], reverse: OOT_ZORA_RIVER_FROM_FIELD }
-OOT_KAKARIKO_FROM_FIELD:                        { game: oot, id: 0x0db, type: region, areas: ["OOT Hyrule Field", "OOT Kakariko"], reverse: OOT_FIELD_FROM_KAKARIKO }
+OOT_KAKARIKO_FROM_FIELD:                        { game: oot, id: 0x0db, type: region, areas: ["OOT Hyrule Field", "OOT Kakariko"], reverse: OOT_FIELD_FROM_KAKARIKO, debug: ['REGION', 'Kakariko'] }
 OOT_FIELD_FROM_KAKARIKO:                        { game: oot, id: 0x17d, type: overworld, areas: ["OOT Kakariko", "OOT Hyrule Field"], reverse: OOT_KAKARIKO_FROM_FIELD }
-OOT_LON_LON_RANCH_FROM_FIELD:                   { game: oot, id: 0x157, type: region, areas: ["OOT Hyrule Field", "OOT Lon Lon Ranch"], reverse: OOT_FIELD_FROM_LON_LON_RANCH }
+OOT_LON_LON_RANCH_FROM_FIELD:                   { game: oot, id: 0x157, type: region, areas: ["OOT Hyrule Field", "OOT Lon Lon Ranch"], reverse: OOT_FIELD_FROM_LON_LON_RANCH, debug: ['REGION', 'Lon Lon Ranch'] }
 OOT_FIELD_FROM_LON_LON_RANCH:                   { game: oot, id: 0x1f9, type: overworld, areas: ["OOT Lon Lon Ranch", "OOT Hyrule Field"], reverse: OOT_LON_LON_RANCH_FROM_FIELD }
-OOT_LAKE_HYLIA_FROM_FIELD:                      { game: oot, id: 0x102, type: region, areas: ["OOT Hyrule Field", "OOT Lake Hylia"], reverse: OOT_FIELD_FROM_LAKE_HYLIA }
+OOT_LAKE_HYLIA_FROM_FIELD:                      { game: oot, id: 0x102, type: region, areas: ["OOT Hyrule Field", "OOT Lake Hylia"], reverse: OOT_FIELD_FROM_LAKE_HYLIA, debug: ['REGION', 'Lake Hylia'] }
 OOT_FIELD_FROM_LAKE_HYLIA:                      { game: oot, id: 0x189, type: overworld, areas: ["OOT Lake Hylia", "OOT Hyrule Field"], reverse: OOT_LAKE_HYLIA_FROM_FIELD }
-OOT_GERUDO_FORTRESS_FROM_VALLEY:                { game: oot, id: 0x129, type: region, areas: ["OOT Gerudo Valley After Bridge", "OOT Gerudo Fortress Exterior"], reverse: OOT_VALLEY_FROM_GERUDO_FORTRESS }
+OOT_GERUDO_FORTRESS_FROM_VALLEY:                { game: oot, id: 0x129, type: region, areas: ["OOT Gerudo Valley After Bridge", "OOT Gerudo Fortress Exterior"], reverse: OOT_VALLEY_FROM_GERUDO_FORTRESS, debug: ['REGION', 'Gerudo Fortress'] }
 OOT_VALLEY_FROM_GERUDO_FORTRESS:                { game: oot, id: 0x22d, type: overworld, areas: ["OOT Gerudo Fortress Exterior", "OOT Gerudo Valley After Bridge"], reverse: OOT_GERUDO_FORTRESS_FROM_VALLEY }
-OOT_DEATH_MOUNTAIN_FROM_KAKARIKO:               { game: oot, id: 0x13d, type: region, areas: ["OOT Kakariko Trail Start", "OOT Death Mountain"], reverse: OOT_KAKARIKO_FROM_DEATH_MOUNTAIN }
+OOT_DEATH_MOUNTAIN_FROM_KAKARIKO:               { game: oot, id: 0x13d, type: region, areas: ["OOT Kakariko Trail Start", "OOT Death Mountain"], reverse: OOT_KAKARIKO_FROM_DEATH_MOUNTAIN, debug: ['REGION', 'Death Mountain Trail'] }
 OOT_KAKARIKO_FROM_DEATH_MOUNTAIN:               { game: oot, id: 0x191, type: overworld, areas: ["OOT Death Mountain", "OOT Kakariko Trail Start"], reverse: OOT_DEATH_MOUNTAIN_FROM_KAKARIKO }
 OOT_GERUDO_VALLEY_FROM_FIELD:                   { game: oot, id: 0x117, type: region, areas: ["OOT Hyrule Field", "OOT Gerudo Valley"], reverse: OOT_FIELD_FROM_GERUDO_VALLEY }
 OOT_FIELD_FROM_GERUDO_VALLEY:                   { game: oot, id: 0x18d, type: overworld, areas: ["OOT Gerudo Valley", "OOT Hyrule Field"], reverse: OOT_GERUDO_VALLEY_FROM_FIELD }
