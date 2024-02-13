@@ -85,7 +85,7 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   MM_MASK_POSTMAN: "Postman's Hat",
   MM_MASK_ROMANI: "Romani's Mask",
   MM_MASK_SCENTS: "Mask of Scents",
-  MM_MASK_STONE: "Stone Mask",
+  MM_MASK_STONE: "Stone Mask (MM)",
   MM_MASK_TROUPE_LEADER: "Circus Leader's Mask",
   MM_MASK_TRUTH: "Mask of Truth (MM)",
   MM_MASK_ZORA: "Zora Mask (MM)",
