@@ -25,6 +25,7 @@ export const MASKS_REGULAR = new Set([
   Items.SHARED_MASK_BUNNY,
   Items.SHARED_MASK_KEATON,
   Items.SHARED_MASK_BLAST,
+  Items.SHARED_MASK_STONE,
 ]);
 
 export const MASKS_TRANSFORM = new Set([
