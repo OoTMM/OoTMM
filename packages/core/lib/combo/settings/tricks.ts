@@ -50,6 +50,7 @@ export const TRICKS = {
   OOT_GANON_FAIRY_TT: "Ganon's Great Fairy with Age Swap and without Gold Gauntlets",
   OOT_GANON_CASTLE_ENTRY: "Enter Ganon's Castle with Longshot Anywhere",
   OOT_SHADOW_TEMPLE_STICKS: "Enter Shadow Temple with Sticks & Fire Arrows",
+  OOT_WATER_GOLD_SCALE: "Placeholder text to check if PR passes tests on GitHub - SciNerd",
   MM_LENS: "Fewer Lens Requirements (MM)",
   MM_TUNICS: "Fewer Tunic Requirements (MM)",
   MM_PALACE_BEAN_SKIP: "Skip Planting Beans in Deku Palace",
