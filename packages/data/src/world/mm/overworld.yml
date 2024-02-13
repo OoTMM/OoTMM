@@ -574,7 +574,7 @@
     "Clock Town East": "true"
     "Clock Town West": "true"
     "Road to Southern Swamp": "true"
-    "Behind Large Icicles": "has_arrows || (has_hot_water_distance_spring && has(OWL_CLOCK_TOWN)) || has_hot_water_farore || has_hot_water_er_spring || short_hook_anywhere || can_use_din || (climb_anywhere && trick(MM_CLIMB_PAST_TF_ICICLES))" #added climb anywhere
+    "Behind Large Icicles": "has_arrows || (has_hot_water_distance_spring && has(OWL_CLOCK_TOWN)) || has_hot_water_farore || has_hot_water_er_spring || short_hook_anywhere || can_use_din"
     "Milk Road": "true"
     "Great Bay Fence": "can_play_epona || (can_goron_bomb_jump && has_bombs) || short_hook_anywhere || climb_anywhere" #added climb anywhere
     "Road to Ikana Front": "true"
@@ -1616,8 +1616,7 @@
 "Behind Large Icicles":
   region: TERMINA_FIELD
   exits:
-    "Termina Field": "has_arrows || (has_hot_water_distance_spring && has(OWL_MOUNTAIN_VILLAGE)) || has_hot_water_farore || has_hot_water_mtn_spring || has_hot_water_er_spring || short_hook_anywhere || can_use_din || (climb_anywhere && trick(MM_CLIMB_PAST_TF_ICICLES))" #added climb anywhere
-    "Milk Road": "true""
+    "Termina Field": "has_arrows || (has_hot_water_distance_spring && has(OWL_MOUNTAIN_VILLAGE)) || has_hot_water_farore || has_hot_water_mtn_spring || has_hot_water_er_spring || short_hook_anywhere || can_use_din"
     "Mountain Village Path Lower": "true"
 "Mountain Village Path Lower":
   region: PATH_TO_MOUNTAIN_VILLAGE
