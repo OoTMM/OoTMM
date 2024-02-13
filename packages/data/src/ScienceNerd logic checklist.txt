@@ -1,9 +1,0 @@
-Note to self: delete this file before making PR for full review
-
-Climb Anywhere First Pass Logic done for the following:
-	overworld - Swamp and Stone Tower will need more work before moving to second pass
-	woodfall_temple
-	
-The following areas need to be checked in-game still:
-	some checks in woodfall_temple
-	beneath_the_well - confirm no applicable climb anywhere logic needed
