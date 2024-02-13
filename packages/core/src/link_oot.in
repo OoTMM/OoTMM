@@ -17,6 +17,7 @@ DMARomToRam = 0x8000085c;
 DrawLink = 0x80079f48;
 
 Actor_ProcessInitChain = 0x80063f7c;
+Actor_Angle = 0x800213b4;
 
 GetRoomClearFlag = 0x80020640;
 
@@ -49,6 +50,9 @@ kObjectsTable = 0x800f8ff8;
 Audio_PlayFanfare = 0x800c69a0;
 
 Gfx_TexScroll = 0x8007eb00;
+
+Actor_WorldDistXZToActor = 0x800214fc;
+Actor_HeightDiff = 0x800215ec;
 
 DrawGi_Opa0_Xlu1        = 0x800582c0;
 DrawGi_Opa0_Xlu12       = 0x80058584;

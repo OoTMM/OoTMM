@@ -15,22 +15,6 @@ void EnGe1_AfterCaught(void)
     gPlay->nextEntranceIndex = entrance;
 }
 
-static void EnGe1_SetCaughtWrapper(Actor* this, GameState_Play* play)
-{
-    ActorFunc EnGe1_SetCaught;
-
-    if (GET_LINK(play)->mask == PLAYER_MASK_STONE)
-        return;
-
-    EnGe1_SetCaught = actorAddr(AC_EN_GE1, 0x80a8f670);
-    EnGe1_SetCaught(this, play);
-}
-
-PATCH_CALL(0x80a8f730, EnGe1_SetCaughtWrapper);
-PATCH_CALL(0x80a8f754, EnGe1_SetCaughtWrapper);
-PATCH_CALL(0x80a8f8c0, EnGe1_SetCaughtWrapper);
-PATCH_CALL(0x80a8f8e4, EnGe1_SetCaughtWrapper);
-
 int EnGe1_IsPeaceful(void)
 {
     return gSave.inventory.quest.gerudoCard;

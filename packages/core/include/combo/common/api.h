@@ -63,6 +63,10 @@ typedef struct GameState_Play GameState_Play;
 typedef struct ActorContext ActorContext;
 typedef struct Actor Actor;
 
+float Actor_WorldDistXZToActor(Actor* a, Actor* b);
+float Actor_HeightDiff(Actor* a, Actor* b);
+u16   Actor_Angle(Actor* a, Actor* b);
+
 int    LoadFile(void* dst, u32 vromAddr, u32 size);
 
 Actor*  SpawnActor(ActorContext* actorCtx, GameState_Play* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable);
