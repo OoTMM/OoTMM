@@ -1263,6 +1263,13 @@ export const SETTINGS = [{
   description: "Add the Blast Mask in Ocarina of Time.",
   default: false
 }, {
+  key: 'stoneMaskOot',
+  name: "Stone Mask (OoT)",
+  category: 'items.extensions',
+  type: 'boolean',
+  description: "Add the Stone Mask in Ocarina of Time.",
+  default: false
+}, {
   key: 'ocarinaButtonsShuffleOot',
   name: 'Ocarina Buttons Shuffle (OoT)',
   category: 'items.extensions',
@@ -1501,6 +1508,13 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false,
   cond: (s: any) => s.blastMaskOot,
+}, {
+  key: 'sharedMaskStone',
+  name: 'Shared Stone Mask',
+  category: 'items.shared',
+  type: 'boolean',
+  default: false,
+  cond: (s: any) => s.stoneMaskOot,
 }, {
   key: 'sharedWallets',
   name: 'Shared Wallets',

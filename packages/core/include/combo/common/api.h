@@ -28,6 +28,7 @@
 # define PLAYER_MASK_GERUDO             0x07
 # define PLAYER_MASK_TRUTH              0x08
 # define PLAYER_MASK_BLAST              0x09
+# define PLAYER_MASK_STONE              0x0a
 #endif
 
 #if defined(GAME_MM)
