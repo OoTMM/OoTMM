@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add Stone Mask to Ocarina of Time.
 - Add an Open Zora's Domain Shortcut setting, removing the ice block leading to Zora's Domain from Lake Hylia-
 - Add a Wisp to control the water level in Lake Hylia given you've beaten Water Temple.
 - Add the ability to shuffle clocks representing Majora's Mask days.
