@@ -728,6 +728,13 @@ export const SETTINGS = [{
   ],
   default: 'closed'
 }, {
+  key: 'openZdShortcut',
+  name: 'Open Zora\'s Domain Shortcut',
+  category: 'main.events',
+  type: 'boolean',
+  description: 'Removes the ice blocking Zora\'s Domain in Lake Hylia as adult',
+  default: false
+}, {
   key: 'zoraKing',
   name: 'King Zora',
   category: 'main.events',
@@ -1303,6 +1310,13 @@ export const SETTINGS = [{
   category: 'items.extensions',
   type: 'boolean',
   description: 'Add NPC souls into the item pool. NPCs won\'t spawn unless their soul is obtained.',
+  default: false
+}, {
+  key: 'clocks',
+  name: 'Clocks as Items',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Add items representing every Majora\'s Mask half day into the pool. The moon will crash early unless you collect these items.',
   default: false
 }, {
   key: 'lenientSpikes',

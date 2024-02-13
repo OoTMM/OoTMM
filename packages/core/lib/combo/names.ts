@@ -698,6 +698,7 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   MM_STRENGTH: "Progressive Strength (MM)",
   OOT_MASK_BLAST: "Blast Mask (OoT)",
   SHARED_MASK_BLAST: "Blast Mask",
+  MM_CLOCK: "Progressive Clock",
 };
 
 export function itemName(item: string) {

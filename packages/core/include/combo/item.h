@@ -100,7 +100,8 @@
 #define IA_MM_FAIRY_BIG         0x5c
 #define IA_MM_SCALE             0x5d
 #define IA_MM_STRENGTH          0x5e
-#define IA_ENDGAME              0x5f
+#define IA_MM_CLOCK             0x5f
+#define IA_ENDGAME              0x60
 #define IA_NONE                 0xff
 
 #define ITT_NONE        0x00

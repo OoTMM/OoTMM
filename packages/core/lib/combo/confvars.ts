@@ -153,6 +153,8 @@ export const CONFVARS = [
   'MM_AUTO_INVERT_ALWAYS',
   'MM_AUTO_INVERT_FIRST_CYCLE',
   'MM_MOON_CRASH_CYCLE',
+  'OOT_OPEN_ZD_SHORTCUT',
+  'MM_CLOCKS',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

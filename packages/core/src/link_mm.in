@@ -186,6 +186,8 @@ ClearSwitchFlag = 0x800b5c34;
 GetItemCollectBehavior = 0x801143cc;
 RemoveItem = 0x801149a0;
 
+Interface_StartMoonCrash = 0x8011c808;
+
 Sram_SaveEndOfCycle = 0x80143b0c;
 Sram_SaveNewDay = 0x80146f5c;
 

@@ -13,6 +13,7 @@ void comboDungeonSetFlags(int dungeonId, int mmCycle)
         break;
     case DUNGEONID_TEMPLE_WATER:
         BITMAP16_SET(gOotSave.eventsChk, EV_OOT_CHK_LAKE_HYLIA_WATER);
+        gMiscFlags.erWaterBeaten = 1;
         break;
     case DUNGEONID_TEMPLE_WOODFALL:
         gMmExtraBoss.boss |= (1 << 0);

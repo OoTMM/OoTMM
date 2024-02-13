@@ -400,6 +400,7 @@ void hookPlay_Init(GameState_Play* play)
 
     /* Spawn Custom Triggers */
     CustomTriggers_Spawn(play);
+    comboSpawnCustomWarps(play);
 
     /* Title screen transition skip */
     if (gComboCtx.valid)

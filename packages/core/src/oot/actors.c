@@ -261,8 +261,12 @@ Actor* comboSpawnActor(ActorContext* actorCtx, GameState_Play *play, short actor
     }
 
     if (comboConfig(CFG_OOT_OPEN_MASK_SHOP) && play->sceneId == SCE_OOT_MARKET_CHILD_NIGHT && actorId == AC_EN_DOOR)
-        if(((variable >> 7 & 7) == 0x5) && ((variable & 0x3f) == 0x10)) 
+        if (((variable >> 7 & 7) == 0x5) && ((variable & 0x3f) == 0x10)) 
             variable = 0x1bf;
+
+    if (comboConfig(CFG_OOT_OPEN_ZD_SHORTCUT) && actorId == AC_BG_SPOT06_OBJECTS && play->sceneId == SCE_OOT_LAKE_HYLIA)
+        if (((variable >> 8) & 0xff) == 3)
+            return NULL;
 
     sActorIdToSpawn = actorId;
     actor = SpawnActor(actorCtx, play, actorId, x, y, z, rx, ry, rz, variable);

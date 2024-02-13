@@ -1598,9 +1598,9 @@
   exits:
     "Hyrule Field": "true"
     "Hyrule Field Drawbridge": "is_child"
-    "Zora Domain": "is_child && (can_dive_small || longshot_anywhere || (trick(OOT_LAKE_SHORTCUT) && hookshot_anywhere))"
+    "Zora Domain": "(is_child && (can_dive_small || longshot_anywhere || (trick(OOT_LAKE_SHORTCUT) && hookshot_anywhere))) || (is_adult && setting(openZdShortcut))"
     "Laboratory": "true"
-    "Water Temple": "has_iron_boots && has_tunic_zora && can_hookshot"
+    "Water Temple": "(has_iron_boots && has_tunic_zora && can_hookshot) || (trick(OOT_WATER_GOLD_SCALE) && is_adult && can_longshot && has_scale_raw(2))"
     "Fishing Pond": "is_child || event(WATER_TEMPLE_CLEARED) || (is_adult && scarecrow_hookshot) || can_ride_bean(BEAN_LAKE_HYLIA) || hookshot_anywhere || climb_anywhere || time_travel_at_will"
     "Lake Hylia Grotto": "true"
   events:

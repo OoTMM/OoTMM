@@ -15,5 +15,5 @@ Replaces:
 PATCH_START 0x80b3c498
   jal       Player_HasStrength
    addiu    a0, zero, 0x0003
-  beqzl     v0, .+0x4c
+  beqzl     v0, .+0x1c
 PATCH_END
