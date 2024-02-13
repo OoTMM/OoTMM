@@ -116,6 +116,7 @@ export const TRICKS = {
   MM_MR_BOULDER_SKIP_CLIMB: "Climb along the wall in Milk Road to get past the boulder on Day 1 without Powder Keg", //placeholder name/description feel free to change if needed -SciNrd
   MM_GBC_GREAT_FAIRY_CLIMB: "Climb up to the ledge where the Fairy Fountain entrance is and climb above the entrance to drop in past the boulders. Have to drop from the wall to work", //see above comment -SciNrd
   MM_ST_CLIMB_ANYWHERE: "Climb Stone Tower anywhere", //Trick to climb the walls of stone tower -SciNrd
+  MM_PRECISE_CLIMBING: "Climb anywhere with great precision", //precise climb anywhere trick
 };
 
 export type Trick = keyof typeof TRICKS;

@@ -241,3 +241,4 @@
 "hookshot_anywhere": "can_hookshot && setting(hookshotAnywhereMm)"
 "climb_anywhere": "setting(climbMostSurfacesMm)"
 "st_climb_anywhere_trick": "climb_anywhere && (trick(MM_ST_CLIMB_ANYWHERE))"
+"precise_climbing": "climb_anywhere && (trick(MM_PRECISE_CLIMBING))"
