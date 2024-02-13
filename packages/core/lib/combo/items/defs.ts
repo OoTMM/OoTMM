@@ -698,6 +698,8 @@ const ITEM_IDS = [
   'MM_STRENGTH',
   'OOT_MASK_BLAST',
   'SHARED_MASK_BLAST',
+  'OOT_MASK_STONE',
+  'SHARED_MASK_STONE',
   'MM_CLOCK',
 ] as const;
 

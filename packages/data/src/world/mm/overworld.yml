@@ -2869,7 +2869,7 @@
     "Ikana Valley": "true"
     "Ikana Fairy Fountain": "true"
     "Ikana Spring Water Cave": "true"
-    "Music Box House": "event(IKANA_CURSE_LIFTED) && (has_explosives || has(MASK_STONE))"
+    "Music Box House": "event(IKANA_CURSE_LIFTED) && (has_explosives || has_mask_stone)"
     "Ghost Hut": "true"
     "Beneath The Well Entrance": "true"
     "Ikana Castle Entrance": "true"

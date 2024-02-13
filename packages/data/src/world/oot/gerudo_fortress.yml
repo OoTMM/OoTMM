@@ -68,13 +68,13 @@
   exits:
     "Gerudo Fortress Lower-Right Ledge": "true"
     "Gerudo Fortress Kitchen Tunnel End": "true"
-    "Gerudo Fortress Kitchen Bottom": "can_use_bow || can_hookshot || has(GERUDO_CARD)"
+    "Gerudo Fortress Kitchen Bottom": "evade_gerudo"
 "Gerudo Fortress Kitchen Bottom":
   dungeon: GF
   exits:
-    "Gerudo Fortress Kitchen Tunnel Mid": "can_use_bow || can_hookshot || has(GERUDO_CARD)"
-    "Gerudo Fortress Kitchen Ledge Near Tunnel": "can_use_bow || can_hookshot || has(GERUDO_CARD)"
-    "Gerudo Fortress Kitchen Ledge Away from Tunnel": "can_use_bow || can_hookshot || has(GERUDO_CARD)"
+    "Gerudo Fortress Kitchen Tunnel Mid": "evade_gerudo"
+    "Gerudo Fortress Kitchen Ledge Near Tunnel": "evade_gerudo"
+    "Gerudo Fortress Kitchen Ledge Away from Tunnel": "evade_gerudo"
   locations:
     "Gerudo Fortress Pot Kitchen 1": "true"
     "Gerudo Fortress Pot Kitchen 2": "true"
@@ -83,13 +83,13 @@
   dungeon: GF
   exits:
     "Gerudo Fortress Lower-Center Ledge": "true"
-    "Gerudo Fortress Kitchen Bottom": "can_use_bow || can_hookshot || has(GERUDO_CARD)"
+    "Gerudo Fortress Kitchen Bottom": "evade_gerudo"
     "Gerudo Fortress Kitchen Ledge Away from Tunnel": "can_hookshot || has_hover_boots || climb_anywhere"
 "Gerudo Fortress Kitchen Ledge Away from Tunnel":
   dungeon: GF
   exits:
     "Gerudo Fortress Upper-Center Ledge": "true"
-    "Gerudo Fortress Kitchen Bottom": "can_use_bow || can_hookshot || has(GERUDO_CARD)"
+    "Gerudo Fortress Kitchen Bottom": "evade_gerudo"
     "Gerudo Fortress Kitchen Ledge Near Tunnel": "can_hookshot || has_hover_boots || climb_anywhere"
 "Gerudo Fortress Carpenter 3":
   dungeon: GF
@@ -108,7 +108,7 @@
     "Gerudo Fortress Lower-Left Ledge": "true"
     "Gerudo Fortress Break Room Top": "can_hookshot || climb_anywhere"
   events:
-    MAGIC: "can_use_bow || can_hookshot || has(GERUDO_CARD)"
+    MAGIC: "evade_gerudo"
     ARROWS: "is_adult && (has(GERUDO_CARD) || can_hookshot)"
     SEEDS: "is_child && has(GERUDO_CARD)"
   locations:

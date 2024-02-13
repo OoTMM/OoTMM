@@ -48,7 +48,10 @@ void comboItemIcon(void* dst, int itemId)
     switch (itemId)
     {
     case ITEM_OOT_MASK_BLAST:
-        LoadMmItemIcon(dst, 0x47);
+        LoadMmItemIcon(dst, ITEM_MM_MASK_BLAST);
+        break;
+    case ITEM_OOT_MASK_STONE:
+        LoadMmItemIcon(dst, ITEM_MM_MASK_STONE);
         break;
     default:
         LoadFile(dst, 0x7bd000 + itemId * 0x1000, 0x1000);
@@ -71,7 +74,7 @@ static void LoadCustomItemIconSlot(GameState_Play* play, int slot)
         link = GET_LINK(play);
         switch (link->mask)
         {
-        case 9:
+        case PLAYER_MASK_BLAST:
             comboItemIcon(dst, ITEM_OOT_MASK_BLAST);
             if (gBlastMaskDelayAcc)
                 Grayscale(dst, 0x400);

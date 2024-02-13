@@ -17,6 +17,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.upgrades.quiver = 3;
         gSave.inventory.upgrades.dekuStick = 3;
         gSave.inventory.upgrades.dekuNut = 3;
+        gSave.inventory.upgrades.strength = 3;
         //gMmExtraFlags2.childWallet = 1;
         //gSave.inventory.upgrades.wallet = 3;
         //gMmExtraFlags3.bottomlessWallet = 1;

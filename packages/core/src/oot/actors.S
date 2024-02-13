@@ -9,3 +9,9 @@ PATCH_END
 PATCH_START 0x8001fa60
   j   Actor_AfterSetNaviToActor
 PATCH_END
+
+/* Hook actor run update */
+PATCH_START 0x800240d8
+  jal Actor_RunUpdate
+   move a2,t9
+PATCH_END

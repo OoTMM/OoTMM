@@ -2018,7 +2018,7 @@
     "Fortress Near Wasteland": "event(OPEN_FORTRESS_GATE) || climb_anywhere || hookshot_anywhere"
     "Gerudo Training Grounds": "has(GERUDO_CARD) && can_use_wallet(1) && (is_adult || (time_travel_at_will && trick(OOT_GTG_CHILD_TT)))"
     "Gerudo Fortress Grotto": "is_adult && hidden_grotto_storms"
-    "Gerudo Fortress Lower-Right Ledge": "is_child || can_use_bow || can_hookshot || has(GERUDO_CARD)"
+    "Gerudo Fortress Lower-Right Ledge": "is_child || evade_gerudo"
   events:
     OPEN_FORTRESS_GATE: "has(GERUDO_CARD) && is_adult"
   locations:

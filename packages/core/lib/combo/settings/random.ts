@@ -378,6 +378,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
     base.sharedMaskTruth = true;
     base.sharedMaskKeaton = true;
     base.sharedMaskBlast = true;
+    base.sharedMaskStone = true;
     base.sharedWallets = true;
     base.sharedHealth = true;
     base.sharedSoulsEnemy = true;
@@ -458,6 +459,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
       base.sharedMaskTruth = true;
       base.sharedMaskKeaton = true;
       base.sharedMaskBlast = true;
+      base.sharedMaskStone = true;
       break;
     default:
       base.sharedMaskGoron = booleanWeighted(random, 0.5);
@@ -466,6 +468,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
       base.sharedMaskTruth = booleanWeighted(random, 0.5);
       base.sharedMaskKeaton = booleanWeighted(random, 0.5);
       base.sharedMaskBlast = booleanWeighted(random, 0.5);
+      base.sharedMaskStone = booleanWeighted(random, 0.5);
       break;
     }
 
@@ -507,6 +510,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
   base.fairyOcarinaMm = booleanWeighted(random, 0.5);
   base.shortHookshotMm = booleanWeighted(random, 0.25);
   base.blastMaskOot = booleanWeighted(random, 0.25);
+  base.stoneMaskOot = booleanWeighted(random, 0.25);
 
   /* Boots - 50% disabled, 25% enabled, 25% individual */
   switch (randomInt(random, 4)) {

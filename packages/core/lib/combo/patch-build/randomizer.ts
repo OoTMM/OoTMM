@@ -93,6 +93,7 @@ const SHARED_ITEMS_OOT = new Map([
   ['SHARED_TUNIC_GORON',      'OOT_TUNIC_GORON'],
   ['SHARED_TUNIC_ZORA',       'OOT_TUNIC_ZORA'],
   ['SHARED_MASK_BLAST',       'OOT_MASK_BLAST'],
+  ['SHARED_MASK_STONE',       'OOT_MASK_STONE'],
   ['SHARED_SCALE',            'OOT_SCALE'],
   ['SHARED_STRENGTH',         'OOT_STRENGTH'],
 ]);
@@ -160,6 +161,7 @@ const SHARED_ITEMS_MM = new Map([
   ['SHARED_TUNIC_GORON',      'MM_TUNIC_GORON'],
   ['SHARED_TUNIC_ZORA',       'MM_TUNIC_ZORA'],
   ['SHARED_MASK_BLAST',       'MM_MASK_BLAST'],
+  ['SHARED_MASK_STONE',       'MM_MASK_STONE'],
   ['SHARED_SCALE',            'MM_SCALE'],
   ['SHARED_STRENGTH',         'MM_STRENGTH'],
 ]);
@@ -820,6 +822,8 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     BLAST_MASK_DELAY_VERYLONG: settings.blastMaskCooldown === 'verylong',
     OOT_MASK_BLAST: settings.blastMaskOot,
     SHARED_MASK_BLAST: settings.sharedMaskBlast,
+    OOT_MASK_STONE: settings.stoneMaskOot,
+    SHARED_MASK_STONE: settings.sharedMaskStone,
     MM_FD_ANYWHERE: settings.fierceDeityAnywhere,
     MM_CLOCK_SPEED_VERYSLOW: settings.clockSpeed === 'veryslow',
     MM_CLOCK_SPEED_SLOW: settings.clockSpeed === 'slow',

@@ -11,7 +11,7 @@
     FAIRY: "true"
   exits:
     "Woodfall Temple": "true"
-    "Woodfall Temple Main": "has(MASK_DEKU) || can_hookshot_short || (has_hover_boots && has_weapon && has_explosives && has_mask_bunny && (has_arrows || has(MASK_STONE)) && trick(MM_WFT_LOBBY_HOVERS))"
+    "Woodfall Temple Main": "has(MASK_DEKU) || can_hookshot_short || (has_hover_boots && has_weapon && has_explosives && has_mask_bunny && (has_arrows || has_mask_stone) && trick(MM_WFT_LOBBY_HOVERS))"
     "Woodfall Temple Boss Access": "setting(bossWarpPads, remains) && has(REMAINS_ODOLWA)"
   locations:
     "Woodfall Temple Entrance Chest": "has(MASK_DEKU) || can_hookshot_short"
