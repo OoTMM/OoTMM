@@ -94,12 +94,12 @@
 - { id: POE, func: Poe, params: [0x6000990, 0x6000be0, 0x6000cf0, 0x6000950] }
 - { id: FAIRY, func: Fairy, params: [0x6000bd0, 0x6000db8, 0x6000ef0] }
 - { id: OOT_BULLET_BAG2, func: Opa10_Xlu234, params: [0x6000b70, 0x6000af0, 0x6000f48, 0x6000b30, 0x6000ff0] }
-- { id: OOT_RUPEE_GREEN, func: Rupee, params: [0x60005e0, 0x60004a0, 0x60006f0, 0x6000540] }
-- { id: OOT_RUPEE_BLUE, func: Rupee, params: [0x60005e0, 0x60004c0, 0x60006f0, 0x6000560] }
-- { id: OOT_RUPEE_RED, func: Rupee, params: [0x60005e0, 0x60004e0, 0x60006f0, 0x6000580] }
+- { id: RUPEE, func: Rupee, params: [0x6000620, 0x6000730] }
+- { id: OOT_RUPEE_GREEN, func: VanillaRupee, params: [0x60005e0, 0x60004a0, 0x60006f0, 0x6000540] }
+- { id: OOT_RUPEE_BLUE, func: VanillaRupee, params: [0x60005e0, 0x60004c0, 0x60006f0, 0x6000560] }
+- { id: OOT_RUPEE_RED, func: VanillaRupee, params: [0x60005e0, 0x60004e0, 0x60006f0, 0x6000580] }
+- { id: OOT_RUPEE_PURPLE, func: VanillaRupee, params: [0x60005e0, 0x6000500, 0x60006f0, 0x60005a0] }
 - { id: BIG_POE, func: Poe, params: [0x6000990, 0x6000be0, 0x6000cf0, 0x6000970] }
-- { id: OOT_RUPEE_PURPLE, func: Opa10_Xlu32, params: [0x60005e0, 0x6000500, 0x60006f0, 0x60005a0] }
-- { id: OOT_RUPEE_HUGE, func: Opa10_Xlu32, params: [0x60005e0, 0x6000520, 0x60006f0, 0x60005c0] }
 - { id: OOT_BULLET_BAG3, func: Opa10_Xlu234, params: [0x6000b70, 0x6000b10, 0x6000f48, 0x6000b50, 0x6000ff0] }
 - { id: OOT_SWORD_KOKIRI, func: Opa0, params: [0x6000960] }
 - { id: GS_TOKEN2, func: GS, params: [0x6004db0, 0x6004eb8] }
@@ -130,15 +130,9 @@
 - { id: MM_MASK_CAPTAIN, func: Opa01, params: [0x6000fa0, 0x6000cf0] }
 - { id: MM_DEED_SWAMP, func: Opa01, params: [0x6000a08, 0x6000990] }
 - { id: MM_DEED_MOUNTAIN, func: Opa01, params: [0x6000a08, 0x60009b8] }
-- { id: MM_RUPEE_GOLD, func: Opa10_Xlu32, params: [0x6000620, 0x6000540, 0x6000730, 0x6000600] }
 - { id: MM_DEED_OCEAN, func: Opa01, params: [0x6000a08, 0x60009e0] }
 - { id: MM_MASK_GORON, func: Opa0_Xlu1, params: [0x60010d0, 0x6000ba0] }
 - { id: MM_MASK_ZORA, func: Opa01, params: [0x6000c10, 0x60007d0] }
-- { id: MM_RUPEE_GREEN, func: Rupee, params: [0x6000620, 0x60004a0, 0x6000730, 0x6000560] }
-- { id: MM_RUPEE_BLUE, func: Rupee, params: [0x6000620, 0x60004c0, 0x6000730, 0x6000580] }
-- { id: MM_RUPEE_RED, func: Rupee, params: [0x6000620, 0x60004e0, 0x6000730, 0x60005a0] }
-- { id: MM_RUPEE_PURPLE, func: Opa10_Xlu32, params: [0x6000620, 0x6000500, 0x6000730, 0x60005c0] }
-- { id: MM_RUPEE_SILVER, func: Opa10_Xlu32, params: [0x6000620, 0x6000520, 0x6000730, 0x60005e0] }
 - { id: MM_SWORD_KOKIRI, func: Opa01, params: [0x6000998, 0x6000850] }
 - { id: BOTTLE_POTION, func: CustomBottlePotion, params: [0x60009b0] }
 - { id: MM_ZORA_EGG, func: Opa0_Xlu1, params: [0x6001010, 0x6000cf0] }

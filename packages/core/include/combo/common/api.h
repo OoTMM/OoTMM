@@ -293,14 +293,13 @@ void DrawGi_Medallion(GameState_Play*, s16);
 void DrawGi_MirrorShield(GameState_Play*, s16);
 void DrawGi_Poe(GameState_Play*, s16);
 void DrawGi_Potion(GameState_Play*, s16);
-void DrawGi_Rupee(GameState_Play*, s16);
 void DrawGi_Scale(GameState_Play*, s16);
 void DrawGi_SoldOut(GameState_Play*, s16);
 void DrawGi_Spell(GameState_Play*, s16);
 void DrawGi_MoonTear(GameState_Play*, s16);
 void DrawGi_BottleFairy(GameState_Play*, s16);
 void DrawGi_BottleBlueFire(GameState_Play*, s16);
-void DrawGi_Clock(GameState_Play*, s16);
+void DrawGi_VanillaRupee(GameState_Play*, s16);
 
 void Interface_StartMoonCrash(GameState_Play* play);
 

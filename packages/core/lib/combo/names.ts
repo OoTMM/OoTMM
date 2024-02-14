@@ -701,6 +701,9 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   OOT_MASK_STONE: "Stone Mask (OoT)",
   SHARED_MASK_STONE: "Stone Mask",
   MM_CLOCK: "Progressive Clock",
+  MM_TRAP_RUPOOR: "Rupoor (MM)",
+  OOT_TRAP_RUPOOR: "Rupoor (OoT)",
+  SHARED_TRAP_RUPOOR: "Rupoor",
 };
 
 export function itemName(item: string) {

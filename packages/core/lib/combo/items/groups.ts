@@ -214,7 +214,14 @@ export const SONGS = new Set([
   Items.SHARED_SONG_SUN,
 ]);
 
+export const TRAPS = new Set([
+  Items.OOT_TRAP_RUPOOR,
+  Items.MM_TRAP_RUPOOR,
+  Items.SHARED_TRAP_RUPOOR,
+])
+
 export const JUNK = new Set([
+  ...TRAPS,
   Items.OOT_RUPEE_BLUE,
   Items.OOT_RUPEE_RED,
   Items.OOT_RECOVERY_HEART,

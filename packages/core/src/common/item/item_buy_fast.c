@@ -78,6 +78,8 @@ int isItemFastBuy(s16 gi)
     case GI_MM_BIG_POE:
     case GI_OOT_FAIRY_BIG:
     case GI_MM_FAIRY_BIG:
+    case GI_OOT_TRAP_RUPOOR:
+    case GI_MM_TRAP_RUPOOR:
         return 1;
     default:
         return 0;

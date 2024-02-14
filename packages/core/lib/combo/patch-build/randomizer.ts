@@ -96,6 +96,7 @@ const SHARED_ITEMS_OOT = new Map([
   ['SHARED_MASK_STONE',       'OOT_MASK_STONE'],
   ['SHARED_SCALE',            'OOT_SCALE'],
   ['SHARED_STRENGTH',         'OOT_STRENGTH'],
+  ['SHARED_TRAP_RUPOOR',      'OOT_TRAP_RUPOOR'],
 ]);
 
 const SHARED_ITEMS_MM = new Map([
@@ -164,6 +165,7 @@ const SHARED_ITEMS_MM = new Map([
   ['SHARED_MASK_STONE',       'MM_MASK_STONE'],
   ['SHARED_SCALE',            'MM_SCALE'],
   ['SHARED_STRENGTH',         'MM_STRENGTH'],
+  ['SHARED_TRAP_RUPOOR',      'MM_TRAP_RUPOOR'],
 ]);
 
 const SHARED_ITEMS = {

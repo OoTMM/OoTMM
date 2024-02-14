@@ -1,8 +1,9 @@
 #include <combo.h>
 #include <combo/custom.h>
 
-#define M_PI      3.14159265358979323846
-#define M_SQRT1_2 0.707106781186547524401
+#define M_PI            3.14159265358979323846
+#define M_SQRT1_2       0.707106781186547524401
+#define DLIST_RAW(x)    (((u32)(x)) - 0x80000000)
 
 static float hueToRgb(float p, float q, float t)
 {
@@ -1344,5 +1345,66 @@ void DrawGi_Clock(GameState_Play* play, s16 index)
     ModelViewTranslate(0.f, 1100.f, -50.f, MAT_MUL);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[3]);
+    CLOSE_DISPS();
+}
+
+typedef struct
+{
+    u32 listColorOpa;
+    u32 listColorXlu;
+}
+RupeeColorDlists;
+
+static const Gfx kDlistRupeeBlackOpa[] = {
+    gsDPPipeSync(),
+    gsDPSetPrimColor(0x00, 0x80, 20, 20, 20, 255),
+    gsDPSetEnvColor(0, 0, 0, 255),
+    gsSPEndDisplayList(),
+};
+
+static const Gfx kDlistRupeeBlackXlu[] = {
+    gsDPPipeSync(),
+    gsDPSetPrimColor(0x00, 0x80, 20, 20, 20, 255),
+    gsDPSetEnvColor(30, 30, 30, 255),
+    gsSPEndDisplayList(),
+};
+
+/**
+ * Draw a (3D) rupee with a custom color.
+ * param:
+ *   0 - Black (Rupoor)
+ *   1 - Green
+ *   2 - Blue
+ *   3 - Red
+ *   4 - Purple
+ *   5 - Silver
+ *   6 - Gold/Huge
+ */
+void DrawGi_Rupee(GameState_Play* play, s16 index, u8 param)
+{
+    static const float smallRupeeScale = 0.7f;
+    static const RupeeColorDlists kColors[] = {
+        { DLIST_RAW(kDlistRupeeBlackOpa), DLIST_RAW(kDlistRupeeBlackXlu) },
+        { 0x060004a0, 0x06000560 },
+        { 0x060004c0, 0x06000580 },
+        { 0x060004e0, 0x060005a0 },
+        { 0x06000500, 0x060005c0 },
+        { 0x06000520, 0x060005e0 },
+        { 0x06000540, 0x06000600 },
+    };
+
+    if (param < 4)
+        ModelViewScale(smallRupeeScale, smallRupeeScale, smallRupeeScale, MAT_MUL);
+
+    OPEN_DISPS(play->gs.gfx);
+    InitListPolyOpa(play->gs.gfx);
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(POLY_OPA_DISP++, kColors[param].listColorOpa);
+    gSPDisplayList(POLY_OPA_DISP++, kDrawGi[index].lists[0]);
+
+    InitListPolyXlu(play->gs.gfx);
+    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(POLY_XLU_DISP++, kColors[param].listColorXlu);
+    gSPDisplayList(POLY_XLU_DISP++, kDrawGi[index].lists[1]);
     CLOSE_DISPS();
 }
