@@ -41,7 +41,10 @@ void comboPlayerUseItem(GameState_Play* play, Actor_Player* link, s16 itemId)
         gComboTriggersData.events.pocketEgg = 1;
         break;
     case ITEM_OOT_MASK_BLAST:
-        maskToggle(play, link, 9);
+        maskToggle(play, link, PLAYER_MASK_BLAST);
+        break;
+    case ITEM_OOT_MASK_STONE:
+        maskToggle(play, link, PLAYER_MASK_STONE);
         break;
     default:
         Player_UseItem = OverlayAddr(0x80834000);
@@ -173,6 +176,16 @@ static void DrawExtendedMaskBlast(GameState_Play* play, Actor_Player* link)
     CLOSE_DISPS();
 }
 
+static void DrawExtendedMaskStone(GameState_Play* play, Actor_Player* link)
+{
+    if (!prepareMask(play, 0x24e | MASK_FOREIGN_OBJECT, 1))
+        return;
+
+    OPEN_DISPS(play->gs.gfx);
+    gSPDisplayList(POLY_OPA_DISP++, 0x0a000820);
+    CLOSE_DISPS();
+}
+
 typedef void (*MaskCallback)(GameState_Play*, Actor_Player*);
 
 static const MaskCallback kMaskCallbacks[] = {
@@ -185,6 +198,7 @@ static const MaskCallback kMaskCallbacks[] = {
     DrawExtendedMaskGerudo,
     DrawExtendedMaskTruth,
     DrawExtendedMaskBlast,
+    DrawExtendedMaskStone,
 };
 
 void comboDrawExtendedMask(void)

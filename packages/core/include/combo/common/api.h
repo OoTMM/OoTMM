@@ -28,6 +28,7 @@
 # define PLAYER_MASK_GERUDO             0x07
 # define PLAYER_MASK_TRUTH              0x08
 # define PLAYER_MASK_BLAST              0x09
+# define PLAYER_MASK_STONE              0x0a
 #endif
 
 #if defined(GAME_MM)
@@ -61,6 +62,10 @@
 typedef struct GameState_Play GameState_Play;
 typedef struct ActorContext ActorContext;
 typedef struct Actor Actor;
+
+float Actor_WorldDistXZToActor(Actor* a, Actor* b);
+float Actor_HeightDiff(Actor* a, Actor* b);
+u16   Actor_Angle(Actor* a, Actor* b);
 
 int    LoadFile(void* dst, u32 vromAddr, u32 size);
 

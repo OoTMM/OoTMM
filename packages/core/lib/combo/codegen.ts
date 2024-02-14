@@ -10,6 +10,7 @@ import { CodeGen } from './util/codegen';
 
 const ENTRANCES_DEBUG_CATEGORIES = {
   COMMON: 'Common',
+  REGION: 'Region',
   DUNGEON: 'Dungeon',
   BOSS: 'Boss',
   WARP: 'Songs/Owls',

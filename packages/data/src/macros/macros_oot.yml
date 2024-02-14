@@ -173,7 +173,7 @@
 "can_cut_grass": "can_cut_grass_no_c_button || can_boomerang || has_explosives || can_hammer"
 "can_kill_baba_sticks": "soul_deku_baba && (can_boomerang || (has_weapon && (is_child || has_nuts || can_hookshot || can_hammer)))"
 "can_kill_baba_nuts": "soul_deku_baba && (has_weapon || has_explosives || can_use_slingshot)"
-"can_hit_scrub": "has_nuts || can_hit_triggers_distance || has_shield_for_scrubs || can_collect_distance || can_hammer"
+"can_hit_scrub": "has_nuts || can_hit_triggers_distance || has_shield_for_scrubs || can_collect_distance || can_hammer || has_explosives"
 "can_rescue_carpenter": "small_keys_hideout_all && (has_weapon || ((can_boomerang || has_nuts) && can_use_sticks)) && soul_npc(SOUL_NPC_CARPENTERS)"
 "carpenters_rescued": "setting(gerudoFortress, open) || (event(CARPENTER_1) && (setting(gerudoFortress, single) || (event(CARPENTER_2) && event(CARPENTER_3) && event(CARPENTER_4))))"
 
@@ -255,6 +255,8 @@
 
 # Masks
 "has_mask_truth": "has(MASK_TRUTH) || has(SHARED_MASK_TRUTH)"
+"has_mask_stone": "setting(stoneMaskOot) && cond(setting(sharedMaskStone), has(SHARED_MASK_STONE), has(MASK_STONE))"
+"can_use_mask_stone": "age_child_trade && has_mask_stone"
 "has_mask_blast": "setting(blastMaskOot) && cond(setting(sharedMaskBlast), has(SHARED_MASK_BLAST), has(MASK_BLAST))"
 "can_use_mask_blast": "age_child_trade && has_mask_blast"
 
@@ -271,6 +273,7 @@
 "climb_anywhere": "setting(climbMostSurfacesOot)"
 "hookshot_anywhere": "can_hookshot && setting(hookshotAnywhereOot)"
 "longshot_anywhere": "can_longshot && setting(hookshotAnywhereOot)"
+"evade_gerudo": "can_use_bow || can_hookshot || has(GERUDO_CARD) || can_use_mask_stone"
 
 # Events
 "ganon_trial_light": "!setting(ganonTrials, Light) || event(GANON_TRIAL_LIGHT)"

@@ -18,7 +18,7 @@ static void debugCheat(GameState_Play* play)
         gSave.playerData.swordHealth = 8;
         gSave.isBiggoronSword = 1;
 
-        gSave.inventory.quest.gerudoCard = 1;
+        //gSave.inventory.quest.gerudoCard = 1;
         gSave.inventory.dungeonKeys[SCE_OOT_TEMPLE_FIRE] = 8;
         gSave.inventory.dungeonKeys[SCE_OOT_TREASURE_SHOP] = 6;
         gSave.inventory.items[ITS_OOT_STICKS] = ITEM_OOT_STICK;
@@ -113,11 +113,11 @@ static void debugCheat(GameState_Play* play)
         gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_EYE_DROPS);
         gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_CLAIM_CHECK);
         gSave.inventory.items[ITS_OOT_TRADE_ADULT] = ITEM_OOT_POCKET_EGG;
-        gSave.inventory.items[ITS_OOT_TRADE_CHILD] = ITEM_OOT_MASK_BLAST;
+        gSave.inventory.items[ITS_OOT_TRADE_CHILD] = ITEM_OOT_MASK_STONE;
 
         SetEventChk(EV_OOT_CHK_EPONA);
 
-        gSave.equips.buttonItems[1] = ITEM_OOT_MASK_BLAST;
+        gSave.equips.buttonItems[1] = ITEM_OOT_MASK_STONE;
         gSave.equips.cButtonSlots[0] = ITS_OOT_TRADE_CHILD;
 
 

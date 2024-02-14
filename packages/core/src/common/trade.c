@@ -28,6 +28,7 @@ const u8 kOotTradeChild[] = {
     ITEM_OOT_GERUDO_MASK,
     ITEM_OOT_MASK_OF_TRUTH,
     ITEM_OOT_MASK_BLAST,
+    ITEM_OOT_MASK_STONE,
 };
 
 const u8 kOotOcarina[] = {

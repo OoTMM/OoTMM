@@ -261,7 +261,7 @@ Actor* comboSpawnActor(ActorContext* actorCtx, GameState_Play *play, short actor
     }
 
     if (comboConfig(CFG_OOT_OPEN_MASK_SHOP) && play->sceneId == SCE_OOT_MARKET_CHILD_NIGHT && actorId == AC_EN_DOOR)
-        if (((variable >> 7 & 7) == 0x5) && ((variable & 0x3f) == 0x10)) 
+        if (((variable >> 7 & 7) == 0x5) && ((variable & 0x3f) == 0x10))
             variable = 0x1bf;
 
     if (comboConfig(CFG_OOT_OPEN_ZD_SHORTCUT) && actorId == AC_BG_SPOT06_OBJECTS && play->sceneId == SCE_OOT_LAKE_HYLIA)
@@ -286,3 +286,86 @@ static int GetRoomClearFlagForActor(GameState_Play* play, int flag)
 }
 
 PATCH_CALL(0x80025284, GetRoomClearFlagForActor);
+
+static int shouldActorIgnorePlayer(Actor* this, Actor_Player* link)
+{
+    u16 variable;
+
+    if (link->mask != PLAYER_MASK_STONE)
+        return 0;
+
+    variable = this->variable;
+
+    switch (this->id)
+    {
+    case AC_EN_AM:
+        return !!(variable != 0);
+    case AC_EN_NY:
+    case AC_EN_SB:
+    case AC_EN_RR:
+    case AC_EN_TORCH2:
+    case AC_EN_FZ:
+    case AC_EN_WEIYER:
+    case AC_EN_EIYER:
+    case AC_EN_BB:
+    case AC_EN_ANUBICE:
+    case AC_EN_TP:
+    case AC_EN_BA:
+    case AC_EN_GOMA:
+    case AC_EN_DODOJR:
+    case AC_EN_SKJ:
+    case AC_EN_CROW:
+    case AC_EN_HINTNUTS:
+    case AC_EN_WALLMAS:
+    case AC_EN_REEBA:
+    case AC_EN_FLOORMAS:
+    case AC_EN_DEKUNUTS:
+    case AC_EN_DNS:
+    case AC_EN_MB:
+    case AC_EN_TITE:
+    case AC_EN_PEEHAT:
+    case AC_EN_FIREFLY:
+    case AC_EN_DODONGO:
+    case AC_EN_SW:
+    case AC_EN_VM:
+    case AC_EN_ST:
+    case AC_EN_GE1:
+    case AC_EN_GE2:
+    case AC_EN_BILI:
+    case AC_EN_VALI:
+        return 1;
+    default:
+        return 0;
+    }
+}
+
+void Actor_RunUpdate(Actor* this, GameState_Play* play, ActorFunc update)
+{
+    int ignorePlayer;
+    s16 yawTowardsPlayer;
+    f32 xyzDistToPlayerSq;
+    f32 xzDistanceFromLink;
+    f32 yDistanceFromLink;
+
+    ignorePlayer = shouldActorIgnorePlayer(this, GET_LINK(play));
+    if (ignorePlayer)
+    {
+        yawTowardsPlayer = this->yawTowardsPlayer;
+        xyzDistToPlayerSq = this->xyzDistToPlayerSq;
+        xzDistanceFromLink = this->xzDistanceFromLink;
+        yDistanceFromLink = this->yDistanceFromLink;
+
+        this->yawTowardsPlayer = (s16)(u16)(RandFloat() * 0x10000);
+        this->xyzDistToPlayerSq = 10000.f;
+        this->xzDistanceFromLink = 10000.f;
+        this->yDistanceFromLink = 10000.f;
+    }
+    update(this, play);
+    if (ignorePlayer)
+    {
+        this->yawTowardsPlayer = yawTowardsPlayer;
+        this->xyzDistToPlayerSq = xyzDistToPlayerSq;
+        this->xzDistanceFromLink = xzDistanceFromLink;
+        this->yDistanceFromLink = yDistanceFromLink;
+    }
+}

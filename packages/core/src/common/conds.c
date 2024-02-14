@@ -41,6 +41,7 @@ int comboSpecialCond(int special)
     u8 hasMaskBunny;
     u8 hasMaskTruth;
     u8 hasMaskBlast;
+    u8 hasMaskStone;
 
     cond = &gComboData.special[special];
     count = 0;
@@ -50,6 +51,7 @@ int comboSpecialCond(int special)
     hasMaskBunny = 0;
     hasMaskTruth = 0;
     hasMaskBlast = 0;
+    hasMaskStone = 0;
 
     if (cond->flags & SPF_STONES)
     {
@@ -138,10 +140,17 @@ int comboSpecialCond(int special)
             if (gMmSave.inventory.items[ITS_MM_MASK_BLAST] == ITEM_MM_MASK_BLAST) count++;
         }
 
+        if (comboConfig(CFG_SHARED_MASK_STONE))
+        {
+            if (gMmSave.inventory.items[ITS_MM_MASK_STONE] == ITEM_MM_MASK_STONE) hasMaskStone = 1;
+        }
+        else
+        {
+            if (gMmSave.inventory.items[ITS_MM_MASK_STONE] == ITEM_MM_MASK_STONE) count++;
+        }
+
         if (gMmSave.inventory.items[ITS_MM_MASK_POSTMAN] == ITEM_MM_MASK_POSTMAN) count++;
         if (gMmSave.inventory.items[ITS_MM_MASK_ALL_NIGHT] == ITEM_MM_MASK_ALL_NIGHT) count++;
-        if (gMmSave.inventory.items[ITS_MM_MASK_BLAST] == ITEM_MM_MASK_BLAST) count++;
-        if (gMmSave.inventory.items[ITS_MM_MASK_STONE] == ITEM_MM_MASK_STONE) count++;
         if (gMmSave.inventory.items[ITS_MM_MASK_GREAT_FAIRY] == ITEM_MM_MASK_GREAT_FAIRY) count++;
         if (gMmSave.inventory.items[ITS_MM_MASK_BREMEN] == ITEM_MM_MASK_BREMEN) count++;
         if (gMmSave.inventory.items[ITS_MM_MASK_DON_GERO] == ITEM_MM_MASK_DON_GERO) count++;
@@ -237,6 +246,15 @@ int comboSpecialCond(int special)
             if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_MASK_BLAST)) count++;
         }
 
+        if (comboConfig(CFG_SHARED_MASK_STONE))
+        {
+            if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_MASK_STONE)) hasMaskStone = 1;
+        }
+        else
+        {
+            if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_MASK_STONE)) count++;
+        }
+
         if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_GERUDO_MASK)) count++;
         if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_SPOOKY_MASK)) count++;
         if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_SKULL_MASK)) count++;
@@ -265,6 +283,7 @@ int comboSpecialCond(int special)
     count += hasMaskZora;
     count += hasMaskGoron;
     count += hasMaskBlast;
+    count += hasMaskStone;
 
     return count >= cond->count;
 }

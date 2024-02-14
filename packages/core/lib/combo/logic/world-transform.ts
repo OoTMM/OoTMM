@@ -140,6 +140,8 @@ const ITEM_POOL_PLENTIFUL = new Set([
   Items.MM_MASK_BLAST,
   Items.OOT_MASK_BLAST,
   Items.SHARED_MASK_BLAST,
+  Items.OOT_MASK_STONE,
+  Items.SHARED_MASK_STONE,
   Items.MM_MASK_SCENTS,
   Items.MM_MASK_KAFEI,
   Items.MM_MASK_FIERCE_DEITY,
@@ -755,6 +757,12 @@ export class LogicPassWorldTransform {
       this.replaceItem(Items.MM_MASK_BLAST, Items.SHARED_MASK_BLAST);
     } else if (settings.blastMaskOot) {
       this.addItem(Items.OOT_MASK_BLAST);
+    }
+
+    if (settings.sharedMaskStone) {
+      this.replaceItem(Items.MM_MASK_STONE, Items.SHARED_MASK_STONE);
+    } else if (settings.stoneMaskOot) {
+      this.addItem(Items.OOT_MASK_STONE);
     }
 
     if (settings.sharedLens) {

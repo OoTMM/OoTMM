@@ -152,6 +152,7 @@
 
 /* Custom */
 #define ITEM_OOT_MASK_BLAST             0x9c
+#define ITEM_OOT_MASK_STONE             0x9d
 
 #define ITEM_MM_OCARINA_OF_TIME             0x00
 #define ITEM_MM_BOW                         0x01
@@ -397,6 +398,7 @@
 #define XITEM_OOT_CHILD_GERUDO_MASK     0x9
 #define XITEM_OOT_CHILD_MASK_OF_TRUTH   0xa
 #define XITEM_OOT_CHILD_MASK_BLAST      0xb
+#define XITEM_OOT_CHILD_MASK_STONE      0xc
 
 #define XITEM_OOT_ADULT_POCKET_EGG              0x0
 #define XITEM_OOT_ADULT_POCKET_CUCCO            0x1

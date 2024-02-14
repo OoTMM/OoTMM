@@ -104,7 +104,7 @@
   exits:
     "Pirate Fortress Interior": "true"
   events:
-    FORTRESS_BEEHIVE: "has(MASK_STONE) && can_hookshot_short && (has_arrows || can_use_deku_bubble)"
+    FORTRESS_BEEHIVE: "has_mask_stone && can_hookshot_short && (has_arrows || can_use_deku_bubble)"
     ZORA_EGGS_HOOKSHOT_ROOM: "can_hookshot_short && underwater_walking && event(FORTRESS_BEEHIVE)"
   locations:
     "Pirate Fortress Interior Hookshot": "event(FORTRESS_BEEHIVE)"
