@@ -4,10 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [19.0] - 2024-02-14
+
 ### Added
 
 - Add Stone Mask to Ocarina of Time.
-- Add an Open Zora's Domain Shortcut setting, removing the ice block leading to Zora's Domain from Lake Hylia-
+- Add an Open Zora's Domain Shortcut setting, removing the ice block leading to Zora's Domain from Lake Hylia.
+- Add a setting to open Majora's Mask dungeons in the clear state of their respective region.
 - Add a Wisp to control the water level in Lake Hylia given you've beaten Water Temple.
 - Add the ability to shuffle clocks representing Majora's Mask days.
 - Add a Moon Crash setting, letting player keep going after a moon crash.
@@ -27,9 +30,11 @@ All notable changes to this project will be documented in this file.
 - Add Goron Tunic/Zora Tunic to Majora's Mask.
 - Add dedicated CSMC textures and colors for souls.
 - Add shared settings for every new item extension.
+- Add logic to MQ heart shuffle.
 
 ### Fixed
 
+- Fix minor issues with OoT warp songs and MM bosses.
 - Fix the hyrule field glitch happening much more often compared to the vanilla game in OoT.
 - Fix a long standing issue where pre-completed dungeons could interfere with the logic in some edge-cases.
 - Fix a bug where you could unequip shields and swords or toggle items while hovering the wrong slot.
@@ -996,7 +1001,8 @@ All notable changes to this project will be documented in this file.
 
 - Initial stable release.
 
-[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v18.3...HEAD
+[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v19.0...HEAD
+[19.0]: https://github.com/OoTMM/OoTMM/compare/v18.3...v19.0
 [18.3]: https://github.com/OoTMM/OoTMM/compare/v18.2...v18.3
 [18.2]: https://github.com/OoTMM/OoTMM/compare/v18.1...v18.2
 [18.1]: https://github.com/OoTMM/OoTMM/compare/v18.0...v18.1
