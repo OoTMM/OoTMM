@@ -344,10 +344,11 @@ MM_GORON_VILLAGE_FROM_TWIN_WINTER:              { game: mm,  id: 0x9400, type: n
 MM_WOODFALL_FROM_SWAMP:                         { game: mm,  id: 0x8600, type: none }
 MM_COAST_FROM_MIKAU_CS:                         { game: mm,  id: 0x68a0, type: none }
 MM_VOID_GREAT_BAY_COAST:                        { game: mm,  id: 0x6820, type: one-way-void, areas: ["MM Great Bay Coast", "MM VOID"] }
+MM_VOID_GREAT_BAY_COAST_LEFT:                   { game: mm,  id: 0x6820, type: one-way-void, areas: ["MM Great Bay Coast", "MM VOID"] }
+MM_VOID_GREAT_BAY_COAST_RIGHT:                  { game: mm,  id: 0x6860, type: one-way-void, areas: ["MM Great Bay Coast", "MM VOID"] }
 MM_VOID_PINNACLE_ROCK:                          { game: mm,  id: 0x4410, type: one-way-void, areas: ["MM Pinnacle Rock Void", "MM VOID"] }
 MM_VOID_ZORA_CAPE:                              { game: mm,  id: 0x6a30, type: one-way-void, areas: ["MM Zora Cape", "MM VOID"] }
 MM_VOID_SEWERS:                                 { game: mm,  id: 0x7030, type: one-way-void, areas: ["MM Pirate Fortress Sewers Void", "MM VOID"] }
-
 MM_WCT_FROM_SCT_LOW:                            { game: mm,  id: 0xd410, type: region-full, areas: ["MM Clock Town South Lower West", "MM Clock Town West"], reverse: MM_SCT_FROM_WCT_LOW }
 MM_SCT_FROM_WCT_LOW:                            { game: mm,  id: 0xd850, type: overworld,   areas: ["MM Clock Town South Lower West", "MM Clock Town South"], reverse: MM_WCT_FROM_SCT_LOW }
 MM_ECT_FROM_SCT_LOW:                            { game: mm,  id: 0xd210, type: region-full, areas: ["MM Clock Town South Lower East", "MM Clock Town East"], reverse: MM_SCT_FROM_ECT_LOW }
@@ -411,7 +412,7 @@ MM_EXTERIOR_GATE_FROM_SEWERS:                   { game: mm, id: 0x7020, type: ov
 MM_SEWERS_FROM_EXTERIOR_DOOR:                   { game: mm, id: 0x40a0, type: interior-extra, areas: ["MM Pirate Fortress Entrance Balcony", "MM Pirate Fortress Sewers End"], reverse: MM_EXTERIOR_DOOR_FROM_SEWERS }
 MM_EXTERIOR_DOOR_FROM_SEWERS:                   { game: mm, id: 0x7060, type: interior-exit, areas: ["MM Pirate Fortress Sewers End", "MM Pirate Fortress Entrance Balcony"], reverse: MM_SEWERS_FROM_EXTERIOR_DOOR }
 MM_PIRATE_FORTRESS_INTERIOR:                    { game: mm, id: 0x2200, type: region-full, areas: ["MM Pirate Fortress Entrance Balcony", "MM Pirate Fortress Interior"], reverse: MM_PIRATE_FORTRESS_INTERIOR_FROM_EXTERIOR }
-MM_PIRATE_FORTRESS_INTERIOR_FROM_EXTERIOR:      { game: mm, id: 0x7010, type: overworld, areas: ["MM Pirate Fortress Entrance Lookout", "MM Pirate Fortress Barrel Maze Entry"], reverse: MM_PIRATE_FORTRESS_INTERIOR }
+MM_PIRATE_FORTRESS_INTERIOR_FROM_EXTERIOR:      { game: mm, id: 0x7010, type: overworld, areas: ["MM Pirate Fortress Interior", "MM Pirate Fortress Entrance Balconyy"], reverse: MM_PIRATE_FORTRESS_INTERIOR }
 MM_PIRATE_FORTRESS_INTERIOR_FROM_LOOKOUT:       { game: mm, id: 0x22c0, type: region-full, areas: ["MM Pirate Fortress Entrance Lookout", "MM Pirate Fortress Barrel Maze Entry"], reverse: MM_PIRATE_FORTRESS_EXTERIOR_LOOKOUT}
 MM_PIRATE_FORTRESS_EXTERIOR_LOOKOUT:            { game: mm, id: 0x7050, type: overworld, areas: ["MM Pirate Fortress Barrel Maze Entry", "MM Pirate Fortress Entrance Lookout"], reverse: MM_PIRATE_FORTRESS_INTERIOR_FROM_LOOKOUT }
 MM_IKANA_CASTLE_GARDENS:                        { game: mm, id: 0x3410, type: region-full, areas: ["MM Ikana Canyon", "MM Ikana Castle Entrance"], reverse: MM_IKANA_CANYON_FROM_CASTLE_GARDENS }
@@ -434,9 +435,7 @@ OOT_LOST_WOODS:                                 { game: oot, id: 0x11e, type: re
 OOT_FOREST_FROM_LOST_WOODS:                     { game: oot, id: 0x286, type: overworld, areas: ["OOT Lost Woods", "OOT Kokiri Forest"], reverse: OOT LOST_WOODS }
 OOT_FOREST_FROM_LOST_WOODS_BRDIGE:              { game: oot, id: 0x5e0, type: region-full, areas: ["OOT  Lost Woods Bridge", "OOT Kokiri Forest"], reverse: OOT_LOST_WOODS_BRIDGE_FROM_FOREST }
 OOT_LOST_WOODS_BRIDGE_FROM_FOREST:              { game: oot, id: 0x20d, type: overworld, areas: ["OOT Kokiri Forest", "OOT Lost Woods Bridge from Forest"], reverse: OOT FOREST_FROM_LOST_WOODS_BRDIGE }
-
 OOT_WASTELAND:                                  { game: oot, id: 0x130, type: region-sand, areas: ["OOT Fortress Near Wasteland", "OOT Haunted Wasteland Start"], reverse: OOT_FORTRESS_FROM_WASTELAND }
 OOT_FORTRESS_FROM_WASTELAND:                    { game: oot, id: 0x365, type: overworld, areas: ["OOT Haunted Wasteland Start", "OOT Fortress Near Wasteland"], reverse: OOT WASTELAND }
 OOT_COLOSSUS:                                   { game: oot, id: 0x225, type: region-sand, areas: ["OOT Haunted Wasteland End", "OOT Desert Colossus"], reverse: OOT_WASTELAND_FROM_COLOSSUS }
 OOT_WASTELAND_FROM_COLOSSUS:                    { game: oot, id: 0x1a1, type: overworld, areas: ["OOT Desert Colossus", "OOT Haunted Wasteland End"], reverse: OOT COLOSSUS }
-

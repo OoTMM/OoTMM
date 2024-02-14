@@ -49,6 +49,7 @@
 "soul_dampe" : "soul_npc(SOUL_NPC_DAMPE) || soul_npc(SHARED_SOUL_NPC_DAMPE)"
 "soul_darunia" : "soul_npc(SOUL_NPC_DARUNIA) || soul_npc(SHARED_SOUL_NPC_DARUNIA)"
 "soul_epona" : "soul_npc(SOUL_NPC_EPONA) || soul_npc(SHARED_SOUL_NPC_EPONA)"
+"soul_goron" : "soul_npc(SOUL_NPC_GORON) || soul_npc(SHARED_SOUL_NPC_GORON)"
 "soul_goron_shopkeeper" : "soul_npc(SOUL_NPC_GORON_SHOPKEEPER) || soul_npc(SHARED_SOUL_NPC_GORON_SHOPKEEPER)"
 "soul_honey_darling" : "soul_npc(SOUL_NPC_HONEY_DARLING) || soul_npc(SHARED_SOUL_NPC_HONEY_DARLING)"
 "soul_medigoron" : "soul_npc(SOUL_NPC_MEDIGORON) || soul_npc(SHARED_SOUL_NPC_MEDIGORON)"

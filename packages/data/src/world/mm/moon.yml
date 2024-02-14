@@ -17,10 +17,10 @@
   events:
     MAJORA_PRE_BOSS: "true"
   exits:
-    "Moon Trial Deku Entrance":  "soul_npc(SOUL_NPC_CHILDREN_MOON) && can_reset_time_on_moon && masks(1)"
-    "Moon Trial Goron Entrance": "soul_npc(SOUL_NPC_CHILDREN_MOON) && can_reset_time_on_moon && masks(2)"
-    "Moon Trial Zora": "soul_npc(SOUL_NPC_CHILDREN_MOON) && can_reset_time_on_moon && masks(3)"
-    "Moon Trial Link Entrance": "soul_npc(SOUL_NPC_CHILDREN_MOON) && can_reset_time_on_moon && masks(4)"
+    "Moon Trial Deku Entrance":  "soul_npc(SOUL_NPC_MOON_CHILDREN) && can_reset_time_on_moon && masks(1)"
+    "Moon Trial Goron Entrance": "soul_npc(SOUL_NPC_MOON_CHILDREN) && can_reset_time_on_moon && masks(2)"
+    "Moon Trial Zora": "soul_npc(SOUL_NPC_MOON_CHILDREN) && can_reset_time_on_moon && masks(3)"
+    "Moon Trial Link Entrance": "soul_npc(SOUL_NPC_MOON_CHILDREN) && can_reset_time_on_moon && masks(4)"
     "Moon Boss": "soul_npc(SOUL_NPC_CHILD_MAJORA) && (setting(majoraChild, none) || (setting(majoraChild, custom) && special(MAJORA)))"
   locations:
     "Moon Fierce Deity Mask": "can_reset_time_on_moon && masks(20) && event(MOON_TRIAL_DEKU) && event(MOON_TRIAL_GORON) && event(MOON_TRIAL_ZORA) && event(MOON_TRIAL_LINK)"

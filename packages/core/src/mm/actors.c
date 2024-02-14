@@ -375,12 +375,11 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
         switch (variable & 0x000f)
         {
             case 0: return opt(comboHasSoulMm(GI_MM_SOUL_NPC_CHILD_MAJORA));
-            case 1: return opt(comboHasSoulMm(GI_MM_SOUL_NPC_CHILD_ODOLWA));
-            case 2: return opt(comboHasSoulMm(GI_MM_SOUL_NPC_CHILD_GOHT));
-            case 3: return opt(comboHasSoulMm(GI_MM_SOUL_NPC_CHILD_GYORG));
-            case 4: return opt(comboHasSoulMm(GI_MM_SOUL_NPC_CHILD_TWINMOLD));
+            case 1:
+            case 2:
+            case 3:
+            case 4: return opt(comboHasSoulMm(GI_MM_SOUL_NPC_MOON_CHILDREN));
             default: return 1;
-            // default: return opt(comboHasSoulMm(GI_MM_SOUL_NPC_MOON_CHILDREN));
         }
     case AC_EN_SOB1:
         switch (variable & 0xf) {
