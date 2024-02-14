@@ -2457,7 +2457,7 @@
     FAIRY: "can_get_gossip_fairy"
   exits:
     "Great Bay Coast": "true"
-    "Zora Cape Near Hall": "underwater_walking || (can_dive_small && trick(MM_ZORA_HALL_HUMAN))"
+    "Zora Hall Entrance": "underwater_walking || (can_dive_small && trick(MM_ZORA_HALL_HUMAN))"
     "Zora Cape Peninsula": "underwater_walking || can_use_nayru || trick(MM_ZORA_HALL_HUMAN)"
     "Waterfall Cliffs": "can_hookshot"
     "Great Bay Near Fairy Fountain": "can_hookshot && (has_explosives || trick_keg_explosives || short_hook_anywhere)" #|| (can_use_ice_arrows && (has_mask_zora || can_hookshot_short))
@@ -2532,20 +2532,15 @@
   locations:
     "Waterfall Rapids Beaver Race 1": "has_mask_zora"
     "Waterfall Rapids Beaver Race 2": "has_mask_zora"
-"Zora Cape Near Hall":
+"Zora Cape Entrance":
   region: ZORA_CAPE
   exits:
     "Zora Cape": "underwater_walking || (can_dive_small && trick(MM_ZORA_HALL_HUMAN))"
     "Zora Hall Entrance": "underwater_walking || can_dive_small"
-"Zora Hall Entrance":
-  region: ZORA_HALL
-  exits:
-    "Zora Cape Near Hall": "underwater_walking || can_dive_small"
-    "Zora Hall": "true"
 "Zora Hall":
   region: ZORA_HALL
   exits:
-    "Zora Hall Entrance": "true"
+    "Zora Hall Entrance": "underwater_walking || can_dive_small"
     "Zora Cape Peninsula": "true"
     "Zora Shop": "true"
     "Tijo's Room": "can_enter_zora_door_before_gb_clear || event(BOSS_GREAT_BAY)"
