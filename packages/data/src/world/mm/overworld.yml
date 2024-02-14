@@ -255,8 +255,8 @@
     BOMBERS_NORTH2: "event(HIDE_SEEK2)"
     BOMBERS_NORTH3: "event(HIDE_SEEK3)"
     BOMBER_CODE: "bombers1 || bombers2 || bombers3"
-    SAKON_BOMB_BAG: "can_fight && before(NIGHT1_AM_12_00)"
-    SAKON_BOOM: "(has_arrows || can_hookshot_short || can_use_din) && before(NIGHT1_AM_12_00)"
+    SAKON_BOMB_BAG: "can_fight && at(NIGHT1_AM_12_00)"
+    SAKON_BOOM: "(has_arrows || can_hookshot_short || can_use_din) && at(NIGHT1_AM_12_00)"
     MAIL_LETTER: "has(LETTER_TO_KAFEI) && before(DAY2_AM_11_30)"
     PICTURE_TINGLE: "has(PICTOGRAPH_BOX) && is_day"
     RUPEES: "true"
@@ -317,7 +317,7 @@
     MAIL_LETTER: "has(LETTER_TO_KAFEI) && before(DAY2_AM_11_30)"
   locations:
     "Clock Town Silver Rupee Chest": "true"
-    "Clock Town Postman Hat": "event(POSTMAN_FREEDOM) && before(NIGHT3_AM_05_00)"
+    "Clock Town Postman Hat": "event(POSTMAN_FREEDOM) && between(NIGHT3_PM_06_00, NIGHT3_AM_05_00)"
 "Astral Observatory Passage":
   region: ENTRANCE
   exits:
@@ -412,9 +412,9 @@
   exits:
     "Laundry Pool": "true"
   events:
-    MEET_KAFEI: "event(MAIL_LETTER) && before(DAY3_AM_06_00)"
+    MEET_KAFEI: "event(MAIL_LETTER) && between(DAY2_PM_02_00, DAY3_AM_06_00)"
   locations:
-    "Kafei Hideout Pendant of Memories": "event(MAIL_LETTER) && (before(DAY3_AM_06_00) || event(SAKON_BOMB_BAG) || event(SAKON_BOOM))"
+    "Kafei Hideout Pendant of Memories": "event(MAIL_LETTER) && (between(DAY2_PM_02_00, DAY3_AM_06_00) || (after(DAY2_PM_02_00) && (event(SAKON_BOMB_BAG) || event(SAKON_BOOM))))"
     "Kafei Hideout Owner Reward 1": "event(MEET_KAFEI) && between(DAY3_AM_06_00, NIGHT3_PM_10_00)"
     "Kafei Hideout Owner Reward 2": "event(MEET_KAFEI) && between(DAY3_AM_06_00, NIGHT3_PM_10_00)"
 "Post Office":
@@ -445,7 +445,7 @@
   exits:
     "Clock Town West": "true"
 #  locations:
-#    "Lottery Prize": "event(PLAY_LOTTERY) && (before(NIGHT1_PM_11_00) || between(NIGHT2_PM_06_00, NIGHT2_PM_11_00) || between(NIGHT3_PM_06_00, NIGHT3_PM_11_00))"
+#    "Lottery Prize": "event(PLAY_LOTTERY) && (between(NIGHT1_PM_06_00, NIGHT1_PM_11_00) || between(NIGHT2_PM_06_00, NIGHT2_PM_11_00) || between(NIGHT3_PM_06_00, NIGHT3_PM_11_00))"
 "Mayor's Office":
   region: ENTRANCE
   exits:
@@ -2101,7 +2101,7 @@
 "Romani Ranch":
   region: ROMANI_RANCH
   events:
-    ALIENS: "before(NIGHT1_AM_02_30) && has_arrows"
+    ALIENS: "at(NIGHT1_AM_02_30) && has_arrows"
     ARROWS: "true"
     MAGIC: "true"
     FAIRY: "can_get_gossip_fairy"
@@ -2113,8 +2113,8 @@
     "Ranch House": "between(DAY1_AM_06_00, NIGHT1_PM_08_00) || between(DAY2_AM_06_00, NIGHT2_PM_08_00) || between(DAY3_AM_06_00, NIGHT3_PM_08_00)"
   locations:
     "Romani Ranch Epona Song": "before(NIGHT1_PM_06_00)"
-    "Romani Ranch Aliens": "before(NIGHT1_AM_02_30) && has_arrows"
-    "Romani Ranch Cremia Escort": "event(ALIENS)"
+    "Romani Ranch Aliens": "event(ALIENS)"
+    "Romani Ranch Cremia Escort": "event(ALIENS) && at(NIGHT2_PM_06_00)"
     "Romani Ranch Grass Pack 1 Grass 01": "true"
     "Romani Ranch Grass Pack 1 Grass 02": "true"
     "Romani Ranch Grass Pack 1 Grass 03": "true"
@@ -2207,9 +2207,9 @@
   exits:
     "Romani Ranch": "true"
   locations:
-    "Romani Ranch Barn Cow Left": "(before(NIGHT1_AM_02_30) || event(ALIENS)) && can_play_epona"
-    "Romani Ranch Barn Cow Right Front": "(before(NIGHT1_AM_02_30) || event(ALIENS)) && can_play_epona"
-    "Romani Ranch Barn Cow Right Back": "(before(NIGHT1_AM_02_30) || event(ALIENS)) && can_play_epona"
+    "Romani Ranch Barn Cow Left": "(between(NIGHT1_PM_06_00, NIGHT1_AM_02_30) || event(ALIENS)) && can_play_epona"
+    "Romani Ranch Barn Cow Right Front": "(between(NIGHT1_PM_06_00, NIGHT1_AM_02_30) || event(ALIENS)) && can_play_epona"
+    "Romani Ranch Barn Cow Right Back": "(between(NIGHT1_PM_06_00, NIGHT1_AM_02_30) || event(ALIENS)) && can_play_epona"
     # TODO: Wonder items?
     #"Romani Ranch Barn Invisible Rupee 1": "true"
     #"Romani Ranch Barn Invisible Rupee 2": "true"
