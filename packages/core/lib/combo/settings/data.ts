@@ -902,15 +902,15 @@ export const SETTINGS = [{
   default: 'none'
 }, {
   key: 'csmc',
-  name: 'Chest Appearance Matches Content',
+  name: 'Container Appearance Matches Content',
   category: 'main.misc',
   type: 'enum',
   values: [
-    { value: 'never',  name: 'Never', description: 'Chests will be vanilla' },
-    { value: 'agony',  name: 'Stone of Agony', description: 'Chests will match content when you have the Stone of Agony in OoT' },
-    { value: 'always', name: 'Always', description: 'Chests will always match content' },
+    { value: 'never',  name: 'Never', description: 'Containers will be vanilla' },
+    { value: 'agony',  name: 'Stone of Agony', description: 'Containers will match content when you have the Stone of Agony in OoT' },
+    { value: 'always', name: 'Always', description: 'Containers will always match content' },
   ],
-  description: 'Modifies the chests appearance so that they match their content. Works for unique items, keys, fairies, and souls.',
+  description: 'Modifies the chest, grass, and pot appearance so that they match their content. Works for unique items, keys, fairies, and souls. Grass and pots will otherwise always be gold if the item has not been collected',
   default: 'always'
 }, {
   key: 'csmcHearts',
