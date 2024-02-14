@@ -381,8 +381,8 @@ MM_MILK_ROAD_FROM_FIELD:                        { game: mm, id: 0x3e00, type: re
 MM_FIELD_FROM_MILK_ROAD:                        { game: mm, id: 0x5450, type: overworld, areas: ["MM Milk Road", "MM Termina Field"], reverse: MM_MILK_ROAD_FROM_FIELD }
 MM_GORMAN_TRACK_FROM_MILK_ROAD:                 { game: mm, id: 0xce00, type: region-full, areas: ["MM Milk Road", "MM Gorman Track Front"], reverse: MM_MILK_ROAD_FROM_GORMAN_TRACK }
 MM_MILK_ROAD_FROM_GORMAN_TRACK:                 { game: mm, id: 0x3e30, type: overworld, areas: ["MM Gorman Track Front", "MM Milk Road"], reverse: MM_GORMAN_TRACK_FROM_MILK_ROAD }
-MM_GORMAN_FENCE_FROM_MILK_ROAD:                 { game: mm, id: 0xce30, type: region-full, areas: ["MM Milk Road", "MM Behind Gorman Fence"], reverse: MM_MILK_ROAD_FROM_GORMAN_FENCE }
-MM_MILK_ROAD_FROM_GORMAN_FENCE:                 { game: mm, id: 0x3e20, type: overworld, areas: ["MM Behind Gorman Fence", "MM Milk Road"], reverse: MM_GORMAN_FENCE_FROM_MILK_ROAD }
+MM_GORMAN_BACK_FROM_MILK_ROAD:                  { game: mm, id: 0xce30, type: region-full, areas: ["MM Behind Gorman Fence", "MM Gorman Track Back"], reverse: MM_MILK_ROAD_FROM_GORMAN_BACK }
+MM_MILK_ROAD_FROM_GORMAN_BACK:                  { game: mm, id: 0x3e20, type: overworld, areas: ["MM Gorman Track Back", "MM Behind Gorman Fence"], reverse: MM_GORMAN_BACK_FROM_MILK_ROAD }
 MM_SNOWHEAD_PATH_FROM_MOUNTAIN_VILLAGE:         { game: mm, id: 0xb000, type: region-full, areas: ["MM Mountain Village", "MM Path to Snowhead Front"], reverse: MM_MOUNTAIN_VILLAGE_FROM_SNOWHEAD_PATH }
 MM_MOUNTAIN_VILLAGE_FROM_SNOWHEAD_PATH:         { game: mm, id: 0x9a40, type: overworld, areas: ["MM Path to Snowhead Front", "MM Mountain Village"], reverse: MM_SNOWHEAD_PATH_FROM_MOUNTAIN_VILLAGE }
 MM_SNOWHEAD_FROM_SNOWHEAD_PATH:                 { game: mm, id: 0xb200, type: region-full, areas: ["MM Path to Snowhead Back", "MM Snowhead Entrance"], reverse: MM_SNOWHEAD_PATH_FROM_SNOWHEAD }
