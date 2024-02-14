@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+
+- Add rupoors as optional, extra traps.
+
 ## [19.0] - 2024-02-14
 
 ### Added
