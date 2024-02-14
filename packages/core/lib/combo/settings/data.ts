@@ -1387,6 +1387,13 @@ export const SETTINGS = [{
   min: 0,
   max: 999,
 }, {
+  key: 'trapRupoor',
+  name: 'Rupoors',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Add rupoors',
+  default: false
+}, {
   key: 'sharedNutsSticks',
   name: 'Shared Nuts & Sticks',
   category: 'items.shared',

@@ -575,6 +575,24 @@ export class LogicPassWorldTransform {
     }
   }
 
+  private setupExtraTraps() {
+    let extraTraps: Item[] = [];
+
+    if (this.state.settings.trapRupoor) {
+      extraTraps.push(Items.OOT_TRAP_RUPOOR);
+      extraTraps.push(Items.MM_TRAP_RUPOOR);
+    }
+
+    if (extraTraps.length === 0)
+      return;
+
+    const junkCount = Array.from(this.pool.entries())
+      .filter(([pi, _]) => this.state.itemProperties.junk.has(pi.item))
+      .reduce((acc, [_, count]) => acc + count, 0);
+    const trapCount = (junkCount * 20) / (this.state.worlds.length * extraTraps.length * 100);
+    this.addItems(extraTraps, trapCount);
+  }
+
   /**
    * Setup the shared items.
    */
@@ -1166,6 +1184,9 @@ export class LogicPassWorldTransform {
       this.replaceItem(Items.MM_SHIELD_MIRROR, Items.MM_SHIELD);
       this.addItem(Items.MM_SHIELD);
     }
+
+    /* Setup extra traps */
+    this.setupExtraTraps();
 
     /* Setup shared items */
     this.setupSharedItems();
