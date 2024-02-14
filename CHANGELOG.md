@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [19.0] - 2024-02-14
+
 ### Added
 
 - Add Stone Mask to Ocarina of Time.
@@ -999,7 +1001,8 @@ All notable changes to this project will be documented in this file.
 
 - Initial stable release.
 
-[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v18.3...HEAD
+[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v19.0...HEAD
+[19.0]: https://github.com/OoTMM/OoTMM/compare/v18.3...v19.0
 [18.3]: https://github.com/OoTMM/OoTMM/compare/v18.2...v18.3
 [18.2]: https://github.com/OoTMM/OoTMM/compare/v18.1...v18.2
 [18.1]: https://github.com/OoTMM/OoTMM/compare/v18.0...v18.1
