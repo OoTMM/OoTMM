@@ -788,10 +788,6 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   MM_SOUL_NPC_THIEVES: 'Soul of Patrolling Pirates',
   MM_SOUL_NPC_CHILD_MAJORA: 'Soul of Majora Child',
   MM_SOUL_ENEMY_THIEVES: 'Soul of Fighting Pirates',
-  MM_SOUL_NPC_CHILD_ODOLWA: 'Soul of Odolwa Child',
-  MM_SOUL_NPC_CHILD_GOHT: 'Soul of Goht Child',
-  MM_SOUL_NPC_CHILD_GYORG: 'Soul of Gyord Child',
-  MM_SOUL_NPC_CHILD_TWINMOLD: 'Soul of Twinmold Child',
   MM_SOUL_NPC_DOG_OWNER: 'Soul of Doggy Racetrack Owner',
   SHARED_SOUL_ENEMY_POE: 'Soul of Poes',
   SHARED_SOUL_ENEMY_SPIKE_TRAPS: 'Soul of Spiky Traps',
@@ -837,7 +833,10 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   OOT_SOUL_NPC_THIEVES: 'Soul of Patrolling Gerudos',
   OOT_SOUL_ENEMY_THIEVES: 'Soul of Fighting Gerudos',
   SHARED_SOUL_NPC_THIEVES: 'Soul of Patrolling Thieves',
-  SHARED_SOUL_NPC_FISHING_POND_OWNER: 'Soul of Fishing Pond and Trading Post Owner'
+  SHARED_SOUL_NPC_FISHING_POND_OWNER: 'Soul of Fishing Pond and Trading Post Owner',
+  MM_SOUL_NPC_MOON_CHILDREN: 'Soul of the Moon Children',
+  MM_SOUL_NPC_GORON: 'Soul of Gorons (MM)',
+  SHARED_SOUL_NPC_GORON: 'Soul of Gorons'
 };
 
 export function itemName(item: string) {
