@@ -2532,11 +2532,11 @@
   locations:
     "Waterfall Rapids Beaver Race 1": "has_mask_zora"
     "Waterfall Rapids Beaver Race 2": "has_mask_zora"
-"Zora Cape Entrance":
+"Zora Hall Entrance":
   region: ZORA_CAPE
   exits:
     "Zora Cape": "underwater_walking || (can_dive_small && trick(MM_ZORA_HALL_HUMAN))"
-    "Zora Hall Entrance": "underwater_walking || can_dive_small"
+    "Zora Hall": "underwater_walking || can_dive_small"
 "Zora Hall":
   region: ZORA_HALL
   exits:
