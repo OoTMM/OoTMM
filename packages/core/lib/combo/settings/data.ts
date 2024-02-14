@@ -373,7 +373,7 @@ export const SETTINGS = [{
     { value: 'removed', name: 'Removed', description: 'Start with the fairies, and the bubbles are removed.' },
     { value: 'starting', name: 'Starting', description: 'Start with the fairies' },
     { value: 'vanilla', name: 'Vanilla', description: 'The Dungeon Freestanding Stray Fairies will be at their original locations' },
-    { value: 'ownDungeon', name: 'Own Dungeon', description: 'All Dungeon Freestanding StrayFairies are shuffled within their own dungeon' },
+    { value: 'ownDungeon', name: 'Own Dungeon', description: 'All Dungeon Freestanding Stray Fairies are shuffled within their own dungeon' },
     { value: 'anywhere', name: 'Anywhere', description: 'All Dungeon Freestanding Stray Fairies are shuffled anywhere' },
   ],
   default: 'vanilla'
