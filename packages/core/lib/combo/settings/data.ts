@@ -19,7 +19,7 @@ export const SETTINGS = [{
   values: [
     { value: 'single', name: 'Singleplayer', description: 'A regular, one player seed' },
     { value: 'coop', name: 'Co-op', description: 'Everyone plays the same seed, all items are shared' },
-    { value: 'multi', name: 'Multiworld', description: 'A multiplayer settings where players can find each other\'s items' },
+    { value: 'multi', name: 'Multiworld', description: 'A multiplayer setting where players can find each other\'s items' },
   ],
   default: 'single'
 }, {
@@ -51,8 +51,8 @@ export const SETTINGS = [{
     { value: 'ganon', name: 'Ganon', description: 'You must beat Ganon.' },
     { value: 'majora', name: 'Majora', description: 'You must beat Majora.' },
     { value: 'both', name: 'Ganon & Majora', description: 'You must beat Ganon AND Majora. You can do so in any order.' },
-    { value: 'triforce', name: 'Triforce Hunt', description: 'You must collect triforce pieces to win.' },
-    { value: 'triforce3', name: 'Triforce Quest', description: 'You must collect the three parts of the triforce (Power, Courage and Wisdom) to win. Specific hints will guide you.' },
+    { value: 'triforce', name: 'Triforce Hunt', description: 'You must collect Triforce Pieces to win.' },
+    { value: 'triforce3', name: 'Triforce Quest', description: 'You must collect the three parts of the Triforce (Power, Courage and Wisdom) to win. Specific hints will guide you.' },
   ],
   default: 'both'
 }, {
@@ -106,7 +106,7 @@ export const SETTINGS = [{
   name: 'Generate Spoiler Log',
   category: 'main',
   type: 'boolean',
-  description: 'Generate an extra downloadable text file with the location of every item in the seed as well as other informations. It is recommended to enable this option.',
+  description: 'Generate an extra downloadable text file with the location of every item in the seed as well as other information. It is recommended to enable this option.',
   default: true
 }, {
   key: 'probabilisticFoolish',
@@ -136,7 +136,7 @@ export const SETTINGS = [{
   type: 'enum',
   description: 'Controls where songs can be obtained, in both games.',
   values: [
-    { value: 'songLocations', name: 'Song Locations', description: 'Only locations that contains songs in the vanilla games will have songs.' },
+    { value: 'songLocations', name: 'Song Locations', description: 'Only locations that contain songs in the vanilla games will have songs.' },
     { value: 'anywhere', name: 'Anywhere', description: 'Songs can be placed anywhere.' },
   ],
   default: 'songLocations'
@@ -145,23 +145,23 @@ export const SETTINGS = [{
   name: 'Gold Skulltula Tokens Shuffle',
   category: 'main.shuffle',
   type: 'enum',
-  description: 'Controls which Gold Skulltulas should conceal items different than Gold Tokens',
+  description: 'Controls how Gold Skulltulas will be shuffled',
   values: [
     { value: 'none', name: 'No Shuffle', description: 'All Gold Skulltula Tokens will be vanilla' },
     { value: 'dungeons', name: 'Dungeons Only', description: 'Only the Gold Skulltulas within dungeons will be shuffled' },
     { value: 'overworld', name: 'Overworld Only', description: 'Only the Gold Skulltulas outside of dungeons will be shuffled' },
-    { value: 'all', name: 'All Tokens', description: 'Every single Gold Skulltulas will be shuffled' },
+    { value: 'all', name: 'All Tokens', description: 'Every single Gold Skulltula will be shuffled' },
   ],
   default: 'none'
 }, {
   key: 'housesSkulltulaTokens',
-  name: 'Houses Skulltula Tokens Shuffle',
+  name: 'House Skulltula Tokens Shuffle',
   category: 'main.shuffle',
   type: 'enum',
-  description: 'Controls whether Swamp and Ocean should be shuffled or not',
+  description: 'Controls how Swamp and Ocean Skulltulas will be shuffled',
   values: [
     { value: 'none', name: 'No Shuffle', description: 'Swamp and Ocean Tokens will be vanilla' },
-    { value: 'cross', name: 'Gold Skulltulas Only', description: '' },
+    { value: 'cross', name: 'Gold Skulltulas Only', description: 'Any unshuffled Token can be found on any other unshuffled Skulltula' },
     { value: 'all', name: 'All Tokens', description: 'Swamp and Ocean Tokens can be found anywhere' },
   ],
   default: 'none'
@@ -174,7 +174,7 @@ export const SETTINGS = [{
   values: [
     { value: 'vanilla', name: 'Vanilla', description: 'Tingle Maps can be bought at Tingle, in their original locations' },
     { value: 'anywhere', name: 'Anywhere', description: 'Tingle Maps will be anywhere' },
-    { value: 'starting', name: 'Starting Items', description: 'Tingle Maps are in your pocket' },
+    { value: 'starting', name: 'Starting Items', description: 'Tingle Maps are in Link\'s pocket' },
     { value: 'removed', name: 'Removed', description: 'Tingle Maps are fully removed and cannot be obtained' },
   ],
   default: 'vanilla'
@@ -248,7 +248,7 @@ export const SETTINGS = [{
   values: [
     { value: 'ownDungeon', name: 'Own Dungeon', description: 'Boss Keys can only be in their own dungeons' },
     { value: 'anywhere', name: 'Anywhere', description: 'Boss Keys can be found anywhere' },
-    { value: 'removed', name: 'Removed', description: 'Boss keys are removed and boss doors are unlocked' },
+    { value: 'removed', name: 'Removed', description: 'Boss Keys are removed and boss doors are unlocked' },
   ],
   default: 'ownDungeon'
 }, {
@@ -260,7 +260,7 @@ export const SETTINGS = [{
   values: [
     { value: 'ownDungeon', name: 'Own Dungeon', description: 'Boss Keys can only be in their own dungeons' },
     { value: 'anywhere', name: 'Anywhere', description: 'Boss Keys can be found anywhere' },
-    { value: 'removed', name: 'Removed', description: 'Boss keys are removed and boss doors are unlocked' },
+    { value: 'removed', name: 'Removed', description: 'Boss Keys are removed and boss doors are unlocked' },
   ],
   default: 'ownDungeon'
 }, {
@@ -268,7 +268,7 @@ export const SETTINGS = [{
   name: 'Small Key Ring (OoT)',
   category: 'main.shuffle',
   type: 'set',
-  description: 'Controls the grouping of keys into keyrings, for OoT',
+  description: 'Controls the grouping of keys into key rings, for OoT',
   values: [
     { value: 'Forest', name: 'Forest Temple' },
     { value: 'Fire',   name: 'Fire Temple' },
@@ -287,7 +287,7 @@ export const SETTINGS = [{
   name: 'Small Key Ring (MM)',
   category: 'main.shuffle',
   type: 'set',
-  description: 'Controls the grouping of keys into keyrings, for MM',
+  description: 'Controls the grouping of keys into key rings, for MM',
   values: [
     { value: 'WF', name: 'Woodfall Temple' },
     { value: 'SH', name: 'Snowhead Temple' },
@@ -312,7 +312,7 @@ export const SETTINGS = [{
   name: 'Silver Rupee Pouches',
   category: 'main.shuffle',
   type: 'set',
-  description: 'Turn every set of silver rupees into a single item.',
+  description: 'Controls grouping of silver rupees into a single item.',
   values: [
     { value: 'DC', name: 'Dodongo\'s Cavern' },
     { value: 'BotW', name: 'Bottom of the Well' },
@@ -346,7 +346,7 @@ export const SETTINGS = [{
   type: 'enum',
   description: 'Controls where the Clock Town Stray Fairy can be',
   values: [
-    { value: 'vanilla', name: 'Vanilla', description: 'The Clock Town Stray Fairy will be at its original locations'},
+    { value: 'vanilla', name: 'Vanilla', description: 'The Clock Town Stray Fairy will be at its original location'},
     { value: 'anywhere', name: 'Anywhere', description: 'The Clock Town Stray Fairy can be found anywhere' },
   ],
   default: 'vanilla'
@@ -355,12 +355,12 @@ export const SETTINGS = [{
   name: 'Dungeon Chest Fairy Shuffle',
   category: 'main.shuffle',
   type: 'enum',
-  description: 'Controls where the Chest Dungeon Stray Fairies can be',
+  description: 'Controls where the Dungeon Chest Stray Fairies can be',
   values: [
     { value: 'starting', name: 'Starting', description: 'Start with the fairies' },
-    { value: 'vanilla', name: 'Vanilla', description: 'The Dungeon Stray Fairies will be at their original locations' },
-    { value: 'ownDungeon', name: 'Own Dungeon', description: 'All Dungeon Stray Fairies are shuffled within their own dungeon' },
-    { value: 'anywhere', name: 'Anywhere', description: 'All Dungeon Stray Fairies are shuffled anywhere' },
+    { value: 'vanilla', name: 'Vanilla', description: 'The Dungeon Chest Stray Fairies will be at their original locations' },
+    { value: 'ownDungeon', name: 'Own Dungeon', description: 'All Dungeon Chest Stray Fairies are shuffled within their own dungeon' },
+    { value: 'anywhere', name: 'Anywhere', description: 'All Dungeon Chest Stray Fairies are shuffled anywhere' },
   ],
   default: 'ownDungeon'
 }, {
@@ -368,13 +368,13 @@ export const SETTINGS = [{
   name: 'Dungeon Freestanding Fairy Shuffle',
   category: 'main.shuffle',
   type: 'enum',
-  description: 'Controls where the Freestanding Dungeon Stray Fairies can be',
+  description: 'Controls where the Dungeon Freestanding Stray Fairies can be',
   values: [
     { value: 'removed', name: 'Removed', description: 'Start with the fairies, and the bubbles are removed.' },
     { value: 'starting', name: 'Starting', description: 'Start with the fairies' },
-    { value: 'vanilla', name: 'Vanilla', description: 'The Dungeon Stray Fairies will be at their original locations' },
-    { value: 'ownDungeon', name: 'Own Dungeon', description: 'All Dungeon Stray Fairies are shuffled within their own dungeon' },
-    { value: 'anywhere', name: 'Anywhere', description: 'All Dungeon Stray Fairies are shuffled anywhere' },
+    { value: 'vanilla', name: 'Vanilla', description: 'The Dungeon Freestanding Stray Fairies will be at their original locations' },
+    { value: 'ownDungeon', name: 'Own Dungeon', description: 'All Dungeon Freestanding StrayFairies are shuffled within their own dungeon' },
+    { value: 'anywhere', name: 'Anywhere', description: 'All Dungeon Freestanding Stray Fairies are shuffled anywhere' },
   ],
   default: 'vanilla'
 }, {
@@ -399,7 +399,7 @@ export const SETTINGS = [{
   type: 'enum',
   description: 'Controls where the dungeons rewards should be',
   values: [
-    { value: 'dungeonBlueWarps', name: 'Dungeon Blue Warps', description: 'Only the blue warps will grand the rewards' },
+    { value: 'dungeonBlueWarps', name: 'Dungeon Blue Warps', description: 'Only the blue warps will grant the rewards' },
     { value: 'dungeonsLimited', name: 'Dungeons (Max one per dungeon)', description: 'Anywhere in dungeons (one max)' },
     { value: 'dungeons', name: 'Dungeons (Unrestricted)', description: 'Anywhere in dungeons' },
     { value: 'anywhere', name: 'Anywhere', description: 'Can be anywhere' },
@@ -410,28 +410,28 @@ export const SETTINGS = [{
   name: 'Scrub Shuffle (OoT)',
   category: 'main.shuffle',
   type: 'boolean',
-  description: 'Should Business Scrubs in OOT shuffled? If not, the one in Hyrule Field by Lake Hylia fences, the one by the Bridge in Lost Woods and the front one in the grotto near Sacred Forest Meadow will still be shuffled',
+  description: 'Controls whether or not Business Scrubs are shuffled (OoT). If not, the one in Hyrule Field by Lake Hylia\'s fences, the one by the Bridge in Lost Woods, and the front one in the grotto near Sacred Forest Meadow will still be shuffled',
   default: false
 }, {
   key: 'scrubShuffleMm',
   name: 'Scrub Shuffle (MM)',
   category: 'main.shuffle',
   type: 'boolean',
-  description: 'Shuffle the three business scrubs that sells regular items in MM',
+  description: 'Controls whether or not Business Scrubs are shuffled (MM). If not, the one in Termina Field near the Observatory and the one in Goron Village will still be shuffled',
   default: false
 }, {
   key: 'cowShuffleOot',
   name: 'Cow Shuffle (OoT)',
   category: 'main.shuffle',
   type: 'boolean',
-  description: 'Should playing Epona\'s Song near cows in OOT give an item?',
+  description: 'Controls whether or not playing Epona\'s Song near cows will give an item (OOT)',
   default: false
 }, {
   key: 'cowShuffleMm',
   name: 'Cow Shuffle (MM)',
   category: 'main.shuffle',
   type: 'boolean',
-  description: 'Should playing Epona\'s Song near cows in MM give an item?',
+  description: 'Controls whether or not playing Epona\'s Song near cows will give an item (MM)',
   default: false
 }, {
   key: 'shopShuffleOot',
@@ -449,7 +449,7 @@ export const SETTINGS = [{
   name: 'Shop Shuffle (MM)',
   category: 'main.shuffle',
   type: 'enum',
-  description: 'Controls whether or not shops in MM should have their items shuffled',
+  description: 'Controls whether or not shops in MM should have their items shuffled. If not, the Bomb Bag purchases will still be shuffled',
   values: [
     { value: 'none', name: 'None', description: 'All the items are vanilla' },
     { value: 'full', name: 'Full', description: 'All 8 items are shuffled' },
@@ -534,28 +534,28 @@ export const SETTINGS = [{
   name: 'Master Sword Shuffle',
   category: 'main.shuffle',
   type: 'boolean',
-  description: 'Controls whether or not the Master Sword is shuffled amongst all the items',
+  description: 'Controls whether or not the Master Sword is shuffled',
   default: true
 }, {
   key: 'shuffleGerudoCard',
   name: 'Gerudo Card Shuffle',
   category: 'main.shuffle',
   type: 'boolean',
-  description: 'Controls whether or not the Gerudo Membership Card is shuffled amongst all the items',
+  description: 'Controls whether or not the Gerudo Membership Card is shuffled',
   default: true
 }, {
   key: 'shuffleMerchantsMm',
   name: 'Merchants Shuffle (MM)',
   category: 'main.shuffle',
   type: 'boolean',
-  description: 'Shuffle the Milk Bar and Gorman milk purchases in MM',
+  description: 'Controls whether or not the Milk Bar and Gorman milk purchases in MM are shuffled',
   default: false
 }, {
   key: 'pondFishShuffle',
   name: 'Fishing Pond Fish Shuffle',
   category: 'main.shuffle',
   type: 'boolean',
-  description: 'Controls whether or not the Fish (and the Loach) in the Fishing Pond are shuffled amongst all the items.',
+  description: 'Controls whether or not the Fish (and the Loaches) in the Fishing Pond are shuffled amongst all the items.',
   default: false
 }, {
   key: 'divingGameRupeeShuffle',
@@ -583,7 +583,7 @@ export const SETTINGS = [{
   name: 'Fairy Spot Shuffle (OoT)',
   category: 'main.shuffle',
   type: 'boolean',
-  description: 'Controls whether or not big fairies in fairy spots are shuffled (OoT).',
+  description: 'Controls whether or not big fairies in fairy spots are shuffled (OoT). Play either Song of Storms or Sun\'s Song',
   default: false
 }, {
   key: 'eggShuffle',
@@ -602,7 +602,7 @@ export const SETTINGS = [{
   name: 'Ganon Trials',
   category: 'main.events',
   type: 'set',
-  description: 'Enables or disables the trials in Ganon\'s Castle',
+  description: 'Controls which trials in Ganon\'s Castle are enabled',
   values: [
     { value: 'Light',   name: 'Light Trial' },
     { value: 'Forest',  name: 'Forest Trial' },
@@ -642,7 +642,7 @@ export const SETTINGS = [{
   type: 'enum',
   description: 'Alters the Door of Time state',
   values: [
-    { value: 'closed', name: 'Closed', description: 'The Door will be closed, and you will need to play Song of Time in front of the Temple of Time altar to open it. (The Spiritual Stones are NOT needed)' },
+    { value: 'closed', name: 'Closed', description: 'The Door will be closed, and you will need to play Song of Time in front of the Temple of Time altar to open it. (The Spiritual Stones and Ocarina of Time are NOT needed)' },
     { value: 'open', name: 'Open', description: 'The Door is already open' },
   ],
   default: 'closed'
@@ -663,10 +663,10 @@ export const SETTINGS = [{
   name: 'Deku Tree',
   category: 'main.events',
   type: 'enum',
-  description: 'Alters the Deku Tree state',
+  description: 'Controls the behavior of Mido blocking the Deku Tree as child',
   values: [
-    { value: 'closed', name: 'Closed', description: 'Mido will block the way to the deku tree until you have a deku shield and the kokiri sword.' },
-    { value: 'open', name: 'Open', description: 'The deku tree will be open from the start' },
+    { value: 'closed', name: 'Closed', description: 'Mido will block the way to the Deku Tree until you have a Deku Shield and the Kokiri Sword.' },
+    { value: 'open', name: 'Open', description: 'The Deku Tree will be open from the start' },
   ],
   default: 'open'
 }, {
@@ -695,12 +695,12 @@ export const SETTINGS = [{
   name: 'Open Dungeons (MM)',
   category: 'main.events',
   type: 'set',
-  description: 'Make some MM dungeons more readily accessible.',
+  description: 'Controls whether or not MM dungeons will need their respective song. Takes priority over Clear State',
   values: [
     { value: 'WF', name: 'Woodfall Temple' },
     { value: 'SH', name: 'Snowhead Temple' },
     { value: 'GB', name: 'Great Bay Temple' },
-    { value: 'ST', name: 'Stone Tower Temple' },
+    { value: 'ST', name: 'Stone Tower Temples' },
   ],
   default: 'none'
 }, {
@@ -708,7 +708,7 @@ export const SETTINGS = [{
   name: 'Clear State Dungeons (MM)',
   category: 'main.events',
   type: 'enum',
-  description: 'Make some MM dungeons open during clear state.',
+  description: 'Controls whether or not MM dungeons will need their respectives songs in the cleared state',
   values: [
     { value: 'none', name: 'None' },
     { value: 'WF', name: 'Woodfall Temple' },
@@ -721,10 +721,10 @@ export const SETTINGS = [{
   name: 'Kakariko Gate',
   category: 'main.events',
   type: 'enum',
-  description: 'Alters the Kakariko Gate (leading to Death Mountain Trail) state',
+  description: 'Controls the behavior of the gate in Kakariko blocking Death Mountain as child',
   values: [
-    { value: 'closed', name: 'Closed' },
-    { value: 'open', name: 'Open' },
+    { value: 'closed', name: 'Closed', description: 'The gate will be closed until you show Zelda\'s Letter to the guard' },
+    { value: 'open', name: 'Open', description: 'The gate will be open from the start' },
   ],
   default: 'closed'
 }, {
@@ -739,11 +739,11 @@ export const SETTINGS = [{
   name: 'King Zora',
   category: 'main.events',
   type: 'enum',
-  description: 'Alters the behavior of King Zora in Zora\'s Domain',
+  description: 'Controls the behavior of King Zora in Zora\'s Domain',
   values: [
     { value: 'vanilla', name: 'Vanilla', description: 'You will need to present him Ruto\'s Letter in order to enter Zora\'s Fountain as both Child and Adult' },
-    { value: 'adult', name: 'Open (Adult Only)', description: 'Already on the side as Adult, leaving Zora\'s Fountain access free. Child still needs Ruto\'s Letter' },
-    { value: 'open', name: 'Open', description: 'He will already be on the side for both Child and Adult, and Ruto\'s Letter is removed from the game, in favor of an empty bottle' },
+    { value: 'adult', name: 'Open (Adult Only)', description: 'Already on the side as Adult, granting free Zora\'s Fountain access. Child still needs Ruto\'s Letter' },
+    { value: 'open', name: 'Open', description: 'He will already be on the side for both Child and Adult, and Ruto\'s Letter is replaced by an empty bottle' },
   ],
   default: 'vanilla'
 }, {
@@ -751,11 +751,11 @@ export const SETTINGS = [{
   name: 'Gerudo Fortress',
   category: 'main.events',
   type: 'enum',
-  description: 'Alters the behavior of the Carpenters in Gerudo Fortress',
+  description: 'Controls the behavior of the Carpenters in Gerudo Fortress',
   values: [
     { value: 'vanilla', name: 'Vanilla', description: 'You will need to rescue all carpenters.' },
     { value: 'single', name: 'One Carpenter', description: 'You will need to rescue only one carpenter.' },
-    { value: 'open', name: 'Open', description: 'Carpenters are rescued from the start.' },
+    { value: 'open', name: 'Open', description: 'Carpenters are rescued from the start and the bridge in Gerudo Valley as adult is repaired.' },
   ],
   default: 'vanilla'
 }, {
@@ -763,7 +763,7 @@ export const SETTINGS = [{
   name: 'Skip Child Zelda',
   category: 'main.events',
   type: 'boolean',
-  description: 'This changes the beginning of the child trade quest. True means you\'ll start having already met Zelda and got her item along the one from Impa. And the Chicken is also removed from the game',
+  description: 'This changes the beginning of the child trade quest. True means you\'ll start having already met Zelda and got her item along with the one from Impa. The Chicken is also removed from the game, but Malon will still be at Hyrule Castle',
   default: false,
 }, {
   key: 'openMoon',
@@ -777,7 +777,7 @@ export const SETTINGS = [{
   name: 'Light Arrow Cutscene',
   category: 'main.events',
   type: 'enum',
-  description: 'Alters how the Light Arrow Cutscene should be triggered',
+  description: 'Controls how the Light Arrow Cutscene should be triggered',
   values: [
     { value: 'vanilla', name: 'Vanilla', description: 'Triggers at Temple of Time with Shadow and Spirit Medallions' },
     { value: 'custom', name: 'Custom', description: 'Triggers at Temple of Time with a special condition'},
@@ -788,9 +788,9 @@ export const SETTINGS = [{
   name: 'Rainbow Bridge',
   category: 'main.events',
   type: 'enum',
-  description: 'Alters how the Rainbow Bridge should be triggered',
+  description: 'Controls how the Rainbow Bridge should be triggered',
   values: [
-    { value: 'open', name: 'Open', description: 'Always open' },
+    { value: 'open', name: 'Open', description: 'The Rainbow Bridge is always open' },
     { value: 'vanilla', name: 'Vanilla', description: 'Opens when you have the Light Arrows, Shadow Medallion, and Spirit Medallion' },
     { value: 'medallions', name: 'Medallions', description: 'Opens when you have all Medallions' },
     { value: 'custom', name: 'Custom', description: 'You will need to meet a special condition to open the bridge' },
@@ -801,10 +801,10 @@ export const SETTINGS = [{
   name: 'Majora Child Requirements',
   category: 'main.events',
   type: 'enum',
-  description: 'Alters the requirements to fight Majora',
+  description: 'Controls the requirements to enter Majora\'s arena',
   values: [
-    { value: 'none', name: 'None', description: 'As soon as you have access to the Moon you can go fight Majora' },
-    { value: 'custom', name: 'Custom', description: 'You will need to meet a special condition to fight Majora' },
+    { value: 'none', name: 'None', description: 'As soon as you have access to the Moon you can enter Majora\'s arena' },
+    { value: 'custom', name: 'Custom', description: 'You will need to meet a special condition to enter Majora\'s arena' },
   ],
   default: 'none',
   cond: (s: any) => s.goal !== 'triforce' && s.goal !== 'triforce3',
@@ -813,7 +813,7 @@ export const SETTINGS = [{
   name: 'Boss Warp Pads',
   category: 'main.events',
   type: 'enum',
-  description: 'Alters the behavior of the MM Boss Warp Pads.',
+  description: 'Controls the behavior of the MM Boss Warp Pads.',
   values: [
     { value: 'bossBeaten', name: 'Boss Beaten', description: 'Enabled when the boss is beaten' },
     { value: 'remains', name: 'Remains', description: 'Enabled when the matching remain is obtained' },
@@ -896,25 +896,25 @@ export const SETTINGS = [{
   description: 'Controls whether you can play Song of Soaring from OOT to warp to MM Owl Statues and how logic should be affected',
   values: [
     { value: 'none', name: 'None', description: 'Song of Soaring is fully disabled in OOT' },
-    { value: 'childOnly', name: 'Child Only', description: 'Song of Soaring in OOT is enabled, and logic only accounts for Child using it' },
-    { value: 'full', name: 'Child & Adult', description: 'Song of Soaring in OOT is enabled, and logic accounts for both Child and Adult using it' },
+    { value: 'childOnly', name: 'Child Only', description: 'Song of Soaring in OOT is enabled and logical only for Child' },
+    { value: 'full', name: 'Child & Adult', description: 'Song of Soaring in OOT is enabled and logical for both Child and Adult' },
   ],
   default: 'none'
 }, {
   key: 'csmc',
-  name: 'Chest Size Matches Content',
+  name: 'Chest Appearance Matches Content',
   category: 'main.misc',
   type: 'enum',
   values: [
     { value: 'never',  name: 'Never', description: 'Chests will be vanilla' },
-    { value: 'agony',  name: 'Stone of Agony', description: 'Chests will match content when you have the stone of agony in OoT' },
+    { value: 'agony',  name: 'Stone of Agony', description: 'Chests will match content when you have the Stone of Agony in OoT' },
     { value: 'always', name: 'Always', description: 'Chests will always match content' },
   ],
-  description: 'Modifies the chests appearance so they match their content. Works for unique items, keys and fairies.',
+  description: 'Modifies the chests appearance so that they match their content. Works for unique items, keys, fairies, and souls.',
   default: 'always'
 }, {
   key: 'csmcHearts',
-  name: 'CSMC for Heart Pieces/Containers',
+  name: 'CAMC for Heart Pieces/Containers',
   category: 'main.misc',
   type: 'boolean',
   default: true,
@@ -922,11 +922,11 @@ export const SETTINGS = [{
   cond: (x: any) => x.csmc !== 'never',
 }, {
   key: 'csmcExtra',
-  name: 'Extra CSMC',
+  name: 'Skulltula CAMC',
   category: 'main.misc',
   type: 'boolean',
   default: false,
-  description: 'Enables CSMC on a wider range of checks',
+  description: 'Enables CAMC for shuffled Gold, Swamp, and Ocean Skulltulas',
   cond: (x: any) => x.csmc !== 'never',
 }, {
   key: 'blastMaskCooldown',
@@ -963,7 +963,7 @@ export const SETTINGS = [{
   name: 'Fierce Deity Anywhere in MM',
   category: 'main.misc',
   type: 'boolean',
-  description: 'Controls the ability to use Fierce Deity outside of boss lairs',
+  description: 'Controls the ability to use Fierce Deity outside of boss lairs. No logical applications',
   default: false
 }, {
   key: 'hookshotAnywhereOot',
@@ -1045,9 +1045,10 @@ export const SETTINGS = [{
   name: 'OoT Shields',
   category: 'items.progressive',
   type: 'enum',
+  description: 'Alters OOT Shields behavior',
   values: [
-    { value: 'separate', name: 'Separate' },
-    { value: 'progressive', name: 'Progressive' },
+    { value: 'separate', name: 'Separate', description: 'They can be found independently from each other' },
+    { value: 'progressive', name: 'Progressive', description: 'Each Progressive Shield will grant you the next one: Deku Shield -> Hylian Shield -> Mirror Shield. Other Deku and Hylian Shields do not count towards this chain, only the Progressive Shield item.' },
   ],
   default: 'separate'
 }, {
@@ -1067,9 +1068,10 @@ export const SETTINGS = [{
   name: 'MM Shields',
   category: 'items.progressive',
   type: 'enum',
+  description: 'Alters MM Shields behavior',
   values: [
-    { value: 'separate', name: 'Separate' },
-    { value: 'progressive', name: 'Progressive' },
+    { value: 'separate', name: 'Separate', description: 'They can be found independently from each other' },
+    { value: 'progressive', name: 'Progressive', description: 'Each Progressive Shield will grant you the next one: Hero Shield -> Mirror Shield. Other Hero Shields do not count towards this chain, only the Progressive Shield item. If shields are shared, Hero Shield will be obtained alongside Hylian Shield' },
   ],
   default: 'separate'
 }, {
@@ -1077,6 +1079,7 @@ export const SETTINGS = [{
   name: 'MM Great Fairy Sword',
   category: 'items.progressive',
   type: 'enum',
+  description: 'Controls whether Great Fairy Sword is included in sword progression',
   values: [
     { value: 'separate', name: 'Separate' },
     { value: 'progressive', name: 'Progressive' },
@@ -1087,9 +1090,10 @@ export const SETTINGS = [{
   name: 'MM Goron Lullaby',
   category: 'items.progressive',
   type: 'enum',
+  description: 'Alters the behavior of Goron Lullaby',
   values: [
     { value: 'single', name: 'Full Lullaby Only', description: 'Only the Goron Lullaby can be found, and when playing with Songs on Song Locations, Baby Goron in MM is no longer a Song Location' },
-    { value: 'progressive', name: 'Progressive' },
+    { value: 'progressive', name: 'Progressive', description: 'Lullaby Intro will be received first before getting the full song' },
   ],
   default: 'progressive'
 }, {
@@ -1104,7 +1108,7 @@ export const SETTINGS = [{
   name: 'Sun\'s Song in MM',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Enables Sun\'s Song as an item in MM.',
+  description: 'Enables Sun\'s Song as an item in MM. If Songs are on Songs, you must share or start with at least one song',
   default: false
 }, {
   key: 'fairyOcarinaMm',
@@ -1118,28 +1122,28 @@ export const SETTINGS = [{
   name: 'Blue Fire Arrows',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Changes the OoT Ice Arrows to have Blue Fire properties',
+  description: 'Gives the OOT Ice Arrows the properties of Blue Fire',
   default: false,
 }, {
   key: 'sunlightArrows',
   name: 'Sunlight Arrows',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Changes the OoT Light Arrows to have "beams of light" properties',
+  description: 'Gives the OOT Light Arrows the ability to activate most sun switches',
   default: false,
 }, {
   key: 'shortHookshotMm',
   name: 'Short Hookshot in MM',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Adds a short hookshot in MM (logic accounts for that). A trick is also there for some of the harder spots',
+  description: 'Adds a short hookshot in MM (logic accounts for this). A trick is also there for some of the harder spots',
   default: false
 }, {
   key: 'childWallets',
   name: 'Child Wallets',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Shuffles the starting Wallet... making it so you have to find it to spend anything!',
+  description: 'Shuffles the starting Wallets... making it so you have to find it to hold anything!',
   default: false
 }, {
   key: 'colossalWallets',
@@ -1175,7 +1179,7 @@ export const SETTINGS = [{
   name: 'Magical Rupee',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Adds a Magical Rupee that can triggers ever silver-rupee event.',
+  description: 'Adds a Magical Rupee that can trigger every silver-rupee event.',
   default: false,
   cond: (s: any) => s.silverRupeeShuffle !== 'vanilla',
 }, {
@@ -1253,7 +1257,7 @@ export const SETTINGS = [{
   name: "Strength (MM)",
   category: 'items.extensions',
   type: 'boolean',
-  description: "Adds Goron's Bracelet, Silver Gauntlets and Golden Gauntlets in Majora's Mask.",
+  description: "Adds Goron's Bracelet, Silver Gauntlets, and Golden Gauntlets in Majora's Mask.",
   default: false
 }, {
   key: 'blastMaskOot',
@@ -1344,7 +1348,7 @@ export const SETTINGS = [{
   name: 'Coins',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Enable the leftover coin items, that can be used for special conds',
+  description: 'Enable the leftover coin items. These can be used for special conds',
   default: false
 }, {
   key: 'coinsRed',
@@ -1391,7 +1395,7 @@ export const SETTINGS = [{
   name: 'Rupoors',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Add rupoors',
+  description: 'Add rupoors to the item pool. They remove 10 rupees when collected',
   default: false
 }, {
   key: 'sharedNutsSticks',
@@ -1705,6 +1709,7 @@ export const SETTINGS = [{
     { value: 'ownGame', name: 'Own Game' },
     { value: 'full', name: 'Full' },
   ],
+  description: 'Shuffle bosses either within their own game or across both',
   default: 'none'
 }, {
   key: 'erDungeons',
@@ -1728,7 +1733,7 @@ export const SETTINGS = [{
     { value: 'ownGame', name: 'Own Game' },
     { value: 'full', name: 'Full' },
   ],
-  description: 'TODO',
+  description: 'Enables the ability for Wallmasters to take you to random locations within their own game or across both games, based on other entrance settings',
   default: 'none'
 }, {
   key: 'erMajorDungeons',
