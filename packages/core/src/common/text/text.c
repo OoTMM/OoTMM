@@ -281,6 +281,7 @@ static int isItemAmbiguous(s16 gi)
     case GI_OOT_RUPEE_RED:
     case GI_OOT_RUPEE_PURPLE:
     case GI_OOT_RUPEE_HUGE:
+    case GI_OOT_TRAP_RUPOOR:
     case GI_MM_WALLET:
     case GI_MM_WALLET2:
     case GI_MM_WALLET3:
@@ -292,6 +293,7 @@ static int isItemAmbiguous(s16 gi)
     case GI_MM_RUPEE_PURPLE:
     case GI_MM_RUPEE_SILVER:
     case GI_MM_RUPEE_GOLD:
+    case GI_MM_TRAP_RUPOOR:
         return !comboConfig(CFG_SHARED_WALLETS);
     case GI_OOT_HEART_CONTAINER:
     case GI_OOT_HEART_CONTAINER2:
