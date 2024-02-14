@@ -433,8 +433,10 @@ OOT_CRATER_FROM_TRAIL_SUMMIT:                   { game: oot, id: 0x147, type: re
 OOT_TRAIL_SUMMIT_FROM_CRATER:                   { game: oot, id: 0x1bd, type: overworld, areas: ["OOT Death Mountain Crater Top", "OOT Death Mountain Summit"], reverse: OOT CRATER_FROM_TRAIL_SUMMIT }
 OOT_LOST_WOODS:                                 { game: oot, id: 0x11e, type: region-full, areas: ["OOT Kokiri Forest", "OOT Lost Woods"], reverse: OOT_FOREST_FROM_LOST_WOODS }
 OOT_FOREST_FROM_LOST_WOODS:                     { game: oot, id: 0x286, type: overworld, areas: ["OOT Lost Woods", "OOT Kokiri Forest"], reverse: OOT LOST_WOODS }
-OOT_FOREST_FROM_LOST_WOODS_BRDIGE:              { game: oot, id: 0x5e0, type: region-full, areas: ["OOT  Lost Woods Bridge", "OOT Kokiri Forest"], reverse: OOT_LOST_WOODS_BRIDGE_FROM_FOREST }
+OOT_FOREST_FROM_LOST_WOODS_BRDIGE:              { game: oot, id: 0x5e0, type: region-full, areas: ["OOT Lost Woods Bridge", "OOT Kokiri Forest"], reverse: OOT_LOST_WOODS_BRIDGE_FROM_FOREST }
 OOT_LOST_WOODS_BRIDGE_FROM_FOREST:              { game: oot, id: 0x20d, type: overworld, areas: ["OOT Kokiri Forest", "OOT Lost Woods Bridge from Forest"], reverse: OOT FOREST_FROM_LOST_WOODS_BRDIGE }
+OOT_GRAVEYARD:                                  { game: oot, id: 0x0e4, type: region-full, areas: ["OOT Kakariko", "OOT Graveyard"], reverse: OOT_KAKARIKO_FROM_GRAVEYARD }
+OOT_KAKARIKO_FROM_GRAVEYARD:                    { game: oot, id: 0x195, type: overworld, areas: ["OOT Graveyard", "OOT Kakariko"], reverse: OOT_GRAVEYARD }
 OOT_WASTELAND:                                  { game: oot, id: 0x130, type: region-sand, areas: ["OOT Fortress Near Wasteland", "OOT Haunted Wasteland Start"], reverse: OOT_FORTRESS_FROM_WASTELAND }
 OOT_FORTRESS_FROM_WASTELAND:                    { game: oot, id: 0x365, type: overworld, areas: ["OOT Haunted Wasteland Start", "OOT Fortress Near Wasteland"], reverse: OOT WASTELAND }
 OOT_COLOSSUS:                                   { game: oot, id: 0x225, type: region-sand, areas: ["OOT Haunted Wasteland End", "OOT Desert Colossus"], reverse: OOT_WASTELAND_FROM_COLOSSUS }
