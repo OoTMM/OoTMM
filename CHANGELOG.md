@@ -8,6 +8,10 @@ All notable changes to this project will be documented in this file.
 
 - Add rupoors as optional, extra traps.
 
+### Fixed
+
+- Fix FW soaring / game over issue.
+
 ## [19.1] - 2024-02-14
 
 ### Fixed

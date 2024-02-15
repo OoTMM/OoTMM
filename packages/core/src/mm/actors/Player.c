@@ -257,15 +257,17 @@ void Player_Action_CastingSpell(Actor_Player* this, GameState_Play* play)
             {
                 gFwPointerPos = this->base.world.pos;
                 gSaveContext.save.fw.set = 1;
-                gSaveContext.save.fw.pos.x = gSaveContext.respawn[RESPAWN_MODE_DOWN].pos.x;
-                gSaveContext.save.fw.pos.y = gSaveContext.respawn[RESPAWN_MODE_DOWN].pos.y;
-                gSaveContext.save.fw.pos.z = gSaveContext.respawn[RESPAWN_MODE_DOWN].pos.z;
+                gSaveContext.save.fw.pos = gSaveContext.respawn[RESPAWN_MODE_DOWN].pos;
                 gSaveContext.save.fw.yaw = gSaveContext.respawn[RESPAWN_MODE_DOWN].yaw;
                 gSaveContext.save.fw.playerParams = 0x6FF;
                 gSaveContext.save.fw.entranceIndex = gSaveContext.respawn[RESPAWN_MODE_DOWN].entrance;
                 gSaveContext.save.fw.roomIndex = gSaveContext.respawn[RESPAWN_MODE_DOWN].roomIndex;
                 gSaveContext.save.fw.tempSwchFlags = gSaveContext.respawn[RESPAWN_MODE_DOWN].tempSwitchFlags;
                 gSaveContext.save.fw.tempCollectFlags = gSaveContext.respawn[RESPAWN_MODE_DOWN].tempCollectFlags;
+
+                // Copy Game Over / Soar to Entrance respawn data.
+                gSaveContext.save.fwRespawnTop = gSaveContext.respawn[RESPAWN_MODE_TOP];
+
                 this->av2.actionVar2 = 2;
             }
         }
@@ -406,6 +408,9 @@ void Player_Action_FaroresWindText(Actor_Player* this, GameState_Play* play)
             gSaveContext.respawn[RESPAWN_MODE_DOWN].roomIndex = gSaveContext.save.fw.roomIndex;
             gSaveContext.respawn[RESPAWN_MODE_DOWN].tempSwitchFlags = gSaveContext.save.fw.tempSwchFlags;
             gSaveContext.respawn[RESPAWN_MODE_DOWN].tempCollectFlags = gSaveContext.save.fw.tempCollectFlags;
+
+            // Restore Game Over / Soar to Entrance respawn data.
+            gSaveContext.respawn[RESPAWN_MODE_TOP] = gSaveContext.save.fwRespawnTop;
 
             // TODO cancel timers?
 
