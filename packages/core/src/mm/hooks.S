@@ -41,23 +41,9 @@ PATCH_START 0x80800134
   nop
 PATCH_END
 
-/* Skip the intro */
-PATCH_START 0x8096b974
-  li v0, 0xd
-PATCH_END
-
-PATCH_START 0x8096c50c
-  nop
-PATCH_END
-
 /* Disable normal flash handler - we use our own one */
 PATCH_START 0x80185d78
   li v0,0
-PATCH_END
-
-/* Mute the title screen "START" sound */
-PATCH_START 0x8096c568
-  nop
 PATCH_END
 
 /* Disable the first cycle ocarina check */
