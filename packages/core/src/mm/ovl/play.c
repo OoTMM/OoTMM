@@ -218,13 +218,53 @@ static void sendSelfMajorasMask(void)
     BITMAP8_SET(gSharedCustomSave.mm.npc, npc);
 }
 
+void preInitTitleScreen(void)
+{
+    if (!gComboCtx.valid)
+        return;
+
+    /* Disable Title screen */
+    gSaveContext.gameMode = 0;
+
+    /* Load save */
+    gSaveContext.fileIndex = gComboCtx.saveIndex;
+    Sram_OpenSave(NULL, NULL);
+
+    gSave.cutscene = 0;
+    gSaveContext.nextCutscene = 0;
+    if (gComboCtx.entrance == -1)
+        gSave.entranceIndex = ENTR_MM_CLOCK_TOWN;
+    else
+        gSave.entranceIndex = gComboCtx.entrance;
+    if (comboConfig(CFG_ER_ANY))
+        g.initialEntrance = gSave.entranceIndex;
+    else
+        g.initialEntrance = ENTR_MM_CLOCK_TOWN;
+
+    /* Handle shuffled entrance */
+    switch (gSave.entranceIndex)
+    {
+    case ENTR_MM_BOSS_TEMPLE_WOODFALL:
+    case ENTR_MM_BOSS_TEMPLE_SNOWHEAD:
+    case ENTR_MM_BOSS_TEMPLE_GREAT_BAY:
+    case ENTR_MM_BOSS_TEMPLE_STONE_TOWER:
+        gNoTimeFlow = 1;
+        break;
+    }
+
+    /* Finished */
+    gComboCtx.valid = 0;
+}
+
 void hookPlay_Init(GameState_Play* play)
 {
     int isEndOfGame;
 
-    isEndOfGame = 0;
+    /* Pre-init */
+    preInitTitleScreen();
 
     /* Init */
+    isEndOfGame = 0;
     gActorCustomTriggers = NULL;
     gMultiMarkChests = 0;
     gMultiMarkCollectibles = 0;

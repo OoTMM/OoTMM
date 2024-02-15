@@ -28,34 +28,6 @@ void Sram_AfterOpenSave(void)
     gSave.equippedMask = 0;
     gSave.entranceIndex = ENTR_MM_CLOCK_TOWN;
 
-    if (gComboCtx.valid)
-    {
-        if (gComboCtx.entrance != -1)
-        {
-            gSave.entranceIndex = gComboCtx.entrance;
-
-            if (comboConfig(CFG_ER_ANY))
-                g.initialEntrance = gComboCtx.entrance;
-            else
-                g.initialEntrance = ENTR_MM_CLOCK_TOWN;
-            gComboCtx.entrance = -1;
-        }
-
-        if (gComboCtx.shuffledEntrance)
-        {
-            switch (gSave.entranceIndex)
-            {
-            case ENTR_MM_BOSS_TEMPLE_WOODFALL:
-            case ENTR_MM_BOSS_TEMPLE_SNOWHEAD:
-            case ENTR_MM_BOSS_TEMPLE_GREAT_BAY:
-            case ENTR_MM_BOSS_TEMPLE_STONE_TOWER:
-                gNoTimeFlow = 1;
-                break;
-            }
-            gComboCtx.shuffledEntrance = 0;
-        }
-    }
-
 #if defined(DEBUG) && defined(DEBUG_MM_ENTRANCE)
     gSave.entranceIndex = DEBUG_MM_ENTRANCE;
 #endif
