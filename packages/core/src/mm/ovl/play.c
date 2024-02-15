@@ -299,6 +299,9 @@ void hookPlay_Init(GameState_Play* play)
         MM_SET_EVENT_WEEK(EV_MM_WEEK_GREAT_BAY_TURTLE);
     }
 
+    if (gSave.entranceIndex == ENTR_MM_CLOCK_TOWER || gSave.entranceIndex == ENTR_MM_MOON)
+        gNoTimeFlow = 1;
+
     Play_Init(play);
     gPlay = play;
     gLastEntrance = gSave.entranceIndex;
