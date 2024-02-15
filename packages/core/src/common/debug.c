@@ -155,8 +155,8 @@ static u8 menu(const DebugMenuEntry* entries, s16* cursor, s16* scroll, u32* dat
     if (btnPressed(U_JPAD)) tmpCursor--;
     if (btnPressed(L_JPAD)) tmpCursor -= 5;
     if (btnPressed(R_JPAD)) tmpCursor += 5;
-    if (tmpCursor < 0) tmpCursor = 0;
-    if (tmpCursor >= entryCount) tmpCursor = entryCount - 1;
+    if (tmpCursor < 0) tmpCursor = entryCount - 1;
+    if (tmpCursor >= entryCount) tmpCursor = 0;
     *cursor = (u16)tmpCursor;
 
     /* Scrolling */
