@@ -1,5 +1,5 @@
 import React from 'react';
-import { SPECIAL_CONDS, SPECIAL_CONDS_FIELDS } from '@ootmm/core';
+import { Settings, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS } from '@ootmm/core';
 
 import { useSettings } from '../contexts/GeneratorContext';
 import { Checkbox } from './Checkbox';
@@ -25,8 +25,12 @@ function SpecialCondsPanel({ cond }: SpecialCondsPanelProps) {
   for (const f in SPECIAL_CONDS_FIELDS) {
     if(c[f as keyof typeof SPECIAL_CONDS_FIELDS]) {
       max += Number(SPECIAL_CONDS_FIELDS[f].max);
+      if (f === 'masksOot')
+        max -= Object.keys(settings).filter(key => key.includes('sharedMask')).filter(x => settings[x as keyof Settings]).length;
     }
   }
+
+  const label = `Amount (max: ${max > 0 ? max : 0})`
 
   return (
     <form onSubmit={e => e.preventDefault()}>
@@ -42,7 +46,7 @@ function SpecialCondsPanel({ cond }: SpecialCondsPanelProps) {
           />
         )}
          </Group>
-        <InputNumber max={max} label="Amount" value={c.count} onChange={x => setSettings({ specialConds: { [cond]: { count: x } }} as any)}/>
+        <InputNumber max={max} label={label} value={c.count} onChange={x => setSettings({ specialConds: { [cond]: { count: x } }} as any)}/>
       </Group>
     </form>
   );
