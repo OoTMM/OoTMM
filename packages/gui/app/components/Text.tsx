@@ -13,7 +13,7 @@ type TextProps = {
   export function Text({ size, children, style, className}: TextProps)  {
     const typographyStyle = {
       fontSize: getTypographySizeRem(size),
-      lineHeight: getTypographySizeRem(size),
+      lineHeight: Number(getTypographySizeRem(size))*2,
     };
 
     const combinedStyle = { ...typographyStyle, ...style };
