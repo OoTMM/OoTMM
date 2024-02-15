@@ -82,19 +82,6 @@ void Sram_AfterOpenSave(void)
 
     /* Dungeon shuffle override */
     dungeonRespawn(gSave.sceneId);
-
-    /* Game switch override */
-    if (gComboCtx.valid)
-    {
-        gSave.entrance = ENTRANCE_MARKET;
-        gComboCtx.valid = 0;
-
-        if (gComboCtx.entrance != -1)
-        {
-            gSave.entrance = gComboCtx.entrance;
-            gComboCtx.entrance = -1;
-        }
-    }
 }
 
 void Sram_CopySaveWrapper(void* fileSelect, void* sramCtx)

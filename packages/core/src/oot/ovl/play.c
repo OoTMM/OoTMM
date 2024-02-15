@@ -297,8 +297,41 @@ static u32 entranceForOverride(u32 entrance)
     }
 }
 
+void preInitTitleScreen(void)
+{
+    s16 magicCapacity;
+
+    if (gComboCtx.valid)
+    {
+        /* Disable Title screen */
+        gSaveContext.gameMode = 0;
+
+        /* Set file and load */
+        gSaveContext.fileIndex = gComboCtx.saveIndex;
+        Sram_OpenSave(NULL);
+        gSave.cutscene = 0;
+        if (gComboCtx.entrance == -1)
+            gSave.entrance = 0x1d1;
+        else
+            gSave.entrance = gComboCtx.entrance;
+        gComboCtx.valid = 0;
+
+        /* Set magic */
+        magicCapacity = 0;
+        if (gSave.playerData.magicUpgrade)
+            magicCapacity = gSave.playerData.magicUpgrade2 ? 0x60 : 0x30;
+        gSaveContext.magicState = MAGIC_STATE_IDLE;
+        gSaveContext.magicCapacity = magicCapacity;
+        gSaveContext.magicFillTarget = gSave.playerData.magicAmount;
+        gSaveContext.magicTarget = gSave.playerData.magicAmount;
+    }
+}
+
 void hookPlay_Init(GameState_Play* play)
 {
+    /* Pre-init */
+    preInitTitleScreen();
+
     /* Init */
     gActorCustomTriggers = NULL;
     gMultiMarkChests = 0;
@@ -400,12 +433,6 @@ void hookPlay_Init(GameState_Play* play)
     CustomTriggers_Spawn(play);
     comboSpawnCustomWarps(play);
 
-    /* Title screen transition skip */
-    if (gComboCtx.valid)
-    {
-        play->transitionType = TRANS_TYPE_INSTANT;
-    }
-
     if (!gCustomKeep)
     {
         comboLoadCustomKeep();
@@ -428,22 +455,7 @@ void Play_UpdateWrapper(GameState_Play* play)
     comboCacheGarbageCollect();
     comboObjectsGC();
     Play_Update(play);
-
-    if (gComboCtx.valid)
-    {
-        OPEN_DISPS(play->gs.gfx);
-        gDPSetCycleType(OVERLAY_DISP++, G_CYC_FILL);
-        gDPSetRenderMode(OVERLAY_DISP++, G_RM_NOOP, G_RM_NOOP2);
-        gDPSetFillColor(OVERLAY_DISP++, 0);
-        gDPFillRectangle(OVERLAY_DISP++, 0, 0, 319, 239);
-        CLOSE_DISPS();
-    }
-    else
-    {
-        /* Need to draw dpad */
-        comboDpadDraw(play);
-    }
-
+    comboDpadDraw(play);
     Debug_Update();
 }
 

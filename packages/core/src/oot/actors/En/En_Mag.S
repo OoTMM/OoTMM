@@ -1,18 +1,5 @@
 #include <combo.h>
 
-EnMag_BeforeUpdate_Trampoline:
-  HOOK_CALL EnMag_BeforeUpdate
-
-  /* Original code */
-  sw  a1,0x44(sp)
-  jr  ra
-   lw a0,0x44(sp)
-
-PATCH_START 0x80aed38c
-  jal EnMag_BeforeUpdate_Trampoline
-   nop
-PATCH_END
-
 EnMag_AfterDraw_Trampoline:
   lw a0,0x40(sp)
   lw a1,0x44(sp)

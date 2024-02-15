@@ -182,6 +182,7 @@ PlayStoreFlags = 0x8009d894;
 Player_Update = 0x80097740;
 Play_SetupRespawnPoint = 0x8009D94C;
 
+Sram_OpenSave = 0x800902ac;
 OverlayAddr = 0x80099dbc;
 
 Player_InCsMode = 0x8007943c;

@@ -1,15 +1,5 @@
 #include <combo.h>
 
-void EnMag_BeforeUpdate(Actor* this, GameState_Play* play)
-{
-    if (gComboCtx.valid && play->transitionTrigger == 0)
-    {
-        gSaveContext.gameMode = 2;
-        play->transitionTrigger = TRANS_TYPE_NORMAL;
-        play->transitionType = TRANS_TYPE_FADE_BLACK_FAST;
-    }
-}
-
 void* gMmMag;
 
 static void BlitTexture(GfxContext* gfx, u32 addr, s16 w, s16 h, s16 x, s16 y, float scale)

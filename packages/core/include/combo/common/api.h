@@ -212,6 +212,7 @@ void RemoveItem(s16 item, s16 slot);
 void* ActorAlloc(u32 size);
 void  ActorFree(void* data);
 
+void Sram_OpenSave(void*);
 void Sram_CopySave(void*, void*);
 
 void Play_Init(GameState_Play*);

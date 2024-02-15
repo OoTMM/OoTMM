@@ -1,5 +1,10 @@
 #include <combo.h>
 
+/* Use our hook to load the save */
+PATCH_START 0x800902e8
+  jal comboReadOwnSave
+PATCH_END
+
 /* Replace SaveGame */
 PATCH_START 0x800905d4
   j PrepareAndSave
@@ -7,6 +12,10 @@ PATCH_START 0x800905d4
 PATCH_END
 
 /* Hook after save load */
+PATCH_START 0x800902dc
+  nop
+PATCH_END
+
 PATCH_START 0x800905cc
   j Sram_AfterOpenSave
 PATCH_END
