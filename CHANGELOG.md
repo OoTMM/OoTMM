@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix a softlock when getting an item on the same frame the player switches to Kafei in Sakon's Hideout.
 - Fix the doors in Sakon hideout not respecting enemy souls properly.
 - Fix more instances of the Fog Glitch in OoT.
 - Fix FW soaring / game over issue.
