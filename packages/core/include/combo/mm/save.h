@@ -208,9 +208,9 @@ typedef struct
     MmItemEquips            itemEquips;
     MmInventory             inventory;
     MmPermanentSceneFlags   permanentSceneFlags[120];
-    FaroresWindData         fw;
+    RespawnData             fw;
     RespawnData             fwRespawnTop;
-    u8                      unk_E60[0xC];
+    u8                      unk_E58[0x14];
     u32                     dekuPlaygroundHighScores[3];
     u32                     pictoFlags0;
     u32                     pictoFlags1;
