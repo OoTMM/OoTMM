@@ -314,3 +314,16 @@ MM_WALLMASTER_BTW_FOUNTAIN:                     { game: mm,  id: 0xff02, type: w
 MM_WALLMASTER_BTW_EXIT:                         { game: mm,  id: 0xff03, type: wallmaster, areas: ["MM Beneath The Well Wallmaster Near Exit", "MM VOID"] }
 MM_CLOCK_TOWN:                                  { game: mm,  id: 0xd800, type: none, debug: ['COMMON', 'Clock Town'] }
 MM_MOON:                                        { game: mm,  id: 0xc800, type: none, debug: ['COMMON', 'Moon'] }
+OOT_BOSS_GANON2:                                { game: oot, id: 0x517,  type: none, debug: ['BOSS', 'Ganon'] }
+OOT_LOST_BRIDGE_FROM_KOKIRI_FOREST:             { game: oot, id: 0x5e0,  type: none }
+OOT_GERUDO_FORTRESS_CAUGHT_NO_HOOK:             { game: oot, id: 0x1a5,  type: none }
+OOT_GERUDO_FORTRESS_CAUGHT:                     { game: oot, id: 0x5f8,  type: none }
+OOT_CASTLE_STEALTH:                             { game: oot, id: 0x07a,  type: none }
+OOT_CASTLE_FROM_STEALTH:                        { game: oot, id: 0x23d,  type: none }
+OOT_CASTLE_COURTYARD:                           { game: oot, id: 0x400,  type: none }
+OOT_CASTLE_CAUGHT:                              { game: oot, id: 0x47e,  type: none }
+OOT_SHOP_MASKS:                                 { game: oot, id: 0x530,  type: none }
+OOT_SAGES_CHAMBER_END:                          { game: oot, id: 0x06b,  type: none }
+OOT_TEMPLE_OF_TIME_MASTER_SWORD_CS:             { game: oot, id: 0x2ca,  type: none }
+OOT_ZORA_RIVER_FROM_FIELD_WATER:                { game: oot, id: 0x1d9,  type: none }
+OOT_FIELD_FROM_ZORA_RIVER_WATER:                { game: oot, id: 0x311,  type: none }

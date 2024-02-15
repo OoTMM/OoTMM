@@ -7,14 +7,14 @@
 #define ENTRANCE_MARKET       0x1d1
 
 static const s32 kDungeonEntrances[] = {
-    0x000,
-    0x004,
-    0x028,
-    0x169,
-    0x165,
-    0x010,
-    0x037,
-    0x082,
+    ENTR_OOT_DEKU_TREE,
+    ENTR_OOT_DODONGO_CAVERN,
+    ENTR_OOT_JABU_JABU,
+    ENTR_OOT_TEMPLE_FOREST,
+    ENTR_OOT_TEMPLE_FIRE,
+    ENTR_OOT_TEMPLE_WATER,
+    ENTR_OOT_TEMPLE_SHADOW,
+    ENTR_OOT_TEMPLE_SPIRIT,
 };
 
 static void dungeonRespawn(s16 sceneId)

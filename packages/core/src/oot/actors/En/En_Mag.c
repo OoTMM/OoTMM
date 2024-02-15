@@ -4,9 +4,9 @@ void EnMag_BeforeUpdate(Actor* this, GameState_Play* play)
 {
     if (gComboCtx.valid && play->transitionTrigger == 0)
     {
-        *(u32*)(((char*)&gSaveContext) + 4956) = 2;
+        gSaveContext.gameMode = 2;
         play->transitionTrigger = TRANS_TYPE_NORMAL;
-        play->transitionType = 4;
+        play->transitionType = TRANS_TYPE_FADE_BLACK_FAST;
     }
 }
 
