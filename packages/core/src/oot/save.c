@@ -6,7 +6,7 @@
 
 #define ENTRANCE_MARKET       0x1d1
 
-static const s32 kDungeonEntrances[] = {
+static const u16 kDungeonEntrances[] = {
     ENTR_OOT_DEKU_TREE,
     ENTR_OOT_DODONGO_CAVERN,
     ENTR_OOT_JABU_JABU,
@@ -17,9 +17,21 @@ static const s32 kDungeonEntrances[] = {
     ENTR_OOT_TEMPLE_SPIRIT,
 };
 
-static void dungeonRespawn(s16 sceneId)
+static const u16 kBossEntrances[] = {
+    ENTR_OOT_BOSS_DEKU_TREE,
+    ENTR_OOT_BOSS_DODONGO_CAVERN,
+    ENTR_OOT_BOSS_JABU_JABU,
+    ENTR_OOT_BOSS_TEMPLE_FOREST,
+    ENTR_OOT_BOSS_TEMPLE_FIRE,
+    ENTR_OOT_BOSS_TEMPLE_WATER,
+    ENTR_OOT_BOSS_TEMPLE_SHADOW,
+    ENTR_OOT_BOSS_TEMPLE_SPIRIT,
+};
+
+static void dungeonRespawn(s16 sceneId, int isSave)
 {
     int bossId;
+    int dungeonId;
 
     switch (sceneId)
     {
@@ -51,15 +63,20 @@ static void dungeonRespawn(s16 sceneId)
         return;
     }
 
-    bossId = gComboData.boss[bossId];
-    if (bossId >= BOSSID_ODOLWA)
+    dungeonId = gComboData.boss[bossId];
+    if (dungeonId >= DUNGEONID_TEMPLE_WOODFALL)
     {
-        /* Coming from MM */
-        gSave.entrance = ENTRANCE_MARKET;
-        return;
+        if (isSave)
+        {
+            gSave.entrance = (gSave.age == AGE_ADULT) ? ENTR_OOT_TEMPLE_OF_TIME : ENTR_OOT_HOUSE_LINK;
+        }
+        else
+        {
+            gSave.entrance = kBossEntrances[bossId];
+        }
     }
-
-    gSave.entrance = kDungeonEntrances[bossId];
+    else
+        gSave.entrance = kDungeonEntrances[dungeonId];
 }
 
 void Sram_AfterOpenSave(void)
@@ -81,7 +98,7 @@ void Sram_AfterOpenSave(void)
     comboOnSaveLoad();
 
     /* Dungeon shuffle override */
-    dungeonRespawn(gSave.sceneId);
+    dungeonRespawn(gSave.sceneId, 1);
 }
 
 void Sram_CopySaveWrapper(void* fileSelect, void* sramCtx)
@@ -311,7 +328,7 @@ void comboCreateSave(void* unk, void* buffer)
 
 static void DeathWarpWrapper(GameState_Play* play)
 {
-    dungeonRespawn(play->sceneId);
+    dungeonRespawn(play->sceneId, 0);
     DeathWarp(play);
 }
 

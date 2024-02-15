@@ -8,6 +8,10 @@ All notable changes to this project will be documented in this file.
 
 - Add rupoors as optional, extra traps.
 
+### Changed
+
+- Change OoT boss room death/respawn behavior slightly to avoid gaining out of logic access to market.
+
 ### Fixed
 
 - Fix Clock showing (and time flowing) on Clock Tower Roof and Moon.
