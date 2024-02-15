@@ -1,5 +1,5 @@
 import React from 'react';
-import { Settings, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS } from '@ootmm/core';
+import { SPECIAL_CONDS, SPECIAL_CONDS_FIELDS } from '@ootmm/core';
 
 import { useSettings } from '../contexts/GeneratorContext';
 import { Checkbox } from './Checkbox';
@@ -16,16 +16,23 @@ function SpecialCondsPanel({ cond }: SpecialCondsPanelProps) {
   const c = specialConds[cond as keyof typeof SPECIAL_CONDS];
   const enableCond = SPECIAL_CONDS[cond].cond || (() => true);
   const enabled = enableCond(settings);
-
+  let max = 0;
+  
   if (!enabled) {
     return null;
+  }
+
+  for (const f in SPECIAL_CONDS_FIELDS) {
+    if(c[f as keyof typeof SPECIAL_CONDS_FIELDS]) {
+      max += Number(SPECIAL_CONDS_FIELDS[f].max);
+    }
   }
 
   return (
     <form onSubmit={e => e.preventDefault()}>
       <Group direction="vertical">
         <Text size='jb'>{SPECIAL_CONDS[cond].name}</Text>
-        <Group direction="vertical" spacing='xs'> 
+        <Group direction="vertical" spacing='xs' className={cond}> 
         {Object.keys(SPECIAL_CONDS_FIELDS).filter(key => { const cond = (SPECIAL_CONDS_FIELDS as any)[key].cond; return cond ? cond(settings) : true }).map(key =>
           <Checkbox
             key={key}
@@ -35,7 +42,7 @@ function SpecialCondsPanel({ cond }: SpecialCondsPanelProps) {
           />
         )}
          </Group>
-        <InputNumber label="Amount" value={c.count} onChange={x => setSettings({ specialConds: { [cond]: { count: x } }} as any)}/>
+        <InputNumber max={max} label="Amount" value={c.count} onChange={x => setSettings({ specialConds: { [cond]: { count: x } }} as any)}/>
       </Group>
     </form>
   );
