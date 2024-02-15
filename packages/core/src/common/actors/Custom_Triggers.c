@@ -29,7 +29,7 @@ int CustomTriggers_GiveItem(Actor_CustomTriggers* this, GameState_Play* play, co
 
     if (Actor_HasParent(&this->base))
     {
-        this->base.attachedA = NULL;
+        this->base.parent = NULL;
         return 1;
     }
 

@@ -52,7 +52,7 @@ void EnExRuppy_HandlerCollected(Actor_EnExRuppy* this, GameState_Play* play)
     Actor_EnDivingGame* divingGame;
     if (Message_IsClosed(&this->actor, play))
     {
-        divingGame = (Actor_EnDivingGame*)this->actor.attachedA;
+        divingGame = (Actor_EnDivingGame*)this->actor.parent;
         divingGame->grabbedRupeesCounter++;
         UnfreezePlayer(play);
         ActorDestroy(&this->actor);

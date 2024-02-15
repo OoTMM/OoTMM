@@ -11,7 +11,7 @@ int EnSyatekiMan_HasGivenItemSwamp(Actor* this, GameState_Play* play)
         link = GET_LINK(play);
         if (link->state & PLAYER_ACTOR_STATE_GET_ITEM)
         {
-            this->attachedA = NULL;
+            this->parent = NULL;
             MM_SET_EVENT_WEEK(EV_MM_WEEK_ARCHERY_SWAMP_QUIVER);
         }
     }
@@ -31,7 +31,7 @@ int EnSyatekiMan_HasGivenItemTown(Actor* this, GameState_Play* play)
         link = GET_LINK(play);
         if (link->state & PLAYER_ACTOR_STATE_GET_ITEM)
         {
-            this->attachedA = NULL;
+            this->parent = NULL;
             MM_SET_EVENT_WEEK(EV_MM_WEEK_ARCHERY_TOWN_QUIVER);
             *(u16*)((char*)this + 0x284) = 0x406;
         }

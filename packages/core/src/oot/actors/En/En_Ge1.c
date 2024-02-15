@@ -33,7 +33,7 @@ int EnGe1_HasGivenItem(Actor* this, GameState_Play* play)
         link = GET_LINK(play);
         if (link->state & PLAYER_ACTOR_STATE_GET_ITEM)
         {
-            this->attachedA = NULL;
+            this->parent = NULL;
             BITMAP16_SET(gSave.eventsItem, EV_OOT_ITEM_HBA_1500);
             BITMAP16_SET(gSave.eventsMisc, EV_OOT_INF_HBA_1000);
             *(u16*)((char*)this + 0x29c) |= 2;

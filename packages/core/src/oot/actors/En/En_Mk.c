@@ -35,7 +35,7 @@ void EnMk_EyeballFrogHandler(Actor* this, GameState_Play* play)
 {
     if (Actor_HasParent(this))
     {
-        this->attachedA = NULL;
+        this->parent = NULL;
         SET_HANDLER(this, actorAddr(0x14a, 0x80aacd6c));
         return;
     }

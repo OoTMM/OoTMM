@@ -28,7 +28,7 @@ int EnKz_HasGiveItem(Actor* this)
 {
     if (Actor_HasParent(this))
     {
-        this->attachedA = NULL;
+        this->parent = NULL;
         gOotExtraFlags.tunicZora = 1;
         return 1;
     }

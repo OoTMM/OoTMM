@@ -46,7 +46,7 @@ void EnItem00_GiveItemDefaultRange(Actor_EnItem00* this, GameState_Play* play, s
 
     if (itemId >= 0)
     {
-        this->base.attachedA = &link->base;
+        this->base.parent = &link->base;
         AddItemWithIcon(play, link, &kExtendedGetItems[gi - 1]);
         return;
     }

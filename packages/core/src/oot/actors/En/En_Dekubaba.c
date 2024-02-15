@@ -23,7 +23,7 @@ void EnDekubaba_GiveItemDefaultRange(Actor* this, GameState_Play* play, s16 gi)
             dist = -dist;
         if (dist < 10.f)
         {
-            this->attachedA = &link->base;
+            this->parent = &link->base;
             AddItemWithIcon(play, link, &kExtendedGetItems[gi - 1]);
         }
     }

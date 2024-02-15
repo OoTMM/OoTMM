@@ -200,11 +200,11 @@ static void HandleFrameDelay(Actor_Player* link, GameState_Play* play, Actor* ar
     curInfo = GetArrowInfo(arrow->variable);
     if (arrow && curInfo)
     {
-        special = arrow->attachedB;
+        special = arrow->child;
         if (special)
         {
             ActorRemove(&play->actorCtx, special, play);
-            arrow->attachedB = NULL;
+            arrow->child = NULL;
         }
 
         /* Update the magic state */
@@ -250,8 +250,8 @@ static Actor* ArrowCycle_FindArrow(Actor_Player* link, GameState_Play* play)
 {
     Actor* attached;
 
-    attached = link->base.attachedB;
-    if (attached && attached->id == AC_EN_ARROW && attached->attachedA == &link->base) {
+    attached = link->base.child;
+    if (attached && attached->id == AC_EN_ARROW && attached->parent == &link->base) {
         return attached;
     } else {
         return NULL;
@@ -330,7 +330,7 @@ void ArrowCycle_Handle(Actor_Player* link, GameState_Play* play)
     arrow->variable = nextInfo->var;
     ReinitializeArrow(arrow, play);
 
-    special = arrow->attachedB;
+    special = arrow->child;
     if (special)
         special->draw = NULL;
 

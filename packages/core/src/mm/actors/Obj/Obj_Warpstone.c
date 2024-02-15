@@ -68,7 +68,7 @@ void ObjWarpstone_GiveItem(Actor* this, GameState_Play* play)
 
         if (!(link->state & PLAYER_ACTOR_STATE_GET_ITEM))
         {
-            this->attachedA = NULL;
+            this->parent = NULL;
             next = actorAddr(AC_OBJ_WARPSTONE, 0x80b92c48);
             SET_HANDLER(this, next);
             next(this, play);

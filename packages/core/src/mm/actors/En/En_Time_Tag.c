@@ -32,7 +32,7 @@ void EnTimeTag_HandlerSoaring(Actor* this, GameState_Play* play)
     if (ActorTalkedTo(this))
     {
         Message_Close(play);
-        this->attachedA = NULL;
+        this->parent = NULL;
         SET_HANDLER(this, EnTimeTag_GiveItemSoaring);
         EnTimeTag_GiveItemSoaring(this, play);
         return;

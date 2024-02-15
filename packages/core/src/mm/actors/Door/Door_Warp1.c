@@ -99,7 +99,7 @@ int DoorWarp1_ShouldTrigger(Actor* this, GameState_Play* play)
         if (!gMmExtraFlags2.songOath)
         {
             gMmExtraFlags2.songOath = 1;
-            this->attachedA = NULL;
+            this->parent = NULL;
         }
         else
         {
