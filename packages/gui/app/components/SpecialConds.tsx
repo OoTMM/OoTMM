@@ -23,12 +23,11 @@ function SpecialCondsPanel({ cond }: SpecialCondsPanelProps) {
   }
 
   for (const f in SPECIAL_CONDS_FIELDS) {
-    if(c[f as keyof typeof SPECIAL_CONDS_FIELDS]) {
+    if(c[f as keyof typeof SPECIAL_CONDS_FIELDS]) 
       max += Number(SPECIAL_CONDS_FIELDS[f].max);
-      if (f === 'masksOot')
-        max -= Object.keys(settings).filter(key => key.includes('sharedMask')).filter(x => settings[x as keyof Settings]).length;
-    }
   }
+  if (c['masksOot'] && c['masksRegular'])
+    max -= Object.keys(settings).filter(key => key.includes('sharedMask')).filter(x => settings[x as keyof Settings]).length;
 
   const label = `Amount (max: ${max > 0 ? max : 0})`
 
