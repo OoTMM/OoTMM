@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix the doors in Sakon hideout not respecting enemy souls properly.
 - Fix more instances of the Fog Glitch in OoT.
 - Fix FW soaring / game over issue.
 
