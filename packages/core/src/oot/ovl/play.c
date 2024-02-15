@@ -92,14 +92,12 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.dungeonKeys[SCE_OOT_TEMPLE_FOREST] = 9;
         gSave.inventory.dungeonKeys[SCE_OOT_INSIDE_GANON_CASTLE] = 9;
 
-        /*
         gSave.inventory.quest.medallionShadow = 1;
         gSave.inventory.quest.medallionSpirit = 1;
         gSave.inventory.quest.medallionForest = 1;
         gSave.inventory.quest.medallionFire = 1;
         gSave.inventory.quest.medallionWater = 1;
         gSave.inventory.quest.medallionLight = 1;
-        */
 
         gSave.inventory.quest.stoneRuby = 1;
 
