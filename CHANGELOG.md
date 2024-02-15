@@ -16,6 +16,12 @@ All notable changes to this project will be documented in this file.
 - Fix more instances of the Fog Glitch in OoT.
 - Fix FW soaring / game over issue.
 
+## [19.2] - 2024-02-15
+
+### Fixed
+
+- Fix Evan sometimes crashing the game, for real this time.
+
 ## [19.1] - 2024-02-14
 
 ### Fixed
@@ -1019,8 +1025,9 @@ All notable changes to this project will be documented in this file.
 
 - Initial stable release.
 
-[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v19.1...HEAD
-[19.1]: https://github.com/OoTMM/OoTMM/compare/v90.0...v19.1
+[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v19.2...HEAD
+[19.2]: https://github.com/OoTMM/OoTMM/compare/v19.1...v19.2
+[19.1]: https://github.com/OoTMM/OoTMM/compare/v19.0...v19.1
 [19.0]: https://github.com/OoTMM/OoTMM/compare/v18.3...v19.0
 [18.3]: https://github.com/OoTMM/OoTMM/compare/v18.2...v18.3
 [18.2]: https://github.com/OoTMM/OoTMM/compare/v18.1...v18.2
