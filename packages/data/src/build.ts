@@ -3,7 +3,7 @@ import { join } from 'path';
 import { parse as parseYaml } from 'yaml';
 import * as CSV from 'csv/sync';
 
-function emit(name: string, filename: string, data: any) {
+function emit(filename: string, data: any) {
   const dir = join(__dirname, '..', 'dist');
   mkdirSync(dir, { recursive: true });
   writeFileSync(join(dir, `${filename}.json`), JSON.stringify(data));
@@ -95,15 +95,15 @@ const HINTS_DATA = {
   mm: loadCsv('hints/hints_mm.csv'),
 };
 
-emit('WORLD', 'data-world', DATA_WORLD);
-emit('SCENES', 'data-scenes', loadYaml('defs/scenes.yml'));
-emit('NPC', 'data-npc', loadYaml('defs/npc.yml'));
-emit('REGIONS', 'data-regions', loadYaml('defs/regions.yml'));
-emit('HINTS', 'data-hints', loadYaml('defs/hints.yml'));
-emit('ENTRANCES', 'data-entrances', loadYaml('defs/entrances.yml'));
-emit('RAW_GI', 'data-gi', loadYaml('defs/gi.yml'));
-emit('RAW_DRAWGI', 'data-drawgi', loadYaml('defs/drawgi.yml'));
-emit('FILES', 'data-files', DATA_FILES);
-emit('MACROS', 'data-macros', MACROS);
-emit('POOL', 'data-pool', POOL);
-emit('RAW_HINTS_DATA', 'data-hints-raw', HINTS_DATA);
+emit('data-world', DATA_WORLD);
+emit('data-scenes', loadYaml('defs/scenes.yml'));
+emit('data-npc', loadYaml('defs/npc.yml'));
+emit('data-regions', loadYaml('defs/regions.yml'));
+emit('data-hints', loadYaml('defs/hints.yml'));
+emit('data-entrances', loadYaml('defs/entrances.yml'));
+emit('data-gi', loadYaml('defs/gi.yml'));
+emit('data-drawgi', loadYaml('defs/drawgi.yml'));
+emit('data-files', DATA_FILES);
+emit('data-macros', MACROS);
+emit('data-pool', POOL);
+emit('data-hints-raw', HINTS_DATA);
