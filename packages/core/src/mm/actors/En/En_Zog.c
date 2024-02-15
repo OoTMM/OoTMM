@@ -8,7 +8,7 @@ void EnZog_GiveItem(Actor* this, GameState_Play* play)
         gMmExtraFlags.maskZora = 1;
         if (!(GET_LINK(play)->state & PLAYER_ACTOR_STATE_GET_ITEM))
         {
-            play->nextEntrance = 0x68a0;
+            play->nextEntrance = ENTR_MM_COAST_FROM_MIKAU_CS;
             play->transitionTrigger = TRANS_TRIGGER_NORMAL;
             play->transitionType = TRANS_TYPE_FADE_BLACK;
             ActorDestroy(this);

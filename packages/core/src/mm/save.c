@@ -68,7 +68,7 @@ void Sram_SaveEndOfCycleWrapper(GameState_Play* play)
 
     /* Store a dummy scene/entrance in OoT (prevents reloading into a temple - could lead to softlocks) */
     gOotSave.sceneId = SCE_OOT_TEMPLE_OF_TIME;
-    gOotSave.entrance = 0x05f4;
+    gOotSave.entrance = ENTR_OOT_WARP_SONG_TEMPLE;
 
     comboSave(play, SF_NOCOMMIT);
     Sram_SaveEndOfCycle(play);
@@ -180,7 +180,7 @@ void comboSave(GameState_Play* play, int saveFlags)
 
     /* Reset the OoT spawn point */
     gOotSave.sceneId = SCE_OOT_TEMPLE_OF_TIME;
-    gOotSave.entrance = 0x05f4;
+    gOotSave.entrance = ENTR_OOT_WARP_SONG_TEMPLE;
 
     if (!(saveFlags & SF_NOCOMMIT))
     {

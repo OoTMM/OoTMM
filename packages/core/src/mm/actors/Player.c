@@ -367,7 +367,7 @@ void Player_Action_FaroresWindText(Actor_Player* this, GameState_Play* play)
         {
             s32 entrance = gSaveContext.save.fw.entranceIndex & 0xFF00;
             Vec3f* pos = &gSaveContext.save.fw.pos;
-            if (entrance == 0x8a00 || entrance == 0x9400) // Goron Village (Spring) or Goron Village (Winter)
+            if (entrance == ENTR_MM_GORON_VILLAGE_FROM_TWIN_SPRING || entrance == ENTR_MM_GORON_VILLAGE_FROM_TWIN_WINTER) // Goron Village (Spring) or Goron Village (Winter)
             {
                 if (MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH) && pos->x > 1100.0f) // from Lens Cave
                 {
@@ -376,7 +376,7 @@ void Player_Action_FaroresWindText(Actor_Player* this, GameState_Play* play)
                     pos->z = -911.0f;
                 }
             }
-            else if (entrance == 0x8600) // Woodfall
+            else if (entrance == ENTR_MM_WOODFALL_FROM_SWAMP) // Woodfall
             {
                 if (!MM_GET_EVENT_WEEK(EV_MM_WEEK_WOODFALL_TEMPLE_RISE) && ABS(pos->z) < 500.0f)
                 {
