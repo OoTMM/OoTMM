@@ -236,7 +236,7 @@ MM_FISHER_HUT:                                  { game: mm, id: 0x7200, type: in
 MM_GREAT_BAY_COAST_FROM_FISHER_HUT:             { game: mm, id: 0x6840, type: indoors-exit, areas: ["MM Fisher's Hut", "MM Great Bay Coast"], reverse: MM_FISHER_HUT }
 MM_LABORATORY:                                  { game: mm, id: 0x5800, type: indoors, areas: ["MM Great Bay Coast", "MM Laboratory"], reverse: MM_GREAT_BAY_COAST_FROM_LABORATORY }
 MM_GREAT_BAY_COAST_FROM_LABORATORY:             { game: mm, id: 0x6870, type: indoors-exit, areas: ["MM Laboratory", "MM Great Bay Coast"], reverse: MM_LABORATORY }
-MM_ROOM_EVANS:                                  { game: mm, id: 0x9230, type: indoors, areas: ["MM Zora Hall", "MM Evan's Room"], reverse: MM_ZORA_HALL_FROM_EVANS }
+MM_ROOM_EVANS:                                  { game: mm, id: 0x9230, type: indoors, areas: ["MM Zora Hall", "MM Evan's Room"], reverse: MM_ZORA_HALL_FROM_EVANS, debug: [INTERIOR, "Evan"] }
 MM_ZORA_HALL_FROM_EVANS:                        { game: mm, id: 0x6040, type: indoors-exit, areas: ["MM Evan's Room", "MM Zora Hall"], reverse: MM_ROOM_EVANS }
 MM_ROOM_JAPAS:                                  { game: mm, id: 0x9210, type: indoors, areas: ["MM Zora Hall", "MM Japas' Room"], reverse: MM_ZORA_HALL_FROM_JAPAS }
 MM_ZORA_HALL_FROM_JAPAS:                        { game: mm, id: 0x6050, type: indoors-exit, areas: ["MM Japas' Room", "MM Zora Hall"], reverse: MM_ROOM_JAPAS }
@@ -331,7 +331,7 @@ MM_CLOCK_TOWN_FROM_SONG_OF_TIME:                { game: mm,  id: 0x1c00, type: n
 MM_CLOCK_TOWER_MOON_CRASH:                      { game: mm,  id: 0xc030, type: none }
 MM_CLOCK_TOWER_FROM_CLOCK_TOWN:                 { game: mm,  id: 0xc010, type: none }
 MM_TERMINA_FIELD_FROM_CLOCK_TOWN_WEST:          { game: mm,  id: 0x5400, type: none }
-MM_GORON_VILLAGE_FROM_TWIN_SPRING:              { game: mm,  id: 0x8a00, type: none }                       
-MM_GORON_VILLAGE_FROM_TWIN_WINTER:              { game: mm,  id: 0x9400, type: none }                       
+MM_GORON_VILLAGE_FROM_TWIN_SPRING:              { game: mm,  id: 0x8a00, type: none }
+MM_GORON_VILLAGE_FROM_TWIN_WINTER:              { game: mm,  id: 0x9400, type: none }
 MM_WOODFALL_FROM_SWAMP:                         { game: mm,  id: 0x8600, type: none }
 MM_COAST_FROM_MIKAU_CS:                         { game: mm,  id: 0x68a0, type: none }
