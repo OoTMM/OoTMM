@@ -134,6 +134,8 @@ static void debugCheat(GameState_Play* play)
 
 static void checkTimeSkip(GameState_Play* play)
 {
+    static int sTimeSkipAcc;
+
     int currentHalfDay;
     int nextHalfDay;
     u32 linearTime;
@@ -141,7 +143,10 @@ static void checkTimeSkip(GameState_Play* play)
     u8 d;
 
     if (gNoTimeFlow)
+    {
+        sTimeSkipAcc = 0;
         return;
+    }
 
     switch (play->sceneId)
     {
@@ -151,11 +156,15 @@ static void checkTimeSkip(GameState_Play* play)
     case SCE_MM_MOON_ZORA:
     case SCE_MM_MOON_LINK:
     case SCE_MM_LAIR_MAJORA:
+        sTimeSkipAcc = 0;
         return;
     }
 
     if (Player_InCsMode(play))
+    {
+        sTimeSkipAcc = 0;
         return;
+    }
 
     d = gSave.day;
     t = gSave.time;
@@ -170,6 +179,7 @@ static void checkTimeSkip(GameState_Play* play)
 
     if (gSharedCustomSave.mm.halfDays & (1 << currentHalfDay))
     {
+        sTimeSkipAcc = 0;
         return;
     }
 
@@ -191,11 +201,22 @@ static void checkTimeSkip(GameState_Play* play)
     }
     else
     {
-        /* We have a clock going forward */
-        Time_Linear2Game(&d, &t, Time_FromHalfDay(nextHalfDay));
-        gSave.day = d;
-        gSave.time = t;
-        gSave.isNight = !!(nextHalfDay & 1);
+        if (sTimeSkipAcc > 3)
+        {
+            /* We have a clock going forward */
+            Time_Linear2Game(&d, &t, Time_FromHalfDay(nextHalfDay));
+            gSave.day = d;
+            gSave.time = t;
+            gSave.isNight = !!(nextHalfDay & 1);
+
+            /* Need a reload */
+            Play_SetupRespawnPoint(play, 1, 0xdff);
+            gSaveContext.respawnFlag = 2;
+            gSaveContext.nextCutscene = 0;
+            comboTransition(play, gSave.entranceIndex);
+        }
+        else
+            sTimeSkipAcc++;
     }
 }
 
