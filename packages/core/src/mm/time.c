@@ -23,9 +23,24 @@ void Time_Linear2Game(u8* day, u16* time, u32 linear)
     *time = t;
 }
 
+u32 Time_FromHalfDay(u8 halfDay)
+{
+    return 0x10000 + (u32)halfDay * 0x8000;
+}
+
 u32 Time_LinearMoonCrash(void)
 {
-    return 0x10000 + 0x8000 * gSharedCustomSave.mm.halfDays;
+    int max;
+
+    /* Last of a BSR builtin makes it annoying */
+    max = 0;
+    for (int i = 0; i < 6; ++i)
+    {
+        if (gSharedCustomSave.mm.halfDays & (1 << i))
+            max = i + 1;
+    }
+
+    return Time_FromHalfDay(max);
 }
 
 int Time_IsMoonCrashLinear(u32 time)

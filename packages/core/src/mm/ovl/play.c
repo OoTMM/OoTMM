@@ -132,8 +132,14 @@ static void debugCheat(GameState_Play* play)
 #endif
 }
 
-static void checkEarlyMoonCrash(GameState_Play* play)
+static void checkTimeSkip(GameState_Play* play)
 {
+    int currentHalfDay;
+    int nextHalfDay;
+    u32 linearTime;
+    u16 t;
+    u8 d;
+
     if (gNoTimeFlow)
         return;
 
@@ -151,10 +157,46 @@ static void checkEarlyMoonCrash(GameState_Play* play)
     if (Player_InCsMode(play))
         return;
 
-    if (!Time_IsMoonCrash(gSave.day, gSave.time))
+    d = gSave.day;
+    t = gSave.time;
+
+    /* Check for day 0 / day 4 */
+    if (d < 1 || d >= 4)
         return;
 
-    Interface_StartMoonCrash(play);
+    /* Check if we have the clock for the current half day */
+    linearTime = Time_Game2Linear(d, t);
+    currentHalfDay = (linearTime - 0x10000) / 0x8000;
+
+    if (gSharedCustomSave.mm.halfDays & (1 << currentHalfDay))
+    {
+        return;
+    }
+
+    /* We don't, check for the next clock we have */
+    nextHalfDay = -1;
+    for (int i = currentHalfDay; i < 6; ++i)
+    {
+        if (gSharedCustomSave.mm.halfDays & (1 << i))
+        {
+            nextHalfDay = i;
+            break;
+        }
+    }
+
+    if (nextHalfDay == -1)
+    {
+        /* We have no clock going forward, it's a moon crash */
+        Interface_StartMoonCrash(play);
+    }
+    else
+    {
+        /* We have a clock going forward */
+        Time_Linear2Game(&d, &t, Time_FromHalfDay(nextHalfDay));
+        gSave.day = d;
+        gSave.time = t;
+        gSave.isNight = !!(nextHalfDay & 1);
+    }
 }
 
 static u32 entranceForOverride(u32 entrance)
@@ -371,7 +413,7 @@ void Play_UpdateWrapper(GameState_Play* play)
     malloc_check();
     comboCacheGarbageCollect();
     comboObjectsGC();
-    checkEarlyMoonCrash(play);
+    checkTimeSkip(play);
     Play_Update(play);
     Debug_Update();
 }
