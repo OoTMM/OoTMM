@@ -1,7 +1,6 @@
-import { Confvar } from '../confvars';
-import { Items, PlayerItems, itemByID, makePlayerItem } from '../items';
+import { ItemGroups, Items, PlayerItems, itemByID, makePlayerItem } from '../items';
 import { Monitor } from '../monitor';
-import { Random } from '../random';
+import { Random, sample } from '../random';
 import { Settings } from '../settings';
 import { countMapAdd, countMapRemove } from '../util';
 
@@ -54,7 +53,6 @@ export class LogicPassConfig {
 
   run() {
     this.state.monitor.log('Logic: Config');
-    const config = new Set<Confvar>;
 
     const { settings } = this.state;
 
@@ -86,6 +84,29 @@ export class LogicPassConfig {
 
     /* Handle fairies */
     this.startingFairies();
+
+    /* Handle clocks */
+    if (settings.clocks && settings.progressiveClocks === 'separate') {
+      for (let playerId = 0; playerId < this.state.settings.players; ++playerId) {
+        /* Check if the player already has a clock */
+        let hasClock = false;
+        for (const c of ItemGroups.CLOCKS) {
+          const pi = makePlayerItem(c, playerId);
+          if (this.startingItems.has(pi)) {
+            hasClock = true;
+            break;
+          }
+        }
+
+        if (hasClock)
+          continue;
+
+        /* Player doesn't have a clock, assign one at random */
+        const c = sample(this.state.random, Array.from(ItemGroups.CLOCKS));
+        const pi = makePlayerItem(c, playerId);
+        countMapAdd(this.startingItems, pi);
+      }
+    }
 
     return { startingItems: this.startingItems };
   }

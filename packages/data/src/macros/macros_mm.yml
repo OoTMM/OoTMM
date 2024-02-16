@@ -1,11 +1,14 @@
 # Time
-"clock(x)": "!setting(clocks) || has(CLOCK, x)"
-"clock_day1": "true"
-"clock_night1": "clock(1)"
-"clock_day2": "clock(2)"
-"clock_night2": "clock(3)"
-"clock_day3": "clock(4)"
-"clock_night3": "clock(5)"
+"clock_separate(x)": "!setting(clocks) || (setting(progressiveClocks, separate) && has(x))"
+"clock_ascending(x)": "!setting(clocks) || (setting(progressiveClocks, ascending) && has(CLOCK, x))"
+"clock_descending(x)": "!setting(clocks) || (setting(progressiveClocks, descending) && has(CLOCK, x))"
+
+"clock_day1":   "clock_separate(CLOCK1) || clock_ascending(0) || clock_descending(5)"
+"clock_night1": "clock_separate(CLOCK2) || clock_ascending(1) || clock_descending(4)"
+"clock_day2":   "clock_separate(CLOCK3) || clock_ascending(2) || clock_descending(3)"
+"clock_night2": "clock_separate(CLOCK4) || clock_ascending(3) || clock_descending(2)"
+"clock_day3":   "clock_separate(CLOCK5) || clock_ascending(4) || clock_descending(1)"
+"clock_night3": "clock_separate(CLOCK6) || clock_ascending(5) || clock_descending(0)"
 
 "raw_at(x)": "mm_time(at, x)"
 "raw_after(x)": "mm_time(after, x)"

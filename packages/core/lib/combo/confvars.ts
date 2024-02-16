@@ -157,6 +157,8 @@ export const CONFVARS = [
   'MM_MOON_CRASH_CYCLE',
   'OOT_OPEN_ZD_SHORTCUT',
   'MM_CLOCKS',
+  'MM_CLOCKS_PROGRESSIVE',
+  'MM_CLOCKS_PROGRESSIVE_REVERSE',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

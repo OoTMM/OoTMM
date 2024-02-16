@@ -1097,6 +1097,19 @@ export const SETTINGS = [{
   ],
   default: 'progressive'
 }, {
+  key: 'progressiveClocks',
+  name: 'Clocks',
+  category: 'items.progressive',
+  type: 'enum',
+  description: 'Alters the behavior of Clocks',
+  values: [
+    { value: 'separate', name: 'Separate', description: 'Clocks will be independant of each other. If you don\t select a starting clock, one will be given to you at random.' },
+    { value: 'ascending', name: 'Ascending', description: 'Clocks will be received in ascending order.' },
+    { value: 'descending', name: 'Descending ', description: 'Clocks will be received in descending order.' },
+  ],
+  default: 'ascending',
+  cond: (s: any) => s.clocks,
+}, {
   key: 'bottleContentShuffle',
   name: 'Random Bottle Contents',
   category: 'items.extensions',

@@ -1748,8 +1748,7 @@ static int addItemBigFairyMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 
 static int addItemClock(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
-    if (gSharedCustomSave.mm.halfDays < (u8)param)
-        gSharedCustomSave.mm.halfDays = (u8)param;
+    gSharedCustomSave.mm.halfDays |= (1 << param);
     return 0;
 }
 

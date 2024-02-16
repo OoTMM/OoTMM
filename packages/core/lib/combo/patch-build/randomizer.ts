@@ -186,7 +186,7 @@ const SUBSTITUTIONS: {[k: string]: string} = {
   MM_OCARINA: "MM_OCARINA_OF_TIME",
   MM_SCALE: "MM_SCALE_SILVER",
   MM_STRENGTH: "MM_GORON_BRACELET",
-  MM_CLOCK: "MM_CLOCK2",
+  MM_CLOCK: "MM_CLOCK1",
   SHARED_TRIFORCE: "OOT_TRIFORCE",
   SHARED_TRIFORCE_POWER: "OOT_TRIFORCE_POWER",
   SHARED_TRIFORCE_COURAGE: "OOT_TRIFORCE_COURAGE",
@@ -837,6 +837,8 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MM_MOON_CRASH_CYCLE: settings.moonCrash === 'cycle',
     OOT_OPEN_ZD_SHORTCUT: settings.openZdShortcut,
     MM_CLOCKS: settings.clocks,
+    MM_CLOCKS_PROGRESSIVE: settings.progressiveClocks !== 'separate',
+    MM_CLOCKS_PROGRESSIVE_REVERSE: settings.progressiveClocks === 'descending',
   };
 
   for (const v in exprs) {
