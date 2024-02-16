@@ -8,7 +8,7 @@ type SpecialCondField = {
   max: Number | ((s: Settings) => Number);
 };
 
-export const SPECIAL_CONDS_FIELDS: {[f: string]: SpecialCondField} = {
+export const SPECIAL_CONDS_FIELDS = {
   stones:           { name: "Spiritual Stones", max: 3 },
   medallions:       { name: "Medallions", max: 6 },
   remains:          { name: "Boss Remains", max: 4 },
