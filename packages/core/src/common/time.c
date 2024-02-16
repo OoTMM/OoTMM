@@ -1,5 +1,6 @@
 #include <combo.h>
 
+#if defined(GAME_MM)
 u32 Time_Game2Linear(u8 day, u16 time)
 {
     u32 linear;
@@ -43,6 +44,17 @@ u32 Time_LinearMoonCrash(void)
     return Time_FromHalfDay(max);
 }
 
+u32 Time_LinearNewCycle(void)
+{
+    for (int i = 0; i < 6; ++i)
+    {
+        if (gSharedCustomSave.mm.halfDays & (1 << i))
+            return Time_FromHalfDay(i);
+    }
+
+    return Time_FromHalfDay(6);
+}
+
 int Time_IsMoonCrashLinear(u32 time)
 {
     u32 linearMoonCrash;
@@ -56,3 +68,4 @@ int Time_IsMoonCrash(u8 day, u16 time)
 {
     return Time_IsMoonCrashLinear(Time_Game2Linear(day, time));
 }
+#endif

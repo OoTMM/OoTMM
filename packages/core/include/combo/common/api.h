@@ -77,6 +77,8 @@ Actor*  SpawnActorEx(ActorContext* actorCtx, GameState_Play* play, s16 actorId, 
 void    SkelAnime_DrawFlexOpa(GameState_Play* play, void** skeleton, Vec3s* jointTable, s32 dListCount,
                            void* overrideLimbDraw, void* postLimbDraw, void* arg);
 
+void    AudioSeq_QueueSeqCmd(u32 unk);
+
 void    ActorDestroy(Actor* actor);
 int     Actor_HasParent(Actor* actor);
 void    ActorSetScale(Actor* actor, float scale);

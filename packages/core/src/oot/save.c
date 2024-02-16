@@ -3,6 +3,7 @@
 #include <combo/net.h>
 #include <combo/dungeon.h>
 #include <combo/dma.h>
+#include <combo/time.h>
 
 #define ENTRANCE_MARKET       0x1d1
 

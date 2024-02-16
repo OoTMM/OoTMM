@@ -132,10 +132,10 @@ static void debugCheat(GameState_Play* play)
 #endif
 }
 
+static int sTimeSkipFlag;
+
 static void checkTimeSkip(GameState_Play* play)
 {
-    static int sTimeSkipAcc;
-
     int currentHalfDay;
     int nextHalfDay;
     u32 linearTime;
@@ -144,7 +144,7 @@ static void checkTimeSkip(GameState_Play* play)
 
     if (gNoTimeFlow)
     {
-        sTimeSkipAcc = 0;
+        sTimeSkipFlag = 0;
         return;
     }
 
@@ -156,13 +156,13 @@ static void checkTimeSkip(GameState_Play* play)
     case SCE_MM_MOON_ZORA:
     case SCE_MM_MOON_LINK:
     case SCE_MM_LAIR_MAJORA:
-        sTimeSkipAcc = 0;
+        sTimeSkipFlag = 0;
         return;
     }
 
     if (Player_InCsMode(play))
     {
-        sTimeSkipAcc = 0;
+        sTimeSkipFlag = 0;
         return;
     }
 
@@ -179,7 +179,7 @@ static void checkTimeSkip(GameState_Play* play)
 
     if (gSharedCustomSave.mm.halfDays & (1 << currentHalfDay))
     {
-        sTimeSkipAcc = 0;
+        sTimeSkipFlag = 0;
         return;
     }
 
@@ -201,7 +201,17 @@ static void checkTimeSkip(GameState_Play* play)
     }
     else
     {
-        if (sTimeSkipAcc > 3)
+        if (play->actorCtx.flags & 2)
+        {
+            /* Telescope */
+            AudioSeq_QueueSeqCmd(0xe0000100);
+            gSaveContext.nextCutscene = 0;
+            comboTransition(play, ENTR_MM_ASTRAL_OBSERVATORY_FROM_FIELD);
+            gSave.time -= 0x10;
+            return;
+        }
+
+        if (sTimeSkipFlag)
         {
             /* We have a clock going forward */
             Time_Linear2Game(&d, &t, Time_FromHalfDay(nextHalfDay));
@@ -216,7 +226,7 @@ static void checkTimeSkip(GameState_Play* play)
             comboTransition(play, gSave.entranceIndex);
         }
         else
-            sTimeSkipAcc++;
+            sTimeSkipFlag = 1;
     }
 }
 
@@ -310,6 +320,7 @@ void hookPlay_Init(GameState_Play* play)
     preInitTitleScreen();
 
     /* Init */
+    sTimeSkipFlag = 0;
     isEndOfGame = 0;
     gActorCustomTriggers = NULL;
     gMultiMarkChests = 0;
