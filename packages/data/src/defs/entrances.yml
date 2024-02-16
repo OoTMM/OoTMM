@@ -282,7 +282,7 @@ MM_RANCH_HOUSE:                                 { game: mm, id: 0x0610, type: in
 MM_ROMANI_RANCH_FROM_RANCH_HOUSE:               { game: mm, id: 0x6430, type: indoors-exit, areas: ["MM Ranch House", "MM Romani Ranch"], reverse: MM_RANCH_HOUSE }
 MM_ASTRAL_OBSERVATORY_FROM_CLOCK_TOWN_EAST:     { game: mm, id: 0x4c00, type: indoors-extra, areas: ["MM Clock Town East", "MM Astral Observatory Passage"], reverse: MM_CLOCK_TOWN_EAST_FROM_ASTRAL_OBSERVATORY }
 MM_CLOCK_TOWN_EAST_FROM_ASTRAL_OBSERVATORY:     { game: mm, id: 0xd220, type: indoors-exit, areas: ["MM Astral Observatory Passage", "MM Clock Town East"], reverse: MM_ASTRAL_OBSERVATORY_FROM_CLOCK_TOWN_EAST }
-MM_ASTRAL_OBSERVATORY_FROM_FIELD:               { game: mm, id: 0x4c10, type: indoors-extra, areas: ["MM Astral Observatory Balcony", "MM Astral Observatory"], reverse: MM_FIELD_FROM_ASTRAL_OBSERVATORY }
+MM_ASTRAL_OBSERVATORY_FROM_FIELD:               { game: mm, id: 0x4c10, type: indoors-extra, areas: ["MM Astral Observatory Balcony", "MM Astral Observatory"], reverse: MM_FIELD_FROM_ASTRAL_OBSERVATORY, debug: [INTERIOR, "Astral Observatory"] }
 MM_FIELD_FROM_ASTRAL_OBSERVATORY:               { game: mm, id: 0x5490, type: indoors-exit, areas: ["MM Astral Observatory", "MM Astral Observatory Balcony"], reverse: MM_ASTRAL_OBSERVATORY_FROM_FIELD }
 MM_SWAMP_ARCHERY:                               { game: mm, id: 0x4200, type: indoors, areas: ["MM Road to Southern Swamp", "MM Swamp Archery"], reverse: MM_SWAMP_ROAD_FROM_ARCHERY }
 MM_SWAMP_ROAD_FROM_ARCHERY:                     { game: mm, id: 0x7a20, type: indoors-exit, areas: ["MM Swamp Archery", "MM Road to Southern Swamp"], reverse: MM_SWAMP_ARCHERY }

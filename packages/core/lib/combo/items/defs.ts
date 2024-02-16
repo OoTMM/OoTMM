@@ -704,6 +704,12 @@ const ITEM_IDS = [
   'OOT_MASK_STONE',
   'SHARED_MASK_STONE',
   'MM_CLOCK',
+  'MM_CLOCK1',
+  'MM_CLOCK2',
+  'MM_CLOCK3',
+  'MM_CLOCK4',
+  'MM_CLOCK5',
+  'MM_CLOCK6',
 ] as const;
 
 export type ItemID = typeof ITEM_IDS[number];

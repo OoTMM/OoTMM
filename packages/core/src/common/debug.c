@@ -12,6 +12,7 @@
 #define DEBUGMENU_PAGE_TIME     5
 #define DEBUGMENU_PAGE_AGE      6
 #define DEBUGMENU_PAGE_RELOAD   7
+#define DEBUGMENU_PAGE_WIN      8
 
 #define DEBUG_X 30
 #define DEBUG_Y 30
@@ -69,6 +70,7 @@ static const DebugMenuEntry kMenuMain[] = {
     { "Age Swap", DEBUGMENU_PAGE_AGE },
 #endif
     { "Reload", DEBUGMENU_PAGE_RELOAD },
+    { "Win",    DEBUGMENU_PAGE_WIN },
     { NULL, 0 },
 };
 
@@ -402,6 +404,15 @@ static void DebugHandler_Age(int trigger)
 }
 #endif
 
+static void DebugHandler_Win(int trigger)
+{
+    if (trigger)
+    {
+        comboCreditWarp(gPlay);
+        setPage(DEBUGMENU_PAGE_NONE);
+    }
+}
+
 static const DebugMenuFunc kDebugMenuFuncs[] = {
     DebugHandler_None,
     DebugHandler_Main,
@@ -419,6 +430,7 @@ static const DebugMenuFunc kDebugMenuFuncs[] = {
     NULL,
 #endif
     DebugHandler_Reload,
+    DebugHandler_Win,
 };
 
 void Debug_Input(void)

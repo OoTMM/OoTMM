@@ -3,6 +3,7 @@
 #include <combo/net.h>
 #include <combo/dungeon.h>
 #include <combo/dma.h>
+#include <combo/time.h>
 
 #define ENTRANCE_MARKET       0x1d1
 
@@ -280,9 +281,14 @@ void comboCreateSave(void* unk, void* buffer)
         gSharedCustomSave.ocarinaButtonMaskMm = 0xffff;
 
     if (comboConfig(CFG_MM_CLOCKS))
-        gSharedCustomSave.mm.halfDays = 1;
+    {
+        if (comboConfig(CFG_MM_CLOCKS_PROGRESSIVE_REVERSE))
+            gSharedCustomSave.mm.halfDays = 0x20;
+        else if (comboConfig(CFG_MM_CLOCKS_PROGRESSIVE))
+            gSharedCustomSave.mm.halfDays = 0x01;
+    }
     else
-        gSharedCustomSave.mm.halfDays = 6;
+        gSharedCustomSave.mm.halfDays = 0x3f;
 
     gOotSave.childEquips.buttonItems[0] = ITEM_NONE;
     gOotSave.adultEquips.buttonItems[0] = ITEM_NONE;

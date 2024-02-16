@@ -11,6 +11,7 @@ import { LOCATIONS_ZELDA, Location, isLocationOtherFairy, isLocationRenewable, l
 import { ItemSharedDef, SharedItemGroups } from './shared';
 import { World } from './world';
 import { ItemProperties } from './item-properties';
+import { CLOCKS } from '../items/groups';
 
 const BROKEN_ACTORS_CHECKS = [
   'OOT Dodongo Cavern Grass East Corridor Side Room',
@@ -59,6 +60,7 @@ const ITEM_POOL_SCARCE_NOLIMIT = new Set([
 ]);
 
 const ITEM_POOL_PLENTIFUL = new Set([
+  ...CLOCKS,
   Items.MM_CLOCK,
   Items.OOT_RUTO_LETTER,
   Items.OOT_WEIRD_EGG,
@@ -245,49 +247,6 @@ const ITEMS_HEART_PIECES_CONTAINERS_BY_GAME = {
     hc: Items.SHARED_HEART_CONTAINER,
   },
 }
-
-const KEY_RINGS_OOT = new Map([
-  [Items.OOT_SMALL_KEY_FOREST, Items.OOT_KEY_RING_FOREST],
-  [Items.OOT_SMALL_KEY_FIRE, Items.OOT_KEY_RING_FIRE],
-  [Items.OOT_SMALL_KEY_WATER, Items.OOT_KEY_RING_WATER],
-  [Items.OOT_SMALL_KEY_SHADOW, Items.OOT_KEY_RING_SHADOW],
-  [Items.OOT_SMALL_KEY_SPIRIT, Items.OOT_KEY_RING_SPIRIT],
-  [Items.OOT_SMALL_KEY_BOTW, Items.OOT_KEY_RING_BOTW],
-  [Items.OOT_SMALL_KEY_GTG, Items.OOT_KEY_RING_GTG],
-  [Items.OOT_SMALL_KEY_GANON, Items.OOT_KEY_RING_GANON],
-]);
-
-const KEY_RINGS_MM = new Map([
-  [Items.MM_SMALL_KEY_WF, Items.MM_KEY_RING_WF],
-  [Items.MM_SMALL_KEY_SH, Items.MM_KEY_RING_SH],
-  [Items.MM_SMALL_KEY_GB, Items.MM_KEY_RING_GB],
-  [Items.MM_SMALL_KEY_ST, Items.MM_KEY_RING_ST],
-]);
-
-const SILVER_POUCHES = new Map([
-  [Items.OOT_RUPEE_SILVER_DC, Items.OOT_POUCH_SILVER_DC],
-  [Items.OOT_RUPEE_SILVER_BOTW, Items.OOT_POUCH_SILVER_BOTW],
-  [Items.OOT_RUPEE_SILVER_SPIRIT_CHILD, Items.OOT_POUCH_SILVER_SPIRIT_CHILD],
-  [Items.OOT_RUPEE_SILVER_SPIRIT_SUN, Items.OOT_POUCH_SILVER_SPIRIT_SUN],
-  [Items.OOT_RUPEE_SILVER_SPIRIT_BOULDERS, Items.OOT_POUCH_SILVER_SPIRIT_BOULDERS],
-  [Items.OOT_RUPEE_SILVER_SPIRIT_LOBBY, Items.OOT_POUCH_SILVER_SPIRIT_LOBBY],
-  [Items.OOT_RUPEE_SILVER_SPIRIT_ADULT, Items.OOT_POUCH_SILVER_SPIRIT_ADULT],
-  [Items.OOT_RUPEE_SILVER_SHADOW_SCYTHE, Items.OOT_POUCH_SILVER_SHADOW_SCYTHE],
-  [Items.OOT_RUPEE_SILVER_SHADOW_PIT, Items.OOT_POUCH_SILVER_SHADOW_PIT],
-  [Items.OOT_RUPEE_SILVER_SHADOW_SPIKES, Items.OOT_POUCH_SILVER_SHADOW_SPIKES],
-  [Items.OOT_RUPEE_SILVER_SHADOW_BLADES, Items.OOT_POUCH_SILVER_SHADOW_BLADES],
-  [Items.OOT_RUPEE_SILVER_IC_SCYTHE, Items.OOT_POUCH_SILVER_IC_SCYTHE],
-  [Items.OOT_RUPEE_SILVER_IC_BLOCK, Items.OOT_POUCH_SILVER_IC_BLOCK],
-  [Items.OOT_RUPEE_SILVER_GTG_SLOPES, Items.OOT_POUCH_SILVER_GTG_SLOPES],
-  [Items.OOT_RUPEE_SILVER_GTG_LAVA, Items.OOT_POUCH_SILVER_GTG_LAVA],
-  [Items.OOT_RUPEE_SILVER_GTG_WATER, Items.OOT_POUCH_SILVER_GTG_WATER],
-  [Items.OOT_RUPEE_SILVER_GANON_SPIRIT, Items.OOT_POUCH_SILVER_GANON_SPIRIT],
-  [Items.OOT_RUPEE_SILVER_GANON_LIGHT, Items.OOT_POUCH_SILVER_GANON_LIGHT],
-  [Items.OOT_RUPEE_SILVER_GANON_FIRE, Items.OOT_POUCH_SILVER_GANON_FIRE],
-  [Items.OOT_RUPEE_SILVER_GANON_FOREST, Items.OOT_POUCH_SILVER_GANON_FOREST],
-  [Items.OOT_RUPEE_SILVER_GANON_SHADOW, Items.OOT_POUCH_SILVER_GANON_SHADOW],
-  [Items.OOT_RUPEE_SILVER_GANON_WATER, Items.OOT_POUCH_SILVER_GANON_WATER],
-]);
 
 export class LogicPassWorldTransform {
   private pool: PlayerItems = new Map;
@@ -1155,7 +1114,11 @@ export class LogicPassWorldTransform {
 
     /* Add clocks */
     if (this.state.settings.clocks) {
-      this.addItem(Items.MM_CLOCK, 5);
+      if (this.state.settings.progressiveClocks === 'separate') {
+        this.addItems(ItemGroups.CLOCKS);
+      } else {
+        this.addItem(Items.MM_CLOCK, 5);
+      }
     }
 
     /* Handle extra wallets */

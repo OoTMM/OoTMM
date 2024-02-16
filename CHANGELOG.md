@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - Add rupoors as optional, extra traps.
+- Add non-progressive clocks.
 
 ### Changed
 

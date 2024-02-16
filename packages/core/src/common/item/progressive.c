@@ -330,6 +330,7 @@ static s16 progressiveBombchuBagMm(s16 gi, int ovflags)
 static s16 progressiveClock(void)
 {
     static s16 kClocks[] = {
+        GI_MM_CLOCK1,
         GI_MM_CLOCK2,
         GI_MM_CLOCK3,
         GI_MM_CLOCK4,
@@ -339,7 +340,9 @@ static s16 progressiveClock(void)
 
     int index;
 
-    index = gSharedCustomSave.mm.halfDays - 1;
+    index = popcount(gSharedCustomSave.mm.halfDays);
+    if (comboConfig(CFG_MM_CLOCKS_PROGRESSIVE_REVERSE))
+        index = ARRAY_SIZE(kClocks) - index - 1;
     if (index < 0)
         index = 0;
     if (index >= ARRAY_SIZE(kClocks))
@@ -498,12 +501,14 @@ s16 comboProgressive(s16 gi, int ovflags)
     case GI_MM_HOOKSHOT:
         gi = progressiveHookshotMm(gi);
         break;
+    case GI_MM_CLOCK1:
     case GI_MM_CLOCK2:
     case GI_MM_CLOCK3:
     case GI_MM_CLOCK4:
     case GI_MM_CLOCK5:
     case GI_MM_CLOCK6:
-        gi = progressiveClock();
+        if (comboConfig(CFG_MM_CLOCKS_PROGRESSIVE))
+            gi = progressiveClock();
         break;
     default:
         break;
