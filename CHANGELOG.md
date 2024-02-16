@@ -14,6 +14,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix a bunch of clock/moon crash issues.
 - Fix Clock showing (and time flowing) on Clock Tower Roof and Moon.
 - Fix a softlock when getting an item on the same frame the player switches to Kafei in Sakon's Hideout.
 - Fix the doors in Sakon hideout not respecting enemy souls properly.

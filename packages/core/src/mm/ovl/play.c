@@ -2,6 +2,7 @@
 #include <combo/net.h>
 #include <combo/menu.h>
 #include <combo/entrance.h>
+#include <combo/time.h>
 
 GameState_Play* gPlay;
 int gNoTimeFlow;
@@ -131,25 +132,8 @@ static void debugCheat(GameState_Play* play)
 #endif
 }
 
-void moonCrashTime(u8* day, u16* time)
-{
-    u8 index;
-
-    index = gSharedCustomSave.mm.halfDays - 1;
-    if (index < 0)
-        index = 0;
-    *time = (index & 1) ? 0x4000 : 0xc000;
-    *day = ((index + 1) / 2) + 1;
-}
-
 static void checkEarlyMoonCrash(GameState_Play* play)
 {
-    u8 day;
-    u16 time;
-
-    if (gSharedCustomSave.mm.halfDays >= 6)
-        return;
-
     if (gNoTimeFlow)
         return;
 
@@ -164,14 +148,13 @@ static void checkEarlyMoonCrash(GameState_Play* play)
         return;
     }
 
-    if (gSave.day && gSave.day < 4)
-    {
-        moonCrashTime(&day, &time);
+    if (Player_InCsMode(play))
+        return;
 
-        /* Little leeway to catch sun song */
-        if (gSave.day == day && gSave.time >= time && gSave.time < time + 0x100)
-            Interface_StartMoonCrash(play);
-    }
+    if (!Time_IsMoonCrash(gSave.day, gSave.time))
+        return;
+
+    Interface_StartMoonCrash(play);
 }
 
 static u32 entranceForOverride(u32 entrance)

@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 #include <combo/net.h>
+#include <combo/time.h>
 
 #if !defined(GAME_OOT)
 ALIGNED(16) OotSave gOotSave;
@@ -13,7 +14,26 @@ ALIGNED(16) MmSave gMmSave;
 ALIGNED(16) SharedCustomSave gSharedCustomSave;
 
 #if defined(GAME_MM)
-void moonCrashTime(u8* day, u16* time);
+# define GRACE 0x1e0
+
+void gracePeriod(void)
+{
+    u32 linear;
+    u32 moonCrash;
+    u32 linearGrace;
+    u8 d;
+    u16 t;
+
+    linear = Time_Game2Linear(gMmSave.day, gMmSave.time);
+    moonCrash = Time_LinearMoonCrash();
+    if (Time_IsMoonCrashLinear(linear) || (linear < moonCrash && linear + GRACE >= moonCrash))
+    {
+        linearGrace = moonCrash - linear;
+        Time_Linear2Game(&d, &t, linearGrace);
+        gMmSave.day = d;
+        gMmSave.time = t;
+    }
+}
 #endif
 
 void comboOnSaveLoad(void)
@@ -37,18 +57,7 @@ void comboOnSaveLoad(void)
     comboWalletRefresh();
 
 #if defined(GAME_MM)
-# define GRACE 0x1e0
-    u8 mcDay;
-    u16 mcTime;
-
-    moonCrashTime(&mcDay, &mcTime);
-    if (mcTime == 0x4000)
-        mcDay--;
-    /* Grace period */
-    if (gSave.day == mcDay && gSave.time > (mcTime - GRACE) && gSave.time < mcTime)
-    {
-        gSave.time = mcTime - GRACE;
-    }
+    gracePeriod();
 #endif
 }
 

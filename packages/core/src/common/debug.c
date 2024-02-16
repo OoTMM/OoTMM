@@ -300,6 +300,7 @@ static void DebugHandler_Reload(int trigger)
     setPage(DEBUGMENU_PAGE_NONE);
     Play_SetupRespawnPoint(gPlay, 1, 0xdff);
     gSaveContext.respawnFlag = 2;
+    gSaveContext.nextCutscene = 0;
 #if defined(GAME_OOT)
     comboTransition(gPlay, gSave.entrance);
 #else
