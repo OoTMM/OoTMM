@@ -20,7 +20,7 @@ static float kDpadItemScale = 0.4f;
 
 static int canShowDpad(void)
 {
-    if (gSaveContext.gameMode)
+    if (gSaveContext.gameMode || gSaveContext.minigameState)
         return 0;
     return 1;
 }
@@ -69,7 +69,7 @@ static int canUseDpadItem(GameState_Play* play, s16 itemId, int flags)
 #if defined(GAME_MM)
     if (gSave.equippedMask == PLAYER_MASK_GIANT)
         return 0;
-    
+
     /* These states seem to handle minigames - and everything should be disabled during these */
     if(link->state3 & (1 << 22) || link->state & (1 << 5))
         return 0;
