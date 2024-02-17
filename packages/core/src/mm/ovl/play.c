@@ -12,6 +12,15 @@ static void debugCheat(GameState_Play* play)
 #if defined(DEBUG)
     //if (play->gs.input[0].current.buttons & L_TRIG)
     {
+        /* Notebook */
+        gSave.weekEventReg[66] = 0xff;
+        gSave.weekEventReg[67] = 0xff;
+        gSave.weekEventReg[68] = 0xff;
+        gSave.weekEventReg[69] = 0xff;
+        gSave.weekEventReg[70] = 0xff;
+        gSave.weekEventReg[71] = 0xff;
+        gSave.weekEventReg[72] = 0x7f;
+
         gSave.itemEquips.sword = 1;
         gSave.itemEquips.shield = 2;
         gMmExtraFlags2.progressiveShield = 1;

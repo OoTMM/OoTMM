@@ -18,19 +18,6 @@ static void waitSubsystems(void)
 {
     u32 tmp;
 
-    /* VI and vblank */
-    while (IO_READ(VI_CURRENT_REG) != 512)
-        ;
-    while (IO_READ(VI_CURRENT_REG) == 512)
-        ;
-    while (IO_READ(VI_CURRENT_REG) != 512)
-        ;
-    tmp = IO_READ(VI_CONTROL_REG);
-    IO_WRITE(VI_CONTROL_REG, tmp & ~0x3);
-    tmp = IO_READ(VI_CURRENT_REG);
-    IO_WRITE(VI_CURRENT_REG, tmp);
-
-
     for (;;)
     {
         tmp = IO_READ(SP_STATUS_REG);
@@ -73,6 +60,10 @@ static void waitSubsystems(void)
             break;
     }
     IO_WRITE(SI_STATUS_REG, 0);
+
+    /* Disable VI */
+    IO_WRITE(VI_CONTROL_REG, 0);
+    IO_WRITE(VI_CURRENT_REG, 0);
 }
 
 NORETURN void comboGameSwitch2(void);
