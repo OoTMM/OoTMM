@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Make bombchu bag and hints play a little nicer.
 - Change OoT boss room death/respawn behavior slightly to avoid gaining out of logic access to market.
 
 ### Fixed
