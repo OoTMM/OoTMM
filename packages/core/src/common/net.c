@@ -33,22 +33,21 @@ void netInit(void)
 
 NetContext* netMutexLock(void)
 {
-    /* Preemptive lock */
-    gNetGlobal.mutexSystem = 1;
+    for (;;)
+    {
+        /* Preemptive lock */
+        gNetGlobal.mutexSystem = 1;
 
-    /* Check for concurrent lock */
-    if (!gNetGlobal.mutexScript)
-        return &gNetCtx;
+        /* Check for concurrent lock */
+        if (!gNetGlobal.mutexScript)
+            return &gNetCtx;
 
-    /* The mutex is alrady locked */
-    gNetGlobal.mutexSystem = 0;
+        /* The mutex is alrady locked */
+        gNetGlobal.mutexSystem = 0;
 
-    /* Wait for the mutex to be unlocked */
-    while (gNetGlobal.mutexScript)
-        ;
-
-    /* Lock the mutex */
-    return netMutexLock();
+        /* Sleep */
+        Sleep_Usec(10);
+    }
 }
 
 void netMutexUnlock(void)

@@ -19,6 +19,8 @@ Actor_ProcessInitChain = 0x800ffadc;
 
 AudioSeq_QueueSeqCmd = 0x801a89a8;
 
+Sleep_Usec = 0x80087a1c;
+
 ActorRemove = 0x800BB498;
 AddMagic = 0x80115d14;
 Magic_RequestChange = 0x80115db4;
