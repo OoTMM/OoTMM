@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 
 - Add rupoors as optional, extra traps.
 - Add non-progressive clocks.
+- Add a setting to alter the "getting lost" lost woods exits to take you into the lost woods again. Also add a setting to randomize those entrances.
 
 ### Changed
 
