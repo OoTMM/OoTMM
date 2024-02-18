@@ -74,7 +74,7 @@ void EnTimeTag_KickOut_WaitForTime_Wrapper(Actor* this, GameState_Play* play)
 {
     void (*EnTimeTag_KickOut_WaitForTime)(Actor*, GameState_Play*);
 
-    if (play->sceneId == SCE_MM_STOCK_POT_INN && (gMmExtraTrade.trade2 & XITEM_MM_TRADE2_ROOM_KEY))
+    if (play->sceneId == SCE_MM_STOCK_POT_INN && (gMmExtraTrade.trade2 & (1 << XITEM_MM_TRADE2_ROOM_KEY)))
         return;
 
     EnTimeTag_KickOut_WaitForTime = actorAddr(AC_EN_TIME_TAG, 0x80aca840);
