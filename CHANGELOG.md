@@ -9,11 +9,14 @@ All notable changes to this project will be documented in this file.
 - Add rupoors as optional, extra traps.
 - Add non-progressive clocks.
 - Add a setting to alter the "getting lost" lost woods exits to take you into the lost woods again. Also add a setting to randomize those entrances.
+- Add a trick for using Hookshot anywhere to access the Zora Hall doors.
+- Add logic for getting to the Ikana Castle Exterior entrance from the roof.
 
 ### Changed
 
 - Make bombchu bag and hints play a little nicer.
 - Change OoT boss room death/respawn behavior slightly to avoid gaining out of logic access to market.
+- Made logic surrounding Evan simpler; now requires getting through the door in cursed state or Farore's Wind.
 
 ### Fixed
 
@@ -28,6 +31,7 @@ All notable changes to this project will be documented in this file.
 - Fix more instances of the Fog Glitch in OoT.
 - Fix FW soaring / game over issue.
 - Fix an issue where time logic would sometimes lead to contradictions.
+- Fix logic issues involving age swap for the Spirit Temple adult statue checks.
 
 ## [19.2] - 2024-02-15
 
