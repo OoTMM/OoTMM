@@ -2532,10 +2532,10 @@
     "Zora Hall Entrance": "true"
     "Zora Cape Peninsula": "true"
     "Zora Shop": "true"
-    "Tijo's Room": "has_mask_zora || event(BOSS_GREAT_BAY)"
-    "Japas' Room": "has_mask_zora || event(BOSS_GREAT_BAY)"
-    "Evan's Room": "has_mask_zora || event(BOSS_GREAT_BAY)"
-    "Lulu's Room": "has_mask_zora || event(BOSS_GREAT_BAY)"
+    "Tijo's Room": "can_enter_zora_door_before_gb_clear || event(BOSS_GREAT_BAY)"
+    "Japas' Room": "can_enter_zora_door_before_gb_clear || event(BOSS_GREAT_BAY)"
+    "Evan's Room": "can_enter_zora_door_before_gb_clear || event(BOSS_GREAT_BAY)"
+    "Lulu's Room": "can_enter_zora_door_before_gb_clear || event(BOSS_GREAT_BAY)"
   locations:
     "Zora Hall Scene Lights": "can_use_fire_arrows || (has_arrows && can_use_din && can_hookshot)"
 "Zora Shop":
@@ -2559,7 +2559,7 @@
   exits:
     "Zora Hall": "true"
   locations:
-    "Zora Hall Evan HP": "can_play_evan && cond(((setting(erMajorDungeons) || setting(openDungeonsMm, GB)) && (setting(bossWarpPads, Remains) || (trick(MM_GBT_CENTRAL_GEYSER) && (trick(MM_GBT_WATERWHEEL_GORON) || setting(hookshotAnywhereMm))))) || setting(preCompletedDungeons), has_mask_zora || can_use_farore, true)" #This conditional is necessary since Evan is not in his room in clear state, so you need to guarantee Zora for the check to be accessible.
+    "Zora Hall Evan HP": "can_play_evan && (can_enter_zora_door_before_gb_clear || can_use_farore)" #Evan is not here in GB clear state, so we need to guarantee room-entry-before-clear to ensure check is accessible.
 "Lulu's Room":
   region: ENTRANCE
   exits:

@@ -177,6 +177,7 @@
 "can_pass_gibdo": "has(MASK_GIBDO) && soul_redead_gibdo"
 "can_get_gossip_fairy": "can_play_healing || can_play_epona"
 "can_jumpslash": "has_weapon || has_sticks || has_mask_zora"
+"can_enter_zora_door_before_gb_clear": "has_mask_zora || (short_hook_anywhere && trick(MM_ZORA_HALL_DOORS))"
 "woodfall_raised": "event(OPEN_WOODFALL_TEMPLE) || setting(openDungeonsMm, WF) || ((setting(clearStateDungeonsMm, WF) || setting(clearStateDungeonsMm, both)) && event(CLEAN_SWAMP))"
 "blizzard_stopped": "event(OPEN_SNOWHEAD_TEMPLE) || setting(openDungeonsMm, SH) || event(BOSS_SNOWHEAD)"
 "turtle_woken": "(can_play_zora && has_mask_zora) || setting(openDungeonsMm, GB) || ((setting(clearStateDungeonsMm, GB) || setting(clearStateDungeonsMm, both)) && event(BOSS_GREAT_BAY))"
