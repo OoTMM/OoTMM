@@ -1952,7 +1952,7 @@ export const SETTINGS = [{
   cond: (x: any) => x.erOneWays !== 'none'
 }, {
   key: 'erOneWaysWoods',
-  name: 'Shuffle Child Owl Flights',
+  name: 'Shuffle Altered Lost Woods Exits',
   category: 'entrances',
   type: 'boolean',
   description: 'Shuffle the Lost Woods entrances added by "Alter Lost Woods Exits" among one-way entrances.',
