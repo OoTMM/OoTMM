@@ -55,6 +55,10 @@ OOT_ZORA_RIVER_FROM_LOST_WOODS:                 { game: oot, id: 0x1dd, type: re
 OOT_LOST_WOODS_FROM_ZORA_RIVER:                 { game: oot, id: 0x4da, type: overworld, areas: ["OOT Zora River", "OOT Lost Woods"], reverse: OOT_ZORA_RIVER_FROM_LOST_WOODS }
 OOT_GORON_CITY_FROM_LOST_WOODS:                 { game: oot, id: 0x4e2, type: region-shortcut, areas: ["OOT Lost Woods", "OOT Goron City Shortcut"], reverse: OOT_LOST_WOODS_FROM_GORON_CITY }
 OOT_LOST_WOODS_FROM_GORON_CITY:                 { game: oot, id: 0x4d6, type: overworld, areas: ["OOT Goron City Shortcut", "OOT Lost Woods"], reverse: OOT_GORON_CITY_FROM_LOST_WOODS }
+OOT_LOST_WOODS_FROM_LOST_WOODS_NORTH:           { game: oot, id: 0xf01, type: one-way-woods, areas: ["OOT Lost Woods Lost North", "OOT Lost Woods"] }
+OOT_LOST_WOODS_FROM_LOST_WOODS_EAST:            { game: oot, id: 0x1ad, type: one-way-woods, areas: ["OOT Lost Woods Lost East", "OOT Lost Woods"] }
+OOT_LOST_WOODS_FROM_LOST_WOODS_SOUTH:           { game: oot, id: 0x1b1, type: one-way-woods, areas: ["OOT Lost Woods Lost South", "OOT Lost Woods"] }
+OOT_LOST_WOODS_FROM_LOST_WOODS_WEST:            { game: oot, id: 0x4c6, type: one-way-woods, areas: ["OOT Lost Woods Lost West", "OOT Lost Woods"] }
 OOT_LAKE_HYLIA_FROM_ZORA_DOMAIN:                { game: oot, id: 0x560, type: region-shortcut, areas: ["OOT Zora Domain", "OOT Lake Hylia"], reverse: OOT_ZORA_DOMAIN_FROM_LAKE_HYLIA }
 OOT_ZORA_DOMAIN_FROM_LAKE_HYLIA:                { game: oot, id: 0x328, type: overworld, areas: ["OOT Lake Hylia", "OOT Zora Domain"], reverse: OOT_LAKE_HYLIA_FROM_ZORA_DOMAIN }
 OOT_KOKIRI_FOREST_FROM_MIDO:                    { game: oot, id: 0x443, type: indoors-exit, areas: ["OOT Mido's House", "OOT Kokiri Forest"], reverse: OOT_HOUSE_MIDO }
@@ -316,6 +320,8 @@ MM_CLOCK_TOWN:                                  { game: mm,  id: 0xd800, type: n
 MM_MOON:                                        { game: mm,  id: 0xc800, type: none, debug: ['COMMON', 'Moon'] }
 OOT_BOSS_GANON2:                                { game: oot, id: 0x517,  type: none, debug: ['BOSS', 'Ganon'] }
 OOT_LOST_BRIDGE_FROM_KOKIRI_FOREST:             { game: oot, id: 0x5e0,  type: none }
+OOT_LOST_WOODS_FROM_KOKIRI_FOREST:              { game: oot, id: 0x11e,  type: none }
+OOT_KOKIRI_FOREST_FROM_LOST_WOODS:              { game: oot, id: 0x286,  type: none }
 OOT_GERUDO_FORTRESS_CAUGHT_NO_HOOK:             { game: oot, id: 0x1a5,  type: none }
 OOT_GERUDO_FORTRESS_CAUGHT:                     { game: oot, id: 0x5f8,  type: none }
 OOT_CASTLE_STEALTH:                             { game: oot, id: 0x07a,  type: none }

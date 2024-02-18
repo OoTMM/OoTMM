@@ -292,6 +292,8 @@ static u32 entranceForOverride(u32 entrance)
         return ENTR_OOT_FIELD_FROM_ZORA_RIVER;
     case ENTR_OOT_HYRULE_CASTLE_FROM_FAIRY:
         return gLastScene == SCE_OOT_GREAT_FAIRY_FOUNTAIN_UPGRADES ? ENTR_OOT_OUTSIDE_GANON_FROM_FAIRY : ENTR_OOT_HYRULE_CASTLE_FROM_FAIRY;
+    case ENTR_OOT_LOST_WOODS_FROM_KOKIRI_FOREST:
+        return gLastScene == SCE_OOT_LOST_WOODS ? ENTR_OOT_LOST_WOODS_FROM_LOST_WOODS_NORTH : ENTR_OOT_LOST_WOODS_FROM_KOKIRI_FOREST;
     default:
         return entrance;
     }
@@ -348,6 +350,9 @@ void hookPlay_Init(GameState_Play* play)
     {
     case ENTR_OOT_OUTSIDE_GANON_FROM_FAIRY:
         gSave.entrance = ENTR_OOT_HYRULE_CASTLE_FROM_FAIRY;
+        break;
+    case ENTR_OOT_LOST_WOODS_FROM_LOST_WOODS_NORTH:
+        gSave.entrance = ENTR_OOT_LOST_WOODS_FROM_KOKIRI_FOREST;
         break;
     }
 

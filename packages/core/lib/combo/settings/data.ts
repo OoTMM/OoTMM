@@ -1022,6 +1022,13 @@ export const SETTINGS = [{
   description: 'In vanilla OoT, some actors fails to load properly in some rooms due to errors in the room files. When this is on, these actors will load.',
   default: false
 }, {
+  key: 'alterLostWoodsExits',
+  name: 'Alter Lost Woods Exits',
+  category: 'main.misc',
+  type: 'boolean',
+  description: 'There are unused exits in the Lost Woods that return you to the lost woods. When this is on, all the "got lost" exits in the Lost Woods that would normally take you to Kokiri Forest instead take you back to the Lost Woods, keeping your compass direction intact.',
+  default: false
+}, {
   key: 'autoInvert',
   name: 'Auto-Invert Time (MM)',
   category: 'main.misc',
@@ -1943,4 +1950,12 @@ export const SETTINGS = [{
   description: 'Shuffle the two owl flights among one-way entrances.',
   default: false,
   cond: (x: any) => x.erOneWays !== 'none'
+}, {
+  key: 'erOneWaysWoods',
+  name: 'Shuffle Child Owl Flights',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'Shuffle the two owl flights among one-way entrances.',
+  default: false,
+  cond: (x: any) => x.erOneWays !== 'none' && x.alterLostWoodsExits
 }] as const;
