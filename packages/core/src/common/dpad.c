@@ -18,6 +18,9 @@ static const int kDpadOffY[] = { 1, -1, 0, 0 };
 
 static float kDpadItemScale = 0.4f;
 
+static Color_RGB8 sDpadColor = { 0x60, 0x60, 0x60 };
+COSMETIC(DPAD_COLOR, sDpadColor);
+
 static int canShowDpad(void)
 {
     if (gSaveContext.gameMode || (gSaveContext.minigameState == 1))
@@ -131,7 +134,7 @@ void comboDpadDraw(GameState_Play* play)
     gDPPipeSync(OVERLAY_DISP++);
     gSPSegment(OVERLAY_DISP++, 0x06, gCustomKeep);
     gSPSegment(OVERLAY_DISP++, 0x07, sDpadIconBuffer);
-    gDPSetPrimColor(OVERLAY_DISP++, 0, 0x80, 0xff, 0xff, 0xff, alpha);
+    gDPSetPrimColor(OVERLAY_DISP++, 0, 0x80, sDpadColor.r, sDpadColor.g, sDpadColor.b, alpha);
 
     /* Draw */
     comboDrawInit2D(&OVERLAY_DISP);
