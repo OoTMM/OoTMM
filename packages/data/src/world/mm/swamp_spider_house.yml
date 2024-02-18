@@ -3,6 +3,7 @@
   exits:
     "Near Swamp Spider House": "true"
     "Swamp Spider House Main": "cond(setting(erMoon) && trick(MM_MAJORA_LOGIC), (event(MAJORA) && before(NIGHT3_AM_12_00)) || can_play_time, can_reset_time)"
+    "SOARING": "can_play_soaring"
   locations:
     "Swamp Spider House Mask of Truth": "has(GS_TOKEN_SWAMP, 30)"
 "Swamp Spider House Main":
@@ -14,6 +15,7 @@
     WATER: "true"
   exits:
     "Swamp Spider House": "true"
+    "SOARING": "can_play_soaring"
   locations:
     "Swamp Skulltula Main Room Near Ceiling": "can_hookshot_short || has_mask_zora || (has(MASK_DEKU) && (has_arrows || has_magic || (has_bombs || has_bombchu || trick_keg_explosives)))"
     "Swamp Skulltula Main Room Lower Right Soft Soil": "has_bugs"

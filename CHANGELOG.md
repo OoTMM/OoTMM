@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 - Add a setting to alter the "getting lost" lost woods exits to take you into the lost woods again. Also add a setting to randomize those entrances.
 - Add a trick for using Hookshot anywhere to access the Zora Hall doors.
 - Add logic for getting to the Ikana Castle Exterior entrance from the roof.
+- Add logic for soaring out of MM's mini-dungeons.
 
 ### Changed
 

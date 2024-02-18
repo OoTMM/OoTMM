@@ -3,6 +3,7 @@
   exits:
     "Ocean Spider House Front": "(has_explosives || trick_keg_explosives) && cond(setting(erMoon) && trick(MM_MAJORA_LOGIC), (event(MAJORA) && before(NIGHT3_AM_12_00)) || can_play_time, can_reset_time)"
     "Great Bay Coast": "true"
+    "SOARING": "can_play_soaring"
   locations:
     "Ocean Spider House Wallet": "has(GS_TOKEN_OCEAN, 30)"
 "Ocean Spider House Front":
@@ -13,6 +14,7 @@
   exits:
     "Ocean Spider House": "true"
     "Ocean Spider House Back": "can_hookshot_short || can_goron_bomb_jump"
+    "SOARING": "can_play_soaring"
   locations:
     "Ocean Skulltula Entrance Right Wall": "can_hookshot_short"
     "Ocean Skulltula Entrance Left Wall": "can_hookshot_short"
@@ -23,6 +25,8 @@
     "Ocean Spider House Pot Entrance 4": "true"
 "Ocean Spider House Back":
   dungeon: OSH
+  exits:
+    "SOARING": "can_play_soaring"
   locations:
     "Ocean Skulltula 2nd Room Ceiling Edge": "can_hookshot_short || has_mask_zora"
     "Ocean Skulltula 2nd Room Ceiling Plank": "can_hookshot_short || has_mask_zora"
