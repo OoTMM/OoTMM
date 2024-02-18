@@ -816,7 +816,6 @@
     "Zora River": "can_dive_small || hookshot_anywhere"
     "Lost Woods Rupee Arrow": "is_child && (can_dive_small || hookshot_anywhere || can_boomerang)"
     "Lost Woods Lost North": "true"
-    "Lost Woods Lost East": "true"
     "Lost Woods Lost South": "true"
     "Lost Woods Lost West": "true"
   events:
@@ -892,7 +891,11 @@
     "Sacred Meadow Entryway": "true"
     "Deku Theater": "true"
     "Lost Woods Scrub Grotto": "has_explosives_or_hammer"
-    "Kokiri Forest": "true"
+    "Kokiri Forest": "!setting(alterLostWoodsExits)"
+    "Lost Woods Lost North": "true"
+    "Lost Woods Lost East": "true"
+    "Lost Woods Lost South": "true"
+    "Lost Woods Lost West": "true"
   events:
     BEAN_LOST_WOODS_LATE: "can_use_beans"
     RUPEES: "can_cut_grass"
