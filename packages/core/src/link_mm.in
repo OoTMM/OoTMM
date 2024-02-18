@@ -18,6 +18,7 @@ Play_DrawHudButtons = 0x80117100;
 Actor_ProcessInitChain = 0x800ffadc;
 
 _Interface_UpdateButtonsPart2 = 0x80110038;
+Schedule_CheckMiscS = 0x8013296c;
 
 AudioSeq_QueueSeqCmd = 0x801a89a8;
 

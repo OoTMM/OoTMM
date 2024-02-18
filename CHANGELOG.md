@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix room key not working when not the active item.
 - Fix the telescope scrub sometimes failing to spawn when not having an ocarina.
 - Fix MM Fairy Ocarina not being useable on C buttons in some cases.
 - Fix the dpad being useable during some minigames where it shouldn't.
