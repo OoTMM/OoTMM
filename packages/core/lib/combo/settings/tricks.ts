@@ -76,6 +76,7 @@ export const TRICKS = {
   MM_SOUTHERN_SWAMP_SCRUB_HP_GORON: "Southern Swamp Scrub HP as Goron",
   MM_ZORA_HALL_SCRUB_HP_NO_DEKU: "Zora Hall Scrub HP without Deku",
   MM_IKANA_ROOF_PARKOUR: "Jump from Ikana Castle's Roof Interior to Exterior",
+  MM_IKANA_PILLAR_TO_ENTRANCE: "Jump from Ikana Castle's roof pillars to get over the entrance sun block with Nothing",
   MM_POST_OFFICE_GAME: "Post Office Timing Game without Bunny Hood",
   MM_WELL_HSW: "Well's Hot Spring Water without Killing Dexihand",
   MM_ISTT_CHUCHU_LESS: "ISTT Block Room without Chuchu jellies",

@@ -50,6 +50,7 @@
     "Ancient Castle of Ikana Interior North 3": "true"
     "Ancient Castle of Ikana Roof Interior": "can_goron_bomb_jump || short_hook_anywhere"
     "Ikana Castle Exterior": "true"
+    "Ikana Castle Entrance": "has(MASK_DEKU) || has_hover_boots || trick(MM_IKANA_PILLAR_TO_ENTRANCE)"
   events:
     IKANA_CASTLE_LIGHT: "true" #Due to being able to save-warp in MM now, this is no longer an issue.
     IKANA_CASTLE_LIGHT2: "can_use_keg"
