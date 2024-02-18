@@ -20,7 +20,7 @@ static float kDpadItemScale = 0.4f;
 
 static int canShowDpad(void)
 {
-    if (gSaveContext.gameMode || gSaveContext.minigameState)
+    if (gSaveContext.gameMode || (gSaveContext.minigameState == 1))
         return 0;
     return 1;
 }
