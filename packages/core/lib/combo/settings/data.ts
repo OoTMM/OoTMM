@@ -1955,7 +1955,7 @@ export const SETTINGS = [{
   name: 'Shuffle Child Owl Flights',
   category: 'entrances',
   type: 'boolean',
-  description: 'Shuffle the two owl flights among one-way entrances.',
+  description: 'Shuffle the Lost Woods entrances added by "Alter Lost Woods Exits" among one-way entrances.',
   default: false,
   cond: (x: any) => x.erOneWays !== 'none' && x.alterLostWoodsExits
 }] as const;
