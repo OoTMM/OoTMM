@@ -620,7 +620,7 @@ export const SETTINGS = [{
   description: 'Change the behavior of moon crashing',
   values: [
     { value: 'reset', name:  'Reset',  description: 'Moon Crash will restore the last save. No progress will be kept.' },
-    { value: 'cycle', name:  'New Cycle',  description: 'Moon Crash will initiate a new cycle, keeping progress.' },
+    { value: 'cycle', name:  'New Cycle',  description: 'Moon Crash will initiate a new cycle, keeping progress. Checks in MM will be considered in logic without requiring Ocarina and Song of Time.' },
   ],
   default: 'reset'
 }, {
