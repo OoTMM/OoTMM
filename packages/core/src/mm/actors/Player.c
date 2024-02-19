@@ -224,7 +224,7 @@ void Player_Action_CastingSpell(Actor_Player* this, GameState_Play* play)
                 if (Player_SpawnMagicSpellActor(play, this, this->av1.actionVar1) != NULL)
                 {
                     this->state |= 0x30000000; // PLAYER_STATE1_20000000 | PLAYER_STATE1_10000000
-                    if ((this->av1.actionVar1 != 0) || (gSaveContext.save.fw.set <= 0))
+                    if ((this->av1.actionVar1 != 0) || (gSaveContext.respawn[RESPAWN_MODE_HUMAN].data <= 0))
                     {
                         gSaveContext.magicState = MAGIC_STATE_CONSUME_SETUP;
                     }
@@ -255,18 +255,14 @@ void Player_Action_CastingSpell(Actor_Player* this, GameState_Play* play)
 
             if (this->av2.actionVar2 == 0)
             {
-                gFwPointerPos = this->base.world.pos;
-                gSaveContext.save.fw.set = 1;
-                gSaveContext.save.fw.pos = gSaveContext.respawn[RESPAWN_MODE_DOWN].pos;
-                gSaveContext.save.fw.yaw = gSaveContext.respawn[RESPAWN_MODE_DOWN].yaw;
-                gSaveContext.save.fw.playerParams = 0x6FF;
-                gSaveContext.save.fw.entranceIndex = gSaveContext.respawn[RESPAWN_MODE_DOWN].entrance;
-                gSaveContext.save.fw.roomIndex = gSaveContext.respawn[RESPAWN_MODE_DOWN].roomIndex;
-                gSaveContext.save.fw.tempSwchFlags = gSaveContext.respawn[RESPAWN_MODE_DOWN].tempSwitchFlags;
-                gSaveContext.save.fw.tempCollectFlags = gSaveContext.respawn[RESPAWN_MODE_DOWN].tempCollectFlags;
+                gSaveContext.respawn[RESPAWN_MODE_HUMAN].data = 1;
+                Play_SetupRespawnPoint(play, RESPAWN_MODE_HUMAN, 0x6ff);
+                gSave.fw = gSaveContext.respawn[RESPAWN_MODE_DOWN];
+                gSave.fw.playerParams = 0x6ff;
+                gSave.fw.data = 40;
 
                 // Copy Game Over / Soar to Entrance respawn data.
-                gSaveContext.save.fwRespawnTop = gSaveContext.respawn[RESPAWN_MODE_TOP];
+                gSave.fwRespawnTop = gSaveContext.respawn[RESPAWN_MODE_TOP];
 
                 this->av2.actionVar2 = 2;
             }
@@ -361,53 +357,12 @@ void Player_Action_FaroresWindText(Actor_Player* this, GameState_Play* play)
 
         Message_Close(play);
 
-        s32 respawnData = gSaveContext.save.fw.set;
-
         if (play->msgCtx.choiceIndex == 0)
         {
-            s32 entrance = gSaveContext.save.fw.entranceIndex & 0xFF00;
-            Vec3f* pos = &gSaveContext.save.fw.pos;
-            if (entrance == ENTR_MM_GORON_VILLAGE_FROM_TWIN_SPRING || entrance == ENTR_MM_GORON_VILLAGE_FROM_TWIN_WINTER) // Goron Village (Spring) or Goron Village (Winter)
-            {
-                if (MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH) && pos->x > 1100.0f) // from Lens Cave
-                {
-                    // spawn near the owl area instead
-                    pos->x = 1189.0f;
-                    pos->z = -911.0f;
-                }
-            }
-            else if (entrance == ENTR_MM_WOODFALL_FROM_SWAMP) // Woodfall
-            {
-                if (!MM_GET_EVENT_WEEK(EV_MM_WEEK_WOODFALL_TEMPLE_RISE) && ABS(pos->z) < 500.0f)
-                {
-                    if (pos->z > 0) // from front of temple
-                    {
-                        // spawn at owl statue instead
-                        pos->x = 1.0f;
-                        pos->y = 200.0f;
-                        pos->z = 1094.0f;
-                    }
-                    else // from back of temple
-                    {
-                        // spawn near exit to southern swamp instead
-                        pos->x = -41.0f;
-                        pos->y = 12.0f;
-                        pos->z = -1353.0f;
-                    }
-                }
-            }
-
-            gSaveContext.respawnFlag = -8;
+            gSaveContext.respawnFlag = 8;
             play->transitionTrigger = TRANS_TRIGGER_NORMAL;
-            play->nextEntrance = entrance;
-            play->transitionType = TRANS_TYPE_FADE_BLACK;
-            gSaveContext.respawn[RESPAWN_MODE_DOWN].pos = gSaveContext.save.fw.pos;
-            gSaveContext.respawn[RESPAWN_MODE_DOWN].yaw = gSaveContext.save.fw.yaw;
-            gSaveContext.respawn[RESPAWN_MODE_DOWN].playerParams = gSaveContext.save.fw.playerParams;
-            gSaveContext.respawn[RESPAWN_MODE_DOWN].entrance = entrance;
-            gSaveContext.respawn[RESPAWN_MODE_DOWN].roomIndex = gSaveContext.save.fw.roomIndex;
-            gSaveContext.respawn[RESPAWN_MODE_DOWN].tempSwitchFlags = gSaveContext.save.fw.tempSwchFlags;
-            gSaveContext.respawn[RESPAWN_MODE_DOWN].tempCollectFlags = gSaveContext.save.fw.tempCollectFlags;
+            play->nextEntrance = gSaveContext.respawn[RESPAWN_MODE_HUMAN].entrance;
+            play->transitionType = TRANS_TYPE_FADE_WHITE_FAST;
 
             // Restore Game Over / Soar to Entrance respawn data.
             gSaveContext.respawn[RESPAWN_MODE_TOP] = gSaveContext.save.fwRespawnTop;
@@ -419,7 +374,8 @@ void Player_Action_FaroresWindText(Actor_Player* this, GameState_Play* play)
 
         if (play->msgCtx.choiceIndex == 1)
         {
-            gSaveContext.save.fw.set = -respawnData;
+            gSaveContext.respawn[RESPAWN_MODE_HUMAN].data = -gSaveContext.respawn[RESPAWN_MODE_HUMAN].data;
+            gSave.fw.data = 0;
             Audio_PlaySfx_AtPos(&gSaveContext.save.fw.pos, 0x8C8); // NA_SE_PL_MAGIC_WIND_VANISH
         }
 
@@ -444,7 +400,7 @@ s32 Player_CustomCsItem(Actor_Player* this, GameState_Play* play)
     s32 magicSpell = Player_ActionToMagicSpell(this, this->itemAction);
     if (magicSpell >= PLAYER_MAGIC_SPELL_MIN)
     {
-        if ((magicSpell != PLAYER_MAGIC_SPELL_WIND) || (gSaveContext.save.fw.set <= 0))
+        if ((magicSpell != PLAYER_MAGIC_SPELL_WIND) || (gSaveContext.respawn[RESPAWN_MODE_HUMAN].data <= 0))
         {
             Player_CastSpell(play, this, magicSpell);
         }
@@ -548,7 +504,7 @@ s32 Player_CustomUseItem(Actor_Player* this, GameState_Play* play, s32 itemActio
     s32 magicSpell = Player_ActionToMagicSpell(this, itemAction);
     if (magicSpell >= 0)
     {
-        if (((magicSpell == PLAYER_MAGIC_SPELL_WIND) && (gSaveContext.save.fw.set > 0)) ||
+        if (((magicSpell == PLAYER_MAGIC_SPELL_WIND) && (gSaveContext.respawn[RESPAWN_MODE_HUMAN].data > 0)) ||
             ((gSaveContext.magicCapacity != 0) && (gSaveContext.magicState == MAGIC_STATE_IDLE) &&
              (gSaveContext.save.playerData.magicAmount >= sMagicSpellCosts[magicSpell])))
         {
@@ -638,7 +594,7 @@ void Player_Action_FaroresWindSpawning(Actor_Player* this, GameState_Play* play)
 
     if (this->av2.actionVar2++ == 20)
     {
-        gSaveContext.save.fw.set++;
+        gSaveContext.respawn[RESPAWN_MODE_HUMAN].data++;
         Audio_PlaySfx_AtPos(&gSaveContext.save.fw.pos, 0x87B); // NA_SE_PL_MAGIC_WIND_WARP
     }
 }
@@ -666,8 +622,7 @@ void Player_AfterInit(GameState_Play* play)
 
     Actor_InitFaroresWind(play);
 
-    u16 initMode = (player->base.variable & 0xF00) >> 8;
-    if (initMode == 6 && gSaveContext.respawnFlag == -8)
+    if (gSaveContext.respawnFlag == 8)
     {
         Player_InitFaroresWindRespawn(play, player);
     }

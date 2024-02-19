@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file.
 - Add a trick for using Hookshot anywhere to access the Zora Hall doors.
 - Add logic for getting to the Ikana Castle Exterior entrance from the roof.
 - Add logic for soaring out of MM's mini-dungeons.
+- Add a setting to enable Void Warp in MM.
 
 ### Changed
 
@@ -20,6 +21,7 @@ All notable changes to this project will be documented in this file.
 - Make bombchu bag and hints play a little nicer.
 - Change OoT boss room death/respawn behavior slightly to avoid gaining out of logic access to market.
 - Made logic surrounding Evan simpler; now requires getting through the door in cursed state or Farore's Wind.
+- Refactor Farore's Wind in MM to make the code more similar to OoT's code.
 
 ### Fixed
 

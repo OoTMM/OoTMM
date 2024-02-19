@@ -339,6 +339,42 @@ void hookPlay_Init(GameState_Play* play)
     g.keatonGrassMax = -1;
     comboMultiResetWisps();
 
+    if (gSaveContext.respawnFlag == 8)
+    {
+        s32 fwSceneId = Entrance_GetSceneIdAbsolute(gSaveContext.respawn[RESPAWN_MODE_HUMAN].entrance);
+        Vec3f* pos = &gSaveContext.respawn[RESPAWN_MODE_HUMAN].pos;
+        if (fwSceneId == SCE_MM_GORON_VILLAGE_SPRING || fwSceneId == SCE_MM_GORON_VILLAGE_WINTER)
+        {
+            if (MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH) && pos->x > 1100.0f) // from Lens Cave
+            {
+                // spawn near the owl area instead
+                pos->x = 1189.0f;
+                pos->z = -911.0f;
+            }
+        }
+        else if (fwSceneId == SCE_MM_WOODFALL)
+        {
+            if (!MM_GET_EVENT_WEEK(EV_MM_WEEK_WOODFALL_TEMPLE_RISE) && ABS(pos->z) < 500.0f)
+            {
+                if (pos->z > 0) // from front of temple
+                {
+                    // spawn at owl statue instead
+                    pos->x = 1.0f;
+                    pos->y = 200.0f;
+                    pos->z = 1094.0f;
+                }
+                else // from back of temple
+                {
+                    // spawn near exit to southern swamp instead
+                    pos->x = -41.0f;
+                    pos->y = 12.0f;
+                    pos->z = -1353.0f;
+                }
+            }
+        }
+        gSave.fw.pos = *pos;
+    }
+
     if (!gCustomKeep)
     {
         comboLoadCustomKeep();

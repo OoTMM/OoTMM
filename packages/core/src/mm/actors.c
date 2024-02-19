@@ -408,14 +408,19 @@ static LightNode* D_8015BC10;
 static s32 D_8015BC14;
 static f32 D_8015BC18;
 
-Vec3f gFwPointerPos;
-
 void Actor_InitFaroresWind(GameState_Play* play) {
     Vec3f lightPos;
 
-    if (gSaveContext.save.fw.set)
+    if (gSave.fw.data)
     {
-        gFwPointerPos = gSaveContext.save.fw.pos;
+        gSaveContext.respawn[RESPAWN_MODE_HUMAN] = gSave.fw;
+    }
+    else
+    {
+        gSaveContext.respawn[RESPAWN_MODE_HUMAN].data = 0;
+        gSaveContext.respawn[RESPAWN_MODE_HUMAN].pos.x = 0.0f;
+        gSaveContext.respawn[RESPAWN_MODE_HUMAN].pos.y = 0.0f;
+        gSaveContext.respawn[RESPAWN_MODE_HUMAN].pos.z = 0.0f;
     }
 
     lightPos = gSaveContext.save.fw.pos;
@@ -435,7 +440,7 @@ void Actor_DrawFaroresWindPointer(GameState_Play* play)
 
     OPEN_DISPS(play->gs.gfx);
 
-    params = gSaveContext.save.fw.set;
+    params = gSaveContext.respawn[RESPAWN_MODE_HUMAN].data;
 
     if (params)
     {
@@ -447,7 +452,7 @@ void Actor_DrawFaroresWindPointer(GameState_Play* play)
 
         if (temp < 0)
         {
-            gSaveContext.save.fw.set = ++params;
+            gSaveContext.respawn[RESPAWN_MODE_HUMAN].data = ++params;
             ratio = ABS(params) * 0.025f;
             D_8015BC14 = 60;
             D_8015BC18 = 1.0f;
@@ -462,7 +467,7 @@ void Actor_DrawFaroresWindPointer(GameState_Play* play)
             static Vec3f effectAccel = { 0.0f, -0.025f, 0.0f };
             static Color_RGBA8 effectPrimCol = { 255, 255, 255, 0 };
             static Color_RGBA8 effectEnvCol = { 100, 200, 0, 0 };
-            Vec3f* curPos = &gFwPointerPos;
+            Vec3f* curPos = &gSaveContext.respawn[RESPAWN_MODE_HUMAN].pos;
             Vec3f* nextPos = &gSaveContext.respawn[RESPAWN_MODE_DOWN].pos;
             f32 prevNum = D_8015BC18;
             Vec3f dist;
@@ -502,19 +507,14 @@ void Actor_DrawFaroresWindPointer(GameState_Play* play)
 
             if (D_8015BC18 == 0.0f)
             {
-                gSaveContext.save.fw.pos = gSaveContext.respawn[RESPAWN_MODE_DOWN].pos;
-                gSaveContext.save.fw.yaw = gSaveContext.respawn[RESPAWN_MODE_DOWN].yaw;
-                gSaveContext.save.fw.playerParams = 0x6FF;
-                gSaveContext.save.fw.set = 40;
-                gSaveContext.save.fw.entranceIndex = gSaveContext.respawn[RESPAWN_MODE_DOWN].entrance;
-                gSaveContext.save.fw.roomIndex = gSaveContext.respawn[RESPAWN_MODE_DOWN].roomIndex;
-                gSaveContext.save.fw.tempSwchFlags = gSaveContext.respawn[RESPAWN_MODE_DOWN].tempSwitchFlags;
-                gSaveContext.save.fw.tempCollectFlags = gSaveContext.respawn[RESPAWN_MODE_DOWN].tempCollectFlags;
+                gSaveContext.respawn[RESPAWN_MODE_HUMAN] = gSaveContext.respawn[RESPAWN_MODE_DOWN];
+                gSaveContext.respawn[RESPAWN_MODE_HUMAN].playerParams = 0x6ff;
+                gSaveContext.respawn[RESPAWN_MODE_HUMAN].data = 40;
             }
         }
         else if (temp > 0)
         {
-            Vec3f* curPos = &gFwPointerPos;
+            Vec3f* curPos = &gSaveContext.respawn[RESPAWN_MODE_HUMAN].pos;
             f32 nextRatio = 1.0f - temp * 0.1f;
             f32 curRatio = 1.0f - (f32)(temp - 1) * 0.1f;
             Vec3f eye;
@@ -537,12 +537,12 @@ void Actor_DrawFaroresWindPointer(GameState_Play* play)
 
             if (alpha < 0)
             {
-                gSaveContext.save.fw.set = 0;
+                gSaveContext.respawn[RESPAWN_MODE_HUMAN].data = 0;
                 alpha = 0;
             }
             else
             {
-                gSaveContext.save.fw.set = ++params;
+                gSaveContext.respawn[RESPAWN_MODE_HUMAN].data = ++params;
             }
 
             ratio = 1.0f + ((f32)temp * 0.2); // required to match
@@ -550,12 +550,12 @@ void Actor_DrawFaroresWindPointer(GameState_Play* play)
 
         lightRadius = 500.0f * ratio;
 
-        s32 fwSceneId = Entrance_GetSceneIdAbsolute(gSaveContext.save.fw.entranceIndex);
-        s32 fwRoomId = gSaveContext.save.fw.roomIndex;
+        s32 fwSceneId = Entrance_GetSceneIdAbsolute(gSaveContext.respawn[RESPAWN_MODE_HUMAN].entrance);
+        s32 fwRoomId = gSaveContext.respawn[RESPAWN_MODE_HUMAN].roomIndex;
 
         s32 sceneMatches = fwSceneId == play->sceneId;
 
-        f32 yPos = gFwPointerPos.y + yOffset;
+        f32 yPos = gSaveContext.respawn[RESPAWN_MODE_HUMAN].pos.y + yOffset;
 
         if (!sceneMatches)
         {
@@ -605,7 +605,7 @@ void Actor_DrawFaroresWindPointer(GameState_Play* play)
 
             POLY_XLU_DISP = Gfx_SetupDL(POLY_XLU_DISP, 25); // SETUPDL_25
 
-            ModelViewTranslate(gFwPointerPos.x, yPos, gFwPointerPos.z, MAT_SET);
+            ModelViewTranslate(gSaveContext.respawn[RESPAWN_MODE_HUMAN].pos.x, yPos, gSaveContext.respawn[RESPAWN_MODE_HUMAN].pos.z, MAT_SET);
             ModelViewScale(scale, scale, scale, MAT_MUL);
             ModelViewMult(&play->billboardMtxF, MAT_MUL);
             MatrixStackDup();
@@ -626,9 +626,9 @@ void Actor_DrawFaroresWindPointer(GameState_Play* play)
                       G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
             gSPDisplayList(POLY_XLU_DISP++, 0x04000000 | 0x23210); // gEffFlash1DL
 
-            Lights_PointNoGlowSetInfo(&D_8015BC00, gFwPointerPos.x,
+            Lights_PointNoGlowSetInfo(&D_8015BC00, gSaveContext.respawn[RESPAWN_MODE_HUMAN].pos.x,
                                     yPos,
-                                    gFwPointerPos.z, 255, 255, 255, lightRadius);
+                                    gSaveContext.respawn[RESPAWN_MODE_HUMAN].pos.z, 255, 255, 255, lightRadius);
         }
         CLOSE_DISPS();
     }

@@ -827,6 +827,36 @@ PATCH_START 0x8083D614
   bnez      v0, .+0x4c
 PATCH_END
 
+/* Remove call for Elegy Statues to set respawn data. It's unused anyway. */
+
+/*
+Replaces:
+  jal       Play_SetupRespawnPoint
+*/
+PATCH_START 0x80848708
+  nop
+PATCH_END
+
+/* Enable Void Warp */
+
+PATCH_GROUP PG_MM_VOID_WARP
+
+/*
+Replaces:
+  bnez    v0, .+0x10
+  nop
+  lbu     v0, 0xb4a (v1)
+  sltu    v0, zero, v0
+*/
+PATCH_START 0x8082daa4
+  nop
+  nop
+  nop
+  nop
+PATCH_END
+
+PATCH_GROUP_END
+
 /* Change child link object to use EnvColor instead of PrimColor */
 
 PATCH_VROM 0x01166390

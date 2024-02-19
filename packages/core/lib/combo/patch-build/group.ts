@@ -47,6 +47,7 @@ export const PATCH_GROUPS = [
   'MM_OPEN_STT',
   'CRIT_WIGGLE_DISABLE',
   'OOT_LOST_WOODS_EXITS',
+  'MM_VOID_WARP',
 ] as const;
 
 export type PatchGroup = typeof PATCH_GROUPS[number];

@@ -1029,6 +1029,13 @@ export const SETTINGS = [{
   description: 'There are unused exits in the Lost Woods that return you to the lost woods. When this is on, all the "got lost" exits in the Lost Woods that would normally take you to Kokiri Forest instead take you back to the Lost Woods, keeping your compass direction intact.',
   default: false
 }, {
+  key: 'voidWarpMm',
+  name: 'Void Warp in MM',
+  category: 'main.misc',
+  type: 'boolean',
+  description: 'In vanilla OoT, various code only checks for transitionTrigger, but in MM it also checks for transitionMode. When this is on, MM will no longer check transitionMode in those circumstances.',
+  default: false
+}, {
   key: 'autoInvert',
   name: 'Auto-Invert Time (MM)',
   category: 'main.misc',
