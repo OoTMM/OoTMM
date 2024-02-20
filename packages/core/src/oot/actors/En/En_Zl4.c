@@ -9,7 +9,7 @@ void EnZl4_Update6(Actor* actor, GameState_Play* play)
 
     play->transitionTrigger = TRANS_TYPE_NORMAL;
     play->transitionType = TRANS_GFX_SHORTCUT;
-    play->nextEntranceIndex = 0x023d;
+    play->nextEntranceIndex = ENTR_OOT_CASTLE_CAUGHT;
 }
 
 void EnZl4_Update5(Actor* actor, GameState_Play* play)
@@ -25,7 +25,7 @@ void EnZl4_Update4(Actor* actor, GameState_Play* play)
 {
     if (Actor_HasParent(actor))
     {
-        actor->attachedA = NULL;
+        actor->parent = NULL;
         EnZl4_Update5(actor, play);
         actor->update = EnZl4_Update5;
         return;
@@ -37,7 +37,7 @@ void EnZl4_Update3(Actor* actor, GameState_Play* play)
 {
     if (Actor_HasParent(actor))
     {
-        actor->attachedA = NULL;
+        actor->parent = NULL;
         EnZl4_Update4(actor, play);
         actor->update = EnZl4_Update4;
         return;

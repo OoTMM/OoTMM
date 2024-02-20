@@ -174,6 +174,18 @@ typedef struct {
     /* 0x24 */ s32 tempCollectFlags;
 } FaroresWindData; // size = 0x28
 
+typedef struct RespawnData {
+    /* 0x00 */ Vec3f pos;
+    /* 0x0C */ s16 yaw;
+    /* 0x0E */ s16 playerParams;
+    /* 0x10 */ u16 entrance;
+    /* 0x12 */ u8 roomIndex;
+    /* 0x13 */ s8 data;
+    /* 0x14 */ u32 tempSwitchFlags;
+    /* 0x18 */ u32 unk_18;
+    /* 0x1C */ u32 tempCollectFlags;
+} RespawnData; // size = 0x20
+
 typedef struct
 {
     s32                     entranceIndex;
@@ -196,8 +208,9 @@ typedef struct
     MmItemEquips            itemEquips;
     MmInventory             inventory;
     MmPermanentSceneFlags   permanentSceneFlags[120];
-    FaroresWindData         fw; /* TODO: Are we sure this isn't used? */
-    u8                      unk_E40[0x2C];
+    RespawnData             fw;
+    RespawnData             fwRespawnTop;
+    u8                      unk_E58[0x14];
     u32                     dekuPlaygroundHighScores[3];
     u32                     pictoFlags0;
     u32                     pictoFlags1;
@@ -251,18 +264,6 @@ typedef struct
     u8  zTarget;
 }
 SaveOptions;
-
-typedef struct RespawnData {
-    /* 0x00 */ Vec3f pos;
-    /* 0x0C */ s16 yaw;
-    /* 0x0E */ s16 playerParams;
-    /* 0x10 */ u16 entrance;
-    /* 0x12 */ u8 roomIndex;
-    /* 0x13 */ s8 data;
-    /* 0x14 */ u32 tempSwitchFlags;
-    /* 0x18 */ u32 unk_18;
-    /* 0x1C */ u32 tempCollectFlags;
-} RespawnData; // size = 0x20
 
 typedef enum {
     /*  0 */ TIMER_ID_POSTMAN, // postman's counting minigame
@@ -323,8 +324,9 @@ typedef struct
     u16                 magicToConsume;
     u16                 magicToAdd;
     u16                 dungeonId2;
-    char                unk_3f38[0x2];
-    u16                 minigameCounter[2];
+    u16                 minigameState;
+    u16                 minigameScore;
+    u16                 minigameHiddenScore;
     char                unk_3f3e[0x2];
     SaveOptions         options;
     char                unk_3f46[0x4];
@@ -340,19 +342,22 @@ MmSaveContext;
 _Static_assert(sizeof(MmSave) == 0x3ca0, "MmSave size is wrong");
 _Static_assert(sizeof(MmSaveContext) == 0x48d0, "MmSaveContext size is wrong");
 
-ASSERT_OFFSET(MmSaveContext, fileIndex,         0x3ca0);
-ASSERT_OFFSET(MmSaveContext, gameMode,          0x3ca8);
-ASSERT_OFFSET(MmSaveContext, sceneSetupId,      0x3cac);
-ASSERT_OFFSET(MmSaveContext, timerStates,       0x3dd0);
-ASSERT_OFFSET(MmSaveContext, timerDirections,   0x3dd7);
-ASSERT_OFFSET(MmSaveContext, dungeonId2,        0x3f36);
-ASSERT_OFFSET(MmSaveContext, minigameCounter,   0x3f3a);
-ASSERT_OFFSET(MmSaveContext, options,           0x3f40);
-ASSERT_OFFSET(MmSaveContext, unk_3f4c,          0x3f4c);
-ASSERT_OFFSET(MmSaveContext, healthDelta,       0x3f5a);
-ASSERT_OFFSET(MmSaveContext, unk_3f5c,          0x3f5c);
-ASSERT_OFFSET(MmSaveContext, cycleSceneFlags,   0x3f68);
-ASSERT_OFFSET(MmSaveContext, dungeonId,         0x48c8);
+ASSERT_OFFSET(MmSaveContext, fileIndex,             0x3ca0);
+ASSERT_OFFSET(MmSaveContext, gameMode,              0x3ca8);
+ASSERT_OFFSET(MmSaveContext, sceneSetupId,          0x3cac);
+ASSERT_OFFSET(MmSaveContext, timerStates,           0x3dd0);
+ASSERT_OFFSET(MmSaveContext, timerDirections,       0x3dd7);
+ASSERT_OFFSET(MmSaveContext, dungeonId2,            0x3f36);
+ASSERT_OFFSET(MmSaveContext, minigameState,         0x3f38);
+ASSERT_OFFSET(MmSaveContext, minigameScore,         0x3f3a);
+ASSERT_OFFSET(MmSaveContext, minigameHiddenScore,   0x3f3c);
+ASSERT_OFFSET(MmSaveContext, options,               0x3f40);
+ASSERT_OFFSET(MmSaveContext, nextCutscene,          0x3f4a);
+ASSERT_OFFSET(MmSaveContext, unk_3f4c,              0x3f4c);
+ASSERT_OFFSET(MmSaveContext, healthDelta,           0x3f5a);
+ASSERT_OFFSET(MmSaveContext, unk_3f5c,              0x3f5c);
+ASSERT_OFFSET(MmSaveContext, cycleSceneFlags,       0x3f68);
+ASSERT_OFFSET(MmSaveContext, dungeonId,             0x48c8);
 
 #if defined(GAME_MM)
 ALIGNED(16) extern MmSaveContext gSaveContext;

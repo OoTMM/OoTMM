@@ -396,10 +396,8 @@ static void readFlash(u32 devAddr, void* dramAddr, u32 size)
 
 void comboReadWriteFlash(u32 devAddr, void* dramAddr, u32 size, s32 direction)
 {
-#if defined(GAME_OOT)
     if (!SysFlashrom_IsInit())
         SysFlashrom_InitFlash();
-#endif
 
     devAddr &= 0x1ffff;
     if (direction == OS_READ)

@@ -38,7 +38,7 @@ void EnItem00_GiveItem(Actor_EnItem00* this, GameState_Play* play, s16 gi, float
 
     if (itemId >= 0)
     {
-        this->base.attachedA = &link->base;
+        this->base.parent = &link->base;
         AddItemWithIcon(play, link, &kExtendedGetItems[gi - 1]);
         return;
     }

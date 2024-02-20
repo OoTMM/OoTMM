@@ -3,6 +3,7 @@
   exits:
     "Ikana Castle Exterior": "true"
     "Ancient Castle of Ikana Interior": "cond(setting(erMoon) && trick(MM_MAJORA_LOGIC), (event(MAJORA) && before(NIGHT3_AM_12_00)) || can_play_time, can_reset_time)"
+    "SOARING": "can_play_soaring"
 "Ancient Castle of Ikana Interior":
   dungeon: ACoI
   events:
@@ -12,6 +13,7 @@
     "Ancient Castle of Ikana Interior North": "can_use_fire_short_range"
     "Ancient Castle of Ikana Interior South": "can_use_fire_short_range"
     "Ancient Castle of Ikana Behind Block": "(has_mirror_shield && event(IKANA_CASTLE_LIGHT2)) || can_use_light_arrows || short_hook_anywhere"
+    "SOARING": "can_play_soaring"
   locations:
     "Ancient Castle of Ikana Pot Entrance 1": "true"
     "Ancient Castle of Ikana Pot Entrance 2": "true"
@@ -20,6 +22,7 @@
   exits:
     "Ancient Castle of Ikana Interior": "true"
     "Ancient Castle of Ikana Interior North 2": "has(MASK_DEKU) || short_hook_anywhere || (can_use_nayru && has_mask_zora)"
+    "SOARING": "can_play_soaring"
   locations:
     "Ancient Castle of Ikana Pot Left First Room 1": "true"
     "Ancient Castle of Ikana Pot Left First Room 2": "true"
@@ -31,6 +34,7 @@
   exits:
     "Ancient Castle of Ikana Interior North": "true"
     "Ancient Castle of Ikana Interior North 3": "can_use_lens || short_hook_anywhere || has_hover_boots"
+    "SOARING": "can_play_soaring"
   locations:
     "Ancient Castle of Ikana Pot Left Second Room 1": "has(MASK_DEKU) || short_hook_anywhere || has_hover_boots"
     "Ancient Castle of Ikana Pot Left Second Room 2": "has(MASK_DEKU) || short_hook_anywhere || has_hover_boots"
@@ -41,6 +45,7 @@
   exits:
     "Ancient Castle of Ikana Interior North 2": "true"
     "Ancient Castle of Ikana Roof Exterior": "true"
+    "SOARING": "can_play_soaring"
   locations:
     "Ancient Castle of Ikana Pot Left Third Room 1": "true"
     "Ancient Castle of Ikana Pot Left Third Room 2": "true"
@@ -50,6 +55,8 @@
     "Ancient Castle of Ikana Interior North 3": "true"
     "Ancient Castle of Ikana Roof Interior": "can_goron_bomb_jump || short_hook_anywhere"
     "Ikana Castle Exterior": "true"
+    "Ikana Castle Entrance": "has(MASK_DEKU) || has_hover_boots || trick(MM_IKANA_PILLAR_TO_ENTRANCE)"
+    "SOARING": "can_play_soaring"
   events:
     IKANA_CASTLE_LIGHT: "true" #Due to being able to save-warp in MM now, this is no longer an issue.
     IKANA_CASTLE_LIGHT2: "can_use_keg"
@@ -59,18 +66,21 @@
 "Ancient Castle of Ikana Interior South":
   dungeon: ACoI
   exits:
-    "Ancient Castle of Ikana": "true"
+    "Ancient Castle of Ikana Interior": "true"
     "Ancient Castle of Ikana Wizzrobe": "can_reset_time && (((has_mirror_shield && event(IKANA_CASTLE_LIGHT)) || can_use_light_arrows) || short_hook_anywhere)"
+    "SOARING": "can_play_soaring"
 "Ancient Castle of Ikana Wizzrobe":
   dungeon: ACoI
   exits:
     "Ancient Castle of Ikana Interior South": "soul_enemy(SOUL_ENEMY_WIZZROBE) && (can_use_light_arrows || short_hook_anywhere) && (can_fight || has_arrows)"
     "Ancient Castle of Ikana South Last": "soul_enemy(SOUL_ENEMY_WIZZROBE) && (can_fight || has_arrows)"
+    "SOARING": "can_play_soaring"
 "Ancient Castle of Ikana South Last":
   dungeon: ACoI
   exits:
     "Ancient Castle of Ikana Wizzrobe": "true"
     "Ancient Castle of Ikana Roof Interior": "true"
+    "SOARING": "can_play_soaring"
   locations:
     "Ancient Castle of Ikana Pot Right 1": "true"
     "Ancient Castle of Ikana Pot Right 2": "true"
@@ -81,6 +91,7 @@
     "Ancient Castle of Ikana Interior South": "event(IKANA_CASTLE_LIGHT)"
     "Ancient Castle of Ikana South Last": "true"
     "Ancient Castle of Ikana Roof Exterior": "trick(MM_IKANA_ROOF_PARKOUR) || short_hook_anywhere"
+    "SOARING": "can_play_soaring"
   events:
     IKANA_CASTLE_LIGHT2: "can_use_keg"
 "Ancient Castle of Ikana Behind Block":
@@ -88,6 +99,7 @@
   exits:
     "Ancient Castle of Ikana Interior": "can_use_light_arrows || short_hook_anywhere"
     "Ancient Castle of Ikana Pre-Boss": "true"
+    "SOARING": "can_play_soaring"
 "Ancient Castle of Ikana Pre-Boss":
   dungeon: ACoI
   events:

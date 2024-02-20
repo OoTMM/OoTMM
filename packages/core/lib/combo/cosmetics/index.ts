@@ -298,6 +298,7 @@ class CosmeticsPass {
     const colorMmTunicZora = resolveColor(random, c.mmTunicZora, () => colorMmTunicHuman);
     const colorMmTunicFierceDeity = resolveColor(random, c.mmTunicFierceDeity);
     const colorOotShieldMirror = resolveColor(random, c.ootShieldMirror);
+    const colorDpad = resolveColor(random, c.dpad);
 
     /* Patch human tunics */
     if (colorOotTunicKokiri !== null) {
@@ -326,6 +327,11 @@ class CosmeticsPass {
 
     /* Patch OoT Mirror Shield */
     if (colorOotShieldMirror !== null) this.patchOotShieldMirror(colorOotShieldMirror);
+
+    /* Patch D-Pad */
+    if (colorDpad !== null) {
+      this.patchSymbol('DPAD_COLOR', colorBufferRGB(colorDpad));
+    }
 
     /* Patch models */
     this.patchOotChildModel();

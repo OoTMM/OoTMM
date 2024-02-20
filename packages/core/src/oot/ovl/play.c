@@ -92,14 +92,12 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.dungeonKeys[SCE_OOT_TEMPLE_FOREST] = 9;
         gSave.inventory.dungeonKeys[SCE_OOT_INSIDE_GANON_CASTLE] = 9;
 
-        /*
         gSave.inventory.quest.medallionShadow = 1;
         gSave.inventory.quest.medallionSpirit = 1;
         gSave.inventory.quest.medallionForest = 1;
         gSave.inventory.quest.medallionFire = 1;
         gSave.inventory.quest.medallionWater = 1;
         gSave.inventory.quest.medallionLight = 1;
-        */
 
         gSave.inventory.quest.stoneRuby = 1;
 
@@ -158,7 +156,7 @@ static int isRainbowBridgeOpen(void)
 static void eventFixes(GameState_Play* play)
 {
     /* Skip forest temple cutscene */
-    if (gSave.entrance == 0x169)
+    if (gSave.entrance == ENTR_OOT_TEMPLE_FOREST)
     {
         u32 tmp;
         tmp = gSave.perm[SCE_OOT_TEMPLE_FOREST].switches;
@@ -168,7 +166,7 @@ static void eventFixes(GameState_Play* play)
     }
 
     /* Ruto fixes */
-    if (gSave.entrance == 0x028)
+    if (gSave.entrance == ENTR_OOT_JABU_JABU)
     {
         /* Skip the intro cutscene */
         u16 tmp;
@@ -248,14 +246,14 @@ static void endGame(void)
 
     /* Save tmp gameplay values (in case majora was beaten too) */
     tmpAge = gSave.age;
-    tmpNextCutscene = *(u16*)((char*)&gSaveContext + 0x1412);
+    tmpNextCutscene = gSaveContext.nextCutscene;
     tmpCutscene = gSave.cutscene;
     tmpEntrance = gSave.entrance;
     tmpSceneId = gSave.sceneId;
 
     /* Edit gameplay values for end of game save */
     gSave.age = AGE_ADULT;
-    *(u16*)((char*)&gSaveContext + 0x1412) = 0;
+    gSaveContext.nextCutscene = 0;
     gSave.cutscene = 0;
     if (comboConfig(CFG_ER_ANY))
     {
@@ -275,7 +273,7 @@ static void endGame(void)
     if (comboGoalCond())
     {
         gSave.age = tmpAge;
-        *(u16*)((char*)&gSaveContext + 0x1412) = tmpNextCutscene;
+        gSaveContext.nextCutscene = tmpNextCutscene;
         gSave.cutscene = tmpCutscene;
         gSave.entrance = tmpEntrance;
         gSave.sceneId = tmpSceneId;
@@ -286,21 +284,56 @@ static u32 entranceForOverride(u32 entrance)
 {
     switch (entrance)
     {
-    case 0x1d9:
+    case ENTR_OOT_ZORA_RIVER_FROM_FIELD_WATER:
         /* Water entrance to zora river */
-        return 0x0ea;
-    case 0x311:
+        return ENTR_OOT_ZORA_RIVER_FROM_FIELD;
+    case ENTR_OOT_FIELD_FROM_ZORA_RIVER_WATER:
         /* Water entrance to hyrule */
-        return 0x181;
+        return ENTR_OOT_FIELD_FROM_ZORA_RIVER;
     case ENTR_OOT_HYRULE_CASTLE_FROM_FAIRY:
         return gLastScene == SCE_OOT_GREAT_FAIRY_FOUNTAIN_UPGRADES ? ENTR_OOT_OUTSIDE_GANON_FROM_FAIRY : ENTR_OOT_HYRULE_CASTLE_FROM_FAIRY;
+    case ENTR_OOT_LOST_WOODS_FROM_KOKIRI_FOREST:
+        return gLastScene == SCE_OOT_LOST_WOODS ? ENTR_OOT_LOST_WOODS_FROM_LOST_WOODS_NORTH : ENTR_OOT_LOST_WOODS_FROM_KOKIRI_FOREST;
     default:
         return entrance;
     }
 }
 
+void preInitTitleScreen(void)
+{
+    s16 magicCapacity;
+
+    if (gComboCtx.valid)
+    {
+        /* Disable Title screen */
+        gSaveContext.gameMode = 0;
+
+        /* Set file and load */
+        gSaveContext.fileIndex = gComboCtx.saveIndex;
+        Sram_OpenSave(NULL);
+        gSave.cutscene = 0;
+        if (gComboCtx.entrance == -1)
+            gSave.entrance = 0x1d1;
+        else
+            gSave.entrance = gComboCtx.entrance;
+        gComboCtx.valid = 0;
+
+        /* Set magic */
+        magicCapacity = 0;
+        if (gSave.playerData.magicUpgrade)
+            magicCapacity = gSave.playerData.magicUpgrade2 ? 0x60 : 0x30;
+        gSaveContext.magicState = MAGIC_STATE_IDLE;
+        gSaveContext.magicCapacity = magicCapacity;
+        gSaveContext.magicFillTarget = gSave.playerData.magicAmount;
+        gSaveContext.magicTarget = gSave.playerData.magicAmount;
+    }
+}
+
 void hookPlay_Init(GameState_Play* play)
 {
+    /* Pre-init */
+    preInitTitleScreen();
+
     /* Init */
     gActorCustomTriggers = NULL;
     gMultiMarkChests = 0;
@@ -318,10 +351,13 @@ void hookPlay_Init(GameState_Play* play)
     case ENTR_OOT_OUTSIDE_GANON_FROM_FAIRY:
         gSave.entrance = ENTR_OOT_HYRULE_CASTLE_FROM_FAIRY;
         break;
+    case ENTR_OOT_LOST_WOODS_FROM_LOST_WOODS_NORTH:
+        gSave.entrance = ENTR_OOT_LOST_WOODS_FROM_KOKIRI_FOREST;
+        break;
     }
 
     /* Handle swordless & time travel sword oddities */
-    if (gSave.entrance == 0x2ca)
+    if (gSave.entrance == ENTR_OOT_TEMPLE_OF_TIME_MASTER_SWORD_CS)
     {
         if (gSave.age == AGE_CHILD)
         {
@@ -355,19 +391,19 @@ void hookPlay_Init(GameState_Play* play)
         gSave.eventsMisc[29] = 0;
     }
 
-    if (gSave.entrance == 0x007a)
+    if (gSave.entrance == ENTR_OOT_CASTLE_STEALTH)
     {
         /* Entering courtyard */
         if (GetEventChk(EV_OOT_CHK_ZELDA_LETTER))
-            gSave.entrance = 0x0594;
+            gSave.entrance = ENTR_OOT_CASTLE_CAUGHT;
         else
-            gSave.entrance = 0x0400;
+            gSave.entrance = ENTR_OOT_CASTLE_COURTYARD;
     }
-    else if (gSave.entrance == 0x006b)
+    else if (gSave.entrance == ENTR_OOT_SAGES_CHAMBER_END)
     {
         endGame();
     }
-    else if (gSave.entrance == 0x517 && !comboHasSoulOot(GI_OOT_SOUL_NPC_ZELDA))
+    else if (gSave.entrance == ENTR_OOT_BOSS_GANON2 && !comboHasSoulOot(GI_OOT_SOUL_NPC_ZELDA))
     {
         gSave.entrance = ENTR_OOT_GANON_TOWER;
     }
@@ -391,7 +427,7 @@ void hookPlay_Init(GameState_Play* play)
         gLastScene = play->sceneId;
     }
 
-    if (gSave.entrance == 0x0530)
+    if (gSave.entrance == ENTR_OOT_SHOP_MASKS)
     {
         gComboCtx.shuffledEntrance = 0;
         comboGameSwitch(play, ENTR_MM_CLOCK_TOWN);
@@ -401,12 +437,6 @@ void hookPlay_Init(GameState_Play* play)
     /* Spawn Custom Triggers */
     CustomTriggers_Spawn(play);
     comboSpawnCustomWarps(play);
-
-    /* Title screen transition skip */
-    if (gComboCtx.valid)
-    {
-        play->transitionType = 11;
-    }
 
     if (!gCustomKeep)
     {
@@ -430,22 +460,7 @@ void Play_UpdateWrapper(GameState_Play* play)
     comboCacheGarbageCollect();
     comboObjectsGC();
     Play_Update(play);
-
-    if (gComboCtx.valid)
-    {
-        OPEN_DISPS(play->gs.gfx);
-        gDPSetCycleType(OVERLAY_DISP++, G_CYC_FILL);
-        gDPSetRenderMode(OVERLAY_DISP++, G_RM_NOOP, G_RM_NOOP2);
-        gDPSetFillColor(OVERLAY_DISP++, 0);
-        gDPFillRectangle(OVERLAY_DISP++, 0, 0, 319, 239);
-        CLOSE_DISPS();
-    }
-    else
-    {
-        /* Need to draw dpad */
-        comboDpadDraw(play);
-    }
-
+    comboDpadDraw(play);
     Debug_Update();
 }
 

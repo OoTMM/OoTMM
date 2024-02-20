@@ -6,11 +6,11 @@ void EnGe1_AfterCaught(void)
     s32 entrance;
 
     if (gPlay->sceneId == SCE_OOT_GERUDO_VALLEY)
-        entrance = 0x1a5;
+        entrance = ENTR_OOT_GERUDO_FORTRESS_CAUGHT_NO_HOOK;
     else if (gSave.age == AGE_CHILD || gSave.inventory.items[ITS_OOT_HOOKSHOT] == ITEM_NONE)
-        entrance = 0x129;
+        entrance = ENTR_OOT_GERUDO_FORTRESS_FROM_VALLEY;
     else
-        entrance = 0x5f8;
+        entrance = ENTR_OOT_GERUDO_FORTRESS_CAUGHT;
 
     gPlay->nextEntranceIndex = entrance;
 }
@@ -33,7 +33,7 @@ int EnGe1_HasGivenItem(Actor* this, GameState_Play* play)
         link = GET_LINK(play);
         if (link->state & PLAYER_ACTOR_STATE_GET_ITEM)
         {
-            this->attachedA = NULL;
+            this->parent = NULL;
             BITMAP16_SET(gSave.eventsItem, EV_OOT_ITEM_HBA_1500);
             BITMAP16_SET(gSave.eventsMisc, EV_OOT_INF_HBA_1000);
             *(u16*)((char*)this + 0x29c) |= 2;

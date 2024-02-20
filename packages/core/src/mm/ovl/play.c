@@ -2,6 +2,7 @@
 #include <combo/net.h>
 #include <combo/menu.h>
 #include <combo/entrance.h>
+#include <combo/time.h>
 
 GameState_Play* gPlay;
 int gNoTimeFlow;
@@ -11,6 +12,15 @@ static void debugCheat(GameState_Play* play)
 #if defined(DEBUG)
     //if (play->gs.input[0].current.buttons & L_TRIG)
     {
+        /* Notebook */
+        gSave.weekEventReg[66] = 0xff;
+        gSave.weekEventReg[67] = 0xff;
+        gSave.weekEventReg[68] = 0xff;
+        gSave.weekEventReg[69] = 0xff;
+        gSave.weekEventReg[70] = 0xff;
+        gSave.weekEventReg[71] = 0xff;
+        gSave.weekEventReg[72] = 0x7f;
+
         gSave.itemEquips.sword = 1;
         gSave.itemEquips.shield = 2;
         gMmExtraFlags2.progressiveShield = 1;
@@ -117,7 +127,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_MM_TRADE2] = ITEM_MM_ROOM_KEY;
         gSave.inventory.items[ITS_MM_TRADE3] = ITEM_MM_PENDANT_OF_MEMORIES;
 
-        gMmOwlFlags = 0b001111111111; // all owls statues
+        gMmOwlFlags = 0x3ff; // all owls statues
         //gSave.inventory.quest.remainsOdolwa = 1;
         //gMmExtraBoss.boss |= 0x01;
 
@@ -131,27 +141,21 @@ static void debugCheat(GameState_Play* play)
 #endif
 }
 
-void moonCrashTime(u8* day, u16* time)
+static int sTimeSkipFlag;
+
+static void checkTimeSkip(GameState_Play* play)
 {
-    u8 index;
-
-    index = gSharedCustomSave.mm.halfDays - 1;
-    if (index < 0)
-        index = 0;
-    *time = (index & 1) ? 0x4000 : 0xc000;
-    *day = ((index + 1) / 2) + 1;
-}
-
-static void checkEarlyMoonCrash(GameState_Play* play)
-{
-    u8 day;
-    u16 time;
-
-    if (gSharedCustomSave.mm.halfDays >= 6)
-        return;
+    int currentHalfDay;
+    int nextHalfDay;
+    u32 linearTime;
+    u16 t;
+    u8 d;
 
     if (gNoTimeFlow)
+    {
+        sTimeSkipFlag = 0;
         return;
+    }
 
     switch (play->sceneId)
     {
@@ -161,16 +165,77 @@ static void checkEarlyMoonCrash(GameState_Play* play)
     case SCE_MM_MOON_ZORA:
     case SCE_MM_MOON_LINK:
     case SCE_MM_LAIR_MAJORA:
+        sTimeSkipFlag = 0;
         return;
     }
 
-    if (gSave.day && gSave.day < 4)
+    if (Player_InCsMode(play))
     {
-        moonCrashTime(&day, &time);
+        sTimeSkipFlag = 0;
+        return;
+    }
 
-        /* Little leeway to catch sun song */
-        if (gSave.day == day && gSave.time >= time && gSave.time < time + 0x100)
-            Interface_StartMoonCrash(play);
+    d = gSave.day;
+    t = gSave.time;
+
+    /* Check for day 0 / day 4 */
+    if (d < 1 || d >= 4)
+        return;
+
+    /* Check if we have the clock for the current half day */
+    linearTime = Time_Game2Linear(d, t);
+    currentHalfDay = (linearTime - 0x10000) / 0x8000;
+
+    if (gSharedCustomSave.mm.halfDays & (1 << currentHalfDay))
+    {
+        sTimeSkipFlag = 0;
+        return;
+    }
+
+    /* We don't, check for the next clock we have */
+    nextHalfDay = -1;
+    for (int i = currentHalfDay; i < 6; ++i)
+    {
+        if (gSharedCustomSave.mm.halfDays & (1 << i))
+        {
+            nextHalfDay = i;
+            break;
+        }
+    }
+
+    if (nextHalfDay == -1)
+    {
+        /* We have no clock going forward, it's a moon crash */
+        Interface_StartMoonCrash(play);
+    }
+    else
+    {
+        if (play->actorCtx.flags & 2)
+        {
+            /* Telescope */
+            AudioSeq_QueueSeqCmd(0xe0000100);
+            gSaveContext.nextCutscene = 0;
+            comboTransition(play, ENTR_MM_ASTRAL_OBSERVATORY_FROM_FIELD);
+            gSave.time -= 0x10;
+            return;
+        }
+
+        if (sTimeSkipFlag)
+        {
+            /* We have a clock going forward */
+            Time_Linear2Game(&d, &t, Time_FromHalfDay(nextHalfDay));
+            gSave.day = d;
+            gSave.time = t;
+            gSave.isNight = !!(nextHalfDay & 1);
+
+            /* Need a reload */
+            Play_SetupRespawnPoint(play, 1, 0xdff);
+            gSaveContext.respawnFlag = 2;
+            gSaveContext.nextCutscene = 0;
+            comboTransition(play, gSave.entranceIndex);
+        }
+        else
+            sTimeSkipFlag = 1;
     }
 }
 
@@ -180,10 +245,10 @@ static u32 entranceForOverride(u32 entrance)
     {
     case 0x0c00:
         /* To Clear Swamp from road */
-        return 0x8400;
+        return ENTR_MM_SWAMP_FROM_ROAD;
     case 0xae60:
         /* To Spring Mountain Village from Path */
-        return 0x9a60;
+        return ENTR_MM_MOUNTAIN_VILLAGE_FROM_PATH;
     default:
         return entrance;
     }
@@ -218,13 +283,54 @@ static void sendSelfMajorasMask(void)
     BITMAP8_SET(gSharedCustomSave.mm.npc, npc);
 }
 
+void preInitTitleScreen(void)
+{
+    if (!gComboCtx.valid)
+        return;
+
+    /* Disable Title screen */
+    gSaveContext.gameMode = 0;
+
+    /* Load save */
+    gSaveContext.fileIndex = gComboCtx.saveIndex;
+    Sram_OpenSave(NULL, NULL);
+
+    gSave.cutscene = 0;
+    gSaveContext.nextCutscene = 0;
+    if (gComboCtx.entrance == -1)
+        gSave.entranceIndex = ENTR_MM_CLOCK_TOWN;
+    else
+        gSave.entranceIndex = gComboCtx.entrance;
+    if (comboConfig(CFG_ER_ANY))
+        g.initialEntrance = gSave.entranceIndex;
+    else
+        g.initialEntrance = ENTR_MM_CLOCK_TOWN;
+
+    /* Handle shuffled entrance */
+    switch (gSave.entranceIndex)
+    {
+    case ENTR_MM_BOSS_TEMPLE_WOODFALL:
+    case ENTR_MM_BOSS_TEMPLE_SNOWHEAD:
+    case ENTR_MM_BOSS_TEMPLE_GREAT_BAY:
+    case ENTR_MM_BOSS_TEMPLE_STONE_TOWER:
+        gNoTimeFlow = 1;
+        break;
+    }
+
+    /* Finished */
+    gComboCtx.valid = 0;
+}
+
 void hookPlay_Init(GameState_Play* play)
 {
     int isEndOfGame;
 
-    isEndOfGame = 0;
+    /* Pre-init */
+    preInitTitleScreen();
 
     /* Init */
+    sTimeSkipFlag = 0;
+    isEndOfGame = 0;
     gActorCustomTriggers = NULL;
     gMultiMarkChests = 0;
     gMultiMarkCollectibles = 0;
@@ -233,28 +339,64 @@ void hookPlay_Init(GameState_Play* play)
     g.keatonGrassMax = -1;
     comboMultiResetWisps();
 
+    if (gSaveContext.respawnFlag == 8)
+    {
+        s32 fwSceneId = Entrance_GetSceneIdAbsolute(gSaveContext.respawn[RESPAWN_MODE_HUMAN].entrance);
+        Vec3f* pos = &gSaveContext.respawn[RESPAWN_MODE_HUMAN].pos;
+        if (fwSceneId == SCE_MM_GORON_VILLAGE_SPRING || fwSceneId == SCE_MM_GORON_VILLAGE_WINTER)
+        {
+            if (MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH) && pos->x > 1100.0f) // from Lens Cave
+            {
+                // spawn near the owl area instead
+                pos->x = 1189.0f;
+                pos->z = -911.0f;
+            }
+        }
+        else if (fwSceneId == SCE_MM_WOODFALL)
+        {
+            if (!MM_GET_EVENT_WEEK(EV_MM_WEEK_WOODFALL_TEMPLE_RISE) && ABS(pos->z) < 500.0f)
+            {
+                if (pos->z > 0) // from front of temple
+                {
+                    // spawn at owl statue instead
+                    pos->x = 1.0f;
+                    pos->y = 200.0f;
+                    pos->z = 1094.0f;
+                }
+                else // from back of temple
+                {
+                    // spawn near exit to southern swamp instead
+                    pos->x = -41.0f;
+                    pos->y = 12.0f;
+                    pos->z = -1353.0f;
+                }
+            }
+        }
+        gSave.fw.pos = *pos;
+    }
+
     if (!gCustomKeep)
     {
         comboLoadCustomKeep();
     }
 
-    if (gSave.entranceIndex == 0x5400 && gSaveContext.nextCutscene == 0xfff7)
+    if (gSave.entranceIndex == ENTR_MM_TERMINA_FIELD_FROM_CLOCK_TOWN_WEST && gSaveContext.nextCutscene == 0xfff7)
     {
         isEndOfGame = 1;
     }
 
-    if ((gSave.entranceIndex == ENTR_MM_CLOCK_TOWN && gLastEntrance == 0x1c00) || gSave.entranceIndex == 0xc030)
+    if ((gSave.entranceIndex == ENTR_MM_CLOCK_TOWN && gLastEntrance == ENTR_MM_CLOCK_TOWN_FROM_SONG_OF_TIME) || gSave.entranceIndex == ENTR_MM_CLOCK_TOWER_MOON_CRASH)
     {
         /* Song of Time / Moon crash */
         gSave.entranceIndex = entranceForOverride(g.initialEntrance);
     }
 
-    if (gSave.entranceIndex == 0x8610)
+    if (gSave.entranceIndex == ENTR_MM_WOODFALL_FROM_TEMPLE)
     {
         /* Woodfall from temple */
         if (!MM_GET_EVENT_WEEK(EV_MM_WEEK_WOODFALL_TEMPLE_RISE))
         {
-            gSave.entranceIndex = 0x8640;
+            gSave.entranceIndex = ENTR_MM_WARP_OWL_WOODFALL;
         }
     }
 
@@ -283,21 +425,18 @@ void hookPlay_Init(GameState_Play* play)
 
     /* Raise Woodfall Temple with setting enabled */
     if (comboConfig(CFG_MM_OPEN_WF))
-    {
         MM_SET_EVENT_WEEK(EV_MM_WEEK_WOODFALL_TEMPLE_RISE);
-    }
 
     /* Make Biggoron move with setting enabled */
     if (comboConfig(CFG_MM_OPEN_SH))
-    {
         MM_SET_EVENT_WEEK(EV_MM_WEEK_SNOWHEAD_BLIZZARD);
-    }
 
     /* Make turtle surface with setting enabled */
     if (comboConfig(CFG_MM_OPEN_GB))
-    {
         MM_SET_EVENT_WEEK(EV_MM_WEEK_GREAT_BAY_TURTLE);
-    }
+
+    if (gSave.entranceIndex == ENTR_MM_CLOCK_TOWER || gSave.entranceIndex == ENTR_MM_MOON)
+        gNoTimeFlow = 1;
 
     Play_Init(play);
     gPlay = play;
@@ -337,7 +476,7 @@ void hookPlay_Init(GameState_Play* play)
         }
     }
 
-    if (gSave.entranceIndex == 0xc010)
+    if (gSave.entranceIndex == ENTR_MM_CLOCK_TOWER_FROM_CLOCK_TOWN)
     {
         comboGameSwitch(play, -1);
         return;
@@ -351,7 +490,7 @@ void Play_UpdateWrapper(GameState_Play* play)
     malloc_check();
     comboCacheGarbageCollect();
     comboObjectsGC();
-    checkEarlyMoonCrash(play);
+    checkTimeSkip(play);
     Play_Update(play);
     Debug_Update();
 }

@@ -45,7 +45,7 @@ PATCH_CALL(0x80a9eea8, EnNiwLady_GiveItem);
 
 static void EnNiwLady_GiveItemInit(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
-    actor->attachedA = NULL;
+    actor->parent = NULL;
     EnNiwLady_GiveItem(actor, play, gi, a, b);
 }
 

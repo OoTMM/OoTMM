@@ -63,7 +63,7 @@ void CustomTriggers_HandleTriggerGame(Actor_CustomTriggers* this, GameState_Play
 void CustomTriggers_CheckTriggerGame(Actor_CustomTriggers* this, GameState_Play* play)
 {
     /* Sheik in colossus */
-    if (comboHasSoulOot(GI_OOT_SOUL_NPC_SHEIK) && gSave.entrance == 0x1e1 && !GetEventChk(EV_OOT_CHK_SONG_TP_SPIRIT))
+    if (comboHasSoulOot(GI_OOT_SOUL_NPC_SHEIK) && gSave.entrance == ENTR_OOT_DESERT_COLOSSUS_FROM_TEMPLE_SPIRIT && !GetEventChk(EV_OOT_CHK_SONG_TP_SPIRIT))
     {
         gComboTriggersData.trigger = TRIGGER_OOT_SHEIK_COLOSSUS;
         return;
@@ -77,7 +77,7 @@ void CustomTriggers_CheckTriggerGame(Actor_CustomTriggers* this, GameState_Play*
     }
 
     /* Saria's Ocarina */
-    if (comboHasSoulOot(GI_OOT_SOUL_NPC_SARIA) && gSave.entrance == 0x05e0 && !GetEventChk(EV_OOT_CHK_SARIA_OCARINA))
+    if (comboHasSoulOot(GI_OOT_SOUL_NPC_SARIA) && gSave.entrance == ENTR_OOT_LOST_BRIDGE_FROM_KOKIRI_FOREST && !GetEventChk(EV_OOT_CHK_SARIA_OCARINA))
     {
         gComboTriggersData.trigger = TRIGGER_OOT_SARIA_OCARINA;
         return;

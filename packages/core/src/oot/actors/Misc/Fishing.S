@@ -189,11 +189,11 @@ Replaces:
   NOP
 */
 PATCH_START 0x80A41Fb8
-  or        a0, s1, zero
+  lw a0,0x34(sp)
 PATCH_END
 
 PATCH_START 0x80a4757c
-  .word     0x4600DA88
+.word     0x4600DA88
 PATCH_END
 
 /*
@@ -251,9 +251,9 @@ Replaces:
 PATCH_START 0x80a420dc
   sh        t9, 0x010E (v0)
   jal       Fishing_DiscardFish
-  or        a0, v0, zero
+   move     a0,v0
   b         .+0x10
-  or        a0, s1, zero
+   lw       a0,0x34(sp)
 PATCH_END
 
 /*

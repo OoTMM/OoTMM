@@ -508,6 +508,9 @@ export class LogicPassEntrances {
     if (this.input.settings.erOneWaysOwls) {
       pool.add('one-way-owl');
     }
+    if (this.input.settings.erOneWaysWoods) {
+      pool.add('one-way-woods');
+    }
 
     this.placePool(worldId, Array.from(pool), { ownGame: this.input.settings.erOneWays === 'ownGame' });
   }

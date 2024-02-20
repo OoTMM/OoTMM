@@ -4,6 +4,7 @@
     "Ikana Canyon": "true"
     "Beneath The Well North Section": "can_pass_gibdo && has_blue_potion && cond(setting(erMoon) && trick(MM_MAJORA_LOGIC), (event(MAJORA) && before(NIGHT3_AM_12_00)) || can_play_time, can_reset_time)"
     "Beneath The Well East Section": "can_pass_gibdo && has_beans && cond(setting(erMoon) && trick(MM_MAJORA_LOGIC), (event(MAJORA) && before(NIGHT3_AM_12_00)) || can_play_time, can_reset_time)"
+    "SOARING": "can_play_soaring"
 "Beneath The Well Wallmaster Near Entrance":
   region: NONE
   exits:
@@ -28,6 +29,7 @@
     RUPEES: "has_water && (((can_fight || has_weapon_range || has_explosives) && soul_wallmaster) || (has_bugs && can_use_light_arrows && soul_keese))"
   exits:
     "Beneath The Well Wallmaster Near Fountain": "soul_wallmaster && has_water"
+    "SOARING": "can_play_soaring"
   locations:
     "Beneath The Well Keese Chest": "has_water && has_bugs && can_use_lens"
     "Beneath The Well Pot Left Side 1": "has_water && has_fire_sticks"
@@ -52,12 +54,15 @@
     "Beneath The Well Entrance": "true"
     "Beneath The Well Middle Section": "can_pass_gibdo && has_fish"
     "Beneath The Well Cow Hall": "can_pass_gibdo && has_nuts"
+    "SOARING": "can_play_soaring"
   events:
     STICKS: "can_kill_baba_sticks"
     WATER: "true"
     RUPEES: "((can_fight || has_weapon_range || has_explosives) && soul_wallmaster) || (can_use_light_arrows && soul_keese)"
 "Beneath The Well Cow Hall":
   dungeon: BtW
+  exits:
+    "SOARING": "can_play_soaring"  
   events:
     WELL_BIG_POE: "has_bombs && has_weapon_range"
     BUGS: "true"
@@ -79,6 +84,7 @@
   exits:
     "Beneath The Well East Section": "true"
     "Beneath The Well Final Hall": "has_big_poe"
+    "SOARING": "can_play_soaring"
   events:
     STICKS: "can_kill_baba_both_sticks"
     NUTS: "can_kill_baba_nuts"
@@ -100,6 +106,7 @@
     "Beneath The Well Wallmaster Near Exit": "soul_wallmaster"
     "Beneath The Well Middle Section": "true"
     "Beneath The Well Sun Block": "can_pass_gibdo && has_milk"
+    "SOARING": "can_play_soaring"
   events:
     RUPEES: "(can_fight || has_weapon_range || has_explosives) && soul_wallmaster"
     BUGS: "can_use_fire_short_range || (has_sticks && has_big_poe && can_pass_gibdo)"
@@ -114,6 +121,7 @@
   exits:
     "Beneath The Well Final Hall": "true"
     "Beneath The Well End": "has_mirror_shield || can_use_light_arrows"
+    "SOARING": "can_play_soaring"
   locations:
     "Beneath The Well Mirror Shield": "can_use_fire_short_range || (has_sticks && has_big_poe && has_milk && can_pass_gibdo)"
 "Beneath The Well End":
@@ -121,3 +129,4 @@
   exits:
     "Beneath The Well Sun Block": "can_use_light_arrows && cond(setting(erMoon) && trick(MM_MAJORA_LOGIC), (event(MAJORA) && before(NIGHT3_AM_12_00)) || can_play_time, can_reset_time)"
     "Ikana Castle Exterior": "true"
+    "SOARING": "can_play_soaring"

@@ -274,7 +274,16 @@ typedef struct
     /* 0x13F8 */ s16 magicTarget; // target for magic to step to when adding or consuming magic
     u16     eventInf[4];
     u16     mapIndex;
-    char    unk_1404[0xe];
+    u16     minigameState;
+    u16     minigameScore;
+    char    unk_1408[1];
+    u8      language;
+    u8      audioSetting;
+    char    unk_140b[1];
+    u8      zTargetSetting;
+    u16     forcedSeqId;
+    u8      cutsceneTransitionControl;
+    char    unk_1411[1];
     u16     nextCutscene;
     u8      inCutscene;
     char    unk_1415[0x0f];
@@ -283,16 +292,26 @@ typedef struct
 }
 OotSaveContext;
 
-ASSERT_OFFSET(OotSaveContext, gameMode,         0x135c);
-ASSERT_OFFSET(OotSaveContext, sceneSetupId,     0x1360);
-ASSERT_OFFSET(OotSaveContext, unk_1368,         0x1368);
-ASSERT_OFFSET(OotSaveContext, grottoChestFlag,  0x1397);
-ASSERT_OFFSET(OotSaveContext, unk_1398,         0x1398);
-ASSERT_OFFSET(OotSaveContext, unk_1404,         0x1404);
-ASSERT_OFFSET(OotSaveContext, nextCutscene,     0x1412);
-ASSERT_OFFSET(OotSaveContext, inCutscene,       0x1414);
-ASSERT_OFFSET(OotSaveContext, healthDelta,      0x1424);
-ASSERT_OFFSET(OotSaveContext, unk_1426,         0x1426);
+ASSERT_OFFSET(OotSaveContext, gameMode,                     0x135c);
+ASSERT_OFFSET(OotSaveContext, sceneSetupId,                 0x1360);
+ASSERT_OFFSET(OotSaveContext, unk_1368,                     0x1368);
+ASSERT_OFFSET(OotSaveContext, grottoChestFlag,              0x1397);
+ASSERT_OFFSET(OotSaveContext, unk_1398,                     0x1398);
+ASSERT_OFFSET(OotSaveContext, mapIndex,                     0x1402);
+ASSERT_OFFSET(OotSaveContext, minigameState,                0x1404);
+ASSERT_OFFSET(OotSaveContext, minigameScore,                0x1406);
+ASSERT_OFFSET(OotSaveContext, unk_1408,                     0x1408);
+ASSERT_OFFSET(OotSaveContext, language,                     0x1409);
+ASSERT_OFFSET(OotSaveContext, audioSetting,                 0x140a);
+ASSERT_OFFSET(OotSaveContext, unk_140b,                     0x140b);
+ASSERT_OFFSET(OotSaveContext, zTargetSetting,               0x140c);
+ASSERT_OFFSET(OotSaveContext, forcedSeqId,                  0x140e);
+ASSERT_OFFSET(OotSaveContext, cutsceneTransitionControl,    0x1410);
+ASSERT_OFFSET(OotSaveContext, unk_1411,                     0x1411);
+ASSERT_OFFSET(OotSaveContext, nextCutscene,                 0x1412);
+ASSERT_OFFSET(OotSaveContext, inCutscene,                   0x1414);
+ASSERT_OFFSET(OotSaveContext, healthDelta,                  0x1424);
+ASSERT_OFFSET(OotSaveContext, unk_1426,                     0x1426);
 
 _Static_assert(sizeof(OotSave) == 0x1354, "OotSave size is wrong");
 _Static_assert(sizeof(OotSaveContext) == 0x1450, "OotSaveContext size is wrong");

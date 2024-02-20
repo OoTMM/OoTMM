@@ -73,6 +73,8 @@ function asmPatchGroups(world: World, settings: Settings) {
     MM_SHUFFLE_FREE_RUPEES: settings.shuffleFreeRupeesMm,
     MM_OPEN_STT: world.resolvedFlags.openDungeonsMm.has('ST'),
     CRIT_WIGGLE_DISABLE: settings.critWiggleDisable,
+    OOT_LOST_WOODS_EXITS: settings.alterLostWoodsExits,
+    MM_VOID_WARP: settings.voidWarpMm,
   };
   const keys = Object.keys(groups) as PatchGroup[];
   return keys.filter((k) => groups[k]);

@@ -7,7 +7,7 @@ void EnSob1_AfterBuy(Actor_EnSob1* this, GameState_Play* play)
         return;
 
     comboShopAfterBuy(play, this->items[this->itemIndex]);
-    this->base.attachedA = NULL;
+    this->base.parent = NULL;
 }
 
 static void EnSob1_GiveItem(Actor_EnSob1* sob1, GameState_Play* play, s16 gi, float a, float b)

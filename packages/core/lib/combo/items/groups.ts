@@ -214,7 +214,14 @@ export const SONGS = new Set([
   Items.SHARED_SONG_SUN,
 ]);
 
+export const TRAPS = new Set([
+  Items.OOT_TRAP_RUPOOR,
+  Items.MM_TRAP_RUPOOR,
+  Items.SHARED_TRAP_RUPOOR,
+])
+
 export const JUNK = new Set([
+  ...TRAPS,
   Items.OOT_RUPEE_BLUE,
   Items.OOT_RUPEE_RED,
   Items.OOT_RECOVERY_HEART,
@@ -748,6 +755,15 @@ export const FISHING_POND_FISH = new Set([
   Items.OOT_FISHING_POND_ADULT_LOACH_36LBS,
 ]);
 
+export const CLOCKS = new Set([
+  Items.MM_CLOCK1,
+  Items.MM_CLOCK2,
+  Items.MM_CLOCK3,
+  Items.MM_CLOCK4,
+  Items.MM_CLOCK5,
+  Items.MM_CLOCK6,
+]);
+
 export const REQUIRED = new Set([
   ...OWLS,
   ...RUPEES_SILVER,
@@ -772,6 +788,7 @@ export const REQUIRED = new Set([
   ...OOT_BOMBCHU,
   ...MM_BOMBCHU,
   ...SHARED_BOMBCHU,
+  ...CLOCKS,
   Items.MM_CLOCK,
   Items.OOT_BOSS_KEY_GANON,
   Items.OOT_SMALL_KEY_GF,

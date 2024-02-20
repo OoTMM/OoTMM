@@ -12,6 +12,7 @@
 #define DEBUGMENU_PAGE_TIME     5
 #define DEBUGMENU_PAGE_AGE      6
 #define DEBUGMENU_PAGE_RELOAD   7
+#define DEBUGMENU_PAGE_WIN      8
 
 #define DEBUG_X 30
 #define DEBUG_Y 30
@@ -69,6 +70,7 @@ static const DebugMenuEntry kMenuMain[] = {
     { "Age Swap", DEBUGMENU_PAGE_AGE },
 #endif
     { "Reload", DEBUGMENU_PAGE_RELOAD },
+    { "Win",    DEBUGMENU_PAGE_WIN },
     { NULL, 0 },
 };
 
@@ -155,8 +157,8 @@ static u8 menu(const DebugMenuEntry* entries, s16* cursor, s16* scroll, u32* dat
     if (btnPressed(U_JPAD)) tmpCursor--;
     if (btnPressed(L_JPAD)) tmpCursor -= 5;
     if (btnPressed(R_JPAD)) tmpCursor += 5;
-    if (tmpCursor < 0) tmpCursor = 0;
-    if (tmpCursor >= entryCount) tmpCursor = entryCount - 1;
+    if (tmpCursor < 0) tmpCursor = entryCount - 1;
+    if (tmpCursor >= entryCount) tmpCursor = 0;
     *cursor = (u16)tmpCursor;
 
     /* Scrolling */
@@ -300,6 +302,7 @@ static void DebugHandler_Reload(int trigger)
     setPage(DEBUGMENU_PAGE_NONE);
     Play_SetupRespawnPoint(gPlay, 1, 0xdff);
     gSaveContext.respawnFlag = 2;
+    gSaveContext.nextCutscene = 0;
 #if defined(GAME_OOT)
     comboTransition(gPlay, gSave.entrance);
 #else
@@ -401,6 +404,15 @@ static void DebugHandler_Age(int trigger)
 }
 #endif
 
+static void DebugHandler_Win(int trigger)
+{
+    if (trigger)
+    {
+        comboCreditWarp(gPlay);
+        setPage(DEBUGMENU_PAGE_NONE);
+    }
+}
+
 static const DebugMenuFunc kDebugMenuFuncs[] = {
     DebugHandler_None,
     DebugHandler_Main,
@@ -418,6 +430,7 @@ static const DebugMenuFunc kDebugMenuFuncs[] = {
     NULL,
 #endif
     DebugHandler_Reload,
+    DebugHandler_Win,
 };
 
 void Debug_Input(void)

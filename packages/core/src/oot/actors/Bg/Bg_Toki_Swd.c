@@ -5,7 +5,7 @@ static void BgTokiSwd_GiveItem(Actor* this, GameState_Play* play, s16 gi, int np
 {
     if (Actor_HasParent(this))
     {
-        this->attachedA = NULL;
+        this->parent = NULL;
         SetEventChk(event);
         return;
     }

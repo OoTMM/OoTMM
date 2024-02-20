@@ -97,6 +97,13 @@ export const isDefaultRestrictions = (r: ExprRestrictions): boolean => {
     r.mmTime2 === 0;
 };
 
+function isRestrictionImpossible(r: ExprRestrictions): boolean {
+  if (r.mmTime === 0xffffffff && r.mmTime2 === 0xffffffff) {
+    return true;
+  }
+  return false;
+}
+
 type ExprResultTrue = {
   result: true;
   depItems: RecursiveArray<Item>;
@@ -274,6 +281,11 @@ export class ExprAnd extends ExprContainer {
     }
 
     const restrictions = exprRestrictionsAnd(results);
+    /* Check for a contradiction (a restriction that prevents everything) */
+    if (isRestrictionImpossible(restrictions)) {
+      return { result: false, depItems: results.map(x => x.depItems), depEvents: results.map(x => x.depEvents) };
+    }
+
     if (isDefaultRestrictions(restrictions)) {
       return { result: true, depItems: [], depEvents: [] };
     } else {

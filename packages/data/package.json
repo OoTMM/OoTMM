@@ -15,10 +15,10 @@
     "targets": {
       "build": {
         "inputs": [
-          "{projectRoot}/**/*"
+          "{projectRoot}/src/**/*"
         ],
         "outputs": [
-          "{workspaceRoot}/dist"
+          "{projectRoot}/dist/**/*"
         ],
         "dependsOn": [
           "^build"

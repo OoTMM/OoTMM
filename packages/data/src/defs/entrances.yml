@@ -55,6 +55,10 @@ OOT_ZORA_RIVER_FROM_LOST_WOODS:                 { game: oot, id: 0x1dd, type: re
 OOT_LOST_WOODS_FROM_ZORA_RIVER:                 { game: oot, id: 0x4da, type: overworld, areas: ["OOT Zora River", "OOT Lost Woods"], reverse: OOT_ZORA_RIVER_FROM_LOST_WOODS }
 OOT_GORON_CITY_FROM_LOST_WOODS:                 { game: oot, id: 0x4e2, type: region-shortcut, areas: ["OOT Lost Woods", "OOT Goron City Shortcut"], reverse: OOT_LOST_WOODS_FROM_GORON_CITY }
 OOT_LOST_WOODS_FROM_GORON_CITY:                 { game: oot, id: 0x4d6, type: overworld, areas: ["OOT Goron City Shortcut", "OOT Lost Woods"], reverse: OOT_GORON_CITY_FROM_LOST_WOODS }
+OOT_LOST_WOODS_FROM_LOST_WOODS_NORTH:           { game: oot, id: 0xf01, type: one-way-woods, areas: ["OOT Lost Woods Lost North", "OOT Lost Woods"] }
+OOT_LOST_WOODS_FROM_LOST_WOODS_EAST:            { game: oot, id: 0x1ad, type: one-way-woods, areas: ["OOT Lost Woods Lost East", "OOT Lost Woods"] }
+OOT_LOST_WOODS_FROM_LOST_WOODS_SOUTH:           { game: oot, id: 0x1b1, type: one-way-woods, areas: ["OOT Lost Woods Lost South", "OOT Lost Woods"] }
+OOT_LOST_WOODS_FROM_LOST_WOODS_WEST:            { game: oot, id: 0x4c6, type: one-way-woods, areas: ["OOT Lost Woods Lost West", "OOT Lost Woods"] }
 OOT_LAKE_HYLIA_FROM_ZORA_DOMAIN:                { game: oot, id: 0x560, type: region-shortcut, areas: ["OOT Zora Domain", "OOT Lake Hylia"], reverse: OOT_ZORA_DOMAIN_FROM_LAKE_HYLIA }
 OOT_ZORA_DOMAIN_FROM_LAKE_HYLIA:                { game: oot, id: 0x328, type: overworld, areas: ["OOT Lake Hylia", "OOT Zora Domain"], reverse: OOT_LAKE_HYLIA_FROM_ZORA_DOMAIN }
 OOT_KOKIRI_FOREST_FROM_MIDO:                    { game: oot, id: 0x443, type: indoors-exit, areas: ["OOT Mido's House", "OOT Kokiri Forest"], reverse: OOT_HOUSE_MIDO }
@@ -236,7 +240,7 @@ MM_FISHER_HUT:                                  { game: mm, id: 0x7200, type: in
 MM_GREAT_BAY_COAST_FROM_FISHER_HUT:             { game: mm, id: 0x6840, type: indoors-exit, areas: ["MM Fisher's Hut", "MM Great Bay Coast"], reverse: MM_FISHER_HUT }
 MM_LABORATORY:                                  { game: mm, id: 0x5800, type: indoors, areas: ["MM Great Bay Coast", "MM Laboratory"], reverse: MM_GREAT_BAY_COAST_FROM_LABORATORY }
 MM_GREAT_BAY_COAST_FROM_LABORATORY:             { game: mm, id: 0x6870, type: indoors-exit, areas: ["MM Laboratory", "MM Great Bay Coast"], reverse: MM_LABORATORY }
-MM_ROOM_EVANS:                                  { game: mm, id: 0x9230, type: indoors, areas: ["MM Zora Hall", "MM Evan's Room"], reverse: MM_ZORA_HALL_FROM_EVANS }
+MM_ROOM_EVANS:                                  { game: mm, id: 0x9230, type: indoors, areas: ["MM Zora Hall", "MM Evan's Room"], reverse: MM_ZORA_HALL_FROM_EVANS, debug: [INTERIOR, "Evan"] }
 MM_ZORA_HALL_FROM_EVANS:                        { game: mm, id: 0x6040, type: indoors-exit, areas: ["MM Evan's Room", "MM Zora Hall"], reverse: MM_ROOM_EVANS }
 MM_ROOM_JAPAS:                                  { game: mm, id: 0x9210, type: indoors, areas: ["MM Zora Hall", "MM Japas' Room"], reverse: MM_ZORA_HALL_FROM_JAPAS }
 MM_ZORA_HALL_FROM_JAPAS:                        { game: mm, id: 0x6050, type: indoors-exit, areas: ["MM Japas' Room", "MM Zora Hall"], reverse: MM_ROOM_JAPAS }
@@ -282,7 +286,7 @@ MM_RANCH_HOUSE:                                 { game: mm, id: 0x0610, type: in
 MM_ROMANI_RANCH_FROM_RANCH_HOUSE:               { game: mm, id: 0x6430, type: indoors-exit, areas: ["MM Ranch House", "MM Romani Ranch"], reverse: MM_RANCH_HOUSE }
 MM_ASTRAL_OBSERVATORY_FROM_CLOCK_TOWN_EAST:     { game: mm, id: 0x4c00, type: indoors-extra, areas: ["MM Clock Town East", "MM Astral Observatory Passage"], reverse: MM_CLOCK_TOWN_EAST_FROM_ASTRAL_OBSERVATORY }
 MM_CLOCK_TOWN_EAST_FROM_ASTRAL_OBSERVATORY:     { game: mm, id: 0xd220, type: indoors-exit, areas: ["MM Astral Observatory Passage", "MM Clock Town East"], reverse: MM_ASTRAL_OBSERVATORY_FROM_CLOCK_TOWN_EAST }
-MM_ASTRAL_OBSERVATORY_FROM_FIELD:               { game: mm, id: 0x4c10, type: indoors-extra, areas: ["MM Astral Observatory Balcony", "MM Astral Observatory"], reverse: MM_FIELD_FROM_ASTRAL_OBSERVATORY }
+MM_ASTRAL_OBSERVATORY_FROM_FIELD:               { game: mm, id: 0x4c10, type: indoors-extra, areas: ["MM Astral Observatory Balcony", "MM Astral Observatory"], reverse: MM_FIELD_FROM_ASTRAL_OBSERVATORY, debug: [INTERIOR, "Astral Observatory"] }
 MM_FIELD_FROM_ASTRAL_OBSERVATORY:               { game: mm, id: 0x5490, type: indoors-exit, areas: ["MM Astral Observatory", "MM Astral Observatory Balcony"], reverse: MM_ASTRAL_OBSERVATORY_FROM_FIELD }
 MM_SWAMP_ARCHERY:                               { game: mm, id: 0x4200, type: indoors, areas: ["MM Road to Southern Swamp", "MM Swamp Archery"], reverse: MM_SWAMP_ROAD_FROM_ARCHERY }
 MM_SWAMP_ROAD_FROM_ARCHERY:                     { game: mm, id: 0x7a20, type: indoors-exit, areas: ["MM Swamp Archery", "MM Road to Southern Swamp"], reverse: MM_SWAMP_ARCHERY }
@@ -314,3 +318,26 @@ MM_WALLMASTER_BTW_FOUNTAIN:                     { game: mm,  id: 0xff02, type: w
 MM_WALLMASTER_BTW_EXIT:                         { game: mm,  id: 0xff03, type: wallmaster, areas: ["MM Beneath The Well Wallmaster Near Exit", "MM VOID"] }
 MM_CLOCK_TOWN:                                  { game: mm,  id: 0xd800, type: none, debug: ['COMMON', 'Clock Town'] }
 MM_MOON:                                        { game: mm,  id: 0xc800, type: none, debug: ['COMMON', 'Moon'] }
+OOT_BOSS_GANON2:                                { game: oot, id: 0x517,  type: none, debug: ['BOSS', 'Ganon'] }
+OOT_LOST_BRIDGE_FROM_KOKIRI_FOREST:             { game: oot, id: 0x5e0,  type: none }
+OOT_LOST_WOODS_FROM_KOKIRI_FOREST:              { game: oot, id: 0x11e,  type: none }
+OOT_KOKIRI_FOREST_FROM_LOST_WOODS:              { game: oot, id: 0x286,  type: none }
+OOT_GERUDO_FORTRESS_CAUGHT_NO_HOOK:             { game: oot, id: 0x1a5,  type: none }
+OOT_GERUDO_FORTRESS_CAUGHT:                     { game: oot, id: 0x5f8,  type: none }
+OOT_CASTLE_STEALTH:                             { game: oot, id: 0x07a,  type: none }
+OOT_CASTLE_FROM_STEALTH:                        { game: oot, id: 0x23d,  type: none }
+OOT_CASTLE_COURTYARD:                           { game: oot, id: 0x400,  type: none }
+OOT_CASTLE_CAUGHT:                              { game: oot, id: 0x47e,  type: none }
+OOT_SHOP_MASKS:                                 { game: oot, id: 0x530,  type: none }
+OOT_SAGES_CHAMBER_END:                          { game: oot, id: 0x06b,  type: none }
+OOT_TEMPLE_OF_TIME_MASTER_SWORD_CS:             { game: oot, id: 0x2ca,  type: none }
+OOT_ZORA_RIVER_FROM_FIELD_WATER:                { game: oot, id: 0x1d9,  type: none }
+OOT_FIELD_FROM_ZORA_RIVER_WATER:                { game: oot, id: 0x311,  type: none }
+MM_CLOCK_TOWN_FROM_SONG_OF_TIME:                { game: mm,  id: 0x1c00, type: none }
+MM_CLOCK_TOWER_MOON_CRASH:                      { game: mm,  id: 0xc030, type: none }
+MM_CLOCK_TOWER_FROM_CLOCK_TOWN:                 { game: mm,  id: 0xc010, type: none }
+MM_TERMINA_FIELD_FROM_CLOCK_TOWN_WEST:          { game: mm,  id: 0x5400, type: none }
+MM_GORON_VILLAGE_FROM_TWIN_SPRING:              { game: mm,  id: 0x8a00, type: none }
+MM_GORON_VILLAGE_FROM_TWIN_WINTER:              { game: mm,  id: 0x9400, type: none }
+MM_WOODFALL_FROM_SWAMP:                         { game: mm,  id: 0x8600, type: none }
+MM_COAST_FROM_MIKAU_CS:                         { game: mm,  id: 0x68a0, type: none }

@@ -4,6 +4,54 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [20.0] - 2024-02-19
+
+### Added
+
+- Add cosmetics settings for dpad.
+- Add rupoors as optional, extra traps.
+- Add non-progressive clocks.
+- Add a setting to alter the "getting lost" lost woods exits to take you into the lost woods again. Also add a setting to randomize those entrances.
+- Add a trick for using Hookshot anywhere to access the Zora Hall doors.
+- Add logic for getting to the Ikana Castle Exterior entrance from the roof.
+- Add logic for soaring out of MM's mini-dungeons.
+- Add a setting to enable Void Warp in MM.
+
+### Changed
+
+- Change the dpad texture.
+- Make bombchu bag and hints play a little nicer.
+- Change OoT boss room death/respawn behavior slightly to avoid gaining out of logic access to market.
+- Made logic surrounding Evan simpler; now requires getting through the door in cursed state or Farore's Wind.
+- Refactor Farore's Wind in MM to make the code more similar to OoT's code.
+
+### Fixed
+
+- Fix room key not working when not the active item.
+- Fix the telescope scrub sometimes failing to spawn when not having an ocarina.
+- Fix MM Fairy Ocarina not being useable on C buttons in some cases.
+- Fix the dpad being useable during some minigames where it shouldn't.
+- Fix a bunch of clock/moon crash issues.
+- Fix Clock showing (and time flowing) on Clock Tower Roof and Moon.
+- Fix a softlock when getting an item on the same frame the player switches to Kafei in Sakon's Hideout.
+- Fix the doors in Sakon hideout not respecting enemy souls properly.
+- Fix more instances of the Fog Glitch in OoT.
+- Fix FW soaring / game over issue.
+- Fix an issue where time logic would sometimes lead to contradictions.
+- Fix logic issues involving age swap for the Spirit Temple adult statue checks.
+
+## [19.2] - 2024-02-15
+
+### Fixed
+
+- Fix Evan sometimes crashing the game, for real this time.
+
+## [19.1] - 2024-02-14
+
+### Fixed
+
+- Fix Evan sometimes crashing the game.
+
 ## [19.0] - 2024-02-14
 
 ### Added
@@ -1001,7 +1049,10 @@ All notable changes to this project will be documented in this file.
 
 - Initial stable release.
 
-[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v19.0...HEAD
+[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v20.0...HEAD
+[20.0]: https://github.com/OoTMM/OoTMM/compare/v19.2...v20.0
+[19.2]: https://github.com/OoTMM/OoTMM/compare/v19.1...v19.2
+[19.1]: https://github.com/OoTMM/OoTMM/compare/v19.0...v19.1
 [19.0]: https://github.com/OoTMM/OoTMM/compare/v18.3...v19.0
 [18.3]: https://github.com/OoTMM/OoTMM/compare/v18.2...v18.3
 [18.2]: https://github.com/OoTMM/OoTMM/compare/v18.1...v18.2

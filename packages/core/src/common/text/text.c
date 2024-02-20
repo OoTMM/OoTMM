@@ -281,6 +281,7 @@ static int isItemAmbiguous(s16 gi)
     case GI_OOT_RUPEE_RED:
     case GI_OOT_RUPEE_PURPLE:
     case GI_OOT_RUPEE_HUGE:
+    case GI_OOT_TRAP_RUPOOR:
     case GI_MM_WALLET:
     case GI_MM_WALLET2:
     case GI_MM_WALLET3:
@@ -292,6 +293,7 @@ static int isItemAmbiguous(s16 gi)
     case GI_MM_RUPEE_PURPLE:
     case GI_MM_RUPEE_SILVER:
     case GI_MM_RUPEE_GOLD:
+    case GI_MM_TRAP_RUPOOR:
         return !comboConfig(CFG_SHARED_WALLETS);
     case GI_OOT_HEART_CONTAINER:
     case GI_OOT_HEART_CONTAINER2:
@@ -745,8 +747,22 @@ void comboTextAppendItemNameEx(char** b, s16 gi, int flags, int importance)
                 ambiguous = 0;
             }
             break;
-        case GI_MM_CLOCK2:
-            itemName = "a " TEXT_C1 "Progressive Clock";
+        case GI_MM_CLOCK1:
+            if (comboConfig(CFG_MM_CLOCKS_PROGRESSIVE))
+                itemName = "a " TEXT_C1 "Progressive Clock";
+            break;
+        case GI_OOT_BOMBCHU_5:
+        case GI_OOT_BOMBCHU_10:
+        case GI_OOT_BOMBCHU_20:
+            if (comboConfig(CFG_OOT_BOMBCHU_BAG))
+                itemName = TEXT_C1 "Bombchu"; /* Generic term for pack or bag */
+            break;
+        case GI_MM_BOMBCHU:
+        case GI_MM_BOMBCHU_5:
+        case GI_MM_BOMBCHU_10:
+        case GI_MM_BOMBCHU_20:
+            if (comboConfig(CFG_MM_BOMBCHU_BAG))
+                itemName = TEXT_C1 "Bombchu"; /* Generic term for pack or bag */
             break;
         }
 
@@ -1048,28 +1064,51 @@ void comboTextMessageCantBuy(GameState_Play* play, int flags)
     comboTextAutoLineBreaks(start);
 }
 
+static int shouldItemBeHintedWithImportance(s16 gi)
+{
+    if (!comboConfig(CFG_HINT_IMPORTANCE))
+        return 0;
+
+    if (gi == GI_NOTHING)
+        return 0;
+
+    switch (gi)
+    {
+    case GI_OOT_BOMBCHU_5:
+    case GI_OOT_BOMBCHU_10:
+    case GI_OOT_BOMBCHU_20:
+    case GI_MM_BOMBCHU:
+    case GI_MM_BOMBCHU_5:
+    case GI_MM_BOMBCHU_10:
+    case GI_MM_BOMBCHU_20:
+        return 1;
+    default:
+        return !isItemFastBuy(gi);
+    }
+}
+
 void comboTextAppendItemImportance(char** b, s16 gi, int importance)
 {
-    if (comboConfig(CFG_HINT_IMPORTANCE) && !isItemFastBuy(gi) && gi != GI_NOTHING)
+    if (!shouldItemBeHintedWithImportance(gi))
+        return;
+
+    switch (importance)
     {
-        switch (importance)
-        {
-        case 0:
-            comboTextAppendStr(b, " (" TEXT_COLOR_PINK "not required");
-            comboTextAppendClearColor(b);
-            comboTextAppendStr(b, ")");
-            break;
-        case 1:
-            comboTextAppendStr(b, " (" TEXT_COLOR_TEAL "sometimes required");
-            comboTextAppendClearColor(b);
-            comboTextAppendStr(b, ")");
-            break;
-        case 2:
-            comboTextAppendStr(b, " (" TEXT_COLOR_YELLOW "required");
-            comboTextAppendClearColor(b);
-            comboTextAppendStr(b, ")");
-            break;
-        }
+    case 0:
+        comboTextAppendStr(b, " (" TEXT_COLOR_PINK "not required");
+        comboTextAppendClearColor(b);
+        comboTextAppendStr(b, ")");
+        break;
+    case 1:
+        comboTextAppendStr(b, " (" TEXT_COLOR_TEAL "sometimes required");
+        comboTextAppendClearColor(b);
+        comboTextAppendStr(b, ")");
+        break;
+    case 2:
+        comboTextAppendStr(b, " (" TEXT_COLOR_YELLOW "required");
+        comboTextAppendClearColor(b);
+        comboTextAppendStr(b, ")");
+        break;
     }
 }
 

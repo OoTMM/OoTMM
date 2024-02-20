@@ -35,6 +35,10 @@ export const COSMETICS = [{
   name: 'MM Fierce Deity Tunic',
   type: 'color',
 }, {
+  key: 'dpad',
+  name: 'D-Pad',
+  type: 'color',
+}, {
   key: 'modelOotChildLink',
   name: 'Player Model - Child Link (OoT)',
   type: 'zobj',

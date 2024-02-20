@@ -1,10 +1,7 @@
 #include <combo.h>
 
-static void PatchWeather(void)
+static void PatchWeather(GameState_Play* play)
 {
-    if (!comboConfig(CFG_ER_ANY))
-        return;
-
     gFogState = 0;
     if (gSave.age != AGE_ADULT || gSaveContext.sceneSetupId >= 4)
         return;
@@ -37,7 +34,7 @@ static void PatchWeather(void)
             return;
         }
 
-        switch (gSave.sceneId)
+        switch (play->sceneId)
         {
         case SCE_OOT_ZORA_DOMAIN:
         case SCE_OOT_ZORA_FOUNTAIN:
@@ -48,7 +45,7 @@ static void PatchWeather(void)
 
     if (gSave.inventory.quest.medallionForest && gSave.inventory.quest.medallionFire && gSave.inventory.quest.medallionWater && !GetEventChk(EV_OOT_CHK_MEDALLION_SHADOW))
     {
-        switch (gSave.sceneId)
+        switch (play->sceneId)
         {
         case SCE_OOT_KAKARIKO_VILLAGE:
         case SCE_OOT_GRAVEYARD:
@@ -73,7 +70,7 @@ static void PatchWeather(void)
             return;
         }
 
-        switch (gSave.sceneId)
+        switch (play->sceneId)
         {
         case SCE_OOT_KAKARIKO_VILLAGE:
         case SCE_OOT_GRAVEYARD:
@@ -95,7 +92,7 @@ static void PatchWeather(void)
 static void Play_InitEnvironmentWrapper(GameState_Play* play, u16 skyboxId)
 {
     /* Patch the weather system */
-    PatchWeather();
+    PatchWeather(play);
 
     /* Forward */
     Play_InitEnvironment(play, skyboxId);

@@ -683,6 +683,9 @@ const ITEM_IDS = [
   'MM_MAGIC_JAR_LARGE',
   'SHARED_MAGIC_JAR_SMALL',
   'SHARED_MAGIC_JAR_LARGE',
+  'OOT_TRAP_RUPOOR',
+  'MM_TRAP_RUPOOR',
+  'SHARED_TRAP_RUPOOR',
   'NOTHING',
   'OOT_FAIRY_BIG',
   'MM_FAIRY_BIG',
@@ -701,6 +704,12 @@ const ITEM_IDS = [
   'OOT_MASK_STONE',
   'SHARED_MASK_STONE',
   'MM_CLOCK',
+  'MM_CLOCK1',
+  'MM_CLOCK2',
+  'MM_CLOCK3',
+  'MM_CLOCK4',
+  'MM_CLOCK5',
+  'MM_CLOCK6',
 ] as const;
 
 export type ItemID = typeof ITEM_IDS[number];

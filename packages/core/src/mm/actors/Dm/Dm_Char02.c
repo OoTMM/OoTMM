@@ -32,7 +32,7 @@ int DmChar02_HasGivenItem(Actor* this)
         if (!gMmExtraFlags2.ocarina)
         {
             gMmExtraFlags2.ocarina = 1;
-            this->attachedA = NULL;
+            this->parent = NULL;
             return 0;
         }
         return 1;

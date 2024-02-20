@@ -32,7 +32,7 @@ void EnTimeTag_HandlerSoaring(Actor* this, GameState_Play* play)
     if (ActorTalkedTo(this))
     {
         Message_Close(play);
-        this->attachedA = NULL;
+        this->parent = NULL;
         SET_HANDLER(this, EnTimeTag_GiveItemSoaring);
         EnTimeTag_GiveItemSoaring(this, play);
         return;
@@ -69,3 +69,14 @@ static void EnTimeTag_AfterKick(void)
 }
 
 PATCH_FUNC(0x80aca714, EnTimeTag_AfterKick);
+
+void EnTimeTag_KickOut_WaitForTime_Wrapper(Actor* this, GameState_Play* play)
+{
+    void (*EnTimeTag_KickOut_WaitForTime)(Actor*, GameState_Play*);
+
+    if (play->sceneId == SCE_MM_STOCK_POT_INN && (gMmExtraTrade.trade2 & (1 << XITEM_MM_TRADE2_ROOM_KEY)))
+        return;
+
+    EnTimeTag_KickOut_WaitForTime = actorAddr(AC_EN_TIME_TAG, 0x80aca840);
+    EnTimeTag_KickOut_WaitForTime(this, play);
+}

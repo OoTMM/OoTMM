@@ -12,7 +12,7 @@ int EnKgy_HasGivenItem(Actor* this)
             gMmExtraFlags.swordRazor = 1;
         else
             gMmExtraFlags.swordGilded = 1;
-        this->attachedA = NULL;
+        this->parent = NULL;
     }
     return ret;
 }

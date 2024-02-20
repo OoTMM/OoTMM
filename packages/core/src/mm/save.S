@@ -1,5 +1,21 @@
 #include <combo.h>
 
+/* Load the save ourselves */
+Sram_OpenSave_Early:
+  HOOK_CALL comboReadOwnSave
+  addiu sp,-0x40
+  j 0x80144e80
+   lui a3,0x801f
+
+PATCH_START 0x80144e78
+  j Sram_OpenSave_Early
+   nop
+PATCH_END
+
+PATCH_START 0x80144e90
+  li t6,0
+PATCH_END
+
 /* Rebase MM save */
 PATCH_START 0x801c67c8
 .int SAVE_OFFSET_MM_1 >> 7

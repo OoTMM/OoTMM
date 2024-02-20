@@ -18,9 +18,12 @@ static const int kDpadOffY[] = { 1, -1, 0, 0 };
 
 static float kDpadItemScale = 0.4f;
 
+static Color_RGB8 sDpadColor = { 0x60, 0x60, 0x60 };
+COSMETIC(DPAD_COLOR, sDpadColor);
+
 static int canShowDpad(void)
 {
-    if (gSaveContext.gameMode)
+    if (gSaveContext.gameMode || (gSaveContext.minigameState == 1))
         return 0;
     return 1;
 }
@@ -69,7 +72,7 @@ static int canUseDpadItem(GameState_Play* play, s16 itemId, int flags)
 #if defined(GAME_MM)
     if (gSave.equippedMask == PLAYER_MASK_GIANT)
         return 0;
-    
+
     /* These states seem to handle minigames - and everything should be disabled during these */
     if(link->state3 & (1 << 22) || link->state & (1 << 5))
         return 0;
@@ -131,7 +134,7 @@ void comboDpadDraw(GameState_Play* play)
     gDPPipeSync(OVERLAY_DISP++);
     gSPSegment(OVERLAY_DISP++, 0x06, gCustomKeep);
     gSPSegment(OVERLAY_DISP++, 0x07, sDpadIconBuffer);
-    gDPSetPrimColor(OVERLAY_DISP++, 0, 0x80, 0xff, 0xff, 0xff, alpha);
+    gDPSetPrimColor(OVERLAY_DISP++, 0, 0x80, sDpadColor.r, sDpadColor.g, sDpadColor.b, alpha);
 
     /* Draw */
     comboDrawInit2D(&OVERLAY_DISP);

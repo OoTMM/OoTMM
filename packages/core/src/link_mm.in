@@ -17,6 +17,13 @@ Play_DrawHudButtons = 0x80117100;
 
 Actor_ProcessInitChain = 0x800ffadc;
 
+_Interface_UpdateButtonsPart2 = 0x80110038;
+Schedule_CheckMiscS = 0x8013296c;
+
+AudioSeq_QueueSeqCmd = 0x801a89a8;
+
+Sleep_Usec = 0x80087a1c;
+
 ActorRemove = 0x800BB498;
 AddMagic = 0x80115d14;
 Magic_RequestChange = 0x80115db4;
@@ -100,9 +107,11 @@ DrawGi_GS                   = 0x800ee7d8;
 DrawGi_Heart                = 0x800eee34;
 DrawGi_Poe                  = 0x800ee400;
 DrawGi_Potion               = 0x800eea48;
-DrawGi_Rupee                = 0x800efab8;
+DrawGi_VanillaRupee         = 0x800efab8;
 DrawGi_MoonTear             = 0x800ef65c;
 DrawGi_BottleFairy          = 0x800ef4d4;
+
+Player_InCsMode = 0x801233e4;
 
 Gfx_SetupDL57 = 0x8012BFC4;
 InitListPolyOpa = 0x8012c28c;
@@ -190,6 +199,7 @@ Interface_StartMoonCrash = 0x8011c808;
 
 Sram_SaveEndOfCycle = 0x80143b0c;
 Sram_SaveNewDay = 0x80146f5c;
+Sram_OpenSave = 0x80144e78;
 
 DisplayTextBox = 0x80150d08;
 Message_IsClosed = 0x800b867c;

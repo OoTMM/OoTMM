@@ -160,11 +160,11 @@ function SettingTooltip({ setting }: { setting: string }) {
 
   return (
     <Tooltip id={data.key}>
-      <Text size='md' style={{whiteSpace:"pre-line"}}>{description.split('<br>').join('\n')}</Text>
+      <Text size='xl' style={{whiteSpace:"pre-line"}}>{description.split('<br>').join('\n')}</Text>
       <ul>
         {Object.entries(values).map(x => <li key={x[0]}><strong>{x[0]}</strong>: {x[1]}</li>)}
       </ul>
-      <Text size='md'>Default: <strong>{def}</strong></Text>
+      <Text size='xl'>Default: <strong>{def}</strong></Text>
     </Tooltip>
   );
 }

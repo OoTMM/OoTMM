@@ -99,7 +99,7 @@ int DoorWarp1_ShouldTrigger(Actor* this, GameState_Play* play)
         if (!gMmExtraFlags2.songOath)
         {
             gMmExtraFlags2.songOath = 1;
-            this->attachedA = NULL;
+            this->parent = NULL;
         }
         else
         {
@@ -164,17 +164,17 @@ static void DoorWarp1_TriggerBossWarpPad(Actor* this, GameState_Play* play)
     switch (play->sceneId)
     {
     case SCE_MM_TEMPLE_WOODFALL:
-        entrance = 0x3800;
+        entrance = ENTR_MM_BOSS_TEMPLE_WOODFALL;
         break;
     case SCE_MM_TEMPLE_SNOWHEAD:
-        entrance = 0x8200;
+        entrance = ENTR_MM_BOSS_TEMPLE_SNOWHEAD;
         break;
     case SCE_MM_TEMPLE_GREAT_BAY:
-        entrance = 0xb800;
+        entrance = ENTR_MM_BOSS_TEMPLE_GREAT_BAY;
         break;
     case SCE_MM_TEMPLE_STONE_TOWER:
     case SCE_MM_TEMPLE_STONE_TOWER_INVERTED:
-        entrance = 0x6600;
+        entrance = ENTR_MM_BOSS_TEMPLE_STONE_TOWER;
         break;
     default:
         UNREACHABLE();
