@@ -3,11 +3,20 @@
 
 #include <combo/util.h>
 
-typedef struct PACKED
+typedef struct
 {
     char view[0x128];
     char unk_0128[0xdc88];
-    char textBuffer[0x550]; /* Probably smaller */
+    char textBuffer[0x500];
+    /* 0xE2B0 */ u8* textboxSegment; // original name: "fukidashiSegment"
+    /* 0xE2B4 */ char unk_E2B4[0x4];
+    /* 0xE2B8 */ struct OcarinaStaff* ocarinaStaff; // original name : "info"
+    /* 0xE2BC */ char unk_E2BC[0x3C];
+    /* 0xE2F8 */ u16 textId;
+    /* 0xE2FA */ u16 choiceTextId;
+    /* 0xE2FC */ u8 textBoxProperties; // original name : "msg_disp_type"
+    /* 0xE2FD */ u8 textBoxType; // "Text Box Type"
+    /* 0xE2FE */ u8 textBoxPos; // text box position
     /* 0xE300 */ s32 msgLength;
     /* 0xE304 */ u8 msgMode;
     /* 0xE305 */ u8 unk_e305;
@@ -20,6 +29,8 @@ typedef struct PACKED
     char unk_e3f2[0x26];
 }
 MessageContext;
+
+ASSERT_SIZE(MessageContext, 0xe418);
 
 #define OCARINA_SONG_MINUET             0x0
 #define OCARINA_SONG_BOLERO             0x1

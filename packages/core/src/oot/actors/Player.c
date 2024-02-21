@@ -4,6 +4,7 @@
 #include <combo/custom.h>
 
 void ArrowCycle_Handle(Actor_Player* link, GameState_Play* play);
+void Ocarina_HandleCustomSongs(Actor_Player* link, GameState_Play* play);
 
 void* Player_AllocObjectBuffer(u32 size)
 {
@@ -233,6 +234,7 @@ void Player_UpdateWrapper(Actor_Player* this, GameState_Play* play)
 
     ArrowCycle_Handle(this, play);
     Player_Update(this, play);
+    Ocarina_HandleCustomSongs(this, play);
     comboDpadUpdate(play);
     comboDpadUse(play, DPF_EQUIP);
 
@@ -360,4 +362,16 @@ void Player_DrawDekuStick(void)
     gSPSegment(POLY_OPA_DISP++, 0x0a, obj);
     gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_EQ_DEKU_STICK_0);
     CLOSE_DISPS();
+}
+
+void Player_AfterSetEquipmentData(GameState_Play* play)
+{
+    Actor_Player* player = GET_LINK(play);
+    if (player->rightHandType != 0xd && // PLAYER_MODELTYPE_RH_OCARINA
+        player->rightHandType != 0xe && // PLAYER_MODELTYPE_RH_OOT
+        (player->heldItemAction == 0x1c || // PLAYER_IA_OCARINA_FAIRY
+        player->heldItemAction == 0x1d)) // PLAYER_IA_OCARINA_OF_TIME
+    {
+        Player_SetModels(player, Player_ActionToModelGroup(player, player->heldItemAction));
+    }
 }

@@ -705,6 +705,9 @@ typedef enum {
 
 #define VTX(x,y,z,s,t,crnx,cgny,cbnz,a) { { { x, y, z }, 0, { s, t }, { crnx, cgny, cbnz, a } } }
 
+#define MASS_IMMOVABLE 0xFF // Cannot be pushed by OC colliders
+#define MASS_HEAVY 0xFE // Can only be pushed by OC colliders from actors with IMMOVABLE or HEAVY mass.
+
 typedef enum {
     /* 0x00 */ CAM_SET_NONE,
     /* 0x01 */ CAM_SET_NORMAL0, // Generic camera 0, used in various places "NORMAL0"
@@ -1162,5 +1165,21 @@ typedef struct {
     /* 0x1 */ s8 spawnNum;
     /* 0x2 */ u16 flags;
 } EntranceTableEntry; // size = 0x4
+
+#define UPDBGCHECKINFO_FLAG_0 (1 << 0) // check wall
+#define UPDBGCHECKINFO_FLAG_1 (1 << 1) // check ceiling
+#define UPDBGCHECKINFO_FLAG_2 (1 << 2) // check floor and water
+#define UPDBGCHECKINFO_FLAG_3 (1 << 3)
+#define UPDBGCHECKINFO_FLAG_4 (1 << 4)
+#define UPDBGCHECKINFO_FLAG_5 (1 << 5) // unused
+#define UPDBGCHECKINFO_FLAG_6 (1 << 6) // disable water ripples
+#define UPDBGCHECKINFO_FLAG_7 (1 << 7) // alternate wall check?
+
+// MM
+
+#define UPDBGCHECKINFO_FLAG_8 (1 << 8)
+#define UPDBGCHECKINFO_FLAG_9 (1 << 9)
+#define UPDBGCHECKINFO_FLAG_10 (1 << 10) // check water
+#define UPDBGCHECKINFO_FLAG_11 (1 << 11)
 
 #endif /* TYPES_H */

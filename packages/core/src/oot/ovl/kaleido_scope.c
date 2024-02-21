@@ -736,7 +736,6 @@ void KaleidoScope_BeforeUpdate(GameState_Play* play)
                 WREG(2) = -6240;
                 func_800C7200(0);
                 gSoaringIndexSelected = -1;
-                play->msgCtx.ocarinaMode = 4; // OCARINA_MODE_END
                 gSaveContext.prevHudVisibilityMode = 50; // HUD_VISIBILITY_ALL;
             }
             else if (play->gs.input[0].pressed.buttons & A_BUTTON)

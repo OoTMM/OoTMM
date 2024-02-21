@@ -90,6 +90,8 @@ InitListPolyXlu         = 0x8007e2c0;
 Gfx_SetupDL_42Opa       = 0x8007e868;
 Matrix_MultVec3f        = 0x800ab958;
 GetMatrixMV             = 0x800ab900;
+Gfx_DrawDListOpa        = 0x80028048;
+Gfx_DrawDListXlu        = 0x800280c8;
 
 IsSceneValidEpona = 0x8005a3c0;
 _SpawnActor = 0x80025110;
@@ -108,6 +110,7 @@ PlayLoopingSfxAtActor = 0x8002313c;
 
 Actor_HasParent = 0x80022bb0;
 ActorDestroy = 0x80020eb4;
+Actor_UpdatePos = 0x80021124;
 ActorUpdateVelocity = 0x8002121c;
 Actor_SetCollisionCylinder = 0x80021e6c;
 
@@ -169,7 +172,9 @@ Interface_LoadActionLabelB = 0x80071FF8;
 
 Math_CosS = 0x80063684;
 Math_SinS = 0x800636C4;
+Math_StepToS = 0x800637d4;
 RandIntRange = 0x80063bf0;
+Math_Vec3f_Copy = 0x80063cac;
 gSegments = 0x80120c38;
 osSetIntMask = 0x80003cc0;
 
@@ -189,6 +194,8 @@ Player_InCsMode = 0x8007943c;
 
 UpdateEquipment = 0x80079764;
 
+Player_ActionToModelGroup = 0x800794b0;
+Player_SetModels = 0x800795e8;
 Player_UsingItem = 0x80079bf8;
 
 Enemy_StartFinishingBlow = 0x80025b4c;
@@ -247,3 +254,9 @@ ActorFind = 0x80025b0c;
 sqrtf = 0x800D0DC0;
 
 EffectSsIceSmoke_Spawn = 0x8001e560;
+
+CollisionCheck_SetOC = 0x8004c130;
+Collider_InitCylinder = 0x8004ab7c;
+Collider_SetCylinder = 0x8004acec;
+Collider_UpdateCylinder = 0x80050b00;
+Collider_DestroyCylinder = 0x8004abcc;

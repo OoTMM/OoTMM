@@ -1,5 +1,48 @@
 #include <combo.h>
 
+/*
+==================================================================================================
+ Handle Custom Songs
+==================================================================================================
+*/
+
+/*
+Replaces:
+  beqz    v1, .+0x5c
+*/
+PATCH_START 0x800dded4
+  beqz    v1, .+0x58
+PATCH_END
+
+/*
+Replaces:
+  bnel    v1, t8, .+0x4c
+   lbu    t9, 0x0001 (a1)
+*/
+PATCH_START 0x800ddee8
+  bnel    v1, t8, .+0x44
+   nop
+PATCH_END
+
+Ocarina_BeforeSongPlayingProcessed_Hook:
+  HOOK_SAVE
+  jal   Ocarina_BeforeSongPlayingProcessed
+   nop
+  sw    v0, 0x003c (sp) // store into HOOK_SAVE's T9
+  HOOK_RESTORE
+  jr    ra
+   nop
+
+/*
+Replaces:
+  lw      a1, 0x62b8 (s2)
+  lbu     t9, 0x0001 (a1)
+*/
+PATCH_START 0x800ddf2c
+  jal     Ocarina_BeforeSongPlayingProcessed_Hook
+   move   a0, s3
+PATCH_END
+
 Ocarina_CheckCustomSongs_Hook:
   addiu   sp,-0x18
   sw      ra,0x14(sp)

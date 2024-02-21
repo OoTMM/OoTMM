@@ -29,6 +29,7 @@
 # define AC_EN_HORSE                0x014
 # define AC_EN_ITEM00               0x015
 # define AC_EN_ARROW                0x016
+# define AC_CUSTOM_TORCH2           0x017
 # define AC_EN_ELF                  0x018
 # define AC_EN_NIW                  0x019
 # define AC_EN_TITE                 0x01b

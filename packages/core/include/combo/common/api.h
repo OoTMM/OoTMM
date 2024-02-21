@@ -90,7 +90,9 @@ void    ActorSetUnk(Actor* actor, float unk);
 void    ActorEnableGrab(Actor* actor, GameState_Play* play);
 void    ActorEnableTalk(Actor* actor, GameState_Play* play, float range);
 void    ActorEnableTalkEx(Actor* actor, GameState_Play* play, float range, u32 unk);
+// AKA  Actor_UpdateBgCheckInfo
 void    Actor_SetCollisionCylinder(GameState_Play* play, Actor* actor, float unk_3, float unk_4, float unk_5, u32 unk_6);
+// AKA  Actor_MoveXZGravity AKA Actor_MoveWithGravity
 void    ActorUpdateVelocity(Actor* actor);
 int     ActorTalkedTo(Actor* actor);
 
@@ -139,8 +141,9 @@ extern u16 gPictoboxState;
 extern u16 gPictoboxPhotoTaken;
 #endif
 
-#define TEXT_STATE_NONE     0
-#define TEXT_STATE_CLOSING  2
+#define TEXT_STATE_NONE         0
+#define TEXT_STATE_CLOSING      2
+#define TEXT_STATE_DONE_FADING  3
 
 #if defined(GAME_OOT)
 int  Message_GetState(MessageContext* ctx);
@@ -173,6 +176,7 @@ void Matrix_SetTranslateRotateYXZ(f32 translateX, f32 translateY, f32 translateZ
 f32 Math_CosS(s16 angle);
 f32 Math_SinS(s16 angle);
 s32 Math_StepToF(f32* pValue, f32 target, f32 step);
+s32 Math_StepToS(s16* pValue, s16 target, s16 step);
 f32 Math_SmoothStepToF(f32* pValue, f32 target, f32 fraction, f32 step, f32 minStep);
 f32 sqrtf(f32 value);
 
@@ -245,6 +249,8 @@ void* OverlayAddr(u32 addr);
 void LoadIcon(u32 vaddr, int iconId, void* buffer, int size);
 void CmpDma_LoadAllFiles(u32 vrom, void* dst, size_t size);
 
+s32 Player_ActionToModelGroup(Actor_Player* link, s32 itemAction);
+void Player_SetModels(Actor_Player* link, s32 modelGroup);
 int Player_UsingItem(Actor_Player* link);
 int Player_GetEnvironmentalHazard(GameState_Play* play);
 
@@ -317,6 +323,8 @@ void Interface_StartMoonCrash(GameState_Play* play);
 
 /* GFX */
 Gfx* Gfx_TexScroll(GfxContext* ctx, u32 x, u32 y, s32 width, s32 height);
+void Gfx_DrawDListOpa(GameState_Play* play, Gfx* dlist);
+void Gfx_DrawDListXlu(GameState_Play* play, Gfx* dlist);
 
 void SpawnRoomActors(GameState_Play* play, int id);
 
@@ -436,9 +444,9 @@ Actor* SpawnCollectible(GameState_Play* play, const Vec3f* pos, u16 param);
 #if defined(GAME_MM)
 void SpawnCollectible2(GameState_Play* play, int unk, void* unk2, u16 unk3);
 f32 VectDist(Vec3f* vec1, Vec3f* vec2);
-void Math_Vec3f_Copy(Vec3f* dest, Vec3f* src);
 f32 Math_Vec3f_DistXYZAndStoreDiff(Vec3f* a, Vec3f* b, Vec3f* dest);
 #endif
+void Math_Vec3f_Copy(Vec3f* dest, Vec3f* src);
 
 void EffectSsIceSmoke_Spawn(GameState_Play* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, s16 scale);
 void EffectSsKiraKira_SpawnDispersed(GameState_Play* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, Color_RGBA8* primColor, Color_RGBA8* envColor, s16 scale, s32 life);
@@ -458,8 +466,10 @@ void Camera_SetCameraData(Camera* camera, s16 setDataFlags, void* data0, void* d
 s32 Collider_InitCylinder(struct GameState_Play* play, ColliderCylinder* collider);
 s32 Collider_SetCylinder(struct GameState_Play* play, ColliderCylinder* collider, struct Actor* actor, ColliderCylinderInit* src);
 void Collider_UpdateCylinder(struct Actor* actor, ColliderCylinder* collider);
+void Collider_DestroyCylinder(struct GameState_Play* play, ColliderCylinder* collider);
 
 s32 CollisionCheck_SetAT(GameState_Play* play, CollisionCheckContext* colCtxt, Collider* collider);
+s32 CollisionCheck_SetOC(GameState_Play* play, CollisionCheckContext* colCtxt, Collider* collider);
 
 void Map_SetAreaEntrypoint(GameState_Play* play);
 

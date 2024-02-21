@@ -7,13 +7,23 @@
 typedef struct PACKED ALIGNED(4) Actor_Player
 {
     Actor           base;
-    char            unk_13c[0x04];
+    s8              currentTunic; // current tunic from `PlayerTunic`
+    s8              currentSwordItemId;
+    s8              currentShield; // current shield from `PlayerShield`
+    s8              currentBoots; // current boots from `PlayerBoots`
     u8              heldItemButton;
     u8              itemAction;
     u8              heldItemId;
     u8              boots;
     u8              heldItemAction;
-    char            unk_145[0x0a];
+    char            unk_155[0x003];
+    u8              modelGroup;
+    u8              nextModelGroup;
+    s8              itemChangeType;
+    u8              modelAnimType;
+    u8              leftHandType;
+    u8              rightHandType;
+    u8              sheathType;
     u8              mask;
     char            unk_150[0x34];
     OSMesgQueue     objMsgQueue;
@@ -39,13 +49,12 @@ Actor_Player;
 
 _Static_assert(sizeof(Actor_Player) == 0xa6c, "Actor_Player size is wrong");
 
-ASSERT_OFFSET(Actor_Player, unk_13c,        0x13c);
+ASSERT_OFFSET(Actor_Player, currentTunic,   0x13c);
 ASSERT_OFFSET(Actor_Player, heldItemButton, 0x140);
 ASSERT_OFFSET(Actor_Player, itemAction,     0x141);
 ASSERT_OFFSET(Actor_Player, heldItemId,     0x142);
 ASSERT_OFFSET(Actor_Player, boots,          0x143);
 ASSERT_OFFSET(Actor_Player, heldItemAction, 0x144);
-ASSERT_OFFSET(Actor_Player, unk_145,        0x145);
 ASSERT_OFFSET(Actor_Player, mask,           0x14f);
 ASSERT_OFFSET(Actor_Player, unk_150,        0x150);
 ASSERT_OFFSET(Actor_Player, unk_1a4,        0x1a4);

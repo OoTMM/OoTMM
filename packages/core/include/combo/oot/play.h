@@ -95,7 +95,8 @@ typedef struct GameState_Play
     s8              shootingGalleryStatus;
     s8              bombchuBowlingStatus; /* "bombchu_game_flag" */
     u8              transitionType;
-    char            unk_11e60[0x6b8];
+    CollisionCheckContext colChkCtx;
+    char            unk_120fc[0x41c];
 }
 GameState_Play;
 

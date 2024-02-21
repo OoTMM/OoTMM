@@ -42,6 +42,7 @@
 #  include <combo/oot/actors/En_Diving_Game.h>
 #  include <combo/oot/actors/En_Elf.h>
 #  include <combo/oot/actors/Shot_Sun.h>
+#  include <combo/oot/actors/Custom_Torch2.h>
 # endif
 
 # if defined(GAME_MM)
@@ -451,8 +452,6 @@ extern int gNoTimeFlow;
 
 /* Ocarina */
 void comboCheckSong(const OcarinaSongButtons* songButtons, int songIndex);
-
-extern u8 gCustomOcarinaSong;
 
 /* Conds */
 int comboSpecialCond(int special);
