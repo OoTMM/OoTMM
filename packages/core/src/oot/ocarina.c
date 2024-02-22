@@ -389,8 +389,15 @@ static void HandleElegy(GameState_Play* play)
     }
 
     s32 effectType = 0x19; // DEMO_EFFECT_TIMEWARP_TIMEBLOCK_SMALL
-    SpawnActor(&play->actorCtx, play, AC_DEMO_EFFECT, player->base.world.pos.x, player->base.world.pos.y,
+    DemoEffect* effect = (DemoEffect*) SpawnActor(&play->actorCtx, play, AC_DEMO_EFFECT, player->base.world.pos.x, player->base.world.pos.y,
                                 player->base.world.pos.z, 0, player->base.rot2.y, 0, effectType);
+
+    if (effect != NULL)
+    {
+        effect->envXluColor[0] = 0;
+        effect->envXluColor[1] = 100;
+        effect->envXluColor[2] = 0;
+    }
 
     play->msgCtx.ocarinaMode = 4; // OCARINA_MODE_END
     Message_Close(play);

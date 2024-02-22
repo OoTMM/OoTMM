@@ -43,6 +43,7 @@
 #  include <combo/oot/actors/En_Elf.h>
 #  include <combo/oot/actors/Shot_Sun.h>
 #  include <combo/oot/actors/Custom_Torch2.h>
+#  include <combo/oot/actors/Demo_Effect.h>
 # endif
 
 # if defined(GAME_MM)
