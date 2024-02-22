@@ -45,7 +45,7 @@ void Ocarina_CheckCustomSongs(void)
         comboCheckSong(&sSongSoaring, CUSTOM_SONG_SOARING);
     }
 
-    // if (comboConfig(CFG_SHARED_ELEGY))
+    if (gCustomSave.hasElegy)
     {
         comboCheckSong(&sSongElegy, CUSTOM_SONG_ELEGY);
     }

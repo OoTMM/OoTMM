@@ -212,6 +212,8 @@ export const SONGS = new Set([
   Items.SHARED_SONG_TIME,
   Items.SHARED_SONG_STORMS,
   Items.SHARED_SONG_SUN,
+  Items.OOT_SONG_EMPTINESS,
+  Items.SHARED_SONG_EMPTINESS,
 ]);
 
 export const TRAPS = new Set([
@@ -1063,4 +1065,6 @@ export const REQUIRED = new Set([
   Items.SHARED_MASK_BLAST,
   Items.OOT_MASK_STONE,
   Items.SHARED_MASK_STONE,
+  Items.OOT_SONG_EMPTINESS,
+  Items.SHARED_SONG_EMPTINESS,
 ]);

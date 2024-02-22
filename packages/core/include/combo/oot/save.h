@@ -371,6 +371,7 @@ typedef struct ALIGNED(16)
     u8  shops[8];
     u8  scrubs[8];
     u8  sr[16];
+    u8  hasElegy:1;
 }
 OotCustomSave;
 
