@@ -1956,7 +1956,7 @@
   exits:
     "Gerudo Valley Falls": "true"
     "Hyrule Field": "true"
-    "Gerudo Valley After Bridge": "can_longshot || can_ride_epona || (is_adult && carpenters_rescued) || (is_child && ((has_hover_boots && trick(OOT_VALLEY_GATE_HOVER)) || hookshot_anywhere)) || time_travel_at_will"
+    "Gerudo Valley After Bridge": "can_longshot || can_ride_epona || (is_adult && carpenters_rescued) || (is_child && ((has_hover_boots && trick(OOT_VALLEY_GATE_HOVER)) || can_hookshot)) || time_travel_at_will"
     "Octorok Grotto Ledge": "true"
   events:
     RUPEES: "true"
