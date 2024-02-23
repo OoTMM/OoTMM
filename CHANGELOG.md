@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Fixed
+
+- Fixed an issue where Strength got removed from logic for King Dodongo, causing bomb bag to be hard-required.
+
 ## [20.0] - 2024-02-19
 
 ### Added
