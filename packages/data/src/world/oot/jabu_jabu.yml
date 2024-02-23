@@ -7,7 +7,7 @@
   dungeon: JJ
   exits:
     "Jabu-Jabu": "true"
-    "Jabu-Jabu Pre-Boss": "event(BIG_OCTO) || (has_hover_boots && (trick(OOT_JABU_BOSS_HOVER) || can_play_elegy)) || climb_anywhere || (glitch_megaflip && trick(OOT_JJB_BOXLESS) && can_jump_slash)"
+    "Jabu-Jabu Pre-Boss": "event(BIG_OCTO) || (has_hover_boots && (trick(OOT_JABU_BOSS_HOVER) || can_play_elegy)) || climb_anywhere || (glitch_megaflip && ((trick(OOT_JJB_BOXLESS) && can_jump_slash) || can_play_elegy))"
   events:
     BIG_OCTO: "soul_octorok && event(PARASITE) && (has_weapon || can_use_sticks)"
     PARASITE: "soul_enemy(SOUL_ENEMY_PARASITE) && can_boomerang && (soul_npc(SOUL_NPC_RUTO) || can_play_elegy)"
