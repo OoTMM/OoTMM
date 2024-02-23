@@ -70,6 +70,8 @@
   exits:
     "Deku Tree Lobby": "true"
     "Deku Tree Water Room Back": "(is_child && has_shield) || can_longshot || (can_hookshot && has_iron_boots)"
+  events:
+    MQ_DEKU_WATER_TORCHES: "(is_child && has_shield && can_use_sticks) || (can_use_bow && can_play_elegy)"
   locations:
     "MQ Deku Tree Before Water Platform Chest": "true"
     "MQ Deku Tree Grass Spike Room Front 1": "can_cut_grass"
@@ -78,14 +80,16 @@
 "Deku Tree Water Room Back":
   dungeon: DT
   exits:
-    "Deku Tree Backrooms": "soul_keese && soul_deku_scrub && soul_enemy(SOUL_ENEMY_GOHMA_LARVA) && (has_weapon || has_ranged_weapon_child) && ((is_child && has_shield && can_use_sticks) || has_fire)"
+    "Deku Tree Backrooms": "soul_keese && soul_deku_scrub && soul_enemy(SOUL_ENEMY_GOHMA_LARVA) && (has_weapon || has_ranged_weapon_child) && event(MQ_DEKU_WATER_TORCHES)"
+  events:
+    MQ_DEKU_WATER_TORCHES: "has_fire"
   locations:
     "MQ Deku Tree After Water Platform Chest": "can_play_time"
     "MQ Deku Tree Before Water Platform Chest": "true"
     "MQ Deku Tree Grass Spike Room Back 1": "can_cut_grass"
     "MQ Deku Tree Grass Spike Room Back 2": "can_cut_grass"
-    "MQ Deku Tree Grass Larvae Room 1": "can_cut_grass" #This is placed here because you don't need the souls to get the grass like you do to reach the backrooms.
-    "MQ Deku Tree Grass Larvae Room 2": "can_cut_grass" #This is placed here because you don't need the souls to get the grass like you do to reach the backrooms.
+    "MQ Deku Tree Grass Larvae Room 1": "can_cut_grass && event(MQ_DEKU_WATER_TORCHES)" #This is placed here because you don't need the souls to get the grass like you do to reach the backrooms.
+    "MQ Deku Tree Grass Larvae Room 2": "can_cut_grass && event(MQ_DEKU_WATER_TORCHES)" #This is placed here because you don't need the souls to get the grass like you do to reach the backrooms.
     "MQ Deku Tree Grass Spike Room Front 1": "can_cut_grass"
     "MQ Deku Tree Grass Spike Room Front 2": "can_cut_grass"
     "MQ Deku Tree Grass Spike Room Front 3": "can_cut_grass"

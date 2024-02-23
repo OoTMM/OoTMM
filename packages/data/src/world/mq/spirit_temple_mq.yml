@@ -14,9 +14,9 @@
     "MQ Spirit Temple Lobby Back-Right Chest": "can_hit_triggers_distance || has_bombchu || can_hookshot"
     #The following three chests are here to allow for an age indeterminate path. This is the only age indeterminate content in Spirit MQ.
     "MQ Spirit Temple Compass Chest": "can_use_slingshot && has_bow && small_keys_spirit(2) && has_bombchu"
-    "MQ Spirit Temple Sun Block Room Chest": "small_keys_spirit(2) && has_bombchu && can_play_time && is_child"
+    "MQ Spirit Temple Sun Block Room Chest": "small_keys_spirit(2) && has_bombchu && (can_play_time || can_play_elegy) && is_child"
     "MQ Spirit Temple Lobby Front-Right Chest": "silver_rupees_spirit_lobby"
-    "Spirit Temple Silver Gauntlets": "small_keys_spirit(4) && has_explosives && can_play_time && is_child && soul_iron_knuckle && (has_weapon || can_use_sticks) && has_lens"
+    "Spirit Temple Silver Gauntlets": "small_keys_spirit(4) && has_explosives && (can_play_time || can_play_elegy) && is_child && soul_iron_knuckle && (has_weapon || can_use_sticks) && has_lens"
     "MQ Spirit Temple SR Lobby Rock Right": "has_explosives_or_hammer"
     "MQ Spirit Temple SR Lobby Rock Left": "has_explosives_or_hammer"
     "MQ Spirit Temple Pot Entrance 1": "true"
@@ -71,7 +71,7 @@
     "Spirit Temple Wallmaster Statue": "soul_wallmaster"
     "Spirit Temple Wallmaster Adult Climb": "has_fire_arrows && can_reflect_light && soul_wallmaster" # TODO: Check this
     "Spirit Temple Child Upper": "small_keys_spirit(7)"
-    "Spirit Temple Sun Block Room": "is_adult || can_play_time || has_hover_boots" #Adult's long legs make the jumps easy
+    "Spirit Temple Sun Block Room": "is_adult || (can_play_time || can_play_elegy) || has_hover_boots" #Adult's long legs make the jumps easy
     "Spirit Temple Adult Lower": "has_fire_arrows && can_reflect_light && soul_enemy(SOUL_ENEMY_STALFOS) && soul_wallmaster && has_weapon"
     "Spirit Temple Adult Upper": "is_adult && small_keys_spirit(5)"
     "Spirit Temple Boss": "event(SPIRIT_TEMPLE_LIGHT) && has_mirror_shield && boss_key(BOSS_KEY_SPIRIT) && is_adult"
@@ -95,7 +95,7 @@
   exits:
     #This looks weird but is the last way to account for a very specific scenario involving adult access to the Silver Gauntlets chest and the Colossus drop.
     "Spirit Temple Wallmaster Child Sun": "soul_wallmaster"
-    "Spirit Temple Child Hand": "soul_iron_knuckle && (small_keys_spirit(7) && (has_weapon || can_use_sticks)) || (is_adult && small_keys_spirit(4) && has_lens && can_play_time && soul_floormaster)"
+    "Spirit Temple Child Hand": "soul_iron_knuckle && (small_keys_spirit(7) && (has_weapon || can_use_sticks)) || (is_adult && small_keys_spirit(4) && has_lens && (can_play_time || can_play_elegy) && soul_floormaster)"
   locations:
     "MQ Spirit Temple Sun Block Room Chest": "true"
     "MQ Spirit Temple GS Sun Block Room": "is_adult"
@@ -122,19 +122,26 @@
 "Spirit Temple Adult Upper":
   dungeon: Spirit
   exits:
-    "Spirit Temple Adult Hand": "can_play_time"
+    "Spirit Temple Adult Upper 2": "can_play_time || can_play_elegy"
     "Spirit Temple Adult Climb": "small_keys_spirit(6)"
   locations:
     "MQ Spirit Temple Beamos Room Chest": "soul_beamos"
-"Spirit Temple Adult Hand":
+"Spirit Temple Adult Upper 2":
   dungeon: Spirit
   exits:
-    "Spirit Temple Child Hand": "can_longshot && has_lens && soul_iron_knuckle && soul_floormaster"
+    "Spirit Temple Adult Hand": "has_lens && soul_iron_knuckle && soul_floormaster"
   locations:
     "MQ Spirit Temple Dinolfos Room Chest": "true"
     "MQ Spirit Temple Dinolfos Room Big Fairy": "can_play_sun"
     "MQ Spirit Temple Boss Key Chest": "can_reflect_light"
     "Spirit Temple Mirror Shield": "has_lens && soul_iron_knuckle && soul_floormaster"
+"Spirit Temple Adult Hand":
+  dungeon: Spirit
+  exits:
+    "Spirit Temple Child Hand": "can_longshot"
+    "Spirit Temple Adult Upper 2": "true"
+  locations:
+    "Spirit Temple Mirror Shield": "true"
 "Spirit Temple Adult Climb":
   dungeon: Spirit
   exits:

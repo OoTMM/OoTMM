@@ -8,6 +8,7 @@
 "has_hover_boots_raw": "cond(setting(sharedBootsHover), has(SHARED_BOOTS_HOVER), has(BOOTS_HOVER))"
 "has_tunic_goron_raw": "cond(setting(sharedTunicGoron), has(SHARED_TUNIC_GORON), has(TUNIC_GORON))"
 "has_tunic_zora_raw": "cond(setting(sharedTunicZora), has(SHARED_TUNIC_ZORA), has(TUNIC_ZORA))"
+"has_elegy_raw": "cond(setting(sharedSongElegy), has(SHARED_SONG_EMPTINESS), has(SONG_EMPTINESS))"
 
 "has_scale_raw(x)": "cond(setting(sharedScales), has(SHARED_SCALE, x), has(SCALE, x))"
 "has_strength_raw(x)": "cond(setting(sharedStrength), has(SHARED_STRENGTH, x), has(STRENGTH, x))"
