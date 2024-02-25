@@ -122,7 +122,7 @@
 "Spirit Temple Adult Upper":
   dungeon: Spirit
   exits:
-    "Spirit Temple Adult Upper 2": "can_play_time || can_play_elegy"
+    "Spirit Temple Adult Upper 2": "can_play_time"
     "Spirit Temple Adult Climb": "small_keys_spirit(6)"
   locations:
     "MQ Spirit Temple Beamos Room Chest": "soul_beamos"
