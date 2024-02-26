@@ -3,30 +3,24 @@
 
 #include <combo/common/actor.h>
 
-struct EnTorch2;
-
-typedef struct EnTorch2 {
+typedef struct Actor_CustomEnTorch2 {
     /* 0x000 */ Actor base;
     /* 0x13c */ ColliderCylinder collider;
     /* 0x188 */ u8 state;
     /* 0x189 */ u8 framesUntilNextState;
     /* 0x18a */ s16 alpha;
-} EnTorch2; // size = 0x18c
+} Actor_CustomEnTorch2; // size = 0x18c
 
-typedef enum {
-    /* 0 */ TORCH2_PARAM_HUMAN,
-    /* 1 */ TORCH2_PARAM_GORON,
-    /* 2 */ TORCH2_PARAM_ZORA,
-    /* 3 */ TORCH2_PARAM_DEKU,
-    /* 4 */ TORCH2_PARAM_FIERCE_DEITY
-} EnTorch2Param;
+#define TORCH2_PARAM_HUMAN          0
+#define TORCH2_PARAM_GORON          1
+#define TORCH2_PARAM_ZORA           2
+#define TORCH2_PARAM_DEKU           3
+#define TORCH2_PARAM_FIERCE_DEITY   4
 
-typedef enum {
-    /* 0 */ TORCH2_STATE_INITIALIZED,
-    /* 1 */ TORCH2_STATE_FADING_IN,
-    /* 2 */ TORCH2_STATE_SOLID,
-    /* 3 */ TORCH2_STATE_IDLE,
-    /* 4 */ TORCH2_STATE_DYING
-} EnTorch2State;
+#define TORCH2_STATE_INITIALIZED    0
+#define TORCH2_STATE_FADING_IN      1
+#define TORCH2_STATE_SOLID          2
+#define TORCH2_STATE_IDLE           3
+#define TORCH2_STATE_DYING          4
 
 #endif // Z_EN_TORCH2_H

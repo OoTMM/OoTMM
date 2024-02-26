@@ -205,5 +205,5 @@ Replaces:
 PATCH_START 0x80079848
   lw      a0,0x18(sp)
   j       Player_AfterSetEquipmentData
-   addiu  sp, sp, 0x18
+   addiu  sp, 0x18
 PATCH_END

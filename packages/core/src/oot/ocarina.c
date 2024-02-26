@@ -173,7 +173,7 @@ void Ocarina_HandleLastPlayedSong(GameState_Play* play, Actor_Player* player, s1
     }
 }
 
-const char* soarNames[10] = {
+static const char* kSoarNames[] = {
     "Great Bay Coast",
     "Zora Cape",
     "Snowhead",
@@ -193,7 +193,7 @@ static void soaringMessage(GameState_Play* play, u8 soaringIndex)
     b = play->msgCtx.textBuffer;
     comboTextAppendHeader(&b);
     comboTextAppendStr(&b, "Soar to " TEXT_COLOR_RED);
-    comboTextAppendStr(&b, soarNames[soaringIndex]);
+    comboTextAppendStr(&b, kSoarNames[soaringIndex]);
     comboTextAppendStr(&b, TEXT_CZ "?" TEXT_NL TEXT_NL TEXT_COLOR_GREEN TEXT_CHOICE2 "OK" TEXT_NL "No" TEXT_END);
 }
 
@@ -360,7 +360,7 @@ static void SetupSoaring(GameState_Play* play)
     }
 }
 
-EnTorch2* gElegyShells[1]; // need to increase this if other forms are added to OoT.
+Actor_CustomEnTorch2* gElegyShells[1]; // need to increase this if other forms are added to OoT.
 
 static void HandleElegy(GameState_Play* play)
 {
@@ -368,7 +368,7 @@ static void HandleElegy(GameState_Play* play)
     Actor_Player* player = GET_LINK(play);
     u8 playerForm = 0;
 
-    EnTorch2* torch2 = gElegyShells[playerForm];
+    Actor_CustomEnTorch2* torch2 = gElegyShells[playerForm];
     if (torch2 != NULL)
     {
         Math_Vec3f_Copy(&torch2->base.home.pos, &player->base.world.pos);
@@ -378,7 +378,7 @@ static void HandleElegy(GameState_Play* play)
     }
     else
     {
-        torch2 = (EnTorch2*)SpawnActor(&play->actorCtx, play, AC_CUSTOM_TORCH2, player->base.world.pos.x,
+        torch2 = (Actor_CustomEnTorch2*)SpawnActor(&play->actorCtx, play, AC_CUSTOM_TORCH2, player->base.world.pos.x,
                                         player->base.world.pos.y, player->base.world.pos.z, 0, player->base.rot2.y, 0,
                                         playerForm);
     }

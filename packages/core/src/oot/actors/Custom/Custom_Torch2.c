@@ -9,7 +9,7 @@
 
 #define FLAGS (1 << 4) // (ACTOR_FLAG_10)
 
-#define THIS ((EnTorch2*)thisx)
+#define THIS ((Actor_CustomEnTorch2*)thisx)
 
 void EnTorch2_Init(Actor* thisx, GameState_Play* play);
 void EnTorch2_Destroy(Actor* thisx, GameState_Play* play);
@@ -19,14 +19,14 @@ void EnTorch2_Draw(Actor* thisx, GameState_Play* play2);
 void EnTorch2_UpdateIdle(Actor* thisx, GameState_Play* play);
 void EnTorch2_UpdateDeath(Actor* thisx, GameState_Play* play);
 
-extern EnTorch2* gElegyShells[];
+extern Actor_CustomEnTorch2* gElegyShells[];
 
 ActorInit En_Torch2_InitVars = {
     /**/ AC_CUSTOM_TORCH2,
     /**/ ACTORCAT_ITEMACTION,
     /**/ FLAGS,
     /**/ 1, // GAMEPLAY_KEEP,
-    /**/ sizeof(EnTorch2),
+    /**/ sizeof(Actor_CustomEnTorch2),
     /**/ EnTorch2_Init,
     /**/ EnTorch2_Destroy,
     /**/ EnTorch2_Update,
@@ -256,7 +256,7 @@ static Gfx* sShellDLists[] = {
 };
 
 void EnTorch2_Init(Actor* thisx, GameState_Play* play) {
-    EnTorch2* this = THIS;
+    Actor_CustomEnTorch2* this = THIS;
 
     Actor_ProcessInitChain(&this->base, sInitChain);
     Collider_InitCylinder(play, &this->collider);
@@ -275,7 +275,7 @@ void EnTorch2_Init(Actor* thisx, GameState_Play* play) {
 }
 
 void EnTorch2_Destroy(Actor* thisx, GameState_Play* play) {
-    EnTorch2* this = THIS;
+    Actor_CustomEnTorch2* this = THIS;
 
     Collider_DestroyCylinder(play, &this->collider);
 
@@ -285,7 +285,7 @@ void EnTorch2_Destroy(Actor* thisx, GameState_Play* play) {
 #define fabsf(f) __builtin_fabsf((f32)(f))
 
 void EnTorch2_Update(Actor* thisx, GameState_Play* play) {
-    EnTorch2* this = THIS;
+    Actor_CustomEnTorch2* this = THIS;
     u16 targetAlpha;
     u16 remainingFrames;
 
@@ -330,7 +330,7 @@ void EnTorch2_Update(Actor* thisx, GameState_Play* play) {
 }
 
 void EnTorch2_UpdateIdle(Actor* thisx, GameState_Play* play) {
-    EnTorch2* this = THIS;
+    Actor_CustomEnTorch2* this = THIS;
 
     if (this->state == TORCH2_STATE_DYING) {
         // Start death animation
@@ -340,7 +340,7 @@ void EnTorch2_UpdateIdle(Actor* thisx, GameState_Play* play) {
 }
 
 void EnTorch2_UpdateDeath(Actor* thisx, GameState_Play* play) {
-    EnTorch2* this = THIS;
+    Actor_CustomEnTorch2* this = THIS;
 
     // Fall down and become transparent, then delete once invisible
     if (Math_StepToS(&this->alpha, 0, 8)) {
@@ -365,7 +365,7 @@ void EnTorch2_Draw(Actor* thisx, GameState_Play* play2) {
     };
 
     GameState_Play* play = play2;
-    EnTorch2* this = THIS;
+    Actor_CustomEnTorch2* this = THIS;
     Gfx* gfx = sShellDLists[this->base.variable];
 
     OPEN_DISPS(play->gs.gfx);
