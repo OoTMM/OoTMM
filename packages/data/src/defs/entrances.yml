@@ -61,6 +61,7 @@ OOT_LOST_WOODS_FROM_LOST_WOODS_SOUTH:           { game: oot, id: 0x1b1, type: on
 OOT_LOST_WOODS_FROM_LOST_WOODS_WEST:            { game: oot, id: 0x4c6, type: one-way-woods, areas: ["OOT Lost Woods Lost West", "OOT Lost Woods"] }
 OOT_LAKE_HYLIA_FROM_ZORA_DOMAIN:                { game: oot, id: 0x560, type: region-shortcut, areas: ["OOT Zora Domain", "OOT Lake Hylia"], reverse: OOT_ZORA_DOMAIN_FROM_LAKE_HYLIA }
 OOT_ZORA_DOMAIN_FROM_LAKE_HYLIA:                { game: oot, id: 0x328, type: overworld, areas: ["OOT Lake Hylia", "OOT Zora Domain"], reverse: OOT_LAKE_HYLIA_FROM_ZORA_DOMAIN }
+OOT_HOUSE_LINK_WARP:                            { game: oot, id: 0x0bb, type: none, debug: ['COMMON', "Link's House"] }
 OOT_KOKIRI_FOREST_FROM_MIDO:                    { game: oot, id: 0x443, type: indoors-exit, areas: ["OOT Mido's House", "OOT Kokiri Forest"], reverse: OOT_HOUSE_MIDO }
 OOT_KOKIRI_FOREST_FROM_SARIA:                   { game: oot, id: 0x447, type: indoors-exit, areas: ["OOT Saria's House", "OOT Kokiri Forest"], reverse: OOT_HOUSE_SARIA }
 OOT_KOKIRI_FOREST_FROM_TWINS:                   { game: oot, id: 0x33c, type: indoors-exit, areas: ["OOT House of Twins", "OOT Kokiri Forest"], reverse: OOT_HOUSE_TWINS }
@@ -101,7 +102,7 @@ OOT_STABLES:                                    { game: oot, id: 0x2f9, type: in
 OOT_LON_LON_RANCH_FROM_STABLES:                 { game: oot, id: 0x42f, type: indoors-exit, areas: ["OOT Lon Lon Ranch Stables", "OOT Lon Lon Ranch"], reverse: OOT_STABLES }
 OOT_SILO:                                       { game: oot, id: 0x5d0, type: indoors, areas: ["OOT Lon Lon Ranch", "OOT Lon Lon Ranch Silo"], reverse: OOT_LON_LON_RANCH_FROM_SILO }
 OOT_LON_LON_RANCH_FROM_SILO:                    { game: oot, id: 0x5d4, type: indoors-exit, areas: ["OOT Lon Lon Ranch Silo", "OOT Lon Lon Ranch"], reverse: OOT_SILO }
-OOT_HOUSE_LINK:                                 { game: oot, id: 0x272, type: indoors-extra, areas: ["OOT Kokiri Forest", "OOT Link's House"], reverse: OOT_KOKIRI_FOREST_FROM_LINK, debug: ['COMMON', 'Link House'] }
+OOT_HOUSE_LINK:                                 { game: oot, id: 0x272, type: indoors-extra, areas: ["OOT Kokiri Forest", "OOT Link's House"], reverse: OOT_KOKIRI_FOREST_FROM_LINK }
 OOT_KOKIRI_FOREST_FROM_LINK:                    { game: oot, id: 0x211, type: indoors-exit, areas: ["OOT Link's House", "OOT Kokiri Forest"], reverse: OOT_HOUSE_LINK }
 OOT_TEMPLE_OF_TIME:                             { game: oot, id: 0x053, type: indoors-extra, areas: ["OOT Temple of Time Entryway", "OOT Temple of Time"], reverse: OOT_TEMPLE_OF_TIME_ENTRYWAY_FROM_TEMPLE, debug: ['COMMON', 'Temple of Time'] }
 OOT_TEMPLE_OF_TIME_ENTRYWAY_FROM_TEMPLE:        { game: oot, id: 0x472, type: indoors-exit, areas: ["OOT Temple of Time", "OOT Temple of Time Entryway"], reverse: OOT_TEMPLE_OF_TIME }
