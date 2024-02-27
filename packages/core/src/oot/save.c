@@ -69,7 +69,7 @@ static void dungeonRespawn(s16 sceneId, int isSave)
     {
         if (isSave)
         {
-            gSave.entrance = (gSave.age == AGE_ADULT) ? ENTR_OOT_TEMPLE_OF_TIME : ENTR_OOT_HOUSE_LINK;
+            gSave.entrance = (gSave.age == AGE_ADULT) ? ENTR_OOT_WARP_SONG_TEMPLE : ENTR_OOT_HOUSE_LINK_WARP;
         }
         else
         {
@@ -298,7 +298,7 @@ void comboCreateSave(void* unk, void* buffer)
     {
         /* Spawn as adult in ToT */
         gOotSave.age = AGE_ADULT;
-        gOotSave.entrance = ENTR_OOT_TEMPLE_OF_TIME;
+        gOotSave.entrance = ENTR_OOT_WARP_SONG_TEMPLE;
         gOotSave.sceneId = SCE_OOT_TEMPLE_OF_TIME;
 
         /* Force Master Sword */
