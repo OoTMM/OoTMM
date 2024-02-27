@@ -14,14 +14,14 @@ typedef struct PACKED ALIGNED(4)
     /* 0x058 */ OSMesgQueue* unk58;
     /* 0x05C */ OSMesgQueue taskQueue;
     /* 0x074 */ u8 pad74[0x4];
-    /* 0x078 */ u8 task[0x58]; // OSScTask
+    /* 0x078 */ u8 task[0x58]; /* OSScTask */
     /* 0x0D0 */ u8 padD0[0xD0];
     /* 0x1A0 */ Gfx* unk1A0;
     /* 0x1A4 */ DisplayListBuffer unk1A4;
     /* 0x1B4 */ Gfx* unk1B4;
     /* 0x1B8 */ DisplayListBuffer unk1B8;
     /* 0x1C8 */ u8 pad1C8[0xAC];
-    /* 0x274 */ u32 unk274; // OSViMode*
+    /* 0x274 */ u32 unk274; /* OSViMode* */
     /* 0x278 */ void* zbuffer;
     /* 0x27C */ u8 pad27C[0x1C];
     /* 0x298 */ DisplayListBuffer overlay;

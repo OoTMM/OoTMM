@@ -14,7 +14,7 @@ static void EnSsh_ItemQuery(ComboItemQuery* q, int index, int flags)
     bzero(q, sizeof(*q));
 
     q->ovType = OV_NPC;
-    q->gi = GI_OOT_RUPEE_BLUE; // Dummy
+    q->gi = GI_OOT_RUPEE_BLUE; /* Dummy */
     q->id = kNPCs[index];
     q->ovFlags = flags;
 }

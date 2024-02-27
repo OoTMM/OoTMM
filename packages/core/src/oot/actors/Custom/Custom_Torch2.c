@@ -7,7 +7,7 @@
 #include <combo.h>
 #include <combo/custom.h>
 
-#define FLAGS (1 << 4) // (ACTOR_FLAG_10)
+#define FLAGS (1 << 4) /* (ACTOR_FLAG_10) */
 
 void EnTorch2_Init(Actor_CustomEnTorch2 *this, GameState_Play *play);
 void EnTorch2_Destroy(Actor_CustomEnTorch2 *this, GameState_Play *play);
@@ -23,7 +23,7 @@ ActorInit En_Torch2_InitVars = {
     AC_CUSTOM_TORCH2,
     ACTORCAT_ITEMACTION,
     FLAGS,
-    1, // GAMEPLAY_KEEP,
+    1, /* GAMEPLAY_KEEP, */
     sizeof(Actor_CustomEnTorch2),
     (ActorFunc)EnTorch2_Init,
     (ActorFunc)EnTorch2_Destroy,
@@ -250,7 +250,7 @@ void EnTorch2_Init(Actor_CustomEnTorch2 *this, GameState_Play *play)
     Collider_InitCylinder(play, &this->collider);
     Collider_SetCylinder(play, &this->collider, &this->base, &sCylinderInit);
 
-    this->base.flags |= (1 << 26); // ACTOR_FLAG_CAN_PRESS_SWITCH;
+    this->base.flags |= (1 << 26); /* ACTOR_FLAG_CAN_PRESS_SWITCH; */
 
     this->framesUntilNextState = 20;
 }
@@ -290,7 +290,7 @@ void EnTorch2_Update(Actor_CustomEnTorch2 *this, GameState_Play *play)
     {
         if (this->state == TORCH2_STATE_INITIALIZED)
         {
-            // Spawn in
+            /* Spawn in */
             if (this->alpha == 0)
             {
                 Math_Vec3f_Copy(&this->base.world.pos, &this->base.home.pos);
@@ -301,7 +301,7 @@ void EnTorch2_Update(Actor_CustomEnTorch2 *this, GameState_Play *play)
         }
         else if (this->state == TORCH2_STATE_FADING_IN)
         {
-            // Stay semitransparent until the player moves away
+            /* Stay semitransparent until the player moves away */
             if ((this->base.xzDistanceFromLink > 32.0f) || (fabsf(this->base.yDistanceFromLink) > 70.0f))
             {
                 this->state = TORCH2_STATE_SOLID;
@@ -310,7 +310,7 @@ void EnTorch2_Update(Actor_CustomEnTorch2 *this, GameState_Play *play)
         }
         else
         {
-            // Once the player has moved away, update collision and become opaque
+            /* Once the player has moved away, update collision and become opaque */
             Collider_UpdateCylinder(&this->base, &this->collider);
             CollisionCheck_SetOC(play, &play->colChkCtx, &this->collider.base);
             targetAlpha = 255;
@@ -323,7 +323,7 @@ void EnTorch2_UpdateIdle(Actor_CustomEnTorch2 *this, GameState_Play *play)
 {
     if (this->state == TORCH2_STATE_DYING)
     {
-        // Start death animation
+        /* Start death animation */
         this->base.update = EnTorch2_UpdateDeath;
         this->base.velocity.y = 0.0f;
     }
@@ -331,7 +331,7 @@ void EnTorch2_UpdateIdle(Actor_CustomEnTorch2 *this, GameState_Play *play)
 
 void EnTorch2_UpdateDeath(Actor_CustomEnTorch2 *this, GameState_Play *play)
 {
-    // Fall down and become transparent, then delete once invisible
+    /* Fall down and become transparent, then delete once invisible */
     if (Math_StepToS(&this->alpha, 0, 8))
     {
         ActorDestroy(&this->base);

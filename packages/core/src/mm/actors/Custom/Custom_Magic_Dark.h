@@ -12,6 +12,6 @@ typedef struct MagicDark {
     /* 0x0140 */ Vec3f orbOffset;
     /* 0x014C */ f32 scale;
     /* 0x0150 */ char unk_160[0x4];
-} MagicDark; // size = 0x0154
+} MagicDark; /* size = 0x0154 */
 
 #endif

@@ -7,10 +7,10 @@
 typedef struct PACKED ALIGNED(4) Actor_Player
 {
     Actor           base;
-    s8              currentTunic; // current tunic from `PlayerTunic`
+    s8              currentTunic; /* current tunic from `PlayerTunic` */
     s8              currentSwordItemId;
-    s8              currentShield; // current shield from `PlayerShield`
-    s8              currentBoots; // current boots from `PlayerBoots`
+    s8              currentShield; /* current shield from `PlayerShield` */
+    s8              currentBoots; /* current boots from `PlayerBoots` */
     u8              heldItemButton;
     u8              itemAction;
     u8              heldItemId;

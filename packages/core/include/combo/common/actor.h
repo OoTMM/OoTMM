@@ -1074,16 +1074,16 @@ typedef struct Actor
     float       speedXZ;
     float       gravity;
     float       minVelocityY;
-    CollisionPoly* wallPoly; // Wall polygon the actor is touching
-    CollisionPoly* floorPoly; // Floor polygon directly below the actor
-    u8          wallBgId; // Bg ID of the wall polygon the actor is touching
-    u8          floorBgId; // Bg ID of the floor polygon directly below the actor
-    s16         wallYaw; // Y rotation of the wall polygon the actor is touching
-    f32         floorHeight; // Y position of the floor polygon directly below the actor
-    f32         yDistToWater; // Distance to the surface of active waterbox. Negative value means above water
-    u16         bgCheckFlags; // Flags indicating how the actor is interacting with collision
-    s16         yawTowardsPlayer; // Y rotation difference between the actor and the player
-    f32         xyzDistToPlayerSq; // Squared distance between the actor and the player
+    CollisionPoly* wallPoly; /* Wall polygon the actor is touching */
+    CollisionPoly* floorPoly; /* Floor polygon directly below the actor */
+    u8          wallBgId; /* Bg ID of the wall polygon the actor is touching */
+    u8          floorBgId; /* Bg ID of the floor polygon directly below the actor */
+    s16         wallYaw; /* Y rotation of the wall polygon the actor is touching */
+    f32         floorHeight; /* Y position of the floor polygon directly below the actor */
+    f32         yDistToWater; /* Distance to the surface of active waterbox. Negative value means above water */
+    u16         bgCheckFlags; /* Flags indicating how the actor is interacting with collision */
+    s16         yawTowardsPlayer; /* Y rotation difference between the actor and the player */
+    f32         xyzDistToPlayerSq; /* Squared distance between the actor and the player */
     f32         xzDistanceFromLink;
     f32         yDistanceFromLink;
     CollisionCheckInfo colChkInfo;
@@ -1152,7 +1152,7 @@ _Static_assert(sizeof(ActorList) == 0xC, "MM ActorList size is wrong");
 typedef struct BlinkInfo {
     /* 0x0 */ s16 eyeTexIndex;
     /* 0x2 */ s16 blinkTimer;
-} BlinkInfo; // size = 0x4
+} BlinkInfo; /* size = 0x4 */
 
 Actor* comboSpawnActor(ActorContext* actorCtx, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable);
 Actor* comboSpawnActorEx(ActorContext* actorCtx, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int ex1, int ex2, int ex3);

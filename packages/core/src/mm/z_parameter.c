@@ -66,7 +66,7 @@ u32 Interface_GetCustomIconTexture(GameState_Play* play, PauseContext* pauseCtx)
 
 extern s8 gPlayerFormCustomItemRestrictions[5][8];
 
-// button and item are stored in SP10 and SP14 by HOOK_SAVE
+/* button and item are stored in SP10 and SP14 by HOOK_SAVE */
 s8 Interface_GetItemRestriction(u8 playerForm, GameState_Play* play, s16* restoreHudVisibility, s32 nothing, u8 item, s16 button)
 {
     s8 (*gPlayerFormItemRestrictions)[0x72] = (s8(*)[0x72])0x801c2410;
@@ -84,10 +84,10 @@ s8 Interface_GetItemRestriction(u8 playerForm, GameState_Play* play, s16* restor
     s8 result = gPlayerFormCustomItemRestrictions[playerForm][customItem];
     if (result < 0)
     {
-        if (gSaveContext.buttonStatus[button] == 0xFF) // BTN_DISABLED
+        if (gSaveContext.buttonStatus[button] == 0xFF) /* BTN_DISABLED */
         {
             *restoreHudVisibility = 1;
-            gSaveContext.buttonStatus[button] = 0; // BTN_ENABLED
+            gSaveContext.buttonStatus[button] = 0; /* BTN_ENABLED */
         }
     }
     return result;
@@ -111,7 +111,7 @@ s32 Items_ShouldCheckItemUsabilityWhileSwimming(GameState_Play* play, u8 item)
         case ITEM_MM_TUNIC_GORON:
             return 0;
         case ITEM_MM_HOOKSHOT:
-        case 0x11: // Short Hookshot
+        case 0x11: /* Short Hookshot */
             return Player_GetEnvironmentalHazard(play) != PLAYER_ENV_HAZARD_UNDERWATER_FLOOR;
         }
 

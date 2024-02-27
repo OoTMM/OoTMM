@@ -82,7 +82,7 @@ void Ocarina_HandleLastPlayedSong(GameState_Play* play, Actor_Player* player, s1
     /* Displaced code: */
     case OCARINA_SONG_SARIAS:
         player->naviTextId = -0xE0;
-        player->naviActor->flags |= (1 << 16); // ACTOR_FLAG_16
+        player->naviActor->flags |= (1 << 16); /* ACTOR_FLAG_16 */
         break;
     /* End displaced code. */
     case OCARINA_SONG_TIME:
@@ -92,7 +92,7 @@ void Ocarina_HandleLastPlayedSong(GameState_Play* play, Actor_Player* player, s1
 #if defined(DEBUG)
         canChangeAge = 1;
 #endif
-        if (play->msgCtx.ocarinaAction != 0x29) // OCARINA_ACTION_FREE_PLAY_DONE
+        if (play->msgCtx.ocarinaAction != 0x29) /* OCARINA_ACTION_FREE_PLAY_DONE */
         {
             canChangeAge = 0;
         }
@@ -226,7 +226,7 @@ static void HandleSoaring(GameState_Play* play)
 
                     /* Stop ocarina */
                     sInCustomSong = CUSTOM_SONG_NONE;
-                    play->msgCtx.ocarinaMode = 4; // OCARINA_MODE_END
+                    play->msgCtx.ocarinaMode = 4; /* OCARINA_MODE_END */
                     gSoaringIndexSelected = -1;
 
                     if (play->msgCtx.choice == 0)
@@ -246,7 +246,7 @@ static void HandleSoaring(GameState_Play* play)
         {
             /* Stop ocarina */
             sInCustomSong = CUSTOM_SONG_NONE;
-            play->msgCtx.ocarinaMode = 4; // OCARINA_MODE_END
+            play->msgCtx.ocarinaMode = 4; /* OCARINA_MODE_END */
         }
     }
 }
@@ -282,7 +282,7 @@ static void HandleSongOfTime(GameState_Play* play)
         else
         {
             PlaySound(0x480A);
-            play->msgCtx.ocarinaMode = 4; // OCARINA_MODE_END
+            play->msgCtx.ocarinaMode = 4; /* OCARINA_MODE_END */
         }
     }
 }
@@ -292,15 +292,15 @@ static void PrepareSoaringScreen(GameState_Play* play)
     PauseContext* pauseCtx = &play->pauseCtx;
     s16 i;
 
-    // Rumble_StateReset();
+    /* Rumble_StateReset(); */
 
     pauseCtx->switchPageTimer = 0;
-    pauseCtx->changing = 1; // PAUSE_MAIN_STATE_SWITCHING_PAGE;
+    pauseCtx->changing = 1; /* PAUSE_MAIN_STATE_SWITCHING_PAGE; */
 
-    // Set eye position and pageIndex such that scrolling left brings to the desired page
-    pauseCtx->eye.x = -64.0f; // sKaleidoSetupEyeX1[pauseCtx->pageIndex];
-    pauseCtx->eye.z = 0.0f; // sKaleidoSetupEyeZ1[pauseCtx->pageIndex];
-    pauseCtx->screen_idx = 1 ; // sKaleidoSetupKscpPos1[pauseCtx->pageIndex];
+    /* Set eye position and pageIndex such that scrolling left brings to the desired page */
+    pauseCtx->eye.x = -64.0f; /* sKaleidoSetupEyeX1[pauseCtx->pageIndex]; */
+    pauseCtx->eye.z = 0.0f; /* sKaleidoSetupEyeZ1[pauseCtx->pageIndex]; */
+    pauseCtx->screen_idx = 1 ; /* sKaleidoSetupKscpPos1[pauseCtx->pageIndex]; */
     pauseCtx->infoPanelOffsetY = -40;
 
     for (i = 0; i < ARRAY_SIZE(pauseCtx->worldMapPoints); i++) {
@@ -329,11 +329,11 @@ static void SetupSoaring(GameState_Play* play)
     }
     else
     {
-        // if in a dungeon or boss scene
-        // {
-        //      "Soar to Dungeon Entrance?"
-        // }
-        // else
+        /* if in a dungeon or boss scene */
+        /* { */
+        /*      "Soar to Dungeon Entrance?" */
+        /* } */
+        /* else */
         if (!gMmOwlFlags)
         {
             PlayerDisplayTextBox(play, 0x88c, NULL);
@@ -348,14 +348,14 @@ static void SetupSoaring(GameState_Play* play)
             PrepareSoaringScreen(play);
             pauseCtx->screen_idx = 1;
             gSaveContext.prevHudVisibilityMode = gSaveContext.hudVisibilityMode;
-            gSaveContext.nextHudVisibilityMode = 0xC; // HUD_VISIBILITY_A | HUD_VISIBILITY_B;
+            gSaveContext.nextHudVisibilityMode = 0xC; /* HUD_VISIBILITY_A | HUD_VISIBILITY_B; */
             R_UPDATE_RATE = 2;
             if (Letterbox_GetSizeTarget() != 0) {
                 Letterbox_SetSizeTarget(0);
             }
             func_800C7200(1);
             play->msgCtx.msgLength = 0;
-            play->msgCtx.msgMode = 0; // MSGMODE_NONE
+            play->msgCtx.msgMode = 0; /* MSGMODE_NONE */
         }
     }
 }
@@ -390,7 +390,7 @@ static void HandleElegy(GameState_Play* play)
         effect->envXluColor[2] = 0;
     }
 
-    play->msgCtx.ocarinaMode = 4; // OCARINA_MODE_END
+    play->msgCtx.ocarinaMode = 4; /* OCARINA_MODE_END */
     Message_Close(play);
 }
 
@@ -400,7 +400,7 @@ u8 Ocarina_BeforeSongPlayingProcessed(GameState_Play* play)
 
     if (songPlayed >= 0x81 && songPlayed <= 0x83)
     {
-        PlaySound(0x4807); // NA_SE_SY_TRE_BOX_APPEAR
+        PlaySound(0x4807); /* NA_SE_SY_TRE_BOX_APPEAR */
 
         sInCustomSong = songPlayed - 0x80;
 

@@ -54,8 +54,8 @@ void comboSyncItems(void)
     /*
     if (comboConfig(CFG_SHARED_SPELL_LOVE))
     {
-        // TODO
-        // gForeignSave.nayrusLoveTimer = gSave.nayrusLoveTimer;
+        /* TODO */
+        /* gForeignSave.nayrusLoveTimer = gSave.nayrusLoveTimer; */
     }
     */
 }

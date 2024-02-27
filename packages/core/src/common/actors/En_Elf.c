@@ -176,7 +176,7 @@ void EnElf_InitWrapper(Actor_EnElf* this, GameState_Play* play)
 {
     ActorCallback init;
 
-    // Fairy Group Spawner
+    /* Fairy Group Spawner */
     if (this->base.variable == 4) {
         EnElf_Aliases(this, play);
     }
@@ -229,9 +229,9 @@ void EnElf_PlayItemSfx(Actor_EnElf* this, GameState_Play* play)
 #if defined(GAME_MM)
 void Fairy_SetHealthAccumulator(Actor_EnElf* this, GameState_Play* play)
 {
-    // Displaced code:
+    /* Displaced code: */
     this->unk_246++;
-    // End displaced code
+    /* End displaced code */
 
     if (this->extendedGiDraw == 0 || this->extendedGiDraw == this->extendedGi)
     {

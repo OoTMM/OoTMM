@@ -12,17 +12,17 @@ typedef void (*EnElfUnkFunc)(Actor_EnElf*, GameState_Play*);
 struct Actor_EnElf
 {
     /* 0x0000 */ Actor base;
-    /* 0x013C */ u8 skelAnime[0x44]; // SkelAnime
+    /* 0x013C */ u8 skelAnime[0x44]; /* SkelAnime */
     /* 0x0180 */ Vec3s jointTable[15];
     /* 0x01DA */ Vec3s morphTable[15];
     /* 0x0234 */ Color_RGBAf innerColor;
     /* 0x0244 */ Color_RGBAf outerColor;
-    /* 0x0254 */ u8 lightInfoGlow[0x10]; // LightInfo
-    /* 0x0264 */ void* lightNodeGlow; // LightNode
-    /* 0x0268 */ u8 lightInfoNoGlow[0x10]; // LightInfo
-    /* 0x0278 */ void* lightNodeNoGlow; // LightNode
+    /* 0x0254 */ u8 lightInfoGlow[0x10]; /* LightInfo */
+    /* 0x0264 */ void* lightNodeGlow; /* LightNode */
+    /* 0x0268 */ u8 lightInfoNoGlow[0x10]; /* LightInfo */
+    /* 0x0278 */ void* lightNodeNoGlow; /* LightNode */
     /* 0x027C */ Vec3f unk_28C;
-    /* 0x0288 */ void* elfMsg; // ElfMsg
+    /* 0x0288 */ void* elfMsg; /* ElfMsg */
     /* 0x028C */ f32 unk_29C;
     /* 0x0290 */ f32 unk_2A0;
     /* 0x0294 */ f32 unk_2A4;

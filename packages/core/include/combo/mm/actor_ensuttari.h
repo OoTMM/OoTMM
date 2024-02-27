@@ -3,7 +3,7 @@
 
 #include <combo/common/actor.h>
 
-typedef struct 
+typedef struct
 {
     /* 0x000 */ Actor base;
     /* 0x144 */ char pad144[0x4];
@@ -19,6 +19,6 @@ typedef struct
     /* 0x456 */ s16 actorCutscene1;
     /* 0x458 */ s16 actorCutscene2;
     /* 0x45A */ char pad45A[0x2];
-} Actor_EnSuttari; // size = 0x45C
+} Actor_EnSuttari; /* size = 0x45C */
 
 #endif

@@ -7,7 +7,7 @@
 #include "Custom_Magic_Fire.h"
 #include <combo/custom.h>
 
-#define FLAGS ((1 << 4) | (1 << 25)) // (ACTOR_FLAG_4 | ACTOR_FLAG_25)
+#define FLAGS ((1 << 4) | (1 << 25)) /* (ACTOR_FLAG_4 | ACTOR_FLAG_25) */
 
 void MagicFire_Init(Actor* thisx, GameState_Play* play);
 void MagicFire_Destroy(Actor* thisx, GameState_Play* play);
@@ -35,7 +35,7 @@ ActorInit Magic_Fire_InitVars = {
     /**/ AC_CUSTOM_SPELL_FIRE,
     /**/ ACTORCAT_ITEMACTION,
     /**/ FLAGS,
-    /**/ 1, // OBJECT_GAMEPLAY_KEEP
+    /**/ 1, /* OBJECT_GAMEPLAY_KEEP */
     /**/ sizeof(MagicFire),
     /**/ MagicFire_Init,
     /**/ MagicFire_Destroy,
@@ -159,19 +159,19 @@ void MagicFire_UpdateBeforeCast(Actor* thisx, GameState_Play* play) {
     MagicFire* this = (MagicFire*)thisx;
     Actor_Player* player = GET_LINK(play);
 
-    // See `ACTOROVL_ALLOC_ABSOLUTE`
-    //! @bug This condition is too broad, the actor will also be killed by warp songs. But warp songs do not use an
-    //! actor which uses `ACTOROVL_ALLOC_ABSOLUTE`. There is no reason to kill the actor in this case.
-    // if ((play->msgCtx.msgMode == MSGMODE_OCARINA_CORRECT_PLAYBACK) || (play->msgCtx.msgMode == MSGMODE_SONG_PLAYED)) {
-    //     Actor_Kill(&this->actor);
-    //     return;
-    // }
+    /* See `ACTOROVL_ALLOC_ABSOLUTE` */
+    /*! @bug This condition is too broad, the actor will also be killed by warp songs. But warp songs do not use an */
+    /*! actor which uses `ACTOROVL_ALLOC_ABSOLUTE`. There is no reason to kill the actor in this case. */
+    /* if ((play->msgCtx.msgMode == MSGMODE_OCARINA_CORRECT_PLAYBACK) || (play->msgCtx.msgMode == MSGMODE_SONG_PLAYED)) { */
+    /*     Actor_Kill(&this->actor); */
+    /*     return; */
+    /* } */
 
     if (this->actionTimer > 0) {
         this->actionTimer--;
     } else {
         this->actor.update = MagicFire_Update;
-        Player_PlaySfx(player, 0x879); // NA_SE_PL_MAGIC_FIRE
+        Player_PlaySfx(player, 0x879); /* NA_SE_PL_MAGIC_FIRE */
     }
     this->actor.world.pos = player->base.world.pos;
 }
@@ -182,13 +182,13 @@ void MagicFire_Update(Actor* thisx, GameState_Play* play) {
 
     this->actor.world.pos = player->base.world.pos;
 
-    // See `ACTOROVL_ALLOC_ABSOLUTE`
-    //! @bug This condition is too broad, the actor will also be killed by warp songs. But warp songs do not use an
-    //! actor which uses `ACTOROVL_ALLOC_ABSOLUTE`. There is no reason to kill the actor in this case.
-    // if ((play->msgCtx.msgMode == MSGMODE_OCARINA_CORRECT_PLAYBACK) || (play->msgCtx.msgMode == MSGMODE_SONG_PLAYED)) {
-    //     Actor_Kill(&this->actor);
-    //     return;
-    // }
+    /* See `ACTOROVL_ALLOC_ABSOLUTE` */
+    /*! @bug This condition is too broad, the actor will also be killed by warp songs. But warp songs do not use an */
+    /*! actor which uses `ACTOROVL_ALLOC_ABSOLUTE`. There is no reason to kill the actor in this case. */
+    /* if ((play->msgCtx.msgMode == MSGMODE_OCARINA_CORRECT_PLAYBACK) || (play->msgCtx.msgMode == MSGMODE_SONG_PLAYED)) { */
+    /*     Actor_Kill(&this->actor); */
+    /*     return; */
+    /* } */
 
     Collider_UpdateCylinder(&this->actor, &this->collider);
     this->collider.dim.radius = (this->actor.scale.x * 325.0f);
@@ -206,7 +206,7 @@ void MagicFire_Update(Actor* thisx, GameState_Play* play) {
             this->scalingSpeed = 0.08f;
             this->action++;
             break;
-        case DF_ACTION_EXPAND_SLOWLY: // Fire sphere slowly expands out of player for 30 frames
+        case DF_ACTION_EXPAND_SLOWLY: /* Fire sphere slowly expands out of player for 30 frames */
             Math_StepToF(&this->alphaMultiplier, 1.0f, 1.0f / 30.0f);
             if (this->actionTimer > 0) {
                 Math_SmoothStepToF(&this->actor.scale.x, 0.4f, this->scalingSpeed, 0.1f, 0.001f);
@@ -216,14 +216,14 @@ void MagicFire_Update(Actor* thisx, GameState_Play* play) {
                 this->action++;
             }
             break;
-        case DF_ACTION_STOP_EXPANDING: // Sphere stops expanding and maintains size for 25 frames
+        case DF_ACTION_STOP_EXPANDING: /* Sphere stops expanding and maintains size for 25 frames */
             if (this->actionTimer <= 0) {
                 this->actionTimer = 15;
                 this->action++;
                 this->scalingSpeed = 0.05f;
             }
             break;
-        case DF_ACTION_EXPAND_QUICKLY: // Sphere beings to grow again and quickly expands out until killed
+        case DF_ACTION_EXPAND_QUICKLY: /* Sphere beings to grow again and quickly expands out until killed */
             this->alphaMultiplier -= 8.0f / 119.00001f;
             this->actor.scale.x += this->scalingSpeed;
             this->actor.scale.y += this->scalingSpeed;

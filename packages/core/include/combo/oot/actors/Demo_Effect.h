@@ -105,12 +105,12 @@ typedef struct Actor_DemoEffect {
     /* 0x0194 */ DemoEffectFunc initUpdateFunc;
     /* 0x0198 */ ActorFunc initDrawFunc;
     /* 0x019C */ DemoEffectFunc updateFunc;
-} Actor_DemoEffect; // size = 0x01A0
+} Actor_DemoEffect; /* size = 0x01A0 */
 
-// These names come from the objects that correspond to this actor type.
+/* These names come from the objects that correspond to this actor type. */
 #define DEMO_EFFECT_CRYSTAL_LIGHT               0x00
 #define DEMO_EFFECT_FIRE_BALL                   0x01
-// Object is in GAMEPLAY_KEEP. Not a name from object. It's a blue orb
+/* Object is in GAMEPLAY_KEEP. Not a name from object. It's a blue orb */
 #define DEMO_EFFECT_BLUE_ORB                    0x02
 #define DEMO_EFFECT_LGT_SHOWER                  0x03
 #define DEMO_EFFECT_GOD_LGT_DIN                 0x04
@@ -131,7 +131,7 @@ typedef struct Actor_DemoEffect {
 #define DEMO_EFFECT_JEWEL_KOKIRI                0x13
 #define DEMO_EFFECT_JEWEL_GORON                 0x14
 #define DEMO_EFFECT_JEWEL_ZORA                  0x15
-// Object is jewel, but this is really the dust in the ToT light arrow cutscene
+/* Object is jewel, but this is really the dust in the ToT light arrow cutscene */
 #define DEMO_EFFECT_DUST                        0x16
 #define DEMO_EFFECT_LIGHTARROW                  0x17
 #define DEMO_EFFECT_TIMEWARP_TIMEBLOCK_LARGE    0x18
@@ -150,9 +150,9 @@ typedef struct Actor_DemoEffect {
 #define GOD_LGT_NAYRU   0x01
 #define GOD_LGT_FARORE  0x02
 
-// params info
-// type: (params & 0x00FF)
-// light size: ((params & 0x0F00) >> 8)
-// light color: ((params & 0xF000) >> 12)
+/* params info */
+/* type: (params & 0x00FF) */
+/* light size: ((params & 0x0F00) >> 8) */
+/* light color: ((params & 0xF000) >> 12) */
 
 #endif

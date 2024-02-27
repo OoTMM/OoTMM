@@ -77,7 +77,7 @@ typedef struct
     /* 0x220 */ f32 unk220;
     /* 0x224 */ u16 itemAlpha;
     /* 0x226 */ u8 pad226[0x12];
-    /* 0x238 */ u8 cells1[0xa]; // PauseCells
+    /* 0x238 */ u8 cells1[0xa]; /* PauseCells */
     s16     cursorIndexX[5];
     s16     cursorIndexY[5];
     char    unk_256[0x008];
@@ -109,7 +109,7 @@ typedef struct {
     /* 0x0F */ u8 fogColor[3];
     /* 0x12 */ s16 blendRateAndFogNear;
     /* 0x14 */ s16 zFar;
-} EnvLightSettings; // size = 0x16
+} EnvLightSettings; /* size = 0x16 */
 
 typedef struct {
     /* 0x00 */ u8 ambientColor[3];
@@ -118,9 +118,9 @@ typedef struct {
     /* 0x09 */ s8 light2Dir[3];
     /* 0x0C */ u8 light2Color[3];
     /* 0x0F */ u8 fogColor[3];
-    /* 0x12 */ s16 fogNear; // ranges from 0-1000 (0: starts immediately, 1000: no fog), but is clamped to ENV_FOGNEAR_MAX
-    /* 0x14 */ s16 zFar; // Max depth (render distance) of the view as a whole. fogFar will always match zFar
-} CurrentEnvLightSettings; // size = 0x16
+    /* 0x12 */ s16 fogNear; /* ranges from 0-1000 (0: starts immediately, 1000: no fog), but is clamped to ENV_FOGNEAR_MAX */
+    /* 0x14 */ s16 zFar; /* Max depth (render distance) of the view as a whole. fogFar will always match zFar */
+} CurrentEnvLightSettings; /* size = 0x16 */
 
 typedef struct
 {
@@ -146,8 +146,8 @@ typedef struct
     /* 0x22 */ u16 changeLightTimer;
     /* 0x24 */ u16 changeDuration;
     /* 0x26 */ u8 unk_26;
-    /* 0x28 */ LightInfo dirLight1; // sun 1
-    /* 0x36 */ LightInfo dirLight2; // sun 2
+    /* 0x28 */ LightInfo dirLight1; /* sun 1 */
+    /* 0x36 */ LightInfo dirLight2; /* sun 2 */
     /* 0x44 */ s8 skyboxDmaState;
     /* 0x48 */ DmaRequest dmaRequest;
     /* 0x68 */ OSMesgQueue loadQueue;
@@ -159,18 +159,18 @@ typedef struct
     /* 0xAC */ Vec3s windDirection;
     /* 0xB4 */ f32 windSpeed;
     /* 0xB8 */ u8 numLightSettings;
-    /* 0xBC */ EnvLightSettings* lightSettingsList; // list of light settings from the scene file
-    /* 0xC0 */ u8 lightBlendEnabled; // only used with `LIGHT_MODE_SETTINGS` or on override
-    /* 0xC1 */ u8 lightSetting; // only used with `LIGHT_MODE_SETTINGS` or on override
+    /* 0xBC */ EnvLightSettings* lightSettingsList; /* list of light settings from the scene file */
+    /* 0xC0 */ u8 lightBlendEnabled; /* only used with `LIGHT_MODE_SETTINGS` or on override */
+    /* 0xC1 */ u8 lightSetting; /* only used with `LIGHT_MODE_SETTINGS` or on override */
     /* 0xC2 */ u8 prevLightSetting;
     /* 0xC3 */ u8 lightSettingOverride;
-    /* 0xC4 */ CurrentEnvLightSettings lightSettings; // settings for the currently "live" lights
+    /* 0xC4 */ CurrentEnvLightSettings lightSettings; /* settings for the currently "live" lights */
     /* 0xDA */ u16 lightBlendRateOverride;
     /* 0xDC */ f32 lightBlend;
     /* 0xE0 */ u8 lightBlendOverride;
     /* 0xE1 */ u8 stormRequest;
     /* 0xE2 */ u8 stormState;
-    /* 0xE3 */ u8 lightningState; // modified by unused func in EnWeatherTag
+    /* 0xE3 */ u8 lightningState; /* modified by unused func in EnWeatherTag */
     /* 0xE4 */ u8 timeSeqState;
     /* 0xE5 */ u8 fillScreen;
     /* 0xE6 */ u8 screenFillColor[4];
@@ -196,15 +196,15 @@ typedef struct ActorContext
     /* 0x001 */ u8 pad1;
     /* 0x002 */ u8 unk2;
     /* 0x003 */ u8 lensActive;
-    /* 0x004 */ s8 lensMaskSize; // The size of the circle when drawn the lens mask. Larger value leads to a smaller circle
+    /* 0x004 */ s8 lensMaskSize; /* The size of the circle when drawn the lens mask. Larger value leads to a smaller circle */
     /* 0x005 */ u8 flags;
     /* 0x006 */ u8 pad6[0x5];
     /* 0x00B */ s8 lensActorsDrawn;
-    /* 0x00C */ s16 halfDaysBit; // A single bit indicating the current half-day. It is one of HALFDAYBIT_DAYX_ macro values
+    /* 0x00C */ s16 halfDaysBit; /* A single bit indicating the current half-day. It is one of HALFDAYBIT_DAYX_ macro values */
     /* 0x00E */ u8 totalLoadedActors;
     /* 0x00F */ u8 numLensActors;
     ActorList   actors[12];
-    /* 0x0A0 */ Actor* lensActors[32]; // LENS_ACTOR_MAX // Draws up to LENS_ACTOR_MAX number of invisible actors
+    /* 0x0A0 */ Actor* lensActors[32]; /* LENS_ACTOR_MAX // Draws up to LENS_ACTOR_MAX number of invisible actors */
     char        unk_120[0x134];
     Actor*      elegyStatues[4];
     char        unk_264[0x4];
@@ -236,15 +236,15 @@ typedef struct Font
         u64     force_structure_alignment_font;
     };
     union {
-        char    schar[1280]; // msgBuf
-        u16     wchar[640];  // msgBufWide
+        char    schar[1280]; /* msgBuf */
+        u16     wchar[640];  /* msgBufWide */
         u64     force_structure_alignment_msg;
     } textBuffer;
     u8*         messageStart;
     u8*         messageEnd;
-    u8          unk_11d88; // current Char Buffer ?
+    u8          unk_11d88; /* current Char Buffer ? */
 }
-Font; // size = 0x11D90
+Font; /* size = 0x11D90 */
 
 _Static_assert(sizeof(Font) == 0x11d90, "MM Font size is wrong");
 
@@ -254,7 +254,7 @@ typedef struct MessageTableEntry
     u8 typePos;
     const char* segment;
 }
-MessageTableEntry; // size = 0x8;
+MessageTableEntry; /* size = 0x8; */
 
 _Static_assert(sizeof(MessageTableEntry) == 0x8, "MM MessageTableEntry size is wrong");
 
@@ -264,20 +264,20 @@ typedef struct {
     s8      noteIndex;
     char    pad3;
     s8      playbackRecentNote;
-    u8      playbackState; // 1 while doing playback, is reset to 0 to show the "You Played X song" text.
+    u8      playbackState; /* 1 while doing playback, is reset to 0 to show the "You Played X song" text. */
     u8      playbackNoteIndex;
     char    pad7;
 } SongFrameInfo;
 
-// Structure with some song state. Usually located at: 0x801FD43A.
+/* Structure with some song state. Usually located at: 0x801FD43A. */
 typedef struct {
     SongFrameInfo   frameInfo[2];
     u16             frameCount;
-    s16             analogAngle; // Angle of analog stick, modifies sound.
+    s16             analogAngle; /* Angle of analog stick, modifies sound. */
     char            pad14[0x14];
-    u8              hasPlayedNote; // 1 if has played note since using ocarina.
+    u8              hasPlayedNote; /* 1 if has played note since using ocarina. */
     char            pad29[0x7];
-    u16             flags; // 0x37DF if all songs.
+    u16             flags; /* 0x37DF if all songs. */
     u8              noteIndex3;
     char            pad33;
 } SongInfo;
@@ -287,7 +287,7 @@ _Static_assert(sizeof(SongInfo) == 0x34, "MM SongInfo size is wrong");
 
 typedef struct MessageContext
 {
-    char                        view[0x00168]; // TODO: Add actual View structure
+    char                        view[0x00168]; /* TODO: Add actual View structure */
     Font                        font;
     char                        unk_11ef8[0x8];
     SongInfo*                   songInfo;
@@ -331,11 +331,11 @@ typedef struct MessageContext
     s16                         unk_12012;
     s16                         unk_12014;
     s16                         unk_12016;
-    s16                         unk_12018; // messageR
-    s16                         unk_1201a; // messageG
-    s16                         unk_1201c; // messageB
-    s16                         unk_1201e; // messageA
-    u8                          unk_12020;  // probably textboxEndType
+    s16                         unk_12018; /* messageR */
+    s16                         unk_1201a; /* messageG */
+    s16                         unk_1201c; /* messageB */
+    s16                         unk_1201e; /* messageA */
+    u8                          unk_12020;  /* probably textboxEndType */
     u8                          choiceIndex;
     u8                          unk_12022;
     u8                          stateTimer;
@@ -356,10 +356,10 @@ typedef struct MessageContext
     struct Actor*               unkActor;
     s16                         unk_12044;
     s16                         unk_12046;
-    u8                          unk_12048; // EnKakasi
+    u8                          unk_12048; /* EnKakasi */
     char                        unk_12049[0x1];
     s16                         unk_1204a[0x5];
-    s16                         unk_12054[6]; // First, second and third digits in lottery code guess
+    s16                         unk_12054[6]; /* First, second and third digits in lottery code guess */
     char                        unk_12060[0x8];
     s16                         unk_12068;
     s16                         unk_1206a;
@@ -376,7 +376,7 @@ typedef struct MessageContext
     s16                         unk_12092;
     s8                          unk_12094;
     char                        unk_12095[0x3];
-    f32                         unk_12098; // Text_Scale?
+    f32                         unk_12098; /* Text_Scale? */
     s16                         unk_1209c;
     char                        unk_1209e[0x2];
     s32                         unk_120a0;
@@ -452,7 +452,7 @@ _Static_assert(sizeof(RoomContext) == 0x80, "MM RoomContext size is wrong");
 typedef struct {
     /* 0x0 */ u8   seqId;
     /* 0x1 */ u8   ambienceId;
-} SequenceContext; // size = 0x2
+} SequenceContext; /* size = 0x2 */
 
 typedef struct GameState_Play
 {
@@ -464,8 +464,8 @@ typedef struct GameState_Play
     /* 0x000B4 */ char unk_B4[0x4];
     /* 0x000B8 */ View view;
     /* 0x00220 */ Camera mainCamera;
-    /* 0x00398 */ Camera subCameras[3]; // NUM_CAMS - CAM_ID_SUB_FIRST
-    /* 0x00800 */ Camera* cameraPtrs[4]; // NUM_CAMS
+    /* 0x00398 */ Camera subCameras[3]; /* NUM_CAMS - CAM_ID_SUB_FIRST */
+    /* 0x00800 */ Camera* cameraPtrs[4]; /* NUM_CAMS */
     /* 0x00810 */ s16 activeCamId;
     /* 0x00812 */ s16 nextCamera;
     /* 0x00814 */ SequenceContext sequenceCtx;
@@ -550,13 +550,13 @@ ASSERT_OFFSET(GameState_Play, transitionMode,           0x18b4a);
 _Static_assert(sizeof(GameState_Play) == 0x19258, "MM GameState_Play size is wrong");
 
 typedef struct RegEditor {
-    /* 0x00 */ u8  regPage; // 0: no page selected (reg editor is not active); 1: first page; `REG_PAGES`: last page
-    /* 0x01 */ u8  regGroup; // Indexed from 0 to `REG_GROUPS`-1. Each group has its own character to identify it.
-    /* 0x02 */ u8  regCur; // Selected reg, indexed from 0 as the page start
+    /* 0x00 */ u8  regPage; /* 0: no page selected (reg editor is not active); 1: first page; `REG_PAGES`: last page */
+    /* 0x01 */ u8  regGroup; /* Indexed from 0 to `REG_GROUPS`-1. Each group has its own character to identify it. */
+    /* 0x02 */ u8  regCur; /* Selected reg, indexed from 0 as the page start */
     /* 0x03 */ u8  dPadInputPrev;
     /* 0x04 */ u32 inputRepeatTimer;
     /* 0x08 */ s8 pad_08[0xC];
-    /* 0x14 */ s16 data[REG_GROUPS * REG_PER_GROUP]; // Accessed through *REG macros
-} RegEditor; // size = 0x15D4
+    /* 0x14 */ s16 data[REG_GROUPS * REG_PER_GROUP]; /* Accessed through *REG macros */
+} RegEditor; /* size = 0x15D4 */
 
 #endif

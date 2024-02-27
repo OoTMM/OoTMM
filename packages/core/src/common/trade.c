@@ -67,7 +67,7 @@ const u8 kMmTrade3[] = {
 };
 
 const u8 kMmHookshot[] = {
-    0x11, // ITEM_MM_BOTTLE_POTION_RED but that enum is wrong
+    0x11, /* ITEM_MM_BOTTLE_POTION_RED but that enum is wrong */
     ITEM_MM_HOOKSHOT,
 };
 
@@ -76,7 +76,7 @@ const u8 kMmOcarina[] = {
     ITEM_MM_OCARINA_OF_TIME,
 };
 
-// Return value is used to index gVertex
+/* Return value is used to index gVertex */
 s32 comboGetSlotExtras(u32 slot, u8** outItemPtr, u32* outFlags, const u8** outTable, u32* outTableSize)
 {
     s32 result = -1;

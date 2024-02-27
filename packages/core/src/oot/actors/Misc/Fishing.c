@@ -56,7 +56,7 @@ static void Fishing_Fish_ItemQuery(GameState_Play* playOrNull, ComboItemQuery* q
         ? GI_OOT_FISHING_POND_CHILD_FISH_2LBS
         : GI_OOT_FISHING_POND_ADULT_FISH_4LBS;
     q->ovType = OV_FISH;
-    q->id = variable - 100; // EN_FISH_PARAM
+    q->id = variable - 100; /* EN_FISH_PARAM */
     q->giRenew = GI_OOT_RECOVERY_HEART;
 
     if (gSave.age == AGE_ADULT) {
@@ -128,10 +128,10 @@ static f32 Fishing_GetFishOnHand(u8* sFishOnHandIsLoach, s32 take) {
 
     if (pounds) {
         if (pounds & 0x80) {
-            // Loach
+            /* Loach */
             *sFishOnHandIsLoach = 1;
         } else {
-            // Fish
+            /* Fish */
             *sFishOnHandIsLoach = 0;
         }
         pounds &= 0x7F;
@@ -153,14 +153,14 @@ Actor* Fishing_DiscardFish(Actor* this) {
     Fishing_GetFishOnHand(&fishOnHandIsLoach, 1);
     s16* stateAndTimer = (s16*)(((u8*)this) + 0x14C);
 
-    // Displaced code:
+    /* Displaced code: */
     *stateAndTimer = 20;
 
     return this;
 }
 
 void Fishing_SetCaughtId(Actor* actor, u16* sFishingCaughtTextId) {
-    // Displaced code:
+    /* Displaced code: */
     u8* stateAndTimer = ((u8*)actor) + 0x1C5;
     *stateAndTimer = 0;
 
@@ -174,7 +174,7 @@ void Fishing_HijackCaughtMessage(GameState_Play* play, u16 textId, Actor* this) 
     }
 
     u16 variable = textId;
-    textId = 0x4083; // standard fish caught
+    textId = 0x4083; /* standard fish caught */
 
     PlayerDisplayTextBox(play, textId, this);
 
@@ -188,7 +188,7 @@ PATCH_CALL(0x80a42b98, Fishing_HijackCaughtMessage);
 
 s32 Fishing_IsFishLoach(u16 variable) {
     if (variable == 200) {
-        // Fish Tank
+        /* Fish Tank */
         return 0;
     }
 
@@ -211,9 +211,9 @@ s32 Fishing_IsFishLoach(u16 variable) {
 
 void Fishing_OverrideInitFishLength(u8 linkAge, f32 childMultiplier, Actor* this) {
     f32* fishLength = (f32*)(((u8*)this)+0x19C);
-    u8* appearsAsLoach = (((u8*)this)+0x143); // unused padding in Fishing struct
+    u8* appearsAsLoach = (((u8*)this)+0x143); /* unused padding in Fishing struct */
 
-    // Displaced code:
+    /* Displaced code: */
     if (linkAge == AGE_CHILD) {
         *fishLength *= childMultiplier;
     }
@@ -267,11 +267,11 @@ void Fishing_FishGiveItem(Actor* this, GameState_Play* play) {
     major = !isItemFastBuy(o.gi);
     if (major)
     {
-        // "It's smaller than your current fish. Are you sure?"
-        // Behavior overridden later
+        /* "It's smaller than your current fish. Are you sure?" */
+        /* Behavior overridden later */
         PlayerDisplayTextBox(play, 0x4098, NULL);
         u8* keepState = (((u8*)this)+0x1C5);
-        *keepState = 1; // Wait for another dialog
+        *keepState = 1; /* Wait for another dialog */
         s16* timer = (s16*)(((u8*)this) + 0x16A);
         *timer = 60;
     }

@@ -7,7 +7,7 @@
 #include "Custom_Magic_Wind.h"
 #include <combo/custom.h>
 
-#define FLAGS ((1 << 4) | (1 << 25)) // (ACTOR_FLAG_4 | ACTOR_FLAG_25)
+#define FLAGS ((1 << 4) | (1 << 25)) /* (ACTOR_FLAG_4 | ACTOR_FLAG_25) */
 
 void MagicWind_Init(Actor* thisx, GameState_Play* play);
 void MagicWind_Destroy(Actor* thisx, GameState_Play* play);
@@ -24,7 +24,7 @@ ActorInit Magic_Wind_InitVars = {
     /**/ AC_CUSTOM_SPELL_WIND,
     /**/ ACTORCAT_ITEMACTION,
     /**/ FLAGS,
-    /**/ 1, // OBJECT_GAMEPLAY_KEEP
+    /**/ 1, /* OBJECT_GAMEPLAY_KEEP */
     /**/ sizeof(MagicWind),
     /**/ MagicWind_Init,
     /**/ MagicWind_Destroy,
@@ -156,7 +156,7 @@ void MagicWind_Init(Actor* thisx, GameState_Play* play) {
     Actor_Player* player = GET_LINK(play);
 
     if (!SkelCurve_Init(play, &this->skelCurve, &sSkel, &sAnim)) {
-        // "Magic_Wind_Actor_ct (): Construct failed"
+        /* "Magic_Wind_Actor_ct (): Construct failed" */
     }
     this->actor.room = -1;
     switch (this->actor.variable) {
@@ -168,7 +168,7 @@ void MagicWind_Init(Actor* thisx, GameState_Play* play) {
         case 1:
             SkelCurve_SetAnim(&this->skelCurve, &sAnim, 60.0f, 0.0f, 60.0f, -1.0f);
             MagicWind_SetupAction(this, MagicWind_Shrink);
-            Player_PlaySfx(player, 0x87B); // NA_SE_PL_MAGIC_WIND_WARP
+            Player_PlaySfx(player, 0x87B); /* NA_SE_PL_MAGIC_WIND_WARP */
             break;
     }
 }
@@ -195,7 +195,7 @@ void MagicWind_WaitForTimer(MagicWind* this, GameState_Play* play) {
         return;
     }
 
-    Player_PlaySfx(player, 0x87A); // NA_SE_PL_MAGIC_WIND_NORMAL
+    Player_PlaySfx(player, 0x87A); /* NA_SE_PL_MAGIC_WIND_NORMAL */
     MagicWind_UpdateAlpha(1.0f);
     MagicWind_SetupAction(this, MagicWind_Grow);
     SkelCurve_Update(play, &this->skelCurve);
@@ -235,13 +235,13 @@ void MagicWind_Shrink(MagicWind* this, GameState_Play* play) {
 void MagicWind_Update(Actor* thisx, GameState_Play* play) {
     MagicWind* this = (MagicWind*)thisx;
 
-    // See `ACTOROVL_ALLOC_ABSOLUTE`
-    //! @bug This condition is too broad, the actor will also be killed by warp songs. But warp songs do not use an
-    //! actor which uses `ACTOROVL_ALLOC_ABSOLUTE`. There is no reason to kill the actor in this case.
-    // if ((play->msgCtx.msgMode == MSGMODE_OCARINA_CORRECT_PLAYBACK) || (play->msgCtx.msgMode == MSGMODE_SONG_PLAYED)) {
-    //     ActorDestroy(thisx);
-    //     return;
-    // }
+    /* See `ACTOROVL_ALLOC_ABSOLUTE` */
+    /*! @bug This condition is too broad, the actor will also be killed by warp songs. But warp songs do not use an */
+    /*! actor which uses `ACTOROVL_ALLOC_ABSOLUTE`. There is no reason to kill the actor in this case. */
+    /* if ((play->msgCtx.msgMode == MSGMODE_OCARINA_CORRECT_PLAYBACK) || (play->msgCtx.msgMode == MSGMODE_SONG_PLAYED)) { */
+    /*     ActorDestroy(thisx); */
+    /*     return; */
+    /* } */
 
     this->actionFunc(this, play);
 }
@@ -279,7 +279,7 @@ void MagicWind_Draw(Actor* thisx, GameState_Play* play) {
     gSPSegment(POLY_XLU_DISP++, 0x06, gCustomKeep);
 
     if (this->actionFunc != MagicWind_WaitForTimer) {
-        POLY_XLU_DISP = Gfx_SetupDL(POLY_XLU_DISP, 25); // SETUPDL_25
+        POLY_XLU_DISP = Gfx_SetupDL(POLY_XLU_DISP, 25); /* SETUPDL_25 */
         SkelCurve_Draw(&this->actor, play, &this->skelCurve, (void*)MagicWind_OverrideLimbDraw, NULL, 1, NULL);
     }
 

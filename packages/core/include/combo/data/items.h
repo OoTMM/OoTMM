@@ -306,7 +306,7 @@
 #define ITEM_MM_BOOTS_HOVER                 0xb2
 #define ITEM_MM_TUNIC_GORON                 0xb3
 #define ITEM_MM_TUNIC_ZORA                  0xb4
-// If we want to use values above 0xb5 we need to fix a lot of code related to magic arrows
+/* If we want to use values above 0xb5 we need to fix a lot of code related to magic arrows */
 
 #define ITEM_NONE       0xff
 

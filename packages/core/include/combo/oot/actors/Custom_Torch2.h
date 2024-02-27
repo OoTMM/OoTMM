@@ -24,4 +24,4 @@ typedef struct Actor_CustomEnTorch2
 #define TORCH2_STATE_IDLE 3
 #define TORCH2_STATE_DYING 4
 
-#endif // COMBO_OOT_CUSTOM_TORCH2_H
+#endif /* COMBO_OOT_CUSTOM_TORCH2_H */

@@ -15,7 +15,7 @@ typedef struct
     void*   segment;
     char    unk_10[0x4];
 }
-Room; // size = 0x14
+Room; /* size = 0x14 */
 
 _Static_assert(sizeof(Room) == 0x14, "OoT Room size is wrong");
 
@@ -30,7 +30,7 @@ typedef struct
     char            dmaRequest[0x20];
     OSMesgQueue     loadQueue;
     OSMesg          loadMsg;
-    s16             unk_74[2]; // context-specific data used by the current scene draw config
+    s16             unk_74[2]; /* context-specific data used by the current scene draw config */
 }
 RoomContext;
 

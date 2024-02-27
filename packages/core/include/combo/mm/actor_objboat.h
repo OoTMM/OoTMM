@@ -11,7 +11,7 @@ typedef struct {
     /* 0x15E */ u8 unk15E;
     /* 0x15F */ u8 unk15F;
     /* 0x160 */ char pad160[0x8];
-} Actor_ObjBoat; // size = 0x168
+} Actor_ObjBoat; /* size = 0x168 */
 
 ASSERT_OFFSET(Actor_ObjBoat, pathProgress, 0x15c);
 

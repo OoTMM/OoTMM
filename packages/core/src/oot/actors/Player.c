@@ -367,10 +367,10 @@ void Player_DrawDekuStick(void)
 void Player_AfterSetEquipmentData(GameState_Play* play)
 {
     Actor_Player* player = GET_LINK(play);
-    if (player->rightHandType != 0xd && // PLAYER_MODELTYPE_RH_OCARINA
-        player->rightHandType != 0xe && // PLAYER_MODELTYPE_RH_OOT
-        (player->heldItemAction == 0x1c || // PLAYER_IA_OCARINA_FAIRY
-        player->heldItemAction == 0x1d)) // PLAYER_IA_OCARINA_OF_TIME
+    if (player->rightHandType != 0xd && /* PLAYER_MODELTYPE_RH_OCARINA */
+        player->rightHandType != 0xe && /* PLAYER_MODELTYPE_RH_OOT */
+        (player->heldItemAction == 0x1c || /* PLAYER_IA_OCARINA_FAIRY */
+        player->heldItemAction == 0x1d)) /* PLAYER_IA_OCARINA_OF_TIME */
     {
         Player_SetModels(player, Player_ActionToModelGroup(player, player->heldItemAction));
     }
