@@ -366,7 +366,6 @@ static void HandleElegy(GameState_Play* play)
 {
     sInCustomSong = CUSTOM_SONG_NONE;
     Actor_Player* player = GET_LINK(play);
-    u8 playerForm = 0;
 
     if (gElegyShell != NULL)
     {
@@ -378,13 +377,11 @@ static void HandleElegy(GameState_Play* play)
     else
     {
         gElegyShell = (Actor_CustomEnTorch2*)SpawnActor(&play->actorCtx, play, AC_CUSTOM_TORCH2, player->base.world.pos.x,
-                                        player->base.world.pos.y, player->base.world.pos.z, 0, player->base.rot2.y, 0,
-                                        playerForm);
+                                        player->base.world.pos.y, player->base.world.pos.z, 0, player->base.rot2.y, 0, 0);
     }
 
-    s32 effectType = 0x19; // DEMO_EFFECT_TIMEWARP_TIMEBLOCK_SMALL
     Actor_DemoEffect* effect = (Actor_DemoEffect*) SpawnActor(&play->actorCtx, play, AC_DEMO_EFFECT, player->base.world.pos.x, player->base.world.pos.y,
-                                player->base.world.pos.z, 0, player->base.rot2.y, 0, effectType);
+                                player->base.world.pos.z, 0, player->base.rot2.y, 0, DEMO_EFFECT_TIMEWARP_TIMEBLOCK_SMALL);
 
     if (effect != NULL)
     {

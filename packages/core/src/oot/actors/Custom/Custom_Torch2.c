@@ -20,15 +20,15 @@ void EnTorch2_UpdateDeath(Actor_CustomEnTorch2* this, GameState_Play* play);
 extern Actor_CustomEnTorch2* gElegyShell;
 
 ActorInit En_Torch2_InitVars = {
-    /**/ AC_CUSTOM_TORCH2,
-    /**/ ACTORCAT_ITEMACTION,
-    /**/ FLAGS,
-    /**/ 1, // GAMEPLAY_KEEP,
-    /**/ sizeof(Actor_CustomEnTorch2),
-    /**/ EnTorch2_Init,
-    /**/ EnTorch2_Destroy,
-    /**/ EnTorch2_Update,
-    /**/ EnTorch2_Draw,
+    AC_CUSTOM_TORCH2,
+    ACTORCAT_ITEMACTION,
+    FLAGS,
+    1, // GAMEPLAY_KEEP,
+    sizeof(Actor_CustomEnTorch2),
+    (ActorFunc)EnTorch2_Init,
+    (ActorFunc)EnTorch2_Destroy,
+    (ActorFunc)EnTorch2_Update,
+    (ActorFunc)EnTorch2_Draw,
 };
 
 static ColliderCylinderInit sCylinderInit = {
@@ -252,15 +252,8 @@ void EnTorch2_Init(Actor_CustomEnTorch2* this, GameState_Play* play) {
     Collider_InitCylinder(play, &this->collider);
     Collider_SetCylinder(play, &this->collider, &this->base, &sCylinderInit);
 
-    if (this->base.variable != TORCH2_PARAM_DEKU) {
-        this->base.flags |= (1 << 26); // ACTOR_FLAG_CAN_PRESS_SWITCH;
+    this->base.flags |= (1 << 26); // ACTOR_FLAG_CAN_PRESS_SWITCH;
 
-        // All OoT Elegy Statues are human, for now
-        // Also no switches require a "heavy" actor, and rusty switches work completely differently
-        // if (this->base.variable == TORCH2_PARAM_GORON) {
-        //     this->base.flags |= ACTOR_FLAG_CAN_PRESS_HEAVY_SWITCH;
-        // }
-    }
     this->framesUntilNextState = 20;
 }
 
