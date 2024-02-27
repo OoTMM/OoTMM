@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix an issue where the grace period could cause a buggy cycle-reset.
 - Fixed an issue where Strength got removed from logic for King Dodongo, causing bomb bag to be hard-required.
 - Some logic issues involving Shared Din's Fire not being accounted for in some situations.
 
