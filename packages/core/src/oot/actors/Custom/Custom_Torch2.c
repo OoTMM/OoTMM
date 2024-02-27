@@ -17,7 +17,7 @@ void EnTorch2_Draw(Actor_CustomEnTorch2* this, GameState_Play* play2);
 void EnTorch2_UpdateIdle(Actor_CustomEnTorch2* this, GameState_Play* play);
 void EnTorch2_UpdateDeath(Actor_CustomEnTorch2* this, GameState_Play* play);
 
-extern Actor_CustomEnTorch2* gElegyShells[];
+extern Actor_CustomEnTorch2* gElegyShell;
 
 ActorInit En_Torch2_InitVars = {
     /**/ AC_CUSTOM_TORCH2,
@@ -247,12 +247,6 @@ static Gfx gElegyShellHumanDL[] = {
     gsSPEndDisplayList(),
 };
 
-// Shells for each of Link's different forms
-// (Playing elegy as Fierce Deity puts down a human shell)
-static Gfx* sShellDLists[] = {
-    gElegyShellHumanDL, // gElegyShellGoronDL, gElegyShellZoraDL, gElegyShellDekuDL, gElegyShellHumanDL,
-};
-
 void EnTorch2_Init(Actor_CustomEnTorch2* this, GameState_Play* play) {
     Actor_ProcessInitChain(&this->base, sInitChain);
     Collider_InitCylinder(play, &this->collider);
@@ -273,7 +267,7 @@ void EnTorch2_Init(Actor_CustomEnTorch2* this, GameState_Play* play) {
 void EnTorch2_Destroy(Actor_CustomEnTorch2* this, GameState_Play* play) {
     Collider_DestroyCylinder(play, &this->collider);
 
-    gElegyShells[this->base.variable] = NULL;
+    gElegyShell = NULL;
 }
 
 void EnTorch2_Update(Actor_CustomEnTorch2* this, GameState_Play* play) {
@@ -352,7 +346,6 @@ void EnTorch2_Draw(Actor_CustomEnTorch2* this, GameState_Play* play2) {
     };
 
     GameState_Play* play = play2;
-    Gfx* gfx = sShellDLists[this->base.variable];
 
     OPEN_DISPS(play->gs.gfx);
 
@@ -360,12 +353,12 @@ void EnTorch2_Draw(Actor_CustomEnTorch2* this, GameState_Play* play2) {
         gSPSegment(POLY_OPA_DISP++, 0x08, gCustomKeep);
         gSPSegment(POLY_OPA_DISP++, 0x0C, renderModeSetNoneDL);
         gDPSetEnvColor(POLY_OPA_DISP++, 255, 255, 255, 255);
-        Gfx_DrawDListOpa(play, gfx);
+        Gfx_DrawDListOpa(play, gElegyShellHumanDL);
     } else {
         gSPSegment(POLY_XLU_DISP++, 0x08, gCustomKeep);
         gSPSegment(POLY_XLU_DISP++, 0x0C, renderModeSetXluSingleCycleDL);
         gDPSetEnvColor(POLY_XLU_DISP++, 255, 255, 255, this->alpha);
-        Gfx_DrawDListXlu(play, gfx);
+        Gfx_DrawDListXlu(play, gElegyShellHumanDL);
     }
 
     CLOSE_DISPS();

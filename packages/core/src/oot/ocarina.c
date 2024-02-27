@@ -360,7 +360,7 @@ static void SetupSoaring(GameState_Play* play)
     }
 }
 
-Actor_CustomEnTorch2* gElegyShells[1]; // need to increase this if other forms are added to OoT.
+Actor_CustomEnTorch2* gElegyShell;
 
 static void HandleElegy(GameState_Play* play)
 {
@@ -368,24 +368,18 @@ static void HandleElegy(GameState_Play* play)
     Actor_Player* player = GET_LINK(play);
     u8 playerForm = 0;
 
-    Actor_CustomEnTorch2* torch2 = gElegyShells[playerForm];
-    if (torch2 != NULL)
+    if (gElegyShell != NULL)
     {
-        Math_Vec3f_Copy(&torch2->base.home.pos, &player->base.world.pos);
-        torch2->base.home.rot.y = player->base.rot2.y;
-        torch2->state = 0;
-        torch2->framesUntilNextState = 20;
+        Math_Vec3f_Copy(&gElegyShell->base.home.pos, &player->base.world.pos);
+        gElegyShell->base.home.rot.y = player->base.rot2.y;
+        gElegyShell->state = 0;
+        gElegyShell->framesUntilNextState = 20;
     }
     else
     {
-        torch2 = (Actor_CustomEnTorch2*)SpawnActor(&play->actorCtx, play, AC_CUSTOM_TORCH2, player->base.world.pos.x,
+        gElegyShell = (Actor_CustomEnTorch2*)SpawnActor(&play->actorCtx, play, AC_CUSTOM_TORCH2, player->base.world.pos.x,
                                         player->base.world.pos.y, player->base.world.pos.z, 0, player->base.rot2.y, 0,
                                         playerForm);
-    }
-
-    if (torch2 != NULL)
-    {
-        gElegyShells[playerForm] = torch2;
     }
 
     s32 effectType = 0x19; // DEMO_EFFECT_TIMEWARP_TIMEBLOCK_SMALL
