@@ -4,9 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Changed
+
+- Child Hookshot to get past the Gerudo Valley gate no longer requires Hookshot Anywhere enabled to be in logic.
+
 ### Fixed
 
 - Fixed an issue where Strength got removed from logic for King Dodongo, causing bomb bag to be hard-required.
+- Some logic issues involving Shared Din's Fire not being accounted for in some situations.
 
 ## [20.0] - 2024-02-19
 

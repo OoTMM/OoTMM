@@ -86,7 +86,7 @@
     "Spirit Temple Statue": "true"
     "Spirit Temple Child Hand": "small_keys_spirit(5) && soul_iron_knuckle"
   locations:
-    "Spirit Temple Sun Block Room Torches": "(event(SPIRIT_CHILD_DOOR) && can_use_sticks && silver_rupees_spirit_sun) || (has_fire_spirit && silver_rupees_spirit_sun) || (has_fire_arrows && event(SPIRIT_ADULT_DOOR))"
+    "Spirit Temple Sun Block Room Torches": "(event(SPIRIT_CHILD_DOOR) && can_use_sticks && silver_rupees_spirit_sun) || (has_fire_spirit && silver_rupees_spirit_sun) || can_use_din || (has_fire_arrows && event(SPIRIT_ADULT_DOOR))"
     "Spirit Temple SR Sun 1": "true"
     "Spirit Temple SR Sun 2": "true"
     "Spirit Temple SR Sun 3": "true"
@@ -141,7 +141,7 @@
     "Spirit Temple Child Upper": "true"
     "Spirit Temple Boss": "boss_key(BOSS_KEY_SPIRIT) && event(SPIRIT_LIGHT_STATUE) && (can_hookshot || (climb_anywhere && has_hover_boots && can_jump_slash && trick(OOT_SPIRIT_BOSS_CLIMB_NO_HOOK)))"
   locations:
-    "Spirit Temple Statue Base": "(event(SPIRIT_CHILD_DOOR) && has_explosives && can_use_sticks) || has_fire_spirit || (has_fire_arrows && event(SPIRIT_ADULT_DOOR))"
+    "Spirit Temple Statue Base": "(event(SPIRIT_CHILD_DOOR) && has_explosives && can_use_sticks) || has_fire_spirit || can_use_din || (has_fire_arrows && event(SPIRIT_ADULT_DOOR))"
     "Spirit Temple GS Statue": "(event(SPIRIT_ADULT_DOOR) && ((is_adult && scarecrow_hookshot) || has_hover_boots || can_longshot || climb_anywhere)) || (event(SPIRIT_CHILD_DOOR) && has_explosives && (has_hover_boots || can_hookshot || climb_anywhere)) || (climb_anywhere && can_damage_skull)"
     "Spirit Temple Silver Gauntlets": "small_keys_spirit(3) && has_hookshot(2) && has_explosives && soul_iron_knuckle && soul_enemy(SOUL_ENEMY_ANUBIS) && soul_beamos"
     "Spirit Temple Pot Statue Room 1": "true"

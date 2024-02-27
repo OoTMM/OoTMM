@@ -185,7 +185,7 @@
 #Specialty Macros
 "met_zelda": "event(MEET_ZELDA) || setting(skipZelda)"
 "woke_talon_child": "event(TALON_CHILD) || setting(skipZelda)"
-"has_fire_spirit_ageless": "has_magic && ((has_arrows && (has(ARROW_FIRE) || has(SHARED_ARROW_FIRE)) && has_sticks) || has(SPELL_FIRE)) && cond(climb_anywhere, (has_explosives && can_reflect_light) || small_keys_spirit(3), has_explosives || small_keys_spirit(2))"
+"has_fire_spirit_ageless": "has_magic && ((has_arrows && (has(ARROW_FIRE) || has(SHARED_ARROW_FIRE)) && has_sticks) || can_use_din) && cond(climb_anywhere, (has_explosives && can_reflect_light) || small_keys_spirit(3), has_explosives || small_keys_spirit(2))"
 "has_fire_spirit": "(time_travel_at_will && has_fire_or_sticks) || has_fire_spirit_ageless"
 "has_ranged_weapon_both_ageless": "has_explosives || (((has(SLINGSHOT) && (event(SEEDS) || renewable(DEKU_SEEDS_30))) || has(BOOMERANG)) && (has_hookshot(1) || has_arrows))"
 "has_ranged_weapon_both": "(time_travel_at_will && has_ranged_weapon) || has_ranged_weapon_both_ageless"
@@ -261,8 +261,8 @@
 "can_use_mask_blast": "age_child_trade && has_mask_blast"
 
 # Glitches
-"glitch_equip_swap": "glitch(OOT_EQUIP_SWAP) && (has(SPELL_FIRE) || (has_sticks && (is_child || setting(agelessSticks))))"
-"glitch_equip_swap_anyage": "glitch(OOT_EQUIP_SWAP) && (has(SPELL_FIRE) || (has_sticks && setting(agelessSticks)))"
+"glitch_equip_swap": "glitch(OOT_EQUIP_SWAP) && ((has(SPELL_FIRE) || has(SHARED_SPELL_FIRE)) || (has_sticks && (is_child || setting(agelessSticks))))"
+"glitch_equip_swap_anyage": "glitch(OOT_EQUIP_SWAP) && ((has(SPELL_FIRE) || has(SHARED_SPELL_FIRE)) || (has_sticks && setting(agelessSticks)))"
 "glitch_ocarina_items": "glitch(OOT_OCARINA_ITEMS) && (has_bugs || has_fish)"
 "glitch_megaflip": "glitch(OOT_MEGAFLIP) && has_explosives && has_one_hand_shield"
 
