@@ -12,6 +12,8 @@
 
 # define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
 
+#define fabsf(f) __builtin_fabsf(f)
+
 // "Length" is how long the fish is, which affects how much it weighs, but I call it weight sometimes anyway.
 # define FISH_WEIGHT_TO_LENGTH(weight) (sqrtf((weight - 0.5f) / 0.0036f) + 1.0f) // Add 1.0 to prevent errors due to truncating
 

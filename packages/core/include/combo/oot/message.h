@@ -3,7 +3,7 @@
 
 #include <combo/util.h>
 
-typedef struct
+typedef struct PACKED
 {
     char view[0x128];
     char unk_0128[0xdc88];
@@ -17,6 +17,7 @@ typedef struct
     /* 0xE2FC */ u8 textBoxProperties; // original name : "msg_disp_type"
     /* 0xE2FD */ u8 textBoxType; // "Text Box Type"
     /* 0xE2FE */ u8 textBoxPos; // text box position
+    /* 0xE2FF */ u8 pad_e2ff;
     /* 0xE300 */ s32 msgLength;
     /* 0xE304 */ u8 msgMode;
     /* 0xE305 */ u8 unk_e305;

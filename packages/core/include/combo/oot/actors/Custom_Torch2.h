@@ -1,15 +1,15 @@
-#ifndef Z_EN_TORCH2_H
-#define Z_EN_TORCH2_H
+#ifndef COMBO_OOT_CUSTOM_TORCH2_H
+#define COMBO_OOT_CUSTOM_TORCH2_H
 
 #include <combo/common/actor.h>
 
 typedef struct Actor_CustomEnTorch2 {
-    /* 0x000 */ Actor base;
-    /* 0x13c */ ColliderCylinder collider;
-    /* 0x188 */ u8 state;
-    /* 0x189 */ u8 framesUntilNextState;
-    /* 0x18a */ s16 alpha;
-} Actor_CustomEnTorch2; // size = 0x18c
+    Actor base;
+    ColliderCylinder collider;
+    u8 state;
+    u8 framesUntilNextState;
+    s16 alpha;
+} Actor_CustomEnTorch2;
 
 #define TORCH2_PARAM_HUMAN          0
 #define TORCH2_PARAM_GORON          1
@@ -23,4 +23,4 @@ typedef struct Actor_CustomEnTorch2 {
 #define TORCH2_STATE_IDLE           3
 #define TORCH2_STATE_DYING          4
 
-#endif // Z_EN_TORCH2_H
+#endif // COMBO_OOT_CUSTOM_TORCH2_H

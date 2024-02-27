@@ -9,15 +9,13 @@
 
 #define FLAGS (1 << 4) // (ACTOR_FLAG_10)
 
-#define THIS ((Actor_CustomEnTorch2*)thisx)
+void EnTorch2_Init(Actor_CustomEnTorch2* this, GameState_Play* play);
+void EnTorch2_Destroy(Actor_CustomEnTorch2* this, GameState_Play* play);
+void EnTorch2_Update(Actor_CustomEnTorch2* this, GameState_Play* play);
+void EnTorch2_Draw(Actor_CustomEnTorch2* this, GameState_Play* play2);
 
-void EnTorch2_Init(Actor* thisx, GameState_Play* play);
-void EnTorch2_Destroy(Actor* thisx, GameState_Play* play);
-void EnTorch2_Update(Actor* thisx, GameState_Play* play);
-void EnTorch2_Draw(Actor* thisx, GameState_Play* play2);
-
-void EnTorch2_UpdateIdle(Actor* thisx, GameState_Play* play);
-void EnTorch2_UpdateDeath(Actor* thisx, GameState_Play* play);
+void EnTorch2_UpdateIdle(Actor_CustomEnTorch2* this, GameState_Play* play);
+void EnTorch2_UpdateDeath(Actor_CustomEnTorch2* this, GameState_Play* play);
 
 extern Actor_CustomEnTorch2* gElegyShells[];
 
@@ -57,13 +55,13 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_S8(colChkInfo.mass, MASS_IMMOVABLE, ICHAIN_STOP),
 };
 
-const u32 gElegyShellHumanMouthTex = 0x08000000 | CUSTOM_KEEP_ELEGY_SHELL_HUMAN_MOUTH_TEXTURE;
-const u32 gElegyShellHumanEyeAndNoseTex = 0x08000000 | CUSTOM_KEEP_ELEGY_SHELL_HUMAN_EYE_AND_NOSE_TEXTURE;
-const u32 gElegyShellHumanNostrilsAndSkinTex = 0x08000000 | CUSTOM_KEEP_ELEGY_SHELL_HUMAN_NOSTRILS_AND_SKIN_TEXTURE;
-const u32 gElegyShellHumanHairTex = 0x08000000 | CUSTOM_KEEP_ELEGY_SHELL_HUMAN_HAIR_TEXTURE;
-const u32 gElegyShellBeltAndTunicTex = 0x08000000 | CUSTOM_KEEP_ELEGY_SHELL_BELT_AND_TUNIC_TEXTURE;
-const u32 gElegyShellHumanBootsTex = 0x08000000 | CUSTOM_KEEP_ELEGY_SHELL_HUMAN_BOOTS_TEXTURE;
-const u32 gElegyShellHumanPlatformTex = 0x08000000 | CUSTOM_KEEP_ELEGY_SHELL_HUMAN_PLATFORM_TEXTURE;
+static const u32 sElegyShellHumanMouthTex = 0x08000000 | CUSTOM_KEEP_ELEGY_SHELL_HUMAN_MOUTH_TEXTURE;
+static const u32 sElegyShellHumanEyeAndNoseTex = 0x08000000 | CUSTOM_KEEP_ELEGY_SHELL_HUMAN_EYE_AND_NOSE_TEXTURE;
+static const u32 sElegyShellHumanNostrilsAndSkinTex = 0x08000000 | CUSTOM_KEEP_ELEGY_SHELL_HUMAN_NOSTRILS_AND_SKIN_TEXTURE;
+static const u32 sElegyShellHumanHairTex = 0x08000000 | CUSTOM_KEEP_ELEGY_SHELL_HUMAN_HAIR_TEXTURE;
+static const u32 sElegyShellBeltAndTunicTex = 0x08000000 | CUSTOM_KEEP_ELEGY_SHELL_BELT_AND_TUNIC_TEXTURE;
+static const u32 sElegyShellHumanBootsTex = 0x08000000 | CUSTOM_KEEP_ELEGY_SHELL_HUMAN_BOOTS_TEXTURE;
+static const u32 sElegyShellHumanPlatformTex = 0x08000000 | CUSTOM_KEEP_ELEGY_SHELL_HUMAN_PLATFORM_TEXTURE;
 
 static Vtx sElegyShellHumanVtx[360] = {
 #include "sElegyShellHumanVtx.vtx.inc"
@@ -76,7 +74,7 @@ static Gfx gElegyShellHumanDL[] = {
     gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_OPA_SURF2),
     gsSPDisplayList(0x0C000000),
     gsDPSetTextureLUT(G_TT_NONE),
-    gsDPLoadTextureBlock(gElegyShellHumanMouthTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gsDPLoadTextureBlock(sElegyShellHumanMouthTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD),
     gsDPSetPrimColor(0, 0x80, 255, 255, 255, 255),
     gsSPLoadGeometryMode(G_ZBUFFER | G_SHADE | G_CULL_BACK | G_FOG | G_LIGHTING | G_SHADING_SMOOTH),
@@ -98,7 +96,7 @@ static Gfx gElegyShellHumanDL[] = {
     gsSP2Triangles(5, 6, 7, 0, 8, 9, 10, 0),
     gsSPDisplayList(0x0C000000),
     gsDPSetTextureLUT(G_TT_NONE),
-    gsDPLoadTextureBlock(gElegyShellHumanEyeAndNoseTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_MIRROR |
+    gsDPLoadTextureBlock(sElegyShellHumanEyeAndNoseTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_MIRROR |
                          G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 5, 6, G_TX_NOLOD, G_TX_NOLOD),
     gsDPSetPrimColor(0, 0x80, 255, 255, 255, 255),
     gsSP2Triangles(11, 12, 13, 0, 11, 14, 12, 0),
@@ -113,7 +111,7 @@ static Gfx gElegyShellHumanDL[] = {
     gsSP2Triangles(12, 27, 28, 0, 13, 12, 28, 0),
     gsSPDisplayList(0x0C000000),
     gsDPSetTextureLUT(G_TT_NONE),
-    gsDPLoadTextureBlock(gElegyShellHumanNostrilsAndSkinTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 8, 0, G_TX_MIRROR |
+    gsDPLoadTextureBlock(sElegyShellHumanNostrilsAndSkinTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 8, 0, G_TX_MIRROR |
                          G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 4, 3, G_TX_NOLOD, G_TX_NOLOD),
     gsDPSetPrimColor(0, 0x80, 255, 255, 255, 255),
     gsSPVertex(&sElegyShellHumanVtx[60], 7, 0),
@@ -121,7 +119,7 @@ static Gfx gElegyShellHumanDL[] = {
     gsSP1Triangle(4, 5, 6, 0),
     gsSPDisplayList(0x0C000000),
     gsDPSetTextureLUT(G_TT_NONE),
-    gsDPLoadTextureBlock(gElegyShellHumanHairTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gsDPLoadTextureBlock(sElegyShellHumanHairTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
                          G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD),
     gsDPSetPrimColor(0, 0x80, 255, 255, 255, 255),
     gsSPVertex(&sElegyShellHumanVtx[67], 32, 0),
@@ -144,7 +142,7 @@ static Gfx gElegyShellHumanDL[] = {
     gsSP2Triangles(18, 19, 20, 0, 18, 5, 19, 0),
     gsSPDisplayList(0x0C000000),
     gsDPSetTextureLUT(G_TT_NONE),
-    gsDPLoadTextureBlock(gElegyShellBeltAndTunicTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gsDPLoadTextureBlock(sElegyShellBeltAndTunicTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD),
     gsDPSetPrimColor(0, 0x80, 255, 255, 255, 255),
     gsSPVertex(&sElegyShellHumanVtx[120], 32, 0),
@@ -190,7 +188,7 @@ static Gfx gElegyShellHumanDL[] = {
     gsSP1Triangle(8, 1, 3, 0),
     gsSPDisplayList(0x0C000000),
     gsDPSetTextureLUT(G_TT_NONE),
-    gsDPLoadTextureBlock(gElegyShellHumanNostrilsAndSkinTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 8, 0, G_TX_MIRROR |
+    gsDPLoadTextureBlock(sElegyShellHumanNostrilsAndSkinTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 8, 0, G_TX_MIRROR |
                          G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 4, 3, G_TX_NOLOD, G_TX_NOLOD),
     gsDPSetPrimColor(0, 0x80, 255, 255, 255, 255),
     gsSPVertex(&sElegyShellHumanVtx[222], 32, 0),
@@ -215,7 +213,7 @@ static Gfx gElegyShellHumanDL[] = {
     gsSP2Triangles(27, 28, 29, 0, 27, 30, 28, 0),
     gsSPDisplayList(0x0C000000),
     gsDPSetTextureLUT(G_TT_NONE),
-    gsDPLoadTextureBlock(gElegyShellHumanBootsTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_MIRROR | G_TX_WRAP,
+    gsDPLoadTextureBlock(sElegyShellHumanBootsTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_MIRROR | G_TX_WRAP,
                          G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD),
     gsDPSetPrimColor(0, 0x80, 255, 255, 255, 255),
     gsSPVertex(&sElegyShellHumanVtx[283], 32, 0),
@@ -234,7 +232,7 @@ static Gfx gElegyShellHumanDL[] = {
     gsSP2Triangles(18, 19, 20, 0, 21, 22, 23, 0),
     gsSPDisplayList(0x0C000000),
     gsDPSetTextureLUT(G_TT_NONE),
-    gsDPLoadTextureBlock(gElegyShellHumanPlatformTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gsDPLoadTextureBlock(sElegyShellHumanPlatformTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
                          G_TX_NOMIRROR | G_TX_WRAP, 3, 4, G_TX_NOLOD, G_TX_NOLOD),
     gsDPSetPrimColor(0, 0x80, 255, 255, 255, 255),
     gsSPVertex(&sElegyShellHumanVtx[337], 23, 0),
@@ -255,9 +253,7 @@ static Gfx* sShellDLists[] = {
     gElegyShellHumanDL, // gElegyShellGoronDL, gElegyShellZoraDL, gElegyShellDekuDL, gElegyShellHumanDL,
 };
 
-void EnTorch2_Init(Actor* thisx, GameState_Play* play) {
-    Actor_CustomEnTorch2* this = THIS;
-
+void EnTorch2_Init(Actor_CustomEnTorch2* this, GameState_Play* play) {
     Actor_ProcessInitChain(&this->base, sInitChain);
     Collider_InitCylinder(play, &this->collider);
     Collider_SetCylinder(play, &this->collider, &this->base, &sCylinderInit);
@@ -274,18 +270,13 @@ void EnTorch2_Init(Actor* thisx, GameState_Play* play) {
     this->framesUntilNextState = 20;
 }
 
-void EnTorch2_Destroy(Actor* thisx, GameState_Play* play) {
-    Actor_CustomEnTorch2* this = THIS;
-
+void EnTorch2_Destroy(Actor_CustomEnTorch2* this, GameState_Play* play) {
     Collider_DestroyCylinder(play, &this->collider);
 
     gElegyShells[this->base.variable] = NULL;
 }
 
-#define fabsf(f) __builtin_fabsf((f32)(f))
-
-void EnTorch2_Update(Actor* thisx, GameState_Play* play) {
-    Actor_CustomEnTorch2* this = THIS;
+void EnTorch2_Update(Actor_CustomEnTorch2* this, GameState_Play* play) {
     u16 targetAlpha;
     u16 remainingFrames;
 
@@ -329,9 +320,7 @@ void EnTorch2_Update(Actor* thisx, GameState_Play* play) {
     }
 }
 
-void EnTorch2_UpdateIdle(Actor* thisx, GameState_Play* play) {
-    Actor_CustomEnTorch2* this = THIS;
-
+void EnTorch2_UpdateIdle(Actor_CustomEnTorch2* this, GameState_Play* play) {
     if (this->state == TORCH2_STATE_DYING) {
         // Start death animation
         this->base.update = EnTorch2_UpdateDeath;
@@ -339,9 +328,7 @@ void EnTorch2_UpdateIdle(Actor* thisx, GameState_Play* play) {
     }
 }
 
-void EnTorch2_UpdateDeath(Actor* thisx, GameState_Play* play) {
-    Actor_CustomEnTorch2* this = THIS;
-
+void EnTorch2_UpdateDeath(Actor_CustomEnTorch2* this, GameState_Play* play) {
     // Fall down and become transparent, then delete once invisible
     if (Math_StepToS(&this->alpha, 0, 8)) {
         ActorDestroy(&this->base);
@@ -352,7 +339,7 @@ void EnTorch2_UpdateDeath(Actor* thisx, GameState_Play* play) {
     ActorUpdateVelocity(&this->base);
 }
 
-void EnTorch2_Draw(Actor* thisx, GameState_Play* play2) {
+void EnTorch2_Draw(Actor_CustomEnTorch2* this, GameState_Play* play2) {
     static Gfx renderModeSetNoneDL[] = {
         gsSPEndDisplayList(),
         gsSPEndDisplayList(),
@@ -365,7 +352,6 @@ void EnTorch2_Draw(Actor* thisx, GameState_Play* play2) {
     };
 
     GameState_Play* play = play2;
-    Actor_CustomEnTorch2* this = THIS;
     Gfx* gfx = sShellDLists[this->base.variable];
 
     OPEN_DISPS(play->gs.gfx);

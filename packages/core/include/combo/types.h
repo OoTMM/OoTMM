@@ -705,8 +705,10 @@ typedef enum {
 
 #define VTX(x,y,z,s,t,crnx,cgny,cbnz,a) { { { x, y, z }, 0, { s, t }, { crnx, cgny, cbnz, a } } }
 
-#define MASS_IMMOVABLE 0xFF // Cannot be pushed by OC colliders
-#define MASS_HEAVY 0xFE // Can only be pushed by OC colliders from actors with IMMOVABLE or HEAVY mass.
+// Cannot be pushed by OC colliders
+#define MASS_IMMOVABLE 0xFF
+// Can only be pushed by OC colliders from actors with IMMOVABLE or HEAVY mass.
+#define MASS_HEAVY 0xFE
 
 typedef enum {
     /* 0x00 */ CAM_SET_NONE,

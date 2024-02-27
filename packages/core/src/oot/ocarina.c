@@ -389,7 +389,7 @@ static void HandleElegy(GameState_Play* play)
     }
 
     s32 effectType = 0x19; // DEMO_EFFECT_TIMEWARP_TIMEBLOCK_SMALL
-    DemoEffect* effect = (DemoEffect*) SpawnActor(&play->actorCtx, play, AC_DEMO_EFFECT, player->base.world.pos.x, player->base.world.pos.y,
+    Actor_DemoEffect* effect = (Actor_DemoEffect*) SpawnActor(&play->actorCtx, play, AC_DEMO_EFFECT, player->base.world.pos.x, player->base.world.pos.y,
                                 player->base.world.pos.z, 0, player->base.rot2.y, 0, effectType);
 
     if (effect != NULL)
