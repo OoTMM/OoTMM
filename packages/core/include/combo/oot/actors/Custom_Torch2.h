@@ -4,11 +4,11 @@
 #include <combo/common/actor.h>
 
 typedef struct Actor_CustomEnTorch2 {
-    Actor base;
-    ColliderCylinder collider;
-    u8 state;
-    u8 framesUntilNextState;
-    s16 alpha;
+    Actor               base;
+    ColliderCylinder    collider;
+    u8                  state;
+    u8                  framesUntilNextState;
+    s16                 alpha;
 } Actor_CustomEnTorch2;
 
 #define TORCH2_PARAM_HUMAN          0
