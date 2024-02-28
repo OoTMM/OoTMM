@@ -99,6 +99,7 @@ const BLITZ_BASE: PartialDeep<Settings> = {
     "MM_PALACE_BEAN_SKIP",
     "MM_SOUTHERN_SWAMP_SCRUB_HP_GORON",
     "MM_ZORA_HALL_SCRUB_HP_NO_DEKU",
+    "MM_EVAN_FARORE",
     "OOT_DC_JUMP",
     "OOT_DEAD_HAND_STICKS",
     "OOT_FOREST_HOOK",
@@ -604,6 +605,9 @@ const PRESET_HELL = makeSettings({
     'MM_GYORG_POTS_DIVE',
     'MM_STT_POT_BOMBCHU_DIVE',
     'MM_STOCK_POT_WAIT',
+    'MM_STAGE_LIGHTS_DIN',
+    'MM_RANCH_FARORE',
+    'MM_EVAN_FARORE',
   ]
 });
 

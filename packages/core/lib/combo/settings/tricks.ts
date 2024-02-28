@@ -116,6 +116,9 @@ export const TRICKS = {
   MM_GYORG_POTS_DIVE: "Dive down to the pots in Gyorg's Lair, break the pots with a Blast Mask explosion, and collect the item before it before it lands on the ground.",
   MM_STT_POT_BOMBCHU_DIVE: "Position yourself precisely to launch a Bombchu that breaks the shallow underwater pots, then collect the items with a dive.",
   MM_STOCK_POT_WAIT: "Wait outside Stock Pot Inn's roof for closing",
+  MM_STAGE_LIGHTS_DIN: "Light the Zora Hall Stage Lights using Din's Fire, Bow, and Hookshot",
+  MM_RANCH_FARORE: "Romani's Ranch locations using Farore's Wind and Time Reset",
+  MM_EVAN_FARORE: "Evan's Piece of Heart using Farore's Wind and Time Reset",
 };
 
 export type Trick = keyof typeof TRICKS;

@@ -2108,7 +2108,7 @@
 "Romani Ranch":
   region: ROMANI_RANCH
   events:
-    ALIENS: "(at(NIGHT1_AM_02_30) || (can_use_farore && clock_night1)) && has_arrows"
+    ALIENS: "(at(NIGHT1_AM_02_30) || (trick(MM_RANCH_FARORE) && can_use_farore && clock_night1)) && has_arrows"
     ARROWS: "true"
     MAGIC: "true"
     FAIRY: "can_get_gossip_fairy"
@@ -2119,9 +2119,9 @@
     "Stables": "true"
     "Ranch House": "between(DAY1_AM_06_00, NIGHT1_PM_08_00) || between(DAY2_AM_06_00, NIGHT2_PM_08_00) || between(DAY3_AM_06_00, NIGHT3_PM_08_00)"
   locations:
-    "Romani Ranch Epona Song": "before(NIGHT1_PM_06_00) || (can_use_farore && clock_day1)"
+    "Romani Ranch Epona Song": "before(NIGHT1_PM_06_00) || (trick(MM_RANCH_FARORE) && can_use_farore && clock_day1)"
     "Romani Ranch Aliens": "event(ALIENS)"
-    "Romani Ranch Cremia Escort": "event(ALIENS) && (at(NIGHT2_PM_06_00) || (can_use_farore && clock_night2))"
+    "Romani Ranch Cremia Escort": "event(ALIENS) && (at(NIGHT2_PM_06_00) || (trick(MM_RANCH_FARORE) && can_use_farore && clock_night2))"
     "Romani Ranch Grass Pack 1 Grass 01": "true"
     "Romani Ranch Grass Pack 1 Grass 02": "true"
     "Romani Ranch Grass Pack 1 Grass 03": "true"
@@ -2544,7 +2544,7 @@
     "Evan's Room": "can_enter_zora_door_before_gb_clear || event(BOSS_GREAT_BAY)"
     "Lulu's Room": "can_enter_zora_door_before_gb_clear || event(BOSS_GREAT_BAY)"
   locations:
-    "Zora Hall Scene Lights": "can_use_fire_arrows || (has_arrows && can_use_din && can_hookshot)"
+    "Zora Hall Scene Lights": "can_use_fire_arrows || (trick(MM_STAGE_LIGHTS_DIN) && has_arrows && can_use_din && can_hookshot)"
 "Zora Shop":
   region: ENTRANCE
   exits:
@@ -2566,7 +2566,7 @@
   exits:
     "Zora Hall": "true"
   locations:
-    "Zora Hall Evan HP": "can_play_evan && (can_enter_zora_door_before_gb_clear || can_use_farore)" #Evan is not here in GB clear state, so we need to guarantee room-entry-before-clear to ensure check is accessible.
+    "Zora Hall Evan HP": "can_play_evan && (can_enter_zora_door_before_gb_clear || (trick(MM_EVAN_FARORE) && can_use_farore))" #Evan is not here in GB clear state, so we need to guarantee room-entry-before-clear to ensure check is accessible.
 "Lulu's Room":
   region: ENTRANCE
   exits:

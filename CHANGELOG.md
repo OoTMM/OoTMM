@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 - Farore's Wind is now logical for Hot Spring Water in Snowhead Temple's Eenos room without ER.
 - OOT Warp Songs can now be logically used within MM dungeons.
 - New trick to wait on the roof for Stock Pot Inn to close.
+- Add tricks for using Farore's Wind and resetting time to get the Romani Ranch checks.
 
 ### Changed
 
@@ -20,6 +21,8 @@ All notable changes to this project will be documented in this file.
 - Removed the time constraints on Bremen Mask and Doggy Race since those events are always available if you can get in.
 - Removed requirements of meeting Kafei for the Curiosity Shop guy's checks.
 - Stock Pot Inn's toilet hand now requires night 3 or other night inn access when Stock Pot Inn is not shuffled.
+- Make Zora Hall stage lights with Din's Fire a trick.
+- Make resetting time with Farore's Wind for Evan a trick.
 
 ### Fixed
 
