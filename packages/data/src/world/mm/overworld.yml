@@ -512,7 +512,7 @@
     DAY3_AM_06_00: "has(ROOM_KEY)"
   events:
     SETUP_MEET: "has(MASK_KAFEI) && between(DAY1_PM_01_45, NIGHT1_PM_09_00)"
-    MEET_ANJU: "event(SETUP_MEET) && between(NIGHT1_AM_12_00, DAY2_AM_06_00)"
+    MEET_ANJU: "event(SETUP_MEET) && cond(setting(erIndoorsExtra), between(NIGHT1_AM_12_00, DAY2_AM_06_00), between(NIGHT1_AM_12_00, DAY2_AM_06_00) && (has(ROOM_KEY) || has(MASK_DEKU) || event(SPI_ROOF_FARORE) || trick(MM_STOCK_POT_WAIT)))"
     DELIVER_PENDANT: "has(PENDANT_OF_MEMORIES) && (between(DAY2_AM_06_00, NIGHT2_PM_09_00) || between(DAY3_AM_06_00, DAY3_AM_11_30))"
     BUGS: "true"
     FISH: "true"
@@ -521,7 +521,7 @@
     "Stock Pot Inn Guest Room Chest": "has(ROOM_KEY)"
     "Stock Pot Inn Staff Room Chest": "is_night3"
     "Stock Pot Inn Room Key": "between(DAY1_PM_01_45, DAY1_PM_04_00)"
-    "Stock Pot Inn Letter to Kafei": "cond(setting(erIndoorsExtra), event(MEET_ANJU), event(MEET_ANJU) && (has(ROOM_KEY) || has(MASK_DEKU) || event(SPI_ROOF_FARORE) || trick(MM_STOCK_POT_WAIT)))"
+    "Stock Pot Inn Letter to Kafei": "event(MEET_ANJU)"
     "Stock Pot Inn Couple's Mask": "event(SUN_MASK) && event(DELIVER_PENDANT) && event(MEET_ANJU) && after(NIGHT3_AM_04_00)"
     "Stock Pot Inn Grandma HP 1": "has(MASK_ALL_NIGHT) && (is_day1 || is_day2)"
     "Stock Pot Inn Grandma HP 2": "has(MASK_ALL_NIGHT) && (is_day1 || is_day2)"
