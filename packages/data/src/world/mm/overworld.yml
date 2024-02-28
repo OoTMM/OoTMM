@@ -521,11 +521,11 @@
     "Stock Pot Inn Guest Room Chest": "has(ROOM_KEY)"
     "Stock Pot Inn Staff Room Chest": "is_night3"
     "Stock Pot Inn Room Key": "between(DAY1_PM_01_45, DAY1_PM_04_00)"
-    "Stock Pot Inn Letter to Kafei": "cond(setting(erIndoorsExtra), event(MEET_ANJU), event(MEET_ANJU) && (has(ROOM_KEY) || has(MASK_DEKU)))"
+    "Stock Pot Inn Letter to Kafei": "cond(setting(erIndoorsExtra), event(MEET_ANJU), event(MEET_ANJU) && (has(ROOM_KEY) || has(MASK_DEKU) || can_use_farore || trick(MM_STOCK_POT_WAIT)))"
     "Stock Pot Inn Couple's Mask": "event(SUN_MASK) && event(DELIVER_PENDANT) && event(MEET_ANJU) && after(NIGHT3_AM_04_00)"
     "Stock Pot Inn Grandma HP 1": "has(MASK_ALL_NIGHT) && (is_day1 || is_day2)"
     "Stock Pot Inn Grandma HP 2": "has(MASK_ALL_NIGHT) && (is_day1 || is_day2)"
-    "Stock Pot Inn ??? HP": "has_paper && midnight"
+    "Stock Pot Inn ??? HP": "cond(setting(erIndoorsExtra), has_paper && midnight, has_paper && midnight && (clock_night3 || has(ROOM_KEY) || has(MASK_DEKU) || can_use_farore || trick(MM_STOCK_POT_WAIT)))"
 "Stock Pot Inn Roof":
   region: CLOCK_TOWN_EAST
   exits:

@@ -50,6 +50,7 @@ export const TRICKS = {
   OOT_GANON_FAIRY_TT: "Ganon's Great Fairy with Age Swap and without Gold Gauntlets",
   OOT_GANON_CASTLE_ENTRY: "Enter Ganon's Castle with Longshot Anywhere",
   OOT_SHADOW_TEMPLE_STICKS: "Enter Shadow Temple with Sticks & Fire Arrows",
+  OOT_WATER_GOLD_SCALE: "Enter Water Temple with Gold Scale and Longshot",
   MM_LENS: "Fewer Lens Requirements (MM)",
   MM_TUNICS: "Fewer Tunic Requirements (MM)",
   MM_PALACE_BEAN_SKIP: "Skip Planting Beans in Deku Palace",
@@ -114,7 +115,7 @@ export const TRICKS = {
   MM_ISTT_ENTRY_HOVER: "Inverted Stone Tower Temple Death Armos using Hover Boots and Bunny Hood",
   MM_GYORG_POTS_DIVE: "Dive down to the pots in Gyorg's Lair, break the pots with a Blast Mask explosion, and collect the item before it before it lands on the ground.",
   MM_STT_POT_BOMBCHU_DIVE: "Position yourself precisely to launch a Bombchu that breaks the shallow underwater pots, then collect the items with a dive.",
-  OOT_WATER_GOLD_SCALE: "Enter Water Temple with Gold Scale and Longshot",
+  MM_STOCK_POT_WAIT: "Wait outside Stock Pot Inn's roof for closing",
 };
 
 export type Trick = keyof typeof TRICKS;

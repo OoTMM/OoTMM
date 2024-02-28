@@ -10,6 +10,8 @@ All notable changes to this project will be documented in this file.
 - Farore's Wind is now logical for Stock Pot Inn night access.
 - Farore's Wind is now logical to reach the Mountain Village grotto.
 - Farore's Wind is now logical for Hot Spring Water in Snowhead Temple's Eenos room without ER.
+- OOT Warp Songs can now be logically used within MM dungeons.
+- New trick to wait on the roof for Stock Pot Inn to close.
 
 ### Changed
 
@@ -17,6 +19,7 @@ All notable changes to this project will be documented in this file.
 - Adjusted MM dungeon access logic to account for the combination of Moon Crash Cycles and Clock Tower ER.
 - Removed the time constraints on Bremen Mask and Doggy Race since those events are always available if you can get in.
 - Removed requirements of meeting Kafei for the Curiosity Shop guy's checks.
+- Stock Pot Inn's toilet hand now requires night 3 or other night inn access when Stock Pot Inn is not shuffled.
 
 ### Fixed
 
