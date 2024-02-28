@@ -23,7 +23,7 @@ All notable changes to this project will be documented in this file.
 - Fix an issue where the grace period could cause a buggy cycle-reset.
 - Fixed an issue where Strength got removed from logic for King Dodongo, causing bomb bag to be hard-required.
 - Some logic issues involving Shared Din's Fire not being accounted for in some situations.
-- Fixed an issue where logic thought you oculd get Pendant of Memories after 10pm on night 2.
+- Fixed an issue where logic thought you could get Pendant of Memories after 10pm on night 2.
 
 ## [20.0] - 2024-02-19
 
