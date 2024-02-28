@@ -2205,13 +2205,8 @@
   exits:
     "Romani Ranch": "true"
   locations:
-
-    "Doggy Racetrack Chest": "(can_use_beans || has_mask_zora || can_hookshot_short || climb_anywhere || trick(MM_DOG_RACE_CHEST_NOTHING)) && (between(DAY1_AM_06_00, NIGHT1_PM_08_00) || between(DAY2_AM_06_00, NIGHT2_PM_08_00) || between(DAY3_AM_06_00, NIGHT3_PM_08_00))" #added climb anywhere
-    "Doggy Racetrack HP": "can_use_wallet(1) && has_mask_truth && (between(DAY1_AM_06_00, NIGHT1_PM_08_00) || between(DAY2_AM_06_00, NIGHT2_PM_08_00) || between(DAY3_AM_06_00, NIGHT3_PM_08_00))"
-
-    "Doggy Racetrack Chest": "can_use_beans || has_mask_zora || can_hookshot_short || trick(MM_DOG_RACE_CHEST_NOTHING)"
+    "Doggy Racetrack Chest": "can_use_beans || has_mask_zora || can_hookshot_short || trick(MM_DOG_RACE_CHEST_NOTHING) || climb_anywhere"
     "Doggy Racetrack HP": "can_use_wallet(1) && has_mask_truth"
-
     "Doggy Racetrack Pot 1": "true"
     "Doggy Racetrack Pot 2": "true"
     "Doggy Racetrack Pot 3": "true"
