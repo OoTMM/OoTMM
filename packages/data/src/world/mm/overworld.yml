@@ -1652,6 +1652,7 @@
   exits:
     "Mountain Village Path Upper": "true"
     "Twin Islands": "true"
+    "Near Goron Graveyard": "can_use_lens_strict || trick(MM_DARMANI_WALL) || event(GORON_GRAVE_FARORE) || (event(BOSS_SNOWHEAD) && (has_mask_goron || has_mask_zora || short_hook_anywhere))"
     "Path to Snowhead Front": "true"
     "Blacksmith": "true"
     "Near Village Grotto": "event(BOSS_SNOWHEAD) && (has_mask_goron || short_hook_anywhere)"
