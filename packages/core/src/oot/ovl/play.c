@@ -118,6 +118,8 @@ static void debugCheat(GameState_Play* play)
         gSave.equips.buttonItems[1] = ITEM_OOT_MASK_STONE;
         gSave.equips.cButtonSlots[0] = ITS_OOT_TRADE_CHILD;
 
+        gCustomSave.hasElegy = 1;
+
 
 #if defined(DEBUG_AGE)
         gSave.age = DEBUG_AGE;

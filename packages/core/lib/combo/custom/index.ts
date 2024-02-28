@@ -60,6 +60,8 @@ const ENTRIES: CustomEntry[] = [
   { game: 'oot', name: "MASK_OOT_BUNNY",        file: "objects/object_link_child",   seg: { in: 0x06, out: 0x0a }, offsets: [0x2ca38] },
 
   { game: 'oot', name: "EQ_DEKU_STICK",         file: "objects/object_link_child",   seg: { in: 0x06, out: 0x0a }, offsets: [0x6cc0] },
+
+  { game: 'mm', name: "OBJECT_TORCH2", file: "objects/gameplay_keep", seg: { in: 0x04, out: 0x06}, offsets: [0x1c430] },
 ];
 
 const getObjectBuffer = async (roms: DecompressedRoms, game: Game, file: string) => {
@@ -165,13 +167,6 @@ export const extractedAssets = async (roms: DecompressedRoms): Promise<{[k: stri
   GORON_SYMBOL_TEXTURE: await extractRaw(roms, 'oot', 'objects/object_link_child', 0x7288, 16 * 32 * 2),
   GAUNTLET1_TEXTURE: await extractRaw(roms, 'oot', 'objects/object_link_boy', 0x9980, 16 * 32 * 2),
   GAUNTLET2_TEXTURE: await extractRaw(roms, 'oot', 'objects/object_link_boy', 0x9d80, 32 * 32 * 2),
-  ELEGY_SHELL_HUMAN_MOUTH_TEXTURE: await extractRaw(roms, 'mm', 'objects/gameplay_keep', 0x1caf8, 32 * 32 * 2),
-  ELEGY_SHELL_HUMAN_EYE_AND_NOSE_TEXTURE: await extractRaw(roms, 'mm', 'objects/gameplay_keep', 0x1d2f8, 32 * 64 * 2),
-  ELEGY_SHELL_HUMAN_NOSTRILS_AND_SKIN_TEXTURE: await extractRaw(roms, 'mm', 'objects/gameplay_keep', 0x1e2f8, 16 * 8 * 2),
-  ELEGY_SHELL_HUMAN_BOOTS_TEXTURE: await extractRaw(roms, 'mm', 'objects/gameplay_keep', 0x1e3f8, 16 * 16 * 2),
-  ELEGY_SHELL_HUMAN_PLATFORM_TEXTURE: await extractRaw(roms, 'mm', 'objects/gameplay_keep', 0x1e5f8, 8 * 16 * 2),
-  ELEGY_SHELL_BELT_AND_TUNIC_TEXTURE: await extractRaw(roms, 'mm', 'objects/gameplay_keep', 0x1e6f8, 32 * 16 * 2),
-  ELEGY_SHELL_HUMAN_HAIR_TEXTURE: await extractRaw(roms, 'mm', 'objects/gameplay_keep', 0x1eaf8, 16 * 16 * 2),
 });
 
 type ObjectRef = {

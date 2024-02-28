@@ -23,7 +23,7 @@ ActorInit En_Torch2_InitVars = {
     AC_CUSTOM_TORCH2,
     ACTORCAT_ITEMACTION,
     FLAGS,
-    1, /* GAMEPLAY_KEEP, */
+    CUSTOM_OBJECT_ID_OBJECT_TORCH2,
     sizeof(Actor_CustomEnTorch2),
     (ActorFunc)EnTorch2_Init,
     (ActorFunc)EnTorch2_Destroy,
@@ -53,195 +53,6 @@ static ColliderCylinderInit sCylinderInit = {
 
 static InitChainEntry sInitChain[] = {
     ICHAIN_S8(colChkInfo.mass, MASS_IMMOVABLE, ICHAIN_STOP),
-};
-
-static const u32 sElegyShellHumanMouthTex = 0x08000000 | CUSTOM_KEEP_ELEGY_SHELL_HUMAN_MOUTH_TEXTURE;
-static const u32 sElegyShellHumanEyeAndNoseTex = 0x08000000 | CUSTOM_KEEP_ELEGY_SHELL_HUMAN_EYE_AND_NOSE_TEXTURE;
-static const u32 sElegyShellHumanNostrilsAndSkinTex = 0x08000000 | CUSTOM_KEEP_ELEGY_SHELL_HUMAN_NOSTRILS_AND_SKIN_TEXTURE;
-static const u32 sElegyShellHumanHairTex = 0x08000000 | CUSTOM_KEEP_ELEGY_SHELL_HUMAN_HAIR_TEXTURE;
-static const u32 sElegyShellBeltAndTunicTex = 0x08000000 | CUSTOM_KEEP_ELEGY_SHELL_BELT_AND_TUNIC_TEXTURE;
-static const u32 sElegyShellHumanBootsTex = 0x08000000 | CUSTOM_KEEP_ELEGY_SHELL_HUMAN_BOOTS_TEXTURE;
-static const u32 sElegyShellHumanPlatformTex = 0x08000000 | CUSTOM_KEEP_ELEGY_SHELL_HUMAN_PLATFORM_TEXTURE;
-
-static Vtx sElegyShellHumanVtx[360] = {
-#include "sElegyShellHumanVtx.vtx.inc"
-};
-
-static Gfx gElegyShellHumanDL[] = {
-    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
-    gsDPPipeSync(),
-    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, PRIMITIVE, 0, COMBINED, 0, COMBINED, 0, ENVIRONMENT, 0),
-    gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_OPA_SURF2),
-    gsSPDisplayList(0x0C000000),
-    gsDPSetTextureLUT(G_TT_NONE),
-    gsDPLoadTextureBlock(sElegyShellHumanMouthTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
-                         G_TX_MIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD),
-    gsDPSetPrimColor(0, 0x80, 255, 255, 255, 255),
-    gsSPLoadGeometryMode(G_ZBUFFER | G_SHADE | G_CULL_BACK | G_FOG | G_LIGHTING | G_SHADING_SMOOTH),
-    gsSPVertex(sElegyShellHumanVtx, 32, 0),
-    gsSP2Triangles(0, 1, 2, 0, 3, 1, 0, 0),
-    gsSP2Triangles(2, 4, 5, 0, 6, 7, 8, 0),
-    gsSP2Triangles(9, 10, 11, 0, 12, 8, 7, 0),
-    gsSP2Triangles(0, 13, 3, 0, 8, 13, 0, 0),
-    gsSP2Triangles(14, 15, 16, 0, 15, 12, 16, 0),
-    gsSP2Triangles(13, 15, 14, 0, 15, 8, 12, 0),
-    gsSP2Triangles(13, 8, 15, 0, 3, 13, 14, 0),
-    gsSP2Triangles(17, 7, 18, 0, 19, 7, 17, 0),
-    gsSP2Triangles(12, 19, 16, 0, 12, 7, 19, 0),
-    gsSP2Triangles(20, 18, 21, 0, 22, 23, 24, 0),
-    gsSP2Triangles(23, 25, 26, 0, 8, 27, 6, 0),
-    gsSP1Triangle(28, 29, 30, 0),
-    gsSPVertex(&sElegyShellHumanVtx[31], 29, 0),
-    gsSP2Triangles(0, 1, 2, 0, 3, 2, 4, 0),
-    gsSP2Triangles(5, 6, 7, 0, 8, 9, 10, 0),
-    gsSPDisplayList(0x0C000000),
-    gsDPSetTextureLUT(G_TT_NONE),
-    gsDPLoadTextureBlock(sElegyShellHumanEyeAndNoseTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_MIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 5, 6, G_TX_NOLOD, G_TX_NOLOD),
-    gsDPSetPrimColor(0, 0x80, 255, 255, 255, 255),
-    gsSP2Triangles(11, 12, 13, 0, 11, 14, 12, 0),
-    gsSP2Triangles(11, 15, 14, 0, 15, 16, 14, 0),
-    gsSP2Triangles(17, 14, 16, 0, 17, 12, 14, 0),
-    gsSP2Triangles(17, 18, 12, 0, 18, 17, 19, 0),
-    gsSP2Triangles(20, 18, 19, 0, 15, 21, 16, 0),
-    gsSP2Triangles(22, 23, 24, 0, 25, 18, 20, 0),
-    gsSP2Triangles(25, 26, 18, 0, 12, 18, 26, 0),
-    gsSP2Triangles(27, 12, 26, 0, 22, 27, 26, 0),
-    gsSP2Triangles(27, 22, 24, 0, 27, 24, 28, 0),
-    gsSP2Triangles(12, 27, 28, 0, 13, 12, 28, 0),
-    gsSPDisplayList(0x0C000000),
-    gsDPSetTextureLUT(G_TT_NONE),
-    gsDPLoadTextureBlock(sElegyShellHumanNostrilsAndSkinTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 8, 0, G_TX_MIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 4, 3, G_TX_NOLOD, G_TX_NOLOD),
-    gsDPSetPrimColor(0, 0x80, 255, 255, 255, 255),
-    gsSPVertex(&sElegyShellHumanVtx[60], 7, 0),
-    gsSP2Triangles(0, 1, 2, 0, 1, 3, 2, 0),
-    gsSP1Triangle(4, 5, 6, 0),
-    gsSPDisplayList(0x0C000000),
-    gsDPSetTextureLUT(G_TT_NONE),
-    gsDPLoadTextureBlock(sElegyShellHumanHairTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
-                         G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD),
-    gsDPSetPrimColor(0, 0x80, 255, 255, 255, 255),
-    gsSPVertex(&sElegyShellHumanVtx[67], 32, 0),
-    gsSP2Triangles(0, 1, 2, 0, 3, 0, 2, 0),
-    gsSP2Triangles(4, 5, 6, 0, 7, 5, 4, 0),
-    gsSP2Triangles(8, 9, 10, 0, 11, 12, 13, 0),
-    gsSP2Triangles(11, 1, 12, 0, 14, 13, 12, 0),
-    gsSP2Triangles(15, 16, 17, 0, 18, 1, 11, 0),
-    gsSP2Triangles(19, 9, 8, 0, 19, 20, 9, 0),
-    gsSP2Triangles(21, 20, 19, 0, 19, 22, 21, 0),
-    gsSP2Triangles(23, 24, 25, 0, 4, 6, 7, 0),
-    gsSP2Triangles(26, 27, 28, 0, 21, 29, 30, 0),
-    gsSP1Triangle(30, 31, 21, 0),
-    gsSPVertex(&sElegyShellHumanVtx[99], 21, 0),
-    gsSP2Triangles(0, 1, 2, 0, 3, 0, 2, 0),
-    gsSP2Triangles(4, 5, 6, 0, 7, 8, 9, 0),
-    gsSP2Triangles(10, 11, 12, 0, 10, 5, 4, 0),
-    gsSP2Triangles(11, 10, 4, 0, 13, 0, 3, 0),
-    gsSP2Triangles(14, 15, 16, 0, 17, 15, 14, 0),
-    gsSP2Triangles(18, 19, 20, 0, 18, 5, 19, 0),
-    gsSPDisplayList(0x0C000000),
-    gsDPSetTextureLUT(G_TT_NONE),
-    gsDPLoadTextureBlock(sElegyShellBeltAndTunicTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 16, 0, G_TX_MIRROR | G_TX_CLAMP,
-                         G_TX_MIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD),
-    gsDPSetPrimColor(0, 0x80, 255, 255, 255, 255),
-    gsSPVertex(&sElegyShellHumanVtx[120], 32, 0),
-    gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
-    gsSP2Triangles(3, 6, 7, 0, 3, 7, 8, 0),
-    gsSP2Triangles(3, 8, 9, 0, 3, 9, 4, 0),
-    gsSP2Triangles(7, 6, 10, 0, 11, 7, 10, 0),
-    gsSP2Triangles(11, 10, 12, 0, 10, 13, 12, 0),
-    gsSP2Triangles(14, 15, 16, 0, 14, 17, 15, 0),
-    gsSP2Triangles(18, 19, 20, 0, 20, 13, 18, 0),
-    gsSP2Triangles(18, 21, 0, 0, 2, 18, 0, 0),
-    gsSP2Triangles(10, 21, 13, 0, 2, 22, 19, 0),
-    gsSP2Triangles(19, 22, 23, 0, 3, 24, 6, 0),
-    gsSP2Triangles(5, 24, 3, 0, 1, 22, 2, 0),
-    gsSP2Triangles(21, 25, 0, 0, 25, 21, 10, 0),
-    gsSP2Triangles(18, 13, 21, 0, 19, 18, 2, 0),
-    gsSP2Triangles(25, 24, 0, 0, 0, 24, 1, 0),
-    gsSP2Triangles(25, 10, 6, 0, 6, 24, 25, 0),
-    gsSP2Triangles(1, 5, 22, 0, 5, 1, 24, 0),
-    gsSP2Triangles(5, 4, 22, 0, 4, 26, 22, 0),
-    gsSP2Triangles(23, 22, 26, 0, 27, 28, 29, 0),
-    gsSPVertex(&sElegyShellHumanVtx[150], 32, 0),
-    gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
-    gsSP2Triangles(6, 7, 8, 0, 1, 0, 9, 0),
-    gsSP2Triangles(6, 8, 10, 0, 11, 8, 7, 0),
-    gsSP2Triangles(12, 13, 14, 0, 15, 16, 17, 0),
-    gsSP2Triangles(18, 19, 20, 0, 20, 21, 18, 0),
-    gsSP2Triangles(20, 22, 21, 0, 4, 23, 24, 0),
-    gsSP2Triangles(4, 25, 23, 0, 26, 27, 28, 0),
-    gsSP2Triangles(25, 29, 23, 0, 29, 30, 23, 0),
-    gsSPVertex(&sElegyShellHumanVtx[181], 32, 0),
-    gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
-    gsSP2Triangles(6, 7, 5, 0, 8, 9, 10, 0),
-    gsSP2Triangles(9, 11, 10, 0, 9, 12, 11, 0),
-    gsSP2Triangles(13, 14, 15, 0, 9, 16, 12, 0),
-    gsSP2Triangles(8, 10, 17, 0, 18, 19, 20, 0),
-    gsSP2Triangles(21, 22, 13, 0, 20, 23, 24, 0),
-    gsSP2Triangles(25, 26, 27, 0, 28, 25, 27, 0),
-    gsSP1Triangle(29, 30, 31, 0),
-    gsSPVertex(&sElegyShellHumanVtx[213], 9, 0),
-    gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
-    gsSP2Triangles(4, 3, 6, 0, 7, 3, 1, 0),
-    gsSP1Triangle(8, 1, 3, 0),
-    gsSPDisplayList(0x0C000000),
-    gsDPSetTextureLUT(G_TT_NONE),
-    gsDPLoadTextureBlock(sElegyShellHumanNostrilsAndSkinTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 8, 0, G_TX_MIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 4, 3, G_TX_NOLOD, G_TX_NOLOD),
-    gsDPSetPrimColor(0, 0x80, 255, 255, 255, 255),
-    gsSPVertex(&sElegyShellHumanVtx[222], 32, 0),
-    gsSP2Triangles(0, 1, 2, 0, 1, 3, 2, 0),
-    gsSP2Triangles(4, 5, 6, 0, 7, 8, 9, 0),
-    gsSP2Triangles(10, 11, 12, 0, 13, 12, 11, 0),
-    gsSP2Triangles(14, 15, 16, 0, 6, 17, 4, 0),
-    gsSP2Triangles(11, 18, 19, 0, 10, 18, 11, 0),
-    gsSP2Triangles(20, 21, 22, 0, 23, 20, 22, 0),
-    gsSP2Triangles(23, 22, 24, 0, 25, 3, 1, 0),
-    gsSP2Triangles(25, 1, 26, 0, 27, 28, 29, 0),
-    gsSPVertex(&sElegyShellHumanVtx[252], 31, 0),
-    gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
-    gsSP2Triangles(4, 6, 5, 0, 4, 7, 6, 0),
-    gsSP2Triangles(8, 9, 10, 0, 9, 11, 10, 0),
-    gsSP2Triangles(9, 12, 11, 0, 13, 7, 4, 0),
-    gsSP2Triangles(14, 13, 4, 0, 14, 4, 3, 0),
-    gsSP2Triangles(15, 16, 17, 0, 18, 16, 15, 0),
-    gsSP2Triangles(15, 19, 20, 0, 19, 15, 17, 0),
-    gsSP2Triangles(21, 22, 23, 0, 21, 23, 24, 0),
-    gsSP2Triangles(25, 23, 26, 0, 23, 22, 26, 0),
-    gsSP2Triangles(27, 28, 29, 0, 27, 30, 28, 0),
-    gsSPDisplayList(0x0C000000),
-    gsDPSetTextureLUT(G_TT_NONE),
-    gsDPLoadTextureBlock(sElegyShellHumanBootsTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_MIRROR | G_TX_WRAP,
-                         G_TX_MIRROR | G_TX_CLAMP, 4, 4, G_TX_NOLOD, G_TX_NOLOD),
-    gsDPSetPrimColor(0, 0x80, 255, 255, 255, 255),
-    gsSPVertex(&sElegyShellHumanVtx[283], 32, 0),
-    gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
-    gsSP2Triangles(6, 7, 8, 0, 6, 9, 7, 0),
-    gsSP2Triangles(10, 11, 12, 0, 13, 4, 3, 0),
-    gsSP2Triangles(14, 15, 16, 0, 17, 18, 19, 0),
-    gsSP2Triangles(20, 18, 17, 0, 2, 21, 0, 0),
-    gsSP2Triangles(22, 23, 24, 0, 25, 23, 22, 0),
-    gsSP2Triangles(26, 27, 28, 0, 29, 27, 26, 0),
-    gsSPVertex(&sElegyShellHumanVtx[313], 24, 0),
-    gsSP2Triangles(0, 1, 2, 0, 3, 1, 0, 0),
-    gsSP2Triangles(4, 5, 6, 0, 7, 8, 9, 0),
-    gsSP2Triangles(10, 11, 12, 0, 13, 10, 12, 0),
-    gsSP2Triangles(14, 8, 7, 0, 15, 16, 17, 0),
-    gsSP2Triangles(18, 19, 20, 0, 21, 22, 23, 0),
-    gsSPDisplayList(0x0C000000),
-    gsDPSetTextureLUT(G_TT_NONE),
-    gsDPLoadTextureBlock(sElegyShellHumanPlatformTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 16, 0, G_TX_NOMIRROR | G_TX_WRAP,
-                         G_TX_NOMIRROR | G_TX_WRAP, 3, 4, G_TX_NOLOD, G_TX_NOLOD),
-    gsDPSetPrimColor(0, 0x80, 255, 255, 255, 255),
-    gsSPVertex(&sElegyShellHumanVtx[337], 23, 0),
-    gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
-    gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
-    gsSP2Triangles(3, 2, 8, 0, 3, 8, 9, 0),
-    gsSP2Triangles(7, 6, 10, 0, 7, 10, 11, 0),
-    gsSP2Triangles(12, 13, 3, 0, 4, 14, 12, 0),
-    gsSP2Triangles(12, 14, 11, 0, 3, 15, 12, 0),
-    gsSP2Triangles(16, 17, 18, 0, 19, 17, 20, 0),
-    gsSP2Triangles(18, 17, 21, 0, 20, 17, 22, 0),
-    gsSPEndDisplayList(),
 };
 
 void EnTorch2_Init(Actor_CustomEnTorch2 *this, GameState_Play *play)
@@ -347,8 +158,14 @@ void EnTorch2_Draw(Actor_CustomEnTorch2 *this, GameState_Play *play)
     static Gfx renderModeSetNoneDL[] = {
         gsSPEndDisplayList(),
         gsSPEndDisplayList(),
+        gsSPEndDisplayList(),
+        gsSPEndDisplayList(),
     };
     static Gfx renderModeSetXluSingleCycleDL[] = {
+        gsDPSetRenderMode(AA_EN | Z_CMP | IM_RD | CLR_ON_CVG | CVG_DST_WRAP | ZMODE_XLU | FORCE_BL |
+                              GBL_c1(G_BL_CLR_IN, G_BL_0, G_BL_CLR_IN, G_BL_1),
+                          G_RM_AA_ZB_XLU_SURF2),
+        gsSPEndDisplayList(),
         gsDPSetRenderMode(AA_EN | Z_CMP | IM_RD | CLR_ON_CVG | CVG_DST_WRAP | ZMODE_XLU | FORCE_BL |
                               GBL_c1(G_BL_CLR_FOG, G_BL_A_SHADE, G_BL_CLR_IN, G_BL_1MA),
                           G_RM_AA_ZB_XLU_SURF2),
@@ -359,17 +176,15 @@ void EnTorch2_Draw(Actor_CustomEnTorch2 *this, GameState_Play *play)
 
     if (this->alpha == 255)
     {
-        gSPSegment(POLY_OPA_DISP++, 0x08, gCustomKeep);
         gSPSegment(POLY_OPA_DISP++, 0x0C, renderModeSetNoneDL);
         gDPSetEnvColor(POLY_OPA_DISP++, 255, 255, 255, 255);
-        Gfx_DrawDListOpa(play, gElegyShellHumanDL);
+        Gfx_DrawDListOpa(play, (Gfx*)CUSTOM_OBJECT_OBJECT_TORCH2_0);
     }
     else
     {
-        gSPSegment(POLY_XLU_DISP++, 0x08, gCustomKeep);
         gSPSegment(POLY_XLU_DISP++, 0x0C, renderModeSetXluSingleCycleDL);
         gDPSetEnvColor(POLY_XLU_DISP++, 255, 255, 255, this->alpha);
-        Gfx_DrawDListXlu(play, gElegyShellHumanDL);
+        Gfx_DrawDListXlu(play, (Gfx*)CUSTOM_OBJECT_OBJECT_TORCH2_0);
     }
 
     CLOSE_DISPS();
