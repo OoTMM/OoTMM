@@ -3,13 +3,17 @@
 "GLOBAL":
   region: NONE
   exits:
+    "WARP_SONGS": "true"
+    "SOARING": "can_play_soaring"
+"WARP_SONGS":
+  region: NONE
+  exits:
     "OOT SONG_TP_FOREST": "can_play_cross_tp_forest"
     "OOT SONG_TP_FIRE": "can_play_cross_tp_fire"
     "OOT SONG_TP_WATER": "can_play_cross_tp_water"
     "OOT SONG_TP_SHADOW": "can_play_cross_tp_shadow"
     "OOT SONG_TP_SPIRIT": "can_play_cross_tp_spirit"
     "OOT SONG_TP_LIGHT": "can_play_cross_tp_light"
-    "SOARING": "can_play_soaring"
 "Tingle Town":
   region: TINGLE
   locations:
