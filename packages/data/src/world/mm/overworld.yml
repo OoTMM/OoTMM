@@ -344,7 +344,7 @@
   region: LAUNDRY_POOL
   exits:
     "Clock Town South": "true"
-    "Kafei Hideout": "(event(MAIL_LETTER) && between(DAY2_PM_02_00, NIGHT2_PM_10_00)) || (event(MEET_KAFEI) && (between(DAY2_PM_02_00, DAY3_AM_06_00) || between(DAY3_PM_01_00, NIGHT3_PM_10_00)))"
+    "Kafei Hideout": "(event(MAIL_LETTER) && between(DAY2_PM_02_00, NIGHT2_PM_10_00)) || (event(MEET_KAFEI) && between(DAY3_PM_01_00, NIGHT3_PM_10_00))"
   events:
     FROG_1: "has(MASK_DON_GERO)"
     MAGIC: "true"
