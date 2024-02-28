@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file.
 - OOT Warp Songs can now be logically used within MM dungeons.
 - New trick to wait on the roof for Stock Pot Inn to close.
 - Add tricks for using Farore's Wind and resetting time to get the Romani Ranch checks.
+- Hover Boots are now accounted for getting Letter to Kafei and Toilet Hand in Stock Pot Inn.
 
 ### Changed
 
