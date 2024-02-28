@@ -1,8 +1,9 @@
 "Stone Tower Temple Inverted":
   dungeon: IST
   exits:
-    "Stone Tower Temple Inverted Entrance": "cond(setting(erMoon) && trick(MM_MAJORA_LOGIC), (event(MAJORA) && before(NIGHT3_AM_12_00)) || can_play_time, can_reset_time)"
+    "Stone Tower Temple Inverted Entrance": "can_reset_time_dungeon"
     "Stone Tower Flipping": "true"
+    "WARP_SONGS": "true"
 "Stone Tower Temple Inverted Entrance":
   dungeon: IST
   events:
@@ -14,6 +15,7 @@
     "Stone Tower Temple Inverted Entrance Ledge": "(trick(MM_ISTT_ENTRY_JUMP) && (has_bombs || trick_keg_explosives)) || short_hook_anywhere || (trick(MM_ISTT_ENTRY_HOVER) && has_hover_boots && has_mask_bunny)"
     "Stone Tower Temple Inverted Entrance Top": "short_hook_anywhere"
     "Stone Tower Temple Boss Access": "setting(bossWarpPads, remains) && has(REMAINS_TWINMOLD)"
+    "WARP_SONGS": "true"
   locations:
     "Stone Tower Temple Inverted Entrance Chest": "can_use_light_arrows"
 "Stone Tower Temple Inverted East":
@@ -22,6 +24,7 @@
     "Stone Tower Temple Inverted Entrance": "can_use_light_arrows || short_hook_anywhere"
     "Stone Tower Temple Inverted East Ledge": "has(MASK_DEKU) || hookshot_anywhere"
     "Stone Tower Temple Inverted East Bridge": "has(MASK_DEKU) || trick(MM_ST_UPDRAFTS) || short_hook_anywhere"
+    "WARP_SONGS": "true"
   events:
     STONE_TOWER_WATER_CHEST_SUN: "can_use_light_arrows"
   locations:
@@ -37,6 +40,7 @@
     "Stone Tower Temple Inverted East": "true"
     "Stone Tower Temple Inverted Center Bridge": "(trick(MM_ISTT_EYEGORE) && ((has_mask_zora && has_bombs) || (has_shield && has_explosives))) || short_hook_anywhere"
     "Stone Tower Temple Inverted Boss Key Room": trick(MM_ISTT_EYEGORE) || short_hook_anywhere || has_hover_boots
+    "WARP_SONGS": "true"
   locations:
     "Stone Tower Temple Inverted East Middle Chest": "true"
     "Stone Tower Temple Inverted Pot Updrafts Bridge 1": "true"
@@ -50,6 +54,7 @@
     "Stone Tower Temple Inverted East": "true"
     "Stone Tower Temple Inverted East Bridge": "true"
     "Stone Tower Temple Inverted Wizzrobe": "(soul_enemy(SOUL_ENEMY_CHUCHU) || (trick(MM_ISTT_CHUCHU_LESS) && (has_chateau || has_blue_potion || has_green_potion || has_double_magic))) && can_use_light_arrows && cond(trick(MM_ISTT_ENTRY_JUMP), small_keys_st(4), small_keys_st(3))"
+    "WARP_SONGS": "true"
   locations:
     "Stone Tower Temple Inverted Pot Updrafts Ledge 1": "true"
     "Stone Tower Temple Inverted Pot Updrafts Ledge 2": "true"
@@ -60,6 +65,7 @@
   exits:
     "Stone Tower Temple Inverted Wizzrobe Ledge": "(soul_enemy(SOUL_ENEMY_WIZZROBE) && can_hookshot_short && (can_fight || has_arrows)) || short_hook_anywhere"
     "Stone Tower Temple Inverted East Ledge": "((can_use_light_arrows || short_hook_anywhere) && small_keys_st(3)) || (can_goron_bomb_jump && has_bombs && small_keys_st(4))"
+    "WARP_SONGS": "true"
   locations:
     "Stone Tower Temple Inverted Pot Wizzrobe 1": "can_hookshot || short_hook_anywhere"
     "Stone Tower Temple Inverted Pot Wizzrobe 2": "can_hookshot || short_hook_anywhere"
@@ -71,6 +77,7 @@
   exits:
     "Stone Tower Temple Inverted Wizzrobe": "true"
     "Stone Tower Temple Inverted Death Armos Maze": "has(MASK_DEKU) || hookshot_anywhere"
+    "WARP_SONGS": "true"
   events:
     POE: "true"
   locations:
@@ -82,6 +89,7 @@
   exits:
     "Stone Tower Temple Inverted Center": "true"
     "Stone Tower Temple Inverted Wizzrobe Ledge": "has(MASK_DEKU) || hookshot_anywhere"
+    "WARP_SONGS": "true"
   events:
     POE: "true"
   locations:
@@ -95,6 +103,7 @@
     "Stone Tower Temple Inverted Entrance Ledge": "true"
     "Stone Tower Temple Inverted Death Armos Maze": "true"
     "Stone Tower Temple Inverted Center Bridge": "(trick(MM_ISTT_EYEGORE) && can_use_light_arrows && can_hookshot) || hookshot_anywhere"
+    "WARP_SONGS": "true"
   locations:
     "Stone Tower Temple Inverted Flying Pot Center 1": "((has(MASK_DEKU) && has_weapon_range) || hookshot_anywhere) && soul_flying_pot"
     "Stone Tower Temple Inverted Flying Pot Center 2": "((has(MASK_DEKU) && has_weapon_range) || hookshot_anywhere) && soul_flying_pot"
@@ -106,6 +115,7 @@
   exits:
     "Stone Tower Temple Inverted Center": "has(MASK_DEKU) || hookshot_anywhere"
     "Stone Tower Temple Inverted Center Bridge": "(trick(MM_ISTT_EYEGORE) && can_use_light_arrows && can_hookshot) || hookshot_anywhere"
+    "WARP_SONGS": "true"
   locations:
     "Stone Tower Temple Inverted Boss Key": "soul_enemy(SOUL_ENEMY_GOMESS) && can_use_light_arrows && can_fight" # Mercy fight requirements so you dont need to rely on magic and arrow drops from bats if you only have Light Arrows
     "Stone Tower Temple Inverted Pot Gomess 1": "true"
@@ -117,6 +127,7 @@
   exits:
     "Stone Tower Temple Inverted Entrance Top": "can_hookshot"
     "Stone Tower Temple Inverted Center": "true"
+    "WARP_SONGS": "true"
   events:
     STONE_TOWER_ENTRANCE_CHEST_SWITCH: "true"
 "Stone Tower Temple Inverted Entrance Top":
@@ -124,6 +135,7 @@
   exits:
     "Stone Tower Temple Inverted Center Bridge": "small_keys_st(4)"
     "Stone Tower Temple Inverted Entrance": "true"
+    "WARP_SONGS": "true"
 "Stone Tower Temple Inverted Center Bridge":
   dungeon: IST
   exits:
@@ -131,12 +143,14 @@
     "Stone Tower Temple Inverted Boss Key Room": "(trick(MM_ISTT_EYEGORE) && has_explosives) || has_mask_goron || has_hover_boots || short_hook_anywhere"
     "Stone Tower Temple Inverted Center": "(trick(MM_ISTT_EYEGORE) && has_explosives) || has_mask_goron || has_hover_boots || short_hook_anywhere"
     "Stone Tower Temple Inverted Entrance Top": "small_keys_st(4)"
+    "WARP_SONGS": "true"
   locations:
     "Stone Tower Temple Inverted Giant Mask": "soul_enemy(SOUL_ENEMY_EYEGORE) && (has_explosives || has_arrows || can_hookshot_short || has_mask_zora || has_mask_goron)"
 "Stone Tower Temple Inverted Pre-Boss":
   dungeon: IST
   exits:
     "Stone Tower Temple Boss Access": "can_hookshot_short && boss_key(BOSS_KEY_ST)"
+    "WARP_SONGS": "true"
   events:
     STONE_TOWER_BRIDGE_CHEST_SWITCH: "can_activate_crystal"
     MAGIC: "can_hookshot_short"
@@ -175,6 +189,7 @@
   dungeon: IST
   exits:
     "Stone Tower After Boss": "soul_boss(SOUL_BOSS_TWINMOLD) && (has_magic && ((has(MASK_GIANT) && has(SWORD)) || has(MASK_FIERCE_DEITY)))"
+    "WARP_SONGS": "can_reset_time" #Only relevant when the boss is in an OOT dungeon. Must account for resetting time so that it can be repeated.
 "Stone Tower After Boss":
   boss: true
   dungeon: IST

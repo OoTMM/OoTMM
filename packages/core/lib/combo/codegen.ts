@@ -15,6 +15,7 @@ const ENTRANCES_DEBUG_CATEGORIES = {
   BOSS: 'Boss',
   WARP: 'Songs/Owls',
   INTERIOR: 'Interiors',
+  SPECIAL: 'Special',
 };
 
 const codegenFile = async (data: {[k: string]: number}, prefix: string, filename: string, guard: string) => {

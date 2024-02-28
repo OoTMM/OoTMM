@@ -399,6 +399,10 @@ void hookPlay_Init(GameState_Play* play)
         else
             gSave.entrance = ENTR_OOT_CASTLE_COURTYARD;
     }
+    else if (gSave.entrance == ENTR_OOT_CASTLE_STEALTH_FROM_COURTYARD)
+    {
+        gSave.entrance = ENTR_OOT_CASTLE_FROM_STEALTH;
+    }
     else if (gSave.entrance == ENTR_OOT_SAGES_CHAMBER_END)
     {
         endGame();

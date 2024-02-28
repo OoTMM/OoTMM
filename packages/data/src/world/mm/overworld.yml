@@ -3,13 +3,17 @@
 "GLOBAL":
   region: NONE
   exits:
+    "WARP_SONGS": "true"
+    "SOARING": "can_play_soaring"
+"WARP_SONGS":
+  region: NONE
+  exits:
     "OOT SONG_TP_FOREST": "can_play_cross_tp_forest"
     "OOT SONG_TP_FIRE": "can_play_cross_tp_fire"
     "OOT SONG_TP_WATER": "can_play_cross_tp_water"
     "OOT SONG_TP_SHADOW": "can_play_cross_tp_shadow"
     "OOT SONG_TP_SPIRIT": "can_play_cross_tp_spirit"
     "OOT SONG_TP_LIGHT": "can_play_cross_tp_light"
-    "SOARING": "can_play_soaring"
 "Tingle Town":
   region: TINGLE
   locations:
@@ -306,7 +310,11 @@
     "Chest Game": "before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || between(DAY3_AM_06_00, NIGHT3_PM_10_00)"
     "Honey & Darling Game": "before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || between(DAY3_AM_06_00, NIGHT3_PM_10_00)"
     "Stock Pot Inn": "has(ROOM_KEY) || between(DAY1_AM_08_00, NIGHT1_PM_08_00) || between(DAY2_AM_08_00, NIGHT2_PM_08_00) || after(DAY3_AM_08_00)"
+
     "Stock Pot Inn Roof": "has(MASK_DEKU) || short_hook_anywhere || has_hover_boots || climb_anywhere" #added climb anywhere
+
+    "Stock Pot Inn Roof": "has(MASK_DEKU) || short_hook_anywhere || has_hover_boots || event(SPI_ROOF_FARORE)"
+
     "Milk Bar": "between(DAY1_AM_10_00, NIGHT1_PM_09_00) || between(DAY2_AM_10_00, NIGHT2_PM_09_00) || between(DAY3_AM_10_00, NIGHT3_PM_09_00) || (has(MASK_ROMANI) && (between(NIGHT1_PM_10_00, NIGHT1_AM_05_00) || between(NIGHT2_PM_10_00, NIGHT2_AM_05_00) || after(NIGHT3_PM_10_00)))"
     "Astral Observatory Passage": "event(BOMBER_CODE) || trick(MM_BOMBER_GUESS) || trick(MM_BOMBER_BACKFLIP) || short_hook_anywhere"
   events:
@@ -412,11 +420,11 @@
   exits:
     "Laundry Pool": "true"
   events:
-    MEET_KAFEI: "event(MAIL_LETTER) && between(DAY2_PM_02_00, DAY3_AM_06_00)"
+    MEET_KAFEI: "event(MAIL_LETTER) && between(DAY2_PM_02_00, NIGHT2_PM_10_00)"
   locations:
-    "Kafei Hideout Pendant of Memories": "event(MAIL_LETTER) && (between(DAY2_PM_02_00, DAY3_AM_06_00) || (after(DAY2_PM_02_00) && (event(SAKON_BOMB_BAG) || event(SAKON_BOOM))))"
-    "Kafei Hideout Owner Reward 1": "event(MEET_KAFEI) && between(DAY3_AM_06_00, NIGHT3_PM_10_00)"
-    "Kafei Hideout Owner Reward 2": "event(MEET_KAFEI) && between(DAY3_AM_06_00, NIGHT3_PM_10_00)"
+    "Kafei Hideout Pendant of Memories": "event(MAIL_LETTER) && between(DAY2_PM_02_00, NIGHT2_PM_10_00)"
+    "Kafei Hideout Owner Reward 1": "between(DAY3_AM_06_00, NIGHT3_PM_10_00)"
+    "Kafei Hideout Owner Reward 2": "between(DAY3_AM_06_00, NIGHT3_PM_10_00)"
 "Post Office":
   region: ENTRANCE
   exits:
@@ -517,16 +525,18 @@
     "Stock Pot Inn Guest Room Chest": "has(ROOM_KEY)"
     "Stock Pot Inn Staff Room Chest": "is_night3"
     "Stock Pot Inn Room Key": "between(DAY1_PM_01_45, DAY1_PM_04_00)"
-    "Stock Pot Inn Letter to Kafei": "cond(setting(erIndoorsExtra), event(MEET_ANJU), event(MEET_ANJU) && (has(ROOM_KEY) || has(MASK_DEKU)))"
+    "Stock Pot Inn Letter to Kafei": "cond(setting(erIndoorsExtra), event(MEET_ANJU), event(MEET_ANJU) && (has(ROOM_KEY) || has(MASK_DEKU) || event(SPI_ROOF_FARORE) || trick(MM_STOCK_POT_WAIT)))"
     "Stock Pot Inn Couple's Mask": "event(SUN_MASK) && event(DELIVER_PENDANT) && event(MEET_ANJU) && after(NIGHT3_AM_04_00)"
     "Stock Pot Inn Grandma HP 1": "has(MASK_ALL_NIGHT) && (is_day1 || is_day2)"
     "Stock Pot Inn Grandma HP 2": "has(MASK_ALL_NIGHT) && (is_day1 || is_day2)"
-    "Stock Pot Inn ??? HP": "has_paper && midnight"
+    "Stock Pot Inn ??? HP": "cond(setting(erIndoorsExtra), has_paper && midnight, has_paper && midnight && (clock_night3 || has(ROOM_KEY) || has(MASK_DEKU) || event(SPI_ROOF_FARORE) || trick(MM_STOCK_POT_WAIT)))"
 "Stock Pot Inn Roof":
   region: CLOCK_TOWN_EAST
   exits:
     "Clock Town East": "true"
     "Stock Pot Inn": "true"
+  events:
+    SPI_ROOF_FARORE: "can_use_farore"
 "Deku Playground":
   region: ENTRANCE
   events:
@@ -1394,7 +1404,7 @@
   exits:
     "Swamp Back": "true"
     "Deku Palace Cliff": "has(MASK_DEKU) || short_hook_anywhere"
-    "Near Deku Shrine": "event(CLEAN_SWAMP) || (can_use_nayru && has_mask_zora) || (has_hover_boots && has_arrows) || (has_hover_boots && can_hookshot_short)"
+    "Near Deku Shrine": "event(CLEAN_SWAMP) || (can_use_nayru && has_mask_zora) || (has_hover_boots && (has_arrows || can_hookshot_short))"
     "Deku Palace Main": "has(MASK_DEKU) || trick(MM_PALACE_GUARD_SKIP) || short_hook_anywhere"
     "Deku Palace Upper": "(event(CLEAN_SWAMP) || has(MASK_DEKU) || can_use_nayru) && can_use_beans"
   events:
@@ -1642,7 +1652,6 @@
   exits:
     "Mountain Village Path Upper": "true"
     "Twin Islands": "true"
-    "Near Goron Graveyard": "can_use_lens_strict || trick(MM_DARMANI_WALL) || (event(BOSS_SNOWHEAD) && (has_mask_goron || has_mask_zora || short_hook_anywhere))"
     "Path to Snowhead Front": "true"
     "Blacksmith": "true"
     "Near Village Grotto": "event(BOSS_SNOWHEAD) && (has_mask_goron || short_hook_anywhere)"
@@ -1905,6 +1914,7 @@
   events:
     MAGIC: "true"
     ARROWS: "event(BOSS_SNOWHEAD)"
+    GORON_GRAVE_FARORE: "can_use_farore"
 "Goron Graveyard":
   region: ENTRANCE
   exits:
@@ -2101,7 +2111,7 @@
 "Romani Ranch":
   region: ROMANI_RANCH
   events:
-    ALIENS: "at(NIGHT1_AM_02_30) && has_arrows"
+    ALIENS: "(at(NIGHT1_AM_02_30) || (can_use_farore && clock_night1)) && has_arrows"
     ARROWS: "true"
     MAGIC: "true"
     FAIRY: "can_get_gossip_fairy"
@@ -2112,9 +2122,9 @@
     "Stables": "true"
     "Ranch House": "between(DAY1_AM_06_00, NIGHT1_PM_08_00) || between(DAY2_AM_06_00, NIGHT2_PM_08_00) || between(DAY3_AM_06_00, NIGHT3_PM_08_00)"
   locations:
-    "Romani Ranch Epona Song": "before(NIGHT1_PM_06_00)"
+    "Romani Ranch Epona Song": "before(NIGHT1_PM_06_00) || (can_use_farore && clock_day1)"
     "Romani Ranch Aliens": "event(ALIENS)"
-    "Romani Ranch Cremia Escort": "event(ALIENS) && at(NIGHT2_PM_06_00)"
+    "Romani Ranch Cremia Escort": "event(ALIENS) && (at(NIGHT2_PM_06_00) || (can_use_farore && clock_night2))"
     "Romani Ranch Grass Pack 1 Grass 01": "true"
     "Romani Ranch Grass Pack 1 Grass 02": "true"
     "Romani Ranch Grass Pack 1 Grass 03": "true"
@@ -2176,7 +2186,7 @@
     "Romani Ranch Gossip Entrance": "true"
     "Romani Ranch Gossip Behind House": "true"
     "Romani Ranch Gossip Near Tree": "true"
-"Cucco Shack":
+"Cucco Shack": #Grog is always available
   region: ENTRANCE
   events:
     RUPEES: "has_weapon_range || has_weapon || can_break_boulders"
@@ -2184,24 +2194,29 @@
   exits:
     "Romani Ranch": "true"
   locations:
-    "Cucco Shack Bunny Mask": "has(MASK_BREMEN) && (between(DAY1_AM_06_00, NIGHT1_PM_08_00) || between(DAY2_AM_06_00, NIGHT2_PM_08_00) || between(DAY3_AM_06_00, NIGHT3_PM_08_00))"
+    "Cucco Shack Bunny Mask": "has(MASK_BREMEN)"
   gossip:
-    "Cucco Shack Gossip": "between(DAY1_AM_06_00, NIGHT1_PM_08_00) || between(DAY2_AM_06_00, NIGHT2_PM_08_00) || between(DAY3_AM_06_00, NIGHT3_PM_08_00)"
-"Doggy Racetrack":
+    "Cucco Shack Gossip": "true"
+"Doggy Racetrack": #The race is always available
   region: ENTRANCE
   events:
     FAIRY: "can_get_gossip_fairy"
   exits:
     "Romani Ranch": "true"
   locations:
+
     "Doggy Racetrack Chest": "(can_use_beans || has_mask_zora || can_hookshot_short || climb_anywhere || trick(MM_DOG_RACE_CHEST_NOTHING)) && (between(DAY1_AM_06_00, NIGHT1_PM_08_00) || between(DAY2_AM_06_00, NIGHT2_PM_08_00) || between(DAY3_AM_06_00, NIGHT3_PM_08_00))" #added climb anywhere
     "Doggy Racetrack HP": "can_use_wallet(1) && has_mask_truth && (between(DAY1_AM_06_00, NIGHT1_PM_08_00) || between(DAY2_AM_06_00, NIGHT2_PM_08_00) || between(DAY3_AM_06_00, NIGHT3_PM_08_00))"
+
+    "Doggy Racetrack Chest": "can_use_beans || has_mask_zora || can_hookshot_short || trick(MM_DOG_RACE_CHEST_NOTHING)"
+    "Doggy Racetrack HP": "can_use_wallet(1) && has_mask_truth"
+
     "Doggy Racetrack Pot 1": "true"
     "Doggy Racetrack Pot 2": "true"
     "Doggy Racetrack Pot 3": "true"
     "Doggy Racetrack Pot 4": "true"
   gossip:
-    "Doggy Racetrack Gossip": "between(DAY1_AM_06_00, NIGHT1_PM_08_00) || between(DAY2_AM_06_00, NIGHT2_PM_08_00) || between(DAY3_AM_06_00, NIGHT3_PM_08_00)"
+    "Doggy Racetrack Gossip": "true"
 "Stables":
   region: ENTRANCE
   exits:

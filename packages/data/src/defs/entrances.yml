@@ -326,8 +326,9 @@ OOT_KOKIRI_FOREST_FROM_LOST_WOODS:              { game: oot, id: 0x286,  type: n
 OOT_GERUDO_FORTRESS_CAUGHT_NO_HOOK:             { game: oot, id: 0x1a5,  type: none }
 OOT_GERUDO_FORTRESS_CAUGHT:                     { game: oot, id: 0x5f8,  type: none }
 OOT_CASTLE_STEALTH:                             { game: oot, id: 0x07a,  type: none }
+OOT_CASTLE_STEALTH_FROM_COURTYARD:              { game: oot, id: 0x296,  type: none }
 OOT_CASTLE_FROM_STEALTH:                        { game: oot, id: 0x23d,  type: none }
-OOT_CASTLE_COURTYARD:                           { game: oot, id: 0x400,  type: none }
+OOT_CASTLE_COURTYARD:                           { game: oot, id: 0x400,  type: none, debug: ['SPECIAL', 'Castle Courtyard'] }
 OOT_CASTLE_CAUGHT:                              { game: oot, id: 0x47e,  type: none }
 OOT_SHOP_MASKS:                                 { game: oot, id: 0x530,  type: none }
 OOT_SAGES_CHAMBER_END:                          { game: oot, id: 0x06b,  type: none }

@@ -28,7 +28,7 @@ void gracePeriod(void)
     moonCrash = Time_LinearMoonCrash();
     if (Time_IsMoonCrashLinear(linear) || (linear < moonCrash && linear + GRACE >= moonCrash))
     {
-        linearGrace = moonCrash - linear;
+        linearGrace = moonCrash - GRACE;
         Time_Linear2Game(&d, &t, linearGrace);
         gMmSave.day = d;
         gMmSave.time = t;

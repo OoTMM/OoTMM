@@ -2,8 +2,9 @@
   dungeon: PF
   exits:
     "Great Bay Coast Fortress": "underwater_walking || can_dive_small"
-    "Pirate Fortress Entrance": "cond(setting(erMoon) && trick(MM_MAJORA_LOGIC), (event(MAJORA) && before(NIGHT3_AM_12_00)) || can_play_time, can_reset_time)"
+    "Pirate Fortress Entrance": "can_reset_time_dungeon"
     "SOARING": "can_play_soaring"
+    "WARP_SONGS": "true"
 "Pirate Fortress Entrance":
   dungeon: PF
   exits:
@@ -12,6 +13,7 @@
     "Pirate Fortress Entrance Balcony": "can_hookshot || (can_hookshot_short && trick(MM_PFI_BOAT_HOOK))"
     "Pirate Fortress Entrance Lookout": can_hookshot_short && trick(MM_PFI_BOAT_HOOK)
     "SOARING": "can_play_soaring"
+    "WARP_SONGS": "true"
   events:
     PHOTO_GERUDO: "has(PICTOGRAPH_BOX)"
   locations:
@@ -25,12 +27,14 @@
     "Pirate Fortress Sewers End": "true"
     "Pirate Fortress Interior": "true"
     "SOARING": "can_play_soaring"
+    "WARP_SONGS": "true"
 "Pirate Fortress Sewers":
   region: PIRATE_FORTRESS_SEWERS
   exits:
     "Pirate Fortress Entrance": "true"
     "Pirate Fortress Sewers Cage Room": "has_mask_zora || (underwater_walking_strict && can_lift_silver)"
-    "SOARING": "can_play_soaring"
+    "SOARING": "underwater_walking && can_play_soaring"
+    "WARP_SONGS": "underwater_walking"
   locations:
     "Pirate Fortress Sewers Chest 1": "underwater_walking_strict"
 "Pirate Fortress Sewers Cage Room":
@@ -40,6 +44,7 @@
     "Pirate Fortress Sewers": "has_mask_zora || (underwater_walking_strict && can_lift_silver)"
     "Pirate Fortress Sewers After Gate": "has_weapon_range || (has_hover_boots && can_activate_crystal)"
     "SOARING": "can_play_soaring"
+    "WARP_SONGS": "true"
   locations:
     "Pirate Fortress Sewers Chest 2": "underwater_walking"
     "Pirate Fortress Sewers Chest 3": "underwater_walking"
@@ -57,6 +62,7 @@
     "Pirate Fortress Entrance": "true"
     "Pirate Fortress Sewers End": "has_weapon_range || has_bombs || has_bombchu"
     "SOARING": "can_play_soaring"
+    "WARP_SONGS": "true"
   locations:
     "Pirate Fortress Sewers Pot Waterway 1": "true"
     "Pirate Fortress Sewers Pot Waterway 2": "true"
@@ -70,6 +76,7 @@
     "Pirate Fortress Entrance Balcony": "has_weapon_range || (has_hover_boots && can_activate_crystal)"
     "Pirate Fortress Sewers After Gate": "true"
     "SOARING": "can_play_soaring"
+    "WARP_SONGS": "true"
   locations:
     "Pirate Fortress Sewers Pot End 1": "true"
     "Pirate Fortress Sewers Pot End 2": "true"
@@ -91,6 +98,7 @@
     "Pirate Fortress Barrel Maze Exit": "short_hook_anywhere || (can_hookshot && has_hover_boots)"
     "Pirate Fortress Treasure Room Exit": "short_hook_anywhere || has_hover_boots"
     "SOARING": "can_play_soaring"
+    "WARP_SONGS": "true"
   locations:
     "Pirate Fortress Interior Lower Chest": "true"
     "Pirate Fortress Interior Upper Chest": "can_hookshot || short_hook_anywhere || (has_mask_goron && trick(MM_OOB_MOVEMENT))"
@@ -102,6 +110,7 @@
   exits:
     "Pirate Fortress Interior": "true"
     "SOARING": "can_play_soaring"
+    "WARP_SONGS": "true"
   events:
     FORTRESS_BEEHIVE: "has_arrows || can_use_deku_bubble"
     ARROWS: "true"
@@ -113,6 +122,7 @@
   exits:
     "Pirate Fortress Interior": "true"
     "SOARING": "can_play_soaring"
+    "WARP_SONGS": "true"
   events:
     FORTRESS_BEEHIVE: "has_mask_stone && can_hookshot_short && (has_arrows || can_use_deku_bubble)"
     ZORA_EGGS_HOOKSHOT_ROOM: "can_hookshot_short && underwater_walking && event(FORTRESS_BEEHIVE)"
@@ -125,6 +135,7 @@
     "Pirate Fortress Entrance Lookout": "true"
     "Pirate Fortress Barrel Maze": "true"
     "SOARING": "can_play_soaring"
+    "WARP_SONGS": "true"
 "Pirate Fortress Entrance Lookout":
   dungeon: PF
   exits:
@@ -136,12 +147,14 @@
     "Pirate Fortress Barrel Maze Entry": "true"
     "Pirate Fortress Barrel Maze Aquarium": "can_fight && can_evade_gerudo"
     "SOARING": "can_play_soaring"
+    "WARP_SONGS": "true"
 "Pirate Fortress Barrel Maze Aquarium":
   region: PIRATE_FORTRESS_INTERIOR
   exits:
     "Pirate Fortress Barrel Maze": "can_fight && can_evade_gerudo"
     "Pirate Fortress Barrel Maze Exit": "true"
     "SOARING": "can_play_soaring"
+    "WARP_SONGS": "true"
   events:
     ZORA_EGGS_BARREL_MAZE: "can_hookshot_short && underwater_walking"
     ARROWS: "true"
@@ -156,24 +169,29 @@
     "Pirate Fortress Barrel Maze Aquarium": "true"
     "Pirate Fortress Interior": "true"
     "SOARING": "can_play_soaring"
+    "WARP_SONGS": "true"
 "Pirate Fortress Lone Guard Entry":
   region: PIRATE_FORTRESS_INTERIOR
   exits:
     "Pirate Fortress Interior": "true"
     "Pirate Fortress Lone Guard": "true"
     "Pirate Fortress Treasure Room Entry": "can_hookshot || short_hook_anywhere"
+    "SOARING": "can_play_soaring"
+    "WARP_SONGS": "true"
 "Pirate Fortress Lone Guard":
   region: PIRATE_FORTRESS_INTERIOR
   exits:
     "Pirate Fortress Lone Guard Aquarium": "can_fight && can_evade_gerudo"
     "Pirate Fortress Lone Guard Entry": "true"
     "SOARING": "can_play_soaring"
+    "WARP_SONGS": "true"
 "Pirate Fortress Lone Guard Aquarium":
   region: PIRATE_FORTRESS_INTERIOR
   exits:
     "Pirate Fortress Lone Guard": "can_fight && can_evade_gerudo"
     "Pirate Fortress Lone Guard Exit": "true"
     "SOARING": "can_play_soaring"
+    "WARP_SONGS": "true"
   events:
     ZORA_EGGS_LONE_GUARD: "can_hookshot_short && underwater_walking"
     ARROWS: "true"
@@ -188,18 +206,21 @@
     "Pirate Fortress Lone Guard Aquarium": "true"
     "Pirate Fortress Interior": "true"
     "SOARING": "can_play_soaring"
+    "WARP_SONGS": "true"
 "Pirate Fortress Treasure Room Entry":
   region: PIRATE_FORTRESS_INTERIOR
   exits:
     "Pirate Fortress Interior": "can_evade_gerudo"
     "Pirate Fortress Treasure Room": "true"
     "SOARING": "can_play_soaring"
+    "WARP_SONGS": "true"
 "Pirate Fortress Treasure Room":
   region: PIRATE_FORTRESS_INTERIOR
   exits:
     "Pirate Fortress Treasure Room Aquarium": "can_fight && can_evade_gerudo"
     "Pirate Fortress Treasure Room Entry": "true"
     "SOARING": "can_play_soaring"
+    "WARP_SONGS": "true"
   locations:
     "Pirate Fortress Interior Silver Rupee Chest": "can_evade_gerudo"
 "Pirate Fortress Treasure Room Aquarium":
@@ -208,6 +229,7 @@
     "Pirate Fortress Treasure Room": "can_fight && can_evade_gerudo"
     "Pirate Fortress Treasure Room Exit": "true"
     "SOARING": "can_play_soaring"
+    "WARP_SONGS": "true"
   events:
     ZORA_EGGS_TREASURE_ROOM: "can_hookshot_short && underwater_walking"
     ARROWS: "true"
@@ -220,3 +242,4 @@
     "Pirate Fortress Treasure Room Aquarium": "true"
     "Pirate Fortress Interior": "true"
     "SOARING": "can_play_soaring"
+    "WARP_SONGS": "true"

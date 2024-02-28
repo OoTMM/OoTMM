@@ -1,8 +1,9 @@
 "Great Bay Temple":
   dungeon: GB
   exits:
-    "Great Bay Temple Entrance": "cond(setting(erMoon) && trick(MM_MAJORA_LOGIC), (event(MAJORA) && before(NIGHT3_AM_12_00)) || can_play_time, can_reset_time)"
+    "Great Bay Temple Entrance": "can_reset_time_dungeon"
     "Zora Cape Peninsula": "can_hookshot || short_hook_anywhere"
+    "WARP_SONGS": "true"
 "Great Bay Temple Entrance":
   dungeon: GB
   events:
@@ -11,9 +12,10 @@
     RUPEES: "true"
     FAIRY: "true"
   exits:
-    "Great Bay Temple Entrance": "true"
+    "Great Bay Temple": "true"
     "Great Bay Temple Water Wheel": "true"
     "Great Bay Temple Boss Access": "setting(bossWarpPads, remains) && has(REMAINS_GYORG)"
+    "WARP_SONGS": "true"
   locations:
     "Great Bay Temple Entrance Chest": "has_sticks || can_use_fire_short_range || (has_arrows && trick(MM_GBT_ENTRANCE_BOW))"
 "Great Bay Temple Water Wheel":
@@ -23,6 +25,7 @@
   exits:
     "Great Bay Temple Entrance": "true"
     "Great Bay Temple Central Room": "underwater_walking || (has_mask_goron && trick(MM_GBT_WATERWHEEL_GORON)) || short_hook_anywhere || (has_hover_boots && trick(MM_GBT_WATERWHEEL_HOVERS))"
+    "WARP_SONGS": "true"
   locations:
     "Great Bay Temple SF Water Wheel Platform": "can_dive_small || underwater_walking || (has(MASK_GREAT_FAIRY) && (has_arrows || can_hookshot)) || (short_hook_anywhere && trick(MM_GBT_FAIRY2_HOOK))"
     "Great Bay Temple SF Water Wheel Skulltula": "soul_skulltula && (can_fight || has_weapon_range || has_explosives)"
@@ -40,6 +43,7 @@
     "Great Bay Temple Green Pipe 1": "can_use_ice_arrows || short_hook_anywhere"
     "Great Bay Temple Compass Room": "(underwater_walking || hookshot_anywhere || (trick(MM_GBT_CENTRAL_GEYSER) && ((can_use_fire_arrows && can_use_ice_arrows) || can_use_din || can_use_farore || can_use_nayru))) && event(GB_WATER_WHEEL)"
     "Great Bay Temple Pre-Boss": "(underwater_walking || (trick(MM_GBT_CENTRAL_GEYSER) && ((can_use_fire_arrows && can_use_ice_arrows) || can_use_din || can_use_farore || can_use_nayru))) && event(GB_WATER_WHEEL)"
+    "WARP_SONGS": "true"
   events:
     MAGIC: "true"
   locations:
@@ -55,6 +59,7 @@
     "Great Bay Temple Baba Room": "has_mask_zora || ((has_bombchu || has_mask_blast) && (short_hook_anywhere || underwater_walking || (can_dive_big && has_tunic_zora))) || hookshot_anywhere"
     "Great Bay Temple Red Pipe 2": "can_use_ice_arrows || short_hook_anywhere"
     "Great Bay Temple Green Pipe 3": "short_hook_anywhere"
+    "WARP_SONGS": "true"
   locations:
     "Great Bay Temple Map": "has_mask_zora || short_hook_anywhere || can_use_ice_arrows || can_hookshot || has(MASK_DEKU)"
     "Great Bay Temple SF Map Room Pot": "has_mask_zora || short_hook_anywhere || can_use_ice_arrows || has(MASK_DEKU)"
@@ -73,6 +78,7 @@
   dungeon: GB
   exits:
     "Great Bay Temple Compass Room": "true"
+    "WARP_SONGS": "true"
   locations:
     "Great Bay Temple Baba Chest": "soul_enemy(SOUL_ENEMY_BIO_BABA) && (has_mask_zora || has_arrows || (has_mask_blast && short_hook_anywhere))"
 "Great Bay Temple Compass Room":
@@ -85,6 +91,7 @@
     "Great Bay Temple Boss Key Room": "can_use_ice_arrows && (can_use_fire_short_range || has_hot_water_farore)"
     "Great Bay Temple After Boss Key": "(can_use_ice_arrows && trick(MM_GBT_FIRELESS) && has_mask_zora) || short_hook_anywhere"
     "Great Bay Temple Green Pipe 2": "event(GB_WATER_WHEEL)"
+    "WARP_SONGS": "true"
   locations:
     "Great Bay Temple Compass": "soul_enemy(SOUL_ENEMY_BIO_BABA) || can_hookshot || can_use_ice_arrows || short_hook_anywhere" # The lilypads from the biobabas aren't here without their souls
     "Great Bay Temple Compass Room Underwater": "underwater_walking"
@@ -103,6 +110,7 @@
   exits:
     "Great Bay Temple Central Room": "underwater_walking || hookshot_anywhere"
     "Great Bay Temple Ice Arrow Room": "small_keys_gb(1)"
+    "WARP_SONGS": "true"
   events:
     GB_PIPE_RED: "(soul_octorok && can_use_ice_arrows) || short_hook_anywhere || (has_hover_boots && has_mask_bunny && has_weapon && trick(MM_GBT_RED1_HOVERS))"
   locations:
@@ -116,6 +124,7 @@
     MAGIC: "soul_enemy(SOUL_ENEMY_CHUCHU) && (has_weapon || has_mask_zora || has(MASK_DEKU) || has_explosives)"
   exits:
     "Great Bay Temple Red Pipe 1": "true"
+    "WARP_SONGS": "true"
   locations:
     "Great Bay Temple Ice Arrow": "soul_enemy(SOUL_ENEMY_WART)"
     "Great Bay Temple Pot Wart 1": "true"
@@ -142,6 +151,7 @@
   dungeon: GB
   exits:
     "Great Bay Temple Map Room": "true"
+    "WARP_SONGS": "true"
   events:
     GB_PIPE_RED2: "(soul_enemy(SOUL_ENEMY_CHUCHU) && can_use_ice_arrows) || short_hook_anywhere"
     MAGIC: "true"
@@ -149,6 +159,7 @@
   dungeon: GB
   exits:
     "Great Bay Temple After Boss Key": "soul_enemy(SOUL_ENEMY_GEKKO) && can_use_ice_arrows"
+    "WARP_SONGS": "true"
   events:
     FROG_4: "has(MASK_DON_GERO) && soul_enemy(SOUL_ENEMY_GEKKO) && can_use_ice_arrows"
 "Great Bay Temple After Boss Key":
@@ -156,12 +167,14 @@
   exits:
     "Great Bay Temple Boss Key Room": "true"
     "Great Bay Temple Compass Room": "true"
+    "WARP_SONGS": "true"
   locations:
     "Great Bay Temple Boss Key": "true"
 "Great Bay Temple Green Pipe 1":
   dungeon: GB
   exits:
     "Great Bay Temple Central Room": "true"
+    "WARP_SONGS": "true"
   events:
     GB_PIPE_GREEN: "true"
   locations:
@@ -176,6 +189,7 @@
   dungeon: GB
   exits:
     "Great Bay Temple Green Pipe 3": "(can_use_ice_arrows && (can_use_fire_arrows || short_hook_anywhere || trick(MM_GBT_FIRELESS))) || hookshot_anywhere"
+    "WARP_SONGS": "true"
   locations:
     "Great Bay Temple Green Pipe 2 Lower Chest": "can_hookshot || (can_use_ice_arrows && can_hookshot_short) || has_hover_boots" #can just jump to the alcove after riding the platform, new trick?
     "Great Bay Temple Green Pipe 2 Upper Chest": "(can_hookshot && can_use_ice_arrows && (can_use_fire_arrows || trick(MM_GBT_FIRELESS))) || short_hook_anywhere || (has_hover_boots && trick(MM_GBT_GREEN2_UPPER_HOVERS))"
@@ -192,6 +206,7 @@
   exits:
     "Great Bay Temple Green Pipe 2": "true"
     "Great Bay Temple Map Room": "((can_use_fire_arrows || trick(MM_GBT_FIRELESS)) && can_use_ice_arrows) || short_hook_anywhere || has_hover_boots"
+    "WARP_SONGS": "true"
   events:
     GB_PIPE_GREEN2: "(can_use_ice_arrows && (can_use_fire_arrows || trick(MM_GBT_FIRELESS))) || short_hook_anywhere || has_hover_boots"
   locations:
@@ -204,6 +219,7 @@
   dungeon: GB
   exits:
     "Great Bay Temple Boss Access": "boss_key(BOSS_KEY_GB) && ((event(GB_PIPE_GREEN) && event(GB_PIPE_GREEN2)) || short_hook_anywhere)"
+    "WARP_SONGS": "true"
   locations:
     "Great Bay Temple SF Pre-Boss Above Water": "can_use_ice_arrows || (has(MASK_GREAT_FAIRY) && (has_arrows || can_hookshot)) || short_hook_anywhere"
     "Great Bay Temple SF Pre-Boss Underwater": "has_mask_zora || (can_use_ice_arrows && (has(MASK_GREAT_FAIRY) || short_hook_anywhere || underwater_walking)) || (underwater_walking && can_hookshot_short)"
@@ -224,6 +240,7 @@
   dungeon: GB
   exits:
     "Great Bay Temple After Boss": "soul_boss(SOUL_BOSS_GYORG) && ((has_magic && ((has_mask_zora && has_arrows) || has(MASK_FIERCE_DEITY))) || (has_iron_boots && has_tunic_zora_strict && can_hookshot_short && trick(MM_GYORG_IRONS)))"
+    "WARP_SONGS": "can_reset_time" #Only relevant when the boss is in an OOT dungeon. Must account for resetting time so that it can be repeated.
   locations:
     "Great Bay Temple Boss Pot 1": "true"
     "Great Bay Temple Boss Pot 2": "true"

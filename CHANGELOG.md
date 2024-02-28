@@ -4,9 +4,29 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+
+- Farore's Wind is now logical for Romani's Song, Aliens, and Cremia Escort.
+- Farore's Wind is now logical for Stock Pot Inn night access.
+- Farore's Wind is now logical to reach the Mountain Village grotto.
+- Farore's Wind is now logical for Hot Spring Water in Snowhead Temple's Eenos room without ER.
+- OOT Warp Songs can now be logically used within MM dungeons.
+- New trick to wait on the roof for Stock Pot Inn to close.
+
+### Changed
+
+- Child Hookshot to get past the Gerudo Valley gate no longer requires Hookshot Anywhere enabled to be in logic.
+- Adjusted MM dungeon access logic to account for the combination of Moon Crash Cycles and Clock Tower ER.
+- Removed the time constraints on Bremen Mask and Doggy Race since those events are always available if you can get in.
+- Removed requirements of meeting Kafei for the Curiosity Shop guy's checks.
+- Stock Pot Inn's toilet hand now requires night 3 or other night inn access when Stock Pot Inn is not shuffled.
+
 ### Fixed
 
+- Fix an issue where the grace period could cause a buggy cycle-reset.
 - Fixed an issue where Strength got removed from logic for King Dodongo, causing bomb bag to be hard-required.
+- Some logic issues involving Shared Din's Fire not being accounted for in some situations.
+- Fixed an issue where logic thought you could get Pendant of Memories after 10pm on night 2.
 
 ## [20.0] - 2024-02-19
 

@@ -1,8 +1,9 @@
 "Stone Tower Temple":
   dungeon: ST
   exits:
-    "Stone Tower Temple Entrance": "cond(setting(erMoon) && trick(MM_MAJORA_LOGIC), (event(MAJORA) && before(NIGHT3_AM_12_00)) || can_play_time, can_reset_time)"
+    "Stone Tower Temple Entrance": "can_reset_time_dungeon"
     "Stone Tower Front of Temple": "true"
+    "WARP_SONGS": "true"
 "Stone Tower Temple Entrance":
   dungeon: ST
   events:
@@ -13,6 +14,7 @@
     "Stone Tower Temple": "true"
     "Stone Tower Temple West": "true"
     "Stone Tower Temple Water Room": "can_use_light_arrows || event(STONE_TOWER_EAST_ENTRY_BLOCK) || short_hook_anywhere"
+    "WARP_SONGS": "true"
   locations:
     "Stone Tower Temple Entrance Chest": "has_arrows"
     "Stone Tower Temple Entrance Switch Chest": "event(STONE_TOWER_ENTRANCE_CHEST_SWITCH)"
@@ -26,11 +28,13 @@
   exits:
     "Stone Tower Temple Entrance": "true"
     "Stone Tower Temple West Garden": "can_play_emptiness && has_mask_goron && (has_explosives || trick_keg_explosives)"
+    "WARP_SONGS": "true"
 "Stone Tower Temple West Garden":
   dungeon: ST
   exits:
     "Stone Tower Temple Under West Garden": "true"
     "Stone Tower Temple Center Ledge": "small_keys_st(4) || (small_keys_st(3) && (has_mask_zora || short_hook_anywhere))"
+    "WARP_SONGS": "true"
   events:
     STONE_TOWER_WEST_GARDEN_LIGHT: "has_explosives"
   locations:
@@ -45,6 +49,7 @@
   exits:
     "Stone Tower Temple West Garden": "true"
     "Stone Tower Temple Under West Garden After Block": "(event(STONE_TOWER_WEST_GARDEN_LIGHT) && has_mirror_shield) || can_use_light_arrows || short_hook_anywhere || (can_hookshot && has_hover_boots && trick(MM_STT_LAVA_BLOCK_HOVERS) && (has_weapon || has_mask_bunny))"
+    "WARP_SONGS": "true"
   locations:
     "Stone Tower Temple Under West Garden Ledge Chest": "can_hookshot || short_hook_anywhere"
     "Stone Tower Temple Pot Lava Room 1": "true"
@@ -53,6 +58,8 @@
     "Stone Tower Temple Pot Lava Room 4": "true"
 "Stone Tower Temple Under West Garden After Block":
   dungeon: ST
+  exits:
+    "WARP_SONGS": "true"
   locations:
     "Stone Tower Temple Under West Garden Lava Chest": "soul_armos && (can_fight || has_explosives)"
     "Stone Tower Temple Map": "true"
@@ -66,6 +73,7 @@
     "Stone Tower Temple West Garden": "small_keys_st(4) || (small_keys_st(3) && has_mask_goron && (has_explosives || trick_keg_explosives) && can_play_emptiness)"
     "Stone Tower Temple Center": "has_mask_zora || soul_enemy(SOUL_ENEMY_DEXIHAND) || (has_tunic_zora && has_iron_boots && can_hookshot) || (has_tunic_zora && has_iron_boots && short_hook_anywhere)"
     "Stone Tower Temple Water Bridge": "(can_goron_bomb_jump && can_use_ice_arrows) || short_hook_anywhere"
+    "WARP_SONGS": "true"
   locations:
     "Stone Tower Temple Center Sun Block Chest": "short_hook_anywhere || (can_goron_bomb_jump && can_use_ice_arrows && can_use_light_arrows) || (((has(MASK_DEKU) || has_explosives || (has_magic && (has_weapon && has(SPIN_UPGRADE))) || has(SWORD, 3) || has(GREAT_FAIRY_SWORD) || can_use_ice_arrows) && (has_mask_zora || soul_enemy(SOUL_ENEMY_DEXIHAND))) && can_use_light_arrows)"
     "Stone Tower Temple Rupee Center Room Left": "can_use_light_arrows || short_hook_anywhere"
@@ -75,6 +83,7 @@
     "Stone Tower Temple Water Room": "underwater_walking || short_hook_anywhere || can_dive_small"
     "Stone Tower Temple Center Ledge": "has_mask_zora"
     "Stone Tower Temple Water Bridge": "(can_goron_bomb_jump && can_use_ice_arrows) || short_hook_anywhere"
+    "WARP_SONGS": "true"
   locations:
     "Stone Tower Temple Center Across Water Chest": "true"
     "Stone Tower Temple Center Sun Block Chest": "((has_mask_zora || (can_goron_bomb_jump && can_use_ice_arrows)) && can_use_light_arrows) || short_hook_anywhere"
@@ -86,6 +95,7 @@
     "Stone Tower Temple Center": "has_mask_zora || (soul_enemy(SOUL_ENEMY_DEXIHAND) && (short_hook_anywhere || can_dive_small || (has_tunic_zora && has_iron_boots))) || (has_tunic_zora && has_iron_boots && (can_hookshot || short_hook_anywhere))"
     "Stone Tower Temple Mirrors Room": "small_keys_st(4)"
     "Stone Tower Temple Entrance": "event(STONE_TOWER_EAST_ENTRY_BLOCK) || short_hook_anywhere"
+    "WARP_SONGS": "true"
   events:
     STONE_TOWER_WATER_CHEST_SWITCH: "underwater_walking"
     STONE_TOWER_EAST_ENTRY_BLOCK: "has_mirror_shield || can_use_light_arrows"
@@ -104,6 +114,7 @@
   dungeon: ST
   exits:
     "Stone Tower Temple Wind Room": "(has_mask_goron && has_mirror_shield) || can_use_light_arrows || short_hook_anywhere"
+    "WARP_SONGS": "true"
   locations:
     "Stone Tower Temple Mirrors Room Center Chest": "(has_mask_goron && has_mirror_shield) || can_use_light_arrows"
     "Stone Tower Temple Mirrors Room Right Chest": "(has_mask_goron && has_mirror_shield) || can_use_light_arrows || short_hook_anywhere"
@@ -113,6 +124,7 @@
   dungeon: ST
   exits:
     "Stone Tower Temple Light Arrow Room": "has(MASK_DEKU) || can_use_light_arrows || (short_hook_anywhere && has_weapon && trick(MM_ST_UPDRAFTS)) || hookshot_anywhere"
+    "WARP_SONGS": "true"
   locations:
     "Stone Tower Temple Wind Room Ledge Chest": "has(MASK_DEKU) || (trick(MM_ST_UPDRAFTS) && (short_hook_anywhere || (has_hover_boots && has_iron_boots))) || hookshot_anywhere"
     "Stone Tower Temple Wind Room Jail Chest": "(has(MASK_DEKU) || can_use_light_arrows || (short_hook_anywhere && has_weapon && trick(MM_ST_UPDRAFTS)) || hookshot_anywhere) && has_mask_goron"
@@ -130,12 +142,14 @@
   dungeon: ST
   exits:
     "Stone Tower Temple Before Water Bridge": "soul_enemy(SOUL_ENEMY_GARO) && (has_weapon || has_mask_goron || can_use_deku_bubble || has_arrows)"
+    "WARP_SONGS": "true"
   locations:
     "Stone Tower Temple Light Arrow": "soul_enemy(SOUL_ENEMY_GARO) && (has_weapon || has_mask_goron || can_use_deku_bubble || has_arrows)"
 "Stone Tower Temple Before Water Bridge":
   dungeon: ST
   exits:
     "Stone Tower Temple Water Bridge": "true"
+    "WARP_SONGS": "true"
   events:
     FAIRY: "true"
   locations:
@@ -162,5 +176,6 @@
     "Stone Tower Temple Entrance": "true"
     "Stone Tower Temple Center": "(can_goron_bomb_jump && (can_use_ice_arrows || soul_enemy(SOUL_ENEMY_DEXIHAND) || has_mask_zora || can_hookshot)) || short_hook_anywhere"
     "Stone Tower Temple Center Ledge": "(can_goron_bomb_jump && (can_use_ice_arrows || has_mask_zora)) || short_hook_anywhere"
+    "WARP_SONGS": "true"
   locations:
     "Stone Tower Temple Water Bridge Chest": "soul_enemy(SOUL_ENEMY_EYEGORE) && (has_explosives || has_arrows || can_hookshot_short || has_mask_zora || has_mask_goron)"

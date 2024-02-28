@@ -115,11 +115,15 @@ export const TRICKS = {
   MM_ISTT_ENTRY_HOVER: "Inverted Stone Tower Temple Death Armos using Hover Boots and Bunny Hood",
   MM_GYORG_POTS_DIVE: "Dive down to the pots in Gyorg's Lair, break the pots with a Blast Mask explosion, and collect the item before it before it lands on the ground.",
   MM_STT_POT_BOMBCHU_DIVE: "Position yourself precisely to launch a Bombchu that breaks the shallow underwater pots, then collect the items with a dive.",
+
   MM_MR_BOULDER_SKIP_CLIMB: "Climb along the wall in Milk Road to get past the boulder on Day 1 without Powder Keg", //placeholder name/description feel free to change if needed -SciNrd
   MM_GBC_GREAT_FAIRY_CLIMB: "Climb up to the ledge where the Fairy Fountain entrance is and climb above the entrance to drop in past the boulders. Have to drop from the wall to work", //see above comment -SciNrd
   MM_ST_CLIMB_ANYWHERE: "Climb Stone Tower anywhere", //Trick to climb the walls of stone tower -SciNrd
   MM_PRECISE_CLIMBING: "Climb anywhere with great precision", //precise climb anywhere trick
   MM_SHT_EARLY_BOSS_CLIMB: "Skip straight to the boss door in Snowhead Temple once in the main room",
+
+  MM_STOCK_POT_WAIT: "Wait outside Stock Pot Inn's roof for closing",
+
 };
 
 export type Trick = keyof typeof TRICKS;
