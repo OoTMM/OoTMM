@@ -537,6 +537,7 @@ void Actor_DrawFaroresWindPointer(GameState_Play* play)
 
             if (alpha < 0)
             {
+                gSave.fw.data = 0;
                 gSaveContext.respawn[RESPAWN_MODE_HUMAN].data = 0;
                 alpha = 0;
             }
