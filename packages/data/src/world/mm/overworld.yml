@@ -311,9 +311,9 @@
     "Honey & Darling Game": "before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || between(DAY3_AM_06_00, NIGHT3_PM_10_00)"
     "Stock Pot Inn": "has(ROOM_KEY) || between(DAY1_AM_08_00, NIGHT1_PM_08_00) || between(DAY2_AM_08_00, NIGHT2_PM_08_00) || after(DAY3_AM_08_00)"
 
-    "Stock Pot Inn Roof": "has(MASK_DEKU) || short_hook_anywhere || has_hover_boots || climb_anywhere" #added climb anywhere
 
-    "Stock Pot Inn Roof": "has(MASK_DEKU) || short_hook_anywhere || has_hover_boots || event(SPI_ROOF_FARORE)"
+
+    "Stock Pot Inn Roof": "has(MASK_DEKU) || short_hook_anywhere || has_hover_boots || event(SPI_ROOF_FARORE) || climb_anywhere" #added climb anywhere"
 
     "Milk Bar": "between(DAY1_AM_10_00, NIGHT1_PM_09_00) || between(DAY2_AM_10_00, NIGHT2_PM_09_00) || between(DAY3_AM_10_00, NIGHT3_PM_09_00) || (has(MASK_ROMANI) && (between(NIGHT1_PM_10_00, NIGHT1_AM_05_00) || between(NIGHT2_PM_10_00, NIGHT2_AM_05_00) || after(NIGHT3_PM_10_00)))"
     "Astral Observatory Passage": "event(BOMBER_CODE) || trick(MM_BOMBER_GUESS) || trick(MM_BOMBER_BACKFLIP) || short_hook_anywhere"
