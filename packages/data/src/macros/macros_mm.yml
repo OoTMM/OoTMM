@@ -158,6 +158,7 @@
 "trick_sht_fireless": "((has_hot_water_distance && has(OWL_SNOWHEAD)) || has_hot_water_er_spring || has_hot_water_farore) && trick(MM_SHT_FIRELESS)"
 "trick_sht_fireless_er": "(has_hot_water_er_spring || has_hot_water_farore) && trick(MM_SHT_FIRELESS)"
 "can_reset_time": "setting(moonCrash, cycle) || can_play_time || (event(MAJORA) && trick(MM_MAJORA_LOGIC) && !is_goal_triforce)"
+"can_reset_time_dungeon": "cond(setting(erMoon), (((trick(MM_MAJORA_LOGIC) && event(MAJORA) && !is_goal_triforce) || setting(moonCrash, cycle)) && (before(NIGHT3_AM_12_00) || can_use_farore || setting(autoInvert, always))) || can_play_time, can_reset_time)"
 "can_reset_time_on_moon": "can_play_time || (event(MAJORA) && trick(MM_MAJORA_LOGIC) && !is_goal_triforce)"
 "has_sticks": "event(STICKS) || renewable(STICK) || renewable(SHARED_STICK) || renewable(SHARED_STICKS_5) || renewable(SHARED_STICKS_10) || (setting(sharedNutsSticks) && event(OOT_STICKS))"
 "has_nuts": "event(NUTS) || renewable(NUT) || renewable(NUTS_5) || renewable(NUTS_10) || renewable(SHARED_NUT) || renewable(SHARED_NUTS_5) || renewable(SHARED_NUTS_10) || (setting(sharedNutsSticks) && event(OOT_NUTS))"

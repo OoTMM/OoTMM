@@ -1,7 +1,7 @@
 "Ocean Spider House":
   dungeon: OSH
   exits:
-    "Ocean Spider House Front": "(has_explosives || trick_keg_explosives) && cond(setting(erMoon) && trick(MM_MAJORA_LOGIC), (event(MAJORA) && before(NIGHT3_AM_12_00)) || can_play_time, can_reset_time)"
+    "Ocean Spider House Front": "(has_explosives || trick_keg_explosives) && can_reset_time_dungeon"
     "Great Bay Coast": "true"
     "SOARING": "can_play_soaring"
   locations:
