@@ -412,9 +412,9 @@
   exits:
     "Laundry Pool": "true"
   events:
-    MEET_KAFEI: "event(MAIL_LETTER) && between(DAY2_PM_02_00, DAY3_AM_06_00)"
+    MEET_KAFEI: "event(MAIL_LETTER) && between(DAY2_PM_02_00, NIGHT2_PM_10_00)"
   locations:
-    "Kafei Hideout Pendant of Memories": "event(MAIL_LETTER) && (between(DAY2_PM_02_00, DAY3_AM_06_00) || (after(DAY2_PM_02_00) && (event(SAKON_BOMB_BAG) || event(SAKON_BOOM))))"
+    "Kafei Hideout Pendant of Memories": "event(MAIL_LETTER) && between(DAY2_PM_02_00, NIGHT2_PM_10_00)"
     "Kafei Hideout Owner Reward 1": "between(DAY3_AM_06_00, NIGHT3_PM_10_00)"
     "Kafei Hideout Owner Reward 2": "between(DAY3_AM_06_00, NIGHT3_PM_10_00)"
 "Post Office":
