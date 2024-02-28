@@ -2,8 +2,8 @@
   dungeon: BtW
   exits:
     "Ikana Canyon": "true"
-    "Beneath The Well North Section": "can_pass_gibdo && has_blue_potion && cond(setting(erMoon) && trick(MM_MAJORA_LOGIC), (event(MAJORA) && before(NIGHT3_AM_12_00)) || can_play_time, can_reset_time)"
-    "Beneath The Well East Section": "can_pass_gibdo && has_beans && cond(setting(erMoon) && trick(MM_MAJORA_LOGIC), (event(MAJORA) && before(NIGHT3_AM_12_00)) || can_play_time, can_reset_time)"
+    "Beneath The Well North Section": "can_pass_gibdo && has_blue_potion && can_reset_time_dungeon"
+    "Beneath The Well East Section": "can_pass_gibdo && has_beans && can_reset_time_dungeon"
     "SOARING": "can_play_soaring"
 "Beneath The Well Wallmaster Near Entrance":
   region: NONE
@@ -127,6 +127,6 @@
 "Beneath The Well End":
   dungeon: BtWE
   exits:
-    "Beneath The Well Sun Block": "can_use_light_arrows && cond(setting(erMoon) && trick(MM_MAJORA_LOGIC), (event(MAJORA) && before(NIGHT3_AM_12_00)) || can_play_time, can_reset_time)"
+    "Beneath The Well Sun Block": "can_use_light_arrows && can_reset_time_dungeon"
     "Ikana Castle Exterior": "true"
     "SOARING": "can_play_soaring"

@@ -1,7 +1,7 @@
 "Snowhead Temple":
   dungeon: SH
   exits:
-    "Snowhead Temple Entrance": "can_reset_time && cond(setting(erMoon), before(NIGHT3_AM_12_00), true)"
+    "Snowhead Temple Entrance": "can_reset_time_dungeon"
     "Snowhead": "true"
 "Snowhead Temple Entrance":
   dungeon: SH
@@ -237,7 +237,7 @@
   dungeon: SH
   exits:
     "Snowhead Temple Center Level 3 Snow": "true"
-    "Snowhead Temple Dinolfos Room": "can_use_fire_short_range || trick_sht_fireless_er"
+    "Snowhead Temple Dinolfos Room": "can_use_fire_short_range || trick_sht_fireless_er || (trick_sht_fireless && can_use_farore)"
   locations:
     "Snowhead Temple SF Snow Room": "can_use_lens && (((has_arrows || can_hookshot_short) && has(MASK_GREAT_FAIRY)) || short_hook_anywhere)"
 "Snowhead Temple Dinolfos Room":
