@@ -240,6 +240,7 @@
   dungeon: GB
   exits:
     "Great Bay Temple After Boss": "soul_boss(SOUL_BOSS_GYORG) && ((has_magic && ((has_mask_zora && has_arrows) || has(MASK_FIERCE_DEITY))) || (has_iron_boots && has_tunic_zora_strict && can_hookshot_short && trick(MM_GYORG_IRONS)))"
+    "WARP_SONGS": "can_reset_time" #Only relevant when the boss is in an OOT dungeon. Must account for resetting time so that it can be repeated.
   locations:
     "Great Bay Temple Boss Pot 1": "true"
     "Great Bay Temple Boss Pot 2": "true"

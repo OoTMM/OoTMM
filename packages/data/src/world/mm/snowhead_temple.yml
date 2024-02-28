@@ -311,7 +311,7 @@
     ARROWS: "true"
   exits:
     "Snowhead Temple After Boss": "soul_boss(SOUL_BOSS_GOHT) && can_use_fire_short_range"
-    "WARP_SONGS": "true"
+    "WARP_SONGS": "can_reset_time" #Only relevant when the boss is in an OOT dungeon. Must account for resetting time so that it can be repeated.
   locations:
     "Snowhead Temple Boss Pot Early 1": "true"
     "Snowhead Temple Boss Pot Early 2": "true"
