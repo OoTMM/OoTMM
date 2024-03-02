@@ -91,7 +91,7 @@
 "can_play_goron_half": "has_ocarina && has_goron_song_half && ocarina_button_a && ocarina_button_right && ocarina_button_left"
 "can_play_goron": "has_ocarina && has_goron_song && ocarina_button_a && ocarina_button_right && ocarina_button_left"
 "can_play_zora": "can_play(SONG_ZORA) && ocarina_button_left && ocarina_button_right && ocarina_button_up && ocarina_button_down"
-"can_play_emptiness": "can_play(SONG_EMPTINESS) && ocarina_button_left && ocarina_button_right && ocarina_button_up && ocarina_button_down"
+"can_play_emptiness": "has_ocarina && has_elegy_raw && ocarina_button_left && ocarina_button_right && ocarina_button_up && ocarina_button_down"
 "can_play_order": "can_play(SONG_ORDER) && ocarina_button_right && ocarina_button_down && ocarina_button_up && ocarina_button_a"
 
 "can_play_evan": "has_ocarina && ocarina_button_a && ocarina_button_right && ocarina_button_down && ocarina_button_left"

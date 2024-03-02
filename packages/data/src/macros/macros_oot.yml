@@ -44,6 +44,8 @@
 "can_play_tp_shadow": "can_play(SONG_TP_SHADOW) && ocarina_button_a && ocarina_button_right && ocarina_button_down && ocarina_button_left"
 "can_play_tp_spirit": "can_play(SONG_TP_SPIRIT) && ocarina_button_a && ocarina_button_right && ocarina_button_down"
 
+"can_play_elegy": "has_ocarina && has_elegy_raw && ocarina_button_down && ocarina_button_left && ocarina_button_right && ocarina_button_up"
+
 "can_play_minigame": "has_ocarina && ocarina_button_a && ocarina_button_right && ocarina_button_down && ocarina_button_left && ocarina_button_up"
 "can_play_scarecrow": "has_ocarina && ocarina_button_any2"
 

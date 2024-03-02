@@ -30,7 +30,7 @@ typedef struct {
     /* 0x10 */ u32 vramEnd;
     /* 0x14 */ u8 pad14[0x4];
     /* 0x18 */ char* filename;
-} PlayerOverlay; // size = 0x1C
+} PlayerOverlay; /* size = 0x1C */
 
 _Static_assert(sizeof(PlayerOverlay) == 0x1C, "PlayerOverlay size is wrong");
 

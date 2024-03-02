@@ -1,7 +1,5 @@
 #include <combo.h>
 
-u8 gCustomOcarinaSong = 0;
-
 void comboCheckSong(const OcarinaSongButtons* songButtons, int songIndex)
 {
     u32 pitch;
@@ -26,11 +24,6 @@ void comboCheckSong(const OcarinaSongButtons* songButtons, int songIndex)
         gIsOcarinaEnabled = 0;
         gOcarinaFlags = 0;
 
-#if defined(GAME_OOT)
-        gPlayedOcarinaSong = 1;
-        gCustomOcarinaSong = songIndex + 1;
-#else
         gPlayedOcarinaSong = songIndex + 0x80 + 1;
-#endif
     }
 }

@@ -195,3 +195,9 @@ PATCH_START 0x8007b8b8
    nop
   nop
 PATCH_END
+
+PATCH_START 0x80079848
+  lw      a0,0x18(sp)
+  j       Player_AfterSetEquipmentData
+   addiu  sp,0x18
+PATCH_END

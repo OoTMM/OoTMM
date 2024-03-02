@@ -97,6 +97,7 @@ const SHARED_ITEMS_OOT = new Map([
   ['SHARED_SCALE',            'OOT_SCALE'],
   ['SHARED_STRENGTH',         'OOT_STRENGTH'],
   ['SHARED_TRAP_RUPOOR',      'OOT_TRAP_RUPOOR'],
+  ['SHARED_SONG_EMPTINESS',   'OOT_SONG_EMPTINESS'],
 ]);
 
 const SHARED_ITEMS_MM = new Map([
@@ -166,6 +167,7 @@ const SHARED_ITEMS_MM = new Map([
   ['SHARED_SCALE',            'MM_SCALE'],
   ['SHARED_STRENGTH',         'MM_STRENGTH'],
   ['SHARED_TRAP_RUPOOR',      'MM_TRAP_RUPOOR'],
+  ['SHARED_SONG_EMPTINESS',   'MM_SONG_EMPTINESS'],
 ]);
 
 const SHARED_ITEMS = {
@@ -826,6 +828,8 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     SHARED_MASK_BLAST: settings.sharedMaskBlast,
     OOT_MASK_STONE: settings.stoneMaskOot,
     SHARED_MASK_STONE: settings.sharedMaskStone,
+    OOT_SONG_EMPTINESS: settings.elegyOot,
+    SHARED_SONG_EMPTINESS: settings.sharedSongElegy,
     MM_FD_ANYWHERE: settings.fierceDeityAnywhere,
     MM_CLOCK_SPEED_VERYSLOW: settings.clockSpeed === 'veryslow',
     MM_CLOCK_SPEED_SLOW: settings.clockSpeed === 'slow',

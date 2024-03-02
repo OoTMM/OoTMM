@@ -68,12 +68,12 @@ union SongStateResults {
 u32 SongState_HandlePlayback(GameState_Play* play, MessageContext* msgCtxt) {
     s8 song = msgCtxt->songInfo->frameInfo[0].storedSong;
     if (song == 3) {
-        // Process state for Elegy of Emptiness
-        // Disable sfx being "dampened" (normally action 0x17 would do this before advancing to 0x18)
+        /* Process state for Elegy of Emptiness */
+        /* Disable sfx being "dampened" (normally action 0x17 would do this before advancing to 0x18) */
         AudioOcarina_SetInstrument(0);
-        // Code for action 0x18 will stop early unless this value is 0x32.
-        // msgCtxt->unk202C = 0x32;
-        // Skip past song playback & message box, to state 0x18
+        /* Code for action 0x18 will stop early unless this value is 0x32. */
+        /* msgCtxt->unk202C = 0x32; */
+        /* Skip past song playback & message box, to state 0x18 */
         union SongStateResults results = {
             .action = 0x18,
             .unk1F0A = 3,
@@ -81,7 +81,7 @@ u32 SongState_HandlePlayback(GameState_Play* play, MessageContext* msgCtxt) {
         };
         return results.value;
     } else {
-        // Vanilla behavior, prepare for song playback.
+        /* Vanilla behavior, prepare for song playback. */
         union SongStateResults results = {
             .action = 0x12,
             .unk1F0A = 3,

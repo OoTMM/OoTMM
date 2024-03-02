@@ -1301,6 +1301,13 @@ export const SETTINGS = [{
   description: "Add the Stone Mask in Ocarina of Time.",
   default: false
 }, {
+  key: 'elegyOot',
+  name: "Elegy of Emptiness (OoT)",
+  category: 'items.extensions',
+  type: 'boolean',
+  description: "Add the Elegy of Emptiness in Ocarina of Time.",
+  default: false
+}, {
   key: 'ocarinaButtonsShuffleOot',
   name: 'Ocarina Buttons Shuffle (OoT)',
   category: 'items.extensions',
@@ -1553,6 +1560,13 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false,
   cond: (s: any) => s.stoneMaskOot,
+}, {
+  key: 'sharedSongElegy',
+  name: 'Shared Elegy of Emptiness',
+  category: 'items.shared',
+  type: 'boolean',
+  default: false,
+  cond: (s: any) => s.elegyOot,
 }, {
   key: 'sharedWallets',
   name: 'Shared Wallets',

@@ -12,13 +12,13 @@ static void debugCheat(GameState_Play* play)
 #if defined(DEBUG)
     if (!gSaveContext.gameMode && play->gs.input[0].current.buttons & L_TRIG)
     {
-        //MM_SET_EVENT_WEEK(EV_MM_WEEK_DRANK_CHATEAU_ROMANI);
+        /*MM_SET_EVENT_WEEK(EV_MM_WEEK_DRANK_CHATEAU_ROMANI); */
         SetEventChk(EV_OOT_CHK_MASTER_SWORD_PULLED);
         SetEventChk(EV_OOT_CHK_MASTER_SWORD_CHAMBER);
         gSave.playerData.swordHealth = 8;
         gSave.isBiggoronSword = 1;
 
-        //gSave.inventory.quest.gerudoCard = 1;
+        /*gSave.inventory.quest.gerudoCard = 1; */
         gSave.inventory.dungeonKeys[SCE_OOT_TEMPLE_FIRE] = 8;
         gSave.inventory.dungeonKeys[SCE_OOT_TREASURE_SHOP] = 6;
         gSave.inventory.items[ITS_OOT_STICKS] = ITEM_OOT_STICK;
@@ -51,15 +51,15 @@ static void debugCheat(GameState_Play* play)
 
         gSave.inventory.upgrades.dekuStick = 3;
         gSave.inventory.upgrades.dekuNut = 3;
-        //gSave.inventory.upgrades.bulletBag = 3;
+        /*gSave.inventory.upgrades.bulletBag = 3; */
         gSave.inventory.upgrades.bombBag = 3;
         gSave.inventory.upgrades.quiver = 3;
         gSave.inventory.upgrades.dive = 2;
-        //gSave.inventory.upgrades.wallet = 3;
+        /*gSave.inventory.upgrades.wallet = 3; */
         gSave.inventory.upgrades.strength = 3;
-        //gOotExtraFlags.bottomlessWallet = 1;
-        //gOotMaxRupees[3] = 9999;
-        //gWalletDigits[3] = 4;
+        /*gOotExtraFlags.bottomlessWallet = 1; */
+        /*gOotMaxRupees[3] = 9999; */
+        /*gWalletDigits[3] = 4; */
 
         gSave.inventory.ammo[ITS_OOT_STICKS] = 10;
         gSave.inventory.ammo[ITS_OOT_SLINGSHOT] = 50;
@@ -118,12 +118,14 @@ static void debugCheat(GameState_Play* play)
         gSave.equips.buttonItems[1] = ITEM_OOT_MASK_STONE;
         gSave.equips.cButtonSlots[0] = ITS_OOT_TRADE_CHILD;
 
+        gCustomSave.hasElegy = 1;
+
 
 #if defined(DEBUG_AGE)
         gSave.age = DEBUG_AGE;
 #endif
 
-        //BITMAP16_SET(gSave.eventsMisc, EV_OOT_INF_KING_ZORA_THAWED);
+        /*BITMAP16_SET(gSave.eventsMisc, EV_OOT_INF_KING_ZORA_THAWED); */
     }
 #endif
 }

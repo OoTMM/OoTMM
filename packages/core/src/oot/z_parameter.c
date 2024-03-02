@@ -87,9 +87,9 @@ void Magic_UpdateCustom(GameState_Play* play)
 {
     if (comboIsChateauActive())
     {
-        // R_MAGIC_FILL_COLOR(0) = 0; // Red
-        R_MAGIC_FILL_COLOR(1) = 0; // Green
-        R_MAGIC_FILL_COLOR(2) = 200; // Blue
+        /* R_MAGIC_FILL_COLOR(0) = 0; // Red */
+        R_MAGIC_FILL_COLOR(1) = 0; /* Green */
+        R_MAGIC_FILL_COLOR(2) = 200; /* Blue */
         Magic_FlashMeterBorder();
         switch (gSaveContext.magicState) {
             case MAGIC_STATE_CONSUME:
@@ -101,14 +101,14 @@ void Magic_UpdateCustom(GameState_Play* play)
     }
     else
     {
-        // R_MAGIC_FILL_COLOR(0) = 0; // Red
-        R_MAGIC_FILL_COLOR(1) = 200; // Green
-        R_MAGIC_FILL_COLOR(2) = 0; // Blue
+        /* R_MAGIC_FILL_COLOR(0) = 0; // Red */
+        R_MAGIC_FILL_COLOR(1) = 200; /* Green */
+        R_MAGIC_FILL_COLOR(2) = 0; /* Blue */
     }
     Magic_Update(play);
 }
 
-PATCH_CALL(0x80832578, Magic_RequestChangeCustom) // Player - Magic Arrows
-PATCH_CALL(0x808FF258, Magic_RequestChangeCustom) // Spin Attack - Weird Check in Initializer
+PATCH_CALL(0x80832578, Magic_RequestChangeCustom) /* Player - Magic Arrows */
+PATCH_CALL(0x808FF258, Magic_RequestChangeCustom) /* Spin Attack - Weird Check in Initializer */
 
 PATCH_CALL(0x80078B78, Magic_UpdateCustom)
