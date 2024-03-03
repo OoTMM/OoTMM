@@ -77,6 +77,7 @@ const BLITZ_BASE: PartialDeep<Settings> = {
   elegyOot: true,
   sharedMaskBlast: true,
   sharedMaskStone: true,
+  sharedSongElegy: true,
   agelessChildTrade: true,
   scalesMm: true,
   strengthMm: true,
