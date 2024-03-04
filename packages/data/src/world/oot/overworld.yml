@@ -1481,7 +1481,7 @@
   time: flow
   exits:
     "Zora River Front": "true"
-    "Zora Domain": "can_play_zelda || hookshot_anywhere || (is_child && trick(OOT_DOMAIN_CUCCO)) || (has_hover_boots && trick(OOT_DOMAIN_HOVER))"
+    "Zora River Behind Falls": "can_play_zelda || (trick(OOT_ZR_FALLS_HOOK) && hookshot_anywhere) || (trick(OOT_DOMAIN_CUCCO) && is_child) || (trick(OOT_DOMAIN_HOVER) && has_hover_boots)"
     "Lost Woods": "can_dive_small || hookshot_anywhere"
     "Zora River Storms Grotto": "hidden_grotto_storms"
     "Zora River Open Grotto": "true"
@@ -1509,6 +1509,12 @@
   gossip:
     "Zora River Gossip High Pillar": "true"
     "Zora River Gossip Near Domain": "true"
+"Zora River Behind Falls":
+  region: ZORA_RIVER
+  time: flow
+  exits:
+    "Zora River": "true"
+    "Zora Domain": "true"
 "Zora River Storms Grotto":
   region: ENTRANCE
   age_change: false
@@ -1554,7 +1560,7 @@
 "Zora Domain":
   region: ZORA_DOMAIN
   exits:
-    "Zora River": "true"
+    "Zora River Behind Falls": "true"
     "Lake Hylia": "is_child && (can_dive_small || longshot_anywhere || (trick(OOT_LAKE_SHORTCUT) && hookshot_anywhere))"
     "Zora Domain Back": "king_zora_moved || (is_adult && trick(OOT_KZ_SKIP)) || climb_anywhere || hookshot_anywhere"
     "Zora Shop": "is_child || has_blue_fire"

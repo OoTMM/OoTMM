@@ -24,6 +24,7 @@ All notable changes to this project will be documented in this file.
 - Stock Pot Inn's toilet hand now requires night 3 or other night inn access when Stock Pot Inn is not shuffled.
 - Make Zora Hall stage lights with Din's Fire a trick.
 - Make resetting time with Farore's Wind for Evan a trick.
+- Hookshot Anywhere to go behind the waterfall in Zora's River is now a trick.
 
 ### Fixed
 

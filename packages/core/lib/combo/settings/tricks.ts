@@ -39,6 +39,7 @@ export const TRICKS = {
   OOT_WATER_PIT_GS_CHU: "Water Temple Large Pit GS with Bombchu",
   OOT_SHADOW_BOAT_EARLY: "Reach Shadow Temple Boat with Climb Anywhere",
   OOT_SPIRIT_BOSS_CLIMB_NO_HOOK: "Reach Twinrova using Climb Anywhere and Hover Boots",
+  OOT_ZR_FALLS_HOOK: "Use Hookshot Anywhere to get past the Zora's River Waterfall",
   OOT_DC_BOULDER: "Skip Dodongo Cavern's Boulder using Ageless Hookshot Anywhere",
   OOT_LAKE_SHORTCUT: "Move Between Lake Hylia and Zora's Domain with Ageless Hookshot Anywhere",
   OOT_JJB_BOXLESS: "Access Jabu-Jabu pre-boss without the box",
