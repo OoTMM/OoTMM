@@ -187,7 +187,7 @@
 #Specialty Macros
 "met_zelda": "event(MEET_ZELDA) || setting(skipZelda)"
 "woke_talon_child": "event(TALON_CHILD) || setting(skipZelda)"
-"has_fire_spirit_ageless": "has_magic && ((has_arrows && (has(ARROW_FIRE) || has(SHARED_ARROW_FIRE)) && has_sticks) || can_use_din) && cond(climb_anywhere, (has_explosives && can_reflect_light) || small_keys_spirit(3), has_explosives || small_keys_spirit(2))"
+"has_fire_spirit_ageless": "has_magic && ((has_arrows && (has(ARROW_FIRE) || has(SHARED_ARROW_FIRE)) && has_sticks) || can_use_din) && cond(climb_anywhere_spirit, (has_explosives && can_reflect_light) || small_keys_spirit(3), has_explosives || small_keys_spirit(2))"
 "has_fire_spirit": "(time_travel_at_will && has_fire_or_sticks) || has_fire_spirit_ageless"
 "has_ranged_weapon_both_ageless": "has_explosives || (((has(SLINGSHOT) && (event(SEEDS) || renewable(DEKU_SEEDS_30))) || has(BOOMERANG)) && (has_hookshot(1) || has_arrows))"
 "has_ranged_weapon_both": "(time_travel_at_will && has_ranged_weapon) || has_ranged_weapon_both_ageless"
@@ -272,9 +272,9 @@
 "soul_enemy(x)": "(!setting(soulsEnemyOot)) || has(x)"
 "soul_boss(x)": "(!setting(soulsBossOot)) || has(x)"
 "soul_npc(x)": "(!setting(soulsNpcOot)) || has(x)"
-"climb_anywhere": "setting(climbMostSurfacesOot)"
-"hookshot_anywhere": "can_hookshot && setting(hookshotAnywhereOot)"
-"longshot_anywhere": "can_longshot && setting(hookshotAnywhereOot)"
+"climb_anywhere": "setting(climbMostSurfacesOot, logical)"
+"hookshot_anywhere": "can_hookshot && setting(hookshotAnywhereOot, logical)"
+"longshot_anywhere": "can_longshot && setting(hookshotAnywhereOot, logical)"
 "evade_gerudo": "can_use_bow || can_hookshot || has(GERUDO_CARD) || can_use_mask_stone"
 
 # Events

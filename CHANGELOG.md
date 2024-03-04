@@ -14,6 +14,8 @@ All notable changes to this project will be documented in this file.
 - New trick to wait on the roof for Stock Pot Inn to close.
 - Add tricks for using Farore's Wind and resetting time to get the Romani Ranch checks.
 - Hover Boots are now accounted for getting Letter to Kafei and Toilet Hand in Stock Pot Inn.
+- Hookshot Anywhere for both games and Climb Anywhere for OOT can now be enabled without logical implications.
+- - Key logic for Forest, Shadow, and Spirit Temples still accounts for the above settings whether they are logical or not.
 
 ### Changed
 

@@ -243,5 +243,5 @@
 # Misc
 "soul_enemy(x)": "(!setting(soulsEnemyMm)) || has(x)"
 "soul_boss(x)": "(!setting(soulsBossMm)) || has(x)"
-"short_hook_anywhere": "can_hookshot_short && setting(hookshotAnywhereMm)"
-"hookshot_anywhere": "can_hookshot && setting(hookshotAnywhereMm)"
+"short_hook_anywhere": "can_hookshot_short && setting(hookshotAnywhereMm, logical)"
+"hookshot_anywhere": "can_hookshot && setting(hookshotAnywhereMm, logical)"

@@ -959,6 +959,18 @@ export const SETTINGS = [{
   ],
   default: 'default'
 }, {
+  key: 'autoInvert',
+  name: 'Auto-Invert Time (MM)',
+  category: 'main.misc',
+  type: 'enum',
+  description: 'Auto-inverts time at the start of a cycle',
+  values: [
+    { value: 'never', name: 'Never' },
+    { value: 'firstCycle', name: 'First Cycle' },
+    { value: 'always', name: 'Always' },
+  ],
+  default: 'never'
+}, {
   key: 'fierceDeityAnywhere',
   name: 'Fierce Deity Anywhere in MM',
   category: 'main.misc',
@@ -969,23 +981,38 @@ export const SETTINGS = [{
   key: 'hookshotAnywhereOot',
   name: 'Hookshot Anywhere (OoT)',
   category: 'main.misc',
-  type: 'boolean',
-  description: 'Modifies all surfaces to be hooked onto',
-  default: false
+  type: 'enum',
+  description: 'Modifies all surfaces to be hooked onto and if it is expected in logic',
+  values: [
+    { value: 'off', name: 'Off' },
+    { value: 'enabled', name: 'On' },
+    { value: 'logical', name: 'Logical' },
+  ],
+  default: 'off'
 }, {
   key: 'hookshotAnywhereMm',
   name: 'Hookshot Anywhere (MM)',
   category: 'main.misc',
-  type: 'boolean',
-  description: 'Modifies all surfaces to be hooked onto',
-  default: false
+  type: 'enum',
+  description: 'Modifies all surfaces to be hooked onto and if it is expected in logic',
+  values: [
+    { value: 'off', name: 'Off' },
+    { value: 'enabled', name: 'On' },
+    { value: 'logical', name: 'Logical' },
+  ],
+  default: 'off'
 }, {
   key: 'climbMostSurfacesOot',
   name: 'Climb Most Surfaces (OoT)',
   category: 'main.misc',
-  type: 'boolean',
-  description: 'Modifies most surface to be climbable',
-  default: false
+  type: 'enum',
+  description: 'Modifies most surface to be climbable and if it is expected in logic',
+  values: [
+    { value: 'off', name: 'Off' },
+    { value: 'enabled', name: 'On' },
+    { value: 'logical', name: 'Logical' },
+  ],
+  default: 'off'
 }, {
   key: 'climbMostSurfacesMm',
   name: 'Climb Most Surfaces (MM)',
@@ -1035,18 +1062,6 @@ export const SETTINGS = [{
   type: 'boolean',
   description: 'In vanilla OoT, various code only checks for transitionTrigger, but in MM it also checks for transitionMode. When this is on, MM will no longer check transitionMode in those circumstances.',
   default: false
-}, {
-  key: 'autoInvert',
-  name: 'Auto-Invert Time (MM)',
-  category: 'main.misc',
-  type: 'enum',
-  description: 'Auto-inverts time at the start of a cycle',
-  values: [
-    { value: 'never', name: 'Never' },
-    { value: 'firstCycle', name: 'First Cycle' },
-    { value: 'always', name: 'Always' },
-  ],
-  default: 'never'
 }, {
   key: 'fillWallets',
   name: 'Fill Wallets',
