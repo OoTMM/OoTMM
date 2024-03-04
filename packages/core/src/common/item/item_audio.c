@@ -168,6 +168,7 @@ void comboPlayItemFanfare(s16 gi, int isShort)
     case GI_MM_SONG_ZORA:
         fanfare = FANFARE_SONG_ZORA;
         break;
+    case GI_OOT_SONG_EMPTINESS:
     case GI_MM_SONG_EMPTINESS:
         fanfare = FANFARE_SONG_EMPTINESS;
         break;
