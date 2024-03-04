@@ -26,10 +26,10 @@ export type BuildPatchfileIn = {
 
 function asmPatchGroups(world: World, settings: Settings) {
   const groups: {[k in PatchGroup]: boolean} = {
-    OOT_HOOKSHOT_ANYWHERE: settings.hookshotAnywhereOot,
-    OOT_CLIMB_ANYWHERE: settings.climbMostSurfacesOot,
+    OOT_HOOKSHOT_ANYWHERE: settings.hookshotAnywhereOot !== 'off',
+    OOT_CLIMB_ANYWHERE: settings.climbMostSurfacesOot !== 'off',
     MM_FD_ANYWHERE: settings.fierceDeityAnywhere,
-    MM_HOOKSHOT_ANYWHERE: settings.hookshotAnywhereMm,
+    MM_HOOKSHOT_ANYWHERE: settings.hookshotAnywhereMm !== 'off',
     MM_BLAST_MASK_DELAY_INSTANT: settings.blastMaskCooldown === 'instant',
     MM_BLAST_MASK_DELAY_VERYSHORT: settings.blastMaskCooldown === 'veryshort',
     MM_BLAST_MASK_DELAY_SHORT: settings.blastMaskCooldown === 'short',
