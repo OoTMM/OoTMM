@@ -981,11 +981,6 @@ export const SETTINGS = [{
   key: 'hookshotAnywhereOot',
   name: 'Hookshot Anywhere (OoT)',
   category: 'main.misc',
-
-  type: 'boolean',
-  description: 'Modifies all surfaces in OoT to be hooked onto',
-  default: false,
-
   type: 'enum',
   description: 'Modifies all surfaces to be hooked onto and if it is expected in logic',
   values: [
@@ -994,16 +989,10 @@ export const SETTINGS = [{
     { value: 'logical', name: 'Logical' },
   ],
   default: 'off'
-
 }, {
   key: 'hookshotAnywhereMm',
   name: 'Hookshot Anywhere (MM)',
   category: 'main.misc',
-
-  type: 'boolean',
-  description: 'Modifies all surfaces in MM to be hooked onto',
-  default: false,
-
   type: 'enum',
   description: 'Modifies all surfaces to be hooked onto and if it is expected in logic',
   values: [
@@ -1012,16 +1001,10 @@ export const SETTINGS = [{
     { value: 'logical', name: 'Logical' },
   ],
   default: 'off'
-
 }, {
   key: 'climbMostSurfacesOot',
   name: 'Climb Most Surfaces (OoT)',
   category: 'main.misc',
-
-  type: 'boolean',
-  description: 'Modifies most surfaces in OoT to be climbable',
-  default: false,
-
   type: 'enum',
   description: 'Modifies most surface to be climbable and if it is expected in logic',
   values: [
@@ -1030,7 +1013,6 @@ export const SETTINGS = [{
     { value: 'logical', name: 'Logical' },
   ],
   default: 'off'
-
 }, {
   key: 'climbMostSurfacesMm',
   name: 'Climb Most Surfaces (MM)',
