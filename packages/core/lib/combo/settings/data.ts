@@ -984,7 +984,7 @@ export const SETTINGS = [{
 
   type: 'boolean',
   description: 'Modifies all surfaces in OoT to be hooked onto',
-  default: false
+  default: false,
 
   type: 'enum',
   description: 'Modifies all surfaces to be hooked onto and if it is expected in logic',
@@ -1002,7 +1002,7 @@ export const SETTINGS = [{
 
   type: 'boolean',
   description: 'Modifies all surfaces in MM to be hooked onto',
-  default: false
+  default: false,
 
   type: 'enum',
   description: 'Modifies all surfaces to be hooked onto and if it is expected in logic',
@@ -1020,7 +1020,7 @@ export const SETTINGS = [{
 
   type: 'boolean',
   description: 'Modifies most surfaces in OoT to be climbable',
-  default: false
+  default: false,
 
   type: 'enum',
   description: 'Modifies most surface to be climbable and if it is expected in logic',
