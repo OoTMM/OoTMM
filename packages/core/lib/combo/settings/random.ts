@@ -293,6 +293,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
   }
 
   base.sunSongMm = booleanWeighted(random, 0.5);
+  base.elegyOot = booleanWeighted(random, 0.5);
   base.csmc = sampleWeighted(random, { always: 18, agony: 1, never: 1 });
   if (base.csmc !== 'never') {
     base.csmcHearts = booleanWeighted(random, 0.75);
@@ -369,6 +370,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
     base.sharedSongStorms = true;
     base.sharedSongTime = true;
     base.sharedSongSun = true;
+    base.sharedSongElegy = true;
     base.sharedHookshot = true;
     base.sharedLens = true;
     base.sharedOcarina = true;
@@ -481,12 +483,14 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
       base.sharedSongStorms = true;
       base.sharedSongTime = true;
       base.sharedSongSun = true;
+      base.sharedSongElegy = true;
       break;
     default:
       base.sharedSongEpona = booleanWeighted(random, 0.5);
       base.sharedSongStorms = booleanWeighted(random, 0.5);
       base.sharedSongTime = booleanWeighted(random, 0.5);
       base.sharedSongSun = booleanWeighted(random, 0.5);
+      base.sharedSongElegy = booleanWeighted(random, 0.5);
       break;
     }
 

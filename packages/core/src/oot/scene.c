@@ -1,8 +1,8 @@
 #include <combo.h>
 
 static EntranceTableEntry defaultEntrance = {
-    0, // Deku Tree
-    0, // From Entrance
+    0, /* Deku Tree */
+    0, /* From Entrance */
     TRANS_TYPE_FADE_BLACK
 };
 

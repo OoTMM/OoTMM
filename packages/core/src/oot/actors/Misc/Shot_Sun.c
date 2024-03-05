@@ -42,7 +42,7 @@ void ShotSun_InitWrapper(Actor_ShotSun* this, GameState_Play* play)
     ActorCallback init;
     u16 variable = this->base.variable & 0xFF;
 
-    // Fairy Spawner
+    /* Fairy Spawner */
     if (variable == 0x40 || variable == 0x41) {
         ShotSun_Aliases(this, play);
     }

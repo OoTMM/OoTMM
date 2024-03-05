@@ -28,14 +28,14 @@
     "MQ Jabu-Jabu Second Room 1F Chest": "can_use_slingshot && (has_hover_boots || can_hookshot || event(JABU_BIG_OCTO))"
     "MQ Jabu-Jabu Third Room West Chest": "can_use_slingshot && (is_child || (is_adult && can_dive_small))" #Future-proofing this for eventual ageless bow and slingshot. Adult cannot dive to the alcove without a scale.
     "MQ Jabu-Jabu Third Room East Chest": "can_use_slingshot && (is_child || (is_adult && can_dive_small))" #Future-proofing this for eventual ageless bow and slingshot. Adult cannot dive to the alcove without a scale.
-    "MQ Jabu-Jabu SoT Room Lower Chest": "soul_npc(SOUL_NPC_RUTO) && (is_child || (is_adult && can_dive_small))" #Future-proofing this for eventual ageless bow and slingshot. Adult cannot dive to the alcove without a scale.
-    "MQ Jabu-Jabu Boomerang Chest": "soul_npc(SOUL_NPC_RUTO) && soul_lizalfos_dinalfos && soul_like_like && soul_enemy(SOUL_ENEMY_STINGER)" #You will always have an acceptable weapon for this.
-    "MQ Jabu-Jabu GS SoT Block": "soul_npc(SOUL_NPC_RUTO) && can_play_time && (is_child || (is_adult && can_dive_small))" #Future-proofing this for eventual ageless bow and slingshot. Adult cannot dive to the alcove without a scale.
+    "MQ Jabu-Jabu SoT Room Lower Chest": "(soul_npc(SOUL_NPC_RUTO) || can_play_elegy) && (is_child || (is_adult && can_dive_small))" #Future-proofing this for eventual ageless bow and slingshot. Adult cannot dive to the alcove without a scale.
+    "MQ Jabu-Jabu Boomerang Chest": "(soul_npc(SOUL_NPC_RUTO) || can_play_elegy) && soul_lizalfos_dinalfos && soul_like_like && soul_enemy(SOUL_ENEMY_STINGER)" #You will always have an acceptable weapon for this.
+    "MQ Jabu-Jabu GS SoT Block": "(soul_npc(SOUL_NPC_RUTO) || can_play_elegy) && can_play_time && (is_child || (is_adult && can_dive_small))" #Future-proofing this for eventual ageless bow and slingshot. Adult cannot dive to the alcove without a scale.
     "MQ Jabu-Jabu Cow": "can_play_epona && event(JABU_BIG_OCTO) && can_use_slingshot"
     "MQ Jabu-Jabu Pot Underwater Alcove 1": "is_child || (is_adult && can_dive_small)" #Future-proofing this for eventual ageless bow and slingshot. Adult cannot dive to the alcove without a scale.
     "MQ Jabu-Jabu Pot Underwater Alcove 2": "is_child || (is_adult && can_dive_small)" #Future-proofing this for eventual ageless bow and slingshot. Adult cannot dive to the alcove without a scale.
-    "MQ Jabu-Jabu Pot Boomerang Room 1": "soul_npc(SOUL_NPC_RUTO) && (is_child || (is_adult && can_dive_small))" #Future-proofing this for eventual ageless bow and slingshot. Adult cannot dive to the alcove without a scale.
-    "MQ Jabu-Jabu Pot Boomerang Room 2": "soul_npc(SOUL_NPC_RUTO) && (is_child || (is_adult && can_dive_small))" #Future-proofing this for eventual ageless bow and slingshot. Adult cannot dive to the alcove without a scale.
+    "MQ Jabu-Jabu Pot Boomerang Room 1": "(soul_npc(SOUL_NPC_RUTO) || can_play_elegy) && (is_child || (is_adult && can_dive_small))" #Future-proofing this for eventual ageless bow and slingshot. Adult cannot dive to the alcove without a scale.
+    "MQ Jabu-Jabu Pot Boomerang Room 2": "(soul_npc(SOUL_NPC_RUTO) || can_play_elegy) && (is_child || (is_adult && can_dive_small))" #Future-proofing this for eventual ageless bow and slingshot. Adult cannot dive to the alcove without a scale.
     "MQ Jabu-Jabu Grass Main Room Top 1": "(is_child || (is_adult && can_dive_small)) && can_cut_grass && has_explosives_or_hammer"
     "MQ Jabu-Jabu Grass Main Room Top 2": "(is_child || (is_adult && can_dive_small)) && can_cut_grass && has_explosives_or_hammer"
     "MQ Jabu-Jabu Grass Main Room Bottom 1": "(is_child || (is_adult && can_dive_small)) && can_cut_grass"

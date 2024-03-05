@@ -108,8 +108,8 @@
   exits:
     "Forest Temple Main": "true"
     "Forest Temple Garden West Ledge": "has_hover_boots || climb_anywhere || hookshot_anywhere"
-    "Forest Temple Twisted 1 Normal": "(((is_adult || time_travel_at_will) && has_goron_bracelet) || climb_anywhere || hookshot_anywhere) && cond(setting(hookshotAnywhereOot) && !setting(ageChange, none), small_keys_forest(5), small_keys_forest(2))"
-    "Forest Temple Twisted 1 Alt": "event(FOREST_TWISTED_HALL) && cond(setting(hookshotAnywhereOot) && !setting(ageChange, none), small_keys_forest(5), small_keys_forest(2))"
+    "Forest Temple Twisted 1 Normal": "(((is_adult || time_travel_at_will) && has_goron_bracelet) || climb_anywhere || hookshot_anywhere) && cond(!setting(hookshotAnywhereOot, off) && !setting(ageChange, none), small_keys_forest(5), small_keys_forest(2))"
+    "Forest Temple Twisted 1 Alt": "event(FOREST_TWISTED_HALL) && cond(!setting(hookshotAnywhereOot, off) && !setting(ageChange, none), small_keys_forest(5), small_keys_forest(2))"
   events:
     FOREST_TWISTED_HALL: "(((is_adult || time_travel_at_will) && has_goron_bracelet) || climb_anywhere || hookshot_anywhere) && can_hit_triggers_distance"
   locations:
@@ -118,7 +118,7 @@
   dungeon: Forest
   exits:
     "Forest Temple Wallmaster West": "soul_wallmaster"
-    "Forest Temple Poe 1": "cond(setting(hookshotAnywhereOot) && !setting(ageChange, none), small_keys_forest(5), small_keys_forest(3))"
+    "Forest Temple Poe 1": "cond(!setting(hookshotAnywhereOot, off) && !setting(ageChange, none), small_keys_forest(5), small_keys_forest(3))"
 "Forest Temple Twisted 1 Alt":
   dungeon: Forest
   exits:

@@ -26,14 +26,14 @@
     "MQ Water Temple Pot Storage Room 1": "has_iron_boots && has_tunic_zora && can_hookshot"
     "MQ Water Temple Pot Storage Room 2": "has_iron_boots && has_tunic_zora && can_hookshot"
     "MQ Water Temple Pot Storage Room 3": "has_iron_boots && has_tunic_zora && can_hookshot"
-    "MQ Water Temple Pot Twisted Room Entrance": "has_iron_boots && has_tunic_zora && (can_hookshot || (event(WATER_LEVEL_LOW) && has_hover_boots))"
-    "MQ Water Temple Pot Twisted Room Right 1": "has_iron_boots && has_tunic_zora && (can_hookshot || (event(WATER_LEVEL_LOW) && has_hover_boots))"
-    "MQ Water Temple Pot Twisted Room Right 2": "has_iron_boots && has_tunic_zora && (can_hookshot || (event(WATER_LEVEL_LOW) && has_hover_boots))"
+    "MQ Water Temple Pot Twisted Room Entrance": "has_iron_boots && has_tunic_zora && (can_hookshot || event(WATER_LEVEL_LOW))"
+    "MQ Water Temple Pot Twisted Room Right 1": "has_iron_boots && has_tunic_zora && (can_hookshot || event(WATER_LEVEL_LOW))"
+    "MQ Water Temple Pot Twisted Room Right 2": "has_iron_boots && has_tunic_zora && (can_hookshot || event(WATER_LEVEL_LOW))"
     "MQ Water Temple Pot Twisted Room Cage 1": "event(WATER_LEVEL_LOW) && can_use_din"
     "MQ Water Temple Pot Twisted Room Cage 2": "event(WATER_LEVEL_LOW) && can_use_din"
-    "MQ Water Temple Pot Room Before High Water 1": "event(WATER_LEVEL_LOW) && can_hookshot"
-    "MQ Water Temple Pot Room Before High Water 2": "event(WATER_LEVEL_LOW) && can_hookshot"
-    "MQ Water Temple Pot Room Before High Water 3": "event(WATER_LEVEL_LOW) && can_hookshot"
+    "MQ Water Temple Pot Room Before High Water 1": "event(WATER_LEVEL_LOW) && (can_hookshot || can_play_elegy)"
+    "MQ Water Temple Pot Room Before High Water 2": "event(WATER_LEVEL_LOW) && (can_hookshot || can_play_elegy)"
+    "MQ Water Temple Pot Room Before High Water 3": "event(WATER_LEVEL_LOW) && (can_hookshot || can_play_elegy)"
 "Water Temple Dark Link":
   dungeon: Water
   events:

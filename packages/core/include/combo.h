@@ -12,8 +12,10 @@
 
 # define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
 
-// "Length" is how long the fish is, which affects how much it weighs, but I call it weight sometimes anyway.
-# define FISH_WEIGHT_TO_LENGTH(weight) (sqrtf((weight - 0.5f) / 0.0036f) + 1.0f) // Add 1.0 to prevent errors due to truncating
+#define fabsf(f) __builtin_fabsf(f)
+
+/* "Length" is how long the fish is, which affects how much it weighs, but I call it weight sometimes anyway. */
+# define FISH_WEIGHT_TO_LENGTH(weight) (sqrtf((weight - 0.5f) / 0.0036f) + 1.0f) /* Add 1.0 to prevent errors due to truncating */
 
 # include <ultra64.h>
 # include <combo/actor_ovl.h>
@@ -42,6 +44,8 @@
 #  include <combo/oot/actors/En_Diving_Game.h>
 #  include <combo/oot/actors/En_Elf.h>
 #  include <combo/oot/actors/Shot_Sun.h>
+#  include <combo/oot/actors/Custom_Torch2.h>
+#  include <combo/oot/actors/Demo_Effect.h>
 # endif
 
 # if defined(GAME_MM)
@@ -451,8 +455,6 @@ extern int gNoTimeFlow;
 
 /* Ocarina */
 void comboCheckSong(const OcarinaSongButtons* songButtons, int songIndex);
-
-extern u8 gCustomOcarinaSong;
 
 /* Conds */
 int comboSpecialCond(int special);

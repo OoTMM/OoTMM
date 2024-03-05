@@ -68,34 +68,35 @@ typedef struct GameState_Play
     s32 (*damagePlayer)(struct GameState_Play* play, s32 damage);
     void (*talkWithPlayer)(struct GameState_Play* play, Actor* actor);
 
-    MtxF            viewProjectionMtxF;
-    MtxF            billboardMtxF;
-    Mtx*            billboardMtx;
-    u32             gameplayFrames;
-    u8              linkAgeOnLoad;
-    u8              haltAllActors;
-    u8              spawn;
-    u8              numActorEntries;
-    u8              numRooms;
-    RomFile*        roomList;
-    ActorEntry*     playerEntry;
-    ActorEntry*     actorEntryList;
-    void*           unk_11DFC;
-    Spawn*          spawnList;
-    s16*            exitList;
-    Path*           pathList;
-    QuestHintCmd*   naviQuestHints;
-    void*           specialEffects;
-    u8              skyboxId;
-    s8              transitionTrigger; /* "fade_direction" */
-    s16             unk_11E16;
-    s16             bgCoverAlpha;
-    u16             nextEntranceIndex;
-    char            unk_11E1C[0x40];
-    s8              shootingGalleryStatus;
-    s8              bombchuBowlingStatus; /* "bombchu_game_flag" */
-    u8              transitionType;
-    char            unk_11e60[0x6b8];
+    MtxF                    viewProjectionMtxF;
+    MtxF                    billboardMtxF;
+    Mtx*                    billboardMtx;
+    u32                     gameplayFrames;
+    u8                      linkAgeOnLoad;
+    u8                      haltAllActors;
+    u8                      spawn;
+    u8                      numActorEntries;
+    u8                      numRooms;
+    RomFile*                roomList;
+    ActorEntry*             playerEntry;
+    ActorEntry*             actorEntryList;
+    void*                   unk_11DFC;
+    Spawn*                  spawnList;
+    s16*                    exitList;
+    Path*                   pathList;
+    QuestHintCmd*           naviQuestHints;
+    void*                   specialEffects;
+    u8                      skyboxId;
+    s8                      transitionTrigger; /* "fade_direction" */
+    s16                     unk_11E16;
+    s16                     bgCoverAlpha;
+    u16                     nextEntranceIndex;
+    char                    unk_11E1C[0x40];
+    s8                      shootingGalleryStatus;
+    s8                      bombchuBowlingStatus; /* "bombchu_game_flag" */
+    u8                      transitionType;
+    CollisionCheckContext   colChkCtx;
+    char                    unk_120fc[0x41c];
 }
 GameState_Play;
 

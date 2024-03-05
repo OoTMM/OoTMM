@@ -12,6 +12,6 @@ typedef struct MagicWind {
     /* 0x014C */ SkelCurve skelCurve;
     /* 0x016C */ s16 timer;
     /* 0x0170 */ MagicWindFunc actionFunc;
-} MagicWind; // size = 0x0174
+} MagicWind; /* size = 0x0174 */
 
 #endif

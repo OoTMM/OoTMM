@@ -7,7 +7,7 @@
 #include "Custom_Magic_Dark.h"
 #include <combo/custom.h>
 
-#define FLAGS ((1 << 4) | (1 << 25)) // (ACTOR_FLAG_4 | ACTOR_FLAG_25)
+#define FLAGS ((1 << 4) | (1 << 25)) /* (ACTOR_FLAG_4 | ACTOR_FLAG_25) */
 
 void MagicDark_Init(Actor* thisx, GameState_Play* play);
 void MagicDark_Destroy(Actor* thisx, GameState_Play* play);
@@ -22,7 +22,7 @@ ActorInit Magic_Dark_InitVars = {
     /**/ AC_CUSTOM_SPELL_LOVE,
     /**/ ACTORCAT_ITEMACTION,
     /**/ FLAGS,
-    /**/ 1, // OBJECT_GAMEPLAY_KEEP,
+    /**/ 1, /* OBJECT_GAMEPLAY_KEEP, */
     /**/ sizeof(MagicDark),
     /**/ MagicDark_Init,
     /**/ MagicDark_Destroy,
@@ -113,18 +113,18 @@ void MagicDark_DiamondUpdate(Actor* thisx, GameState_Play* play) {
     u8 phi_a0;
     Actor_Player* player = GET_LINK(play);
     s16 nayrusLoveTimer = gSaveContext.nayrusLoveTimer;
-    // s32 msgMode = play->msgCtx.msgMode;
+    /* s32 msgMode = play->msgCtx.msgMode; */
 
-    // See `ACTOROVL_ALLOC_ABSOLUTE`
-    //! @bug This condition is too broad, the actor will also be killed by warp songs. But warp songs do not use an
-    //! actor which uses `ACTOROVL_ALLOC_ABSOLUTE`. There is no reason to kill the actor in this case.
-    //! This happens with all magic effects actors, but is especially visible with Nayru's Love as it lasts longer than
-    //! other magic actors, and the Nayru's Love actor is supposed to be spawned back after ocarina effects actors are
-    //! done. But with warp songs, whether the player warps away or not, the actor won't be spawned back.
-    // if ((msgMode == MSGMODE_OCARINA_CORRECT_PLAYBACK) || (msgMode == MSGMODE_SONG_PLAYED)) {
-    //     ActorDestroy(thisx);
-    //     return;
-    // }
+    /* See `ACTOROVL_ALLOC_ABSOLUTE` */
+    /*! @bug This condition is too broad, the actor will also be killed by warp songs. But warp songs do not use an */
+    /*! actor which uses `ACTOROVL_ALLOC_ABSOLUTE`. There is no reason to kill the actor in this case. */
+    /*! This happens with all magic effects actors, but is especially visible with Nayru's Love as it lasts longer than */
+    /*! other magic actors, and the Nayru's Love actor is supposed to be spawned back after ocarina effects actors are */
+    /*! done. But with warp songs, whether the player warps away or not, the actor won't be spawned back. */
+    /* if ((msgMode == MSGMODE_OCARINA_CORRECT_PLAYBACK) || (msgMode == MSGMODE_SONG_PLAYED)) { */
+    /*     ActorDestroy(thisx); */
+    /*     return; */
+    /* } */
 
     if (nayrusLoveTimer >= 1200) {
         player->invincibilityTimer = 0;
@@ -173,9 +173,9 @@ void MagicDark_DiamondUpdate(Actor* thisx, GameState_Play* play) {
     gSaveContext.nayrusLoveTimer = nayrusLoveTimer + 1;
 
     if (nayrusLoveTimer < 1100) {
-        PlayLoopingSfxAtActor(thisx, 0x7C); // NA_SE_PL_MAGIC_SOUL_NORMAL
+        PlayLoopingSfxAtActor(thisx, 0x7C); /* NA_SE_PL_MAGIC_SOUL_NORMAL */
     } else {
-        PlayLoopingSfxAtActor(thisx, 0xC0); // NA_SE_PL_MAGIC_SOUL_FLASH
+        PlayLoopingSfxAtActor(thisx, 0xC0); /* NA_SE_PL_MAGIC_SOUL_FLASH */
     }
 }
 
@@ -217,7 +217,7 @@ void MagicDark_OrbUpdate(Actor* thisx, GameState_Play* play) {
     MagicDark* this = (MagicDark*)thisx;
     Actor_Player* player = GET_LINK(play);
 
-    PlayLoopingSfxAtActor(&this->actor, 0xC3); // NA_SE_PL_MAGIC_SOUL_BALL
+    PlayLoopingSfxAtActor(&this->actor, 0xC3); /* NA_SE_PL_MAGIC_SOUL_BALL */
     if (this->timer < 35) {
         MagicDark_DimLighting(play, this->timer * (1 / 45.0f));
         Math_SmoothStepToF(&thisx->scale.x, this->scale * (1 / 12.000001f), 0.05f, 0.01f, 0.0001f);
@@ -258,13 +258,13 @@ void MagicDark_DiamondDraw(Actor* thisx, GameState_Play* play) {
         f32 y;
         if (player->transformation == MM_PLAYER_FORM_GORON)
         {
-            if (player->state3 & 0x00001000) // PLAYER_STATE3_GORON_ROLL
+            if (player->state3 & 0x00001000) /* PLAYER_STATE3_GORON_ROLL */
             {
                 y = player->base.world.pos.y + Player_GetHeight(player) * 0.5f;
             }
             else
             {
-                y = player->bodyPartsPos[PLAYER_BODYPART_WAIST].y + 10.0f; // Goron's waist is really low
+                y = player->bodyPartsPos[PLAYER_BODYPART_WAIST].y + 10.0f; /* Goron's waist is really low */
             }
         }
         else
@@ -335,12 +335,12 @@ void MagicDark_OrbDraw(Actor* thisx, GameState_Play* play) {
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     ModelViewRotateZ(sp6C * (M_PI / 32), MAT_MUL);
-    gSPDisplayList(POLY_XLU_DISP++, 0x04000000 | 0x23210); // gEffFlash1DL
+    gSPDisplayList(POLY_XLU_DISP++, 0x04000000 | 0x23210); /* gEffFlash1DL */
     MatrixStackPop();
     ModelViewRotateZ(-sp6C * (M_PI / 32), MAT_MUL);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPDisplayList(POLY_XLU_DISP++, 0x04000000 | 0x23210); // gEffFlash1DL
+    gSPDisplayList(POLY_XLU_DISP++, 0x04000000 | 0x23210); /* gEffFlash1DL */
 
     CLOSE_DISPS();
 }

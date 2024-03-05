@@ -15,6 +15,6 @@ typedef struct MagicFire {
     /* 0x0196 */ s16 screenTintBehaviour;
     /* 0x0198 */ s16 actionTimer;
     /* 0x019A */ s16 screenTintBehaviourTimer;
-} MagicFire; // size = 0x019C
+} MagicFire; /* size = 0x019C */
 
 #endif

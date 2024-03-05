@@ -10,7 +10,7 @@ int gNoTimeFlow;
 static void debugCheat(GameState_Play* play)
 {
 #if defined(DEBUG)
-    //if (play->gs.input[0].current.buttons & L_TRIG)
+    /*if (play->gs.input[0].current.buttons & L_TRIG) */
     {
         /* Notebook */
         gSave.weekEventReg[66] = 0xff;
@@ -28,9 +28,9 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.upgrades.dekuStick = 3;
         gSave.inventory.upgrades.dekuNut = 3;
         gSave.inventory.upgrades.strength = 3;
-        //gMmExtraFlags2.childWallet = 1;
-        //gSave.inventory.upgrades.wallet = 3;
-        //gMmExtraFlags3.bottomlessWallet = 1;
+        /*gMmExtraFlags2.childWallet = 1; */
+        /*gSave.inventory.upgrades.wallet = 3; */
+        /*gMmExtraFlags3.bottomlessWallet = 1; */
         gSave.inventory.upgrades.bombBag = 0;
 
         gSave.itemEquips.buttonItems[0][0] = ITEM_MM_SWORD_KOKIRI;
@@ -99,7 +99,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.quest.songEmpty = 1;
         gSave.inventory.quest.songOrder = 1;
         gSave.inventory.quest.songSun = 1;
-        gSave.inventory.quest.songSaria = 0; // left out because it currently breaks the audio channels
+        gSave.inventory.quest.songSaria = 0; /* left out because it currently breaks the audio channels */
 
         gMmSave.playerData.magicAcquired = 1;
         gMmSave.playerData.doubleMagic = 1;
@@ -127,15 +127,15 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_MM_TRADE2] = ITEM_MM_ROOM_KEY;
         gSave.inventory.items[ITS_MM_TRADE3] = ITEM_MM_PENDANT_OF_MEMORIES;
 
-        gMmOwlFlags = 0x3ff; // all owls statues
-        //gSave.inventory.quest.remainsOdolwa = 1;
-        //gMmExtraBoss.boss |= 0x01;
+        gMmOwlFlags = 0x3ff; /* all owls statues */
+        /*gSave.inventory.quest.remainsOdolwa = 1; */
+        /*gMmExtraBoss.boss |= 0x01; */
 
-        //gSave.day = 3;
-        //gSave.isNight = 1;
-        //gSave.time = 0x3000;
+        /*gSave.day = 3; */
+        /*gSave.isNight = 1; */
+        /*gSave.time = 0x3000; */
 
-        //gSave.skullCountOcean = 0x10;
+        /*gSave.skullCountOcean = 0x10; */
     }
 
 #endif
@@ -345,9 +345,9 @@ void hookPlay_Init(GameState_Play* play)
         Vec3f* pos = &gSaveContext.respawn[RESPAWN_MODE_HUMAN].pos;
         if (fwSceneId == SCE_MM_GORON_VILLAGE_SPRING || fwSceneId == SCE_MM_GORON_VILLAGE_WINTER)
         {
-            if (MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH) && pos->x > 1100.0f) // from Lens Cave
+            if (MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH) && pos->x > 1100.0f) /* from Lens Cave */
             {
-                // spawn near the owl area instead
+                /* spawn near the owl area instead */
                 pos->x = 1189.0f;
                 pos->z = -911.0f;
             }
@@ -356,16 +356,16 @@ void hookPlay_Init(GameState_Play* play)
         {
             if (!MM_GET_EVENT_WEEK(EV_MM_WEEK_WOODFALL_TEMPLE_RISE) && ABS(pos->z) < 500.0f)
             {
-                if (pos->z > 0) // from front of temple
+                if (pos->z > 0) /* from front of temple */
                 {
-                    // spawn at owl statue instead
+                    /* spawn at owl statue instead */
                     pos->x = 1.0f;
                     pos->y = 200.0f;
                     pos->z = 1094.0f;
                 }
-                else // from back of temple
+                else /* from back of temple */
                 {
-                    // spawn near exit to southern swamp instead
+                    /* spawn near exit to southern swamp instead */
                     pos->x = -41.0f;
                     pos->y = 12.0f;
                     pos->z = -1353.0f;

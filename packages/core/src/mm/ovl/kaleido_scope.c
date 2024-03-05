@@ -54,13 +54,13 @@ void KaleidoScope_LoadNamedItemCustom(void* segment, u32 texIndex)
     u32 isForeign = 0;
     switch (texIndex)
     {
-    case 0x5: // MM Fairy Ocarina
+    case 0x5: /* MM Fairy Ocarina */
         isForeign = 1;
-        texIndex = 0x7b + 0x7; // OoT Fairy Ocarina
+        texIndex = 0x7b + 0x7; /* OoT Fairy Ocarina */
         break;
-    case 0x11: // MM OoT Hookshot
+    case 0x11: /* MM OoT Hookshot */
         isForeign = 1;
-        texIndex = 0x7b + 0xA; // OoT OoT Hookshot
+        texIndex = 0x7b + 0xA; /* OoT OoT Hookshot */
         break;
     case ITEM_MM_SPELL_FIRE:
         isForeign = 1;
@@ -110,7 +110,7 @@ void KaleidoScope_ShowItemMessage(GameState_Play* play, u16 messageId, u8 yPosit
     char* b;
     if (messageId == 0x1711)
     {
-        messageId = 0x170f; // Use Hookshot message instead of broken OoT Hookshot message
+        messageId = 0x170f; /* Use Hookshot message instead of broken OoT Hookshot message */
     }
     Message_ShowMessageAtYPosition(play, messageId, yPosition);
     s16 itemId = messageId - 0x1700;
@@ -118,7 +118,7 @@ void KaleidoScope_ShowItemMessage(GameState_Play* play, u16 messageId, u8 yPosit
     {
     case ITEM_MM_OCARINA_FAIRY:
         b = play->msgCtx.font.textBuffer.schar;
-        b[2] = 0x4C; // Use Ocarina of Time icon.
+        b[2] = 0x4C; /* Use Ocarina of Time icon. */
         b += 11;
         comboTextAppendStr(&b, TEXT_COLOR_RED "Fairy Ocarina" TEXT_NL);
         comboTextAppendClearColor(&b);
@@ -126,7 +126,7 @@ void KaleidoScope_ShowItemMessage(GameState_Play* play, u16 messageId, u8 yPosit
         break;
     case ITEM_MM_SPELL_WIND:
         b = play->msgCtx.font.textBuffer.schar;
-        b[2] = 0xFE; // Use No Icon
+        b[2] = 0xFE; /* Use No Icon */
         b += 11;
         comboTextAppendStr(&b, TEXT_COLOR_RED "Farore's Wind" TEXT_NL);
         comboTextAppendClearColor(&b);
@@ -134,7 +134,7 @@ void KaleidoScope_ShowItemMessage(GameState_Play* play, u16 messageId, u8 yPosit
         break;
     case ITEM_MM_SPELL_LOVE:
         b = play->msgCtx.font.textBuffer.schar;
-        b[2] = 0xFE; // Use No Icon
+        b[2] = 0xFE; /* Use No Icon */
         b += 11;
         comboTextAppendStr(&b, TEXT_COLOR_RED "Nayru's Love" TEXT_NL);
         comboTextAppendClearColor(&b);
@@ -142,7 +142,7 @@ void KaleidoScope_ShowItemMessage(GameState_Play* play, u16 messageId, u8 yPosit
         break;
     case ITEM_MM_SPELL_FIRE:
         b = play->msgCtx.font.textBuffer.schar;
-        b[2] = 0xFE; // Use No Icon
+        b[2] = 0xFE; /* Use No Icon */
         b += 11;
         comboTextAppendStr(&b, TEXT_COLOR_RED "Din's Fire" TEXT_NL);
         comboTextAppendClearColor(&b);
@@ -150,7 +150,7 @@ void KaleidoScope_ShowItemMessage(GameState_Play* play, u16 messageId, u8 yPosit
         break;
     case ITEM_MM_BOOTS_IRON:
         b = play->msgCtx.font.textBuffer.schar;
-        b[2] = 0xFE; // Use No Icon
+        b[2] = 0xFE; /* Use No Icon */
         b += 11;
         comboTextAppendStr(&b, TEXT_COLOR_RED "Iron Boots" TEXT_NL);
         comboTextAppendClearColor(&b);
@@ -158,7 +158,7 @@ void KaleidoScope_ShowItemMessage(GameState_Play* play, u16 messageId, u8 yPosit
         break;
     case ITEM_MM_BOOTS_HOVER:
         b = play->msgCtx.font.textBuffer.schar;
-        b[2] = 0xFE; // Use No Icon
+        b[2] = 0xFE; /* Use No Icon */
         b += 11;
         comboTextAppendStr(&b, TEXT_COLOR_RED "Hover Boots" TEXT_NL);
         comboTextAppendClearColor(&b);
@@ -166,7 +166,7 @@ void KaleidoScope_ShowItemMessage(GameState_Play* play, u16 messageId, u8 yPosit
         break;
     case ITEM_MM_TUNIC_GORON:
         b = play->msgCtx.font.textBuffer.schar;
-        b[2] = 0xFE; // Use No Icon
+        b[2] = 0xFE; /* Use No Icon */
         b += 11;
         comboTextAppendStr(&b, TEXT_COLOR_RED "Goron Tunic" TEXT_NL);
         comboTextAppendClearColor(&b);
@@ -174,7 +174,7 @@ void KaleidoScope_ShowItemMessage(GameState_Play* play, u16 messageId, u8 yPosit
         break;
     case ITEM_MM_TUNIC_ZORA:
         b = play->msgCtx.font.textBuffer.schar;
-        b[2] = 0xFE; // Use No Icon
+        b[2] = 0xFE; /* Use No Icon */
         b += 11;
         comboTextAppendStr(&b, TEXT_COLOR_RED "Zora Tunic" TEXT_NL);
         comboTextAppendClearColor(&b);
@@ -428,10 +428,10 @@ static u8 GetNextItem(u32 slot, s32* outTableIndex)
     return ITEM_NONE;
 }
 
-// Vertex buffers.
+/* Vertex buffers. */
 static Vtx gVertexBufs[(4 * 5) * 2];
 
-// Vertex buffer pointers.
+/* Vertex buffer pointers. */
 static Vtx* gVertex[5] = {
     &gVertexBufs[(4 * 0) * 2],
     &gVertexBufs[(4 * 1) * 2],
@@ -441,23 +441,23 @@ static Vtx* gVertex[5] = {
 };
 
 static Vtx* GetVtxBuffer(GameState_Play* play, u32 vertIdx, u32 slot) {
-    // Get vertex of current icon drawing to Item Select screen
+    /* Get vertex of current icon drawing to Item Select screen */
     const Vtx* srcVtx = play->pauseCtx.vtxBuf + vertIdx;
 
-    // Get dest Vtx (factor in frame counter)
+    /* Get dest Vtx (factor in frame counter) */
     int framebufIdx = play->gs.gfx->displayListCounter & 1;
     Vtx* dstVtx = gVertex[slot] + (framebufIdx * 4);
 
-    // Copy source Vtx over to dest Vtx
+    /* Copy source Vtx over to dest Vtx */
     for (int i = 0; i < 4; i++) {
         dstVtx[i] = srcVtx[i];
     }
 
-    // Adjust X position
+    /* Adjust X position */
     dstVtx[0].v.ob[0] += 0x10;
     dstVtx[2].v.ob[0] += 0x10;
 
-    // Adjust Y position
+    /* Adjust Y position */
     dstVtx[0].v.ob[1] -= 0x10;
     dstVtx[1].v.ob[1] -= 0x10;
 
@@ -466,10 +466,10 @@ static Vtx* GetVtxBuffer(GameState_Play* play, u32 vertIdx, u32 slot) {
 
 static void DrawIcon(GfxContext* gfxCtx, const Vtx* vtx, u32 segAddr, u16 width, u16 height, u16 qidx) {
     OPEN_DISPS(gfxCtx);
-    // Instructions that happen before function
+    /* Instructions that happen before function */
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0xFF, 0xFF, 0xFF, gfxCtx->play->pauseCtx.itemAlpha & 0xFF);
-    gSPVertex(POLY_OPA_DISP++, vtx, 4, 0); // Loads 4 vertices from RDRAM
-    // Instructions that happen during function.
+    gSPVertex(POLY_OPA_DISP++, vtx, 4, 0); /* Loads 4 vertices from RDRAM */
+    /* Instructions that happen during function. */
     gDPLoadTextureBlock(POLY_OPA_DISP++, segAddr, G_IM_FMT_RGBA, G_IM_SIZ_32b, width, height, 0,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                         G_TX_NOLOD);

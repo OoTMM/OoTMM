@@ -48,13 +48,13 @@
 "Ganon Castle Forest":
   dungeon: Ganon
   events:
-    GANON_TRIAL_FOREST: "soul_enemy(SOUL_ENEMY_STALFOS) && can_play_time && has_light_arrows"
+    GANON_TRIAL_FOREST: "soul_enemy(SOUL_ENEMY_STALFOS) && (can_play_time || can_play_elegy) && has_light_arrows"
   locations:
     "MQ Ganon Castle Forest Trial Key": "can_hookshot"
     "MQ Ganon Castle Forest Trial First Chest": "soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon && can_hit_triggers_distance"
     "MQ Ganon Castle Forest Trial Second Chest": "soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon && has_fire"
-    "MQ Ganon Pot Forest End 1": "soul_enemy(SOUL_ENEMY_STALFOS) && can_play_time"
-    "MQ Ganon Pot Forest End 2": "soul_enemy(SOUL_ENEMY_STALFOS) && can_play_time"
+    "MQ Ganon Pot Forest End 1": "soul_enemy(SOUL_ENEMY_STALFOS) && (can_play_time || can_play_elegy)"
+    "MQ Ganon Pot Forest End 2": "soul_enemy(SOUL_ENEMY_STALFOS) && (can_play_time || can_play_elegy)"
 "Ganon Castle Fire":
   dungeon: Ganon
   events:

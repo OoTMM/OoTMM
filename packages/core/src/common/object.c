@@ -428,7 +428,7 @@ int comboIsObjectSlotLoaded(ObjectContext* objectCtx, int slot)
         return IsObjectSlotLoaded(objectCtx, slot);
     else
         return (gExObjectsAddr[slot] != NULL);
-        //return 0;
+        /*return 0; */
 }
 
 static void comboActorSetObjectSegment(GameState_Play* play, Actor* actor)

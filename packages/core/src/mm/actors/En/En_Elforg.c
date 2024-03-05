@@ -84,7 +84,7 @@ void EnElforg_GiveItem(GameState_Play* play, Actor* this)
     comboAddItemEx(play, &q, 1);
     comboPlayItemFanfare(o.gi, 1);
 
-    // If it's a town fairy
+    /* If it's a town fairy */
     if ((this->variable & 0xF) == 3) {
         gMmExtraFlags2.townStrayFairy = 1;
     }

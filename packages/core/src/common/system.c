@@ -32,7 +32,7 @@ void comboInvalDCache(void* addr, u32 size)
 
     for (u32 i = 0; i < count; ++i)
     {
-        //__asm__ __volatile__("cache 0x15, 0(%0)" :: "r"(daddr));
+        /*__asm__ __volatile__("cache 0x15, 0(%0)" :: "r"(daddr)); */
         __asm__ __volatile__("cache 0x11, 0(%0)" :: "r"(daddr));
         daddr += DCACHELINE;
     }

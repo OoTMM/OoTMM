@@ -61,6 +61,7 @@
     "Fire Temple Maze Upper": "can_hookshot && (trick(OOT_HAMMER_WALLS) || has_explosives)"
   locations:
     "MQ Fire Temple Maze Lower Chest": "true"
+    "MQ Fire Temple Maze Side Room Chest": "can_play_elegy"
 "Fire Temple Maze Upper":
   dungeon: Fire
   exits:

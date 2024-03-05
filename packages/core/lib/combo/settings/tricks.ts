@@ -39,6 +39,7 @@ export const TRICKS = {
   OOT_WATER_PIT_GS_CHU: "Water Temple Large Pit GS with Bombchu",
   OOT_SHADOW_BOAT_EARLY: "Reach Shadow Temple Boat with Climb Anywhere",
   OOT_SPIRIT_BOSS_CLIMB_NO_HOOK: "Reach Twinrova using Climb Anywhere and Hover Boots",
+  OOT_ZR_FALLS_HOOK: "Use Hookshot Anywhere to get past the Zora's River Waterfall",
   OOT_DC_BOULDER: "Skip Dodongo Cavern's Boulder using Ageless Hookshot Anywhere",
   OOT_LAKE_SHORTCUT: "Move Between Lake Hylia and Zora's Domain with Ageless Hookshot Anywhere",
   OOT_JJB_BOXLESS: "Access Jabu-Jabu pre-boss without the box",
@@ -123,6 +124,12 @@ export const TRICKS = {
   MM_SHT_EARLY_BOSS_CLIMB: "Skip straight to the boss door in Snowhead Temple once in the main room",
 
   MM_STOCK_POT_WAIT: "Wait outside Stock Pot Inn's roof for closing",
+
+
+
+  MM_STAGE_LIGHTS_DIN: "Light the Zora Hall Stage Lights using Din's Fire, Bow, and Hookshot",
+  MM_RANCH_FARORE: "Romani's Ranch locations using Farore's Wind and Time Reset",
+  MM_EVAN_FARORE: "Evan's Piece of Heart using Farore's Wind and Time Reset",
 
 };
 

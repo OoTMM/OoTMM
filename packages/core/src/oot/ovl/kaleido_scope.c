@@ -213,186 +213,186 @@ s16 gPrevCursorPoint;
 s8 gSoaringIndexSelected = -1;
 
 static u16 sOwlWarpPauseItems[] = {
-    0xAF, // OWL_WARP_GREAT_BAY_COAST
-    0xB3, // OWL_WARP_ZORA_CAPE
-    0xAA, // OWL_WARP_SNOWHEAD
-    0xB1, // OWL_WARP_MOUNTAIN_VILLAGE
-    0xA9, // OWL_WARP_CLOCK_TOWN
-    0xB2, // OWL_WARP_MILK_ROAD
-    0xA8, // OWL_WARP_WOODFALL
-    0xB0, // OWL_WARP_SOUTHERN_SWAMP
-    0xAC, // OWL_WARP_IKANA_CANYON
-    0xAE, // OWL_WARP_STONE_TOWER
+    0xAF, /* OWL_WARP_GREAT_BAY_COAST */
+    0xB3, /* OWL_WARP_ZORA_CAPE */
+    0xAA, /* OWL_WARP_SNOWHEAD */
+    0xB1, /* OWL_WARP_MOUNTAIN_VILLAGE */
+    0xA9, /* OWL_WARP_CLOCK_TOWN */
+    0xB2, /* OWL_WARP_MILK_ROAD */
+    0xA8, /* OWL_WARP_WOODFALL */
+    0xB0, /* OWL_WARP_SOUTHERN_SWAMP */
+    0xAC, /* OWL_WARP_IKANA_CANYON */
+    0xAE, /* OWL_WARP_STONE_TOWER */
 };
 
 static s16 sVtxPageMapWorldQuadsX[VTX_PAGE_MAP_WORLD_QUADS] = {
-    -41,  // mapPageVtx[60] QUAD_MAP_WORLD_CLOUDS_CLOCK_TOWN_1
-    9,    // mapPageVtx[64] QUAD_MAP_WORLD_CLOUDS_CLOCK_TOWN_2
-    43,   // mapPageVtx[68] QUAD_MAP_WORLD_CLOUDS_WOODFALL_1
-    -21,  // mapPageVtx[72] QUAD_MAP_WORLD_CLOUDS_WOODFALL_2
-    -37,  // mapPageVtx[76] QUAD_MAP_WORLD_CLOUDS_WOODFALL_3
-    43,   // mapPageVtx[80] QUAD_MAP_WORLD_CLOUDS_SNOWHEAD_1
-    -69,  // mapPageVtx[84] QUAD_MAP_WORLD_CLOUDS_SNOWHEAD_2
-    -69,  // mapPageVtx[88] QUAD_MAP_WORLD_CLOUDS_SNOWHEAD_3
-    -32,  // mapPageVtx[92] QUAD_MAP_WORLD_CLOUDS_ROMANI_RANCH
-    -109, // mapPageVtx[96] QUAD_MAP_WORLD_CLOUDS_GREAT_BAY_1
-    -45,  // mapPageVtx[100] QUAD_MAP_WORLD_CLOUDS_GREAT_BAY_2
-    -109, // mapPageVtx[104] QUAD_MAP_WORLD_CLOUDS_GREAT_BAY_3
-    -45,  // mapPageVtx[108] QUAD_MAP_WORLD_CLOUDS_GREAT_BAY_4
-    59,   // mapPageVtx[112] QUAD_MAP_WORLD_CLOUDS_STONE_TOWER_1
-    -5,   // mapPageVtx[116] QUAD_MAP_WORLD_CLOUDS_STONE_TOWER_2
-    -70,  // mapPageVtx[120] QUAD_MAP_REGION_GREAT_BAY
-    -52,  // mapPageVtx[124] QUAD_MAP_REGION_ZORA_HALL
-    -11,  // mapPageVtx[128] QUAD_MAP_REGION_ROMANI_RANCH
-    -2,   // mapPageVtx[132] QUAD_MAP_REGION_DEKU_PALACE
-    8,    // mapPageVtx[136] QUAD_MAP_REGION_WOODFALL
-    2,    // mapPageVtx[140] QUAD_MAP_REGION_CLOCK_TOWN
-    1,    // mapPageVtx[144] QUAD_MAP_REGION_SNOWHEAD
-    43,   // mapPageVtx[148] QUAD_MAP_REGION_IKANA_GRAVEYARD
-    52,   // mapPageVtx[152] QUAD_MAP_REGION_IKANA_CANYON
-    54,   // mapPageVtx[156] QUAD_MAP_REGION_GORON_VILLAGE
-    62,   // mapPageVtx[160] QUAD_MAP_REGION_STONE_TOWER
-    -80,  // mapPageVtx[164] QUAD_MAP_OWL_WARP_GREAT_BAY_COAST
-    -64,  // mapPageVtx[168] QUAD_MAP_OWL_WARP_ZORA_CAPE
-    -9,   // mapPageVtx[172] QUAD_MAP_OWL_WARP_SNOWHEAD
-    -3,   // mapPageVtx[176] QUAD_MAP_OWL_WARP_MOUNTAIN_VILLAGE
-    -7,   // mapPageVtx[180] QUAD_MAP_OWL_WARP_CLOCK_TOWN
-    -16,  // mapPageVtx[184] QUAD_MAP_OWL_WARP_MILK_ROAD
-    -1,   // mapPageVtx[188] QUAD_MAP_OWL_WARP_WOODFALL
-    23,   // mapPageVtx[192] QUAD_MAP_OWL_WARP_SOUTHERN_SWAMP
-    44,   // mapPageVtx[196] QUAD_MAP_OWL_WARP_IKANA_CANYON
-    54,   // mapPageVtx[200] QUAD_MAP_OWL_WARP_STONE_TOWER
+    -41,  /* mapPageVtx[60] QUAD_MAP_WORLD_CLOUDS_CLOCK_TOWN_1 */
+    9,    /* mapPageVtx[64] QUAD_MAP_WORLD_CLOUDS_CLOCK_TOWN_2 */
+    43,   /* mapPageVtx[68] QUAD_MAP_WORLD_CLOUDS_WOODFALL_1 */
+    -21,  /* mapPageVtx[72] QUAD_MAP_WORLD_CLOUDS_WOODFALL_2 */
+    -37,  /* mapPageVtx[76] QUAD_MAP_WORLD_CLOUDS_WOODFALL_3 */
+    43,   /* mapPageVtx[80] QUAD_MAP_WORLD_CLOUDS_SNOWHEAD_1 */
+    -69,  /* mapPageVtx[84] QUAD_MAP_WORLD_CLOUDS_SNOWHEAD_2 */
+    -69,  /* mapPageVtx[88] QUAD_MAP_WORLD_CLOUDS_SNOWHEAD_3 */
+    -32,  /* mapPageVtx[92] QUAD_MAP_WORLD_CLOUDS_ROMANI_RANCH */
+    -109, /* mapPageVtx[96] QUAD_MAP_WORLD_CLOUDS_GREAT_BAY_1 */
+    -45,  /* mapPageVtx[100] QUAD_MAP_WORLD_CLOUDS_GREAT_BAY_2 */
+    -109, /* mapPageVtx[104] QUAD_MAP_WORLD_CLOUDS_GREAT_BAY_3 */
+    -45,  /* mapPageVtx[108] QUAD_MAP_WORLD_CLOUDS_GREAT_BAY_4 */
+    59,   /* mapPageVtx[112] QUAD_MAP_WORLD_CLOUDS_STONE_TOWER_1 */
+    -5,   /* mapPageVtx[116] QUAD_MAP_WORLD_CLOUDS_STONE_TOWER_2 */
+    -70,  /* mapPageVtx[120] QUAD_MAP_REGION_GREAT_BAY */
+    -52,  /* mapPageVtx[124] QUAD_MAP_REGION_ZORA_HALL */
+    -11,  /* mapPageVtx[128] QUAD_MAP_REGION_ROMANI_RANCH */
+    -2,   /* mapPageVtx[132] QUAD_MAP_REGION_DEKU_PALACE */
+    8,    /* mapPageVtx[136] QUAD_MAP_REGION_WOODFALL */
+    2,    /* mapPageVtx[140] QUAD_MAP_REGION_CLOCK_TOWN */
+    1,    /* mapPageVtx[144] QUAD_MAP_REGION_SNOWHEAD */
+    43,   /* mapPageVtx[148] QUAD_MAP_REGION_IKANA_GRAVEYARD */
+    52,   /* mapPageVtx[152] QUAD_MAP_REGION_IKANA_CANYON */
+    54,   /* mapPageVtx[156] QUAD_MAP_REGION_GORON_VILLAGE */
+    62,   /* mapPageVtx[160] QUAD_MAP_REGION_STONE_TOWER */
+    -80,  /* mapPageVtx[164] QUAD_MAP_OWL_WARP_GREAT_BAY_COAST */
+    -64,  /* mapPageVtx[168] QUAD_MAP_OWL_WARP_ZORA_CAPE */
+    -9,   /* mapPageVtx[172] QUAD_MAP_OWL_WARP_SNOWHEAD */
+    -3,   /* mapPageVtx[176] QUAD_MAP_OWL_WARP_MOUNTAIN_VILLAGE */
+    -7,   /* mapPageVtx[180] QUAD_MAP_OWL_WARP_CLOCK_TOWN */
+    -16,  /* mapPageVtx[184] QUAD_MAP_OWL_WARP_MILK_ROAD */
+    -1,   /* mapPageVtx[188] QUAD_MAP_OWL_WARP_WOODFALL */
+    23,   /* mapPageVtx[192] QUAD_MAP_OWL_WARP_SOUTHERN_SWAMP */
+    44,   /* mapPageVtx[196] QUAD_MAP_OWL_WARP_IKANA_CANYON */
+    54,   /* mapPageVtx[200] QUAD_MAP_OWL_WARP_STONE_TOWER */
 };
 
 static s16 gVtxPageMapWorldQuadsWidth[VTX_PAGE_MAP_WORLD_QUADS] = {
-    80,  // mapPageVtx[60]  QUAD_MAP_WORLD_CLOUDS_CLOCK_TOWN_1
-    64,  // mapPageVtx[64]  QUAD_MAP_WORLD_CLOUDS_CLOCK_TOWN_2
-    64,  // mapPageVtx[68]  QUAD_MAP_WORLD_CLOUDS_WOODFALL_1
-    64,  // mapPageVtx[72]  QUAD_MAP_WORLD_CLOUDS_WOODFALL_2
-    16,  // mapPageVtx[76]  QUAD_MAP_WORLD_CLOUDS_WOODFALL_3
-    64,  // mapPageVtx[80]  QUAD_MAP_WORLD_CLOUDS_SNOWHEAD_1
-    112, // mapPageVtx[84]  QUAD_MAP_WORLD_CLOUDS_SNOWHEAD_2
-    112, // mapPageVtx[88]  QUAD_MAP_WORLD_CLOUDS_SNOWHEAD_3
-    48,  // mapPageVtx[92]  QUAD_MAP_WORLD_CLOUDS_ROMANI_RANCH
-    64,  // mapPageVtx[96]  QUAD_MAP_WORLD_CLOUDS_GREAT_BAY_1
-    64,  // mapPageVtx[100] QUAD_MAP_WORLD_CLOUDS_GREAT_BAY_2
-    64,  // mapPageVtx[104] QUAD_MAP_WORLD_CLOUDS_GREAT_BAY_3
-    64,  // mapPageVtx[108] QUAD_MAP_WORLD_CLOUDS_GREAT_BAY_4
-    48,  // mapPageVtx[112] QUAD_MAP_WORLD_CLOUDS_STONE_TOWER_1
-    64,  // mapPageVtx[116] QUAD_MAP_WORLD_CLOUDS_STONE_TOWER_2
-    8,   // mapPageVtx[120] QUAD_MAP_REGION_GREAT_BAY
-    8,   // mapPageVtx[124] QUAD_MAP_REGION_ZORA_HALL
-    8,   // mapPageVtx[128] QUAD_MAP_REGION_ROMANI_RANCH
-    8,   // mapPageVtx[132] QUAD_MAP_REGION_DEKU_PALACE
-    8,   // mapPageVtx[136] QUAD_MAP_REGION_WOODFALL
-    8,   // mapPageVtx[140] QUAD_MAP_REGION_CLOCK_TOWN
-    8,   // mapPageVtx[144] QUAD_MAP_REGION_SNOWHEAD
-    8,   // mapPageVtx[148] QUAD_MAP_REGION_IKANA_GRAVEYARD
-    8,   // mapPageVtx[152] QUAD_MAP_REGION_IKANA_CANYON
-    8,   // mapPageVtx[156] QUAD_MAP_REGION_GORON_VILLAGE
-    8,   // mapPageVtx[160] QUAD_MAP_REGION_STONE_TOWER
-    24,  // mapPageVtx[164] QUAD_MAP_OWL_WARP_GREAT_BAY_COAST
-    24,  // mapPageVtx[168] QUAD_MAP_OWL_WARP_ZORA_CAPE
-    24,  // mapPageVtx[172] QUAD_MAP_OWL_WARP_SNOWHEAD
-    24,  // mapPageVtx[176] QUAD_MAP_OWL_WARP_MOUNTAIN_VILLAGE
-    24,  // mapPageVtx[180] QUAD_MAP_OWL_WARP_CLOCK_TOWN
-    24,  // mapPageVtx[184] QUAD_MAP_OWL_WARP_MILK_ROAD
-    24,  // mapPageVtx[188] QUAD_MAP_OWL_WARP_WOODFALL
-    24,  // mapPageVtx[192] QUAD_MAP_OWL_WARP_SOUTHERN_SWAMP
-    24,  // mapPageVtx[196] QUAD_MAP_OWL_WARP_IKANA_CANYON
-    24,  // mapPageVtx[200] QUAD_MAP_OWL_WARP_STONE_TOWER
+    80,  /* mapPageVtx[60]  QUAD_MAP_WORLD_CLOUDS_CLOCK_TOWN_1 */
+    64,  /* mapPageVtx[64]  QUAD_MAP_WORLD_CLOUDS_CLOCK_TOWN_2 */
+    64,  /* mapPageVtx[68]  QUAD_MAP_WORLD_CLOUDS_WOODFALL_1 */
+    64,  /* mapPageVtx[72]  QUAD_MAP_WORLD_CLOUDS_WOODFALL_2 */
+    16,  /* mapPageVtx[76]  QUAD_MAP_WORLD_CLOUDS_WOODFALL_3 */
+    64,  /* mapPageVtx[80]  QUAD_MAP_WORLD_CLOUDS_SNOWHEAD_1 */
+    112, /* mapPageVtx[84]  QUAD_MAP_WORLD_CLOUDS_SNOWHEAD_2 */
+    112, /* mapPageVtx[88]  QUAD_MAP_WORLD_CLOUDS_SNOWHEAD_3 */
+    48,  /* mapPageVtx[92]  QUAD_MAP_WORLD_CLOUDS_ROMANI_RANCH */
+    64,  /* mapPageVtx[96]  QUAD_MAP_WORLD_CLOUDS_GREAT_BAY_1 */
+    64,  /* mapPageVtx[100] QUAD_MAP_WORLD_CLOUDS_GREAT_BAY_2 */
+    64,  /* mapPageVtx[104] QUAD_MAP_WORLD_CLOUDS_GREAT_BAY_3 */
+    64,  /* mapPageVtx[108] QUAD_MAP_WORLD_CLOUDS_GREAT_BAY_4 */
+    48,  /* mapPageVtx[112] QUAD_MAP_WORLD_CLOUDS_STONE_TOWER_1 */
+    64,  /* mapPageVtx[116] QUAD_MAP_WORLD_CLOUDS_STONE_TOWER_2 */
+    8,   /* mapPageVtx[120] QUAD_MAP_REGION_GREAT_BAY */
+    8,   /* mapPageVtx[124] QUAD_MAP_REGION_ZORA_HALL */
+    8,   /* mapPageVtx[128] QUAD_MAP_REGION_ROMANI_RANCH */
+    8,   /* mapPageVtx[132] QUAD_MAP_REGION_DEKU_PALACE */
+    8,   /* mapPageVtx[136] QUAD_MAP_REGION_WOODFALL */
+    8,   /* mapPageVtx[140] QUAD_MAP_REGION_CLOCK_TOWN */
+    8,   /* mapPageVtx[144] QUAD_MAP_REGION_SNOWHEAD */
+    8,   /* mapPageVtx[148] QUAD_MAP_REGION_IKANA_GRAVEYARD */
+    8,   /* mapPageVtx[152] QUAD_MAP_REGION_IKANA_CANYON */
+    8,   /* mapPageVtx[156] QUAD_MAP_REGION_GORON_VILLAGE */
+    8,   /* mapPageVtx[160] QUAD_MAP_REGION_STONE_TOWER */
+    24,  /* mapPageVtx[164] QUAD_MAP_OWL_WARP_GREAT_BAY_COAST */
+    24,  /* mapPageVtx[168] QUAD_MAP_OWL_WARP_ZORA_CAPE */
+    24,  /* mapPageVtx[172] QUAD_MAP_OWL_WARP_SNOWHEAD */
+    24,  /* mapPageVtx[176] QUAD_MAP_OWL_WARP_MOUNTAIN_VILLAGE */
+    24,  /* mapPageVtx[180] QUAD_MAP_OWL_WARP_CLOCK_TOWN */
+    24,  /* mapPageVtx[184] QUAD_MAP_OWL_WARP_MILK_ROAD */
+    24,  /* mapPageVtx[188] QUAD_MAP_OWL_WARP_WOODFALL */
+    24,  /* mapPageVtx[192] QUAD_MAP_OWL_WARP_SOUTHERN_SWAMP */
+    24,  /* mapPageVtx[196] QUAD_MAP_OWL_WARP_IKANA_CANYON */
+    24,  /* mapPageVtx[200] QUAD_MAP_OWL_WARP_STONE_TOWER */
 };
 static s16 sVtxPageMapWorldQuadsY[VTX_PAGE_MAP_WORLD_QUADS] = {
-    11,  // mapPageVtx[60] QUAD_MAP_WORLD_CLOUDS_CLOCK_TOWN_1
-    22,  // mapPageVtx[64] QUAD_MAP_WORLD_CLOUDS_CLOCK_TOWN_2
-    -16, // mapPageVtx[68] QUAD_MAP_WORLD_CLOUDS_WOODFALL_1
-    -16, // mapPageVtx[72] QUAD_MAP_WORLD_CLOUDS_WOODFALL_2
-    -16, // mapPageVtx[76] QUAD_MAP_WORLD_CLOUDS_WOODFALL_3
-    59,  // mapPageVtx[80] QUAD_MAP_WORLD_CLOUDS_SNOWHEAD_1
-    24,  // mapPageVtx[84] QUAD_MAP_WORLD_CLOUDS_SNOWHEAD_2
-    59,  // mapPageVtx[88] QUAD_MAP_WORLD_CLOUDS_SNOWHEAD_3
-    -11, // mapPageVtx[92] QUAD_MAP_WORLD_CLOUDS_ROMANI_RANCH
-    -5,  // mapPageVtx[96] QUAD_MAP_WORLD_CLOUDS_GREAT_BAY_1
-    -5,  // mapPageVtx[100] QUAD_MAP_WORLD_CLOUDS_GREAT_BAY_2
-    59,  // mapPageVtx[104] QUAD_MAP_WORLD_CLOUDS_GREAT_BAY_3
-    59,  // mapPageVtx[108] QUAD_MAP_WORLD_CLOUDS_GREAT_BAY_4
-    39,  // mapPageVtx[112] QUAD_MAP_WORLD_CLOUDS_STONE_TOWER_1
-    31,  // mapPageVtx[116] QUAD_MAP_WORLD_CLOUDS_STONE_TOWER_2
-    -10, // mapPageVtx[120] QUAD_MAP_REGION_GREAT_BAY
-    -36, // mapPageVtx[124] QUAD_MAP_REGION_ZORA_HALL
-    -19, // mapPageVtx[128] QUAD_MAP_REGION_ROMANI_RANCH
-    -53, // mapPageVtx[132] QUAD_MAP_REGION_DEKU_PALACE
-    -27, // mapPageVtx[136] QUAD_MAP_REGION_WOODFALL
-    -2,  // mapPageVtx[140] QUAD_MAP_REGION_CLOCK_TOWN
-    41,  // mapPageVtx[144] QUAD_MAP_REGION_SNOWHEAD
-    11,  // mapPageVtx[148] QUAD_MAP_REGION_IKANA_GRAVEYARD
-    -3,  // mapPageVtx[152] QUAD_MAP_REGION_IKANA_CANYON
-    45,  // mapPageVtx[156] QUAD_MAP_REGION_GORON_VILLAGE
-    18,  // mapPageVtx[160] QUAD_MAP_REGION_STONE_TOWER
-    -8,  // mapPageVtx[164] QUAD_MAP_OWL_WARP_GREAT_BAY_COAST
-    -38, // mapPageVtx[168] QUAD_MAP_OWL_WARP_ZORA_CAPE
-    39,  // mapPageVtx[172] QUAD_MAP_OWL_WARP_SNOWHEAD
-    26,  // mapPageVtx[176] QUAD_MAP_OWL_WARP_MOUNTAIN_VILLAGE
-    1,   // mapPageVtx[180] QUAD_MAP_OWL_WARP_CLOCK_TOWN
-    -7,  // mapPageVtx[184] QUAD_MAP_OWL_WARP_MILK_ROAD
-    -28, // mapPageVtx[188] QUAD_MAP_OWL_WARP_WOODFALL
-    -27, // mapPageVtx[192] QUAD_MAP_OWL_WARP_SOUTHERN_SWAMP
-    -1,  // mapPageVtx[196] QUAD_MAP_OWL_WARP_IKANA_CANYON
-    24,  // mapPageVtx[200] QUAD_MAP_OWL_WARP_STONE_TOWER
+    11,  /* mapPageVtx[60] QUAD_MAP_WORLD_CLOUDS_CLOCK_TOWN_1 */
+    22,  /* mapPageVtx[64] QUAD_MAP_WORLD_CLOUDS_CLOCK_TOWN_2 */
+    -16, /* mapPageVtx[68] QUAD_MAP_WORLD_CLOUDS_WOODFALL_1 */
+    -16, /* mapPageVtx[72] QUAD_MAP_WORLD_CLOUDS_WOODFALL_2 */
+    -16, /* mapPageVtx[76] QUAD_MAP_WORLD_CLOUDS_WOODFALL_3 */
+    59,  /* mapPageVtx[80] QUAD_MAP_WORLD_CLOUDS_SNOWHEAD_1 */
+    24,  /* mapPageVtx[84] QUAD_MAP_WORLD_CLOUDS_SNOWHEAD_2 */
+    59,  /* mapPageVtx[88] QUAD_MAP_WORLD_CLOUDS_SNOWHEAD_3 */
+    -11, /* mapPageVtx[92] QUAD_MAP_WORLD_CLOUDS_ROMANI_RANCH */
+    -5,  /* mapPageVtx[96] QUAD_MAP_WORLD_CLOUDS_GREAT_BAY_1 */
+    -5,  /* mapPageVtx[100] QUAD_MAP_WORLD_CLOUDS_GREAT_BAY_2 */
+    59,  /* mapPageVtx[104] QUAD_MAP_WORLD_CLOUDS_GREAT_BAY_3 */
+    59,  /* mapPageVtx[108] QUAD_MAP_WORLD_CLOUDS_GREAT_BAY_4 */
+    39,  /* mapPageVtx[112] QUAD_MAP_WORLD_CLOUDS_STONE_TOWER_1 */
+    31,  /* mapPageVtx[116] QUAD_MAP_WORLD_CLOUDS_STONE_TOWER_2 */
+    -10, /* mapPageVtx[120] QUAD_MAP_REGION_GREAT_BAY */
+    -36, /* mapPageVtx[124] QUAD_MAP_REGION_ZORA_HALL */
+    -19, /* mapPageVtx[128] QUAD_MAP_REGION_ROMANI_RANCH */
+    -53, /* mapPageVtx[132] QUAD_MAP_REGION_DEKU_PALACE */
+    -27, /* mapPageVtx[136] QUAD_MAP_REGION_WOODFALL */
+    -2,  /* mapPageVtx[140] QUAD_MAP_REGION_CLOCK_TOWN */
+    41,  /* mapPageVtx[144] QUAD_MAP_REGION_SNOWHEAD */
+    11,  /* mapPageVtx[148] QUAD_MAP_REGION_IKANA_GRAVEYARD */
+    -3,  /* mapPageVtx[152] QUAD_MAP_REGION_IKANA_CANYON */
+    45,  /* mapPageVtx[156] QUAD_MAP_REGION_GORON_VILLAGE */
+    18,  /* mapPageVtx[160] QUAD_MAP_REGION_STONE_TOWER */
+    -8,  /* mapPageVtx[164] QUAD_MAP_OWL_WARP_GREAT_BAY_COAST */
+    -38, /* mapPageVtx[168] QUAD_MAP_OWL_WARP_ZORA_CAPE */
+    39,  /* mapPageVtx[172] QUAD_MAP_OWL_WARP_SNOWHEAD */
+    26,  /* mapPageVtx[176] QUAD_MAP_OWL_WARP_MOUNTAIN_VILLAGE */
+    1,   /* mapPageVtx[180] QUAD_MAP_OWL_WARP_CLOCK_TOWN */
+    -7,  /* mapPageVtx[184] QUAD_MAP_OWL_WARP_MILK_ROAD */
+    -28, /* mapPageVtx[188] QUAD_MAP_OWL_WARP_WOODFALL */
+    -27, /* mapPageVtx[192] QUAD_MAP_OWL_WARP_SOUTHERN_SWAMP */
+    -1,  /* mapPageVtx[196] QUAD_MAP_OWL_WARP_IKANA_CANYON */
+    24,  /* mapPageVtx[200] QUAD_MAP_OWL_WARP_STONE_TOWER */
 };
 static s16 gVtxPageMapWorldQuadsHeight[VTX_PAGE_MAP_WORLD_QUADS] = {
-    40, // mapPageVtx[60] QUAD_MAP_WORLD_CLOUDS_CLOCK_TOWN_1
-    31, // mapPageVtx[64] QUAD_MAP_WORLD_CLOUDS_CLOCK_TOWN_2
-    53, // mapPageVtx[68] QUAD_MAP_WORLD_CLOUDS_WOODFALL_1
-    53, // mapPageVtx[72] QUAD_MAP_WORLD_CLOUDS_WOODFALL_2
-    53, // mapPageVtx[76] QUAD_MAP_WORLD_CLOUDS_WOODFALL_3
-    52, // mapPageVtx[80] QUAD_MAP_WORLD_CLOUDS_SNOWHEAD_1
-    35, // mapPageVtx[84] QUAD_MAP_WORLD_CLOUDS_SNOWHEAD_2
-    35, // mapPageVtx[88] QUAD_MAP_WORLD_CLOUDS_SNOWHEAD_3
-    32, // mapPageVtx[92] QUAD_MAP_WORLD_CLOUDS_ROMANI_RANCH
-    64, // mapPageVtx[96] QUAD_MAP_WORLD_CLOUDS_GREAT_BAY_1
-    64, // mapPageVtx[100] QUAD_MAP_WORLD_CLOUDS_GREAT_BAY_2
-    64, // mapPageVtx[104] QUAD_MAP_WORLD_CLOUDS_GREAT_BAY_3
-    64, // mapPageVtx[108] QUAD_MAP_WORLD_CLOUDS_GREAT_BAY_4
-    82, // mapPageVtx[112] QUAD_MAP_WORLD_CLOUDS_STONE_TOWER_1
-    61, // mapPageVtx[116] QUAD_MAP_WORLD_CLOUDS_STONE_TOWER_2
-    8,  // mapPageVtx[120] QUAD_MAP_REGION_GREAT_BAY
-    8,  // mapPageVtx[124] QUAD_MAP_REGION_ZORA_HALL
-    8,  // mapPageVtx[128] QUAD_MAP_REGION_ROMANI_RANCH
-    8,  // mapPageVtx[132] QUAD_MAP_REGION_DEKU_PALACE
-    8,  // mapPageVtx[136] QUAD_MAP_REGION_WOODFALL
-    8,  // mapPageVtx[140] QUAD_MAP_REGION_CLOCK_TOWN
-    8,  // mapPageVtx[144] QUAD_MAP_REGION_SNOWHEAD
-    8,  // mapPageVtx[148] QUAD_MAP_REGION_IKANA_GRAVEYARD
-    8,  // mapPageVtx[152] QUAD_MAP_REGION_IKANA_CANYON
-    8,  // mapPageVtx[156] QUAD_MAP_REGION_GORON_VILLAGE
-    8,  // mapPageVtx[160] QUAD_MAP_REGION_STONE_TOWER
-    12, // mapPageVtx[164] QUAD_MAP_OWL_WARP_GREAT_BAY_COAST
-    12, // mapPageVtx[168] QUAD_MAP_OWL_WARP_ZORA_CAPE
-    12, // mapPageVtx[172] QUAD_MAP_OWL_WARP_SNOWHEAD
-    12, // mapPageVtx[176] QUAD_MAP_OWL_WARP_MOUNTAIN_VILLAGE
-    12, // mapPageVtx[180] QUAD_MAP_OWL_WARP_CLOCK_TOWN
-    12, // mapPageVtx[184] QUAD_MAP_OWL_WARP_MILK_ROAD
-    12, // mapPageVtx[188] QUAD_MAP_OWL_WARP_WOODFALL
-    12, // mapPageVtx[192] QUAD_MAP_OWL_WARP_SOUTHERN_SWAMP
-    12, // mapPageVtx[196] QUAD_MAP_OWL_WARP_IKANA_CANYON
-    12, // mapPageVtx[200] QUAD_MAP_OWL_WARP_STONE_TOWER
+    40, /* mapPageVtx[60] QUAD_MAP_WORLD_CLOUDS_CLOCK_TOWN_1 */
+    31, /* mapPageVtx[64] QUAD_MAP_WORLD_CLOUDS_CLOCK_TOWN_2 */
+    53, /* mapPageVtx[68] QUAD_MAP_WORLD_CLOUDS_WOODFALL_1 */
+    53, /* mapPageVtx[72] QUAD_MAP_WORLD_CLOUDS_WOODFALL_2 */
+    53, /* mapPageVtx[76] QUAD_MAP_WORLD_CLOUDS_WOODFALL_3 */
+    52, /* mapPageVtx[80] QUAD_MAP_WORLD_CLOUDS_SNOWHEAD_1 */
+    35, /* mapPageVtx[84] QUAD_MAP_WORLD_CLOUDS_SNOWHEAD_2 */
+    35, /* mapPageVtx[88] QUAD_MAP_WORLD_CLOUDS_SNOWHEAD_3 */
+    32, /* mapPageVtx[92] QUAD_MAP_WORLD_CLOUDS_ROMANI_RANCH */
+    64, /* mapPageVtx[96] QUAD_MAP_WORLD_CLOUDS_GREAT_BAY_1 */
+    64, /* mapPageVtx[100] QUAD_MAP_WORLD_CLOUDS_GREAT_BAY_2 */
+    64, /* mapPageVtx[104] QUAD_MAP_WORLD_CLOUDS_GREAT_BAY_3 */
+    64, /* mapPageVtx[108] QUAD_MAP_WORLD_CLOUDS_GREAT_BAY_4 */
+    82, /* mapPageVtx[112] QUAD_MAP_WORLD_CLOUDS_STONE_TOWER_1 */
+    61, /* mapPageVtx[116] QUAD_MAP_WORLD_CLOUDS_STONE_TOWER_2 */
+    8,  /* mapPageVtx[120] QUAD_MAP_REGION_GREAT_BAY */
+    8,  /* mapPageVtx[124] QUAD_MAP_REGION_ZORA_HALL */
+    8,  /* mapPageVtx[128] QUAD_MAP_REGION_ROMANI_RANCH */
+    8,  /* mapPageVtx[132] QUAD_MAP_REGION_DEKU_PALACE */
+    8,  /* mapPageVtx[136] QUAD_MAP_REGION_WOODFALL */
+    8,  /* mapPageVtx[140] QUAD_MAP_REGION_CLOCK_TOWN */
+    8,  /* mapPageVtx[144] QUAD_MAP_REGION_SNOWHEAD */
+    8,  /* mapPageVtx[148] QUAD_MAP_REGION_IKANA_GRAVEYARD */
+    8,  /* mapPageVtx[152] QUAD_MAP_REGION_IKANA_CANYON */
+    8,  /* mapPageVtx[156] QUAD_MAP_REGION_GORON_VILLAGE */
+    8,  /* mapPageVtx[160] QUAD_MAP_REGION_STONE_TOWER */
+    12, /* mapPageVtx[164] QUAD_MAP_OWL_WARP_GREAT_BAY_COAST */
+    12, /* mapPageVtx[168] QUAD_MAP_OWL_WARP_ZORA_CAPE */
+    12, /* mapPageVtx[172] QUAD_MAP_OWL_WARP_SNOWHEAD */
+    12, /* mapPageVtx[176] QUAD_MAP_OWL_WARP_MOUNTAIN_VILLAGE */
+    12, /* mapPageVtx[180] QUAD_MAP_OWL_WARP_CLOCK_TOWN */
+    12, /* mapPageVtx[184] QUAD_MAP_OWL_WARP_MILK_ROAD */
+    12, /* mapPageVtx[188] QUAD_MAP_OWL_WARP_WOODFALL */
+    12, /* mapPageVtx[192] QUAD_MAP_OWL_WARP_SOUTHERN_SWAMP */
+    12, /* mapPageVtx[196] QUAD_MAP_OWL_WARP_IKANA_CANYON */
+    12, /* mapPageVtx[200] QUAD_MAP_OWL_WARP_STONE_TOWER */
 };
 
 static s16* sVtxPageQuadsX[VTX_PAGE_MAX] = {
-    sVtxPageMapWorldQuadsX,   // VTX_PAGE_MAP_WORLD
+    sVtxPageMapWorldQuadsX,   /* VTX_PAGE_MAP_WORLD */
 };
 
 static s16* sVtxPageQuadsWidth[VTX_PAGE_MAX] = {
-    gVtxPageMapWorldQuadsWidth,   // VTX_PAGE_MAP_WORLD
+    gVtxPageMapWorldQuadsWidth,   /* VTX_PAGE_MAP_WORLD */
 };
 
 static s16* sVtxPageQuadsY[VTX_PAGE_MAX] = {
-    sVtxPageMapWorldQuadsY,   // VTX_PAGE_MAP_WORLD
+    sVtxPageMapWorldQuadsY,   /* VTX_PAGE_MAP_WORLD */
 };
 
 static s16* sVtxPageQuadsHeight[VTX_PAGE_MAX] = {
-    gVtxPageMapWorldQuadsHeight,   // VTX_PAGE_MAP_WORLD
+    gVtxPageMapWorldQuadsHeight,   /* VTX_PAGE_MAP_WORLD */
 };
 
 static const u32 sWorldMapClockTownCloud1Tex = 0x0C008418;
@@ -412,46 +412,46 @@ static const u32 sWorldMapWoodfallCloud2Tex = 0x0C0135D8;
 static const u32 sWorldMapWoodfallCloud3Tex = 0x0C014318;
 
 static u32 sCloudTextures[] = {
-    sWorldMapClockTownCloud1Tex,  // TINGLE_MAP_CLOCK_TOWN
-    sWorldMapClockTownCloud2Tex,  // TINGLE_MAP_CLOCK_TOWN
-    sWorldMapWoodfallCloud1Tex,   // TINGLE_MAP_WOODFALL
-    sWorldMapWoodfallCloud2Tex,   // TINGLE_MAP_WOODFALL
-    sWorldMapWoodfallCloud3Tex,   // TINGLE_MAP_WOODFALL
-    sWorldMapSnowheadCloud1Tex,   // TINGLE_MAP_SNOWHEAD
-    sWorldMapSnowheadCloud2Tex,   // TINGLE_MAP_SNOWHEAD
-    sWorldMapSnowheadCloud3Tex,   // TINGLE_MAP_SNOWHEAD
-    sWorldMapRomaniRanchCloudTex, // TINGLE_MAP_ROMANI_RANCH
-    sWorldMapGreatBayCloud1Tex,   // TINGLE_MAP_GREAT_BAY
-    sWorldMapGreatBayCloud2Tex,   // TINGLE_MAP_GREAT_BAY
-    sWorldMapGreatBayCloud3Tex,   // TINGLE_MAP_GREAT_BAY
-    sWorldMapGreatBayCloud4Tex,   // TINGLE_MAP_GREAT_BAY
-    sWorldMapStoneTowerCloud1Tex, // TINGLE_MAP_STONE_TOWER
-    sWorldMapStoneTowerCloud2Tex, // TINGLE_MAP_STONE_TOWER
+    sWorldMapClockTownCloud1Tex,  /* TINGLE_MAP_CLOCK_TOWN */
+    sWorldMapClockTownCloud2Tex,  /* TINGLE_MAP_CLOCK_TOWN */
+    sWorldMapWoodfallCloud1Tex,   /* TINGLE_MAP_WOODFALL */
+    sWorldMapWoodfallCloud2Tex,   /* TINGLE_MAP_WOODFALL */
+    sWorldMapWoodfallCloud3Tex,   /* TINGLE_MAP_WOODFALL */
+    sWorldMapSnowheadCloud1Tex,   /* TINGLE_MAP_SNOWHEAD */
+    sWorldMapSnowheadCloud2Tex,   /* TINGLE_MAP_SNOWHEAD */
+    sWorldMapSnowheadCloud3Tex,   /* TINGLE_MAP_SNOWHEAD */
+    sWorldMapRomaniRanchCloudTex, /* TINGLE_MAP_ROMANI_RANCH */
+    sWorldMapGreatBayCloud1Tex,   /* TINGLE_MAP_GREAT_BAY */
+    sWorldMapGreatBayCloud2Tex,   /* TINGLE_MAP_GREAT_BAY */
+    sWorldMapGreatBayCloud3Tex,   /* TINGLE_MAP_GREAT_BAY */
+    sWorldMapGreatBayCloud4Tex,   /* TINGLE_MAP_GREAT_BAY */
+    sWorldMapStoneTowerCloud1Tex, /* TINGLE_MAP_STONE_TOWER */
+    sWorldMapStoneTowerCloud2Tex, /* TINGLE_MAP_STONE_TOWER */
 };
 
 static f32 sOwlWarpWorldMapCursorsX[OWL_WARP_MAX - 1] = {
-    -50.0f, // OWL_WARP_GREAT_BAY_COAST
-    -38.0f, // OWL_WARP_ZORA_CAPE
-    6.0f,   // OWL_WARP_SNOWHEAD
-    11.0f,  // OWL_WARP_MOUNTAIN_VILLAGE
-    8.0f,   // OWL_WARP_CLOCK_TOWN
-    0.0f,   // OWL_WARP_MILK_ROAD
-    12.0f,  // OWL_WARP_WOODFALL
-    31.0f,  // OWL_WARP_SOUTHERN_SWAMP
-    48.0f,  // OWL_WARP_IKANA_CANYON
-    56.0f,  // OWL_WARP_STONE_TOWER
+    -50.0f, /* OWL_WARP_GREAT_BAY_COAST */
+    -38.0f, /* OWL_WARP_ZORA_CAPE */
+    6.0f,   /* OWL_WARP_SNOWHEAD */
+    11.0f,  /* OWL_WARP_MOUNTAIN_VILLAGE */
+    8.0f,   /* OWL_WARP_CLOCK_TOWN */
+    0.0f,   /* OWL_WARP_MILK_ROAD */
+    12.0f,  /* OWL_WARP_WOODFALL */
+    31.0f,  /* OWL_WARP_SOUTHERN_SWAMP */
+    48.0f,  /* OWL_WARP_IKANA_CANYON */
+    56.0f,  /* OWL_WARP_STONE_TOWER */
 };
 static f32 sOwlWarpWorldMapCursorsY[OWL_WARP_MAX - 1] = {
-    -14.0f, // OWL_WARP_GREAT_BAY_COAST
-    -39.0f, // OWL_WARP_ZORA_CAPE
-    23.0f,  // OWL_WARP_SNOWHEAD
-    11.0f,  // OWL_WARP_MOUNTAIN_VILLAGE
-    -8.0f,  // OWL_WARP_CLOCK_TOWN
-    -15.0f, // OWL_WARP_MILK_ROAD
-    -31.0f, // OWL_WARP_WOODFALL
-    -30.0f, // OWL_WARP_SOUTHERN_SWAMP
-    -10.0f, // OWL_WARP_IKANA_CANYON
-    11.0f,  // OWL_WARP_STONE_TOWER
+    -14.0f, /* OWL_WARP_GREAT_BAY_COAST */
+    -39.0f, /* OWL_WARP_ZORA_CAPE */
+    23.0f,  /* OWL_WARP_SNOWHEAD */
+    11.0f,  /* OWL_WARP_MOUNTAIN_VILLAGE */
+    -8.0f,  /* OWL_WARP_CLOCK_TOWN */
+    -15.0f, /* OWL_WARP_MILK_ROAD */
+    -31.0f, /* OWL_WARP_WOODFALL */
+    -30.0f, /* OWL_WARP_SOUTHERN_SWAMP */
+    -10.0f, /* OWL_WARP_IKANA_CANYON */
+    11.0f,  /* OWL_WARP_STONE_TOWER */
 };
 
 static s16 sCursorPrimColorTarget[][3] = {
@@ -488,7 +488,7 @@ static void KaleidoScope_UpdateSoaringMapCursor(GameState_Play* play)
     PauseContext* pauseCtx = &play->pauseCtx;
     s16 oldCursorPoint;
 
-    pauseCtx->cursorColorSet = 4; // PAUSE_CURSOR_COLOR_SET_BLUE;
+    pauseCtx->cursorColorSet = 4; /* PAUSE_CURSOR_COLOR_SET_BLUE; */
     oldCursorPoint = pauseCtx->cursorPoint[PAUSE_WORLD_MAP];
 
     if (pauseCtx->stickAdjX > 30) {
@@ -511,13 +511,13 @@ static void KaleidoScope_UpdateSoaringMapCursor(GameState_Play* play)
         } while (!pauseCtx->worldMapPoints[pauseCtx->cursorPoint[PAUSE_WORLD_MAP]]);
     }
 
-    //! TODO: Is the `0xA4` here related to `0xA3` being the last recored item in the `ItemId` enum?
+    /*! TODO: Is the `0xA4` here related to `0xA3` being the last recored item in the `ItemId` enum? */
     pauseCtx->cursorItem[PAUSE_MAP] = sOwlWarpPauseItems[pauseCtx->cursorPoint[PAUSE_WORLD_MAP]] - 0xA4;
-    // Used as cursor vtxIndex
+    /* Used as cursor vtxIndex */
     pauseCtx->cursorSlot[PAUSE_MAP] = 31 + pauseCtx->cursorPoint[PAUSE_WORLD_MAP];
 
     if (oldCursorPoint != pauseCtx->cursorPoint[PAUSE_WORLD_MAP]) {
-        PlaySound(0x4809); // NA_SE_SY_CURSOR
+        PlaySound(0x4809); /* NA_SE_SY_CURSOR */
     }
 }
 
@@ -527,7 +527,7 @@ static void LoadMapName(void* dst, u32 mapNameId)
 
     comboDmaLookupForeignId(&dma, 18);
     u32 vromAddr = dma.vstart;
-    // u32 size = 0x400;
+    /* u32 size = 0x400; */
     u32 headerSize;
     LoadFile(&headerSize, vromAddr, sizeof(headerSize));
 
@@ -593,14 +593,14 @@ void KaleidoScope_BeforeUpdate(GameState_Play* play)
             if (sStickXRepeatState == -1) {
                 sStickXRepeatTimer--;
                 if (sStickXRepeatTimer < 0) {
-                    // Allow the input to register and apply the delay for all subsequent repeated inputs
+                    /* Allow the input to register and apply the delay for all subsequent repeated inputs */
                     sStickXRepeatTimer = 2;
                 } else {
-                    // Cancel the current input
+                    /* Cancel the current input */
                     pauseCtx->stickAdjX = 0;
                 }
             } else {
-                // Allow the input to register and apply the delay for the first repeated input
+                /* Allow the input to register and apply the delay for the first repeated input */
                 sStickXRepeatTimer = 10;
                 sStickXRepeatState = -1;
             }
@@ -608,14 +608,14 @@ void KaleidoScope_BeforeUpdate(GameState_Play* play)
             if (sStickXRepeatState == 1) {
                 sStickXRepeatTimer--;
                 if (sStickXRepeatTimer < 0) {
-                    // Allow the input to register and apply the delay for all subsequent repeated inputs
+                    /* Allow the input to register and apply the delay for all subsequent repeated inputs */
                     sStickXRepeatTimer = 2;
                 } else {
-                    // Cancel the current input
+                    /* Cancel the current input */
                     pauseCtx->stickAdjX = 0;
                 }
             } else {
-                // Allow the input to register and apply the delay for the first repeated input
+                /* Allow the input to register and apply the delay for the first repeated input */
                 sStickXRepeatTimer = 10;
                 sStickXRepeatState = 1;
             }
@@ -627,14 +627,14 @@ void KaleidoScope_BeforeUpdate(GameState_Play* play)
             if (sStickYRepeatState == -1) {
                 sStickYRepeatTimer--;
                 if (sStickYRepeatTimer < 0) {
-                    // Allow the input to register and apply the delay for all subsequent repeated inputs
+                    /* Allow the input to register and apply the delay for all subsequent repeated inputs */
                     sStickYRepeatTimer = 2;
                 } else {
-                    // Cancel the current input
+                    /* Cancel the current input */
                     pauseCtx->stickAdjY = 0;
                 }
             } else {
-                // Allow the input to register and apply the delay for the first repeated input
+                /* Allow the input to register and apply the delay for the first repeated input */
                 sStickYRepeatTimer = 10;
                 sStickYRepeatState = -1;
             }
@@ -642,14 +642,14 @@ void KaleidoScope_BeforeUpdate(GameState_Play* play)
             if (sStickYRepeatState == 1) {
                 sStickYRepeatTimer--;
                 if (sStickYRepeatTimer < 0) {
-                    // Allow the input to register and apply the delay for all subsequent repeated inputs
+                    /* Allow the input to register and apply the delay for all subsequent repeated inputs */
                     sStickYRepeatTimer = 2;
                 } else {
-                    // Cancel the current input
+                    /* Cancel the current input */
                     pauseCtx->stickAdjY = 0;
                 }
             } else {
-                // Allow the input to register and apply the delay for the first repeated input
+                /* Allow the input to register and apply the delay for the first repeated input */
                 sStickYRepeatTimer = 10;
                 sStickYRepeatState = 1;
             }
@@ -677,15 +677,15 @@ void KaleidoScope_BeforeUpdate(GameState_Play* play)
             u8* dest = PALIGN(play->objectCtx.spaceStart, 16);
 
             pauseCtx->iconItemSegment = dest;
-            size = comboLoadFile(dest, 8); // icon_item_static
+            size = comboLoadFile(dest, 8); /* icon_item_static */
             dest = PALIGN(dest + size, 16);
 
             pauseCtx->iconItemAltSegment = dest;
-            size = comboLoadForeignFile(dest, 10); // icon_item_field_static
+            size = comboLoadForeignFile(dest, 10); /* icon_item_field_static */
             dest = PALIGN(dest + size, 16);
 
             pauseCtx->iconItemLangSegment = dest;
-            size = comboLoadForeignFile(dest, 13); // icon_item_jpn_static
+            size = comboLoadForeignFile(dest, 13); /* icon_item_jpn_static */
             dest = PALIGN(dest + size, 16);
 
             pauseCtx->nameSegment = dest;
@@ -699,11 +699,11 @@ void KaleidoScope_BeforeUpdate(GameState_Play* play)
             }
             sMapPageBgTextures[5] = 0x0D006200;
 
-            Interface_SetDoAction(play, 0x06); // DO_ACTION_DECIDE
-            Interface_LoadActionLabelB(play, 0x12); // DO_ACTION_STOP
+            Interface_SetDoAction(play, 0x06); /* DO_ACTION_DECIDE */
+            Interface_LoadActionLabelB(play, 0x12); /* DO_ACTION_STOP */
             pauseCtx->state = PAUSE_STATE_OWLWARP_3;
             VREG(88) = 98;
-            pauseCtx->promptChoice = 0; // PAUSE_PROMPT_YES
+            pauseCtx->promptChoice = 0; /* PAUSE_PROMPT_YES */
             break;
 
         case PAUSE_STATE_OWLWARP_3:
@@ -721,7 +721,7 @@ void KaleidoScope_BeforeUpdate(GameState_Play* play)
                 interfaceCtx->startAlpha = 255;
                 WREG(2) = 0;
                 pauseCtx->alpha = 255;
-                pauseCtx->changing = 0; // PAUSE_MAIN_STATE_IDLE;
+                pauseCtx->changing = 0; /* PAUSE_MAIN_STATE_IDLE; */
                 pauseCtx->cursorSpecialPos = 0;
                 pauseCtx->state = PAUSE_STATE_OWLWARP_SELECT;
                 R_PAUSE_OWLWARP_ALPHA = 120;
@@ -729,25 +729,24 @@ void KaleidoScope_BeforeUpdate(GameState_Play* play)
             break;
 
         case PAUSE_STATE_OWLWARP_SELECT:
-            // TODO for some reason pressing START causes a "failed ocarina" sfx.
+            /* TODO for some reason pressing START causes a "failed ocarina" sfx. */
             if ((play->gs.input[0].pressed.buttons & START_BUTTON) || (play->gs.input[0].pressed.buttons & B_BUTTON))
             {
                 pauseCtx->state = PAUSE_STATE_OWLWARP_6;
                 WREG(2) = -6240;
                 func_800C7200(0);
                 gSoaringIndexSelected = -1;
-                play->msgCtx.ocarinaMode = 4; // OCARINA_MODE_END
-                gSaveContext.prevHudVisibilityMode = 50; // HUD_VISIBILITY_ALL;
+                gSaveContext.prevHudVisibilityMode = 50; /* HUD_VISIBILITY_ALL; */
             }
             else if (play->gs.input[0].pressed.buttons & A_BUTTON)
             {
                 msgCtx->msgLength = 0;
-                msgCtx->msgMode = 0; // MSGMODE_NONE;
+                msgCtx->msgMode = 0; /* MSGMODE_NONE; */
                 pauseCtx->state = PAUSE_STATE_OWLWARP_6;
                 WREG(2) = -6240;
                 func_800C7200(0);
                 gSoaringIndexSelected = (u8)pauseCtx->cursorPoint[PAUSE_WORLD_MAP];
-                PlaySound(0x4808); // NA_SE_SY_DECIDE
+                PlaySound(0x4808); /* NA_SE_SY_DECIDE */
             }
             else
             {
@@ -772,8 +771,8 @@ void KaleidoScope_BeforeUpdate(GameState_Play* play)
                     pauseCtx->alpha = 0;
                 }
             } else {
-                pauseCtx->debugState = 0; // DEBUG_EDITOR_NONE;
-                pauseCtx->state = 0x13; // PAUSE_STATE_UNPAUSE_CLOSE;
+                pauseCtx->debugState = 0; /* DEBUG_EDITOR_NONE; */
+                pauseCtx->state = 0x13; /* PAUSE_STATE_UNPAUSE_CLOSE; */
                 pauseCtx->itemPageRoll = pauseCtx->mapPageRoll = pauseCtx->questPageRoll = pauseCtx->maskPageRoll =
                     160.0f;
                 pauseCtx->namedItem = PAUSE_ITEM_NONE;
@@ -798,18 +797,18 @@ static void KaleidoScope_DrawWorldMap(GameState_Play* play) {
 
     OPEN_DISPS(play->gs.gfx);
 
-    // KaleidoScope_SetCursorVtxPos(pauseCtx, pauseCtx->cursorSlot[PAUSE_MAP] * 4, pauseCtx->mapPageVtx);
+    /* KaleidoScope_SetCursorVtxPos(pauseCtx, pauseCtx->cursorSlot[PAUSE_MAP] * 4, pauseCtx->mapPageVtx); */
 
-    // Draw the world map angled
-    // Because it is at an angle, vertices are used to place it.
-    // The structure of the loops here is to satisfy the constraints of both TMEM and the size of the vertex cache.
-    // - Each loop iteration loads 9 rows, because 9 is the largest number smaller than
-    //   `TMEM_SIZE / 2 / textureWidth`.
-    // - Each loop is at most 8 iterations long because each row uses 4 vertices and the vertex cache has size
-    //   `32 = 8 * 4`.
-    // .
-    // Hence there is one loop of length 8, one of length 6, and then the remaining `128 - (8 + 6) * 9 = 2` rows are
-    // drawn at the end.
+    /* Draw the world map angled */
+    /* Because it is at an angle, vertices are used to place it. */
+    /* The structure of the loops here is to satisfy the constraints of both TMEM and the size of the vertex cache. */
+    /* - Each loop iteration loads 9 rows, because 9 is the largest number smaller than */
+    /*   `TMEM_SIZE / 2 / textureWidth`. */
+    /* - Each loop is at most 8 iterations long because each row uses 4 vertices and the vertex cache has size */
+    /*   `32 = 8 * 4`. */
+    /* . */
+    /* Hence there is one loop of length 8, one of length 6, and then the remaining `128 - (8 + 6) * 9 = 2` rows are */
+    /* drawn at the end. */
 
     gDPPipeSync(POLY_OPA_DISP++);
     gDPSetTextureFilter(POLY_OPA_DISP++, G_TF_POINT);
@@ -818,11 +817,11 @@ static void KaleidoScope_DrawWorldMap(GameState_Play* play) {
 
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, pauseCtx->alpha);
 
-    // Set the vertices for the first 8 quads attached to the world map texture.
+    /* Set the vertices for the first 8 quads attached to the world map texture. */
     gSPVertex(POLY_OPA_DISP++, &pauseCtx->mapPageVtx[QUAD_MAP_PAGE_WORLD_IMAGE_FIRST * 4], 8 * 4, 0);
 
-    // Process the first 72 rows of pixels for gWorldMapImageTex, 9 rows at a time over 8 iterations
-    // Loop over quadIndex of this loop (i), quadIndex of the entire texture (k), vtxIndex (j)
+    /* Process the first 72 rows of pixels for gWorldMapImageTex, 9 rows at a time over 8 iterations */
+    /* Loop over quadIndex of this loop (i), quadIndex of the entire texture (k), vtxIndex (j) */
     for (i = 0, k = 0, j = 0; i < 8; i++, k++, j += 4) {
         gDPLoadTextureBlock(
             POLY_OPA_DISP++, (u8*)gWorldMapImageTex + k * (WORLD_MAP_IMAGE_WIDTH * WORLD_MAP_IMAGE_FRAG_HEIGHT),
@@ -832,12 +831,12 @@ static void KaleidoScope_DrawWorldMap(GameState_Play* play) {
         gSP1Quadrangle(POLY_OPA_DISP++, j, j + 2, j + 3, j + 1, 0);
     }
 
-    // Set the vertices for the last 7 quads attached to the world map texture:
-    // 6 quads with a height of 9, 1 quad with a height of 2
+    /* Set the vertices for the last 7 quads attached to the world map texture: */
+    /* 6 quads with a height of 9, 1 quad with a height of 2 */
     gSPVertex(POLY_OPA_DISP++, &pauseCtx->mapPageVtx[(QUAD_MAP_PAGE_WORLD_IMAGE_FIRST + 8) * 4], (6 + 1) * 4, 0);
 
-    // Process the next 54 rows of pixels for gWorldMapImageTex, 9 rows at a time over 6 iterations
-    // Loop over quadIndex of this loop (i), quadIndex of the entire texture (k), vtxIndex (j)
+    /* Process the next 54 rows of pixels for gWorldMapImageTex, 9 rows at a time over 6 iterations */
+    /* Loop over quadIndex of this loop (i), quadIndex of the entire texture (k), vtxIndex (j) */
     for (i = 0, j = 0; i < 6; i++, k++, j += 4) {
         gDPLoadTextureBlock(
             POLY_OPA_DISP++, (u8*)gWorldMapImageTex + k * (WORLD_MAP_IMAGE_WIDTH * WORLD_MAP_IMAGE_FRAG_HEIGHT),
@@ -847,7 +846,7 @@ static void KaleidoScope_DrawWorldMap(GameState_Play* play) {
         gSP1Quadrangle(POLY_OPA_DISP++, j, j + 2, j + 3, j + 1, 0);
     }
 
-    // Process the last 2 rows of pixels for gWorldMapImageTex
+    /* Process the last 2 rows of pixels for gWorldMapImageTex */
     gDPLoadTextureBlock(
         POLY_OPA_DISP++, (u8*)gWorldMapImageTex + k * (WORLD_MAP_IMAGE_WIDTH * WORLD_MAP_IMAGE_FRAG_HEIGHT),
         G_IM_FMT_CI, G_IM_SIZ_8b, WORLD_MAP_IMAGE_WIDTH, WORLD_MAP_IMAGE_HEIGHT % WORLD_MAP_IMAGE_FRAG_HEIGHT, 0,
@@ -867,8 +866,8 @@ static void KaleidoScope_DrawWorldMap(GameState_Play* play) {
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 215, 235, 235, pauseCtx->alpha);
     gDPSetEnvColor(POLY_OPA_DISP++, 40, 60, 100, 0);
 
-    // Draw clouds over the world map
-    // Iterate over cloud bits (n)
+    /* Draw clouds over the world map */
+    /* Iterate over cloud bits (n) */
     for (n = 0; n < WORLD_MAP_NUM_CLOUDS; n++) {
         if (!(((void)0, gMmSave.worldMapCloudVisibility) & (1 << n))) {
 
@@ -890,7 +889,7 @@ static void KaleidoScope_DrawWorldMap(GameState_Play* play) {
 
     Gfx_SetupDL_42Opa(play->gs.gfx);
 
-    // Selecting an owl warp
+    /* Selecting an owl warp */
     gDPPipeSync(POLY_OPA_DISP++);
     gDPSetCombineMode(POLY_OPA_DISP++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
     gDPLoadTextureBlock(POLY_OPA_DISP++, gWorldMapOwlFaceTex, G_IM_FMT_RGBA, G_IM_SIZ_32b, 24, 12, 0,
@@ -899,8 +898,8 @@ static void KaleidoScope_DrawWorldMap(GameState_Play* play) {
 
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, pauseCtx->alpha);
 
-    // Loop over OwlWarpId (i), unused vtxIndex (j), unused (k)
-    for (i = 0, j = 0; i <= 9; i++, k++, j += 4) { // OWL_WARP_STONE_TOWER
+    /* Loop over OwlWarpId (i), unused vtxIndex (j), unused (k) */
+    for (i = 0, j = 0; i <= 9; i++, k++, j += 4) { /* OWL_WARP_STONE_TOWER */
         if (pauseCtx->worldMapPoints[i]) {
             gSPVertex(POLY_OPA_DISP++, &pauseCtx->mapPageVtx[(QUAD_MAP_PAGE_WORLD_WARP_FIRST + i) * 4], 4, 0);
             gSP1Quadrangle(POLY_OPA_DISP++, 0, 2, 3, 1, 0);
@@ -1104,7 +1103,7 @@ static void KaleidoScope_DrawOwlWarpInfoPanel(GameState_Play* play)
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 150, 140, 90, 255);
     gSPVertex(POLY_OPA_DISP++, &pauseCtx->infoPanelVtx[0], 16, 0);
 
-    gSPDisplayList(POLY_OPA_DISP++, 0x080885C0); // gItemNamePanelDL
+    gSPDisplayList(POLY_OPA_DISP++, 0x080885C0); /* gItemNamePanelDL */
 
     if (pauseCtx->cursorSpecialPos != 0) {
         j = (pauseCtx->cursorSpecialPos * 4) - 32;
@@ -1135,7 +1134,7 @@ static void KaleidoScope_DrawOwlWarpInfoPanel(GameState_Play* play)
 
         gSPVertex(POLY_OPA_DISP++, &pauseCtx->infoPanelVtx[16], 4, 0);
 
-        if (pauseCtx->nameColorSet == 1) { // PAUSE_NAME_COLOR_SET_GREY
+        if (pauseCtx->nameColorSet == 1) { /* PAUSE_NAME_COLOR_SET_GREY */
             gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 70, 70, 70, 255);
         } else {
             gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, 255);
@@ -1277,14 +1276,14 @@ static void KaleidoScope_UpdateCursorSize(GameState_Play* play)
         sCursorHeight = 7.5f;
         sCursorWidth = 7.5f;
 
-        // sCursorSpinPhase += 0x300;
+        /* sCursorSpinPhase += 0x300; */
     } else {
         if (pauseCtx->cursorSpecialPos == PAUSE_CURSOR_PAGE_LEFT) {
             sCursorX = -93.0f;
-        } else { // PAUSE_CURSOR_PAGE_RIGHT
+        } else { /* PAUSE_CURSOR_PAGE_RIGHT */
             sCursorX = 101.0f;
         }
-        // sCursorSpinPhase += 0x300;
+        /* sCursorSpinPhase += 0x300; */
         sCursorHeight = 8.0f;
         sCursorWidth = 8.0f;
         sCursorY = -4.0f;
@@ -1328,15 +1327,15 @@ static s16 KaleidoScope_SetPageVertices(GameState_Play* play, Vtx* vtx, s16 vtxP
     s16 j;
     s16 k;
 
-    // Vertices for KaleidoScope_DrawPageSections
+    /* Vertices for KaleidoScope_DrawPageSections */
 
     pageBgQuadX = 0 - (PAGE_BG_COLS * PAGE_BG_QUAD_WIDTH) / 2 - PAGE_BG_QUAD_WIDTH;
 
-    // For each column
+    /* For each column */
     for (k = 0, i = 0; i < 3; i++) {
         pageBgQuadX += PAGE_BG_QUAD_WIDTH;
 
-        // For each row
+        /* For each row */
         for (pageBgQuadY = (PAGE_BG_ROWS * PAGE_BG_QUAD_HEIGHT) / 2, j = 0; j < 5; j++, k += 4, pageBgQuadY -= 32) {
             vtx[k + 0].v.ob[0] = vtx[k + 2].v.ob[0] = pageBgQuadX;
             vtx[k + 1].v.ob[0] = vtx[k + 3].v.ob[0] = vtx[k + 0].v.ob[0] + PAGE_BG_QUAD_WIDTH;
@@ -1471,20 +1470,20 @@ static void KaleidoScope_SetVertices(GameState_Play* play, GfxContext* gfxCtx)
             pauseCtx->cursorVtx[i].v.cn[3] = 255;
     }
 
-    // PAUSE_QUAD_CURSOR_0
+    /* PAUSE_QUAD_CURSOR_0 */
     pauseCtx->cursorVtx[1].v.tc[0] = pauseCtx->cursorVtx[2].v.tc[1] = pauseCtx->cursorVtx[3].v.tc[0] =
         pauseCtx->cursorVtx[3].v.tc[1]
-        // PAUSE_QUAD_CURSOR_1
+        /* PAUSE_QUAD_CURSOR_1 */
         = pauseCtx->cursorVtx[5].v.tc[0] = pauseCtx->cursorVtx[6].v.tc[1] = pauseCtx->cursorVtx[7].v.tc[0] =
             pauseCtx->cursorVtx[7].v.tc[1]
-        // PAUSE_QUAD_CURSOR_2
+        /* PAUSE_QUAD_CURSOR_2 */
         = pauseCtx->cursorVtx[9].v.tc[0] = pauseCtx->cursorVtx[10].v.tc[1] = pauseCtx->cursorVtx[11].v.tc[0] =
             pauseCtx->cursorVtx[11].v.tc[1]
-        // PAUSE_QUAD_CURSOR_3
+        /* PAUSE_QUAD_CURSOR_3 */
         = pauseCtx->cursorVtx[13].v.tc[0] = pauseCtx->cursorVtx[14].v.tc[1] = pauseCtx->cursorVtx[15].v.tc[0] =
             pauseCtx->cursorVtx[15].v.tc[1] = 16 * (1 << 5);
 
-    // PAUSE_QUAD_CURSOR_4
+    /* PAUSE_QUAD_CURSOR_4 */
     pauseCtx->cursorVtx[17].v.tc[0] = pauseCtx->cursorVtx[18].v.tc[1] = pauseCtx->cursorVtx[19].v.tc[0] =
         pauseCtx->cursorVtx[19].v.tc[1] = 32 * (1 << 5);
 
@@ -1493,7 +1492,7 @@ static void KaleidoScope_SetVertices(GameState_Play* play, GfxContext* gfxCtx)
 
 typedef void (*KaleidoScope_SetView_Func)(PauseContext*, f32, f32, f32);
 
-// Returns true if called shouldn't draw menu
+/* Returns true if called shouldn't draw menu */
 s32 KaleidoScope_BeforeDraw(GameState_Play* play)
 {
     PauseContext* pauseCtx = &play->pauseCtx;
@@ -1581,10 +1580,10 @@ static u8 GetNextItem(u32 slot, s32* outTableIndex)
     return ITEM_NONE;
 }
 
-// Vertex buffers.
+/* Vertex buffers. */
 static Vtx gVertexBufs[(4 * 4) * 2];
 
-// Vertex buffer pointers.
+/* Vertex buffer pointers. */
 static Vtx* gVertex[4] = {
     &gVertexBufs[(4 * 0) * 2],
     &gVertexBufs[(4 * 1) * 2],
@@ -1593,23 +1592,23 @@ static Vtx* gVertex[4] = {
 };
 
 static Vtx* GetVtxBuffer(GameState_Play* play, u32 vertIdx, u32 slot) {
-    // Get vertex of current icon drawing to Item Select screen
+    /* Get vertex of current icon drawing to Item Select screen */
     const Vtx* srcVtx = play->pauseCtx.itemVtx + vertIdx;
 
-    // Get dest Vtx (factor in frame counter)
+    /* Get dest Vtx (factor in frame counter) */
     int framebufIdx = play->gs.gfx->displayListCounter & 1;
     Vtx* dstVtx = gVertex[slot] + (framebufIdx * 4);
 
-    // Copy source Vtx over to dest Vtx
+    /* Copy source Vtx over to dest Vtx */
     for (int i = 0; i < 4; i++) {
         dstVtx[i] = srcVtx[i];
     }
 
-    // Adjust X position
+    /* Adjust X position */
     dstVtx[0].v.ob[0] += 0x10;
     dstVtx[2].v.ob[0] += 0x10;
 
-    // Adjust Y position
+    /* Adjust Y position */
     dstVtx[0].v.ob[1] -= 0x10;
     dstVtx[1].v.ob[1] -= 0x10;
 
@@ -1618,10 +1617,10 @@ static Vtx* GetVtxBuffer(GameState_Play* play, u32 vertIdx, u32 slot) {
 
 static void DrawIcon(GfxContext* gfxCtx, const Vtx* vtx, u32 segAddr, u16 width, u16 height, u16 qidx) {
     OPEN_DISPS(gfxCtx);
-    // Instructions that happen before function
+    /* Instructions that happen before function */
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0xFF, 0xFF, 0xFF, gfxCtx->play->pauseCtx.alpha & 0xFF);
-    gSPVertex(POLY_OPA_DISP++, vtx, 4, 0); // Loads 4 vertices from RDRAM
-    // Instructions that happen during function.
+    gSPVertex(POLY_OPA_DISP++, vtx, 4, 0); /* Loads 4 vertices from RDRAM */
+    /* Instructions that happen during function. */
     gDPLoadTextureBlock(POLY_OPA_DISP++, segAddr, G_IM_FMT_RGBA, G_IM_SIZ_32b, width, height, 0,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                         G_TX_NOLOD);

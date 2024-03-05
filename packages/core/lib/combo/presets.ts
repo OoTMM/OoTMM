@@ -74,8 +74,10 @@ const BLITZ_BASE: PartialDeep<Settings> = {
   sharedTunicZora: true,
   blastMaskOot: true,
   stoneMaskOot: true,
+  elegyOot: true,
   sharedMaskBlast: true,
   sharedMaskStone: true,
+  sharedSongElegy: true,
   agelessChildTrade: true,
   scalesMm: true,
   strengthMm: true,
@@ -99,6 +101,7 @@ const BLITZ_BASE: PartialDeep<Settings> = {
     "MM_PALACE_BEAN_SKIP",
     "MM_SOUTHERN_SWAMP_SCRUB_HP_GORON",
     "MM_ZORA_HALL_SCRUB_HP_NO_DEKU",
+    "MM_EVAN_FARORE",
     "OOT_DC_JUMP",
     "OOT_DEAD_HAND_STICKS",
     "OOT_FOREST_HOOK",
@@ -164,12 +167,16 @@ const PRESET_BLITZ = makeBlitz({
     'OOT Skulltula House 50 Tokens'
   ],
   hints: [
-    { type: 'foolish', amount: 8, extra: 1 },
-    { type: 'always', amount: 'max', extra: 1 },
-    { type: 'sometimes', amount: 4, extra: 1 },
-    { type: 'playthrough', amount: 4, extra: 1 },
-    { type: 'woth', amount: 9, extra: 1 },
-    { type: 'sometimes', amount: 'max', extra: 1 },
+    { type: "foolish", amount: 8, extra: 1 },
+    { type: "always", amount: "max", extra: 1 },
+    { type: "sometimes", amount: 4, extra: 1 },
+    { type: "item", amount: 1, extra: 1, item: "SHARED_SHIELD_MIRROR" },
+    { type: "item", amount: 1, extra: 1, item: "MM_MASK_CAPTAIN" },
+    { type: "item", amount: 1, extra: 1, item: "MM_POWDER_KEG" },
+    { type: "item", amount: 1, extra: 1, item: "SHARED_ARROW_ICE" },
+    { type: "playthrough", amount: 1, extra: 1 },
+    { type: "woth", amount: 9, extra: 1 },
+    { type: "sometimes", amount: "max", extra: 1 }
   ]
 });
 
@@ -222,6 +229,7 @@ const PRESET_BLITZ_PRECOMPLETED = makeBlitz({
     { type: "item", amount: 1, extra: 1, item: "SHARED_SHIELD_MIRROR" },
     { type: "item", amount: 1, extra: 1, item: "MM_MASK_CAPTAIN" },
     { type: "item", amount: 1, extra: 1, item: "MM_POWDER_KEG" },
+    { type: "item", amount: 1, extra: 1, item: "SHARED_ARROW_ICE" },
     { type: "playthrough", amount: 1, extra: 1 },
     { type: "woth", amount: 9, extra: 1 },
     { type: "sometimes", amount: "max", extra: 1 }
@@ -272,7 +280,7 @@ const PRESET_TRIFORCE_BLITZ = makeBlitz({
   hints: [
     { type: "foolish", amount: 8, extra: 1 },
     { type: "always", amount: "max", extra: 1 },
-    { type: "sometimes", amount: 3, extra: 1 },
+    { type: "sometimes", amount: 4, extra: 1 },
     { type: "item", amount: 1, extra: 1, item: "MM_MASK_CAPTAIN" },
     { type: "item", amount: 1, extra: 1, item: "MM_POWDER_KEG" },
     { type: "item", amount: 1, extra: 1, item: "SHARED_SHIELD_MIRROR" },
@@ -531,6 +539,7 @@ const PRESET_HELL = makeSettings({
     'OOT_WATER_PIT_GS_CHU',
     'OOT_SHADOW_BOAT_EARLY',
     'OOT_SPIRIT_BOSS_CLIMB_NO_HOOK',
+    'OOT_ZR_FALLS_HOOK',
     'OOT_DC_BOULDER',
     'OOT_LAKE_SHORTCUT',
     'OOT_TENT_CHILD',
@@ -604,6 +613,9 @@ const PRESET_HELL = makeSettings({
     'MM_GYORG_POTS_DIVE',
     'MM_STT_POT_BOMBCHU_DIVE',
     'MM_STOCK_POT_WAIT',
+    'MM_STAGE_LIGHTS_DIN',
+    'MM_RANCH_FARORE',
+    'MM_EVAN_FARORE',
   ]
 });
 
