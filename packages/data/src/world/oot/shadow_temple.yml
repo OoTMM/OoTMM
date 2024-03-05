@@ -29,7 +29,7 @@
 "Shadow Temple Main":
   dungeon: Shadow
   exits:
-    "Shadow Temple Open": "cond(climb_anywhere, small_keys_shadow(4), small_keys_shadow(1)) && has_explosives"
+    "Shadow Temple Open": "cond(!setting(climbMostSurfacesOot, off), small_keys_shadow(4), small_keys_shadow(1)) && has_explosives"
     "Shadow Temple Scythe Silver Rupees": "true"
   locations:
     "Shadow Temple Compass": "soul_redead_gibdo && (has_weapon || can_use_sticks || can_use_din || can_hammer)"
@@ -52,7 +52,7 @@
     SHADOW_INVISIBLE_SCYTHE_GATE: "soul_like_like && soul_keese && (has_ranged_weapon_adult || can_use_slingshot || can_use_sticks || has_explosives_or_hammer || has_weapon)"
   exits:
     "Shadow Temple Falling Spikes": "silver_rupees_shadow_pit"
-    "Shadow Temple Invisible Spikes": "cond(climb_anywhere, small_keys_shadow(4), small_keys_shadow(2))"
+    "Shadow Temple Invisible Spikes": "cond(!setting(climbMostSurfacesOot, off), small_keys_shadow(4), small_keys_shadow(2))"
     "Shadow Temple Wallmaster": "soul_wallmaster"
   locations:
     "Shadow Temple Spinning Blades Visible": "event(SHADOW_INVISIBLE_SCYTHE_GATE)"
@@ -81,7 +81,7 @@
   dungeon: Shadow
   exits:
     "Shadow Temple Open": "small_keys_shadow(4)"
-    "Shadow Temple Wind Front": "cond(climb_anywhere, small_keys_shadow(4), small_keys_shadow(3) && ((is_adult && soul_redead_gibdo && can_hookshot) || can_longshot))"
+    "Shadow Temple Wind Front": "cond(!setting(climbMostSurfacesOot, off), small_keys_shadow(4), small_keys_shadow(3) && ((is_adult && soul_redead_gibdo && can_hookshot) || can_longshot))"
     "Shadow Temple Skull Pot": "silver_rupees_shadow_spikes"
   locations:
     "Shadow Temple SR Spikes Back Left": "has_lens && (can_hookshot || climb_anywhere)"

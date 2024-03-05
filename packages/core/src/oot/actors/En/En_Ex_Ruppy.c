@@ -22,7 +22,7 @@ void EnExRuppy_ItemQuery(ComboItemQuery* q, Actor_EnExRuppy* this, GameState_Pla
         q->gi = GI_OOT_RUPEE_RED;
         break;
     case 0x03:
-        q->gi = GI_OOT_RUPEE_HUGE; // TODO GI_OOT_RUPEE_500?
+        q->gi = GI_OOT_RUPEE_HUGE; /* TODO GI_OOT_RUPEE_500? */
         break;
     case 0x04:
         q->gi = GI_OOT_RUPEE_PURPLE;

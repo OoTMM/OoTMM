@@ -53,7 +53,7 @@
   exits:
     "Stone Tower Temple Inverted East": "true"
     "Stone Tower Temple Inverted East Bridge": "true"
-    "Stone Tower Temple Inverted Wizzrobe": "(soul_enemy(SOUL_ENEMY_CHUCHU) || (trick(MM_ISTT_CHUCHU_LESS) && (has_chateau || has_blue_potion || has_green_potion || has_double_magic))) && can_use_light_arrows && cond(trick(MM_ISTT_ENTRY_JUMP), small_keys_st(4), small_keys_st(3))"
+    "Stone Tower Temple Inverted Wizzrobe": "(soul_enemy(SOUL_ENEMY_CHUCHU) || (trick(MM_ISTT_CHUCHU_LESS) && (has_chateau || has_blue_potion || has_green_potion || has_double_magic))) && can_use_light_arrows && small_keys_st(4)"
     "WARP_SONGS": "true"
   locations:
     "Stone Tower Temple Inverted Pot Updrafts Ledge 1": "true"

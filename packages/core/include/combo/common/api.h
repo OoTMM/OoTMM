@@ -90,7 +90,9 @@ void    ActorSetUnk(Actor* actor, float unk);
 void    ActorEnableGrab(Actor* actor, GameState_Play* play);
 void    ActorEnableTalk(Actor* actor, GameState_Play* play, float range);
 void    ActorEnableTalkEx(Actor* actor, GameState_Play* play, float range, u32 unk);
+/* AKA  Actor_UpdateBgCheckInfo */
 void    Actor_SetCollisionCylinder(GameState_Play* play, Actor* actor, float unk_3, float unk_4, float unk_5, u32 unk_6);
+/* AKA  Actor_MoveXZGravity AKA Actor_MoveWithGravity */
 void    ActorUpdateVelocity(Actor* actor);
 int     ActorTalkedTo(Actor* actor);
 
@@ -139,8 +141,9 @@ extern u16 gPictoboxState;
 extern u16 gPictoboxPhotoTaken;
 #endif
 
-#define TEXT_STATE_NONE     0
-#define TEXT_STATE_CLOSING  2
+#define TEXT_STATE_NONE         0
+#define TEXT_STATE_CLOSING      2
+#define TEXT_STATE_DONE_FADING  3
 
 #if defined(GAME_OOT)
 int  Message_GetState(MessageContext* ctx);
@@ -173,6 +176,7 @@ void Matrix_SetTranslateRotateYXZ(f32 translateX, f32 translateY, f32 translateZ
 f32 Math_CosS(s16 angle);
 f32 Math_SinS(s16 angle);
 s32 Math_StepToF(f32* pValue, f32 target, f32 step);
+s32 Math_StepToS(s16* pValue, s16 target, s16 step);
 f32 Math_SmoothStepToF(f32* pValue, f32 target, f32 fraction, f32 step, f32 minStep);
 f32 sqrtf(f32 value);
 
@@ -245,6 +249,8 @@ void* OverlayAddr(u32 addr);
 void LoadIcon(u32 vaddr, int iconId, void* buffer, int size);
 void CmpDma_LoadAllFiles(u32 vrom, void* dst, size_t size);
 
+s32 Player_ActionToModelGroup(Actor_Player* link, s32 itemAction);
+void Player_SetModels(Actor_Player* link, s32 modelGroup);
 int Player_UsingItem(Actor_Player* link);
 int Player_GetEnvironmentalHazard(GameState_Play* play);
 
@@ -317,6 +323,8 @@ void Interface_StartMoonCrash(GameState_Play* play);
 
 /* GFX */
 Gfx* Gfx_TexScroll(GfxContext* ctx, u32 x, u32 y, s32 width, s32 height);
+void Gfx_DrawDListOpa(GameState_Play* play, Gfx* dlist);
+void Gfx_DrawDListXlu(GameState_Play* play, Gfx* dlist);
 
 void SpawnRoomActors(GameState_Play* play, int id);
 
@@ -358,53 +366,53 @@ int IsSceneValidEpona(int sceneId);
 
 #if defined(GAME_OOT)
 typedef enum {
-    /* 0x0 */ MAGIC_STATE_IDLE, // Regular gameplay
-    /* 0x1 */ MAGIC_STATE_CONSUME_SETUP, // Sets the speed at which magic border flashes
-    /* 0x2 */ MAGIC_STATE_CONSUME, // Consume magic until target is reached or no more magic is available
-    /* 0x3 */ MAGIC_STATE_METER_FLASH_1, // Flashes border and freezes Dark Link
-    /* 0x4 */ MAGIC_STATE_METER_FLASH_2, // Flashes border and draws yellow magic to preview target consumption
-    /* 0x5 */ MAGIC_STATE_RESET, // Reset colors and return to idle
-    /* 0x6 */ MAGIC_STATE_METER_FLASH_3, // Flashes border with no additional behaviour
-    /* 0x7 */ MAGIC_STATE_CONSUME_LENS, // Magic slowly consumed by lens.
-    /* 0x8 */ MAGIC_STATE_STEP_CAPACITY, // Step `magicCapacity` to full capacity
-    /* 0x9 */ MAGIC_STATE_FILL, // Add magic until magicFillTarget is reached.
-    /* 0xA */ MAGIC_STATE_ADD // Add requested magic
+    /* 0x0 */ MAGIC_STATE_IDLE, /* Regular gameplay */
+    /* 0x1 */ MAGIC_STATE_CONSUME_SETUP, /* Sets the speed at which magic border flashes */
+    /* 0x2 */ MAGIC_STATE_CONSUME, /* Consume magic until target is reached or no more magic is available */
+    /* 0x3 */ MAGIC_STATE_METER_FLASH_1, /* Flashes border and freezes Dark Link */
+    /* 0x4 */ MAGIC_STATE_METER_FLASH_2, /* Flashes border and draws yellow magic to preview target consumption */
+    /* 0x5 */ MAGIC_STATE_RESET, /* Reset colors and return to idle */
+    /* 0x6 */ MAGIC_STATE_METER_FLASH_3, /* Flashes border with no additional behaviour */
+    /* 0x7 */ MAGIC_STATE_CONSUME_LENS, /* Magic slowly consumed by lens. */
+    /* 0x8 */ MAGIC_STATE_STEP_CAPACITY, /* Step `magicCapacity` to full capacity */
+    /* 0x9 */ MAGIC_STATE_FILL, /* Add magic until magicFillTarget is reached. */
+    /* 0xA */ MAGIC_STATE_ADD /* Add requested magic */
 } MagicState;
 
 typedef enum {
-    /* 0 */ MAGIC_CONSUME_NOW, // Consume Magic immediately without preview
-    /* 1 */ MAGIC_CONSUME_WAIT_NO_PREVIEW, // Sets consume target but waits to consume. No yellow magic preview to target consumption. Unused
-    /* 2 */ MAGIC_CONSUME_NOW_ALT, // Identical behaviour to MAGIC_CONSUME_NOW. Unused
-    /* 3 */ MAGIC_CONSUME_LENS, // Lens consumption
-    /* 4 */ MAGIC_CONSUME_WAIT_PREVIEW, // Sets consume target but waits to consume. Draws yellow magic to target consumption
-    /* 5 */ MAGIC_ADD // Sets a target to add magic
+    /* 0 */ MAGIC_CONSUME_NOW, /* Consume Magic immediately without preview */
+    /* 1 */ MAGIC_CONSUME_WAIT_NO_PREVIEW, /* Sets consume target but waits to consume. No yellow magic preview to target consumption. Unused */
+    /* 2 */ MAGIC_CONSUME_NOW_ALT, /* Identical behaviour to MAGIC_CONSUME_NOW. Unused */
+    /* 3 */ MAGIC_CONSUME_LENS, /* Lens consumption */
+    /* 4 */ MAGIC_CONSUME_WAIT_PREVIEW, /* Sets consume target but waits to consume. Draws yellow magic to target consumption */
+    /* 5 */ MAGIC_ADD /* Sets a target to add magic */
 } MagicChangeType;
 #else
 typedef enum {
-    /* 0  */ MAGIC_STATE_IDLE, // Regular gameplay
-    /* 1  */ MAGIC_STATE_CONSUME_SETUP, // Sets the speed at which the magic border flashes
-    /* 2  */ MAGIC_STATE_CONSUME, // Consume magic until target is reached or no more magic is available
-    /* 3  */ MAGIC_STATE_METER_FLASH_1, // Flashes border
-    /* 4  */ MAGIC_STATE_METER_FLASH_2, // Flashes border and draws yellow magic to preview target consumption
-    /* 5  */ MAGIC_STATE_RESET, // Reset colors and return to idle
-    /* 6  */ MAGIC_STATE_METER_FLASH_3, // Flashes border with no additional behaviour
-    /* 7  */ MAGIC_STATE_CONSUME_LENS, // Magic slowly consumed by Lens of Truth
-    /* 8  */ MAGIC_STATE_STEP_CAPACITY, // Step `magicCapacity` to full capacity
-    /* 9  */ MAGIC_STATE_FILL, // Add magic until magicFillTarget is reached
+    /* 0  */ MAGIC_STATE_IDLE, /* Regular gameplay */
+    /* 1  */ MAGIC_STATE_CONSUME_SETUP, /* Sets the speed at which the magic border flashes */
+    /* 2  */ MAGIC_STATE_CONSUME, /* Consume magic until target is reached or no more magic is available */
+    /* 3  */ MAGIC_STATE_METER_FLASH_1, /* Flashes border */
+    /* 4  */ MAGIC_STATE_METER_FLASH_2, /* Flashes border and draws yellow magic to preview target consumption */
+    /* 5  */ MAGIC_STATE_RESET, /* Reset colors and return to idle */
+    /* 6  */ MAGIC_STATE_METER_FLASH_3, /* Flashes border with no additional behaviour */
+    /* 7  */ MAGIC_STATE_CONSUME_LENS, /* Magic slowly consumed by Lens of Truth */
+    /* 8  */ MAGIC_STATE_STEP_CAPACITY, /* Step `magicCapacity` to full capacity */
+    /* 9  */ MAGIC_STATE_FILL, /* Add magic until magicFillTarget is reached */
     /* 10 */ MAGIC_STATE_CONSUME_GORON_ZORA_SETUP,
-    /* 11 */ MAGIC_STATE_CONSUME_GORON_ZORA, // Magic slowly consumed by Goron spiked rolling or Zora electric barrier.
-    /* 12 */ MAGIC_STATE_CONSUME_GIANTS_MASK // Magic slowly consumed by Giant's Mask
+    /* 11 */ MAGIC_STATE_CONSUME_GORON_ZORA, /* Magic slowly consumed by Goron spiked rolling or Zora electric barrier. */
+    /* 12 */ MAGIC_STATE_CONSUME_GIANTS_MASK /* Magic slowly consumed by Giant's Mask */
 } MagicState;
 
 typedef enum {
-    /* 0 */ MAGIC_CONSUME_NOW, // Consume magic immediately without preview
-    /* 1 */ MAGIC_CONSUME_WAIT_NO_PREVIEW, // Sets consume target but waits to consume. No yellow magic preview to target consumption. Unused
-    /* 2 */ MAGIC_CONSUME_NOW_ALT, // Identical behaviour to MAGIC_CONSUME_NOW. Unused
-    /* 3 */ MAGIC_CONSUME_LENS, // Lens of Truth consumption
-    /* 4 */ MAGIC_CONSUME_WAIT_PREVIEW, // Sets consume target but waits to consume. Show magic to be consumed in yellow.
-    /* 5 */ MAGIC_CONSUME_GORON_ZORA, // Goron spiked rolling or Zora electric barrier slow consumption
-    /* 6 */ MAGIC_CONSUME_GIANTS_MASK, // Giant's Mask slow consumption
-    /* 7 */ MAGIC_CONSUME_DEITY_BEAM // Fierce Deity Beam consumption, consumed magic now and not via request
+    /* 0 */ MAGIC_CONSUME_NOW, /* Consume magic immediately without preview */
+    /* 1 */ MAGIC_CONSUME_WAIT_NO_PREVIEW, /* Sets consume target but waits to consume. No yellow magic preview to target consumption. Unused */
+    /* 2 */ MAGIC_CONSUME_NOW_ALT, /* Identical behaviour to MAGIC_CONSUME_NOW. Unused */
+    /* 3 */ MAGIC_CONSUME_LENS, /* Lens of Truth consumption */
+    /* 4 */ MAGIC_CONSUME_WAIT_PREVIEW, /* Sets consume target but waits to consume. Show magic to be consumed in yellow. */
+    /* 5 */ MAGIC_CONSUME_GORON_ZORA, /* Goron spiked rolling or Zora electric barrier slow consumption */
+    /* 6 */ MAGIC_CONSUME_GIANTS_MASK, /* Giant's Mask slow consumption */
+    /* 7 */ MAGIC_CONSUME_DEITY_BEAM /* Fierce Deity Beam consumption, consumed magic now and not via request */
 } MagicChangeType;
 #endif
 
@@ -436,9 +444,9 @@ Actor* SpawnCollectible(GameState_Play* play, const Vec3f* pos, u16 param);
 #if defined(GAME_MM)
 void SpawnCollectible2(GameState_Play* play, int unk, void* unk2, u16 unk3);
 f32 VectDist(Vec3f* vec1, Vec3f* vec2);
-void Math_Vec3f_Copy(Vec3f* dest, Vec3f* src);
 f32 Math_Vec3f_DistXYZAndStoreDiff(Vec3f* a, Vec3f* b, Vec3f* dest);
 #endif
+void Math_Vec3f_Copy(Vec3f* dest, Vec3f* src);
 
 void EffectSsIceSmoke_Spawn(GameState_Play* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, s16 scale);
 void EffectSsKiraKira_SpawnDispersed(GameState_Play* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, Color_RGBA8* primColor, Color_RGBA8* envColor, s16 scale, s32 life);
@@ -458,8 +466,10 @@ void Camera_SetCameraData(Camera* camera, s16 setDataFlags, void* data0, void* d
 s32 Collider_InitCylinder(struct GameState_Play* play, ColliderCylinder* collider);
 s32 Collider_SetCylinder(struct GameState_Play* play, ColliderCylinder* collider, struct Actor* actor, ColliderCylinderInit* src);
 void Collider_UpdateCylinder(struct Actor* actor, ColliderCylinder* collider);
+void Collider_DestroyCylinder(struct GameState_Play* play, ColliderCylinder* collider);
 
 s32 CollisionCheck_SetAT(GameState_Play* play, CollisionCheckContext* colCtxt, Collider* collider);
+s32 CollisionCheck_SetOC(GameState_Play* play, CollisionCheckContext* colCtxt, Collider* collider);
 
 void Map_SetAreaEntrypoint(GameState_Play* play);
 

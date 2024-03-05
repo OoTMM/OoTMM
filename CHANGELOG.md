@@ -12,6 +12,10 @@ All notable changes to this project will be documented in this file.
 - Farore's Wind is now logical for Hot Spring Water in Snowhead Temple's Eenos room without ER.
 - OOT Warp Songs can now be logically used within MM dungeons.
 - New trick to wait on the roof for Stock Pot Inn to close.
+- Add tricks for using Farore's Wind and resetting time to get the Romani Ranch checks.
+- Hover Boots are now accounted for getting Letter to Kafei and Toilet Hand in Stock Pot Inn.
+- Hookshot Anywhere for both games and Climb Anywhere for OOT can now be enabled without logical implications.
+- - Key logic for Forest, Shadow, and Spirit Temples still accounts for the above settings whether they are logical or not.
 
 ### Changed
 
@@ -20,6 +24,9 @@ All notable changes to this project will be documented in this file.
 - Removed the time constraints on Bremen Mask and Doggy Race since those events are always available if you can get in.
 - Removed requirements of meeting Kafei for the Curiosity Shop guy's checks.
 - Stock Pot Inn's toilet hand now requires night 3 or other night inn access when Stock Pot Inn is not shuffled.
+- Make Zora Hall stage lights with Din's Fire a trick.
+- Make resetting time with Farore's Wind for Evan a trick.
+- Hookshot Anywhere to go behind the waterfall in Zora's River is now a trick.
 
 ### Fixed
 
@@ -27,6 +34,7 @@ All notable changes to this project will be documented in this file.
 - Fixed an issue where Strength got removed from logic for King Dodongo, causing bomb bag to be hard-required.
 - Some logic issues involving Shared Din's Fire not being accounted for in some situations.
 - Fixed an issue where logic thought you could get Pendant of Memories after 10pm on night 2.
+- Fix Farore's Wind in MM not being properly dispelled when used.
 
 ## [20.0] - 2024-02-19
 

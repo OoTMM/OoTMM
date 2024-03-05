@@ -13,7 +13,7 @@ struct Actor_ShotSun
     /* 0x013C */ ColliderCylinder collider;
     /* 0x0188 */ ShotSunActionFunc actionFunc;
     /* 0x018C */ Vec3s hitboxPos;
-    /* 0x0192 */ s16 timer; // Frames until fairy spawns
+    /* 0x0192 */ s16 timer; /* Frames until fairy spawns */
     /* 0x0194 */ u8 fairySpawnerState;
 
     /* Extended flags */

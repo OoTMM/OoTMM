@@ -17,16 +17,16 @@ _Static_assert(sizeof(ActorList) == 0x8, "OoT ActorList size is wrong");
 typedef struct TargetContextEntry
 {
     /* 0x00 */ Vec3f    pos;
-    /* 0x0C */ f32      unk_0C; // radius?
+    /* 0x0C */ f32      unk_0C; /* radius? */
     /* 0x10 */ Color_RGB8 color;
 }
-TargetContextEntry; // size = 0x14
+TargetContextEntry; /* size = 0x14 */
 
 _Static_assert(sizeof(TargetContextEntry) == 0x14, "TargetContextEntry size is wrong");
 
 typedef struct TargetContext
 {
-    /* 0x00 */ Vec3f    naviRefPos; // possibly wrong
+    /* 0x00 */ Vec3f    naviRefPos; /* possibly wrong */
     /* 0x0C */ Vec3f    targetCenterPos;
     /* 0x18 */ Color_RGBAf naviInner;
     /* 0x28 */ Color_RGBAf naviOuter;
@@ -41,10 +41,10 @@ typedef struct TargetContext
     /* 0x4D */ char     unk_4D[0x03];
     /* 0x50 */ TargetContextEntry arr_50[3];
     /* 0x8C */ Actor*   unk_8C;
-    /* 0x90 */ Actor*   bgmEnemy; // The nearest enemy to player with the right flags that will trigger NA_BGM_ENEMY
+    /* 0x90 */ Actor*   bgmEnemy; /* The nearest enemy to player with the right flags that will trigger NA_BGM_ENEMY */
     /* 0x94 */ Actor*   unk_94;
 }
-TargetContext; // size = 0x98
+TargetContext; /* size = 0x98 */
 
 _Static_assert(sizeof(TargetContext) == 0x98, "TargetContext size is wrong");
 
@@ -67,6 +67,6 @@ typedef struct
     /* 0x00 */ u8 numActors;
     /* 0x04 */ TransitionActorEntry* list;
 }
-TransitionActorContext; // size = 0x8
+TransitionActorContext; /* size = 0x8 */
 
 #endif

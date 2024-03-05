@@ -2,7 +2,7 @@
 #define REGS_H
 
 
-#define REG_GROUPS 29 // number of REG groups, i.e. REG, SREG, OREG, etc.
+#define REG_GROUPS 29 /* number of REG groups, i.e. REG, SREG, OREG, etc. */
 #define REG_PAGES 6
 #define REG_PER_PAGE 16
 #define REG_PER_GROUP REG_PAGES * REG_PER_PAGE
@@ -49,7 +49,7 @@ void Regs_Init(void);
 #define R_TIME_SPEED                      REG(15)
 #define R_RUN_SPEED_LIMIT                 REG(45)
 
-#define R_ENABLE_ARENA_DBG                SREG(0) // Same as OoT
+#define R_ENABLE_ARENA_DBG                SREG(0) /* Same as OoT */
 #define R_ROOM_IMAGE_NODRAW_FLAGS         SREG(25)
 #define R_UPDATE_RATE                     SREG(30)
 #define R_VI_MODE_EDIT_STATE              SREG(48)
@@ -120,7 +120,7 @@ void Regs_Init(void);
 #define R_A_BTN_COLOR(i)                    XREG(22 + i)
 #define R_A_BTN_Y_OFFSET                    XREG(31)
 #define R_MAGIC_CONSUME_TIMER_GIANTS_MASK   XREG(41)
-#define R_THREE_DAY_CLOCK_Y_POS             XREG(43) // TODO: Test
+#define R_THREE_DAY_CLOCK_Y_POS             XREG(43) /* TODO: Test */
 #define R_THREE_DAY_CLOCK_SUN_MOON_CUTOFF   XREG(44)
 #define R_THREE_DAY_CLOCK_HOUR_DIGIT_CUTOFF XREG(45)
 #define R_PAUSE_DBG_MAP_CLOUD_ON            XREG(50)
@@ -130,13 +130,13 @@ void Regs_Init(void);
 #define R_MOON_CRASH_TIMER_X                XREG(81)
 #define R_PAUSE_OWLWARP_ALPHA               XREG(87)
 #define R_STORY_FILL_SCREEN_ALPHA           XREG(91)
-#define R_PLAYER_FLOOR_REVERSE_INDEX        XREG(94) // stores what floor the player is on
+#define R_PLAYER_FLOOR_REVERSE_INDEX        XREG(94) /* stores what floor the player is on */
 #define R_MINIMAP_DISABLED                  XREG(95)
 
 #define R_ENV_LIGHT1_DIR(i)               cREG(3 + (i))
 #define R_ENV_LIGHT2_DIR(i)               cREG(6 + (i))
 
-#define R_TRANS_FADE_FLASH_ALPHA_STEP     iREG(50) // Set to a negative number to start the flash
+#define R_TRANS_FADE_FLASH_ALPHA_STEP     iREG(50) /* Set to a negative number to start the flash */
 #define R_ROOM_CULL_DEBUG_MODE            iREG(86)
 #define R_ROOM_CULL_NUM_ENTRIES           iREG(87)
 #define R_ROOM_CULL_USED_ENTRIES          iREG(88)
@@ -163,7 +163,7 @@ void Regs_Init(void);
 #define R_ITEM_ICON_WIDTH(i)              VREG(76 + i)
 #define R_ITEM_BTN_WIDTH(i)               VREG(80 + i)
 
-// Name inferred from OoT. Set to true to manually set play->csCtx.script
+/* Name inferred from OoT. Set to true to manually set play->csCtx.script */
 #define R_USE_DEBUG_CUTSCENE              dREG(95)
 
 #endif

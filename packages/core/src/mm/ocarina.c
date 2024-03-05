@@ -12,7 +12,7 @@ const char* warpTexts[6] = {
 };
 
 static OcarinaSongButtons sWarpSongs[6] = {
-    // MINUET_OF_FOREST
+    /* MINUET_OF_FOREST */
     {
         6,
         {
@@ -25,7 +25,7 @@ static OcarinaSongButtons sWarpSongs[6] = {
         }
     },
 
-    // BOLERO_OF_FIRE
+    /* BOLERO_OF_FIRE */
     {
         8,
         {
@@ -40,7 +40,7 @@ static OcarinaSongButtons sWarpSongs[6] = {
         }
     },
 
-    // SERENADE_OF_WATER
+    /* SERENADE_OF_WATER */
     {
         5,
         {
@@ -52,7 +52,7 @@ static OcarinaSongButtons sWarpSongs[6] = {
         }
     },
 
-    // REQUIEM_OF_SPIRIT
+    /* REQUIEM_OF_SPIRIT */
     {
         6,
         {
@@ -65,7 +65,7 @@ static OcarinaSongButtons sWarpSongs[6] = {
         }
     },
 
-    // NOCTURNE_OF_SHADOW
+    /* NOCTURNE_OF_SHADOW */
     {
         7,
         {
@@ -79,7 +79,7 @@ static OcarinaSongButtons sWarpSongs[6] = {
         }
     },
 
-    // PRELUDE_OF_LIGHT
+    /* PRELUDE_OF_LIGHT */
     {
         6,
         {
@@ -102,7 +102,7 @@ u8 Ocarina_BeforeSongPlayingProcessed(GameState_Play* ctxt)
 
     if (songPlayed >= 0x80 && songPlayed <= 0x85)
     {
-        PlaySound(0x4807); // NA_SE_SY_TRE_BOX_APPEAR
+        PlaySound(0x4807); /* NA_SE_SY_TRE_BOX_APPEAR */
 
         u8 songIndex = songPlayed - 0x80;
         sWarpSongPlayed = songIndex;
@@ -110,11 +110,11 @@ u8 Ocarina_BeforeSongPlayingProcessed(GameState_Play* ctxt)
         if (ctxt->interfaceCtx.restrictions.songOfSoaring)
         {
             PlayerDisplayTextBox(ctxt, 0x1B95, NULL);
-            ctxt->msgCtx.ocarinaMode = 0x27; // OCARINA_MODE_PROCESS_RESTRICTED_SONG
+            ctxt->msgCtx.ocarinaMode = 0x27; /* OCARINA_MODE_PROCESS_RESTRICTED_SONG */
             return 0xFE;
         }
 
-        PlayerDisplayTextBox(ctxt, 0x1B93, NULL); // Soar to X?
+        PlayerDisplayTextBox(ctxt, 0x1B93, NULL); /* Soar to X? */
         b = ctxt->msgCtx.font.textBuffer.schar;
         b += 11;
         comboTextAppendStr(&b, warpTexts[songIndex]);
@@ -124,7 +124,7 @@ u8 Ocarina_BeforeSongPlayingProcessed(GameState_Play* ctxt)
         }
         comboTextAppendStr(&b, TEXT_NL TEXT_COLOR_GREEN TEXT_CHOICE2 "     OK" TEXT_NL "     No" TEXT_END);
 
-        ctxt->msgCtx.ocarinaMode = 1; // OCARINA_MODE_ACTIVE
+        ctxt->msgCtx.ocarinaMode = 1; /* OCARINA_MODE_ACTIVE */
         return 0xfe;
     }
 
@@ -137,40 +137,40 @@ void Ocarina_HandleWarp(Actor_Player* player, GameState_Play* play)
     if (sWarpSongPlayed >= 0 && sWarpSongPlayed <= 5)
     {
         messageState = Message_GetState((char*)play + 0x4908);
-        if (messageState == 4) // TEXT_STATE_CHOICE
+        if (messageState == 4) /* TEXT_STATE_CHOICE */
         {
             AudioOcarina_SetInstrument(0);
         }
 
-        if (play->msgCtx.ocarinaMode == 0x27) // OCARINA_MODE_PROCESS_RESTRICTED_SONG
+        if (play->msgCtx.ocarinaMode == 0x27) /* OCARINA_MODE_PROCESS_RESTRICTED_SONG */
         {
-            if (messageState == 6) // TEXT_STATE_DONE
+            if (messageState == 6) /* TEXT_STATE_DONE */
             {
                 AudioOcarina_SetInstrument(0);
                 sWarpSongPlayed = 0xFF;
             }
         }
 
-        if (play->msgCtx.ocarinaMode == 2) // OCARINA_MODE_WARP
+        if (play->msgCtx.ocarinaMode == 2) /* OCARINA_MODE_WARP */
         {
             play->interfaceCtx.unk_222 = 0;
             ActorCutscene_Stop(play->playerActorCsIds[0]);
-            player->base.flags &= ~0x20000000; // ACTOR_FLAG_20000000
+            player->base.flags &= ~0x20000000; /* ACTOR_FLAG_20000000 */
             Actor* actor = SpawnActor(&play->actorCtx, play, AC_EN_TEST7, player->base.world.pos.x, player->base.world.pos.y, player->base.world.pos.z, 0, 0, 0, 0x8000 | sWarpSongPlayed);
             if (actor)
             {
-                player->state &= ~0x20000000; // PLAYER_STATE1_TIME_STOP
-                player->csMode = 0; // csMode = PLAYER_CSMODE_0;
+                player->state &= ~0x20000000; /* PLAYER_STATE1_TIME_STOP */
+                player->csMode = 0; /* csMode = PLAYER_CSMODE_0; */
 
                 void (*Player_func_8085B28C)(GameState_Play* play, Actor_Player* link, s32 csMode);
                 Player_func_8085B28C = OverlayAddr(0x8085B28C);
                 Player_func_8085B28C(play, NULL, 19);
 
-                player->state |= 0x30000000; // PLAYER_STATE1_SPECIAL_2 | PLAYER_STATE1_TIME_STOP
+                player->state |= 0x30000000; /* PLAYER_STATE1_SPECIAL_2 | PLAYER_STATE1_TIME_STOP */
             }
             else
             {
-                // TODO not sure what this is for in the vanilla code. perhaps to prevent the player softlocking in the case the soaring actor fails to spawn?
+                /* TODO not sure what this is for in the vanilla code. perhaps to prevent the player softlocking in the case the soaring actor fails to spawn? */
                 /*
                 func_80836A5C(this, play);
                 Player_AnimationPlayOnceReverse(play, this, D_8085D17C[this->transformation]);
@@ -178,7 +178,7 @@ void Ocarina_HandleWarp(Actor_Player* player, GameState_Play* play)
             }
             sWarpSongPlayed = 0xFF;
         }
-        else if (play->msgCtx.ocarinaMode == 4) // OCARINA_MODE_END
+        else if (play->msgCtx.ocarinaMode == 4) /* OCARINA_MODE_END */
         {
             sWarpSongPlayed = 0xFF;
         }

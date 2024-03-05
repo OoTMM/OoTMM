@@ -60,6 +60,8 @@ const ENTRIES: CustomEntry[] = [
   { game: 'oot', name: "MASK_OOT_BUNNY",        file: "objects/object_link_child",   seg: { in: 0x06, out: 0x0a }, offsets: [0x2ca38] },
 
   { game: 'oot', name: "EQ_DEKU_STICK",         file: "objects/object_link_child",   seg: { in: 0x06, out: 0x0a }, offsets: [0x6cc0] },
+
+  { game: 'mm', name: "OBJECT_TORCH2",          file: "objects/gameplay_keep",       seg: { in: 0x04, out: 0x06},  offsets: [0x1c430] },
 ];
 
 const getObjectBuffer = async (roms: DecompressedRoms, game: Game, file: string) => {

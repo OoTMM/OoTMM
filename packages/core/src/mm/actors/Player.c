@@ -73,7 +73,7 @@ typedef enum {
 
 typedef struct AnimSfxEntry {
     /* 0x0 */ u16 sfxId;
-    /* 0x2 */ s16 flags; // negative marks the end
+    /* 0x2 */ s16 flags; /* negative marks the end */
 } AnimSfxEntry;
 
 #define ANIMSFX_SHIFT_TYPE(type) ((type) << 11)
@@ -82,8 +82,8 @@ typedef struct AnimSfxEntry {
 
 static AnimSfxEntry sMagicSpellStartSfx[] =
 {
-    { 0x83D, ANIMSFX_DATA(ANIMSFX_TYPE_1, 20) }, // NA_SE_PL_SKIP
-    { 0x6800, ANIMSFX_DATA(ANIMSFX_TYPE_4, 20) }, // NA_SE_VO_LI_SWORD_N
+    { 0x83D, ANIMSFX_DATA(ANIMSFX_TYPE_1, 20) }, /* NA_SE_PL_SKIP */
+    { 0x6800, ANIMSFX_DATA(ANIMSFX_TYPE_4, 20) }, /* NA_SE_VO_LI_SWORD_N */
     { 0, -ANIMSFX_DATA(ANIMSFX_TYPE_6, 26) },
 };
 
@@ -91,37 +91,37 @@ static AnimSfxEntry sMagicSpellSfx[][2] =
 {
     {
         { 0, ANIMSFX_DATA(ANIMSFX_TYPE_8, 20) },
-        { 0x6817, -ANIMSFX_DATA(ANIMSFX_TYPE_4, 30) }, // NA_SE_VO_LI_MAGIC_FROL
+        { 0x6817, -ANIMSFX_DATA(ANIMSFX_TYPE_4, 30) }, /* NA_SE_VO_LI_MAGIC_FROL */
     },
     {
         { 0, ANIMSFX_DATA(ANIMSFX_TYPE_8, 20) },
-        { 0x6815, -ANIMSFX_DATA(ANIMSFX_TYPE_4, 44) }, // NA_SE_VO_LI_MAGIC_NALE
+        { 0x6815, -ANIMSFX_DATA(ANIMSFX_TYPE_4, 44) }, /* NA_SE_VO_LI_MAGIC_NALE */
     },
     {
-        { 0x681C, ANIMSFX_DATA(ANIMSFX_TYPE_4, 20) }, // NA_SE_VO_LI_MAGIC_ATTACK
-        { 0x1818, -ANIMSFX_DATA(ANIMSFX_TYPE_1, 20) }, // NA_SE_IT_SWORD_SWING_HARD
+        { 0x681C, ANIMSFX_DATA(ANIMSFX_TYPE_4, 20) }, /* NA_SE_VO_LI_MAGIC_ATTACK */
+        { 0x1818, -ANIMSFX_DATA(ANIMSFX_TYPE_1, 20) }, /* NA_SE_IT_SWORD_SWING_HARD */
     },
 };
 
 static PlayerAnimationHeader* sMagicSpellFirstAnimation[] =
 {
-    (PlayerAnimationHeader*)0x0400da28, // &gPlayerAnim_link_magic_kaze1,
-    (PlayerAnimationHeader*)0x0400da10, // &gPlayerAnim_link_magic_honoo1,
-    (PlayerAnimationHeader*)0x0400da40, // &gPlayerAnim_link_magic_tamashii1,
+    (PlayerAnimationHeader*)0x0400da28, /* &gPlayerAnim_link_magic_kaze1, */
+    (PlayerAnimationHeader*)0x0400da10, /* &gPlayerAnim_link_magic_honoo1, */
+    (PlayerAnimationHeader*)0x0400da40, /* &gPlayerAnim_link_magic_tamashii1, */
 };
 
 static PlayerAnimationHeader* sMagicSpellSecondAnimation[] =
 {
-    (PlayerAnimationHeader*)0x0400da30, // &gPlayerAnim_link_magic_kaze2,
-    (PlayerAnimationHeader*)0x0400da18, // &gPlayerAnim_link_magic_honoo2,
-    (PlayerAnimationHeader*)0x0400da48, // &gPlayerAnim_link_magic_tamashii2,
+    (PlayerAnimationHeader*)0x0400da30, /* &gPlayerAnim_link_magic_kaze2, */
+    (PlayerAnimationHeader*)0x0400da18, /* &gPlayerAnim_link_magic_honoo2, */
+    (PlayerAnimationHeader*)0x0400da48, /* &gPlayerAnim_link_magic_tamashii2, */
 };
 
 static PlayerAnimationHeader* sMagicSpellThirdAnimation[] =
 {
-    (PlayerAnimationHeader*)0x0400da38, // &gPlayerAnim_link_magic_kaze3,
-    (PlayerAnimationHeader*)0x0400da20, // &gPlayerAnim_link_magic_honoo3,
-    (PlayerAnimationHeader*)0x0400da50, // &gPlayerAnim_link_magic_tamashii3,
+    (PlayerAnimationHeader*)0x0400da38, /* &gPlayerAnim_link_magic_kaze3, */
+    (PlayerAnimationHeader*)0x0400da20, /* &gPlayerAnim_link_magic_honoo3, */
+    (PlayerAnimationHeader*)0x0400da50, /* &gPlayerAnim_link_magic_tamashii3, */
 };
 
 static u8 sMagicSpellLoopTimer[] = { 70, 10, 10 };
@@ -185,7 +185,7 @@ static s32 Player_ActionToTunic(Actor_Player* this, s32 itemAction)
 Actor* Player_SpawnMagicSpellActor(GameState_Play* play, Actor_Player* this, s8 magicSpell)
 {
     return SpawnActor(&play->actorCtx, play, sMagicSpellActorIds[magicSpell], this->base.world.pos.x, this->base.world.pos.y, this->base.world.pos.z, 0, 0, 0, 0);
-}      // size = 0x4
+}      /* size = 0x4 */
 
 typedef void (*Player_PlayAnimSfx)(Actor_Player*, AnimSfxEntry*);
 typedef void (*Player_func_80832F24)(Actor_Player*);
@@ -223,7 +223,7 @@ void Player_Action_CastingSpell(Actor_Player* this, GameState_Play* play)
 
                 if (Player_SpawnMagicSpellActor(play, this, this->av1.actionVar1) != NULL)
                 {
-                    this->state |= 0x30000000; // PLAYER_STATE1_20000000 | PLAYER_STATE1_10000000
+                    this->state |= 0x30000000; /* PLAYER_STATE1_20000000 | PLAYER_STATE1_10000000 */
                     if ((this->av1.actionVar1 != 0) || (gSaveContext.respawn[RESPAWN_MODE_HUMAN].data <= 0))
                     {
                         gSaveContext.magicState = MAGIC_STATE_CONSUME_SETUP;
@@ -261,7 +261,7 @@ void Player_Action_CastingSpell(Actor_Player* this, GameState_Play* play)
                 gSave.fw.playerParams = 0x6ff;
                 gSave.fw.data = 40;
 
-                // Copy Game Over / Soar to Entrance respawn data.
+                /* Copy Game Over / Soar to Entrance respawn data. */
                 gSave.fwRespawnTop = gSaveContext.respawn[RESPAWN_MODE_TOP];
 
                 this->av2.actionVar2 = 2;
@@ -279,7 +279,7 @@ void Player_Action_CastingSpell(Actor_Player* this, GameState_Play* play)
                 Player_PlayAnimSfx(this, sMagicSpellSfx[this->av1.actionVar1]);
                 if ((this->av1.actionVar1 == 2) && PlayerAnimation_OnFrame(&this->skelAnime, 30.0f))
                 {
-                    this->state &= ~0x30000000; // PLAYER_STATE1_20000000 | PLAYER_STATE1_10000000
+                    this->state &= ~0x30000000; /* PLAYER_STATE1_20000000 | PLAYER_STATE1_10000000 */
                 }
             }
             else if (sMagicSpellLoopTimer[this->av1.actionVar1] < this->av2.actionVar2++)
@@ -310,15 +310,15 @@ void Player_CastSpell(GameState_Play* play, Actor_Player* this, s32 magicSpell)
         Player_SetAction_PreserveItemAction = OverlayAddr(0x80831760);
         Player_SetAction_PreserveItemAction(play, this, Player_Action_CastingSpell, 0);
 
-        this->av1.actionVar1 = magicSpell; // - 3?
+        this->av1.actionVar1 = magicSpell; /* - 3? */
 
-        PlayerAnimation_PlayOnceSetSpeed(play, &this->skelAnime, (PlayerAnimationHeader*)0x0400da58, 0.83f); // gPlayerAnim_link_magic_tame
+        PlayerAnimation_PlayOnceSetSpeed(play, &this->skelAnime, (PlayerAnimationHeader*)0x0400da58, 0.83f); /* gPlayerAnim_link_magic_tame */
 
-        this->csId = 0x7B; // CS_ID_GLOBAL_TALK
+        this->csId = 0x7B; /* CS_ID_GLOBAL_TALK */
         Player_func_8083249C = OverlayAddr(0x8083249c);
         Player_func_8083249C(this);
 
-        this->state3 |= 0x80; // PLAYER_STATE3_80
+        this->state3 |= 0x80; /* PLAYER_STATE3_80 */
     }
 }
 
@@ -332,17 +332,17 @@ void Player_Action_FaroresWindText(Actor_Player* this, GameState_Play* play)
     Player_func_8085B384 Player_func_8085B384;
     char* b;
 
-    this->state3 |= 0x80; // PLAYER_STATE3_80
+    this->state3 |= 0x80; /* PLAYER_STATE3_80 */
 
     PlayerAnimation_Update(play, &this->skelAnime);
     Player_UpdateUpperBody(this, play);
 
     if (this->av2.actionVar2 == 0)
     {
-        // Message Id is the same as OoT, but here it's the Great Fairy's Sword get-item message. Doesn't matter though.
+        /* Message Id is the same as OoT, but here it's the Great Fairy's Sword get-item message. Doesn't matter though. */
         PlayerDisplayTextBox(play, 0x3B, &this->base);
         b = play->msgCtx.font.textBuffer.schar;
-        b[2] = 0xFE; // Use No icon.
+        b[2] = 0xFE; /* Use No icon. */
         b += 11;
         comboTextAppendStr(&b, TEXT_FAST "You cast Farore's Wind!" TEXT_NL);
         comboTextAppendStr(&b, TEXT_COLOR_GREEN TEXT_CHOICE3 "     Return to the Warp Point" TEXT_NL "     Dispel the Warp Point" TEXT_NL "     Exit" TEXT_END);
@@ -350,7 +350,7 @@ void Player_Action_FaroresWindText(Actor_Player* this, GameState_Play* play)
         return;
     }
 
-    // MSGMODE_TEXT_DONE
+    /* MSGMODE_TEXT_DONE */
     if (play->msgCtx.msgMode == 0x42 && Message_ShouldAdvance(play))
     {
         Audio_PlaySfx_MessageDecide();
@@ -364,10 +364,10 @@ void Player_Action_FaroresWindText(Actor_Player* this, GameState_Play* play)
             play->nextEntrance = gSaveContext.respawn[RESPAWN_MODE_HUMAN].entrance;
             play->transitionType = TRANS_TYPE_FADE_WHITE_FAST;
 
-            // Restore Game Over / Soar to Entrance respawn data.
+            /* Restore Game Over / Soar to Entrance respawn data. */
             gSaveContext.respawn[RESPAWN_MODE_TOP] = gSaveContext.save.fwRespawnTop;
 
-            // TODO cancel timers?
+            /* TODO cancel timers? */
 
             return;
         }
@@ -376,7 +376,7 @@ void Player_Action_FaroresWindText(Actor_Player* this, GameState_Play* play)
         {
             gSaveContext.respawn[RESPAWN_MODE_HUMAN].data = -gSaveContext.respawn[RESPAWN_MODE_HUMAN].data;
             gSave.fw.data = 0;
-            Audio_PlaySfx_AtPos(&gSaveContext.save.fw.pos, 0x8C8); // NA_SE_PL_MAGIC_WIND_VANISH
+            Audio_PlaySfx_AtPos(&gSaveContext.save.fw.pos, 0x8C8); /* NA_SE_PL_MAGIC_WIND_VANISH */
         }
 
         Player_func_8085B384 = OverlayAddr(0x8085B384);
@@ -408,10 +408,10 @@ s32 Player_CustomCsItem(Actor_Player* this, GameState_Play* play)
         {
             Player_SetAction = OverlayAddr(0x80831494);
             Player_SetAction(play, this, Player_Action_FaroresWindText, 1);
-            this->state |= 0x30000000; // PLAYER_STATE1_20000000 | PLAYER_STATE1_10000000
+            this->state |= 0x30000000; /* PLAYER_STATE1_20000000 | PLAYER_STATE1_10000000 */
             Player_GetWaitAnimation = OverlayAddr(0x8082ED20);
             PlayerAnimation_PlayOnce(play, &this->skelAnime, Player_GetWaitAnimation(this));
-            this->csId = 0x7B; // CS_ID_GLOBAL_TALK
+            this->csId = 0x7B; /* CS_ID_GLOBAL_TALK */
             Player_func_8083249C = OverlayAddr(0x8083249c);
             Player_func_8083249C(this);
         }
@@ -419,7 +419,7 @@ s32 Player_CustomCsItem(Actor_Player* this, GameState_Play* play)
         func_8082DAD4(this);
         return 1;
     }
-    else if (this->itemAction >= 0x3a && this->itemAction <= 0x51) // PLAYER_IA_MASK_MIN // PLAYER_IA_MASK_MAX
+    else if (this->itemAction >= 0x3a && this->itemAction <= 0x51) /* PLAYER_IA_MASK_MIN // PLAYER_IA_MASK_MAX */
     {
         return -1;
     }
@@ -437,8 +437,8 @@ void Player_CheckCustomBoots(GameState_Play* play)
     Actor_Player* player = GET_LINK(play);
     if (player->transformation == MM_PLAYER_FORM_HUMAN)
     {
-        player->base.flags &= ~(1 << 17); // ~ACTOR_FLAG_CAN_PRESS_HEAVY_SWITCH
-        player->base.flags |= (1 << 26); // ACTOR_FLAG_CAN_PRESS_SWITCH
+        player->base.flags &= ~(1 << 17); /* ~ACTOR_FLAG_CAN_PRESS_HEAVY_SWITCH */
+        player->base.flags |= (1 << 26); /* ACTOR_FLAG_CAN_PRESS_SWITCH */
 
         if (gSaveContext.save.itemEquips.boots > 0)
         {
@@ -451,18 +451,18 @@ void Player_CheckCustomBoots(GameState_Play* play)
             switch(currentBoots)
             {
             case PLAYER_BOOTS_IRON:
-                player->currentBoots = 6; // PLAYER_BOOTS_GORON
-                player->base.flags |= (1 << 17); // ACTOR_FLAG_CAN_PRESS_HEAVY_SWITCH
+                player->currentBoots = 6; /* PLAYER_BOOTS_GORON */
+                player->base.flags |= (1 << 17); /* ACTOR_FLAG_CAN_PRESS_HEAVY_SWITCH */
                 if (player->state & PLAYER_ACTOR_STATE_WATER)
                 {
-                    currentBoots = 2; // Iron Underwater
+                    currentBoots = 2; /* Iron Underwater */
                 }
                 REG(27) = 500;
                 REG(48) = 100;
                 break;
             case PLAYER_BOOTS_HOVER:
-                player->currentBoots = 0; // PLAYER_BOOTS_FIERCE_DEITY
-                player->base.flags &= ~(1 << 26); // ~ACTOR_FLAG_CAN_PRESS_SWITCH
+                player->currentBoots = 0; /* PLAYER_BOOTS_FIERCE_DEITY */
+                player->base.flags &= ~(1 << 26); /* ~ACTOR_FLAG_CAN_PRESS_SWITCH */
                 break;
             }
 
@@ -513,9 +513,9 @@ s32 Player_CustomUseItem(Actor_Player* this, GameState_Play* play, s32 itemActio
         }
         else
         {
-            PlaySound(0x4806); // NA_SE_SY_ERROR
+            PlaySound(0x4806); /* NA_SE_SY_ERROR */
         }
-        // Handled
+        /* Handled */
         return 1;
     }
 
@@ -533,14 +533,14 @@ s32 Player_CustomUseItem(Actor_Player* this, GameState_Play* play, s32 itemActio
 
             if (!newBoots)
             {
-                this->currentBoots = 1; // PLAYER_BOOTS_HYLIAN
+                this->currentBoots = 1; /* PLAYER_BOOTS_HYLIAN */
             }
 
             Player_SetBootData(play, this);
-            Player_PlaySfx(this, 0x835); // NA_SE_PL_CHANGE_ARMS
+            Player_PlaySfx(this, 0x835); /* NA_SE_PL_CHANGE_ARMS */
         }
 
-        // Handled
+        /* Handled */
         return 1;
     }
 
@@ -556,19 +556,19 @@ s32 Player_CustomUseItem(Actor_Player* this, GameState_Play* play, s32 itemActio
             }
             gSaveContext.save.itemEquips.tunic = newTunic;
 
-            Player_PlaySfx(this, 0x835); // NA_SE_PL_CHANGE_ARMS
+            Player_PlaySfx(this, 0x835); /* NA_SE_PL_CHANGE_ARMS */
         }
 
-        // Handled
+        /* Handled */
         return 1;
     }
 
-    // PLAYER_IA_MASK_MIN = 0x3A,
-    // PLAYER_IA_MASK_MAX = 0x51,
-    // PLAYER_IA_MASK_GIANT = 0x4D,
+    /* PLAYER_IA_MASK_MIN = 0x3A, */
+    /* PLAYER_IA_MASK_MAX = 0x51, */
+    /* PLAYER_IA_MASK_GIANT = 0x4D, */
     if (itemAction >= 0x3A && itemAction <= 0x51 && (this->transformation != MM_PLAYER_FORM_HUMAN || itemAction >= 0x4D))
     {
-        // Vanilla code doesn't need to check more conditions.
+        /* Vanilla code doesn't need to check more conditions. */
         return -1;
     }
 
@@ -595,7 +595,7 @@ void Player_Action_FaroresWindSpawning(Actor_Player* this, GameState_Play* play)
     if (this->av2.actionVar2++ == 20)
     {
         gSaveContext.respawn[RESPAWN_MODE_HUMAN].data++;
-        Audio_PlaySfx_AtPos(&gSaveContext.save.fw.pos, 0x87B); // NA_SE_PL_MAGIC_WIND_WARP
+        Audio_PlaySfx_AtPos(&gSaveContext.save.fw.pos, 0x87B); /* NA_SE_PL_MAGIC_WIND_WARP */
     }
 }
 
@@ -604,12 +604,12 @@ void Player_InitFaroresWindRespawn(GameState_Play* play, Actor_Player* this)
     Player_SetAction Player_SetAction = OverlayAddr(0x80831494);
     this->base.draw = NULL;
     Player_SetAction(play, this, Player_Action_FaroresWindSpawning, 0);
-    this->state |= 0x20000000; // PLAYER_STATE1_20000000
+    this->state |= 0x20000000; /* PLAYER_STATE1_20000000 */
 }
 
 void Player_AfterInit(GameState_Play* play)
 {
-    // Displaced code:
+    /* Displaced code: */
     Map_SetAreaEntrypoint(play);
 
     Actor_Player* player = GET_LINK(play);
@@ -923,7 +923,7 @@ const u32 gLinkAdultGauntletPlate2Tex = 0x08000000 | CUSTOM_KEEP_GAUNTLET2_TEXTU
 
 const u32 gHilite2Tex = 0x04000000 | 0xca30;
 
-// gLinkAdultLeftGauntletPlate2DL is omitted because we always render the "closed hand" variant so it doesn't clip into the link's hand
+/* gLinkAdultLeftGauntletPlate2DL is omitted because we always render the "closed hand" variant so it doesn't clip into the link's hand */
 
 Gfx gLinkAdultLeftGauntletPlate3DL[] = {
     gsSPMatrix(0x0D000300, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW),
@@ -984,7 +984,7 @@ Gfx gLinkAdultRightGauntletPlate1DL[] = {
     gsSPEndDisplayList(),
 };
 
-// gLinkAdultRightGauntletPlate2DL is omitted because we always render the "closed hand" variant so it doesn't clip into the link's hand
+/* gLinkAdultRightGauntletPlate2DL is omitted because we always render the "closed hand" variant so it doesn't clip into the link's hand */
 
 Gfx gLinkAdultRightGauntletPlate3DL[] = {
     gsSPMatrix(0x0D0003C0, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW),
@@ -1032,10 +1032,10 @@ static Vec3s sHoverBootsRot = { 0, 0, 0 };
 static s32 sHoverBootCircleAlpha = 255;
 
 static Color_RGB8 sTunicColors[4] = {
-    { 30, 105, 27 }, // PLAYER_TUNIC_NONE (default in MM)
-    { 30, 105, 27 }, // PLAYER_TUNIC_KOKIRI (will not be used)
-    { 100, 20, 0 },  // PLAYER_TUNIC_GORON
-    { 0, 60, 100 },  // PLAYER_TUNIC_ZORA
+    { 30, 105, 27 }, /* PLAYER_TUNIC_NONE (default in MM) */
+    { 30, 105, 27 }, /* PLAYER_TUNIC_KOKIRI (will not be used) */
+    { 100, 20, 0 },  /* PLAYER_TUNIC_GORON */
+    { 0, 60, 100 },  /* PLAYER_TUNIC_ZORA */
 };
 
 COSMETIC(MM_COLOR_TUNIC_KOKIRI, sTunicColors[0]);
@@ -1062,7 +1062,7 @@ void Player_SkelAnime_DrawFlexLod(GameState_Play* play, void** skeleton, Vec3s* 
     gSPSegment(POLY_OPA_DISP++, 0x08, gCustomKeep);
     gSPSegment(POLY_XLU_DISP++, 0x08, gCustomKeep);
 
-    if (overrideLimbDraw != Player_OverrideLimbDrawGameplayFirstPerson && gSaveContext.gameMode != 3) // GAMEMODE_END_CREDITS
+    if (overrideLimbDraw != Player_OverrideLimbDrawGameplayFirstPerson && gSaveContext.gameMode != 3) /* GAMEMODE_END_CREDITS */
     {
         switch (GET_PLAYER_CUSTOM_BOOTS(player))
         {
@@ -1161,10 +1161,10 @@ u16 Player_GetFloorSfxByAge(Actor_Player* this, u16 sfxId) {
     {
         switch (sfxId)
         {
-        case 0x800: // NA_SE_PL_WALK_GROUND
-        case 0x810: // NA_SE_PL_JUMP_GROUND
-        case 0x820: // NA_SE_PL_LAND_GROUND
-            return 0x28DC; // NA_SE_EV_IRON_DOOR_CLOSE
+        case 0x800: /* NA_SE_PL_WALK_GROUND */
+        case 0x810: /* NA_SE_PL_JUMP_GROUND */
+        case 0x820: /* NA_SE_PL_LAND_GROUND */
+            return 0x28DC; /* NA_SE_EV_IRON_DOOR_CLOSE */
         }
     }
 
@@ -1177,7 +1177,7 @@ s32 Player_ShouldCheckItemUsabilityWhileSwimming(Actor_Player* player, u8 itemAc
 {
     switch (itemAction)
     {
-    case 0x50: // PLAYER_IA_MASK_ZORA
+    case 0x50: /* PLAYER_IA_MASK_ZORA */
     case PLAYER_CUSTOM_IA_BOOTS_IRON:
     case PLAYER_CUSTOM_IA_BOOTS_HOVER:
     case PLAYER_CUSTOM_IA_TUNIC_ZORA:
@@ -1196,7 +1196,7 @@ f32 Player_GetEnvironmentWindSpeed(GameState_Play* play)
         return 0.0f;
     }
 
-    // Displaced code:
+    /* Displaced code: */
     return play->envCtx.windSpeed;
 }
 
@@ -1207,13 +1207,13 @@ s32 Player_IsBeingPushed(Actor_Player* this, GameState_Play* play)
         return this->pushedSpeed != 0.0f;
     }
 
-    // Displaced code:
+    /* Displaced code: */
     return this->pushedSpeed != 0.0f || this->windSpeed != 0.0f || play->envCtx.windSpeed >= 50.0f;
 }
 
 s32 Player_PlayHoverSound(Actor_Player* this, f32* arg1Ptr)
 {
-    // Displaced code:
+    /* Displaced code: */
     f32 arg1 = *arg1Ptr;
     f32 updateScale = R_UPDATE_RATE / 2.0f;
 
@@ -1224,13 +1224,13 @@ s32 Player_PlayHoverSound(Actor_Player* this, f32* arg1Ptr)
         arg1 = 7.25f;
     }
     *arg1Ptr = arg1;
-    // End displaced code
+    /* End displaced code */
 
     if (GET_PLAYER_CUSTOM_BOOTS(this) == PLAYER_BOOTS_HOVER
         && !(this->base.bgCheckFlags & BGCHECKFLAG_GROUND)
         && this->hoverBootsTimer != 0)
     {
-        Actor_PlaySfx_FlaggedCentered1(&this->base, 0xC9); // NA_SE_PL_HOBBERBOOTS_LV - SFX_FLAG
+        Actor_PlaySfx_FlaggedCentered1(&this->base, 0xC9); /* NA_SE_PL_HOBBERBOOTS_LV - SFX_FLAG */
         return 1;
     }
 
@@ -1296,9 +1296,9 @@ s32 Player_UpdateHoverBoots(Actor_Player* this)
         return 0;
     }
 
-    if (!(this->state & 0x8000000)) // PLAYER_STATE1_8000000 // Swimming
+    if (!(this->state & 0x8000000)) /* PLAYER_STATE1_8000000 // Swimming */
     {
-        *sPlayerFloorType = 0; // FLOOR_TYPE_0;
+        *sPlayerFloorType = 0; /* FLOOR_TYPE_0; */
     }
     this->floorPitch = this->floorPitchAlt = *sPlayerFloorPitchShape = 0;
 
@@ -1315,7 +1315,7 @@ s32 Player_CheckHoverBoots(Actor_Player* player)
     {
         s32* sPlayerPrevFloorProperty = OverlayAddr(0x80862B1C);
         player->base.velocity.y = 1.0f;
-        *sPlayerPrevFloorProperty = 9; // FLOOR_PROPERTY_9
+        *sPlayerPrevFloorProperty = 9; /* FLOOR_PROPERTY_9 */
         return 1;
     }
     return 0;
@@ -1328,9 +1328,9 @@ s32 Player_IsFloorSlippery(Actor_Player* player, s32 floorType)
         return 1;
     }
 
-    // Displaced code:
-    return (player->base.bgCheckFlags & BGCHECKFLAG_GROUND) && floorType == 5 && player->currentBoots < 5; // PLAYER_BOOTS_ZORA_UNDERWATER
-    // End displaced code
+    /* Displaced code: */
+    return (player->base.bgCheckFlags & BGCHECKFLAG_GROUND) && floorType == 5 && player->currentBoots < 5; /* PLAYER_BOOTS_ZORA_UNDERWATER */
+    /* End displaced code */
 }
 
 s32 Player_IsGoronOrGoronTunic(Actor_Player* player)
@@ -1341,7 +1341,7 @@ s32 Player_IsGoronOrGoronTunic(Actor_Player* player)
 static u8 sFloorDamageDelay[] = { 120, 60 };
 s32 Player_ShouldTakeFloorDamage(Actor_Player* player, s32 isWallDamaging, s32 floorDamageType, s32 isFloorDamaging)
 {
-    // (floorDamageType < 0 && !isWallDamaging) never enters this code
+    /* (floorDamageType < 0 && !isWallDamaging) never enters this code */
 
     if (isFloorDamaging || isWallDamaging || player->base.yDistToWater > 0.0f)
     {
@@ -1350,7 +1350,7 @@ s32 Player_ShouldTakeFloorDamage(Actor_Player* player, s32 isWallDamaging, s32 f
         return 1;
     }
 
-    // probably redundant, but better to be safe
+    /* probably redundant, but better to be safe */
     if (floorDamageType < 0 || floorDamageType > 1)
     {
         return 0;
@@ -1366,7 +1366,7 @@ s32 Player_ShouldTakeFloorDamage(Actor_Player* player, s32 isWallDamaging, s32 f
     return 0;
 }
 
-// This skips the environment hazard text for hot rooms, but there are no hot rooms in MM.
+/* This skips the environment hazard text for hot rooms, but there are no hot rooms in MM. */
 s32 Player_GetEnvironmentalHazardCustom(GameState_Play* play) {
     Actor_Player* player = GET_LINK(play);
 
@@ -1383,10 +1383,10 @@ s32 Player_GetEnvironmentalHazardCustom(GameState_Play* play) {
         }
         return PLAYER_ENV_HAZARD_UNDERWATER_FREE;
     }
-    else if (player->state & 0x08000000) // PLAYER_STATE1_SWIM
+    else if (player->state & 0x08000000) /* PLAYER_STATE1_SWIM */
     {
         if ((player->transformation == MM_PLAYER_FORM_ZORA)
-            && (player->currentBoots >= 5) // PLAYER_BOOTS_ZORA_UNDERWATER
+            && (player->currentBoots >= 5) /* PLAYER_BOOTS_ZORA_UNDERWATER */
             && (player->base.bgCheckFlags & BGCHECKFLAG_GROUND))
         {
             return PLAYER_ENV_HAZARD_UNDERWATER_FLOOR;
@@ -1406,7 +1406,7 @@ PATCH_FUNC(0x801242dc, Player_GetEnvironmentalHazardCustom);
 
 s32 Player_CanSurface(Actor_Player* player)
 {
-    return player->state & 0x08000000 // PLAYER_STATE1_SWIM
+    return player->state & 0x08000000 /* PLAYER_STATE1_SWIM */
         && player->transformation == MM_PLAYER_FORM_ZORA;
 }
 
@@ -1414,7 +1414,7 @@ s32 Player_GetItemCamMode(Actor_Player* this)
 {
     if (this->transformation == MM_PLAYER_FORM_HUMAN)
     {
-        if (this->heldItemAction == 0xD && (this->state & 0x8000000)) // PLAYER_IA_HOOKSHOT // PLAYER_STATE1_8000000 // Swimming
+        if (this->heldItemAction == 0xD && (this->state & 0x8000000)) /* PLAYER_IA_HOOKSHOT // PLAYER_STATE1_8000000 // Swimming */
         {
             return CAM_MODE_BOWARROW;
         }
@@ -1452,7 +1452,7 @@ f32 Player_GetMaxDiveDepth()
 
 u8 Player_GetStrengthCustom(u8 formStrength)
 {
-    if (comboConfig(CFG_MM_STRENGTH) && gSaveContext.save.playerForm == MM_PLAYER_FORM_HUMAN) // || gSaveContext.save.playerForm == MM_PLAYER_FORM_FIERCE_DEITY)
+    if (comboConfig(CFG_MM_STRENGTH) && gSaveContext.save.playerForm == MM_PLAYER_FORM_HUMAN) /* || gSaveContext.save.playerForm == MM_PLAYER_FORM_FIERCE_DEITY) */
     {
         return gSaveContext.save.inventory.upgrades.strength;
     }

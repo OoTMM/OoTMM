@@ -1,8 +1,8 @@
 #include <combo.h>
 
 static EntranceTableEntry defaultEntrance = {
-    0, // Mayor's Residence
-    0, // From Door
+    0, /* Mayor's Residence */
+    0, /* From Door */
     TRANS_TYPE_FADE_BLACK
 };
 

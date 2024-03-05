@@ -51,13 +51,6 @@ void comboSyncItems(void)
         gForeignSave.playerData.health = gSave.playerData.health;
         gForeignSave.inventory.quest.heartPieces = gSave.inventory.quest.heartPieces;
     }
-    /*
-    if (comboConfig(CFG_SHARED_SPELL_LOVE))
-    {
-        // TODO
-        // gForeignSave.nayrusLoveTimer = gSave.nayrusLoveTimer;
-    }
-    */
 }
 
 int comboItemPrecondEx(const ComboItemQuery* q, s16 price)

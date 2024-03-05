@@ -347,7 +347,7 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
     case AC_EN_NEO_REEBA:
         return comboHasSoulMm(GI_MM_SOUL_ENEMY_LEEVER);
     case AC_EN_SKB:
-        if ((play->sceneId == SCE_MM_IKANA_GRAVEYARD) && (play->roomCtx.curRoom.id == 0x01)) // Upper graveyard
+        if ((play->sceneId == SCE_MM_IKANA_GRAVEYARD) && (play->roomCtx.curRoom.id == 0x01)) /* Upper graveyard */
             return 1;
         /* Fallthrough */
     case AC_EN_HINT_SKB:
@@ -444,7 +444,7 @@ void Actor_DrawFaroresWindPointer(GameState_Play* play)
 
     if (params)
     {
-        // f32 yOffset = LINK_IS_ADULT ? 80.0f : 60.0f;
+        /* f32 yOffset = LINK_IS_ADULT ? 80.0f : 60.0f; */
         f32 yOffset = 60.0f;
         f32 ratio = 1.0f;
         s32 alpha = 255;
@@ -537,6 +537,7 @@ void Actor_DrawFaroresWindPointer(GameState_Play* play)
 
             if (alpha < 0)
             {
+                gSave.fw.data = 0;
                 gSaveContext.respawn[RESPAWN_MODE_HUMAN].data = 0;
                 alpha = 0;
             }
@@ -545,7 +546,7 @@ void Actor_DrawFaroresWindPointer(GameState_Play* play)
                 gSaveContext.respawn[RESPAWN_MODE_HUMAN].data = ++params;
             }
 
-            ratio = 1.0f + ((f32)temp * 0.2); // required to match
+            ratio = 1.0f + ((f32)temp * 0.2); /* required to match */
         }
 
         lightRadius = 500.0f * ratio;
@@ -603,7 +604,7 @@ void Actor_DrawFaroresWindPointer(GameState_Play* play)
         {
             f32 scale = 0.025f * ratio;
 
-            POLY_XLU_DISP = Gfx_SetupDL(POLY_XLU_DISP, 25); // SETUPDL_25
+            POLY_XLU_DISP = Gfx_SetupDL(POLY_XLU_DISP, 25); /* SETUPDL_25 */
 
             ModelViewTranslate(gSaveContext.respawn[RESPAWN_MODE_HUMAN].pos.x, yPos, gSaveContext.respawn[RESPAWN_MODE_HUMAN].pos.z, MAT_SET);
             ModelViewScale(scale, scale, scale, MAT_MUL);
@@ -617,14 +618,14 @@ void Actor_DrawFaroresWindPointer(GameState_Play* play)
             ModelViewRotateZ(BINANG_TO_RAD_ALT2((play->gameplayFrames * 1500) & 0xFFFF), MAT_MUL);
             gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx),
                       G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
-            gSPDisplayList(POLY_XLU_DISP++, 0x04000000 | 0x23210); // gEffFlash1DL
+            gSPDisplayList(POLY_XLU_DISP++, 0x04000000 | 0x23210); /* gEffFlash1DL */
 
             MatrixStackPop();
             ModelViewRotateZ(BINANG_TO_RAD_ALT2(~((play->gameplayFrames * 1200) & 0xFFFF)), MAT_MUL);
 
             gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx),
                       G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
-            gSPDisplayList(POLY_XLU_DISP++, 0x04000000 | 0x23210); // gEffFlash1DL
+            gSPDisplayList(POLY_XLU_DISP++, 0x04000000 | 0x23210); /* gEffFlash1DL */
 
             Lights_PointNoGlowSetInfo(&D_8015BC00, gSaveContext.respawn[RESPAWN_MODE_HUMAN].pos.x,
                                     yPos,
@@ -636,7 +637,7 @@ void Actor_DrawFaroresWindPointer(GameState_Play* play)
 
 void Actor_AfterDrawAll(GameState_Play* play)
 {
-    // Displaced code:
+    /* Displaced code: */
     if (play->actorCtx.lensMaskSize != 0)
     {
         play->actorCtx.lensActorsDrawn = 1;

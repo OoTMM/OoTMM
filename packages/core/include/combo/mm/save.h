@@ -43,7 +43,7 @@ typedef struct
     u32     unused:9;
     u32     dekuNut:3;
     u32     dekuStick:3;
-    u32     unused2:3; // bullet bag
+    u32     unused2:3; /* bullet bag */
     u32     wallet:2;
     u32     scale:3;
     u32     strength:3;
@@ -164,7 +164,7 @@ typedef struct
 MmHorseData;
 
 typedef struct {
-    /* 0x00 */ Vec3f pos; // Normally it's a Vec3i, but this is easier.
+    /* 0x00 */ Vec3f pos; /* Normally it's a Vec3i, but this is easier. */
     /* 0x0C */ s32 yaw;
     /* 0x10 */ s32 playerParams;
     /* 0x14 */ s32 entranceIndex;
@@ -172,7 +172,7 @@ typedef struct {
     /* 0x1C */ s32 set;
     /* 0x20 */ s32 tempSwchFlags;
     /* 0x24 */ s32 tempCollectFlags;
-} FaroresWindData; // size = 0x28
+} FaroresWindData; /* size = 0x28 */
 
 typedef struct RespawnData {
     /* 0x00 */ Vec3f pos;
@@ -184,7 +184,7 @@ typedef struct RespawnData {
     /* 0x14 */ u32 tempSwitchFlags;
     /* 0x18 */ u32 unk_18;
     /* 0x1C */ u32 tempCollectFlags;
-} RespawnData; // size = 0x20
+} RespawnData; /* size = 0x20 */
 
 typedef struct
 {
@@ -266,12 +266,12 @@ typedef struct
 SaveOptions;
 
 typedef enum {
-    /*  0 */ TIMER_ID_POSTMAN, // postman's counting minigame
-    /*  1 */ TIMER_ID_MINIGAME_1, // minigame timer
+    /*  0 */ TIMER_ID_POSTMAN, /* postman's counting minigame */
+    /*  1 */ TIMER_ID_MINIGAME_1, /* minigame timer */
     /*  2 */ TIMER_ID_2,
-    /*  3 */ TIMER_ID_MOON_CRASH, // timer used for mooncrash on the clocktower roof
-    /*  4 */ TIMER_ID_MINIGAME_2, // minigame timer
-    /*  5 */ TIMER_ID_ENV_HAZARD, // environmental hazard timer (underwater or hot room)
+    /*  3 */ TIMER_ID_MOON_CRASH, /* timer used for mooncrash on the clocktower roof */
+    /*  4 */ TIMER_ID_MINIGAME_2, /* minigame timer */
+    /*  5 */ TIMER_ID_ENV_HAZARD, /* environmental hazard timer (underwater or hot room) */
     /*  6 */ TIMER_ID_GORON_RACE_UNUSED,
     /*  7 */ TIMER_ID_MAX,
     /* 99 */ TIMER_ID_NONE = 99
@@ -281,41 +281,41 @@ typedef struct
 {
     /* 0x0000 */ MmSave save;
     /* 0x3CA0 */ u32 fileIndex;
-    /* 0x3CA4 */ s16 powderKegTimer;                    // "big_bom_timer"
+    /* 0x3CA4 */ s16 powderKegTimer;                    /* "big_bom_timer" */
     /* 0x3CA6 */ u8 unk_3CA6;
-    /* 0x3CA7 */ u8 unk_3CA7;                           // "day_night_flag"
+    /* 0x3CA7 */ u8 unk_3CA7;                           /* "day_night_flag" */
     /* 0x3CA8 */ s32 gameMode;
     /* 0x3CAC */ s32 sceneSetupId;
-    /* 0x3CB0 */ s32 respawnFlag;                       // "restart_flag"
-    /* 0x3CB4 */ RespawnData respawn[RESPAWN_MODE_MAX]; // "restart_data"
-    /* 0x3DB4 */ f32 entranceSpeed;                     // "player_wipe_speedF"
-    /* 0x3DB8 */ u16 entranceSound;                     // "player_wipe_door_SE"
-    /* 0x3DBA */ u8 unk_3DBA;                           // "player_wipe_item"
-    /* 0x3DBB */ u8 retainWeatherMode;                  // "next_walk"
-    /* 0x3DBC */ s16 dogParams;                         // OoT leftover. "dog_flag"
-    /* 0x3DBE */ u8 envHazardTextTriggerFlags;          // "guide_status"
-    /* 0x3DBF */ u8 showTitleCard;                      // "name_display"
-    /* 0x3DC0 */ s16 nayrusLoveTimer;                   // remnant of OoT, "shield_magic_timer"
-    /* 0x3DC2 */ u8 unk_3DC2;                           // "pad1"
-    /* 0x3DC8 */ OSTime postmanTimerStopOsTime;         // The osTime when the timer stops for the postman minigame. "get_time"
-    /* 0x3DD0 */ u8 timerStates[TIMER_ID_MAX];          // See the `TimerState` enum. "event_fg"
-    /* 0x3DD7 */ u8 timerDirections[TIMER_ID_MAX];      // See the `TimerDirection` enum. "calc_flag"
-    /* 0x3DE0 */ u64 timerCurTimes[TIMER_ID_MAX];       // For countdown, the remaining time left. For countup, the time since the start. In centiseconds (1/100th sec). "event_ostime"
-    /* 0x3E18 */ u64 timerTimeLimits[TIMER_ID_MAX];     // The original total time given for the timer to count from, in centiseconds (1/100th sec). "event_sub"
-    /* 0x3E50 */ OSTime timerStartOsTimes[TIMER_ID_MAX]; // The osTime when the timer starts. "func_time"
-    /* 0x3E88 */ u64 timerStopTimes[TIMER_ID_MAX];       // The total amount of time taken between the start and end of the timer, in centiseconds (1/100th sec). "func_end_time"
-    /* 0x3EC0 */ OSTime timerPausedOsTimes[TIMER_ID_MAX]; // The cumulative osTime spent with the timer paused. "func_stop_time"
-    /* 0x3EF8 */ s16 timerX[TIMER_ID_MAX];              // "event_xp"
-    /* 0x3F06 */ s16 timerY[TIMER_ID_MAX];              // "event_yp"
-    /* 0x3F14 */ s16 unk_3F14;                          // "character_change"
-    /* 0x3F16 */ u8 seqId;                              // "old_bgm"
-    /* 0x3F17 */ u8 ambienceId;                         // "old_env"
-    /* 0x3F18 */ u8 buttonStatus[6];                    // "button_item"
-    /* 0x3F1E */ u8 hudVisibilityForceButtonAlphasByStatus; // if btn alphas are updated through Interface_UpdateButtonAlphas, instead update them through Interface_UpdateButtonAlphasByStatus "ck_fg"
-    /* 0x3F20 */ u16 nextHudVisibility;                 // triggers the hud to change visibility to the requested value. Reset to HUD_VISIBILITY_IDLE when target is reached "alpha_type"
-    /* 0x3F22 */ u16 hudVisibility;                     // current hud visibility "prev_alpha_type"
-    /* 0x3F24 */ u16 hudVisibilityTimer;                // number of frames in the transition to a new hud visibility. Used to step alpha "alpha_count"
-    /* 0x3F26 */ u16 prevHudVisibility;                 // used to store and recover hud visibility for pause menu and text boxes "last_time_type"
+    /* 0x3CB0 */ s32 respawnFlag;                       /* "restart_flag" */
+    /* 0x3CB4 */ RespawnData respawn[RESPAWN_MODE_MAX]; /* "restart_data" */
+    /* 0x3DB4 */ f32 entranceSpeed;                     /* "player_wipe_speedF" */
+    /* 0x3DB8 */ u16 entranceSound;                     /* "player_wipe_door_SE" */
+    /* 0x3DBA */ u8 unk_3DBA;                           /* "player_wipe_item" */
+    /* 0x3DBB */ u8 retainWeatherMode;                  /* "next_walk" */
+    /* 0x3DBC */ s16 dogParams;                         /* OoT leftover. "dog_flag" */
+    /* 0x3DBE */ u8 envHazardTextTriggerFlags;          /* "guide_status" */
+    /* 0x3DBF */ u8 showTitleCard;                      /* "name_display" */
+    /* 0x3DC0 */ s16 nayrusLoveTimer;                   /* remnant of OoT, "shield_magic_timer" */
+    /* 0x3DC2 */ u8 unk_3DC2;                           /* "pad1" */
+    /* 0x3DC8 */ OSTime postmanTimerStopOsTime;         /* The osTime when the timer stops for the postman minigame. "get_time" */
+    /* 0x3DD0 */ u8 timerStates[TIMER_ID_MAX];          /* See the `TimerState` enum. "event_fg" */
+    /* 0x3DD7 */ u8 timerDirections[TIMER_ID_MAX];      /* See the `TimerDirection` enum. "calc_flag" */
+    /* 0x3DE0 */ u64 timerCurTimes[TIMER_ID_MAX];       /* For countdown, the remaining time left. For countup, the time since the start. In centiseconds (1/100th sec). "event_ostime" */
+    /* 0x3E18 */ u64 timerTimeLimits[TIMER_ID_MAX];     /* The original total time given for the timer to count from, in centiseconds (1/100th sec). "event_sub" */
+    /* 0x3E50 */ OSTime timerStartOsTimes[TIMER_ID_MAX]; /* The osTime when the timer starts. "func_time" */
+    /* 0x3E88 */ u64 timerStopTimes[TIMER_ID_MAX];       /* The total amount of time taken between the start and end of the timer, in centiseconds (1/100th sec). "func_end_time" */
+    /* 0x3EC0 */ OSTime timerPausedOsTimes[TIMER_ID_MAX]; /* The cumulative osTime spent with the timer paused. "func_stop_time" */
+    /* 0x3EF8 */ s16 timerX[TIMER_ID_MAX];              /* "event_xp" */
+    /* 0x3F06 */ s16 timerY[TIMER_ID_MAX];              /* "event_yp" */
+    /* 0x3F14 */ s16 unk_3F14;                          /* "character_change" */
+    /* 0x3F16 */ u8 seqId;                              /* "old_bgm" */
+    /* 0x3F17 */ u8 ambienceId;                         /* "old_env" */
+    /* 0x3F18 */ u8 buttonStatus[6];                    /* "button_item" */
+    /* 0x3F1E */ u8 hudVisibilityForceButtonAlphasByStatus; /* if btn alphas are updated through Interface_UpdateButtonAlphas, instead update them through Interface_UpdateButtonAlphasByStatus "ck_fg" */
+    /* 0x3F20 */ u16 nextHudVisibility;                 /* triggers the hud to change visibility to the requested value. Reset to HUD_VISIBILITY_IDLE when target is reached "alpha_type" */
+    /* 0x3F22 */ u16 hudVisibility;                     /* current hud visibility "prev_alpha_type" */
+    /* 0x3F24 */ u16 hudVisibilityTimer;                /* number of frames in the transition to a new hud visibility. Used to step alpha "alpha_count" */
+    /* 0x3F26 */ u16 prevHudVisibility;                 /* used to store and recover hud visibility for pause menu and text boxes "last_time_type" */
     u16                 magicState;
     u16                 isMagicRequested;
     u16                 magicFlag;
