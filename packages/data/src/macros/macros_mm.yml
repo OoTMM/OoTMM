@@ -244,8 +244,7 @@
 "soul_enemy(x)": "(!setting(soulsEnemyMm)) || has(x)"
 "soul_boss(x)": "(!setting(soulsBossMm)) || has(x)"
 
-"short_hook_anywhere": "can_hookshot_short && setting(hookshotAnywhereMm)"
-"hookshot_anywhere": "can_hookshot && setting(hookshotAnywhereMm)"
+
 "climb_anywhere": "setting(climbMostSurfacesMm)"
 "st_climb_anywhere_trick": "climb_anywhere && (trick(MM_ST_CLIMB_ANYWHERE))"
 "trick_precise_climbing": "climb_anywhere && (trick(MM_PRECISE_CLIMBING))"
