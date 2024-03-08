@@ -27,7 +27,7 @@ const DUNGEON_REWARD_LOCATIONS = [
   'MM Woodfall Temple Boss',
   'MM Snowhead Temple Boss',
   'MM Great Bay Temple Boss',
-  'MM Stone Tower Boss',
+  'MM Stone Tower Temple Inverted Boss',
 ];
 
 const SHARED_ITEMS_OOT = new Map([
