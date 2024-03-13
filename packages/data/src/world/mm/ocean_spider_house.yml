@@ -6,7 +6,7 @@
     "SOARING": "can_play_soaring"
     "WARP_SONGS": "true"
   locations:
-    "Ocean Spider House Wallet": "has(GS_TOKEN_OCEAN, 30)"
+    "Ocean Spider House Wallet": "can_check_gf_sh(0x01, MM_SPIDER_HOUSES, GS_TOKEN_OCEAN)"
 "Ocean Spider House Front":
   dungeon: OSH
   events:

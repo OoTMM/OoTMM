@@ -820,6 +820,52 @@ export const SETTINGS = [{
   ],
   default: 'bossBeaten'
 }, {
+  key: 'strayCountSetter',
+  name: 'Stray Fairy requirement',
+  category: 'main.events',
+  type: 'enum',
+  description: 'Controls how many Stray Fairies are needed to get the rewards from the Great Fairies',
+  values:[
+    {value: 'vanilla', name: 'Vanilla', description: 'Requires the normal number of fairies'},
+    {value: 'random', name: 'Random', description: 'Requires a random number of fairies'},
+    {value: 'wrandom', name: 'Weighted Random', description: 'Requires a random number of fairies, prioritzing ones toward the middle'},
+    {value: 'fixed', name: 'Custom', description: 'Allows the number to be set to a specific value'},
+  ],
+  default: 'vanilla'
+},{
+  key: 'skullCountSetter',
+  name: 'Skulltula token requirement (MM)',
+  category: 'main.events',
+  type: 'enum',
+  description: 'Controls how many Skulltula tokens are needed to get the rewards from the spider houses',
+  values:[
+    {value: 'vanilla', name: 'Vanilla', description: 'Requires the normal number of tokens'},
+    {value: 'random', name: 'Random', description: 'Requires a random number of tokens'},
+    {value: 'wrandom', name: 'Weighted Random', description: 'Requires a random number of tokens, prioritzing ones toward the middle'},
+    {value: 'fixed', name: 'Custom', description: 'Allows the number to be set to a specific value'},
+  ],
+  default: 'vanilla'
+},{
+  key: 'strayCount',
+  name: 'Stray fairy requirement',
+  category: 'main.events',
+  type: 'number',
+  min: 0,
+  max: 15,
+  description: 'Sets the Stray Fairy requirement to an exact number',
+  default: 15,
+  cond: (s: any) => s.strayCountSetter == 'fixed',
+},{
+  key: 'skullCount',
+  name: 'Skulltula token requirement (MM)',
+  category: 'main.events',
+  type: 'number',
+  min: 0,
+  max: 30,
+  description: 'Sets the Skulltula token requirement to an exact number',
+  default: 30,
+  cond: (s: any) => s.skullCountSetter == 'fixed',
+},{
   key: 'freeScarecrowOot',
   name: 'Free Scarecrow (OoT)',
   category: 'main.events',
@@ -881,7 +927,7 @@ export const SETTINGS = [{
   type: 'boolean',
   description: 'Makes the Mask Shop in Market open during the night',
   default: false
-}, {
+},{
   key: 'crossWarpOot',
   name: 'Cross-Games OoT Warp Songs',
   category: 'main.cross',

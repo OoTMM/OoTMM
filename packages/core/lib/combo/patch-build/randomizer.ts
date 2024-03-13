@@ -926,6 +926,8 @@ export const randomizerData = (worldId: number, logic: LogicResult): Buffer => {
   buffers.push(zoraSapphireBuffer(worldId, logic));
   buffers.push(randomizerBoss(worldId, logic));
   buffers.push(randomizerDungeons(worldId, logic));
+  buffers.push(toU8Buffer([logic.settings.strayCount]));
+  buffers.push(toU8Buffer([logic.settings.skullCount]));
   return Buffer.concat(buffers);
 };
 

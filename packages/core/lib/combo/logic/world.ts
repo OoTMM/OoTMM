@@ -11,6 +11,7 @@ import { Monitor } from '../monitor';
 import { defaultPrices } from './price';
 import { Item, itemByID, ItemHelpers, Items } from '../items';
 import { Random } from '../random';
+import { defaultStraySkulls } from './token-fairies';
 
 export const WORLD_FLAGS = [
   'ganonTrials',
@@ -137,6 +138,7 @@ export type World = {
   songLocations: Set<string>;
   warpLocations: Set<string>;
   prices: number[];
+  straySkulls: number[];
   mq: Set<string>;
   bossIds: number[];
   dungeonIds: number[];
@@ -222,6 +224,7 @@ export function cloneWorld(world: World): World {
     songLocations: new Set(world.songLocations),
     warpLocations: new Set(world.warpLocations),
     prices: [...world.prices],
+    straySkulls: [...world.straySkulls],
     mq: new Set(world.mq),
     preCompleted: new Set(world.preCompleted),
     bossIds: [...world.bossIds],
@@ -297,6 +300,7 @@ export class LogicPassWorld {
 
     /* Prices */
     const prices = defaultPrices(mq);
+    const straySkulls = defaultStraySkulls();
 
     return {
       areas: {},
@@ -309,6 +313,7 @@ export class LogicPassWorld {
       songLocations: new Set(),
       warpLocations: new Set(),
       prices,
+      straySkulls,
       mq,
       preCompleted: new Set(),
       bossIds: [],

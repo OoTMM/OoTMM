@@ -1,5 +1,10 @@
 #include <combo.h>
 #include <combo/item.h>
+/*0x80B66D30 to 0x80B6D660*/
+u8 EnSth_skullMax()
+{
+    return gComboData.skullCount;
+}
 
 int EnSth_HasGivenItemMaskOfTruth(Actor* this)
 {
@@ -41,7 +46,7 @@ PATCH_CALL(0x80b67c00, EnSth_GiveItem);
 void EnSth_AfterInit(Actor* this, GameState_Play* play)
 {
     /* Spawn the cursed skull if required */
-    if ((this->variable & 0xf) == 4 && gSave.skullCountOcean < 30)
+    if ((this->variable & 0xf) == 4 && gSave.skullCountOcean < EnSth_skullMax())
     {
         SpawnActor(
             &play->actorCtx,
@@ -53,3 +58,26 @@ void EnSth_AfterInit(Actor* this, GameState_Play* play)
         );
     }
 }
+
+s16 EnSth_newSkull(s16 sceneId)
+{
+    if (sceneId == SCE_MM_SPIDER_HOUSE_OCEAN && gSave.skullCountOcean>=EnSth_skullMax() && gSave.skullCountOcean<30){
+        return (gSave.skullCountOcean+(30-EnSth_skullMax())) & 0xFFFF;
+    }
+    if (sceneId == SCE_MM_SPIDER_HOUSE_SWAMP && gSave.skullCountSwamp>=EnSth_skullMax() && gSave.skullCountSwamp<30){
+        return ((gSave.skullCountSwamp+(30-EnSth_skullMax())) & 0xFFFF);
+    }
+}
+
+PATCH_FUNC(0x8012f22c, EnSth_newSkull);
+
+s16 EnSth_fixTextboxes(s16 sceneId){
+    if (sceneId == SCE_MM_SPIDER_HOUSE_OCEAN){
+        return (gSave.skullCountOcean & 0xFFFF);
+    }
+    else{
+        return (gSave.skullCountSwamp & 0xFFFF);
+    }
+}
+
+PATCH_CALL(0x8011fb60, EnSth_fixTextboxes);

@@ -1567,7 +1567,7 @@
   exits:
     "Woodfall Near Fairy Fountain": "true"
   locations:
-    "Woodfall Great Fairy": "has(STRAY_FAIRY_WF, 15)"
+    "Woodfall Great Fairy": "can_check_gf_sh(0x00, MM_GREAT_FAIRIES, STRAY_FAIRY_WF)"
 "Near Deku Shrine":
   region: DEKU_PALACE
   exits:
@@ -2034,7 +2034,7 @@
   exits:
     "Snowhead Near Fairy Fountain": "true"
   locations:
-    "Snowhead Great Fairy": "has(STRAY_FAIRY_SH, 15)"
+    "Snowhead Great Fairy": "can_check_gf_sh(0x01, MM_GREAT_FAIRIES, STRAY_FAIRY_SH)"
 "Goron Race":
   region: ENTRANCE
   events:
@@ -2507,7 +2507,7 @@
   exits:
     "Great Bay Near Fairy Fountain": "true"
   locations:
-    "Great Bay Great Fairy": "has(STRAY_FAIRY_GB, 15)"
+    "Great Bay Great Fairy": "can_check_gf_sh(0x02, MM_GREAT_FAIRIES, STRAY_FAIRY_GB)"
 "Waterfall Cliffs":
   region: ZORA_CAPE
   exits:
@@ -2897,7 +2897,7 @@
   exits:
     "Ikana Canyon": "true"
   locations:
-    "Ikana Great Fairy": "has(STRAY_FAIRY_ST, 15)"
+    "Ikana Great Fairy": "can_check_gf_sh(0x03, MM_GREAT_FAIRIES, STRAY_FAIRY_ST)"
 "Ikana Spring Water Cave":
   region: ENTRANCE
   exits:
