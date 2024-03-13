@@ -1961,8 +1961,8 @@ Stone Tower Temple Grass Garden 3,                      grass,          NONE,   
 Stone Tower Temple Grass Garden 4,                      grass,          NONE,                   TEMPLE_STONE_TOWER,           0x00215,                    RANDOM
 Stone Tower Temple Grass Garden 5,                      grass,          NONE,                   TEMPLE_STONE_TOWER,           0x00216,                    RANDOM
 Stone Tower Temple Grass Garden 6,                      grass,          NONE,                   TEMPLE_STONE_TOWER,           0x00217,                    RANDOM
-Stone Tower Boss HC,                                    collectible,    NONE,                   LAIR_TWINMOLD,                0x1f,                       HEART_CONTAINER
-Stone Tower Boss,                                       npc,            NONE,                   LAIR_TWINMOLD,                REMAINS_TWINMOLD,           REMAINS_TWINMOLD
+Stone Tower Temple Inverted Boss HC,                    collectible,    NONE,                   LAIR_TWINMOLD,                0x1f,                       HEART_CONTAINER
+Stone Tower Temple Inverted Boss,                       npc,            NONE,                   LAIR_TWINMOLD,                REMAINS_TWINMOLD,           REMAINS_TWINMOLD
 Secret Shrine Dinalfos Chest,                           chest,          NONE,                   SECRET_SHRINE,                0x00,                       RUPEE_SILVER
 Secret Shrine Wizzrobe Chest,                           chest,          NONE,                   SECRET_SHRINE,                0x01,                       RUPEE_SILVER
 Secret Shrine Wart Chest,                               chest,          SECRET_SHRINE_WART_HP,  SECRET_SHRINE,                0x02,                       RUPEE_SILVER

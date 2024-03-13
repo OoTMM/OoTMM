@@ -826,7 +826,7 @@ export class LogicPassSolver {
         'MM Woodfall Temple Boss',
         'MM Snowhead Temple Boss',
         'MM Great Bay Temple Boss',
-        'MM Stone Tower Boss',
+        'MM Stone Tower Temple Inverted Boss',
       ];
       if (LOCS_OATH.some(x => locNames.includes(x))) {
         const oathLoc = makeLocation('MM Oath to Order', worldId);
