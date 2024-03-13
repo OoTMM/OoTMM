@@ -15,7 +15,7 @@ All notable changes to this project will be documented in this file.
 - Add tricks for using Farore's Wind and resetting time to get the Romani Ranch checks.
 - Hover Boots are now accounted for getting Letter to Kafei and Toilet Hand in Stock Pot Inn.
 - Hookshot Anywhere for both games and Climb Anywhere for OOT can now be enabled without logical implications.
-- - Key logic for Forest, Shadow, and Spirit Temples still accounts for the above settings whether they are logical or not.
+- Key logic for Forest, Shadow, and Spirit Temples still accounts for the above settings whether they are logical or not.
 
 ### Changed
 
@@ -30,6 +30,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix some items not being received in multi.
 - Fix an issue where the grace period could cause a buggy cycle-reset.
 - Fixed an issue where Strength got removed from logic for King Dodongo, causing bomb bag to be hard-required.
 - Some logic issues involving Shared Din's Fire not being accounted for in some situations.

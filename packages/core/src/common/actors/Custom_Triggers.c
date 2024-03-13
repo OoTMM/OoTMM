@@ -59,6 +59,7 @@ int CustomTriggers_GiveItemNet(Actor_CustomTriggers* this, GameState_Play* play,
 {
     ComboItemQuery q = ITEM_QUERY_INIT;
     ComboItemOverride o;
+    int isFast;
 
     q.gi = gi;
     q.from = from;
@@ -70,8 +71,24 @@ int CustomTriggers_GiveItemNet(Actor_CustomTriggers* this, GameState_Play* play,
         q.gi = RECOVERY_HEART;
     }
 
+    switch (q.gi)
+    {
+    case GI_OOT_BOMBCHU_5:
+    case GI_OOT_BOMBCHU_10:
+    case GI_OOT_BOMBCHU_20:
+    case GI_MM_BOMBCHU:
+    case GI_MM_BOMBCHU_5:
+    case GI_MM_BOMBCHU_10:
+    case GI_MM_BOMBCHU_20:
+        isFast = 0;
+        break;
+    default:
+        isFast = isItemFastBuy(q.gi);
+        break;
+    }
+
     comboItemOverride(&o, &q);
-    if (isItemFastBuy(o.gi))
+    if (isFast)
     {
         comboAddItemRawEx(play, &q, 0);
         EnItem00_SpawnDecoy(play, o.gi);
