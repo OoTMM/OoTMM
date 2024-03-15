@@ -37,6 +37,12 @@
 
 "midnight": "between(NIGHT1_AM_12_00, DAY2_AM_06_00) || between(NIGHT2_AM_12_00, DAY3_AM_06_00) || after(NIGHT3_AM_12_00)"
 
+# Age
+"is_child": "!setting(crossAge) || age(child)"
+"is_adult": "setting(crossAge) && age(adult)"
+"is_tall": "has_mask_zora || is_adult"
+"is_short": "has(MASK_DEKU) || is_child"
+
 # Spells
 "can_use_din": "setting(spellFireMm) && can_use_din_raw"
 "can_use_farore": "setting(spellWindMm) && can_use_farore_raw"

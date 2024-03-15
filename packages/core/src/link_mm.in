@@ -169,6 +169,7 @@ PlayLoopingSfxAtActor = 0x800B9010;
 Actor_PlaySfx_FlaggedCentered1 = 0x800B8F98;
 Message_Close = 0x801477b4;
 Audio_PlaySfx_MessageDecide = 0x8019F208;
+Audio_PlaySfx = 0x801a5cfc;
 
 RandIntRange = 0x800ff450;
 
@@ -218,6 +219,7 @@ LoadIcon = 0x80178e3c;
 CmpDma_LoadAllFiles = 0x80178E7C;
 
 OverlayAddr = 0x801638d8;
+KaleidoManager_LoadOvl = 0x80163758;
 
 PlayMusic = 0x801a3238;
 
@@ -328,6 +330,7 @@ SkelAnime_DrawFlexLod = 0x80133710;
 Lights_PointNoGlowSetInfo = 0x801019FC;
 
 Actor_DrawLensActors = 0x800B9EF4;
+Actor_LoadOverlay = 0x800bacd4;
 
 Play_SetupRespawnPoint = 0x80169E6C;
 
@@ -341,3 +344,8 @@ Player_SetBootData = 0x80123140;
 Player_GetStrength = 0x80124020;
 
 Entrance_GetTableEntry = 0x801322c0;
+
+Object_SpawnPersistent = 0x8012f2e0;
+Object_GetSlot = 0x8012f608;
+
+Player_OverrideLimbDrawGameplayDefault = 0x80125d4c;

@@ -857,6 +857,19 @@ PATCH_END
 
 PATCH_GROUP_END
 
+PATCH_START 0x80122ab8
+  jal     Player_AfterMaskLoaded
+   move   a0, s2
+  li      at, 0x0b
+  bne     v0, at, .+0xc0
+PATCH_END
+
+PATCH_START 0x80846c6c
+  lui     t9, %HI(Player_OverrideLimbDrawGameplayDefault_Custom)
+  bne     v0, at, .+0x4c
+   addiu  t9, t9, %LO(Player_OverrideLimbDrawGameplayDefault_Custom)
+PATCH_END
+
 /* Change child link object to use EnvColor instead of PrimColor */
 
 PATCH_VROM 0x01166390

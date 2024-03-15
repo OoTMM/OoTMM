@@ -142,7 +142,7 @@
   dungeon: SH
   exits:
     "Snowhead Temple Center Level 1": "true"
-    "Snowhead Temple Block Room Upper": "can_hookshot_short || (event(SNOWHEAD_PUSH_BLOCK) && has_mask_zora)"
+    "Snowhead Temple Block Room Upper": "can_hookshot_short || (event(SNOWHEAD_PUSH_BLOCK) && is_tall)"
     "WARP_SONGS": "true"
   events:
     SNOWHEAD_PUSH_BLOCK: "true"
@@ -170,7 +170,7 @@
   locations:
     "Snowhead Temple Compass": "true"
     "Snowhead Temple Compass Room Ledge": "can_use_fire_short_range || trick_sht_fireless"
-    "Snowhead Temple SF Compass Room Crate": "(((can_use_fire_short_range || trick_sht_fireless) || can_hookshot_short || has_mask_zora) && (has_explosives || has_mask_goron || has_hover_boots)) || (has(MASK_GREAT_FAIRY) && (has_bombs || trick_keg_explosives)) || can_goron_bomb_jump"
+    "Snowhead Temple SF Compass Room Crate": "(((can_use_fire_short_range || trick_sht_fireless) || can_hookshot_short || is_tall) && (has_explosives || has_mask_goron || has_hover_boots)) || (has(MASK_GREAT_FAIRY) && (has_bombs || trick_keg_explosives)) || can_goron_bomb_jump"
     "Snowhead Temple Pot Compass Room 1": "true"
     "Snowhead Temple Pot Compass Room 2": "true"
     "Snowhead Temple Pot Compass Room 3": "true"
@@ -184,7 +184,7 @@
     "WARP_SONGS": "true"
   locations:
     "Snowhead Temple Icicle Room Alcove": "can_use_lens"
-    "Snowhead Temple Icicle Room": "((has_arrows || has_mask_zora || can_use_lens) && can_break_boulders) || (can_hookshot_short && (has_explosives || trick_keg_explosives))"
+    "Snowhead Temple Icicle Room": "((has_arrows || is_tall || can_use_lens) && can_break_boulders) || (can_hookshot_short && (has_explosives || trick_keg_explosives))"
     "Snowhead Temple Rupee 1": "has_arrows"
     "Snowhead Temple Rupee 2": "has_arrows"
     "Snowhead Temple Rupee 3": "has_arrows"
@@ -192,7 +192,7 @@
   dungeon: SH
   exits:
     "Snowhead Temple Icicles": "small_keys_sh(3) || ((has_explosives || trick_keg_explosives) && small_keys_sh(2))"
-    "Snowhead Temple Dual Switches Unlocked": "has_mask_goron || has_mask_zora || short_hook_anywhere || can_hookshot || has_hover_boots || can_use_fire_short_range || trick_sht_fireless_er"
+    "Snowhead Temple Dual Switches Unlocked": "has_mask_goron || is_tall || short_hook_anywhere || can_hookshot || has_hover_boots || can_use_fire_short_range || trick_sht_fireless_er"
     "WARP_SONGS": "true"
   locations:
     "Snowhead Temple SF Dual Switches": "can_use_lens && (((has_arrows || can_hookshot) && has(MASK_GREAT_FAIRY)) || hookshot_anywhere)"
@@ -246,7 +246,7 @@
     SHT_STICK_RUN: "has_sticks"
   exits:
     "Snowhead Temple Map Room Upper": "true"
-    "Snowhead Temple Center Level 2 Dual": "has_weapon || has_mask_zora || has_mask_goron || has_hover_boots"
+    "Snowhead Temple Center Level 2 Dual": "has_weapon || is_tall || has_mask_goron || has_hover_boots"
     "Snowhead Temple Fire Arrow": "true"
     "Snowhead Temple Center Level 3 Snow": "has_mask_goron || can_hookshot || short_hook_anywhere || has_hover_boots"
     "Snowhead Temple Center Level 4": "event(SNOWHEAD_RAISE_PILLAR)"

@@ -89,7 +89,7 @@
     "Great Bay Temple Baba Room": "true"
     "Great Bay Temple Central Room": "true"
     "Great Bay Temple Boss Key Room": "can_use_ice_arrows && (can_use_fire_short_range || has_hot_water_farore)"
-    "Great Bay Temple After Boss Key": "(can_use_ice_arrows && trick(MM_GBT_FIRELESS) && has_mask_zora) || short_hook_anywhere"
+    "Great Bay Temple After Boss Key": "(can_use_ice_arrows && trick(MM_GBT_FIRELESS) && is_tall) || short_hook_anywhere"
     "Great Bay Temple Green Pipe 2": "event(GB_WATER_WHEEL)"
     "WARP_SONGS": "true"
   locations:

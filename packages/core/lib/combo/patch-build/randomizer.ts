@@ -733,6 +733,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     OOT_CROSS_WARP: settings.crossWarpOot,
     MM_CROSS_WARP: settings.crossWarpMm !== 'none',
     MM_CROSS_WARP_ADULT: settings.crossWarpMm === 'full',
+    MM_CROSS_AGE: settings.crossAge,
     MM_OCARINA_FAIRY: settings.fairyOcarinaMm,
     MM_HOOKSHOT_SHORT: settings.shortHookshotMm,
     MM_SONG_SUN: settings.sunSongMm,

@@ -7,6 +7,7 @@
 #include <combo/mm/regs.h>
 #include <combo/mm/types.h>
 #include <combo/common/ocarina.h>
+#include <combo/mm/object.h>
 
 typedef struct
 {
@@ -481,7 +482,8 @@ typedef struct GameState_Play
     PauseContext        pauseCtx;
     GameOverContext     gameOverCtx;
     EnvironmentContext  envCtx;
-    char                unk_17104[0x015dc];
+    char                unk_17104[0xc84];
+    ObjectContext       objectCtx;
     RoomContext         roomCtx;
     char                unk_18760[0x3c];
     s16                 playerActorCsIds[10];

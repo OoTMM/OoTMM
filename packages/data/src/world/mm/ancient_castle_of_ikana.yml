@@ -23,7 +23,7 @@
   dungeon: ACoI
   exits:
     "Ancient Castle of Ikana Interior": "true"
-    "Ancient Castle of Ikana Interior North 2": "has(MASK_DEKU) || short_hook_anywhere || (can_use_nayru && has_mask_zora)"
+    "Ancient Castle of Ikana Interior North 2": "has(MASK_DEKU) || short_hook_anywhere || (can_use_nayru && is_tall)"
     "SOARING": "can_play_soaring"
     "WARP_SONGS": "true"
   locations:

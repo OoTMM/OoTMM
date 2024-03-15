@@ -61,7 +61,10 @@ const ENTRIES: CustomEntry[] = [
 
   { game: 'oot', name: "EQ_DEKU_STICK",         file: "objects/object_link_child",   seg: { in: 0x06, out: 0x0a }, offsets: [0x6cc0] },
 
-  { game: 'mm', name: "OBJECT_TORCH2",          file: "objects/gameplay_keep",       seg: { in: 0x04, out: 0x06},  offsets: [0x1c430] },
+  { game: 'mm',  name: "OBJECT_TORCH2",         file: "objects/gameplay_keep",       seg: { in: 0x04, out: 0x06 }, offsets: [0x1c430] },
+  { game: 'oot', name: 'BOOTS_IRON',            file: "objects/object_link_boy",     seg: { in: 0x06, out: 0x0a }, offsets: [0x25918, 0x25a60] },
+  { game: 'oot', name: 'BOOTS_HOVER',           file: "objects/object_link_boy",     seg: { in: 0x06, out: 0x0a }, offsets: [0x25ba8, 0x25db0] },
+  { game: 'oot', name: 'GAUNTLETS',             file: "objects/object_link_boy",     seg: { in: 0x06, out: 0x0a }, offsets: [0x25218, 0x252d8, 0x25438, 0x25598, 0x25658, 0x257b8] },
 ];
 
 const getObjectBuffer = async (roms: DecompressedRoms, game: Game, file: string) => {
@@ -293,6 +296,17 @@ class CustomAssetsBuilder {
     await this.addObjectFile('BTN_C_HORIZONTAL', 'btn_c_horizontal.zobj', [0x06000e10]);
     await this.addObjectFile('BTN_C_VERTICAL', 'btn_c_vertical.zobj', [0x06000960]);
     await this.addObjectFile('BOMBCHU_BAG', 'bombchu_bag.zobj', [0x060006A0, 0x060008E0, 0x06001280]);
+    await this.addObjectFile('MM_ADULT_LINK', 'mm_adult_link.zobj', [
+      0x060122C4, 0x0600bb00, 0x0601c0c0, 0x0601c0d0, 0x0601c130, 0x0601BFE8, 0x0601BFF8, 0x0601C008,
+      0x0601C028, 0x0601C048, 0x0601BFC8, 0x0601BFA8, 0x0601BEC8, 0x0601C0B0, 0x06010000, 0x0600AE40,
+      0x0601DC68, 0x0601C068, 0x0601C080, 0x0601C098, 0x06010D50, 0x0600B3F0, 0x0601C0F0, 0x0601C100,
+      0x0601C0E0, 0x0600A8E8, 0x060103D8, 0x0601C120, 0x0601C110, 0x0601be60
+    ]);
+    await this.addObjectFile('MM_ADULT_EPONA', 'mm_adult_epona.zobj', []);
+    await this.addObjectFile('MM_ADULT_LINK_SPIN_ATTACK_VTX_1', 'mm_adult_link_spin_attack_vtx_1.bin', []);
+    await this.addObjectFile('MM_ADULT_LINK_SPIN_ATTACK_VTX_2', 'mm_adult_link_spin_attack_vtx_2.bin', []);
+    await this.addObjectFile('MM_ADULT_LINK_SPIN_ATTACK_VTX_3', 'mm_adult_link_spin_attack_vtx_3.bin', []);
+    await this.addObjectFile('MM_ADULT_LINK_MASK_MTX', 'mm_adult_link_mask_mtx.bin', []);
 
     /* Add the object table */
     const objectTableBuffer = toU32Buffer(this.objectVroms.map(o => [o.vstart, o.vend]).flat());

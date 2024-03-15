@@ -34,16 +34,20 @@ class ObjectSplitter {
         const op2 = data2 >>> 24;
         if (op2 === 0xf5) {
           /* Texture */
-          const fmt = (data >>> 16) & 0xff;
+          const fmt = (list.readUInt32BE(i + 0x28) >> 19) & 3;
           let bpp = 0;
           switch (fmt) {
-          case 0x50:
-          case 0x90:
+          case 0:
             bpp = 4;
             break;
-          case 0x10:
-          case 0x70:
+          case 1:
+            bpp = 8;
+            break;
+          case 2:
             bpp = 16;
+            break;
+          case 3:
+            bpp = 32;
             break;
           default:
             throw new Error(`Unknown texture format 0x${fmt.toString(16)}`);
@@ -56,8 +60,9 @@ class ObjectSplitter {
           list.writeUInt32BE(newAddr, i + 4);
         } else if (op2 === 0xe8) {
           /* Palette */
+          const count = ((list.readUInt32BE(i + 0x24) & 0xffffff) >> 14) + 1;
           const addr = list.readUInt32BE(i + 4);
-          const newAddr = this.copy(addr, 32);
+          const newAddr = this.copy(addr, count * 2);
           list.writeUInt32BE(newAddr, i + 4);
         }
       }

@@ -882,6 +882,13 @@ export const SETTINGS = [{
   description: 'Makes the Mask Shop in Market open during the night',
   default: false
 }, {
+  key: 'crossAge',
+  name: 'Cross-Games Age',
+  category: 'main.cross',
+  type: 'boolean',
+  description: 'When you enter MM as Adult Link, you will be Adult Link in MM.',
+  default: false
+}, {
   key: 'crossWarpOot',
   name: 'Cross-Games OoT Warp Songs',
   category: 'main.cross',
