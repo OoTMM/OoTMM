@@ -119,6 +119,7 @@ void DmaCompressed(u32 pstart, void* dst, u32 size);
 #if defined(GAME_OOT)
 void _DmaCompressed(u32 pstart, void* dst, u32 size);
 #endif
+s32 RequestDma(DmaRequest* request, void* vramStart, u32 vromStart, size_t size, u32 unused, OSMesgQueue* queue, OSMesg msg);
 
 void ConvertMatrix(const float* in, u16* out);
 void MatrixRotation(u16 angle, int unk_1);
@@ -245,6 +246,7 @@ void Player_Update(Actor_Player* this, GameState_Play* play);
 void Play_SetupRespawnPoint(GameState_Play* this, s32 respawnMode, s32 playerParams);
 
 void* OverlayAddr(u32 addr);
+void KaleidoManager_LoadOvl(void* ovl);
 
 void LoadIcon(u32 vaddr, int iconId, void* buffer, int size);
 void CmpDma_LoadAllFiles(u32 vrom, void* dst, size_t size);
@@ -262,6 +264,7 @@ void PlayLoopingSfxAtActor(Actor* actor, u32 id);
 void Actor_PlaySfx_FlaggedCentered1(Actor* actor, u16 sfxId);
 void Audio_PlaySfx_AtPos(Vec3f* pos, u16 sfxId);
 void Audio_PlaySfx_MessageDecide(void);
+void Audio_PlaySfx(u16 sfxId, Vec3f* pos, u8 token, f32* freqScale, f32* volume, s8* reverbAdd);
 
 #if defined(GAME_MM)
 void AudioOcarina_SetInstrument(u8 ocarinaInstrumentId);
@@ -492,6 +495,7 @@ void Lights_PointNoGlowSetInfo(LightInfo* info, s16 x, s16 y, s16 z, u8 r, u8 g,
 LightNode* LightContext_InsertLight(GameState_Play* play, LightContext* lightCtx, LightInfo* info);
 
 void Actor_DrawLensActors(GameState_Play* play, s32 numLensActors, Actor** lensActors);
+ActorInit* Actor_LoadOverlay(ActorContext* actorCtx, s16 index);
 
 f32 Player_GetHeight(Actor_Player* player);
 
@@ -509,5 +513,10 @@ s32 SysFlashrom_ReadData(void* addr, u32 pageNum, u32 pageCount);
 s32 SysFlashrom_ExecWrite(void* addr, u32 pageNum, u32 pageCount);
 
 EntranceTableEntry* Entrance_GetTableEntry(u16 entrance);
+
+s32 Object_SpawnPersistent(ObjectContext* objectCtx, s16 id);
+s32 Object_GetSlot(ObjectContext* objectCtx, s16 id);
+
+s32 Player_OverrideLimbDrawGameplayDefault(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Player* player);
 
 extern OSPiHandle* gCartHandle;

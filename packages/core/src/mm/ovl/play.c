@@ -3,6 +3,7 @@
 #include <combo/menu.h>
 #include <combo/entrance.h>
 #include <combo/time.h>
+#include <combo/custom.h>
 
 GameState_Play* gPlay;
 int gNoTimeFlow;
@@ -323,6 +324,7 @@ void preInitTitleScreen(void)
 
 void hookPlay_Init(GameState_Play* play)
 {
+    gPlay = play;
     int isEndOfGame;
 
     /* Pre-init */
@@ -373,6 +375,112 @@ void hookPlay_Init(GameState_Play* play)
             }
         }
         gSave.fw.pos = *pos;
+    }
+
+    if (comboIsLinkAdult())
+    {
+        s16* playerFormObjectIds = (s16*)0x801c2730;
+        playerFormObjectIds[MM_PLAYER_FORM_HUMAN] = CUSTOM_OBJECT_ID_MM_ADULT_LINK;
+
+        u32* playerSkeletons = (u32*)0x801bfe00;
+        playerSkeletons[MM_PLAYER_FORM_HUMAN] = CUSTOM_OBJECT_MM_ADULT_LINK_0;
+
+        u32* playerWaistDLs = (u32*)0x801bfffc;
+        u32* playerHandHoldingShieldDLs = (u32*)0x801c0024;
+        u32* playerSheath12DLs = (u32*)0x801c0034;
+        u32* playerSheath13DLs = (u32*)0x801c005c;
+        u32* playerSheath14DLs = (u32*)0x801c0084;
+        u32* playerShieldDLs = (u32*)0x801c00ac;
+        u32* playerSheathedSwordDLs = (u32*)0x801c00bc;
+        u32* playerSwordSheathsDLs = (u32*)0x801c00d4;
+        u32* playerLeftHandTwoHandSwordDLs = (u32*)0x801c00ec;
+        u32* playerLeftHandOpenDLs = (u32*)0x801c0114;
+        u32* playerLeftHandClosedDLs = (u32*)0x801c013c;
+        u32* playerLeftHandOneHandSwordDLs = (u32*)0x801c0164;
+        u32* playerEquipValueDLs = (u32*)0x801c018c;
+        u32* playerRightHandOpenDLs = (u32*)0x801c01a4;
+        u32* playerRightHandClosedDLs = (u32*)0x801c01cc;
+        u32* playerRightHandBowDLs = (u32*)0x801c01f4;
+        u32* playerRightHandInstrumentDLs = (u32*)0x801c021c;
+        u32* playerRightHandHookshotDLs = (u32*)0x801c0244;
+        u32* playerLeftHandBottleDLs = (u32*)0x801c026c;
+        u32* playerFirstPersonLeftForearmDLs = (u32*)0x801c0294;
+        u32* playerFirstPersonLeftHandDLs = (u32*)0x801c02a8;
+        u32* playerFirstPersonRightShoulderDLs = (u32*)0x801c02bc;
+        u32* playerFirstPersonRightHandDLs = (u32*)0x801c02d0;
+        u32* playerFirstPersonRightHandHookshotDLs = (u32*)0x801c02e4;
+
+        playerWaistDLs[MM_PLAYER_FORM_HUMAN * 2] = CUSTOM_OBJECT_MM_ADULT_LINK_1;
+        playerWaistDLs[MM_PLAYER_FORM_HUMAN * 2 + 1] = CUSTOM_OBJECT_MM_ADULT_LINK_1;
+        playerHandHoldingShieldDLs[0] = CUSTOM_OBJECT_MM_ADULT_LINK_2;
+        playerHandHoldingShieldDLs[1] = CUSTOM_OBJECT_MM_ADULT_LINK_2;
+        playerHandHoldingShieldDLs[2] = CUSTOM_OBJECT_MM_ADULT_LINK_3;
+        playerHandHoldingShieldDLs[3] = CUSTOM_OBJECT_MM_ADULT_LINK_3;
+        playerSheath12DLs[MM_PLAYER_FORM_HUMAN * 2] = CUSTOM_OBJECT_MM_ADULT_LINK_4;
+        playerSheath12DLs[MM_PLAYER_FORM_HUMAN * 2 + 1] = CUSTOM_OBJECT_MM_ADULT_LINK_4;
+        playerSheath13DLs[MM_PLAYER_FORM_HUMAN * 2] = CUSTOM_OBJECT_MM_ADULT_LINK_4;
+        playerSheath13DLs[MM_PLAYER_FORM_HUMAN * 2 + 1] = CUSTOM_OBJECT_MM_ADULT_LINK_4;
+        playerSheath14DLs[MM_PLAYER_FORM_HUMAN * 2] = CUSTOM_OBJECT_MM_ADULT_LINK_4;
+        playerSheath14DLs[MM_PLAYER_FORM_HUMAN * 2 + 1] = CUSTOM_OBJECT_MM_ADULT_LINK_4;
+        playerShieldDLs[0] = CUSTOM_OBJECT_MM_ADULT_LINK_5;
+        playerShieldDLs[1] = CUSTOM_OBJECT_MM_ADULT_LINK_5;
+        playerShieldDLs[2] = CUSTOM_OBJECT_MM_ADULT_LINK_6;
+        playerShieldDLs[3] = CUSTOM_OBJECT_MM_ADULT_LINK_6;
+        playerSheathedSwordDLs[0] = CUSTOM_OBJECT_MM_ADULT_LINK_7;
+        playerSheathedSwordDLs[1] = CUSTOM_OBJECT_MM_ADULT_LINK_7;
+        playerSheathedSwordDLs[2] = CUSTOM_OBJECT_MM_ADULT_LINK_8;
+        playerSheathedSwordDLs[3] = CUSTOM_OBJECT_MM_ADULT_LINK_8;
+        playerSheathedSwordDLs[4] = CUSTOM_OBJECT_MM_ADULT_LINK_9;
+        playerSheathedSwordDLs[5] = CUSTOM_OBJECT_MM_ADULT_LINK_9;
+        playerSwordSheathsDLs[0] = CUSTOM_OBJECT_MM_ADULT_LINK_10;
+        playerSwordSheathsDLs[1] = CUSTOM_OBJECT_MM_ADULT_LINK_10;
+        playerSwordSheathsDLs[2] = CUSTOM_OBJECT_MM_ADULT_LINK_11;
+        playerSwordSheathsDLs[3] = CUSTOM_OBJECT_MM_ADULT_LINK_11;
+        playerSwordSheathsDLs[4] = CUSTOM_OBJECT_MM_ADULT_LINK_12;
+        playerSwordSheathsDLs[5] = CUSTOM_OBJECT_MM_ADULT_LINK_12;
+        playerLeftHandTwoHandSwordDLs[MM_PLAYER_FORM_HUMAN * 2] = CUSTOM_OBJECT_MM_ADULT_LINK_13;
+        playerLeftHandTwoHandSwordDLs[MM_PLAYER_FORM_HUMAN * 2 + 1] = CUSTOM_OBJECT_MM_ADULT_LINK_13;
+        playerLeftHandOpenDLs[MM_PLAYER_FORM_HUMAN * 2] = CUSTOM_OBJECT_MM_ADULT_LINK_14;
+        playerLeftHandOpenDLs[MM_PLAYER_FORM_HUMAN * 2 + 1] = CUSTOM_OBJECT_MM_ADULT_LINK_14;
+        playerLeftHandClosedDLs[MM_PLAYER_FORM_HUMAN * 2] = CUSTOM_OBJECT_MM_ADULT_LINK_15;
+        playerLeftHandClosedDLs[MM_PLAYER_FORM_HUMAN * 2 + 1] = CUSTOM_OBJECT_MM_ADULT_LINK_15;
+        playerLeftHandOneHandSwordDLs[MM_PLAYER_FORM_HUMAN * 2] = CUSTOM_OBJECT_MM_ADULT_LINK_16;
+        playerLeftHandOneHandSwordDLs[MM_PLAYER_FORM_HUMAN * 2 + 1] = CUSTOM_OBJECT_MM_ADULT_LINK_16;
+        playerEquipValueDLs[0] = CUSTOM_OBJECT_MM_ADULT_LINK_17;
+        playerEquipValueDLs[1] = CUSTOM_OBJECT_MM_ADULT_LINK_17;
+        playerEquipValueDLs[2] = CUSTOM_OBJECT_MM_ADULT_LINK_18;
+        playerEquipValueDLs[3] = CUSTOM_OBJECT_MM_ADULT_LINK_18;
+        playerEquipValueDLs[4] = CUSTOM_OBJECT_MM_ADULT_LINK_19;
+        playerEquipValueDLs[5] = CUSTOM_OBJECT_MM_ADULT_LINK_19;
+        playerRightHandOpenDLs[MM_PLAYER_FORM_HUMAN * 2] = CUSTOM_OBJECT_MM_ADULT_LINK_20;
+        playerRightHandOpenDLs[MM_PLAYER_FORM_HUMAN * 2 + 1] = CUSTOM_OBJECT_MM_ADULT_LINK_20;
+        playerRightHandClosedDLs[MM_PLAYER_FORM_HUMAN * 2] = CUSTOM_OBJECT_MM_ADULT_LINK_21;
+        playerRightHandClosedDLs[MM_PLAYER_FORM_HUMAN * 2 + 1] = CUSTOM_OBJECT_MM_ADULT_LINK_21;
+        playerRightHandBowDLs[MM_PLAYER_FORM_HUMAN * 2] = CUSTOM_OBJECT_MM_ADULT_LINK_22;
+        playerRightHandBowDLs[MM_PLAYER_FORM_HUMAN * 2 + 1] = CUSTOM_OBJECT_MM_ADULT_LINK_22;
+        playerRightHandInstrumentDLs[MM_PLAYER_FORM_HUMAN * 2] = CUSTOM_OBJECT_MM_ADULT_LINK_23;
+        playerRightHandInstrumentDLs[MM_PLAYER_FORM_HUMAN * 2 + 1] = CUSTOM_OBJECT_MM_ADULT_LINK_23;
+        playerRightHandHookshotDLs[MM_PLAYER_FORM_HUMAN * 2] = CUSTOM_OBJECT_MM_ADULT_LINK_24;
+        playerRightHandHookshotDLs[MM_PLAYER_FORM_HUMAN * 2 + 1] = CUSTOM_OBJECT_MM_ADULT_LINK_24;
+        playerLeftHandBottleDLs[MM_PLAYER_FORM_HUMAN * 2] = CUSTOM_OBJECT_MM_ADULT_LINK_25;
+        playerLeftHandBottleDLs[MM_PLAYER_FORM_HUMAN * 2 + 1] = CUSTOM_OBJECT_MM_ADULT_LINK_25;
+        playerFirstPersonLeftForearmDLs[MM_PLAYER_FORM_HUMAN] = CUSTOM_OBJECT_MM_ADULT_LINK_4;
+        playerFirstPersonLeftHandDLs[MM_PLAYER_FORM_HUMAN] = CUSTOM_OBJECT_MM_ADULT_LINK_15;
+        playerFirstPersonRightShoulderDLs[MM_PLAYER_FORM_HUMAN] = CUSTOM_OBJECT_MM_ADULT_LINK_26;
+        playerFirstPersonRightHandDLs[MM_PLAYER_FORM_HUMAN] = CUSTOM_OBJECT_MM_ADULT_LINK_27;
+        playerFirstPersonRightHandHookshotDLs[MM_PLAYER_FORM_HUMAN] = CUSTOM_OBJECT_MM_ADULT_LINK_28;
+
+        f32* meleeWeaponLengths = (f32*)0x801c0d78;
+        meleeWeaponLengths[1] = 4000.0f;
+        meleeWeaponLengths[2] = 4000.0f;
+        meleeWeaponLengths[3] = 5500.0f;
+        meleeWeaponLengths[4] = 5500.0f;
+
+        u32* playerRightHandBowDLs2 = (u32*)0x801c0d94;
+        *playerRightHandBowDLs2 = CUSTOM_OBJECT_MM_ADULT_LINK_29;
+
+        u32* playerHeightJtbl = (u32*)0x801dca58;
+        playerHeightJtbl[MM_PLAYER_FORM_HUMAN] = playerHeightJtbl[MM_PLAYER_FORM_ZORA];
     }
 
     if (!gCustomKeep)
@@ -439,7 +547,6 @@ void hookPlay_Init(GameState_Play* play)
         gNoTimeFlow = 1;
 
     Play_Init(play);
-    gPlay = play;
     gLastEntrance = gSave.entranceIndex;
     g.inGrotto = (play->sceneId == SCE_MM_GROTTOS);
     if (!g.inGrotto)

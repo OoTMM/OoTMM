@@ -74,7 +74,7 @@ static f32 MagicDark_GetScale(Actor_Player* player)
     case MM_PLAYER_FORM_DEKU:
         return 0.4f;
     case MM_PLAYER_FORM_HUMAN:
-        return 0.4f;
+        return comboIsLinkAdult() ? 0.6f : 0.4f;
     }
     return 0.0f;
 }

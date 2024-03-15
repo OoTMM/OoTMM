@@ -45,7 +45,7 @@ static const ObjectTexturePatch kObjectTexturePatches[] = {
     { 0x53390, 0x7df10 },
 };
 
-ALIGNED(16) ObjectData kCustomObjectsTable[32];
+ALIGNED(16) ObjectData kCustomObjectsTable[0x30];
 
 static const ObjectPatch kObjectPatches[] = {
 #if defined(GAME_OOT)
@@ -234,6 +234,24 @@ static void comboPatchForeignObject(void* buffer, u16 objectId)
         texture = (u32*)((u8*)buffer + offset + 4);
         *texture = 0x04000000 | comboGetTextureOverride((*texture) & 0xffffff);
     }
+}
+
+ObjectData* comboGetObjectData(u16 objectId)
+{
+    const ObjectData* table;
+    if (objectId & 0x2000)
+    {
+        table = kCustomObjectsTable;
+    }
+    else if (objectId & 0x1000)
+    {
+        table = kExtraObjectsTable;
+    }
+    else
+    {
+        table = kObjectsTable;
+    }
+    return &table[objectId & 0xfff];
 }
 
 u32 comboLoadObject(void* buffer, u16 objectId)

@@ -117,3 +117,12 @@ int comboIsChateauActive(void)
 
     return !!MM_GET_EVENT_WEEK(EV_MM_WEEK_DRANK_CHATEAU_ROMANI);
 }
+
+int comboIsLinkAdult(void)
+{
+#if defined(GAME_MM)
+    if (!comboConfig(CFG_MM_CROSS_AGE))
+        return 0;
+#endif
+    return gOotSave.age == 0;
+}

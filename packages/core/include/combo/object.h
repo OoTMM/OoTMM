@@ -99,6 +99,7 @@ ObjectPatch;
 #define OBJ_OOT_GI_RUPY             0x17f
 #define OBJ_OOT_GI_SWORD_1          0x18d
 
+#define OBJ_MM_LINK_CHILD           0x011
 #define OBJ_MM_GI_KEY               0x086
 #define OBJ_MM_GI_MELODY            0x08f
 #define OBJ_MM_GI_HEART             0x090

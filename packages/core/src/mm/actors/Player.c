@@ -101,6 +101,10 @@ static AnimSfxEntry sMagicSpellSfx[][2] =
         { 0x681C, ANIMSFX_DATA(ANIMSFX_TYPE_4, 20) }, /* NA_SE_VO_LI_MAGIC_ATTACK */
         { 0x1818, -ANIMSFX_DATA(ANIMSFX_TYPE_1, 20) }, /* NA_SE_IT_SWORD_SWING_HARD */
     },
+    {
+        { 0x6801, ANIMSFX_DATA(ANIMSFX_TYPE_4, 20) }, /* NA_SE_VO_LI_SWORD_L */
+        { 0x1818, -ANIMSFX_DATA(ANIMSFX_TYPE_1, 20) }, /* NA_SE_IT_SWORD_SWING_HARD */
+    },
 };
 
 static PlayerAnimationHeader* sMagicSpellFirstAnimation[] =
@@ -156,9 +160,9 @@ static s32 Player_ActionToMagicSpell(Actor_Player* this, s32 itemAction)
 
 static s32 Player_ActionToBoots(Actor_Player* this, s32 itemAction)
 {
-    s32 boots = itemAction - PLAYER_CUSTOM_IA_BOOTS_MIN;
+    s32 boots = itemAction - PLAYER_CUSTOM_IA_BOOTS_MIN + 1;
 
-    if ((boots >= PLAYER_BOOTS_MIN) && (boots <= PLAYER_BOOTS_MAX))
+    if ((boots >= PLAYER_BOOTS_IRON) && (boots <= PLAYER_BOOTS_HOVER))
     {
         return boots;
     }
@@ -276,7 +280,12 @@ void Player_Action_CastingSpell(Actor_Player* this, GameState_Play* play)
             }
             else if (this->av2.actionVar2 == 1)
             {
-                Player_PlayAnimSfx(this, sMagicSpellSfx[this->av1.actionVar1]);
+                s8 spellSfxIndex = this->av1.actionVar1;
+                if (spellSfxIndex == 2 && comboIsLinkAdult())
+                {
+                    spellSfxIndex = 3;
+                }
+                Player_PlayAnimSfx(this, sMagicSpellSfx[spellSfxIndex]);
                 if ((this->av1.actionVar1 == 2) && PlayerAnimation_OnFrame(&this->skelAnime, 30.0f))
                 {
                     this->state &= ~0x30000000; /* PLAYER_STATE1_20000000 | PLAYER_STATE1_10000000 */
@@ -426,9 +435,26 @@ s32 Player_CustomCsItem(Actor_Player* this, GameState_Play* play)
     return 0;
 }
 
-s16 sBootData[3][18] = {
+s16 sBootData[7][18] = {
+    /* Child Link - Iron Boots */
     { 200, 1000, 300, 700, 550, 270, 1000, 0, 120, 800, 300, -160, 600, 590, 750, 125, 200, 130 },
+
+    /* Child Link - Hover Boots */
     { 200, 1000, 300, 700, 550, 270, 600, 600, 120, 800, 550, -100, 600, 540, 270, 25, 0, 130 },
+
+    /* Child Link - Iron Boots (Underwater) */
+    { 80, 800, 150, 700, 480, 270, 600, 50, 120, 800, 550, -40, 400, 540, 270, 25, 0, 80 },
+
+    /* Adult Link - Kokiri Boots */
+    { 200, 1000, 300, 700, 550, 270, 700, 300, 120, 800, 600, -100, 600, 590, 750, 125, 200, 130 },
+
+    /* Adult Link - Iron Boots */
+    { 200, 1000, 300, 700, 550, 270, 1000, 0, 120, 800, 300, -160, 600, 590, 750, 125, 200, 130 },
+
+    /* Adult Link - Hover Boots */
+    { 200, 1000, 300, 700, 550, 270, 600, 600, 120, 800, 550, -100, 600, 540, 270, 25, 0, 130 },
+
+    /* Adult Link - Iron Boots (Underwater) */
     { 80, 800, 150, 700, 480, 270, 600, 50, 120, 800, 550, -40, 400, 540, 270, 25, 0, 80 },
 };
 
@@ -437,12 +463,13 @@ void Player_CheckCustomBoots(GameState_Play* play)
     Actor_Player* player = GET_LINK(play);
     if (player->transformation == MM_PLAYER_FORM_HUMAN)
     {
+        s32 isAdult = comboIsLinkAdult();
         player->base.flags &= ~(1 << 17); /* ~ACTOR_FLAG_CAN_PRESS_HEAVY_SWITCH */
         player->base.flags |= (1 << 26); /* ACTOR_FLAG_CAN_PRESS_SWITCH */
 
-        if (gSaveContext.save.itemEquips.boots > 0)
+        if (gSaveContext.save.itemEquips.boots > 0 || isAdult)
         {
-            s32 currentBoots = gSaveContext.save.itemEquips.boots - 1;
+            s32 currentBoots = gSaveContext.save.itemEquips.boots;
             s16* bootRegs;
 
             REG(27) = 2000;
@@ -455,7 +482,7 @@ void Player_CheckCustomBoots(GameState_Play* play)
                 player->base.flags |= (1 << 17); /* ACTOR_FLAG_CAN_PRESS_HEAVY_SWITCH */
                 if (player->state & PLAYER_ACTOR_STATE_WATER)
                 {
-                    currentBoots = 2; /* Iron Underwater */
+                    currentBoots = 3; /* Iron Underwater */
                 }
                 REG(27) = 500;
                 REG(48) = 100;
@@ -466,7 +493,12 @@ void Player_CheckCustomBoots(GameState_Play* play)
                 break;
             }
 
-            bootRegs = sBootData[currentBoots];
+            if (isAdult)
+            {
+                currentBoots += 4;
+            }
+
+            bootRegs = sBootData[currentBoots - 1];
             REG(19) = bootRegs[0];
             REG(30) = bootRegs[1];
             REG(32) = bootRegs[2];
@@ -520,18 +552,17 @@ s32 Player_CustomUseItem(Actor_Player* this, GameState_Play* play, s32 itemActio
     }
 
     s32 boots = Player_ActionToBoots(this, itemAction);
-    if (boots >= 0)
+    if (boots > 0)
     {
         if (this->transformation == MM_PLAYER_FORM_HUMAN)
         {
-            u16 newBoots = boots + 1;
-            if (gSaveContext.save.itemEquips.boots == newBoots)
+            if (gSaveContext.save.itemEquips.boots == boots)
             {
-                newBoots = 0;
+                boots = 0;
             }
-            gSaveContext.save.itemEquips.boots = newBoots;
+            gSaveContext.save.itemEquips.boots = boots;
 
-            if (!newBoots)
+            if (!boots)
             {
                 this->currentBoots = 1; /* PLAYER_BOOTS_HYLIAN */
             }
@@ -1023,6 +1054,88 @@ Gfx gLinkAdultRightGauntletPlate3DL[] = {
     gsSPEndDisplayList(),
 };
 
+static int prepareObject(GameState_Play* play, u16 objectId)
+{
+    void* obj;
+
+    obj = comboGetObject(objectId);
+    if (!obj)
+        return 0;
+
+    OPEN_DISPS(play->gs.gfx);
+    gSPSegment(POLY_OPA_DISP++, 0x0a, obj);
+    CLOSE_DISPS();
+
+    return 1;
+}
+
+static void DrawBootsIron(GameState_Play* play, Actor_Player* link)
+{
+    OPEN_DISPS(play->gs.gfx);
+    if (comboIsLinkAdult())
+    {
+        if (!prepareObject(play, CUSTOM_OBJECT_ID_BOOTS_IRON))
+            return;
+        gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_BOOTS_IRON_0);
+        gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_BOOTS_IRON_1);
+    }
+    else
+    {
+        gSPSegment(POLY_OPA_DISP++, 0x08, gCustomKeep);
+        gSPDisplayList(POLY_OPA_DISP++, gLinkAdultLeftIronBootDL);
+        gSPDisplayList(POLY_OPA_DISP++, gLinkAdultRightIronBootDL);
+    }
+    CLOSE_DISPS();
+}
+
+static void DrawBootsHover(GameState_Play* play, Actor_Player* link)
+{
+    OPEN_DISPS(play->gs.gfx);
+    if (comboIsLinkAdult())
+    {
+        if (!prepareObject(play, CUSTOM_OBJECT_ID_BOOTS_HOVER))
+            return;
+        gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_BOOTS_HOVER_0);
+        gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_BOOTS_HOVER_1);
+    }
+    else
+    {
+        gSPSegment(POLY_OPA_DISP++, 0x08, gCustomKeep);
+        gSPDisplayList(POLY_OPA_DISP++, gLinkAdultLeftHoverBootDL);
+        gSPDisplayList(POLY_OPA_DISP++, gLinkAdultRightHoverBootDL);
+    }
+    CLOSE_DISPS();
+}
+
+static void DrawGauntlets(GameState_Play* play, Actor_Player* link)
+{
+    OPEN_DISPS(play->gs.gfx);
+    if (comboIsLinkAdult())
+    {
+        if (!prepareObject(play, CUSTOM_OBJECT_ID_GAUNTLETS))
+            return;
+        s32 playerLeftHandType = *(s32*)0x801f59f4;
+        s32 playerRightHandType = *(s32*)0x801f59f8;
+        gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_GAUNTLETS_0);
+        gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_GAUNTLETS_3);
+        gSPDisplayList(POLY_OPA_DISP++, (playerLeftHandType == 0) /* PLAYER_MODELTYPE_LH_OPEN */
+                                            ? CUSTOM_OBJECT_GAUNTLETS_1
+                                            : CUSTOM_OBJECT_GAUNTLETS_2);
+        gSPDisplayList(POLY_OPA_DISP++, (playerRightHandType == 6) /* PLAYER_MODELTYPE_RH_OPEN */
+                                            ? CUSTOM_OBJECT_GAUNTLETS_4
+                                            : CUSTOM_OBJECT_GAUNTLETS_5);
+    }
+    else
+    {
+        gSPSegment(POLY_OPA_DISP++, 0x08, gCustomKeep);
+        gSPDisplayList(POLY_OPA_DISP++, gLinkAdultLeftGauntletPlate1DL);
+        gSPDisplayList(POLY_OPA_DISP++, gLinkAdultRightGauntletPlate1DL);
+        gSPDisplayList(POLY_OPA_DISP++, gLinkAdultLeftGauntletPlate3DL);
+        gSPDisplayList(POLY_OPA_DISP++, gLinkAdultRightGauntletPlate3DL);
+    }
+    CLOSE_DISPS();
+}
+
 static Color_RGB8 sGauntletColors[] = {
     { 255, 255, 255 },
     { 254, 207, 15 },
@@ -1059,20 +1172,16 @@ void Player_SkelAnime_DrawFlexLod(GameState_Play* play, void** skeleton, Vec3s* 
 
     SkelAnime_DrawFlexLod(play, skeleton, jointTable, dListCount, overrideLimbDraw, postLimbDraw, &player->base, lod);
 
-    gSPSegment(POLY_OPA_DISP++, 0x08, gCustomKeep);
-    gSPSegment(POLY_XLU_DISP++, 0x08, gCustomKeep);
 
     if (overrideLimbDraw != Player_OverrideLimbDrawGameplayFirstPerson && gSaveContext.gameMode != 3) /* GAMEMODE_END_CREDITS */
     {
         switch (GET_PLAYER_CUSTOM_BOOTS(player))
         {
         case PLAYER_BOOTS_IRON:
-            gSPDisplayList(POLY_OPA_DISP++, gLinkAdultLeftIronBootDL);
-            gSPDisplayList(POLY_OPA_DISP++, gLinkAdultRightIronBootDL);
+            DrawBootsIron(play, player);
             break;
         case PLAYER_BOOTS_HOVER:
-            gSPDisplayList(POLY_OPA_DISP++, gLinkAdultLeftHoverBootDL);
-            gSPDisplayList(POLY_OPA_DISP++, gLinkAdultRightHoverBootDL);
+            DrawBootsHover(play, player);
             break;
         }
 
@@ -1083,6 +1192,7 @@ void Player_SkelAnime_DrawFlexLod(GameState_Play* play, void** skeleton, Vec3s* 
             switch (strength)
             {
                 case 1:
+                    gSPSegment(POLY_OPA_DISP++, 0x08, gCustomKeep);
                     gSPDisplayList(POLY_OPA_DISP++, gLinkChildGoronBraceletDL);
                     break;
                 case 2:
@@ -1091,14 +1201,13 @@ void Player_SkelAnime_DrawFlexLod(GameState_Play* play, void** skeleton, Vec3s* 
                     gDPPipeSync(POLY_OPA_DISP++);
                     gDPSetEnvColor(POLY_OPA_DISP++, gauntletColor->r, gauntletColor->g, gauntletColor->b, 0);
 
-                    gSPDisplayList(POLY_OPA_DISP++, gLinkAdultLeftGauntletPlate1DL);
-                    gSPDisplayList(POLY_OPA_DISP++, gLinkAdultRightGauntletPlate1DL);
-                    gSPDisplayList(POLY_OPA_DISP++, gLinkAdultLeftGauntletPlate3DL);
-                    gSPDisplayList(POLY_OPA_DISP++, gLinkAdultRightGauntletPlate3DL);
+                    DrawGauntlets(play, player);
                     break;
             }
         }
     }
+
+    gSPSegment(POLY_XLU_DISP++, 0x08, gCustomKeep);
 
     if (GET_PLAYER_CUSTOM_BOOTS(player) == PLAYER_BOOTS_HOVER && !(player->base.bgCheckFlags & BGCHECKFLAG_GROUND)
         && !(player->state & (1 << 23)) && player->hoverBootsTimer != 0)
@@ -1462,4 +1571,71 @@ u8 Player_GetStrengthCustom(u8 formStrength)
 s32 Player_HasStrength(u8 requiredStrength)
 {
     return Player_GetStrength() >= requiredStrength;
+}
+
+void Player_PlaySfx_GiantsMask(u16 sfxId, Vec3f* pos, u8 token, f32* freqScale, f32* volume, s8* reverbAdd)
+{
+    if (comboIsLinkAdult())
+    {
+        sfxId -= 0x20;
+    }
+    Audio_PlaySfx(sfxId, pos, token, freqScale, volume, reverbAdd);
+}
+
+PATCH_CALL(0x8019f874, Player_PlaySfx_GiantsMask);
+
+u8 Player_AfterMaskLoaded(Actor_Player* player)
+{
+    player->maskObjectLoadState = 0;
+
+    if (player->base.id == AC_PLAYER && comboIsLinkAdult())
+    {
+        u32* maskObjectSegment;
+        switch (player->currentMask)
+        {
+        case PLAYER_MASK_KEATON:
+            maskObjectSegment = (u32*) player->maskObjectSegment;
+            maskObjectSegment[0x12a] = 0xde000000;
+            maskObjectSegment[0x12b] = 0x0405a2e0;
+            break;
+        case PLAYER_MASK_BUNNY:
+            maskObjectSegment = (u32*) player->maskObjectSegment;
+            maskObjectSegment[0x188] = 0xde000000;
+            maskObjectSegment[0x189] = 0x0405a2e0;
+            maskObjectSegment[0x1e0] = 0xde000000;
+            maskObjectSegment[0x1e1] = 0x0405a2e8;
+            maskObjectSegment[0x1ec] = 0xde000000;
+            maskObjectSegment[0x1ed] = 0x0405a2e0;
+            maskObjectSegment[0x224] = 0xde000000;
+            maskObjectSegment[0x225] = 0x0405a2e8;
+            maskObjectSegment[0x230] = 0xde000000;
+            maskObjectSegment[0x231] = 0x0405a2e0;
+            break;
+        case PLAYER_MASK_SCENTS:
+            maskObjectSegment = (u32*) player->maskObjectSegment;
+            maskObjectSegment[0x1c6] = 0xde000000;
+            maskObjectSegment[0x1c7] = 0x0405a2e0;
+            break;
+        }
+    }
+
+    return player->currentMask;
+}
+
+s32 Player_OverrideLimbDrawGameplayDefault_Custom(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Player* player)
+{
+    if (!Player_OverrideLimbDrawGameplayDefault(play, limbIndex, dList, pos, rot, player))
+    {
+        switch (limbIndex)
+        {
+        case PLAYER_LIMB_ROOT:
+            if (player->state3 & 0x20000000 && comboIsLinkAdult()) /* PLAYER_STATE3_20000000 */
+            {
+                pos->y += 1280.0f;
+            }
+            break;
+        }
+    }
+
+    return 0;
 }
