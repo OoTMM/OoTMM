@@ -43,7 +43,7 @@ const SIMPLE_DEPENDENCIES: {[k: string]: string[]} = {
     'OOT Gerudo Valley Broken Goron Sword'
   ],
   OOT_BROKEN_GORON_SWORD: [
-    'OOT Death Mountain Prescription'
+    'OOT Death Mountain Trail Prescription'
   ],
   OOT_PRESCRIPTION: [
     'OOT Zora Domain Eyeball Frog'
@@ -52,10 +52,10 @@ const SIMPLE_DEPENDENCIES: {[k: string]: string[]} = {
     'OOT Laboratory Eye Drops'
   ],
   OOT_EYE_DROPS: [
-    'OOT Death Mountain Claim Check'
+    'OOT Death Mountain Trail Claim Check'
   ],
   OOT_CLAIM_CHECK: [
-    'OOT Death Mountain Biggoron Sword'
+    'OOT Death Mountain Trail Biggoron Sword'
   ],
   OOT_SONG_SUN: [
     'OOT Graveyard ReDead Tomb',

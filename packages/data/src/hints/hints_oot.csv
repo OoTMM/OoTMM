@@ -15,7 +15,7 @@ Sacred Meadow Gossip Near Forest Temple,              gossip,           0x1c
 Sacred Meadow Gossip Atop Maze Woods Side,            gossip,           0x16
 Sacred Meadow Gossip Atop Maze Temple Side,           gossip,           0x17
 Graveyard Gossip,                                     gossip,           0x0a
-Death Mountain Gossip on Climb,                       gossip,           0x04
+Death Mountain Trail Gossip on Climb,                       gossip,           0x04
 Goron City Gossip Boulder Maze,                       gossip,           0x15
 Goron City Gossip Near Medigoron,                     gossip,           0x19
 Zora River Gossip High Pillar,                        gossip,           0x0d
@@ -36,6 +36,6 @@ Hyrule Field Gossip Near Lake Hylia,                  gossip-grotto,    0x03
 Hyrule Field Gossip Southeast Grotto,                 gossip-grotto,    0x02
 Lost Woods Gossip Grotto,                             gossip-grotto,    0x14
 Kakariko Gossip Grotto,                               gossip-grotto,    0x08
-Death Mountain Gossip Grotto,                         gossip-grotto,    0x17
+Death Mountain Trail Gossip Grotto,                         gossip-grotto,    0x17
 Zora River Gossip Grotto,                             gossip-grotto,    0x09
 Death Mountain Crater Gossip Grotto,                  gossip-grotto,    0x1a

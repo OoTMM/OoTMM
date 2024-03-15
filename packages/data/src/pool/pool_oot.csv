@@ -236,38 +236,38 @@ Graveyard Grass 09,                                         grass,          NONE
 Graveyard Grass 10,                                         grass,          NONE,                 GRAVEYARD,                      0x90110,                    RANDOM
 Graveyard Grass 11,                                         grass,          NONE,                 GRAVEYARD,                      0xa0110,                    RANDOM
 Graveyard Grass 12,                                         grass,          NONE,                 GRAVEYARD,                      0xb0110,                    RANDOM
-Death Mountain Chest,                                       chest,          NONE,                 DEATH_MOUNTAIN_TRAIL,           0x01,                       RUPEE_PURPLE
-Death Mountain HP,                                          collectible,    NONE,                 DEATH_MOUNTAIN_TRAIL,           0x1e,                       HEART_PIECE
-Death Mountain Prescription,                                npc,            BIGGORON,             DEATH_MOUNTAIN_TRAIL,           TRADE_PRESCRIPTION,         PRESCRIPTION
-Death Mountain Claim Check,                                 npc,            BIGGORON,             DEATH_MOUNTAIN_TRAIL,           TRADE_CLAIM_CHECK,          CLAIM_CHECK
-Death Mountain Biggoron Sword,                              npc,            BIGGORON,             DEATH_MOUNTAIN_TRAIL,           TRADE_BIGGORON_SWORD,       SWORD_BIGGORON
-Death Mountain Grotto,                                      chest,          NONE,                 GROTTOS,                        0x17,                       RUPEE_HUGE
-Death Mountain Grotto Grass 1,                              grass,          NONE,                 GROTTOS,                        0x03702,                    RANDOM
-Death Mountain Grotto Grass 2,                              grass,          NONE,                 GROTTOS,                        0x03703,                    RANDOM
-Death Mountain Grotto Grass 3,                              grass,          NONE,                 GROTTOS,                        0x03704,                    RANDOM
-Death Mountain Grotto Grass 4,                              grass,          NONE,                 GROTTOS,                        0x03705,                    RANDOM
-Death Mountain GS Entrance,                                 gs,             NONE,                 DEATH_MOUNTAIN_TRAIL,           0x82,                       GS_TOKEN
-Death Mountain GS Soil,                                     gs,             NONE,                 DEATH_MOUNTAIN_TRAIL,           0x81,                       GS_TOKEN
-Death Mountain GS Above Dodongo,                            gs,             NONE,                 DEATH_MOUNTAIN_TRAIL,           0x83,                       GS_TOKEN
-Death Mountain GS Before Climb,                             gs,             NONE,                 DEATH_MOUNTAIN_TRAIL,           0x84,                       GS_TOKEN
-Death Mountain Cow,                                         cow,            NONE,                 DEATH_MOUNTAIN_TRAIL,           0x07,                       MILK
-Death Mountain Cow Grotto Grass 1,                          grass,          NONE,                 GROTTOS,                        0x00301,                    RANDOM
-Death Mountain Cow Grotto Grass 2,                          grass,          NONE,                 GROTTOS,                        0x00302,                    RANDOM
-Death Mountain Cow Grotto Rupee 1,                          rupee,          NONE,                 GROTTOS,                        0x00305,                    RUPEE_GREEN
-Death Mountain Cow Grotto Rupee 2,                          rupee,          NONE,                 GROTTOS,                        0x10305,                    RUPEE_GREEN
-Death Mountain Cow Grotto Rupee 3,                          rupee,          NONE,                 GROTTOS,                        0x20305,                    RUPEE_GREEN
-Death Mountain Cow Grotto Rupee 4,                          rupee,          NONE,                 GROTTOS,                        0x30305,                    RUPEE_GREEN
-Death Mountain Cow Grotto Rupee 5,                          rupee,          NONE,                 GROTTOS,                        0x40305,                    RUPEE_GREEN
-Death Mountain Cow Grotto Rupee 6,                          rupee,          NONE,                 GROTTOS,                        0x50305,                    RUPEE_GREEN
-Death Mountain Cow Grotto Rupee 7,                          rupee,          NONE,                 GROTTOS,                        0x60305,                    RUPEE_RED
-Death Mountain Cow Grotto Heart 1,                          heart,          NONE,                 GROTTOS,                        0x00306,                    RECOVERY_HEART
-Death Mountain Cow Grotto Heart 2,                          heart,          NONE,                 GROTTOS,                        0x00307,                    RECOVERY_HEART
-Death Mountain Cow Grotto Heart 3,                          heart,          NONE,                 GROTTOS,                        0x00308,                    RECOVERY_HEART
-Death Mountain Cow Grotto Heart 4,                          heart,          NONE,                 GROTTOS,                        0x00309,                    RECOVERY_HEART
-Death Mountain Cow Grotto Big Fairy,                        fairy_spot,     NONE,                 GROTTOS,                        0x00304,                    FAIRY_BIG
-Death Mountain Rupee Upper,                                 rupee,          NONE,                 DEATH_MOUNTAIN_TRAIL,           0x00001,                    RUPEE_RED
-Death Mountain Rupee Lower,                                 rupee,          NONE,                 DEATH_MOUNTAIN_TRAIL,           0x00002,                    RUPEE_BLUE
-Death Mountain Big Fairy,                                   fairy_spot,     NONE,                 DEATH_MOUNTAIN_TRAIL,           0x00026,                    FAIRY_BIG
+Death Mountain Trail Chest,                                 chest,          NONE,                 DEATH_MOUNTAIN_TRAIL,           0x01,                       RUPEE_PURPLE
+Death Mountain Trail HP,                                    collectible,    NONE,                 DEATH_MOUNTAIN_TRAIL,           0x1e,                       HEART_PIECE
+Death Mountain Trail Prescription,                          npc,            BIGGORON,             DEATH_MOUNTAIN_TRAIL,           TRADE_PRESCRIPTION,         PRESCRIPTION
+Death Mountain Trail Claim Check,                           npc,            BIGGORON,             DEATH_MOUNTAIN_TRAIL,           TRADE_CLAIM_CHECK,          CLAIM_CHECK
+Death Mountain Trail Biggoron Sword,                        npc,            BIGGORON,             DEATH_MOUNTAIN_TRAIL,           TRADE_BIGGORON_SWORD,       SWORD_BIGGORON
+Death Mountain Trail Grotto,                                chest,          NONE,                 GROTTOS,                        0x17,                       RUPEE_HUGE
+Death Mountain Trail Grotto Grass 1,                        grass,          NONE,                 GROTTOS,                        0x03702,                    RANDOM
+Death Mountain Trail Grotto Grass 2,                        grass,          NONE,                 GROTTOS,                        0x03703,                    RANDOM
+Death Mountain Trail Grotto Grass 3,                        grass,          NONE,                 GROTTOS,                        0x03704,                    RANDOM
+Death Mountain Trail Grotto Grass 4,                        grass,          NONE,                 GROTTOS,                        0x03705,                    RANDOM
+Death Mountain Trail GS Entrance,                           gs,             NONE,                 DEATH_MOUNTAIN_TRAIL,           0x82,                       GS_TOKEN
+Death Mountain Trail GS Soil,                               gs,             NONE,                 DEATH_MOUNTAIN_TRAIL,           0x81,                       GS_TOKEN
+Death Mountain Trail GS Above Dodongo,                      gs,             NONE,                 DEATH_MOUNTAIN_TRAIL,           0x83,                       GS_TOKEN
+Death Mountain Trail GS Before Climb,                       gs,             NONE,                 DEATH_MOUNTAIN_TRAIL,           0x84,                       GS_TOKEN
+Death Mountain Trail Cow,                                   cow,            NONE,                 DEATH_MOUNTAIN_TRAIL,           0x07,                       MILK
+Death Mountain Trail Cow Grotto Grass 1,                    grass,          NONE,                 GROTTOS,                        0x00301,                    RANDOM
+Death Mountain Trail Cow Grotto Grass 2,                    grass,          NONE,                 GROTTOS,                        0x00302,                    RANDOM
+Death Mountain Trail Cow Grotto Rupee 1,                    rupee,          NONE,                 GROTTOS,                        0x00305,                    RUPEE_GREEN
+Death Mountain Trail Cow Grotto Rupee 2,                    rupee,          NONE,                 GROTTOS,                        0x10305,                    RUPEE_GREEN
+Death Mountain Trail Cow Grotto Rupee 3,                    rupee,          NONE,                 GROTTOS,                        0x20305,                    RUPEE_GREEN
+Death Mountain Trail Cow Grotto Rupee 4,                    rupee,          NONE,                 GROTTOS,                        0x30305,                    RUPEE_GREEN
+Death Mountain Trail Cow Grotto Rupee 5,                    rupee,          NONE,                 GROTTOS,                        0x40305,                    RUPEE_GREEN
+Death Mountain Trail Cow Grotto Rupee 6,                    rupee,          NONE,                 GROTTOS,                        0x50305,                    RUPEE_GREEN
+Death Mountain Trail Cow Grotto Rupee 7,                    rupee,          NONE,                 GROTTOS,                        0x60305,                    RUPEE_RED
+Death Mountain Trail Cow Grotto Heart 1,                    heart,          NONE,                 GROTTOS,                        0x00306,                    RECOVERY_HEART
+Death Mountain Trail Cow Grotto Heart 2,                    heart,          NONE,                 GROTTOS,                        0x00307,                    RECOVERY_HEART
+Death Mountain Trail Cow Grotto Heart 3,                    heart,          NONE,                 GROTTOS,                        0x00308,                    RECOVERY_HEART
+Death Mountain Trail Cow Grotto Heart 4,                    heart,          NONE,                 GROTTOS,                        0x00309,                    RECOVERY_HEART
+Death Mountain Trail Cow Grotto Big Fairy,                  fairy_spot,     NONE,                 GROTTOS,                        0x00304,                    FAIRY_BIG
+Death Mountain Trail Rupee Upper,                           rupee,          NONE,                 DEATH_MOUNTAIN_TRAIL,           0x00001,                    RUPEE_RED
+Death Mountain Trail Rupee Lower,                           rupee,          NONE,                 DEATH_MOUNTAIN_TRAIL,           0x00002,                    RUPEE_BLUE
+Death Mountain Trail Big Fairy,                             fairy_spot,     NONE,                 DEATH_MOUNTAIN_TRAIL,           0x00026,                    FAIRY_BIG
 Darunia,                                                    npc,            NONE,                 GORON_CITY,                     DARUNIA_BRACELET,           STRENGTH
 Goron City Maze Center 1,                                   chest,          NONE,                 GORON_CITY,                     0x02,                       RUPEE_PURPLE
 Goron City Maze Center 2,                                   chest,          NONE,                 GORON_CITY,                     0x01,                       RUPEE_PURPLE

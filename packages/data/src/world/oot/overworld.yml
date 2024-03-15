@@ -1300,14 +1300,14 @@
     BOULDER_DEATH_MOUNTAIN: "has_explosives_or_hammer"
     RUPEES: "true"
   locations:
-    "Death Mountain Chest": "has_explosives_or_hammer"
-    "Death Mountain HP": "true"
-    "Death Mountain GS Entrance": "has_explosives || (can_hammer && (is_adult || can_use_sticks || (age_sword_adult && has(SWORD_BIGGORON)) || has_ranged_weapon_child || can_use_din))"
-    "Death Mountain GS Soil": "gs_soil && has_bombflowers && can_damage_skull"
-    "Death Mountain GS Above Dodongo":  "gs_night && is_adult && (can_hammer || trick(OOT_DMT_RED_ROCK_GS))"
-    "Death Mountain Rupee Upper": "is_child && event(BOULDER_DEATH_MOUNTAIN)"
-    "Death Mountain Rupee Lower": "is_child && has_explosives_or_hammer"
-    "Death Mountain Big Fairy": "can_play_sun"
+    "Death Mountain Trail Chest": "has_explosives_or_hammer"
+    "Death Mountain Trail HP": "true"
+    "Death Mountain Trail GS Entrance": "has_explosives || (can_hammer && (is_adult || can_use_sticks || (age_sword_adult && has(SWORD_BIGGORON)) || has_ranged_weapon_child || can_use_din))"
+    "Death Mountain Trail GS Soil": "gs_soil && has_bombflowers && can_damage_skull"
+    "Death Mountain Trail GS Above Dodongo":  "gs_night && is_adult && (can_hammer || trick(OOT_DMT_RED_ROCK_GS))"
+    "Death Mountain Trail Rupee Upper": "is_child && event(BOULDER_DEATH_MOUNTAIN)"
+    "Death Mountain Trail Rupee Lower": "is_child && has_explosives_or_hammer"
+    "Death Mountain Trail Big Fairy": "can_play_sun"
 "Death Mountain Summit":
   region: DEATH_MOUNTAIN_TRAIL
   time: flow
@@ -1317,12 +1317,12 @@
     "Death Mountain Crater Top": "true"
     "Fairy Fountain Magic": "has_explosives_or_hammer"
   locations:
-    "Death Mountain Prescription": "adult_trade(BROKEN_GORON_SWORD) && soul_npc(SOUL_NPC_BIGGORON)"
-    "Death Mountain Claim Check": "adult_trade(EYE_DROPS) && soul_npc(SOUL_NPC_BIGGORON)"
-    "Death Mountain Biggoron Sword": "adult_trade(CLAIM_CHECK) && soul_npc(SOUL_NPC_BIGGORON)"
-    "Death Mountain GS Before Climb": "is_adult && gs_night && (can_hammer || trick(OOT_DMT_RED_ROCK_GS))"
+    "Death Mountain Trail Prescription": "adult_trade(BROKEN_GORON_SWORD) && soul_npc(SOUL_NPC_BIGGORON)"
+    "Death Mountain Trail Claim Check": "adult_trade(EYE_DROPS) && soul_npc(SOUL_NPC_BIGGORON)"
+    "Death Mountain Trail Biggoron Sword": "adult_trade(CLAIM_CHECK) && soul_npc(SOUL_NPC_BIGGORON)"
+    "Death Mountain Trail GS Before Climb": "is_adult && gs_night && (can_hammer || trick(OOT_DMT_RED_ROCK_GS))"
   gossip:
-    "Death Mountain Gossip on Climb": "true"
+    "Death Mountain Trail Gossip on Climb": "true"
 "Death Mountain Storms Grotto":
   region: ENTRANCE
   age_change: false
@@ -1337,13 +1337,13 @@
     FISH: "has_bottle"
     BUGS: "has_bottle && can_cut_grass"
   locations:
-    "Death Mountain Grotto": "true"
-    "Death Mountain Grotto Grass 1": "can_cut_grass"
-    "Death Mountain Grotto Grass 2": "can_cut_grass"
-    "Death Mountain Grotto Grass 3": "can_cut_grass"
-    "Death Mountain Grotto Grass 4": "can_cut_grass"
+    "Death Mountain Trail Grotto": "true"
+    "Death Mountain Trail Grotto Grass 1": "can_cut_grass"
+    "Death Mountain Trail Grotto Grass 2": "can_cut_grass"
+    "Death Mountain Trail Grotto Grass 3": "can_cut_grass"
+    "Death Mountain Trail Grotto Grass 4": "can_cut_grass"
   gossip:
-    "Death Mountain Gossip Grotto": "true"
+    "Death Mountain Trail Gossip Grotto": "true"
 "Death Mountain Cow Grotto":
   region: ENTRANCE
   age_change: false
@@ -1352,21 +1352,21 @@
   events:
     RUPEES: "true"
   locations:
-    "Death Mountain Cow": "can_play_epona"
-    "Death Mountain Cow Grotto Grass 1": "can_cut_grass"
-    "Death Mountain Cow Grotto Grass 2": "can_cut_grass"
-    "Death Mountain Cow Grotto Rupee 1": "true"
-    "Death Mountain Cow Grotto Rupee 2": "true"
-    "Death Mountain Cow Grotto Rupee 3": "true"
-    "Death Mountain Cow Grotto Rupee 4": "true"
-    "Death Mountain Cow Grotto Rupee 5": "true"
-    "Death Mountain Cow Grotto Rupee 6": "true"
-    "Death Mountain Cow Grotto Rupee 7": "true"
-    "Death Mountain Cow Grotto Heart 1": "true"
-    "Death Mountain Cow Grotto Heart 2": "true"
-    "Death Mountain Cow Grotto Heart 3": "true"
-    "Death Mountain Cow Grotto Heart 4": "true"
-    "Death Mountain Cow Grotto Big Fairy": "can_play_storms"
+    "Death Mountain Trail Cow": "can_play_epona"
+    "Death Mountain Trail Cow Grotto Grass 1": "can_cut_grass"
+    "Death Mountain Trail Cow Grotto Grass 2": "can_cut_grass"
+    "Death Mountain Trail Cow Grotto Rupee 1": "true"
+    "Death Mountain Trail Cow Grotto Rupee 2": "true"
+    "Death Mountain Trail Cow Grotto Rupee 3": "true"
+    "Death Mountain Trail Cow Grotto Rupee 4": "true"
+    "Death Mountain Trail Cow Grotto Rupee 5": "true"
+    "Death Mountain Trail Cow Grotto Rupee 6": "true"
+    "Death Mountain Trail Cow Grotto Rupee 7": "true"
+    "Death Mountain Trail Cow Grotto Heart 1": "true"
+    "Death Mountain Trail Cow Grotto Heart 2": "true"
+    "Death Mountain Trail Cow Grotto Heart 3": "true"
+    "Death Mountain Trail Cow Grotto Heart 4": "true"
+    "Death Mountain Trail Cow Grotto Big Fairy": "can_play_storms"
 "Fairy Fountain Magic":
   region: ENTRANCE
   exits:
