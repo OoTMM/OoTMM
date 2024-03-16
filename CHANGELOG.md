@@ -6,19 +6,19 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- Farore's Wind is now logical for Romani's Song, Aliens, and Cremia Escort.
-- Farore's Wind is now logical for Stock Pot Inn night access.
-- Farore's Wind is now logical to reach the Mountain Village grotto.
-- Farore's Wind is now logical for Hot Spring Water in Snowhead Temple's Eenos room without ER.
-- OOT Warp Songs can now be logically used within MM dungeons.
+- Adult Link in Majora's Mask.
 - New trick to wait on the roof for Stock Pot Inn to close.
 - Add tricks for using Farore's Wind and resetting time to get the Romani Ranch checks.
 - Hover Boots are now accounted for getting Letter to Kafei and Toilet Hand in Stock Pot Inn.
 - Hookshot Anywhere for both games and Climb Anywhere for OOT can now be enabled without logical implications.
-- Key logic for Forest, Shadow, and Spirit Temples still accounts for the above settings whether they are logical or not.
 
 ### Changed
 
+- OOT Warp Songs can now be logically used within MM dungeons.
+- Farore's Wind is now logical for Romani's Song, Aliens, and Cremia Escort.
+- Farore's Wind is now logical for Stock Pot Inn night access.
+- Farore's Wind is now logical to reach the Mountain Village grotto.
+- Farore's Wind is now logical for Hot Spring Water in Snowhead Temple's Eenos room without ER.
 - Child Hookshot to get past the Gerudo Valley gate no longer requires Hookshot Anywhere enabled to be in logic.
 - Adjusted MM dungeon access logic to account for the combination of Moon Crash Cycles and Clock Tower ER.
 - Removed the time constraints on Bremen Mask and Doggy Race since those events are always available if you can get in.
