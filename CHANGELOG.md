@@ -37,6 +37,7 @@ All notable changes to this project will be documented in this file.
 - Some logic issues involving Shared Din's Fire not being accounted for in some situations.
 - Fixed an issue where logic thought you could get Pendant of Memories after 10pm on night 2.
 - Fix Farore's Wind in MM not being properly dispelled when used.
+- Fixed logic for the hearts in MQ Bottom of the Well.
 
 ## [20.0] - 2024-02-19
 
