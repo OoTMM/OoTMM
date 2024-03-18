@@ -218,7 +218,7 @@
     CLOCK_TOWN_SCRUB: "has(MOON_TEAR)"
     MAIL_LETTER: "has(LETTER_TO_KAFEI) && before(DAY2_AM_11_30)"
   locations:
-    "Clock Town South Chest Lower": "can_hookshot || short_hook_anywhere || (has(MASK_DEKU) && event(CLOCK_TOWN_SCRUB)) || trick(MM_SCT_NOTHING) || can_goron_bomb_jump"
+    "Clock Town South Chest Lower": "can_hookshot || (is_adult && can_hookshot_short) || short_hook_anywhere || (has(MASK_DEKU) && event(CLOCK_TOWN_SCRUB)) || trick(MM_SCT_NOTHING) || can_goron_bomb_jump"
     "Clock Town South Chest Upper": "(can_hookshot || short_hook_anywhere || (has(MASK_DEKU) && event(CLOCK_TOWN_SCRUB)) || (can_goron_bomb_jump && can_hookshot_short)) && final_day"
     "Clock Town Business Scrub": "event(CLOCK_TOWN_SCRUB)"
     "Clock Town Post Box": "has(MASK_POSTMAN)"
@@ -1525,11 +1525,11 @@
     "Swamp Canopy Back": "true"
     "Woodfall Shrine": "(has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP))) || hookshot_anywhere"
     "Woodfall Temple Princess Jail": "event(CLEAN_SWAMP) && woodfall_raised"
-    "Woodfall Near Fairy Fountain": "event(CLEAN_SWAMP) && short_hook_anywhere"
+    "Woodfall Near Fairy Fountain": "(event(CLEAN_SWAMP) || can_use_nayru) && short_hook_anywhere"
   locations:
     "Woodfall Entrance Chest": "has(MASK_DEKU) || can_hookshot || event(CLEAN_SWAMP) || can_use_nayru || has_hover_boots"
-    "Woodfall HP Chest": "(has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP))) || can_hookshot"
-    "Woodfall Near Owl Chest": "(has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP))) || (event(CLEAN_SWAMP) && can_hookshot) || hookshot_anywhere"
+    "Woodfall HP Chest": "(has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP))) || can_hookshot || (is_adult && can_hookshot_short && (event(CLEAN_SWAMP) || can_use_nayru))"
+    "Woodfall Near Owl Chest": "(has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP))) || (event(CLEAN_SWAMP) && can_hookshot) || (is_adult && can_hookshot_short && (event(CLEAN_SWAMP) || can_use_nayru)) || hookshot_anywhere"
     "Woodfall Grass 1": "true"
     "Woodfall Grass 2": "true"
     "Woodfall Grass 3": "true"
@@ -1542,7 +1542,7 @@
   exits:
     "Woodfall Temple": "true"
     "Woodfall Shrine": "cond(setting(openDungeonsMm, WF) || setting(clearStateDungeonsMm, WF) || setting(clearStateDungeonsMm, both), has(MASK_DEKU) || hookshot_anywhere, true)"
-    "Woodfall": "event(CLEAN_SWAMP)"
+    "Woodfall": "event(CLEAN_SWAMP) || can_use_nayru"
 "Woodfall Shrine":
   region: WOODFALL
   exits:
@@ -1561,7 +1561,7 @@
     "Woodfall Shrine": "(has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP))) || hookshot_anywhere"
     "Woodfall Fairy Fountain": "true"
   locations:
-    "Woodfall Near Owl Chest": "can_hookshot"
+    "Woodfall Near Owl Chest": "can_hookshot || (is_adult && can_hookshot_short && (event(CLEAN_SWAMP) || can_use_nayru))"
 "Woodfall Fairy Fountain":
   region: ENTRANCE
   exits:
@@ -2676,7 +2676,7 @@
     FAIRY: "can_get_gossip_fairy || scarecrow_hookshot || short_hook_anywhere"
   exits:
     "Road to Ikana Front": "can_play_epona || short_hook_anywhere || (can_goron_bomb_jump && has_bombs)"
-    "Road to Ikana Top": "((has(MASK_GARO) || has(MASK_GIBDO)) && (can_hookshot || (can_hookshot_short && trick(MM_HARD_HOOKSHOT)))) || short_hook_anywhere"
+    "Road to Ikana Top": "((has(MASK_GARO) || has(MASK_GIBDO)) && (can_hookshot || (can_hookshot_short && (trick(MM_HARD_HOOKSHOT) || is_adult)))) || short_hook_anywhere"
     "Ikana Graveyard": "true"
   locations:
     "Road to Ikana Stone Mask": "can_use_lens_strict && has_red_or_blue_potion"
