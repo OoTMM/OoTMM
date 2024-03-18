@@ -1400,7 +1400,7 @@
   exits:
     "Swamp Back": "true"
     "Deku Palace Cliff": "has(MASK_DEKU) || short_hook_anywhere"
-    "Near Deku Shrine": "event(CLEAN_SWAMP) || (can_use_nayru && (has_mask_zora || (is_adult && (has_arrows || can_hookshot_short)))) || (has_hover_boots && (has_arrows || can_hookshot_short))"
+    "Near Deku Shrine": "event(CLEAN_SWAMP) || (can_use_nayru && (has_mask_zora || (is_adult && (has_arrows || can_hookshot_short || can_use_din)))) || (has_hover_boots && (has_arrows || can_hookshot_short || can_use_din))"
     "Deku Palace Main": "has(MASK_DEKU) || trick(MM_PALACE_GUARD_SKIP) || short_hook_anywhere"
     "Deku Palace Upper": "(event(CLEAN_SWAMP) || has(MASK_DEKU) || can_use_nayru) && can_use_beans"
   events:
@@ -1410,10 +1410,10 @@
   exits:
     "Deku Palace Throne": "true"
     "Deku Palace Front": "true"
-    "Deku Palace Grotto": "true"
+    "Deku Palace Grotto": "is_child || has(MASK_DEKU) || trick(MM_PALACE_BEAN_SKIP)"
     "Deku Palace Upper": "trick(MM_PALACE_BEAN_SKIP) || short_hook_anywhere"
   locations:
-    "Deku Palace HP": "true"
+    "Deku Palace HP": "is_child || has(MASK_DEKU) || trick(MM_PALACE_BEAN_SKIP)"
     "Deku Palace Rupee Right 01": "true"
     "Deku Palace Rupee Right 02": "true"
     "Deku Palace Rupee Right 03": "true"
@@ -1421,12 +1421,12 @@
     "Deku Palace Rupee Right 05": "true"
     "Deku Palace Rupee Right 06": "true"
     "Deku Palace Rupee Right 07": "true"
-    "Deku Palace Rupee Right 08": "true"
-    "Deku Palace Rupee Right 09": "true"
-    "Deku Palace Rupee Right 10": "true"
-    "Deku Palace Rupee Right 11": "true"
-    "Deku Palace Rupee Right 12": "true"
-    "Deku Palace Rupee Right 13": "true"
+    "Deku Palace Rupee Right 08": "is_child || has(MASK_DEKU) || trick(MM_PALACE_BEAN_SKIP)"
+    "Deku Palace Rupee Right 09": "is_child || has(MASK_DEKU) || trick(MM_PALACE_BEAN_SKIP)"
+    "Deku Palace Rupee Right 10": "is_child || has(MASK_DEKU) || trick(MM_PALACE_BEAN_SKIP)"
+    "Deku Palace Rupee Right 11": "is_child || has(MASK_DEKU) || trick(MM_PALACE_BEAN_SKIP)"
+    "Deku Palace Rupee Right 12": "is_child || has(MASK_DEKU) || trick(MM_PALACE_BEAN_SKIP)"
+    "Deku Palace Rupee Right 13": "is_child || has(MASK_DEKU) || trick(MM_PALACE_BEAN_SKIP)"
     "Deku Palace Rupee Left 01": "true"
     "Deku Palace Rupee Left 02": "true"
     "Deku Palace Rupee Left 03": "true"
@@ -1435,9 +1435,9 @@
     "Deku Palace Rupee Left 07": "true"
     "Deku Palace Rupee Left 08": "true"
     "Deku Palace Rupee Left 09": "true"
-    "Deku Palace Rupee Left 10": "true"
-    "Deku Palace Rupee Left 11": "true"
-    "Deku Palace Rupee Left 12": "true"
+    "Deku Palace Rupee Left 10": "is_child || has(MASK_DEKU) || trick(MM_PALACE_BEAN_SKIP)"
+    "Deku Palace Rupee Left 11": "is_child || has(MASK_DEKU) || trick(MM_PALACE_BEAN_SKIP)"
+    "Deku Palace Rupee Left 12": "is_child || has(MASK_DEKU) || trick(MM_PALACE_BEAN_SKIP)"
 "Deku Palace Upper":
   region: DEKU_PALACE
   events:
