@@ -27,6 +27,7 @@ const BLITZ_BASE: PartialDeep<Settings> = {
   gerudoFortress: 'single',
   skipZelda: true,
   bossWarpPads: 'remains',
+  crossAge: true,
   crossWarpOot: true,
   crossWarpMm: 'full',
   fastBunnyHood: true,
