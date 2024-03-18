@@ -27,6 +27,8 @@ All notable changes to this project will be documented in this file.
 - Make Zora Hall stage lights with Din's Fire a trick.
 - Make resetting time with Farore's Wind for Evan a trick.
 - Hookshot Anywhere to go behind the waterfall in Zora's River is now a trick.
+- Din's Fire is now logical to defeat the Big Octo in Deku Palace.
+- Nayru's Love is now logical for various routing in Woodfall.
 
 ### Fixed
 
