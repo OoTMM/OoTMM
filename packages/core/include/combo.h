@@ -322,13 +322,13 @@ void    comboCacheGarbageCollect(void);
 void*   comboCacheGetFile(u32 vrom);
 
 /* Objects */
-void        comboObjectsReset(void);
-void        comboObjectsGC(void);
-void*       comboGetObject(u16 objectId);
-ObjectData* comboGetObjectData(u16 objectId);
-u32         comboLoadObject(void* buffer, u16 objectId);
-void        comboLoadCustomKeep(void);
-void        comboExObjectsReset(void);
+void                comboObjectsReset(void);
+void                comboObjectsGC(void);
+void*               comboGetObject(u16 objectId);
+const ObjectData*   comboGetObjectData(u16 objectId);
+u32                 comboLoadObject(void* buffer, u16 objectId);
+void                comboLoadCustomKeep(void);
+void                comboExObjectsReset(void);
 
 /* Custom_Warp */
 void comboSpawnCustomWarps(GameState_Play*);

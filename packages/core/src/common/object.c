@@ -236,7 +236,7 @@ static void comboPatchForeignObject(void* buffer, u16 objectId)
     }
 }
 
-ObjectData* comboGetObjectData(u16 objectId)
+const ObjectData* comboGetObjectData(u16 objectId)
 {
     const ObjectData* table;
     if (objectId & 0x2000)

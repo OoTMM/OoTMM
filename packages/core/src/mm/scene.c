@@ -42,8 +42,7 @@ s32 Object_SpawnPersistentCustom(ObjectContext* objectCtx, s16 id)
 
     if (objectCtx->num < ARRAY_SIZE(objectCtx->slots) - 1)
     {
-        objectCtx->slots[objectCtx->num + 1].segment =
-            ALIGN16((u32)objectCtx->slots[objectCtx->num].segment + size);
+        objectCtx->slots[objectCtx->num + 1].segment = (void*)ALIGN16((u32)objectCtx->slots[objectCtx->num].segment + size);
     }
 
     objectCtx->num++;
@@ -99,7 +98,7 @@ void* Object_AllocateSlotCustom(ObjectContext* objectCtx, s32 slot, s16 id)
 {
     u32 addr;
     u32 vromSize;
-    ObjectData* fileTableEntry;
+    const ObjectData* fileTableEntry;
 
     objectCtx->slots[slot].id = -id;
     objectCtx->slots[slot].dmaRequest.vromAddr = 0;
@@ -123,7 +122,7 @@ void Object_UpdateEntriesCustom(ObjectContext* objectCtx)
 {
     s32 i;
     ObjectStatus* entry = &objectCtx->slots[0];
-    ObjectData* objectFile;
+    const ObjectData* objectFile;
     u32 size;
 
     for (i = 0; i < objectCtx->num; i++)

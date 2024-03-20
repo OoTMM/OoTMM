@@ -3,7 +3,7 @@
 
 #include <combo/types.h>
 
-typedef struct PACKED ALIGNED(4)
+typedef struct
 {
     u32 vromStart;
     u32 vromEnd;
