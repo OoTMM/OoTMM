@@ -32,6 +32,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix Woods of Mystery grass patches being labeled wrong and having incorrect day logic.
 - Fix a very persistent wrong warp issue.
 - Fix a weird interaction between plentiful item pool and OoT elegy.
 - Fix some items not being received in multi.

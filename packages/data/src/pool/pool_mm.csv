@@ -567,29 +567,29 @@ Woods of Mystery Grotto Grass 11,                       grass,          NONE,   
 Woods of Mystery Grotto Grass 12,                       grass,          NONE,                   GROTTOS,                      0x03c11,                    RANDOM
 Woods of Mystery Grotto Grass 13,                       grass,          NONE,                   GROTTOS,                      0x03c12,                    RANDOM
 Woods of Mystery Grotto Grass 14,                       grass,          NONE,                   GROTTOS,                      0x03c13,                    RANDOM
-Woods of Mystery Grass NW 1,                            grass,          NONE,                   WOODS_MYSTERY,                0x00000,                    RANDOM
-Woods of Mystery Grass NW 2,                            grass,          NONE,                   WOODS_MYSTERY,                0x00001,                    RANDOM
-Woods of Mystery Grass W 1,                             grass,          NONE,                   WOODS_MYSTERY,                0x00103,                    RANDOM
-Woods of Mystery Grass W 2,                             grass,          NONE,                   WOODS_MYSTERY,                0x00104,                    RANDOM
-Woods of Mystery Grass W 3,                             grass,          NONE,                   WOODS_MYSTERY,                0x00105,                    RANDOM
-Woods of Mystery Grass SW,                              grass,          NONE,                   WOODS_MYSTERY,                0x00201,                    RANDOM
-Woods of Mystery Grass N 1,                             grass,          NONE,                   WOODS_MYSTERY,                0x00307,                    RANDOM
-Woods of Mystery Grass N 2,                             grass,          NONE,                   WOODS_MYSTERY,                0x00308,                    RANDOM
+Woods of Mystery Grass SW 1,                            grass,          NONE,                   WOODS_MYSTERY,                0x00000,                    RANDOM
+Woods of Mystery Grass SW 2,                            grass,          NONE,                   WOODS_MYSTERY,                0x00001,                    RANDOM
+Woods of Mystery Grass S 1,                             grass,          NONE,                   WOODS_MYSTERY,                0x00103,                    RANDOM
+Woods of Mystery Grass S 2,                             grass,          NONE,                   WOODS_MYSTERY,                0x00104,                    RANDOM
+Woods of Mystery Grass S 3,                             grass,          NONE,                   WOODS_MYSTERY,                0x00105,                    RANDOM
+Woods of Mystery Grass SE,                              grass,          NONE,                   WOODS_MYSTERY,                0x00201,                    RANDOM
+Woods of Mystery Grass W 1,                             grass,          NONE,                   WOODS_MYSTERY,                0x00307,                    RANDOM
+Woods of Mystery Grass W 2,                             grass,          NONE,                   WOODS_MYSTERY,                0x00308,                    RANDOM
 Woods of Mystery Grass Center 1,                        grass,          NONE,                   WOODS_MYSTERY,                0x00406,                    RANDOM
 Woods of Mystery Grass Center 2,                        grass,          NONE,                   WOODS_MYSTERY,                0x00407,                    RANDOM
 Woods of Mystery Grass Center 3,                        grass,          NONE,                   WOODS_MYSTERY,                0x00408,                    RANDOM
 Woods of Mystery Grass Center 4,                        grass,          NONE,                   WOODS_MYSTERY,                0x00409,                    RANDOM
-Woods of Mystery Grass S 1,                             grass,          NONE,                   WOODS_MYSTERY,                0x00507,                    RANDOM
-Woods of Mystery Grass S 2,                             grass,          NONE,                   WOODS_MYSTERY,                0x00508,                    RANDOM
-Woods of Mystery Grass NE 1,                            grass,          NONE,                   WOODS_MYSTERY,                0x00601,                    RANDOM
-Woods of Mystery Grass NE 2,                            grass,          NONE,                   WOODS_MYSTERY,                0x00602,                    RANDOM
-Woods of Mystery Grass E 1,                             grass,          NONE,                   WOODS_MYSTERY,                0x00707,                    RANDOM
-Woods of Mystery Grass E 2,                             grass,          NONE,                   WOODS_MYSTERY,                0x00708,                    RANDOM
-Woods of Mystery Grass SE 1,                            grass,          NONE,                   WOODS_MYSTERY,                0x00801,                    RANDOM
-Woods of Mystery Grass SE 2,                            grass,          NONE,                   WOODS_MYSTERY,                0x00802,                    RANDOM
-Woods of Mystery Grass SE 3,                            grass,          NONE,                   WOODS_MYSTERY,                0x00803,                    RANDOM
-Woods of Mystery Grass SE 4,                            grass,          NONE,                   WOODS_MYSTERY,                0x00804,                    RANDOM
-Woods of Mystery Grass SE 5,                            grass,          NONE,                   WOODS_MYSTERY,                0x00806,                    RANDOM
+Woods of Mystery Grass E 1,                             grass,          NONE,                   WOODS_MYSTERY,                0x00507,                    RANDOM
+Woods of Mystery Grass E 2,                             grass,          NONE,                   WOODS_MYSTERY,                0x00508,                    RANDOM
+Woods of Mystery Grass NW 1,                            grass,          NONE,                   WOODS_MYSTERY,                0x00601,                    RANDOM
+Woods of Mystery Grass NW 2,                            grass,          NONE,                   WOODS_MYSTERY,                0x00602,                    RANDOM
+Woods of Mystery Grass N 1,                             grass,          NONE,                   WOODS_MYSTERY,                0x00707,                    RANDOM
+Woods of Mystery Grass N 2,                             grass,          NONE,                   WOODS_MYSTERY,                0x00708,                    RANDOM
+Woods of Mystery Grass NE 1,                            grass,          NONE,                   WOODS_MYSTERY,                0x00801,                    RANDOM
+Woods of Mystery Grass NE 2,                            grass,          NONE,                   WOODS_MYSTERY,                0x00802,                    RANDOM
+Woods of Mystery Grass NE 3,                            grass,          NONE,                   WOODS_MYSTERY,                0x00803,                    RANDOM
+Woods of Mystery Grass NE 4,                            grass,          NONE,                   WOODS_MYSTERY,                0x00804,                    RANDOM
+Woods of Mystery Grass NE 5,                            grass,          NONE,                   WOODS_MYSTERY,                0x00806,                    RANDOM
 Swamp Archery Reward 1,                                 npc,            NONE,                   SHOOTING_GALLERY_SWAMP,       SHOOTING_GAME_SWAMP_1,      BOW
 Swamp Archery Reward 2,                                 npc,            NONE,                   SHOOTING_GALLERY_SWAMP,       SHOOTING_GAME_SWAMP_2,      HEART_PIECE
 Swamp Potion Shop Kotake,                               npc,            NONE,                   WOODS_MYSTERY,                KOTAKE_RED_POTION,          BOTTLE_POTION_RED
