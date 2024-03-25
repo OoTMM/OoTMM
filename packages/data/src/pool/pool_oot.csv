@@ -377,8 +377,8 @@ Zora Domain Diving Game,                                    npc,            NONE
 Zora Domain Diving Game Green Rupee,                        collectible,    NONE,                 ZORA_DOMAIN,                    0x1,                        RUPEE_GREEN
 Zora Domain Diving Game Blue Rupee,                         collectible,    NONE,                 ZORA_DOMAIN,                    0x2,                        RUPEE_BLUE
 Zora Domain Diving Game Red Rupee,                          collectible,    NONE,                 ZORA_DOMAIN,                    0x3,                        RUPEE_RED
-Zora Domain Diving Game Purple Rupee,                       collectible,    NONE,                 ZORA_DOMAIN,                    0x4,                        RUPEE_PURPLE
-Zora Domain Diving Game Huge Rupee,                         collectible,    NONE,                 ZORA_DOMAIN,                    0x5,                        RUPEE_HUGE
+Zora Domain Diving Game Purple Rupee,                       collectible,    NONE,                 ZORA_DOMAIN,                    0x5,                        RUPEE_PURPLE
+Zora Domain Diving Game Huge Rupee,                         collectible,    NONE,                 ZORA_DOMAIN,                    0x4,                        RUPEE_HUGE
 Zora Domain Tunic,                                          npc,            ZORA_KING,            ZORA_DOMAIN,                    ZORA_KING_TUNIC,            TUNIC_ZORA
 Zora Domain Eyeball Frog,                                   npc,            ZORA_KING,            ZORA_DOMAIN,                    TRADE_EYEBALL_FROG,         EYEBALL_FROG
 Zora Domain GS Waterfall,                                   gs,             NONE,                 ZORA_DOMAIN,                    0x96,                       GS_TOKEN
