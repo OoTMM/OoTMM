@@ -772,7 +772,7 @@
   age_change: false
   exits:
     "Ganon Castle Exterior": "is_adult && rainbow_bridge"
-    "Hyrule Castle Courtyard": "is_child"
+    "Hyrule Castle Courtyard": "is_child && trick(OOT_COURTYARD_FROM_GANON )"
     "Ganon Castle": "true"
 "Near Fairy Fountain Defense":
   region: GANON_CASTLE_EXTERIOR

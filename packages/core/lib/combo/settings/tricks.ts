@@ -52,6 +52,7 @@ export const TRICKS = {
   OOT_GANON_CASTLE_ENTRY: "Enter Ganon's Castle with Longshot Anywhere",
   OOT_SHADOW_TEMPLE_STICKS: "Enter Shadow Temple with Sticks & Fire Arrows",
   OOT_WATER_GOLD_SCALE: "Enter Water Temple with Gold Scale and Longshot",
+  OOT_COURTYARD_FROM_GANON : "Enter Zelda's Courtyard using Age Swap in Ganon's Castle",
   MM_LENS: "Fewer Lens Requirements (MM)",
   MM_TUNICS: "Fewer Tunic Requirements (MM)",
   MM_PALACE_BEAN_SKIP: "Skip Planting Beans in Deku Palace",
