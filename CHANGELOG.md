@@ -32,6 +32,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix a very persistent wrong warp issue.
 - Fix a weird interaction between plentiful item pool and OoT elegy.
 - Fix some items not being received in multi.
 - Fix an issue where the grace period could cause a buggy cycle-reset.

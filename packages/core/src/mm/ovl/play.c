@@ -328,6 +328,7 @@ void hookPlay_Init(GameState_Play* play)
     int isEndOfGame;
 
     /* Pre-init */
+    gIsEntranceOverride = 0;
     preInitTitleScreen();
 
     /* Init */
