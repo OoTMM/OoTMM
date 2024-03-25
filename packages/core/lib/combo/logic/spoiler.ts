@@ -14,6 +14,7 @@ import { Location, locationData, makeLocation } from './locations';
 import { Region, regionData } from './regions';
 import { PlayerItem, PlayerItems } from '../items';
 import { exportSettings } from '../settings/string';
+import { ENTRANCES } from '@ootmm/data';
 
 const VERSION = process.env.VERSION || 'XXX';
 
@@ -266,8 +267,14 @@ export class LogicPassSpoiler {
         this.indent(`World ${i + 1}`);
       }
 
+      const niceEntrances = new Array();
       for (const [src, dst] of world.entranceOverrides) {
-        this.write(`${src} -> ${dst}`);
+        const srcEntry = ENTRANCES[src as keyof typeof ENTRANCES];
+        const dstEntry = ENTRANCES[dst as keyof typeof ENTRANCES];
+        niceEntrances.push(`${srcEntry.from} to ${srcEntry.to} (${src}) -> ${dstEntry.to} from ${dstEntry.from} (${dst})`);
+      }
+      for (const niceE of niceEntrances.sort()) {
+        this.write(`${niceE}`);
       }
 
       if (worlds.length > 1) {
