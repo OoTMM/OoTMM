@@ -14,6 +14,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Soaring from an MM boss now always returns to the entrance of the dungeon, even if it's a cross-dungeon.
 - OOT Warp Songs can now be logically used within MM dungeons.
 - Farore's Wind is now logical for Romani's Song, Aliens, and Cremia Escort.
 - Farore's Wind is now logical for Stock Pot Inn night access.
