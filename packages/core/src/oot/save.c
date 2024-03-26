@@ -290,8 +290,15 @@ void comboCreateSave(void* unk, void* buffer)
     else
         gSharedCustomSave.mm.halfDays = 0x3f;
 
+    /* Set initial equips */
     gOotSave.childEquips.buttonItems[0] = ITEM_NONE;
-    gOotSave.adultEquips.buttonItems[0] = ITEM_NONE;
+    gOotSave.childEquips.equipment.boots = 0x01;
+    gOotSave.childEquips.equipment.tunics = 0x01;
+
+    gOotSave.adultEquips.buttonItems[0] = ITEM_OOT_SWORD_MASTER;
+    gOotSave.adultEquips.equipment.boots = 0x01;
+    gOotSave.adultEquips.equipment.tunics = 0x01;
+    gOotSave.adultEquips.equipment.swords = 0x02;
 
     /* Apply starting age */
     if (comboConfig(CFG_OOT_START_ADULT))

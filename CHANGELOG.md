@@ -35,6 +35,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix various bugs with swordless & age swap equips.
 - Fix region states in MM being incorrect when coming from OoT.
 - Fix Woods of Mystery grass patches being labeled wrong and having incorrect day logic.
 - Fix Diving Minigame Purple and Huge Rupees being swapped.

@@ -29,7 +29,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_OOT_STICKS] = ITEM_OOT_STICK;
         gSave.inventory.items[ITS_OOT_NUTS] = ITEM_OOT_NUT;
         gSave.inventory.items[ITS_OOT_BOMBS] = ITEM_OOT_BOMB;
-        gSave.inventory.items[ITS_OOT_BOW] = ITEM_OOT_BOW;
+        //gSave.inventory.items[ITS_OOT_BOW] = ITEM_OOT_BOW;
         gSave.inventory.items[ITS_OOT_ARROW_FIRE] = ITEM_OOT_ARROW_FIRE;
         gSave.inventory.items[ITS_OOT_ARROW_ICE] = ITEM_OOT_ARROW_ICE;
         gSave.inventory.items[ITS_OOT_ARROW_LIGHT] = ITEM_OOT_ARROW_LIGHT;
@@ -58,7 +58,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.upgrades.dekuNut = 3;
         /*gSave.inventory.upgrades.bulletBag = 3; */
         gSave.inventory.upgrades.bombBag = 3;
-        gSave.inventory.upgrades.quiver = 3;
+        //gSave.inventory.upgrades.quiver = 3;
         gSave.inventory.upgrades.dive = 2;
         /*gSave.inventory.upgrades.wallet = 3; */
         gSave.inventory.upgrades.strength = 3;
@@ -70,7 +70,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.ammo[ITS_OOT_SLINGSHOT] = 50;
         gSave.inventory.ammo[ITS_OOT_NUTS] = 40;
         gSave.inventory.ammo[ITS_OOT_BOMBS] = 40;
-        gSave.inventory.ammo[ITS_OOT_BOW] = 50;
+        //gSave.inventory.ammo[ITS_OOT_BOW] = 50;
         gSave.inventory.ammo[ITS_OOT_BOMBCHU] = 50;
         gSave.inventory.quest.songZelda = 1;
         gSave.inventory.quest.songSaria = 1;
@@ -364,41 +364,6 @@ void hookPlay_Init(GameState_Play* play)
         break;
     }
 
-    /* Handle swordless & time travel sword oddities */
-    if (gSave.entrance == ENTR_OOT_TEMPLE_OF_TIME_MASTER_SWORD_CS)
-    {
-        if (gSave.age == AGE_CHILD)
-        {
-            gSave.equips.buttonItems[0] = gSave.childEquips.buttonItems[0];
-            if (gSave.equips.buttonItems[0] == ITEM_NONE)
-            {
-                gSave.equips.equipment.swords = 0;
-                gSave.eventsMisc[29] = 1;
-            }
-        }
-    }
-
-    if (gSave.equips.equipment.swords == 0 || (gSave.inventory.equipment.swords & (1 << (gSave.equips.equipment.swords - 1))) == 0)
-    {
-        /* Set swordless */
-        gSave.equips.equipment.swords = 0;
-        switch (gSave.equips.buttonItems[0])
-        {
-        case ITEM_OOT_SWORD_KOKIRI:
-        case ITEM_OOT_SWORD_MASTER:
-        case ITEM_OOT_SWORD_KNIFE_BIGGORON:
-        case ITEM_OOT_SWORD_KNIFE_BROKEN:
-            gSave.equips.buttonItems[0] = ITEM_NONE;
-            break;
-        }
-        gSave.eventsMisc[29] = 1;
-    }
-    else
-    {
-        /* Set sworded */
-        gSave.eventsMisc[29] = 0;
-    }
-
     if (gSave.entrance == ENTR_OOT_CASTLE_STEALTH)
     {
         /* Entering courtyard */
@@ -538,3 +503,32 @@ void Play_TransitionDone(GameState_Play* play)
         play->nextEntranceIndex = entrance & 0xffff;
     }
 }
+
+static void TimeTravelUpdateEquipment(void)
+{
+    OotItemEquips* prevAge;
+    OotItemEquips* nextAge;
+
+    if (gSave.age == AGE_ADULT)
+    {
+        prevAge = &gSave.adultEquips;
+        nextAge = &gSave.childEquips;
+    }
+    else
+    {
+        prevAge = &gSave.childEquips;
+        nextAge = &gSave.adultEquips;
+    }
+
+    memcpy(prevAge, &gSave.equips, sizeof(*prevAge));
+    if (EV_OOT_IS_SWORDLESS())
+        prevAge->buttonItems[0] = ITEM_NONE;
+    memcpy(&gSave.equips, nextAge, sizeof(*nextAge));
+
+    if (gSave.equips.buttonItems[0] == ITEM_NONE)
+        EV_OOT_SET_SWORDLESS();
+    else
+        EV_OOT_UNSET_SWORDLESS();
+}
+
+PATCH_FUNC(0x8006f804, TimeTravelUpdateEquipment);

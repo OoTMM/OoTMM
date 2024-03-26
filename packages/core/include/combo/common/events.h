@@ -179,6 +179,10 @@
 #define EV_MM_WEEK_NOTEBOOK_RECEIVED_STONE_MASK             MM_EV(72, 5)
 #define EV_MM_WEEK_NOTEBOOK_RECEIVED_BREMEN_MASK            MM_EV(72, 6)
 
+#define EV_OOT_IS_SWORDLESS()                               (!!(gOotSave.eventsMisc[29]))
+#define EV_OOT_SET_SWORDLESS()                              do { gOotSave.eventsMisc[29] = 1; } while (0)
+#define EV_OOT_UNSET_SWORDLESS()                            do { gOotSave.eventsMisc[29] = 0; } while (0)
+
 #if !defined(__ASSEMBLER__)
 # define MM_SET_EVENT_WEEK(x)       (gMmSave.weekEventReg[(x) / 8] |= (1 << ((x) % 8)))
 # define MM_CLEAR_EVENT_WEEK(x)     (gMmSave.weekEventReg[(x) / 8] &= ~(1 << ((x) % 8)))
