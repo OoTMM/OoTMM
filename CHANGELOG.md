@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - Prettier "Entrances" section in the spoiler log.
-- New trick to reach Zelda's Courtyard using Age Swap in Ganon's Castle. 
+- New trick to reach Zelda's Courtyard using Age Swap in Ganon's Castle.
 - Adult Link in Majora's Mask.
 - New trick to wait on the roof for Stock Pot Inn to close.
 - Add tricks for using Farore's Wind and resetting time to get the Romani Ranch checks.
@@ -35,6 +35,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix region states in MM being incorrect when coming from OoT.
 - Fix Woods of Mystery grass patches being labeled wrong and having incorrect day logic.
 - Fix Diving Minigame Purple and Huge Rupees being swapped.
 - Fix a very persistent wrong warp issue.
