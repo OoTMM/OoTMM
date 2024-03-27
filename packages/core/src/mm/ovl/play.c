@@ -297,7 +297,7 @@ void fixupOriginalSceneSetup(void)
     {
         switch (entranceKey)
         {
-        case 0x69: /* Swamp */
+        case 0x42: /* Swamp */
             entranceKey = 0x06;
             break;
         case 0x43: /* Woodfall */
