@@ -78,6 +78,8 @@ Actor*  SpawnActorEx(ActorContext* actorCtx, GameState_Play* play, s16 actorId, 
 int Schedule_CheckMiscS(GameState_Play* play, void* unk);
 #endif
 
+void Fault_AddHungupAndCrashImpl(const char* str1, const char* str2);
+
 void    SkelAnime_DrawFlexOpa(GameState_Play* play, void** skeleton, Vec3s* jointTable, s32 dListCount,
                            void* overrideLimbDraw, void* postLimbDraw, void* arg);
 

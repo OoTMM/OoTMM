@@ -223,6 +223,8 @@ func_800C7200 = 0x800C7200;
 Letterbox_SetSizeTarget = 0x80099620;
 Letterbox_GetSizeTarget = 0x80099630;
 
+Fault_AddHungupAndCrashImpl = 0x800af564;
+
 Play_LoadKaleidoOverlay = 0x80099c60;
 LoadMapMark = 0x80066df0;
 
