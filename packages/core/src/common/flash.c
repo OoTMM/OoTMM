@@ -242,6 +242,7 @@ extern OSMesgQueue  sFlashromMesgQueue;
 #endif
 
 static char sFlashBuffer[FLASH_BLOCK_SIZE] ALIGNED(16);
+static char sFlashBufferReadback[FLASH_BLOCK_SIZE] ALIGNED(16);
 
 static s32 doWrite(void* addr, u32 pageNum, u32 pageCount)
 {
@@ -264,6 +265,19 @@ static s32 doWrite(void* addr, u32 pageNum, u32 pageCount)
     return 0;
 }
 
+static int validateFlashReadback(void* addr, u32 pageNum, u32 pageCount)
+{
+    for (int i = 0; i < pageCount; i++)
+    {
+        SysFlashrom_ReadData(sFlashBufferReadback, pageNum + i, 1);
+        if (memcmp(addr, sFlashBufferReadback, FLASH_BLOCK_SIZE) != 0)
+            return -1;
+        addr = (char*)addr + FLASH_BLOCK_SIZE;
+    }
+
+    return 0;
+}
+
 static int tryWrite(void* addr, u32 pageNum, u32 pageCount)
 {
     int errors;
@@ -273,10 +287,10 @@ static int tryWrite(void* addr, u32 pageNum, u32 pageCount)
     for (;;)
     {
         ret = doWrite(addr, pageNum, pageCount);
-        if (ret == 0)
+        if (ret == 0 && validateFlashReadback(addr, pageNum, pageCount) == 0)
             return 0;
         errors++;
-        if (errors >= 3)
+        if (errors >= 10)
         {
             Fault_AddHungupAndCrashImpl("Flash Write Error", "???");
             return ret;
@@ -300,7 +314,6 @@ static void writeFlash(u32 devAddr, void* dramAddr, u32 size)
         SysFlashrom_ReadData(sFlashBuffer, devAddr / FLASH_BLOCK_SIZE, 1);
         memcpy(sFlashBuffer + misalign, dramAddr, tmp);
         tryWrite(sFlashBuffer, devAddr / FLASH_BLOCK_SIZE, 1);
-        SysFlashrom_ReadData(sFlashBuffer, devAddr / FLASH_BLOCK_SIZE, 1);
         devAddr += tmp;
         dramAddr = ((char*)dramAddr + tmp);
         size -= tmp;
@@ -313,7 +326,6 @@ static void writeFlash(u32 devAddr, void* dramAddr, u32 size)
             /* DMA-friendly */
             tmp = size / FLASH_BLOCK_SIZE;
             tryWrite(dramAddr, devAddr / FLASH_BLOCK_SIZE, tmp);
-            SysFlashrom_ReadData(dramAddr, devAddr / FLASH_BLOCK_SIZE, tmp);
             devAddr += tmp * FLASH_BLOCK_SIZE;
             dramAddr = ((char*)dramAddr + tmp * FLASH_BLOCK_SIZE);
             size -= tmp * FLASH_BLOCK_SIZE;
@@ -325,7 +337,6 @@ static void writeFlash(u32 devAddr, void* dramAddr, u32 size)
             {
                 memcpy(sFlashBuffer, dramAddr, FLASH_BLOCK_SIZE);
                 tryWrite(sFlashBuffer, devAddr / FLASH_BLOCK_SIZE, 1);
-                SysFlashrom_ReadData(sFlashBuffer, devAddr / FLASH_BLOCK_SIZE, 1);
                 devAddr += FLASH_BLOCK_SIZE;
                 dramAddr = ((char*)dramAddr + FLASH_BLOCK_SIZE);
                 size -= FLASH_BLOCK_SIZE;
@@ -339,7 +350,6 @@ static void writeFlash(u32 devAddr, void* dramAddr, u32 size)
         SysFlashrom_ReadData(sFlashBuffer, devAddr / FLASH_BLOCK_SIZE, 1);
         memcpy(sFlashBuffer, dramAddr, size);
         tryWrite(sFlashBuffer, devAddr / FLASH_BLOCK_SIZE, 1);
-        SysFlashrom_ReadData(sFlashBuffer, devAddr / FLASH_BLOCK_SIZE, 1);
     }
 }
 
