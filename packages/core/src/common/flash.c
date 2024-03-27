@@ -277,7 +277,10 @@ static int tryWrite(void* addr, u32 pageNum, u32 pageCount)
             return 0;
         errors++;
         if (errors >= 3)
+        {
+            Fault_AddHungupAndCrashImpl("Flash Write Error", "???");
             return ret;
+        }
     }
 }
 
