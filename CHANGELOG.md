@@ -35,6 +35,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix Soaring from OoT being able to cancel the GI animation.
 - Fix OoT Blast/Stone mask behaving oddly with scene restrictions.
 - Fix clock transitions breaking grottos.
 - Fix minor discrepancies between song of time and moon crash cycle.
