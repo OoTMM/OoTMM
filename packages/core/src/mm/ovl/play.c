@@ -146,6 +146,7 @@ static int sTimeSkipFlag;
 
 static void checkTimeSkip(GameState_Play* play)
 {
+    Actor_Player* link;
     int currentHalfDay;
     int nextHalfDay;
     u32 linearTime;
@@ -230,7 +231,8 @@ static void checkTimeSkip(GameState_Play* play)
             gSave.isNight = !!(nextHalfDay & 1);
 
             /* Need a reload */
-            Play_SetupRespawnPoint(play, 1, 0xdff);
+            link = GET_LINK(play);
+            Play_SetRespawnData(play, 1, gSave.entranceIndex, play->roomCtx.curRoom.id, 0xdff, &link->base.world.pos, link->base.rot2.y);
             gSaveContext.respawnFlag = 2;
             gSaveContext.nextCutscene = 0;
             comboTransition(play, gSave.entranceIndex);

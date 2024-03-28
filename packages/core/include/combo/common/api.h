@@ -247,6 +247,7 @@ s32 Play_CamIsNotFixed(GameState_Play* play);
 
 void Player_Update(Actor_Player* this, GameState_Play* play);
 void Play_SetupRespawnPoint(GameState_Play* this, s32 respawnMode, s32 playerParams);
+void Play_SetRespawnData(GameState_Play *play, s32 respawnMode, u16 entrance, s32 roomIndex, s32 playerParams, const Vec3f* pos, s16 yaw);
 
 void* OverlayAddr(u32 addr);
 void KaleidoManager_LoadOvl(void* ovl);

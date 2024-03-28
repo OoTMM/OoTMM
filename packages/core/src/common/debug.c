@@ -297,18 +297,28 @@ static void DebugHandler_Warp2(int trigger)
     comboTransition(gPlay, entrance);
 }
 
+#if defined(GAME_OOT)
 static void DebugHandler_Reload(int trigger)
 {
     setPage(DEBUGMENU_PAGE_NONE);
     Play_SetupRespawnPoint(gPlay, 1, 0xdff);
     gSaveContext.respawnFlag = 2;
     gSaveContext.nextCutscene = 0;
-#if defined(GAME_OOT)
     comboTransition(gPlay, gSave.entrance);
-#else
-    comboTransition(gPlay, gSave.entranceIndex);
-#endif
 }
+#else
+static void DebugHandler_Reload(int trigger)
+{
+    Actor_Player* link;
+
+    link = GET_LINK(gPlay);
+    setPage(DEBUGMENU_PAGE_NONE);
+    Play_SetRespawnData(gPlay, 1, gSave.entranceIndex, gPlay->roomCtx.curRoom.id, 0xdff, &link->base.world.pos, link->base.rot2.y);
+    gSaveContext.respawnFlag = 2;
+    gSaveContext.nextCutscene = 0;
+    comboTransition(gPlay, gSave.entranceIndex);
+}
+#endif
 
 #if defined(GAME_MM)
 static void DebugHandler_Time(int trigger)

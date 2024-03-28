@@ -200,6 +200,7 @@ RemoveItem = 0x801149a0;
 
 Interface_StartMoonCrash = 0x8011c808;
 
+Play_SetRespawnData = 0x80169dcc;
 _Sram_SaveEndOfCycle = 0x80143b0c;
 Sram_SaveNewDay = 0x80146f5c;
 Sram_OpenSave = 0x80144e78;
