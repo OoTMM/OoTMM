@@ -35,6 +35,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix OoT Blast/Stone mask behaving oddly with scene restrictions.
 - Fix clock transitions breaking grottos.
 - Fix minor discrepancies between song of time and moon crash cycle.
 - Fix various bugs with swordless & age swap equips.

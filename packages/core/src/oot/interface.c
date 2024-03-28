@@ -125,3 +125,33 @@ void LoadEquipItemTexture(void)
     gDPLoadTextureBlock(OVERLAY_DISP++, tex, G_IM_FMT_RGBA, G_IM_SIZ_32b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
     CLOSE_DISPS();
 }
+
+void Interface_UpdateButtonsPart2Wrapper(GameState_Play* play)
+{
+    u8* ptr;
+    u8 itemId;
+    u8 buttons[3];
+
+    for (int i = 0; i < 3; ++i)
+    {
+        ptr = &gSave.equips.buttonItems[i + 1];
+        itemId = *ptr;
+        buttons[i] = itemId;
+
+        switch (itemId)
+        {
+        case ITEM_OOT_MASK_BLAST:
+        case ITEM_OOT_MASK_STONE:
+            *ptr = ITEM_OOT_KEATON_MASK;
+            break;
+        }
+    }
+
+    Interface_UpdateButtonsPart2(play);
+
+    for (int i = 0; i < 3; ++i)
+    {
+        ptr = &gSave.equips.buttonItems[i + 1];
+        *ptr = buttons[i];
+    }
+}

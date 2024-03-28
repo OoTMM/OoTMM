@@ -228,6 +228,8 @@ Fault_AddHungupAndCrashImpl = 0x800af564;
 Play_LoadKaleidoOverlay = 0x80099c60;
 LoadMapMark = 0x80066df0;
 
+_Interface_UpdateButtonsPart2 = 0x8006e340;
+
 gMaxRupees = 0x800f8cec;
 
 gWalletDigits = 0x800f7618;
