@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [21.0] - 2024-03-28
+
 ### Added
 
 - Prettier "Entrances" section in the spoiler log.
@@ -1098,7 +1100,8 @@ All notable changes to this project will be documented in this file.
 
 - Initial stable release.
 
-[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v20.0...HEAD
+[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v21.0...HEAD
+[21.0]: https://github.com/OoTMM/OoTMM/compare/v20.0...v21.0
 [20.0]: https://github.com/OoTMM/OoTMM/compare/v19.2...v20.0
 [19.2]: https://github.com/OoTMM/OoTMM/compare/v19.1...v19.2
 [19.1]: https://github.com/OoTMM/OoTMM/compare/v19.0...v19.1
