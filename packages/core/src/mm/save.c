@@ -33,7 +33,7 @@ void Sram_AfterOpenSave(void)
 #endif
 }
 
-void Sram_SaveEndOfCycleWrapper(GameState_Play* play)
+void Sram_SaveEndOfCycle(GameState_Play* play)
 {
     /* Re-enable time */
     gNoTimeFlow = 0;
@@ -43,7 +43,7 @@ void Sram_SaveEndOfCycleWrapper(GameState_Play* play)
     gOotSave.entrance = ENTR_OOT_WARP_SONG_TEMPLE;
 
     comboSave(play, SF_NOCOMMIT);
-    Sram_SaveEndOfCycle(play);
+    _Sram_SaveEndOfCycle(play);
 
     /* Not an Owl save */
     gSave.isOwlSave = 0;
@@ -125,8 +125,8 @@ void Sram_SaveEndOfCycleWrapper(GameState_Play* play)
     comboHandleAutoInvertClockSpeed();
 }
 
-PATCH_CALL(0x80146f94, Sram_SaveEndOfCycleWrapper);
-PATCH_CALL(0x80158420, Sram_SaveEndOfCycleWrapper);
+PATCH_CALL(0x80146f94, Sram_SaveEndOfCycle);
+PATCH_CALL(0x80158420, Sram_SaveEndOfCycle);
 
 void PrepareSaveAndSave(SramContext* sram)
 {
@@ -194,10 +194,7 @@ static void MoonCrashCycle(void)
     cutscene = gSave.cutscene;
     gSave.playerForm = MM_PLAYER_FORM_HUMAN;
     gSave.equippedMask = 0;
-    gSave.day = 0;
-    gSave.time = 0x3fff;
-    comboSave(gPlay, SF_NOCOMMIT);
-    Sram_SaveNewDay(gPlay);
+    Sram_SaveEndOfCycle(gPlay);
     gSave.cutscene = cutscene;
 }
 

@@ -204,6 +204,7 @@ void Interface_LoadActionLabelB(GameState_Play* play, u16 action);
 
 #if defined(GAME_MM)
 void PrepareSave(SramContext* sram);
+void _Sram_SaveEndOfCycle(GameState_Play* play);
 void Sram_SaveEndOfCycle(GameState_Play* play);
 void Sram_SaveNewDay(GameState_Play* play);
 #endif
