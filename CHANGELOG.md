@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Changed
+
+- Saving is now enabled on the Clock Tower with Moon Crash set to New Cycle.
+
 ## [21.0] - 2024-03-28
 
 ### Added
