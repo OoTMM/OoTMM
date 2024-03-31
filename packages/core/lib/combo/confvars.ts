@@ -162,6 +162,7 @@ export const CONFVARS = [
   'MM_CLOCKS',
   'MM_CLOCKS_PROGRESSIVE',
   'MM_CLOCKS_PROGRESSIVE_REVERSE',
+  'MM_DST',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

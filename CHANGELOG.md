@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+
+- Implements Daylight Saving Time in MM.
+
 ### Changed
 
 - Saving is now enabled on the Clock Tower with Moon Crash set to New Cycle.
