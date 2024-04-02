@@ -4,9 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
-### Added
+### Jokes
 
-- Implements Daylight Saving Time in MM.
+- (**April Fools**) Implement "Daylight Saving Time in MM", removing one hour every night.
 
 ### Changed
 

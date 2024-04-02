@@ -936,13 +936,6 @@ export const SETTINGS = [{
   description: 'Enables CAMC for shuffled Gold, Swamp, and Ocean Skulltulas',
   cond: (x: any) => x.csmc !== 'never',
 }, {
-  key: 'dst',
-  name: 'Daylight Saving Time',
-  category: 'items.extensions',
-  type: 'boolean',
-  description: 'Implements Daylight Saving Time in MM.',
-  default: false
-}, {
   key: 'blastMaskCooldown',
   name: 'Blast Mask Cooldown',
   category: 'main.misc',

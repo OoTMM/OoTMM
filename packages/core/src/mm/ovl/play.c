@@ -666,27 +666,8 @@ void hookPlay_Init(GameState_Play* play)
     }
 }
 
-#define HOUR(x) (((x) * 0x10000) / 24)
-
-static void dst(void)
-{
-    u16 dstStart;
-    u16 dstStop;
-
-    if (!comboConfig(CFG_MM_DST))
-        return;
-    dstStart = HOUR(2);
-    dstStop = HOUR(3);
-
-    if (gSave.time >= dstStart && gSave.time < dstStop)
-    {
-        gSave.time += HOUR(1);
-    }
-}
-
 void Play_UpdateWrapper(GameState_Play* play)
 {
-    dst();
     comboMenuTick();
     Debug_Input();
     malloc_check();
