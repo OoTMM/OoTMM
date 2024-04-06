@@ -15,7 +15,7 @@
     "Deku Tree Map Chest": "true"
     "Deku Tree Compass Chest": "true"
     "Deku Tree Compass Room Side Chest": "true"
-    "Deku Tree GS Compass": "can_damage_skull"
+    "Deku Tree GS Compass": "gs && can_damage_skull"
     "Deku Tree Grass Lobby 1": "can_cut_grass"
     "Deku Tree Grass Lobby 2": "can_cut_grass"
     "Deku Tree Grass Lobby 3": "can_cut_grass"
@@ -46,8 +46,8 @@
     "Deku Tree Basement Ledge": "trick(OOT_DEKU_SKIP) || is_adult || has_hover_boots || climb_anywhere || hookshot_anywhere"
   locations:
     "Deku Tree Basement Chest": "true"
-    "Deku Tree GS Basement Gate": "can_damage_skull"
-    "Deku Tree GS Basement Vines": "has_ranged_weapon || can_use_din || has_explosives"
+    "Deku Tree GS Basement Gate": "gs && can_damage_skull"
+    "Deku Tree GS Basement Vines": "gs && (has_ranged_weapon || can_use_din || has_explosives)"
     "Deku Tree Grass Basement Main 1": "can_cut_grass"
     "Deku Tree Grass Basement Main 2": "can_cut_grass"
     "Deku Tree Grass Eye Switch Room 1": "can_cut_grass && event(DEKU_BURN_WEB)"
@@ -61,7 +61,7 @@
   exits:
     "Deku Tree Basement Ledge": "is_child"
   locations:
-    "Deku Tree GS Basement Back Room": "event(DEKU_MUD_WALL) && event(DEKU_BURN_WEB) && (can_collect_distance || (climb_anywhere && (has_explosives || has_ranged_weapon || can_use_din || (age_sword_adult && has(SWORD_BIGGORON)))))"
+    "Deku Tree GS Basement Back Room": "gs && event(DEKU_MUD_WALL) && event(DEKU_BURN_WEB) && (can_collect_distance || (climb_anywhere && (has_explosives || has_ranged_weapon || can_use_din || (age_sword_adult && has(SWORD_BIGGORON)))))"
     "Deku Tree Grass Larva Room 1": "can_cut_grass"
     "Deku Tree Grass Larva Room 2": "can_cut_grass"
     "Deku Tree Grass Water Room 1": "can_cut_grass && event(DEKU_BURN_WEB)"

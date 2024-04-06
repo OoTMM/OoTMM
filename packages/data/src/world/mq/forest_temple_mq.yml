@@ -5,7 +5,7 @@
     "Forest Temple Main": "small_keys_forest(1) && (is_adult || (has_nuts || has_weapon || has_explosives || has_ranged_weapon_child))"
   locations:
     "MQ Forest Temple First Room Chest": "can_hit_triggers_distance || can_hookshot || has_explosives || has_hover_boots || can_use_din || (has_weapon && (has(MAGIC_UPGRADE) || has(SHARED_MAGIC_UPGRADE)))" #Many ways to deal with the Skulltula in the way.
-    "MQ Forest Temple GS Entryway": "can_collect_distance"
+    "MQ Forest Temple GS Entryway": "gs && can_collect_distance"
 "Forest Temple Wallmaster West":
   region: NONE
   exits:
@@ -42,7 +42,7 @@
     "Forest Temple West Garden": "soul_floormaster && small_keys_forest(2) && is_adult && has_goron_bracelet" #This is sideways thinking, but you must have access to West Garden with 2 keys here because you cannot waste a third without access via another means.
     "Forest Temple Twisted Hallway": "small_keys_forest(3) && is_adult && has_goron_bracelet && event(FOREST_TWIST_SWITCH)"
   locations:
-    "MQ Forest Temple GS Climb Room": "can_damage_skull"
+    "MQ Forest Temple GS Climb Room": "gs && can_damage_skull"
 "Forest Temple Straightened Hallway":
   dungeon: Forest
   exits:
@@ -66,7 +66,7 @@
     "Forest Temple East Garden": "can_dive_big"
     "Forest Temple Garden Ledges": "has_fire_arrows"
   locations:
-    "MQ Forest Temple GS West Garden": "true"
+    "MQ Forest Temple GS West Garden": "gs"
 "Forest Temple East Garden":
   dungeon: Forest
   exits:
@@ -78,8 +78,8 @@
     NUTS: "soul_deku_baba && (has_weapon || has_explosives || can_use_slingshot)"
   locations:
     "MQ Forest Temple Well Chest": "can_hit_triggers_distance"
-    "MQ Forest Temple GS East Garden": "can_collect_distance"
-    "MQ Forest Temple GS Well": "can_hit_triggers_distance || (has_iron_boots && (can_hookshot || has_mask_blast))"
+    "MQ Forest Temple GS East Garden": "gs && can_collect_distance"
+    "MQ Forest Temple GS Well": "gs && (can_hit_triggers_distance || (has_iron_boots && (can_hookshot || has_mask_blast)))"
     "MQ Forest Temple Heart Well 1": "can_hit_triggers_distance || has_iron_boots"
     "MQ Forest Temple Heart Well 2": "can_hit_triggers_distance || has_iron_boots"
     "MQ Forest Temple Heart Well 3": "can_hit_triggers_distance || has_iron_boots"
@@ -90,7 +90,7 @@
     "Forest Temple East Garden": "true"
   locations:
     "MQ Forest Temple East Garden High Ledge Chest": "true"
-    "MQ Forest Temple GS East Garden": "can_play_time"
+    "MQ Forest Temple GS East Garden": "gs && can_play_time"
     "MQ Forest Temple Heart Garden 1": "true"
     "MQ Forest Temple Heart Garden 2": "true"
     "MQ Forest Temple Heart Garden 3": "true"

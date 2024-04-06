@@ -17,7 +17,7 @@
     "MQ Deku Tree Slingshot Chest": "soul_deku_baba && soul_enemy(SOUL_ENEMY_GOHMA_LARVA) && (has_weapon || can_use_sticks || has_ranged_weapon_child)" #Bombs and Din's work, but it's horrible.
     "MQ Deku Tree Slingshot Room Far Chest": "can_use_sticks || has_fire"
     "MQ Deku Tree Basement Chest": "can_use_sticks || has_fire"
-    "MQ Deku Tree GS Lobby Crate": "can_damage_skull"
+    "MQ Deku Tree GS Lobby Crate": "gs && can_damage_skull"
     "MQ Deku Tree Grass Entrance Lower 1": "can_cut_grass"
     "MQ Deku Tree Grass Entrance Lower 2": "can_cut_grass"
     "MQ Deku Tree Grass Entrance Lower 3": "can_cut_grass"
@@ -63,7 +63,7 @@
   exits:
     "Deku Tree Compass Room": "true"
   locations:
-    "MQ Deku Tree GS Compass Room": "can_collect_distance"
+    "MQ Deku Tree GS Compass Room": "gs && can_collect_distance"
     "MQ Deku Tree Heart Compass Room": "true"
 "Deku Tree Water Room":
   dungeon: DT
@@ -99,8 +99,8 @@
     "Deku Tree Water Room Back": "soul_keese && soul_deku_scrub && soul_enemy(SOUL_ENEMY_GOHMA_LARVA) && (has_weapon || has_ranged_weapon_child)" #Judgment call, this fight is way too big for sticks and nuts to be forced.
     "Deku Tree Basement Ledge": "(is_child && can_use_sticks) || can_use_din"
   locations:
-    "MQ Deku Tree GS Song of Time Blocks": "(can_play_time && can_collect_distance) || can_longshot"
-    "MQ Deku Tree GS Back Room": "(can_use_sticks || has_fire) && can_collect_distance"
+    "MQ Deku Tree GS Song of Time Blocks": "gs && ((can_play_time && can_collect_distance) || can_longshot)"
+    "MQ Deku Tree GS Back Room": "gs && (can_use_sticks || has_fire) && can_collect_distance"
     "MQ Deku Tree Grass Gravestone Room 1": "can_cut_grass"
     "MQ Deku Tree Grass Gravestone Room 2": "can_cut_grass"
     "MQ Deku Tree Grass Gravestone Room 3": "can_cut_grass"
@@ -119,7 +119,7 @@
   events:
     DEKU_BLOCK: "true"
   locations:
-    "MQ Deku Tree Scrub": "can_hit_scrub && scrub_price(0x1b)"
+    "MQ Deku Tree Scrub": "business_scrub(0x1b)"
     "MQ Deku Tree Grass Basement Upper 1": "can_cut_grass"
     "MQ Deku Tree Grass Basement Upper 2": "can_cut_grass"
     "MQ Deku Tree Grass Basement Upper 3": "can_cut_grass"

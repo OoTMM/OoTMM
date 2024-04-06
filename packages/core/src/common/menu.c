@@ -294,6 +294,16 @@ static const char* const kSoulsBossMm[] = {
     "Igos",
 };
 
+static const char* const kSoulsMiscOot[] = {
+    "Gold Skulltulas",
+    "Business Scrubs",
+};
+
+static const char* const kSoulsMiscMm[] = {
+    "Gold Skulltulas",
+    "Business Scrubs",
+};
+
 static const Gfx kDlistQuadRGBA16_12x12[] = {
     gsDPPipeSync(),
     gsSPVertex(SEG1_BASE, 4, 0),
@@ -913,11 +923,17 @@ void comboMenuUpdate(GameState_Play* play)
     case MENU_SOULS_OOT_NPC:
         g.menuCursorMax = ARRAY_SIZE(kSoulsNpcOot);
         break;
+    case MENU_SOULS_OOT_MISC:
+        g.menuCursorMax = ARRAY_SIZE(kSoulsMiscOot);
+        break;
     case MENU_SOULS_MM_ENEMY:
         g.menuCursorMax = ARRAY_SIZE(kSoulsEnemyMm);
         break;
     case MENU_SOULS_MM_BOSS:
         g.menuCursorMax = ARRAY_SIZE(kSoulsBossMm);
+        break;
+    case MENU_SOULS_MM_MISC:
+        g.menuCursorMax = ARRAY_SIZE(kSoulsMiscMm);
         break;
     }
 
@@ -998,21 +1014,29 @@ void comboMenuDraw(GameState_Play* play)
     case MENU_SOULS_OOT_NPC:
         drawMenuSouls(play, "OoT NPC Souls", kSoulsNpcOot, GI_OOT_SOUL_NPC_SARIA, 0);
         break;
+    case MENU_SOULS_OOT_MISC:
+        drawMenuSouls(play, "OoT Misc. Souls", kSoulsMiscOot, GI_OOT_SOUL_MISC_GS, 0);
+        break;
     case MENU_SOULS_MM_ENEMY:
         drawMenuSouls(play, "MM Enemy Souls", kSoulsEnemyMm, GI_MM_SOUL_ENEMY_OCTOROK, 1);
         break;
     case MENU_SOULS_MM_BOSS:
         drawMenuSouls(play, "MM Boss Souls", kSoulsBossMm, GI_MM_SOUL_BOSS_ODOLWA, 1);
         break;
+    case MENU_SOULS_MM_MISC:
+        drawMenuSouls(play, "MM Misc. Souls", kSoulsMiscMm, GI_MM_SOUL_MISC_GS, 1);
+        break;
     }
 }
 
 void comboMenuNext(void)
 {
-    if(comboConfig(CFG_MENU_NOTEBOOK) && !gMmSave.inventory.quest.notebook) {
+    if (comboConfig(CFG_MENU_NOTEBOOK) && !gMmSave.inventory.quest.notebook)
+    {
         PlaySound(0x4806);
         return;
     }
+
     PlaySound(0x4809);
     g.menuScreen++;
     g.menuCursor = 0;
@@ -1024,9 +1048,13 @@ void comboMenuNext(void)
         g.menuScreen++;
     if (g.menuScreen == MENU_SOULS_OOT_NPC && !comboConfig(CFG_OOT_SOULS_NPC))
         g.menuScreen++;
+    if (g.menuScreen == MENU_SOULS_OOT_MISC && !comboConfig(CFG_OOT_SOULS_MISC))
+        g.menuScreen++;
     if (g.menuScreen == MENU_SOULS_MM_ENEMY && !comboConfig(CFG_MM_SOULS_ENEMY))
         g.menuScreen++;
     if (g.menuScreen == MENU_SOULS_MM_BOSS && !comboConfig(CFG_MM_SOULS_BOSS))
+        g.menuScreen++;
+    if (g.menuScreen == MENU_SOULS_MM_MISC && !comboConfig(CFG_MM_SOULS_MISC))
         g.menuScreen++;
 
     if (g.menuScreen >= MENU_MAX)

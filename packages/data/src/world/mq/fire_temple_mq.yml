@@ -45,7 +45,7 @@
   locations:
     "MQ Fire Temple Boss Key Chest": "has_tunic_goron && has_fire && can_hookshot"
     "MQ Fire Temple 1f Lava Room Goron Chest": "has_tunic_goron && has_fire && can_hookshot && has_explosives"
-    "MQ Fire Temple GS 1f Lava Room": "has_tunic_goron"
+    "MQ Fire Temple GS 1f Lava Room": "gs && has_tunic_goron"
     "MQ Fire Temple Pot Lava Room Left": "has_tunic_goron"
     "MQ Fire Temple Pot Lava Room Alcove": "has_tunic_goron"
     "MQ Fire Temple Pot Lava Room Right": "has_tunic_goron && can_hookshot"
@@ -74,7 +74,7 @@
 "Fire Temple Burning Block":
   dungeon: Fire
   locations:
-    "MQ Fire Temple GS Burning Block": "true"
+    "MQ Fire Temple GS Burning Block": "gs"
 "Fire Temple 3f Lava Room":
   dungeon: Fire
   exits:
@@ -93,8 +93,8 @@
     FIRE_TEMPLE_PILLAR_HAMMER: "true"
   locations:
     "MQ Fire Temple Flare Dancer Key": "soul_enemy(SOUL_ENEMY_FLARE_DANCER)"
-    "MQ Fire Temple GS Fire Walls Side Room": "has_hover_boots || can_play_time"
-    "MQ Fire Temple GS Fire Walls Middle": "has_explosives"
+    "MQ Fire Temple GS Fire Walls Side Room": "gs && (has_hover_boots || can_play_time)"
+    "MQ Fire Temple GS Fire Walls Middle": "gs && has_explosives"
     "MQ Fire Temple Pot Fire Maze Room Left 1": "true"
     "MQ Fire Temple Pot Fire Maze Room Left 2": "true"
     "MQ Fire Temple Pot Fire Maze Room Right 1": "has_hover_boots || can_play_time"
@@ -105,4 +105,4 @@
   dungeon: Fire
   locations:
     "MQ Fire Temple Topmost Chest": "true"
-    "MQ Fire Temple GS Topmost": "small_keys_fire_mq(5)"
+    "MQ Fire Temple GS Topmost": "gs && small_keys_fire_mq(5)"

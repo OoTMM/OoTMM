@@ -681,6 +681,7 @@ void DrawGi_CustomGS(GameState_Play* play, s16 index)
         { 0xaaaaaaff, 0xffffffff, 0xff0000ff, 0xff0000ff }, /* Soul */
         { 0xaaaaaaff, 0xffffffff, 0x8800ffff, 0x8800ffff }, /* Boss Soul */
         { 0xaaaaaaff, 0xffffffff, 0x00ff00ff, 0x00ff00ff }, /* NPC Soul */
+        { 0xaaaaaaff, 0xffffffff, 0x888888ff, 0x888888ff }, /* Misc. Soul */
     };
 
     const DrawGi* drawGi;

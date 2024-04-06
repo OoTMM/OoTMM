@@ -17,10 +17,10 @@
 "Ganon Castle Fairy Fountain":
   dungeon: Ganon
   locations:
-    "Ganon Castle Leftmost Scrub": "can_hit_scrub && scrub_price(0x21)"
-    "Ganon Castle Left-Center Scrub": "can_hit_scrub && scrub_price(0x22)"
-    "Ganon Castle Right-Center Scrub": "can_hit_scrub && scrub_price(0x23)"
-    "Ganon Castle Rightmost Scrub": "can_hit_scrub && scrub_price(0x24)"
+    "Ganon Castle Leftmost Scrub": "business_scrub(0x21)"
+    "Ganon Castle Left-Center Scrub": "business_scrub(0x22)"
+    "Ganon Castle Right-Center Scrub": "business_scrub(0x23)"
+    "Ganon Castle Rightmost Scrub": "business_scrub(0x24)"
     "Ganon Castle Fairy Fountain Fairy 1": "true"
     "Ganon Castle Fairy Fountain Fairy 2": "true"
     "Ganon Castle Fairy Fountain Fairy 3": "true"

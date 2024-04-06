@@ -359,6 +359,11 @@ static int isItemAmbiguous(s16 gi)
     case GI_MM_SOUL_ENEMY_LEEVER:
     case GI_MM_SOUL_ENEMY_STALCHILD:
         return !comboConfig(CFG_SHARED_SOULS_ENEMY);
+    case GI_OOT_SOUL_MISC_GS:
+    case GI_OOT_SOUL_MISC_BUSINESS_SCRUB:
+    case GI_MM_SOUL_MISC_GS:
+    case GI_MM_SOUL_MISC_BUSINESS_SCRUB:
+        return !comboConfig(CFG_SHARED_SOULS_MISC);
     case GI_OOT_SKELETON_KEY:
     case GI_MM_SKELETON_KEY:
         return !comboConfig(CFG_SHARED_SKELETON_KEY);

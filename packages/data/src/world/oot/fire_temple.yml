@@ -29,7 +29,7 @@
     "Fire Temple Boss Key Loop Start": "true"
     "Fire Temple Boss Key Loop Flare Dancer": "true"
   locations:
-    "Fire Temple GS Hammer Statues": "true"
+    "Fire Temple GS Hammer Statues": "gs"
 "Fire Temple Boss Key Loop Flare Dancer":
   dungeon: Fire
   exits:
@@ -48,7 +48,7 @@
   locations:
     "Fire Temple Lava Room North Jail Chest": "has_tunic_goron"
     "Fire Temple Lava Room South Jail Chest": "(is_adult || climb_anywhere || hookshot_anywhere) && has_tunic_goron && has_explosives"
-    "Fire Temple GS Lava Side Room": "has_tunic_goron && (climb_anywhere || hookshot_anywhere || (is_adult && can_play_time)) && can_damage_skull"
+    "Fire Temple GS Lava Side Room": "gs && has_tunic_goron && (climb_anywhere || hookshot_anywhere || (is_adult && can_play_time)) && can_damage_skull"
     "Fire Temple Pot Lava Room 1": "has_tunic_goron"
     "Fire Temple Pot Lava Room 2": "has_tunic_goron"
     "Fire Temple Pot Lava Room 3": "has_tunic_goron"
@@ -63,7 +63,7 @@
   locations:
     "Fire Temple Maze Chest": "true"
     "Fire Temple Maze Jail Chest": "true"
-    "Fire Temple GS Maze": "has_explosives && (climb_anywhere || can_collect_distance)"
+    "Fire Temple GS Maze": "gs && has_explosives && (climb_anywhere || can_collect_distance)"
     "Fire Temple Map": "can_hit_triggers_distance && small_keys_fire(4)"
 "Fire Temple Ledge Above Main":
   dungeon: Fire
@@ -87,8 +87,8 @@
   dungeon: Fire
   locations:
     "Fire Temple Scarecrow Chest": "true"
-    "Fire Temple GS Scarecrow Wall": "has_weapon || has_ranged_weapon || has_explosives || can_use_sticks || can_use_din"
-    "Fire Temple GS Scarecrow Top": "can_hookshot || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_din))"
+    "Fire Temple GS Scarecrow Wall": "gs && (has_weapon || has_ranged_weapon || has_explosives || can_use_sticks || can_use_din)"
+    "Fire Temple GS Scarecrow Top": "gs && (can_hookshot || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_din)))"
 "Fire Temple Ring":
   dungeon: Fire
   exits:

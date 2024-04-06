@@ -262,6 +262,8 @@
 - { id: OOT_SOUL_BOSS_MORPHA, type: SOUL, add: [OOT_SOUL, 0x1005], flags: 0x80, draw: SOUL_BOSS, object: [oot, 0x015c], name: "the <C1>Soul of Morpha" }
 - { id: OOT_SOUL_BOSS_BONGO_BONGO, type: SOUL, add: [OOT_SOUL, 0x1006], flags: 0x80, draw: SOUL_BOSS, object: [oot, 0x015c], name: "the <C1>Soul of Bongo-Bongo" }
 - { id: OOT_SOUL_BOSS_TWINROVA, type: SOUL, add: [OOT_SOUL, 0x1007], flags: 0x80, draw: SOUL_BOSS, object: [oot, 0x015c], name: "the <C1>Soul of Twinrova" }
+- { id: OOT_SOUL_MISC_GS, type: SOUL, add: [OOT_SOUL, 0x3000], flags: 0x80, draw: SOUL_MISC, object: [oot, 0x015c], name: "the <C1>Soul of Gold Skulltulas" }
+- { id: OOT_SOUL_MISC_BUSINESS_SCRUB, type: SOUL, add: [OOT_SOUL, 0x3001], flags: 0x80, draw: SOUL_MISC, object: [oot, 0x015c], name: "the <C1>Soul of Business Scrubs" }
 - { id: OOT_KEY_RING, type: KEY, add: [OOT_KEY_RING, 0xffff], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "the <C0>Key Ring" }
 - { id: OOT_KEY_RING_FOREST, type: KEY, add: [OOT_KEY_RING, SCE_OOT_TEMPLE_FOREST], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "the <C0>Key Ring (Forest)" }
 - { id: OOT_KEY_RING_FIRE, type: KEY, add: [OOT_KEY_RING, SCE_OOT_TEMPLE_FIRE], flags: 0x80, draw: SMALL_KEY, object: [oot, 0x00aa], name: "the <C0>Key Ring (Fire)" }
@@ -639,6 +641,8 @@
 - { id: MM_SOUL_BOSS_GYORG, type: SOUL, add: [MM_SOUL, 0x1002], flags: 0xa0, draw: SOUL_BOSS, object: [mm, 0x0125], name: "the <C1>Soul of Gyorg" }
 - { id: MM_SOUL_BOSS_TWINMOLD, type: SOUL, add: [MM_SOUL, 0x1003], flags: 0xa0, draw: SOUL_BOSS, object: [mm, 0x0125], name: "the <C1>Soul of Twinmold" }
 - { id: MM_SOUL_BOSS_IGOS, type: SOUL, add: [MM_SOUL, 0x1004], flags: 0xa0, draw: SOUL_BOSS, object: [mm, 0x0125], name: "the <C1>Soul of Igos" }
+- { id: MM_SOUL_MISC_GS, type: SOUL, add: [MM_SOUL, 0x3000], flags: 0xa0, draw: SOUL_MISC, object: [mm, 0x0125], name: "the <C1>Soul of Gold Skulltulas" }
+- { id: MM_SOUL_MISC_BUSINESS_SCRUB, type: SOUL, add: [MM_SOUL, 0x3001], flags: 0xa0, draw: SOUL_MISC, object: [mm, 0x0125], name: "the <C1>Soul of Business Scrubs" }
 - { id: MM_KEY_RING, type: KEY, add: [MM_KEY_RING, 0xffff], flags: 0xa0, draw: SMALL_KEY, object: [mm, 0x0086], name: "the <C0>Key Ring" }
 - { id: MM_KEY_RING_WF, type: KEY, add: [MM_KEY_RING, 0], flags: 0xa0, draw: SMALL_KEY, object: [mm, 0x0086], name: "the <C0>Key Ring (Woodfall)" }
 - { id: MM_KEY_RING_SH, type: KEY, add: [MM_KEY_RING, 1], flags: 0xa0, draw: SMALL_KEY, object: [mm, 0x0086], name: "the <C0>Key Ring (Snowhead)" }

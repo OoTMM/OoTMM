@@ -319,7 +319,7 @@
   exits:
     "Hyrule Field": "true"
   locations:
-    "Hyrule Field Grotto Scrub HP": "can_hit_scrub && scrub_price(0x07)"
+    "Hyrule Field Grotto Scrub HP": "business_scrub(0x07)"
     "Hyrule Field Grotto Scrub Big Fairy": "can_play_storms"
 "Hyrule Field Open Grotto":
   region: ENTRANCE
@@ -400,7 +400,7 @@
     NUTS: "has_fire"
     BUGS: "has_fire && can_cut_grass"
   locations:
-    "Hyrule Field Grotto Near Gerudo GS": "(can_collect_distance || climb_anywhere) && has_fire"
+    "Hyrule Field Grotto Near Gerudo GS": "gs && (can_collect_distance || climb_anywhere) && has_fire"
     "Hyrule Field Cow": "has_fire && can_play_epona"
     "Hyrule Field Cow Grotto Pot 1": "has_fire"
     "Hyrule Field Cow Grotto Pot 2": "has_fire"
@@ -417,7 +417,7 @@
     SEEDS: "has_sword_kokiri"
     ARROWS: "is_adult"
   locations:
-    "Hyrule Field Grotto Near Kakariko GS": "can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_din))"
+    "Hyrule Field Grotto Near Kakariko GS": "gs && (can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_din)))"
 "Hyrule Field Fairy Grotto":
   region: ENTRANCE
   age_change: false
@@ -518,7 +518,7 @@
     RUPEES: "true"
   locations:
     "Market Pot House Big Poes": "is_adult && has_big_poe && soul_npc(SOUL_NPC_POE_COLLECTOR)"
-    "Market Pot House GS": "is_child"
+    "Market Pot House GS": "gs && is_child"
     "Market Pot House Child Pot Ground 1": "is_child"
     "Market Pot House Child Pot Ground 2": "is_child"
     "Market Pot House Child Pot Ground 3": "is_child"
@@ -639,7 +639,7 @@
     RUPEES: "is_child"
   locations:
     "Lon Lon Ranch Malon Song": "is_child && has_ocarina && event(MALON) && is_day"
-    "Lon Lon Ranch GS Tree": "is_child"
+    "Lon Lon Ranch GS Tree": "gs && is_child"
     "Lon Lon Ranch GS House": "is_child && gs_night && (can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_sword || can_use_sticks || can_use_din)))"
     "Lon Lon Ranch GS Rain Shed": "is_child && gs_night"
     "Lon Lon Ranch GS Back Wall": "is_child && gs_night && (can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_din)))"
@@ -680,9 +680,9 @@
   exits:
     "Lon Lon Ranch": "true"
   locations:
-    "Lon Lon Ranch Grotto Left Scrub": "is_child && scrub_price(0x08) && can_hit_scrub"
-    "Lon Lon Ranch Grotto Center Scrub": "is_child && scrub_price(0x09) && can_hit_scrub"
-    "Lon Lon Ranch Grotto Right Scrub": "is_child && scrub_price(0x0a) && can_hit_scrub"
+    "Lon Lon Ranch Grotto Left Scrub": "is_child && business_scrub(0x08)"
+    "Lon Lon Ranch Grotto Center Scrub": "is_child && business_scrub(0x09)"
+    "Lon Lon Ranch Grotto Right Scrub": "is_child && business_scrub(0x0a)"
 "Hyrule Castle":
   region: HYRULE_CASTLE
   age_change: false
@@ -702,7 +702,7 @@
     BUGS: "has_bottle"
   locations:
     "Malon Egg": "event(MALON)"
-    "Hyrule Castle GS Tree": "can_damage_skull"
+    "Hyrule Castle GS Tree": "gs && can_damage_skull"
     "Hyrule Castle Grass 1": "can_cut_grass"
     "Hyrule Castle Grass 2": "can_cut_grass"
     # These pots fail to load
@@ -750,7 +750,7 @@
     BOMBS_OR_BOMBCHU: "can_hammer"
     BUGS: "has_explosives_or_hammer && has_bottle"
   locations:
-    "Hyrule Castle GS Grotto": "has_explosives_or_hammer && can_collect_distance"
+    "Hyrule Castle GS Grotto": "gs && has_explosives_or_hammer && can_collect_distance"
     "Hyrule Castle Grotto Pot 1": "has_explosives_or_hammer"
     "Hyrule Castle Grotto Pot 2": "has_explosives_or_hammer"
     "Hyrule Castle Grotto Pot 3": "has_explosives_or_hammer"
@@ -766,7 +766,7 @@
     "Ganon Castle Exterior After Bridge": "rainbow_bridge || (longshot_anywhere && trick(OOT_GANON_CASTLE_ENTRY))"
     "Near Fairy Fountain Defense": "can_lift_gold"
   locations:
-    "Ganon Castle Exterior GS": "true"
+    "Ganon Castle Exterior GS": "gs"
 "Ganon Castle Exterior After Bridge":
   region: GANON_CASTLE_EXTERIOR
   age_change: false
@@ -830,7 +830,7 @@
     "Lost Woods Target": "can_use_slingshot"
     "Lost Woods Skull Kid": "is_child && can_play_saria"
     "Lost Woods Memory Game": "is_child && can_play_minigame"
-    "Lost Woods Scrub Sticks Upgrade": "is_child && can_hit_scrub && scrub_price(0x00)"
+    "Lost Woods Scrub Sticks Upgrade": "is_child && business_scrub(0x00)"
     "Lost Woods Odd Mushroom": "adult_trade(COJIRO)"
     "Lost Woods Poacher's Saw": "adult_trade(ODD_POTION) && soul_npc(SOUL_NPC_KOKIRI)"
     "Lost Woods GS Soil Bridge": "gs_soil && can_damage_skull"
@@ -905,8 +905,8 @@
     MAGIC: "can_cut_grass"
     BUGS: "has_bottle && can_cut_grass"
   locations:
-    "Lost Woods Scrub Near Theater Left": "is_child && can_hit_scrub && scrub_price(0x01)"
-    "Lost Woods Scrub Near Theater Right": "is_child && can_hit_scrub && scrub_price(0x02)"
+    "Lost Woods Scrub Near Theater Left": "is_child && business_scrub(0x01)"
+    "Lost Woods Scrub Near Theater Right": "is_child && business_scrub(0x02)"
     "Lost Woods GS Soil Theater": "gs_soil && can_damage_skull"
     "Lost Woods GS Bean Ride": "is_adult && gs_night && (can_ride_bean(BEAN_LOST_WOODS_LATE) || climb_anywhere || hookshot_anywhere || (trick(OOT_LOST_WOODS_ADULT_GS) && can_collect_distance && (can_longshot || can_use_bow || has_bombchu || can_use_din)))"
     "Lost Woods Grass Deep 1": "can_cut_grass"
@@ -929,8 +929,8 @@
   exits:
     "Lost Woods Deep": "true"
   locations:
-    "Lost Woods Grotto Scrub Nuts Upgrade": "can_hit_scrub && scrub_price(0x03)"
-    "Lost Woods Grotto Scrub Back": "can_hit_scrub && scrub_price(0x04)"
+    "Lost Woods Grotto Scrub Nuts Upgrade": "business_scrub(0x03)"
+    "Lost Woods Grotto Scrub Back": "business_scrub(0x04)"
     "Lost Woods Grotto Scrub Big Fairy": "can_play_sun"
 "Sacred Meadow Entryway":
   region: SACRED_MEADOW
@@ -968,8 +968,8 @@
   exits:
     "Sacred Meadow": "true"
   locations:
-    "Sacred Meadow Storms Grotto Front Scrub": "can_hit_scrub && scrub_price(0x05)"
-    "Sacred Meadow Storms Grotto Back Scrub": "can_hit_scrub && scrub_price(0x06)"
+    "Sacred Meadow Storms Grotto Front Scrub": "business_scrub(0x05)"
+    "Sacred Meadow Storms Grotto Back Scrub": "business_scrub(0x06)"
 "Sacred Meadow Fairy Grotto":
   region: ENTRANCE
   age_change: false
@@ -1302,7 +1302,7 @@
   locations:
     "Death Mountain Trail Chest": "has_explosives_or_hammer"
     "Death Mountain Trail HP": "true"
-    "Death Mountain Trail GS Entrance": "has_explosives || (can_hammer && (is_adult || can_use_sticks || (age_sword_adult && has(SWORD_BIGGORON)) || has_ranged_weapon_child || can_use_din))"
+    "Death Mountain Trail GS Entrance": "gs && (has_explosives || (can_hammer && (is_adult || can_use_sticks || (age_sword_adult && has(SWORD_BIGGORON)) || has_ranged_weapon_child || can_use_din)))"
     "Death Mountain Trail GS Soil": "gs_soil && has_bombflowers && can_damage_skull"
     "Death Mountain Trail GS Above Dodongo":  "gs_night && is_adult && (can_hammer || trick(OOT_DMT_RED_ROCK_GS))"
     "Death Mountain Trail Rupee Upper": "is_child && event(BOULDER_DEATH_MOUNTAIN)"
@@ -1403,8 +1403,8 @@
     "Goron City Tunic": "is_adult && (has_explosives || can_use_bow || has_goron_bracelet) && soul_npc(SOUL_NPC_GORON_CHILD)"
     "Goron City Bomb Bag": "is_child && has_explosives && soul_npc(SOUL_NPC_GORON)"
     "Goron City Medigoron Giant Knife": "is_adult && (has_bombflowers || can_hammer) && can_use_wallet(2) && soul_npc(SOUL_NPC_MEDIGORON)"
-    "Goron City GS Platform": "is_adult"
-    "Goron City GS Maze": "is_child && (has_explosives_or_hammer || (climb_anywhere && can_damage_skull) || hookshot_anywhere)"
+    "Goron City GS Platform": "gs && is_adult"
+    "Goron City GS Maze": "gs && is_child && (has_explosives_or_hammer || (climb_anywhere && can_damage_skull) || hookshot_anywhere)"
     "Goron City Pot Stairs 1": "true"
     "Goron City Pot Stairs 2": "true"
     "Goron City Pot Stairs 3": "true"
@@ -1447,9 +1447,9 @@
   exits:
     "Goron City": "true"
   locations:
-    "Goron City Grotto Left Scrub": "can_hit_scrub && scrub_price(0x0b)"
-    "Goron City Grotto Center Scrub": "can_hit_scrub && scrub_price(0x0c)"
-    "Goron City Grotto Right Scrub": "can_hit_scrub && scrub_price(0x0d)"
+    "Goron City Grotto Left Scrub": "business_scrub(0x0b)"
+    "Goron City Grotto Center Scrub": "business_scrub(0x0c)"
+    "Goron City Grotto Right Scrub": "business_scrub(0x0d)"
 "Zora River Front":
   region: ZORA_RIVER
   time: flow
@@ -1463,7 +1463,7 @@
     ARROWS: "is_adult"
     MAGIC: "can_cut_grass"
   locations:
-    "Zora River GS Tree": "is_child && can_damage_skull"
+    "Zora River GS Tree": "gs && is_child && can_damage_skull"
     "Zora River Grass Pack Bush 01": "can_cut_grass"
     "Zora River Grass Pack Bush 02": "can_cut_grass"
     "Zora River Grass Pack Bush 03": "can_cut_grass"
@@ -1521,8 +1521,8 @@
   exits:
     "Zora River": "true"
   locations:
-    "Zora River Storms Grotto Front Scrub": "can_hit_scrub && scrub_price(0x12)"
-    "Zora River Storms Grotto Back Scrub": "can_hit_scrub && scrub_price(0x13)"
+    "Zora River Storms Grotto Front Scrub": "business_scrub(0x12)"
+    "Zora River Storms Grotto Back Scrub": "business_scrub(0x13)"
 "Zora River Open Grotto":
   region: ZORA_RIVER
   exits:
@@ -1711,7 +1711,7 @@
   locations:
     "Laboratory Dive": "has_scale_raw(2) || (trick(OOT_LAB_DIVE_NO_GOLD_SCALE) && has_iron_boots && can_hookshot)"
     "Laboratory Eye Drops": "adult_trade(EYEBALL_FROG)"
-    "Laboratory GS Crate": "has_iron_boots && can_hookshot"
+    "Laboratory GS Crate": "gs && has_iron_boots && can_hookshot"
     "Laboratory Rupee 1": "can_dive_big"
     "Laboratory Rupee 2": "can_dive_big"
     "Laboratory Rupee 3": "can_dive_big"
@@ -1762,9 +1762,9 @@
   exits:
     "Lake Hylia": "true"
   locations:
-    "Lake Hylia Grotto Left Scrub": "can_hit_scrub && scrub_price(0x14)"
-    "Lake Hylia Grotto Center Scrub": "can_hit_scrub && scrub_price(0x15)"
-    "Lake Hylia Grotto Right Scrub": "can_hit_scrub && scrub_price(0x16)"
+    "Lake Hylia Grotto Left Scrub": "business_scrub(0x14)"
+    "Lake Hylia Grotto Center Scrub": "business_scrub(0x15)"
+    "Lake Hylia Grotto Right Scrub": "business_scrub(0x16)"
 "Zora Fountain":
   region: ZORA_FOUNTAIN
   exits:
@@ -1778,7 +1778,7 @@
   locations:
     "Zora Fountain Iceberg HP": "is_adult"
     "Zora Fountain GS Wall": "is_child && gs_night && (can_collect_distance || (climb_anywhere && (can_use_sword || can_use_sticks || has_ranged_weapon || has_explosives || can_use_din)))"
-    "Zora Fountain GS Tree": "is_child && can_damage_skull"
+    "Zora Fountain GS Tree": "gs && is_child && can_damage_skull"
     "Zora Fountain GS Upper": "is_adult && gs_night && ((has_explosives_or_hammer && can_collect_distance && can_lift_silver) || (climb_anywhere && (has_explosives || has(SWORD_BIGGORON) || has_ranged_weapon || can_use_din)))"
     "Zora Fountain Child Pot 1": "is_child"
     "Zora Fountain Child Pot 2": "is_child"
@@ -1858,9 +1858,9 @@
     ARROWS: "has_tunic_goron_strict || has_explosives_or_hammer"
     MAGIC: "has_tunic_goron_strict || has_explosives_or_hammer"
   locations:
-    "Death Mountain Crater GS Crate": "is_child && can_damage_skull"
+    "Death Mountain Crater GS Crate": "gs && is_child && can_damage_skull"
     "Death Mountain Crater Alcove HP": "true"
-    "Death Mountain Crater Scrub Child": "is_child && can_hit_scrub && scrub_price(0x0e)"
+    "Death Mountain Crater Scrub Child": "is_child && business_scrub(0x0e)"
   gossip:
     "Death Mountain Crater Gossip Wall": "has_explosives"
 "Death Mountain Crater Bottom":
@@ -1945,9 +1945,9 @@
   exits:
     "Death Mountain Crater Bottom": "true"
   locations:
-    "Death Mountain Crater Grotto Left Scrub": "can_hit_scrub && scrub_price(0x0f)"
-    "Death Mountain Crater Grotto Center Scrub": "can_hit_scrub && scrub_price(0x10)"
-    "Death Mountain Crater Grotto Right Scrub": "can_hit_scrub && scrub_price(0x11)"
+    "Death Mountain Crater Grotto Left Scrub": "business_scrub(0x0f)"
+    "Death Mountain Crater Grotto Center Scrub": "business_scrub(0x10)"
+    "Death Mountain Crater Grotto Right Scrub": "business_scrub(0x11)"
 "Fairy Fountain Double Magic":
   region: ENTRANCE
   exits:
@@ -2030,8 +2030,8 @@
   exits:
     "Gerudo Valley After Bridge": "true"
   locations:
-    "Gerudo Valley Grotto Front Scrub": "can_hit_scrub && scrub_price(0x17)"
-    "Gerudo Valley Grotto Back Scrub": "can_hit_scrub && scrub_price(0x18)"
+    "Gerudo Valley Grotto Front Scrub": "business_scrub(0x17)"
+    "Gerudo Valley Grotto Back Scrub": "business_scrub(0x18)"
 "Gerudo Valley Tent":
   region: ENTRANCE
   exits:
@@ -2147,7 +2147,7 @@
     BOMBCHU: "can_use_wallet(2)"
   locations:
     "Haunted Wasteland Chest": "has_fire"
-    "Haunted Wasteland GS": "can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_sword || can_use_sticks || can_use_din))"
+    "Haunted Wasteland GS": "gs && (can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_sword || can_use_sticks || can_use_din)))"
     "Haunted Wasteland Pot 1": "true"
     "Haunted Wasteland Pot 2": "true"
     "Haunted Wasteland Pot 3": "true"
@@ -2205,5 +2205,5 @@
   exits:
     "Desert Colossus": "true"
   locations:
-    "Desert Colossus Grotto Front Scrub": "can_hit_scrub && scrub_price(0x19)"
-    "Desert Colossus Grotto Back Scrub": "can_hit_scrub && scrub_price(0x1a)"
+    "Desert Colossus Grotto Front Scrub": "business_scrub(0x19)"
+    "Desert Colossus Grotto Back Scrub": "business_scrub(0x1a)"

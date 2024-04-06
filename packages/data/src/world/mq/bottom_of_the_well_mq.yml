@@ -28,9 +28,9 @@
     "MQ Bottom of the Well Lens Chest": "(can_play_zelda || has_hover_boots) && small_keys_botw(2) && has_explosives && (has_weapon || can_use_sticks || can_use_din || has_iron_boots || can_play_sun)" #Trying to get past these ReDeads/Wallmaster with actually nothing isn't fair.'
     "MQ Bottom of the Well Dead Hand Key": "has_explosives"
     "MQ Bottom of the Well East Middle Room Key": "can_play_zelda || (has_explosives_or_hammer && has_hover_boots)"
-    "MQ Bottom of the Well GS Basement": "can_damage_skull"
-    "MQ Bottom of the Well GS West Middle Room": "(can_play_zelda || has_hover_boots) && has_explosives"
-    "MQ Bottom of the Well GS Coffin Room": "can_damage_skull && small_keys_botw(2)"
+    "MQ Bottom of the Well GS Basement": "gs && can_damage_skull"
+    "MQ Bottom of the Well GS West Middle Room": "gs && (can_play_zelda || has_hover_boots) && has_explosives"
+    "MQ Bottom of the Well GS Coffin Room": "gs && can_damage_skull && small_keys_botw(2)"
     "MQ Bottom of the Well Pot Lobby Cage 1": "can_play_zelda || (has_explosives_or_hammer && has_hover_boots)"
     "MQ Bottom of the Well Pot Lobby Cage 2": "can_play_zelda || (has_explosives_or_hammer && has_hover_boots)"
     "MQ Bottom of the Well Pot Lobby Cage 3": "can_play_zelda || (has_explosives_or_hammer && has_hover_boots)"

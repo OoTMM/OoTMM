@@ -273,6 +273,10 @@ void comboCreateSave(void* unk, void* buffer)
         memset(gSharedCustomSave.soulsBossMm, 0xff, sizeof(gSharedCustomSave.soulsBossMm));
     if (!comboConfig(CFG_OOT_SOULS_NPC))
         memset(gSharedCustomSave.soulsNpcOot, 0xff, sizeof(gSharedCustomSave.soulsNpcOot));
+    if (!comboConfig(CFG_OOT_SOULS_MISC))
+        memset(gSharedCustomSave.soulsMiscOot, 0xff, sizeof(gSharedCustomSave.soulsMiscOot));
+    if (!comboConfig(CFG_MM_SOULS_MISC))
+        memset(gSharedCustomSave.soulsMiscMm, 0xff, sizeof(gSharedCustomSave.soulsMiscMm));
 
     /* Apply ocarina buttons */
     if (!comboConfig(CFG_OOT_OCARINA_BUTTONS))

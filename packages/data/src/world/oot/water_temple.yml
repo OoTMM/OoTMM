@@ -61,7 +61,7 @@
   events:
     WATER_LEVEL_MIDDLE: "can_play_zelda"
   locations:
-    "Water Temple GS Center": "can_longshot || hookshot_anywhere || (climb_anywhere && (has_ranged_weapon || has_bombchu))"
+    "Water Temple GS Center": "gs && (can_longshot || hookshot_anywhere || (climb_anywhere && (has_ranged_weapon || has_bombchu)))"
 "Water Temple Under Center":
   dungeon: Water
   locations:
@@ -106,7 +106,7 @@
   exits:
     "Water Temple Boss Key Room": "small_keys_water(5) && ((is_adult && can_dive_small) || has_iron_boots || hookshot_anywhere)"
   locations:
-    "Water Temple GS Waterfalls": "is_adult || can_collect_distance || ((can_use_sword_master || (age_sword_adult && has(SWORD_BIGGORON)) || can_use_sticks || has_ranged_weapon || can_use_din || (has_hover_boots && (can_use_sword_kokiri || can_use_sword_goron || has_explosives))) && (has_hover_boots || climb_anywhere))"
+    "Water Temple GS Waterfalls": "gs && (is_adult || can_collect_distance || ((can_use_sword_master || (age_sword_adult && has(SWORD_BIGGORON)) || can_use_sticks || has_ranged_weapon || can_use_din || (has_hover_boots && (can_use_sword_kokiri || can_use_sword_goron || has_explosives))) && (has_hover_boots || climb_anywhere)))"
 "Water Temple Boss Key Room":
   dungeon: Water
   locations:
@@ -118,7 +118,7 @@
   exits:
     "Water Temple Before Dark Link": "small_keys_water(5) && can_hookshot"
   locations:
-    "Water Temple GS Large Pit": "can_longshot || (can_hit_triggers_distance && climb_anywhere) || (climb_anywhere && has_bombchu && trick(OOT_WATER_PIT_GS_CHU))"
+    "Water Temple GS Large Pit": "gs && (can_longshot || (can_hit_triggers_distance && climb_anywhere) || (climb_anywhere && has_bombchu && trick(OOT_WATER_PIT_GS_CHU)))"
 "Water Temple Before Dark Link":
   dungeon: Water
   exits:
@@ -146,7 +146,7 @@
     "Water Temple Dragon Room Ledge": "can_hit_triggers_distance"
     "Water Temple Longshot Room": "longshot_anywhere && climb_anywhere && (is_child || event(LONGSHOT_TIME_BLOCK))"
   locations:
-    "Water Temple GS River": "has_iron_boots"
+    "Water Temple GS River": "gs && has_iron_boots"
     "Water Temple Pot River 1": "true"
     "Water Temple Pot River 2": "true"
     "Water Temple Heart 1": "true"
@@ -167,7 +167,7 @@
 "Water Temple Inside Cage":
   dungeon: Water
   locations:
-    "Water Temple GS Cage": "has_weapon || can_use_sticks"
+    "Water Temple GS Cage": "gs && (has_weapon || can_use_sticks)"
     "Water Temple Pot Skull Cage 1": "has_weapon || can_use_sticks"
     "Water Temple Pot Skull Cage 2": "has_weapon || can_use_sticks"
     "Water Temple Pot Skull Cage 3": "has_weapon || can_use_sticks"

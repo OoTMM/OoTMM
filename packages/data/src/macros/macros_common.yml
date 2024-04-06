@@ -40,5 +40,9 @@
 "soul_leever": "soul_enemy(SOUL_ENEMY_LEEVER) || soul_enemy(SHARED_SOUL_ENEMY_LEEVER)"
 "soul_stalchild": "soul_enemy(SOUL_ENEMY_STALCHILD) || soul_enemy(SHARED_SOUL_ENEMY_STALCHILD)"
 
+"shared_soul_misc(a,b)": "cond(setting(sharedSoulsMisc), soul_misc(b), soul_misc(a))"
+"soul_gs": "shared_soul_misc(SOUL_MISC_GS, SHARED_SOUL_MISC_GS)"
+"soul_business_scrub": "shared_soul_misc(SOUL_MISC_BUSINESS_SCRUB, SHARED_SOUL_MISC_BUSINESS_SCRUB)"
+
 # Settings
 "is_goal_triforce": "setting(goal, triforce) || setting(goal, triforce3)"

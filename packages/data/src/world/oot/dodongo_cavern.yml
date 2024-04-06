@@ -13,7 +13,7 @@
     "Dodongo Cavern Skull": "event(DC_BOMB_EYES)"
   locations:
     "Dodongo Cavern Map Chest": "true"
-    "Dodongo Cavern Lobby Scrub": "can_hit_scrub && scrub_price(0x1f)"
+    "Dodongo Cavern Lobby Scrub": "business_scrub(0x1f)"
   gossip:
     "Dodongo Cavern Gossip": "true"
 "Dodongo Cavern Right Corridor":
@@ -23,7 +23,7 @@
     "Dodongo Cavern Side Room": "(soul_enemy(SOUL_ENEMY_BABY_DODONGO) && (has_weapon || can_use_sticks)) || has_explosives_or_hammer || has_blue_fire_arrows_mudwall"
     "Dodongo Cavern Miniboss 1": "true"
   locations:
-    "Dodongo Cavern GS Scarecrow": "(is_adult && scarecrow_hookshot) || (climb_anywhere && can_damage_skull) || hookshot_anywhere"
+    "Dodongo Cavern GS Scarecrow": "gs && ((is_adult && scarecrow_hookshot) || (climb_anywhere && can_damage_skull) || hookshot_anywhere)"
     "Dodongo Cavern Pot Right Corridor Pot 1": "true"
     "Dodongo Cavern Pot Right Corridor Pot 2": "true"
     "Dodongo Cavern Pot Right Corridor Pot 3": "true"
@@ -35,7 +35,7 @@
   exits:
     "Dodongo Cavern Right Corridor": "true"
   locations:
-    "Dodongo Cavern GS Side Room": "can_damage_skull"
+    "Dodongo Cavern GS Side Room": "gs && can_damage_skull"
     # Normally fails to load
     "Dodongo Cavern Grass East Corridor Side Room": "can_cut_grass"
 "Dodongo Cavern Miniboss 1":
@@ -66,7 +66,7 @@
   exits:
     "Dodongo Cavern Green Room": "true"
   locations:
-    "Dodongo Cavern Green Side Room Scrub": "can_hit_scrub && scrub_price(0x1d)"
+    "Dodongo Cavern Green Side Room Scrub": "business_scrub(0x1d)"
 "Dodongo Cavern Main Ledge":
   dungeon: DC
   exits:
@@ -86,8 +86,8 @@
     "Dodongo Cavern Stairs": "true"
     "Dodongo Cavern Bomb Bag Room 1": "true"
   locations:
-    "Dodongo Cavern GS Stairs Vines": "true"
-    "Dodongo Cavern GS Stairs Top": "(can_collect_distance && event(DC_SHORTCUT)) || hookshot_anywhere || (climb_anywhere && (has_explosives || has_ranged_weapon || can_use_din))"
+    "Dodongo Cavern GS Stairs Vines": "gs"
+    "Dodongo Cavern GS Stairs Top": "gs && ((can_collect_distance && event(DC_SHORTCUT)) || hookshot_anywhere || (climb_anywhere && (has_explosives || has_ranged_weapon || can_use_din)))"
     "Dodongo Cavern Pot Stairs Pot 1": "true"
     "Dodongo Cavern Pot Stairs Pot 2": "true"
     "Dodongo Cavern Pot Stairs Pot 3": "true"
@@ -118,8 +118,8 @@
   exits:
     "Dodongo Cavern Bomb Bag Room 1": "true"
   locations:
-    "Dodongo Cavern Bomb Bag Side Room Left Scrub": "can_hit_scrub && scrub_price(0x1e)"
-    "Dodongo Cavern Bomb Bag Side Room Right Scrub": "can_hit_scrub && scrub_price(0x1c)"
+    "Dodongo Cavern Bomb Bag Side Room Left Scrub": "business_scrub(0x1e)"
+    "Dodongo Cavern Bomb Bag Side Room Right Scrub": "business_scrub(0x1c)"
 "Dodongo Cavern Miniboss 2":
   dungeon: DC
   exits:
@@ -160,7 +160,7 @@
     "Dodongo Cavern Main": "true"
     "Dodongo Cavern Boss": "true"
   locations:
-    "Dodongo Cavern GS Near Boss": "true"
+    "Dodongo Cavern GS Near Boss": "gs"
     "Dodongo Cavern Pot Skull 1": "true"
     "Dodongo Cavern Pot Skull 2": "true"
     "Dodongo Cavern Pot Skull 3": "true"

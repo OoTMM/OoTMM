@@ -57,7 +57,7 @@
   locations:
     "Shadow Temple Spinning Blades Visible": "event(SHADOW_INVISIBLE_SCYTHE_GATE)"
     "Shadow Temple Spinning Blades Invisible": "event(SHADOW_INVISIBLE_SCYTHE_GATE)"
-    "Shadow Temple GS Invisible Scythe": "event(SHADOW_INVISIBLE_SCYTHE_GATE) && (can_collect_distance || climb_anywhere)"
+    "Shadow Temple GS Invisible Scythe": "gs && event(SHADOW_INVISIBLE_SCYTHE_GATE) && (can_collect_distance || climb_anywhere)"
     "Shadow Temple SR Pit 1": "true"
     "Shadow Temple SR Pit 2": "true"
     "Shadow Temple SR Pit 3": "true"
@@ -72,7 +72,7 @@
     "Shadow Temple Falling Spikes Lower": "true"
     "Shadow Temple Falling Spikes Upper 1": "(is_adult && has_goron_bracelet) || climb_anywhere || hookshot_anywhere"
     "Shadow Temple Falling Spikes Upper 2": "(is_adult && has_goron_bracelet) || climb_anywhere || hookshot_anywhere"
-    "Shadow Temple GS Falling Spikes": "can_collect_distance || (climb_anywhere && can_damage_skull)"
+    "Shadow Temple GS Falling Spikes": "gs && (can_collect_distance || (climb_anywhere && can_damage_skull))"
     "Shadow Temple Pot Falling Spikes Bottom 1": "true"
     "Shadow Temple Pot Falling Spikes Bottom 2": "true"
     "Shadow Temple Pot Falling Spikes Top 1": "(is_adult && has_goron_bracelet) || climb_anywhere || hookshot_anywhere"
@@ -94,7 +94,7 @@
   dungeon: Shadow
   locations:
     "Shadow Temple Skull": "has_bombflowers"
-    "Shadow Temple GS Skull Pot": "can_damage_skull || has_goron_bracelet"
+    "Shadow Temple GS Skull Pot": "gs && (can_damage_skull || has_goron_bracelet)"
 "Shadow Temple Wind Front":
   dungeon: Shadow
   exits:
@@ -129,7 +129,7 @@
   events:
     SHADOW_SHORTCUT: "has_goron_bracelet"
   locations:
-    "Shadow Temple GS Near Boat": "can_longshot || hookshot_anywhere || (climb_anywhere && (has_weapon || has_ranged_weapon || has_explosives || can_use_din))"
+    "Shadow Temple GS Near Boat": "gs && (can_longshot || hookshot_anywhere || (climb_anywhere && (has_weapon || has_ranged_weapon || has_explosives || can_use_din)))"
     "Shadow Temple Heart Shortcut 1": "scarecrow_longshot || hookshot_anywhere || climb_anywhere"
     "Shadow Temple Heart Shortcut 2": "scarecrow_longshot || hookshot_anywhere || climb_anywhere"
 "Shadow Temple After Boat":
@@ -142,7 +142,7 @@
     "Shadow Temple Boss Key Room 1": "can_use_din || climb_anywhere || hookshot_anywhere"
     "Shadow Temple Boss Key Room 2": "can_use_din || climb_anywhere || hookshot_anywhere"
     "Shadow Temple Invisible Floormaster": "soul_floormaster && (has_weapon || can_hit_triggers_distance || can_use_din || can_use_sticks || can_hammer)"
-    "Shadow Temple GS Triple Skull Pot": "can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_weapon || can_use_sticks || can_use_din || has_bombflowers))"
+    "Shadow Temple GS Triple Skull Pot": "gs && (can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_weapon || can_use_sticks || can_use_din || has_bombflowers)))"
     "Shadow Temple Pot Boss Key Room": "true"
     "Shadow Temple Pot Invisible Floormaster Room 1": "true"
     "Shadow Temple Pot Invisible Floormaster Room 2": "true"

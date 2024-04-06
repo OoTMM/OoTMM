@@ -5,7 +5,7 @@
     "Forest Temple Main": "is_adult || has_nuts || has_weapon || has_explosives_or_hammer || has_ranged_weapon_child"
   locations:
     "Forest Temple Tree Small Key": "true"
-    "Forest Temple GS Entrance": "has_ranged_weapon || has_explosives || can_use_din"
+    "Forest Temple GS Entrance": "gs && (has_ranged_weapon || has_explosives || can_use_din)"
 "Forest Temple Wallmaster West":
   region: NONE
   exits:
@@ -27,7 +27,7 @@
   events:
     FOREST_POE_4: "event(FOREST_POE_1) && event(FOREST_POE_2) && event(FOREST_POE_3)"
   locations:
-    "Forest Temple GS Main": "can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_din))"
+    "Forest Temple GS Main": "gs && (can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_din)))"
     "Forest Temple Pot Main Room 1": "true"
     "Forest Temple Pot Main Room 2": "true"
     "Forest Temple Pot Main Room 3": "true"
@@ -51,7 +51,7 @@
     STICKS: "can_hookshot || can_hammer || can_boomerang || (has_nuts && has_weapon)"
     NUTS: "is_adult || has_weapon || has_explosives || can_use_slingshot"
   locations:
-    "Forest Temple GS Garden West": "(can_longshot || (climb_anywhere && has_bombchu)) || (event(FOREST_LEDGE_REACHED) && (can_collect_distance || (climb_anywhere && has_ranged_weapon)))"
+    "Forest Temple GS Garden West": "gs && ((can_longshot || (climb_anywhere && has_bombchu)) || (event(FOREST_LEDGE_REACHED) && (can_collect_distance || (climb_anywhere && has_ranged_weapon))))"
 "Forest Temple Garden West Ledge":
   dungeon: Forest
   exits:
@@ -93,7 +93,7 @@
     NUTS: "is_adult || has_weapon || has_explosives || can_use_slingshot"
   locations:
     "Forest Temple Garden": "can_hookshot || climb_anywhere"
-    "Forest Temple GS Garden East": "can_hookshot || (climb_anywhere && (has_ranged_weapon || can_use_sword_master || has_explosives || can_use_din || (age_sword_adult && has(SWORD_BIGGORON)) || can_use_sticks || (can_use_sword_kokiri && has_hover_boots)))"
+    "Forest Temple GS Garden East": "gs && (can_hookshot || (climb_anywhere && (has_ranged_weapon || can_use_sword_master || has_explosives || can_use_din || (age_sword_adult && has(SWORD_BIGGORON)) || can_use_sticks || (can_use_sword_kokiri && has_hover_boots))))"
 "Forest Temple Well":
   dungeon: Forest
   exits:
@@ -180,7 +180,7 @@
   locations:
     "Forest Temple Checkerboard": "true"
     "Forest Temple Garden": "true"
-    "Forest Temple GS Garden East": "can_collect_distance || (climb_anywhere && (has_ranged_weapon || can_use_sword_master || has_explosives || can_use_din || (age_sword_adult && has(SWORD_BIGGORON)) || can_use_sticks || (can_use_sword_kokiri && has_hover_boots)))"
+    "Forest Temple GS Garden East": "gs && (can_collect_distance || (climb_anywhere && (has_ranged_weapon || can_use_sword_master || has_explosives || can_use_din || (age_sword_adult && has(SWORD_BIGGORON)) || can_use_sticks || (can_use_sword_kokiri && has_hover_boots))))"
 "Forest Temple Poe 3":
   dungeon: Forest
   exits:
@@ -196,4 +196,4 @@
     "Forest Temple Boss": "boss_key(BOSS_KEY_FOREST)"
   locations:
     "Forest Temple Antichamber": "true"
-    "Forest Temple GS Antichamber": "can_collect_distance || climb_anywhere"
+    "Forest Temple GS Antichamber": "gs && (can_collect_distance || climb_anywhere)"

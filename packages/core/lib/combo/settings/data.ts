@@ -1379,6 +1379,20 @@ export const SETTINGS = [{
   description: 'Add NPC souls into the item pool. NPCs won\'t spawn unless their soul is obtained.',
   default: false
 }, {
+  key: 'soulsMiscOot',
+  name: 'Misc. Souls (OoT)',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Add misc. souls into the item pool. Corresponding actors won\'t spawn unless their soul is obtained.',
+  default: false
+}, {
+  key: 'soulsMiscMm',
+  name: 'Misc. Souls (MM)',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Add misc. souls into the item pool. Corresponding actors won\'t spawn unless their soul is obtained.',
+  default: false
+}, {
   key: 'clocks',
   name: 'Clocks as Items',
   category: 'items.extensions',
@@ -1615,6 +1629,13 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false,
   cond: (s: any) => s.soulsEnemyOot && s.soulsEnemyMm,
+}, {
+  key: 'sharedSoulsMisc',
+  name: 'Shared Misc. Souls',
+  category: 'items.shared',
+  type: 'boolean',
+  default: false,
+  cond: (s: any) => s.soulsMiscOot && s.soulsMiscMm,
 }, {
   key: 'sharedOcarinaButtons',
   name: 'Shared Ocarina Buttons',

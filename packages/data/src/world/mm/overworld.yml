@@ -220,7 +220,7 @@
   locations:
     "Clock Town South Chest Lower": "can_hookshot || (is_adult && can_hookshot_short) || short_hook_anywhere || (has(MASK_DEKU) && event(CLOCK_TOWN_SCRUB)) || trick(MM_SCT_NOTHING) || can_goron_bomb_jump"
     "Clock Town South Chest Upper": "(can_hookshot || short_hook_anywhere || (has(MASK_DEKU) && event(CLOCK_TOWN_SCRUB)) || (can_goron_bomb_jump && can_hookshot_short)) && final_day"
-    "Clock Town Business Scrub": "event(CLOCK_TOWN_SCRUB)"
+    "Clock Town Business Scrub": "soul_business_scrub && event(CLOCK_TOWN_SCRUB)"
     "Clock Town Post Box": "has(MASK_POSTMAN)"
 "Clock Town South Upper West":
   region: CLOCK_TOWN_SOUTH
@@ -550,7 +550,7 @@
     "Astral Observatory Junction": "true"
     "Astral Observatory Balcony": "true"
   events:
-    SCRUB_TELESCOPE: "true"
+    SCRUB_TELESCOPE: "soul_business_scrub"
     TEAR_TELESCOPE: "true"
     SCARECROW: "can_play_scarecrow"
 "Astral Observatory Balcony":
@@ -1205,8 +1205,8 @@
     FAIRY: "true"
   locations:
     "Southern Swamp HP": "(has(DEED_LAND) && has(MASK_DEKU)) || (trick(MM_SOUTHERN_SWAMP_SCRUB_HP_GORON) && has_mask_goron) || short_hook_anywhere"
-    "Southern Swamp Scrub Deed": "has(DEED_LAND)"
-    "Southern Swamp Scrub Shop": "has(MASK_DEKU) && can_use_wallet(1)"
+    "Southern Swamp Scrub Deed": "soul_business_scrub && has(DEED_LAND)"
+    "Southern Swamp Scrub Shop": "soul_business_scrub && has(MASK_DEKU) && can_use_wallet(1)"
     "Southern Swamp Pot 1": "true"
     "Southern Swamp Pot 2": "true"
     "Southern Swamp Pot 3": "true"
@@ -1857,8 +1857,8 @@
     RUPEES: "can_break_snowballs || (can_use_light_arrows && soul_tektite)"
   locations:
     "Goron Village HP": "(has(DEED_SWAMP) && has(MASK_DEKU)) || short_hook_anywhere"
-    "Goron Village Scrub Deed": "has(DEED_SWAMP) && has(MASK_DEKU)"
-    "Goron Village Scrub Bomb Bag": "has_mask_goron && can_use_wallet(2)"
+    "Goron Village Scrub Deed": "soul_business_scrub && has(DEED_SWAMP) && has(MASK_DEKU)"
+    "Goron Village Scrub Bomb Bag": "soul_business_scrub && has_mask_goron && can_use_wallet(2)"
 #    "Goron Village Scrub Bomb Bag": "(has_mask_goron || (has(MOON_TEAR) && has(DEED_LAND) && has(DEED_SWAMP))) && can_use_wallet(2)"
     "Goron Powder Keg": "event(POWDER_KEG_TRIAL) || (short_hook_anywhere && can_use_keg)"
 "Front of Lone Peak Shrine":
@@ -2573,8 +2573,8 @@
     "Zora Hall": "true"
   locations:
     "Zora Hall Scrub HP": "(trick(MM_ZORA_HALL_SCRUB_HP_NO_DEKU) && (has_mask_goron || is_tall)) || (has_mask_goron && has(MASK_DEKU) && has(DEED_MOUNTAIN)) || short_hook_anywhere"
-    "Zora Hall Scrub Shop": "has_mask_zora && can_use_wallet(1)"
-    "Zora Hall Scrub Deed": "has(DEED_MOUNTAIN) && has_mask_goron"
+    "Zora Hall Scrub Shop": "soul_business_scrub && has_mask_zora && can_use_wallet(1)"
+    "Zora Hall Scrub Deed": "soul_business_scrub && has(DEED_MOUNTAIN) && has_mask_goron"
 "Zora Cape Peninsula":
   region: ZORA_CAPE
   exits:
@@ -2823,9 +2823,9 @@
     "Ikana Valley Grotto": "true"
     "Swamp Front": "true"
   locations:
-    "Ikana Valley Scrub Rupee": "has(DEED_OCEAN) && has_mask_zora"
+    "Ikana Valley Scrub Rupee": "soul_business_scrub && has(DEED_OCEAN) && has_mask_zora"
     "Ikana Valley Scrub HP": "(has(DEED_OCEAN) && has_mask_zora && has(MASK_DEKU)) || hookshot_anywhere"
-    "Ikana Valley Scrub Shop": "can_use_wallet(2)"
+    "Ikana Valley Scrub Shop": "soul_business_scrub && can_use_wallet(2)"
   gossip:
     "Ikana Valley Gossip Lower": "true"
     "Ikana Valley Gossip Scrub": "(has(DEED_OCEAN) && has_mask_zora && has(MASK_DEKU)) || hookshot_anywhere"

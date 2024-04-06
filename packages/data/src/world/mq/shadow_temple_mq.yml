@@ -81,7 +81,7 @@
     "MQ Shadow Temple Spike Curtain Ground Chest": "true"
     "MQ Shadow Temple Spike Curtain Upper Cage Chest": "has_goron_bracelet && is_adult"
     "MQ Shadow Temple Spike Curtain Upper Switch Chest": "has_goron_bracelet && is_adult"
-    "MQ Shadow Temple GS Spike Curtain": "can_collect_distance"
+    "MQ Shadow Temple GS Spike Curtain": "gs && can_collect_distance"
     "MQ Shadow Temple SR Pit Back": "true"
     "MQ Shadow Temple SR Pit Midair Low": "can_longshot"
     "MQ Shadow Temple SR Pit Midair High": "can_longshot"
@@ -117,8 +117,8 @@
     "MQ Shadow Temple Wind Hint Chest": "true"
     "MQ Shadow Temple After Wind Gibdos Chest": "soul_redead_gibdo && (has_weapon || can_use_sticks || can_use_din)"
     "MQ Shadow Temple After Wind Bomb Chest": "has_explosives"
-    "MQ Shadow Temple GS Wind Hint": "true"
-    "MQ Shadow Temple GS After Wind Bomb": "has_explosives"
+    "MQ Shadow Temple GS Wind Hint": "gs"
+    "MQ Shadow Temple GS After Wind Bomb": "gs && has_explosives"
     "MQ Shadow Temple Pot Room Before Boat 1": "has_weapon || can_use_sticks || can_use_din || can_play_sun" #It would be too unfair to get around the Gibdos otherwise
     "MQ Shadow Temple Pot Room Before Boat 2": "has_weapon || can_use_sticks || can_use_din || can_play_sun" #It would be too unfair to get around the Gibdos otherwise
     "MQ Shadow Temple Flying Pot Room Before Boat 1": "soul_flying_pot && ((has_weapon || can_use_sticks || can_use_din) || (can_play_sun))" #It would be too unfair to get around the Gibdos otherwise
@@ -132,8 +132,8 @@
     "Shadow Temple Boss": "boss_key(BOSS_KEY_SHADOW) && can_use_bow || longshot_anywhere || climb_anywhere"
     "Shadow Temple Final Side Rooms": "(can_use_bow && ((can_play_time && can_longshot) || hookshot_anywhere)) || longshot_anywhere || climb_anywhere"
   locations:
-    "MQ Shadow Temple GS After Boat": "true"
-    "MQ Shadow Temple GS Pre-Boss": "can_use_bow"
+    "MQ Shadow Temple GS After Boat": "gs"
+    "MQ Shadow Temple GS Pre-Boss": "gs && can_use_bow"
     "MQ Shadow Temple Pot After Boat Before Bridge 1": "true"
     "MQ Shadow Temple Pot After Boat Before Bridge 2": "true"
     "MQ Shadow Temple Pot After Boat After Bridge 1": "can_use_bow"

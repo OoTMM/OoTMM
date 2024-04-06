@@ -206,6 +206,7 @@
 - { id: BUTTON_C_UP, func: Button, params: [1, 0, BTN_C_VERTICAL_0] }
 - { id: BUTTON_C_DOWN, func: Button, params: [1, 1, BTN_C_VERTICAL_0] }
 - { id: SOUL_NPC, func: CustomGS, params: [5] }
+- { id: SOUL_MISC, func: CustomGS, params: [6] }
 - { id: BOMBCHU_BAG, func: BombchuBag, params: [BOMBCHU_BAG_0, BOMBCHU_BAG_1, BOMBCHU_BAG_2] }
 - { id: FAIRY_BIG, func: BigFairy, params: [0x6000bd0, 0x6000db8, 0x6000ef0] }
 - { id: BOTTLE_BLUE_FIRE, func: BottleBlueFire, params: [0x6000670, 0x6000750] }

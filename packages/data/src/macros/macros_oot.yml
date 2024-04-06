@@ -163,9 +163,13 @@
 "has_bugs": "has_bottle && (renewable(BUG) || event(BUGS))"
 "has_fish": "has_bottle && (renewable(FISH) || event(FISH))"
 
+# GS
+"gs": "soul_gs"
+"gs_soil": "gs && is_child && has_bugs"
+"gs_night": "gs && is_night && (trick(OOT_NIGHT_GS) || can_play_sun)"
+
 #Specific Interaction Macros:
 "can_ride_epona": "is_adult && can_play_epona"
-"gs_soil": "is_child && has_bugs"
 "adult_trade(x)": "is_adult && has(x)"
 "has_blue_fire": "has_blue_fire_arrows || (has_bottle && (event(BLUE_FIRE) || renewable(BLUE_FIRE) || renewable(BOTTLE_BLUE_FIRE)))"
 "can_ride_bean(x)": "is_adult && event(x)"
@@ -180,7 +184,6 @@
 "carpenters_rescued": "setting(gerudoFortress, open) || (event(CARPENTER_1) && (setting(gerudoFortress, single) || (event(CARPENTER_2) && event(CARPENTER_3) && event(CARPENTER_4))))"
 
 #Trick Macros
-"gs_night": "is_night && (trick(OOT_NIGHT_GS) || can_play_sun)"
 "has_lens": "has_lens_strict || trick(OOT_LENS)"
 "trick_mido": "trick(OOT_MIDO_SKIP) && (has_bow || has_hookshot(1) || has(SHARED_ARROW_FIRE) || has(ARROW_FIRE) || has(SHARED_ARROW_LIGHT) || has(ARROW_LIGHT))"
 
@@ -196,6 +199,7 @@
 "king_zora_moved": "event(KING_ZORA_LETTER) || setting(zoraKing, open) || (setting(zoraKing, adult) && is_adult)"
 "can_move_mido": "(is_child && has_sword_kokiri && renewable(SHIELD_DEKU)) || setting(dekuTree, open)"
 "mido_moved": "setting(dekuTree, open) || (event(MIDO_MOVED) && soul_npc(SOUL_NPC_MIDO))"
+"business_scrub(id)": "soul_business_scrub && can_hit_scrub && scrub_price(id)"
 
 # Wallets
 "has_wallet(n)": "cond(setting(childWallets), has(WALLET, n) || has(SHARED_WALLET, n), has(WALLET, n - 1) || has(SHARED_WALLET, n - 1))"
@@ -272,6 +276,7 @@
 "soul_enemy(x)": "(!setting(soulsEnemyOot)) || has(x)"
 "soul_boss(x)": "(!setting(soulsBossOot)) || has(x)"
 "soul_npc(x)": "(!setting(soulsNpcOot)) || has(x)"
+"soul_misc(x)": "(!setting(soulsMiscOot)) || has(x)"
 "climb_anywhere": "setting(climbMostSurfacesOot, logical)"
 "hookshot_anywhere": "can_hookshot && setting(hookshotAnywhereOot, logical)"
 "longshot_anywhere": "can_longshot && setting(hookshotAnywhereOot, logical)"

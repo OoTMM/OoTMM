@@ -19,8 +19,8 @@
     "MQ Water Temple Compass Chest": "soul_enemy(SOUL_ENEMY_SPIKE) && soul_lizalfos_dinalfos && event(WATER_LEVEL_LOW) && (can_use_bow || has_fire) && event(WATER_LEVEL_HIGH)" #To prevent water level mid softlocks.
     "MQ Water Temple Longshot Chest": "event(WATER_LEVEL_LOW) && can_hookshot"
     "MQ Water Temple Central Pillar Chest": "can_play_time && can_use_din && can_hookshot && has_iron_boots && has_tunic_zora_strict"
-    "MQ Water Temple GS Lizalfos Hallway": "event(WATER_LEVEL_LOW) && can_use_din"
-    "MQ Water Temple GS High Water Changer": "event(WATER_LEVEL_LOW) && can_longshot"
+    "MQ Water Temple GS Lizalfos Hallway": "gs && event(WATER_LEVEL_LOW) && can_use_din"
+    "MQ Water Temple GS High Water Changer": "gs && event(WATER_LEVEL_LOW) && can_longshot"
     "MQ Water Temple Pot Ruto 1": "has_iron_boots && has_tunic_zora && (can_hookshot || event(WATER_LEVEL_LOW))"
     "MQ Water Temple Pot Ruto 2": "has_iron_boots && has_tunic_zora && (can_hookshot || event(WATER_LEVEL_LOW))"
     "MQ Water Temple Pot Storage Room 1": "has_iron_boots && has_tunic_zora && can_hookshot"
@@ -40,7 +40,7 @@
     WATER_GATES: "soul_enemy(SOUL_ENEMY_DARK_LINK) && has_weapon && can_use_din && has_iron_boots && has_tunic_zora && soul_enemy(SOUL_ENEMY_STALFOS)"
   locations:
     "MQ Water Temple Boss Key Chest": "soul_enemy(SOUL_ENEMY_DARK_LINK) && has_weapon && can_use_din && can_dive_small && soul_enemy(SOUL_ENEMY_STALFOS)" #Scale can solve dragon spiral MQ
-    "MQ Water Temple GS River": "soul_enemy(SOUL_ENEMY_STALFOS) && soul_enemy(SOUL_ENEMY_DARK_LINK) && has_weapon" #Believe it or not, this is very easy to get with no Iron Boots.
+    "MQ Water Temple GS River": "gs && soul_enemy(SOUL_ENEMY_STALFOS) && soul_enemy(SOUL_ENEMY_DARK_LINK) && has_weapon" #Believe it or not, this is very easy to get with no Iron Boots.
     "MQ Water Temple Pot Before Dark Link Ledge 1": "(soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon) || has_hover_boots" #This is why the Stalfos soul was removed from the main room requirements.
     "MQ Water Temple Pot Before Dark Link Ledge 2": "(soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon) || has_hover_boots" #This is why the Stalfos soul was removed from the main room requirements.
     "MQ Water Temple Pot Before Dark Link Ledge 3": "(soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon) || has_hover_boots" #This is why the Stalfos soul was removed from the main room requirements.
@@ -57,7 +57,7 @@
 "Water Temple Three Torch Room":
   dungeon: Water
   locations:
-    "MQ Water Temple GS Three Torch": "has_fire_arrows && (scarecrow_hookshot || has_hover_boots)"
+    "MQ Water Temple GS Three Torch": "gs && has_fire_arrows && (scarecrow_hookshot || has_hover_boots)"
     "MQ Water Temple Pot Skull Cage 1": "has_fire_arrows && (scarecrow_hookshot || has_hover_boots)"
     "MQ Water Temple Pot Skull Cage 2": "has_fire_arrows && (scarecrow_hookshot || has_hover_boots)"
     "MQ Water Temple Pot Skull Cage 3": "has_fire_arrows && (scarecrow_hookshot || has_hover_boots)"
@@ -66,7 +66,7 @@
   dungeon: Water
   locations:
     "MQ Water Temple Side Loop Key": "true"
-    "MQ Water Temple GS Side Loop": "has_fire && small_keys_water(2) && soul_dodongo"
+    "MQ Water Temple GS Side Loop": "gs && has_fire && small_keys_water(2) && soul_dodongo"
     "MQ Water Temple Pot Stalfos Room 1": "true"
     "MQ Water Temple Pot Stalfos Room 2": "true"
     "MQ Water Temple Pot Loop 1": "has_fire && small_keys_water(2)"

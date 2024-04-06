@@ -14,7 +14,7 @@
     "Ice Cavern Block Room": "has_blue_fire"
     "Ice Cavern First Fire Room": "(is_adult || climb_anywhere || hookshot_anywhere) && silver_rupees_ic_scythe"
   locations:
-    "Ice Cavern GS Scythe Room": "can_collect_distance || (climb_anywhere && (has_weapon || can_use_sticks || has_ranged_weapon || has_explosives || can_use_din))"
+    "Ice Cavern GS Scythe Room": "gs && (can_collect_distance || (climb_anywhere && (has_weapon || can_use_sticks || has_ranged_weapon || has_explosives || can_use_din)))"
     "Ice Cavern SR Scythe Left": "true"
     "Ice Cavern SR Scythe Center Left": "true"
     "Ice Cavern SR Scythe Back": "true"
@@ -33,7 +33,7 @@
   locations:
     "Ice Cavern Compass": "true"
     "Ice Cavern HP": "true"
-    "Ice Cavern GS HP Room": "can_collect_distance || (climb_anywhere && (has_weapon || can_use_sticks || has_ranged_weapon || has_explosives || can_use_din))"
+    "Ice Cavern GS HP Room": "gs && (can_collect_distance || (climb_anywhere && (has_weapon || can_use_sticks || has_ranged_weapon || has_explosives || can_use_din)))"
 "Ice Cavern First Fire Room":
   dungeon: IC
   events:
@@ -52,7 +52,7 @@
   events:
     BLUE_FIRE: "has_bottle"
   locations:
-    "Ice Cavern GS Block Room": "can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_din))"
+    "Ice Cavern GS Block Room": "gs && (can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_din)))"
     "Ice Cavern SR Blocks Back Left": "true"
     "Ice Cavern SR Blocks Back Right": "true"
     "Ice Cavern SR Blocks Center": "true"

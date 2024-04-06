@@ -34,6 +34,11 @@ const SOULS_ENEMY: ItemSharedDef[] = [
   { shared: Items.SHARED_SOUL_ENEMY_STALCHILD,           oot: Items.OOT_SOUL_ENEMY_STALCHILD,          mm: Items.MM_SOUL_ENEMY_STALCHILD },
 ];
 
+const SOULS_MISC: ItemSharedDef[] = [
+  { shared: Items.SHARED_SOUL_MISC_GS,              oot: Items.OOT_SOUL_MISC_GS,              mm: Items.MM_SOUL_MISC_GS },
+  { shared: Items.SHARED_SOUL_MISC_BUSINESS_SCRUB,  oot: Items.OOT_SOUL_MISC_BUSINESS_SCRUB,  mm: Items.MM_SOUL_MISC_BUSINESS_SCRUB },
+];
+
 const SKELETON_KEY: ItemSharedDef[] = [
   { shared: Items.SHARED_SKELETON_KEY, oot: Items.OOT_SKELETON_KEY, mm: Items.MM_SKELETON_KEY },
 ];
@@ -53,4 +58,4 @@ const SHIELDS: ItemSharedDef[] = [
 ];
 
 
-export const SharedItemGroups = { SOULS_ENEMY, SKELETON_KEY, OCARINA_BUTTONS, SHIELDS };
+export const SharedItemGroups = { SOULS_ENEMY, SOULS_MISC, SKELETON_KEY, OCARINA_BUTTONS, SHIELDS };

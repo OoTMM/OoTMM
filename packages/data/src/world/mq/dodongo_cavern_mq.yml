@@ -16,8 +16,8 @@
     STICKS: "(has_bombflowers || can_hammer) && (has_weapon || can_boomerang)"
   locations:
     "MQ Dodongo Cavern Map Chest": "has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall"
-    "MQ Dodongo Cavern Lobby Scrub Front": "can_hit_scrub && scrub_price(0x1c)"
-    "MQ Dodongo Cavern Lobby Scrub Back": "can_hit_scrub && scrub_price(0x1d)"
+    "MQ Dodongo Cavern Lobby Scrub Front": "business_scrub(0x1c)"
+    "MQ Dodongo Cavern Lobby Scrub Back": "business_scrub(0x1d)"
   gossip:
     "Dodongo Cavern Gossip": "has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall"
 "Dodongo Cavern Staircase":
@@ -26,7 +26,7 @@
     "Dodongo Cavern Main": "true"
     "Dodongo Cavern Upper Staircase": "has_bombflowers"
   locations:
-    "MQ Dodongo Cavern GS Time Blocks": "can_play_time && can_damage_skull"
+    "MQ Dodongo Cavern GS Time Blocks": "gs && can_play_time && can_damage_skull"
     "MQ Dodongo Cavern SR Beamos": "true"
     "MQ Dodongo Cavern SR Crate": "true"
     "MQ Dodongo Cavern Pot Stairs 1": "true"
@@ -41,7 +41,7 @@
     "MQ Dodongo Cavern SR Upper Corner Low": "true"
     "MQ Dodongo Cavern SR Vines": "true"
     "MQ Dodongo Cavern SR Upper Corner High": "true"
-    "MQ Dodongo Cavern Staircase Scrub": "can_hit_scrub && scrub_price(0x1f)"
+    "MQ Dodongo Cavern Staircase Scrub": "business_scrub(0x1f)"
 "Dodongo Cavern After Staircase":
   dungeon: DC
   exits:
@@ -61,14 +61,14 @@
     "Dodongo Cavern Room Before Upper Lizalfos": "can_use_sticks || has_fire"
   locations:
     "MQ Dodongo Cavern Larvae Room Chest": "soul_enemy(SOUL_ENEMY_GOHMA_LARVA) && (can_use_sticks || has_fire)"
-    "MQ Dodongo Cavern GS Larve Room": "can_use_sticks || has_fire"
+    "MQ Dodongo Cavern GS Larve Room": "gs && (can_use_sticks || has_fire)"
     "MQ Dodongo Cavern Heart Vanilla Bomb Bag Room": "true"
 "Dodongo Cavern Upper Lizalfos":
   dungeon: DC
   exits:
     "Dodongo Cavern Upper Ledges": "soul_lizalfos_dinalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
   locations:
-    "MQ Dodongo Cavern GS Upper Lizalfos": "has_explosives_or_hammer"
+    "MQ Dodongo Cavern GS Upper Lizalfos": "gs && has_explosives_or_hammer"
     "MQ Dodongo Cavern Pot Miniboss 1": "true"
     "MQ Dodongo Cavern Pot Miniboss 2": "true"
     "MQ Dodongo Cavern Pot Miniboss 3": "true"
@@ -91,7 +91,7 @@
   exits:
     "Dodongo Cavern Lower Lizalfos": "can_use_bow || ((has_bombflowers || can_use_din) && can_use_slingshot)"
   locations:
-    "MQ Dodongo Cavern Tunnel Side Scrub": "can_hit_scrub && scrub_price(0x1e)"
+    "MQ Dodongo Cavern Tunnel Side Scrub": "business_scrub(0x1e)"
     "MQ Dodongo Cavern Pot East Corridor 1": "true"
     "MQ Dodongo Cavern Pot East Corridor 2": "true"
     "MQ Dodongo Cavern Pot East Corridor 3": "true"
@@ -109,7 +109,7 @@
     "Dodongo Cavern Lower Lizalfos": "true"
     "Dodongo Cavern Bomb Bag Ledge": "can_use_bow || has_bombflowers || can_use_din"
   locations:
-    "MQ Dodongo Cavern GS Poe Room Side": "can_collect_distance && (can_use_bow || has_bombflowers || can_use_din)"
+    "MQ Dodongo Cavern GS Poe Room Side": "gs && can_collect_distance && (can_use_bow || has_bombflowers || can_use_din)"
     "MQ Dodongo Cavern Pot Green Room 1": "true"
     "MQ Dodongo Cavern Pot Green Room 2": "true"
     "MQ Dodongo Cavern Pot Green Room 3": "true"
@@ -129,7 +129,7 @@
     "Dodongo Cavern Boss": "true"
   locations:
     "MQ Dodongo Cavern Chest Under Grave": "true"
-    "MQ Dodongo Cavern GS Near Boss": "true"
+    "MQ Dodongo Cavern GS Near Boss": "gs"
     "MQ Dodongo Cavern Pot Before Boss 1": "true"
     "MQ Dodongo Cavern Pot Before Boss 2": "true"
     "MQ Dodongo Cavern Pot Before Boss Loop 1": "true"

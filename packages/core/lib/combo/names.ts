@@ -712,6 +712,12 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   MM_TRAP_RUPOOR: "Rupoor (MM)",
   OOT_TRAP_RUPOOR: "Rupoor (OoT)",
   SHARED_TRAP_RUPOOR: "Rupoor",
+  OOT_SOUL_MISC_GS: "Soul of Gold Skulltulas (OoT)",
+  OOT_SOUL_MISC_BUSINESS_SCRUB: "Soul of Business Scrubs (OoT)",
+  MM_SOUL_MISC_GS: "Soul of Gold Skulltulas (MM)",
+  MM_SOUL_MISC_BUSINESS_SCRUB: "Soul of Business Scrubs (MM)",
+  SHARED_SOUL_MISC_GS: "Soul of Gold Skulltulas",
+  SHARED_SOUL_MISC_BUSINESS_SCRUB: "Soul of Business Scrubs",
 };
 
 export function itemName(item: string) {

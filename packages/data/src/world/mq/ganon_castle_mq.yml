@@ -22,11 +22,11 @@
 "Ganon Castle Fairy Fountain":
   dungeon: Ganon
   locations:
-    "MQ Ganon Castle Leftmost Scrub": "can_hit_scrub && scrub_price(0x21)"
-    "MQ Ganon Castle Left-Center Scrub": "can_hit_scrub && scrub_price(0x22)"
-    "MQ Ganon Castle Center Scrub": "can_hit_scrub && scrub_price(0x23)"
-    "MQ Ganon Castle Right-Center Scrub": "can_hit_scrub && scrub_price(0x24)"
-    "MQ Ganon Castle Rightmost Scrub": "can_hit_scrub && scrub_price(0x25)"
+    "MQ Ganon Castle Leftmost Scrub": "business_scrub(0x21)"
+    "MQ Ganon Castle Left-Center Scrub": "business_scrub(0x22)"
+    "MQ Ganon Castle Center Scrub": "business_scrub(0x23)"
+    "MQ Ganon Castle Right-Center Scrub": "business_scrub(0x24)"
+    "MQ Ganon Castle Rightmost Scrub": "business_scrub(0x25)"
     "MQ Ganon Castle Fairy Fountain Fairy 1": "true"
     "MQ Ganon Castle Fairy Fountain Fairy 2": "true"
     "MQ Ganon Castle Fairy Fountain Fairy 3": "true"

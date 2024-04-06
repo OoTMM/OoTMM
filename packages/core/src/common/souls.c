@@ -17,6 +17,7 @@ static void soulInfosOot(u8** bm, int* index, s16 gi)
     case 0: *bm = gSharedCustomSave.soulsEnemyOot; break;
     case 1: *bm = gSharedCustomSave.soulsBossOot; break;
     case 2: *bm = gSharedCustomSave.soulsNpcOot; break;
+    case 3: *bm = gSharedCustomSave.soulsMiscOot; break;
     default: UNREACHABLE(); break;
     }
 }
@@ -34,6 +35,7 @@ static void soulInfosMm(u8** bm, int* index, s16 gi)
     {
     case 0: *bm = gSharedCustomSave.soulsEnemyMm; break;
     case 1: *bm = gSharedCustomSave.soulsBossMm; break;
+    case 3: *bm = gSharedCustomSave.soulsMiscMm; break;
     default: UNREACHABLE(); break;
     }
 }
