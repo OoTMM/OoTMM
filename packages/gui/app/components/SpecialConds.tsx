@@ -23,8 +23,13 @@ function SpecialCondsPanel({ cond }: SpecialCondsPanelProps) {
   }
 
   for (const f in SPECIAL_CONDS_FIELDS) {
-    if(c[f as keyof typeof SPECIAL_CONDS_FIELDS]) 
-      max += Number(SPECIAL_CONDS_FIELDS[f as keyof typeof SPECIAL_CONDS_FIELDS].max);
+    if(c[f as keyof typeof SPECIAL_CONDS_FIELDS]) {
+      const condm = SPECIAL_CONDS_FIELDS[f as keyof typeof SPECIAL_CONDS_FIELDS].max;
+      if(typeof condm === 'number')
+        max += condm;
+      else 
+        max += condm(settings);
+    }
   }
   if (c['masksOot'] && c['masksRegular'])
     max -= Object.keys(settings).filter(key => key.includes('sharedMask')).filter(x => settings[x as keyof Settings]).length;
