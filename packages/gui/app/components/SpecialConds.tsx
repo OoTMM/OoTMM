@@ -16,16 +16,26 @@ function SpecialCondsPanel({ cond }: SpecialCondsPanelProps) {
   const c = specialConds[cond as keyof typeof SPECIAL_CONDS];
   const enableCond = SPECIAL_CONDS[cond].cond || (() => true);
   const enabled = enableCond(settings);
-
+  let max = 0;
+  
   if (!enabled) {
     return null;
   }
+
+  for (const f in SPECIAL_CONDS_FIELDS) {
+    if(c[f as keyof typeof SPECIAL_CONDS_FIELDS]) 
+      max += Number(SPECIAL_CONDS_FIELDS[f as keyof typeof SPECIAL_CONDS_FIELDS].max);
+  }
+  if (c['masksOot'] && c['masksRegular'])
+    max -= Object.keys(settings).filter(key => key.includes('sharedMask')).filter(x => settings[x as keyof Settings]).length;
+
+  const label = `Amount (max: ${max > 0 ? max : 0})`
 
   return (
     <form onSubmit={e => e.preventDefault()}>
       <Group direction="vertical">
         <Text size='jb'>{SPECIAL_CONDS[cond].name}</Text>
-        <Group direction="vertical" spacing='xs'> 
+        <Group direction="vertical" spacing='xs' className={cond}> 
         {Object.keys(SPECIAL_CONDS_FIELDS).filter(key => { const cond = (SPECIAL_CONDS_FIELDS as any)[key].cond; return cond ? cond(settings) : true }).map(key =>
           <Checkbox
             key={key}
@@ -35,7 +45,7 @@ function SpecialCondsPanel({ cond }: SpecialCondsPanelProps) {
           />
         )}
          </Group>
-        <InputNumber label="Amount" value={c.count} onChange={x => setSettings({ specialConds: { [cond]: { count: x } }} as any)}/>
+        <InputNumber max={max} label={label} value={c.count} onChange={x => setSettings({ specialConds: { [cond]: { count: x } }} as any)}/>
       </Group>
     </form>
   );

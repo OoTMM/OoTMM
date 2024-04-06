@@ -5,28 +5,29 @@ type SettingCond = (s: Settings) => boolean;
 type SpecialCondField = {
   name: string;
   cond?: SettingCond;
+  max: Number | ((s: Settings) => Number);
 };
 
 export const SPECIAL_CONDS_FIELDS = {
-  stones:           { name: "Spiritual Stones" },
-  medallions:       { name: "Medallions" },
-  remains:          { name: "Boss Remains" },
-  skullsGold:       { name: "Gold Skulltulas Tokens" },
-  skullsSwamp:      { name: "Swamp Skulltulas Tokens" },
-  skullsOcean:      { name: "Ocean Skulltulas Tokens" },
-  fairiesWF:        { name: "Stray Fairies (Woodfall)" },
-  fairiesSH:        { name: "Stray Fairies (Snowhead)" },
-  fairiesGB:        { name: "Stray Fairies (Great Bay)" },
-  fairiesST:        { name: "Stray Fairies (Stone Tower)" },
-  fairyTown:        { name: "Stray Fairy (Clock Town)" },
-  masksRegular:     { name: "Regular Masks (MM)" },
-  masksTransform:   { name: "Transformation Masks (MM)" },
-  masksOot:         { name: "Masks (OoT)" },
-  triforce:         { name: "Triforce Pieces", cond: (s: Settings) => s.goal === 'triforce' },
-  coinsRed:         { name: "Coins (Red)", cond: (s: Settings) => s.coinsRed > 0 },
-  coinsGreen:       { name: "Coins (Green)", cond: (s: Settings) => s.coinsGreen > 0 },
-  coinsBlue:        { name: "Coins (Blue)", cond: (s: Settings) => s.coinsBlue > 0 },
-  coinsYellow:      { name: "Coins (Yellow)", cond: (s: Settings) => s.coinsYellow > 0 },
+  stones:           { name: "Spiritual Stones", max: 3 },
+  medallions:       { name: "Medallions", max: 6 },
+  remains:          { name: "Boss Remains", max: 4 },
+  skullsGold:       { name: "Gold Skulltulas Tokens", max: 100 },
+  skullsSwamp:      { name: "Swamp Skulltulas Tokens", max: 30 },
+  skullsOcean:      { name: "Ocean Skulltulas Tokens", max: 30 },
+  fairiesWF:        { name: "Stray Fairies (Woodfall)", max: 15 },
+  fairiesSH:        { name: "Stray Fairies (Snowhead)", max: 15 },
+  fairiesGB:        { name: "Stray Fairies (Great Bay)", max: 15 },
+  fairiesST:        { name: "Stray Fairies (Stone Tower)", max: 15 },
+  fairyTown:        { name: "Stray Fairy (Clock Town)", max: 1 },
+  masksRegular:     { name: "Regular Masks (MM)", max: 20 },
+  masksTransform:   { name: "Transformation Masks (MM)", max: 4 },
+  masksOot:         { name: "Masks (OoT)", max: 8 },
+  triforce:         { name: "Triforce Pieces", cond: (s: Settings) => s.goal === 'triforce', max: (s: Settings) => s.triforcePieces },
+  coinsRed:         { name: "Coins (Red)", cond: (s: Settings) => s.coinsRed > 0, max: (s: Settings) => s.coinsRed },
+  coinsGreen:       { name: "Coins (Green)", cond: (s: Settings) => s.coinsGreen > 0, max: (s: Settings) => s.coinsGreen },
+  coinsBlue:        { name: "Coins (Blue)", cond: (s: Settings) => s.coinsBlue > 0, max: (s: Settings) => s.coinsBlue },
+  coinsYellow:      { name: "Coins (Yellow)", cond: (s: Settings) => s.coinsYellow > 0, max: (s: Settings) => s.coinsYellow },
 };
 
 export type SpecialCond = {[k in keyof typeof SPECIAL_CONDS_FIELDS]: boolean} & { count: number };
