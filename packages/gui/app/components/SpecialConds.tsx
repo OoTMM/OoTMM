@@ -35,6 +35,7 @@ function SpecialCondsPanel({ cond }: SpecialCondsPanelProps) {
     max -= Object.keys(settings).filter(key => key.includes('sharedMask')).filter(x => settings[x as keyof Settings]).length;
 
   const label = `Amount (max: ${max > 0 ? max : 0})`
+  c.count = c.count > max ? max : c.count;
 
   return (
     <form onSubmit={e => e.preventDefault()}>
