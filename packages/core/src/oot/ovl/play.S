@@ -76,3 +76,16 @@ PATCH_START 0x8009B0d0
   nop
   nop
 PATCH_END
+
+/* Don't immediately restore the grotto respawn point */
+PATCH_START 0x808372c8
+  nop
+PATCH_END
+
+PATCH_START 0x808372d8
+  nop
+PATCH_END
+
+PATCH_START 0x808372f4
+  nop
+PATCH_END

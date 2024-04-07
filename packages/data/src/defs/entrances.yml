@@ -353,3 +353,13 @@ OOT_GROTTO_GENERIC_RIVER:                       { game: oot, id: 0x1005, type: g
 OOT_GROTTO_GENERIC_HF_SOUTHWEST:                { game: oot, id: 0x1006, type: grotto, debug: ['GROTTO', 'HF Southwest Generic'] }
 OOT_GROTTO_GENERIC_HF_OPEN:                     { game: oot, id: 0x1007, type: grotto, debug: ['GROTTO', 'HF Open Generic'] }
 OOT_GROTTO_GENERIC_HF_MAKET:                    { game: oot, id: 0x1008, type: grotto, debug: ['GROTTO', 'HF Market Generic'] }
+OOT_GROTTO_EXIT_GENERIC_KOKIRI_FOREST:          { game: oot, id: 0x1100, type: grotto-exit }
+OOT_GROTTO_EXIT_GENERIC_LOST_WOODS:             { game: oot, id: 0x1101, type: grotto-exit }
+OOT_GROTTO_EXIT_GENERIC_KAKARIKO:               { game: oot, id: 0x1102, type: grotto-exit }
+OOT_GROTTO_EXIT_GENERIC_DMT:                    { game: oot, id: 0x1103, type: grotto-exit }
+OOT_GROTTO_EXIT_GENERIC_DMC:                    { game: oot, id: 0x1104, type: grotto-exit }
+OOT_GROTTO_EXIT_GENERIC_RIVER:                  { game: oot, id: 0x1105, type: grotto-exit }
+OOT_GROTTO_EXIT_GENERIC_HF_SOUTHWEST:           { game: oot, id: 0x1106, type: grotto-exit }
+OOT_GROTTO_EXIT_GENERIC_HF_OPEN:                { game: oot, id: 0x1107, type: grotto-exit }
+OOT_GROTTO_EXIT_GENERIC_HF_MAKET:               { game: oot, id: 0x1108, type: grotto-exit }
+OOT_INTERNAL_EXIT_GROTTO:                       { game: oot, id: 0x7fff, type: none }

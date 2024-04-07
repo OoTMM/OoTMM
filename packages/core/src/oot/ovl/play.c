@@ -477,24 +477,38 @@ static const u8 kGrottoDataGeneric[] = { 0x0c, 0x14, 0x08, 0x17, 0x1a, 0x09, 0x0
 static void applyCustomEntrance(u32* entrance)
 {
     u32 id;
+    OotRespawnData* rs;
 
     id = *entrance;
-    switch (id)
+    if (id >= ENTR_OOT_GROTTO_GENERIC_KOKIRI_FOREST && id <= ENTR_OOT_GROTTO_GENERIC_HF_MAKET)
     {
-    case ENTR_OOT_GROTTO_GENERIC_KOKIRI_FOREST:
-    case ENTR_OOT_GROTTO_GENERIC_LOST_WOODS:
-    case ENTR_OOT_GROTTO_GENERIC_KAKARIKO:
-    case ENTR_OOT_GROTTO_GENERIC_DMT:
-    case ENTR_OOT_GROTTO_GENERIC_DMC:
-    case ENTR_OOT_GROTTO_GENERIC_RIVER:
-    case ENTR_OOT_GROTTO_GENERIC_HF_SOUTHWEST:
-    case ENTR_OOT_GROTTO_GENERIC_HF_OPEN:
-    case ENTR_OOT_GROTTO_GENERIC_HF_MAKET:
         *entrance = ENTR_OOT_GROTTO_TYPE_GENERIC;
-        gSaveContext.grottoChestFlag &= ~0x1f;
-        gSaveContext.grottoChestFlag |= kGrottoDataGeneric[id - ENTR_OOT_GROTTO_GENERIC_KOKIRI_FOREST];
-        break;
+        gGrottoData &= ~0x1f;
+        gGrottoData |= kGrottoDataGeneric[id - ENTR_OOT_GROTTO_GENERIC_KOKIRI_FOREST];
     }
+    else if (id >= ENTR_OOT_GROTTO_EXIT_GENERIC_KOKIRI_FOREST && id <= ENTR_OOT_GROTTO_EXIT_GENERIC_HF_MAKET)
+    {
+        rs = &gSaveContext.respawn[1];
+        rs->pos.x = -512;
+        rs->pos.y = 380;
+        rs->pos.z = -1224;
+        rs->yaw = 0;
+        rs->entranceIndex = id;
+        rs->playerParams = 0x04ff;
+        rs->data = 0;
+        rs->roomIndex = 0;
+        rs->tempSwitchFlags = 0;
+        rs->tempCollectFlags = 0;
+        gSaveContext.respawnFlag = 2;
+        gSaveContext.nextTransitionType = 3;
+        *entrance = ENTR_OOT_KOKIRI_FOREST_FROM_LOST_WOODS;
+    }
+}
+
+static u32 entrGrottoExit(GameState_Play* play)
+{
+    return ENTR_OOT_GROTTO_EXIT_GENERIC_KOKIRI_FOREST;
+    //return ENTR_OOT_INTERNAL_EXIT_GROTTO;
 }
 
 void Play_TransitionDone(GameState_Play* play)
@@ -507,9 +521,19 @@ void Play_TransitionDone(GameState_Play* play)
     if (entrance == ENTR_EXTENDED)
         entrance = g.nextEntrance;
 
+    if (entrance == ENTR_OOT_INTERNAL_EXIT_GROTTO)
+    {
+        entrance = entrGrottoExit(play);
+        if (entrance == ENTR_OOT_INTERNAL_EXIT_GROTTO)
+        {
+            gIsEntranceOverride = 0;
+            entrance = gSaveContext.respawn[1].entranceIndex;
+            gSaveContext.respawnFlag = 2;
+            gSaveContext.nextTransitionType = 3;
+        }
+    }
+
     /* Handle transition override */
-    if (g.inGrotto)
-        gIsEntranceOverride = 0;
     if (gIsEntranceOverride)
     {
         gIsEntranceOverride = 0;
