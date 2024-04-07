@@ -343,3 +343,13 @@ MM_GORON_VILLAGE_FROM_TWIN_SPRING:              { game: mm,  id: 0x8a00, type: n
 MM_GORON_VILLAGE_FROM_TWIN_WINTER:              { game: mm,  id: 0x9400, type: none }
 MM_WOODFALL_FROM_SWAMP:                         { game: mm,  id: 0x8600, type: none }
 MM_COAST_FROM_MIKAU_CS:                         { game: mm,  id: 0x68a0, type: none }
+OOT_GROTTO_TYPE_GENERIC:                        { game: oot, id: 0x03f,  type: none } # Multiple uses
+OOT_GROTTO_GENERIC_KOKIRI_FOREST:               { game: oot, id: 0x1000, type: grotto, debug: ['GROTTO', 'Kokiri Forest Generic'] }
+OOT_GROTTO_GENERIC_LOST_WOODS:                  { game: oot, id: 0x1001, type: grotto, debug: ['GROTTO', 'Lost Woods Generic'] }
+OOT_GROTTO_GENERIC_KAKARIKO:                    { game: oot, id: 0x1002, type: grotto, debug: ['GROTTO', 'Kakariko Generic'] }
+OOT_GROTTO_GENERIC_DMT:                         { game: oot, id: 0x1003, type: grotto, debug: ['GROTTO', 'DMT Generic'] }
+OOT_GROTTO_GENERIC_DMC:                         { game: oot, id: 0x1004, type: grotto, debug: ['GROTTO', 'DMC Generic'] }
+OOT_GROTTO_GENERIC_RIVER:                       { game: oot, id: 0x1005, type: grotto, debug: ['GROTTO', 'River Generic'] }
+OOT_GROTTO_GENERIC_HF_SOUTHWEST:                { game: oot, id: 0x1006, type: grotto, debug: ['GROTTO', 'HF Southwest Generic'] }
+OOT_GROTTO_GENERIC_HF_OPEN:                     { game: oot, id: 0x1007, type: grotto, debug: ['GROTTO', 'HF Open Generic'] }
+OOT_GROTTO_GENERIC_HF_MAKET:                    { game: oot, id: 0x1008, type: grotto, debug: ['GROTTO', 'HF Market Generic'] }

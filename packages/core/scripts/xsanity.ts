@@ -7,15 +7,15 @@ import { CONFIG } from '../lib/combo/config';
 import { mkdir } from 'fs';
 
 const OOT_GENERIC_GROTTOS = [
-  0x0c,
-  0x14,
-  0x08,
-  0x17,
-  0x1a,
-  0x09,
-  0x02,
-  0x03,
-  0x00,
+  0x0c, /* Kokiri Forest */
+  0x14, /* Lost Woods */
+  0x08, /* Kakariko */
+  0x17, /* Death Mountain Trail */
+  0x1a, /* Death Mountain Crater */
+  0x09, /* Zora River */
+  0x02, /* Hyrule Field Southwest */
+  0x03, /* Hyrule Field Open */
+  0x00, /* Hyrule Field Market */
 ];
 
 const OOT_FAIRY_FOUNTAINS = [

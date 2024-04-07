@@ -472,6 +472,31 @@ NORETURN static void Play_GameSwitch(GameState_Play* play, s32 entrance)
     comboGameSwitch(play, entrance);
 }
 
+static const u8 kGrottoDataGeneric[] = { 0x0c, 0x14, 0x08, 0x17, 0x1a, 0x09, 0x02, 0x03, 0x00 };
+
+static void applyCustomEntrance(u32* entrance)
+{
+    u32 id;
+
+    id = *entrance;
+    switch (id)
+    {
+    case ENTR_OOT_GROTTO_GENERIC_KOKIRI_FOREST:
+    case ENTR_OOT_GROTTO_GENERIC_LOST_WOODS:
+    case ENTR_OOT_GROTTO_GENERIC_KAKARIKO:
+    case ENTR_OOT_GROTTO_GENERIC_DMT:
+    case ENTR_OOT_GROTTO_GENERIC_DMC:
+    case ENTR_OOT_GROTTO_GENERIC_RIVER:
+    case ENTR_OOT_GROTTO_GENERIC_HF_SOUTHWEST:
+    case ENTR_OOT_GROTTO_GENERIC_HF_OPEN:
+    case ENTR_OOT_GROTTO_GENERIC_HF_MAKET:
+        *entrance = ENTR_OOT_GROTTO_TYPE_GENERIC;
+        gSaveContext.grottoChestFlag &= ~0x1f;
+        gSaveContext.grottoChestFlag |= kGrottoDataGeneric[id - ENTR_OOT_GROTTO_GENERIC_KOKIRI_FOREST];
+        break;
+    }
+}
+
 void Play_TransitionDone(GameState_Play* play)
 {
     u32 entrance;
@@ -492,6 +517,8 @@ void Play_TransitionDone(GameState_Play* play)
         if (override != -1)
             entrance = (u32)override;
     }
+
+    applyCustomEntrance(&entrance);
 
     /* Check for foreign */
     if (entrance & MASK_FOREIGN_ENTRANCE)
