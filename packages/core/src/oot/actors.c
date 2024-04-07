@@ -14,6 +14,7 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
     switch (actorId)
     {
     case AC_EN_DNS:
+    case AC_EN_SHOPNUTS:
         return opt(comboHasSoulOot(GI_OOT_SOUL_MISC_BUSINESS_SCRUB));
     case AC_EN_TEST:
         return comboHasSoulOot(GI_OOT_SOUL_ENEMY_STALFOS);
