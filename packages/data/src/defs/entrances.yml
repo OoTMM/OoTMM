@@ -363,7 +363,7 @@ OOT_GROTTO_SCRUBS2_VALLEY:                      { game: oot, id: 0x1010, type: g
 OOT_GROTTO_SCRUBS2_COLOSSUS:                    { game: oot, id: 0x1011, type: grotto, debug: ['GROTTO', 'Colossus Scrubs'] }
 OOT_GROTTO_SCRUBS3_RANCH:                       { game: oot, id: 0x1012, type: grotto, debug: ['GROTTO', 'Ranch Scrubs'] }
 OOT_GROTTO_SCRUBS3_GORON_CITY:                  { game: oot, id: 0x1013, type: grotto, debug: ['GROTTO', 'Goron City Scrubs'] }
-OOT_GROTTO_SCRUBS3_DMT:                         { game: oot, id: 0x1014, type: grotto, debug: ['GROTTO', 'DMT Scrubs'] }
+OOT_GROTTO_SCRUBS3_DMC:                         { game: oot, id: 0x1014, type: grotto, debug: ['GROTTO', 'DMC Scrubs'] }
 OOT_GROTTO_SCRUBS3_LAKE:                        { game: oot, id: 0x1015, type: grotto, debug: ['GROTTO', 'Lake Scrubs'] }
 OOT_GROTTO_SCRUB_UPGRADE:                       { game: oot, id: 0x5b0,  type: grotto, debug: ['GROTTO', 'Scrub Upgrade'] }
 OOT_GROTTO_SCRUB_HEART_PIECE:                   { game: oot, id: 0x59c,  type: grotto, debug: ['GROTTO', 'Scrub Heart Piece'] }

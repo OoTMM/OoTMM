@@ -474,6 +474,28 @@ NORETURN static void Play_GameSwitch(GameState_Play* play, s32 entrance)
 
 static const u8 kGrottoDataGeneric[] = { 0x0c, 0x14, 0x08, 0x17, 0x1a, 0x09, 0x02, 0x03, 0x00 };
 
+static const u8 kGrottoDataFairy[] = {
+    SCE_OOT_SACRED_FOREST_MEADOW,
+    SCE_OOT_HYRULE_FIELD,
+    SCE_OOT_ZORA_RIVER,
+    SCE_OOT_ZORA_DOMAIN,
+    SCE_OOT_GERUDO_VALLEY,
+};
+
+static const u8 kGrottoDataScrubs2[] = {
+    SCE_OOT_SACRED_FOREST_MEADOW,
+    SCE_OOT_ZORA_RIVER,
+    SCE_OOT_GERUDO_VALLEY,
+    SCE_OOT_DESERT_COLOSSUS,
+};
+
+static const u8 kGrottoDataScrubs3[] = {
+    SCE_OOT_LON_LON_RANCH,
+    SCE_OOT_GORON_CITY,
+    SCE_OOT_DEATH_MOUNTAIN_CRATER,
+    SCE_OOT_LAKE_HYLIA,
+};
+
 static const u8  kGrottoExitsRoom[] = {};
 static const s16 kGrottoExitsPos[] = {};
 static const u16 kGrottoExitsEntrance[] = {};
@@ -486,9 +508,28 @@ static void applyCustomEntrance(u32* entrance)
     id = *entrance;
     if (id >= ENTR_OOT_GROTTO_GENERIC_KOKIRI_FOREST && id <= ENTR_OOT_GROTTO_GENERIC_HF_MAKET)
     {
+        id -= ENTR_OOT_GROTTO_GENERIC_KOKIRI_FOREST;
         *entrance = ENTR_OOT_GROTTO_TYPE_GENERIC;
         gGrottoData &= ~0x1f;
-        gGrottoData |= kGrottoDataGeneric[id - ENTR_OOT_GROTTO_GENERIC_KOKIRI_FOREST];
+        gGrottoData |= kGrottoDataGeneric[id];
+    }
+    else if (id >= ENTR_OOT_GROTTO_FAIRY_SFM && id <= ENTR_OOT_GROTTO_FAIRY_VALLEY)
+    {
+        id -= ENTR_OOT_GROTTO_FAIRY_SFM;
+        *entrance = ENTR_OOT_GROTTO_TYPE_FAIRY;
+        gLastScene = kGrottoDataFairy[id];
+    }
+    else if (id >= ENTR_OOT_GROTTO_SCRUBS2_SFM && id <= ENTR_OOT_GROTTO_SCRUBS2_COLOSSUS)
+    {
+        id -= ENTR_OOT_GROTTO_SCRUBS2_SFM;
+        *entrance = ENTR_OOT_GROTTO_TYPE_SCRUB2;
+        gLastScene = kGrottoDataScrubs2[id];
+    }
+    else if (id >= ENTR_OOT_GROTTO_SCRUBS3_RANCH && id <= ENTR_OOT_GROTTO_SCRUBS3_LAKE)
+    {
+        id -= ENTR_OOT_GROTTO_SCRUBS3_RANCH;
+        *entrance = ENTR_OOT_GROTTO_TYPE_SCRUB3;
+        gLastScene = kGrottoDataScrubs3[id];
     }
     else if (id >= ENTR_OOT_GROTTO_EXIT_GENERIC_KOKIRI_FOREST && id <= ENTR_OOT_GROTTO_EXIT_GENERIC_HF_MAKET)
     {
