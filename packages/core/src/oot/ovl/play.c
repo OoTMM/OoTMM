@@ -474,6 +474,10 @@ NORETURN static void Play_GameSwitch(GameState_Play* play, s32 entrance)
 
 static const u8 kGrottoDataGeneric[] = { 0x0c, 0x14, 0x08, 0x17, 0x1a, 0x09, 0x02, 0x03, 0x00 };
 
+static const u8  kGrottoExitsRoom[] = {};
+static const s16 kGrottoExitsPos[] = {};
+static const u16 kGrottoExitsEntrance[] = {};
+
 static void applyCustomEntrance(u32* entrance)
 {
     u32 id;
@@ -488,20 +492,21 @@ static void applyCustomEntrance(u32* entrance)
     }
     else if (id >= ENTR_OOT_GROTTO_EXIT_GENERIC_KOKIRI_FOREST && id <= ENTR_OOT_GROTTO_EXIT_GENERIC_HF_MAKET)
     {
+        id -= ENTR_OOT_GROTTO_EXIT_GENERIC_KOKIRI_FOREST;
         rs = &gSaveContext.respawn[1];
-        rs->pos.x = -512;
-        rs->pos.y = 380;
-        rs->pos.z = -1224;
+        rs->pos.x = (float)kGrottoExitsPos[3 * id + 0];
+        rs->pos.y = (float)kGrottoExitsPos[3 * id + 1];
+        rs->pos.z = (float)kGrottoExitsPos[3 * id + 2];
         rs->yaw = 0;
-        rs->entranceIndex = id;
+        rs->entranceIndex = kGrottoExitsEntrance[id];
         rs->playerParams = 0x04ff;
         rs->data = 0;
-        rs->roomIndex = 0;
+        rs->roomIndex = kGrottoExitsRoom[id];
         rs->tempSwitchFlags = 0;
         rs->tempCollectFlags = 0;
         gSaveContext.respawnFlag = 2;
         gSaveContext.nextTransitionType = 3;
-        *entrance = ENTR_OOT_KOKIRI_FOREST_FROM_LOST_WOODS;
+        *entrance = rs->entranceIndex;
     }
 }
 
