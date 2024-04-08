@@ -517,11 +517,17 @@ static const GrottoExit kGrottoExits[] = {
     { ENTR_OOT_FIELD_FROM_MARKET_ENTRANCE,       0, { -1425,    0,   810 } },
 
     /* Fairy Fountains */
-    { ENTR_OOT_WARP_SONG_MEADOW,            0,  {    45,    0,   220 } },
+    { ENTR_OOT_SACRED_MEADOW,               0,  {    45,    0,   220 } },
     { ENTR_OOT_FIELD_FROM_MARKET_ENTRANCE,  0,  { -4450, -300,  -425 } },
     { ENTR_OOT_ZORA_RIVER_FROM_FIELD,       0,  {   670,  570,  -365 } },
     { ENTR_OOT_ZORA_DOMAIN,                 1,  {  -860,   14,  -470 } },
     { ENTR_OOT_GERUDO_FORTRESS_FROM_VALLEY, 0,  {   376,  333, -1564 } },
+
+    /* Double Scrubs */
+    { ENTR_OOT_WARP_SONG_MEADOW,           0, {  310,  480, -2300 } },
+    { ENTR_OOT_ZORA_RIVER_FROM_FIELD,      0, { -1630, 100,  -130 } },
+    { ENTR_OOT_GERUDO_VALLEY_FROM_TENT,    0, { -1323,  15,  -969 } },
+    { ENTR_OOT_DESERT_COLOSSUS_FROM_FAIRY, 0, {    60, -32, -1300 } },
 };
 
 static void applyGrottoExit(u32* entrance, int id)
@@ -588,8 +594,9 @@ static u32 entrGrottoExit(GameState_Play* play)
     switch (play->sceneId)
     {
     case SCE_OOT_GROTTOS:
-        if (play->roomCtx.curRoom.num == 0)
+        switch (play->roomCtx.curRoom.num)
         {
+        case 0x00:
             switch (gGrottoData & 0x1f)
             {
             case 0x0c: return ENTR_OOT_GROTTO_EXIT_GENERIC_KOKIRI_FOREST;
@@ -601,8 +608,17 @@ static u32 entrGrottoExit(GameState_Play* play)
             case 0x02: return ENTR_OOT_GROTTO_EXIT_GENERIC_HF_SOUTHEAST;
             case 0x03: return ENTR_OOT_GROTTO_EXIT_GENERIC_HF_OPEN;
             case 0x00: return ENTR_OOT_GROTTO_EXIT_GENERIC_HF_MAKET;
-            default: UNREACHABLE();
             }
+            UNREACHABLE();
+        case 0x09:
+            switch (gLastScene)
+            {
+            case SCE_OOT_SACRED_FOREST_MEADOW: return ENTR_OOT_GROTTO_EXIT_SCRUBS2_SFM;
+            case SCE_OOT_ZORA_RIVER: return ENTR_OOT_GROTTO_EXIT_SCRUBS2_RIVER;
+            case SCE_OOT_GERUDO_VALLEY: return ENTR_OOT_GROTTO_EXIT_SCRUBS2_VALLEY;
+            case SCE_OOT_DESERT_COLOSSUS: return ENTR_OOT_GROTTO_EXIT_SCRUBS2_COLOSSUS;
+            }
+            UNREACHABLE();
         }
         break;
     case SCE_OOT_FAIRY_FOUNTAIN:
@@ -613,8 +629,8 @@ static u32 entrGrottoExit(GameState_Play* play)
         case SCE_OOT_ZORA_RIVER: return ENTR_OOT_GROTTO_EXIT_FAIRY_RIVER;
         case SCE_OOT_ZORA_DOMAIN: return ENTR_OOT_GROTTO_EXIT_FAIRY_DOMAIN;
         case SCE_OOT_GERUDO_FORTRESS: return ENTR_OOT_GROTTO_EXIT_FAIRY_FORTRESS;
-        default: UNREACHABLE();
         }
+        UNREACHABLE();
     }
 
     return ENTR_OOT_INTERNAL_EXIT_GROTTO;
