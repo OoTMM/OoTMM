@@ -377,12 +377,18 @@ static const GrottoExit kGrottoExits[] = {
     { ENTR_MM_GREAT_BAY_COAST_FROM_FISHER_HUT, 0, { 1359, 80, 5018 } },
     { ENTR_MM_ZORA_CAPE_FROM_COAST, 0, { -562, 80, 2707 } },
     { ENTR_MM_IKANA_ROAD_FROM_FIELD, 0, { -428, 200, -335 } },
-    { ENTR_MM_IKANA_GRAVEYARD_FROM_DAMPE,       1, { 106, 314, -1777 } },
+    { ENTR_MM_IKANA_GRAVEYARD_FROM_DAMPE, 1, { 106, 314, -1777 } },
     { ENTR_MM_IKANA_VALLEY_FROM_ROAD, 2, { -2475, -505, 2475 } },
 
     /* Cow grottos */
     { ENTR_MM_TERMINA_FIELD_FROM_CLOCK_TOWN_SOUTH, 0, { -375, -222, 3976 } },
     { ENTR_MM_GREAT_BAY_COAST_FROM_LABORATORY, 0, { 2077, 333, -215 } },
+
+    /* Gossip grottos */
+    { ENTR_MM_TERMINA_FIELD_FROM_CLOCK_TOWN_NORTH, 0, { 192, 48, -3138 } },
+    { ENTR_MM_TERMINA_FIELD_FROM_CLOCK_TOWN_EAST,  0, { 4450, 254, 925 } },
+    { ENTR_MM_TERMINA_FIELD_FROM_CLOCK_TOWN_WEST,  0, { -2782, 48, -1654 } },
+    { ENTR_MM_TERMINA_FIELD_FROM_CLOCK_TOWN_SOUTH, 0, { -1592, -222, 4622 } },
 };
 
 static void applyGrottoExit(u32* entrance, const GrottoExit* ge)
@@ -421,6 +427,10 @@ static u32 entrGrottoExit(GameState_Play* play)
     case SCE_MM_GROTTOS:
         switch (play->roomCtx.curRoom.id)
         {
+        case 0x00: return ENTR_MM_GROTTO_EXIT_GOSSIPS_OCEAN;
+        case 0x01: return ENTR_MM_GROTTO_EXIT_GOSSIPS_SWAMP;
+        case 0x02: return ENTR_MM_GROTTO_EXIT_GOSSIPS_CANYON;
+        case 0x03: return ENTR_MM_GROTTO_EXIT_GOSSIPS_MOUNTAIN;
         case 0x04:
             switch (gGrottoData & 0x1f)
             {

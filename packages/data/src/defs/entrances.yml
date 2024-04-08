@@ -482,6 +482,7 @@ OOT_MARKET_FROM_MASK_SHOP:                      { game: oot, id: 0x1d1,  type: n
 MM_WOODS_OF_MYSTERY:                        { game: mm, id: 0xc200, type: none }
 MM_TERMINA_FIELD_FROM_CLOCK_TOWN_EAST:      { game: mm, id: 0x5470, type: none }
 MM_TERMINA_FIELD_FROM_CLOCK_TOWN_SOUTH:     { game: mm, id: 0x5460, type: none }
+MM_TERMINA_FIELD_FROM_CLOCK_TOWN_NORTH:     { game: mm, id: 0x5480, type: none }
 MM_SWAMP_ROAD_FROM_FIELD:                   { game: mm, id: 0x7a00, type: none }
 MM_TWIN_ISLAND_FROM_MOUNTAIN_VILLAGE:       { game: mm, id: 0xb400, type: none }
 MM_PATH_SNOWHEAD_FROM_SNOWHEAD:             { game: mm, id: 0xb010, type: none }
