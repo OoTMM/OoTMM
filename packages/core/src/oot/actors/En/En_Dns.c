@@ -20,13 +20,30 @@
 #define KEY(sceneId, inGrotto, item) \
     (((inGrotto) << 24) | ((sceneId) << 16) | (item))
 
+static int scrubSceneKey(GameState_Play* play, int inGrotto)
+{
+    s8 roomId;
+
+    if (!inGrotto)
+        return play->sceneId;
+    roomId = play->roomCtx.curRoom.num;
+    if (roomId == 0x06)
+        return SCE_OOT_LOST_WOODS;
+    if (roomId == 0x01)
+        return SCE_OOT_HYRULE_FIELD;
+    return gLastScene;
+}
+
 static int EnDns_GetID(Actor* this)
 {
     int key;
+    int lastScene;
     int inGrotto;
 
     inGrotto = (gPlay->sceneId == SCE_OOT_GROTTOS);
-    key = KEY(inGrotto ? gLastScene : gPlay->sceneId, inGrotto, this->variable & 0xff);
+    lastScene = scrubSceneKey(gPlay, inGrotto);
+    key = KEY(lastScene, inGrotto, this->variable & 0xff);
+
     switch (key)
     {
     /* Lost Woods */
