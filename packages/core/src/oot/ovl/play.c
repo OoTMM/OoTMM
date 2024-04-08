@@ -607,7 +607,7 @@ static void applyCustomEntrance(u32* entrance)
         *entrance = ENTR_OOT_GROTTO_TYPE_SCRUB3;
         gLastScene = kGrottoDataScrubs3[id];
     }
-    else if (id >= ENTR_OOT_GROTTO_EXIT_GENERIC_KOKIRI_FOREST && id <= ENTR_OOT_GRAVE_EXIT_DAMPE)
+    else if (id >= ENTR_OOT_GROTTO_EXIT_GENERIC_KOKIRI_FOREST && id <= ENTR_OOT_GROTTO_EXIT_OCTOROK)
     {
         id -= ENTR_OOT_GROTTO_EXIT_GENERIC_KOKIRI_FOREST;
         applyGrottoExit(entrance, id);
@@ -677,6 +677,10 @@ static u32 entrGrottoExit(GameState_Play* play)
         case SCE_OOT_GERUDO_FORTRESS: return ENTR_OOT_GROTTO_EXIT_FAIRY_FORTRESS;
         }
         UNREACHABLE();
+    case SCE_OOT_TOMB_FAIRY: return ENTR_OOT_GRAVE_EXIT_SHIELD;
+    case SCE_OOT_TOMB_REDEAD: return ENTR_OOT_GRAVE_EXIT_REDEAD;
+    case SCE_OOT_TOMB_ROYAL: return ENTR_OOT_GRAVE_EXIT_ROYAL;
+    case SCE_OOT_TOMB_DAMPE_WINDMILL: return ENTR_OOT_GRAVE_EXIT_DAMPE;
     }
 
     return ENTR_OOT_INTERNAL_EXIT_GROTTO;
