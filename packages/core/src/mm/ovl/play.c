@@ -379,6 +379,10 @@ static const GrottoExit kGrottoExits[] = {
     { ENTR_MM_IKANA_ROAD_FROM_FIELD, 0, { -428, 200, -335 } },
     { ENTR_MM_IKANA_GRAVEYARD_FROM_DAMPE,       1, { 106, 314, -1777 } },
     { ENTR_MM_IKANA_VALLEY_FROM_ROAD, 2, { -2475, -505, 2475 } },
+
+    /* Cow grottos */
+    { ENTR_MM_TERMINA_FIELD_FROM_CLOCK_TOWN_SOUTH, 0, { -375, -222, 3976 } },
+    { ENTR_MM_GREAT_BAY_COAST_FROM_LABORATORY, 0, { 2077, 333, -215 } },
 };
 
 static void applyGrottoExit(u32* entrance, const GrottoExit* ge)
@@ -430,6 +434,13 @@ static u32 entrGrottoExit(GameState_Play* play)
             case 0x1d: return ENTR_MM_GROTTO_EXIT_GENERIC_SWAMP;
             case 0x1e: return ENTR_MM_GROTTO_EXIT_GENERIC_PATH_SWAMP;
             case 0x1f: return ENTR_MM_GROTTO_EXIT_GENERIC_GRASS;
+            }
+            UNREACHABLE();
+        case 0x0a:
+            switch (gLastScene)
+            {
+            case SCE_MM_TERMINA_FIELD: return ENTR_MM_GROTTO_EXIT_COW_FIELD;
+            case SCE_MM_GREAT_BAY_COAST: return ENTR_MM_GROTTO_EXIT_COW_COAST;
             }
             UNREACHABLE();
         }
