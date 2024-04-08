@@ -335,8 +335,6 @@ Lights_PointNoGlowSetInfo = 0x801019FC;
 Actor_DrawLensActors = 0x800B9EF4;
 Actor_LoadOverlay = 0x800bacd4;
 
-Play_SetupRespawnPoint = 0x80169E6C;
-
 LightContext_InsertLight = 0x80102624;
 
 Entrance_GetSceneIdAbsolute = 0x80132338;

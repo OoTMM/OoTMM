@@ -116,7 +116,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.ammo[ITS_MM_BOMBS] = 40;
 
         gSave.playerData.healthMax = 0x10 * 20;
-        gSave.playerData.health = gSave.playerData.healthMax;
+        gSave.playerData.health = 0x10 * 3;
 
         gMmExtraTrade.trade1 = 0x3f;
         gMmExtraTrade.trade2 = 0x1f;
@@ -747,3 +747,21 @@ void Play_TransitionDone(GameState_Play* play)
         play->nextEntrance = entrance & 0xffff;
     }
 }
+
+void Play_SetupRespawnPointRaw(GameState_Play* play, int respawnId, int playerParams)
+{
+    Actor_Player* link;
+
+    link = GET_LINK(play);
+    Play_SetRespawnData(play, respawnId, gSave.entranceIndex, gPlay->roomCtx.curRoom.id, playerParams, &link->base.world.pos, link->base.rot2.y);
+}
+
+void Play_SetupRespawnPoint(GameState_Play* play, int respawnId, int playerParams)
+{
+    if (!comboConfig(CFG_ER_GROTTOS) && play->sceneId == SCE_MM_GROTTOS)
+        return;
+
+    Play_SetupRespawnPointRaw(play, respawnId, playerParams);
+}
+
+PATCH_FUNC(0x80169e6c, Play_SetupRespawnPoint);
