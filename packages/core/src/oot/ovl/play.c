@@ -496,14 +496,52 @@ static const u8 kGrottoDataScrubs3[] = {
     SCE_OOT_LAKE_HYLIA,
 };
 
-static const u8  kGrottoExitsRoom[] = {};
-static const s16 kGrottoExitsPos[] = {};
-static const u16 kGrottoExitsEntrance[] = {};
+typedef struct
+{
+    u16 entrance;
+    u8  room;
+    s16 pos[3];
+}
+GrottoExit;
+
+static const GrottoExit kGrottoExits[] = {
+    /* Generic Grottos */
+    { ENTR_OOT_KOKIRI_FOREST_FROM_LOST_WOODS,    0, {  -512,  380, -1224 } },
+    { ENTR_OOT_LOST_WOODS_FROM_KOKIRI_FOREST,    2, {   915,    0,  -925 } },
+    { ENTR_OOT_KAKARIKO_FROM_GRANNY,             0, {   860,   80,  -260 } },
+    { ENTR_OOT_DEATH_MOUNTAIN_FROM_GORON_CITY,   0, {  -383, 1386, -1206 } },
+    { ENTR_OOT_DEATH_MOUNTAIN_CRATER,            1, {    40, 1233,  1770 } },
+    { ENTR_OOT_ZORA_RIVER_FROM_FIELD,            0, {   360,  570,   130 } },
+    { ENTR_OOT_FIELD_FROM_LAKE_HYLIA,            0, {  -270, -500, 12350 } },
+    { ENTR_OOT_FIELD_FROM_LAKE_HYLIA,            0, { -4030, -700, 13860 } },
+    { ENTR_OOT_FIELD_FROM_MARKET_ENTRANCE,       0, { -1425,    0,   810 } },
+};
+
+static void applyGrottoExit(u32* entrance, int id)
+{
+    OotRespawnData* rs;
+    const GrottoExit* ge;
+
+    rs = &gSaveContext.respawn[1];
+    ge = &kGrottoExits[id];
+    rs->pos.x = ge->pos[0];
+    rs->pos.y = ge->pos[1];
+    rs->pos.z = ge->pos[2];
+    rs->yaw = 0;
+    rs->entranceIndex = ge->entrance;
+    rs->playerParams = 0x04ff;
+    rs->data = 0;
+    rs->roomIndex = ge->room;
+    rs->tempSwitchFlags = 0;
+    rs->tempCollectFlags = 0;
+    gSaveContext.respawnFlag = 2;
+    gSaveContext.nextTransitionType = 3;
+    *entrance = rs->entranceIndex;
+}
 
 static void applyCustomEntrance(u32* entrance)
 {
     u32 id;
-    OotRespawnData* rs;
 
     id = *entrance;
     if (id >= ENTR_OOT_GROTTO_GENERIC_KOKIRI_FOREST && id <= ENTR_OOT_GROTTO_GENERIC_HF_MAKET)
@@ -531,30 +569,37 @@ static void applyCustomEntrance(u32* entrance)
         *entrance = ENTR_OOT_GROTTO_TYPE_SCRUB3;
         gLastScene = kGrottoDataScrubs3[id];
     }
-    else if (id >= ENTR_OOT_GROTTO_EXIT_GENERIC_KOKIRI_FOREST && id <= ENTR_OOT_GROTTO_EXIT_GENERIC_HF_MAKET)
+    else if (id >= ENTR_OOT_GROTTO_EXIT_GENERIC_KOKIRI_FOREST && id <= ENTR_OOT_GROTTO_EXIT_SCRUBS3_LAKE)
     {
         id -= ENTR_OOT_GROTTO_EXIT_GENERIC_KOKIRI_FOREST;
-        rs = &gSaveContext.respawn[1];
-        rs->pos.x = (float)kGrottoExitsPos[3 * id + 0];
-        rs->pos.y = (float)kGrottoExitsPos[3 * id + 1];
-        rs->pos.z = (float)kGrottoExitsPos[3 * id + 2];
-        rs->yaw = 0;
-        rs->entranceIndex = kGrottoExitsEntrance[id];
-        rs->playerParams = 0x04ff;
-        rs->data = 0;
-        rs->roomIndex = kGrottoExitsRoom[id];
-        rs->tempSwitchFlags = 0;
-        rs->tempCollectFlags = 0;
-        gSaveContext.respawnFlag = 2;
-        gSaveContext.nextTransitionType = 3;
-        *entrance = rs->entranceIndex;
+        applyGrottoExit(entrance, id);
     }
 }
 
 static u32 entrGrottoExit(GameState_Play* play)
 {
-    return ENTR_OOT_GROTTO_EXIT_GENERIC_KOKIRI_FOREST;
-    //return ENTR_OOT_INTERNAL_EXIT_GROTTO;
+    switch (play->sceneId)
+    {
+    case SCE_OOT_GROTTOS:
+        if (play->roomCtx.curRoom.num == 0)
+        {
+            switch (gGrottoData & 0x1f)
+            {
+            case 0x0c: return ENTR_OOT_GROTTO_EXIT_GENERIC_KOKIRI_FOREST;
+            case 0x14: return ENTR_OOT_GROTTO_EXIT_GENERIC_LOST_WOODS;
+            case 0x08: return ENTR_OOT_GROTTO_EXIT_GENERIC_KAKARIKO;
+            case 0x17: return ENTR_OOT_GROTTO_EXIT_GENERIC_DMT;
+            case 0x1a: return ENTR_OOT_GROTTO_EXIT_GENERIC_DMC;
+            case 0x09: return ENTR_OOT_GROTTO_EXIT_GENERIC_RIVER;
+            case 0x02: return ENTR_OOT_GROTTO_EXIT_GENERIC_HF_SOUTHEAST;
+            case 0x03: return ENTR_OOT_GROTTO_EXIT_GENERIC_HF_OPEN;
+            case 0x00: return ENTR_OOT_GROTTO_EXIT_GENERIC_HF_MAKET;
+            }
+        }
+        break;
+    }
+
+    return ENTR_OOT_INTERNAL_EXIT_GROTTO;
 }
 
 void Play_TransitionDone(GameState_Play* play)
