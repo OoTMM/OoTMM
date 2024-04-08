@@ -709,9 +709,12 @@ void Play_UpdateWrapper(GameState_Play* play)
     Debug_Update();
 }
 
-NORETURN static void Play_GameSwitch(GameState_Play* play, s32 entrance)
+static u32 entrGrottoExit(GameState_Play* play)
 {
-    comboGameSwitch(play, entrance);
+    //if (!comboConfig(CFG_ER_GROTTOS))
+    //    return ENTR_MM_INTERNAL_EXIT_GROTTO;
+
+    return ENTR_MM_INTERNAL_EXIT_GROTTO;
 }
 
 void Play_TransitionDone(GameState_Play* play)
@@ -724,9 +727,19 @@ void Play_TransitionDone(GameState_Play* play)
     if (entrance == ENTR_EXTENDED)
         entrance = g.nextEntrance;
 
+    /* Handle grotto exits */
+    if (entrance == ENTR_MM_INTERNAL_EXIT_GROTTO)
+    {
+        entrance = entrGrottoExit(play);
+        if (entrance == ENTR_MM_INTERNAL_EXIT_GROTTO)
+        {
+            gIsEntranceOverride = 0;
+            entrance = gSaveContext.respawn[3].entrance;
+            gSaveContext.respawnFlag = 4;
+        }
+    }
+
     /* Handle transition override */
-    if (g.inGrotto)
-        gIsEntranceOverride = 0;
     if (gIsEntranceOverride)
     {
         gIsEntranceOverride = 0;
@@ -740,7 +753,7 @@ void Play_TransitionDone(GameState_Play* play)
     /* Check for foreign */
     if (entrance & MASK_FOREIGN_ENTRANCE)
     {
-        Play_GameSwitch(play, entrance & ~MASK_FOREIGN_ENTRANCE);
+        comboGameSwitch(play, entrance & ~MASK_FOREIGN_ENTRANCE);
     }
     else
     {
