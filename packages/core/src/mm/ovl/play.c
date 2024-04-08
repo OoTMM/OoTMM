@@ -257,7 +257,6 @@ static u32 entranceForOverride(u32 entrance)
     }
 }
 
-
 static void sendSelfMajorasMask(void)
 {
     NetContext* net;
@@ -356,7 +355,90 @@ void fixupOriginalSceneSetup(void)
     gSave.entranceIndex = (entranceKey << 9) | (entrance & 0x1ff);
 }
 
-static const u8 kGrottoDataGeneric[] = { 0x1a, 0x1f, 0x1d, 0x1c, 0x1e, 0x1b, 0x19, 0x13, 0x17, 0x15, 0x16, 0x18, 0x14 };
+
+typedef struct
+{
+    u16 entrance;
+    u8  room;
+    s16 pos[3];
+}
+GrottoExit;
+
+static const GrottoExit kGrottoExits[] = {
+    /* Generic grottos */
+    { ENTR_MM_TERMINA_FIELD_FROM_CLOCK_TOWN_EAST, 0, { 2367, 315, -192 } },
+    { ENTR_MM_TERMINA_FIELD_FROM_CLOCK_TOWN_SOUTH, 0, { 1012, -221, 3642 } },
+    { ENTR_MM_SWAMP_ROAD_FROM_FIELD, 0, { 104, -182, 2202 } },
+    { ENTR_MM_WOODS_OF_MYSTERY, 2, { 2, 0, -889 } },
+    { ENTR_MM_SWAMP_FROM_SPIDER_HOUSE, 1, { -1700, 38, 1800 } },
+    { ENTR_MM_WARP_OWL_MOUNTAIN_VILLAGE, 1, { 2406, 1168, -1197 } },
+    { ENTR_MM_TWIN_ISLAND_FROM_MOUNTAIN_VILLAGE, 0, { -1309, 320, 143 } },
+    { ENTR_MM_PATH_SNOWHEAD_FROM_SNOWHEAD, 0, { -987, 360, -2339 } },
+    { ENTR_MM_GREAT_BAY_COAST_FROM_FISHER_HUT, 0, { 1359, 80, 5018 } },
+    { ENTR_MM_ZORA_CAPE_FROM_COAST, 0, { -562, 80, 2707 } },
+    { ENTR_MM_IKANA_ROAD_FROM_FIELD, 0, { -428, 200, -335 } },
+    { ENTR_MM_IKANA_GRAVEYARD_FROM_DAMPE,       1, { 106, 314, -1777 } },
+    { ENTR_MM_IKANA_VALLEY_FROM_ROAD, 2, { -2475, -505, 2475 } },
+};
+
+static void applyGrottoExit(u32* entrance, const GrottoExit* ge)
+{
+    RespawnData* rs;
+
+    /* Set the grotto exit */
+    rs = &gSaveContext.respawn[3];
+    rs->pos.x = ge->pos[0];
+    rs->pos.y = ge->pos[1];
+    rs->pos.z = ge->pos[2];
+    rs->yaw = 0;
+    rs->entrance = ge->entrance;
+    rs->playerParams = 0x04ff;
+    rs->data = 0;
+    rs->roomIndex = ge->room;
+    rs->tempSwitchFlags = 0;
+    rs->unk_18 = 0;
+    rs->tempCollectFlags = 0;
+
+    /* Set the respawn flags */
+    gSaveContext.respawnFlag = 4;
+    *entrance = rs->entrance;
+}
+
+static u32 entrGrottoExit(GameState_Play* play)
+{
+    //if (!comboConfig(CFG_ER_GROTTOS))
+    //    return ENTR_MM_INTERNAL_EXIT_GROTTO;
+
+    switch (play->sceneId)
+    {
+    case SCE_MM_GROTTOS:
+        switch (play->roomCtx.curRoom.id)
+        {
+        case 0x04:
+            switch (gGrottoData & 0x1f)
+            {
+            case 0x13: return ENTR_MM_GROTTO_EXIT_GENERIC_PATH_SNOWHEAD;
+            case 0x14: return ENTR_MM_GROTTO_EXIT_GENERIC_VALLEY;
+            case 0x15: return ENTR_MM_GROTTO_EXIT_GENERIC_ZORA_CAPE;
+            case 0x16: return ENTR_MM_GROTTO_EXIT_GENERIC_PATH_IKANA;
+            case 0x17: return ENTR_MM_GROTTO_EXIT_GENERIC_GREAT_BAY_COAST;
+            case 0x18: return ENTR_MM_GROTTO_EXIT_GENERIC_GRAVEYARD;
+            case 0x19: return ENTR_MM_GROTTO_EXIT_GENERIC_TWIN_ISLANDS;
+            case 0x1a: return ENTR_MM_GROTTO_EXIT_GENERIC_FIELD_PILLAR;
+            case 0x1b: return ENTR_MM_GROTTO_EXIT_GENERIC_MOUNTAIN_VILLAGE;
+            case 0x1c: return ENTR_MM_GROTTO_EXIT_GENERIC_WOODS;
+            case 0x1d: return ENTR_MM_GROTTO_EXIT_GENERIC_SWAMP;
+            case 0x1e: return ENTR_MM_GROTTO_EXIT_GENERIC_PATH_SWAMP;
+            case 0x1f: return ENTR_MM_GROTTO_EXIT_GENERIC_GRASS;
+            }
+            UNREACHABLE();
+        }
+    }
+
+    return ENTR_MM_INTERNAL_EXIT_GROTTO;
+}
+
+static const u8 kGrottoDataGeneric[] = { 0x1a, 0x1f, 0x1e, 0x1c, 0x1d, 0x1b, 0x19, 0x13, 0x17, 0x15, 0x16, 0x18, 0x14 };
 
 static void applyCustomEntrance(u32* entrance)
 {
@@ -377,6 +459,11 @@ static void applyCustomEntrance(u32* entrance)
         else
             gLastScene = SCE_MM_GREAT_BAY_COAST;
         *entrance = ENTR_MM_GROTTO_TYPE_COW;
+    }
+    else if (id >= ENTR_MM_GROTTO_EXIT_GENERIC_FIELD_PILLAR && id <= ENTR_MM_GROTTO_EXIT_HOT_WATER)
+    {
+        id -= ENTR_MM_GROTTO_EXIT_GENERIC_FIELD_PILLAR;
+        applyGrottoExit(entrance, &kGrottoExits[id]);
     }
 }
 
@@ -707,14 +794,6 @@ void Play_UpdateWrapper(GameState_Play* play)
     checkTimeSkip(play);
     Play_Update(play);
     Debug_Update();
-}
-
-static u32 entrGrottoExit(GameState_Play* play)
-{
-    //if (!comboConfig(CFG_ER_GROTTOS))
-    //    return ENTR_MM_INTERNAL_EXIT_GROTTO;
-
-    return ENTR_MM_INTERNAL_EXIT_GROTTO;
 }
 
 void Play_TransitionDone(GameState_Play* play)
