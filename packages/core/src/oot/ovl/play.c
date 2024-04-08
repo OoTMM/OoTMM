@@ -479,7 +479,7 @@ static const u8 kGrottoDataFairy[] = {
     SCE_OOT_HYRULE_FIELD,
     SCE_OOT_ZORA_RIVER,
     SCE_OOT_ZORA_DOMAIN,
-    SCE_OOT_GERUDO_VALLEY,
+    SCE_OOT_GERUDO_FORTRESS,
 };
 
 static const u8 kGrottoDataScrubs2[] = {
@@ -515,6 +515,13 @@ static const GrottoExit kGrottoExits[] = {
     { ENTR_OOT_FIELD_FROM_LAKE_HYLIA,            0, {  -270, -500, 12350 } },
     { ENTR_OOT_FIELD_FROM_LAKE_HYLIA,            0, { -4030, -700, 13860 } },
     { ENTR_OOT_FIELD_FROM_MARKET_ENTRANCE,       0, { -1425,    0,   810 } },
+
+    /* Fairy Fountains */
+    { ENTR_OOT_WARP_SONG_MEADOW,            0,  {    45,    0,   220 } },
+    { ENTR_OOT_FIELD_FROM_MARKET_ENTRANCE,  0,  { -4450, -300,  -425 } },
+    { ENTR_OOT_ZORA_RIVER_FROM_FIELD,       0,  {   670,  570,  -365 } },
+    { ENTR_OOT_ZORA_DOMAIN,                 1,  {  -860,   14,  -470 } },
+    { ENTR_OOT_GERUDO_FORTRESS_FROM_VALLEY, 0,  {   376,  333, -1564 } },
 };
 
 static void applyGrottoExit(u32* entrance, int id)
@@ -551,7 +558,7 @@ static void applyCustomEntrance(u32* entrance)
         gGrottoData &= ~0x1f;
         gGrottoData |= kGrottoDataGeneric[id];
     }
-    else if (id >= ENTR_OOT_GROTTO_FAIRY_SFM && id <= ENTR_OOT_GROTTO_FAIRY_VALLEY)
+    else if (id >= ENTR_OOT_GROTTO_FAIRY_SFM && id <= ENTR_OOT_GROTTO_FAIRY_FORTRESS)
     {
         id -= ENTR_OOT_GROTTO_FAIRY_SFM;
         *entrance = ENTR_OOT_GROTTO_TYPE_FAIRY;
@@ -594,9 +601,20 @@ static u32 entrGrottoExit(GameState_Play* play)
             case 0x02: return ENTR_OOT_GROTTO_EXIT_GENERIC_HF_SOUTHEAST;
             case 0x03: return ENTR_OOT_GROTTO_EXIT_GENERIC_HF_OPEN;
             case 0x00: return ENTR_OOT_GROTTO_EXIT_GENERIC_HF_MAKET;
+            default: UNREACHABLE();
             }
         }
         break;
+    case SCE_OOT_FAIRY_FOUNTAIN:
+        switch (gLastScene)
+        {
+        case SCE_OOT_SACRED_FOREST_MEADOW: return ENTR_OOT_GROTTO_EXIT_FAIRY_SFM;
+        case SCE_OOT_HYRULE_FIELD: return ENTR_OOT_GROTTO_EXIT_FAIRY_HF;
+        case SCE_OOT_ZORA_RIVER: return ENTR_OOT_GROTTO_EXIT_FAIRY_RIVER;
+        case SCE_OOT_ZORA_DOMAIN: return ENTR_OOT_GROTTO_EXIT_FAIRY_DOMAIN;
+        case SCE_OOT_GERUDO_FORTRESS: return ENTR_OOT_GROTTO_EXIT_FAIRY_FORTRESS;
+        default: UNREACHABLE();
+        }
     }
 
     return ENTR_OOT_INTERNAL_EXIT_GROTTO;
