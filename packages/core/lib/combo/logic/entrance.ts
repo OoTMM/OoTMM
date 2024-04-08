@@ -434,7 +434,9 @@ export class LogicPassEntrances {
       const e = ENTRANCES[eName];
       delete world.areas[e.from].exits[e.to!];
       const reverse = (e as any).reverse as Entrance | undefined;
+      console.log(eName);
       if (reverse) {
+        console.log(reverse);
         const r = ENTRANCES[reverse];
         delete world.areas[r.from!].exits[r.to!];
       }
@@ -565,6 +567,11 @@ export class LogicPassEntrances {
     }
   }
 
+  private placeGrottos(worldId: number) {
+    const pool = new Set(['grotto', 'grave']);
+    this.placePool(worldId, Array.from(pool), { ownGame: this.input.settings.erGrottos === 'ownGame' });
+  }
+
   private propagateRegionsStep(worldId: number) {
     const world = this.worlds[worldId];
     let changed = false;
@@ -693,6 +700,11 @@ export class LogicPassEntrances {
       if (this.input.settings.erWallmasters !== 'none') {
         anyEr = true;
         this.placeWallmasters(i);
+      }
+
+      if (this.input.settings.erGrottos !== 'none') {
+        anyEr = true;
+        this.placeGrottos(i);
       }
 
       if (this.input.settings.erRegions !== 'none') {
