@@ -301,6 +301,48 @@ static u32 entranceForOverride(u32 entrance)
         return gLastScene == SCE_OOT_GREAT_FAIRY_FOUNTAIN_UPGRADES ? ENTR_OOT_OUTSIDE_GANON_FROM_FAIRY : ENTR_OOT_HYRULE_CASTLE_FROM_FAIRY;
     case ENTR_OOT_LOST_WOODS_FROM_KOKIRI_FOREST:
         return gLastScene == SCE_OOT_LOST_WOODS ? ENTR_OOT_LOST_WOODS_FROM_LOST_WOODS_NORTH : ENTR_OOT_LOST_WOODS_FROM_KOKIRI_FOREST;
+    case ENTR_OOT_GROTTO_TYPE_GENERIC:
+        switch (gGrottoData & 0x1f)
+        {
+        case 0x0c: return ENTR_OOT_GROTTO_GENERIC_KOKIRI_FOREST;
+        case 0x14: return ENTR_OOT_GROTTO_GENERIC_LOST_WOODS;
+        case 0x08: return ENTR_OOT_GROTTO_GENERIC_KAKARIKO;
+        case 0x17: return ENTR_OOT_GROTTO_GENERIC_DMT;
+        case 0x1a: return ENTR_OOT_GROTTO_GENERIC_DMC;
+        case 0x09: return ENTR_OOT_GROTTO_GENERIC_RIVER;
+        case 0x02: return ENTR_OOT_GROTTO_GENERIC_HF_SOUTHEAST;
+        case 0x03: return ENTR_OOT_GROTTO_GENERIC_HF_OPEN;
+        case 0x00: return ENTR_OOT_GROTTO_GENERIC_HF_MAKET;
+        }
+        UNREACHABLE();
+    case ENTR_OOT_GROTTO_TYPE_FAIRY:
+        switch (gLastScene)
+        {
+        case SCE_OOT_SACRED_FOREST_MEADOW: return ENTR_OOT_GROTTO_FAIRY_SFM;
+        case SCE_OOT_HYRULE_FIELD: return ENTR_OOT_GROTTO_FAIRY_HF;
+        case SCE_OOT_ZORA_RIVER: return ENTR_OOT_GROTTO_FAIRY_RIVER;
+        case SCE_OOT_ZORA_DOMAIN: return ENTR_OOT_GROTTO_FAIRY_DOMAIN;
+        case SCE_OOT_GERUDO_FORTRESS: return ENTR_OOT_GROTTO_FAIRY_FORTRESS;
+        }
+        UNREACHABLE();
+    case ENTR_OOT_GROTTO_TYPE_SCRUB2:
+        switch (gLastScene)
+        {
+        case SCE_OOT_SACRED_FOREST_MEADOW: return ENTR_OOT_GROTTO_SCRUBS2_SFM;
+        case SCE_OOT_ZORA_RIVER: return ENTR_OOT_GROTTO_SCRUBS2_RIVER;
+        case SCE_OOT_GERUDO_VALLEY: return ENTR_OOT_GROTTO_SCRUBS2_VALLEY;
+        case SCE_OOT_DESERT_COLOSSUS: return ENTR_OOT_GROTTO_SCRUBS2_COLOSSUS;
+        }
+        UNREACHABLE();
+    case ENTR_OOT_GROTTO_TYPE_SCRUB3:
+        switch (gLastScene)
+        {
+        case SCE_OOT_LON_LON_RANCH: return ENTR_OOT_GROTTO_SCRUBS3_RANCH;
+        case SCE_OOT_GORON_CITY: return ENTR_OOT_GROTTO_SCRUBS3_GORON_CITY;
+        case SCE_OOT_DEATH_MOUNTAIN_CRATER: return ENTR_OOT_GROTTO_SCRUBS3_DMC;
+        case SCE_OOT_LAKE_HYLIA: return ENTR_OOT_GROTTO_SCRUBS3_LAKE;
+        }
+        UNREACHABLE();
     default:
         return entrance;
     }
