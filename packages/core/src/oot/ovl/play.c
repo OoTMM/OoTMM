@@ -698,7 +698,7 @@ static u32 entrGrottoExit(GameState_Play* play)
             }
             UNREACHABLE();
         case 0x0a: return ENTR_OOT_GROTTO_EXIT_TEKTITE;
-        case 0x0b: return ENTR_OOT_GROTTO_DEKU_THEATER;
+        case 0x0b: return ENTR_OOT_GROTTO_EXIT_DEKU_THEATER;
         case 0x0c:
             switch (gLastScene)
             {
