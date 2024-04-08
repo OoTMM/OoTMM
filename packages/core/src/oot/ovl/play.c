@@ -301,6 +301,48 @@ static u32 entranceForOverride(u32 entrance)
         return gLastScene == SCE_OOT_GREAT_FAIRY_FOUNTAIN_UPGRADES ? ENTR_OOT_OUTSIDE_GANON_FROM_FAIRY : ENTR_OOT_HYRULE_CASTLE_FROM_FAIRY;
     case ENTR_OOT_LOST_WOODS_FROM_KOKIRI_FOREST:
         return gLastScene == SCE_OOT_LOST_WOODS ? ENTR_OOT_LOST_WOODS_FROM_LOST_WOODS_NORTH : ENTR_OOT_LOST_WOODS_FROM_KOKIRI_FOREST;
+    case ENTR_OOT_GROTTO_TYPE_GENERIC:
+        switch (gGrottoData & 0x1f)
+        {
+        case 0x0c: return ENTR_OOT_GROTTO_GENERIC_KOKIRI_FOREST;
+        case 0x14: return ENTR_OOT_GROTTO_GENERIC_LOST_WOODS;
+        case 0x08: return ENTR_OOT_GROTTO_GENERIC_KAKARIKO;
+        case 0x17: return ENTR_OOT_GROTTO_GENERIC_DMT;
+        case 0x1a: return ENTR_OOT_GROTTO_GENERIC_DMC;
+        case 0x09: return ENTR_OOT_GROTTO_GENERIC_RIVER;
+        case 0x02: return ENTR_OOT_GROTTO_GENERIC_HF_SOUTHEAST;
+        case 0x03: return ENTR_OOT_GROTTO_GENERIC_HF_OPEN;
+        case 0x00: return ENTR_OOT_GROTTO_GENERIC_HF_MAKET;
+        }
+        UNREACHABLE();
+    case ENTR_OOT_GROTTO_TYPE_FAIRY:
+        switch (gLastScene)
+        {
+        case SCE_OOT_SACRED_FOREST_MEADOW: return ENTR_OOT_GROTTO_FAIRY_SFM;
+        case SCE_OOT_HYRULE_FIELD: return ENTR_OOT_GROTTO_FAIRY_HF;
+        case SCE_OOT_ZORA_RIVER: return ENTR_OOT_GROTTO_FAIRY_RIVER;
+        case SCE_OOT_ZORA_DOMAIN: return ENTR_OOT_GROTTO_FAIRY_DOMAIN;
+        case SCE_OOT_GERUDO_FORTRESS: return ENTR_OOT_GROTTO_FAIRY_FORTRESS;
+        }
+        UNREACHABLE();
+    case ENTR_OOT_GROTTO_TYPE_SCRUB2:
+        switch (gLastScene)
+        {
+        case SCE_OOT_SACRED_FOREST_MEADOW: return ENTR_OOT_GROTTO_SCRUBS2_SFM;
+        case SCE_OOT_ZORA_RIVER: return ENTR_OOT_GROTTO_SCRUBS2_RIVER;
+        case SCE_OOT_GERUDO_VALLEY: return ENTR_OOT_GROTTO_SCRUBS2_VALLEY;
+        case SCE_OOT_DESERT_COLOSSUS: return ENTR_OOT_GROTTO_SCRUBS2_COLOSSUS;
+        }
+        UNREACHABLE();
+    case ENTR_OOT_GROTTO_TYPE_SCRUB3:
+        switch (gLastScene)
+        {
+        case SCE_OOT_LON_LON_RANCH: return ENTR_OOT_GROTTO_SCRUBS3_RANCH;
+        case SCE_OOT_GORON_CITY: return ENTR_OOT_GROTTO_SCRUBS3_GORON_CITY;
+        case SCE_OOT_DEATH_MOUNTAIN_CRATER: return ENTR_OOT_GROTTO_SCRUBS3_DMC;
+        case SCE_OOT_LAKE_HYLIA: return ENTR_OOT_GROTTO_SCRUBS3_LAKE;
+        }
+        UNREACHABLE();
     default:
         return entrance;
     }
@@ -472,6 +514,223 @@ NORETURN static void Play_GameSwitch(GameState_Play* play, s32 entrance)
     comboGameSwitch(play, entrance);
 }
 
+static const u8 kGrottoDataGeneric[] = { 0x0c, 0x14, 0x08, 0x17, 0x1a, 0x09, 0x02, 0x03, 0x00 };
+
+static const u8 kGrottoDataFairy[] = {
+    SCE_OOT_SACRED_FOREST_MEADOW,
+    SCE_OOT_HYRULE_FIELD,
+    SCE_OOT_ZORA_RIVER,
+    SCE_OOT_ZORA_DOMAIN,
+    SCE_OOT_GERUDO_FORTRESS,
+};
+
+static const u8 kGrottoDataScrubs2[] = {
+    SCE_OOT_SACRED_FOREST_MEADOW,
+    SCE_OOT_ZORA_RIVER,
+    SCE_OOT_GERUDO_VALLEY,
+    SCE_OOT_DESERT_COLOSSUS,
+};
+
+static const u8 kGrottoDataScrubs3[] = {
+    SCE_OOT_LON_LON_RANCH,
+    SCE_OOT_GORON_CITY,
+    SCE_OOT_DEATH_MOUNTAIN_CRATER,
+    SCE_OOT_LAKE_HYLIA,
+};
+
+typedef struct
+{
+    u16 entrance;
+    u8  room;
+    s16 pos[3];
+}
+GrottoExit;
+
+static const GrottoExit kGrottoExits[] = {
+    /* Generic Grottos */
+    { ENTR_OOT_KOKIRI_FOREST_FROM_LOST_WOODS,    0, {  -512,  380, -1224 } },
+    { ENTR_OOT_LOST_WOODS_FROM_KOKIRI_FOREST,    2, {   915,    0,  -925 } },
+    { ENTR_OOT_KAKARIKO_FROM_GRANNY,             0, {   860,   80,  -260 } },
+    { ENTR_OOT_DEATH_MOUNTAIN_FROM_GORON_CITY,   0, {  -383, 1386, -1206 } },
+    { ENTR_OOT_DEATH_MOUNTAIN_CRATER,            1, {    40, 1233,  1770 } },
+    { ENTR_OOT_ZORA_RIVER_FROM_FIELD,            0, {   360,  570,   130 } },
+    { ENTR_OOT_FIELD_FROM_LAKE_HYLIA,            0, {  -270, -500, 12350 } },
+    { ENTR_OOT_FIELD_FROM_LAKE_HYLIA,            0, { -4030, -700, 13860 } },
+    { ENTR_OOT_FIELD_FROM_MARKET_ENTRANCE,       0, { -1425,    0,   810 } },
+
+    /* Fairy Fountains */
+    { ENTR_OOT_SACRED_MEADOW,               0,  {    45,    0,   220 } },
+    { ENTR_OOT_FIELD_FROM_MARKET_ENTRANCE,  0,  { -4450, -300,  -425 } },
+    { ENTR_OOT_ZORA_RIVER_FROM_FIELD,       0,  {   670,  570,  -365 } },
+    { ENTR_OOT_ZORA_DOMAIN,                 1,  {  -860,   14,  -470 } },
+    { ENTR_OOT_GERUDO_FORTRESS_FROM_VALLEY, 0,  {   376,  333, -1564 } },
+
+    /* Double Scrubs */
+    { ENTR_OOT_WARP_SONG_MEADOW,           0, {  310,  480, -2300 } },
+    { ENTR_OOT_ZORA_RIVER_FROM_FIELD,      0, { -1630, 100,  -130 } },
+    { ENTR_OOT_GERUDO_VALLEY_FROM_TENT,    0, { -1323,  15,  -969 } },
+    { ENTR_OOT_DESERT_COLOSSUS_FROM_FAIRY, 0, {    60, -32, -1300 } },
+
+    /* Triple scrubs */
+    { ENTR_OOT_LON_LON_RANCH_FROM_HOUSE,                0, {  1800,    0,  1500 } },
+    { ENTR_OOT_GORON_CITY,                              3, {  1100,  580, -1190 } },
+    { ENTR_OOT_DEATH_MOUNTAIN_CRATER_FROM_GORON_CITY,   1, { -1699,  722,  -472 } },
+    { ENTR_OOT_WARP_SONG_LAKE,                          0, { -3040, -1033, 6075 } },
+
+    /* Other Grottos */
+    { ENTR_OOT_LOST_WOODS_FROM_KOKIRI_FOREST,   8, {   670,    0, -2520 } }, /* OOT_GROTTO_EXIT_SCRUB_UPGRADE */
+    { ENTR_OOT_FIELD_FROM_LAKE_HYLIA,           0, { -4990, -700, 13820 } }, /* OOT_GROTTO_EXIT_SCRUB_HEART_PIECE */
+    { ENTR_OOT_LOST_WOODS_FROM_MEADOW,          6, {    80,  -20, -1600 } }, /* OOT_GROTTO_EXIT_DEKU_THEATER */
+    { ENTR_OOT_SACRED_MEADOW,                   0, {  -195,    0,  1900 } }, /* OOT_GROTTO_EXIT_WOLFOS */
+    { ENTR_OOT_FIELD_FROM_MARKET_ENTRANCE,      0, { -4945, -300,  2835 } }, /* OOT_GROTTO_EXIT_TEKTITE */
+    { ENTR_OOT_FIELD_FROM_GERUDO_VALLEY,        0, { -7870, -300,  6920 } }, /* OOT_GROTTO_EXIT_FIELD_COW */
+    { ENTR_OOT_FIELD_FROM_KAKARIKO,             0, {  2060,   20,  -170 } }, /* OOT_GROTTO_EXIT_FIELD_TREE */
+    { ENTR_OOT_DEATH_MOUNTAIN_FROM_KAKARIKO,    0, {  -688, 1946,  -285 } }, /* OOT_GROTTO_EXIT_TRAIL_COW */
+    { ENTR_OOT_HYRULE_CASTLE,                   0, {   996, 1571,   844 } }, /* OOT_GROTTO_EXIT_CASTLE */
+    { ENTR_OOT_KAKARIKO_FROM_FIELD,             0, {  -400,    0,   400 } }, /* OOT_GROTTO_EXIT_REDEAD */
+    { ENTR_OOT_GERUDO_VALLEY_FROM_FIELD,        0, {   280, -555,  1470 } }, /* OOT_GROTTO_EXIT_OCTOROK */
+};
+
+static void applyGrottoExit(u32* entrance, int id)
+{
+    OotRespawnData* rs;
+    const GrottoExit* ge;
+
+    /* Set the grotto exit */
+    rs = &gSaveContext.respawn[1];
+    ge = &kGrottoExits[id];
+    rs->pos.x = ge->pos[0];
+    rs->pos.y = ge->pos[1];
+    rs->pos.z = ge->pos[2];
+    rs->yaw = 0;
+    rs->entranceIndex = ge->entrance;
+    rs->playerParams = 0x04ff;
+    rs->data = 0;
+    rs->roomIndex = ge->room;
+    rs->tempSwitchFlags = 0;
+    rs->tempCollectFlags = 0;
+
+    /* Set the void respawn */
+    memcpy(&gSaveContext.respawn[0], rs, sizeof(OotRespawnData));
+
+    /* Set the respawn flags */
+    gSaveContext.respawnFlag = 2;
+    gSaveContext.nextTransitionType = 3;
+    *entrance = rs->entranceIndex;
+}
+
+static void applyCustomEntrance(u32* entrance)
+{
+    u32 id;
+
+    id = *entrance;
+    if (id >= ENTR_OOT_GROTTO_GENERIC_KOKIRI_FOREST && id <= ENTR_OOT_GROTTO_GENERIC_HF_MAKET)
+    {
+        id -= ENTR_OOT_GROTTO_GENERIC_KOKIRI_FOREST;
+        *entrance = ENTR_OOT_GROTTO_TYPE_GENERIC;
+        gGrottoData &= ~0x1f;
+        gGrottoData |= kGrottoDataGeneric[id];
+    }
+    else if (id >= ENTR_OOT_GROTTO_FAIRY_SFM && id <= ENTR_OOT_GROTTO_FAIRY_FORTRESS)
+    {
+        id -= ENTR_OOT_GROTTO_FAIRY_SFM;
+        *entrance = ENTR_OOT_GROTTO_TYPE_FAIRY;
+        gLastScene = kGrottoDataFairy[id];
+    }
+    else if (id >= ENTR_OOT_GROTTO_SCRUBS2_SFM && id <= ENTR_OOT_GROTTO_SCRUBS2_COLOSSUS)
+    {
+        id -= ENTR_OOT_GROTTO_SCRUBS2_SFM;
+        *entrance = ENTR_OOT_GROTTO_TYPE_SCRUB2;
+        gLastScene = kGrottoDataScrubs2[id];
+    }
+    else if (id >= ENTR_OOT_GROTTO_SCRUBS3_RANCH && id <= ENTR_OOT_GROTTO_SCRUBS3_LAKE)
+    {
+        id -= ENTR_OOT_GROTTO_SCRUBS3_RANCH;
+        *entrance = ENTR_OOT_GROTTO_TYPE_SCRUB3;
+        gLastScene = kGrottoDataScrubs3[id];
+    }
+    else if (id >= ENTR_OOT_GROTTO_EXIT_GENERIC_KOKIRI_FOREST && id <= ENTR_OOT_GROTTO_EXIT_OCTOROK)
+    {
+        id -= ENTR_OOT_GROTTO_EXIT_GENERIC_KOKIRI_FOREST;
+        applyGrottoExit(entrance, id);
+    }
+}
+
+static u32 entrGrottoExit(GameState_Play* play)
+{
+    if (!comboConfig(CFG_ER_GROTTOS))
+        return ENTR_OOT_INTERNAL_EXIT_GROTTO;
+
+    switch (play->sceneId)
+    {
+    case SCE_OOT_GROTTOS:
+        switch (play->roomCtx.curRoom.num)
+        {
+        case 0x00:
+            switch (gGrottoData & 0x1f)
+            {
+            case 0x0c: return ENTR_OOT_GROTTO_EXIT_GENERIC_KOKIRI_FOREST;
+            case 0x14: return ENTR_OOT_GROTTO_EXIT_GENERIC_LOST_WOODS;
+            case 0x08: return ENTR_OOT_GROTTO_EXIT_GENERIC_KAKARIKO;
+            case 0x17: return ENTR_OOT_GROTTO_EXIT_GENERIC_DMT;
+            case 0x1a: return ENTR_OOT_GROTTO_EXIT_GENERIC_DMC;
+            case 0x09: return ENTR_OOT_GROTTO_EXIT_GENERIC_RIVER;
+            case 0x02: return ENTR_OOT_GROTTO_EXIT_GENERIC_HF_SOUTHEAST;
+            case 0x03: return ENTR_OOT_GROTTO_EXIT_GENERIC_HF_OPEN;
+            case 0x00: return ENTR_OOT_GROTTO_EXIT_GENERIC_HF_MAKET;
+            }
+            UNREACHABLE();
+        case 0x01: return ENTR_OOT_GROTTO_EXIT_SCRUB_HEART_PIECE;
+        case 0x02: return ENTR_OOT_GROTTO_EXIT_REDEAD;
+        case 0x03: return ENTR_OOT_GROTTO_EXIT_TRAIL_COW;
+        case 0x04: return ENTR_OOT_GROTTO_EXIT_FIELD_COW;
+        case 0x05: return ENTR_OOT_GROTTO_EXIT_OCTOROK;
+        case 0x06: return ENTR_OOT_GROTTO_EXIT_SCRUB_UPGRADE;
+        case 0x07: return ENTR_OOT_GROTTO_EXIT_WOLFOS;
+        case 0x08: return ENTR_OOT_GROTTO_EXIT_CASTLE;
+        case 0x09:
+            switch (gLastScene)
+            {
+            case SCE_OOT_SACRED_FOREST_MEADOW: return ENTR_OOT_GROTTO_EXIT_SCRUBS2_SFM;
+            case SCE_OOT_ZORA_RIVER: return ENTR_OOT_GROTTO_EXIT_SCRUBS2_RIVER;
+            case SCE_OOT_GERUDO_VALLEY: return ENTR_OOT_GROTTO_EXIT_SCRUBS2_VALLEY;
+            case SCE_OOT_DESERT_COLOSSUS: return ENTR_OOT_GROTTO_EXIT_SCRUBS2_COLOSSUS;
+            }
+            UNREACHABLE();
+        case 0x0a: return ENTR_OOT_GROTTO_EXIT_TEKTITE;
+        case 0x0b: return ENTR_OOT_GROTTO_DEKU_THEATER;
+        case 0x0c:
+            switch (gLastScene)
+            {
+            case SCE_OOT_LON_LON_RANCH: return ENTR_OOT_GROTTO_EXIT_SCRUBS3_RANCH;
+            case SCE_OOT_GORON_CITY: return ENTR_OOT_GROTTO_EXIT_SCRUBS3_GORON_CITY;
+            case SCE_OOT_DEATH_MOUNTAIN_CRATER: return ENTR_OOT_GROTTO_EXIT_SCRUBS3_DMC;
+            case SCE_OOT_LAKE_HYLIA: return ENTR_OOT_GROTTO_EXIT_SCRUBS3_LAKE;
+            }
+            UNREACHABLE();
+        case 0x0d: return ENTR_OOT_GROTTO_EXIT_FIELD_TREE;
+        UNREACHABLE();
+        }
+        break;
+    case SCE_OOT_FAIRY_FOUNTAIN:
+        switch (gLastScene)
+        {
+        case SCE_OOT_SACRED_FOREST_MEADOW: return ENTR_OOT_GROTTO_EXIT_FAIRY_SFM;
+        case SCE_OOT_HYRULE_FIELD: return ENTR_OOT_GROTTO_EXIT_FAIRY_HF;
+        case SCE_OOT_ZORA_RIVER: return ENTR_OOT_GROTTO_EXIT_FAIRY_RIVER;
+        case SCE_OOT_ZORA_DOMAIN: return ENTR_OOT_GROTTO_EXIT_FAIRY_DOMAIN;
+        case SCE_OOT_GERUDO_FORTRESS: return ENTR_OOT_GROTTO_EXIT_FAIRY_FORTRESS;
+        }
+        UNREACHABLE();
+    case SCE_OOT_TOMB_FAIRY: return ENTR_OOT_GRAVE_EXIT_SHIELD;
+    case SCE_OOT_TOMB_REDEAD: return ENTR_OOT_GRAVE_EXIT_REDEAD;
+    case SCE_OOT_TOMB_ROYAL: return ENTR_OOT_GRAVE_EXIT_ROYAL;
+    case SCE_OOT_TOMB_DAMPE_WINDMILL: return ENTR_OOT_GRAVE_EXIT_DAMPE;
+    }
+
+    return ENTR_OOT_INTERNAL_EXIT_GROTTO;
+}
+
 void Play_TransitionDone(GameState_Play* play)
 {
     u32 entrance;
@@ -482,9 +741,19 @@ void Play_TransitionDone(GameState_Play* play)
     if (entrance == ENTR_EXTENDED)
         entrance = g.nextEntrance;
 
+    if (entrance == ENTR_OOT_INTERNAL_EXIT_GROTTO)
+    {
+        entrance = entrGrottoExit(play);
+        if (entrance == ENTR_OOT_INTERNAL_EXIT_GROTTO)
+        {
+            gIsEntranceOverride = 0;
+            entrance = gSaveContext.respawn[1].entranceIndex;
+            gSaveContext.respawnFlag = 2;
+            gSaveContext.nextTransitionType = 3;
+        }
+    }
+
     /* Handle transition override */
-    if (g.inGrotto)
-        gIsEntranceOverride = 0;
     if (gIsEntranceOverride)
     {
         gIsEntranceOverride = 0;
@@ -492,6 +761,8 @@ void Play_TransitionDone(GameState_Play* play)
         if (override != -1)
             entrance = (u32)override;
     }
+
+    applyCustomEntrance(&entrance);
 
     /* Check for foreign */
     if (entrance & MASK_FOREIGN_ENTRANCE)

@@ -7,15 +7,15 @@ import { CONFIG } from '../lib/combo/config';
 import { mkdir } from 'fs';
 
 const OOT_GENERIC_GROTTOS = [
-  0x0c,
-  0x14,
-  0x08,
-  0x17,
-  0x1a,
-  0x09,
-  0x02,
-  0x03,
-  0x00,
+  0x0c, /* Kokiri Forest */
+  0x14, /* Lost Woods */
+  0x08, /* Kakariko */
+  0x17, /* Death Mountain Trail */
+  0x1a, /* Death Mountain Crater */
+  0x09, /* Zora River */
+  0x02, /* Hyrule Field Southwest */
+  0x03, /* Hyrule Field Open */
+  0x00, /* Hyrule Field Market */
 ];
 
 const OOT_FAIRY_FOUNTAINS = [
@@ -147,6 +147,7 @@ const ACTORS_OOT = {
   BG_SPOT11_OASIS: 0x1C2,
   OBJ_MURE3: 0x1ab,
   SHOT_SUN: 0x183,
+  //EN_HOLE: 0x9b,
 };
 
 const ACTORS_MM = {
@@ -286,6 +287,7 @@ type RawRoom = {
 type Actor = {
   actorId: number;
   typeId: number;
+  pos: [number, number, number];
   rz: number;
   params: number;
 }
@@ -456,9 +458,12 @@ function parseRoomActors(rom: Buffer, raw: RawRoom, game: Game): RoomActors[] {
     for (let actorId = 0; actorId < actorCount; actorId++) {
       const actorVromBase = 0x10 * actorId + actorsVrom;
       const typeId = rom.readUInt16BE(actorVromBase + 0x00) & typeIdMask;
+      const posx = rom.readInt16BE(actorVromBase + 0x02);
+      const posy = rom.readInt16BE(actorVromBase + 0x04);
+      const posz = rom.readInt16BE(actorVromBase + 0x06);
       const rz = rom.readUInt16BE(actorVromBase + 0x0c);
       const params = rom.readUInt16BE(actorVromBase + 0x0e);
-      actors.push({ actorId, typeId, rz, params });
+      actors.push({ actorId, typeId, pos: [posx, posy, posz], rz, params });
     }
   }
   actors = filterActors(actors, game);
@@ -634,6 +639,25 @@ function decPad(n: number, width: number) {
   const s = n.toString();
   const count = width - s.length;
   return count > 0 ? '0'.repeat(width - s.length) + s : s;
+}
+
+function outputGrottosOot(roomActors: RoomActors[]) {
+  let lastSceneId = -1;
+  let lastSetupId = -1;
+  for (const room of roomActors) {
+    for (const actor of room.actors) {
+      /*if (actor.typeId === ACTORS_OOT.EN_HOLE)*/ {
+        if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
+          console.log('');
+          console.log(`### Scene: ${scenesById('oot')[room.sceneId]}`);
+          lastSceneId = room.sceneId;
+          lastSetupId = room.setupId;
+        }
+
+        console.log(`Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Pos ${actor.pos[0]}, ${actor.pos[1]}, ${actor.pos[2]}`);
+      }
+    }
+  }
 }
 
 function outputShotSunOot(roomActors: RoomActors[]) {
@@ -1002,11 +1026,11 @@ function roomActorsFromRaw(rom: Buffer, raw: RawRoom[], game: Game): RoomActors[
       roomId: 0x00,
       setupId: 0x00,
       actors: [
-        { actorId: 0, typeId: ACTORS_MM.POT, params: 0x00, rz: 0x0000, },
-        { actorId: 1, typeId: ACTORS_MM.POT, params: 0x00, rz: 0x0000, },
-        { actorId: 2, typeId: ACTORS_MM.POT, params: 0x00, rz: 0x0000, },
-        { actorId: 3, typeId: ACTORS_MM.POT, params: 0x00, rz: 0x0000, },
-        { actorId: 4, typeId: ACTORS_MM.POT, params: 0x00, rz: 0x0000, },
+        { actorId: 0, typeId: ACTORS_MM.POT, pos: [0, 0, 0], params: 0x00, rz: 0x0000, },
+        { actorId: 1, typeId: ACTORS_MM.POT, pos: [0, 0, 0], params: 0x00, rz: 0x0000, },
+        { actorId: 2, typeId: ACTORS_MM.POT, pos: [0, 0, 0], params: 0x00, rz: 0x0000, },
+        { actorId: 3, typeId: ACTORS_MM.POT, pos: [0, 0, 0], params: 0x00, rz: 0x0000, },
+        { actorId: 4, typeId: ACTORS_MM.POT, pos: [0, 0, 0], params: 0x00, rz: 0x0000, },
       ]
     });
   }
@@ -1070,8 +1094,9 @@ async function run() {
   //outputFairyPoolOot(ootRooms);
   //outputRupeesMm(mmRooms);
   //outputHeartsMm(mmRooms);
-  outputShotSunOot(ootRooms);
-  outputShotSunOot(mqRooms);
+  //outputShotSunOot(ootRooms);
+  //outputShotSunOot(mqRooms);
+  //outputGrottosOot(ootRooms);
 }
 
 run().catch(e => {

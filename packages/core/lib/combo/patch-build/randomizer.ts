@@ -847,6 +847,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MM_CLOCKS: settings.clocks,
     MM_CLOCKS_PROGRESSIVE: settings.progressiveClocks !== 'separate',
     MM_CLOCKS_PROGRESSIVE_REVERSE: settings.progressiveClocks === 'descending',
+    ER_GROTTOS: settings.erGrottos !== 'none',
   };
 
   for (const v in exprs) {

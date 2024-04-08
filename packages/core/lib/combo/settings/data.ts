@@ -1808,6 +1808,18 @@ export const SETTINGS = [{
   description: 'Enable the ability to shuffle dungeons within their own game or across both.',
   default: 'none'
 }, {
+  key: 'erGrottos',
+  name: 'Grotto Shuffle (EXPERIMENTAL - OOT ONLY)',
+  category: 'entrances',
+  type: 'enum',
+  values: [
+    { value: 'none', name: 'None' },
+    { value: 'ownGame', name: 'Own Game' },
+    { value: 'full', name: 'Full' },
+  ],
+  description: 'Shuffle grottos and graves.',
+  default: 'none'
+}, {
   key: 'erWallmasters',
   name: 'Wallmaster Shuffle',
   category: 'entrances',

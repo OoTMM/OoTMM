@@ -15,6 +15,7 @@ const ENTRANCES_DEBUG_CATEGORIES = {
   BOSS: 'Boss',
   WARP: 'Songs/Owls',
   INTERIOR: 'Interiors',
+  GROTTO: 'Grottos',
   SPECIAL: 'Special',
 };
 

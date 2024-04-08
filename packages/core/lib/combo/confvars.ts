@@ -165,6 +165,7 @@ export const CONFVARS = [
   'MM_CLOCKS',
   'MM_CLOCKS_PROGRESSIVE',
   'MM_CLOCKS_PROGRESSIVE_REVERSE',
+  'ER_GROTTOS',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

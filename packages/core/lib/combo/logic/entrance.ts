@@ -530,6 +530,10 @@ export class LogicPassEntrances {
       pool = [...pool, 'boss'];
     }
 
+    if (this.input.settings.erGrottos !== 'none') {
+      pool = [...pool, 'grotto', 'grave'];
+    }
+
     if (pool.length === 0) {
       return def;
     }
@@ -563,6 +567,11 @@ export class LogicPassEntrances {
       entrancesSrc.delete(src);
       entrancesDst.delete(dst);
     }
+  }
+
+  private placeGrottos(worldId: number) {
+    const pool = new Set(['grotto', 'grave']);
+    this.placePool(worldId, Array.from(pool), { ownGame: this.input.settings.erGrottos === 'ownGame' });
   }
 
   private propagateRegionsStep(worldId: number) {
@@ -693,6 +702,11 @@ export class LogicPassEntrances {
       if (this.input.settings.erWallmasters !== 'none') {
         anyEr = true;
         this.placeWallmasters(i);
+      }
+
+      if (this.input.settings.erGrottos !== 'none') {
+        anyEr = true;
+        this.placeGrottos(i);
       }
 
       if (this.input.settings.erRegions !== 'none') {
