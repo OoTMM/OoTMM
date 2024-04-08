@@ -403,6 +403,9 @@ static void applyGrottoExit(u32* entrance, const GrottoExit* ge)
     rs->unk_18 = 0;
     rs->tempCollectFlags = 0;
 
+    /* Copy to the void respawn */
+    memcpy(&gSaveContext.respawn[0], rs, sizeof(RespawnData));
+
     /* Set the respawn flags */
     gSaveContext.respawnFlag = 4;
     *entrance = rs->entrance;
