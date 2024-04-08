@@ -434,9 +434,7 @@ export class LogicPassEntrances {
       const e = ENTRANCES[eName];
       delete world.areas[e.from].exits[e.to!];
       const reverse = (e as any).reverse as Entrance | undefined;
-      console.log(eName);
       if (reverse) {
-        console.log(reverse);
         const r = ENTRANCES[reverse];
         delete world.areas[r.from!].exits[r.to!];
       }
@@ -530,6 +528,10 @@ export class LogicPassEntrances {
 
     if (this.input.settings.erBoss !== 'none') {
       pool = [...pool, 'boss'];
+    }
+
+    if (this.input.settings.erGrottos !== 'none') {
+      pool = [...pool, 'grotto', 'grave'];
     }
 
     if (pool.length === 0) {
