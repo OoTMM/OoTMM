@@ -348,171 +348,6 @@ static u32 entranceForOverride(u32 entrance)
     }
 }
 
-void preInitTitleScreen(void)
-{
-    s16 magicCapacity;
-
-    if (gComboCtx.valid)
-    {
-        /* Disable Title screen */
-        gSaveContext.gameMode = 0;
-
-        /* Set file and load */
-        gSaveContext.fileIndex = gComboCtx.saveIndex;
-        Sram_OpenSave(NULL);
-        gSave.cutscene = 0;
-        if (gComboCtx.entrance == -1)
-            gSave.entrance = 0x1d1;
-        else
-            gSave.entrance = gComboCtx.entrance;
-        gComboCtx.valid = 0;
-
-        /* Set magic */
-        magicCapacity = 0;
-        if (gSave.playerData.magicUpgrade)
-            magicCapacity = gSave.playerData.magicUpgrade2 ? 0x60 : 0x30;
-        gSaveContext.magicState = MAGIC_STATE_IDLE;
-        gSaveContext.magicCapacity = magicCapacity;
-        gSaveContext.magicFillTarget = gSave.playerData.magicAmount;
-        gSaveContext.magicTarget = gSave.playerData.magicAmount;
-    }
-}
-
-void hookPlay_Init(GameState_Play* play)
-{
-    /* Pre-init */
-    gIsEntranceOverride = 0;
-    preInitTitleScreen();
-
-    /* Init */
-    gActorCustomTriggers = NULL;
-    gMultiMarkChests = 0;
-    gMultiMarkCollectibles = 0;
-    gMultiMarkSwitch0 = 0;
-    gMultiMarkSwitch1 = 0;
-    comboMultiResetWisps();
-
-    /* Register play */
-    gPlay = play;
-
-    /* Handle custom entrance IDs */
-    switch (gSave.entrance)
-    {
-    case ENTR_OOT_OUTSIDE_GANON_FROM_FAIRY:
-        gSave.entrance = ENTR_OOT_HYRULE_CASTLE_FROM_FAIRY;
-        break;
-    case ENTR_OOT_LOST_WOODS_FROM_LOST_WOODS_NORTH:
-        gSave.entrance = ENTR_OOT_LOST_WOODS_FROM_KOKIRI_FOREST;
-        break;
-    }
-
-    if (gSave.entrance == ENTR_OOT_CASTLE_STEALTH)
-    {
-        /* Entering courtyard */
-        if (GetEventChk(EV_OOT_CHK_ZELDA_LETTER))
-            gSave.entrance = ENTR_OOT_CASTLE_CAUGHT;
-        else
-            gSave.entrance = ENTR_OOT_CASTLE_COURTYARD;
-    }
-    else if (gSave.entrance == ENTR_OOT_CASTLE_STEALTH_FROM_COURTYARD)
-    {
-        gSave.entrance = ENTR_OOT_CASTLE_FROM_STEALTH;
-    }
-    else if (gSave.entrance == ENTR_OOT_SAGES_CHAMBER_END)
-    {
-        endGame();
-    }
-    else if (gSave.entrance == ENTR_OOT_BOSS_GANON2 && !comboHasSoulOot(GI_OOT_SOUL_NPC_ZELDA))
-    {
-        gSave.entrance = ENTR_OOT_GANON_TOWER;
-    }
-
-    comboCacheClear();
-    comboObjectsReset();
-    comboExObjectsReset();
-    debugCheat(play);
-    eventFixes(play);
-
-    Play_Init(play);
-
-    /* Epona fix */
-    if (!IsSceneValidEpona(play->sceneId))
-        comboClearEpona(play);
-
-    gLastEntrance = gSave.entrance;
-    g.inGrotto = (play->sceneId == SCE_OOT_GROTTOS || play->sceneId == SCE_OOT_FAIRY_FOUNTAIN);
-    if (!g.inGrotto)
-    {
-        gLastScene = play->sceneId;
-    }
-
-    if (gSave.entrance == ENTR_OOT_SHOP_MASKS)
-    {
-        gComboCtx.shuffledEntrance = 0;
-        comboGameSwitch(play, ENTR_MM_CLOCK_TOWN);
-        return;
-    }
-
-    /* Spawn Custom Triggers */
-    CustomTriggers_Spawn(play);
-    comboSpawnCustomWarps(play);
-
-    if (!gCustomKeep)
-    {
-        comboLoadCustomKeep();
-    }
-
-#if defined(DEBUG)
-    if (!gSaveContext.gameMode && (play->gs.input[0].current.buttons & R_TRIG))
-    {
-        gComboCtx.shuffledEntrance = 0;
-        comboGameSwitch(play, ENTR_MM_CLOCK_TOWN);
-        return;
-    }
-#endif
-}
-
-void Play_UpdateWrapper(GameState_Play* play)
-{
-    comboMenuTick();
-    Debug_Input();
-    comboCacheGarbageCollect();
-    comboObjectsGC();
-    Play_Update(play);
-    comboDpadDraw(play);
-    Debug_Update();
-}
-
-static void Play_LoadKaleidoScopeHook(void* unk)
-{
-    Play_LoadKaleidoOverlay(unk);
-    comboMqKaleidoHook(gPlay);
-}
-
-PATCH_CALL(0x8009a06c, Play_LoadKaleidoScopeHook);
-
-void comboClearEpona(GameState_Play* play)
-{
-    if (AREG(6) != 0)
-    {
-        /* Link is on Epona, needs to dismount */
-        AREG(6) = 0;
-
-        /* Reset the TempB */
-        gSave.equips.buttonItems[0] = gSaveContext.buttonStatus[0];
-        gSaveContext.buttonStatus[0] = ITEM_NONE;
-
-        /* Reload the B button icon */
-        Interface_LoadItemIconImpl(play, 0);
-    }
-}
-
-NORETURN static void Play_GameSwitch(GameState_Play* play, s32 entrance)
-{
-    gComboCtx.shuffledEntrance = 1;
-    comboClearEpona(play);
-    comboGameSwitch(play, entrance);
-}
 
 static const u8 kGrottoDataGeneric[] = { 0x0c, 0x14, 0x08, 0x17, 0x1a, 0x09, 0x02, 0x03, 0x00 };
 
@@ -654,6 +489,171 @@ static void applyCustomEntrance(u32* entrance)
         id -= ENTR_OOT_GROTTO_EXIT_GENERIC_KOKIRI_FOREST;
         applyGrottoExit(entrance, id);
     }
+}
+
+static void preInitTitleScreen(void)
+{
+    s16 magicCapacity;
+    u32 entrance;
+
+    if (gComboCtx.valid)
+    {
+        /* Disable Title screen */
+        gSaveContext.gameMode = 0;
+
+        /* Set file and load */
+        gSaveContext.fileIndex = gComboCtx.saveIndex;
+        Sram_OpenSave(NULL);
+        gSave.cutscene = 0;
+
+        /* Set the entrance */
+        entrance = gComboCtx.entrance;
+        applyCustomEntrance(&entrance);
+        gSave.entrance = (s32)entrance;
+        gComboCtx.valid = 0;
+
+        /* Set magic */
+        magicCapacity = 0;
+        if (gSave.playerData.magicUpgrade)
+            magicCapacity = gSave.playerData.magicUpgrade2 ? 0x60 : 0x30;
+        gSaveContext.magicState = MAGIC_STATE_IDLE;
+        gSaveContext.magicCapacity = magicCapacity;
+        gSaveContext.magicFillTarget = gSave.playerData.magicAmount;
+        gSaveContext.magicTarget = gSave.playerData.magicAmount;
+    }
+}
+
+void hookPlay_Init(GameState_Play* play)
+{
+    /* Pre-init */
+    gIsEntranceOverride = 0;
+    preInitTitleScreen();
+
+    /* Init */
+    gActorCustomTriggers = NULL;
+    gMultiMarkChests = 0;
+    gMultiMarkCollectibles = 0;
+    gMultiMarkSwitch0 = 0;
+    gMultiMarkSwitch1 = 0;
+    comboMultiResetWisps();
+
+    /* Register play */
+    gPlay = play;
+
+    /* Handle custom entrance IDs */
+    switch (gSave.entrance)
+    {
+    case ENTR_OOT_OUTSIDE_GANON_FROM_FAIRY:
+        gSave.entrance = ENTR_OOT_HYRULE_CASTLE_FROM_FAIRY;
+        break;
+    case ENTR_OOT_LOST_WOODS_FROM_LOST_WOODS_NORTH:
+        gSave.entrance = ENTR_OOT_LOST_WOODS_FROM_KOKIRI_FOREST;
+        break;
+    }
+
+    if (gSave.entrance == ENTR_OOT_CASTLE_STEALTH)
+    {
+        /* Entering courtyard */
+        if (GetEventChk(EV_OOT_CHK_ZELDA_LETTER))
+            gSave.entrance = ENTR_OOT_CASTLE_CAUGHT;
+        else
+            gSave.entrance = ENTR_OOT_CASTLE_COURTYARD;
+    }
+    else if (gSave.entrance == ENTR_OOT_CASTLE_STEALTH_FROM_COURTYARD)
+    {
+        gSave.entrance = ENTR_OOT_CASTLE_FROM_STEALTH;
+    }
+    else if (gSave.entrance == ENTR_OOT_SAGES_CHAMBER_END)
+    {
+        endGame();
+    }
+    else if (gSave.entrance == ENTR_OOT_BOSS_GANON2 && !comboHasSoulOot(GI_OOT_SOUL_NPC_ZELDA))
+    {
+        gSave.entrance = ENTR_OOT_GANON_TOWER;
+    }
+
+    comboCacheClear();
+    comboObjectsReset();
+    comboExObjectsReset();
+    debugCheat(play);
+    eventFixes(play);
+
+    Play_Init(play);
+
+    /* Epona fix */
+    if (!IsSceneValidEpona(play->sceneId))
+        comboClearEpona(play);
+
+    gLastEntrance = gSave.entrance;
+    g.inGrotto = (play->sceneId == SCE_OOT_GROTTOS || play->sceneId == SCE_OOT_FAIRY_FOUNTAIN);
+    if (!g.inGrotto)
+    {
+        gLastScene = play->sceneId;
+    }
+
+    if (gSave.entrance == ENTR_OOT_SHOP_MASKS)
+    {
+        comboGameSwitch(play, ENTR_MM_CLOCK_TOWN);
+        return;
+    }
+
+    /* Spawn Custom Triggers */
+    CustomTriggers_Spawn(play);
+    comboSpawnCustomWarps(play);
+
+    if (!gCustomKeep)
+    {
+        comboLoadCustomKeep();
+    }
+
+#if defined(DEBUG)
+    if (!gSaveContext.gameMode && (play->gs.input[0].current.buttons & R_TRIG))
+    {
+        comboGameSwitch(play, ENTR_MM_CLOCK_TOWN);
+        return;
+    }
+#endif
+}
+
+void Play_UpdateWrapper(GameState_Play* play)
+{
+    comboMenuTick();
+    Debug_Input();
+    comboCacheGarbageCollect();
+    comboObjectsGC();
+    Play_Update(play);
+    comboDpadDraw(play);
+    Debug_Update();
+}
+
+static void Play_LoadKaleidoScopeHook(void* unk)
+{
+    Play_LoadKaleidoOverlay(unk);
+    comboMqKaleidoHook(gPlay);
+}
+
+PATCH_CALL(0x8009a06c, Play_LoadKaleidoScopeHook);
+
+void comboClearEpona(GameState_Play* play)
+{
+    if (AREG(6) != 0)
+    {
+        /* Link is on Epona, needs to dismount */
+        AREG(6) = 0;
+
+        /* Reset the TempB */
+        gSave.equips.buttonItems[0] = gSaveContext.buttonStatus[0];
+        gSaveContext.buttonStatus[0] = ITEM_NONE;
+
+        /* Reload the B button icon */
+        Interface_LoadItemIconImpl(play, 0);
+    }
+}
+
+NORETURN static void Play_GameSwitch(GameState_Play* play, s32 entrance)
+{
+    comboClearEpona(play);
+    comboGameSwitch(play, entrance);
 }
 
 static u32 entrGrottoExit(GameState_Play* play)

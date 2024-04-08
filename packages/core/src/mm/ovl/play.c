@@ -356,8 +356,34 @@ void fixupOriginalSceneSetup(void)
     gSave.entranceIndex = (entranceKey << 9) | (entrance & 0x1ff);
 }
 
+static const u8 kGrottoDataGeneric[] = { 0x1a, 0x1f, 0x1d, 0x1c, 0x1e, 0x1b, 0x19, 0x13, 0x17, 0x15, 0x16, 0x18, 0x14 };
+
+static void applyCustomEntrance(u32* entrance)
+{
+    u32 id;
+
+    id = *entrance;
+    if (id >= ENTR_MM_GROTTO_GENERIC_FIELD_PILLAR && id <= ENTR_MM_GROTTO_GENERIC_VALLEY)
+    {
+        id -= ENTR_MM_GROTTO_GENERIC_FIELD_PILLAR;
+        *entrance = ENTR_MM_GROTTO_TYPE_GENERIC;
+        gGrottoData &= ~0x1f;
+        gGrottoData |= kGrottoDataGeneric[id];
+    }
+    else if (id >= ENTR_MM_GROTTO_COW_FIELD && id <= ENTR_MM_GROTTO_COW_COAST)
+    {
+        if (id == ENTR_MM_GROTTO_COW_FIELD)
+            gLastScene = SCE_MM_TERMINA_FIELD;
+        else
+            gLastScene = SCE_MM_GREAT_BAY_COAST;
+        *entrance = ENTR_MM_GROTTO_TYPE_COW;
+    }
+}
+
 void preInitTitleScreen(void)
 {
+    u32 entrance;
+
     if (!gComboCtx.valid)
         return;
 
@@ -367,17 +393,17 @@ void preInitTitleScreen(void)
     /* Load save */
     gSaveContext.fileIndex = gComboCtx.saveIndex;
     Sram_OpenSave(NULL, NULL);
-
     gSave.cutscene = 0;
     gSaveContext.nextCutscene = 0;
-    if (gComboCtx.entrance == -1)
-        gSave.entranceIndex = ENTR_MM_CLOCK_TOWN;
-    else
-        gSave.entranceIndex = gComboCtx.entrance;
+
+    /* Load the entrance */
+    entrance = gComboCtx.entrance;
     if (comboConfig(CFG_ER_ANY))
-        g.initialEntrance = gSave.entranceIndex;
+        g.initialEntrance = entrance;
     else
         g.initialEntrance = ENTR_MM_CLOCK_TOWN;
+    applyCustomEntrance(&entrance);
+    gSave.entranceIndex = entrance;
 
     /* Fixup the scene/setup */
     fixupOriginalSceneSetup();
@@ -399,6 +425,8 @@ void preInitTitleScreen(void)
 
 void hookPlay_Init(GameState_Play* play)
 {
+    u32 entrance;
+
     gPlay = play;
     int isEndOfGame;
 
@@ -572,7 +600,9 @@ void hookPlay_Init(GameState_Play* play)
     if ((gSave.entranceIndex == ENTR_MM_CLOCK_TOWN && gLastEntrance == ENTR_MM_CLOCK_TOWN_FROM_SONG_OF_TIME) || gSave.entranceIndex == ENTR_MM_CLOCK_TOWER_MOON_CRASH)
     {
         /* Song of Time / Moon crash */
-        gSave.entranceIndex = entranceForOverride(g.initialEntrance);
+        entrance = g.initialEntrance;
+        applyCustomEntrance(&entrance);
+        gSave.entranceIndex = entrance;
     }
 
     if (gSave.entranceIndex == ENTR_MM_WOODFALL_FROM_TEMPLE)
@@ -652,7 +682,8 @@ void hookPlay_Init(GameState_Play* play)
             gSave.time = 0x3fff;
             comboSave(play, SF_NOCOMMIT);
             Sram_SaveNewDay(play);
-            play->nextEntrance = entranceForOverride(g.initialEntrance);
+            play->nextEntrance = ENTR_EXTENDED;
+            g.nextEntrance = g.initialEntrance;
             play->transitionTrigger = TRANS_TRIGGER_NORMAL;
             play->transitionType = TRANS_TYPE_FADE_BLACK;
             return;
@@ -661,7 +692,7 @@ void hookPlay_Init(GameState_Play* play)
 
     if (gSave.entranceIndex == ENTR_MM_CLOCK_TOWER_FROM_CLOCK_TOWN)
     {
-        comboGameSwitch(play, -1);
+        comboGameSwitch(play, ENTR_OOT_MARKET_FROM_MASK_SHOP);
         return;
     }
 }
@@ -703,6 +734,8 @@ void Play_TransitionDone(GameState_Play* play)
         if (override != -1)
             entrance = (u32)override;
     }
+
+    applyCustomEntrance(&entrance);
 
     /* Check for foreign */
     if (entrance & MASK_FOREIGN_ENTRANCE)

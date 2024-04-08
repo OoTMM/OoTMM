@@ -452,4 +452,5 @@ OOT_GORON_CITY:                                 { game: oot, id: 0x14d,  type: n
 OOT_DEATH_MOUNTAIN_CRATER_FROM_GORON_CITY:      { game: oot, id: 0x246,  type: none }
 OOT_LOST_WOODS_FROM_MEADOW:                     { game: oot, id: 0x1a9,  type: none }
 OOT_HYRULE_CASTLE:                              { game: oot, id: 0x138,  type: none }
+OOT_MARKET_FROM_MASK_SHOP:                      { game: oot, id: 0x1d1,  type: none }
 OOT_INTERNAL_EXIT_GROTTO:                       { game: oot, id: 0x7fff, type: none }
