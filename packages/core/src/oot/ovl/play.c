@@ -528,6 +528,12 @@ static const GrottoExit kGrottoExits[] = {
     { ENTR_OOT_ZORA_RIVER_FROM_FIELD,      0, { -1630, 100,  -130 } },
     { ENTR_OOT_GERUDO_VALLEY_FROM_TENT,    0, { -1323,  15,  -969 } },
     { ENTR_OOT_DESERT_COLOSSUS_FROM_FAIRY, 0, {    60, -32, -1300 } },
+
+    /* Triple scrubs */
+    { ENTR_OOT_LON_LON_RANCH_FROM_HOUSE,                0, {  1800,    0,  1500 } },
+    { ENTR_OOT_GORON_CITY,                              3, {  1100,  580, -1190 } },
+    { ENTR_OOT_DEATH_MOUNTAIN_CRATER_FROM_GORON_CITY,   1, { -1699,  722,  -472 } },
+    { ENTR_OOT_WARP_SONG_LAKE,                          0, { -3040, -1033, 6075 } },
 };
 
 static void applyGrottoExit(u32* entrance, int id)
@@ -617,6 +623,15 @@ static u32 entrGrottoExit(GameState_Play* play)
             case SCE_OOT_ZORA_RIVER: return ENTR_OOT_GROTTO_EXIT_SCRUBS2_RIVER;
             case SCE_OOT_GERUDO_VALLEY: return ENTR_OOT_GROTTO_EXIT_SCRUBS2_VALLEY;
             case SCE_OOT_DESERT_COLOSSUS: return ENTR_OOT_GROTTO_EXIT_SCRUBS2_COLOSSUS;
+            }
+            UNREACHABLE();
+        case 0x0c:
+            switch (gLastScene)
+            {
+            case SCE_OOT_LON_LON_RANCH: return ENTR_OOT_GROTTO_EXIT_SCRUBS3_RANCH;
+            case SCE_OOT_GORON_CITY: return ENTR_OOT_GROTTO_EXIT_SCRUBS3_GORON_CITY;
+            case SCE_OOT_DEATH_MOUNTAIN_CRATER: return ENTR_OOT_GROTTO_EXIT_SCRUBS3_DMC;
+            case SCE_OOT_LAKE_HYLIA: return ENTR_OOT_GROTTO_EXIT_SCRUBS3_LAKE;
             }
             UNREACHABLE();
         }

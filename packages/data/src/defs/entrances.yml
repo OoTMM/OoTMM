@@ -406,4 +406,6 @@ OOT_DEATH_MOUNTAIN_FROM_GORON_CITY:             { game: oot, id: 0x1b9,  type: n
 OOT_DEATH_MOUNTAIN_CRATER:                      { game: oot, id: 0x147,  type: none }
 OOT_ZORA_DOMAIN:                                { game: oot, id: 0x108,  type: none }
 OOT_SACRED_MEADOW:                              { game: oot, id: 0x0fc,  type: none }
+OOT_GORON_CITY:                                 { game: oot, id: 0x14d,  type: none }
+OOT_DEATH_MOUNTAIN_CRATER_FROM_GORON_CITY:      { game: oot, id: 0x246,  type: none }
 OOT_INTERNAL_EXIT_GROTTO:                       { game: oot, id: 0x7fff, type: none }
