@@ -1710,9 +1710,9 @@
 "Near Village Grotto":
   region: MOUNTAIN_VILLAGE
   exits:
-    "Mountain Village Grotto": "true"
+    "Mountain Village Grotto": "is_spring"
     "Mountain Village": "true"
-    "Near Goron Graveyard": "has_mask_goron || short_hook_anywhere"
+    "Near Goron Graveyard": "is_spring && (has_mask_goron || short_hook_anywhere)"
 "Mountain Village Grotto":
   region: ENTRANCE
   exits:

@@ -37,6 +37,9 @@
 
 "midnight": "between(NIGHT1_AM_12_00, DAY2_AM_06_00) || between(NIGHT2_AM_12_00, DAY3_AM_06_00) || after(NIGHT3_AM_12_00)"
 
+# Region State
+"is_spring": "event(BOSS_SNOWHEAD)"
+
 # Age
 "is_child": "!setting(crossAge) || age(child)"
 "is_adult": "setting(crossAge) && age(adult)"
