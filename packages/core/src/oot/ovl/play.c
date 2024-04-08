@@ -554,6 +554,7 @@ static void applyGrottoExit(u32* entrance, int id)
     OotRespawnData* rs;
     const GrottoExit* ge;
 
+    /* Set the grotto exit */
     rs = &gSaveContext.respawn[1];
     ge = &kGrottoExits[id];
     rs->pos.x = ge->pos[0];
@@ -566,6 +567,11 @@ static void applyGrottoExit(u32* entrance, int id)
     rs->roomIndex = ge->room;
     rs->tempSwitchFlags = 0;
     rs->tempCollectFlags = 0;
+
+    /* Set the void respawn */
+    memcpy(&gSaveContext.respawn[0], rs, sizeof(OotRespawnData));
+
+    /* Set the respawn flags */
     gSaveContext.respawnFlag = 2;
     gSaveContext.nextTransitionType = 3;
     *entrance = rs->entranceIndex;
