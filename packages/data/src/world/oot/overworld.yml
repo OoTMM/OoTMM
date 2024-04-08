@@ -691,7 +691,7 @@
     "Market Castle Entry": "true"
     "Near Fairy Fountain Din": "has_explosives_or_hammer"
     "Hyrule Castle Courtyard": "woke_talon_child || (has_hover_boots && (soul_npc(SOUL_NPC_TALON) || setting(skipZelda))) || climb_anywhere || hookshot_anywhere"
-    "Hyrule Castle Grotto": "hidden_grotto_storms"
+    "Hyrule Castle Near Grotto": "true"
   events:
     MALON: "soul_npc(SOUL_NPC_MALON)"
     TALON_CHILD: "has(CHICKEN) && soul_npc(SOUL_NPC_TALON)"
@@ -711,6 +711,13 @@
   gossip:
     "Hyrule Castle Gossip After Climb": "true"
     "Hyrule Castle Gossip Before Moat": "true"
+"Hyrule Castle Near Grotto":
+  region: HYRULE_CASTLE
+  age_change: false
+  exits:
+    "Hyrule Castle": "is_child"
+    "Hyrule Castle Grotto": "is_child && hidden_grotto_storms"
+    "Ganon Castle Exterior": "is_adult"
 "Hyrule Castle Courtyard":
   region: HYRULE_CASTLE
   age_change: false
@@ -741,7 +748,7 @@
   region: ENTRANCE
   age_change: false
   exits:
-    "Hyrule Castle": "true"
+    "Hyrule Castle Near Grotto": "true"
   events:
     RUPEES: "has_explosives_or_hammer"
     NUTS: "has_explosives_or_hammer"

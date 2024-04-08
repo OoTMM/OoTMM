@@ -616,6 +616,9 @@ static void applyCustomEntrance(u32* entrance)
 
 static u32 entrGrottoExit(GameState_Play* play)
 {
+    if (!comboConfig(CFG_ER_GROTTOS))
+        return ENTR_OOT_INTERNAL_EXIT_GROTTO;
+
     switch (play->sceneId)
     {
     case SCE_OOT_GROTTOS:
