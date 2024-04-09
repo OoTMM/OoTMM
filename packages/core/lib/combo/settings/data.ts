@@ -1840,7 +1840,7 @@ export const SETTINGS = [{
   default: 'none'
 }, {
   key: 'erMixedRegions',
-  name: 'Mixel Pools - Regions',
+  name: 'Mixed Pools - Regions',
   category: 'entrances',
   type: 'boolean',
   description: 'If turned on, regions will be shuffled with other mixed pools.',
@@ -1848,7 +1848,7 @@ export const SETTINGS = [{
   cond: (x: any) => x.erMixed !== 'none' && x.erMixed === x.erRegions,
 }, {
   key: 'erMixedIndoors',
-  name: 'Mixel Pools - Interiors',
+  name: 'Mixed Pools - Interiors',
   category: 'entrances',
   type: 'boolean',
   description: 'If turned on, interiors will be shuffled with other mixed pools.',
@@ -1856,7 +1856,7 @@ export const SETTINGS = [{
   cond: (x: any) => x.erMixed !== 'none' && x.erMixed === x.erIndoors,
 }, {
   key: 'erMixedGrottos',
-  name: 'Mixel Pools - Grottos',
+  name: 'Mixed Pools - Grottos',
   category: 'entrances',
   type: 'boolean',
   description: 'If turned on, grottos will be shuffled with other mixed pools.',
