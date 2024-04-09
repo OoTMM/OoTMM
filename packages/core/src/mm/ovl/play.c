@@ -252,6 +252,31 @@ static u32 entranceForOverride(u32 entrance)
     case 0xae60:
         /* To Spring Mountain Village from Path */
         return ENTR_MM_MOUNTAIN_VILLAGE_FROM_PATH;
+    case ENTR_MM_GROTTO_TYPE_GENERIC:
+        switch (gGrottoData & 0x1f)
+        {
+        case 0x13: return ENTR_MM_GROTTO_GENERIC_PATH_SNOWHEAD;
+        case 0x14: return ENTR_MM_GROTTO_GENERIC_VALLEY;
+        case 0x15: return ENTR_MM_GROTTO_GENERIC_ZORA_CAPE;
+        case 0x16: return ENTR_MM_GROTTO_GENERIC_PATH_IKANA;
+        case 0x17: return ENTR_MM_GROTTO_GENERIC_GREAT_BAY_COAST;
+        case 0x18: return ENTR_MM_GROTTO_GENERIC_GRAVEYARD;
+        case 0x19: return ENTR_MM_GROTTO_GENERIC_TWIN_ISLANDS;
+        case 0x1a: return ENTR_MM_GROTTO_GENERIC_FIELD_PILLAR;
+        case 0x1b: return ENTR_MM_GROTTO_GENERIC_MOUNTAIN_VILLAGE;
+        case 0x1c: return ENTR_MM_GROTTO_GENERIC_WOODS;
+        case 0x1d: return ENTR_MM_GROTTO_GENERIC_SWAMP;
+        case 0x1e: return ENTR_MM_GROTTO_GENERIC_PATH_SWAMP;
+        case 0x1f: return ENTR_MM_GROTTO_GENERIC_GRASS;
+        }
+        UNREACHABLE();
+    case ENTR_MM_GROTTO_TYPE_COW:
+        switch (gLastScene)
+        {
+        case SCE_MM_TERMINA_FIELD: return ENTR_MM_GROTTO_COW_FIELD;
+        case SCE_MM_GREAT_BAY_COAST: return ENTR_MM_GROTTO_COW_COAST;
+        }
+        UNREACHABLE();
     default:
         return entrance;
     }

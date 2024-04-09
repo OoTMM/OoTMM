@@ -30,7 +30,7 @@ void comboInitEntrances(void)
     comboDmaLoadFile(gEntrances, COMBO_VROM_ENTRANCES);
 }
 
-s32 comboEntranceOverride(s16 entranceId)
+s32 comboEntranceOverride(u32 entranceId)
 {
     int i;
 
@@ -39,7 +39,7 @@ s32 comboEntranceOverride(s16 entranceId)
     {
         if (gEntrances[i].key == -1)
             return -1;
-        if (gEntrances[i].key == (s32)((u16)entranceId & 0xffff))
+        if (gEntrances[i].key == (s32)entranceId)
             return gEntrances[i].value;
         i++;
     }

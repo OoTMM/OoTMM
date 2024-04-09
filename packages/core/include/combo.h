@@ -429,7 +429,7 @@ void comboShopUpdateItem(GameState_Play* play, Actor_EnGirlA* girlA);
 
 /* Entrance */
 void comboInitEntrances(void);
-s32 comboEntranceOverride(s16 entranceId);
+s32 comboEntranceOverride(u32 entranceId);
 int comboBossLairIndex();
 
 extern s8 gIsEntranceOverride;

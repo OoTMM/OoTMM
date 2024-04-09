@@ -2323,7 +2323,7 @@
     ARROWS: "true"
     RUPEES: "true"
   exits:
-    "Great Bay Coast": "true"
+    "GBC Near Cow Grotto": "true"
   locations:
     "Great Bay Coast Cow Front": "can_play_epona"
     "Great Bay Coast Cow Back": "can_play_epona"
@@ -2478,7 +2478,7 @@
     FISH: "true"
     BUGS: "true"
   exits:
-    "Great Bay Coast": "true"
+    "Zora Cape": "true"
   locations:
     "Zora Cape Grotto": "true"
     "Zora Cape Grotto Grass 01": "true"
