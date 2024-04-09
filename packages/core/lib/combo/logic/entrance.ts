@@ -158,6 +158,43 @@ export class LogicPassEntrances {
     return true;
   }
 
+  private isAssignable(worldId: number, aShuffledEntrances: Set<Entrance>, original: Entrance, replacement: Entrance) {
+    const world = this.worlds[worldId];
+    const originalEntrance = ENTRANCES[original];
+    const replacementEntrance = ENTRANCES[replacement];
+    const shuffledEntrances = new Set(aShuffledEntrances);
+
+    /* Not all locations */
+    if (this.input.settings.logic !== 'allLocations') {
+      return true;
+    }
+
+    /* Apply an override */
+    shuffledEntrances.delete(replacement);
+    world.areas[originalEntrance.from].exits[replacementEntrance.to] = this.getExpr(worldId, original);
+    world.areas.TMP = { game: 'mm', region: 'NONE', exits: {}, locations: {}, events: {}, boss: false, ageChange: false, gossip: {}, dungeon: null, stay: null, time: 'flow' };
+    for (const e of shuffledEntrances) {
+      const target = ENTRANCES[e].to;
+      world.areas.TMP.exits[target] = exprTrue();
+    }
+    world.areas['OOT SPAWN'].exits['TMP'] = exprTrue();
+
+    /* Check if the new world is valid */
+    const pathfinderState = this.pathfinder.run(null, { singleWorld: worldId, ignoreItems: true, recursive: true });
+
+    /* Restore the override */
+    delete world.areas[originalEntrance.from].exits[replacementEntrance.to];
+    delete world.areas['OOT SPAWN'].exits['TMP'];
+    delete world.areas.TMP;
+
+    /* Get the number of locs */
+    if (pathfinderState.locations.size < world.locations.size) {
+      return false;
+    }
+
+    return true;
+  }
+
   private fixBosses(worldId: number) {
     const world = this.worlds[worldId];
     const bossEntrances = (Object.keys(ENTRANCES) as Entrance[]).filter(x => ENTRANCES[x].type === 'boss');
@@ -489,9 +526,21 @@ export class LogicPassEntrances {
       if (pools[poolName].opts?.ownGame) {
         dstCandidates = new Set([...dstCandidates].filter(x => ENTRANCES[x].game === ENTRANCES[src].game));
       }
-      const dst = sample(this.input.random, [...dstCandidates]);
+
+      let dst: Entrance;
+      for (;;) {
+        if (dstCandidates.size === 0) {
+          throw new LogicEntranceError(`No destination for ${src}`);
+        }
+        dst = sample(this.input.random, [...dstCandidates]);
+        dstCandidates.delete(dst);
+        if (this.isAssignable(worldId, entrancesAll, src, dst)) {
+          break;
+        }
+      }
 
       /* Place */
+      entrancesAll.delete(dst);
       if (this.input.settings.erDecoupled) {
         this.placeSingle(worldId, src, dst, pools[poolName].opts);
       } else {
@@ -504,10 +553,6 @@ export class LogicPassEntrances {
         delete poolEntrances[poolName];
       }
     }
-  }
-
-  private placePool(worldId: number, pool: string[], opts?: PlaceOpts) {
-    this.placePools(worldId, { SINGLE: { pool, opts: opts || {} } });
   }
 
   private poolRegions(worldId: number) {
@@ -532,7 +577,7 @@ export class LogicPassEntrances {
     return { pool: Array.from(pool), opts: { ownGame: this.input.settings.erIndoors === 'ownGame' } };
   }
 
-  private placeWarps(worldId: number) {
+  private poolWarps(worldId: number) {
     const pool = new Set(['one-way-song', 'one-way-statue']);
 
     if (this.input.settings.erWarps === 'ootOnly') {
@@ -542,10 +587,10 @@ export class LogicPassEntrances {
       pool.delete('one-way-song');
     }
 
-    this.placePool(worldId, Array.from(pool), { ownGame: this.input.settings.erWarps === 'ownGame' });
+    return { pool: Array.from(pool), opts: { ownGame: this.input.settings.erWarps === 'ownGame' } };
   }
 
-  private placeOneWays(worldId: number) {
+  private poolOneWays(worldId: number) {
     const pool = new Set(['one-way']);
 
     if (!this.input.settings.erOneWaysMajor) {
@@ -567,7 +612,7 @@ export class LogicPassEntrances {
       pool.add('one-way-woods');
     }
 
-    this.placePool(worldId, Array.from(pool), { ownGame: this.input.settings.erOneWays === 'ownGame' });
+    return { pool: Array.from(pool), opts: { ownGame: this.input.settings.erOneWays === 'ownGame' } };
   }
 
   private shuffledPools(def?: string[]) {
@@ -729,8 +774,9 @@ export class LogicPassEntrances {
 
     if (this.input.settings.ageChange === 'none') {
       /* We don't want child to reach the Fairy OGC exit, and the other way around too */
-      forbiddenAreasChild.push('OOT Near Fairy Fountain Defense');
-      forbiddenAreasAdult.push('OOT Near Fairy Fountain Din');
+      /* TODO: Doesn't work very well */
+      /* forbiddenAreasChild.push('OOT Near Fairy Fountain Defense'); */
+      /* forbiddenAreasAdult.push('OOT Near Fairy Fountain Din'); */
     }
 
     for (const area of forbiddenAreasChild) {
@@ -811,17 +857,17 @@ export class LogicPassEntrances {
         }
       }
 
-      this.placePools(i, pools);
-
       if (this.input.settings.erWarps !== 'none') {
+        pools.WARPS = this.poolWarps(i);
         anyEr = true;
-        this.placeWarps(i);
       }
 
       if (this.input.settings.erOneWays !== 'none') {
+        pools.ONE_WAYS = this.poolOneWays(i);
         anyEr = true;
-        this.placeOneWays(i);
       }
+
+      this.placePools(i, pools);
 
       if (this.input.settings.erDungeons !== 'none') {
         anyEr = true;
