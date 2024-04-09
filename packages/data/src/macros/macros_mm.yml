@@ -247,7 +247,7 @@
 "has_mask_zora": "has(MASK_ZORA) || has(SHARED_MASK_ZORA)"
 "has_mask_goron": "has(MASK_GORON) || has(SHARED_MASK_GORON)"
 
-"er_enabled": "setting(erMajorDungeons) || setting(erMinorDungeons) || setting(erSpiderHouses) || setting(erGanonCastle) || setting(erGanonTower) || setting(erBeneathWell) || setting(erPirateFortress) || setting(erSecretShrine) || setting(erIkanaCastle) || setting(erMoon) || setting(erIndoorsMajor) || setting(erIndoorsExtra) || !setting(erRegions, none) || !setting(erBoss, none) || !setting(erWarps, none) || setting(erOneWaysMajor) || setting(erOneWaysIkana) || setting(erOneWaysSongs) || setting(erOneWaysStatues) || setting(erOneWaysOwls) || !setting(erWallmasters, none)"
+"er_enabled": "setting(erMajorDungeons) || setting(erMinorDungeons) || setting(erSpiderHouses) || setting(erGanonCastle) || setting(erGanonTower) || setting(erBeneathWell) || setting(erPirateFortress) || setting(erSecretShrine) || setting(erIkanaCastle) || setting(erMoon) || setting(erIndoorsMajor) || setting(erIndoorsExtra) || !setting(erRegions, none) || !setting(erBoss, none) || !setting(erWarps, none) || setting(erOneWaysMajor) || setting(erOneWaysIkana) || setting(erOneWaysSongs) || setting(erOneWaysStatues) || setting(erOneWaysOwls) || !setting(erGrottos, none) || !setting(erWallmasters, none)"
 "dungeon_er": "setting(erMajorDungeons) || setting(erSpiderHouses) || setting(erBeneathWell) || setting(erPirateFortress) || setting(erSecretShrine) || setting(erIkanaCastle) || (setting(erDungeons, full) && (setting(erMinorDungeons) || setting(erGanonCastle) || setting(erGanonTower)))"
 
 # Misc

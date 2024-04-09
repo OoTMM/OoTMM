@@ -429,8 +429,8 @@ static void applyGrottoExit(u32* entrance, const GrottoExit* ge)
 
 static u32 entrGrottoExit(GameState_Play* play)
 {
-    //if (!comboConfig(CFG_ER_GROTTOS))
-    //    return ENTR_MM_INTERNAL_EXIT_GROTTO;
+    if (!comboConfig(CFG_ER_GROTTOS))
+        return ENTR_MM_INTERNAL_EXIT_GROTTO;
 
     switch (play->sceneId)
     {
