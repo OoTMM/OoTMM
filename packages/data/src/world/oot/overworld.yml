@@ -1531,7 +1531,7 @@
     "Zora River Storms Grotto Front Scrub": "business_scrub(0x12)"
     "Zora River Storms Grotto Back Scrub": "business_scrub(0x13)"
 "Zora River Open Grotto":
-  region: ZORA_RIVER
+  region: ENTRANCE
   exits:
     "Zora River": "true"
   events:
