@@ -60,9 +60,10 @@ const DUNGEON_INDEX = {
 } as {[k: string]: number};;
 
 type PlaceOpts = {
-  overworld?: boolean;
   ownGame?: boolean;
 };
+
+type EntrancePools = {[k: string]: { pool: string[], opts: PlaceOpts }};
 
 export class LogicPassEntrances {
   private pathfinder!: Pathfinder;
@@ -400,7 +401,7 @@ export class LogicPassEntrances {
     /* Change the world */
     let expr = this.getExpr(worldId, original);
     if ((entranceOriginal.game === 'oot' || entranceOriginal.type === 'one-way-statue') && entranceReplacement.game === 'mm') {
-      if (entranceOriginal.game === 'oot' && opts.overworld) {
+      if (entranceOriginal.game === 'oot' && entranceReplacement.game === 'mm' && ['overworld', 'region'].includes(entranceReplacement.type)) {
         world.areas[entranceOriginal.from].exits['MM GLOBAL'] = expr;
       }
       if (!((entranceReplacement.flags as string[]).includes('no-sot'))) {
@@ -424,13 +425,28 @@ export class LogicPassEntrances {
     }
   }
 
-  private placePool(worldId: number, pool: string[], opts?: PlaceOpts) {
+  private placePools(worldId: number, pools: EntrancePools) {
     const world = this.worlds[worldId];
-    /* Get overworld entrances */
-    const entrances = new Set((Object.keys(ENTRANCES) as Entrance[]).filter(x => pool.includes(ENTRANCES[x].type)));
+    const poolEntrances: {[k: string]: { src: Entrance[]; dst: Set<Entrance>; }} = {};
 
-    /* Delete the overworld entrances from the world */
-    for (const eName of entrances) {
+    /* Get entrances */
+    const poolNames = new Set(Object.keys(pools));
+    const entrancesTypes = new Set<string>();
+    const entrancesAll = new Set<Entrance>();
+    for (const name of poolNames) {
+      const types = pools[name].pool;
+      for (const t of types) {
+        entrancesTypes.add(t);
+      }
+      const entrances = new Set((Object.keys(ENTRANCES) as Entrance[]).filter(x => types.includes(ENTRANCES[x].type)));
+      for (const e of entrances) {
+        entrancesAll.add(e);
+      }
+      poolEntrances[name] = { src: shuffle(this.input.random, [...entrances]), dst: new Set([...entrances]) };
+    }
+
+    /* Delete the entrances from the world */
+    for (const eName of entrancesAll) {
       const e = ENTRANCES[eName];
       delete world.areas[e.from].exits[e.to!];
       const reverse = (e as any).reverse as Entrance | undefined;
@@ -440,22 +456,45 @@ export class LogicPassEntrances {
       }
     }
 
-    /* Shuffle the entrances */
-    const shuffledEntrances = shuffle(this.input.random, [...entrances]);
-
-    /* Apply the entrances */
-    for (let e of shuffledEntrances) {
-      let candidates = [...entrances];
-      if (opts?.ownGame) {
-        candidates = candidates.filter(c => ENTRANCES[c].game === ENTRANCES[e].game);
+    /* Remove any empty pools */
+    for (const name of poolNames) {
+      if (poolEntrances[name].src.length === 0) {
+        delete poolEntrances[name];
       }
-      const newE = sample(this.input.random, candidates);
-      this.place(worldId, e, newE, opts);
-      entrances.delete(newE);
+    }
+
+    /* Shuffle */
+    while (Object.keys(poolEntrances).length > 0) {
+      /* Select a pool */
+      const poolName = sample(this.input.random, Object.keys(poolEntrances));
+      const pool = poolEntrances[poolName];
+
+      /* Select an entrance */
+      const src = pool.src.pop()!;
+
+      /* Select candidates */
+      let dstCandidates = pool.dst;
+      if (pools[poolName].opts?.ownGame) {
+        dstCandidates = new Set([...dstCandidates].filter(x => ENTRANCES[x].game === ENTRANCES[src].game));
+      }
+      const dst = sample(this.input.random, [...dstCandidates]);
+
+      /* Place */
+      this.place(worldId, src, dst, pools[poolName].opts);
+      pool.dst.delete(dst);
+
+      /* Remove the pool if empty */
+      if (pool.src.length === 0) {
+        delete poolEntrances[poolName];
+      }
     }
   }
 
-  private placeRegions(worldId: number) {
+  private placePool(worldId: number, pool: string[], opts?: PlaceOpts) {
+    this.placePools(worldId, { SINGLE: { pool, opts: opts || {} } });
+  }
+
+  private poolRegions(worldId: number) {
     const pool = new Set(['region']);
     if (this.input.settings.erRegionsExtra) {
       pool.add('region-extra');
@@ -463,10 +502,10 @@ export class LogicPassEntrances {
     if (this.input.settings.erRegionsShortcuts) {
       pool.add('region-shortcut');
     }
-    this.placePool(worldId, Array.from(pool), { ownGame: this.input.settings.erRegions === 'ownGame' });
+    return { pool: Array.from(pool), opts: { ownGame: this.input.settings.erRegions === 'ownGame' } };
   }
 
-  private placeIndoors(worldId: number) {
+  private poolIndoors(worldId: number) {
     const pool = new Set(['indoors']);
     if (!this.input.settings.erIndoorsMajor) {
       pool.delete('indoors');
@@ -474,7 +513,7 @@ export class LogicPassEntrances {
     if (this.input.settings.erIndoorsExtra) {
       pool.add('indoors-extra');
     }
-    this.placePool(worldId, Array.from(pool), { ownGame: this.input.settings.erIndoors === 'ownGame' });
+    return { pool: Array.from(pool), opts: { ownGame: this.input.settings.erIndoors === 'ownGame' } };
   }
 
   private placeWarps(worldId: number) {
@@ -569,9 +608,9 @@ export class LogicPassEntrances {
     }
   }
 
-  private placeGrottos(worldId: number) {
-    const pool = new Set(['grotto', 'grave']);
-    this.placePool(worldId, Array.from(pool), { ownGame: this.input.settings.erGrottos === 'ownGame' });
+  private poolGrottos() {
+    const pool = ['grotto', 'grave'];
+    return { pool, opts: { ownGame: this.input.settings.erGrottos === 'ownGame' } };
   }
 
   private propagateRegionsStep(worldId: number) {
@@ -699,6 +738,8 @@ export class LogicPassEntrances {
     this.pathfinder = new Pathfinder(this.worlds, this.input.settings, this.input.startingItems);
 
     for (let i = 0; i < worldsCount; ++i) {
+      const pools: EntrancePools = {};
+
       if (this.input.settings.erWallmasters !== 'none') {
         anyEr = true;
         this.placeWallmasters(i);
@@ -706,18 +747,39 @@ export class LogicPassEntrances {
 
       if (this.input.settings.erGrottos !== 'none') {
         anyEr = true;
-        this.placeGrottos(i);
+        pools.GROTTOS = this.poolGrottos();
       }
 
       if (this.input.settings.erRegions !== 'none') {
         anyEr = true;
-        this.placeRegions(i);
+        pools.REGIONS = this.poolRegions(i);
       }
 
       if (this.input.settings.erIndoors !== 'none') {
         anyEr = true;
-        this.placeIndoors(i);
+        pools.INDOORS = this.poolIndoors(i);
       }
+
+      if (this.input.settings.erMixed !== 'none') {
+        pools.MIXED = { pool: [], opts: { ownGame: this.input.settings.erMixed === 'ownGame' } };
+
+        if (this.input.settings.erMixedGrottos) {
+          pools.MIXED.pool = [...pools.MIXED.pool, ...pools.GROTTOS.pool];
+          delete pools.GROTTOS;
+        }
+
+        if (this.input.settings.erMixedRegions) {
+          pools.MIXED.pool = [...pools.MIXED.pool, ...pools.REGIONS.pool];
+          delete pools.REGIONS;
+        }
+
+        if (this.input.settings.erMixedIndoors) {
+          pools.MIXED.pool = [...pools.MIXED.pool, ...pools.INDOORS.pool];
+          delete pools.INDOORS;
+        }
+      }
+
+      this.placePools(i, pools);
 
       if (this.input.settings.erWarps !== 'none') {
         anyEr = true;
