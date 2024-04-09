@@ -908,6 +908,14 @@ export const SETTINGS = [{
   ],
   default: 'none'
 }, {
+  key: 'crossGameFw',
+  name: 'Cross-Games Farore\'s Wind',
+  category: 'main.cross',
+  type: 'boolean',
+  description: 'Controls whether you can use Farore\'s Wind to warp between OOT and MM.',
+  default: false,
+  cond: (x: any) => x.spellWindMm,
+}, {
   key: 'csmc',
   name: 'Container Appearance Matches Content',
   category: 'main.misc',
