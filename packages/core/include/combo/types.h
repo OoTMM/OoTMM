@@ -979,7 +979,9 @@ typedef enum RespawnMode {
     /* 8 */ RESPAWN_MODE_MAX
 } RespawnMode;
 
-#define GROTTO_CHEST_FLAG(save) (save.respawn[RESPAWN_MODE_UNK_3].data)
+#if defined(GAME_MM)
+# define gGrottoData    (gSaveContext.respawn[RESPAWN_MODE_UNK_3].data)
+#endif
 
 typedef enum {
     /*  0 */ TRANS_TYPE_WIPE,

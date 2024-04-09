@@ -1809,7 +1809,7 @@ export const SETTINGS = [{
   default: 'none'
 }, {
   key: 'erGrottos',
-  name: 'Grotto Shuffle (EXPERIMENTAL - OOT ONLY)',
+  name: 'Grotto Shuffle',
   category: 'entrances',
   type: 'enum',
   values: [

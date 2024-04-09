@@ -56,3 +56,12 @@ Replaces:
 PATCH_START 0x80167650
   jal     Play_TransitionDone_Hook
 PATCH_END
+
+/* Disable special casing of grotto exit */
+PATCH_START 0x80835500
+  nop
+PATCH_END
+
+PATCH_START 0x80835508
+  nop
+PATCH_END

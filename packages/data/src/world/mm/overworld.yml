@@ -1710,9 +1710,9 @@
 "Near Village Grotto":
   region: MOUNTAIN_VILLAGE
   exits:
-    "Mountain Village Grotto": "true"
+    "Mountain Village Grotto": "is_spring"
     "Mountain Village": "true"
-    "Near Goron Graveyard": "has_mask_goron || short_hook_anywhere"
+    "Near Goron Graveyard": "is_spring && (has_mask_goron || short_hook_anywhere)"
 "Mountain Village Grotto":
   region: ENTRANCE
   exits:
@@ -2323,7 +2323,7 @@
     ARROWS: "true"
     RUPEES: "true"
   exits:
-    "Great Bay Coast": "true"
+    "GBC Near Cow Grotto": "true"
   locations:
     "Great Bay Coast Cow Front": "can_play_epona"
     "Great Bay Coast Cow Back": "can_play_epona"
@@ -2478,7 +2478,7 @@
     FISH: "true"
     BUGS: "true"
   exits:
-    "Great Bay Coast": "true"
+    "Zora Cape": "true"
   locations:
     "Zora Cape Grotto": "true"
     "Zora Cape Grotto Grass 01": "true"
@@ -2779,6 +2779,10 @@
     "Beneath The Graveyard Rupee 5": "true"
     "Beneath The Graveyard Rupee 6": "true"
     "Beneath The Graveyard Rupee 7": "true"
+"Beneath The Graveyard Night 3 Fake Exit":
+  region: NONE
+  exits:
+    "Ikana Graveyard": "true"
 "Beneath The Graveyard Night 3":
   region: ENTRANCE
   events:

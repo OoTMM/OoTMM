@@ -134,8 +134,8 @@ typedef struct PACKED ALIGNED(4)
     char magic[8];
     u32  valid;
     u32  saveIndex;
-    s32  entrance;
-    s32  shuffledEntrance;
+    u32  entrance;
+    s32  unused;
 }
 ComboContext;
 
@@ -234,7 +234,7 @@ void comboSave(GameState_Play* play, int saveFlags);
 void comboCreateSaveMM(void);
 
 /* Switch */
-NORETURN void comboGameSwitch(GameState_Play* play, s32 entrance);
+NORETURN void comboGameSwitch(GameState_Play* play, u32 entrance);
 
 #if defined(GAME_OOT)
 void swapFarore(void);
@@ -429,7 +429,7 @@ void comboShopUpdateItem(GameState_Play* play, Actor_EnGirlA* girlA);
 
 /* Entrance */
 void comboInitEntrances(void);
-s32 comboEntranceOverride(s16 entranceId);
+s32 comboEntranceOverride(u32 entranceId);
 int comboBossLairIndex();
 
 extern s8 gIsEntranceOverride;
@@ -467,7 +467,7 @@ typedef struct ComboItemQuery ComboItemQuery;
 /* Global data */
 typedef struct
 {
-    u16                     initialEntrance;
+    u32                     initialEntrance;
     u8                      inGrotto;
     u8                      isCreditWarp;
     const ComboItemQuery*   itemQuery;

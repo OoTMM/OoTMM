@@ -147,7 +147,7 @@ const ACTORS_OOT = {
   BG_SPOT11_OASIS: 0x1C2,
   OBJ_MURE3: 0x1ab,
   SHOT_SUN: 0x183,
-  //EN_HOLE: 0x9b,
+  //DOOR_ANA: 0x9b,
 };
 
 const ACTORS_MM = {
@@ -161,6 +161,7 @@ const ACTORS_MM = {
   OBJ_GRASS_UNIT: 0x10d,
   EN_KUSA2: 0x171,
   EN_ELF: 0x10,
+  //DOOR_ANA: 0x55,
 };
 
 const ACTOR_SLICES_OOT = {
@@ -641,15 +642,15 @@ function decPad(n: number, width: number) {
   return count > 0 ? '0'.repeat(width - s.length) + s : s;
 }
 
-function outputGrottosOot(roomActors: RoomActors[]) {
+function outputGrottosMm(roomActors: RoomActors[]) {
   let lastSceneId = -1;
   let lastSetupId = -1;
   for (const room of roomActors) {
     for (const actor of room.actors) {
-      /*if (actor.typeId === ACTORS_OOT.EN_HOLE)*/ {
+      if (actor.typeId === ACTORS_MM.DOOR_ANA) {
         if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
           console.log('');
-          console.log(`### Scene: ${scenesById('oot')[room.sceneId]}`);
+          console.log(`### Scene: ${scenesById('mm')[room.sceneId]}`);
           lastSceneId = room.sceneId;
           lastSetupId = room.setupId;
         }
@@ -1096,7 +1097,7 @@ async function run() {
   //outputHeartsMm(mmRooms);
   //outputShotSunOot(ootRooms);
   //outputShotSunOot(mqRooms);
-  //outputGrottosOot(ootRooms);
+  //outputGrottosMm(mmRooms);
 }
 
 run().catch(e => {

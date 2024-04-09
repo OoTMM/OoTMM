@@ -69,12 +69,9 @@ static void waitSubsystems(void)
 NORETURN void comboGameSwitch2(void);
 NORETURN void comboGameSwitch4(u32);
 
-NORETURN void comboGameSwitch(GameState_Play* play, s32 entrance)
+NORETURN void comboGameSwitch(GameState_Play* play, u32 entrance)
 {
-    if (entrance == -1)
-        gComboCtx.entrance = -1;
-    else
-        gComboCtx.entrance = (entrance & 0x7fffffff);
+    gComboCtx.entrance = entrance;
 
     netClose();
     comboSave(play, SF_OWL);

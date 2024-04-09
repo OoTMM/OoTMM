@@ -116,7 +116,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.ammo[ITS_MM_BOMBS] = 40;
 
         gSave.playerData.healthMax = 0x10 * 20;
-        gSave.playerData.health = gSave.playerData.healthMax;
+        gSave.playerData.health = 0x10 * 3;
 
         gMmExtraTrade.trade1 = 0x3f;
         gMmExtraTrade.trade2 = 0x1f;
@@ -252,11 +252,35 @@ static u32 entranceForOverride(u32 entrance)
     case 0xae60:
         /* To Spring Mountain Village from Path */
         return ENTR_MM_MOUNTAIN_VILLAGE_FROM_PATH;
+    case ENTR_MM_GROTTO_TYPE_GENERIC:
+        switch (gGrottoData & 0x1f)
+        {
+        case 0x13: return ENTR_MM_GROTTO_GENERIC_PATH_SNOWHEAD;
+        case 0x14: return ENTR_MM_GROTTO_GENERIC_VALLEY;
+        case 0x15: return ENTR_MM_GROTTO_GENERIC_ZORA_CAPE;
+        case 0x16: return ENTR_MM_GROTTO_GENERIC_PATH_IKANA;
+        case 0x17: return ENTR_MM_GROTTO_GENERIC_GREAT_BAY_COAST;
+        case 0x18: return ENTR_MM_GROTTO_GENERIC_GRAVEYARD;
+        case 0x19: return ENTR_MM_GROTTO_GENERIC_TWIN_ISLANDS;
+        case 0x1a: return ENTR_MM_GROTTO_GENERIC_FIELD_PILLAR;
+        case 0x1b: return ENTR_MM_GROTTO_GENERIC_MOUNTAIN_VILLAGE;
+        case 0x1c: return ENTR_MM_GROTTO_GENERIC_WOODS;
+        case 0x1d: return ENTR_MM_GROTTO_GENERIC_SWAMP;
+        case 0x1e: return ENTR_MM_GROTTO_GENERIC_PATH_SWAMP;
+        case 0x1f: return ENTR_MM_GROTTO_GENERIC_GRASS;
+        }
+        UNREACHABLE();
+    case ENTR_MM_GROTTO_TYPE_COW:
+        switch (gLastScene)
+        {
+        case SCE_MM_TERMINA_FIELD: return ENTR_MM_GROTTO_COW_FIELD;
+        case SCE_MM_GREAT_BAY_COAST: return ENTR_MM_GROTTO_COW_COAST;
+        }
+        UNREACHABLE();
     default:
         return entrance;
     }
 }
-
 
 static void sendSelfMajorasMask(void)
 {
@@ -356,8 +380,169 @@ void fixupOriginalSceneSetup(void)
     gSave.entranceIndex = (entranceKey << 9) | (entrance & 0x1ff);
 }
 
+
+typedef struct
+{
+    u16 entrance;
+    u8  room;
+    s16 pos[3];
+}
+GrottoExit;
+
+static const GrottoExit kGrottoExits[] = {
+    /* Generic grottos */
+    { ENTR_MM_TERMINA_FIELD_FROM_CLOCK_TOWN_EAST, 0, { 2367, 315, -192 } },
+    { ENTR_MM_TERMINA_FIELD_FROM_CLOCK_TOWN_SOUTH, 0, { 1012, -221, 3642 } },
+    { ENTR_MM_SWAMP_ROAD_FROM_FIELD, 0, { 104, -182, 2202 } },
+    { ENTR_MM_WOODS_OF_MYSTERY, 2, { 2, 0, -889 } },
+    { ENTR_MM_SWAMP_FROM_SPIDER_HOUSE, 1, { -1700, 38, 1800 } },
+    { ENTR_MM_WARP_OWL_MOUNTAIN_VILLAGE, 1, { 2406, 1168, -1197 } },
+    { ENTR_MM_TWIN_ISLAND_FROM_MOUNTAIN_VILLAGE, 0, { -1309, 320, 143 } },
+    { ENTR_MM_PATH_SNOWHEAD_FROM_SNOWHEAD, 0, { -987, 360, -2339 } },
+    { ENTR_MM_GREAT_BAY_COAST_FROM_FISHER_HUT, 0, { 1359, 80, 5018 } },
+    { ENTR_MM_ZORA_CAPE_FROM_COAST, 0, { -562, 80, 2707 } },
+    { ENTR_MM_IKANA_ROAD_FROM_FIELD, 0, { -428, 200, -335 } },
+    { ENTR_MM_IKANA_GRAVEYARD_FROM_DAMPE, 1, { 106, 314, -1777 } },
+    { ENTR_MM_IKANA_VALLEY_FROM_ROAD, 2, { -2475, -505, 2475 } },
+
+    /* Cow grottos */
+    { ENTR_MM_TERMINA_FIELD_FROM_CLOCK_TOWN_SOUTH, 0, { -375, -222, 3976 } },
+    { ENTR_MM_GREAT_BAY_COAST_FROM_LABORATORY, 0, { 2077, 333, -215 } },
+
+    /* Gossip grottos */
+    { ENTR_MM_TERMINA_FIELD_FROM_CLOCK_TOWN_NORTH, 0, { 192, 48, -3138 } },
+    { ENTR_MM_TERMINA_FIELD_FROM_CLOCK_TOWN_EAST,  0, { 4450, 254, 925 } },
+    { ENTR_MM_TERMINA_FIELD_FROM_CLOCK_TOWN_WEST,  0, { -2782, 48, -1654 } },
+    { ENTR_MM_TERMINA_FIELD_FROM_CLOCK_TOWN_SOUTH, 0, { -1592, -222, 4622 } },
+
+    /* Normal grottos */
+    { ENTR_MM_TERMINA_FIELD_FROM_CLOCK_TOWN_NORTH, 0, { -2425, -281, -3291 } },
+    { ENTR_MM_TERMINA_FIELD_FROM_CLOCK_TOWN_EAST,  0, { 3223, 219, 1417 } },
+    { ENTR_MM_TERMINA_FIELD_FROM_CLOCK_TOWN_SOUTH, 0, { -2317, -221, 3418 } },
+    { ENTR_MM_TERMINA_FIELD_FROM_CLOCK_TOWN_WEST,  0, { -5159, -281, -571 } },
+    { ENTR_MM_DEKU_PALACE_EXTERIOR_FROM_THRONE, 1, { 1190, 0, 1011 } },
+    { ENTR_MM_TWIN_ISLAND_FROM_MOUNTAIN_VILLAGE, 0, { 589, 195, 53 } },
+};
+
+static const GrottoExit kGrottoExitMountainWinter = { ENTR_MM_WARP_OWL_MOUNTAIN_VILLAGE, 0, { 345, 8, -150 } };
+
+static void applyGrottoExit(u32* entrance, const GrottoExit* ge)
+{
+    RespawnData* rs;
+
+    /* Set the grotto exit */
+    rs = &gSaveContext.respawn[3];
+    rs->pos.x = ge->pos[0];
+    rs->pos.y = ge->pos[1];
+    rs->pos.z = ge->pos[2];
+    rs->yaw = 0;
+    rs->entrance = ge->entrance;
+    rs->playerParams = 0x04ff;
+    rs->data = 0;
+    rs->roomIndex = ge->room;
+    rs->tempSwitchFlags = 0;
+    rs->unk_18 = 0;
+    rs->tempCollectFlags = 0;
+
+    /* Copy to the void respawn */
+    memcpy(&gSaveContext.respawn[0], rs, sizeof(RespawnData));
+
+    /* Set the respawn flags */
+    gSaveContext.respawnFlag = 4;
+    *entrance = rs->entrance;
+}
+
+static u32 entrGrottoExit(GameState_Play* play)
+{
+    if (!comboConfig(CFG_ER_GROTTOS))
+        return ENTR_MM_INTERNAL_EXIT_GROTTO;
+
+    switch (play->sceneId)
+    {
+    case SCE_MM_GROTTOS:
+        switch (play->roomCtx.curRoom.id)
+        {
+        case 0x00: return ENTR_MM_GROTTO_EXIT_GOSSIPS_OCEAN;
+        case 0x01: return ENTR_MM_GROTTO_EXIT_GOSSIPS_SWAMP;
+        case 0x02: return ENTR_MM_GROTTO_EXIT_GOSSIPS_CANYON;
+        case 0x03: return ENTR_MM_GROTTO_EXIT_GOSSIPS_MOUNTAIN;
+        case 0x04:
+            switch (gGrottoData & 0x1f)
+            {
+            case 0x13: return ENTR_MM_GROTTO_EXIT_GENERIC_PATH_SNOWHEAD;
+            case 0x14: return ENTR_MM_GROTTO_EXIT_GENERIC_VALLEY;
+            case 0x15: return ENTR_MM_GROTTO_EXIT_GENERIC_ZORA_CAPE;
+            case 0x16: return ENTR_MM_GROTTO_EXIT_GENERIC_PATH_IKANA;
+            case 0x17: return ENTR_MM_GROTTO_EXIT_GENERIC_GREAT_BAY_COAST;
+            case 0x18: return ENTR_MM_GROTTO_EXIT_GENERIC_GRAVEYARD;
+            case 0x19: return ENTR_MM_GROTTO_EXIT_GENERIC_TWIN_ISLANDS;
+            case 0x1a: return ENTR_MM_GROTTO_EXIT_GENERIC_FIELD_PILLAR;
+            case 0x1b: return ENTR_MM_GROTTO_EXIT_GENERIC_MOUNTAIN_VILLAGE;
+            case 0x1c: return ENTR_MM_GROTTO_EXIT_GENERIC_WOODS;
+            case 0x1d: return ENTR_MM_GROTTO_EXIT_GENERIC_SWAMP;
+            case 0x1e: return ENTR_MM_GROTTO_EXIT_GENERIC_PATH_SWAMP;
+            case 0x1f: return ENTR_MM_GROTTO_EXIT_GENERIC_GRASS;
+            }
+            UNREACHABLE();
+        case 0x07: return ENTR_MM_GROTTO_EXIT_DODONGO;
+        case 0x09: return ENTR_MM_GROTTO_EXIT_SCRUB;
+        case 0x0a:
+            switch (gLastScene)
+            {
+            case SCE_MM_TERMINA_FIELD: return ENTR_MM_GROTTO_EXIT_COW_FIELD;
+            case SCE_MM_GREAT_BAY_COAST: return ENTR_MM_GROTTO_EXIT_COW_COAST;
+            }
+            UNREACHABLE();
+        case 0x0b: return ENTR_MM_GROTTO_EXIT_BIO_BABA;
+        case 0x0c: return ENTR_MM_GROTTO_EXIT_BEAN;
+        case 0x0d: return ENTR_MM_GROTTO_EXIT_PEAHAT;
+        case 0x0e: return ENTR_MM_GROTTO_EXIT_HOT_WATER;
+        }
+    }
+
+    return ENTR_MM_INTERNAL_EXIT_GROTTO;
+}
+
+static const u8 kGrottoDataGeneric[] = { 0x1a, 0x1f, 0x1e, 0x1c, 0x1d, 0x1b, 0x19, 0x13, 0x17, 0x15, 0x16, 0x18, 0x14 };
+
+static void applyCustomEntrance(u32* entrance)
+{
+    const GrottoExit* ge;
+    u32 id;
+
+    id = *entrance;
+    if (id >= ENTR_MM_GROTTO_GENERIC_FIELD_PILLAR && id <= ENTR_MM_GROTTO_GENERIC_VALLEY)
+    {
+        id -= ENTR_MM_GROTTO_GENERIC_FIELD_PILLAR;
+        *entrance = ENTR_MM_GROTTO_TYPE_GENERIC;
+        gGrottoData &= ~0x1f;
+        gGrottoData |= kGrottoDataGeneric[id];
+    }
+    else if (id >= ENTR_MM_GROTTO_COW_FIELD && id <= ENTR_MM_GROTTO_COW_COAST)
+    {
+        if (id == ENTR_MM_GROTTO_COW_FIELD)
+            gLastScene = SCE_MM_TERMINA_FIELD;
+        else
+            gLastScene = SCE_MM_GREAT_BAY_COAST;
+        *entrance = ENTR_MM_GROTTO_TYPE_COW;
+    }
+    else if (id >= ENTR_MM_GROTTO_EXIT_GENERIC_FIELD_PILLAR && id <= ENTR_MM_GROTTO_EXIT_HOT_WATER)
+    {
+        if ((id == ENTR_MM_GROTTO_EXIT_GENERIC_MOUNTAIN_VILLAGE) && !MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH))
+            ge = &kGrottoExitMountainWinter;
+        else
+        {
+            id -= ENTR_MM_GROTTO_EXIT_GENERIC_FIELD_PILLAR;
+            ge = &kGrottoExits[id];
+        }
+        applyGrottoExit(entrance, ge);
+    }
+}
+
 void preInitTitleScreen(void)
 {
+    u32 entrance;
+
     if (!gComboCtx.valid)
         return;
 
@@ -367,17 +552,17 @@ void preInitTitleScreen(void)
     /* Load save */
     gSaveContext.fileIndex = gComboCtx.saveIndex;
     Sram_OpenSave(NULL, NULL);
-
     gSave.cutscene = 0;
     gSaveContext.nextCutscene = 0;
-    if (gComboCtx.entrance == -1)
-        gSave.entranceIndex = ENTR_MM_CLOCK_TOWN;
-    else
-        gSave.entranceIndex = gComboCtx.entrance;
+
+    /* Load the entrance */
+    entrance = gComboCtx.entrance;
     if (comboConfig(CFG_ER_ANY))
-        g.initialEntrance = gSave.entranceIndex;
+        g.initialEntrance = entrance;
     else
         g.initialEntrance = ENTR_MM_CLOCK_TOWN;
+    applyCustomEntrance(&entrance);
+    gSave.entranceIndex = entrance;
 
     /* Fixup the scene/setup */
     fixupOriginalSceneSetup();
@@ -399,6 +584,8 @@ void preInitTitleScreen(void)
 
 void hookPlay_Init(GameState_Play* play)
 {
+    u32 entrance;
+
     gPlay = play;
     int isEndOfGame;
 
@@ -572,7 +759,9 @@ void hookPlay_Init(GameState_Play* play)
     if ((gSave.entranceIndex == ENTR_MM_CLOCK_TOWN && gLastEntrance == ENTR_MM_CLOCK_TOWN_FROM_SONG_OF_TIME) || gSave.entranceIndex == ENTR_MM_CLOCK_TOWER_MOON_CRASH)
     {
         /* Song of Time / Moon crash */
-        gSave.entranceIndex = entranceForOverride(g.initialEntrance);
+        entrance = g.initialEntrance;
+        applyCustomEntrance(&entrance);
+        gSave.entranceIndex = entrance;
     }
 
     if (gSave.entranceIndex == ENTR_MM_WOODFALL_FROM_TEMPLE)
@@ -652,7 +841,8 @@ void hookPlay_Init(GameState_Play* play)
             gSave.time = 0x3fff;
             comboSave(play, SF_NOCOMMIT);
             Sram_SaveNewDay(play);
-            play->nextEntrance = entranceForOverride(g.initialEntrance);
+            play->nextEntrance = ENTR_EXTENDED;
+            g.nextEntrance = g.initialEntrance;
             play->transitionTrigger = TRANS_TRIGGER_NORMAL;
             play->transitionType = TRANS_TYPE_FADE_BLACK;
             return;
@@ -661,7 +851,7 @@ void hookPlay_Init(GameState_Play* play)
 
     if (gSave.entranceIndex == ENTR_MM_CLOCK_TOWER_FROM_CLOCK_TOWN)
     {
-        comboGameSwitch(play, -1);
+        comboGameSwitch(play, ENTR_OOT_MARKET_FROM_MASK_SHOP);
         return;
     }
 }
@@ -678,11 +868,6 @@ void Play_UpdateWrapper(GameState_Play* play)
     Debug_Update();
 }
 
-NORETURN static void Play_GameSwitch(GameState_Play* play, s32 entrance)
-{
-    comboGameSwitch(play, entrance);
-}
-
 void Play_TransitionDone(GameState_Play* play)
 {
     u32 entrance;
@@ -693,9 +878,19 @@ void Play_TransitionDone(GameState_Play* play)
     if (entrance == ENTR_EXTENDED)
         entrance = g.nextEntrance;
 
+    /* Handle grotto exits */
+    if (entrance == ENTR_MM_INTERNAL_EXIT_GROTTO)
+    {
+        entrance = entrGrottoExit(play);
+        if (entrance == ENTR_MM_INTERNAL_EXIT_GROTTO)
+        {
+            gIsEntranceOverride = 0;
+            entrance = gSaveContext.respawn[3].entrance;
+            gSaveContext.respawnFlag = 4;
+        }
+    }
+
     /* Handle transition override */
-    if (g.inGrotto)
-        gIsEntranceOverride = 0;
     if (gIsEntranceOverride)
     {
         gIsEntranceOverride = 0;
@@ -704,13 +899,33 @@ void Play_TransitionDone(GameState_Play* play)
             entrance = (u32)override;
     }
 
+    applyCustomEntrance(&entrance);
+
     /* Check for foreign */
     if (entrance & MASK_FOREIGN_ENTRANCE)
     {
-        Play_GameSwitch(play, entrance & ~MASK_FOREIGN_ENTRANCE);
+        comboGameSwitch(play, entrance & ~MASK_FOREIGN_ENTRANCE);
     }
     else
     {
         play->nextEntrance = entrance & 0xffff;
     }
 }
+
+void Play_SetupRespawnPointRaw(GameState_Play* play, int respawnId, int playerParams)
+{
+    Actor_Player* link;
+
+    link = GET_LINK(play);
+    Play_SetRespawnData(play, respawnId, gSave.entranceIndex, gPlay->roomCtx.curRoom.id, playerParams, &link->base.world.pos, link->base.rot2.y);
+}
+
+void Play_SetupRespawnPoint(GameState_Play* play, int respawnId, int playerParams)
+{
+    if (!comboConfig(CFG_ER_GROTTOS) && play->sceneId == SCE_MM_GROTTOS)
+        return;
+
+    Play_SetupRespawnPointRaw(play, respawnId, playerParams);
+}
+
+PATCH_FUNC(0x80169e6c, Play_SetupRespawnPoint);

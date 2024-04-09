@@ -259,7 +259,7 @@ void ageSwap(GameState_Play* play)
 {
     /* Age swap */
     play->linkAgeOnLoad = !gSaveContext.save.age;
-    Play_SetupRespawnPoint(play, 1, 0xDFF);
+    Play_SetupRespawnPoint(play, 1, 0xdff);
     gSaveContext.respawnFlag = 2;
     play->transitionTrigger = TRANS_TYPE_NORMAL;
     play->nextEntranceIndex = gSaveContext.save.entrance;

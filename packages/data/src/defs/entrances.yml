@@ -339,43 +339,43 @@ OOT_GROTTO_TYPE_GENERIC:                        { game: oot, id: 0x03f,  type: n
 OOT_GROTTO_TYPE_FAIRY:                          { game: oot, id: 0x36d,  type: none } # Multiple uses
 OOT_GROTTO_TYPE_SCRUB2:                         { game: oot, id: 0x5bc,  type: none } # Multiple uses
 OOT_GROTTO_TYPE_SCRUB3:                         { game: oot, id: 0x5a4,  type: none } # Multiple uses
-OOT_GROTTO_GENERIC_KOKIRI_FOREST:               { game: oot, id: 0x1000, type: grotto, areas: ['OOT Kokiri Forest', 'OOT Kokiri Forest Storms Grotto'], reverse: OOT_GROTTO_EXIT_GENERIC_KOKIRI_FOREST,  debug: ['GROTTO', 'Kokiri Forest Generic'] }
-OOT_GROTTO_GENERIC_LOST_WOODS:                  { game: oot, id: 0x1001, type: grotto, areas: ['OOT Lost Woods', 'OOT Lost Woods Generic Grotto'], reverse: OOT_GROTTO_EXIT_GENERIC_LOST_WOODS,  debug: ['GROTTO', 'Lost Woods Generic'] }
-OOT_GROTTO_GENERIC_KAKARIKO:                    { game: oot, id: 0x1002, type: grotto, areas: ['OOT Kakariko Back', 'OOT Kakariko Generic Grotto'], reverse: OOT_GROTTO_EXIT_GENERIC_KAKARIKO,  debug: ['GROTTO', 'Kakariko Generic'] }
-OOT_GROTTO_GENERIC_DMT:                         { game: oot, id: 0x1003, type: grotto, areas: ['OOT Death Mountain', 'OOT Death Mountain Storms Grotto'], reverse: OOT_GROTTO_EXIT_GENERIC_DMT,  debug: ['GROTTO', 'DMT Generic'] }
-OOT_GROTTO_GENERIC_DMC:                         { game: oot, id: 0x1004, type: grotto, areas: ['OOT Death Mountain Crater Top', 'OOT Death Mountain Crater Generic Grotto'], reverse: OOT_GROTTO_EXIT_GENERIC_DMC,  debug: ['GROTTO', 'DMC Generic'] }
-OOT_GROTTO_GENERIC_RIVER:                       { game: oot, id: 0x1005, type: grotto, areas: ['OOT Zora River', 'OOT Zora River Open Grotto'], reverse: OOT_GROTTO_EXIT_GENERIC_RIVER,  debug: ['GROTTO', 'River Generic'] }
-OOT_GROTTO_GENERIC_HF_SOUTHEAST:                { game: oot, id: 0x1006, type: grotto, areas: ['OOT Hyrule Field', 'OOT Hyrule Field Southeast Grotto'], reverse: OOT_GROTTO_EXIT_GENERIC_HF_SOUTHEAST,  debug: ['GROTTO', 'HF Southeast Generic'] }
-OOT_GROTTO_GENERIC_HF_OPEN:                     { game: oot, id: 0x1007, type: grotto, areas: ['OOT Hyrule Field', 'OOT Hyrule Field Open Grotto'], reverse: OOT_GROTTO_EXIT_GENERIC_HF_OPEN,  debug: ['GROTTO', 'HF Open Generic'] }
-OOT_GROTTO_GENERIC_HF_MAKET:                    { game: oot, id: 0x1008, type: grotto, areas: ['OOT Hyrule Field', 'OOT Hyrule Field Grotto Near Market'], reverse: OOT_GROTTO_EXIT_GENERIC_HF_MAKET,  debug: ['GROTTO', 'HF Market Generic'] }
-OOT_GROTTO_FAIRY_SFM:                           { game: oot, id: 0x1009, type: grotto, areas: ['OOT Sacred Meadow', 'OOT Sacred Meadow Fairy Grotto'], reverse: OOT_GROTTO_EXIT_FAIRY_SFM,  debug: ['GROTTO', 'Meadow Fairy'] }
-OOT_GROTTO_FAIRY_HF:                            { game: oot, id: 0x100a, type: grotto, areas: ['OOT Hyrule Field', 'OOT Hyrule Field Fairy Grotto'], reverse: OOT_GROTTO_EXIT_FAIRY_HF,  debug: ['GROTTO', 'Hyrule Field Fairy'] }
-OOT_GROTTO_FAIRY_RIVER:                         { game: oot, id: 0x100b, type: grotto, areas: ['OOT Zora River', 'OOT Zora River Boulder Grotto'], reverse: OOT_GROTTO_EXIT_FAIRY_RIVER,  debug: ['GROTTO', 'River Fairy'] }
-OOT_GROTTO_FAIRY_DOMAIN:                        { game: oot, id: 0x100c, type: grotto, areas: ['OOT Zora Domain', 'OOT Zora Domain Grotto'], reverse: OOT_GROTTO_EXIT_FAIRY_DOMAIN,  debug: ['GROTTO', 'Domain Fairy'] }
-OOT_GROTTO_FAIRY_FORTRESS:                      { game: oot, id: 0x100d, type: grotto, areas: ['OOT Gerudo Fortress Exterior', 'OOT Gerudo Fortress Grotto'], reverse: OOT_GROTTO_EXIT_FAIRY_FORTRESS,  debug: ['GROTTO', 'Fortress Fairy'] }
-OOT_GROTTO_SCRUBS2_SFM:                         { game: oot, id: 0x100e, type: grotto, areas: ['OOT Sacred Meadow', 'OOT Sacred Meadow Storms Grotto'], reverse: OOT_GROTTO_EXIT_SCRUBS2_SFM,  debug: ['GROTTO', 'Meadow Scrubs'] }
-OOT_GROTTO_SCRUBS2_RIVER:                       { game: oot, id: 0x100f, type: grotto, areas: ['OOT Zora River', 'OOT Zora River Storms Grotto'], reverse: OOT_GROTTO_EXIT_SCRUBS2_RIVER,  debug: ['GROTTO', 'River Scrubs'] }
-OOT_GROTTO_SCRUBS2_VALLEY:                      { game: oot, id: 0x1010, type: grotto, areas: ['OOT Gerudo Valley After Bridge', 'OOT Gerudo Valley Storms Grotto'], reverse: OOT_GROTTO_EXIT_SCRUBS2_VALLEY,  debug: ['GROTTO', 'Valley Scrubs'] }
-OOT_GROTTO_SCRUBS2_COLOSSUS:                    { game: oot, id: 0x1011, type: grotto, areas: ['OOT Desert Colossus', 'OOT Desert Colossus Grotto'], reverse: OOT_GROTTO_EXIT_SCRUBS2_COLOSSUS,  debug: ['GROTTO', 'Colossus Scrubs'] }
-OOT_GROTTO_SCRUBS3_RANCH:                       { game: oot, id: 0x1012, type: grotto, areas: ['OOT Lon Lon Ranch', 'OOT Lon Lon Ranch Grotto'], reverse: OOT_GROTTO_EXIT_SCRUBS3_RANCH,  debug: ['GROTTO', 'Ranch Scrubs'] }
-OOT_GROTTO_SCRUBS3_GORON_CITY:                  { game: oot, id: 0x1013, type: grotto, areas: ['OOT Goron City', 'OOT Goron City Grotto'], reverse: OOT_GROTTO_EXIT_SCRUBS3_GORON_CITY,  debug: ['GROTTO', 'Goron City Scrubs'] }
-OOT_GROTTO_SCRUBS3_DMC:                         { game: oot, id: 0x1014, type: grotto, areas: ['OOT Death Mountain Crater Bottom', 'OOT Death Mountain Crater Scrub Grotto'], reverse: OOT_GROTTO_EXIT_SCRUBS3_DMC,  debug: ['GROTTO', 'DMC Scrubs'] }
-OOT_GROTTO_SCRUBS3_LAKE:                        { game: oot, id: 0x1015, type: grotto, areas: ['OOT Lake Hylia', 'OOT Lake Hylia Grotto'], reverse: OOT_GROTTO_EXIT_SCRUBS3_LAKE,  debug: ['GROTTO', 'Lake Scrubs'] }
-OOT_GROTTO_SCRUB_UPGRADE:                       { game: oot, id: 0x5b0,  type: grotto, areas: ['OOT Lost Woods Deep', 'OOT Lost Woods Scrub Grotto'], reverse: OOT_GROTTO_EXIT_SCRUB_UPGRADE,  debug: ['GROTTO', 'Scrub Upgrade'] }
-OOT_GROTTO_SCRUB_HEART_PIECE:                   { game: oot, id: 0x59c,  type: grotto, areas: ['OOT Hyrule Field', 'OOT Hyrule Field Scrub Grotto'], reverse: OOT_GROTTO_EXIT_SCRUB_HEART_PIECE,  debug: ['GROTTO', 'Scrub Heart Piece'] }
-OOT_GROTTO_DEKU_THEATER:                        { game: oot, id: 0x5c4,  type: grotto, areas: ['OOT Lost Woods Deep', 'OOT Deku Theater'], reverse: OOT_GROTTO_EXIT_DEKU_THEATER,  debug: ['GROTTO', 'Deku Theater'] }
-OOT_GROTTO_WOLFOS:                              { game: oot, id: 0x5b4,  type: grotto, areas: ['OOT Sacred Meadow Entryway', 'OOT Wolfos Grotto'], reverse: OOT_GROTTO_EXIT_WOLFOS,  debug: ['GROTTO', 'Wolfos'] }
-OOT_GROTTO_TEKTITE:                             { game: oot, id: 0x5c0,  type: grotto, areas: ['OOT Hyrule Field', 'OOT Hyrule Field Tektite Grotto'], reverse: OOT_GROTTO_EXIT_TEKTITE,  debug: ['GROTTO', 'Tektite'] }
-OOT_GROTTO_FIELD_COW:                           { game: oot, id: 0x5a8,  type: grotto, areas: ['OOT Hyrule Field', 'OOT Hyrule Field Grotto Near GV'], reverse: OOT_GROTTO_EXIT_FIELD_COW,  debug: ['GROTTO', 'Field Cow'] }
-OOT_GROTTO_FIELD_TREE:                          { game: oot, id: 0x598,  type: grotto, areas: ['OOT Hyrule Field', 'OOT Hyrule Field Grotto Near Kak'], reverse: OOT_GROTTO_EXIT_FIELD_TREE,  debug: ['GROTTO', 'Field Tree'] }
-OOT_GROTTO_TRAIL_COW:                           { game: oot, id: 0x5fc,  type: grotto, areas: ['OOT Death Mountain', 'OOT Death Mountain Cow Grotto'], reverse: OOT_GROTTO_EXIT_TRAIL_COW,  debug: ['GROTTO', 'Trail Cow'] }
-OOT_GROTTO_CASTLE:                              { game: oot, id: 0x5b8,  type: grotto, areas: ['OOT Hyrule Castle Near Grotto', 'OOT Hyrule Castle Grotto'], reverse: OOT_GROTTO_EXIT_CASTLE,  debug: ['GROTTO', 'Castle'] }
-OOT_GROTTO_REDEAD:                              { game: oot, id: 0x5a0,  type: grotto, areas: ['OOT Kakariko', 'OOT ReDead Grotto'], reverse: OOT_GROTTO_EXIT_REDEAD,  debug: ['GROTTO', 'Redead'] }
-OOT_GROTTO_OCTOROK:                             { game: oot, id: 0x5ac,  type: grotto, areas: ['OOT Octorok Grotto Ledge', 'OOT Octorok Grotto'], reverse: OOT_GROTTO_EXIT_OCTOROK,  debug: ['GROTTO', 'Octorok'] }
-OOT_GRAVE_SHIELD:                               { game: oot, id: 0x04b,  type: grave, areas: ["OOT Graveyard", "OOT Graveyard Shield Grave"], reverse: OOT_GRAVE_EXIT_SHIELD, debug: ['GROTTO', 'Shield Grave'] }
-OOT_GRAVE_REDEAD:                               { game: oot, id: 0x31c,  type: grave, areas: ["OOT Graveyard", "OOT Graveyard ReDead Grave"], reverse: OOT_GRAVE_EXIT_REDEAD, debug: ['GROTTO', 'ReDead Grave'] }
-OOT_GRAVE_ROYAL:                                { game: oot, id: 0x02d,  type: grave, areas: ["OOT Graveyard", "OOT Graveyard Royal Tomb"], reverse: OOT_GRAVE_EXIT_ROYAL, debug: ['GROTTO', 'Royal Grave'] }
-OOT_GRAVE_DAMPE:                                { game: oot, id: 0x44f,  type: grave, areas: ["OOT Graveyard", "OOT Dampe Grave"], reverse: OOT_GRAVE_EXIT_DAMPE, debug: ['GROTTO', 'Dampe Grave'] }
+OOT_GROTTO_GENERIC_KOKIRI_FOREST:               { game: oot, id: 0x1000, type: grotto, areas: ['OOT Kokiri Forest', 'OOT Kokiri Forest Storms Grotto'], reverse: OOT_GROTTO_EXIT_GENERIC_KOKIRI_FOREST,  debug: ['OOT_GROTTO', 'Kokiri Forest Generic'] }
+OOT_GROTTO_GENERIC_LOST_WOODS:                  { game: oot, id: 0x1001, type: grotto, areas: ['OOT Lost Woods', 'OOT Lost Woods Generic Grotto'], reverse: OOT_GROTTO_EXIT_GENERIC_LOST_WOODS,  debug: ['OOT_GROTTO', 'Lost Woods Generic'] }
+OOT_GROTTO_GENERIC_KAKARIKO:                    { game: oot, id: 0x1002, type: grotto, areas: ['OOT Kakariko Back', 'OOT Kakariko Generic Grotto'], reverse: OOT_GROTTO_EXIT_GENERIC_KAKARIKO,  debug: ['OOT_GROTTO', 'Kakariko Generic'] }
+OOT_GROTTO_GENERIC_DMT:                         { game: oot, id: 0x1003, type: grotto, areas: ['OOT Death Mountain', 'OOT Death Mountain Storms Grotto'], reverse: OOT_GROTTO_EXIT_GENERIC_DMT,  debug: ['OOT_GROTTO', 'DMT Generic'] }
+OOT_GROTTO_GENERIC_DMC:                         { game: oot, id: 0x1004, type: grotto, areas: ['OOT Death Mountain Crater Top', 'OOT Death Mountain Crater Generic Grotto'], reverse: OOT_GROTTO_EXIT_GENERIC_DMC,  debug: ['OOT_GROTTO', 'DMC Generic'] }
+OOT_GROTTO_GENERIC_RIVER:                       { game: oot, id: 0x1005, type: grotto, areas: ['OOT Zora River', 'OOT Zora River Open Grotto'], reverse: OOT_GROTTO_EXIT_GENERIC_RIVER,  debug: ['OOT_GROTTO', 'River Generic'] }
+OOT_GROTTO_GENERIC_HF_SOUTHEAST:                { game: oot, id: 0x1006, type: grotto, areas: ['OOT Hyrule Field', 'OOT Hyrule Field Southeast Grotto'], reverse: OOT_GROTTO_EXIT_GENERIC_HF_SOUTHEAST,  debug: ['OOT_GROTTO', 'HF Southeast Generic'] }
+OOT_GROTTO_GENERIC_HF_OPEN:                     { game: oot, id: 0x1007, type: grotto, areas: ['OOT Hyrule Field', 'OOT Hyrule Field Open Grotto'], reverse: OOT_GROTTO_EXIT_GENERIC_HF_OPEN,  debug: ['OOT_GROTTO', 'HF Open Generic'] }
+OOT_GROTTO_GENERIC_HF_MAKET:                    { game: oot, id: 0x1008, type: grotto, areas: ['OOT Hyrule Field', 'OOT Hyrule Field Grotto Near Market'], reverse: OOT_GROTTO_EXIT_GENERIC_HF_MAKET,  debug: ['OOT_GROTTO', 'HF Market Generic'] }
+OOT_GROTTO_FAIRY_SFM:                           { game: oot, id: 0x1009, type: grotto, areas: ['OOT Sacred Meadow', 'OOT Sacred Meadow Fairy Grotto'], reverse: OOT_GROTTO_EXIT_FAIRY_SFM,  debug: ['OOT_GROTTO', 'Meadow Fairy'] }
+OOT_GROTTO_FAIRY_HF:                            { game: oot, id: 0x100a, type: grotto, areas: ['OOT Hyrule Field', 'OOT Hyrule Field Fairy Grotto'], reverse: OOT_GROTTO_EXIT_FAIRY_HF,  debug: ['OOT_GROTTO', 'Hyrule Field Fairy'] }
+OOT_GROTTO_FAIRY_RIVER:                         { game: oot, id: 0x100b, type: grotto, areas: ['OOT Zora River', 'OOT Zora River Boulder Grotto'], reverse: OOT_GROTTO_EXIT_FAIRY_RIVER,  debug: ['OOT_GROTTO', 'River Fairy'] }
+OOT_GROTTO_FAIRY_DOMAIN:                        { game: oot, id: 0x100c, type: grotto, areas: ['OOT Zora Domain', 'OOT Zora Domain Grotto'], reverse: OOT_GROTTO_EXIT_FAIRY_DOMAIN,  debug: ['OOT_GROTTO', 'Domain Fairy'] }
+OOT_GROTTO_FAIRY_FORTRESS:                      { game: oot, id: 0x100d, type: grotto, areas: ['OOT Gerudo Fortress Exterior', 'OOT Gerudo Fortress Grotto'], reverse: OOT_GROTTO_EXIT_FAIRY_FORTRESS,  debug: ['OOT_GROTTO', 'Fortress Fairy'] }
+OOT_GROTTO_SCRUBS2_SFM:                         { game: oot, id: 0x100e, type: grotto, areas: ['OOT Sacred Meadow', 'OOT Sacred Meadow Storms Grotto'], reverse: OOT_GROTTO_EXIT_SCRUBS2_SFM,  debug: ['OOT_GROTTO', 'Meadow Scrubs'] }
+OOT_GROTTO_SCRUBS2_RIVER:                       { game: oot, id: 0x100f, type: grotto, areas: ['OOT Zora River', 'OOT Zora River Storms Grotto'], reverse: OOT_GROTTO_EXIT_SCRUBS2_RIVER,  debug: ['OOT_GROTTO', 'River Scrubs'] }
+OOT_GROTTO_SCRUBS2_VALLEY:                      { game: oot, id: 0x1010, type: grotto, areas: ['OOT Gerudo Valley After Bridge', 'OOT Gerudo Valley Storms Grotto'], reverse: OOT_GROTTO_EXIT_SCRUBS2_VALLEY,  debug: ['OOT_GROTTO', 'Valley Scrubs'] }
+OOT_GROTTO_SCRUBS2_COLOSSUS:                    { game: oot, id: 0x1011, type: grotto, areas: ['OOT Desert Colossus', 'OOT Desert Colossus Grotto'], reverse: OOT_GROTTO_EXIT_SCRUBS2_COLOSSUS,  debug: ['OOT_GROTTO', 'Colossus Scrubs'] }
+OOT_GROTTO_SCRUBS3_RANCH:                       { game: oot, id: 0x1012, type: grotto, areas: ['OOT Lon Lon Ranch', 'OOT Lon Lon Ranch Grotto'], reverse: OOT_GROTTO_EXIT_SCRUBS3_RANCH,  debug: ['OOT_GROTTO', 'Ranch Scrubs'] }
+OOT_GROTTO_SCRUBS3_GORON_CITY:                  { game: oot, id: 0x1013, type: grotto, areas: ['OOT Goron City', 'OOT Goron City Grotto'], reverse: OOT_GROTTO_EXIT_SCRUBS3_GORON_CITY,  debug: ['OOT_GROTTO', 'Goron City Scrubs'] }
+OOT_GROTTO_SCRUBS3_DMC:                         { game: oot, id: 0x1014, type: grotto, areas: ['OOT Death Mountain Crater Bottom', 'OOT Death Mountain Crater Scrub Grotto'], reverse: OOT_GROTTO_EXIT_SCRUBS3_DMC,  debug: ['OOT_GROTTO', 'DMC Scrubs'] }
+OOT_GROTTO_SCRUBS3_LAKE:                        { game: oot, id: 0x1015, type: grotto, areas: ['OOT Lake Hylia', 'OOT Lake Hylia Grotto'], reverse: OOT_GROTTO_EXIT_SCRUBS3_LAKE,  debug: ['OOT_GROTTO', 'Lake Scrubs'] }
+OOT_GROTTO_SCRUB_UPGRADE:                       { game: oot, id: 0x5b0,  type: grotto, areas: ['OOT Lost Woods Deep', 'OOT Lost Woods Scrub Grotto'], reverse: OOT_GROTTO_EXIT_SCRUB_UPGRADE,  debug: ['OOT_GROTTO', 'Scrub Upgrade'] }
+OOT_GROTTO_SCRUB_HEART_PIECE:                   { game: oot, id: 0x59c,  type: grotto, areas: ['OOT Hyrule Field', 'OOT Hyrule Field Scrub Grotto'], reverse: OOT_GROTTO_EXIT_SCRUB_HEART_PIECE,  debug: ['OOT_GROTTO', 'Scrub Heart Piece'] }
+OOT_GROTTO_DEKU_THEATER:                        { game: oot, id: 0x5c4,  type: grotto, areas: ['OOT Lost Woods Deep', 'OOT Deku Theater'], reverse: OOT_GROTTO_EXIT_DEKU_THEATER,  debug: ['OOT_GROTTO', 'Deku Theater'] }
+OOT_GROTTO_WOLFOS:                              { game: oot, id: 0x5b4,  type: grotto, areas: ['OOT Sacred Meadow Entryway', 'OOT Wolfos Grotto'], reverse: OOT_GROTTO_EXIT_WOLFOS,  debug: ['OOT_GROTTO', 'Wolfos'] }
+OOT_GROTTO_TEKTITE:                             { game: oot, id: 0x5c0,  type: grotto, areas: ['OOT Hyrule Field', 'OOT Hyrule Field Tektite Grotto'], reverse: OOT_GROTTO_EXIT_TEKTITE,  debug: ['OOT_GROTTO', 'Tektite'] }
+OOT_GROTTO_FIELD_COW:                           { game: oot, id: 0x5a8,  type: grotto, areas: ['OOT Hyrule Field', 'OOT Hyrule Field Grotto Near GV'], reverse: OOT_GROTTO_EXIT_FIELD_COW,  debug: ['OOT_GROTTO', 'Field Cow'] }
+OOT_GROTTO_FIELD_TREE:                          { game: oot, id: 0x598,  type: grotto, areas: ['OOT Hyrule Field', 'OOT Hyrule Field Grotto Near Kak'], reverse: OOT_GROTTO_EXIT_FIELD_TREE,  debug: ['OOT_GROTTO', 'Field Tree'] }
+OOT_GROTTO_TRAIL_COW:                           { game: oot, id: 0x5fc,  type: grotto, areas: ['OOT Death Mountain', 'OOT Death Mountain Cow Grotto'], reverse: OOT_GROTTO_EXIT_TRAIL_COW,  debug: ['OOT_GROTTO', 'Trail Cow'] }
+OOT_GROTTO_CASTLE:                              { game: oot, id: 0x5b8,  type: grotto, areas: ['OOT Hyrule Castle Near Grotto', 'OOT Hyrule Castle Grotto'], reverse: OOT_GROTTO_EXIT_CASTLE,  debug: ['OOT_GROTTO', 'Castle'] }
+OOT_GROTTO_REDEAD:                              { game: oot, id: 0x5a0,  type: grotto, areas: ['OOT Kakariko', 'OOT ReDead Grotto'], reverse: OOT_GROTTO_EXIT_REDEAD,  debug: ['OOT_GROTTO', 'Redead'] }
+OOT_GROTTO_OCTOROK:                             { game: oot, id: 0x5ac,  type: grotto, areas: ['OOT Octorok Grotto Ledge', 'OOT Octorok Grotto'], reverse: OOT_GROTTO_EXIT_OCTOROK,  debug: ['OOT_GROTTO', 'Octorok'] }
+OOT_GRAVE_SHIELD:                               { game: oot, id: 0x04b,  type: grave, areas: ["OOT Graveyard", "OOT Graveyard Shield Grave"], reverse: OOT_GRAVE_EXIT_SHIELD, debug: ['OOT_GROTTO', 'Shield Grave'] }
+OOT_GRAVE_REDEAD:                               { game: oot, id: 0x31c,  type: grave, areas: ["OOT Graveyard", "OOT Graveyard ReDead Grave"], reverse: OOT_GRAVE_EXIT_REDEAD, debug: ['OOT_GROTTO', 'ReDead Grave'] }
+OOT_GRAVE_ROYAL:                                { game: oot, id: 0x02d,  type: grave, areas: ["OOT Graveyard", "OOT Graveyard Royal Tomb"], reverse: OOT_GRAVE_EXIT_ROYAL, debug: ['OOT_GROTTO', 'Royal Grave'] }
+OOT_GRAVE_DAMPE:                                { game: oot, id: 0x44f,  type: grave, areas: ["OOT Graveyard", "OOT Dampe Grave"], reverse: OOT_GRAVE_EXIT_DAMPE, debug: ['OOT_GROTTO', 'Dampe Grave'] }
 OOT_GROTTO_EXIT_GENERIC_KOKIRI_FOREST:          { game: oot, id: 0x1100, type: grotto-exit, areas: ['OOT Kokiri Forest Storms Grotto', 'OOT Kokiri Forest'], reverse: OOT_GROTTO_GENERIC_KOKIRI_FOREST }
 OOT_GROTTO_EXIT_GENERIC_LOST_WOODS:             { game: oot, id: 0x1101, type: grotto-exit, areas: ['OOT Lost Woods Generic Grotto', 'OOT Lost Woods'], reverse: OOT_GROTTO_GENERIC_LOST_WOODS }
 OOT_GROTTO_EXIT_GENERIC_KAKARIKO:               { game: oot, id: 0x1102, type: grotto-exit, areas: ['OOT Kakariko Generic Grotto', 'OOT Kakariko Back'], reverse: OOT_GROTTO_GENERIC_KAKARIKO }
@@ -413,6 +413,66 @@ OOT_GRAVE_EXIT_SHIELD:                          { game: oot, id: 0x35d,  type: g
 OOT_GRAVE_EXIT_REDEAD:                          { game: oot, id: 0x361,  type: grave-exit, areas: ["OOT Graveyard ReDead Grave", "OOT Graveyard"], reverse: OOT_GRAVE_REDEAD }
 OOT_GRAVE_EXIT_ROYAL:                           { game: oot, id: 0x50b,  type: grave-exit, areas: ["OOT Graveyard Royal Tomb", "OOT Graveyard"], reverse: OOT_GRAVE_ROYAL }
 OOT_GRAVE_EXIT_DAMPE:                           { game: oot, id: 0x359,  type: grave-exit, areas: ["OOT Dampe Grave Entrance", "OOT Graveyard"], reverse: OOT_GRAVE_DAMPE }
+MM_GROTTO_TYPE_GENERIC:                         { game: mm, id: 0x1440, type: none } # Multiple uses
+MM_GROTTO_TYPE_COW:                             { game: mm, id: 0x14a0, type: none } # Multiple uses
+MM_GROTTO_GENERIC_FIELD_PILLAR:                 { game: mm, id: 0x10000, type: grotto, areas: ['MM Termina Field', 'MM Pillar Grotto'], reverse: MM_GROTTO_EXIT_GENERIC_FIELD_PILLAR, debug: ['MM_GROTTO', 'Generic Pillar'] }
+MM_GROTTO_GENERIC_GRASS:                        { game: mm, id: 0x10001, type: grotto, areas: ['MM Termina Field', 'MM Grass Grotto'], reverse: MM_GROTTO_EXIT_GENERIC_GRASS, debug: ['MM_GROTTO', 'Generic Grass'] }
+MM_GROTTO_GENERIC_PATH_SWAMP:                   { game: mm, id: 0x10002, type: grotto, areas: ['MM Road to Southern Swamp', 'MM Road to Southern Swamp Grotto'], reverse: MM_GROTTO_EXIT_GENERIC_PATH_SWAMP, debug: ['MM_GROTTO', 'Generic Path to Swamp'] }
+MM_GROTTO_GENERIC_WOODS:                        { game: mm, id: 0x10003, type: grotto, areas: ['MM Woods of Mystery', 'MM Woods of Mystery Grotto'], reverse: MM_GROTTO_EXIT_GENERIC_WOODS, debug: ['MM_GROTTO', 'Generic Woods of Mystery'] }
+MM_GROTTO_GENERIC_SWAMP:                        { game: mm, id: 0x10004, type: grotto, areas: ['MM Near Swamp Spider House', 'MM Near Swamp Grotto'], reverse: MM_GROTTO_EXIT_GENERIC_SWAMP, debug: ['MM_GROTTO', 'Generic Swamp'] }
+MM_GROTTO_GENERIC_MOUNTAIN_VILLAGE:             { game: mm, id: 0x10005, type: grotto, areas: ['MM Near Village Grotto', 'MM Mountain Village Grotto'], reverse: MM_GROTTO_EXIT_GENERIC_MOUNTAIN_VILLAGE, debug: ['MM_GROTTO', 'Generic Mountain Village'] }
+MM_GROTTO_GENERIC_TWIN_ISLANDS:                 { game: mm, id: 0x10006, type: grotto, areas: ['MM Near Ramp Grotto', 'MM Twin Islands Ramp Grotto'], reverse: MM_GROTTO_EXIT_GENERIC_TWIN_ISLANDS, debug: ['MM_GROTTO', 'Generic Twin Islands'] }
+MM_GROTTO_GENERIC_PATH_SNOWHEAD:                { game: mm, id: 0x10007, type: grotto, areas: ['MM Path to Snowhead Back', 'MM Path to Snowhead Grotto'], reverse: MM_GROTTO_EXIT_GENERIC_PATH_SNOWHEAD, debug: ['MM_GROTTO', 'Generic Path to Snowhead'] }
+MM_GROTTO_GENERIC_GREAT_BAY_COAST:              { game: mm, id: 0x10008, type: grotto, areas: ['MM Great Bay Coast', 'MM Great Bay Grotto'], reverse: MM_GROTTO_EXIT_GENERIC_GREAT_BAY_COAST, debug: ['MM_GROTTO', 'Generic Great Bay Coast'] }
+MM_GROTTO_GENERIC_ZORA_CAPE:                    { game: mm, id: 0x10009, type: grotto, areas: ['MM Zora Cape', 'MM Zora Cape Grotto'], reverse: MM_GROTTO_EXIT_GENERIC_ZORA_CAPE, debug: ['MM_GROTTO', 'Generic Zora Cape'] }
+MM_GROTTO_GENERIC_PATH_IKANA:                   { game: mm, id: 0x1000a, type: grotto, areas: ['MM Road to Ikana Front', 'MM Road to Ikana Grotto'], reverse: MM_GROTTO_EXIT_GENERIC_PATH_IKANA, debug: ['MM_GROTTO', 'Generic Path to Ikana'] }
+MM_GROTTO_GENERIC_GRAVEYARD:                    { game: mm, id: 0x1000b, type: grotto, areas: ['MM Ikana Graveyard', 'MM Ikana Graveyard Grotto'], reverse: MM_GROTTO_EXIT_GENERIC_GRAVEYARD, debug: ['MM_GROTTO', 'Generic Graveyard'] }
+MM_GROTTO_GENERIC_VALLEY:                       { game: mm, id: 0x1000c, type: grotto, areas: ['MM Ikana Valley', 'MM Ikana Valley Grotto'], reverse: MM_GROTTO_EXIT_GENERIC_VALLEY, debug: ['MM_GROTTO', 'Generic Ikana Valley'] }
+MM_GROTTO_COW_FIELD:                            { game: mm, id: 0x1000d, type: grotto, areas: ['MM Termina Field', 'MM Termina Field Cow Grotto'], reverse: MM_GROTTO_EXIT_COW_FIELD, debug: ['MM_GROTTO', 'Cow Field'] }
+MM_GROTTO_COW_COAST:                            { game: mm, id: 0x1000e, type: grotto, areas: ['MM GBC Near Cow Grotto', 'MM Great Bay Cow Grotto'], reverse: MM_GROTTO_EXIT_COW_COAST, debug: ['MM_GROTTO', 'Cow Coast'] }
+MM_GROTTO_GOSSIPS_MOUNTAIN:                     { game: mm, id: 0x1430, type: grotto, areas: ['MM Termina Field', 'MM Mountain Gossip Grotto'], reverse: MM_GROTTO_EXIT_GOSSIPS_MOUNTAIN, debug: ['MM_GROTTO', 'Gossips (Mountain)'] }
+MM_GROTTO_GOSSIPS_CANYON:                       { game: mm, id: 0x1420, type: grotto, areas: ['MM Termina Field', 'MM Canyon Gossip Grotto'], reverse: MM_GROTTO_EXIT_GOSSIPS_CANYON, debug: ['MM_GROTTO', 'Gossips (Canyon)'] }
+MM_GROTTO_GOSSIPS_OCEAN:                        { game: mm, id: 0x1400, type: grotto, areas: ['MM Termina Field', 'MM Ocean Gossip Grotto'], reverse: MM_GROTTO_EXIT_GOSSIPS_OCEAN, debug: ['MM_GROTTO', 'Gossips (Ocean)'] }
+MM_GROTTO_GOSSIPS_SWAMP:                        { game: mm, id: 0x1410, type: grotto, areas: ['MM Termina Field', 'MM Swamp Gossip Grotto'], reverse: MM_GROTTO_EXIT_GOSSIPS_SWAMP, debug: ['MM_GROTTO', 'Gossips (Swamp)'] }
+MM_GROTTO_DODONGO:                              { game: mm, id: 0x1470, type: grotto, areas: ['MM Termina Field', 'MM Dodongo Grotto'], reverse: MM_GROTTO_EXIT_DODONGO, debug: ['MM_GROTTO', 'Dodongo'] }
+MM_GROTTO_SCRUB:                                { game: mm, id: 0x1490, type: grotto, areas: ['MM Termina Field', 'MM Scrub Grotto'], reverse: MM_GROTTO_EXIT_SCRUB, debug: ['MM_GROTTO', 'Scrub'] }
+MM_GROTTO_PEAHAT:                               { game: mm, id: 0x14d0, type: grotto, areas: ['MM Termina Field', 'MM Peahat Grotto'], reverse: MM_GROTTO_EXIT_PEAHAT, debug: ['MM_GROTTO', 'Peahat'] }
+MM_GROTTO_BIO_BABA:                             { game: mm, id: 0x14b0, type: grotto, areas: ['MM Termina Field', 'MM Bio Baba Grotto'], reverse: MM_GROTTO_EXIT_BIO_BABA, debug: ['MM_GROTTO', 'Bio Baba'] }
+MM_GROTTO_BEAN:                                 { game: mm, id: 0x14c0, type: grotto, areas: ['MM Deku Palace Main', 'MM Deku Palace Grotto'], reverse: MM_GROTTO_EXIT_BEAN, debug: ['MM_GROTTO', 'Bean'] }
+MM_GROTTO_HOT_WATER:                            { game: mm, id: 0x1450, type: grotto, areas: ['MM Twin Islands', 'MM Twin Islands Frozen Grotto'], reverse: MM_GROTTO_EXIT_HOT_WATER, debug: ['MM_GROTTO', 'Hot Water'] }
+MM_GROTTO_DEKU_PLAYGROUND:                      { game: mm, id: 0x3600, type: grotto, areas: ['MM Clock Town North', 'MM Deku Playground'], reverse: MM_GROTTO_EXIT_DEKU_PLAYGROUND, debug: ['MM_GROTTO', 'Deku Playground'] }
+MM_GRAVE_NIGHT1:                                { game: mm, id: 0x0a10, type: grave, areas: ['MM Ikana Graveyard', 'MM Beneath The Graveyard Night 1'], reverse: MM_GRAVE_EXIT_NIGHT1, debug: ['MM_GROTTO', 'Grave Night 1'] }
+MM_GRAVE_NIGHT2:                                { game: mm, id: 0x0a00, type: grave, areas: ['MM Ikana Graveyard', 'MM Beneath The Graveyard Night 2'], reverse: MM_GRAVE_EXIT_NIGHT2, debug: ['MM_GROTTO', 'Grave Night 2'] }
+MM_GRAVE_NIGHT3:                                { game: mm, id: 0x5a00, type: grave, areas: ['MM Ikana Graveyard', 'MM Beneath The Graveyard Night 3'], reverse: MM_GRAVE_EXIT_NIGHT3, debug: ['MM_GROTTO', 'Grave Night 3'] }
+MM_GROTTO_EXIT_GENERIC_FIELD_PILLAR:            { game: mm, id: 0x10100, type: grotto-exit, areas: ['MM Pillar Grotto', 'MM Termina Field'], reverse: MM_GROTTO_GENERIC_FIELD_PILLAR }
+MM_GROTTO_EXIT_GENERIC_GRASS:                   { game: mm, id: 0x10101, type: grotto-exit, areas: ['MM Grass Grotto', 'MM Termina Field'], reverse: MM_GROTTO_GENERIC_GRASS }
+MM_GROTTO_EXIT_GENERIC_PATH_SWAMP:              { game: mm, id: 0x10102, type: grotto-exit, areas: ['MM Road to Southern Swamp Grotto', 'MM Road to Southern Swamp'], reverse: MM_GROTTO_GENERIC_PATH_SWAMP }
+MM_GROTTO_EXIT_GENERIC_WOODS:                   { game: mm, id: 0x10103, type: grotto-exit, areas: ['MM Woods of Mystery Grotto', 'MM Woods of Mystery'], reverse: MM_GROTTO_GENERIC_WOODS }
+MM_GROTTO_EXIT_GENERIC_SWAMP:                   { game: mm, id: 0x10104, type: grotto-exit, areas: ['MM Near Swamp Grotto', 'MM Near Swamp Spider House'], reverse: MM_GROTTO_GENERIC_SWAMP }
+MM_GROTTO_EXIT_GENERIC_MOUNTAIN_VILLAGE:        { game: mm, id: 0x10105, type: grotto-exit, areas: ['MM Mountain Village Grotto', 'MM Near Village Grotto'], reverse: MM_GROTTO_GENERIC_MOUNTAIN_VILLAGE }
+MM_GROTTO_EXIT_GENERIC_TWIN_ISLANDS:            { game: mm, id: 0x10106, type: grotto-exit, areas: ['MM Twin Islands Ramp Grotto', 'MM Near Ramp Grotto'], reverse: MM_GROTTO_GENERIC_TWIN_ISLANDS }
+MM_GROTTO_EXIT_GENERIC_PATH_SNOWHEAD:           { game: mm, id: 0x10107, type: grotto-exit, areas: ['MM Path to Snowhead Grotto', 'MM Path to Snowhead Back'], reverse: MM_GROTTO_GENERIC_PATH_SNOWHEAD }
+MM_GROTTO_EXIT_GENERIC_GREAT_BAY_COAST:         { game: mm, id: 0x10108, type: grotto-exit, areas: ['MM Great Bay Grotto', 'MM Great Bay Coast'], reverse: MM_GROTTO_GENERIC_GREAT_BAY_COAST }
+MM_GROTTO_EXIT_GENERIC_ZORA_CAPE:               { game: mm, id: 0x10109, type: grotto-exit, areas: ['MM Zora Cape Grotto', 'MM Zora Cape'], reverse: MM_GROTTO_GENERIC_ZORA_CAPE }
+MM_GROTTO_EXIT_GENERIC_PATH_IKANA:              { game: mm, id: 0x1010a, type: grotto-exit, areas: ['MM Road to Ikana Grotto', 'MM Road to Ikana Front'], reverse: MM_GROTTO_GENERIC_PATH_IKANA }
+MM_GROTTO_EXIT_GENERIC_GRAVEYARD:               { game: mm, id: 0x1010b, type: grotto-exit, areas: ['MM Ikana Graveyard Grotto', 'MM Ikana Graveyard'], reverse: MM_GROTTO_GENERIC_GRAVEYARD }
+MM_GROTTO_EXIT_GENERIC_VALLEY:                  { game: mm, id: 0x1010c, type: grotto-exit, areas: ['MM Ikana Valley Grotto', 'MM Ikana Valley'], reverse: MM_GROTTO_GENERIC_VALLEY }
+MM_GROTTO_EXIT_COW_FIELD:                       { game: mm, id: 0x1010d, type: grotto-exit, areas: ['MM Termina Field Cow Grotto', 'MM Termina Field'], reverse: MM_GROTTO_COW_FIELD }
+MM_GROTTO_EXIT_COW_COAST:                       { game: mm, id: 0x1010e, type: grotto-exit, areas: ['MM Great Bay Cow Grotto', 'MM GBC Near Cow Grotto'], reverse: MM_GROTTO_COW_COAST }
+MM_GROTTO_EXIT_GOSSIPS_MOUNTAIN:                { game: mm, id: 0x1010f, type: grotto-exit, areas: ['MM Mountain Gossip Grotto', 'MM Termina Field'], reverse: MM_GROTTO_GOSSIPS_MOUNTAIN }
+MM_GROTTO_EXIT_GOSSIPS_CANYON:                  { game: mm, id: 0x10110, type: grotto-exit, areas: ['MM Canyon Gossip Grotto', 'MM Termina Field'], reverse: MM_GROTTO_GOSSIPS_CANYON }
+MM_GROTTO_EXIT_GOSSIPS_OCEAN:                   { game: mm, id: 0x10111, type: grotto-exit, areas: ['MM Ocean Gossip Grotto', 'MM Termina Field'], reverse: MM_GROTTO_GOSSIPS_OCEAN }
+MM_GROTTO_EXIT_GOSSIPS_SWAMP:                   { game: mm, id: 0x10112, type: grotto-exit, areas: ['MM Swamp Gossip Grotto', 'MM Termina Field'], reverse: MM_GROTTO_GOSSIPS_SWAMP }
+MM_GROTTO_EXIT_DODONGO:                         { game: mm, id: 0x10113, type: grotto-exit, areas: ['MM Dodongo Grotto', 'MM Termina Field'], reverse: MM_GROTTO_DODONGO }
+MM_GROTTO_EXIT_SCRUB:                           { game: mm, id: 0x10114, type: grotto-exit, areas: ['MM Scrub Grotto', 'MM Termina Field'], reverse: MM_GROTTO_SCRUB }
+MM_GROTTO_EXIT_PEAHAT:                          { game: mm, id: 0x10115, type: grotto-exit, areas: ['MM Peahat Grotto', 'MM Termina Field'], reverse: MM_GROTTO_PEAHAT }
+MM_GROTTO_EXIT_BIO_BABA:                        { game: mm, id: 0x10116, type: grotto-exit, areas: ['MM Bio Baba Grotto', 'MM Termina Field'], reverse: MM_GROTTO_BIO_BABA }
+MM_GROTTO_EXIT_BEAN:                            { game: mm, id: 0x10117, type: grotto-exit, areas: ['MM Deku Palace Grotto', 'MM Deku Palace Main'], reverse: MM_GROTTO_BEAN }
+MM_GROTTO_EXIT_HOT_WATER:                       { game: mm, id: 0x10118, type: grotto-exit, areas: ['MM Twin Islands Frozen Grotto', 'MM Twin Islands'], reverse: MM_GROTTO_HOT_WATER }
+MM_GROTTO_EXIT_DEKU_PLAYGROUND:                 { game: mm, id: 0xd640, type: grotto-exit, areas: ['MM Deku Playground', 'MM Clock Town North'], reverse: MM_GROTTO_DEKU_PLAYGROUND }
+MM_GRAVE_EXIT_NIGHT1:                           { game: mm, id: 0x8030, type: grave-exit, areas: ['MM Beneath The Graveyard Night 1', 'MM Ikana Graveyard'], reverse: MM_GRAVE_NIGHT1 }
+MM_GRAVE_EXIT_NIGHT2:                           { game: mm, id: 0x8020, type: grave-exit, areas: ['MM Beneath The Graveyard Night 2', 'MM Ikana Graveyard'], reverse: MM_GRAVE_NIGHT2 }
+MM_GRAVE_EXIT_NIGHT3:                           { game: mm, id: 0x8010, type: grave-exit, areas: ['MM Beneath The Graveyard Night 3 Fake Exit', 'MM Ikana Graveyard'], reverse: MM_GRAVE_NIGHT3 }
 OOT_DEATH_MOUNTAIN_FROM_GORON_CITY:             { game: oot, id: 0x1b9,  type: none }
 OOT_DEATH_MOUNTAIN_CRATER:                      { game: oot, id: 0x147,  type: none }
 OOT_ZORA_DOMAIN:                                { game: oot, id: 0x108,  type: none }
@@ -421,4 +481,18 @@ OOT_GORON_CITY:                                 { game: oot, id: 0x14d,  type: n
 OOT_DEATH_MOUNTAIN_CRATER_FROM_GORON_CITY:      { game: oot, id: 0x246,  type: none }
 OOT_LOST_WOODS_FROM_MEADOW:                     { game: oot, id: 0x1a9,  type: none }
 OOT_HYRULE_CASTLE:                              { game: oot, id: 0x138,  type: none }
+OOT_MARKET_FROM_MASK_SHOP:                      { game: oot, id: 0x1d1,  type: none }
+
+MM_WOODS_OF_MYSTERY:                        { game: mm, id: 0xc200, type: none }
+MM_TERMINA_FIELD_FROM_CLOCK_TOWN_EAST:      { game: mm, id: 0x5470, type: none }
+MM_TERMINA_FIELD_FROM_CLOCK_TOWN_SOUTH:     { game: mm, id: 0x5460, type: none }
+MM_TERMINA_FIELD_FROM_CLOCK_TOWN_NORTH:     { game: mm, id: 0x5480, type: none }
+MM_SWAMP_ROAD_FROM_FIELD:                   { game: mm, id: 0x7a00, type: none }
+MM_TWIN_ISLAND_FROM_MOUNTAIN_VILLAGE:       { game: mm, id: 0xb400, type: none }
+MM_PATH_SNOWHEAD_FROM_SNOWHEAD:             { game: mm, id: 0xb010, type: none }
+MM_ZORA_CAPE_FROM_COAST:                    { game: mm, id: 0x6a00, type: none }
+MM_IKANA_ROAD_FROM_FIELD:                   { game: mm, id: 0xa000, type: none }
+MM_IKANA_GRAVEYARD_FROM_DAMPE:              { game: mm, id: 0x8040, type: none }
+
 OOT_INTERNAL_EXIT_GROTTO:                       { game: oot, id: 0x7fff, type: none }
+MM_INTERNAL_EXIT_GROTTO:                        { game: oot, id: 0xffff, type: none }

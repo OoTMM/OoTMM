@@ -36,7 +36,7 @@ void EnKusa_Aliases(Xflag* xflag)
         break;
     case SCE_MM_GROTTOS:
         if (xflag->roomId == 0x04)
-            xflag->roomId = 0x20 | (GROTTO_CHEST_FLAG(gSaveContext) & 0x1f);
+            xflag->roomId = 0x20 | (gGrottoData & 0x1f);
         break;
     }
 }
