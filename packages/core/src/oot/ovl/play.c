@@ -312,7 +312,7 @@ static u32 entranceForOverride(u32 entrance)
         case 0x09: return ENTR_OOT_GROTTO_GENERIC_RIVER;
         case 0x02: return ENTR_OOT_GROTTO_GENERIC_HF_SOUTHEAST;
         case 0x03: return ENTR_OOT_GROTTO_GENERIC_HF_OPEN;
-        case 0x00: return ENTR_OOT_GROTTO_GENERIC_HF_MAKET;
+        case 0x00: return ENTR_OOT_GROTTO_GENERIC_HF_MARKET;
         }
         UNREACHABLE();
     case ENTR_OOT_GROTTO_TYPE_FAIRY:
@@ -459,7 +459,7 @@ static void applyCustomEntrance(u32* entrance)
     u32 id;
 
     id = *entrance;
-    if (id >= ENTR_OOT_GROTTO_GENERIC_KOKIRI_FOREST && id <= ENTR_OOT_GROTTO_GENERIC_HF_MAKET)
+    if (id >= ENTR_OOT_GROTTO_GENERIC_KOKIRI_FOREST && id <= ENTR_OOT_GROTTO_GENERIC_HF_MARKET)
     {
         id -= ENTR_OOT_GROTTO_GENERIC_KOKIRI_FOREST;
         *entrance = ENTR_OOT_GROTTO_TYPE_GENERIC;
@@ -677,7 +677,7 @@ static u32 entrGrottoExit(GameState_Play* play)
             case 0x09: return ENTR_OOT_GROTTO_EXIT_GENERIC_RIVER;
             case 0x02: return ENTR_OOT_GROTTO_EXIT_GENERIC_HF_SOUTHEAST;
             case 0x03: return ENTR_OOT_GROTTO_EXIT_GENERIC_HF_OPEN;
-            case 0x00: return ENTR_OOT_GROTTO_EXIT_GENERIC_HF_MAKET;
+            case 0x00: return ENTR_OOT_GROTTO_EXIT_GENERIC_HF_MARKET;
             }
             UNREACHABLE();
         case 0x01: return ENTR_OOT_GROTTO_EXIT_SCRUB_HEART_PIECE;
