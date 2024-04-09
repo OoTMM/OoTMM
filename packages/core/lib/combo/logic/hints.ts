@@ -295,6 +295,11 @@ export class LogicPassHints {
       return false;
     }
 
+    /* Nameless regions are restricted */
+    if (klass !== 'item' && region === 'NAMELESS') {
+      return false;
+    }
+
     /* Not shuffled */
     if (!isLocationFullyShuffled(this.state.settings, this.state.fixedLocations, this.state.items, loc, {
       noPlando: this.state.settings.noPlandoHints,

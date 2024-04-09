@@ -102,6 +102,10 @@ const RegionName kRegionNamesMm[] = {
     { "from",       TEXT_COLOR_GREEN "Tingle" },
 };
 
+static const RegionName kRegionNowhere = { NULL, TEXT_COLOR_PINK "nowhere" };
+static const RegionName kRegionLinkPocket = { "inside", TEXT_COLOR_YELLOW "Link's Pocket" };
+static const RegionName kRegionNamelessPlace = { "in", "a " TEXT_COLOR_PINK "Nameless Place" };
+
 static const CheckName kCheckNamesOot[] = {
     { "the " TEXT_COLOR_BLUE "Frogs Ocarina Game", TF_NONE },
     { TEXT_COLOR_BLUE "Fishing", TF_NONE },
@@ -851,42 +855,19 @@ void comboTextAppendRegionName(char** b, u8 regionId, u8 world, int flags)
     const RegionName* regName;
 
     start = *b;
+
     if (regionId == 0xff)
-    {
-        if (flags & TF_PREPOS)
-        {
-            comboTextAppendStr(b, "inside ");
-        }
-        comboTextAppendStr(b, TEXT_COLOR_YELLOW "Link's Pocket");
-        comboTextAppendClearColor(b);
-        if (flags & TF_CAPITALIZE)
-        {
-            start[0] = toupper(start[0]);
-        }
-        return;
-    }
-
-    if (regionId == 0x00)
-    {
-        comboTextAppendStr(b, TEXT_COLOR_PINK "nowhere");
-        comboTextAppendClearColor(b);
-        if (flags & TF_CAPITALIZE)
-        {
-            start[0] = toupper(start[0]);
-        }
-        return;
-    }
-
-    if (regionId & 0x80)
-    {
+        regName = &kRegionLinkPocket;
+    else if (regionId == 0x00)
+        regName = &kRegionNowhere;
+    else if (regionId == 0xfe)
+        regName = &kRegionNamelessPlace;
+    else if (regionId & 0x80)
         regName = &kRegionNamesMm[(regionId & 0x7f) - 1];
-    }
     else
-    {
         regName = &kRegionNamesOot[(regionId & 0x7f) - 1];
-    }
 
-    if (flags & TF_PREPOS)
+    if ((flags & TF_PREPOS) && regName->prepos)
     {
         comboTextAppendStr(b, regName->prepos);
         comboTextAppendStr(b, " ");

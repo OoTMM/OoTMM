@@ -1,4 +1,5 @@
 NONE:                 0x00
+NAMELESS:             0xfe
 POCKET:               0xff
 
 OOT_SACRED_REALM:             0x01

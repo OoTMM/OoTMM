@@ -1,4 +1,4 @@
-const OOT_REGION_NAMES: {[k: string]: string} = {
+const REGION_NAMES: {[k: string]: string} = {
   'OOT_KOKIRI_FOREST': 'Kokiri Forest',
   'OOT_HYRULE_FIELD': 'Hyrule Field',
   'OOT_MARKET': 'Market',
@@ -36,8 +36,6 @@ const OOT_REGION_NAMES: {[k: string]: string} = {
   'OOT_GERUDO_TRAINING_GROUNDS': 'Gerudo\'s Training Ground',
   'OOT_GANON_CASTLE': 'Ganon\'s Castle',
   'OOT_EGGS': 'Inside Eggs',
-}
-const MM_REGION_NAMES: {[k: string]: string} = {
   'MM_CLOCK_TOWN_SOUTH': 'South Clock Town',
   'MM_GIANT_DREAM': 'Giant\'s Dream',
   'MM_CLOCK_TOWN_NORTH': 'North Clock Town',
@@ -80,6 +78,7 @@ const MM_REGION_NAMES: {[k: string]: string} = {
   'MM_SPIDER_HOUSE_SWAMP': 'Swamp Spider House',
   'MM_SPIDER_HOUSE_OCEAN': 'Ocean Spider House',
   'MM_TINGLE': 'Tingle',
+  'NAMELESS': 'A Nameless Place',
 }
 
-export const regionName = (region: string) => OOT_REGION_NAMES[region] ?? MM_REGION_NAMES[region] ?? region;
+export const regionName = (region: string) => REGION_NAMES[region] ?? region;

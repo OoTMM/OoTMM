@@ -629,6 +629,16 @@ export class LogicPassEntrances {
     return { pool, opts: { ownGame: this.input.settings.erGrottos === 'ownGame' } };
   }
 
+  private changeRegion(worldId: number, area: string, newRegion: string) {
+    const world = this.worlds[worldId];
+    world.areas[area].region = newRegion;
+    for (const loc of Object.keys(world.areas[area].locations)) {
+      if (world.regions[loc] === 'ENTRANCE') {
+        world.regions[loc] = newRegion;
+      }
+    }
+  }
+
   private propagateRegionsStep(worldId: number) {
     const world = this.worlds[worldId];
     let changed = false;
@@ -643,12 +653,7 @@ export class LogicPassEntrances {
           throw new LogicEntranceError(`Unknown exit: ${exitName}`);
         }
         if (exitArea.region === 'ENTRANCE') {
-          exitArea.region = a.region;
-          for (const loc of Object.keys(exitArea.locations)) {
-            if (world.regions[loc] === 'ENTRANCE') {
-              world.regions[loc] = a.region;
-            }
-          }
+          this.changeRegion(worldId, exitName, a.region);
           changed = true;
         }
       }
@@ -662,6 +667,17 @@ export class LogicPassEntrances {
       for (;;) {
         if (!this.propagateRegionsStep(i)) {
           break;
+        }
+      }
+    }
+
+    /* Check for unassigned regions */
+    for (let i = 0; i < this.worlds.length; ++i) {
+      const world = this.worlds[i];
+      for (const areaName of Object.keys(world.areas)) {
+        const a = world.areas[areaName];
+        if (a.region === 'ENTRANCE') {
+          this.changeRegion(i, areaName, 'NAMELESS');
         }
       }
     }

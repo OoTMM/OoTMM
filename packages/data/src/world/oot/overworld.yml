@@ -1082,7 +1082,7 @@
   region: ENTRANCE
   exits:
     "Kakariko": "true"
-    "Kakariko Potion Shop Back": "is_adult || climb_anywhere"
+    "Kakariko Potion Shop Junction": "true"
   locations:
     "Kakariko Potion Shop Item 1": "is_adult && shop_price(0x38) && soul_npc(SOUL_NPC_POTION_SHOPKEEPER)"
     "Kakariko Potion Shop Item 2": "is_adult && shop_price(0x39) && soul_npc(SOUL_NPC_POTION_SHOPKEEPER)"
@@ -1092,11 +1092,16 @@
     "Kakariko Potion Shop Item 6": "is_adult && shop_price(0x3d) && soul_npc(SOUL_NPC_POTION_SHOPKEEPER)"
     "Kakariko Potion Shop Item 7": "is_adult && shop_price(0x3e) && soul_npc(SOUL_NPC_POTION_SHOPKEEPER)"
     "Kakariko Potion Shop Item 8": "is_adult && shop_price(0x3f) && soul_npc(SOUL_NPC_POTION_SHOPKEEPER)"
-"Kakariko Potion Shop Back":
+"Kakariko Potion Shop Junction":
   region: NONE
   exits:
-    "Kakariko Back": "is_adult"
     "Kakariko Potion Shop": "true"
+    "Kakariko Potion Shop Back": "is_adult || climb_anywhere"
+"Kakariko Potion Shop Back":
+  region: ENTRANCE
+  exits:
+    "Kakariko Back": "is_adult"
+    "Kakariko Potion Shop Junction": "true"
 "Kakariko Granny Shop":
   region: ENTRANCE
   exits:
