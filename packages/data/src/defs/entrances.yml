@@ -438,8 +438,8 @@ MM_GROTTO_DODONGO:                              { game: mm, id: 0x1470, type: gr
 MM_GROTTO_SCRUB:                                { game: mm, id: 0x1490, type: grotto, areas: ['MM Termina Field', 'MM Scrub Grotto'], reverse: MM_GROTTO_EXIT_SCRUB, debug: ['MM_GROTTO', 'Scrub'] }
 MM_GROTTO_PEAHAT:                               { game: mm, id: 0x14d0, type: grotto, areas: ['MM Termina Field', 'MM Peahat Grotto'], reverse: MM_GROTTO_EXIT_PEAHAT, debug: ['MM_GROTTO', 'Peahat'] }
 MM_GROTTO_BIO_BABA:                             { game: mm, id: 0x14b0, type: grotto, areas: ['MM Termina Field', 'MM Bio Baba Grotto'], reverse: MM_GROTTO_EXIT_BIO_BABA, debug: ['MM_GROTTO', 'Bio Baba'] }
-MM_GROTTO_BEAN:                                 { game: mm, id: 0x14c0, type: grotto, areas: ['MM Deku Palace Main', 'MM Deku Palace Grotto'], reverse: MM_GROTTO_EXIT_BEAN, debug: ['MM_GROTTO', 'Bean'] }
 MM_GROTTO_HOT_WATER:                            { game: mm, id: 0x1450, type: grotto, areas: ['MM Twin Islands', 'MM Twin Islands Frozen Grotto'], reverse: MM_GROTTO_EXIT_HOT_WATER, debug: ['MM_GROTTO', 'Hot Water'] }
+MM_GROTTO_BEAN:                                 { game: mm, id: 0x14c0, type: grotto, areas: ['MM Deku Palace Main', 'MM Deku Palace Grotto'], reverse: MM_GROTTO_EXIT_BEAN, debug: ['MM_GROTTO', 'Bean'] }
 MM_GROTTO_DEKU_PLAYGROUND:                      { game: mm, id: 0x3600, type: grotto, areas: ['MM Clock Town North', 'MM Deku Playground'], reverse: MM_GROTTO_EXIT_DEKU_PLAYGROUND, debug: ['MM_GROTTO', 'Deku Playground'] }
 MM_GRAVE_NIGHT1:                                { game: mm, id: 0x0a10, type: grave, areas: ['MM Ikana Graveyard', 'MM Beneath The Graveyard Night 1'], reverse: MM_GRAVE_EXIT_NIGHT1, debug: ['MM_GROTTO', 'Grave Night 1'] }
 MM_GRAVE_NIGHT2:                                { game: mm, id: 0x0a00, type: grave, areas: ['MM Ikana Graveyard', 'MM Beneath The Graveyard Night 2'], reverse: MM_GRAVE_EXIT_NIGHT2, debug: ['MM_GROTTO', 'Grave Night 2'] }
@@ -467,8 +467,8 @@ MM_GROTTO_EXIT_DODONGO:                         { game: mm, id: 0x10113, type: g
 MM_GROTTO_EXIT_SCRUB:                           { game: mm, id: 0x10114, type: grotto-exit, areas: ['MM Scrub Grotto', 'MM Termina Field'], reverse: MM_GROTTO_SCRUB }
 MM_GROTTO_EXIT_PEAHAT:                          { game: mm, id: 0x10115, type: grotto-exit, areas: ['MM Peahat Grotto', 'MM Termina Field'], reverse: MM_GROTTO_PEAHAT }
 MM_GROTTO_EXIT_BIO_BABA:                        { game: mm, id: 0x10116, type: grotto-exit, areas: ['MM Bio Baba Grotto', 'MM Termina Field'], reverse: MM_GROTTO_BIO_BABA }
-MM_GROTTO_EXIT_BEAN:                            { game: mm, id: 0x10117, type: grotto-exit, areas: ['MM Deku Palace Grotto', 'MM Deku Palace Main'], reverse: MM_GROTTO_BEAN }
 MM_GROTTO_EXIT_HOT_WATER:                       { game: mm, id: 0x10118, type: grotto-exit, areas: ['MM Twin Islands Frozen Grotto', 'MM Twin Islands'], reverse: MM_GROTTO_HOT_WATER }
+MM_GROTTO_EXIT_BEAN:                            { game: mm, id: 0x5090, type: grotto-exit, areas: ['MM Deku Palace Grotto', 'MM Deku Palace Main'], reverse: MM_GROTTO_BEAN }
 MM_GROTTO_EXIT_DEKU_PLAYGROUND:                 { game: mm, id: 0xd640, type: grotto-exit, areas: ['MM Deku Playground', 'MM Clock Town North'], reverse: MM_GROTTO_DEKU_PLAYGROUND }
 MM_GRAVE_EXIT_NIGHT1:                           { game: mm, id: 0x8030, type: grave-exit, areas: ['MM Beneath The Graveyard Night 1', 'MM Ikana Graveyard'], reverse: MM_GRAVE_NIGHT1 }
 MM_GRAVE_EXIT_NIGHT2:                           { game: mm, id: 0x8020, type: grave-exit, areas: ['MM Beneath The Graveyard Night 2', 'MM Ikana Graveyard'], reverse: MM_GRAVE_NIGHT2 }

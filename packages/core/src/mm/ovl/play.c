@@ -420,7 +420,6 @@ static const GrottoExit kGrottoExits[] = {
     { ENTR_MM_TERMINA_FIELD_FROM_CLOCK_TOWN_EAST,  0, { 3223, 219, 1417 } },
     { ENTR_MM_TERMINA_FIELD_FROM_CLOCK_TOWN_SOUTH, 0, { -2317, -221, 3418 } },
     { ENTR_MM_TERMINA_FIELD_FROM_CLOCK_TOWN_WEST,  0, { -5159, -281, -571 } },
-    { ENTR_MM_DEKU_PALACE_EXTERIOR_FROM_THRONE, 1, { 1190, 0, 1011 } },
     { ENTR_MM_TWIN_ISLAND_FROM_MOUNTAIN_VILLAGE, 0, { 589, 195, 53 } },
 };
 
@@ -494,7 +493,6 @@ static u32 entrGrottoExit(GameState_Play* play)
             }
             UNREACHABLE();
         case 0x0b: return ENTR_MM_GROTTO_EXIT_BIO_BABA;
-        case 0x0c: return ENTR_MM_GROTTO_EXIT_BEAN;
         case 0x0d: return ENTR_MM_GROTTO_EXIT_PEAHAT;
         case 0x0e: return ENTR_MM_GROTTO_EXIT_HOT_WATER;
         }
