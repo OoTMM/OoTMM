@@ -1820,6 +1820,13 @@ export const SETTINGS = [{
   description: 'Shuffle grottos and graves.',
   default: 'none'
 }, {
+  key: 'erDecoupled',
+  name: 'Decoupled Entrances',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'Makes the entrances decoupled from the exits. This means that the entrance you take does not have to be the same as the exit you take.',
+  default: false,
+}, {
   key: 'erMixed',
   name: 'Mixed Pools',
   category: 'entrances',

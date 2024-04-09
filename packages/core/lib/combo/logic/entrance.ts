@@ -415,7 +415,6 @@ export class LogicPassEntrances {
   }
 
   private place(worldId: number, original: Entrance, replacement: Entrance, opts?: PlaceOpts) {
-    const world = this.worlds[worldId];
     const entranceOriginal = ENTRANCES[original];
     const entranceReplacement = ENTRANCES[replacement];
 
@@ -439,8 +438,19 @@ export class LogicPassEntrances {
         entrancesTypes.add(t);
       }
       const entrances = new Set((Object.keys(ENTRANCES) as Entrance[]).filter(x => types.includes(ENTRANCES[x].type)));
+      const reverseEntrances = new Set<Entrance>();
       for (const e of entrances) {
         entrancesAll.add(e);
+        if (this.input.settings.erDecoupled) {
+          const reverse = (ENTRANCES[e] as any).reverse as Entrance | undefined;
+          if (reverse) {
+            reverseEntrances.add(reverse);
+            entrancesAll.add(reverse);
+          }
+        }
+      }
+      for (const e of reverseEntrances) {
+        entrances.add(e);
       }
       poolEntrances[name] = { src: shuffle(this.input.random, [...entrances]), dst: new Set([...entrances]) };
     }
@@ -449,10 +459,12 @@ export class LogicPassEntrances {
     for (const eName of entrancesAll) {
       const e = ENTRANCES[eName];
       delete world.areas[e.from].exits[e.to!];
-      const reverse = (e as any).reverse as Entrance | undefined;
-      if (reverse) {
-        const r = ENTRANCES[reverse];
-        delete world.areas[r.from!].exits[r.to!];
+      if (!this.input.settings.erDecoupled) {
+        const reverse = (e as any).reverse as Entrance | undefined;
+        if (reverse) {
+          const r = ENTRANCES[reverse];
+          delete world.areas[r.from!].exits[r.to!];
+        }
       }
     }
 
@@ -480,7 +492,11 @@ export class LogicPassEntrances {
       const dst = sample(this.input.random, [...dstCandidates]);
 
       /* Place */
-      this.place(worldId, src, dst, pools[poolName].opts);
+      if (this.input.settings.erDecoupled) {
+        this.placeSingle(worldId, src, dst, pools[poolName].opts);
+      } else {
+        this.place(worldId, src, dst, pools[poolName].opts);
+      }
       pool.dst.delete(dst);
 
       /* Remove the pool if empty */
