@@ -399,6 +399,8 @@ static const GrottoExit kGrottoExits[] = {
     { ENTR_MM_TWIN_ISLAND_FROM_MOUNTAIN_VILLAGE, 0, { 589, 195, 53 } },
 };
 
+static const GrottoExit kGrottoExitMountainWinter = { ENTR_MM_WARP_OWL_MOUNTAIN_VILLAGE, 0, { 345, 8, -150 } };
+
 static void applyGrottoExit(u32* entrance, const GrottoExit* ge)
 {
     RespawnData* rs;
@@ -480,6 +482,7 @@ static const u8 kGrottoDataGeneric[] = { 0x1a, 0x1f, 0x1e, 0x1c, 0x1d, 0x1b, 0x1
 
 static void applyCustomEntrance(u32* entrance)
 {
+    const GrottoExit* ge;
     u32 id;
 
     id = *entrance;
@@ -500,8 +503,14 @@ static void applyCustomEntrance(u32* entrance)
     }
     else if (id >= ENTR_MM_GROTTO_EXIT_GENERIC_FIELD_PILLAR && id <= ENTR_MM_GROTTO_EXIT_HOT_WATER)
     {
-        id -= ENTR_MM_GROTTO_EXIT_GENERIC_FIELD_PILLAR;
-        applyGrottoExit(entrance, &kGrottoExits[id]);
+        if ((id == ENTR_MM_GROTTO_EXIT_GENERIC_MOUNTAIN_VILLAGE) && !MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH))
+            ge = &kGrottoExitMountainWinter;
+        else
+        {
+            id -= ENTR_MM_GROTTO_EXIT_GENERIC_FIELD_PILLAR;
+            ge = &kGrottoExits[id];
+        }
+        applyGrottoExit(entrance, ge);
     }
 }
 

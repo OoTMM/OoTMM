@@ -18,10 +18,10 @@ static void debugCheat(GameState_Play* play)
         gSave.playerData.swordHealth = 8;
         gSave.isBiggoronSword = 1;
 
-        MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF);
-        MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH);
-        MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_GB);
-        MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_ST);
+        //MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF);
+        //MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH);
+        //MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_GB);
+        //MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_ST);
 
         /*gSave.inventory.quest.gerudoCard = 1; */
         gSave.inventory.dungeonKeys[SCE_OOT_TEMPLE_FIRE] = 8;
