@@ -2779,6 +2779,10 @@
     "Beneath The Graveyard Rupee 5": "true"
     "Beneath The Graveyard Rupee 6": "true"
     "Beneath The Graveyard Rupee 7": "true"
+"Beneath The Graveyard Night 3 Fake Exit":
+  region: NONE
+  exits:
+    "Ikana Graveyard": "true"
 "Beneath The Graveyard Night 3":
   region: ENTRANCE
   events:

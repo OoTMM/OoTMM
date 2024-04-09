@@ -469,6 +469,10 @@ MM_GROTTO_EXIT_PEAHAT:                          { game: mm, id: 0x10115, type: g
 MM_GROTTO_EXIT_BIO_BABA:                        { game: mm, id: 0x10116, type: grotto-exit, areas: ['MM Bio Baba Grotto', 'MM Termina Field'], reverse: MM_GROTTO_BIO_BABA }
 MM_GROTTO_EXIT_BEAN:                            { game: mm, id: 0x10117, type: grotto-exit, areas: ['MM Deku Palace Grotto', 'MM Deku Palace Main'], reverse: MM_GROTTO_BEAN }
 MM_GROTTO_EXIT_HOT_WATER:                       { game: mm, id: 0x10118, type: grotto-exit, areas: ['MM Twin Islands Frozen Grotto', 'MM Twin Islands'], reverse: MM_GROTTO_HOT_WATER }
+MM_GROTTO_EXIT_DEKU_PLAYGROUND:                 { game: mm, id: 0xd640, type: grotto-exit, areas: ['MM Deku Playground', 'MM Clock Town North'], reverse: MM_GROTTO_DEKU_PLAYGROUND }
+MM_GRAVE_EXIT_NIGHT1:                           { game: mm, id: 0x8030, type: grave-exit, areas: ['MM Beneath The Graveyard Night 1', 'MM Ikana Graveyard'], reverse: MM_GRAVE_NIGHT1 }
+MM_GRAVE_EXIT_NIGHT2:                           { game: mm, id: 0x8020, type: grave-exit, areas: ['MM Beneath The Graveyard Night 2', 'MM Ikana Graveyard'], reverse: MM_GRAVE_NIGHT2 }
+MM_GRAVE_EXIT_NIGHT3:                           { game: mm, id: 0x8010, type: grave-exit, areas: ['MM Beneath The Graveyard Night 3 Fake Exit', 'MM Ikana Graveyard'], reverse: MM_GRAVE_NIGHT3 }
 OOT_DEATH_MOUNTAIN_FROM_GORON_CITY:             { game: oot, id: 0x1b9,  type: none }
 OOT_DEATH_MOUNTAIN_CRATER:                      { game: oot, id: 0x147,  type: none }
 OOT_ZORA_DOMAIN:                                { game: oot, id: 0x108,  type: none }
