@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add the ability to mix entrance pools.
 - Add Grotto/Grave entrance randomizer, for both games.
 - Misc. Souls for both games, which can be shared.
 - Added a validator for Special Conditions (web-wise).

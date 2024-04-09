@@ -1254,7 +1254,7 @@
   locations:
     "Graveyard ReDead Tomb": "can_play_sun"
 "Dampe Grave":
-  region: GRAVEYARD
+  region: ENTRANCE
   exits:
     "Dampe Grave Entrance": "true"
     "Windmill Exit": "is_adult && can_play_time && soul_npc(SOUL_NPC_DAMPE)"
