@@ -3,7 +3,7 @@
   exits:
     "Ganon Castle Exterior After Bridge": "true"
     "Ganon Castle Main": "soul_iron_knuckle && soul_armos && soul_bubble && (can_use_sword_master || can_use_sword_goron || (can_use_sticks && (has_ranged_weapon_child || can_use_bow)) || has_explosives_or_hammer)"
-"Ganon Castle Wallmaster":
+"Ganon Castle Spirit Wallmaster":
   region: NONE
   exits:
     "VOID": "true"
@@ -93,7 +93,7 @@
   events:
     GANON_TRIAL_SPIRIT: "has_light_arrows && has_fire_arrows && can_reflect_light && can_hammer && has_bombchu && (soul_iron_knuckle || trick(OOT_HAMMER_WALLS))"
   exits:
-    "Ganon Castle Wallmaster": "soul_wallmaster && can_hammer && has_fire_arrows && can_reflect_light && has_bombchu && (soul_iron_knuckle || trick(OOT_HAMMER_WALLS))"
+    "Ganon Castle Spirit Wallmaster": "soul_wallmaster && can_hammer && has_fire_arrows && can_reflect_light && has_bombchu && (soul_iron_knuckle || trick(OOT_HAMMER_WALLS))"
   locations:
     "MQ Ganon Castle Spirit Trial First Chest": "can_hammer && ((can_use_bow && soul_iron_knuckle) || trick(OOT_HAMMER_WALLS))"
     "MQ Ganon Castle Spirit Trial Second Chest": "can_hammer && ((can_use_bow && soul_iron_knuckle) || trick(OOT_HAMMER_WALLS)) && has_bombchu && has_lens"

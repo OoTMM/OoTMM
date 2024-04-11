@@ -304,7 +304,8 @@ OOT_WALLMASTER_BOTW_MAIN:                       { game: oot, id: 0xf17, type: wa
 OOT_WALLMASTER_BOTW_BASEMENT:                   { game: oot, id: 0xf18, type: wallmaster, areas: ["OOT Bottom of the Well Wallmaster Basement", "OOT VOID"] }
 OOT_WALLMASTER_BOTW_PIT:                        { game: oot, id: 0xf19, type: wallmaster, areas: ["OOT Bottom of the Well Wallmaster Pit", "OOT VOID"] }
 OOT_WALLMASTER_GTG:                             { game: oot, id: 0xf1a, type: wallmaster, areas: ["OOT Gerudo Training Grounds Wallmaster", "OOT VOID"] }
-OOT_WALLMASTER_GANON:                           { game: oot, id: 0xf1b, type: wallmaster, areas: ["OOT Ganon Castle Wallmaster", "OOT VOID"] }
+OOT_WALLMASTER_GANON_SPIRIT:                    { game: oot, id: 0xf1b, type: wallmaster, areas: ["OOT Ganon Castle Spirit Wallmaster", "OOT VOID"] }
+OOT_WALLMASTER_GANON_LIGHT:                     { game: oot, id: 0xf1c, type: wallmaster, areas: ["OOT Ganon Castle Light Wallmaster", "OOT VOID"] }
 MM_WALLMASTER_DAMPE:                            { game: mm,  id: 0xff00, type: wallmaster, areas: ["MM Beneath The Graveyard Night 3 Wallmaster", "MM VOID"] }
 MM_WALLMASTER_BTW_ENTRANCE:                     { game: mm,  id: 0xff01, type: wallmaster, areas: ["MM Beneath The Well Wallmaster Near Entrance", "MM VOID"] }
 MM_WALLMASTER_BTW_FOUNTAIN:                     { game: mm,  id: 0xff02, type: wallmaster, areas: ["MM Beneath The Well Wallmaster Near Fountain", "MM VOID"] }

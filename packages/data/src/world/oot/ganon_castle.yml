@@ -10,7 +10,11 @@
     "Ganon Castle Shadow": "true"
     "Ganon Castle Stairs": "ganon_barrier"
     "Ganon Castle Fairy Fountain": "has_lens"
-"Ganon Castle Wallmaster":
+"Ganon Castle Spirit Wallmaster":
+  region: NONE
+  exits:
+    "VOID": "true"
+"Ganon Castle Light Wallmaster":
   region: NONE
   exits:
     "VOID": "true"
@@ -45,6 +49,7 @@
 "Ganon Castle Light 2":
   dungeon: Ganon
   exits:
+    "Ganon Castle Light Wallmaster": "true"
     "Ganon Castle Light End": "silver_rupees_ganon_light && has_lens"
   locations:
     "Ganon Castle SR Light Alcove Right": "true"
@@ -138,7 +143,7 @@
 "Ganon Castle Spirit 2":
   dungeon: Ganon
   exits:
-    "Ganon Castle Wallmaster": "(has_bombchu || climb_anywhere || hookshot_anywhere) && soul_wallmaster && can_reflect_light"
+    "Ganon Castle Spirit Wallmaster": "(has_bombchu || climb_anywhere || hookshot_anywhere) && soul_wallmaster && can_reflect_light"
     "Ganon Castle Spirit End": "(has_bombchu || climb_anywhere || hookshot_anywhere) && can_reflect_light && can_use_bow"
   locations:
     "Ganon Castle Spirit Chest 1": "can_use_sticks || can_use_sword || has_bombchu || hookshot_anywhere || (climb_anywhere && (has_ranged_weapon || has_explosives))"

@@ -35,7 +35,11 @@ static int EnWallmas_GetDestEr(Actor* this, GameState_Play* play)
     case SCE_OOT_GERUDO_TRAINING_GROUND:
         return ENTR_OOT_WALLMASTER_GTG;
     case SCE_OOT_INSIDE_GANON_CASTLE:
-        return ENTR_OOT_WALLMASTER_GANON;
+        switch (room)
+        {
+        case 0x08: return ENTR_OOT_WALLMASTER_GANON_LIGHT;
+        default: return ENTR_OOT_WALLMASTER_GANON_SPIRIT;
+        }
     default:
         UNREACHABLE();
     }
