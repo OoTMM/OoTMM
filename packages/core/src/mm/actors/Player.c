@@ -375,9 +375,6 @@ void Player_Action_FaroresWindText(Actor_Player* this, GameState_Play* play)
             play->nextEntrance = gSaveContext.respawn[RESPAWN_MODE_HUMAN].entrance;
             play->transitionType = TRANS_TYPE_FADE_WHITE_FAST;
 
-            /* Restore Game Over / Soar to Entrance respawn data. */
-            gSaveContext.respawn[RESPAWN_MODE_TOP] = gCustomSave.fwRespawnTop[comboIsLinkAdult()];
-
             /* TODO cancel timers? */
 
             return;
@@ -657,6 +654,9 @@ void Player_AfterInit(GameState_Play* play)
 
     if (gSaveContext.respawnFlag == 8)
     {
+        /* Restore Game Over / Soar to Entrance respawn data. */
+        gSaveContext.respawn[RESPAWN_MODE_TOP] = gCustomSave.fwRespawnTop[comboIsLinkAdult()];
+
         Player_InitFaroresWindRespawn(play, player);
     }
 }
