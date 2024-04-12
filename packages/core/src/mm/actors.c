@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/souls.h>
+#include <combo/entrance.h>
 
 void EnGo_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
 void EnDnh_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
@@ -422,9 +423,11 @@ static f32 D_8015BC18;
 void Actor_InitFaroresWind(GameState_Play* play) {
     Vec3f lightPos;
 
-    if (gSave.fw.data)
+    RespawnData* fw = &gCustomSave.fw[gOotSave.age];
+
+    if (fw->data)
     {
-        gSaveContext.respawn[RESPAWN_MODE_HUMAN] = gSave.fw;
+        gSaveContext.respawn[RESPAWN_MODE_HUMAN] = *fw;
     }
     else
     {
@@ -434,7 +437,7 @@ void Actor_InitFaroresWind(GameState_Play* play) {
         gSaveContext.respawn[RESPAWN_MODE_HUMAN].pos.z = 0.0f;
     }
 
-    lightPos = gSaveContext.save.fw.pos;
+    lightPos = fw->pos;
     lightPos.y += 60.0f;
 
     Lights_PointNoGlowSetInfo(&D_8015BC00, lightPos.x, lightPos.y, lightPos.z, 0xFF, 0xFF, 0xFF, -1);
@@ -453,7 +456,7 @@ void Actor_DrawFaroresWindPointer(GameState_Play* play)
 
     params = gSaveContext.respawn[RESPAWN_MODE_HUMAN].data;
 
-    if (params)
+    if (params && gSaveContext.respawn[RESPAWN_MODE_HUMAN].entrance != ENTR_FW_CROSS)
     {
         f32 yOffset = comboIsLinkAdult() ? 80.0f : 60.0f;
         f32 ratio = 1.0f;
@@ -547,7 +550,7 @@ void Actor_DrawFaroresWindPointer(GameState_Play* play)
 
             if (alpha < 0)
             {
-                gSave.fw.data = 0;
+                gCustomSave.fw[gOotSave.age].data = 0;
                 gSaveContext.respawn[RESPAWN_MODE_HUMAN].data = 0;
                 alpha = 0;
             }

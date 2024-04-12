@@ -15,10 +15,12 @@ All notable changes to this project will be documented in this file.
 - Add Grotto/Grave entrance randomizer, for both games.
 - Misc. Souls for both games, which can be shared.
 - Added a validator for Special Conditions (web-wise).
+- Add setting to allow warping between games using Farore's Wind.
 
 ### Changed
 
 - Saving is now enabled on the Clock Tower with Moon Crash set to New Cycle.
+- Farore's Wind in MM is now tied to Link's age, like in OoT.
 
 ### Fixed
 

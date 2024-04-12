@@ -550,6 +550,27 @@ void preInitTitleScreen(void)
     /* Load save */
     gSaveContext.fileIndex = gComboCtx.saveIndex;
     Sram_OpenSave(NULL, NULL);
+
+    if (gComboCtx.isFwSpawn)
+    {
+        gSaveContext.respawnFlag = 8;
+        gComboCtx.isFwSpawn = 0;
+
+        RespawnData* fw = &gCustomSave.fw[gOotSave.age];
+
+        if (fw->data)
+        {
+            gSaveContext.respawn[RESPAWN_MODE_HUMAN] = *fw;
+        }
+        else
+        {
+            gSaveContext.respawn[RESPAWN_MODE_HUMAN].data = 0;
+            gSaveContext.respawn[RESPAWN_MODE_HUMAN].pos.x = 0.0f;
+            gSaveContext.respawn[RESPAWN_MODE_HUMAN].pos.y = 0.0f;
+            gSaveContext.respawn[RESPAWN_MODE_HUMAN].pos.z = 0.0f;
+        }
+    }
+
     gSave.cutscene = 0;
     gSaveContext.nextCutscene = 0;
 
@@ -635,7 +656,7 @@ void hookPlay_Init(GameState_Play* play)
                 }
             }
         }
-        gSave.fw.pos = *pos;
+        gCustomSave.fw[gOotSave.age].pos = *pos;
     }
 
     if (comboIsLinkAdult())
@@ -873,8 +894,16 @@ void Play_TransitionDone(GameState_Play* play)
 
     /* Resolve extended entrance */
     entrance = play->nextEntrance;
-    if (entrance == ENTR_EXTENDED)
+    switch (entrance)
+    {
+    case ENTR_EXTENDED:
         entrance = g.nextEntrance;
+        break;
+    case ENTR_FW_CROSS:
+        entrance = gForeignSave.fw.entranceIndex | MASK_FOREIGN_ENTRANCE;
+        gComboCtx.isFwSpawn = 1;
+        break;
+    }
 
     /* Handle grotto exits */
     if (entrance == ENTR_MM_INTERNAL_EXIT_GROTTO)

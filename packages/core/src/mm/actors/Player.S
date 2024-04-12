@@ -305,7 +305,7 @@ PATCH_START 0x80861c5c
 .int 0
 PATCH_END
 
-/* Magic Spells. TODO PATCH_GROUP ? */
+/* Magic Spells. */
 
 /*
 Replaces:

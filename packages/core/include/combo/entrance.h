@@ -4,6 +4,7 @@
 #include <combo/types.h>
 
 #define ENTR_EXTENDED 0xfffe
+#define ENTR_FW_CROSS 0xfffd
 
 typedef struct GameState_Play GameState_Play;
 

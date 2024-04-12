@@ -504,6 +504,34 @@ static void preInitTitleScreen(void)
         /* Set file and load */
         gSaveContext.fileIndex = gComboCtx.saveIndex;
         Sram_OpenSave(NULL);
+        if (gComboCtx.isFwSpawn)
+        {
+            gSaveContext.respawnFlag = 3;
+            gComboCtx.isFwSpawn = 0;
+
+            OotFaroreWind* fw = &gSave.fw;
+
+            if (fw->set)
+            {
+                gSaveContext.respawn[RESPAWN_MODE_TOP].data = 0x28;
+                gSaveContext.respawn[RESPAWN_MODE_TOP].pos.x = fw->pos.x;
+                gSaveContext.respawn[RESPAWN_MODE_TOP].pos.y = fw->pos.y;
+                gSaveContext.respawn[RESPAWN_MODE_TOP].pos.z = fw->pos.z;
+                gSaveContext.respawn[RESPAWN_MODE_TOP].yaw = fw->yaw;
+                gSaveContext.respawn[RESPAWN_MODE_TOP].playerParams = fw->playerParams;
+                gSaveContext.respawn[RESPAWN_MODE_TOP].entranceIndex = fw->entranceIndex;
+                gSaveContext.respawn[RESPAWN_MODE_TOP].roomIndex = fw->roomIndex;
+                gSaveContext.respawn[RESPAWN_MODE_TOP].tempSwitchFlags = fw->tempSwitchFlags;
+                gSaveContext.respawn[RESPAWN_MODE_TOP].tempCollectFlags = fw->tempCollectFlags;
+            }
+            else
+            {
+                gSaveContext.respawn[RESPAWN_MODE_TOP].data = 0;
+                gSaveContext.respawn[RESPAWN_MODE_TOP].pos.x = 0.0f;
+                gSaveContext.respawn[RESPAWN_MODE_TOP].pos.y = 0.0f;
+                gSaveContext.respawn[RESPAWN_MODE_TOP].pos.z = 0.0f;
+            }
+        }
         gSave.cutscene = 0;
 
         /* Set the entrance */
@@ -738,8 +766,16 @@ void Play_TransitionDone(GameState_Play* play)
 
     /* Resolve extended entrance */
     entrance = play->nextEntranceIndex;
-    if (entrance == ENTR_EXTENDED)
+    switch (entrance)
+    {
+    case ENTR_EXTENDED:
         entrance = g.nextEntrance;
+        break;
+    case ENTR_FW_CROSS:
+        entrance = gSharedCustomSave.mm.fw[gSave.age].entrance | MASK_FOREIGN_ENTRANCE;
+        gComboCtx.isFwSpawn = 1;
+        break;
+    }
 
     if (entrance == ENTR_OOT_INTERNAL_EXIT_GROTTO)
     {

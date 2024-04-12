@@ -135,7 +135,7 @@ typedef struct PACKED ALIGNED(4)
     u32  valid;
     u32  saveIndex;
     u32  entrance;
-    s32  unused;
+    s32  isFwSpawn;
 }
 ComboContext;
 
