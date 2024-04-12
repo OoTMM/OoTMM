@@ -56,7 +56,7 @@ void comboSyncItems(void)
     if (comboConfig(CFG_CROSS_GAME_FW))
     {
 #if defined(GAME_MM)
-        RespawnData* fw = &gCustomSave.fw[comboIsLinkAdult()];
+        RespawnData* fw = &gCustomSave.fw[gOotSave.age];
         OotFaroreWind* foreignFw = &gForeignSave.fw;
 
         if (fw->data <= 0 || fw->entrance != ENTR_FW_CROSS)
@@ -70,7 +70,7 @@ void comboSyncItems(void)
             foreignFw->entranceIndex = ENTR_FW_CROSS;
         }
 #else
-        RespawnData* foreignFw = &gSharedCustomSave.mm.fw[comboIsLinkAdult()];
+        RespawnData* foreignFw = &gSharedCustomSave.mm.fw[gSave.age];
         OotFaroreWind* fw = &gSave.fw;
 
         if (fw->set <= 0 || fw->entranceIndex != ENTR_FW_CROSS)

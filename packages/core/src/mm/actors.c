@@ -423,7 +423,7 @@ static f32 D_8015BC18;
 void Actor_InitFaroresWind(GameState_Play* play) {
     Vec3f lightPos;
 
-    RespawnData* fw = &gCustomSave.fw[comboIsLinkAdult()];
+    RespawnData* fw = &gCustomSave.fw[gOotSave.age];
 
     if (fw->data)
     {
@@ -550,7 +550,7 @@ void Actor_DrawFaroresWindPointer(GameState_Play* play)
 
             if (alpha < 0)
             {
-                gCustomSave.fw[comboIsLinkAdult()].data = 0;
+                gCustomSave.fw[gOotSave.age].data = 0;
                 gSaveContext.respawn[RESPAWN_MODE_HUMAN].data = 0;
                 alpha = 0;
             }

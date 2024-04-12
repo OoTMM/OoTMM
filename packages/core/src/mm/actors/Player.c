@@ -260,7 +260,7 @@ void Player_Action_CastingSpell(Actor_Player* this, GameState_Play* play)
 
             if (this->av2.actionVar2 == 0)
             {
-                RespawnData* fw = &gCustomSave.fw[comboIsLinkAdult()];
+                RespawnData* fw = &gCustomSave.fw[gOotSave.age];
                 gSaveContext.respawn[RESPAWN_MODE_HUMAN].data = 1;
                 Play_SetupRespawnPoint(play, RESPAWN_MODE_HUMAN, 0x6ff);
                 *fw = gSaveContext.respawn[RESPAWN_MODE_DOWN];
@@ -268,7 +268,7 @@ void Player_Action_CastingSpell(Actor_Player* this, GameState_Play* play)
                 fw->data = 40;
 
                 /* Copy Game Over / Soar to Entrance respawn data. */
-                gCustomSave.fwRespawnTop[comboIsLinkAdult()] = gSaveContext.respawn[RESPAWN_MODE_TOP];
+                gCustomSave.fwRespawnTop[gOotSave.age] = gSaveContext.respawn[RESPAWN_MODE_TOP];
 
                 this->av2.actionVar2 = 2;
             }
@@ -383,8 +383,8 @@ void Player_Action_FaroresWindText(Actor_Player* this, GameState_Play* play)
         if (play->msgCtx.choiceIndex == 1)
         {
             gSaveContext.respawn[RESPAWN_MODE_HUMAN].data = -gSaveContext.respawn[RESPAWN_MODE_HUMAN].data;
-            gCustomSave.fw[comboIsLinkAdult()].data = 0;
-            Audio_PlaySfx_AtPos(&gCustomSave.fw[comboIsLinkAdult()].pos, 0x8C8); /* NA_SE_PL_MAGIC_WIND_VANISH */
+            gCustomSave.fw[gOotSave.age].data = 0;
+            Audio_PlaySfx_AtPos(&gCustomSave.fw[gOotSave.age].pos, 0x8C8); /* NA_SE_PL_MAGIC_WIND_VANISH */
         }
 
         Player_func_8085B384 = OverlayAddr(0x8085B384);
@@ -625,7 +625,7 @@ void Player_Action_FaroresWindSpawning(Actor_Player* this, GameState_Play* play)
     if (this->av2.actionVar2++ == 20)
     {
         gSaveContext.respawn[RESPAWN_MODE_HUMAN].data++;
-        Audio_PlaySfx_AtPos(&gCustomSave.fw[comboIsLinkAdult()].pos, 0x87B); /* NA_SE_PL_MAGIC_WIND_WARP */
+        Audio_PlaySfx_AtPos(&gCustomSave.fw[gOotSave.age].pos, 0x87B); /* NA_SE_PL_MAGIC_WIND_WARP */
     }
 }
 
@@ -655,7 +655,7 @@ void Player_AfterInit(GameState_Play* play)
     if (gSaveContext.respawnFlag == 8)
     {
         /* Restore Game Over / Soar to Entrance respawn data. */
-        gSaveContext.respawn[RESPAWN_MODE_TOP] = gCustomSave.fwRespawnTop[comboIsLinkAdult()];
+        gSaveContext.respawn[RESPAWN_MODE_TOP] = gCustomSave.fwRespawnTop[gOotSave.age];
 
         Player_InitFaroresWindRespawn(play, player);
     }

@@ -556,7 +556,7 @@ void preInitTitleScreen(void)
         gSaveContext.respawnFlag = 8;
         gComboCtx.isFwSpawn = 0;
 
-        RespawnData* fw = &gCustomSave.fw[comboIsLinkAdult()];
+        RespawnData* fw = &gCustomSave.fw[gOotSave.age];
 
         if (fw->data)
         {
@@ -656,7 +656,7 @@ void hookPlay_Init(GameState_Play* play)
                 }
             }
         }
-        gCustomSave.fw[comboIsLinkAdult()].pos = *pos;
+        gCustomSave.fw[gOotSave.age].pos = *pos;
     }
 
     if (comboIsLinkAdult())

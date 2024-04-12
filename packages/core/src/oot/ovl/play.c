@@ -772,7 +772,7 @@ void Play_TransitionDone(GameState_Play* play)
         entrance = g.nextEntrance;
         break;
     case ENTR_FW_CROSS:
-        entrance = gSharedCustomSave.mm.fw[comboIsLinkAdult()].entrance | MASK_FOREIGN_ENTRANCE;
+        entrance = gSharedCustomSave.mm.fw[gSave.age].entrance | MASK_FOREIGN_ENTRANCE;
         gComboCtx.isFwSpawn = 1;
         break;
     }
