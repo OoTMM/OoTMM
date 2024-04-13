@@ -287,6 +287,20 @@ function entrance(srcName: string, world: World) {
   return data;
 }
 
+function entranceAbs(world: World, name: string) {
+  const dstName = world.entranceOverrides.get(name) || name;
+  const dstGame: Game = (/^OOT_/.test(name) ? 'oot' : 'mm');
+  const entr = ENTRANCES[dstName as keyof typeof ENTRANCES];
+  if (entr === undefined) {
+    throw new Error(`Unknown entrance ${dstName}`);
+  }
+  let data = entr.id;
+  if (dstGame === 'mm') {
+    data = (data | 0x80000000) >>> 0;
+  }
+  return data;
+}
+
 const entrance2 = (srcGame: Game, dstGame: Game, name: string) => {
   const entr = ENTRANCES[name as keyof typeof ENTRANCES];
   if (entr === undefined) {
@@ -566,6 +580,26 @@ const gameHints = (settings: Settings, game: Game, hints: WorldHints): Buffer =>
   }
   buffers.push(Buffer.alloc(0x10, 0xff));
   return padBuffer16(Buffer.concat(buffers));
+}
+
+function dungeonWarpsBuffer(world: World) {
+  const defaultWarps = [
+    'OOT_KOKIRI_FOREST_FROM_DEKU_TREE',
+    'OOT_MOUNTAIN_TRAIL_FROM_DODONGO_CAVERN',
+    'OOT_ZORA_FOUNTAIN_FROM_JABU_JABU',
+    'OOT_SACRED_MEADOW_FROM_TEMPLE_FOREST',
+    'OOT_DEATH_CRATER_FROM_TEMPLE_FIRE',
+    'OOT_LAKE_HYLIA_FROM_TEMPLE_WATER',
+    'OOT_GRAVEYARD_FROM_TEMPLE_SHADOW',
+    'OOT_DESERT_COLOSSUS_FROM_TEMPLE_SPIRIT',
+    'MM_WOODFALL_FROM_TEMPLE',
+    'MM_SNOWHEAD_FROM_TEMPLE',
+    'MM_GREAT_BAY_FROM_TEMPLE',
+    'MM_STONE_TOWER_INVERTED_FROM_TEMPLE',
+  ];
+
+  const entrances = defaultWarps.map((e) => entranceAbs(world, e));
+  return toU32Buffer(entrances);
 }
 
 const regionsBuffer = (regions: Region[]) => {
@@ -889,7 +923,6 @@ export const randomizerHints = (world: number, logic: LogicResult): Buffer => {
 };
 
 const randomizerBoss = (worldId: number, logic: LogicResult): Buffer => toU8Buffer(logic.worlds[worldId].bossIds);
-const randomizerDungeons = (worldId: number, logic: LogicResult): Buffer => toU8Buffer(logic.worlds[worldId].dungeonIds);
 const randomizerTriforce = (logic: LogicResult): Buffer => toU16Buffer([logic.settings.triforcePieces, logic.settings.triforceGoal]);
 
 function specialConds(settings: Settings) {
@@ -920,6 +953,7 @@ export const randomizerData = (worldId: number, logic: LogicResult): Buffer => {
   const buffers = [];
   buffers.push(logic.uuid);
   buffers.push(toU8Buffer([worldId + 1, 0, 0, 0]));
+  buffers.push(dungeonWarpsBuffer(logic.worlds[worldId]));
   buffers.push(randomizerDungeonsBits(worldId, logic));
   buffers.push(randomizerWarps(worldId, logic));
   buffers.push(randomizerConfig(logic.worlds[worldId], logic.settings));
@@ -931,7 +965,6 @@ export const randomizerData = (worldId: number, logic: LogicResult): Buffer => {
   buffers.push(toI8Buffer(logic.hints[worldId].staticHintsImportances));
   buffers.push(zoraSapphireBuffer(worldId, logic));
   buffers.push(randomizerBoss(worldId, logic));
-  buffers.push(randomizerDungeons(worldId, logic));
   return Buffer.concat(buffers);
 };
 

@@ -97,16 +97,17 @@ static void comboTextMap(char** b, GameState_Play* play, s16 gi)
     /* Display the entrance */
     if (dungeonId == DUNGEONID_TEMPLE_STONE_TOWER || dungeonId == DUNGEONID_TEMPLE_STONE_TOWER_INVERTED)
     {
+        /* DEBUG */
         comboTextAppendStr(b, TEXT_NL "The entrances are at ");
-        comboTextAppendDungeonName(b, gComboData.dungeons[DUNGEONID_TEMPLE_STONE_TOWER]);
+        //comboTextAppendDungeonName(b, gComboData.dungeons[DUNGEONID_TEMPLE_STONE_TOWER]);
         comboTextAppendStr(b, " and ");
-        comboTextAppendDungeonName(b, gComboData.dungeons[DUNGEONID_TEMPLE_STONE_TOWER_INVERTED]);
+        //comboTextAppendDungeonName(b, gComboData.dungeons[DUNGEONID_TEMPLE_STONE_TOWER_INVERTED]);
         comboTextAppendStr(b, ".");
     }
     else
     {
         comboTextAppendStr(b, TEXT_NL "The entrance is at ");
-        comboTextAppendDungeonName(b, gComboData.dungeons[dungeonId]);
+        //comboTextAppendDungeonName(b, gComboData.dungeons[dungeonId]);
         comboTextAppendStr(b, ".");
     }
 }

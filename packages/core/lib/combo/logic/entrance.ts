@@ -702,7 +702,6 @@ class WorldShuffler {
 
     return world;
   }
-
 };
 
 export class LogicPassEntrances {

@@ -4,7 +4,7 @@
 
 static void EnGe2_ThrowPlayerOut(Actor* this, GameState_Play* play)
 {
-    EntranceDescr entrance;
+    //EntranceDescr entrance;
     u8* timer;
 
     /* Handle timer */
@@ -16,6 +16,8 @@ static void EnGe2_ThrowPlayerOut(Actor* this, GameState_Play* play)
     }
 
     /* Transition */
+    /* DEBUG */
+#if 0
     if (play->sceneId != SCE_MM_PIRATE_FORTRESS_ENTRANCE || gComboData.dungeons[DUNGEONID_PIRATE_FORTRESS] == DUNGEONID_PIRATE_FORTRESS)
     {
         play->nextEntrance = play->setupExitList[this->variable & 0x1f];
@@ -27,6 +29,7 @@ static void EnGe2_ThrowPlayerOut(Actor* this, GameState_Play* play)
         comboGetDungeonExit(&entrance, gComboData.dungeons[DUNGEONID_PIRATE_FORTRESS]);
         comboTransitionDescr(play, &entrance);
     }
+#endif
 }
 
 PATCH_FUNC(0x80b8bc78, EnGe2_ThrowPlayerOut);
