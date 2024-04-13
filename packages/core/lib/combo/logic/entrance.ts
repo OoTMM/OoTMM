@@ -1,5 +1,7 @@
+import { mapValues } from 'lodash';
 import { ENTRANCES } from '@ootmm/data';
-import { Random, sample, shuffle } from '../random';
+
+import { Random, sample } from '../random';
 import { Settings } from '../settings';
 import { DUNGEONS_REGIONS, ExprMap, World, WorldArea, cloneWorld, BOSS_INDEX_BY_DUNGEON } from './world';
 import { Pathfinder } from './pathfind';
@@ -8,9 +10,8 @@ import { LogicEntranceError, LogicError } from './error';
 import { Expr, exprAge, exprAnd, exprFalse, exprTrue } from './expr';
 import { Location, makeLocation } from './locations';
 import { LogicPassSolver } from './solve';
-import { Items, ItemsCount, PlayerItems, makePlayerItem } from '../items';
+import { PlayerItems } from '../items';
 import { ItemProperties } from './item-properties';
-import { mapValues } from 'lodash';
 import { optimizeExpr } from './expr-optimizer';
 
 type Entrance = keyof typeof ENTRANCES;
@@ -689,113 +690,6 @@ export class LogicPassEntrances {
     },
   ) {
     this.worlds = [];
-  }
-
-  private fixDungeons(worldId: number) {
-    const world = this.worlds[worldId];
-    /* Set the dungeon list */
-    let shuffledDungeons = new Set(['DT', 'DC', 'JJ', 'Forest', 'Fire', 'Water', 'Shadow', 'Spirit', 'WF', 'SH', 'GB', 'ST', 'IST']);
-    if (!this.input.settings.erMajorDungeons) {
-      ['DT', 'DC', 'JJ', 'Forest', 'Fire', 'Water', 'Shadow', 'Spirit', 'WF', 'SH', 'GB', 'ST', 'IST'].forEach(d => shuffledDungeons.delete(d));
-    }
-    if (this.input.settings.erMinorDungeons) {
-      ['BotW', 'IC', 'GTG'].forEach(d => shuffledDungeons.add(d));
-    }
-    if (this.input.settings.erGanonCastle) {
-      shuffledDungeons.add('Ganon');
-    }
-    if (this.input.settings.erGanonTower) {
-      shuffledDungeons.add('Tower');
-    }
-    if (this.input.settings.erSpiderHouses) {
-      ['SSH', 'OSH'].forEach(d => shuffledDungeons.add(d));
-    }
-    if (this.input.settings.erPirateFortress) {
-      shuffledDungeons.add('PF');
-    }
-    if (this.input.settings.erBeneathWell) {
-      ['BtW', 'BtWE'].forEach(d => shuffledDungeons.add(d));
-    }
-    if (this.input.settings.erIkanaCastle) {
-      shuffledDungeons.add('ACoI');
-    }
-    if (this.input.settings.erSecretShrine) {
-      shuffledDungeons.add('SS');
-    }
-    if (this.input.settings.erMoon) {
-      shuffledDungeons.add('Moon');
-    }
-
-    /* Get the transitions and exprs */
-    const dungeonTransitions = (Object.keys(ENTRANCES) as Entrance[])
-      .filter(e => ENTRANCES[e].type === 'dungeon')
-      .filter(e => shuffledDungeons.has(world.areas[ENTRANCES[e].to].dungeon!));
-
-    const dungeonEntrances = new Map<string, Entrance>();
-
-    for (const eName of dungeonTransitions) {
-      const e = ENTRANCES[eName];
-      /* Get the exit */
-      const reverse = (e as any).reverse as Entrance | undefined;
-      const exit = ENTRANCES[reverse!];
-
-      /* Get the various areas */
-      const entranceAreaFrom = world.areas[e.from];
-      const entranceAreaTo = world.areas[e.to];
-      const exitAreaFrom = world.areas[exit.from];
-
-      /* Save the entrance */
-      dungeonEntrances.set(entranceAreaTo.dungeon!, eName);
-
-      /* Remove the transitions */
-      delete entranceAreaFrom.exits[e.to];
-      delete exitAreaFrom.exits[exit.to];
-    }
-
-    /* Assign the dungeons */
-    const unplacedDungeons = new Set(shuffledDungeons);
-    const unplacedLocs = new Set(shuffledDungeons);
-    const assigns = new Map<string, Set<string>>();
-    while (unplacedDungeons.size > 0) {
-      /* Refresh the assigns */
-      for (const dungeon of unplacedDungeons) {
-        if (!assigns.has(dungeon)) {
-          assigns.set(dungeon, new Set<string>());
-        }
-        const locs = assigns.get(dungeon)!;
-        for (const loc of unplacedLocs) {
-          if (locs.has(loc)) {
-            continue;
-          }
-          if (this.isAssignableNew(worldId, dungeonEntrances.get(loc)!, dungeonEntrances.get(dungeon)!, { ownGame: this.input.settings.erDungeons === 'ownGame' })) {
-            locs.add(loc);
-          }
-        }
-      }
-
-      const minSize = Math.min(...Array.from(assigns.values()).map(s => s.size));
-      const candidates = Array.from(assigns.entries()).filter(([_, s]) => s.size === minSize).map(([k, _]) => k);
-      const dungeon = sample(this.input.random, candidates);
-      const locs = assigns.get(dungeon)!;
-      if (locs.size === 0) {
-        throw new LogicError(`Unable to assign dungeon ${dungeon}`);
-      }
-      const loc = sample(this.input.random, Array.from(locs));
-
-      /* Mark the placement */
-      assigns.delete(dungeon);
-      for (const v of assigns.values()) {
-        v.delete(loc);
-      }
-      unplacedDungeons.delete(dungeon);
-      unplacedLocs.delete(loc);
-
-      /* Change the world */
-      const sourceEntranceId = dungeonEntrances.get(loc)!;
-      const destEntranceId = dungeonEntrances.get(dungeon)!;
-
-      this.place(worldId, sourceEntranceId, destEntranceId);
-    }
   }
 
   private changeRegion(worldId: number, area: string, newRegion: string) {
