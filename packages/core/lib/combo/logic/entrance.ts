@@ -140,15 +140,6 @@ class WorldShuffler {
     }
 
     if (this.settings.logic === 'allLocations' && pathfinderState.locations.size < newWorld.locations.size) {
-      /* DEBUG */
-      const missingLocations: Location[] = [];
-      for (const loc of newWorld.locations) {
-        const l = makeLocation(loc, this.worldId);
-        if (!pathfinderState.locations.has(l)) {
-          missingLocations.push(l);
-        }
-      }
-      //console.log('MISSING LOCATIONS', missingLocations);
       return false;
     }
 
