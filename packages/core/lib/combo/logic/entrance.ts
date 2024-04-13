@@ -457,98 +457,8 @@ class WorldShuffler {
     return { pool, opts: { ownGame: this.settings.erGrottos === 'ownGame' } };
   }
 
-  run(): World {
-    this.overrides = {};
-    const pools: EntrancePools = {};
-
-    if (this.settings.erWallmasters !== 'none') {
-      this.placeWallmasters();
-    }
-
-    if (this.settings.erDungeons !== 'none') {
-      pools.DUNGEONS = this.poolDungeons();
-    }
-
-    if (this.settings.erGrottos !== 'none') {
-      pools.GROTTOS = this.poolGrottos();
-    }
-
-    if (this.settings.erRegions !== 'none') {
-      pools.REGIONS = this.poolRegions();
-    }
-
-    if (this.settings.erIndoors !== 'none') {
-      pools.INDOORS = this.poolIndoors();
-    }
-
-    if (this.settings.erMixed !== 'none') {
-      pools.MIXED = { pool: [], opts: { ownGame: this.settings.erMixed === 'ownGame' } };
-
-      if (this.settings.erMixedGrottos) {
-        pools.MIXED.pool = [...pools.MIXED.pool, ...pools.GROTTOS.pool];
-        delete pools.GROTTOS;
-      }
-
-      if (this.settings.erMixedRegions) {
-        pools.MIXED.pool = [...pools.MIXED.pool, ...pools.REGIONS.pool];
-        delete pools.REGIONS;
-      }
-
-      if (this.settings.erMixedIndoors) {
-        pools.MIXED.pool = [...pools.MIXED.pool, ...pools.INDOORS.pool];
-        delete pools.INDOORS;
-      }
-    }
-
-    if (this.settings.erWarps !== 'none') {
-      pools.WARPS = this.poolWarps();
-    }
-
-    if (this.settings.erOneWays !== 'none') {
-      pools.ONE_WAYS = this.poolOneWays();
-    }
-
-    this.placePools(pools);
-
-    /*
-    if (this.input.settings.erDungeons !== 'none') {
-      anyEr = true;
-      this.fixDungeons(i);
-    }
-
-    if (this.input.settings.erBoss !== 'none') {
-      anyEr = true;
-      this.fixBosses(i);
-    }
-    */
-
-    return this.changedWorld(this.overrides);
-  }
-
-};
-
-export class LogicPassEntrances {
-  private worlds: World[];
-
-  constructor(
-    private readonly input: {
-      worlds: World[];
-      settings: Settings;
-      random: Random;
-      monitor: Monitor;
-      fixedLocations: Set<Location>,
-      pool: PlayerItems;
-      renewableJunks: PlayerItems;
-      startingItems: PlayerItems;
-      itemProperties: ItemProperties;
-    },
-  ) {
-    this.worlds = [];
-  }
-
-  private isAssignableNew(worldId: number, original: Entrance, replacement: Entrance, opts?: { ownGame?: boolean, locations?: string[] }) {
-    const world = this.worlds[worldId];
-    const originalWorld = this.input.worlds[worldId];
+  private isAssignableLegacy(world: World, original: Entrance, replacement: Entrance, opts?: { ownGame?: boolean, locations?: string[] }) {
+    const originalWorld = this.world;
     const originalEntrance = ENTRANCES[original];
     const replacementEntrance = ENTRANCES[replacement];
     const dungeon = originalWorld.areas[replacementEntrance.to].dungeon!;
@@ -561,12 +471,12 @@ export class LogicPassEntrances {
     }
 
     /* Not all locations */
-    if (this.input.settings.logic !== 'allLocations') {
+    if (this.settings.logic !== 'allLocations') {
       return true;
     }
 
     /* Apply an override */
-    world.areas[originalEntrance.from].exits[replacementEntrance.to] = this.getExpr(worldId, original);
+    world.areas[originalEntrance.from].exits[replacementEntrance.to] = this.getExpr(original);
 
     /* If the dungeon is ST or IST, we need to allow the other dungeon */
     if (dungeon === 'ST') {
@@ -577,7 +487,10 @@ export class LogicPassEntrances {
     }
 
     /* Check if the new world is valid */
-    const pathfinderState = this.pathfinder.run(null, { singleWorld: worldId, ignoreItems: true, recursive: true });
+    const allWorlds = [...this.worlds];
+    allWorlds[this.worldId] = world;
+    const pathfinder = new Pathfinder(allWorlds, this.settings, this.startingItems);
+    const pathfinderState = pathfinder.run(null, { singleWorld: this.worldId, ignoreItems: true, recursive: true });
 
     /* Restore the override */
     delete world.areas[originalEntrance.from].exits[replacementEntrance.to]
@@ -595,21 +508,20 @@ export class LogicPassEntrances {
     }
 
     /* Turn into locations */
-    const worldLocs = locations.map(l => makeLocation(l, worldId));
+    const worldLocs = locations.map(l => makeLocation(l, this.worldId));
 
     /* Check if the new world is valid */
     if (!(worldLocs.every(l => pathfinderState.locations.has(l))))
       return false;
 
     /* Ganon's tower check */
-    if (dungeon === 'Tower' && ['ganon', 'both'].includes(this.input.settings.goal) && !pathfinderState.ws[worldId].events.has('OOT_GANON'))
+    if (dungeon === 'Tower' && ['ganon', 'both'].includes(this.settings.goal) && !pathfinderState.ws[this.worldId].events.has('OOT_GANON'))
       return false;
 
     return true;
   }
 
-  private fixBosses(worldId: number) {
-    const world = this.worlds[worldId];
+  private legacyFixBosses(world: World): World {
     const bossEntrances = (Object.keys(ENTRANCES) as Entrance[]).filter(x => ENTRANCES[x].type === 'boss');
     const bossEntrancesByDungeon = new Map<string, Entrance>();
     const bossEvents = new Map<string, ExprMap>();
@@ -677,7 +589,7 @@ export class LogicPassEntrances {
           if (locs.has(loc)) {
             continue;
           }
-          if (this.isAssignableNew(worldId, bossEntrancesByDungeon.get(loc)!, bossEntrancesByDungeon.get(boss)!, { ownGame: this.input.settings.erBoss === 'ownGame', locations: bossLocations.get(boss)! })) {
+          if (this.isAssignableLegacy(world, bossEntrancesByDungeon.get(loc)!, bossEntrancesByDungeon.get(boss)!, { ownGame: this.settings.erBoss === 'ownGame', locations: bossLocations.get(boss)! })) {
             locs.add(loc);
           }
         }
@@ -685,12 +597,12 @@ export class LogicPassEntrances {
 
       const minSize = Math.min(...Array.from(assigns.values()).map(s => s.size));
       const bosses = Array.from(assigns.entries()).filter(([_, s]) => s.size === minSize).map(([k, _]) => k);
-      const boss = sample(this.input.random, bosses);
+      const boss = sample(this.random, bosses);
       const locs = assigns.get(boss)!;
       if (locs.size === 0) {
         throw new LogicEntranceError(`Nowhere to place boss ${boss}`);
       }
-      const loc = sample(this.input.random, Array.from(locs));
+      const loc = sample(this.random, Array.from(locs));
 
       /* Mark as placed */
       unplacedBosses.delete(boss);
@@ -703,7 +615,8 @@ export class LogicPassEntrances {
       /* Place the boss */
       const src = bossEntrancesByDungeon.get(loc)!;
       const dst = bossEntrancesByDungeon.get(boss)!;
-      this.place(worldId, src, dst);
+      world.areas[ENTRANCES[src].from].exits[ENTRANCES[dst].to] = this.getExpr(src);
+      world.entranceOverrides.set(src, dst);
       world.bossIds[BOSS_INDEX_BY_DUNGEON[boss]] = BOSS_INDEX_BY_DUNGEON[loc];
 
       /* Add the events */
@@ -725,6 +638,90 @@ export class LogicPassEntrances {
         }
       }
     }
+
+    return world;
+  }
+
+  run(): World {
+    this.overrides = {};
+    const pools: EntrancePools = {};
+
+    if (this.settings.erWallmasters !== 'none') {
+      this.placeWallmasters();
+    }
+
+    if (this.settings.erDungeons !== 'none') {
+      pools.DUNGEONS = this.poolDungeons();
+    }
+
+    if (this.settings.erGrottos !== 'none') {
+      pools.GROTTOS = this.poolGrottos();
+    }
+
+    if (this.settings.erRegions !== 'none') {
+      pools.REGIONS = this.poolRegions();
+    }
+
+    if (this.settings.erIndoors !== 'none') {
+      pools.INDOORS = this.poolIndoors();
+    }
+
+    if (this.settings.erMixed !== 'none') {
+      pools.MIXED = { pool: [], opts: { ownGame: this.settings.erMixed === 'ownGame' } };
+
+      if (this.settings.erMixedGrottos) {
+        pools.MIXED.pool = [...pools.MIXED.pool, ...pools.GROTTOS.pool];
+        delete pools.GROTTOS;
+      }
+
+      if (this.settings.erMixedRegions) {
+        pools.MIXED.pool = [...pools.MIXED.pool, ...pools.REGIONS.pool];
+        delete pools.REGIONS;
+      }
+
+      if (this.settings.erMixedIndoors) {
+        pools.MIXED.pool = [...pools.MIXED.pool, ...pools.INDOORS.pool];
+        delete pools.INDOORS;
+      }
+    }
+
+    if (this.settings.erWarps !== 'none') {
+      pools.WARPS = this.poolWarps();
+    }
+
+    if (this.settings.erOneWays !== 'none') {
+      pools.ONE_WAYS = this.poolOneWays();
+    }
+
+    this.placePools(pools);
+
+    let world = this.changedWorld(this.overrides);
+    if (this.settings.erBoss !== 'none') {
+      world = this.legacyFixBosses(world);
+    }
+
+    return world;
+  }
+
+};
+
+export class LogicPassEntrances {
+  private worlds: World[];
+
+  constructor(
+    private readonly input: {
+      worlds: World[];
+      settings: Settings;
+      random: Random;
+      monitor: Monitor;
+      fixedLocations: Set<Location>,
+      pool: PlayerItems;
+      renewableJunks: PlayerItems;
+      startingItems: PlayerItems;
+      itemProperties: ItemProperties;
+    },
+  ) {
+    this.worlds = [];
   }
 
   private fixDungeons(worldId: number) {
