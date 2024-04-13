@@ -178,6 +178,8 @@ typedef struct
 {
     u8              uuid[16];
     u8              playerId;
+    u32             dungeonWarps[12];
+    u32             dungeonEntrances[26];
     u32             mq;
     u32             preCompleted;
     u32             entrancesSong[6];
@@ -192,7 +194,6 @@ typedef struct
     s8              staticHintsImportance[20];
     u16             giZoraSapphire;
     u8              boss[12];
-    u8              dungeons[26];
 }
 ComboData;
 

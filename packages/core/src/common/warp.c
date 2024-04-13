@@ -4,9 +4,8 @@
 
 void comboTriggerWarp(GameState_Play* play, int bossId)
 {
-    EntranceDescr descr;
     int dungeonId;
-    int dungeonEntranceId;
+    u32 dungeonExit;
 
 #if defined(GAME_MM)
     /* Flag the actual boss as dead (MM) */
@@ -27,73 +26,64 @@ void comboTriggerWarp(GameState_Play* play, int bossId)
     }
 #endif
 
-    /* Compute shuffled indices */
+    /* Compute shuffled index and set flags */
     dungeonId = (int)gComboData.boss[bossId];
-    dungeonEntranceId = (int)gComboData.dungeons[dungeonId];
-
     comboDungeonSetFlags(dungeonId, 1);
 
     /* Set entrance - need special case for warp dungeons */
-    comboGetDungeonExit(&descr, dungeonEntranceId);
-    switch (dungeonEntranceId)
+    dungeonExit = gComboData.dungeonWarps[dungeonId];
+    switch (dungeonExit)
     {
-    case DUNGEONID_DEKU_TREE:
-        descr.id = 0x0457; /* Works OK as adult */
+    case ENTR_OOT_KOKIRI_FOREST_FROM_DEKU_TREE:
+        dungeonExit = 0x0457; /* Works OK as adult */
         break;
-    case DUNGEONID_DODONGOS_CAVERN:
-        descr.id = 0x0242; /* Works OK as adult */
+    case ENTR_OOT_MOUNTAIN_TRAIL_FROM_DODONGO_CAVERN:
+        dungeonExit = 0x0242; /* Works OK as adult */
         break;
-    case DUNGEONID_JABU_JABU:
-        descr.id = 0x0221; /* Works OK as adult */
+    case ENTR_OOT_ZORA_FOUNTAIN_FROM_JABU_JABU:
+        dungeonExit = 0x0221; /* Works OK as adult */
         break;
-    case DUNGEONID_TEMPLE_FOREST:
-        descr.id = 0x0600; /* Normal exit WW as child */
+    case ENTR_OOT_SACRED_MEADOW_FROM_TEMPLE_FOREST:
+        dungeonExit = ENTR_OOT_WARP_SONG_MEADOW; /* Normal exit WW as child */
         break;
-    case DUNGEONID_TEMPLE_FIRE:
-        descr.id = 0x04f6; /* Normal exit WW as child */
+    case ENTR_OOT_DEATH_CRATER_FROM_TEMPLE_FIRE:
+        dungeonExit = ENTR_OOT_WARP_SONG_CRATER; /* Normal exit WW as child */
         break;
-    case DUNGEONID_TEMPLE_WATER:
-        descr.id = 0x0604; /* Normal exit WW as child */
+    case ENTR_OOT_LAKE_HYLIA_FROM_TEMPLE_WATER:
+        dungeonExit = ENTR_OOT_WARP_SONG_LAKE; /* Normal exit WW as child */
         break;
-    case DUNGEONID_TEMPLE_SHADOW:
-        descr.id = 0x0568; /* Normal exit crashes as child */
+    case ENTR_OOT_GRAVEYARD_FROM_TEMPLE_SHADOW:
+        dungeonExit = ENTR_OOT_WARP_SONG_GRAVE; /* Normal exit crashes as child */
         break;
-    case DUNGEONID_TEMPLE_SPIRIT:
-        descr.id = 0x01e1; /* Normal exit crashes as child */
+    case ENTR_OOT_DESERT_COLOSSUS_FROM_TEMPLE_SPIRIT:
+        dungeonExit = 0x01e1; /* Normal exit crashes as child */
         break;
-    case DUNGEONID_TEMPLE_WOODFALL:
+    case (ENTR_MM_WOODFALL_FROM_TEMPLE | MASK_FOREIGN_ENTRANCE):
         if (MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF) && MM_GET_EVENT_WEEK(EV_MM_WEEK_WOODFALL_TEMPLE_RISE))
-        {
-            descr.id = 0x3010;
-        }
+            dungeonExit = 0x3010 | MASK_FOREIGN_ENTRANCE;
         else
-        {
-            descr.id = 0x8600;
-        }
+            dungeonExit = 0x8600 | MASK_FOREIGN_ENTRANCE;
         break;
-    case DUNGEONID_TEMPLE_SNOWHEAD:
+    case (ENTR_MM_SNOWHEAD_FROM_TEMPLE | MASK_FOREIGN_ENTRANCE):
         if (MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH))
-        {
-            descr.id = 0xae70;
-        }
+            dungeonExit = 0xae70 | MASK_FOREIGN_ENTRANCE;
         else
-        {
-            descr.id = 0x9a70;
-        }
+            dungeonExit = 0x9a70 | MASK_FOREIGN_ENTRANCE;
         break;
-    case DUNGEONID_TEMPLE_GREAT_BAY:
-        descr.id = 0x6a70;
+    case (ENTR_MM_GREAT_BAY_FROM_TEMPLE | MASK_FOREIGN_ENTRANCE):
+        dungeonExit = 0x6a70 | MASK_FOREIGN_ENTRANCE;
         break;
-    case DUNGEONID_TEMPLE_STONE_TOWER:
-    case DUNGEONID_TEMPLE_STONE_TOWER_INVERTED:
-        descr.id = 0x2070;
+    case (ENTR_MM_STONE_TOWER_FROM_TEMPLE | MASK_FOREIGN_ENTRANCE):
+    case (ENTR_MM_STONE_TOWER_INVERTED_FROM_TEMPLE | MASK_FOREIGN_ENTRANCE):
+        dungeonExit = 0x2070 | MASK_FOREIGN_ENTRANCE;
         break;
     }
 
 #if defined(GAME_MM)
+    dungeonExit ^= MASK_FOREIGN_ENTRANCE;
     gSave.playerForm = MM_PLAYER_FORM_HUMAN;
     gSave.equippedMask = 0;
 #endif
 
-    comboTransitionDescr(play, &descr);
+    comboTransition(play, dungeonExit);
 }

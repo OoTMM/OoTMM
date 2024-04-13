@@ -1847,6 +1847,14 @@ export const SETTINGS = [{
   description: 'Allow shuffling multiple pools together.',
   default: 'none'
 }, {
+  key: 'erMixedDungeons',
+  name: 'Mixed Pools - Dungeons',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'If turned on, dungeons will be shuffled with other mixed pools.',
+  default: false,
+  cond: (x: any) => x.erMixed !== 'none' && x.erMixed === x.erDungeons,
+}, {
   key: 'erMixedRegions',
   name: 'Mixed Pools - Regions',
   category: 'entrances',
