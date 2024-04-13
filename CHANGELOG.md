@@ -24,6 +24,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix Goron Ruby looking odd in MM.
 - Ruto's Soul is now accounted in logic for the Big Octo in Jabu-Jabu.
 
 ## [21.0] - 2024-03-28
