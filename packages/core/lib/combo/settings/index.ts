@@ -8,5 +8,5 @@ export { GLITCHES } from './glitches';
 
 export type { Settings } from './type';
 export type { SettingCategory } from './categories';
-export type { Trick } from './tricks';
+export type { TrickKey } from './tricks';
 export type { Glitch } from './glitches';
