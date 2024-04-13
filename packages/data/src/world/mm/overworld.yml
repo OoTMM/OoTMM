@@ -1540,7 +1540,7 @@
 "Woodfall Front of Temple":
   region: WOODFALL
   exits:
-    "Woodfall Temple": "true"
+    "Woodfall Temple": "woodfall_raised"
     "Woodfall Shrine": "cond(setting(openDungeonsMm, WF) || setting(clearStateDungeonsMm, WF) || setting(clearStateDungeonsMm, both), has(MASK_DEKU) || hookshot_anywhere, true)"
     "Woodfall": "event(CLEAN_SWAMP) || can_use_nayru"
 "Woodfall Shrine":
