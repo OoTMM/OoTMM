@@ -179,6 +179,7 @@ typedef struct
     u8              uuid[16];
     u8              playerId;
     u32             dungeonWarps[12];
+    u32             dungeonEntrances[26];
     u32             mq;
     u32             preCompleted;
     u32             entrancesSong[6];

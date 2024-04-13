@@ -602,6 +602,80 @@ function dungeonWarpsBuffer(world: World) {
   return toU32Buffer(entrances);
 }
 
+function dungeonEntrancesBuffer(world: World) {
+  const mainDungeonsReverse: {[k: number]: number} = {};
+  const mainDungeonRegions: {[k: number]: string} = {};
+
+  const defaultEntrances = [
+    'OOT_DEKU_TREE',
+    'OOT_DODONGO_CAVERN',
+    'OOT_JABU_JABU',
+    'OOT_TEMPLE_FOREST',
+    'OOT_TEMPLE_FIRE',
+    'OOT_TEMPLE_WATER',
+    'OOT_TEMPLE_SHADOW',
+    'OOT_TEMPLE_SPIRIT',
+    'MM_TEMPLE_WOODFALL',
+    'MM_TEMPLE_SNOWHEAD',
+    'MM_TEMPLE_GREAT_BAY',
+    'MM_TEMPLE_STONE_TOWER_INVERTED',
+    'MM_TEMPLE_STONE_TOWER',
+    'MM_SPIDER_HOUSE_SWAMP',
+    'MM_SPIDER_HOUSE_OCEAN',
+    'OOT_BOTTOM_OF_THE_WELL',
+    'OOT_ICE_CAVERN',
+    'OOT_GERUDO_TRAINING_GROUNDS',
+    'MM_BENEATH_THE_WELL',
+    'MM_IKANA_CASTLE',
+    'MM_SECRET_SHRINE',
+    'MM_BENEATH_THE_WELL_BACK',
+    'MM_PIRATE_FORTRESS',
+    'OOT_GANON_CASTLE',
+    'OOT_GANON_TOWER',
+    'MM_MOON',
+  ];
+
+  /* Compute substitutions */
+  for (let i = 0; i < defaultEntrances.length; ++i) {
+    const entrance = world.entranceOverrides.get(defaultEntrances[i]) || defaultEntrances[i];
+    const index = defaultEntrances.indexOf(entrance);
+    if (index !== -1) {
+      mainDungeonsReverse[index] = i;
+    }
+  }
+
+  /* Compute main region */
+  for (const areaName in world.areas) {
+    const area = world.areas[areaName];
+    for (let i = 0; i < defaultEntrances.length; ++i) {
+      const entrName = defaultEntrances[i];
+      const entrData = ENTRANCES[entrName as keyof typeof ENTRANCES];
+      const to = entrData.to;
+      const areaTo = world.areas[to];
+      if (area.exits[to] && area.dungeon !== areaTo.dungeon) {
+        const region = area.region;
+        if (region !== 'NONE' && region !== 'POCKET' && region !== 'NAMELESS') {
+          mainDungeonRegions[i] = region;
+        }
+      }
+    }
+  }
+
+  const buffers: Buffer[] = [];
+  for (let i = 0; i < defaultEntrances.length; ++i) {
+    const dungeonIndex = mainDungeonsReverse[i];
+    let region = mainDungeonRegions[i] || 'NAMELESS';
+    if (dungeonIndex !== undefined) {
+      buffers.push(toU32Buffer([(dungeonIndex | 0x80000000) >>> 0]));
+    } else {
+      const regionId = (REGIONS as any)[region];
+      buffers.push(toU32Buffer([regionId]));
+    }
+  }
+
+  return Buffer.concat(buffers);
+}
+
 const regionsBuffer = (regions: Region[]) => {
   const data = regions.map((region) => {
     const regionId = (REGIONS as any)[regionData(region).id];
@@ -954,6 +1028,7 @@ export const randomizerData = (worldId: number, logic: LogicResult): Buffer => {
   buffers.push(logic.uuid);
   buffers.push(toU8Buffer([worldId + 1, 0, 0, 0]));
   buffers.push(dungeonWarpsBuffer(logic.worlds[worldId]));
+  buffers.push(dungeonEntrancesBuffer(logic.worlds[worldId]));
   buffers.push(randomizerDungeonsBits(worldId, logic));
   buffers.push(randomizerWarps(worldId, logic));
   buffers.push(randomizerConfig(logic.worlds[worldId], logic.settings));
