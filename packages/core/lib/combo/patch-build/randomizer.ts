@@ -289,7 +289,7 @@ function entrance(srcName: string, world: World) {
 
 function entranceAbs(world: World, name: string) {
   const dstName = world.entranceOverrides.get(name) || name;
-  const dstGame: Game = (/^OOT_/.test(name) ? 'oot' : 'mm');
+  const dstGame: Game = (/^OOT_/.test(dstName) ? 'oot' : 'mm');
   const entr = ENTRANCES[dstName as keyof typeof ENTRANCES];
   if (entr === undefined) {
     throw new Error(`Unknown entrance ${dstName}`);

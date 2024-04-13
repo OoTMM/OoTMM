@@ -1,7 +1,7 @@
 import { ENTRANCES } from '@ootmm/data';
 import { Random, sample, shuffle } from '../random';
 import { Settings } from '../settings';
-import { DUNGEONS_REGIONS, ExprMap, World, WorldArea, cloneWorld } from './world';
+import { DUNGEONS_REGIONS, ExprMap, World, WorldArea, cloneWorld, BOSS_INDEX_BY_DUNGEON } from './world';
 import { Pathfinder } from './pathfind';
 import { Monitor } from '../monitor';
 import { LogicEntranceError, LogicError } from './error';
@@ -14,50 +14,6 @@ import { mapValues } from 'lodash';
 import { optimizeExpr } from './expr-optimizer';
 
 type Entrance = keyof typeof ENTRANCES;
-
-const BOSS_INDEX_BY_DUNGEON = {
-  DT: 0,
-  DC: 1,
-  JJ: 2,
-  Forest: 3,
-  Fire: 4,
-  Water: 5,
-  Shadow: 6,
-  Spirit: 7,
-  WF: 8,
-  SH: 9,
-  GB: 10,
-  IST: 11,
-} as {[k: string]: number};
-
-const DUNGEON_INDEX = {
-  DT: 0,
-  DC: 1,
-  JJ: 2,
-  Forest: 3,
-  Fire: 4,
-  Water: 5,
-  Shadow: 6,
-  Spirit: 7,
-  WF: 8,
-  SH: 9,
-  GB: 10,
-  IST: 11,
-  ST: 12,
-  SSH: 13,
-  OSH: 14,
-  BotW: 15,
-  IC: 16,
-  GTG: 17,
-  BtW: 18,
-  ACoI: 19,
-  SS: 20,
-  BtWE: 21,
-  PF: 22,
-  Ganon: 23,
-  Tower: 24,
-  Moon: 25,
-} as {[k: string]: number};;
 
 type PlaceOpts = {
   ownGame?: boolean;
@@ -385,9 +341,16 @@ class WorldShuffler {
   private poolDungeons() {
     const pool: string[] = [];
 
-    if (this.settings.erMajorDungeons) {
-      pool.push('dungeon');
-    }
+    if (this.settings.erMajorDungeons) pool.push('dungeon');
+    if (this.settings.erMinorDungeons) pool.push('dungeon-minor');
+    if (this.settings.erGanonCastle) pool.push('dungeon-ganon');
+    if (this.settings.erGanonTower) pool.push('dungeon-ganon-tower');
+    if (this.settings.erSpiderHouses) pool.push('dungeon-sh');
+    if (this.settings.erPirateFortress) pool.push('dungeon-pf');
+    if (this.settings.erBeneathWell) pool.push('dungeon-btw');
+    if (this.settings.erIkanaCastle) pool.push('dungeon-acoi');
+    if (this.settings.erSecretShrine) pool.push('dungeon-ss');
+    if (this.settings.erMoon) pool.push('dungeon-ctr');
 
     return { pool, opts: { ownGame: this.settings.erDungeons === 'ownGame' } };
   }
@@ -669,6 +632,11 @@ class WorldShuffler {
     if (this.settings.erMixed !== 'none') {
       pools.MIXED = { pool: [], opts: { ownGame: this.settings.erMixed === 'ownGame' } };
 
+      if (this.settings.erMixedDungeons) {
+        pools.MIXED.pool = [...pools.MIXED.pool, ...pools.DUNGEONS.pool];
+        delete pools.DUNGEONS;
+      }
+
       if (this.settings.erMixedGrottos) {
         pools.MIXED.pool = [...pools.MIXED.pool, ...pools.GROTTOS.pool];
         delete pools.GROTTOS;
@@ -827,9 +795,6 @@ export class LogicPassEntrances {
       const destEntranceId = dungeonEntrances.get(dungeon)!;
 
       this.place(worldId, sourceEntranceId, destEntranceId);
-
-      /* Store the dungeon */
-      world.dungeonIds[DUNGEON_INDEX[dungeon]] = DUNGEON_INDEX[loc];
     }
   }
 
