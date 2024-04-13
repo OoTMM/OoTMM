@@ -64,6 +64,7 @@ type PlaceOpts = {
 };
 
 type EntrancePools = {[k: string]: { pool: string[], opts: PlaceOpts }};
+type PoolEntrances = {[k: string]: { src: Set<Entrance>; dst: Set<Entrance>; }};
 
 type EntranceOverrides = {[k in Entrance]?: Entrance | null};
 
@@ -223,8 +224,64 @@ class WorldShuffler {
     return entrs;
   }
 
+  private placePoolsRecursive(pools: EntrancePools, entrances: PoolEntrances, overrides: EntranceOverrides, assumed: Set<Entrance>): EntranceOverrides | null {
+    if (Object.keys(entrances).length === 0) {
+      return overrides;
+    }
+
+    /* Select a pool */
+    const poolName = sample(this.random, Object.keys(entrances));
+    const pool = entrances[poolName];
+
+    /* Select a source */
+    const src = sample(this.random, [...pool.src]);
+
+    /* Build the candidates list */
+    let dstCandidates = new Set(pool.dst);
+    if (pools[poolName].opts?.ownGame) {
+      dstCandidates = new Set([...dstCandidates].filter(x => ENTRANCES[x].game === ENTRANCES[src].game));
+    }
+
+    /* Try to find a match */
+    while (dstCandidates.size > 0) {
+      const dst = sample(this.random, [...dstCandidates]);
+      dstCandidates.delete(dst);
+      const revSrc = this.reverseEntrance(src);
+      const revDst = this.reverseEntrance(dst);
+      const newOverrides = { ...overrides };
+      const newAssumed = new Set(assumed);
+      newOverrides[src] = dst;
+      newAssumed.delete(dst);
+      if (revSrc && revDst) {
+        newOverrides[revDst] = revSrc;
+        newAssumed.delete(revSrc);
+      }
+      if (!this.isValidShuffle(newOverrides, newAssumed)) {
+        //console.log(`Invalid shuffle: ${src} -> ${dst}`);
+        continue;
+      }
+      //console.log(`Valid shuffle: ${src} -> ${dst}`);
+
+      /* The match is valid */
+      const newEntrances = { ...entrances };
+      newEntrances[poolName] = { src: new Set(pool.src), dst: new Set(pool.dst) };
+      newEntrances[poolName].src.delete(src);
+      newEntrances[poolName].dst.delete(dst);
+      const finalOverrides = this.placePoolsRecursive(pools, newEntrances, newOverrides, newAssumed);
+      if (finalOverrides) {
+        return finalOverrides;
+      }
+    }
+
+    const backTrackLevel = Object.values(overrides).filter(x => x).length;
+    console.log(overrides);
+    console.log(`No match for ${src}, backtracking to level ${backTrackLevel}`);
+    return null;
+  }
+
   private placePools(pools: EntrancePools) {
-    const poolEntrances: {[k: string]: { src: Entrance[]; dst: Set<Entrance>; }} = {};
+    const overrides = { ...this.overrides };
+    const poolEntrances: PoolEntrances = {};
 
     /* Get entrances */
     const poolNames = new Set(Object.keys(pools));
@@ -239,7 +296,7 @@ class WorldShuffler {
       const entrances = (Object.keys(ENTRANCES) as Entrance[]).filter(x => types.includes(ENTRANCES[x].type)).flatMap(x => this.entrances(x));
       const entrancesReverse = entrances.map(x => this.reverseEntrance(x)).filter(x => x) as Entrance[];
 
-      const src = shuffle(this.random, [...entrances]);
+      const src = new Set([...entrances]);
       const dst = new Set([...entrances]);
       poolEntrances[name] = { src, dst };
 
@@ -252,63 +309,23 @@ class WorldShuffler {
       }
     }
 
+    /* Force null for the assumed entrances */
+    for (const e of entrancesAssumed) {
+      overrides[e] = null;
+    }
+
     /* Remove any empty pools */
     for (const name of poolNames) {
-      if (poolEntrances[name].src.length === 0) {
+      if (poolEntrances[name].src.size === 0) {
         delete poolEntrances[name];
       }
     }
 
-    /* Shuffle */
-    while (Object.keys(poolEntrances).length > 0) {
-      /* Select a pool */
-      const poolName = sample(this.random, Object.keys(poolEntrances));
-      const pool = poolEntrances[poolName];
-
-      /* Select an entrance */
-      const src = pool.src.pop()!;
-
-      /* Select candidates */
-      let dstCandidates = pool.dst;
-      if (pools[poolName].opts?.ownGame) {
-        dstCandidates = new Set([...dstCandidates].filter(x => ENTRANCES[x].game === ENTRANCES[src].game));
-      }
-
-      let dst: Entrance;
-      for (;;) {
-        if (dstCandidates.size === 0) {
-          throw new LogicEntranceError(`No destination for ${src}`);
-        }
-        dst = sample(this.random, [...dstCandidates]);
-        dstCandidates.delete(dst);
-        const overrides = { ...this.overrides };
-        const assumed = new Set(entrancesAssumed);
-        overrides[src] = dst;
-        assumed.delete(dst);
-        const revSrc = this.reverseEntrance(src);
-        const revDst = this.reverseEntrance(dst);
-        if (revSrc && revDst) {
-          overrides[revDst] = revSrc;
-          assumed.delete(revSrc);
-        }
-
-        /* If the shuffle is valid, make it permanent */
-        if (this.isValidShuffle(overrides, assumed)) {
-          console.log(`VALID: ${src} -> ${dst}`);
-          this.overrides = overrides;
-          entrancesAssumed = assumed;
-          pool.dst.delete(dst);
-
-          /* Remove the pool if empty */
-          if (pool.src.length === 0) {
-            delete poolEntrances[poolName];
-          }
-          break;
-        } else {
-          console.log(`INVALID: ${src} -> ${dst}`);
-        }
-      }
+    const finalOverrides = this.placePoolsRecursive(pools, poolEntrances, overrides, entrancesAssumed);
+    if (!finalOverrides) {
+      throw new LogicEntranceError('Unable to place pools');
     }
+    this.overrides = finalOverrides;
   }
 
   private shuffledPools(def?: string[]) {
@@ -362,6 +379,16 @@ class WorldShuffler {
       entrancesSrc.delete(src);
       entrancesDst.delete(dst);
     }
+  }
+
+  private poolDungeons() {
+    const pool: string[] = [];
+
+    if (this.settings.erMajorDungeons) {
+      pool.push('dungeon');
+    }
+
+    return { pool, opts: { ownGame: this.settings.erDungeons === 'ownGame' } };
   }
 
   private poolRegions() {
@@ -435,6 +462,10 @@ class WorldShuffler {
 
     if (this.settings.erWallmasters !== 'none') {
       this.placeWallmasters();
+    }
+
+    if (this.settings.erDungeons !== 'none') {
+      pools.DUNGEONS = this.poolDungeons();
     }
 
     if (this.settings.erGrottos !== 'none') {
