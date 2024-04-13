@@ -71,6 +71,7 @@ type EntranceOverrides = {[k in Entrance]?: Entrance | null};
 class WorldShuffler {
   private world: World;
   private overrides: EntranceOverrides;
+  private backtrackCount: number;
 
   constructor(
     private random: Random,
@@ -79,6 +80,7 @@ class WorldShuffler {
     private settings: Settings,
     private startingItems: PlayerItems,
   ) {
+    this.backtrackCount = 0;
     this.world = worlds[worldId];
     this.overrides = {};
   }
@@ -257,29 +259,32 @@ class WorldShuffler {
         newAssumed.delete(revSrc);
       }
       if (!this.isValidShuffle(newOverrides, newAssumed)) {
-        //console.log(`Invalid shuffle: ${src} -> ${dst}`);
         continue;
       }
-      //console.log(`Valid shuffle: ${src} -> ${dst}`);
 
       /* The match is valid */
       const newEntrances = { ...entrances };
       newEntrances[poolName] = { src: new Set(pool.src), dst: new Set(pool.dst) };
       newEntrances[poolName].src.delete(src);
       newEntrances[poolName].dst.delete(dst);
+      if (newEntrances[poolName].src.size === 0) {
+        delete newEntrances[poolName];
+      }
       const finalOverrides = this.placePoolsRecursive(pools, newEntrances, newOverrides, newAssumed);
       if (finalOverrides) {
         return finalOverrides;
       }
     }
 
-    const backTrackLevel = Object.values(overrides).filter(x => x).length;
-    console.log(overrides);
-    console.log(`No match for ${src}, backtracking to level ${backTrackLevel}`);
+    this.backtrackCount++;
+    if (this.backtrackCount > 100) {
+      throw new LogicEntranceError('Too many backtracks');
+    }
     return null;
   }
 
   private placePools(pools: EntrancePools) {
+    this.backtrackCount = 0;
     const overrides = { ...this.overrides };
     const poolEntrances: PoolEntrances = {};
 
@@ -295,23 +300,19 @@ class WorldShuffler {
       }
       const entrances = (Object.keys(ENTRANCES) as Entrance[]).filter(x => types.includes(ENTRANCES[x].type)).flatMap(x => this.entrances(x));
       const entrancesReverse = entrances.map(x => this.reverseEntrance(x)).filter(x => x) as Entrance[];
+      const entrancesAll = [...entrances, ...entrancesReverse];
 
       const src = new Set([...entrances]);
       const dst = new Set([...entrances]);
       poolEntrances[name] = { src, dst };
 
-      for (const e of entrances) {
-        entrancesAssumed.add(e);
+      for (const name of entrancesAll) {
+        overrides[name] = null;
+        const e = ENTRANCES[name];
+        if (!(['dungeon-exit', 'grotto-exit', 'grave-exit'].includes(e.type)) || name === 'OOT_DESERT_COLOSSUS_FROM_TEMPLE_SPIRIT' || this.settings.erDecoupled) {
+          entrancesAssumed.add(name);
+        }
       }
-
-      for (const e of entrancesReverse) {
-        entrancesAssumed.add(e);
-      }
-    }
-
-    /* Force null for the assumed entrances */
-    for (const e of entrancesAssumed) {
-      overrides[e] = null;
     }
 
     /* Remove any empty pools */
