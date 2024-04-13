@@ -1,7 +1,7 @@
 import { sortBy } from 'lodash';
 
 import { Options } from '../options';
-import { Glitch, GLITCHES, SETTINGS, Settings, Trick, TRICKS } from '../settings';
+import { Glitch, GLITCHES, SETTINGS, Settings, TrickKey, TRICKS } from '../settings';
 import { HintGossipFoolish, HintGossipPath, HintGossipItemExact, HintGossipItemRegion, Hints, HINTS_PATHS } from './hints';
 import { World, WORLD_FLAGS } from './world';
 import { itemName } from '../names';
@@ -116,7 +116,7 @@ export class LogicPassSpoiler {
     }
     this.indent('Tricks');
     for (const trick of tricks) {
-      this.write(`${TRICKS[trick as Trick]}`);
+      this.write(`${TRICKS[trick as TrickKey]}`);
     }
     this.unindent('');
   }

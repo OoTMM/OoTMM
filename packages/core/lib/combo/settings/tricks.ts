@@ -11,10 +11,14 @@ export type Trick = {
 
 /** Typing for the whole object of tricks */
 export type Tricks = {
-  [key: string]: { value: Trick };
+  [key: string]: Trick;
 };
 
-export const TRICKS = {
+/** Typing for each key of the TRICKS object */
+export type TrickKey = keyof typeof TRICKS;
+
+/** Object containing all of the Tricks in the Randomizer */
+export const TRICKS: Tricks = {
   OOT_LENS: {
     name: 'Fewer Lens Requirements (OoT)',
     tooltip: 'Doing things that would normally require Lens will no longer will, except for Treasure Chest Game and Haunted Wasteland.',
@@ -781,4 +785,4 @@ export const TRICKS = {
   },
 };
 
-export const DEFAULT_TRICKS: Trick[] = ['OOT_NIGHT_GS'];
+export const DEFAULT_TRICKS: TrickKey[] = ['OOT_NIGHT_GS'];
