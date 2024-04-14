@@ -15,7 +15,7 @@ export { default as RAW_HINTS_DATA } from '../dist/data-hints-raw.json';
 export type EntranceData = {
   game: 'oot' | 'mm';
   id: number;
-  type: 'none' | 'boss' | 'dungeon' | 'dungeon-exit' | 'region' | 'region-extra' | 'overworld' | 'one-way-statue' | 'wallmaster';
+  type: 'none' | 'boss' | 'dungeon' | 'dungeon-exit' | 'region' | 'region-extra' | 'overworld' | 'one-way-statue' | 'wallmaster' | 'spawn';
   from: string;
   to: string;
   flags: string[];

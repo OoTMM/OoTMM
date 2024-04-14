@@ -1,3 +1,5 @@
+OOT_SPAWN_CHILD:                                { game: oot, id: 0x0bb, type: spawn, areas: ['OOT SPAWN CHILD', "OOT Link's House"], debug: ['COMMON', "Link's House"] }
+OOT_SPAWN_ADULT:                                { game: oot, id: 0xf20, type: spawn, areas: ['OOT SPAWN ADULT', 'OOT Temple of Time'] }
 OOT_BOSS_DEKU_TREE:                             { game: oot, id: 0x40f, type: boss, areas: ["OOT Deku Tree Before Boss", "OOT Deku Tree Boss"], debug: ['BOSS', 'Gohma'] }
 OOT_BOSS_DODONGO_CAVERN:                        { game: oot, id: 0x40b, type: boss, areas: ["OOT Dodongo Cavern Skull", "OOT Dodongo Cavern Boss"], debug: ['BOSS', 'King Dodongo'] }
 OOT_BOSS_JABU_JABU:                             { game: oot, id: 0x301, type: boss, areas: ["OOT Jabu-Jabu Pre-Boss", "OOT Jabu-Jabu Boss"], debug: ['BOSS', 'Barinade'] }
@@ -61,7 +63,6 @@ OOT_LOST_WOODS_FROM_LOST_WOODS_SOUTH:           { game: oot, id: 0x1b1, type: on
 OOT_LOST_WOODS_FROM_LOST_WOODS_WEST:            { game: oot, id: 0x4c6, type: one-way-woods, areas: ["OOT Lost Woods Lost West", "OOT Lost Woods"] }
 OOT_LAKE_HYLIA_FROM_ZORA_DOMAIN:                { game: oot, id: 0x560, type: region-shortcut, areas: ["OOT Zora Domain", "OOT Lake Hylia"], reverse: OOT_ZORA_DOMAIN_FROM_LAKE_HYLIA }
 OOT_ZORA_DOMAIN_FROM_LAKE_HYLIA:                { game: oot, id: 0x328, type: overworld, areas: ["OOT Lake Hylia", "OOT Zora Domain"], reverse: OOT_LAKE_HYLIA_FROM_ZORA_DOMAIN }
-OOT_HOUSE_LINK_WARP:                            { game: oot, id: 0x0bb, type: none, debug: ['COMMON', "Link's House"] }
 OOT_KOKIRI_FOREST_FROM_MIDO:                    { game: oot, id: 0x443, type: indoors-exit, areas: ["OOT Mido's House", "OOT Kokiri Forest"], reverse: OOT_HOUSE_MIDO }
 OOT_KOKIRI_FOREST_FROM_SARIA:                   { game: oot, id: 0x447, type: indoors-exit, areas: ["OOT Saria's House", "OOT Kokiri Forest"], reverse: OOT_HOUSE_SARIA }
 OOT_KOKIRI_FOREST_FROM_TWINS:                   { game: oot, id: 0x33c, type: indoors-exit, areas: ["OOT House of Twins", "OOT Kokiri Forest"], reverse: OOT_HOUSE_TWINS }

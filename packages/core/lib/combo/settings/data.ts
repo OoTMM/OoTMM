@@ -1898,6 +1898,13 @@ export const SETTINGS = [{
   description: 'Enables the ability for Wallmasters to take you to random locations within their own game or across both games, based on other entrance settings',
   default: 'none'
 }, {
+  key: 'erSpawns',
+  name: 'Spawn Shuffle',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'Shuffle the starting positions of the player.',
+  default: false
+}, {
   key: 'erMajorDungeons',
   name: 'Shuffle Major Dungeons with Dungeons',
   category: 'entrances',

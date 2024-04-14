@@ -330,6 +330,30 @@ class WorldShuffler {
     }
   }
 
+  private placeSpawns() {
+    /* Compute types */
+    const types = new Set(this.poolsTypes());
+    types.delete('boss');
+    types.add('spawn');
+    types.add('indoors');
+
+    /* Compute entrances */
+    let entrances = [...types].map(x => (Object.keys(ENTRANCES) as Entrance[]).filter(y => ENTRANCES[y].type === x)).flat();
+    entrances = entrances.flatMap(x => this.entrances(x)).filter(x => ENTRANCES[x].game === 'oot');
+
+    const entrancesSrc = new Set((Object.keys(ENTRANCES) as Entrance[]).filter(x => ENTRANCES[x].type === 'spawn'));
+    const entrancesDst = new Set(entrances);
+
+    while (entrancesSrc.size > 0) {
+      const src = sample(this.random, [...entrancesSrc]);
+      let dstCandidates = [...entrancesDst];
+      const dst = sample(this.random, dstCandidates);
+      this.overrides[src] = dst;
+      entrancesSrc.delete(src);
+      entrancesDst.delete(dst);
+    }
+  }
+
   private poolDungeons() {
     const pool: string[] = [];
 
@@ -597,13 +621,8 @@ class WorldShuffler {
     return world;
   }
 
-  run(): World {
-    this.overrides = {};
+  private makePools(): EntrancePools {
     const pools: EntrancePools = {};
-
-    if (this.settings.erWallmasters !== 'none') {
-      this.placeWallmasters();
-    }
 
     if (this.settings.erDungeons !== 'none') {
       pools.DUNGEONS = this.poolDungeons();
@@ -653,7 +672,28 @@ class WorldShuffler {
       pools.ONE_WAYS = this.poolOneWays();
     }
 
-    this.placePools(pools);
+    return pools;
+  }
+
+  private poolsTypes(): string[] {
+    const pools = this.makePools();
+    const poolValues = Object.values(pools);
+    const types = poolValues.map(x => x.pool).flat();
+    return [...new Set(types)];
+  }
+
+  run(): World {
+    this.overrides = {};
+
+    if (this.settings.erWallmasters !== 'none') {
+      this.placeWallmasters();
+    }
+
+    if (this.settings.erSpawns) {
+      this.placeSpawns();
+    }
+
+    this.placePools(this.makePools());
 
     let world = this.changedWorld(this.overrides);
     if (this.settings.erBoss !== 'none') {

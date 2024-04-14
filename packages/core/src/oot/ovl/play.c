@@ -551,6 +551,41 @@ static void preInitTitleScreen(void)
     }
 }
 
+static void playAdjustEntrance(GameState_Play* play)
+{
+    /* Handle custom entrance IDs */
+    switch (gSave.entrance)
+    {
+    case ENTR_OOT_SPAWN_ADULT:
+        gSave.entrance = ENTR_OOT_WARP_SONG_TEMPLE;
+        break;
+    case ENTR_OOT_OUTSIDE_GANON_FROM_FAIRY:
+        gSave.entrance = ENTR_OOT_HYRULE_CASTLE_FROM_FAIRY;
+        break;
+    case ENTR_OOT_LOST_WOODS_FROM_LOST_WOODS_NORTH:
+        gSave.entrance = ENTR_OOT_LOST_WOODS_FROM_KOKIRI_FOREST;
+        break;
+    case ENTR_OOT_CASTLE_STEALTH:
+        if (GetEventChk(EV_OOT_CHK_ZELDA_LETTER))
+            gSave.entrance = ENTR_OOT_CASTLE_CAUGHT;
+        else
+            gSave.entrance = ENTR_OOT_CASTLE_COURTYARD;
+        break;
+    case ENTR_OOT_CASTLE_STEALTH_FROM_COURTYARD:
+        gSave.entrance = ENTR_OOT_CASTLE_FROM_STEALTH;
+        break;
+    case ENTR_OOT_SAGES_CHAMBER_END:
+        endGame();
+        break;
+    case ENTR_OOT_BOSS_GANON2:
+        if (!comboHasSoulOot(GI_OOT_SOUL_NPC_ZELDA))
+            gSave.entrance = ENTR_OOT_GANON_TOWER;
+        break;
+    }
+
+    applyCustomEntrance(&gSave.entrance);
+}
+
 void hookPlay_Init(GameState_Play* play)
 {
     /* Pre-init */
@@ -568,37 +603,8 @@ void hookPlay_Init(GameState_Play* play)
     /* Register play */
     gPlay = play;
 
-    /* Handle custom entrance IDs */
-    switch (gSave.entrance)
-    {
-    case ENTR_OOT_OUTSIDE_GANON_FROM_FAIRY:
-        gSave.entrance = ENTR_OOT_HYRULE_CASTLE_FROM_FAIRY;
-        break;
-    case ENTR_OOT_LOST_WOODS_FROM_LOST_WOODS_NORTH:
-        gSave.entrance = ENTR_OOT_LOST_WOODS_FROM_KOKIRI_FOREST;
-        break;
-    }
-
-    if (gSave.entrance == ENTR_OOT_CASTLE_STEALTH)
-    {
-        /* Entering courtyard */
-        if (GetEventChk(EV_OOT_CHK_ZELDA_LETTER))
-            gSave.entrance = ENTR_OOT_CASTLE_CAUGHT;
-        else
-            gSave.entrance = ENTR_OOT_CASTLE_COURTYARD;
-    }
-    else if (gSave.entrance == ENTR_OOT_CASTLE_STEALTH_FROM_COURTYARD)
-    {
-        gSave.entrance = ENTR_OOT_CASTLE_FROM_STEALTH;
-    }
-    else if (gSave.entrance == ENTR_OOT_SAGES_CHAMBER_END)
-    {
-        endGame();
-    }
-    else if (gSave.entrance == ENTR_OOT_BOSS_GANON2 && !comboHasSoulOot(GI_OOT_SOUL_NPC_ZELDA))
-    {
-        gSave.entrance = ENTR_OOT_GANON_TOWER;
-    }
+    /* Adjust entrance */
+    playAdjustEntrance(play);
 
     comboCacheClear();
     comboObjectsReset();

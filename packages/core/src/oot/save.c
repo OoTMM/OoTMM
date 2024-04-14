@@ -29,7 +29,7 @@ static const u16 kBossEntrances[] = {
     ENTR_OOT_BOSS_TEMPLE_SPIRIT,
 };
 
-static void dungeonRespawn(s16 sceneId, int isSave)
+static int dungeonRespawn(s16 sceneId, int isSave)
 {
     int bossId;
     int dungeonId;
@@ -61,23 +61,42 @@ static void dungeonRespawn(s16 sceneId, int isSave)
         bossId = BOSSID_TWINROVA;
         break;
     default:
-        return;
+        return 0;
     }
 
     dungeonId = gComboData.boss[bossId];
     if (dungeonId >= DUNGEONID_TEMPLE_WOODFALL)
     {
         if (isSave)
-        {
-            gSave.entrance = (gSave.age == AGE_ADULT) ? ENTR_OOT_WARP_SONG_TEMPLE : ENTR_OOT_HOUSE_LINK_WARP;
-        }
-        else
-        {
-            gSave.entrance = kBossEntrances[bossId];
-        }
+            return 0;
+        gSave.entrance = kBossEntrances[bossId];
     }
     else
         gSave.entrance = kDungeonEntrances[dungeonId];
+    return 1;
+}
+
+static void fixSpawn(void)
+{
+    u32 entrance;
+    s32 override;
+
+    /* If the player saved in a dungeon, don't touch it */
+    if (dungeonRespawn(gSave.sceneId, 1))
+        return;
+
+    /* If the player saved in link's house, and it's not ER, honor that */
+    if (gSave.sceneId == SCE_OOT_LINK_HOUSE && !comboConfig(CFG_ER_ANY))
+    {
+        gSave.entrance = ENTR_OOT_SPAWN_CHILD;
+        return;
+    }
+
+    entrance = gSave.age == AGE_CHILD ? ENTR_OOT_SPAWN_CHILD : ENTR_OOT_SPAWN_ADULT;
+    override = comboEntranceOverride(entrance);
+    if (override != -1)
+        entrance = (u32)override;
+    gSave.entrance = entrance;
 }
 
 void Sram_AfterOpenSave(void)
@@ -97,9 +116,7 @@ void Sram_AfterOpenSave(void)
         SetEventChk(EV_OOT_CHK_DEKU_MIDO_SWORD_SHIELD);
 
     comboOnSaveLoad();
-
-    /* Dungeon shuffle override */
-    dungeonRespawn(gSave.sceneId, 1);
+    fixSpawn();
 }
 
 void Sram_CopySaveWrapper(void* fileSelect, void* sramCtx)
