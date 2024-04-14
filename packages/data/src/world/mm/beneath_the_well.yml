@@ -21,7 +21,9 @@
 "Beneath The Well North Section":
   dungeon: BtW
   events:
-    WELL_HOT_WATER: "has_fish && (has_explosives || has_mask_zora || trick_keg_explosives || trick(MM_WELL_HSW))"
+    WELL_HOT_WATER_SPRING: "is_spring && (has_fish && (has_explosives || has_mask_zora || trick_keg_explosives || trick(MM_WELL_HSW)))"
+    WELL_HOT_WATER_WINTER: "is_winter && (has_fish && (has_explosives || has_mask_zora || trick_keg_explosives || trick(MM_WELL_HSW)))"
+    WELL_HOT_WATER: "is_spring_or_winter && (has_fish && (has_explosives || has_mask_zora || trick_keg_explosives || trick(MM_WELL_HSW)))"
     WATER: "true"
     FISH: "true"
     BUGS: "has_water && has_fire_sticks"

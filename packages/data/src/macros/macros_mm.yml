@@ -209,7 +209,7 @@
 
 # Hot water
 "has_hot_water_mtn": "has_bottle && (event(HOT_WATER_NORTH) || (is_spring && event(HOT_WATER_NORTH_SPRING)) || (is_winter && event(HOT_WATER_NORTH_WINTER)))"
-"has_hot_water_well": "has_bottle && event(WELL_HOT_WATER)"
+"has_hot_water_well": "has_bottle && (event(WELL_HOT_WATER) || (is_spring && event(WELL_HOT_WATER_SPRING)) || (is_winter && event(WELL_HOT_WATER_WINTER)))"
 "has_hot_water_distance": "(can_play_soaring || can_use_farore) && (has_hot_water_mtn || has_hot_water_well)"
 "has_hot_water_er": "er_enabled && (has_hot_water_mtn || has_hot_water_well)"
 "has_hot_water_farore": "can_use_farore && (has_hot_water_mtn || has_hot_water_well)"

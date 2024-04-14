@@ -1313,13 +1313,13 @@
     "Swamp Front": "true"
     "Swamp Back": "event(BOAT_RIDE)"
   events:
-     BOAT_RIDE: "event(PICTURE_SWAMP) || event(KOUME)"
+     BOAT_RIDE: "(event(PICTURE_SWAMP) || event(KOUME)) && is_swamp_poisoned"
   locations:
-    "Tourist Information Pictobox": "event(KOUME)"
+    "Tourist Information Pictobox": "event(KOUME) && is_swamp_poisoned"
     "Tourist Information Boat Archery": "event(KOUME) && is_swamp_cleared && has_bow"
-    "Tourist Information Tingle Picture": "event(PICTURE_TINGLE) || event(PICTURE_DEKU_KING)"
-#    "Tourist Information Big Octo Picture": "event(PICTURE_BIG_OCTO)"
-#    "Tourist Information Consolation Prize": "event(PICTURE_SWAMP)"
+    "Tourist Information Tingle Picture": "(event(PICTURE_TINGLE) || event(PICTURE_DEKU_KING)) && is_swamp_poisoned"
+#    "Tourist Information Big Octo Picture": "event(PICTURE_BIG_OCTO) && is_swamp_poisoned"
+#    "Tourist Information Consolation Prize": "event(PICTURE_SWAMP) && is_swamp_poisoned"
 "Woods of Mystery":
   region: SOUTHERN_SWAMP
   exits:
@@ -1455,7 +1455,7 @@
     "Deku Palace Cage": "event(RETURN_PRINCESS) && short_hook_anywhere"
   events:
     PICTURE_DEKU_KING: "has(PICTOGRAPH_BOX) && has(MASK_DEKU)"
-    RETURN_PRINCESS: "has_deku_princess && has(MASK_DEKU)"
+    RETURN_PRINCESS: "is_swamp_cleared && has_deku_princess && has(MASK_DEKU)"
 "Deku Palace Near Cage":
   region: DEKU_PALACE
   exits:
@@ -1468,7 +1468,7 @@
     "Deku Palace Near Cage": "true"
     "Deku Palace Throne": "short_hook_anywhere && trick(MM_ESCAPE_CAGE) && has(MASK_DEKU)"
   locations:
-    "Deku Palace Sonata of Awakening": "has(MASK_DEKU) && has_ocarina"
+    "Deku Palace Sonata of Awakening": "is_swamp_poisoned && has(MASK_DEKU) && has_ocarina"
 "Deku Palace Grotto":
   region: ENTRANCE
   exits:
@@ -1648,7 +1648,7 @@
   exits:
     "Mountain Village Path Upper": "true"
     "Twin Islands": "true"
-    "Near Goron Graveyard": "can_use_lens_strict || trick(MM_DARMANI_WALL) || event(GORON_GRAVE_FARORE) || (is_spring && (has_mask_goron || has_mask_zora || short_hook_anywhere))"
+    "Near Goron Graveyard": "(is_winter && (can_use_lens_strict || trick(MM_DARMANI_WALL))) || event(GORON_GRAVE_FARORE) || (is_spring && (has_mask_goron || has_mask_zora || can_hookshot || short_hook_anywhere))"
     "Path to Snowhead Front": "true"
     "Blacksmith": "true"
     "Near Village Grotto": "is_spring && (has_mask_goron || short_hook_anywhere)"
@@ -1769,7 +1769,7 @@
   locations:
     "Twin Islands Underwater Chest 1": "is_spring && underwater_walking"
     "Twin Islands Underwater Chest 2": "is_spring && underwater_walking"
-    "Goron Elder": "is_winter && (first_day || second_day) && has_mask_goron && cond(!setting(erBoss, none), can_use_fire_short_range || (setting(bossWarpPads, bossBeaten) && has_hot_water_er), can_use_fire_short_range || has_hot_water_mtn || has_hot_water_er || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE)))"
+    "Goron Elder": "is_winter && (first_day || second_day) && has_mask_goron && (can_use_fire_short_range || has_hot_water_er || has_hot_water_mtn || has_hot_water_farore || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE)))"
     "Twin Islands Grass 01": "is_spring"
     "Twin Islands Grass 02": "is_spring"
     "Twin Islands Grass 03": "is_spring"
@@ -1866,7 +1866,7 @@
 "Front of Lone Peak Shrine":
   region: GORON_VILLAGE
   exits:
-    "Goron Village": "is_winter && can_use_lens"
+    "Goron Village": "(is_winter && can_use_lens)" # || is_spring // for when the cave is shuffled and the spawn changed
     "Lone Peak Shrine": "true"
 "Lone Peak Shrine":
   region: ENTRANCE
@@ -2575,7 +2575,7 @@
   exits:
     "Zora Hall": "true"
   locations:
-    "Zora Hall Evan HP": "can_play_evan && (can_enter_zora_door_before_gb_clear || (trick(MM_EVAN_FARORE) && can_use_farore))" #Evan is not here in GB clear state, so we need to guarantee room-entry-before-clear to ensure check is accessible.
+    "Zora Hall Evan HP": "can_play_evan && (is_ocean_cursed || (trick(MM_EVAN_FARORE) && can_use_farore))"
 "Lulu's Room":
   region: ENTRANCE
   exits:
@@ -2933,7 +2933,7 @@
   exits:
     "Ikana Canyon": "true"
   locations:
-    "Ghost Hut HP": "(has_arrows || can_hookshot_short || can_use_deku_bubble) && can_use_wallet(1)"
+    "Ghost Hut HP": "(has_arrows || can_hookshot_short || can_use_deku_bubble) && can_use_wallet(1) && is_valley_cursed"
 "Ikana Castle Entrance":
   region: IKANA_CASTLE
   exits:
