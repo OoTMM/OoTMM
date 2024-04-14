@@ -115,7 +115,6 @@ static void comboTextMap(char** b, GameState_Play* play, s16 gi)
     /* Display the entrance */
     if (dungeonId == DUNGEONID_TEMPLE_STONE_TOWER || dungeonId == DUNGEONID_TEMPLE_STONE_TOWER_INVERTED)
     {
-        /* DEBUG */
         comboTextAppendStr(b, TEXT_NL "The entrances are ");
         appendDungeonEntrance(b, DUNGEONID_TEMPLE_STONE_TOWER);
         comboTextAppendStr(b, " and ");

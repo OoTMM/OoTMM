@@ -271,6 +271,9 @@ void comboCreateSave(void* unk, void* buffer)
     /* Create MM save */
     comboCreateSaveMM();
 
+    /* Move epona in a dummy scene */
+    gSave.horseData.sceneId = -1;
+
     /* Apply some early settings */
     if (!comboConfig(CFG_CHILD_WALLET))
     {
