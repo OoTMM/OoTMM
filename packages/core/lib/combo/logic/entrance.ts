@@ -336,13 +336,16 @@ class WorldShuffler {
     types.delete('boss');
     types.add('spawn');
     types.add('indoors');
+    types.add('one-way-song');
+    types.add('region');
 
     /* Compute entrances */
-    let entrances = [...types].map(x => (Object.keys(ENTRANCES) as Entrance[]).filter(y => ENTRANCES[y].type === x)).flat();
-    entrances = entrances.flatMap(x => this.entrances(x)).filter(x => ENTRANCES[x].game === 'oot');
+    const entrances = [...types].map(x => (Object.keys(ENTRANCES) as Entrance[]).filter(y => ENTRANCES[y].type === x)).flat();
+    const reverseEntrances = entrances.map(x => this.reverseEntranceRaw(x)).filter(x => x) as Entrance[];
+    const allEntrancesOot = [...entrances, ...reverseEntrances].filter(x => ENTRANCES[x].game === 'oot');
 
     const entrancesSrc = new Set((Object.keys(ENTRANCES) as Entrance[]).filter(x => ENTRANCES[x].type === 'spawn'));
-    const entrancesDst = new Set(entrances);
+    const entrancesDst = new Set(allEntrancesOot);
 
     while (entrancesSrc.size > 0) {
       const src = sample(this.random, [...entrancesSrc]);
