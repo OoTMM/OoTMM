@@ -22,13 +22,15 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- Saving is now enabled on the Clock Tower with Moon Crash set to New Cycle.
+- Saving is now enabled on the Clock Tower Roof with Moon Crash set to New Cycle.
 - Farore's Wind in MM is now tied to Link's age, like in OoT.
+- Logic for MM's cursed and cleared states has received an overhaul and is now more robust.
 
 ### Fixed
 
 - Fix Goron Ruby looking odd in MM.
 - Ruto's Soul is now accounted in logic for the Big Octo in Jabu-Jabu.
+- Logic for entering Woodfall Temple if exiting the temple itself has been fixed.
 
 ## [21.0] - 2024-03-28
 
