@@ -1870,6 +1870,14 @@ export const SETTINGS = [{
   default: false,
   cond: (x: any) => x.erMixed !== 'none' && x.erMixed === x.erRegions,
 }, {
+  key: 'erMixedOverworld',
+  name: 'Mixed Pools - Overworld',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'If turned on, overworld entrances will be shuffled with other mixed pools.',
+  default: false,
+  cond: (x: any) => x.erMixed !== 'none' && x.erMixed === x.erOverworld,
+}, {
   key: 'erMixedIndoors',
   name: 'Mixed Pools - Interiors',
   category: 'entrances',
@@ -1989,6 +1997,7 @@ export const SETTINGS = [{
   ],
   default: 'none',
   description: '- Every entrance to Hyrule Field except Market<br>- The entrance to Gerudo Fortress from Gerudo Valley<br>- The entrance to Death Mountain from Kakariko<br>- The entrances to the four main regions in MM<br>- The entrance to Romani Ranch',
+  cond: (x: any) => x.erOverworld === 'none',
 }, {
   key: 'erRegionsExtra',
   name: 'Shuffle Market Entrance',
@@ -2005,6 +2014,19 @@ export const SETTINGS = [{
   description: 'Shuffles the various shortcuts between regions.<br>- Lost Woods/Goron City<br>- Lost Woods/Zora\'s River<br>- Zora\'s Domain/Lake Hylia',
   default: false,
   cond: (x: any) => x.erRegions !== 'none'
+}, {
+  key: 'erOverworld',
+  name: 'Shuffle Overworld',
+  category: 'entrances',
+  type: 'enum',
+  values: [
+    { value: 'none', name: 'None' },
+    { value: 'ownGame', name: 'Own Game' },
+    { value: 'full', name: 'Full' },
+  ],
+  default: 'none',
+  description: 'Shuffle every overworld entrance.',
+  cond: (x: any) => x.erRegions === 'none',
 }, {
   key: 'erIndoors',
   name: 'Shuffle Interiors',

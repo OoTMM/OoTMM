@@ -20,6 +20,7 @@ export type EntranceData = {
   to: string;
   flags: string[];
   debug?: any;
+  map: string;
 };
 
 export type Entrance = keyof typeof DATA_ENTRANCES;
@@ -37,5 +38,6 @@ export const ENTRANCES = Object.fromEntries(Object.entries(DATA_ENTRANCES).map((
     data.from = 'NONE';
     data.to = 'NONE';
   }
+  //data.map = data.map || 'NONE';
   return [k, data];
 })) as Record<Entrance, EntranceData>;

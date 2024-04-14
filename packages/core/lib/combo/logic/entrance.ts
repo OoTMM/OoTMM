@@ -367,6 +367,11 @@ class WorldShuffler {
     return { pool: Array.from(pool), opts: { ownGame: this.settings.erRegions === 'ownGame' } };
   }
 
+  private poolOverworld() {
+    const pool = ['region', 'region-extra', 'region-shortcut', 'region-exit', 'overworld'];
+    return { pool, opts: { ownGame: this.settings.erOverworld === 'ownGame' } };
+  }
+
   private poolIndoors() {
     const pool = new Set(['indoors']);
     if (!this.settings.erIndoorsMajor) {
@@ -621,6 +626,10 @@ class WorldShuffler {
       pools.REGIONS = this.poolRegions();
     }
 
+    if (this.settings.erOverworld !== 'none') {
+      pools.OVERWORLD = this.poolOverworld();
+    }
+
     if (this.settings.erIndoors !== 'none') {
       pools.INDOORS = this.poolIndoors();
     }
@@ -641,6 +650,11 @@ class WorldShuffler {
       if (this.settings.erMixedRegions) {
         pools.MIXED.pool = [...pools.MIXED.pool, ...pools.REGIONS.pool];
         delete pools.REGIONS;
+      }
+
+      if (this.settings.erMixedOverworld) {
+        pools.MIXED.pool = [...pools.MIXED.pool, ...pools.OVERWORLD.pool];
+        delete pools.OVERWORLD;
       }
 
       if (this.settings.erMixedIndoors) {
