@@ -192,6 +192,13 @@ class WorldShuffler {
       dstCandidates = new Set([...dstCandidates].filter(x => ENTRANCES[x].game === ENTRANCES[src].game));
     }
 
+    /* Filter self-loops */
+    const srcEntrance = ENTRANCES[src];
+    const map = srcEntrance.fromMap;
+    if (map !== 'NONE') {
+      dstCandidates = new Set([...dstCandidates].filter(x => ENTRANCES[x].toMap !== map));
+    }
+
     /* Try to find a match */
     while (dstCandidates.size > 0) {
       const dst = sample(this.random, [...dstCandidates]);
