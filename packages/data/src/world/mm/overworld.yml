@@ -2548,10 +2548,10 @@
     "Zora Hall Entrance": "true"
     "Zora Cape Peninsula": "true"
     "Zora Shop": "true"
-    "Tijo's Room": "can_enter_zora_door_before_gb_clear || is_ocean_cleared"
-    "Japas' Room": "can_enter_zora_door_before_gb_clear || is_ocean_cleared"
-    "Evan's Room": "can_enter_zora_door_before_gb_clear || is_ocean_cleared"
-    "Lulu's Room": "can_enter_zora_door_before_gb_clear || is_ocean_cleared"
+    "Tijo's Room": "can_enter_zora_door"
+    "Japas' Room": "can_enter_zora_door"
+    "Evan's Room": "can_enter_zora_door"
+    "Lulu's Room": "can_enter_zora_door"
   locations:
     "Zora Hall Scene Lights": "can_use_fire_arrows || (trick(MM_STAGE_LIGHTS_DIN) && has_arrows && can_use_din && can_hookshot)"
 "Zora Shop":
