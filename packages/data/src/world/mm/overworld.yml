@@ -1664,7 +1664,7 @@
     FAIRY: "true"
   locations:
     "Mountain Village Waterfall Chest": "is_spring && can_use_lens"
-    "Mountain Village Don Gero Mask": "event(GORON_FOOD)"
+    "Mountain Village Don Gero Mask": "is_winter && event(GORON_FOOD)"
     "Mountain Village Frog Choir HP": "is_spring && event(FROG_1) && event(FROG_2) && event(FROG_3) && event(FROG_4)"
     "Mountain Village Pot": "scarecrow_hookshot || short_hook_anywhere"
     "Mountain Village Grass 1": "is_spring"
@@ -1748,7 +1748,7 @@
   exits:
     "Mountain Village": "true"
   events:
-    BLACKSMITH_ENABLED: "is_spring || can_use_fire_short_range || has_hot_water_mtn || has_hot_water_er || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE))"
+    BLACKSMITH_ENABLED: "is_spring || (is_winter && (can_use_fire_short_range || has_hot_water_mtn || has_hot_water_er || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE))))"
     GOLD_DUST_USED: "can_use_wallet(2) && has(BOTTLED_GOLD_DUST) && event(BLACKSMITH_ENABLED)"
   locations:
     "Blacksmith Razor Blade": "can_use_wallet(2) && event(BLACKSMITH_ENABLED)"
@@ -1769,7 +1769,7 @@
   locations:
     "Twin Islands Underwater Chest 1": "is_spring && underwater_walking"
     "Twin Islands Underwater Chest 2": "is_spring && underwater_walking"
-    "Goron Elder": "has_mask_goron && cond(!setting(erBoss, none), can_use_fire_short_range || (setting(bossWarpPads, bossBeaten) && has_hot_water_er), can_use_fire_short_range || has_hot_water_mtn || has_hot_water_er || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE))) && (first_day || second_day)"
+    "Goron Elder": "is_winter && (first_day || second_day) && has_mask_goron && cond(!setting(erBoss, none), can_use_fire_short_range || (setting(bossWarpPads, bossBeaten) && has_hot_water_er), can_use_fire_short_range || has_hot_water_mtn || has_hot_water_er || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE)))"
     "Twin Islands Grass 01": "is_spring"
     "Twin Islands Grass 02": "is_spring"
     "Twin Islands Grass 03": "is_spring"
@@ -1846,7 +1846,7 @@
   region: GORON_VILLAGE
   exits:
     "Twin Islands": "true"
-    "Front of Lone Peak Shrine": "true"
+    "Front of Lone Peak Shrine": "is_winter"
     "Goron Shrine": "first_day || has_mask_goron"
   events:
     POWDER_KEG_TRIAL: "(is_spring || can_use_fire_short_range) && has_mask_goron"
@@ -1866,7 +1866,7 @@
 "Front of Lone Peak Shrine":
   region: GORON_VILLAGE
   exits:
-    "Goron Village": "can_use_lens"
+    "Goron Village": "is_winter && can_use_lens"
     "Lone Peak Shrine": "true"
 "Lone Peak Shrine":
   region: ENTRANCE
@@ -1936,11 +1936,11 @@
     "Goron Village": "true"
     "Goron Shop": "true"
   events:
-    GORON_FOOD: "goron_fast_roll && (can_use_fire_arrows || can_lullaby_half)"
+    GORON_FOOD: "is_winter && goron_fast_roll && (can_use_fire_arrows || can_lullaby_half)"
     STICKS: "true"
     MAGIC: "true"
   locations:
-    "Goron Baby": "has_mask_goron && can_lullaby_half"
+    "Goron Baby": "is_winter && has_mask_goron && can_lullaby_half"
     "Goron Shrine Pot 01": "true"
     "Goron Shrine Pot 02": "true"
     "Goron Shrine Pot 03": "true"
