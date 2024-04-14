@@ -39,13 +39,13 @@ OOT_ZORA_RIVER_FROM_FIELD:                      { game: oot, id: 0x0ea, type: re
 OOT_KAKARIKO_FROM_FIELD:                        { game: oot, id: 0x0db, type: region, maps: [OOT_HYRULE_FIELD, OOT_KAKARIKO], areas: ["OOT Hyrule Field", "OOT Kakariko"], reverse: OOT_FIELD_FROM_KAKARIKO, debug: ['REGION', 'Kakariko'] }
 OOT_LON_LON_RANCH_FROM_FIELD:                   { game: oot, id: 0x157, type: region, maps: [OOT_HYRULE_FIELD, OOT_LON_LON_RANCH], areas: ["OOT Hyrule Field", "OOT Lon Lon Ranch"], reverse: OOT_FIELD_FROM_LON_LON_RANCH, debug: ['REGION', 'Lon Lon Ranch'] }
 OOT_LAKE_HYLIA_FROM_FIELD:                      { game: oot, id: 0x102, type: region, maps: [OOT_HYRULE_FIELD, OOT_LAKE_HYLIA], areas: ["OOT Hyrule Field", "OOT Lake Hylia"], reverse: OOT_FIELD_FROM_LAKE_HYLIA, debug: ['REGION', 'Lake Hylia'] }
-OOT_GERUDO_FORTRESS_FROM_VALLEY:                { game: oot, id: 0x129, type: region, maps: [OOT_HYRULE_FIELD, OOT_GERUDO_FORTRESS], areas: ["OOT Gerudo Valley After Bridge", "OOT Gerudo Fortress Exterior"], reverse: OOT_VALLEY_FROM_GERUDO_FORTRESS, debug: ['REGION', 'Gerudo Fortress'] }
-OOT_DEATH_MOUNTAIN_FROM_KAKARIKO:               { game: oot, id: 0x13d, type: region, maps: [OOT_HYRULE_FIELD, OOT_DEATH_MOUNTAIN_TRAIL], areas: ["OOT Kakariko Trail Start", "OOT Death Mountain"], reverse: OOT_KAKARIKO_FROM_DEATH_MOUNTAIN, debug: ['REGION', 'Death Mountain Trail'] }
+OOT_GERUDO_FORTRESS_FROM_VALLEY:                { game: oot, id: 0x129, type: region, maps: [OOT_GERUDO_VALLEY, OOT_GERUDO_FORTRESS], areas: ["OOT Gerudo Valley After Bridge", "OOT Gerudo Fortress Exterior"], reverse: OOT_VALLEY_FROM_GERUDO_FORTRESS, debug: ['REGION', 'Gerudo Fortress'] }
+OOT_DEATH_MOUNTAIN_FROM_KAKARIKO:               { game: oot, id: 0x13d, type: region, maps: [OOT_KAKARIKO, OOT_DEATH_MOUNTAIN_TRAIL], areas: ["OOT Kakariko Trail Start", "OOT Death Mountain"], reverse: OOT_KAKARIKO_FROM_DEATH_MOUNTAIN, debug: ['REGION', 'Death Mountain Trail'] }
 OOT_GERUDO_VALLEY_FROM_FIELD:                   { game: oot, id: 0x117, type: region, maps: [OOT_HYRULE_FIELD, OOT_GERUDO_VALLEY], areas: ["OOT Hyrule Field", "OOT Gerudo Valley"], reverse: OOT_FIELD_FROM_GERUDO_VALLEY }
 OOT_MARKET_ENTRANCE_FROM_FIELD:                 { game: oot, id: 0x276, type: region-extra, maps: [OOT_HYRULE_FIELD, OOT_MARKET_ENTRANCE], areas: ["OOT Hyrule Field", "OOT Market Entryway"], reverse: OOT_FIELD_FROM_MARKET_ENTRANCE }
 OOT_ZORA_RIVER_FROM_LOST_WOODS:                 { game: oot, id: 0x1dd, type: region-shortcut, maps: [OOT_LOST_WOODS, OOT_ZORA_RIVER], areas: ["OOT Lost Woods", "OOT Zora River"], reverse: OOT_LOST_WOODS_FROM_ZORA_RIVER }
 OOT_GORON_CITY_FROM_LOST_WOODS:                 { game: oot, id: 0x4e2, type: region-shortcut, maps: [OOT_LOST_WOODS, OOT_GORON_CITY], areas: ["OOT Lost Woods", "OOT Goron City Shortcut"], reverse: OOT_LOST_WOODS_FROM_GORON_CITY }
-OOT_LAKE_HYLIA_FROM_ZORA_DOMAIN:                { game: oot, id: 0x560, type: region-shortcut, maps: [OOT_HYRULE_FIELD, OOT_LAKE_HYLIA], areas: ["OOT Zora Domain", "OOT Lake Hylia"], reverse: OOT_ZORA_DOMAIN_FROM_LAKE_HYLIA }
+OOT_LAKE_HYLIA_FROM_ZORA_DOMAIN:                { game: oot, id: 0x560, type: region-shortcut, maps: [OOT_ZORA_DOMAIN, OOT_LAKE_HYLIA], areas: ["OOT Zora Domain", "OOT Lake Hylia"], reverse: OOT_ZORA_DOMAIN_FROM_LAKE_HYLIA }
 OOT_FIELD_FROM_LOST_WOODS_BRIDGE:               { game: oot, id: 0x185, type: region-exit, maps: [OOT_LOST_WOODS, OOT_HYRULE_FIELD], areas: ["OOT Lost Woods Bridge", "OOT Hyrule Field"], reverse: OOT_LOST_WOODS_BRIDGE_FROM_FIELD }
 OOT_FIELD_FROM_ZORA_RIVER:                      { game: oot, id: 0x181, type: region-exit, maps: [OOT_ZORA_RIVER, OOT_HYRULE_FIELD], areas: ["OOT Zora River Front", "OOT Hyrule Field"], reverse: OOT_ZORA_RIVER_FROM_FIELD }
 OOT_FIELD_FROM_KAKARIKO:                        { game: oot, id: 0x17d, type: region-exit, maps: [OOT_KAKARIKO, OOT_HYRULE_FIELD], areas: ["OOT Kakariko", "OOT Hyrule Field"], reverse: OOT_KAKARIKO_FROM_FIELD }
@@ -66,6 +66,20 @@ OOT_ZORA_DOMAIN:                                { game: oot, id: 0x108, type: ov
 OOT_RIVER_FROM_DOMAIN:                          { game: oot, id: 0x19d, type: overworld, maps: [OOT_ZORA_DOMAIN, OOT_ZORA_RIVER], areas: ["OOT Zora Domain", "OOT Zora River Behind Falls"], reverse: OOT_ZORA_DOMAIN }
 OOT_FOUNTAIN_ZORA:                              { game: oot, id: 0x225, type: overworld, maps: [OOT_ZORA_DOMAIN, OOT_ZORA_FOUNTAIN], areas: ["OOT Zora Domain Back", "OOT Zora Fountain"], reverse: OOT_DOMAIN_FROM_FOUNTAIN }
 OOT_DOMAIN_FROM_FOUNTAIN:                       { game: oot, id: 0x1a1, type: overworld, maps: [OOT_ZORA_FOUNTAIN, OOT_ZORA_DOMAIN], areas: ["OOT Zora Fountain", "OOT Zora Domain Back"], reverse: OOT_FOUNTAIN_ZORA }
+OOT_CRATER_FROM_GORON_CITY:                     { game: oot, id: 0x246, type: overworld, maps: [OOT_GORON_CITY, OOT_DEATH_MOUNTAIN_CRATER], areas: ["OOT Darunia Chamber", "OOT Death Mountain Crater Bottom"], reverse: OOT_GORON_CITY_FROM_CRATER }
+OOT_GORON_CITY_FROM_CRATER:                     { game: oot, id: 0x1c1, type: overworld, maps: [OOT_DEATH_MOUNTAIN_CRATER, OOT_GORON_CITY], areas: ["OOT Death Mountain Crater Bottom", "OOT Darunia Chamber"], reverse: OOT_CRATER_FROM_GORON_CITY }
+OOT_DEATH_MOUNTAIN_CRATER:                      { game: oot, id: 0x147, type: overworld, maps: [OOT_DEATH_MOUNTAIN_TRAIL, OOT_DEATH_MOUNTAIN_CRATER], areas: ["OOT Death Mountain Summit", "OOT Death Mountain Crater Top"], reverse: OOT_TRAIL_SUMMIT_FROM_CRATER }
+OOT_TRAIL_SUMMIT_FROM_CRATER:                   { game: oot, id: 0x1bd, type: overworld, maps: [OOT_DEATH_MOUNTAIN_CRATER, OOT_DEATH_MOUNTAIN_TRAIL], areas: ["OOT Death Mountain Crater Top", "OOT Death Mountain Summit"], reverse: OOT_DEATH_MOUNTAIN_CRATER }
+OOT_LOST_WOODS_FROM_KOKIRI_FOREST:              { game: oot, id: 0x11e, type: overworld, maps: [OOT_KOKIRI_FOREST, OOT_LOST_WOODS], areas: ["OOT Kokiri Forest", "OOT Lost Woods"], reverse: OOT_KOKIRI_FOREST_FROM_LOST_WOODS }
+OOT_KOKIRI_FOREST_FROM_LOST_WOODS:              { game: oot, id: 0x286, type: overworld, maps: [OOT_LOST_WOODS, OOT_KOKIRI_FOREST], areas: ["OOT Lost Woods", "OOT Kokiri Forest"], reverse: OOT_LOST_WOODS_FROM_KOKIRI_FOREST }
+OOT_FOREST_FROM_LOST_WOODS_BRDIGE:              { game: oot, id: 0x20d, type: overworld, maps: [OOT_LOST_WOODS, OOT_KOKIRI_FOREST], areas: ["OOT Lost Woods Bridge", "OOT Kokiri Forest"], reverse: OOT_LOST_WOODS_BRIDGE_FROM_FOREST }
+OOT_LOST_WOODS_BRIDGE_FROM_FOREST:              { game: oot, id: 0x5e0, type: overworld, maps: [OOT_KOKIRI_FOREST, OOT_LOST_WOODS], areas: ["OOT Kokiri Forest", "OOT Lost Woods Bridge from Forest"], reverse: OOT_FOREST_FROM_LOST_WOODS_BRDIGE }
+OOT_GRAVEYARD:                                  { game: oot, id: 0x0e4, type: overworld, maps: [OOT_KAKARIKO, OOT_GRAVEYARD], areas: ["OOT Kakariko", "OOT Graveyard"], reverse: OOT_KAKARIKO_FROM_GRAVEYARD }
+OOT_KAKARIKO_FROM_GRAVEYARD:                    { game: oot, id: 0x195, type: overworld, maps: [OOT_GRAVEYARD, OOT_KAKARIKO], areas: ["OOT Graveyard", "OOT Kakariko"], reverse: OOT_GRAVEYARD }
+OOT_WASTELAND:                                  { game: oot, id: 0x130, type: overworld, maps: [OOT_GERUDO_FORTRESS, OOT_WASTELAND], areas: ["OOT Fortress Near Wasteland", "OOT Haunted Wasteland Start"], reverse: OOT_FORTRESS_FROM_WASTELAND }
+OOT_FORTRESS_FROM_WASTELAND:                    { game: oot, id: 0x3ac, type: overworld, maps: [OOT_WASTELAND, OOT_GERUDO_FORTRESS], areas: ["OOT Haunted Wasteland Start", "OOT Fortress Near Wasteland"], reverse: OOT_WASTELAND }
+OOT_COLOSSUS:                                   { game: oot, id: 0x123, type: overworld, maps: [OOT_WASTELAND, OOT_COLOSSUS], areas: ["OOT Haunted Wasteland End", "OOT Desert Colossus"], reverse: OOT_WASTELAND_FROM_COLOSSUS }
+OOT_WASTELAND_FROM_COLOSSUS:                    { game: oot, id: 0x365, type: overworld, maps: [OOT_COLOSSUS, OOT_WASTELAND], areas: ["OOT Desert Colossus", "OOT Haunted Wasteland End"], reverse: OOT_COLOSSUS }
 OOT_LAKE_HYLIA_FROM_VALLEY:                     { game: oot, id: 0x219, type: one-way, areas: ["OOT Gerudo Valley Falls", "OOT Lake Hylia"] }
 OOT_LOST_WOODS_FROM_LOST_WOODS_NORTH:           { game: oot, id: 0xf01, type: one-way-woods, areas: ["OOT Lost Woods Lost North", "OOT Lost Woods"] }
 OOT_LOST_WOODS_FROM_LOST_WOODS_EAST:            { game: oot, id: 0x1ad, type: one-way-woods, areas: ["OOT Lost Woods Lost East", "OOT Lost Woods"] }
@@ -324,9 +338,6 @@ MM_WALLMASTER_BTW_EXIT:                         { game: mm,  id: 0xff03, type: w
 MM_CLOCK_TOWN:                                  { game: mm,  id: 0xd800, type: none, debug: ['COMMON', 'Clock Town'] }
 MM_MOON:                                        { game: mm,  id: 0xc800, type: none, debug: ['COMMON', 'Moon'] }
 OOT_BOSS_GANON2:                                { game: oot, id: 0x517,  type: none, debug: ['BOSS', 'Ganon'] }
-OOT_LOST_BRIDGE_FROM_KOKIRI_FOREST:             { game: oot, id: 0x5e0,  type: none }
-OOT_LOST_WOODS_FROM_KOKIRI_FOREST:              { game: oot, id: 0x11e,  type: none }
-OOT_KOKIRI_FOREST_FROM_LOST_WOODS:              { game: oot, id: 0x286,  type: none }
 OOT_GERUDO_FORTRESS_CAUGHT_NO_HOOK:             { game: oot, id: 0x1a5,  type: none }
 OOT_GERUDO_FORTRESS_CAUGHT:                     { game: oot, id: 0x5f8,  type: none }
 OOT_CASTLE_STEALTH:                             { game: oot, id: 0x07a,  type: none }
@@ -484,8 +495,6 @@ MM_GROTTO_EXIT_DEKU_PLAYGROUND:                 { game: mm, id: 0xd640, type: gr
 MM_GRAVE_EXIT_NIGHT1:                           { game: mm, id: 0x8030, type: grave-exit, areas: ['MM Beneath The Graveyard Night 1', 'MM Ikana Graveyard'], reverse: MM_GRAVE_NIGHT1 }
 MM_GRAVE_EXIT_NIGHT2:                           { game: mm, id: 0x8020, type: grave-exit, areas: ['MM Beneath The Graveyard Night 2', 'MM Ikana Graveyard'], reverse: MM_GRAVE_NIGHT2 }
 MM_GRAVE_EXIT_NIGHT3:                           { game: mm, id: 0x8010, type: grave-exit, areas: ['MM Beneath The Graveyard Night 3 Fake Exit', 'MM Ikana Graveyard'], reverse: MM_GRAVE_NIGHT3 }
-OOT_DEATH_MOUNTAIN_CRATER:                      { game: oot, id: 0x147,  type: none }
-OOT_DEATH_MOUNTAIN_CRATER_FROM_GORON_CITY:      { game: oot, id: 0x246,  type: none }
 OOT_HYRULE_CASTLE:                              { game: oot, id: 0x138,  type: none }
 OOT_MARKET_FROM_MASK_SHOP:                      { game: oot, id: 0x1d1,  type: none }
 

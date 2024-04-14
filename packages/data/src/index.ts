@@ -66,7 +66,7 @@ for (const i1 of Object.keys(ENTRANCES) as Entrance[]) {
       throw new Error(`Entrance ${i2} reverse should be ${i1}`);
     }
     if (e1.id === e2.id) {
-      throw new Error(`Duplicate entrance id: ${i1} and ${i2}`);
+      throw new Error(`Duplicate entrance id: ${i1} and ${i2} (${e1.id.toString(16)})`);
     }
   }
 }

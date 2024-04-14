@@ -281,7 +281,7 @@ static const GrottoExit kGrottoExits[] = {
     /* Triple scrubs */
     { ENTR_OOT_LON_LON_RANCH_FROM_HOUSE,                0, {  1800,    0,  1500 } },
     { ENTR_OOT_GORON_CITY,                              3, {  1100,  580, -1190 } },
-    { ENTR_OOT_DEATH_MOUNTAIN_CRATER_FROM_GORON_CITY,   1, { -1699,  722,  -472 } },
+    { ENTR_OOT_CRATER_FROM_GORON_CITY,                  1, { -1699,  722,  -472 } },
     { ENTR_OOT_WARP_SONG_LAKE,                          0, { -3040, -1033, 6075 } },
 
     /* Other Grottos */
