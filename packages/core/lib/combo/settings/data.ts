@@ -1835,6 +1835,13 @@ export const SETTINGS = [{
   description: 'Shuffle grottos and graves.',
   default: 'none'
 }, {
+  key: 'erSelfLoops',
+  name: 'Allow Self-Loops',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'Allow entrances to loop back to the same map. Might make the topology of the world very confusing.',
+  default: false,
+}, {
   key: 'erDecoupled',
   name: 'Decoupled Entrances',
   category: 'entrances',

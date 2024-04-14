@@ -193,10 +193,12 @@ class WorldShuffler {
     }
 
     /* Filter self-loops */
-    const srcEntrance = ENTRANCES[src];
-    const map = srcEntrance.fromMap;
-    if (map !== 'NONE') {
-      dstCandidates = new Set([...dstCandidates].filter(x => ENTRANCES[x].toMap !== map));
+    if (!this.settings.erSelfLoops) {
+      const srcEntrance = ENTRANCES[src];
+      const map = srcEntrance.fromMap;
+      if (map !== 'NONE') {
+        dstCandidates = new Set([...dstCandidates].filter(x => ENTRANCES[x].toMap !== map));
+      }
     }
 
     /* Try to find a match */
