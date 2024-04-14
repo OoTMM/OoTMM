@@ -222,6 +222,11 @@ class WorldShuffler {
       newEntrances[poolName] = { src: new Set(pool.src), dst: new Set(pool.dst) };
       newEntrances[poolName].src.delete(src);
       newEntrances[poolName].dst.delete(dst);
+      if (revSrc && revDst) {
+        newEntrances[poolName].src.delete(revDst);
+        newEntrances[poolName].dst.delete(revSrc);
+      }
+
       if (newEntrances[poolName].src.size === 0) {
         delete newEntrances[poolName];
       }

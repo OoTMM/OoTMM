@@ -58,6 +58,14 @@ OOT_FIELD_FROM_MARKET_ENTRANCE:                 { game: oot, id: 0x1fd, type: re
 OOT_LOST_WOODS_FROM_ZORA_RIVER:                 { game: oot, id: 0x4da, type: region-exit, maps: [OOT_ZORA_RIVER, OOT_LOST_WOODS], areas: ["OOT Zora River", "OOT Lost Woods"], reverse: OOT_ZORA_RIVER_FROM_LOST_WOODS }
 OOT_LOST_WOODS_FROM_GORON_CITY:                 { game: oot, id: 0x4d6, type: region-exit, maps: [OOT_GORON_CITY, OOT_LOST_WOODS], areas: ["OOT Goron City Shortcut", "OOT Lost Woods"], reverse: OOT_GORON_CITY_FROM_LOST_WOODS }
 OOT_ZORA_DOMAIN_FROM_LAKE_HYLIA:                { game: oot, id: 0x328, type: region-exit, maps: [OOT_LAKE_HYLIA, OOT_ZORA_DOMAIN], areas: ["OOT Lake Hylia", "OOT Zora Domain"], reverse: OOT_LAKE_HYLIA_FROM_ZORA_DOMAIN }
+OOT_SACRED_FOREST_MEADOW:                       { game: oot, id: 0x0fc, type: overworld, maps: [OOT_LOST_WOODS, OOT_SACRED_MEADOW], areas: ["OOT Lost Woods Deep", "OOT Sacred Meadow Entryway"], reverse: OOT_LOST_WOODS_FROM_MEADOW }
+OOT_LOST_WOODS_FROM_MEADOW:                     { game: oot, id: 0x1a9, type: overworld, maps: [OOT_SACRED_MEADOW, OOT_LOST_WOODS], areas: ["OOT Sacred Meadow Entryway", "OOT Lost Woods Deep"], reverse: OOT_SACRED_FOREST_MEADOW }
+OOT_GORON_CITY:                                 { game: oot, id: 0x14d, type: overworld, maps: [OOT_DEATH_MOUNTAIN_TRAIL, OOT_GORON_CITY], areas: ["OOT Death Mountain", "OOT Goron City"], reverse: OOT_DEATH_MOUNTAIN_FROM_GORON_CITY }
+OOT_DEATH_MOUNTAIN_FROM_GORON_CITY:             { game: oot, id: 0x1b9, type: overworld, maps: [OOT_GORON_CITY, OOT_DEATH_MOUNTAIN_TRAIL], areas: ["OOT Goron City", "OOT Death Mountain"], reverse: OOT_GORON_CITY }
+OOT_ZORA_DOMAIN:                                { game: oot, id: 0x108, type: overworld, maps: [OOT_ZORA_RIVER, OOT_ZORA_DOMAIN], areas: ["OOT Zora River Behind Falls", "OOT Zora Domain"], reverse: OOT_RIVER_FROM_DOMAIN }
+OOT_RIVER_FROM_DOMAIN:                          { game: oot, id: 0x19d, type: overworld, maps: [OOT_ZORA_DOMAIN, OOT_ZORA_RIVER], areas: ["OOT Zora Domain", "OOT Zora River Behind Falls"], reverse: OOT_ZORA_DOMAIN }
+OOT_FOUNTAIN_ZORA:                              { game: oot, id: 0x225, type: overworld, maps: [OOT_ZORA_DOMAIN, OOT_ZORA_FOUNTAIN], areas: ["OOT Zora Domain Back", "OOT Zora Fountain"], reverse: OOT_DOMAIN_FROM_FOUNTAIN }
+OOT_DOMAIN_FROM_FOUNTAIN:                       { game: oot, id: 0x1a1, type: overworld, maps: [OOT_ZORA_FOUNTAIN, OOT_ZORA_DOMAIN], areas: ["OOT Zora Fountain", "OOT Zora Domain Back"], reverse: OOT_FOUNTAIN_ZORA }
 OOT_LAKE_HYLIA_FROM_VALLEY:                     { game: oot, id: 0x219, type: one-way, areas: ["OOT Gerudo Valley Falls", "OOT Lake Hylia"] }
 OOT_LOST_WOODS_FROM_LOST_WOODS_NORTH:           { game: oot, id: 0xf01, type: one-way-woods, areas: ["OOT Lost Woods Lost North", "OOT Lost Woods"] }
 OOT_LOST_WOODS_FROM_LOST_WOODS_EAST:            { game: oot, id: 0x1ad, type: one-way-woods, areas: ["OOT Lost Woods Lost East", "OOT Lost Woods"] }
@@ -323,7 +331,6 @@ OOT_GERUDO_FORTRESS_CAUGHT_NO_HOOK:             { game: oot, id: 0x1a5,  type: n
 OOT_GERUDO_FORTRESS_CAUGHT:                     { game: oot, id: 0x5f8,  type: none }
 OOT_CASTLE_STEALTH:                             { game: oot, id: 0x07a,  type: none }
 OOT_CASTLE_STEALTH_FROM_COURTYARD:              { game: oot, id: 0x296,  type: none }
-OOT_CASTLE_FROM_STEALTH:                        { game: oot, id: 0x23d,  type: none }
 OOT_CASTLE_COURTYARD:                           { game: oot, id: 0x400,  type: none, debug: ['SPECIAL', 'Castle Courtyard'] }
 OOT_CASTLE_CAUGHT:                              { game: oot, id: 0x47e,  type: none }
 OOT_SHOP_MASKS:                                 { game: oot, id: 0x530,  type: none }
@@ -477,13 +484,8 @@ MM_GROTTO_EXIT_DEKU_PLAYGROUND:                 { game: mm, id: 0xd640, type: gr
 MM_GRAVE_EXIT_NIGHT1:                           { game: mm, id: 0x8030, type: grave-exit, areas: ['MM Beneath The Graveyard Night 1', 'MM Ikana Graveyard'], reverse: MM_GRAVE_NIGHT1 }
 MM_GRAVE_EXIT_NIGHT2:                           { game: mm, id: 0x8020, type: grave-exit, areas: ['MM Beneath The Graveyard Night 2', 'MM Ikana Graveyard'], reverse: MM_GRAVE_NIGHT2 }
 MM_GRAVE_EXIT_NIGHT3:                           { game: mm, id: 0x8010, type: grave-exit, areas: ['MM Beneath The Graveyard Night 3 Fake Exit', 'MM Ikana Graveyard'], reverse: MM_GRAVE_NIGHT3 }
-OOT_DEATH_MOUNTAIN_FROM_GORON_CITY:             { game: oot, id: 0x1b9,  type: none }
 OOT_DEATH_MOUNTAIN_CRATER:                      { game: oot, id: 0x147,  type: none }
-OOT_ZORA_DOMAIN:                                { game: oot, id: 0x108,  type: none }
-OOT_SACRED_MEADOW:                              { game: oot, id: 0x0fc,  type: none }
-OOT_GORON_CITY:                                 { game: oot, id: 0x14d,  type: none }
 OOT_DEATH_MOUNTAIN_CRATER_FROM_GORON_CITY:      { game: oot, id: 0x246,  type: none }
-OOT_LOST_WOODS_FROM_MEADOW:                     { game: oot, id: 0x1a9,  type: none }
 OOT_HYRULE_CASTLE:                              { game: oot, id: 0x138,  type: none }
 OOT_MARKET_FROM_MASK_SHOP:                      { game: oot, id: 0x1d1,  type: none }
 
@@ -498,7 +500,6 @@ MM_TERMINA_FIELD_FROM_MILK_ROAD:            { game: mm, id: 0x5450, type: none }
 MM_SWAMP_ROAD_FROM_FIELD:                   { game: mm, id: 0x7a00, type: none }
 MM_TWIN_ISLAND_FROM_MOUNTAIN_VILLAGE:       { game: mm, id: 0xb400, type: none }
 MM_PATH_SNOWHEAD_FROM_SNOWHEAD:             { game: mm, id: 0xb010, type: none }
-MM_ZORA_CAPE_FROM_COAST:                    { game: mm, id: 0x6a00, type: none }
 MM_IKANA_ROAD_FROM_FIELD:                   { game: mm, id: 0xa000, type: none }
 MM_IKANA_GRAVEYARD_FROM_DAMPE:              { game: mm, id: 0x8040, type: none }
 MM_MILK_ROAD_FROM_FIELD:                    { game: mm, id: 0x3e00, type: none }
