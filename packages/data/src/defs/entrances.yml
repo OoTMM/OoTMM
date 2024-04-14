@@ -282,7 +282,9 @@ MM_CLOCK_TOWN_EAST_FROM_ASTRAL_OBSERVATORY:     { game: mm, id: 0xd220, type: in
 MM_ASTRAL_OBSERVATORY_FROM_FIELD:               { game: mm, id: 0x4c10, type: indoors-extra, areas: ["MM Astral Observatory Balcony", "MM Astral Observatory"], reverse: MM_FIELD_FROM_ASTRAL_OBSERVATORY, debug: [INTERIOR, "Astral Observatory"] }
 MM_FIELD_FROM_ASTRAL_OBSERVATORY:               { game: mm, id: 0x5490, type: indoors-exit, areas: ["MM Astral Observatory", "MM Astral Observatory Balcony"], reverse: MM_ASTRAL_OBSERVATORY_FROM_FIELD }
 MM_SWAMP_ARCHERY:                               { game: mm, id: 0x4200, type: indoors, areas: ["MM Road to Southern Swamp", "MM Swamp Archery"], reverse: MM_SWAMP_ROAD_FROM_ARCHERY }
-MM_SWAMP_ROAD_FROM_ARCHERY:                     { game: mm, id: 0x7a20, type: indoors-exit, areas: ["MM Swamp Archery", "MM Road to Southern Swamp"], reverse: MM_SWAMP_ARCHERY }
+MM_SWAMP_ROAD_FROM_ARCHERY:                     { game: mm, id: 0x7a20, type: indoors-exit, areas:  ["MM Swamp Archery", "MM Road to Southern Swamp"], reverse: MM_SWAMP_ARCHERY }
+MM_GORON_RACETRACK:                             { game: mm, id: 0xd000, type: indoors-extra, areas: ["MM Near Goron Race", "MM Goron Race"], reverse: MM_TWIN_ISLANDS_FROM_GORON_RACETRACK, debug: [INTERIOR, "Goron Race"] }
+MM_TWIN_ISLANDS_FROM_GORON_RACETRACK:           { game: mm, id: 0xb420, type: indoors-exit, areas: ["MM Goron Race", "MM Near Goron Race"], reverse: MM_GORON_RACETRACK }
 MM_WARP_OWL_GREAT_BAY:                          { game: mm, id: 0x68b0, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Great Bay"], debug: ['WARP', 'Great Bay'] }
 MM_WARP_OWL_ZORA_CAPE:                          { game: mm, id: 0x6a60, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Zora Cape"], debug: ['WARP', 'Zora Cape'] }
 MM_WARP_OWL_SNOWHEAD:                           { game: mm, id: 0xb230, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Snowhead"], debug: ['WARP', 'Snowhead'] }
