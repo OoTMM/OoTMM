@@ -245,8 +245,8 @@ MM_ZORA_SHOP:                                   { game: mm, id: 0x9250, type: in
 MM_ZORA_HALL_FROM_SHOP:                         { game: mm, id: 0x6020, type: indoors-exit, areas: ["MM Zora Shop", "MM Zora Hall"], reverse: MM_ZORA_SHOP }
 MM_GHOST_HUT:                                   { game: mm, id: 0x9c00, type: indoors, areas: ["MM Ikana Canyon", "MM Ghost Hut"], reverse: MM_IKANA_CANYON_FROM_GHOST_HUT }
 MM_IKANA_CANYON_FROM_GHOST_HUT:                 { game: mm, id: 0x2010, type: indoors-exit, areas: ["MM Ghost Hut", "MM Ikana Canyon"], reverse: MM_GHOST_HUT }
-MM_MUSIC_BOX_HOUSE:                             { game: mm, id: 0xa400, type: indoors-special, areas: ["MM Ikana Canyon", "MM Music Box House"], reverse: MM_IKANA_CANYON_FROM_MUSIC_BOX_HOUSE }
-MM_IKANA_CANYON_FROM_MUSIC_BOX_HOUSE:           { game: mm, id: 0x2020, type: indoors-special, areas: ["MM Music Box House", "MM Ikana Canyon"], reverse: MM_MUSIC_BOX_HOUSE }
+MM_MUSIC_BOX_HOUSE:                             { game: mm, id: 0xa400, type: indoors, areas: ["MM Ikana Canyon", "MM Music Box House"], reverse: MM_IKANA_CANYON_FROM_MUSIC_BOX_HOUSE }
+MM_IKANA_CANYON_FROM_MUSIC_BOX_HOUSE:           { game: mm, id: 0x2020, type: indoors-exit, areas: ["MM Music Box House", "MM Ikana Canyon"], reverse: MM_MUSIC_BOX_HOUSE }
 MM_FAIRY_FOUNTAIN_IKANA:                        { game: mm, id: 0x4640, type: indoors, areas: ["MM Ikana Canyon", "MM Ikana Fairy Fountain"], reverse: MM_IKANA_CANYON_FROM_FAIRY_FOUNTAIN }
 MM_IKANA_CANYON_FROM_FAIRY_FOUNTAIN:            { game: mm, id: 0x20b0, type: indoors-exit, areas: ["MM Ikana Fairy Fountain", "MM Ikana Canyon"], reverse: MM_FAIRY_FOUNTAIN_IKANA }
 MM_DEKU_PALACE_THRONE:                          { game: mm, id: 0x7600, type: indoors-special, areas: ["MM Deku Palace Main", "MM Deku Palace Throne"], reverse: MM_DEKU_PALACE_EXTERIOR_FROM_THRONE }

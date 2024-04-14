@@ -2894,7 +2894,7 @@
     "Ikana Valley": "true"
     "Ikana Fairy Fountain": "true"
     "Ikana Spring Water Cave": "true"
-    "Music Box House": "event(IKANA_CURSE_LIFTED) && (has_explosives || has_mask_stone)"
+    "Music Box House": "(event(IKANA_CURSE_LIFTED) && (has_explosives || has_mask_stone)) || is_valley_cleared"
     "Ghost Hut": "true"
     "Beneath The Well Entrance": "true"
     "Ikana Castle Entrance": "true"
@@ -2921,13 +2921,13 @@
   exits:
     "Ikana Canyon": "true"
   events:
-    IKANA_CURSE_LIFTED: "can_play_storms"
+    IKANA_CURSE_LIFTED: "is_valley_cursed && can_play_storms"
 "Music Box House":
   region: ENTRANCE
   exits:
     "Ikana Canyon": "true"
   locations:
-    "Music Box House Gibdo Mask": "can_play_healing"
+    "Music Box House Gibdo Mask": "is_valley_cursed && can_play_healing"
 "Ghost Hut":
   region: ENTRANCE
   exits:
