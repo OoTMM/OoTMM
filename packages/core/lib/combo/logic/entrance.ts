@@ -197,7 +197,24 @@ class WorldShuffler {
       const srcEntrance = ENTRANCES[src];
       const map = srcEntrance.fromMap;
       if (map !== 'NONE') {
-        dstCandidates = new Set([...dstCandidates].filter(x => ENTRANCES[x].toMap !== map));
+        dstCandidates = new Set([...dstCandidates].filter((candidate) => {
+          const cEntrance = ENTRANCES[candidate];
+          if (cEntrance.toMap !== map) {
+            return true;
+          }
+
+          /* Same map, check for internal submap */
+          if (srcEntrance.fromMap !== srcEntrance.toMap) {
+            return false;
+          }
+
+          if (cEntrance.fromMap !== cEntrance.toMap) {
+            return false;
+          }
+
+          /* Both entrances are internal, check the submap */
+          return srcEntrance.fromSubmap !== cEntrance.toSubmap;
+        }));
       }
     }
 

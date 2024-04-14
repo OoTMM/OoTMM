@@ -23,6 +23,8 @@ export type EntranceData = {
   debug?: any;
   fromMap: string;
   toMap: string;
+  fromSubmap: string;
+  toSubmap: string;
 };
 
 export type Entrance = keyof typeof DATA_ENTRANCES;
@@ -47,6 +49,15 @@ export const ENTRANCES = Object.fromEntries(Object.entries(DATA_ENTRANCES).map((
   } else {
     data.fromMap = 'NONE';
     data.toMap = 'NONE';
+  }
+
+  if (data.submaps) {
+    data.fromSubmap = data.submaps[0];
+    data.toSubmap = data.submaps[1];
+    delete data.submaps;
+  } else {
+    data.fromSubmap = 'NONE';
+    data.toSubmap = 'NONE';
   }
   return [k, data];
 })) as Record<Entrance, EntranceData>;
