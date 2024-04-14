@@ -364,7 +364,10 @@ void Inventory_SetWorldMapCloudVisibility(s16 tingleId);
 
 #endif
 
+void Horse_SpawnOverworld(GameState_Play* play, Actor_Player* link);
+
 #if defined(GAME_MM)
+extern int gHorseIsMounted;
 s16 ActorCutscene_StartAndSetFlag(s16 index, Actor* actor);
 #endif
 

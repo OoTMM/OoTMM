@@ -185,11 +185,11 @@ MM_SWAMP_FROM_ROAD:                             { game: mm, id: 0x8400, type: re
 MM_SWAMP_ROAD_FROM_SWAMP:                       { game: mm, id: 0x7a10, type: overworld, areas: ["MM Swamp Front", "MM Road to Southern Swamp"], reverse: MM_SWAMP_FROM_ROAD }
 MM_MOUNTAIN_VILLAGE_FROM_PATH:                  { game: mm, id: 0x9a60, type: region, areas: ["MM Mountain Village Path Upper", "MM Mountain Village"], reverse: MM_PATH_FROM_MOUNTAIN_VILLAGE }
 MM_PATH_FROM_MOUNTAIN_VILLAGE:                  { game: mm, id: 0x3210, type: overworld, areas: ["MM Mountain Village", "MM Mountain Village Path Upper"], reverse: MM_MOUNTAIN_VILLAGE_FROM_PATH }
-MM_GREAT_BAY_COAST_FROM_FIELD:                  { game: mm, id: 0x6800, type: region, areas: ["MM Great Bay Fence", "MM Great Bay Coast"], reverse: MM_FIELD_FROM_GREAT_BAY_COAST }
-MM_FIELD_FROM_GREAT_BAY_COAST:                  { game: mm, id: 0x5420, type: overworld, areas: ["MM Great Bay Coast", "MM Great Bay Fence"], reverse: MM_GREAT_BAY_COAST_FROM_FIELD }
+MM_GREAT_BAY_COAST_FROM_FIELD:                  { game: mm, id: 0x6800, type: region, areas: ["MM Great Bay Fence", "MM Great Bay Coast"], reverse: MM_TERMINA_FIELD_FROM_GREAT_BAY_COAST }
+MM_TERMINA_FIELD_FROM_GREAT_BAY_COAST:          { game: mm, id: 0x5420, type: overworld, areas: ["MM Great Bay Coast", "MM Great Bay Fence"], reverse: MM_GREAT_BAY_COAST_FROM_FIELD }
 MM_IKANA_VALLEY_FROM_ROAD:                      { game: mm, id: 0x2000, type: region, areas: ["MM Road to Ikana Top", "MM Ikana Valley"], reverse: MM_IKANA_ROAD_FROM_VALLEY }
 MM_IKANA_ROAD_FROM_VALLEY:                      { game: mm, id: 0xa010, type: overworld, areas: ["MM Ikana Valley", "MM Road to Ikana Top"], reverse: MM_IKANA_VALLEY_FROM_ROAD }
-MM_ROMANI_RANCH_FROM_MILK_ROAD:                 { game: mm, id: 0x6400, type: region, areas: ["MM Near Romani Ranch", "MM Romani Ranch"], reverse: MM_MILK_ROAD_FROM_ROMANI_RANCH }
+MM_ROMANI_RANCH_FROM_MILK_ROAD:                 { game: mm, id: 0x6400, type: region, areas: ["MM Near Romani Ranch", "MM Romani Ranch"], reverse: MM_MILK_ROAD_FROM_ROMANI_RANCH, debug: ['REGION', 'Romani Ranch'] }
 MM_MILK_ROAD_FROM_ROMANI_RANCH:                 { game: mm, id: 0x3e10, type: overworld, areas: ["MM Romani Ranch", "MM Near Romani Ranch"], reverse: MM_ROMANI_RANCH_FROM_MILK_ROAD }
 MM_SWAMP_FROM_IKANA_CANYON:                     { game: mm, id: 0x8490, type: one-way, areas: ["MM Ikana Valley", "MM Swamp Front"] }
 MM_IKANA_CASTLE_INTERIOR_KEG:                   { game: mm, id: 0x3440, type: one-way-ikana, areas: ["MM Ancient Castle of Ikana Roof Interior", "MM Ancient Castle of Ikana"] }
@@ -491,12 +491,30 @@ MM_WOODS_OF_MYSTERY:                        { game: mm, id: 0xc200, type: none }
 MM_TERMINA_FIELD_FROM_CLOCK_TOWN_EAST:      { game: mm, id: 0x5470, type: none }
 MM_TERMINA_FIELD_FROM_CLOCK_TOWN_SOUTH:     { game: mm, id: 0x5460, type: none }
 MM_TERMINA_FIELD_FROM_CLOCK_TOWN_NORTH:     { game: mm, id: 0x5480, type: none }
+MM_TERMINA_FIELD_FROM_ROAD_TO_SWAMP:        { game: mm, id: 0x5410, type: none }
+MM_TERMINA_FIELD_FROM_ROAD_TO_SNOWHEAD:     { game: mm, id: 0x5430, type: none }
+MM_TERMINA_FIELD_FROM_ROAD_TO_IKANA:        { game: mm, id: 0x5440, type: none }
+MM_TERMINA_FIELD_FROM_MILK_ROAD:            { game: mm, id: 0x5450, type: none }
 MM_SWAMP_ROAD_FROM_FIELD:                   { game: mm, id: 0x7a00, type: none }
 MM_TWIN_ISLAND_FROM_MOUNTAIN_VILLAGE:       { game: mm, id: 0xb400, type: none }
 MM_PATH_SNOWHEAD_FROM_SNOWHEAD:             { game: mm, id: 0xb010, type: none }
 MM_ZORA_CAPE_FROM_COAST:                    { game: mm, id: 0x6a00, type: none }
 MM_IKANA_ROAD_FROM_FIELD:                   { game: mm, id: 0xa000, type: none }
 MM_IKANA_GRAVEYARD_FROM_DAMPE:              { game: mm, id: 0x8040, type: none }
+MM_MILK_ROAD_FROM_FIELD:                    { game: mm, id: 0x3e00, type: none }
+MM_MILK_ROAD_FROM_GORMAN_TRACK_BARRIER:     { game: mm, id: 0x3e20, type: none }
+MM_MILK_ROAD_FROM_GORMAN_TRACK:             { game: mm, id: 0x3e30, type: none }
+MM_MILK_ROAD_FROM_RANCH2:                   { game: mm, id: 0x3e50, type: none }
+MM_MILK_ROAD_FROM_GORMAN_TRACK2:            { game: mm, id: 0x3e60, type: none }
+MM_GORMAN_TRACK_UNK1:                       { game: mm, id: 0xce00, type: none }
+MM_GORMAN_TRACK_UNK2:                       { game: mm, id: 0xce10, type: none }
+MM_GORMAN_TRACK_UNK3:                       { game: mm, id: 0xce20, type: none }
+MM_GORMAN_TRACK_UNK4:                       { game: mm, id: 0xce30, type: none }
+MM_GORMAN_TRACK_UNK5:                       { game: mm, id: 0xce40, type: none }
+MM_GORMAN_TRACK_UNK6:                       { game: mm, id: 0xce50, type: none }
+MM_MOUNTAIN_VILLAGE_PATH_FROM_TERMINA_FIELD:  { game: mm, id: 0x3200, type: none }
+MM_GREAT_BAY_COAST_FROM_ZORA_CAPE:            { game: mm, id: 0x6810, type: none }
+MM_ZORA_CAPE_FROM_GREAT_BAY_COAST:            { game: mm, id: 0x6a00, type: none }
 
 OOT_INTERNAL_EXIT_GROTTO:                       { game: oot, id: 0x7fff, type: none }
 MM_INTERNAL_EXIT_GROTTO:                        { game: oot, id: 0xffff, type: none }

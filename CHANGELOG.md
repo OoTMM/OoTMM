@@ -30,6 +30,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix various crashes in MM when taking Epona to the wrong region in ER.
 - Fix Goron Ruby looking odd in MM.
 - Ruto's Soul is now accounted in logic for the Big Octo in Jabu-Jabu.
 - Logic for entering Woodfall Temple if exiting the temple itself has been fixed.

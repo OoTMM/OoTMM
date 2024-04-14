@@ -97,8 +97,9 @@ void malloc_check(void);
 # define malloc_check() do {} while (0)
 #endif
 
-#define CHEAT_HEALTH        0
-#define CHEAT_MAGIC         1
+#define CHEAT_ALL_ITEMS     0
+#define CHEAT_HEALTH        1
+#define CHEAT_MAGIC         2
 
 #if defined(DEBUG)
 typedef struct

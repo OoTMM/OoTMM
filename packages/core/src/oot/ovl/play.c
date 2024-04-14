@@ -7,134 +7,6 @@
 extern void* gMmMag;
 GameState_Play* gPlay;
 
-static void debugCheat(GameState_Play* play)
-{
-#if defined(DEBUG)
-    if (!gSaveContext.gameMode && play->gs.input[0].current.buttons & L_TRIG)
-    {
-        /*MM_SET_EVENT_WEEK(EV_MM_WEEK_DRANK_CHATEAU_ROMANI); */
-        SetEventChk(EV_OOT_CHK_MASTER_SWORD_PULLED);
-        SetEventChk(EV_OOT_CHK_MASTER_SWORD_CHAMBER);
-        gSave.playerData.swordHealth = 8;
-        gSave.isBiggoronSword = 1;
-
-        //MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF);
-        //MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH);
-        //MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_GB);
-        //MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_ST);
-
-        /*gSave.inventory.quest.gerudoCard = 1; */
-        gSave.inventory.dungeonKeys[SCE_OOT_TEMPLE_FIRE] = 8;
-        gSave.inventory.dungeonKeys[SCE_OOT_TREASURE_SHOP] = 6;
-        gSave.inventory.items[ITS_OOT_STICKS] = ITEM_OOT_STICK;
-        gSave.inventory.items[ITS_OOT_NUTS] = ITEM_OOT_NUT;
-        gSave.inventory.items[ITS_OOT_BOMBS] = ITEM_OOT_BOMB;
-        //gSave.inventory.items[ITS_OOT_BOW] = ITEM_OOT_BOW;
-        gSave.inventory.items[ITS_OOT_ARROW_FIRE] = ITEM_OOT_ARROW_FIRE;
-        gSave.inventory.items[ITS_OOT_ARROW_ICE] = ITEM_OOT_ARROW_ICE;
-        gSave.inventory.items[ITS_OOT_ARROW_LIGHT] = ITEM_OOT_ARROW_LIGHT;
-        gSave.inventory.items[ITS_OOT_SLINGSHOT] = ITEM_OOT_SLINGSHOT;
-        gSave.inventory.items[ITS_OOT_OCARINA] = ITEM_OOT_OCARINA_TIME;
-        gSave.inventory.items[ITS_OOT_BOOMERANG] = ITEM_OOT_BOOMERANG;
-        gSave.inventory.items[ITS_OOT_BOTTLE] = ITEM_OOT_RUTO_LETTER;
-        gSave.inventory.items[ITS_OOT_BOTTLE2] = ITEM_OOT_FISH;
-        gSave.inventory.items[ITS_OOT_BOTTLE3] = ITEM_OOT_BIG_POE;
-        gSave.inventory.items[ITS_OOT_BOTTLE4] = ITEM_OOT_BIG_POE;
-        gSave.inventory.items[ITS_OOT_BOMBCHU] = ITEM_OOT_BOMBCHU_10;
-        gSave.inventory.items[ITS_OOT_TRADE_CHILD] = ITEM_OOT_ZELDA_LETTER;
-        gSave.inventory.items[ITS_OOT_HAMMER] = ITEM_OOT_HAMMER;
-        gSave.inventory.items[ITS_OOT_HOOKSHOT] = ITEM_OOT_LONGSHOT;
-        gSave.inventory.items[ITS_OOT_LENS] = ITEM_OOT_LENS;
-        gSave.inventory.items[ITS_OOT_SPELL_WIND] = ITEM_OOT_SPELL_WIND;
-        gSave.inventory.items[ITS_OOT_SPELL_FIRE] = ITEM_OOT_SPELL_FIRE;
-        gSave.inventory.items[ITS_OOT_SPELL_LOVE] = ITEM_OOT_SPELL_LOVE;
-
-        gSave.inventory.equipment.swords = 0x7;
-        gSave.inventory.equipment.shields = 0x7;
-        gSave.inventory.equipment.tunics = 0x7;
-        gSave.inventory.equipment.boots = 0x7;
-
-        gSave.inventory.upgrades.dekuStick = 3;
-        gSave.inventory.upgrades.dekuNut = 3;
-        /*gSave.inventory.upgrades.bulletBag = 3; */
-        gSave.inventory.upgrades.bombBag = 3;
-        //gSave.inventory.upgrades.quiver = 3;
-        gSave.inventory.upgrades.dive = 2;
-        /*gSave.inventory.upgrades.wallet = 3; */
-        gSave.inventory.upgrades.strength = 3;
-        /*gOotExtraFlags.bottomlessWallet = 1; */
-        /*gOotMaxRupees[3] = 9999; */
-        /*gWalletDigits[3] = 4; */
-
-        gSave.inventory.ammo[ITS_OOT_STICKS] = 10;
-        gSave.inventory.ammo[ITS_OOT_SLINGSHOT] = 50;
-        gSave.inventory.ammo[ITS_OOT_NUTS] = 40;
-        gSave.inventory.ammo[ITS_OOT_BOMBS] = 40;
-        //gSave.inventory.ammo[ITS_OOT_BOW] = 50;
-        gSave.inventory.ammo[ITS_OOT_BOMBCHU] = 50;
-        gSave.inventory.quest.songZelda = 1;
-        gSave.inventory.quest.songSaria = 1;
-        gSave.inventory.quest.songTime = 1;
-        gSave.inventory.quest.songSun = 1;
-        gSave.inventory.quest.songEpona = 1;
-        gSave.inventory.quest.songStorms = 1;
-        gSave.inventory.quest.songTpLight = 1;
-        gSave.inventory.quest.songTpShadow = 1;
-        gSave.inventory.quest.songTpWater = 1;
-        gSave.inventory.quest.songTpFire = 1;
-        gSave.inventory.quest.songTpForest = 1;
-        gSave.inventory.quest.songTpSpirit = 1;
-
-        gSave.inventory.quest.stoneEmerald = 1;
-        gSave.inventory.quest.stoneRuby = 0;
-        gSave.inventory.quest.stoneSapphire = 0;
-
-        gSave.playerData.magicUpgrade = 1;
-        gSave.playerData.magicUpgrade2 = 1;
-        gOotSave.playerData.magicSize = 0;
-        gSaveContext.magicFillTarget = 0x60;
-
-        gSave.inventory.dungeonKeys[SCE_OOT_TEMPLE_FOREST] = 9;
-        gSave.inventory.dungeonKeys[SCE_OOT_INSIDE_GANON_CASTLE] = 9;
-
-        gSave.inventory.quest.medallionShadow = 1;
-        gSave.inventory.quest.medallionSpirit = 1;
-        gSave.inventory.quest.medallionForest = 1;
-        gSave.inventory.quest.medallionFire = 1;
-        gSave.inventory.quest.medallionWater = 1;
-        gSave.inventory.quest.medallionLight = 1;
-
-        gSave.inventory.quest.stoneRuby = 1;
-
-        gSave.playerData.health = gSave.playerData.healthMax = 20 * 0x10;
-
-        gSave.playerData.rupees = 500;
-
-        gOotExtraTrade.child = 0xffff;
-        gOotExtraTrade.adult = 0xffff;
-        gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_EYEBALL_FROG);
-        gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_EYE_DROPS);
-        gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_CLAIM_CHECK);
-        gSave.inventory.items[ITS_OOT_TRADE_ADULT] = ITEM_OOT_POCKET_EGG;
-        gSave.inventory.items[ITS_OOT_TRADE_CHILD] = ITEM_OOT_MASK_STONE;
-
-        SetEventChk(EV_OOT_CHK_EPONA);
-
-        gSave.equips.buttonItems[1] = ITEM_OOT_MASK_STONE;
-        gSave.equips.cButtonSlots[0] = ITS_OOT_TRADE_CHILD;
-
-        gCustomSave.hasElegy = 1;
-
-
-#if defined(DEBUG_AGE)
-        gSave.age = DEBUG_AGE;
-#endif
-
-        /*BITMAP16_SET(gSave.eventsMisc, EV_OOT_INF_KING_ZORA_THAWED); */
-    }
-#endif
-}
-
 static int isRainbowBridgeOpen(void)
 {
     if (comboConfig(CFG_OOT_BRIDGE_CUSTOM) && !comboSpecialCond(SPECIAL_BRIDGE))
@@ -609,7 +481,6 @@ void hookPlay_Init(GameState_Play* play)
     comboCacheClear();
     comboObjectsReset();
     comboExObjectsReset();
-    debugCheat(play);
     eventFixes(play);
 
     Play_Init(play);
@@ -684,7 +555,7 @@ void comboClearEpona(GameState_Play* play)
     }
 }
 
-NORETURN static void Play_GameSwitch(GameState_Play* play, s32 entrance)
+NORETURN static void Play_GameSwitch(GameState_Play* play, u32 entrance)
 {
     comboClearEpona(play);
     comboGameSwitch(play, entrance);

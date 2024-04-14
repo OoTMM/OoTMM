@@ -276,6 +276,8 @@ osSetThreadPri = 0x8008fc00;
 SetRoomClear = 0x800b5d30;
 
 RandFloat = 0x80086fdc;
+gHorseIsMounted = 0x801bda9c;
+Horse_SpawnOverworld = 0x800f3c44;
 
 ActorUpdateVelocity = 0x800b6a88;
 Player_GetHeight = 0x800B6FC8;
