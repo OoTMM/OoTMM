@@ -38,7 +38,9 @@
 "midnight": "between(NIGHT1_AM_12_00, DAY2_AM_06_00) || between(NIGHT2_AM_12_00, DAY3_AM_06_00) || after(NIGHT3_AM_12_00)"
 
 # Region State
-"is_spring": "event(BOSS_SNOWHEAD)"
+"is_winter": "flag_set(MM_REGION_NORTH_CURSED) && flag_check_unset(MM_REGION_NORTH_CLEARED)"
+"is_spring": "flag_set(MM_REGION_NORTH_CLEARED) && flag_check_unset(MM_REGION_NORTH_CURSED) && event(BOSS_SNOWHEAD)"
+"is_spring_or_winter": "flag_check_unset(MM_REGION_NORTH_CLEARED) && flag_check_unset(MM_REGION_NORTH_CURSED)"
 
 # Age
 "is_child": "!setting(crossAge) || age(child)"
@@ -189,7 +191,7 @@
 "can_jumpslash": "has_weapon || has_sticks || has_mask_zora"
 "can_enter_zora_door_before_gb_clear": "has_mask_zora || (short_hook_anywhere && trick(MM_ZORA_HALL_DOORS))"
 "woodfall_raised": "event(OPEN_WOODFALL_TEMPLE) || setting(openDungeonsMm, WF) || ((setting(clearStateDungeonsMm, WF) || setting(clearStateDungeonsMm, both)) && event(CLEAN_SWAMP))"
-"blizzard_stopped": "event(OPEN_SNOWHEAD_TEMPLE) || setting(openDungeonsMm, SH) || event(BOSS_SNOWHEAD)"
+"blizzard_stopped": "event(OPEN_SNOWHEAD_TEMPLE) || setting(openDungeonsMm, SH) || is_spring"
 "turtle_woken": "(can_play_zora && has_mask_zora) || setting(openDungeonsMm, GB) || ((setting(clearStateDungeonsMm, GB) || setting(clearStateDungeonsMm, both)) && event(BOSS_GREAT_BAY))"
 "can_kill_freezard_short_range": "can_fight || can_use_light_arrows || can_use_fire_short_range || has_explosives || can_hookshot_short"
 
