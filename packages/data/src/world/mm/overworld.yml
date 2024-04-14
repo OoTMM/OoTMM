@@ -1187,7 +1187,7 @@
   exits:
     "Road to Southern Swamp": "true"
     "Tourist Information": "true"
-    "Swamp Back": "event(BOAT_RIDE) || is_swamp_cleared || has_mask_zora || ((has(MASK_DEKU) || can_use_nayru || has_hover_boots || is_adult) && (has_arrows || can_hookshot_short || can_use_din))"
+    "Swamp Back": "((event(BOAT_RIDE) || has_arrows || can_hookshot_short || can_use_din) && (has(MASK_DEKU) || has_hover_boots || can_use_nayru || is_adult)) || is_swamp_cleared || has_mask_zora"
     "Swamp Potion Shop": "true"
     "Woods of Mystery": "true"
     "Owl Swamp": "true"
@@ -1254,7 +1254,7 @@
     PICTURE_SWAMP: "has(PICTOGRAPH_BOX)"
     PICTURE_BIG_OCTO: "has(PICTOGRAPH_BOX) && soul_octorok"
   exits:
-    "Swamp Front": "event(BOAT_RIDE) || is_swamp_cleared || has_mask_zora || ((has_arrows || can_hookshot) && (has(MASK_DEKU) || has_mask_goron || can_use_nayru || has_hover_boots || is_adult))"
+    "Swamp Front": "((event(BOAT_RIDE) || has_arrows) && (has(MASK_DEKU) || has_hover_boots || can_use_nayru || is_adult || has_mask_goron)) || (has_mask_goron && can_hookshot_short) || (has_hover_boots && (can_hookshot_short || can_use_din)) || (is_adult && (can_use_din || (can_use_nayru && can_hookshot_short))) || is_swamp_cleared || has_mask_zora"
     "Deku Palace Front": "true"
     "Near Swamp Spider House": "has(MASK_DEKU) || is_tall || is_swamp_cleared || short_hook_anywhere || can_use_nayru || has_hover_boots"
     "Swamp Canopy Back": "is_swamp_cleared || short_hook_anywhere"
@@ -1273,7 +1273,7 @@
   events:
     MUSHROOM: "has(MASK_SCENTS)"
   exits:
-    "Swamp Front": "(has_arrows || can_hookshot) && has_mask_goron"
+    "Swamp Front": "((has_arrows || can_hookshot || event(BOAT_RIDE)) && (has_mask_goron || is_tall || can_use_nayru)) || (is_adult && can_use_din)"
     "Near Swamp Spider House": "has(MASK_DEKU) || is_tall || is_swamp_cleared || can_hookshot_short || can_use_nayru || has_hover_boots"
     "Southern Swamp Grotto": "true"
     "Swamp Canopy Front": "short_hook_anywhere"
@@ -1313,7 +1313,7 @@
     "Swamp Front": "true"
     "Swamp Back": "event(BOAT_RIDE)"
   events:
-     BOAT_RIDE: "(event(PICTURE_SWAMP) || event(KOUME)) && is_swamp_poisoned"
+     BOAT_RIDE: "(event(PICTURE_SWAMP) || (event(KOUME) && (!setting(erIndoorsExtra) || can_use_wallet(1)))) && is_swamp_poisoned"
   locations:
     "Tourist Information Pictobox": "event(KOUME) && is_swamp_poisoned"
     "Tourist Information Boat Archery": "event(KOUME) && is_swamp_cleared && has_bow"
@@ -1511,7 +1511,7 @@
 "Swamp Canopy Back":
   region: SOUTHERN_SWAMP
   exits:
-    "Swamp Front": "(has(MASK_DEKU) || has_mask_goron) && (can_hookshot || has_arrows)"
+    "Swamp Front": "(has(MASK_DEKU) || has_mask_goron || is_tall || has_hover_boots || can_use_nayru) && (can_hookshot || has_arrows || event(BOAT_RIDE))"
     "Swamp Back": "has(MASK_DEKU) || is_tall || is_swamp_cleared || can_use_nayru || has_hover_boots"
     "Woodfall": "true"
     "Swamp Canopy Front": "has(MASK_DEKU) || short_hook_anywhere"
