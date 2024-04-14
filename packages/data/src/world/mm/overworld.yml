@@ -580,7 +580,7 @@
     "Clock Town East": "true"
     "Clock Town West": "true"
     "Road to Southern Swamp": "true"
-    "Behind Large Icicles": "has_arrows || (has_hot_water_distance_spring && has(OWL_CLOCK_TOWN)) || has_hot_water_farore || has_hot_water_er_spring || short_hook_anywhere || can_use_din"
+    "Behind Large Icicles": "has_arrows || (has_hot_water_distance && has(OWL_CLOCK_TOWN)) || has_hot_water_farore || has_hot_water_er || short_hook_anywhere || can_use_din"
     "Milk Road": "true"
     "Great Bay Fence": "can_play_epona || (can_goron_bomb_jump && has_bombs) || short_hook_anywhere"
     "Road to Ikana Front": "true"
@@ -1622,17 +1622,17 @@
 "Behind Large Icicles":
   region: TERMINA_FIELD
   exits:
-    "Termina Field": "has_arrows || (has_hot_water_distance_spring && has(OWL_MOUNTAIN_VILLAGE)) || has_hot_water_farore || has_hot_water_mtn_spring || has_hot_water_er_spring || short_hook_anywhere || can_use_din"
+    "Termina Field": "has_arrows || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE)) || has_hot_water_farore || has_hot_water_mtn || has_hot_water_er || short_hook_anywhere || can_use_din"
     "Mountain Village Path Lower": "true"
 "Mountain Village Path Lower":
   region: PATH_TO_MOUNTAIN_VILLAGE
   events:
     RUPEES: "can_use_light_arrows && soul_tektite && (is_day || (can_break_snowballs))"
-    MAGIC: "event(BOSS_SNOWHEAD)"
+    MAGIC: "is_spring"
     FAIRY: "can_get_gossip_fairy"
   exits:
     "Behind Large Icicles": "true"
-    "Mountain Village Path Upper": "can_break_snowballs || event(BOSS_SNOWHEAD) || short_hook_anywhere"
+    "Mountain Village Path Upper": "can_break_snowballs || is_spring || short_hook_anywhere"
   gossip:
     "Mountain Village Path Gossip": "true"
 "Mountain Village Path Upper":
@@ -1648,65 +1648,65 @@
   exits:
     "Mountain Village Path Upper": "true"
     "Twin Islands": "true"
-    "Near Goron Graveyard": "can_use_lens_strict || trick(MM_DARMANI_WALL) || event(GORON_GRAVE_FARORE) || (event(BOSS_SNOWHEAD) && (has_mask_goron || has_mask_zora || short_hook_anywhere))"
+    "Near Goron Graveyard": "can_use_lens_strict || trick(MM_DARMANI_WALL) || event(GORON_GRAVE_FARORE) || (is_spring && (has_mask_goron || has_mask_zora || short_hook_anywhere))"
     "Path to Snowhead Front": "true"
     "Blacksmith": "true"
-    "Near Village Grotto": "event(BOSS_SNOWHEAD) && (has_mask_goron || short_hook_anywhere)"
+    "Near Village Grotto": "is_spring && (has_mask_goron || short_hook_anywhere)"
     "Owl Mountain": "true"
   gossip:
-    "Mountain Village Gossip Outside": "event(BOSS_SNOWHEAD)"
-    "Mountain Village Gossip Tunnel": "event(BOSS_SNOWHEAD) && (has_mask_goron || short_hook_anywhere)"
+    "Mountain Village Gossip Outside": "is_spring"
+    "Mountain Village Gossip Tunnel": "is_spring && (has_mask_goron || short_hook_anywhere)"
   events:
     MAGIC: "true"
     ARROWS: "true"
     BOMBS_OR_BOMBCHU: "true"
-    RUPEES: "event(BOSS_SNOWHEAD) || (can_break_snowballs && (second_day || final_day)) || (can_break_snowballs && can_use_light_arrows && first_day && soul_tektite)"
+    RUPEES: "is_spring || (can_break_snowballs && (second_day || final_day)) || (can_break_snowballs && can_use_light_arrows && first_day && soul_tektite)"
     FAIRY: "true"
   locations:
-    "Mountain Village Waterfall Chest": "event(BOSS_SNOWHEAD) && can_use_lens"
-    "Mountain Village Don Gero Mask": "event(GORON_FOOD)"
-    "Mountain Village Frog Choir HP": "event(BOSS_SNOWHEAD) && event(FROG_1) && event(FROG_2) && event(FROG_3) && event(FROG_4)"
+    "Mountain Village Waterfall Chest": "is_spring && can_use_lens"
+    "Mountain Village Don Gero Mask": "is_winter && event(GORON_FOOD)"
+    "Mountain Village Frog Choir HP": "is_spring && event(FROG_1) && event(FROG_2) && event(FROG_3) && event(FROG_4)"
     "Mountain Village Pot": "scarecrow_hookshot || short_hook_anywhere"
-    "Mountain Village Grass 1": "event(BOSS_SNOWHEAD)"
-    "Mountain Village Grass 2": "event(BOSS_SNOWHEAD)"
-    "Mountain Village Grass 3": "event(BOSS_SNOWHEAD)"
-    "Mountain Village Grass Pack 1 Grass 1": "event(BOSS_SNOWHEAD)"
-    "Mountain Village Grass Pack 1 Grass 2": "event(BOSS_SNOWHEAD)"
-    "Mountain Village Grass Pack 1 Grass 3": "event(BOSS_SNOWHEAD)"
-    "Mountain Village Grass Pack 1 Grass 4": "event(BOSS_SNOWHEAD)"
-    "Mountain Village Grass Pack 1 Grass 5": "event(BOSS_SNOWHEAD)"
-    "Mountain Village Grass Pack 1 Grass 6": "event(BOSS_SNOWHEAD)"
-    "Mountain Village Grass Pack 1 Grass 7": "event(BOSS_SNOWHEAD)"
-    "Mountain Village Grass Pack 1 Grass 8": "event(BOSS_SNOWHEAD)"
-    "Mountain Village Grass Pack 1 Grass 9": "event(BOSS_SNOWHEAD)"
-    "Mountain Village Grass Pack 2 Grass 1": "event(BOSS_SNOWHEAD)"
-    "Mountain Village Grass Pack 2 Grass 2": "event(BOSS_SNOWHEAD)"
-    "Mountain Village Grass Pack 2 Grass 3": "event(BOSS_SNOWHEAD)"
-    "Mountain Village Grass Pack 2 Grass 4": "event(BOSS_SNOWHEAD)"
-    "Mountain Village Grass Pack 2 Grass 5": "event(BOSS_SNOWHEAD)"
-    "Mountain Village Grass Pack 2 Grass 6": "event(BOSS_SNOWHEAD)"
-    "Mountain Village Grass Pack 2 Grass 7": "event(BOSS_SNOWHEAD)"
-    "Mountain Village Grass Pack 2 Grass 8": "event(BOSS_SNOWHEAD)"
-    "Mountain Village Grass Pack 2 Grass 9": "event(BOSS_SNOWHEAD)"
-    "Mountain Village Grass Pack 3 Grass 1": "event(BOSS_SNOWHEAD)"
-    "Mountain Village Grass Pack 3 Grass 2": "event(BOSS_SNOWHEAD)"
-    "Mountain Village Grass Pack 3 Grass 3": "event(BOSS_SNOWHEAD)"
-    "Mountain Village Grass Pack 3 Grass 4": "event(BOSS_SNOWHEAD)"
-    "Mountain Village Grass Pack 3 Grass 5": "event(BOSS_SNOWHEAD)"
-    "Mountain Village Grass Pack 3 Grass 6": "event(BOSS_SNOWHEAD)"
-    "Mountain Village Grass Pack 3 Grass 7": "event(BOSS_SNOWHEAD)"
-    "Mountain Village Grass Pack 3 Grass 8": "event(BOSS_SNOWHEAD)"
-    "Mountain Village Grass Pack 3 Grass 9": "event(BOSS_SNOWHEAD)"
-    "Mountain Village Keaton Grass Reward 1": "event(BOSS_SNOWHEAD)"
-    "Mountain Village Keaton Grass Reward 2": "event(BOSS_SNOWHEAD) && keaton_grass_easy"
-    "Mountain Village Keaton Grass Reward 3": "event(BOSS_SNOWHEAD) && keaton_grass_easy"
-    "Mountain Village Keaton Grass Reward 4": "event(BOSS_SNOWHEAD) && keaton_grass_easy"
-    "Mountain Village Keaton Grass Reward 5": "event(BOSS_SNOWHEAD) && keaton_grass_easy"
-    "Mountain Village Keaton Grass Reward 6": "event(BOSS_SNOWHEAD) && keaton_grass_hard"
-    "Mountain Village Keaton Grass Reward 7": "event(BOSS_SNOWHEAD) && keaton_grass_hard"
-    "Mountain Village Keaton Grass Reward 8": "event(BOSS_SNOWHEAD) && keaton_grass_hard"
-    "Mountain Village Keaton Grass Reward 9": "event(BOSS_SNOWHEAD) && keaton_grass_hard"
-    "Mountain Village Rupee": "event(BOSS_SNOWHEAD) && has_mask_goron"
+    "Mountain Village Grass 1": "is_spring"
+    "Mountain Village Grass 2": "is_spring"
+    "Mountain Village Grass 3": "is_spring"
+    "Mountain Village Grass Pack 1 Grass 1": "is_spring"
+    "Mountain Village Grass Pack 1 Grass 2": "is_spring"
+    "Mountain Village Grass Pack 1 Grass 3": "is_spring"
+    "Mountain Village Grass Pack 1 Grass 4": "is_spring"
+    "Mountain Village Grass Pack 1 Grass 5": "is_spring"
+    "Mountain Village Grass Pack 1 Grass 6": "is_spring"
+    "Mountain Village Grass Pack 1 Grass 7": "is_spring"
+    "Mountain Village Grass Pack 1 Grass 8": "is_spring"
+    "Mountain Village Grass Pack 1 Grass 9": "is_spring"
+    "Mountain Village Grass Pack 2 Grass 1": "is_spring"
+    "Mountain Village Grass Pack 2 Grass 2": "is_spring"
+    "Mountain Village Grass Pack 2 Grass 3": "is_spring"
+    "Mountain Village Grass Pack 2 Grass 4": "is_spring"
+    "Mountain Village Grass Pack 2 Grass 5": "is_spring"
+    "Mountain Village Grass Pack 2 Grass 6": "is_spring"
+    "Mountain Village Grass Pack 2 Grass 7": "is_spring"
+    "Mountain Village Grass Pack 2 Grass 8": "is_spring"
+    "Mountain Village Grass Pack 2 Grass 9": "is_spring"
+    "Mountain Village Grass Pack 3 Grass 1": "is_spring"
+    "Mountain Village Grass Pack 3 Grass 2": "is_spring"
+    "Mountain Village Grass Pack 3 Grass 3": "is_spring"
+    "Mountain Village Grass Pack 3 Grass 4": "is_spring"
+    "Mountain Village Grass Pack 3 Grass 5": "is_spring"
+    "Mountain Village Grass Pack 3 Grass 6": "is_spring"
+    "Mountain Village Grass Pack 3 Grass 7": "is_spring"
+    "Mountain Village Grass Pack 3 Grass 8": "is_spring"
+    "Mountain Village Grass Pack 3 Grass 9": "is_spring"
+    "Mountain Village Keaton Grass Reward 1": "is_spring"
+    "Mountain Village Keaton Grass Reward 2": "is_spring && keaton_grass_easy"
+    "Mountain Village Keaton Grass Reward 3": "is_spring && keaton_grass_easy"
+    "Mountain Village Keaton Grass Reward 4": "is_spring && keaton_grass_easy"
+    "Mountain Village Keaton Grass Reward 5": "is_spring && keaton_grass_easy"
+    "Mountain Village Keaton Grass Reward 6": "is_spring && keaton_grass_hard"
+    "Mountain Village Keaton Grass Reward 7": "is_spring && keaton_grass_hard"
+    "Mountain Village Keaton Grass Reward 8": "is_spring && keaton_grass_hard"
+    "Mountain Village Keaton Grass Reward 9": "is_spring && keaton_grass_hard"
+    "Mountain Village Rupee": "is_spring && has_mask_goron"
 "Near Village Grotto":
   region: MOUNTAIN_VILLAGE
   exits:
@@ -1748,7 +1748,7 @@
   exits:
     "Mountain Village": "true"
   events:
-    BLACKSMITH_ENABLED: "event(BOSS_SNOWHEAD) || can_use_fire_short_range || has_hot_water_mtn || has_hot_water_er || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE))"
+    BLACKSMITH_ENABLED: "is_spring || (is_winter && (can_use_fire_short_range || has_hot_water_mtn || has_hot_water_er || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE))))"
     GOLD_DUST_USED: "can_use_wallet(2) && has(BOTTLED_GOLD_DUST) && event(BLACKSMITH_ENABLED)"
   locations:
     "Blacksmith Razor Blade": "can_use_wallet(2) && event(BLACKSMITH_ENABLED)"
@@ -1758,34 +1758,34 @@
   events:
     PICTURE_TINGLE: "has(PICTOGRAPH_BOX)"
     MAGIC: "true"
-    RUPEES: "(can_use_light_arrows && (soul_tektite || soul_wolfos || (can_break_snowballs && soul_enemy(SOUL_ENEMY_SNAPPER)))) || event(BOSS_SNOWHEAD)"
+    RUPEES: "(can_use_light_arrows && (soul_tektite || soul_wolfos || (can_break_snowballs && soul_enemy(SOUL_ENEMY_SNAPPER)))) || is_spring"
   exits:
     "Mountain Village": "true"
     "Goron Village": "true"
     "Near Goron Race": "has_mask_goron || scarecrow_hookshot || short_hook_anywhere"
     "Near Ramp Grotto": "has_mask_goron || short_hook_anywhere"
-    "Twin Islands Frozen Grotto": "can_use_fire_short_range || event(BOSS_SNOWHEAD) || has_hot_water_mtn || has_hot_water_er || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE))"
+    "Twin Islands Frozen Grotto": "is_spring || (is_winter && (can_use_fire_short_range || has_hot_water_mtn || has_hot_water_er || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE))))"
     "Tingle Mountain": "has_weapon_range"
   locations:
-    "Twin Islands Underwater Chest 1": "event(BOSS_SNOWHEAD) && underwater_walking"
-    "Twin Islands Underwater Chest 2": "event(BOSS_SNOWHEAD) && underwater_walking"
-    "Goron Elder": "has_mask_goron && cond(!setting(erBoss, none), can_use_fire_short_range || (setting(bossWarpPads, bossBeaten) && has_hot_water_er), can_use_fire_short_range || has_hot_water_mtn || has_hot_water_er || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE))) && (first_day || second_day)"
-    "Twin Islands Grass 01": "event(BOSS_SNOWHEAD)"
-    "Twin Islands Grass 02": "event(BOSS_SNOWHEAD)"
-    "Twin Islands Grass 03": "event(BOSS_SNOWHEAD)"
-    "Twin Islands Grass 04": "event(BOSS_SNOWHEAD)"
-    "Twin Islands Grass 05": "event(BOSS_SNOWHEAD)"
-    "Twin Islands Grass 06": "event(BOSS_SNOWHEAD)"
-    "Twin Islands Grass 07": "event(BOSS_SNOWHEAD)"
-    "Twin Islands Grass 08": "event(BOSS_SNOWHEAD)"
-    "Twin Islands Grass 09": "event(BOSS_SNOWHEAD)"
-    "Twin Islands Grass 10": "event(BOSS_SNOWHEAD)"
-    "Twin Islands Grass 11": "event(BOSS_SNOWHEAD)"
-    "Twin Islands Grass 12": "event(BOSS_SNOWHEAD)"
-    "Twin Islands Rupee 1": "event(BOSS_SNOWHEAD) && (underwater_walking || can_dive_small)"
-    "Twin Islands Rupee 2": "event(BOSS_SNOWHEAD) && (underwater_walking || can_dive_small)"
-    "Twin Islands Rupee 3": "event(BOSS_SNOWHEAD) && (underwater_walking || can_dive_small)"
-    "Twin Islands Rupee 4": "event(BOSS_SNOWHEAD) && (underwater_walking || can_dive_small)"
+    "Twin Islands Underwater Chest 1": "is_spring && underwater_walking"
+    "Twin Islands Underwater Chest 2": "is_spring && underwater_walking"
+    "Goron Elder": "is_winter && (first_day || second_day) && has_mask_goron && cond(!setting(erBoss, none), can_use_fire_short_range || (setting(bossWarpPads, bossBeaten) && has_hot_water_er), can_use_fire_short_range || has_hot_water_mtn || has_hot_water_er || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE)))"
+    "Twin Islands Grass 01": "is_spring"
+    "Twin Islands Grass 02": "is_spring"
+    "Twin Islands Grass 03": "is_spring"
+    "Twin Islands Grass 04": "is_spring"
+    "Twin Islands Grass 05": "is_spring"
+    "Twin Islands Grass 06": "is_spring"
+    "Twin Islands Grass 07": "is_spring"
+    "Twin Islands Grass 08": "is_spring"
+    "Twin Islands Grass 09": "is_spring"
+    "Twin Islands Grass 10": "is_spring"
+    "Twin Islands Grass 11": "is_spring"
+    "Twin Islands Grass 12": "is_spring"
+    "Twin Islands Rupee 1": "is_spring && (underwater_walking || can_dive_small)"
+    "Twin Islands Rupee 2": "is_spring && (underwater_walking || can_dive_small)"
+    "Twin Islands Rupee 3": "is_spring && (underwater_walking || can_dive_small)"
+    "Twin Islands Rupee 4": "is_spring && (underwater_walking || can_dive_small)"
 "Twin Islands Ramp Grotto":
   region: ENTRANCE
   exits:
@@ -1821,7 +1821,9 @@
   exits:
     "Twin Islands": "true"
   events:
-    TWIN_ISLANDS_HOT_WATER: "true"
+    HOT_WATER_NORTH_WINTER: "is_winter"
+    HOT_WATER_NORTH_SPRING: "is_spring"
+    HOT_WATER_NORTH: "is_spring_or_winter"
     WATER: "true"
     STICKS: "can_kill_baba_sticks"
     MUSHROOM: "has(MASK_SCENTS)"
@@ -1844,10 +1846,10 @@
   region: GORON_VILLAGE
   exits:
     "Twin Islands": "true"
-    "Front of Lone Peak Shrine": "true"
+    "Front of Lone Peak Shrine": "is_winter"
     "Goron Shrine": "first_day || has_mask_goron"
   events:
-    POWDER_KEG_TRIAL: "(event(BOSS_SNOWHEAD) || can_use_fire_short_range) && has_mask_goron"
+    POWDER_KEG_TRIAL: "(is_spring || can_use_fire_short_range) && has_mask_goron"
     BUY_KEG: "event(POWDER_KEG_TRIAL) && has(POWDER_KEG) && can_use_wallet(2)"
     MAGIC: "true"
     ARROWS: "true"
@@ -1864,7 +1866,7 @@
 "Front of Lone Peak Shrine":
   region: GORON_VILLAGE
   exits:
-    "Goron Village": "can_use_lens"
+    "Goron Village": "is_winter && can_use_lens"
     "Lone Peak Shrine": "true"
 "Lone Peak Shrine":
   region: ENTRANCE
@@ -1907,31 +1909,38 @@
   exits:
     "Mountain Village": "true"
     "Goron Graveyard": "true"
-    "Near Village Grotto": "event(BOSS_SNOWHEAD)"
+    "Near Village Grotto": "is_spring"
   events:
     MAGIC: "true"
-    ARROWS: "event(BOSS_SNOWHEAD)"
+    ARROWS: "is_spring"
     GORON_GRAVE_FARORE: "can_use_farore"
 "Goron Graveyard":
   region: ENTRANCE
   exits:
     "Near Goron Graveyard": "true"
+    "Goron Graveyard Water": "has_mask_goron || can_lift_gold"
   locations:
     "Goron Graveyard Mask": "can_use_lens_strict && can_play_healing"
+"Goron Graveyard Water":
+  region: ENTRANCE
+  exits:
+    "Goron Graveyard": "true"
   events:
-    GORON_GRAVEYARD_HOT_WATER: "has_bottle && (has_mask_goron || can_lift_gold)"
-    WATER: "has_bottle && (has_mask_goron || can_lift_gold)"
+    WATER: "true"
+    HOT_WATER_NORTH_WINTER: "is_winter"
+    HOT_WATER_NORTH_SPRING: "is_spring"
+    HOT_WATER_NORTH: "is_spring_or_winter"
 "Goron Shrine":
   region: GORON_VILLAGE
   exits:
     "Goron Village": "true"
     "Goron Shop": "true"
   events:
-    GORON_FOOD: "goron_fast_roll && (can_use_fire_arrows || can_lullaby_half)"
+    GORON_FOOD: "is_winter && goron_fast_roll && (can_use_fire_arrows || can_lullaby_half)"
     STICKS: "true"
     MAGIC: "true"
   locations:
-    "Goron Baby": "has_mask_goron && can_lullaby_half"
+    "Goron Baby": "is_winter && has_mask_goron && can_lullaby_half"
     "Goron Shrine Pot 01": "true"
     "Goron Shrine Pot 02": "true"
     "Goron Shrine Pot 03": "true"
@@ -2023,7 +2032,7 @@
 "Snowhead Near Fairy Fountain":
   region: SNOWHEAD
   events:
-    MAGIC: "((blizzard_stopped || has_iron_boots) && can_break_boulders) || event(BOSS_SNOWHEAD)"
+    MAGIC: "((blizzard_stopped || has_iron_boots) && can_break_boulders) || is_spring"
     RUPEES: "blizzard_stopped && can_use_light_arrows && soul_wolfos"
   exits:
     "Snowhead Entrance": "true"
@@ -2042,7 +2051,7 @@
   exits:
     "Near Goron Race": "true"
   locations:
-    "Goron Race Reward": "event(BOSS_SNOWHEAD) && goron_fast_roll"
+    "Goron Race Reward": "is_spring && goron_fast_roll"
     "Goron Race Pot 01": "true"
     "Goron Race Pot 02": "true"
     "Goron Race Pot 03": "true"
