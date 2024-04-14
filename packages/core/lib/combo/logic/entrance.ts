@@ -683,11 +683,11 @@ export class LogicPassEntrances {
     this.worlds = [];
   }
 
-  private changeRegion(worldId: number, area: string, newRegion: string) {
+  private changeRegion(worldId: number, area: string, newRegion: string, force?: boolean) {
     const world = this.worlds[worldId];
     world.areas[area].region = newRegion;
     for (const loc of Object.keys(world.areas[area].locations)) {
-      if (world.regions[loc] === 'ENTRANCE') {
+      if (world.regions[loc] === 'ENTRANCE' || force) {
         world.regions[loc] = newRegion;
       }
     }
@@ -715,7 +715,31 @@ export class LogicPassEntrances {
     return changed;
   }
 
+  private replaceAllRegions(worldId: number, oldRegion: string, newRegion: string) {
+    const world = this.worlds[worldId];
+    for (const areaName of Object.keys(world.areas)) {
+      const a = world.areas[areaName];
+      if (a.region === oldRegion) {
+        this.changeRegion(worldId, areaName, newRegion, true);
+      }
+    }
+  }
+
+  private simplifyRegions(worldId: number) {
+    this.replaceAllRegions(worldId, 'OOT_GANON_CASTLE_TOWER', 'OOT_GANON_CASTLE');
+    this.replaceAllRegions(worldId, 'MM_TEMPLE_STONE_TOWER_INVERTED', 'MM_TEMPLE_STONE_TOWER');
+    this.replaceAllRegions(worldId, 'MM_BUTLER_RACE', 'ENTRANCE');
+    this.replaceAllRegions(worldId, 'MM_GORON_RACETRACK', 'ENTRANCE');
+  }
+
   private propagateRegions() {
+    /* Simplify */
+    if (!this.input.settings.extraHintRegions) {
+      for (let i = 0; i < this.worlds.length; ++i) {
+        this.simplifyRegions(i);
+      }
+    }
+
     /* Propagate regions */
     for (let i = 0; i < this.worlds.length; ++i) {
       for (;;) {
@@ -807,6 +831,7 @@ export class LogicPassEntrances {
     if (this.worlds[0].entranceOverrides.size) {
       this.validate();
     }
+
     this.propagateRegions();
 
     return { worlds: this.worlds };

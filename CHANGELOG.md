@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add a setting to allow more granular hint regions.
 - Add decoupled entrances.
 - Add the ability to mix entrance pools.
 - Add Grotto/Grave entrance randomizer, for both games.

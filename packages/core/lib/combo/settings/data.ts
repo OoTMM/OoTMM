@@ -123,6 +123,13 @@ export const SETTINGS = [{
   description: 'Prevents items that are part of a plando from being hinted',
   default: true
 }, {
+  key: 'extraHintRegions',
+  name: 'Extra Hint Regions',
+  category: 'main',
+  type: 'boolean',
+  description: 'Make the region hints more granular: Makes Goron Racetrack and Butler Race into their own regions, and splits Ganon Castle/Tower and Normal/Inverted Stone Tower Temple.',
+  default: false
+}, {
   key: 'hintImportance',
   name: 'Hint Importance',
   category: 'main',

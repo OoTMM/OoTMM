@@ -1574,12 +1574,12 @@
     "Deku Palace Front": "is_swamp_cleared || has(MASK_DEKU) || can_use_nayru || has_hover_boots"
     "Deku Shrine": "true"
 "Deku Shrine":
-  region: ENTRANCE
+  region: BUTLER_RACE
   exits:
     "Near Deku Shrine": "true"
     "Deku Shrine Main": "event(RETURN_PRINCESS)"
 "Deku Shrine Main":
-  region: ENTRANCE
+  region: BUTLER_RACE
   exits:
     "Deku Shrine End": "true" # You can just jump to the crystal and spin it as deku
   locations:
@@ -1606,7 +1606,7 @@
     "Deku Shrine Rupee Main 19": "true"
     "Deku Shrine Rupee Main 20": "true"
 "Deku Shrine End":
-  region: ENTRANCE
+  region: BUTLER_RACE
   locations:
     "Deku Shrine Mask of Scents": "true"
     "Deku Shrine Rupee End 01": "true"
@@ -2045,7 +2045,7 @@
   locations:
     "Snowhead Great Fairy": "has(STRAY_FAIRY_SH, 15)"
 "Goron Race":
-  region: ENTRANCE
+  region: GORON_RACETRACK
   events:
     MAGIC: "true"
   exits:
