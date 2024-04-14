@@ -24,7 +24,10 @@
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "bootstrap": "^5.3.3",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.10.2",
+    "react-bootstrap-icons": "^1.10.2",
     "react-dom": "^18.2.0",
     "react-select": "^5.8.0",
     "react-tooltip": "^5.25.1"
