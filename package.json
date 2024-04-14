@@ -14,11 +14,10 @@
   },
   "dependencies": {
     "jszip": "^3.10.1",
-    "pako": "^2.1.0",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "pako": "^2.1.0"
   },
   "devDependencies": {
-    "glob": "^10.3.10",
     "@nrwl/jest": "^17.2.8",
     "@types/jest": "^29.5.11",
     "@types/lodash": "^4.14.202",
@@ -26,6 +25,7 @@
     "@types/node": "^20.10.6",
     "@types/pako": "^2.0.3",
     "cross-env": "^7.0.3",
+    "glob": "^10.3.10",
     "jest": "^29.7.0",
     "microtime": "^3.1.1",
     "nx": "^17.2.8",
