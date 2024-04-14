@@ -580,7 +580,7 @@
     "Clock Town East": "true"
     "Clock Town West": "true"
     "Road to Southern Swamp": "true"
-    "Behind Large Icicles": "has_arrows || (has_hot_water_distance_spring && has(OWL_CLOCK_TOWN)) || has_hot_water_farore || has_hot_water_er_spring || short_hook_anywhere || can_use_din"
+    "Behind Large Icicles": "has_arrows || (has_hot_water_distance && has(OWL_CLOCK_TOWN)) || has_hot_water_farore || has_hot_water_er || short_hook_anywhere || can_use_din"
     "Milk Road": "true"
     "Great Bay Fence": "can_play_epona || (can_goron_bomb_jump && has_bombs) || short_hook_anywhere"
     "Road to Ikana Front": "true"
@@ -1622,7 +1622,7 @@
 "Behind Large Icicles":
   region: TERMINA_FIELD
   exits:
-    "Termina Field": "has_arrows || (has_hot_water_distance_spring && has(OWL_MOUNTAIN_VILLAGE)) || has_hot_water_farore || has_hot_water_mtn_spring || has_hot_water_er_spring || short_hook_anywhere || can_use_din"
+    "Termina Field": "has_arrows || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE)) || has_hot_water_farore || has_hot_water_mtn || has_hot_water_er || short_hook_anywhere || can_use_din"
     "Mountain Village Path Lower": "true"
 "Mountain Village Path Lower":
   region: PATH_TO_MOUNTAIN_VILLAGE
@@ -1764,7 +1764,7 @@
     "Goron Village": "true"
     "Near Goron Race": "has_mask_goron || scarecrow_hookshot || short_hook_anywhere"
     "Near Ramp Grotto": "has_mask_goron || short_hook_anywhere"
-    "Twin Islands Frozen Grotto": "can_use_fire_short_range || is_spring || has_hot_water_mtn || has_hot_water_er || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE))"
+    "Twin Islands Frozen Grotto": "is_spring || (is_winter && (can_use_fire_short_range || has_hot_water_mtn || has_hot_water_er || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE))))"
     "Tingle Mountain": "has_weapon_range"
   locations:
     "Twin Islands Underwater Chest 1": "is_spring && underwater_walking"
@@ -1821,7 +1821,9 @@
   exits:
     "Twin Islands": "true"
   events:
-    TWIN_ISLANDS_HOT_WATER: "true"
+    HOT_WATER_NORTH_WINTER: "is_winter"
+    HOT_WATER_NORTH_SPRING: "is_spring"
+    HOT_WATER_NORTH: "is_spring_or_winter"
     WATER: "true"
     STICKS: "can_kill_baba_sticks"
     MUSHROOM: "has(MASK_SCENTS)"
@@ -1916,11 +1918,18 @@
   region: ENTRANCE
   exits:
     "Near Goron Graveyard": "true"
+    "Goron Graveyard Water": "has_mask_goron || can_lift_gold"
   locations:
     "Goron Graveyard Mask": "can_use_lens_strict && can_play_healing"
+"Goron Graveyard Water":
+  region: ENTRANCE
+  exits:
+    "Goron Graveyard": "true"
   events:
-    GORON_GRAVEYARD_HOT_WATER: "has_bottle && (has_mask_goron || can_lift_gold)"
-    WATER: "has_bottle && (has_mask_goron || can_lift_gold)"
+    WATER: "true"
+    HOT_WATER_NORTH_WINTER: "is_winter"
+    HOT_WATER_NORTH_SPRING: "is_spring"
+    HOT_WATER_NORTH: "is_spring_or_winter"
 "Goron Shrine":
   region: GORON_VILLAGE
   exits:

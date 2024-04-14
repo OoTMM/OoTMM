@@ -516,7 +516,7 @@ class ExprFlagSet extends Expr {
 
   constructor(flag: number) {
     super(`FLAG_SET(${flag})`);
-    this.result = RESULT_TRUE;
+    this.result = { ...RESULT_TRUE };
     this.result.restrictions = defaultRestrictions();
     this.result.restrictions.constraintFlags = ((1 << flag) >>> 0);
   }
