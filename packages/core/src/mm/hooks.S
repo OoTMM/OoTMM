@@ -162,3 +162,8 @@ PATCH_END
 PATCH_START 0x80129160
     jal     Player_DrawHookshotReticleCustom
 PATCH_END
+
+/* Hook on cutscene transitions */
+PATCH_START 0x800eb424
+  jal CutsceneTransitionHook
+PATCH_END

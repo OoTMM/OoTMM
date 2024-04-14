@@ -956,3 +956,21 @@ void Play_SetupRespawnPoint(GameState_Play* play, int respawnId, int playerParam
 }
 
 PATCH_FUNC(0x80169e6c, Play_SetupRespawnPoint);
+
+void CutsceneTransitionHook(GameState_Play* play)
+{
+    /* Default hook */
+    void (*DefaultHook)(GameState_Play*);
+    DefaultHook = (void*)0x801306a4;
+    DefaultHook(play);
+
+    if (gSaveContext.gameMode)
+        return;
+
+    if (gPlay->sceneId == SCE_MM_MUSIC_BOX_HOUSE && gPlay->nextEntrance == ENTR_MM_IKANA_CANYON_FROM_MUSIC_BOX_HOUSE)
+    {
+        /* Cutscene when getting kicked by Pam */
+        gIsEntranceOverride = 1;
+        return;
+    }
+}
