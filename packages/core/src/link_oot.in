@@ -107,6 +107,7 @@ PlaySound = 0x800646f0;
 PlaySound6 = 0x800c806c;
 Actor_PlaySfx = 0x80022fd0;
 PlayLoopingSfxAtActor = 0x8002313c;
+Horse_Spawn = 0x8005aefc;
 
 Actor_HasParent = 0x80022bb0;
 ActorDestroy = 0x80020eb4;

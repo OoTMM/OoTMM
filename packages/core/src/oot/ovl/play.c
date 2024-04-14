@@ -485,10 +485,6 @@ void hookPlay_Init(GameState_Play* play)
 
     Play_Init(play);
 
-    /* Epona fix */
-    if (!comboIsEntranceValidEpona(gSave.entrance))
-        comboClearEpona(play);
-
     gLastEntrance = gSave.entrance;
     g.inGrotto = (play->sceneId == SCE_OOT_GROTTOS || play->sceneId == SCE_OOT_FAIRY_FOUNTAIN);
     if (!g.inGrotto)
@@ -539,25 +535,9 @@ static void Play_LoadKaleidoScopeHook(void* unk)
 
 PATCH_CALL(0x8009a06c, Play_LoadKaleidoScopeHook);
 
-void comboClearEpona(GameState_Play* play)
-{
-    if (AREG(6) != 0)
-    {
-        /* Link is on Epona, needs to dismount */
-        AREG(6) = 0;
-
-        /* Reset the TempB */
-        gSave.equips.buttonItems[0] = gSaveContext.buttonStatus[0];
-        gSaveContext.buttonStatus[0] = ITEM_NONE;
-
-        /* Reload the B button icon */
-        Interface_LoadItemIconImpl(play, 0);
-    }
-}
-
 NORETURN static void Play_GameSwitch(GameState_Play* play, u32 entrance)
 {
-    comboClearEpona(play);
+    Horse_ForceUnmount(play);
     comboGameSwitch(play, entrance);
 }
 

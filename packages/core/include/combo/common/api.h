@@ -364,6 +364,8 @@ void Inventory_SetWorldMapCloudVisibility(s16 tingleId);
 
 #endif
 
+void Horse_ForceUnmount(GameState_Play* play);
+void Horse_Spawn(GameState_Play* play, Actor_Player* link);
 void Horse_SpawnOverworld(GameState_Play* play, Actor_Player* link);
 
 #if defined(GAME_MM)
