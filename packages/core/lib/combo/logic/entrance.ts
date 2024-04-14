@@ -277,45 +277,30 @@ class WorldShuffler {
     this.overrides = finalOverrides;
   }
 
-  private shuffledPools(def?: string[]) {
-    let pool: string[] = [];
-
-    if (this.settings.erOneWays !== 'none') {
-      pool = [...pool, 'one-way', 'one-way-ikana', 'one-way-song', 'one-way-statue', 'one-way-owl'];
-    }
-
-    if (this.settings.erDungeons !== 'none') {
-      pool = [...pool, 'dungeon'];
-    }
-
-    if (this.settings.erBoss !== 'none') {
-      pool = [...pool, 'boss'];
-    }
-
-    if (this.settings.erGrottos !== 'none') {
-      pool = [...pool, 'grotto', 'grave'];
-    }
-
-    if (pool.length === 0) {
-      return def;
-    }
-
-    return pool;
+  private entrancesForTypes(aTypes: Iterable<string>, reverse: boolean) {
+    const types = new Set(aTypes);
+    const entrances = (Object.keys(ENTRANCES) as Entrance[]).filter(x => types.has(ENTRANCES[x].type));
+    if (!reverse)
+      return entrances;
+    const entrancesReverse = entrances.map(x => this.reverseEntranceRaw(x)).filter(x => x) as Entrance[];
+    return [...entrances, ...entrancesReverse];
   }
 
   private placeWallmasters() {
-    const pool = this.shuffledPools(['dungeon'])!;
+    /* Compute types */
+    const types = new Set(this.poolsTypes());
+    types.add('dungeon');
+    types.add('dungeon-minor');
+    types.add('dungeon-sh');
 
+    if (this.settings.erBoss !== 'none') {
+      types.add('boss');
+    }
+
+    /* Compute entrances */
+    const entrances = this.entrancesForTypes(types, this.settings.erDecoupled);
     const entrancesSrc = new Set((Object.keys(ENTRANCES) as Entrance[]).filter(x => ENTRANCES[x].type === 'wallmaster' && this.world.areas.hasOwnProperty(ENTRANCES[x].from)));
-    const entrancesDst = new Set((Object.keys(ENTRANCES) as Entrance[]).filter(x => pool.includes(ENTRANCES[x].type)));
-
-    /* Sanity - TODO: base this on real ER settings */
-    entrancesDst.delete('MM_CLOCK_TOWER');
-    entrancesDst.delete('MM_CLOCK_TOWN_FROM_CLOCK_TOWER');
-    entrancesDst.delete('OOT_GANON_CASTLE');
-    entrancesDst.delete('OOT_GANON_CASTLE_EXTERIOR_FROM_CASTLE');
-    entrancesDst.delete('OOT_GANON_TOWER');
-    entrancesDst.delete('OOT_GANON_CASTLE_FROM_TOWER');
+    const entrancesDst = new Set(entrances);
 
     while (entrancesSrc.size > 0) {
       const src = sample(this.random, [...entrancesSrc]);
@@ -340,12 +325,9 @@ class WorldShuffler {
     types.add('region');
 
     /* Compute entrances */
-    const entrances = [...types].map(x => (Object.keys(ENTRANCES) as Entrance[]).filter(y => ENTRANCES[y].type === x)).flat();
-    const reverseEntrances = entrances.map(x => this.reverseEntranceRaw(x)).filter(x => x) as Entrance[];
-    const allEntrancesOot = [...entrances, ...reverseEntrances].filter(x => ENTRANCES[x].game === 'oot');
-
+    const entrances = this.entrancesForTypes(types, true).filter(x => ENTRANCES[x].game === 'oot');
     const entrancesSrc = new Set((Object.keys(ENTRANCES) as Entrance[]).filter(x => ENTRANCES[x].type === 'spawn'));
-    const entrancesDst = new Set(allEntrancesOot);
+    const entrancesDst = new Set(entrances);
 
     while (entrancesSrc.size > 0) {
       const src = sample(this.random, [...entrancesSrc]);
