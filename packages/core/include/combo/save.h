@@ -58,8 +58,9 @@ typedef struct
     u32 erSpring:1;
     u32 erSwampClear:1;
     u32 erCoastClear:1;
+    u32 erValleyClear:1;
     u32 erWaterBeaten:1;
-    u32 unused:28;
+    u32 unused:27;
 }
 MiscFlags;
 #endif

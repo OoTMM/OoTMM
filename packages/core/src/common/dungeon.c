@@ -53,6 +53,7 @@ void comboDungeonSetFlags(int dungeonId, int mmCycle)
         {
             MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_ST);
         }
+        gMiscFlags.erValleyClear = 1;
         break;
     }
 }

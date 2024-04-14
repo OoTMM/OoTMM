@@ -802,6 +802,7 @@ export class LogicPassSolver {
         'MM_BOSS_WOODFALL': 'MM Swamp Front',
         'MM_BOSS_SNOWHEAD': 'MM Mountain Village',
         'MM_BOSS_GREAT_BAY': 'MM Great Bay Coast',
+        'MM_BOSS_STONE_TOWER': 'MM Ikana Canyon',
       };
 
       const world = this.worlds[worldId];

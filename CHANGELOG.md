@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file.
 - Misc. Souls for both games, which can be shared.
 - Added a validator for Special Conditions (web-wise).
 - Add setting to allow warping between games using Farore's Wind.
+- Add a clear state wisp to ikana valley.
 
 ### Changed
 
