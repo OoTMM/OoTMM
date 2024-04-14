@@ -17,7 +17,7 @@ export type Tricks = {
 };
 
 /** Typing for each key of the TRICKS object */
-export type TrickKey = keyof typeof TRICKS;
+export type TrickKey = string;
 
 /** Object containing all of the Tricks in the Randomizer */
 export const TRICKS: Tricks = {
