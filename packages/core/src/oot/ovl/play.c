@@ -615,7 +615,7 @@ void hookPlay_Init(GameState_Play* play)
     Play_Init(play);
 
     /* Epona fix */
-    if (!IsSceneValidEpona(play->sceneId))
+    if (!comboIsEntranceValidEpona(gSave.entrance))
         comboClearEpona(play);
 
     gLastEntrance = gSave.entrance;

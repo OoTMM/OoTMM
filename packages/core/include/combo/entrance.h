@@ -8,6 +8,7 @@
 
 typedef struct GameState_Play GameState_Play;
 
+int  comboIsEntranceValidEpona(u32 entranceId);
 void comboTransition(GameState_Play* play, u32 entranceId);
 
 #endif
