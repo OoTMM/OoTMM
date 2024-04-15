@@ -957,6 +957,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MM_CLOCKS_PROGRESSIVE_REVERSE: settings.progressiveClocks === 'descending',
     ER_GROTTOS: settings.erGrottos !== 'none',
     ER_OVERWORLD: settings.erOverworld !== 'none',
+    ER_INDOORS: settings.erIndoors !== 'none',
     ER_REGIONS_OVERWORLD: settings.erRegions !== 'none' || settings.erOverworld !== 'none',
     CROSS_GAME_FW: settings.crossGameFw,
   };

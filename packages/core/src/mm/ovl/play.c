@@ -501,7 +501,7 @@ void hookPlay_Init(GameState_Play* play)
     g.keatonGrassMax = -1;
     comboMultiResetWisps();
 
-    if (comboConfig(CFG_ER_OVERWORLD))
+    if (comboConfig(CFG_ER_OVERWORLD) || comboConfig(CFG_ER_INDOORS))
         gSave.hasSirloin = 0;
 
     if (gSaveContext.respawnFlag == 8)

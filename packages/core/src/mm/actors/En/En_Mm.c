@@ -4,7 +4,7 @@ void EnMm_InitWrapper(Actor* this, GameState_Play* play)
 {
     ActorFunc EnMm_Init;
 
-    if (comboConfig(CFG_ER_OVERWORLD))
+    if (comboConfig(CFG_ER_OVERWORLD) || comboConfig(CFG_ER_INDOORS))
     {
         if (gSharedCustomSave.storedSirloin && play->sceneId != SCE_MM_MOUNTAIN_VILLAGE_WINTER)
         {
@@ -24,7 +24,7 @@ static int EnMm_ActorHasParent(Actor* this)
     if (!Actor_HasParent(this))
         return 0;
 
-    if (comboConfig(CFG_ER_OVERWORLD))
+    if (comboConfig(CFG_ER_OVERWORLD) || comboConfig(CFG_ER_INDOORS))
     {
         if (gPlay->sceneId == SCE_MM_GORON_SHRINE)
         {
