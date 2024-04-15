@@ -1932,7 +1932,7 @@
     HOT_WATER_NORTH_SPRING: "is_spring"
     HOT_WATER_NORTH: "is_spring_or_winter"
 "Goron Shrine":
-  region: GORON_VILLAGE
+  region: ENTRANCE
   exits:
     "Goron Village": "true"
     "Goron Shop": "true"
@@ -1953,10 +1953,14 @@
     "Goron Shrine Pot 09": "true"
     "Goron Shrine Pot 10": "true"
     "Goron Shrine Pot 11": "true"
+"Goron Shrine From Shop":
+  region: NONE
+  exits:
+    "Goron Shrine": "true"
 "Goron Shop":
   region: ENTRANCE
   exits:
-    "Goron Shrine": "true"
+    "Goron Shrine From Shop": "true"
   locations:
     "Goron Shop Item 1": "shop_price(0x10)"
     "Goron Shop Item 2": "shop_price(0x11)"

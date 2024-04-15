@@ -432,6 +432,7 @@ MM_CUCCO_SHACK:                                 { game: mm, id: 0x7e00, type: in
 MM_DOGGY_RACETRACK:                             { game: mm, id: 0x7c00, type: indoors, areas: ["MM Romani Ranch", "MM Doggy Racetrack"], reverse: MM_ROMANI_RANCH_FROM_DOGGY_RACETRACK }
 MM_STABLES:                                     { game: mm, id: 0x0600, type: indoors, areas: ["MM Romani Ranch", "MM Stables"], reverse: MM_ROMANI_RANCH_FROM_STABLES }
 MM_RANCH_HOUSE:                                 { game: mm, id: 0x0610, type: indoors, areas: ["MM Romani Ranch", "MM Ranch House"], reverse: MM_ROMANI_RANCH_FROM_RANCH_HOUSE }
+MM_GORON_SHRINE:                                { game: mm, id: 0x5e00, type: indoors, maps: [MM_GORON_VILLAGE, MM_GORON_SHRINE], areas: ['MM Goron Village', 'MM Goron Shrine'], reverse: MM_GORON_VILLAGE_FROM_GORON_SHRINE, debug: [INTERIOR, 'Goron Shrine'] }
 MM_STOCK_POT_INN:                               { game: mm, id: 0xbc00, type: indoors-extra, maps: [MM_CLOCK_TOWN, MM_STOCK_POT], areas: ["MM Clock Town East", "MM Stock Pot Inn"], reverse: MM_CLOCK_TOWN_EAST_FROM_STOCK_POT_INN }
 MM_STOCK_POT_INN_ROOF:                          { game: mm, id: 0xbc10, type: indoors-extra, maps: [MM_CLOCK_TOWN, MM_STOCK_POT], areas: ["MM Stock Pot Inn Roof", "MM Stock Pot Inn"], reverse: MM_CLOCK_TOWN_EAST_FROM_STOCK_POT_INN_ROOF }
 MM_SEWERS_FROM_EXTERIOR_DOOR:                   { game: mm, id: 0x40a0, type: indoors-extra, maps: [MM_PIRATE_ENTRANCE, MM_PIRATE_SEWERS], areas: ["MM Pirate Fortress Entrance Balcony", "MM Pirate Fortress Sewers End"], reverse: MM_EXTERIOR_DOOR_FROM_SEWERS }
@@ -455,7 +456,7 @@ MM_CLOCK_TOWN_WEST_FROM_LOTTERY:                { game: mm, id: 0xd480, type: in
 MM_LAUNDRY_POOL_FROM_KAFEI_HIDEOUT:             { game: mm, id: 0xda10, type: indoors-exit, maps: [MM_CURIOSITY_SHOP, MM_LAUNDRY_POOL], areas: ["MM Kafei Hideout", "MM Laundry Pool"], reverse: MM_KAFEI_HIDEOUT }
 MM_SWAMP_FROM_POTION_SHOP:                      { game: mm, id: 0x8450, type: indoors-exit, maps: [NONE, MM_SWAMP], areas: ["MM Swamp Potion Shop", "MM Swamp Front"], reverse: MM_POTION_SHOP }
 MM_DEKU_PALACE_EXTERIOR_FROM_SHRINE:            { game: mm, id: 0x5040, type: indoors-exit, maps: [NONE, MM_DEKU_PALACE], areas: ["MM Deku Shrine", "MM Near Deku Shrine"], reverse: MM_DEKU_SHRINE }
-MM_GORON_SHRINE_FROM_SHOP:                      { game: mm, id: 0x5e10, type: indoors-exit, maps: [NONE, MM_GORON_SHRINE], areas: ["MM Goron Shop", "MM Goron Shrine"], reverse: MM_GORON_SHOP, debug: [INTERIOR, 'Goron Shrine'] }
+MM_GORON_SHRINE_FROM_SHOP:                      { game: mm, id: 0x5e10, type: indoors-exit, maps: [NONE, MM_GORON_SHRINE], areas: ["MM Goron Shop", "MM Goron Shrine From Shop"], reverse: MM_GORON_SHOP }
 MM_GREAT_BAY_COAST_FROM_FISHER_HUT:             { game: mm, id: 0x6840, type: indoors-exit, maps: [NONE, MM_GREAT_BAY_COAST], areas: ["MM Fisher's Hut", "MM Great Bay Coast"], reverse: MM_FISHER_HUT }
 MM_GREAT_BAY_COAST_FROM_LABORATORY:             { game: mm, id: 0x6870, type: indoors-exit, maps: [NONE, MM_GREAT_BAY_COAST], areas: ["MM Laboratory", "MM Great Bay Coast"], reverse: MM_LABORATORY }
 MM_ZORA_HALL_FROM_EVANS:                        { game: mm, id: 0x6040, type: indoors-exit, maps: [NONE, MM_ZORA_HALL], areas: ["MM Evan's Room", "MM Zora Hall"], reverse: MM_ROOM_EVANS }
@@ -483,6 +484,7 @@ MM_FIELD_FROM_ASTRAL_OBSERVATORY:               { game: mm, id: 0x5490, type: in
 MM_SWAMP_ROAD_FROM_ARCHERY:                     { game: mm, id: 0x7a20, type: indoors-exit, maps: [NONE, MM_ROAD_SWAMP], areas: ["MM Swamp Archery", "MM Road to Southern Swamp"], reverse: MM_SWAMP_ARCHERY }
 MM_TWIN_ISLANDS_FROM_GORON_RACETRACK:           { game: mm, id: 0xb420, type: indoors-exit, maps: [NONE, MM_TWIN_ISLANDS], areas: ["MM Goron Race", "MM Near Goron Race"], reverse: MM_GORON_RACETRACK }
 MM_ZORA_CAPE_FROM_BEAVERS:                      { game: mm, id: 0x6a40, type: indoors-exit, maps: [NONE, MM_ZORA_CAPE], areas: ["MM Waterfall Rapids", "MM Waterfall Cliffs"], reverse: MM_BEAVERS }
+MM_GORON_VILLAGE_FROM_GORON_SHRINE:             { game: mm, id: 0x9420, type: indoors-exit, maps: [MM_GORON_SHRINE, MM_GORON_VILLAGE], areas: ['MM Goron Shrine', 'MM Goron Village'], reverse: MM_GORON_SHRINE }
 MM_DEKU_PALACE_THRONE:                          { game: mm, id: 0x7600, type: indoors-special, areas: ["MM Deku Palace Main", "MM Deku Palace Throne"], reverse: MM_DEKU_PALACE_EXTERIOR_FROM_THRONE }
 MM_DEKU_PALACE_EXTERIOR_FROM_THRONE:            { game: mm, id: 0x5020, type: indoors-special, areas: ["MM Deku Palace Throne", "MM Deku Palace Main"], reverse: MM_DEKU_PALACE_THRONE }
 MM_DEKU_PALACE_THRONE_CAGE:                     { game: mm, id: 0x7610, type: indoors-special, areas: ["MM Deku Palace Near Cage", "MM Deku Palace Cage"], reverse: MM_DEKU_PALACE_EXTERIOR_FROM_THRONE_CAGE }
