@@ -81,9 +81,28 @@ static void fixSpawn(void)
     u32 entrance;
     s32 override;
 
-    /* If the player saved in a dungeon, don't touch it */
+    /* If the player saved in a boss, don't touch it */
     if (dungeonRespawn(gSave.sceneId, 1))
         return;
+
+    /* If the player saved in a dungeon, don't touch it */
+    switch (gSave.sceneId)
+    {
+    case SCE_OOT_INSIDE_DEKU_TREE:
+    case SCE_OOT_DODONGO_CAVERN:
+    case SCE_OOT_INSIDE_JABU_JABU:
+    case SCE_OOT_TEMPLE_FOREST:
+    case SCE_OOT_TEMPLE_FIRE:
+    case SCE_OOT_TEMPLE_WATER:
+    case SCE_OOT_TEMPLE_SHADOW:
+    case SCE_OOT_TEMPLE_SPIRIT:
+    case SCE_OOT_BOTTOM_OF_THE_WELL:
+    case SCE_OOT_ICE_CAVERN:
+    case SCE_OOT_GERUDO_TRAINING_GROUND:
+    case SCE_OOT_INSIDE_GANON_CASTLE:
+    case SCE_OOT_GANON_TOWER:
+        return;
+    }
 
     /* If the player saved in link's house, and it's not ER, honor that */
     if (gSave.sceneId == SCE_OOT_LINK_HOUSE && !comboConfig(CFG_ER_ANY))
