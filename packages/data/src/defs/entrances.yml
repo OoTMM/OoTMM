@@ -84,6 +84,8 @@ OOT_MARKET_FROM_MARKET_ENTRANCE:                { game: oot, id: 0x0b1, type: ov
 OOT_MARKET_ENTRANCE_FROM_MARKET:                { game: oot, id: 0x033, type: overworld, maps: [OOT_MARKET, OOT_MARKET], submaps: [MAIN, ENTRANCE], areas: ["OOT Market", "OOT Market Entryway"], reverse: OOT_MARKET_FROM_MARKET_ENTRANCE }
 OOT_HYRULE_CASTLE:                              { game: oot, id: 0x138, type: overworld, maps: [OOT_MARKET, OOT_HYRULE_CASTLE], areas: ["OOT Market", "OOT Market Castle Entry"], reverse: OOT_MARKET_FROM_CASTLE }
 OOT_MARKET_FROM_CASTLE:                         { game: oot, id: 0x25a, type: overworld, maps: [OOT_HYRULE_CASTLE, OOT_MARKET], areas: ["OOT Market Castle Entry", "OOT Market"], reverse: OOT_HYRULE_CASTLE }
+OOT_MARKET_FROM_TEMPLE_OF_TIME_ENTRYWAY:        { game: oot, id: 0x25e, type: overworld, maps: [OOT_MARKET, OOT_MARKET], submaps: [TEMPLE, MAIN], areas: ["OOT Temple of Time Entryway", "OOT Market"], reverse: OOT_TEMPLE_OF_TIME_ENTRYWAY_FROM_MARKET }
+OOT_TEMPLE_OF_TIME_ENTRYWAY_FROM_MARKET:        { game: oot, id: 0x171, type: overworld, maps: [OOT_MARKET, OOT_MARKET], submaps: [MAIN, TEMPLE], areas: ["OOT Market", "OOT Temple of Time Entryway"], reverse: OOT_MARKET_FROM_TEMPLE_OF_TIME_ENTRYWAY }
 OOT_LAKE_HYLIA_FROM_VALLEY:                     { game: oot, id: 0x219, type: one-way, areas: ["OOT Gerudo Valley Falls", "OOT Lake Hylia"] }
 OOT_LOST_WOODS_FROM_LOST_WOODS_NORTH:           { game: oot, id: 0xf01, type: one-way-woods, areas: ["OOT Lost Woods Lost North", "OOT Lost Woods"] }
 OOT_LOST_WOODS_FROM_LOST_WOODS_EAST:            { game: oot, id: 0x1ad, type: one-way-woods, areas: ["OOT Lost Woods Lost East", "OOT Lost Woods"] }
@@ -264,22 +266,22 @@ OOT_GRAVE_EXIT_SHIELD:                          { game: oot, id: 0x35d, type: gr
 OOT_GRAVE_EXIT_REDEAD:                          { game: oot, id: 0x361, type: grave-exit, areas: ["OOT Graveyard ReDead Grave", "OOT Graveyard"], reverse: OOT_GRAVE_REDEAD }
 OOT_GRAVE_EXIT_ROYAL:                           { game: oot, id: 0x50b, type: grave-exit, areas: ["OOT Graveyard Royal Tomb", "OOT Graveyard"], reverse: OOT_GRAVE_ROYAL }
 OOT_GRAVE_EXIT_DAMPE:                           { game: oot, id: 0x359, type: grave-exit, areas: ["OOT Dampe Grave Entrance", "OOT Graveyard"], reverse: OOT_GRAVE_DAMPE }
-OOT_BOSS_GANON2:                                { game: oot, id: 0x517,  type: none, debug: ['BOSS', 'Ganon'] }
-OOT_GERUDO_FORTRESS_CAUGHT_NO_HOOK:             { game: oot, id: 0x1a5,  type: none }
-OOT_GERUDO_FORTRESS_CAUGHT:                     { game: oot, id: 0x5f8,  type: none }
-OOT_CASTLE_STEALTH:                             { game: oot, id: 0x07a,  type: none }
-OOT_CASTLE_STEALTH_FROM_COURTYARD:              { game: oot, id: 0x296,  type: none }
-OOT_CASTLE_COURTYARD:                           { game: oot, id: 0x400,  type: none, debug: ['SPECIAL', 'Castle Courtyard'] }
-OOT_CASTLE_CAUGHT:                              { game: oot, id: 0x47e,  type: none }
-OOT_SHOP_MASKS:                                 { game: oot, id: 0x530,  type: none }
-OOT_SAGES_CHAMBER_END:                          { game: oot, id: 0x06b,  type: none }
-OOT_TEMPLE_OF_TIME_MASTER_SWORD_CS:             { game: oot, id: 0x2ca,  type: none }
-OOT_ZORA_RIVER_FROM_FIELD_WATER:                { game: oot, id: 0x1d9,  type: none }
-OOT_FIELD_FROM_ZORA_RIVER_WATER:                { game: oot, id: 0x311,  type: none }
-OOT_GROTTO_TYPE_GENERIC:                        { game: oot, id: 0x03f,  type: none } # Multiple uses
-OOT_GROTTO_TYPE_FAIRY:                          { game: oot, id: 0x36d,  type: none } # Multiple uses
-OOT_GROTTO_TYPE_SCRUB2:                         { game: oot, id: 0x5bc,  type: none } # Multiple uses
-OOT_GROTTO_TYPE_SCRUB3:                         { game: oot, id: 0x5a4,  type: none } # Multiple uses
+OOT_BOSS_GANON2:                                { game: oot, id: 0x517, type: none, debug: ['BOSS', 'Ganon'] }
+OOT_GERUDO_FORTRESS_CAUGHT_NO_HOOK:             { game: oot, id: 0x1a5, type: none }
+OOT_GERUDO_FORTRESS_CAUGHT:                     { game: oot, id: 0x5f8, type: none }
+OOT_CASTLE_STEALTH:                             { game: oot, id: 0x07a, type: none }
+OOT_CASTLE_STEALTH_FROM_COURTYARD:              { game: oot, id: 0x296, type: none }
+OOT_CASTLE_COURTYARD:                           { game: oot, id: 0x400, type: none, debug: ['SPECIAL', 'Castle Courtyard'] }
+OOT_CASTLE_CAUGHT:                              { game: oot, id: 0x47e, type: none }
+OOT_SHOP_MASKS:                                 { game: oot, id: 0x530, type: none }
+OOT_SAGES_CHAMBER_END:                          { game: oot, id: 0x06b, type: none }
+OOT_TEMPLE_OF_TIME_MASTER_SWORD_CS:             { game: oot, id: 0x2ca, type: none }
+OOT_ZORA_RIVER_FROM_FIELD_WATER:                { game: oot, id: 0x1d9, type: none }
+OOT_FIELD_FROM_ZORA_RIVER_WATER:                { game: oot, id: 0x311, type: none }
+OOT_GROTTO_TYPE_GENERIC:                        { game: oot, id: 0x03f, type: none } # Multiple uses
+OOT_GROTTO_TYPE_FAIRY:                          { game: oot, id: 0x36d, type: none } # Multiple uses
+OOT_GROTTO_TYPE_SCRUB2:                         { game: oot, id: 0x5bc, type: none } # Multiple uses
+OOT_GROTTO_TYPE_SCRUB3:                         { game: oot, id: 0x5a4, type: none } # Multiple uses
 OOT_MARKET_FROM_MASK_SHOP:                      { game: oot, id: 0x1d1, type: none }
 OOT_INTERNAL_EXIT_GROTTO:                       { game: oot, id: 0x7fff, type: none }
 MM_BOSS_TEMPLE_WOODFALL:                        { game: mm, id: 0x3800, type: boss, flags: [no-sot], areas: ["MM Woodfall Temple Boss Access", "MM Woodfall Temple Boss"], debug: ['BOSS', 'Odolwa'] }
