@@ -390,8 +390,10 @@ MM_IKANA_CASTLE_GARDENS:                        { game: mm, id: 0x3410, type: ov
 MM_IKANA_CANYON_FROM_CASTLE_GARDENS:            { game: mm, id: 0x2080, type: overworld, maps: [MM_IKANA_CASTLE, MM_IKANA_VALLEY], areas: ["MM Ikana Castle Entrance", "MM Ikana Canyon"], reverse: MM_IKANA_CASTLE_GARDENS }
 MM_STONE_TOWER:                                 { game: mm, id: 0xaa00, type: overworld, maps: [MM_IKANA_VALLEY, MM_STONE_TOWER], areas: ["MM Ikana Canyon", "MM Stone Tower"], reverse: MM_IKANA_CANYON_FROM_STONE_TOWER }
 MM_IKANA_CANYON_FROM_STONE_TOWER:               { game: mm, id: 0x2030, type: overworld, maps: [MM_STONE_TOWER, MM_IKANA_VALLEY], areas: ["MM Stone Tower", "MM Ikana Canyon"], reverse: MM_STONE_TOWER }
-MM_TWIN_ISLAND_FROM_MOUNTAIN_VILLAGE:           { game: mm, id: 0xb400, type: overworld, maps: [MM_MOUNTAIN_VILLAGE, MM_TWIN_ISLANDS], areas: ["MM Mountain Village", "MM Twin Islands"], reverse: MM_MOUNTAIN_VILLAGE_FROM_TWIN_ISLANDS }
-MM_MOUNTAIN_VILLAGE_FROM_TWIN_ISLANDS:          { game: mm, id: 0x9a20, type: overworld, maps: [MM_TWIN_ISLANDS, MM_MOUNTAIN_VILLAGE], areas: ["MM Twin Islands", "MM Mountain Village"], reverse: MM_TWIN_ISLAND_FROM_MOUNTAIN_VILLAGE }
+MM_TWIN_ISLANDS_FROM_MOUNTAIN_VILLAGE:          { game: mm, id: 0xb400, type: overworld, maps: [MM_MOUNTAIN_VILLAGE, MM_TWIN_ISLANDS], areas: ["MM Mountain Village", "MM Twin Islands"], reverse: MM_MOUNTAIN_VILLAGE_FROM_TWIN_ISLANDS, debug: [REGION, 'Twin Islands'] }
+MM_MOUNTAIN_VILLAGE_FROM_TWIN_ISLANDS:          { game: mm, id: 0x9a20, type: overworld, maps: [MM_TWIN_ISLANDS, MM_MOUNTAIN_VILLAGE], areas: ["MM Twin Islands", "MM Mountain Village"], reverse: MM_TWIN_ISLANDS_FROM_MOUNTAIN_VILLAGE }
+MM_TWIN_ISLANDS_FROM_GORON_VILLAGE:             { game: mm, id: 0xb410, type: overworld, maps: [MM_GORON_VILLAGE, MM_TWIN_ISLANDS], areas: ["MM Goron Village", "MM Twin Islands"], reverse: MM_GORON_VILLAGE_FROM_TWIN_ISLANDS }
+MM_GORON_VILLAGE_FROM_TWIN_ISLANDS:             { game: mm, id: 0x9400, type: overworld, maps: [MM_TWIN_ISLANDS, MM_GORON_VILLAGE], areas: ["MM Twin Islands", "MM Goron Village"], reverse: MM_TWIN_ISLANDS_FROM_GORON_VILLAGE, debug: [REGION, 'Goron Village'] }
 MM_SWAMP_FROM_IKANA_CANYON:                     { game: mm, id: 0x8490, type: one-way, areas: ["MM Ikana Valley", "MM Swamp Front"] }
 MM_IKANA_CASTLE_INTERIOR_KEG:                   { game: mm, id: 0x3440, type: one-way-ikana, areas: ["MM Ancient Castle of Ikana Roof Interior", "MM Ancient Castle of Ikana"] }
 MM_IKANA_CASTLE_INTERIOR_BLOCK:                 { game: mm, id: 0x3450, type: one-way-ikana, areas: ["MM Ancient Castle of Ikana Roof Interior", "MM Ancient Castle of Ikana Interior South"] }
@@ -570,8 +572,6 @@ MM_MOON:                                        { game: mm, id: 0xc800, type: no
 MM_CLOCK_TOWN_FROM_SONG_OF_TIME:                { game: mm, id: 0x1c00, type: none }
 MM_CLOCK_TOWER_MOON_CRASH:                      { game: mm, id: 0xc030, type: none }
 MM_CLOCK_TOWER_FROM_CLOCK_TOWN:                 { game: mm, id: 0xc010, type: none }
-MM_GORON_VILLAGE_FROM_TWIN_SPRING:              { game: mm, id: 0x8a00, type: none }
-MM_GORON_VILLAGE_FROM_TWIN_WINTER:              { game: mm, id: 0x9400, type: none }
 MM_COAST_FROM_MIKAU_CS:                         { game: mm, id: 0x68a0, type: none }
 MM_GROTTO_TYPE_GENERIC:                         { game: mm, id: 0x1440, type: none } # Multiple uses
 MM_GROTTO_TYPE_COW:                             { game: mm, id: 0x14a0, type: none } # Multiple uses

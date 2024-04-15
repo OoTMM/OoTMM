@@ -25,6 +25,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Rework how the sirloin function in indoor ER (+ new overworld ER) to allow shuffling the North in MM.
 - Saving is now enabled on the Clock Tower Roof with Moon Crash set to New Cycle.
 - Farore's Wind in MM is now tied to Link's age, like in OoT.
 - Logic for MM's cursed and cleared states has received an overhaul and is now more robust.
