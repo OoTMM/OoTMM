@@ -390,6 +390,8 @@ MM_IKANA_CASTLE_GARDENS:                        { game: mm, id: 0x3410, type: ov
 MM_IKANA_CANYON_FROM_CASTLE_GARDENS:            { game: mm, id: 0x2080, type: overworld, maps: [MM_IKANA_CASTLE, MM_IKANA_VALLEY], areas: ["MM Ikana Castle Entrance", "MM Ikana Canyon"], reverse: MM_IKANA_CASTLE_GARDENS }
 MM_STONE_TOWER:                                 { game: mm, id: 0xaa00, type: overworld, maps: [MM_IKANA_VALLEY, MM_STONE_TOWER], areas: ["MM Ikana Canyon", "MM Stone Tower"], reverse: MM_IKANA_CANYON_FROM_STONE_TOWER }
 MM_IKANA_CANYON_FROM_STONE_TOWER:               { game: mm, id: 0x2030, type: overworld, maps: [MM_STONE_TOWER, MM_IKANA_VALLEY], areas: ["MM Stone Tower", "MM Ikana Canyon"], reverse: MM_STONE_TOWER }
+MM_TWIN_ISLAND_FROM_MOUNTAIN_VILLAGE:           { game: mm, id: 0xb400, type: overworld, maps: [MM_MOUNTAIN_VILLAGE, MM_TWIN_ISLANDS], areas: ["MM Mountain Village", "MM Twin Islands"], reverse: MM_MOUNTAIN_VILLAGE_FROM_TWIN_ISLANDS }
+MM_MOUNTAIN_VILLAGE_FROM_TWIN_ISLANDS:          { game: mm, id: 0x9a20, type: overworld, maps: [MM_TWIN_ISLANDS, MM_MOUNTAIN_VILLAGE], areas: ["MM Twin Islands", "MM Mountain Village"], reverse: MM_TWIN_ISLAND_FROM_MOUNTAIN_VILLAGE }
 MM_SWAMP_FROM_IKANA_CANYON:                     { game: mm, id: 0x8490, type: one-way, areas: ["MM Ikana Valley", "MM Swamp Front"] }
 MM_IKANA_CASTLE_INTERIOR_KEG:                   { game: mm, id: 0x3440, type: one-way-ikana, areas: ["MM Ancient Castle of Ikana Roof Interior", "MM Ancient Castle of Ikana"] }
 MM_IKANA_CASTLE_INTERIOR_BLOCK:                 { game: mm, id: 0x3450, type: one-way-ikana, areas: ["MM Ancient Castle of Ikana Roof Interior", "MM Ancient Castle of Ikana Interior South"] }
@@ -563,7 +565,6 @@ MM_GROTTO_EXIT_DEKU_PLAYGROUND:                 { game: mm, id: 0xd640, type: gr
 MM_GRAVE_EXIT_NIGHT1:                           { game: mm, id: 0x8030, type: grave-exit, maps: [MM_BENEATH_GRAVEYARD, MM_GRAVEYARD], areas: ['MM Beneath The Graveyard Night 1', 'MM Ikana Graveyard'], reverse: MM_GRAVE_NIGHT1 }
 MM_GRAVE_EXIT_NIGHT2:                           { game: mm, id: 0x8020, type: grave-exit, maps: [MM_BENEATH_GRAVEYARD, MM_GRAVEYARD], areas: ['MM Beneath The Graveyard Night 2', 'MM Ikana Graveyard'], reverse: MM_GRAVE_NIGHT2 }
 MM_GRAVE_EXIT_NIGHT3:                           { game: mm, id: 0x8010, type: grave-exit, maps: [MM_BENEATH_GRAVEYARD_DAMPE, MM_GRAVEYARD], areas: ['MM Beneath The Graveyard Night 3 Fake Exit', 'MM Ikana Graveyard'], reverse: MM_GRAVE_NIGHT3 }
-MM_TWIN_ISLAND_FROM_MOUNTAIN_VILLAGE:           { game: mm, id: 0xb400, type: none }
 MM_CLOCK_TOWN:                                  { game: mm, id: 0xd800, type: none, debug: ['COMMON', 'Clock Town'] }
 MM_MOON:                                        { game: mm, id: 0xc800, type: none, debug: ['COMMON', 'Moon'] }
 MM_CLOCK_TOWN_FROM_SONG_OF_TIME:                { game: mm, id: 0x1c00, type: none }

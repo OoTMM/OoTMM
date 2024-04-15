@@ -110,14 +110,20 @@ static void checkTimeSkip(GameState_Play* play)
 
 static u32 entranceForOverride(u32 entrance)
 {
+    u32 entranceKey;
+
+    entranceKey = (entrance >> 9);
+    switch (entranceKey)
+    {
+    case 0x06: entranceKey = 0x42; break;
+    case 0x57: entranceKey = 0x4d; break;
+    case 0x45: entranceKey = 0x4a; break;
+    case 0x5b: entranceKey = 0x5a; break;
+    }
+    entrance = (entranceKey << 9) | (entrance & 0x1ff);
+
     switch (entrance)
     {
-    case 0x0c00:
-        /* To Clear Swamp from road */
-        return ENTR_MM_SWAMP_FROM_ROAD;
-    case 0xae60:
-        /* To Spring Mountain Village from Path */
-        return ENTR_MM_MOUNTAIN_VILLAGE_FROM_PATH;
     case ENTR_MM_GROTTO_TYPE_GENERIC:
         switch (gGrottoData & 0x1f)
         {
