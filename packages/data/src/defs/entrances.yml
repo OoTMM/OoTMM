@@ -91,85 +91,86 @@ OOT_LOST_WOODS_FROM_LOST_WOODS_NORTH:           { game: oot, id: 0xf01, type: on
 OOT_LOST_WOODS_FROM_LOST_WOODS_EAST:            { game: oot, id: 0x1ad, type: one-way-woods, areas: ["OOT Lost Woods Lost East", "OOT Lost Woods"] }
 OOT_LOST_WOODS_FROM_LOST_WOODS_SOUTH:           { game: oot, id: 0x1b1, type: one-way-woods, areas: ["OOT Lost Woods Lost South", "OOT Lost Woods"] }
 OOT_LOST_WOODS_FROM_LOST_WOODS_WEST:            { game: oot, id: 0x4c6, type: one-way-woods, areas: ["OOT Lost Woods Lost West", "OOT Lost Woods"] }
-OOT_KOKIRI_FOREST_FROM_MIDO:                    { game: oot, id: 0x443, type: indoors-exit, areas: ["OOT Mido's House", "OOT Kokiri Forest"], reverse: OOT_HOUSE_MIDO }
-OOT_KOKIRI_FOREST_FROM_SARIA:                   { game: oot, id: 0x447, type: indoors-exit, areas: ["OOT Saria's House", "OOT Kokiri Forest"], reverse: OOT_HOUSE_SARIA }
-OOT_KOKIRI_FOREST_FROM_TWINS:                   { game: oot, id: 0x33c, type: indoors-exit, areas: ["OOT House of Twins", "OOT Kokiri Forest"], reverse: OOT_HOUSE_TWINS }
-OOT_KOKIRI_FOREST_FROM_KNOW_IT_ALL:             { game: oot, id: 0x26a, type: indoors-exit, areas: ["OOT Know It All House", "OOT Kokiri Forest"], reverse: OOT_HOUSE_KNOW_IT_ALL }
-OOT_KOKIRI_FOREST_FROM_SHOP:                    { game: oot, id: 0x266, type: indoors-exit, areas: ["OOT Kokiri Shop", "OOT Kokiri Forest"], reverse: OOT_KOKIRI_SHOP }
 OOT_HOUSE_MIDO:                                 { game: oot, id: 0x433, type: indoors, areas: ["OOT Kokiri Forest", "OOT Mido's House"], reverse: OOT_KOKIRI_FOREST_FROM_MIDO }
 OOT_HOUSE_SARIA:                                { game: oot, id: 0x437, type: indoors, areas: ["OOT Kokiri Forest", "OOT Saria's House"], reverse: OOT_KOKIRI_FOREST_FROM_SARIA }
 OOT_HOUSE_TWINS:                                { game: oot, id: 0x09c, type: indoors, areas: ["OOT Kokiri Forest", "OOT House of Twins"], reverse: OOT_KOKIRI_FOREST_FROM_TWINS }
 OOT_HOUSE_KNOW_IT_ALL:                          { game: oot, id: 0x0c9, type: indoors, areas: ["OOT Kokiri Forest", "OOT Know It All House"], reverse: OOT_KOKIRI_FOREST_FROM_KNOW_IT_ALL }
 OOT_KOKIRI_SHOP:                                { game: oot, id: 0x0c1, type: indoors, areas: ["OOT Kokiri Forest", "OOT Kokiri Shop"], reverse: OOT_KOKIRI_FOREST_FROM_SHOP }
-OOT_MARKET_ENTRANCE_FROM_POTS:                  { game: oot, id: 0x26e, type: indoors-exit, areas: ["OOT Market Pot House", "OOT Market Entryway"], reverse: OOT_HOUSE_POTS }
 OOT_HOUSE_POTS:                                 { game: oot, id: 0x07e, type: indoors, areas: ["OOT Market Entryway", "OOT Market Pot House"], reverse: OOT_MARKET_ENTRANCE_FROM_POTS }
 OOT_LABORATORY:                                 { game: oot, id: 0x043, type: indoors, areas: ["OOT Lake Hylia", "OOT Laboratory"], reverse: OOT_LAKE_HYLIA_FROM_LABORATORY }
-OOT_LAKE_HYLIA_FROM_LABORATORY:                 { game: oot, id: 0x3cc, type: indoors-exit, areas: ["OOT Laboratory", "OOT Lake Hylia"], reverse: OOT_LABORATORY }
 OOT_FISHING_POND:                               { game: oot, id: 0x45f, type: indoors, areas: ["OOT Lake Hylia", "OOT Fishing Pond"], reverse: OOT_LAKE_HYLIA_FROM_FISHING_POND }
-OOT_LAKE_HYLIA_FROM_FISHING_POND:               { game: oot, id: 0x309, type: indoors-exit, areas: ["OOT Fishing Pond", "OOT Lake Hylia"], reverse: OOT_FISHING_POND }
 OOT_VALLEY_TENT:                                { game: oot, id: 0x3a0, type: indoors, areas: ["OOT Gerudo Valley After Bridge", "OOT Gerudo Valley Tent"], reverse: OOT_GERUDO_VALLEY_FROM_TENT }
-OOT_GERUDO_VALLEY_FROM_TENT:                    { game: oot, id: 0x3d0, type: indoors-exit, areas: ["OOT Gerudo Valley Tent", "OOT Gerudo Valley After Bridge"], reverse: OOT_VALLEY_TENT }
 OOT_HOUSE_CARPENTER:                            { game: oot, id: 0x2fd, type: indoors, areas: ["OOT Kakariko", "OOT Kakariko Carpenter House"], reverse: OOT_KAKARIKO_FROM_CARPENTER }
-OOT_KAKARIKO_FROM_CARPENTER:                    { game: oot, id: 0x349, type: indoors-exit, areas: ["OOT Kakariko Carpenter House", "OOT Kakariko"], reverse: OOT_HOUSE_CARPENTER }
 OOT_HOUSE_SKULLTULA:                            { game: oot, id: 0x550, type: indoors, areas: ["OOT Kakariko", "OOT Skulltula House"], reverse: OOT_KAKARIKO_FROM_SKULLTULA }
-OOT_KAKARIKO_FROM_SKULLTULA:                    { game: oot, id: 0x4ee, type: indoors-exit, areas: ["OOT Skulltula House", "OOT Kakariko"], reverse: OOT_HOUSE_SKULLTULA }
 OOT_HOUSE_IMPA:                                 { game: oot, id: 0x39c, type: indoors, areas: ["OOT Kakariko", "OOT Impa House Front"], reverse: OOT_KAKARIKO_FROM_IMPA }
-OOT_KAKARIKO_FROM_IMPA:                         { game: oot, id: 0x345, type: indoors-exit, areas: ["OOT Impa House Front", "OOT Kakariko"], reverse: OOT_HOUSE_IMPA }
 OOT_HOUSE_IMPA_BACK:                            { game: oot, id: 0x5c8, type: indoors, areas: ["OOT Kakariko Rooftop", "OOT Impa House Back"], reverse: OOT_KAKARIKO_FROM_IMPA_BACK }
-OOT_KAKARIKO_FROM_IMPA_BACK:                    { game: oot, id: 0x5dc, type: indoors-exit, areas: ["OOT Impa House Back", "OOT Kakariko Rooftop"], reverse: OOT_HOUSE_IMPA_BACK }
 OOT_SHOP_GRANNY:                                { game: oot, id: 0x072, type: indoors, areas: ["OOT Kakariko Back", "OOT Kakariko Granny Shop"], reverse: OOT_KAKARIKO_FROM_GRANNY }
-OOT_KAKARIKO_FROM_GRANNY:                       { game: oot, id: 0x34d, type: indoors-exit, areas: ["OOT Kakariko Granny Shop", "OOT Kakariko Back"], reverse: OOT_SHOP_GRANNY }
 OOT_HOUSE_DAMPE:                                { game: oot, id: 0x30d, type: indoors, areas: ["OOT Graveyard", "OOT Dampe House"], reverse: OOT_GRAVEYARD_FROM_DAMPE }
-OOT_GRAVEYARD_FROM_DAMPE:                       { game: oot, id: 0x355, type: indoors-exit, areas: ["OOT Dampe House", "OOT Graveyard"], reverse: OOT_HOUSE_DAMPE }
 OOT_SHOP_GORON:                                 { game: oot, id: 0x37c, type: indoors, areas: ["OOT Goron City", "OOT Goron Shop"], reverse: OOT_GORON_CITY_FROM_SHOP }
-OOT_GORON_CITY_FROM_SHOP:                       { game: oot, id: 0x3fc, type: indoors-exit, areas: ["OOT Goron Shop", "OOT Goron City"], reverse: OOT_SHOP_GORON }
 OOT_SHOP_ZORA:                                  { game: oot, id: 0x380, type: indoors, areas: ["OOT Zora Domain", "OOT Zora Shop"], reverse: OOT_ZORA_DOMAIN_FROM_SHOP }
-OOT_ZORA_DOMAIN_FROM_SHOP:                      { game: oot, id: 0x3c4, type: indoors-exit, areas: ["OOT Zora Shop", "OOT Zora Domain"], reverse: OOT_SHOP_ZORA }
 OOT_HOUSE_LON_LON:                              { game: oot, id: 0x04f, type: indoors, areas: ["OOT Lon Lon Ranch", "OOT Lon Lon Ranch House"], reverse: OOT_LON_LON_RANCH_FROM_HOUSE }
-OOT_LON_LON_RANCH_FROM_HOUSE:                   { game: oot, id: 0x378, type: indoors-exit, areas: ["OOT Lon Lon Ranch House", "OOT Lon Lon Ranch"], reverse: OOT_HOUSE_LON_LON }
-OOT_STABLES:                                    { game: oot, id: 0x2f9, type: indoors, areas: ["OOT Lon Lon Ranch", "OOT Lon Lon Ranch Stables"], reverse: OOT_LON_LON_RANCH_FROM_STABLES }
-OOT_LON_LON_RANCH_FROM_STABLES:                 { game: oot, id: 0x42f, type: indoors-exit, areas: ["OOT Lon Lon Ranch Stables", "OOT Lon Lon Ranch"], reverse: OOT_STABLES }
 OOT_SILO:                                       { game: oot, id: 0x5d0, type: indoors, areas: ["OOT Lon Lon Ranch", "OOT Lon Lon Ranch Silo"], reverse: OOT_LON_LON_RANCH_FROM_SILO }
-OOT_LON_LON_RANCH_FROM_SILO:                    { game: oot, id: 0x5d4, type: indoors-exit, areas: ["OOT Lon Lon Ranch Silo", "OOT Lon Lon Ranch"], reverse: OOT_SILO }
-OOT_HOUSE_LINK:                                 { game: oot, id: 0x272, type: indoors-extra, areas: ["OOT Kokiri Forest", "OOT Link's House"], reverse: OOT_KOKIRI_FOREST_FROM_LINK }
-OOT_KOKIRI_FOREST_FROM_LINK:                    { game: oot, id: 0x211, type: indoors-exit, areas: ["OOT Link's House", "OOT Kokiri Forest"], reverse: OOT_HOUSE_LINK }
-OOT_TEMPLE_OF_TIME:                             { game: oot, id: 0x053, type: indoors-extra, areas: ["OOT Temple of Time Entryway", "OOT Temple of Time"], reverse: OOT_TEMPLE_OF_TIME_ENTRYWAY_FROM_TEMPLE, debug: ['COMMON', 'Temple of Time'] }
-OOT_TEMPLE_OF_TIME_ENTRYWAY_FROM_TEMPLE:        { game: oot, id: 0x472, type: indoors-exit, areas: ["OOT Temple of Time", "OOT Temple of Time Entryway"], reverse: OOT_TEMPLE_OF_TIME }
-OOT_WINDMILL:                                   { game: oot, id: 0x453, type: indoors-extra, areas: ["OOT Kakariko", "OOT Windmill"], reverse: OOT_KAKARIKO_FROM_WINDMILL }
-OOT_KAKARIKO_FROM_WINDMILL:                     { game: oot, id: 0x351, type: indoors-exit, areas: ["OOT Windmill", "OOT Kakariko"], reverse: OOT_WINDMILL }
-OOT_SHOP_POTION_KAKARIKO:                       { game: oot, id: 0x384, type: indoors-extra, areas: ["OOT Kakariko", "OOT Kakariko Potion Shop"], reverse: OOT_KAKARIKO_FROM_SHOP_POTION }
-OOT_KAKARIKO_FROM_SHOP_POTION:                  { game: oot, id: 0x44b, type: indoors-exit, areas: ["OOT Kakariko Potion Shop", "OOT Kakariko"], reverse: OOT_SHOP_POTION_KAKARIKO }
-OOT_SHOP_POTION_KAKARIKO_BACK:                  { game: oot, id: 0x3ec, type: indoors-extra, areas: ["OOT Kakariko Back", "OOT Kakariko Potion Shop Back"], reverse: OOT_KAKARIKO_FROM_SHOP_POTION_BACK }
-OOT_KAKARIKO_FROM_SHOP_POTION_BACK:             { game: oot, id: 0x4ff, type: indoors-exit, areas: ["OOT Kakariko Potion Shop Back", "OOT Kakariko Back"], reverse: OOT_SHOP_POTION_KAKARIKO_BACK }
+OOT_STABLES:                                    { game: oot, id: 0x2f9, type: indoors, areas: ["OOT Lon Lon Ranch", "OOT Lon Lon Ranch Stables"], reverse: OOT_LON_LON_RANCH_FROM_STABLES }
 OOT_FAIRY_MAGIC:                                { game: oot, id: 0x315, type: indoors, areas: ["OOT Death Mountain Summit", "OOT Fairy Fountain Magic"], reverse: OOT_DEATH_MOUNTAIN_FROM_FAIRY }
-OOT_DEATH_MOUNTAIN_FROM_FAIRY:                  { game: oot, id: 0x45b, type: indoors-exit, areas: ["OOT Fairy Fountain Magic", "OOT Death Mountain Summit"], reverse: OOT_FAIRY_MAGIC }
 OOT_FAIRY_MAGIC2:                               { game: oot, id: 0x4be, type: indoors, areas: ["OOT Death Mountain Crater Bottom", "OOT Fairy Fountain Double Magic"], reverse: OOT_DEATH_CRATER_FROM_FAIRY }
-OOT_DEATH_CRATER_FROM_FAIRY:                    { game: oot, id: 0x482, type: indoors-exit, areas: ["OOT Fairy Fountain Double Magic", "OOT Death Mountain Crater Bottom"], reverse: OOT_FAIRY_MAGIC2 }
 OOT_FAIRY_DIN:                                  { game: oot, id: 0x578, type: indoors, areas: ["OOT Near Fairy Fountain Din", "OOT Fairy Fountain Din"], reverse: OOT_HYRULE_CASTLE_FROM_FAIRY }
-OOT_HYRULE_CASTLE_FROM_FAIRY:                   { game: oot, id: 0x340, type: indoors-exit, areas: ["OOT Fairy Fountain Din", "OOT Near Fairy Fountain Din"], reverse: OOT_FAIRY_DIN }
 OOT_FAIRY_FARORE:                               { game: oot, id: 0x371, type: indoors, areas: ["OOT Zora Fountain", "OOT Fairy Fountain Farore"], reverse: OOT_ZORA_FOUNTAIN_FROM_FAIRY }
-OOT_ZORA_FOUNTAIN_FROM_FAIRY:                   { game: oot, id: 0x394, type: indoors-exit, areas: ["OOT Fairy Fountain Farore", "OOT Zora Fountain"], reverse: OOT_FAIRY_FARORE }
 OOT_FAIRY_NAYRU:                                { game: oot, id: 0x588, type: indoors, areas: ["OOT Desert Colossus", "OOT Fairy Fountain Nayru"], reverse: OOT_DESERT_COLOSSUS_FROM_FAIRY }
-OOT_DESERT_COLOSSUS_FROM_FAIRY:                 { game: oot, id: 0x57c, type: indoors-exit, areas: ["OOT Fairy Fountain Nayru", "OOT Desert Colossus"], reverse: OOT_FAIRY_NAYRU }
 OOT_FAIRY_DEFENSE:                              { game: oot, id: 0x4c2, type: indoors, areas: ["OOT Near Fairy Fountain Defense", "OOT Fairy Fountain Defense"], reverse: OOT_OUTSIDE_GANON_FROM_FAIRY }
 OOT_BOMBCHU_BOWLING:                            { game: oot, id: 0x507, type: indoors, areas: ["OOT Market", "OOT Bombchu Bowling"], reverse: OOT_MARKET_FROM_BOWLING }
-OOT_MARKET_FROM_BOWLING:                        { game: oot, id: 0x3bc, type: indoors-exit, areas: ["OOT Bombchu Bowling", "OOT Market"], reverse: OOT_BOMBCHU_BOWLING }
 OOT_TREASURE_GAME:                              { game: oot, id: 0x063, type: indoors, areas: ["OOT Market", "OOT Treasure Chest Game"], reverse: OOT_MARKET_FROM_TREASURE_GAME }
-OOT_MARKET_FROM_TREASURE_GAME:                  { game: oot, id: 0x1d5, type: indoors-exit, areas: ["OOT Treasure Chest Game", "OOT Market"], reverse: OOT_TREASURE_GAME }
 OOT_BOMBCHU_SHOP:                               { game: oot, id: 0x528, type: indoors, areas: ["OOT Back Alley", "OOT Market Bombchu Shop"], reverse: OOT_MARKET_FROM_BOMBCHU_SHOP }
-OOT_MARKET_FROM_BOMBCHU_SHOP:                   { game: oot, id: 0x3c0, type: indoors-exit, areas: ["OOT Market Bombchu Shop", "OOT Back Alley"], reverse: OOT_BOMBCHU_SHOP }
 OOT_ALLEY_HOUSE:                                { game: oot, id: 0x43b, type: indoors, areas: ["OOT Back Alley", "OOT Market Back Alley East Home"], reverse: OOT_MARKET_FROM_ALLEY_HOUSE }
-OOT_MARKET_FROM_ALLEY_HOUSE:                    { game: oot, id: 0x067, type: indoors-exit, areas: ["OOT Market Back Alley East Home", "OOT Back Alley"], reverse: OOT_ALLEY_HOUSE }
 OOT_MARKET_BAZAAR:                              { game: oot, id: 0x52c, type: indoors, areas: ["OOT Market", "OOT Market Bazaar"], reverse: OOT_MARKET_FROM_BAZAAR }
-OOT_MARKET_FROM_BAZAAR:                         { game: oot, id: 0x3b8, type: indoors-exit, areas: ["OOT Market Bazaar", "OOT Market"], reverse: OOT_MARKET_BAZAAR }
 OOT_MARKET_POTION:                              { game: oot, id: 0x388, type: indoors, areas: ["OOT Market", "OOT Market Potion Shop"], reverse: OOT_MARKET_FROM_POTION }
-OOT_MARKET_FROM_POTION:                         { game: oot, id: 0x2a2, type: indoors-exit, areas: ["OOT Market Potion Shop", "OOT Market"], reverse: OOT_MARKET_POTION }
 OOT_CHILD_ARCHERY:                              { game: oot, id: 0x16d, type: indoors, areas: ["OOT Market", "OOT Shooting Gallery Child"], reverse: OOT_MARKET_FROM_ARCHERY }
-OOT_MARKET_FROM_ARCHERY:                        { game: oot, id: 0x1cd, type: indoors-exit, areas: ["OOT Shooting Gallery Child", "OOT Market"], reverse: OOT_CHILD_ARCHERY }
 OOT_KAKARIKO_BAZAAR:                            { game: oot, id: 0x0b7, type: indoors, areas: ["OOT Kakariko", "OOT Kakariko Bazaar"], reverse: OOT_KAKARIKO_FROM_BAZAAR }
-OOT_KAKARIKO_FROM_BAZAAR:                       { game: oot, id: 0x201, type: indoors-exit, areas: ["OOT Kakariko Bazaar", "OOT Kakariko"], reverse: OOT_KAKARIKO_BAZAAR }
 OOT_ADULT_ARCHERY:                              { game: oot, id: 0x03b, type: indoors, areas: ["OOT Kakariko", "OOT Shooting Gallery Adult"], reverse: OOT_KAKARIKO_FROM_ARCHERY }
+OOT_HOUSE_LINK:                                 { game: oot, id: 0x272, type: indoors-extra, areas: ["OOT Kokiri Forest", "OOT Link's House"], reverse: OOT_KOKIRI_FOREST_FROM_LINK }
+OOT_TEMPLE_OF_TIME:                             { game: oot, id: 0x053, type: indoors-extra, maps: [OOT_MARKET, OOT_TEMPLE_OF_TIME], areas: ["OOT Temple of Time Entryway", "OOT Temple of Time"], reverse: OOT_TEMPLE_OF_TIME_ENTRYWAY_FROM_TEMPLE, debug: ['COMMON', 'Temple of Time'] }
+OOT_WINDMILL:                                   { game: oot, id: 0x453, type: indoors-extra, maps: [OOT_KAKARIKO, OOT_DAMPE_WINDMILL], areas: ["OOT Kakariko", "OOT Windmill"], reverse: OOT_KAKARIKO_FROM_WINDMILL }
+OOT_SHOP_POTION_KAKARIKO:                       { game: oot, id: 0x384, type: indoors-extra, maps: [OOT_KAKARIKO, OOT_KAKARIKO_POTION_SHOP], areas: ["OOT Kakariko", "OOT Kakariko Potion Shop"], reverse: OOT_KAKARIKO_FROM_SHOP_POTION }
+OOT_SHOP_POTION_KAKARIKO_BACK:                  { game: oot, id: 0x3ec, type: indoors-extra, maps: [OOT_KAKARIKO, OOT_KAKARIKO_POTION_SHOP], areas: ["OOT Kakariko Back", "OOT Kakariko Potion Shop Back"], reverse: OOT_KAKARIKO_FROM_SHOP_POTION_BACK }
+OOT_KOKIRI_FOREST_FROM_MIDO:                    { game: oot, id: 0x443, type: indoors-exit, areas: ["OOT Mido's House", "OOT Kokiri Forest"], reverse: OOT_HOUSE_MIDO }
+OOT_KOKIRI_FOREST_FROM_SARIA:                   { game: oot, id: 0x447, type: indoors-exit, areas: ["OOT Saria's House", "OOT Kokiri Forest"], reverse: OOT_HOUSE_SARIA }
+OOT_KOKIRI_FOREST_FROM_TWINS:                   { game: oot, id: 0x33c, type: indoors-exit, areas: ["OOT House of Twins", "OOT Kokiri Forest"], reverse: OOT_HOUSE_TWINS }
+OOT_KOKIRI_FOREST_FROM_KNOW_IT_ALL:             { game: oot, id: 0x26a, type: indoors-exit, areas: ["OOT Know It All House", "OOT Kokiri Forest"], reverse: OOT_HOUSE_KNOW_IT_ALL }
+OOT_KOKIRI_FOREST_FROM_SHOP:                    { game: oot, id: 0x266, type: indoors-exit, areas: ["OOT Kokiri Shop", "OOT Kokiri Forest"], reverse: OOT_KOKIRI_SHOP }
+OOT_MARKET_ENTRANCE_FROM_POTS:                  { game: oot, id: 0x26e, type: indoors-exit, areas: ["OOT Market Pot House", "OOT Market Entryway"], reverse: OOT_HOUSE_POTS }
+OOT_LAKE_HYLIA_FROM_LABORATORY:                 { game: oot, id: 0x3cc, type: indoors-exit, areas: ["OOT Laboratory", "OOT Lake Hylia"], reverse: OOT_LABORATORY }
+OOT_LAKE_HYLIA_FROM_FISHING_POND:               { game: oot, id: 0x309, type: indoors-exit, areas: ["OOT Fishing Pond", "OOT Lake Hylia"], reverse: OOT_FISHING_POND }
+OOT_GERUDO_VALLEY_FROM_TENT:                    { game: oot, id: 0x3d0, type: indoors-exit, areas: ["OOT Gerudo Valley Tent", "OOT Gerudo Valley After Bridge"], reverse: OOT_VALLEY_TENT }
+OOT_KAKARIKO_FROM_CARPENTER:                    { game: oot, id: 0x349, type: indoors-exit, areas: ["OOT Kakariko Carpenter House", "OOT Kakariko"], reverse: OOT_HOUSE_CARPENTER }
+OOT_KAKARIKO_FROM_SKULLTULA:                    { game: oot, id: 0x4ee, type: indoors-exit, areas: ["OOT Skulltula House", "OOT Kakariko"], reverse: OOT_HOUSE_SKULLTULA }
+OOT_KAKARIKO_FROM_IMPA:                         { game: oot, id: 0x345, type: indoors-exit, areas: ["OOT Impa House Front", "OOT Kakariko"], reverse: OOT_HOUSE_IMPA }
+OOT_KAKARIKO_FROM_IMPA_BACK:                    { game: oot, id: 0x5dc, type: indoors-exit, areas: ["OOT Impa House Back", "OOT Kakariko Rooftop"], reverse: OOT_HOUSE_IMPA_BACK }
+OOT_KAKARIKO_FROM_GRANNY:                       { game: oot, id: 0x34d, type: indoors-exit, areas: ["OOT Kakariko Granny Shop", "OOT Kakariko Back"], reverse: OOT_SHOP_GRANNY }
+OOT_GRAVEYARD_FROM_DAMPE:                       { game: oot, id: 0x355, type: indoors-exit, areas: ["OOT Dampe House", "OOT Graveyard"], reverse: OOT_HOUSE_DAMPE }
+OOT_GORON_CITY_FROM_SHOP:                       { game: oot, id: 0x3fc, type: indoors-exit, areas: ["OOT Goron Shop", "OOT Goron City"], reverse: OOT_SHOP_GORON }
+OOT_ZORA_DOMAIN_FROM_SHOP:                      { game: oot, id: 0x3c4, type: indoors-exit, areas: ["OOT Zora Shop", "OOT Zora Domain"], reverse: OOT_SHOP_ZORA }
+OOT_LON_LON_RANCH_FROM_HOUSE:                   { game: oot, id: 0x378, type: indoors-exit, areas: ["OOT Lon Lon Ranch House", "OOT Lon Lon Ranch"], reverse: OOT_HOUSE_LON_LON }
+OOT_LON_LON_RANCH_FROM_STABLES:                 { game: oot, id: 0x42f, type: indoors-exit, areas: ["OOT Lon Lon Ranch Stables", "OOT Lon Lon Ranch"], reverse: OOT_STABLES }
+OOT_LON_LON_RANCH_FROM_SILO:                    { game: oot, id: 0x5d4, type: indoors-exit, areas: ["OOT Lon Lon Ranch Silo", "OOT Lon Lon Ranch"], reverse: OOT_SILO }
+OOT_KOKIRI_FOREST_FROM_LINK:                    { game: oot, id: 0x211, type: indoors-exit, areas: ["OOT Link's House", "OOT Kokiri Forest"], reverse: OOT_HOUSE_LINK }
+OOT_TEMPLE_OF_TIME_ENTRYWAY_FROM_TEMPLE:        { game: oot, id: 0x472, type: indoors-exit, areas: ["OOT Temple of Time", "OOT Temple of Time Entryway"], reverse: OOT_TEMPLE_OF_TIME }
+OOT_KAKARIKO_FROM_WINDMILL:                     { game: oot, id: 0x351, type: indoors-exit, areas: ["OOT Windmill", "OOT Kakariko"], reverse: OOT_WINDMILL }
+OOT_KAKARIKO_FROM_SHOP_POTION:                  { game: oot, id: 0x44b, type: indoors-exit, areas: ["OOT Kakariko Potion Shop", "OOT Kakariko"], reverse: OOT_SHOP_POTION_KAKARIKO }
+OOT_KAKARIKO_FROM_SHOP_POTION_BACK:             { game: oot, id: 0x4ff, type: indoors-exit, areas: ["OOT Kakariko Potion Shop Back", "OOT Kakariko Back"], reverse: OOT_SHOP_POTION_KAKARIKO_BACK }
+OOT_DEATH_MOUNTAIN_FROM_FAIRY:                  { game: oot, id: 0x45b, type: indoors-exit, areas: ["OOT Fairy Fountain Magic", "OOT Death Mountain Summit"], reverse: OOT_FAIRY_MAGIC }
+OOT_DEATH_CRATER_FROM_FAIRY:                    { game: oot, id: 0x482, type: indoors-exit, areas: ["OOT Fairy Fountain Double Magic", "OOT Death Mountain Crater Bottom"], reverse: OOT_FAIRY_MAGIC2 }
+OOT_HYRULE_CASTLE_FROM_FAIRY:                   { game: oot, id: 0x340, type: indoors-exit, areas: ["OOT Fairy Fountain Din", "OOT Near Fairy Fountain Din"], reverse: OOT_FAIRY_DIN }
+OOT_ZORA_FOUNTAIN_FROM_FAIRY:                   { game: oot, id: 0x394, type: indoors-exit, areas: ["OOT Fairy Fountain Farore", "OOT Zora Fountain"], reverse: OOT_FAIRY_FARORE }
+OOT_DESERT_COLOSSUS_FROM_FAIRY:                 { game: oot, id: 0x57c, type: indoors-exit, areas: ["OOT Fairy Fountain Nayru", "OOT Desert Colossus"], reverse: OOT_FAIRY_NAYRU }
+OOT_MARKET_FROM_BOWLING:                        { game: oot, id: 0x3bc, type: indoors-exit, areas: ["OOT Bombchu Bowling", "OOT Market"], reverse: OOT_BOMBCHU_BOWLING }
+OOT_MARKET_FROM_TREASURE_GAME:                  { game: oot, id: 0x1d5, type: indoors-exit, areas: ["OOT Treasure Chest Game", "OOT Market"], reverse: OOT_TREASURE_GAME }
+OOT_MARKET_FROM_BOMBCHU_SHOP:                   { game: oot, id: 0x3c0, type: indoors-exit, areas: ["OOT Market Bombchu Shop", "OOT Back Alley"], reverse: OOT_BOMBCHU_SHOP }
+OOT_MARKET_FROM_ALLEY_HOUSE:                    { game: oot, id: 0x067, type: indoors-exit, areas: ["OOT Market Back Alley East Home", "OOT Back Alley"], reverse: OOT_ALLEY_HOUSE }
+OOT_MARKET_FROM_BAZAAR:                         { game: oot, id: 0x3b8, type: indoors-exit, areas: ["OOT Market Bazaar", "OOT Market"], reverse: OOT_MARKET_BAZAAR }
+OOT_MARKET_FROM_POTION:                         { game: oot, id: 0x2a2, type: indoors-exit, areas: ["OOT Market Potion Shop", "OOT Market"], reverse: OOT_MARKET_POTION }
+OOT_MARKET_FROM_ARCHERY:                        { game: oot, id: 0x1cd, type: indoors-exit, areas: ["OOT Shooting Gallery Child", "OOT Market"], reverse: OOT_CHILD_ARCHERY }
+OOT_KAKARIKO_FROM_BAZAAR:                       { game: oot, id: 0x201, type: indoors-exit, areas: ["OOT Kakariko Bazaar", "OOT Kakariko"], reverse: OOT_KAKARIKO_BAZAAR }
 OOT_KAKARIKO_FROM_ARCHERY:                      { game: oot, id: 0x463, type: indoors-exit, areas: ["OOT Shooting Gallery Adult", "OOT Kakariko"], reverse: OOT_ADULT_ARCHERY }
+OOT_OUTSIDE_GANON_FROM_FAIRY:                   { game: oot, id: 0xf00, type: indoors-exit, areas: ["OOT Fairy Fountain Defense", "OOT Near Fairy Fountain Defense"], reverse: OOT_FAIRY_DEFENSE }
 OOT_WARP_SONG_MEADOW:                           { game: oot, id: 0x600, type: one-way-song, areas: ["OOT SONG_TP_FOREST", "OOT Sacred Meadow"], debug: ['WARP', 'Minuet'] }
 OOT_WARP_SONG_CRATER:                           { game: oot, id: 0x4f6, type: one-way-song, areas: ["OOT SONG_TP_FIRE", "OOT Death Mountain Crater Warp"], debug: ['WARP', 'Bolero'] }
 OOT_WARP_SONG_LAKE:                             { game: oot, id: 0x604, type: one-way-song, areas: ["OOT SONG_TP_WATER", "OOT Lake Hylia"], debug: ['WARP', 'Serenade'] }
@@ -178,7 +179,6 @@ OOT_WARP_SONG_DESERT:                           { game: oot, id: 0x1f1, type: on
 OOT_WARP_SONG_TEMPLE:                           { game: oot, id: 0x5f4, type: one-way-song, areas: ["OOT SONG_TP_LIGHT", "OOT Temple of Time"], debug: ['WARP', 'Prelude'] }
 OOT_VILLAGE_OWL:                                { game: oot, id: 0x554, type: one-way-owl, areas: ["OOT Death Mountain Summit", "OOT Kakariko Rooftop"] }
 OOT_FIELD_OWL:                                  { game: oot, id: 0x27e, type: one-way-owl, areas: ["OOT Lake Hylia", "OOT Hyrule Field Drawbridge"] }
-OOT_OUTSIDE_GANON_FROM_FAIRY:                   { game: oot, id: 0xf00, type: indoors-exit, areas: ["OOT Fairy Fountain Defense", "OOT Near Fairy Fountain Defense"], reverse: OOT_FAIRY_DEFENSE }
 OOT_WALLMASTER_FOREST_CORRIDOR_WEST:            { game: oot, id: 0xf10, type: wallmaster, areas: ["OOT Forest Temple Wallmaster West", "OOT VOID"] }
 OOT_WALLMASTER_FOREST_CORRIDOR_EAST:            { game: oot, id: 0xf11, type: wallmaster, areas: ["OOT Forest Temple Wallmaster East", "OOT VOID"] }
 OOT_WALLMASTER_SHADOW:                          { game: oot, id: 0xf12, type: wallmaster, areas: ["OOT Shadow Temple Wallmaster", "OOT VOID"] }
