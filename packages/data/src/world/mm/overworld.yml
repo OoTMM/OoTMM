@@ -1834,8 +1834,10 @@
   region: TWIN_ISLANDS
   exits:
     "Twin Islands": "true"
-    "Goron Race": "can_use_keg || event(POWDER_KEG_TRIAL) || (short_hook_anywhere && trick(MM_HARD_HOOKSHOT))"
+    "Goron Race": "event(TRIAL_BOULDER) || (short_hook_anywhere && trick(MM_HARD_HOOKSHOT))"
     "Near Ramp Grotto": "true"
+  events:
+    TRIAL_BOULDER: "can_use_keg || (setting(erOverworld, none) && event(POWDER_KEG_TRIAL))"
 "Near Ramp Grotto":
   region: TWIN_ISLANDS
   events:
@@ -1851,7 +1853,7 @@
     "Goron Shrine": "first_day || has_mask_goron"
   events:
     POWDER_KEG_TRIAL: "(is_spring || can_use_fire_short_range) && has_mask_goron"
-    BUY_KEG: "event(POWDER_KEG_TRIAL) && has(POWDER_KEG) && can_use_wallet(2)"
+    BUY_KEG: "event(POWDER_KEG_TRIAL) && event(TRIAL_BOULDER) && has(POWDER_KEG) && can_use_wallet(2)"
     MAGIC: "true"
     ARROWS: "true"
     BOMBS_OR_BOMBCHU: "true"
@@ -1863,7 +1865,7 @@
     "Goron Village Scrub Deed": "soul_business_scrub && has(DEED_SWAMP) && has(MASK_DEKU)"
     "Goron Village Scrub Bomb Bag": "soul_business_scrub && has_mask_goron && can_use_wallet(2)"
 #    "Goron Village Scrub Bomb Bag": "(has_mask_goron || (has(MOON_TEAR) && has(DEED_LAND) && has(DEED_SWAMP))) && can_use_wallet(2)"
-    "Goron Powder Keg": "event(POWDER_KEG_TRIAL) || (short_hook_anywhere && can_use_keg)"
+    "Goron Powder Keg": "event(TRIAL_BOULDER) && (event(POWDER_KEG_TRIAL) || (short_hook_anywhere && trick(MM_KEG_TRIAL_HEATLESS)))"
 "Front of Lone Peak Shrine":
   region: GORON_VILLAGE
   exits:

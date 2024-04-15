@@ -617,6 +617,7 @@ const PRESET_HELL = makeSettings({
     'MM_STAGE_LIGHTS_DIN',
     'MM_RANCH_FARORE',
     'MM_EVAN_FARORE',
+    'MM_KEG_TRIAL_HEATLESS',
   ]
 });
 

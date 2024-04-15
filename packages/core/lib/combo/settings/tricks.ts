@@ -121,6 +121,7 @@ export const TRICKS = {
   MM_STAGE_LIGHTS_DIN: "Light the Zora Hall Stage Lights using Din's Fire, Bow, and Hookshot",
   MM_RANCH_FARORE: "Romani's Ranch locations using Farore's Wind and Time Reset",
   MM_EVAN_FARORE: "Evan's Piece of Heart using Farore's Wind and Time Reset",
+  MM_KEG_TRIAL_HEATLESS: "Powder Keg Trial without Thawing Ice using Hookshot Anywhere",
 };
 
 export type Trick = keyof typeof TRICKS;
