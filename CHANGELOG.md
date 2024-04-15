@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add full overworld ER.
 - Add random starting positions.
 - Add a setting to allow more granular hint regions.
 - Add decoupled entrances.
