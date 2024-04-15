@@ -1,6 +1,24 @@
 #include <combo.h>
 #include <combo/item.h>
 
+static void EnMaYto_WarpWrapper(Actor* this, GameState_Play* play)
+{
+    ActorFunc EnMaYto_Warp;
+
+    EnMaYto_Warp = actorAddr(AC_EN_MA_YTO, 0x80b905b0);
+    EnMaYto_Warp(this, play);
+
+    if (comboConfig(CFG_ER_OVERWORLD))
+        gPlay->nextEntrance = 0x6480;
+}
+
+static void EnMaYto_SetWarpHandler(Actor* this)
+{
+    (*(void**)((char*)this + 0x188)) = EnMaYto_WarpWrapper;
+}
+
+PATCH_FUNC(0x80b9059c, EnMaYto_SetWarpHandler);
+
 int EnMaYto_HasGivenItem(Actor* this)
 {
     int ret;
