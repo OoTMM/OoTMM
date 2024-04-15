@@ -80,6 +80,8 @@ OOT_WASTELAND:                                  { game: oot, id: 0x130, type: ov
 OOT_FORTRESS_FROM_WASTELAND:                    { game: oot, id: 0x3ac, type: overworld, maps: [OOT_WASTELAND, OOT_GERUDO_FORTRESS], areas: ["OOT Haunted Wasteland Start", "OOT Fortress Near Wasteland"], reverse: OOT_WASTELAND }
 OOT_COLOSSUS:                                   { game: oot, id: 0x123, type: overworld, maps: [OOT_WASTELAND, OOT_COLOSSUS], areas: ["OOT Haunted Wasteland End", "OOT Desert Colossus"], reverse: OOT_WASTELAND_FROM_COLOSSUS }
 OOT_WASTELAND_FROM_COLOSSUS:                    { game: oot, id: 0x365, type: overworld, maps: [OOT_COLOSSUS, OOT_WASTELAND], areas: ["OOT Desert Colossus", "OOT Haunted Wasteland End"], reverse: OOT_COLOSSUS }
+OOT_MARKET_FROM_MARKET_ENTRANCE:                { game: oot, id: 0x0b1, type: overworld, maps: [OOT_MARKET, OOT_MARKET], submaps: [ENTRANCE, MAIN], areas: ["OOT Market Entryway", "OOT Market"], reverse: OOT_MARKET_ENTRANCE_FROM_MARKET }
+OOT_MARKET_ENTRANCE_FROM_MARKET:                { game: oot, id: 0x033, type: overworld, maps: [OOT_MARKET, OOT_MARKET], submaps: [MAIN, ENTRANCE], areas: ["OOT Market", "OOT Market Entryway"], reverse: OOT_MARKET_FROM_MARKET_ENTRANCE }
 OOT_LAKE_HYLIA_FROM_VALLEY:                     { game: oot, id: 0x219, type: one-way, areas: ["OOT Gerudo Valley Falls", "OOT Lake Hylia"] }
 OOT_LOST_WOODS_FROM_LOST_WOODS_NORTH:           { game: oot, id: 0xf01, type: one-way-woods, areas: ["OOT Lost Woods Lost North", "OOT Lost Woods"] }
 OOT_LOST_WOODS_FROM_LOST_WOODS_EAST:            { game: oot, id: 0x1ad, type: one-way-woods, areas: ["OOT Lost Woods Lost East", "OOT Lost Woods"] }
