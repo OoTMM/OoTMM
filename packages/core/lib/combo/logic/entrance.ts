@@ -193,7 +193,7 @@ class WorldShuffler {
     }
 
     /* Filter self-loops */
-    if (!this.settings.erSelfLoops) {
+    if (!this.settings.erSelfLoops && !this.settings.erDecoupled) {
       const srcEntrance = ENTRANCES[src];
       const map = srcEntrance.fromMap;
       if (map !== 'NONE') {

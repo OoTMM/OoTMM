@@ -1841,6 +1841,7 @@ export const SETTINGS = [{
   type: 'boolean',
   description: 'Allow entrances to loop back to the same map. Might make the topology of the world very confusing.',
   default: false,
+  cond: (x: any) => !x.erDecoupled,
 }, {
   key: 'erDecoupled',
   name: 'Decoupled Entrances',
