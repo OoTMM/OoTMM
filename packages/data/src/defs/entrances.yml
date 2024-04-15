@@ -261,6 +261,24 @@ MM_ZORA_CAPE_FROM_HALL_WATER:                   { game: mm, id: 0x6a10, type: ov
 MM_ZORA_HALL_UNDERWATER:                        { game: mm, id: 0x6000, type: overworld, maps: [MM_ZORA_CAPE, MM_ZORA_HALL], areas: ["MM Zora Hall Entrance", "MM Zora Hall"], reverse: MM_ZORA_CAPE_FROM_HALL_WATER }
 MM_ZORA_CAPE_PENINSULA:                         { game: mm, id: 0x6010, type: overworld, maps: [MM_ZORA_HALL, MM_ZORA_CAPE], areas: ["MM Zora Hall", "MM Zora Cape Peninsula"], reverse: MM_ZORA_HALL_LEDGE }
 MM_ZORA_HALL_LEDGE:                             { game: mm, id: 0x6a20, type: overworld, maps: [MM_ZORA_CAPE, MM_ZORA_HALL], areas: ["MM Zora Cape Peninsula", "MM Zora Hall"], reverse: MM_ZORA_CAPE_PENINSULA }
+MM_DEKU_PALACE_MAIN_ENTRANCE:                   { game: mm, id: 0x5000, type: overworld, maps: [MM_SWAMP, MM_DEKU_PALACE], areas: ["MM Swamp Back", "MM Deku Palace Front"], reverse: MM_SWAMP_FROM_PALACE_MAIN_ENTRANCE }
+MM_SWAMP_FROM_PALACE_MAIN_ENTRANCE:             { game: mm, id: 0x8430, type: overworld, maps: [MM_DEKU_PALACE, MM_SWAMP], areas: ["MM Deku Palace Front", "MM Swamp Back"], reverse: MM_DEKU_PALACE_MAIN_ENTRANCE }
+MM_DEKU_PALACE_LEDGE:                           { game: mm, id: 0x5050, type: overworld, maps: [MM_SWAMP, MM_DEKU_PALACE], areas: ["MM Swamp Canopy Front", "MM Deku Palace Cliff"], reverse: MM_SWAMP_FROM_PALACE_LEDGE }
+MM_SWAMP_FROM_PALACE_LEDGE:                     { game: mm, id: 0x8440, type: overworld, maps: [MM_DEKU_PALACE, MM_SWAMP], areas: ["MM Deku Palace Cliff", "MM Swamp Canopy Front"], reverse: MM_DEKU_PALACE_LEDGE }
+MM_WOODFALL:                                    { game: mm, id: 0x8600, type: overworld, maps: [MM_SWAMP, MM_WOODFALL], areas: ["MM Swamp Canopy Back", "MM Woodfall"], reverse: MM_SWAMP_FROM_WOODFALL }
+MM_SWAMP_FROM_WOODFALL:                         { game: mm, id: 0x8420, type: overworld, maps: [MM_WOODFALL, MM_SWAMP], areas: ["MM Woodfall", "MM Swamp Canopy Back"], reverse: MM_WOODFALL }
+MM_MYSTERY_WOODS:                               { game: mm, id: 0xc200, type: overworld, maps: [MM_SWAMP, MM_MYSTERY_WOODS], areas: ["MM Swamp Front", "MM Woods of Mystery"], reverse: MM_SWAMP_FROM_MYSTERY_WOODS }
+MM_SWAMP_FROM_MYSTERY_WOODS:                    { game: mm, id: 0x8470, type: overworld, maps: [MM_MYSTERY_WOODS, MM_SWAMP], areas: ["MM Woods of Mystery", "MM Swamp Front"], reverse: MM_MYSTERY_WOODS }
+MM_SEWERS_FROM_EXTERIOR_GATE:                   { game: mm, id: 0x4090, type: overworld, maps: [MM_PIRATE_ENTRANCE, MM_PIRATE_SEWERS], areas: ["MM Pirate Fortress Entrance", "MM Pirate Fortress Sewers"], reverse: MM_EXTERIOR_GATE_FROM_SEWERS }
+MM_EXTERIOR_GATE_FROM_SEWERS:                   { game: mm, id: 0x7020, type: overworld, maps: [MM_PIRATE_SEWERS, MM_PIRATE_ENTRANCE], areas: ["MM Pirate Fortress Sewers", "MM Pirate Fortress Entrance"], reverse: MM_SEWERS_FROM_EXTERIOR_GATE }
+MM_PIRATE_FORTRESS_INTERIOR:                    { game: mm, id: 0x2200, type: overworld, maps: [MM_PIRATE_ENTRANCE, MM_PIRATE_INTERIOR], areas: ["MM Pirate Fortress Entrance Balcony", "MM Pirate Fortress Interior"], reverse: MM_PIRATE_FORTRESS_EXTERIOR_FROM_INTERIOR }
+MM_PIRATE_FORTRESS_EXTERIOR_FROM_INTERIOR:      { game: mm, id: 0x7010, type: overworld, maps: [MM_PIRATE_INTERIOR, MM_PIRATE_ENTRANCE], areas: ["MM Pirate Fortress Interior", "MM Pirate Fortress Entrance Balcony"], reverse: MM_PIRATE_FORTRESS_INTERIOR }
+MM_PIRATE_FORTRESS_INTERIOR_FROM_LOOKOUT:       { game: mm, id: 0x22c0, type: overworld, maps: [MM_PIRATE_ENTRANCE, MM_PIRATE_INTERIOR], areas: ["MM Pirate Fortress Entrance Lookout", "MM Pirate Fortress Barrel Maze Entry"], reverse: MM_PIRATE_FORTRESS_EXTERIOR_LOOKOUT}
+MM_PIRATE_FORTRESS_EXTERIOR_LOOKOUT:            { game: mm, id: 0x7050, type: overworld, maps: [MM_PIRATE_INTERIOR, MM_PIRATE_ENTRANCE], areas: ["MM Pirate Fortress Barrel Maze Entry", "MM Pirate Fortress Entrance Lookout"], reverse: MM_PIRATE_FORTRESS_INTERIOR_FROM_LOOKOUT }
+MM_IKANA_CASTLE_GARDENS:                        { game: mm, id: 0x3410, type: overworld, maps: [MM_IKANA_VALLEY, MM_IKANA_CASTLE], areas: ["MM Ikana Canyon", "MM Ikana Castle Entrance"], reverse: MM_IKANA_CANYON_FROM_CASTLE_GARDENS }
+MM_IKANA_CANYON_FROM_CASTLE_GARDENS:            { game: mm, id: 0x2080, type: overworld, maps: [MM_IKANA_CASTLE, MM_IKANA_VALLEY], areas: ["MM Ikana Castle Entrance", "MM Ikana Canyon"], reverse: MM_IKANA_CASTLE_GARDENS }
+MM_STONE_TOWER:                                 { game: mm, id: 0xaa00, type: overworld, maps: [MM_IKANA_VALLEY, MM_STONE_TOWER], areas: ["MM Ikana Canyon", "MM Stone Tower"], reverse: MM_IKANA_CANYON_FROM_STONE_TOWER }
+MM_IKANA_CANYON_FROM_STONE_TOWER:               { game: mm, id: 0x2030, type: overworld, maps: [MM_STONE_TOWER, MM_IKANA_VALLEY], areas: ["MM Stone Tower", "MM Ikana Canyon"], reverse: MM_STONE_TOWER }
 MM_SWAMP_FROM_IKANA_CANYON:                     { game: mm, id: 0x8490, type: one-way, areas: ["MM Ikana Valley", "MM Swamp Front"] }
 MM_IKANA_CASTLE_INTERIOR_KEG:                   { game: mm, id: 0x3440, type: one-way-ikana, areas: ["MM Ancient Castle of Ikana Roof Interior", "MM Ancient Castle of Ikana"] }
 MM_IKANA_CASTLE_INTERIOR_BLOCK:                 { game: mm, id: 0x3450, type: one-way-ikana, areas: ["MM Ancient Castle of Ikana Roof Interior", "MM Ancient Castle of Ikana Interior South"] }
@@ -320,6 +338,8 @@ MM_MUSIC_BOX_HOUSE:                             { game: mm, id: 0xa400, type: in
 MM_IKANA_CANYON_FROM_MUSIC_BOX_HOUSE:           { game: mm, id: 0x2020, type: indoors-exit, areas: ["MM Music Box House", "MM Ikana Canyon"], reverse: MM_MUSIC_BOX_HOUSE }
 MM_FAIRY_FOUNTAIN_IKANA:                        { game: mm, id: 0x4640, type: indoors, areas: ["MM Ikana Canyon", "MM Ikana Fairy Fountain"], reverse: MM_IKANA_CANYON_FROM_FAIRY_FOUNTAIN }
 MM_IKANA_CANYON_FROM_FAIRY_FOUNTAIN:            { game: mm, id: 0x20b0, type: indoors-exit, areas: ["MM Ikana Fairy Fountain", "MM Ikana Canyon"], reverse: MM_FAIRY_FOUNTAIN_IKANA }
+MM_SEWERS_FROM_EXTERIOR_DOOR:                   { game: mm, id: 0x40a0, type: indoors-extra, areas: ["MM Pirate Fortress Entrance Balcony", "MM Pirate Fortress Sewers End"], reverse: MM_EXTERIOR_DOOR_FROM_SEWERS }
+MM_EXTERIOR_DOOR_FROM_SEWERS:                   { game: mm, id: 0x7060, type: indoors-exit, areas: ["MM Pirate Fortress Sewers End", "MM Pirate Fortress Entrance Balcony"], reverse: MM_SEWERS_FROM_EXTERIOR_DOOR }
 MM_DEKU_PALACE_THRONE:                          { game: mm, id: 0x7600, type: indoors-special, areas: ["MM Deku Palace Main", "MM Deku Palace Throne"], reverse: MM_DEKU_PALACE_EXTERIOR_FROM_THRONE }
 MM_DEKU_PALACE_EXTERIOR_FROM_THRONE:            { game: mm, id: 0x5020, type: indoors-special, areas: ["MM Deku Palace Throne", "MM Deku Palace Main"], reverse: MM_DEKU_PALACE_THRONE }
 MM_DEKU_PALACE_THRONE_CAGE:                     { game: mm, id: 0x7610, type: indoors-special, areas: ["MM Deku Palace Near Cage", "MM Deku Palace Cage"], reverse: MM_DEKU_PALACE_EXTERIOR_FROM_THRONE_CAGE }
@@ -404,7 +424,6 @@ MM_CLOCK_TOWER_MOON_CRASH:                      { game: mm,  id: 0xc030, type: n
 MM_CLOCK_TOWER_FROM_CLOCK_TOWN:                 { game: mm,  id: 0xc010, type: none }
 MM_GORON_VILLAGE_FROM_TWIN_SPRING:              { game: mm,  id: 0x8a00, type: none }
 MM_GORON_VILLAGE_FROM_TWIN_WINTER:              { game: mm,  id: 0x9400, type: none }
-MM_WOODFALL_FROM_SWAMP:                         { game: mm,  id: 0x8600, type: none }
 MM_COAST_FROM_MIKAU_CS:                         { game: mm,  id: 0x68a0, type: none }
 OOT_GROTTO_TYPE_GENERIC:                        { game: oot, id: 0x03f,  type: none } # Multiple uses
 OOT_GROTTO_TYPE_FAIRY:                          { game: oot, id: 0x36d,  type: none } # Multiple uses
@@ -546,7 +565,6 @@ MM_GRAVE_EXIT_NIGHT2:                           { game: mm, id: 0x8020, type: gr
 MM_GRAVE_EXIT_NIGHT3:                           { game: mm, id: 0x8010, type: grave-exit, areas: ['MM Beneath The Graveyard Night 3 Fake Exit', 'MM Ikana Graveyard'], reverse: MM_GRAVE_NIGHT3 }
 OOT_HYRULE_CASTLE:                              { game: oot, id: 0x138, type: none }
 OOT_MARKET_FROM_MASK_SHOP:                      { game: oot, id: 0x1d1, type: none }
-MM_WOODS_OF_MYSTERY:                            { game: mm, id: 0xc200, type: none }
 MM_TWIN_ISLAND_FROM_MOUNTAIN_VILLAGE:           { game: mm, id: 0xb400, type: none }
 MM_IKANA_GRAVEYARD_FROM_DAMPE:                  { game: mm, id: 0x8040, type: none }
 MM_MILK_ROAD_FROM_RANCH2:                       { game: mm, id: 0x3e50, type: none }
