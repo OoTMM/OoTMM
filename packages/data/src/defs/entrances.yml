@@ -82,6 +82,8 @@ OOT_COLOSSUS:                                   { game: oot, id: 0x123, type: ov
 OOT_WASTELAND_FROM_COLOSSUS:                    { game: oot, id: 0x365, type: overworld, maps: [OOT_COLOSSUS, OOT_WASTELAND], areas: ["OOT Desert Colossus", "OOT Haunted Wasteland End"], reverse: OOT_COLOSSUS }
 OOT_MARKET_FROM_MARKET_ENTRANCE:                { game: oot, id: 0x0b1, type: overworld, maps: [OOT_MARKET, OOT_MARKET], submaps: [ENTRANCE, MAIN], areas: ["OOT Market Entryway", "OOT Market"], reverse: OOT_MARKET_ENTRANCE_FROM_MARKET }
 OOT_MARKET_ENTRANCE_FROM_MARKET:                { game: oot, id: 0x033, type: overworld, maps: [OOT_MARKET, OOT_MARKET], submaps: [MAIN, ENTRANCE], areas: ["OOT Market", "OOT Market Entryway"], reverse: OOT_MARKET_FROM_MARKET_ENTRANCE }
+OOT_HYRULE_CASTLE:                              { game: oot, id: 0x138, type: overworld, maps: [OOT_MARKET, OOT_HYRULE_CASTLE], areas: ["OOT Market", "OOT Market Castle Entry"], reverse: OOT_MARKET_FROM_CASTLE }
+OOT_MARKET_FROM_CASTLE:                         { game: oot, id: 0x25a, type: overworld, maps: [OOT_HYRULE_CASTLE, OOT_MARKET], areas: ["OOT Market Castle Entry", "OOT Market"], reverse: OOT_HYRULE_CASTLE }
 OOT_LAKE_HYLIA_FROM_VALLEY:                     { game: oot, id: 0x219, type: one-way, areas: ["OOT Gerudo Valley Falls", "OOT Lake Hylia"] }
 OOT_LOST_WOODS_FROM_LOST_WOODS_NORTH:           { game: oot, id: 0xf01, type: one-way-woods, areas: ["OOT Lost Woods Lost North", "OOT Lost Woods"] }
 OOT_LOST_WOODS_FROM_LOST_WOODS_EAST:            { game: oot, id: 0x1ad, type: one-way-woods, areas: ["OOT Lost Woods Lost East", "OOT Lost Woods"] }
@@ -565,7 +567,6 @@ MM_GROTTO_EXIT_DEKU_PLAYGROUND:                 { game: mm, id: 0xd640, type: gr
 MM_GRAVE_EXIT_NIGHT1:                           { game: mm, id: 0x8030, type: grave-exit, areas: ['MM Beneath The Graveyard Night 1', 'MM Ikana Graveyard'], reverse: MM_GRAVE_NIGHT1 }
 MM_GRAVE_EXIT_NIGHT2:                           { game: mm, id: 0x8020, type: grave-exit, areas: ['MM Beneath The Graveyard Night 2', 'MM Ikana Graveyard'], reverse: MM_GRAVE_NIGHT2 }
 MM_GRAVE_EXIT_NIGHT3:                           { game: mm, id: 0x8010, type: grave-exit, areas: ['MM Beneath The Graveyard Night 3 Fake Exit', 'MM Ikana Graveyard'], reverse: MM_GRAVE_NIGHT3 }
-OOT_HYRULE_CASTLE:                              { game: oot, id: 0x138, type: none }
 OOT_MARKET_FROM_MASK_SHOP:                      { game: oot, id: 0x1d1, type: none }
 MM_TWIN_ISLAND_FROM_MOUNTAIN_VILLAGE:           { game: mm, id: 0xb400, type: none }
 MM_IKANA_GRAVEYARD_FROM_DAMPE:                  { game: mm, id: 0x8040, type: none }

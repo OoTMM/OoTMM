@@ -469,6 +469,7 @@
   region: NONE
   age_change: false
   exits:
+    "Market": "true"
     "Hyrule Castle": "is_child"
     "Ganon Castle Exterior": "is_adult"
 "Market Bazaar":
