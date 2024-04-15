@@ -8,7 +8,7 @@ static void EnMaYto_WarpWrapper(Actor* this, GameState_Play* play)
     EnMaYto_Warp = actorAddr(AC_EN_MA_YTO, 0x80b905b0);
     EnMaYto_Warp(this, play);
 
-    if (comboConfig(CFG_ER_OVERWORLD))
+    if (comboConfig(CFG_ER_REGIONS_OVERWORLD))
         gPlay->nextEntrance = 0x6480;
 }
 
