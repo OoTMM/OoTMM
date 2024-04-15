@@ -30,8 +30,8 @@ All notable changes to this project will be documented in this file.
 - Farore's Wind in MM is now tied to Link's age, like in OoT.
 - Logic for MM's cursed and cleared states has received an overhaul and is now more robust.
 - Powder Keg Trial with Short Hook Anywhere and without thawing the ice is now a trick.
-- Goron Elder and Keaton Quiz can now be logically obtained in their alternate locations.
-- Guessing the Bomber Code for the notebook check is no longer considered in North Clock Town.
+- Clock Town Post Box, Goron Elder, and Keaton Quiz can now be logically obtained in their alternate locations.
+- Guessing the Bomber Code for the notebook check is now logical in East Clock Town.
 
 ### Fixed
 

@@ -251,6 +251,7 @@
     "Clock Town Fairy Fountain": "true"
     "Deku Playground": "true"
     "Tingle Town": "is_day && (has_weapon_range || (has_weapon && (trick(MM_NCT_TINGLE) || has_hover_boots)))"
+    "Clock Town North Postbox": "true"
   events:
     HIDE_SEEK1: "has_weapon_range && first_day"
     HIDE_SEEK2: "has_weapon_range && second_day"
@@ -278,6 +279,12 @@
     "Clock Town Keaton Grass Reward 7": "keaton_grass_hard"
     "Clock Town Keaton Grass Reward 8": "keaton_grass_hard"
     "Clock Town Keaton Grass Reward 9": "keaton_grass_hard"
+"Clock Town North Postbox":
+  region: NONE
+  exits:
+    "Clock Town North": "true"
+  locations:
+    "Clock Town Post Box": "has(MASK_POSTMAN)"
 "Clock Town West":
   region: CLOCK_TOWN_WEST
   events:
@@ -314,6 +321,7 @@
     "Clock Town East SPI Roof": "has(MASK_DEKU) || short_hook_anywhere || has_hover_boots || event(SPI_ROOF_FARORE)"
     "Milk Bar": "between(DAY1_AM_10_00, NIGHT1_PM_09_00) || between(DAY2_AM_10_00, NIGHT2_PM_09_00) || between(DAY3_AM_10_00, NIGHT3_PM_09_00) || (has(MASK_ROMANI) && (between(NIGHT1_PM_10_00, NIGHT1_AM_05_00) || between(NIGHT2_PM_10_00, NIGHT2_AM_05_00) || after(NIGHT3_PM_10_00)))"
     "Astral Observatory Passage": "event(BOMBER_CODE) || event(GUESS_BOMBER) || trick(MM_BOMBER_BACKFLIP) || short_hook_anywhere"
+    "Clock Town East Postbox": "true"
   events:
     BOMBERS_EAST1: "event(HIDE_SEEK1)"
     BOMBERS_EAST2: "event(HIDE_SEEK2)"
@@ -322,6 +330,12 @@
   locations:
     "Clock Town Silver Rupee Chest": "true"
     "Clock Town Postman Hat": "event(POSTMAN_FREEDOM) && between(NIGHT3_PM_06_00, NIGHT3_AM_05_00)"
+"Clock Town East Postbox":
+  region: NONE
+  exits:
+    "Clock Town East Main": "true"
+  locations:
+    "Clock Town Post Box": "has(MASK_POSTMAN)"
 "Clock Town East":
   region: CLOCK_TOWN_EAST
   exits:
