@@ -455,7 +455,7 @@ MM_CLOCK_TOWN_WEST_FROM_LOTTERY:                { game: mm, id: 0xd480, type: in
 MM_LAUNDRY_POOL_FROM_KAFEI_HIDEOUT:             { game: mm, id: 0xda10, type: indoors-exit, maps: [MM_CURIOSITY_SHOP, MM_LAUNDRY_POOL], areas: ["MM Kafei Hideout", "MM Laundry Pool"], reverse: MM_KAFEI_HIDEOUT }
 MM_SWAMP_FROM_POTION_SHOP:                      { game: mm, id: 0x8450, type: indoors-exit, maps: [NONE, MM_SWAMP], areas: ["MM Swamp Potion Shop", "MM Swamp Front"], reverse: MM_POTION_SHOP }
 MM_DEKU_PALACE_EXTERIOR_FROM_SHRINE:            { game: mm, id: 0x5040, type: indoors-exit, maps: [NONE, MM_DEKU_PALACE], areas: ["MM Deku Shrine", "MM Near Deku Shrine"], reverse: MM_DEKU_SHRINE }
-MM_GORON_SHRINE_FROM_SHOP:                      { game: mm, id: 0x5e10, type: indoors-exit, maps: [NONE, MM_GORON_SHRINE], areas: ["MM Goron Shop", "MM Goron Shrine"], reverse: MM_GORON_SHOP }
+MM_GORON_SHRINE_FROM_SHOP:                      { game: mm, id: 0x5e10, type: indoors-exit, maps: [NONE, MM_GORON_SHRINE], areas: ["MM Goron Shop", "MM Goron Shrine"], reverse: MM_GORON_SHOP, debug: [INTERIOR, 'Goron Shrine'] }
 MM_GREAT_BAY_COAST_FROM_FISHER_HUT:             { game: mm, id: 0x6840, type: indoors-exit, maps: [NONE, MM_GREAT_BAY_COAST], areas: ["MM Fisher's Hut", "MM Great Bay Coast"], reverse: MM_FISHER_HUT }
 MM_GREAT_BAY_COAST_FROM_LABORATORY:             { game: mm, id: 0x6870, type: indoors-exit, maps: [NONE, MM_GREAT_BAY_COAST], areas: ["MM Laboratory", "MM Great Bay Coast"], reverse: MM_LABORATORY }
 MM_ZORA_HALL_FROM_EVANS:                        { game: mm, id: 0x6040, type: indoors-exit, maps: [NONE, MM_ZORA_HALL], areas: ["MM Evan's Room", "MM Zora Hall"], reverse: MM_ROOM_EVANS }

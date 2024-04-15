@@ -403,6 +403,18 @@ static void applyCustomEntrance(u32* entrance)
     }
 }
 
+static void spawnSirloin(GameState_Play* play)
+{
+    if (!gSharedCustomSave.storedSirloin)
+        return;
+    if (play->sceneId != SCE_MM_MOUNTAIN_VILLAGE_WINTER)
+        return;
+    if (MM_CHECK_EVENT_INF(EV_MM_WEEK_DUNGEON_SH))
+        return;
+
+    SpawnActor(&play->actorCtx, play, AC_EN_MM, -1025.f, 8.f, 400.f, 0.f, 0.f, 0.f, 0x8000);
+}
+
 void preInitTitleScreen(void)
 {
     u32 entrance;
@@ -488,6 +500,9 @@ void hookPlay_Init(GameState_Play* play)
     gMultiMarkSwitch1 = 0;
     g.keatonGrassMax = -1;
     comboMultiResetWisps();
+
+    if (comboConfig(CFG_ER_OVERWORLD))
+        gSave.hasSirloin = 0;
 
     if (gSaveContext.respawnFlag == 8)
     {
@@ -706,6 +721,7 @@ void hookPlay_Init(GameState_Play* play)
     CustomTriggers_Spawn(play);
     comboSpawnItemGivers(play);
     comboSpawnCustomWarps(play);
+    spawnSirloin(play);
 
     if (gNoTimeFlow)
     {

@@ -118,6 +118,7 @@
 #define EV_MM_WEEK_CURIOSITY_SHOP_BOUGHT        MM_EV(33,   2)
 #define EV_MM_WEEK_SNOWHEAD_BLIZZARD            MM_EV(30,   0)
 #define EV_MM_WEEK_DUNGEON_SH                   MM_EV(33,   7)
+#define EV_MM_WEEK_HUGO                         MM_EV(37,   3)
 #define EV_MM_WEEK_GREAT_BAY_TURTLE             MM_EV(53,   5)
 #define EV_MM_WEEK_DUNGEON_GB                   MM_EV(55,   7)
 #define EV_MM_WEEK_DUNGEON_ST                   MM_EV(52,   5)
