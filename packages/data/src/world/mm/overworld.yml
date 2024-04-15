@@ -266,7 +266,7 @@
     RUPEES: "true"
   locations:
     "Clock Town Tree HP": "true"
-    "Clock Town Bomber Notebook": "event(BOMBER_CODE) || event(GUESS_BOMBER)"
+    "Clock Town Bomber Notebook": "event(BOMBER_CODE)"
     "Clock Town Blast Mask": "event(SAKON_BOMB_BAG)"
     "Clock Town Keaton HP": "has_mask_keaton"
     "Clock Town Keaton Grass Reward 1": "true"
@@ -299,7 +299,7 @@
     "Clock Town Bank Reward 2": "can_use_wallet(2) || (can_use_wallet(1) && (trick(MM_BANK_ONE_WALLET) || trick(MM_BANK_NO_WALLET)))"
     "Clock Town Bank Reward 3": "can_use_wallet(3) || (can_use_wallet(2) && trick(MM_BANK_ONE_WALLET)) || (can_use_wallet(1) && trick(MM_BANK_NO_WALLET))"
     "Clock Town Rosa Sisters HP": "has(MASK_KAMARO) && (is_night1 || is_night2)"
-"Clock Town East":
+"Clock Town East Main":
   region: CLOCK_TOWN_EAST
   exits:
     "Termina Field": "true"
@@ -311,11 +311,10 @@
     "Chest Game": "before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || between(DAY3_AM_06_00, NIGHT3_PM_10_00)"
     "Honey & Darling Game": "before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || between(DAY3_AM_06_00, NIGHT3_PM_10_00)"
     "Stock Pot Inn": "has(ROOM_KEY) || between(DAY1_AM_08_00, NIGHT1_PM_08_00) || between(DAY2_AM_08_00, NIGHT2_PM_08_00) || after(DAY3_AM_08_00)"
-    "Stock Pot Inn Roof": "has(MASK_DEKU) || short_hook_anywhere || has_hover_boots || event(SPI_ROOF_FARORE)"
+    "Clock Town East SPI Roof": "has(MASK_DEKU) || short_hook_anywhere || has_hover_boots || event(SPI_ROOF_FARORE)"
     "Milk Bar": "between(DAY1_AM_10_00, NIGHT1_PM_09_00) || between(DAY2_AM_10_00, NIGHT2_PM_09_00) || between(DAY3_AM_10_00, NIGHT3_PM_09_00) || (has(MASK_ROMANI) && (between(NIGHT1_PM_10_00, NIGHT1_AM_05_00) || between(NIGHT2_PM_10_00, NIGHT2_AM_05_00) || after(NIGHT3_PM_10_00)))"
-    "Astral Observatory Passage": "event(BOMBER_CODE) || trick(MM_BOMBER_GUESS) || trick(MM_BOMBER_BACKFLIP) || short_hook_anywhere"
+    "Astral Observatory Passage": "event(BOMBER_CODE) || event(GUESS_BOMBER) || trick(MM_BOMBER_BACKFLIP) || short_hook_anywhere"
   events:
-    GUESS_BOMBER: "trick(MM_BOMBER_GUESS)"
     BOMBERS_EAST1: "event(HIDE_SEEK1)"
     BOMBERS_EAST2: "event(HIDE_SEEK2)"
     BOMBERS_EAST3: "event(HIDE_SEEK3)"
@@ -323,10 +322,22 @@
   locations:
     "Clock Town Silver Rupee Chest": "true"
     "Clock Town Postman Hat": "event(POSTMAN_FREEDOM) && between(NIGHT3_PM_06_00, NIGHT3_AM_05_00)"
+"Clock Town East":
+  region: CLOCK_TOWN_EAST
+  exits:
+    "Clock Town East Main": "true"
+  events:
+    GUESS_BOMBER: "trick(MM_BOMBER_GUESS)"
+"Clock Town East Near Hideout":
+  region: NONE
+  exits:
+    "Clock Town East Main": "true"
+  locations:
+    "Clock Town Bomber Notebook": "event(GUESS_BOMBER)"
 "Astral Observatory Passage":
   region: ENTRANCE
   exits:
-    "Clock Town East": "true"
+    "Clock Town East Near Hideout": "true"
     "Astral Observatory Junction": "true"
   events:
     MAGIC: "true"
@@ -527,11 +538,15 @@
     "Stock Pot Inn Grandma HP 1": "has(MASK_ALL_NIGHT) && (is_day1 || is_day2)"
     "Stock Pot Inn Grandma HP 2": "has(MASK_ALL_NIGHT) && (is_day1 || is_day2)"
     "Stock Pot Inn ??? HP": "cond(setting(erIndoorsExtra), has_paper && midnight, has_paper && midnight && (clock_night3 || has(ROOM_KEY) || has(MASK_DEKU) || has_hover_boots || event(SPI_ROOF_FARORE) || trick(MM_STOCK_POT_WAIT)))"
-"Stock Pot Inn Roof":
+"Clock Town East SPI Roof":
   region: CLOCK_TOWN_EAST
   exits:
     "Clock Town East": "true"
     "Stock Pot Inn": "true"
+"Stock Pot Inn Roof":
+  region: CLOCK_TOWN_EAST
+  exits:
+    "Clock Town East SPI Roof": "true"
   events:
     SPI_ROOF_FARORE: "can_use_farore"
 "Deku Playground":
@@ -1649,11 +1664,13 @@
   exits:
     "Mountain Village Path Upper": "true"
     "Twin Islands": "true"
-    "Near Goron Graveyard": "(is_winter && (can_use_lens_strict || trick(MM_DARMANI_WALL))) || event(GORON_GRAVE_FARORE) || (is_spring && (has_mask_goron || has_mask_zora || can_hookshot || short_hook_anywhere))"
+    "Mountain Village Cliff": "(is_winter && (can_use_lens_strict || trick(MM_DARMANI_WALL))) || event(GORON_GRAVE_FARORE) || (is_spring && (has_mask_goron || has_mask_zora || can_hookshot || short_hook_anywhere))"
     "Path to Snowhead Front": "true"
     "Blacksmith": "true"
     "Near Village Grotto": "is_spring && (has_mask_goron || short_hook_anywhere)"
     "Owl Mountain": "true"
+    "Mountain Village Elder": "true"
+    "Mountain Village Keaton": "true"
   gossip:
     "Mountain Village Gossip Outside": "is_spring"
     "Mountain Village Gossip Tunnel": "is_spring && (has_mask_goron || short_hook_anywhere)"
@@ -1708,12 +1725,24 @@
     "Mountain Village Keaton Grass Reward 8": "is_spring && keaton_grass_hard"
     "Mountain Village Keaton Grass Reward 9": "is_spring && keaton_grass_hard"
     "Mountain Village Rupee": "is_spring && has_mask_goron"
+"Mountain Village Elder":
+  region: NONE
+  exits:
+    "Mountain Village": "true"
+  locations:
+    "Goron Elder": "is_winter && final_day && has_mask_goron && (can_use_fire_short_range || has_hot_water_er || has_hot_water_mtn || has_hot_water_farore || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE)))"
+"Mountain Village Keaton":
+  region: NONE
+  exits:
+    "Mountain Village": "true"
+  locations:
+    "Clock Town Keaton HP": "is_spring && has_mask_keaton"
 "Near Village Grotto":
   region: MOUNTAIN_VILLAGE
   exits:
     "Mountain Village Grotto": "is_spring"
     "Mountain Village": "true"
-    "Near Goron Graveyard": "is_spring && (has_mask_goron || short_hook_anywhere)"
+    "Mountain Village Cliff": "is_spring && (has_mask_goron || short_hook_anywhere)"
 "Mountain Village Grotto":
   region: ENTRANCE
   exits:
@@ -1907,7 +1936,7 @@
     "Lone Peak Shrine Grass Pack 2 Grass 10": "true"
     "Lone Peak Shrine Grass Pack 2 Grass 11": "true"
     "Lone Peak Shrine Grass Pack 2 Grass 12": "true"
-"Near Goron Graveyard":
+"Mountain Village Cliff":
   region: MOUNTAIN_VILLAGE
   exits:
     "Mountain Village": "true"
@@ -1916,6 +1945,12 @@
   events:
     MAGIC: "true"
     ARROWS: "is_spring"
+"Near Goron Graveyard":
+  region: MOUNTAIN_VILLAGE
+  exits:
+    "Mountain Village Cliff": "true"
+  events:
+    MAGIC: "true"
     GORON_GRAVE_FARORE: "can_use_farore"
 "Goron Graveyard":
   region: ENTRANCE
@@ -2098,6 +2133,7 @@
     "Near Romani Ranch": "after(DAY3_AM_06_00) || can_use_keg || (short_hook_anywhere && trick(MM_OOB_MOVEMENT))"
     "Behind Gorman Fence": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || final_day || short_hook_anywhere"
     "Tingle Ranch": "has_weapon_range"
+    "Milk Road Keaton": "true"
   events:
     PICTURE_TINGLE: "has(PICTOGRAPH_BOX)"
     RUPEES: "true"
@@ -2116,6 +2152,12 @@
     "Milk Road Keaton Grass Reward 7": "keaton_grass_hard"
     "Milk Road Keaton Grass Reward 8": "keaton_grass_hard"
     "Milk Road Keaton Grass Reward 9": "keaton_grass_hard"
+"Milk Road Keaton":
+  region: NONE
+  exits:
+    "Milk Road": "true"
+  locations:
+    "Clock Town Keaton HP": "has_mask_keaton"
 "Near Romani Ranch":
   region: MILK_ROAD
   exits:
