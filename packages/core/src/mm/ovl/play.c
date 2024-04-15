@@ -110,14 +110,20 @@ static void checkTimeSkip(GameState_Play* play)
 
 static u32 entranceForOverride(u32 entrance)
 {
+    u32 entranceKey;
+
+    entranceKey = (entrance >> 9);
+    switch (entranceKey)
+    {
+    case 0x06: entranceKey = 0x42; break;
+    case 0x57: entranceKey = 0x4d; break;
+    case 0x45: entranceKey = 0x4a; break;
+    case 0x5b: entranceKey = 0x5a; break;
+    }
+    entrance = (entranceKey << 9) | (entrance & 0x1ff);
+
     switch (entrance)
     {
-    case 0x0c00:
-        /* To Clear Swamp from road */
-        return ENTR_MM_SWAMP_FROM_ROAD;
-    case 0xae60:
-        /* To Spring Mountain Village from Path */
-        return ENTR_MM_MOUNTAIN_VILLAGE_FROM_PATH;
     case ENTR_MM_GROTTO_TYPE_GENERIC:
         switch (gGrottoData & 0x1f)
         {
@@ -263,7 +269,7 @@ static const GrottoExit kGrottoExits[] = {
     { ENTR_MM_MYSTERY_WOODS, 2, { 2, 0, -889 } },
     { ENTR_MM_SWAMP_FROM_SPIDER_HOUSE, 1, { -1700, 38, 1800 } },
     { ENTR_MM_WARP_OWL_MOUNTAIN_VILLAGE, 1, { 2406, 1168, -1197 } },
-    { ENTR_MM_TWIN_ISLAND_FROM_MOUNTAIN_VILLAGE, 0, { -1309, 320, 143 } },
+    { ENTR_MM_TWIN_ISLANDS_FROM_MOUNTAIN_VILLAGE, 0, { -1309, 320, 143 } },
     { ENTR_MM_PATH_SNOWHEAD_FROM_SNOWHEAD, 0, { -987, 360, -2339 } },
     { ENTR_MM_GREAT_BAY_COAST_FROM_FISHER_HUT, 0, { 1359, 80, 5018 } },
     { ENTR_MM_ZORA_CAPE_FROM_GREAT_BAY_COAST, 0, { -562, 80, 2707 } },
@@ -286,7 +292,7 @@ static const GrottoExit kGrottoExits[] = {
     { ENTR_MM_TERMINA_FIELD_FROM_CLOCK_TOWN_EAST,  0, { 3223, 219, 1417 } },
     { ENTR_MM_TERMINA_FIELD_FROM_CLOCK_TOWN_SOUTH, 0, { -2317, -221, 3418 } },
     { ENTR_MM_TERMINA_FIELD_FROM_CLOCK_TOWN_WEST,  0, { -5159, -281, -571 } },
-    { ENTR_MM_TWIN_ISLAND_FROM_MOUNTAIN_VILLAGE, 0, { 589, 195, 53 } },
+    { ENTR_MM_TWIN_ISLANDS_FROM_MOUNTAIN_VILLAGE, 0, { 589, 195, 53 } },
 };
 
 static const GrottoExit kGrottoExitMountainWinter = { ENTR_MM_WARP_OWL_MOUNTAIN_VILLAGE, 0, { 345, 8, -150 } };
@@ -403,6 +409,18 @@ static void applyCustomEntrance(u32* entrance)
     }
 }
 
+static void spawnSirloin(GameState_Play* play)
+{
+    if (!gSharedCustomSave.storedSirloin)
+        return;
+    if (play->sceneId != SCE_MM_MOUNTAIN_VILLAGE_WINTER)
+        return;
+    if (MM_CHECK_EVENT_INF(EV_MM_WEEK_DUNGEON_SH))
+        return;
+
+    SpawnActor(&play->actorCtx, play, AC_EN_MM, -1025.f, 8.f, 400.f, 0.f, 0.f, 0.f, 0x8000);
+}
+
 void preInitTitleScreen(void)
 {
     u32 entrance;
@@ -488,6 +506,9 @@ void hookPlay_Init(GameState_Play* play)
     gMultiMarkSwitch1 = 0;
     g.keatonGrassMax = -1;
     comboMultiResetWisps();
+
+    if (comboConfig(CFG_ER_OVERWORLD) || comboConfig(CFG_ER_INDOORS))
+        gSave.hasSirloin = 0;
 
     if (gSaveContext.respawnFlag == 8)
     {
@@ -706,6 +727,7 @@ void hookPlay_Init(GameState_Play* play)
     CustomTriggers_Spawn(play);
     comboSpawnItemGivers(play);
     comboSpawnCustomWarps(play);
+    spawnSirloin(play);
 
     if (gNoTimeFlow)
     {

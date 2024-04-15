@@ -245,7 +245,7 @@ typedef struct
     MmHorseData             horseData;
     u16                     checksum;
     u8                      eventInf[8];
-    u8                      unk_1014;
+    u8                      hasSirloin;
     u8                      unk_1015;
     u16                     jinxTimer;
     s16                     rupeesDelta;
