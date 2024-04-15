@@ -266,7 +266,7 @@ static const GrottoExit kGrottoExits[] = {
     { ENTR_OOT_FIELD_FROM_MARKET_ENTRANCE,       0, { -1425,    0,   810 } },
 
     /* Fairy Fountains */
-    { ENTR_OOT_SACRED_MEADOW,               0,  {    45,    0,   220 } },
+    { ENTR_OOT_SACRED_FOREST_MEADOW,        0,  {    45,    0,   220 } },
     { ENTR_OOT_FIELD_FROM_MARKET_ENTRANCE,  0,  { -4450, -300,  -425 } },
     { ENTR_OOT_ZORA_RIVER_FROM_FIELD,       0,  {   670,  570,  -365 } },
     { ENTR_OOT_ZORA_DOMAIN,                 1,  {  -860,   14,  -470 } },
@@ -281,14 +281,14 @@ static const GrottoExit kGrottoExits[] = {
     /* Triple scrubs */
     { ENTR_OOT_LON_LON_RANCH_FROM_HOUSE,                0, {  1800,    0,  1500 } },
     { ENTR_OOT_GORON_CITY,                              3, {  1100,  580, -1190 } },
-    { ENTR_OOT_DEATH_MOUNTAIN_CRATER_FROM_GORON_CITY,   1, { -1699,  722,  -472 } },
+    { ENTR_OOT_CRATER_FROM_GORON_CITY,                  1, { -1699,  722,  -472 } },
     { ENTR_OOT_WARP_SONG_LAKE,                          0, { -3040, -1033, 6075 } },
 
     /* Other Grottos */
     { ENTR_OOT_LOST_WOODS_FROM_KOKIRI_FOREST,   8, {   670,    0, -2520 } }, /* OOT_GROTTO_EXIT_SCRUB_UPGRADE */
     { ENTR_OOT_FIELD_FROM_LAKE_HYLIA,           0, { -4990, -700, 13820 } }, /* OOT_GROTTO_EXIT_SCRUB_HEART_PIECE */
     { ENTR_OOT_LOST_WOODS_FROM_MEADOW,          6, {    80,  -20, -1600 } }, /* OOT_GROTTO_EXIT_DEKU_THEATER */
-    { ENTR_OOT_SACRED_MEADOW,                   0, {  -195,    0,  1900 } }, /* OOT_GROTTO_EXIT_WOLFOS */
+    { ENTR_OOT_SACRED_FOREST_MEADOW,            0, {  -195,    0,  1900 } }, /* OOT_GROTTO_EXIT_WOLFOS */
     { ENTR_OOT_FIELD_FROM_MARKET_ENTRANCE,      0, { -4945, -300,  2835 } }, /* OOT_GROTTO_EXIT_TEKTITE */
     { ENTR_OOT_FIELD_FROM_GERUDO_VALLEY,        0, { -7870, -300,  6920 } }, /* OOT_GROTTO_EXIT_FIELD_COW */
     { ENTR_OOT_FIELD_FROM_KAKARIKO,             0, {  2060,   20,  -170 } }, /* OOT_GROTTO_EXIT_FIELD_TREE */
@@ -444,7 +444,7 @@ static void playAdjustEntrance(GameState_Play* play)
             gSave.entrance = ENTR_OOT_CASTLE_COURTYARD;
         break;
     case ENTR_OOT_CASTLE_STEALTH_FROM_COURTYARD:
-        gSave.entrance = ENTR_OOT_CASTLE_FROM_STEALTH;
+        gSave.entrance = ENTR_OOT_GANON_CASTLE_EXTERIOR_FROM_CASTLE; /* Stealth exit as child */
         break;
     case ENTR_OOT_SAGES_CHAMBER_END:
         endGame();

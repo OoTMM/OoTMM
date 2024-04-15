@@ -192,6 +192,32 @@ class WorldShuffler {
       dstCandidates = new Set([...dstCandidates].filter(x => ENTRANCES[x].game === ENTRANCES[src].game));
     }
 
+    /* Filter self-loops */
+    if (!this.settings.erSelfLoops && !this.settings.erDecoupled) {
+      const srcEntrance = ENTRANCES[src];
+      const map = srcEntrance.fromMap;
+      if (map !== 'NONE') {
+        dstCandidates = new Set([...dstCandidates].filter((candidate) => {
+          const cEntrance = ENTRANCES[candidate];
+          if (cEntrance.toMap !== map) {
+            return true;
+          }
+
+          /* Same map, check for internal submap */
+          if (srcEntrance.fromMap !== srcEntrance.toMap) {
+            return false;
+          }
+
+          if (cEntrance.fromMap !== cEntrance.toMap) {
+            return false;
+          }
+
+          /* Both entrances are internal, check the submap */
+          return srcEntrance.fromSubmap !== cEntrance.toSubmap;
+        }));
+      }
+    }
+
     /* Try to find a match */
     while (dstCandidates.size > 0) {
       const dst = sample(this.random, [...dstCandidates]);
@@ -215,6 +241,11 @@ class WorldShuffler {
       newEntrances[poolName] = { src: new Set(pool.src), dst: new Set(pool.dst) };
       newEntrances[poolName].src.delete(src);
       newEntrances[poolName].dst.delete(dst);
+      if (revSrc && revDst) {
+        newEntrances[poolName].src.delete(revDst);
+        newEntrances[poolName].dst.delete(revSrc);
+      }
+
       if (newEntrances[poolName].src.size === 0) {
         delete newEntrances[poolName];
       }
@@ -365,6 +396,11 @@ class WorldShuffler {
       pool.add('region-shortcut');
     }
     return { pool: Array.from(pool), opts: { ownGame: this.settings.erRegions === 'ownGame' } };
+  }
+
+  private poolOverworld() {
+    const pool = ['region', 'region-extra', 'region-shortcut', 'region-exit', 'overworld'];
+    return { pool, opts: { ownGame: this.settings.erOverworld === 'ownGame' } };
   }
 
   private poolIndoors() {
@@ -621,6 +657,10 @@ class WorldShuffler {
       pools.REGIONS = this.poolRegions();
     }
 
+    if (this.settings.erOverworld !== 'none') {
+      pools.OVERWORLD = this.poolOverworld();
+    }
+
     if (this.settings.erIndoors !== 'none') {
       pools.INDOORS = this.poolIndoors();
     }
@@ -641,6 +681,11 @@ class WorldShuffler {
       if (this.settings.erMixedRegions) {
         pools.MIXED.pool = [...pools.MIXED.pool, ...pools.REGIONS.pool];
         delete pools.REGIONS;
+      }
+
+      if (this.settings.erMixedOverworld) {
+        pools.MIXED.pool = [...pools.MIXED.pool, ...pools.OVERWORLD.pool];
+        delete pools.OVERWORLD;
       }
 
       if (this.settings.erMixedIndoors) {

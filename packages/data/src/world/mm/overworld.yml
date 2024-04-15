@@ -303,6 +303,7 @@
   region: CLOCK_TOWN_EAST
   exits:
     "Termina Field": "true"
+    "Clock Town North": "true"
     "Clock Town South Upper East": "true"
     "Clock Town South Lower East": "true"
     "Mayor's Office": "between(DAY1_AM_10_00, NIGHT1_PM_08_00) || between(DAY2_AM_10_00, NIGHT2_PM_08_00) || after(DAY3_AM_10_00)"

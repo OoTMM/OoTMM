@@ -45,5 +45,7 @@ export function isEntranceShuffle(settings: Settings) {
     return true;
   if (settings.erWallmasters !== 'none')
     return true;
+  if (settings.erOverworld !== 'none')
+    return true;
   return false;
 }

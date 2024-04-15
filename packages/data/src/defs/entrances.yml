@@ -34,35 +34,63 @@ OOT_ZORA_FOUNTAIN_FROM_ICE_CAVERN:              { game: oot, id: 0x3d4, type: du
 OOT_GERUDO_FORTRESS_FROM_GERUDO_TRAINING:       { game: oot, id: 0x3a8, type: dungeon-exit, areas: ["OOT Gerudo Training Grounds", "OOT Gerudo Fortress Exterior"], reverse: OOT_GERUDO_TRAINING_GROUNDS }
 OOT_GANON_CASTLE_EXTERIOR_FROM_CASTLE:          { game: oot, id: 0x23d, type: dungeon-exit, areas: ["OOT Ganon Castle", "OOT Ganon Castle Exterior After Bridge"], reverse: OOT_GANON_CASTLE }
 OOT_GANON_CASTLE_FROM_TOWER:                    { game: oot, id: 0x534, type: dungeon-exit, areas: ["OOT Ganon Castle Tower", "OOT Ganon Castle Stairs"], reverse: OOT_GANON_TOWER }
-OOT_LOST_WOODS_BRIDGE_FROM_FIELD:               { game: oot, id: 0x4de, type: region, areas: ["OOT Hyrule Field", "OOT Lost Woods Bridge"], reverse: OOT_FIELD_FROM_LOST_WOODS_BRIDGE }
-OOT_FIELD_FROM_LOST_WOODS_BRIDGE:               { game: oot, id: 0x185, type: overworld, areas: ["OOT Lost Woods Bridge", "OOT Hyrule Field"], reverse: OOT_LOST_WOODS_BRIDGE_FROM_FIELD }
-OOT_ZORA_RIVER_FROM_FIELD:                      { game: oot, id: 0x0ea, type: region, areas: ["OOT Hyrule Field", "OOT Zora River Front"], reverse: OOT_FIELD_FROM_ZORA_RIVER, debug: ['REGION', 'Zora River'] }
-OOT_FIELD_FROM_ZORA_RIVER:                      { game: oot, id: 0x181, type: overworld, areas: ["OOT Zora River Front", "OOT Hyrule Field"], reverse: OOT_ZORA_RIVER_FROM_FIELD }
-OOT_KAKARIKO_FROM_FIELD:                        { game: oot, id: 0x0db, type: region, areas: ["OOT Hyrule Field", "OOT Kakariko"], reverse: OOT_FIELD_FROM_KAKARIKO, debug: ['REGION', 'Kakariko'] }
-OOT_FIELD_FROM_KAKARIKO:                        { game: oot, id: 0x17d, type: overworld, areas: ["OOT Kakariko", "OOT Hyrule Field"], reverse: OOT_KAKARIKO_FROM_FIELD }
-OOT_LON_LON_RANCH_FROM_FIELD:                   { game: oot, id: 0x157, type: region, areas: ["OOT Hyrule Field", "OOT Lon Lon Ranch"], reverse: OOT_FIELD_FROM_LON_LON_RANCH, debug: ['REGION', 'Lon Lon Ranch'] }
-OOT_FIELD_FROM_LON_LON_RANCH:                   { game: oot, id: 0x1f9, type: overworld, areas: ["OOT Lon Lon Ranch", "OOT Hyrule Field"], reverse: OOT_LON_LON_RANCH_FROM_FIELD }
-OOT_LAKE_HYLIA_FROM_FIELD:                      { game: oot, id: 0x102, type: region, areas: ["OOT Hyrule Field", "OOT Lake Hylia"], reverse: OOT_FIELD_FROM_LAKE_HYLIA, debug: ['REGION', 'Lake Hylia'] }
-OOT_FIELD_FROM_LAKE_HYLIA:                      { game: oot, id: 0x189, type: overworld, areas: ["OOT Lake Hylia", "OOT Hyrule Field"], reverse: OOT_LAKE_HYLIA_FROM_FIELD }
-OOT_GERUDO_FORTRESS_FROM_VALLEY:                { game: oot, id: 0x129, type: region, areas: ["OOT Gerudo Valley After Bridge", "OOT Gerudo Fortress Exterior"], reverse: OOT_VALLEY_FROM_GERUDO_FORTRESS, debug: ['REGION', 'Gerudo Fortress'] }
-OOT_VALLEY_FROM_GERUDO_FORTRESS:                { game: oot, id: 0x22d, type: overworld, areas: ["OOT Gerudo Fortress Exterior", "OOT Gerudo Valley After Bridge"], reverse: OOT_GERUDO_FORTRESS_FROM_VALLEY }
-OOT_DEATH_MOUNTAIN_FROM_KAKARIKO:               { game: oot, id: 0x13d, type: region, areas: ["OOT Kakariko Trail Start", "OOT Death Mountain"], reverse: OOT_KAKARIKO_FROM_DEATH_MOUNTAIN, debug: ['REGION', 'Death Mountain Trail'] }
-OOT_KAKARIKO_FROM_DEATH_MOUNTAIN:               { game: oot, id: 0x191, type: overworld, areas: ["OOT Death Mountain", "OOT Kakariko Trail Start"], reverse: OOT_DEATH_MOUNTAIN_FROM_KAKARIKO }
-OOT_GERUDO_VALLEY_FROM_FIELD:                   { game: oot, id: 0x117, type: region, areas: ["OOT Hyrule Field", "OOT Gerudo Valley"], reverse: OOT_FIELD_FROM_GERUDO_VALLEY }
-OOT_FIELD_FROM_GERUDO_VALLEY:                   { game: oot, id: 0x18d, type: overworld, areas: ["OOT Gerudo Valley", "OOT Hyrule Field"], reverse: OOT_GERUDO_VALLEY_FROM_FIELD }
-OOT_MARKET_ENTRANCE_FROM_FIELD:                 { game: oot, id: 0x276, type: region-extra, areas: ["OOT Hyrule Field", "OOT Market Entryway"], reverse: OOT_FIELD_FROM_MARKET_ENTRANCE }
-OOT_FIELD_FROM_MARKET_ENTRANCE:                 { game: oot, id: 0x1fd, type: overworld, areas: ["OOT Market Entryway", "OOT Hyrule Field"], reverse: OOT_MARKET_ENTRANCE_FROM_FIELD }
+OOT_LOST_WOODS_BRIDGE_FROM_FIELD:               { game: oot, id: 0x4de, type: region, maps: [OOT_HYRULE_FIELD, OOT_LOST_WOODS], areas: ["OOT Hyrule Field", "OOT Lost Woods Bridge"], reverse: OOT_FIELD_FROM_LOST_WOODS_BRIDGE }
+OOT_ZORA_RIVER_FROM_FIELD:                      { game: oot, id: 0x0ea, type: region, maps: [OOT_HYRULE_FIELD, OOT_ZORA_RIVER], areas: ["OOT Hyrule Field", "OOT Zora River Front"], reverse: OOT_FIELD_FROM_ZORA_RIVER, debug: ['REGION', 'Zora River'] }
+OOT_KAKARIKO_FROM_FIELD:                        { game: oot, id: 0x0db, type: region, maps: [OOT_HYRULE_FIELD, OOT_KAKARIKO], areas: ["OOT Hyrule Field", "OOT Kakariko"], reverse: OOT_FIELD_FROM_KAKARIKO, debug: ['REGION', 'Kakariko'] }
+OOT_LON_LON_RANCH_FROM_FIELD:                   { game: oot, id: 0x157, type: region, maps: [OOT_HYRULE_FIELD, OOT_LON_LON_RANCH], areas: ["OOT Hyrule Field", "OOT Lon Lon Ranch"], reverse: OOT_FIELD_FROM_LON_LON_RANCH, debug: ['REGION', 'Lon Lon Ranch'] }
+OOT_LAKE_HYLIA_FROM_FIELD:                      { game: oot, id: 0x102, type: region, maps: [OOT_HYRULE_FIELD, OOT_LAKE_HYLIA], areas: ["OOT Hyrule Field", "OOT Lake Hylia"], reverse: OOT_FIELD_FROM_LAKE_HYLIA, debug: ['REGION', 'Lake Hylia'] }
+OOT_GERUDO_FORTRESS_FROM_VALLEY:                { game: oot, id: 0x129, type: region, maps: [OOT_GERUDO_VALLEY, OOT_GERUDO_FORTRESS], areas: ["OOT Gerudo Valley After Bridge", "OOT Gerudo Fortress Exterior"], reverse: OOT_VALLEY_FROM_GERUDO_FORTRESS, debug: ['REGION', 'Gerudo Fortress'] }
+OOT_DEATH_MOUNTAIN_FROM_KAKARIKO:               { game: oot, id: 0x13d, type: region, maps: [OOT_KAKARIKO, OOT_DEATH_MOUNTAIN_TRAIL], areas: ["OOT Kakariko Trail Start", "OOT Death Mountain"], reverse: OOT_KAKARIKO_FROM_DEATH_MOUNTAIN, debug: ['REGION', 'Death Mountain Trail'] }
+OOT_GERUDO_VALLEY_FROM_FIELD:                   { game: oot, id: 0x117, type: region, maps: [OOT_HYRULE_FIELD, OOT_GERUDO_VALLEY], areas: ["OOT Hyrule Field", "OOT Gerudo Valley"], reverse: OOT_FIELD_FROM_GERUDO_VALLEY }
+OOT_MARKET_ENTRANCE_FROM_FIELD:                 { game: oot, id: 0x276, type: region-extra, maps: [OOT_HYRULE_FIELD, OOT_MARKET_ENTRANCE], areas: ["OOT Hyrule Field", "OOT Market Entryway"], reverse: OOT_FIELD_FROM_MARKET_ENTRANCE }
+OOT_ZORA_RIVER_FROM_LOST_WOODS:                 { game: oot, id: 0x1dd, type: region-shortcut, maps: [OOT_LOST_WOODS, OOT_ZORA_RIVER], areas: ["OOT Lost Woods", "OOT Zora River"], reverse: OOT_LOST_WOODS_FROM_ZORA_RIVER }
+OOT_GORON_CITY_FROM_LOST_WOODS:                 { game: oot, id: 0x4e2, type: region-shortcut, maps: [OOT_LOST_WOODS, OOT_GORON_CITY], areas: ["OOT Lost Woods", "OOT Goron City Shortcut"], reverse: OOT_LOST_WOODS_FROM_GORON_CITY }
+OOT_LAKE_HYLIA_FROM_ZORA_DOMAIN:                { game: oot, id: 0x560, type: region-shortcut, maps: [OOT_ZORA_DOMAIN, OOT_LAKE_HYLIA], areas: ["OOT Zora Domain", "OOT Lake Hylia"], reverse: OOT_ZORA_DOMAIN_FROM_LAKE_HYLIA }
+OOT_FIELD_FROM_LOST_WOODS_BRIDGE:               { game: oot, id: 0x185, type: region-exit, maps: [OOT_LOST_WOODS, OOT_HYRULE_FIELD], areas: ["OOT Lost Woods Bridge", "OOT Hyrule Field"], reverse: OOT_LOST_WOODS_BRIDGE_FROM_FIELD }
+OOT_FIELD_FROM_ZORA_RIVER:                      { game: oot, id: 0x181, type: region-exit, maps: [OOT_ZORA_RIVER, OOT_HYRULE_FIELD], areas: ["OOT Zora River Front", "OOT Hyrule Field"], reverse: OOT_ZORA_RIVER_FROM_FIELD }
+OOT_FIELD_FROM_KAKARIKO:                        { game: oot, id: 0x17d, type: region-exit, maps: [OOT_KAKARIKO, OOT_HYRULE_FIELD], areas: ["OOT Kakariko", "OOT Hyrule Field"], reverse: OOT_KAKARIKO_FROM_FIELD }
+OOT_FIELD_FROM_LON_LON_RANCH:                   { game: oot, id: 0x1f9, type: region-exit, maps: [OOT_LON_LON_RANCH, OOT_HYRULE_FIELD], areas: ["OOT Lon Lon Ranch", "OOT Hyrule Field"], reverse: OOT_LON_LON_RANCH_FROM_FIELD }
+OOT_FIELD_FROM_LAKE_HYLIA:                      { game: oot, id: 0x189, type: region-exit, maps: [OOT_LAKE_HYLIA, OOT_HYRULE_FIELD], areas: ["OOT Lake Hylia", "OOT Hyrule Field"], reverse: OOT_LAKE_HYLIA_FROM_FIELD }
+OOT_FIELD_FROM_GERUDO_VALLEY:                   { game: oot, id: 0x18d, type: region-exit, maps: [OOT_GERUDO_VALLEY, OOT_HYRULE_FIELD], areas: ["OOT Gerudo Valley", "OOT Hyrule Field"], reverse: OOT_GERUDO_VALLEY_FROM_FIELD }
+OOT_VALLEY_FROM_GERUDO_FORTRESS:                { game: oot, id: 0x22d, type: region-exit, maps: [OOT_GERUDO_FORTRESS, OOT_GERUDO_VALLEY], areas: ["OOT Gerudo Fortress Exterior", "OOT Gerudo Valley After Bridge"], reverse: OOT_GERUDO_FORTRESS_FROM_VALLEY }
+OOT_KAKARIKO_FROM_DEATH_MOUNTAIN:               { game: oot, id: 0x191, type: region-exit, maps: [OOT_DEATH_MOUNTAIN_TRAIL, OOT_KAKARIKO], areas: ["OOT Death Mountain", "OOT Kakariko Trail Start"], reverse: OOT_DEATH_MOUNTAIN_FROM_KAKARIKO }
+OOT_FIELD_FROM_MARKET_ENTRANCE:                 { game: oot, id: 0x1fd, type: region-exit, maps: [OOT_MARKET_ENTRANCE, OOT_HYRULE_FIELD], areas: ["OOT Market Entryway", "OOT Hyrule Field"], reverse: OOT_MARKET_ENTRANCE_FROM_FIELD }
+OOT_LOST_WOODS_FROM_ZORA_RIVER:                 { game: oot, id: 0x4da, type: region-exit, maps: [OOT_ZORA_RIVER, OOT_LOST_WOODS], areas: ["OOT Zora River", "OOT Lost Woods"], reverse: OOT_ZORA_RIVER_FROM_LOST_WOODS }
+OOT_LOST_WOODS_FROM_GORON_CITY:                 { game: oot, id: 0x4d6, type: region-exit, maps: [OOT_GORON_CITY, OOT_LOST_WOODS], areas: ["OOT Goron City Shortcut", "OOT Lost Woods"], reverse: OOT_GORON_CITY_FROM_LOST_WOODS }
+OOT_ZORA_DOMAIN_FROM_LAKE_HYLIA:                { game: oot, id: 0x328, type: region-exit, maps: [OOT_LAKE_HYLIA, OOT_ZORA_DOMAIN], areas: ["OOT Lake Hylia", "OOT Zora Domain"], reverse: OOT_LAKE_HYLIA_FROM_ZORA_DOMAIN }
+OOT_SACRED_FOREST_MEADOW:                       { game: oot, id: 0x0fc, type: overworld, maps: [OOT_LOST_WOODS, OOT_SACRED_MEADOW], areas: ["OOT Lost Woods Deep", "OOT Sacred Meadow Entryway"], reverse: OOT_LOST_WOODS_FROM_MEADOW }
+OOT_LOST_WOODS_FROM_MEADOW:                     { game: oot, id: 0x1a9, type: overworld, maps: [OOT_SACRED_MEADOW, OOT_LOST_WOODS], areas: ["OOT Sacred Meadow Entryway", "OOT Lost Woods Deep"], reverse: OOT_SACRED_FOREST_MEADOW }
+OOT_GORON_CITY:                                 { game: oot, id: 0x14d, type: overworld, maps: [OOT_DEATH_MOUNTAIN_TRAIL, OOT_GORON_CITY], areas: ["OOT Death Mountain", "OOT Goron City"], reverse: OOT_DEATH_MOUNTAIN_FROM_GORON_CITY }
+OOT_DEATH_MOUNTAIN_FROM_GORON_CITY:             { game: oot, id: 0x1b9, type: overworld, maps: [OOT_GORON_CITY, OOT_DEATH_MOUNTAIN_TRAIL], areas: ["OOT Goron City", "OOT Death Mountain"], reverse: OOT_GORON_CITY }
+OOT_ZORA_DOMAIN:                                { game: oot, id: 0x108, type: overworld, maps: [OOT_ZORA_RIVER, OOT_ZORA_DOMAIN], areas: ["OOT Zora River Behind Falls", "OOT Zora Domain"], reverse: OOT_RIVER_FROM_DOMAIN }
+OOT_RIVER_FROM_DOMAIN:                          { game: oot, id: 0x19d, type: overworld, maps: [OOT_ZORA_DOMAIN, OOT_ZORA_RIVER], areas: ["OOT Zora Domain", "OOT Zora River Behind Falls"], reverse: OOT_ZORA_DOMAIN }
+OOT_FOUNTAIN_ZORA:                              { game: oot, id: 0x225, type: overworld, maps: [OOT_ZORA_DOMAIN, OOT_ZORA_FOUNTAIN], areas: ["OOT Zora Domain Back", "OOT Zora Fountain"], reverse: OOT_DOMAIN_FROM_FOUNTAIN }
+OOT_DOMAIN_FROM_FOUNTAIN:                       { game: oot, id: 0x1a1, type: overworld, maps: [OOT_ZORA_FOUNTAIN, OOT_ZORA_DOMAIN], areas: ["OOT Zora Fountain", "OOT Zora Domain Back"], reverse: OOT_FOUNTAIN_ZORA }
+OOT_CRATER_FROM_GORON_CITY:                     { game: oot, id: 0x246, type: overworld, maps: [OOT_GORON_CITY, OOT_DEATH_MOUNTAIN_CRATER], areas: ["OOT Darunia Chamber", "OOT Death Mountain Crater Bottom"], reverse: OOT_GORON_CITY_FROM_CRATER }
+OOT_GORON_CITY_FROM_CRATER:                     { game: oot, id: 0x1c1, type: overworld, maps: [OOT_DEATH_MOUNTAIN_CRATER, OOT_GORON_CITY], areas: ["OOT Death Mountain Crater Bottom", "OOT Darunia Chamber"], reverse: OOT_CRATER_FROM_GORON_CITY }
+OOT_DEATH_MOUNTAIN_CRATER:                      { game: oot, id: 0x147, type: overworld, maps: [OOT_DEATH_MOUNTAIN_TRAIL, OOT_DEATH_MOUNTAIN_CRATER], areas: ["OOT Death Mountain Summit", "OOT Death Mountain Crater Top"], reverse: OOT_TRAIL_SUMMIT_FROM_CRATER }
+OOT_TRAIL_SUMMIT_FROM_CRATER:                   { game: oot, id: 0x1bd, type: overworld, maps: [OOT_DEATH_MOUNTAIN_CRATER, OOT_DEATH_MOUNTAIN_TRAIL], areas: ["OOT Death Mountain Crater Top", "OOT Death Mountain Summit"], reverse: OOT_DEATH_MOUNTAIN_CRATER }
+OOT_LOST_WOODS_FROM_KOKIRI_FOREST:              { game: oot, id: 0x11e, type: overworld, maps: [OOT_KOKIRI_FOREST, OOT_LOST_WOODS], areas: ["OOT Kokiri Forest", "OOT Lost Woods"], reverse: OOT_KOKIRI_FOREST_FROM_LOST_WOODS }
+OOT_KOKIRI_FOREST_FROM_LOST_WOODS:              { game: oot, id: 0x286, type: overworld, maps: [OOT_LOST_WOODS, OOT_KOKIRI_FOREST], areas: ["OOT Lost Woods", "OOT Kokiri Forest"], reverse: OOT_LOST_WOODS_FROM_KOKIRI_FOREST }
+OOT_FOREST_FROM_LOST_WOODS_BRIDGE:              { game: oot, id: 0x20d, type: overworld, maps: [OOT_LOST_WOODS, OOT_KOKIRI_FOREST], areas: ["OOT Lost Woods Bridge", "OOT Kokiri Forest"], reverse: OOT_LOST_WOODS_BRIDGE_FROM_FOREST }
+OOT_LOST_WOODS_BRIDGE_FROM_FOREST:              { game: oot, id: 0x5e0, type: overworld, maps: [OOT_KOKIRI_FOREST, OOT_LOST_WOODS], areas: ["OOT Kokiri Forest", "OOT Lost Woods Bridge from Forest"], reverse: OOT_FOREST_FROM_LOST_WOODS_BRIDGE }
+OOT_GRAVEYARD:                                  { game: oot, id: 0x0e4, type: overworld, maps: [OOT_KAKARIKO, OOT_GRAVEYARD], areas: ["OOT Kakariko", "OOT Graveyard"], reverse: OOT_KAKARIKO_FROM_GRAVEYARD }
+OOT_KAKARIKO_FROM_GRAVEYARD:                    { game: oot, id: 0x195, type: overworld, maps: [OOT_GRAVEYARD, OOT_KAKARIKO], areas: ["OOT Graveyard", "OOT Kakariko"], reverse: OOT_GRAVEYARD }
+OOT_WASTELAND:                                  { game: oot, id: 0x130, type: overworld, maps: [OOT_GERUDO_FORTRESS, OOT_WASTELAND], areas: ["OOT Fortress Near Wasteland", "OOT Haunted Wasteland Start"], reverse: OOT_FORTRESS_FROM_WASTELAND }
+OOT_FORTRESS_FROM_WASTELAND:                    { game: oot, id: 0x3ac, type: overworld, maps: [OOT_WASTELAND, OOT_GERUDO_FORTRESS], areas: ["OOT Haunted Wasteland Start", "OOT Fortress Near Wasteland"], reverse: OOT_WASTELAND }
+OOT_COLOSSUS:                                   { game: oot, id: 0x123, type: overworld, maps: [OOT_WASTELAND, OOT_COLOSSUS], areas: ["OOT Haunted Wasteland End", "OOT Desert Colossus"], reverse: OOT_WASTELAND_FROM_COLOSSUS }
+OOT_WASTELAND_FROM_COLOSSUS:                    { game: oot, id: 0x365, type: overworld, maps: [OOT_COLOSSUS, OOT_WASTELAND], areas: ["OOT Desert Colossus", "OOT Haunted Wasteland End"], reverse: OOT_COLOSSUS }
+OOT_MARKET_FROM_MARKET_ENTRANCE:                { game: oot, id: 0x0b1, type: overworld, maps: [OOT_MARKET, OOT_MARKET], submaps: [ENTRANCE, MAIN], areas: ["OOT Market Entryway", "OOT Market"], reverse: OOT_MARKET_ENTRANCE_FROM_MARKET }
+OOT_MARKET_ENTRANCE_FROM_MARKET:                { game: oot, id: 0x033, type: overworld, maps: [OOT_MARKET, OOT_MARKET], submaps: [MAIN, ENTRANCE], areas: ["OOT Market", "OOT Market Entryway"], reverse: OOT_MARKET_FROM_MARKET_ENTRANCE }
+OOT_HYRULE_CASTLE:                              { game: oot, id: 0x138, type: overworld, maps: [OOT_MARKET, OOT_HYRULE_CASTLE], areas: ["OOT Market", "OOT Market Castle Entry"], reverse: OOT_MARKET_FROM_CASTLE }
+OOT_MARKET_FROM_CASTLE:                         { game: oot, id: 0x25a, type: overworld, maps: [OOT_HYRULE_CASTLE, OOT_MARKET], areas: ["OOT Market Castle Entry", "OOT Market"], reverse: OOT_HYRULE_CASTLE }
+OOT_MARKET_FROM_TEMPLE_OF_TIME_ENTRYWAY:        { game: oot, id: 0x25e, type: overworld, maps: [OOT_MARKET, OOT_MARKET], submaps: [TEMPLE, MAIN], areas: ["OOT Temple of Time Entryway", "OOT Market"], reverse: OOT_TEMPLE_OF_TIME_ENTRYWAY_FROM_MARKET }
+OOT_TEMPLE_OF_TIME_ENTRYWAY_FROM_MARKET:        { game: oot, id: 0x171, type: overworld, maps: [OOT_MARKET, OOT_MARKET], submaps: [MAIN, TEMPLE], areas: ["OOT Market", "OOT Temple of Time Entryway"], reverse: OOT_MARKET_FROM_TEMPLE_OF_TIME_ENTRYWAY }
 OOT_LAKE_HYLIA_FROM_VALLEY:                     { game: oot, id: 0x219, type: one-way, areas: ["OOT Gerudo Valley Falls", "OOT Lake Hylia"] }
-OOT_ZORA_RIVER_FROM_LOST_WOODS:                 { game: oot, id: 0x1dd, type: region-shortcut, areas: ["OOT Lost Woods", "OOT Zora River"], reverse: OOT_LOST_WOODS_FROM_ZORA_RIVER }
-OOT_LOST_WOODS_FROM_ZORA_RIVER:                 { game: oot, id: 0x4da, type: overworld, areas: ["OOT Zora River", "OOT Lost Woods"], reverse: OOT_ZORA_RIVER_FROM_LOST_WOODS }
-OOT_GORON_CITY_FROM_LOST_WOODS:                 { game: oot, id: 0x4e2, type: region-shortcut, areas: ["OOT Lost Woods", "OOT Goron City Shortcut"], reverse: OOT_LOST_WOODS_FROM_GORON_CITY }
-OOT_LOST_WOODS_FROM_GORON_CITY:                 { game: oot, id: 0x4d6, type: overworld, areas: ["OOT Goron City Shortcut", "OOT Lost Woods"], reverse: OOT_GORON_CITY_FROM_LOST_WOODS }
 OOT_LOST_WOODS_FROM_LOST_WOODS_NORTH:           { game: oot, id: 0xf01, type: one-way-woods, areas: ["OOT Lost Woods Lost North", "OOT Lost Woods"] }
 OOT_LOST_WOODS_FROM_LOST_WOODS_EAST:            { game: oot, id: 0x1ad, type: one-way-woods, areas: ["OOT Lost Woods Lost East", "OOT Lost Woods"] }
 OOT_LOST_WOODS_FROM_LOST_WOODS_SOUTH:           { game: oot, id: 0x1b1, type: one-way-woods, areas: ["OOT Lost Woods Lost South", "OOT Lost Woods"] }
 OOT_LOST_WOODS_FROM_LOST_WOODS_WEST:            { game: oot, id: 0x4c6, type: one-way-woods, areas: ["OOT Lost Woods Lost West", "OOT Lost Woods"] }
-OOT_LAKE_HYLIA_FROM_ZORA_DOMAIN:                { game: oot, id: 0x560, type: region-shortcut, areas: ["OOT Zora Domain", "OOT Lake Hylia"], reverse: OOT_ZORA_DOMAIN_FROM_LAKE_HYLIA }
-OOT_ZORA_DOMAIN_FROM_LAKE_HYLIA:                { game: oot, id: 0x328, type: overworld, areas: ["OOT Lake Hylia", "OOT Zora Domain"], reverse: OOT_LAKE_HYLIA_FROM_ZORA_DOMAIN }
 OOT_KOKIRI_FOREST_FROM_MIDO:                    { game: oot, id: 0x443, type: indoors-exit, areas: ["OOT Mido's House", "OOT Kokiri Forest"], reverse: OOT_HOUSE_MIDO }
 OOT_KOKIRI_FOREST_FROM_SARIA:                   { game: oot, id: 0x447, type: indoors-exit, areas: ["OOT Saria's House", "OOT Kokiri Forest"], reverse: OOT_HOUSE_SARIA }
 OOT_KOKIRI_FOREST_FROM_TWINS:                   { game: oot, id: 0x33c, type: indoors-exit, areas: ["OOT House of Twins", "OOT Kokiri Forest"], reverse: OOT_HOUSE_TWINS }
@@ -151,151 +179,6 @@ OOT_WARP_SONG_TEMPLE:                           { game: oot, id: 0x5f4, type: on
 OOT_VILLAGE_OWL:                                { game: oot, id: 0x554, type: one-way-owl, areas: ["OOT Death Mountain Summit", "OOT Kakariko Rooftop"] }
 OOT_FIELD_OWL:                                  { game: oot, id: 0x27e, type: one-way-owl, areas: ["OOT Lake Hylia", "OOT Hyrule Field Drawbridge"] }
 OOT_OUTSIDE_GANON_FROM_FAIRY:                   { game: oot, id: 0xf00, type: indoors-exit, areas: ["OOT Fairy Fountain Defense", "OOT Near Fairy Fountain Defense"], reverse: OOT_FAIRY_DEFENSE }
-MM_BOSS_TEMPLE_WOODFALL:                        { game: mm, id: 0x3800, type: boss, flags: [no-sot], areas: ["MM Woodfall Temple Boss Access", "MM Woodfall Temple Boss"], debug: ['BOSS', 'Odolwa'] }
-MM_BOSS_TEMPLE_SNOWHEAD:                        { game: mm, id: 0x8200, type: boss, flags: [no-sot], areas: ["MM Snowhead Temple Boss Access", "MM Snowhead Temple Boss"], debug: ['BOSS', 'Goht'] }
-MM_BOSS_TEMPLE_GREAT_BAY:                       { game: mm, id: 0xb800, type: boss, flags: [no-sot], areas: ["MM Great Bay Temple Boss Access", "MM Great Bay Temple Boss"], debug: ['BOSS', 'Gyorg'] }
-MM_BOSS_TEMPLE_STONE_TOWER:                     { game: mm, id: 0x6600, type: boss, flags: [no-sot], areas: ["MM Stone Tower Temple Boss Access", "MM Stone Tower Temple Boss"], debug: ['BOSS', 'Twinmold'] }
-MM_TEMPLE_WOODFALL:                             { game: mm, id: 0x3000, type: dungeon, areas: ["MM Woodfall Front of Temple", "MM Woodfall Temple"], reverse: MM_WOODFALL_FROM_TEMPLE, debug: ['DUNGEON', 'WFT'] }
-MM_TEMPLE_SNOWHEAD:                             { game: mm, id: 0x3c00, type: dungeon, areas: ["MM Snowhead", "MM Snowhead Temple"], reverse: MM_SNOWHEAD_FROM_TEMPLE, debug: ['DUNGEON', 'SHT'] }
-MM_TEMPLE_GREAT_BAY:                            { game: mm, id: 0x8c00, type: dungeon, areas: ["MM Zora Cape Peninsula", "MM Great Bay Temple"], reverse: MM_GREAT_BAY_FROM_TEMPLE, debug: ['DUNGEON', 'GBT'] }
-MM_TEMPLE_STONE_TOWER_INVERTED:                 { game: mm, id: 0x2a00, type: dungeon, areas: ["MM Stone Tower Top Inverted", "MM Stone Tower Temple Inverted"], reverse: MM_STONE_TOWER_INVERTED_FROM_TEMPLE, debug: ['DUNGEON', 'ISTT'] }
-MM_TEMPLE_STONE_TOWER:                          { game: mm, id: 0x2600, type: dungeon, areas: ["MM Stone Tower Front of Temple", "MM Stone Tower Temple"], reverse: MM_STONE_TOWER_FROM_TEMPLE, debug: ['DUNGEON', 'STT'] }
-MM_SPIDER_HOUSE_SWAMP:                          { game: mm, id: 0x4800, type: dungeon-sh, areas: ["MM Near Swamp Spider House", "MM Swamp Spider House"], reverse: MM_SWAMP_FROM_SPIDER_HOUSE, debug: ['DUNGEON', 'SSH'] }
-MM_SPIDER_HOUSE_OCEAN:                          { game: mm, id: 0x4a00, type: dungeon-sh, areas: ["MM Great Bay Coast", "MM Ocean Spider House"], reverse: MM_GREAT_BAY_FROM_SPIDER_HOUSE, debug: ['DUNGEON', 'OSH'] }
-MM_BENEATH_THE_WELL:                            { game: mm, id: 0x9000, type: dungeon-btw, areas: ["MM Ikana Canyon", "MM Beneath The Well Entrance"], reverse: MM_IKANA_CANYON_FROM_WELL, debug: ['DUNGEON', 'BtW (F)'] }
-MM_BENEATH_THE_WELL_BACK:                       { game: mm, id: 0x9010, type: dungeon-btw, areas: ["MM Ikana Castle Exterior", "MM Beneath The Well End"], reverse: MM_IKANA_CASTLE_EXTERIOR_FROM_WELL, debug: ['DUNGEON', 'BtW (B)'] }
-MM_IKANA_CASTLE:                                { game: mm, id: 0x3430, type: dungeon-acoi, areas: ["MM Ikana Castle Exterior", "MM Ancient Castle of Ikana"], reverse: MM_IKANA_CASTLE_EXTERIOR_FROM_CASTLE, debug: ['DUNGEON', 'ACoI'] }
-MM_SECRET_SHRINE:                               { game: mm, id: 0xba00, type: dungeon-ss, areas: ["MM Ikana Valley", "MM Secret Shrine"], reverse: MM_IKANA_VALLEY_FROM_SHRINE, debug: ['DUNGEON', 'SS'] }
-MM_PIRATE_FORTRESS:                             { game: mm, id: 0x7000, type: dungeon-pf, areas: ["MM Great Bay Coast Fortress", "MM Pirate Fortress"], reverse: MM_GREAT_BAY_FROM_PIRATE_FORTRESS, debug: ['DUNGEON', 'PFE'] }
-MM_CLOCK_TOWER:                                 { game: mm, id: 0x2c00, type: dungeon-ctr, areas: ["MM Clock Tower Platform", "MM Clock Tower Roof"], reverse: MM_CLOCK_TOWN_FROM_CLOCK_TOWER }
-MM_WOODFALL_FROM_TEMPLE:                        { game: mm, id: 0x8610, type: dungeon-exit, areas: ["MM Woodfall Temple", "MM Woodfall Front of Temple"], reverse: MM_TEMPLE_WOODFALL }
-MM_SNOWHEAD_FROM_TEMPLE:                        { game: mm, id: 0xb210, type: dungeon-exit, areas: ["MM Snowhead Temple", "MM Snowhead"], reverse: MM_TEMPLE_SNOWHEAD }
-MM_GREAT_BAY_FROM_TEMPLE:                       { game: mm, id: 0x6a70, type: dungeon-exit, areas: ["MM Great Bay Temple", "MM Zora Cape Peninsula"], reverse: MM_TEMPLE_GREAT_BAY }
-MM_STONE_TOWER_INVERTED_FROM_TEMPLE:            { game: mm, id: 0xac10, type: dungeon-exit, areas: ["MM Stone Tower Temple Inverted", "MM Stone Tower Flipping"], reverse: MM_TEMPLE_STONE_TOWER_INVERTED }
-MM_STONE_TOWER_FROM_TEMPLE:                     { game: mm, id: 0xaa20, type: dungeon-exit, areas: ["MM Stone Tower Temple", "MM Stone Tower Front of Temple"], reverse: MM_TEMPLE_STONE_TOWER }
-MM_SWAMP_FROM_SPIDER_HOUSE:                     { game: mm, id: 0x8480, type: dungeon-exit, areas: ["MM Swamp Spider House", "MM Near Swamp Spider House"], reverse: MM_SPIDER_HOUSE_SWAMP }
-MM_GREAT_BAY_FROM_SPIDER_HOUSE:                 { game: mm, id: 0x6880, type: dungeon-exit, areas: ["MM Ocean Spider House", "MM Great Bay Coast"], reverse: MM_SPIDER_HOUSE_OCEAN }
-MM_IKANA_CANYON_FROM_WELL:                      { game: mm, id: 0x2050, type: dungeon-exit, areas: ["MM Beneath The Well Entrance", "MM Ikana Canyon"], reverse: MM_BENEATH_THE_WELL }
-MM_IKANA_CASTLE_EXTERIOR_FROM_WELL:             { game: mm, id: 0x3400, type: dungeon-exit, areas: ["MM Beneath The Well End", "MM Ikana Castle Exterior"], reverse: MM_BENEATH_THE_WELL_BACK }
-MM_IKANA_CASTLE_EXTERIOR_FROM_CASTLE:           { game: mm, id: 0x3420, type: dungeon-exit, areas: ["MM Ancient Castle of Ikana", "MM Ikana Castle Exterior"], reverse: MM_IKANA_CASTLE }
-MM_IKANA_VALLEY_FROM_SHRINE:                    { game: mm, id: 0x20c0, type: dungeon-exit, areas: ["MM Secret Shrine", "MM Ikana Valley"], reverse: MM_SECRET_SHRINE }
-MM_GREAT_BAY_FROM_PIRATE_FORTRESS:              { game: mm, id: 0x6850, type: dungeon-exit, areas: ["MM Pirate Fortress", "MM Great Bay Coast Fortress"], reverse: MM_PIRATE_FORTRESS }
-MM_CLOCK_TOWN_FROM_CLOCK_TOWER:                 { game: mm, id: 0xd880, type: dungeon-exit, areas: ["MM Clock Tower Roof", "MM Clock Tower Platform"], reverse: MM_CLOCK_TOWER }
-MM_SWAMP_FROM_ROAD:                             { game: mm, id: 0x8400, type: region, areas: ["MM Road to Southern Swamp", "MM Swamp Front"], reverse: MM_SWAMP_ROAD_FROM_SWAMP }
-MM_SWAMP_ROAD_FROM_SWAMP:                       { game: mm, id: 0x7a10, type: overworld, areas: ["MM Swamp Front", "MM Road to Southern Swamp"], reverse: MM_SWAMP_FROM_ROAD }
-MM_MOUNTAIN_VILLAGE_FROM_PATH:                  { game: mm, id: 0x9a60, type: region, areas: ["MM Mountain Village Path Upper", "MM Mountain Village"], reverse: MM_PATH_FROM_MOUNTAIN_VILLAGE }
-MM_PATH_FROM_MOUNTAIN_VILLAGE:                  { game: mm, id: 0x3210, type: overworld, areas: ["MM Mountain Village", "MM Mountain Village Path Upper"], reverse: MM_MOUNTAIN_VILLAGE_FROM_PATH }
-MM_GREAT_BAY_COAST_FROM_FIELD:                  { game: mm, id: 0x6800, type: region, areas: ["MM Great Bay Fence", "MM Great Bay Coast"], reverse: MM_TERMINA_FIELD_FROM_GREAT_BAY_COAST }
-MM_TERMINA_FIELD_FROM_GREAT_BAY_COAST:          { game: mm, id: 0x5420, type: overworld, areas: ["MM Great Bay Coast", "MM Great Bay Fence"], reverse: MM_GREAT_BAY_COAST_FROM_FIELD }
-MM_IKANA_VALLEY_FROM_ROAD:                      { game: mm, id: 0x2000, type: region, areas: ["MM Road to Ikana Top", "MM Ikana Valley"], reverse: MM_IKANA_ROAD_FROM_VALLEY }
-MM_IKANA_ROAD_FROM_VALLEY:                      { game: mm, id: 0xa010, type: overworld, areas: ["MM Ikana Valley", "MM Road to Ikana Top"], reverse: MM_IKANA_VALLEY_FROM_ROAD }
-MM_ROMANI_RANCH_FROM_MILK_ROAD:                 { game: mm, id: 0x6400, type: region, areas: ["MM Near Romani Ranch", "MM Romani Ranch"], reverse: MM_MILK_ROAD_FROM_ROMANI_RANCH, debug: ['REGION', 'Romani Ranch'] }
-MM_MILK_ROAD_FROM_ROMANI_RANCH:                 { game: mm, id: 0x3e10, type: overworld, areas: ["MM Romani Ranch", "MM Near Romani Ranch"], reverse: MM_ROMANI_RANCH_FROM_MILK_ROAD }
-MM_SWAMP_FROM_IKANA_CANYON:                     { game: mm, id: 0x8490, type: one-way, areas: ["MM Ikana Valley", "MM Swamp Front"] }
-MM_IKANA_CASTLE_INTERIOR_KEG:                   { game: mm, id: 0x3440, type: one-way-ikana, areas: ["MM Ancient Castle of Ikana Roof Interior", "MM Ancient Castle of Ikana"] }
-MM_IKANA_CASTLE_INTERIOR_BLOCK:                 { game: mm, id: 0x3450, type: one-way-ikana, areas: ["MM Ancient Castle of Ikana Roof Interior", "MM Ancient Castle of Ikana Interior South"] }
-MM_CHEST_GAME:                                  { game: mm, id: 0x2800, type: indoors, areas: ["MM Clock Town East", "MM Chest Game"], reverse: MM_CLOCK_TOWN_EAST_FROM_CHEST_GAME }
-MM_CLOCK_TOWN_EAST_FROM_CHEST_GAME:             { game: mm, id: 0xd240, type: indoors-exit, areas: ["MM Chest Game", "MM Clock Town East"], reverse: MM_CHEST_GAME }
-MM_HONEY_AND_DARLING_GAME:                      { game: mm, id: 0x0800, type: indoors, areas: ["MM Clock Town East", "MM Honey & Darling Game"], reverse: MM_CLOCK_TOWN_EAST_FROM_HONEY_AND_DARLING }
-MM_CLOCK_TOWN_EAST_FROM_HONEY_AND_DARLING:      { game: mm, id: 0xd260, type: indoors-exit, areas: ["MM Honey & Darling Game", "MM Clock Town East"], reverse: MM_HONEY_AND_DARLING_GAME }
-MM_MAYORS_OFFICE:                               { game: mm, id: 0x0000, type: indoors, areas: ["MM Clock Town East", "MM Mayor's Office"], reverse: MM_CLOCK_TOWN_EAST_FROM_MAYORS_OFFICE }
-MM_CLOCK_TOWN_EAST_FROM_MAYORS_OFFICE:          { game: mm, id: 0xd270, type: indoors-exit, areas: ["MM Mayor's Office", "MM Clock Town East"], reverse: MM_MAYORS_OFFICE }
-MM_TOWN_ARCHERY:                                { game: mm, id: 0x3a00, type: indoors, areas: ["MM Clock Town East", "MM Town Archery"], reverse: MM_CLOCK_TOWN_EAST_FROM_TOWN_ARCHERY }
-MM_CLOCK_TOWN_EAST_FROM_TOWN_ARCHERY:           { game: mm, id: 0xd280, type: indoors-exit, areas: ["MM Town Archery", "MM Clock Town East"], reverse: MM_TOWN_ARCHERY }
-MM_STOCK_POT_INN:                               { game: mm, id: 0xbc00, type: indoors-extra, areas: ["MM Clock Town East", "MM Stock Pot Inn"], reverse: MM_CLOCK_TOWN_EAST_FROM_STOCK_POT_INN }
-MM_CLOCK_TOWN_EAST_FROM_STOCK_POT_INN:          { game: mm, id: 0xd290, type: indoors-exit, areas: ["MM Stock Pot Inn", "MM Clock Town East"], reverse: MM_STOCK_POT_INN }
-MM_STOCK_POT_INN_ROOF:                          { game: mm, id: 0xbc10, type: indoors-extra, areas: ["MM Stock Pot Inn Roof", "MM Stock Pot Inn"], reverse: MM_CLOCK_TOWN_EAST_FROM_STOCK_POT_INN_ROOF }
-MM_CLOCK_TOWN_EAST_FROM_STOCK_POT_INN_ROOF:     { game: mm, id: 0xd2a0, type: indoors-exit, areas: ["MM Stock Pot Inn", "MM Stock Pot Inn Roof"], reverse: MM_STOCK_POT_INN_ROOF }
-MM_MILK_BAR:                                    { game: mm, id: 0x2400, type: indoors, areas: ["MM Clock Town East", "MM Milk Bar"], reverse: MM_CLOCK_TOWN_EAST_FROM_MILK_BAR }
-MM_CLOCK_TOWN_EAST_FROM_MILK_BAR:               { game: mm, id: 0xd2b0, type: indoors-exit, areas: ["MM Milk Bar", "MM Clock Town East"], reverse: MM_MILK_BAR }
-MM_FAIRY_FOUNTAIN_TOWN:                         { game: mm, id: 0x4600, type: indoors, areas: ["MM Clock Town North", "MM Clock Town Fairy Fountain"], reverse: MM_CLOCK_TOWN_NORTH_FROM_FAIRY_FOUNTAIN }
-MM_CLOCK_TOWN_NORTH_FROM_FAIRY_FOUNTAIN:        { game: mm, id: 0xd630, type: indoors-exit, areas: ["MM Clock Town Fairy Fountain", "MM Clock Town North"], reverse: MM_FAIRY_FOUNTAIN_TOWN }
-MM_SWORDSMAN_SCHOOL:                            { game: mm, id: 0xa200, type: indoors, areas: ["MM Clock Town West", "MM Swordsman School"], reverse: MM_CLOCK_TOWN_WEST_FROM_SWORDSMAN_SCHOOL }
-MM_CLOCK_TOWN_WEST_FROM_SWORDSMAN_SCHOOL:       { game: mm, id: 0xd430, type: indoors-exit, areas: ["MM Swordsman School", "MM Clock Town West"], reverse: MM_SWORDSMAN_SCHOOL }
-MM_CURIOSITY_SHOP:                              { game: mm, id: 0x0e00, type: indoors, areas: ["MM Clock Town West", "MM Curiosity Shop"], reverse: MM_CLOCK_TOWN_WEST_FROM_CURIOSITY_SHOP }
-MM_CLOCK_TOWN_WEST_FROM_CURIOSITY_SHOP:         { game: mm, id: 0xd440, type: indoors-exit, areas: ["MM Curiosity Shop", "MM Clock Town West"], reverse: MM_CURIOSITY_SHOP }
-MM_TRADING_POST:                                { game: mm, id: 0x6200, type: indoors, areas: ["MM Clock Town West", "MM Trading Post"], reverse: MM_CLOCK_TOWN_WEST_FROM_TRADING_POST }
-MM_CLOCK_TOWN_WEST_FROM_TRADING_POST:           { game: mm, id: 0xd450, type: indoors-exit, areas: ["MM Trading Post", "MM Clock Town West"], reverse: MM_TRADING_POST }
-MM_BOMB_SHOP:                                   { game: mm, id: 0xca00, type: indoors, areas: ["MM Clock Town West", "MM Bomb Shop"], reverse: MM_CLOCK_TOWN_WEST_FROM_BOMB_SHOP }
-MM_CLOCK_TOWN_WEST_FROM_BOMB_SHOP:              { game: mm, id: 0xd460, type: indoors-exit, areas: ["MM Bomb Shop", "MM Clock Town West"], reverse: MM_BOMB_SHOP }
-MM_POST_OFFICE:                                 { game: mm, id: 0x5600, type: indoors, areas: ["MM Clock Town West", "MM Post Office"], reverse: MM_CLOCK_TOWN_WEST_FROM_POST_OFFICE }
-MM_CLOCK_TOWN_WEST_FROM_POST_OFFICE:            { game: mm, id: 0xd470, type: indoors-exit, areas: ["MM Post Office", "MM Clock Town West"], reverse: MM_POST_OFFICE }
-MM_LOTTERY:                                     { game: mm, id: 0x6c00, type: indoors, areas: ["MM Clock Town West", "MM Lottery"], reverse: MM_CLOCK_TOWN_WEST_FROM_LOTTERY }
-MM_CLOCK_TOWN_WEST_FROM_LOTTERY:                { game: mm, id: 0xd480, type: indoors-exit, areas: ["MM Lottery", "MM Clock Town West"], reverse: MM_LOTTERY }
-MM_KAFEI_HIDEOUT:                               { game: mm, id: 0x0e10, type: indoors, areas: ["MM Laundry Pool", "MM Kafei Hideout"], reverse: MM_LAUNDRY_POOL_FROM_KAFEI_HIDEOUT }
-MM_LAUNDRY_POOL_FROM_KAFEI_HIDEOUT:             { game: mm, id: 0xda10, type: indoors-exit, areas: ["MM Kafei Hideout", "MM Laundry Pool"], reverse: MM_KAFEI_HIDEOUT }
-MM_POTION_SHOP:                                 { game: mm, id: 0x0400, type: indoors, areas: ["MM Swamp Front", "MM Swamp Potion Shop"], reverse: MM_SWAMP_FROM_POTION_SHOP }
-MM_SWAMP_FROM_POTION_SHOP:                      { game: mm, id: 0x8450, type: indoors-exit, areas: ["MM Swamp Potion Shop", "MM Swamp Front"], reverse: MM_POTION_SHOP }
-MM_DEKU_SHRINE:                                 { game: mm, id: 0x9e00, type: indoors, areas: ["MM Near Deku Shrine", "MM Deku Shrine"], reverse: MM_DEKU_PALACE_EXTERIOR_FROM_SHRINE }
-MM_DEKU_PALACE_EXTERIOR_FROM_SHRINE:            { game: mm, id: 0x5040, type: indoors-exit, areas: ["MM Deku Shrine", "MM Near Deku Shrine"], reverse: MM_DEKU_SHRINE }
-MM_GORON_SHOP:                                  { game: mm, id: 0x7400, type: indoors, areas: ["MM Goron Shrine", "MM Goron Shop"], reverse: MM_GORON_SHRINE_FROM_SHOP }
-MM_GORON_SHRINE_FROM_SHOP:                      { game: mm, id: 0x5e10, type: indoors-exit, areas: ["MM Goron Shop", "MM Goron Shrine"], reverse: MM_GORON_SHOP }
-MM_FISHER_HUT:                                  { game: mm, id: 0x7200, type: indoors, areas: ["MM Great Bay Coast", "MM Fisher's Hut"], reverse: MM_GREAT_BAY_COAST_FROM_FISHER_HUT }
-MM_GREAT_BAY_COAST_FROM_FISHER_HUT:             { game: mm, id: 0x6840, type: indoors-exit, areas: ["MM Fisher's Hut", "MM Great Bay Coast"], reverse: MM_FISHER_HUT }
-MM_LABORATORY:                                  { game: mm, id: 0x5800, type: indoors, areas: ["MM Great Bay Coast", "MM Laboratory"], reverse: MM_GREAT_BAY_COAST_FROM_LABORATORY }
-MM_GREAT_BAY_COAST_FROM_LABORATORY:             { game: mm, id: 0x6870, type: indoors-exit, areas: ["MM Laboratory", "MM Great Bay Coast"], reverse: MM_LABORATORY }
-MM_ROOM_EVANS:                                  { game: mm, id: 0x9230, type: indoors, areas: ["MM Zora Hall", "MM Evan's Room"], reverse: MM_ZORA_HALL_FROM_EVANS, debug: [INTERIOR, "Evan"] }
-MM_ZORA_HALL_FROM_EVANS:                        { game: mm, id: 0x6040, type: indoors-exit, areas: ["MM Evan's Room", "MM Zora Hall"], reverse: MM_ROOM_EVANS }
-MM_ROOM_JAPAS:                                  { game: mm, id: 0x9210, type: indoors, areas: ["MM Zora Hall", "MM Japas' Room"], reverse: MM_ZORA_HALL_FROM_JAPAS }
-MM_ZORA_HALL_FROM_JAPAS:                        { game: mm, id: 0x6050, type: indoors-exit, areas: ["MM Japas' Room", "MM Zora Hall"], reverse: MM_ROOM_JAPAS }
-MM_ROOM_TIJO:                                   { game: mm, id: 0x9200, type: indoors, areas: ["MM Zora Hall", "MM Tijo's Room"], reverse: MM_ZORA_HALL_FROM_TIJO }
-MM_ZORA_HALL_FROM_TIJO:                         { game: mm, id: 0x6060, type: indoors-exit, areas: ["MM Tijo's Room", "MM Zora Hall"], reverse: MM_ROOM_TIJO }
-MM_ROOM_LULU:                                   { game: mm, id: 0x9220, type: indoors, areas: ["MM Zora Hall", "MM Lulu's Room"], reverse: MM_ZORA_HALL_FROM_LULU }
-MM_ZORA_HALL_FROM_LULU:                         { game: mm, id: 0x6030, type: indoors-exit, areas: ["MM Lulu's Room", "MM Zora Hall"], reverse: MM_ROOM_LULU }
-MM_ZORA_SHOP:                                   { game: mm, id: 0x9250, type: indoors, areas: ["MM Zora Hall", "MM Zora Shop"], reverse: MM_ZORA_HALL_FROM_SHOP }
-MM_ZORA_HALL_FROM_SHOP:                         { game: mm, id: 0x6020, type: indoors-exit, areas: ["MM Zora Shop", "MM Zora Hall"], reverse: MM_ZORA_SHOP }
-MM_GHOST_HUT:                                   { game: mm, id: 0x9c00, type: indoors, areas: ["MM Ikana Canyon", "MM Ghost Hut"], reverse: MM_IKANA_CANYON_FROM_GHOST_HUT }
-MM_IKANA_CANYON_FROM_GHOST_HUT:                 { game: mm, id: 0x2010, type: indoors-exit, areas: ["MM Ghost Hut", "MM Ikana Canyon"], reverse: MM_GHOST_HUT }
-MM_MUSIC_BOX_HOUSE:                             { game: mm, id: 0xa400, type: indoors, areas: ["MM Ikana Canyon", "MM Music Box House"], reverse: MM_IKANA_CANYON_FROM_MUSIC_BOX_HOUSE, debug: [INTERIOR, "Music House"] }
-MM_IKANA_CANYON_FROM_MUSIC_BOX_HOUSE:           { game: mm, id: 0x2020, type: indoors-exit, areas: ["MM Music Box House", "MM Ikana Canyon"], reverse: MM_MUSIC_BOX_HOUSE }
-MM_FAIRY_FOUNTAIN_IKANA:                        { game: mm, id: 0x4640, type: indoors, areas: ["MM Ikana Canyon", "MM Ikana Fairy Fountain"], reverse: MM_IKANA_CANYON_FROM_FAIRY_FOUNTAIN }
-MM_IKANA_CANYON_FROM_FAIRY_FOUNTAIN:            { game: mm, id: 0x20b0, type: indoors-exit, areas: ["MM Ikana Fairy Fountain", "MM Ikana Canyon"], reverse: MM_FAIRY_FOUNTAIN_IKANA }
-MM_DEKU_PALACE_THRONE:                          { game: mm, id: 0x7600, type: indoors-special, areas: ["MM Deku Palace Main", "MM Deku Palace Throne"], reverse: MM_DEKU_PALACE_EXTERIOR_FROM_THRONE }
-MM_DEKU_PALACE_EXTERIOR_FROM_THRONE:            { game: mm, id: 0x5020, type: indoors-special, areas: ["MM Deku Palace Throne", "MM Deku Palace Main"], reverse: MM_DEKU_PALACE_THRONE }
-MM_DEKU_PALACE_THRONE_CAGE:                     { game: mm, id: 0x7610, type: indoors-special, areas: ["MM Deku Palace Near Cage", "MM Deku Palace Cage"], reverse: MM_DEKU_PALACE_EXTERIOR_FROM_THRONE_CAGE }
-MM_DEKU_PALACE_EXTERIOR_FROM_THRONE_CAGE:       { game: mm, id: 0x5030, type: indoors-special, areas: ["MM Deku Palace Cage", "MM Deku Palace Near Cage"], reverse: MM_DEKU_PALACE_THRONE_CAGE }
-MM_SAKON_HIDEOUT:                               { game: mm, id: 0x9800, type: indoors-special, areas: ["MM Ikana Valley", "MM Sakon Hideout"], reverse: MM_IKANA_CANYON_FROM_SAKON_HIDEOUT }
-MM_IKANA_CANYON_FROM_SAKON_HIDEOUT:             { game: mm, id: 0x2060, type: indoors-special, areas: ["MM Sakon Hideout", "MM Ikana Valley"], reverse: MM_SAKON_HIDEOUT }
-MM_IKANA_CAVERN:                                { game: mm, id: 0x20e0, type: indoors, areas: ["MM Ikana Canyon", "MM Ikana Spring Water Cave"], reverse: MM_IKANA_CANYON_FROM_CAVERN }
-MM_IKANA_CANYON_FROM_CAVERN:                    { game: mm, id: 0x20d0, type: indoors-exit, areas: ["MM Ikana Spring Water Cave", "MM Ikana Canyon"], reverse: MM_IKANA_CAVERN }
-MM_FAIRY_FOUNTAIN_GREAT_BAY:                    { game: mm, id: 0x4630, type: indoors, areas: ["MM Great Bay Near Fairy Fountain", "MM Great Bay Fairy Fountain"], reverse: MM_GREAT_BAY_FROM_FAIRY_FOUNTAIN }
-MM_GREAT_BAY_FROM_FAIRY_FOUNTAIN:               { game: mm, id: 0x6a50, type: indoors-exit, areas: ["MM Great Bay Fairy Fountain", "MM Great Bay Near Fairy Fountain"], reverse: MM_FAIRY_FOUNTAIN_GREAT_BAY }
-MM_FAIRY_FOUNTAIN_SNOWHEAD:                     { game: mm, id: 0x4620, type: indoors, areas: ["MM Snowhead Near Fairy Fountain", "MM Snowhead Fairy Fountain"], reverse: MM_SNOWHEAD_FROM_FAIRY_FOUNTAIN }
-MM_SNOWHEAD_FROM_FAIRY_FOUNTAIN:                { game: mm, id: 0xb220, type: indoors-exit, areas: ["MM Snowhead Fairy Fountain", "MM Snowhead Near Fairy Fountain"], reverse: MM_FAIRY_FOUNTAIN_SNOWHEAD }
-MM_TOURIST_INFORMATION:                         { game: mm, id: 0xa800, type: indoors-extra, areas: ["MM Swamp Front", "MM Tourist Information"], reverse: MM_SWAMP_FROM_TOURIST_INFORMATION }
-MM_SWAMP_FROM_TOURIST_INFORMATION:              { game: mm, id: 0x8410, type: indoors-exit, areas: ["MM Tourist Information", "MM Swamp Front"], reverse: MM_TOURIST_INFORMATION }
-MM_FAIRY_FOUNTAIN_WOODFALL:                     { game: mm, id: 0x4610, type: indoors, areas: ["MM Woodfall Near Fairy Fountain", "MM Woodfall Fairy Fountain"], reverse: MM_WOODFALL_FROM_FAIRY_FOUNTAIN }
-MM_WOODFALL_FROM_FAIRY_FOUNTAIN:                { game: mm, id: 0x8620, type: indoors-exit, areas: ["MM Woodfall Fairy Fountain", "MM Woodfall Near Fairy Fountain"], reverse: MM_FAIRY_FOUNTAIN_WOODFALL }
-MM_GORON_GRAVEYARD:                             { game: mm, id: 0x9600, type: indoors, areas: ["MM Near Goron Graveyard", "MM Goron Graveyard"], reverse: MM_MOUNTAIN_VILLAGE_FROM_GORON_GRAVEYARD }
-MM_MOUNTAIN_VILLAGE_FROM_GORON_GRAVEYARD:       { game: mm, id: 0x9a30, type: indoors-exit, areas: ["MM Goron Graveyard", "MM Near Goron Graveyard"], reverse: MM_GORON_GRAVEYARD }
-MM_BLACKSMITH:                                  { game: mm, id: 0x5200, type: indoors, areas: ["MM Mountain Village", "MM Blacksmith"], reverse: MM_MOUNTAIN_VILLAGE_FROM_BLACKSMITH }
-MM_MOUNTAIN_VILLAGE_FROM_BLACKSMITH:            { game: mm, id: 0x9a10, type: indoors-exit, areas: ["MM Blacksmith", "MM Mountain Village"], reverse: MM_BLACKSMITH }
-MM_CUCCO_SHACK:                                 { game: mm, id: 0x7e00, type: indoors, areas: ["MM Romani Ranch", "MM Cucco Shack"], reverse: MM_ROMANI_RANCH_FROM_CUCCO_SHACK }
-MM_ROMANI_RANCH_FROM_CUCCO_SHACK:               { game: mm, id: 0x6440, type: indoors-exit, areas: ["MM Cucco Shack", "MM Romani Ranch"], reverse: MM_CUCCO_SHACK }
-MM_DOGGY_RACETRACK:                             { game: mm, id: 0x7c00, type: indoors, areas: ["MM Romani Ranch", "MM Doggy Racetrack"], reverse: MM_ROMANI_RANCH_FROM_DOGGY_RACETRACK }
-MM_ROMANI_RANCH_FROM_DOGGY_RACETRACK:           { game: mm, id: 0x6450, type: indoors-exit, areas: ["MM Doggy Racetrack", "MM Romani Ranch"], reverse: MM_DOGGY_RACETRACK }
-MM_STABLES:                                     { game: mm, id: 0x0600, type: indoors, areas: ["MM Romani Ranch", "MM Stables"], reverse: MM_ROMANI_RANCH_FROM_STABLES }
-MM_ROMANI_RANCH_FROM_STABLES:                   { game: mm, id: 0x6420, type: indoors-exit, areas: ["MM Stables", "MM Romani Ranch"], reverse: MM_STABLES }
-MM_RANCH_HOUSE:                                 { game: mm, id: 0x0610, type: indoors, areas: ["MM Romani Ranch", "MM Ranch House"], reverse: MM_ROMANI_RANCH_FROM_RANCH_HOUSE }
-MM_ROMANI_RANCH_FROM_RANCH_HOUSE:               { game: mm, id: 0x6430, type: indoors-exit, areas: ["MM Ranch House", "MM Romani Ranch"], reverse: MM_RANCH_HOUSE }
-MM_ASTRAL_OBSERVATORY_FROM_CLOCK_TOWN_EAST:     { game: mm, id: 0x4c00, type: indoors-extra, areas: ["MM Clock Town East", "MM Astral Observatory Passage"], reverse: MM_CLOCK_TOWN_EAST_FROM_ASTRAL_OBSERVATORY }
-MM_CLOCK_TOWN_EAST_FROM_ASTRAL_OBSERVATORY:     { game: mm, id: 0xd220, type: indoors-exit, areas: ["MM Astral Observatory Passage", "MM Clock Town East"], reverse: MM_ASTRAL_OBSERVATORY_FROM_CLOCK_TOWN_EAST }
-MM_ASTRAL_OBSERVATORY_FROM_FIELD:               { game: mm, id: 0x4c10, type: indoors-extra, areas: ["MM Astral Observatory Balcony", "MM Astral Observatory"], reverse: MM_FIELD_FROM_ASTRAL_OBSERVATORY, debug: [INTERIOR, "Astral Observatory"] }
-MM_FIELD_FROM_ASTRAL_OBSERVATORY:               { game: mm, id: 0x5490, type: indoors-exit, areas: ["MM Astral Observatory", "MM Astral Observatory Balcony"], reverse: MM_ASTRAL_OBSERVATORY_FROM_FIELD }
-MM_SWAMP_ARCHERY:                               { game: mm, id: 0x4200, type: indoors, areas: ["MM Road to Southern Swamp", "MM Swamp Archery"], reverse: MM_SWAMP_ROAD_FROM_ARCHERY }
-MM_SWAMP_ROAD_FROM_ARCHERY:                     { game: mm, id: 0x7a20, type: indoors-exit, areas:  ["MM Swamp Archery", "MM Road to Southern Swamp"], reverse: MM_SWAMP_ARCHERY }
-MM_GORON_RACETRACK:                             { game: mm, id: 0xd000, type: indoors, areas: ["MM Near Goron Race", "MM Goron Race"], reverse: MM_TWIN_ISLANDS_FROM_GORON_RACETRACK, debug: [INTERIOR, "Goron Race"] }
-MM_TWIN_ISLANDS_FROM_GORON_RACETRACK:           { game: mm, id: 0xb420, type: indoors-exit, areas: ["MM Goron Race", "MM Near Goron Race"], reverse: MM_GORON_RACETRACK }
-MM_WARP_OWL_GREAT_BAY:                          { game: mm, id: 0x68b0, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Great Bay"], debug: ['WARP', 'Great Bay'] }
-MM_WARP_OWL_ZORA_CAPE:                          { game: mm, id: 0x6a60, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Zora Cape"], debug: ['WARP', 'Zora Cape'] }
-MM_WARP_OWL_SNOWHEAD:                           { game: mm, id: 0xb230, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Snowhead"], debug: ['WARP', 'Snowhead'] }
-MM_WARP_OWL_MOUNTAIN_VILLAGE:                   { game: mm, id: 0x9a80, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Mountain"], debug: ['WARP', 'Mountain'] }
-MM_WARP_OWL_CLOCK_TOWN:                         { game: mm, id: 0xd890, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Clock Town"], debug: ['WARP', 'Clock Town'] }
-MM_WARP_OWL_MILK_ROAD:                          { game: mm, id: 0x3e40, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Milk Road"], debug: ['WARP', 'Milk Road'] }
-MM_WARP_OWL_WOODFALL:                           { game: mm, id: 0x8640, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Woodfall"], debug: ['WARP', 'Woodfall'] }
-MM_WARP_OWL_SOUTHERN_SWAMP:                     { game: mm, id: 0x84a0, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Swamp"], debug: ['WARP', 'Swamp'] }
-MM_WARP_OWL_IKANA_CANYON:                       { game: mm, id: 0x2040, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Ikana"], debug: ['WARP', 'Ikana'] }
-MM_WARP_OWL_STONE_TOWER:                        { game: mm, id: 0xaa30, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Stone Tower"], debug: ['WARP', 'Stone Tower'] }
 OOT_WALLMASTER_FOREST_CORRIDOR_WEST:            { game: oot, id: 0xf10, type: wallmaster, areas: ["OOT Forest Temple Wallmaster West", "OOT VOID"] }
 OOT_WALLMASTER_FOREST_CORRIDOR_EAST:            { game: oot, id: 0xf11, type: wallmaster, areas: ["OOT Forest Temple Wallmaster East", "OOT VOID"] }
 OOT_WALLMASTER_SHADOW:                          { game: oot, id: 0xf12, type: wallmaster, areas: ["OOT Shadow Temple Wallmaster", "OOT VOID"] }
@@ -309,40 +192,6 @@ OOT_WALLMASTER_BOTW_PIT:                        { game: oot, id: 0xf19, type: wa
 OOT_WALLMASTER_GTG:                             { game: oot, id: 0xf1a, type: wallmaster, areas: ["OOT Gerudo Training Grounds Wallmaster", "OOT VOID"] }
 OOT_WALLMASTER_GANON_SPIRIT:                    { game: oot, id: 0xf1b, type: wallmaster, areas: ["OOT Ganon Castle Spirit Wallmaster", "OOT VOID"] }
 OOT_WALLMASTER_GANON_LIGHT:                     { game: oot, id: 0xf1c, type: wallmaster, areas: ["OOT Ganon Castle Light Wallmaster", "OOT VOID"] }
-MM_WALLMASTER_DAMPE:                            { game: mm,  id: 0xff00, type: wallmaster, areas: ["MM Beneath The Graveyard Night 3 Wallmaster", "MM VOID"] }
-MM_WALLMASTER_BTW_ENTRANCE:                     { game: mm,  id: 0xff01, type: wallmaster, areas: ["MM Beneath The Well Wallmaster Near Entrance", "MM VOID"] }
-MM_WALLMASTER_BTW_FOUNTAIN:                     { game: mm,  id: 0xff02, type: wallmaster, areas: ["MM Beneath The Well Wallmaster Near Fountain", "MM VOID"] }
-MM_WALLMASTER_BTW_EXIT:                         { game: mm,  id: 0xff03, type: wallmaster, areas: ["MM Beneath The Well Wallmaster Near Exit", "MM VOID"] }
-MM_CLOCK_TOWN:                                  { game: mm,  id: 0xd800, type: none, debug: ['COMMON', 'Clock Town'] }
-MM_MOON:                                        { game: mm,  id: 0xc800, type: none, debug: ['COMMON', 'Moon'] }
-OOT_BOSS_GANON2:                                { game: oot, id: 0x517,  type: none, debug: ['BOSS', 'Ganon'] }
-OOT_LOST_BRIDGE_FROM_KOKIRI_FOREST:             { game: oot, id: 0x5e0,  type: none }
-OOT_LOST_WOODS_FROM_KOKIRI_FOREST:              { game: oot, id: 0x11e,  type: none }
-OOT_KOKIRI_FOREST_FROM_LOST_WOODS:              { game: oot, id: 0x286,  type: none }
-OOT_GERUDO_FORTRESS_CAUGHT_NO_HOOK:             { game: oot, id: 0x1a5,  type: none }
-OOT_GERUDO_FORTRESS_CAUGHT:                     { game: oot, id: 0x5f8,  type: none }
-OOT_CASTLE_STEALTH:                             { game: oot, id: 0x07a,  type: none }
-OOT_CASTLE_STEALTH_FROM_COURTYARD:              { game: oot, id: 0x296,  type: none }
-OOT_CASTLE_FROM_STEALTH:                        { game: oot, id: 0x23d,  type: none }
-OOT_CASTLE_COURTYARD:                           { game: oot, id: 0x400,  type: none, debug: ['SPECIAL', 'Castle Courtyard'] }
-OOT_CASTLE_CAUGHT:                              { game: oot, id: 0x47e,  type: none }
-OOT_SHOP_MASKS:                                 { game: oot, id: 0x530,  type: none }
-OOT_SAGES_CHAMBER_END:                          { game: oot, id: 0x06b,  type: none }
-OOT_TEMPLE_OF_TIME_MASTER_SWORD_CS:             { game: oot, id: 0x2ca,  type: none }
-OOT_ZORA_RIVER_FROM_FIELD_WATER:                { game: oot, id: 0x1d9,  type: none }
-OOT_FIELD_FROM_ZORA_RIVER_WATER:                { game: oot, id: 0x311,  type: none }
-MM_CLOCK_TOWN_FROM_SONG_OF_TIME:                { game: mm,  id: 0x1c00, type: none }
-MM_CLOCK_TOWER_MOON_CRASH:                      { game: mm,  id: 0xc030, type: none }
-MM_CLOCK_TOWER_FROM_CLOCK_TOWN:                 { game: mm,  id: 0xc010, type: none }
-MM_TERMINA_FIELD_FROM_CLOCK_TOWN_WEST:          { game: mm,  id: 0x5400, type: none }
-MM_GORON_VILLAGE_FROM_TWIN_SPRING:              { game: mm,  id: 0x8a00, type: none }
-MM_GORON_VILLAGE_FROM_TWIN_WINTER:              { game: mm,  id: 0x9400, type: none }
-MM_WOODFALL_FROM_SWAMP:                         { game: mm,  id: 0x8600, type: none }
-MM_COAST_FROM_MIKAU_CS:                         { game: mm,  id: 0x68a0, type: none }
-OOT_GROTTO_TYPE_GENERIC:                        { game: oot, id: 0x03f,  type: none } # Multiple uses
-OOT_GROTTO_TYPE_FAIRY:                          { game: oot, id: 0x36d,  type: none } # Multiple uses
-OOT_GROTTO_TYPE_SCRUB2:                         { game: oot, id: 0x5bc,  type: none } # Multiple uses
-OOT_GROTTO_TYPE_SCRUB3:                         { game: oot, id: 0x5a4,  type: none } # Multiple uses
 OOT_GROTTO_GENERIC_KOKIRI_FOREST:               { game: oot, id: 0x1000, type: grotto, areas: ['OOT Kokiri Forest', 'OOT Kokiri Forest Storms Grotto'], reverse: OOT_GROTTO_EXIT_GENERIC_KOKIRI_FOREST,  debug: ['OOT_GROTTO', 'Kokiri Forest Generic'] }
 OOT_GROTTO_GENERIC_LOST_WOODS:                  { game: oot, id: 0x1001, type: grotto, areas: ['OOT Lost Woods', 'OOT Lost Woods Generic Grotto'], reverse: OOT_GROTTO_EXIT_GENERIC_LOST_WOODS,  debug: ['OOT_GROTTO', 'Lost Woods Generic'] }
 OOT_GROTTO_GENERIC_KAKARIKO:                    { game: oot, id: 0x1002, type: grotto, areas: ['OOT Kakariko Back', 'OOT Kakariko Generic Grotto'], reverse: OOT_GROTTO_EXIT_GENERIC_KAKARIKO,  debug: ['OOT_GROTTO', 'Kakariko Generic'] }
@@ -413,10 +262,255 @@ OOT_GROTTO_EXIT_TRAIL_COW:                      { game: oot, id: 0x111d, type: g
 OOT_GROTTO_EXIT_CASTLE:                         { game: oot, id: 0x111e, type: grotto-exit, areas: ['OOT Hyrule Castle Grotto', 'OOT Hyrule Castle Near Grotto'], reverse: OOT_GROTTO_CASTLE }
 OOT_GROTTO_EXIT_REDEAD:                         { game: oot, id: 0x111f, type: grotto-exit, areas: ['OOT ReDead Grotto', 'OOT Kakariko'], reverse: OOT_GROTTO_REDEAD }
 OOT_GROTTO_EXIT_OCTOROK:                        { game: oot, id: 0x1120, type: grotto-exit, areas: ['OOT Octorok Grotto', 'OOT Octorok Grotto Ledge'], reverse: OOT_GROTTO_OCTOROK }
-OOT_GRAVE_EXIT_SHIELD:                          { game: oot, id: 0x35d,  type: grave-exit, areas: ["OOT Graveyard Shield Grave", "OOT Graveyard"], reverse: OOT_GRAVE_SHIELD }
-OOT_GRAVE_EXIT_REDEAD:                          { game: oot, id: 0x361,  type: grave-exit, areas: ["OOT Graveyard ReDead Grave", "OOT Graveyard"], reverse: OOT_GRAVE_REDEAD }
-OOT_GRAVE_EXIT_ROYAL:                           { game: oot, id: 0x50b,  type: grave-exit, areas: ["OOT Graveyard Royal Tomb", "OOT Graveyard"], reverse: OOT_GRAVE_ROYAL }
-OOT_GRAVE_EXIT_DAMPE:                           { game: oot, id: 0x359,  type: grave-exit, areas: ["OOT Dampe Grave Entrance", "OOT Graveyard"], reverse: OOT_GRAVE_DAMPE }
+OOT_GRAVE_EXIT_SHIELD:                          { game: oot, id: 0x35d, type: grave-exit, areas: ["OOT Graveyard Shield Grave", "OOT Graveyard"], reverse: OOT_GRAVE_SHIELD }
+OOT_GRAVE_EXIT_REDEAD:                          { game: oot, id: 0x361, type: grave-exit, areas: ["OOT Graveyard ReDead Grave", "OOT Graveyard"], reverse: OOT_GRAVE_REDEAD }
+OOT_GRAVE_EXIT_ROYAL:                           { game: oot, id: 0x50b, type: grave-exit, areas: ["OOT Graveyard Royal Tomb", "OOT Graveyard"], reverse: OOT_GRAVE_ROYAL }
+OOT_GRAVE_EXIT_DAMPE:                           { game: oot, id: 0x359, type: grave-exit, areas: ["OOT Dampe Grave Entrance", "OOT Graveyard"], reverse: OOT_GRAVE_DAMPE }
+OOT_BOSS_GANON2:                                { game: oot, id: 0x517, type: none, debug: ['BOSS', 'Ganon'] }
+OOT_GERUDO_FORTRESS_CAUGHT_NO_HOOK:             { game: oot, id: 0x1a5, type: none }
+OOT_GERUDO_FORTRESS_CAUGHT:                     { game: oot, id: 0x5f8, type: none }
+OOT_CASTLE_STEALTH:                             { game: oot, id: 0x07a, type: none }
+OOT_CASTLE_STEALTH_FROM_COURTYARD:              { game: oot, id: 0x296, type: none }
+OOT_CASTLE_COURTYARD:                           { game: oot, id: 0x400, type: none, debug: ['SPECIAL', 'Castle Courtyard'] }
+OOT_CASTLE_CAUGHT:                              { game: oot, id: 0x47e, type: none }
+OOT_SHOP_MASKS:                                 { game: oot, id: 0x530, type: none }
+OOT_SAGES_CHAMBER_END:                          { game: oot, id: 0x06b, type: none }
+OOT_TEMPLE_OF_TIME_MASTER_SWORD_CS:             { game: oot, id: 0x2ca, type: none }
+OOT_ZORA_RIVER_FROM_FIELD_WATER:                { game: oot, id: 0x1d9, type: none }
+OOT_FIELD_FROM_ZORA_RIVER_WATER:                { game: oot, id: 0x311, type: none }
+OOT_GROTTO_TYPE_GENERIC:                        { game: oot, id: 0x03f, type: none } # Multiple uses
+OOT_GROTTO_TYPE_FAIRY:                          { game: oot, id: 0x36d, type: none } # Multiple uses
+OOT_GROTTO_TYPE_SCRUB2:                         { game: oot, id: 0x5bc, type: none } # Multiple uses
+OOT_GROTTO_TYPE_SCRUB3:                         { game: oot, id: 0x5a4, type: none } # Multiple uses
+OOT_MARKET_FROM_MASK_SHOP:                      { game: oot, id: 0x1d1, type: none }
+OOT_INTERNAL_EXIT_GROTTO:                       { game: oot, id: 0x7fff, type: none }
+MM_BOSS_TEMPLE_WOODFALL:                        { game: mm, id: 0x3800, type: boss, flags: [no-sot], areas: ["MM Woodfall Temple Boss Access", "MM Woodfall Temple Boss"], debug: ['BOSS', 'Odolwa'] }
+MM_BOSS_TEMPLE_SNOWHEAD:                        { game: mm, id: 0x8200, type: boss, flags: [no-sot], areas: ["MM Snowhead Temple Boss Access", "MM Snowhead Temple Boss"], debug: ['BOSS', 'Goht'] }
+MM_BOSS_TEMPLE_GREAT_BAY:                       { game: mm, id: 0xb800, type: boss, flags: [no-sot], areas: ["MM Great Bay Temple Boss Access", "MM Great Bay Temple Boss"], debug: ['BOSS', 'Gyorg'] }
+MM_BOSS_TEMPLE_STONE_TOWER:                     { game: mm, id: 0x6600, type: boss, flags: [no-sot], areas: ["MM Stone Tower Temple Boss Access", "MM Stone Tower Temple Boss"], debug: ['BOSS', 'Twinmold'] }
+MM_TEMPLE_WOODFALL:                             { game: mm, id: 0x3000, type: dungeon, areas: ["MM Woodfall Front of Temple", "MM Woodfall Temple"], reverse: MM_WOODFALL_FROM_TEMPLE, debug: ['DUNGEON', 'WFT'] }
+MM_TEMPLE_SNOWHEAD:                             { game: mm, id: 0x3c00, type: dungeon, areas: ["MM Snowhead", "MM Snowhead Temple"], reverse: MM_SNOWHEAD_FROM_TEMPLE, debug: ['DUNGEON', 'SHT'] }
+MM_TEMPLE_GREAT_BAY:                            { game: mm, id: 0x8c00, type: dungeon, areas: ["MM Zora Cape Peninsula", "MM Great Bay Temple"], reverse: MM_GREAT_BAY_FROM_TEMPLE, debug: ['DUNGEON', 'GBT'] }
+MM_TEMPLE_STONE_TOWER_INVERTED:                 { game: mm, id: 0x2a00, type: dungeon, areas: ["MM Stone Tower Top Inverted", "MM Stone Tower Temple Inverted"], reverse: MM_STONE_TOWER_INVERTED_FROM_TEMPLE, debug: ['DUNGEON', 'ISTT'] }
+MM_TEMPLE_STONE_TOWER:                          { game: mm, id: 0x2600, type: dungeon, areas: ["MM Stone Tower Front of Temple", "MM Stone Tower Temple"], reverse: MM_STONE_TOWER_FROM_TEMPLE, debug: ['DUNGEON', 'STT'] }
+MM_SPIDER_HOUSE_SWAMP:                          { game: mm, id: 0x4800, type: dungeon-sh, areas: ["MM Near Swamp Spider House", "MM Swamp Spider House"], reverse: MM_SWAMP_FROM_SPIDER_HOUSE, debug: ['DUNGEON', 'SSH'] }
+MM_SPIDER_HOUSE_OCEAN:                          { game: mm, id: 0x4a00, type: dungeon-sh, areas: ["MM Great Bay Coast", "MM Ocean Spider House"], reverse: MM_GREAT_BAY_FROM_SPIDER_HOUSE, debug: ['DUNGEON', 'OSH'] }
+MM_BENEATH_THE_WELL:                            { game: mm, id: 0x9000, type: dungeon-btw, areas: ["MM Ikana Canyon", "MM Beneath The Well Entrance"], reverse: MM_IKANA_CANYON_FROM_WELL, debug: ['DUNGEON', 'BtW (F)'] }
+MM_BENEATH_THE_WELL_BACK:                       { game: mm, id: 0x9010, type: dungeon-btw, areas: ["MM Ikana Castle Exterior", "MM Beneath The Well End"], reverse: MM_IKANA_CASTLE_EXTERIOR_FROM_WELL, debug: ['DUNGEON', 'BtW (B)'] }
+MM_IKANA_CASTLE:                                { game: mm, id: 0x3430, type: dungeon-acoi, areas: ["MM Ikana Castle Exterior", "MM Ancient Castle of Ikana"], reverse: MM_IKANA_CASTLE_EXTERIOR_FROM_CASTLE, debug: ['DUNGEON', 'ACoI'] }
+MM_SECRET_SHRINE:                               { game: mm, id: 0xba00, type: dungeon-ss, areas: ["MM Ikana Valley", "MM Secret Shrine"], reverse: MM_IKANA_VALLEY_FROM_SHRINE, debug: ['DUNGEON', 'SS'] }
+MM_PIRATE_FORTRESS:                             { game: mm, id: 0x7000, type: dungeon-pf, areas: ["MM Great Bay Coast Fortress", "MM Pirate Fortress"], reverse: MM_GREAT_BAY_FROM_PIRATE_FORTRESS, debug: ['DUNGEON', 'PFE'] }
+MM_CLOCK_TOWER:                                 { game: mm, id: 0x2c00, type: dungeon-ctr, areas: ["MM Clock Tower Platform", "MM Clock Tower Roof"], reverse: MM_CLOCK_TOWN_FROM_CLOCK_TOWER }
+MM_WOODFALL_FROM_TEMPLE:                        { game: mm, id: 0x8610, type: dungeon-exit, areas: ["MM Woodfall Temple", "MM Woodfall Front of Temple"], reverse: MM_TEMPLE_WOODFALL }
+MM_SNOWHEAD_FROM_TEMPLE:                        { game: mm, id: 0xb210, type: dungeon-exit, areas: ["MM Snowhead Temple", "MM Snowhead"], reverse: MM_TEMPLE_SNOWHEAD }
+MM_GREAT_BAY_FROM_TEMPLE:                       { game: mm, id: 0x6a70, type: dungeon-exit, areas: ["MM Great Bay Temple", "MM Zora Cape Peninsula"], reverse: MM_TEMPLE_GREAT_BAY }
+MM_STONE_TOWER_INVERTED_FROM_TEMPLE:            { game: mm, id: 0xac10, type: dungeon-exit, areas: ["MM Stone Tower Temple Inverted", "MM Stone Tower Flipping"], reverse: MM_TEMPLE_STONE_TOWER_INVERTED }
+MM_STONE_TOWER_FROM_TEMPLE:                     { game: mm, id: 0xaa20, type: dungeon-exit, areas: ["MM Stone Tower Temple", "MM Stone Tower Front of Temple"], reverse: MM_TEMPLE_STONE_TOWER }
+MM_SWAMP_FROM_SPIDER_HOUSE:                     { game: mm, id: 0x8480, type: dungeon-exit, areas: ["MM Swamp Spider House", "MM Near Swamp Spider House"], reverse: MM_SPIDER_HOUSE_SWAMP }
+MM_GREAT_BAY_FROM_SPIDER_HOUSE:                 { game: mm, id: 0x6880, type: dungeon-exit, areas: ["MM Ocean Spider House", "MM Great Bay Coast"], reverse: MM_SPIDER_HOUSE_OCEAN }
+MM_IKANA_CANYON_FROM_WELL:                      { game: mm, id: 0x2050, type: dungeon-exit, areas: ["MM Beneath The Well Entrance", "MM Ikana Canyon"], reverse: MM_BENEATH_THE_WELL }
+MM_IKANA_CASTLE_EXTERIOR_FROM_WELL:             { game: mm, id: 0x3400, type: dungeon-exit, areas: ["MM Beneath The Well End", "MM Ikana Castle Exterior"], reverse: MM_BENEATH_THE_WELL_BACK }
+MM_IKANA_CASTLE_EXTERIOR_FROM_CASTLE:           { game: mm, id: 0x3420, type: dungeon-exit, areas: ["MM Ancient Castle of Ikana", "MM Ikana Castle Exterior"], reverse: MM_IKANA_CASTLE }
+MM_IKANA_VALLEY_FROM_SHRINE:                    { game: mm, id: 0x20c0, type: dungeon-exit, areas: ["MM Secret Shrine", "MM Ikana Valley"], reverse: MM_SECRET_SHRINE }
+MM_GREAT_BAY_FROM_PIRATE_FORTRESS:              { game: mm, id: 0x6850, type: dungeon-exit, areas: ["MM Pirate Fortress", "MM Great Bay Coast Fortress"], reverse: MM_PIRATE_FORTRESS }
+MM_CLOCK_TOWN_FROM_CLOCK_TOWER:                 { game: mm, id: 0xd880, type: dungeon-exit, areas: ["MM Clock Tower Roof", "MM Clock Tower Platform"], reverse: MM_CLOCK_TOWER }
+MM_SWAMP_FROM_ROAD:                             { game: mm, id: 0x8400, type: region, maps: [MM_ROAD_SWAMP, MM_SWAMP], areas: ["MM Road to Southern Swamp", "MM Swamp Front"], reverse: MM_SWAMP_ROAD_FROM_SWAMP }
+MM_MOUNTAIN_VILLAGE_FROM_PATH:                  { game: mm, id: 0x9a60, type: region, maps: [MM_ROAD_MOUNTAIN_VILLAGE, MM_MOUNTAIN_VILLAGE], areas: ["MM Mountain Village Path Upper", "MM Mountain Village"], reverse: MM_PATH_FROM_MOUNTAIN_VILLAGE }
+MM_GREAT_BAY_COAST_FROM_FIELD:                  { game: mm, id: 0x6800, type: region, maps: [MM_TERMINA_FIELD, MM_GREAT_BAY_COAST], areas: ["MM Great Bay Fence", "MM Great Bay Coast"], reverse: MM_TERMINA_FIELD_FROM_GREAT_BAY_COAST }
+MM_IKANA_VALLEY_FROM_ROAD:                      { game: mm, id: 0x2000, type: region, maps: [MM_ROAD_IKANA, MM_IKANA_VALLEY], areas: ["MM Road to Ikana Top", "MM Ikana Valley"], reverse: MM_IKANA_ROAD_FROM_VALLEY }
+MM_ROMANI_RANCH_FROM_MILK_ROAD:                 { game: mm, id: 0x6400, type: region, maps: [MM_MILK_ROAD, MM_ROMANI_RANCH], areas: ["MM Near Romani Ranch", "MM Romani Ranch"], reverse: MM_MILK_ROAD_FROM_ROMANI_RANCH, debug: ['REGION', 'Romani Ranch'] }
+MM_SWAMP_ROAD_FROM_SWAMP:                       { game: mm, id: 0x7a10, type: region-exit, maps: [MM_SWAMP, MM_ROAD_SWAMP], areas: ["MM Swamp Front", "MM Road to Southern Swamp"], reverse: MM_SWAMP_FROM_ROAD }
+MM_PATH_FROM_MOUNTAIN_VILLAGE:                  { game: mm, id: 0x3210, type: region-exit, maps: [MM_MOUNTAIN_VILLAGE, MM_ROAD_MOUNTAIN_VILLAGE], areas: ["MM Mountain Village", "MM Mountain Village Path Upper"], reverse: MM_MOUNTAIN_VILLAGE_FROM_PATH }
+MM_TERMINA_FIELD_FROM_GREAT_BAY_COAST:          { game: mm, id: 0x5420, type: region-exit, maps: [MM_GREAT_BAY_COAST, MM_TERMINA_FIELD], areas: ["MM Great Bay Coast", "MM Great Bay Fence"], reverse: MM_GREAT_BAY_COAST_FROM_FIELD }
+MM_IKANA_ROAD_FROM_VALLEY:                      { game: mm, id: 0xa010, type: region-exit, maps: [MM_IKANA_VALLEY, MM_ROAD_IKANA], areas: ["MM Ikana Valley", "MM Road to Ikana Top"], reverse: MM_IKANA_VALLEY_FROM_ROAD }
+MM_MILK_ROAD_FROM_ROMANI_RANCH:                 { game: mm, id: 0x3e10, type: region-exit, maps: [MM_ROMANI_RANCH, MM_MILK_ROAD], areas: ["MM Romani Ranch", "MM Near Romani Ranch"], reverse: MM_ROMANI_RANCH_FROM_MILK_ROAD }
+MM_CLOCK_TOWN_WEST_FROM_SOUTH_BOTTOM:           { game: mm, id: 0xd410, type: overworld, maps: [MM_CLOCK_TOWN, MM_CLOCK_TOWN], submaps: [SOUTH, WEST], areas: ["MM Clock Town South Lower West", "MM Clock Town West"], reverse: MM_CLOCK_TOWN_SOUTH_BOTTOM_FROM_WEST }
+MM_CLOCK_TOWN_SOUTH_BOTTOM_FROM_WEST:           { game: mm, id: 0xd850, type: overworld, maps: [MM_CLOCK_TOWN, MM_CLOCK_TOWN], submaps: [WEST, SOUTH], areas: ["MM Clock Town South Lower West", "MM Clock Town South"], reverse: MM_CLOCK_TOWN_WEST_FROM_SOUTH_BOTTOM }
+MM_CLOCK_TOWN_EAST_FROM_SOUTH_BOTTOM:           { game: mm, id: 0xd210, type: overworld, maps: [MM_CLOCK_TOWN, MM_CLOCK_TOWN], submaps: [SOUTH, EAST], areas: ["MM Clock Town South Lower East", "MM Clock Town East"], reverse: MM_CLOCK_TOWN_SOUTH_BOTTOM_FROM_EAST }
+MM_CLOCK_TOWN_SOUTH_BOTTOM_FROM_EAST:           { game: mm, id: 0xd870, type: overworld, maps: [MM_CLOCK_TOWN, MM_CLOCK_TOWN], submaps: [EAST, SOUTH], areas: ["MM Clock Town South Lower East", "MM Clock Town South"], reverse: MM_CLOCK_TOWN_EAST_FROM_SOUTH_BOTTOM }
+MM_CLOCK_TOWN_NORTH_FROM_EAST:                  { game: mm, id: 0xd610, type: overworld, maps: [MM_CLOCK_TOWN, MM_CLOCK_TOWN], submaps: [EAST, NORTH], areas: ["MM Clock Town East", "MM Clock Town North"], reverse: MM_CLOCK_TOWN_EAST_FROM_NORTH }
+MM_CLOCK_TOWN_EAST_FROM_NORTH:                  { game: mm, id: 0xd250, type: overworld, maps: [MM_CLOCK_TOWN, MM_CLOCK_TOWN], submaps: [NORTH, EAST], areas: ["MM Clock Town North", "MM Clock Town East"], reverse: MM_CLOCK_TOWN_NORTH_FROM_EAST }
+MM_CLOCK_TOWN_NORTH_FROM_SOUTH:                 { game: mm, id: 0xd620, type: overworld, maps: [MM_CLOCK_TOWN, MM_CLOCK_TOWN], submaps: [SOUTH, NORTH], areas: ["MM Clock Town South", "MM Clock Town North"], reverse: MM_CLOCK_TOWN_SOUTH_FROM_NORTH }
+MM_CLOCK_TOWN_SOUTH_FROM_NORTH:                 { game: mm, id: 0xd840, type: overworld, maps: [MM_CLOCK_TOWN, MM_CLOCK_TOWN], submaps: [NORTH, SOUTH], areas: ["MM Clock Town North", "MM Clock Town South"], reverse: MM_CLOCK_TOWN_NORTH_FROM_SOUTH }
+MM_CLOCK_TOWN_EAST_FROM_SOUTH_TOP:              { game: mm, id: 0xd230, type: overworld, maps: [MM_CLOCK_TOWN, MM_CLOCK_TOWN], submaps: [SOUTH, EAST], areas: ["MM Clock Town South Upper East", "MM Clock Town East"], reverse: MM_CLOCK_TOWN_SOUTH_TOP_FROM_EAST }
+MM_CLOCK_TOWN_SOUTH_TOP_FROM_EAST:              { game: mm, id: 0xd820, type: overworld, maps: [MM_CLOCK_TOWN, MM_CLOCK_TOWN], submaps: [EAST, SOUTH], areas: ["MM Clock Town South Upper East", "MM Clock Town South"], reverse: MM_CLOCK_TOWN_EAST_FROM_SOUTH_TOP }
+MM_CLOCK_TOWN_WEST_FROM_SOUTH_TOP:              { game: mm, id: 0xd420, type: overworld, maps: [MM_CLOCK_TOWN, MM_CLOCK_TOWN], submaps: [SOUTH, WEST], areas: ["MM Clock Town South Upper West", "MM Clock Town West"], reverse: MM_CLOCK_TOWN_SOUTH_TOP_FROM_WEST }
+MM_CLOCK_TOWN_SOUTH_TOP_FROM_WEST:              { game: mm, id: 0xd830, type: overworld, maps: [MM_CLOCK_TOWN, MM_CLOCK_TOWN], submaps: [WEST, SOUTH], areas: ["MM Clock Town South Upper West", "MM Clock Town South"], reverse: MM_CLOCK_TOWN_WEST_FROM_SOUTH_TOP }
+MM_CLOCK_TOWN_WEST_FROM_FIELD:                  { game: mm, id: 0xd400, type: overworld, maps: [MM_TERMINA_FIELD, MM_CLOCK_TOWN], areas: ["MM Termina Field", "MM Clock Town West"], reverse: MM_TERMINA_FIELD_FROM_CLOCK_TOWN_WEST }
+MM_CLOCK_TOWN_SOUTH_FROM_FIELD:                 { game: mm, id: 0xd810, type: overworld, maps: [MM_TERMINA_FIELD, MM_CLOCK_TOWN], areas: ["MM Termina Field", "MM Clock Town South"], reverse: MM_TERMINA_FIELD_FROM_CLOCK_TOWN_SOUTH }
+MM_CLOCK_TOWN_EAST_FROM_FIELD:                  { game: mm, id: 0xd200, type: overworld, maps: [MM_TERMINA_FIELD, MM_CLOCK_TOWN], areas: ["MM Termina Field", "MM Clock Town East"], reverse: MM_TERMINA_FIELD_FROM_CLOCK_TOWN_EAST }
+MM_CLOCK_TOWN_NORTH_FROM_FIELD:                 { game: mm, id: 0xd600, type: overworld, maps: [MM_TERMINA_FIELD, MM_CLOCK_TOWN], areas: ["MM Termina Field", "MM Clock Town North"], reverse: MM_TERMINA_FIELD_FROM_CLOCK_TOWN_NORTH }
+MM_CLOCK_TOWN_SOUTH_FROM_LAUNDRY_POOL:          { game: mm, id: 0xd860, type: overworld, maps: [MM_CLOCK_TOWN, MM_LAUNDRY_POOL], areas: ["MM Laundry Pool", "MM Clock Town South"], reverse: MM_LAUNDRY_POOL }
+MM_LAUNDRY_POOL:                                { game: mm, id: 0xda00, type: overworld, maps: [MM_LAUNDRY_POOL, MM_CLOCK_TOWN], areas: ["MM Clock Town South", "MM Laundry Pool"], reverse: MM_CLOCK_TOWN_SOUTH_FROM_LAUNDRY_POOL }
+MM_TERMINA_FIELD_FROM_CLOCK_TOWN_WEST:          { game: mm, id: 0x5400, type: overworld, maps: [MM_CLOCK_TOWN, MM_TERMINA_FIELD], areas: ["MM Clock Town West", "MM Termina Field"], reverse: MM_CLOCK_TOWN_WEST_FROM_FIELD }
+MM_TERMINA_FIELD_FROM_CLOCK_TOWN_SOUTH:         { game: mm, id: 0x5460, type: overworld, maps: [MM_CLOCK_TOWN, MM_TERMINA_FIELD], areas: ["MM Clock Town South", "MM Termina Field"], reverse: MM_CLOCK_TOWN_SOUTH_FROM_FIELD }
+MM_TERMINA_FIELD_FROM_CLOCK_TOWN_EAST:          { game: mm, id: 0x5470, type: overworld, maps: [MM_CLOCK_TOWN, MM_TERMINA_FIELD], areas: ["MM Clock Town East", "MM Termina Field"], reverse: MM_CLOCK_TOWN_EAST_FROM_FIELD }
+MM_TERMINA_FIELD_FROM_CLOCK_TOWN_NORTH:         { game: mm, id: 0x5480, type: overworld, maps: [MM_CLOCK_TOWN, MM_TERMINA_FIELD], areas: ["MM Clock Town North", "MM Termina Field"], reverse: MM_CLOCK_TOWN_NORTH_FROM_FIELD }
+MM_IKANA_ROAD_FROM_FIELD:                       { game: mm, id: 0xa000, type: overworld, maps: [MM_TERMINA_FIELD, MM_ROAD_IKANA], areas: ["MM Termina Field", "MM Road to Ikana Front"], reverse: MM_TERMINA_FIELD_FROM_ROAD_TO_IKANA }
+MM_TERMINA_FIELD_FROM_ROAD_TO_IKANA:            { game: mm, id: 0x5440, type: overworld, maps: [MM_ROAD_IKANA, MM_TERMINA_FIELD], areas: ["MM Road to Ikana Front", "MM Termina Field"], reverse: MM_IKANA_ROAD_FROM_FIELD }
+MM_MOUNTAIN_VILLAGE_PATH_FROM_TERMINA_FIELD:    { game: mm, id: 0x3200, type: overworld, maps: [MM_TERMINA_FIELD, MM_ROAD_MOUNTAIN_VILLAGE], areas: ["MM Behind Large Icicles", "MM Mountain Village Path Lower"], reverse: MM_TERMINA_FIELD_FROM_PATH_TO_MOUNTAIN_VILLAGE }
+MM_TERMINA_FIELD_FROM_PATH_TO_MOUNTAIN_VILLAGE: { game: mm, id: 0x5430, type: overworld, maps: [MM_ROAD_MOUNTAIN_VILLAGE, MM_TERMINA_FIELD], areas: ["MM Mountain Village Path Lower", "MM Behind Large Icicles"], reverse: MM_MOUNTAIN_VILLAGE_PATH_FROM_TERMINA_FIELD }
+MM_SWAMP_ROAD_FROM_FIELD:                       { game: mm, id: 0x7a00, type: overworld, maps: [MM_TERMINA_FIELD, MM_ROAD_SWAMP], areas: ["MM Termina Field", "MM Road to Southern Swamp"], reverse: MM_TERMINA_FIELD_FROM_ROAD_TO_SWAMP }
+MM_TERMINA_FIELD_FROM_ROAD_TO_SWAMP:            { game: mm, id: 0x5410, type: overworld, maps: [MM_ROAD_SWAMP, MM_TERMINA_FIELD], areas: ["MM Road to Southern Swamp", "MM Termina Field"], reverse: MM_SWAMP_ROAD_FROM_FIELD }
+MM_MILK_ROAD_FROM_FIELD:                        { game: mm, id: 0x3e00, type: overworld, maps: [MM_TERMINA_FIELD, MM_MILK_ROAD], areas: ["MM Termina Field", "MM Milk Road"], reverse: MM_TERMINA_FIELD_FROM_MILK_ROAD }
+MM_TERMINA_FIELD_FROM_MILK_ROAD:                { game: mm, id: 0x5450, type: overworld, maps: [MM_MILK_ROAD, MM_TERMINA_FIELD], areas: ["MM Milk Road", "MM Termina Field"], reverse: MM_MILK_ROAD_FROM_FIELD }
+MM_GORMAN_TRACK_FROM_MILK_ROAD:                 { game: mm, id: 0xce00, type: overworld, maps: [MM_MILK_ROAD, MM_GORMAN_TRACK], areas: ["MM Milk Road", "MM Gorman Track Front"], reverse: MM_MILK_ROAD_FROM_GORMAN_TRACK }
+MM_MILK_ROAD_FROM_GORMAN_TRACK:                 { game: mm, id: 0x3e30, type: overworld, maps: [MM_GORMAN_TRACK, MM_MILK_ROAD], areas: ["MM Gorman Track Front", "MM Milk Road"], reverse: MM_GORMAN_TRACK_FROM_MILK_ROAD }
+MM_GORMAN_BACK_FROM_MILK_ROAD:                  { game: mm, id: 0xce30, type: overworld, maps: [MM_MILK_ROAD, MM_GORMAN_TRACK], areas: ["MM Behind Gorman Fence", "MM Gorman Track Back"], reverse: MM_MILK_ROAD_FROM_GORMAN_BACK }
+MM_MILK_ROAD_FROM_GORMAN_BACK:                  { game: mm, id: 0x3e20, type: overworld, maps: [MM_GORMAN_TRACK, MM_MILK_ROAD], areas: ["MM Gorman Track Back", "MM Behind Gorman Fence"], reverse: MM_GORMAN_BACK_FROM_MILK_ROAD }
+MM_SNOWHEAD_PATH_FROM_MOUNTAIN_VILLAGE:         { game: mm, id: 0xb000, type: overworld, maps: [MM_MOUNTAIN_VILLAGE, MM_ROAD_SNOWHEAD], areas: ["MM Mountain Village", "MM Path to Snowhead Front"], reverse: MM_MOUNTAIN_VILLAGE_FROM_SNOWHEAD_PATH }
+MM_MOUNTAIN_VILLAGE_FROM_SNOWHEAD_PATH:         { game: mm, id: 0x9a40, type: overworld, maps: [MM_ROAD_SNOWHEAD, MM_MOUNTAIN_VILLAGE], areas: ["MM Path to Snowhead Front", "MM Mountain Village"], reverse: MM_SNOWHEAD_PATH_FROM_MOUNTAIN_VILLAGE }
+MM_SNOWHEAD_FROM_SNOWHEAD_PATH:                 { game: mm, id: 0xb200, type: overworld, maps: [MM_ROAD_SNOWHEAD, MM_SNOWHEAD], areas: ["MM Path to Snowhead Back", "MM Snowhead Entrance"], reverse: MM_PATH_SNOWHEAD_FROM_SNOWHEAD }
+MM_PATH_SNOWHEAD_FROM_SNOWHEAD:                 { game: mm, id: 0xb010, type: overworld, maps: [MM_SNOWHEAD, MM_ROAD_SNOWHEAD], areas: ["MM Snowhead Entrance", "MM Path to Snowhead Back"], reverse: MM_SNOWHEAD_FROM_SNOWHEAD_PATH }
+MM_IKANA_GRAVEYARD:                             { game: mm, id: 0x8000, type: overworld, maps: [MM_ROAD_IKANA, MM_GRAVEYARD], areas: ["MM Road to Ikana Center", "MM Ikana Graveyard"], reverse: MM_IKANA_ROAD_FROM_IKANA_GRAVEYARD }
+MM_IKANA_ROAD_FROM_IKANA_GRAVEYARD:             { game: mm, id: 0xa020, type: overworld, maps: [MM_GRAVEYARD, MM_ROAD_IKANA], areas: ["MM Ikana Graveyard", "MM Road to Ikana Center"], reverse: MM_IKANA_GRAVEYARD }
+MM_ZORA_CAPE_FROM_GREAT_BAY_COAST:              { game: mm, id: 0x6a00, type: overworld, maps: [MM_GREAT_BAY_COAST, MM_ZORA_CAPE], areas: ["MM Great Bay Coast", "MM Zora Cape"], reverse: MM_GREAT_BAY_COAST_FROM_ZORA_CAPE }
+MM_GREAT_BAY_COAST_FROM_ZORA_CAPE:              { game: mm, id: 0x6810, type: overworld, maps: [MM_ZORA_CAPE, MM_GREAT_BAY_COAST], areas: ["MM Zora Cape", "MM Great Bay Coast"], reverse: MM_ZORA_CAPE_FROM_GREAT_BAY_COAST }
+MM_PINNACLE_ROCK:                               { game: mm, id: 0x4400, type: overworld, maps: [MM_GREAT_BAY_COAST, MM_PINNACLE_ROCK], areas: ["MM Great Bay Coast", "MM Pinnacle Rock Entrance"], reverse: MM_GREAT_BAY_FROM_PINNACLE_ROCK }
+MM_GREAT_BAY_FROM_PINNACLE_ROCK:                { game: mm, id: 0x6830, type: overworld, maps: [MM_PINNACLE_ROCK, MM_GREAT_BAY_COAST], areas: ["MM Pinnacle Rock Entrance", "MM Great Bay Coast"], reverse: MM_PINNACLE_ROCK}
+MM_ZORA_CAPE_FROM_HALL_WATER:                   { game: mm, id: 0x6a10, type: overworld, maps: [MM_ZORA_HALL, MM_ZORA_CAPE], areas: ["MM Zora Hall", "MM Zora Hall Entrance"], reverse: MM_ZORA_HALL_UNDERWATER }
+MM_ZORA_HALL_UNDERWATER:                        { game: mm, id: 0x6000, type: overworld, maps: [MM_ZORA_CAPE, MM_ZORA_HALL], areas: ["MM Zora Hall Entrance", "MM Zora Hall"], reverse: MM_ZORA_CAPE_FROM_HALL_WATER }
+MM_ZORA_CAPE_PENINSULA:                         { game: mm, id: 0x6010, type: overworld, maps: [MM_ZORA_HALL, MM_ZORA_CAPE], areas: ["MM Zora Hall", "MM Zora Cape Peninsula"], reverse: MM_ZORA_HALL_LEDGE }
+MM_ZORA_HALL_LEDGE:                             { game: mm, id: 0x6a20, type: overworld, maps: [MM_ZORA_CAPE, MM_ZORA_HALL], areas: ["MM Zora Cape Peninsula", "MM Zora Hall"], reverse: MM_ZORA_CAPE_PENINSULA }
+MM_DEKU_PALACE_MAIN_ENTRANCE:                   { game: mm, id: 0x5000, type: overworld, maps: [MM_SWAMP, MM_DEKU_PALACE], areas: ["MM Swamp Back", "MM Deku Palace Front"], reverse: MM_SWAMP_FROM_PALACE_MAIN_ENTRANCE }
+MM_SWAMP_FROM_PALACE_MAIN_ENTRANCE:             { game: mm, id: 0x8430, type: overworld, maps: [MM_DEKU_PALACE, MM_SWAMP], areas: ["MM Deku Palace Front", "MM Swamp Back"], reverse: MM_DEKU_PALACE_MAIN_ENTRANCE }
+MM_DEKU_PALACE_LEDGE:                           { game: mm, id: 0x5050, type: overworld, maps: [MM_SWAMP, MM_DEKU_PALACE], areas: ["MM Swamp Canopy Front", "MM Deku Palace Cliff"], reverse: MM_SWAMP_FROM_PALACE_LEDGE }
+MM_SWAMP_FROM_PALACE_LEDGE:                     { game: mm, id: 0x8440, type: overworld, maps: [MM_DEKU_PALACE, MM_SWAMP], areas: ["MM Deku Palace Cliff", "MM Swamp Canopy Front"], reverse: MM_DEKU_PALACE_LEDGE }
+MM_WOODFALL:                                    { game: mm, id: 0x8600, type: overworld, maps: [MM_SWAMP, MM_WOODFALL], areas: ["MM Swamp Canopy Back", "MM Woodfall"], reverse: MM_SWAMP_FROM_WOODFALL }
+MM_SWAMP_FROM_WOODFALL:                         { game: mm, id: 0x8420, type: overworld, maps: [MM_WOODFALL, MM_SWAMP], areas: ["MM Woodfall", "MM Swamp Canopy Back"], reverse: MM_WOODFALL }
+MM_MYSTERY_WOODS:                               { game: mm, id: 0xc200, type: overworld, maps: [MM_SWAMP, MM_MYSTERY_WOODS], areas: ["MM Swamp Front", "MM Woods of Mystery"], reverse: MM_SWAMP_FROM_MYSTERY_WOODS }
+MM_SWAMP_FROM_MYSTERY_WOODS:                    { game: mm, id: 0x8470, type: overworld, maps: [MM_MYSTERY_WOODS, MM_SWAMP], areas: ["MM Woods of Mystery", "MM Swamp Front"], reverse: MM_MYSTERY_WOODS }
+MM_SEWERS_FROM_EXTERIOR_GATE:                   { game: mm, id: 0x4090, type: overworld, maps: [MM_PIRATE_ENTRANCE, MM_PIRATE_SEWERS], areas: ["MM Pirate Fortress Entrance", "MM Pirate Fortress Sewers"], reverse: MM_EXTERIOR_GATE_FROM_SEWERS }
+MM_EXTERIOR_GATE_FROM_SEWERS:                   { game: mm, id: 0x7020, type: overworld, maps: [MM_PIRATE_SEWERS, MM_PIRATE_ENTRANCE], areas: ["MM Pirate Fortress Sewers", "MM Pirate Fortress Entrance"], reverse: MM_SEWERS_FROM_EXTERIOR_GATE }
+MM_PIRATE_FORTRESS_INTERIOR:                    { game: mm, id: 0x2200, type: overworld, maps: [MM_PIRATE_ENTRANCE, MM_PIRATE_INTERIOR], areas: ["MM Pirate Fortress Entrance Balcony", "MM Pirate Fortress Interior"], reverse: MM_PIRATE_FORTRESS_EXTERIOR_FROM_INTERIOR }
+MM_PIRATE_FORTRESS_EXTERIOR_FROM_INTERIOR:      { game: mm, id: 0x7010, type: overworld, maps: [MM_PIRATE_INTERIOR, MM_PIRATE_ENTRANCE], areas: ["MM Pirate Fortress Interior", "MM Pirate Fortress Entrance Balcony"], reverse: MM_PIRATE_FORTRESS_INTERIOR }
+MM_PIRATE_FORTRESS_INTERIOR_FROM_LOOKOUT:       { game: mm, id: 0x22c0, type: overworld, maps: [MM_PIRATE_ENTRANCE, MM_PIRATE_INTERIOR], areas: ["MM Pirate Fortress Entrance Lookout", "MM Pirate Fortress Barrel Maze Entry"], reverse: MM_PIRATE_FORTRESS_EXTERIOR_LOOKOUT}
+MM_PIRATE_FORTRESS_EXTERIOR_LOOKOUT:            { game: mm, id: 0x7050, type: overworld, maps: [MM_PIRATE_INTERIOR, MM_PIRATE_ENTRANCE], areas: ["MM Pirate Fortress Barrel Maze Entry", "MM Pirate Fortress Entrance Lookout"], reverse: MM_PIRATE_FORTRESS_INTERIOR_FROM_LOOKOUT }
+MM_IKANA_CASTLE_GARDENS:                        { game: mm, id: 0x3410, type: overworld, maps: [MM_IKANA_VALLEY, MM_IKANA_CASTLE], areas: ["MM Ikana Canyon", "MM Ikana Castle Entrance"], reverse: MM_IKANA_CANYON_FROM_CASTLE_GARDENS }
+MM_IKANA_CANYON_FROM_CASTLE_GARDENS:            { game: mm, id: 0x2080, type: overworld, maps: [MM_IKANA_CASTLE, MM_IKANA_VALLEY], areas: ["MM Ikana Castle Entrance", "MM Ikana Canyon"], reverse: MM_IKANA_CASTLE_GARDENS }
+MM_STONE_TOWER:                                 { game: mm, id: 0xaa00, type: overworld, maps: [MM_IKANA_VALLEY, MM_STONE_TOWER], areas: ["MM Ikana Canyon", "MM Stone Tower"], reverse: MM_IKANA_CANYON_FROM_STONE_TOWER }
+MM_IKANA_CANYON_FROM_STONE_TOWER:               { game: mm, id: 0x2030, type: overworld, maps: [MM_STONE_TOWER, MM_IKANA_VALLEY], areas: ["MM Stone Tower", "MM Ikana Canyon"], reverse: MM_STONE_TOWER }
+MM_SWAMP_FROM_IKANA_CANYON:                     { game: mm, id: 0x8490, type: one-way, areas: ["MM Ikana Valley", "MM Swamp Front"] }
+MM_IKANA_CASTLE_INTERIOR_KEG:                   { game: mm, id: 0x3440, type: one-way-ikana, areas: ["MM Ancient Castle of Ikana Roof Interior", "MM Ancient Castle of Ikana"] }
+MM_IKANA_CASTLE_INTERIOR_BLOCK:                 { game: mm, id: 0x3450, type: one-way-ikana, areas: ["MM Ancient Castle of Ikana Roof Interior", "MM Ancient Castle of Ikana Interior South"] }
+MM_CHEST_GAME:                                  { game: mm, id: 0x2800, type: indoors, areas: ["MM Clock Town East", "MM Chest Game"], reverse: MM_CLOCK_TOWN_EAST_FROM_CHEST_GAME }
+MM_CLOCK_TOWN_EAST_FROM_CHEST_GAME:             { game: mm, id: 0xd240, type: indoors-exit, areas: ["MM Chest Game", "MM Clock Town East"], reverse: MM_CHEST_GAME }
+MM_HONEY_AND_DARLING_GAME:                      { game: mm, id: 0x0800, type: indoors, areas: ["MM Clock Town East", "MM Honey & Darling Game"], reverse: MM_CLOCK_TOWN_EAST_FROM_HONEY_AND_DARLING }
+MM_CLOCK_TOWN_EAST_FROM_HONEY_AND_DARLING:      { game: mm, id: 0xd260, type: indoors-exit, areas: ["MM Honey & Darling Game", "MM Clock Town East"], reverse: MM_HONEY_AND_DARLING_GAME }
+MM_MAYORS_OFFICE:                               { game: mm, id: 0x0000, type: indoors, areas: ["MM Clock Town East", "MM Mayor's Office"], reverse: MM_CLOCK_TOWN_EAST_FROM_MAYORS_OFFICE }
+MM_CLOCK_TOWN_EAST_FROM_MAYORS_OFFICE:          { game: mm, id: 0xd270, type: indoors-exit, areas: ["MM Mayor's Office", "MM Clock Town East"], reverse: MM_MAYORS_OFFICE }
+MM_TOWN_ARCHERY:                                { game: mm, id: 0x3a00, type: indoors, areas: ["MM Clock Town East", "MM Town Archery"], reverse: MM_CLOCK_TOWN_EAST_FROM_TOWN_ARCHERY }
+MM_CLOCK_TOWN_EAST_FROM_TOWN_ARCHERY:           { game: mm, id: 0xd280, type: indoors-exit, areas: ["MM Town Archery", "MM Clock Town East"], reverse: MM_TOWN_ARCHERY }
+MM_STOCK_POT_INN:                               { game: mm, id: 0xbc00, type: indoors-extra, areas: ["MM Clock Town East", "MM Stock Pot Inn"], reverse: MM_CLOCK_TOWN_EAST_FROM_STOCK_POT_INN }
+MM_CLOCK_TOWN_EAST_FROM_STOCK_POT_INN:          { game: mm, id: 0xd290, type: indoors-exit, areas: ["MM Stock Pot Inn", "MM Clock Town East"], reverse: MM_STOCK_POT_INN }
+MM_STOCK_POT_INN_ROOF:                          { game: mm, id: 0xbc10, type: indoors-extra, areas: ["MM Stock Pot Inn Roof", "MM Stock Pot Inn"], reverse: MM_CLOCK_TOWN_EAST_FROM_STOCK_POT_INN_ROOF }
+MM_CLOCK_TOWN_EAST_FROM_STOCK_POT_INN_ROOF:     { game: mm, id: 0xd2a0, type: indoors-exit, areas: ["MM Stock Pot Inn", "MM Stock Pot Inn Roof"], reverse: MM_STOCK_POT_INN_ROOF }
+MM_MILK_BAR:                                    { game: mm, id: 0x2400, type: indoors, areas: ["MM Clock Town East", "MM Milk Bar"], reverse: MM_CLOCK_TOWN_EAST_FROM_MILK_BAR }
+MM_CLOCK_TOWN_EAST_FROM_MILK_BAR:               { game: mm, id: 0xd2b0, type: indoors-exit, areas: ["MM Milk Bar", "MM Clock Town East"], reverse: MM_MILK_BAR }
+MM_FAIRY_FOUNTAIN_TOWN:                         { game: mm, id: 0x4600, type: indoors, areas: ["MM Clock Town North", "MM Clock Town Fairy Fountain"], reverse: MM_CLOCK_TOWN_NORTH_FROM_FAIRY_FOUNTAIN }
+MM_CLOCK_TOWN_NORTH_FROM_FAIRY_FOUNTAIN:        { game: mm, id: 0xd630, type: indoors-exit, areas: ["MM Clock Town Fairy Fountain", "MM Clock Town North"], reverse: MM_FAIRY_FOUNTAIN_TOWN }
+MM_SWORDSMAN_SCHOOL:                            { game: mm, id: 0xa200, type: indoors, areas: ["MM Clock Town West", "MM Swordsman School"], reverse: MM_CLOCK_TOWN_WEST_FROM_SWORDSMAN_SCHOOL }
+MM_CLOCK_TOWN_WEST_FROM_SWORDSMAN_SCHOOL:       { game: mm, id: 0xd430, type: indoors-exit, areas: ["MM Swordsman School", "MM Clock Town West"], reverse: MM_SWORDSMAN_SCHOOL }
+MM_CURIOSITY_SHOP:                              { game: mm, id: 0x0e00, type: indoors, areas: ["MM Clock Town West", "MM Curiosity Shop"], reverse: MM_CLOCK_TOWN_WEST_FROM_CURIOSITY_SHOP }
+MM_CLOCK_TOWN_WEST_FROM_CURIOSITY_SHOP:         { game: mm, id: 0xd440, type: indoors-exit, areas: ["MM Curiosity Shop", "MM Clock Town West"], reverse: MM_CURIOSITY_SHOP }
+MM_TRADING_POST:                                { game: mm, id: 0x6200, type: indoors, areas: ["MM Clock Town West", "MM Trading Post"], reverse: MM_CLOCK_TOWN_WEST_FROM_TRADING_POST }
+MM_CLOCK_TOWN_WEST_FROM_TRADING_POST:           { game: mm, id: 0xd450, type: indoors-exit, areas: ["MM Trading Post", "MM Clock Town West"], reverse: MM_TRADING_POST }
+MM_BOMB_SHOP:                                   { game: mm, id: 0xca00, type: indoors, areas: ["MM Clock Town West", "MM Bomb Shop"], reverse: MM_CLOCK_TOWN_WEST_FROM_BOMB_SHOP }
+MM_CLOCK_TOWN_WEST_FROM_BOMB_SHOP:              { game: mm, id: 0xd460, type: indoors-exit, areas: ["MM Bomb Shop", "MM Clock Town West"], reverse: MM_BOMB_SHOP }
+MM_POST_OFFICE:                                 { game: mm, id: 0x5600, type: indoors, areas: ["MM Clock Town West", "MM Post Office"], reverse: MM_CLOCK_TOWN_WEST_FROM_POST_OFFICE }
+MM_CLOCK_TOWN_WEST_FROM_POST_OFFICE:            { game: mm, id: 0xd470, type: indoors-exit, areas: ["MM Post Office", "MM Clock Town West"], reverse: MM_POST_OFFICE }
+MM_LOTTERY:                                     { game: mm, id: 0x6c00, type: indoors, areas: ["MM Clock Town West", "MM Lottery"], reverse: MM_CLOCK_TOWN_WEST_FROM_LOTTERY }
+MM_CLOCK_TOWN_WEST_FROM_LOTTERY:                { game: mm, id: 0xd480, type: indoors-exit, areas: ["MM Lottery", "MM Clock Town West"], reverse: MM_LOTTERY }
+MM_KAFEI_HIDEOUT:                               { game: mm, id: 0x0e10, type: indoors, areas: ["MM Laundry Pool", "MM Kafei Hideout"], reverse: MM_LAUNDRY_POOL_FROM_KAFEI_HIDEOUT }
+MM_LAUNDRY_POOL_FROM_KAFEI_HIDEOUT:             { game: mm, id: 0xda10, type: indoors-exit, areas: ["MM Kafei Hideout", "MM Laundry Pool"], reverse: MM_KAFEI_HIDEOUT }
+MM_POTION_SHOP:                                 { game: mm, id: 0x0400, type: indoors, areas: ["MM Swamp Front", "MM Swamp Potion Shop"], reverse: MM_SWAMP_FROM_POTION_SHOP }
+MM_SWAMP_FROM_POTION_SHOP:                      { game: mm, id: 0x8450, type: indoors-exit, areas: ["MM Swamp Potion Shop", "MM Swamp Front"], reverse: MM_POTION_SHOP }
+MM_DEKU_SHRINE:                                 { game: mm, id: 0x9e00, type: indoors, areas: ["MM Near Deku Shrine", "MM Deku Shrine"], reverse: MM_DEKU_PALACE_EXTERIOR_FROM_SHRINE }
+MM_DEKU_PALACE_EXTERIOR_FROM_SHRINE:            { game: mm, id: 0x5040, type: indoors-exit, areas: ["MM Deku Shrine", "MM Near Deku Shrine"], reverse: MM_DEKU_SHRINE }
+MM_GORON_SHOP:                                  { game: mm, id: 0x7400, type: indoors, areas: ["MM Goron Shrine", "MM Goron Shop"], reverse: MM_GORON_SHRINE_FROM_SHOP }
+MM_GORON_SHRINE_FROM_SHOP:                      { game: mm, id: 0x5e10, type: indoors-exit, areas: ["MM Goron Shop", "MM Goron Shrine"], reverse: MM_GORON_SHOP }
+MM_FISHER_HUT:                                  { game: mm, id: 0x7200, type: indoors, areas: ["MM Great Bay Coast", "MM Fisher's Hut"], reverse: MM_GREAT_BAY_COAST_FROM_FISHER_HUT }
+MM_GREAT_BAY_COAST_FROM_FISHER_HUT:             { game: mm, id: 0x6840, type: indoors-exit, areas: ["MM Fisher's Hut", "MM Great Bay Coast"], reverse: MM_FISHER_HUT }
+MM_LABORATORY:                                  { game: mm, id: 0x5800, type: indoors, areas: ["MM Great Bay Coast", "MM Laboratory"], reverse: MM_GREAT_BAY_COAST_FROM_LABORATORY }
+MM_GREAT_BAY_COAST_FROM_LABORATORY:             { game: mm, id: 0x6870, type: indoors-exit, areas: ["MM Laboratory", "MM Great Bay Coast"], reverse: MM_LABORATORY }
+MM_ROOM_EVANS:                                  { game: mm, id: 0x9230, type: indoors, areas: ["MM Zora Hall", "MM Evan's Room"], reverse: MM_ZORA_HALL_FROM_EVANS, debug: [INTERIOR, "Evan"] }
+MM_ZORA_HALL_FROM_EVANS:                        { game: mm, id: 0x6040, type: indoors-exit, areas: ["MM Evan's Room", "MM Zora Hall"], reverse: MM_ROOM_EVANS }
+MM_ROOM_JAPAS:                                  { game: mm, id: 0x9210, type: indoors, areas: ["MM Zora Hall", "MM Japas' Room"], reverse: MM_ZORA_HALL_FROM_JAPAS }
+MM_ZORA_HALL_FROM_JAPAS:                        { game: mm, id: 0x6050, type: indoors-exit, areas: ["MM Japas' Room", "MM Zora Hall"], reverse: MM_ROOM_JAPAS }
+MM_ROOM_TIJO:                                   { game: mm, id: 0x9200, type: indoors, areas: ["MM Zora Hall", "MM Tijo's Room"], reverse: MM_ZORA_HALL_FROM_TIJO }
+MM_ZORA_HALL_FROM_TIJO:                         { game: mm, id: 0x6060, type: indoors-exit, areas: ["MM Tijo's Room", "MM Zora Hall"], reverse: MM_ROOM_TIJO }
+MM_ROOM_LULU:                                   { game: mm, id: 0x9220, type: indoors, areas: ["MM Zora Hall", "MM Lulu's Room"], reverse: MM_ZORA_HALL_FROM_LULU }
+MM_ZORA_HALL_FROM_LULU:                         { game: mm, id: 0x6030, type: indoors-exit, areas: ["MM Lulu's Room", "MM Zora Hall"], reverse: MM_ROOM_LULU }
+MM_ZORA_SHOP:                                   { game: mm, id: 0x9250, type: indoors, areas: ["MM Zora Hall", "MM Zora Shop"], reverse: MM_ZORA_HALL_FROM_SHOP }
+MM_ZORA_HALL_FROM_SHOP:                         { game: mm, id: 0x6020, type: indoors-exit, areas: ["MM Zora Shop", "MM Zora Hall"], reverse: MM_ZORA_SHOP }
+MM_GHOST_HUT:                                   { game: mm, id: 0x9c00, type: indoors, areas: ["MM Ikana Canyon", "MM Ghost Hut"], reverse: MM_IKANA_CANYON_FROM_GHOST_HUT }
+MM_IKANA_CANYON_FROM_GHOST_HUT:                 { game: mm, id: 0x2010, type: indoors-exit, areas: ["MM Ghost Hut", "MM Ikana Canyon"], reverse: MM_GHOST_HUT }
+MM_MUSIC_BOX_HOUSE:                             { game: mm, id: 0xa400, type: indoors, areas: ["MM Ikana Canyon", "MM Music Box House"], reverse: MM_IKANA_CANYON_FROM_MUSIC_BOX_HOUSE, debug: [INTERIOR, "Music House"] }
+MM_IKANA_CANYON_FROM_MUSIC_BOX_HOUSE:           { game: mm, id: 0x2020, type: indoors-exit, areas: ["MM Music Box House", "MM Ikana Canyon"], reverse: MM_MUSIC_BOX_HOUSE }
+MM_FAIRY_FOUNTAIN_IKANA:                        { game: mm, id: 0x4640, type: indoors, areas: ["MM Ikana Canyon", "MM Ikana Fairy Fountain"], reverse: MM_IKANA_CANYON_FROM_FAIRY_FOUNTAIN }
+MM_IKANA_CANYON_FROM_FAIRY_FOUNTAIN:            { game: mm, id: 0x20b0, type: indoors-exit, areas: ["MM Ikana Fairy Fountain", "MM Ikana Canyon"], reverse: MM_FAIRY_FOUNTAIN_IKANA }
+MM_SEWERS_FROM_EXTERIOR_DOOR:                   { game: mm, id: 0x40a0, type: indoors-extra, areas: ["MM Pirate Fortress Entrance Balcony", "MM Pirate Fortress Sewers End"], reverse: MM_EXTERIOR_DOOR_FROM_SEWERS }
+MM_EXTERIOR_DOOR_FROM_SEWERS:                   { game: mm, id: 0x7060, type: indoors-exit, areas: ["MM Pirate Fortress Sewers End", "MM Pirate Fortress Entrance Balcony"], reverse: MM_SEWERS_FROM_EXTERIOR_DOOR }
+MM_DEKU_PALACE_THRONE:                          { game: mm, id: 0x7600, type: indoors-special, areas: ["MM Deku Palace Main", "MM Deku Palace Throne"], reverse: MM_DEKU_PALACE_EXTERIOR_FROM_THRONE }
+MM_DEKU_PALACE_EXTERIOR_FROM_THRONE:            { game: mm, id: 0x5020, type: indoors-special, areas: ["MM Deku Palace Throne", "MM Deku Palace Main"], reverse: MM_DEKU_PALACE_THRONE }
+MM_DEKU_PALACE_THRONE_CAGE:                     { game: mm, id: 0x7610, type: indoors-special, areas: ["MM Deku Palace Near Cage", "MM Deku Palace Cage"], reverse: MM_DEKU_PALACE_EXTERIOR_FROM_THRONE_CAGE }
+MM_DEKU_PALACE_EXTERIOR_FROM_THRONE_CAGE:       { game: mm, id: 0x5030, type: indoors-special, areas: ["MM Deku Palace Cage", "MM Deku Palace Near Cage"], reverse: MM_DEKU_PALACE_THRONE_CAGE }
+MM_SAKON_HIDEOUT:                               { game: mm, id: 0x9800, type: indoors-special, areas: ["MM Ikana Valley", "MM Sakon Hideout"], reverse: MM_IKANA_CANYON_FROM_SAKON_HIDEOUT }
+MM_IKANA_CANYON_FROM_SAKON_HIDEOUT:             { game: mm, id: 0x2060, type: indoors-special, areas: ["MM Sakon Hideout", "MM Ikana Valley"], reverse: MM_SAKON_HIDEOUT }
+MM_IKANA_CAVERN:                                { game: mm, id: 0x20e0, type: indoors, areas: ["MM Ikana Canyon", "MM Ikana Spring Water Cave"], reverse: MM_IKANA_CANYON_FROM_CAVERN }
+MM_IKANA_CANYON_FROM_CAVERN:                    { game: mm, id: 0x20d0, type: indoors-exit, areas: ["MM Ikana Spring Water Cave", "MM Ikana Canyon"], reverse: MM_IKANA_CAVERN }
+MM_FAIRY_FOUNTAIN_GREAT_BAY:                    { game: mm, id: 0x4630, type: indoors, areas: ["MM Great Bay Near Fairy Fountain", "MM Great Bay Fairy Fountain"], reverse: MM_GREAT_BAY_FROM_FAIRY_FOUNTAIN }
+MM_GREAT_BAY_FROM_FAIRY_FOUNTAIN:               { game: mm, id: 0x6a50, type: indoors-exit, areas: ["MM Great Bay Fairy Fountain", "MM Great Bay Near Fairy Fountain"], reverse: MM_FAIRY_FOUNTAIN_GREAT_BAY }
+MM_FAIRY_FOUNTAIN_SNOWHEAD:                     { game: mm, id: 0x4620, type: indoors, areas: ["MM Snowhead Near Fairy Fountain", "MM Snowhead Fairy Fountain"], reverse: MM_SNOWHEAD_FROM_FAIRY_FOUNTAIN }
+MM_SNOWHEAD_FROM_FAIRY_FOUNTAIN:                { game: mm, id: 0xb220, type: indoors-exit, areas: ["MM Snowhead Fairy Fountain", "MM Snowhead Near Fairy Fountain"], reverse: MM_FAIRY_FOUNTAIN_SNOWHEAD }
+MM_TOURIST_INFORMATION:                         { game: mm, id: 0xa800, type: indoors-extra, areas: ["MM Swamp Front", "MM Tourist Information"], reverse: MM_SWAMP_FROM_TOURIST_INFORMATION }
+MM_SWAMP_FROM_TOURIST_INFORMATION:              { game: mm, id: 0x8410, type: indoors-exit, areas: ["MM Tourist Information", "MM Swamp Front"], reverse: MM_TOURIST_INFORMATION }
+MM_FAIRY_FOUNTAIN_WOODFALL:                     { game: mm, id: 0x4610, type: indoors, areas: ["MM Woodfall Near Fairy Fountain", "MM Woodfall Fairy Fountain"], reverse: MM_WOODFALL_FROM_FAIRY_FOUNTAIN }
+MM_WOODFALL_FROM_FAIRY_FOUNTAIN:                { game: mm, id: 0x8620, type: indoors-exit, areas: ["MM Woodfall Fairy Fountain", "MM Woodfall Near Fairy Fountain"], reverse: MM_FAIRY_FOUNTAIN_WOODFALL }
+MM_GORON_GRAVEYARD:                             { game: mm, id: 0x9600, type: indoors, areas: ["MM Near Goron Graveyard", "MM Goron Graveyard"], reverse: MM_MOUNTAIN_VILLAGE_FROM_GORON_GRAVEYARD }
+MM_MOUNTAIN_VILLAGE_FROM_GORON_GRAVEYARD:       { game: mm, id: 0x9a30, type: indoors-exit, areas: ["MM Goron Graveyard", "MM Near Goron Graveyard"], reverse: MM_GORON_GRAVEYARD }
+MM_BLACKSMITH:                                  { game: mm, id: 0x5200, type: indoors, areas: ["MM Mountain Village", "MM Blacksmith"], reverse: MM_MOUNTAIN_VILLAGE_FROM_BLACKSMITH }
+MM_MOUNTAIN_VILLAGE_FROM_BLACKSMITH:            { game: mm, id: 0x9a10, type: indoors-exit, areas: ["MM Blacksmith", "MM Mountain Village"], reverse: MM_BLACKSMITH }
+MM_CUCCO_SHACK:                                 { game: mm, id: 0x7e00, type: indoors, areas: ["MM Romani Ranch", "MM Cucco Shack"], reverse: MM_ROMANI_RANCH_FROM_CUCCO_SHACK }
+MM_ROMANI_RANCH_FROM_CUCCO_SHACK:               { game: mm, id: 0x6440, type: indoors-exit, areas: ["MM Cucco Shack", "MM Romani Ranch"], reverse: MM_CUCCO_SHACK }
+MM_DOGGY_RACETRACK:                             { game: mm, id: 0x7c00, type: indoors, areas: ["MM Romani Ranch", "MM Doggy Racetrack"], reverse: MM_ROMANI_RANCH_FROM_DOGGY_RACETRACK }
+MM_ROMANI_RANCH_FROM_DOGGY_RACETRACK:           { game: mm, id: 0x6450, type: indoors-exit, areas: ["MM Doggy Racetrack", "MM Romani Ranch"], reverse: MM_DOGGY_RACETRACK }
+MM_STABLES:                                     { game: mm, id: 0x0600, type: indoors, areas: ["MM Romani Ranch", "MM Stables"], reverse: MM_ROMANI_RANCH_FROM_STABLES }
+MM_ROMANI_RANCH_FROM_STABLES:                   { game: mm, id: 0x6420, type: indoors-exit, areas: ["MM Stables", "MM Romani Ranch"], reverse: MM_STABLES }
+MM_RANCH_HOUSE:                                 { game: mm, id: 0x0610, type: indoors, areas: ["MM Romani Ranch", "MM Ranch House"], reverse: MM_ROMANI_RANCH_FROM_RANCH_HOUSE }
+MM_ROMANI_RANCH_FROM_RANCH_HOUSE:               { game: mm, id: 0x6430, type: indoors-exit, areas: ["MM Ranch House", "MM Romani Ranch"], reverse: MM_RANCH_HOUSE }
+MM_ASTRAL_OBSERVATORY_FROM_CLOCK_TOWN_EAST:     { game: mm, id: 0x4c00, type: indoors-extra, areas: ["MM Clock Town East", "MM Astral Observatory Passage"], reverse: MM_CLOCK_TOWN_EAST_FROM_ASTRAL_OBSERVATORY }
+MM_CLOCK_TOWN_EAST_FROM_ASTRAL_OBSERVATORY:     { game: mm, id: 0xd220, type: indoors-exit, areas: ["MM Astral Observatory Passage", "MM Clock Town East"], reverse: MM_ASTRAL_OBSERVATORY_FROM_CLOCK_TOWN_EAST }
+MM_ASTRAL_OBSERVATORY_FROM_FIELD:               { game: mm, id: 0x4c10, type: indoors-extra, areas: ["MM Astral Observatory Balcony", "MM Astral Observatory"], reverse: MM_FIELD_FROM_ASTRAL_OBSERVATORY, debug: [INTERIOR, "Astral Observatory"] }
+MM_FIELD_FROM_ASTRAL_OBSERVATORY:               { game: mm, id: 0x5490, type: indoors-exit, areas: ["MM Astral Observatory", "MM Astral Observatory Balcony"], reverse: MM_ASTRAL_OBSERVATORY_FROM_FIELD }
+MM_SWAMP_ARCHERY:                               { game: mm, id: 0x4200, type: indoors, areas: ["MM Road to Southern Swamp", "MM Swamp Archery"], reverse: MM_SWAMP_ROAD_FROM_ARCHERY }
+MM_SWAMP_ROAD_FROM_ARCHERY:                     { game: mm, id: 0x7a20, type: indoors-exit, areas:  ["MM Swamp Archery", "MM Road to Southern Swamp"], reverse: MM_SWAMP_ARCHERY }
+MM_GORON_RACETRACK:                             { game: mm, id: 0xd000, type: indoors, areas: ["MM Near Goron Race", "MM Goron Race"], reverse: MM_TWIN_ISLANDS_FROM_GORON_RACETRACK, debug: [INTERIOR, "Goron Race"] }
+MM_TWIN_ISLANDS_FROM_GORON_RACETRACK:           { game: mm, id: 0xb420, type: indoors-exit, areas: ["MM Goron Race", "MM Near Goron Race"], reverse: MM_GORON_RACETRACK }
+MM_BEAVERS:                                     { game: mm, id: 0x8e00, type: indoors, areas: ["MM Waterfall Cliffs", "MM Waterfall Rapids"], reverse: MM_ZORA_CAPE_FROM_BEAVERS }
+MM_ZORA_CAPE_FROM_BEAVERS:                      { game: mm, id: 0x6a40, type: indoors-exit, areas: ["MM Waterfall Rapids", "MM Waterfall Cliffs"], reverse: MM_BEAVERS }
+MM_WARP_OWL_GREAT_BAY:                          { game: mm, id: 0x68b0, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Great Bay"], debug: ['WARP', 'Great Bay'] }
+MM_WARP_OWL_ZORA_CAPE:                          { game: mm, id: 0x6a60, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Zora Cape"], debug: ['WARP', 'Zora Cape'] }
+MM_WARP_OWL_SNOWHEAD:                           { game: mm, id: 0xb230, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Snowhead"], debug: ['WARP', 'Snowhead'] }
+MM_WARP_OWL_MOUNTAIN_VILLAGE:                   { game: mm, id: 0x9a80, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Mountain"], debug: ['WARP', 'Mountain'] }
+MM_WARP_OWL_CLOCK_TOWN:                         { game: mm, id: 0xd890, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Clock Town"], debug: ['WARP', 'Clock Town'] }
+MM_WARP_OWL_MILK_ROAD:                          { game: mm, id: 0x3e40, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Milk Road"], debug: ['WARP', 'Milk Road'] }
+MM_WARP_OWL_WOODFALL:                           { game: mm, id: 0x8640, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Woodfall"], debug: ['WARP', 'Woodfall'] }
+MM_WARP_OWL_SOUTHERN_SWAMP:                     { game: mm, id: 0x84a0, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Swamp"], debug: ['WARP', 'Swamp'] }
+MM_WARP_OWL_IKANA_CANYON:                       { game: mm, id: 0x2040, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Ikana"], debug: ['WARP', 'Ikana'] }
+MM_WARP_OWL_STONE_TOWER:                        { game: mm, id: 0xaa30, type: one-way-statue, flags: [no-sot], areas: ["MM SOARING", "MM Owl Stone Tower"], debug: ['WARP', 'Stone Tower'] }
+MM_WALLMASTER_DAMPE:                            { game: mm, id: 0xff00, type: wallmaster, areas: ["MM Beneath The Graveyard Night 3 Wallmaster", "MM VOID"] }
+MM_WALLMASTER_BTW_ENTRANCE:                     { game: mm, id: 0xff01, type: wallmaster, areas: ["MM Beneath The Well Wallmaster Near Entrance", "MM VOID"] }
+MM_WALLMASTER_BTW_FOUNTAIN:                     { game: mm, id: 0xff02, type: wallmaster, areas: ["MM Beneath The Well Wallmaster Near Fountain", "MM VOID"] }
+MM_WALLMASTER_BTW_EXIT:                         { game: mm, id: 0xff03, type: wallmaster, areas: ["MM Beneath The Well Wallmaster Near Exit", "MM VOID"] }
+MM_CLOCK_TOWN:                                  { game: mm, id: 0xd800, type: none, debug: ['COMMON', 'Clock Town'] }
+MM_MOON:                                        { game: mm, id: 0xc800, type: none, debug: ['COMMON', 'Moon'] }
+MM_CLOCK_TOWN_FROM_SONG_OF_TIME:                { game: mm, id: 0x1c00, type: none }
+MM_CLOCK_TOWER_MOON_CRASH:                      { game: mm, id: 0xc030, type: none }
+MM_CLOCK_TOWER_FROM_CLOCK_TOWN:                 { game: mm, id: 0xc010, type: none }
+MM_GORON_VILLAGE_FROM_TWIN_SPRING:              { game: mm, id: 0x8a00, type: none }
+MM_GORON_VILLAGE_FROM_TWIN_WINTER:              { game: mm, id: 0x9400, type: none }
+MM_COAST_FROM_MIKAU_CS:                         { game: mm, id: 0x68a0, type: none }
 MM_GROTTO_TYPE_GENERIC:                         { game: mm, id: 0x1440, type: none } # Multiple uses
 MM_GROTTO_TYPE_COW:                             { game: mm, id: 0x14a0, type: none } # Multiple uses
 MM_GROTTO_GENERIC_FIELD_PILLAR:                 { game: mm, id: 0x10000, type: grotto, areas: ['MM Termina Field', 'MM Pillar Grotto'], reverse: MM_GROTTO_EXIT_GENERIC_FIELD_PILLAR, debug: ['MM_GROTTO', 'Generic Pillar'] }
@@ -477,44 +571,12 @@ MM_GROTTO_EXIT_DEKU_PLAYGROUND:                 { game: mm, id: 0xd640, type: gr
 MM_GRAVE_EXIT_NIGHT1:                           { game: mm, id: 0x8030, type: grave-exit, areas: ['MM Beneath The Graveyard Night 1', 'MM Ikana Graveyard'], reverse: MM_GRAVE_NIGHT1 }
 MM_GRAVE_EXIT_NIGHT2:                           { game: mm, id: 0x8020, type: grave-exit, areas: ['MM Beneath The Graveyard Night 2', 'MM Ikana Graveyard'], reverse: MM_GRAVE_NIGHT2 }
 MM_GRAVE_EXIT_NIGHT3:                           { game: mm, id: 0x8010, type: grave-exit, areas: ['MM Beneath The Graveyard Night 3 Fake Exit', 'MM Ikana Graveyard'], reverse: MM_GRAVE_NIGHT3 }
-OOT_DEATH_MOUNTAIN_FROM_GORON_CITY:             { game: oot, id: 0x1b9,  type: none }
-OOT_DEATH_MOUNTAIN_CRATER:                      { game: oot, id: 0x147,  type: none }
-OOT_ZORA_DOMAIN:                                { game: oot, id: 0x108,  type: none }
-OOT_SACRED_MEADOW:                              { game: oot, id: 0x0fc,  type: none }
-OOT_GORON_CITY:                                 { game: oot, id: 0x14d,  type: none }
-OOT_DEATH_MOUNTAIN_CRATER_FROM_GORON_CITY:      { game: oot, id: 0x246,  type: none }
-OOT_LOST_WOODS_FROM_MEADOW:                     { game: oot, id: 0x1a9,  type: none }
-OOT_HYRULE_CASTLE:                              { game: oot, id: 0x138,  type: none }
-OOT_MARKET_FROM_MASK_SHOP:                      { game: oot, id: 0x1d1,  type: none }
-
-MM_WOODS_OF_MYSTERY:                        { game: mm, id: 0xc200, type: none }
-MM_TERMINA_FIELD_FROM_CLOCK_TOWN_EAST:      { game: mm, id: 0x5470, type: none }
-MM_TERMINA_FIELD_FROM_CLOCK_TOWN_SOUTH:     { game: mm, id: 0x5460, type: none }
-MM_TERMINA_FIELD_FROM_CLOCK_TOWN_NORTH:     { game: mm, id: 0x5480, type: none }
-MM_TERMINA_FIELD_FROM_ROAD_TO_SWAMP:        { game: mm, id: 0x5410, type: none }
-MM_TERMINA_FIELD_FROM_ROAD_TO_SNOWHEAD:     { game: mm, id: 0x5430, type: none }
-MM_TERMINA_FIELD_FROM_ROAD_TO_IKANA:        { game: mm, id: 0x5440, type: none }
-MM_TERMINA_FIELD_FROM_MILK_ROAD:            { game: mm, id: 0x5450, type: none }
-MM_SWAMP_ROAD_FROM_FIELD:                   { game: mm, id: 0x7a00, type: none }
-MM_TWIN_ISLAND_FROM_MOUNTAIN_VILLAGE:       { game: mm, id: 0xb400, type: none }
-MM_PATH_SNOWHEAD_FROM_SNOWHEAD:             { game: mm, id: 0xb010, type: none }
-MM_ZORA_CAPE_FROM_COAST:                    { game: mm, id: 0x6a00, type: none }
-MM_IKANA_ROAD_FROM_FIELD:                   { game: mm, id: 0xa000, type: none }
-MM_IKANA_GRAVEYARD_FROM_DAMPE:              { game: mm, id: 0x8040, type: none }
-MM_MILK_ROAD_FROM_FIELD:                    { game: mm, id: 0x3e00, type: none }
-MM_MILK_ROAD_FROM_GORMAN_TRACK_BARRIER:     { game: mm, id: 0x3e20, type: none }
-MM_MILK_ROAD_FROM_GORMAN_TRACK:             { game: mm, id: 0x3e30, type: none }
-MM_MILK_ROAD_FROM_RANCH2:                   { game: mm, id: 0x3e50, type: none }
-MM_MILK_ROAD_FROM_GORMAN_TRACK2:            { game: mm, id: 0x3e60, type: none }
-MM_GORMAN_TRACK_UNK1:                       { game: mm, id: 0xce00, type: none }
-MM_GORMAN_TRACK_UNK2:                       { game: mm, id: 0xce10, type: none }
-MM_GORMAN_TRACK_UNK3:                       { game: mm, id: 0xce20, type: none }
-MM_GORMAN_TRACK_UNK4:                       { game: mm, id: 0xce30, type: none }
-MM_GORMAN_TRACK_UNK5:                       { game: mm, id: 0xce40, type: none }
-MM_GORMAN_TRACK_UNK6:                       { game: mm, id: 0xce50, type: none }
-MM_MOUNTAIN_VILLAGE_PATH_FROM_TERMINA_FIELD:  { game: mm, id: 0x3200, type: none }
-MM_GREAT_BAY_COAST_FROM_ZORA_CAPE:            { game: mm, id: 0x6810, type: none }
-MM_ZORA_CAPE_FROM_GREAT_BAY_COAST:            { game: mm, id: 0x6a00, type: none }
-
-OOT_INTERNAL_EXIT_GROTTO:                       { game: oot, id: 0x7fff, type: none }
-MM_INTERNAL_EXIT_GROTTO:                        { game: oot, id: 0xffff, type: none }
+MM_TWIN_ISLAND_FROM_MOUNTAIN_VILLAGE:           { game: mm, id: 0xb400, type: none }
+MM_IKANA_GRAVEYARD_FROM_DAMPE:                  { game: mm, id: 0x8040, type: none }
+MM_MILK_ROAD_FROM_RANCH2:                       { game: mm, id: 0x3e50, type: none }
+MM_MILK_ROAD_FROM_GORMAN_TRACK2:                { game: mm, id: 0x3e60, type: none }
+MM_GORMAN_TRACK_UNK2:                           { game: mm, id: 0xce10, type: none }
+MM_GORMAN_TRACK_UNK3:                           { game: mm, id: 0xce20, type: none }
+MM_GORMAN_TRACK_UNK5:                           { game: mm, id: 0xce40, type: none }
+MM_GORMAN_TRACK_UNK6:                           { game: mm, id: 0xce50, type: none }
+MM_INTERNAL_EXIT_GROTTO:                        { game: mm, id: 0xffff, type: none }
