@@ -729,6 +729,18 @@ void hookPlay_Init(GameState_Play* play)
     comboSpawnCustomWarps(play);
     spawnSirloin(play);
 
+    if (comboConfig(CFG_ER_ANY))
+    {
+        if (play->sceneId == SCE_MM_STONE_TOWER_INVERTED)
+        {
+            SetSwitchFlag(play, 0x14);
+        }
+        else if (play->sceneId == SCE_MM_STONE_TOWER)
+        {
+            ClearSwitchFlag(play, 0x14);
+        }
+    }
+
     if (gNoTimeFlow)
     {
         play->envCtx.sceneTimeSpeed = 0;
