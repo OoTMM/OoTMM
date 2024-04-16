@@ -3124,8 +3124,3 @@
     "Stone Tower Inverted Pot 3": "true"
     "Stone Tower Inverted Pot 4": "true"
     "Stone Tower Inverted Pot 5": "true"
-"Stone Tower Flipping":
-  region: STONE_TOWER
-  exits:
-    "Stone Tower Top": "true"
-    "Stone Tower Top Inverted": "(can_use_elegy && can_use_light_arrows) || setting(openDungeonsMm, ST)"
