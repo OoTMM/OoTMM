@@ -352,3 +352,6 @@ Object_SpawnPersistent = 0x8012f2e0;
 Object_GetSlot = 0x8012f608;
 
 Player_OverrideLimbDrawGameplayDefault = 0x80125d4c;
+
+Environment_Init = 0x800f510c;
+gWeatherMode = 0x801BDBB0;

@@ -401,6 +401,7 @@ typedef enum {
     /* 5 */ MAGIC_ADD /* Sets a target to add magic */
 } MagicChangeType;
 #else
+
 typedef enum {
     /* 0  */ MAGIC_STATE_IDLE, /* Regular gameplay */
     /* 1  */ MAGIC_STATE_CONSUME_SETUP, /* Sets the speed at which the magic border flashes */
@@ -530,3 +531,7 @@ s32 Object_GetSlot(ObjectContext* objectCtx, s16 id);
 s32 Player_OverrideLimbDrawGameplayDefault(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Player* player);
 
 extern OSPiHandle* gCartHandle;
+
+void Environment_Init(GameState_Play* play, EnvironmentContext* envCtx, int unused);
+
+extern u8 gWeatherMode;
