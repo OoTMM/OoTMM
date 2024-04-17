@@ -62,19 +62,19 @@ const Options = ({
         </Col>
         <Col lg="3">
           <div className="forceRight">
-            {!['None', ''].includes(option.value.tooltip) && (
-              <a className="tooltip-link" id={option.key as string} href="#">
-                <QuestionCircleFill />
-              </a>
-            )}
             {!['None', ''].includes(option.value.youtubeLink) && (
-              <a href={option.value.youtubeLink} className="icon-spacing">
+              <a href={option.value.youtubeLink} className="icon-spacing" title="Video Example">
                 <Youtube />
               </a>
             )}
             {!['None', ''].includes(option.value.writtenDocumentationLink) && (
-              <a href={option.value.writtenDocumentationLink} className="icon-spacing">
+              <a href={option.value.writtenDocumentationLink} className="icon-spacing" title="Relevant Written Documentation">
                 <TextParagraph />
+              </a>
+            )}
+            {!['None', ''].includes(option.value.tooltip) && (
+              <a className="tooltip-link icon-spacing" id={option.key as string} href="#">
+                <QuestionCircleFill />
               </a>
             )}
           </div>
