@@ -3,7 +3,7 @@ import { TRICKS } from '@ootmm/core';
 import { useSettings } from '../contexts/GeneratorContext';
 import { Text } from './Text';
 import { TrickKey } from '@ootmm/core/lib/combo/settings';
-import SelectorCard from './SelectorCard';
+import SelectorCard, { SelectedList } from './SelectorCard';
 import TriforceImg from '../assets/blacktriforce.png';
 import MaskImg from '../assets/blackmask.png';
 import { Col, Row } from 'react-bootstrap';
@@ -17,14 +17,14 @@ const NAMES = {
 export function GameTricks({ game, img }: { game: keyof typeof NAMES; img: typeof TriforceImg }) {
   const [settings, setSettings] = useSettings();
   const tricks: TrickKey[] = Object.keys(TRICKS).filter((x) => x.startsWith(game));
-  const options = tricks.map((trick) => ({ value: trick as TrickKey, label: TRICKS[trick].name }));
+  const options = tricks.map((trickKey) => ({ key: trickKey as keyof SelectedList, value: TRICKS[trickKey] }));
 
-  const add = (trick: string) => {
-    setSettings({ tricks: { add: [trick as TrickKey] } });
+  const add = (trickKey: TrickKey) => {
+    setSettings({ tricks: { add: [trickKey] } });
   };
 
-  const remove = (trick: string) => {
-    setSettings({ tricks: { remove: [trick as TrickKey] } });
+  const remove = (trickKey: TrickKey) => {
+    setSettings({ tricks: { remove: [trickKey] } });
   };
 
   return (
