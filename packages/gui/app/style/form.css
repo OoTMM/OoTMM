@@ -1,12 +1,7 @@
 label {
   display: flex;
   flex-direction: column;
-  font-weight: bold;
   font-size: 1em;
-}
-
-label {
-  font-weight: initial;
 }
 
 input[type='file'] {
@@ -16,8 +11,8 @@ input[type='file'] {
 input[type='checkbox'] {
   height: 20px;
   width: 20px;
-  opacity: 0.5;
-  transition: all 200ms ease-in 0s;
+  opacity: 0.7;
+  transition: all 350ms ease-in 0s;
 }
 
 select,
