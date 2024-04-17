@@ -175,7 +175,7 @@
     "Ganon Castle Pot Shadow End 1": "true"
     "Ganon Castle Pot Shadow End 2": "true"
 "Ganon Castle Stairs":
-  region: NONE
+  region: GANON_CASTLE
   exits:
     "Ganon Castle": "true"
     "Ganon Castle Tower": "true"

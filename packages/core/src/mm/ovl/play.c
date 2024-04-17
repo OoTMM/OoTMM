@@ -8,140 +8,6 @@
 GameState_Play* gPlay;
 int gNoTimeFlow;
 
-static void debugCheat(GameState_Play* play)
-{
-#if defined(DEBUG)
-    /*if (play->gs.input[0].current.buttons & L_TRIG) */
-    {
-        /* Notebook */
-        gSave.weekEventReg[66] = 0xff;
-        gSave.weekEventReg[67] = 0xff;
-        gSave.weekEventReg[68] = 0xff;
-        gSave.weekEventReg[69] = 0xff;
-        gSave.weekEventReg[70] = 0xff;
-        gSave.weekEventReg[71] = 0xff;
-        gSave.weekEventReg[72] = 0x7f;
-
-        gSave.itemEquips.sword = 1;
-        gSave.itemEquips.shield = 2;
-        gMmExtraFlags2.progressiveShield = 1;
-        gSave.inventory.upgrades.quiver = 3;
-        gSave.inventory.upgrades.dekuStick = 3;
-        gSave.inventory.upgrades.dekuNut = 3;
-        gSave.inventory.upgrades.strength = 3;
-        /*gMmExtraFlags2.childWallet = 1; */
-        /*gSave.inventory.upgrades.wallet = 3; */
-        /*gMmExtraFlags3.bottomlessWallet = 1; */
-        gSave.inventory.upgrades.bombBag = 0;
-
-        gSave.itemEquips.buttonItems[0][0] = ITEM_MM_SWORD_KOKIRI;
-        gSave.inventory.items[ITS_MM_OCARINA] = ITEM_MM_OCARINA_OF_TIME;
-        gSave.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
-        gSave.inventory.items[ITS_MM_ARROW_FIRE] = ITEM_MM_ARROW_FIRE;
-        gSave.inventory.items[ITS_MM_ARROW_ICE] = ITEM_MM_ARROW_ICE;
-        gSave.inventory.items[ITS_MM_ARROW_LIGHT] = ITEM_MM_ARROW_LIGHT;
-        gSave.inventory.items[ITS_MM_BOMBS] = ITEM_MM_BOMB;
-        gSave.inventory.items[ITS_MM_BOMBCHU] = ITEM_MM_BOMBCHU;
-        gSave.inventory.items[ITS_MM_STICKS] = ITEM_MM_STICK;
-        gSave.inventory.items[ITS_MM_NUTS] = ITEM_MM_NUT;
-        gSave.inventory.items[ITS_MM_BEANS] = ITEM_MM_MAGIC_BEAN;
-        gSave.inventory.items[ITS_MM_KEG] = ITEM_MM_POWDER_KEG;
-        gSave.inventory.items[ITS_MM_PICTOBOX] = ITEM_MM_PICTOGRAPH_BOX;
-        gSave.inventory.items[ITS_MM_LENS] = ITEM_MM_LENS_OF_TRUTH;
-        gSave.inventory.items[ITS_MM_HOOKSHOT] = ITEM_MM_HOOKSHOT;
-        gSave.inventory.items[ITS_MM_GREAT_FAIRY_SWORD] = ITEM_MM_GREAT_FAIRY_SWORD;
-        gSave.inventory.items[ITS_MM_BOTTLE + 0] = ITEM_MM_DEKU_PRINCESS;
-        gSave.inventory.items[ITS_MM_BOTTLE + 1] = ITEM_MM_SPRING_WATER_HOT;
-        gSave.inventory.items[ITS_MM_BOTTLE + 2] = ITEM_MM_MAGIC_MUSHROOM;
-        gSave.inventory.items[ITS_MM_BOTTLE + 3] = ITEM_MM_POE;
-        gSave.inventory.items[ITS_MM_BOTTLE + 4] = ITEM_MM_BOTTLE_EMPTY;
-        gSave.inventory.items[ITS_MM_BOTTLE + 5] = ITEM_MM_BOTTLE_EMPTY;
-
-        gSave.inventory.items[ITS_MM_STICKS] = ITEM_MM_STICK;
-        gSave.inventory.ammo[ITS_MM_STICKS] = 30;
-
-        gSave.inventory.items[ITS_MM_MASK_POSTMAN] = ITEM_MM_MASK_POSTMAN;
-        gSave.inventory.items[ITS_MM_MASK_ALL_NIGHT] = ITEM_MM_MASK_ALL_NIGHT;
-        gSave.inventory.items[ITS_MM_MASK_BLAST] = ITEM_MM_MASK_BLAST;
-        gSave.inventory.items[ITS_MM_MASK_STONE] = ITEM_MM_MASK_STONE;
-        gSave.inventory.items[ITS_MM_MASK_GREAT_FAIRY] = ITEM_MM_MASK_GREAT_FAIRY;
-        gSave.inventory.items[ITS_MM_MASK_DEKU] = ITEM_MM_MASK_DEKU;
-        gSave.inventory.items[ITS_MM_MASK_KEATON] = ITEM_MM_MASK_KEATON;
-        gSave.inventory.items[ITS_MM_MASK_BREMEN] = ITEM_MM_MASK_BREMEN;
-        gSave.inventory.items[ITS_MM_MASK_BUNNY] = ITEM_MM_MASK_BUNNY;
-        gSave.inventory.items[ITS_MM_MASK_DON_GERO] = ITEM_MM_MASK_DON_GERO;
-        gSave.inventory.items[ITS_MM_MASK_SCENTS] = ITEM_MM_MASK_SCENTS;
-        gSave.inventory.items[ITS_MM_MASK_GORON] = ITEM_MM_MASK_GORON;
-        gSave.inventory.items[ITS_MM_MASK_ROMANI] = ITEM_MM_MASK_ROMANI;
-        gSave.inventory.items[ITS_MM_MASK_TROUPE_LEADER] = ITEM_MM_MASK_TROUPE_LEADER;
-        gSave.inventory.items[ITS_MM_MASK_KAFEI] = ITEM_MM_MASK_KAFEI;
-        gSave.inventory.items[ITS_MM_MASK_COUPLE] = ITEM_MM_MASK_COUPLE;
-        gSave.inventory.items[ITS_MM_MASK_TRUTH] = ITEM_MM_MASK_TRUTH;
-        gSave.inventory.items[ITS_MM_MASK_ZORA] = ITEM_MM_MASK_ZORA;
-        gSave.inventory.items[ITS_MM_MASK_KAMARO] = ITEM_MM_MASK_KAMARO;
-        gSave.inventory.items[ITS_MM_MASK_GIBDO] = ITEM_MM_MASK_GIBDO;
-        gSave.inventory.items[ITS_MM_MASK_GARO] = ITEM_MM_MASK_GARO;
-        gSave.inventory.items[ITS_MM_MASK_CAPTAIN] = ITEM_MM_MASK_CAPTAIN;
-        gSave.inventory.items[ITS_MM_MASK_GIANT] = ITEM_MM_MASK_GIANT;
-        gSave.inventory.items[ITS_MM_MASK_FIERCE_DEITY] = ITEM_MM_MASK_FIERCE_DEITY;
-
-        gSave.playerData.rupees = 9999;
-
-        gSave.inventory.quest.notebook = 1;
-        gSave.inventory.quest.songHealing = 1;
-        gSave.inventory.quest.songTime = 1;
-        gSave.inventory.quest.songSoaring = 1;
-        gSave.inventory.quest.songEpona = 1;
-        gSave.inventory.quest.songStorms = 1;
-        gSave.inventory.quest.songAwakening = 1;
-        gSave.inventory.quest.songLullabyIntro = 1;
-        gSave.inventory.quest.songLullaby = 1;
-        gSave.inventory.quest.songNewWave = 1;
-        gSave.inventory.quest.songEmpty = 1;
-        gSave.inventory.quest.songOrder = 1;
-        gSave.inventory.quest.songSun = 1;
-        gSave.inventory.quest.songSaria = 0; /* left out because it currently breaks the audio channels */
-
-        gMmSave.playerData.magicAcquired = 1;
-        gMmSave.playerData.doubleMagic = 1;
-        gMmSave.playerData.magicAmount = 2 * 0x30;
-        gSaveContext.magicFillTarget = 0x60;
-
-        gSave.inventory.ammo[ITS_MM_STICKS] = 30;
-        gSave.inventory.ammo[ITS_MM_NUTS] = 40;
-        gSave.inventory.ammo[ITS_MM_KEG] = 1;
-        gSave.inventory.ammo[ITS_MM_BEANS] = 10;
-        gSave.inventory.ammo[ITS_MM_BOW] = 50;
-        gSave.inventory.ammo[ITS_MM_BOMBCHU] = 50;
-        gSave.inventory.ammo[ITS_MM_BOMBS] = 40;
-
-        gSave.playerData.healthMax = 0x10 * 20;
-        gSave.playerData.health = 0x10 * 3;
-
-        gMmExtraTrade.trade1 = 0x3f;
-        gMmExtraTrade.trade2 = 0x1f;
-        gMmExtraTrade.trade3 = 0x1f;
-        gMmExtraItems.hookshot = 3;
-        gMmExtraItems.ocarina = 3;
-
-        gSave.inventory.items[ITS_MM_TRADE1] = ITEM_MM_DEED_LAND;
-        gSave.inventory.items[ITS_MM_TRADE2] = ITEM_MM_ROOM_KEY;
-        gSave.inventory.items[ITS_MM_TRADE3] = ITEM_MM_PENDANT_OF_MEMORIES;
-
-        gMmOwlFlags = 0x3ff; /* all owls statues */
-        /*gSave.inventory.quest.remainsOdolwa = 1; */
-        /*gMmExtraBoss.boss |= 0x01; */
-
-        /*gSave.day = 3; */
-        /*gSave.isNight = 1; */
-        /*gSave.time = 0x3000; */
-
-        /*gSave.skullCountOcean = 0x10; */
-    }
-
-#endif
-}
-
 static int sTimeSkipFlag;
 
 static void checkTimeSkip(GameState_Play* play)
@@ -244,14 +110,20 @@ static void checkTimeSkip(GameState_Play* play)
 
 static u32 entranceForOverride(u32 entrance)
 {
+    u32 entranceKey;
+
+    entranceKey = (entrance >> 9);
+    switch (entranceKey)
+    {
+    case 0x06: entranceKey = 0x42; break;
+    case 0x57: entranceKey = 0x4d; break;
+    case 0x45: entranceKey = 0x4a; break;
+    case 0x5b: entranceKey = 0x5a; break;
+    }
+    entrance = (entranceKey << 9) | (entrance & 0x1ff);
+
     switch (entrance)
     {
-    case 0x0c00:
-        /* To Clear Swamp from road */
-        return ENTR_MM_SWAMP_FROM_ROAD;
-    case 0xae60:
-        /* To Spring Mountain Village from Path */
-        return ENTR_MM_MOUNTAIN_VILLAGE_FROM_PATH;
     case ENTR_MM_GROTTO_TYPE_GENERIC:
         switch (gGrottoData & 0x1f)
         {
@@ -394,13 +266,13 @@ static const GrottoExit kGrottoExits[] = {
     { ENTR_MM_TERMINA_FIELD_FROM_CLOCK_TOWN_EAST, 0, { 2367, 315, -192 } },
     { ENTR_MM_TERMINA_FIELD_FROM_CLOCK_TOWN_SOUTH, 0, { 1012, -221, 3642 } },
     { ENTR_MM_SWAMP_ROAD_FROM_FIELD, 0, { 104, -182, 2202 } },
-    { ENTR_MM_WOODS_OF_MYSTERY, 2, { 2, 0, -889 } },
+    { ENTR_MM_MYSTERY_WOODS, 2, { 2, 0, -889 } },
     { ENTR_MM_SWAMP_FROM_SPIDER_HOUSE, 1, { -1700, 38, 1800 } },
     { ENTR_MM_WARP_OWL_MOUNTAIN_VILLAGE, 1, { 2406, 1168, -1197 } },
-    { ENTR_MM_TWIN_ISLAND_FROM_MOUNTAIN_VILLAGE, 0, { -1309, 320, 143 } },
+    { ENTR_MM_TWIN_ISLANDS_FROM_MOUNTAIN_VILLAGE, 0, { -1309, 320, 143 } },
     { ENTR_MM_PATH_SNOWHEAD_FROM_SNOWHEAD, 0, { -987, 360, -2339 } },
     { ENTR_MM_GREAT_BAY_COAST_FROM_FISHER_HUT, 0, { 1359, 80, 5018 } },
-    { ENTR_MM_ZORA_CAPE_FROM_COAST, 0, { -562, 80, 2707 } },
+    { ENTR_MM_ZORA_CAPE_FROM_GREAT_BAY_COAST, 0, { -562, 80, 2707 } },
     { ENTR_MM_IKANA_ROAD_FROM_FIELD, 0, { -428, 200, -335 } },
     { ENTR_MM_IKANA_GRAVEYARD_FROM_DAMPE, 1, { 106, 314, -1777 } },
     { ENTR_MM_IKANA_VALLEY_FROM_ROAD, 2, { -2475, -505, 2475 } },
@@ -420,7 +292,7 @@ static const GrottoExit kGrottoExits[] = {
     { ENTR_MM_TERMINA_FIELD_FROM_CLOCK_TOWN_EAST,  0, { 3223, 219, 1417 } },
     { ENTR_MM_TERMINA_FIELD_FROM_CLOCK_TOWN_SOUTH, 0, { -2317, -221, 3418 } },
     { ENTR_MM_TERMINA_FIELD_FROM_CLOCK_TOWN_WEST,  0, { -5159, -281, -571 } },
-    { ENTR_MM_TWIN_ISLAND_FROM_MOUNTAIN_VILLAGE, 0, { 589, 195, 53 } },
+    { ENTR_MM_TWIN_ISLANDS_FROM_MOUNTAIN_VILLAGE, 0, { 589, 195, 53 } },
 };
 
 static const GrottoExit kGrottoExitMountainWinter = { ENTR_MM_WARP_OWL_MOUNTAIN_VILLAGE, 0, { 345, 8, -150 } };
@@ -537,6 +409,18 @@ static void applyCustomEntrance(u32* entrance)
     }
 }
 
+static void spawnSirloin(GameState_Play* play)
+{
+    if (!gSharedCustomSave.storedSirloin)
+        return;
+    if (play->sceneId != SCE_MM_MOUNTAIN_VILLAGE_WINTER)
+        return;
+    if (MM_CHECK_EVENT_INF(EV_MM_WEEK_DUNGEON_SH))
+        return;
+
+    SpawnActor(&play->actorCtx, play, AC_EN_MM, -1025.f, 8.f, 400.f, 0.f, 0.f, 0.f, 0x8000);
+}
+
 void preInitTitleScreen(void)
 {
     u32 entrance;
@@ -550,6 +434,27 @@ void preInitTitleScreen(void)
     /* Load save */
     gSaveContext.fileIndex = gComboCtx.saveIndex;
     Sram_OpenSave(NULL, NULL);
+
+    if (gComboCtx.isFwSpawn)
+    {
+        gSaveContext.respawnFlag = 8;
+        gComboCtx.isFwSpawn = 0;
+
+        RespawnData* fw = &gCustomSave.fw[gOotSave.age];
+
+        if (fw->data)
+        {
+            gSaveContext.respawn[RESPAWN_MODE_HUMAN] = *fw;
+        }
+        else
+        {
+            gSaveContext.respawn[RESPAWN_MODE_HUMAN].data = 0;
+            gSaveContext.respawn[RESPAWN_MODE_HUMAN].pos.x = 0.0f;
+            gSaveContext.respawn[RESPAWN_MODE_HUMAN].pos.y = 0.0f;
+            gSaveContext.respawn[RESPAWN_MODE_HUMAN].pos.z = 0.0f;
+        }
+    }
+
     gSave.cutscene = 0;
     gSaveContext.nextCutscene = 0;
 
@@ -602,6 +507,9 @@ void hookPlay_Init(GameState_Play* play)
     g.keatonGrassMax = -1;
     comboMultiResetWisps();
 
+    if (comboConfig(CFG_ER_OVERWORLD) || comboConfig(CFG_ER_INDOORS))
+        gSave.hasSirloin = 0;
+
     if (gSaveContext.respawnFlag == 8)
     {
         s32 fwSceneId = Entrance_GetSceneIdAbsolute(gSaveContext.respawn[RESPAWN_MODE_HUMAN].entrance);
@@ -635,7 +543,7 @@ void hookPlay_Init(GameState_Play* play)
                 }
             }
         }
-        gSave.fw.pos = *pos;
+        gCustomSave.fw[gOotSave.age].pos = *pos;
     }
 
     if (comboIsLinkAdult())
@@ -781,7 +689,6 @@ void hookPlay_Init(GameState_Play* play)
 
     comboCacheClear();
     comboObjectsReset();
-    debugCheat(play);
 
     /* Force alt beaver race */
     MM_SET_EVENT_WEEK(EV_MM_WEEK_BEAVER_RACE_ALT);
@@ -810,6 +717,7 @@ void hookPlay_Init(GameState_Play* play)
         gNoTimeFlow = 1;
 
     Play_Init(play);
+
     gLastEntrance = gSave.entranceIndex;
     g.inGrotto = (play->sceneId == SCE_MM_GROTTOS);
     if (!g.inGrotto)
@@ -819,6 +727,19 @@ void hookPlay_Init(GameState_Play* play)
     CustomTriggers_Spawn(play);
     comboSpawnItemGivers(play);
     comboSpawnCustomWarps(play);
+    spawnSirloin(play);
+
+    if (comboConfig(CFG_ER_ANY))
+    {
+        if (play->sceneId == SCE_MM_STONE_TOWER_INVERTED)
+        {
+            SetSwitchFlag(play, 0x14);
+        }
+        else if (play->sceneId == SCE_MM_STONE_TOWER)
+        {
+            ClearSwitchFlag(play, 0x14);
+        }
+    }
 
     if (gNoTimeFlow)
     {
@@ -845,6 +766,7 @@ void hookPlay_Init(GameState_Play* play)
             play->transitionType = TRANS_TYPE_FADE_BLACK;
             return;
         }
+        g.isCredits = 1;
     }
 
     if (gSave.entranceIndex == ENTR_MM_CLOCK_TOWER_FROM_CLOCK_TOWN)
@@ -856,6 +778,10 @@ void hookPlay_Init(GameState_Play* play)
 
 void Play_UpdateWrapper(GameState_Play* play)
 {
+    /* Auto-press A during credits */
+    if (g.isCredits)
+        play->gs.input[0].pressed.buttons = (play->gs.frameCount & 1) ? A_BUTTON : 0;
+
     comboMenuTick();
     Debug_Input();
     malloc_check();
@@ -873,8 +799,16 @@ void Play_TransitionDone(GameState_Play* play)
 
     /* Resolve extended entrance */
     entrance = play->nextEntrance;
-    if (entrance == ENTR_EXTENDED)
+    switch (entrance)
+    {
+    case ENTR_EXTENDED:
         entrance = g.nextEntrance;
+        break;
+    case ENTR_FW_CROSS:
+        entrance = gForeignSave.fw.entranceIndex | MASK_FOREIGN_ENTRANCE;
+        gComboCtx.isFwSpawn = 1;
+        break;
+    }
 
     /* Handle grotto exits */
     if (entrance == ENTR_MM_INTERNAL_EXIT_GROTTO)
@@ -927,3 +861,21 @@ void Play_SetupRespawnPoint(GameState_Play* play, int respawnId, int playerParam
 }
 
 PATCH_FUNC(0x80169e6c, Play_SetupRespawnPoint);
+
+void CutsceneTransitionHook(GameState_Play* play)
+{
+    /* Default hook */
+    void (*DefaultHook)(GameState_Play*);
+    DefaultHook = (void*)0x801306a4;
+    DefaultHook(play);
+
+    if (gSaveContext.gameMode)
+        return;
+
+    if (gPlay->sceneId == SCE_MM_MUSIC_BOX_HOUSE && gPlay->nextEntrance == ENTR_MM_IKANA_CANYON_FROM_MUSIC_BOX_HOUSE)
+    {
+        /* Cutscene when getting kicked by Pam */
+        gIsEntranceOverride = 1;
+        return;
+    }
+}

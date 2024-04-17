@@ -289,7 +289,11 @@ void ActorRemove(ActorContext* ctx, Actor* actor, GameState_Play* play);
 
 void DrawSimpleOpa(GameState_Play* play, u32 segAddr);
 
+s16 RupeeValueOot(s16 count);
+s16 RupeeValueMm(s16 count);
+void AddRupeesRaw(s16 delta);
 void AddRupees(s16 delta);
+void _AddRupees(s16 delta);
 
 void AudioLoad_InitTable(void* unk1, u32 unk2, u32 unk3);
 
@@ -364,7 +368,12 @@ void Inventory_SetWorldMapCloudVisibility(s16 tingleId);
 
 #endif
 
+void Horse_ForceUnmount(GameState_Play* play);
+void Horse_Spawn(GameState_Play* play, Actor_Player* link);
+void Horse_SpawnOverworld(GameState_Play* play, Actor_Player* link);
+
 #if defined(GAME_MM)
+extern int gHorseIsMounted;
 s16 ActorCutscene_StartAndSetFlag(s16 index, Actor* actor);
 #endif
 
@@ -396,6 +405,7 @@ typedef enum {
     /* 5 */ MAGIC_ADD /* Sets a target to add magic */
 } MagicChangeType;
 #else
+
 typedef enum {
     /* 0  */ MAGIC_STATE_IDLE, /* Regular gameplay */
     /* 1  */ MAGIC_STATE_CONSUME_SETUP, /* Sets the speed at which the magic border flashes */
@@ -525,3 +535,7 @@ s32 Object_GetSlot(ObjectContext* objectCtx, s16 id);
 s32 Player_OverrideLimbDrawGameplayDefault(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Player* player);
 
 extern OSPiHandle* gCartHandle;
+
+void Environment_Init(GameState_Play* play, EnvironmentContext* envCtx, int unused);
+
+extern u8 gWeatherMode;

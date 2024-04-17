@@ -77,7 +77,7 @@ void CustomTriggers_CheckTriggerGame(Actor_CustomTriggers* this, GameState_Play*
     }
 
     /* Saria's Ocarina */
-    if (comboHasSoulOot(GI_OOT_SOUL_NPC_SARIA) && gSave.entrance == ENTR_OOT_LOST_BRIDGE_FROM_KOKIRI_FOREST && !GetEventChk(EV_OOT_CHK_SARIA_OCARINA))
+    if (comboHasSoulOot(GI_OOT_SOUL_NPC_SARIA) && gSave.entrance == ENTR_OOT_LOST_WOODS_BRIDGE_FROM_FOREST && !GetEventChk(EV_OOT_CHK_SARIA_OCARINA))
     {
         gComboTriggersData.trigger = TRIGGER_OOT_SARIA_OCARINA;
         return;

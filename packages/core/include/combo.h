@@ -97,8 +97,9 @@ void malloc_check(void);
 # define malloc_check() do {} while (0)
 #endif
 
-#define CHEAT_HEALTH        0
-#define CHEAT_MAGIC         1
+#define CHEAT_ALL_ITEMS     0
+#define CHEAT_HEALTH        1
+#define CHEAT_MAGIC         2
 
 #if defined(DEBUG)
 typedef struct
@@ -135,7 +136,7 @@ typedef struct PACKED ALIGNED(4)
     u32  valid;
     u32  saveIndex;
     u32  entrance;
-    s32  unused;
+    s32  isFwSpawn;
 }
 ComboContext;
 
@@ -178,6 +179,8 @@ typedef struct
 {
     u8              uuid[16];
     u8              playerId;
+    u32             dungeonWarps[12];
+    u32             dungeonEntrances[26];
     u32             mq;
     u32             preCompleted;
     u32             entrancesSong[6];
@@ -192,7 +195,6 @@ typedef struct
     s8              staticHintsImportance[20];
     u16             giZoraSapphire;
     u8              boss[12];
-    u8              dungeons[26];
 }
 ComboData;
 
@@ -470,6 +472,7 @@ typedef struct
     u32                     initialEntrance;
     u8                      inGrotto;
     u8                      isCreditWarp;
+    u8                      isCredits;
     const ComboItemQuery*   itemQuery;
     const ComboItemQuery*   itemQueryBox;
     u8                      silverRupee;
@@ -497,8 +500,6 @@ extern u16 gPrevPageIndex;
 extern s16 gPrevCursorPoint;
 extern s8 gSoaringIndexSelected;
 #endif
-
-void comboClearEpona(GameState_Play* play);
 
 void comboHandleAutoInvertClockSpeed(void);
 

@@ -36,6 +36,7 @@ const REGION_NAMES: {[k: string]: string} = {
   'OOT_GERUDO_TRAINING_GROUNDS': 'Gerudo\'s Training Ground',
   'OOT_GANON_CASTLE': 'Ganon\'s Castle',
   'OOT_EGGS': 'Inside Eggs',
+  OOT_GANON_CASTLE_TOWER: 'Ganon\'s Castle Tower',
   'MM_CLOCK_TOWN_SOUTH': 'South Clock Town',
   'MM_GIANT_DREAM': 'Giant\'s Dream',
   'MM_CLOCK_TOWN_NORTH': 'North Clock Town',
@@ -78,6 +79,9 @@ const REGION_NAMES: {[k: string]: string} = {
   'MM_SPIDER_HOUSE_SWAMP': 'Swamp Spider House',
   'MM_SPIDER_HOUSE_OCEAN': 'Ocean Spider House',
   'MM_TINGLE': 'Tingle',
+  MM_TEMPLE_STONE_TOWER_INVERTED: 'Inverted Stone Tower Temple',
+  MM_GORON_RACETRACK: 'Goron Racetrack',
+  MM_BUTLER_RACE: 'Butler Race',
   'NAMELESS': 'A Nameless Place',
 }
 

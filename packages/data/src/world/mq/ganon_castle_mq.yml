@@ -119,7 +119,7 @@
     "MQ Ganon Pot Shadow End 1": "has_lens && (has_hover_boots || (can_hookshot && has_fire && can_use_bow)) && silver_rupees_ganon_shadow"
     "MQ Ganon Pot Shadow End 2": "has_lens && (has_hover_boots || (can_hookshot && has_fire && can_use_bow)) && silver_rupees_ganon_shadow"
 "Ganon Castle Stairs":
-  region: NONE
+  region: GANON_CASTLE
   exits:
     "Ganon Castle": "true"
     "Ganon Castle Tower": "true"

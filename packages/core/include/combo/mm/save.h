@@ -208,9 +208,7 @@ typedef struct
     MmItemEquips            itemEquips;
     MmInventory             inventory;
     MmPermanentSceneFlags   permanentSceneFlags[120];
-    RespawnData             fw;
-    RespawnData             fwRespawnTop;
-    u8                      unk_E58[0x14];
+    u8                      unk_DF4[0x54];
     u32                     dekuPlaygroundHighScores[3];
     u32                     pictoFlags0;
     u32                     pictoFlags1;
@@ -247,7 +245,7 @@ typedef struct
     MmHorseData             horseData;
     u16                     checksum;
     u8                      eventInf[8];
-    u8                      unk_1014;
+    u8                      hasSirloin;
     u8                      unk_1015;
     u16                     jinxTimer;
     s16                     rupeesDelta;
@@ -487,6 +485,8 @@ typedef struct ALIGNED(16)
     u8 npc[32];
     u8 shops[4];
     u8 halfDays;
+    RespawnData fw[2];
+    RespawnData fwRespawnTop[2];
 }
 MmCustomSave;
 

@@ -123,6 +123,13 @@ export const SETTINGS = [{
   description: 'Prevents items that are part of a plando from being hinted',
   default: true
 }, {
+  key: 'extraHintRegions',
+  name: 'Extra Hint Regions',
+  category: 'main',
+  type: 'boolean',
+  description: 'Make the region hints more granular: Makes Goron Racetrack and Butler Race into their own regions, and splits Ganon Castle/Tower and Normal/Inverted Stone Tower Temple.',
+  default: false
+}, {
   key: 'hintImportance',
   name: 'Hint Importance',
   category: 'main',
@@ -620,7 +627,7 @@ export const SETTINGS = [{
   description: 'Change the behavior of moon crashing',
   values: [
     { value: 'reset', name:  'Reset',  description: 'Moon Crash will restore the last save. No progress will be kept.' },
-    { value: 'cycle', name:  'New Cycle',  description: 'Moon Crash will initiate a new cycle, keeping progress.' },
+    { value: 'cycle', name:  'New Cycle',  description: 'Moon Crash will initiate a new cycle, keeping progress. Saving is enabled on the Clock Tower Roof.' },
   ],
   default: 'reset'
 }, {
@@ -666,7 +673,8 @@ export const SETTINGS = [{
   description: 'Controls the behavior of Mido blocking the Deku Tree as child',
   values: [
     { value: 'closed', name: 'Closed', description: 'Mido will block the way to the Deku Tree until you have a Deku Shield and the Kokiri Sword.' },
-    { value: 'open', name: 'Open', description: 'The Deku Tree will be open from the start' },
+    { value: 'vanilla', name: 'Vanilla', description: 'Mido will block the way to the Deku Tree, but the tree itself will be open as child.' },
+    { value: 'open', name: 'Open', description: 'Mido will not block the way, the Deku Tree will be open from the start' },
   ],
   default: 'open'
 }, {
@@ -907,6 +915,14 @@ export const SETTINGS = [{
     { value: 'full', name: 'Child & Adult', description: 'Song of Soaring in OOT is enabled and logical for both Child and Adult' },
   ],
   default: 'none'
+}, {
+  key: 'crossGameFw',
+  name: 'Cross-Games Farore\'s Wind',
+  category: 'main.cross',
+  type: 'boolean',
+  description: 'Controls whether you can use Farore\'s Wind to warp between OOT and MM.',
+  default: false,
+  cond: (x: any) => x.spellWindMm,
 }, {
   key: 'csmc',
   name: 'Container Appearance Matches Content',
@@ -1207,6 +1223,14 @@ export const SETTINGS = [{
   category: 'items.extensions',
   type: 'boolean',
   description: 'Adds a Wallet that can hold up to 9999 rupees in each game',
+  default: false,
+  cond: (s: any) => s.colossalWallets,
+}, {
+  key: 'rupeeScaling',
+  name: 'Rupee Scaling',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Makes rupees worth twice as much with the Colossal Wallet, and twenty times as much with the Bottomless Wallet.',
   default: false,
   cond: (s: any) => s.colossalWallets,
 }, {
@@ -1820,6 +1844,14 @@ export const SETTINGS = [{
   description: 'Shuffle grottos and graves.',
   default: 'none'
 }, {
+  key: 'erSelfLoops',
+  name: 'Allow Self-Loops',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'Allow entrances to loop back to the same map. Might make the topology of the world very confusing.',
+  default: false,
+  cond: (x: any) => !x.erDecoupled,
+}, {
   key: 'erDecoupled',
   name: 'Decoupled Entrances',
   category: 'entrances',
@@ -1839,6 +1871,14 @@ export const SETTINGS = [{
   description: 'Allow shuffling multiple pools together.',
   default: 'none'
 }, {
+  key: 'erMixedDungeons',
+  name: 'Mixed Pools - Dungeons',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'If turned on, dungeons will be shuffled with other mixed pools.',
+  default: false,
+  cond: (x: any) => x.erMixed !== 'none' && x.erMixed === x.erDungeons,
+}, {
   key: 'erMixedRegions',
   name: 'Mixed Pools - Regions',
   category: 'entrances',
@@ -1846,6 +1886,14 @@ export const SETTINGS = [{
   description: 'If turned on, regions will be shuffled with other mixed pools.',
   default: false,
   cond: (x: any) => x.erMixed !== 'none' && x.erMixed === x.erRegions,
+}, {
+  key: 'erMixedOverworld',
+  name: 'Mixed Pools - Overworld',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'If turned on, overworld entrances will be shuffled with other mixed pools.',
+  default: false,
+  cond: (x: any) => x.erMixed !== 'none' && x.erMixed === x.erOverworld,
 }, {
   key: 'erMixedIndoors',
   name: 'Mixed Pools - Interiors',
@@ -1874,6 +1922,13 @@ export const SETTINGS = [{
   ],
   description: 'Enables the ability for Wallmasters to take you to random locations within their own game or across both games, based on other entrance settings',
   default: 'none'
+}, {
+  key: 'erSpawns',
+  name: 'Spawn Shuffle',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'Shuffle the starting positions of the player.',
+  default: false
 }, {
   key: 'erMajorDungeons',
   name: 'Shuffle Major Dungeons with Dungeons',
@@ -1959,6 +2014,7 @@ export const SETTINGS = [{
   ],
   default: 'none',
   description: '- Every entrance to Hyrule Field except Market<br>- The entrance to Gerudo Fortress from Gerudo Valley<br>- The entrance to Death Mountain from Kakariko<br>- The entrances to the four main regions in MM<br>- The entrance to Romani Ranch',
+  cond: (x: any) => x.erOverworld === 'none',
 }, {
   key: 'erRegionsExtra',
   name: 'Shuffle Market Entrance',
@@ -1975,6 +2031,19 @@ export const SETTINGS = [{
   description: 'Shuffles the various shortcuts between regions.<br>- Lost Woods/Goron City<br>- Lost Woods/Zora\'s River<br>- Zora\'s Domain/Lake Hylia',
   default: false,
   cond: (x: any) => x.erRegions !== 'none'
+}, {
+  key: 'erOverworld',
+  name: 'Shuffle Overworld',
+  category: 'entrances',
+  type: 'enum',
+  values: [
+    { value: 'none', name: 'None' },
+    { value: 'ownGame', name: 'Own Game' },
+    { value: 'full', name: 'Full' },
+  ],
+  default: 'none',
+  description: 'Shuffle every overworld entrance.',
+  cond: (x: any) => x.erRegions === 'none',
 }, {
   key: 'erIndoors',
   name: 'Shuffle Interiors',
@@ -2000,7 +2069,7 @@ export const SETTINGS = [{
   name: 'Shuffle Extra Interiors',
   category: 'entrances',
   type: 'boolean',
-  description: 'Shuffle additional, more complex interiors. These include:<br>- OOT: Link\'s House, Temple of Time, Windmill, Kak Potion Shop<br>- MM: Stock Pot Inn, Astral Observatory/Bombers\' Hideout, Swamp Tourist Hut, Ikana Spring Cave',
+  description: 'Shuffle additional, more complex interiors. These include:<br>- OOT: Link\'s House, Temple of Time, Windmill, Kak Potion Shop<br>- MM: Stock Pot Inn, Astral Observatory/Bombers\' Hideout, Swamp Tourist Hut, Ikana Spring Cave, Music Box House',
   default: false,
   cond: (x: any) => x.erIndoors !== 'none'
 }, {

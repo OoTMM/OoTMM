@@ -15,7 +15,7 @@ typedef struct
     s16         health;
     s8          magicSize;
     s8          magicAmount;
-    u16         rupees;
+    s16         rupees;
     u16         swordHealth;
     char        unk_38[2];
     u8          magicUpgrade;

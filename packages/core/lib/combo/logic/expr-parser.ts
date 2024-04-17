@@ -2,7 +2,7 @@ import { Game } from '../config';
 import { itemByID } from '../items';
 import { Settings } from '../settings';
 import { gameId } from '../util';
-import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprAge, exprHas, exprRenewable, exprEvent, exprMasks, exprSetting, exprNot, exprCond, exprTrick, exprSpecial, exprOotTime, exprMmTime, exprLicense, exprPrice, exprGlitch, exprFish } from './expr';
+import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprAge, exprHas, exprRenewable, exprEvent, exprMasks, exprSetting, exprNot, exprCond, exprTrick, exprSpecial, exprOotTime, exprMmTime, exprLicense, exprPrice, exprGlitch, exprFish, exprFlagSet, exprFlagCheckUnset } from './expr';
 import { ResolvedWorldFlags } from './world';
 
 const SIMPLE_TOKENS = ['||', '&&', '(', ')', ',', 'true', 'false', '!', '+', '-'] as const;
@@ -333,6 +333,28 @@ export class ExprParser {
     return exprFish(ageAndType, minPounds, maxPounds);
   }
 
+  private parseExprFlagSet(): Expr | undefined {
+    if (this.peek('identifier') !== 'flag_set') {
+      return undefined;
+    }
+    this.accept('identifier');
+    this.expect('(');
+    const flag = this.expect('identifier');
+    this.expect(')');
+    return exprFlagSet(flag);
+  }
+
+  private parseExprFlagCheckUnset(): Expr | undefined {
+    if (this.peek('identifier') !== 'flag_check_unset') {
+      return undefined;
+    }
+    this.accept('identifier');
+    this.expect('(');
+    const flag = this.expect('identifier');
+    this.expect(')');
+    return exprFlagCheckUnset(flag);
+  }
+
   private parseMacro(): Expr | undefined {
     /* Check for a macro with the given name */
     const name = this.peek('identifier');
@@ -411,6 +433,8 @@ export class ExprParser {
       || this.parseExprMmTime()
       || this.parseExprPrice()
       || this.parseExprFish()
+      || this.parseExprFlagSet()
+      || this.parseExprFlagCheckUnset()
       || this.parseMacro();
   }
 

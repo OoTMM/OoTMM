@@ -248,7 +248,7 @@
   exits:
     "Oath to Order": "true"
   events:
-    CLEAN_SWAMP: "true"
+    BOSS_WOODFALL: "true"
   locations:
     "Woodfall Temple Boss Container": "true"
     "Woodfall Temple Boss": "true"

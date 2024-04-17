@@ -153,7 +153,7 @@ static const ObjectPatch kObjectPatches[] = {
     { OBJ_OOT_GI_TICKETSTONE, { 0x0f38 } },
     { OBJ_OOT_GI_TRUTH_MASK, { 0x1408, 0x16e8 } },
     { CUSTOM_OBJECT_ID_GI_STONE_EMERALD, { 0xba0, 0x12a8 } },
-    { CUSTOM_OBJECT_ID_GI_STONE_RUBY, { 0x670, 0x938 } },
+    { CUSTOM_OBJECT_ID_GI_STONE_RUBY, { 0xa70, 0xd38 } },
     { CUSTOM_OBJECT_ID_GI_STONE_SAPPHIRE, { 0x1308 } },
     { CUSTOM_OBJECT_ID_GI_MEDALLION_FOREST, { 0x3a8, 0xe58 } },
     { CUSTOM_OBJECT_ID_GI_MEDALLION_FIRE,   { 0x1e8, 0xc48 } },

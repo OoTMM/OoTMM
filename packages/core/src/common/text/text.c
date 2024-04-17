@@ -54,6 +54,7 @@ const RegionName kRegionNamesOot[] = {
     { "in",         "the " TEXT_COLOR_YELLOW "Haunted Wastelands" },
     { "around",     "the " TEXT_COLOR_ORANGE "Desert Colossus" },
     { "inside",     "an " TEXT_COLOR_YELLOW "Egg" },
+    { "inside",     TEXT_COLOR_RED "Ganon's Castle Tower" },
 };
 
 const RegionName kRegionNamesMm[] = {
@@ -100,6 +101,9 @@ const RegionName kRegionNamesMm[] = {
     { "in",         "the " TEXT_COLOR_GREEN "Swamp Spider House" },
     { "in",         "the " TEXT_COLOR_BLUE "Ocean Spider House" },
     { "from",       TEXT_COLOR_GREEN "Tingle" },
+    { "in",         TEXT_COLOR_ORANGE "Inverted Stone Tower Temple" },
+    { "inside",     "the " TEXT_COLOR_GREEN "Butler Race" },
+    { "inside",     "the " TEXT_COLOR_RED "Goron Racetrack" },
 };
 
 static const RegionName kRegionNowhere = { NULL, TEXT_COLOR_PINK "nowhere" };

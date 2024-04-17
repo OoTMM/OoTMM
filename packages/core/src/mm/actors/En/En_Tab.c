@@ -142,11 +142,11 @@ void EnTab_AfterGivingItem(Actor* actor)
     {
     case 0:
         gMmExtraFlags2.milkBarMilk = 1;
-        AddRupees(-kPrices[0]);
+        AddRupeesRaw(-kPrices[0]);
         break;
     case 1:
         gMmExtraFlags2.milkBarChateau = 1;
-        AddRupees(-kPrices[1]);
+        AddRupeesRaw(-kPrices[1]);
         break;
     }
 }

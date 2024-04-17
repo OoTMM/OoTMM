@@ -38,6 +38,9 @@ void Sram_SaveEndOfCycle(GameState_Play* play)
     /* Re-enable time */
     gNoTimeFlow = 0;
 
+    /* Disable sirloin */
+    gSharedCustomSave.storedSirloin = 0;
+
     /* Store a dummy scene/entrance in OoT (prevents reloading into a temple - could lead to softlocks) */
     gOotSave.sceneId = SCE_OOT_TEMPLE_OF_TIME;
     gOotSave.entrance = ENTR_OOT_WARP_SONG_TEMPLE;
