@@ -4,7 +4,8 @@
 
 static void EnGe2_ThrowPlayerOut(Actor* this, GameState_Play* play)
 {
-    s32 entrance;
+    s32 override;
+    u32 entrance;
     u8* timer;
 
     /* Handle timer */
@@ -16,8 +17,13 @@ static void EnGe2_ThrowPlayerOut(Actor* this, GameState_Play* play)
     }
 
     /* Transition */
-    entrance = comboEntranceOverride(ENTR_MM_GREAT_BAY_FROM_PIRATE_FORTRESS);
-    if (play->sceneId != SCE_MM_PIRATE_FORTRESS_ENTRANCE || entrance == -1 || entrance == ENTR_MM_GREAT_BAY_FROM_PIRATE_FORTRESS)
+    if (play->sceneId == SCE_MM_PIRATE_FORTRESS_ENTRANCE)
+        entrance = ENTR_MM_GREAT_BAY_FROM_PIRATE_FORTRESS;
+    else
+        entrance = ENTR_MM_PIRATE_FORTRESS_EXTERIOR_FROM_INTERIOR;
+    override = comboEntranceOverride(entrance);
+
+    if (override == -1 || (u32)override == entrance)
     {
         play->nextEntrance = play->setupExitList[this->variable & 0x1f];
         play->transitionTrigger = TRANS_TRIGGER_NORMAL;
@@ -25,7 +31,7 @@ static void EnGe2_ThrowPlayerOut(Actor* this, GameState_Play* play)
     }
     else
     {
-        comboTransition(play, (u32)entrance);
+        comboTransition(play, (u32)override);
     }
 }
 
