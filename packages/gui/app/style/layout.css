@@ -10,6 +10,11 @@
   align-items: center;
 }
 
+.forceRight {
+  display: flex;
+  justify-content: right;
+}
+
 .two-column-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -59,7 +64,8 @@
   max-width: 30em;
 }
 
-.tooltip p, .tooltip ul {
+.tooltip p,
+.tooltip ul {
   margin: 0.75em;
 }
 
