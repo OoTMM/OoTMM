@@ -766,6 +766,7 @@ void hookPlay_Init(GameState_Play* play)
             play->transitionType = TRANS_TYPE_FADE_BLACK;
             return;
         }
+        g.isCredits = 1;
     }
 
     if (gSave.entranceIndex == ENTR_MM_CLOCK_TOWER_FROM_CLOCK_TOWN)
@@ -777,6 +778,10 @@ void hookPlay_Init(GameState_Play* play)
 
 void Play_UpdateWrapper(GameState_Play* play)
 {
+    /* Auto-press A during credits */
+    if (g.isCredits)
+        play->gs.input[0].pressed.buttons = (play->gs.frameCount & 1) ? A_BUTTON : 0;
+
     comboMenuTick();
     Debug_Input();
     malloc_check();

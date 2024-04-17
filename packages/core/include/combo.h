@@ -472,6 +472,7 @@ typedef struct
     u32                     initialEntrance;
     u8                      inGrotto;
     u8                      isCreditWarp;
+    u8                      isCredits;
     const ComboItemQuery*   itemQuery;
     const ComboItemQuery*   itemQueryBox;
     u8                      silverRupee;

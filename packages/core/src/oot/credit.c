@@ -5,6 +5,7 @@ void comboCreditWarp(GameState_Play* play)
     Actor_Player* link;
 
     g.isCreditWarp = 1;
+    g.isCredits = 1;
 
     /* Save */
     comboSave(play, 0);

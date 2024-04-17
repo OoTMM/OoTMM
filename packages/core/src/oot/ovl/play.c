@@ -156,6 +156,7 @@ static void endGame(void)
         gSave.cutscene = tmpCutscene;
         gSave.entrance = tmpEntrance;
         gSave.sceneId = tmpSceneId;
+        g.isCredits = 1;
     }
 }
 
@@ -518,6 +519,10 @@ void hookPlay_Init(GameState_Play* play)
 
 void Play_UpdateWrapper(GameState_Play* play)
 {
+    /* Auto-press A during credits */
+    if (g.isCredits)
+        play->gs.input[0].pressed.buttons = (play->gs.frameCount & 1) ? A_BUTTON : 0;
+
     comboMenuTick();
     Debug_Input();
     comboCacheGarbageCollect();
