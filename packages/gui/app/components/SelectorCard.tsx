@@ -45,9 +45,18 @@ const Options = ({
         <Col>
           <Checkbox
             label={option.value.name}
-            checked={selectedList[option.key]}
+            checked={selectedList[option.key] ? true : false}
             onChange={() => {
-              setSelectedList({ ...selectedList, [option.key]: !selectedList[option.key] });
+              const value = selectedList[option.key] ? true : undefined;
+              setSelectedList((previousList: SelectedList) => {
+                const newList = { ...previousList };
+                if (newList[option.key] === true) {
+                  delete newList[option.key];
+                } else {
+                  newList[option.key] = true;
+                }
+                return newList;
+              });
             }}
           />
         </Col>
@@ -85,8 +94,8 @@ export type SelectorCardOption = {
 type SelectorCardProps = {
   options: SelectorCardOption[];
   selected: string[];
-  add: (x: string) => void;
-  remove: (x: string) => void;
+  add: (xToAdd: SelectedList, setAdditions: Function) => void;
+  remove: (xToRemove: SelectedList, setRemovals: Function) => void;
   clear?: () => void;
   label: string;
 };
@@ -101,13 +110,38 @@ const SelectorCard = ({ options, selected, add, remove, clear, label }: Selector
     <>
       <Row>
         <Col>
-          <Button label={`Add ${label}`} variant="primary" iconRight={<CaretRightFill />} />
+          <Button
+            label={`Add ${label}`}
+            variant="primary"
+            iconRight={<CaretRightFill />}
+            handleClick={() => {
+              console.log(selectedToAdd);
+              add(selectedToAdd, setAdditions);
+            }}
+          />
         </Col>
         <Col>
-          <Button label="Reset" variant="danger" />
+          <Button
+            label="Reset"
+            variant="danger"
+            handleClick={() => {
+              const itemsToReset: SelectedList = {};
+              added.forEach((checkedItem) => {
+                itemsToReset[checkedItem.key as string] = true;
+              });
+              remove(itemsToReset, setRemovals);
+            }}
+          />
         </Col>
         <Col>
-          <Button label={`Remove ${label}`} variant="primary" iconLeft={<CaretLeftFill />} />
+          <Button
+            label={`Remove ${label}`}
+            variant="primary"
+            iconLeft={<CaretLeftFill />}
+            handleClick={() => {
+              remove(selectedToRemove, setRemovals);
+            }}
+          />
         </Col>
       </Row>
       <Row className="mt-3">

@@ -19,17 +19,19 @@ export function GameTricks({ game, img }: { game: keyof typeof NAMES; img: typeo
   const tricks: TrickKey[] = Object.keys(TRICKS).filter((x) => x.startsWith(game));
   const options = tricks.map((trickKey) => ({ key: trickKey as keyof SelectedList, value: TRICKS[trickKey] }));
 
-  const add = (trickKey: TrickKey) => {
-    setSettings({ tricks: { add: [trickKey] } });
+  const add = async (trickKeysToAdd: SelectedList, setAdditions: Function) => {
+    setSettings({ tricks: { add: Object.keys(trickKeysToAdd) } });
+    setAdditions({});
   };
 
-  const remove = (trickKey: TrickKey) => {
-    setSettings({ tricks: { remove: [trickKey] } });
+  const remove = (trickKeysToRemove: SelectedList, setRemovals: Function) => {
+    setSettings({ tricks: { remove: Object.keys(trickKeysToRemove) } });
+    setRemovals({});
   };
 
   return (
     <>
-      <Row>
+      <Row className="mb-2">
         <Col>
           <Text size="jb">{NAMES[game]}</Text>
         </Col>
@@ -58,9 +60,8 @@ export function Tricks() {
     <>
       <Text size="mg">Tricks</Text>
 
-      <Button label="Reset All" variant="danger" className="btn-auto" handleClick={clear}></Button>
-      <Row>
-        <Col lg={12} xl={6}>
+      <Row className="mt-4">
+        <Col xl={12} xxl={6}>
           <GameTricks game="OOT" img={TriforceImg} />
         </Col>
         <Col>
