@@ -246,7 +246,7 @@ Actor_SetCollisionCylinder = 0x800b78b8;
 MatrixStackDup = 0x8018019c;
 MatrixStackPop = 0x801801cc;
 
-AddRupees = 0x801159ec;
+_AddRupees = 0x801159ec;
 
 PlayStoreFlags = 0x80169d40;
 Play_GetCamera = 0x801696d4;

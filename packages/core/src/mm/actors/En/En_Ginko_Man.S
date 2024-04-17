@@ -80,3 +80,11 @@ PATCH_START 0x80a65678
   li a2,GI_MM_RUPEE_BLUE
 PATCH_END
 
+/* Use the raw rupee handlers */
+PATCH_START 0x80a65030
+  jal AddRupees
+PATCH_END
+
+PATCH_START 0x80a65320
+  jal AddRupees
+PATCH_END

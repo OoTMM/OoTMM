@@ -169,23 +169,16 @@ static void reloadHookshot(GameState_Play* play)
 }
 #endif
 
-static void addRupeesEffect(s16 delta)
-{
-#if defined(GAME_OOT)
-    gSaveContext.rupeesDelta += delta;
-#else
-    gSaveContext.save.rupeesDelta += delta;
-#endif
-}
-
 static void addRupeesRawOot(s16 delta)
 {
     u16 max;
 
     max = gOotMaxRupees[gOotSave.inventory.upgrades.wallet];
-    gOotSave.playerData.rupees += delta;
+    gOotSave.playerData.rupees += RupeeValueOot(delta);
     if (gOotSave.playerData.rupees > max)
         gOotSave.playerData.rupees = max;
+    if (gOotSave.playerData.rupees < 0)
+        gOotSave.playerData.rupees = 0;
 }
 
 static void addRupeesRawMm(s16 delta)
@@ -193,9 +186,11 @@ static void addRupeesRawMm(s16 delta)
     u16 max;
 
     max = gMmMaxRupees[gMmSave.inventory.upgrades.wallet];
-    gMmSave.playerData.rupees += delta;
+    gMmSave.playerData.rupees += RupeeValueMm(delta);
     if (gMmSave.playerData.rupees > max)
         gMmSave.playerData.rupees = max;
+    if (gMmSave.playerData.rupees < 0)
+        gMmSave.playerData.rupees = 0;
 }
 
 static void addRupeesOot(GameState_Play* play, s16 delta)
@@ -207,7 +202,7 @@ static void addRupeesOot(GameState_Play* play, s16 delta)
 
     if (play)
     {
-        addRupeesEffect(delta);
+        AddRupees(delta);
         return;
     }
 
@@ -226,7 +221,7 @@ static void addRupeesMm(GameState_Play* play, s16 delta)
 
     if (play)
     {
-        addRupeesEffect(delta);
+        AddRupees(delta);
         return;
     }
 

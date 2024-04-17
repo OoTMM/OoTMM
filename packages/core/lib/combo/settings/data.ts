@@ -1226,6 +1226,14 @@ export const SETTINGS = [{
   default: false,
   cond: (s: any) => s.colossalWallets,
 }, {
+  key: 'rupeeScaling',
+  name: 'Rupee Scaling',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Makes rupees worth twice as much with the Colossal Wallet, and twenty times as much with the Bottomless Wallet.',
+  default: false,
+  cond: (s: any) => s.colossalWallets,
+}, {
   key: 'skeletonKeyOot',
   name: 'Skeleton Key (OoT)',
   category: 'items.extensions',

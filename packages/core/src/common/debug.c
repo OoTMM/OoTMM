@@ -633,11 +633,11 @@ static void cheatAllItems(GameState_Play* play)
     gSave.inventory.upgrades.bombBag = 3;
     gSave.inventory.upgrades.quiver = 3;
     gSave.inventory.upgrades.dive = 2;
-    /*gSave.inventory.upgrades.wallet = 3; */
+    gSave.inventory.upgrades.wallet = 3;
     gSave.inventory.upgrades.strength = 3;
-    /*gOotExtraFlags.bottomlessWallet = 1; */
-    /*gOotMaxRupees[3] = 9999; */
-    /*gWalletDigits[3] = 4; */
+    gOotExtraFlags.bottomlessWallet = 1;
+    gOotMaxRupees[3] = 9999;
+    gWalletDigits[3] = 4;
 
     gSave.inventory.ammo[ITS_OOT_STICKS] = 10;
     gSave.inventory.ammo[ITS_OOT_SLINGSHOT] = 50;

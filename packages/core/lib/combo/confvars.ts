@@ -172,6 +172,7 @@ export const CONFVARS = [
   'ER_INDOORS',
   'ER_REGIONS_OVERWORLD',
   'CROSS_GAME_FW',
+  'RUPEE_SCALING',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

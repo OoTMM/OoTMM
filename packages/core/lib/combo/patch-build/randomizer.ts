@@ -962,6 +962,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     ER_INDOORS: settings.erIndoors !== 'none',
     ER_REGIONS_OVERWORLD: settings.erRegions !== 'none' || settings.erOverworld !== 'none',
     CROSS_GAME_FW: settings.crossGameFw,
+    RUPEE_SCALING: settings.rupeeScaling,
   };
 
   for (const v in exprs) {

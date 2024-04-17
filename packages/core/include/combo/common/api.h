@@ -289,7 +289,11 @@ void ActorRemove(ActorContext* ctx, Actor* actor, GameState_Play* play);
 
 void DrawSimpleOpa(GameState_Play* play, u32 segAddr);
 
+s16 RupeeValueOot(s16 count);
+s16 RupeeValueMm(s16 count);
+void AddRupeesRaw(s16 delta);
 void AddRupees(s16 delta);
+void _AddRupees(s16 delta);
 
 void AudioLoad_InitTable(void* unk1, u32 unk2, u32 unk3);
 
