@@ -801,6 +801,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MM_PROGRESSIVE_LULLABY: settings.progressiveGoronLullaby === 'progressive',
     DOOR_OF_TIME_OPEN: settings.doorOfTime === 'open',
     OOT_OPEN_DEKU: settings.dekuTree === 'open',
+    OOT_ADULT_DEKU: settings.dekuTreeAdult,
     ER_DUNGEONS: settings.erDungeons !== 'none',
     ER_MAJOR_DUNGEONS: settings.erMajorDungeons,
     ER_BOSS: settings.erBoss !== 'none',

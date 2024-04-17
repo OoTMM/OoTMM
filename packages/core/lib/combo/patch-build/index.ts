@@ -41,7 +41,6 @@ function asmPatchGroups(world: World, settings: Settings) {
     MM_CLOCK_SPEED_VERYFAST: settings.clockSpeed === 'veryfast',
     MM_CLOCK_SPEED_SUPERFAST: settings.clockSpeed === 'superfast',
     MM_BOSS_WARP_PADS_BEATEN: settings.bossWarpPads === 'bossBeaten',
-    OOT_ADULT_DEKU_TREE: settings.dekuTreeAdult,
     OOT_FIRE_TEMPLE_CHILD: settings.fireChild,
     OOT_FAST_BUNNY_HOOD: settings.fastBunnyHood,
     OOT_AGELESS_SWORDS: settings.agelessSwords,
