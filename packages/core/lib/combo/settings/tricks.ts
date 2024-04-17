@@ -778,8 +778,7 @@ export const TRICKS: Tricks = {
   },
   MM_STAGE_LIGHTS_DIN: {
     name: "Light the Zora Hall Stage Lights using Din's Fire, Bow, and Hookshot",
-    tooltip:
-      "The item can be obtained without Fire Arrows by first hooking to either torch, using Din's Fire, then shooting an arrow to the other torch.",
+    tooltip: "The item can be obtained without Fire Arrows by first hooking to either torch, using Din's Fire, then shooting an arrow to the other torch.",
     youtubeLink: '',
     writtenDocumentationLink: 'None',
   },
@@ -796,9 +795,9 @@ export const TRICKS: Tricks = {
     writtenDocumentationLink: 'None',
   },
   MM_KEG_TRIAL_HEATLESS: {
-    name: "Powder Keg Trial without Thawing Ice using Hookshot Anywhere",
-    tooltip: "",
-    youtubeLink: '',
+    name: 'Powder Keg Trial without Thawing Ice using Hookshot Anywhere',
+    tooltip: '',
+    youtubeLink: 'None',
     writtenDocumentationLink: 'None',
   },
 };
