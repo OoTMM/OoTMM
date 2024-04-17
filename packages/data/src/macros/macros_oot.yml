@@ -187,6 +187,11 @@
 "has_lens": "has_lens_strict || trick(OOT_LENS)"
 "trick_mido": "trick(OOT_MIDO_SKIP) && (has_bow || has_hookshot(1) || has(SHARED_ARROW_FIRE) || has(ARROW_FIRE) || has(SHARED_ARROW_LIGHT) || has(ARROW_LIGHT))"
 
+# Mido / Deku Tree
+"can_move_mido_reqs": "is_child && has_sword_kokiri && renewable(SHIELD_DEKU)"
+"can_move_mido": "can_move_mido_reqs && soul_npc(SOUL_NPC_MIDO)"
+"can_bypass_mido": "setting(dekuTree, open) || is_adult || climb_anywhere || hookshot_anywhere || can_move_mido_reqs"
+
 #Specialty Macros
 "met_zelda": "event(MEET_ZELDA) || setting(skipZelda)"
 "woke_talon_child": "event(TALON_CHILD) || setting(skipZelda)"
@@ -197,8 +202,6 @@
 "can_collect_ageless_raw": "(has_hookshot(1) && has(BOOMERANG)) || (age_boomerang_anyage && has(BOOMERANG)) || (age_hookshot_anyage && has_hookshot(1))"
 "can_collect_ageless": "(time_travel_at_will && can_collect_distance) || can_collect_ageless_raw"
 "king_zora_moved": "event(KING_ZORA_LETTER) || setting(zoraKing, open) || (setting(zoraKing, adult) && is_adult)"
-"can_move_mido": "(is_child && has_sword_kokiri && renewable(SHIELD_DEKU)) || setting(dekuTree, open)"
-"mido_moved": "setting(dekuTree, open) || (event(MIDO_MOVED) && soul_npc(SOUL_NPC_MIDO))"
 "business_scrub(id)": "soul_business_scrub && can_hit_scrub && scrub_price(id)"
 
 # Wallets
