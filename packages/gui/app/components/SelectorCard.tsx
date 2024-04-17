@@ -7,12 +7,6 @@ import { Trick } from '@ootmm/core/lib/combo/settings/tricks';
 import { Tooltip } from './Tooltip';
 import { Text } from './Text';
 
-/*const CustomOption = ({ children, ...props }: { children?: React.ReactNode; props: any }) => {
-  const { onMouseMove, onMouseOver, ...rest } = (props as any).innerProps;
-  const newProps = { ...props, innerProps: rest };
-  return <components.Option {...(newProps as any)}>{children}</components.Option>;
-};*/
-
 export type SelectedList = { [key: string]: boolean };
 
 const ToolTips = ({ listOfOptions }: { listOfOptions: SelectorCardOption[] }) => {
