@@ -13,7 +13,9 @@ static void BgTreemouth_SetHandler(Actor* this, void* unused)
     /* Never make the deku tree dynamic */
     SET_HANDLER(this, BgTreemouth_HandlerNull);
 
-    if (!comboConfig(CFG_OOT_ADULT_DEKU) && (gSave.age == AGE_ADULT))
+    if (gSave.age == AGE_CHILD && !comboConfig(CFG_OOT_CLOSED_DEKU))
+        isOpen = 1;
+    else if (!comboConfig(CFG_OOT_ADULT_DEKU) && (gSave.age == AGE_ADULT))
         isOpen = 0;
     else
         isOpen = GetEventChk(EV_OOT_CHK_DEKU_MIDO_SWORD_SHIELD);

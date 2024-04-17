@@ -156,7 +156,7 @@
   region: KOKIRI_FOREST
   exits:
     "Kokiri Forest": "can_bypass_mido"
-    "Deku Tree": "(setting(dekuTree, open) || event(MIDO_MOVED)) && (is_child || setting(dekuTreeAdult))"
+    "Deku Tree": "(setting(dekuTree, open) || (is_child && setting(dekuTree, vanilla)) || event(MIDO_MOVED)) && (is_child || setting(dekuTreeAdult))"
   events:
     STICKS: "is_child && soul_deku_baba && (can_boomerang || has_weapon)"
     MIDO_MOVED: "can_move_mido"

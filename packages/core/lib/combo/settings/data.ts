@@ -673,7 +673,8 @@ export const SETTINGS = [{
   description: 'Controls the behavior of Mido blocking the Deku Tree as child',
   values: [
     { value: 'closed', name: 'Closed', description: 'Mido will block the way to the Deku Tree until you have a Deku Shield and the Kokiri Sword.' },
-    { value: 'open', name: 'Open', description: 'The Deku Tree will be open from the start' },
+    { value: 'vanilla', name: 'Vanilla', description: 'Mido will block the way to the Deku Tree, but the tree itself will be open as child.' },
+    { value: 'open', name: 'Open', description: 'Mido will not block the way, the Deku Tree will be open from the start' },
   ],
   default: 'open'
 }, {
