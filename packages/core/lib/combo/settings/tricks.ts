@@ -793,6 +793,12 @@ export const TRICKS: Tricks = {
     youtubeLink: '',
     writtenDocumentationLink: 'None',
   },
+  MM_KEG_TRIAL_HEATLESS: {
+    name: 'Powder Keg Trial without Thawing Ice using Hookshot Anywhere',
+    tooltip: '',
+    youtubeLink: 'None',
+    writtenDocumentationLink: 'None',
+  },
 };
 
 export const DEFAULT_TRICKS: TrickKey[] = ['OOT_NIGHT_GS'];
