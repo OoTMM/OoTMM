@@ -17,7 +17,9 @@ export type Tricks = {
 /** Typing for each key of the TRICKS object */
 export type TrickKey = string;
 
-/** Object containing all of the Tricks in the Randomizer */
+/** Object containing all of the Tricks in the Randomizer
+ * Note: "" and "None" as values for tooltip and the links will not render those elements, but they have to be defined
+ */
 export const TRICKS: Tricks = {
   OOT_LENS: {
     name: 'Fewer Lens Requirements (OoT)',
@@ -556,7 +558,7 @@ export const TRICKS: Tricks = {
     writtenDocumentationLink: 'None',
   },
   MM_ISTT_CHUCHU_LESS: {
-    name: 'ISTT Block Room without Chuchu jellies',
+    name: 'ISTT Block Room without Chuchu Jellies',
     tooltip: '',
     youtubeLink: 'Needs Link',
     writtenDocumentationLink: 'None',
