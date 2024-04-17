@@ -205,15 +205,15 @@
   dungeon: GB
   exits:
     "Great Bay Temple Green Pipe 2": "true"
-    "Great Bay Temple Map Room": "((can_use_fire_arrows || trick(MM_GBT_FIRELESS)) && can_use_ice_arrows) || short_hook_anywhere || has_hover_boots"
+    "Great Bay Temple Map Room": "(can_use_fire_arrows && can_use_ice_arrows) || (trick(MM_GBT_FIRELESS) && has(MASK_DEKU) && (has_mask_zora || (is_adult && (has_weapon || has_sticks)))) || short_hook_anywhere || has_hover_boots"
     "WARP_SONGS": "true"
   events:
-    GB_PIPE_GREEN2: "(can_use_ice_arrows && (can_use_fire_arrows || trick(MM_GBT_FIRELESS))) || short_hook_anywhere || has_hover_boots"
+    GB_PIPE_GREEN2: "(can_use_fire_arrows && can_use_ice_arrows) || (trick(MM_GBT_FIRELESS) && has(MASK_DEKU) && (has_mask_zora || (is_adult && (has_weapon || has_sticks)))) || short_hook_anywhere || has_hover_boots"
   locations:
-    "Great Bay Temple Green Pipe 3 Chest": "(can_use_ice_arrows && (can_use_fire_arrows || trick(MM_GBT_FIRELESS)) && can_hookshot) || short_hook_anywhere || has_hover_boots"
+    "Great Bay Temple Green Pipe 3 Chest": "(can_use_fire_arrows && can_use_ice_arrows && is_tall) || (trick(MM_GBT_FIRELESS) && has(MASK_DEKU) && (has_mask_zora || (is_adult && (has_weapon || has_sticks)))) || short_hook_anywhere || has_hover_boots"
     "Great Bay Temple SF Green Pipe 3 Barrel": "underwater_walking || ((has_bombchu || has_mask_blast) && (short_hook_anywhere || can_dive_small)) || (has(MASK_GREAT_FAIRY) && has_bombchu)"
-    "Great Bay Temple Pot Green Pipe 3 Upper 1": "(can_use_ice_arrows && (can_use_fire_arrows || trick(MM_GBT_FIRELESS))) || short_hook_anywhere || has_hover_boots"
-    "Great Bay Temple Pot Green Pipe 3 Upper 2": "(can_use_ice_arrows && (can_use_fire_arrows || trick(MM_GBT_FIRELESS))) || short_hook_anywhere || has_hover_boots"
+    "Great Bay Temple Pot Green Pipe 3 Upper 1": "(can_use_fire_arrows && can_use_ice_arrows && is_tall) || (trick(MM_GBT_FIRELESS) && has(MASK_DEKU) && (has_mask_zora || (is_adult && (has_weapon || has_sticks)))) || short_hook_anywhere || has_hover_boots"
+    "Great Bay Temple Pot Green Pipe 3 Upper 2": "(can_use_fire_arrows && can_use_ice_arrows && is_tall) || (trick(MM_GBT_FIRELESS) && has(MASK_DEKU) && (has_mask_zora || (is_adult && (has_weapon || has_sticks)))) || short_hook_anywhere || has_hover_boots"
     "Great Bay Temple Pot Green Pipe 3 Lower": "true"
 "Great Bay Temple Pre-Boss":
   dungeon: GB
