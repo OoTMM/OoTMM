@@ -11,7 +11,7 @@ import { Checkbox } from './Checkbox';
 import { Group } from './Group';
 import { Text } from './Text';
 
-const hintOptions: { name: string, value: string}[] = [];
+const hintOptions: { name: string; value: string }[] = [];
 for (const k in HINT_TYPES) {
   hintOptions.push({ name: HINT_TYPES[k as keyof typeof HINT_TYPES], value: k });
 }
@@ -23,13 +23,13 @@ export function HintEditor({ index }: HintEditorProps) {
   const [settings, setSettings] = useSettings();
   const itemPool = useItemPool();
 
-  const itemOptions = Object.keys(itemPool).map(item => ({ value: item, label: itemName(item) }));
+  const itemOptions = Object.keys(itemPool).map((item) => ({ value: item, label: itemName(item) }));
   const hint = settings.hints[index];
 
   const updateHint = (h: SettingHint) => {
     const newArray = [...settings.hints];
     newArray[index] = h;
-    setSettings({ hints: { set: newArray }});
+    setSettings({ hints: { set: newArray } });
   };
 
   const onChangeType = (type: keyof typeof HINT_TYPES) => {
@@ -67,7 +67,7 @@ export function HintEditor({ index }: HintEditorProps) {
   const onRemove = () => {
     const newArray = [...settings.hints];
     newArray.splice(index, 1);
-    setSettings({ hints: { set: newArray }});
+    setSettings({ hints: { set: newArray } });
   };
 
   const onMoveUp = () => {
@@ -76,7 +76,7 @@ export function HintEditor({ index }: HintEditorProps) {
     const temp = newArray[index - 1];
     newArray[index - 1] = newArray[index];
     newArray[index] = temp;
-    setSettings({ hints: { set: newArray }});
+    setSettings({ hints: { set: newArray } });
   };
 
   const onMoveDown = () => {
@@ -85,36 +85,40 @@ export function HintEditor({ index }: HintEditorProps) {
     const temp = newArray[index + 1];
     newArray[index + 1] = newArray[index];
     newArray[index] = temp;
-    setSettings({ hints: { set: newArray }});
+    setSettings({ hints: { set: newArray } });
   };
 
-  const selectedItem = itemOptions.find(x => x.value === hint.item);
+  const selectedItem = itemOptions.find((x) => x.value === hint.item);
   const style = { display: 'inline-block', 'margin-left': '0.5em' };
   const labelStyle = { display: 'inline-flex', 'margin-right': '0.5em', 'align-items': 'center', 'flex-direction': 'column' };
 
   return (
     <tr className="hint">
       <td>
-        <span className="plando-remove" onClick={onRemove}><FontAwesomeIcon icon={faXmark}/></span>
-        <span className="plando-remove" onClick={onMoveUp}><FontAwesomeIcon icon={faArrowUp}/></span>
-        <span className="plando-remove" onClick={onMoveDown}><FontAwesomeIcon icon={faArrowDown}/></span>
+        <span className="plando-remove" onClick={onRemove}>
+          <FontAwesomeIcon icon={faXmark} />
+        </span>
+        <span className="plando-remove" onClick={onMoveUp}>
+          <FontAwesomeIcon icon={faArrowUp} />
+        </span>
+        <span className="plando-remove" onClick={onMoveDown}>
+          <FontAwesomeIcon icon={faArrowDown} />
+        </span>
       </td>
       <td>
-        <Dropdown options={hintOptions} value={hint.type} onChange={onChangeType as any}/>
+        <Dropdown options={hintOptions} value={hint.type} onChange={onChangeType as any} />
       </td>
       <td>
-        {hint.type === 'item' &&
-          <Select className='plando-select' options={itemOptions} onChange={(v) => onChangeItem(v?.value)} value={selectedItem}/>
-        }
+        {hint.type === 'item' && (
+          <Select className="plando-select" options={itemOptions} onChange={(v) => onChangeItem(v?.value)} value={selectedItem} />
+        )}
+      </td>
+      <td>{hint.amount !== 'max' && <InputNumber value={hint.amount} onChange={onChangeAmount} />}</td>
+      <td>
+        <Checkbox checked={hint.amount === 'max'} onChange={onChangeMax} />
       </td>
       <td>
-        {hint.amount !== 'max' && <InputNumber value={hint.amount} onChange={onChangeAmount}/>}
-      </td>
-      <td>
-        <Checkbox checked={hint.amount === 'max'} onChange={onChangeMax}/>
-      </td>
-      <td>
-        <InputNumber value={hint.extra} onChange={onChangeExtra}/>
+        <InputNumber value={hint.extra} onChange={onChangeExtra} />
       </td>
     </tr>
   );
@@ -126,16 +130,22 @@ export function Hints() {
   const onNew = () => {
     const newArray = [...settings.hints];
     newArray.push({ type: 'junk', amount: 1, extra: 0 });
-    setSettings({ hints: { set: newArray }});
+    setSettings({ hints: { set: newArray } });
   };
 
   return (
-    <Group direction="vertical" spacing='xxl'>
-      <Text size='mg'>Hints</Text>
-      <Group direction='horizontal'>
-        <button className="btn-primary" onClick={onNew}>New</button>
-        <button className="btn-danger" onClick={() => setSettings({ hints: { set: [] } })}>Remove All</button>
-        <button className="btn-danger" onClick={() => setSettings({ hints: { set: SETTINGS_DEFAULT_HINTS } })}>Reset</button>
+    <Group direction="vertical" spacing="xxl">
+      <Text size="mg">Hints</Text>
+      <Group direction="horizontal">
+        <button className="btn btn-primary" onClick={onNew}>
+          New
+        </button>
+        <button className="btn-danger" onClick={() => setSettings({ hints: { set: [] } })}>
+          Remove All
+        </button>
+        <button className="btn-danger" onClick={() => setSettings({ hints: { set: SETTINGS_DEFAULT_HINTS } })}>
+          Reset
+        </button>
       </Group>
 
       <table className="hints">
@@ -150,9 +160,11 @@ export function Hints() {
           </tr>
         </thead>
         <tbody>
-          {settings.hints.map((_, i) => <HintEditor key={i} index={i}/>)}
+          {settings.hints.map((_, i) => (
+            <HintEditor key={i} index={i} />
+          ))}
         </tbody>
       </table>
     </Group>
   );
-};
+}
