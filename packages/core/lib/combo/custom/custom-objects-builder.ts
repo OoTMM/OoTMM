@@ -45,6 +45,32 @@ export class CustomObjectsBuilder {
     return { name, data: out.data, offsets: out.offsets };
   }
 
+  private async makeEqShieldMirror(): Promise<CustomObject> {
+    const editor = new ObjectEditor(0xa);
+    const obj = await this.getFile('oot', 'objects/object_link_boy');
+    editor.loadSegment(0x06, obj);
+
+    const b = 0x060241c0;
+    let list = editor.listData(b)!;
+    list = editor.stripList(list, 0x060242c8 - b, 0x060245a8 - b);
+
+    editor.submitList(list);
+    return { name: 'EQ_SHIELD_MIRROR', ...editor.build() };
+  }
+
+  private async makeEqShieldDeku(): Promise<CustomObject> {
+    const editor = new ObjectEditor(0xa);
+    const obj = await this.getFile('oot', 'objects/object_link_child');
+    editor.loadSegment(0x06, obj);
+
+    const b = 0x06014440;
+    let list = editor.listData(b)!;
+    //list = editor.stripList(list, 0x060242c8 - b, 0x060245a8 - b);
+
+    editor.submitList(list);
+    return { name: 'EQ_SHIELD_DEKU', ...editor.build() };
+  }
+
   private async makeEqSheathShieldDeku(): Promise<CustomObject> {
     const editor = new ObjectEditor(0xa);
     const object_link_child = await this.getFile('oot', 'objects/object_link_child');
@@ -83,6 +109,19 @@ export class CustomObjectsBuilder {
 
     editor.submitList(list);
     return { name: 'EQ_SHEATH_SHIELD_HYLIAN_ADULT', ...editor.build() };
+  }
+
+  private async makeEqSheathShieldMirror(): Promise<CustomObject> {
+    const editor = new ObjectEditor(0xa);
+    const obj = await this.getFile('oot', 'objects/object_link_boy');
+    editor.loadSegment(0x06, obj);
+
+    const b = 0x060216b0;
+    let list = editor.listData(b)!;
+    list = editor.stripList(list, 0x06021868 - b, 0x060219b8 - b);
+
+    editor.submitList(list);
+    return { name: 'EQ_SHEATH_SHIELD_MIRROR', ...editor.build() };
   }
 
   private async makeEqSheathSwordOotChildFull(): Promise<CustomObject> {
@@ -203,9 +242,12 @@ export class CustomObjectsBuilder {
       await this.makeEqBiggoronSword(),
       await this.makeEqBiggoronSwordBroken(),
       await this.makeEqHammer(),
+      await this.makeEqShieldDeku(),
+      await this.makeEqShieldMirror(),
       await this.makeEqSheathShieldDeku(),
       await this.makeEqSheathShieldHylianChild(),
       await this.makeEqSheathShieldHylianAdult(),
+      await this.makeEqSheathShieldMirror(),
       await this.makeEqSheathSwordOotChildFull(),
       await this.makeEqSheathSwordOotChildEmpty(),
       await this.makeEqSheathSwordOotAdultFull(),

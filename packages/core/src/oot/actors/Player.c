@@ -405,7 +405,9 @@ static Gfx sGfxCustomSheath[] = {
 
 #define DLIST_INDIRECT(x)           (*(u32*)((x)))
 #define DLIST_CHILD_LHAND_CLOSED    DLIST_INDIRECT(0x800f78ec)
+#define DLIST_CHILD_RHAND_CLOSED    DLIST_INDIRECT(0x800f77c4)
 #define DLIST_ADULT_LHAND_CLOSED    DLIST_INDIRECT(0x800f78e8)
+#define DLIST_ADULT_RHAND_CLOSED    DLIST_INDIRECT(0x800f77b8)
 
 static void* Player_CustomLeftHand(u32 handDlist, void* eqData, u32 eqDlist)
 {
@@ -501,6 +503,9 @@ static void Player_OverrideCustomSheath(GameState_Play* play, Actor_Player* this
             else
                 shield = Player_CustomSheathShield(comboGetObject(CUSTOM_OBJECT_ID_EQ_SHEATH_SHIELD_HYLIAN_ADULT), CUSTOM_OBJECT_EQ_SHEATH_SHIELD_HYLIAN_ADULT_0);
             break;
+        case 3:
+            shield = Player_CustomSheathShield(comboGetObject(CUSTOM_OBJECT_ID_EQ_SHEATH_SHIELD_MIRROR), CUSTOM_OBJECT_EQ_SHEATH_SHIELD_MIRROR_0);
+            break;
         }
     }
 
@@ -534,6 +539,12 @@ static void Player_OverrideAdult(GameState_Play* play, Actor_Player* this, int l
         }
     }
 
+    if (limb == PLAYER_LIMB_R_HAND)
+    {
+        if ((this->rightHandType == PLAYER_MODELTYPE_RH_SHIELD) && gSave.equips.equipment.shields == 1)
+            *dlist = Player_CustomRightHand(DLIST_ADULT_RHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_DEKU), CUSTOM_OBJECT_EQ_SHIELD_DEKU_0);
+    }
+
     if (limb == PLAYER_LIMB_SHEATH)
     {
         if (gSave.equips.equipment.shields == 1 || gSave.equips.equipment.swords <= 1)
@@ -545,7 +556,7 @@ static void Player_OverrideChild(GameState_Play* play, Actor_Player* this, int l
 {
     if (limb == PLAYER_LIMB_L_HAND)
     {
-        if ((this->leftHandType == PLAYER_MODELTYPE_LH_SWORD || isPause) && gSave.equips.equipment.swords == 2)
+        if ((this->leftHandType == PLAYER_MODELTYPE_LH_SWORD || this->leftHandType == PLAYER_MODELTYPE_LH_SWORD_2 || isPause) && gSave.equips.equipment.swords == 2)
             *dlist = Player_CustomLeftHand(DLIST_CHILD_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_MASTER_SWORD), CUSTOM_OBJECT_EQ_MASTER_SWORD_0);
         else if ((this->leftHandType == PLAYER_MODELTYPE_LH_BGS || isPause) && gSave.equips.equipment.swords == 3)
         {
@@ -556,6 +567,12 @@ static void Player_OverrideChild(GameState_Play* play, Actor_Player* this, int l
         }
         else if (this->leftHandType == PLAYER_MODELTYPE_LH_HAMMER)
             *dlist = Player_CustomLeftHand(DLIST_CHILD_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_HAMMER), CUSTOM_OBJECT_EQ_HAMMER_0);
+    }
+
+    if (limb == PLAYER_LIMB_R_HAND)
+    {
+        if ((this->rightHandType == PLAYER_MODELTYPE_RH_SHIELD) && gSave.equips.equipment.shields == 3)
+            *dlist = Player_CustomRightHand(DLIST_CHILD_RHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_MIRROR), CUSTOM_OBJECT_EQ_SHIELD_MIRROR_0);
     }
 
     if (limb == PLAYER_LIMB_SHEATH)
