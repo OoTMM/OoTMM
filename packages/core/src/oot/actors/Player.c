@@ -418,6 +418,8 @@ static void* Player_CustomLeftHand(u32 handDlist, void* eqData, u32 eqDlist)
     ((u32*)sGfxCustomLeftHand)[3] = (u32)eqData;
     ((u32*)sGfxCustomLeftHand)[5] = eqDlist;
 
+    osWritebackDCache(sGfxCustomLeftHand, sizeof(sGfxCustomLeftHand));
+
     return sGfxCustomLeftHand;
 }
 
@@ -430,6 +432,8 @@ static void* Player_CustomRightHand(u32 handDlist, void* eqData, u32 eqDlist)
     ((u32*)sGfxCustomRightHand)[3] = (u32)eqData;
     ((u32*)sGfxCustomRightHand)[5] = eqDlist;
 
+    osWritebackDCache(sGfxCustomRightHand, sizeof(sGfxCustomRightHand));
+
     return sGfxCustomRightHand;
 }
 
@@ -441,6 +445,8 @@ static void* Player_CustomSheathShield(void* eqData, u32 eqDlist)
     ((u32*)sGfxCustomSheathShield)[1] = (u32)eqData;
     ((u32*)sGfxCustomSheathShield)[3] = eqDlist;
 
+    osWritebackDCache(sGfxCustomSheathShield, sizeof(sGfxCustomSheathShield));
+
     return sGfxCustomSheathShield;
 }
 
@@ -451,6 +457,8 @@ static void* Player_CustomSheathSword(void* eqData, u32 eqDlist)
 
     ((u32*)sGfxCustomSheathSword)[1] = (u32)eqData;
     ((u32*)sGfxCustomSheathSword)[3] = eqDlist;
+
+    osWritebackDCache(sGfxCustomSheathSword, sizeof(sGfxCustomSheathSword));
 
     return sGfxCustomSheathSword;
 }
@@ -466,6 +474,8 @@ static void* Player_CustomSheath(void* shield, void* sword)
 {
     ((u32*)sGfxCustomSheath)[1] = (u32)dlistOrNothing(shield);
     ((u32*)sGfxCustomSheath)[3] = (u32)dlistOrNothing(sword);
+
+    osWritebackDCache(sGfxCustomSheath, sizeof(sGfxCustomSheath));
 
     return sGfxCustomSheath;
 }
