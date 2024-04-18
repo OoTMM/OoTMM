@@ -419,10 +419,17 @@ static void Player_OverrideChild(GameState_Play* play, Actor_Player* this, int l
 {
     if (limb == PLAYER_LIMB_L_HAND)
     {
-        if ((this->leftHandType == PLAYER_MODELTYPE_LH_SWORD || isPause) && gSave.equips.equipment.swords == EQ_OOT_SWORD_MASTER)
+        if ((this->leftHandType == PLAYER_MODELTYPE_LH_SWORD || isPause) && gSave.equips.equipment.swords == 2)
             *dlist = Player_CustomLeftHand(DLIST_CHILD_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_MASTER_SWORD), CUSTOM_OBJECT_EQ_MASTER_SWORD_0);
+        else if ((this->leftHandType == PLAYER_MODELTYPE_LH_BGS || isPause) && gSave.equips.equipment.swords == 3)
+        {
+            if (gSave.playerData.swordHealth)
+                *dlist = Player_CustomLeftHand(DLIST_CHILD_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_BIGGORON_SWORD), CUSTOM_OBJECT_EQ_BIGGORON_SWORD_0);
+            else
+                *dlist = Player_CustomLeftHand(DLIST_CHILD_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_BIGGORON_SWORD_BROKEN), CUSTOM_OBJECT_EQ_BIGGORON_SWORD_BROKEN_0);
+        }
         else if (this->leftHandType == PLAYER_MODELTYPE_LH_HAMMER)
-            *dlist = Player_CustomRightHand(DLIST_CHILD_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_HAMMER), CUSTOM_OBJECT_EQ_HAMMER_0);
+            *dlist = Player_CustomLeftHand(DLIST_CHILD_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_HAMMER), CUSTOM_OBJECT_EQ_HAMMER_0);
     }
 }
 

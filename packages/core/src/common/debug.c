@@ -589,7 +589,7 @@ static void cheatAllItems(GameState_Play* play)
     SetEventChk(EV_OOT_CHK_MASTER_SWORD_PULLED);
     SetEventChk(EV_OOT_CHK_MASTER_SWORD_CHAMBER);
     gSave.playerData.swordHealth = 8;
-    gSave.isBiggoronSword = 1;
+    //gSave.isBiggoronSword = 1;
 
     //MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF);
     //MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH);
