@@ -382,13 +382,13 @@ static Gfx sGfxEqChildMasterSword[] = {
     gsSPBranchList(CUSTOM_OBJECT_EQ_MASTER_SWORD_0),
 };
 
-static void Player_OverrideChild(GameState_Play* play, Actor_Player* this, int limb, Gfx** dlist)
+static void Player_OverrideChild(GameState_Play* play, Actor_Player* this, int limb, Gfx** dlist, int isPause)
 {
     void* tmp;
 
     if (limb == PLAYER_LIMB_L_HAND)
     {
-        if (this->leftHandType == PLAYER_MODELTYPE_LH_SWORD && this->currentSwordItemId == ITEM_OOT_SWORD_MASTER)
+        if ((this->leftHandType == PLAYER_MODELTYPE_LH_SWORD || isPause) && gSave.equips.equipment.swords == EQ_OOT_SWORD_MASTER)
         {
             /* Child Master Sword */
             *dlist = NULL;
@@ -404,14 +404,28 @@ static void Player_OverrideChild(GameState_Play* play, Actor_Player* this, int l
     }
 }
 
+static void Player_OverrideCustom(GameState_Play* play, Actor_Player* this, int limb, Gfx** dlist, int isPause)
+{
+    if (gSave.age == AGE_CHILD)
+        Player_OverrideChild(play, this, limb, dlist, isPause);
+}
+
 int Player_OverrideLimbDrawGameplayDefaultWrapper(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Player* player)
 {
     /* Forward */
     if (Player_OverrideLimbDrawGameplayDefault(play, limbIndex, dList, pos, rot, player))
         return 0;
 
-    if (gSave.age == AGE_CHILD)
-        Player_OverrideChild(play, player, limbIndex, dList);
+    Player_OverrideCustom(play, player, limbIndex, dList, 0);
+    return 0;
+}
 
+int Player_OverrideLimbDrawPauseWrapper(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Player* player)
+{
+    /* Forward */
+    if (Player_OverrideLimbDrawPause(play, limbIndex, dList, pos, rot, player))
+        return 0;
+
+    Player_OverrideCustom(play, player, limbIndex, dList, 1);
     return 0;
 }
