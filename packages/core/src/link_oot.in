@@ -208,6 +208,8 @@ DrawSimpleOpa = 0x80028048;
 
 _AddRupees = 0x800721cc;
 
+_Player_OverrideLimbDrawGameplayDefault = 0x8007aa94;
+
 SpawnRoomActors = 0x80025488;
 
 gPlayedOcarinaSong = 0x80102b74;

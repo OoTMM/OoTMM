@@ -16,6 +16,7 @@ import { raw } from './raw';
 import { Options } from '../options';
 import { Patchfile } from '../patch-build/patchfile';
 import { grayscale } from '../image';
+import { CustomObjectsBuilder } from './custom-objects-builder';
 
 const FILES_TO_INDEX = {
   oot: arrayToIndexMap(FILES.oot),
@@ -269,7 +270,22 @@ class CustomAssetsBuilder {
   async run() {
     this.monitor.log("Building custom objects");
 
-    /* Extract some objects */
+    /* Build custom objects */
+    const customObjectsBuilder = new CustomObjectsBuilder(this.roms);
+    const customObjects = await customObjectsBuilder.build();
+    for (const co of customObjects) {
+      await this.addCustomObject(co.name, co.data, co.offsets);
+
+      if (!process.env.BROWSER) {
+        const outDir = path.resolve('build', 'custom');
+        const outBasename = co.name.toLowerCase();
+        const outFilename = path.resolve(outDir, `${outBasename}.zobj`);
+        await fs.promises.mkdir(outDir, { recursive: true });
+        await fs.promises.writeFile(outFilename, co.data);
+      }
+    }
+
+    /* Build custom objects (legacy) */
     for (const entry of ENTRIES) {
       await this.addCustomExtractedObject(entry);
     }

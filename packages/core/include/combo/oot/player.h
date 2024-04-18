@@ -4,6 +4,54 @@
 #include <ultra64.h>
 #include <combo/common/actor.h>
 
+#define PLAYER_LIMB_NONE             0x00
+#define PLAYER_LIMB_ROOT             0x01
+#define PLAYER_LIMB_WAIST            0x02
+#define PLAYER_LIMB_LOWER            0x03
+#define PLAYER_LIMB_R_THIGH          0x04
+#define PLAYER_LIMB_R_SHIN           0x05
+#define PLAYER_LIMB_R_FOOT           0x06
+#define PLAYER_LIMB_L_THIGH          0x07
+#define PLAYER_LIMB_L_SHIN           0x08
+#define PLAYER_LIMB_L_FOOT           0x09
+#define PLAYER_LIMB_UPPER            0x0a
+#define PLAYER_LIMB_HEAD             0x0b
+#define PLAYER_LIMB_HAT              0x0c
+#define PLAYER_LIMB_COLLAR           0x0d
+#define PLAYER_LIMB_L_SHOULDER       0x0e
+#define PLAYER_LIMB_L_FOREARM        0x0f
+#define PLAYER_LIMB_L_HAND           0x10
+#define PLAYER_LIMB_R_SHOULDER       0x11
+#define PLAYER_LIMB_R_FOREARM        0x12
+#define PLAYER_LIMB_R_HAND           0x13
+#define PLAYER_LIMB_SHEATH           0x14
+#define PLAYER_LIMB_TORSO            0x15
+#define PLAYER_LIMB_MAX              0x16
+
+#define PLAYER_MODELTYPE_LH_OPEN                0x00
+#define PLAYER_MODELTYPE_LH_CLOSED              0x01
+#define PLAYER_MODELTYPE_LH_SWORD               0x02
+#define PLAYER_MODELTYPE_LH_SWORD_2             0x03
+#define PLAYER_MODELTYPE_LH_BGS                 0x04
+#define PLAYER_MODELTYPE_LH_HAMMER              0x05
+#define PLAYER_MODELTYPE_LH_BOOMERANG           0x06
+#define PLAYER_MODELTYPE_LH_BOTTLE              0x07
+#define PLAYER_MODELTYPE_RH_OPEN                0x08
+#define PLAYER_MODELTYPE_RH_CLOSED              0x09
+#define PLAYER_MODELTYPE_RH_SHIELD              0x0a
+#define PLAYER_MODELTYPE_RH_BOW_SLINGSHOT       0x0b
+#define PLAYER_MODELTYPE_RH_BOW_SLINGSHOT_2     0x0c
+#define PLAYER_MODELTYPE_RH_OCARINA             0x0d
+#define PLAYER_MODELTYPE_RH_OOT                 0x0e
+#define PLAYER_MODELTYPE_RH_HOOKSHOT            0x0f
+#define PLAYER_MODELTYPE_SHEATH_16              0x10
+#define PLAYER_MODELTYPE_SHEATH_17              0x11
+#define PLAYER_MODELTYPE_SHEATH_18              0x12
+#define PLAYER_MODELTYPE_SHEATH_19              0x13
+#define PLAYER_MODELTYPE_WAIST                  0x14
+#define PLAYER_MODELTYPE_MAX                    0x15
+#define PLAYER_MODELTYPE_RH_FF                  0xff
+
 typedef struct PACKED ALIGNED(4) Actor_Player
 {
     Actor           base;

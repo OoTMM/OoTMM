@@ -375,3 +375,43 @@ void Player_AfterSetEquipmentData(GameState_Play* play)
         Player_SetModels(player, Player_ActionToModelGroup(player, player->heldItemAction));
     }
 }
+
+static Gfx sGfxEqChildMasterSword[] = {
+    gsSPDisplayList(0),
+    gsSPSegment(0x0a, 0),
+    gsSPBranchList(CUSTOM_OBJECT_EQ_MASTER_SWORD_0),
+};
+
+static void Player_OverrideChild(GameState_Play* play, Actor_Player* this, int limb, Gfx** dlist)
+{
+    void* tmp;
+
+    if (limb == PLAYER_LIMB_L_HAND)
+    {
+        if (this->leftHandType == PLAYER_MODELTYPE_LH_SWORD && this->currentSwordItemId == ITEM_OOT_SWORD_MASTER)
+        {
+            /* Child Master Sword */
+            *dlist = NULL;
+            tmp = comboGetObject(CUSTOM_OBJECT_ID_EQ_MASTER_SWORD);
+
+            if (tmp)
+            {
+                ((u32*)sGfxEqChildMasterSword)[1] = *(u32*)(0x800f78ec);
+                ((u32*)sGfxEqChildMasterSword)[3] = ((u32)tmp - 0x80000000);
+                *dlist = sGfxEqChildMasterSword;
+            }
+        }
+    }
+}
+
+int Player_OverrideLimbDrawGameplayDefaultWrapper(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Player* player)
+{
+    /* Forward */
+    if (Player_OverrideLimbDrawGameplayDefault(play, limbIndex, dList, pos, rot, player))
+        return 0;
+
+    if (gSave.age == AGE_CHILD)
+        Player_OverrideChild(play, player, limbIndex, dList);
+
+    return 0;
+}
