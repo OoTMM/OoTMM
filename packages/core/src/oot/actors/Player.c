@@ -518,7 +518,6 @@ static void Player_OverrideCustomSheath(GameState_Play* play, Actor_Player* this
             sword = Player_CustomSheathSword(comboGetObject(CUSTOM_OBJECT_ID_EQ_SHEATH_SWORD_OOT_ADULT_FULL), CUSTOM_OBJECT_EQ_SHEATH_SWORD_OOT_ADULT_FULL_0);
         break;
     }
-    //*dlist = Player_CustomSheathShield(comboGetObject(CUSTOM_OBJECT_ID_EQ_SHEATH_SHIELD_DEKU), CUSTOM_OBJECT_EQ_SHEATH_SHIELD_DEKU_0);
 
     *dlist = Player_CustomSheath(shield, sword);
 }
