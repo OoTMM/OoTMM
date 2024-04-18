@@ -52,7 +52,16 @@ export const MM_TIME_SLICES = [
   'NIGHT3_AM_05_00',
 ];
 
-//export type Expr = (state: State) => ExprResult;
+const CONSTRAINT_FLAGS = [
+  'MM_REGION_SWAMP_CURSED',
+  'MM_REGION_SWAMP_CLEARED',
+  'MM_REGION_NORTH_CURSED',
+  'MM_REGION_NORTH_CLEARED',
+  'MM_REGION_OCEAN_CURSED',
+  'MM_REGION_OCEAN_CLEARED',
+  'MM_REGION_VALLEY_CURSED',
+  'MM_REGION_VALLEY_CLEARED',
+];
 
 type RecursiveArray<T> = Array<T | RecursiveArray<T>>;
 
@@ -69,6 +78,7 @@ type ExprRestrictions = {
   };
   mmTime: number;
   mmTime2: number;
+  constraintFlags: number;
 };
 
 export const defaultRestrictions = (): ExprRestrictions => ({
@@ -78,6 +88,7 @@ export const defaultRestrictions = (): ExprRestrictions => ({
   },
   mmTime: 0,
   mmTime2: 0,
+  constraintFlags: 0,
 });
 
 export const maxRestrictions = (): ExprRestrictions => ({
@@ -87,10 +98,11 @@ export const maxRestrictions = (): ExprRestrictions => ({
   },
   mmTime: 0xffffffff,
   mmTime2: 0xffffffff,
+  constraintFlags: 0xffffffff,
 });
 
 export const isDefaultRestrictions = (r: ExprRestrictions): boolean => {
-  return r.oot.day === false && r.oot.night === false && r.mmTime === 0 && r.mmTime2 === 0;
+  return r.oot.day === false && r.oot.night === false && r.mmTime === 0 && r.mmTime2 === 0 && r.constraintFlags === 0;
 };
 
 function isRestrictionImpossible(r: ExprRestrictions): boolean {
@@ -116,6 +128,7 @@ export type AreaData = {
   };
   mmTime: number;
   mmTime2: number;
+  constraintFlags: number;
 };
 
 type State = {
@@ -142,6 +155,7 @@ export const exprRestrictionsAnd = (exprs: ExprResult[]): ExprRestrictions => {
     restrictions.oot.night = restrictions.oot.night || expr.restrictions.oot.night;
     restrictions.mmTime = (restrictions.mmTime | expr.restrictions.mmTime) >>> 0;
     restrictions.mmTime2 = (restrictions.mmTime2 | expr.restrictions.mmTime2) >>> 0;
+    restrictions.constraintFlags = (restrictions.constraintFlags | expr.restrictions.constraintFlags) >>> 0;
   }
 
   return restrictions;
@@ -157,6 +171,7 @@ export const exprRestrictionsOr = (exprs: ExprResult[]): ExprRestrictions => {
     restrictions.oot.night = restrictions.oot.night && expr.restrictions.oot.night;
     restrictions.mmTime = (restrictions.mmTime & expr.restrictions.mmTime) >>> 0;
     restrictions.mmTime2 = (restrictions.mmTime2 & expr.restrictions.mmTime2) >>> 0;
+    restrictions.constraintFlags = (restrictions.constraintFlags & expr.restrictions.constraintFlags) >>> 0;
   }
 
   return restrictions;
@@ -172,7 +187,7 @@ function resolveSpecialCond(settings: Settings, state: State, special: string): 
   }
 
   if (state.ignoreItems) {
-    return { result: true, depItems: [], depEvents: [] };
+    return RESULT_TRUE;
   }
 
   let items = new Set<Item>();
@@ -237,13 +252,16 @@ export abstract class ExprContainer extends Expr {
   }
 }
 
+const RESULT_TRUE: ExprResultTrue = { result: true, depItems: [], depEvents: [] };
+const RESULT_FALSE: ExprResultFalse = { result: false, depItems: [], depEvents: [] };
+
 class ExprTrue extends Expr {
   constructor() {
     super('TRUE');
   }
 
   eval(_state: State): ExprResult {
-    return { result: true, depItems: [], depEvents: [] };
+    return RESULT_TRUE;
   }
 }
 
@@ -253,7 +271,7 @@ class ExprFalse extends Expr {
   }
 
   eval(_state: State): ExprResult {
-    return { result: false, depItems: [], depEvents: [] };
+    return RESULT_FALSE;
   }
 }
 
@@ -282,7 +300,7 @@ export class ExprAnd extends ExprContainer {
     }
 
     if (isDefaultRestrictions(restrictions)) {
-      return { result: true, depItems: [], depEvents: [] };
+      return RESULT_TRUE;
     } else {
       return { result: true, depItems: results.map((x) => x.depItems), depEvents: results.map((x) => x.depEvents), restrictions };
     }
@@ -305,7 +323,7 @@ export class ExprOr extends ExprContainer {
       if (r.result) {
         result = true;
         if (!r.restrictions) {
-          return { result: true, depItems: [], depEvents: [] };
+          return RESULT_TRUE;
         }
       }
     }
@@ -313,7 +331,7 @@ export class ExprOr extends ExprContainer {
     if (result) {
       const restrictions = exprRestrictionsOr(results);
       if (isDefaultRestrictions(restrictions)) {
-        return { result: true, depItems: [], depEvents: [] };
+        return RESULT_TRUE;
       } else {
         return { result: true, depItems: results.map((x) => x.depItems), depEvents: results.map((x) => x.depEvents), restrictions };
       }
@@ -333,8 +351,7 @@ export class ExprAge extends Expr {
   }
 
   eval(state: State): ExprResult {
-    const result = state.age === this.age;
-    return { result, depItems: [], depEvents: [] };
+    return state.age === this.age ? RESULT_TRUE : RESULT_FALSE;
   }
 }
 
@@ -492,6 +509,38 @@ class ExprPrice extends Expr {
     const price = state.world.prices[this.slot];
     const result = price <= this.max;
     return { result, depItems: [], depEvents: [] };
+  }
+}
+
+class ExprFlagSet extends Expr {
+  readonly result: ExprResult;
+
+  constructor(flag: number) {
+    super(`FLAG_SET(${flag})`);
+    this.result = { ...RESULT_TRUE };
+    this.result.restrictions = defaultRestrictions();
+    this.result.restrictions.constraintFlags = (1 << flag) >>> 0;
+  }
+
+  eval(_state: State): ExprResult {
+    return this.result;
+  }
+}
+
+class ExprFlagCheckUnset extends Expr {
+  readonly flag: number;
+
+  constructor(flag: number) {
+    super(`FLAG_CHECK(${flag})`);
+    this.flag = (1 << flag) >>> 0;
+  }
+
+  eval(state: State) {
+    if (state.areaData.constraintFlags & this.flag) {
+      return RESULT_FALSE;
+    } else {
+      return RESULT_TRUE;
+    }
   }
 }
 
@@ -750,4 +799,20 @@ export const exprFish = (ageAndType: string, minPounds: number, maxPounds: numbe
 
   const exprs = items.map((item) => exprHas(item, 1));
   return exprOr(exprs);
+};
+
+export const exprFlagSet = (flag: string): Expr => {
+  const index = CONSTRAINT_FLAGS.indexOf(flag);
+  if (index === -1) {
+    throw new Error(`Unknown constraint flag: ${flag}`);
+  }
+  return exprMemo(new ExprFlagSet(index));
+};
+
+export const exprFlagCheckUnset = (flag: string): Expr => {
+  const index = CONSTRAINT_FLAGS.indexOf(flag);
+  if (index === -1) {
+    throw new Error(`Unknown constraint flag: ${flag}`);
+  }
+  return exprMemo(new ExprFlagCheckUnset(index));
 };

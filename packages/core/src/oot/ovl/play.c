@@ -7,134 +7,6 @@
 extern void* gMmMag;
 GameState_Play* gPlay;
 
-static void debugCheat(GameState_Play* play)
-{
-#if defined(DEBUG)
-    if (!gSaveContext.gameMode && play->gs.input[0].current.buttons & L_TRIG)
-    {
-        /*MM_SET_EVENT_WEEK(EV_MM_WEEK_DRANK_CHATEAU_ROMANI); */
-        SetEventChk(EV_OOT_CHK_MASTER_SWORD_PULLED);
-        SetEventChk(EV_OOT_CHK_MASTER_SWORD_CHAMBER);
-        gSave.playerData.swordHealth = 8;
-        gSave.isBiggoronSword = 1;
-
-        //MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF);
-        //MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH);
-        //MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_GB);
-        //MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_ST);
-
-        /*gSave.inventory.quest.gerudoCard = 1; */
-        gSave.inventory.dungeonKeys[SCE_OOT_TEMPLE_FIRE] = 8;
-        gSave.inventory.dungeonKeys[SCE_OOT_TREASURE_SHOP] = 6;
-        gSave.inventory.items[ITS_OOT_STICKS] = ITEM_OOT_STICK;
-        gSave.inventory.items[ITS_OOT_NUTS] = ITEM_OOT_NUT;
-        gSave.inventory.items[ITS_OOT_BOMBS] = ITEM_OOT_BOMB;
-        //gSave.inventory.items[ITS_OOT_BOW] = ITEM_OOT_BOW;
-        gSave.inventory.items[ITS_OOT_ARROW_FIRE] = ITEM_OOT_ARROW_FIRE;
-        gSave.inventory.items[ITS_OOT_ARROW_ICE] = ITEM_OOT_ARROW_ICE;
-        gSave.inventory.items[ITS_OOT_ARROW_LIGHT] = ITEM_OOT_ARROW_LIGHT;
-        gSave.inventory.items[ITS_OOT_SLINGSHOT] = ITEM_OOT_SLINGSHOT;
-        gSave.inventory.items[ITS_OOT_OCARINA] = ITEM_OOT_OCARINA_TIME;
-        gSave.inventory.items[ITS_OOT_BOOMERANG] = ITEM_OOT_BOOMERANG;
-        gSave.inventory.items[ITS_OOT_BOTTLE] = ITEM_OOT_RUTO_LETTER;
-        gSave.inventory.items[ITS_OOT_BOTTLE2] = ITEM_OOT_FISH;
-        gSave.inventory.items[ITS_OOT_BOTTLE3] = ITEM_OOT_BIG_POE;
-        gSave.inventory.items[ITS_OOT_BOTTLE4] = ITEM_OOT_BIG_POE;
-        gSave.inventory.items[ITS_OOT_BOMBCHU] = ITEM_OOT_BOMBCHU_10;
-        gSave.inventory.items[ITS_OOT_TRADE_CHILD] = ITEM_OOT_ZELDA_LETTER;
-        gSave.inventory.items[ITS_OOT_HAMMER] = ITEM_OOT_HAMMER;
-        gSave.inventory.items[ITS_OOT_HOOKSHOT] = ITEM_OOT_LONGSHOT;
-        gSave.inventory.items[ITS_OOT_LENS] = ITEM_OOT_LENS;
-        gSave.inventory.items[ITS_OOT_SPELL_WIND] = ITEM_OOT_SPELL_WIND;
-        gSave.inventory.items[ITS_OOT_SPELL_FIRE] = ITEM_OOT_SPELL_FIRE;
-        gSave.inventory.items[ITS_OOT_SPELL_LOVE] = ITEM_OOT_SPELL_LOVE;
-
-        gSave.inventory.equipment.swords = 0x7;
-        gSave.inventory.equipment.shields = 0x7;
-        gSave.inventory.equipment.tunics = 0x7;
-        gSave.inventory.equipment.boots = 0x7;
-
-        gSave.inventory.upgrades.dekuStick = 3;
-        gSave.inventory.upgrades.dekuNut = 3;
-        /*gSave.inventory.upgrades.bulletBag = 3; */
-        gSave.inventory.upgrades.bombBag = 3;
-        //gSave.inventory.upgrades.quiver = 3;
-        gSave.inventory.upgrades.dive = 2;
-        /*gSave.inventory.upgrades.wallet = 3; */
-        gSave.inventory.upgrades.strength = 3;
-        /*gOotExtraFlags.bottomlessWallet = 1; */
-        /*gOotMaxRupees[3] = 9999; */
-        /*gWalletDigits[3] = 4; */
-
-        gSave.inventory.ammo[ITS_OOT_STICKS] = 10;
-        gSave.inventory.ammo[ITS_OOT_SLINGSHOT] = 50;
-        gSave.inventory.ammo[ITS_OOT_NUTS] = 40;
-        gSave.inventory.ammo[ITS_OOT_BOMBS] = 40;
-        //gSave.inventory.ammo[ITS_OOT_BOW] = 50;
-        gSave.inventory.ammo[ITS_OOT_BOMBCHU] = 50;
-        gSave.inventory.quest.songZelda = 1;
-        gSave.inventory.quest.songSaria = 1;
-        gSave.inventory.quest.songTime = 1;
-        gSave.inventory.quest.songSun = 1;
-        gSave.inventory.quest.songEpona = 1;
-        gSave.inventory.quest.songStorms = 1;
-        gSave.inventory.quest.songTpLight = 1;
-        gSave.inventory.quest.songTpShadow = 1;
-        gSave.inventory.quest.songTpWater = 1;
-        gSave.inventory.quest.songTpFire = 1;
-        gSave.inventory.quest.songTpForest = 1;
-        gSave.inventory.quest.songTpSpirit = 1;
-
-        gSave.inventory.quest.stoneEmerald = 1;
-        gSave.inventory.quest.stoneRuby = 0;
-        gSave.inventory.quest.stoneSapphire = 0;
-
-        gSave.playerData.magicUpgrade = 1;
-        gSave.playerData.magicUpgrade2 = 1;
-        gOotSave.playerData.magicSize = 0;
-        gSaveContext.magicFillTarget = 0x60;
-
-        gSave.inventory.dungeonKeys[SCE_OOT_TEMPLE_FOREST] = 9;
-        gSave.inventory.dungeonKeys[SCE_OOT_INSIDE_GANON_CASTLE] = 9;
-
-        gSave.inventory.quest.medallionShadow = 1;
-        gSave.inventory.quest.medallionSpirit = 1;
-        gSave.inventory.quest.medallionForest = 1;
-        gSave.inventory.quest.medallionFire = 1;
-        gSave.inventory.quest.medallionWater = 1;
-        gSave.inventory.quest.medallionLight = 1;
-
-        gSave.inventory.quest.stoneRuby = 1;
-
-        gSave.playerData.health = gSave.playerData.healthMax = 20 * 0x10;
-
-        gSave.playerData.rupees = 500;
-
-        gOotExtraTrade.child = 0xffff;
-        gOotExtraTrade.adult = 0xffff;
-        gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_EYEBALL_FROG);
-        gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_EYE_DROPS);
-        gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_CLAIM_CHECK);
-        gSave.inventory.items[ITS_OOT_TRADE_ADULT] = ITEM_OOT_POCKET_EGG;
-        gSave.inventory.items[ITS_OOT_TRADE_CHILD] = ITEM_OOT_MASK_STONE;
-
-        SetEventChk(EV_OOT_CHK_EPONA);
-
-        gSave.equips.buttonItems[1] = ITEM_OOT_MASK_STONE;
-        gSave.equips.cButtonSlots[0] = ITS_OOT_TRADE_CHILD;
-
-        gCustomSave.hasElegy = 1;
-
-
-#if defined(DEBUG_AGE)
-        gSave.age = DEBUG_AGE;
-#endif
-
-        /*BITMAP16_SET(gSave.eventsMisc, EV_OOT_INF_KING_ZORA_THAWED); */
-    }
-#endif
-}
-
 static int isRainbowBridgeOpen(void)
 {
     if (comboConfig(CFG_OOT_BRIDGE_CUSTOM) && !comboSpecialCond(SPECIAL_BRIDGE))
@@ -284,6 +156,7 @@ static void endGame(void)
         gSave.cutscene = tmpCutscene;
         gSave.entrance = tmpEntrance;
         gSave.sceneId = tmpSceneId;
+        g.isCredits = 1;
     }
 }
 
@@ -394,7 +267,7 @@ static const GrottoExit kGrottoExits[] = {
     { ENTR_OOT_FIELD_FROM_MARKET_ENTRANCE,       0, { -1425,    0,   810 } },
 
     /* Fairy Fountains */
-    { ENTR_OOT_SACRED_MEADOW,               0,  {    45,    0,   220 } },
+    { ENTR_OOT_SACRED_FOREST_MEADOW,        0,  {    45,    0,   220 } },
     { ENTR_OOT_FIELD_FROM_MARKET_ENTRANCE,  0,  { -4450, -300,  -425 } },
     { ENTR_OOT_ZORA_RIVER_FROM_FIELD,       0,  {   670,  570,  -365 } },
     { ENTR_OOT_ZORA_DOMAIN,                 1,  {  -860,   14,  -470 } },
@@ -409,14 +282,14 @@ static const GrottoExit kGrottoExits[] = {
     /* Triple scrubs */
     { ENTR_OOT_LON_LON_RANCH_FROM_HOUSE,                0, {  1800,    0,  1500 } },
     { ENTR_OOT_GORON_CITY,                              3, {  1100,  580, -1190 } },
-    { ENTR_OOT_DEATH_MOUNTAIN_CRATER_FROM_GORON_CITY,   1, { -1699,  722,  -472 } },
+    { ENTR_OOT_CRATER_FROM_GORON_CITY,                  1, { -1699,  722,  -472 } },
     { ENTR_OOT_WARP_SONG_LAKE,                          0, { -3040, -1033, 6075 } },
 
     /* Other Grottos */
     { ENTR_OOT_LOST_WOODS_FROM_KOKIRI_FOREST,   8, {   670,    0, -2520 } }, /* OOT_GROTTO_EXIT_SCRUB_UPGRADE */
     { ENTR_OOT_FIELD_FROM_LAKE_HYLIA,           0, { -4990, -700, 13820 } }, /* OOT_GROTTO_EXIT_SCRUB_HEART_PIECE */
     { ENTR_OOT_LOST_WOODS_FROM_MEADOW,          6, {    80,  -20, -1600 } }, /* OOT_GROTTO_EXIT_DEKU_THEATER */
-    { ENTR_OOT_SACRED_MEADOW,                   0, {  -195,    0,  1900 } }, /* OOT_GROTTO_EXIT_WOLFOS */
+    { ENTR_OOT_SACRED_FOREST_MEADOW,            0, {  -195,    0,  1900 } }, /* OOT_GROTTO_EXIT_WOLFOS */
     { ENTR_OOT_FIELD_FROM_MARKET_ENTRANCE,      0, { -4945, -300,  2835 } }, /* OOT_GROTTO_EXIT_TEKTITE */
     { ENTR_OOT_FIELD_FROM_GERUDO_VALLEY,        0, { -7870, -300,  6920 } }, /* OOT_GROTTO_EXIT_FIELD_COW */
     { ENTR_OOT_FIELD_FROM_KAKARIKO,             0, {  2060,   20,  -170 } }, /* OOT_GROTTO_EXIT_FIELD_TREE */
@@ -504,6 +377,34 @@ static void preInitTitleScreen(void)
         /* Set file and load */
         gSaveContext.fileIndex = gComboCtx.saveIndex;
         Sram_OpenSave(NULL);
+        if (gComboCtx.isFwSpawn)
+        {
+            gSaveContext.respawnFlag = 3;
+            gComboCtx.isFwSpawn = 0;
+
+            OotFaroreWind* fw = &gSave.fw;
+
+            if (fw->set)
+            {
+                gSaveContext.respawn[RESPAWN_MODE_TOP].data = 0x28;
+                gSaveContext.respawn[RESPAWN_MODE_TOP].pos.x = fw->pos.x;
+                gSaveContext.respawn[RESPAWN_MODE_TOP].pos.y = fw->pos.y;
+                gSaveContext.respawn[RESPAWN_MODE_TOP].pos.z = fw->pos.z;
+                gSaveContext.respawn[RESPAWN_MODE_TOP].yaw = fw->yaw;
+                gSaveContext.respawn[RESPAWN_MODE_TOP].playerParams = fw->playerParams;
+                gSaveContext.respawn[RESPAWN_MODE_TOP].entranceIndex = fw->entranceIndex;
+                gSaveContext.respawn[RESPAWN_MODE_TOP].roomIndex = fw->roomIndex;
+                gSaveContext.respawn[RESPAWN_MODE_TOP].tempSwitchFlags = fw->tempSwitchFlags;
+                gSaveContext.respawn[RESPAWN_MODE_TOP].tempCollectFlags = fw->tempCollectFlags;
+            }
+            else
+            {
+                gSaveContext.respawn[RESPAWN_MODE_TOP].data = 0;
+                gSaveContext.respawn[RESPAWN_MODE_TOP].pos.x = 0.0f;
+                gSaveContext.respawn[RESPAWN_MODE_TOP].pos.y = 0.0f;
+                gSaveContext.respawn[RESPAWN_MODE_TOP].pos.z = 0.0f;
+            }
+        }
         gSave.cutscene = 0;
 
         /* Set the entrance */
@@ -523,6 +424,41 @@ static void preInitTitleScreen(void)
     }
 }
 
+static void playAdjustEntrance(GameState_Play* play)
+{
+    /* Handle custom entrance IDs */
+    switch (gSave.entrance)
+    {
+    case ENTR_OOT_SPAWN_ADULT:
+        gSave.entrance = ENTR_OOT_WARP_SONG_TEMPLE;
+        break;
+    case ENTR_OOT_OUTSIDE_GANON_FROM_FAIRY:
+        gSave.entrance = ENTR_OOT_HYRULE_CASTLE_FROM_FAIRY;
+        break;
+    case ENTR_OOT_LOST_WOODS_FROM_LOST_WOODS_NORTH:
+        gSave.entrance = ENTR_OOT_LOST_WOODS_FROM_KOKIRI_FOREST;
+        break;
+    case ENTR_OOT_CASTLE_STEALTH:
+        if (GetEventChk(EV_OOT_CHK_ZELDA_LETTER))
+            gSave.entrance = ENTR_OOT_CASTLE_CAUGHT;
+        else
+            gSave.entrance = ENTR_OOT_CASTLE_COURTYARD;
+        break;
+    case ENTR_OOT_CASTLE_STEALTH_FROM_COURTYARD:
+        gSave.entrance = ENTR_OOT_GANON_CASTLE_EXTERIOR_FROM_CASTLE; /* Stealth exit as child */
+        break;
+    case ENTR_OOT_SAGES_CHAMBER_END:
+        endGame();
+        break;
+    case ENTR_OOT_BOSS_GANON2:
+        if (!comboHasSoulOot(GI_OOT_SOUL_NPC_ZELDA))
+            gSave.entrance = ENTR_OOT_GANON_TOWER;
+        break;
+    }
+
+    applyCustomEntrance(&gSave.entrance);
+}
+
 void hookPlay_Init(GameState_Play* play)
 {
     /* Pre-init */
@@ -540,49 +476,15 @@ void hookPlay_Init(GameState_Play* play)
     /* Register play */
     gPlay = play;
 
-    /* Handle custom entrance IDs */
-    switch (gSave.entrance)
-    {
-    case ENTR_OOT_OUTSIDE_GANON_FROM_FAIRY:
-        gSave.entrance = ENTR_OOT_HYRULE_CASTLE_FROM_FAIRY;
-        break;
-    case ENTR_OOT_LOST_WOODS_FROM_LOST_WOODS_NORTH:
-        gSave.entrance = ENTR_OOT_LOST_WOODS_FROM_KOKIRI_FOREST;
-        break;
-    }
-
-    if (gSave.entrance == ENTR_OOT_CASTLE_STEALTH)
-    {
-        /* Entering courtyard */
-        if (GetEventChk(EV_OOT_CHK_ZELDA_LETTER))
-            gSave.entrance = ENTR_OOT_CASTLE_CAUGHT;
-        else
-            gSave.entrance = ENTR_OOT_CASTLE_COURTYARD;
-    }
-    else if (gSave.entrance == ENTR_OOT_CASTLE_STEALTH_FROM_COURTYARD)
-    {
-        gSave.entrance = ENTR_OOT_CASTLE_FROM_STEALTH;
-    }
-    else if (gSave.entrance == ENTR_OOT_SAGES_CHAMBER_END)
-    {
-        endGame();
-    }
-    else if (gSave.entrance == ENTR_OOT_BOSS_GANON2 && !comboHasSoulOot(GI_OOT_SOUL_NPC_ZELDA))
-    {
-        gSave.entrance = ENTR_OOT_GANON_TOWER;
-    }
+    /* Adjust entrance */
+    playAdjustEntrance(play);
 
     comboCacheClear();
     comboObjectsReset();
     comboExObjectsReset();
-    debugCheat(play);
     eventFixes(play);
 
     Play_Init(play);
-
-    /* Epona fix */
-    if (!IsSceneValidEpona(play->sceneId))
-        comboClearEpona(play);
 
     gLastEntrance = gSave.entrance;
     g.inGrotto = (play->sceneId == SCE_OOT_GROTTOS || play->sceneId == SCE_OOT_FAIRY_FOUNTAIN);
@@ -617,6 +519,10 @@ void hookPlay_Init(GameState_Play* play)
 
 void Play_UpdateWrapper(GameState_Play* play)
 {
+    /* Auto-press A during credits */
+    if (g.isCredits)
+        play->gs.input[0].pressed.buttons = (play->gs.frameCount & 1) ? A_BUTTON : 0;
+
     comboMenuTick();
     Debug_Input();
     comboCacheGarbageCollect();
@@ -634,25 +540,9 @@ static void Play_LoadKaleidoScopeHook(void* unk)
 
 PATCH_CALL(0x8009a06c, Play_LoadKaleidoScopeHook);
 
-void comboClearEpona(GameState_Play* play)
+NORETURN static void Play_GameSwitch(GameState_Play* play, u32 entrance)
 {
-    if (AREG(6) != 0)
-    {
-        /* Link is on Epona, needs to dismount */
-        AREG(6) = 0;
-
-        /* Reset the TempB */
-        gSave.equips.buttonItems[0] = gSaveContext.buttonStatus[0];
-        gSaveContext.buttonStatus[0] = ITEM_NONE;
-
-        /* Reload the B button icon */
-        Interface_LoadItemIconImpl(play, 0);
-    }
-}
-
-NORETURN static void Play_GameSwitch(GameState_Play* play, s32 entrance)
-{
-    comboClearEpona(play);
+    Horse_ForceUnmount(play);
     comboGameSwitch(play, entrance);
 }
 
@@ -738,8 +628,16 @@ void Play_TransitionDone(GameState_Play* play)
 
     /* Resolve extended entrance */
     entrance = play->nextEntranceIndex;
-    if (entrance == ENTR_EXTENDED)
+    switch (entrance)
+    {
+    case ENTR_EXTENDED:
         entrance = g.nextEntrance;
+        break;
+    case ENTR_FW_CROSS:
+        entrance = gSharedCustomSave.mm.fw[gSave.age].entrance | MASK_FOREIGN_ENTRANCE;
+        gComboCtx.isFwSpawn = 1;
+        break;
+    }
 
     if (entrance == ENTR_OOT_INTERNAL_EXIT_GROTTO)
     {

@@ -29,13 +29,13 @@ static void quickBuyItem(GameState_Play* play, Actor_EnGirlA* girlA)
 
     EnGirlA_ItemQuery(&q, girlA);
     comboAddItemEx(play, &q, 1);
-    AddRupees(-girlA->price);
+    AddRupeesRaw(-girlA->price);
     comboShopAfterBuy(play, girlA);
 }
 
 static void postBuyItem(GameState_Play* play, Actor_EnGirlA* girlA)
 {
-    AddRupees(-girlA->price);
+    AddRupeesRaw(-girlA->price);
 }
 
 void comboShopUpdateItem(GameState_Play* play, Actor_EnGirlA* girlA)

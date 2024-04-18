@@ -18,3 +18,14 @@ PATCH_END
 PATCH_START 0x80b90118
   li a2,GI_MM_MASK_ROMANI
 PATCH_END
+
+/* Use our handler */
+PATCH_START 0x80b9059c
+  lui    t6,%HI(EnMaYto_WarpWrapper)
+  addiu  t6,%LO(EnMaYto_WarpWrapper)
+PATCH_END
+
+PATCH_START 0x80b91a64
+.int 0
+.int 0
+PATCH_END

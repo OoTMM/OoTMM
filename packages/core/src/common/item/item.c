@@ -2,6 +2,7 @@
 #include <combo/item.h>
 #include <combo/net.h>
 #include <combo/dma.h>
+#include <combo/entrance.h>
 
 #if defined(GAME_OOT)
 u16 gMmMaxRupees[] = { 0, 200, 500, 999 };
@@ -50,6 +51,39 @@ void comboSyncItems(void)
         gForeignSave.playerData.healthMax = gSave.playerData.healthMax;
         gForeignSave.playerData.health = gSave.playerData.health;
         gForeignSave.inventory.quest.heartPieces = gSave.inventory.quest.heartPieces;
+    }
+
+    if (comboConfig(CFG_CROSS_GAME_FW))
+    {
+#if defined(GAME_MM)
+        RespawnData* fw = &gCustomSave.fw[gOotSave.age];
+        OotFaroreWind* foreignFw = &gForeignSave.fw;
+
+        if (fw->data <= 0 || fw->entrance != ENTR_FW_CROSS)
+        {
+            foreignFw->set = 0;
+        }
+
+        if (fw->data > 0 && foreignFw->set <= 0)
+        {
+            foreignFw->set = 1;
+            foreignFw->entranceIndex = ENTR_FW_CROSS;
+        }
+#else
+        RespawnData* foreignFw = &gSharedCustomSave.mm.fw[gSave.age];
+        OotFaroreWind* fw = &gSave.fw;
+
+        if (fw->set <= 0 || fw->entranceIndex != ENTR_FW_CROSS)
+        {
+            foreignFw->data = 0;
+        }
+
+        if (fw->set > 0 && foreignFw->data <= 0)
+        {
+            foreignFw->data = 1;
+            foreignFw->entrance = ENTR_FW_CROSS;
+        }
+#endif
     }
 }
 

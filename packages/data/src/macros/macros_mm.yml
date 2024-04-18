@@ -38,7 +38,18 @@
 "midnight": "between(NIGHT1_AM_12_00, DAY2_AM_06_00) || between(NIGHT2_AM_12_00, DAY3_AM_06_00) || after(NIGHT3_AM_12_00)"
 
 # Region State
-"is_spring": "event(BOSS_SNOWHEAD)"
+"is_winter": "flag_set(MM_REGION_NORTH_CURSED) && flag_check_unset(MM_REGION_NORTH_CLEARED)"
+"is_spring": "flag_set(MM_REGION_NORTH_CLEARED) && flag_check_unset(MM_REGION_NORTH_CURSED) && event(BOSS_SNOWHEAD)"
+"is_spring_or_winter": "flag_check_unset(MM_REGION_NORTH_CLEARED) && flag_check_unset(MM_REGION_NORTH_CURSED)" # Used for hot water in edge-cases
+
+"is_swamp_poisoned": "flag_set(MM_REGION_SWAMP_CURSED) && flag_check_unset(MM_REGION_SWAMP_CLEARED)"
+"is_swamp_cleared": "flag_set(MM_REGION_SWAMP_CLEARED) && flag_check_unset(MM_REGION_SWAMP_CURSED) && event(BOSS_WOODFALL)"
+
+"is_ocean_cursed": "flag_set(MM_REGION_OCEAN_CURSED) && flag_check_unset(MM_REGION_OCEAN_CLEARED)"
+"is_ocean_cleared": "flag_set(MM_REGION_OCEAN_CLEARED) && flag_check_unset(MM_REGION_OCEAN_CURSED) && event(BOSS_GREAT_BAY)"
+
+"is_valley_cursed": "flag_set(MM_REGION_VALLEY_CURSED) && flag_check_unset(MM_REGION_VALLEY_CLEARED)"
+"is_valley_cleared": "flag_set(MM_REGION_VALLEY_CLEARED) && flag_check_unset(MM_REGION_VALLEY_CURSED) && event(BOSS_STONE_TOWER)"
 
 # Age
 "is_child": "!setting(crossAge) || age(child)"
@@ -164,8 +175,8 @@
 "can_hookshot_short": "can_hookshot_n(1)"
 "can_hookshot": "cond(setting(shortHookshotMm), can_hookshot_n(2), can_hookshot_n(1))"
 "trick_keg_explosives": "can_use_keg && trick(MM_KEG_EXPLOSIVES)"
-"trick_sht_fireless": "((has_hot_water_distance && has(OWL_SNOWHEAD)) || has_hot_water_er_spring || has_hot_water_farore) && trick(MM_SHT_FIRELESS)"
-"trick_sht_fireless_er": "(has_hot_water_er_spring || has_hot_water_farore) && trick(MM_SHT_FIRELESS)"
+"trick_sht_fireless": "((has_hot_water_distance && has(OWL_SNOWHEAD)) || has_hot_water_er || has_hot_water_farore) && trick(MM_SHT_FIRELESS)"
+"trick_sht_fireless_er": "(has_hot_water_er || has_hot_water_farore) && trick(MM_SHT_FIRELESS)"
 "can_reset_time": "setting(moonCrash, cycle) || can_play_time || (event(MAJORA) && trick(MM_MAJORA_LOGIC) && !is_goal_triforce)"
 "can_reset_time_dungeon": "cond(setting(erMoon), (((trick(MM_MAJORA_LOGIC) && event(MAJORA) && !is_goal_triforce) || setting(moonCrash, cycle)) && (before(NIGHT3_AM_12_00) || can_use_farore || setting(autoInvert, always))) || can_play_time, can_reset_time)"
 "can_reset_time_on_moon": "can_play_time || (event(MAJORA) && trick(MM_MAJORA_LOGIC) && !is_goal_triforce)"
@@ -187,14 +198,22 @@
 "can_pass_gibdo": "has(MASK_GIBDO) && soul_redead_gibdo"
 "can_get_gossip_fairy": "can_play_healing || can_play_epona"
 "can_jumpslash": "has_weapon || has_sticks || has_mask_zora"
-"can_enter_zora_door_before_gb_clear": "has_mask_zora || (short_hook_anywhere && trick(MM_ZORA_HALL_DOORS))"
-"woodfall_raised": "event(OPEN_WOODFALL_TEMPLE) || setting(openDungeonsMm, WF) || ((setting(clearStateDungeonsMm, WF) || setting(clearStateDungeonsMm, both)) && event(CLEAN_SWAMP))"
-"blizzard_stopped": "event(OPEN_SNOWHEAD_TEMPLE) || setting(openDungeonsMm, SH) || event(BOSS_SNOWHEAD)"
-"turtle_woken": "(can_play_zora && has_mask_zora) || setting(openDungeonsMm, GB) || ((setting(clearStateDungeonsMm, GB) || setting(clearStateDungeonsMm, both)) && event(BOSS_GREAT_BAY))"
+"can_enter_zora_door": "has_mask_zora || is_ocean_cleared || (short_hook_anywhere && trick(MM_ZORA_HALL_DOORS))"
+"woodfall_raised": "event(OPEN_WOODFALL_TEMPLE) || setting(openDungeonsMm, WF) || ((setting(clearStateDungeonsMm, WF) || setting(clearStateDungeonsMm, both)) && is_swamp_cleared)"
+"blizzard_stopped": "event(OPEN_SNOWHEAD_TEMPLE) || setting(openDungeonsMm, SH) || is_spring"
+"turtle_woken": "(can_play_zora && has_mask_zora) || setting(openDungeonsMm, GB) || ((setting(clearStateDungeonsMm, GB) || setting(clearStateDungeonsMm, both)) && is_ocean_cleared)"
 "can_kill_freezard_short_range": "can_fight || can_use_light_arrows || can_use_fire_short_range || has_explosives || can_hookshot_short"
 
 "underwater_walking": "has_mask_zora || (has_tunic_zora && has_iron_boots)"
 "underwater_walking_strict": "has_mask_zora || (has_tunic_zora_strict && has_iron_boots)"
+
+# Hot water
+"has_hot_water_mtn": "has_bottle && (event(HOT_WATER_NORTH) || (is_spring && event(HOT_WATER_NORTH_SPRING)) || (is_winter && event(HOT_WATER_NORTH_WINTER)))"
+"has_hot_water_well": "has_bottle && (event(WELL_HOT_WATER) || (is_spring && event(WELL_HOT_WATER_SPRING)) || (is_winter && event(WELL_HOT_WATER_WINTER)))"
+"has_hot_water_distance": "(can_play_soaring || can_use_farore) && (has_hot_water_mtn || has_hot_water_well)"
+"has_hot_water_er": "er_enabled && (has_hot_water_mtn || has_hot_water_well)"
+"has_hot_water_farore": "can_use_farore && (has_hot_water_mtn || has_hot_water_well)"
+
 
 # Bottles
 "has_bottle": "has(BOTTLE_EMPTY) || has(BOTTLE_POTION_RED) || has(BOTTLE_POTION_GREEN) || has(BOTTLE_POTION_BLUE) || has(BOTTLE_MILK) || event(GOLD_DUST_USED) || has(BOTTLE_CHATEAU) || has(BOTTLE_FAIRY) || has(BOTTLE_POE) || has(BOTTLE_BIG_POE)"
@@ -207,14 +226,6 @@
 "has_all_zora_eggs": "has_bottle && event(ZORA_EGGS_HOOKSHOT_ROOM) && event(ZORA_EGGS_BARREL_MAZE) && event(ZORA_EGGS_LONE_GUARD) && event(ZORA_EGGS_TREASURE_ROOM) && event(ZORA_EGGS_PINNACLE_ROCK)"
 "has_chateau": "has_bottle && (renewable(CHATEAU) || renewable(BOTTLE_CHATEAU))"
 "has_big_poe": "has_bottle && (event(WELL_BIG_POE) || event(DAMPE_BIG_POE) || renewable(BOTTLE_BIG_POE) || renewable(BIG_POE))"
-"has_hot_water_mtn": "has_bottle && event(GORON_GRAVEYARD_HOT_WATER)"
-"has_hot_water_mtn_spring": "has_bottle && (event(GORON_GRAVEYARD_HOT_WATER) || event(TWIN_ISLANDS_HOT_WATER))" # Temporary hack until we have something better
-"has_hot_water_well": "has_bottle && event(WELL_HOT_WATER)"
-"has_hot_water_distance": "(can_play_soaring || can_use_farore) && (has_hot_water_mtn || has_hot_water_well)"
-"has_hot_water_distance_spring": "(can_play_soaring || can_use_farore) && (has_hot_water_mtn_spring || has_hot_water_well)"
-"has_hot_water_er": "er_enabled && (has_hot_water_mtn || has_hot_water_well)"
-"has_hot_water_er_spring": "er_enabled && (has_hot_water_mtn_spring || has_hot_water_well)"
-"has_hot_water_farore": "can_use_farore && (has_hot_water_mtn_spring || has_hot_water_well)"
 "has_bugs": "has_bottle && event(BUGS)"
 "has_fish": "has_bottle && event(FISH)"
 "has_water": "has_bottle && event(WATER)"
@@ -247,7 +258,7 @@
 "has_mask_zora": "has(MASK_ZORA) || has(SHARED_MASK_ZORA)"
 "has_mask_goron": "has(MASK_GORON) || has(SHARED_MASK_GORON)"
 
-"er_enabled": "setting(erMajorDungeons) || setting(erMinorDungeons) || setting(erSpiderHouses) || setting(erGanonCastle) || setting(erGanonTower) || setting(erBeneathWell) || setting(erPirateFortress) || setting(erSecretShrine) || setting(erIkanaCastle) || setting(erMoon) || setting(erIndoorsMajor) || setting(erIndoorsExtra) || !setting(erRegions, none) || !setting(erBoss, none) || !setting(erWarps, none) || setting(erOneWaysMajor) || setting(erOneWaysIkana) || setting(erOneWaysSongs) || setting(erOneWaysStatues) || setting(erOneWaysOwls) || !setting(erGrottos, none) || !setting(erWallmasters, none)"
+"er_enabled": "setting(erMajorDungeons) || setting(erMinorDungeons) || setting(erSpiderHouses) || setting(erGanonCastle) || setting(erGanonTower) || setting(erBeneathWell) || setting(erPirateFortress) || setting(erSecretShrine) || setting(erIkanaCastle) || setting(erMoon) || setting(erIndoorsMajor) || setting(erIndoorsExtra) || !setting(erRegions, none) || !setting(erOverworld, none) || !setting(erBoss, none) || !setting(erWarps, none) || setting(erOneWaysMajor) || setting(erOneWaysIkana) || setting(erOneWaysSongs) || setting(erOneWaysStatues) || setting(erOneWaysOwls) || !setting(erGrottos, none) || !setting(erWallmasters, none)"
 "dungeon_er": "setting(erMajorDungeons) || setting(erSpiderHouses) || setting(erBeneathWell) || setting(erPirateFortress) || setting(erSecretShrine) || setting(erIkanaCastle) || (setting(erDungeons, full) && (setting(erMinorDungeons) || setting(erGanonCastle) || setting(erGanonTower)))"
 
 # Misc

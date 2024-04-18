@@ -81,6 +81,21 @@ function resolveWorldFlags(settings: Settings, random: Random): ResolvedWorldFla
   return result;
 }
 
+export const BOSS_INDEX_BY_DUNGEON = {
+  DT: 0,
+  DC: 1,
+  JJ: 2,
+  Forest: 3,
+  Fire: 4,
+  Water: 5,
+  Shadow: 6,
+  Spirit: 7,
+  WF: 8,
+  SH: 9,
+  GB: 10,
+  IST: 11,
+} as {[k: string]: number};
+
 export type ExprMap = {
   [k: string]: Expr;
 }
@@ -139,7 +154,6 @@ export type World = {
   prices: number[];
   mq: Set<string>;
   bossIds: number[];
-  dungeonIds: number[];
   entranceOverrides: Map<string, string>;
   preCompleted: Set<string>;
   resolvedFlags: ResolvedWorldFlags;
@@ -160,12 +174,12 @@ export const DUNGEONS_REGIONS: { [k: string]: string } = {
   GTG: "OOT_GERUDO_TRAINING_GROUNDS",
   GF: "OOT_THIEVES_HIDEOUT",
   Ganon: "OOT_GANON_CASTLE",
-  Tower: "OOT_GANON_CASTLE",
+  Tower: "OOT_GANON_CASTLE_TOWER",
   WF: "MM_TEMPLE_WOODFALL",
   SH: "MM_TEMPLE_SNOWHEAD",
   GB: "MM_TEMPLE_GREAT_BAY",
   ST: "MM_TEMPLE_STONE_TOWER",
-  IST: "MM_TEMPLE_STONE_TOWER",
+  IST: "MM_TEMPLE_STONE_TOWER_INVERTED",
   SSH: "MM_SPIDER_HOUSE_SWAMP",
   OSH: "MM_SPIDER_HOUSE_OCEAN",
   BtW: "MM_BENEATH_THE_WELL",
@@ -225,7 +239,6 @@ export function cloneWorld(world: World): World {
     mq: new Set(world.mq),
     preCompleted: new Set(world.preCompleted),
     bossIds: [...world.bossIds],
-    dungeonIds: [...world.dungeonIds],
     entranceOverrides: new Map(world.entranceOverrides),
     resolvedFlags: world.resolvedFlags,
     exprParsers: world.exprParsers,
@@ -311,8 +324,7 @@ export class LogicPassWorld {
       prices,
       mq,
       preCompleted: new Set(),
-      bossIds: [],
-      dungeonIds: [],
+      bossIds: Object.values(BOSS_INDEX_BY_DUNGEON),
       entranceOverrides: new Map,
       resolvedFlags,
       exprParsers,

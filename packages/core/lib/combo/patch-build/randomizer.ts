@@ -287,6 +287,20 @@ function entrance(srcName: string, world: World) {
   return data;
 }
 
+function entranceAbs(world: World, name: string) {
+  const dstName = world.entranceOverrides.get(name) || name;
+  const dstGame: Game = (/^OOT_/.test(dstName) ? 'oot' : 'mm');
+  const entr = ENTRANCES[dstName as keyof typeof ENTRANCES];
+  if (entr === undefined) {
+    throw new Error(`Unknown entrance ${dstName}`);
+  }
+  let data = entr.id;
+  if (dstGame === 'mm') {
+    data = (data | 0x80000000) >>> 0;
+  }
+  return data;
+}
+
 const entrance2 = (srcGame: Game, dstGame: Game, name: string) => {
   const entr = ENTRANCES[name as keyof typeof ENTRANCES];
   if (entr === undefined) {
@@ -568,6 +582,100 @@ const gameHints = (settings: Settings, game: Game, hints: WorldHints): Buffer =>
   return padBuffer16(Buffer.concat(buffers));
 }
 
+function dungeonWarpsBuffer(world: World) {
+  const defaultWarps = [
+    'OOT_KOKIRI_FOREST_FROM_DEKU_TREE',
+    'OOT_MOUNTAIN_TRAIL_FROM_DODONGO_CAVERN',
+    'OOT_ZORA_FOUNTAIN_FROM_JABU_JABU',
+    'OOT_SACRED_MEADOW_FROM_TEMPLE_FOREST',
+    'OOT_DEATH_CRATER_FROM_TEMPLE_FIRE',
+    'OOT_LAKE_HYLIA_FROM_TEMPLE_WATER',
+    'OOT_GRAVEYARD_FROM_TEMPLE_SHADOW',
+    'OOT_DESERT_COLOSSUS_FROM_TEMPLE_SPIRIT',
+    'MM_WOODFALL_FROM_TEMPLE',
+    'MM_SNOWHEAD_FROM_TEMPLE',
+    'MM_GREAT_BAY_FROM_TEMPLE',
+    'MM_STONE_TOWER_INVERTED_FROM_TEMPLE',
+  ];
+
+  const entrances = defaultWarps.map((e) => entranceAbs(world, e));
+  return toU32Buffer(entrances);
+}
+
+function dungeonEntrancesBuffer(world: World) {
+  const mainDungeonsReverse: {[k: number]: number} = {};
+  const mainDungeonRegions: {[k: number]: string} = {};
+
+  const defaultEntrances = [
+    'OOT_DEKU_TREE',
+    'OOT_DODONGO_CAVERN',
+    'OOT_JABU_JABU',
+    'OOT_TEMPLE_FOREST',
+    'OOT_TEMPLE_FIRE',
+    'OOT_TEMPLE_WATER',
+    'OOT_TEMPLE_SHADOW',
+    'OOT_TEMPLE_SPIRIT',
+    'MM_TEMPLE_WOODFALL',
+    'MM_TEMPLE_SNOWHEAD',
+    'MM_TEMPLE_GREAT_BAY',
+    'MM_TEMPLE_STONE_TOWER_INVERTED',
+    'MM_TEMPLE_STONE_TOWER',
+    'MM_SPIDER_HOUSE_SWAMP',
+    'MM_SPIDER_HOUSE_OCEAN',
+    'OOT_BOTTOM_OF_THE_WELL',
+    'OOT_ICE_CAVERN',
+    'OOT_GERUDO_TRAINING_GROUNDS',
+    'MM_BENEATH_THE_WELL',
+    'MM_IKANA_CASTLE',
+    'MM_SECRET_SHRINE',
+    'MM_BENEATH_THE_WELL_BACK',
+    'MM_PIRATE_FORTRESS',
+    'OOT_GANON_CASTLE',
+    'OOT_GANON_TOWER',
+    'MM_MOON',
+  ];
+
+  /* Compute substitutions */
+  for (let i = 0; i < defaultEntrances.length; ++i) {
+    const entrance = world.entranceOverrides.get(defaultEntrances[i]) || defaultEntrances[i];
+    const index = defaultEntrances.indexOf(entrance);
+    if (index !== -1) {
+      mainDungeonsReverse[index] = i;
+    }
+  }
+
+  /* Compute main region */
+  for (const areaName in world.areas) {
+    const area = world.areas[areaName];
+    for (let i = 0; i < defaultEntrances.length; ++i) {
+      const entrName = defaultEntrances[i];
+      const entrData = ENTRANCES[entrName as keyof typeof ENTRANCES];
+      const to = entrData.to;
+      const areaTo = world.areas[to];
+      if (area.exits[to] && area.dungeon !== areaTo.dungeon) {
+        const region = area.region;
+        if (region !== 'NONE' && region !== 'POCKET' && region !== 'NAMELESS') {
+          mainDungeonRegions[i] = region;
+        }
+      }
+    }
+  }
+
+  const buffers: Buffer[] = [];
+  for (let i = 0; i < defaultEntrances.length; ++i) {
+    const dungeonIndex = mainDungeonsReverse[i];
+    let region = mainDungeonRegions[i] || 'NAMELESS';
+    if (dungeonIndex !== undefined) {
+      buffers.push(toU32Buffer([(dungeonIndex | 0x80000000) >>> 0]));
+    } else {
+      const regionId = (REGIONS as any)[region];
+      buffers.push(toU32Buffer([regionId]));
+    }
+  }
+
+  return Buffer.concat(buffers);
+}
+
 const regionsBuffer = (regions: Region[]) => {
   const data = regions.map((region) => {
     const regionId = (REGIONS as any)[regionData(region).id];
@@ -693,6 +801,8 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MM_PROGRESSIVE_LULLABY: settings.progressiveGoronLullaby === 'progressive',
     DOOR_OF_TIME_OPEN: settings.doorOfTime === 'open',
     OOT_OPEN_DEKU: settings.dekuTree === 'open',
+    OOT_CLOSED_DEKU: settings.dekuTree === 'closed',
+    OOT_ADULT_DEKU: settings.dekuTreeAdult,
     ER_DUNGEONS: settings.erDungeons !== 'none',
     ER_MAJOR_DUNGEONS: settings.erMajorDungeons,
     ER_BOSS: settings.erBoss !== 'none',
@@ -848,6 +958,11 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MM_CLOCKS_PROGRESSIVE: settings.progressiveClocks !== 'separate',
     MM_CLOCKS_PROGRESSIVE_REVERSE: settings.progressiveClocks === 'descending',
     ER_GROTTOS: settings.erGrottos !== 'none',
+    ER_OVERWORLD: settings.erOverworld !== 'none',
+    ER_INDOORS: settings.erIndoors !== 'none',
+    ER_REGIONS_OVERWORLD: settings.erRegions !== 'none' || settings.erOverworld !== 'none',
+    CROSS_GAME_FW: settings.crossGameFw,
+    RUPEE_SCALING: settings.rupeeScaling,
   };
 
   for (const v in exprs) {
@@ -888,7 +1003,6 @@ export const randomizerHints = (world: number, logic: LogicResult): Buffer => {
 };
 
 const randomizerBoss = (worldId: number, logic: LogicResult): Buffer => toU8Buffer(logic.worlds[worldId].bossIds);
-const randomizerDungeons = (worldId: number, logic: LogicResult): Buffer => toU8Buffer(logic.worlds[worldId].dungeonIds);
 const randomizerTriforce = (logic: LogicResult): Buffer => toU16Buffer([logic.settings.triforcePieces, logic.settings.triforceGoal]);
 
 function specialConds(settings: Settings) {
@@ -919,6 +1033,8 @@ export const randomizerData = (worldId: number, logic: LogicResult): Buffer => {
   const buffers = [];
   buffers.push(logic.uuid);
   buffers.push(toU8Buffer([worldId + 1, 0, 0, 0]));
+  buffers.push(dungeonWarpsBuffer(logic.worlds[worldId]));
+  buffers.push(dungeonEntrancesBuffer(logic.worlds[worldId]));
   buffers.push(randomizerDungeonsBits(worldId, logic));
   buffers.push(randomizerWarps(worldId, logic));
   buffers.push(randomizerConfig(logic.worlds[worldId], logic.settings));
@@ -930,7 +1046,6 @@ export const randomizerData = (worldId: number, logic: LogicResult): Buffer => {
   buffers.push(toI8Buffer(logic.hints[worldId].staticHintsImportances));
   buffers.push(zoraSapphireBuffer(worldId, logic));
   buffers.push(randomizerBoss(worldId, logic));
-  buffers.push(randomizerDungeons(worldId, logic));
   return Buffer.concat(buffers);
 };
 

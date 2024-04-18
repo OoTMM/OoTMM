@@ -10,19 +10,39 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add rupee scaling, a setting where rupees are worth more if you have an upgraded wallet.
+- Add full overworld ER.
+- Add random starting positions.
+- Add a setting to allow more granular hint regions.
 - Add decoupled entrances.
 - Add the ability to mix entrance pools.
 - Add Grotto/Grave entrance randomizer, for both games.
 - Misc. Souls for both games, which can be shared.
 - Added a validator for Special Conditions (web-wise).
+- Add setting to allow warping between games using Farore's Wind.
+- Add a clear state wisp to ikana valley.
+- Add the Ikana Music House to interiors shuffle.
+- Add the Goron Racetrack to interiors shuffle.
 
 ### Changed
 
-- Saving is now enabled on the Clock Tower with Moon Crash set to New Cycle.
+- Rework how Deku Tree behaves (it's now either always open or strictly opened by Mido).
+- Rework how the sirloin function in indoor ER (+ new overworld ER) to allow shuffling the North in MM.
+- Saving is now enabled on the Clock Tower Roof with Moon Crash set to New Cycle.
+- Farore's Wind in MM is now tied to Link's age, like in OoT.
+- Logic for MM's cursed and cleared states has received an overhaul and is now more robust.
+- Powder Keg Trial with Short Hook Anywhere and without thawing the ice is now a trick.
+- Clock Town Post Box, Goron Elder, and Keaton Quiz can now be logically obtained in their alternate locations.
+- Guessing the Bomber Code for the notebook check is now logical in East Clock Town.
 
 ### Fixed
 
+- Fix Epona spawning near Lon Lon ranch by default.
+- Fix various crashes in MM when taking Epona to the wrong region in ER.
+- Fix Goron Ruby looking odd in MM.
 - Ruto's Soul is now accounted in logic for the Big Octo in Jabu-Jabu.
+- Logic for entering Woodfall Temple if exiting the temple itself has been fixed.
+- The "GBT without Fire Arrows" trick now correctly accounts for being tall and no longer requires Ice Arrows.
 
 ## [21.0] - 2024-03-28
 

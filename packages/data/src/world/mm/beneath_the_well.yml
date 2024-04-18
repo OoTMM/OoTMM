@@ -21,7 +21,9 @@
 "Beneath The Well North Section":
   dungeon: BtW
   events:
-    WELL_HOT_WATER: "has_fish && (has_explosives || has_mask_zora || trick_keg_explosives || trick(MM_WELL_HSW))"
+    WELL_HOT_WATER_SPRING: "is_spring && (has_fish && (has_explosives || has_mask_zora || trick_keg_explosives || trick(MM_WELL_HSW)))"
+    WELL_HOT_WATER_WINTER: "is_winter && (has_fish && (has_explosives || has_mask_zora || trick_keg_explosives || trick(MM_WELL_HSW)))"
+    WELL_HOT_WATER: "is_spring_or_winter && (has_fish && (has_explosives || has_mask_zora || trick_keg_explosives || trick(MM_WELL_HSW)))"
     WATER: "true"
     FISH: "true"
     BUGS: "has_water && has_fire_sticks"
@@ -65,16 +67,16 @@
 "Beneath The Well Cow Hall":
   dungeon: BtW
   exits:
-    "SOARING": "can_play_soaring"  
+    "SOARING": "can_play_soaring"
     "WARP_SONGS": "true"
   events:
     WELL_BIG_POE: "has_bombs && has_weapon_range"
     BUGS: "true"
   locations:
-    "Beneath The Well Cow": "(has_hot_water_well || (has_hot_water_distance_spring && has(OWL_IKANA_CANYON)) || has_hot_water_er_spring) && can_play_epona"
-    "Beneath The Well Grass Cow 1": "has_hot_water_well || (has_hot_water_distance_spring && has(OWL_IKANA_CANYON)) || has_hot_water_er_spring"
-    "Beneath The Well Grass Cow 2": "has_hot_water_well || (has_hot_water_distance_spring && has(OWL_IKANA_CANYON)) || has_hot_water_er_spring"
-    "Beneath The Well Grass Cow 3": "has_hot_water_well || (has_hot_water_distance_spring && has(OWL_IKANA_CANYON)) || has_hot_water_er_spring"
+    "Beneath The Well Cow": "(has_hot_water_well || (has_hot_water_distance && has(OWL_IKANA_CANYON)) || has_hot_water_er) && can_play_epona"
+    "Beneath The Well Grass Cow 1": "has_hot_water_well || (has_hot_water_distance && has(OWL_IKANA_CANYON)) || has_hot_water_er"
+    "Beneath The Well Grass Cow 2": "has_hot_water_well || (has_hot_water_distance && has(OWL_IKANA_CANYON)) || has_hot_water_er"
+    "Beneath The Well Grass Cow 3": "has_hot_water_well || (has_hot_water_distance && has(OWL_IKANA_CANYON)) || has_hot_water_er"
     "Beneath The Well Pot Big Poe 1": "has_bombs"
     "Beneath The Well Pot Big Poe 2": "has_bombs"
     "Beneath The Well Pot Big Poe 3": "has_bombs"

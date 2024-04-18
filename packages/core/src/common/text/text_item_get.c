@@ -83,6 +83,24 @@ static int compassDungeonId(GameState_Play* play, s16 gi)
     }
 }
 
+static void appendDungeonEntrance(char** b, int dungeonId)
+{
+    u32 data;
+
+    data = gComboData.dungeonEntrances[dungeonId];
+    if (data & 0x80000000)
+    {
+        /* Dungeon */
+        comboTextAppendStr(b, "at ");
+        comboTextAppendDungeonName(b, data & 0xff);
+    }
+    else
+    {
+        /* Region */
+        comboTextAppendRegionName(b, data, 0, TF_PREPOS);
+    }
+}
+
 static void comboTextMap(char** b, GameState_Play* play, s16 gi)
 {
     int dungeonId;
@@ -97,16 +115,16 @@ static void comboTextMap(char** b, GameState_Play* play, s16 gi)
     /* Display the entrance */
     if (dungeonId == DUNGEONID_TEMPLE_STONE_TOWER || dungeonId == DUNGEONID_TEMPLE_STONE_TOWER_INVERTED)
     {
-        comboTextAppendStr(b, TEXT_NL "The entrances are at ");
-        comboTextAppendDungeonName(b, gComboData.dungeons[DUNGEONID_TEMPLE_STONE_TOWER]);
+        comboTextAppendStr(b, TEXT_NL "The entrances are ");
+        appendDungeonEntrance(b, DUNGEONID_TEMPLE_STONE_TOWER);
         comboTextAppendStr(b, " and ");
-        comboTextAppendDungeonName(b, gComboData.dungeons[DUNGEONID_TEMPLE_STONE_TOWER_INVERTED]);
+        appendDungeonEntrance(b, DUNGEONID_TEMPLE_STONE_TOWER_INVERTED);
         comboTextAppendStr(b, ".");
     }
     else
     {
-        comboTextAppendStr(b, TEXT_NL "The entrance is at ");
-        comboTextAppendDungeonName(b, gComboData.dungeons[dungeonId]);
+        comboTextAppendStr(b, TEXT_NL "The entrance is ");
+        appendDungeonEntrance(b, dungeonId);
         comboTextAppendStr(b, ".");
     }
 }

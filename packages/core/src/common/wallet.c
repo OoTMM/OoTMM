@@ -52,3 +52,56 @@ void comboWalletRefresh(void)
 
     updateRupeeColor();
 }
+
+s16 RupeeValueRaw(s16 count, int extraWallets)
+{
+    s32 acc;
+
+    acc = count;
+    if (comboConfig(CFG_RUPEE_SCALING) && acc > 0)
+    {
+        if (extraWallets >= 1) acc *= 2;
+        if (extraWallets >= 2) acc *= 10;
+
+        if (acc > 9999)
+            acc = 9999;
+    }
+
+    return (s16)acc;
+}
+
+s16 RupeeValueOot(s16 count)
+{
+    return RupeeValueRaw(count, (!!(gOotSave.inventory.upgrades.wallet == 3)) + gOotExtraFlags.bottomlessWallet);
+}
+
+s16 RupeeValueMm(s16 count)
+{
+    return RupeeValueRaw(count, (!!(gMmSave.inventory.upgrades.wallet == 3)) + gMmExtraFlags3.bottomlessWallet);
+}
+
+#if defined(GAME_OOT)
+# define RupeeValue RupeeValueOot
+#endif
+
+#if defined(GAME_MM)
+# define RupeeValue RupeeValueMm
+#endif
+
+void AddRupeesRaw(s16 value)
+{
+#if defined(GAME_OOT)
+    gSaveContext.rupeesDelta += value;
+#endif
+
+#if defined(GAME_MM)
+    gSave.rupeesDelta += value;
+#endif
+}
+
+void AddRupees(s16 value)
+{
+    AddRupeesRaw(RupeeValue(value));
+}
+
+PATCH_FUNC(_AddRupees, AddRupees);

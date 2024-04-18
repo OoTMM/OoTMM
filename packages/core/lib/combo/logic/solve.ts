@@ -799,9 +799,10 @@ export class LogicPassSolver {
     for (let worldId = 0; worldId < this.worlds.length; ++worldId) {
       const WISPS = {
         'OOT_WATER_TEMPLE_CLEARED': 'OOT SPAWN',
-        'MM_CLEAN_SWAMP': 'MM Swamp Front',
+        'MM_BOSS_WOODFALL': 'MM Swamp Front',
         'MM_BOSS_SNOWHEAD': 'MM Mountain Village',
         'MM_BOSS_GREAT_BAY': 'MM Great Bay Coast',
+        'MM_BOSS_STONE_TOWER': 'MM Ikana Canyon',
       };
 
       const world = this.worlds[worldId];
