@@ -71,6 +71,20 @@ export class CustomObjectsBuilder {
     return { name: 'EQ_SHEATH_SHIELD_HYLIAN_CHILD', ...editor.build() };
   }
 
+  private async makeEqSheathShieldHylianAdult(): Promise<CustomObject> {
+    const editor = new ObjectEditor(0xa);
+    const obj = await this.getFile('oot', 'objects/object_link_boy');
+    editor.loadSegment(0x06, obj);
+
+    const b = 0x06020f48;
+    let list = editor.listData(b)!;
+    list = editor.stripList(list, 0x06020f88 - b, 0x06020fa8 - b);
+    list = editor.stripList(list, 0x06020fd8 - b - 0x20, 0x06020fe8 - b - 0x20);
+
+    editor.submitList(list);
+    return { name: 'EQ_SHEATH_SHIELD_HYLIAN_ADULT', ...editor.build() };
+  }
+
   private async makeEqSheathSwordOotChildFull(): Promise<CustomObject> {
     const editor = new ObjectEditor(0xa);
     const object_link_child = await this.getFile('oot', 'objects/object_link_child');
@@ -191,6 +205,7 @@ export class CustomObjectsBuilder {
       await this.makeEqHammer(),
       await this.makeEqSheathShieldDeku(),
       await this.makeEqSheathShieldHylianChild(),
+      await this.makeEqSheathShieldHylianAdult(),
       await this.makeEqSheathSwordOotChildFull(),
       await this.makeEqSheathSwordOotChildEmpty(),
       await this.makeEqSheathSwordOotAdultFull(),

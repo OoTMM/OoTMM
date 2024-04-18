@@ -498,6 +498,8 @@ static void Player_OverrideCustomSheath(GameState_Play* play, Actor_Player* this
         case 2:
             if (gSave.age == AGE_CHILD)
                 shield = Player_CustomSheathShield(comboGetObject(CUSTOM_OBJECT_ID_EQ_SHEATH_SHIELD_HYLIAN_CHILD), CUSTOM_OBJECT_EQ_SHEATH_SHIELD_HYLIAN_CHILD_0);
+            else
+                shield = Player_CustomSheathShield(comboGetObject(CUSTOM_OBJECT_ID_EQ_SHEATH_SHIELD_HYLIAN_ADULT), CUSTOM_OBJECT_EQ_SHEATH_SHIELD_HYLIAN_ADULT_0);
             break;
         }
     }
