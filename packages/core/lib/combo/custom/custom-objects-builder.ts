@@ -45,6 +45,80 @@ export class CustomObjectsBuilder {
     return { name, data: out.data, offsets: out.offsets };
   }
 
+  private async makeEqSheathShieldDeku(): Promise<CustomObject> {
+    const editor = new ObjectEditor(0xa);
+    const object_link_child = await this.getFile('oot', 'objects/object_link_child');
+    editor.loadSegment(0x06, object_link_child);
+
+    const b = 0x06015100;
+    let list = editor.listData(b)!;
+    list = editor.stripList(list, 0x06015130 - b, 0x06015140 - b);
+
+    editor.submitList(list);
+    return { name: 'EQ_SHEATH_SHIELD_DEKU', ...editor.build() };
+  }
+
+  private async makeEqSheathShieldHylianChild(): Promise<CustomObject> {
+    const editor = new ObjectEditor(0xa);
+    const object_link_child = await this.getFile('oot', 'objects/object_link_child');
+    editor.loadSegment(0x06, object_link_child);
+
+    const b = 0x06014c30;
+    let list = editor.listData(b)!;
+    list = editor.stripList(list, 0x06014c60 - b, 0x06014c70 - b);
+
+    editor.submitList(list);
+    return { name: 'EQ_SHEATH_SHIELD_HYLIAN_CHILD', ...editor.build() };
+  }
+
+  private async makeEqSheathSwordOotChildFull(): Promise<CustomObject> {
+    const editor = new ObjectEditor(0xa);
+    const object_link_child = await this.getFile('oot', 'objects/object_link_child');
+    editor.loadSegment(0x06, object_link_child);
+
+    const b = 0x06015248;
+    const list = editor.listData(b)!;
+
+    editor.submitList(list);
+    return { name: 'EQ_SHEATH_SWORD_OOT_CHILD_FULL', ...editor.build() };
+  }
+
+  private async makeEqSheathSwordOotChildEmpty(): Promise<CustomObject> {
+    const editor = new ObjectEditor(0xa);
+    const object_link_child = await this.getFile('oot', 'objects/object_link_child');
+    editor.loadSegment(0x06, object_link_child);
+
+    const b = 0x06015408;
+    const list = editor.listData(b)!;
+
+    editor.submitList(list);
+    return { name: 'EQ_SHEATH_SWORD_OOT_CHILD_EMPTY', ...editor.build() };
+  }
+
+  private async makeEqSheathSwordOotAdultFull(): Promise<CustomObject> {
+    const editor = new ObjectEditor(0xa);
+    const object_link_child = await this.getFile('oot', 'objects/object_link_boy');
+    editor.loadSegment(0x06, object_link_child);
+
+    const b = 0x06023160;
+    const list = editor.listData(b)!;
+
+    editor.submitList(list);
+    return { name: 'EQ_SHEATH_SWORD_OOT_ADULT_FULL', ...editor.build() };
+  }
+
+  private async makeEqSheathSwordOotAdultEmpty(): Promise<CustomObject> {
+    const editor = new ObjectEditor(0xa);
+    const object_link_child = await this.getFile('oot', 'objects/object_link_boy');
+    editor.loadSegment(0x06, object_link_child);
+
+    const b = 0x060249d8;
+    const list = editor.listData(b)!;
+
+    editor.submitList(list);
+    return { name: 'EQ_SHEATH_SWORD_OOT_ADULT_EMPTY', ...editor.build() };
+  }
+
   private async makeEqKokiriSword(): Promise<CustomObject> {
     const editor = new ObjectEditor(0xa);
     const object_link_child = await this.getFile('oot', 'objects/object_link_child');
@@ -115,6 +189,12 @@ export class CustomObjectsBuilder {
       await this.makeEqBiggoronSword(),
       await this.makeEqBiggoronSwordBroken(),
       await this.makeEqHammer(),
+      await this.makeEqSheathShieldDeku(),
+      await this.makeEqSheathShieldHylianChild(),
+      await this.makeEqSheathSwordOotChildFull(),
+      await this.makeEqSheathSwordOotChildEmpty(),
+      await this.makeEqSheathSwordOotAdultFull(),
+      await this.makeEqSheathSwordOotAdultEmpty(),
       //await this.simpleExtract('LIMB_OOT_CHILD_LHAND_CLOSED', 'oot', 'objects/object_link_child', [], 0x06, 0x0a),
     ];
   }
