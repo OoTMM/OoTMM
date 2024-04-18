@@ -45,6 +45,18 @@ export class CustomObjectsBuilder {
     return { name, data: out.data, offsets: out.offsets };
   }
 
+  private async makeEqKokiriSword(): Promise<CustomObject> {
+    const editor = new ObjectEditor(0xa);
+    const object_link_child = await this.getFile('oot', 'objects/object_link_child');
+    editor.loadSegment(0x06, object_link_child);
+
+    const b = 0x06014048;
+    let list = editor.listData(b)!;
+
+    editor.submitList(list);
+    return { name: 'EQ_KOKIRI_SWORD', ...editor.build() };
+  }
+
   private async makeEqMasterSword(): Promise<CustomObject> {
     const editor = new ObjectEditor(0xa);
     const object_link_boy = await this.getFile('oot', 'objects/object_link_boy');
@@ -98,6 +110,7 @@ export class CustomObjectsBuilder {
 
   async build(): Promise<CustomObject[]> {
     return [
+      await this.makeEqKokiriSword(),
       await this.makeEqMasterSword(),
       await this.makeEqBiggoronSword(),
       await this.makeEqBiggoronSwordBroken(),

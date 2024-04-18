@@ -390,6 +390,7 @@ static Gfx sGfxCustomRightHand[] = {
 
 #define DLIST_INDIRECT(x)           (*(u32*)((x)))
 #define DLIST_CHILD_LHAND_CLOSED    DLIST_INDIRECT(0x800f78ec)
+#define DLIST_ADULT_LHAND_CLOSED    DLIST_INDIRECT(0x800f78e8)
 
 static void* Player_CustomLeftHand(u32 handDlist, void* eqData, u32 eqDlist)
 {
@@ -415,6 +416,17 @@ static void* Player_CustomRightHand(u32 handDlist, void* eqData, u32 eqDlist)
     return sGfxCustomRightHand;
 }
 
+static void Player_OverrideAdult(GameState_Play* play, Actor_Player* this, int limb, Gfx** dlist, int isPause)
+{
+    if (limb == PLAYER_LIMB_L_HAND)
+    {
+        if ((this->leftHandType == PLAYER_MODELTYPE_LH_SWORD || isPause) && gSave.equips.equipment.swords == 1)
+        {
+            *dlist = Player_CustomLeftHand(DLIST_ADULT_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_KOKIRI_SWORD), CUSTOM_OBJECT_EQ_KOKIRI_SWORD_0);
+        }
+    }
+}
+
 static void Player_OverrideChild(GameState_Play* play, Actor_Player* this, int limb, Gfx** dlist, int isPause)
 {
     if (limb == PLAYER_LIMB_L_HAND)
@@ -437,6 +449,8 @@ static void Player_OverrideCustom(GameState_Play* play, Actor_Player* this, int 
 {
     if (gSave.age == AGE_CHILD)
         Player_OverrideChild(play, this, limb, dlist, isPause);
+    else
+        Player_OverrideAdult(play, this, limb, dlist, isPause);
 }
 
 int Player_OverrideLimbDrawGameplayDefaultWrapper(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Player* player)
