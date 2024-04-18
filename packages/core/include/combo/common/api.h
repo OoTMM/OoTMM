@@ -533,6 +533,7 @@ s32 Object_SpawnPersistent(ObjectContext* objectCtx, s16 id);
 s32 Object_GetSlot(ObjectContext* objectCtx, s16 id);
 
 s32 Player_OverrideLimbDrawGameplayDefault(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Player* player);
+s32 Player_OverrideLimbDrawPause(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Player* player);
 
 extern OSPiHandle* gCartHandle;
 

@@ -375,3 +375,246 @@ void Player_AfterSetEquipmentData(GameState_Play* play)
         Player_SetModels(player, Player_ActionToModelGroup(player, player->heldItemAction));
     }
 }
+
+static Gfx sGfxCustomLeftHand[] = {
+    gsSPDisplayList(0),
+    gsSPSegment(0x0a, 0),
+    gsSPBranchList(0),
+};
+
+static Gfx sGfxCustomRightHand[] = {
+    gsSPDisplayList(0),
+    gsSPSegment(0x0a, 0),
+    gsSPBranchList(0),
+};
+
+static Gfx sGfxCustomSheathShield[] = {
+    gsSPSegment(0x0a, 0),
+    gsSPBranchList(0),
+};
+
+static Gfx sGfxCustomSheathSword[] = {
+    gsSPSegment(0x0a, 0),
+    gsSPBranchList(0),
+};
+
+static Gfx sGfxCustomSheath[] = {
+    gsSPDisplayList(0),
+    gsSPBranchList(0),
+};
+
+#define DLIST_INDIRECT(x)           (*(u32*)((x)))
+#define DLIST_CHILD_LHAND_CLOSED    DLIST_INDIRECT(0x800f78ec)
+#define DLIST_CHILD_RHAND_CLOSED    DLIST_INDIRECT(0x800f77c4)
+#define DLIST_ADULT_LHAND_CLOSED    DLIST_INDIRECT(0x800f78e8)
+#define DLIST_ADULT_RHAND_CLOSED    DLIST_INDIRECT(0x800f77b8)
+
+static void* Player_CustomLeftHand(u32 handDlist, void* eqData, u32 eqDlist)
+{
+    if (!eqData)
+        return NULL;
+
+    ((u32*)sGfxCustomLeftHand)[1] = handDlist;
+    ((u32*)sGfxCustomLeftHand)[3] = (u32)eqData;
+    ((u32*)sGfxCustomLeftHand)[5] = eqDlist;
+
+    return sGfxCustomLeftHand;
+}
+
+static void* Player_CustomRightHand(u32 handDlist, void* eqData, u32 eqDlist)
+{
+    if (!eqData)
+        return NULL;
+
+    ((u32*)sGfxCustomRightHand)[1] = handDlist;
+    ((u32*)sGfxCustomRightHand)[3] = (u32)eqData;
+    ((u32*)sGfxCustomRightHand)[5] = eqDlist;
+
+    return sGfxCustomRightHand;
+}
+
+static void* Player_CustomSheathShield(void* eqData, u32 eqDlist)
+{
+    if (!eqData)
+        return (void*)kDListEmpty;
+
+    ((u32*)sGfxCustomSheathShield)[1] = (u32)eqData;
+    ((u32*)sGfxCustomSheathShield)[3] = eqDlist;
+
+    return sGfxCustomSheathShield;
+}
+
+static void* Player_CustomSheathSword(void* eqData, u32 eqDlist)
+{
+    if (!eqData)
+        return (void*)kDListEmpty;
+
+    ((u32*)sGfxCustomSheathSword)[1] = (u32)eqData;
+    ((u32*)sGfxCustomSheathSword)[3] = eqDlist;
+
+    return sGfxCustomSheathSword;
+}
+
+static void* dlistOrNothing(void* dlist)
+{
+    if (!dlist)
+        return (void*)kDListEmpty;
+    return dlist;
+}
+
+static void* Player_CustomSheath(void* shield, void* sword)
+{
+    ((u32*)sGfxCustomSheath)[1] = (u32)dlistOrNothing(shield);
+    ((u32*)sGfxCustomSheath)[3] = (u32)dlistOrNothing(sword);
+
+    return sGfxCustomSheath;
+}
+
+static void Player_OverrideCustomSheath(GameState_Play* play, Actor_Player* this, Gfx** dlist, int isPause)
+{
+    void*   shield;
+    void*   sword;
+    u8      swordInUse;
+    u8      shieldOnBack;
+
+    shield = NULL;
+    sword = NULL;
+    swordInUse = !!isPause;
+
+    switch (this->leftHandType)
+    {
+    case PLAYER_MODELTYPE_LH_SWORD:
+    case PLAYER_MODELTYPE_LH_SWORD_2:
+    case PLAYER_MODELTYPE_LH_BGS:
+        swordInUse = 1;
+        break;
+    }
+
+    if (isPause)
+    {
+        shieldOnBack = 0;
+        if (gSave.age == AGE_CHILD && gSave.equips.equipment.shields > 1)
+            shieldOnBack = 1;
+    }
+    else
+        shieldOnBack = !!(this->rightHandType != PLAYER_MODELTYPE_RH_SHIELD);
+    if (shieldOnBack)
+    {
+        /* Shield on back */
+        switch (gSave.equips.equipment.shields)
+        {
+        case 1:
+            shield = Player_CustomSheathShield(comboGetObject(CUSTOM_OBJECT_ID_EQ_SHEATH_SHIELD_DEKU), CUSTOM_OBJECT_EQ_SHEATH_SHIELD_DEKU_0);
+            break;
+        case 2:
+            if (gSave.age == AGE_CHILD)
+                shield = Player_CustomSheathShield(comboGetObject(CUSTOM_OBJECT_ID_EQ_SHEATH_SHIELD_HYLIAN_CHILD), CUSTOM_OBJECT_EQ_SHEATH_SHIELD_HYLIAN_CHILD_0);
+            else
+                shield = Player_CustomSheathShield(comboGetObject(CUSTOM_OBJECT_ID_EQ_SHEATH_SHIELD_HYLIAN_ADULT), CUSTOM_OBJECT_EQ_SHEATH_SHIELD_HYLIAN_ADULT_0);
+            break;
+        case 3:
+            shield = Player_CustomSheathShield(comboGetObject(CUSTOM_OBJECT_ID_EQ_SHEATH_SHIELD_MIRROR), CUSTOM_OBJECT_EQ_SHEATH_SHIELD_MIRROR_0);
+            break;
+        }
+    }
+
+    switch (gSave.equips.equipment.swords)
+    {
+    case 1:
+        if (swordInUse)
+            sword = Player_CustomSheathSword(comboGetObject(CUSTOM_OBJECT_ID_EQ_SHEATH_SWORD_OOT_CHILD_EMPTY), CUSTOM_OBJECT_EQ_SHEATH_SWORD_OOT_CHILD_EMPTY_0);
+        else
+            sword = Player_CustomSheathSword(comboGetObject(CUSTOM_OBJECT_ID_EQ_SHEATH_SWORD_OOT_CHILD_FULL), CUSTOM_OBJECT_EQ_SHEATH_SWORD_OOT_CHILD_FULL_0);
+        break;
+    case 2:
+    case 3:
+        if (swordInUse)
+            sword = Player_CustomSheathSword(comboGetObject(CUSTOM_OBJECT_ID_EQ_SHEATH_SWORD_OOT_ADULT_EMPTY), CUSTOM_OBJECT_EQ_SHEATH_SWORD_OOT_ADULT_EMPTY_0);
+        else
+            sword = Player_CustomSheathSword(comboGetObject(CUSTOM_OBJECT_ID_EQ_SHEATH_SWORD_OOT_ADULT_FULL), CUSTOM_OBJECT_EQ_SHEATH_SWORD_OOT_ADULT_FULL_0);
+        break;
+    }
+
+    *dlist = Player_CustomSheath(shield, sword);
+}
+
+static void Player_OverrideAdult(GameState_Play* play, Actor_Player* this, int limb, Gfx** dlist, int isPause)
+{
+    if (limb == PLAYER_LIMB_L_HAND)
+    {
+        if ((this->leftHandType == PLAYER_MODELTYPE_LH_SWORD || isPause) && gSave.equips.equipment.swords == 1)
+        {
+            *dlist = Player_CustomLeftHand(DLIST_ADULT_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_KOKIRI_SWORD), CUSTOM_OBJECT_EQ_KOKIRI_SWORD_0);
+        }
+    }
+
+    if (limb == PLAYER_LIMB_R_HAND)
+    {
+        if ((this->rightHandType == PLAYER_MODELTYPE_RH_SHIELD) && gSave.equips.equipment.shields == 1)
+            *dlist = Player_CustomRightHand(DLIST_ADULT_RHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_DEKU), CUSTOM_OBJECT_EQ_SHIELD_DEKU_0);
+    }
+
+    if (limb == PLAYER_LIMB_SHEATH)
+    {
+        if (gSave.equips.equipment.shields == 1 || gSave.equips.equipment.swords <= 1)
+            Player_OverrideCustomSheath(play, this, dlist, isPause);
+    }
+}
+
+static void Player_OverrideChild(GameState_Play* play, Actor_Player* this, int limb, Gfx** dlist, int isPause)
+{
+    if (limb == PLAYER_LIMB_L_HAND)
+    {
+        if ((this->leftHandType == PLAYER_MODELTYPE_LH_SWORD || this->leftHandType == PLAYER_MODELTYPE_LH_SWORD_2 || isPause) && gSave.equips.equipment.swords == 2)
+            *dlist = Player_CustomLeftHand(DLIST_CHILD_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_MASTER_SWORD), CUSTOM_OBJECT_EQ_MASTER_SWORD_0);
+        else if ((this->leftHandType == PLAYER_MODELTYPE_LH_BGS || isPause) && gSave.equips.equipment.swords == 3)
+        {
+            if (gSave.playerData.swordHealth)
+                *dlist = Player_CustomLeftHand(DLIST_CHILD_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_BIGGORON_SWORD), CUSTOM_OBJECT_EQ_BIGGORON_SWORD_0);
+            else
+                *dlist = Player_CustomLeftHand(DLIST_CHILD_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_BIGGORON_SWORD_BROKEN), CUSTOM_OBJECT_EQ_BIGGORON_SWORD_BROKEN_0);
+        }
+        else if (this->leftHandType == PLAYER_MODELTYPE_LH_HAMMER)
+            *dlist = Player_CustomLeftHand(DLIST_CHILD_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_HAMMER), CUSTOM_OBJECT_EQ_HAMMER_0);
+    }
+
+    if (limb == PLAYER_LIMB_R_HAND)
+    {
+        if ((this->rightHandType == PLAYER_MODELTYPE_RH_SHIELD) && gSave.equips.equipment.shields == 3)
+            *dlist = Player_CustomRightHand(DLIST_CHILD_RHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_MIRROR), CUSTOM_OBJECT_EQ_SHIELD_MIRROR_0);
+    }
+
+    if (limb == PLAYER_LIMB_SHEATH)
+    {
+        if (gSave.equips.equipment.shields == 3 || gSave.equips.equipment.swords != 1)
+            Player_OverrideCustomSheath(play, this, dlist, isPause);
+    }
+}
+
+static void Player_OverrideCustom(GameState_Play* play, Actor_Player* this, int limb, Gfx** dlist, int isPause)
+{
+    if (gSave.age == AGE_CHILD)
+        Player_OverrideChild(play, this, limb, dlist, isPause);
+    else
+        Player_OverrideAdult(play, this, limb, dlist, isPause);
+}
+
+int Player_OverrideLimbDrawGameplayDefaultWrapper(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Player* player)
+{
+    /* Forward */
+    if (Player_OverrideLimbDrawGameplayDefault(play, limbIndex, dList, pos, rot, player))
+        return 0;
+
+    Player_OverrideCustom(play, player, limbIndex, dList, 0);
+    return 0;
+}
+
+int Player_OverrideLimbDrawPauseWrapper(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Player* player)
+{
+    /* Forward */
+    if (Player_OverrideLimbDrawPause(play, limbIndex, dList, pos, rot, player))
+        return 0;
+
+    Player_OverrideCustom(play, player, limbIndex, dList, 1);
+    return 0;
+}

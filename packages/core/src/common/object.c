@@ -45,7 +45,7 @@ static const ObjectTexturePatch kObjectTexturePatches[] = {
     { 0x53390, 0x7df10 },
 };
 
-ALIGNED(16) ObjectData kCustomObjectsTable[0x30];
+ALIGNED(16) ObjectData kCustomObjectsTable[128];
 
 static const ObjectPatch kObjectPatches[] = {
 #if defined(GAME_OOT)
