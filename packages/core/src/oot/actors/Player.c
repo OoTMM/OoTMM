@@ -382,6 +382,15 @@ static Gfx sGfxCustomLeftHand[] = {
     gsSPBranchList(0),
 };
 
+static Gfx sGfxCustomRightHand[] = {
+    gsSPDisplayList(0),
+    gsSPSegment(0x0a, 0),
+    gsSPBranchList(0),
+};
+
+#define DLIST_INDIRECT(x)           (*(u32*)((x)))
+#define DLIST_CHILD_LHAND_CLOSED    DLIST_INDIRECT(0x800f78ec)
+
 static void* Player_CustomLeftHand(u32 handDlist, void* eqData, u32 eqDlist)
 {
     if (!eqData)
@@ -394,12 +403,16 @@ static void* Player_CustomLeftHand(u32 handDlist, void* eqData, u32 eqDlist)
     return sGfxCustomLeftHand;
 }
 
-static void* Player_CustomLeftHandChild(void* eqData, u32 eqDlist)
+static void* Player_CustomRightHand(u32 handDlist, void* eqData, u32 eqDlist)
 {
-    u32 handDlist;
+    if (!eqData)
+        return NULL;
 
-    handDlist = *(u32*)(0x800f78ec);
-    return Player_CustomLeftHand(handDlist, eqData, eqDlist);
+    ((u32*)sGfxCustomRightHand)[1] = handDlist;
+    ((u32*)sGfxCustomRightHand)[3] = (u32)eqData;
+    ((u32*)sGfxCustomRightHand)[5] = eqDlist;
+
+    return sGfxCustomRightHand;
 }
 
 static void Player_OverrideChild(GameState_Play* play, Actor_Player* this, int limb, Gfx** dlist, int isPause)
@@ -407,10 +420,9 @@ static void Player_OverrideChild(GameState_Play* play, Actor_Player* this, int l
     if (limb == PLAYER_LIMB_L_HAND)
     {
         if ((this->leftHandType == PLAYER_MODELTYPE_LH_SWORD || isPause) && gSave.equips.equipment.swords == EQ_OOT_SWORD_MASTER)
-        {
-            /* Child Master Sword */
-            *dlist = Player_CustomLeftHandChild(comboGetObject(CUSTOM_OBJECT_ID_EQ_MASTER_SWORD), CUSTOM_OBJECT_EQ_MASTER_SWORD_0);
-        }
+            *dlist = Player_CustomLeftHand(DLIST_CHILD_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_MASTER_SWORD), CUSTOM_OBJECT_EQ_MASTER_SWORD_0);
+        else if (this->leftHandType == PLAYER_MODELTYPE_LH_HAMMER)
+            *dlist = Player_CustomRightHand(DLIST_CHILD_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_HAMMER), CUSTOM_OBJECT_EQ_HAMMER_0);
     }
 }
 

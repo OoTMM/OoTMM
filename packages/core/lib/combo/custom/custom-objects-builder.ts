@@ -57,9 +57,23 @@ export class CustomObjectsBuilder {
     return { name: 'EQ_MASTER_SWORD', ...editor.build() };
   }
 
+  private async makeEqHammer(): Promise<CustomObject> {
+    const editor = new ObjectEditor(0xa);
+    const object_link_boy = await this.getFile('oot', 'objects/object_link_boy');
+    editor.loadSegment(0x06, object_link_boy);
+
+    const b = 0x060233e0;
+    let ms = editor.listData(b)!;
+    ms = editor.stripList(ms, 0x06023660 - b, 0x060238C0 - b);
+
+    editor.submitList(ms);
+    return { name: 'EQ_HAMMER', ...editor.build() };
+  }
+
   async build(): Promise<CustomObject[]> {
     return [
       await this.makeEqMasterSword(),
+      await this.makeEqHammer(),
       //await this.simpleExtract('LIMB_OOT_CHILD_LHAND_CLOSED', 'oot', 'objects/object_link_child', [], 0x06, 0x0a),
     ];
   }
