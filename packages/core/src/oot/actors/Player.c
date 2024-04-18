@@ -475,6 +475,7 @@ static void Player_OverrideCustomSheath(GameState_Play* play, Actor_Player* this
     void*   shield;
     void*   sword;
     u8      swordInUse;
+    u8      shieldOnBack;
 
     shield = NULL;
     sword = NULL;
@@ -489,7 +490,15 @@ static void Player_OverrideCustomSheath(GameState_Play* play, Actor_Player* this
         break;
     }
 
-    if (this->rightHandType != PLAYER_MODELTYPE_RH_SHIELD)
+    if (isPause)
+    {
+        shieldOnBack = 0;
+        if (gSave.age == AGE_CHILD && gSave.equips.equipment.shields > 1)
+            shieldOnBack = 1;
+    }
+    else
+        shieldOnBack = !!(this->rightHandType != PLAYER_MODELTYPE_RH_SHIELD);
+    if (shieldOnBack)
     {
         /* Shield on back */
         switch (gSave.equips.equipment.shields)
