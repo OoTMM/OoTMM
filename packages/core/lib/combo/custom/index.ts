@@ -203,23 +203,23 @@ class CustomAssetsBuilder {
     return objectId;
   }
 
-  addRawData(data: Buffer, compressed: boolean) {
+  addRawData(name: string | null, data: Buffer, compressed: boolean) {
     const sizeAligned = (data.length + 0xf) & ~0xf;
     const vrom = this.vrom;
     this.vrom += sizeAligned;
-    this.patch.addNewFile(null, vrom, data, compressed);
+    this.patch.addNewFile(name, vrom, data, compressed);
     return vrom;
   }
 
   async addFile(define: string, filename: string, compressed: boolean) {
     const data = await raw(this.opts, filename);
-    const vrom = this.addRawData(data, compressed);
+    const vrom = this.addRawData(null, data, compressed);
     this.cg.define('CUSTOM_' + define + '_ADDR', vrom);
     return vrom;
   }
 
   async addCustomObject(name: string, data: Buffer, defines: number[]) {
-    const vrom = this.addRawData(data, true);
+    const vrom = this.addRawData(`custom/${name.toLowerCase()}`, data, true);
     const objectId = this.addObjectEntry(vrom, data.length);
     this.cg.define('CUSTOM_OBJECT_ID_' + name, objectId);
     for (let i = 0; i < defines.length; ++i) {
@@ -247,14 +247,14 @@ class CustomAssetsBuilder {
       this.cg.define('CUSTOM_KEEP_' + k, off);
     }
 
-    const customKeepVrom = this.addRawData(keep.pack(), true);
+    const customKeepVrom = this.addRawData(null, keep.pack(), true);
     this.cg.define('CUSTOM_KEEP_VROM', customKeepVrom);
   }
 
   async addCustomFiles() {
     const cfiles = await customFiles(this.opts);
     for (const [name, data] of Object.entries(cfiles)) {
-      const vrom = this.addRawData(data, true);
+      const vrom = this.addRawData(null, data, true);
       this.cg.define('CUSTOM_' + name + '_ADDR', vrom);
     }
   }
@@ -262,7 +262,7 @@ class CustomAssetsBuilder {
   async addCustomExtractedFiles() {
     const cfiles = await customExtractedFiles(this.roms);
     for (const [name, data] of Object.entries(cfiles)) {
-      const vrom = this.addRawData(data, true);
+      const vrom = this.addRawData(null, data, true);
       this.cg.define('CUSTOM_' + name + '_ADDR', vrom);
     }
   }
@@ -326,7 +326,7 @@ class CustomAssetsBuilder {
 
     /* Add the object table */
     const objectTableBuffer = toU32Buffer(this.objectVroms.map(o => [o.vstart, o.vend]).flat());
-    const objectTableVrom = this.addRawData(objectTableBuffer, true);
+    const objectTableVrom = this.addRawData(null, objectTableBuffer, true);
     this.cg.define('CUSTOM_OBJECT_TABLE_VROM', objectTableVrom);
     this.cg.define('CUSTOM_OBJECT_TABLE_SIZE', this.objectVroms.length);
 
