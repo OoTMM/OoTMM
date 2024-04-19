@@ -579,3 +579,42 @@ int Player_OverrideLimbDrawPauseWrapper(GameState_Play* play, s32 limbIndex, Gfx
     Player_OverrideCustom(play, player, limbIndex, dList, 1);
     return 0;
 }
+
+void Player_DrawFlexLod(GameState_Play* play, void** skeleton, Vec3s* jointTable, s32 dListCount, void* overrideLimbDraw, void* postLimbDraw, void* arg, s32 lod)
+{
+    void* bootsData;
+    u32 bootsList;
+    u32 bootsList2;
+
+    /* Forward */
+    SkelAnime_DrawFlexLod(play, skeleton, jointTable, dListCount, overrideLimbDraw, postLimbDraw, arg, lod);
+
+    /* Boots */
+    if (gSave.age == AGE_CHILD)
+    {
+        bootsData = NULL;
+        if (gSave.equips.equipment.boots == 2)
+        {
+            bootsData = comboGetObject(CUSTOM_OBJECT_ID_BOOTS_IRON);
+            bootsList = CUSTOM_OBJECT_BOOTS_IRON_0;
+            bootsList2 = CUSTOM_OBJECT_BOOTS_IRON_1;
+        }
+        else if (gSave.equips.equipment.boots == 3)
+        {
+            bootsData = comboGetObject(CUSTOM_OBJECT_ID_BOOTS_HOVER);
+            bootsList = CUSTOM_OBJECT_BOOTS_HOVER_0;
+            bootsList2 = CUSTOM_OBJECT_BOOTS_HOVER_1;
+        }
+
+        if (bootsData)
+        {
+            OPEN_DISPS(play->gs.gfx);
+            gSPSegment(POLY_OPA_DISP++, 0x0a, bootsData);
+            gSPDisplayList(POLY_OPA_DISP++, bootsList);
+            gSPDisplayList(POLY_OPA_DISP++, bootsList2);
+            CLOSE_DISPS();
+        }
+    }
+}
+
+PATCH_CALL(0x8007a0d0, Player_DrawFlexLod);
