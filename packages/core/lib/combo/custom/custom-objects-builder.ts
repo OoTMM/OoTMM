@@ -248,6 +248,21 @@ export class CustomObjectsBuilder {
     return { name: 'EQ_OCARINA_FAIRY', ...editor.build() };
   }
 
+  private async makeEqBoomerang(): Promise<CustomObject> {
+    const editor = new ObjectEditor(0xa);
+    const obj = await this.getFile('oot', 'objects/object_link_child');
+    editor.loadSegment(0x06, obj);
+
+    /* 18580 */
+    const b = 0x06016908;
+    let data = editor.segData(b, 0x06016998 - b)!;
+    const data2 = editor.listData(0x06018580)!;
+    const dataCombined = Buffer.concat([data, data2]);
+
+    editor.submitList(dataCombined);
+    return { name: 'EQ_BOOMERANG', ...editor.build() };
+  }
+
   async build(): Promise<CustomObject[]> {
     return [
       await this.makeEqKokiriSword(),
@@ -266,6 +281,7 @@ export class CustomObjectsBuilder {
       await this.makeEqSheathSwordOotAdultFull(),
       await this.makeEqSheathSwordOotAdultEmpty(),
       await this.makeEqOcarinaFairy(),
+      await this.makeEqBoomerang(),
       //await this.simpleExtract('LIMB_OOT_CHILD_LHAND_CLOSED', 'oot', 'objects/object_link_child', [], 0x06, 0x0a),
     ];
   }

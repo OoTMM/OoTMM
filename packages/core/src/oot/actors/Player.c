@@ -507,6 +507,9 @@ static void Player_OverrideAdult(GameState_Play* play, Actor_Player* this, int l
         {
             *dlist = Player_CustomHandEq(DLIST_ADULT_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_KOKIRI_SWORD), CUSTOM_OBJECT_EQ_KOKIRI_SWORD_0);
         }
+
+        if (this->leftHandType == PLAYER_MODELTYPE_LH_BOOMERANG)
+            *dlist = Player_CustomHandEq(DLIST_ADULT_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_BOOMERANG), CUSTOM_OBJECT_EQ_BOOMERANG_0);
     }
 
     if (limb == PLAYER_LIMB_R_HAND)
