@@ -18,7 +18,7 @@
   cursor: pointer;
   border: 1px solid #aaa;
   border-radius: 5%;
-  background: #eee;
+  background: var(--input-bg);
   padding: 1em;
   margin: 1em;
 }

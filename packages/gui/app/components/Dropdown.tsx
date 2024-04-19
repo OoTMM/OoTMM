@@ -11,14 +11,23 @@ type DropdownProps = {
   value: string;
   tooltip?: string;
   onChange: (value: string) => void;
-}
-export const Dropdown = ({ label, options, value, tooltip, onChange }: DropdownProps) => {
+  skipSpace?: boolean;
+};
+export const Dropdown = ({ label, options, value, tooltip, onChange, skipSpace }: DropdownProps) => {
   return (
     <label>
-      <Group direction='vertical'>
-        <Group direction='horizontal'>
-          <Text size='xl' className="label-main">{label}</Text>
-          {tooltip && <a className="tooltip-link" id={tooltip} href="#"><FontAwesomeIcon icon={faQuestionCircle}/></a>}
+      <Group direction="vertical" skipSpace={skipSpace}>
+        <Group direction="horizontal">
+          {label && (
+            <Text size="xl" className="label-main">
+              {label}
+            </Text>
+          )}
+          {tooltip && (
+            <a className="tooltip-link" id={tooltip} href="#">
+              <FontAwesomeIcon icon={faQuestionCircle} />
+            </a>
+          )}
         </Group>
         <select value={value} onChange={(e) => onChange(e.target.value)}>
           {options.map((option) => (

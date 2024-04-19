@@ -15,8 +15,32 @@ html {
 
 body {
   font-size: 1.6rem;
+  --background: #eeeeee;
+  --color: #161616;
+  --input-bg: #eeeeee;
+  --input-hover: #5b70e66c;
+  --primary-btn-background: #0d6efd;
+  --primary-btn-color: white;
+  --danger-btn-background: #dc3545;
+  --danger-btn-color: white;
+  --card-border: #6e29a3;
 }
 
+body.dark {
+  --background: #1f1f1f;
+  --color: #cfcfcf;
+  --input-bg: #242424;
+  --input-hover: #2d2c30;
+  --primary-btn-background: #05376b;
+  --primary-btn-color: #bfbfbf;
+  --danger-btn-background: #a02531;
+  --danger-btn-color: #bfbfbf;
+  --card-border: #6e29a3;
+}
+
+html {
+  color: var(--color) !important;
+}
 strong {
   font-weight: 600;
 }

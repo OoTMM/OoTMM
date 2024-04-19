@@ -1,18 +1,20 @@
 .tab-bar-left {
   background: #333;
   color: white;
+  display: flex !important;
+  flex-direction: column;
 }
 
 .tab {
   min-width: 230px;
   font-size: 1.3em;
   padding: 1em;
-  display: block;
   text-decoration: none;
   color: inherit;
 }
 
-.tab.active, .tab:hover {
+.tab.active,
+.tab:hover {
   background: #111;
 }
 
@@ -21,4 +23,16 @@
   max-height: 100vh;
   overflow: auto;
   padding: 2em;
+  background-color: var(--background);
+  color: var(--color);
+}
+
+.dark-mode-container {
+  margin-top: auto;
+  margin-bottom: 13px;
+  margin-left: 14px;
+}
+
+.dark-mode-label {
+  vertical-align: middle;
 }

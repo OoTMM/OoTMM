@@ -5,14 +5,14 @@ import { PRESETS, Settings } from '@ootmm/core';
 import { useOverrideSettings, useSettings } from '../contexts/GeneratorContext';
 import Group from './Group';
 
-const NO_PRESET = "-----";
+const NO_PRESET = '-----';
 
 type Option = {
   label: string;
   value: Settings | null;
 };
 
-const customPresets = JSON.parse(localStorage.getItem("customPresets") || "{}");
+const customPresets = JSON.parse(localStorage.getItem('customPresets') || '{}');
 
 export const PresetSelector = () => {
   const overrideSettings = useOverrideSettings();
@@ -35,7 +35,7 @@ export const PresetSelector = () => {
     if (!o || o.value === null) {
       /* Clear */
       delete customPresets[value.label];
-      localStorage.setItem("customPresets", JSON.stringify(customPresets));
+      localStorage.setItem('customPresets', JSON.stringify(customPresets));
       setValue(options[0]);
       return;
     }
@@ -44,28 +44,28 @@ export const PresetSelector = () => {
   };
 
   const onCreate = (x: string) => {
-    const newOptionLabel = "Custom: " + x;
+    const newOptionLabel = 'Custom: ' + x;
     const newOption = { label: newOptionLabel, value: settings };
 
     /* Also triggers a redraw */
     customPresets[newOptionLabel] = settings;
-    localStorage.setItem("customPresets", JSON.stringify(customPresets));
+    localStorage.setItem('customPresets', JSON.stringify(customPresets));
     setValue(newOption);
-  }
+  };
 
-  return <label>
-    <Group direction='vertical' spacing='xs'>
-      <span>
-        Preset
-      </span>
-      <CreatableSelect
-        isClearable={!PRESETS.hasOwnProperty(value.label) && value.value !== null}
-        options={options as any[]}
-        onChange={(x) => onChange(x)}
-        onCreateOption={(x) => onCreate(x)}
-        value={value}
-      />
-    </Group>
-    
-  </label>;
+  return (
+    <label>
+      <Group direction="vertical" spacing="xs">
+        <span>Preset</span>
+        <CreatableSelect
+          isClearable={!PRESETS.hasOwnProperty(value.label) && value.value !== null}
+          options={options as any[]}
+          onChange={(x) => onChange(x)}
+          onCreateOption={(x) => onCreate(x)}
+          value={value}
+          classNamePrefix="react-select"
+        />
+      </Group>
+    </label>
+  );
 };

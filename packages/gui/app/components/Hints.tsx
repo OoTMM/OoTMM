@@ -106,11 +106,23 @@ export function HintEditor({ index }: HintEditorProps) {
         </span>
       </td>
       <td>
-        <Dropdown options={hintOptions} value={hint.type} onChange={onChangeType as any} />
+        <Dropdown options={hintOptions} value={hint.type} onChange={onChangeType as any} skipSpace={true} />
       </td>
       <td>
         {hint.type === 'item' && (
-          <Select className="plando-select" options={itemOptions} onChange={(v) => onChangeItem(v?.value)} value={selectedItem} />
+          <Select
+            className="plando-select dropdown-height"
+            classNamePrefix="react-select"
+            options={itemOptions}
+            onChange={(v) => onChangeItem(v?.value)}
+            value={selectedItem}
+            styles={{
+              dropdownIndicator: (styles) => ({
+                ...styles,
+                padding: '4px',
+              }),
+            }}
+          />
         )}
       </td>
       <td>{hint.amount !== 'max' && <InputNumber value={hint.amount} onChange={onChangeAmount} />}</td>

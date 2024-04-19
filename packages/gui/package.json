@@ -29,6 +29,7 @@
     "react-bootstrap": "^2.10.2",
     "react-bootstrap-icons": "^1.10.2",
     "react-dom": "^18.2.0",
+    "react-responsive": "^10.0.0",
     "react-select": "^5.8.0",
     "react-tooltip": "^5.25.1"
   },
