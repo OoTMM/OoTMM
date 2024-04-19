@@ -381,7 +381,7 @@ void Player_AfterSetEquipmentData(GameState_Play* play)
 #define DLIST_CHILD_RHAND_CLOSED    DLIST_INDIRECT(0x800f77c4)
 #define DLIST_ADULT_LHAND_CLOSED    DLIST_INDIRECT(0x800f78e8)
 #define DLIST_ADULT_RHAND_CLOSED    DLIST_INDIRECT(0x800f77b8)
-
+#define DLIST_ADULT_RHAND_OPEN      DLIST_INDIRECT(0x800f7918)
 
 static void* Player_CustomHandEq(u32 handDlist, void* eqData, u32 eqDlist)
 {
@@ -513,6 +513,9 @@ static void Player_OverrideAdult(GameState_Play* play, Actor_Player* this, int l
     {
         if ((this->rightHandType == PLAYER_MODELTYPE_RH_SHIELD) && gSave.equips.equipment.shields == 1)
             *dlist = Player_CustomHandEq(DLIST_ADULT_RHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_DEKU), CUSTOM_OBJECT_EQ_SHIELD_DEKU_0);
+
+        if (this->rightHandType == PLAYER_MODELTYPE_RH_OCARINA)
+            *dlist = Player_CustomHandEq(DLIST_ADULT_RHAND_OPEN, comboGetObject(CUSTOM_OBJECT_ID_EQ_OCARINA_FAIRY), CUSTOM_OBJECT_EQ_OCARINA_FAIRY_0);
     }
 
     if (limb == PLAYER_LIMB_SHEATH)

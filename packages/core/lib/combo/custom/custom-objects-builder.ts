@@ -235,6 +235,19 @@ export class CustomObjectsBuilder {
     return { name: 'EQ_HAMMER', ...editor.build() };
   }
 
+  private async makeEqOcarinaFairy(): Promise<CustomObject> {
+    const editor = new ObjectEditor(0xa);
+    const obj = await this.getFile('oot', 'objects/object_link_child');
+    editor.loadSegment(0x06, obj);
+
+    const b = 0x06015ba8;
+    let data = editor.listData(b)!;
+    data = editor.stripList(data, 0x06015CB8 - b, 0x06015DE8 - b);
+
+    editor.submitList(data);
+    return { name: 'EQ_OCARINA_FAIRY', ...editor.build() };
+  }
+
   async build(): Promise<CustomObject[]> {
     return [
       await this.makeEqKokiriSword(),
@@ -252,6 +265,7 @@ export class CustomObjectsBuilder {
       await this.makeEqSheathSwordOotChildEmpty(),
       await this.makeEqSheathSwordOotAdultFull(),
       await this.makeEqSheathSwordOotAdultEmpty(),
+      await this.makeEqOcarinaFairy(),
       //await this.simpleExtract('LIMB_OOT_CHILD_LHAND_CLOSED', 'oot', 'objects/object_link_child', [], 0x06, 0x0a),
     ];
   }
