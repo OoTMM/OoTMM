@@ -629,7 +629,7 @@ void Player_DrawFlexLod(GameState_Play* play, void** skeleton, Vec3s* jointTable
             CLOSE_DISPS();
         }
 
-        if (gSave.inventory.upgrades.strength > 1)
+        if (comboConfig(CFG_OOT_AGELESS_STRENGTH) && gSave.inventory.upgrades.strength > 1)
         {
             c = &sGauntletColors[gSave.inventory.upgrades.strength > 2 ? 1 : 0];
             OPEN_DISPS(play->gs.gfx);
@@ -650,3 +650,24 @@ static void Player_AddMasterSwordGanonFight(GameState_Play* play)
 }
 
 PATCH_CALL(0x80850758, Player_AddMasterSwordGanonFight);
+
+int Player_GetStrength(void)
+{
+    int level;
+
+    level = gSave.inventory.upgrades.strength;
+    if (level > 3)
+        level = 3;
+    if (gSave.age == AGE_CHILD && level > 1 && !comboConfig(CFG_OOT_AGELESS_STRENGTH))
+        level = 1;
+    return level;
+}
+
+PATCH_FUNC(0x80079af8, Player_GetStrength);
+
+static int Player_IsStrengthGoronBracelet(void)
+{
+    return Player_GetStrength() == 1;
+}
+
+PATCH_CALL(0x8007a2b4, Player_IsStrengthGoronBracelet);
