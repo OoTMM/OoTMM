@@ -173,6 +173,8 @@ export const CONFVARS = [
   'ER_REGIONS_OVERWORLD',
   'CROSS_GAME_FW',
   'RUPEE_SCALING',
+  'OOT_SWORDLESS_ADULT',
+  'OOT_TIME_TRAVEL_REQUIRES_MS',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

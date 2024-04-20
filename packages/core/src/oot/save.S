@@ -39,3 +39,8 @@ PATCH_END
 PATCH_START 0x800e17cc
   li t4,0xfff
 PATCH_END
+
+/* Don't force-give the Master Sword when loading as adult */
+PATCH_START 0x80090540
+  nop
+PATCH_END

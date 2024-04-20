@@ -459,6 +459,27 @@ static void playAdjustEntrance(GameState_Play* play)
     applyCustomEntrance(&gSave.entrance);
 }
 
+static void masterSwordFix(GameState_Play* play)
+{
+    if (!gSharedCustomSave.foundMasterSword)
+        return;
+
+    /* Re-add the Master Sword to the inventory */
+    gSave.inventory.equipment.swords |= 2;
+
+    if (comboConfig(CFG_OOT_SWORDLESS_ADULT))
+        return;
+    if (gSave.age != AGE_ADULT)
+        return;
+    if (gSave.equips.buttonItems[0] != ITEM_NONE)
+        return;
+
+    /* We need to force-reequip */
+    gSave.equips.buttonItems[0] = ITEM_OOT_SWORD_MASTER;
+    gSave.equips.equipment.swords = 2;
+    EV_OOT_UNSET_SWORDLESS();
+}
+
 void hookPlay_Init(GameState_Play* play)
 {
     /* Pre-init */
@@ -483,6 +504,7 @@ void hookPlay_Init(GameState_Play* play)
     comboObjectsReset();
     comboExObjectsReset();
     eventFixes(play);
+    masterSwordFix(play);
 
     Play_Init(play);
 

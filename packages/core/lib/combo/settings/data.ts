@@ -643,6 +643,21 @@ export const SETTINGS = [{
   ],
   default: 'child'
 }, {
+  key: 'swordlessAdult',
+  name: 'Allow adult link to be swordless',
+  category: 'main.events',
+  type: 'boolean',
+  description: 'Choose whether or not adult Link can be swordless',
+  default: false
+}, {
+  key: 'timeTravelSword',
+  name: 'Time Travel requires Master Sword',
+  category: 'main.events',
+  type: 'boolean',
+  description: 'Choose whether or not Link needs the Master Sword to travel through time',
+  default: true,
+  cond: (s: any) => s.swordlessAdult,
+}, {
   key: 'doorOfTime',
   name: 'Door of Time',
   category: 'main.events',
