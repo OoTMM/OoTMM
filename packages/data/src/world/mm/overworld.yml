@@ -306,7 +306,7 @@
     "Clock Town Bank Reward 2": "can_use_wallet(2) || (can_use_wallet(1) && (trick(MM_BANK_ONE_WALLET) || trick(MM_BANK_NO_WALLET)))"
     "Clock Town Bank Reward 3": "can_use_wallet(3) || (can_use_wallet(2) && trick(MM_BANK_ONE_WALLET)) || (can_use_wallet(1) && trick(MM_BANK_NO_WALLET))"
     "Clock Town Rosa Sisters HP": "has(MASK_KAMARO) && (is_night1 || is_night2)"
-"Clock Town East":
+"Clock Town East Main":
   region: CLOCK_TOWN_EAST
   exits:
     "Termina Field": "true"
@@ -323,7 +323,6 @@
     "Astral Observatory Passage": "event(BOMBER_CODE) || event(GUESS_BOMBER) || trick(MM_BOMBER_BACKFLIP) || short_hook_anywhere"
     "Clock Town East Postbox": "true"
   events:
-    GUESS_BOMBER: "trick(MM_BOMBER_GUESS)"
     BOMBERS_EAST1: "event(HIDE_SEEK1)"
     BOMBERS_EAST2: "event(HIDE_SEEK2)"
     BOMBERS_EAST3: "event(HIDE_SEEK3)"
@@ -334,16 +333,19 @@
 "Clock Town East Postbox":
   region: NONE
   exits:
-    "Clock Town East": "true"
+    "Clock Town East Main": "true"
   locations:
     "Clock Town Post Box": "has(MASK_POSTMAN)"
-"Clock Town East Near Hideout":
-  region: CLOCK_TOWN_WEST
+"Clock Town East":
+  region: CLOCK_TOWN_EAST
   exits:
-    "Clock Town East": "true"
-    "Clock Town East Near Hideout Guess": "true"
-"Clock Town East Near Hideout Guess":
+    "Clock Town East Main": "true"
+  events:
+    GUESS_BOMBER: "trick(MM_BOMBER_GUESS)"
+"Clock Town East Near Hideout":
   region: NONE
+  exits:
+    "Clock Town East Main": "true"
   locations:
     "Clock Town Bomber Notebook": "event(GUESS_BOMBER)"
 "Astral Observatory Passage":
