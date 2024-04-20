@@ -963,6 +963,8 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     ER_REGIONS_OVERWORLD: settings.erRegions !== 'none' || settings.erOverworld !== 'none',
     CROSS_GAME_FW: settings.crossGameFw,
     RUPEE_SCALING: settings.rupeeScaling,
+    OOT_SWORDLESS_ADULT: settings.swordlessAdult,
+    OOT_TIME_TRAVEL_REQUIRES_MS: settings.timeTravelSword,
   };
 
   for (const v in exprs) {

@@ -920,6 +920,8 @@ static int addItemSwordOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     }
     if (param >= 4)
         gOotSave.isBiggoronSword = 1;
+    if (param == 2)
+        gSharedCustomSave.foundMasterSword = 1;
     return 0;
 }
 

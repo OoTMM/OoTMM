@@ -338,10 +338,16 @@ void comboCreateSave(void* unk, void* buffer)
     gOotSave.childEquips.equipment.boots = 0x01;
     gOotSave.childEquips.equipment.tunics = 0x01;
 
-    gOotSave.adultEquips.buttonItems[0] = ITEM_OOT_SWORD_MASTER;
     gOotSave.adultEquips.equipment.boots = 0x01;
     gOotSave.adultEquips.equipment.tunics = 0x01;
-    gOotSave.adultEquips.equipment.swords = 0x02;
+
+    if (!comboConfig(CFG_OOT_SWORDLESS_ADULT))
+    {
+        gOotSave.adultEquips.buttonItems[0] = ITEM_OOT_SWORD_MASTER;
+        gOotSave.adultEquips.equipment.swords = 0x02;
+    }
+    else
+        gOotSave.adultEquips.buttonItems[0] = ITEM_NONE;
 
     /* Apply starting age */
     if (comboConfig(CFG_OOT_START_ADULT))
@@ -351,13 +357,17 @@ void comboCreateSave(void* unk, void* buffer)
         gOotSave.entrance = ENTR_OOT_WARP_SONG_TEMPLE;
         gOotSave.sceneId = SCE_OOT_TEMPLE_OF_TIME;
 
-        /* Force Master Sword */
-        gOotSave.equips.buttonItems[0] = ITEM_OOT_SWORD_MASTER;
-        gOotSave.inventory.equipment.swords |= EQ_OOT_SWORD_MASTER;
-        gOotSave.equips.equipment.swords = 2;
+        if (!comboConfig(CFG_OOT_SWORDLESS_ADULT))
+        {
+            /* Force Master Sword */
+            gOotSave.equips.buttonItems[0] = ITEM_OOT_SWORD_MASTER;
+            gOotSave.inventory.equipment.swords |= EQ_OOT_SWORD_MASTER;
+            gOotSave.equips.equipment.swords = 2;
+            gSharedCustomSave.foundMasterSword = 1;
 
-        /* Unset the swordless flag */
-        gSave.eventsMisc[29] = 0;
+            /* Unset the swordless flag */
+            gSave.eventsMisc[29] = 0;
+        }
     }
 
     /* Apply starting items */
