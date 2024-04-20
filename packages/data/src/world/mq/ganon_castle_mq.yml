@@ -121,5 +121,5 @@
 "Ganon Castle Stairs":
   region: GANON_CASTLE
   exits:
-    "Ganon Castle": "true"
+    "Ganon Castle Main": "true"
     "Ganon Castle Tower": "true"
