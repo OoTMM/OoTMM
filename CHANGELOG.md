@@ -10,6 +10,8 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add a setting to travel through time without the Master Sword.
+- Add a setting to play as swordless adult link.
 - Render most of the ageless items.
 - Add rupee scaling, a setting where rupees are worth more if you have an upgraded wallet.
 - Add full overworld ER.
