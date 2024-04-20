@@ -105,7 +105,7 @@
 - { id: OOT_DEKU_SEEDS_30, item: OOT_SEEDS_30, type: MINOR, add: [SEEDS, 30], flags: 0x50, draw: OOT_SEEDS, object: [oot, 0x0119], name: "<C0>30 Deku Seeds" }
 - { id: OOT_BOMBCHU_5, item: OOT_BOMBCHU_5, type: NORMAL, add: [OOT_BOMBCHU, 5], flags: 0x80, draw: BOMBCHU, object: [oot, 0x00d9], name: "<C0>5 Bombchu" }
 - { id: OOT_BOMBCHU_20, item: OOT_BOMBCHU_20, type: NORMAL, add: [OOT_BOMBCHU, 20], flags: 0x80, draw: BOMBCHU, object: [oot, 0x00d9], name: "<C0>20 Bombchu" }
-- { id: OOT_FISH, item: OOT_FISH, type: MINOR, add: OOT_BOTTLE_REFILL, flags: 0x80, draw: POND_FISH, object: GI_POND_FISH, name: "a <C0>Fish" }
+- { id: OOT_FISH, item: OOT_FISH, type: MINOR, add: OOT_BOTTLE_REFILL, flags: 0x80, draw: FISH, object: [oot, 0x00f4], name: "a <C0>Fish" }
 - { id: OOT_BUG, item: OOT_BUG, type: MINOR, add: OOT_BOTTLE_REFILL, flags: 0x80, draw: BUG, object: [oot, 0x0174], name: "a <C0>Bug" }
 - { id: OOT_BLUE_FIRE, item: OOT_BLUE_FIRE, type: MINOR, add: OOT_BOTTLE_REFILL, flags: 0x80, draw: OOT_BLUE_FIRE, object: [oot, 0x0173], name: "some <C0>Blue Fire" }
 - { id: OOT_POE, item: OOT_POE, type: MINOR, add: OOT_BOTTLE_REFILL, flags: 0x80, draw: POE, object: [oot, 0x0176], name: "a <C0>Poe" }
