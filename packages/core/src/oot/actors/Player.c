@@ -586,8 +586,16 @@ int Player_OverrideLimbDrawPauseWrapper(GameState_Play* play, s32 limbIndex, Gfx
     return 0;
 }
 
+static Color_RGB8 sGauntletColors[] = {
+    { 255, 255, 255 },
+    { 254, 207, 15 },
+};
+
+void DrawChildGauntlets(GameState_Play* play);
+
 void Player_DrawFlexLod(GameState_Play* play, void** skeleton, Vec3s* jointTable, s32 dListCount, void* overrideLimbDraw, void* postLimbDraw, void* arg, s32 lod)
 {
+    Color_RGB8* c;
     void* bootsData;
     u32 bootsList;
     u32 bootsList2;
@@ -619,6 +627,16 @@ void Player_DrawFlexLod(GameState_Play* play, void** skeleton, Vec3s* jointTable
             gSPDisplayList(POLY_OPA_DISP++, bootsList);
             gSPDisplayList(POLY_OPA_DISP++, bootsList2);
             CLOSE_DISPS();
+        }
+
+        if (gSave.inventory.upgrades.strength > 1)
+        {
+            c = &sGauntletColors[gSave.inventory.upgrades.strength > 2 ? 1 : 0];
+            OPEN_DISPS(play->gs.gfx);
+            gDPPipeSync(POLY_OPA_DISP++);
+            gDPSetEnvColor(POLY_OPA_DISP++, c->r, c->g, c->b, 0);
+            CLOSE_DISPS();
+            DrawChildGauntlets(play);
         }
     }
 }
