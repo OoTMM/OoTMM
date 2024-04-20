@@ -126,8 +126,8 @@
 "has_hover_boots": "age_boots && has_hover_boots_raw"
 
 "has_goron_bracelet": "has_strength_raw(1)"
-"can_lift_silver": "is_adult && has_strength_raw(2)"
-"can_lift_gold": "is_adult && has_strength_raw(3)"
+"can_lift_silver": "(is_adult || setting(agelessStrength)) && has_strength_raw(2)"
+"can_lift_gold": "(is_adult || setting(agelessStrength)) && has_strength_raw(3)"
 
 #Magic Item Macros
 "has_green_potion": "has_bottle && (renewable(POTION_GREEN) || renewable(BOTTLE_POTION_GREEN))"

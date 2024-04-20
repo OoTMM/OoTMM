@@ -1823,6 +1823,13 @@ export const SETTINGS = [{
   description: 'Allows Link to use the child trade items independently of his age',
   default: false
 }, {
+  key: 'agelessStrength',
+  name: 'Ageless Strength',
+  category: 'items.ageless',
+  type: 'boolean',
+  description: 'Allows Child Link to use adult strength upgrades',
+  default: false
+}, {
   key: 'erBoss',
   name: 'Boss Entrance Shuffle',
   category: 'entrances',

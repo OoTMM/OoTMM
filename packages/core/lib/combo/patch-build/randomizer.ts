@@ -865,6 +865,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     COLOSSAL_WALLET: settings.colossalWallets,
     BOTTOMLESS_WALLET: settings.bottomlessWallets,
     OOT_AGELESS_BOOTS: settings.agelessBoots,
+    OOT_AGELESS_STRENGTH: settings.agelessStrength,
     MM_OWL_SHUFFLE: settings.owlShuffle === 'anywhere',
     OOT_CARPENTERS_ONE: settings.gerudoFortress === 'single',
     OOT_CARPENTERS_NONE: settings.gerudoFortress === 'open',
