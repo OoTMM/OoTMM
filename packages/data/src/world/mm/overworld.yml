@@ -1411,8 +1411,6 @@
     "Woods of Mystery Grotto Grass 14": "true"
 "Swamp Potion Shop":
   region: ENTRANCE
-  events:
-    RED_POTION: "event(MEET_KOUME)"
   exits:
     "Swamp Front": "true"
   locations:

@@ -218,7 +218,7 @@
 # Bottles
 "has_bottle": "has(BOTTLE_EMPTY) || has(BOTTLE_POTION_RED) || has(BOTTLE_POTION_GREEN) || has(BOTTLE_POTION_BLUE) || has(BOTTLE_MILK) || event(GOLD_DUST_USED) || has(BOTTLE_CHATEAU) || has(BOTTLE_FAIRY) || has(BOTTLE_POE) || has(BOTTLE_BIG_POE)"
 "has_blue_potion": "has_bottle && (renewable(POTION_BLUE) || renewable(BOTTLE_POTION_BLUE))"
-"has_red_potion": "has_bottle && (event(RED_POTION) || renewable(POTION_RED) || renewable(BOTTLE_POTION_RED))"
+"has_red_potion": "has_bottle && (renewable(POTION_RED) || renewable(BOTTLE_POTION_RED))"
 "has_green_potion": "has_bottle && (renewable(POTION_GREEN) || renewable(BOTTLE_POTION_GREEN))"
 "has_milk": "has_bottle && (renewable(MILK) || renewable(BOTTLE_MILK))"
 "has_red_or_blue_potion": "has_red_potion || has_blue_potion"

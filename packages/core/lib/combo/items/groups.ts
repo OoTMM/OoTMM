@@ -400,6 +400,7 @@ export const CRITICAL_RENEWABLES = new Set([
   Items.MM_SHIELD_HERO,
   Items.MM_BOMBCHU_10,
   Items.MM_MAGIC_BEAN,
+  Items.MM_POTION_RED,
   Items.MM_POTION_BLUE,
   Items.MM_MILK,
   Items.OOT_SHIELD_DEKU,
