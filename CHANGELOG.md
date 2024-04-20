@@ -29,6 +29,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Change the fishing pond fish model.
 - Kotake no longer gives red potion refills when Koume isn't rescued.
 - Rework how Deku Tree behaves (it's now either always open or strictly opened by Mido).
 - Rework how the sirloin function in indoor ER (+ new overworld ER) to allow shuffling the North in MM.

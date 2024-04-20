@@ -1349,6 +1349,26 @@ void DrawGi_Clock(GameState_Play* play, s16 index)
     CLOSE_DISPS();
 }
 
+void DrawGi_PondFish(GameState_Play* play, s16 index, u8 param)
+{
+    const DrawGi* drawGi;
+    float scaleBase;
+    float scaleActual;
+    float scale;
+
+    drawGi = &kDrawGi[index];
+    scaleBase = FISH_WEIGHT_TO_LENGTH(2);
+    scaleActual = FISH_WEIGHT_TO_LENGTH(param * 0.2f + 2.f);
+    scale = scaleActual / scaleBase;
+
+    OPEN_DISPS(play->gs.gfx);
+    InitListPolyOpa(play->gs.gfx);
+    ModelViewScale(scale, scale, scale, MAT_MUL);
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
+    CLOSE_DISPS();
+}
+
 typedef struct
 {
     u32 listColorOpa;

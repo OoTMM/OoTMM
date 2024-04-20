@@ -311,6 +311,7 @@ class CustomAssetsBuilder {
     await this.addObjectFile('BTN_A', 'btn_a.zobj', [0x06000da0]);
     await this.addObjectFile('BTN_C_HORIZONTAL', 'btn_c_horizontal.zobj', [0x06000e10]);
     await this.addObjectFile('BTN_C_VERTICAL', 'btn_c_vertical.zobj', [0x06000960]);
+    await this.addObjectFile('GI_POND_FISH', 'gi_pond_fish.zobj', [0x06001160]);
     await this.addObjectFile('BOMBCHU_BAG', 'bombchu_bag.zobj', [0x060006A0, 0x060008E0, 0x06001280]);
     await this.addObjectFile('MM_ADULT_LINK', 'mm_adult_link.zobj', [
       0x060122C4, 0x0600bb00, 0x0601c0c0, 0x0601c0d0, 0x0601c130, 0x0601BFE8, 0x0601BFF8, 0x0601C008,

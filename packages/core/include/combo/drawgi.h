@@ -49,6 +49,7 @@ void DrawGi_BombchuBag(GameState_Play* play, s16 index, u8 param);
 void DrawGi_BigFairy(GameState_Play* play, s16 index);
 void DrawGi_Clock(GameState_Play*, s16);
 void DrawGi_Rupee(GameState_Play*, s16 index, u8 param);
+void DrawGi_PondFish(GameState_Play*, s16 index, u8 param);
 
 #endif
 
