@@ -338,9 +338,12 @@
   locations:
     "Clock Town Post Box": "has(MASK_POSTMAN)"
 "Clock Town East Near Hideout":
-  region: NONE
+  region: CLOCK_TOWN_WEST
   exits:
     "Clock Town East": "true"
+    "Clock Town East Near Hideout Guess": "true"
+"Clock Town East Near Hideout Guess":
+  region: NONE
   locations:
     "Clock Town Bomber Notebook": "event(GUESS_BOMBER)"
 "Astral Observatory Passage":
