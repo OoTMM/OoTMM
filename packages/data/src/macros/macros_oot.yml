@@ -92,9 +92,10 @@
 "age_child_trade": "glitch_equip_swap || is_child || setting(agelessChildTrade)"
 
 # Swords
+"starts_with_master_sword": "setting(startingAge, adult) && !setting(swordlessAdult)"
 "has_sword_kokiri": "cond(setting(progressiveSwordsOot, progressive), has(SWORD), has(SWORD_KOKIRI))"
-"has_sword_master": "setting(startingAge, adult) || cond(setting(progressiveSwordsOot, progressive), has(SWORD, 2), has(SWORD_MASTER))"
-"has_sword_goron": "cond(setting(progressiveSwordsOot, progressive), cond(setting(startingAge, adult), has(SWORD, 2), has(SWORD, 3)), cond(setting(progressiveSwordsOot, goron), has(SWORD_GORON), has(SWORD_KNIFE) || has(SWORD_BIGGORON)))"
+"has_sword_master": "starts_with_master_sword || cond(setting(progressiveSwordsOot, progressive), has(SWORD, 2), has(SWORD_MASTER))"
+"has_sword_goron": "cond(setting(progressiveSwordsOot, progressive), cond(starts_with_master_sword, has(SWORD, 2), has(SWORD, 3)), cond(setting(progressiveSwordsOot, goron), has(SWORD_GORON), has(SWORD_KNIFE) || has(SWORD_BIGGORON)))"
 "has_weapon": "can_use_sword"
 "can_use_sword_kokiri": "age_sword_child && has_sword_kokiri"
 "can_use_sword_master": "age_sword_adult && has_sword_master"
