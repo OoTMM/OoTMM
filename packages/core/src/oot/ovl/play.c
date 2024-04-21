@@ -4,6 +4,7 @@
 #include <combo/menu.h>
 #include <combo/entrance.h>
 #include <combo/debug.h>
+#include <combo/magic.h>
 
 extern void* gMmMag;
 GameState_Play* gPlay;

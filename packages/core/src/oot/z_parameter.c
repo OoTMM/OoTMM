@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/magic.h>
 
 void Magic_FlashMeterBorder(void)
 {

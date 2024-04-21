@@ -3,6 +3,7 @@
 #include <combo/entrance.h>
 #include <combo/player.h>
 #include <combo/mask.h>
+#include <combo/magic.h>
 #include "../actors.h"
 
 void ArrowCycle_Handle(Actor_Player* link, GameState_Play* play);

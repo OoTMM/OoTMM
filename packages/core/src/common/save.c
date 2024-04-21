@@ -2,6 +2,7 @@
 #include <combo/item.h>
 #include <combo/net.h>
 #include <combo/time.h>
+#include <combo/magic.h>
 
 #if !defined(GAME_OOT)
 ALIGNED(16) OotSave gOotSave;
