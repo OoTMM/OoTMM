@@ -143,6 +143,7 @@ async function genEntrances() {
   /* Codegen debug data */
   const debug = new CodeGen(path.resolve('build', 'src', 'common', 'entrances_debug.c'));
   debug.include('combo.h');
+  debug.include('combo/debug.h');
   debug.raw('');
   debug.raw('#if defined(DEBUG)');
   for (const [name, _] of Object.entries(ENTRANCES_DEBUG_CATEGORIES)) {

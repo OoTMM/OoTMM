@@ -3,6 +3,7 @@
 #include <combo/sr.h>
 #include <combo/dma.h>
 #include <combo/menu.h>
+#include <combo/debug.h>
 
 ComboGlobal g;
 

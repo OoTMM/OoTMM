@@ -1,10 +1,6 @@
 #ifndef COMBO_COMBO_H
 #define COMBO_COMBO_H
 
-#if defined(DEBUG)
-# include <combo/debug.h>
-#endif
-
 #if !defined(__ASSEMBLER__)
 # include <stddef.h>
 # include <string.h>
@@ -90,40 +86,6 @@
 #endif
 
 #if !defined(__ASSEMBLER__)
-
-#if defined(DEBUG_ALLOC)
-void malloc_check(void);
-#else
-# define malloc_check() do {} while (0)
-#endif
-
-#define CHEAT_ALL_ITEMS     0
-#define CHEAT_HEALTH        1
-#define CHEAT_MAGIC         2
-
-#if defined(DEBUG)
-typedef struct
-{
-    const char* name;
-    u32         data;
-}
-DebugMenuEntry;
-
-void Debug_Init(void);
-void Debug_Input(void);
-void Debug_Update(void);
-
-extern const DebugMenuEntry kDebugMenuWarp[];
-
-# define CHEAT_ON(x) (BITMAP8_GET(gSharedCustomSave.cheats, x))
-
-#else
-# define Debug_Init() do {} while (0)
-# define Debug_Input() do {} while (0)
-# define Debug_Update() do {} while (0)
-# define CHEAT_ON(x) (0)
-#endif
-
 void comboDisableInterrupts(void);
 void comboDma(void* addr, u32 cartAddr, u32 size);
 void comboDma_NoCacheInval(void* addr, u32 cartAddr, u32 size);

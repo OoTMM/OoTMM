@@ -1,9 +1,9 @@
 #include <combo.h>
+#include <combo/debug.h>
 #include <combo/custom.h>
 #include <combo/entrance.h>
 
 #if defined(DEBUG)
-
 #define DEBUGMENU_PAGE_NONE     0
 #define DEBUGMENU_PAGE_MAIN     1
 #define DEBUGMENU_PAGE_CHEATS   2

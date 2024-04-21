@@ -6,7 +6,6 @@
 /out
 /third_party
 /node_modules
-/include/combo/debug.h
 /config.yml
 /config*.yml
 /local

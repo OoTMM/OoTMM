@@ -3,6 +3,7 @@
 #include <combo/net.h>
 #include <combo/menu.h>
 #include <combo/entrance.h>
+#include <combo/debug.h>
 
 extern void* gMmMag;
 GameState_Play* gPlay;
