@@ -2,6 +2,7 @@
 #include <combo/dungeon.h>
 #include <combo/souls.h>
 #include <combo/player.h>
+#include <combo/mask.h>
 
 static s16 sActorIdToSpawn;
 
@@ -296,7 +297,7 @@ static int shouldActorIgnorePlayer(Actor* this, Actor_Player* link)
 {
     u16 variable;
 
-    if (link->mask != PLAYER_MASK_STONE)
+    if (link->mask != MASK_STONE)
         return 0;
 
     variable = this->variable;

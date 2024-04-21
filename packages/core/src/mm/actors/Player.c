@@ -2,6 +2,7 @@
 #include <combo/custom.h>
 #include <combo/entrance.h>
 #include <combo/player.h>
+#include <combo/mask.h>
 #include "../actors.h"
 
 void ArrowCycle_Handle(Actor_Player* link, GameState_Play* play);
@@ -1462,12 +1463,12 @@ u8 Player_AfterMaskLoaded(Actor_Player* player)
         u32* maskObjectSegment;
         switch (player->currentMask)
         {
-        case PLAYER_MASK_KEATON:
+        case MASK_KEATON:
             maskObjectSegment = (u32*) player->maskObjectSegment;
             maskObjectSegment[0x12a] = 0xde000000;
             maskObjectSegment[0x12b] = 0x0405a2e0;
             break;
-        case PLAYER_MASK_BUNNY:
+        case MASK_BUNNY:
             maskObjectSegment = (u32*) player->maskObjectSegment;
             maskObjectSegment[0x188] = 0xde000000;
             maskObjectSegment[0x189] = 0x0405a2e0;
@@ -1480,7 +1481,7 @@ u8 Player_AfterMaskLoaded(Actor_Player* player)
             maskObjectSegment[0x230] = 0xde000000;
             maskObjectSegment[0x231] = 0x0405a2e0;
             break;
-        case PLAYER_MASK_SCENTS:
+        case MASK_SCENTS:
             maskObjectSegment = (u32*) player->maskObjectSegment;
             maskObjectSegment[0x1c6] = 0xde000000;
             maskObjectSegment[0x1c7] = 0x0405a2e0;

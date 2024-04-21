@@ -5,48 +5,6 @@
 #include <combo/math/vec.h>
 #include <combo/gi.h>
 
-#if defined(GAME_OOT)
-# define PLAYER_MASK_NONE               0x00
-# define PLAYER_MASK_KEATON             0x01
-# define PLAYER_MASK_SKULL              0x02
-# define PLAYER_MASK_SPOOKY             0x03
-# define PLAYER_MASK_BUNNY              0x04
-# define PLAYER_MASK_GORON              0x05
-# define PLAYER_MASK_ZORA               0x06
-# define PLAYER_MASK_GERUDO             0x07
-# define PLAYER_MASK_TRUTH              0x08
-# define PLAYER_MASK_BLAST              0x09
-# define PLAYER_MASK_STONE              0x0a
-#endif
-
-#if defined(GAME_MM)
-# define PLAYER_MASK_NONE               0x00
-# define PLAYER_MASK_TRUTH              0x01
-# define PLAYER_MASK_KAFEI              0x02
-# define PLAYER_MASK_ALL_NIGHT          0x03
-# define PLAYER_MASK_BUNNY              0x04
-# define PLAYER_MASK_KEATON             0x05
-# define PLAYER_MASK_GARO               0x06
-# define PLAYER_MASK_ROMANI             0x07
-# define PLAYER_MASK_TROUPE_LEADER      0x08
-# define PLAYER_MASK_POSTMAN            0x09
-# define PLAYER_MASK_COUPLE             0x0a
-# define PLAYER_MASK_GREAT_FAIRY        0x0b
-# define PLAYER_MASK_GIBDO              0x0c
-# define PLAYER_MASK_DON_GERO           0x0d
-# define PLAYER_MASK_KAMARO             0x0e
-# define PLAYER_MASK_CAPTAIN            0x0f
-# define PLAYER_MASK_STONE              0x10
-# define PLAYER_MASK_BREMEN             0x11
-# define PLAYER_MASK_BLAST              0x12
-# define PLAYER_MASK_SCENTS             0x13
-# define PLAYER_MASK_GIANT              0x14
-# define PLAYER_MASK_FIERCE_DEITY       0x15
-# define PLAYER_MASK_GORON              0x16
-# define PLAYER_MASK_ZORA               0x17
-# define PLAYER_MASK_DEKU               0x18
-#endif
-
 typedef struct GameState_Play GameState_Play;
 typedef struct ActorContext ActorContext;
 typedef struct Actor Actor;

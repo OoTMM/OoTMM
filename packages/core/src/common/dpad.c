@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/dma.h>
 #include <combo/player.h>
+#include <combo/mask.h>
 
 #define DPAD_DOWN   0
 #define DPAD_UP     1
@@ -71,7 +72,7 @@ static int canUseDpadItem(GameState_Play* play, s16 itemId, int flags)
 
     /* Giant mask can't use any item */
 #if defined(GAME_MM)
-    if (gSave.equippedMask == PLAYER_MASK_GIANT)
+    if (gSave.equippedMask == MASK_GIANT)
         return 0;
 
     /* These states seem to handle minigames - and everything should be disabled during these */

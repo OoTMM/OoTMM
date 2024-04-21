@@ -3,6 +3,7 @@
 #include <combo/dungeon.h>
 #include <combo/custom.h>
 #include <combo/player.h>
+#include <combo/mask.h>
 
 void ArrowCycle_Handle(Actor_Player* link, GameState_Play* play);
 void Ocarina_HandleCustomSongs(Actor_Player* link, GameState_Play* play);
@@ -53,10 +54,10 @@ void Player_UseItem(GameState_Play* play, Actor_Player* link, s16 itemId)
         gComboTriggersData.events.pocketEgg = 1;
         break;
     case ITEM_OOT_MASK_BLAST:
-        maskToggle(play, link, PLAYER_MASK_BLAST);
+        maskToggle(play, link, MASK_BLAST);
         break;
     case ITEM_OOT_MASK_STONE:
-        maskToggle(play, link, PLAYER_MASK_STONE);
+        maskToggle(play, link, MASK_STONE);
         break;
     case ITEM_OOT_BOOTS_IRON:
         Player_UseBoots(play, link, 2);

@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/dma.h>
 #include <combo/player.h>
+#include <combo/mask.h>
 
 ALIGNED(16) static u32 sIconHeader[2];
 
@@ -75,7 +76,7 @@ static void LoadCustomItemIconSlot(GameState_Play* play, int slot)
         link = GET_LINK(play);
         switch (link->mask)
         {
-        case PLAYER_MASK_BLAST:
+        case MASK_BLAST:
             comboItemIcon(dst, ITEM_OOT_MASK_BLAST);
             if (gBlastMaskDelayAcc)
                 Grayscale(dst, 0x400);
