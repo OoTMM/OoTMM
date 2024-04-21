@@ -4,6 +4,8 @@
 #if !defined(__ASSEMBLER__)
 # include <combo/types.h>
 # include <combo/util.h>
+# include <combo/math/vec.h>
+# include <combo/misc.h>
 #endif
 
 #if defined(GAME_OOT)

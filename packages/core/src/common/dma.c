@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/custom.h>
 #include <combo/dma.h>
+#include <combo/io.h>
 
 #if defined(GAME_OOT)
 /* OoT doesn't have reentrancy in DmaCompressed, implement it */

@@ -2,6 +2,7 @@
 #define COMBO_ACTOR_OVL_H
 
 #include <combo/types.h>
+#include <combo/util.h>
 
 typedef struct PACKED ALIGNED(0x4)
 {

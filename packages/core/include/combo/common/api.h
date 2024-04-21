@@ -2,6 +2,7 @@
 #define COMBO_COMMON_API_H
 
 #include <combo/types.h>
+#include <combo/math/vec.h>
 #include <combo/gi.h>
 
 #define PLAYER_ACTOR_STATE_TRANSITION           0x00000001
@@ -539,8 +540,6 @@ s32 Object_GetSlot(ObjectContext* objectCtx, s16 id);
 
 s32 Player_OverrideLimbDrawGameplayDefault(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Player* player);
 s32 Player_OverrideLimbDrawPause(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Player* player);
-
-extern OSPiHandle* gCartHandle;
 
 void Environment_Init(GameState_Play* play, EnvironmentContext* envCtx, int unused);
 
