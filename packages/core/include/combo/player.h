@@ -3,6 +3,14 @@
 
 #include <combo/types.h>
 
+#if defined(GAME_OOT)
+# include <combo/oot/player.h>
+#endif
+
+#if defined(GAME_MM)
+# include <combo/mm/player.h>
+#endif
+
 typedef struct GameState_Play GameState_Play;
 typedef struct Actor_Player Actor_Player;
 

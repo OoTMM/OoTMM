@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 #include <combo/net.h>
+#include <combo/player.h>
 
 #define TRIGGER_NONE            0x00
 #define TRIGGER_GANON_BK        0x01

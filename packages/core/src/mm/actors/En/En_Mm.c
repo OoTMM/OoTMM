@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/player.h>
 
 void EnMm_InitWrapper(Actor* this, GameState_Play* play)
 {

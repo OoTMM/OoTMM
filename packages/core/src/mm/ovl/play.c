@@ -5,6 +5,7 @@
 #include <combo/time.h>
 #include <combo/custom.h>
 #include <combo/debug.h>
+#include <combo/player.h>
 
 GameState_Play* gPlay;
 int gNoTimeFlow;

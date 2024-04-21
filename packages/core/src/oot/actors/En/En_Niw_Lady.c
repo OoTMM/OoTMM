@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/player.h>
 
 int EnNiwLady_GetActiveItem(GameState_Play* play)
 {

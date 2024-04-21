@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/player.h>
 
 s32 BgLotus_ShouldSink(Actor* this, GameState_Play* play)
 {

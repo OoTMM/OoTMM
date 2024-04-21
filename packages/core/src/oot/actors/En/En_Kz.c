@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/player.h>
 
 static void EnKz_MaybeSetMovedPos(Actor* this, GameState_Play* play)
 {

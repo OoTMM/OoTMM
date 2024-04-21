@@ -6,8 +6,6 @@
 # include <string.h>
 # include <stdlib.h>
 
-# define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
-
 #define fabsf(f) __builtin_fabsf(f)
 
 /* "Length" is how long the fish is, which affects how much it weighs, but I call it weight sometimes anyway. */
@@ -30,7 +28,6 @@
 
 # if defined(GAME_OOT)
 #  include <combo/oot/play.h>
-#  include <combo/oot/player.h>
 #  include <combo/oot/pause_state.h>
 #  include <combo/oot/actors/Item_Etcetera.h>
 #  include <combo/oot/actors/Obj_Timeblock_Warp2Block.h>
@@ -46,7 +43,6 @@
 
 # if defined(GAME_MM)
 #  include <combo/mm/play.h>
-#  include <combo/mm/player.h>
 #  include <combo/mm/actor_ensob1.h>
 #  include <combo/mm/actor_enfsn.h>
 #  include <combo/mm/actor_entrt.h>

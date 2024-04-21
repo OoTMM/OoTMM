@@ -6,6 +6,7 @@
 
 #include "Custom_Magic_Dark.h"
 #include <combo/custom.h>
+#include <combo/player.h>
 
 #define FLAGS ((1 << 4) | (1 << 25)) /* (ACTOR_FLAG_4 | ACTOR_FLAG_25) */
 

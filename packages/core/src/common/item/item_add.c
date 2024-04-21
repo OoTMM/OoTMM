@@ -2,6 +2,7 @@
 #include <combo/item.h>
 #include <combo/sr.h>
 #include <combo/souls.h>
+#include <combo/player.h>
 
 #if defined(GAME_OOT)
 # define addRupeesRaw  addRupeesRawOot

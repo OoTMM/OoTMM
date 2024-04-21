@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/custom.h>
+#include <combo/player.h>
 
 void comboLoadObjectGi(Actor_Player* player, u16 objectId)
 {

@@ -2,6 +2,7 @@
 #include <combo/sr.h>
 #include <combo/dungeon.h>
 #include <combo/custom.h>
+#include <combo/player.h>
 
 void ArrowCycle_Handle(Actor_Player* link, GameState_Play* play);
 void Ocarina_HandleCustomSongs(Actor_Player* link, GameState_Play* play);

@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/player.h>
 
 static u32 lastClimbFrame = 0;
 static u32 startClimbingTimer = 5;

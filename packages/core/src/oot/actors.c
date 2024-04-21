@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/dungeon.h>
 #include <combo/souls.h>
+#include <combo/player.h>
 
 static s16 sActorIdToSpawn;
 

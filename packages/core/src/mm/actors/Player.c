@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/custom.h>
 #include <combo/entrance.h>
+#include <combo/player.h>
 #include "../actors.h"
 
 void ArrowCycle_Handle(Actor_Player* link, GameState_Play* play);

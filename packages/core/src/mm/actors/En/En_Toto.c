@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/player.h>
 
 void EnToto_SpawnItemGiver(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {

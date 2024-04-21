@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/player.h>
 
 extern u32 gOcarinaPressedButtons;
 

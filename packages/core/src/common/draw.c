@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/player.h>
 
 ALIGNED(16) const Gfx kDListEmpty[] = {
     gsSPEndDisplayList(),

@@ -3,6 +3,7 @@
 #include <combo/dungeon.h>
 #include <combo/menu.h>
 #include <combo/item.h>
+#include <combo/player.h>
 
 void KaleidoScope_AfterSetCutsorColor(GameState_Play* play)
 {

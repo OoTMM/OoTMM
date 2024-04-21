@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/player.h>
 
 void Interface_LoadItemIconCustom(u32 vrom, s32 id, void* dst, size_t size)
 {

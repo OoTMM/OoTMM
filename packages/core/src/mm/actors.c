@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/souls.h>
 #include <combo/entrance.h>
+#include <combo/player.h>
 
 void EnGo_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
 void EnDnh_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);

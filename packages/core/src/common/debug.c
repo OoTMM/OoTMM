@@ -2,6 +2,7 @@
 #include <combo/debug.h>
 #include <combo/custom.h>
 #include <combo/entrance.h>
+#include <combo/player.h>
 
 #if defined(DEBUG)
 #define DEBUGMENU_PAGE_NONE     0

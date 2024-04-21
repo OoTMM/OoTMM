@@ -3,6 +3,7 @@
 #include <combo/menu.h>
 #include <combo/dma.h>
 #include <combo/item.h>
+#include <combo/player.h>
 
 static int checkItemToggle(GameState_Play* play)
 {

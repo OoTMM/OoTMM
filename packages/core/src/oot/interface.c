@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/dma.h>
+#include <combo/player.h>
 
 ALIGNED(16) static u32 sIconHeader[2];
 

@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/player.h>
 
 #if defined(GAME_OOT)
 # define ITEM_BOW ITEM_OOT_BOW
