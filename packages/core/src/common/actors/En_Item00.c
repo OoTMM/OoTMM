@@ -113,7 +113,7 @@ void EnItem00_AddXflag(Actor_EnItem00* this)
     if (!isItemFastBuy(o.gi))
     {
         PlayerDisplayTextBox(gPlay, DUMMY_MSG, NULL);
-        FreezePlayer(gPlay);
+        Player_Freeze(gPlay);
         this->isExtendedMajor = 1;
     }
     comboAddItemEx(gPlay, &q, this->isExtendedMajor);
@@ -187,11 +187,11 @@ static void EnItem00_XflagCollectedHandler(Actor_EnItem00* this, GameState_Play*
     EnItem00_CollectedHandler(this, play);
     if (Message_IsClosed(&this->base, play))
     {
-        UnfreezePlayer(play);
+        Player_Unfreeze(play);
         this->handler = EnItem00_CollectedHandler;
     }
     else
-        FreezePlayer(play);
+        Player_Freeze(play);
 }
 
 void EnItem00_SetXflagCollectedHandler(Actor_EnItem00* this)

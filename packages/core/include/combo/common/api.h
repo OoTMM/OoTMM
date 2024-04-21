@@ -5,19 +5,6 @@
 #include <combo/math/vec.h>
 #include <combo/gi.h>
 
-#define PLAYER_ACTOR_STATE_TRANSITION           0x00000001
-#define PLAYER_ACTOR_STATE_TRANSFORM            0x00000002
-#define PLAYER_ACTOR_STATE_CLIMB                0x00000004
-#define PLAYER_ACTOR_STATE_DEATH                0x00000080
-#define PLAYER_ACTOR_STATE_FROZEN               0x00000200
-#define PLAYER_ACTOR_STATE_GET_ITEM             0x00000400
-#define PLAYER_ACTOR_STATE_HOLD_ITEM            0x00000800
-#define PLAYER_ACTOR_STATE_CLIMB2               0x00200000
-#define PLAYER_ACTOR_STATE_EPONA                0x00800000
-#define PLAYER_ACTOR_STATE_WATER                0x08000000
-#define PLAYER_ACTOR_STATE_USE_ITEM             0x10000000
-#define PLAYER_ACTOR_STATE_CUTSCENE_FROZEN      0x20000000
-
 #if defined(GAME_OOT)
 # define PLAYER_MASK_NONE               0x00
 # define PLAYER_MASK_KEATON             0x01
@@ -239,7 +226,6 @@ void Sram_CopySave(void*, void*);
 void Play_Init(GameState_Play*);
 void Play_Update(GameState_Play*);
 
-s32 Player_InCsMode(GameState_Play*);
 void Interface_LoadItemIconImpl(GameState_Play* play, int slot);
 void UpdateEquipment(GameState_Play* play, Actor_Player* link);
 
@@ -247,7 +233,6 @@ void PlayStoreFlags(GameState_Play* play);
 Camera* Play_GetCamera(GameState_Play* this, s16 camId);
 s32 Play_CamIsNotFixed(GameState_Play* play);
 
-void Player_Update(Actor_Player* this, GameState_Play* play);
 void Play_SetupRespawnPoint(GameState_Play* this, int respawnMode, int playerParams);
 void Play_SetupRespawnPointRaw(GameState_Play* this, int respawnMode, int playerParams);
 void Play_SetRespawnData(GameState_Play *play, s32 respawnMode, u16 entrance, s32 roomIndex, s32 playerParams, const Vec3f* pos, s16 yaw);
@@ -258,14 +243,8 @@ void KaleidoManager_LoadOvl(void* ovl);
 void LoadIcon(u32 vaddr, int iconId, void* buffer, int size);
 void CmpDma_LoadAllFiles(u32 vrom, void* dst, size_t size);
 
-s32 Player_ActionToModelGroup(Actor_Player* link, s32 itemAction);
-void Player_SetModels(Actor_Player* link, s32 modelGroup);
-int Player_UsingItem(Actor_Player* link);
-int Player_GetEnvironmentalHazard(GameState_Play* play);
-
 void PlaySound(u16 soundId);
 void PlayMusic(int arg0, int arg1, int arg2, int arg3, int arg4);
-void Player_PlaySfx(Actor_Player* player, u16 sfxId);
 void Actor_PlaySfx(Actor* actor, u32 id);
 void PlayLoopingSfxAtActor(Actor* actor, u32 id);
 void Actor_PlaySfx_FlaggedCentered1(Actor* actor, u16 sfxId);
@@ -275,7 +254,6 @@ void Audio_PlaySfx(u16 sfxId, Vec3f* pos, u8 token, f32* freqScale, f32* volume,
 
 #if defined(GAME_MM)
 void AudioOcarina_SetInstrument(u8 ocarinaInstrumentId);
-void Player_DrawHookshotReticle(GameState_Play* play, Actor_Player* player, f32 distance);
 #endif
 
 int Actor_RunByteCode(Actor* this, GameState_Play* play, void* bytecode, void* unk1, void* unk2);
@@ -502,7 +480,7 @@ void SkelCurve_SetAnim(SkelCurve* skelCurve, CurveAnimationHeader* animation, f3
 s32 SkelCurve_Update(struct GameState_Play* play, SkelCurve* skelCurve);
 void SkelCurve_Draw(Actor* actor, struct GameState_Play* play, SkelCurve* skelCurve, OverrideCurveLimbDraw overrideLimbDraw, PostCurveLimbDraw postLimbDraw, s32 lod, Actor* thisx);
 
-typedef s32 (*OverrideLimbDrawOpa)(struct GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, void*);
+typedef int (*OverrideLimbDrawOpa)(struct GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, void*);
 typedef void (*PostLimbDrawOpa)(struct GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3s* rot, void*);
 
 void SkelAnime_DrawFlexLod(GameState_Play* play, void** skeleton, Vec3s* jointTable, s32 dListCount,
@@ -514,19 +492,7 @@ LightNode* LightContext_InsertLight(GameState_Play* play, LightContext* lightCtx
 void Actor_DrawLensActors(GameState_Play* play, s32 numLensActors, Actor** lensActors);
 ActorInit* Actor_LoadOverlay(ActorContext* actorCtx, s16 index);
 
-f32 Player_GetHeight(Actor_Player* player);
-
 s32 Entrance_GetSceneIdAbsolute(u16 entrance);
-
-s32 Player_OverrideLimbDrawGameplayFirstPerson(struct GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, void*);
-
-void Player_SetBootData(GameState_Play* play, Actor_Player* player);
-
-#if defined(GAME_MM)
-u8 Player_GetStrength(void);
-#else
-int Player_GetStrength(void);
-#endif
 
 /* SysFlashrom */
 s32 SysFlashrom_IsInit(void);
@@ -538,9 +504,6 @@ EntranceTableEntry* Entrance_GetTableEntry(u16 entrance);
 
 s32 Object_SpawnPersistent(ObjectContext* objectCtx, s16 id);
 s32 Object_GetSlot(ObjectContext* objectCtx, s16 id);
-
-s32 Player_OverrideLimbDrawGameplayDefault(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Player* player);
-s32 Player_OverrideLimbDrawPause(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Player* player);
 
 void Environment_Init(GameState_Play* play, EnvironmentContext* envCtx, int unused);
 

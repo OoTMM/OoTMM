@@ -8,12 +8,12 @@ void EnSi_WaitForPlayerToCloseMessage(Actor* this, GameState_Play* play)
 {
     if (Message_IsClosed(this, play))
     {
-        UnfreezePlayer(play);
+        Player_Unfreeze(play);
         ActorDestroy(this);
     }
     else
     {
-        FreezePlayer(play);
+        Player_Freeze(play);
     }
 }
 
@@ -45,7 +45,7 @@ void EnSi_AddItem(Actor* this, GameState_Play* play)
     PlayerDisplayTextBox(play, 0x52, NULL);
     comboAddItemEx(play, &q, 1);
     comboPlayItemFanfare(o.gi, 1);
-    FreezePlayer(play);
+    Player_Freeze(play);
     SET_HANDLER(this, EnSi_WaitForPlayerToCloseMessage);
     this->draw = NULL;
 }

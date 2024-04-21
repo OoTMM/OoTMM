@@ -54,12 +54,12 @@ void EnExRuppy_HandlerCollected(Actor_EnExRuppy* this, GameState_Play* play)
     {
         divingGame = (Actor_EnDivingGame*)this->actor.parent;
         divingGame->grabbedRupeesCounter++;
-        UnfreezePlayer(play);
+        Player_Unfreeze(play);
         ActorDestroy(&this->actor);
     }
     else
     {
-        FreezePlayer(play);
+        Player_Freeze(play);
     }
 }
 
@@ -85,7 +85,7 @@ void EnExRuppy_GiveItem(Actor_EnExRuppy* this, GameState_Play* play, Actor_EnDiv
     if (major)
     {
         PlayerDisplayTextBox(play, 0xb4, NULL);
-        FreezePlayer(play);
+        Player_Freeze(play);
 
         /* Set the collected handler */
         this->actionFunc = EnExRuppy_HandlerCollected;
