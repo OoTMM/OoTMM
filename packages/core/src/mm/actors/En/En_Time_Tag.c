@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/config.h>
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x144) = (h); } while (0)
 
@@ -45,7 +46,7 @@ PATCH_FUNC(0x80aca268, EnTimeTag_HandlerSoaring);
 
 void EnTimeTag_MoonCutscene(Actor* this, GameState_Play* play)
 {
-    if (comboSpecialCond(SPECIAL_MOON))
+    if (Config_SpecialCond(SPECIAL_MOON))
     {
         /* Skip to Moon */
         gSave.day = 3;

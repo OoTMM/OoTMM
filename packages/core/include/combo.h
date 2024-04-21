@@ -362,10 +362,6 @@ extern int gNoTimeFlow;
 /* Ocarina */
 void comboCheckSong(const OcarinaSongButtons* songButtons, int songIndex);
 
-/* Conds */
-int comboSpecialCond(int special);
-int comboGoalCond(void);
-
 typedef struct ComboItemQuery ComboItemQuery;
 
 /* Global data */

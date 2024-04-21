@@ -809,15 +809,6 @@ typedef enum {
 
 typedef struct
 {
-    u32 vstart;
-    u32 vend;
-    u32 pstart;
-    u32 pend;
-}
-DmaEntry;
-
-typedef struct
-{
     u32     vromAddr;
     void*   dramAddr;
     u32     size;

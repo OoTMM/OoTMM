@@ -266,7 +266,7 @@ static void CustomTriggers_CheckTrigger(Actor_CustomTriggers* this, GameState_Pl
     NetContext* net;
 
     /* Ganon BK */
-    if (Config_Flag(CFG_OOT_GANON_BK_CUSTOM) && !gOotExtraFlags.ganonBossKey && comboSpecialCond(SPECIAL_GANON_BK))
+    if (Config_Flag(CFG_OOT_GANON_BK_CUSTOM) && !gOotExtraFlags.ganonBossKey && Config_SpecialCond(SPECIAL_GANON_BK))
     {
         gComboTriggersData.acc = 0;
         gComboTriggersData.trigger = TRIGGER_GANON_BK;

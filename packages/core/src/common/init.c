@@ -4,6 +4,7 @@
 #include <combo/dma.h>
 #include <combo/menu.h>
 #include <combo/debug.h>
+#include <combo/config.h>
 
 ComboGlobal g;
 
@@ -18,6 +19,7 @@ void comboInit(void)
 
     initHeap();
     comboLoadContext();
+    Config_Init();
     comboInitData();
     comboInitObjects();
     comboInitOverride();

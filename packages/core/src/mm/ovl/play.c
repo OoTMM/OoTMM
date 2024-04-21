@@ -755,7 +755,7 @@ void hookPlay_Init(GameState_Play* play)
         /* End game */
         gMmExtraFlags2.majora = 1;
         sendSelfMajorasMask();
-        if (!comboGoalCond() && !g.isCreditWarp)
+        if (!Config_IsGoal() && !g.isCreditWarp)
         {
             gSave.playerForm = MM_PLAYER_FORM_HUMAN;
             gSave.equippedMask = 0;

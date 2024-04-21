@@ -1764,7 +1764,7 @@ static int addItemEndgame(GameState_Play* play, u8 itemId, s16 gi, u16 param)
         break;
     }
 
-    if (comboGoalCond())
+    if (Config_IsGoal())
         gOotExtraFlags.endgameItemIsWin = 1;
 
     return 0;

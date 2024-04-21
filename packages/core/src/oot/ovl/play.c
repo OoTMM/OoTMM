@@ -12,7 +12,7 @@ GameState_Play* gPlay;
 
 static int isRainbowBridgeOpen(void)
 {
-    if (Config_Flag(CFG_OOT_BRIDGE_CUSTOM) && !comboSpecialCond(SPECIAL_BRIDGE))
+    if (Config_Flag(CFG_OOT_BRIDGE_CUSTOM) && !Config_SpecialCond(SPECIAL_BRIDGE))
         return 0;
 
     if (Config_Flag(CFG_OOT_BRIDGE_VANILLA) && !(
@@ -152,7 +152,7 @@ static void endGame(void)
     comboSave(NULL, SF_PASSIVE);
 
     /* Restore gameplay values to play the cutscene if majora was beaten too */
-    if (comboGoalCond())
+    if (Config_IsGoal())
     {
         gSave.age = tmpAge;
         gSaveContext.nextCutscene = tmpNextCutscene;

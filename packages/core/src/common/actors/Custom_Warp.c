@@ -197,7 +197,7 @@ void comboSpawnCustomWarps(GameState_Play* play)
         z = 2500.f;
     }
 
-    if (Config_Flag(CFG_MM_OPEN_MOON) && comboSpecialCond(SPECIAL_MOON) && play->sceneId == SCE_MM_CLOCK_TOWER_ROOFTOP)
+    if (Config_Flag(CFG_MM_OPEN_MOON) && Config_SpecialCond(SPECIAL_MOON) && play->sceneId == SCE_MM_CLOCK_TOWER_ROOFTOP)
     {
         variable = SWITCH_OPEN_MOON;
         x = 212.f;

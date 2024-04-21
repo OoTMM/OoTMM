@@ -3,13 +3,8 @@
 #include <combo/dma.h>
 #include <combo/config.h>
 
-ALIGNED(16) ComboConfig gComboConfig;
-
 void comboInitData(void)
 {
-    /* Load the data chunk */
-    comboDmaLoadFile(&gComboConfig, COMBO_VROM_DATA);
-
     /* Normal keys OoT */
     g.maxKeysOot[SCE_OOT_INSIDE_DEKU_TREE] = 0;
     g.maxKeysOot[SCE_OOT_DODONGO_CAVERN] = 0;

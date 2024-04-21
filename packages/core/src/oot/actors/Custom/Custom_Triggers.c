@@ -89,7 +89,7 @@ void CustomTriggers_CheckTriggerGame(Actor_CustomTriggers* this, GameState_Play*
     {
         int shouldTrigger;
         if (Config_Flag(CFG_OOT_LACS_CUSTOM))
-            shouldTrigger = comboSpecialCond(SPECIAL_LACS);
+            shouldTrigger = Config_SpecialCond(SPECIAL_LACS);
         else
             shouldTrigger = (gSave.inventory.quest.medallionSpirit && gSave.inventory.quest.medallionShadow);
 
