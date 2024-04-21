@@ -1507,3 +1507,11 @@ s32 Player_OverrideLimbDrawGameplayDefault_Custom(GameState_Play* play, s32 limb
 
     return 0;
 }
+
+void Player_UseItem(GameState_Play* play, Actor_Player* this, s16 itemId)
+{
+    void (*Player_UseItemImpl)(GameState_Play* play, Actor_Player* this, s16 itemId);
+
+    Player_UseItemImpl = OverlayAddr(0x80831990);
+    Player_UseItemImpl(play, this, itemId);
+}

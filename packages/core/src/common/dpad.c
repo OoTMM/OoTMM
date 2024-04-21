@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/dma.h>
+#include <combo/player.h>
 
 #define DPAD_DOWN   0
 #define DPAD_UP     1
@@ -161,22 +162,6 @@ void comboDpadDraw(GameState_Play* play)
     CLOSE_DISPS();
 }
 
-#if defined(GAME_OOT)
-static void toggleBoots(GameState_Play* play, s16 itemId)
-{
-    u16 targetBoots;
-
-    targetBoots = (itemId == ITEM_OOT_BOOTS_HOVER) ? 3 : 2;
-    if (gSave.equips.equipment.boots == targetBoots)
-        gSave.equips.equipment.boots = 1;
-    else
-        gSave.equips.equipment.boots = targetBoots;
-    UpdateEquipment(play, GET_LINK(play));
-    PlaySound(0x835);
-}
-#endif
-
-#if defined(GAME_OOT)
 static void dpadUseItem(GameState_Play* play, int index, int flags)
 {
     s16 itemId;
@@ -184,26 +169,8 @@ static void dpadUseItem(GameState_Play* play, int index, int flags)
     itemId = sDpadItems[index];
     if (!canUseDpadItem(play, itemId, flags))
         return;
-    if (itemId == ITEM_OOT_BOOTS_HOVER || itemId == ITEM_OOT_BOOTS_IRON)
-        toggleBoots(play, itemId);
-    else
-        comboPlayerUseItem(play, GET_LINK(play), itemId);
-}
-#endif
-
-#if defined(GAME_MM)
-static void dpadUseItem(GameState_Play* play, int index, int flags)
-{
-    s16 itemId;
-    void (*Player_UseItem)(GameState_Play* play, Actor_Player* link, s16 itemId);
-
-    itemId = sDpadItems[index];
-    if (!canUseDpadItem(play, itemId, flags))
-        return;
-    Player_UseItem = OverlayAddr(0x80831990);
     Player_UseItem(play, GET_LINK(play), itemId);
 }
-#endif
 
 #if defined(GAME_OOT)
 void comboDpadUpdate(GameState_Play* play)

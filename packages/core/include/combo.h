@@ -242,8 +242,6 @@ NORETURN void comboGameSwitch(GameState_Play* play, u32 entrance);
 void swapFarore(void);
 #endif
 
-void comboPlayerUseItem(GameState_Play* play, Actor_Player* link, s16 itemId);
-
 /* Override */
 #define OV_NONE         0x00
 #define OV_CHEST        0x01

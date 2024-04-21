@@ -27,9 +27,19 @@ static void maskToggle(GameState_Play* play, Actor_Player* player, u8 maskId)
     PlaySound(0x835);
 }
 
-void comboPlayerUseItem(GameState_Play* play, Actor_Player* link, s16 itemId)
+static void Player_UseBoots(GameState_Play* play, Actor_Player* this, int bootsId)
 {
-    void (*Player_UseItem)(GameState_Play* play, Actor_Player* link, s16 itemId);
+    if (gSave.equips.equipment.boots == bootsId)
+        gSave.equips.equipment.boots = 1;
+    else
+        gSave.equips.equipment.boots = bootsId;
+    UpdateEquipment(play, GET_LINK(play));
+    PlaySound(0x835);
+}
+
+void Player_UseItem(GameState_Play* play, Actor_Player* link, s16 itemId)
+{
+    void (*Player_UseItemImpl)(GameState_Play* play, Actor_Player* link, s16 itemId);
     u8 prevMask;
 
     prevMask = link->mask;
@@ -47,9 +57,15 @@ void comboPlayerUseItem(GameState_Play* play, Actor_Player* link, s16 itemId)
     case ITEM_OOT_MASK_STONE:
         maskToggle(play, link, PLAYER_MASK_STONE);
         break;
+    case ITEM_OOT_BOOTS_IRON:
+        Player_UseBoots(play, link, 2);
+        break;
+    case ITEM_OOT_BOOTS_HOVER:
+        Player_UseBoots(play, link, 3);
+        break;
     default:
-        Player_UseItem = OverlayAddr(0x80834000);
-        Player_UseItem(play, link, itemId);
+        Player_UseItemImpl = OverlayAddr(0x80834000);
+        Player_UseItemImpl(play, link, itemId);
         break;
     }
 
@@ -57,7 +73,7 @@ void comboPlayerUseItem(GameState_Play* play, Actor_Player* link, s16 itemId)
         Interface_LoadItemIconImpl(play, 0);
 }
 
-PATCH_CALL(0x8083212c, comboPlayerUseItem);
+PATCH_CALL(0x8083212c, Player_UseItem);
 
 static int prepareMask(GameState_Play* play, u16 objectId, int needsMatrix)
 {
