@@ -239,7 +239,7 @@ DrawDungeonUnk2 = 0x801091f0;
 
 gGameData = 0x801f3f60;
 
-DrawSimpleOpa = 0x800bdfc0;
+Gfx_DrawDListOpa = 0x800bdfc0;
 
 Actor_SetCollisionCylinder = 0x800b78b8;
 

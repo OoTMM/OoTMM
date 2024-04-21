@@ -42,5 +42,8 @@ void    InitListPolyXlu(GfxContext* gfx);
 void    Gfx_SetupDL_42Opa(GfxContext* gfx);
 void*   GetMatrixMV(GfxContext* gfx);
 u32     DisplaceTexture(GfxContext* gfx, int, int, int, int, int, int, int, int, int, int);
+Gfx*    Gfx_TexScroll(GfxContext* ctx, u32 x, u32 y, s32 width, s32 height);
+void    Gfx_DrawDListOpa(GameState_Play* play, Gfx* dlist);
+void    Gfx_DrawDListXlu(GameState_Play* play, Gfx* dlist);
 
 #endif

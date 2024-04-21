@@ -225,8 +225,6 @@ void DrawDungeonUnk2(void* unk);
 
 void ActorRemove(ActorContext* ctx, Actor* actor, GameState_Play* play);
 
-void DrawSimpleOpa(GameState_Play* play, u32 segAddr);
-
 s16 RupeeValueOot(s16 count);
 s16 RupeeValueMm(s16 count);
 void AddRupeesRaw(s16 delta);
@@ -237,44 +235,7 @@ void AudioLoad_InitTable(void* unk1, u32 unk2, u32 unk3);
 
 void ParseSceneRoomHeaders_SoundSettings(GameState_Play* play, void* cmd);
 
-/* DrawGi */
-void DrawGi_Opa0_Xlu1(GameState_Play*, s16);
-void DrawGi_Opa0_Xlu12(GameState_Play*, s16);
-void DrawGi_Opa0(GameState_Play*, s16);
-void DrawGi_Opa01(GameState_Play*, s16);
-void DrawGi_Opa1023(GameState_Play*, s16);
-void DrawGi_Opa10_Xlu2(GameState_Play*, s16);
-void DrawGi_Opa10_Xlu234(GameState_Play*, s16);
-void DrawGi_Opa10_Xlu32(GameState_Play*, s16);
-void DrawGi_Opa10234567(GameState_Play*, s16);
-void DrawGi_Xlu01(GameState_Play*, s16);
-void DrawGi_BlueFire(GameState_Play*, s16);
-void DrawGi_BombchuMask(GameState_Play*, s16);
-void DrawGi_Compass(GameState_Play*, s16);
-void DrawGi_DekuNut(GameState_Play*, s16);
-void DrawGi_Fairy(GameState_Play*, s16);
-void DrawGi_Fish(GameState_Play*, s16);
-void DrawGi_GiantKnife(GameState_Play*, s16);
-void DrawGi_GS(GameState_Play*, s16);
-void DrawGi_Heart(GameState_Play*, s16);
-void DrawGi_Medallion(GameState_Play*, s16);
-void DrawGi_MirrorShield(GameState_Play*, s16);
-void DrawGi_Poe(GameState_Play*, s16);
-void DrawGi_Potion(GameState_Play*, s16);
-void DrawGi_Scale(GameState_Play*, s16);
-void DrawGi_SoldOut(GameState_Play*, s16);
-void DrawGi_Spell(GameState_Play*, s16);
-void DrawGi_MoonTear(GameState_Play*, s16);
-void DrawGi_BottleFairy(GameState_Play*, s16);
-void DrawGi_BottleBlueFire(GameState_Play*, s16);
-void DrawGi_VanillaRupee(GameState_Play*, s16);
-
 void Interface_StartMoonCrash(GameState_Play* play);
-
-/* GFX */
-Gfx* Gfx_TexScroll(GfxContext* ctx, u32 x, u32 y, s32 width, s32 height);
-void Gfx_DrawDListOpa(GameState_Play* play, Gfx* dlist);
-void Gfx_DrawDListXlu(GameState_Play* play, Gfx* dlist);
 
 void SpawnRoomActors(GameState_Play* play, int id);
 

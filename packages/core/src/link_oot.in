@@ -204,7 +204,7 @@ Interface_LoadItemIconImpl = 0x8006fb50;
 
 DeathWarp = 0x8009da10;
 
-DrawSimpleOpa = 0x80028048;
+Gfx_DrawDListOpa = 0x80028048;
 
 _AddRupees = 0x800721cc;
 

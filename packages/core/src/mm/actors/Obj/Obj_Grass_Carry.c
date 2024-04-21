@@ -47,7 +47,7 @@ static void ObjGrassCarry_Draw(Actor_ObjGrassCarry* this, GameState_Play* play)
     csmcGrassPreDraw(play, o.gi, CSMC_GRASS_NORMAL, 0, 0);
 
     /* Draw */
-    DrawSimpleOpa(play, 0x50078a0);
+    Gfx_DrawDListOpa(play, (void*)0x50078a0);
 }
 
 PATCH_FUNC(0x809abb7c, ObjGrassCarry_Draw);

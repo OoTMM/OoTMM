@@ -154,7 +154,7 @@ void ObjTsubo_Draw(Actor_ObjTsubo* this, GameState_Play* play)
     csmcPotPreDraw(&this->base, play, o.gi, type);
 
     /* Draw */
-    DrawSimpleOpa(play, dlist);
+    Gfx_DrawDListOpa(play, (void*)dlist);
 }
 
 PATCH_FUNC(0x809294b0, ObjTsubo_Draw);

@@ -87,7 +87,7 @@ static void EnKusa2_Draw(GameState_Play* play)
     csmcGrassPreDraw(play, o.gi, CSMC_GRASS_NORMAL, 0, 0);
 
     /* Draw */
-    DrawSimpleOpa(play, 0x50078a0);
+    Gfx_DrawDListOpa(play, (void*)0x50078a0);
 }
 
 PATCH_CALL(0x80a5e95c, EnKusa2_Draw);
