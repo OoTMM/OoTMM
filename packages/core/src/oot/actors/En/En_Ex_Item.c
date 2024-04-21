@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/config.h>
 
 void EnExItem_RewardByIndex(ComboItemQuery* q, int index)
 {
@@ -25,7 +26,7 @@ void EnExItem_RewardByIndex(ComboItemQuery* q, int index)
     case 0x07:
         /* Bombchu */
         q->gi = GI_OOT_BOMBCHU_10;
-        if (comboConfig(CFG_OOT_BOMBCHU_BAG) && gOotSave.inventory.items[ITS_OOT_BOMBCHU] != ITEM_OOT_BOMBCHU_10)
+        if (Config_Flag(CFG_OOT_BOMBCHU_BAG) && gOotSave.inventory.items[ITS_OOT_BOMBCHU] != ITEM_OOT_BOMBCHU_10)
             q->gi = GI_OOT_RUPEE_PURPLE;
         break;
     case 0x03:

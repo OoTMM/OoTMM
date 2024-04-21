@@ -2,6 +2,8 @@
 #include <combo/souls.h>
 #include <combo/entrance.h>
 #include <combo/player.h>
+#include <combo/math.h>
+#include <combo/config.h>
 
 void EnGo_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
 void EnDnh_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
@@ -409,7 +411,7 @@ static int GetRoomClearFlagForActor(GameState_Play* play, int flag)
     int res;
 
     res = GetRoomClearFlag(play, flag);
-    if (comboConfig(CFG_ER_WALLMASTERS) && sActorIdToSpawn == AC_EN_WALLMAS)
+    if (Config_Flag(CFG_ER_WALLMASTERS) && sActorIdToSpawn == AC_EN_WALLMAS)
         res = 0;
     return res;
 }

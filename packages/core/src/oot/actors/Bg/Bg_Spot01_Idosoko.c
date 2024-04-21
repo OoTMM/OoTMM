@@ -1,8 +1,9 @@
 #include <combo.h>
+#include <combo/config.h>
 
 void BgSpot01Idosoko_Handler(Actor* this, GameState_Play* play)
 {
-    if (comboConfig(CFG_OOT_ADULT_WELL) && gSave.age == AGE_ADULT && GetEventChk(EV_OOT_CHK_WELL_DRAINED))
+    if (Config_Flag(CFG_OOT_ADULT_WELL) && gSave.age == AGE_ADULT && GetEventChk(EV_OOT_CHK_WELL_DRAINED))
         ActorDestroy(this);
 }
 

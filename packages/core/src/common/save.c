@@ -3,6 +3,7 @@
 #include <combo/net.h>
 #include <combo/time.h>
 #include <combo/magic.h>
+#include <combo/config.h>
 
 #if !defined(GAME_OOT)
 ALIGNED(16) OotSave gOotSave;
@@ -209,17 +210,17 @@ void comboHandleAutoInvertClockSpeed(void)
     s32 invertSpeed;
 
     invertSpeed = -2;
-    if(comboConfig(CFG_MM_CLOCK_SPEED_VERYSLOW))
+    if(Config_Flag(CFG_MM_CLOCK_SPEED_VERYSLOW))
         invertSpeed = 0;
-    if(comboConfig(CFG_MM_CLOCK_SPEED_SLOW))
+    if(Config_Flag(CFG_MM_CLOCK_SPEED_SLOW))
         invertSpeed = -1;
-    if(comboConfig(CFG_MM_CLOCK_SPEED_FAST))
+    if(Config_Flag(CFG_MM_CLOCK_SPEED_FAST))
         invertSpeed = -4;
-    if(comboConfig(CFG_MM_CLOCK_SPEED_VERYFAST))
+    if(Config_Flag(CFG_MM_CLOCK_SPEED_VERYFAST))
         invertSpeed = -6;
-    if(comboConfig(CFG_MM_CLOCK_SPEED_SUPERFAST))
+    if(Config_Flag(CFG_MM_CLOCK_SPEED_SUPERFAST))
         invertSpeed = -12;
 
-    if (comboConfig(CFG_MM_AUTO_INVERT_ALWAYS) || (comboConfig(CFG_MM_AUTO_INVERT_FIRST_CYCLE) && gMmSave.playerData.songOfTimeCount == 0))
+    if (Config_Flag(CFG_MM_AUTO_INVERT_ALWAYS) || (Config_Flag(CFG_MM_AUTO_INVERT_FIRST_CYCLE) && gMmSave.playerData.songOfTimeCount == 0))
         gMmSave.daySpeed = invertSpeed;
 }

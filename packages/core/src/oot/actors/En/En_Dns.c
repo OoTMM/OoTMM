@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 #include <combo/player.h>
+#include <combo/config.h>
 
 #define SCRUB_ITEM_NUTS             0x00
 #define SCRUB_ITEM_STICK            0x01
@@ -151,7 +152,7 @@ static s16 EnDns_GetPrice(Actor* this)
     int id;
 
     id = EnDns_GetID(this);
-    return (s16)gComboData.prices[PRICES_OOT_SCRUBS + id];
+    return (s16)gComboConfig.prices[PRICES_OOT_SCRUBS + id];
 }
 
 void EnDns_MaybeDestroy(Actor* this)

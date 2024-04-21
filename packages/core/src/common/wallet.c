@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/config.h>
 
 u32 gInterfaceRupeeColor;
 
@@ -58,7 +59,7 @@ s16 RupeeValueRaw(s16 count, int extraWallets)
     s32 acc;
 
     acc = count;
-    if (comboConfig(CFG_RUPEE_SCALING) && acc > 0)
+    if (Config_Flag(CFG_RUPEE_SCALING) && acc > 0)
     {
         if (extraWallets >= 1) acc *= 2;
         if (extraWallets >= 2) acc *= 10;

@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/config.h>
 
 #define SOLD_OUT GI_MM_SOLD_OUT
 
@@ -59,11 +60,11 @@ void comboShopSetupItem(GameState_Play* play, Actor_EnGirlA* girlA)
 #endif
 
     girlA->shopId = comboShopItemSlot(play, girlA);
-    girlA->price = (s16)gComboData.prices[PRICES_SHOPS + girlA->shopId];
+    girlA->price = (s16)gComboConfig.prices[PRICES_SHOPS + girlA->shopId];
 
 #if defined(GAME_MM)
     if (girlA->shopId == 0x03 && play->sceneId == SCE_MM_CURIOSITY_SHOP)
-        girlA->price = (s16)gComboData.prices[PRICES_MM_SHOPS_EX + 0x00];
+        girlA->price = (s16)gComboConfig.prices[PRICES_MM_SHOPS_EX + 0x00];
 #endif
 
     comboShopUpdateItem(play, girlA);

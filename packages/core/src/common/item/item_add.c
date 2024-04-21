@@ -4,6 +4,7 @@
 #include <combo/souls.h>
 #include <combo/player.h>
 #include <combo/magic.h>
+#include <combo/config.h>
 
 #if defined(GAME_OOT)
 # define addRupeesRaw  addRupeesRawOot
@@ -198,7 +199,7 @@ static void addRupeesRawMm(s16 delta)
 static void addRupeesOot(GameState_Play* play, s16 delta)
 {
 #if defined(GAME_MM)
-    if (!comboConfig(CFG_SHARED_WALLETS))
+    if (!Config_Flag(CFG_SHARED_WALLETS))
         play = NULL;
 #endif
 
@@ -208,7 +209,7 @@ static void addRupeesOot(GameState_Play* play, s16 delta)
         return;
     }
 
-    if (comboConfig(CFG_SHARED_WALLETS))
+    if (Config_Flag(CFG_SHARED_WALLETS))
         addRupeesRaw(delta);
     else
         addRupeesRawOot(delta);
@@ -217,7 +218,7 @@ static void addRupeesOot(GameState_Play* play, s16 delta)
 static void addRupeesMm(GameState_Play* play, s16 delta)
 {
 #if defined(GAME_OOT)
-    if (!comboConfig(CFG_SHARED_WALLETS))
+    if (!Config_Flag(CFG_SHARED_WALLETS))
         play = NULL;
 #endif
 
@@ -227,7 +228,7 @@ static void addRupeesMm(GameState_Play* play, s16 delta)
         return;
     }
 
-    if (comboConfig(CFG_SHARED_WALLETS))
+    if (Config_Flag(CFG_SHARED_WALLETS))
         addRupeesRaw(delta);
     else
         addRupeesRawMm(delta);
@@ -284,12 +285,12 @@ static void addWalletRawShared(u16 index)
 
 static int addItemWalletOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
-    if (comboConfig(CFG_SHARED_WALLETS))
+    if (Config_Flag(CFG_SHARED_WALLETS))
         addWalletRawShared(param);
     else
         addWalletRawOot(param);
 
-    if (comboConfig(CFG_FILL_WALLETS))
+    if (Config_Flag(CFG_FILL_WALLETS))
         addRupeesOot(play, gOotMaxRupees[gOotSave.inventory.upgrades.wallet]);
 
     return 0;
@@ -297,12 +298,12 @@ static int addItemWalletOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 
 static int addItemWalletMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
-    if (comboConfig(CFG_SHARED_WALLETS))
+    if (Config_Flag(CFG_SHARED_WALLETS))
         addWalletRawShared(param);
     else
         addWalletRawMm(param);
 
-    if (comboConfig(CFG_FILL_WALLETS))
+    if (Config_Flag(CFG_FILL_WALLETS))
         addRupeesMm(play, gMmMaxRupees[gMmSave.inventory.upgrades.wallet]);
 
     return 0;
@@ -347,14 +348,14 @@ static void addBombsRawMm(u8 count)
 static void addBombsOot(u8 count)
 {
     addBombsRawOot(count);
-    if (comboConfig(CFG_SHARED_BOMB_BAGS))
+    if (Config_Flag(CFG_SHARED_BOMB_BAGS))
         addBombsRawMm(count);
 }
 
 static void addBombsMm(u8 count)
 {
     addBombsRawMm(count);
-    if (comboConfig(CFG_SHARED_BOMB_BAGS))
+    if (Config_Flag(CFG_SHARED_BOMB_BAGS))
         addBombsRawOot(count);
 }
 
@@ -395,14 +396,14 @@ void addNutsRawMm(int count)
 void addNutsOot(int count)
 {
     addNutsRawOot(count);
-    if (comboConfig(CFG_SHARED_NUTS_STICKS))
+    if (Config_Flag(CFG_SHARED_NUTS_STICKS))
         addNutsRawMm(count);
 }
 
 void addNutsMm(int count)
 {
     addNutsRawMm(count);
-    if (comboConfig(CFG_SHARED_NUTS_STICKS))
+    if (Config_Flag(CFG_SHARED_NUTS_STICKS))
         addNutsRawOot(count);
 }
 
@@ -422,7 +423,7 @@ static int addItemNutsUpgrade(GameState_Play* play, u8 itemId, s16 gi, u16 param
 {
     if (gOotSave.inventory.upgrades.dekuNut < param)
         gOotSave.inventory.upgrades.dekuNut = param;
-    if (comboConfig(CFG_SHARED_NUTS_STICKS))
+    if (Config_Flag(CFG_SHARED_NUTS_STICKS))
         gMmSave.inventory.upgrades.dekuNut = gOotSave.inventory.upgrades.dekuNut;
     addNutsOot(kMaxNuts[param]);
     return 0;
@@ -430,7 +431,7 @@ static int addItemNutsUpgrade(GameState_Play* play, u8 itemId, s16 gi, u16 param
 
 static void addBombchuRawOot(u8 count)
 {
-    if (comboConfig(CFG_OOT_BOMBCHU_BAG) && gOotSave.inventory.items[ITS_OOT_BOMBCHU] != ITEM_OOT_BOMBCHU_10)
+    if (Config_Flag(CFG_OOT_BOMBCHU_BAG) && gOotSave.inventory.items[ITS_OOT_BOMBCHU] != ITEM_OOT_BOMBCHU_10)
         return;
 
     addAmmoOot(ITS_OOT_BOMBCHU, ITEM_OOT_BOMBCHU_10, 50, count);
@@ -438,7 +439,7 @@ static void addBombchuRawOot(u8 count)
 
 static void addBombchuRawMm(u8 count)
 {
-    if (comboConfig(CFG_MM_BOMBCHU_BAG))
+    if (Config_Flag(CFG_MM_BOMBCHU_BAG))
     {
         if (gMmSave.inventory.items[ITS_MM_BOMBCHU] == ITEM_MM_BOMBCHU)
             addAmmoMm(ITS_MM_BOMBCHU, ITEM_MM_BOMBCHU, 50, count);
@@ -453,14 +454,14 @@ static void addBombchuRawMm(u8 count)
 static void addBombchuOot(u8 count)
 {
     addBombchuRawOot(count);
-    if (comboConfig(CFG_SHARED_BOMBCHU))
+    if (Config_Flag(CFG_SHARED_BOMBCHU))
         addBombchuRawMm(count);
 }
 
 static void addBombchuMm(u8 count)
 {
     addBombchuRawMm(count);
-    if (comboConfig(CFG_SHARED_BOMBCHU))
+    if (Config_Flag(CFG_SHARED_BOMBCHU))
         addBombchuRawOot(count);
 }
 
@@ -499,14 +500,14 @@ static void addArrowsRawMm(u8 count)
 static void addArrowsOot(u8 count)
 {
     addArrowsRawOot(count);
-    if (comboConfig(CFG_SHARED_BOWS))
+    if (Config_Flag(CFG_SHARED_BOWS))
         addArrowsRawMm(count);
 }
 
 static void addArrowsMm(u8 count)
 {
     addArrowsRawMm(count);
-    if (comboConfig(CFG_SHARED_BOWS))
+    if (Config_Flag(CFG_SHARED_BOWS))
         addArrowsRawOot(count);
 }
 
@@ -539,7 +540,7 @@ static void addBowRawMm(u8 index)
 static int addItemBowOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
     addBowRawOot(param);
-    if (comboConfig(CFG_SHARED_BOWS))
+    if (Config_Flag(CFG_SHARED_BOWS))
         addBowRawMm(param);
     return 0;
 }
@@ -547,7 +548,7 @@ static int addItemBowOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 static int addItemBowMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
     addBowRawMm(param);
-    if (comboConfig(CFG_SHARED_BOWS))
+    if (Config_Flag(CFG_SHARED_BOWS))
         addBowRawOot(param);
     return 0;
 }
@@ -627,14 +628,14 @@ void addSticksRawMm(int count)
 void addSticksOot(int count)
 {
     addSticksRawOot(count);
-    if (comboConfig(CFG_SHARED_NUTS_STICKS))
+    if (Config_Flag(CFG_SHARED_NUTS_STICKS))
         addSticksRawMm(count);
 }
 
 void addSticksMm(int count)
 {
     addSticksRawMm(count);
-    if (comboConfig(CFG_SHARED_NUTS_STICKS))
+    if (Config_Flag(CFG_SHARED_NUTS_STICKS))
         addSticksRawOot(count);
 }
 
@@ -654,7 +655,7 @@ static int addItemSticksUpgrade(GameState_Play* play, u8 itemId, s16 gi, u16 par
 {
     if (gOotSave.inventory.upgrades.dekuStick < param)
         gOotSave.inventory.upgrades.dekuStick = param;
-    if (comboConfig(CFG_SHARED_NUTS_STICKS))
+    if (Config_Flag(CFG_SHARED_NUTS_STICKS))
         gMmSave.inventory.upgrades.dekuStick = gOotSave.inventory.upgrades.dekuStick;
     addSticksOot(kMaxSticks[param]);
     return 0;
@@ -685,7 +686,7 @@ static void addHookshotRawMm(GameState_Play* play, int level)
     gMmExtraItems.hookshot |= (1 << (level - 1));
     reloadSlotMm(play, ITS_MM_HOOKSHOT);
 #if defined(GAME_MM)
-    if (comboConfig(CFG_MM_HOOKSHOT_SHORT) && level >= 2)
+    if (Config_Flag(CFG_MM_HOOKSHOT_SHORT) && level >= 2)
         reloadHookshot(play);
 #endif
 }
@@ -693,9 +694,9 @@ static void addHookshotRawMm(GameState_Play* play, int level)
 static void addHookshotOot(GameState_Play* play, int level)
 {
     addHookshotRawOot(play, level);
-    if (comboConfig(CFG_SHARED_HOOKSHOT))
+    if (Config_Flag(CFG_SHARED_HOOKSHOT))
     {
-        if (comboConfig(CFG_MM_HOOKSHOT_SHORT))
+        if (Config_Flag(CFG_MM_HOOKSHOT_SHORT))
             addHookshotRawMm(play, level);
         else
             addHookshotRawMm(play, 2);
@@ -705,9 +706,9 @@ static void addHookshotOot(GameState_Play* play, int level)
 static void addHookshotMm(GameState_Play* play, int level)
 {
     addHookshotRawMm(play, level);
-    if (comboConfig(CFG_SHARED_HOOKSHOT))
+    if (Config_Flag(CFG_SHARED_HOOKSHOT))
     {
-        if (comboConfig(CFG_MM_HOOKSHOT_SHORT))
+        if (Config_Flag(CFG_MM_HOOKSHOT_SHORT))
             addHookshotRawOot(play, level);
         else
             addHookshotRawOot(play, 1);
@@ -815,9 +816,9 @@ static void addOcarinaRawMm(GameState_Play* play, int level)
 static int addItemOcarinaOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
     addOcarinaRawOot(play, param);
-    if (comboConfig(CFG_SHARED_OCARINA))
+    if (Config_Flag(CFG_SHARED_OCARINA))
     {
-        if (param >= 2 || comboConfig(CFG_MM_OCARINA_FAIRY))
+        if (param >= 2 || Config_Flag(CFG_MM_OCARINA_FAIRY))
             addOcarinaRawMm(play, param);
     }
     return 0;
@@ -826,7 +827,7 @@ static int addItemOcarinaOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 static int addItemOcarinaMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
     addOcarinaRawMm(play, param);
-    if (comboConfig(CFG_SHARED_OCARINA))
+    if (Config_Flag(CFG_SHARED_OCARINA))
         addOcarinaRawOot(play, param);
     return 0;
 }
@@ -969,7 +970,7 @@ static void addBombBagRawMm(u8 index)
 static int addItemBombBagOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
     addBombBagRawOot(param);
-    if (comboConfig(CFG_SHARED_BOMB_BAGS))
+    if (Config_Flag(CFG_SHARED_BOMB_BAGS))
         addBombBagRawMm(param);
     return 0;
 }
@@ -977,7 +978,7 @@ static int addItemBombBagOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 static int addItemBombBagMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
     addBombBagRawMm(param);
-    if (comboConfig(CFG_SHARED_BOMB_BAGS))
+    if (Config_Flag(CFG_SHARED_BOMB_BAGS))
         addBombBagRawOot(param);
     return 0;
 }
@@ -1093,7 +1094,7 @@ static void addHealthRawMm(u8 count)
 static void addHealthOot(GameState_Play* play, u8 count)
 {
 #if defined(GAME_MM)
-    if (!comboConfig(CFG_SHARED_HEALTH))
+    if (!Config_Flag(CFG_SHARED_HEALTH))
         play = NULL;
 #endif
 
@@ -1103,7 +1104,7 @@ static void addHealthOot(GameState_Play* play, u8 count)
         return;
     }
 
-    if (comboConfig(CFG_SHARED_HEALTH))
+    if (Config_Flag(CFG_SHARED_HEALTH))
         addHealthRawMm(count);
     addHealthRawOot(count);
 }
@@ -1111,7 +1112,7 @@ static void addHealthOot(GameState_Play* play, u8 count)
 static void addHealthMm(GameState_Play* play, u8 count)
 {
 #if defined(GAME_OOT)
-    if (!comboConfig(CFG_SHARED_HEALTH))
+    if (!Config_Flag(CFG_SHARED_HEALTH))
         play = NULL;
 #endif
 
@@ -1121,7 +1122,7 @@ static void addHealthMm(GameState_Play* play, u8 count)
         return;
     }
 
-    if (comboConfig(CFG_SHARED_HEALTH))
+    if (Config_Flag(CFG_SHARED_HEALTH))
         addHealthRawOot(count);
     addHealthRawMm(count);
 }
@@ -1153,7 +1154,7 @@ static void addDefenseUpgradeRawMm(void)
 static int addItemDefenseUpgradeOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
     addDefenseUpgradeRawOot();
-    if (comboConfig(CFG_SHARED_HEALTH))
+    if (Config_Flag(CFG_SHARED_HEALTH))
         addDefenseUpgradeRawMm();
     addHealthOot(play, 20);
     return 0;
@@ -1162,7 +1163,7 @@ static int addItemDefenseUpgradeOot(GameState_Play* play, u8 itemId, s16 gi, u16
 static int addItemDefenseUpgradeMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
     addDefenseUpgradeRawMm();
-    if (comboConfig(CFG_SHARED_HEALTH))
+    if (Config_Flag(CFG_SHARED_HEALTH))
         addDefenseUpgradeRawOot();
     addHealthMm(play, 20);
     return 0;
@@ -1193,7 +1194,7 @@ static int addItemHeartPieceOot(GameState_Play* play, u8 itemId, s16 gi, u16 par
     for (int i = 0; i < param; ++i)
     {
         addHeartPieceRawOot();
-        if (comboConfig(CFG_SHARED_HEALTH))
+        if (Config_Flag(CFG_SHARED_HEALTH))
             addHeartPieceRawMm();
     }
     addHealthOot(play, 20);
@@ -1205,7 +1206,7 @@ static int addItemHeartPieceMm(GameState_Play* play, u8 itemId, s16 gi, u16 para
     for (int i = 0; i < param; ++i)
     {
         addHeartPieceRawMm();
-        if (comboConfig(CFG_SHARED_HEALTH))
+        if (Config_Flag(CFG_SHARED_HEALTH))
             addHeartPieceRawOot();
     }
     addHealthMm(play, 20);
@@ -1217,7 +1218,7 @@ static int addSmallKeyOot(u16 dungeonId)
     s8 keyCount;
 
     /* Check for max keys */
-    if ((dungeonId != SCE_OOT_TREASURE_SHOP || comboConfig(CFG_OOT_CHEST_GAME_SHUFFLE)) && gOotSave.inventory.dungeonItems[dungeonId].maxKeys >= g.maxKeysOot[dungeonId])
+    if ((dungeonId != SCE_OOT_TREASURE_SHOP || Config_Flag(CFG_OOT_CHEST_GAME_SHUFFLE)) && gOotSave.inventory.dungeonItems[dungeonId].maxKeys >= g.maxKeysOot[dungeonId])
         return 0;
 
     keyCount = gOotSave.inventory.dungeonKeys[dungeonId];
@@ -1226,7 +1227,7 @@ static int addSmallKeyOot(u16 dungeonId)
     else
         keyCount++;
     gOotSave.inventory.dungeonKeys[dungeonId] = keyCount;
-    if (dungeonId == SCE_OOT_TREASURE_SHOP && !comboConfig(CFG_OOT_CHEST_GAME_SHUFFLE))
+    if (dungeonId == SCE_OOT_TREASURE_SHOP && !Config_Flag(CFG_OOT_CHEST_GAME_SHUFFLE))
         return 0;
     else
         return ++gOotSave.inventory.dungeonItems[dungeonId].maxKeys;
@@ -1648,7 +1649,7 @@ static void addMagicEffect(GameState_Play* play, u8 count)
 static void addMagicOot(GameState_Play* play, u8 count)
 {
 #if defined(GAME_MM)
-    if (!comboConfig(CFG_SHARED_MAGIC))
+    if (!Config_Flag(CFG_SHARED_MAGIC))
         play = NULL;
 #endif
 
@@ -1658,7 +1659,7 @@ static void addMagicOot(GameState_Play* play, u8 count)
         return;
     }
 
-    if (comboConfig(CFG_SHARED_MAGIC))
+    if (Config_Flag(CFG_SHARED_MAGIC))
         addMagicRawMm(count);
     addMagicRawOot(count);
 }
@@ -1666,7 +1667,7 @@ static void addMagicOot(GameState_Play* play, u8 count)
 static void addMagicMm(GameState_Play* play, u8 count)
 {
 #if defined(GAME_OOT)
-    if (!comboConfig(CFG_SHARED_MAGIC))
+    if (!Config_Flag(CFG_SHARED_MAGIC))
         play = NULL;
 #endif
 
@@ -1676,14 +1677,14 @@ static void addMagicMm(GameState_Play* play, u8 count)
         return;
     }
 
-    if (comboConfig(CFG_SHARED_MAGIC))
+    if (Config_Flag(CFG_SHARED_MAGIC))
         addMagicRawOot(count);
     addMagicRawMm(count);
 }
 
 static int addItemMagicOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
-    addMagicOot(play, param * (comboConfig(CFG_SHARED_MAGIC) ? 0x18 : 0x0c));
+    addMagicOot(play, param * (Config_Flag(CFG_SHARED_MAGIC) ? 0x18 : 0x0c));
     return 0;
 }
 
@@ -1706,7 +1707,7 @@ static void addBombchuBagRawMm(void)
 static void addBombchuBagOot(u8 count)
 {
     addBombchuBagRawOot();
-    if (comboConfig(CFG_SHARED_BOMBCHU))
+    if (Config_Flag(CFG_SHARED_BOMBCHU))
         addBombchuBagRawMm();
     addBombchuOot(count);
 }
@@ -1714,7 +1715,7 @@ static void addBombchuBagOot(u8 count)
 static void addBombchuBagMm(u8 count)
 {
     addBombchuBagRawMm();
-    if (comboConfig(CFG_SHARED_BOMBCHU))
+    if (Config_Flag(CFG_SHARED_BOMBCHU))
         addBombchuBagRawOot();
     addBombchuMm(count);
 }
@@ -1992,7 +1993,7 @@ int comboAddItemRaw(GameState_Play* play, s16 gi)
             otherGi = si->gi;
         else
             continue;
-        if (comboConfig(si->cfg))
+        if (Config_Flag(si->cfg))
             addItem(play, otherGi);
         break;
     }

@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 #include <combo/csmc.h>
+#include <combo/config.h>
 
 static void EnKusa2_GetXflag(Xflag* xflag, int id)
 {
@@ -30,7 +31,7 @@ static void EnKusa2_SpawnDrop(GameState_Play* play, Vec3f* pos, u16 dropIndex)
     if ((s8)dropIndex > g.keatonGrassMax)
         g.keatonGrassMax = (s8)dropIndex;
 
-    if (comboConfig(CFG_MM_SHUFFLE_GRASS))
+    if (Config_Flag(CFG_MM_SHUFFLE_GRASS))
     {
         /* Extract the ID and build the xflag */
         EnKusa2_GetXflag(&xflag, dropIndex);
@@ -59,7 +60,7 @@ static void EnKusa2_Draw(GameState_Play* play)
     int id;
 
     o.gi = 0;
-    if (comboConfig(CFG_MM_SHUFFLE_GRASS))
+    if (Config_Flag(CFG_MM_SHUFFLE_GRASS))
     {
         /* Compute a nice ID */
         if (sLastFrameCount != play->gs.frameCount)

@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 #include <combo/player.h>
+#include <combo/config.h>
 
 static void EnItem00_ItemQuery(ComboItemQuery* q, Actor_EnItem00* this, GameState_Play* play, s16 gi)
 {
@@ -72,7 +73,7 @@ static s16 bombDrop(s16 dropId)
     u8  bombCount;
     u8  bombchuCount;
 
-    if (!comboConfig(CFG_MM_BOMBCHU_BAG))
+    if (!Config_Flag(CFG_MM_BOMBCHU_BAG))
         return dropId;
 
     hasChuBag = (gMmSave.inventory.items[ITS_MM_BOMBCHU] == ITEM_MM_BOMBCHU);

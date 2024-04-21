@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/dungeon.h>
+#include <combo/config.h>
 
 int comboCurrentDungeon(GameState_Play* play)
 {
@@ -42,13 +43,13 @@ int comboCurrentDungeon(GameState_Play* play)
 
     /* Boss lairs */
     case SCE_MM_LAIR_ODOLWA:
-        return gComboData.boss[BOSSID_ODOLWA];
+        return gComboConfig.boss[BOSSID_ODOLWA];
     case SCE_MM_LAIR_GOHT:
-        return gComboData.boss[BOSSID_GOHT];
+        return gComboConfig.boss[BOSSID_GOHT];
     case SCE_MM_LAIR_GYORG:
-        return gComboData.boss[BOSSID_GYORG];
+        return gComboConfig.boss[BOSSID_GYORG];
     case SCE_MM_LAIR_TWINMOLD:
-        return gComboData.boss[BOSSID_TWINMOLD];
+        return gComboConfig.boss[BOSSID_TWINMOLD];
 
     default:
         return -1;

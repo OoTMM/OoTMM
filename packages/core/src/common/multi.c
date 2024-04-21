@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/net.h>
 #include <combo/player.h>
+#include <combo/config.h>
 
 u32 gMultiMarkChests;
 u32 gMultiMarkCollectibles;
@@ -280,7 +281,7 @@ static void setXflagsMarkMm(GameState_Play* play, int sliceId, int sceneId, int 
 
 void multiSetMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
 {
-    if (!comboConfig(CFG_MULTIPLAYER))
+    if (!Config_Flag(CFG_MULTIPLAYER))
         return;
 
     switch (ovType)
@@ -324,7 +325,7 @@ void multiSetMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u
 
 void multiSetMarkedMm(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
 {
-    if (!comboConfig(CFG_MULTIPLAYER))
+    if (!Config_Flag(CFG_MULTIPLAYER))
         return;
 
     switch (ovType)
@@ -365,7 +366,7 @@ void multiSetMarkedMm(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8
 
 int multiIsMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
 {
-    if (!comboConfig(CFG_MULTIPLAYER))
+    if (!Config_Flag(CFG_MULTIPLAYER))
         return 0;
 
     switch (ovType)
@@ -401,7 +402,7 @@ int multiIsMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 
 
 int multiIsMarkedMm(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
 {
-    if (!comboConfig(CFG_MULTIPLAYER))
+    if (!Config_Flag(CFG_MULTIPLAYER))
         return 0;
 
     switch (ovType)
@@ -575,7 +576,7 @@ void comboMultiProcessMessages(GameState_Play* play)
 {
     NetContext* ctx;
 
-    if (!comboConfig(CFG_MULTIPLAYER))
+    if (!Config_Flag(CFG_MULTIPLAYER))
         return;
 
     ctx = netMutexLock();
@@ -600,7 +601,7 @@ static void drawSingleWisp(GameState_Play* play, const PlayerWisp* wisp)
 
 void comboMultiDrawWisps(GameState_Play* play)
 {
-    if (!comboConfig(CFG_MULTIPLAYER))
+    if (!Config_Flag(CFG_MULTIPLAYER))
         return;
 
     InitListPolyXlu(play->gs.gfx);
@@ -613,7 +614,7 @@ void comboMultiDrawWisps(GameState_Play* play)
 
 void comboMultiResetWisps(void)
 {
-    if (!comboConfig(CFG_MULTIPLAYER))
+    if (!Config_Flag(CFG_MULTIPLAYER))
         return;
     bzero(sPlayerWisps, sizeof(sPlayerWisps));
 }

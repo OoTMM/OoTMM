@@ -2,6 +2,7 @@
 #include <combo/entrance.h>
 #include <combo/dma.h>
 #include <combo/mask.h>
+#include <combo/config.h>
 
 #if defined(GAME_OOT)
 # define ENTRANCES_ADDR 0x03ff4000
@@ -57,7 +58,7 @@ void comboTransition(GameState_Play* play, u32 entrance)
 
 #if defined(GAME_MM)
     gNoTimeFlow = 0;
-    if (gSave.playerForm == MM_PLAYER_FORM_FIERCE_DEITY && !comboConfig(CFG_MM_FD_ANYWHERE))
+    if (gSave.playerForm == MM_PLAYER_FORM_FIERCE_DEITY && !Config_Flag(CFG_MM_FD_ANYWHERE))
     {
         switch (play->sceneId)
         {

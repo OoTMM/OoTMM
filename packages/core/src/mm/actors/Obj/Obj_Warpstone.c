@@ -2,6 +2,7 @@
 #include <combo/item.h>
 #include <combo/net.h>
 #include <combo/player.h>
+#include <combo/config.h>
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x1ac) = (h); } while (0)
 
@@ -11,7 +12,7 @@ static void sendNetOwl(GameState_Play* play, int owlId)
     int npc;
     s16 gi;
 
-    if (!comboConfig(CFG_MULTIPLAYER))
+    if (!Config_Flag(CFG_MULTIPLAYER))
         return;
 
     if (owlId == 0xf)
@@ -29,8 +30,8 @@ static void sendNetOwl(GameState_Play* play, int owlId)
     netWaitCmdClear();
     bzero(&net->cmdOut, sizeof(net->cmdOut));
     net->cmdOut.op = NET_OP_ITEM_SEND;
-    net->cmdOut.itemSend.playerFrom = gComboData.playerId;
-    net->cmdOut.itemSend.playerTo = gComboData.playerId;
+    net->cmdOut.itemSend.playerFrom = gComboConfig.playerId;
+    net->cmdOut.itemSend.playerTo = gComboConfig.playerId;
     net->cmdOut.itemSend.game = 1;
     net->cmdOut.itemSend.gi = gi;
     net->cmdOut.itemSend.key = ((u32)OV_NPC << 24) | npc;
@@ -51,7 +52,7 @@ void ObjWarpstone_GiveItem(Actor* this, GameState_Play* play)
 
     id = this->variable & 0xf;
 
-    if (!comboConfig(CFG_MM_OWL_SHUFFLE) || (id == 0xf))
+    if (!Config_Flag(CFG_MM_OWL_SHUFFLE) || (id == 0xf))
     {
         gMmOwlFlags |= ((u32)1 << id);
         sendNetOwl(play, id);

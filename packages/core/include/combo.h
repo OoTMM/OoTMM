@@ -6,8 +6,6 @@
 # include <string.h>
 # include <stdlib.h>
 
-#define fabsf(f) __builtin_fabsf(f)
-
 /* "Length" is how long the fish is, which affects how much it weighs, but I call it weight sometimes anyway. */
 # define FISH_WEIGHT_TO_LENGTH(weight) (sqrtf((weight - 0.5f) / 0.0036f) + 1.0f) /* Add 1.0 to prevent errors due to truncating */
 
@@ -67,14 +65,12 @@
 #include <PR/gbi.h>
 #include <combo/common/actor.h>
 #include <combo/save.h>
-#include <combo/prices.h>
 #include <combo/gi.h>
 #include <combo/data/items.h>
 #include <combo/entrances.h>
 #include <combo/common/events.h>
 #include <combo/scenes.h>
 #include <combo/drawgi.h>
-#include <combo/config.h>
 #if defined (GAME_OOT)
 # include <combo/oot/pause_state_defs.h>
 #else
@@ -100,22 +96,6 @@ ComboContext;
 
 extern ComboContext gComboCtx;
 
-typedef struct
-{
-    u8 region;
-    u8 world;
-}
-ItemHint;
-
-typedef struct
-{
-    ItemHint dungeonRewards[13];
-    ItemHint lightArrows;
-    ItemHint oathToOrder;
-    ItemHint ganonBossKey;
-}
-ComboDataHints;
-
 #define SPECIAL_BRIDGE      0
 #define SPECIAL_MOON        1
 #define SPECIAL_LACS        2
@@ -124,39 +104,6 @@ ComboDataHints;
 
 #define PLAYER_SELF 0x00
 #define PLAYER_ALL  0xff
-
-typedef struct
-{
-    u32 flags;
-    u16 count;
-    u16 zero;
-}
-SpecialCond;
-
-typedef struct
-{
-    u8              uuid[16];
-    u8              playerId;
-    u32             dungeonWarps[12];
-    u32             dungeonEntrances[26];
-    u32             mq;
-    u32             preCompleted;
-    u32             entrancesSong[6];
-    u32             entrancesOwl[10];
-    u8              config[0x40];
-    SpecialCond     special[5];
-    u16             maxCoins[4];
-    u16             prices[PRICES_MAX];
-    u16             triforcePieces;
-    u16             triforceGoal;
-    ComboDataHints  hints;
-    s8              staticHintsImportance[20];
-    u16             giZoraSapphire;
-    u8              boss[12];
-}
-ComboData;
-
-extern ComboData gComboData;
 
 ALIGNED(16) extern const Gfx kDListEmpty[];
 
@@ -355,7 +302,6 @@ void comboDpadDraw(GameState_Play* play);
 void comboDpadUpdate(GameState_Play* play);
 int  comboDpadUse(GameState_Play* play, int flags);
 
-int comboConfig(int flag);
 int comboDoorIsUnlocked(GameState_Play* play, Actor* actor);
 
 /* Hints */

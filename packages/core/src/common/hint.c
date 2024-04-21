@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/dma.h>
 #include <combo/item.h>
+#include <combo/config.h>
 
 #if defined(GAME_OOT)
 # define HINTS_ADDR 0x03ff1000
@@ -80,7 +81,7 @@ static void appendCorrectItemName(char** b, s16 gi, u8 player, u8 importance)
 
     comboTextAppendItemImportance(b, gi, importance);
 
-    if (player != 0 && player != 0xff && player != gComboData.playerId)
+    if (player != 0 && player != 0xff && player != gComboConfig.playerId)
     {
         comboTextAppendStr(b, " for " TEXT_COLOR_YELLOW "Player ");
         comboTextAppendNum(b, player);

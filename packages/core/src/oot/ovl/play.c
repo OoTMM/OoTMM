@@ -5,23 +5,24 @@
 #include <combo/entrance.h>
 #include <combo/debug.h>
 #include <combo/magic.h>
+#include <combo/config.h>
 
 extern void* gMmMag;
 GameState_Play* gPlay;
 
 static int isRainbowBridgeOpen(void)
 {
-    if (comboConfig(CFG_OOT_BRIDGE_CUSTOM) && !comboSpecialCond(SPECIAL_BRIDGE))
+    if (Config_Flag(CFG_OOT_BRIDGE_CUSTOM) && !comboSpecialCond(SPECIAL_BRIDGE))
         return 0;
 
-    if (comboConfig(CFG_OOT_BRIDGE_VANILLA) && !(
+    if (Config_Flag(CFG_OOT_BRIDGE_VANILLA) && !(
         gOotSave.inventory.quest.medallionShadow
         && gOotSave.inventory.quest.medallionSpirit
         && gOotSave.inventory.items[ITS_OOT_ARROW_LIGHT] == ITEM_OOT_ARROW_LIGHT
     ))
         return 0;
 
-    if (comboConfig(CFG_OOT_BRIDGE_MEDALLIONS) && !(
+    if (Config_Flag(CFG_OOT_BRIDGE_MEDALLIONS) && !(
         gOotSave.inventory.quest.medallionLight
         && gOotSave.inventory.quest.medallionForest
         && gOotSave.inventory.quest.medallionFire
@@ -85,7 +86,7 @@ static void sendSelfTriforce(void)
     int npc;
     s16 gi;
 
-    if (!comboConfig(CFG_MULTIPLAYER))
+    if (!Config_Flag(CFG_MULTIPLAYER))
         return;
 
     gi = GI_OOT_TRIFORCE_FULL;
@@ -95,8 +96,8 @@ static void sendSelfTriforce(void)
     netWaitCmdClear();
     bzero(&net->cmdOut, sizeof(net->cmdOut));
     net->cmdOut.op = NET_OP_ITEM_SEND;
-    net->cmdOut.itemSend.playerFrom = gComboData.playerId;
-    net->cmdOut.itemSend.playerTo = gComboData.playerId;
+    net->cmdOut.itemSend.playerFrom = gComboConfig.playerId;
+    net->cmdOut.itemSend.playerTo = gComboConfig.playerId;
     net->cmdOut.itemSend.game = 0;
     net->cmdOut.itemSend.gi = gi;
     net->cmdOut.itemSend.key = ((u32)OV_NPC << 24) | npc;
@@ -136,7 +137,7 @@ static void endGame(void)
     gSave.age = AGE_ADULT;
     gSaveContext.nextCutscene = 0;
     gSave.cutscene = 0;
-    if (comboConfig(CFG_ER_ANY))
+    if (Config_Flag(CFG_ER_ANY))
     {
         gSave.entrance = ENTR_OOT_GANON_TOWER;
         gSave.sceneId = SCE_OOT_GANON_TOWER;
@@ -469,7 +470,7 @@ static void masterSwordFix(GameState_Play* play)
     /* Re-add the Master Sword to the inventory */
     gSave.inventory.equipment.swords |= 2;
 
-    if (comboConfig(CFG_OOT_SWORDLESS_ADULT))
+    if (Config_Flag(CFG_OOT_SWORDLESS_ADULT))
         return;
     if (gSave.age != AGE_ADULT)
         return;
@@ -572,7 +573,7 @@ NORETURN static void Play_GameSwitch(GameState_Play* play, u32 entrance)
 
 static u32 entrGrottoExit(GameState_Play* play)
 {
-    if (!comboConfig(CFG_ER_GROTTOS))
+    if (!Config_Flag(CFG_ER_GROTTOS))
         return ENTR_OOT_INTERNAL_EXIT_GROTTO;
 
     switch (play->sceneId)

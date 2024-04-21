@@ -4,6 +4,8 @@
 #include <combo/player.h>
 #include <combo/mask.h>
 #include <combo/magic.h>
+#include <combo/math.h>
+#include <combo/config.h>
 #include "../actors.h"
 
 void ArrowCycle_Handle(Actor_Player* link, GameState_Play* play);
@@ -1056,7 +1058,7 @@ void Player_SkelAnime_DrawFlexLod(GameState_Play* play, void** skeleton, Vec3s* 
             break;
         }
 
-        if (player->transformation == MM_PLAYER_FORM_HUMAN && comboConfig(CFG_MM_STRENGTH))
+        if (player->transformation == MM_PLAYER_FORM_HUMAN && Config_Flag(CFG_MM_STRENGTH))
         {
             Color_RGB8* gauntletColor;
             s32 strength = gSaveContext.save.inventory.upgrades.strength;
@@ -1355,7 +1357,7 @@ s32 Player_GetEnvironmentalHazardCustom(GameState_Play* play) {
         return PLAYER_ENV_HAZARD_HOTROOM;
     }
     else if (player->transformation != MM_PLAYER_FORM_ZORA && player->underwaterTimer > 80
-        && (!comboConfig(CFG_MM_SCALES) || GET_PLAYER_CUSTOM_BOOTS(player) == PLAYER_BOOTS_IRON || player->underwaterTimer >= 300))
+        && (!Config_Flag(CFG_MM_SCALES) || GET_PLAYER_CUSTOM_BOOTS(player) == PLAYER_BOOTS_IRON || player->underwaterTimer >= 300))
     {
         if (GET_PLAYER_CUSTOM_BOOTS(player) == PLAYER_BOOTS_IRON && (player->base.bgCheckFlags & BGCHECKFLAG_GROUND))
         {
@@ -1432,7 +1434,7 @@ f32 Player_GetMaxDiveDepth()
 
 u8 Player_GetStrengthCustom(u8 formStrength)
 {
-    if (comboConfig(CFG_MM_STRENGTH) && gSaveContext.save.playerForm == MM_PLAYER_FORM_HUMAN) /* || gSaveContext.save.playerForm == MM_PLAYER_FORM_FIERCE_DEITY) */
+    if (Config_Flag(CFG_MM_STRENGTH) && gSaveContext.save.playerForm == MM_PLAYER_FORM_HUMAN) /* || gSaveContext.save.playerForm == MM_PLAYER_FORM_FIERCE_DEITY) */
     {
         return gSaveContext.save.inventory.upgrades.strength;
     }

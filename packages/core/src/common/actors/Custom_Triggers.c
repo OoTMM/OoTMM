@@ -2,6 +2,7 @@
 #include <combo/item.h>
 #include <combo/net.h>
 #include <combo/player.h>
+#include <combo/config.h>
 
 #define TRIGGER_NONE            0x00
 #define TRIGGER_GANON_BK        0x01
@@ -207,7 +208,7 @@ static void CustomTriggers_HandleTrigger(Actor_CustomTriggers* this, GameState_P
         gi = net->cmdIn.itemRecv.gi;
         isMarked = 0;
         needsMarking = 0;
-        isSamePlayer = (net->cmdIn.itemRecv.playerFrom == gComboData.playerId);
+        isSamePlayer = (net->cmdIn.itemRecv.playerFrom == gComboConfig.playerId);
         if (isSamePlayer)
         {
             if (!(net->cmdIn.itemRecv.flags & OVF_RENEW))
@@ -265,7 +266,7 @@ static void CustomTriggers_CheckTrigger(Actor_CustomTriggers* this, GameState_Pl
     NetContext* net;
 
     /* Ganon BK */
-    if (comboConfig(CFG_OOT_GANON_BK_CUSTOM) && !gOotExtraFlags.ganonBossKey && comboSpecialCond(SPECIAL_GANON_BK))
+    if (Config_Flag(CFG_OOT_GANON_BK_CUSTOM) && !gOotExtraFlags.ganonBossKey && comboSpecialCond(SPECIAL_GANON_BK))
     {
         gComboTriggersData.acc = 0;
         gComboTriggersData.trigger = TRIGGER_GANON_BK;
@@ -273,7 +274,7 @@ static void CustomTriggers_CheckTrigger(Actor_CustomTriggers* this, GameState_Pl
     }
 
     /* Triforce (Hunt) */
-    if (comboConfig(CFG_GOAL_TRIFORCE) && !gOotExtraFlags.triforceWin && gTriforceCount >= gComboData.triforceGoal)
+    if (Config_Flag(CFG_GOAL_TRIFORCE) && !gOotExtraFlags.triforceWin && gTriforceCount >= gComboConfig.triforceGoal)
     {
         gComboTriggersData.acc = 0;
         gComboTriggersData.trigger = TRIGGER_TRIFORCE;
@@ -281,7 +282,7 @@ static void CustomTriggers_CheckTrigger(Actor_CustomTriggers* this, GameState_Pl
     }
 
     /* Triforce (Quest) */
-    if (comboConfig(CFG_GOAL_TRIFORCE3) && !gOotExtraFlags.triforceWin && gTriforceCount >= 3)
+    if (Config_Flag(CFG_GOAL_TRIFORCE3) && !gOotExtraFlags.triforceWin && gTriforceCount >= 3)
     {
         gComboTriggersData.acc = 0;
         gComboTriggersData.trigger = TRIGGER_TRIFORCE;
@@ -300,7 +301,7 @@ static void CustomTriggers_CheckTrigger(Actor_CustomTriggers* this, GameState_Pl
     net = netMutexLock();
     if (net->cmdIn.op == NET_OP_ITEM_RECV)
     {
-        if (net->cmdIn.itemRecv.playerTo != gComboData.playerId)
+        if (net->cmdIn.itemRecv.playerTo != gComboConfig.playerId)
         {
             bzero(&net->cmdIn, sizeof(net->cmdIn));
             gSaveLedgerBase++;

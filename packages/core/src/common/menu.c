@@ -4,6 +4,7 @@
 #include <combo/menu.h>
 #include <combo/sr.h>
 #include <combo/souls.h>
+#include <combo/config.h>
 
 #define VTX_COUNT 2048
 
@@ -95,7 +96,7 @@ void menuInit()
     DungeonDef* d;
 
     d = gDungeonDefs + gDungeonDefCount;
-    if (comboConfig(CFG_GOAL_TRIFORCE) || comboConfig(CFG_GOAL_TRIFORCE3))
+    if (Config_Flag(CFG_GOAL_TRIFORCE) || Config_Flag(CFG_GOAL_TRIFORCE3))
     {
         d->name = "Triforce";
         d->id = 2;
@@ -105,7 +106,7 @@ void menuInit()
         d++;
     }
 
-    if (gComboData.maxCoins[0])
+    if (gComboConfig.maxCoins[0])
     {
         d->name = "Red Coins";
         d->id = 3;
@@ -115,7 +116,7 @@ void menuInit()
         d++;
     }
 
-    if (gComboData.maxCoins[1])
+    if (gComboConfig.maxCoins[1])
     {
         d->name = "Green Coins";
         d->id = 4;
@@ -125,7 +126,7 @@ void menuInit()
         d++;
     }
 
-    if (gComboData.maxCoins[2])
+    if (gComboConfig.maxCoins[2])
     {
         d->name = "Blue Coins";
         d->id = 5;
@@ -135,7 +136,7 @@ void menuInit()
         d++;
     }
 
-    if (gComboData.maxCoins[3])
+    if (gComboConfig.maxCoins[3])
     {
         d->name = "Yellow Coins";
         d->id = 6;
@@ -716,11 +717,11 @@ static void printDungeonData(GameState_Play* play, int base, int index)
     u8 b;
     u8 a;
 
-    triforceMax = comboConfig(CFG_GOAL_TRIFORCE3) ? 3 : (gOotExtraFlags.triforceWin ? gComboData.triforcePieces : gComboData.triforceGoal);
+    triforceMax = Config_Flag(CFG_GOAL_TRIFORCE3) ? 3 : (gOotExtraFlags.triforceWin ? gComboConfig.triforcePieces : gComboConfig.triforceGoal);
     triforceDigits = digitCount(triforceMax);
 
     offX = 0.f;
-    if (comboConfig(CFG_OOT_SILVER_RUPEE_SHUFFLE) && ((base + index) < 13))
+    if (Config_Flag(CFG_OOT_SILVER_RUPEE_SHUFFLE) && ((base + index) < 13))
         offX = -30.f;
 
     OPEN_DISPS(play->gs.gfx);
@@ -764,7 +765,7 @@ static void printDungeonData(GameState_Play* play, int base, int index)
 
     x = -110.f;
     y = 42.f - 12 * index;
-    if (def->dungeonId != -1 && gComboData.preCompleted & (1 << def->dungeonId))
+    if (def->dungeonId != -1 && gComboConfig.preCompleted & (1 << def->dungeonId))
     {
         r = 0x3f;
         gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, r, r, r, 255);
@@ -816,25 +817,25 @@ static void printDungeonData(GameState_Play* play, int base, int index)
             /* Red Coins */
             gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 0, 0, 255);
             drawTexRGBA16_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_COIN), x + 104.f, y);
-            printNumColored(play, gSharedCustomSave.coins[0], gComboData.maxCoins[0], digitCount(gComboData.maxCoins[0]), x + 116.f, y, 1);
+            printNumColored(play, gSharedCustomSave.coins[0], gComboConfig.maxCoins[0], digitCount(gComboConfig.maxCoins[0]), x + 116.f, y, 1);
             break;
         case 4:
             /* Green Coins */
             gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0, 255, 0, 255);
             drawTexRGBA16_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_COIN), x + 104.f, y);
-            printNumColored(play, gSharedCustomSave.coins[1], gComboData.maxCoins[1], digitCount(gComboData.maxCoins[1]), x + 116.f, y, 1);
+            printNumColored(play, gSharedCustomSave.coins[1], gComboConfig.maxCoins[1], digitCount(gComboConfig.maxCoins[1]), x + 116.f, y, 1);
             break;
         case 5:
             /* Blue Coins */
             gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0, 0, 255, 255);
             drawTexRGBA16_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_COIN), x + 104.f, y);
-            printNumColored(play, gSharedCustomSave.coins[2], gComboData.maxCoins[2], digitCount(gComboData.maxCoins[2]), x + 116.f, y, 1);
+            printNumColored(play, gSharedCustomSave.coins[2], gComboConfig.maxCoins[2], digitCount(gComboConfig.maxCoins[2]), x + 116.f, y, 1);
             break;
         case 6:
             /* Yellow Coins */
             gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 0, 255);
             drawTexRGBA16_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_COIN), x + 104.f, y);
-            printNumColored(play, gSharedCustomSave.coins[3], gComboData.maxCoins[3], digitCount(gComboData.maxCoins[3]), x + 116.f, y, 1);
+            printNumColored(play, gSharedCustomSave.coins[3], gComboConfig.maxCoins[3], digitCount(gComboConfig.maxCoins[3]), x + 116.f, y, 1);
             break;
         }
     }
@@ -868,7 +869,7 @@ static void printDungeonData(GameState_Play* play, int base, int index)
             printNumColored(play, data.fairies, 15, 2, x + 186.f, y, 0);
         }
 
-        if (comboConfig(CFG_OOT_SILVER_RUPEE_SHUFFLE) && srBase != -1)
+        if (Config_Flag(CFG_OOT_SILVER_RUPEE_SHUFFLE) && srBase != -1)
             printDungeonSilverRupees(play, x + 170.f, y, srBase, srCount);
     }
     CLOSE_DISPS();
@@ -1031,7 +1032,7 @@ void comboMenuDraw(GameState_Play* play)
 
 void comboMenuNext(void)
 {
-    if (comboConfig(CFG_MENU_NOTEBOOK) && !gMmSave.inventory.quest.notebook)
+    if (Config_Flag(CFG_MENU_NOTEBOOK) && !gMmSave.inventory.quest.notebook)
     {
         PlaySound(0x4806);
         return;
@@ -1042,19 +1043,19 @@ void comboMenuNext(void)
     g.menuCursor = 0;
     g.menuCursorMax = 0;
 
-    if (g.menuScreen == MENU_SOULS_OOT_ENEMY && !comboConfig(CFG_OOT_SOULS_ENEMY))
+    if (g.menuScreen == MENU_SOULS_OOT_ENEMY && !Config_Flag(CFG_OOT_SOULS_ENEMY))
         g.menuScreen++;
-    if (g.menuScreen == MENU_SOULS_OOT_BOSS && !comboConfig(CFG_OOT_SOULS_BOSS))
+    if (g.menuScreen == MENU_SOULS_OOT_BOSS && !Config_Flag(CFG_OOT_SOULS_BOSS))
         g.menuScreen++;
-    if (g.menuScreen == MENU_SOULS_OOT_NPC && !comboConfig(CFG_OOT_SOULS_NPC))
+    if (g.menuScreen == MENU_SOULS_OOT_NPC && !Config_Flag(CFG_OOT_SOULS_NPC))
         g.menuScreen++;
-    if (g.menuScreen == MENU_SOULS_OOT_MISC && !comboConfig(CFG_OOT_SOULS_MISC))
+    if (g.menuScreen == MENU_SOULS_OOT_MISC && !Config_Flag(CFG_OOT_SOULS_MISC))
         g.menuScreen++;
-    if (g.menuScreen == MENU_SOULS_MM_ENEMY && !comboConfig(CFG_MM_SOULS_ENEMY))
+    if (g.menuScreen == MENU_SOULS_MM_ENEMY && !Config_Flag(CFG_MM_SOULS_ENEMY))
         g.menuScreen++;
-    if (g.menuScreen == MENU_SOULS_MM_BOSS && !comboConfig(CFG_MM_SOULS_BOSS))
+    if (g.menuScreen == MENU_SOULS_MM_BOSS && !Config_Flag(CFG_MM_SOULS_BOSS))
         g.menuScreen++;
-    if (g.menuScreen == MENU_SOULS_MM_MISC && !comboConfig(CFG_MM_SOULS_MISC))
+    if (g.menuScreen == MENU_SOULS_MM_MISC && !Config_Flag(CFG_MM_SOULS_MISC))
         g.menuScreen++;
 
     if (g.menuScreen >= MENU_MAX)

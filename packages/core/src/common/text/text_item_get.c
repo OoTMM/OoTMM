@@ -2,6 +2,7 @@
 #include <combo/text.h>
 #include <combo/dungeon.h>
 #include <combo/item.h>
+#include <combo/config.h>
 
 static int mapDungeonId(GameState_Play* play, s16 gi)
 {
@@ -87,7 +88,7 @@ static void appendDungeonEntrance(char** b, int dungeonId)
 {
     u32 data;
 
-    data = gComboData.dungeonEntrances[dungeonId];
+    data = gComboConfig.dungeonEntrances[dungeonId];
     if (data & 0x80000000)
     {
         /* Dungeon */
@@ -105,7 +106,7 @@ static void comboTextMap(char** b, GameState_Play* play, s16 gi)
 {
     int dungeonId;
 
-    if (!comboConfig(CFG_ER_DUNGEONS))
+    if (!Config_Flag(CFG_ER_DUNGEONS))
         return;
 
     dungeonId = mapDungeonId(play, gi);
@@ -135,7 +136,7 @@ static void comboTextCompass(char** b, GameState_Play* play, s16 gi)
     int dungeonId;
     int bossId;
 
-    if (!comboConfig(CFG_ER_BOSS))
+    if (!Config_Flag(CFG_ER_BOSS))
         return;
 
     dungeonId = compassDungeonId(play, gi);
@@ -168,7 +169,7 @@ void comboTextHijackItemEx(GameState_Play* play, const ComboItemOverride* o, int
     char* start;
     int isSelf;
 
-    isSelf = (o->player == PLAYER_SELF) || (o->player == PLAYER_ALL) || (o->player == gComboData.playerId);
+    isSelf = (o->player == PLAYER_SELF) || (o->player == PLAYER_ALL) || (o->player == gComboConfig.playerId);
 
 #if defined(GAME_OOT)
     b = play->msgCtx.textBuffer;

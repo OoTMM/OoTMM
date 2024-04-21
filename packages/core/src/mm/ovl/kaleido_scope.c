@@ -4,6 +4,7 @@
 #include <combo/menu.h>
 #include <combo/item.h>
 #include <combo/player.h>
+#include <combo/config.h>
 
 void KaleidoScope_AfterSetCutsorColor(GameState_Play* play)
 {
@@ -285,7 +286,7 @@ static int canSave(GameState_Play* play)
     case SCE_MM_LAIR_MAJORA:
         return 0;
     case SCE_MM_CLOCK_TOWER_ROOFTOP:
-        return !!comboConfig(CFG_ER_MOON) || !!comboConfig(CFG_MM_MOON_CRASH_CYCLE);
+        return !!Config_Flag(CFG_ER_MOON) || !!Config_Flag(CFG_MM_MOON_CRASH_CYCLE);
     case SCE_MM_SOUTHERN_SWAMP:
         return gSave.entranceIndex != 0x8460 && !MM_CHECK_EVENT_INF(0x35) && !MM_CHECK_EVENT_INF(0x41);
     default:

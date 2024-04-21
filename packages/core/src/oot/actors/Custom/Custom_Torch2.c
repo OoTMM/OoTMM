@@ -6,6 +6,7 @@
 
 #include <combo.h>
 #include <combo/custom.h>
+#include <combo/math.h>
 
 #define FLAGS (1 << 4) /* (ACTOR_FLAG_10) */
 

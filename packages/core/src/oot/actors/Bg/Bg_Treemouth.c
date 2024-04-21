@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/config.h>
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x15c) = (h); } while (0)
 
@@ -13,9 +14,9 @@ static void BgTreemouth_SetHandler(Actor* this, void* unused)
     /* Never make the deku tree dynamic */
     SET_HANDLER(this, BgTreemouth_HandlerNull);
 
-    if (gSave.age == AGE_CHILD && !comboConfig(CFG_OOT_CLOSED_DEKU))
+    if (gSave.age == AGE_CHILD && !Config_Flag(CFG_OOT_CLOSED_DEKU))
         isOpen = 1;
-    else if (!comboConfig(CFG_OOT_ADULT_DEKU) && (gSave.age == AGE_ADULT))
+    else if (!Config_Flag(CFG_OOT_ADULT_DEKU) && (gSave.age == AGE_ADULT))
         isOpen = 0;
     else
         isOpen = GetEventChk(EV_OOT_CHK_DEKU_MIDO_SWORD_SHIELD);

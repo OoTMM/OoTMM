@@ -2,6 +2,7 @@
 #include <combo/custom.h>
 #include <combo/dungeon.h>
 #include <combo/dma.h>
+#include <combo/config.h>
 
 typedef struct
 {
@@ -131,7 +132,7 @@ static void swapMqRooms(void)
 
 static int isEnabledMq(int dungeonId)
 {
-    return gComboData.mq & (1 << dungeonId);
+    return gComboConfig.mq & (1 << dungeonId);
 }
 
 #define PATCH_POLY(ptr, index, type, flags) \
@@ -400,7 +401,7 @@ static void loadMqRoomMaybe(GameState_Play* play)
     }
 
     /* Remove broken actors */
-    if (comboConfig(CFG_NO_BROKEN_ACTORS))
+    if (Config_Flag(CFG_NO_BROKEN_ACTORS))
     {
         for (int i = 0; i < ARRAY_SIZE(kMqBrokenActors); ++i)
         {

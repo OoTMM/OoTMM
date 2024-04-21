@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/entrance.h>
 #include <combo/dungeon.h>
+#include <combo/config.h>
 
 static const u32 kDungeonEntrances[] =
 {
@@ -27,7 +28,7 @@ void EnTest7_TriggerWarpWrapper(Actor* actor, GameState_Play* play)
 
     if (actor->variable & 0x8000)
     {
-        entrance = gComboData.entrancesSong[actor->variable & 0xff] ^ MASK_FOREIGN_ENTRANCE;
+        entrance = gComboConfig.entrancesSong[actor->variable & 0xff] ^ MASK_FOREIGN_ENTRANCE;
     }
     else
     {
@@ -60,11 +61,11 @@ void EnTest7_TriggerWarpWrapper(Actor* actor, GameState_Play* play)
 
         if (bossId != -1)
         {
-            dungeonId = gComboData.boss[bossId];
+            dungeonId = gComboConfig.boss[bossId];
             entrance = kDungeonEntrances[dungeonId];
         }
         else
-            entrance = gComboData.entrancesOwl[(actor->variable & 0xff) - 0x1c];
+            entrance = gComboConfig.entrancesOwl[(actor->variable & 0xff) - 0x1c];
     }
 
     comboTransition(play, entrance);

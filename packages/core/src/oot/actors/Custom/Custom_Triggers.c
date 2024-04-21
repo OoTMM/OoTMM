@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/souls.h>
+#include <combo/config.h>
 
 #define TRIGGER_OOT_SHEIK_COLOSSUS          0x100
 #define TRIGGER_OOT_SHEIK_KAKARIKO          0x101
@@ -87,7 +88,7 @@ void CustomTriggers_CheckTriggerGame(Actor_CustomTriggers* this, GameState_Play*
     if (comboHasSoulOot(GI_OOT_SOUL_NPC_SHEIK) && comboHasSoulOot(GI_OOT_SOUL_NPC_ZELDA) && play->sceneId == SCE_OOT_TEMPLE_OF_TIME && gSave.age == AGE_ADULT && !GetEventChk(EV_OOT_CHK_LIGHT_ARROW))
     {
         int shouldTrigger;
-        if (comboConfig(CFG_OOT_LACS_CUSTOM))
+        if (Config_Flag(CFG_OOT_LACS_CUSTOM))
             shouldTrigger = comboSpecialCond(SPECIAL_LACS);
         else
             shouldTrigger = (gSave.inventory.quest.medallionSpirit && gSave.inventory.quest.medallionShadow);

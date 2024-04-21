@@ -1,12 +1,13 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/config.h>
 
 static void DemoEffect_SapphireItemQuery(ComboItemQuery* q)
 {
     bzero(q, sizeof(*q));
 
     q->ovType = OV_NONE;
-    q->gi = gComboData.giZoraSapphire;
+    q->gi = gComboConfig.giZoraSapphire;
 }
 
 static void DemoEffect_SapphireItemOverride(ComboItemOverride* o)

@@ -4,6 +4,7 @@
 #include <combo/dma.h>
 #include <combo/entrance.h>
 #include <combo/io.h>
+#include <combo/config.h>
 
 #if defined(GAME_OOT)
 u16 gMmMaxRupees[] = { 0, 200, 500, 999 };
@@ -19,42 +20,42 @@ const u8 kMaxSeeds[] = { 0, 30, 40, 50 };
 
 static int isPlayerSelf(u8 playerId)
 {
-    if (playerId == PLAYER_SELF || playerId == gComboData.playerId)
+    if (playerId == PLAYER_SELF || playerId == gComboConfig.playerId)
         return 1;
     return 0;
 }
 
 void comboSyncItems(void)
 {
-    if (comboConfig(CFG_SHARED_BOWS))
+    if (Config_Flag(CFG_SHARED_BOWS))
         gForeignSave.inventory.ammo[ITS_FOREIGN_BOW] = gSave.inventory.ammo[ITS_NATIVE_BOW];
 
-    if (comboConfig(CFG_SHARED_BOMB_BAGS))
+    if (Config_Flag(CFG_SHARED_BOMB_BAGS))
         gForeignSave.inventory.ammo[ITS_FOREIGN_BOMBS] = gSave.inventory.ammo[ITS_NATIVE_BOMBS];
 
-    if (comboConfig(CFG_SHARED_BOMBCHU))
+    if (Config_Flag(CFG_SHARED_BOMBCHU))
         gForeignSave.inventory.ammo[ITS_FOREIGN_BOMBCHU] = gSave.inventory.ammo[ITS_NATIVE_BOMBCHU];
 
-    if (comboConfig(CFG_SHARED_MAGIC))
+    if (Config_Flag(CFG_SHARED_MAGIC))
        gForeignSave.playerData.magicAmount = gSave.playerData.magicAmount;
 
-    if (comboConfig(CFG_SHARED_NUTS_STICKS))
+    if (Config_Flag(CFG_SHARED_NUTS_STICKS))
     {
         gForeignSave.inventory.ammo[ITS_FOREIGN_NUTS] = gSave.inventory.ammo[ITS_NATIVE_NUTS];
         gForeignSave.inventory.ammo[ITS_FOREIGN_STICKS] = gSave.inventory.ammo[ITS_NATIVE_STICKS];
     }
 
-    if (comboConfig(CFG_SHARED_WALLETS))
+    if (Config_Flag(CFG_SHARED_WALLETS))
         gForeignSave.playerData.rupees = gSave.playerData.rupees;
 
-    if (comboConfig(CFG_SHARED_HEALTH))
+    if (Config_Flag(CFG_SHARED_HEALTH))
     {
         gForeignSave.playerData.healthMax = gSave.playerData.healthMax;
         gForeignSave.playerData.health = gSave.playerData.health;
         gForeignSave.inventory.quest.heartPieces = gSave.inventory.quest.heartPieces;
     }
 
-    if (comboConfig(CFG_CROSS_GAME_FW))
+    if (Config_Flag(CFG_CROSS_GAME_FW))
     {
 #if defined(GAME_MM)
         RespawnData* fw = &gCustomSave.fw[gOotSave.age];
@@ -357,7 +358,7 @@ int comboAddItemRawEx(GameState_Play* play, const ComboItemQuery* q, int updateT
     if (updateText)
         comboTextHijackItemEx(play, &o, count);
 
-    if (comboConfig(CFG_MULTIPLAYER) && q->ovType != OV_NONE)
+    if (Config_Flag(CFG_MULTIPLAYER) && q->ovType != OV_NONE)
     {
         /* Mark the item */
         if (isPlayerSelf(o.player))
@@ -387,7 +388,7 @@ int comboAddItemRawEx(GameState_Play* play, const ComboItemQuery* q, int updateT
         netWaitCmdClear();
         bzero(&net->cmdOut, sizeof(net->cmdOut));
         net->cmdOut.op = NET_OP_ITEM_SEND;
-        net->cmdOut.itemSend.playerFrom = gComboData.playerId;
+        net->cmdOut.itemSend.playerFrom = gComboConfig.playerId;
         net->cmdOut.itemSend.playerTo = o.player;
 #if defined(GAME_OOT)
         net->cmdOut.itemSend.game = 0;

@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/net.h>
+#include <combo/config.h>
 
 static void Sram_LoadOptions(void)
 {
@@ -203,7 +204,7 @@ static void MoonCrashCycle(void)
 
 void Sram_ResetSaveFromMoonCrash(void)
 {
-    if (comboConfig(CFG_MM_MOON_CRASH_CYCLE))
+    if (Config_Flag(CFG_MM_MOON_CRASH_CYCLE))
         MoonCrashCycle();
     else
         MoonCrashReset();

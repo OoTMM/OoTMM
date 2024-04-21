@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/dungeon.h>
+#include <combo/config.h>
 
 #define DOOR_NONE       0
 #define DOOR_SMALL_KEY  1
@@ -42,29 +43,29 @@ int comboDoorIsUnlocked(GameState_Play* play, Actor* actor)
     flag = actor->variable & 0x3f;
 
     /* Fire temple 1st door */
-    if (sceneId == SCE_OOT_TEMPLE_FIRE && flag == 0x17 && !comboConfig(CFG_SMALL_KEY_SHUFFLE) && !(gComboData.mq & (1 << MQ_TEMPLE_FIRE)))
+    if (sceneId == SCE_OOT_TEMPLE_FIRE && flag == 0x17 && !Config_Flag(CFG_SMALL_KEY_SHUFFLE) && !(gComboConfig.mq & (1 << MQ_TEMPLE_FIRE)))
         return 1;
 
     /* Water temple water raise door */
-    if (sceneId == SCE_OOT_TEMPLE_WATER && flag == 0x15 && !(gComboData.mq & (1 << MQ_TEMPLE_WATER)))
+    if (sceneId == SCE_OOT_TEMPLE_WATER && flag == 0x15 && !(gComboConfig.mq & (1 << MQ_TEMPLE_WATER)))
         return 1;
 
     if (type == DOOR_BOSS_KEY)
     {
         if (sceneId == SCE_OOT_GANON_TOWER)
         {
-            if (comboConfig(CFG_GOAL_TRIFORCE) || comboConfig(CFG_GOAL_TRIFORCE3))
+            if (Config_Flag(CFG_GOAL_TRIFORCE) || Config_Flag(CFG_GOAL_TRIFORCE3))
                 return gOotExtraFlags.triforceWin;
-            if (comboConfig(CFG_GANON_NO_BOSS_KEY))
+            if (Config_Flag(CFG_GANON_NO_BOSS_KEY))
                 return 1;
         }
         else
         {
-            if (comboConfig(CFG_OOT_NO_BOSS_KEY))
+            if (Config_Flag(CFG_OOT_NO_BOSS_KEY))
                 return 1;
         }
     }
-    else if (type == DOOR_SMALL_KEY && comboConfig(CFG_OOT_NO_SMALL_KEY))
+    else if (type == DOOR_SMALL_KEY && Config_Flag(CFG_OOT_NO_SMALL_KEY))
         return 1;
 
     return GetSwitchFlag(play, flag);

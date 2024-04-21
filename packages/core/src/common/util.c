@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/util.h>
 #include <combo/item.h>
+#include <combo/config.h>
 
 u32 popcount(u32 x)
 {
@@ -64,7 +65,7 @@ int comboMmDungeonIndex(void)
 int comboIsChateauActive(void)
 {
 #if defined(GAME_OOT)
-    if (!comboConfig(CFG_SHARED_MAGIC))
+    if (!Config_Flag(CFG_SHARED_MAGIC))
         return 0;
 #endif
 
@@ -74,7 +75,7 @@ int comboIsChateauActive(void)
 int comboIsLinkAdult(void)
 {
 #if defined(GAME_MM)
-    if (!comboConfig(CFG_MM_CROSS_AGE))
+    if (!Config_Flag(CFG_MM_CROSS_AGE))
         return 0;
 #endif
     return gOotSave.age == 0;

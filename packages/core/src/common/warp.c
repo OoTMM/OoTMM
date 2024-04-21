@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/entrance.h>
 #include <combo/dungeon.h>
+#include <combo/config.h>
 
 void comboTriggerWarp(GameState_Play* play, int bossId)
 {
@@ -27,11 +28,11 @@ void comboTriggerWarp(GameState_Play* play, int bossId)
 #endif
 
     /* Compute shuffled index and set flags */
-    dungeonId = (int)gComboData.boss[bossId];
+    dungeonId = (int)gComboConfig.boss[bossId];
     comboDungeonSetFlags(dungeonId, 1);
 
     /* Set entrance - need special case for warp dungeons */
-    dungeonExit = gComboData.dungeonWarps[dungeonId];
+    dungeonExit = gComboConfig.dungeonWarps[dungeonId];
     switch (dungeonExit)
     {
     case ENTR_OOT_KOKIRI_FOREST_FROM_DEKU_TREE:

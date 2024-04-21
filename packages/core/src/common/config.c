@@ -1,6 +1,7 @@
-#include <combo.h>
+#include <combo/util.h>
+#include <combo/config.h>
 
-int comboConfig(int flag)
+int Config_Flag(int flag)
 {
-    return BITMAP8_GET(gComboData.config, flag);
+    return BITMAP8_GET(gComboConfig.config, flag);
 }

@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/config.h>
 
 #define SPF_STONES                  (1 <<  0)
 #define SPF_MEDALLIONS              (1 <<  1)
@@ -22,9 +23,9 @@
 
 int comboGoalCond(void)
 {
-    if (comboConfig(CFG_GOAL_GANON) && !gOotExtraFlags.ganon)
+    if (Config_Flag(CFG_GOAL_GANON) && !gOotExtraFlags.ganon)
         return 0;
-    if (comboConfig(CFG_GOAL_MAJORA) && !gMmExtraFlags2.majora)
+    if (Config_Flag(CFG_GOAL_MAJORA) && !gMmExtraFlags2.majora)
         return 0;
     return 1;
 }
@@ -43,7 +44,7 @@ int comboSpecialCond(int special)
     u8 hasMaskBlast;
     u8 hasMaskStone;
 
-    cond = &gComboData.special[special];
+    cond = &gComboConfig.special[special];
     count = 0;
     hasMaskGoron = 0;
     hasMaskZora = 0;
@@ -104,7 +105,7 @@ int comboSpecialCond(int special)
 
     if (cond->flags & SPF_MASKS_REGULAR)
     {
-        if (comboConfig(CFG_SHARED_MASK_KEATON))
+        if (Config_Flag(CFG_SHARED_MASK_KEATON))
         {
             if (gMmSave.inventory.items[ITS_MM_MASK_KEATON] == ITEM_MM_MASK_KEATON) hasMaskKeaton = 1;
         }
@@ -113,7 +114,7 @@ int comboSpecialCond(int special)
             if (gMmSave.inventory.items[ITS_MM_MASK_KEATON] == ITEM_MM_MASK_KEATON) count++;
         }
 
-        if (comboConfig(CFG_SHARED_MASK_BUNNY))
+        if (Config_Flag(CFG_SHARED_MASK_BUNNY))
         {
             if (gMmSave.inventory.items[ITS_MM_MASK_BUNNY] == ITEM_MM_MASK_BUNNY) hasMaskBunny = 1;
         }
@@ -122,7 +123,7 @@ int comboSpecialCond(int special)
             if (gMmSave.inventory.items[ITS_MM_MASK_BUNNY] == ITEM_MM_MASK_BUNNY) count++;
         }
 
-        if (comboConfig(CFG_SHARED_MASK_TRUTH))
+        if (Config_Flag(CFG_SHARED_MASK_TRUTH))
         {
             if (gMmSave.inventory.items[ITS_MM_MASK_TRUTH] == ITEM_MM_MASK_TRUTH) hasMaskTruth = 1;
         }
@@ -131,7 +132,7 @@ int comboSpecialCond(int special)
             if (gMmSave.inventory.items[ITS_MM_MASK_TRUTH] == ITEM_MM_MASK_TRUTH) count++;
         }
 
-        if (comboConfig(CFG_SHARED_MASK_BLAST))
+        if (Config_Flag(CFG_SHARED_MASK_BLAST))
         {
             if (gMmSave.inventory.items[ITS_MM_MASK_BLAST] == ITEM_MM_MASK_BLAST) hasMaskBlast = 1;
         }
@@ -140,7 +141,7 @@ int comboSpecialCond(int special)
             if (gMmSave.inventory.items[ITS_MM_MASK_BLAST] == ITEM_MM_MASK_BLAST) count++;
         }
 
-        if (comboConfig(CFG_SHARED_MASK_STONE))
+        if (Config_Flag(CFG_SHARED_MASK_STONE))
         {
             if (gMmSave.inventory.items[ITS_MM_MASK_STONE] == ITEM_MM_MASK_STONE) hasMaskStone = 1;
         }
@@ -168,7 +169,7 @@ int comboSpecialCond(int special)
 
     if (cond->flags & SPF_MASKS_TRANSFORM)
     {
-        if (comboConfig(CFG_SHARED_MASK_ZORA))
+        if (Config_Flag(CFG_SHARED_MASK_ZORA))
         {
             if (gMmSave.inventory.items[ITS_MM_MASK_ZORA] == ITEM_MM_MASK_ZORA) hasMaskZora = 1;
         }
@@ -177,7 +178,7 @@ int comboSpecialCond(int special)
             if (gMmSave.inventory.items[ITS_MM_MASK_ZORA] == ITEM_MM_MASK_ZORA) count++;
         }
 
-        if (comboConfig(CFG_SHARED_MASK_GORON))
+        if (Config_Flag(CFG_SHARED_MASK_GORON))
         {
             if (gMmSave.inventory.items[ITS_MM_MASK_GORON] == ITEM_MM_MASK_GORON) hasMaskGoron = 1;
         }
@@ -192,7 +193,7 @@ int comboSpecialCond(int special)
 
     if (cond->flags & SPF_MASKS_OOT)
     {
-        if (comboConfig(CFG_SHARED_MASK_KEATON))
+        if (Config_Flag(CFG_SHARED_MASK_KEATON))
         {
             if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_KEATON_MASK)) hasMaskKeaton = 1;
         }
@@ -201,7 +202,7 @@ int comboSpecialCond(int special)
             if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_KEATON_MASK)) count++;
         }
 
-        if (comboConfig(CFG_SHARED_MASK_BUNNY))
+        if (Config_Flag(CFG_SHARED_MASK_BUNNY))
         {
             if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_BUNNY_HOOD)) hasMaskBunny = 1;
         }
@@ -210,7 +211,7 @@ int comboSpecialCond(int special)
             if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_BUNNY_HOOD)) count++;
         }
 
-        if (comboConfig(CFG_SHARED_MASK_TRUTH))
+        if (Config_Flag(CFG_SHARED_MASK_TRUTH))
         {
             if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_MASK_OF_TRUTH)) hasMaskTruth = 1;
         }
@@ -219,7 +220,7 @@ int comboSpecialCond(int special)
             if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_MASK_OF_TRUTH)) count++;
         }
 
-        if (comboConfig(CFG_SHARED_MASK_ZORA))
+        if (Config_Flag(CFG_SHARED_MASK_ZORA))
         {
             if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_ZORA_MASK)) hasMaskZora = 1;
         }
@@ -228,7 +229,7 @@ int comboSpecialCond(int special)
             if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_ZORA_MASK)) count++;
         }
 
-        if (comboConfig(CFG_SHARED_MASK_GORON))
+        if (Config_Flag(CFG_SHARED_MASK_GORON))
         {
             if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_GORON_MASK)) hasMaskGoron = 1;
         }
@@ -237,7 +238,7 @@ int comboSpecialCond(int special)
             if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_GORON_MASK)) count++;
         }
 
-        if (comboConfig(CFG_SHARED_MASK_BLAST))
+        if (Config_Flag(CFG_SHARED_MASK_BLAST))
         {
             if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_MASK_BLAST)) hasMaskBlast = 1;
         }
@@ -246,7 +247,7 @@ int comboSpecialCond(int special)
             if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_MASK_BLAST)) count++;
         }
 
-        if (comboConfig(CFG_SHARED_MASK_STONE))
+        if (Config_Flag(CFG_SHARED_MASK_STONE))
         {
             if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_MASK_STONE)) hasMaskStone = 1;
         }

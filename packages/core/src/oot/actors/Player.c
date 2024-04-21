@@ -4,6 +4,7 @@
 #include <combo/custom.h>
 #include <combo/player.h>
 #include <combo/mask.h>
+#include <combo/config.h>
 
 void ArrowCycle_Handle(Actor_Player* link, GameState_Play* play);
 void Ocarina_HandleCustomSongs(Actor_Player* link, GameState_Play* play);
@@ -317,11 +318,11 @@ u16 gBlastMaskDelayAcc;
 
 static u16 blastMaskDelay(void)
 {
-    if (comboConfig(CFG_BLAST_MASK_DELAY_INSTANT)) return 0x001;
-    if (comboConfig(CFG_BLAST_MASK_DELAY_VERYSHORT)) return 0x020;
-    if (comboConfig(CFG_BLAST_MASK_DELAY_SHORT)) return 0x80;
-    if (comboConfig(CFG_BLAST_MASK_DELAY_LONG)) return 0x200;
-    if (comboConfig(CFG_BLAST_MASK_DELAY_VERYLONG)) return 0x400;
+    if (Config_Flag(CFG_BLAST_MASK_DELAY_INSTANT)) return 0x001;
+    if (Config_Flag(CFG_BLAST_MASK_DELAY_VERYSHORT)) return 0x020;
+    if (Config_Flag(CFG_BLAST_MASK_DELAY_SHORT)) return 0x80;
+    if (Config_Flag(CFG_BLAST_MASK_DELAY_LONG)) return 0x200;
+    if (Config_Flag(CFG_BLAST_MASK_DELAY_VERYLONG)) return 0x400;
     return 0x136;
 }
 
@@ -647,7 +648,7 @@ void Player_DrawFlexLod(GameState_Play* play, void** skeleton, Vec3s* jointTable
             CLOSE_DISPS();
         }
 
-        if (comboConfig(CFG_OOT_AGELESS_STRENGTH) && gSave.inventory.upgrades.strength > 1)
+        if (Config_Flag(CFG_OOT_AGELESS_STRENGTH) && gSave.inventory.upgrades.strength > 1)
         {
             c = &sGauntletColors[gSave.inventory.upgrades.strength > 2 ? 1 : 0];
             OPEN_DISPS(play->gs.gfx);
@@ -676,7 +677,7 @@ int Player_GetStrength(void)
     level = gSave.inventory.upgrades.strength;
     if (level > 3)
         level = 3;
-    if (gSave.age == AGE_CHILD && level > 1 && !comboConfig(CFG_OOT_AGELESS_STRENGTH))
+    if (gSave.age == AGE_CHILD && level > 1 && !Config_Flag(CFG_OOT_AGELESS_STRENGTH))
         level = 1;
     return level;
 }

@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/net.h>
+#include <combo/config.h>
 
 #define gNetGlobal (*((NetGlobal*)(0x800001a0)))
 
@@ -21,7 +22,7 @@ static void wait(void)
 void netInit(void)
 {
     /* Init the context */
-    gNetCtx.uuid = gComboData.uuid;
+    gNetCtx.uuid = gComboConfig.uuid;
     gNetCtx.ledgerBase = 0xffffffff;
 
     /* Init the global struct */

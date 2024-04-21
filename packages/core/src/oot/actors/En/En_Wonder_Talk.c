@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/config.h>
 
 static const char kIcons[] = {
     0x6c,
@@ -16,7 +17,7 @@ static void hintSingleDungeon(char** b, int index)
 {
     const ItemHint* ih;
 
-    ih = &gComboData.hints.dungeonRewards[index];
+    ih = &gComboConfig.hints.dungeonRewards[index];
     comboTextAppendStr(b, TEXT_FAST TEXT_ICON);
     **b = kIcons[index];
     ++(*b);
@@ -51,18 +52,18 @@ static void hintDungeons(GameState_Play* play)
         comboTextAppendStr(&b, TEXT_BB TEXT_ICON "\x08" TEXT_FAST "It is also written that reuniting the " TEXT_COLOR_YELLOW "Spiritual Stones ");
         comboTextAppendClearColor(&b);
         comboTextAppendStr(&b, "leads to ");
-        comboTextAppendNpcReward(&b, NPC_OOT_OCARINA_TIME_ITEM, GI_OOT_OCARINA_TIME, gComboData.staticHintsImportance[5]);
+        comboTextAppendNpcReward(&b, NPC_OOT_OCARINA_TIME_ITEM, GI_OOT_OCARINA_TIME, gComboConfig.staticHintsImportance[5]);
         comboTextAppendStr(&b, " and ");
-        comboTextAppendNpcReward(&b, NPC_OOT_OCARINA_TIME_SONG, GI_OOT_SONG_TIME, gComboData.staticHintsImportance[6]);
+        comboTextAppendNpcReward(&b, NPC_OOT_OCARINA_TIME_SONG, GI_OOT_SONG_TIME, gComboConfig.staticHintsImportance[6]);
         comboTextAppendStr(&b, ".");
     }
     else
     {
         /* Ganon BK hint */
-        if (comboConfig(CFG_OOT_GANON_BOSS_KEY_HINT))
+        if (Config_Flag(CFG_OOT_GANON_BOSS_KEY_HINT))
         {
             comboTextAppendStr(&b, TEXT_BB TEXT_ICON "\x74" TEXT_FAST);
-            comboTextAppendRegionName(&b, gComboData.hints.ganonBossKey.region, gComboData.hints.ganonBossKey.world, TF_PREPOS | TF_CAPITALIZE);
+            comboTextAppendRegionName(&b, gComboConfig.hints.ganonBossKey.region, gComboConfig.hints.ganonBossKey.world, TF_PREPOS | TF_CAPITALIZE);
             comboTextAppendStr(&b, "...");
         }
     }

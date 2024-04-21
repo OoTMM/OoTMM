@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/csmc.h>
 #include <combo/item.h>
+#include <combo/config.h>
 
 int csmcFromItem(s16 gi)
 {
@@ -10,7 +11,7 @@ int csmcFromItem(s16 gi)
         gi = -gi;
 
     /* Special case: OoT bombchu */
-    if (comboConfig(CFG_OOT_BOMBCHU_BAG))
+    if (Config_Flag(CFG_OOT_BOMBCHU_BAG))
     {
         switch (gi)
         {
@@ -22,7 +23,7 @@ int csmcFromItem(s16 gi)
     }
 
     /* Special case: MM bombchu */
-    if (comboConfig(CFG_MM_BOMBCHU_BAG))
+    if (Config_Flag(CFG_MM_BOMBCHU_BAG))
     {
         switch (gi)
         {
@@ -48,7 +49,7 @@ int csmcFromItem(s16 gi)
     case ITT_FAIRY:
         return CSMC_FAIRY;
     case ITT_HEART:
-        return comboConfig(CFG_CSMC_HEARTS) ? CSMC_HEART : CSMC_NORMAL;
+        return Config_Flag(CFG_CSMC_HEARTS) ? CSMC_HEART : CSMC_NORMAL;
     case ITT_SOUL:
         return CSMC_SOUL;
     case ITT_NONE:
@@ -62,10 +63,10 @@ int csmcFromItem(s16 gi)
 
 int csmcEnabled(void)
 {
-    return (comboConfig(CFG_CSMC) || (comboConfig(CFG_CSMC_AGONY) && gOotSave.inventory.quest.agonyStone));
+    return (Config_Flag(CFG_CSMC) || (Config_Flag(CFG_CSMC_AGONY) && gOotSave.inventory.quest.agonyStone));
 }
 
 int csmcEnabledExtra(void)
 {
-    return csmcEnabled() && comboConfig(CFG_CSMC_EXTRA);
+    return csmcEnabled() && Config_Flag(CFG_CSMC_EXTRA);
 }

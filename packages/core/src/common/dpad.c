@@ -2,6 +2,7 @@
 #include <combo/dma.h>
 #include <combo/player.h>
 #include <combo/mask.h>
+#include <combo/config.h>
 
 #define DPAD_DOWN   0
 #define DPAD_UP     1
@@ -184,13 +185,13 @@ void comboDpadUpdate(GameState_Play* play)
     if (gSave.age == AGE_CHILD)
     {
         sDpadItems[DPAD_UP] = gSave.inventory.items[ITS_OOT_TRADE_CHILD];
-        if (!comboConfig(CFG_OOT_AGELESS_BOOTS))
+        if (!Config_Flag(CFG_OOT_AGELESS_BOOTS))
         {
             sDpadItems[DPAD_LEFT] = ITEM_NONE;
             sDpadItems[DPAD_RIGHT] = ITEM_NONE;
         }
     }
-    else if(comboConfig(CFG_OOT_AGELESS_CHILD_TRADE))
+    else if(Config_Flag(CFG_OOT_AGELESS_CHILD_TRADE))
         sDpadItems[DPAD_UP] = gSave.inventory.items[ITS_OOT_TRADE_CHILD];
 }
 #endif

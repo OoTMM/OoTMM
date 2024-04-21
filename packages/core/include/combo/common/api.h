@@ -123,13 +123,6 @@ void ModelViewScale(float sx, float sy, float sz, int mode);
 void ModelViewMult(MtxF* mf, s32 mode);
 void Matrix_SetTranslateRotateYXZ(f32 translateX, f32 translateY, f32 translateZ, Vec3s* rot);
 
-f32 Math_CosS(s16 angle);
-f32 Math_SinS(s16 angle);
-s32 Math_StepToF(f32* pValue, f32 target, f32 step);
-s32 Math_StepToS(s16* pValue, s16 target, s16 step);
-f32 Math_SmoothStepToF(f32* pValue, f32 target, f32 fraction, f32 step, f32 minStep);
-f32 sqrtf(f32 value);
-
 void MatrixStackDup(void);
 void MatrixStackPop(void);
 void Matrix_MultVec3f(Vec3f* src, Vec3f* dest);

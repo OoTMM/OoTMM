@@ -3,6 +3,7 @@
 #include <combo/souls.h>
 #include <combo/player.h>
 #include <combo/mask.h>
+#include <combo/config.h>
 
 static s16 sActorIdToSpawn;
 
@@ -266,11 +267,11 @@ Actor* comboSpawnActor(ActorContext* actorCtx, GameState_Play *play, short actor
         variable = 0xff00;
     }
 
-    if (comboConfig(CFG_OOT_OPEN_MASK_SHOP) && play->sceneId == SCE_OOT_MARKET_CHILD_NIGHT && actorId == AC_EN_DOOR)
+    if (Config_Flag(CFG_OOT_OPEN_MASK_SHOP) && play->sceneId == SCE_OOT_MARKET_CHILD_NIGHT && actorId == AC_EN_DOOR)
         if (((variable >> 7 & 7) == 0x5) && ((variable & 0x3f) == 0x10))
             variable = 0x1bf;
 
-    if (comboConfig(CFG_OOT_OPEN_ZD_SHORTCUT) && actorId == AC_BG_SPOT06_OBJECTS && play->sceneId == SCE_OOT_LAKE_HYLIA)
+    if (Config_Flag(CFG_OOT_OPEN_ZD_SHORTCUT) && actorId == AC_BG_SPOT06_OBJECTS && play->sceneId == SCE_OOT_LAKE_HYLIA)
         if (((variable >> 8) & 0xff) == 3)
             return NULL;
 
@@ -286,7 +287,7 @@ static int GetRoomClearFlagForActor(GameState_Play* play, int flag)
     int res;
 
     res = GetRoomClearFlag(play, flag);
-    if (comboConfig(CFG_ER_WALLMASTERS) && sActorIdToSpawn == AC_EN_WALLMAS)
+    if (Config_Flag(CFG_ER_WALLMASTERS) && sActorIdToSpawn == AC_EN_WALLMAS)
         res = 0;
     return res;
 }
