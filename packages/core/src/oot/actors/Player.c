@@ -6,6 +6,8 @@
 #include <combo/mask.h>
 #include <combo/config.h>
 #include <combo/global.h>
+#include <combo/dpad.h>
+#include <combo/multi.h>
 
 void ArrowCycle_Handle(Actor_Player* link, GameState_Play* play);
 void Ocarina_HandleCustomSongs(Actor_Player* link, GameState_Play* play);
@@ -255,8 +257,8 @@ void Player_UpdateWrapper(Actor_Player* this, GameState_Play* play)
     ArrowCycle_Handle(this, play);
     Player_Update(this, play);
     Ocarina_HandleCustomSongs(this, play);
-    comboDpadUpdate(play);
-    comboDpadUse(play, DPF_EQUIP);
+    Dpad_Update(play);
+    Dpad_Use(play, DPF_EQUIP);
 
     if (!(this->state & (PLAYER_ACTOR_STATE_CLIMB | PLAYER_ACTOR_STATE_CLIMB2)))
     {
@@ -268,14 +270,14 @@ void Player_UpdateWrapper(Actor_Player* this, GameState_Play* play)
     }
 
     comboSrUpdate(play);
-    comboMultiProcessMessages(play);
+    Multi_ProcessMessages(play);
 }
 
 int Player_DpadHook(Actor_Player* this, GameState_Play* play)
 {
     if (Player_UsingItem(this))
         return 1;
-    return comboDpadUse(play, DPF_ITEMS);
+    return Dpad_Use(play, DPF_ITEMS);
 }
 
 void EnGs_TalkedTo(Actor*, GameState_Play*);

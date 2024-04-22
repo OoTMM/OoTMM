@@ -6,6 +6,8 @@
 #include <combo/magic.h>
 #include <combo/math.h>
 #include <combo/config.h>
+#include <combo/dpad.h>
+#include <combo/multi.h>
 #include "../actors.h"
 
 void ArrowCycle_Handle(Actor_Player* link, GameState_Play* play);
@@ -14,16 +16,16 @@ void Player_UpdateWrapper(Actor_Player* this, GameState_Play* play)
 {
     ArrowCycle_Handle(this, play);
     Player_Update(this, play);
-    comboDpadUpdate(play);
+    Dpad_Update(play);
     Ocarina_HandleWarp(this, play);
-    comboMultiProcessMessages(play);
+    Multi_ProcessMessages(play);
 }
 
 int Player_DpadHook(Actor_Player* this, GameState_Play* play)
 {
     if (Player_UsingItem(this))
         return 1;
-    return comboDpadUse(play, DPF_ITEMS);
+    return Dpad_Use(play, DPF_ITEMS);
 }
 
 void Player_DrawHookshotReticleCustom(GameState_Play* play, Actor_Player* player)

@@ -6,6 +6,7 @@
 #include <combo/player.h>
 #include <combo/config.h>
 #include <combo/global.h>
+#include <combo/dpad.h>
 
 void KaleidoScope_AfterSetCutsorColor(GameState_Play* play)
 {
@@ -14,7 +15,7 @@ void KaleidoScope_AfterSetCutsorColor(GameState_Play* play)
     int effect;
 
     /* Update Dpad */
-    comboDpadUpdate(play);
+    Dpad_Update(play);
 
     cursorSlot = play->pauseCtx.cursorSlot[0];
     press = !!(play->gs.input[0].pressed.buttons & (L_TRIG | U_CBUTTONS));

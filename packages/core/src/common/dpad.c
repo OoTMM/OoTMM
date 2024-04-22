@@ -3,6 +3,7 @@
 #include <combo/player.h>
 #include <combo/mask.h>
 #include <combo/config.h>
+#include <combo/dpad.h>
 
 #define DPAD_DOWN   0
 #define DPAD_UP     1
@@ -114,7 +115,7 @@ static void reloadIcons(GameState_Play* play)
     }
 }
 
-void comboDpadDraw(GameState_Play* play)
+void Dpad_Draw(GameState_Play* play)
 {
     s16 itemId;
     u8 alpha;
@@ -175,7 +176,7 @@ static void dpadUseItem(GameState_Play* play, int index, int flags)
 }
 
 #if defined(GAME_OOT)
-void comboDpadUpdate(GameState_Play* play)
+void Dpad_Update(GameState_Play* play)
 {
     /* Update the items */
     sDpadItems[DPAD_DOWN] = gSave.inventory.items[ITS_OOT_OCARINA];
@@ -197,7 +198,7 @@ void comboDpadUpdate(GameState_Play* play)
 #endif
 
 #if defined(GAME_MM)
-void comboDpadUpdate(GameState_Play* play)
+void Dpad_Update(GameState_Play* play)
 {
     /* Update the items */
     sDpadItems[DPAD_DOWN] = gSave.inventory.items[ITS_MM_OCARINA];
@@ -207,7 +208,7 @@ void comboDpadUpdate(GameState_Play* play)
 }
 #endif
 
-int comboDpadUse(GameState_Play* play, int flags)
+int Dpad_Use(GameState_Play* play, int flags)
 {
     u32 buttons;
     if (!canUseDpad(play))

@@ -7,6 +7,7 @@
 #include <combo/math.h>
 #include <combo/config.h>
 #include <combo/global.h>
+#include <combo/dpad.h>
 
 static int checkItemToggle(GameState_Play* play)
 {
@@ -115,7 +116,7 @@ void KaleidoSetCursorColor(GameState_Play* play)
     b = 0xff;
 
     /* Update dpad */
-    comboDpadUpdate(play);
+    Dpad_Update(play);
 
     /* Not on Z/R */
     if (p->cursorSpecialPos == 0)

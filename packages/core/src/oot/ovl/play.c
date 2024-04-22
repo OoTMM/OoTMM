@@ -7,6 +7,8 @@
 #include <combo/magic.h>
 #include <combo/config.h>
 #include <combo/global.h>
+#include <combo/dpad.h>
+#include <combo/multi.h>
 
 extern void* gMmMag;
 GameState_Play* gPlay;
@@ -496,7 +498,7 @@ void hookPlay_Init(GameState_Play* play)
     gMultiMarkCollectibles = 0;
     gMultiMarkSwitch0 = 0;
     gMultiMarkSwitch1 = 0;
-    comboMultiResetWisps();
+    Multi_ResetWisps();
 
     /* Register play */
     gPlay = play;
@@ -554,7 +556,7 @@ void Play_UpdateWrapper(GameState_Play* play)
     comboCacheGarbageCollect();
     comboObjectsGC();
     Play_Update(play);
-    comboDpadDraw(play);
+    Dpad_Draw(play);
     Debug_Update();
 }
 

@@ -280,7 +280,7 @@ static void setXflagsMarkMm(GameState_Play* play, int sliceId, int sceneId, int 
     comboXflagsSetMm(&xf);
 }
 
-void multiSetMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
+void Multi_SetMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
 {
     if (!Config_Flag(CFG_MULTIPLAYER))
         return;
@@ -324,7 +324,7 @@ void multiSetMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u
     }
 }
 
-void multiSetMarkedMm(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
+void Multi_SetMarkedMm(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
 {
     if (!Config_Flag(CFG_MULTIPLAYER))
         return;
@@ -365,7 +365,7 @@ void multiSetMarkedMm(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8
     }
 }
 
-int multiIsMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
+int Multi_IsMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
 {
     if (!Config_Flag(CFG_MULTIPLAYER))
         return 0;
@@ -401,7 +401,7 @@ int multiIsMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 
     return 0;
 }
 
-int multiIsMarkedMm(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
+int Multi_IsMarkedMm(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
 {
     if (!Config_Flag(CFG_MULTIPLAYER))
         return 0;
@@ -573,7 +573,7 @@ static void processMessages(GameState_Play* play, NetContext* net)
     }
 }
 
-void comboMultiProcessMessages(GameState_Play* play)
+void Multi_ProcessMessages(GameState_Play* play)
 {
     NetContext* ctx;
 
@@ -600,7 +600,7 @@ static void drawSingleWisp(GameState_Play* play, const PlayerWisp* wisp)
     CLOSE_DISPS();
 }
 
-void comboMultiDrawWisps(GameState_Play* play)
+void Multi_DrawWisps(GameState_Play* play)
 {
     if (!Config_Flag(CFG_MULTIPLAYER))
         return;
@@ -613,7 +613,7 @@ void comboMultiDrawWisps(GameState_Play* play)
     }
 }
 
-void comboMultiResetWisps(void)
+void Multi_ResetWisps(void)
 {
     if (!Config_Flag(CFG_MULTIPLAYER))
         return;

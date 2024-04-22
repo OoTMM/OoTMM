@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/dpad.h>
 
 void Play_DrawHudButtons(GameState_Play* play);
 
@@ -10,7 +11,7 @@ void Play_DrawHudButtons_Wrapper(GameState_Play* play)
     CLOSE_DISPS();
 
     Play_DrawHudButtons(play);
-    comboDpadDraw(play);
+    Dpad_Draw(play);
 }
 
 PATCH_CALL(0x801201f4, Play_DrawHudButtons_Wrapper);

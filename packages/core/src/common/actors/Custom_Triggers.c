@@ -3,6 +3,7 @@
 #include <combo/net.h>
 #include <combo/player.h>
 #include <combo/config.h>
+#include <combo/multi.h>
 
 #define TRIGGER_NONE            0x00
 #define TRIGGER_GANON_BK        0x01
@@ -219,9 +220,9 @@ static void CustomTriggers_HandleTrigger(Actor_CustomTriggers* this, GameState_P
                 roomId = (net->cmdIn.itemRecv.key >> 8) & 0xff;
                 id = net->cmdIn.itemRecv.key & 0xff;
                 if (net->cmdIn.itemRecv.game)
-                    isMarked = multiIsMarkedMm(play, ovType, sceneId, roomId, id);
+                    isMarked = Multi_IsMarkedMm(play, ovType, sceneId, roomId, id);
                 else
-                    isMarked = multiIsMarkedOot(play, ovType, sceneId, roomId, id);
+                    isMarked = Multi_IsMarkedOot(play, ovType, sceneId, roomId, id);
             }
             else
             {
@@ -243,9 +244,9 @@ static void CustomTriggers_HandleTrigger(Actor_CustomTriggers* this, GameState_P
             if (needsMarking)
             {
                 if (net->cmdIn.itemRecv.game)
-                    multiSetMarkedMm(play, ovType, sceneId, roomId, id);
+                    Multi_SetMarkedMm(play, ovType, sceneId, roomId, id);
                 else
-                    multiSetMarkedOot(play, ovType, sceneId, roomId, id);
+                    Multi_SetMarkedOot(play, ovType, sceneId, roomId, id);
             }
 
             /* Mark as obtained on the network */
@@ -365,7 +366,7 @@ void CustomTriggers_Spawn(GameState_Play* play)
 
 void CustomTriggers_Draw(Actor* this, GameState_Play* play)
 {
-    comboMultiDrawWisps(play);
+    Multi_DrawWisps(play);
 }
 
 ActorInit CustomTriggers_gActorInit = {

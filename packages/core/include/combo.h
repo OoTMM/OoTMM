@@ -119,11 +119,6 @@ NORETURN void comboGameSwitch(GameState_Play* play, u32 entrance);
 void swapFarore(void);
 #endif
 
-/* Net */
-void comboMultiDrawWisps(GameState_Play* play);
-void comboMultiResetWisps(void);
-void comboMultiProcessMessages(GameState_Play* play);
-
 void shaderFlameEffectColor(GameState_Play* play, u32 color, float scale, float offsetY);
 
 /* Text */
@@ -142,24 +137,7 @@ void comboTextHijackDungeonRewardHints(GameState_Play* play, int hint);
 void comboTextHijackOathToOrder(GameState_Play* play);
 #endif
 
-/* Multi */
-extern u32 gMultiMarkChests;
-extern u32 gMultiMarkCollectibles;
-extern u32 gMultiMarkSwitch0;
-extern u32 gMultiMarkSwitch1;
-
-#if defined(GAME_OOT)
-# define multiIsMarked multiIsMarkedOot
-#else
-# define multiIsMarked multiIsMarkedMm
-#endif
-
 void    comboWalletRefresh(void);
-
-void    multiSetMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id);
-void    multiSetMarkedMm(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id);
-int     multiIsMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id);
-int     multiIsMarkedMm(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id);
 
 /* Progressive */
 s16 comboProgressive(s16 gi, int ovflags);
@@ -236,14 +214,6 @@ void comboInvalDCache(void* addr, u32 size);
 
 /* Custom keep files */
 extern void* gCustomKeep;
-
-/* Dpad */
-#define DPF_ITEMS      0x01
-#define DPF_EQUIP      0x02
-
-void comboDpadDraw(GameState_Play* play);
-void comboDpadUpdate(GameState_Play* play);
-int  comboDpadUse(GameState_Play* play, int flags);
 
 int comboDoorIsUnlocked(GameState_Play* play, Actor* actor);
 

@@ -9,6 +9,7 @@
 #include <combo/config.h>
 #include <combo/item.h>
 #include <combo/global.h>
+#include <combo/multi.h>
 
 GameState_Play* gPlay;
 int gNoTimeFlow;
@@ -510,7 +511,7 @@ void hookPlay_Init(GameState_Play* play)
     gMultiMarkSwitch0 = 0;
     gMultiMarkSwitch1 = 0;
     g.keatonGrassMax = -1;
-    comboMultiResetWisps();
+    Multi_ResetWisps();
 
     if (Config_Flag(CFG_ER_OVERWORLD) || Config_Flag(CFG_ER_INDOORS))
         gSave.hasSirloin = 0;

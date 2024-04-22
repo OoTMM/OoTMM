@@ -7,6 +7,7 @@
 #include <combo/config.h>
 #include <combo/shop.h>
 #include <combo/global.h>
+#include <combo/multi.h>
 
 #if defined(GAME_OOT)
 u16 gMmMaxRupees[] = { 0, 200, 500, 999 };
@@ -136,7 +137,7 @@ void comboGiveItem(Actor* actor, GameState_Play* play, const ComboItemQuery* q, 
     ComboItemQuery qNothing = ITEM_QUERY_INIT;
     const ComboItemQuery* qPtr;
 
-    if (multiIsMarked(play, q->ovType, q->sceneId, q->roomId, q->id) && !(q->ovFlags & OVF_RENEW))
+    if (Multi_IsMarked(play, q->ovType, q->sceneId, q->roomId, q->id) && !(q->ovFlags & OVF_RENEW))
     {
         qNothing.gi = GI_NOTHING;
         qPtr = &qNothing;
@@ -366,9 +367,9 @@ int comboAddItemRawEx(GameState_Play* play, const ComboItemQuery* q, int updateT
         if (isPlayerSelf(o.player))
         {
 #if defined(GAME_OOT)
-            multiSetMarkedOot(play, q->ovType, q->sceneId, q->roomId, q->id);
+            Multi_SetMarkedOot(play, q->ovType, q->sceneId, q->roomId, q->id);
 #else
-            multiSetMarkedMm(play, q->ovType, q->sceneId, q->roomId, q->id);
+            Multi_SetMarkedMm(play, q->ovType, q->sceneId, q->roomId, q->id);
 #endif
 
             /* If the item was a renewable, add it to the GI skips */
@@ -411,7 +412,7 @@ int comboAddItemEx(GameState_Play* play, const ComboItemQuery* q, int updateText
     ComboItemQuery qNothing = ITEM_QUERY_INIT;
     const ComboItemQuery* qPtr;
 
-    if (multiIsMarked(play, q->ovType, q->sceneId, q->roomId, q->id) && !(q->ovFlags & OVF_RENEW))
+    if (Multi_IsMarked(play, q->ovType, q->sceneId, q->roomId, q->id) && !(q->ovFlags & OVF_RENEW))
     {
         qNothing.gi = GI_NOTHING;
         qPtr = &qNothing;
