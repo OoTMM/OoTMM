@@ -5,6 +5,7 @@
 #include <combo/entrance.h>
 #include <combo/io.h>
 #include <combo/config.h>
+#include <combo/shop.h>
 
 #if defined(GAME_OOT)
 u16 gMmMaxRupees[] = { 0, 200, 500, 999 };

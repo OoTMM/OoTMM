@@ -1,12 +1,13 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/shop.h>
 
 void EnSob1_AfterBuy(Actor_EnSob1* this, GameState_Play* play)
 {
     if (!Actor_HasParent(&this->base))
         return;
 
-    comboShopAfterBuy(play, this->items[this->itemIndex]);
+    Shop_AfterBuy(play, this->items[this->itemIndex]);
     this->base.parent = NULL;
 }
 

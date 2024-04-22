@@ -1,12 +1,13 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/shop.h>
 
 static int EnTrt_HasGivenItem(Actor_EnTrt* this, GameState_Play* play)
 {
     if (!Actor_HasParent(&this->base))
         return 0;
 
-    comboShopAfterBuy(play, this->items[this->itemIndex]);
+    Shop_AfterBuy(play, this->items[this->itemIndex]);
     return 1;
 }
 
@@ -14,14 +15,14 @@ PATCH_CALL(0x80a8dfcc, EnTrt_HasGivenItem);
 
 static void EnTrt_DisplayShopTextBoxConfirm(Actor_EnTrt* this)
 {
-    comboShopDisplayTextBoxConfirm(gPlay, this->items[this->itemIndex]);
+    Shop_DisplayTextBoxConfirm(gPlay, this->items[this->itemIndex]);
 }
 
 PATCH_FUNC(0x80a8bb3c, EnTrt_DisplayShopTextBoxConfirm);
 
 static void EnTrt_DisplayShopTextBox(Actor_EnTrt* this)
 {
-    comboShopDisplayTextBox(gPlay, this->items[this->itemIndex]);
+    Shop_DisplayTextBox(gPlay, this->items[this->itemIndex]);
 }
 
 PATCH_FUNC(0x80a8baf8, EnTrt_DisplayShopTextBox);

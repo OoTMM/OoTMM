@@ -2,6 +2,7 @@
 #include <combo/item.h>
 #include <combo/player.h>
 #include <combo/config.h>
+#include <combo/shop.h>
 
 #define SCRUB_ITEM_NUTS             0x00
 #define SCRUB_ITEM_STICK            0x01

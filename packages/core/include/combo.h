@@ -289,20 +289,6 @@ int comboDoorIsUnlocked(GameState_Play* play, Actor* actor);
 void comboInitHints(void);
 void comboHintGossip(u8 key, GameState_Play* play);
 
-/* Shop */
-#define SC_OK               0x00
-#define SC_OK_NOCUTSCENE    0x01
-#define SC_ERR_CANNOTBUY    0x02
-#define SC_ERR_NORUPEES     0x04
-
-u8   comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA);
-int  comboShopPrecond(GameState_Play* play, Actor_EnGirlA* girlA);
-void comboShopDisplayTextBox(GameState_Play* play, Actor_EnGirlA* girlA);
-void comboShopDisplayTextBoxConfirm(GameState_Play* play, Actor_EnGirlA* girlA);
-void comboShopAfterBuy(GameState_Play* play, Actor_EnGirlA* girlA);
-void comboShopSetupItem(GameState_Play* play, Actor_EnGirlA* girlA);
-void comboShopUpdateItem(GameState_Play* play, Actor_EnGirlA* girlA);
-
 /* Entrance */
 void comboInitEntrances(void);
 s32 comboEntranceOverride(u32 entranceId);

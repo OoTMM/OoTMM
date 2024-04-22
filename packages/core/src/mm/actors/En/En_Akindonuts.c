@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/shop.h>
 
 #define SCRUB_SWAMP             1
 #define SCRUB_MOUNTAIN          2
