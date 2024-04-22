@@ -5,8 +5,7 @@
 #include <combo/dma.h>
 #include <combo/time.h>
 #include <combo/config.h>
-
-#define ENTRANCE_MARKET       0x1d1
+#include <combo/context.h>
 
 static const u16 kDungeonEntrances[] = {
     ENTR_OOT_DEKU_TREE,

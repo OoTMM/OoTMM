@@ -9,6 +9,7 @@
 #include <combo/global.h>
 #include <combo/dpad.h>
 #include <combo/multi.h>
+#include <combo/context.h>
 
 extern void* gMmMag;
 GameState_Play* gPlay;

@@ -2,6 +2,7 @@
 #include <combo/net.h>
 #include <combo/dma.h>
 #include <combo/system.h>
+#include <combo/context.h>
 
 typedef void (*EntryPoint)(void)  __attribute__ ((noreturn));
 
@@ -91,6 +92,6 @@ NORETURN void comboGameSwitch3(void)
     System_InvalICache((void*)FOREIGN_DRAM, FOREIGN_SIZE);
     IO_WRITE(PI_STATUS_REG, PI_STATUS_RESET | PI_STATUS_CLR_INTR);
 
-    comboExportContext();
+    Context_Export();
     comboGameSwitch4(FOREIGN_DRAM);
 }

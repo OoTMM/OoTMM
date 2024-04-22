@@ -10,6 +10,7 @@
 #include <combo/item.h>
 #include <combo/global.h>
 #include <combo/multi.h>
+#include <combo/context.h>
 
 GameState_Play* gPlay;
 int gNoTimeFlow;

@@ -78,25 +78,10 @@
 
 #if !defined(__ASSEMBLER__)
 
-typedef struct PACKED ALIGNED(4)
-{
-    char magic[8];
-    u32  valid;
-    u32  saveIndex;
-    u32  entrance;
-    s32  isFwSpawn;
-}
-ComboContext;
-
-extern ComboContext gComboCtx;
-
 #define PLAYER_SELF 0x00
 #define PLAYER_ALL  0xff
 
 ALIGNED(16) extern const Gfx kDListEmpty[];
-
-void comboLoadContext(void);
-void comboExportContext(void);
 
 /* Init */
 void comboInit(void);
