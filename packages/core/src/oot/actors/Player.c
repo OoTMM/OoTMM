@@ -505,10 +505,21 @@ static void Player_OverrideCustomSheath(GameState_Play* play, Actor_Player* this
     switch (gSave.equips.equipment.swords)
     {
     case 1:
-        if (swordInUse)
-            sword = Player_CustomEq(comboGetObject(CUSTOM_OBJECT_ID_EQ_SHEATH_SWORD_OOT_CHILD_EMPTY), CUSTOM_OBJECT_EQ_SHEATH_SWORD_OOT_CHILD_EMPTY_0);
-        else
-            sword = Player_CustomEq(comboGetObject(CUSTOM_OBJECT_ID_EQ_SHEATH_SWORD_OOT_CHILD_FULL), CUSTOM_OBJECT_EQ_SHEATH_SWORD_OOT_CHILD_FULL_0);
+        switch (gSharedCustomSave.extraSwordsOot)
+        {
+        case 0:
+            if (swordInUse)
+                sword = Player_CustomEq(comboGetObject(CUSTOM_OBJECT_ID_EQ_SHEATH_SWORD_OOT_CHILD_EMPTY), CUSTOM_OBJECT_EQ_SHEATH_SWORD_OOT_CHILD_EMPTY_0);
+            else
+                sword = Player_CustomEq(comboGetObject(CUSTOM_OBJECT_ID_EQ_SHEATH_SWORD_OOT_CHILD_FULL), CUSTOM_OBJECT_EQ_SHEATH_SWORD_OOT_CHILD_FULL_0);
+            break;
+        case 1:
+            sword = Player_CustomEq(comboGetObject(CUSTOM_OBJECT_ID_EQ_SHEATH_SWORD_RAZOR), swordInUse ? CUSTOM_OBJECT_EQ_SHEATH_SWORD_RAZOR_0 : CUSTOM_OBJECT_EQ_SHEATH_SWORD_RAZOR_1);
+            break;
+        case 2:
+            sword = Player_CustomEq(comboGetObject(CUSTOM_OBJECT_ID_EQ_SHEATH_SWORD_GILDED), swordInUse ? CUSTOM_OBJECT_EQ_SHEATH_SWORD_GILDED_0 : CUSTOM_OBJECT_EQ_SHEATH_SWORD_GILDED_1);
+            break;
+        }
         break;
     case 2:
     case 3:
@@ -593,7 +604,7 @@ static void Player_OverrideChild(GameState_Play* play, Actor_Player* this, int l
 
     if (limb == PLAYER_LIMB_SHEATH)
     {
-        if (gSave.equips.equipment.shields == 3 || gSave.equips.equipment.swords != 1)
+        if (gSave.equips.equipment.shields == 3 || gSave.equips.equipment.swords != 1 || gSharedCustomSave.extraSwordsOot)
             Player_OverrideCustomSheath(play, this, dlist, isPause);
     }
 }

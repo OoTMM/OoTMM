@@ -19,8 +19,26 @@ export class ObjectEditor {
     this.outOffsets.push(listAddr);
   }
 
+  submitListAddr(addr: number) {
+    this.submitOut(this.processListAddr(addr));
+  }
+
   submitList(aList: Buffer) {
     this.submitOut(this.processList(aList));
+  }
+
+  processListAddr(addr: number) {
+    const seenAddr = this.seen.get(addr);
+    if (seenAddr !== undefined) {
+      return seenAddr;
+    }
+    const data = this.listData(addr);
+    if (!data) {
+      return addr;
+    }
+    const newAddr = this.processList(data);
+    this.seen.set(addr, newAddr);
+    return newAddr;
   }
 
   processList(aList: Buffer) {
@@ -73,14 +91,15 @@ export class ObjectEditor {
           const newAddr = this.copy(addr, count * 2);
           list.writeUInt32BE(newAddr, i + 4);
         }
+      } else if (op === 0xda) {
+        const addr = list.readUInt32BE(i + 4);
+        const newAddr = this.copy(addr, 0x40);
+        list.writeUInt32BE(newAddr, i + 4);
       } else if (op === 0xde) {
         /* List */
         const addr = list.readUInt32BE(i + 4);
-        const data = this.listData(addr);
-        if (data) {
-          const newAddr = this.processList(data);
-          list.writeUInt32BE(newAddr, i + 4);
-        }
+        const newAddr = this.processListAddr(addr);
+        list.writeUInt32BE(newAddr, i + 4);
       }
     }
 
@@ -150,6 +169,17 @@ export class ObjectEditor {
     list.copy(out, 0, 0, from);
     list.copy(out, from, to);
     return out;
+  }
+
+  combineListsAddrs(lists: number[]) {
+    const newList = Buffer.alloc(lists.length * 8);
+    for (let i = 0; i < lists.length; i++) {
+      const op = 0xde;
+      const op2 = (i === lists.length - 1) ? 0x01 : 0x00;
+      newList.writeUInt32BE((((op << 24) >>> 0) | (op2 << 16)) >>> 0, i * 8);
+      newList.writeUInt32BE(lists[i], i * 8 + 4);
+    }
+    return newList;
   }
 
   build(): ObjectEditorOut {
