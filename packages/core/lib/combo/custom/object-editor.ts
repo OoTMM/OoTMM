@@ -12,7 +12,8 @@ export class ObjectEditor {
 
   constructor(
     private readonly segOut: number,
-  ) {}
+  ) {
+  }
 
   submitOut(listAddr: number) {
     this.outOffsets.push(listAddr);
@@ -72,6 +73,14 @@ export class ObjectEditor {
           const newAddr = this.copy(addr, count * 2);
           list.writeUInt32BE(newAddr, i + 4);
         }
+      } else if (op === 0xde) {
+        /* List */
+        const addr = list.readUInt32BE(i + 4);
+        const data = this.listData(addr);
+        if (data) {
+          const newAddr = this.processList(data);
+          list.writeUInt32BE(newAddr, i + 4);
+        }
       }
     }
 
@@ -119,8 +128,9 @@ export class ObjectEditor {
     for (;;) {
       const data = d.readUInt32BE(i);
       const op = (data >>> 24);
+      const op2 = (data >>> 16) & 0xff;
       i += 8;
-      if (op === 0xdf) {
+      if (op === 0xdf || (op == 0xde && op2 == 0x01)) {
         return i;
       }
     }

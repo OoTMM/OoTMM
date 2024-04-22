@@ -528,7 +528,12 @@ static void Player_OverrideAdult(GameState_Play* play, Actor_Player* this, int l
     {
         if ((this->leftHandType == PLAYER_MODELTYPE_LH_SWORD || isPause) && gSave.equips.equipment.swords == 1)
         {
-            *dlist = Player_CustomHandEq(DLIST_ADULT_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_KOKIRI_SWORD), CUSTOM_OBJECT_EQ_KOKIRI_SWORD_0);
+            if (gSharedCustomSave.extraSwordsOot == 0)
+                *dlist = Player_CustomHandEq(DLIST_ADULT_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_KOKIRI_SWORD), CUSTOM_OBJECT_EQ_KOKIRI_SWORD_0);
+            else if (gSharedCustomSave.extraSwordsOot == 1)
+                *dlist = Player_CustomHandEq(DLIST_ADULT_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_RAZOR_SWORD), CUSTOM_OBJECT_EQ_RAZOR_SWORD_0);
+            else if (gSharedCustomSave.extraSwordsOot == 2)
+                *dlist = Player_CustomHandEq(DLIST_ADULT_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_GILDED_SWORD), CUSTOM_OBJECT_EQ_GILDED_SWORD_0);
         }
 
         if (this->leftHandType == PLAYER_MODELTYPE_LH_BOOMERANG)
@@ -555,8 +560,20 @@ static void Player_OverrideChild(GameState_Play* play, Actor_Player* this, int l
 {
     if (limb == PLAYER_LIMB_L_HAND)
     {
-        if ((this->leftHandType == PLAYER_MODELTYPE_LH_SWORD || this->leftHandType == PLAYER_MODELTYPE_LH_SWORD_2 || isPause) && gSave.equips.equipment.swords == 2)
-            *dlist = Player_CustomHandEq(DLIST_CHILD_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_MASTER_SWORD), CUSTOM_OBJECT_EQ_MASTER_SWORD_0);
+        if (this->leftHandType == PLAYER_MODELTYPE_LH_SWORD || this->leftHandType == PLAYER_MODELTYPE_LH_SWORD_2 || isPause)
+        {
+            if (gSave.equips.equipment.swords == 1)
+            {
+                if (gSharedCustomSave.extraSwordsOot == 1)
+                    *dlist = Player_CustomHandEq(DLIST_CHILD_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_RAZOR_SWORD), CUSTOM_OBJECT_EQ_RAZOR_SWORD_0);
+                else if (gSharedCustomSave.extraSwordsOot == 2)
+                    *dlist = Player_CustomHandEq(DLIST_CHILD_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_GILDED_SWORD), CUSTOM_OBJECT_EQ_GILDED_SWORD_0);
+            }
+            else if (gSave.equips.equipment.swords == 2)
+            {
+                *dlist = Player_CustomHandEq(DLIST_CHILD_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_MASTER_SWORD), CUSTOM_OBJECT_EQ_MASTER_SWORD_0);
+            }
+        }
         else if ((this->leftHandType == PLAYER_MODELTYPE_LH_BGS || isPause) && gSave.equips.equipment.swords == 3)
         {
             if (gSave.playerData.swordHealth)

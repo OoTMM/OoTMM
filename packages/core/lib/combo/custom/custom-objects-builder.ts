@@ -184,6 +184,30 @@ export class CustomObjectsBuilder {
     return { name: 'EQ_KOKIRI_SWORD', ...editor.build() };
   }
 
+  private async makeEqRazorSword(): Promise<CustomObject> {
+    const editor = new ObjectEditor(0xa);
+    const obj = await this.getFile('mm', 'objects/gameplay_keep');
+    editor.loadSegment(0x04, obj);
+
+    const b = 0x04003060;
+    let list = editor.listData(b)!;
+    editor.submitList(list);
+
+    return { name: 'EQ_RAZOR_SWORD', ...editor.build() };
+  }
+
+  private async makeEqGildedSword(): Promise<CustomObject> {
+    const editor = new ObjectEditor(0xa);
+    const obj = await this.getFile('mm', 'objects/object_link_child');
+    editor.loadSegment(0x06, obj);
+
+    const b = 0x0601dcb0;
+    let list = editor.listData(b)!;
+
+    editor.submitList(list);
+    return { name: 'EQ_GILDED_SWORD', ...editor.build() };
+  }
+
   private async makeEqMasterSword(): Promise<CustomObject> {
     const editor = new ObjectEditor(0xa);
     const object_link_boy = await this.getFile('oot', 'objects/object_link_boy');
@@ -266,6 +290,8 @@ export class CustomObjectsBuilder {
   async build(): Promise<CustomObject[]> {
     return [
       await this.makeEqKokiriSword(),
+      await this.makeEqRazorSword(),
+      await this.makeEqGildedSword(),
       await this.makeEqMasterSword(),
       await this.makeEqBiggoronSword(),
       await this.makeEqBiggoronSwordBroken(),
