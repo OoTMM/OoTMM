@@ -34,6 +34,10 @@ DmaEntry;
 
 extern DmaEntry gDmaData[DMA_COUNT];
 
+void comboDma(void* addr, u32 cartAddr, u32 size);
+void comboDma_NoCacheInval(void* addr, u32 cartAddr, u32 size);
+u32 comboLoadFile(void* dest, s32 fileIndex);
+u32 comboLoadForeignFile(void* dest, s32 foreignFileIndex);
 int  comboDmaLookup(DmaEntry* buf, u32 vromAddr);
 void comboDmaLookupForeignId(DmaEntry* dst, int id);
 u32  comboDmaLoadFile(void* dst, u32 vrom);

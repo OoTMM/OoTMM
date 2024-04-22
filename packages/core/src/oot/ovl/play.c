@@ -149,7 +149,7 @@ static void endGame(void)
     }
 
     /* Save */
-    comboSave(NULL, SF_PASSIVE);
+    Save_DoSave(NULL, SF_PASSIVE);
 
     /* Restore gameplay values to play the cutscene if majora was beaten too */
     if (Config_IsGoal())

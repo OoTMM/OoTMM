@@ -301,7 +301,7 @@ static void menuSave(GameState_Play* play)
         return;
 
     /* Save the game */
-    comboSave(play, SF_OWL);
+    Save_DoSave(play, SF_OWL);
     PlaySound(0x4823);
 }
 

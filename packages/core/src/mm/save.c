@@ -6,7 +6,7 @@ static void Sram_LoadOptions(void)
 {
     u8 ootHeader[0x20];
 
-    comboReadWriteFlash(0x00000, ootHeader, sizeof(ootHeader), OS_READ);
+    Flash_ReadWrite(0x00000, ootHeader, sizeof(ootHeader), OS_READ);
     gSaveContext.options.optionId = 0xa51d;
     gSaveContext.options.unk_02 = 1;
     gSaveContext.options.audio = ootHeader[0];
@@ -20,10 +20,10 @@ void Sram_AfterOpenSave(void)
     Sram_LoadOptions();
 
     /* Read the foreign save */
-    comboReadForeignSave();
+    Save_ReadForeign();
 
     /* Handle common settings */
-    comboOnSaveLoad();
+    Save_OnLoad();
 
     gSave.playerForm = MM_PLAYER_FORM_HUMAN;
     gSave.equippedMask = 0;
@@ -46,7 +46,7 @@ void Sram_SaveEndOfCycle(GameState_Play* play)
     gOotSave.sceneId = SCE_OOT_TEMPLE_OF_TIME;
     gOotSave.entrance = ENTR_OOT_WARP_SONG_TEMPLE;
 
-    comboSave(play, SF_NOCOMMIT);
+    Save_DoSave(play, SF_NOCOMMIT);
     _Sram_SaveEndOfCycle(play);
 
     /* Not an Owl save */
@@ -135,7 +135,7 @@ PATCH_CALL(0x80158420, Sram_SaveEndOfCycle);
 void PrepareSaveAndSave(SramContext* sram)
 {
     PrepareSave(sram);
-    comboWriteSave();
+    Save_Write();
 }
 
 PATCH_CALL(0x80146fa0, PrepareSaveAndSave);
@@ -145,7 +145,7 @@ PATCH_CALL(0x80829218, PrepareSaveAndSave);
 PATCH_CALL(0x80829f08, PrepareSaveAndSave);
 PATCH_CALL(0x80146f10, PrepareSaveAndSave);
 
-void comboSave(GameState_Play* play, int saveFlags)
+void Save_DoSave(GameState_Play* play, int saveFlags)
 {
     /* Wait for net */
     netWaitSave();
@@ -162,7 +162,7 @@ void comboSave(GameState_Play* play, int saveFlags)
     {
         PlayStoreFlags(play);
         PrepareSave(&play->sramCtx);
-        comboWriteSave();
+        Save_Write();
     }
 }
 
@@ -172,8 +172,8 @@ static void MoonCrashReset(void)
 
     /* Read save */
     cutscene = gSave.cutscene;
-    comboReadOwnSave();
-    comboReadForeignSave();
+    Save_ReadOwn();
+    Save_ReadForeign();
     gSave.cutscene = cutscene;
 
     /* Reset flags */
@@ -187,7 +187,7 @@ static void MoonCrashReset(void)
     }
 
     /* Trigger save load */
-    comboOnSaveLoad();
+    Save_OnLoad();
 }
 
 static void MoonCrashCycle(void)

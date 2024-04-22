@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/net.h>
+#include <combo/dma.h>
 
 typedef void (*EntryPoint)(void)  __attribute__ ((noreturn));
 
@@ -74,7 +75,7 @@ NORETURN void comboGameSwitch(GameState_Play* play, u32 entrance)
     gComboCtx.entrance = entrance;
 
     netClose();
-    comboSave(play, SF_OWL);
+    Save_DoSave(play, SF_OWL);
     comboDisableInterrupts();
     waitSubsystems();
     comboGameSwitch2();

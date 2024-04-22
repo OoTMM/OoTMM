@@ -79,10 +79,6 @@
 
 #if !defined(__ASSEMBLER__)
 void comboDisableInterrupts(void);
-void comboDma(void* addr, u32 cartAddr, u32 size);
-void comboDma_NoCacheInval(void* addr, u32 cartAddr, u32 size);
-u32 comboLoadFile(void* dest, s32 fileIndex);
-u32 comboLoadForeignFile(void* dest, s32 foreignFileIndex);
 
 typedef struct PACKED ALIGNED(4)
 {
@@ -95,12 +91,6 @@ typedef struct PACKED ALIGNED(4)
 ComboContext;
 
 extern ComboContext gComboCtx;
-
-#define SPECIAL_BRIDGE      0
-#define SPECIAL_MOON        1
-#define SPECIAL_LACS        2
-#define SPECIAL_GANON_BK    3
-#define SPECIAL_MAJORA      4
 
 #define PLAYER_SELF 0x00
 #define PLAYER_ALL  0xff
@@ -118,27 +108,9 @@ void comboInitData(void);
 void comboItemIcon(void* dst, int itemId);
 void comboLoadMmIcon(void* dst, u32 iconBank, int iconId);
 
-/* Flash */
-void comboReadWriteFlash(u32 devAddr, void* dramAddr, u32 size, s32 direction);
-
 #if defined(GAME_OOT)
 extern u16 gBlastMaskDelayAcc;
 #endif
-
-/* Save */
-#define SF_OWL          0x01
-#define SF_NOCOMMIT     0x02
-#define SF_PASSIVE      0x04
-
-void comboReadOwnSave(void);
-void comboReadForeignSave(void);
-void comboWriteSave(void);
-void comboCopyMmSave(int dst, int src);
-void comboOnSaveLoad(void);
-void comboSave(GameState_Play* play, int saveFlags);
-
-/* Save util */
-void comboCreateSaveMM(void);
 
 /* Switch */
 NORETURN void comboGameSwitch(GameState_Play* play, u32 entrance);

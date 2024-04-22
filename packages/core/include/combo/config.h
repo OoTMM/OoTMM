@@ -5,6 +5,12 @@
 #include <combo/prices.h>
 #include <combo/types.h>
 
+#define SPECIAL_BRIDGE      0
+#define SPECIAL_MOON        1
+#define SPECIAL_LACS        2
+#define SPECIAL_GANON_BK    3
+#define SPECIAL_MAJORA      4
+
 typedef struct
 {
     u8 region;

@@ -407,7 +407,7 @@ static void readFlash(u32 devAddr, void* dramAddr, u32 size)
     }
 }
 
-void comboReadWriteFlash(u32 devAddr, void* dramAddr, u32 size, s32 direction)
+void Flash_ReadWrite(u32 devAddr, void* dramAddr, u32 size, s32 direction)
 {
     if (!SysFlashrom_IsInit())
         SysFlashrom_InitFlash();

@@ -126,7 +126,7 @@ void Sram_AfterOpenSave(void)
 #endif
 
     /* Read the other save */
-    comboReadForeignSave();
+    Save_ReadForeign();
 
     /* Met deku tree - deku tree open - met mido */
     gSave.eventsChk[0] |= 0x102c;
@@ -135,14 +135,14 @@ void Sram_AfterOpenSave(void)
     if (Config_Flag(CFG_OOT_OPEN_DEKU))
         SetEventChk(EV_OOT_CHK_DEKU_MIDO_SWORD_SHIELD);
 
-    comboOnSaveLoad();
+    Save_OnLoad();
     fixSpawn();
 }
 
 void Sram_CopySaveWrapper(void* fileSelect, void* sramCtx)
 {
     Sram_CopySave(fileSelect, sramCtx);
-    comboCopyMmSave(*(short*)((char*)fileSelect + 0x1ca50), *(short*)((char*)fileSelect + 0x1ca38));
+    Save_CopyMM(*(short*)((char*)fileSelect + 0x1ca50), *(short*)((char*)fileSelect + 0x1ca38));
 }
 
 PATCH_CALL(0x808048d8, Sram_CopySaveWrapper);
@@ -289,7 +289,7 @@ void comboCreateSave(void* unk, void* buffer)
     u32 base;
 
     /* Create MM save */
-    comboCreateSaveMM();
+    Save_CreateMM();
 
     /* Move epona in a dummy scene */
     gSave.horseData.sceneId = -1;
@@ -385,7 +385,7 @@ void comboCreateSave(void* unk, void* buffer)
     }
 
     /* Write save */
-    comboWriteSave();
+    Save_Write();
 
     /* Copy inside the buffer */
     base = 0x20 + 0x1450 * gSaveContext.fileIndex;
@@ -403,10 +403,10 @@ PATCH_CALL(0x8009dacc, DeathWarpWrapper);
 
 void PrepareAndSave(void)
 {
-    comboSave(gPlay, 0);
+    Save_DoSave(gPlay, 0);
 }
 
-void comboSave(GameState_Play* play, int saveFlags)
+void Save_DoSave(GameState_Play* play, int saveFlags)
 {
     /* Wait for net */
     netWaitSave();
@@ -421,6 +421,6 @@ void comboSave(GameState_Play* play, int saveFlags)
 
     if (!(saveFlags & SF_NOCOMMIT))
     {
-        comboWriteSave();
+        Save_Write();
     }
 }

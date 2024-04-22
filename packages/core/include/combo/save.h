@@ -32,6 +32,20 @@ SharedCustomSave;
 
 extern SharedCustomSave gSharedCustomSave;
 
+#define SF_OWL          0x01
+#define SF_NOCOMMIT     0x02
+#define SF_PASSIVE      0x04
+
+void Save_ReadOwn(void);
+void Save_ReadForeign(void);
+void Save_Write(void);
+void Save_CreateMM(void);
+void Save_CopyMM(int dst, int src);
+void Save_OnLoad(void);
+void Save_DoSave(GameState_Play* play, int saveFlags);
+
+void Flash_ReadWrite(u32 devAddr, void* dramAddr, u32 size, s32 direction);
+
 # if defined(GAME_OOT)
 #  define gCustomSave gSharedCustomSave.oot
 # else

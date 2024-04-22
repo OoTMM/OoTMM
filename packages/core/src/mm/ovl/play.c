@@ -761,7 +761,7 @@ void hookPlay_Init(GameState_Play* play)
             gSave.equippedMask = 0;
             gSave.day = 0;
             gSave.time = 0x3fff;
-            comboSave(play, SF_NOCOMMIT);
+            Save_DoSave(play, SF_NOCOMMIT);
             Sram_SaveNewDay(play);
             play->nextEntrance = ENTR_EXTENDED;
             g.nextEntrance = g.initialEntrance;

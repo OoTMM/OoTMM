@@ -2,7 +2,7 @@
 
 /* Use our hook to load the save */
 PATCH_START 0x800902e8
-  jal comboReadOwnSave
+  jal Save_ReadOwn
 PATCH_END
 
 /* Replace SaveGame */
