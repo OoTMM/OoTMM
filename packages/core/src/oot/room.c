@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/global.h>
+#include <combo/actor.h>
 
 void updateSceneSetup(void)
 {

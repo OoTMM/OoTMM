@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/actor.h>
 
 static int ItemGiver_Common(Actor* this, GameState_Play* play, s16 gi)
 {

@@ -8,6 +8,7 @@
 #include <combo/config.h>
 #include <combo/global.h>
 #include <combo/dpad.h>
+#include <combo/inventory.h>
 
 static int checkItemToggle(GameState_Play* play)
 {

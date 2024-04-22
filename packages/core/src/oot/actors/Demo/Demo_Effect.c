@@ -2,6 +2,7 @@
 #include <combo/item.h>
 #include <combo/config.h>
 #include <combo/draw.h>
+#include <combo/actor.h>
 
 static void DemoEffect_SapphireItemQuery(ComboItemQuery* q)
 {

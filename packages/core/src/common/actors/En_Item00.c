@@ -3,6 +3,7 @@
 #include <combo/player.h>
 #include <combo/global.h>
 #include <combo/draw.h>
+#include <combo/actor.h>
 
 #if defined(GAME_OOT)
 # define DUMMY_MSG 0xb4

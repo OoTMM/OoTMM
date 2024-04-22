@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/inventory.h>
 
 static void removeButtonItem(u16 itemId)
 {

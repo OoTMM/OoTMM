@@ -8,6 +8,7 @@
 #include <combo/shop.h>
 #include <combo/global.h>
 #include <combo/multi.h>
+#include <combo/actor.h>
 
 #if defined(GAME_OOT)
 u16 gMmMaxRupees[] = { 0, 200, 500, 999 };

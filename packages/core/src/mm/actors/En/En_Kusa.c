@@ -3,6 +3,7 @@
 #include <combo/item.h>
 #include <combo/config.h>
 #include <combo/global.h>
+#include <combo/actor.h>
 
 void EnKusa_Aliases(Xflag* xflag)
 {

@@ -224,4 +224,6 @@ void comboPlayItemFanfare(s16 gi, int isShort);
 
 s16 comboItemResolve(GameState_Play* play, s16 gi);
 
+s16 comboProgressive(s16 gi, int ovflags);
+
 #endif

@@ -2,6 +2,7 @@
 #include <combo/dungeon.h>
 #include <combo/entrance.h>
 #include <combo/config.h>
+#include <combo/actor.h>
 
 typedef struct
 {

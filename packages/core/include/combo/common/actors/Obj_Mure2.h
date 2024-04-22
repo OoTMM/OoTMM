@@ -2,7 +2,7 @@
 #define COMBO_COMMON_ACTOR_OBJ_MURE2_H
 
 #include <combo/xflags.h>
-#include <combo/common/actor.h>
+#include <combo/actor.h>
 
 typedef struct ALIGNED(4)
 {

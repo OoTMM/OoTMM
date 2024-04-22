@@ -2,6 +2,7 @@
 #include <combo/entrance.h>
 #include <combo/dungeon.h>
 #include <combo/config.h>
+#include <combo/actor.h>
 
 static const u32 kDungeonEntrances[] =
 {

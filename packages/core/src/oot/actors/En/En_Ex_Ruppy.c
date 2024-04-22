@@ -2,6 +2,7 @@
 #include <combo/item.h>
 #include <combo/player.h>
 #include <combo/draw.h>
+#include <combo/actor.h>
 
 void EnExRuppy_ItemQuery(ComboItemQuery* q, Actor_EnExRuppy* this, GameState_Play* play)
 {

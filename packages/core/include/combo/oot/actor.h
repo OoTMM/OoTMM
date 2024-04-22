@@ -2,7 +2,7 @@
 #define INCLUDED_COMBO_OOT_ACTOR_H
 
 #include <combo/util.h>
-#include <combo/common/actor.h>
+#include <combo/actor.h>
 #include <combo/common/color.h>
 
 typedef struct

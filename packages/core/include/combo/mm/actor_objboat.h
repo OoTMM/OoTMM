@@ -1,7 +1,7 @@
 #ifndef COMBO_MM_ACTOR_OBJBOAT_H
 #define COMBO_MM_ACTOR_OBJBOAT_H
 
-#include <combo/common/actor.h>
+#include <combo/actor.h>
 
 typedef struct {
     /* 0x000 */ Actor base;

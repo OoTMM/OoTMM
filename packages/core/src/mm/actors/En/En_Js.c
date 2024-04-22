@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 #include <combo/config.h>
+#include <combo/actor.h>
 
 static void EnJs_ItemQuery(ComboItemQuery* q)
 {

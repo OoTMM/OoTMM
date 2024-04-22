@@ -62,7 +62,6 @@
 #endif
 
 /* Shared with assembler */
-#include <combo/common/actor.h>
 #include <combo/save.h>
 #include <combo/gi.h>
 #include <combo/data/items.h>
@@ -80,8 +79,6 @@
 
 #define PLAYER_SELF 0x00
 #define PLAYER_ALL  0xff
-
-ALIGNED(16) extern const Gfx kDListEmpty[];
 
 /* Init */
 void comboInit(void);
@@ -102,28 +99,7 @@ NORETURN void comboGameSwitch(GameState_Play* play, u32 entrance);
 void swapFarore(void);
 #endif
 
-void shaderFlameEffectColor(GameState_Play* play, u32 color, float scale, float offsetY);
-
-/* Text */
-int  comboMultibyteCharSize(u8 c);
-void comboTextExtra(char** b, GameState_Play* play, s16 gi);
-void comboTextHijackItem(GameState_Play* play, s16 gi, int count);
-void comboTextHijackItemEx(GameState_Play* play, const ComboItemOverride* o, int count);
-void comboTextHijackItemShop(GameState_Play* play, const ComboItemOverride* o, s16 price, int confirm);
-
-#if defined(GAME_OOT)
-void comboTextHijackDungeonRewardHints(GameState_Play* play, int base, int count);
-void comboTextHijackLightArrows(GameState_Play* play);
-void comboTextHijackFishCaught(GameState_Play* play, const ComboItemOverride* o);
-#else
-void comboTextHijackDungeonRewardHints(GameState_Play* play, int hint);
-void comboTextHijackOathToOrder(GameState_Play* play);
-#endif
-
 void    comboWalletRefresh(void);
-
-/* Progressive */
-s16 comboProgressive(s16 gi, int ovflags);
 
 /* Cache */
 void    comboCacheClear(void);
@@ -149,30 +125,11 @@ int comboMmDungeonIndex(void);
 int comboIsChateauActive(void);
 int comboIsLinkAdult(void);
 
-s32 comboGetSlotExtras(u32 slot, u8** outItemPtr, u32* outFlags, const u8** outTable, u32* outTableSize);
-u8 comboGetNextTrade(u8 currentItem, u32 flags, const u8* table, u32 tableSize);
-void comboToggleSlot(u32 slot);
-void comboToggleTrade(u8* slot, u32 flags, const u8* table, u32 tableSize);
-
-#if defined(GAME_OOT)
-void comboRemoveTradeItemAdult(u16 xitemId);
-void comboRemoveTradeItemChild(u16 xitemId);
-#endif
-
-#if defined(GAME_MM)
-void comboRemoveTradeItem1(u16 xitemId);
-void comboRemoveTradeItem2(u16 xitemId);
-void comboRemoveTradeItem3(u16 xitemId);
-#endif
-
 void comboSpawnItemGiver(GameState_Play* play, u16 npcId);
 void comboSpawnItemGivers(GameState_Play* play);
 
 /* libc */
 int toupper(int c);
-
-/* Util */
-void*   actorAddr(u16 actorId, u32 addr);
 
 int comboDoorIsUnlocked(GameState_Play* play, Actor* actor);
 

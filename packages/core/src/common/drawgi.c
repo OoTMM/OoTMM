@@ -155,7 +155,7 @@ void DrawGi_CustomHeartContainer(GameState_Play* play, s16 drawGiId)
     CLOSE_DISPS();
 }
 
-void shaderFlameEffectColor(GameState_Play* play, u32 color, float scale, float offsetY)
+void Gfx_DrawFlameColor(GameState_Play* play, u32 color, float scale, float offsetY)
 {
 #if defined(GAME_OOT)
     static const u32 kFlameDlist = 0x52a10;
@@ -1053,7 +1053,7 @@ void DrawGi_Triforce(GameState_Play* play, s16 index, u8 param)
     }
 
     InitListPolyXlu(play->gs.gfx);
-    shaderFlameEffectColor(play, color, 1.5f, 20.f);
+    Gfx_DrawFlameColor(play, color, 1.5f, 20.f);
 }
 
 void DrawGi_TriforceFull(GameState_Play* play, s16 index, u8 param)

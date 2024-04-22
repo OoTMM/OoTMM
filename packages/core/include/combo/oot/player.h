@@ -2,7 +2,7 @@
 #define COMBO_OOT_PLAYER_H
 
 #include <ultra64.h>
-#include <combo/common/actor.h>
+#include <combo/actor.h>
 
 #define PLAYER_LIMB_NONE             0x00
 #define PLAYER_LIMB_ROOT             0x01

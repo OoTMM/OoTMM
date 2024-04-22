@@ -2,6 +2,7 @@
 #include <combo/custom.h>
 #include <combo/item.h>
 #include <combo/csmc.h>
+#include <combo/actor.h>
 
 void ObjTsubo_Alias(Actor_ObjTsubo* this)
 {

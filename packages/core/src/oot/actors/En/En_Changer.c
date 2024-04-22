@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/actor.h>
 
 void EnChanger_Init(Actor* this, GameState_Play* play)
 {

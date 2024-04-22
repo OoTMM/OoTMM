@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/inventory.h>
 
 int EnTa_GetActiveItem_Chicken(Actor* this, GameState_Play* play)
 {

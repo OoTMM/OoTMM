@@ -4,6 +4,7 @@
 #include <combo/player.h>
 #include <combo/config.h>
 #include <combo/multi.h>
+#include <combo/actor.h>
 
 #define TRIGGER_NONE            0x00
 #define TRIGGER_GANON_BK        0x01

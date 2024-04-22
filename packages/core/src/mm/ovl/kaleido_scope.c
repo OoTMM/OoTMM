@@ -7,6 +7,7 @@
 #include <combo/config.h>
 #include <combo/global.h>
 #include <combo/dpad.h>
+#include <combo/inventory.h>
 
 void KaleidoScope_AfterSetCutsorColor(GameState_Play* play)
 {

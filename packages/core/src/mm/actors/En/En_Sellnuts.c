@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 #include <combo/player.h>
+#include <combo/inventory.h>
 
 int EnSellnuts_HasGivenItem(Actor* this)
 {

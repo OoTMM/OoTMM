@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 #include <combo/player.h>
+#include <combo/actor.h>
 
 #if defined(GAME_OOT)
 # define RECOVERY_HEART GI_OOT_RECOVERY_HEART

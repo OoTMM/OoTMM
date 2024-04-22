@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 #include <combo/player.h>
+#include <combo/inventory.h>
 
 void EnToryo_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {

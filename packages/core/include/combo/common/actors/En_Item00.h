@@ -2,7 +2,7 @@
 #define COMBO_ACTORS_EN_ITEM00_H
 
 #include <combo/xflags.h>
-#include <combo/common/actor.h>
+#include <combo/actor.h>
 
 #if defined(GAME_OOT)
 # define ITEM00_RUPEE_GREEN     0x00

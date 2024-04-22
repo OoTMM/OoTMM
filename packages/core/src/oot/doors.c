@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/dungeon.h>
 #include <combo/config.h>
+#include <combo/actor.h>
 
 #define DOOR_NONE       0
 #define DOOR_SMALL_KEY  1

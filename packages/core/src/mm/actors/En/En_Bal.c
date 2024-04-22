@@ -2,6 +2,7 @@
 #include <combo/item.h>
 #include <combo/config.h>
 #include <combo/shop.h>
+#include <combo/actor.h>
 
 static u16 kTingleMaps[] = {
     GI_MM_WORLD_MAP_CLOCK_TOWN,

@@ -2,6 +2,7 @@
 #include <combo/entrance.h>
 #include <combo/player.h>
 #include <combo/config.h>
+#include <combo/actor.h>
 
 typedef enum {
     CUSTOM_SONG_NONE,

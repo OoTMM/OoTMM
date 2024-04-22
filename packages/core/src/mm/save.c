@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/net.h>
 #include <combo/config.h>
+#include <combo/inventory.h>
 
 static void Sram_LoadOptions(void)
 {

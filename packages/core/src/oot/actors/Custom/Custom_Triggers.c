@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/souls.h>
 #include <combo/config.h>
+#include <combo/inventory.h>
 
 #define TRIGGER_OOT_SHEIK_COLOSSUS          0x100
 #define TRIGGER_OOT_SHEIK_KAKARIKO          0x101

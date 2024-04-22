@@ -1,7 +1,7 @@
 #ifndef COMBO_OOT_CUSTOM_TORCH2_H
 #define COMBO_OOT_CUSTOM_TORCH2_H
 
-#include <combo/common/actor.h>
+#include <combo/actor.h>
 
 typedef struct Actor_CustomEnTorch2
 {

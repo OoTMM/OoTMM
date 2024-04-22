@@ -3,6 +3,7 @@
 #include <combo/item.h>
 #include <combo/csmc.h>
 #include <combo/config.h>
+#include <combo/actor.h>
 
 Actor_ObjGrass* gObjGrass;
 

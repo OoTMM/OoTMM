@@ -4,6 +4,7 @@
 #include <combo/magic.h>
 #include <combo/global.h>
 #include <combo/draw.h>
+#include <combo/actor.h>
 
 #if defined(GAME_OOT)
 # define EN_ELF_INIT_VROM        0x808862f4

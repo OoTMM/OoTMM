@@ -1,7 +1,7 @@
 #ifndef COMBO_MM_ACTOR_ARMSHOOK_H
 #define COMBO_MM_ACTOR_ARMSHOOK_H
 
-#include <combo/common/actor.h>
+#include <combo/actor.h>
 
 struct Actor_ArmsHook;
 

@@ -5,6 +5,7 @@
 #include <combo/mask.h>
 #include <combo/config.h>
 #include <combo/global.h>
+#include <combo/actor.h>
 
 static s16 sActorIdToSpawn;
 

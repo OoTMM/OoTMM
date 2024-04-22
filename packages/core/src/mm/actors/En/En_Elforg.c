@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 #include <combo/draw.h>
+#include <combo/actor.h>
 
 static void EnElforg_ItemQuery(ComboItemQuery* q, Actor* this, GameState_Play* play)
 {

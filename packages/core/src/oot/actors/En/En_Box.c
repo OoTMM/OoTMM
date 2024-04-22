@@ -2,6 +2,7 @@
 #include <combo/item.h>
 #include <combo/csmc.h>
 #include <combo/config.h>
+#include <combo/actor.h>
 
 static void EnBox_ItemQuery(ComboItemQuery* q, Actor* this, GameState_Play* play, s16 gi)
 {

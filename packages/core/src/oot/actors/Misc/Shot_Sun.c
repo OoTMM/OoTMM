@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 #include <combo/global.h>
+#include <combo/actor.h>
 
 int ShotSun_GiveFireArrow(Actor* actor, GameState_Play* play)
 {

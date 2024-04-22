@@ -3,6 +3,7 @@
 #include <combo/player.h>
 #include <combo/config.h>
 #include <combo/item.h>
+#include <combo/actor.h>
 
 u32 gMultiMarkChests;
 u32 gMultiMarkCollectibles;
@@ -596,7 +597,7 @@ static void drawSingleWisp(GameState_Play* play, const PlayerWisp* wisp)
 {
     OPEN_DISPS(play->gs.gfx);
     ModelViewTranslate(wisp->pos.x, wisp->pos.y, wisp->pos.z, MAT_SET);
-    shaderFlameEffectColor(play, kWispColors[wisp->clientId & 0xf], 0.35f, -50.0f);
+    Gfx_DrawFlameColor(play, kWispColors[wisp->clientId & 0xf], 0.35f, -50.0f);
     CLOSE_DISPS();
 }
 

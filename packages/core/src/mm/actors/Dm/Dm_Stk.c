@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/config.h>
+#include <combo/actor.h>
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x290) = (h); } while (0)
 
