@@ -176,6 +176,7 @@ export const CONFVARS = [
   'RUPEE_SCALING',
   'OOT_SWORDLESS_ADULT',
   'OOT_TIME_TRAVEL_REQUIRES_MS',
+  'OOT_EXTRA_CHILD_SWORDS',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

@@ -966,6 +966,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     RUPEE_SCALING: settings.rupeeScaling,
     OOT_SWORDLESS_ADULT: settings.swordlessAdult,
     OOT_TIME_TRAVEL_REQUIRES_MS: settings.timeTravelSword,
+    OOT_EXTRA_CHILD_SWORDS: settings.extraChildSwordsOot,
   };
 
   for (const v in exprs) {

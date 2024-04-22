@@ -1294,6 +1294,11 @@ export class LogicPassWorldTransform {
       this.replaceItem(Items.OOT_SWORD_BIGGORON,  Items.OOT_SWORD_GORON);
     }
 
+    if (settings.extraChildSwordsOot) {
+      this.replaceItem(Items.OOT_SWORD_KOKIRI,    Items.OOT_SWORD);
+      this.addItem(Items.OOT_SWORD, 2);
+    }
+
     /* Handle MM Swords */
     if (settings.progressiveGFS === 'progressive') {
       this.replaceItem(Items.MM_GREAT_FAIRY_SWORD, Items.MM_SWORD);

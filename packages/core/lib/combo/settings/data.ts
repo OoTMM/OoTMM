@@ -1348,6 +1348,14 @@ export const SETTINGS = [{
   description: "Adds Goron's Bracelet, Silver Gauntlets, and Golden Gauntlets in Majora's Mask.",
   default: false
 }, {
+  key: 'extraChildSwordsOot',
+  name: "Extra Child Swords (OoT)",
+  category: 'items.extensions',
+  type: 'boolean',
+  description: "Add the various Majora's Mask swords in OoT, as upgrades to the kokiri sword.",
+  default: false,
+  cond: (x: any) => x.progressiveSwordsOot !== 'progressive',
+}, {
   key: 'blastMaskOot',
   name: "Blast Mask (OoT)",
   category: 'items.extensions',
