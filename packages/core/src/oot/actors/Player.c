@@ -5,6 +5,7 @@
 #include <combo/player.h>
 #include <combo/mask.h>
 #include <combo/config.h>
+#include <combo/global.h>
 
 void ArrowCycle_Handle(Actor_Player* link, GameState_Play* play);
 void Ocarina_HandleCustomSongs(Actor_Player* link, GameState_Play* play);

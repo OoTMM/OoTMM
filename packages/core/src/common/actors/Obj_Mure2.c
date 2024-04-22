@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/global.h>
 
 #if defined(GAME_OOT)
 # define ADDR_INIT              0x80abddbc

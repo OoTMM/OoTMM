@@ -6,6 +6,7 @@
 #include <combo/debug.h>
 #include <combo/magic.h>
 #include <combo/config.h>
+#include <combo/global.h>
 
 extern void* gMmMag;
 GameState_Play* gPlay;

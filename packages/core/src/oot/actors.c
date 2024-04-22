@@ -4,6 +4,7 @@
 #include <combo/player.h>
 #include <combo/mask.h>
 #include <combo/config.h>
+#include <combo/global.h>
 
 static s16 sActorIdToSpawn;
 

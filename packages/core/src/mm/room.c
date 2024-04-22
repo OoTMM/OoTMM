@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/global.h>
 
 u8 gActorNum;
 

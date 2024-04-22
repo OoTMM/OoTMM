@@ -6,6 +6,7 @@
 #include <combo/player.h>
 #include <combo/math.h>
 #include <combo/config.h>
+#include <combo/global.h>
 
 static int checkItemToggle(GameState_Play* play)
 {

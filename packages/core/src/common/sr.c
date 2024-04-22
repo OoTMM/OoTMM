@@ -3,6 +3,7 @@
 #include <combo/dungeon.h>
 #include <combo/player.h>
 #include <combo/config.h>
+#include <combo/global.h>
 
 static u32* const kSilverRupeeCounts[] = {
     &gOotSilverRupeeCounts1,

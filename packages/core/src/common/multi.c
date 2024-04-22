@@ -2,6 +2,7 @@
 #include <combo/net.h>
 #include <combo/player.h>
 #include <combo/config.h>
+#include <combo/item.h>
 
 u32 gMultiMarkChests;
 u32 gMultiMarkCollectibles;

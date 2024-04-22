@@ -5,6 +5,7 @@
 #include <combo/sr.h>
 #include <combo/souls.h>
 #include <combo/config.h>
+#include <combo/global.h>
 
 #define VTX_COUNT 2048
 

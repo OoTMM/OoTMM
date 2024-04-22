@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/global.h>
 
 extern Actor_ObjGrass* gObjGrass;
 

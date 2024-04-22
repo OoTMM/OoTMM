@@ -2,6 +2,7 @@
 #include <combo/item.h>
 #include <combo/player.h>
 #include <combo/magic.h>
+#include <combo/global.h>
 
 #if defined(GAME_OOT)
 # define EN_ELF_INIT_VROM        0x808862f4

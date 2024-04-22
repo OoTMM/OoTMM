@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 #include <combo/player.h>
+#include <combo/global.h>
 
 #if defined(GAME_OOT)
 # define DUMMY_MSG 0xb4

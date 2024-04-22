@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 #include <combo/csmc.h>
+#include <combo/global.h>
 
 #if defined(GAME_OOT)
 # define ADDR_FUNC_INIT 0x80a77b30

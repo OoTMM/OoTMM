@@ -2,6 +2,7 @@
 #include <combo/csmc.h>
 #include <combo/item.h>
 #include <combo/config.h>
+#include <combo/global.h>
 
 void EnKusa_Aliases(Xflag* xflag)
 {

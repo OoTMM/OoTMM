@@ -2,6 +2,7 @@
 #include <combo/item.h>
 #include <combo/csmc.h>
 #include <combo/config.h>
+#include <combo/global.h>
 
 static void EnKusa2_GetXflag(Xflag* xflag, int id)
 {

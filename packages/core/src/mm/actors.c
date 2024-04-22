@@ -4,6 +4,7 @@
 #include <combo/player.h>
 #include <combo/math.h>
 #include <combo/config.h>
+#include <combo/global.h>
 
 void EnGo_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
 void EnDnh_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);

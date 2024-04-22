@@ -5,6 +5,7 @@
 #include <combo/menu.h>
 #include <combo/debug.h>
 #include <combo/config.h>
+#include <combo/global.h>
 
 ComboGlobal g;
 

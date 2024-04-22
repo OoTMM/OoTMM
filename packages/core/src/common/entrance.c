@@ -3,6 +3,7 @@
 #include <combo/dma.h>
 #include <combo/mask.h>
 #include <combo/config.h>
+#include <combo/global.h>
 
 #if defined(GAME_OOT)
 # define ENTRANCES_ADDR 0x03ff4000

@@ -2,6 +2,7 @@
 #include <combo/dungeon.h>
 #include <combo/dma.h>
 #include <combo/config.h>
+#include <combo/global.h>
 
 void comboInitData(void)
 {

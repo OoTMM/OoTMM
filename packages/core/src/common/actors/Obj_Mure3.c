@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/global.h>
 
 #if defined(GAME_OOT)
 # define ADDR_HANDLER_POST_SPAWN 0x80b5579c

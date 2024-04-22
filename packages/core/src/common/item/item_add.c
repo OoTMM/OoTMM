@@ -5,6 +5,7 @@
 #include <combo/player.h>
 #include <combo/magic.h>
 #include <combo/config.h>
+#include <combo/global.h>
 
 #if defined(GAME_OOT)
 # define addRupeesRaw  addRupeesRawOot
