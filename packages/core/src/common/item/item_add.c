@@ -1777,6 +1777,13 @@ static int addElegyOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
+static int addItemSwordExtraOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    if (gSharedCustomSave.extraSwordsOot < param)
+        gSharedCustomSave.extraSwordsOot = (u8)param;
+    return 0;
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -1876,6 +1883,7 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemClock,
     addItemEndgame,
     addElegyOot,
+    addItemSwordExtraOot,
 };
 
 extern const u8 kAddItemFuncs[];

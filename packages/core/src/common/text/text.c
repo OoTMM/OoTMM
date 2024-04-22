@@ -425,17 +425,14 @@ static int isItemAmbiguous(s16 gi)
     case GI_OOT_TUNIC_GORON:
     case GI_MM_TUNIC_GORON:
         return (Config_Flag(CFG_MM_TUNIC_GORON) && !Config_Flag(CFG_SHARED_TUNIC_GORON));
-        break;
     case GI_OOT_TUNIC_ZORA:
     case GI_MM_TUNIC_ZORA:
         return (Config_Flag(CFG_MM_TUNIC_ZORA) && !Config_Flag(CFG_SHARED_TUNIC_ZORA));
-        break;
     case GI_OOT_SCALE_SILVER:
     case GI_OOT_SCALE_GOLDEN:
     case GI_MM_SCALE_SILVER:
     case GI_MM_SCALE_GOLDEN:
         return (Config_Flag(CFG_MM_SCALES) && !Config_Flag(CFG_SHARED_SCALES));
-        break;
     case GI_OOT_GORON_BRACELET:
     case GI_OOT_SILVER_GAUNTLETS:
     case GI_OOT_GOLDEN_GAUNTLETS:
@@ -443,7 +440,11 @@ static int isItemAmbiguous(s16 gi)
     case GI_MM_SILVER_GAUNTLETS:
     case GI_MM_GOLDEN_GAUNTLETS:
         return (Config_Flag(CFG_MM_STRENGTH) && !Config_Flag(CFG_SHARED_STRENGTH));
-        break;
+    case GI_OOT_SWORD_RAZOR:
+    case GI_OOT_SWORD_GILDED:
+    case GI_MM_SWORD_RAZOR:
+    case GI_MM_SWORD_GILDED:
+        return Config_Flag(CFG_OOT_EXTRA_CHILD_SWORDS);
     case GI_OOT_MAGIC_BEAN:
     case GI_OOT_BOTTLE_EMPTY:
     case GI_OOT_BOTTLE_MILK:
