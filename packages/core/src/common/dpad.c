@@ -4,6 +4,7 @@
 #include <combo/mask.h>
 #include <combo/config.h>
 #include <combo/dpad.h>
+#include <combo/global.h>
 
 #define DPAD_DOWN   0
 #define DPAD_UP     1
@@ -136,7 +137,7 @@ void Dpad_Draw(GameState_Play* play)
     /* Init */
     OPEN_DISPS(play->gs.gfx);
     gDPPipeSync(OVERLAY_DISP++);
-    gSPSegment(OVERLAY_DISP++, 0x06, gCustomKeep);
+    gSPSegment(OVERLAY_DISP++, 0x06, g.customKeep);
     gSPSegment(OVERLAY_DISP++, 0x07, sDpadIconBuffer);
     gDPSetPrimColor(OVERLAY_DISP++, 0, 0x80, sDpadColor.r, sDpadColor.g, sDpadColor.b, alpha);
 

@@ -1,7 +1,7 @@
 #include <combo.h>
 
-.global comboDisableInterrupts
-comboDisableInterrupts:
+.global System_DisableInterrupts
+System_DisableInterrupts:
   /* Zero some COP0 registers to disable threads */
   mfc0 a0, $12
   li a1, 0xfffffffe

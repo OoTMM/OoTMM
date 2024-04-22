@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/custom.h>
+#include <combo/global.h>
 
 const Vtx sGauntletVtx[] = {
 #include "data/gauntlets.vtx.inc"
@@ -136,7 +137,7 @@ Gfx gLinkAdultRightGauntletPlate3DL[] = {
 void DrawChildGauntlets(GameState_Play* play)
 {
     OPEN_DISPS(play->gs.gfx);
-    gSPSegment(POLY_OPA_DISP++, 0x08, gCustomKeep);
+    gSPSegment(POLY_OPA_DISP++, 0x08, g.customKeep);
     gSPDisplayList(POLY_OPA_DISP++, gLinkAdultLeftGauntletPlate1DL);
     gSPDisplayList(POLY_OPA_DISP++, gLinkAdultRightGauntletPlate1DL);
     gSPDisplayList(POLY_OPA_DISP++, gLinkAdultLeftGauntletPlate3DL);

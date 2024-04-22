@@ -7,6 +7,7 @@ typedef struct ComboItemQuery ComboItemQuery;
 
 typedef struct
 {
+    void*                   customKeep;
     u32                     initialEntrance;
     u8                      inGrotto;
     u8                      isCreditWarp;

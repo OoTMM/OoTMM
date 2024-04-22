@@ -658,7 +658,7 @@ void hookPlay_Init(GameState_Play* play)
         playerHeightJtbl[MM_PLAYER_FORM_HUMAN] = playerHeightJtbl[MM_PLAYER_FORM_ZORA];
     }
 
-    if (!gCustomKeep)
+    if (!g.customKeep)
     {
         comboLoadCustomKeep();
     }

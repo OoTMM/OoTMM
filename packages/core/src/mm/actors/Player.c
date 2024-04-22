@@ -8,6 +8,7 @@
 #include <combo/config.h>
 #include <combo/dpad.h>
 #include <combo/multi.h>
+#include <combo/global.h>
 #include "../actors.h"
 
 void ArrowCycle_Handle(Actor_Player* link, GameState_Play* play);
@@ -958,7 +959,7 @@ static void DrawBootsIron(GameState_Play* play, Actor_Player* link)
     }
     else
     {
-        gSPSegment(POLY_OPA_DISP++, 0x08, gCustomKeep);
+        gSPSegment(POLY_OPA_DISP++, 0x08, g.customKeep);
         gSPDisplayList(POLY_OPA_DISP++, gLinkAdultLeftIronBootDL);
         gSPDisplayList(POLY_OPA_DISP++, gLinkAdultRightIronBootDL);
     }
@@ -977,7 +978,7 @@ static void DrawBootsHover(GameState_Play* play, Actor_Player* link)
     }
     else
     {
-        gSPSegment(POLY_OPA_DISP++, 0x08, gCustomKeep);
+        gSPSegment(POLY_OPA_DISP++, 0x08, g.customKeep);
         gSPDisplayList(POLY_OPA_DISP++, gLinkAdultLeftHoverBootDL);
         gSPDisplayList(POLY_OPA_DISP++, gLinkAdultRightHoverBootDL);
     }
@@ -1067,7 +1068,7 @@ void Player_SkelAnime_DrawFlexLod(GameState_Play* play, void** skeleton, Vec3s* 
             switch (strength)
             {
                 case 1:
-                    gSPSegment(POLY_OPA_DISP++, 0x08, gCustomKeep);
+                    gSPSegment(POLY_OPA_DISP++, 0x08, g.customKeep);
                     gSPDisplayList(POLY_OPA_DISP++, gLinkChildGoronBraceletDL);
                     break;
                 case 2:
@@ -1082,7 +1083,7 @@ void Player_SkelAnime_DrawFlexLod(GameState_Play* play, void** skeleton, Vec3s* 
         }
     }
 
-    gSPSegment(POLY_XLU_DISP++, 0x08, gCustomKeep);
+    gSPSegment(POLY_XLU_DISP++, 0x08, g.customKeep);
 
     if (GET_PLAYER_CUSTOM_BOOTS(player) == PLAYER_BOOTS_HOVER && !(player->base.bgCheckFlags & BGCHECKFLAG_GROUND)
         && !(player->state & (1 << 23)) && player->hoverBootsTimer != 0)

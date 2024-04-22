@@ -78,7 +78,6 @@
 #endif
 
 #if !defined(__ASSEMBLER__)
-void comboDisableInterrupts(void);
 
 typedef struct PACKED ALIGNED(4)
 {
@@ -205,15 +204,7 @@ void comboSpawnItemGivers(GameState_Play* play);
 int toupper(int c);
 
 /* Util */
-u32     popcount(u32 x);
 void*   actorAddr(u16 actorId, u32 addr);
-
-/* System */
-void comboInvalICache(void* addr, u32 size);
-void comboInvalDCache(void* addr, u32 size);
-
-/* Custom keep files */
-extern void* gCustomKeep;
 
 int comboDoorIsUnlocked(GameState_Play* play, Actor* actor);
 

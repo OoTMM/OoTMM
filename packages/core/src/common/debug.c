@@ -3,6 +3,7 @@
 #include <combo/custom.h>
 #include <combo/entrance.h>
 #include <combo/player.h>
+#include <combo/global.h>
 
 #if defined(DEBUG)
 #define DEBUGMENU_PAGE_NONE     0
@@ -100,7 +101,7 @@ static void debugDrawChar(int x, int y, char c)
     y = DEBUG_Y + (y * 12);
 
     OPEN_DISPS(gPlay->gs.gfx);
-    gSPSegment(POLY_OPA_DISP++, 0x09, (char*)gCustomKeep + CUSTOM_KEEP_FONT + ((c - ' ') * 0x30));
+    gSPSegment(POLY_OPA_DISP++, 0x09, (char*)g.customKeep + CUSTOM_KEEP_FONT + ((c - ' ') * 0x30));
     gSPDisplayList(POLY_OPA_DISP++, kDlistLoadIA4_8x12);
     gSPTextureRectangle(
         POLY_OPA_DISP++,

@@ -1,6 +1,8 @@
 #ifndef COMBO_UTIL_H
 #define COMBO_UTIL_H
 
+#include <combo/types.h>
+
 #define NORETURN    __attribute__((noreturn))
 #define PACKED      __attribute__((packed))
 #define ALIGNED(x)  __attribute__((aligned(x)))
@@ -29,5 +31,7 @@
 #define ALIGN32(val) (((val) + 0x1F) & ~0x1F)
 #define ALIGN64(val) (((val) + 0x3F) & ~0x3F)
 #define ALIGN256(val) (((val) + 0xFF) & ~0xFF)
+
+u32 popcount(u32 x);
 
 #endif

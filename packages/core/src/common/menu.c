@@ -29,7 +29,7 @@
 #define DD_BOSS_KEY     0x08
 #define DD_FAIRIES      0x10
 
-#define CK_PTR(addr)    ((const char*)gCustomKeep + (addr))
+#define CK_PTR(addr)    ((const char*)g.customKeep + (addr))
 
 Vtx* gMenuVtx;
 int  gMenuVtxTTL;
@@ -713,10 +713,10 @@ static void printDungeonData(GameState_Play* play, int base, int index)
     float x;
     float y;
     float offX;
-    u8 r;
-    u8 g;
-    u8 b;
-    u8 a;
+    u8 cr;
+    u8 cg;
+    u8 cb;
+    u8 ca;
 
     triforceMax = Config_Flag(CFG_GOAL_TRIFORCE3) ? 3 : (gOotExtraFlags.triforceWin ? gComboConfig.triforcePieces : gComboConfig.triforceGoal);
     triforceDigits = digitCount(triforceMax);
@@ -768,16 +768,16 @@ static void printDungeonData(GameState_Play* play, int base, int index)
     y = 42.f - 12 * index;
     if (def->dungeonId != -1 && gComboConfig.preCompleted & (1 << def->dungeonId))
     {
-        r = 0x3f;
-        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, r, r, r, 255);
+        cr = 0x3f;
+        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, cr, cr, cr, 255);
         printStr(play, def->name, x, y);
-        r = 0xff;
-        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, r, r, r, 255);
+        cr = 0xff;
+        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, cr, cr, cr, 255);
     }
     else
     {
-        r = 0xff;
-        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, r, r, r, 255);
+        cr = 0xff;
+        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, cr, cr, cr, 255);
         printStr(play, def->name, x, y);
     }
     x += offX;
@@ -787,8 +787,8 @@ static void printDungeonData(GameState_Play* play, int base, int index)
         {
         case 0:
             /* Town Fairy */
-            color4(&r, &g, &b, &a, kFairyColors[4]);
-            gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, r, g, b, a);
+            color4(&cr, &cg, &cb, &ca, kFairyColors[4]);
+            gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, cr, cg, cb, ca);
             drawTexRGBA16_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_FAIRY), x + 174.f, y);
             printNumColored(play, !!MM_GET_EVENT_WEEK(EV_MM_WEEK_TOWN_FAIRY), 1, 2, x + 186.f, y, 0);
             break;
@@ -864,8 +864,8 @@ static void printDungeonData(GameState_Play* play, int base, int index)
         }
         if (def->flags & DD_FAIRIES)
         {
-            color4(&r, &g, &b, &a, kFairyColors[def->id]);
-            gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, r, g, b, a);
+            color4(&cr, &cg, &cb, &ca, kFairyColors[def->id]);
+            gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, cr, cg, cb, ca);
             drawTexRGBA16_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_FAIRY), x + 174.f, y);
             printNumColored(play, data.fairies, 15, 2, x + 186.f, y, 0);
         }
@@ -999,7 +999,7 @@ void comboMenuDraw(GameState_Play* play)
     gDPSetCombineMode(POLY_OPA_DISP++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
     drawBackground(play, -110.f, 59.f, 217.f, 128.f);
     gDPSetCombineMode(POLY_OPA_DISP++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
-    gSPSegment(POLY_OPA_DISP++, 0x06, gCustomKeep);
+    gSPSegment(POLY_OPA_DISP++, 0x06, g.customKeep);
     CLOSE_DISPS();
 
     switch (g.menuScreen)

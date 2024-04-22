@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/net.h>
 #include <combo/dma.h>
+#include <combo/system.h>
 
 typedef void (*EntryPoint)(void)  __attribute__ ((noreturn));
 
@@ -76,18 +77,18 @@ NORETURN void comboGameSwitch(GameState_Play* play, u32 entrance)
 
     netClose();
     Save_DoSave(play, SF_OWL);
-    comboDisableInterrupts();
+    System_DisableInterrupts();
     waitSubsystems();
     comboGameSwitch2();
 }
 
 NORETURN void comboGameSwitch3(void)
 {
-    comboInvalDCache((void*)FOREIGN_DRAM, FOREIGN_SIZE);
-    comboInvalICache((void*)FOREIGN_DRAM, FOREIGN_SIZE);
+    System_InvalDCache((void*)FOREIGN_DRAM, FOREIGN_SIZE);
+    System_InvalICache((void*)FOREIGN_DRAM, FOREIGN_SIZE);
     comboDma_NoCacheInval((void*)FOREIGN_OFF, FOREIGN_CART, FOREIGN_SIZE);
-    comboInvalDCache((void*)FOREIGN_DRAM, FOREIGN_SIZE);
-    comboInvalICache((void*)FOREIGN_DRAM, FOREIGN_SIZE);
+    System_InvalDCache((void*)FOREIGN_DRAM, FOREIGN_SIZE);
+    System_InvalICache((void*)FOREIGN_DRAM, FOREIGN_SIZE);
     IO_WRITE(PI_STATUS_REG, PI_STATUS_RESET | PI_STATUS_CLR_INTR);
 
     comboExportContext();

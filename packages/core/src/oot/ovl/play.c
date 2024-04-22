@@ -531,7 +531,7 @@ void hookPlay_Init(GameState_Play* play)
     CustomTriggers_Spawn(play);
     comboSpawnCustomWarps(play);
 
-    if (!gCustomKeep)
+    if (!g.customKeep)
     {
         comboLoadCustomKeep();
     }

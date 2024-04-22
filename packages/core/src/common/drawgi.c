@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/custom.h>
+#include <combo/global.h>
 
 #define M_PI            3.14159265358979323846
 #define M_SQRT1_2       0.707106781186547524401
@@ -600,7 +601,7 @@ void DrawGi_CustomStrayFairy(GameState_Play* play, s16 drawGiId)
     const DrawGi* drawGi;
     int index;
     u8 r;
-    u8 g;
+    u8 gg;
     u8 b;
     u8 a;
 
@@ -617,15 +618,15 @@ void DrawGi_CustomStrayFairy(GameState_Play* play, s16 drawGiId)
 #endif
 
     OPEN_DISPS(play->gs.gfx);
-    gSPSegment(POLY_XLU_DISP++, 0x08, gCustomKeep);
+    gSPSegment(POLY_XLU_DISP++, 0x08, g.customKeep);
     comboSetObjectSegment(play->gs.gfx, &kStrayFairyObj);
     ModelViewUnkTransform(&play->billboardMtxF);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     InitListPolyXlu(play->gs.gfx);
-    color4(&r, &g, &b, &a, kEnvColors[index - 1]);
-    gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, a);
-    color4(&r, &g, &b, &a, kPrimColors[index - 1]);
-    gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, r, g, b, a);
+    color4(&r, &gg, &b, &a, kEnvColors[index - 1]);
+    gDPSetEnvColor(POLY_XLU_DISP++, r, gg, b, a);
+    color4(&r, &gg, &b, &a, kPrimColors[index - 1]);
+    gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, r, gg, b, a);
     gSPDisplayList(POLY_XLU_DISP++, offsetof(CustomStrayFairyObj, dlist) | 0x06000000);
     CLOSE_DISPS();
 }
