@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 #include <combo/config.h>
+#include <combo/draw.h>
 
 void EnExItem_RewardByIndex(ComboItemQuery* q, int index)
 {
@@ -81,7 +82,7 @@ void EnExItem_Draw(Actor* actor, GameState_Play* play)
     comboItemOverride(&o, &q);
     scale = *(float*)(((char*)actor) + 0x154);
     ActorSetScale(actor, scale);
-    comboDrawGI(play, actor, o.gi, 0);
+    Draw_Gi(play, actor, o.gi, 0);
 }
 
 void EnExItem_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)

@@ -62,7 +62,6 @@
 #endif
 
 /* Shared with assembler */
-#include <PR/gbi.h>
 #include <combo/common/actor.h>
 #include <combo/save.h>
 #include <combo/gi.h>
@@ -164,22 +163,6 @@ int comboOotDungeonScene(GameState_Play* play, int isBossKey);
 int comboMmDungeonIndex(void);
 int comboIsChateauActive(void);
 int comboIsLinkAdult(void);
-
-/* Draw */
-#define DRAW_NO_PRE1    0x01
-#define DRAW_NO_PRE2    0x02
-#define DRAW_RAW        (DRAW_NO_PRE1 | DRAW_NO_PRE2)
-
-void comboSetObjectSegment(GfxContext* gfx, void* buffer);
-void comboDrawGI(GameState_Play* play, Actor* actor, s16 gi, int flags);
-void comboDrawInit2D(Gfx** dl);
-void comboDrawBlit2D_RGBA32(Gfx** dl, u32 segAddr, int w, int h, float x, float y, float scale);
-void comboDrawBlit2D_RGBA16(Gfx** dl, u32 segAddr, int w, int h, float x, float y, float scale);
-void comboDrawBlit2D_IA4(Gfx** dl, u32 segAddr, int w, int h, float x, float y, float scale);
-
-/* Event */
-void comboOotSetEventChk(u16 flag);
-void comboMmSetEventWeek(u16 flag);
 
 s32 comboGetSlotExtras(u32 slot, u8** outItemPtr, u32* outFlags, const u8** outTable, u32* outTableSize);
 u8 comboGetNextTrade(u8 currentItem, u32 flags, const u8* table, u32 tableSize);

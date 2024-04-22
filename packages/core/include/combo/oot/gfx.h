@@ -3,7 +3,7 @@
 
 #include <combo/types.h>
 
-typedef struct PACKED ALIGNED(4)
+typedef struct PACKED ALIGNED(4) GfxContext
 {
     char                unk_000[0x1b4];
     DisplayListBuffer   work;

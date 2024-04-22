@@ -2,6 +2,7 @@
 #include <combo/item.h>
 #include <combo/player.h>
 #include <combo/global.h>
+#include <combo/draw.h>
 
 #if defined(GAME_OOT)
 # define DUMMY_MSG 0xb4
@@ -43,7 +44,7 @@ static void EnItem00_DrawXflag(Actor_EnItem00* this, GameState_Play* play)
     ModelViewTranslate(this->base.world.pos.x, this->base.world.pos.y + 20.f, this->base.world.pos.z, MAT_SET);
     ModelViewScale(0.35f, 0.35f, 0.35f, MAT_MUL);
     ModelViewRotateY(this->base.rot2.y * ((M_PI * 2.f) / 32767.f), MAT_MUL);
-    comboDrawGI(play, &this->base, gi, 0);
+    Draw_Gi(play, &this->base, gi, 0);
 }
 
 static int EnItem00_XflagCanCollect(Actor_EnItem00* this, GameState_Play* play)

@@ -3,7 +3,7 @@
 
 #include <combo/types.h>
 
-typedef struct PACKED ALIGNED(4)
+typedef struct PACKED ALIGNED(4) GfxContext
 {
     /* 0x000 */ Gfx* polyOpaBuffer;
     /* 0x004 */ Gfx* polyXluBuffer;

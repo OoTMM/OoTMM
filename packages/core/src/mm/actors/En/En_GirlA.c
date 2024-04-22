@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 #include <combo/shop.h>
+#include <combo/draw.h>
 
 void EnGirlA_Draw(Actor_EnGirlA* this, GameState_Play* play)
 {
@@ -11,7 +12,7 @@ void EnGirlA_Draw(Actor_EnGirlA* this, GameState_Play* play)
     EnGirlA_ItemOverride(&o, this);
     if (o.gi != GI_MM_SOLD_OUT)
         MatrixRotation(this->angle, 1);
-    comboDrawGI(play, &this->base, o.gi, 0);
+    Draw_Gi(play, &this->base, o.gi, 0);
 }
 
 void EnGirlA_AfterHandler(Actor_EnGirlA* this, GameState_Play* play)

@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/draw.h>
 
 int Fishing_HasGivenItem(Actor* this)
 {
@@ -102,7 +103,7 @@ void Fishing_DrawFish_SkelAnime(GameState_Play* play, void** skeleton, Vec3s* jo
     Matrix_MultVec3f(&mouthOffset, fishMouthPos);
 
     ModelViewScale(56.0f, 56.0f, 56.0f, MAT_MUL);
-    comboDrawGI(play, this, o.gi, 0);
+    Draw_Gi(play, this, o.gi, 0);
 }
 
 PATCH_CALL(0x80a405d8, Fishing_DrawFish_SkelAnime);

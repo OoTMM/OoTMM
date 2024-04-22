@@ -2,6 +2,7 @@
 #include <combo/item.h>
 #include <combo/player.h>
 #include <combo/config.h>
+#include <combo/draw.h>
 
 static void EnItem00_ItemQuery(ComboItemQuery* q, Actor_EnItem00* this, GameState_Play* play, s16 gi)
 {
@@ -61,7 +62,7 @@ void EnItem00_DrawHeartPiece(Actor_EnItem00* this, GameState_Play* play)
     EnItem00_ItemQuery(&q, this, play, GI_OOT_HEART_PIECE);
     comboItemOverride(&o, &q);
     ModelViewScale(scale, scale, scale, MAT_MUL);
-    comboDrawGI(play, &this->base, o.gi, 0);
+    Draw_Gi(play, &this->base, o.gi, 0);
 }
 
 PATCH_FUNC(0x800a75b8, EnItem00_DrawHeartPiece);

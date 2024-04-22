@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/custom.h>
 #include <combo/global.h>
+#include <combo/draw.h>
 
 #define M_PI            3.14159265358979323846
 #define M_SQRT1_2       0.707106781186547524401
@@ -619,7 +620,7 @@ void DrawGi_CustomStrayFairy(GameState_Play* play, s16 drawGiId)
 
     OPEN_DISPS(play->gs.gfx);
     gSPSegment(POLY_XLU_DISP++, 0x08, g.customKeep);
-    comboSetObjectSegment(play->gs.gfx, &kStrayFairyObj);
+    Draw_SetObjectSegment(play->gs.gfx, &kStrayFairyObj);
     ModelViewUnkTransform(&play->billboardMtxF);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     InitListPolyXlu(play->gs.gfx);

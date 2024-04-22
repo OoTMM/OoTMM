@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 #include <combo/player.h>
+#include <combo/draw.h>
 
 void EnExRuppy_ItemQuery(ComboItemQuery* q, Actor_EnExRuppy* this, GameState_Play* play)
 {
@@ -44,7 +45,7 @@ void EnExRuppy_Draw(Actor_EnExRuppy* this, GameState_Play* play)
     EnExRuppy_ItemQuery(&q, this, play);
     comboItemOverride(&o, &q);
     ModelViewScale(25.0f, 25.0f, 25.0f, MAT_MUL);
-    comboDrawGI(play, &this->actor, o.gi, 0);
+    Draw_Gi(play, &this->actor, o.gi, 0);
 }
 
 void EnExRuppy_HandlerCollected(Actor_EnExRuppy* this, GameState_Play* play)

@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 #include <combo/player.h>
+#include <combo/draw.h>
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x144) = (h); } while (0)
 
@@ -57,7 +58,7 @@ void EnSi_Draw(Actor* this, GameState_Play* play)
     ComboItemOverride o;
 
     EnSi_ItemOverride(&o, this, play);
-    comboDrawGI(play, this, o.gi, 0);
+    Draw_Gi(play, this, o.gi, 0);
 }
 
 PATCH_FUNC(0x8098cd0c, EnSi_Draw);

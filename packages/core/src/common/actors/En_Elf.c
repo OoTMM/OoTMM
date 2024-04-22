@@ -3,6 +3,7 @@
 #include <combo/player.h>
 #include <combo/magic.h>
 #include <combo/global.h>
+#include <combo/draw.h>
 
 #if defined(GAME_OOT)
 # define EN_ELF_INIT_VROM        0x808862f4
@@ -89,7 +90,7 @@ void EnElf_Draw(Actor_EnElf* this, GameState_Play* play)
     static const float scale = 25.0f;
 
     ModelViewScale(scale, scale, scale, MAT_MUL);
-    comboDrawGI(play, &this->base, this->extendedGiDraw, 0);
+    Draw_Gi(play, &this->base, this->extendedGiDraw, 0);
 }
 
 #if defined(GAME_OOT)

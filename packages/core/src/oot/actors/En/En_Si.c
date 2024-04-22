@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/draw.h>
 
 static void EnSi_ItemQuery(ComboItemQuery* q, Actor* this)
 {
@@ -40,7 +41,7 @@ void EnSi_Draw(Actor* this, GameState_Play* play)
     ComboItemOverride o;
 
     EnSi_ItemOverride(&o, this);
-    comboDrawGI(play, this, o.gi, 0);
+    Draw_Gi(play, this, o.gi, 0);
 }
 
 PATCH_CALL(0x80b4b3f8, EnSi_Draw);

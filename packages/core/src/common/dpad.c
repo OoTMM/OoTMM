@@ -5,6 +5,7 @@
 #include <combo/config.h>
 #include <combo/dpad.h>
 #include <combo/global.h>
+#include <combo/draw.h>
 
 #define DPAD_DOWN   0
 #define DPAD_UP     1
@@ -142,8 +143,8 @@ void Dpad_Draw(GameState_Play* play)
     gDPSetPrimColor(OVERLAY_DISP++, 0, 0x80, sDpadColor.r, sDpadColor.g, sDpadColor.b, alpha);
 
     /* Draw */
-    comboDrawInit2D(&OVERLAY_DISP);
-    comboDrawBlit2D_RGBA16(&OVERLAY_DISP, 0x06000000, 32, 32, kDpadPosX, kDpadPosY, 0.5f);
+    Draw_Init2D(&OVERLAY_DISP);
+    Draw_Blit2D_RGBA16(&OVERLAY_DISP, 0x06000000, 32, 32, kDpadPosX, kDpadPosY, 0.5f);
 
     for (int i = 0; i < 4; ++i)
     {
@@ -160,7 +161,7 @@ void Dpad_Draw(GameState_Play* play)
             }
             x = kDpadPosX + kDpadOffX[i] * 32 * kDpadItemScale + 1.5f;
             y = kDpadPosY + kDpadOffY[i] * 32 * kDpadItemScale + 1;
-            comboDrawBlit2D_RGBA32(&OVERLAY_DISP, 0x07000000 | (i * 32 * 32 * 4), 32, 32, x, y, kDpadItemScale);
+            Draw_Blit2D_RGBA32(&OVERLAY_DISP, 0x07000000 | (i * 32 * 32 * 4), 32, 32, x, y, kDpadItemScale);
         }
     }
     CLOSE_DISPS();
