@@ -348,6 +348,34 @@ static int shouldActorIgnorePlayer(Actor* this, Actor_Player* link)
     }
 }
 
+static int GetDamage(DamageTable* tbl, int type)
+{
+    return tbl->attack[type] & 0xf;
+}
+
+static void SetDamage(DamageTable* tbl, int type, int value)
+{
+    tbl->attack[type] = (tbl->attack[type] & 0xf0) | (value & 0xf);
+}
+
+static void Actor_UpdateDamageTable(Actor* this)
+{
+    DamageTable* tbl;
+    int dmg;
+
+    tbl = this->colChkInfo.damageTable;
+    if (!tbl)
+        return;
+    if (GetDamage(tbl, 10) != 4)
+        return; /* Weird table, better not touch */
+    if (GetDamage(tbl, 8) == 0 && !gSharedCustomSave.extraSwordsOot)
+        return;
+    dmg = 1 + gSharedCustomSave.extraSwordsOot;
+    SetDamage(tbl, 8, dmg);
+    SetDamage(tbl, 22, dmg);
+    SetDamage(tbl, 25, dmg * 2);
+}
+
 void Actor_RunUpdate(Actor* this, GameState_Play* play, ActorFunc update)
 {
     int ignorePlayer;
@@ -356,6 +384,7 @@ void Actor_RunUpdate(Actor* this, GameState_Play* play, ActorFunc update)
     f32 xzDistanceFromLink;
     f32 yDistanceFromLink;
 
+    Actor_UpdateDamageTable(this);
     ignorePlayer = shouldActorIgnorePlayer(this, GET_LINK(play));
     if (ignorePlayer)
     {
