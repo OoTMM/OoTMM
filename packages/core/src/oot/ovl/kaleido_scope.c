@@ -1717,3 +1717,45 @@ void KaleidoScope_LoadItemName(void* dst, s16 id)
         LoadFile(dst, 0x880000 + 0x400 * id, 0x400);
     }
 }
+
+void KaleidoScope_DrawQuadEquipment(GameState_Play* play, u32 dlist, int w, int h, int flags)
+{
+    static void* customKokiriSwordTexture;
+    static u8 customKokiriSwordId;
+    static u8 customKokiSwordAge;
+
+    void (*KaleidoScope_DrawQuadTextureRGBA32)(GameState_Play*, u32, int, int, int);
+
+    if (dlist == 0x0803b000 && gSharedCustomSave.extraSwordsOot)
+    {
+        /* Extra child sword */
+        if (!customKokiriSwordTexture)
+        {
+            customKokiriSwordTexture = malloc(0x1000);
+            customKokiriSwordId = 0;
+            customKokiSwordAge = 0xff;
+        }
+
+        if (customKokiriSwordTexture)
+        {
+            if (customKokiriSwordId != gSharedCustomSave.extraSwordsOot || customKokiSwordAge != gSave.age)
+            {
+                customKokiriSwordId = gSharedCustomSave.extraSwordsOot;
+                customKokiSwordAge = gSave.age;
+
+                if (gSharedCustomSave.extraSwordsOot == 1)
+                    LoadMmItemIcon(customKokiriSwordTexture, ITEM_MM_SWORD_RAZOR);
+                else
+                    LoadMmItemIcon(customKokiriSwordTexture, ITEM_MM_SWORD_GILDED);
+
+                if (gSave.age != AGE_CHILD && !Config_Flag(CFG_OOT_AGELESS_SWORDS))
+                    Grayscale(customKokiriSwordTexture, 0x400);
+            }
+
+            dlist = ((u32)customKokiriSwordTexture) & 0xffffff;
+        }
+    }
+
+    KaleidoScope_DrawQuadTextureRGBA32 = OverlayAddr(0x8081f1e8);
+    KaleidoScope_DrawQuadTextureRGBA32(play, dlist, w, h, flags);
+}
