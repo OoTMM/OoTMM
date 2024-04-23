@@ -835,6 +835,8 @@ const PRESET_CROSSKEYS = makeSettings({
   erIndoorsExtra: true,
   erOneWays: 'full',
   erOneWaysMajor: true,
+  extraChildSwordsOot: true,
+  sharedSwords: true,
   startingItems: {
     OOT_NUTS_10: 2,
     OOT_MASK_BUNNY: 1,
