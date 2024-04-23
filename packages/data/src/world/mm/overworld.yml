@@ -462,12 +462,12 @@
   stay:
     NIGHT3_PM_11_00: "false"
   locations:
-    "Swordsman School HP": "has(SWORD) && can_use_wallet(1) && before(NIGHT3_PM_11_00)"
-    "Swordsman School Pot 1": "has(SWORD) && after(NIGHT3_AM_12_00)"
-    "Swordsman School Pot 2": "has(SWORD) && after(NIGHT3_AM_12_00)"
-    "Swordsman School Pot 3": "has(SWORD) && after(NIGHT3_AM_12_00)"
-    "Swordsman School Pot 4": "has(SWORD) && after(NIGHT3_AM_12_00)"
-    "Swordsman School Pot 5": "has(SWORD) && after(NIGHT3_AM_12_00)"
+    "Swordsman School HP": "has_sword && can_use_wallet(1) && before(NIGHT3_PM_11_00)"
+    "Swordsman School Pot 1": "has_sword && after(NIGHT3_AM_12_00)"
+    "Swordsman School Pot 2": "has_sword && after(NIGHT3_AM_12_00)"
+    "Swordsman School Pot 3": "has_sword && after(NIGHT3_AM_12_00)"
+    "Swordsman School Pot 4": "has_sword && after(NIGHT3_AM_12_00)"
+    "Swordsman School Pot 5": "has_sword && after(NIGHT3_AM_12_00)"
 "Lottery":
   region: ENTRANCE
   events:

@@ -352,8 +352,28 @@ static s16 progressiveClock(void)
     return kClocks[index];
 }
 
+static s16 progressiveExtraSwordOot(void)
+{
+    if (!(gOotSave.inventory.equipment.swords & EQ_OOT_SWORD_KOKIRI))
+        return GI_OOT_SWORD_KOKIRI;
+    if (gSharedCustomSave.extraSwordsOot == 0)
+        return GI_OOT_SWORD_RAZOR;
+    return GI_OOT_SWORD_GILDED;
+}
+
 s16 comboProgressive(s16 gi, int ovflags)
 {
+    if (Config_Flag(CFG_OOT_EXTRA_CHILD_SWORDS))
+    {
+        switch (gi)
+        {
+        case GI_OOT_SWORD_KOKIRI:
+        case GI_OOT_SWORD_RAZOR:
+        case GI_OOT_SWORD_GILDED:
+            return progressiveExtraSwordOot();
+        }
+    }
+
     switch (gi)
     {
     /* Items */

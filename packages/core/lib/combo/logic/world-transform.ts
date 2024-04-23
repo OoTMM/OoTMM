@@ -50,6 +50,7 @@ const ITEM_POOL_SCARCE = new Set([
   Items.SHARED_BOW,
   Items.SHARED_BOMB_BAG,
   Items.SHARED_MAGIC_UPGRADE,
+  Items.SHARED_SWORD,
 ]);
 
 const ITEM_POOL_SCARCE_NOLIMIT = new Set([
@@ -87,6 +88,7 @@ const ITEM_POOL_PLENTIFUL = new Set([
   Items.OOT_SPELL_WIND,
   Items.OOT_SPELL_LOVE,
   Items.OOT_STRENGTH,
+  Items.SHARED_SWORD,
   Items.OOT_SWORD,
   Items.OOT_SWORD_GORON,
   Items.OOT_SWORD_KOKIRI,
@@ -560,6 +562,13 @@ export class LogicPassWorldTransform {
    */
   private setupSharedItems() {
     const { settings } = this.state;
+
+    if (settings.sharedSwords) {
+      /* Swords */
+      this.replaceItem(Items.OOT_SWORD, Items.SHARED_SWORD);
+      this.replaceItem(Items.MM_SWORD, Items.SHARED_SWORD);
+      this.removeItem(Items.SHARED_SWORD, 3);
+    }
 
     if (settings.sharedBows) {
       /* Bows and quivers */
@@ -1161,6 +1170,11 @@ export class LogicPassWorldTransform {
     if (settings.progressiveShieldsMm === 'progressive') {
       this.replaceItem(Items.MM_SHIELD_MIRROR, Items.MM_SHIELD);
       this.addItem(Items.MM_SHIELD);
+    }
+
+    if (settings.extraChildSwordsOot) {
+      this.replaceItem(Items.OOT_SWORD_KOKIRI, Items.OOT_SWORD);
+      this.addItem(Items.OOT_SWORD, 2);
     }
 
     /* Setup extra traps */

@@ -40,7 +40,7 @@ void comboLoadMmIcon(void* dst, u32 iconBank, int iconId)
         DmaCompressed(iconAddr, dst, iconSize);
 }
 
-static void LoadMmItemIcon(void* dst, int iconId)
+void LoadMmItemIcon(void* dst, int iconId)
 {
     comboLoadMmIcon(dst, 0xa36c10, iconId);
 }
@@ -61,7 +61,7 @@ void comboItemIcon(void* dst, int itemId)
     }
 }
 
-static void LoadCustomItemIconSlot(GameState_Play* play, int slot)
+static void LoadCustomItemIconSlot(GameState_Play* play, int slot, int isInit)
 {
     Actor_Player* link;
     void* dst;
@@ -70,7 +70,7 @@ static void LoadCustomItemIconSlot(GameState_Play* play, int slot)
     dst = (*(char**)((char*)&play->interfaceCtx + 0x138)) + 0x1000 * slot;
     itemId = gSave.equips.buttonItems[slot];
 
-    if (slot == 0)
+    if (slot == 0 && !isInit)
     {
         /* Masks can overwrite the B icon */
         link = GET_LINK(play);
@@ -84,29 +84,56 @@ static void LoadCustomItemIconSlot(GameState_Play* play, int slot)
         }
     }
 
+    if (itemId == ITEM_OOT_SWORD_KOKIRI)
+    {
+        if (gSharedCustomSave.extraSwordsOot == 1)
+        {
+            LoadMmItemIcon(dst, ITEM_MM_SWORD_RAZOR);
+            return;
+        }
+
+        if (gSharedCustomSave.extraSwordsOot == 2)
+        {
+            LoadMmItemIcon(dst, ITEM_MM_SWORD_GILDED);
+            return;
+        }
+    }
+
     comboItemIcon(dst, itemId);
 }
 
-PATCH_FUNC(0x8006fb50, LoadCustomItemIconSlot);
-PATCH_FUNC(0x8006fc00, LoadCustomItemIconSlot);
+static void LoadCustomItemIcon(GameState_Play* play, int slot, int isInit)
+{
+    LoadCustomItemIconSlot(play, slot, 0);
+}
+
+PATCH_FUNC(0x8006fb50, LoadCustomItemIcon);
+PATCH_FUNC(0x8006fc00, LoadCustomItemIcon);
+
+static void LoadCustomItemIcon_B(void)
+{
+    LoadCustomItemIconSlot(gPlay, 0, 1);
+}
+
+PATCH_CALL(0x800e1dbc, LoadCustomItemIcon_B);
 
 static void LoadCustomItemIcon_C_Left(void)
 {
-    LoadCustomItemIconSlot(gPlay, 1);
+    LoadCustomItemIconSlot(gPlay, 1, 1);
 }
 
 PATCH_CALL(0x800e1e20, LoadCustomItemIcon_C_Left);
 
 static void LoadCustomItemIcon_C_Down(void)
 {
-    LoadCustomItemIconSlot(gPlay, 2);
+    LoadCustomItemIconSlot(gPlay, 2, 1);
 }
 
 PATCH_CALL(0x800e1e54, LoadCustomItemIcon_C_Down);
 
 static void LoadCustomItemIcon_C_Right(void)
 {
-    LoadCustomItemIconSlot(gPlay, 3);
+    LoadCustomItemIconSlot(gPlay, 3, 1);
 }
 
 PATCH_CALL(0x800e1e88, LoadCustomItemIcon_C_Right);

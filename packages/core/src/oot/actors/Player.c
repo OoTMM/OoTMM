@@ -246,8 +246,24 @@ void comboDrawExtendedMask(void)
     cb(play, link);
 }
 
+static void updateKokiriSwordLength(void)
+{
+    float* dst;
+
+    dst = (float*)0x800f7bb8;
+
+    switch (gSharedCustomSave.extraSwordsOot)
+    {
+    case 0: *dst = 3000.f; break;
+    case 1: *dst = 3000.f; break;
+    case 2: *dst = 4000.f; break;
+    }
+}
+
 void Player_UpdateWrapper(Actor_Player* this, GameState_Play* play)
 {
+    updateKokiriSwordLength();
+
     if (gBlastMaskDelayAcc)
     {
         gBlastMaskDelayAcc--;
@@ -505,10 +521,21 @@ static void Player_OverrideCustomSheath(GameState_Play* play, Actor_Player* this
     switch (gSave.equips.equipment.swords)
     {
     case 1:
-        if (swordInUse)
-            sword = Player_CustomEq(comboGetObject(CUSTOM_OBJECT_ID_EQ_SHEATH_SWORD_OOT_CHILD_EMPTY), CUSTOM_OBJECT_EQ_SHEATH_SWORD_OOT_CHILD_EMPTY_0);
-        else
-            sword = Player_CustomEq(comboGetObject(CUSTOM_OBJECT_ID_EQ_SHEATH_SWORD_OOT_CHILD_FULL), CUSTOM_OBJECT_EQ_SHEATH_SWORD_OOT_CHILD_FULL_0);
+        switch (gSharedCustomSave.extraSwordsOot)
+        {
+        case 0:
+            if (swordInUse)
+                sword = Player_CustomEq(comboGetObject(CUSTOM_OBJECT_ID_EQ_SHEATH_SWORD_OOT_CHILD_EMPTY), CUSTOM_OBJECT_EQ_SHEATH_SWORD_OOT_CHILD_EMPTY_0);
+            else
+                sword = Player_CustomEq(comboGetObject(CUSTOM_OBJECT_ID_EQ_SHEATH_SWORD_OOT_CHILD_FULL), CUSTOM_OBJECT_EQ_SHEATH_SWORD_OOT_CHILD_FULL_0);
+            break;
+        case 1:
+            sword = Player_CustomEq(comboGetObject(CUSTOM_OBJECT_ID_EQ_SHEATH_SWORD_RAZOR), swordInUse ? CUSTOM_OBJECT_EQ_SHEATH_SWORD_RAZOR_0 : CUSTOM_OBJECT_EQ_SHEATH_SWORD_RAZOR_1);
+            break;
+        case 2:
+            sword = Player_CustomEq(comboGetObject(CUSTOM_OBJECT_ID_EQ_SHEATH_SWORD_GILDED), swordInUse ? CUSTOM_OBJECT_EQ_SHEATH_SWORD_GILDED_0 : CUSTOM_OBJECT_EQ_SHEATH_SWORD_GILDED_1);
+            break;
+        }
         break;
     case 2:
     case 3:
@@ -522,13 +549,40 @@ static void Player_OverrideCustomSheath(GameState_Play* play, Actor_Player* this
     *dlist = Player_CustomPair(shield, sword);
 }
 
+static void fixTunicColoLimb(GameState_Play* play, int limb)
+{
+    static const u8* kColors = (const u8*)0x800f7ad8;
+    int index;
+    u8 cr;
+    u8 cg;
+    u8 cb;
+
+    if (limb != PLAYER_LIMB_R_SHOULDER && limb != PLAYER_LIMB_TORSO)
+        return;
+
+    index = gSave.equips.equipment.tunics - 1;
+    cr = kColors[index * 3 + 0];
+    cg = kColors[index * 3 + 1];
+    cb = kColors[index * 3 + 2];
+    OPEN_DISPS(play->gs.gfx);
+    gDPSetEnvColor(POLY_OPA_DISP++, cr, cg, cb, 0xff);
+    CLOSE_DISPS();
+}
+
 static void Player_OverrideAdult(GameState_Play* play, Actor_Player* this, int limb, Gfx** dlist, int isPause)
 {
+    fixTunicColoLimb(play, limb);
+
     if (limb == PLAYER_LIMB_L_HAND)
     {
         if ((this->leftHandType == PLAYER_MODELTYPE_LH_SWORD || isPause) && gSave.equips.equipment.swords == 1)
         {
-            *dlist = Player_CustomHandEq(DLIST_ADULT_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_KOKIRI_SWORD), CUSTOM_OBJECT_EQ_KOKIRI_SWORD_0);
+            if (gSharedCustomSave.extraSwordsOot == 0)
+                *dlist = Player_CustomHandEq(DLIST_ADULT_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_KOKIRI_SWORD), CUSTOM_OBJECT_EQ_KOKIRI_SWORD_0);
+            else if (gSharedCustomSave.extraSwordsOot == 1)
+                *dlist = Player_CustomHandEq(DLIST_ADULT_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_RAZOR_SWORD), CUSTOM_OBJECT_EQ_RAZOR_SWORD_0);
+            else if (gSharedCustomSave.extraSwordsOot == 2)
+                *dlist = Player_CustomHandEq(DLIST_ADULT_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_GILDED_SWORD), CUSTOM_OBJECT_EQ_GILDED_SWORD_0);
         }
 
         if (this->leftHandType == PLAYER_MODELTYPE_LH_BOOMERANG)
@@ -553,10 +607,24 @@ static void Player_OverrideAdult(GameState_Play* play, Actor_Player* this, int l
 
 static void Player_OverrideChild(GameState_Play* play, Actor_Player* this, int limb, Gfx** dlist, int isPause)
 {
+    fixTunicColoLimb(play, limb);
+
     if (limb == PLAYER_LIMB_L_HAND)
     {
-        if ((this->leftHandType == PLAYER_MODELTYPE_LH_SWORD || this->leftHandType == PLAYER_MODELTYPE_LH_SWORD_2 || isPause) && gSave.equips.equipment.swords == 2)
-            *dlist = Player_CustomHandEq(DLIST_CHILD_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_MASTER_SWORD), CUSTOM_OBJECT_EQ_MASTER_SWORD_0);
+        if (this->leftHandType == PLAYER_MODELTYPE_LH_SWORD || this->leftHandType == PLAYER_MODELTYPE_LH_SWORD_2 || isPause)
+        {
+            if (gSave.equips.equipment.swords == 1)
+            {
+                if (gSharedCustomSave.extraSwordsOot == 1)
+                    *dlist = Player_CustomHandEq(DLIST_CHILD_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_RAZOR_SWORD), CUSTOM_OBJECT_EQ_RAZOR_SWORD_0);
+                else if (gSharedCustomSave.extraSwordsOot == 2)
+                    *dlist = Player_CustomHandEq(DLIST_CHILD_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_GILDED_SWORD), CUSTOM_OBJECT_EQ_GILDED_SWORD_0);
+            }
+            else if (gSave.equips.equipment.swords == 2)
+            {
+                *dlist = Player_CustomHandEq(DLIST_CHILD_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_MASTER_SWORD), CUSTOM_OBJECT_EQ_MASTER_SWORD_0);
+            }
+        }
         else if ((this->leftHandType == PLAYER_MODELTYPE_LH_BGS || isPause) && gSave.equips.equipment.swords == 3)
         {
             if (gSave.playerData.swordHealth)
@@ -576,7 +644,7 @@ static void Player_OverrideChild(GameState_Play* play, Actor_Player* this, int l
 
     if (limb == PLAYER_LIMB_SHEATH)
     {
-        if (gSave.equips.equipment.shields == 3 || gSave.equips.equipment.swords != 1)
+        if (gSave.equips.equipment.shields == 3 || gSave.equips.equipment.swords != 1 || gSharedCustomSave.extraSwordsOot)
             Player_OverrideCustomSheath(play, this, dlist, isPause);
     }
 }

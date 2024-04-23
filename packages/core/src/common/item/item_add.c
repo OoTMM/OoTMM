@@ -1777,6 +1777,18 @@ static int addElegyOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
+static int addItemSwordExtraOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    if (gSharedCustomSave.extraSwordsOot < param)
+        gSharedCustomSave.extraSwordsOot = (u8)param;
+
+#if defined(GAME_OOT)
+    if (play)
+        Interface_LoadItemIconImpl(play, 0);
+#endif
+    return 0;
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -1876,6 +1888,7 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemClock,
     addItemEndgame,
     addElegyOot,
+    addItemSwordExtraOot,
 };
 
 extern const u8 kAddItemFuncs[];
@@ -1957,6 +1970,9 @@ static const SharedItem kSimpleSharedItems[] = {
     { CFG_SHARED_STRENGTH, GI_OOT_SILVER_GAUNTLETS, GI_MM_SILVER_GAUNTLETS },
     { CFG_SHARED_STRENGTH, GI_OOT_GOLDEN_GAUNTLETS, GI_MM_GOLDEN_GAUNTLETS },
     { CFG_SHARED_SONG_EMPTINESS, GI_OOT_SONG_EMPTINESS, GI_MM_SONG_EMPTINESS },
+    { CFG_SHARED_SWORDS, GI_OOT_SWORD_KOKIRI, GI_MM_SWORD_KOKIRI },
+    { CFG_SHARED_SWORDS, GI_OOT_SWORD_RAZOR, GI_MM_SWORD_RAZOR },
+    { CFG_SHARED_SWORDS, GI_OOT_SWORD_GILDED, GI_MM_SWORD_GILDED },
 };
 
 static int addItem(GameState_Play* play, s16 gi)

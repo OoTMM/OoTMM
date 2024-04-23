@@ -470,6 +470,7 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   OOT_SWORD_KNIFE: "Giant's Knife",
   OOT_SWORD_KOKIRI: "Kokiri Sword (OoT)",
   OOT_SWORD_MASTER: "Master Sword",
+  SHARED_SWORD: "Progressive Sword",
   OOT_SWORD: "Progressive Sword (OoT)",
   OOT_TUNIC_GORON: "Goron Tunic (OoT)",
   OOT_TUNIC_ZORA: "Zora Tunic (OoT)",

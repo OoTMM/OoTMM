@@ -93,11 +93,16 @@
 
 # Swords
 "starts_with_master_sword": "setting(startingAge, adult) && !setting(swordlessAdult)"
-"has_sword_kokiri": "cond(setting(progressiveSwordsOot, progressive), has(SWORD), has(SWORD_KOKIRI))"
+"has_sword_child(n)": "setting(extraChildSwordsOot) && cond(setting(sharedSwords), has(SHARED_SWORD, n), has(SWORD, n))"
+"has_sword_kokiri": "cond(setting(progressiveSwordsOot, progressive), has(SWORD), cond(setting(extraChildSwordsOot), has_sword_child(1), has(SWORD_KOKIRI)))"
+"has_sword_razor": "has_sword_child(2)"
+"has_sword_gilded": "has_sword_child(3)"
 "has_sword_master": "starts_with_master_sword || cond(setting(progressiveSwordsOot, progressive), has(SWORD, 2), has(SWORD_MASTER))"
 "has_sword_goron": "cond(setting(progressiveSwordsOot, progressive), cond(starts_with_master_sword, has(SWORD, 2), has(SWORD, 3)), cond(setting(progressiveSwordsOot, goron), has(SWORD_GORON), has(SWORD_KNIFE) || has(SWORD_BIGGORON)))"
 "has_weapon": "can_use_sword"
 "can_use_sword_kokiri": "age_sword_child && has_sword_kokiri"
+"can_use_sword_razor": "age_sword_child && has_sword_razor"
+"can_use_sword_gilded": "age_sword_child && has_sword_gilded"
 "can_use_sword_master": "age_sword_adult && has_sword_master"
 "can_use_sword_goron": "age_sword_adult && has_sword_goron"
 "can_use_sword": "can_use_sword_kokiri || can_use_sword_master || can_use_sword_goron"

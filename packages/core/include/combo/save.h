@@ -24,6 +24,7 @@ typedef struct ALIGNED(16)
     u8              caughtAdultFishWeight[20]; /* first item is length. should this be in OotCustomSave? */
     u8              foundMasterSword:1;
     u8              storedSirloin:1;
+    u8              extraSwordsOot:2;
 #if defined(DEBUG)
     u8              cheats[4];
 #endif

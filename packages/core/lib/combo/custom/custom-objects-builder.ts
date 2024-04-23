@@ -172,6 +172,34 @@ export class CustomObjectsBuilder {
     return { name: 'EQ_SHEATH_SWORD_OOT_ADULT_EMPTY', ...editor.build() };
   }
 
+  private async makeEqSheathSwordRazor(): Promise<CustomObject> {
+    const editor = new ObjectEditor(0xa);
+    const obj_child = await this.getFile('mm', 'objects/object_link_child');
+    const obj_keep = await this.getFile('mm', 'objects/gameplay_keep');
+    editor.loadSegment(0x04, obj_keep);
+    editor.loadSegment(0x06, obj_child);
+
+    const body = editor.processListAddr(0x06017338);
+    const bodyHandle = editor.processListAddr(0x0601db40);
+    editor.submitOut(body);
+    editor.submitOut(bodyHandle);
+
+    return { name: 'EQ_SHEATH_SWORD_RAZOR', ...editor.build() };
+  }
+
+  private async makeEqSheathSwordGilded(): Promise<CustomObject> {
+    const editor = new ObjectEditor(0xa);
+    const obj_child = await this.getFile('mm', 'objects/object_link_child');
+    editor.loadSegment(0x06, obj_child);
+
+    const body = editor.processListAddr(0x06016b80);
+    const bodyHandle = editor.processListAddr(0x0601db60);
+    editor.submitOut(body);
+    editor.submitOut(bodyHandle);
+
+    return { name: 'EQ_SHEATH_SWORD_GILDED', ...editor.build() };
+  }
+
   private async makeEqKokiriSword(): Promise<CustomObject> {
     const editor = new ObjectEditor(0xa);
     const object_link_child = await this.getFile('oot', 'objects/object_link_child');
@@ -182,6 +210,30 @@ export class CustomObjectsBuilder {
 
     editor.submitList(list);
     return { name: 'EQ_KOKIRI_SWORD', ...editor.build() };
+  }
+
+  private async makeEqRazorSword(): Promise<CustomObject> {
+    const editor = new ObjectEditor(0xa);
+    const obj = await this.getFile('mm', 'objects/gameplay_keep');
+    editor.loadSegment(0x04, obj);
+
+    const b = 0x04003060;
+    let list = editor.listData(b)!;
+    editor.submitList(list);
+
+    return { name: 'EQ_RAZOR_SWORD', ...editor.build() };
+  }
+
+  private async makeEqGildedSword(): Promise<CustomObject> {
+    const editor = new ObjectEditor(0xa);
+    const obj = await this.getFile('mm', 'objects/object_link_child');
+    editor.loadSegment(0x06, obj);
+
+    const b = 0x0601dcb0;
+    let list = editor.listData(b)!;
+
+    editor.submitList(list);
+    return { name: 'EQ_GILDED_SWORD', ...editor.build() };
   }
 
   private async makeEqMasterSword(): Promise<CustomObject> {
@@ -266,6 +318,8 @@ export class CustomObjectsBuilder {
   async build(): Promise<CustomObject[]> {
     return [
       await this.makeEqKokiriSword(),
+      await this.makeEqRazorSword(),
+      await this.makeEqGildedSword(),
       await this.makeEqMasterSword(),
       await this.makeEqBiggoronSword(),
       await this.makeEqBiggoronSwordBroken(),
@@ -280,6 +334,8 @@ export class CustomObjectsBuilder {
       await this.makeEqSheathSwordOotChildEmpty(),
       await this.makeEqSheathSwordOotAdultFull(),
       await this.makeEqSheathSwordOotAdultEmpty(),
+      await this.makeEqSheathSwordRazor(),
+      await this.makeEqSheathSwordGilded(),
       await this.makeEqOcarinaFairy(),
       await this.makeEqBoomerang(),
       //await this.simpleExtract('LIMB_OOT_CHILD_LHAND_CLOSED', 'oot', 'objects/object_link_child', [], 0x06, 0x0a),
