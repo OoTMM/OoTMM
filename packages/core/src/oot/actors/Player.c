@@ -533,8 +533,30 @@ static void Player_OverrideCustomSheath(GameState_Play* play, Actor_Player* this
     *dlist = Player_CustomPair(shield, sword);
 }
 
+static void fixTunicColoLimb(GameState_Play* play, int limb)
+{
+    static const u8* kColors = (const u8*)0x800f7ad8;
+    int index;
+    u8 cr;
+    u8 cg;
+    u8 cb;
+
+    if (limb != PLAYER_LIMB_R_SHOULDER && limb != PLAYER_LIMB_TORSO)
+        return;
+
+    index = gSave.equips.equipment.tunics - 1;
+    cr = kColors[index * 3 + 0];
+    cg = kColors[index * 3 + 1];
+    cb = kColors[index * 3 + 2];
+    OPEN_DISPS(play->gs.gfx);
+    gDPSetEnvColor(POLY_OPA_DISP++, cr, cg, cb, 0xff);
+    CLOSE_DISPS();
+}
+
 static void Player_OverrideAdult(GameState_Play* play, Actor_Player* this, int limb, Gfx** dlist, int isPause)
 {
+    fixTunicColoLimb(play, limb);
+
     if (limb == PLAYER_LIMB_L_HAND)
     {
         if ((this->leftHandType == PLAYER_MODELTYPE_LH_SWORD || isPause) && gSave.equips.equipment.swords == 1)
@@ -569,6 +591,8 @@ static void Player_OverrideAdult(GameState_Play* play, Actor_Player* this, int l
 
 static void Player_OverrideChild(GameState_Play* play, Actor_Player* this, int limb, Gfx** dlist, int isPause)
 {
+    fixTunicColoLimb(play, limb);
+
     if (limb == PLAYER_LIMB_L_HAND)
     {
         if (this->leftHandType == PLAYER_MODELTYPE_LH_SWORD || this->leftHandType == PLAYER_MODELTYPE_LH_SWORD_2 || isPause)
