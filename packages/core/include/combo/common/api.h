@@ -44,6 +44,7 @@ void    Actor_SetCollisionCylinder(GameState_Play* play, Actor* actor, float unk
 /* AKA  Actor_MoveXZGravity AKA Actor_MoveWithGravity */
 void    ActorUpdateVelocity(Actor* actor);
 int     ActorTalkedTo(Actor* actor);
+u8      CollisionCheck_GetSwordDamage(u32 dmgFlags);
 
 void    EnableOwl(u8 owlId);
 
