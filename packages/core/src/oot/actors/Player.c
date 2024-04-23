@@ -246,8 +246,24 @@ void comboDrawExtendedMask(void)
     cb(play, link);
 }
 
+static void updateKokiriSwordLength(void)
+{
+    float* dst;
+
+    dst = (float*)0x800f7bb8;
+
+    switch (gSharedCustomSave.extraSwordsOot)
+    {
+    case 0: *dst = 3000.f; break;
+    case 1: *dst = 3000.f; break;
+    case 2: *dst = 4000.f; break;
+    }
+}
+
 void Player_UpdateWrapper(Actor_Player* this, GameState_Play* play)
 {
+    updateKokiriSwordLength();
+
     if (gBlastMaskDelayAcc)
     {
         gBlastMaskDelayAcc--;
