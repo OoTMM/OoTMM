@@ -1545,10 +1545,31 @@ u32 GetItemTexture(u32 slotId, u8 item, u32 index)
 {
     static void* sExtraIconTradeChild[2];
     static u8 sExtraIconTradeChildItem[2];
+    static void* sExtraIconExtendedSword;
+    static u8 sExtraIconExtendedSwordValue;
     u32* itemToIcon = (u32*)0x800f8d2c;
-    switch (slotId)
+
+    if (item == ITEM_OOT_SWORD_KOKIRI && gSharedCustomSave.extraSwordsOot)
     {
-    case ITS_OOT_TRADE_CHILD:
+        if (!sExtraIconExtendedSword)
+        {
+            sExtraIconExtendedSword = malloc(0x1000);
+            sExtraIconExtendedSwordValue = 0;
+        }
+
+        if (sExtraIconExtendedSword)
+        {
+            if (sExtraIconExtendedSwordValue != gSharedCustomSave.extraSwordsOot)
+            {
+                sExtraIconExtendedSwordValue = gSharedCustomSave.extraSwordsOot;
+                LoadMmItemIcon(sExtraIconExtendedSword, ITEM_MM_SWORD_RAZOR);
+            }
+            return (u32)sExtraIconExtendedSword & 0x00ffffff;
+        }
+    }
+
+    if (slotId == ITS_OOT_TRADE_CHILD)
+    {
         if (!sExtraIconTradeChild[index])
         {
             sExtraIconTradeChild[index] = malloc(0x1000);
@@ -1565,11 +1586,9 @@ u32 GetItemTexture(u32 slotId, u8 item, u32 index)
             }
             return (u32)sExtraIconTradeChild[index] & 0x00ffffff;
         }
-        break;
-    default:
-        return itemToIcon[item];
     }
-    return 0;
+
+    return itemToIcon[item];
 }
 
 static u8 GetNextItem(u32 slot, s32* outTableIndex)
@@ -1669,6 +1688,16 @@ void KaleidoScope_LoadItemName(void* dst, s16 id)
     if (itemId == ITEM_NONE)
     {
         memset(dst, 0, 0x400);
+    }
+    else if (itemId == ITEM_OOT_SWORD_KOKIRI)
+    {
+        switch (gSharedCustomSave.extraSwordsOot)
+        {
+        case 0: LoadFile(dst, 0x880000 + 0x400 * id, 0x400); break;
+        case 1: comboLoadMmIcon(dst, 0xa27660, ITEM_MM_SWORD_RAZOR); break;
+        case 2: comboLoadMmIcon(dst, 0xa27660, ITEM_MM_SWORD_GILDED); break;
+        default: UNREACHABLE();
+        }
     }
     else if (itemId == ITEM_OOT_MASK_BLAST)
     {

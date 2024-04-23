@@ -184,6 +184,8 @@ extern s8 gSoaringIndexSelected;
 
 void comboHandleAutoInvertClockSpeed(void);
 
+void LoadMmItemIcon(void* dst, int iconId);
+
 #else
 # include <combo/asm.h>
 #endif

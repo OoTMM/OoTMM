@@ -40,7 +40,7 @@ void comboLoadMmIcon(void* dst, u32 iconBank, int iconId)
         DmaCompressed(iconAddr, dst, iconSize);
 }
 
-static void LoadMmItemIcon(void* dst, int iconId)
+void LoadMmItemIcon(void* dst, int iconId)
 {
     comboLoadMmIcon(dst, 0xa36c10, iconId);
 }

@@ -302,3 +302,19 @@ PATCH_START 0x80822e6c
   nop
   jal KaleidoScope_LoadItemName
 PATCH_END
+
+/* Use our equips handler */
+
+/*PreRenderEquipHook:
+  sw s2,0x10(sp)
+  move a0,a1
+  jal GetReplacementTextureEquipItem
+   nop
+  move a1,v0
+  lw a0,0x0(t4)
+
+PATCH_START 0x80819470
+  jal PreRenderEquipHook
+   nop
+PATCH_END
+*/
