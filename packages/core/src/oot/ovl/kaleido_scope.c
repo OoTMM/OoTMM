@@ -1545,28 +1545,7 @@ u32 GetItemTexture(u32 slotId, u8 item, u32 index)
 {
     static void* sExtraIconTradeChild[2];
     static u8 sExtraIconTradeChildItem[2];
-    static void* sExtraIconExtendedSword;
-    static u8 sExtraIconExtendedSwordValue;
     u32* itemToIcon = (u32*)0x800f8d2c;
-
-    if (item == ITEM_OOT_SWORD_KOKIRI && gSharedCustomSave.extraSwordsOot)
-    {
-        if (!sExtraIconExtendedSword)
-        {
-            sExtraIconExtendedSword = malloc(0x1000);
-            sExtraIconExtendedSwordValue = 0;
-        }
-
-        if (sExtraIconExtendedSword)
-        {
-            if (sExtraIconExtendedSwordValue != gSharedCustomSave.extraSwordsOot)
-            {
-                sExtraIconExtendedSwordValue = gSharedCustomSave.extraSwordsOot;
-                LoadMmItemIcon(sExtraIconExtendedSword, ITEM_MM_SWORD_RAZOR);
-            }
-            return (u32)sExtraIconExtendedSword & 0x00ffffff;
-        }
-    }
 
     if (slotId == ITS_OOT_TRADE_CHILD)
     {

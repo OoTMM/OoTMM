@@ -1781,6 +1781,11 @@ static int addItemSwordExtraOot(GameState_Play* play, u8 itemId, s16 gi, u16 par
 {
     if (gSharedCustomSave.extraSwordsOot < param)
         gSharedCustomSave.extraSwordsOot = (u8)param;
+
+#if defined(GAME_OOT)
+    if (play)
+        Interface_LoadItemIconImpl(play, 0);
+#endif
     return 0;
 }
 
