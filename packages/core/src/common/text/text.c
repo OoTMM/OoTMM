@@ -440,15 +440,17 @@ static int isItemAmbiguous(s16 gi)
     case GI_MM_SILVER_GAUNTLETS:
     case GI_MM_GOLDEN_GAUNTLETS:
         return (Config_Flag(CFG_MM_STRENGTH) && !Config_Flag(CFG_SHARED_STRENGTH));
+    case GI_OOT_SWORD_KOKIRI:
+    case GI_MM_SWORD_KOKIRI:
+        return !Config_Flag(CFG_SHARED_SWORDS);
     case GI_OOT_SWORD_RAZOR:
     case GI_OOT_SWORD_GILDED:
     case GI_MM_SWORD_RAZOR:
     case GI_MM_SWORD_GILDED:
-        return Config_Flag(CFG_OOT_EXTRA_CHILD_SWORDS);
+        return Config_Flag(CFG_OOT_EXTRA_CHILD_SWORDS) && !Config_Flag(CFG_SHARED_SWORDS);
     case GI_OOT_MAGIC_BEAN:
     case GI_OOT_BOTTLE_EMPTY:
     case GI_OOT_BOTTLE_MILK:
-    case GI_OOT_SWORD_KOKIRI:
     case GI_OOT_MILK:
     case GI_OOT_POTION_RED:
     case GI_OOT_POTION_GREEN:
@@ -472,7 +474,6 @@ static int isItemAmbiguous(s16 gi)
     case GI_MM_BOTTLE_POE:
     case GI_MM_BOTTLE_BIG_POE:
     case GI_MM_BOTTLE_EMPTY:
-    case GI_MM_SWORD_KOKIRI:
     case GI_MM_BOTTLE_MILK:
     case GI_MM_MILK:
     case GI_MM_POTION_RED:
@@ -708,10 +709,10 @@ void comboTextAppendItemNameEx(char** b, s16 gi, int flags, int importance)
         switch (gi)
         {
         case GI_OOT_SWORD_KOKIRI:
-            if (Config_Flag(CFG_OOT_PROGRESSIVE_SWORDS))
+            if (Config_Flag(CFG_OOT_PROGRESSIVE_SWORDS) || Config_Flag(CFG_OOT_EXTRA_CHILD_SWORDS))
             {
                 itemName = "a " TEXT_C1 "Progressive Sword";
-                ambiguous = 1;
+                ambiguous = !Config_Flag(CFG_SHARED_SWORDS);
             }
             break;
         case GI_OOT_SWORD_KNIFE:
@@ -722,7 +723,7 @@ void comboTextAppendItemNameEx(char** b, s16 gi, int flags, int importance)
             break;
         case GI_MM_SWORD_KOKIRI:
             itemName = "a " TEXT_C1 "Progressive Sword";
-            ambiguous = 1;
+            ambiguous = !Config_Flag(CFG_SHARED_SWORDS);
             break;
         case GI_OOT_PROGRESSIVE_SHIELD_DEKU:
         case GI_MM_PROGRESSIVE_SHIELD_HERO:

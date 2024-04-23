@@ -860,6 +860,7 @@ export const REQUIRED = new Set([
   Items.OOT_SONG_TP_LIGHT,
   Items.OOT_SPELL_FIRE,
   Items.OOT_STRENGTH,
+  Items.SHARED_SWORD,
   Items.OOT_SWORD,
   Items.OOT_SWORD_KOKIRI,
   Items.OOT_SWORD_MASTER,

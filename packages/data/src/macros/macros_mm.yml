@@ -127,7 +127,11 @@
 
 # Misc
 "keaton_grass_easy": "has_weapon && has_magic"
-"keaton_grass_hard": "keaton_grass_easy && (has(SPIN_UPGRADE) || has(GREAT_FAIRY_SWORD) || has(SWORD, 3))"
+"keaton_grass_hard": "keaton_grass_easy && (has(SPIN_UPGRADE) || has(GREAT_FAIRY_SWORD) || has_sword_level(3))"
+
+"has_sword_level(n)": "cond(setting(sharedSwords), has(SHARED_SWORD, n), has(SWORD, n))"
+"has_sword": "has_sword_level(1)"
+"has_weapon": "has_sword || has(GREAT_FAIRY_SWORD)"
 
 "can_break_boulders": "has_explosives || has_mask_goron"
 "can_use_fire_short_range": "can_use_fire_arrows || can_use_din"
@@ -154,7 +158,6 @@
 "has_bombchu_license": "cond(setting(bombchuBagMm), cond(setting(sharedBombchuBags), has_bombchu_license_shared, has_bombchu_license_nonshared), has_bomb_bag)"
 "has_bombchu": "has_bombchu_source && has_bombchu_license"
 "has_beans": "event(MAGIC_BEANS_PALACE) || (license(MAGIC_BEAN) && renewable(MAGIC_BEAN))"
-"has_weapon": "has(SWORD) || has(GREAT_FAIRY_SWORD)"
 "can_use_beans": "has_beans && (has_water || can_play_storms)"
 "scarecrow_hookshot_short": "has_ocarina && can_hookshot_short"
 "scarecrow_hookshot": "has_ocarina && can_hookshot"

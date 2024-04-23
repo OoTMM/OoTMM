@@ -31,6 +31,7 @@ const DUNGEON_REWARD_LOCATIONS = [
 ];
 
 const SHARED_ITEMS_OOT = new Map([
+  ['SHARED_SWORD',            'OOT_SWORD_KOKIRI'],
   ['SHARED_BOW',              'OOT_BOW'],
   ['SHARED_BOMB_BAG',         'OOT_BOMB_BAG'],
   ['SHARED_ARROWS_5',         'OOT_ARROWS_5'],
@@ -101,6 +102,7 @@ const SHARED_ITEMS_OOT = new Map([
 ]);
 
 const SHARED_ITEMS_MM = new Map([
+  ['SHARED_SWORD',            'MM_SWORD_KOKIRI'],
   ['SHARED_BOW',              'MM_BOW'],
   ['SHARED_BOMB_BAG',         'MM_BOMB_BAG'],
   ['SHARED_ARROWS_5',         'OOT_ARROWS_5'], /* MM lacks 5 pack */
@@ -807,6 +809,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     ER_MAJOR_DUNGEONS: settings.erMajorDungeons,
     ER_BOSS: settings.erBoss !== 'none',
     ER_ANY: isEntranceShuffle(settings),
+    SHARED_SWORDS: settings.sharedSwords,
     SHARED_BOWS: settings.sharedBows,
     SHARED_BOMB_BAGS: settings.sharedBombBags,
     SHARED_MAGIC: settings.sharedMagic,

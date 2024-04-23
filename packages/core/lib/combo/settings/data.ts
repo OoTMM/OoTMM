@@ -1663,6 +1663,13 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false
 }, {
+  key: 'sharedSwords',
+  name: 'Shared Swords',
+  category: 'items.shared',
+  type: 'boolean',
+  default: false,
+  cond: (s: any) => s.extraChildSwordsOot && s.progressiveGFS !== 'progressive',
+}, {
   key: 'sharedShields',
   name: 'Shared Shields',
   category: 'items.shared',
