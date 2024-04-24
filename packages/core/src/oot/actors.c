@@ -150,6 +150,7 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
         return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_CUCCO_LADY));
     case AC_EN_TORYO:
     case AC_EN_DAIKU:
+    case AC_EN_DAIKU_KAKARIKO:
         return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_CARPENTERS));
     case AC_EN_FU:
         return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_GURU_GURU));
