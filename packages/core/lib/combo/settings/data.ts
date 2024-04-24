@@ -1552,7 +1552,7 @@ export const SETTINGS = [{
   cond: hasMM,
 }, {
   key: 'soulsNpcOot',
-  name: 'NPC Souls (OoT) (EXPERIMENTAL)',
+  name: 'NPC Souls (OoT)',
   category: 'items.extensions',
   type: 'boolean',
   description: 'Add NPC souls into the item pool. NPCs won\'t spawn unless their soul is obtained.',
