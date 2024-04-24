@@ -81,10 +81,8 @@ export const Result = ({ result: { roms, hash, log, patches } }: Props) => {
 
   return (
     <div>
-      <div>
-        {outFilePending && <div>Building archive...</div>}
-        {outFile && <button className='btn-download' onClick={() => download(outFile)}>Save</button>}
-      </div>
+      {outFilePending && <div>Building archive...</div>}
+      {outFile && <button className='btn-download' onClick={() => download(outFile)}>Save</button>}
     </div>
   );
 };
