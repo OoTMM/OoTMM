@@ -12,7 +12,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- Add Majora's Maks swords to Ocarina of Time.
+- Add Majora's Mask swords to Ocarina of Time.
 - Add the ability to play a single game.
 - Add ageless strength upgrades.
 - Add a setting to travel through time without the Master Sword.
