@@ -49,6 +49,7 @@ All notable changes to this project will be documented in this file.
 - Ruto's Soul is now accounted in logic for the Big Octo in Jabu-Jabu.
 - Logic for entering Woodfall Temple if exiting the temple itself has been fixed.
 - The "GBT without Fire Arrows" trick now correctly accounts for being tall and no longer requires Ice Arrows.
+- Fixed logic for reaching Swamp Canopy Front in MM.
 
 ## [21.0] - 2024-03-28
 
