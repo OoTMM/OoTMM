@@ -1,3 +1,13 @@
+import { Game } from '../config';
+
+function hasGame(x: any, g: Game) {
+  return x.games === g || x.games === 'ootmm';
+}
+
+const hasOoTMM = (x: any) => x.games === 'ootmm';
+const hasOoT = (x: any) => hasGame(x, 'oot');
+const hasMM = (x: any) => hasGame(x, 'mm');
+
 const SETTING_PRICE = {
   type: 'enum',
   values: [
@@ -19,6 +29,7 @@ export const SETTINGS = [{
   values: [
     { value: 'ootmm', name: 'OoT+MM', description: 'The combo randomizer experience.' },
     { value: 'oot', name: 'OoT Only', description: 'Ocarina of Time Only.' },
+    { value: 'mm', name: 'MM Only', description: 'Majora\'s Mask Only.' },
   ],
   default: 'ootmm'
 }, {
@@ -58,14 +69,14 @@ export const SETTINGS = [{
   type: 'enum',
   description: 'The objective of the seed. The game will end when the specified goal is reached.',
   values: [
-    { value: 'any', name: 'Any Final Boss', description: 'You can beat either Ganon or Majora.' },
-    { value: 'ganon', name: 'Ganon', description: 'You must beat Ganon.' },
-    { value: 'majora', name: 'Majora', description: 'You must beat Majora.' },
-    { value: 'both', name: 'Ganon & Majora', description: 'You must beat Ganon AND Majora. You can do so in any order.' },
+    { value: 'any', name: 'Any Final Boss', description: 'You can beat either Ganon or Majora.', cond: hasOoTMM },
+    { value: 'ganon', name: 'Ganon', description: 'You must beat Ganon.', cond: hasOoT },
+    { value: 'majora', name: 'Majora', description: 'You must beat Majora.', cond: hasMM },
+    { value: 'both', name: 'Ganon & Majora', description: 'You must beat Ganon AND Majora. You can do so in any order.', cond: hasOoTMM },
     { value: 'triforce', name: 'Triforce Hunt', description: 'You must collect Triforce Pieces to win.' },
     { value: 'triforce3', name: 'Triforce Quest', description: 'You must collect the three parts of the Triforce (Power, Courage and Wisdom) to win. Specific hints will guide you.' },
   ],
-  default: 'both'
+  default: 'both',
 }, {
   key: 'triforceGoal',
   name: 'Triforce Goal',

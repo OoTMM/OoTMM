@@ -68,19 +68,19 @@ function validateSettingsStep(settings: Settings): Settings {
     }
   }
 
+  /* Hardcoded game checks */
+  if (s.goal === 'both') {
+    if (s.games === 'oot') s.goal = 'ganon';
+    if (s.games === 'mm') s.goal = 'majora';
+  }
+
   /* Specific validation */
   for (const data of SETTINGS) {
     const key = data.key;
     const cond = (data as any).cond;
     const min = (data as any).min;
     const max = (data as any).max;
-    let defaultV: any;
-
-    if (typeof data.default === 'function') {
-      defaultV = data.default(s);
-    } else {
-      defaultV = data.default;
-    }
+    const defaultV = data.default;
 
     if (cond && !cond(s)) {
       if (data.type === 'set') {
