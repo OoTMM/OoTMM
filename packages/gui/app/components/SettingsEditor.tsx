@@ -70,7 +70,7 @@ function Setting({ setting }: { setting: string }) {
       <Dropdown
         value={settings[data.key] as string}
         label={data.name}
-        options={(data as any).values}
+        options={(data as any).values.filter((x: any) => x.cond === undefined || x.cond(settings))}
         tooltip={(data as any).description ? data.key : undefined}
         onChange={(v) => setSettings({ [data.key]: v })}
       />
