@@ -1353,8 +1353,8 @@
 "Woods of Mystery":
   region: SOUTHERN_SWAMP
   exits:
-    "Swamp Front": "true"
-    "Woods of Mystery Grotto": "second_day"
+    "Woods of Mystery Lost": "true"
+    "Near Woods of Mystery Grotto": "second_day"
   events:
     KOUME: "has_red_or_blue_potion"
     MEET_KOUME: "true"
@@ -1366,7 +1366,6 @@
     "Woods of Mystery Grass S 1": "true"
     "Woods of Mystery Grass S 2": "true"
     "Woods of Mystery Grass S 3": "true"
-    "Woods of Mystery Grass SE": "second_day"
     "Woods of Mystery Grass W 1": "true"
     "Woods of Mystery Grass W 2": "true"
     "Woods of Mystery Grass Center 1": "true"
@@ -1384,10 +1383,22 @@
     "Woods of Mystery Grass NE 3": "true"
     "Woods of Mystery Grass NE 4": "true"
     "Woods of Mystery Grass NE 5": "true"
+"Near Woods of Mystery Grotto":
+  region: SOUTHERN_SWAMP
+  exits:
+    "Woods of Mystery": "second_day"
+    "Woods of Mystery Lost": "true"
+    "Woods of Mystery Grotto": "true"
+  locations:
+    "Woods of Mystery Grass SE": "true"
+"Woods of Mystery Lost":
+  region: SOUTHERN_SWAMP
+  exits:
+    "Swamp Front": "true"
 "Woods of Mystery Grotto":
   region: ENTRANCE
   exits:
-    "Woods of Mystery": "second_day"
+    "Near Woods of Mystery Grotto": "true"
   events:
     STICKS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_sticks)"
     NUTS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_nuts)"
