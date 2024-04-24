@@ -74,12 +74,29 @@ function validateSettingsStep(settings: Settings): Settings {
     const cond = (data as any).cond;
     const min = (data as any).min;
     const max = (data as any).max;
+    let defaultV: any;
+
+    if (typeof data.default === 'function') {
+      defaultV = data.default(s);
+    } else {
+      defaultV = data.default;
+    }
 
     if (cond && !cond(s)) {
       if (data.type === 'set') {
-        (s as any)[key] = { type: data.default };
+        (s as any)[key] = { type: defaultV };
       } else {
-        (s as any)[key] = data.default;
+        (s as any)[key] = defaultV;
+      }
+    }
+
+    if (data.type === 'enum') {
+      const curV = (s as any)[key];
+      const enumD = (data as any).values.find((x: any) => x.key === curV);
+      if (enumD) {
+        if (enumD.cond && !enumD.cond(s)) {
+          (s as any)[key] = defaultV;
+        }
       }
     }
 

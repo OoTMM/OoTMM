@@ -359,6 +359,23 @@ export class LogicPassWorld {
   }
 
   private loadAreas(game: Game, exprParser: ExprParser) {
+    if (game === 'mm' && this.state.settings.games === 'oot') {
+      this.world.areas['MM Clock Town'] = {
+        game: 'mm',
+        boss: false,
+        ageChange: false,
+        dungeon: null,
+        exits: {},
+        events: {},
+        locations: {},
+        gossip: {},
+        stay: null,
+        time: 'still',
+        region: 'NONE',
+      };
+      return;
+    }
+
     const data = WORLD[game];
     for (let areaSetName in data) {
       let areaSet = (data as any)[areaSetName];

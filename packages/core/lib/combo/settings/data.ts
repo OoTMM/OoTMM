@@ -11,6 +11,17 @@ const SETTING_PRICE = {
 } as const;
 
 export const SETTINGS = [{
+  key: 'games',
+  name: 'Games',
+  category: 'main',
+  type: 'enum',
+  description: 'The games.',
+  values: [
+    { value: 'ootmm', name: 'OoT+MM', description: 'The combo randomizer experience.' },
+    { value: 'oot', name: 'OoT Only', description: 'Ocarina of Time Only.' },
+  ],
+  default: 'ootmm'
+}, {
   key: 'mode',
   name: 'Mode',
   category: 'main',
