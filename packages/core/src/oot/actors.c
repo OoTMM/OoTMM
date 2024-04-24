@@ -175,8 +175,11 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
     case AC_EN_HEISHI3:
     case AC_EN_HEISHI4:
         return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_HYLIAN_GUARD));
+    case AC_EN_MU:
     case AC_EN_HY:
     case AC_EN_ANI:
+    case AC_EN_TG:
+    case AC_EN_NIW_GIRL:
         return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_HYLIAN_CITIZEN));
     case AC_EN_MA1:
     case AC_EN_MA2:
