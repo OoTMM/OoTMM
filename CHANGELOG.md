@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [22.0] - 2024-04-24
+
 ### Jokes
 
 - (**April Fools**) Implement "Daylight Saving Time in MM", removing one hour every night.
@@ -1148,7 +1150,8 @@ All notable changes to this project will be documented in this file.
 
 - Initial stable release.
 
-[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v21.0...HEAD
+[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v22.0...HEAD
+[22.0]: https://github.com/OoTMM/OoTMM/compare/v21.0...v22.0
 [21.0]: https://github.com/OoTMM/OoTMM/compare/v20.0...v21.0
 [20.0]: https://github.com/OoTMM/OoTMM/compare/v19.2...v20.0
 [19.2]: https://github.com/OoTMM/OoTMM/compare/v19.1...v19.2
