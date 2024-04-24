@@ -791,7 +791,7 @@ void comboTextAppendItemNameEx(char** b, s16 gi, int flags, int importance)
     comboTextAppendStr(b, itemName);
     comboTextAppendClearColor(b);
 
-    if (ambiguous)
+    if (ambiguous && !Config_Flag(CFG_ONLY_OOT) && !Config_Flag(CFG_ONLY_MM))
     {
         comboTextAppendStr(b, " (");
         if (gi >= GI_MM_RUPEE_GREEN)

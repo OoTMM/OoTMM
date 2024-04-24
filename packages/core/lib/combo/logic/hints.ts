@@ -399,6 +399,9 @@ export class LogicPassHints {
 
   private locImportance(loc: Location) {
     const pi = this.state.items.get(loc)!;
+    if (!pi)
+      return 0;
+
     if (!ItemHelpers.isItemMajor(pi.item)) {
       return -1;
     }

@@ -522,12 +522,6 @@ void hookPlay_Init(GameState_Play* play)
         gLastScene = play->sceneId;
     }
 
-    if (gSave.entrance == ENTR_OOT_SHOP_MASKS)
-    {
-        comboGameSwitch(play, ENTR_MM_CLOCK_TOWN);
-        return;
-    }
-
     /* Spawn Custom Triggers */
     CustomTriggers_Spawn(play);
     comboSpawnCustomWarps(play);
@@ -536,14 +530,6 @@ void hookPlay_Init(GameState_Play* play)
     {
         comboLoadCustomKeep();
     }
-
-#if defined(DEBUG)
-    if (!gSaveContext.gameMode && (play->gs.input[0].current.buttons & R_TRIG))
-    {
-        comboGameSwitch(play, ENTR_MM_CLOCK_TOWN);
-        return;
-    }
-#endif
 }
 
 void Play_UpdateWrapper(GameState_Play* play)
@@ -668,6 +654,16 @@ void Play_TransitionDone(GameState_Play* play)
         break;
     }
 
+    /* Handle game switch */
+    if (entrance == ENTR_OOT_SHOP_MASKS)
+    {
+        if (!Config_Flag(CFG_ONLY_OOT))
+            entrance = ENTR_MM_CLOCK_TOWN | MASK_FOREIGN_ENTRANCE;
+        else
+            entrance = ENTR_OOT_MARKET_FROM_MASK_SHOP;
+    }
+
+    /* Handle grottos */
     if (entrance == ENTR_OOT_INTERNAL_EXIT_GROTTO)
     {
         entrance = entrGrottoExit(play);

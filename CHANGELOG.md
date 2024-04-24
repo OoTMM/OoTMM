@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add the ability to play a single game.
 - Add ageless strength upgrades.
 - Add a setting to travel through time without the Master Sword.
 - Add a setting to play as swordless adult link.
