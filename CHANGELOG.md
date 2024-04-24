@@ -17,7 +17,6 @@ All notable changes to this project will be documented in this file.
 - Add ageless strength upgrades.
 - Add a setting to travel through time without the Master Sword.
 - Add a setting to play as swordless adult link.
-- Add a setting for Razor and Gilded Swords in OOT.
 - Render most of the ageless items.
 - Add rupee scaling, a setting where rupees are worth more if you have an upgraded wallet.
 - Add full overworld ER.
