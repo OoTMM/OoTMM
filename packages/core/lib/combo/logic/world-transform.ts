@@ -24,7 +24,7 @@ const BROKEN_ACTORS_CHECKS = [
   'OOT MQ Dodongo Cavern Grass Room Before Miniboss',
 ];
 
-const EXTRA_ITEMS = new Set([
+const EXTRA_ITEMS_OOT = new Set([
   Items.OOT_MASK_SKULL,
   Items.OOT_MASK_SPOOKY,
   Items.OOT_MASK_GERUDO,
@@ -33,6 +33,9 @@ const EXTRA_ITEMS = new Set([
   Items.OOT_MASK_BUNNY,
   Items.OOT_MASK_GORON,
   Items.OOT_MASK_ZORA,
+]);
+
+const EXTRA_ITEMS_MM = new Set([
   Items.MM_MASK_DEKU,
   Items.MM_SWORD,
 ]);
@@ -543,8 +546,8 @@ export class LogicPassWorldTransform {
     let extraTraps: Item[] = [];
 
     if (this.state.settings.trapRupoor) {
-      extraTraps.push(Items.OOT_TRAP_RUPOOR);
-      extraTraps.push(Items.MM_TRAP_RUPOOR);
+      if (['ootmm', 'oot'].includes(this.state.settings.games)) extraTraps.push(Items.OOT_TRAP_RUPOOR);
+      if (['ootmm', 'mm'].includes(this.state.settings.games)) extraTraps.push(Items.MM_TRAP_RUPOOR);
     }
 
     if (extraTraps.length === 0)
@@ -976,6 +979,16 @@ export class LogicPassWorldTransform {
     }
   }
 
+  private addExtraWallet() {
+    if (['ootmm', 'oot'].includes(this.state.settings.games)) {
+      this.addItem(Items.OOT_WALLET);
+    }
+
+    if (['ootmm', 'mm'].includes(this.state.settings.games)) {
+      this.addItem(Items.MM_WALLET);
+    }
+  }
+
   run() {
     const { settings } = this.state;
     this.state.monitor.log('Logic: World Transform');
@@ -1092,8 +1105,16 @@ export class LogicPassWorldTransform {
     this.makePools();
 
     /* Add extra items */
-    for (const item of EXTRA_ITEMS) {
-      this.addItem(item);
+    if (['ootmm', 'oot'].includes(this.state.settings.games)) {
+      for (const item of EXTRA_ITEMS_OOT) {
+        this.addItem(item);
+      }
+    }
+
+    if (['ootmm', 'mm'].includes(this.state.settings.games)) {
+      for (const item of EXTRA_ITEMS_MM) {
+        this.addItem(item);
+      }
     }
 
     /* Add souls */
@@ -1147,18 +1168,15 @@ export class LogicPassWorldTransform {
 
     /* Handle extra wallets */
     if (this.state.settings.childWallets) {
-      this.addItem(Items.OOT_WALLET);
-      this.addItem(Items.MM_WALLET);
+      this.addExtraWallet();
     }
 
     if (this.state.settings.colossalWallets) {
-      this.addItem(Items.OOT_WALLET);
-      this.addItem(Items.MM_WALLET);
+      this.addExtraWallet();
     }
 
     if (this.state.settings.bottomlessWallets) {
-      this.addItem(Items.OOT_WALLET);
-      this.addItem(Items.MM_WALLET);
+      this.addExtraWallet();
     }
 
     /* Handle progressive shields */
