@@ -129,7 +129,7 @@
   sw    v1,0x44(sp)
 .endm
 
-.macro HOOK_RESTORE
+.macro HOOK_RESTORE_KEEP_V0
   lw    ra,0x04(sp)
   lw    a0,0x08(sp)
   lw    a1,0x0c(sp)
@@ -145,9 +145,13 @@
   lw    t7,0x34(sp)
   lw    t8,0x38(sp)
   lw    t9,0x3c(sp)
-  lw    v0,0x40(sp)
   lw    v1,0x44(sp)
   addiu sp,0x50
+.endm
+
+.macro HOOK_RESTORE
+  lw    v0,0x40(sp)
+ HOOK_RESTORE_KEEP_V0
 .endm
 
 .macro HOOK_CALL addr

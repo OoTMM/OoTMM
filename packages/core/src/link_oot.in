@@ -202,6 +202,7 @@ Player_UsingItem = 0x80079bf8;
 Enemy_StartFinishingBlow = 0x80025b4c;
 Interface_LoadItemIconImpl = 0x8006fb50;
 CollisionCheck_GetSwordDamage = 0x80051a34;
+Play_InCutscene = 0x8009cb08;
 
 DeathWarp = 0x8009da10;
 
