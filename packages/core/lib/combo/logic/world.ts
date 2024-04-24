@@ -278,7 +278,34 @@ export class LogicPassWorld {
   private createWorld(): World {
     this.world = this.makeDefaultWorld();
     for (const g of GAMES) {
-      this.loadGame(g);
+      if (this.state.settings.games === 'ootmm' || this.state.settings.games === g)
+        this.loadGame(g);
+    }
+    if (this.state.settings.games === 'oot') {
+      for (const a of Object.values(this.world.areas)) {
+        delete a.exits['MM Clock Town'];
+      }
+    }
+    if (this.state.settings.games === 'mm') {
+      for (const a of Object.values(this.world.areas)) {
+        delete a.exits['OOT Market'];
+      }
+
+      this.world.areas['OOT SPAWN'] = {
+        game: 'mm',
+        boss: false,
+        ageChange: false,
+        dungeon: null,
+        exits: {
+          'MM Clock Town': exprTrue(),
+        },
+        events: {},
+        locations: {},
+        gossip: {},
+        stay: null,
+        time: 'still',
+        region: 'NONE',
+      };
     }
     return this.world;
   }
@@ -359,13 +386,15 @@ export class LogicPassWorld {
   }
 
   private loadAreas(game: Game, exprParser: ExprParser) {
-    if (game === 'mm' && this.state.settings.games === 'oot') {
-      this.world.areas['MM Clock Town'] = {
-        game: 'mm',
+    if (game === 'oot' && this.state.settings.games === 'mm') {
+      this.world.areas['OOT SPAWN'] = {
+        game: 'oot',
         boss: false,
         ageChange: false,
         dungeon: null,
-        exits: {},
+        exits: {
+          'MM Clock Town': exprTrue(),
+        },
         events: {},
         locations: {},
         gossip: {},

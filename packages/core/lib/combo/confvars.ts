@@ -179,6 +179,8 @@ export const CONFVARS = [
   'OOT_SWORDLESS_ADULT',
   'OOT_TIME_TRAVEL_REQUIRES_MS',
   'OOT_EXTRA_CHILD_SWORDS',
+  'ONLY_OOT',
+  'ONLY_MM',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

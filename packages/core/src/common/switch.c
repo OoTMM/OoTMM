@@ -77,7 +77,8 @@ NORETURN void comboGameSwitch(GameState_Play* play, u32 entrance)
     gComboCtx.entrance = entrance;
 
     netClose();
-    Save_DoSave(play, SF_OWL);
+    if (play)
+        Save_DoSave(play, SF_OWL);
     System_DisableInterrupts();
     waitSubsystems();
     comboGameSwitch2();
