@@ -91,6 +91,10 @@ export class LogicPassSpoiler {
         continue;
       }
       const v = (this.state.settings as any)[s];
+      const data = SETTINGS.find(x => x.key === s)! as any;
+      if (data && data.cond && !data.cond(this.state.settings)) {
+        continue;
+      }
       this.write(`${s}: ${v}`);
     }
     this.unindent('');
