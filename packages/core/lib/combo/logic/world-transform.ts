@@ -1121,6 +1121,7 @@ export class LogicPassWorldTransform {
     if (settings.soulsEnemyOot) this.addItems(ItemGroups.OOT_SOULS_ENEMY);
     if (settings.soulsBossOot) this.addItems(ItemGroups.OOT_SOULS_BOSS);
     if (settings.soulsNpcOot) this.addItems(ItemGroups.OOT_SOULS_NPC);
+    if (settings.soulsNpcMm) this.addItems(ItemGroups.MM_SOULS_NPC);
     if (settings.soulsMiscOot) this.addItems(ItemGroups.OOT_SOULS_MISC);
     if (settings.soulsEnemyMm) this.addItems(ItemGroups.MM_SOULS_ENEMY);
     if (settings.soulsBossMm) this.addItems(ItemGroups.MM_SOULS_BOSS);
