@@ -55,7 +55,8 @@ export const randomInt = (random: Random, max: number) => {
   }
 };
 
-export const sample = <T>(random: Random, arr: T[]): T => {
+export const sample = <T>(random: Random, aList: Iterable<T>): T => {
+  const arr = Array.from(aList).sort();
   if (arr.length === 0) {
     throw new Error('Empty Array');
   }
@@ -64,8 +65,8 @@ export const sample = <T>(random: Random, arr: T[]): T => {
   return arr[index];
 };
 
-export const shuffle = <T>(random: Random, arr: T[]): T[] => {
-  const copy = [...arr];
+export const shuffle = <T>(random: Random, aList: Iterable<T>): T[] => {
+  const copy = Array.from(aList).sort();
   for (let i = 0; i < copy.length - 1; i++) {
     const j = i + randomInt(random, copy.length - i);
     [copy[i], copy[j]] = [copy[j], copy[i]];

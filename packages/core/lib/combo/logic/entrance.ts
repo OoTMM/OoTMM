@@ -194,7 +194,7 @@ class WorldShuffler {
     const pool = entrances[poolName];
 
     /* Select a source */
-    const src = sample(this.random, [...pool.src]);
+    const src = sample(this.random, pool.src);
 
     /* Build the candidates list */
     let dstCandidates = new Set(pool.dst);
@@ -230,7 +230,7 @@ class WorldShuffler {
 
     /* Try to find a match */
     while (dstCandidates.size > 0) {
-      const dst = sample(this.random, [...dstCandidates]);
+      const dst = sample(this.random, dstCandidates);
       dstCandidates.delete(dst);
       const revSrc = this.reverseEntrance(src);
       const revDst = this.reverseEntrance(dst);
@@ -344,7 +344,7 @@ class WorldShuffler {
     const entrancesDst = new Set(entrances);
 
     while (entrancesSrc.size > 0) {
-      const src = sample(this.random, [...entrancesSrc]);
+      const src = sample(this.random, entrancesSrc);
       let dstCandidates = [...entrancesDst];
       if (this.settings.erWallmasters === 'ownGame') {
         dstCandidates = dstCandidates.filter(x => ENTRANCES[x].game === ENTRANCES[src].game);
@@ -371,9 +371,8 @@ class WorldShuffler {
     const entrancesDst = new Set(entrances);
 
     while (entrancesSrc.size > 0) {
-      const src = sample(this.random, [...entrancesSrc]);
-      let dstCandidates = [...entrancesDst];
-      const dst = sample(this.random, dstCandidates);
+      const src = sample(this.random, entrancesSrc);
+      const dst = sample(this.random, entrancesDst);
       this.overrides[src] = dst;
       entrancesSrc.delete(src);
       entrancesDst.delete(dst);
@@ -612,7 +611,7 @@ class WorldShuffler {
       if (locs.size === 0) {
         throw new LogicEntranceError(`Nowhere to place boss ${boss}`);
       }
-      const loc = sample(this.random, Array.from(locs));
+      const loc = sample(this.random, locs);
 
       /* Mark as placed */
       unplacedBosses.delete(boss);

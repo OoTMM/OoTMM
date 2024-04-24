@@ -102,7 +102,7 @@ export class LogicPassConfig {
           continue;
 
         /* Player doesn't have a clock, assign one at random */
-        const c = sample(this.state.random, Array.from(ItemGroups.CLOCKS));
+        const c = sample(this.state.random, ItemGroups.CLOCKS);
         const pi = makePlayerItem(c, playerId);
         countMapAdd(this.startingItems, pi);
       }

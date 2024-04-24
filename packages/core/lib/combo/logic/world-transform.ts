@@ -962,7 +962,7 @@ export class LogicPassWorldTransform {
       }
 
       for (let j = 0; j < count; ++j) {
-        const item = sample(this.state.random, Array.from(group));
+        const item = sample(this.state.random, group);
         const pi = makePlayerItem(item, i);
         this.addPlayerItem(pi);
       }
