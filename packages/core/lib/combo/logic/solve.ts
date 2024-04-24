@@ -375,33 +375,38 @@ export class LogicPassSolver {
     this.preCompleteDungeons();
 
     /* Place required items */
-    this.retry(() => {
-      this.pathfinderState = this.pathfinder.run(null);
+    if (this.input.settings.logic !== 'none') {
+      this.retry(() => {
+        this.pathfinderState = this.pathfinder.run(null);
 
-      for (;;) {
-        /* Pathfind */
-        this.pathfinderState = this.pathfinder.run(this.pathfinderState, { ganonMajora: this.input.settings.goal === 'triforce3', inPlace: true, recursive: true, items: this.state.items });
+        for (;;) {
+          /* Pathfind */
+          this.pathfinderState = this.pathfinder.run(this.pathfinderState, { ganonMajora: this.input.settings.goal === 'triforce3', inPlace: true, recursive: true, items: this.state.items });
 
-        /* Stop cond */
-        if (this.input.settings.logic === 'beatable') {
-          let goal: boolean;
-          if (this.input.settings.goal === 'triforce3') {
-            goal = this.pathfinderState.ganonMajora;
-          } else {
-            goal = this.pathfinderState.goal;
+          let goal = true;
+          if (this.input.settings.logic === 'allLocations') {
+            if (this.pathfinderState.locations.size !== this.locations.length) {
+              goal = false;
+            }
           }
+
+          if (goal) {
+            if (this.input.settings.goal === 'triforce3') {
+              goal = this.pathfinderState.ganonMajora;
+            } else {
+              goal = this.pathfinderState.goal;
+            }
+          }
+
           if (goal) {
             break;
           }
-        }
-        if (this.pathfinderState.locations.size === this.locations.length) {
-          break;
-        }
 
-        /* We need to place a required item */
-        this.randomPlace(this.state.pools.required);
-      }
-    });
+          /* We need to place a required item */
+          this.randomPlace(this.state.pools.required);
+        }
+      });
+    }
 
     /* At this point we have a beatable game */
     this.fillAll();
