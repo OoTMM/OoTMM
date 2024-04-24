@@ -92,7 +92,7 @@ function validateSettingsStep(settings: Settings): Settings {
 
     if (data.type === 'enum') {
       const curV = (s as any)[key];
-      const enumD = (data as any).values.find((x: any) => x.key === curV);
+      const enumD = (data as any).values.find((x: any) => x.value === curV);
       if (enumD) {
         if (enumD.cond && !enumD.cond(s)) {
           (s as any)[key] = defaultV;

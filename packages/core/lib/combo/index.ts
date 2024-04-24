@@ -47,8 +47,7 @@ export { SETTINGS, DEFAULT_SETTINGS, SETTINGS_CATEGORIES, TRICKS, GLITCHES, item
 
 export type Items = {[k: string]: number};
 
-export const itemPool = (aSettings: Partial<Settings>): Items => {
-  const settings: Settings = { ...DEFAULT_SETTINGS, ...aSettings };
+export const itemPool = (settings: Settings): Items => {
   const cosmetics = makeCosmetics({});
   const monitor = new Monitor({ onLog: () => {} });
   const random = makeRandomSettings({});
