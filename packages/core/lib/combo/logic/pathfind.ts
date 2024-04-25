@@ -774,8 +774,8 @@ export class Pathfinder {
         continue;
       }
       const ws = this.state.ws[worldId];
-      if (!ws.events.has('OOT_GANON_PRE_BOSS')) return false;
-      if (!ws.events.has('MM_MAJORA_PRE_BOSS')) return false;
+      if (this.settings.games !== 'mm' && !ws.events.has('OOT_GANON_PRE_BOSS')) return false;
+      if (this.settings.games !== 'oot' && !ws.events.has('MM_MAJORA_PRE_BOSS')) return false;
     }
 
     return true;
