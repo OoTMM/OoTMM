@@ -352,7 +352,7 @@
 - { id: OOT_SOUL_NPC_BEAN_SALESMAN, type: SOUL, add: [OOT_SOUL, 0x2026], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of the Bean Salesman" }
 - { id: OOT_SOUL_NPC_SCIENTIST, type: SOUL, add: [OOT_SOUL, 0x2027], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of the Scientist" }
 - { id: OOT_SOUL_NPC_INGO, type: SOUL, add: [OOT_SOUL, 0x2028], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of Ingo" }
-- { id: OOT_SOUL_NPC_PUNK_BOY, type: SOUL, add: [OOT_SOUL, 0x2029], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of the Punk Boy" }
+- { id: OOT_SOUL_NPC_GROG, type: SOUL, add: [OOT_SOUL, 0x2029], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of the Punk Boy" }
 - { id: OOT_SOUL_NPC_DOG_LADY, type: SOUL, add: [OOT_SOUL, 0x202a], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of the Dog Lady" }
 - { id: OOT_SOUL_NPC_CARPET_MAN, type: SOUL, add: [OOT_SOUL, 0x202b], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of the Carpet Man" }
 - { id: OOT_SOUL_NPC_OLD_HAG, type: SOUL, add: [OOT_SOUL, 0x202c], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of the Old Hag" }

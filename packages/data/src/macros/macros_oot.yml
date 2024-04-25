@@ -291,6 +291,7 @@
 "longshot_anywhere": "can_longshot && setting(hookshotAnywhereOot, logical)"
 "evade_gerudo": "can_use_bow || can_hookshot || has(GERUDO_CARD) || can_use_mask_stone"
 
+
 # Events
 "ganon_trial_light": "!setting(ganonTrials, Light) || event(GANON_TRIAL_LIGHT)"
 "ganon_trial_forest": "!setting(ganonTrials, Forest) || event(GANON_TRIAL_FOREST)"

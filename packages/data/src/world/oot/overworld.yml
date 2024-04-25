@@ -588,7 +588,7 @@
   exits:
     "Back Alley": "true"
   locations:
-    "Market Dog Lady HP": "event(RICHARD) && is_night && soul_npc(SOUL_NPC_CITIZEN)"
+    "Market Dog Lady HP": "event(RICHARD) && is_night && soul_dog_lady"
 "Market Back Alley East Home":
   region: ENTRANCE
   exits:
@@ -839,7 +839,7 @@
     "Lost Woods Skull Kid": "is_child && can_play_saria"
     "Lost Woods Memory Game": "is_child && can_play_minigame"
     "Lost Woods Scrub Sticks Upgrade": "is_child && business_scrub(0x00)"
-    "Lost Woods Odd Mushroom": "adult_trade(COJIRO)"
+    "Lost Woods Odd Mushroom": "soul_grog && adult_trade(COJIRO)"
     "Lost Woods Poacher's Saw": "adult_trade(ODD_POTION) && soul_npc(SOUL_NPC_KOKIRI)"
     "Lost Woods GS Soil Bridge": "gs_soil && can_damage_skull"
     "Lost Woods Grass 1": "can_cut_grass"
@@ -1022,7 +1022,7 @@
     "Kakariko Anju Egg": "is_adult && is_day && soul_npc(SOUL_NPC_CUCCO_LADY)"
     "Kakariko Anju Cojiro": "event(TALON_AWAKE) && is_day && soul_npc(SOUL_NPC_CUCCO_LADY)"
     "Kakariko Song Shadow": "is_adult && soul_npc(SOUL_NPC_SHEIK) && has(MEDALLION_FOREST) && has(MEDALLION_FIRE) && has(MEDALLION_WATER)"
-    "Kakariko Man on Roof": "(can_hookshot || trick(OOT_MAN_ON_ROOF) || climb_anywhere) && soul_npc(SOUL_NPC_CITIZEN)"
+    "Kakariko Man on Roof": "(can_hookshot || trick(OOT_MAN_ON_ROOF) || climb_anywhere) && soul_rooftop_man"
     "Kakariko GS Shooting Gallery": "gs_night && is_child"
     "Kakariko GS Tree": "gs_night && is_child"
     "Kakariko GS House of Skulltula": "gs_night && is_child"
@@ -1110,7 +1110,7 @@
   events:
     MAGIC: "adult_trade(ODD_MUSHROOM) && can_use_wallet(2) && has_bottle"
   locations:
-    "Kakariko Potion Shop Odd Potion": "adult_trade(ODD_MUSHROOM)"
+    "Kakariko Potion Shop Odd Potion": "soul_old_hag && adult_trade(ODD_MUSHROOM)"
 "Shooting Gallery Adult":
   region: ENTRANCE
   exits:
@@ -1506,7 +1506,7 @@
     ARROWS: "is_adult"
     MAGIC: "true"
   locations:
-    "Zora River Bean Seller": "is_child && can_use_wallet(1)"
+    "Zora River Bean Seller": "is_child && can_use_wallet(1) && soul_bean_salesman"
     "Zora River HP Pillar": "is_child || has_hover_boots || climb_anywhere || hookshot_anywhere || glitch_megaflip"
     "Zora River HP Platform": "is_child || has_hover_boots || climb_anywhere || hookshot_anywhere || glitch_megaflip"
     "Zora River Frogs Storms": "is_child && can_play_storms"
@@ -1722,8 +1722,8 @@
   exits:
     "Lake Hylia": "true"
   locations:
-    "Laboratory Dive": "has_scale_raw(2) || (trick(OOT_LAB_DIVE_NO_GOLD_SCALE) && has_iron_boots && can_hookshot)"
-    "Laboratory Eye Drops": "adult_trade(EYEBALL_FROG)"
+    "Laboratory Dive": "soul_scientist && (has_scale_raw(2) || (trick(OOT_LAB_DIVE_NO_GOLD_SCALE) && has_iron_boots && can_hookshot))"
+    "Laboratory Eye Drops": "soul_scientist && adult_trade(EYEBALL_FROG)"
     "Laboratory GS Crate": "gs && has_iron_boots && can_hookshot"
     "Laboratory Rupee 1": "can_dive_big"
     "Laboratory Rupee 2": "can_dive_big"

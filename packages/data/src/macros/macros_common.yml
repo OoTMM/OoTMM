@@ -44,5 +44,15 @@
 "soul_gs": "shared_soul_misc(SOUL_MISC_GS, SHARED_SOUL_MISC_GS)"
 "soul_business_scrub": "shared_soul_misc(SOUL_MISC_BUSINESS_SCRUB, SHARED_SOUL_MISC_BUSINESS_SCRUB)"
 
+# NPC Souls
+"shared_soul_npc(a, b)": "soul_npc(a)"
+"soul_chest_game_owner": "shared_soul_npc(SOUL_NPC_CHEST_GAME_OWNER, SHARED_SOUL_NPC_CHEST_GAME_OWNER)"
+"soul_rooftop_man": "shared_soul_npc(SOUL_NPC_ROOFTOP_MAN, SHARED_SOUL_NPC_ROOFTOP_MAN)"
+"soul_bean_salesman": "shared_soul_npc(SOUL_NPC_BEAN_SALESMAN, SHARED_SOUL_NPC_BEAN_SALESMAN)"
+"soul_scientist": "shared_soul_npc(SOUL_NPC_SCIENTIST, SHARED_SOUL_NPC_SCIENTIST)"
+"soul_grog": "shared_soul_npc(SOUL_NPC_GROG, SHARED_SOUL_NPC_GROG)"
+"soul_dog_lady": "shared_soul_npc(SOUL_NPC_DOG_LADY, SHARED_SOUL_NPC_DOG_LADY)"
+"soul_old_hag": "shared_soul_npc(SOUL_NPC_OLD_HAG, SHARED_SOUL_NPC_OLD_HAG)"
+
 # Settings
 "is_goal_triforce": "setting(goal, triforce) || setting(goal, triforce3)"
