@@ -52,6 +52,7 @@
 "soul_scientist": "shared_soul_npc(SOUL_NPC_SCIENTIST, SHARED_SOUL_NPC_SCIENTIST)"
 "soul_grog": "shared_soul_npc(SOUL_NPC_GROG, SHARED_SOUL_NPC_GROG)"
 "soul_dog_lady": "shared_soul_npc(SOUL_NPC_DOG_LADY, SHARED_SOUL_NPC_DOG_LADY)"
+"soul_carpet_man": "shared_soul_npc(SOUL_NPC_CARPET_MAN, SHARED_SOUL_NPC_CARPET_MAN)"
 "soul_old_hag": "shared_soul_npc(SOUL_NPC_OLD_HAG, SHARED_SOUL_NPC_OLD_HAG)"
 
 # Settings
