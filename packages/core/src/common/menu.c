@@ -216,6 +216,18 @@ static const char* const kSoulsNpcOot[] = {
     "Dampe",
     "Graveyard Kid",
     "Poe Collector",
+    "Composer Bros.",
+    "Chest Game Owner",
+    "Lovers",
+    "Astronomer",
+    "Bean Salesman",
+    "Scientist",
+    "Ingo",
+    "Punk Boy",
+    "Dog Lady",
+    "Carpet Man",
+    "Old Hag",
+    "Beggar",
 };
 
 static const char* const kSoulsEnemyMm[] = {
