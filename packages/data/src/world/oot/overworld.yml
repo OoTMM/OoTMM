@@ -588,7 +588,7 @@
   exits:
     "Back Alley": "true"
   locations:
-    "Market Dog Lady HP": "event(RICHARD) && is_night && soul_npc(SOUL_NPC_HYLIAN_CITIZEN)"
+    "Market Dog Lady HP": "event(RICHARD) && is_night && soul_npc(SOUL_NPC_CITIZEN)"
 "Market Back Alley East Home":
   region: ENTRANCE
   exits:
@@ -1022,7 +1022,7 @@
     "Kakariko Anju Egg": "is_adult && is_day && soul_npc(SOUL_NPC_CUCCO_LADY)"
     "Kakariko Anju Cojiro": "event(TALON_AWAKE) && is_day && soul_npc(SOUL_NPC_CUCCO_LADY)"
     "Kakariko Song Shadow": "is_adult && soul_npc(SOUL_NPC_SHEIK) && has(MEDALLION_FOREST) && has(MEDALLION_FIRE) && has(MEDALLION_WATER)"
-    "Kakariko Man on Roof": "(can_hookshot || trick(OOT_MAN_ON_ROOF) || climb_anywhere) && soul_npc(SOUL_NPC_HYLIAN_CITIZEN)"
+    "Kakariko Man on Roof": "(can_hookshot || trick(OOT_MAN_ON_ROOF) || climb_anywhere) && soul_npc(SOUL_NPC_CITIZEN)"
     "Kakariko GS Shooting Gallery": "gs_night && is_child"
     "Kakariko GS Tree": "gs_night && is_child"
     "Kakariko GS House of Skulltula": "gs_night && is_child"

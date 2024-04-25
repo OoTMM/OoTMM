@@ -325,7 +325,7 @@
 - { id: OOT_SOUL_NPC_KOKIRI, type: SOUL, add: [OOT_SOUL, 0x200a], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of Kokiri" }
 - { id: OOT_SOUL_NPC_KOKIRI_SHOPKEEPER, type: SOUL, add: [OOT_SOUL, 0x200b], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of Kokiri Shopkeeper" }
 - { id: OOT_SOUL_NPC_HYLIAN_GUARD, type: SOUL, add: [OOT_SOUL, 0x200c], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of Hylian Guard" }
-- { id: OOT_SOUL_NPC_HYLIAN_CITIZEN, type: SOUL, add: [OOT_SOUL, 0x200d], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of Hylian Citizen" }
+- { id: OOT_SOUL_NPC_CITIZEN, type: SOUL, add: [OOT_SOUL, 0x200d], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of Citizens" }
 - { id: OOT_SOUL_NPC_MALON, type: SOUL, add: [OOT_SOUL, 0x200e], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of Malon" }
 - { id: OOT_SOUL_NPC_TALON, type: SOUL, add: [OOT_SOUL, 0x200f], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of Talon" }
 - { id: OOT_SOUL_NPC_FISHING_POND_OWNER, type: SOUL, add: [OOT_SOUL, 0x2010], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of Fishing Pond Owner" }
@@ -340,24 +340,23 @@
 - { id: OOT_SOUL_NPC_BOMBCHU_SHOPKEEPER, type: SOUL, add: [OOT_SOUL, 0x2019], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of Bombchu Shopkeeper" }
 - { id: OOT_SOUL_NPC_POTION_SHOPKEEPER, type: SOUL, add: [OOT_SOUL, 0x201a], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of Potion Shopkeeper" }
 - { id: OOT_SOUL_NPC_BOMBCHU_BOWLING_LADY, type: SOUL, add: [OOT_SOUL, 0x201b], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of Bowling Lady" }
-- { id: OOT_SOUL_NPC_TRASURE_CHEST_GAME_OWNER, type: SOUL, add: [OOT_SOUL, 0x201c], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of Treasure Game Owner" }
+- { id: OOT_SOUL_NPC_CHEST_GAME_OWNER, type: SOUL, add: [OOT_SOUL, 0x201c], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of Chest Game Owner" }
 - { id: OOT_SOUL_NPC_SHOOTING_GALLERY_OWNER, type: SOUL, add: [OOT_SOUL, 0x201d], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of Shooting Gallery Owner" }
 - { id: OOT_SOUL_NPC_DAMPE, type: SOUL, add: [OOT_SOUL, 0x201f], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of Dampe" }
 - { id: OOT_SOUL_NPC_GRAVEYARD_KID, type: SOUL, add: [OOT_SOUL, 0x2020], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of Graveyard Kid" }
 - { id: OOT_SOUL_NPC_POE_COLLECTOR, type: SOUL, add: [OOT_SOUL, 0x2021], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of Poe Collector" }
 - { id: OOT_SOUL_NPC_COMPOSER_BROS, type: SOUL, add: [OOT_SOUL, 0x2022], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of Composer Bros." }
-- { id: OOT_SOUL_NPC_CHEST_GAME_OWNER, type: SOUL, add: [OOT_SOUL, 0x2023], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of the Chest Game Owner" }
-- { id: OOT_SOUL_NPC_LOVERS, type: SOUL, add: [OOT_SOUL, 0x2024], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of the Lovers" }
-- { id: OOT_SOUL_NPC_ASTRONOMER, type: SOUL, add: [OOT_SOUL, 0x2025], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of the Astronomer" }
-- { id: OOT_SOUL_NPC_ROOFTOP_MAN, type: SOUL, add: [OOT_SOUL, 0x2026], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of the Rooftop Man" }
-- { id: OOT_SOUL_NPC_BEAN_SALESMAN, type: SOUL, add: [OOT_SOUL, 0x2027], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of the Bean Salesman" }
-- { id: OOT_SOUL_NPC_SCIENTIST, type: SOUL, add: [OOT_SOUL, 0x2028], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of the Scientist" }
-- { id: OOT_SOUL_NPC_INGO, type: SOUL, add: [OOT_SOUL, 0x2029], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of Ingo" }
-- { id: OOT_SOUL_NPC_PUNK_BOY, type: SOUL, add: [OOT_SOUL, 0x202a], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of the Punk Boy" }
-- { id: OOT_SOUL_NPC_DOG_LADY, type: SOUL, add: [OOT_SOUL, 0x202b], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of the Dog Lady" }
-- { id: OOT_SOUL_NPC_CARPET_MAN, type: SOUL, add: [OOT_SOUL, 0x202c], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of the Carpet Man" }
-- { id: OOT_SOUL_NPC_OLD_HAG, type: SOUL, add: [OOT_SOUL, 0x202d], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of the Old Hag" }
-- { id: OOT_SOUL_NPC_BEGGAR, type: SOUL, add: [OOT_SOUL, 0x202e], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of the Beggar" }
+- { id: OOT_SOUL_NPC_LOVERS, type: SOUL, add: [OOT_SOUL, 0x2023], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of the Lovers" }
+- { id: OOT_SOUL_NPC_ASTRONOMER, type: SOUL, add: [OOT_SOUL, 0x2024], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of the Astronomer" }
+- { id: OOT_SOUL_NPC_ROOFTOP_MAN, type: SOUL, add: [OOT_SOUL, 0x2025], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of the Rooftop Man" }
+- { id: OOT_SOUL_NPC_BEAN_SALESMAN, type: SOUL, add: [OOT_SOUL, 0x2026], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of the Bean Salesman" }
+- { id: OOT_SOUL_NPC_SCIENTIST, type: SOUL, add: [OOT_SOUL, 0x2027], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of the Scientist" }
+- { id: OOT_SOUL_NPC_INGO, type: SOUL, add: [OOT_SOUL, 0x2028], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of Ingo" }
+- { id: OOT_SOUL_NPC_PUNK_BOY, type: SOUL, add: [OOT_SOUL, 0x2029], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of the Punk Boy" }
+- { id: OOT_SOUL_NPC_DOG_LADY, type: SOUL, add: [OOT_SOUL, 0x202a], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of the Dog Lady" }
+- { id: OOT_SOUL_NPC_CARPET_MAN, type: SOUL, add: [OOT_SOUL, 0x202b], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of the Carpet Man" }
+- { id: OOT_SOUL_NPC_OLD_HAG, type: SOUL, add: [OOT_SOUL, 0x202c], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of the Old Hag" }
+- { id: OOT_SOUL_NPC_BEGGAR, type: SOUL, add: [OOT_SOUL, 0x202d], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of the Beggar" }
 - { id: OOT_BOTTLE_POTION_RED, item: OOT_POTION_RED, type: MAJOR, add: OOT_BOTTLE_NEW, flags: 0x80, draw: BOTTLE_POTION, object: [mm, 0x0196], name:  "a <C1>bottle of Red Potion" }
 - { id: OOT_BOTTLE_POTION_GREEN, item: OOT_POTION_GREEN, type: MAJOR, add: OOT_BOTTLE_NEW, flags: 0x80, draw: [BOTTLE_POTION, 0x01], object: [mm, 0x0196], name:  "a <C1>bottle of Green Potion" }
 - { id: OOT_BOTTLE_POTION_BLUE, item: OOT_POTION_BLUE, type: MAJOR, add: OOT_BOTTLE_NEW, flags: 0x80, draw: [BOTTLE_POTION, 0x02], object: [mm, 0x0196], name:  "a <C1>bottle of Blue Potion" }

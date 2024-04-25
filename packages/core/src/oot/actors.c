@@ -14,26 +14,35 @@ static int opt(int x)
     return x > 0 ? 1 : -1;
 }
 
-/*
-OOT_SOUL_NPC_COMPOSER_BROS
-OOT_SOUL_NPC_CHEST_GAME_OWNER
-OOT_SOUL_NPC_LOVERS
-OOT_SOUL_NPC_ASTRONOMER
-OOT_SOUL_NPC_ROOFTOP_MAN
-OOT_SOUL_NPC_BEAN_SALESMAN
-OOT_SOUL_NPC_SCIENTIST
-OOT_SOUL_NPC_INGO
-OOT_SOUL_NPC_PUNK_BOY
-OOT_SOUL_NPC_DOG_LADY
-OOT_SOUL_NPC_CARPET_MAN
-OOT_SOUL_NPC_OLD_HAG
-OOT_SOUL_NPC_BEGGAR
-*/
-
 static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
 {
     switch (actorId)
     {
+    case AC_EN_DS:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_OLD_HAG));
+    case AC_EN_JS:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_CARPET_MAN));
+    case AC_EN_HS:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_PUNK_BOY));
+    case AC_EN_IN:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_INGO));
+    case AC_EN_MK:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_SCIENTIST));
+    case AC_EN_MS:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_BEAN_SALESMAN));
+    case AC_EN_TG:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_LOVERS));
+    case AC_EN_TAKARA_MAN:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_CHEST_GAME_OWNER));
+    case AC_EN_POH:
+        switch (variable)
+        {
+        case 2:
+        case 3:
+            return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_COMPOSER_BROS));
+        default:
+            return 1;
+        }
     case AC_EN_DNS:
     case AC_EN_SHOPNUTS:
         return opt(comboHasSoulOot(GI_OOT_SOUL_MISC_BUSINESS_SCRUB));
@@ -191,12 +200,19 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
     case AC_EN_HEISHI3:
     case AC_EN_HEISHI4:
         return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_HYLIAN_GUARD));
-    case AC_EN_MU:
-    case AC_EN_HY:
     case AC_EN_ANI:
-    case AC_EN_TG:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_ROOFTOP_MAN));
+    case AC_EN_MU:
     case AC_EN_NIW_GIRL:
-        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_HYLIAN_CITIZEN));
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_CITIZEN));
+    case AC_EN_HY:
+        switch (variable & 0x3f)
+        {
+        case 0x00: return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_DOG_LADY));
+        case 0x05: return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_BEGGAR));
+        case 0x07: return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_ASTRONOMER));
+        default: return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_CITIZEN));
+        }
     case AC_EN_MA1:
     case AC_EN_MA2:
     case AC_EN_MA3:
@@ -227,8 +243,6 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
     case AC_EN_BOM_BOWL_MAN:
     case AC_BG_BOWL_WALL:
         return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_BOMBCHU_BOWLING_LADY));
-    case AC_EN_TAKARA_MAN:
-        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_TRASURE_CHEST_GAME_OWNER));
     case AC_EN_SYATEKI_MAN:
         return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_SHOOTING_GALLERY_OWNER));
     case AC_EN_TK:

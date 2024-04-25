@@ -229,7 +229,7 @@
 "small_keys_shadow(n)": "small_keys(Shadow, SMALL_KEY_SHADOW, KEY_RING_SHADOW, n)"
 "small_keys_spirit(n)": "small_keys(Spirit, SMALL_KEY_SPIRIT, KEY_RING_SPIRIT, n)"
 "small_keys_hideout(n)": "has_skeleton_key || has(KEY_RING_GF) || has(SMALL_KEY_GF, n)"
-"small_keys_tcg(n)": "cond(setting(smallKeyShuffleChestGame, vanilla), has_lens_strict && can_use_wallet(1) && soul_npc(SOUL_NPC_TRASURE_CHEST_GAME_OWNER), has_skeleton_key || has(KEY_RING_TCG) || has(SMALL_KEY_TCG, n))"
+"small_keys_tcg(n)": "cond(setting(smallKeyShuffleChestGame, vanilla), has_lens_strict && can_use_wallet(1) && soul_npc(SOUL_NPC_CHEST_GAME_OWNER), has_skeleton_key || has(KEY_RING_TCG) || has(SMALL_KEY_TCG, n))"
 "small_keys_hideout_all": "setting(gerudoFortress, open) || cond(setting(gerudoFortress, single), small_keys_hideout(1), small_keys_hideout(4))"
 "small_keys_botw(n)": "small_keys(BotW, SMALL_KEY_BOTW, KEY_RING_BOTW, n)"
 "small_keys_gtg(n)": "small_keys(GTG, SMALL_KEY_GTG, KEY_RING_GTG, n)"
