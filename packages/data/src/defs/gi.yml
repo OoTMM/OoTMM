@@ -693,7 +693,8 @@
 - { id: MM_SOUL_NPC_CARPET_MAN, type: SOUL, add: [MM_SOUL, 0x202f], flags: 0xa0, draw: SOUL_NPC, object: [mm, 0x0125], name: "the <C1>Soul of Swordsman" }
 - { id: MM_SOUL_NPC_OLD_HAG, type: SOUL, add: [MM_SOUL, 0x2030], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of Anju's Grandmother" }
 - { id: MM_SOUL_NPC_TOURIST_CENTER, type: SOUL, add: [MM_SOUL, 0x2031], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of Boat Cruise Man" }
-- { id: MM_SOUL_NPC_MOON_CHILDREN, type: SOUL, add: [MM_SOUL, 0x2032], flags: 0xa0, draw: SOUL_NPC, object: [mm, 0x0125], name: "the <C1>Soul of Moon Children" }
+- { id: MM_SOUL_NPC_BANKER, type: SOUL, add: [MM_SOUL, 0x2032], flags: 0x80, draw: SOUL_NPC, object: [oot, 0x015c], name: "the <C1>Soul of the Banker" }
+- { id: MM_SOUL_NPC_MOON_CHILDREN, type: SOUL, add: [MM_SOUL, 0x2033], flags: 0xa0, draw: SOUL_NPC, object: [mm, 0x0125], name: "the <C1>Soul of Moon Children" }
 - { id: MM_SOUL_MISC_GS, type: SOUL, add: [MM_SOUL, 0x3000], flags: 0xa0, draw: SOUL_MISC, object: [mm, 0x0125], name: "the <C1>Soul of Gold Skulltulas" }
 - { id: MM_SOUL_MISC_BUSINESS_SCRUB, type: SOUL, add: [MM_SOUL, 0x3001], flags: 0xa0, draw: SOUL_MISC, object: [mm, 0x0125], name: "the <C1>Soul of Business Scrubs" }
 - { id: MM_KEY_RING, type: KEY, add: [MM_KEY_RING, 0xffff], flags: 0xa0, draw: SMALL_KEY, object: [mm, 0x0086], name: "the <C0>Key Ring" }

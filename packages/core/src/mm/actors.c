@@ -242,6 +242,8 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
 {
     switch (actorId)
     {
+    case AC_EN_GINKO_MAN:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_BANKER));
     case AC_EN_AN:
         return opt(comboHasSoulMm(GI_MM_SOUL_NPC_ANJU));
     case AC_EN_GURUGURU:

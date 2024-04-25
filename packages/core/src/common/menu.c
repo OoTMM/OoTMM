@@ -325,6 +325,7 @@ static const char* const kSoulsNpcMm[] = {
     "Swordsman",
     "Anju\'s Grandmother",
     "Boat Cruise Man",
+    "Banker",
     "Moon Children",
 };
 

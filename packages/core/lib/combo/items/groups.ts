@@ -633,6 +633,7 @@ export const MM_SOULS_NPC = new Set([
   Items.MM_SOUL_NPC_CARPET_MAN,
   Items.MM_SOUL_NPC_OLD_HAG,
   Items.MM_SOUL_NPC_TOURIST_CENTER,
+  Items.MM_SOUL_NPC_BANKER,
   Items.MM_SOUL_NPC_MOON_CHILDREN,
 ]);
 
