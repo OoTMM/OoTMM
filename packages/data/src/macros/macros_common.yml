@@ -45,7 +45,7 @@
 "soul_business_scrub": "shared_soul_misc(SOUL_MISC_BUSINESS_SCRUB, SHARED_SOUL_MISC_BUSINESS_SCRUB)"
 
 # NPC Souls
-"shared_soul_npc(a, b)": "soul_npc(a)"
+"shared_soul_npc(a, b)": "cond(setting(sharedSoulsNpc), soul_npc(b), soul_npc(a))"
 "soul_fishing_pond_owner": "shared_soul_npc(SOUL_NPC_FISHING_POND_OWNER, SHARED_SOUL_NPC_FISHING_POND_OWNER)"
 "soul_zora_shopkeeper": "shared_soul_npc(SOUL_NPC_ZORA_SHOPKEEPER, SHARED_SOUL_NPC_ZORA_SHOPKEEPER)"
 "soul_zora": "shared_soul_npc(SOUL_NPC_ZORA, SHARED_SOUL_NPC_ZORA)"
