@@ -271,8 +271,6 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
         return opt(comboHasSoulMm(GI_MM_SOUL_NPC_BLACKSMITHS));
     case AC_EN_GB2:
         return opt(comboHasSoulMm(GI_MM_SOUL_NPC_POE_COLLECTOR));
-    case AC_EN_OWL:
-        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_OWL));
     case AC_EN_TAB:
         return opt(comboHasSoulMm(GI_MM_SOUL_NPC_TALON));
     case AC_EN_BJI_01:
@@ -308,7 +306,7 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
         }
     case AC_EN_JGAME_TSN:
     case AC_EN_TSN:
-        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_FISHERMAN));
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_CHEST_GAME_OWNER));
     case AC_EN_LIFT_NUTS:
         return opt(comboHasSoulMm(GI_MM_SOUL_NPC_PLAYGROUND_SCRUBS));
     case AC_EN_DNP:

@@ -314,7 +314,6 @@ static const char* const kSoulsNpcMm[] = {
     "Keg Trial Goron",
     "Mr. Barten",
     "Astronomer",
-    "Owl",
     "Poe Hut Owner",
     "Blacksmiths",
     "Chest Game Lady",

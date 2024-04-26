@@ -1018,9 +1018,9 @@
     "Impa House Front": "true"
     "ReDead Grotto": "hidden_grotto_bomb"
   locations:
-    "Kakariko Anju Bottle": "is_child && is_day && soul_npc(SOUL_NPC_CUCCO_LADY)"
-    "Kakariko Anju Egg": "is_adult && is_day && soul_npc(SOUL_NPC_CUCCO_LADY)"
-    "Kakariko Anju Cojiro": "event(TALON_AWAKE) && is_day && soul_npc(SOUL_NPC_CUCCO_LADY)"
+    "Kakariko Anju Bottle": "is_child && is_day && soul_anju"
+    "Kakariko Anju Egg": "is_adult && is_day && soul_anju"
+    "Kakariko Anju Cojiro": "event(TALON_AWAKE) && is_day && soul_anju"
     "Kakariko Song Shadow": "is_adult && soul_npc(SOUL_NPC_SHEIK) && has(MEDALLION_FOREST) && has(MEDALLION_FIRE) && has(MEDALLION_WATER)"
     "Kakariko Man on Roof": "(can_hookshot || trick(OOT_MAN_ON_ROOF) || climb_anywhere) && soul_rooftop_man"
     "Kakariko GS Shooting Gallery": "gs_night && is_child"
@@ -2002,7 +2002,7 @@
     "Gerudo Valley Tent": "is_adult || trick(OOT_TENT_CHILD)"
   locations:
     "Gerudo Valley Chest": "(is_adult && (can_hammer || hookshot_anywhere || climb_anywhere)) || time_travel_at_will"
-    "Gerudo Valley Broken Goron Sword": "adult_trade(POACHER_SAW) && soul_npc(SOUL_NPC_CARPENTERS)"
+    "Gerudo Valley Broken Goron Sword": "adult_trade(POACHER_SAW) && soul_carpenters"
     "Gerudo Valley GS Tent": "is_adult && gs_night && (can_collect_distance || (climb_anywhere && (has_explosives || has(SWORD_BIGGORON) || has_ranged_weapon || can_use_din)))"
     "Gerudo Valley GS Pillar": "is_adult && can_collect_distance && gs_night"
     "Gerudo Valley Crate HP": "climb_anywhere"

@@ -46,6 +46,9 @@
 
 # NPC Souls
 "shared_soul_npc(a, b)": "soul_npc(a)"
+"soul_ruto": "shared_soul_npc(SOUL_NPC_RUTO, SHARED_SOUL_NPC_RUTO)"
+"soul_anju": "shared_soul_npc(SOUL_NPC_ANJU, SHARED_SOUL_NPC_ANJU)"
+"soul_carpenters": "shared_soul_npc(SOUL_NPC_CARPENTERS, SHARED_SOUL_NPC_CARPENTERS)"
 "soul_chest_game_owner": "shared_soul_npc(SOUL_NPC_CHEST_GAME_OWNER, SHARED_SOUL_NPC_CHEST_GAME_OWNER)"
 "soul_rooftop_man": "shared_soul_npc(SOUL_NPC_ROOFTOP_MAN, SHARED_SOUL_NPC_ROOFTOP_MAN)"
 "soul_bean_salesman": "shared_soul_npc(SOUL_NPC_BEAN_SALESMAN, SHARED_SOUL_NPC_BEAN_SALESMAN)"

@@ -1850,6 +1850,13 @@ export const SETTINGS = [{
   default: false,
   cond: (s: any) => hasOoTMM(s) && s.soulsEnemyOot && s.soulsEnemyMm,
 }, {
+  key: 'sharedSoulsNpc',
+  name: 'Shared NPC Souls',
+  category: 'items.shared',
+  type: 'boolean',
+  default: false,
+  cond: (s: any) => hasOoTMM(s) && s.soulsNpcOot && s.soulsNpcMm,
+}, {
   key: 'sharedSoulsMisc',
   name: 'Shared Misc. Souls',
   category: 'items.shared',

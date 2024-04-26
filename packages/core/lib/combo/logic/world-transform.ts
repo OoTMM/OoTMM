@@ -215,6 +215,7 @@ const ITEM_POOL_PLENTIFUL = new Set([
   ...ItemGroups.MM_SOULS_BOSS,
   ...ItemGroups.MM_SOULS_MISC,
   ...ItemGroups.SHARED_SOULS_ENEMY,
+  ...ItemGroups.SHARED_SOULS_NPC,
   ...ItemGroups.SHARED_SOULS_MISC,
   Items.OOT_BUTTON_A,
   Items.OOT_BUTTON_C_RIGHT,

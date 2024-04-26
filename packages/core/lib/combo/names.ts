@@ -585,7 +585,7 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   OOT_SOUL_NPC_KING_ZORA: "Soul of King Zora",
   OOT_SOUL_NPC_ZELDA: "Soul of Zelda",
   OOT_SOUL_NPC_SHEIK: "Soul of Sheik",
-  OOT_SOUL_NPC_CUCCO_LADY: "Soul of Cucco Lady",
+  OOT_SOUL_NPC_ANJU: "Soul of Cucco Lady",
   OOT_SOUL_NPC_CARPENTERS: "Soul of Carpenters",
   OOT_SOUL_NPC_GURU_GURU: "Soul of Guru-Guru",
   OOT_SOUL_NPC_MIDO: "Soul of Mido",
