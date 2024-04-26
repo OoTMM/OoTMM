@@ -288,7 +288,8 @@ static const char* const kSoulsBossMm[] = {
 
 static const char* const kSoulsNpcMm[] = {
     "Madame Aroma",
-    "Archery Owners",
+    "Town Archery Owner",
+    "Swamp Archery Owner",
     "Gorons",
     "Baby Goron",
     "Bombs Shopkeeper",
@@ -319,8 +320,8 @@ static const char* const kSoulsNpcMm[] = {
     "Chest Game Lady",
     "Tingle",
     "Toilet Hand",
-    "Trading Post Day Tender",
-    "Trading Post Night Tender",
+    "Trading Post Owner",
+    "Part-Timer",
     "Zoras",
     "Zora Shopkeeper",
     "Romani/Cremia",

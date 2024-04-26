@@ -477,14 +477,14 @@
   exits:
     "Market": "true"
   locations:
-    "Market Bazaar Item 1": "shop_price(0x20) && soul_npc(SOUL_NPC_BAZAAR_SHOPKEEPER)"
-    "Market Bazaar Item 2": "shop_price(0x21) && soul_npc(SOUL_NPC_BAZAAR_SHOPKEEPER)"
-    "Market Bazaar Item 3": "shop_price(0x22) && soul_npc(SOUL_NPC_BAZAAR_SHOPKEEPER)"
-    "Market Bazaar Item 4": "shop_price(0x23) && soul_npc(SOUL_NPC_BAZAAR_SHOPKEEPER)"
-    "Market Bazaar Item 5": "shop_price(0x24) && soul_npc(SOUL_NPC_BAZAAR_SHOPKEEPER)"
-    "Market Bazaar Item 6": "shop_price(0x25) && soul_npc(SOUL_NPC_BAZAAR_SHOPKEEPER)"
-    "Market Bazaar Item 7": "shop_price(0x26) && soul_npc(SOUL_NPC_BAZAAR_SHOPKEEPER)"
-    "Market Bazaar Item 8": "shop_price(0x27) && soul_npc(SOUL_NPC_BAZAAR_SHOPKEEPER)"
+    "Market Bazaar Item 1": "shop_price(0x20) && soul_bazaar_shopkeeper"
+    "Market Bazaar Item 2": "shop_price(0x21) && soul_bazaar_shopkeeper"
+    "Market Bazaar Item 3": "shop_price(0x22) && soul_bazaar_shopkeeper"
+    "Market Bazaar Item 4": "shop_price(0x23) && soul_bazaar_shopkeeper"
+    "Market Bazaar Item 5": "shop_price(0x24) && soul_bazaar_shopkeeper"
+    "Market Bazaar Item 6": "shop_price(0x25) && soul_bazaar_shopkeeper"
+    "Market Bazaar Item 7": "shop_price(0x26) && soul_bazaar_shopkeeper"
+    "Market Bazaar Item 8": "shop_price(0x27) && soul_bazaar_shopkeeper"
 "Market Potion Shop":
   region: ENTRANCE
   exits:
@@ -503,14 +503,14 @@
   exits:
     "Back Alley": "true"
   locations:
-    "Market Bombchu Shop Item 1": "shop_price(0x08) && soul_npc(SOUL_NPC_BOMBCHU_SHOPKEEPER)"
-    "Market Bombchu Shop Item 2": "shop_price(0x09) && soul_npc(SOUL_NPC_BOMBCHU_SHOPKEEPER)"
-    "Market Bombchu Shop Item 3": "shop_price(0x0a) && soul_npc(SOUL_NPC_BOMBCHU_SHOPKEEPER)"
-    "Market Bombchu Shop Item 4": "shop_price(0x0b) && soul_npc(SOUL_NPC_BOMBCHU_SHOPKEEPER)"
-    "Market Bombchu Shop Item 5": "shop_price(0x0c) && soul_npc(SOUL_NPC_BOMBCHU_SHOPKEEPER)"
-    "Market Bombchu Shop Item 6": "shop_price(0x0d) && soul_npc(SOUL_NPC_BOMBCHU_SHOPKEEPER)"
-    "Market Bombchu Shop Item 7": "shop_price(0x0e) && soul_npc(SOUL_NPC_BOMBCHU_SHOPKEEPER)"
-    "Market Bombchu Shop Item 8": "shop_price(0x0f) && soul_npc(SOUL_NPC_BOMBCHU_SHOPKEEPER)"
+    "Market Bombchu Shop Item 1": "shop_price(0x08) && soul_bombchu_shopkeeper"
+    "Market Bombchu Shop Item 2": "shop_price(0x09) && soul_bombchu_shopkeeper"
+    "Market Bombchu Shop Item 3": "shop_price(0x0a) && soul_bombchu_shopkeeper"
+    "Market Bombchu Shop Item 4": "shop_price(0x0b) && soul_bombchu_shopkeeper"
+    "Market Bombchu Shop Item 5": "shop_price(0x0c) && soul_bombchu_shopkeeper"
+    "Market Bombchu Shop Item 6": "shop_price(0x0d) && soul_bombchu_shopkeeper"
+    "Market Bombchu Shop Item 7": "shop_price(0x0e) && soul_bombchu_shopkeeper"
+    "Market Bombchu Shop Item 8": "shop_price(0x0f) && soul_bombchu_shopkeeper"
 "Market Pot House":
   region: ENTRANCE
   exits:
@@ -518,7 +518,7 @@
   events:
     RUPEES: "true"
   locations:
-    "Market Pot House Big Poes": "is_adult && has_big_poe && soul_npc(SOUL_NPC_POE_COLLECTOR)"
+    "Market Pot House Big Poes": "is_adult && has_big_poe && soul_poe_collector"
     "Market Pot House GS": "gs && is_child"
     "Market Pot House Child Pot Ground 1": "is_child"
     "Market Pot House Child Pot Ground 2": "is_child"
@@ -606,14 +606,14 @@
     BOMBS: "can_use_wallet(2)"
     BOMBCHU: "can_use_wallet(1)"
   locations:
-    "Bombchu Bowling Reward 1": "(has_bomb_bag || has_bombchu_license) && can_use_wallet(1) && soul_npc(SOUL_NPC_BOMBCHU_BOWLING_LADY)"
-    "Bombchu Bowling Reward 2": "(has_bomb_bag || has_bombchu_license) && can_use_wallet(1) && soul_npc(SOUL_NPC_BOMBCHU_BOWLING_LADY)"
+    "Bombchu Bowling Reward 1": "(has_bomb_bag || has_bombchu_license) && can_use_wallet(1) && soul_bombchu_bowling_lady"
+    "Bombchu Bowling Reward 2": "(has_bomb_bag || has_bombchu_license) && can_use_wallet(1) && soul_bombchu_bowling_lady"
 "Shooting Gallery Child":
   region: ENTRANCE
   exits:
     "Market": "true"
   locations:
-    "Shooting Gallery Child": "is_child && can_use_wallet(1) && soul_npc(SOUL_NPC_SHOOTING_GALLERY_OWNER)"
+    "Shooting Gallery Child": "is_child && can_use_wallet(1) && soul_shooting_gallery_owner"
 "Temple of Time Entryway":
   region: MARKET
   age_change: false
@@ -636,7 +636,7 @@
   events:
     #EPONA: "is_adult && can_play_epona && can_use_wallet(1) && is_day"
     EPONA: "true" #If fast Epona becomes a setting, we need a check here... this is "Ingo deposed".
-    MALON_COW: "can_ride_epona && event(EPONA) && is_day && soul_npc(SOUL_NPC_MALON)"
+    MALON_COW: "can_ride_epona && event(EPONA) && is_day && soul_malon"
     RUPEES: "is_child"
   locations:
     "Lon Lon Ranch Malon Song": "is_child && has_ocarina && event(MALON) && is_day"
@@ -671,7 +671,7 @@
   exits:
     "Lon Lon Ranch": "true"
   locations:
-    "Lon Lon Ranch Talon Bottle": "is_child && woke_talon_child && can_use_wallet(1) && is_day && soul_npc(SOUL_NPC_TALON)"
+    "Lon Lon Ranch Talon Bottle": "is_child && woke_talon_child && can_use_wallet(1) && is_day && soul_talon"
     "Lon Lon Ranch Talon House Pot 1": "true"
     "Lon Lon Ranch Talon House Pot 2": "true"
     "Lon Lon Ranch Talon House Pot 3": "true"
@@ -691,11 +691,11 @@
   exits:
     "Market Castle Entry": "true"
     "Near Fairy Fountain Din": "has_explosives_or_hammer"
-    "Hyrule Castle Courtyard": "woke_talon_child || (has_hover_boots && (soul_npc(SOUL_NPC_TALON) || setting(skipZelda))) || climb_anywhere || hookshot_anywhere"
+    "Hyrule Castle Courtyard": "woke_talon_child || (has_hover_boots && (soul_talon || setting(skipZelda))) || climb_anywhere || hookshot_anywhere"
     "Hyrule Castle Near Grotto": "true"
   events:
-    MALON: "soul_npc(SOUL_NPC_MALON)"
-    TALON_CHILD: "has(CHICKEN) && soul_npc(SOUL_NPC_TALON)"
+    MALON: "soul_malon"
+    TALON_CHILD: "has(CHICKEN) && soul_talon"
     BOMBS_OR_BOMBCHU: "true"
     RUPEES: "true"
     SEEDS: "is_child"
@@ -1071,14 +1071,14 @@
   exits:
     "Kakariko": "true"
   locations:
-    "Kakariko Bazaar Item 1": "shop_price(0x30) && soul_npc(SOUL_NPC_BAZAAR_SHOPKEEPER)"
-    "Kakariko Bazaar Item 2": "shop_price(0x31) && soul_npc(SOUL_NPC_BAZAAR_SHOPKEEPER)"
-    "Kakariko Bazaar Item 3": "shop_price(0x32) && soul_npc(SOUL_NPC_BAZAAR_SHOPKEEPER)"
-    "Kakariko Bazaar Item 4": "shop_price(0x33) && soul_npc(SOUL_NPC_BAZAAR_SHOPKEEPER)"
-    "Kakariko Bazaar Item 5": "shop_price(0x34) && soul_npc(SOUL_NPC_BAZAAR_SHOPKEEPER)"
-    "Kakariko Bazaar Item 6": "shop_price(0x35) && soul_npc(SOUL_NPC_BAZAAR_SHOPKEEPER)"
-    "Kakariko Bazaar Item 7": "shop_price(0x36) && soul_npc(SOUL_NPC_BAZAAR_SHOPKEEPER)"
-    "Kakariko Bazaar Item 8": "shop_price(0x37) && soul_npc(SOUL_NPC_BAZAAR_SHOPKEEPER)"
+    "Kakariko Bazaar Item 1": "shop_price(0x30) && soul_bazaar_shopkeeper"
+    "Kakariko Bazaar Item 2": "shop_price(0x31) && soul_bazaar_shopkeeper"
+    "Kakariko Bazaar Item 3": "shop_price(0x32) && soul_bazaar_shopkeeper"
+    "Kakariko Bazaar Item 4": "shop_price(0x33) && soul_bazaar_shopkeeper"
+    "Kakariko Bazaar Item 5": "shop_price(0x34) && soul_bazaar_shopkeeper"
+    "Kakariko Bazaar Item 6": "shop_price(0x35) && soul_bazaar_shopkeeper"
+    "Kakariko Bazaar Item 7": "shop_price(0x36) && soul_bazaar_shopkeeper"
+    "Kakariko Bazaar Item 8": "shop_price(0x37) && soul_bazaar_shopkeeper"
 "Kakariko Potion Shop":
   region: ENTRANCE
   exits:
@@ -1116,7 +1116,7 @@
   exits:
     "Kakariko": "true"
   locations:
-    "Shooting Gallery Adult": "is_adult && can_use_bow && can_use_wallet(1) && soul_npc(SOUL_NPC_SHOOTING_GALLERY_OWNER)"
+    "Shooting Gallery Adult": "is_adult && can_use_bow && can_use_wallet(1) && soul_shooting_gallery_owner"
 "Impa House Front":
   region: ENTRANCE
   exits:
@@ -1139,7 +1139,7 @@
     WELL_DRAIN: "is_child && can_play_storms"
   locations:
     "Windmill HP": "can_boomerang || event(WINDMILL_TOP) || (is_adult && trick(OOT_WINDMILL_HP_NOTHING)) || climb_anywhere || hookshot_anywhere"
-    "Windmill Song of Storms": "is_adult && has_ocarina && soul_npc(SOUL_NPC_GURU_GURU)"
+    "Windmill Song of Storms": "is_adult && has_ocarina && soul_guru_guru"
 "Windmill Exit":
   region: NONE
   exits:
@@ -1150,7 +1150,7 @@
   exits:
     "Kakariko": "true"
   events:
-    TALON_AWAKE: "adult_trade(POCKET_CUCCO) && soul_npc(SOUL_NPC_TALON)"
+    TALON_AWAKE: "adult_trade(POCKET_CUCCO) && soul_talon"
 "Skulltula House":
   region: ENTRANCE
   exits:
@@ -1208,7 +1208,7 @@
     ARROWS: "is_adult"
     MAGIC: "can_cut_grass"
   locations:
-    "Graveyard Dampe Game": "is_child && can_use_wallet(1) && is_dusk && soul_npc(SOUL_NPC_DAMPE)"
+    "Graveyard Dampe Game": "is_child && can_use_wallet(1) && is_dusk && soul_dampe"
     "Graveyard Crate HP": "can_ride_bean(BEAN_GRAVEYARD) || can_longshot || climb_anywhere || hookshot_anywhere"
     "Graveyard GS Soil": "gs_soil && can_damage_skull"
     "Graveyard GS Wall": "is_child && gs_night && (can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_din)))"
@@ -1263,7 +1263,7 @@
   region: ENTRANCE
   exits:
     "Dampe Grave Entrance": "true"
-    "Windmill Exit": "is_adult && can_play_time && soul_npc(SOUL_NPC_DAMPE)"
+    "Windmill Exit": "is_adult && can_play_time && soul_dampe"
   events:
     NUTS: "true"
     RUPEES: "true"
@@ -1271,10 +1271,10 @@
     BOMBS_OR_BOMBCHU: "true"
     SEEDS: "is_child"
     ARROWS: "is_adult"
-    WINDMILL_TOP: "is_adult && can_play_time && soul_npc(SOUL_NPC_DAMPE)"
+    WINDMILL_TOP: "is_adult && can_play_time && soul_dampe"
   locations:
-    "Graveyard Dampe Tomb Reward 1": "soul_npc(SOUL_NPC_DAMPE)"
-    "Graveyard Dampe Tomb Reward 2": "is_adult && soul_npc(SOUL_NPC_DAMPE)" #It's very hard to finish this race sub-1 as kid.
+    "Graveyard Dampe Tomb Reward 1": "soul_dampe"
+    "Graveyard Dampe Tomb Reward 2": "is_adult && soul_dampe" #It's very hard to finish this race sub-1 as kid.
     "Graveyard Dampe Tomb Pot 1": "true"
     "Graveyard Dampe Tomb Pot 2": "true"
     "Graveyard Dampe Tomb Pot 3": "true"
@@ -1284,11 +1284,11 @@
     "Graveyard Dampe Tomb Rupee 1": "true"
     "Graveyard Dampe Tomb Rupee 2": "true"
     "Graveyard Dampe Tomb Rupee 3": "true"
-    "Graveyard Dampe Tomb Rupee 4": "soul_npc(SOUL_NPC_DAMPE)"
-    "Graveyard Dampe Tomb Rupee 5": "soul_npc(SOUL_NPC_DAMPE)"
-    "Graveyard Dampe Tomb Rupee 6": "soul_npc(SOUL_NPC_DAMPE)"
-    "Graveyard Dampe Tomb Rupee 7": "soul_npc(SOUL_NPC_DAMPE)"
-    "Graveyard Dampe Tomb Rupee 8": "soul_npc(SOUL_NPC_DAMPE)"
+    "Graveyard Dampe Tomb Rupee 4": "soul_dampe"
+    "Graveyard Dampe Tomb Rupee 5": "soul_dampe"
+    "Graveyard Dampe Tomb Rupee 6": "soul_dampe"
+    "Graveyard Dampe Tomb Rupee 7": "soul_dampe"
+    "Graveyard Dampe Tomb Rupee 8": "soul_dampe"
 "Dampe Grave Entrance":
   region: NONE
   exits:
@@ -1330,9 +1330,9 @@
     "Death Mountain Crater Top": "true"
     "Fairy Fountain Magic": "has_explosives_or_hammer"
   locations:
-    "Death Mountain Trail Prescription": "adult_trade(BROKEN_GORON_SWORD) && soul_npc(SOUL_NPC_BIGGORON)"
-    "Death Mountain Trail Claim Check": "adult_trade(EYE_DROPS) && soul_npc(SOUL_NPC_BIGGORON)"
-    "Death Mountain Trail Biggoron Sword": "adult_trade(CLAIM_CHECK) && soul_npc(SOUL_NPC_BIGGORON)"
+    "Death Mountain Trail Prescription": "adult_trade(BROKEN_GORON_SWORD) && soul_biggoron"
+    "Death Mountain Trail Claim Check": "adult_trade(EYE_DROPS) && soul_biggoron"
+    "Death Mountain Trail Biggoron Sword": "adult_trade(CLAIM_CHECK) && soul_biggoron"
     "Death Mountain Trail GS Before Climb": "is_adult && gs_night && (can_hammer || trick(OOT_DMT_RED_ROCK_GS))"
   gossip:
     "Death Mountain Trail Gossip on Climb": "true"
@@ -1400,8 +1400,8 @@
   exits:
     "Goron City Shortcut": "event(GORON_CITY_SHORTCUT) || climb_anywhere || hookshot_anywhere"
     "Death Mountain": "true"
-    "Darunia Chamber": "(is_adult && (has_explosives || can_use_bow || has_goron_bracelet) && soul_npc(SOUL_NPC_GORON_CHILD)) || (is_child && can_play_zelda)"
-    "Goron Shop": "(has_bombflowers && (is_child || time_travel_at_will || (is_adult && soul_npc(SOUL_NPC_GORON_CHILD)))) || (can_use_bow && soul_npc(SOUL_NPC_GORON_CHILD) && (is_adult || time_travel_at_will)) || ((can_use_din || event(DARUNIA_TORCH)) && (is_child || time_travel_at_will))"
+    "Darunia Chamber": "(is_adult && (has_explosives || can_use_bow || has_goron_bracelet) && soul_goron_child) || (is_child && can_play_zelda)"
+    "Goron Shop": "(has_bombflowers && (is_child || time_travel_at_will || (is_adult && soul_goron_child))) || (can_use_bow && soul_goron_child && (is_adult || time_travel_at_will)) || ((can_use_din || event(DARUNIA_TORCH)) && (is_child || time_travel_at_will))"
     "Goron City Grotto": "(is_adult && can_play_time) || (can_hookshot && (has_tunic_goron_strict || can_use_nayru)) || climb_anywhere"
   events:
     GORON_CITY_SHORTCUT: "has_bombflowers || can_hammer || can_use_bow || can_use_din || event(DARUNIA_TORCH)"
@@ -1413,9 +1413,9 @@
     "Goron City Maze Center 2": "has_explosives_or_hammer || can_lift_silver || climb_anywhere || hookshot_anywhere"
     "Goron City Maze Left": "can_hammer || can_lift_silver || climb_anywhere || hookshot_anywhere"
     "Goron City Big Pot HP": "is_child && has_bombs && (event(DARUNIA_TORCH) || has_fire)"
-    "Goron City Tunic": "is_adult && (has_explosives || can_use_bow || has_goron_bracelet) && soul_npc(SOUL_NPC_GORON_CHILD)"
-    "Goron City Bomb Bag": "is_child && has_explosives && soul_npc(SOUL_NPC_GORON)"
-    "Goron City Medigoron Giant Knife": "is_adult && (has_bombflowers || can_hammer) && can_use_wallet(2) && soul_npc(SOUL_NPC_MEDIGORON)"
+    "Goron City Tunic": "is_adult && (has_explosives || can_use_bow || has_goron_bracelet) && soul_goron_child"
+    "Goron City Bomb Bag": "is_child && has_explosives && soul_goron"
+    "Goron City Medigoron Giant Knife": "is_adult && (has_bombflowers || can_hammer) && can_use_wallet(2) && soul_medigoron"
     "Goron City GS Platform": "gs && is_adult"
     "Goron City GS Maze": "gs && is_child && (has_explosives_or_hammer || (climb_anywhere && can_damage_skull) || hookshot_anywhere)"
     "Goron City Pot Stairs 1": "true"
@@ -1446,14 +1446,14 @@
   exits:
     "Goron City": "true"
   locations:
-    "Goron Shop Item 1": "shop_price(0x18) && soul_npc(SOUL_NPC_GORON_SHOPKEEPER)"
-    "Goron Shop Item 2": "shop_price(0x19) && soul_npc(SOUL_NPC_GORON_SHOPKEEPER)"
-    "Goron Shop Item 3": "shop_price(0x1a) && soul_npc(SOUL_NPC_GORON_SHOPKEEPER)"
-    "Goron Shop Item 4": "shop_price(0x1b) && soul_npc(SOUL_NPC_GORON_SHOPKEEPER)"
-    "Goron Shop Item 5": "shop_price(0x1c) && soul_npc(SOUL_NPC_GORON_SHOPKEEPER)"
-    "Goron Shop Item 6": "shop_price(0x1d) && soul_npc(SOUL_NPC_GORON_SHOPKEEPER)"
-    "Goron Shop Item 7": "shop_price(0x1e) && soul_npc(SOUL_NPC_GORON_SHOPKEEPER)"
-    "Goron Shop Item 8": "shop_price(0x1f) && soul_npc(SOUL_NPC_GORON_SHOPKEEPER)"
+    "Goron Shop Item 1": "shop_price(0x18) && soul_goron_shopkeeper"
+    "Goron Shop Item 2": "shop_price(0x19) && soul_goron_shopkeeper"
+    "Goron Shop Item 3": "shop_price(0x1a) && soul_goron_shopkeeper"
+    "Goron Shop Item 4": "shop_price(0x1b) && soul_goron_shopkeeper"
+    "Goron Shop Item 5": "shop_price(0x1c) && soul_goron_shopkeeper"
+    "Goron Shop Item 6": "shop_price(0x1d) && soul_goron_shopkeeper"
+    "Goron Shop Item 7": "shop_price(0x1e) && soul_goron_shopkeeper"
+    "Goron Shop Item 8": "shop_price(0x1f) && soul_goron_shopkeeper"
 "Goron City Grotto":
   region: ENTRANCE
   age_change: false
@@ -1586,12 +1586,12 @@
     FISH: "is_child && has_bottle"
   locations:
     "Zora Domain Waterfall Chest": "is_child"
-    "Zora Domain Diving Game": "is_child && can_use_wallet(1) && soul_npc(SOUL_NPC_ZORA)"
-    "Zora Domain Diving Game Green Rupee": "is_child && can_use_wallet(1) && soul_npc(SOUL_NPC_ZORA)"
-    "Zora Domain Diving Game Blue Rupee": "is_child && can_use_wallet(1) && soul_npc(SOUL_NPC_ZORA)"
-    "Zora Domain Diving Game Red Rupee": "is_child && can_use_wallet(1) && soul_npc(SOUL_NPC_ZORA)"
-    "Zora Domain Diving Game Purple Rupee": "is_child && can_use_wallet(1) && soul_npc(SOUL_NPC_ZORA)"
-    "Zora Domain Diving Game Huge Rupee": "is_child && can_use_wallet(1) && soul_npc(SOUL_NPC_ZORA)"
+    "Zora Domain Diving Game": "is_child && can_use_wallet(1) && soul_zora"
+    "Zora Domain Diving Game Green Rupee": "is_child && can_use_wallet(1) && soul_zora"
+    "Zora Domain Diving Game Blue Rupee": "is_child && can_use_wallet(1) && soul_zora"
+    "Zora Domain Diving Game Red Rupee": "is_child && can_use_wallet(1) && soul_zora"
+    "Zora Domain Diving Game Purple Rupee": "is_child && can_use_wallet(1) && soul_zora"
+    "Zora Domain Diving Game Huge Rupee": "is_child && can_use_wallet(1) && soul_zora"
     "Zora Domain Tunic": "is_adult && has_blue_fire && soul_npc(SOUL_NPC_KING_ZORA)"
     "Zora Domain Eyeball Frog": "has_blue_fire && adult_trade(PRESCRIPTION) && soul_npc(SOUL_NPC_KING_ZORA)"
     "Zora Domain GS Waterfall": "is_adult && gs_night && (has_ranged_weapon || has_magic || has_explosives)"
@@ -1612,14 +1612,14 @@
   exits:
     "Zora Domain": "true"
   locations:
-    "Zora Shop Item 1": "shop_price(0x10) && soul_npc(SOUL_NPC_ZORA_SHOPKEEPER)"
-    "Zora Shop Item 2": "shop_price(0x11) && soul_npc(SOUL_NPC_ZORA_SHOPKEEPER)"
-    "Zora Shop Item 3": "shop_price(0x12) && soul_npc(SOUL_NPC_ZORA_SHOPKEEPER)"
-    "Zora Shop Item 4": "shop_price(0x13) && soul_npc(SOUL_NPC_ZORA_SHOPKEEPER)"
-    "Zora Shop Item 5": "shop_price(0x14) && soul_npc(SOUL_NPC_ZORA_SHOPKEEPER)"
-    "Zora Shop Item 6": "shop_price(0x15) && soul_npc(SOUL_NPC_ZORA_SHOPKEEPER)"
-    "Zora Shop Item 7": "shop_price(0x16) && soul_npc(SOUL_NPC_ZORA_SHOPKEEPER)"
-    "Zora Shop Item 8": "shop_price(0x17) && soul_npc(SOUL_NPC_ZORA_SHOPKEEPER)"
+    "Zora Shop Item 1": "shop_price(0x10) && soul_zora_shopkeeper"
+    "Zora Shop Item 2": "shop_price(0x11) && soul_zora_shopkeeper"
+    "Zora Shop Item 3": "shop_price(0x12) && soul_zora_shopkeeper"
+    "Zora Shop Item 4": "shop_price(0x13) && soul_zora_shopkeeper"
+    "Zora Shop Item 5": "shop_price(0x14) && soul_zora_shopkeeper"
+    "Zora Shop Item 6": "shop_price(0x15) && soul_zora_shopkeeper"
+    "Zora Shop Item 7": "shop_price(0x16) && soul_zora_shopkeeper"
+    "Zora Shop Item 8": "shop_price(0x17) && soul_zora_shopkeeper"
 "Zora Domain Grotto":
   region: ENTRANCE
   age_change: false
@@ -1734,41 +1734,41 @@
   exits:
     "Lake Hylia": "true"
   locations:
-    "Fishing Pond Child": "is_child && can_use_wallet(1) && soul_npc(SOUL_NPC_FISHING_POND_OWNER) && (!setting(pondFishShuffle) || has_pond_fish(CHILD_FISH, 7, 14) || has_pond_fish(CHILD_LOACH, 14, 19))"
-    "Fishing Pond Adult": "is_adult && can_use_wallet(1) && soul_npc(SOUL_NPC_FISHING_POND_OWNER) && (!setting(pondFishShuffle) || has_pond_fish(ADULT_FISH, 8, 25) || has_pond_fish(ADULT_LOACH, 29, 36))"
-    "Fishing Pond Child Fish 1": "is_child && can_use_wallet(1) && soul_npc(SOUL_NPC_FISHING_POND_OWNER)"
-    "Fishing Pond Child Fish 2": "is_child && can_use_wallet(1) && soul_npc(SOUL_NPC_FISHING_POND_OWNER)"
-    "Fishing Pond Child Fish 3": "is_child && can_use_wallet(1) && soul_npc(SOUL_NPC_FISHING_POND_OWNER)"
-    "Fishing Pond Child Fish 4": "is_child && can_use_wallet(1) && soul_npc(SOUL_NPC_FISHING_POND_OWNER)"
-    "Fishing Pond Child Fish 5": "is_child && can_use_wallet(1) && soul_npc(SOUL_NPC_FISHING_POND_OWNER)"
-    "Fishing Pond Child Fish 6": "is_child && can_use_wallet(1) && soul_npc(SOUL_NPC_FISHING_POND_OWNER)"
-    "Fishing Pond Child Fish 7": "is_child && can_use_wallet(1) && soul_npc(SOUL_NPC_FISHING_POND_OWNER)"
-    "Fishing Pond Child Fish 8": "is_child && can_use_wallet(1) && soul_npc(SOUL_NPC_FISHING_POND_OWNER)"
-    "Fishing Pond Child Fish 9": "is_child && can_use_wallet(1) && soul_npc(SOUL_NPC_FISHING_POND_OWNER)"
-    "Fishing Pond Child Fish 10": "is_child && can_use_wallet(1) && soul_npc(SOUL_NPC_FISHING_POND_OWNER)"
-    "Fishing Pond Child Fish 11": "is_child && can_use_wallet(1) && soul_npc(SOUL_NPC_FISHING_POND_OWNER)"
-    "Fishing Pond Child Fish 12": "is_child && can_use_wallet(1) && soul_npc(SOUL_NPC_FISHING_POND_OWNER)"
-    "Fishing Pond Child Fish 13": "is_child && can_use_wallet(1) && soul_npc(SOUL_NPC_FISHING_POND_OWNER)"
-    "Fishing Pond Child Fish 14": "is_child && can_use_wallet(1) && soul_npc(SOUL_NPC_FISHING_POND_OWNER)"
-    "Fishing Pond Child Fish 15": "is_child && can_use_wallet(1) && soul_npc(SOUL_NPC_FISHING_POND_OWNER)"
-    "Fishing Pond Child Loach 1": "is_child && can_use_wallet(1) && soul_npc(SOUL_NPC_FISHING_POND_OWNER)"
-    "Fishing Pond Child Loach 2": "is_child && can_use_wallet(1) && soul_npc(SOUL_NPC_FISHING_POND_OWNER)"
-    "Fishing Pond Adult Fish 1": "is_adult && can_use_wallet(1) && soul_npc(SOUL_NPC_FISHING_POND_OWNER)"
-    "Fishing Pond Adult Fish 2": "is_adult && can_use_wallet(1) && soul_npc(SOUL_NPC_FISHING_POND_OWNER)"
-    "Fishing Pond Adult Fish 3": "is_adult && can_use_wallet(1) && soul_npc(SOUL_NPC_FISHING_POND_OWNER)"
-    "Fishing Pond Adult Fish 4": "is_adult && can_use_wallet(1) && soul_npc(SOUL_NPC_FISHING_POND_OWNER)"
-    "Fishing Pond Adult Fish 5": "is_adult && can_use_wallet(1) && soul_npc(SOUL_NPC_FISHING_POND_OWNER)"
-    "Fishing Pond Adult Fish 6": "is_adult && can_use_wallet(1) && soul_npc(SOUL_NPC_FISHING_POND_OWNER)"
-    "Fishing Pond Adult Fish 7": "is_adult && can_use_wallet(1) && soul_npc(SOUL_NPC_FISHING_POND_OWNER)"
-    "Fishing Pond Adult Fish 8": "is_adult && can_use_wallet(1) && soul_npc(SOUL_NPC_FISHING_POND_OWNER)"
-    "Fishing Pond Adult Fish 9": "is_adult && can_use_wallet(1) && soul_npc(SOUL_NPC_FISHING_POND_OWNER)"
-    "Fishing Pond Adult Fish 10": "is_adult && can_use_wallet(1) && soul_npc(SOUL_NPC_FISHING_POND_OWNER)"
-    "Fishing Pond Adult Fish 11": "is_adult && can_use_wallet(1) && soul_npc(SOUL_NPC_FISHING_POND_OWNER)"
-    "Fishing Pond Adult Fish 12": "is_adult && can_use_wallet(1) && soul_npc(SOUL_NPC_FISHING_POND_OWNER)"
-    "Fishing Pond Adult Fish 13": "is_adult && can_use_wallet(1) && soul_npc(SOUL_NPC_FISHING_POND_OWNER)"
-    "Fishing Pond Adult Fish 14": "is_adult && can_use_wallet(1) && soul_npc(SOUL_NPC_FISHING_POND_OWNER)"
-    "Fishing Pond Adult Fish 15": "is_adult && can_use_wallet(1) && soul_npc(SOUL_NPC_FISHING_POND_OWNER)"
-    "Fishing Pond Adult Loach": "is_adult && can_use_wallet(1) && soul_npc(SOUL_NPC_FISHING_POND_OWNER)"
+    "Fishing Pond Child": "is_child && can_use_wallet(1) && soul_fishing_pond_owner && (!setting(pondFishShuffle) || has_pond_fish(CHILD_FISH, 7, 14) || has_pond_fish(CHILD_LOACH, 14, 19))"
+    "Fishing Pond Adult": "is_adult && can_use_wallet(1) && soul_fishing_pond_owner && (!setting(pondFishShuffle) || has_pond_fish(ADULT_FISH, 8, 25) || has_pond_fish(ADULT_LOACH, 29, 36))"
+    "Fishing Pond Child Fish 1": "is_child && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Child Fish 2": "is_child && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Child Fish 3": "is_child && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Child Fish 4": "is_child && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Child Fish 5": "is_child && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Child Fish 6": "is_child && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Child Fish 7": "is_child && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Child Fish 8": "is_child && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Child Fish 9": "is_child && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Child Fish 10": "is_child && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Child Fish 11": "is_child && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Child Fish 12": "is_child && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Child Fish 13": "is_child && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Child Fish 14": "is_child && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Child Fish 15": "is_child && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Child Loach 1": "is_child && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Child Loach 2": "is_child && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Adult Fish 1": "is_adult && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Adult Fish 2": "is_adult && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Adult Fish 3": "is_adult && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Adult Fish 4": "is_adult && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Adult Fish 5": "is_adult && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Adult Fish 6": "is_adult && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Adult Fish 7": "is_adult && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Adult Fish 8": "is_adult && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Adult Fish 9": "is_adult && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Adult Fish 10": "is_adult && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Adult Fish 11": "is_adult && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Adult Fish 12": "is_adult && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Adult Fish 13": "is_adult && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Adult Fish 14": "is_adult && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Adult Fish 15": "is_adult && can_use_wallet(1) && soul_fishing_pond_owner"
+    "Fishing Pond Adult Loach": "is_adult && can_use_wallet(1) && soul_fishing_pond_owner"
 "Lake Hylia Grotto":
   region: ENTRANCE
   age_change: false
