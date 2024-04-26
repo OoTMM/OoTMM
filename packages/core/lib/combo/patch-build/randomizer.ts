@@ -833,6 +833,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     SHARED_HEALTH: settings.sharedHealth,
     SHARED_SOULS_ENEMY: settings.sharedSoulsEnemy,
     SHARED_SOULS_MISC: settings.sharedSoulsMisc,
+    SHARED_SOULS_NPC: settings.sharedSoulsNpc,
     SHARED_OCARINA_BUTTONS: settings.sharedOcarinaButtons,
     SHARED_SHIELDS: settings.sharedShields,
     SHARED_SPELL_FIRE: settings.sharedSpellFire,
