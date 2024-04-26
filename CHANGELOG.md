@@ -4,10 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
-
 ### Changed
 
 - Woods of Mystery has been logically reorganized to allow for leaving from the Day 2 Grotto in ER.
+
+### Fixed
+
+- Fix death after leaving a grotto in MM in ER leading to wrong warps in some cases.
 
 ## [22.0] - 2024-04-24
 
