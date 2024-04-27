@@ -1163,13 +1163,6 @@ export const SETTINGS = [{
   default: true,
   cond: hasOoT,
 }, {
-  key: 'defaultHoldTarget',
-  name: 'Default Hold Target',
-  category: 'main.misc',
-  type: 'boolean',
-  description: 'Forces the default target system to HOLD instead of SWITCH',
-  default: true
-}, {
   key: 'critWiggleDisable',
   name: 'Disable Crit Wiggle',
   category: 'main.misc',

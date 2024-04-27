@@ -55,7 +55,6 @@ function asmPatchGroups(world: World, settings: Settings) {
     OOT_BLUE_FIRE_ARROWS: settings.blueFireArrows,
     OOT_SUNLIGHT_ARROWS: settings.sunlightArrows,
     ER: isEntranceShuffle(settings),
-    DEFAULT_HOLD: settings.defaultHoldTarget,
     OOT_SILVER_RUPEE_SHUFFLE: settings.silverRupeeShuffle !== 'vanilla',
     OOT_FREE_SCARECROW: settings.freeScarecrowOot,
     OOT_SHUFFLE_GRASS: settings.shuffleGrassOot,

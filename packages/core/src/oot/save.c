@@ -428,3 +428,18 @@ void Save_DoSave(GameState_Play* play, int saveFlags)
         Save_Write();
     }
 }
+
+static u8 sHoldTarget;
+COSMETIC(HOLD_TARGET, sHoldTarget);
+
+static void Save_CopySettings(void* dst, const void* src, size_t size)
+{
+    memcpy(dst, src, size);
+
+    if (sHoldTarget)
+    {
+        ((u8*)dst)[1] = 1;
+    }
+}
+
+PATCH_CALL(0x80091258, Save_CopySettings);

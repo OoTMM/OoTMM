@@ -319,6 +319,11 @@ class CosmeticsPass {
     const colorOotShieldMirror = resolveColor(random, c.ootShieldMirror);
     const colorDpad = resolveColor(random, c.dpad);
 
+    /* Patch hold target */
+    if (c.defaultHold) {
+      this.patchSymbol('HOLD_TARGET', Buffer.from([0x01]));
+    }
+
     /* Patch human tunics */
     if (colorOotTunicKokiri !== null) {
       await this.patchOotTunic(0, colorOotTunicKokiri);
