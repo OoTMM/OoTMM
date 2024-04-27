@@ -211,11 +211,22 @@ static const char* const kSoulsNpcOot[] = {
     "Bombchu Shopkeeper",
     "Potion Shopkeeper",
     "Bombchu Bowling Lady",
-    "Treasure Chest Game Owner",
+    "Chest Game Owner",
     "Shooting Gallery Owner",
     "Dampe",
     "Graveyard Kid",
     "Poe Collector",
+    "Composer Bros.",
+    "Lovers",
+    "Astronomer",
+    "Bean Salesman",
+    "Scientist",
+    "Ingo",
+    "Punk Boy",
+    "Dog Lady",
+    "Carpet Man",
+    "Old Hag",
+    "Beggar",
 };
 
 static const char* const kSoulsEnemyMm[] = {
@@ -273,6 +284,60 @@ static const char* const kSoulsBossMm[] = {
     "Gyorg",
     "Twinmold",
     "Igos",
+};
+
+static const char* const kSoulsNpcMm[] = {
+    "Madame Aroma",
+    "Town Archery Owner",
+    "Swamp Archery Owner",
+    "Gorons",
+    "Baby Goron",
+    "Bombs Shopkeeper",
+    "Bombers' Kids",
+    "Deku Butler",
+    "Clock Town Cizizen",
+    "Composer Bros",
+    "Dampe",
+    "Deku King",
+    "Deku Princess",
+    "Playground Scrubs",
+    "Goron Elder",
+    "Fisherman",
+    "Goron Shopkeeper",
+    "Honey & Darling",
+    "Toto",
+    "Lulu",
+    "Zora Musicians",
+    "Kafei",
+    "Keaton",
+    "Koume & Kotake",
+    "Mayor Dotour",
+    "Keg Trial Goron",
+    "Mr. Barten",
+    "Astronomer",
+    "Poe Hut Owner",
+    "Blacksmiths",
+    "Chest Game Lady",
+    "Tingle",
+    "Toilet Hand",
+    "Trading Post Owner",
+    "Part-Timer",
+    "Zoras",
+    "Zora Shopkeeper",
+    "Romani/Cremia",
+    "Bean Salesman",
+    "Carpenters",
+    "Anju",
+    "Guru-Guru",
+    "Marine Scientist",
+    "Gorman & Bros.",
+    "Grog",
+    "Dog Lady",
+    "Swordsman",
+    "Anju\'s Grandmother",
+    "Boat Cruise Man",
+    "Banker",
+    "Moon Children",
 };
 
 static const char* const kSoulsMiscOot[] = {
@@ -918,6 +983,9 @@ void comboMenuUpdate(GameState_Play* play)
     case MENU_SOULS_MM_BOSS:
         g.menuCursorMax = ARRAY_SIZE(kSoulsBossMm);
         break;
+    case MENU_SOULS_MM_NPC:
+        g.menuCursorMax = ARRAY_SIZE(kSoulsNpcMm);
+        break;
     case MENU_SOULS_MM_MISC:
         g.menuCursorMax = ARRAY_SIZE(kSoulsMiscMm);
         break;
@@ -1009,6 +1077,9 @@ void comboMenuDraw(GameState_Play* play)
     case MENU_SOULS_MM_BOSS:
         drawMenuSouls(play, "MM Boss Souls", kSoulsBossMm, GI_MM_SOUL_BOSS_ODOLWA, 1);
         break;
+    case MENU_SOULS_MM_NPC:
+        drawMenuSouls(play, "MM NPC Souls", kSoulsNpcMm, GI_MM_SOUL_NPC_AROMA, 1);
+        break;
     case MENU_SOULS_MM_MISC:
         drawMenuSouls(play, "MM Misc. Souls", kSoulsMiscMm, GI_MM_SOUL_MISC_GS, 1);
         break;
@@ -1039,6 +1110,8 @@ void comboMenuNext(void)
     if (g.menuScreen == MENU_SOULS_MM_ENEMY && !Config_Flag(CFG_MM_SOULS_ENEMY))
         g.menuScreen++;
     if (g.menuScreen == MENU_SOULS_MM_BOSS && !Config_Flag(CFG_MM_SOULS_BOSS))
+        g.menuScreen++;
+    if (g.menuScreen == MENU_SOULS_MM_NPC && !Config_Flag(CFG_MM_SOULS_NPC))
         g.menuScreen++;
     if (g.menuScreen == MENU_SOULS_MM_MISC && !Config_Flag(CFG_MM_SOULS_MISC))
         g.menuScreen++;

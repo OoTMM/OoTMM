@@ -10,7 +10,7 @@ CheckGraveyardKid:
   /* Check for the soul of the kid */
   HOOK_SAVE
   jal comboHasSoulOot
-   li a0,GI_OOT_SOUL_NPC_GRAVEYARD_KID
+   li a0,GI_OOT_SOUL_NPC_BOMBERS
   HOOK_RESTORE_KEEP_V0
   beqz v0,CheckGraveyardKid_Ret
    nop
