@@ -76,6 +76,7 @@
 "Kokiri Forest":
   region: KOKIRI_FOREST
   exits:
+    "Kokiri Forest Grass": "can_cut_grass"
     "Link's House": "true"
     "Mido's House": "true"
     "Saria's House": "true"
@@ -100,34 +101,6 @@
     "Kokiri Forest GS Soil": "gs_soil && can_damage_skull"
     "Kokiri Forest GS Night Child": "is_child && gs_night && can_damage_skull"
     "Kokiri Forest GS Night Adult": "is_adult && (can_collect_distance || climb_anywhere) && gs_night"
-    "Kokiri Forest Grass 1": "can_cut_grass"
-    "Kokiri Forest Grass 2": "can_cut_grass"
-    "Kokiri Forest Grass 3": "can_cut_grass"
-    "Kokiri Forest Grass 4": "can_cut_grass"
-    "Kokiri Forest Grass 5": "can_cut_grass"
-    "Kokiri Forest Grass 6": "can_cut_grass"
-    "Kokiri Forest Grass 7": "can_cut_grass"
-    "Kokiri Forest Grass 8": "can_cut_grass"
-    "Kokiri Forest Grass Child 1": "is_child && can_cut_grass"
-    "Kokiri Forest Grass Child 2": "is_child && can_cut_grass"
-    "Kokiri Forest Grass Child 3": "is_child && can_cut_grass"
-    "Kokiri Forest Grass Child 4": "is_child && can_cut_grass"
-    "Kokiri Forest Grass Child Kokiri": "is_child && can_cut_grass"
-    "Kokiri Forest Grass Child Crawl 1": "is_child && can_cut_grass"
-    "Kokiri Forest Grass Child Crawl 2": "is_child && can_cut_grass"
-    "Kokiri Forest Grass Child Crawl 3": "is_child && can_cut_grass"
-    "Kokiri Forest Grass Adult 01": "is_adult && can_cut_grass"
-    "Kokiri Forest Grass Adult 02": "is_adult && can_cut_grass"
-    "Kokiri Forest Grass Adult 03": "is_adult && can_cut_grass"
-    "Kokiri Forest Grass Adult 04": "is_adult && can_cut_grass"
-    "Kokiri Forest Grass Adult 05": "is_adult && can_cut_grass"
-    "Kokiri Forest Grass Adult 06": "is_adult && can_cut_grass"
-    "Kokiri Forest Grass Adult 07": "is_adult && can_cut_grass"
-    "Kokiri Forest Grass Adult 08": "is_adult && can_cut_grass"
-    "Kokiri Forest Grass Adult 09": "is_adult && can_cut_grass"
-    "Kokiri Forest Grass Adult 10": "is_adult && can_cut_grass"
-    "Kokiri Forest Grass Adult 11": "is_adult && can_cut_grass"
-    "Kokiri Forest Grass Adult 12": "is_adult && can_cut_grass"
     # TODO: Add this back when we have wonder items
     #"Kokiri Forest Invisible Rupee 1": "is_child"
     #"Kokiri Forest Invisible Rupee 2": "is_child"
@@ -142,8 +115,52 @@
     "Kokiri Forest Heart 3": "is_child"
   gossip:
     "Kokiri Gossip Near Lost Woods Open": "true"
+"Kokiri Forest Grass":
+  region: KOKIRI_FOREST
+  age_change: false
+  exits:
+    "Kokiri Forest Grass Child": "is_child"
+    "Kokiri Forest Grass Adult": "is_adult"
+  locations:
+    "Kokiri Forest Grass 1": "true"
+    "Kokiri Forest Grass 2": "true"
+    "Kokiri Forest Grass 3": "true"
+    "Kokiri Forest Grass 4": "true"
+    "Kokiri Forest Grass 5": "true"
+    "Kokiri Forest Grass 6": "true"
+    "Kokiri Forest Grass 7": "true"
+    "Kokiri Forest Grass 8": "true"
+"Kokiri Forest Grass Child":
+  region: KOKIRI_FOREST
+  age_change: false
+  locations:
+    "Kokiri Forest Grass Child 1": "true"
+    "Kokiri Forest Grass Child 2": "true"
+    "Kokiri Forest Grass Child 3": "true"
+    "Kokiri Forest Grass Child 4": "true"
+    "Kokiri Forest Grass Child Kokiri": "true"
+    "Kokiri Forest Grass Child Crawl 1": "true"
+    "Kokiri Forest Grass Child Crawl 2": "true"
+    "Kokiri Forest Grass Child Crawl 3": "true"
+"Kokiri Forest Grass Adult":
+  region: KOKIRI_FOREST
+  age_change: false
+  locations:
+    "Kokiri Forest Grass Adult 01": "true"
+    "Kokiri Forest Grass Adult 02": "true"
+    "Kokiri Forest Grass Adult 03": "true"
+    "Kokiri Forest Grass Adult 04": "true"
+    "Kokiri Forest Grass Adult 05": "true"
+    "Kokiri Forest Grass Adult 06": "true"
+    "Kokiri Forest Grass Adult 07": "true"
+    "Kokiri Forest Grass Adult 08": "true"
+    "Kokiri Forest Grass Adult 09": "true"
+    "Kokiri Forest Grass Adult 10": "true"
+    "Kokiri Forest Grass Adult 11": "true"
+    "Kokiri Forest Grass Adult 12": "true"
 "Kokiri Forest Adult Rupees":
   region: KOKIRI_FOREST
+  age_change: false
   locations:
     "Kokiri Forest Rupee Adult 1": "true"
     "Kokiri Forest Rupee Adult 2": "true"
@@ -167,15 +184,19 @@
   region: ENTRANCE
   exits:
     "Kokiri Forest": "true"
+    "Kokiri Shop Items": "soul_npc(SOUL_NPC_KOKIRI_SHOPKEEPER)"
+"Kokiri Shop Items":
+  region: ENTRANCE
+  age_change: false
   locations:
-    "Kokiri Shop Item 1": "shop_price(0x00) && soul_npc(SOUL_NPC_KOKIRI_SHOPKEEPER)"
-    "Kokiri Shop Item 2": "shop_price(0x01) && soul_npc(SOUL_NPC_KOKIRI_SHOPKEEPER)"
-    "Kokiri Shop Item 3": "shop_price(0x02) && soul_npc(SOUL_NPC_KOKIRI_SHOPKEEPER)"
-    "Kokiri Shop Item 4": "shop_price(0x03) && soul_npc(SOUL_NPC_KOKIRI_SHOPKEEPER)"
-    "Kokiri Shop Item 5": "shop_price(0x04) && soul_npc(SOUL_NPC_KOKIRI_SHOPKEEPER)"
-    "Kokiri Shop Item 6": "shop_price(0x05) && soul_npc(SOUL_NPC_KOKIRI_SHOPKEEPER)"
-    "Kokiri Shop Item 7": "shop_price(0x06) && soul_npc(SOUL_NPC_KOKIRI_SHOPKEEPER)"
-    "Kokiri Shop Item 8": "shop_price(0x07) && soul_npc(SOUL_NPC_KOKIRI_SHOPKEEPER)"
+    "Kokiri Shop Item 1": "shop_price(0x00)"
+    "Kokiri Shop Item 2": "shop_price(0x01)"
+    "Kokiri Shop Item 3": "shop_price(0x02)"
+    "Kokiri Shop Item 4": "shop_price(0x03)"
+    "Kokiri Shop Item 5": "shop_price(0x04)"
+    "Kokiri Shop Item 6": "shop_price(0x05)"
+    "Kokiri Shop Item 7": "shop_price(0x06)"
+    "Kokiri Shop Item 8": "shop_price(0x07)"
 "Mido's House":
   region: ENTRANCE
   exits:
@@ -213,22 +234,28 @@
   age_change: false
   exits:
     "Kokiri Forest": "true"
+    "Kokiri Forest Storms Grotto Grass": "can_cut_grass"
   events:
-    BOMBS_OR_BOMBCHU: "can_cut_grass"
-    RUPEES: "can_cut_grass"
-    SEEDS: "is_child && can_cut_grass"
-    ARROWS: "is_adult"
-    MAGIC: "can_cut_grass"
     FISH: "has_bottle"
-    BUGS: "has_bottle && can_cut_grass"
   locations:
     "Kokiri Forest Storms Grotto": "true"
-    "Kokiri Forest Storms Grotto Grass 1": "can_cut_grass"
-    "Kokiri Forest Storms Grotto Grass 2": "can_cut_grass"
-    "Kokiri Forest Storms Grotto Grass 3": "can_cut_grass"
-    "Kokiri Forest Storms Grotto Grass 4": "can_cut_grass"
   gossip:
     "Kokiri Gossip Near Lost Woods Grotto": "true"
+"Kokiri Forest Storms Grotto Grass":
+  region: ENTRANCE
+  age_change: false
+  events:
+    BOMBS_OR_BOMBCHU: "true"
+    RUPEES: "true"
+    SEEDS: "is_child"
+    ARROWS: "is_adult"
+    MAGIC: "true"
+    BUGS: "has_bottle"
+  locations:
+    "Kokiri Forest Storms Grotto Grass 1": "true"
+    "Kokiri Forest Storms Grotto Grass 2": "true"
+    "Kokiri Forest Storms Grotto Grass 3": "true"
+    "Kokiri Forest Storms Grotto Grass 4": "true"
 "Hyrule Field":
   region: HYRULE_FIELD
   time: flow
@@ -240,6 +267,7 @@
     "Lake Hylia": "true"
     "Gerudo Valley": "true"
     "Lon Lon Ranch": "true"
+    "Hyrule Field Grass": "can_cut_grass"
     "Hyrule Field Scrub Grotto": "hidden_grotto_bomb"
     "Hyrule Field Open Grotto": "true"
     "Hyrule Field Southeast Grotto": "has_explosives_or_hammer"
@@ -259,55 +287,59 @@
   locations:
     "Hyrule Field Ocarina of Time": "is_child && has_spiritual_stones"
     "Hyrule Field Song of Time": "is_child && has_spiritual_stones"
-    "Hyrule Field Grass Pack 1 Bush 01": "can_cut_grass"
-    "Hyrule Field Grass Pack 1 Bush 02": "can_cut_grass"
-    "Hyrule Field Grass Pack 1 Bush 03": "can_cut_grass"
-    "Hyrule Field Grass Pack 1 Bush 04": "can_cut_grass"
-    "Hyrule Field Grass Pack 1 Bush 05": "can_cut_grass"
-    "Hyrule Field Grass Pack 1 Bush 06": "can_cut_grass"
-    "Hyrule Field Grass Pack 1 Bush 07": "can_cut_grass"
-    "Hyrule Field Grass Pack 1 Bush 08": "can_cut_grass"
-    "Hyrule Field Grass Pack 1 Bush 09": "can_cut_grass"
-    "Hyrule Field Grass Pack 1 Bush 10": "can_cut_grass"
-    "Hyrule Field Grass Pack 1 Bush 11": "can_cut_grass"
-    "Hyrule Field Grass Pack 1 Bush 12": "can_cut_grass"
-    "Hyrule Field Grass Pack 2 Bush 01": "can_cut_grass"
-    "Hyrule Field Grass Pack 2 Bush 02": "can_cut_grass"
-    "Hyrule Field Grass Pack 2 Bush 03": "can_cut_grass"
-    "Hyrule Field Grass Pack 2 Bush 04": "can_cut_grass"
-    "Hyrule Field Grass Pack 2 Bush 05": "can_cut_grass"
-    "Hyrule Field Grass Pack 2 Bush 06": "can_cut_grass"
-    "Hyrule Field Grass Pack 2 Bush 07": "can_cut_grass"
-    "Hyrule Field Grass Pack 2 Bush 08": "can_cut_grass"
-    "Hyrule Field Grass Pack 2 Bush 09": "can_cut_grass"
-    "Hyrule Field Grass Pack 2 Bush 10": "can_cut_grass"
-    "Hyrule Field Grass Pack 2 Bush 11": "can_cut_grass"
-    "Hyrule Field Grass Pack 2 Bush 12": "can_cut_grass"
-    "Hyrule Field Grass Pack 3 Bush 01": "can_cut_grass"
-    "Hyrule Field Grass Pack 3 Bush 02": "can_cut_grass"
-    "Hyrule Field Grass Pack 3 Bush 03": "can_cut_grass"
-    "Hyrule Field Grass Pack 3 Bush 04": "can_cut_grass"
-    "Hyrule Field Grass Pack 3 Bush 05": "can_cut_grass"
-    "Hyrule Field Grass Pack 3 Bush 06": "can_cut_grass"
-    "Hyrule Field Grass Pack 3 Bush 07": "can_cut_grass"
-    "Hyrule Field Grass Pack 3 Bush 08": "can_cut_grass"
-    "Hyrule Field Grass Pack 3 Bush 09": "can_cut_grass"
-    "Hyrule Field Grass Pack 3 Bush 10": "can_cut_grass"
-    "Hyrule Field Grass Pack 3 Bush 11": "can_cut_grass"
-    "Hyrule Field Grass Pack 3 Bush 12": "can_cut_grass"
-    "Hyrule Field Grass Pack 4 Bush 01": "can_cut_grass"
-    "Hyrule Field Grass Pack 4 Bush 02": "can_cut_grass"
-    "Hyrule Field Grass Pack 4 Bush 03": "can_cut_grass"
-    "Hyrule Field Grass Pack 4 Bush 04": "can_cut_grass"
-    "Hyrule Field Grass Pack 4 Bush 05": "can_cut_grass"
-    "Hyrule Field Grass Pack 4 Bush 06": "can_cut_grass"
-    "Hyrule Field Grass Pack 4 Bush 07": "can_cut_grass"
-    "Hyrule Field Grass Pack 4 Bush 08": "can_cut_grass"
-    "Hyrule Field Grass Pack 4 Bush 09": "can_cut_grass"
-    "Hyrule Field Grass Pack 4 Bush 10": "can_cut_grass"
-    "Hyrule Field Grass Pack 4 Bush 11": "can_cut_grass"
-    "Hyrule Field Grass Pack 4 Bush 12": "can_cut_grass"
     "Hyrule Field River Big Fairy": "can_play_storms"
+"Hyrule Field Grass":
+  region: HYRULE_FIELD
+  age_change: false
+  locations:
+    "Hyrule Field Grass Pack 1 Bush 01": "true"
+    "Hyrule Field Grass Pack 1 Bush 02": "true"
+    "Hyrule Field Grass Pack 1 Bush 03": "true"
+    "Hyrule Field Grass Pack 1 Bush 04": "true"
+    "Hyrule Field Grass Pack 1 Bush 05": "true"
+    "Hyrule Field Grass Pack 1 Bush 06": "true"
+    "Hyrule Field Grass Pack 1 Bush 07": "true"
+    "Hyrule Field Grass Pack 1 Bush 08": "true"
+    "Hyrule Field Grass Pack 1 Bush 09": "true"
+    "Hyrule Field Grass Pack 1 Bush 10": "true"
+    "Hyrule Field Grass Pack 1 Bush 11": "true"
+    "Hyrule Field Grass Pack 1 Bush 12": "true"
+    "Hyrule Field Grass Pack 2 Bush 01": "true"
+    "Hyrule Field Grass Pack 2 Bush 02": "true"
+    "Hyrule Field Grass Pack 2 Bush 03": "true"
+    "Hyrule Field Grass Pack 2 Bush 04": "true"
+    "Hyrule Field Grass Pack 2 Bush 05": "true"
+    "Hyrule Field Grass Pack 2 Bush 06": "true"
+    "Hyrule Field Grass Pack 2 Bush 07": "true"
+    "Hyrule Field Grass Pack 2 Bush 08": "true"
+    "Hyrule Field Grass Pack 2 Bush 09": "true"
+    "Hyrule Field Grass Pack 2 Bush 10": "true"
+    "Hyrule Field Grass Pack 2 Bush 11": "true"
+    "Hyrule Field Grass Pack 2 Bush 12": "true"
+    "Hyrule Field Grass Pack 3 Bush 01": "true"
+    "Hyrule Field Grass Pack 3 Bush 02": "true"
+    "Hyrule Field Grass Pack 3 Bush 03": "true"
+    "Hyrule Field Grass Pack 3 Bush 04": "true"
+    "Hyrule Field Grass Pack 3 Bush 05": "true"
+    "Hyrule Field Grass Pack 3 Bush 06": "true"
+    "Hyrule Field Grass Pack 3 Bush 07": "true"
+    "Hyrule Field Grass Pack 3 Bush 08": "true"
+    "Hyrule Field Grass Pack 3 Bush 09": "true"
+    "Hyrule Field Grass Pack 3 Bush 10": "true"
+    "Hyrule Field Grass Pack 3 Bush 11": "true"
+    "Hyrule Field Grass Pack 3 Bush 12": "true"
+    "Hyrule Field Grass Pack 4 Bush 01": "true"
+    "Hyrule Field Grass Pack 4 Bush 02": "true"
+    "Hyrule Field Grass Pack 4 Bush 03": "true"
+    "Hyrule Field Grass Pack 4 Bush 04": "true"
+    "Hyrule Field Grass Pack 4 Bush 05": "true"
+    "Hyrule Field Grass Pack 4 Bush 06": "true"
+    "Hyrule Field Grass Pack 4 Bush 07": "true"
+    "Hyrule Field Grass Pack 4 Bush 08": "true"
+    "Hyrule Field Grass Pack 4 Bush 09": "true"
+    "Hyrule Field Grass Pack 4 Bush 10": "true"
+    "Hyrule Field Grass Pack 4 Bush 11": "true"
+    "Hyrule Field Grass Pack 4 Bush 12": "true"
 "Hyrule Field Drawbridge":
   region: HYRULE_FIELD
   time: flow
@@ -444,6 +476,7 @@
   age_change: false
   exits:
     "Market Entryway": "true"
+    "Market Grass": "is_child && can_cut_grass_no_c_button"
     "Back Alley": "is_child"
     "Market Castle Entry": "true"
     "Temple of Time Entryway": "true"
@@ -456,15 +489,18 @@
   events:
     RICHARD: "is_night && is_child"
     RUPEES: "is_child"
+"Market Grass":
+  region: MARKET
+  age_change: false
   locations:
-    "Market Grass 1": "is_child && can_cut_grass_no_c_button"
-    "Market Grass 2": "is_child && can_cut_grass_no_c_button"
-    "Market Grass 3": "is_child && can_cut_grass_no_c_button"
-    "Market Grass 4": "is_child && can_cut_grass_no_c_button"
-    "Market Grass 5": "is_child && can_cut_grass_no_c_button"
-    "Market Grass 6": "is_child && can_cut_grass_no_c_button"
-    "Market Grass 7": "is_child && can_cut_grass_no_c_button"
-    "Market Grass 8": "is_child && can_cut_grass_no_c_button"
+    "Market Grass 1": "true"
+    "Market Grass 2": "true"
+    "Market Grass 3": "true"
+    "Market Grass 4": "true"
+    "Market Grass 5": "true"
+    "Market Grass 6": "true"
+    "Market Grass 7": "true"
+    "Market Grass 8": "true"
 "Market Castle Entry":
   region: NONE
   age_change: false
@@ -476,105 +512,126 @@
   region: ENTRANCE
   exits:
     "Market": "true"
+    "Market Bazaar Items": "soul_bazaar_shopkeeper"
+"Market Bazaar Items":
+  region: ENTRANCE
+  age_change: false
   locations:
-    "Market Bazaar Item 1": "shop_price(0x20) && soul_bazaar_shopkeeper"
-    "Market Bazaar Item 2": "shop_price(0x21) && soul_bazaar_shopkeeper"
-    "Market Bazaar Item 3": "shop_price(0x22) && soul_bazaar_shopkeeper"
-    "Market Bazaar Item 4": "shop_price(0x23) && soul_bazaar_shopkeeper"
-    "Market Bazaar Item 5": "shop_price(0x24) && soul_bazaar_shopkeeper"
-    "Market Bazaar Item 6": "shop_price(0x25) && soul_bazaar_shopkeeper"
-    "Market Bazaar Item 7": "shop_price(0x26) && soul_bazaar_shopkeeper"
-    "Market Bazaar Item 8": "shop_price(0x27) && soul_bazaar_shopkeeper"
+    "Market Bazaar Item 1": "shop_price(0x20)"
+    "Market Bazaar Item 2": "shop_price(0x21)"
+    "Market Bazaar Item 3": "shop_price(0x22)"
+    "Market Bazaar Item 4": "shop_price(0x23)"
+    "Market Bazaar Item 5": "shop_price(0x24)"
+    "Market Bazaar Item 6": "shop_price(0x25)"
+    "Market Bazaar Item 7": "shop_price(0x26)"
+    "Market Bazaar Item 8": "shop_price(0x27)"
 "Market Potion Shop":
   region: ENTRANCE
   exits:
     "Market": "true"
+    "Market Potion Shop Items": "soul_npc(SOUL_NPC_POTION_SHOPKEEPER)"
+"Market Potion Shop Items":
+  region: ENTRANCE
+  age_change: false
   locations:
-    "Market Potion Shop Item 1": "shop_price(0x28) && soul_npc(SOUL_NPC_POTION_SHOPKEEPER)"
-    "Market Potion Shop Item 2": "shop_price(0x29) && soul_npc(SOUL_NPC_POTION_SHOPKEEPER)"
-    "Market Potion Shop Item 3": "shop_price(0x2a) && soul_npc(SOUL_NPC_POTION_SHOPKEEPER)"
-    "Market Potion Shop Item 4": "shop_price(0x2b) && soul_npc(SOUL_NPC_POTION_SHOPKEEPER)"
-    "Market Potion Shop Item 5": "shop_price(0x2c) && soul_npc(SOUL_NPC_POTION_SHOPKEEPER)"
-    "Market Potion Shop Item 6": "shop_price(0x2d) && soul_npc(SOUL_NPC_POTION_SHOPKEEPER)"
-    "Market Potion Shop Item 7": "shop_price(0x2e) && soul_npc(SOUL_NPC_POTION_SHOPKEEPER)"
-    "Market Potion Shop Item 8": "shop_price(0x2f) && soul_npc(SOUL_NPC_POTION_SHOPKEEPER)"
+    "Market Potion Shop Item 1": "shop_price(0x28)"
+    "Market Potion Shop Item 2": "shop_price(0x29)"
+    "Market Potion Shop Item 3": "shop_price(0x2a)"
+    "Market Potion Shop Item 4": "shop_price(0x2b)"
+    "Market Potion Shop Item 5": "shop_price(0x2c)"
+    "Market Potion Shop Item 6": "shop_price(0x2d)"
+    "Market Potion Shop Item 7": "shop_price(0x2e)"
+    "Market Potion Shop Item 8": "shop_price(0x2f)"
 "Market Bombchu Shop":
   region: ENTRANCE
   exits:
     "Back Alley": "true"
+    "Market Bombchu Shop Items": "soul_bombchu_shopkeeper"
+"Market Bombchu Shop Items":
+  region: ENTRANCE
+  age_change: false
   locations:
-    "Market Bombchu Shop Item 1": "shop_price(0x08) && soul_bombchu_shopkeeper"
-    "Market Bombchu Shop Item 2": "shop_price(0x09) && soul_bombchu_shopkeeper"
-    "Market Bombchu Shop Item 3": "shop_price(0x0a) && soul_bombchu_shopkeeper"
-    "Market Bombchu Shop Item 4": "shop_price(0x0b) && soul_bombchu_shopkeeper"
-    "Market Bombchu Shop Item 5": "shop_price(0x0c) && soul_bombchu_shopkeeper"
-    "Market Bombchu Shop Item 6": "shop_price(0x0d) && soul_bombchu_shopkeeper"
-    "Market Bombchu Shop Item 7": "shop_price(0x0e) && soul_bombchu_shopkeeper"
-    "Market Bombchu Shop Item 8": "shop_price(0x0f) && soul_bombchu_shopkeeper"
+    "Market Bombchu Shop Item 1": "shop_price(0x08)"
+    "Market Bombchu Shop Item 2": "shop_price(0x09)"
+    "Market Bombchu Shop Item 3": "shop_price(0x0a)"
+    "Market Bombchu Shop Item 4": "shop_price(0x0b)"
+    "Market Bombchu Shop Item 5": "shop_price(0x0c)"
+    "Market Bombchu Shop Item 6": "shop_price(0x0d)"
+    "Market Bombchu Shop Item 7": "shop_price(0x0e)"
+    "Market Bombchu Shop Item 8": "shop_price(0x0f)"
 "Market Pot House":
   region: ENTRANCE
   exits:
     "Market Entryway": "true"
+    "Market Pot House Child": "is_child"
+    "Market Pot House Adult": "is_adult"
   events:
     RUPEES: "true"
+"Market Pot House Child":
+  region: ENTRANCE
+  age_change: false
   locations:
-    "Market Pot House Big Poes": "is_adult && has_big_poe && soul_poe_collector"
-    "Market Pot House GS": "gs && is_child"
-    "Market Pot House Child Pot Ground 1": "is_child"
-    "Market Pot House Child Pot Ground 2": "is_child"
-    "Market Pot House Child Pot Ground 3": "is_child"
-    "Market Pot House Child Pot Ground 4": "is_child"
-    "Market Pot House Child Pot Ground 5": "is_child"
-    "Market Pot House Child Pot Ground 6": "is_child"
-    "Market Pot House Child Pot Ground 7": "is_child"
-    "Market Pot House Child Pot Ground 8": "is_child"
-    "Market Pot House Child Pot Ground 9": "is_child"
-    "Market Pot House Child Pot Ground 10": "is_child"
-    "Market Pot House Child Pot Ground 11": "is_child"
-    "Market Pot House Child Pot Ground 12": "is_child"
-    "Market Pot House Child Pot Ground 13": "is_child"
-    "Market Pot House Child Pot Ground 14": "is_child"
-    "Market Pot House Child Pot Ground 15": "is_child"
-    "Market Pot House Child Pot Ground 16": "is_child"
-    "Market Pot House Child Pot Ground 17": "is_child"
-    "Market Pot House Child Pot Ground 18": "is_child"
-    "Market Pot House Child Pot Ground 19": "is_child"
-    "Market Pot House Child Pot Ground 20": "is_child"
-    "Market Pot House Child Pot Ground 21": "is_child"
-    "Market Pot House Child Pot Ground 22": "is_child"
-    "Market Pot House Child Pot Ground 23": "is_child"
-    "Market Pot House Child Pot Ground 24": "is_child"
-    "Market Pot House Child Pot Ground 25": "is_child"
-    "Market Pot House Child Pot Ground 26": "is_child"
-    "Market Pot House Child Pot Ground 27": "is_child"
-    "Market Pot House Child Pot Ground 28": "is_child"
-    "Market Pot House Child Pot Ground 29": "is_child"
-    "Market Pot House Child Pot Ground 30": "is_child"
-    "Market Pot House Child Pot Ground 31": "is_child"
-    "Market Pot House Child Pot Ground 32": "is_child"
-    "Market Pot House Child Pot Ground 33": "is_child"
-    "Market Pot House Child Pot Ground 34": "is_child"
-    "Market Pot House Child Pot Ground 35": "is_child"
-    "Market Pot House Child Pot Ground 36": "is_child"
-    "Market Pot House Child Pot Ground 37": "is_child"
-    "Market Pot House Child Pot Ground 38": "is_child"
-    "Market Pot House Child Pot Ground 39": "is_child"
-    "Market Pot House Child Pot Ground 40": "is_child"
-    "Market Pot House Child Pot Ground 41": "is_child"
-    "Market Pot House Child Pot Ground 42": "is_child"
-    "Market Pot House Child Pot Above 1": "is_child"
-    "Market Pot House Child Pot Above 2": "is_child"
-    "Market Pot House Adult Pot 1": "is_adult"
-    "Market Pot House Adult Pot 2": "is_adult"
-    "Market Pot House Adult Pot 3": "is_adult"
-    "Market Pot House Adult Pot 4": "is_adult"
-    "Market Pot House Adult Pot 5": "is_adult"
-    "Market Pot House Adult Pot 6": "is_adult"
-    "Market Pot House Adult Pot 7": "is_adult"
-    "Market Pot House Adult Pot 8": "is_adult"
-    "Market Pot House Adult Pot 9": "is_adult"
-    "Market Pot House Adult Pot 10": "is_adult"
-    "Market Pot House Adult Pot 11": "is_adult"
+    "Market Pot House GS": "gs"
+    "Market Pot House Child Pot Ground 1": "true"
+    "Market Pot House Child Pot Ground 2": "true"
+    "Market Pot House Child Pot Ground 3": "true"
+    "Market Pot House Child Pot Ground 4": "true"
+    "Market Pot House Child Pot Ground 5": "true"
+    "Market Pot House Child Pot Ground 6": "true"
+    "Market Pot House Child Pot Ground 7": "true"
+    "Market Pot House Child Pot Ground 8": "true"
+    "Market Pot House Child Pot Ground 9": "true"
+    "Market Pot House Child Pot Ground 10": "true"
+    "Market Pot House Child Pot Ground 11": "true"
+    "Market Pot House Child Pot Ground 12": "true"
+    "Market Pot House Child Pot Ground 13": "true"
+    "Market Pot House Child Pot Ground 14": "true"
+    "Market Pot House Child Pot Ground 15": "true"
+    "Market Pot House Child Pot Ground 16": "true"
+    "Market Pot House Child Pot Ground 17": "true"
+    "Market Pot House Child Pot Ground 18": "true"
+    "Market Pot House Child Pot Ground 19": "true"
+    "Market Pot House Child Pot Ground 20": "true"
+    "Market Pot House Child Pot Ground 21": "true"
+    "Market Pot House Child Pot Ground 22": "true"
+    "Market Pot House Child Pot Ground 23": "true"
+    "Market Pot House Child Pot Ground 24": "true"
+    "Market Pot House Child Pot Ground 25": "true"
+    "Market Pot House Child Pot Ground 26": "true"
+    "Market Pot House Child Pot Ground 27": "true"
+    "Market Pot House Child Pot Ground 28": "true"
+    "Market Pot House Child Pot Ground 29": "true"
+    "Market Pot House Child Pot Ground 30": "true"
+    "Market Pot House Child Pot Ground 31": "true"
+    "Market Pot House Child Pot Ground 32": "true"
+    "Market Pot House Child Pot Ground 33": "true"
+    "Market Pot House Child Pot Ground 34": "true"
+    "Market Pot House Child Pot Ground 35": "true"
+    "Market Pot House Child Pot Ground 36": "true"
+    "Market Pot House Child Pot Ground 37": "true"
+    "Market Pot House Child Pot Ground 38": "true"
+    "Market Pot House Child Pot Ground 39": "true"
+    "Market Pot House Child Pot Ground 40": "true"
+    "Market Pot House Child Pot Ground 41": "true"
+    "Market Pot House Child Pot Ground 42": "true"
+    "Market Pot House Child Pot Above 1": "true"
+    "Market Pot House Child Pot Above 2": "true"
+"Market Pot House Adult":
+  region: ENTRANCE
+  age_change: false
+  locations:
+    "Market Pot House Big Poes": "has_big_poe && soul_poe_collector"
+    "Market Pot House Adult Pot 1": "true"
+    "Market Pot House Adult Pot 2": "true"
+    "Market Pot House Adult Pot 3": "true"
+    "Market Pot House Adult Pot 4": "true"
+    "Market Pot House Adult Pot 5": "true"
+    "Market Pot House Adult Pot 6": "true"
+    "Market Pot House Adult Pot 7": "true"
+    "Market Pot House Adult Pot 8": "true"
+    "Market Pot House Adult Pot 9": "true"
+    "Market Pot House Adult Pot 10": "true"
+    "Market Pot House Adult Pot 11": "true"
 "Back Alley":
   region: MARKET
   age_change: false
@@ -602,12 +659,16 @@
   age_change: false
   exits:
     "Market": "true"
+    "Bombchu Bowling Rewards": "(has_bomb_bag || has_bombchu_license) && can_use_wallet(1) && soul_bombchu_bowling_lady"
+"Bombchu Bowling Rewards":
+  region: ENTRANCE
+  age_change: false
   events:
+    BOMBCHU: "true"
     BOMBS: "can_use_wallet(2)"
-    BOMBCHU: "can_use_wallet(1)"
   locations:
-    "Bombchu Bowling Reward 1": "(has_bomb_bag || has_bombchu_license) && can_use_wallet(1) && soul_bombchu_bowling_lady"
-    "Bombchu Bowling Reward 2": "(has_bomb_bag || has_bombchu_license) && can_use_wallet(1) && soul_bombchu_bowling_lady"
+    "Bombchu Bowling Reward 1": "true"
+    "Bombchu Bowling Reward 2": "true"
 "Shooting Gallery Child":
   region: ENTRANCE
   exits:
@@ -629,6 +690,7 @@
   region: LON_LON_RANCH
   exits:
     "Hyrule Field": "true"
+    "Lon Lon Ranch Pots": "is_child"
     "Lon Lon Ranch Silo": "true"
     "Lon Lon Ranch Stables": "true"
     "Lon Lon Ranch House": "is_day"
@@ -644,13 +706,17 @@
     "Lon Lon Ranch GS House": "is_child && gs_night && (can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_sword || can_use_sticks || can_use_din)))"
     "Lon Lon Ranch GS Rain Shed": "is_child && gs_night"
     "Lon Lon Ranch GS Back Wall": "is_child && gs_night && (can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_din)))"
-    "Lon Lon Ranch Pot 1": "is_child"
-    "Lon Lon Ranch Pot 2": "is_child"
-    "Lon Lon Ranch Pot 3": "is_child"
-    "Lon Lon Ranch Pot 4": "is_child"
-    "Lon Lon Ranch Pot 5": "is_child"
-    "Lon Lon Ranch Pot 6": "is_child"
-    "Lon Lon Ranch Pot 7": "is_child"
+"Lon Lon Ranch Pots":
+  region: LON_LON_RANCH
+  age_change: false
+  locations:
+    "Lon Lon Ranch Pot 1": "true"
+    "Lon Lon Ranch Pot 2": "true"
+    "Lon Lon Ranch Pot 3": "true"
+    "Lon Lon Ranch Pot 4": "true"
+    "Lon Lon Ranch Pot 5": "true"
+    "Lon Lon Ranch Pot 6": "true"
+    "Lon Lon Ranch Pot 7": "true"
 "Lon Lon Ranch Stables":
   region: ENTRANCE
   exits:
@@ -780,7 +846,7 @@
   age_change: false
   exits:
     "Ganon Castle Exterior": "is_adult && rainbow_bridge"
-    "Hyrule Castle Courtyard": "is_child && trick(OOT_COURTYARD_FROM_GANON )"
+    "Hyrule Castle Courtyard": "is_child && trick(OOT_COURTYARD_FROM_GANON)"
     "Ganon Castle": "true"
 "Near Fairy Fountain Defense":
   region: GANON_CASTLE_EXTERIOR
@@ -2180,6 +2246,7 @@
     "Desert Colossus Grotto": "can_lift_silver"
     "Spirit Temple Adult Hand": "climb_anywhere"
     "Spirit Temple Child Hand": "climb_anywhere"
+    "Desert Colossus Oasis": "can_play_storms"
   events:
     BEAN_DESERT_COLOSSUS: "can_use_beans"
   locations:
@@ -2187,16 +2254,19 @@
     "Desert Colossus GS Soil": "gs_soil && can_damage_skull"
     "Desert Colossus GS Tree": "is_adult && gs_night && (can_collect_distance || (climb_anywhere && (has_explosives || has_ranged_weapon || can_use_din)))"
     "Desert Colossus GS Plateau": "is_adult && gs_night && ((can_collect_distance && trick(OOT_COLOSSUS_GS_NO_BEAN)) || can_ride_bean(BEAN_DESERT_COLOSSUS))"
-    "Desert Colossus Oasis Fairy 1": "can_play_storms"
-    "Desert Colossus Oasis Fairy 2": "can_play_storms"
-    "Desert Colossus Oasis Fairy 3": "can_play_storms"
-    "Desert Colossus Oasis Fairy 4": "can_play_storms"
-    "Desert Colossus Oasis Fairy 5": "can_play_storms"
-    "Desert Colossus Oasis Fairy 6": "can_play_storms"
-    "Desert Colossus Oasis Fairy 7": "can_play_storms"
-    "Desert Colossus Oasis Fairy 8": "can_play_storms"
   gossip:
     "Desert Colossus Gossip": "true"
+"Desert Colossus Oasis":
+  region: DESERT_COLOSSUS
+  locations:
+    "Desert Colossus Oasis Fairy 1": "true"
+    "Desert Colossus Oasis Fairy 2": "true"
+    "Desert Colossus Oasis Fairy 3": "true"
+    "Desert Colossus Oasis Fairy 4": "true"
+    "Desert Colossus Oasis Fairy 5": "true"
+    "Desert Colossus Oasis Fairy 6": "true"
+    "Desert Colossus Oasis Fairy 7": "true"
+    "Desert Colossus Oasis Fairy 8": "true"
 "Desert Colossus Spirit Exit":
   region: DESERT_COLOSSUS
   time: flow
