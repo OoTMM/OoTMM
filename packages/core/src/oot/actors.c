@@ -274,6 +274,8 @@ static int canSpawnActor(GameState_Play* play, s16 actorId, u16 valid)
             return 1;
         else
             return 0;
+    case AC_BG_JYA_BLOCK:
+        return !Config_Flag(CFG_OOT_AGELESS_STRENGTH);
     default:
         return 1;
     }
