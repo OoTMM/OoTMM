@@ -11,7 +11,6 @@
 #include <combo/multi.h>
 #include <combo/context.h>
 
-extern void* gMmMag;
 GameState_Play* gPlay;
 
 static int isRainbowBridgeOpen(void)

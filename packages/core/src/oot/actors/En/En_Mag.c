@@ -1,7 +1,5 @@
 #include <combo.h>
 
-void* gMmMag;
-
 static void BlitTexture(GfxContext* gfx, u32 addr, s16 w, s16 h, s16 x, s16 y, float scale)
 {
     float rScale;
@@ -43,19 +41,11 @@ static void BlitTexture(GfxContext* gfx, u32 addr, s16 w, s16 h, s16 x, s16 y, f
 
 void EnMag_AfterDraw(Actor* this, GameState_Play* play)
 {
-    u32 size;
-    u32 objectId;
     float alpha;
     int iAlpha;
+    void* mmMag;
 
-    if (!gMmMag)
-    {
-        objectId = MASK_FOREIGN_OBJECT | 0x115;
-        size = comboLoadObject(NULL, objectId);
-        gMmMag = malloc(size);
-        comboLoadObject(gMmMag, objectId);
-    }
-
+    mmMag = comboGetObject(0x115 | MASK_FOREIGN_OBJECT);
     alpha = *(float*)((char*)this + 0xe2f0);
     iAlpha = (int)(alpha);
 
@@ -79,7 +69,7 @@ void EnMag_AfterDraw(Actor* this, GameState_Play* play)
     gDPSetRenderMode(OVERLAY_DISP++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
     gDPSetTextureFilter(OVERLAY_DISP++, G_TF_BILERP);
 
-    if (iAlpha)
+    if (iAlpha && mmMag)
     {
         gDPSetPrimColor(OVERLAY_DISP++, 0, 0, 0xff, 0xff, 0xff, iAlpha);
 
@@ -87,7 +77,7 @@ void EnMag_AfterDraw(Actor* this, GameState_Play* play)
         BlitTexture(play->gs.gfx, 0x6000300, 160, 160, 30, 50, 0.65f);
 
         /* MM Logo */
-        gSPSegment(OVERLAY_DISP++, 0x6, gMmMag);
+        gSPSegment(OVERLAY_DISP++, 0x6, mmMag);
         BlitTexture(play->gs.gfx, 0x06011e48, 0x80, 0x70, 165, 65, 0.65f);
         BlitTexture(play->gs.gfx, 0x06000000, 0x90, 0x40, 190, 85, 0.65f);
     }
