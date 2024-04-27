@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/souls.h>
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x15c) = (h); } while (0)
 
@@ -9,6 +10,9 @@ void BgHakaTomb_HandlerNull(Actor* this, GameState_Play* play)
 
 void BgHakaTomb_LearnSongStorms(Actor* this, GameState_Play* play)
 {
+    if (!comboHasSoulMm(GI_MM_SOUL_NPC_COMPOSER_BROS))
+        return;
+
     if (gMmExtraFlags.songStorms || Actor_HasParent(this))
     {
         gMmExtraFlags.songStorms = 1;
