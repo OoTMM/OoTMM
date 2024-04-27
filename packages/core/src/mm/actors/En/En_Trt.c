@@ -35,18 +35,6 @@ void EnTrt_GiveItem_BottledRedPotion(Actor* actor, GameState_Play* play, s16 gi,
 PATCH_CALL(0x80a8c54c, EnTrt_GiveItem_BottledRedPotion);
 PATCH_CALL(0x80ad4094, EnTrt_GiveItem_BottledRedPotion); /* En_Trt2 */
 
-static int EnTrt_HasGivenItemBottleRedPotion(Actor* this, GameState_Play* play)
-{
-    if (MM_CHECK_EVENT_INF(EV_MM_WEEK_BOTTLE_RED_POTION))
-        return 1;
-    if (Actor_HasParent(this))
-        return 1;
-    return 0;
-}
-
-PATCH_CALL(0x80a8c49c, EnTrt_HasGivenItemBottleRedPotion);
-PATCH_CALL(0x80ad4000, EnTrt_HasGivenItemBottleRedPotion); /* En_Trt2 */
-
 static void EnTrt_GiveItem(Actor_EnTrt* this, GameState_Play* play, s16 gi, float a, float b)
 {
     ComboItemQuery q;

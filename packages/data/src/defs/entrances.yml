@@ -410,7 +410,7 @@ MM_BOMB_SHOP:                                   { game: mm, id: 0xca00, type: in
 MM_POST_OFFICE:                                 { game: mm, id: 0x5600, type: indoors, areas: ["MM Clock Town West", "MM Post Office"], reverse: MM_CLOCK_TOWN_WEST_FROM_POST_OFFICE }
 MM_LOTTERY:                                     { game: mm, id: 0x6c00, type: indoors, areas: ["MM Clock Town West", "MM Lottery"], reverse: MM_CLOCK_TOWN_WEST_FROM_LOTTERY }
 MM_KAFEI_HIDEOUT:                               { game: mm, id: 0x0e10, type: indoors, maps: [MM_LAUNDRY_POOL, MM_CURIOSITY_SHOP], areas: ["MM Laundry Pool", "MM Kafei Hideout"], reverse: MM_LAUNDRY_POOL_FROM_KAFEI_HIDEOUT }
-MM_POTION_SHOP:                                 { game: mm, id: 0x0400, type: indoors, areas: ["MM Swamp Front", "MM Swamp Potion Shop"], reverse: MM_SWAMP_FROM_POTION_SHOP }
+MM_POTION_SHOP:                                 { game: mm, id: 0x0400, type: indoors, areas: ["MM Swamp Front", "MM Swamp Potion Shop"], reverse: MM_SWAMP_FROM_POTION_SHOP, debug: [INTERIOR, 'Swamp Potion Shop'] }
 MM_DEKU_SHRINE:                                 { game: mm, id: 0x9e00, type: indoors, areas: ["MM Near Deku Shrine", "MM Deku Shrine"], reverse: MM_DEKU_PALACE_EXTERIOR_FROM_SHRINE }
 MM_GORON_SHOP:                                  { game: mm, id: 0x7400, type: indoors, areas: ["MM Goron Shrine", "MM Goron Shop"], reverse: MM_GORON_SHRINE_FROM_SHOP }
 MM_FISHER_HUT:                                  { game: mm, id: 0x7200, type: indoors, areas: ["MM Great Bay Coast", "MM Fisher's Hut"], reverse: MM_GREAT_BAY_COAST_FROM_FISHER_HUT }
