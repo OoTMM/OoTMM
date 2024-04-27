@@ -405,6 +405,11 @@ static void Actor_UpdateDamageTable(Actor* this)
     if (GetDamage(tbl, 8) == 0 && !gSharedCustomSave.extraSwordsOot)
         return;
     dmg = 1 + gSharedCustomSave.extraSwordsOot;
+
+    /* Dead hand takes MS-level damage from KS */
+    if (dmg < 2 && (this->id == AC_EN_DH || this->id == AC_EN_DHA))
+        dmg = 2;
+
     SetDamage(tbl, 8, dmg);
     SetDamage(tbl, 22, dmg);
     SetDamage(tbl, 25, dmg * 2);

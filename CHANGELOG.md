@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix damage being wrong against Dead Hand in some cases.
 - Fix death after leaving a grotto in MM in ER leading to wrong warps in some cases.
 
 ## [22.0] - 2024-04-24
