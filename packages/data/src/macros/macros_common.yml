@@ -46,6 +46,13 @@
 
 # NPC Souls
 "shared_soul_npc(a, b)": "cond(setting(sharedSoulsNpc), soul_npc(b), soul_npc(a))"
+"soul_banker": "shared_soul_npc(SOUL_NPC_BANKER, SHARED_SOUL_NPC_BANKER)"
+"soul_astronomer": "shared_soul_npc(SOUL_NPC_ASTRONOMER, SHARED_SOUL_NPC_ASTRONOMER)"
+"soul_gorman": "shared_soul_npc(SOUL_NPC_GORMAN, SHARED_SOUL_NPC_GORMAN)"
+"soul_honey_darling": "shared_soul_npc(SOUL_NPC_HONEY_DARLING, SHARED_SOUL_NPC_HONEY_DARLING)"
+"soul_composer_bros": "shared_soul_npc(SOUL_NPC_COMPOSER_BROS, SHARED_SOUL_NPC_COMPOSER_BROS)"
+"soul_citizen": "shared_soul_npc(SOUL_NPC_CITIZEN, SHARED_SOUL_NPC_CITIZEN)"
+"soul_bombers": "shared_soul_npc(SOUL_NPC_BOMBERS, SHARED_SOUL_NPC_BOMBERS)"
 "soul_fishing_pond_owner": "shared_soul_npc(SOUL_NPC_FISHING_POND_OWNER, SHARED_SOUL_NPC_FISHING_POND_OWNER)"
 "soul_zora_shopkeeper": "shared_soul_npc(SOUL_NPC_ZORA_SHOPKEEPER, SHARED_SOUL_NPC_ZORA_SHOPKEEPER)"
 "soul_zora": "shared_soul_npc(SOUL_NPC_ZORA, SHARED_SOUL_NPC_ZORA)"
