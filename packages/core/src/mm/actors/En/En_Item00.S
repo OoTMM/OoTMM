@@ -10,12 +10,11 @@ PATCH_START 0x801aded0
 .int EnItem00_InitWrapper
 PATCH_END
 
-UpdateEnd:
-  /* Original */
-  sh    zero,0x14a(s0)
-
-  j EnItem00_SetXflagCollectedHandler
-   move  a0,s0
+/* Use our draw handler */
+PATCH_START 0x800a75b8
+  j EnItem00_Draw
+   nop
+PATCH_END
 
 /* Use our xflag post-collection handler */
 PATCH_START 0x800a7108

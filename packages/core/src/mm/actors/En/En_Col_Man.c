@@ -31,12 +31,10 @@ PATCH_CALL(0x80afdecc, EnColMan_GiveItem);
 
 void EnColMan_DrawHeartPiece(Actor* this, GameState_Play* play)
 {
-    static const float scale = 12.5f;
     ComboItemOverride o;
 
     EnColMan_ItemOverride(&o);
-    ModelViewScale(scale, scale, scale, MAT_MUL);
-    Draw_Gi(play, this, o.gi, 0);
+    Draw_Freestanding(play, this, o.gi, 0);
 }
 
 PATCH_FUNC(0x80afe414, EnColMan_DrawHeartPiece);

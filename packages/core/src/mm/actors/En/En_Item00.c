@@ -4,7 +4,7 @@
 #include <combo/config.h>
 #include <combo/draw.h>
 
-static void EnItem00_ItemQuery(ComboItemQuery* q, Actor_EnItem00* this, GameState_Play* play, s16 gi)
+void EnItem00_ItemQuery(ComboItemQuery* q, Actor_EnItem00* this, GameState_Play* play, s16 gi)
 {
     memset(q, 0, sizeof(*q));
 
@@ -51,21 +51,6 @@ void EnItem00_GiveItem(Actor_EnItem00* this, GameState_Play* play, s16 gi, float
 
 PATCH_CALL(0x800a700c, EnItem00_GiveItem);
 PATCH_CALL(0x800a6a8c, EnItem00_GiveItem);
-
-void EnItem00_DrawHeartPiece(Actor_EnItem00* this, GameState_Play* play)
-{
-    static const float scale = 12.5f;
-
-    ComboItemQuery q;
-    ComboItemOverride o;
-
-    EnItem00_ItemQuery(&q, this, play, GI_OOT_HEART_PIECE);
-    comboItemOverride(&o, &q);
-    ModelViewScale(scale, scale, scale, MAT_MUL);
-    Draw_Gi(play, &this->base, o.gi, 0);
-}
-
-PATCH_FUNC(0x800a75b8, EnItem00_DrawHeartPiece);
 
 static s16 bombDrop(s16 dropId)
 {
