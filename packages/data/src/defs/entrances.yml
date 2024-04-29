@@ -414,7 +414,7 @@ MM_POTION_SHOP:                                 { game: mm, id: 0x0400, type: in
 MM_DEKU_SHRINE:                                 { game: mm, id: 0x9e00, type: indoors, areas: ["MM Near Deku Shrine", "MM Deku Shrine"], reverse: MM_DEKU_PALACE_EXTERIOR_FROM_SHRINE }
 MM_GORON_SHOP:                                  { game: mm, id: 0x7400, type: indoors, areas: ["MM Goron Shrine", "MM Goron Shop"], reverse: MM_GORON_SHRINE_FROM_SHOP }
 MM_FISHER_HUT:                                  { game: mm, id: 0x7200, type: indoors, areas: ["MM Great Bay Coast", "MM Fisher's Hut"], reverse: MM_GREAT_BAY_COAST_FROM_FISHER_HUT }
-MM_LABORATORY:                                  { game: mm, id: 0x5800, type: indoors, areas: ["MM Great Bay Coast", "MM Laboratory"], reverse: MM_GREAT_BAY_COAST_FROM_LABORATORY }
+MM_LABORATORY:                                  { game: mm, id: 0x5800, type: indoors, areas: ["MM Great Bay Coast", "MM Laboratory"], reverse: MM_GREAT_BAY_COAST_FROM_LABORATORY, debug: [INTERIOR, 'Great Bay Laboratory'] }
 MM_ROOM_EVANS:                                  { game: mm, id: 0x9230, type: indoors, areas: ["MM Zora Hall", "MM Evan's Room"], reverse: MM_ZORA_HALL_FROM_EVANS, debug: [INTERIOR, "Evan"] }
 MM_ROOM_JAPAS:                                  { game: mm, id: 0x9210, type: indoors, areas: ["MM Zora Hall", "MM Japas' Room"], reverse: MM_ZORA_HALL_FROM_JAPAS }
 MM_ROOM_TIJO:                                   { game: mm, id: 0x9200, type: indoors, areas: ["MM Zora Hall", "MM Tijo's Room"], reverse: MM_ZORA_HALL_FROM_TIJO }

@@ -42,18 +42,10 @@ static void EnItem00_DrawXflag(Actor_EnItem00* this, GameState_Play* play)
         this->xflagGi = gi;
     }
 
-    Draw_Freestanding(play, &this->base, gi, 0);
-}
-
-void EnItem00_Draw(Actor_EnItem00* this, GameState_Play* play)
-{
-    ComboItemQuery q;
-    ComboItemOverride o;
-
-    EnItem00_ItemQuery(&q, this, play, 0);
-    comboItemOverride(&o, &q);
-    if (o.gi)
-        Draw_Freestanding(play, &this->base, o.gi, 0);
+    ModelViewTranslate(this->base.world.pos.x, this->base.world.pos.y + 20.f, this->base.world.pos.z, MAT_SET);
+    ModelViewScale(0.35f, 0.35f, 0.35f, MAT_MUL);
+    ModelViewRotateY(this->base.rot2.y * ((M_PI * 2.f) / 32767.f), MAT_MUL);
+    Draw_Gi(play, &this->base, gi, 0);
 }
 
 static int EnItem00_XflagCanCollect(Actor_EnItem00* this, GameState_Play* play)

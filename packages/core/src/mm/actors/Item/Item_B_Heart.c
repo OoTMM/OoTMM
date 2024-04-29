@@ -29,7 +29,7 @@ void ItemBHeart_Draw(Actor* this, GameState_Play* play)
 
     ItemBHeart_ItemQuery(&q, play);
     comboItemOverride(&o, &q);
-    Draw_Freestanding(play, this, o.gi, DRAW_RAW);
+    Draw_Gi(play, this, o.gi, DRAW_RAW);
 }
 
 PATCH_FUNC(0x808bcfc4, ItemBHeart_Draw);

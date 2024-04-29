@@ -5,12 +5,6 @@ PATCH_START 0x800e775c
 .int 0x1a4
 PATCH_END
 
-/* Use our draw handler */
-PATCH_START 0x80013498
-  j EnItem00_Draw
-   nop
-PATCH_END
-
 /* Use custom callbacks */
 PATCH_START 0x800e7760
 .int EnItem00_InitWrapper

@@ -505,7 +505,7 @@ static void cheatAllItems(GameState_Play* play)
     gSave.inventory.items[ITS_MM_BOTTLE + 1] = ITEM_MM_SPRING_WATER_HOT;
     gSave.inventory.items[ITS_MM_BOTTLE + 2] = ITEM_MM_MAGIC_MUSHROOM;
     gSave.inventory.items[ITS_MM_BOTTLE + 3] = ITEM_MM_POE;
-    gSave.inventory.items[ITS_MM_BOTTLE + 4] = ITEM_MM_BOTTLE_EMPTY;
+    gSave.inventory.items[ITS_MM_BOTTLE + 4] = ITEM_MM_FISH;
     gSave.inventory.items[ITS_MM_BOTTLE + 5] = ITEM_MM_BOTTLE_EMPTY;
 
     gSave.inventory.items[ITS_MM_STICKS] = ITEM_MM_STICK;

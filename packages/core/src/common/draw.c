@@ -69,16 +69,6 @@ void Draw_Gi(GameState_Play* play, Actor* actor, s16 gi, int flags)
     drawGiParam(play, gi);
 }
 
-void Draw_Freestanding(GameState_Play* play, Actor* actor, s16 gi, int flags)
-{
-    static const float scale = 0.40f;
-
-    ModelViewTranslate(actor->world.pos.x, actor->world.pos.y + 20.f, actor->world.pos.z, MAT_SET);
-    ModelViewScale(scale, scale, scale, MAT_MUL);
-    ModelViewRotateY(actor->rot2.y * ((M_PI * 2.f) / 32767.f), MAT_MUL);
-    Draw_Gi(play, actor, gi, 0);
-}
-
 void comboPlayerDrawGI(GameState_Play* play, int drawGiMinusOne)
 {
     drawGiParamDrawId(play, (u8)(drawGiMinusOne + 1), playerDrawGiParam);
