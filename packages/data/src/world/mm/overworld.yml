@@ -2770,7 +2770,7 @@
     FAIRY: "can_get_gossip_fairy || scarecrow_hookshot || short_hook_anywhere"
   exits:
     "Road to Ikana Front": "can_play_epona || short_hook_anywhere || (can_goron_bomb_jump && has_bombs)"
-    "Road to Ikana Top": "((has(MASK_GARO) || has(MASK_GIBDO)) && (can_hookshot || (can_hookshot_short && (trick(MM_HARD_HOOKSHOT) || is_adult)))) || short_hook_anywhere"
+    "Road to Ikana Top": "(soul_poe_collector && (has(MASK_GARO) || has(MASK_GIBDO)) && (can_hookshot || (can_hookshot_short && (trick(MM_HARD_HOOKSHOT) || is_adult)))) || short_hook_anywhere"
     "Ikana Graveyard": "true"
   locations:
     "Road to Ikana Stone Mask": "can_use_lens_strict && has_red_or_blue_potion"
