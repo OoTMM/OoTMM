@@ -360,6 +360,8 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
             return opt(comboHasSoulMm(GI_MM_SOUL_NPC_BAZAAR_SHOPKEEPER));
         else
             return opt(comboHasSoulMm(GI_MM_SOUL_NPC_SHOOTING_GALLERY_OWNER));
+    case AC_EN_SYATEKI_OKUTA:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_SHOOTING_GALLERY_OWNER));
     case AC_EN_MK:
         return opt(comboHasSoulMm(GI_MM_SOUL_NPC_SCIENTIST));
     case AC_EN_IN:

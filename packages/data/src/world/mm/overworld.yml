@@ -517,8 +517,8 @@
   exits:
     "Clock Town East": "true"
   locations:
-    "Town Archery Reward 1": "soul_bazaar_shopkeeper && has_bow && can_use_wallet(1) && (before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || between(DAY3_AM_06_00, NIGHT3_PM_10_00))"
-    "Town Archery Reward 2": "soul_bazaar_shopkeeper && has_bow && can_use_wallet(1) && (before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || between(DAY3_AM_06_00, NIGHT3_PM_10_00))"
+    "Town Archery Reward 1": "soul_shooting_gallery_owner && has_bow && can_use_wallet(1) && (before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || between(DAY3_AM_06_00, NIGHT3_PM_10_00))"
+    "Town Archery Reward 2": "soul_shooting_gallery_owner && has_bow && can_use_wallet(1) && (before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || between(DAY3_AM_06_00, NIGHT3_PM_10_00))"
 "Chest Game":
   region: ENTRANCE
   exits:
@@ -1194,8 +1194,8 @@
   exits:
     "Road to Southern Swamp": "true"
   locations:
-    "Swamp Archery Reward 1": "soul_shooting_gallery_owner && has_bow && can_use_wallet(1) && (before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || between(DAY3_AM_06_00, NIGHT3_PM_10_00))"
-    "Swamp Archery Reward 2": "soul_shooting_gallery_owner && has_bow && can_use_wallet(1) && (before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || between(DAY3_AM_06_00, NIGHT3_PM_10_00))"
+    "Swamp Archery Reward 1": "soul_bazaar_shopkeeper && has_bow && can_use_wallet(1) && (before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || between(DAY3_AM_06_00, NIGHT3_PM_10_00))"
+    "Swamp Archery Reward 2": "soul_bazaar_shopkeeper && has_bow && can_use_wallet(1) && (before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || between(DAY3_AM_06_00, NIGHT3_PM_10_00))"
 "Road to Southern Swamp Grotto":
   region: ENTRANCE
   events:
