@@ -17,6 +17,7 @@ extern u16 gActionMaskRoll;
 extern u16 gActionMaskOpen;
 extern u16 gActionMaskGrab;
 extern u16 gActionMaskCrawl;
+extern u16 gActionMaskDive;
 
 int ActionCustom_EnabledOot(int action);
 void ActionCustom_Refresh(void);

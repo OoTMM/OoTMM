@@ -255,6 +255,10 @@ PATCH_START 0x8083c7c4
   jal LoadMaskActionChestAndGrab
 PATCH_END
 
+PATCH_START 0x8083d950
+  jal LoadMaskActionGrab
+PATCH_END
+
 /* Action - crawl */
 LoadMaskActionCrawl:
   lui at,%HI(gActionMaskCrawl)
@@ -263,6 +267,21 @@ LoadMaskActionCrawl:
 
 PATCH_START 0x8083d2bc
   jal LoadMaskActionCrawl
+PATCH_END
+
+/* Action - Dive */
+LoadMaskActionDive:
+  lui at,%HI(gActionMaskDive)
+  jr ra
+   lhu at,%LO(gActionMaskDive)(at)
+
+PATCH_START 0x8083b224
+  jal LoadMaskActionDive
+PATCH_END
+
+/* ??? */
+PATCH_START 0x80849e04
+  li at,0xffff
 PATCH_END
 
 PATCH_GROUP_END

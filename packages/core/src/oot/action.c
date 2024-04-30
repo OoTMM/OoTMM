@@ -6,6 +6,7 @@ u16 gActionMaskRoll;
 u16 gActionMaskOpen;
 u16 gActionMaskGrab;
 u16 gActionMaskCrawl;
+u16 gActionMaskDive;
 
 void ActionCustom_Refresh(void)
 {
@@ -16,4 +17,5 @@ void ActionCustom_Refresh(void)
     gActionMaskOpen = ActionCustom_EnabledOot(ACTION_CUSTOM_OPEN) ? A_BUTTON : 0xffff;
     gActionMaskGrab = ActionCustom_EnabledOot(ACTION_CUSTOM_GRAB) ? A_BUTTON : 0xffff;
     gActionMaskCrawl = ActionCustom_EnabledOot(ACTION_CUSTOM_CRAWL) ? A_BUTTON : 0xffff;
+    gActionMaskDive = ActionCustom_EnabledOot(ACTION_CUSTOM_DIVE) ? A_BUTTON : 0xffff;
 }
