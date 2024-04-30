@@ -13,12 +13,6 @@
 #define ACTION_CUSTOM_PUSH              0x07
 #define ACTION_CUSTOM_MAX               0x08
 
-extern u16 gActionMaskRoll;
-extern u16 gActionMaskOpen;
-extern u16 gActionMaskGrab;
-extern u16 gActionMaskCrawl;
-extern u16 gActionMaskDive;
-
 int ActionCustom_EnabledOot(int action);
 void ActionCustom_Refresh(void);
 

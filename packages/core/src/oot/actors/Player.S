@@ -279,9 +279,18 @@ PATCH_START 0x8083b224
   jal LoadMaskActionDive
 PATCH_END
 
-/* ??? */
-PATCH_START 0x80849e04
-  li at,0xffff
+/* Action - Push */
+LoadMaskActionPush:
+  lui at,%HI(gActionMaskPush)
+  jr ra
+   lhu at,%LO(gActionMaskPush)(at)
+
+PATCH_START 0x80836c74
+  jal LoadMaskActionPush
+PATCH_END
+
+PATCH_START 0x80836cb4
+  jal LoadMaskActionPush
 PATCH_END
 
 PATCH_GROUP_END
