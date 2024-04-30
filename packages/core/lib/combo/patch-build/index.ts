@@ -57,6 +57,7 @@ function asmPatchGroups(world: World, settings: Settings) {
     ER: isEntranceShuffle(settings),
     OOT_SILVER_RUPEE_SHUFFLE: settings.silverRupeeShuffle !== 'vanilla',
     OOT_FREE_SCARECROW: settings.freeScarecrowOot,
+    MM_FREE_SCARECROW: settings.freeScarecrowMm,
     OOT_SHUFFLE_GRASS: settings.shuffleGrassOot,
     MM_SHUFFLE_GRASS: settings.shuffleGrassMm,
     MM_LENIENT_SPIKES: settings.lenientSpikes,

@@ -934,6 +934,14 @@ export const SETTINGS = [{
   default: false,
   cond: hasOoT,
 }, {
+  key: 'freeScarecrowMm',
+  name: 'Free Scarecrow (MM)',
+  category: 'main.events',
+  type: 'boolean',
+  description: 'Allows to spawn the Scarecrow just by pulling the Ocarina out',
+  default: false,
+  cond: hasMM,
+}, {
   key: 'preCompletedDungeons',
   name: 'Pre-Completed Dungeons',
   category: 'main.events',
