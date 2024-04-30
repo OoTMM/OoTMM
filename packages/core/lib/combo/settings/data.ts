@@ -1584,6 +1584,14 @@ export const SETTINGS = [{
   default: false,
   cond: hasMM,
 }, {
+  key: 'actionsOot',
+  name: 'Actions (OoT)',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Add basic actions as intem into the item pool.',
+  default: false,
+  cond: hasOoT,
+}, {
   key: 'clocks',
   name: 'Clocks as Items',
   category: 'items.extensions',

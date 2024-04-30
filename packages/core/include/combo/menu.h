@@ -13,7 +13,8 @@
 #define MENU_SOULS_MM_BOSS      7
 #define MENU_SOULS_MM_NPC       8
 #define MENU_SOULS_MM_MISC      9
-#define MENU_MAX                10
+#define MENU_ACTIONS_OOT        10
+#define MENU_MAX                11
 
 typedef struct GameState_Play GameState_Play;
 

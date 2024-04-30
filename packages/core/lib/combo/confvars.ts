@@ -183,6 +183,7 @@ export const CONFVARS = [
   'OOT_EXTRA_CHILD_SWORDS',
   'ONLY_OOT',
   'ONLY_MM',
+  'OOT_ACTIONS',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

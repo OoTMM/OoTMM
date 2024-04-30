@@ -225,21 +225,9 @@ PATCH_START _Player_OverrideLimbDrawPause
   nop
 PATCH_END
 
-#if 0
-/* Action - roll */
-LoadMaskActionRoll:
-  lui at,%HI(gActionMaskRoll)
-  jr ra
-   lhu at,%LO(gActionMaskRoll)(at)
 
-PATCH_START 0x80836c74
-  jal LoadMaskActionRoll
-PATCH_END
-
-PATCH_START 0x80836cb4
-  jal LoadMaskActionRoll
-PATCH_END
-#endif
+/* Actions */
+PATCH_GROUP PG_OOT_ACTIONS
 
 /* Action - open */
 LoadMaskActionOpen:
@@ -266,3 +254,15 @@ LoadMaskActionChestAndGrab:
 PATCH_START 0x8083c7c4
   jal LoadMaskActionChestAndGrab
 PATCH_END
+
+/* Action - crawl */
+LoadMaskActionCrawl:
+  lui at,%HI(gActionMaskCrawl)
+  jr ra
+   lhu at,%LO(gActionMaskCrawl)(at)
+
+PATCH_START 0x8083d2bc
+  jal LoadMaskActionCrawl
+PATCH_END
+
+PATCH_GROUP_END

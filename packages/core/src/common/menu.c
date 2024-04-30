@@ -6,6 +6,7 @@
 #include <combo/souls.h>
 #include <combo/config.h>
 #include <combo/global.h>
+#include <combo/action.h>
 
 #define VTX_COUNT 2048
 
@@ -350,6 +351,17 @@ static const char* const kSoulsMiscOot[] = {
 static const char* const kSoulsMiscMm[] = {
     "Gold Skulltulas",
     "Business Scrubs",
+};
+
+static const char* const kActionsOot[] = {
+    "Roll",
+    "Talk",
+    "Open",
+    "Grab",
+    "Climb",
+    "Crawl",
+    "Dive",
+    "Push",
 };
 
 static const Gfx kDlistQuadRGBA16_12x12[] = {
@@ -748,6 +760,31 @@ static void printSoul(GameState_Play* play, const char* const* names, int soulBa
     CLOSE_DISPS();
 }
 
+static void printAction(GameState_Play* play, int base, int index)
+{
+    const char* name;
+    float x;
+    float y;
+    int id;
+
+    id = base + index;
+    name = kActionsOot[id];
+    x = -110.f;
+    y = 42.f - 12 * index;
+
+    OPEN_DISPS(play->gs.gfx);
+    if (ActionCustom_EnabledOot(id))
+    {
+        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, 255);
+    }
+    else
+    {
+        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 70, 70, 70, 255);
+    }
+    printStr(play, name, x, y);
+    CLOSE_DISPS();
+}
+
 static void printDungeonData(GameState_Play* play, int base, int index)
 {
     const DungeonDef* def;
@@ -991,6 +1028,9 @@ void comboMenuUpdate(GameState_Play* play)
     case MENU_SOULS_MM_MISC:
         g.menuCursorMax = ARRAY_SIZE(kSoulsMiscMm);
         break;
+    case MENU_ACTIONS_OOT:
+        g.menuCursorMax = ARRAY_SIZE(kActionsOot);
+        break;
     }
 
     updateCursor(play);
@@ -1008,6 +1048,16 @@ static void drawMenuSouls(GameState_Play* play, const char* title, const char* c
     printStr(play, title, -110.f, 54.f);
     for (int i = 0; i < min(LINES, g.menuCursorMax); ++i)
         printSoul(play, names, soulBase, g.menuCursor, i, mm);
+    CLOSE_DISPS();
+}
+
+static void drawMenuActions(GameState_Play* play, const char* title)
+{
+    OPEN_DISPS(play->gs.gfx);
+    gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 0, 255);
+    printStr(play, title, -110.f, 54.f);
+    for (int i = 0; i < min(LINES, g.menuCursorMax); ++i)
+        printAction(play, g.menuCursor, i);
     CLOSE_DISPS();
 }
 
@@ -1085,6 +1135,9 @@ void comboMenuDraw(GameState_Play* play)
     case MENU_SOULS_MM_MISC:
         drawMenuSouls(play, "MM Misc. Souls", kSoulsMiscMm, GI_MM_SOUL_MISC_GS, 1);
         break;
+    case MENU_ACTIONS_OOT:
+        drawMenuActions(play, "OoT Actions");
+        break;
     }
 }
 
@@ -1116,6 +1169,8 @@ void comboMenuNext(void)
     if (g.menuScreen == MENU_SOULS_MM_NPC && !Config_Flag(CFG_MM_SOULS_NPC))
         g.menuScreen++;
     if (g.menuScreen == MENU_SOULS_MM_MISC && !Config_Flag(CFG_MM_SOULS_MISC))
+        g.menuScreen++;
+    if (g.menuScreen == MENU_ACTIONS_OOT && !Config_Flag(CFG_OOT_ACTIONS))
         g.menuScreen++;
 
     if (g.menuScreen >= MENU_MAX)

@@ -74,6 +74,7 @@ function asmPatchGroups(world: World, settings: Settings) {
     CRIT_WIGGLE_DISABLE: settings.critWiggleDisable,
     OOT_LOST_WOODS_EXITS: settings.alterLostWoodsExits,
     MM_VOID_WARP: settings.voidWarpMm,
+    OOT_ACTIONS: settings.actionsOot,
   };
   const keys = Object.keys(groups) as PatchGroup[];
   return keys.filter((k) => groups[k]);
