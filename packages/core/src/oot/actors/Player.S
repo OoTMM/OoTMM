@@ -293,4 +293,14 @@ PATCH_START 0x80836cb4
   jal LoadMaskActionPush
 PATCH_END
 
+/* Action - Talk */
+LoadMaskActionTalk:
+  lui at,%HI(gActionMaskTalk)
+  jr ra
+   lhu at,%LO(gActionMaskTalk)(at)
+
+PATCH_START 0x8083989c
+  jal gActionMaskTalk
+PATCH_END
+
 PATCH_GROUP_END
