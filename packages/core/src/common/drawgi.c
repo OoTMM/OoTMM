@@ -1196,7 +1196,7 @@ void DrawGi_Wallet(GameState_Play* play, s16 index)
     CLOSE_DISPS();
 }
 
-void DrawGi_Button(GameState_Play* play, s16 index)
+void DrawGi_Button(GameState_Play* play, s16 index, u8 param)
 {
     const DrawGi* drawGi;
     drawGi = &kDrawGi[index];
@@ -1215,6 +1215,11 @@ void DrawGi_Button(GameState_Play* play, s16 index)
         gDPSetPrimColor(POLY_OPA_DISP++, 0, 0x80, 0, 0, 255, 255);
     }
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[2]);
+    if (param)
+    {
+        InitListPolyXlu(play->gs.gfx);
+        Gfx_DrawFlameColor(play, 0xff00ffff, 1.5f, 20.f);
+    }
     CLOSE_DISPS();
 }
 

@@ -424,6 +424,14 @@
 - { id: OOT_MASK_STONE, type: MASK, add: [OOT_TRADE_CHILD, XITEM_OOT_CHILD_MASK_STONE], flags: 0x80, draw: MM_MASK_STONE, object: [mm, 0x0254], name: "the <C1>Stone Mask" }
 - { id: OOT_TRAP_RUPOOR, type: RUPEE, add: [OOT_RUPEE, -10], flags: 0x80, draw: [RUPEE, 0], object: [mm, 0x013f], name: "a <COLOR_BLUE>Rupoor" }
 - { id: OOT_SONG_EMPTINESS, type: MAJOR, add: OOT_SONG_EMPTINESS, flags: 0x80, draw: [NOTE, 0x84], object: [oot, 0x00b6], name: "the <C2>Elegy of Emptiness" }
+- { id: OOT_ACTION_ROLL, type: MAJOR, add: [OOT_ACTION, 0], flags: 0x80, draw: [BUTTON_A, 1], object: BTN_A, name: "the <C1>Roll Action" }
+- { id: OOT_ACTION_TALK, type: MAJOR, add: [OOT_ACTION, 1], flags: 0x80, draw: [BUTTON_A, 1], object: BTN_A, name: "the <C1>Talk Action" }
+- { id: OOT_ACTION_OPEN, type: MAJOR, add: [OOT_ACTION, 2], flags: 0x80, draw: [BUTTON_A, 1], object: BTN_A, name: "the <C1>Open Action" }
+- { id: OOT_ACTION_GRAB, type: MAJOR, add: [OOT_ACTION, 3], flags: 0x80, draw: [BUTTON_A, 1], object: BTN_A, name: "the <C1>Grab Action" }
+- { id: OOT_ACTION_CLIMB, type: MAJOR, add: [OOT_ACTION, 4], flags: 0x80, draw: [BUTTON_A, 1], object: BTN_A, name: "the <C1>Climb Action" }
+- { id: OOT_ACTION_CRAWL, type: MAJOR, add: [OOT_ACTION, 5], flags: 0x80, draw: [BUTTON_A, 1], object: BTN_A, name: "the <C1>Crawl Action" }
+- { id: OOT_ACTION_DIVE, type: MAJOR, add: [OOT_ACTION, 6], flags: 0x80, draw: [BUTTON_A, 1], object: BTN_A, name: "the <C1>Dive Action" }
+- { id: OOT_ACTION_PUSH, type: MAJOR, add: [OOT_ACTION, 7], flags: 0x80, draw: [BUTTON_A, 1], object: BTN_A, name: "the <C1>Push Action" }
 - { id: MM_RUPEE_GREEN, item: MM_RUPEE_GREEN, type: RUPEE, add: [MM_RUPEE, 1], flags: 0x00, draw: [RUPEE, 1], object: [mm, 0x013f], name: "a <C0>Green Rupee" }
 - { id: MM_RUPEE_BLUE, item: MM_RUPEE_BLUE, type: RUPEE, add: [MM_RUPEE, 5], flags: 0x01, draw: [RUPEE, 2], object: [mm, 0x013f], name: "a <C0>Blue Rupee" }
 - { id: MM_RUPEE_RED_10, item: MM_RUPEE_RED10, type: RUPEE, add: [MM_RUPEE, 10], flags: 0x02, draw: [RUPEE, 3], object: [mm, 0x013f], name: "a <C0>Red Rupee" }
@@ -715,7 +723,7 @@
 - { id: MM_KEY_RING_GB, type: KEY, add: [MM_KEY_RING, 2], flags: 0xa0, draw: SMALL_KEY, object: [mm, 0x0086], name: "the <C0>Key Ring (Great Bay)" }
 - { id: MM_KEY_RING_ST, type: KEY, add: [MM_KEY_RING, 3], flags: 0xa0, draw: SMALL_KEY, object: [mm, 0x0086], name: "the <C0>Key Ring (Stone Tower)" }
 - { id: MM_SKELETON_KEY, type: MAJOR, add: MM_SKELETON_KEY, flags: 0xa0, draw: SKELETON_KEY, object: [mm, 0x0086], name: "the <C1>Skeleton Key" }
-- { id: MM_BUTTON_A, type: MAJOR, add: [MM_BUTTON, 0], flags: 0xa0, draw: BUTTON_A, object: BTN_A, name: "the <C1>A Button" }
+- { id: MM_BUTTON_A, type: MAJOR, add: [MM_BUTTON, 0], flags: 0xa0, draw: [BUTTON_A, 0], object: BTN_A, name: "the <C1>A Button" }
 - { id: MM_BUTTON_C_RIGHT, type: MAJOR, add: [MM_BUTTON, 1], flags: 0xa0, draw: BUTTON_C_RIGHT, object: BTN_C_HORIZONTAL, name: "the <C1>C-Right Button" }
 - { id: MM_BUTTON_C_LEFT, type: MAJOR, add: [MM_BUTTON, 2], flags: 0xa0, draw: BUTTON_C_LEFT, object: BTN_C_HORIZONTAL, name: "the <C1>C-Left Button" }
 - { id: MM_BUTTON_C_UP, type: MAJOR, add: [MM_BUTTON, 3], flags: 0xa0, draw: BUTTON_C_UP, object: BTN_C_VERTICAL, name: "the <C1>C-Up Button" }
