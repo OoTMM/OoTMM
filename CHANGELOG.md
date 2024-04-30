@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add Free Scarecrow for MM.
 - Add NPC souls to MM, more NPC souls in OoT, shared NPC souls.
 
 ### Changed
