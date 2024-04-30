@@ -24,15 +24,6 @@
 #define PLAYER_ACTOR_STATE_USE_ITEM             0x10000000
 #define PLAYER_ACTOR_STATE_CUTSCENE_FROZEN      0x20000000
 
-#define ACTION_CUSTOM_ROLL              0x00
-#define ACTION_CUSTOM_TALK              0x01
-#define ACTION_CUSTOM_OPEN              0x02
-#define ACTION_CUSTOM_GRAB              0x03
-#define ACTION_CUSTOM_CLIMB             0x04
-#define ACTION_CUSTOM_CRAWL             0x05
-#define ACTION_CUSTOM_DIVE              0x06
-#define ACTION_CUSTOM_PUSH              0x07
-
 void Player_Update(Actor_Player* this, GameState_Play* play);
 void Player_SetModels(Actor_Player* link, s32 modelGroup);
 int Player_UsingItem(Actor_Player* link);

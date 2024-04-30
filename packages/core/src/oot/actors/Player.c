@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/action.h>
 #include <combo/sr.h>
 #include <combo/dungeon.h>
 #include <combo/custom.h>
@@ -262,6 +263,7 @@ static void updateKokiriSwordLength(void)
 
 void Player_UpdateWrapper(Actor_Player* this, GameState_Play* play)
 {
+    ActionCustom_Refresh();
     updateKokiriSwordLength();
 
     if (gBlastMaskDelayAcc)

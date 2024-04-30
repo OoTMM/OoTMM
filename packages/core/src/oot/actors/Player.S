@@ -224,3 +224,45 @@ PATCH_START _Player_OverrideLimbDrawPause
  j Player_OverrideLimbDrawPauseWrapper
   nop
 PATCH_END
+
+#if 0
+/* Action - roll */
+LoadMaskActionRoll:
+  lui at,%HI(gActionMaskRoll)
+  jr ra
+   lhu at,%LO(gActionMaskRoll)(at)
+
+PATCH_START 0x80836c74
+  jal LoadMaskActionRoll
+PATCH_END
+
+PATCH_START 0x80836cb4
+  jal LoadMaskActionRoll
+PATCH_END
+#endif
+
+/* Action - open */
+LoadMaskActionOpen:
+  lui at,%HI(gActionMaskOpen)
+  jr ra
+   lhu at,%LO(gActionMaskOpen)(at)
+
+PATCH_START 0x80837968
+  jal LoadMaskActionOpen
+PATCH_END
+
+/* Action - chests & grabbed actors */
+LoadMaskActionGrab:
+  lui at,%HI(gActionMaskGrab)
+  jr ra
+   lhu at,%LO(gActionMaskGrab)(at)
+
+LoadMaskActionChestAndGrab:
+  beqz v0,LoadMaskActionGrab
+   nop
+  j LoadMaskActionOpen
+   nop
+
+PATCH_START 0x8083c7c4
+  jal LoadMaskActionChestAndGrab
+PATCH_END
