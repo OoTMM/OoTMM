@@ -663,7 +663,7 @@
 - { id: MM_SOUL_NPC_BOMBCHU_SHOPKEEPER, type: SOUL, add: [MM_SOUL, 0x2005], flags: 0xa0, draw: SOUL_NPC, object: [mm, 0x0125], name: "the <C1>Soul of Bombs Shopkeeper" }
 - { id: MM_SOUL_NPC_BOMBERS, type: SOUL, add: [MM_SOUL, 0x2006], flags: 0xa0, draw: SOUL_NPC, object: [mm, 0x0125], name: "the <C1>Soul of Bombers' Kids" }
 - { id: MM_SOUL_NPC_BUTLER_DEKU, type: SOUL, add: [MM_SOUL, 0x2007], flags: 0xa0, draw: SOUL_NPC, object: [mm, 0x0125], name: "the <C1>Soul of Deku Butler" }
-- { id: MM_SOUL_NPC_CITIZEN, type: SOUL, add: [MM_SOUL, 0x2008], flags: 0xa0, draw: SOUL_NPC, object: [mm, 0x0125], name: "the <C1>Soul of Cizizens" }
+- { id: MM_SOUL_NPC_CITIZEN, type: SOUL, add: [MM_SOUL, 0x2008], flags: 0xa0, draw: SOUL_NPC, object: [mm, 0x0125], name: "the <C1>Soul of Citizens" }
 - { id: MM_SOUL_NPC_COMPOSER_BROS, type: SOUL, add: [MM_SOUL, 0x2009], flags: 0xa0, draw: SOUL_NPC, object: [mm, 0x0125], name: "the <C1>Soul of Composer Bros" }
 - { id: MM_SOUL_NPC_DAMPE, type: SOUL, add: [MM_SOUL, 0x200a], flags: 0xa0, draw: SOUL_NPC, object: [mm, 0x0125], name: "the <C1>Soul of Dampe" }
 - { id: MM_SOUL_NPC_DEKU_KING, type: SOUL, add: [MM_SOUL, 0x200b], flags: 0xa0, draw: SOUL_NPC, object: [mm, 0x0125], name: "the <C1>Soul of Deku King" }

@@ -296,7 +296,7 @@ static const char* const kSoulsNpcMm[] = {
     "Bombs Shopkeeper",
     "Bombers' Kids",
     "Deku Butler",
-    "Clock Town Cizizen",
+    "Clock Town Citizen",
     "Composer Bros",
     "Dampe",
     "Deku King",
