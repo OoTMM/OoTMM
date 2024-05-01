@@ -300,7 +300,29 @@ LoadMaskActionTalk:
    lhu at,%LO(gActionMaskTalk)(at)
 
 PATCH_START 0x8083989c
-  jal gActionMaskTalk
+  jal LoadMaskActionTalk
+PATCH_END
+
+/* Action - Roll */
+RollCheck:
+  /* Replaced code */
+  addu  t7,a0,t6
+  lb    t8,0x83b(t7)
+  bnez  t8,RollCheck_End
+   nop
+
+  /* Check if rolls are enabled */
+  lui t8,%HI(gActionEnabledRoll)
+  lbu t8,%LO(gActionEnabledRoll)(t8)
+  sltiu t8,1
+
+RollCheck_End:
+  jr ra
+   nop
+
+PATCH_START 0x80839d58
+  jal RollCheck
+   nop
 PATCH_END
 
 PATCH_GROUP_END
