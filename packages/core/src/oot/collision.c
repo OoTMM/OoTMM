@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/action.h>
 
 #define DMG_DEKU_NUT     (1 << 0)
 #define DMG_DEKU_STICK   (1 << 1)
@@ -55,3 +56,26 @@ PATCH_CALL(0x809693f4, CollisionCheck_GetSwordDamageWrapper);
 PATCH_CALL(0x809ab998, CollisionCheck_GetSwordDamageWrapper);
 PATCH_CALL(0x809d988c, CollisionCheck_GetSwordDamageWrapper);
 PATCH_CALL(0x809f882c, CollisionCheck_GetSwordDamageWrapper);
+
+static u32 Collision_GetWallPropertiesWrapper(void)
+{
+    u32 flags;
+
+    flags = Collision_GetWallProperties();
+    if (!ActionCustom_EnabledOot(ACTION_CUSTOM_CLIMB))
+    {
+        flags &= ~0x0e; /* 0x02: Ladder up / 0x04: Ladder down? / 0x08: Free climb? */
+    }
+    return flags;
+}
+
+PATCH_CALL(0x80034484, Collision_GetWallPropertiesWrapper);
+PATCH_CALL(0x800344b8, Collision_GetWallPropertiesWrapper);
+PATCH_CALL(0x800344ec, Collision_GetWallPropertiesWrapper);
+PATCH_CALL(0x808389d4, Collision_GetWallPropertiesWrapper);
+PATCH_CALL(0x8083d4d8, Collision_GetWallPropertiesWrapper);
+PATCH_CALL(0x80846128, Collision_GetWallPropertiesWrapper);
+PATCH_CALL(0x80945a44, Collision_GetWallPropertiesWrapper);
+PATCH_CALL(0x809cf294, Collision_GetWallPropertiesWrapper);
+PATCH_CALL(0x809cf348, Collision_GetWallPropertiesWrapper);
+PATCH_CALL(0x809cf54c, Collision_GetWallPropertiesWrapper);

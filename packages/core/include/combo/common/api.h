@@ -361,6 +361,8 @@ EntranceTableEntry* Entrance_GetTableEntry(u16 entrance);
 s32 Object_SpawnPersistent(ObjectContext* objectCtx, s16 id);
 s32 Object_GetSlot(ObjectContext* objectCtx, s16 id);
 
+u32 Collision_GetWallProperties(void);
+
 void Environment_Init(GameState_Play* play, EnvironmentContext* envCtx, int unused);
 
 extern u8 gWeatherMode;

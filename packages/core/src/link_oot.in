@@ -14,6 +14,8 @@ osWritebackDCache = 0x80003440;
 osWritebackDCacheAll = 0x800d5aa0;
 DMARomToRam = 0x8000085c;
 
+Collision_GetWallProperties = 0x8003444c;
+
 DrawLink = 0x80079f48;
 
 Actor_ProcessInitChain = 0x80063f7c;
