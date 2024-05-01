@@ -366,6 +366,8 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
         return opt(comboHasSoulMm(GI_MM_SOUL_NPC_SCIENTIST));
     case AC_EN_IN:
     case AC_EN_GM:
+        if (gSaveContext.gameMode || gSaveContext.minigameState == 1)
+            return 1;
         return opt(comboHasSoulMm(GI_MM_SOUL_NPC_GORMAN));
     case AC_EN_HS:
         return opt(comboHasSoulMm(GI_MM_SOUL_NPC_GROG));
