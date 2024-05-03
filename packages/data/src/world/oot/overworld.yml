@@ -289,11 +289,11 @@
   events:
     BIG_POE: "can_ride_epona && can_use_bow && has_bottle"
     #There are rocks near Gerudo Valley you can farm for drops
-    BOMBS_OR_BOMBCHU: "true"
-    RUPEES: "true"
-    SEEDS: "is_child"
-    ARROWS: "is_adult"
-    MAGIC: "true"
+    BOMBS_OR_BOMBCHU: "can_break_small_rocks || can_cut_grass"
+    RUPEES: "can_break_small_rocks || can_cut_grass"
+    SEEDS: "(can_break_small_rocks || can_cut_grass) && is_child"
+    ARROWS: "(can_break_small_rocks || can_cut_grass) && is_adult"
+    MAGIC: "can_break_small_rocks || can_cut_grass"
   locations:
     "Hyrule Field Ocarina of Time": "is_child && has_spiritual_stones"
     "Hyrule Field Song of Time": "is_child && has_spiritual_stones"
@@ -372,18 +372,18 @@
     BOMBS_OR_BOMBCHU: "can_cut_grass"
     RUPEES: "can_cut_grass"
     SEEDS: "is_child && can_cut_grass"
-    ARROWS: "is_adult"
+    ARROWS: "is_adult && can_cut_grass"
     MAGIC: "can_cut_grass"
     FISH: "has_bottle"
     BUGS: "has_bottle && can_cut_grass"
   locations:
-    "Hyrule Field Grotto Open": "true"
+    "Hyrule Field Grotto Open": "action_open"
     "Hyrule Field Grotto Open Grass 1": "can_cut_grass"
     "Hyrule Field Grotto Open Grass 2": "can_cut_grass"
     "Hyrule Field Grotto Open Grass 3": "can_cut_grass"
     "Hyrule Field Grotto Open Grass 4": "can_cut_grass"
   gossip:
-    "Hyrule Field Gossip Near Lake Hylia": "true"
+    "Hyrule Field Gossip Near Lake Hylia": "action_talk"
 "Hyrule Field Southeast Grotto":
   region: ENTRANCE
   age_change: false
@@ -393,18 +393,18 @@
     BOMBS_OR_BOMBCHU: "can_cut_grass"
     RUPEES: "can_cut_grass"
     SEEDS: "is_child && can_cut_grass"
-    ARROWS: "is_adult"
+    ARROWS: "is_adult && can_cut_grass"
     MAGIC: "can_cut_grass"
     FISH: "has_bottle"
     BUGS: "has_bottle && can_cut_grass"
   locations:
-    "Hyrule Field Grotto Southeast": "true"
+    "Hyrule Field Grotto Southeast": "action_open"
     "Hyrule Field Grotto Southeast Grass 1": "can_cut_grass"
     "Hyrule Field Grotto Southeast Grass 2": "can_cut_grass"
     "Hyrule Field Grotto Southeast Grass 3": "can_cut_grass"
     "Hyrule Field Grotto Southeast Grass 4": "can_cut_grass"
   gossip:
-    "Hyrule Field Gossip Southeast Grotto": "true"
+    "Hyrule Field Gossip Southeast Grotto": "action_talk"
 "Hyrule Field Grotto Near Market":
   region: ENTRANCE
   age_change: false
@@ -414,18 +414,18 @@
     BOMBS_OR_BOMBCHU: "can_cut_grass"
     RUPEES: "can_cut_grass"
     SEEDS: "is_child && can_cut_grass"
-    ARROWS: "is_adult"
+    ARROWS: "is_adult && can_cut_grass"
     MAGIC: "can_cut_grass"
     FISH: "has_bottle"
     BUGS: "has_bottle && can_cut_grass"
   locations:
-    "Hyrule Field Grotto Market": "true"
+    "Hyrule Field Grotto Market": "action_open"
     "Hyrule Field Grotto Market Grass 1": "can_cut_grass"
     "Hyrule Field Grotto Market Grass 2": "can_cut_grass"
     "Hyrule Field Grotto Market Grass 3": "can_cut_grass"
     "Hyrule Field Grotto Market Grass 4": "can_cut_grass"
   gossip:
-    "Hyrule Field Gossip Near Castle Town": "true"
+    "Hyrule Field Gossip Near Castle Town": "action_talk"
 "Hyrule Field Tektite Grotto":
   region: ENTRANCE
   age_change: false
@@ -444,20 +444,20 @@
   locations:
     "Hyrule Field Grotto Near Gerudo GS": "gs && (can_collect_distance || climb_anywhere) && has_fire"
     "Hyrule Field Cow": "has_fire && can_play_epona"
-    "Hyrule Field Cow Grotto Pot 1": "has_fire"
-    "Hyrule Field Cow Grotto Pot 2": "has_fire"
+    "Hyrule Field Cow Grotto Pot 1": "can_break_pots && has_fire"
+    "Hyrule Field Cow Grotto Pot 2": "can_break_pots && has_fire"
     "Hyrule Field Grotto Near Gerudo Grass 1": "has_fire && can_cut_grass"
     "Hyrule Field Grotto Near Gerudo Grass 2": "has_fire && can_cut_grass"
   gossip:
-    "Hyrule Field Gossip Near Gerudo Valley": "has_fire"
+    "Hyrule Field Gossip Near Gerudo Valley": "action_talk && has_fire"
 "Hyrule Field Grotto Near Kak":
   region: ENTRANCE
   age_change: false
   exits:
     "Hyrule Field": "true"
   events:
-    SEEDS: "has_sword_kokiri"
-    ARROWS: "is_adult"
+    SEEDS: "is_child && can_cut_grass"
+    ARROWS: "is_adult && can_cut_grass"
   locations:
     "Hyrule Field Grotto Near Kakariko GS": "gs && (can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_din)))"
 "Hyrule Field Fairy Grotto":
