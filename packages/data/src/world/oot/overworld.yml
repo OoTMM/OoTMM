@@ -480,7 +480,7 @@
   exits:
     "Hyrule Field": "is_day || is_adult"
     "Market": "true"
-    "Market Pot House": "true"
+    "Market Pot House": "action_open"
 "Market":
   region: MARKET
   age_change: false
@@ -490,12 +490,12 @@
     "Back Alley": "is_child"
     "Market Castle Entry": "true"
     "Temple of Time Entryway": "true"
-    "Bombchu Bowling": "is_child"
-    "Treasure Chest Game": "is_night && is_child"
-    "Shooting Gallery Child": "is_day && is_child"
-    "Market Bazaar": "is_day && is_child"
-    "Market Potion Shop": "is_day && is_child"
-    "MM Clock Town": "is_child && (is_day || setting(openMaskShop))"
+    "Bombchu Bowling": "is_child && action_open"
+    "Treasure Chest Game": "is_night && is_child && action_open"
+    "Shooting Gallery Child": "is_day && is_child && action_open"
+    "Market Bazaar": "is_day && is_child && action_open"
+    "Market Potion Shop": "is_day && is_child && action_open"
+    "MM Clock Town": "is_child && action_open && (is_day || setting(openMaskShop))"
   events:
     RICHARD: "is_night && is_child"
     RUPEES: "is_child"
@@ -522,7 +522,7 @@
   region: ENTRANCE
   exits:
     "Market": "true"
-    "Market Bazaar Items": "soul_bazaar_shopkeeper"
+    "Market Bazaar Items": "action_talk && soul_bazaar_shopkeeper"
 "Market Bazaar Items":
   region: ENTRANCE
   age_change: false
@@ -539,7 +539,7 @@
   region: ENTRANCE
   exits:
     "Market": "true"
-    "Market Potion Shop Items": "soul_npc(SOUL_NPC_POTION_SHOPKEEPER)"
+    "Market Potion Shop Items": "action_talk && soul_npc(SOUL_NPC_POTION_SHOPKEEPER)"
 "Market Potion Shop Items":
   region: ENTRANCE
   age_change: false
@@ -556,7 +556,7 @@
   region: ENTRANCE
   exits:
     "Back Alley": "true"
-    "Market Bombchu Shop Items": "soul_bombchu_shopkeeper"
+    "Market Bombchu Shop Items": "action_talk && soul_bombchu_shopkeeper"
 "Market Bombchu Shop Items":
   region: ENTRANCE
   age_change: false
@@ -572,7 +572,7 @@
 "Market Pot House":
   region: ENTRANCE
   exits:
-    "Market Entryway": "true"
+    "Market Entryway": "action_open"
     "Market Pot House Child": "is_child"
     "Market Pot House Adult": "is_adult"
   events:
@@ -580,8 +580,14 @@
 "Market Pot House Child":
   region: ENTRANCE
   age_change: false
+  exits:
+    "Market Pot House Child Pots": "can_break_pots"
   locations:
-    "Market Pot House GS": "gs"
+    "Market Pot House GS": "can_break_large_crates && gs"
+"Market Pot House Child Pots":
+  region: ENTRANCE
+  age_change: false
+  locations:
     "Market Pot House Child Pot Ground 1": "true"
     "Market Pot House Child Pot Ground 2": "true"
     "Market Pot House Child Pot Ground 3": "true"
@@ -629,8 +635,14 @@
 "Market Pot House Adult":
   region: ENTRANCE
   age_change: false
+  exits:
+    "Market Pot House Adult Pots": "can_break_pots"
   locations:
-    "Market Pot House Big Poes": "has_big_poe && soul_poe_collector"
+    "Market Pot House Big Poes": "action_talk && has_big_poe && soul_poe_collector"
+"Market Pot House Adult Pots":
+  region: ENTRANCE
+  age_change: false
+  locations:
     "Market Pot House Adult Pot 1": "true"
     "Market Pot House Adult Pot 2": "true"
     "Market Pot House Adult Pot 3": "true"
@@ -647,29 +659,29 @@
   age_change: false
   exits:
     "Market": "true"
-    "Dog Lady House": "true"
-    "Market Bombchu Shop": "is_night"
-    "Market Back Alley East Home": "is_night"
+    "Dog Lady House": "action_open"
+    "Market Bombchu Shop": "is_night && action_open"
+    "Market Back Alley East Home": "is_night && action_open"
 "Dog Lady House":
   region: ENTRANCE
   exits:
-    "Back Alley": "true"
+    "Back Alley": "action_open"
   locations:
-    "Market Dog Lady HP": "event(RICHARD) && is_night && soul_dog_lady"
+    "Market Dog Lady HP": "action_talk && event(RICHARD) && is_night && soul_dog_lady"
 "Market Back Alley East Home":
   region: ENTRANCE
   exits:
-    "Back Alley": "true"
+    "Back Alley": "action_open"
   locations:
-    "Market Back Alley East House Pot 1": "true"
-    "Market Back Alley East House Pot 2": "true"
-    "Market Back Alley East House Pot 3": "true"
+    "Market Back Alley East House Pot 1": "can_break_pots"
+    "Market Back Alley East House Pot 2": "can_break_pots"
+    "Market Back Alley East House Pot 3": "can_break_pots"
 "Bombchu Bowling":
   region: ENTRANCE
   age_change: false
   exits:
-    "Market": "true"
-    "Bombchu Bowling Rewards": "(has_bomb_bag || has_bombchu_license) && can_use_wallet(1) && soul_bombchu_bowling_lady"
+    "Market": "action_open"
+    "Bombchu Bowling Rewards": "action_talk && (has_bomb_bag || has_bombchu_license) && can_use_wallet(1) && soul_bombchu_bowling_lady"
 "Bombchu Bowling Rewards":
   region: ENTRANCE
   age_change: false
@@ -682,9 +694,9 @@
 "Shooting Gallery Child":
   region: ENTRANCE
   exits:
-    "Market": "true"
+    "Market": "action_open"
   locations:
-    "Shooting Gallery Child": "is_child && can_use_wallet(1) && soul_shooting_gallery_owner"
+    "Shooting Gallery Child": "action_talk && is_child && can_use_wallet(1) && soul_shooting_gallery_owner"
 "Temple of Time Entryway":
   region: MARKET
   age_change: false
@@ -692,10 +704,10 @@
     "Market": "true"
     "Temple of Time": "true"
   gossip:
-    "Market Gossip Outside Temple Leftmost": "true"
-    "Market Gossip Outside Temple Left-Center": "true"
-    "Market Gossip Outside Temple Right-Center": "true"
-    "Market Gossip Outside Temple Rightmost": "true"
+    "Market Gossip Outside Temple Leftmost": "action_talk"
+    "Market Gossip Outside Temple Left-Center": "action_talk"
+    "Market Gossip Outside Temple Right-Center": "action_talk"
+    "Market Gossip Outside Temple Rightmost": "action_talk"
 "Lon Lon Ranch":
   region: LON_LON_RANCH
   exits:

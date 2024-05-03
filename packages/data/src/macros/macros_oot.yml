@@ -177,6 +177,7 @@
 "action_push": "action(ACTION_PUSH)"
 
 # Pots, Grass, Small Rocks
+"can_break_large_crates": "action_roll || has_explosives || can_hammer"
 "can_break_small_rocks": "action_grab || has_explosives || can_hammer"
 "can_break_pots": "action_grab || has_weapon" # Needs variants for scenes where you can't use explosives and stuff
 "can_cut_grass_no_c_button": "has_weapon || has_strength_raw(1) || can_use_mask_blast"
