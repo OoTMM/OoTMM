@@ -887,6 +887,17 @@ export const CLOCKS = new Set([
   Items.MM_CLOCK6,
 ]);
 
+export const ACTIONS_OOT = new Set([
+  Items.OOT_ACTION_ROLL,
+  Items.OOT_ACTION_TALK,
+  Items.OOT_ACTION_OPEN,
+  Items.OOT_ACTION_GRAB,
+  Items.OOT_ACTION_CLIMB,
+  Items.OOT_ACTION_CRAWL,
+  Items.OOT_ACTION_DIVE,
+  Items.OOT_ACTION_PUSH,
+]);
+
 export const REQUIRED = new Set([
   ...OWLS,
   ...RUPEES_SILVER,
@@ -917,6 +928,7 @@ export const REQUIRED = new Set([
   ...MM_BOMBCHU,
   ...SHARED_BOMBCHU,
   ...CLOCKS,
+  ...ACTIONS_OOT,
   Items.MM_CLOCK,
   Items.OOT_BOSS_KEY_GANON,
   Items.OOT_SMALL_KEY_GF,

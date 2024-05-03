@@ -65,6 +65,7 @@ const ITEM_POOL_SCARCE_NOLIMIT = new Set([
 
 const ITEM_POOL_PLENTIFUL = new Set([
   ...CLOCKS,
+  ...ItemGroups.ACTIONS_OOT,
   Items.MM_CLOCK,
   Items.OOT_RUTO_LETTER,
   Items.OOT_WEIRD_EGG,
@@ -1171,6 +1172,11 @@ export class LogicPassWorldTransform {
       } else {
         this.addItem(Items.MM_CLOCK, 5);
       }
+    }
+
+    /* Add actions */
+    if (settings.actionsOot) {
+      this.addItems(ItemGroups.ACTIONS_OOT);
     }
 
     /* Handle extra wallets */
