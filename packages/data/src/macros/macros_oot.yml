@@ -165,6 +165,23 @@
 "has_spiritual_stones": "has(STONE_EMERALD) && has(STONE_RUBY) && has(STONE_SAPPHIRE)"
 "can_jump_slash": "has_weapon || can_use_sticks || can_hammer"
 
+# Actions
+"action(x)": "!setting(actionsOot) || has(x)"
+"action_roll": "action(ACTION_ROLL)"
+"action_talk": "action(ACTION_TALK)"
+"action_open": "action(ACTION_OPEN)"
+"action_grab": "action(ACTION_GRAB)"
+"action_climb": "action(ACTION_CLIMB)"
+"action_crawl": "action(ACTION_CRAWL)"
+"action_dive": "action(ACTION_DIVE)"
+"action_push": "action(ACTION_PUSH)"
+
+# Pots, Grass, Small Rocks
+"can_break_small_rocks": "action_grab || has_explosives || can_hammer"
+"can_break_pots": "action_grab || has_weapon" # Needs variants for scenes where you can't use explosives and stuff
+"can_cut_grass_no_c_button": "has_weapon || has_strength_raw(1) || can_use_mask_blast"
+"can_cut_grass": "can_cut_grass_no_c_button || can_boomerang || has_explosives || can_hammer"
+
 # Bottle contents
 "has_bugs": "has_bottle && (renewable(BUG) || event(BUGS))"
 "has_fish": "has_bottle && (renewable(FISH) || event(FISH))"
@@ -181,8 +198,6 @@
 "can_ride_bean(x)": "is_adult && event(x)"
 "can_damage": "has_weapon || can_use_sticks || has_explosives || can_use_slingshot || can_use_din"
 "can_damage_skull": "can_damage || can_collect_distance"
-"can_cut_grass_no_c_button": "has_weapon || has_strength_raw(1) || can_use_mask_blast"
-"can_cut_grass": "can_cut_grass_no_c_button || can_boomerang || has_explosives || can_hammer"
 "can_kill_baba_sticks": "soul_deku_baba && (can_boomerang || (has_weapon && (is_child || has_nuts || can_hookshot || can_hammer)))"
 "can_kill_baba_nuts": "soul_deku_baba && (has_weapon || has_explosives || can_use_slingshot)"
 "can_hit_scrub": "has_nuts || can_hit_triggers_distance || has_shield_for_scrubs || can_collect_distance || can_hammer || has_explosives"
@@ -194,7 +209,7 @@
 "trick_mido": "trick(OOT_MIDO_SKIP) && (has_bow || has_hookshot(1) || has(SHARED_ARROW_FIRE) || has(ARROW_FIRE) || has(SHARED_ARROW_LIGHT) || has(ARROW_LIGHT))"
 
 # Mido / Deku Tree
-"can_move_mido_reqs": "is_child && has_sword_kokiri && renewable(SHIELD_DEKU)"
+"can_move_mido_reqs": "is_child && has_sword_kokiri && renewable(SHIELD_DEKU) && action_talk"
 "can_move_mido": "can_move_mido_reqs && soul_npc(SOUL_NPC_MIDO)"
 "can_bypass_mido": "setting(dekuTree, open) || is_adult || climb_anywhere || hookshot_anywhere || can_move_mido_reqs"
 

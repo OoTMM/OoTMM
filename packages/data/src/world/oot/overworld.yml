@@ -69,35 +69,34 @@
 "Link's House":
   region: ENTRANCE
   exits:
-    "Kokiri Forest": "true"
+    "Kokiri Forest Near Link's House": "true"
   locations:
     "Kokiri Forest Cow": "is_adult && event(MALON_COW) && can_play_epona"
-    "Link's House Pot": "true"
+    "Link's House Pot": "can_break_pots"
 "Kokiri Forest":
   region: KOKIRI_FOREST
   exits:
     "Kokiri Forest Grass": "can_cut_grass"
-    "Link's House": "true"
+    "Kokiri Forest Near Link's House": "action_climb"
+    "Kokiri Forest Near Lost Woods": "action_climb"
     "Mido's House": "true"
     "Saria's House": "true"
     "House of Twins": "true"
     "Know It All House": "true"
-    "Lost Woods": "true"
     "Lost Woods Bridge from Forest": "true"
     "Kokiri Shop": "true"
-    "Kokiri Forest Storms Grotto": "hidden_grotto_storms"
     "Kokiri Forest Near Deku Tree": "can_bypass_mido"
     "Kokiri Forest Adult Rupees": "can_ride_bean(BEAN_KOKIRI_FOREST) || (is_adult && (has_hover_boots || hookshot_anywhere || climb_anywhere))"
   events:
-    BOMBS_OR_BOMBCHU: "true"
-    RUPEES: "true"
-    SEEDS: "is_child"
-    ARROWS: "is_adult"
-    MAGIC: "true"
+    BOMBS_OR_BOMBCHU: "can_break_small_rocks"
+    RUPEES: "can_break_small_rocks || can_cut_grass"
+    SEEDS: "is_child && can_cut_grass"
+    ARROWS: "is_adult && can_cut_grass"
+    MAGIC: "can_cut_grass"
     MIDO_MOVED: "can_move_mido"
     BEAN_KOKIRI_FOREST: "can_use_beans"
   locations:
-    "Kokiri Forest Kokiri Sword Chest": "is_child"
+    "Kokiri Forest Kokiri Sword Chest": "action_crawl && is_child"
     "Kokiri Forest GS Soil": "gs_soil && can_damage_skull"
     "Kokiri Forest GS Night Child": "is_child && gs_night && can_damage_skull"
     "Kokiri Forest GS Night Adult": "is_adult && (can_collect_distance || climb_anywhere) && gs_night"
@@ -108,13 +107,24 @@
     #"Kokiri Forest Invisible Rupee 4": "is_child"
     "Kokiri Forest Rupee Child 1": "is_child"
     "Kokiri Forest Rupee Child 2": "is_child"
-    "Kokiri Forest Rupee Crawl 1": "is_child"
-    "Kokiri Forest Rupee Crawl 2": "is_child"
+    "Kokiri Forest Rupee Crawl 1": "action_crawl && is_child"
+    "Kokiri Forest Rupee Crawl 2": "action_crawl && is_child"
     "Kokiri Forest Heart 1": "is_child"
     "Kokiri Forest Heart 2": "is_child"
     "Kokiri Forest Heart 3": "is_child"
+"Kokiri Forest Near Link's House":
+  region: KOKIRI_FOREST
+  exits:
+    "Link's House": "true"
+    "Kokiri Forest": "true"
+"Kokiri Forest Near Lost Woods":
+  region: KOKIRI_FOREST
+  exits:
+    "Kokiri Forest": "true"
+    "Lost Woods": "true"
+    "Kokiri Forest Storms Grotto": "hidden_grotto_storms"
   gossip:
-    "Kokiri Gossip Near Lost Woods Open": "true"
+    "Kokiri Gossip Near Lost Woods Open": "action_talk"
 "Kokiri Forest Grass":
   region: KOKIRI_FOREST
   age_change: false
@@ -139,9 +149,9 @@
     "Kokiri Forest Grass Child 3": "true"
     "Kokiri Forest Grass Child 4": "true"
     "Kokiri Forest Grass Child Kokiri": "true"
-    "Kokiri Forest Grass Child Crawl 1": "true"
-    "Kokiri Forest Grass Child Crawl 2": "true"
-    "Kokiri Forest Grass Child Crawl 3": "true"
+    "Kokiri Forest Grass Child Crawl 1": "action_crawl"
+    "Kokiri Forest Grass Child Crawl 2": "action_crawl"
+    "Kokiri Forest Grass Child Crawl 3": "action_crawl"
 "Kokiri Forest Grass Adult":
   region: KOKIRI_FOREST
   age_change: false
@@ -178,13 +188,13 @@
     STICKS: "is_child && soul_deku_baba && (can_boomerang || has_weapon)"
     MIDO_MOVED: "can_move_mido"
   gossip:
-    "Kokiri Gossip Left of Deku Tree": "true"
-    "Kokiri Gossip Right of Deku Tree": "true"
+    "Kokiri Gossip Left of Deku Tree": "action_talk"
+    "Kokiri Gossip Right of Deku Tree": "action_talk"
 "Kokiri Shop":
   region: ENTRANCE
   exits:
     "Kokiri Forest": "true"
-    "Kokiri Shop Items": "soul_npc(SOUL_NPC_KOKIRI_SHOPKEEPER)"
+    "Kokiri Shop Items": "action_talk && soul_npc(SOUL_NPC_KOKIRI_SHOPKEEPER)"
 "Kokiri Shop Items":
   region: ENTRANCE
   age_change: false
@@ -202,10 +212,10 @@
   exits:
     "Kokiri Forest": "true"
   locations:
-    "Mido's House Top Left": "true"
-    "Mido's House Top Right": "true"
-    "Mido's House Bottom Left": "true"
-    "Mido's House Bottom Right": "true"
+    "Mido's House Top Left": "action_open"
+    "Mido's House Top Right": "action_open"
+    "Mido's House Bottom Left": "action_open"
+    "Mido's House Bottom Right": "action_open"
 "Saria's House":
   region: ENTRANCE
   exits:
@@ -220,27 +230,27 @@
   exits:
     "Kokiri Forest": "true"
   locations:
-    "Twins House Pot 1": "true"
-    "Twins House Pot 2": "true"
+    "Twins House Pot 1": "can_break_pots"
+    "Twins House Pot 2": "can_break_pots"
 "Know It All House":
   region: ENTRANCE
   exits:
     "Kokiri Forest": "true"
   locations:
-    "Know It All House Pot 1": "true"
-    "Know It All House Pot 2": "true"
+    "Know It All House Pot 1": "can_break_pots"
+    "Know It All House Pot 2": "can_break_pots"
 "Kokiri Forest Storms Grotto":
   region: ENTRANCE
   age_change: false
   exits:
-    "Kokiri Forest": "true"
+    "Kokiri Forest Near Lost Woods": "true"
     "Kokiri Forest Storms Grotto Grass": "can_cut_grass"
   events:
     FISH: "has_bottle"
   locations:
-    "Kokiri Forest Storms Grotto": "true"
+    "Kokiri Forest Storms Grotto": "action_open"
   gossip:
-    "Kokiri Gossip Near Lost Woods Grotto": "true"
+    "Kokiri Gossip Near Lost Woods Grotto": "action_talk"
 "Kokiri Forest Storms Grotto Grass":
   region: ENTRANCE
   age_change: false
@@ -882,7 +892,7 @@
 "Lost Woods":
   region: LOST_WOODS
   exits:
-    "Kokiri Forest": "true"
+    "Kokiri Forest Near Lost Woods": "true"
     "Lost Woods Bridge": "can_longshot || has_hover_boots || can_ride_bean(BEAN_LOST_WOODS_EARLY) || climb_anywhere || hookshot_anywhere"
     "Lost Woods Deep": "is_child || can_play_saria || trick_mido || hookshot_anywhere || climb_anywhere"
     "Lost Woods Generic Grotto": "has_explosives_or_hammer"
