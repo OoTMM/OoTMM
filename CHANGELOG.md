@@ -19,6 +19,7 @@ All notable changes to this project will be documented in this file.
 - Fix Koume/Kotake still giving red potions when they shouldn't.
 - Fix damage being wrong against Dead Hand in some cases.
 - Fix death after leaving a grotto in MM in ER leading to wrong warps in some cases.
+- Fix an issue with rewards within dungeons using only OOT or only MM.
 
 ## [22.0] - 2024-04-24
 
