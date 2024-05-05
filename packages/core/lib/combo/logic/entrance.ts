@@ -333,7 +333,7 @@ class WorldShuffler {
     types.add('one-way-warp');
     types.add('one-way-statue');
 
-    if (this.input.settings.erWarpsAnywhere !== 'none') {
+    if (this.settings.erWarpsAnywhere !== 'none') {
       types.add('grotto');
       types.add('grave');
       types.add('grotto-exit');
@@ -368,15 +368,15 @@ class WorldShuffler {
 
     /* Compute entrances */
     const entrances = this.entrancesForTypes(types, this.settings.erDecoupled);
-    if (this.input.settings.erWarps === 'mmOnly') {
+    if (this.settings.erWarps === 'mmOnly') {
       const entrancesSrc = new Set(this.allEntrances.filter(x => ENTRANCES[x].type === 'one-way-statue'));
       types.delete('one-way-warp');
     }
-    if (this.input.settings.erWarps === 'ootOnly') {
+    if (this.settings.erWarps === 'ootOnly') {
       const entrancesSrc = new Set(this.allEntrances.filter(x => ENTRANCES[x].type === 'one-way-warp'));
       types.delete('one-way-statue');
     }
-    else () {
+    else {
       const entrancesSrc = new Set(this.allEntrances.filter(x => ENTRANCES[x].type === 'one-way-warp' && ENTRANCES[x].type === 'one-way-statue'));
     }	
     const entrancesDst = new Set(entrances);
