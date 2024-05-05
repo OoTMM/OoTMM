@@ -367,21 +367,18 @@ class WorldShuffler {
     }
 
     /* Compute entrances */
-    const entrances = this.entrancesForTypes(types, this.settings.erDecoupled);
-    if (this.settings.erWarps === 'mmOnly') {
-      const entrancesSrc = new Set(this.allEntrances.filter(x => ENTRANCES[x].type === 'one-way-statue'));
-      types.delete('one-way-warp');
-    }
-    if (this.settings.erWarps === 'ootOnly') {
-      const entrancesSrc = new Set(this.allEntrances.filter(x => ENTRANCES[x].type === 'one-way-warp'));
-      types.delete('one-way-statue');
-    }
-    else {
-      const entrancesSrc = new Set(this.allEntrances.filter(x => ENTRANCES[x].type === 'one-way-warp' && ENTRANCES[x].type === 'one-way-statue'));
-    }	
-    const entrancesDst = new Set(entrances);
+    const entrancesR = this.entrancesForTypes(types, true);
+    const entrancesO = this.entrancesForTypes(types, false);
+    const entrancesSrc = new Set(this.allEntrances.filter(x => ENTRANCES[x].type === 'one-way-warp' && ENTRANCES[x].type === 'one-way-statue'));
+    const entrancesDst = new Set(entrancesO, entrancesR);
 
     while (entrancesSrc.size > 0) {
+      if (this.settings.erWarps === 'mmOnly') {
+        types.delete('one-way-warp');
+      }
+      if (this.settings.erWarps === 'ootOnly') {
+        types.delete('one-way-statue');
+      }
       const src = sample(this.random, entrancesSrc);
       let dstCandidates = [...entrancesDst];
       if (this.settings.erWarpsAnywhere === 'ownGame') {
@@ -453,9 +450,10 @@ class WorldShuffler {
     }
 
     /* Compute entrances */
-    const entrances = this.entrancesForTypes(types, true).filter(x => ENTRANCES[x].game === 'oot');
+    const entrancesR = this.entrancesForTypes(types, true).filter(x => ENTRANCES[x].game === 'oot');
+    const entrancesO = this.entrancesForTypes(types, false).filter(x => ENTRANCES[x].game === 'oot');
     const entrancesSrc = new Set((Object.keys(ENTRANCES) as Entrance[]).filter(x => ENTRANCES[x].type === 'spawn'));
-    const entrancesDst = new Set(entrances);
+    const entrancesDst = new Set(entrancesO, entrancesR);
 
     while (entrancesSrc.size > 0) {
       const src = sample(this.random, entrancesSrc);
