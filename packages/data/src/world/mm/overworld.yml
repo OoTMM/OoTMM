@@ -1915,7 +1915,7 @@
   exits:
     "Twin Islands": "true"
     "Front of Lone Peak Shrine": "is_winter"
-    "Goron Shrine": "first_day || has_mask_goron"
+    "Goron Shrine": "(soul_goron && first_day) || has_mask_goron"
   events:
     POWDER_KEG_TRIAL: "soul_medigoron && (is_spring || can_use_fire_short_range) && has_mask_goron"
     BUY_KEG: "soul_medigoron && event(POWDER_KEG_TRIAL) && event(TRIAL_BOULDER) && has(POWDER_KEG) && can_use_wallet(2)"
