@@ -2300,7 +2300,7 @@ export const SETTINGS = [{
   category: 'entrances',
   type: 'enum',
   values: [
-    { value: 'none', name: 'None', description: 'Warp songs and soaring are not shuffled.' },
+    { value: 'none', name: 'None', description: 'Warp songs and Soaring are not shuffled.' },
     { value: 'ootOnly', name: 'OoT Only', description: 'Shuffles only OoT\'s warp songs among each other.', cond: hasOoT },
     { value: 'mmOnly', name: 'MM Only', description: 'Shuffles only MM\'s soaring spots among each other.', cond: hasMM },
     { value: 'ownGame', name: 'Own Game', description: 'Shuffles both warp songs and soaring spots within their own game.', cond: hasOoTMM },
@@ -2369,4 +2369,24 @@ export const SETTINGS = [{
   description: 'Shuffle the Lost Woods entrances added by "Alter Lost Woods Exits" among one-way entrances.',
   default: false,
   cond: (x: any) => hasOoT(x) && x.erOneWays !== 'none' && x.alterLostWoodsExits
+}, {
+  key: 'erWarpsAnywhere',
+  name: 'Enable Warps Anywhere',
+  category: 'entrances',
+  type: 'enum',
+  values: [
+    { value: 'none', name: 'None', description: 'Warp Songs and Soaring are only shuffled among themselves.' },
+    { value: 'ownGame', name: 'Own Game', description: 'Warp Songs and Soaring are shuffled anywhere among their own game.', cond: hasOoTMM },
+    { value: 'full', name: 'Full', description: 'Warp Songs and Soaring are shuffled anywhere among both games.' },
+  ],
+  description: 'Enables the option of shuffling Warp Songs and Soaring anywhere.',
+  default: 'none',
+}, {
+  key: 'erAnyBossDungeon',
+  name: 'Anywhere Includes Bosses and Dungeons',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'Includes Bosses and Dungeons when shuffling spawns, warps, or one-ways anywhere.',
+  default: false,
+  cond: (x: any) => x.erWarpsAnywhere !== 'none' || x.erSpawns
 }] as const;

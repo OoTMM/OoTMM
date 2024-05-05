@@ -327,6 +327,73 @@ class WorldShuffler {
     return [...entrances, ...entrancesReverse];
   }
 
+  private placeWarps() {
+    /* Compute types */
+	const types = new Set();
+    types.add('one-way-warp');
+    types.add('one-way-statue');
+
+    if (this.input.settings.erWarpsAnywhere !== 'none') {
+      types.add('grotto');
+      types.add('grave');
+      types.add('grotto-exit');
+      types.add('grave-exit');
+      types.add('region');
+      types.add('region-extra');
+      types.add('region-shortcut');
+      types.add('region-exit');
+      types.add('indoors');
+      types.add('indoors-extra');
+      types.add('indoors-exit');
+      types.add('overworld');
+      types.add('one-way');
+      types.add('one-way-woods');
+      types.add('one-way-owl');
+      types.add('one-way-ikana');
+
+      if (this.settings.erAnyBossDungeon) {
+        types.add('boss');
+        types.add('dungeon');
+        types.add('dungeon-minor');
+        types.add('dungeon-sh');
+        types.add('dungeon-pf');
+        types.add('dungeon-ss');
+        types.add('dungeon-btw');
+        types.add('dungeon-acoi');
+        types.add('dungeon-ganon');
+        types.add('dungeo-ganon-tower');
+        types.add('dungeon-exit');
+      }
+    }
+
+    /* Compute entrances */
+    const entrances = this.entrancesForTypes(types, this.settings.erDecoupled);
+    if (this.input.settings.erWarps === 'mmOnly') {
+      const entrancesSrc = new Set(this.allEntrances.filter(x => ENTRANCES[x].type === 'one-way-statue'));
+      types.delete('one-way-warp');
+    }
+    if (this.input.settings.erWarps === 'ootOnly') {
+      const entrancesSrc = new Set(this.allEntrances.filter(x => ENTRANCES[x].type === 'one-way-warp'));
+      types.delete('one-way-statue');
+    }
+    else () {
+      const entrancesSrc = new Set(this.allEntrances.filter(x => ENTRANCES[x].type === 'one-way-warp' && ENTRANCES[x].type === 'one-way-statue'));
+    }	
+    const entrancesDst = new Set(entrances);
+
+    while (entrancesSrc.size > 0) {
+      const src = sample(this.random, entrancesSrc);
+      let dstCandidates = [...entrancesDst];
+      if (this.settings.erWarpsAnywhere === 'ownGame') {
+        dstCandidates = dstCandidates.filter(x => ENTRANCES[x].game === ENTRANCES[src].game);
+      }
+      const dst = sample(this.random, dstCandidates);
+      this.overrides[src] = dst;
+      entrancesSrc.delete(src);
+      entrancesDst.delete(dst);
+    }
+  }
+
   private placeWallmasters() {
     /* Compute types */
     const types = new Set(this.poolsTypes());
@@ -358,12 +425,32 @@ class WorldShuffler {
 
   private placeSpawns() {
     /* Compute types */
-    const types = new Set(this.poolsTypes());
-    types.delete('boss');
-    types.add('spawn');
-    types.add('indoors');
-    types.add('one-way-song');
+    const types = new Set();
+    types.add('grotto');
+    types.add('grave');
+    types.add('grotto-exit');
+    types.add('grave-exit');
     types.add('region');
+    types.add('region-extra');
+    types.add('region-shortcut');
+    types.add('region-exit');
+    types.add('indoors');
+    types.add('indoors-extra');
+    types.add('indoors-exit');
+    types.add('overworld');
+    types.add('one-way');
+    types.add('one-way-warp');
+    types.add('one-way-woods');
+    types.add('one-way-owl');
+
+    if (this.settings.erAnyBossDungeon) {
+      types.add('boss');
+      types.add('dungeon');
+      types.add('dungeon-minor');
+      types.add('dungeon-ganon');
+      types.add('dungeo-ganon-tower');
+      types.add('dungeon-exit');
+    }
 
     /* Compute entrances */
     const entrances = this.entrancesForTypes(types, true).filter(x => ENTRANCES[x].game === 'oot');
@@ -421,19 +508,6 @@ class WorldShuffler {
       pool.add('indoors-extra');
     }
     return { pool: Array.from(pool), opts: { ownGame: this.settings.erIndoors === 'ownGame' } };
-  }
-
-  private poolWarps() {
-    const pool = new Set(['one-way-song', 'one-way-statue']);
-
-    if (this.settings.erWarps === 'ootOnly') {
-      pool.delete('one-way-statue');
-    }
-    if (this.settings.erWarps === 'mmOnly') {
-      pool.delete('one-way-song');
-    }
-
-    return { pool: Array.from(pool), opts: { ownGame: this.settings.erWarps === 'ownGame' } };
   }
 
   private poolOneWays() {
@@ -730,6 +804,10 @@ class WorldShuffler {
 
     if (this.settings.erSpawns) {
       this.placeSpawns();
+    }
+
+    if (this.settings.erWarps !== 'none') {
+      this.placeWarps();
     }
 
     this.placePools(this.makePools());
