@@ -777,10 +777,6 @@ class WorldShuffler {
       }
     }
 
-    if (this.settings.erWarps !== 'none') {
-      pools.WARPS = this.poolWarps();
-    }
-
     if (this.settings.erOneWays !== 'none') {
       pools.ONE_WAYS = this.poolOneWays();
     }
