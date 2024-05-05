@@ -224,6 +224,33 @@ const REWARDS_DUNGEONS = [
   'SS',
 ];
 
+const REWARDS_DUNGEONS_OOT = [
+  'DT',
+  'DC',
+  'JJ',
+  'Forest',
+  'Fire',
+  'Water',
+  'Shadow',
+  'Spirit',
+  'BotW',
+  'IC',
+  'GTG',
+];
+
+const REWARDS_DUNGEONS_MM = [
+  'WF',
+  'SH',
+  'GB',
+  'ST',
+  'SSH',
+  'OSH',
+  'PF',
+  'BtW',
+  'ACoI',
+  'SS',
+];
+
 type ItemPools = {
   extra: PlayerItems,
   required: PlayerItems,
@@ -933,7 +960,15 @@ export class LogicPassSolver {
   private placeDungeonRewardsInDungeons() {
     const allDungeons: Set<string>[] = [];
     for (let i = 0; i < this.input.settings.players; ++i) {
-      allDungeons.push(new Set([...REWARDS_DUNGEONS]));
+      if (this.input.settings.games === 'oot') {
+        allDungeons.push(new Set([...REWARDS_DUNGEONS_OOT]));
+      }
+      if (this.input.settings.games === 'mm') {
+        allDungeons.push(new Set([...REWARDS_DUNGEONS_MM]));
+      }
+      else {
+        allDungeons.push(new Set([...REWARDS_DUNGEONS]));
+      }
     }
 
     const rewards = shuffle(this.input.random, countMapArray(this.state.pools.required)
