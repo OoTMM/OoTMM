@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix one fish not being properly flagged when obtained in pond fish shuffle.
 - Fix some silver blocks being only able to be pushed once in ageless strength.
 - Fix Koume/Kotake still giving red potions when they shouldn't.
 - Fix damage being wrong against Dead Hand in some cases.

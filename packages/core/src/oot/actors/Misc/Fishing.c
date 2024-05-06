@@ -49,33 +49,24 @@ void Fishing_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float 
 PATCH_CALL(0x80a42644, Fishing_GiveItem);
 PATCH_CALL(0x80a427e0, Fishing_GiveItem);
 
-static void Fishing_Fish_ItemQuery(GameState_Play* playOrNull, ComboItemQuery* q, u16 variable)
+static void Fishing_Fish_ItemQuery(GameState_Play* play, ComboItemQuery* q, u16 variable)
 {
-    bzero(q, sizeof(*q));
+    int flag;
 
+    flag = variable - 100;
+    if (gSave.age == AGE_ADULT)
+        flag += 17;
+
+    bzero(q, sizeof(*q));
     q->gi = gSave.age == AGE_ADULT
         ? GI_OOT_FISHING_POND_CHILD_FISH_2LBS
         : GI_OOT_FISHING_POND_ADULT_FISH_4LBS;
     q->ovType = OV_FISH;
-    q->id = variable - 100; /* EN_FISH_PARAM */
+    q->id = flag; /* EN_FISH_PARAM */
     q->giRenew = GI_OOT_RECOVERY_HEART;
 
-    if (gSave.age == AGE_ADULT) {
-        q->id += 17;
-    }
-
-    if (playOrNull != NULL) {
-        int flag = variable - 100;
-        if (gSave.age == AGE_ADULT) {
-            if (GetCollectibleFlag(playOrNull, flag)) {
-                q->ovFlags |= OVF_RENEW;
-            }
-        } else {
-            if (GetChestFlag(playOrNull, flag)) {
-                q->ovFlags |= OVF_RENEW;
-            }
-        }
-    }
+    if (BITMAP8_GET(gSharedCustomSave.caughtFishFlags, flag))
+        q->ovFlags |= OVF_RENEW;
 }
 
 static void Fishing_Fish_ItemOverride(GameState_Play* playOrNull, ComboItemOverride* o, u16 variable)

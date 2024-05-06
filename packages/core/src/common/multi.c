@@ -223,22 +223,6 @@ static void setStrayFairyMarkMm(GameState_Play* play, int sceneId, int id)
         setSwitch0MarkMm(play, sceneId, id & 0x1f);
 }
 
-static int getFiskMark(GameState_Play* play, int id)
-{
-    if (id >= 17)
-        return getCollectibleMarkOot(play, SCE_OOT_FISHING_POND, id & 0x1f);
-    else
-        return getChestMarkOot(play, SCE_OOT_FISHING_POND, id & 0x1f);
-}
-
-static void setFishMark(GameState_Play* play, int id)
-{
-    if (id >= 17)
-        setCollectibleMarkOot(play, SCE_OOT_FISHING_POND, id & 0x1f);
-    else
-        setChestMarkOot(play, SCE_OOT_FISHING_POND, id & 0x1f);
-}
-
 static void markXflag(Xflag* xf, int sliceId, int sceneId, int roomId, int id)
 {
     bzero(xf, sizeof(*xf));
@@ -317,7 +301,7 @@ void Multi_SetMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, 
         BITMAP8_SET(gSharedCustomSave.oot.sr, id);
         break;
     case OV_FISH:
-        setFishMark(play, id);
+        BITMAP8_SET(gSharedCustomSave.caughtFishFlags, id);
         break;
     default:
         setXflagsMarkOot(play, ovType - OV_XFLAG0, sceneId, roomId, id);
@@ -394,7 +378,7 @@ int Multi_IsMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8
     case OV_SR:
         return BITMAP8_GET(gSharedCustomSave.oot.sr, id);
     case OV_FISH:
-        return getFiskMark(play, id);
+        return BITMAP8_GET(gSharedCustomSave.caughtFishFlags, id);
     default:
         return getXflagsMarkOot(play, ovType - OV_XFLAG0, sceneId, roomId, id);
     }
