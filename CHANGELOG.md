@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - Woods of Mystery has been logically reorganized to allow for leaving from the Day 2 Grotto in ER.
+- Reduced Meg spawn timer after being hit.
 
 ### Fixed
 
