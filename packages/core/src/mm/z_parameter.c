@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/player.h>
+#include <combo/souls.h>
 
 void Interface_LoadItemIconCustom(u32 vrom, s32 id, void* dst, size_t size)
 {
@@ -71,6 +72,12 @@ extern s8 gPlayerFormCustomItemRestrictions[5][8];
 s8 Interface_GetItemRestriction(u8 playerForm, GameState_Play* play, s16* restoreHudVisibility, s32 nothing, u8 item, s16 button)
 {
     s8 (*gPlayerFormItemRestrictions)[0x72] = (s8(*)[0x72])0x801c2410;
+    if (item == ITEM_MM_MASK_GIANT && !comboHasSoulMm(GI_MM_SOUL_BOSS_TWINMOLD))
+    {
+        gPlayerFormItemRestrictions[playerForm][item] = 0;
+        gSaveContext.buttonStatus[button] = 0xff;
+    }
+
     if (item < ITEM_MM_CUSTOM_MIN)
     {
         return gPlayerFormItemRestrictions[playerForm][item];

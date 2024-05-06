@@ -30,6 +30,7 @@ All notable changes to this project will be documented in this file.
 - Fix possible softlock on Volvagia when damaging her second hitbox after death cutscene was initiated.
 - Update blitz presets.
 - Fix crash when trying to calm the council without the souls of all involved parties.
+- Fix crash in Twinmold Arena when trying to transform into Giant without Twinmold's soul.
 
 ## [22.0] - 2024-04-24
 
