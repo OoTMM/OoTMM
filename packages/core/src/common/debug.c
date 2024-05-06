@@ -506,7 +506,7 @@ static void cheatAllItems(GameState_Play* play)
     gSave.inventory.items[ITS_MM_BOTTLE + 2] = ITEM_MM_MAGIC_MUSHROOM;
     gSave.inventory.items[ITS_MM_BOTTLE + 3] = ITEM_MM_POE;
     gSave.inventory.items[ITS_MM_BOTTLE + 4] = ITEM_MM_FISH;
-    gSave.inventory.items[ITS_MM_BOTTLE + 5] = ITEM_MM_BOTTLE_EMPTY;
+    gSave.inventory.items[ITS_MM_BOTTLE + 5] = ITEM_MM_POTION_RED;
 
     gSave.inventory.items[ITS_MM_STICKS] = ITEM_MM_STICK;
     gSave.inventory.ammo[ITS_MM_STICKS] = 30;
@@ -633,7 +633,7 @@ static void cheatAllItems(GameState_Play* play)
 
     gSave.inventory.upgrades.dekuStick = 3;
     gSave.inventory.upgrades.dekuNut = 3;
-    /*gSave.inventory.upgrades.bulletBag = 3; */
+    gSave.inventory.upgrades.bulletBag = 3;
     gSave.inventory.upgrades.bombBag = 3;
     gSave.inventory.upgrades.quiver = 3;
     gSave.inventory.upgrades.dive = 2;
@@ -663,8 +663,8 @@ static void cheatAllItems(GameState_Play* play)
     gSave.inventory.quest.songTpSpirit = 1;
 
     gSave.inventory.quest.stoneEmerald = 1;
-    gSave.inventory.quest.stoneRuby = 0;
-    gSave.inventory.quest.stoneSapphire = 0;
+    gSave.inventory.quest.stoneRuby = 1;
+    gSave.inventory.quest.stoneSapphire = 1;
 
     gSave.playerData.magicUpgrade = 1;
     gSave.playerData.magicUpgrade2 = 1;

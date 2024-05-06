@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 - Add NPC souls to MM, more NPC souls in OoT, shared NPC souls.
 - Add cutscenes speed-ups for the end of Ganon's Castle Trials.
 - Add new junk hints.
+- Ruto now spawns on first floor of Jabu-Jabu if it's vanilla layout (not MQ!).
 
 ### Changed
 
