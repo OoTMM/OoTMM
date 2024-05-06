@@ -24,6 +24,7 @@ All notable changes to this project will be documented in this file.
 - Fix death after leaving a grotto in MM in ER leading to wrong warps in some cases.
 - Fix an issue with rewards within dungeons using only OOT or only MM.
 - Fix logic issue for Spirit Temple Statue Upper Right chest not checking for Hookshot or Hover Boots in certain conditions.
+- Fix possible softlock on Volvagia when damaging her second hitbox after death cutscene was initiated.
 
 ## [22.0] - 2024-04-24
 
