@@ -15,7 +15,7 @@ All notable changes to this project will be documented in this file.
 
 - Woods of Mystery has been logically reorganized to allow for leaving from the Day 2 Grotto in ER.
 - Reduced Meg spawn timer after being hit.
-- Removed the camera lock upon throwing a bomb-flower onto the rock locking Dodongo's Cavern
+- Removed the camera lock upon throwing a bomb-flower onto the rock locking Dodongo's Cavern.
 
 ### Fixed
 
@@ -28,6 +28,7 @@ All notable changes to this project will be documented in this file.
 - Fix logic issue for Spirit Temple Statue Upper Right chest not checking for Hookshot or Hover Boots in certain conditions.
 - Fix possible softlock on Volvagia when damaging her second hitbox after death cutscene was initiated.
 - Update blitz presets.
+- Fix crash when trying to calm the council without the souls of all involved parties.
 
 ## [22.0] - 2024-04-24
 

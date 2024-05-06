@@ -399,9 +399,9 @@ MM_IKANA_CASTLE_INTERIOR_KEG:                   { game: mm, id: 0x3440, type: on
 MM_IKANA_CASTLE_INTERIOR_BLOCK:                 { game: mm, id: 0x3450, type: one-way-ikana, areas: ["MM Ancient Castle of Ikana Roof Interior", "MM Ancient Castle of Ikana Interior South"] }
 MM_CHEST_GAME:                                  { game: mm, id: 0x2800, type: indoors, areas: ["MM Clock Town East Main", "MM Chest Game"], reverse: MM_CLOCK_TOWN_EAST_FROM_CHEST_GAME }
 MM_HONEY_AND_DARLING_GAME:                      { game: mm, id: 0x0800, type: indoors, areas: ["MM Clock Town East Main", "MM Honey & Darling Game"], reverse: MM_CLOCK_TOWN_EAST_FROM_HONEY_AND_DARLING }
-MM_MAYORS_OFFICE:                               { game: mm, id: 0x0000, type: indoors, areas: ["MM Clock Town East Main", "MM Mayor's Office"], reverse: MM_CLOCK_TOWN_EAST_FROM_MAYORS_OFFICE }
+MM_MAYORS_OFFICE:                               { game: mm, id: 0x0000, type: indoors, areas: ["MM Clock Town East Main", "MM Mayor's Office"], reverse: MM_CLOCK_TOWN_EAST_FROM_MAYORS_OFFICE, debug: [INTERIOR, 'Mayors Office'] }
 MM_TOWN_ARCHERY:                                { game: mm, id: 0x3a00, type: indoors, areas: ["MM Clock Town East Main", "MM Town Archery"], reverse: MM_CLOCK_TOWN_EAST_FROM_TOWN_ARCHERY }
-MM_MILK_BAR:                                    { game: mm, id: 0x2400, type: indoors, areas: ["MM Clock Town East Main", "MM Milk Bar"], reverse: MM_CLOCK_TOWN_EAST_FROM_MILK_BAR }
+MM_MILK_BAR:                                    { game: mm, id: 0x2400, type: indoors, areas: ["MM Clock Town East Main", "MM Milk Bar"], reverse: MM_CLOCK_TOWN_EAST_FROM_MILK_BAR, debug: [INTERIOR, 'Milk Bar'] }
 MM_FAIRY_FOUNTAIN_TOWN:                         { game: mm, id: 0x4600, type: indoors, areas: ["MM Clock Town North", "MM Clock Town Fairy Fountain"], reverse: MM_CLOCK_TOWN_NORTH_FROM_FAIRY_FOUNTAIN }
 MM_SWORDSMAN_SCHOOL:                            { game: mm, id: 0xa200, type: indoors, areas: ["MM Clock Town West", "MM Swordsman School"], reverse: MM_CLOCK_TOWN_WEST_FROM_SWORDSMAN_SCHOOL }
 MM_CURIOSITY_SHOP:                              { game: mm, id: 0x0e00, type: indoors, areas: ["MM Clock Town West", "MM Curiosity Shop"], reverse: MM_CLOCK_TOWN_WEST_FROM_CURIOSITY_SHOP }
