@@ -587,11 +587,11 @@ static void cheatAllItems(GameState_Play* play)
 static void cheatAllItems(GameState_Play* play)
 {
     gSave.inventory.quest.gerudoCard = 1;
-    /*MM_SET_EVENT_WEEK(EV_MM_WEEK_DRANK_CHATEAU_ROMANI); */
+    MM_SET_EVENT_WEEK(EV_MM_WEEK_DRANK_CHATEAU_ROMANI);
     SetEventChk(EV_OOT_CHK_MASTER_SWORD_PULLED);
     SetEventChk(EV_OOT_CHK_MASTER_SWORD_CHAMBER);
     gSave.playerData.swordHealth = 8;
-    //gSave.isBiggoronSword = 1;
+    gSave.isBiggoronSword = 1;
 
     //MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF);
     //MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH);
@@ -647,7 +647,7 @@ static void cheatAllItems(GameState_Play* play)
     gSave.inventory.ammo[ITS_OOT_SLINGSHOT] = 50;
     gSave.inventory.ammo[ITS_OOT_NUTS] = 40;
     gSave.inventory.ammo[ITS_OOT_BOMBS] = 40;
-    //gSave.inventory.ammo[ITS_OOT_BOW] = 50;
+    gSave.inventory.ammo[ITS_OOT_BOW] = 50;
     gSave.inventory.ammo[ITS_OOT_BOMBCHU] = 50;
     gSave.inventory.quest.songZelda = 1;
     gSave.inventory.quest.songSaria = 1;
@@ -697,8 +697,8 @@ static void cheatAllItems(GameState_Play* play)
 
     SetEventChk(EV_OOT_CHK_EPONA);
 
-    gSave.equips.buttonItems[1] = ITEM_OOT_MASK_STONE;
-    gSave.equips.cButtonSlots[0] = ITS_OOT_TRADE_CHILD;
+    // gSave.equips.buttonItems[1] = ITEM_OOT_MASK_STONE;
+    // gSave.equips.cButtonSlots[0] = ITS_OOT_TRADE_CHILD;
 
     gCustomSave.hasElegy = 1;
 }
