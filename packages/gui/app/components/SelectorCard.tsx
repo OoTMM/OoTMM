@@ -32,51 +32,35 @@ const Options = ({
   selectedList: SelectedList;
   setSelectedList: Function;
 }) => {
-  const body = [];
-  for (const option of listOfOptions) {
-    body.push(
-      <Row className="m-1" key={option.key}>
-        <Col>
-          <Checkbox
-            label={option.value.name}
-            checked={selectedList[option.key] ? true : false}
-            onChange={() => {
-              const value = selectedList[option.key] ? true : undefined;
-              setSelectedList((previousList: SelectedList) => {
-                const newList = { ...previousList };
-                if (newList[option.key] === true) {
-                  delete newList[option.key];
-                } else {
-                  newList[option.key] = true;
-                }
-                return newList;
-              });
-            }}
-          />
-        </Col>
-        <Col lg="3">
-          <div className="forceRight">
-            {option.value.linkVideo &&
-              <a href={option.value.linkVideo} className="icon-spacing" title="Video Example">
-                <Youtube />
-              </a>
-            }
-            {option.value.linkText &&
-              <a href={option.value.linkText} className="icon-spacing" title="Relevant Written Documentation">
-                <TextParagraph />
-              </a>
-            }
-            {option.value.tooltip &&
-              <a className="tooltip-link icon-spacing" id={option.key as string} href="#">
-                <QuestionCircleFill />
-              </a>
-            }
-          </div>
-        </Col>
-      </Row>
-    );
-  }
-  return <>{body}</>;
+  return listOfOptions.map(option =>
+    <Row className="m-1" key={option.key}>
+      <Col>
+        <Checkbox
+          label={option.value.name}
+          checked={selectedList[option.key] ? true : false}
+          onChange={() => {
+            const value = selectedList[option.key] ? true : undefined;
+            setSelectedList((previousList: SelectedList) => {
+              const newList = { ...previousList };
+              if (newList[option.key] === true) {
+                delete newList[option.key];
+              } else {
+                newList[option.key] = true;
+              }
+              return newList;
+            });
+          }}
+        />
+      </Col>
+      <Col lg="3">
+        <div className="forceRight">
+          {option.value.linkVideo && <a target="_blank" href={option.value.linkVideo} className="icon-spacing" title="Video Example"><Youtube/></a>}
+          {option.value.linkText && <a target="_blank" href={option.value.linkText} className="icon-spacing" title="Relevant Written Documentation"><TextParagraph/></a>}
+          {option.value.tooltip && <a className="tooltip-link icon-spacing" id={option.key as string} href="#"><QuestionCircleFill/></a>}
+        </div>
+      </Col>
+    </Row>
+  );
 };
 
 // This type needs to change as you implement more features with it ( IE: Glitches, Plando, etc )  Just use ORs to chain the value type together.
