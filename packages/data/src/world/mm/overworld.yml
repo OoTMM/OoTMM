@@ -384,9 +384,9 @@
     "Clock Town Laundry Pool Grass 1": "true"
     "Clock Town Laundry Pool Grass 2": "true"
     "Clock Town Laundry Pool Grass 3": "true"
-    "Clock Town Laundry Pool Rupee 1": "second_day"
-    "Clock Town Laundry Pool Rupee 2": "second_day"
-    "Clock Town Laundry Pool Rupee 3": "second_day"
+    "Clock Town Laundry Pool Rupee 1": "is_night2"
+    "Clock Town Laundry Pool Rupee 2": "is_night2"
+    "Clock Town Laundry Pool Rupee 3": "is_night2"
 "Clock Town Fairy Fountain":
   region: ENTRANCE
   exits:
