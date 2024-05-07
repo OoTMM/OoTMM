@@ -1,27 +1,12 @@
 import React, { useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import Button from './Button';
-import { CaretLeftFill, CaretRightFill, QuestionCircleFill, TextParagraph, Youtube } from 'react-bootstrap-icons';
-import { Checkbox } from './Checkbox';
 import { Trick } from '@ootmm/core/lib/combo/settings/tricks';
+import Button from './Button';
+import { CaretLeftFill, CaretRightFill, TextParagraph, Youtube } from 'react-bootstrap-icons';
+import { Checkbox } from './Checkbox';
 import { Tooltip } from './Tooltip';
-import { Text } from './Text';
 
 export type SelectedList = { [key: string]: boolean };
-
-const ToolTips = ({ listOfOptions }: { listOfOptions: SelectorCardOption[] }) => {
-  const body = [];
-  for (const option of listOfOptions) {
-    body.push(
-      <Tooltip id={option.key as string} key={option.key}>
-        <Text size="xl" style={{ whiteSpace: 'pre-line' }}>
-          {option.value.tooltip}
-        </Text>
-      </Tooltip>
-    );
-  }
-  return <>{body}</>;
-};
 
 const Options = ({
   listOfOptions,
@@ -56,7 +41,7 @@ const Options = ({
         <div className="forceRight">
           {option.value.linkVideo && <a target="_blank" href={option.value.linkVideo} className="icon-spacing" title="Video Example"><Youtube/></a>}
           {option.value.linkText && <a target="_blank" href={option.value.linkText} className="icon-spacing" title="Relevant Written Documentation"><TextParagraph/></a>}
-          {option.value.tooltip && <a className="tooltip-link icon-spacing" id={option.key as string} href="#"><QuestionCircleFill/></a>}
+          {option.value.tooltip && <Tooltip>{option.value.tooltip}</Tooltip>}
         </div>
       </Col>
     </Row>
@@ -124,7 +109,6 @@ const SelectorCard = ({ options, selected, add, remove, clear, label }: Selector
       </Row>
       <Row className="mt-3">
         <Col>
-          <ToolTips listOfOptions={remaining} />
           <div className="card">
             <Options listOfOptions={remaining} selectedList={selectedToAdd} setSelectedList={setAdditions} />
           </div>
