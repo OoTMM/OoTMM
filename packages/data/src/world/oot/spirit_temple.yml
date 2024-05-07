@@ -6,7 +6,7 @@
     "Spirit Temple Adult Entrance": "can_lift_silver"
   events:
     SPIRIT_CHILD_DOOR: "is_child && small_keys_spirit(5)"
-    SPIRIT_ADULT_DOOR: "can_lift_silver && cond(setting(agelessBoots) || setting(agelessHookshot) || !setting(climbMostSurfacesOot, off) || !setting(ageChange, none), small_keys_spirit(5), small_keys_spirit(3))" #Child with Hover Boots, Hookshot, or climbing to the hands or adult side give the possibility of using every other door.
+    SPIRIT_ADULT_DOOR: "can_lift_silver && cond(setting(agelessBoots) || setting(agelessHookshot) || setting(agelessStrength) || !setting(climbMostSurfacesOot, off) || !setting(ageChange, none), small_keys_spirit(5), small_keys_spirit(3))" #Child with Hover Boots, Hookshot, or climbing to the hands or adult side give the possibility of using every other door.
     MAGIC: "true"
   locations:
     "Spirit Temple Pot Lobby 1": "true"
@@ -160,7 +160,7 @@
     "Spirit Temple Adult Upper": "small_keys_spirit(4)"
   locations:
     "Spirit Temple Statue Hands": "cond(!setting(climbMostSurfacesOot, off), (has_explosives && (has_mirror_shield || small_keys_spirit(2))) || small_keys_spirit(3) || (has_explosives && small_keys_spirit(2)), (((setting(agelessBoots) && trick(OOT_SPIRIT_CHILD_HOVER) && has_hover_boots_raw) || (setting(agelessHookshot) && has_hookshot(1))) && has_explosives) || event(SPIRIT_ADULT_DOOR) || (event(SPIRIT_CHILD_DOOR) && ((trick(OOT_SPIRIT_CHILD_HOVER) && has_hover_boots) || can_hookshot)) || (time_travel_at_will && has_explosives && (has_hookshot(1) || (has_hover_boots_raw && trick(OOT_SPIRIT_CHILD_HOVER))))) && can_play_zelda"
-    "Spirit Temple Statue Upper Right": "cond(!setting(climbMostSurfacesOot, off), (has_explosives && (has_mirror_shield || small_keys_spirit(2))) || small_keys_spirit(3) || (has_explosives && small_keys_spirit(2)), (((setting(agelessBoots) && trick(OOT_SPIRIT_CHILD_HOVER) && has_hover_boots_raw) || (setting(agelessHookshot) && has_hookshot(1))) && has_explosives) || event(SPIRIT_ADULT_DOOR) || (event(SPIRIT_CHILD_DOOR) && ((trick(OOT_SPIRIT_CHILD_HOVER) && has_hover_boots) || can_hookshot)) || (time_travel_at_will && has_explosives && (has_hookshot(1) || (has_hover_boots_raw && trick(OOT_SPIRIT_CHILD_HOVER))))) && can_play_zelda"
+    "Spirit Temple Statue Upper Right": "cond(!setting(climbMostSurfacesOot, off), (has_explosives && (has_mirror_shield || small_keys_spirit(2))) || small_keys_spirit(3) || (has_explosives && small_keys_spirit(2)), (((setting(agelessBoots) && trick(OOT_SPIRIT_CHILD_HOVER) && has_hover_boots_raw) || (setting(agelessHookshot) && has_hookshot(1))) && has_explosives) || (event(SPIRIT_ADULT_DOOR) && (has_hover_boots || has_hookshot(1))) || (event(SPIRIT_CHILD_DOOR) && ((trick(OOT_SPIRIT_CHILD_HOVER) && has_hover_boots) || can_hookshot)) || (time_travel_at_will && has_explosives && (has_hookshot(1) || (has_hover_boots_raw && trick(OOT_SPIRIT_CHILD_HOVER))))) && can_play_zelda"
     "Spirit Temple Pot Adult Upper": "small_keys_spirit(4)"
 "Spirit Temple Adult Upper":
   dungeon: Spirit

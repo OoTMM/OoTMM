@@ -93,13 +93,14 @@
 #define EV_OOT_ITEM_GORON_BRACELET          0x20
 #define EV_OOT_INF_MEDIGORON                0xb2
 
-#define EV_MM_WEEK_ENTERED_TERMINA              MM_EV(0x00, 1)
-#define EV_MM_WEEK_ENTERED_CLOCK_TOWN_EAST      MM_EV(0x02, 3)
-#define EV_MM_WEEK_ENTERED_CLOCK_TOWN_WEST      MM_EV(0x02, 4)
-#define EV_MM_WEEK_ENTERED_CLOCK_TOWN_NORTH     MM_EV(0x02, 5)
-#define EV_MM_WEEK_MONKEY_PUNISHED              MM_EV(0x09, 7)
-#define EV_MM_WEEK_TOWN_GUARDS                  MM_EV(0x0c, 5)
-#define EV_MM_WEEK_FOREST_WITCH                 MM_EV(0x10, 4)
+#define EV_MM_WEEK_ENTERED_TERMINA              MM_EV(0,  1)
+#define EV_MM_WEEK_ENTERED_CLOCK_TOWN_EAST      MM_EV(2,  3)
+#define EV_MM_WEEK_ENTERED_CLOCK_TOWN_WEST      MM_EV(2,  4)
+#define EV_MM_WEEK_ENTERED_CLOCK_TOWN_NORTH     MM_EV(2,  5)
+#define EV_MM_WEEK_MONKEY_PUNISHED              MM_EV(9,  7)
+#define EV_MM_WEEK_TOWN_GUARDS                  MM_EV(12, 5)
+#define EV_MM_WEEK_BOTTLE_RED_POTION            MM_EV(12, 4)
+#define EV_MM_WEEK_FOREST_WITCH                 MM_EV(16, 4)
 #define EV_MM_WEEK_SPIN_UPGRADE                 MM_EV(0x17, 1)
 #define EV_MM_WEEK_FIRST_CYCLE                  MM_EV(0x3b, 2)
 #define EV_MM_WEEK_BEAVER_RACE1_DONE            MM_EV(0x5d, 0)

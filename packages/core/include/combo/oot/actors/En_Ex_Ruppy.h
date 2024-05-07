@@ -1,7 +1,7 @@
 #ifndef COMBO_OOT_EN_EX_RUPPY_H
 #define COMBO_OOT_EN_EX_RUPPY_H
 
-#include <combo/common/actor.h>
+#include <combo/actor.h>
 
 typedef struct Actor_EnExRuppy Actor_EnExRuppy;
 

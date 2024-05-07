@@ -3,6 +3,10 @@
 #include <combo/sr.h>
 #include <combo/dma.h>
 #include <combo/menu.h>
+#include <combo/debug.h>
+#include <combo/config.h>
+#include <combo/global.h>
+#include <combo/context.h>
 
 ComboGlobal g;
 
@@ -16,7 +20,8 @@ void comboInit(void)
     g.delayedSwitchFlag = 0xff;
 
     initHeap();
-    comboLoadContext();
+    Context_Init();
+    Config_Init();
     comboInitData();
     comboInitObjects();
     comboInitOverride();

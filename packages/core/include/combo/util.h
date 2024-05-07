@@ -1,8 +1,15 @@
 #ifndef COMBO_UTIL_H
 #define COMBO_UTIL_H
 
-#include <stddef.h>
 #include <combo/types.h>
+
+#define NORETURN    __attribute__((noreturn))
+#define PACKED      __attribute__((packed))
+#define ALIGNED(x)  __attribute__((aligned(x)))
+#define UNREACHABLE __builtin_unreachable
+#define UNUSED(x)   ((void)x)
+
+#define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
 
 #define ASSERT_SIZE(s, sz)      _Static_assert(sizeof(s) == sz, #s " size is wrong")
 #define ASSERT_OFFSET(s,f,o)    _Static_assert(offsetof(s,f) == o, "Offset of " #f " in " #s " is not " #o)
@@ -25,11 +32,6 @@
 #define ALIGN64(val) (((val) + 0x3F) & ~0x3F)
 #define ALIGN256(val) (((val) + 0xFF) & ~0xFF)
 
-u8   comboReadPhysU8(u32 paddr);
-s8   comboReadPhysI8(u32 paddr);
-u16  comboReadPhysU16(u32 paddr);
-s16  comboReadPhysI16(u32 paddr);
-u32  comboReadPhysU32(u32 paddr);
-s32  comboReadPhysI32(u32 paddr);
+u32 popcount(u32 x);
 
 #endif

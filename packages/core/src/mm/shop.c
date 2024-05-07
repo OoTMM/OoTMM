@@ -44,7 +44,7 @@
 #define SHOP_ITEM_9F                0x29
 #define SHOP_ITEM_SHIELD_MIRROR     0x2a
 
-u8 comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
+u8 Shop_ItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
 {
     switch (play->sceneId)
     {

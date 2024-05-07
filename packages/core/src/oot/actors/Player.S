@@ -201,3 +201,26 @@ PATCH_START 0x80079848
   j       Player_AfterSetEquipmentData
    addiu  sp,0x18
 PATCH_END
+
+/* Use our override handlers */
+.globl Player_OverrideLimbDrawGameplayDefault
+Player_OverrideLimbDrawGameplayDefault:
+  addiu sp,-0x28
+  j     _Player_OverrideLimbDrawGameplayDefault+8
+   sw   s0,0x20(sp)
+
+PATCH_START _Player_OverrideLimbDrawGameplayDefault
+ j Player_OverrideLimbDrawGameplayDefaultWrapper
+  nop
+PATCH_END
+
+.globl Player_OverrideLimbDrawPause
+Player_OverrideLimbDrawPause:
+  sw  a0,0x0(sp)
+  j   _Player_OverrideLimbDrawPause+8
+   sw a3,0xc(sp)
+
+PATCH_START _Player_OverrideLimbDrawPause
+ j Player_OverrideLimbDrawPauseWrapper
+  nop
+PATCH_END

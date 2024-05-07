@@ -3,23 +3,30 @@
 #include <combo/net.h>
 #include <combo/menu.h>
 #include <combo/entrance.h>
+#include <combo/debug.h>
+#include <combo/magic.h>
+#include <combo/config.h>
+#include <combo/global.h>
+#include <combo/dpad.h>
+#include <combo/multi.h>
+#include <combo/context.h>
+#include <combo/dungeon.h>
 
-extern void* gMmMag;
 GameState_Play* gPlay;
 
 static int isRainbowBridgeOpen(void)
 {
-    if (comboConfig(CFG_OOT_BRIDGE_CUSTOM) && !comboSpecialCond(SPECIAL_BRIDGE))
+    if (Config_Flag(CFG_OOT_BRIDGE_CUSTOM) && !Config_SpecialCond(SPECIAL_BRIDGE))
         return 0;
 
-    if (comboConfig(CFG_OOT_BRIDGE_VANILLA) && !(
+    if (Config_Flag(CFG_OOT_BRIDGE_VANILLA) && !(
         gOotSave.inventory.quest.medallionShadow
         && gOotSave.inventory.quest.medallionSpirit
         && gOotSave.inventory.items[ITS_OOT_ARROW_LIGHT] == ITEM_OOT_ARROW_LIGHT
     ))
         return 0;
 
-    if (comboConfig(CFG_OOT_BRIDGE_MEDALLIONS) && !(
+    if (Config_Flag(CFG_OOT_BRIDGE_MEDALLIONS) && !(
         gOotSave.inventory.quest.medallionLight
         && gOotSave.inventory.quest.medallionForest
         && gOotSave.inventory.quest.medallionFire
@@ -54,6 +61,10 @@ static void eventFixes(GameState_Play* play)
             tmp |= 0x1e;
         gSave.eventsMisc[20] = tmp;
 
+        /* Places Ruto on first floor */
+        if (!(gComboConfig.mq & (1 << MQ_JABU_JABU)))
+            BITMAP16_SET(gSave.eventsMisc, EV_OOT_INF_RUTO_TOP_FLOOR);
+
         /* Ruto kidnap fixes */
         if (BITMAP16_GET(gSave.eventsMisc, EV_OOT_INF_RUTO_KIDNAPPED) || BITMAP16_GET(gSave.eventsMisc, EV_OOT_INF_RUTO_GOT_SAPPHIRE))
         {
@@ -83,7 +94,7 @@ static void sendSelfTriforce(void)
     int npc;
     s16 gi;
 
-    if (!comboConfig(CFG_MULTIPLAYER))
+    if (!Config_Flag(CFG_MULTIPLAYER))
         return;
 
     gi = GI_OOT_TRIFORCE_FULL;
@@ -93,8 +104,8 @@ static void sendSelfTriforce(void)
     netWaitCmdClear();
     bzero(&net->cmdOut, sizeof(net->cmdOut));
     net->cmdOut.op = NET_OP_ITEM_SEND;
-    net->cmdOut.itemSend.playerFrom = gComboData.playerId;
-    net->cmdOut.itemSend.playerTo = gComboData.playerId;
+    net->cmdOut.itemSend.playerFrom = gComboConfig.playerId;
+    net->cmdOut.itemSend.playerTo = gComboConfig.playerId;
     net->cmdOut.itemSend.game = 0;
     net->cmdOut.itemSend.gi = gi;
     net->cmdOut.itemSend.key = ((u32)OV_NPC << 24) | npc;
@@ -134,7 +145,7 @@ static void endGame(void)
     gSave.age = AGE_ADULT;
     gSaveContext.nextCutscene = 0;
     gSave.cutscene = 0;
-    if (comboConfig(CFG_ER_ANY))
+    if (Config_Flag(CFG_ER_ANY))
     {
         gSave.entrance = ENTR_OOT_GANON_TOWER;
         gSave.sceneId = SCE_OOT_GANON_TOWER;
@@ -146,10 +157,10 @@ static void endGame(void)
     }
 
     /* Save */
-    comboSave(NULL, SF_PASSIVE);
+    Save_DoSave(NULL, SF_PASSIVE);
 
     /* Restore gameplay values to play the cutscene if majora was beaten too */
-    if (comboGoalCond())
+    if (Config_IsGoal())
     {
         gSave.age = tmpAge;
         gSaveContext.nextCutscene = tmpNextCutscene;
@@ -459,6 +470,27 @@ static void playAdjustEntrance(GameState_Play* play)
     applyCustomEntrance(&gSave.entrance);
 }
 
+static void masterSwordFix(GameState_Play* play)
+{
+    if (!gSharedCustomSave.foundMasterSword)
+        return;
+
+    /* Re-add the Master Sword to the inventory */
+    gSave.inventory.equipment.swords |= 2;
+
+    if (Config_Flag(CFG_OOT_SWORDLESS_ADULT))
+        return;
+    if (gSave.age != AGE_ADULT)
+        return;
+    if (gSave.equips.buttonItems[0] != ITEM_NONE)
+        return;
+
+    /* We need to force-reequip */
+    gSave.equips.buttonItems[0] = ITEM_OOT_SWORD_MASTER;
+    gSave.equips.equipment.swords = 2;
+    EV_OOT_UNSET_SWORDLESS();
+}
+
 void hookPlay_Init(GameState_Play* play)
 {
     /* Pre-init */
@@ -471,7 +503,7 @@ void hookPlay_Init(GameState_Play* play)
     gMultiMarkCollectibles = 0;
     gMultiMarkSwitch0 = 0;
     gMultiMarkSwitch1 = 0;
-    comboMultiResetWisps();
+    Multi_ResetWisps();
 
     /* Register play */
     gPlay = play;
@@ -483,6 +515,7 @@ void hookPlay_Init(GameState_Play* play)
     comboObjectsReset();
     comboExObjectsReset();
     eventFixes(play);
+    masterSwordFix(play);
 
     Play_Init(play);
 
@@ -493,28 +526,14 @@ void hookPlay_Init(GameState_Play* play)
         gLastScene = play->sceneId;
     }
 
-    if (gSave.entrance == ENTR_OOT_SHOP_MASKS)
-    {
-        comboGameSwitch(play, ENTR_MM_CLOCK_TOWN);
-        return;
-    }
-
     /* Spawn Custom Triggers */
     CustomTriggers_Spawn(play);
     comboSpawnCustomWarps(play);
 
-    if (!gCustomKeep)
+    if (!g.customKeep)
     {
         comboLoadCustomKeep();
     }
-
-#if defined(DEBUG)
-    if (!gSaveContext.gameMode && (play->gs.input[0].current.buttons & R_TRIG))
-    {
-        comboGameSwitch(play, ENTR_MM_CLOCK_TOWN);
-        return;
-    }
-#endif
 }
 
 void Play_UpdateWrapper(GameState_Play* play)
@@ -528,7 +547,7 @@ void Play_UpdateWrapper(GameState_Play* play)
     comboCacheGarbageCollect();
     comboObjectsGC();
     Play_Update(play);
-    comboDpadDraw(play);
+    Dpad_Draw(play);
     Debug_Update();
 }
 
@@ -548,7 +567,7 @@ NORETURN static void Play_GameSwitch(GameState_Play* play, u32 entrance)
 
 static u32 entrGrottoExit(GameState_Play* play)
 {
-    if (!comboConfig(CFG_ER_GROTTOS))
+    if (!Config_Flag(CFG_ER_GROTTOS))
         return ENTR_OOT_INTERNAL_EXIT_GROTTO;
 
     switch (play->sceneId)
@@ -639,6 +658,16 @@ void Play_TransitionDone(GameState_Play* play)
         break;
     }
 
+    /* Handle game switch */
+    if (entrance == ENTR_OOT_SHOP_MASKS)
+    {
+        if (!Config_Flag(CFG_ONLY_OOT))
+            entrance = ENTR_MM_CLOCK_TOWN | MASK_FOREIGN_ENTRANCE;
+        else
+            entrance = ENTR_OOT_MARKET_FROM_MASK_SHOP;
+    }
+
+    /* Handle grottos */
     if (entrance == ENTR_OOT_INTERNAL_EXIT_GROTTO)
     {
         entrance = entrGrottoExit(play);

@@ -1,6 +1,9 @@
 #include <combo.h>
 #include <combo/sr.h>
 #include <combo/dungeon.h>
+#include <combo/player.h>
+#include <combo/config.h>
+#include <combo/global.h>
 
 static u32* const kSilverRupeeCounts[] = {
     &gOotSilverRupeeCounts1,
@@ -39,17 +42,17 @@ static void updateSR(int id, int count, int flag)
 
 void comboSilverRupeesInit(void)
 {
-    if (gComboData.mq & (1 << MQ_DODONGOS_CAVERN))
+    if (gComboConfig.mq & (1 << MQ_DODONGOS_CAVERN))
     {
         updateSR(SR_DC, 5, 0x25);
     }
 
-    if (gComboData.mq & (1 << MQ_BOTTOM_OF_THE_WELL))
+    if (gComboConfig.mq & (1 << MQ_BOTTOM_OF_THE_WELL))
     {
         updateSR(SR_BOTW, 0, 0);
     }
 
-    if (gComboData.mq & (1 << MQ_TEMPLE_SPIRIT))
+    if (gComboConfig.mq & (1 << MQ_TEMPLE_SPIRIT))
     {
         /* Need logic */
         updateSR(SR_SPIRIT1, 5, 0x37);
@@ -57,27 +60,27 @@ void comboSilverRupeesInit(void)
         updateSR(SR_SPIRIT3, 0, 0);
     }
 
-    if (gComboData.mq & (1 << MQ_TEMPLE_SHADOW))
+    if (gComboConfig.mq & (1 << MQ_TEMPLE_SHADOW))
     {
         updateSR(SR_SHADOW2, 10, 0x03);
         updateSR(SR_SHADOW3,  5, 0x11); /* Double check */
         updateSR(SR_SHADOW4, 10, 0x08);
     }
 
-    if (gComboData.mq & (1 << MQ_ICE_CAVERN))
+    if (gComboConfig.mq & (1 << MQ_ICE_CAVERN))
     {
         updateSR(SR_IC1, 0, 0);
         updateSR(SR_IC2, 0, 0);
     }
 
-    if (gComboData.mq & (1 << MQ_GERUDO_TRAINING_GROUNDS))
+    if (gComboConfig.mq & (1 << MQ_GERUDO_TRAINING_GROUNDS))
     {
         updateSR(SR_GTG1, 5, 0x1c);
         updateSR(SR_GTG2, 6, 0x0c);
         updateSR(SR_GTG3, 3, 0x1b);
     }
 
-    if (gComboData.mq & (1 << MQ_GANON_CASTLE))
+    if (gComboConfig.mq & (1 << MQ_GANON_CASTLE))
     {
         updateSR(SR_GANON1, 5, 0x0b);
         updateSR(SR_GANON2, 5, 0x02);

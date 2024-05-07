@@ -6,6 +6,7 @@ import { useCosmetics } from '../contexts/GeneratorContext';
 import { FileSelect } from './FileSelect';
 import { Group } from './Group';
 import { Text } from './Text';
+import { Checkbox } from './Checkbox';
 
 const COLOR_OPTIONS: { name: string, value: string}[] = [{ value: 'default', name: 'Default' }, { value: 'auto', name: 'Auto' }, { value: 'random', name: 'Random' }, ...Object.entries(COLORS).map(([key, x]) => ({ name: x.name, value: key }))];
 
@@ -44,6 +45,14 @@ function Cosmetic({ cosmetic }: { cosmetic: keyof Cosmetics }) {
         onChange={(f) => setCosmetics({ [cosmetic]: f })}
       />
     );
+  case 'boolean':
+    return (
+      <Checkbox
+        label={data.name}
+        checked={!!(cosmetics[cosmetic])}
+        onChange={(v) => setCosmetics({ [cosmetic]: v })}
+      />
+    );
   default:
     return null;
   }
@@ -52,9 +61,9 @@ function Cosmetic({ cosmetic }: { cosmetic: keyof Cosmetics }) {
 export function CosmeticsEditor() {
   const options: { name: string, value: string}[] = Object.entries(COLORS).map(([key, x]) => ({ name: x.name, value: key }));
   options.push({ name: "Random", value: "random" });
-  const dropdowns = COSMETICS.filter(c => c.type === 'color');
-  const fileSelects = COSMETICS.filter(c => ['zobj', 'zip'].includes(c.type));
-
+  const fileTypes = ['zobj', 'zip'];
+  const nonFiles = COSMETICS.filter(c => !fileTypes.includes(c.type));
+  const files = COSMETICS.filter(c => fileTypes.includes(c.type));
 
   return (
     <Group direction='vertical' spacing='xxl'>
@@ -62,11 +71,11 @@ export function CosmeticsEditor() {
       <form>
       <Group direction='vertical' spacing='jb'>
         <div className="three-column-grid">
-          {dropdowns.map(c => <Cosmetic key={c.key} cosmetic={c.key}/>)}
+          {nonFiles.map(c => <Cosmetic key={c.key} cosmetic={c.key}/>)}
         </div>
         <div className="center">
         <Group direction='horizontal' spacing='mg'>
-          {fileSelects.map(c => <Cosmetic key={c.key} cosmetic={c.key}/>)}
+          {files.map(c => <Cosmetic key={c.key} cosmetic={c.key}/>)}
         </Group>
         </div>
       </Group>

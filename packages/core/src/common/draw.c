@@ -1,4 +1,6 @@
 #include <combo.h>
+#include <combo/player.h>
+#include <combo/draw.h>
 
 ALIGNED(16) const Gfx kDListEmpty[] = {
     gsSPEndDisplayList(),
@@ -7,7 +9,7 @@ ALIGNED(16) const Gfx kDListEmpty[] = {
 void PreDraw1(Actor* actor, GameState_Play* play, int unk);
 void PreDraw2(Actor* actor, GameState_Play* play, int unk);
 
-void comboSetObjectSegment(GfxContext* gfx, void* buffer)
+void Draw_SetObjectSegment(GfxContext* gfx, void* buffer)
 {
     /* Set the segment in the display list */
     OPEN_DISPS(gfx);
@@ -46,7 +48,7 @@ static void drawGiParam(GameState_Play* play, s16 gi)
     drawGiParamDrawId(play, drawGiId, param);
 }
 
-void comboDrawGI(GameState_Play* play, Actor* actor, s16 gi, int flags)
+void Draw_Gi(GameState_Play* play, Actor* actor, s16 gi, int flags)
 {
     const GetItem* giEntry;
     void* objBuffer;
@@ -58,7 +60,7 @@ void comboDrawGI(GameState_Play* play, Actor* actor, s16 gi, int flags)
     if (objectId & ~MASK_FOREIGN_OBJECT)
     {
         objBuffer = comboGetObject(objectId);
-        comboSetObjectSegment(play->gs.gfx, objBuffer);
+        Draw_SetObjectSegment(play->gs.gfx, objBuffer);
     }
     if (!(flags & DRAW_NO_PRE1))
         PreDraw1(actor, play, 0);
@@ -78,7 +80,7 @@ void comboPlayerSetDrawGi(Actor_Player* link)
     link->drawGiId = kExtendedGetItems[link->gi - 1].drawGiId;
 }
 
-void comboDrawInit2D(Gfx** dl)
+void Draw_Init2D(Gfx** dl)
 {
     gSPLoadGeometryMode((*dl)++, 0);
     gDPSetAlphaDither((*dl)++, G_AD_DISABLE);
@@ -98,7 +100,7 @@ void comboDrawInit2D(Gfx** dl)
     gDPSetTextureFilter((*dl)++, G_TF_BILERP);
 }
 
-void comboDrawBlit2D_RGBA32(Gfx** dl, u32 segAddr, int w, int h, float x, float y, float scale)
+void Draw_Blit2D_RGBA32(Gfx** dl, u32 segAddr, int w, int h, float x, float y, float scale)
 {
     float rScale;
 
@@ -129,7 +131,7 @@ void comboDrawBlit2D_RGBA32(Gfx** dl, u32 segAddr, int w, int h, float x, float 
 }
 
 
-void comboDrawBlit2D_RGBA16(Gfx** dl, u32 segAddr, int w, int h, float x, float y, float scale)
+void Draw_Blit2D_RGBA16(Gfx** dl, u32 segAddr, int w, int h, float x, float y, float scale)
 {
     float rScale;
 
@@ -159,7 +161,7 @@ void comboDrawBlit2D_RGBA16(Gfx** dl, u32 segAddr, int w, int h, float x, float 
     );
 }
 
-void comboDrawBlit2D_IA4(Gfx** dl, u32 segAddr, int w, int h, float x, float y, float scale)
+void Draw_Blit2D_IA4(Gfx** dl, u32 segAddr, int w, int h, float x, float y, float scale)
 {
     float rScale;
 

@@ -1,7 +1,7 @@
 #ifndef COMBO_OOT_EN_DIVING_GAME_H
 #define COMBO_OOT_EN_DIVING_GAME_H
 
-#include <combo/common/actor.h>
+#include <combo/actor.h>
 
 typedef struct Actor_EnDivingGame Actor_EnDivingGame;
 

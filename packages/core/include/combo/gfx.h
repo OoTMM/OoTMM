@@ -35,6 +35,8 @@ DisplayListBuffer;
 
 #define GRAPH_ALLOC(gfxCtx, size) ((void*)((gfxCtx)->polyOpa.end = (Gfx*)((u8*)(gfxCtx)->polyOpa.end - ALIGN(size, 16))))
 
+ALIGNED(16) extern const Gfx kDListEmpty[];
+
 Gfx*    Gfx_SetupDL(Gfx* gfx, u32 i);
 Gfx*    Gfx_SetupDL57(Gfx* gfx);
 void    InitListPolyOpa(GfxContext* gfx);
@@ -42,5 +44,9 @@ void    InitListPolyXlu(GfxContext* gfx);
 void    Gfx_SetupDL_42Opa(GfxContext* gfx);
 void*   GetMatrixMV(GfxContext* gfx);
 u32     DisplaceTexture(GfxContext* gfx, int, int, int, int, int, int, int, int, int, int);
+Gfx*    Gfx_TexScroll(GfxContext* ctx, u32 x, u32 y, s32 width, s32 height);
+void    Gfx_DrawDListOpa(GameState_Play* play, Gfx* dlist);
+void    Gfx_DrawDListXlu(GameState_Play* play, Gfx* dlist);
+void    Gfx_DrawFlameColor(GameState_Play* play, u32 color, float scale, float offsetY);
 
 #endif

@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 #include <combo/player.h>
+#include <combo/draw.h>
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x144) = (h); } while (0)
 
@@ -8,12 +9,12 @@ void EnSi_WaitForPlayerToCloseMessage(Actor* this, GameState_Play* play)
 {
     if (Message_IsClosed(this, play))
     {
-        UnfreezePlayer(play);
+        Player_Unfreeze(play);
         ActorDestroy(this);
     }
     else
     {
-        FreezePlayer(play);
+        Player_Freeze(play);
     }
 }
 
@@ -45,7 +46,7 @@ void EnSi_AddItem(Actor* this, GameState_Play* play)
     PlayerDisplayTextBox(play, 0x52, NULL);
     comboAddItemEx(play, &q, 1);
     comboPlayItemFanfare(o.gi, 1);
-    FreezePlayer(play);
+    Player_Freeze(play);
     SET_HANDLER(this, EnSi_WaitForPlayerToCloseMessage);
     this->draw = NULL;
 }
@@ -57,7 +58,7 @@ void EnSi_Draw(Actor* this, GameState_Play* play)
     ComboItemOverride o;
 
     EnSi_ItemOverride(&o, this, play);
-    comboDrawGI(play, this, o.gi, 0);
+    Draw_Gi(play, this, o.gi, 0);
 }
 
 PATCH_FUNC(0x8098cd0c, EnSi_Draw);

@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/player.h>
 
 void ArmsHook_SetTimerAndParent(Actor_ArmsHook* this, GameState_Play* play)
 {

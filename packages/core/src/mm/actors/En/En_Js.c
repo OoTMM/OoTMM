@@ -1,5 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/config.h>
+#include <combo/actor.h>
 
 static void EnJs_ItemQuery(ComboItemQuery* q)
 {
@@ -68,7 +70,7 @@ static void EnJs_DisplayHint(GameState_Play* play, s16 messageId)
     comboTextAppendHeader(&b);
     start = b;
     comboTextAppendStr(&b, "You have only weak masks..." TEXT_NL "Having better masks would give you ");
-    comboTextAppendItemNameQueryEx(&b, &q, TF_PREPOS | TF_PROGRESSIVE, gComboData.staticHintsImportance[8]);
+    comboTextAppendItemNameQueryEx(&b, &q, TF_PREPOS | TF_PROGRESSIVE, gComboConfig.staticHintsImportance[8]);
     comboTextAppendStr(&b, "..." TEXT_BB "So...you'll play?" TEXT_NL TEXT_NL TEXT_COLOR_GREEN TEXT_CHOICE2 "Yes" TEXT_NL "No" TEXT_END);
     comboTextAutoLineBreaks(start);
 }
@@ -91,12 +93,12 @@ void EnJs_TryStartFight(Actor* this)
     void (*EnJs_SetFreeCamera)(Actor*, int);
 
     canFight = 0;
-    if (comboConfig(CFG_GOAL_TRIFORCE) || comboConfig(CFG_GOAL_TRIFORCE3))
+    if (Config_Flag(CFG_GOAL_TRIFORCE) || Config_Flag(CFG_GOAL_TRIFORCE3))
     {
         if (gOotExtraFlags.triforceWin)
             canFight = 1;
     }
-    else if (!comboConfig(CFG_MM_MAJORA_CHILD_CUSTOM) || comboSpecialCond(SPECIAL_MAJORA))
+    else if (!Config_Flag(CFG_MM_MAJORA_CHILD_CUSTOM) || Config_SpecialCond(SPECIAL_MAJORA))
     {
         canFight = 1;
     }

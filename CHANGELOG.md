@@ -4,12 +4,50 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+
+- Add Free Scarecrow for MM.
+- Add NPC souls to MM, more NPC souls in OoT, shared NPC souls.
+- Add cutscenes speed-ups for the end of Ganon's Castle Trials.
+- Add new junk hints.
+- Ruto now spawns on first floor of Jabu-Jabu if it's vanilla layout (not MQ!).
+
+### Changed
+
+- Woods of Mystery has been logically reorganized to allow for leaving from the Day 2 Grotto in ER.
+- Reduced Meg spawn timer after being hit.
+- Removed the camera lock upon throwing a bomb-flower onto the rock locking Dodongo's Cavern.
+- Boat Archery now ends right as you reach 20 points.
+
+### Fixed
+
+- Fix one fish not being properly flagged when obtained in pond fish shuffle.
+- Fix some silver blocks being only able to be pushed once in ageless strength.
+- Fix Koume/Kotake still giving red potions when they shouldn't.
+- Fix damage being wrong against Dead Hand in some cases.
+- Fix death after leaving a grotto in MM in ER leading to wrong warps in some cases.
+- Fix an issue with rewards within dungeons using only OOT or only MM.
+- Fix logic issue for Spirit Temple Statue Upper Right chest not checking for Hookshot or Hover Boots in certain conditions.
+- Fix possible softlock on Volvagia when damaging her second hitbox after death cutscene was initiated.
+- Update blitz presets.
+- Fix crash when trying to calm the council without the souls of all involved parties.
+- Fix crash in Twinmold Arena when trying to transform into Giant without Twinmold's soul.
+- Fix logic issue with Laundry Pool freestanding rupees checking for Day 2 and Night 2 instead of Night 2 only.
+
+## [22.0] - 2024-04-24
+
 ### Jokes
 
 - (**April Fools**) Implement "Daylight Saving Time in MM", removing one hour every night.
 
 ### Added
 
+- Add Majora's Mask swords to Ocarina of Time.
+- Add the ability to play a single game.
+- Add ageless strength upgrades.
+- Add a setting to travel through time without the Master Sword.
+- Add a setting to play as swordless adult link.
+- Render most of the ageless items.
 - Add rupee scaling, a setting where rupees are worth more if you have an upgraded wallet.
 - Add full overworld ER.
 - Add random starting positions.
@@ -26,7 +64,9 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- Rework how Deku Tree behaves (it's now either always open or strictly opened by Mido).
+- Change the fishing pond fish model.
+- Kotake no longer gives red potion refills when Koume isn't rescued.
+- Rework how Deku Tree behaves (it's now either always open, strictly opened by Mido, or vanilla behavior).
 - Rework how the sirloin function in indoor ER (+ new overworld ER) to allow shuffling the North in MM.
 - Saving is now enabled on the Clock Tower Roof with Moon Crash set to New Cycle.
 - Farore's Wind in MM is now tied to Link's age, like in OoT.
@@ -43,6 +83,7 @@ All notable changes to this project will be documented in this file.
 - Ruto's Soul is now accounted in logic for the Big Octo in Jabu-Jabu.
 - Logic for entering Woodfall Temple if exiting the temple itself has been fixed.
 - The "GBT without Fire Arrows" trick now correctly accounts for being tall and no longer requires Ice Arrows.
+- Fixed logic for reaching Swamp Canopy Front in MM.
 
 ## [21.0] - 2024-03-28
 
@@ -1140,7 +1181,8 @@ All notable changes to this project will be documented in this file.
 
 - Initial stable release.
 
-[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v21.0...HEAD
+[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v22.0...HEAD
+[22.0]: https://github.com/OoTMM/OoTMM/compare/v21.0...v22.0
 [21.0]: https://github.com/OoTMM/OoTMM/compare/v20.0...v21.0
 [20.0]: https://github.com/OoTMM/OoTMM/compare/v19.2...v20.0
 [19.2]: https://github.com/OoTMM/OoTMM/compare/v19.1...v19.2

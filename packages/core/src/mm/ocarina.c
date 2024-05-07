@@ -1,4 +1,6 @@
 #include <combo.h>
+#include <combo/player.h>
+#include <combo/config.h>
 
 extern u32 gOcarinaPressedButtons;
 
@@ -190,7 +192,7 @@ void Ocarina_CheckCustomSongs(void)
     u32 enabledWarpSongs = (gOotSave.inventory.quest.value >> 6) & 0x3f;
     u8 songIndex;
 
-    if (!comboConfig(CFG_OOT_CROSS_WARP))
+    if (!Config_Flag(CFG_OOT_CROSS_WARP))
         return;
 
     for (songIndex = 0; songIndex < 6; songIndex++)

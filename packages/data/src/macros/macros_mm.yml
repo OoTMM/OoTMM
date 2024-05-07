@@ -127,7 +127,11 @@
 
 # Misc
 "keaton_grass_easy": "has_weapon && has_magic"
-"keaton_grass_hard": "keaton_grass_easy && (has(SPIN_UPGRADE) || has(GREAT_FAIRY_SWORD) || has(SWORD, 3))"
+"keaton_grass_hard": "keaton_grass_easy && (has(SPIN_UPGRADE) || has(GREAT_FAIRY_SWORD) || has_sword_level(3))"
+
+"has_sword_level(n)": "cond(setting(sharedSwords), has(SHARED_SWORD, n), has(SWORD, n))"
+"has_sword": "has_sword_level(1)"
+"has_weapon": "has_sword || has(GREAT_FAIRY_SWORD)"
 
 "can_break_boulders": "has_explosives || has_mask_goron"
 "can_use_fire_short_range": "can_use_fire_arrows || can_use_din"
@@ -154,10 +158,10 @@
 "has_bombchu_license": "cond(setting(bombchuBagMm), cond(setting(sharedBombchuBags), has_bombchu_license_shared, has_bombchu_license_nonshared), has_bomb_bag)"
 "has_bombchu": "has_bombchu_source && has_bombchu_license"
 "has_beans": "event(MAGIC_BEANS_PALACE) || (license(MAGIC_BEAN) && renewable(MAGIC_BEAN))"
-"has_weapon": "has(SWORD) || has(GREAT_FAIRY_SWORD)"
 "can_use_beans": "has_beans && (has_water || can_play_storms)"
-"scarecrow_hookshot_short": "has_ocarina && can_hookshot_short"
-"scarecrow_hookshot": "has_ocarina && can_hookshot"
+"scarecrow_set": "event(SCARECROW) || setting(freeScarecrowMm)"
+"scarecrow_hookshot_short": "scarecrow_set && has_ocarina && can_hookshot_short"
+"scarecrow_hookshot": "scarecrow_set && has_ocarina && can_hookshot"
 "goron_fast_roll": "has_mask_goron && has_magic"
 "can_use_deku_bubble": "has(MASK_DEKU) && has_magic"
 "has_weapon_range": "has_arrows || can_hookshot_short || has_mask_zora || can_use_deku_bubble"
@@ -218,7 +222,7 @@
 # Bottles
 "has_bottle": "has(BOTTLE_EMPTY) || has(BOTTLE_POTION_RED) || has(BOTTLE_POTION_GREEN) || has(BOTTLE_POTION_BLUE) || has(BOTTLE_MILK) || event(GOLD_DUST_USED) || has(BOTTLE_CHATEAU) || has(BOTTLE_FAIRY) || has(BOTTLE_POE) || has(BOTTLE_BIG_POE)"
 "has_blue_potion": "has_bottle && (renewable(POTION_BLUE) || renewable(BOTTLE_POTION_BLUE))"
-"has_red_potion": "has_bottle && (event(RED_POTION) || renewable(POTION_RED) || renewable(BOTTLE_POTION_RED))"
+"has_red_potion": "has_bottle && (renewable(POTION_RED) || renewable(BOTTLE_POTION_RED))"
 "has_green_potion": "has_bottle && (renewable(POTION_GREEN) || renewable(BOTTLE_POTION_GREEN))"
 "has_milk": "has_bottle && (renewable(MILK) || renewable(BOTTLE_MILK))"
 "has_red_or_blue_potion": "has_red_potion || has_blue_potion"
@@ -264,6 +268,7 @@
 # Misc
 "soul_enemy(x)": "(!setting(soulsEnemyMm)) || has(x)"
 "soul_boss(x)": "(!setting(soulsBossMm)) || has(x)"
+"soul_npc(x)": "(!setting(soulsNpcMm)) || has(x)"
 "soul_misc(x)": "(!setting(soulsMiscMm)) || has(x)"
 "short_hook_anywhere": "can_hookshot_short && setting(hookshotAnywhereMm, logical)"
 "hookshot_anywhere": "can_hookshot && setting(hookshotAnywhereMm, logical)"

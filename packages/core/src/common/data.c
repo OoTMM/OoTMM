@@ -1,14 +1,11 @@
 #include <combo.h>
 #include <combo/dungeon.h>
 #include <combo/dma.h>
-
-ALIGNED(16) ComboData gComboData;
+#include <combo/config.h>
+#include <combo/global.h>
 
 void comboInitData(void)
 {
-    /* Load the data chunk */
-    comboDmaLoadFile(&gComboData, COMBO_VROM_DATA);
-
     /* Normal keys OoT */
     g.maxKeysOot[SCE_OOT_INSIDE_DEKU_TREE] = 0;
     g.maxKeysOot[SCE_OOT_DODONGO_CAVERN] = 0;
@@ -32,68 +29,68 @@ void comboInitData(void)
     g.maxKeysMm[3] = 4;
 
     /* MQ Forest */
-    if (gComboData.mq & (1 << MQ_TEMPLE_FOREST))
+    if (gComboConfig.mq & (1 << MQ_TEMPLE_FOREST))
     {
         g.maxKeysOot[SCE_OOT_TEMPLE_FOREST] = 6;
     }
 
     /* MQ Fire / keysanity */
-    if (gComboData.mq & (1 << MQ_TEMPLE_FIRE))
+    if (gComboConfig.mq & (1 << MQ_TEMPLE_FIRE))
     {
         g.maxKeysOot[SCE_OOT_TEMPLE_FIRE] = 5;
     }
-    else if (comboConfig(CFG_SMALL_KEY_SHUFFLE))
+    else if (Config_Flag(CFG_SMALL_KEY_SHUFFLE))
     {
         g.maxKeysOot[SCE_OOT_TEMPLE_FIRE] = 8;
     }
 
     /* MQ Water */
-    if (gComboData.mq & (1 << MQ_TEMPLE_WATER))
+    if (gComboConfig.mq & (1 << MQ_TEMPLE_WATER))
     {
         g.maxKeysOot[SCE_OOT_TEMPLE_WATER] = 2;
     }
 
     /* MQ Shadow */
-    if (gComboData.mq & (1 << MQ_TEMPLE_SHADOW))
+    if (gComboConfig.mq & (1 << MQ_TEMPLE_SHADOW))
     {
         g.maxKeysOot[SCE_OOT_TEMPLE_SHADOW] = 6;
     }
 
     /* MQ Spirit */
-    if (gComboData.mq & (1 << MQ_TEMPLE_SPIRIT))
+    if (gComboConfig.mq & (1 << MQ_TEMPLE_SPIRIT))
     {
         g.maxKeysOot[SCE_OOT_TEMPLE_SPIRIT] = 7;
     }
 
     /* MQ Well */
-    if (gComboData.mq & (1 << MQ_BOTTOM_OF_THE_WELL))
+    if (gComboConfig.mq & (1 << MQ_BOTTOM_OF_THE_WELL))
     {
         g.maxKeysOot[SCE_OOT_BOTTOM_OF_THE_WELL] = 2;
     }
 
     /* MQ GTG */
-    if (gComboData.mq & (1 << MQ_GERUDO_TRAINING_GROUNDS))
+    if (gComboConfig.mq & (1 << MQ_GERUDO_TRAINING_GROUNDS))
     {
         g.maxKeysOot[SCE_OOT_GERUDO_TRAINING_GROUND] = 3;
     }
 
     /* MQ Ganon */
-    if (gComboData.mq & (1 << MQ_GANON_CASTLE))
+    if (gComboConfig.mq & (1 << MQ_GANON_CASTLE))
     {
         g.maxKeysOot[SCE_OOT_INSIDE_GANON_CASTLE] = 3;
     }
 
-    if (comboConfig(CFG_OOT_CARPENTERS_NONE))
+    if (Config_Flag(CFG_OOT_CARPENTERS_NONE))
     {
         g.maxKeysOot[SCE_OOT_THIEVES_HIDEOUT] = 0;
     }
-    else if (comboConfig(CFG_OOT_CARPENTERS_ONE))
+    else if (Config_Flag(CFG_OOT_CARPENTERS_ONE))
     {
         g.maxKeysOot[SCE_OOT_THIEVES_HIDEOUT] = 1;
     }
 
     /* OoT keysy */
-    if (comboConfig(CFG_OOT_NO_SMALL_KEY))
+    if (Config_Flag(CFG_OOT_NO_SMALL_KEY))
     {
         g.maxKeysOot[SCE_OOT_TEMPLE_FOREST] = 0;
         g.maxKeysOot[SCE_OOT_TEMPLE_FIRE] = 0;
@@ -105,7 +102,7 @@ void comboInitData(void)
     }
 
     /* MM keysy */
-    if (comboConfig(CFG_MM_NO_SMALL_KEY))
+    if (Config_Flag(CFG_MM_NO_SMALL_KEY))
     {
         g.maxKeysMm[0] = 0;
         g.maxKeysMm[1] = 0;
@@ -114,6 +111,6 @@ void comboInitData(void)
     }
 
     /* Chest game */
-    if (comboConfig(CFG_OOT_CHEST_GAME_SHUFFLE))
+    if (Config_Flag(CFG_OOT_CHEST_GAME_SHUFFLE))
         g.maxKeysOot[SCE_OOT_TREASURE_SHOP] = 6;
 }

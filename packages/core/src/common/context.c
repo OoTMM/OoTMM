@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/context.h>
 
 #define MAGIC "OoT+MM<3"
 
@@ -7,7 +8,7 @@ extern ComboContext gComboCtxWrite;
 
 ComboContext gComboCtx;
 
-void comboLoadContext(void)
+void Context_Init(void)
 {
     memcpy(&gComboCtx, &gComboCtxRead, sizeof(gComboCtx));
     if (memcmp(gComboCtx.magic, MAGIC, sizeof(gComboCtx.magic)) != 0)
@@ -23,7 +24,7 @@ void comboLoadContext(void)
     bzero(&gComboCtxRead, sizeof(gComboCtx));
 }
 
-void comboExportContext(void)
+void Context_Export(void)
 {
     void* src;
     void* dst;

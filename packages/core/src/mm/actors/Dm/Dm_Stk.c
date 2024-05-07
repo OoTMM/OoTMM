@@ -1,10 +1,12 @@
 #include <combo.h>
+#include <combo/config.h>
+#include <combo/actor.h>
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x290) = (h); } while (0)
 
 static void DmStk_Start(Actor* this, GameState_Play* play)
 {
-    if (comboSpecialCond(SPECIAL_MOON) && !comboConfig(CFG_MM_OPEN_MOON))
+    if (Config_SpecialCond(SPECIAL_MOON) && !Config_Flag(CFG_MM_OPEN_MOON))
     {
         PlayerDisplayTextBox(play, 0x2013, this);
         comboTextHijackOathToOrder(play);

@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/souls.h>
+#include <combo/actor.h>
 
 static int ObjNozoki_CanOpenDoorForKafeiWrapper(Actor* actor, GameState_Play* play)
 {

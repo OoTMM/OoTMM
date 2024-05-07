@@ -200,7 +200,7 @@ const DUNGEON_ITEMS = {
   Moon: [],
 }
 
-const REWARDS_DUNGEONS = [
+const REWARDS_DUNGEONS_OOT = [
   'DT',
   'DC',
   'JJ',
@@ -209,13 +209,16 @@ const REWARDS_DUNGEONS = [
   'Water',
   'Shadow',
   'Spirit',
+  'BotW',
+  'IC',
+  'GTG',
+];
+
+const REWARDS_DUNGEONS_MM = [
   'WF',
   'SH',
   'GB',
   'ST',
-  'BotW',
-  'IC',
-  'GTG',
   'SSH',
   'OSH',
   'PF',
@@ -375,33 +378,38 @@ export class LogicPassSolver {
     this.preCompleteDungeons();
 
     /* Place required items */
-    this.retry(() => {
-      this.pathfinderState = this.pathfinder.run(null);
+    if (this.input.settings.logic !== 'none') {
+      this.retry(() => {
+        this.pathfinderState = this.pathfinder.run(null);
 
-      for (;;) {
-        /* Pathfind */
-        this.pathfinderState = this.pathfinder.run(this.pathfinderState, { ganonMajora: this.input.settings.goal === 'triforce3', inPlace: true, recursive: true, items: this.state.items });
+        for (;;) {
+          /* Pathfind */
+          this.pathfinderState = this.pathfinder.run(this.pathfinderState, { ganonMajora: this.input.settings.goal === 'triforce3', inPlace: true, recursive: true, items: this.state.items });
 
-        /* Stop cond */
-        if (this.input.settings.logic === 'beatable') {
-          let goal: boolean;
-          if (this.input.settings.goal === 'triforce3') {
-            goal = this.pathfinderState.ganonMajora;
-          } else {
-            goal = this.pathfinderState.goal;
+          let goal = true;
+          if (this.input.settings.logic === 'allLocations') {
+            if (this.pathfinderState.locations.size !== this.locations.length) {
+              goal = false;
+            }
           }
+
+          if (goal) {
+            if (this.input.settings.goal === 'triforce3') {
+              goal = this.pathfinderState.ganonMajora;
+            } else {
+              goal = this.pathfinderState.goal;
+            }
+          }
+
           if (goal) {
             break;
           }
-        }
-        if (this.pathfinderState.locations.size === this.locations.length) {
-          break;
-        }
 
-        /* We need to place a required item */
-        this.randomPlace(this.state.pools.required);
-      }
-    });
+          /* We need to place a required item */
+          this.randomPlace(this.state.pools.required);
+        }
+      });
+    }
 
     /* At this point we have a beatable game */
     this.fillAll();
@@ -928,7 +936,15 @@ export class LogicPassSolver {
   private placeDungeonRewardsInDungeons() {
     const allDungeons: Set<string>[] = [];
     for (let i = 0; i < this.input.settings.players; ++i) {
-      allDungeons.push(new Set([...REWARDS_DUNGEONS]));
+      if (this.input.settings.games === 'oot') {
+        allDungeons.push(new Set([...REWARDS_DUNGEONS_OOT]));
+      }
+      if (this.input.settings.games === 'mm') {
+        allDungeons.push(new Set([...REWARDS_DUNGEONS_MM]));
+      }
+      else {
+        allDungeons.push(new Set([...REWARDS_DUNGEONS_OOT, ...REWARDS_DUNGEONS_MM]));
+      }
     }
 
     const rewards = shuffle(this.input.random, countMapArray(this.state.pools.required)
@@ -991,7 +1007,7 @@ export class LogicPassSolver {
   private placeJunkLocations() {
     const { settings } = this.input;
     let locs = this.makePlayerLocations(this.input.settings.junkLocations);
-    if (!settings.shuffleMasterSword && settings.startingAge === 'adult') {
+    if (!settings.shuffleMasterSword && settings.startingAge === 'adult' && !settings.swordlessAdult) {
       locs = [...locs, ...this.makePlayerLocations(['OOT Temple of Time Master Sword'])];
     }
     this.fillJunk(locs);

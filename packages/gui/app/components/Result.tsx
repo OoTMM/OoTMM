@@ -81,15 +81,8 @@ export const Result = ({ result: { roms, hash, log, patches } }: Props) => {
 
   return (
     <div>
-      {log && <div style={{border: "none", borderRadius:"2px", background: "#ff5722", fontWeight:"700", fontSize:"1em", padding: "0.5em 1em", textDecoration: "none", minWidth: "48px"}}>
-        <div><span style={{textAlign:"left"}}><FontAwesomeIcon icon={faTriangleExclamation}/> WARNING </span></div>
-          <div>You have generated a spoiler log. It is STRONGLY recommended to store it.</div>
-          <div>If you run into issues while playing the seed, you will be asked to provide the spoiler log for assistance.</div>
-      </div>}
-      <div>
-        {outFilePending && <div>Building archive...</div>}
-        {outFile && <button className='btn-download' onClick={() => download(outFile)}>Save</button>}
-      </div>
+      {outFilePending && <div>Building archive...</div>}
+      {outFile && <button className='btn-download' onClick={() => download(outFile)}>Save</button>}
     </div>
   );
 };

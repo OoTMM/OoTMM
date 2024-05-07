@@ -1,27 +1,12 @@
 import React, { useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import Button from './Button';
-import { CaretLeftFill, CaretRightFill, QuestionCircleFill, TextParagraph, Youtube } from 'react-bootstrap-icons';
-import { Checkbox } from './Checkbox';
 import { Trick } from '@ootmm/core/lib/combo/settings/tricks';
+import Button from './Button';
+import { CaretLeftFill, CaretRightFill, TextParagraph, Youtube } from 'react-bootstrap-icons';
+import { Checkbox } from './Checkbox';
 import { Tooltip } from './Tooltip';
-import { Text } from './Text';
 
 export type SelectedList = { [key: string]: boolean };
-
-const ToolTips = ({ listOfOptions }: { listOfOptions: SelectorCardOption[] }) => {
-  const body = [];
-  for (const option of listOfOptions) {
-    body.push(
-      <Tooltip id={option.key as string} key={option.key}>
-        <Text size="xl" style={{ whiteSpace: 'pre-line' }}>
-          {option.value.tooltip}
-        </Text>
-      </Tooltip>
-    );
-  }
-  return <>{body}</>;
-};
 
 const Options = ({
   listOfOptions,
@@ -32,51 +17,35 @@ const Options = ({
   selectedList: SelectedList;
   setSelectedList: Function;
 }) => {
-  const body = [];
-  for (const option of listOfOptions) {
-    body.push(
-      <Row className="m-1" key={option.key}>
-        <Col>
-          <Checkbox
-            label={option.value.name}
-            checked={selectedList[option.key] ? true : false}
-            onChange={() => {
-              const value = selectedList[option.key] ? true : undefined;
-              setSelectedList((previousList: SelectedList) => {
-                const newList = { ...previousList };
-                if (newList[option.key] === true) {
-                  delete newList[option.key];
-                } else {
-                  newList[option.key] = true;
-                }
-                return newList;
-              });
-            }}
-          />
-        </Col>
-        <Col lg="3">
-          <div className="forceRight">
-            {!['None', ''].includes(option.value.youtubeLink) && (
-              <a href={option.value.youtubeLink} className="icon-spacing" title="Video Example">
-                <Youtube />
-              </a>
-            )}
-            {!['None', ''].includes(option.value.writtenDocumentationLink) && (
-              <a href={option.value.writtenDocumentationLink} className="icon-spacing" title="Relevant Written Documentation">
-                <TextParagraph />
-              </a>
-            )}
-            {!['None', ''].includes(option.value.tooltip) && (
-              <a className="tooltip-link icon-spacing" id={option.key as string} href="#">
-                <QuestionCircleFill />
-              </a>
-            )}
-          </div>
-        </Col>
-      </Row>
-    );
-  }
-  return <>{body}</>;
+  return listOfOptions.map(option =>
+    <Row className="m-1" key={option.key}>
+      <Col>
+        <Checkbox
+          label={option.value.name}
+          checked={selectedList[option.key] ? true : false}
+          onChange={() => {
+            const value = selectedList[option.key] ? true : undefined;
+            setSelectedList((previousList: SelectedList) => {
+              const newList = { ...previousList };
+              if (newList[option.key] === true) {
+                delete newList[option.key];
+              } else {
+                newList[option.key] = true;
+              }
+              return newList;
+            });
+          }}
+        />
+      </Col>
+      <Col lg="3">
+        <div className="forceRight">
+          {option.value.linkVideo && <a target="_blank" href={option.value.linkVideo} className="icon-spacing" title="Video Example"><Youtube/></a>}
+          {option.value.linkText && <a target="_blank" href={option.value.linkText} className="icon-spacing" title="Relevant Written Documentation"><TextParagraph/></a>}
+          {option.value.tooltip && <Tooltip>{option.value.tooltip}</Tooltip>}
+        </div>
+      </Col>
+    </Row>
+  );
 };
 
 // This type needs to change as you implement more features with it ( IE: Glitches, Plando, etc )  Just use ORs to chain the value type together.
@@ -140,7 +109,6 @@ const SelectorCard = ({ options, selected, add, remove, clear, label }: Selector
       </Row>
       <Row className="mt-3">
         <Col>
-          <ToolTips listOfOptions={remaining} />
           <div className="card">
             <Options listOfOptions={remaining} selectedList={selectedToAdd} setSelectedList={setAdditions} />
           </div>

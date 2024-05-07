@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/actor_id.h>
 
 PATCH_GROUP PG_MM_OPEN_STT
 

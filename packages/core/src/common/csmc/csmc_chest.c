@@ -2,6 +2,7 @@
 #include <combo/csmc.h>
 #include <combo/custom.h>
 #include <combo/dungeon.h>
+#include <combo/config.h>
 
 #define CSMC_CHEST_NORMAL     0x00
 #define CSMC_CHEST_BOSS_KEY   0x01
@@ -68,7 +69,7 @@ static int csmcEnabledActor(Actor* this, GameState_Play* play)
         return 0;
 
 #if defined(GAME_OOT)
-    if (play->sceneId == SCE_OOT_TREASURE_SHOP && (this->variable & 0x1f) != 0x0a && !comboConfig(CFG_OOT_CHEST_GAME_SHUFFLE))
+    if (play->sceneId == SCE_OOT_TREASURE_SHOP && (this->variable & 0x1f) != 0x0a && !Config_Flag(CFG_OOT_CHEST_GAME_SHUFFLE))
         return 0;
 #endif
 
@@ -98,7 +99,7 @@ void csmcChestInit(Actor* this, GameState_Play* play, s16 gi)
         /* Fix for IGT chest */
         if (play->sceneId == SCE_OOT_INSIDE_GANON_CASTLE)
         {
-            if ((this->variable & 0x1f) == (gComboData.mq & (1 << MQ_GANON_CASTLE) ? 0x04 : 0x11))
+            if ((this->variable & 0x1f) == (gComboConfig.mq & (1 << MQ_GANON_CASTLE) ? 0x04 : 0x11))
                 this->world.pos.z -= 10.f;
         }
 #endif

@@ -1,5 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/config.h>
+#include <combo/shop.h>
 
 #define SOLD_OUT GI_MM_SOLD_OUT
 
@@ -9,7 +11,7 @@
 # define PRICES_SHOPS PRICES_MM_SHOPS
 #endif
 
-int comboShopPrecond(GameState_Play* play, Actor_EnGirlA* girlA)
+int Shop_Precond(GameState_Play* play, Actor_EnGirlA* girlA)
 {
     ComboItemQuery q;
 
@@ -17,10 +19,10 @@ int comboShopPrecond(GameState_Play* play, Actor_EnGirlA* girlA)
     return comboItemPrecondEx(&q, girlA->price);
 }
 
-void comboShopAfterBuy(GameState_Play* play, Actor_EnGirlA* girlA)
+void Shop_AfterBuy(GameState_Play* play, Actor_EnGirlA* girlA)
 {
     BITMAP8_SET(gCustomSave.shops, girlA->shopId);
-    comboShopUpdateItem(play, girlA);
+    Shop_UpdateItem(play, girlA);
 }
 
 static void quickBuyItem(GameState_Play* play, Actor_EnGirlA* girlA)
@@ -30,7 +32,7 @@ static void quickBuyItem(GameState_Play* play, Actor_EnGirlA* girlA)
     EnGirlA_ItemQuery(&q, girlA);
     comboAddItemEx(play, &q, 1);
     AddRupeesRaw(-girlA->price);
-    comboShopAfterBuy(play, girlA);
+    Shop_AfterBuy(play, girlA);
 }
 
 static void postBuyItem(GameState_Play* play, Actor_EnGirlA* girlA)
@@ -38,7 +40,7 @@ static void postBuyItem(GameState_Play* play, Actor_EnGirlA* girlA)
     AddRupeesRaw(-girlA->price);
 }
 
-void comboShopUpdateItem(GameState_Play* play, Actor_EnGirlA* girlA)
+void Shop_UpdateItem(GameState_Play* play, Actor_EnGirlA* girlA)
 {
     ComboItemOverride o;
 
@@ -46,30 +48,30 @@ void comboShopUpdateItem(GameState_Play* play, Actor_EnGirlA* girlA)
     if (o.gi == SOLD_OUT)
         girlA->disabled = 1;
 
-    girlA->precond = comboShopPrecond;
+    girlA->precond = Shop_Precond;
     girlA->quickBuy = quickBuyItem;
     girlA->postBuy = postBuyItem;
 }
 
-void comboShopSetupItem(GameState_Play* play, Actor_EnGirlA* girlA)
+void Shop_SetupItem(GameState_Play* play, Actor_EnGirlA* girlA)
 {
 #if defined(GAME_MM)
     if (girlA->base.variable == 2)
         girlA->disabled = !(MM_GET_EVENT_WEEK(EV_MM_WEEK_WITCH_MUSHROOM));
 #endif
 
-    girlA->shopId = comboShopItemSlot(play, girlA);
-    girlA->price = (s16)gComboData.prices[PRICES_SHOPS + girlA->shopId];
+    girlA->shopId = Shop_ItemSlot(play, girlA);
+    girlA->price = (s16)gComboConfig.prices[PRICES_SHOPS + girlA->shopId];
 
 #if defined(GAME_MM)
     if (girlA->shopId == 0x03 && play->sceneId == SCE_MM_CURIOSITY_SHOP)
-        girlA->price = (s16)gComboData.prices[PRICES_MM_SHOPS_EX + 0x00];
+        girlA->price = (s16)gComboConfig.prices[PRICES_MM_SHOPS_EX + 0x00];
 #endif
 
-    comboShopUpdateItem(play, girlA);
+    Shop_UpdateItem(play, girlA);
 }
 
-void comboShopDisplayTextBox(GameState_Play* play, Actor_EnGirlA* girlA)
+void Shop_DisplayTextBox(GameState_Play* play, Actor_EnGirlA* girlA)
 {
     ComboItemOverride o;
     int flags;
@@ -90,7 +92,7 @@ void comboShopDisplayTextBox(GameState_Play* play, Actor_EnGirlA* girlA)
     comboTextHijackItemShop(play, &o, girlA->price, flags);
 }
 
-void comboShopDisplayTextBoxConfirm(GameState_Play* play, Actor_EnGirlA* girlA)
+void Shop_DisplayTextBoxConfirm(GameState_Play* play, Actor_EnGirlA* girlA)
 {
     ComboItemOverride o;
 

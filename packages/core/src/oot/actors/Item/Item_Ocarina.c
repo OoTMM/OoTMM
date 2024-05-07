@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/draw.h>
 
 static void ItemOcarina_ItemQuery(ComboItemQuery* q, int index)
 {
@@ -81,7 +82,7 @@ void ItemOcarina_Draw(Actor* this, GameState_Play* play)
     ComboItemOverride o;
 
     ItemOcarina_ItemOverride(&o, 0);
-    comboDrawGI(play, this, o.gi, 0);
+    Draw_Gi(play, this, o.gi, 0);
 }
 
 PATCH_FUNC(0x80a2b7c0, ItemOcarina_Handler);

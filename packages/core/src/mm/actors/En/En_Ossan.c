@@ -1,12 +1,13 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/shop.h>
 
 static int EnOssan_HasGiveItem(Actor_EnOssan* this, GameState_Play* play)
 {
     if (!Actor_HasParent(&this->base))
         return 0;
 
-    comboShopAfterBuy(play, this->items[this->itemIndex]);
+    Shop_AfterBuy(play, this->items[this->itemIndex]);
     return 1;
 }
 

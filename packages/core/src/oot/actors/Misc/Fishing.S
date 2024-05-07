@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/actor_id.h>
 
 /* Accept smaller fish */
 PATCH_START 0x80a42388

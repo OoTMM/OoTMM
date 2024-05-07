@@ -2,7 +2,8 @@
 #define COMBO_MM_PLAYER_H
 
 #include <ultra64.h>
-#include <combo/common/actor.h>
+#include <combo/actor.h>
+#include <combo/actor.h>
 #include <combo/dma.h>
 
 struct Actor_Player;

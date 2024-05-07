@@ -2,66 +2,13 @@
 #define COMBO_COMMON_API_H
 
 #include <combo/types.h>
+#include <combo/math/vec.h>
 #include <combo/gi.h>
-
-#define PLAYER_ACTOR_STATE_TRANSITION           0x00000001
-#define PLAYER_ACTOR_STATE_TRANSFORM            0x00000002
-#define PLAYER_ACTOR_STATE_CLIMB                0x00000004
-#define PLAYER_ACTOR_STATE_DEATH                0x00000080
-#define PLAYER_ACTOR_STATE_FROZEN               0x00000200
-#define PLAYER_ACTOR_STATE_GET_ITEM             0x00000400
-#define PLAYER_ACTOR_STATE_HOLD_ITEM            0x00000800
-#define PLAYER_ACTOR_STATE_CLIMB2               0x00200000
-#define PLAYER_ACTOR_STATE_EPONA                0x00800000
-#define PLAYER_ACTOR_STATE_WATER                0x08000000
-#define PLAYER_ACTOR_STATE_USE_ITEM             0x10000000
-#define PLAYER_ACTOR_STATE_CUTSCENE_FROZEN      0x20000000
-
-#if defined(GAME_OOT)
-# define PLAYER_MASK_NONE               0x00
-# define PLAYER_MASK_KEATON             0x01
-# define PLAYER_MASK_SKULL              0x02
-# define PLAYER_MASK_SPOOKY             0x03
-# define PLAYER_MASK_BUNNY              0x04
-# define PLAYER_MASK_GORON              0x05
-# define PLAYER_MASK_ZORA               0x06
-# define PLAYER_MASK_GERUDO             0x07
-# define PLAYER_MASK_TRUTH              0x08
-# define PLAYER_MASK_BLAST              0x09
-# define PLAYER_MASK_STONE              0x0a
-#endif
-
-#if defined(GAME_MM)
-# define PLAYER_MASK_NONE               0x00
-# define PLAYER_MASK_TRUTH              0x01
-# define PLAYER_MASK_KAFEI              0x02
-# define PLAYER_MASK_ALL_NIGHT          0x03
-# define PLAYER_MASK_BUNNY              0x04
-# define PLAYER_MASK_KEATON             0x05
-# define PLAYER_MASK_GARO               0x06
-# define PLAYER_MASK_ROMANI             0x07
-# define PLAYER_MASK_TROUPE_LEADER      0x08
-# define PLAYER_MASK_POSTMAN            0x09
-# define PLAYER_MASK_COUPLE             0x0a
-# define PLAYER_MASK_GREAT_FAIRY        0x0b
-# define PLAYER_MASK_GIBDO              0x0c
-# define PLAYER_MASK_DON_GERO           0x0d
-# define PLAYER_MASK_KAMARO             0x0e
-# define PLAYER_MASK_CAPTAIN            0x0f
-# define PLAYER_MASK_STONE              0x10
-# define PLAYER_MASK_BREMEN             0x11
-# define PLAYER_MASK_BLAST              0x12
-# define PLAYER_MASK_SCENTS             0x13
-# define PLAYER_MASK_GIANT              0x14
-# define PLAYER_MASK_FIERCE_DEITY       0x15
-# define PLAYER_MASK_GORON              0x16
-# define PLAYER_MASK_ZORA               0x17
-# define PLAYER_MASK_DEKU               0x18
-#endif
 
 typedef struct GameState_Play GameState_Play;
 typedef struct ActorContext ActorContext;
 typedef struct Actor Actor;
+typedef struct Actor_Player Actor_Player;
 
 float Actor_WorldDistXZToActor(Actor* a, Actor* b);
 float Actor_HeightDiff(Actor* a, Actor* b);
@@ -97,6 +44,7 @@ void    Actor_SetCollisionCylinder(GameState_Play* play, Actor* actor, float unk
 /* AKA  Actor_MoveXZGravity AKA Actor_MoveWithGravity */
 void    ActorUpdateVelocity(Actor* actor);
 int     ActorTalkedTo(Actor* actor);
+u8      CollisionCheck_GetSwordDamage(u32 dmgFlags);
 
 void    EnableOwl(u8 owlId);
 
@@ -176,13 +124,6 @@ void ModelViewScale(float sx, float sy, float sz, int mode);
 void ModelViewMult(MtxF* mf, s32 mode);
 void Matrix_SetTranslateRotateYXZ(f32 translateX, f32 translateY, f32 translateZ, Vec3s* rot);
 
-f32 Math_CosS(s16 angle);
-f32 Math_SinS(s16 angle);
-s32 Math_StepToF(f32* pValue, f32 target, f32 step);
-s32 Math_StepToS(s16* pValue, s16 target, s16 step);
-f32 Math_SmoothStepToF(f32* pValue, f32 target, f32 fraction, f32 step, f32 minStep);
-f32 sqrtf(f32 value);
-
 void MatrixStackDup(void);
 void MatrixStackPop(void);
 void Matrix_MultVec3f(Vec3f* src, Vec3f* dest);
@@ -237,7 +178,6 @@ void Sram_CopySave(void*, void*);
 void Play_Init(GameState_Play*);
 void Play_Update(GameState_Play*);
 
-s32 Player_InCsMode(GameState_Play*);
 void Interface_LoadItemIconImpl(GameState_Play* play, int slot);
 void UpdateEquipment(GameState_Play* play, Actor_Player* link);
 
@@ -245,7 +185,6 @@ void PlayStoreFlags(GameState_Play* play);
 Camera* Play_GetCamera(GameState_Play* this, s16 camId);
 s32 Play_CamIsNotFixed(GameState_Play* play);
 
-void Player_Update(Actor_Player* this, GameState_Play* play);
 void Play_SetupRespawnPoint(GameState_Play* this, int respawnMode, int playerParams);
 void Play_SetupRespawnPointRaw(GameState_Play* this, int respawnMode, int playerParams);
 void Play_SetRespawnData(GameState_Play *play, s32 respawnMode, u16 entrance, s32 roomIndex, s32 playerParams, const Vec3f* pos, s16 yaw);
@@ -256,14 +195,8 @@ void KaleidoManager_LoadOvl(void* ovl);
 void LoadIcon(u32 vaddr, int iconId, void* buffer, int size);
 void CmpDma_LoadAllFiles(u32 vrom, void* dst, size_t size);
 
-s32 Player_ActionToModelGroup(Actor_Player* link, s32 itemAction);
-void Player_SetModels(Actor_Player* link, s32 modelGroup);
-int Player_UsingItem(Actor_Player* link);
-int Player_GetEnvironmentalHazard(GameState_Play* play);
-
 void PlaySound(u16 soundId);
 void PlayMusic(int arg0, int arg1, int arg2, int arg3, int arg4);
-void Player_PlaySfx(Actor_Player* player, u16 sfxId);
 void Actor_PlaySfx(Actor* actor, u32 id);
 void PlayLoopingSfxAtActor(Actor* actor, u32 id);
 void Actor_PlaySfx_FlaggedCentered1(Actor* actor, u16 sfxId);
@@ -273,7 +206,6 @@ void Audio_PlaySfx(u16 sfxId, Vec3f* pos, u8 token, f32* freqScale, f32* volume,
 
 #if defined(GAME_MM)
 void AudioOcarina_SetInstrument(u8 ocarinaInstrumentId);
-void Player_DrawHookshotReticle(GameState_Play* play, Actor_Player* player, f32 distance);
 #endif
 
 int Actor_RunByteCode(Actor* this, GameState_Play* play, void* bytecode, void* unk1, void* unk2);
@@ -287,8 +219,6 @@ void DrawDungeonUnk2(void* unk);
 
 void ActorRemove(ActorContext* ctx, Actor* actor, GameState_Play* play);
 
-void DrawSimpleOpa(GameState_Play* play, u32 segAddr);
-
 s16 RupeeValueOot(s16 count);
 s16 RupeeValueMm(s16 count);
 void AddRupeesRaw(s16 delta);
@@ -299,44 +229,7 @@ void AudioLoad_InitTable(void* unk1, u32 unk2, u32 unk3);
 
 void ParseSceneRoomHeaders_SoundSettings(GameState_Play* play, void* cmd);
 
-/* DrawGi */
-void DrawGi_Opa0_Xlu1(GameState_Play*, s16);
-void DrawGi_Opa0_Xlu12(GameState_Play*, s16);
-void DrawGi_Opa0(GameState_Play*, s16);
-void DrawGi_Opa01(GameState_Play*, s16);
-void DrawGi_Opa1023(GameState_Play*, s16);
-void DrawGi_Opa10_Xlu2(GameState_Play*, s16);
-void DrawGi_Opa10_Xlu234(GameState_Play*, s16);
-void DrawGi_Opa10_Xlu32(GameState_Play*, s16);
-void DrawGi_Opa10234567(GameState_Play*, s16);
-void DrawGi_Xlu01(GameState_Play*, s16);
-void DrawGi_BlueFire(GameState_Play*, s16);
-void DrawGi_BombchuMask(GameState_Play*, s16);
-void DrawGi_Compass(GameState_Play*, s16);
-void DrawGi_DekuNut(GameState_Play*, s16);
-void DrawGi_Fairy(GameState_Play*, s16);
-void DrawGi_Fish(GameState_Play*, s16);
-void DrawGi_GiantKnife(GameState_Play*, s16);
-void DrawGi_GS(GameState_Play*, s16);
-void DrawGi_Heart(GameState_Play*, s16);
-void DrawGi_Medallion(GameState_Play*, s16);
-void DrawGi_MirrorShield(GameState_Play*, s16);
-void DrawGi_Poe(GameState_Play*, s16);
-void DrawGi_Potion(GameState_Play*, s16);
-void DrawGi_Scale(GameState_Play*, s16);
-void DrawGi_SoldOut(GameState_Play*, s16);
-void DrawGi_Spell(GameState_Play*, s16);
-void DrawGi_MoonTear(GameState_Play*, s16);
-void DrawGi_BottleFairy(GameState_Play*, s16);
-void DrawGi_BottleBlueFire(GameState_Play*, s16);
-void DrawGi_VanillaRupee(GameState_Play*, s16);
-
 void Interface_StartMoonCrash(GameState_Play* play);
-
-/* GFX */
-Gfx* Gfx_TexScroll(GfxContext* ctx, u32 x, u32 y, s32 width, s32 height);
-void Gfx_DrawDListOpa(GameState_Play* play, Gfx* dlist);
-void Gfx_DrawDListXlu(GameState_Play* play, Gfx* dlist);
 
 void SpawnRoomActors(GameState_Play* play, int id);
 
@@ -381,64 +274,7 @@ void DrawHUD(GameState_Play* play);
 
 int IsSceneValidEpona(int sceneId);
 
-#if defined(GAME_OOT)
-typedef enum {
-    /* 0x0 */ MAGIC_STATE_IDLE, /* Regular gameplay */
-    /* 0x1 */ MAGIC_STATE_CONSUME_SETUP, /* Sets the speed at which magic border flashes */
-    /* 0x2 */ MAGIC_STATE_CONSUME, /* Consume magic until target is reached or no more magic is available */
-    /* 0x3 */ MAGIC_STATE_METER_FLASH_1, /* Flashes border and freezes Dark Link */
-    /* 0x4 */ MAGIC_STATE_METER_FLASH_2, /* Flashes border and draws yellow magic to preview target consumption */
-    /* 0x5 */ MAGIC_STATE_RESET, /* Reset colors and return to idle */
-    /* 0x6 */ MAGIC_STATE_METER_FLASH_3, /* Flashes border with no additional behaviour */
-    /* 0x7 */ MAGIC_STATE_CONSUME_LENS, /* Magic slowly consumed by lens. */
-    /* 0x8 */ MAGIC_STATE_STEP_CAPACITY, /* Step `magicCapacity` to full capacity */
-    /* 0x9 */ MAGIC_STATE_FILL, /* Add magic until magicFillTarget is reached. */
-    /* 0xA */ MAGIC_STATE_ADD /* Add requested magic */
-} MagicState;
-
-typedef enum {
-    /* 0 */ MAGIC_CONSUME_NOW, /* Consume Magic immediately without preview */
-    /* 1 */ MAGIC_CONSUME_WAIT_NO_PREVIEW, /* Sets consume target but waits to consume. No yellow magic preview to target consumption. Unused */
-    /* 2 */ MAGIC_CONSUME_NOW_ALT, /* Identical behaviour to MAGIC_CONSUME_NOW. Unused */
-    /* 3 */ MAGIC_CONSUME_LENS, /* Lens consumption */
-    /* 4 */ MAGIC_CONSUME_WAIT_PREVIEW, /* Sets consume target but waits to consume. Draws yellow magic to target consumption */
-    /* 5 */ MAGIC_ADD /* Sets a target to add magic */
-} MagicChangeType;
-#else
-
-typedef enum {
-    /* 0  */ MAGIC_STATE_IDLE, /* Regular gameplay */
-    /* 1  */ MAGIC_STATE_CONSUME_SETUP, /* Sets the speed at which the magic border flashes */
-    /* 2  */ MAGIC_STATE_CONSUME, /* Consume magic until target is reached or no more magic is available */
-    /* 3  */ MAGIC_STATE_METER_FLASH_1, /* Flashes border */
-    /* 4  */ MAGIC_STATE_METER_FLASH_2, /* Flashes border and draws yellow magic to preview target consumption */
-    /* 5  */ MAGIC_STATE_RESET, /* Reset colors and return to idle */
-    /* 6  */ MAGIC_STATE_METER_FLASH_3, /* Flashes border with no additional behaviour */
-    /* 7  */ MAGIC_STATE_CONSUME_LENS, /* Magic slowly consumed by Lens of Truth */
-    /* 8  */ MAGIC_STATE_STEP_CAPACITY, /* Step `magicCapacity` to full capacity */
-    /* 9  */ MAGIC_STATE_FILL, /* Add magic until magicFillTarget is reached */
-    /* 10 */ MAGIC_STATE_CONSUME_GORON_ZORA_SETUP,
-    /* 11 */ MAGIC_STATE_CONSUME_GORON_ZORA, /* Magic slowly consumed by Goron spiked rolling or Zora electric barrier. */
-    /* 12 */ MAGIC_STATE_CONSUME_GIANTS_MASK /* Magic slowly consumed by Giant's Mask */
-} MagicState;
-
-typedef enum {
-    /* 0 */ MAGIC_CONSUME_NOW, /* Consume magic immediately without preview */
-    /* 1 */ MAGIC_CONSUME_WAIT_NO_PREVIEW, /* Sets consume target but waits to consume. No yellow magic preview to target consumption. Unused */
-    /* 2 */ MAGIC_CONSUME_NOW_ALT, /* Identical behaviour to MAGIC_CONSUME_NOW. Unused */
-    /* 3 */ MAGIC_CONSUME_LENS, /* Lens of Truth consumption */
-    /* 4 */ MAGIC_CONSUME_WAIT_PREVIEW, /* Sets consume target but waits to consume. Show magic to be consumed in yellow. */
-    /* 5 */ MAGIC_CONSUME_GORON_ZORA, /* Goron spiked rolling or Zora electric barrier slow consumption */
-    /* 6 */ MAGIC_CONSUME_GIANTS_MASK, /* Giant's Mask slow consumption */
-    /* 7 */ MAGIC_CONSUME_DEITY_BEAM /* Fierce Deity Beam consumption, consumed magic now and not via request */
-} MagicChangeType;
-#endif
-
 s32 Health_ChangeBy(GameState_Play* play, s16 amount);
-s32 Magic_RequestChange(GameState_Play* play, s16 amount, s16 type);
-void Magic_Reset(GameState_Play* play);
-void Magic_Update(GameState_Play* play);
-void Magic_Refill(GameState_Play*);
 
 typedef struct ObjectContext ObjectContext;
 int GetObjectSlot(ObjectContext* ctx, int objectId);
@@ -500,7 +336,7 @@ void SkelCurve_SetAnim(SkelCurve* skelCurve, CurveAnimationHeader* animation, f3
 s32 SkelCurve_Update(struct GameState_Play* play, SkelCurve* skelCurve);
 void SkelCurve_Draw(Actor* actor, struct GameState_Play* play, SkelCurve* skelCurve, OverrideCurveLimbDraw overrideLimbDraw, PostCurveLimbDraw postLimbDraw, s32 lod, Actor* thisx);
 
-typedef s32 (*OverrideLimbDrawOpa)(struct GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, void*);
+typedef int (*OverrideLimbDrawOpa)(struct GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, void*);
 typedef void (*PostLimbDrawOpa)(struct GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3s* rot, void*);
 
 void SkelAnime_DrawFlexLod(GameState_Play* play, void** skeleton, Vec3s* jointTable, s32 dListCount,
@@ -512,14 +348,7 @@ LightNode* LightContext_InsertLight(GameState_Play* play, LightContext* lightCtx
 void Actor_DrawLensActors(GameState_Play* play, s32 numLensActors, Actor** lensActors);
 ActorInit* Actor_LoadOverlay(ActorContext* actorCtx, s16 index);
 
-f32 Player_GetHeight(Actor_Player* player);
-
 s32 Entrance_GetSceneIdAbsolute(u16 entrance);
-
-s32 Player_OverrideLimbDrawGameplayFirstPerson(struct GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, void*);
-
-void Player_SetBootData(GameState_Play* play, Actor_Player* player);
-u8 Player_GetStrength(void);
 
 /* SysFlashrom */
 s32 SysFlashrom_IsInit(void);
@@ -531,10 +360,6 @@ EntranceTableEntry* Entrance_GetTableEntry(u16 entrance);
 
 s32 Object_SpawnPersistent(ObjectContext* objectCtx, s16 id);
 s32 Object_GetSlot(ObjectContext* objectCtx, s16 id);
-
-s32 Player_OverrideLimbDrawGameplayDefault(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Player* player);
-
-extern OSPiHandle* gCartHandle;
 
 void Environment_Init(GameState_Play* play, EnvironmentContext* envCtx, int unused);
 

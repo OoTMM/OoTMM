@@ -4,6 +4,13 @@
 #include <combo/entrance.h>
 #include <combo/time.h>
 #include <combo/custom.h>
+#include <combo/debug.h>
+#include <combo/player.h>
+#include <combo/config.h>
+#include <combo/item.h>
+#include <combo/global.h>
+#include <combo/multi.h>
+#include <combo/context.h>
 
 GameState_Play* gPlay;
 int gNoTimeFlow;
@@ -160,7 +167,7 @@ static void sendSelfMajorasMask(void)
     int npc;
     s16 gi;
 
-    if (!comboConfig(CFG_MULTIPLAYER))
+    if (!Config_Flag(CFG_MULTIPLAYER))
         return;
 
     gi = GI_MM_MASK_MAJORA;
@@ -170,8 +177,8 @@ static void sendSelfMajorasMask(void)
     netWaitCmdClear();
     bzero(&net->cmdOut, sizeof(net->cmdOut));
     net->cmdOut.op = NET_OP_ITEM_SEND;
-    net->cmdOut.itemSend.playerFrom = gComboData.playerId;
-    net->cmdOut.itemSend.playerTo = gComboData.playerId;
+    net->cmdOut.itemSend.playerFrom = gComboConfig.playerId;
+    net->cmdOut.itemSend.playerTo = gComboConfig.playerId;
     net->cmdOut.itemSend.game = 1;
     net->cmdOut.itemSend.gi = gi;
     net->cmdOut.itemSend.key = ((u32)OV_NPC << 24) | npc;
@@ -315,8 +322,9 @@ static void applyGrottoExit(u32* entrance, const GrottoExit* ge)
     rs->unk_18 = 0;
     rs->tempCollectFlags = 0;
 
-    /* Copy to the void respawn */
+    /* Copy to the void and death respawn */
     memcpy(&gSaveContext.respawn[0], rs, sizeof(RespawnData));
+    memcpy(&gSaveContext.respawn[2], rs, sizeof(RespawnData));
 
     /* Set the respawn flags */
     gSaveContext.respawnFlag = 4;
@@ -325,7 +333,7 @@ static void applyGrottoExit(u32* entrance, const GrottoExit* ge)
 
 static u32 entrGrottoExit(GameState_Play* play)
 {
-    if (!comboConfig(CFG_ER_GROTTOS))
+    if (!Config_Flag(CFG_ER_GROTTOS))
         return ENTR_MM_INTERNAL_EXIT_GROTTO;
 
     switch (play->sceneId)
@@ -460,7 +468,7 @@ void preInitTitleScreen(void)
 
     /* Load the entrance */
     entrance = gComboCtx.entrance;
-    if (comboConfig(CFG_ER_ANY))
+    if (Config_Flag(CFG_ER_ANY))
         g.initialEntrance = entrance;
     else
         g.initialEntrance = ENTR_MM_CLOCK_TOWN;
@@ -505,9 +513,9 @@ void hookPlay_Init(GameState_Play* play)
     gMultiMarkSwitch0 = 0;
     gMultiMarkSwitch1 = 0;
     g.keatonGrassMax = -1;
-    comboMultiResetWisps();
+    Multi_ResetWisps();
 
-    if (comboConfig(CFG_ER_OVERWORLD) || comboConfig(CFG_ER_INDOORS))
+    if (Config_Flag(CFG_ER_OVERWORLD) || Config_Flag(CFG_ER_INDOORS))
         gSave.hasSirloin = 0;
 
     if (gSaveContext.respawnFlag == 8)
@@ -652,7 +660,7 @@ void hookPlay_Init(GameState_Play* play)
         playerHeightJtbl[MM_PLAYER_FORM_HUMAN] = playerHeightJtbl[MM_PLAYER_FORM_ZORA];
     }
 
-    if (!gCustomKeep)
+    if (!g.customKeep)
     {
         comboLoadCustomKeep();
     }
@@ -702,15 +710,15 @@ void hookPlay_Init(GameState_Play* play)
     MM_SET_EVENT_WEEK(MM_EV(82, 1));
 
     /* Raise Woodfall Temple with setting enabled */
-    if (comboConfig(CFG_MM_OPEN_WF))
+    if (Config_Flag(CFG_MM_OPEN_WF))
         MM_SET_EVENT_WEEK(EV_MM_WEEK_WOODFALL_TEMPLE_RISE);
 
     /* Make Biggoron move with setting enabled */
-    if (comboConfig(CFG_MM_OPEN_SH))
+    if (Config_Flag(CFG_MM_OPEN_SH))
         MM_SET_EVENT_WEEK(EV_MM_WEEK_SNOWHEAD_BLIZZARD);
 
     /* Make turtle surface with setting enabled */
-    if (comboConfig(CFG_MM_OPEN_GB))
+    if (Config_Flag(CFG_MM_OPEN_GB))
         MM_SET_EVENT_WEEK(EV_MM_WEEK_GREAT_BAY_TURTLE);
 
     if (gSave.entranceIndex == ENTR_MM_CLOCK_TOWER || gSave.entranceIndex == ENTR_MM_MOON)
@@ -729,7 +737,7 @@ void hookPlay_Init(GameState_Play* play)
     comboSpawnCustomWarps(play);
     spawnSirloin(play);
 
-    if (comboConfig(CFG_ER_ANY))
+    if (Config_Flag(CFG_ER_ANY))
     {
         if (play->sceneId == SCE_MM_STONE_TOWER_INVERTED)
         {
@@ -752,13 +760,13 @@ void hookPlay_Init(GameState_Play* play)
         /* End game */
         gMmExtraFlags2.majora = 1;
         sendSelfMajorasMask();
-        if (!comboGoalCond() && !g.isCreditWarp)
+        if (!Config_IsGoal() && !g.isCreditWarp)
         {
             gSave.playerForm = MM_PLAYER_FORM_HUMAN;
             gSave.equippedMask = 0;
             gSave.day = 0;
             gSave.time = 0x3fff;
-            comboSave(play, SF_NOCOMMIT);
+            Save_DoSave(play, SF_NOCOMMIT);
             Sram_SaveNewDay(play);
             play->nextEntrance = ENTR_EXTENDED;
             g.nextEntrance = g.initialEntrance;
@@ -767,12 +775,6 @@ void hookPlay_Init(GameState_Play* play)
             return;
         }
         g.isCredits = 1;
-    }
-
-    if (gSave.entranceIndex == ENTR_MM_CLOCK_TOWER_FROM_CLOCK_TOWN)
-    {
-        comboGameSwitch(play, ENTR_OOT_MARKET_FROM_MASK_SHOP);
-        return;
     }
 }
 
@@ -808,6 +810,15 @@ void Play_TransitionDone(GameState_Play* play)
         entrance = gForeignSave.fw.entranceIndex | MASK_FOREIGN_ENTRANCE;
         gComboCtx.isFwSpawn = 1;
         break;
+    }
+
+    /* Game switch */
+    if (entrance == ENTR_MM_CLOCK_TOWER_FROM_CLOCK_TOWN)
+    {
+        if (!Config_Flag(CFG_ONLY_MM))
+            entrance = ENTR_OOT_MARKET_FROM_MASK_SHOP | MASK_FOREIGN_ENTRANCE;
+        else
+            entrance = ENTR_MM_CLOCK_TOWN;
     }
 
     /* Handle grotto exits */
@@ -854,7 +865,7 @@ void Play_SetupRespawnPointRaw(GameState_Play* play, int respawnId, int playerPa
 
 void Play_SetupRespawnPoint(GameState_Play* play, int respawnId, int playerParams)
 {
-    if (!comboConfig(CFG_ER_GROTTOS) && play->sceneId == SCE_MM_GROTTOS)
+    if (!Config_Flag(CFG_ER_GROTTOS) && play->sceneId == SCE_MM_GROTTOS)
         return;
 
     Play_SetupRespawnPointRaw(play, respawnId, playerParams);

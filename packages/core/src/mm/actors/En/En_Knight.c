@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/actor.h>
 
 void EnKnight_OnDestroy(Actor* this, GameState_Play* play)
 {

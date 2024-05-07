@@ -2,6 +2,7 @@
 #include <combo/csmc.h>
 #include <combo/custom.h>
 #include <combo/dungeon.h>
+#include <combo/actor.h>
 
 #define CSMC_NAVI_NORMAL     0x00
 #define CSMC_NAVI_BOSS_KEY   0x01

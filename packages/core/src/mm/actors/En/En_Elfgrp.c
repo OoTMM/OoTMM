@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/config.h>
 
 static const s16 kGreatFairyRewards[] = {
     GI_MM_MASK_GREAT_FAIRY,
@@ -88,7 +89,7 @@ static void fairyHint(GameState_Play* play, int index)
     comboTextAppendStr(&b, "Young one, please help us! If you bring the " TEXT_COLOR_PINK "15 Stray Fairies");
     comboTextAppendClearColor(&b);
     comboTextAppendStr(&b, " here, we will give you ");
-    comboTextAppendItemNameQueryEx(&b, &q, TF_PREPOS | TF_PROGRESSIVE, gComboData.staticHintsImportance[9 + (index - 2)]);
+    comboTextAppendItemNameQueryEx(&b, &q, TF_PREPOS | TF_PROGRESSIVE, gComboConfig.staticHintsImportance[9 + (index - 2)]);
     comboTextAppendStr(&b, "!" TEXT_END);
     comboTextAutoLineBreaks(start);
 }
@@ -108,9 +109,9 @@ static void fairyHintTown(GameState_Play* play)
     comboTextAppendStr(&b, "Young one, please help us! If you bring the missing " TEXT_COLOR_ORANGE "Stray Fairy");
     comboTextAppendClearColor(&b);
     comboTextAppendStr(&b, " here, we will give you ");
-    comboTextAppendItemNameQueryEx(&b, &q1, TF_PREPOS | TF_PROGRESSIVE, gComboData.staticHintsImportance[18]);
+    comboTextAppendItemNameQueryEx(&b, &q1, TF_PREPOS | TF_PROGRESSIVE, gComboConfig.staticHintsImportance[18]);
     comboTextAppendStr(&b, " and ");
-    comboTextAppendItemNameQueryEx(&b, &q2, TF_PREPOS | TF_PROGRESSIVE, gComboData.staticHintsImportance[19]);
+    comboTextAppendItemNameQueryEx(&b, &q2, TF_PREPOS | TF_PROGRESSIVE, gComboConfig.staticHintsImportance[19]);
     comboTextAppendStr(&b, "!" TEXT_END);
     comboTextAutoLineBreaks(start);
 }

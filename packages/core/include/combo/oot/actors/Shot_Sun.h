@@ -1,7 +1,7 @@
 #ifndef COMBO_OOT_SHOT_SUN_H
 #define COMBO_OOT_SHOT_SUN_H
 
-#include <combo/common/actor.h>
+#include <combo/actor.h>
 
 typedef struct Actor_ShotSun Actor_ShotSun;
 

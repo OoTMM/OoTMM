@@ -1,12 +1,15 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/config.h>
+#include <combo/draw.h>
+#include <combo/actor.h>
 
 static void DemoEffect_SapphireItemQuery(ComboItemQuery* q)
 {
     bzero(q, sizeof(*q));
 
     q->ovType = OV_NONE;
-    q->gi = gComboData.giZoraSapphire;
+    q->gi = gComboConfig.giZoraSapphire;
 }
 
 static void DemoEffect_SapphireItemOverride(ComboItemOverride* o)
@@ -45,7 +48,7 @@ static void DemoEffect_DrawSapphireInJabu(Actor* this, GameState_Play* play)
     ModelViewTranslate(this->world.pos.x, this->world.pos.y, this->world.pos.z, MAT_SET);
     ModelViewScale(0.35f, 0.35f, 0.35f, MAT_MUL);
     ModelViewRotateY(angle, MAT_MUL);
-    comboDrawGI(play, this, o.gi, 0);
+    Draw_Gi(play, this, o.gi, 0);
 }
 
 void DemoEffect_DrawSpiritualLoader(Actor* this, GameState_Play* play)

@@ -1,5 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/player.h>
+#include <combo/shop.h>
 
 static u8 sItemIndex;
 

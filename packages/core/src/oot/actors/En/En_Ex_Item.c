@@ -1,5 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/config.h>
+#include <combo/draw.h>
 
 void EnExItem_RewardByIndex(ComboItemQuery* q, int index)
 {
@@ -25,7 +27,7 @@ void EnExItem_RewardByIndex(ComboItemQuery* q, int index)
     case 0x07:
         /* Bombchu */
         q->gi = GI_OOT_BOMBCHU_10;
-        if (comboConfig(CFG_OOT_BOMBCHU_BAG) && gOotSave.inventory.items[ITS_OOT_BOMBCHU] != ITEM_OOT_BOMBCHU_10)
+        if (Config_Flag(CFG_OOT_BOMBCHU_BAG) && gOotSave.inventory.items[ITS_OOT_BOMBCHU] != ITEM_OOT_BOMBCHU_10)
             q->gi = GI_OOT_RUPEE_PURPLE;
         break;
     case 0x03:
@@ -80,7 +82,7 @@ void EnExItem_Draw(Actor* actor, GameState_Play* play)
     comboItemOverride(&o, &q);
     scale = *(float*)(((char*)actor) + 0x154);
     ActorSetScale(actor, scale);
-    comboDrawGI(play, actor, o.gi, 0);
+    Draw_Gi(play, actor, o.gi, 0);
 }
 
 void EnExItem_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)

@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/draw.h>
 
 static void EnColMan_ItemQuery(ComboItemQuery* q)
 {
@@ -30,12 +31,12 @@ PATCH_CALL(0x80afdecc, EnColMan_GiveItem);
 
 void EnColMan_DrawHeartPiece(Actor* this, GameState_Play* play)
 {
-    static const float scale = 12.5f;
+    static const float scale = 35.f;
     ComboItemOverride o;
 
     EnColMan_ItemOverride(&o);
     ModelViewScale(scale, scale, scale, MAT_MUL);
-    comboDrawGI(play, this, o.gi, 0);
+    Draw_Gi(play, this, o.gi, 0);
 }
 
 PATCH_FUNC(0x80afe414, EnColMan_DrawHeartPiece);

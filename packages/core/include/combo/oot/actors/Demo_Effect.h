@@ -1,7 +1,7 @@
 #ifndef COMBO_OOT_DEMO_EFFECT_H
 #define COMBO_OOT_DEMO_EFFECT_H
 
-#include <combo/common/actor.h>
+#include <combo/actor.h>
 #include <combo/common/actor_init.h>
 
 typedef struct Actor_DemoEffect Actor_DemoEffect;

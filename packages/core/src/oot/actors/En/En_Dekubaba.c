@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/player.h>
 
 void EnDekubaba_GiveItemDefaultRange(Actor* this, GameState_Play* play, s16 gi)
 {

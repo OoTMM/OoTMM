@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/context.h>
 
 void hook_Title_Main(u8* data)
 {

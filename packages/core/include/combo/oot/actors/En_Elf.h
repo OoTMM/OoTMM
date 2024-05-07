@@ -1,7 +1,7 @@
 #ifndef COMBO_OOT_EN_ELF_H
 #define COMBO_OOT_EN_ELF_H
 
-#include <combo/common/actor.h>
+#include <combo/actor.h>
 #include <combo/item.h>
 
 typedef struct Actor_EnElf Actor_EnElf;

@@ -1,4 +1,6 @@
 #include <combo.h>
+#include <combo/config.h>
+#include <combo/actor.h>
 
 #define DOOR_NONE       0
 #define DOOR_SMALL_KEY  1
@@ -30,9 +32,9 @@ int comboDoorIsUnlocked(GameState_Play* play, Actor* actor)
     type = doorType(play, actor);
     flag = actor->variable & 0x7f;
 
-    if (type == DOOR_BOSS_KEY && comboConfig(CFG_MM_NO_BOSS_KEY))
+    if (type == DOOR_BOSS_KEY && Config_Flag(CFG_MM_NO_BOSS_KEY))
         return 1;
-    else if (type == DOOR_SMALL_KEY && comboConfig(CFG_MM_NO_SMALL_KEY))
+    else if (type == DOOR_SMALL_KEY && Config_Flag(CFG_MM_NO_SMALL_KEY))
         return 1;
 
     return GetSwitchFlag(play, flag);

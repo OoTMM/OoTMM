@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/dungeon.h>
+#include <combo/config.h>
 
 void comboDungeonSetFlags(int dungeonId, int mmCycle)
 {
@@ -20,7 +21,7 @@ void comboDungeonSetFlags(int dungeonId, int mmCycle)
         if (mmCycle)
         {
             MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF);
-            if (comboConfig(CFG_MM_CLEAR_OPEN_WF))
+            if (Config_Flag(CFG_MM_CLEAR_OPEN_WF))
             {
                 MM_SET_EVENT_WEEK(EV_MM_WEEK_WOODFALL_TEMPLE_RISE);
             }
@@ -40,7 +41,7 @@ void comboDungeonSetFlags(int dungeonId, int mmCycle)
         if (mmCycle)
         {
             MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_GB);
-            if (comboConfig(CFG_MM_CLEAR_OPEN_GB))
+            if (Config_Flag(CFG_MM_CLEAR_OPEN_GB))
             {
                 MM_SET_EVENT_WEEK(EV_MM_WEEK_GREAT_BAY_TURTLE);
             }
@@ -62,7 +63,7 @@ int comboBossDungeon(int dungeonId)
 {
     for (int i = 0; i <= BOSSID_TWINMOLD; ++i)
     {
-        if (gComboData.boss[i] == dungeonId)
+        if (gComboConfig.boss[i] == dungeonId)
             return i;
     }
     return -1;

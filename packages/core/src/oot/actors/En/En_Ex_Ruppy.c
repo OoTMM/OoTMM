@@ -1,6 +1,8 @@
 #include <combo.h>
 #include <combo/item.h>
 #include <combo/player.h>
+#include <combo/draw.h>
+#include <combo/actor.h>
 
 void EnExRuppy_ItemQuery(ComboItemQuery* q, Actor_EnExRuppy* this, GameState_Play* play)
 {
@@ -44,7 +46,7 @@ void EnExRuppy_Draw(Actor_EnExRuppy* this, GameState_Play* play)
     EnExRuppy_ItemQuery(&q, this, play);
     comboItemOverride(&o, &q);
     ModelViewScale(25.0f, 25.0f, 25.0f, MAT_MUL);
-    comboDrawGI(play, &this->actor, o.gi, 0);
+    Draw_Gi(play, &this->actor, o.gi, 0);
 }
 
 void EnExRuppy_HandlerCollected(Actor_EnExRuppy* this, GameState_Play* play)
@@ -54,12 +56,12 @@ void EnExRuppy_HandlerCollected(Actor_EnExRuppy* this, GameState_Play* play)
     {
         divingGame = (Actor_EnDivingGame*)this->actor.parent;
         divingGame->grabbedRupeesCounter++;
-        UnfreezePlayer(play);
+        Player_Unfreeze(play);
         ActorDestroy(&this->actor);
     }
     else
     {
-        FreezePlayer(play);
+        Player_Freeze(play);
     }
 }
 
@@ -85,7 +87,7 @@ void EnExRuppy_GiveItem(Actor_EnExRuppy* this, GameState_Play* play, Actor_EnDiv
     if (major)
     {
         PlayerDisplayTextBox(play, 0xb4, NULL);
-        FreezePlayer(play);
+        Player_Freeze(play);
 
         /* Set the collected handler */
         this->actionFunc = EnExRuppy_HandlerCollected;

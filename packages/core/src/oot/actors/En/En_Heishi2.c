@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/inventory.h>
 
 void EnHeishi2_AfterZeldaLetter(GameState_Play* play)
 {

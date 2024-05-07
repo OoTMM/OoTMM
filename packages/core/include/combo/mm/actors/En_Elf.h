@@ -1,7 +1,7 @@
 #ifndef COMBO_MM_EN_ELF_H
 #define COMBO_MM_EN_ELF_H
 
-#include <combo/common/actor.h>
+#include <combo/actor.h>
 
 typedef struct Actor_EnElf Actor_EnElf;
 

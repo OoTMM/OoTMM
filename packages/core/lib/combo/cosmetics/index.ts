@@ -211,6 +211,25 @@ class CosmeticsPass {
     const envColor = colorBufferRGB(brightness(color, 0.2));
     primColor.copy(fileGi.data, 0xfc8 + 4);
     envColor.copy(fileGi.data, 0xfd0 + 4);
+
+    /* Patch the ageless shield (sheath) */
+    const fileAgeless1 = this.builder.fileByName('custom/eq_shield_mirror');
+    if (fileAgeless1) {
+      const off = 0x1b1c;
+      const original = fileAgeless1.data.readUint32BE(off);
+      if (original === 0xd70000ff) {
+        buffer.copy(fileAgeless1.data, off);
+      }
+    }
+
+    const fileAgeless2 = this.builder.fileByName('custom/eq_sheath_shield_mirror');
+    if (fileAgeless2) {
+      const off = 0x1e7c;
+      const original = fileAgeless2.data.readUint32BE(off);
+      if (original === 0xd70000ff) {
+        buffer.copy(fileAgeless2.data, off);
+      }
+    }
   }
 
   private async getPathBuffer(path: BufferPath | null): Promise<Buffer | null> {
@@ -299,6 +318,11 @@ class CosmeticsPass {
     const colorMmTunicFierceDeity = resolveColor(random, c.mmTunicFierceDeity);
     const colorOotShieldMirror = resolveColor(random, c.ootShieldMirror);
     const colorDpad = resolveColor(random, c.dpad);
+
+    /* Patch hold target */
+    if (c.defaultHold) {
+      this.patchSymbol('HOLD_TARGET', Buffer.from([0x01]));
+    }
 
     /* Patch human tunics */
     if (colorOotTunicKokiri !== null) {

@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/config.h>
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x280) = (h); } while (0)
 
@@ -45,7 +46,7 @@ static void hintZoraEggs(GameState_Play* play)
     comboTextAppendStr(&b, "If you can bring all of the " TEXT_COLOR_BLUE "Zora Eggs ");
     comboTextAppendClearColor(&b);
     comboTextAppendStr(&b, "here, you will get ");
-    comboTextAppendItemNameQueryEx(&b, &q, TF_PREPOS | TF_PROGRESSIVE, gComboData.staticHintsImportance[7]);
+    comboTextAppendItemNameQueryEx(&b, &q, TF_PREPOS | TF_PROGRESSIVE, gComboConfig.staticHintsImportance[7]);
     comboTextAppendStr(&b, "!" TEXT_SIGNAL TEXT_END);
     comboTextAutoLineBreaks(start);
 }

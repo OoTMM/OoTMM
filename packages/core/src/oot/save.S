@@ -2,7 +2,7 @@
 
 /* Use our hook to load the save */
 PATCH_START 0x800902e8
-  jal comboReadOwnSave
+  jal Save_ReadOwn
 PATCH_END
 
 /* Replace SaveGame */
@@ -38,4 +38,9 @@ PATCH_END
 /* Remove failsafe for spoiling items on game over? */
 PATCH_START 0x800e17cc
   li t4,0xfff
+PATCH_END
+
+/* Don't force-give the Master Sword when loading as adult */
+PATCH_START 0x80090540
+  nop
 PATCH_END

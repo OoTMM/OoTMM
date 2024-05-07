@@ -6,6 +6,9 @@
 
 #include "Custom_Magic_Wind.h"
 #include <combo/custom.h>
+#include <combo/player.h>
+#include <combo/magic.h>
+#include <combo/global.h>
 
 #define FLAGS ((1 << 4) | (1 << 25)) /* (ACTOR_FLAG_4 | ACTOR_FLAG_25) */
 
@@ -276,7 +279,7 @@ void MagicWind_Draw(Actor* thisx, GameState_Play* play) {
 
     OPEN_DISPS(gfxCtx);
 
-    gSPSegment(POLY_XLU_DISP++, 0x06, gCustomKeep);
+    gSPSegment(POLY_XLU_DISP++, 0x06, g.customKeep);
 
     if (this->actionFunc != MagicWind_WaitForTimer) {
         POLY_XLU_DISP = Gfx_SetupDL(POLY_XLU_DISP, 25); /* SETUPDL_25 */

@@ -1,0 +1,33 @@
+#include <combo.h>
+
+/* Skip scarecrow cutscene */
+PATCH_START 0x809718d0
+  li v0,1
+PATCH_END
+
+PATCH_START 0x809718f4
+  nop
+PATCH_END
+
+PATCH_START 0x80971900
+  jal PlaySound
+   li a0,0x4802
+PATCH_END
+
+PATCH_GROUP PG_MM_FREE_SCARECROW
+
+/* Free scarecrow */
+PATCH_START 0x80971824
+  li at,0x01
+PATCH_END
+
+PATCH_START 0x809717d8
+  li t7,1
+PATCH_END
+
+/* Don't cancel ocarina */
+PATCH_START 0x8097184c
+  nop
+PATCH_END
+
+PATCH_GROUP_END

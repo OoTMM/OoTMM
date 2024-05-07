@@ -1,5 +1,9 @@
 #include <combo.h>
 #include <combo/net.h>
+#include <combo/player.h>
+#include <combo/config.h>
+#include <combo/item.h>
+#include <combo/actor.h>
 
 u32 gMultiMarkChests;
 u32 gMultiMarkCollectibles;
@@ -219,22 +223,6 @@ static void setStrayFairyMarkMm(GameState_Play* play, int sceneId, int id)
         setSwitch0MarkMm(play, sceneId, id & 0x1f);
 }
 
-static int getFiskMark(GameState_Play* play, int id)
-{
-    if (id >= 17)
-        return getCollectibleMarkOot(play, SCE_OOT_FISHING_POND, id & 0x1f);
-    else
-        return getChestMarkOot(play, SCE_OOT_FISHING_POND, id & 0x1f);
-}
-
-static void setFishMark(GameState_Play* play, int id)
-{
-    if (id >= 17)
-        setCollectibleMarkOot(play, SCE_OOT_FISHING_POND, id & 0x1f);
-    else
-        setChestMarkOot(play, SCE_OOT_FISHING_POND, id & 0x1f);
-}
-
 static void markXflag(Xflag* xf, int sliceId, int sceneId, int roomId, int id)
 {
     bzero(xf, sizeof(*xf));
@@ -277,9 +265,9 @@ static void setXflagsMarkMm(GameState_Play* play, int sliceId, int sceneId, int 
     comboXflagsSetMm(&xf);
 }
 
-void multiSetMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
+void Multi_SetMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
 {
-    if (!comboConfig(CFG_MULTIPLAYER))
+    if (!Config_Flag(CFG_MULTIPLAYER))
         return;
 
     switch (ovType)
@@ -313,7 +301,7 @@ void multiSetMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u
         BITMAP8_SET(gSharedCustomSave.oot.sr, id);
         break;
     case OV_FISH:
-        setFishMark(play, id);
+        BITMAP8_SET(gSharedCustomSave.caughtFishFlags, id);
         break;
     default:
         setXflagsMarkOot(play, ovType - OV_XFLAG0, sceneId, roomId, id);
@@ -321,9 +309,9 @@ void multiSetMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u
     }
 }
 
-void multiSetMarkedMm(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
+void Multi_SetMarkedMm(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
 {
-    if (!comboConfig(CFG_MULTIPLAYER))
+    if (!Config_Flag(CFG_MULTIPLAYER))
         return;
 
     switch (ovType)
@@ -362,9 +350,9 @@ void multiSetMarkedMm(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8
     }
 }
 
-int multiIsMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
+int Multi_IsMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
 {
-    if (!comboConfig(CFG_MULTIPLAYER))
+    if (!Config_Flag(CFG_MULTIPLAYER))
         return 0;
 
     switch (ovType)
@@ -390,7 +378,7 @@ int multiIsMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 
     case OV_SR:
         return BITMAP8_GET(gSharedCustomSave.oot.sr, id);
     case OV_FISH:
-        return getFiskMark(play, id);
+        return BITMAP8_GET(gSharedCustomSave.caughtFishFlags, id);
     default:
         return getXflagsMarkOot(play, ovType - OV_XFLAG0, sceneId, roomId, id);
     }
@@ -398,9 +386,9 @@ int multiIsMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 
     return 0;
 }
 
-int multiIsMarkedMm(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
+int Multi_IsMarkedMm(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
 {
-    if (!comboConfig(CFG_MULTIPLAYER))
+    if (!Config_Flag(CFG_MULTIPLAYER))
         return 0;
 
     switch (ovType)
@@ -570,11 +558,11 @@ static void processMessages(GameState_Play* play, NetContext* net)
     }
 }
 
-void comboMultiProcessMessages(GameState_Play* play)
+void Multi_ProcessMessages(GameState_Play* play)
 {
     NetContext* ctx;
 
-    if (!comboConfig(CFG_MULTIPLAYER))
+    if (!Config_Flag(CFG_MULTIPLAYER))
         return;
 
     ctx = netMutexLock();
@@ -593,13 +581,13 @@ static void drawSingleWisp(GameState_Play* play, const PlayerWisp* wisp)
 {
     OPEN_DISPS(play->gs.gfx);
     ModelViewTranslate(wisp->pos.x, wisp->pos.y, wisp->pos.z, MAT_SET);
-    shaderFlameEffectColor(play, kWispColors[wisp->clientId & 0xf], 0.35f, -50.0f);
+    Gfx_DrawFlameColor(play, kWispColors[wisp->clientId & 0xf], 0.35f, -50.0f);
     CLOSE_DISPS();
 }
 
-void comboMultiDrawWisps(GameState_Play* play)
+void Multi_DrawWisps(GameState_Play* play)
 {
-    if (!comboConfig(CFG_MULTIPLAYER))
+    if (!Config_Flag(CFG_MULTIPLAYER))
         return;
 
     InitListPolyXlu(play->gs.gfx);
@@ -610,9 +598,9 @@ void comboMultiDrawWisps(GameState_Play* play)
     }
 }
 
-void comboMultiResetWisps(void)
+void Multi_ResetWisps(void)
 {
-    if (!comboConfig(CFG_MULTIPLAYER))
+    if (!Config_Flag(CFG_MULTIPLAYER))
         return;
     bzero(sPlayerWisps, sizeof(sPlayerWisps));
 }

@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/config.h>
 
 static void EnSsh_ItemQuery(ComboItemQuery* q, GameState_Play* play, int flags)
 {
@@ -38,7 +39,7 @@ static void EnSsh_DisplayHint(Actor* this, GameState_Play* play)
     comboTextAppendHeader(&b);
     start = b;
     comboTextAppendStr(&b, "If you lift the curse... I'll give you... ");
-    comboTextAppendItemNameQueryEx(&b, &q, TF_PREPOS | TF_PROGRESSIVE, gComboData.staticHintsImportance[importanceIndex]);
+    comboTextAppendItemNameQueryEx(&b, &q, TF_PREPOS | TF_PROGRESSIVE, gComboConfig.staticHintsImportance[importanceIndex]);
     comboTextAppendStr(&b, "... Hurry... Please..." TEXT_SIGNAL TEXT_END);
     comboTextAutoLineBreaks(start);
 }

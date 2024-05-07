@@ -1,4 +1,6 @@
 #include <combo.h>
+#include <combo/player.h>
+#include <combo/global.h>
 
 void comboCreditWarp(GameState_Play* play)
 {
@@ -8,7 +10,7 @@ void comboCreditWarp(GameState_Play* play)
     g.isCredits = 1;
 
     /* Save */
-    comboSave(play, 0);
+    Save_DoSave(play, 0);
 
     /* Credit warp */
     link = GET_LINK(play);

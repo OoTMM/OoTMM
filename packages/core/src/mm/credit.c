@@ -1,4 +1,6 @@
 #include <combo.h>
+#include <combo/player.h>
+#include <combo/global.h>
 
 void comboCreditWarp(GameState_Play* play)
 {

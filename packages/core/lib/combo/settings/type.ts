@@ -9,6 +9,7 @@ type SettingDataEnumValue = {
   readonly value: string;
   readonly name: string;
   readonly description?: string;
+  readonly cond?: (settings: any) => boolean;
 };
 
 type SettingDataCommon = {
@@ -22,7 +23,7 @@ type SettingDataCommon = {
 type SettingDataEnum = SettingDataCommon & {
   readonly type: 'enum';
   readonly values: ReadonlyArray<SettingDataEnumValue>;
-  readonly default: string;
+  readonly default: string | ((x: any) => string);
 };
 
 type SettingDataSet = SettingDataCommon & {

@@ -3,6 +3,12 @@
 #include <combo/menu.h>
 #include <combo/dma.h>
 #include <combo/item.h>
+#include <combo/player.h>
+#include <combo/math.h>
+#include <combo/config.h>
+#include <combo/global.h>
+#include <combo/dpad.h>
+#include <combo/inventory.h>
 
 static int checkItemToggle(GameState_Play* play)
 {
@@ -111,7 +117,7 @@ void KaleidoSetCursorColor(GameState_Play* play)
     b = 0xff;
 
     /* Update dpad */
-    comboDpadUpdate(play);
+    Dpad_Update(play);
 
     /* Not on Z/R */
     if (p->cursorSpecialPos == 0)
@@ -1540,9 +1546,9 @@ u32 GetItemTexture(u32 slotId, u8 item, u32 index)
     static void* sExtraIconTradeChild[2];
     static u8 sExtraIconTradeChildItem[2];
     u32* itemToIcon = (u32*)0x800f8d2c;
-    switch (slotId)
+
+    if (slotId == ITS_OOT_TRADE_CHILD)
     {
-    case ITS_OOT_TRADE_CHILD:
         if (!sExtraIconTradeChild[index])
         {
             sExtraIconTradeChild[index] = malloc(0x1000);
@@ -1554,16 +1560,14 @@ u32 GetItemTexture(u32 slotId, u8 item, u32 index)
             {
                 sExtraIconTradeChildItem[index] = item;
                 comboItemIcon(sExtraIconTradeChild[index], sExtraIconTradeChildItem[index]);
-                if (!comboConfig(CFG_OOT_AGELESS_CHILD_TRADE) && gSave.age != AGE_CHILD)
+                if (!Config_Flag(CFG_OOT_AGELESS_CHILD_TRADE) && gSave.age != AGE_CHILD)
                     Grayscale(sExtraIconTradeChild[index], 0x400);
             }
             return (u32)sExtraIconTradeChild[index] & 0x00ffffff;
         }
-        break;
-    default:
-        return itemToIcon[item];
     }
-    return 0;
+
+    return itemToIcon[item];
 }
 
 static u8 GetNextItem(u32 slot, s32* outTableIndex)
@@ -1664,6 +1668,16 @@ void KaleidoScope_LoadItemName(void* dst, s16 id)
     {
         memset(dst, 0, 0x400);
     }
+    else if (itemId == ITEM_OOT_SWORD_KOKIRI)
+    {
+        switch (gSharedCustomSave.extraSwordsOot)
+        {
+        case 0: LoadFile(dst, 0x880000 + 0x400 * id, 0x400); break;
+        case 1: comboLoadMmIcon(dst, 0xa27660, ITEM_MM_SWORD_RAZOR); break;
+        case 2: comboLoadMmIcon(dst, 0xa27660, ITEM_MM_SWORD_GILDED); break;
+        default: UNREACHABLE();
+        }
+    }
     else if (itemId == ITEM_OOT_MASK_BLAST)
     {
         comboLoadMmIcon(dst, 0xa27660, ITEM_MM_MASK_BLAST);
@@ -1681,4 +1695,46 @@ void KaleidoScope_LoadItemName(void* dst, s16 id)
     {
         LoadFile(dst, 0x880000 + 0x400 * id, 0x400);
     }
+}
+
+void KaleidoScope_DrawQuadEquipment(GameState_Play* play, u32 dlist, int w, int h, int flags)
+{
+    static void* customKokiriSwordTexture;
+    static u8 customKokiriSwordId;
+    static u8 customKokiSwordAge;
+
+    void (*KaleidoScope_DrawQuadTextureRGBA32)(GameState_Play*, u32, int, int, int);
+
+    if (dlist == 0x0803b000 && gSharedCustomSave.extraSwordsOot)
+    {
+        /* Extra child sword */
+        if (!customKokiriSwordTexture)
+        {
+            customKokiriSwordTexture = malloc(0x1000);
+            customKokiriSwordId = 0;
+            customKokiSwordAge = 0xff;
+        }
+
+        if (customKokiriSwordTexture)
+        {
+            if (customKokiriSwordId != gSharedCustomSave.extraSwordsOot || customKokiSwordAge != gSave.age)
+            {
+                customKokiriSwordId = gSharedCustomSave.extraSwordsOot;
+                customKokiSwordAge = gSave.age;
+
+                if (gSharedCustomSave.extraSwordsOot == 1)
+                    LoadMmItemIcon(customKokiriSwordTexture, ITEM_MM_SWORD_RAZOR);
+                else
+                    LoadMmItemIcon(customKokiriSwordTexture, ITEM_MM_SWORD_GILDED);
+
+                if (gSave.age != AGE_CHILD && !Config_Flag(CFG_OOT_AGELESS_SWORDS))
+                    Grayscale(customKokiriSwordTexture, 0x400);
+            }
+
+            dlist = ((u32)customKokiriSwordTexture) & 0xffffff;
+        }
+    }
+
+    KaleidoScope_DrawQuadTextureRGBA32 = OverlayAddr(0x8081f1e8);
+    KaleidoScope_DrawQuadTextureRGBA32(play, dlist, w, h, flags);
 }

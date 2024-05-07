@@ -6,6 +6,10 @@
 
 #include "Custom_Magic_Dark.h"
 #include <combo/custom.h>
+#include <combo/player.h>
+#include <combo/magic.h>
+#include <combo/math.h>
+#include <combo/global.h>
 
 #define FLAGS ((1 << 4) | (1 << 25)) /* (ACTOR_FLAG_4 | ACTOR_FLAG_25) */
 
@@ -245,7 +249,7 @@ void MagicDark_DiamondDraw(Actor* thisx, GameState_Play* play) {
     u16 gameplayFrames = play->gameplayFrames;
 
     OPEN_DISPS(play->gs.gfx);
-    gSPSegment(POLY_XLU_DISP++, 0x08, gCustomKeep);
+    gSPSegment(POLY_XLU_DISP++, 0x08, g.customKeep);
 
     InitListPolyXlu(play->gs.gfx);
 

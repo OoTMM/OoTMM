@@ -1,5 +1,8 @@
 #include <combo.h>
 #include <combo/entrance.h>
+#include <combo/player.h>
+#include <combo/config.h>
+#include <combo/actor.h>
 
 typedef enum {
     CUSTOM_SONG_NONE,
@@ -39,8 +42,8 @@ static OcarinaSongButtons sSongElegy = {
 void Ocarina_CheckCustomSongs(void)
 {
     if (gMmSave.inventory.quest.songSoaring
-        && comboConfig(CFG_MM_CROSS_WARP)
-        && (comboConfig(CFG_MM_CROSS_WARP_ADULT) || gSave.age == AGE_CHILD))
+        && Config_Flag(CFG_MM_CROSS_WARP)
+        && (Config_Flag(CFG_MM_CROSS_WARP_ADULT) || gSave.age == AGE_CHILD))
     {
         comboCheckSong(&sSongSoaring, CUSTOM_SONG_SOARING);
     }
@@ -86,8 +89,8 @@ void Ocarina_HandleLastPlayedSong(GameState_Play* play, Actor_Player* player, s1
         break;
     /* End displaced code. */
     case OCARINA_SONG_TIME:
-        canChangeAge = comboConfig(CFG_OOT_AGE_CHANGE) && GetEventChk(EV_OOT_CHK_MASTER_SWORD_CHAMBER) && GetEventChk(EV_OOT_CHK_MASTER_SWORD_PULLED);
-        if (canChangeAge && comboConfig(CFG_OOT_AGE_CHANGE_NEEDS_OOT) && gSave.inventory.items[ITS_OOT_OCARINA] != ITEM_OOT_OCARINA_TIME)
+        canChangeAge = Config_Flag(CFG_OOT_AGE_CHANGE) && GetEventChk(EV_OOT_CHK_MASTER_SWORD_CHAMBER) && GetEventChk(EV_OOT_CHK_MASTER_SWORD_PULLED);
+        if (canChangeAge && Config_Flag(CFG_OOT_AGE_CHANGE_NEEDS_OOT) && gSave.inventory.items[ITS_OOT_OCARINA] != ITEM_OOT_OCARINA_TIME)
             canChangeAge = 0;
 #if defined(DEBUG)
         canChangeAge = 1;
@@ -235,7 +238,7 @@ static void HandleSoaring(GameState_Play* play)
                         link = GET_LINK(play);
                         link->state |= (PLAYER_ACTOR_STATE_CUTSCENE_FROZEN | PLAYER_ACTOR_STATE_FROZEN);
                         link->base.freezeTimer = 10000;
-                        u32 entrance = gComboData.entrancesOwl[songId] ^ MASK_FOREIGN_ENTRANCE;
+                        u32 entrance = gComboConfig.entrancesOwl[songId] ^ MASK_FOREIGN_ENTRANCE;
                         comboTransition(play, entrance);
                     }
                 }

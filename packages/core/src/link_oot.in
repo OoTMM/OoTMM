@@ -201,12 +201,18 @@ Player_UsingItem = 0x80079bf8;
 
 Enemy_StartFinishingBlow = 0x80025b4c;
 Interface_LoadItemIconImpl = 0x8006fb50;
+CollisionCheck_GetSwordDamage = 0x80051a34;
+Play_InCutscene = 0x8009cb08;
 
 DeathWarp = 0x8009da10;
 
-DrawSimpleOpa = 0x80028048;
+Gfx_DrawDListOpa = 0x80028048;
 
 _AddRupees = 0x800721cc;
+
+SkelAnime_DrawFlexLod = 0x800894a4;
+_Player_OverrideLimbDrawGameplayDefault = 0x8007aa94;
+_Player_OverrideLimbDrawPause = 0x8007c1c8;
 
 SpawnRoomActors = 0x80025488;
 

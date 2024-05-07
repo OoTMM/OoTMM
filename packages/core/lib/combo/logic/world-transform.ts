@@ -24,7 +24,7 @@ const BROKEN_ACTORS_CHECKS = [
   'OOT MQ Dodongo Cavern Grass Room Before Miniboss',
 ];
 
-const EXTRA_ITEMS = new Set([
+const EXTRA_ITEMS_OOT = new Set([
   Items.OOT_MASK_SKULL,
   Items.OOT_MASK_SPOOKY,
   Items.OOT_MASK_GERUDO,
@@ -33,6 +33,9 @@ const EXTRA_ITEMS = new Set([
   Items.OOT_MASK_BUNNY,
   Items.OOT_MASK_GORON,
   Items.OOT_MASK_ZORA,
+]);
+
+const EXTRA_ITEMS_MM = new Set([
   Items.MM_MASK_DEKU,
   Items.MM_SWORD,
 ]);
@@ -50,6 +53,7 @@ const ITEM_POOL_SCARCE = new Set([
   Items.SHARED_BOW,
   Items.SHARED_BOMB_BAG,
   Items.SHARED_MAGIC_UPGRADE,
+  Items.SHARED_SWORD,
 ]);
 
 const ITEM_POOL_SCARCE_NOLIMIT = new Set([
@@ -87,6 +91,7 @@ const ITEM_POOL_PLENTIFUL = new Set([
   Items.OOT_SPELL_WIND,
   Items.OOT_SPELL_LOVE,
   Items.OOT_STRENGTH,
+  Items.SHARED_SWORD,
   Items.OOT_SWORD,
   Items.OOT_SWORD_GORON,
   Items.OOT_SWORD_KOKIRI,
@@ -206,9 +211,11 @@ const ITEM_POOL_PLENTIFUL = new Set([
   ...ItemGroups.OOT_SOULS_BOSS,
   ...ItemGroups.OOT_SOULS_MISC,
   ...ItemGroups.MM_SOULS_ENEMY,
+  ...ItemGroups.MM_SOULS_NPC,
   ...ItemGroups.MM_SOULS_BOSS,
   ...ItemGroups.MM_SOULS_MISC,
   ...ItemGroups.SHARED_SOULS_ENEMY,
+  ...ItemGroups.SHARED_SOULS_NPC,
   ...ItemGroups.SHARED_SOULS_MISC,
   Items.OOT_BUTTON_A,
   Items.OOT_BUTTON_C_RIGHT,
@@ -541,8 +548,8 @@ export class LogicPassWorldTransform {
     let extraTraps: Item[] = [];
 
     if (this.state.settings.trapRupoor) {
-      extraTraps.push(Items.OOT_TRAP_RUPOOR);
-      extraTraps.push(Items.MM_TRAP_RUPOOR);
+      if (['ootmm', 'oot'].includes(this.state.settings.games)) extraTraps.push(Items.OOT_TRAP_RUPOOR);
+      if (['ootmm', 'mm'].includes(this.state.settings.games)) extraTraps.push(Items.MM_TRAP_RUPOOR);
     }
 
     if (extraTraps.length === 0)
@@ -560,6 +567,13 @@ export class LogicPassWorldTransform {
    */
   private setupSharedItems() {
     const { settings } = this.state;
+
+    if (settings.sharedSwords) {
+      /* Swords */
+      this.replaceItem(Items.OOT_SWORD, Items.SHARED_SWORD);
+      this.replaceItem(Items.MM_SWORD, Items.SHARED_SWORD);
+      this.removeItem(Items.SHARED_SWORD, 3);
+    }
 
     if (settings.sharedBows) {
       /* Bows and quivers */
@@ -852,6 +866,10 @@ export class LogicPassWorldTransform {
       this.shareItems(SharedItemGroups.SOULS_ENEMY, 'max');
     }
 
+    if (settings.sharedSoulsNpc) {
+      this.shareItems(SharedItemGroups.SOULS_NPC, 'max');
+    }
+
     if (settings.sharedSoulsMisc) {
       this.shareItems(SharedItemGroups.SOULS_MISC, 'max');
     }
@@ -950,7 +968,7 @@ export class LogicPassWorldTransform {
       }
 
       for (let j = 0; j < count; ++j) {
-        const item = sample(this.state.random, Array.from(group));
+        const item = sample(this.state.random, group);
         const pi = makePlayerItem(item, i);
         this.addPlayerItem(pi);
       }
@@ -964,6 +982,16 @@ export class LogicPassWorldTransform {
     if (count) {
       this.removePlayerItem(playerKey);
       this.addPlayerItem(playerKeyRing);
+    }
+  }
+
+  private addExtraWallet() {
+    if (['ootmm', 'oot'].includes(this.state.settings.games)) {
+      this.addItem(Items.OOT_WALLET);
+    }
+
+    if (['ootmm', 'mm'].includes(this.state.settings.games)) {
+      this.addItem(Items.MM_WALLET);
     }
   }
 
@@ -1083,8 +1111,16 @@ export class LogicPassWorldTransform {
     this.makePools();
 
     /* Add extra items */
-    for (const item of EXTRA_ITEMS) {
-      this.addItem(item);
+    if (['ootmm', 'oot'].includes(this.state.settings.games)) {
+      for (const item of EXTRA_ITEMS_OOT) {
+        this.addItem(item);
+      }
+    }
+
+    if (['ootmm', 'mm'].includes(this.state.settings.games)) {
+      for (const item of EXTRA_ITEMS_MM) {
+        this.addItem(item);
+      }
     }
 
     /* Add souls */
@@ -1094,6 +1130,7 @@ export class LogicPassWorldTransform {
     if (settings.soulsMiscOot) this.addItems(ItemGroups.OOT_SOULS_MISC);
     if (settings.soulsEnemyMm) this.addItems(ItemGroups.MM_SOULS_ENEMY);
     if (settings.soulsBossMm) this.addItems(ItemGroups.MM_SOULS_BOSS);
+    if (settings.soulsNpcMm) this.addItems(ItemGroups.MM_SOULS_NPC);
     if (settings.soulsMiscMm) this.addItems(ItemGroups.MM_SOULS_MISC);
 
     /* Add skeleton keys */
@@ -1138,18 +1175,15 @@ export class LogicPassWorldTransform {
 
     /* Handle extra wallets */
     if (this.state.settings.childWallets) {
-      this.addItem(Items.OOT_WALLET);
-      this.addItem(Items.MM_WALLET);
+      this.addExtraWallet();
     }
 
     if (this.state.settings.colossalWallets) {
-      this.addItem(Items.OOT_WALLET);
-      this.addItem(Items.MM_WALLET);
+      this.addExtraWallet();
     }
 
     if (this.state.settings.bottomlessWallets) {
-      this.addItem(Items.OOT_WALLET);
-      this.addItem(Items.MM_WALLET);
+      this.addExtraWallet();
     }
 
     /* Handle progressive shields */
@@ -1161,6 +1195,11 @@ export class LogicPassWorldTransform {
     if (settings.progressiveShieldsMm === 'progressive') {
       this.replaceItem(Items.MM_SHIELD_MIRROR, Items.MM_SHIELD);
       this.addItem(Items.MM_SHIELD);
+    }
+
+    if (settings.extraChildSwordsOot) {
+      this.replaceItem(Items.OOT_SWORD_KOKIRI, Items.OOT_SWORD);
+      this.addItem(Items.OOT_SWORD, 2);
     }
 
     /* Setup extra traps */
@@ -1281,7 +1320,7 @@ export class LogicPassWorldTransform {
     }
 
     /* Handle OoT swords */
-    if (settings.startingAge === 'adult') {
+    if (settings.startingAge === 'adult' && !settings.swordlessAdult) {
       this.removeItem(Items.OOT_SWORD_MASTER);
     }
     if (settings.progressiveSwordsOot === 'progressive') {

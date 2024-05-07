@@ -1,13 +1,15 @@
 #include <combo.h>
 #include <combo/item.h>
 #include <combo/csmc.h>
+#include <combo/config.h>
+#include <combo/actor.h>
 
 static void EnBox_ItemQuery(ComboItemQuery* q, Actor* this, GameState_Play* play, s16 gi)
 {
     memset(q, 0, sizeof(*q));
 
     q->gi = gi;
-    if (!(play->sceneId == SCE_OOT_TREASURE_SHOP && gi != -GI_OOT_TC_HEART_PIECE && !comboConfig(CFG_OOT_CHEST_GAME_SHUFFLE)))
+    if (!(play->sceneId == SCE_OOT_TREASURE_SHOP && gi != -GI_OOT_TC_HEART_PIECE && !Config_Flag(CFG_OOT_CHEST_GAME_SHUFFLE)))
     {
         q->ovType = OV_CHEST;
         q->sceneId = play->sceneId;

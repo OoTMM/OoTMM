@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/config.h>
 
 static s16 progressiveRutoLetter(void)
 {
@@ -110,7 +111,7 @@ static s16 progressiveHookshotOot(void)
 static s16 progressiveHookshotMm(s16 gi)
 {
     /* Short hookshot enabled - ignore shared items */
-    if (comboConfig(CFG_MM_HOOKSHOT_SHORT))
+    if (Config_Flag(CFG_MM_HOOKSHOT_SHORT))
     {
         if (!gMmExtraItems.hookshot)
             return GI_MM_HOOKSHOT_SHORT;
@@ -118,7 +119,7 @@ static s16 progressiveHookshotMm(s16 gi)
     }
 
     /* No short hook but shared hookshots */
-    if (comboConfig(CFG_SHARED_HOOKSHOT))
+    if (Config_Flag(CFG_SHARED_HOOKSHOT))
     {
         if (!gOotExtraItems.hookshot)
             return GI_MM_HOOKSHOT;
@@ -156,7 +157,7 @@ static s16 progressiveSwordMm(void)
     case 2:
         return GI_MM_SWORD_GILDED;
     default:
-        return comboConfig(CFG_MM_PROGRESSIVE_GFS) ? GI_MM_GREAT_FAIRY_SWORD : GI_MM_SWORD_GILDED;
+        return Config_Flag(CFG_MM_PROGRESSIVE_GFS) ? GI_MM_GREAT_FAIRY_SWORD : GI_MM_SWORD_GILDED;
     }
 }
 
@@ -168,14 +169,14 @@ static s16 progressiveShieldOot(void)
     if (!(gOotExtraItems.shield & EQ_OOT_SHIELD_HYLIAN))
     {
 #if defined(GAME_MM)
-        if (comboConfig(CFG_SHARED_SHIELDS))
+        if (Config_Flag(CFG_SHARED_SHIELDS))
             return GI_MM_PROGRESSIVE_SHIELD_HERO;
 #endif
         return GI_OOT_PROGRESSIVE_SHIELD_HYLIAN;
     }
 
 #if defined(GAME_MM)
-    if (comboConfig(CFG_SHARED_SHIELDS))
+    if (Config_Flag(CFG_SHARED_SHIELDS))
         return GI_MM_SHIELD_MIRROR;
 #endif
 
@@ -237,8 +238,8 @@ static s16 progressiveWalletOot(void)
     {
     case 0: return GI_OOT_WALLET2;
     case 1: return GI_OOT_WALLET3;
-    case 2: return comboConfig(CFG_COLOSSAL_WALLET) ? GI_OOT_WALLET4 : GI_OOT_WALLET3;
-    case 3: return comboConfig(CFG_BOTTOMLESS_WALLET) ? GI_OOT_WALLET5 : GI_OOT_WALLET4;
+    case 2: return Config_Flag(CFG_COLOSSAL_WALLET) ? GI_OOT_WALLET4 : GI_OOT_WALLET3;
+    case 3: return Config_Flag(CFG_BOTTOMLESS_WALLET) ? GI_OOT_WALLET5 : GI_OOT_WALLET4;
     }
 }
 
@@ -250,8 +251,8 @@ static s16 progressiveWalletMm(void)
     {
     case 0: return GI_MM_WALLET2;
     case 1: return GI_MM_WALLET3;
-    case 2: return comboConfig(CFG_COLOSSAL_WALLET) ? GI_MM_WALLET4 : GI_MM_WALLET3;
-    case 3: return comboConfig(CFG_BOTTOMLESS_WALLET) ? GI_MM_WALLET5 : GI_MM_WALLET4;
+    case 2: return Config_Flag(CFG_COLOSSAL_WALLET) ? GI_MM_WALLET4 : GI_MM_WALLET3;
+    case 3: return Config_Flag(CFG_BOTTOMLESS_WALLET) ? GI_MM_WALLET5 : GI_MM_WALLET4;
     }
 }
 
@@ -300,7 +301,7 @@ static s16 progressiveSongLullaby(void)
 
 static s16 progressiveBombchuBagOot(s16 gi, int ovflags)
 {
-    if (!comboConfig(CFG_OOT_BOMBCHU_BAG) || (gOotSave.inventory.items[ITS_OOT_BOMBCHU] == ITEM_OOT_BOMBCHU_10) || (ovflags & OVF_PRECOND))
+    if (!Config_Flag(CFG_OOT_BOMBCHU_BAG) || (gOotSave.inventory.items[ITS_OOT_BOMBCHU] == ITEM_OOT_BOMBCHU_10) || (ovflags & OVF_PRECOND))
         return gi;
 
     switch (gi)
@@ -314,7 +315,7 @@ static s16 progressiveBombchuBagOot(s16 gi, int ovflags)
 
 static s16 progressiveBombchuBagMm(s16 gi, int ovflags)
 {
-    if (!comboConfig(CFG_MM_BOMBCHU_BAG) || (gMmSave.inventory.items[ITS_MM_BOMBCHU] == ITEM_MM_BOMBCHU) || (ovflags & OVF_PRECOND))
+    if (!Config_Flag(CFG_MM_BOMBCHU_BAG) || (gMmSave.inventory.items[ITS_MM_BOMBCHU] == ITEM_MM_BOMBCHU) || (ovflags & OVF_PRECOND))
         return gi;
 
     switch (gi)
@@ -341,7 +342,7 @@ static s16 progressiveClock(void)
     int index;
 
     index = popcount(gSharedCustomSave.mm.halfDays);
-    if (comboConfig(CFG_MM_CLOCKS_PROGRESSIVE_REVERSE))
+    if (Config_Flag(CFG_MM_CLOCKS_PROGRESSIVE_REVERSE))
         index = ARRAY_SIZE(kClocks) - index - 1;
     if (index < 0)
         index = 0;
@@ -351,8 +352,28 @@ static s16 progressiveClock(void)
     return kClocks[index];
 }
 
+static s16 progressiveExtraSwordOot(void)
+{
+    if (!(gOotSave.inventory.equipment.swords & EQ_OOT_SWORD_KOKIRI))
+        return GI_OOT_SWORD_KOKIRI;
+    if (gSharedCustomSave.extraSwordsOot == 0)
+        return GI_OOT_SWORD_RAZOR;
+    return GI_OOT_SWORD_GILDED;
+}
+
 s16 comboProgressive(s16 gi, int ovflags)
 {
+    if (Config_Flag(CFG_OOT_EXTRA_CHILD_SWORDS))
+    {
+        switch (gi)
+        {
+        case GI_OOT_SWORD_KOKIRI:
+        case GI_OOT_SWORD_RAZOR:
+        case GI_OOT_SWORD_GILDED:
+            return progressiveExtraSwordOot();
+        }
+    }
+
     switch (gi)
     {
     /* Items */
@@ -388,18 +409,18 @@ s16 comboProgressive(s16 gi, int ovflags)
     /* Equipment */
     case GI_OOT_SWORD_KOKIRI:
     case GI_OOT_SWORD_MASTER:
-        if (comboConfig(CFG_OOT_PROGRESSIVE_SWORDS))
+        if (Config_Flag(CFG_OOT_PROGRESSIVE_SWORDS))
             gi = progressiveSwordOot();
         break;
     case GI_OOT_SWORD_BIGGORON:
     case GI_OOT_SWORD_KNIFE:
-        if (comboConfig(CFG_OOT_PROGRESSIVE_SWORDS) || comboConfig(CFG_OOT_PROGRESSIVE_SWORDS_GORON))
+        if (Config_Flag(CFG_OOT_PROGRESSIVE_SWORDS) || Config_Flag(CFG_OOT_PROGRESSIVE_SWORDS_GORON))
             gi = progressiveSwordGoron();
         break;
     case GI_OOT_PROGRESSIVE_SHIELD_DEKU:
     case GI_OOT_PROGRESSIVE_SHIELD_HYLIAN:
     case GI_OOT_SHIELD_MIRROR:
-        if (comboConfig(CFG_OOT_PROGRESSIVE_SHIELDS))
+        if (Config_Flag(CFG_OOT_PROGRESSIVE_SHIELDS))
             gi = progressiveShieldOot();
         break;
     /* Upgrades */
@@ -445,7 +466,7 @@ s16 comboProgressive(s16 gi, int ovflags)
         break;
     case GI_MM_OCARINA_FAIRY:
     case GI_MM_OCARINA_OF_TIME:
-        if (comboConfig(CFG_MM_OCARINA_FAIRY))
+        if (Config_Flag(CFG_MM_OCARINA_FAIRY))
             gi = progressiveOcarinaMm();
         break;
     case GI_MM_SWORD_KOKIRI:
@@ -454,12 +475,12 @@ s16 comboProgressive(s16 gi, int ovflags)
         gi = progressiveSwordMm();
         break;
     case GI_MM_GREAT_FAIRY_SWORD:
-        if (comboConfig(CFG_MM_PROGRESSIVE_GFS))
+        if (Config_Flag(CFG_MM_PROGRESSIVE_GFS))
             gi = progressiveSwordMm();
         break;
     case GI_MM_PROGRESSIVE_SHIELD_HERO:
     case GI_MM_SHIELD_MIRROR:
-        if (comboConfig(CFG_MM_PROGRESSIVE_SHIELDS))
+        if (Config_Flag(CFG_MM_PROGRESSIVE_SHIELDS))
             gi = progressiveShieldMm();
         break;
     case GI_MM_BOMB_BAG:
@@ -494,7 +515,7 @@ s16 comboProgressive(s16 gi, int ovflags)
         break;
     case GI_MM_SONG_GORON:
     case GI_MM_SONG_GORON_HALF:
-        if (comboConfig(CFG_MM_PROGRESSIVE_LULLABY))
+        if (Config_Flag(CFG_MM_PROGRESSIVE_LULLABY))
             gi = progressiveSongLullaby();
         break;
     case GI_MM_HOOKSHOT_SHORT:
@@ -507,7 +528,7 @@ s16 comboProgressive(s16 gi, int ovflags)
     case GI_MM_CLOCK4:
     case GI_MM_CLOCK5:
     case GI_MM_CLOCK6:
-        if (comboConfig(CFG_MM_CLOCKS_PROGRESSIVE))
+        if (Config_Flag(CFG_MM_CLOCKS_PROGRESSIVE))
             gi = progressiveClock();
         break;
     default:

@@ -1,7 +1,7 @@
 #ifndef COMBO_OOT_ITEM_ETC_H
 #define COMBO_OOT_ITEM_ETC_H
 
-#include <combo/common/actor.h>
+#include <combo/actor.h>
 
 typedef struct Actor_ItemEtcetera Actor_ItemEtcetera;
 

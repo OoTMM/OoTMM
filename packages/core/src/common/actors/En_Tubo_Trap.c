@@ -1,6 +1,8 @@
 #include <combo.h>
 #include <combo/item.h>
 #include <combo/csmc.h>
+#include <combo/global.h>
+#include <combo/actor.h>
 
 #if defined(GAME_OOT)
 # define ADDR_FUNC_INIT 0x80a77b30
@@ -52,7 +54,7 @@ static void EnTuboTrap_Draw(Actor_EnTuboTrap* this, GameState_Play* play)
     csmcPotPreDraw(&this->base, play, o.gi, CSMC_POT_NORMAL_DANGEON);
 
     /* Draw the pot */
-    DrawSimpleOpa(play, ADDR_DLIST);
+    Gfx_DrawDListOpa(play, (void*)ADDR_DLIST);
 }
 
 PATCH_FUNC(ADDR_FUNC_DRAW, EnTuboTrap_Draw);

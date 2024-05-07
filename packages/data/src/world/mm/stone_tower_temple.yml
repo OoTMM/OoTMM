@@ -75,7 +75,7 @@
     "Stone Tower Temple Water Bridge": "(can_goron_bomb_jump && can_use_ice_arrows) || short_hook_anywhere"
     "WARP_SONGS": "true"
   locations:
-    "Stone Tower Temple Center Sun Block Chest": "short_hook_anywhere || (can_goron_bomb_jump && can_use_ice_arrows && can_use_light_arrows) || (((has(MASK_DEKU) || has_explosives || (has_magic && (has_weapon && has(SPIN_UPGRADE))) || has(SWORD, 3) || has(GREAT_FAIRY_SWORD) || can_use_ice_arrows) && (has_mask_zora || soul_enemy(SOUL_ENEMY_DEXIHAND))) && can_use_light_arrows)"
+    "Stone Tower Temple Center Sun Block Chest": "short_hook_anywhere || (can_goron_bomb_jump && can_use_ice_arrows && can_use_light_arrows) || (((has(MASK_DEKU) || has_explosives || (has_magic && (has_weapon && has(SPIN_UPGRADE))) || has_sword_level(3) || has(GREAT_FAIRY_SWORD) || can_use_ice_arrows) && (has_mask_zora || soul_enemy(SOUL_ENEMY_DEXIHAND))) && can_use_light_arrows)"
     "Stone Tower Temple Rupee Center Room Left": "can_use_light_arrows || short_hook_anywhere"
 "Stone Tower Temple Center":
   dungeon: ST

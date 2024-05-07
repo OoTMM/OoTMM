@@ -55,11 +55,10 @@ export class LogicPassAnalysisFoolish {
     let lastBanished: Location | null = null;
 
     for (;;) {
-      const locs = Array.from(locations);
-      if (locs.length === 0) {
+      if (locations.size === 0) {
         break;
       }
-      const loc = sample(this.state.random, locs);
+      const loc = sample(this.state.random, locations);
       allowed.delete(loc);
       locations.delete(loc);
       forbidden.add(loc);
@@ -91,11 +90,10 @@ export class LogicPassAnalysisFoolish {
     let pathfinderState: PathfinderState | null = null;
 
     for (;;) {
-      const locs = Array.from(locations);
-      if (locs.length === 0) {
+      if (locations.size === 0) {
         break;
       }
-      const loc = sample(this.state.random, locs);
+      const loc = sample(this.state.random, locations);
       locations.delete(loc);
       forbidden.delete(loc);
       allowed.add(loc);

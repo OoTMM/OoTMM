@@ -1,6 +1,8 @@
 #include <combo.h>
 #include <combo/item.h>
 #include <combo/csmc.h>
+#include <combo/config.h>
+#include <combo/actor.h>
 
 void ObjGrass_GetXflag(Xflag* xflag, Actor_ObjGrass_PackBush* bush);
 
@@ -8,7 +10,7 @@ void ObjGrassCarry_SpawnDropsWrapper(Actor_ObjGrassCarry* this)
 {
     Xflag xflag;
 
-    if (comboConfig(CFG_MM_SHUFFLE_GRASS))
+    if (Config_Flag(CFG_MM_SHUFFLE_GRASS))
     {
         /* Extract the ID and build the xflag */
         ObjGrass_GetXflag(&xflag, this->bush);
@@ -33,7 +35,7 @@ static void ObjGrassCarry_Draw(Actor_ObjGrassCarry* this, GameState_Play* play)
     ComboItemOverride o;
 
     o.gi = 0;
-    if (comboConfig(CFG_MM_SHUFFLE_GRASS))
+    if (Config_Flag(CFG_MM_SHUFFLE_GRASS))
     {
         /* Extract the ID and build the xflag */
         ObjGrass_GetXflag(&xflag, this->bush);
@@ -47,7 +49,7 @@ static void ObjGrassCarry_Draw(Actor_ObjGrassCarry* this, GameState_Play* play)
     csmcGrassPreDraw(play, o.gi, CSMC_GRASS_NORMAL, 0, 0);
 
     /* Draw */
-    DrawSimpleOpa(play, 0x50078a0);
+    Gfx_DrawDListOpa(play, (void*)0x50078a0);
 }
 
 PATCH_FUNC(0x809abb7c, ObjGrassCarry_Draw);

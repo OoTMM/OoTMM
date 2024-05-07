@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/player.h>
 
 void EnZog_GiveItem(Actor* this, GameState_Play* play)
 {

@@ -1,8 +1,7 @@
 #include <combo.h>
 #include <combo/custom.h>
 #include <combo/dma.h>
-
-void* gCustomKeep;
+#include <combo/global.h>
 
 #define OBJECT_COUNT    64
 #define OBJECT_TTL      6
@@ -45,7 +44,7 @@ static const ObjectTexturePatch kObjectTexturePatches[] = {
     { 0x53390, 0x7df10 },
 };
 
-ALIGNED(16) ObjectData kCustomObjectsTable[0x30];
+ALIGNED(16) ObjectData kCustomObjectsTable[128];
 
 static const ObjectPatch kObjectPatches[] = {
 #if defined(GAME_OOT)
@@ -177,8 +176,8 @@ void comboLoadCustomKeep(void)
     u32 customKeepSize;
 
     customKeepSize = comboDmaLoadFile(NULL, CUSTOM_KEEP_VROM);
-    gCustomKeep = malloc(customKeepSize);
-    comboDmaLoadFile(gCustomKeep, CUSTOM_KEEP_VROM);
+    g.customKeep = malloc(customKeepSize);
+    comboDmaLoadFile(g.customKeep, CUSTOM_KEEP_VROM);
 }
 
 #if defined(GAME_OOT)

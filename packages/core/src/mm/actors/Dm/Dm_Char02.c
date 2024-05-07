@@ -1,5 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/player.h>
+#include <combo/draw.h>
 
 static void DmChar02_ItemQuery(ComboItemQuery* q, int npc)
 {
@@ -70,5 +72,5 @@ void DmChar02_DrawOcarina(Actor* this, GameState_Play* play)
     DmChar02_ItemOverride(&o, NPC_MM_SKULL_KID_OCARINA);
     ModelViewScale(scale, scale, scale, MAT_MUL);
     ModelViewTranslate(0.0f, 20.0f, 0.0f, MAT_MUL);
-    comboDrawGI(play, this, o.gi, DRAW_RAW);
+    Draw_Gi(play, this, o.gi, DRAW_RAW);
 }

@@ -110,17 +110,12 @@ export function HintEditor({ index }: HintEditorProps) {
       </td>
       <td>
         {hint.type === 'item' && (
-          <Select
-            className="plando-select dropdown-height"
-            classNamePrefix="react-select"
-            options={itemOptions}
-            onChange={(v) => onChangeItem(v?.value)}
-            value={selectedItem}
+          <Select className="plando-select dropdown-height" classNamePrefix="react-select" options={itemOptions} onChange={(v) => onChangeItem(v?.value)} value={selectedItem} 
             styles={{
-              dropdownIndicator: (styles) => ({
+                dropdownIndicator: (styles) => ({
                 ...styles,
                 padding: '4px',
-              }),
+                }),
             }}
           />
         )}

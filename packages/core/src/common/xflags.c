@@ -3,6 +3,7 @@
 #include <combo/item.h>
 #include <combo/custom.h>
 #include <combo/dma.h>
+#include <combo/io.h>
 
 static u16 bitPosLookup(const Xflag* xf, u32 paddrTableScenes, u32 paddrTableSetups, u32 paddrTableRooms)
 {

@@ -4,11 +4,12 @@ import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 
 import { Group } from './Group';
 import { Text } from './Text';
+import { Tooltip } from './Tooltip';
 
 type CheckboxProps = {
   label?: string;
   checked: boolean;
-  tooltip?: string;
+  tooltip?: React.ReactNode;
   onChange: (checked: boolean) => void;
 }
 
@@ -22,7 +23,7 @@ export const Checkbox = ({ label, checked, tooltip, onChange }: CheckboxProps) =
         />
         <Group direction='horizontal' spacing='xs' style={{paddingTop: '4px'}}>
           <Text size='xl'>{label}</Text>
-          {tooltip && <a className="tooltip-link" id={tooltip} href="#"><FontAwesomeIcon icon={faQuestionCircle}/></a>}
+          {tooltip && <Tooltip>{tooltip}</Tooltip>}
         </Group>
     </Group>
   </label>

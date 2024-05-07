@@ -3,7 +3,7 @@
 
 #include <combo/util.h>
 #include <combo/game_state.h>
-#include <combo/common/actor.h>
+#include <combo/actor.h>
 #include <combo/oot/regs.h>
 #include <combo/common/color.h>
 

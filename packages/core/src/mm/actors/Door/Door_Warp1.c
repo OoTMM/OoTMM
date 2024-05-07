@@ -1,5 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/player.h>
+#include <combo/draw.h>
 
 typedef struct
 {
@@ -152,7 +154,7 @@ void DoorWarp1_AfterDraw(Actor* this, GameState_Play* play)
     ModelViewTranslate(this->world.pos.x, this->world.pos.y + 35.f, this->world.pos.z, MAT_SET);
     ModelViewScale(0.35f, 0.35f, 0.35f, MAT_MUL);
     ModelViewRotateY(angle, MAT_MUL);
-    comboDrawGI(play, this, gi, DRAW_RAW);
+    Draw_Gi(play, this, gi, DRAW_RAW);
 }
 
 PATCH_FUNC(0x808b866c, DoorWarp1_ShouldTrigger);

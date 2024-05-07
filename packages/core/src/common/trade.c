@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/inventory.h>
 
 const u8 kOotTradeAdult[] = {
     ITEM_OOT_POCKET_EGG,

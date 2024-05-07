@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/draw.h>
 
 static void ItemBHeart_ItemQuery(ComboItemQuery* q, Actor* this, GameState_Play* play)
 {
@@ -28,7 +29,7 @@ static void ItemBHeart_Draw(Actor* this, GameState_Play* play)
 
     ItemBHeart_ItemQuery(&q, this, play);
     comboItemOverride(&o, &q);
-    comboDrawGI(play, this, o.gi, 0);
+    Draw_Gi(play, this, o.gi, 0);
 }
 
 PATCH_FUNC(0x80909620, ItemBHeart_Draw);

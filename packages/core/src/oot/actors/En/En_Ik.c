@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/actor.h>
 
 typedef void (*EnIk_SetupDieFunc)(Actor*);
 

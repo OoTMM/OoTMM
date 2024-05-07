@@ -1,7 +1,7 @@
 #ifndef COMBO_COMMON_ACTOR_ENGIRLA_H
 #define COMBO_COMMON_ACTOR_ENGIRLA_H
 
-#include <combo/common/actor.h>
+#include <combo/actor.h>
 #include <combo/util.h>
 #include <combo/types.h>
 

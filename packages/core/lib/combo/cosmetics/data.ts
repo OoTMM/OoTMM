@@ -1,4 +1,8 @@
 export const COSMETICS = [{
+  key: 'defaultHold',
+  name: 'Default Hold Target',
+  type: 'boolean',
+}, {
   key: 'ootTunicKokiri',
   name: 'OoT Kokiri Tunic',
   type: 'color',

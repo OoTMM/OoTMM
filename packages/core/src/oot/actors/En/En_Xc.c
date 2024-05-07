@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/player.h>
 
 static int checkSetEvent(Actor* actor, int event)
 {

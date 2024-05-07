@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/text.h>
 #include <combo/item.h>
+#include <combo/config.h>
 
 typedef struct
 {
@@ -186,7 +187,7 @@ static int isItemAmbiguous(s16 gi)
     case GI_MM_ARROWS_10:
     case GI_MM_ARROWS_30:
     case GI_MM_ARROWS_40:
-        return !comboConfig(CFG_SHARED_BOWS);
+        return !Config_Flag(CFG_SHARED_BOWS);
     case GI_OOT_BOMB_BAG:
     case GI_OOT_BOMB_BAG2:
     case GI_OOT_BOMB_BAG3:
@@ -203,7 +204,7 @@ static int isItemAmbiguous(s16 gi)
     case GI_MM_BOMBS_10:
     case GI_MM_BOMBS_20:
     case GI_MM_BOMBS_30:
-        return !comboConfig(CFG_SHARED_BOMB_BAGS);
+        return !Config_Flag(CFG_SHARED_BOMB_BAGS);
     case GI_OOT_MAGIC_UPGRADE:
     case GI_OOT_MAGIC_UPGRADE2:
     case GI_OOT_MAGIC_JAR_SMALL:
@@ -212,31 +213,31 @@ static int isItemAmbiguous(s16 gi)
     case GI_MM_MAGIC_UPGRADE2:
     case GI_MM_MAGIC_JAR_SMALL:
     case GI_MM_MAGIC_JAR_LARGE:
-        return !comboConfig(CFG_SHARED_MAGIC);
+        return !Config_Flag(CFG_SHARED_MAGIC);
     case GI_OOT_ARROW_FIRE:
     case GI_MM_ARROW_FIRE:
-        return !comboConfig(CFG_SHARED_MAGIC_ARROW_FIRE);
+        return !Config_Flag(CFG_SHARED_MAGIC_ARROW_FIRE);
     case GI_OOT_ARROW_ICE:
     case GI_MM_ARROW_ICE:
-        return !comboConfig(CFG_SHARED_MAGIC_ARROW_ICE);
+        return !Config_Flag(CFG_SHARED_MAGIC_ARROW_ICE);
     case GI_OOT_ARROW_LIGHT:
     case GI_MM_ARROW_LIGHT:
-        return !comboConfig(CFG_SHARED_MAGIC_ARROW_LIGHT);
+        return !Config_Flag(CFG_SHARED_MAGIC_ARROW_LIGHT);
     case GI_OOT_SONG_EPONA:
     case GI_MM_SONG_EPONA:
-        return !comboConfig(CFG_SHARED_SONG_EPONA);
+        return !Config_Flag(CFG_SHARED_SONG_EPONA);
     case GI_OOT_SONG_STORMS:
     case GI_MM_SONG_STORMS:
-        return !comboConfig(CFG_SHARED_SONG_STORMS);
+        return !Config_Flag(CFG_SHARED_SONG_STORMS);
     case GI_OOT_SONG_TIME:
     case GI_MM_SONG_TIME:
-        return !comboConfig(CFG_SHARED_SONG_TIME);
+        return !Config_Flag(CFG_SHARED_SONG_TIME);
     case GI_OOT_SONG_SUN:
     case GI_MM_SONG_SUN:
-        return !(comboConfig(CFG_SHARED_SONG_SUN) || !comboConfig(CFG_MM_SONG_SUN));
+        return !(Config_Flag(CFG_SHARED_SONG_SUN) || !Config_Flag(CFG_MM_SONG_SUN));
     case GI_OOT_SONG_EMPTINESS:
     case GI_MM_SONG_EMPTINESS:
-        return !(comboConfig(CFG_SHARED_SONG_EMPTINESS) || !comboConfig(CFG_OOT_SONG_EMPTINESS));
+        return !(Config_Flag(CFG_SHARED_SONG_EMPTINESS) || !Config_Flag(CFG_OOT_SONG_EMPTINESS));
     case GI_OOT_STICK:
     case GI_OOT_STICKS_5:
     case GI_OOT_STICKS_10:
@@ -247,41 +248,41 @@ static int isItemAmbiguous(s16 gi)
     case GI_MM_NUT:
     case GI_MM_NUTS_5:
     case GI_MM_NUTS_10:
-        return !comboConfig(CFG_SHARED_NUTS_STICKS);
+        return !Config_Flag(CFG_SHARED_NUTS_STICKS);
     case GI_OOT_HOOKSHOT:
     case GI_MM_HOOKSHOT:
     case GI_MM_HOOKSHOT_SHORT:
-        return !comboConfig(CFG_SHARED_HOOKSHOT);
+        return !Config_Flag(CFG_SHARED_HOOKSHOT);
     case GI_OOT_LENS:
     case GI_MM_LENS:
-        return !comboConfig(CFG_SHARED_LENS);
+        return !Config_Flag(CFG_SHARED_LENS);
     case GI_OOT_OCARINA_FAIRY:
-        return (comboConfig(CFG_MM_OCARINA_FAIRY) && !comboConfig(CFG_SHARED_OCARINA));
+        return (Config_Flag(CFG_MM_OCARINA_FAIRY) && !Config_Flag(CFG_SHARED_OCARINA));
     case GI_OOT_OCARINA_TIME:
     case GI_MM_OCARINA_FAIRY:
     case GI_MM_OCARINA_OF_TIME:
-        return !comboConfig(CFG_SHARED_OCARINA);
+        return !Config_Flag(CFG_SHARED_OCARINA);
     case GI_OOT_MASK_KEATON:
     case GI_MM_MASK_KEATON:
-        return !comboConfig(CFG_SHARED_MASK_KEATON);
+        return !Config_Flag(CFG_SHARED_MASK_KEATON);
     case GI_OOT_MASK_BUNNY:
     case GI_MM_MASK_BUNNY:
-        return !comboConfig(CFG_SHARED_MASK_BUNNY);
+        return !Config_Flag(CFG_SHARED_MASK_BUNNY);
     case GI_OOT_MASK_GORON:
     case GI_MM_MASK_GORON:
-        return !comboConfig(CFG_SHARED_MASK_GORON);
+        return !Config_Flag(CFG_SHARED_MASK_GORON);
     case GI_OOT_MASK_ZORA:
     case GI_MM_MASK_ZORA:
-        return !comboConfig(CFG_SHARED_MASK_ZORA);
+        return !Config_Flag(CFG_SHARED_MASK_ZORA);
     case GI_OOT_MASK_TRUTH:
     case GI_MM_MASK_TRUTH:
-        return !comboConfig(CFG_SHARED_MASK_TRUTH);
+        return !Config_Flag(CFG_SHARED_MASK_TRUTH);
     case GI_OOT_MASK_BLAST:
     case GI_MM_MASK_BLAST:
-        return (comboConfig(CFG_OOT_MASK_BLAST) && !comboConfig(CFG_SHARED_MASK_BLAST));
+        return (Config_Flag(CFG_OOT_MASK_BLAST) && !Config_Flag(CFG_SHARED_MASK_BLAST));
     case GI_OOT_MASK_STONE:
     case GI_MM_MASK_STONE:
-        return (comboConfig(CFG_OOT_MASK_STONE) && !comboConfig(CFG_SHARED_MASK_STONE));
+        return (Config_Flag(CFG_OOT_MASK_STONE) && !Config_Flag(CFG_SHARED_MASK_STONE));
     case GI_OOT_WALLET:
     case GI_OOT_WALLET2:
     case GI_OOT_WALLET3:
@@ -305,7 +306,7 @@ static int isItemAmbiguous(s16 gi)
     case GI_MM_RUPEE_SILVER:
     case GI_MM_RUPEE_GOLD:
     case GI_MM_TRAP_RUPOOR:
-        return !comboConfig(CFG_SHARED_WALLETS);
+        return !Config_Flag(CFG_SHARED_WALLETS);
     case GI_OOT_HEART_CONTAINER:
     case GI_OOT_HEART_CONTAINER2:
     case GI_OOT_HEART_PIECE:
@@ -315,7 +316,7 @@ static int isItemAmbiguous(s16 gi)
     case GI_MM_HEART_PIECE:
     case GI_MM_RECOVERY_HEART:
     case GI_MM_DEFENSE_UPGRADE:
-        return !comboConfig(CFG_SHARED_HEALTH);
+        return !Config_Flag(CFG_SHARED_HEALTH);
     case GI_OOT_SOUL_ENEMY_OCTOROK:
     case GI_OOT_SOUL_ENEMY_WALLMASTER:
     case GI_OOT_SOUL_ENEMY_DODONGO:
@@ -366,15 +367,86 @@ static int isItemAmbiguous(s16 gi)
     case GI_MM_SOUL_ENEMY_FLOORMASTER:
     case GI_MM_SOUL_ENEMY_LEEVER:
     case GI_MM_SOUL_ENEMY_STALCHILD:
-        return !comboConfig(CFG_SHARED_SOULS_ENEMY);
+        return !Config_Flag(CFG_SHARED_SOULS_ENEMY);
+    case GI_OOT_SOUL_NPC_SHOOTING_GALLERY_OWNER:
+    case GI_OOT_SOUL_NPC_BAZAAR_SHOPKEEPER:
+    case GI_OOT_SOUL_NPC_GORON:
+    case GI_OOT_SOUL_NPC_GORON_CHILD:
+    case GI_OOT_SOUL_NPC_BOMBCHU_SHOPKEEPER:
+    case GI_OOT_SOUL_NPC_BOMBERS:
+    case GI_OOT_SOUL_NPC_CITIZEN:
+    case GI_OOT_SOUL_NPC_COMPOSER_BROS:
+    case GI_OOT_SOUL_NPC_DAMPE:
+    case GI_OOT_SOUL_NPC_CHEST_GAME_OWNER:
+    case GI_OOT_SOUL_NPC_GORON_SHOPKEEPER:
+    case GI_OOT_SOUL_NPC_HONEY_DARLING:
+    case GI_OOT_SOUL_NPC_RUTO:
+    case GI_OOT_SOUL_NPC_MEDIGORON:
+    case GI_OOT_SOUL_NPC_BIGGORON:
+    case GI_OOT_SOUL_NPC_TALON:
+    case GI_OOT_SOUL_NPC_ASTRONOMER:
+    case GI_OOT_SOUL_NPC_POE_COLLECTOR:
+    case GI_OOT_SOUL_NPC_BOMBCHU_BOWLING_LADY:
+    case GI_OOT_SOUL_NPC_FISHING_POND_OWNER:
+    case GI_OOT_SOUL_NPC_ROOFTOP_MAN:
+    case GI_OOT_SOUL_NPC_ZORA:
+    case GI_OOT_SOUL_NPC_ZORA_SHOPKEEPER:
+    case GI_OOT_SOUL_NPC_MALON:
+    case GI_OOT_SOUL_NPC_BEAN_SALESMAN:
+    case GI_OOT_SOUL_NPC_CARPENTERS:
+    case GI_OOT_SOUL_NPC_ANJU:
+    case GI_OOT_SOUL_NPC_GURU_GURU:
+    case GI_OOT_SOUL_NPC_SCIENTIST:
+    case GI_OOT_SOUL_NPC_GORMAN:
+    case GI_OOT_SOUL_NPC_GROG:
+    case GI_OOT_SOUL_NPC_DOG_LADY:
+    case GI_OOT_SOUL_NPC_CARPET_MAN:
+    case GI_OOT_SOUL_NPC_OLD_HAG:
+    case GI_OOT_SOUL_NPC_BANKER:
+    case GI_MM_SOUL_NPC_SHOOTING_GALLERY_OWNER:
+    case GI_MM_SOUL_NPC_BAZAAR_SHOPKEEPER:
+    case GI_MM_SOUL_NPC_GORON:
+    case GI_MM_SOUL_NPC_GORON_CHILD:
+    case GI_MM_SOUL_NPC_BOMBCHU_SHOPKEEPER:
+    case GI_MM_SOUL_NPC_BOMBERS:
+    case GI_MM_SOUL_NPC_CITIZEN:
+    case GI_MM_SOUL_NPC_COMPOSER_BROS:
+    case GI_MM_SOUL_NPC_DAMPE:
+    case GI_MM_SOUL_NPC_CHEST_GAME_OWNER:
+    case GI_MM_SOUL_NPC_GORON_SHOPKEEPER:
+    case GI_MM_SOUL_NPC_HONEY_DARLING:
+    case GI_MM_SOUL_NPC_RUTO:
+    case GI_MM_SOUL_NPC_MEDIGORON:
+    case GI_MM_SOUL_NPC_BIGGORON:
+    case GI_MM_SOUL_NPC_TALON:
+    case GI_MM_SOUL_NPC_ASTRONOMER:
+    case GI_MM_SOUL_NPC_POE_COLLECTOR:
+    case GI_MM_SOUL_NPC_BOMBCHU_BOWLING_LADY:
+    case GI_MM_SOUL_NPC_FISHING_POND_OWNER:
+    case GI_MM_SOUL_NPC_ROOFTOP_MAN:
+    case GI_MM_SOUL_NPC_ZORA:
+    case GI_MM_SOUL_NPC_ZORA_SHOPKEEPER:
+    case GI_MM_SOUL_NPC_MALON:
+    case GI_MM_SOUL_NPC_BEAN_SALESMAN:
+    case GI_MM_SOUL_NPC_CARPENTERS:
+    case GI_MM_SOUL_NPC_ANJU:
+    case GI_MM_SOUL_NPC_GURU_GURU:
+    case GI_MM_SOUL_NPC_SCIENTIST:
+    case GI_MM_SOUL_NPC_GORMAN:
+    case GI_MM_SOUL_NPC_GROG:
+    case GI_MM_SOUL_NPC_DOG_LADY:
+    case GI_MM_SOUL_NPC_CARPET_MAN:
+    case GI_MM_SOUL_NPC_OLD_HAG:
+    case GI_MM_SOUL_NPC_BANKER:
+        return !Config_Flag(CFG_SHARED_SOULS_NPC);
     case GI_OOT_SOUL_MISC_GS:
     case GI_OOT_SOUL_MISC_BUSINESS_SCRUB:
     case GI_MM_SOUL_MISC_GS:
     case GI_MM_SOUL_MISC_BUSINESS_SCRUB:
-        return !comboConfig(CFG_SHARED_SOULS_MISC);
+        return !Config_Flag(CFG_SHARED_SOULS_MISC);
     case GI_OOT_SKELETON_KEY:
     case GI_MM_SKELETON_KEY:
-        return !comboConfig(CFG_SHARED_SKELETON_KEY);
+        return !Config_Flag(CFG_SHARED_SKELETON_KEY);
     case GI_OOT_BUTTON_A:
     case GI_OOT_BUTTON_C_RIGHT:
     case GI_OOT_BUTTON_C_LEFT:
@@ -385,12 +457,12 @@ static int isItemAmbiguous(s16 gi)
     case GI_MM_BUTTON_C_LEFT:
     case GI_MM_BUTTON_C_DOWN:
     case GI_MM_BUTTON_C_UP:
-        return !comboConfig(CFG_SHARED_OCARINA_BUTTONS);
+        return !Config_Flag(CFG_SHARED_OCARINA_BUTTONS);
     case GI_OOT_SHIELD_HYLIAN:
     case GI_OOT_SHIELD_MIRROR:
     case GI_MM_SHIELD_HERO:
     case GI_MM_SHIELD_MIRROR:
-        return !comboConfig(CFG_SHARED_SHIELDS);
+        return !Config_Flag(CFG_SHARED_SHIELDS);
     case GI_OOT_BOMBCHU_5:
     case GI_OOT_BOMBCHU_10:
     case GI_OOT_BOMBCHU_20:
@@ -405,48 +477,51 @@ static int isItemAmbiguous(s16 gi)
     case GI_MM_BOMBCHU_BAG_5:
     case GI_MM_BOMBCHU_BAG_10:
     case GI_MM_BOMBCHU_BAG_20:
-        return !comboConfig(CFG_SHARED_BOMBCHU);
+        return !Config_Flag(CFG_SHARED_BOMBCHU);
     case GI_OOT_SPELL_FIRE:
     case GI_MM_SPELL_FIRE:
-        return (comboConfig(CFG_MM_SPELL_FIRE) && !comboConfig(CFG_SHARED_SPELL_FIRE));
+        return (Config_Flag(CFG_MM_SPELL_FIRE) && !Config_Flag(CFG_SHARED_SPELL_FIRE));
     case GI_OOT_SPELL_WIND:
     case GI_MM_SPELL_WIND:
-        return (comboConfig(CFG_MM_SPELL_WIND) && !comboConfig(CFG_SHARED_SPELL_WIND));
+        return (Config_Flag(CFG_MM_SPELL_WIND) && !Config_Flag(CFG_SHARED_SPELL_WIND));
     case GI_OOT_SPELL_LOVE:
     case GI_MM_SPELL_LOVE:
-        return (comboConfig(CFG_MM_SPELL_LOVE) && !comboConfig(CFG_SHARED_SPELL_LOVE));
+        return (Config_Flag(CFG_MM_SPELL_LOVE) && !Config_Flag(CFG_SHARED_SPELL_LOVE));
     case GI_OOT_BOOTS_IRON:
     case GI_MM_BOOTS_IRON:
-        return (comboConfig(CFG_MM_BOOTS_IRON) && !comboConfig(CFG_SHARED_BOOTS_IRON));
+        return (Config_Flag(CFG_MM_BOOTS_IRON) && !Config_Flag(CFG_SHARED_BOOTS_IRON));
     case GI_OOT_BOOTS_HOVER:
     case GI_MM_BOOTS_HOVER:
-        return (comboConfig(CFG_MM_BOOTS_HOVER) && !comboConfig(CFG_SHARED_BOOTS_HOVER));
+        return (Config_Flag(CFG_MM_BOOTS_HOVER) && !Config_Flag(CFG_SHARED_BOOTS_HOVER));
     case GI_OOT_TUNIC_GORON:
     case GI_MM_TUNIC_GORON:
-        return (comboConfig(CFG_MM_TUNIC_GORON) && !comboConfig(CFG_SHARED_TUNIC_GORON));
-        break;
+        return (Config_Flag(CFG_MM_TUNIC_GORON) && !Config_Flag(CFG_SHARED_TUNIC_GORON));
     case GI_OOT_TUNIC_ZORA:
     case GI_MM_TUNIC_ZORA:
-        return (comboConfig(CFG_MM_TUNIC_ZORA) && !comboConfig(CFG_SHARED_TUNIC_ZORA));
-        break;
+        return (Config_Flag(CFG_MM_TUNIC_ZORA) && !Config_Flag(CFG_SHARED_TUNIC_ZORA));
     case GI_OOT_SCALE_SILVER:
     case GI_OOT_SCALE_GOLDEN:
     case GI_MM_SCALE_SILVER:
     case GI_MM_SCALE_GOLDEN:
-        return (comboConfig(CFG_MM_SCALES) && !comboConfig(CFG_SHARED_SCALES));
-        break;
+        return (Config_Flag(CFG_MM_SCALES) && !Config_Flag(CFG_SHARED_SCALES));
     case GI_OOT_GORON_BRACELET:
     case GI_OOT_SILVER_GAUNTLETS:
     case GI_OOT_GOLDEN_GAUNTLETS:
     case GI_MM_GORON_BRACELET:
     case GI_MM_SILVER_GAUNTLETS:
     case GI_MM_GOLDEN_GAUNTLETS:
-        return (comboConfig(CFG_MM_STRENGTH) && !comboConfig(CFG_SHARED_STRENGTH));
-        break;
+        return (Config_Flag(CFG_MM_STRENGTH) && !Config_Flag(CFG_SHARED_STRENGTH));
+    case GI_OOT_SWORD_KOKIRI:
+    case GI_MM_SWORD_KOKIRI:
+        return !Config_Flag(CFG_SHARED_SWORDS);
+    case GI_OOT_SWORD_RAZOR:
+    case GI_OOT_SWORD_GILDED:
+    case GI_MM_SWORD_RAZOR:
+    case GI_MM_SWORD_GILDED:
+        return Config_Flag(CFG_OOT_EXTRA_CHILD_SWORDS) && !Config_Flag(CFG_SHARED_SWORDS);
     case GI_OOT_MAGIC_BEAN:
     case GI_OOT_BOTTLE_EMPTY:
     case GI_OOT_BOTTLE_MILK:
-    case GI_OOT_SWORD_KOKIRI:
     case GI_OOT_MILK:
     case GI_OOT_POTION_RED:
     case GI_OOT_POTION_GREEN:
@@ -470,7 +545,6 @@ static int isItemAmbiguous(s16 gi)
     case GI_MM_BOTTLE_POE:
     case GI_MM_BOTTLE_BIG_POE:
     case GI_MM_BOTTLE_EMPTY:
-    case GI_MM_SWORD_KOKIRI:
     case GI_MM_BOTTLE_MILK:
     case GI_MM_MILK:
     case GI_MM_POTION_RED:
@@ -669,10 +743,83 @@ void comboTextAppendItemName(char** b, s16 gi, int flags)
     comboTextAppendItemNameEx(b, gi, flags, -1);
 }
 
+static const char* nameOverride(s16 gi)
+{
+    if (Config_Flag(CFG_SHARED_SOULS_NPC))
+    {
+        switch (gi)
+        {
+        case GI_OOT_SOUL_NPC_SHOOTING_GALLERY_OWNER:
+        case GI_MM_SOUL_NPC_SHOOTING_GALLERY_OWNER:
+            return "the " TEXT_C1 "Soul of the Shooting Gallery/Town Archery Owner";
+        case GI_OOT_SOUL_NPC_BAZAAR_SHOPKEEPER:
+        case GI_MM_SOUL_NPC_BAZAAR_SHOPKEEPER:
+            return "the " TEXT_C1 "Soul of the Bazaar/Swamp Archery Owner";
+        case GI_OOT_SOUL_NPC_GORON_CHILD:
+        case GI_MM_SOUL_NPC_GORON_CHILD:
+            return "the " TEXT_C1 "Soul of the Goron Child/Baby";
+        case GI_OOT_SOUL_NPC_BOMBCHU_SHOPKEEPER:
+        case GI_MM_SOUL_NPC_BOMBCHU_SHOPKEEPER:
+            return "the " TEXT_C1 "Soul of the Bombchu/Bomb Shop Owner";
+        case GI_OOT_SOUL_NPC_BOMBERS:
+        case GI_MM_SOUL_NPC_BOMBERS:
+            return "the " TEXT_C1 "Soul of the Graveyard Kid/Bombers";
+        case GI_OOT_SOUL_NPC_CHEST_GAME_OWNER:
+        case GI_MM_SOUL_NPC_CHEST_GAME_OWNER:
+            return "the " TEXT_C1 "Soul of the Chest Game Owner/Fisherman";
+        case GI_OOT_SOUL_NPC_RUTO:
+        case GI_MM_SOUL_NPC_RUTO:
+            return "the " TEXT_C1 "Soul of Ruto/Lulu";
+        case GI_OOT_SOUL_NPC_MEDIGORON:
+        case GI_MM_SOUL_NPC_MEDIGORON:
+            return "the " TEXT_C1 "Soul of Medigoron/Keg Trial Goron";
+        case GI_OOT_SOUL_NPC_TALON:
+        case GI_MM_SOUL_NPC_TALON:
+            return "the " TEXT_C1 "Soul of Talon/Mr. Barten";
+        case GI_OOT_SOUL_NPC_POE_COLLECTOR:
+        case GI_MM_SOUL_NPC_POE_COLLECTOR:
+            return "the " TEXT_C1 "Soul of Poe Collector/Ghost Hut Owner";
+        case GI_OOT_SOUL_NPC_BOMBCHU_BOWLING_LADY:
+        case GI_MM_SOUL_NPC_BOMBCHU_BOWLING_LADY:
+            return "the " TEXT_C1 "Soul of Bombchu Bowling/Chest Game Lady";
+        case GI_OOT_SOUL_NPC_FISHING_POND_OWNER:
+        case GI_MM_SOUL_NPC_FISHING_POND_OWNER:
+            return "the " TEXT_C1 "Soul of Fishing Pond/Trading Post Owner";
+        case GI_OOT_SOUL_NPC_ROOFTOP_MAN:
+        case GI_MM_SOUL_NPC_ROOFTOP_MAN:
+            return "the " TEXT_C1 "Soul of Rooftop Man/Part-Timer";
+        case GI_OOT_SOUL_NPC_MALON:
+        case GI_MM_SOUL_NPC_MALON:
+            return "the " TEXT_C1 "Soul of Malon/Romani/Cremia";
+        case GI_OOT_SOUL_NPC_ANJU:
+        case GI_MM_SOUL_NPC_ANJU:
+            return "the " TEXT_C1 "Soul of Cucco Lady/Anju";
+        case GI_OOT_SOUL_NPC_GORMAN:
+        case GI_MM_SOUL_NPC_GORMAN:
+            return "the " TEXT_C1 "Soul of Ingo/Gorman & Bros.";
+        case GI_OOT_SOUL_NPC_GROG:
+        case GI_MM_SOUL_NPC_GROG:
+            return "the " TEXT_C1 "Soul of the Punk Kid/Grog";
+        case GI_OOT_SOUL_NPC_CARPET_MAN:
+        case GI_MM_SOUL_NPC_CARPET_MAN:
+            return "the " TEXT_C1 "Soul of the Carpet Man/Swordsman";
+        case GI_OOT_SOUL_NPC_OLD_HAG:
+        case GI_MM_SOUL_NPC_OLD_HAG:
+            return "the " TEXT_C1 "Soul of the Old Hag/Anju's Grandmother";
+        case GI_OOT_SOUL_NPC_BANKER:
+        case GI_MM_SOUL_NPC_BANKER:
+            return "the " TEXT_C1 "Soul of the Beggar/Banker";
+        }
+    }
+
+    return NULL;
+}
+
 void comboTextAppendItemNameEx(char** b, s16 gi, int flags, int importance)
 {
     char* start;
     const char* itemName;
+    const char* tmp;
     int ambiguous;
 
     ambiguous = isItemAmbiguous(gi);
@@ -680,7 +827,7 @@ void comboTextAppendItemNameEx(char** b, s16 gi, int flags, int importance)
 
     if (gi == GI_OOT_ARROW_ICE)
     {
-        if (comboConfig(CFG_OOT_BLUE_FIRE_ARROWS))
+        if (Config_Flag(CFG_OOT_BLUE_FIRE_ARROWS))
         {
             itemName = "the " TEXT_C1 "Blue Fire Arrows";
             ambiguous = 0;
@@ -689,58 +836,63 @@ void comboTextAppendItemNameEx(char** b, s16 gi, int flags, int importance)
 
     if (gi == GI_OOT_ARROW_LIGHT)
     {
-        if (comboConfig(CFG_OOT_SUNLIGHT_ARROWS))
+        if (Config_Flag(CFG_OOT_SUNLIGHT_ARROWS))
         {
             itemName = "the " TEXT_C1 "Sunlight Arrows";
             ambiguous = 0;
         }
     }
 
-    if(gi == GI_MM_BOMBER_NOTEBOOK)
+    if (gi == GI_MM_BOMBER_NOTEBOOK)
     {
-        if(comboConfig(CFG_MENU_NOTEBOOK))
+        if(Config_Flag(CFG_MENU_NOTEBOOK))
             itemName = "the " TEXT_C1 "Bombers' Tracker";
     }
+
+    tmp = nameOverride(gi);
+    if (tmp)
+        itemName = tmp;
+
     if (flags & TF_PROGRESSIVE)
     {
         switch (gi)
         {
         case GI_OOT_SWORD_KOKIRI:
-            if (comboConfig(CFG_OOT_PROGRESSIVE_SWORDS))
+            if (Config_Flag(CFG_OOT_PROGRESSIVE_SWORDS) || Config_Flag(CFG_OOT_EXTRA_CHILD_SWORDS))
             {
                 itemName = "a " TEXT_C1 "Progressive Sword";
-                ambiguous = 1;
+                ambiguous = !Config_Flag(CFG_SHARED_SWORDS);
             }
             break;
         case GI_OOT_SWORD_KNIFE:
-            if (comboConfig(CFG_OOT_PROGRESSIVE_SWORDS_GORON))
+            if (Config_Flag(CFG_OOT_PROGRESSIVE_SWORDS_GORON))
             {
                 itemName = "a " TEXT_C1 "Progressive Goron Sword";
             }
             break;
         case GI_MM_SWORD_KOKIRI:
             itemName = "a " TEXT_C1 "Progressive Sword";
-            ambiguous = 1;
+            ambiguous = !Config_Flag(CFG_SHARED_SWORDS);
             break;
         case GI_OOT_PROGRESSIVE_SHIELD_DEKU:
         case GI_MM_PROGRESSIVE_SHIELD_HERO:
             itemName = "a " TEXT_C1 "Progressive Shield";
-            ambiguous = !comboConfig(CFG_SHARED_SHIELDS);
+            ambiguous = !Config_Flag(CFG_SHARED_SHIELDS);
             break;
         case GI_OOT_OCARINA_FAIRY:
         case GI_MM_OCARINA_FAIRY:
             itemName = "a " TEXT_C1 "Progressive Ocarina";
-            ambiguous = !comboConfig(CFG_SHARED_OCARINA);
+            ambiguous = !Config_Flag(CFG_SHARED_OCARINA);
             break;
         case GI_OOT_HOOKSHOT:
         case GI_MM_HOOKSHOT_SHORT:
             itemName = "a " TEXT_C1 "Progressive Hookshot";
-            ambiguous = !comboConfig(CFG_SHARED_HOOKSHOT);
+            ambiguous = !Config_Flag(CFG_SHARED_HOOKSHOT);
             break;
         case GI_OOT_WALLET:
         case GI_MM_WALLET:
             itemName = "a " TEXT_C1 "Progressive Wallet";
-            ambiguous = !comboConfig(CFG_SHARED_WALLETS);
+            ambiguous = !Config_Flag(CFG_SHARED_WALLETS);
             break;
         case GI_MM_SONG_GORON_HALF:
             itemName = "a " TEXT_C2 "Progressive Goron Lullaby";
@@ -748,36 +900,36 @@ void comboTextAppendItemNameEx(char** b, s16 gi, int flags, int importance)
         case GI_OOT_SCALE_SILVER:
         case GI_MM_SCALE_SILVER:
             itemName = "a " TEXT_C1 "Progressive Scale";
-            ambiguous = !comboConfig(CFG_SHARED_SCALES) && comboConfig(CFG_MM_SCALES);
+            ambiguous = !Config_Flag(CFG_SHARED_SCALES) && Config_Flag(CFG_MM_SCALES);
             break;
         case GI_OOT_GORON_BRACELET:
         case GI_MM_GORON_BRACELET:
             itemName = "a " TEXT_C1 "Progressive Strength";
-            ambiguous = !comboConfig(CFG_SHARED_STRENGTH) && comboConfig(CFG_MM_STRENGTH);
+            ambiguous = !Config_Flag(CFG_SHARED_STRENGTH) && Config_Flag(CFG_MM_STRENGTH);
             break;
         case GI_OOT_BOW:
         case GI_MM_BOW:
-            if (comboConfig(CFG_SHARED_BOWS))
+            if (Config_Flag(CFG_SHARED_BOWS))
             {
                 itemName = "a " TEXT_C1 "Bow";
                 ambiguous = 0;
             }
             break;
         case GI_MM_CLOCK1:
-            if (comboConfig(CFG_MM_CLOCKS_PROGRESSIVE))
+            if (Config_Flag(CFG_MM_CLOCKS_PROGRESSIVE))
                 itemName = "a " TEXT_C1 "Progressive Clock";
             break;
         case GI_OOT_BOMBCHU_5:
         case GI_OOT_BOMBCHU_10:
         case GI_OOT_BOMBCHU_20:
-            if (comboConfig(CFG_OOT_BOMBCHU_BAG))
+            if (Config_Flag(CFG_OOT_BOMBCHU_BAG))
                 itemName = TEXT_C1 "Bombchu"; /* Generic term for pack or bag */
             break;
         case GI_MM_BOMBCHU:
         case GI_MM_BOMBCHU_5:
         case GI_MM_BOMBCHU_10:
         case GI_MM_BOMBCHU_20:
-            if (comboConfig(CFG_MM_BOMBCHU_BAG))
+            if (Config_Flag(CFG_MM_BOMBCHU_BAG))
                 itemName = TEXT_C1 "Bombchu"; /* Generic term for pack or bag */
             break;
         }
@@ -788,7 +940,7 @@ void comboTextAppendItemNameEx(char** b, s16 gi, int flags, int importance)
     comboTextAppendStr(b, itemName);
     comboTextAppendClearColor(b);
 
-    if (ambiguous)
+    if (ambiguous && !Config_Flag(CFG_ONLY_OOT) && !Config_Flag(CFG_ONLY_MM))
     {
         comboTextAppendStr(b, " (");
         if (gi >= GI_MM_RUPEE_GREEN)
@@ -838,14 +990,14 @@ void comboTextAppendItemNameOverrideEx(char** b, const ComboItemOverride* o, int
     else
         gi = o->gi;
     comboTextAppendItemNameEx(b, gi, flags, importance);
-    if (o->player != PLAYER_SELF && o->player != PLAYER_ALL && o->player != gComboData.playerId)
+    if (o->player != PLAYER_SELF && o->player != PLAYER_ALL && o->player != gComboConfig.playerId)
     {
         comboTextAppendStr(b, " for " TEXT_COLOR_YELLOW "Player ");
         comboTextAppendNum(b, o->player);
         comboTextAppendClearColor(b);
     }
 
-    if (o->playerFrom != PLAYER_SELF && o->playerFrom != PLAYER_ALL && o->playerFrom != gComboData.playerId)
+    if (o->playerFrom != PLAYER_SELF && o->playerFrom != PLAYER_ALL && o->playerFrom != gComboConfig.playerId)
     {
         comboTextAppendStr(b, " from " TEXT_COLOR_YELLOW "Player ");
         comboTextAppendNum(b, o->playerFrom);
@@ -879,7 +1031,7 @@ void comboTextAppendRegionName(char** b, u8 regionId, u8 world, int flags)
     comboTextAppendStr(b, regName->name);
     comboTextAppendClearColor(b);
 
-    if (world != 0 && world != 0xff && world != gComboData.playerId)
+    if (world != 0 && world != 0xff && world != gComboConfig.playerId)
     {
         comboTextAppendStr(b, " in " TEXT_COLOR_YELLOW "World ");
         comboTextAppendNum(b, world);
@@ -908,7 +1060,7 @@ int comboTextAppendCheckName(char** b, u8 checkId, u8 world)
     comboTextAppendStr(b, cn->name);
     comboTextAppendClearColor(b);
 
-    if (world != 0 && world != 0xff && world != gComboData.playerId)
+    if (world != 0 && world != 0xff && world != gComboConfig.playerId)
     {
         comboTextAppendStr(b, " in " TEXT_COLOR_YELLOW "World ");
         comboTextAppendNum(b, world);
@@ -981,7 +1133,7 @@ void comboTextHijackDungeonRewardHints(GameState_Play* play, int hint)
     const ItemHint* ih;
     char* b;
 
-    ih = &gComboData.hints.dungeonRewards[9 + hint];
+    ih = &gComboConfig.hints.dungeonRewards[9 + hint];
     b = play->msgCtx.font.textBuffer.schar;
     appendBossRewardHeader(&b, 0x55 + hint);
     comboTextAppendRegionName(&b, ih->region, ih->world, TF_PREPOS | TF_CAPITALIZE);
@@ -1002,7 +1154,7 @@ void comboTextHijackLightArrows(GameState_Play* play)
     comboTextAppendStr(&b,
         "Have you found the " TEXT_COLOR_YELLOW "Light Arrows " TEXT_CZ
     );
-    comboTextAppendRegionName(&b, gComboData.hints.lightArrows.region, gComboData.hints.lightArrows.world, TF_PREPOS);
+    comboTextAppendRegionName(&b, gComboConfig.hints.lightArrows.region, gComboConfig.hints.lightArrows.world, TF_PREPOS);
     comboTextAppendStr(&b, "?" TEXT_END);
     comboTextAutoLineBreaks(play->msgCtx.textBuffer);
 }
@@ -1021,7 +1173,7 @@ void comboTextHijackOathToOrder(GameState_Play* play)
         "Have you found the " TEXT_COLOR_PINK "Oath to Order "
     );
     comboTextAppendClearColor(&b);
-    comboTextAppendRegionName(&b, gComboData.hints.oathToOrder.region, gComboData.hints.oathToOrder.world, TF_PREPOS);
+    comboTextAppendRegionName(&b, gComboConfig.hints.oathToOrder.region, gComboConfig.hints.oathToOrder.world, TF_PREPOS);
     comboTextAppendStr(&b, "?" TEXT_END);
     comboTextAutoLineBreaks(start);
 }
@@ -1059,7 +1211,7 @@ void comboTextMessageCantBuy(GameState_Play* play, int flags)
 
 static int shouldItemBeHintedWithImportance(s16 gi)
 {
-    if (!comboConfig(CFG_HINT_IMPORTANCE))
+    if (!Config_Flag(CFG_HINT_IMPORTANCE))
         return 0;
 
     if (gi == GI_NOTHING)
@@ -1112,7 +1264,7 @@ void comboTextHijackFishCaught(GameState_Play* play, const ComboItemOverride* o)
     char* start;
     int isSelf;
 
-    isSelf = (o->player == PLAYER_SELF) || (o->player == PLAYER_ALL) || (o->player == gComboData.playerId);
+    isSelf = (o->player == PLAYER_SELF) || (o->player == PLAYER_ALL) || (o->player == gComboConfig.playerId);
 
     b = play->msgCtx.textBuffer;
 

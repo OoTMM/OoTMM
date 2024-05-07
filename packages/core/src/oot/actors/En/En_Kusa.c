@@ -1,6 +1,9 @@
 #include <combo.h>
 #include <combo/csmc.h>
 #include <combo/item.h>
+#include <combo/config.h>
+#include <combo/global.h>
+#include <combo/actor.h>
 
 void EnKusa_Aliases(Xflag* xflag)
 {
@@ -135,7 +138,7 @@ void EnKusa_DrawWrapper(Actor_EnKusa* this, GameState_Play* play)
     ComboItemOverride o;
     int alt;
 
-    if (comboConfig(CFG_OOT_SHUFFLE_GRASS) && !comboXflagsGet(&this->xflag))
+    if (Config_Flag(CFG_OOT_SHUFFLE_GRASS) && !comboXflagsGet(&this->xflag))
         comboXflagItemOverride(&o, &this->xflag, 0);
     else
         o.gi = 0;

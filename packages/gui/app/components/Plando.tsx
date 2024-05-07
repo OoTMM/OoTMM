@@ -38,12 +38,7 @@ export function Plando() {
       <Text size="mg">Plando</Text>
       <Group direction="horizontal" spacing="xl">
         <Select className="plando-select" classNamePrefix="react-select" options={locsOptions} onChange={(v) => setSelectedLoc(v?.value)} />
-        <Select
-          className="plando-select"
-          classNamePrefix="react-select"
-          options={itemOptions}
-          onChange={(v) => setSelectedItem(v?.value)}
-        />
+        <Select className="plando-select" classNamePrefix="react-select" options={itemOptions} onChange={(v) => setSelectedItem(v?.value)} />
         <button className="btn btn-primary" onClick={placeItem}>
           Add
         </button>

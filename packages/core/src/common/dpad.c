@@ -1,5 +1,11 @@
 #include <combo.h>
 #include <combo/dma.h>
+#include <combo/player.h>
+#include <combo/mask.h>
+#include <combo/config.h>
+#include <combo/dpad.h>
+#include <combo/global.h>
+#include <combo/draw.h>
 
 #define DPAD_DOWN   0
 #define DPAD_UP     1
@@ -70,7 +76,7 @@ static int canUseDpadItem(GameState_Play* play, s16 itemId, int flags)
 
     /* Giant mask can't use any item */
 #if defined(GAME_MM)
-    if (gSave.equippedMask == PLAYER_MASK_GIANT)
+    if (gSave.equippedMask == MASK_GIANT)
         return 0;
 
     /* These states seem to handle minigames - and everything should be disabled during these */
@@ -111,7 +117,7 @@ static void reloadIcons(GameState_Play* play)
     }
 }
 
-void comboDpadDraw(GameState_Play* play)
+void Dpad_Draw(GameState_Play* play)
 {
     s16 itemId;
     u8 alpha;
@@ -132,13 +138,13 @@ void comboDpadDraw(GameState_Play* play)
     /* Init */
     OPEN_DISPS(play->gs.gfx);
     gDPPipeSync(OVERLAY_DISP++);
-    gSPSegment(OVERLAY_DISP++, 0x06, gCustomKeep);
+    gSPSegment(OVERLAY_DISP++, 0x06, g.customKeep);
     gSPSegment(OVERLAY_DISP++, 0x07, sDpadIconBuffer);
     gDPSetPrimColor(OVERLAY_DISP++, 0, 0x80, sDpadColor.r, sDpadColor.g, sDpadColor.b, alpha);
 
     /* Draw */
-    comboDrawInit2D(&OVERLAY_DISP);
-    comboDrawBlit2D_RGBA16(&OVERLAY_DISP, 0x06000000, 32, 32, kDpadPosX, kDpadPosY, 0.5f);
+    Draw_Init2D(&OVERLAY_DISP);
+    Draw_Blit2D_RGBA16(&OVERLAY_DISP, 0x06000000, 32, 32, kDpadPosX, kDpadPosY, 0.5f);
 
     for (int i = 0; i < 4; ++i)
     {
@@ -155,28 +161,12 @@ void comboDpadDraw(GameState_Play* play)
             }
             x = kDpadPosX + kDpadOffX[i] * 32 * kDpadItemScale + 1.5f;
             y = kDpadPosY + kDpadOffY[i] * 32 * kDpadItemScale + 1;
-            comboDrawBlit2D_RGBA32(&OVERLAY_DISP, 0x07000000 | (i * 32 * 32 * 4), 32, 32, x, y, kDpadItemScale);
+            Draw_Blit2D_RGBA32(&OVERLAY_DISP, 0x07000000 | (i * 32 * 32 * 4), 32, 32, x, y, kDpadItemScale);
         }
     }
     CLOSE_DISPS();
 }
 
-#if defined(GAME_OOT)
-static void toggleBoots(GameState_Play* play, s16 itemId)
-{
-    u16 targetBoots;
-
-    targetBoots = (itemId == ITEM_OOT_BOOTS_HOVER) ? 3 : 2;
-    if (gSave.equips.equipment.boots == targetBoots)
-        gSave.equips.equipment.boots = 1;
-    else
-        gSave.equips.equipment.boots = targetBoots;
-    UpdateEquipment(play, GET_LINK(play));
-    PlaySound(0x835);
-}
-#endif
-
-#if defined(GAME_OOT)
 static void dpadUseItem(GameState_Play* play, int index, int flags)
 {
     s16 itemId;
@@ -184,29 +174,11 @@ static void dpadUseItem(GameState_Play* play, int index, int flags)
     itemId = sDpadItems[index];
     if (!canUseDpadItem(play, itemId, flags))
         return;
-    if (itemId == ITEM_OOT_BOOTS_HOVER || itemId == ITEM_OOT_BOOTS_IRON)
-        toggleBoots(play, itemId);
-    else
-        comboPlayerUseItem(play, GET_LINK(play), itemId);
-}
-#endif
-
-#if defined(GAME_MM)
-static void dpadUseItem(GameState_Play* play, int index, int flags)
-{
-    s16 itemId;
-    void (*Player_UseItem)(GameState_Play* play, Actor_Player* link, s16 itemId);
-
-    itemId = sDpadItems[index];
-    if (!canUseDpadItem(play, itemId, flags))
-        return;
-    Player_UseItem = OverlayAddr(0x80831990);
     Player_UseItem(play, GET_LINK(play), itemId);
 }
-#endif
 
 #if defined(GAME_OOT)
-void comboDpadUpdate(GameState_Play* play)
+void Dpad_Update(GameState_Play* play)
 {
     /* Update the items */
     sDpadItems[DPAD_DOWN] = gSave.inventory.items[ITS_OOT_OCARINA];
@@ -216,19 +188,19 @@ void comboDpadUpdate(GameState_Play* play)
     if (gSave.age == AGE_CHILD)
     {
         sDpadItems[DPAD_UP] = gSave.inventory.items[ITS_OOT_TRADE_CHILD];
-        if (!comboConfig(CFG_OOT_AGELESS_BOOTS))
+        if (!Config_Flag(CFG_OOT_AGELESS_BOOTS))
         {
             sDpadItems[DPAD_LEFT] = ITEM_NONE;
             sDpadItems[DPAD_RIGHT] = ITEM_NONE;
         }
     }
-    else if(comboConfig(CFG_OOT_AGELESS_CHILD_TRADE))
+    else if(Config_Flag(CFG_OOT_AGELESS_CHILD_TRADE))
         sDpadItems[DPAD_UP] = gSave.inventory.items[ITS_OOT_TRADE_CHILD];
 }
 #endif
 
 #if defined(GAME_MM)
-void comboDpadUpdate(GameState_Play* play)
+void Dpad_Update(GameState_Play* play)
 {
     /* Update the items */
     sDpadItems[DPAD_DOWN] = gSave.inventory.items[ITS_MM_OCARINA];
@@ -238,7 +210,7 @@ void comboDpadUpdate(GameState_Play* play)
 }
 #endif
 
-int comboDpadUse(GameState_Play* play, int flags)
+int Dpad_Use(GameState_Play* play, int flags)
 {
     u32 buttons;
     if (!canUseDpad(play))

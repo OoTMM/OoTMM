@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 #include <combo/csmc.h>
+#include <combo/actor.h>
 
 static int sIsSmallChest;
 

@@ -3,6 +3,11 @@
 #include <combo/dungeon.h>
 #include <combo/menu.h>
 #include <combo/item.h>
+#include <combo/player.h>
+#include <combo/config.h>
+#include <combo/global.h>
+#include <combo/dpad.h>
+#include <combo/inventory.h>
 
 void KaleidoScope_AfterSetCutsorColor(GameState_Play* play)
 {
@@ -11,7 +16,7 @@ void KaleidoScope_AfterSetCutsorColor(GameState_Play* play)
     int effect;
 
     /* Update Dpad */
-    comboDpadUpdate(play);
+    Dpad_Update(play);
 
     cursorSlot = play->pauseCtx.cursorSlot[0];
     press = !!(play->gs.input[0].pressed.buttons & (L_TRIG | U_CBUTTONS));
@@ -284,7 +289,7 @@ static int canSave(GameState_Play* play)
     case SCE_MM_LAIR_MAJORA:
         return 0;
     case SCE_MM_CLOCK_TOWER_ROOFTOP:
-        return !!comboConfig(CFG_ER_MOON) || !!comboConfig(CFG_MM_MOON_CRASH_CYCLE);
+        return !!Config_Flag(CFG_ER_MOON) || !!Config_Flag(CFG_MM_MOON_CRASH_CYCLE);
     case SCE_MM_SOUTHERN_SWAMP:
         return gSave.entranceIndex != 0x8460 && !MM_CHECK_EVENT_INF(0x35) && !MM_CHECK_EVENT_INF(0x41);
     default:
@@ -299,7 +304,7 @@ static void menuSave(GameState_Play* play)
         return;
 
     /* Save the game */
-    comboSave(play, SF_OWL);
+    Save_DoSave(play, SF_OWL);
     PlaySound(0x4823);
 }
 

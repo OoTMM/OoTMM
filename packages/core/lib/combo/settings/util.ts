@@ -68,18 +68,35 @@ function validateSettingsStep(settings: Settings): Settings {
     }
   }
 
+  /* Hardcoded game checks */
+  if (s.goal === 'both') {
+    if (s.games === 'oot') s.goal = 'ganon';
+    if (s.games === 'mm') s.goal = 'majora';
+  }
+
   /* Specific validation */
   for (const data of SETTINGS) {
     const key = data.key;
     const cond = (data as any).cond;
     const min = (data as any).min;
     const max = (data as any).max;
+    const defaultV = data.default;
 
     if (cond && !cond(s)) {
       if (data.type === 'set') {
-        (s as any)[key] = { type: data.default };
+        (s as any)[key] = { type: defaultV };
       } else {
-        (s as any)[key] = data.default;
+        (s as any)[key] = defaultV;
+      }
+    }
+
+    if (data.type === 'enum') {
+      const curV = (s as any)[key];
+      const enumD = (data as any).values.find((x: any) => x.value === curV);
+      if (enumD) {
+        if (enumD.cond && !enumD.cond(s)) {
+          (s as any)[key] = defaultV;
+        }
       }
     }
 

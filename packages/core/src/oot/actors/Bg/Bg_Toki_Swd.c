@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/config.h>
 
 static void BgTokiSwd_GiveItem(Actor* this, GameState_Play* play, s16 gi, int npc, int event)
 {
@@ -43,7 +44,7 @@ void BgTokiSwd_Handler(Actor* this, GameState_Play* play)
     else
     {
         /* Needs the Master Sword to become adult */
-        if (gSave.inventory.equipment.swords & EQ_OOT_SWORD_MASTER)
+        if (!Config_Flag(CFG_OOT_TIME_TRAVEL_REQUIRES_MS) || (gSave.inventory.equipment.swords & EQ_OOT_SWORD_MASTER))
             ActorEnableGrab(this, play);
     }
 }

@@ -2,7 +2,7 @@
 
 /* Load the save ourselves */
 Sram_OpenSave_Early:
-  HOOK_CALL comboReadOwnSave
+  HOOK_CALL Save_ReadOwn
   addiu sp,-0x40
   j 0x80144e80
    lui a3,0x801f

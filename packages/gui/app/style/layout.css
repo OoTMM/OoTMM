@@ -79,12 +79,6 @@
   margin: 0.25em;
 }
 
-.react-tooltip {
-  opacity: 100%;
-  background: black;
-  z-index: 9999;
-}
-
 br {
   content: '';
 }

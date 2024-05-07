@@ -1,7 +1,7 @@
 #ifndef COMBO_COMMON_ACTOR_CUSTOM_TRIGGERS_H
 #define COMBO_COMMON_ACTOR_CUSTOM_TRIGGERS_H
 
-#include <combo/common/actor.h>
+#include <combo/actor.h>
 
 typedef struct
 {

@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/config.h>
 
 static const s16 kNPCs[] = {
     NPC_OOT_GS_10,
@@ -34,7 +35,7 @@ static void EnSsh_Hint(GameState_Play* play, int index)
     comboTextAppendStr(&b,
         " Spiders of the Curse" TEXT_CZ " and I will give you "
     );
-    comboTextAppendItemNameQueryEx(&b, &q, TF_PREPOS | TF_PROGRESSIVE, gComboData.staticHintsImportance[index]);
+    comboTextAppendItemNameQueryEx(&b, &q, TF_PREPOS | TF_PROGRESSIVE, gComboConfig.staticHintsImportance[index]);
     comboTextAppendStr(&b, TEXT_CZ "." TEXT_END);
     comboTextAutoLineBreaks(play->msgCtx.textBuffer);
 }

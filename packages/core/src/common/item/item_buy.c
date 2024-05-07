@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/config.h>
 
 static int hasFreeBottleOot(void)
 {
@@ -100,7 +101,7 @@ int isItemBuyable(s16 gi)
     case GI_MM_BOMBCHU_5:
     case GI_MM_BOMBCHU_10:
     case GI_MM_BOMBCHU_20:
-        return (gMmSave.inventory.ammo[ITS_MM_BOMBCHU] < (comboConfig(CFG_MM_BOMBCHU_BAG) ? 50 : kMaxBombs[gMmSave.inventory.upgrades.bombBag]));
+        return (gMmSave.inventory.ammo[ITS_MM_BOMBCHU] < (Config_Flag(CFG_MM_BOMBCHU_BAG) ? 50 : kMaxBombs[gMmSave.inventory.upgrades.bombBag]));
     case GI_MM_ARROWS_10:
     case GI_MM_ARROWS_30:
     case GI_MM_ARROWS_40:

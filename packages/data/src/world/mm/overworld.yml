@@ -129,9 +129,9 @@
   region: GREAT_BAY_COAST
   exits:
     "Great Bay Coast": "can_reset_time"
-    "Tingle Great Bay": "can_hookshot || has_arrows"
+    "Tingle Great Bay": "soul_npc(SOUL_NPC_TINGLE) && (can_hookshot || has_arrows)"
   events:
-    PICTURE_TINGLE: "has(PICTOGRAPH_BOX)"
+    PICTURE_TINGLE: "soul_npc(SOUL_NPC_TINGLE) && has(PICTOGRAPH_BOX)"
   locations:
     "Great Bay Coast Owl Statue": "has_sticks || has_weapon"
 "Owl Zora Cape":
@@ -250,12 +250,12 @@
     "Clock Town East": "true"
     "Clock Town Fairy Fountain": "true"
     "Deku Playground": "true"
-    "Tingle Town": "is_day && (has_weapon_range || (has_weapon && (trick(MM_NCT_TINGLE) || has_hover_boots)))"
+    "Tingle Town": "soul_npc(SOUL_NPC_TINGLE) && is_day && (has_weapon_range || (has_weapon && (trick(MM_NCT_TINGLE) || has_hover_boots)))"
     "Clock Town North Postbox": "true"
   events:
-    HIDE_SEEK1: "has_weapon_range && first_day"
-    HIDE_SEEK2: "has_weapon_range && second_day"
-    HIDE_SEEK3: "has_weapon_range && final_day"
+    HIDE_SEEK1: "soul_bombers && has_weapon_range && first_day"
+    HIDE_SEEK2: "soul_bombers && has_weapon_range && second_day"
+    HIDE_SEEK3: "soul_bombers && has_weapon_range && final_day"
     BOMBERS_NORTH1: "event(HIDE_SEEK1)"
     BOMBERS_NORTH2: "event(HIDE_SEEK2)"
     BOMBERS_NORTH3: "event(HIDE_SEEK3)"
@@ -263,13 +263,13 @@
     SAKON_BOMB_BAG: "can_fight && at(NIGHT1_AM_12_00)"
     SAKON_BOOM: "(has_arrows || can_hookshot_short || can_use_din) && at(NIGHT1_AM_12_00)"
     MAIL_LETTER: "has(LETTER_TO_KAFEI) && before(DAY2_AM_11_30)"
-    PICTURE_TINGLE: "has(PICTOGRAPH_BOX) && is_day"
+    PICTURE_TINGLE: "soul_npc(SOUL_NPC_TINGLE) && has(PICTOGRAPH_BOX) && is_day"
     RUPEES: "true"
   locations:
     "Clock Town Tree HP": "true"
     "Clock Town Bomber Notebook": "event(BOMBER_CODE)"
     "Clock Town Blast Mask": "event(SAKON_BOMB_BAG)"
-    "Clock Town Keaton HP": "has_mask_keaton"
+    "Clock Town Keaton HP": "soul_npc(SOUL_NPC_KEATON) && has_mask_keaton"
     "Clock Town Keaton Grass Reward 1": "true"
     "Clock Town Keaton Grass Reward 2": "keaton_grass_easy"
     "Clock Town Keaton Grass Reward 3": "keaton_grass_easy"
@@ -302,10 +302,10 @@
     "Swordsman School": "first_day || second_day || between(DAY3_AM_06_00, NIGHT3_PM_11_00) || after(NIGHT3_AM_12_00)"
     "Lottery": "is_day || (event(PLAY_LOTTERY) && (before(NIGHT1_PM_11_00) || between(NIGHT2_PM_06_00, NIGHT2_PM_11_00) || between(NIGHT3_PM_06_00, NIGHT3_PM_11_00)))"
   locations:
-    "Clock Town Bank Reward 1": "can_use_wallet(1)"
-    "Clock Town Bank Reward 2": "can_use_wallet(2) || (can_use_wallet(1) && (trick(MM_BANK_ONE_WALLET) || trick(MM_BANK_NO_WALLET)))"
-    "Clock Town Bank Reward 3": "can_use_wallet(3) || (can_use_wallet(2) && trick(MM_BANK_ONE_WALLET)) || (can_use_wallet(1) && trick(MM_BANK_NO_WALLET))"
-    "Clock Town Rosa Sisters HP": "has(MASK_KAMARO) && (is_night1 || is_night2)"
+    "Clock Town Bank Reward 1": "soul_banker && can_use_wallet(1)"
+    "Clock Town Bank Reward 2": "soul_banker && (can_use_wallet(2) || (can_use_wallet(1) && (trick(MM_BANK_ONE_WALLET) || trick(MM_BANK_NO_WALLET))))"
+    "Clock Town Bank Reward 3": "soul_banker && (can_use_wallet(3) || (can_use_wallet(2) && trick(MM_BANK_ONE_WALLET)) || (can_use_wallet(1) && trick(MM_BANK_NO_WALLET)))"
+    "Clock Town Rosa Sisters HP": "soul_citizen && has(MASK_KAMARO) && (is_night1 || is_night2)"
 "Clock Town East Main":
   region: CLOCK_TOWN_EAST
   exits:
@@ -341,7 +341,7 @@
   exits:
     "Clock Town East Main": "true"
   events:
-    GUESS_BOMBER: "trick(MM_BOMBER_GUESS)"
+    GUESS_BOMBER: "soul_bombers && trick(MM_BOMBER_GUESS)"
 "Clock Town East Near Hideout":
   region: NONE
   exits:
@@ -379,14 +379,14 @@
     FROG_1: "has(MASK_DON_GERO)"
     MAGIC: "true"
   locations:
-    "Clock Town Guru Guru Mask Bremen": "is_night1 || is_night2"
+    "Clock Town Guru Guru Mask Bremen": "soul_guru_guru && (is_night1 || is_night2)"
     "Clock Town Stray Fairy": "is_day"
     "Clock Town Laundry Pool Grass 1": "true"
     "Clock Town Laundry Pool Grass 2": "true"
     "Clock Town Laundry Pool Grass 3": "true"
-    "Clock Town Laundry Pool Rupee 1": "second_day"
-    "Clock Town Laundry Pool Rupee 2": "second_day"
-    "Clock Town Laundry Pool Rupee 3": "second_day"
+    "Clock Town Laundry Pool Rupee 1": "is_night2"
+    "Clock Town Laundry Pool Rupee 2": "is_night2"
+    "Clock Town Laundry Pool Rupee 3": "is_night2"
 "Clock Town Fairy Fountain":
   region: ENTRANCE
   exits:
@@ -397,31 +397,44 @@
 "Bomb Shop":
   region: ENTRANCE
   events:
-    BUY_KEG: "has_mask_goron && has(POWDER_KEG) && can_use_wallet(1)"
+    BUY_KEG: "soul_goron && has_mask_goron && has(POWDER_KEG) && can_use_wallet(1)"
   exits:
     "Clock Town West": "true"
   locations:
-    "Bomb Shop Item 1": "shop_price(0x00)"
-    "Bomb Shop Item 2": "shop_price(0x01)"
-    "Bomb Shop Bomb Bag": "shop_price(0x02)"
-    "Bomb Shop Bomb Bag 2": "event(SAKON_BOMB_BAG) && shop_price(0x03)"
+    "Bomb Shop Item 1": "soul_bombchu_shopkeeper && shop_price(0x00)"
+    "Bomb Shop Item 2": "soul_bombchu_shopkeeper && shop_price(0x01)"
+    "Bomb Shop Bomb Bag": "soul_bombchu_shopkeeper && shop_price(0x02)"
+    "Bomb Shop Bomb Bag 2": "soul_bombchu_shopkeeper && event(SAKON_BOMB_BAG) && shop_price(0x03)"
 "Trading Post":
   region: ENTRANCE
+  stay:
+    # This is to make logic aware of the break
+    NIGHT1_PM_09_00: "false"
+    NIGHT1_PM_10_00: "false"
+    NIGHT2_PM_09_00: "false"
+    NIGHT2_PM_10_00: "false"
+    NIGHT3_PM_09_00: "false"
   events:
     SCARECROW: "can_play_scarecrow"
     FISH: "true"
   exits:
     "Clock Town West": "true"
+    "Trading Post Items": "(soul_fishing_pond_owner && (before(NIGHT1_PM_09_00) || between(DAY2_AM_06_00, NIGHT2_PM_09_00))) || (soul_rooftop_man && (between(NIGHT1_PM_09_00, DAY2_AM_06_00) || between(NIGHT2_PM_09_00, NIGHT3_PM_09_00)))"
   locations:
-    "Trading Post Item 1": "shop_price(0x05) && before(NIGHT3_PM_09_00)"
-    "Trading Post Item 2": "shop_price(0x06) && before(NIGHT3_PM_09_00)"
-    "Trading Post Item 3": "shop_price(0x07) && before(NIGHT3_PM_09_00)"
-    "Trading Post Item 4": "shop_price(0x08) && before(NIGHT3_PM_09_00)"
-    "Trading Post Item 5": "shop_price(0x09) && before(NIGHT3_PM_09_00)"
-    "Trading Post Item 6": "shop_price(0x0a) && before(NIGHT3_PM_09_00)"
-    "Trading Post Item 7": "shop_price(0x0b) && before(NIGHT3_PM_09_00)"
-    "Trading Post Item 8": "shop_price(0x0c) && before(NIGHT3_PM_09_00)"
     "Trading Post Pot": "true"
+"Trading Post Items":
+  region: ENTRANCE
+  locations:
+    "Trading Post Item 1": "shop_price(0x05)"
+    "Trading Post Item 2": "shop_price(0x06)"
+    "Trading Post Item 3": "shop_price(0x07)"
+    "Trading Post Item 4": "shop_price(0x08)"
+    "Trading Post Item 5": "shop_price(0x09)"
+    "Trading Post Item 6": "shop_price(0x0a)"
+    "Trading Post Item 7": "shop_price(0x0b)"
+    "Trading Post Item 8": "shop_price(0x0c)"
+
+
 "Curiosity Shop":
   region: ENTRANCE
   exits:
@@ -442,9 +455,9 @@
   exits:
     "Laundry Pool": "true"
   events:
-    MEET_KAFEI: "event(MAIL_LETTER) && between(DAY2_PM_02_00, NIGHT2_PM_10_00)"
+    MEET_KAFEI: "soul_npc(SOUL_NPC_KAFEI) && event(MAIL_LETTER) && between(DAY2_PM_02_00, NIGHT2_PM_10_00)"
   locations:
-    "Kafei Hideout Pendant of Memories": "event(MAIL_LETTER) && between(DAY2_PM_02_00, NIGHT2_PM_10_00)"
+    "Kafei Hideout Pendant of Memories": "soul_npc(SOUL_NPC_KAFEI) && event(MAIL_LETTER) && between(DAY2_PM_02_00, NIGHT2_PM_10_00)"
     "Kafei Hideout Owner Reward 1": "between(DAY3_AM_06_00, NIGHT3_PM_10_00)"
     "Kafei Hideout Owner Reward 2": "between(DAY3_AM_06_00, NIGHT3_PM_10_00)"
 "Post Office":
@@ -452,9 +465,9 @@
   exits:
     "Clock Town West": "true"
   events:
-    POSTMAN_FREEDOM: "has(LETTER_TO_MAMA) && is_night3"
+    POSTMAN_FREEDOM: "soul_citizen && has(LETTER_TO_MAMA) && is_night3"
   locations:
-    "Post Office HP": "(has_mask_bunny || trick(MM_POST_OFFICE_GAME)) && (between(DAY1_PM_03_00, NIGHT1_AM_12_00) || (event(MAIL_LETTER) && between(NIGHT2_PM_06_00, NIGHT2_AM_12_00)))"
+    "Post Office HP": "soul_citizen && (has_mask_bunny || trick(MM_POST_OFFICE_GAME)) && (between(DAY1_PM_03_00, NIGHT1_AM_12_00) || (event(MAIL_LETTER) && between(NIGHT2_PM_06_00, NIGHT2_AM_12_00)))"
 "Swordsman School":
   region: ENTRANCE
   exits:
@@ -462,12 +475,12 @@
   stay:
     NIGHT3_PM_11_00: "false"
   locations:
-    "Swordsman School HP": "has(SWORD) && can_use_wallet(1) && before(NIGHT3_PM_11_00)"
-    "Swordsman School Pot 1": "has(SWORD) && after(NIGHT3_AM_12_00)"
-    "Swordsman School Pot 2": "has(SWORD) && after(NIGHT3_AM_12_00)"
-    "Swordsman School Pot 3": "has(SWORD) && after(NIGHT3_AM_12_00)"
-    "Swordsman School Pot 4": "has(SWORD) && after(NIGHT3_AM_12_00)"
-    "Swordsman School Pot 5": "has(SWORD) && after(NIGHT3_AM_12_00)"
+    "Swordsman School HP": "soul_carpet_man && has_sword && can_use_wallet(1) && before(NIGHT3_PM_11_00)"
+    "Swordsman School Pot 1": "has_sword && after(NIGHT3_AM_12_00)"
+    "Swordsman School Pot 2": "has_sword && after(NIGHT3_AM_12_00)"
+    "Swordsman School Pot 3": "has_sword && after(NIGHT3_AM_12_00)"
+    "Swordsman School Pot 4": "has_sword && after(NIGHT3_AM_12_00)"
+    "Swordsman School Pot 5": "has_sword && after(NIGHT3_AM_12_00)"
 "Lottery":
   region: ENTRANCE
   events:
@@ -481,8 +494,8 @@
   exits:
     "Clock Town East": "true"
   locations:
-    "Mayor's Office Kafei's Mask": "between(DAY1_AM_10_00, NIGHT1_PM_08_00) || between(DAY2_AM_10_00, NIGHT2_PM_08_00)"
-    "Mayor's Office HP": "has(MASK_COUPLE) && (between(DAY1_AM_10_00, NIGHT1_PM_08_00) || between(DAY2_AM_10_00, NIGHT2_PM_08_00) || between(DAY3_AM_10_00, NIGHT3_PM_06_00))"
+    "Mayor's Office Kafei's Mask": "soul_npc(SOUL_NPC_AROMA) && (between(DAY1_AM_10_00, NIGHT1_PM_08_00) || between(DAY2_AM_10_00, NIGHT2_PM_08_00))"
+    "Mayor's Office HP": "soul_npc(SOUL_NPC_MAYOR_DOTOUR) && has(MASK_COUPLE) && (between(DAY1_AM_10_00, NIGHT1_PM_08_00) || between(DAY2_AM_10_00, NIGHT2_PM_08_00) || between(DAY3_AM_10_00, NIGHT3_PM_06_00))"
 "Milk Bar":
   region: ENTRANCE
   exits:
@@ -495,32 +508,32 @@
     NIGHT3_PM_09_00: "false"
     NIGHT3_AM_05_00: "false"
   locations:
-    "Milk Bar Troupe Leader Mask": "can_play_minigame && has(MASK_DEKU) && has_mask_zora && has_mask_goron && (between(NIGHT1_PM_10_00, NIGHT1_AM_05_00) || between(NIGHT2_PM_10_00, NIGHT2_AM_05_00))"
-    "Milk Bar Madame Aroma Bottle": "has(MASK_KAFEI) && has(LETTER_TO_MAMA) && (between(NIGHT3_PM_06_00, NIGHT3_PM_09_00) || after(NIGHT3_PM_10_00))"
-    "Milk Bar Purchase Milk": "has(MASK_ROMANI) && can_use_wallet(1) && (between(NIGHT1_PM_10_00, DAY2_AM_06_00) || between(NIGHT2_PM_10_00, DAY3_AM_06_00) || between(NIGHT3_PM_06_00, NIGHT3_PM_09_00) || after(NIGHT3_PM_10_00))"
-    "Milk Bar Purchase Chateau": "has(MASK_ROMANI) && can_use_wallet(2) && (between(NIGHT1_PM_10_00, DAY2_AM_06_00) || between(NIGHT2_PM_10_00, DAY3_AM_06_00) || between(NIGHT3_PM_06_00, NIGHT3_PM_09_00) || after(NIGHT3_PM_10_00))"
+    "Milk Bar Troupe Leader Mask": "soul_npc(SOUL_NPC_TOTO) && soul_gorman && can_play_minigame && has(MASK_DEKU) && has_mask_zora && has_mask_goron && (between(NIGHT1_PM_10_00, NIGHT1_AM_05_00) || between(NIGHT2_PM_10_00, NIGHT2_AM_05_00))"
+    "Milk Bar Madame Aroma Bottle": "soul_npc(SOUL_NPC_AROMA) && has(MASK_KAFEI) && has(LETTER_TO_MAMA) && (between(NIGHT3_PM_06_00, NIGHT3_PM_09_00) || after(NIGHT3_PM_10_00))"
+    "Milk Bar Purchase Milk": "soul_talon && has(MASK_ROMANI) && can_use_wallet(1) && (between(NIGHT1_PM_10_00, DAY2_AM_06_00) || between(NIGHT2_PM_10_00, DAY3_AM_06_00) || between(NIGHT3_PM_06_00, NIGHT3_PM_09_00) || after(NIGHT3_PM_10_00))"
+    "Milk Bar Purchase Chateau": "soul_talon && has(MASK_ROMANI) && can_use_wallet(2) && (between(NIGHT1_PM_10_00, DAY2_AM_06_00) || between(NIGHT2_PM_10_00, DAY3_AM_06_00) || between(NIGHT3_PM_06_00, NIGHT3_PM_09_00) || after(NIGHT3_PM_10_00))"
 "Town Archery":
   region: ENTRANCE
   exits:
     "Clock Town East": "true"
   locations:
-    "Town Archery Reward 1": "has_bow && can_use_wallet(1) && (before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || between(DAY3_AM_06_00, NIGHT3_PM_10_00))"
-    "Town Archery Reward 2": "has_bow && can_use_wallet(1) && (before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || between(DAY3_AM_06_00, NIGHT3_PM_10_00))"
+    "Town Archery Reward 1": "soul_shooting_gallery_owner && has_bow && can_use_wallet(1) && (before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || between(DAY3_AM_06_00, NIGHT3_PM_10_00))"
+    "Town Archery Reward 2": "soul_shooting_gallery_owner && has_bow && can_use_wallet(1) && (before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || between(DAY3_AM_06_00, NIGHT3_PM_10_00))"
 "Chest Game":
   region: ENTRANCE
   exits:
     "Clock Town East": "true"
   locations:
-    "Chest Game HP": "has_mask_goron && can_use_wallet(1) && (before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || is_day3)"
+    "Chest Game HP": "soul_bombchu_bowling_lady && has_mask_goron && can_use_wallet(1) && (before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || is_day3)"
     #Chest Game Reward Human": "can_use_wallet(1) && (before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || is_day3)"
     #Chest Game Reward Zora": "can_use_wallet(1) && has_mask_zora && (before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || is_day3)"
     #Chest Game Reward Deku": "can_use_wallet(1) && has(MASK_DEKU) && (before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || is_day3)"
 "Honey & Darling Game":
   region: ENTRANCE
   events:
-    HD_REWARD_1: "(has_bomb_bag || has_bombchu_license) && before(NIGHT1_PM_10_00)"
-    HD_REWARD_2: "has_bomb_bag && between(DAY2_AM_06_00, NIGHT2_PM_10_00)"
-    HD_REWARD_3: "(has_bow || can_use_deku_bubble) && is_day3"
+    HD_REWARD_1: "soul_honey_darling && (has_bomb_bag || has_bombchu_license) && before(NIGHT1_PM_10_00)"
+    HD_REWARD_2: "soul_honey_darling && has_bomb_bag && between(DAY2_AM_06_00, NIGHT2_PM_10_00)"
+    HD_REWARD_3: "soul_honey_darling && (has_bow || can_use_deku_bubble) && is_day3"
   exits:
     "Clock Town East": "true"
   locations:
@@ -537,21 +550,21 @@
     NIGHT2_PM_08_00: "has(ROOM_KEY)"
     DAY3_AM_06_00: "has(ROOM_KEY)"
   events:
-    SETUP_MEET: "has(MASK_KAFEI) && between(DAY1_PM_01_45, NIGHT1_PM_09_00)"
-    MEET_ANJU: "event(SETUP_MEET) && cond(setting(erIndoorsExtra), between(NIGHT1_AM_12_00, DAY2_AM_06_00), between(NIGHT1_AM_12_00, DAY2_AM_06_00) && (has(ROOM_KEY) || has(MASK_DEKU) || has_hover_boots || event(SPI_ROOF_FARORE) || trick(MM_STOCK_POT_WAIT)))"
-    DELIVER_PENDANT: "has(PENDANT_OF_MEMORIES) && (between(DAY2_AM_06_00, NIGHT2_PM_09_00) || between(DAY3_AM_06_00, DAY3_AM_11_30))"
+    SETUP_MEET: "soul_anju && has(MASK_KAFEI) && between(DAY1_PM_01_45, NIGHT1_PM_09_00)"
+    MEET_ANJU: "soul_anju && event(SETUP_MEET) && cond(setting(erIndoorsExtra), between(NIGHT1_AM_12_00, DAY2_AM_06_00), between(NIGHT1_AM_12_00, DAY2_AM_06_00) && (has(ROOM_KEY) || has(MASK_DEKU) || has_hover_boots || event(SPI_ROOF_FARORE) || trick(MM_STOCK_POT_WAIT)))"
+    DELIVER_PENDANT: "soul_anju && has(PENDANT_OF_MEMORIES) && (between(DAY2_AM_06_00, NIGHT2_PM_09_00) || between(DAY3_AM_06_00, DAY3_AM_11_30))"
     BUGS: "true"
     FISH: "true"
     MUSHROOM: "has(MASK_SCENTS)"
   locations:
     "Stock Pot Inn Guest Room Chest": "has(ROOM_KEY)"
     "Stock Pot Inn Staff Room Chest": "is_night3"
-    "Stock Pot Inn Room Key": "between(DAY1_PM_01_45, DAY1_PM_04_00)"
+    "Stock Pot Inn Room Key": "soul_anju && between(DAY1_PM_01_45, DAY1_PM_04_00)"
     "Stock Pot Inn Letter to Kafei": "event(MEET_ANJU)"
     "Stock Pot Inn Couple's Mask": "event(SUN_MASK) && event(DELIVER_PENDANT) && event(MEET_ANJU) && after(NIGHT3_AM_04_00)"
-    "Stock Pot Inn Grandma HP 1": "has(MASK_ALL_NIGHT) && (is_day1 || is_day2)"
-    "Stock Pot Inn Grandma HP 2": "has(MASK_ALL_NIGHT) && (is_day1 || is_day2)"
-    "Stock Pot Inn ??? HP": "cond(setting(erIndoorsExtra), has_paper && midnight, has_paper && midnight && (clock_night3 || has(ROOM_KEY) || has(MASK_DEKU) || has_hover_boots || event(SPI_ROOF_FARORE) || trick(MM_STOCK_POT_WAIT)))"
+    "Stock Pot Inn Grandma HP 1": "soul_old_hag && has(MASK_ALL_NIGHT) && (is_day1 || is_day2)"
+    "Stock Pot Inn Grandma HP 2": "soul_old_hag && has(MASK_ALL_NIGHT) && (is_day1 || is_day2)"
+    "Stock Pot Inn ??? HP": "soul_npc(SOUL_NPC_TOILET_HAND) && cond(setting(erIndoorsExtra), has_paper && midnight, has_paper && midnight && (clock_night3 || has(ROOM_KEY) || has(MASK_DEKU) || has_hover_boots || event(SPI_ROOF_FARORE) || trick(MM_STOCK_POT_WAIT)))"
 "Clock Town East SPI Roof":
   region: CLOCK_TOWN_EAST
   exits:
@@ -566,9 +579,9 @@
 "Deku Playground":
   region: ENTRANCE
   events:
-    DEKU_REWARD_1: "between(DAY1_AM_06_00, NIGHT1_AM_12_00)"
-    DEKU_REWARD_2: "between(DAY2_AM_06_00, NIGHT2_AM_12_00)"
-    DEKU_REWARD_3: "between(DAY3_AM_06_00, NIGHT3_AM_12_00)"
+    DEKU_REWARD_1: "soul_npc(SOUL_NPC_PLAYGROUND_SCRUBS) && between(DAY1_AM_06_00, NIGHT1_AM_12_00)"
+    DEKU_REWARD_2: "soul_npc(SOUL_NPC_PLAYGROUND_SCRUBS) && between(DAY2_AM_06_00, NIGHT2_AM_12_00)"
+    DEKU_REWARD_3: "soul_npc(SOUL_NPC_PLAYGROUND_SCRUBS) && between(DAY3_AM_06_00, NIGHT3_AM_12_00)"
   exits:
     "Clock Town North": "true"
   locations:
@@ -580,8 +593,8 @@
     "Astral Observatory Junction": "true"
     "Astral Observatory Balcony": "true"
   events:
-    SCRUB_TELESCOPE: "soul_business_scrub"
-    TEAR_TELESCOPE: "true"
+    SCRUB_TELESCOPE: "soul_astronomer && soul_business_scrub"
+    TEAR_TELESCOPE: "soul_astronomer"
     SCARECROW: "can_play_scarecrow"
 "Astral Observatory Balcony":
   region: TERMINA_FIELD
@@ -630,7 +643,7 @@
     "Termina Field Water Chest": "underwater_walking"
     "Termina Field Tall Grass Chest": "true"
     "Termina Field Tree Stump Chest": "can_hookshot_short || can_use_beans"
-    "Termina Field Kamaro Mask": "can_play_healing && midnight"
+    "Termina Field Kamaro Mask": "soul_citizen && can_play_healing && midnight"
     "Termina Field Pot": "can_use_beans || has_bow"
     "Termina Field Grass Pack 01 Grass 01": "true"
     "Termina Field Grass Pack 01 Grass 02": "true"
@@ -1144,14 +1157,14 @@
     FISH: "true"
     MUSHROOM: "has(MASK_SCENTS)"
     WATER: "true"
-    PICTURE_TINGLE: "has(PICTOGRAPH_BOX)"
+    PICTURE_TINGLE: "soul_npc(SOUL_NPC_TINGLE) && has(PICTOGRAPH_BOX)"
     FAIRY: "can_get_gossip_fairy"
   exits:
     "Swamp Front": "true"
     "Termina Field": "true"
     "Swamp Archery": "before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || between(DAY3_AM_06_00, NIGHT3_PM_10_00)"
     "Road to Southern Swamp Grotto": "true"
-    "Tingle Swamp": "has_weapon_range"
+    "Tingle Swamp": "soul_npc(SOUL_NPC_TINGLE) && has_weapon_range"
   locations:
     "Road to Southern Swamp HP": "has_weapon_range || has_bombchu"
     "Road to Southern Swamp Grass Pack 1 Grass 01": "true"
@@ -1181,8 +1194,8 @@
   exits:
     "Road to Southern Swamp": "true"
   locations:
-    "Swamp Archery Reward 1": "has_bow && can_use_wallet(1) && (before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || between(DAY3_AM_06_00, NIGHT3_PM_10_00))"
-    "Swamp Archery Reward 2": "has_bow && can_use_wallet(1) && (before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || between(DAY3_AM_06_00, NIGHT3_PM_10_00))"
+    "Swamp Archery Reward 1": "soul_bazaar_shopkeeper && has_bow && can_use_wallet(1) && (before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || between(DAY3_AM_06_00, NIGHT3_PM_10_00))"
+    "Swamp Archery Reward 2": "soul_bazaar_shopkeeper && has_bow && can_use_wallet(1) && (before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || between(DAY3_AM_06_00, NIGHT3_PM_10_00))"
 "Road to Southern Swamp Grotto":
   region: ENTRANCE
   events:
@@ -1343,30 +1356,29 @@
     "Swamp Front": "true"
     "Swamp Back": "event(BOAT_RIDE)"
   events:
-     BOAT_RIDE: "(event(PICTURE_SWAMP) || (event(KOUME) && (!setting(erIndoorsExtra) || can_use_wallet(1)))) && is_swamp_poisoned"
+     BOAT_RIDE: "((soul_npc(SOUL_NPC_TOURIST_CENTER) && event(PICTURE_SWAMP)) || (event(KOUME) && (!setting(erIndoorsExtra) || can_use_wallet(1)))) && is_swamp_poisoned"
   locations:
     "Tourist Information Pictobox": "event(KOUME) && is_swamp_poisoned"
     "Tourist Information Boat Archery": "event(KOUME) && is_swamp_cleared && has_bow"
-    "Tourist Information Tingle Picture": "(event(PICTURE_TINGLE) || event(PICTURE_DEKU_KING)) && is_swamp_poisoned"
+    "Tourist Information Tingle Picture": "soul_npc(SOUL_NPC_TOURIST_CENTER) && (event(PICTURE_TINGLE) || event(PICTURE_DEKU_KING)) && is_swamp_poisoned"
 #    "Tourist Information Big Octo Picture": "event(PICTURE_BIG_OCTO) && is_swamp_poisoned"
 #    "Tourist Information Consolation Prize": "event(PICTURE_SWAMP) && is_swamp_poisoned"
 "Woods of Mystery":
   region: SOUTHERN_SWAMP
   exits:
-    "Swamp Front": "true"
-    "Woods of Mystery Grotto": "second_day"
+    "Woods of Mystery Lost": "true"
+    "Near Woods of Mystery Grotto": "second_day"
   events:
-    KOUME: "has_red_or_blue_potion"
-    MEET_KOUME: "true"
+    KOUME: "soul_npc(SOUL_NPC_KOUME_KOTAKE) && has_red_or_blue_potion"
+    MEET_KOUME: "soul_npc(SOUL_NPC_KOUME_KOTAKE)"
     MUSHROOM: "has(MASK_SCENTS)"
   locations:
-    "Swamp Potion Shop Kotake": "true"
+    "Swamp Potion Shop Kotake": "soul_npc(SOUL_NPC_KOUME_KOTAKE)"
     "Woods of Mystery Grass SW 1": "first_day"
     "Woods of Mystery Grass SW 2": "first_day"
     "Woods of Mystery Grass S 1": "true"
     "Woods of Mystery Grass S 2": "true"
     "Woods of Mystery Grass S 3": "true"
-    "Woods of Mystery Grass SE": "second_day"
     "Woods of Mystery Grass W 1": "true"
     "Woods of Mystery Grass W 2": "true"
     "Woods of Mystery Grass Center 1": "true"
@@ -1384,10 +1396,22 @@
     "Woods of Mystery Grass NE 3": "true"
     "Woods of Mystery Grass NE 4": "true"
     "Woods of Mystery Grass NE 5": "true"
+"Near Woods of Mystery Grotto":
+  region: SOUTHERN_SWAMP
+  exits:
+    "Woods of Mystery": "second_day"
+    "Woods of Mystery Lost": "true"
+    "Woods of Mystery Grotto": "true"
+  locations:
+    "Woods of Mystery Grass SE": "true"
+"Woods of Mystery Lost":
+  region: SOUTHERN_SWAMP
+  exits:
+    "Swamp Front": "true"
 "Woods of Mystery Grotto":
   region: ENTRANCE
   exits:
-    "Woods of Mystery": "second_day"
+    "Near Woods of Mystery Grotto": "true"
   events:
     STICKS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_sticks)"
     NUTS: "soul_deku_baba && (can_lift_bracelet || can_kill_baba_nuts)"
@@ -1416,14 +1440,12 @@
     "Woods of Mystery Grotto Grass 14": "true"
 "Swamp Potion Shop":
   region: ENTRANCE
-  events:
-    RED_POTION: "event(MEET_KOUME)"
   exits:
     "Swamp Front": "true"
   locations:
-    "Swamp Potion Shop Item 1": "has_mushroom && shop_price(0x0d) && (first_day || event(MEET_KOUME))"
-    "Swamp Potion Shop Item 2": "shop_price(0x0e) && (first_day || event(MEET_KOUME))"
-    "Swamp Potion Shop Item 3": "shop_price(0x0f) && (first_day || event(MEET_KOUME))"
+    "Swamp Potion Shop Item 1": "soul_npc(SOUL_NPC_KOUME_KOTAKE) && has_mushroom && shop_price(0x0d) && (first_day || event(MEET_KOUME))"
+    "Swamp Potion Shop Item 2": "soul_npc(SOUL_NPC_KOUME_KOTAKE) && shop_price(0x0e) && (first_day || event(MEET_KOUME))"
+    "Swamp Potion Shop Item 3": "soul_npc(SOUL_NPC_KOUME_KOTAKE) && shop_price(0x0f) && (first_day || event(MEET_KOUME))"
     "Swamp Potion Shop Rupee": "true"
 "Deku Palace Front":
   region: DEKU_PALACE
@@ -1484,8 +1506,8 @@
     "Deku Palace Main": "true"
     "Deku Palace Cage": "event(RETURN_PRINCESS) && short_hook_anywhere"
   events:
-    PICTURE_DEKU_KING: "has(PICTOGRAPH_BOX) && has(MASK_DEKU)"
-    RETURN_PRINCESS: "is_swamp_cleared && has_deku_princess && has(MASK_DEKU)"
+    PICTURE_DEKU_KING: "has(PICTOGRAPH_BOX) && has(MASK_DEKU) && soul_npc(SOUL_NPC_DEKU_KING)"
+    RETURN_PRINCESS: "is_swamp_cleared && has_deku_princess && has(MASK_DEKU) && soul_npc(SOUL_NPC_DEKU_KING)"
 "Deku Palace Near Cage":
   region: DEKU_PALACE
   exits:
@@ -1504,7 +1526,7 @@
   exits:
     "Deku Palace Main": "true"
   events:
-    MAGIC_BEANS_PALACE: "can_use_wallet(1)"
+    MAGIC_BEANS_PALACE: "soul_bean_salesman && can_use_wallet(1)"
     ARROWS: "true"
     MAGIC: "true"
     RUPEES: "true"
@@ -1544,7 +1566,7 @@
     "Swamp Front": "(has(MASK_DEKU) || has_mask_goron || is_tall || has_hover_boots || can_use_nayru) && (can_hookshot || has_arrows || event(BOAT_RIDE))"
     "Swamp Back": "has(MASK_DEKU) || is_tall || is_swamp_cleared || can_use_nayru || has_hover_boots"
     "Woodfall": "true"
-    "Swamp Canopy Front": "has(MASK_DEKU) || short_hook_anywhere"
+    "Swamp Canopy Front": "short_hook_anywhere"
   locations:
     "Southern Swamp Song of Soaring": "has(MASK_DEKU) || short_hook_anywhere || (has_hover_boots && has_mask_bunny && (has_weapon || has_explosives) && trick(MM_SOARING_HOVERS)) || (has_mask_zora && has_explosives && trick(MM_SOARING_ZORA))"
 "Woodfall":
@@ -1607,7 +1629,7 @@
   region: BUTLER_RACE
   exits:
     "Near Deku Shrine": "true"
-    "Deku Shrine Main": "event(RETURN_PRINCESS)"
+    "Deku Shrine Main": "soul_npc(SOUL_NPC_BUTLER_DEKU) && event(RETURN_PRINCESS)"
 "Deku Shrine Main":
   region: BUTLER_RACE
   exits:
@@ -1696,7 +1718,7 @@
     FAIRY: "true"
   locations:
     "Mountain Village Waterfall Chest": "is_spring && can_use_lens"
-    "Mountain Village Don Gero Mask": "is_winter && event(GORON_FOOD)"
+    "Mountain Village Don Gero Mask": "is_winter && soul_goron && event(GORON_FOOD)"
     "Mountain Village Frog Choir HP": "is_spring && event(FROG_1) && event(FROG_2) && event(FROG_3) && event(FROG_4)"
     "Mountain Village Pot": "scarecrow_hookshot || short_hook_anywhere"
     "Mountain Village Grass 1": "is_spring"
@@ -1744,13 +1766,13 @@
   exits:
     "Mountain Village": "true"
   locations:
-    "Goron Elder": "is_winter && final_day && has_mask_goron && (can_use_fire_short_range || has_hot_water_er || has_hot_water_mtn || has_hot_water_farore || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE)))"
+    "Goron Elder": "soul_npc(SOUL_NPC_GORON_ELDER) && is_winter && final_day && has_mask_goron && (can_use_fire_short_range || has_hot_water_er || has_hot_water_mtn || has_hot_water_farore || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE)))"
 "Mountain Village Keaton":
   region: NONE
   exits:
     "Mountain Village": "true"
   locations:
-    "Clock Town Keaton HP": "is_spring && has_mask_keaton"
+    "Clock Town Keaton HP": "is_spring && soul_npc(SOUL_NPC_KEATON) && has_mask_keaton"
 "Near Village Grotto":
   region: MOUNTAIN_VILLAGE
   exits:
@@ -1793,14 +1815,14 @@
     "Mountain Village": "true"
   events:
     BLACKSMITH_ENABLED: "is_spring || (is_winter && (can_use_fire_short_range || has_hot_water_mtn || has_hot_water_er || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE))))"
-    GOLD_DUST_USED: "can_use_wallet(2) && has(BOTTLED_GOLD_DUST) && event(BLACKSMITH_ENABLED)"
+    GOLD_DUST_USED: "soul_npc(SOUL_NPC_BLACKSMITHS) && can_use_wallet(2) && has(BOTTLED_GOLD_DUST) && event(BLACKSMITH_ENABLED)"
   locations:
-    "Blacksmith Razor Blade": "can_use_wallet(2) && event(BLACKSMITH_ENABLED)"
+    "Blacksmith Razor Blade": "soul_npc(SOUL_NPC_BLACKSMITHS) && can_use_wallet(2) && event(BLACKSMITH_ENABLED)"
     "Blacksmith Gilded Sword": "event(GOLD_DUST_USED)"
 "Twin Islands":
   region: TWIN_ISLANDS
   events:
-    PICTURE_TINGLE: "has(PICTOGRAPH_BOX)"
+    PICTURE_TINGLE: "soul_npc(SOUL_NPC_TINGLE) && has(PICTOGRAPH_BOX)"
     MAGIC: "true"
     RUPEES: "(can_use_light_arrows && (soul_tektite || soul_wolfos || (can_break_snowballs && soul_enemy(SOUL_ENEMY_SNAPPER)))) || is_spring"
   exits:
@@ -1809,11 +1831,11 @@
     "Near Goron Race": "has_mask_goron || scarecrow_hookshot || short_hook_anywhere"
     "Near Ramp Grotto": "has_mask_goron || short_hook_anywhere"
     "Twin Islands Frozen Grotto": "is_spring || (is_winter && (can_use_fire_short_range || has_hot_water_mtn || has_hot_water_er || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE))))"
-    "Tingle Mountain": "has_weapon_range"
+    "Tingle Mountain": "soul_npc(SOUL_NPC_TINGLE) && has_weapon_range"
   locations:
     "Twin Islands Underwater Chest 1": "is_spring && underwater_walking"
     "Twin Islands Underwater Chest 2": "is_spring && underwater_walking"
-    "Goron Elder": "is_winter && (first_day || second_day) && has_mask_goron && (can_use_fire_short_range || has_hot_water_er || has_hot_water_mtn || has_hot_water_farore || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE)))"
+    "Goron Elder": "soul_npc(SOUL_NPC_GORON_ELDER) && is_winter && (first_day || second_day) && has_mask_goron && (can_use_fire_short_range || has_hot_water_er || has_hot_water_mtn || has_hot_water_farore || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE)))"
     "Twin Islands Grass 01": "is_spring"
     "Twin Islands Grass 02": "is_spring"
     "Twin Islands Grass 03": "is_spring"
@@ -1893,10 +1915,10 @@
   exits:
     "Twin Islands": "true"
     "Front of Lone Peak Shrine": "is_winter"
-    "Goron Shrine": "first_day || has_mask_goron"
+    "Goron Shrine": "(soul_goron && first_day) || has_mask_goron"
   events:
-    POWDER_KEG_TRIAL: "(is_spring || can_use_fire_short_range) && has_mask_goron"
-    BUY_KEG: "event(POWDER_KEG_TRIAL) && event(TRIAL_BOULDER) && has(POWDER_KEG) && can_use_wallet(2)"
+    POWDER_KEG_TRIAL: "soul_medigoron && (is_spring || can_use_fire_short_range) && has_mask_goron"
+    BUY_KEG: "soul_medigoron && event(POWDER_KEG_TRIAL) && event(TRIAL_BOULDER) && has(POWDER_KEG) && can_use_wallet(2)"
     MAGIC: "true"
     ARROWS: "true"
     BOMBS_OR_BOMBCHU: "true"
@@ -1988,11 +2010,11 @@
     "Goron Village": "true"
     "Goron Shop": "true"
   events:
-    GORON_FOOD: "is_winter && goron_fast_roll && (can_use_fire_arrows || can_lullaby_half)"
+    GORON_FOOD: "is_winter && goron_fast_roll && (can_use_fire_arrows || (can_lullaby_half && soul_goron_child))"
     STICKS: "true"
     MAGIC: "true"
   locations:
-    "Goron Baby": "is_winter && has_mask_goron && can_lullaby_half"
+    "Goron Baby": "is_winter && soul_goron_child && has_mask_goron && can_lullaby_half"
     "Goron Shrine Pot 01": "true"
     "Goron Shrine Pot 02": "true"
     "Goron Shrine Pot 03": "true"
@@ -2013,9 +2035,9 @@
   exits:
     "Goron Shrine From Shop": "true"
   locations:
-    "Goron Shop Item 1": "shop_price(0x10)"
-    "Goron Shop Item 2": "shop_price(0x11)"
-    "Goron Shop Item 3": "shop_price(0x12)"
+    "Goron Shop Item 1": "soul_goron_shopkeeper && shop_price(0x10)"
+    "Goron Shop Item 2": "soul_goron_shopkeeper && shop_price(0x11)"
+    "Goron Shop Item 3": "soul_goron_shopkeeper && shop_price(0x12)"
 "Path to Snowhead Front":
   region: PATH_TO_SNOWHEAD
   exits:
@@ -2074,7 +2096,7 @@
     "Snowhead Near Fairy Fountain": "(blizzard_stopped || (has_iron_boots && trick(MM_LULLABY_SKIP_IRONS))) && has_mask_goron"
     "Owl Snowhead": "true"
   events:
-    OPEN_SNOWHEAD_TEMPLE: "can_lullaby && has_mask_goron"
+    OPEN_SNOWHEAD_TEMPLE: "soul_biggoron && can_lullaby && has_mask_goron"
     MAGIC: "true"
     BOMBS_OR_BOMBCHU: "true"
     ARROWS: "true"
@@ -2082,7 +2104,7 @@
 "Snowhead":
   region: SNOWHEAD
   exits:
-    "Snowhead Entrance": "true"
+    "Snowhead Entrance": "(can_lullaby && has_mask_goron) || blizzard_stopped || has_iron_boots"
     "Snowhead Temple": "true"
     "Snowhead Near Fairy Fountain": "blizzard_stopped || has_iron_boots"
 "Snowhead Near Fairy Fountain":
@@ -2091,7 +2113,7 @@
     MAGIC: "((blizzard_stopped || has_iron_boots) && can_break_boulders) || is_spring"
     RUPEES: "blizzard_stopped && can_use_light_arrows && soul_wolfos"
   exits:
-    "Snowhead Entrance": "true"
+    "Snowhead Entrance": "blizzard_stopped || has_iron_boots"
     "Snowhead": "blizzard_stopped || has_iron_boots"
     "Snowhead Fairy Fountain": "true"
 "Snowhead Fairy Fountain":
@@ -2107,7 +2129,7 @@
   exits:
     "Near Goron Race": "true"
   locations:
-    "Goron Race Reward": "is_spring && goron_fast_roll"
+    "Goron Race Reward": "is_spring && soul_goron_child && goron_fast_roll"
     "Goron Race Pot 01": "true"
     "Goron Race Pot 02": "true"
     "Goron Race Pot 03": "true"
@@ -2146,10 +2168,10 @@
     "Owl Milk Road": "true"
     "Near Romani Ranch": "after(DAY3_AM_06_00) || can_use_keg || (short_hook_anywhere && trick(MM_OOB_MOVEMENT))"
     "Behind Gorman Fence": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || final_day || short_hook_anywhere"
-    "Tingle Ranch": "has_weapon_range"
+    "Tingle Ranch": "soul_npc(SOUL_NPC_TINGLE) && has_weapon_range"
     "Milk Road Keaton": "true"
   events:
-    PICTURE_TINGLE: "has(PICTOGRAPH_BOX)"
+    PICTURE_TINGLE: "soul_npc(SOUL_NPC_TINGLE) && has(PICTOGRAPH_BOX)"
     RUPEES: "true"
     MAGIC: "true"
     ARROWS: "true"
@@ -2171,7 +2193,7 @@
   exits:
     "Milk Road": "true"
   locations:
-    "Clock Town Keaton HP": "has_mask_keaton"
+    "Clock Town Keaton HP": "soul_npc(SOUL_NPC_KEATON) && has_mask_keaton"
 "Near Romani Ranch":
   region: MILK_ROAD
   exits:
@@ -2180,7 +2202,7 @@
 "Romani Ranch":
   region: ROMANI_RANCH
   events:
-    ALIENS: "(at(NIGHT1_AM_02_30) || (trick(MM_RANCH_FARORE) && can_use_farore && clock_night1)) && has_arrows"
+    ALIENS: "soul_malon && (at(NIGHT1_AM_02_30) || (trick(MM_RANCH_FARORE) && can_use_farore && clock_night1)) && has_arrows"
     ARROWS: "true"
     MAGIC: "true"
     FAIRY: "can_get_gossip_fairy"
@@ -2191,7 +2213,7 @@
     "Stables": "true"
     "Ranch House": "between(DAY1_AM_06_00, NIGHT1_PM_08_00) || between(DAY2_AM_06_00, NIGHT2_PM_08_00) || between(DAY3_AM_06_00, NIGHT3_PM_08_00)"
   locations:
-    "Romani Ranch Epona Song": "before(NIGHT1_PM_06_00) || (trick(MM_RANCH_FARORE) && can_use_farore && clock_day1)"
+    "Romani Ranch Epona Song": "soul_malon && (before(NIGHT1_PM_06_00) || (trick(MM_RANCH_FARORE) && can_use_farore && clock_day1))"
     "Romani Ranch Aliens": "event(ALIENS)"
     "Romani Ranch Cremia Escort": "event(ALIENS) && (at(NIGHT2_PM_06_00) || (trick(MM_RANCH_FARORE) && can_use_farore && clock_night2))"
     "Romani Ranch Grass Pack 1 Grass 01": "true"
@@ -2263,7 +2285,7 @@
   exits:
     "Romani Ranch": "true"
   locations:
-    "Cucco Shack Bunny Mask": "has(MASK_BREMEN)"
+    "Cucco Shack Bunny Mask": "soul_grog && has(MASK_BREMEN)"
   gossip:
     "Cucco Shack Gossip": "true"
 "Doggy Racetrack": #The race is always available
@@ -2274,7 +2296,7 @@
     "Romani Ranch": "true"
   locations:
     "Doggy Racetrack Chest": "can_use_beans || is_tall || can_hookshot_short || trick(MM_DOG_RACE_CHEST_NOTHING)"
-    "Doggy Racetrack HP": "can_use_wallet(1) && has_mask_truth"
+    "Doggy Racetrack HP": "soul_dog_lady && can_use_wallet(1) && has_mask_truth"
     "Doggy Racetrack Pot 1": "true"
     "Doggy Racetrack Pot 2": "true"
     "Doggy Racetrack Pot 3": "true"
@@ -2325,7 +2347,7 @@
   locations:
     "Great Bay Coast Zora Mask": "can_play_healing"
     "Great Bay Coast HP": "(can_use_beans && scarecrow_hookshot) || short_hook_anywhere"
-    "Great Bay Coast Fisherman HP": "can_use_wallet(1) && (can_hookshot_short || can_use_ice_arrows) && is_ocean_cleared && (between(DAY1_AM_07_00, NIGHT1_AM_04_00) || between(DAY2_AM_07_00, NIGHT2_AM_04_00) || between(DAY3_AM_07_00, NIGHT3_AM_04_00))"
+    "Great Bay Coast Fisherman HP": "soul_chest_game_owner && can_use_wallet(1) && (can_hookshot_short || can_use_ice_arrows) && is_ocean_cleared && (between(DAY1_AM_07_00, NIGHT1_AM_04_00) || between(DAY2_AM_07_00, NIGHT2_AM_04_00) || between(DAY3_AM_07_00, NIGHT3_AM_04_00))"
     "Great Bay Coast Pot Ledge 1": "can_hookshot || short_hook_anywhere"
     "Great Bay Coast Pot Ledge 2": "can_hookshot || short_hook_anywhere"
     "Great Bay Coast Pot Ledge 3": "can_hookshot || short_hook_anywhere"
@@ -2476,7 +2498,7 @@
   exits:
     "Great Bay Coast": "true"
   events:
-    SEAHORSE: "event(PHOTO_GERUDO) && has_bottle"
+    SEAHORSE: "soul_chest_game_owner && event(PHOTO_GERUDO) && has_bottle"
 "Pinnacle Rock Entrance":
   region: PINNACLE_ROCK
   exits:
@@ -2510,7 +2532,7 @@
   exits:
     "Great Bay Coast": "true"
   locations:
-    "Laboratory Zora Song": "has_all_zora_eggs && has_mask_zora && has_ocarina"
+    "Laboratory Zora Song": "soul_scientist && has_all_zora_eggs && has_mask_zora && has_ocarina"
     "Laboratory Fish HP": "has_fish"
 "Zora Cape":
   region: ZORA_CAPE
@@ -2616,15 +2638,15 @@
     "Evan's Room": "can_enter_zora_door"
     "Lulu's Room": "can_enter_zora_door"
   locations:
-    "Zora Hall Scene Lights": "can_use_fire_arrows || (trick(MM_STAGE_LIGHTS_DIN) && has_arrows && can_use_din && can_hookshot)"
+    "Zora Hall Scene Lights": "soul_zora && (can_use_fire_arrows || (trick(MM_STAGE_LIGHTS_DIN) && has_arrows && can_use_din && can_hookshot))"
 "Zora Shop":
   region: ENTRANCE
   exits:
     "Zora Hall": "true"
   locations:
-    "Zora Shop Item 1": "shop_price(0x13)"
-    "Zora Shop Item 2": "shop_price(0x14)"
-    "Zora Shop Item 3": "shop_price(0x15)"
+    "Zora Shop Item 1": "soul_zora_shopkeeper && shop_price(0x13)"
+    "Zora Shop Item 2": "soul_zora_shopkeeper && shop_price(0x14)"
+    "Zora Shop Item 3": "soul_zora_shopkeeper && shop_price(0x15)"
 "Tijo's Room":
   region: ENTRANCE
   exits:
@@ -2638,7 +2660,7 @@
   exits:
     "Zora Hall": "true"
   locations:
-    "Zora Hall Evan HP": "can_play_evan && (is_ocean_cursed || (trick(MM_EVAN_FARORE) && can_use_farore))"
+    "Zora Hall Evan HP": "soul_npc(SOUL_NPC_ZORA_MUSICIANS) && can_play_evan && (is_ocean_cursed || (trick(MM_EVAN_FARORE) && can_use_farore))"
 "Lulu's Room":
   region: ENTRANCE
   exits:
@@ -2665,8 +2687,8 @@
     "Milk Road": "true"
     "Gorman Track": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || short_hook_anywhere"
   locations:
-    "Gorman Track Garo Mask": "can_play_epona && can_use_wallet(1) && is_day"
-    "Gorman Track Milk Purchase": "can_use_wallet(1) && is_day"
+    "Gorman Track Garo Mask": "soul_gorman && can_play_epona && can_use_wallet(1) && is_day"
+    "Gorman Track Milk Purchase": "soul_gorman && can_use_wallet(1) && is_day"
 "Gorman Track Back":
   region: MILK_ROAD
   exits:
@@ -2748,7 +2770,7 @@
     FAIRY: "can_get_gossip_fairy || scarecrow_hookshot || short_hook_anywhere"
   exits:
     "Road to Ikana Front": "can_play_epona || short_hook_anywhere || (can_goron_bomb_jump && has_bombs)"
-    "Road to Ikana Top": "((has(MASK_GARO) || has(MASK_GIBDO)) && (can_hookshot || (can_hookshot_short && (trick(MM_HARD_HOOKSHOT) || is_adult)))) || short_hook_anywhere"
+    "Road to Ikana Top": "(soul_poe_collector && (has(MASK_GARO) || has(MASK_GIBDO)) && (can_hookshot || (can_hookshot_short && (trick(MM_HARD_HOOKSHOT) || is_adult)))) || short_hook_anywhere"
     "Ikana Graveyard": "true"
   locations:
     "Road to Ikana Stone Mask": "can_use_lens_strict && has_red_or_blue_potion"
@@ -2821,7 +2843,7 @@
     "Beneath The Graveyard Night 1/2 Exchange": "short_hook_anywhere || has_hover_boots"
   locations:
     "Beneath The Graveyard Chest": "soul_enemy(SOUL_ENEMY_BAD_BAT) && (can_fight || has_explosives || has_arrows || can_hookshot_short || has(MASK_DEKU))"
-    "Beneath The Graveyard Song of Storms": "soul_iron_knuckle && (has_weapon || has_mask_goron || has_explosives) && has_fire_sticks"
+    "Beneath The Graveyard Song of Storms": "soul_composer_bros && soul_iron_knuckle && (has_weapon || has_mask_goron || has_explosives) && has_fire_sticks"
     "Beneath The Graveyard Pot Night 1 Early 1": "true"
     "Beneath The Graveyard Pot Night 1 Early 2": "true"
     "Beneath The Graveyard Pot Night 1 Bats 1": "true"
@@ -2865,12 +2887,12 @@
   events:
     ARROWS: "true"
     RUPEES: "(can_fight || has_weapon_range || has_explosives) && soul_wallmaster"
-    DAMPE_BIG_POE: "has_weapon_range && is_night3"
+    DAMPE_BIG_POE: "soul_dampe && has_weapon_range && is_night3"
   exits:
     "Ikana Graveyard": "true"
     "Beneath The Graveyard Night 3 Wallmaster": "soul_wallmaster"
   locations:
-    "Beneath The Graveyard Dampe Chest": "has_weapon_range && is_night3"
+    "Beneath The Graveyard Dampe Chest": "has_weapon_range && is_night3 && soul_dampe"
     "Beneath The Graveyard Pot Dampe 01": "true"
     "Beneath The Graveyard Pot Dampe 02": "true"
     "Beneath The Graveyard Pot Dampe 03": "true"
@@ -2962,7 +2984,7 @@
     "Beneath The Well Entrance": "true"
     "Ikana Castle Entrance": "true"
     "Stone Tower": "true"
-    "Tingle Ikana": "has_weapon_range"
+    "Tingle Ikana": "soul_npc(SOUL_NPC_TINGLE) && has_weapon_range"
     "Owl Ikana": "true"
   events:
     MAGIC: "true"
@@ -2970,7 +2992,7 @@
     ARROWS: "true"
     RUPEES: "can_use_light_arrows && is_night && soul_bubble"
     FAIRY: "true"
-    PICTURE_TINGLE: "has(PICTOGRAPH_BOX)"
+    PICTURE_TINGLE: "soul_npc(SOUL_NPC_TINGLE) && has(PICTOGRAPH_BOX)"
   gossip:
     "Ikana Canyon Gossip Upper": "true"
 "Ikana Fairy Fountain":
@@ -2984,7 +3006,7 @@
   exits:
     "Ikana Canyon": "true"
   events:
-    IKANA_CURSE_LIFTED: "is_valley_cursed && can_play_storms"
+    IKANA_CURSE_LIFTED: "soul_composer_bros && is_valley_cursed && can_play_storms"
 "Music Box House":
   region: ENTRANCE
   exits:
@@ -2996,7 +3018,7 @@
   exits:
     "Ikana Canyon": "true"
   locations:
-    "Ghost Hut HP": "(has_arrows || can_hookshot_short || can_use_deku_bubble) && can_use_wallet(1) && is_valley_cursed"
+    "Ghost Hut HP": "soul_poe_collector && (has_arrows || can_hookshot_short || can_use_deku_bubble) && can_use_wallet(1) && is_valley_cursed"
 "Ikana Castle Entrance":
   region: IKANA_CASTLE
   exits:

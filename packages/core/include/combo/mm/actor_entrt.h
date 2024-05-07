@@ -1,7 +1,7 @@
 #ifndef COMBO_MM_ACTOR_ENTRT_H
 #define COMBO_MM_ACTOR_ENTRT_H
 
-#include <combo/common/actor.h>
+#include <combo/actor.h>
 
 typedef struct Actor_EnGirlA Actor_EnGirlA;
 

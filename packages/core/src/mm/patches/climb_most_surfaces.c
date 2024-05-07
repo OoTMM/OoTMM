@@ -1,9 +1,11 @@
 #include <combo.h>
+#include <combo/player.h>
+#include <combo/config.h>
 
 static u32 lastClimbFrame = 0;
 static u32 startClimbingTimer = 5;
 u32 Player_GetCollisionType(Actor_Player* link, GameState_Play* ctxt, u32 collisionType) {
-    if (!comboConfig(CFG_MM_CLIMB_MOST_SURFACES)) {
+    if (!Config_Flag(CFG_MM_CLIMB_MOST_SURFACES)) {
         return collisionType;
     }
 

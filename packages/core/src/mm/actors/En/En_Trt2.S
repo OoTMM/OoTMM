@@ -2,7 +2,7 @@
 
 /* GI renumbering */
 PATCH_START 0x80ad4070
-  li a2,GI_MM_POTION_RED
+  li a2,GI_NOTHING
 PATCH_END
 
 PATCH_START 0x80ad408c

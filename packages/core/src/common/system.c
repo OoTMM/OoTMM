@@ -3,7 +3,7 @@
 #define ICACHELINE 0x20
 #define DCACHELINE 0x10
 
-void comboInvalICache(void* addr, u32 size)
+void System_InvalICache(void* addr, u32 size)
 {
     u32 iaddr;
     u32 iend;
@@ -20,7 +20,7 @@ void comboInvalICache(void* addr, u32 size)
     }
 }
 
-void comboInvalDCache(void* addr, u32 size)
+void System_InvalDCache(void* addr, u32 size)
 {
     u32 daddr;
     u32 dend;

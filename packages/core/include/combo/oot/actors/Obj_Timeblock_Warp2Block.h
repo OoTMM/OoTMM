@@ -1,7 +1,7 @@
 #ifndef COMBO_OOT_OBJ_TIMEBLOCK_WARP2BLOCK_H
 #define COMBO_OOT_OBJ_TIMEBLOCK_WARP2BLOCK_H
 
-#include <combo/common/actor.h>
+#include <combo/actor.h>
 
 typedef struct ALIGNED(4)
 {

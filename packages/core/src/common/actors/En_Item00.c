@@ -1,6 +1,9 @@
 #include <combo.h>
 #include <combo/item.h>
 #include <combo/player.h>
+#include <combo/global.h>
+#include <combo/draw.h>
+#include <combo/actor.h>
 
 #if defined(GAME_OOT)
 # define DUMMY_MSG 0xb4
@@ -42,7 +45,7 @@ static void EnItem00_DrawXflag(Actor_EnItem00* this, GameState_Play* play)
     ModelViewTranslate(this->base.world.pos.x, this->base.world.pos.y + 20.f, this->base.world.pos.z, MAT_SET);
     ModelViewScale(0.35f, 0.35f, 0.35f, MAT_MUL);
     ModelViewRotateY(this->base.rot2.y * ((M_PI * 2.f) / 32767.f), MAT_MUL);
-    comboDrawGI(play, &this->base, gi, 0);
+    Draw_Gi(play, &this->base, gi, 0);
 }
 
 static int EnItem00_XflagCanCollect(Actor_EnItem00* this, GameState_Play* play)
@@ -113,7 +116,7 @@ void EnItem00_AddXflag(Actor_EnItem00* this)
     if (!isItemFastBuy(o.gi))
     {
         PlayerDisplayTextBox(gPlay, DUMMY_MSG, NULL);
-        FreezePlayer(gPlay);
+        Player_Freeze(gPlay);
         this->isExtendedMajor = 1;
     }
     comboAddItemEx(gPlay, &q, this->isExtendedMajor);
@@ -187,11 +190,11 @@ static void EnItem00_XflagCollectedHandler(Actor_EnItem00* this, GameState_Play*
     EnItem00_CollectedHandler(this, play);
     if (Message_IsClosed(&this->base, play))
     {
-        UnfreezePlayer(play);
+        Player_Unfreeze(play);
         this->handler = EnItem00_CollectedHandler;
     }
     else
-        FreezePlayer(play);
+        Player_Freeze(play);
 }
 
 void EnItem00_SetXflagCollectedHandler(Actor_EnItem00* this)

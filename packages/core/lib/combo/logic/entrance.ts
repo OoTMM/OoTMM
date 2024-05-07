@@ -29,6 +29,7 @@ class WorldShuffler {
   private world: World;
   private overrides: EntranceOverrides;
   private backtrackCount: number;
+  private readonly allEntrances: Entrance[];
 
   constructor(
     private random: Random,
@@ -40,6 +41,7 @@ class WorldShuffler {
     this.backtrackCount = 0;
     this.world = worlds[worldId];
     this.overrides = {};
+    this.allEntrances = this.computeAllEntrances();
   }
 
   private getExpr(original: Entrance) {
@@ -55,6 +57,14 @@ class WorldShuffler {
   private songOfTime(e: Expr): Expr {
     const subcond = this.world.exprParsers.mm.parse('can_reset_time');
     return exprAnd([e, subcond]);
+  }
+
+  private computeAllEntrances() {
+    let entrances = Object.keys(ENTRANCES) as Entrance[];
+    if (this.settings.games !== 'ootmm') {
+      entrances = entrances.filter(x => ENTRANCES[x].game === this.settings.games);
+    }
+    return entrances;
   }
 
   private placeSingle(world: World, original: Entrance, replacement: Entrance) {
@@ -184,7 +194,7 @@ class WorldShuffler {
     const pool = entrances[poolName];
 
     /* Select a source */
-    const src = sample(this.random, [...pool.src]);
+    const src = sample(this.random, pool.src);
 
     /* Build the candidates list */
     let dstCandidates = new Set(pool.dst);
@@ -220,7 +230,7 @@ class WorldShuffler {
 
     /* Try to find a match */
     while (dstCandidates.size > 0) {
-      const dst = sample(this.random, [...dstCandidates]);
+      const dst = sample(this.random, dstCandidates);
       dstCandidates.delete(dst);
       const revSrc = this.reverseEntrance(src);
       const revDst = this.reverseEntrance(dst);
@@ -277,7 +287,7 @@ class WorldShuffler {
       for (const t of types) {
         entrancesTypes.add(t);
       }
-      const entrances = (Object.keys(ENTRANCES) as Entrance[]).filter(x => types.includes(ENTRANCES[x].type)).flatMap(x => this.entrances(x));
+      const entrances = this.allEntrances.filter(x => types.includes(ENTRANCES[x].type)).flatMap(x => this.entrances(x));
       const entrancesReverse = entrances.map(x => this.reverseEntrance(x)).filter(x => x) as Entrance[];
       const entrancesAll = [...entrances, ...entrancesReverse];
 
@@ -310,7 +320,7 @@ class WorldShuffler {
 
   private entrancesForTypes(aTypes: Iterable<string>, reverse: boolean) {
     const types = new Set(aTypes);
-    const entrances = (Object.keys(ENTRANCES) as Entrance[]).filter(x => types.has(ENTRANCES[x].type));
+    const entrances = this.allEntrances.filter(x => types.has(ENTRANCES[x].type));
     if (!reverse)
       return entrances;
     const entrancesReverse = entrances.map(x => this.reverseEntranceRaw(x)).filter(x => x) as Entrance[];
@@ -330,11 +340,11 @@ class WorldShuffler {
 
     /* Compute entrances */
     const entrances = this.entrancesForTypes(types, this.settings.erDecoupled);
-    const entrancesSrc = new Set((Object.keys(ENTRANCES) as Entrance[]).filter(x => ENTRANCES[x].type === 'wallmaster' && this.world.areas.hasOwnProperty(ENTRANCES[x].from)));
+    const entrancesSrc = new Set(this.allEntrances.filter(x => ENTRANCES[x].type === 'wallmaster' && this.world.areas.hasOwnProperty(ENTRANCES[x].from)));
     const entrancesDst = new Set(entrances);
 
     while (entrancesSrc.size > 0) {
-      const src = sample(this.random, [...entrancesSrc]);
+      const src = sample(this.random, entrancesSrc);
       let dstCandidates = [...entrancesDst];
       if (this.settings.erWallmasters === 'ownGame') {
         dstCandidates = dstCandidates.filter(x => ENTRANCES[x].game === ENTRANCES[src].game);
@@ -361,9 +371,8 @@ class WorldShuffler {
     const entrancesDst = new Set(entrances);
 
     while (entrancesSrc.size > 0) {
-      const src = sample(this.random, [...entrancesSrc]);
-      let dstCandidates = [...entrancesDst];
-      const dst = sample(this.random, dstCandidates);
+      const src = sample(this.random, entrancesSrc);
+      const dst = sample(this.random, entrancesDst);
       this.overrides[src] = dst;
       entrancesSrc.delete(src);
       entrancesDst.delete(dst);
@@ -522,7 +531,7 @@ class WorldShuffler {
   }
 
   private legacyFixBosses(world: World): World {
-    const bossEntrances = (Object.keys(ENTRANCES) as Entrance[]).filter(x => ENTRANCES[x].type === 'boss');
+    const bossEntrances = this.allEntrances.filter(x => ENTRANCES[x].type === 'boss');
     const bossEntrancesByDungeon = new Map<string, Entrance>();
     const bossEvents = new Map<string, ExprMap>();
     const bossAreas = new Map<string, string[]>();
@@ -602,7 +611,7 @@ class WorldShuffler {
       if (locs.size === 0) {
         throw new LogicEntranceError(`Nowhere to place boss ${boss}`);
       }
-      const loc = sample(this.random, Array.from(locs));
+      const loc = sample(this.random, locs);
 
       /* Mark as placed */
       unplacedBosses.delete(boss);
@@ -832,6 +841,9 @@ export class LogicPassEntrances {
   }
 
   private validateAgeTemple() {
+    if (!['ootmm', 'oot'].includes(this.input.settings.games))
+      return;
+
     const newWorlds = this.worlds.map(w => cloneWorld(w));
     for (const w of newWorlds) {
       const a = w.areas['OOT SPAWN'];

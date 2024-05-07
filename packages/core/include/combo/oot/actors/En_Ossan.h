@@ -1,7 +1,7 @@
 #ifndef COMBO_OOT_EN_OSSAN_H
 #define COMBO_OOT_EN_OSSAN_H
 
-#include <combo/common/actor.h>
+#include <combo/actor.h>
 
 typedef struct Actor_EnGirlA Actor_EnGirlA;
 

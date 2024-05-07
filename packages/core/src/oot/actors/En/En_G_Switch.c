@@ -1,6 +1,8 @@
 #include <combo.h>
 #include <combo/item.h>
 #include <combo/player.h>
+#include <combo/global.h>
+#include <combo/draw.h>
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x13c) = (h); } while (0)
 
@@ -151,7 +153,7 @@ void EnGSwitch_DrawSilverRupee(Actor* this, GameState_Play* play)
 
     EnGSwitch_ItemOverride(&o, this, play);
     ModelViewScale(scale, scale, scale, MAT_MUL);
-    comboDrawGI(play, this, o.gi, 0);
+    Draw_Gi(play, this, o.gi, 0);
 }
 
 static const Gfx kPotDrawListNormalTop[] = {
@@ -184,12 +186,12 @@ void EnGSwitch_HandlerAfterCollected(Actor* this, GameState_Play* play)
 {
     if (Message_IsClosed(this, play))
     {
-        UnfreezePlayer(play);
+        Player_Unfreeze(play);
         ActorDestroy(this);
     }
     else
     {
-        FreezePlayer(play);
+        Player_Freeze(play);
     }
 }
 

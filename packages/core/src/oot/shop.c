@@ -47,7 +47,7 @@
 #define SHOP_POTION_RED_ALT         0x30
 #define SHOP_POTION_RED_ALT2        0x31
 
-u8 comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
+u8 Shop_ItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
 {
     int ageMask;
 

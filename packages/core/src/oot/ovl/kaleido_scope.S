@@ -302,3 +302,12 @@ PATCH_START 0x80822e6c
   nop
   jal KaleidoScope_LoadItemName
 PATCH_END
+
+/* Hook the drawing of equipment */
+PATCH_START 0x80819478
+  jal KaleidoScope_DrawQuadEquipment
+PATCH_END
+
+PATCH_START 0x8082f0ac
+.int 0
+PATCH_END

@@ -1,7 +1,7 @@
 #ifndef COMBO_MM_EN_SUTTARI_H
 #define COMBO_MM_EN_SUTTARI_H
 
-#include <combo/common/actor.h>
+#include <combo/actor.h>
 
 typedef struct
 {

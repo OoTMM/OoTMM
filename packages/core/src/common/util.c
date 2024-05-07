@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/util.h>
 #include <combo/item.h>
+#include <combo/config.h>
 
 u32 popcount(u32 x)
 {
@@ -20,53 +21,6 @@ void* actorAddr(u16 actorId, u32 addr)
     ovl = gActorOvl + actorId;
     offset = addr - ovl->vramStart;
     return (char*)ovl->data + offset;
-}
-
-u8 comboReadPhysU8(u32 paddr)
-{
-    u32 paddrAligned;
-    u32 value;
-
-    paddrAligned = paddr & ~3;
-    value = comboReadPhysU32(paddrAligned);
-    value >>= ((3 - (paddr & 3)) * 8);
-    value &= 0xff;
-    return (u8)value;
-}
-
-s8 comboReadPhysI8(u32 paddr)
-{
-    return (s8)comboReadPhysU8(paddr);
-}
-
-u16 comboReadPhysU16(u32 paddr)
-{
-    u32 paddrAligned;
-    u32 value;
-
-    paddrAligned = paddr & ~3;
-    value = comboReadPhysU32(paddrAligned);
-    value >>= ((2 - (paddr & 2)) * 8);
-    value &= 0xffff;
-    return (u16)value;
-}
-
-s16 comboReadPhysI16(u32 paddr)
-{
-    return (s16)comboReadPhysU16(paddr);
-}
-
-u32 comboReadPhysU32(u32 paddr)
-{
-    u32 tmp;
-
-    osEPiReadIo(gCartHandle, paddr | PI_DOM1_ADDR2, &tmp);
-    return tmp;
-}
-
-s32 comboReadPhysI32(u32 paddr)
-{
-    return (s32)comboReadPhysU32(paddr);
 }
 
 int comboStrayFairyIndex(void)
@@ -111,7 +65,7 @@ int comboMmDungeonIndex(void)
 int comboIsChateauActive(void)
 {
 #if defined(GAME_OOT)
-    if (!comboConfig(CFG_SHARED_MAGIC))
+    if (!Config_Flag(CFG_SHARED_MAGIC))
         return 0;
 #endif
 
@@ -121,7 +75,7 @@ int comboIsChateauActive(void)
 int comboIsLinkAdult(void)
 {
 #if defined(GAME_MM)
-    if (!comboConfig(CFG_MM_CROSS_AGE))
+    if (!Config_Flag(CFG_MM_CROSS_AGE))
         return 0;
 #endif
     return gOotSave.age == 0;

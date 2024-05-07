@@ -7,7 +7,6 @@ import SelectorCard, { SelectedList } from './SelectorCard';
 import TriforceImg from '../assets/blacktriforce.png';
 import MaskImg from '../assets/blackmask.png';
 import { Col, Row } from 'react-bootstrap';
-import Button from './Button';
 
 const NAMES = {
   OOT: 'Ocarina of Time',

@@ -2,6 +2,9 @@
 #include <combo/item.h>
 #include <combo/net.h>
 #include <combo/time.h>
+#include <combo/magic.h>
+#include <combo/config.h>
+#include <combo/global.h>
 
 #if !defined(GAME_OOT)
 ALIGNED(16) OotSave gOotSave;
@@ -36,7 +39,7 @@ void gracePeriod(void)
 }
 #endif
 
-void comboOnSaveLoad(void)
+void Save_OnLoad(void)
 {
     NetContext* net;
 
@@ -104,8 +107,8 @@ static void saveOot(void)
 
     /* Write the save data to flash */
     base = 0x20 + 0x1450 * gSaveContext.fileIndex;
-    comboReadWriteFlash(base, &gOotSave, sizeof(gOotSave), OS_WRITE);
-    comboReadWriteFlash(base + 0x3cf0, &gOotSave, sizeof(gOotSave), OS_WRITE);
+    Flash_ReadWrite(base, &gOotSave, sizeof(gOotSave), OS_WRITE);
+    Flash_ReadWrite(base + 0x3cf0, &gOotSave, sizeof(gOotSave), OS_WRITE);
 }
 
 static void saveMm(void)
@@ -120,36 +123,36 @@ static void saveMm(void)
     gMmSave.checksum = computeChecksumMm(&gMmSave, sizeof(gMmSave));
 
     /* Write the save data to flash */
-    comboReadWriteFlash(base, &gMmSave, sizeof(gMmSave), OS_WRITE);
-    comboReadWriteFlash(base + 0x4000, &gMmSave, sizeof(gMmSave), OS_WRITE);
+    Flash_ReadWrite(base, &gMmSave, sizeof(gMmSave), OS_WRITE);
+    Flash_ReadWrite(base + 0x4000, &gMmSave, sizeof(gMmSave), OS_WRITE);
 }
 
-void comboReadOwnSave(void)
+void Save_ReadOwn(void)
 {
     u32 fileIndex = gSaveContext.fileIndex;
 
 #if defined(GAME_OOT)
-    comboReadWriteFlash(0x20 + 0x1450 * fileIndex, &gOotSave, sizeof(gOotSave), OS_READ);
+    Flash_ReadWrite(0x20 + 0x1450 * fileIndex, &gOotSave, sizeof(gOotSave), OS_READ);
 #endif
 
 #if defined(GAME_MM)
-    comboReadWriteFlash(0x8000 + 0x8000 * fileIndex, &gMmSave, sizeof(gMmSave), OS_READ);
+    Flash_ReadWrite(0x8000 + 0x8000 * fileIndex, &gMmSave, sizeof(gMmSave), OS_READ);
 #endif
 }
 
-void comboReadForeignSave(void)
+void Save_ReadForeign(void)
 {
     u32 fileIndex = gSaveContext.fileIndex;
 
 #if !defined(GAME_OOT)
-    comboReadWriteFlash(0x20 + 0x1450 * fileIndex, &gOotSave, sizeof(gOotSave), OS_READ);
+    Flash_ReadWrite(0x20 + 0x1450 * fileIndex, &gOotSave, sizeof(gOotSave), OS_READ);
 #endif
 
 #if !defined(GAME_MM)
-    comboReadWriteFlash(0x8000 + 0x8000 * fileIndex, &gMmSave, sizeof(gMmSave), OS_READ);
+    Flash_ReadWrite(0x8000 + 0x8000 * fileIndex, &gMmSave, sizeof(gMmSave), OS_READ);
 #endif
 
-    comboReadWriteFlash(0x18000 + 0x4000 * fileIndex, &gSharedCustomSave, sizeof(gSharedCustomSave), OS_READ);
+    Flash_ReadWrite(0x18000 + 0x4000 * fileIndex, &gSharedCustomSave, sizeof(gSharedCustomSave), OS_READ);
 }
 
 static void saveFixup(void)
@@ -159,7 +162,7 @@ static void saveFixup(void)
         gSave.playerData.magicAmount = gSaveContext.magicFillTarget;
 }
 
-void comboWriteSave(void)
+void Save_Write(void)
 {
     NetContext* net;
 
@@ -178,7 +181,7 @@ void comboWriteSave(void)
     saveMm();
 
     /* Write the custom save */
-    comboReadWriteFlash(0x18000 + 0x4000 * gSaveContext.fileIndex, &gSharedCustomSave, sizeof(gSharedCustomSave), OS_WRITE);
+    Flash_ReadWrite(0x18000 + 0x4000 * gSaveContext.fileIndex, &gSharedCustomSave, sizeof(gSharedCustomSave), OS_WRITE);
 }
 
 static void copyRawSave(u32 dst, u32 src, int size)
@@ -187,14 +190,14 @@ static void copyRawSave(u32 dst, u32 src, int size)
 
     for (int i = 0; i < size / sizeof(buf); ++i)
     {
-        comboReadWriteFlash(src, buf, sizeof(buf), OS_READ);
-        comboReadWriteFlash(dst, buf, sizeof(buf), OS_WRITE);
+        Flash_ReadWrite(src, buf, sizeof(buf), OS_READ);
+        Flash_ReadWrite(dst, buf, sizeof(buf), OS_WRITE);
         src += sizeof(buf);
         dst += sizeof(buf);
     }
 }
 
-void comboCopyMmSave(int fileIndexDst, int fileIndexSrc)
+void Save_CopyMM(int fileIndexDst, int fileIndexSrc)
 {
     /* Copy the actual MM save */
     copyRawSave(0x8000 + 0x8000 * fileIndexDst, 0x8000 + 0x8000 * fileIndexSrc, 0x8000);
@@ -208,17 +211,17 @@ void comboHandleAutoInvertClockSpeed(void)
     s32 invertSpeed;
 
     invertSpeed = -2;
-    if(comboConfig(CFG_MM_CLOCK_SPEED_VERYSLOW))
+    if(Config_Flag(CFG_MM_CLOCK_SPEED_VERYSLOW))
         invertSpeed = 0;
-    if(comboConfig(CFG_MM_CLOCK_SPEED_SLOW))
+    if(Config_Flag(CFG_MM_CLOCK_SPEED_SLOW))
         invertSpeed = -1;
-    if(comboConfig(CFG_MM_CLOCK_SPEED_FAST))
+    if(Config_Flag(CFG_MM_CLOCK_SPEED_FAST))
         invertSpeed = -4;
-    if(comboConfig(CFG_MM_CLOCK_SPEED_VERYFAST))
+    if(Config_Flag(CFG_MM_CLOCK_SPEED_VERYFAST))
         invertSpeed = -6;
-    if(comboConfig(CFG_MM_CLOCK_SPEED_SUPERFAST))
+    if(Config_Flag(CFG_MM_CLOCK_SPEED_SUPERFAST))
         invertSpeed = -12;
 
-    if (comboConfig(CFG_MM_AUTO_INVERT_ALWAYS) || (comboConfig(CFG_MM_AUTO_INVERT_FIRST_CYCLE) && gMmSave.playerData.songOfTimeCount == 0))
+    if (Config_Flag(CFG_MM_AUTO_INVERT_ALWAYS) || (Config_Flag(CFG_MM_AUTO_INVERT_FIRST_CYCLE) && gMmSave.playerData.songOfTimeCount == 0))
         gMmSave.daySpeed = invertSpeed;
 }

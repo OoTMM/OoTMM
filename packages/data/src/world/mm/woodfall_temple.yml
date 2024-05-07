@@ -211,7 +211,7 @@
 "Woodfall Temple Princess Jail":
   dungeon: WF
   events:
-    DEKU_PRINCESS: "has_weapon"
+    DEKU_PRINCESS: "has_weapon && soul_npc(SOUL_NPC_DEKU_PRINCESS)"
   exits:
     "Woodfall": "true"
     "WARP_SONGS": "true"

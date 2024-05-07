@@ -76,10 +76,10 @@ static void initCustomSave(void)
 
     bzero(buf, sizeof(buf));
     for (int i = 0; i < 0x4000 / sizeof(buf); ++i)
-        comboReadWriteFlash(0x18000 + 0x4000 * gSaveContext.fileIndex + i * sizeof(buf), buf, sizeof(buf), OS_WRITE);
+        Flash_ReadWrite(0x18000 + 0x4000 * gSaveContext.fileIndex + i * sizeof(buf), buf, sizeof(buf), OS_WRITE);
 }
 
-void comboCreateSaveMM(void)
+void Save_CreateMM(void)
 {
     int i;
     int j;
