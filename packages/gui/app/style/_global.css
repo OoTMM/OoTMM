@@ -2,12 +2,14 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   min-height: 100vh;
 }
 
 html {
-  font-family: Sailec, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: Sailec, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol';
   font-size: 62.5%;
 }
 
@@ -19,7 +21,7 @@ strong {
   font-weight: 600;
 }
 
-label, .label-main {
+.label-main {
   font-weight: 500 !important;
 }
 
@@ -34,4 +36,8 @@ th {
 
 table {
   margin: 1em 0;
+}
+
+.row {
+  --bs-gutter-y: 0.75rem;
 }

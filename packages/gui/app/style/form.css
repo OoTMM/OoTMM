@@ -1,26 +1,23 @@
 label {
   display: flex;
   flex-direction: column;
-  font-weight: bold;
   font-size: 1em;
 }
 
-label > * {
-  font-weight: initial;
-}
-
-input[type=file] {
+input[type='file'] {
   display: none;
 }
 
-input[type=checkbox] {
+input[type='checkbox'] {
   height: 20px;
   width: 20px;
-  opacity: 0.5;
-  transition: all 200ms ease-in 0s;
+  opacity: 0.7;
+  transition: all 350ms ease-in 0s;
 }
 
-select, input[type=text], input[type=number] {
+select,
+input[type='text'],
+input[type='number'] {
   transition: border-color 200ms ease-in 0s, box-shadow 200ms ease-in 0s;
   font-size: 1.5rem;
   height: 30px;
@@ -41,7 +38,8 @@ label > input {
   margin-top: 8px;
 }
 
-button {
+button,
+.btn {
   white-space: nowrap;
   vertical-align: middle;
   user-select: none;
@@ -50,24 +48,29 @@ button {
   text-align: center;
   padding: 0.5em 1em;
   min-width: 48px;
-  line-height: 1.6;
   font-weight: 700;
   font-size: 1em;
   border: none;
-  border-radius: 2px;
+  border-radius: 10px;
 }
 
-button:active, button:hover {
-  opacity: 0.7;
+button:active,
+button:hover {
+  opacity: 0.8;
 }
 
-button, .btn {
+button,
+.btn {
   cursor: pointer;
 }
 
-.btn-primary {
-  background: linear-gradient(180deg, #43d857, #00bb19);
-  color: #fff;
+.btn-fill {
+  width: 100%;
+}
+
+.btn-auto {
+  width: auto;
+  padding: 10px 26px;
 }
 
 .btn-danger {
@@ -79,4 +82,23 @@ button, .btn {
   background: linear-gradient(180deg, #43d857, #00bb19);
   color: #fff;
   margin: 0.25em;
+}
+
+.iconLeft {
+  margin-right: 5px;
+}
+
+.iconRight {
+  margin-left: 5px;
+}
+
+.card {
+  border: 1px solid #6e29a3;
+  height: 538px;
+  overflow-y: auto;
+  padding: 7px 3px;
+}
+
+.icon-spacing {
+  margin-left: 7px;
 }
