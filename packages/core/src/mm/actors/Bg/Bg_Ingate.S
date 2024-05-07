@@ -16,6 +16,6 @@ BgIngate_EndArchery_Hook:
 PATCH_START 0x8095403c
     jal     BgIngate_EndArchery_Hook
      lw      a1, 0x002c (sp)
-    beqz    v0, .+0xbc
+    beqz    v0, .+0xac
     lw      t9, 0x0164 (s0)
 PATCH_END
