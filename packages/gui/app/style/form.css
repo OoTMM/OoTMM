@@ -29,6 +29,7 @@ label {
 }
 
 input[type=checkbox] {
+  flex: none;
   height: 2rem;
   width: 2rem;
   margin-left: 0;
@@ -85,7 +86,7 @@ input[type=text]:focus, select:focus, textarea:focus {
   flex-direction: column;
   border: 1px solid #aaa;
   padding: 0 0.5em;
-  height: 40em;
+  height: 35em;
   min-width: 20em;
   overflow-y: scroll;
 }
