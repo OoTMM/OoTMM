@@ -4,6 +4,8 @@ import { merge } from 'lodash';
 
 import * as API from '../api';
 
+let settingsTicket = 0;
+
 type GeneratorState = {
   romConfig: {
     files: {
@@ -96,9 +98,13 @@ export function GeneratorContextProvider({ children }: { children: React.ReactNo
   };
 
   const overrideSettings = (settings: Settings) => {
+    const ticket = ++settingsTicket;
     setState(state => ({ ...state, settings }));
     localStorage.setItem('settings', JSON.stringify(settings));
     API.itemPoolFromSettings(settings).then((itemPool) => {
+      if (ticket !== settingsTicket) {
+        return;
+      }
       setState((state) => {
         const startingItems = API.restrictItemsByPool(state.settings.startingItems, itemPool);
         const newSettings = { ...state.settings, startingItems };
