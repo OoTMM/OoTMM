@@ -3,7 +3,7 @@ import { SETTINGS_CATEGORIES } from '@ootmm/core';
 
 import { useIsPatch, useRandomSettings } from '../contexts/GeneratorContext';
 import { RomConfig } from './RomConfig';
-import { Tab, TabBar } from './Tab';
+import { Tab, Tabs } from './Tab';
 import { SettingsEditor } from './SettingsEditor';
 import { StartingItems } from './StartingItems';
 import { Tricks } from './Tricks';
@@ -16,67 +16,23 @@ import { CosmeticsEditor } from './Cosmetics';
 import { Hints } from './Hints';
 
 export function Generator() {
-  const tabs: Tab[] = [];
   const [isPatch] = useIsPatch();
   const [randomSettings] = useRandomSettings();
-
   const isRandom = randomSettings.enabled;
 
-  tabs.push({
-    name: "ROM Config",
-    component: <RomConfig/>
-  });
-
-  if (!isPatch) {
-    if (!isRandom) {
-      SETTINGS_CATEGORIES.forEach(category => {
-        tabs.push({ name: category.name, component: <SettingsEditor category={category.key}/>});
-      });
-      tabs.push({
-        name: "Dungeons",
-        component: <Dungeons/>
-      });
-    }
-    tabs.push({
-      name: "Tricks",
-      component: <Tricks/>
-    });
-    tabs.push({
-      name: "Glitches",
-      component: <Glitches/>
-    });
-    if (!isRandom) {
-      tabs.push({
-        name: "Special Conditions",
-        component: <SpecialConds/>
-      });
-      tabs.push({
-        name: "Starting Items",
-        component: <StartingItems/>
-      });
-    }
-
-    tabs.push({
-      name: "Junk Locations",
-      component: <JunkLocations/>
-    });
-    tabs.push({
-      name: "Hints",
-      component: <Hints/>
-    });
-
-    if (!isRandom) {
-      tabs.push({
-        name: "Plando",
-        component: <Plando/>
-      });
-    }
-  }
-
-  tabs.push({
-    name: "Cosmetics",
-    component: <CosmeticsEditor/>
-  });
-
-  return <TabBar tabs={tabs}/>
+  return <Tabs>
+    <Tab name="ROM Config"><RomConfig/></Tab>
+    {SETTINGS_CATEGORIES.map(c => (
+      <Tab key={c.key} name={c.name} disabled={isPatch || isRandom}><SettingsEditor category={c.key}/></Tab>
+    ))}
+    <Tab name="Dungeons" disabled={isPatch || isRandom}><Dungeons/></Tab>
+    <Tab name="Tricks" disabled={isPatch}><Tricks/></Tab>
+    <Tab name="Glitches" disabled={isPatch}><Glitches/></Tab>
+    <Tab name="Special Conditions" disabled={isPatch || isRandom}><SpecialConds/></Tab>
+    <Tab name="Starting Items" disabled={isPatch || isRandom}><StartingItems/></Tab>
+    <Tab name="Junk Locations" disabled={isPatch}><JunkLocations/></Tab>
+    <Tab name="Hints" disabled={isPatch}><Hints/></Tab>
+    <Tab name="Plando" disabled={isPatch || isRandom}><Plando/></Tab>
+    <Tab name="Cosmetics"><CosmeticsEditor/></Tab>
+  </Tabs>;
 }

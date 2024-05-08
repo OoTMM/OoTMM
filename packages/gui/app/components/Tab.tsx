@@ -1,26 +1,30 @@
 import React, { useState } from 'react';
 
-export type Tab = {
-  name: string;
-  component: React.ReactElement;
-}
-
 type TabProps = {
-  tabs: Tab[];
-}
+  name: string;
+  children?: React.ReactNode;
+  disabled?: boolean;
+};
+export function Tab({ disabled, children }: TabProps) {
+  return disabled ? null : children;
+};
 
-export function TabBar({ tabs }: TabProps) {
+type TabsProps = {
+  children?: React.ReactNode;
+};
+export function Tabs({ children }: TabsProps) {
   const [activeTab, setActiveTab] = useState(0);
+  const tabs = React.Children.toArray(children) as React.ReactElement<TabProps>[];
 
   return (
     <>
       <nav className="tab-bar-left">
         {tabs.map((tab, i) =>
-          <a key={i} className={["tab", i === activeTab ? "active" : "inactive"].join(" ")} href="#" onClick={(e) => { e.preventDefault(); setActiveTab(i)}}>{tab.name}</a>
+          !tab.props.disabled && <a key={i} className={["tab", i === activeTab ? "active" : "inactive"].join(" ")} href="#" onClick={(e) => { e.preventDefault(); setActiveTab(i)}}>{tab.props.name}</a>
         )}
       </nav>
       <div className="tab-bar-right" key={activeTab}>
-        {tabs[activeTab].component}
+        {tabs[activeTab]}
       </div>
     </>
   );
