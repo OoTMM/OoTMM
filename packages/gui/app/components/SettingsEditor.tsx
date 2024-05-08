@@ -18,10 +18,10 @@ const SET_OPTIONS = [
 
 function SettingTooltip({ setting }: { setting: string }) {
   const [settings] = useSettings();
-  const data = SETTINGS.find(x => x.key === setting)!;
+  const data = SETTINGS.find((x) => x.key === setting)!;
   const description = (data as any).description;
 
-  const values: {[k: string]: string} = {};
+  const values: { [k: string]: string } = {};
   let def = '';
 
   if (!description) {
@@ -29,36 +29,36 @@ function SettingTooltip({ setting }: { setting: string }) {
   }
 
   switch (data.type) {
-  case 'boolean':
-    def = data.default ? 'true' : 'false';
-    break;
-  case 'enum':
-    for (const v of (data as any).values) {
-      if (v.description) {
-        values[v.name] = v.description;
+    case 'boolean':
+      def = data.default ? 'true' : 'false';
+      break;
+    case 'enum':
+      for (const v of (data as any).values) {
+        if (v.description) {
+          values[v.name] = v.description;
+        }
       }
-    }
-    def = ((data as any).values as any[]).find(x => x.value === (data.default)).name;
-    break;
-  case 'number':
-    const min = (data as any).min;
-    const max = (data as any).max;
+      def = ((data as any).values as any[]).find((x) => x.value === data.default).name;
+      break;
+    case 'number':
+      const min = (data as any).min;
+      const max = (data as any).max;
 
-    if (min !== undefined) {
-      const str: string = typeof min === 'function' ? `${min(settings)} (dynamic)` : `${min}`;
-      values['Minimum'] = str;
-    }
+      if (min !== undefined) {
+        const str: string = typeof min === 'function' ? `${min(settings)} (dynamic)` : `${min}`;
+        values['Minimum'] = str;
+      }
 
-    if (max !== undefined) {
-      const str: string = typeof max === 'function' ? `${max(settings)} (dynamic)` : `${max}`;
-      values['Maximum'] = str;
-    }
+      if (max !== undefined) {
+        const str: string = typeof max === 'function' ? `${max(settings)} (dynamic)` : `${max}`;
+        values['Maximum'] = str;
+      }
 
-    def = data.default.toString();
-    break;
-  case 'set':
-    def = SET_OPTIONS.find(x => x.value == data.default)!.name;
-    break;
+      def = data.default.toString();
+      break;
+    case 'set':
+      def = SET_OPTIONS.find((x) => x.value == data.default)!.name;
+      break;
   }
 
   return <>
@@ -171,46 +171,53 @@ type SettingsPanelProps = {
 };
 export function SettingsPanel({ category }: SettingsPanelProps) {
   const settingsData = SETTINGS.filter((s) => s.category === category);
-  const booleans = settingsData.filter(setting => setting.type === 'boolean')
-  const nonBooleans = settingsData.filter(setting => setting.type !== 'boolean')
+  const booleans = settingsData.filter((setting) => setting.type === 'boolean');
+  const nonBooleans = settingsData.filter((setting) => setting.type !== 'boolean');
 
   return (
     <form>
-      <Group direction='vertical' spacing='xl'>
+      <Group direction="vertical" spacing="xl">
         <div>
           <div className="three-column-grid">
-            {nonBooleans.map(setting => <Setting key={setting.key} setting={setting.key}/>)}
+            {nonBooleans.map((setting) => (
+              <Setting key={setting.key} setting={setting.key} />
+            ))}
           </div>
         </div>
         <div>
           <div className="three-column-grid">
-            {booleans.map(setting => <Setting key={setting.key} setting={setting.key}/>)}
+            {booleans.map((setting) => (
+              <Setting key={setting.key} setting={setting.key} />
+            ))}
           </div>
         </div>
       </Group>
-
     </form>
   );
-};
+}
 
 type SettingsEditorProps = {
   category: string;
 };
 export function SettingsEditor({ category }: SettingsEditorProps) {
-  const cat = SETTINGS_CATEGORIES.find(x => x.key === category)!;
+  const cat = SETTINGS_CATEGORIES.find((x) => x.key === category)!;
   const subcategories = cat.subcategories || [];
   return (
-    <Group direction='vertical' spacing='xxl'>
-      <Text size='mg' style={{textTransform: 'capitalize'}}>{category}</Text>
-      <Group direction='vertical' spacing='jb'>
-        <SettingsPanel category={category}/>
-        {subcategories.map(sub => <div key={sub.key}>
-          <Group direction='vertical' spacing='lg'>
-            <Text size='jb'>{sub.name}</Text>
-            <SettingsPanel category={`${category}.${sub.key}`}/>
-          </Group>
-        </div>)}
+    <Group direction="vertical" spacing="xxl">
+      <Text size="mg" style={{ textTransform: 'capitalize' }}>
+        {category}
+      </Text>
+      <Group direction="vertical" spacing="jb">
+        <SettingsPanel category={category} />
+        {subcategories.map((sub) => (
+          <div key={sub.key}>
+            <Group direction="vertical" spacing="lg">
+              <Text size="jb">{sub.name}</Text>
+              <SettingsPanel category={`${category}.${sub.key}`} />
+            </Group>
+          </div>
+        ))}
       </Group>
     </Group>
-  )
+  );
 }

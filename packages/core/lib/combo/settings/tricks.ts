@@ -29,7 +29,8 @@ export const TRICKS: Tricks = {
   },
   OOT_TUNICS: {
     name: 'Fewer Tunic Requirements (OoT)',
-    tooltip: 'Most things that would normally require Tunics no longer will. Fire Temple past the big lava room, Volvagia, Fire Trial without silver rupee shuffle, and Water Temple central pillar still require Tunics.',
+    tooltip:
+      'Most things that would normally require Tunics no longer will. Fire Temple past the big lava room, Volvagia, Fire Trial without silver rupee shuffle, and Water Temple central pillar still require Tunics.',
   },
   OOT_HIDDEN_GROTTOS: {
     name: 'Hidden Grottos (OoT) without Stone of Agony',
@@ -38,12 +39,14 @@ export const TRICKS: Tricks = {
   },
   OOT_MIDO_SKIP: {
     name: 'Backflip Over Mido',
-    tooltip: 'As Adult, Mido can be backflipped over from the front with a specific angle. It can be done with nothing, but logic will expect a first-person item to make it easier.',
+    tooltip:
+      'As Adult, Mido can be backflipped over from the front with a specific angle. It can be done with nothing, but logic will expect a first-person item to make it easier.',
     linkVideo: 'https://www.youtube.com/watch?v=ll8e7h9vFag&ab_channel=ZeldaSpeedRuns',
   },
   OOT_MAN_ON_ROOF: {
     name: 'Man on Roof with Nothing',
-    tooltip: 'Child can sidehop off the watchtower to reach this man, and Adult can jump onto the Potion Shop roof from the gate to Death Mountain to then reach the man.',
+    tooltip:
+      'Child can sidehop off the watchtower to reach this man, and Adult can jump onto the Potion Shop roof from the gate to Death Mountain to then reach the man.',
     linkVideo: 'https://www.youtube.com/watch?v=3-1BY24Fu-Y&ab_channel=dotzo',
   },
   OOT_BLIND_WASTELAND: {
@@ -68,7 +71,8 @@ export const TRICKS: Tricks = {
   },
   OOT_HAMMER_WALLS: {
     name: 'Hammer Through Walls',
-    tooltip: 'Using the Megaton Hammer against a wall will cause Link to hammer through it. This can be used to hit some switches through walls.',
+    tooltip:
+      'Using the Megaton Hammer against a wall will cause Link to hammer through it. This can be used to hit some switches through walls.',
     linkVideo: 'https://www.youtube.com/watch?v=R18uZdwXRPA&ab_channel=Numbers',
   },
   OOT_VOLCANO_HOVERS: {
@@ -78,7 +82,8 @@ export const TRICKS: Tricks = {
   },
   OOT_NIGHT_GS: {
     name: "Nighttime Gold Skulltulas without Sun's Song",
-    tooltip: "This will make it so that Gold Skulltulas that only appear at night will no longer expect Sun's Song to get, meaning you will need to wait for nightfall.",
+    tooltip:
+      "This will make it so that Gold Skulltulas that only appear at night will no longer expect Sun's Song to get, meaning you will need to wait for nightfall.",
   },
   OOT_DOMAIN_CUCCO: {
     name: "Enter Child Zora's Domain with Cucco",
@@ -97,12 +102,14 @@ export const TRICKS: Tricks = {
   },
   OOT_SAND_RIVER_NOTHING: {
     name: 'Cross the River of Sand with Nothing',
-    tooltip: 'By backwalking across the left side, one can cross the River of Sand forwards. Going backwards, one can backwalk at a slight angle.',
+    tooltip:
+      'By backwalking across the left side, one can cross the River of Sand forwards. Going backwards, one can backwalk at a slight angle.',
     linkVideo: 'https://www.youtube.com/watch?v=PLHJY1KRvtg&ab_channel=dotzo',
   },
   OOT_SHADOW_FIRE_ARROW: {
     name: 'Enter Shadow Temple using Fire Arrows',
-    tooltip: 'With a precise setup, it is possible to light all of the torches for the Shadow Temple Entrance with a mix of fire arrows and normal arrow. The timing is very quick.',
+    tooltip:
+      'With a precise setup, it is possible to light all of the torches for the Shadow Temple Entrance with a mix of fire arrows and normal arrow. The timing is very quick.',
     linkVideo: 'https://www.youtube.com/watch?v=im3IXe__8ww&ab_channel=Exodus122',
   },
   OOT_KZ_SKIP: {
@@ -132,27 +139,32 @@ export const TRICKS: Tricks = {
   },
   OOT_PASS_COLLISION: {
     name: 'Pass through Visible One-Way Collisions',
-    tooltip: "Some walls and gates, despite their appearance, only have collision on one side. Turning this on may expect you to know of these and walk through them. Some examples are the Kakariko Gate as child and the awning behind Impa's House.",
+    tooltip:
+      "Some walls and gates, despite their appearance, only have collision on one side. Turning this on may expect you to know of these and walk through them. Some examples are the Kakariko Gate as child and the awning behind Impa's House.",
     linkVideo: 'https://www.youtube.com/watch?v=OnnNUZVW8Gw&ab_channel=StoneeBadLuck',
   },
   OOT_DMT_RED_ROCK_GS: {
     name: 'DMT Red Rock Skulls without Hammer',
-    tooltip: 'Adult can obtain the Gold Skulltulas on Death Mountain without the Hammer. The upper one can be backflipped into after spin attacking it. The lower one can be hookshotted or jumped onto from above to collect.',
+    tooltip:
+      'Adult can obtain the Gold Skulltulas on Death Mountain without the Hammer. The upper one can be backflipped into after spin attacking it. The lower one can be hookshotted or jumped onto from above to collect.',
     linkVideo: 'https://www.youtube.com/playlist?list=PL7AtrmSRvw6LAJRTwCEb0VzuOFj9BpPZ-',
   },
   OOT_DEAD_HAND_STICKS: {
     name: 'Child Dead Hand without Kokiri Sword',
-    tooltip: 'Fighting Dead Hand as child with Deku Sticks requires all 10 if you only use slashes. This trick removes the mercy of fighting it with a sword.',
+    tooltip:
+      'Fighting Dead Hand as child with Deku Sticks requires all 10 if you only use slashes. This trick removes the mercy of fighting it with a sword.',
     linkVideo: 'https://www.youtube.com/watch?v=gROY5Y66xeA&ab_channel=dotzo',
   },
   OOT_BFA_MUDWALLS: {
     name: 'Break Mud Walls with Blue Fire Arrows',
-    tooltip: 'Blue Fire has the ability to break mudwalls. Turning this on will allow the Blue Fire Arrows to be logical for breaking these.',
+    tooltip:
+      'Blue Fire has the ability to break mudwalls. Turning this on will allow the Blue Fire Arrows to be logical for breaking these.',
     linkVideo: 'https://www.youtube.com/watch?v=XXAFs1cfRrc&ab_channel=ThatWelshKaren',
   },
   OOT_JABU_BOSS_HOVER: {
     name: 'Access Jabu-Jabu Pre-Boss using Hover Boots',
-    tooltip: 'By using Hover Boots, Link can backwalk off the rising platform while carrying the box to skip needing to kill the Parasites and Big Octo.',
+    tooltip:
+      'By using Hover Boots, Link can backwalk off the rising platform while carrying the box to skip needing to kill the Parasites and Big Octo.',
   },
   OOT_SPIRIT_CHILD_HOVER: {
     name: 'Access Adult Spirit as Child using Hover Boots',
@@ -173,11 +185,13 @@ export const TRICKS: Tricks = {
   },
   OOT_MQ_GTG_FLAMES: {
     name: 'MQ Gerudo Training Grounds Lava Room Walk along Flame Circles',
-    tooltip: 'It is possible to walk along and jump between the flame rings in the lava room. Footing is very tiny and precise. This can allow reaching the underwater rupees without Fire Arrows and Hookshot.',
+    tooltip:
+      'It is possible to walk along and jump between the flame rings in the lava room. Footing is very tiny and precise. This can allow reaching the underwater rupees without Fire Arrows and Hookshot.',
   },
   OOT_FORTRESS_JUMPS: {
     name: 'Jump up to higher ledges outside Gerudo Fortress',
-    tooltip: 'Outside the Fortress, Adult can jump to the upper vines without needing to go through the kitchen. Child can do the same after going through the kitchen.',
+    tooltip:
+      'Outside the Fortress, Adult can jump to the upper vines without needing to go through the kitchen. Child can do the same after going through the kitchen.',
   },
   OOT_COLOSSUS_GS_NO_BEAN: {
     name: 'Desert Colossus Plateau GS without Bean Plant',
@@ -577,7 +591,8 @@ export const TRICKS: Tricks = {
   },
   MM_STAGE_LIGHTS_DIN: {
     name: "Light the Zora Hall Stage Lights using Din's Fire, Bow, and Hookshot",
-    tooltip: "The item can be obtained without Fire Arrows by first hooking to either torch, using Din's Fire, then shooting an arrow to the other torch.",
+    tooltip:
+      "The item can be obtained without Fire Arrows by first hooking to either torch, using Din's Fire, then shooting an arrow to the other torch.",
   },
   MM_RANCH_FARORE: {
     name: "Romani's Ranch locations using Farore's Wind and Time Reset",

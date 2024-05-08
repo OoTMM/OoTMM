@@ -5,14 +5,10 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 import Group from './Group';
 
-const CustomOption = ({ children, ...props }: { children?: React.ReactNode, props: any }) => {
+const CustomOption = ({ children, ...props }: { children?: React.ReactNode; props: any }) => {
   const { onMouseMove, onMouseOver, ...rest } = (props as any).innerProps;
   const newProps = { ...props, innerProps: rest };
-  return (
-    <components.Option {...newProps as any}>
-      {children}
-    </components.Option>
-  );
+  return <components.Option {...(newProps as any)}>{children}</components.Option>;
 };
 
 export type ArrayListOption = {
@@ -25,27 +21,34 @@ type ArrayListProps = {
   add: (x: string) => void;
   remove: (x: string) => void;
   clear?: () => void;
-}
+};
 export function ArrayList({ options, selected, add, remove, clear }: ArrayListProps) {
-  const remaining = options.filter(x => !selected.includes(x.value));
+  const remaining = options.filter((x) => !selected.includes(x.value));
 
   return (
-    <Group direction='vertical' spacing='xl'>
-      <Group direction='horizontal'>
+    <Group direction="vertical" spacing="xl">
+      <Group direction="horizontal">
         <Select
-          className='plando-select'
-          filterOption={createFilter({ignoreAccents: false})}
+          className="plando-select"
+          filterOption={createFilter({ ignoreAccents: false })}
           components={{ Option: CustomOption } as any}
           options={remaining}
           onChange={(v) => v && add(v.value)}
+          classNamePrefix="react-select"
         />
-        {clear && <button className="btn-danger" onClick={clear}>Remove All</button>}
+        {clear && (
+          <button className="btn-danger" onClick={clear}>
+            Remove All
+          </button>
+        )}
       </Group>
-      <Group direction='vertical' spacing='xs'>
-        {selected.map(v => (
-          <Group direction='horizontal' spacing='xs' key={v}>
-            <span className="plando-remove" onClick={() => remove(v)}><FontAwesomeIcon icon={faXmark}/></span>
-            <span className="plando-item">{options.find(x => x.value === v)?.label || v}</span>
+      <Group direction="vertical" spacing="xs">
+        {selected.map((v) => (
+          <Group direction="horizontal" spacing="xs" key={v}>
+            <span className="plando-remove" onClick={() => remove(v)}>
+              <FontAwesomeIcon icon={faXmark} />
+            </span>
+            <span className="plando-item">{options.find((x) => x.value === v)?.label || v}</span>
           </Group>
         ))}
       </Group>

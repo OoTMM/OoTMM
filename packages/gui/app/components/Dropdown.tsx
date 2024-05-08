@@ -12,13 +12,14 @@ type DropdownProps = {
   value: string;
   tooltip?: React.ReactNode;
   onChange: (value: string) => void;
-}
-export const Dropdown = ({ label, options, value, tooltip, onChange }: DropdownProps) => {
+  skipSpace?: boolean;
+};
+export const Dropdown = ({ label, options, value, tooltip, onChange, skipSpace }: DropdownProps) => {
   return (
     <label>
-      <Group direction='vertical'>
+      <Group direction='vertical' skipSpace={skipSpace}>
         <Group direction='horizontal'>
-          <Text size='xl' className="label-main">{label}</Text>
+        {label && (<Text size='xl' className="label-main">{label}</Text>)}
           {tooltip && <Tooltip>{tooltip}</Tooltip>}
         </Group>
         <select value={value} onChange={(e) => onChange(e.target.value)}>

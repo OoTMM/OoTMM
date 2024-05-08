@@ -102,11 +102,7 @@ export const maxRestrictions = (): ExprRestrictions => ({
 });
 
 export const isDefaultRestrictions = (r: ExprRestrictions): boolean => {
-  return r.oot.day === false &&
-    r.oot.night === false &&
-    r.mmTime === 0 &&
-    r.mmTime2 === 0 &&
-    r.constraintFlags === 0;
+  return r.oot.day === false && r.oot.night === false && r.mmTime === 0 && r.mmTime2 === 0 && r.constraintFlags === 0;
 };
 
 function isRestrictionImpossible(r: ExprRestrictions): boolean {
@@ -355,7 +351,7 @@ export class ExprAge extends Expr {
   }
 
   eval(state: State): ExprResult {
-    return (state.age === this.age) ? RESULT_TRUE : RESULT_FALSE;
+    return state.age === this.age ? RESULT_TRUE : RESULT_FALSE;
   }
 }
 
@@ -523,7 +519,7 @@ class ExprFlagSet extends Expr {
     super(`FLAG_SET(${flag})`);
     this.result = { ...RESULT_TRUE };
     this.result.restrictions = defaultRestrictions();
-    this.result.restrictions.constraintFlags = ((1 << flag) >>> 0);
+    this.result.restrictions.constraintFlags = (1 << flag) >>> 0;
   }
 
   eval(_state: State): ExprResult {
@@ -536,7 +532,7 @@ class ExprFlagCheckUnset extends Expr {
 
   constructor(flag: number) {
     super(`FLAG_CHECK(${flag})`);
-    this.flag = ((1 << flag) >>> 0);
+    this.flag = (1 << flag) >>> 0;
   }
 
   eval(state: State) {
@@ -546,7 +542,7 @@ class ExprFlagCheckUnset extends Expr {
       return RESULT_TRUE;
     }
   }
-};
+}
 
 function exprMemo(expr: Expr): Expr {
   const cached = exprMap.get(expr.key);
@@ -811,7 +807,7 @@ export const exprFlagSet = (flag: string): Expr => {
     throw new Error(`Unknown constraint flag: ${flag}`);
   }
   return exprMemo(new ExprFlagSet(index));
-}
+};
 
 export const exprFlagCheckUnset = (flag: string): Expr => {
   const index = CONSTRAINT_FLAGS.indexOf(flag);
@@ -819,4 +815,4 @@ export const exprFlagCheckUnset = (flag: string): Expr => {
     throw new Error(`Unknown constraint flag: ${flag}`);
   }
   return exprMemo(new ExprFlagCheckUnset(index));
-}
+};
