@@ -1168,7 +1168,7 @@ const PRESET_ONLY_OOT = makeSettings({
   ]
 });
 
-const PRESET_ONLY_MM = makeSetting({
+const PRESET_ONLY_MM = makeSettings({
   games: 'mm',
   goal: 'majora',
   hintImportance: true,
