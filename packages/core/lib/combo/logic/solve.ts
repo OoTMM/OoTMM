@@ -37,7 +37,8 @@ const VALIDATION_CRITICAL_ITEMS = [
 
 export type ItemPlacement = Map<Location, PlayerItem>;
 
-const NORMAL_DUNGEONS = ['DT', 'DC', 'JJ', 'Forest', 'Fire', 'Water', 'Shadow', 'Spirit', 'WF', 'SH', 'GB', 'ST'];
+const NORMAL_DUNGEONS_OOT = ['DT', 'DC', 'JJ', 'Forest', 'Fire', 'Water', 'Shadow', 'Spirit'];
+const NORMAL_DUNGEONS_MM = ['WF', 'SH', 'GB', 'ST'];
 
 const DUNGEON_ITEMS = {
   DT: [
@@ -745,7 +746,15 @@ export class LogicPassSolver {
 
   private selectPreCompletedDungeonsItem(worldId: number, items: PlayerItems, count: number, group: Set<Item>) {
     const world = this.worlds[worldId];
-    const dungeons = shuffle(this.input.random, [...NORMAL_DUNGEONS]);
+    if (this.input.settings.games === 'ootmm') {
+      const dungeons = shuffle(this.input.random, [...NORMAL_DUNGEONS_OOT, ...NORMAL_DUNGEONS_MM]);
+    }
+    if (this.input.settings.games === 'oot') {
+      const dungeons = shuffle(this.input.random, [...NORMAL_DUNGEONS_OOT]);
+    }
+    if (this.input.settings.games === 'mm') {
+      const dungeons = shuffle(this.input.random, [...NORMAL_DUNGEONS_MM]);
+    }
 
     while (dungeons.length) {
       const stoneCount = Array.from(items.keys()).filter(x => group.has(x.item)).length;
