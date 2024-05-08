@@ -1,6 +1,7 @@
 import { isEqual } from 'lodash';
 import { deflate, inflate } from 'pako';
 import { DEFAULT_SETTINGS, SETTINGS, Settings, makeSettings } from '../settings';
+import { PartialDeep } from 'type-fest';
 
 export function exportSettings(settings: Settings): string {
   const diff: any = {};
@@ -41,7 +42,7 @@ export function exportSettings(settings: Settings): string {
   return `v1.${str}`;
 }
 
-export function importSettings(str: string): Settings {
+export function importSettingsRaw(str: string): PartialDeep<Settings> {
   let data: any;
 
   if (str.startsWith('v1.')) {
@@ -50,7 +51,11 @@ export function importSettings(str: string): Settings {
     data = importSettingsV0(str);
   }
 
-  return makeSettings(data);
+  return data;
+}
+
+export function importSettings(str: string): Settings {
+  return makeSettings(importSettingsRaw(str));
 }
 
 function importSettingsV1(str: string): any {
