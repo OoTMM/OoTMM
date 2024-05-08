@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useIsPatch, useRandomSettings } from '../contexts/GeneratorContext';
+import { useIsPatch, useRandomSettings, useSettings } from '../contexts/GeneratorContext';
 import { RomConfig } from './RomConfig';
 import { Tab, Tabs } from './Tab';
 import { SettingsEditor } from './SettingsEditor';
@@ -13,6 +13,7 @@ import { SpecialConds } from './SpecialConds';
 import { Plando } from './Plando';
 import { CosmeticsEditor } from './Cosmetics';
 import { Hints } from './Hints';
+import { SETTINGS } from '@ootmm/core';
 
 type TabSettingsEditorProps = {
   name: string;
@@ -24,6 +25,7 @@ function TabSettingsEditor({ name, category, disabled }: TabSettingsEditorProps)
 }
 
 export function Generator() {
+  const [settings] = useSettings();
   const [isPatch] = useIsPatch();
   const [randomSettings] = useRandomSettings();
   const isRandom = randomSettings.enabled;
@@ -46,9 +48,9 @@ export function Generator() {
     <Tab name="Items" disabled={isPatch || isRandom}>
       <Tabs>
         <TabSettingsEditor name="Progressive" category="items.progressive"/>
-        <TabSettingsEditor name="Shared" category="items.shared"/>
+        <TabSettingsEditor name="Shared" disabled={settings.games !== 'ootmm'} category="items.shared"/>
         <TabSettingsEditor name="Extensions" category="items.extensions"/>
-        <TabSettingsEditor name="Ageless" category="items.ageless"/>
+        <TabSettingsEditor name="Ageless" disabled={settings.games === 'mm'} category="items.ageless"/>
       </Tabs>
     </Tab>
     <Tab name="Logic" disabled={isPatch}>
