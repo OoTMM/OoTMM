@@ -1,6 +1,5 @@
 @charset "utf-8";
 
-@import 'bootstrap/dist/css/bootstrap.min.css';
 @import 'reset-css';
 @import 'react-tooltip/dist/react-tooltip.css';
 @import './style/_global.css';
@@ -11,3 +10,4 @@
 @import './style/tab.css';
 @import './style/form.css';
 @import './style/startingitems.css';
+@import './style/list.css';

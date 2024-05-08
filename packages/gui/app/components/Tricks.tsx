@@ -1,72 +1,67 @@
 import React from 'react';
+import { DoubleList } from './DoubleList';
 import { TRICKS } from '@ootmm/core';
-import { useSettings } from '../contexts/GeneratorContext';
-import { Text } from './Text';
 import { TrickKey } from '@ootmm/core/lib/combo/settings';
-import SelectorCard, { SelectedList } from './SelectorCard';
-import TriforceImg from '../assets/blacktriforce.png';
-import MaskImg from '../assets/blackmask.png';
-import { Col, Row } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faYoutube } from '@fortawesome/free-brands-svg-icons';
+import { faFileLines } from '@fortawesome/free-solid-svg-icons';
+import { useSettings } from '../contexts/GeneratorContext';
+import { Tooltip } from './Tooltip';
+import { GameName } from './GameName';
 
-const NAMES = {
-  OOT: 'Ocarina of Time',
-  MM: "Majora's Mask",
+const GAMES_NAMES = {
+  oot: "Ocarina of Time",
+  mm: "Majora's Mask",
 };
 
-export function GameTricks({ game, img }: { game: keyof typeof NAMES; img: typeof TriforceImg }) {
-  const [settings, setSettings] = useSettings();
-  const tricks: TrickKey[] = Object.keys(TRICKS).filter((x) => x.startsWith(game));
-  const options = tricks.map((trickKey) => ({ key: trickKey as keyof SelectedList, value: TRICKS[trickKey] }));
-
-  const add = async (trickKeysToAdd: SelectedList, setAdditions: Function) => {
-    setSettings({ tricks: { add: Object.keys(trickKeysToAdd) } });
-    setAdditions({});
-  };
-
-  const remove = (trickKeysToRemove: SelectedList, setRemovals: Function) => {
-    setSettings({ tricks: { remove: Object.keys(trickKeysToRemove) } });
-    setRemovals({});
-  };
-
+function trickExtra(trick: TrickKey) {
+  const t = TRICKS[trick];
   return (
     <>
-      <Row className="mb-2">
-        <Col>
-          <Text size="jb">{NAMES[game]}</Text>
-        </Col>
-        <Col lg="auto">
-          <img src={img} height={100} width={100} />
-        </Col>
-      </Row>
-      <SelectorCard
-        options={options}
-        selected={settings.tricks.filter((x) => tricks.includes(x))}
-        add={add}
-        remove={remove}
-        label="Trick"
-      />
+      {t.linkVideo && <a target="_blank" href={t.linkVideo} title="Video Example"><FontAwesomeIcon icon={faYoutube}/></a>}
+      {t.linkText && <a target="_blank" href={t.linkText} title="Relevant Written Documentation"><FontAwesomeIcon icon={faFileLines}/></a>}
+      {t.tooltip && <Tooltip>{t.tooltip}</Tooltip>}
     </>
   );
 }
 
-export function Tricks() {
-  const [_, setSettings] = useSettings();
-  const clear = () => {
+type GameTricksProps = {
+  game: 'oot' | 'mm';
+}
+function GameTricks({ game }: GameTricksProps) {
+  const [settings, setSettings] = useSettings();
+  const gameTricks = Object.keys(TRICKS).filter((x) => x.startsWith(game.toUpperCase()));
+  const selectedGameTricks = gameTricks.filter((x) => settings.tricks.includes(x));
+  const options = gameTricks.map((trickKey) => ({ key: trickKey, label: TRICKS[trickKey].name, extra: trickExtra(trickKey) }));
+
+  const add = (t: string[]) => {
+    setSettings({ tricks: { add: t } });
+  };
+
+  const remove = (t: string[]) => {
+    setSettings({ tricks: { remove: t } });
+  };
+
+  const reset = () => {
     setSettings({ tricks: { set: [] } });
   };
 
   return (
-    <>
-      <Text size="mg">Tricks</Text>
+    <div className="flex-v">
+      <GameName game={game}/>
+      <DoubleList onAdd={add} onRemove={remove} onReset={reset} options={options} selected={selectedGameTricks}/>
+    </div>
+  );
+}
 
-      <Row className="mt-4">
-        <Col xl={12} xxl={6}>
-          <GameTricks game="OOT" img={TriforceImg} />
-        </Col>
-        <Col>
-          <GameTricks game="MM" img={MaskImg} />
-        </Col>
-      </Row>
+export function Tricks() {
+  return (
+    <>
+      <h1>Tricks</h1>
+      <div className="flex-h">
+        <GameTricks game="oot"/>
+        <GameTricks game="mm"/>
+      </div>
     </>
   );
 }

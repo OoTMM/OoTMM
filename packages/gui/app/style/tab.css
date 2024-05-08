@@ -9,7 +9,7 @@
   padding: 1em;
   display: block;
   text-decoration: none;
-  color: inherit;
+  color: inherit !important;
 }
 
 .tab.active, .tab:hover {
@@ -17,6 +17,8 @@
 }
 
 .tab-bar-right {
+  display: flex;
+  flex-direction: column;
   flex: 1;
   max-height: 100vh;
   overflow: auto;

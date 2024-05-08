@@ -9,6 +9,7 @@ input[type='file'] {
 }
 
 input[type='checkbox'] {
+  flex: none;
   height: 20px;
   width: 20px;
   opacity: 0.7;
@@ -61,7 +62,11 @@ button:hover {
 
 button,
 .btn {
+  background: #2667f3;
+  color: white;
   cursor: pointer;
+  height: 2.5em;
+  border-radius: 5px;
 }
 
 .btn-fill {

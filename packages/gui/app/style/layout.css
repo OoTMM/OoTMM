@@ -56,8 +56,8 @@
 
 .tooltip-link {
   display: inline-block;
-  color: inherit;
   margin-left: 0.5em;
+  color: black !important;
 }
 
 .tooltip {
@@ -85,4 +85,18 @@ br {
 
 br:after {
   content: ' ';
+}
+
+.game {
+  display: flex;
+  align-items: center;
+  margin: 0.5em 0;
+}
+
+.game h2 {
+  font-size: 1.75em;
+}
+
+.game img {
+  height: 2.5em;
 }
