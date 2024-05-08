@@ -95,15 +95,23 @@ export function GeneratorContextProvider({ children }: { children: React.ReactNo
     setState(state => ({ ...state, isPatch }));
   };
 
-  const setSettings = (patch: SettingsPatch) => {
-    const newSettings = mergeSettings(state.settings, patch);
-    setState(state => ({ ...state, settings: newSettings }));
-    return newSettings;
-  };
-
   const overrideSettings = (settings: Settings) => {
     setState(state => ({ ...state, settings }));
+    localStorage.setItem('settings', JSON.stringify(settings));
+    API.itemPoolFromSettings(settings).then((itemPool) => {
+      setState((state) => {
+        const startingItems = API.restrictItemsByPool(state.settings.startingItems, itemPool);
+        const newSettings = { ...state.settings, startingItems };
+        localStorage.setItem('settings', JSON.stringify(newSettings));
+        return { ...state, settings: makeSettings(newSettings), itemPool };
+      });
+    });
     return settings;
+  };
+
+  const setSettings = (patch: SettingsPatch) => {
+    const newSettings = mergeSettings(state.settings, patch);
+    return overrideSettings(newSettings);
   };
 
   const setCosmetics = (patch: Partial<Cosmetics>) => {
@@ -182,19 +190,7 @@ export function useGenerator() {
 
 export function useSettings() {
   const ctx = useContext(GeneratorContext);
-  const setSettings = (patch: SettingsPatch) => {
-    const newSettings = ctx.setSettings(patch);
-    localStorage.setItem('settings', JSON.stringify(newSettings));
-    API.itemPoolFromSettings(newSettings).then((itemPool) => {
-      ctx.setState((state) => {
-        const startingItems = API.restrictItemsByPool(state.settings.startingItems, itemPool);
-        const newSettings = { ...state.settings, startingItems };
-        localStorage.setItem('settings', JSON.stringify(newSettings));
-        return { ...state, settings: makeSettings(newSettings), itemPool };
-      });
-    });
-  };
-  return [ctx.state.settings, setSettings] as const;
+  return [ctx.state.settings, ctx.setSettings] as const;
 }
 
 export function useRandomSettings() {
