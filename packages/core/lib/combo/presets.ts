@@ -1180,6 +1180,7 @@ const PRESET_ONLY_MM = makeSettings({
   bombchuBagMm: true,
   lenientSpikes: false,
   startingItems: { MM_SHIELD_HERO: 1, MM_OCARINA: 1, MM_SWORD: 1, MM_SONG_SOARING: 1 },
+  freeScarecrowMm: true,
   junkLocations: [
     'MM Deku Playground Reward All Days',
     'MM Goron Race Reward',
