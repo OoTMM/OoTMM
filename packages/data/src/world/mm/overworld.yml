@@ -2548,18 +2548,22 @@
     "Waterfall Cliffs": "can_hookshot"
     "Great Bay Near Fairy Fountain": "can_hookshot && (has_explosives || trick_keg_explosives || short_hook_anywhere)" #|| (can_use_ice_arrows && (has_mask_zora || can_hookshot_short))
     "Zora Cape Grotto": "can_break_boulders"
+    "Zora Cape Pot Game": "soul_zora && is_day && (has_weapon || has_mask_zora || can_hookshot_short || has_bow)"
   locations:
     "Zora Cape Underwater Chest": "underwater_walking"
     "Zora Cape Waterfall HP": "has_mask_zora || (has_iron_boots && has_tunic_zora && (has_arrows || has_bombchu || has_mask_blast))"
     "Zora Cape Pot Near Beavers 1": "true"
     "Zora Cape Pot Near Beavers 2": "true"
-    "Zora Cape Pot Game 1": "is_day && (has_weapon || has_mask_zora || can_hookshot_short || has_bow)"
-    "Zora Cape Pot Game 2": "is_day && (has_weapon || has_mask_zora || can_hookshot_short || has_bow)"
-    "Zora Cape Pot Game 3": "is_day && (has_weapon || has_mask_zora || can_hookshot_short || has_bow)"
-    "Zora Cape Pot Game 4": "is_day && (has_weapon || has_mask_zora || can_hookshot_short || has_bow)"
-    "Zora Cape Pot Game 5": "is_day && (has_weapon || has_mask_zora || can_hookshot_short || has_bow)"
   gossip:
     "Zora Cape Gossip": "true"
+"Zora Cape Pot Game":
+  region: ZORA_CAPE
+  locations:
+    "Zora Cape Pot Game 1": "true"
+    "Zora Cape Pot Game 2": "true"
+    "Zora Cape Pot Game 3": "true"
+    "Zora Cape Pot Game 4": "true"
+    "Zora Cape Pot Game 5": "true"
 "Zora Cape Grotto":
   region: ENTRANCE
   events:
