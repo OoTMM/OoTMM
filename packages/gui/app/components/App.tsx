@@ -6,10 +6,10 @@ import { Progress } from './Progress';
 import { Result } from './Result';
 
 function AppContent() {
-  const { isGenerating, message } = useGenerator();
+  const { isGenerating, message, progress } = useGenerator();
 
   if (isGenerating) {
-    return <div className="container"><Progress message={message || ''}/></div>;
+    return <div className="container"><Progress message={message || ''} progress={progress}/></div>;
   }
 
   return <Generator/>;

@@ -113,3 +113,21 @@ p {
   margin-top: 3rem;
   margin-bottom: 3rem;
 }
+
+progress {
+  width: 100%;
+  appearance: none;
+  height: 1em;
+  border-radius: 5px;
+}
+
+progress::-webkit-progress-bar {
+  background: white;
+  border: 1px solid #333;
+  border-radius: 5px;
+}
+
+progress::-webkit-progress-value {
+  background: #0a8f1c;
+  border-radius: 5px;
+}

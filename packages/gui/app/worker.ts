@@ -57,6 +57,13 @@ export type WorkerResultGenerateLog = {
   log: string
 }
 
+export type WorkerResultGenerateProgress = {
+  type: 'generate-progress',
+  id: number,
+  progress: number,
+  total: number,
+}
+
 export type WorkerResultGenerateError = {
   type: 'generate-error',
   id: number,
@@ -64,7 +71,7 @@ export type WorkerResultGenerateError = {
 }
 
 export type WorkerTask = WorkerTaskItemPool | WorkerTaskGenerate;
-export type WorkerResult = WorkerResultItemPool | WorkerResultGenerate | WorkerResultGenerateLog | WorkerResultGenerateError;
+export type WorkerResult = WorkerResultItemPool | WorkerResultGenerate | WorkerResultGenerateLog | WorkerResultGenerateProgress | WorkerResultGenerateError;
 
 function onTaskGenerate(task: WorkerTaskGenerate) {
   let { oot, mm, patch, options } = task;
@@ -76,7 +83,15 @@ function onTaskGenerate(task: WorkerTaskGenerate) {
       log: msg,
     });
   };
-  const generator = generate({ oot, mm, opts: { ...options, patch, fetch: fetchFunc }, monitor: { onLog } });
+  const onProgress = (progress: number, total: number) => {
+    postMessage({
+      type: 'generate-progress',
+      id: task.id,
+      progress,
+      total,
+    });
+  };
+  const generator = generate({ oot, mm, opts: { ...options, patch, fetch: fetchFunc }, monitor: { onLog, onProgress } });
   generator.run().then(result => {
     postMessage({
       type: 'generate',

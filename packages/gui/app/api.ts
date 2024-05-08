@@ -14,6 +14,7 @@ const worker = new Worker();
 const resolversItemPool = new Map<number, (result: WorkerResultItemPool) => void>();
 const resolversGenerate = new Map<number, (result: WorkerResultGenerate | WorkerResultGenerateError) => void>();
 const loggersGenerate = new Map<number, (log: string) => void>();
+const loggersProgress = new Map<number, (progress: number, total: number) => void>();
 
 worker.onmessage = (event: MessageEvent<WorkerResult>) => {
   const result = event.data;
@@ -40,6 +41,13 @@ worker.onmessage = (event: MessageEvent<WorkerResult>) => {
     const logger = loggersGenerate.get(result.id);
     if (logger) {
       logger(result.log);
+    }
+    break;
+  }
+  case 'generate-progress': {
+    const logger = loggersProgress.get(result.id);
+    if (logger) {
+      logger(result.progress, result.total);
     }
     break;
   }
@@ -76,13 +84,14 @@ export function initialCosmetics() {
   return makeCosmetics(oldCosmetics);
 }
 
-export async function generate(files: { oot: Buffer, mm: Buffer, patch?: Buffer }, options: OptionsInput, log: (msg: string) => void) {
+export async function generate(files: { oot: Buffer, mm: Buffer, patch?: Buffer }, options: OptionsInput, log: (msg: string) => void, progress: (current: number, total: number) => void) {
   const result = await new Promise<WorkerResultGenerate | WorkerResultGenerateError>(resolve => {
     const id = workerTaskId++;
     resolversGenerate.set(id, result => {
       resolve(result);
     });
     loggersGenerate.set(id, log);
+    loggersProgress.set(id, progress);
     worker.postMessage({
       type: 'generate',
       id,
