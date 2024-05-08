@@ -784,7 +784,16 @@ export class LogicPassSolver {
 
   private selectPreCompletedDungeonsMajor(worldId: number) {
     const world = this.worlds[worldId];
-    let dungeons = shuffle(this.input.random, [...NORMAL_DUNGEONS]);
+    let dungeons = shuffle(this.input.random, []);
+    if (this.input.settings.games === 'oot') {
+      dungeons.push(...NORMAL_DUNGEONS_OOT);
+    }
+    if (this.input.settings.games === 'mm') {
+      dungeons.push(...NORMAL_DUNGEONS_MM);
+    }
+	else {
+      dungeons.push(...NORMAL_DUNGEONS_OOT, ...NORMAL_DUNGEONS_MM);
+    }
 
     while (dungeons.length) {
       if (world.preCompleted.size >= this.input.settings.preCompletedDungeonsMajor) {
