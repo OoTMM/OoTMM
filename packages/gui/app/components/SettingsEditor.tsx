@@ -92,7 +92,7 @@ function SettingSet({ setting }: { setting: string }) {
         value={(settings[data.key] as any).type as string}
         label={data.name}
         options={SET_OPTIONS}
-        tooltip={<SettingTooltip setting={data.key}/>}
+        tooltip={(data as any).description && <SettingTooltip setting={data.key}/>}
         onChange={(v) => setSettings({ [data.key]: { type: v, values: s.values } as any })}
       />
       {s.type === 'specific' &&
@@ -122,7 +122,7 @@ function Setting({ setting }: { setting: string }) {
         value={settings[data.key] as string}
         label={data.name}
         options={(data as any).values.filter((x: any) => x.cond === undefined || x.cond(settings))}
-        tooltip={<SettingTooltip setting={data.key}/>}
+        tooltip={data.description && <SettingTooltip setting={data.key}/>}
         onChange={(v) => setSettings({ [data.key]: v })}
       />
     );
@@ -131,7 +131,7 @@ function Setting({ setting }: { setting: string }) {
     return (
       <Checkbox
         label={data.name}
-        tooltip={<SettingTooltip setting={data.key}/>}
+        tooltip={(data as any).description && <SettingTooltip setting={data.key}/>}
         checked={settings[data.key] as boolean}
         onChange={(v) => setSettings({ [data.key]: v })}
       />
@@ -152,7 +152,7 @@ function Setting({ setting }: { setting: string }) {
     return (
       <InputNumber
         label={data.name}
-        tooltip={(data as any).description ? data.key : undefined}
+        tooltip={(data as any).description && data.key}
         value={settings[data.key] as number}
         onChange={(v) => setSettings({ [data.key]: v })}
         min={minValue}

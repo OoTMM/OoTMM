@@ -13,18 +13,16 @@ export const Dropdown = ({ label, options, value, tooltip, onChange }: DropdownP
   return (
     <label>
       <>
-        <>
-          {label}
-          {tooltip && <Tooltip>{tooltip}</Tooltip>}
-        </>
-        <select value={value} onChange={(e) => onChange(e.target.value)}>
-          {options.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.name}
-            </option>
-          ))}
-        </select>
+        {label}
+        {tooltip && <Tooltip>{tooltip}</Tooltip>}
       </>
+      <select value={value} onChange={(e) => onChange(e.target.value)}>
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.name}
+          </option>
+        ))}
+      </select>
     </label>
   );
 };
