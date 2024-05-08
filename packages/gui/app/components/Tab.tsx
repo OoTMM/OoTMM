@@ -19,7 +19,7 @@ export function TabBar({ tabs }: TabProps) {
           <a key={i} className={["tab", i === activeTab ? "active" : "inactive"].join(" ")} href="#" onClick={(e) => { e.preventDefault(); setActiveTab(i)}}>{tab.name}</a>
         )}
       </nav>
-      <div className="tab-bar-right">
+      <div className="tab-bar-right" key={activeTab}>
         {tabs[activeTab].component}
       </div>
     </>
