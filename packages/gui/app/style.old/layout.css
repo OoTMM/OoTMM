@@ -1,0 +1,96 @@
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.forceRight {
+  display: flex;
+  justify-content: right;
+}
+
+.two-column-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.three-column-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.container {
+  margin: 3em;
+}
+
+.plando-search {
+  display: flex;
+}
+
+.plando-search > *:not(:last-child) {
+  margin-right: 1.5em;
+}
+
+.plando-select {
+  flex: 1;
+  display: inline-block;
+  min-width: 200px;
+}
+
+.plando-remove {
+  margin-right: 0.5em;
+}
+
+.plando-remove:hover {
+  cursor: pointer;
+  color: rgb(151, 7, 7);
+}
+
+.tooltip-link {
+  display: inline-block;
+  margin-left: 0.5em;
+  color: black !important;
+}
+
+.tooltip {
+  max-width: 30em;
+}
+
+.tooltip p,
+.tooltip ul {
+  margin: 0.75em;
+}
+
+.tooltip ul {
+  list-style-position: outside;
+  list-style-type: disc;
+  margin-left: 2em;
+}
+
+.tooltip li {
+  margin: 0.25em;
+}
+
+br {
+  content: '';
+}
+
+br:after {
+  content: ' ';
+}
+
+.game {
+  display: flex;
+  align-items: center;
+  margin: 0.5em 0;
+}
+
+.game h2 {
+  font-size: 1.75em;
+}
+
+.game img {
+  height: 2.5em;
+}

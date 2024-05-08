@@ -6,8 +6,6 @@ import { Dropdown } from './Dropdown';
 import { Checkbox } from './Checkbox';
 import { useSettings } from '../contexts/GeneratorContext';
 import { InputNumber } from './InputNumber';
-import { Group } from './Group';
-import { Text } from './Text';
 
 const SET_OPTIONS = [
   { value: 'none', name: 'None' },
@@ -62,11 +60,11 @@ function SettingTooltip({ setting }: { setting: string }) {
   }
 
   return <>
-    <Text size='xl' style={{whiteSpace:"pre-line"}}>{description.split('<br>').join('\n')}</Text>
+    {description.split('<br>').join('\n')}
     <ul>
       {Object.entries(values).map(x => <li key={x[0]}><strong>{x[0]}</strong>: {x[1]}</li>)}
     </ul>
-    <Text size='xl'>Default: <strong>{def}</strong></Text>
+    Default: <strong>{def}</strong>
   </>;
 }
 
@@ -171,24 +169,10 @@ type SettingsPanelProps = {
 };
 export function SettingsPanel({ category }: SettingsPanelProps) {
   const settingsData = SETTINGS.filter((s) => s.category === category);
-  const booleans = settingsData.filter(setting => setting.type === 'boolean')
-  const nonBooleans = settingsData.filter(setting => setting.type !== 'boolean')
 
   return (
     <form>
-      <Group direction='vertical' spacing='xl'>
-        <div>
-          <div className="three-column-grid">
-            {nonBooleans.map(setting => <Setting key={setting.key} setting={setting.key}/>)}
-          </div>
-        </div>
-        <div>
-          <div className="three-column-grid">
-            {booleans.map(setting => <Setting key={setting.key} setting={setting.key}/>)}
-          </div>
-        </div>
-      </Group>
-
+      {settingsData.map(x => <Setting key={x.key} setting={x.key}/>)}
     </form>
   );
 };
@@ -200,17 +184,13 @@ export function SettingsEditor({ category }: SettingsEditorProps) {
   const cat = SETTINGS_CATEGORIES.find(x => x.key === category)!;
   const subcategories = cat.subcategories || [];
   return (
-    <Group direction='vertical' spacing='xxl'>
-      <Text size='mg' style={{textTransform: 'capitalize'}}>{category}</Text>
-      <Group direction='vertical' spacing='jb'>
-        <SettingsPanel category={category}/>
-        {subcategories.map(sub => <div key={sub.key}>
-          <Group direction='vertical' spacing='lg'>
-            <Text size='jb'>{sub.name}</Text>
-            <SettingsPanel category={`${category}.${sub.key}`}/>
-          </Group>
-        </div>)}
-      </Group>
-    </Group>
+    <div className="settings">
+      <h1 style={{textTransform: 'capitalize'}}>{category}</h1>
+      <SettingsPanel category={category}/>
+      {subcategories.map(sub => <div className="settings-sub" key={sub.key}>
+        <h2>{sub.name}</h2>
+        <SettingsPanel category={`${category}.${sub.key}`}/>
+      </div>)}
+    </div>
   )
 }

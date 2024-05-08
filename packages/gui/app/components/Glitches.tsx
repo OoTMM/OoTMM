@@ -3,8 +3,6 @@ import { GLITCHES } from '@ootmm/core';
 
 import { useSettings } from '../contexts/GeneratorContext';
 import { ArrayList } from './ArrayList';
-import { Group } from './Group';
-import { Text } from './Text';
 
 const NAMES = {
   OOT: 'Ocarina of Time',
@@ -25,11 +23,11 @@ export function GameGlitches({ game }: { game: keyof typeof NAMES }) {
   }
 
   return (
-    <Group direction='vertical' spacing='xs'>
-      <Text size="jb">{NAMES[game]}</Text>
+    <div>
+      <h1>{NAMES[game]}</h1>
       <ArrayList options={options} selected={settings.glitches.filter(x => glitches.includes(x))} add={add} remove={remove}/>
-    </Group>
-    
+    </div>
+
   );
 }
 
@@ -40,15 +38,15 @@ export function Glitches() {
   }
 
   return (
-    <Group direction='vertical' spacing='xxl'>
-      <Text size='mg'>Glitches</Text>
-      <Group direction='vertical' spacing='xl'>
-        <button className="btn-danger" onClick={clear} style={{width: '120px'}}>Remove All</button>
-        <div className="two-column-grid">
+    <>
+      <h1>Glitches</h1>
+      <>
+        <button className="btn-danger" onClick={clear}>Remove All</button>
+        <div className="dual-panels">
           <GameGlitches game="OOT"/>
           <GameGlitches game="MM"/>
         </div>
-      </Group>
-    </Group>
+      </>
+    </>
   )
 }

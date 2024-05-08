@@ -47,7 +47,7 @@ function GameTricks({ game }: GameTricksProps) {
   };
 
   return (
-    <div className="flex-v">
+    <div>
       <GameName game={game}/>
       <DoubleList onAdd={add} onRemove={remove} onReset={reset} options={options} selected={selectedGameTricks}/>
     </div>
@@ -58,7 +58,7 @@ export function Tricks() {
   return (
     <>
       <h1>Tricks</h1>
-      <div className="flex-h">
+      <div className="dual-panels">
         <GameTricks game="oot"/>
         <GameTricks game="mm"/>
       </div>

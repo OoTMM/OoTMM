@@ -8,8 +8,6 @@ import { Dropdown } from './Dropdown';
 import { HINT_TYPES, SETTINGS_DEFAULT_HINTS, SettingHint, itemName } from '@ootmm/core';
 import { InputNumber } from './InputNumber';
 import { Checkbox } from './Checkbox';
-import { Group } from './Group';
-import { Text } from './Text';
 
 const hintOptions: { name: string; value: string }[] = [];
 for (const k in HINT_TYPES) {
@@ -110,7 +108,7 @@ export function HintEditor({ index }: HintEditorProps) {
       </td>
       <td>
         {hint.type === 'item' && (
-          <Select className="plando-select" options={itemOptions} onChange={(v) => onChangeItem(v?.value)} value={selectedItem} />
+          <Select className="select" options={itemOptions} onChange={(v) => onChangeItem(v?.value)} value={selectedItem} />
         )}
       </td>
       <td>{hint.amount !== 'max' && <InputNumber value={hint.amount} onChange={onChangeAmount} />}</td>
@@ -134,9 +132,9 @@ export function Hints() {
   };
 
   return (
-    <Group direction="vertical" spacing="xxl">
-      <Text size="mg">Hints</Text>
-      <Group direction="horizontal">
+    <>
+      <h1>Hints</h1>
+      <>
         <button className="btn btn-primary" onClick={onNew}>
           New
         </button>
@@ -146,7 +144,7 @@ export function Hints() {
         <button className="btn-danger" onClick={() => setSettings({ hints: { set: SETTINGS_DEFAULT_HINTS } })}>
           Reset
         </button>
-      </Group>
+      </>
 
       <table className="hints">
         <thead>
@@ -165,6 +163,6 @@ export function Hints() {
           ))}
         </tbody>
       </table>
-    </Group>
+    </>
   );
 }

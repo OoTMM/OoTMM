@@ -15,6 +15,6 @@ export function Tooltip({ children }: TooltipProps) {
 
   return <>
     {tooltip}
-    <a className="tooltip-link" data-tooltip-id={id} href="#"><FontAwesomeIcon icon={faQuestionCircle}/></a>
+    <span className="tooltip-link" data-tooltip-id={id}><FontAwesomeIcon icon={faQuestionCircle}/></span>
   </>;
 }

@@ -4,8 +4,6 @@ import { COLORS, COSMETICS, Cosmetics } from '@ootmm/core';
 import { Dropdown } from './Dropdown';
 import { useCosmetics } from '../contexts/GeneratorContext';
 import { FileSelect } from './FileSelect';
-import { Group } from './Group';
-import { Text } from './Text';
 import { Checkbox } from './Checkbox';
 
 const COLOR_OPTIONS: { name: string, value: string}[] = [{ value: 'default', name: 'Default' }, { value: 'auto', name: 'Auto' }, { value: 'random', name: 'Random' }, ...Object.entries(COLORS).map(([key, x]) => ({ name: x.name, value: key }))];
@@ -66,20 +64,20 @@ export function CosmeticsEditor() {
   const files = COSMETICS.filter(c => fileTypes.includes(c.type));
 
   return (
-    <Group direction='vertical' spacing='xxl'>
-      <Text size='mg'>Cosmetics</Text>
+    <>
+      <h1>Cosmetics</h1>
       <form>
-      <Group direction='vertical' spacing='jb'>
+      <>
         <div className="three-column-grid">
           {nonFiles.map(c => <Cosmetic key={c.key} cosmetic={c.key}/>)}
         </div>
         <div className="center">
-        <Group direction='horizontal' spacing='mg'>
+        <>
           {files.map(c => <Cosmetic key={c.key} cosmetic={c.key}/>)}
-        </Group>
+        </>
         </div>
-      </Group>
+      </>
       </form>
-    </Group>
+    </>
   )
 }

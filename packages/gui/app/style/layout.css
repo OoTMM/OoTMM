@@ -1,102 +1,49 @@
-#root {
-  display: flex;
-  min-height: 100vh;
-  min-width: 100vw;
+.tab-bar-left {
+  background: #333;
+  color: white;
 }
 
-.center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.tab-bar-left a {
+  color: inherit;
 }
 
-.forceRight {
-  display: flex;
-  justify-content: right;
+.tab {
+  min-width: 230px;
+  font-size: 1.3em;
+  padding: 1em;
+  display: block;
+  text-decoration: none;
+  color: inherit;
 }
 
-.two-column-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
+.tab.active, .tab:hover {
+  background: #111;
 }
 
-.three-column-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
-}
-
-.container {
-  margin: 3em;
-}
-
-.plando-search {
-  display: flex;
-}
-
-.plando-search > *:not(:last-child) {
-  margin-right: 1.5em;
-}
-
-.plando-select {
+.tab-bar-right {
   flex: 1;
-  display: inline-block;
-  min-width: 200px;
-}
-
-.plando-remove {
-  margin-right: 0.5em;
-}
-
-.plando-remove:hover {
-  cursor: pointer;
-  color: rgb(151, 7, 7);
-}
-
-.tooltip-link {
-  display: inline-block;
-  margin-left: 0.5em;
-  color: black !important;
-}
-
-.tooltip {
-  max-width: 30em;
-}
-
-.tooltip p,
-.tooltip ul {
-  margin: 0.75em;
-}
-
-.tooltip ul {
-  list-style-position: outside;
-  list-style-type: disc;
-  margin-left: 2em;
-}
-
-.tooltip li {
-  margin: 0.25em;
-}
-
-br {
-  content: '';
-}
-
-br:after {
-  content: ' ';
+  max-height: 100vh;
+  overflow: auto;
+  padding: 2em;
 }
 
 .game {
   display: flex;
   align-items: center;
-  margin: 0.5em 0;
-}
-
-.game h2 {
-  font-size: 1.75em;
+  font-size: 1.5em;
+  margin: var(--margin);
 }
 
 .game img {
-  height: 2.5em;
+  height: 5rem;
+}
+
+.dual-panels {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.dual-panels > * {
+  flex: 1;
 }

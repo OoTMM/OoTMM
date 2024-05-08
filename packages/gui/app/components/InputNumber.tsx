@@ -1,5 +1,5 @@
 import React from 'react';
-import { Group } from './Group';
+
 import { Tooltip } from './Tooltip';
 
 type InputNumberProps = {
@@ -14,7 +14,7 @@ type InputNumberProps = {
 export const InputNumber = ({ label, value, onChange, min, max, tooltip }: InputNumberProps) => {
   return (
     <label>
-       <Group direction='vertical' spacing='xs'>
+       <>
         <span>
           {label}
           {tooltip && <Tooltip>{tooltip}</Tooltip>}
@@ -26,7 +26,7 @@ export const InputNumber = ({ label, value, onChange, min, max, tooltip }: Input
           value={value}
           onChange={(e) => onChange(e.target.valueAsNumber)}
         />
-       </Group>
+       </>
     </label>
   );
 };

@@ -3,7 +3,6 @@ import CreatableSelect from 'react-select/creatable';
 
 import { PRESETS, Settings } from '@ootmm/core';
 import { useOverrideSettings, useSettings } from '../contexts/GeneratorContext';
-import Group from './Group';
 
 const NO_PRESET = "-----";
 
@@ -54,7 +53,7 @@ export const PresetSelector = () => {
   }
 
   return <label>
-    <Group direction='vertical' spacing='xs'>
+    <>
       <span>
         Preset
       </span>
@@ -65,7 +64,6 @@ export const PresetSelector = () => {
         onCreateOption={(x) => onCreate(x)}
         value={value}
       />
-    </Group>
-    
+    </>
   </label>;
 };
