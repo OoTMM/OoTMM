@@ -22,9 +22,9 @@ export function JunkLocations() {
   }
 
   return (
-    <>
+    <main>
       <h1>Junk Locations</h1>
       <ArrayList options={options} selected={settings.junkLocations} add={add} remove={remove} clear={clear}/>
-    </>
+    </main>
   );
 }

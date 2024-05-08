@@ -8,6 +8,7 @@ import { Dropdown } from './Dropdown';
 import { HINT_TYPES, SETTINGS_DEFAULT_HINTS, SettingHint, itemName } from '@ootmm/core';
 import { InputNumber } from './InputNumber';
 import { Checkbox } from './Checkbox';
+import { SettingsPanel } from './SettingsEditor';
 
 const hintOptions: { name: string; value: string }[] = [];
 for (const k in HINT_TYPES) {
@@ -87,8 +88,6 @@ export function HintEditor({ index }: HintEditorProps) {
   };
 
   const selectedItem = itemOptions.find((x) => x.value === hint.item);
-  const style = { display: 'inline-block', 'margin-left': '0.5em' };
-  const labelStyle = { display: 'inline-flex', 'margin-right': '0.5em', 'align-items': 'center', 'flex-direction': 'column' };
 
   return (
     <tr className="dashboard-table">
@@ -132,8 +131,9 @@ export function Hints() {
   };
 
   return (
-    <>
+    <main>
       <h1>Hints</h1>
+      <SettingsPanel category='hints'/>
       <>
         <button className="btn" onClick={onNew}>
           New
@@ -163,6 +163,6 @@ export function Hints() {
           ))}
         </tbody>
       </table>
-    </>
+    </main>
   );
 }

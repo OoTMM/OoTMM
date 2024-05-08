@@ -34,7 +34,7 @@ export function StartingItems() {
     </form>;
   };
 
-  return <div>
+  return <main>
     <h1>Starting Items</h1>
     <div>
       <button className="btn-danger" onClick={reset} style={{width: '200px'}}>
@@ -46,5 +46,5 @@ export function StartingItems() {
         {buildSingleTable('SHARED')}
       </div>
     </div>
-  </div>;
+  </main>;
 }

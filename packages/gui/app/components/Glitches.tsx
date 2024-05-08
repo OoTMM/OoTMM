@@ -38,7 +38,7 @@ export function Glitches() {
   }
 
   return (
-    <>
+    <main>
       <h1>Glitches</h1>
       <>
         <button className="btn-danger" onClick={clear}>Remove All</button>
@@ -47,6 +47,6 @@ export function Glitches() {
           <GameGlitches game="MM"/>
         </div>
       </>
-    </>
+    </main>
   )
 }

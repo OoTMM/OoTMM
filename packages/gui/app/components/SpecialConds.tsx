@@ -55,11 +55,11 @@ function SpecialCondsPanel({ cond }: SpecialCondsPanelProps) {
 
 export function SpecialConds() {
   return (
-    <div>
+    <main>
       <h1>Special Conditions</h1>
       <>
         {Object.keys(SPECIAL_CONDS).map(x => <SpecialCondsPanel key={x} cond={x}/>)}
       </>
-    </div>
+    </main>
   );
 }

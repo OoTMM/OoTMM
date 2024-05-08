@@ -1,5 +1,4 @@
 import React from 'react';
-import { SETTINGS_CATEGORIES } from '@ootmm/core';
 
 import { useIsPatch, useRandomSettings } from '../contexts/GeneratorContext';
 import { RomConfig } from './RomConfig';
@@ -15,6 +14,15 @@ import { Plando } from './Plando';
 import { CosmeticsEditor } from './Cosmetics';
 import { Hints } from './Hints';
 
+type TabSettingsEditorProps = {
+  name: string;
+  category: string;
+  disabled?: boolean;
+};
+function TabSettingsEditor({ name, category, disabled }: TabSettingsEditorProps) {
+  return <Tab name={name} disabled={disabled}><SettingsEditor name={name} category={category}/></Tab>;
+}
+
 export function Generator() {
   const [isPatch] = useIsPatch();
   const [randomSettings] = useRandomSettings();
@@ -22,17 +30,41 @@ export function Generator() {
 
   return <Tabs>
     <Tab name="ROM Config"><RomConfig/></Tab>
-    {SETTINGS_CATEGORIES.map(c => (
-      <Tab key={c.key} name={c.name} disabled={isPatch || isRandom}><SettingsEditor category={c.key}/></Tab>
-    ))}
-    <Tab name="Dungeons" disabled={isPatch || isRandom}><Dungeons/></Tab>
-    <Tab name="Tricks" disabled={isPatch}><Tricks/></Tab>
-    <Tab name="Glitches" disabled={isPatch}><Glitches/></Tab>
-    <Tab name="Special Conditions" disabled={isPatch || isRandom}><SpecialConds/></Tab>
-    <Tab name="Starting Items" disabled={isPatch || isRandom}><StartingItems/></Tab>
-    <Tab name="Junk Locations" disabled={isPatch}><JunkLocations/></Tab>
-    <Tab name="Hints" disabled={isPatch}><Hints/></Tab>
-    <Tab name="Plando" disabled={isPatch || isRandom}><Plando/></Tab>
+    <Tab name="Settings" disabled={isPatch || isRandom}>
+      <Tabs>
+        <TabSettingsEditor name="Main" category="main"/>
+        <TabSettingsEditor name="Shuffle" category="main.shuffle"/>
+        <TabSettingsEditor name="Price" category="main.prices"/>
+        <TabSettingsEditor name="Events" category="main.events"/>
+        <TabSettingsEditor name="Cross-Game" category="main.cross"/>
+        <Tab name="Dungeons"><Dungeons/></Tab>
+        <Tab name="Special Conditions"><SpecialConds/></Tab>
+        <Tab name="Starting Items"><StartingItems/></Tab>
+        <TabSettingsEditor name="Misc." category="main.misc"/>
+      </Tabs>
+    </Tab>
+    <Tab name="Items" disabled={isPatch || isRandom}>
+      <Tabs>
+        <TabSettingsEditor name="Progressive" category="items.progressive"/>
+        <TabSettingsEditor name="Shared" category="items.shared"/>
+        <TabSettingsEditor name="Extensions" category="items.extensions"/>
+        <TabSettingsEditor name="Ageless" category="items.ageless"/>
+      </Tabs>
+    </Tab>
+    <Tab name="Logic" disabled={isPatch}>
+      <Tabs>
+        <Tab name="Tricks"><Tricks/></Tab>
+        <Tab name="Glitches"><Glitches/></Tab>
+        <Tab name="Junk Locations"><JunkLocations/></Tab>
+      </Tabs>
+    </Tab>
+    <TabSettingsEditor name="Entrances" category="entrances" disabled={isPatch || isRandom}/>
+    <Tab name="Advanced" disabled={isPatch}>
+      <Tabs>
+        <Tab name="Hints"><Hints/></Tab>
+        <Tab name="Plando" disabled={isRandom}><Plando/></Tab>
+      </Tabs>
+    </Tab>
     <Tab name="Cosmetics"><CosmeticsEditor/></Tab>
   </Tabs>;
 }

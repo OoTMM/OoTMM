@@ -1,6 +1,6 @@
 import React from 'react';
 import Select, { MultiValue } from 'react-select';
-import { SETTINGS, SETTINGS_CATEGORIES, Settings, SettingsPatch } from '@ootmm/core';
+import { SETTINGS } from '@ootmm/core';
 
 import { Dropdown } from './Dropdown';
 import { Checkbox } from './Checkbox';
@@ -178,19 +178,14 @@ export function SettingsPanel({ category }: SettingsPanelProps) {
 };
 
 type SettingsEditorProps = {
+  name: string;
   category: string;
 };
-export function SettingsEditor({ category }: SettingsEditorProps) {
-  const cat = SETTINGS_CATEGORIES.find(x => x.key === category)!;
-  const subcategories = cat.subcategories || [];
+export function SettingsEditor({ name, category }: SettingsEditorProps) {
   return (
-    <div className="settings">
-      <h1 style={{textTransform: 'capitalize'}}>{category}</h1>
+    <main>
+      <h1>{name}</h1>
       <SettingsPanel category={category}/>
-      {subcategories.map(sub => <div className="settings-sub" key={sub.key}>
-        <h2>{sub.name}</h2>
-        <SettingsPanel category={`${category}.${sub.key}`}/>
-      </div>)}
-    </div>
+    </main>
   )
 }

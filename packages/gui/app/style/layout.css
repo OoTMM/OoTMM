@@ -1,15 +1,31 @@
+.tab-bar {
+  display: flex;
+  flex-direction: row;
+}
+
+.tab-bar-right {
+  flex: 10;
+}
+
 .tab-bar-left {
-  background: #333;
+  flex: 1;
+  background: #1f1e1e;
   color: white;
+  min-height: 100vh;
 }
 
 .tab-bar-left a {
   color: inherit;
 }
 
+.tab-bar .tab-bar .tab-bar-left {
+  background: #181616;
+  color: white;
+}
+
 .tab {
-  min-width: 230px;
-  font-size: 1.3em;
+  min-width: 200px;
+  font-size: 1.1em;
   padding: 1em;
   display: block;
   text-decoration: none;
@@ -20,7 +36,16 @@
   background: #111;
 }
 
-.tab-bar-right {
+.tab-bar .tab-bar .tab.active, .tab-bar .tab-bar .tab:hover {
+  background: #000;
+}
+
+.tab-bar .tab-bar .tab {
+  font-size: 1em;
+  padding: 0.75em;
+}
+
+main {
   flex: 1;
   max-height: 100vh;
   overflow: auto;

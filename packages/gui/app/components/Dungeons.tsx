@@ -19,7 +19,7 @@ export function Dungeons() {
   }];
 
   return (
-    <>
+    <main>
       <h1>Dungeons</h1>
       <form>
         {Object.keys(DUNGEONS).map(d =>
@@ -32,6 +32,6 @@ export function Dungeons() {
           />
         )}
       </form>
-    </>
+    </main>
   );
 }

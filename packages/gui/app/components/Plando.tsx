@@ -32,7 +32,7 @@ export function Plando() {
   };
 
   return (
-    <>
+    <main>
       <h1>Plando</h1>
       <nav className="toolbar">
         <Select className="select" options={locsOptions} onChange={(v) => setSelectedLoc(v?.value)} />
@@ -54,6 +54,6 @@ export function Plando() {
             </li>
           ))}
       </ul>
-    </>
+    </main>
   );
 }

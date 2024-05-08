@@ -133,28 +133,28 @@ export const SETTINGS = [{
 }, {
   key: 'probabilisticFoolish',
   name: 'Probabilistic Foolish Hints',
-  category: 'main',
+  category: 'hints',
   type: 'boolean',
   description: 'If you don\'t know what this is, leave it ON',
   default: true
 }, {
   key: 'noPlandoHints',
   name: 'No Plando Hints',
-  category: 'main',
+  category: 'hints',
   type: 'boolean',
   description: 'Prevents items that are part of a plando from being hinted',
   default: true
 }, {
   key: 'extraHintRegions',
   name: 'Extra Hint Regions',
-  category: 'main',
+  category: 'hints',
   type: 'boolean',
   description: 'Make the region hints more granular: Makes Goron Racetrack and Butler Race into their own regions, and splits Ganon Castle/Tower and Normal/Inverted Stone Tower Temple.',
   default: false
 }, {
   key: 'hintImportance',
   name: 'Hint Importance',
-  category: 'main',
+  category: 'hints',
   type: 'boolean',
   description: 'Hints will tell if an item is foolish, sometimes required, or always required',
   default: false
@@ -1204,7 +1204,7 @@ export const SETTINGS = [{
 }, {
   key: 'fillWallets',
   name: 'Fill Wallets',
-  category: 'items',
+  category: 'items.extensions',
   type: 'boolean',
   description: 'Fills the wallet upon finding a new one',
   default: false

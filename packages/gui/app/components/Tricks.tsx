@@ -56,12 +56,12 @@ function GameTricks({ game }: GameTricksProps) {
 
 export function Tricks() {
   return (
-    <>
+    <main>
       <h1>Tricks</h1>
       <div className="dual-panels">
         <GameTricks game="oot"/>
         <GameTricks game="mm"/>
       </div>
-    </>
+    </main>
   );
 }

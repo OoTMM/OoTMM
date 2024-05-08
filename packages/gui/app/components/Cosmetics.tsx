@@ -63,7 +63,7 @@ export function CosmeticsEditor() {
   const nonFiles = COSMETICS.filter(c => !fileTypes.includes(c.type));
   const files = COSMETICS.filter(c => fileTypes.includes(c.type));
 
-  return <>
+  return <main>
     <h1>Cosmetics</h1>
     <form>
       {nonFiles.map(c => <Cosmetic key={c.key} cosmetic={c.key}/>)}
@@ -71,5 +71,5 @@ export function CosmeticsEditor() {
     <form>
       {files.map(c => <Cosmetic key={c.key} cosmetic={c.key}/>)}
     </form>
-  </>;
+  </main>;
 }

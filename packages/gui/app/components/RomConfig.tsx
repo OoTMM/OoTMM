@@ -19,7 +19,7 @@ export function RomConfig() {
     isReady = isReady && !!romConfig.files.patch;
   }
 
-  return <>
+  return <main>
     <h1>OoTMM Web Generator</h1>
     <h2>Version: {process.env.VERSION}</h2>
     {error && <div className="panel panel-error"><h2>Something went wrong</h2><p>{error}</p></div>}
@@ -72,5 +72,5 @@ export function RomConfig() {
         )}
         <button disabled={!isReady} className="btn btn-primary" type="submit" style={{ width: '105px' }}>Generate</button>
     </form>
-  </>;
+  </main>;
 }
