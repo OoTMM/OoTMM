@@ -8,8 +8,6 @@ import { Dropdown } from './Dropdown';
 import { HINT_TYPES, SETTINGS_DEFAULT_HINTS, SettingHint, itemName } from '@ootmm/core';
 import { InputNumber } from './InputNumber';
 import { Checkbox } from './Checkbox';
-import { Group } from './Group';
-import { Text } from './Text';
 
 const hintOptions: { name: string; value: string }[] = [];
 for (const k in HINT_TYPES) {
@@ -93,15 +91,15 @@ export function HintEditor({ index }: HintEditorProps) {
   const labelStyle = { display: 'inline-flex', 'margin-right': '0.5em', 'align-items': 'center', 'flex-direction': 'column' };
 
   return (
-    <tr className="hint">
+    <tr className="dashboard-table">
       <td>
-        <span className="plando-remove" onClick={onRemove}>
+        <span className="list-remove" onClick={onRemove}>
           <FontAwesomeIcon icon={faXmark} />
         </span>
-        <span className="plando-remove" onClick={onMoveUp}>
+        <span className="list-action" onClick={onMoveUp}>
           <FontAwesomeIcon icon={faArrowUp} />
         </span>
-        <span className="plando-remove" onClick={onMoveDown}>
+        <span className="list-action" onClick={onMoveDown}>
           <FontAwesomeIcon icon={faArrowDown} />
         </span>
       </td>
@@ -110,7 +108,7 @@ export function HintEditor({ index }: HintEditorProps) {
       </td>
       <td>
         {hint.type === 'item' && (
-          <Select className="plando-select" options={itemOptions} onChange={(v) => onChangeItem(v?.value)} value={selectedItem} />
+          <Select className="select" options={itemOptions} onChange={(v) => onChangeItem(v?.value)} value={selectedItem} />
         )}
       </td>
       <td>{hint.amount !== 'max' && <InputNumber value={hint.amount} onChange={onChangeAmount} />}</td>
@@ -134,10 +132,10 @@ export function Hints() {
   };
 
   return (
-    <Group direction="vertical" spacing="xxl">
-      <Text size="mg">Hints</Text>
-      <Group direction="horizontal">
-        <button className="btn btn-primary" onClick={onNew}>
+    <>
+      <h1>Hints</h1>
+      <>
+        <button className="btn" onClick={onNew}>
           New
         </button>
         <button className="btn-danger" onClick={() => setSettings({ hints: { set: [] } })}>
@@ -146,7 +144,7 @@ export function Hints() {
         <button className="btn-danger" onClick={() => setSettings({ hints: { set: SETTINGS_DEFAULT_HINTS } })}>
           Reset
         </button>
-      </Group>
+      </>
 
       <table className="hints">
         <thead>
@@ -165,6 +163,6 @@ export function Hints() {
           ))}
         </tbody>
       </table>
-    </Group>
+    </>
   );
 }

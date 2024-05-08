@@ -3,8 +3,6 @@ import { DUNGEONS } from '@ootmm/core';
 
 import { useSettings } from '../contexts/GeneratorContext';
 import { Dropdown } from './Dropdown';
-import { Group } from './Group';
-import { Text } from './Text';
 
 export function Dungeons() {
   const [settings, setSettings] = useSettings();
@@ -21,21 +19,19 @@ export function Dungeons() {
   }];
 
   return (
-    <Group direction='vertical' spacing='xxl'>
-      <Text size="mg">Dungeons</Text>
+    <>
+      <h1>Dungeons</h1>
       <form>
-          <div className="three-column-grid">
-            {Object.keys(DUNGEONS).map(d =>
-              <Dropdown
-                key={d}
-                label={(DUNGEONS as any)[d]}
-                options={options}
-                value={(dungeon as any)[d]}
-                onChange={v => setSettings({ dungeon: { [d as keyof typeof DUNGEONS]: v } })}
-              />
-            )}
-          </div>
+        {Object.keys(DUNGEONS).map(d =>
+          <Dropdown
+            key={d}
+            label={(DUNGEONS as any)[d]}
+            options={options}
+            value={(dungeon as any)[d]}
+            onChange={v => setSettings({ dungeon: { [d as keyof typeof DUNGEONS]: v } })}
+          />
+        )}
       </form>
-    </Group>
+    </>
   );
 }

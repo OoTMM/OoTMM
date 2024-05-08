@@ -3,8 +3,6 @@ import Select, { createFilter, components } from 'react-select';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
-import Group from './Group';
-
 const CustomOption = ({ children, ...props }: { children?: React.ReactNode, props: any }) => {
   const { onMouseMove, onMouseOver, ...rest } = (props as any).innerProps;
   const newProps = { ...props, innerProps: rest };
@@ -30,25 +28,23 @@ export function ArrayList({ options, selected, add, remove, clear }: ArrayListPr
   const remaining = options.filter(x => !selected.includes(x.value));
 
   return (
-    <Group direction='vertical' spacing='xl'>
-      <Group direction='horizontal'>
-        <Select
-          className='plando-select'
-          filterOption={createFilter({ignoreAccents: false})}
-          components={{ Option: CustomOption } as any}
-          options={remaining}
-          onChange={(v) => v && add(v.value)}
-        />
-        {clear && <button className="btn-danger" onClick={clear}>Remove All</button>}
-      </Group>
-      <Group direction='vertical' spacing='xs'>
+    <div>
+      <Select
+        className='select'
+        filterOption={createFilter({ignoreAccents: false})}
+        components={{ Option: CustomOption } as any}
+        options={remaining}
+        onChange={(v) => v && add(v.value)}
+      />
+      {clear && <button className="btn-danger" onClick={clear}>Remove All</button>}
+      <ul>
         {selected.map(v => (
-          <Group direction='horizontal' spacing='xs' key={v}>
-            <span className="plando-remove" onClick={() => remove(v)}><FontAwesomeIcon icon={faXmark}/></span>
-            <span className="plando-item">{options.find(x => x.value === v)?.label || v}</span>
-          </Group>
+          <li key={v}>
+            <span className="list-remove" onClick={() => remove(v)}><FontAwesomeIcon icon={faXmark}/></span>
+            <span className="list-item">{options.find(x => x.value === v)?.label || v}</span>
+          </li>
         ))}
-      </Group>
-    </Group>
+      </ul>
+    </div>
   );
 }

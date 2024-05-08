@@ -3,7 +3,6 @@ import CreatableSelect from 'react-select/creatable';
 
 import { PRESETS, Settings } from '@ootmm/core';
 import { useOverrideSettings, useSettings } from '../contexts/GeneratorContext';
-import Group from './Group';
 
 const NO_PRESET = "-----";
 
@@ -54,18 +53,14 @@ export const PresetSelector = () => {
   }
 
   return <label>
-    <Group direction='vertical' spacing='xs'>
-      <span>
-        Preset
-      </span>
-      <CreatableSelect
-        isClearable={!PRESETS.hasOwnProperty(value.label) && value.value !== null}
-        options={options as any[]}
-        onChange={(x) => onChange(x)}
-        onCreateOption={(x) => onCreate(x)}
-        value={value}
-      />
-    </Group>
-    
+    Preset
+    <CreatableSelect
+      className="select"
+      isClearable={!PRESETS.hasOwnProperty(value.label) && value.value !== null}
+      options={options as any[]}
+      onChange={(x) => onChange(x)}
+      onCreateOption={(x) => onCreate(x)}
+      value={value}
+    />
   </label>;
 };

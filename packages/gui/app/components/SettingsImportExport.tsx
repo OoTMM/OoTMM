@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 import { importSettings, exportSettings } from '@ootmm/core';
 
 import { useOverrideSettings, useSettings } from '../contexts/GeneratorContext';
-import Group from './Group';
 
 export const SettingsImportExport = () => {
   const [settings] = useSettings();
@@ -16,10 +15,8 @@ export const SettingsImportExport = () => {
 
   return (
     <label>
-      <Group direction='vertical' spacing='xs'>
-        Import/Export Settings
-        <textarea className='settings-string' value={settingsString} onChange={x => onChange(x.target.value)}/>
-      </Group>
+      Import/Export Settings
+      <textarea className='settings-string' value={settingsString} onChange={x => onChange(x.target.value)}/>
     </label>
   )
 };

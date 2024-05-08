@@ -2,12 +2,8 @@
 
 @import 'reset-css';
 @import 'react-tooltip/dist/react-tooltip.css';
-@import './style/_global.css';
 
-@import './style/header.css';
+@import './style/base.css';
 @import './style/layout.css';
-@import './style/generator.css';
-@import './style/tab.css';
 @import './style/form.css';
-@import './style/startingitems.css';
-@import './style/list.css';
+@import './style/settings.css';
