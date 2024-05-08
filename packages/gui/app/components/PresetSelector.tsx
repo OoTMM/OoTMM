@@ -53,17 +53,14 @@ export const PresetSelector = () => {
   }
 
   return <label>
-    <>
-      <span>
-        Preset
-      </span>
-      <CreatableSelect
-        isClearable={!PRESETS.hasOwnProperty(value.label) && value.value !== null}
-        options={options as any[]}
-        onChange={(x) => onChange(x)}
-        onCreateOption={(x) => onCreate(x)}
-        value={value}
-      />
-    </>
+    Preset
+    <CreatableSelect
+      className="select"
+      isClearable={!PRESETS.hasOwnProperty(value.label) && value.value !== null}
+      options={options as any[]}
+      onChange={(x) => onChange(x)}
+      onCreateOption={(x) => onCreate(x)}
+      value={value}
+    />
   </label>;
 };

@@ -63,21 +63,13 @@ export function CosmeticsEditor() {
   const nonFiles = COSMETICS.filter(c => !fileTypes.includes(c.type));
   const files = COSMETICS.filter(c => fileTypes.includes(c.type));
 
-  return (
-    <>
-      <h1>Cosmetics</h1>
-      <form>
-      <>
-        <div className="three-column-grid">
-          {nonFiles.map(c => <Cosmetic key={c.key} cosmetic={c.key}/>)}
-        </div>
-        <div className="center">
-        <>
-          {files.map(c => <Cosmetic key={c.key} cosmetic={c.key}/>)}
-        </>
-        </div>
-      </>
-      </form>
-    </>
-  )
+  return <>
+    <h1>Cosmetics</h1>
+    <form>
+      {nonFiles.map(c => <Cosmetic key={c.key} cosmetic={c.key}/>)}
+    </form>
+    <form>
+      {files.map(c => <Cosmetic key={c.key} cosmetic={c.key}/>)}
+    </form>
+  </>;
 }

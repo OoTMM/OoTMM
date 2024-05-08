@@ -72,7 +72,44 @@ button:active, .btn:active {
   background: #a52721;
 }
 
+.btn-primary {
+  background: #26ad14;
+}
+
+.btn-primary:hover {
+  background: #4caf50;
+}
+
+.btn-primary:active {
+  background: #087f0b;
+}
+
+button[disabled], .btn[disabled], .btn-disabled {
+  background: #aaa;
+  cursor: not-allowed;
+}
+
 a, a:visited {
   color: #105fc5;
   text-decoration: none;
+}
+
+td {
+  vertical-align: middle;
+  padding: 0.5em 1em;
+}
+
+th {
+  font-weight: bold;
+}
+
+table {
+  width: 100%;
+  margin: 1em 0;
+}
+
+p {
+  margin: var(--margin);
+  margin-top: 3rem;
+  margin-bottom: 3rem;
 }

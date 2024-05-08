@@ -34,30 +34,26 @@ export function Plando() {
   return (
     <>
       <h1>Plando</h1>
-      <>
+      <nav className="toolbar">
         <Select className="select" options={locsOptions} onChange={(v) => setSelectedLoc(v?.value)} />
         <Select className="select" options={itemOptions} onChange={(v) => setSelectedItem(v?.value)} />
-        <button className="btn btn-primary" onClick={placeItem}>
-          Add
-        </button>
-        <button className="btn-danger" onClick={removeAll}>
-          Remove All
-        </button>
-      </>
-      <>
+        <button className="btn" onClick={placeItem}>Add</button>
+        <button className="btn btn-danger" onClick={removeAll}>Remove All</button>
+      </nav>
+      <ul>
         {Object.entries(settings.plando.locations || {})
           .filter((x) => x[1])
           .map(([loc, item]) => (
-            <React.Fragment key={loc}>
-              <span className="plando-remove" onClick={() => removeItem(loc)}>
+            <li key={loc}>
+              <span className="list-remove" onClick={() => removeItem(loc)}>
                 <FontAwesomeIcon icon={faXmark} />
               </span>
-              <span className="plando-item">
+              <span className="list-item">
                 {loc}: {itemName(item!)}
               </span>
-            </React.Fragment>
+            </li>
           ))}
-      </>
+      </ul>
     </>
   );
 }

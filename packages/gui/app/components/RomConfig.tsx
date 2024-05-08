@@ -5,44 +5,50 @@ import { Checkbox } from './Checkbox';
 import { FileSelect } from './FileSelect';
 import { PresetSelector } from './PresetSelector';
 import { SettingsImportExport } from './SettingsImportExport';
+import { Result } from './Result';
 
 export function RomConfig() {
   const { romConfig, setFileBuffer, setSeed } = useRomConfig();
   const [isPatch, setIsPatch] = useIsPatch();
-  const { error, generate } = useGenerator();
+  const { error, result, archive, generate } = useGenerator();
   const [randomSettings, setRandomSettings] = useRandomSettings();
 
   const isRandomSettings = randomSettings.enabled;
+  let isReady = !!romConfig.files.oot && !!romConfig.files.mm;
+  if (isPatch) {
+    isReady = isReady && !!romConfig.files.patch;
+  }
 
   return <>
     <h1>OoTMM Web Generator</h1>
     <h2>Version: {process.env.VERSION}</h2>
-    {error && <div className="generator-error">{error}</div>}
-    <form
+    {error && <div className="panel panel-error"><h2>Something went wrong</h2><p>{error}</p></div>}
+    {result && <Result archive={archive}/>}
+    <form className="rom-config-form"
       target="_self"
       onSubmit={(e) => {
         e.preventDefault();
         generate();
       }}
     >
-      <div className="center">
-          <FileSelect
-            logo="oot"
-            file="oot"
-            label="Ocarina of Time (1.0, U or J)"
-            accept=".z64, .n64, .v64"
-            onChange={(f) => setFileBuffer('oot', f)}
-          />
-          <FileSelect
-            logo="mm"
-            file="mm"
-            label="Majora's Mask (U only)"
-            accept=".z64, .n64, .v64"
-            onChange={(f) => setFileBuffer('mm', f)}
-          />
-          {isPatch && (
-            <FileSelect file="patch" logo="ootmm" label="OoTMM Patch File" accept=".ootmm" onChange={(f) => setFileBuffer('patch', f)} />
-          )}
+      <div className="rom-config-files">
+        <FileSelect
+          logo="oot"
+          file="oot"
+          label="Ocarina of Time (1.0, U or J)"
+          accept=".z64, .n64, .v64"
+          onChange={(f) => setFileBuffer('oot', f)}
+        />
+        <FileSelect
+          logo="mm"
+          file="mm"
+          label="Majora's Mask (U only)"
+          accept=".z64, .n64, .v64"
+          onChange={(f) => setFileBuffer('mm', f)}
+        />
+        {isPatch && (
+          <FileSelect file="patch" logo="ootmm" label="OoTMM Patch File" accept=".ootmm" onChange={(f) => setFileBuffer('patch', f)} />
+        )}
       </div>
       {!isPatch && <Checkbox label="Random Settings" checked={isRandomSettings} onChange={(x) => setRandomSettings({ enabled: x })} />}
         {isRandomSettings && (
@@ -64,9 +70,7 @@ export function RomConfig() {
             <input type="text" value={romConfig.seed} onChange={(e) => setSeed(e.target.value)} />
           </label>
         )}
-        <button className="btn btn-primary" type="submit" style={{ width: '105px' }}>
-          Generate
-        </button>
+        <button disabled={!isReady} className="btn btn-primary" type="submit" style={{ width: '105px' }}>Generate</button>
     </form>
   </>;
 }

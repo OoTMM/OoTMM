@@ -91,15 +91,15 @@ export function HintEditor({ index }: HintEditorProps) {
   const labelStyle = { display: 'inline-flex', 'margin-right': '0.5em', 'align-items': 'center', 'flex-direction': 'column' };
 
   return (
-    <tr className="hint">
+    <tr className="dashboard-table">
       <td>
-        <span className="plando-remove" onClick={onRemove}>
+        <span className="list-remove" onClick={onRemove}>
           <FontAwesomeIcon icon={faXmark} />
         </span>
-        <span className="plando-remove" onClick={onMoveUp}>
+        <span className="list-action" onClick={onMoveUp}>
           <FontAwesomeIcon icon={faArrowUp} />
         </span>
-        <span className="plando-remove" onClick={onMoveDown}>
+        <span className="list-action" onClick={onMoveDown}>
           <FontAwesomeIcon icon={faArrowDown} />
         </span>
       </td>
@@ -135,7 +135,7 @@ export function Hints() {
     <>
       <h1>Hints</h1>
       <>
-        <button className="btn btn-primary" onClick={onNew}>
+        <button className="btn" onClick={onNew}>
           New
         </button>
         <button className="btn-danger" onClick={() => setSettings({ hints: { set: [] } })}>

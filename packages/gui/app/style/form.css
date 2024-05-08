@@ -24,6 +24,10 @@ label {
   font-weight: 600;
 }
 
+.file-select-label {
+  flex-direction: column;
+}
+
 input[type=checkbox] {
   height: 2rem;
   width: 2rem;
@@ -44,7 +48,7 @@ input[type=text], input[type=number], select, .select {
   outline: none;
 }
 
-input[type=text]:focus, select:focus {
+input[type=text]:focus, select:focus, textarea:focus {
   outline: none;
   border-color: #105fc5;
 }
@@ -104,4 +108,83 @@ input[type=text]:focus, select:focus {
 .double-list-row-extra {
   display: flex;
   margin-left: auto;
+}
+
+.list-item {
+  margin-left: 0.5rem;
+}
+
+.list-remove, .list-action {
+  cursor: pointer;
+}
+
+.list-remove:hover {
+  color: red;
+}
+
+.list-action:hover {
+  color: #105fc5;
+}
+
+li {
+  margin: var(--margin);
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+}
+
+.toolbar .btn, .toolbar button {
+  text-wrap: nowrap;
+  flex: 0;
+}
+
+.file-select {
+  flex: 1;
+  margin: 2em;
+  align-items: center;
+}
+
+.file-select-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  border: 1px solid #aaa;
+  border-radius: 5%;
+  background: #eee;
+  padding: 1em;
+  margin: 1em;
+}
+
+.file-select-box-img-container {
+  display: flex;
+  width: 8em;
+  height: 8em;
+}
+
+.file-select-box-img-container img {
+  object-fit: contain;
+}
+
+.file-select-box p {
+  margin-top: 1em;
+}
+
+.file-select-box.empty img {
+  filter: grayscale(100%);
+}
+
+input[type='file'] {
+  display: none;
+}
+
+textarea {
+  width: 100%;
+  min-width: 100%;
+  margin: 1em 0;
+  min-height: 10rem;
+  font-family: monospace;
+  padding: 0.25em;
 }

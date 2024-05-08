@@ -15,10 +15,8 @@ export const SettingsImportExport = () => {
 
   return (
     <label>
-      <>
-        Import/Export Settings
-        <textarea className='settings-string' value={settingsString} onChange={x => onChange(x.target.value)}/>
-      </>
+      Import/Export Settings
+      <textarea className='settings-string' value={settingsString} onChange={x => onChange(x.target.value)}/>
     </label>
   )
 };

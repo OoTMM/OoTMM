@@ -36,19 +36,17 @@ export const FileSelect = ({ logo, label, accept, onChange, file }: FileSelectPr
   };
 
   return (
-    <label>
-      <>
-        {label}
-        <div className={`file-select-box ${!fileData ? 'empty' : ''}`}>
-          <div className='file-select-box-img-container'>
-            <img src={LOGOS[logo]} width="100%"/>
-          </div>
-          <input type="file" accept={accept} onChange={e => e.target.files && e.target.files[0] && onChangeImpl(e.target.files[0])}/>
-          {pending && <p>...</p>}
-          {!pending && !fileData && <>No file selected</>}
-          {!pending && fileData && <>{fileData.name}</>}
+    <label className="file-select-label">
+      {label}
+      <div className={`file-select-box ${!fileData ? 'empty' : ''}`}>
+        <div className='file-select-box-img-container'>
+          <img src={LOGOS[logo]} width="100%"/>
         </div>
-      </>
+        <input type="file" accept={accept} onChange={e => e.target.files && e.target.files[0] && onChangeImpl(e.target.files[0])}/>
+        {pending && <p>...</p>}
+        {!pending && !fileData && <>No file selected</>}
+        {!pending && fileData && <>{fileData.name}</>}
+      </div>
     </label>
   );
 };

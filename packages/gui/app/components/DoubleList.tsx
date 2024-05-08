@@ -66,9 +66,9 @@ export function DoubleList({ onAdd, onRemove, onReset, options, selected }: Doub
   return (
     <div className="double-list">
       <div className="double-list-tools">
-        <Button type="primary" onClick={add}>Add</Button>
+        <Button onClick={add}>Add</Button>
         {reset && <Button type="danger" onClick={reset}>Reset</Button>}
-        <Button type="primary" onClick={remove}>Remove</Button>
+        <Button onClick={remove}>Remove</Button>
       </div>
       <div className="double-list-content">
         <DoubleListCol values={optionsLeft} selected={selectedLeft} onSelect={selectLeft}/>

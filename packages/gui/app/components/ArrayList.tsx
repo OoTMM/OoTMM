@@ -28,25 +28,23 @@ export function ArrayList({ options, selected, add, remove, clear }: ArrayListPr
   const remaining = options.filter(x => !selected.includes(x.value));
 
   return (
-    <>
-      <>
-        <Select
-          className='select'
-          filterOption={createFilter({ignoreAccents: false})}
-          components={{ Option: CustomOption } as any}
-          options={remaining}
-          onChange={(v) => v && add(v.value)}
-        />
-        {clear && <button className="btn-danger" onClick={clear}>Remove All</button>}
-      </>
-      <>
+    <div>
+      <Select
+        className='select'
+        filterOption={createFilter({ignoreAccents: false})}
+        components={{ Option: CustomOption } as any}
+        options={remaining}
+        onChange={(v) => v && add(v.value)}
+      />
+      {clear && <button className="btn-danger" onClick={clear}>Remove All</button>}
+      <ul>
         {selected.map(v => (
-          <React.Fragment key={v}>
-            <span className="plando-remove" onClick={() => remove(v)}><FontAwesomeIcon icon={faXmark}/></span>
-            <span className="plando-item">{options.find(x => x.value === v)?.label || v}</span>
-          </React.Fragment>
+          <li key={v}>
+            <span className="list-remove" onClick={() => remove(v)}><FontAwesomeIcon icon={faXmark}/></span>
+            <span className="list-item">{options.find(x => x.value === v)?.label || v}</span>
+          </li>
         ))}
-      </>
-    </>
+      </ul>
+    </div>
   );
 }

@@ -19,6 +19,7 @@ type GeneratorState = {
     message: string | null;
     error: string | null;
     result: GeneratorOutput | null;
+    archive: API.ResultFile | null;
   },
   isPatch: boolean;
   settings: Settings;
@@ -68,6 +69,7 @@ function createState(): GeneratorState {
       message: null,
       error: null,
       result: null,
+      archive: null,
     }
   };
 }
@@ -141,10 +143,10 @@ export function useIsPatch() {
 export function useGenerator() {
   const { state, setState } = useContext(GeneratorContext);
   const { generator } = state;
-  const { isGenerating, message, error, result } = generator;
+  const { isGenerating, message, error, result, archive } = generator;
 
   const generate = async () => {
-    setState((state) => ({ ...state, generator: { ...state.generator, isGenerating: true } }));
+    setState((state) => ({ ...state, generator: { ...state.generator, isGenerating: true, archive: null, result: null, error: null } }));
     const { oot, mm, patch } = state.romConfig.files;
     const options: OptionsInput = { seed: state.romConfig.seed, settings: state.settings, cosmetics: state.cosmetics, random: state.random };
     try {
@@ -153,12 +155,14 @@ export function useGenerator() {
         setState((state) => ({ ...state, generator: { ...state.generator, message } }));
       });
       setState((state) => ({ ...state, generator: { ...state.generator, isGenerating: false, result } }));
+      const archive = await API.archive(result);
+      setState((state) => ({ ...state, generator: { ...state.generator, archive } }));
     } catch (e: any) {
       setState((state) => ({ ...state, generator: { ...state.generator, isGenerating: false, error: e.toString() } }));
     }
   };
 
-  return { isGenerating, message, error, result, generate };
+  return { isGenerating, message, error, result, archive, generate };
 }
 
 export function useSettings() {
