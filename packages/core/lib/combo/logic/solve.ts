@@ -746,14 +746,12 @@ export class LogicPassSolver {
 
   private selectPreCompletedDungeonsItem(worldId: number, items: PlayerItems, count: number, group: Set<Item>) {
     const world = this.worlds[worldId];
-    if (this.input.settings.games === 'ootmm') {
-      const dungeons = shuffle(this.input.random, [...NORMAL_DUNGEONS_OOT, ...NORMAL_DUNGEONS_MM]);
-    }
+    const dungeons = shuffle(this.input.random, [...NORMAL_DUNGEONS_OOT, ...NORMAL_DUNGEONS_MM]);
     if (this.input.settings.games === 'oot') {
-      const dungeons = shuffle(this.input.random, [...NORMAL_DUNGEONS_OOT]);
+      dungeons = shuffle(this.input.random, [...NORMAL_DUNGEONS_OOT]);
     }
     if (this.input.settings.games === 'mm') {
-      const dungeons = shuffle(this.input.random, [...NORMAL_DUNGEONS_MM]);
+      dungeons = shuffle(this.input.random, [...NORMAL_DUNGEONS_MM]);
     }
 
     while (dungeons.length) {
