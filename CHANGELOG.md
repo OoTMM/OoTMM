@@ -33,6 +33,7 @@ All notable changes to this project will be documented in this file.
 - Fix crash when trying to calm the council without the souls of all involved parties.
 - Fix crash in Twinmold Arena when trying to transform into Giant without Twinmold's soul.
 - Fix logic issue with Laundry Pool freestanding rupees checking for Day 2 and Night 2 instead of Night 2 only.
+- Fix Farore's Wind in MM not being correctly restricted.
 
 ## [22.0] - 2024-04-24
 

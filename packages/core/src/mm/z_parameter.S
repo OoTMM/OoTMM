@@ -15,7 +15,7 @@ PATCH_END
 
 Interface_GetItemRestriction_Hook:
   HOOK_SAVE
-  or      a1, s0, zero
+  lw      a1, 0x00d0 (sp)
   jal     Interface_GetItemRestriction
    addiu  a2, sp, 0x0024 // HOOK_SAVE's T3
   sw      v0, 0x003c (sp) // store into HOOK_SAVE's T9
