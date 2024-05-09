@@ -194,6 +194,7 @@ static void EnDns_ShopText(Actor* this, GameState_Play* play)
     char* b;
     char* start;
     s16 price;
+    u8 lineBreaks;
 
     EnDns_ItemQuery(&q, EnDns_GetID(this));
 
@@ -208,10 +209,25 @@ static void EnDns_ShopText(Actor* this, GameState_Play* play)
     comboTextAppendNum(&b, price);
     comboTextAppendStr(&b, " Rupees");
     comboTextAppendClearColor(&b);
-    comboTextAppendStr(&b, "?" TEXT_NL TEXT_CHOICE2 TEXT_COLOR_GREEN);
-    comboTextAppendStr(&b, "Yes" TEXT_NL);
-    comboTextAppendStr(&b, "No" TEXT_END);
+    comboTextAppendStr(&b, "?" TEXT_NL TEXT_END);
     comboTextAutoLineBreaks(start);
+
+    lineBreaks = 0;
+    for (int i = 0; start[i] != TEXT_END[0]; ++i)
+    {
+        if (start[i] == TEXT_NL[0])
+            lineBreaks++;
+    }
+
+    /* Ensure there are two line breaks */
+    b--;
+    while (lineBreaks < 2)
+    {
+        comboTextAppendStr(&b, TEXT_NL);
+        lineBreaks++;
+    }
+
+    comboTextAppendStr(&b, TEXT_CHOICE2 TEXT_COLOR_GREEN "Yes" TEXT_NL "No" TEXT_END);
 }
 
 static int EnDns_TalkedTo(Actor* this, GameState_Play* play)
