@@ -47,7 +47,7 @@
 
 main {
   flex: 1;
-  max-height: 100vh;
+  min-height: 100vh;
   overflow: auto;
   padding: 2em;
 }
