@@ -152,7 +152,7 @@ function Setting({ setting }: { setting: string }) {
     return (
       <InputNumber
         label={data.name}
-        tooltip={(data as any).description && data.key}
+        tooltip={(data as any).description && <SettingTooltip setting={data.key}/>}
         value={settings[data.key] as number}
         onChange={(v) => setSettings({ [data.key]: v })}
         min={minValue}
