@@ -120,6 +120,7 @@ static void Audio_DrawMusicName(GameState_Play* play)
 
     OPEN_DISPS(gPlay->gs.gfx);
     gDPPipeSync(POLY_OPA_DISP++);
+    gDPSetCycleType(POLY_OPA_DISP++, G_CYC_1CYCLE);
     gDPSetRenderMode(POLY_OPA_DISP++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
     gDPSetCombineMode(POLY_OPA_DISP++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0xff, 0xff, 0xff, alpha);
