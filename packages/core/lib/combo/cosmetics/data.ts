@@ -54,4 +54,8 @@ export const COSMETICS = [{
   key: 'music',
   name: 'Custom Music ZIP',
   type: 'zip',
-}] as const;
+}, {
+  key: 'musicNames',
+  name: 'Display Music Names',
+  type: 'boolean',
+},] as const;

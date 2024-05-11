@@ -367,6 +367,8 @@ class CosmeticsPass {
       if (data)
         await randomizeMusic(this.builder, random, data);
     }
+    if (c.musicNames)
+      this.patchSymbol('MUSIC_NAMES', Buffer.from([0x01]));
   }
 }
 

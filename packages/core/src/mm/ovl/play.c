@@ -11,6 +11,7 @@
 #include <combo/global.h>
 #include <combo/multi.h>
 #include <combo/context.h>
+#include <combo/audio.h>
 
 GameState_Play* gPlay;
 int gNoTimeFlow;
@@ -791,6 +792,7 @@ void Play_UpdateWrapper(GameState_Play* play)
     comboObjectsGC();
     checkTimeSkip(play);
     Play_Update(play);
+    Audio_DisplayMusicName(play);
     Debug_Update();
 }
 

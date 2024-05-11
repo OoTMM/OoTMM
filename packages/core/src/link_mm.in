@@ -16,6 +16,7 @@ EnItem00_Update = 0x800a6b98;
 Fault_AddHungupAndCrashImpl = 0x80083df4;
 
 Play_DrawHudButtons = 0x80117100;
+Audio_GetActiveSeqId = 0x801a8a50;
 
 Actor_ProcessInitChain = 0x800ffadc;
 

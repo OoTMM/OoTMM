@@ -11,6 +11,7 @@
 #include <combo/multi.h>
 #include <combo/context.h>
 #include <combo/dungeon.h>
+#include <combo/audio.h>
 
 GameState_Play* gPlay;
 
@@ -548,6 +549,7 @@ void Play_UpdateWrapper(GameState_Play* play)
     comboObjectsGC();
     Play_Update(play);
     Dpad_Draw(play);
+    Audio_DisplayMusicName(play);
     Debug_Update();
 }
 

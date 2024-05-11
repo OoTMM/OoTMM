@@ -126,12 +126,95 @@ type AudioSeq = {
   size: number;
 }
 
+function saneName(name: string) {
+  /* Force NFC */
+  name = name.normalize('NFC');
+
+  /* A diacritics */
+  for (const m of ['á', 'à', 'â', 'ä']) {
+    name = name.replace(m, 'a');
+  }
+  for (const m of ['Á', 'À', 'Â', 'Ä']) {
+    name = name.replace(m, 'A');
+  }
+
+  /* E diacritics */
+  for (const m of ['é', 'è', 'ê', 'ë']) {
+    name = name.replace(m, 'e');
+  }
+  for (const m of ['É', 'È', 'Ê', 'Ë']) {
+    name = name.replace(m, 'E');
+  }
+
+  /* I diacritics */
+  for (const m of ['í', 'ì', 'î', 'ï']) {
+    name = name.replace(m, 'i');
+  }
+  for (const m of ['Í', 'Ì', 'Î', 'Ï']) {
+    name = name.replace(m, 'I');
+  }
+
+  /* O diacritics */
+  for (const m of ['ó', 'ò', 'ô', 'ö']) {
+    name = name.replace(m, 'o');
+  }
+  for (const m of ['Ó', 'Ò', 'Ô', 'Ö']) {
+    name = name.replace(m, 'O');
+  }
+
+  /* U diacritics */
+  for (const m of ['ú', 'ù', 'û', 'ü']) {
+    name = name.replace(m, 'u');
+  }
+  for (const m of ['Ú', 'Ù', 'Û', 'Ü']) {
+    name = name.replace(m, 'U');
+  }
+
+  /* Y diacritics */
+  for (const m of ['ý', 'ÿ']) {
+    name = name.replace(m, 'y');
+  }
+  for (const m of ['Ý', 'Ÿ']) {
+    name = name.replace(m, 'Y');
+  }
+
+  /* C diacritics */
+  for (const m of ['ç']) {
+    name = name.replace(m, 'c');
+  }
+  for (const m of ['Ç']) {
+    name = name.replace(m, 'C');
+  }
+
+  /* N diacritics */
+  for (const m of ['ñ']) {
+    name = name.replace(m, 'n');
+  }
+  for (const m of ['Ñ']) {
+    name = name.replace(m, 'N');
+  }
+
+  /* AE */
+  name = name.replace('æ', 'ae');
+  name = name.replace('Æ', 'AE');
+
+  /* OE */
+  name = name.replace('œ', 'oe');
+  name = name.replace('Œ', 'OE');
+
+  /* Remove every other non-ascii */
+  name = name.replace(/[^ -~]/g, '');
+
+  return name;
+}
+
 class MusicInjector {
   private audioSeq: {
     oot: AudioSeq;
     mm: AudioSeq;
   };
   private musics: MusicFile[];
+  private namesBuffer: Buffer;
 
   constructor(
     private builder: RomBuilder,
@@ -149,6 +232,16 @@ class MusicInjector {
       },
     }
     this.musics = [];
+    this.namesBuffer = Buffer.alloc(256 * 2 * 48);
+  }
+
+  private registerName(seqId: number, name: string) {
+    /* Cut name to 48 characters */
+    name = name.slice(0, 48);
+
+    /* Write to buffer */
+    const offset = seqId * 48;
+    this.namesBuffer.write(name, offset, 'utf-8');
   }
 
   private async loadMusicsOotrs(files: JSZip.JSZipObject[]) {
@@ -178,7 +271,7 @@ class MusicInjector {
       /* Parse the metadata */
       const metaRaw = await metaFile[0].async('text');
       const meta = metaRaw.split(/\r?\n/);
-      const name = meta[0];
+      const name = saneName(meta[0]);
       const bankId = Number(meta[1]);
       const type = meta[2];
       const game = 'oot';
@@ -223,7 +316,8 @@ class MusicInjector {
       const seq = await zseqFiles[0].async('nodebuffer');
       const game = 'mm';
       const type = 'bgm';
-      const name = '???';
+      const basename = f.name.split('/').pop()!;
+      const name = saneName(basename.replace('.mmrs', ''));
       const music: MusicFile = { type, seq, bankId, name, game };
       this.musics.push(music);
     }
@@ -248,7 +342,7 @@ class MusicInjector {
     return size;
   }
 
-  private async injectMusicOotOffsetId(slot: number, seqOffset: number, seqLength: number, bankId: number) {
+  private async injectMusicOotOffsetId(slot: number, seqOffset: number, seqLength: number, bankId: number, name: string) {
     const fileCodeOot = this.builder.fileByNameRequired('oot/code');
 
     /* Patch the bank ID */
@@ -261,6 +355,9 @@ class MusicInjector {
     const seqTablePtr = 0x102ae0 + 0x10 * slot;
     const seqTableData = toU32Buffer([seqOffset, seqLength]);
     seqTableData.copy(fileCodeOot.data, seqTablePtr);
+
+    /* Register the name */
+    this.registerName(slot, name);
   }
 
   private async injectMusicOot(slot: string, music: MusicFile) {
@@ -269,15 +366,15 @@ class MusicInjector {
 
     /* Patch the music */
     const slotId = OOT_MUSICS[slot as keyof typeof OOT_MUSICS];
-    await this.injectMusicOotOffsetId(slotId, offset, music.seq.length, music.bankId);
+    await this.injectMusicOotOffsetId(slotId, offset, music.seq.length, music.bankId, music.name);
 
     /* Special cases */
     if (slot === 'Fairy Fountain') {
-      await this.injectMusicOotOffsetId(0x57, offset, music.seq.length, music.bankId);
+      await this.injectMusicOotOffsetId(0x57, offset, music.seq.length, music.bankId, music.name);
     }
   }
 
-  private async injectMusicMmOffsetId(slot: number, seqOffset: number, seqLength: number, bankId: number) {
+  private async injectMusicMmOffsetId(slot: number, seqOffset: number, seqLength: number, bankId: number, name: string) {
     const fileCodeMm = this.builder.fileByNameRequired('mm/code');
 
     /* Patch the bank ID */
@@ -290,6 +387,9 @@ class MusicInjector {
     const seqTablePtr = 0x13bb80 + 0x10 * slot;
     const seqTableData = toU32Buffer([seqOffset, seqLength]);
     seqTableData.copy(fileCodeMm.data, seqTablePtr);
+
+    /* Register the name */
+    this.registerName(slot + 256, name);
   }
 
   private async injectMusicMm(slot: string, music: MusicFile) {
@@ -298,15 +398,15 @@ class MusicInjector {
 
     /* Patch the music */
     const slotId = MM_MUSICS[slot as keyof typeof MM_MUSICS];
-    await this.injectMusicMmOffsetId(slotId, offset, music.seq.length, music.bankId);
+    await this.injectMusicMmOffsetId(slotId, offset, music.seq.length, music.bankId, music.name);
 
     /* Special cases */
     if (slot === 'Clock Town Day 1') {
-      await this.injectMusicMmOffsetId(0x1d, offset, music.seq.length, music.bankId);
+      await this.injectMusicMmOffsetId(0x1d, offset, music.seq.length, music.bankId, music.name);
     }
 
     if (slot === 'Clock Town Day 2') {
-      await this.injectMusicMmOffsetId(0x23, offset, music.seq.length, music.bankId);
+      await this.injectMusicMmOffsetId(0x23, offset, music.seq.length, music.bankId, music.name);
     }
   }
 
@@ -381,6 +481,9 @@ class MusicInjector {
     /* Inject the new audioseq */
     this.replaceAudioseqOot();
     this.replaceAudioseqMm();
+
+    /* Inject the music names */
+    this.builder.addFile({ game: 'custom', type: 'uncompressed', vaddr: 0xf1000000, data: this.namesBuffer });
   }
 }
 

@@ -15,6 +15,7 @@ osWritebackDCacheAll = 0x800d5aa0;
 DMARomToRam = 0x8000085c;
 
 DrawLink = 0x80079f48;
+Audio_GetActiveSeqId = 0x800cab18;
 
 Actor_ProcessInitChain = 0x80063f7c;
 Actor_Angle = 0x800213b4;

@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add a setting to display custom music names in-game.
 - Add Free Scarecrow for MM.
 - Add NPC souls to MM, more NPC souls in OoT, shared NPC souls.
 - Add cutscenes speed-ups for the end of Ganon's Castle Trials.
