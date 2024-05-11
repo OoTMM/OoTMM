@@ -82,9 +82,9 @@ PATCH_END
 
 /* Use the raw rupee handlers */
 PATCH_START 0x80a65030
-  jal AddRupees
+  jal AddRupeesRaw
 PATCH_END
 
 PATCH_START 0x80a65320
-  jal AddRupees
+  jal AddRupeesRaw
 PATCH_END
