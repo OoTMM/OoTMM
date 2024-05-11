@@ -378,6 +378,9 @@ static int shouldActorIgnorePlayer(Actor* this, Actor_Player* link)
     case AC_EN_GE2:
     case AC_EN_BILI:
     case AC_EN_VALI:
+    case AC_EN_HEISHI2:
+    case AC_EN_HEISHI3:
+    case AC_EN_HEISHI4:
         return 1;
     default:
         return 0;
