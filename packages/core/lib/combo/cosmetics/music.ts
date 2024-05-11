@@ -1,17 +1,43 @@
 import JSZip from 'jszip';
 
 import { Random, shuffle } from '../random';
-import { Patchfile } from '../patch-build/patchfile';
 import { toU32Buffer } from '../util';
-import { DecompressedRoms } from '../decompress';
 import { Game } from '../config';
 import { RomBuilder } from '../rom-builder';
 
-const OOT_AUDIOSEQ_ADDR = 0x29de0;
-const OOT_AUDIOSEQ_SIZE = 0x4f690;
+const BANKS_OOT_TO_MM: {[k: number]: number} = {
+  0x03: 0x03,
+  0x05: 0x04,
+  0x08: 0x05,
+  0x09: 0x06,
+  0x0D: 0x07,
+  0x11: 0x08,
+  0x12: 0x09,
+  0x14: 0x0A,
+  0x15: 0x0B,
+  0x16: 0x0C,
+  0x1C: 0x0D,
+  0x1D: 0x0E,
+  0x23: 0x0F,
+  0x24: 0x10,
+};
 
-const MM_AUDIOSEQ_ADDR = 0x46af0;
-const MM_AUDIOSEQ_SIZE = 0x51480;
+const BANKS_MM_TO_OOT: {[k: number]: number} = {
+  0x03: 0x03,
+  0x04: 0x05,
+  0x05: 0x08,
+  0x06: 0x09,
+  0x07: 0x0D,
+  0x08: 0x11,
+  0x09: 0x12,
+  0x0A: 0x14,
+  0x0B: 0x15,
+  0x0C: 0x16,
+  0x0D: 0x1C,
+  0x0E: 0x1D,
+  0x0F: 0x23,
+  0x10: 0x24,
+};
 
 const OOT_MUSICS = {
   "Hyrule Field": 0x02,
@@ -116,9 +142,10 @@ const MM_MUSICS = {
 type MusicFile = {
   type: 'bgm';
   seq: Buffer;
-  bankId: number;
+  bankIdOot: number | null;
+  bankIdMm: number | null;
   name: string;
-  game: Game;
+  games: Game[];
 }
 
 type AudioSeq = {
@@ -272,16 +299,22 @@ class MusicInjector {
       const metaRaw = await metaFile[0].async('text');
       const meta = metaRaw.split(/\r?\n/);
       const name = saneName(meta[0]);
-      const bankId = Number(meta[1]);
+      const bankIdOot = Number(meta[1]);
       const type = meta[2];
-      const game = 'oot';
+      const games: Game[] = ['oot'];
       if (type !== 'bgm') {
         continue;
+      }
+      let bankIdMm: number | null = null;
+
+      if (BANKS_OOT_TO_MM[bankIdOot] !== undefined) {
+        bankIdMm = BANKS_OOT_TO_MM[bankIdOot];
+        games.push('mm');
       }
 
       /* Add the music */
       const seq = await seqFiles[0].async('nodebuffer');
-      const music: MusicFile = { type, seq, bankId, name, game };
+      const music: MusicFile = { type, seq, bankIdOot, bankIdMm, name, games };
       this.musics.push(music);
     }
   }
@@ -310,15 +343,22 @@ class MusicInjector {
         zseqFilename = zseqFilename.split('/').pop()!;
       }
       const bankIdRaw = zseqFilename.split('.')[0];
-      const bankId = parseInt(bankIdRaw, 16);
+      const bankIdMm = parseInt(bankIdRaw, 16);
 
       /* Add the music */
       const seq = await zseqFiles[0].async('nodebuffer');
-      const game = 'mm';
+      const games: Game[] = ['mm'];
       const type = 'bgm';
       const basename = f.name.split('/').pop()!;
       const name = saneName(basename.replace('.mmrs', ''));
-      const music: MusicFile = { type, seq, bankId, name, game };
+
+      let bankIdOot: number | null = null;
+      if (BANKS_MM_TO_OOT[bankIdMm] !== undefined) {
+        bankIdOot = BANKS_MM_TO_OOT[bankIdMm];
+        games.push('oot');
+      }
+
+      const music: MusicFile = { type, seq, bankIdOot, bankIdMm, name, games };
       this.musics.push(music);
     }
   }
@@ -366,11 +406,11 @@ class MusicInjector {
 
     /* Patch the music */
     const slotId = OOT_MUSICS[slot as keyof typeof OOT_MUSICS];
-    await this.injectMusicOotOffsetId(slotId, offset, music.seq.length, music.bankId, music.name);
+    await this.injectMusicOotOffsetId(slotId, offset, music.seq.length, music.bankIdOot!, music.name);
 
     /* Special cases */
     if (slot === 'Fairy Fountain') {
-      await this.injectMusicOotOffsetId(0x57, offset, music.seq.length, music.bankId, music.name);
+      await this.injectMusicOotOffsetId(0x57, offset, music.seq.length, music.bankIdOot!, music.name);
     }
   }
 
@@ -398,15 +438,15 @@ class MusicInjector {
 
     /* Patch the music */
     const slotId = MM_MUSICS[slot as keyof typeof MM_MUSICS];
-    await this.injectMusicMmOffsetId(slotId, offset, music.seq.length, music.bankId, music.name);
+    await this.injectMusicMmOffsetId(slotId, offset, music.seq.length, music.bankIdMm!, music.name);
 
     /* Special cases */
     if (slot === 'Clock Town Day 1') {
-      await this.injectMusicMmOffsetId(0x1d, offset, music.seq.length, music.bankId, music.name);
+      await this.injectMusicMmOffsetId(0x1d, offset, music.seq.length, music.bankIdMm!, music.name);
     }
 
     if (slot === 'Clock Town Day 2') {
-      await this.injectMusicMmOffsetId(0x23, offset, music.seq.length, music.bankId, music.name);
+      await this.injectMusicMmOffsetId(0x23, offset, music.seq.length, music.bankIdMm!, music.name);
     }
   }
 
@@ -446,7 +486,7 @@ class MusicInjector {
 
   private async shuffleMusics(game: Game) {
     const musicsDefs = game === 'oot' ? OOT_MUSICS : MM_MUSICS;
-    const musics = shuffle(this.random, this.musics.filter(m => m.game === game));
+    const musics = shuffle(this.random, this.musics.filter(m => m.games.includes(game)));
     const slots = shuffle(this.random, Object.keys(musicsDefs));
 
     for (;;) {

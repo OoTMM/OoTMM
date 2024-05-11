@@ -15,6 +15,8 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Allow compatible OoTR music to play in MM.
+- Allow compatible MMR music to play in OoT.
 - Woods of Mystery has been logically reorganized to allow for leaving from the Day 2 Grotto in ER.
 - Reduced Meg spawn timer after being hit.
 - Removed the camera lock upon throwing a bomb-flower onto the rock locking Dodongo's Cavern.
