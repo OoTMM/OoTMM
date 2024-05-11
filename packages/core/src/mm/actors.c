@@ -349,6 +349,8 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
         case 0x01: return opt(comboHasSoulMm(GI_MM_SOUL_NPC_ROOFTOP_MAN));
         default: UNREACHABLE();
         }
+    case AC_EN_ANI:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_ROOFTOP_MAN)); 
     case AC_EN_GO:
         switch (variable)
         {

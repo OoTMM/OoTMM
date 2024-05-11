@@ -25,6 +25,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix some actors (Part-Timer in Termina Field, Running Man, Punk Kid) not being properly filtered.
 - Fix rupee scaling affecting bank withdraws.
 - Fix one fish not being properly flagged when obtained in pond fish shuffle.
 - Fix some silver blocks being only able to be pushed once in ageless strength.

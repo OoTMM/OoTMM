@@ -23,6 +23,7 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
     case AC_EN_JS:
         return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_CARPET_MAN));
     case AC_EN_HS:
+    case AC_EN_HS2:
         return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_GROG));
     case AC_EN_IN:
         return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_GORMAN));
@@ -204,6 +205,8 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
         return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_ROOFTOP_MAN));
     case AC_EN_MU:
     case AC_EN_NIW_GIRL:
+    case AC_EN_MM:
+    case AC_EN_MM2:
         return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_CITIZEN));
     case AC_EN_HY:
         switch (variable & 0x3f)
