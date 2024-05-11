@@ -123,7 +123,7 @@ typedef struct {
     /* 0x14 */ s16 zFar; /* Max depth (render distance) of the view as a whole. fogFar will always match zFar */
 } CurrentEnvLightSettings; /* size = 0x16 */
 
-typedef struct
+typedef struct EnvironmentContext
 {
     /* 0x00 */ u16 unk_0;
     /* 0x02 */ u16 sceneTimeSpeed;

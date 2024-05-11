@@ -16,106 +16,6 @@
 GameState_Play* gPlay;
 int gNoTimeFlow;
 
-static int sTimeSkipFlag;
-
-static void checkTimeSkip(GameState_Play* play)
-{
-    Actor_Player* link;
-    int currentHalfDay;
-    int nextHalfDay;
-    u32 linearTime;
-    u16 t;
-    u8 d;
-
-    if (gNoTimeFlow)
-    {
-        sTimeSkipFlag = 0;
-        return;
-    }
-
-    switch (play->sceneId)
-    {
-    case SCE_MM_MOON:
-    case SCE_MM_MOON_DEKU:
-    case SCE_MM_MOON_GORON:
-    case SCE_MM_MOON_ZORA:
-    case SCE_MM_MOON_LINK:
-    case SCE_MM_LAIR_MAJORA:
-        sTimeSkipFlag = 0;
-        return;
-    }
-
-    if (Player_InCsMode(play))
-    {
-        sTimeSkipFlag = 0;
-        return;
-    }
-
-    d = gSave.day;
-    t = gSave.time;
-
-    /* Check for day 0 / day 4 */
-    if (d < 1 || d >= 4)
-        return;
-
-    /* Check if we have the clock for the current half day */
-    linearTime = Time_Game2Linear(d, t);
-    currentHalfDay = (linearTime - 0x10000) / 0x8000;
-
-    if (gSharedCustomSave.mm.halfDays & (1 << currentHalfDay))
-    {
-        sTimeSkipFlag = 0;
-        return;
-    }
-
-    /* We don't, check for the next clock we have */
-    nextHalfDay = -1;
-    for (int i = currentHalfDay; i < 6; ++i)
-    {
-        if (gSharedCustomSave.mm.halfDays & (1 << i))
-        {
-            nextHalfDay = i;
-            break;
-        }
-    }
-
-    if (nextHalfDay == -1)
-    {
-        /* We have no clock going forward, it's a moon crash */
-        Interface_StartMoonCrash(play);
-    }
-    else
-    {
-        if (play->actorCtx.flags & 2)
-        {
-            /* Telescope */
-            AudioSeq_QueueSeqCmd(0xe0000100);
-            gSaveContext.nextCutscene = 0;
-            comboTransition(play, ENTR_MM_ASTRAL_OBSERVATORY_FROM_FIELD);
-            gSave.time -= 0x10;
-            return;
-        }
-
-        if (sTimeSkipFlag)
-        {
-            /* We have a clock going forward */
-            Time_Linear2Game(&d, &t, Time_FromHalfDay(nextHalfDay));
-            gSave.day = d;
-            gSave.time = t;
-            gSave.isNight = !!(nextHalfDay & 1);
-
-            /* Need a reload */
-            link = GET_LINK(play);
-            Play_SetRespawnData(play, 1, gSave.entranceIndex, play->roomCtx.curRoom.id, 0xdff, &link->base.world.pos, link->base.rot2.y);
-            gSaveContext.respawnFlag = 2;
-            gSaveContext.nextCutscene = 0;
-            comboTransition(play, gSave.entranceIndex);
-        }
-        else
-            sTimeSkipFlag = 1;
-    }
-}
-
 static u32 entranceForOverride(u32 entrance)
 {
     u32 entranceKey;
@@ -506,7 +406,6 @@ void hookPlay_Init(GameState_Play* play)
     preInitTitleScreen();
 
     /* Init */
-    sTimeSkipFlag = 0;
     isEndOfGame = 0;
     gActorCustomTriggers = NULL;
     gMultiMarkChests = 0;
@@ -688,14 +587,6 @@ void hookPlay_Init(GameState_Play* play)
         }
     }
 
-    /* Fix an issue with first day prompt */
-    if ((gSave.day == 0 || (gSave.day == 1 && gSave.time == 0x4000)) && gSave.entranceIndex != ENTR_MM_CLOCK_TOWN)
-    {
-        gSave.day = 1;
-        gSave.time = 0x4040; /* Little leeway to avoid being in the night -> day transition state */
-        gSave.isNight = 0;
-    }
-
     comboCacheClear();
     comboObjectsReset();
 
@@ -790,7 +681,6 @@ void Play_UpdateWrapper(GameState_Play* play)
     malloc_check();
     comboCacheGarbageCollect();
     comboObjectsGC();
-    checkTimeSkip(play);
     Play_Update(play);
     Audio_DisplayMusicName(play);
     Debug_Update();

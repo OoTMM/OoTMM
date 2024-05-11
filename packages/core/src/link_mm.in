@@ -14,6 +14,8 @@ EnItem00_CollectedHandler = 0x800a6a40;
 EnItem00_Update = 0x800a6b98;
 
 Fault_AddHungupAndCrashImpl = 0x80083df4;
+Interface_NewDay = 0x8010ee74;
+Environment_NewDay = 0x800feaf4;
 
 Play_DrawHudButtons = 0x80117100;
 Audio_GetActiveSeqId = 0x801a8a50;
