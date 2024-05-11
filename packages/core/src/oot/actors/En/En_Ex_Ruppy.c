@@ -38,6 +38,18 @@ void EnExRuppy_ItemQuery(ComboItemQuery* q, Actor_EnExRuppy* this, GameState_Pla
     }
 }
 
+static int EnExRupy_IsShuffled(Actor_EnExRuppy* this, GameState_Play* play)
+{
+    ComboItemQuery q;
+    ComboItemOverride o;
+
+    EnExRuppy_ItemQuery(&q, this, play);
+    q.gi = GI_NONE;
+    comboItemOverride(&o, &q);
+
+    return o.gi != GI_NONE;
+}
+
 void EnExRuppy_Draw(Actor_EnExRuppy* this, GameState_Play* play)
 {
     ComboItemQuery q;
@@ -109,10 +121,13 @@ void EnExRuppy_GiveItem(Actor_EnExRuppy* this, GameState_Play* play, Actor_EnDiv
 
 void EnExRuppy_InitWrapper(Actor_EnExRuppy* this, GameState_Play* play)
 {
-    ActorCallback init = actorAddr(AC_EN_EX_RUPPY, 0x80a8ab70);
+    ActorCallback init;
+
+    init = actorAddr(AC_EN_EX_RUPPY, 0x80a8ab70);
     init(&this->actor, play);
 
-    if (this->type == 0) {
+    if (this->type == 0 && EnExRupy_IsShuffled(this, play))
+    {
         this->actor.draw = EnExRuppy_Draw;
     }
 }
