@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Make the medallion fanfare and the mask fanfare cross-games.
 - Allow compatible OoTR music to play in MM.
 - Allow compatible MMR music to play in OoT.
 - Woods of Mystery has been logically reorganized to allow for leaving from the Day 2 Grotto in ER.
