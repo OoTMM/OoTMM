@@ -70,7 +70,7 @@
 # define FANFARE_SONG_GORON         0x95c
 # define FANFARE_SONG_ZORA          0x95d
 # define FANFARE_SONG_EMPTINESS     0x95e
-# define FANFARE_SONG_ORDER         0x95f
+# define FANFARE_SONG_ORDER         FANFARE_MM(0x95f)
 #endif
 
 void comboPlayItemFanfare(s16 gi, int isShort)
