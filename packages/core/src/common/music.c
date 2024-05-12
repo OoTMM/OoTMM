@@ -19,4 +19,8 @@ void AudioLoad_InitTableAudioSeq(void* streamStruct, u32 romAddr, u32 unk)
     AudioLoad_InitTable(streamStruct, romAddr, unk);
 }
 
+/* TODO: Change this mess */
+
+#if 0
 PATCH_CALL(AUDIOSEQ_LOAD, AudioLoad_InitTableAudioSeq);
+#endif

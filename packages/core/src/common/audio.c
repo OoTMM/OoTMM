@@ -16,6 +16,48 @@ ALIGNED(16) static char sAudioNameBuffer[49];
 static u8 sAudioNameTTL;
 static u16 sAudioNameSeq = 0xffff;
 
+ALIGNED(16) CustomAudioTable gCustomAudioTable = { { 256 } };
+u8 gCustomAudioSeqBanks[256 * 2 + 256 * 2 + 16];
+
+void Audio_InitCustom(void)
+{
+    ALIGNED(16) u8 banks[0x80];
+    u16* tmp;
+
+    /* Build the custom bank table */
+    for (int i = 0; i < 256; ++i)
+    {
+        tmp = (u16*)(gCustomAudioSeqBanks + i * 2);
+        *tmp = 512 + i * 2;
+    }
+
+    /* Load OoT banks */
+    LoadFile(banks, CUSTOM_SEQ_BANKS_OOT_VROM, 0x80);
+    for (int i = 0; i < 0x80; ++i)
+    {
+        gCustomAudioSeqBanks[512 + i * 2 + 0] = 1;
+        gCustomAudioSeqBanks[512 + i * 2 + 1] = banks[i];
+    }
+
+    /* Sequence 0 is special */
+    tmp = (u16*)(gCustomAudioSeqBanks + 0x00 * 2);
+    *tmp = 1024;
+    gCustomAudioSeqBanks[1024] = 2;
+    gCustomAudioSeqBanks[1025] = 1;
+    gCustomAudioSeqBanks[1026] = 0;
+
+    /* Load MM banks */
+    //LoadFile(banks, CUSTOM_SEQ_BANKS_MM_VROM, 0x80);
+    //for (int i = 0; i < 0x80; ++i)
+    //{
+    //    gCustomAudioSeqBanks[512 + 0x80 * 2 + i * 2 + 0] = 1;
+    //    gCustomAudioSeqBanks[512 + 0x80 * 2 + i * 2 + 1] = banks[i];
+    //}
+
+    LoadFile(gCustomAudioTable.entries + 0x00, CUSTOM_SEQ_TABLE_OOT_VROM, 0x80 * sizeof(AudioTableEntry));
+    LoadFile(gCustomAudioTable.entries + 0x80, CUSTOM_SEQ_TABLE_MM_VROM, 0x80 * sizeof(AudioTableEntry));
+}
+
 static void Audio_UpdateMusicName(void)
 {
     u16 currentSeq;

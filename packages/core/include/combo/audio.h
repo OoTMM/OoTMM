@@ -16,7 +16,9 @@ AudioTableEntry;
 typedef struct
 {
     u16             count;
-    char            pad[0x0e];
+    s16             unk_02;
+    u32             romAddr;
+    char            pad[0x8];
 }
 AudioTableHeader;
 
@@ -26,6 +28,13 @@ typedef struct
     AudioTableEntry  entries[];
 }
 AudioTable;
+
+typedef struct
+{
+    AudioTableHeader header;
+    AudioTableEntry  entries[256];
+}
+CustomAudioTable;
 
 typedef struct GameState_Play GameState_Play;
 
