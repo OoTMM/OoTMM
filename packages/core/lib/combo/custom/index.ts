@@ -272,8 +272,14 @@ class CustomAssetsBuilder {
     seqTableDataOotOrig.copy(seqTableDataOotPatched);
     for (let i = 0; i < 0x6e; ++i) {
       let addr = seqTableDataOotOrig.readUint32BE(i * 0x10);
+      let size = seqTableDataOotOrig.readUint32BE(i * 0x10 + 4);
+      if (!size) {
+        size = seqTableDataOotOrig.readUint32BE(addr * 0x10 + 4);
+        addr = seqTableDataOotOrig.readUint32BE(addr * 0x10);
+      }
       addr += 0x29de0;
       seqTableDataOotPatched.writeUint32BE(addr, i * 0x10);
+      seqTableDataOotPatched.writeUint32BE(size, i * 0x10 + 4);
     }
     const seqTableDataOotVrom = this.addRawData('oot/seq_table', seqTableDataOotPatched, false);
     this.cg.define('CUSTOM_SEQ_TABLE_OOT_VROM', seqTableDataOotVrom);
