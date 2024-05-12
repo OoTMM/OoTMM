@@ -120,6 +120,22 @@ void Audio_InitCustom(void)
 
     LoadFile(gCustomAudioTable.entries + 0x00, CUSTOM_SEQ_TABLE_NATIVE_VROM, 0x80 * sizeof(AudioTableEntry));
     LoadFile(gCustomAudioTable.entries + 0x80, CUSTOM_SEQ_TABLE_FOREIGN_VROM, 0x80 * sizeof(AudioTableEntry));
+
+    /* Resolve virtual addresses */
+    for (int i = 0; i < 256; ++i)
+    {
+        DmaEntry dmaEntry;
+        AudioTableEntry* e;
+
+        e = gCustomAudioTable.entries + i;
+        if (e->romAddr >= 0x08000000)
+        {
+            if (comboDmaLookup(&dmaEntry, e->romAddr))
+            {
+                e->romAddr = dmaEntry.pstart + (e->romAddr - dmaEntry.vstart);
+            }
+        }
+    }
 }
 
 static void Audio_UpdateMusicName(void)
