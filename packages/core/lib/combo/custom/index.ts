@@ -291,10 +291,10 @@ class CustomAssetsBuilder {
     for (let i = 0; i < 0x80; ++i) {
       let addr = seqTableDataMmOrig.readUint32BE(i * 0x10);
       let size = seqTableDataMmOrig.readUint32BE(i * 0x10 + 4);
-      //if (size === 0 && addr) {
-      //  size = seqTableDataMmOrig.readUint32BE(addr * 0x10 + 4);
-      //  addr = seqTableDataMmOrig.readUint32BE(addr * 0x10);
-      //}
+      if (size === 0 && addr) {
+        size = seqTableDataMmOrig.readUint32BE(addr * 0x10 + 4);
+        addr = seqTableDataMmOrig.readUint32BE(addr * 0x10);
+      }
       addr += 0x4d9f40; /* MM_BASE */
       addr += 0x46af0;
       seqTableDataMmPatched.writeUint32BE(addr, i * 0x10);
