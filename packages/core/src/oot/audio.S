@@ -10,6 +10,29 @@
 #define BGM_AUDIOBANK_SIZE      0x4800
 #define BGM_UNK_SIZE            0
 
+/* Use our custom audio table */
+PATCH_START 0x800b8884
+  lui t1,%HI(gCustomAudioTable)
+PATCH_END
+
+PATCH_START 0x800b8894
+  addiu t1,%LO(gCustomAudioTable)
+PATCH_END
+
+/* Use our custom seq -> bank table */
+PATCH_START 0x800b8890
+  lui t6,%HI(gCustomAudioSeqBanks)
+PATCH_END
+
+PATCH_START 0x800b88a0
+  addiu t6,%LO(gCustomAudioSeqBanks)
+PATCH_END
+
+/* Use our custom table init */
+PATCH_START 0x800b88d8
+  jal Audio_InitCustom
+PATCH_END
+
 /* Patch the audio heap */
 PATCH_START 0x800b87c4
   la t9,AUDIO_HEAP_START

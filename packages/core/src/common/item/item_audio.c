@@ -1,17 +1,29 @@
 #include <combo.h>
 #include <combo/item.h>
 
+#define FANFARE_FOREIGN(x) ((x) | 0x80)
+
+#if defined(GAME_OOT)
+# define FANFARE_OOT(x) (x)
+# define FANFARE_MM(x) FANFARE_FOREIGN(x)
+#endif
+
+#if defined(GAME_MM)
+# define FANFARE_OOT(x) FANFARE_FOREIGN(x)
+# define FANFARE_MM(x) (x)
+#endif
+
 #define FANFARE_MAJOR               0x922
 #define FANFARE_HEART_CONTAINER     0x924
 #define FANFARE_HEART_PIECE         0x39
+#define FANFARE_MASK                FANFARE_MM(0x37)
+#define FANFARE_MEDALLION           FANFARE_OOT(0x943)
 #define SFX_RUPEE                   0x4803
 #define SFX_MINOR_GI                0x4824
 #define SFX_MINOR_QUICK             0x4831
 
 #if defined(GAME_OOT)
-# define FANFARE_MASK               FANFARE_MAJOR
 # define FANFARE_STONE              0x932
-# define FANFARE_MEDALLION          0x943
 # define FANFARE_SONG               0x93d
 # define FANFARE_SONG_TP_LIGHT      0x925
 # define FANFARE_SONG_TP_FOREST     0x934
@@ -36,9 +48,7 @@
 #endif
 
 #if defined(GAME_MM)
-# define FANFARE_MASK               0x37
-# define FANFARE_STONE              FANFARE_MAJOR
-# define FANFARE_MEDALLION          FANFARE_MAJOR
+# define FANFARE_STONE              FANFARE_MEDALLION
 # define FANFARE_SONG               0x952
 # define FANFARE_SONG_TP_LIGHT      FANFARE_SONG
 # define FANFARE_SONG_TP_FOREST     FANFARE_SONG

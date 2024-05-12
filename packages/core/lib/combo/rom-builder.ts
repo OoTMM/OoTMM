@@ -156,7 +156,7 @@ export class RomBuilder {
     file.injected = true;
   }
 
-  addFile(args: AddFileArgs): void {
+  addFile(args: AddFileArgs) {
     const file: RomFile = { ...args, injected: false };
     if (file.game === 'custom' && file.vaddr === undefined) {
       const size = file.data.length;
@@ -165,6 +165,7 @@ export class RomBuilder {
       this.vaddr += sizeAligned;
     }
     this.files.push(file);
+    return file.vaddr;
   }
 
   alias(to: string, from: string) {
