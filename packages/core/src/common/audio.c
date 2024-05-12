@@ -10,6 +10,20 @@
 # define MUSIC_NAMES_OFFSET 256
 #endif
 
+#if defined(GAME_OOT)
+# define CUSTOM_SEQ_BANKS_NATIVE_VROM   CUSTOM_SEQ_BANKS_OOT_VROM
+# define CUSTOM_SEQ_BANKS_FOREIGN_VROM  CUSTOM_SEQ_TABLE_MM_VROM
+# define CUSTOM_SEQ_TABLE_NATIVE_VROM   CUSTOM_SEQ_TABLE_OOT_VROM
+# define CUSTOM_SEQ_TABLE_FOREIGN_VROM  CUSTOM_SEQ_TABLE_MM_VROM
+#endif
+
+#if defined(GAME_MM)
+# define CUSTOM_SEQ_BANKS_NATIVE_VROM  CUSTOM_SEQ_BANKS_MM_VROM
+# define CUSTOM_SEQ_BANKS_FOREIGN_VROM CUSTOM_SEQ_TABLE_OOT_VROM
+# define CUSTOM_SEQ_TABLE_NATIVE_VROM  CUSTOM_SEQ_TABLE_MM_VROM
+# define CUSTOM_SEQ_TABLE_FOREIGN_VROM CUSTOM_SEQ_TABLE_OOT_VROM
+#endif
+
 static u8 sDisplayMusicNames;
 COSMETIC(MUSIC_NAMES, sDisplayMusicNames);
 ALIGNED(16) static char sAudioNameBuffer[49];
@@ -19,6 +33,7 @@ static u16 sAudioNameSeq = 0xffff;
 ALIGNED(16) CustomAudioTable gCustomAudioTable = { { 256 } };
 u8 gCustomAudioSeqBanks[256 * 2 + 256 * 2 + 16];
 
+#if defined(GAME_OOT)
 static u8 bankForeignToNative(u8 bankId)
 {
     switch (bankId)
@@ -41,6 +56,32 @@ static u8 bankForeignToNative(u8 bankId)
 
     return bankId;
 }
+#endif
+
+#if defined(GAME_MM)
+static u8 bankForeignToNative(u8 bankId)
+{
+    switch (bankId)
+    {
+    case 0x03: return 0x03;
+    case 0x05: return 0x04;
+    case 0x08: return 0x05;
+    case 0x09: return 0x06;
+    case 0x0D: return 0x07;
+    case 0x11: return 0x08;
+    case 0x12: return 0x09;
+    case 0x14: return 0x0A;
+    case 0x15: return 0x0B;
+    case 0x16: return 0x0C;
+    case 0x1C: return 0x0D;
+    case 0x1D: return 0x0E;
+    case 0x23: return 0x0F;
+    case 0x24: return 0x10;
+    }
+
+    return bankId;
+}
+#endif
 
 void Audio_InitCustom(void)
 {
@@ -54,16 +95,16 @@ void Audio_InitCustom(void)
         *tmp = 512 + i * 2;
     }
 
-    /* Load OoT banks */
-    LoadFile(banks, CUSTOM_SEQ_BANKS_OOT_VROM, 0x80);
+    /* Load native banks */
+    LoadFile(banks, CUSTOM_SEQ_BANKS_NATIVE_VROM, 0x80);
     for (int i = 0; i < 0x80; ++i)
     {
         gCustomAudioSeqBanks[512 + i * 2 + 0] = 1;
         gCustomAudioSeqBanks[512 + i * 2 + 1] = banks[i];
     }
 
-    /* Load MM banks */
-    LoadFile(banks, CUSTOM_SEQ_BANKS_MM_VROM, 0x80);
+    /* Load foreign banks */
+    LoadFile(banks, CUSTOM_SEQ_BANKS_FOREIGN_VROM, 0x80);
     for (int i = 0; i < 0x80; ++i)
     {
         gCustomAudioSeqBanks[512 + 0x80 * 2 + i * 2 + 0] = 1;
@@ -77,8 +118,8 @@ void Audio_InitCustom(void)
     gCustomAudioSeqBanks[1025] = 1;
     gCustomAudioSeqBanks[1026] = 0;
 
-    LoadFile(gCustomAudioTable.entries + 0x00, CUSTOM_SEQ_TABLE_OOT_VROM, 0x80 * sizeof(AudioTableEntry));
-    LoadFile(gCustomAudioTable.entries + 0x80, CUSTOM_SEQ_TABLE_MM_VROM, 0x80 * sizeof(AudioTableEntry));
+    LoadFile(gCustomAudioTable.entries + 0x00, CUSTOM_SEQ_TABLE_NATIVE_VROM, 0x80 * sizeof(AudioTableEntry));
+    LoadFile(gCustomAudioTable.entries + 0x80, CUSTOM_SEQ_TABLE_FOREIGN_VROM, 0x80 * sizeof(AudioTableEntry));
 }
 
 static void Audio_UpdateMusicName(void)
