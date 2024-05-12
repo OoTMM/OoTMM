@@ -258,8 +258,21 @@ static void Audio_DrawMusicName(GameState_Play* play)
 
 void Audio_DisplayMusicName(GameState_Play* play)
 {
+    static u8 sIsInitialized;
+    DmaEntry e;
+
     if (!sDisplayMusicNames)
         return;
+
+    if (!sIsInitialized)
+    {
+        sIsInitialized = 1;
+        if (!comboDmaLookup(&e, COMBO_VROM_MUSIC_NAMES))
+        {
+            sDisplayMusicNames = 0;
+            return;
+        }
+    }
 
     /* Update the music name */
     Audio_UpdateMusicName();
