@@ -54,7 +54,7 @@ static u8 bankForeignToNative(u8 bankId)
     case 0x10: return 0x24;
     }
 
-    return bankId;
+    return 0x03;
 }
 #endif
 
@@ -79,7 +79,7 @@ static u8 bankForeignToNative(u8 bankId)
     case 0x24: return 0x10;
     }
 
-    return bankId;
+    return 0x03;
 }
 #endif
 
