@@ -57,7 +57,6 @@ function resolveColor(random: Random, c: ColorArg, auto?: () => number | null): 
 
 class CosmeticsPass {
   private assetsPromise: Promise<Assets> | null;
-  private vrom: number;
 
   constructor(
     private opts: Options,
@@ -66,7 +65,6 @@ class CosmeticsPass {
     private meta: any,
   ) {
     this.assetsPromise = null;
-    this.vrom = 0xc0000000;
   }
 
   private asset(key: keyof Assets): Promise<Buffer> {
@@ -88,9 +86,7 @@ class CosmeticsPass {
 
   private addNewFile(data: Buffer, compressed = true) {
     const size = (data.length + 0xf) & ~0xf;
-    const vrom = this.vrom;
-    this.vrom = (this.vrom + size) >>> 0;
-    this.builder.addFile({ vaddr: vrom, data, type: compressed ? 'compressed' : 'uncompressed', game: 'custom' })
+    const vrom = this.builder.addFile({ data, type: compressed ? 'compressed' : 'uncompressed', game: 'custom' })!;
     return [vrom, (vrom + size) >>> 0];
   }
 
