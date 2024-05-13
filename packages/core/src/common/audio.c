@@ -17,6 +17,8 @@
 # define CUSTOM_SEQ_TABLE_FOREIGN_VROM      CUSTOM_SEQ_TABLE_MM_VROM
 # define CUSTOM_AUDIO_TABLE_NATIVE_VROM     CUSTOM_AUDIO_TABLE_OOT_VROM
 # define CUSTOM_AUDIO_TABLE_FOREIGN_VROM    CUSTOM_AUDIO_TABLE_MM_VROM
+# define CUSTOM_BANK_TABLE_NATIVE_VROM      CUSTOM_BANK_TABLE_OOT_VROM
+# define CUSTOM_BANK_TABLE_FOREIGN_VROM     CUSTOM_BANK_TABLE_MM_VROM
 #endif
 
 #if defined(GAME_MM)
@@ -26,6 +28,8 @@
 # define CUSTOM_SEQ_TABLE_FOREIGN_VROM      CUSTOM_SEQ_TABLE_OOT_VROM
 # define CUSTOM_AUDIO_TABLE_NATIVE_VROM     CUSTOM_AUDIO_TABLE_MM_VROM
 # define CUSTOM_AUDIO_TABLE_FOREIGN_VROM    CUSTOM_AUDIO_TABLE_OOT_VROM
+# define CUSTOM_BANK_TABLE_NATIVE_VROM      CUSTOM_BANK_TABLE_MM_VROM
+# define CUSTOM_BANK_TABLE_FOREIGN_VROM     CUSTOM_BANK_TABLE_OOT_VROM
 #endif
 
 static u8 sDisplayMusicNames;
@@ -51,6 +55,17 @@ typedef struct
 CustomTableAudio;
 
 ALIGNED(16) CustomTableAudio gCustomTableAudio = { { 16 } };
+
+#ifndef GAME_MM
+typedef struct
+{
+    AudioTableHeader header;
+    AudioTableEntry  entries[0x60];
+}
+CustomTableBank;
+
+ALIGNED(16) CustomTableBank gCustomTableBank = { { 0x60 } };
+#endif
 
 u8 gCustomAudioSeqBanks[256 * 2 + 256 * 2 + 16];
 
@@ -161,6 +176,12 @@ void Audio_InitCustom(void)
     /* Load audio table */
     LoadFile(gCustomTableAudio.entries + 0, CUSTOM_AUDIO_TABLE_NATIVE_VROM, 8 * sizeof(AudioTableEntry));
     LoadFile(gCustomTableAudio.entries + 8, CUSTOM_AUDIO_TABLE_FOREIGN_VROM, 8 * sizeof(AudioTableEntry));
+
+#ifndef GAME_MM
+    /* Load bank tables */
+    LoadFile(gCustomTableBank.entries + 0x00, CUSTOM_BANK_TABLE_NATIVE_VROM, 0x30 * sizeof(AudioTableEntry));
+    LoadFile(gCustomTableBank.entries + 0x30, CUSTOM_BANK_TABLE_FOREIGN_VROM, 0x30 * sizeof(AudioTableEntry));
+#endif
 }
 
 static void Audio_UpdateMusicName(void)

@@ -13,19 +13,11 @@
 /* Use our custom seq table */
 PATCH_START 0x800b8884
   lui t1,%HI(gCustomTableSeq)
-PATCH_END
-
-PATCH_START 0x800b8894
-  addiu t1,%LO(gCustomTableSeq)
-PATCH_END
-
-/* Use our custom tables */
-PATCH_START 0x800b888c
+  lui t2,%HI(gCustomTableBank)
   lui t3,%HI(gCustomTableAudio)
   lui t6,%HI(gCustomAudioSeqBanks)
-PATCH_END
-
-PATCH_START 0x800b889c
+  addiu t1,%LO(gCustomTableSeq)
+  addiu t2,%LO(gCustomTableBank)
   addiu t3,%LO(gCustomTableAudio)
   addiu t6,%LO(gCustomAudioSeqBanks)
 PATCH_END
@@ -33,6 +25,10 @@ PATCH_END
 /* Use our custom table init */
 PATCH_START 0x800b88d8
   jal Audio_InitCustom
+PATCH_END
+
+PATCH_START 0x800b88ec
+  nop
 PATCH_END
 
 PATCH_START 0x800b8900
