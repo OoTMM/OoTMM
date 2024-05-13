@@ -98,8 +98,16 @@ static AudioTable* allocTable(int count)
     return table;
 }
 
+static u8 foreignSampleTable(u8 sampleTableId)
+{
+    if (sampleTableId == 0xff)
+        return 0xff;
+    return sampleTableId + 0x30;
+}
+
 void AudioCustom_Init(void)
 {
+    AudioTableEntry* e;
     ALIGNED(16) u8 banks[0x80];
     u16* tmp;
 
@@ -116,10 +124,26 @@ void AudioCustom_Init(void)
     LoadFile(gCustomAudioTables.audio->entries + 0, CUSTOM_AUDIO_TABLE_NATIVE_VROM, 8 * sizeof(AudioTableEntry));
     LoadFile(gCustomAudioTables.audio->entries + 8, CUSTOM_AUDIO_TABLE_FOREIGN_VROM, 8 * sizeof(AudioTableEntry));
 
+    /* Fix foreign tables */
+    for (int i = 0; i < 0x30; ++i)
+    {
+        e = gCustomAudioTables.bank->entries + 0x30 + i;
+        if (e->medium && !e->size)
+        {
+            /* Alias */
+            e->romAddr += 0x30;
+        }
+    }
+
     /* Foreign banks need to point to their correct audiotable */
     for (int i = 0; i < 0x30; ++i)
     {
-        gCustomAudioTables.bank->entries[0x30 + i].data[0] += 8;
+        e = gCustomAudioTables.bank->entries + 0x30 + i;
+        if (e->medium)
+        {
+            e->data[0] = foreignSampleTable(e->data[0]);
+            e->data[1] = foreignSampleTable(e->data[1]);
+        }
     }
 
     /* Resolve virtual sequence addresses (for custom music) */

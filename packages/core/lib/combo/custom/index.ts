@@ -285,13 +285,10 @@ class CustomAssetsBuilder {
     for (let i = 0; i < count; ++i) {
       let addr = dataOrig.readUint32BE(i * 0x10);
       let size = dataOrig.readUint32BE(i * 0x10 + 4);
-      if (!size) {
-        size = dataOrig.readUint32BE(addr * 0x10 + 4);
-        addr = dataOrig.readUint32BE(addr * 0x10);
+      if (size) {
+        addr += romOffset;
       }
-      addr += romOffset;
       dataPatched.writeUint32BE(addr, i * 0x10);
-      dataPatched.writeUint32BE(size, i * 0x10 + 4);
     }
     const dataVrom = this.addRawData(`${game}/audio_table`, dataPatched, false);
     this.cg.define(`CUSTOM_AUDIO_TABLE_${game.toUpperCase()}_VROM`, dataVrom);
