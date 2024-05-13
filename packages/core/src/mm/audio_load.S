@@ -101,7 +101,7 @@ PATCH_START 0x801907ac
   lui t7,%HI(gAudioLoadStatusFont)
 PATCH_END
 
-PATCH_START 0x801907ec
+PATCH_START 0x801907f0
   lbu t7,%LO(gAudioLoadStatusFont)(t7)
 PATCH_END
 
