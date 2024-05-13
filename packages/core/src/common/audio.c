@@ -211,6 +211,8 @@ static void Audio_UpdateMusicName(void)
     if (currentSeq == 0xffff)
     {
         sAudioNameSeq = 0xffff;
+        sAudioNameBuffer[0] = 0;
+        sAudioNameTTL = 0;
         return;
     }
 
