@@ -4,6 +4,7 @@ import { Random, sample, shuffle } from '../random';
 import { toU32Buffer } from '../util';
 import { Game } from '../config';
 import { RomBuilder } from '../rom-builder';
+import { Monitor } from '../monitor';
 
 type MusicEntry = {
   type: 'bgm' | 'fanfare';
@@ -105,6 +106,13 @@ const MUSIC: {[k: string]: MusicEntry} = {
   MM_IKANA_CASTLE: { type: 'bgm', name: 'Ikana Castle', mm: [0x6f] },
   MM_CLEAR_WOODFALL: { type: 'bgm', name: 'Woodfall Clear', mm: [0x78] },
   MM_CLEAR_SNOWHEAD: { type: 'bgm', name: 'Snowhead Clear', mm: [0x79] },
+  FANFARE_SHARED_ITEM_MAJOR: { type: 'fanfare', name: 'Fanfare Item Major', oot: [0x22], mm: [0x22] },
+  FANFARE_SHARED_ITEM_HEART_PIECE: { type: 'fanfare', name: 'Fanfare Item Heart Piece', oot: [0x39], mm: [0x39] },
+  FANFARE_SHARED_ITEM_HEART_CONTAINER: { type: 'fanfare', name: 'Fanfare Item Heart Container', oot: [0x24], mm: [0x24] },
+  FANFARE_SHARED_ITEM_MASK: { type: 'fanfare', name: 'Fanfare Item Mask', oot: [], mm: [0x37] },
+  FANFARE_SHARED_ITEM_STONE: { type: 'fanfare', name: 'Fanfare Item Stone', oot: [0x32], mm: [] },
+  FANFARE_SHARED_ITEM_MEDALLION: { type: 'fanfare', name: 'Fanfare Item Medallion', oot: [0x43], mm: [] },
+  FANFARE_SHARED_ITEM_OCARINA: { type: 'fanfare', name: 'Fanfare Item Ocarina', oot: [0x3d], mm: [0x52] },
 };
 
 type MusicFile = {
@@ -200,8 +208,8 @@ function saneName(name: string) {
 
 function isMusicSuitable(entry: MusicEntry, file: MusicFile) {
   if (entry.type !== file.type) return false;
-  if (entry.oot && !file.games.includes('oot')) return false;
-  if (entry.mm && !file.games.includes('mm')) return false;
+  if (entry.oot !== undefined && !file.games.includes('oot')) return false;
+  if (entry.mm !== undefined && !file.games.includes('mm')) return false;
 
   return true;
 }
@@ -211,6 +219,7 @@ class MusicInjector {
   private namesBuffer: Buffer;
 
   constructor(
+    private monitor: Monitor,
     private builder: RomBuilder,
     private random: Random,
     private musicZipData: Buffer,
@@ -237,18 +246,21 @@ class MusicInjector {
       /* Look for unsupported stuff */
       const badFiles = musicZip.file(/\.z?(bank|bankmeta|sound|)$/);
       if (badFiles.length > 0) {
+        this.monitor.warn(`Skipped music file ${f.name}: unsupported files found`);
         continue;
       }
 
       /* Find the meta file */
       const metaFile = musicZip.file(/\.meta$/);
       if (metaFile.length !== 1) {
+        this.monitor.warn(`Skipped music file ${f.name}: multiple metadata files`);
         continue;
       }
 
       /* Find the seq file */
       const seqFiles = musicZip.file(/\.seq$/);
       if (seqFiles.length !== 1) {
+        this.monitor.warn(`Skipped music file ${f.name}: multiple sequence files`);
         continue;
       }
 
@@ -257,9 +269,10 @@ class MusicInjector {
       const meta = metaRaw.split(/\r?\n/);
       const name = saneName(meta[0]);
       const bankIdOot = Number(meta[1]);
-      const type = meta[2];
+      const type = meta[2].toLowerCase();
       const games: Game[] = ['oot'];
       if (type !== 'bgm' && type !== 'fanfare') {
+        this.monitor.warn(`Skipped music file ${f.name}: unknown type ${type}`);
         continue;
       }
       let bankIdMm: number | null = null;
@@ -285,18 +298,21 @@ class MusicInjector {
       /* Look for unsupported stuff */
       const badFiles = musicZip.file(/\.z?(bank|bankmeta|sound|)$/);
       if (badFiles.length > 0) {
+        this.monitor.warn(`Skipped music file ${f.name}: unsupported files found`);
         continue;
       }
 
       /* Find the zseq file */
       const zseqFiles = musicZip.file(/\.zseq$/);
       if (zseqFiles.length !== 1) {
+        this.monitor.warn(`Skipped music file ${f.name}: multiple sequence files`);
         continue;
       }
 
       /* Get the categories.txt file */
       const categoriesTxt = musicZip.file('categories.txt');
       if (!categoriesTxt) {
+        this.monitor.warn(`Skipped music file ${f.name}: categories.txt not found`);
         continue;
       }
       const categoriesData = await categoriesTxt.async('text');
@@ -422,7 +438,7 @@ class MusicInjector {
   }
 }
 
-export async function randomizeMusic(builder: RomBuilder, random: Random, data: Buffer) {
-  const injector = new MusicInjector(builder, random, data);
+export async function randomizeMusic(monitor: Monitor, builder: RomBuilder, random: Random, data: Buffer) {
+  const injector = new MusicInjector(monitor, builder, random, data);
   await injector.run();
 }

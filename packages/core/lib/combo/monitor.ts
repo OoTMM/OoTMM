@@ -1,13 +1,15 @@
 type MonitorOnProgress = (progress: number, total: number) => void;
-type MonitorOnLog = (log: string) => void;
+type MonitorMessage = (log: string) => void;
 
 export type MonitorCallbacks = {
   onProgress?: MonitorOnProgress;
-  onLog?: MonitorOnLog;
+  onLog?: MonitorMessage;
+  onWarn?: MonitorMessage;
 };
 
 export class Monitor {
-  private onLog: MonitorOnLog;
+  private onLog: MonitorMessage;
+  private onWarn: MonitorMessage;
   private onProgress: MonitorOnProgress;
   private percent = 0;
   private lastMsg: string | null = null;
@@ -15,6 +17,7 @@ export class Monitor {
   constructor(callbacks: MonitorCallbacks, private isDebug?: boolean) {
     this.onLog = callbacks.onLog || (x => console.log(x));
     this.onProgress = callbacks.onProgress || ((progress: number, total: number) => { this.defaultProgress(progress, total); });
+    this.onWarn = callbacks.onWarn || (x => console.warn(x));
   }
 
   setProgress(progress: number, total: number) {
@@ -41,5 +44,9 @@ export class Monitor {
     if (this.isDebug) {
       this.onLog(message);
     }
+  }
+
+  warn(message: string) {
+    this.onWarn(message);
   }
 }
