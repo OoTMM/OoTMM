@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add fanfares for cross-game items.
 - Add a setting to display custom music names in-game.
 - Add Free Scarecrow for MM.
 - Add NPC souls to MM, more NPC souls in OoT, shared NPC souls.
@@ -15,6 +16,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Improved custom music support.
 - Make the medallion fanfare and the mask fanfare cross-games.
 - Allow compatible OoTR music to play in MM.
 - Allow compatible MMR music to play in OoT.
