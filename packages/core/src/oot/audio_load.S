@@ -31,12 +31,6 @@ PATCH_START 0x800b8900
   nop
 PATCH_END
 
-/* Use custom load status */
-PATCH_START 0x800b3540
-  j AudioHeap_ResetLoadStatus
-   nop
-PATCH_END
-
 /* Load Status Patches - AudioHeap_PopPersistentCache */
 PATCH_START 0x800b3aa0
   lui t6,%HI(gAudioLoadStatusSeq)
@@ -136,5 +130,10 @@ PATCH_END
 
 PATCH_START 0x800b7008
   j AudioLoad_SetSeqLoadStatus
+   nop
+PATCH_END
+
+PATCH_START 0x800b3540
+  j AudioHeap_ResetLoadStatus
    nop
 PATCH_END
