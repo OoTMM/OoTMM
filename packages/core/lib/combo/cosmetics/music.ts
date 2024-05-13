@@ -1,112 +1,114 @@
 import JSZip from 'jszip';
 
-import { Random, shuffle } from '../random';
+import { Random, sample, shuffle } from '../random';
 import { toU32Buffer } from '../util';
 import { Game } from '../config';
 import { RomBuilder } from '../rom-builder';
 
-const OOT_MUSICS = {
-  "Hyrule Field": 0x02,
-  "Dodongos Cavern": 0x18,
-  "Kakariko Adult": 0x19,
-  "Battle": 0x1A,
-  "Boss Battle": 0x1B,
-  "Inside Deku Tree": 0x1C,
-  "Market": 0x1D,
-  "Title Theme": 0x1E,
-  "House": 0x1F,
-  "Jabu Jabu": 0x26,
-  "Kakariko Child": 0x27,
-  "Fairy Fountain": 0x28,
-  "Zelda Theme": 0x29,
-  "Fire Temple": 0x2A,
-  "Forest Temple": 0x2C,
-  "Castle Courtyard": 0x2D,
-  "Ganondorf Theme": 0x2E,
-  "Lon Lon Ranch": 0x2F,
-  "Goron City": 0x30,
-  "Miniboss Battle": 0x38,
-  "Temple of Time": 0x3A,
-  "Kokiri Forest": 0x3C,
-  "Lost Woods": 0x3E,
-  "Spirit Temple": 0x3F,
-  "Horse Race": 0x40,
-  "Ingo Theme": 0x42,
-  "Fairy Flying": 0x4A,
-  "Deku Tree": 0x4B,
-  "Windmill Hut": 0x4C,
-  "Shooting Gallery": 0x4E,
-  "Sheik Theme": 0x4F,
-  "Zoras Domain": 0x50,
-  "Shop": 0x55,
-  "Chamber of the Sages": 0x56,
-  "Ice Cavern": 0x58,
-  "Kaepora Gaebora": 0x5A,
-  "Shadow Temple": 0x5B,
-  "Water Temple": 0x5C,
-  "Gerudo Valley": 0x5F,
-  "Potion Shop": 0x60,
-  "Kotake and Koume": 0x61,
-  "Castle Escape": 0x62,
-  "Castle Underground": 0x63,
-  "Ganondorf Battle": 0x64,
-  "Ganon Battle": 0x65,
-  "Fire Boss": 0x6B,
-  "Mini-game": 0x6C,
-};
+type MusicEntry = {
+  type: 'bgm' | 'fanfare';
+  name: string;
+  oot?: number[];
+  mm?: number[];
+}
 
-const MM_MUSICS = {
-  "Termina Field": 0x02,
-  "Stone Tower Temple": 0x06,
-  "Stone Tower Temple Inverted": 0x07,
-  "Southern Swamp": 0x0c,
-  "Aliens": 0x0d,
-  "Mini Game": 0x0e,
-  "Sharp's Curse": 0x0f,
-  "Great Bay Coast": 0x10,
-  "Ikana Valley": 0x11,
-  "Court of the Deku King": 0x12,
-  "Mountain Village": 0x13,
-  "Pirates' Fortress": 0x14,
-  "Clock Town Day 1": 0x15,
-  "Clock Town Day 2": 0x16,
-  "Clock Town Day 3": 0x17,
-  "Boss Battle": 0x1b,
-  "Woodfall Temple": 0x1c,
-  "Stock Pot Inn": 0x1f,
-  "Mini-game": 0x25,
-  "Goron Race": 0x26,
-  "Music Box House": 0x27,
-  "Fairy's Fountain": 0x28,
-  "Marine Research Laboratory": 0x2c,
-  "Romani Ranch": 0x2f,
-  "Goron Village": 0x30,
-  "Mayor Dotour": 0x31,
-  "Zora Hall": 0x36,
-  "Mini Boss": 0x38,
-  "Astral Observatory": 0x3a,
-  "Bomber's Hideout": 0x3b,
-  "Milk Bar Latte": 0x3c,
-  "Woods of Mystery": 0x3e,
-  "Gorman Race": 0x40,
-  "Gorman Bros.": 0x42,
-  "Kotake's Potion Shop": 0x43,
-  "Store": 0x44,
-  "Target Practice": 0x46,
-  "Sword Training": 0x50,
-  "Final Hours": 0x57,
-  "Snowhead Temple": 0x65,
-  "Great Bay Temple": 0x66,
-  "Majora's Wrath": 0x69,
-  "Majora's Incarnation": 0x6a,
-  "Majora's Mask": 0x6b,
-  "Ikana Castle": 0x6f,
-  "Woodfall Clear": 0x78,
-  "Snowhead Clear": 0x79,
+const MUSIC: {[k: string]: MusicEntry} = {
+  OOT_HYRULE_FIELD: { type: 'bgm', name: 'Hyrule Field', oot: [0x02] },
+  OOT_KAKARIKO_ADULT: { type: 'bgm', name: 'Kakariko Adult', oot: [0x19] },
+  OOT_BATTLE: { type: 'bgm', name: 'Battle (OoT)', oot: [0x1a] },
+  OOT_BATTLE_BOSS: { type: 'bgm', name: 'Boss Battle (OoT)', oot: [0x1b] },
+  OOT_DEKU_TREE: { type: 'bgm', name: 'Deku Tree', oot: [0x1c] },
+  OOT_MARKET: { type: 'bgm', name: 'Market', oot: [0x1d] },
+  OOT_TITLE: { type: 'bgm', name: 'Title Theme', oot: [0x1e] },
+  OOT_HOUSES: { type: 'bgm', name: 'Houses', oot: [0x1f] },
+  OOT_JABU_JABU: { type: 'bgm', name: 'Jabu Jabu', oot: [0x26] },
+  OOT_KAKARIKO_CHILD: { type: 'bgm', name: 'Kakariko Child', oot: [0x27] },
+  OOT_FAIRY_FOUNTAIN: { type: 'bgm', name: 'Fairy Fountain', oot: [0x28, 0x57] },
+  OOT_ZELDA_THEME: { type: 'bgm', name: 'Zelda Theme', oot: [0x29] },
+  OOT_TEMPLE_FIRE: { type: 'bgm', name: 'Fire Temple', oot: [0x2a] },
+  OOT_TEMPLE_FOREST: { type: 'bgm', name: 'Forest Temple', oot: [0x2c] },
+  OOT_CASTLE_COURTYARD: { type: 'bgm', name: 'Castle Courtyard', oot: [0x2d] },
+  OOT_GANONDORF_THEME: { type: 'bgm', name: 'Ganondorf Theme', oot: [0x2e] },
+  OOT_LON_LON_RANCH: { type: 'bgm', name: 'Lon Lon Ranch', oot: [0x2f] },
+  OOT_GORON_CITY: { type: 'bgm', name: 'Goron City', oot: [0x30] },
+  OOT_BATTLE_MINIBOSS: { type: 'bgm', name: 'Miniboss Battle', oot: [0x38] },
+  OOT_TEMPLE_OF_TIME: { type: 'bgm', name: 'Temple of Time', oot: [0x3a] },
+  OOT_KOKIRI_FOREST: { type: 'bgm', name: 'Kokiri Forest', oot: [0x3c] },
+  OOT_LOST_WOODS: { type: 'bgm', name: 'Lost Woods', oot: [0x3e] },
+  OOT_TEMPLE_SPIRIT: { type: 'bgm', name: 'Spirit Temple', oot: [0x3f] },
+  OOT_HORSE_RACE: { type: 'bgm', name: 'Horse Race', oot: [0x40] },
+  OOT_INGO_THEME: { type: 'bgm', name: 'Ingo Theme', oot: [0x42] },
+  OOT_FAIRY_FLYING: { type: 'bgm', name: 'Fairy Flying', oot: [0x4a] },
+  OOT_THEME_DEKU_TREE: { type: 'bgm', name: 'Deku Tree Theme', oot: [0x4b] },
+  OOT_WINDMILL_HUT: { type: 'bgm', name: 'Windmill Hut', oot: [0x4c] },
+  OOT_SHOOTING_GALLERY: { type: 'bgm', name: 'Shooting Gallery', oot: [0x4e] },
+  OOT_SHEIK_THEME: { type: 'bgm', name: 'Sheik Theme', oot: [0x4f] },
+  OOT_ZORAS_DOMAIN: { type: 'bgm', name: 'Zoras Domain', oot: [0x50] },
+  OOT_SHOP: { type: 'bgm', name: 'Shop', oot: [0x55] },
+  OOT_SAGES: { type: 'bgm', name: 'Chamber of the Sages', oot: [0x56] },
+  OOT_ICE_CAVERN: { type: 'bgm', name: 'Ice Cavern', oot: [0x58] },
+  OOT_KAEPORA_GAEBORA: { type: 'bgm', name: 'Kaepora Gaebora', oot: [0x5a] },
+  OOT_TEMPLE_SHADOW: { type: 'bgm', name: 'Shadow Temple', oot: [0x5b] },
+  OOT_TEMPLE_WATER: { type: 'bgm', name: 'Water Temple', oot: [0x5c] },
+  OOT_GERUDO_VALLEY: { type: 'bgm', name: 'Gerudo Valley', oot: [0x5f] },
+  OOT_POTION_SHOP: { type: 'bgm', name: 'Potion Shop (OoT)', oot: [0x60] },
+  OOT_KOTAKE_KOUME: { type: 'bgm', name: 'Kotake and Koume', oot: [0x61] },
+  OOT_ESCAPE_CASTLE: { type: 'bgm', name: 'Castle Escape', oot: [0x62] },
+  OOT_UNDERGROUND_CASTLE: { type: 'bgm', name: 'Castle Underground', oot: [0x63] },
+  OOT_BATTLE_GANONDORF: { type: 'bgm', name: 'Ganondorf Battle', oot: [0x64] },
+  OOT_BATTLE_BOSS_FIRE: { type: 'bgm', name: 'Fire Temple Boss', oot: [0x6b] },
+  OOT_MINIGAME: { type: 'bgm', name: 'Minigame', oot: [0x6c] },
+  MM_TERMINA_FIELD: { type: 'bgm', name: 'Termina Field', mm: [0x02] },
+  MM_TEMPLE_STONE_TOWER: { type: 'bgm', name: 'Stone Tower Temple', mm: [0x06] },
+  MM_TEMPLE_STONE_TOWER_INVERTED: { type: 'bgm', name: 'Stone Tower Temple Inverted', mm: [0x07] },
+  MM_SOUTHERN_SWAMP: { type: 'bgm', name: 'Southern Swamp', mm: [0x0c] },
+  MM_ALIENS: { type: 'bgm', name: 'Aliens', mm: [0x0d] },
+  MM_MINIGAME: { type: 'bgm', name: 'Minigame (MM)', mm: [0x0e] },
+  MM_SHARP_CURSE: { type: 'bgm', name: 'Sharp Curse', mm: [0x0f] },
+  MM_GREAT_BAY_COAST: { type: 'bgm', name: 'Great Bay Coast', mm: [0x10] },
+  MM_IKANA_VALLEY: { type: 'bgm', name: 'Ikana Valley', mm: [0x11] },
+  MM_COURT_DEKU_KING: { type: 'bgm', name: 'Court of the Deku King', mm: [0x12] },
+  MM_MOUNTAIN_VILLAGE: { type: 'bgm', name: 'Mountain Village', mm: [0x13] },
+  MM_PIRATES_FORTRESS: { type: 'bgm', name: 'Pirates Fortress', mm: [0x14] },
+  MM_CLOCK_TOWN_DAY_1: { type: 'bgm', name: 'Clock Town Day 1', mm: [0x15, 0x1d] },
+  MM_CLOCK_TOWN_DAY_2: { type: 'bgm', name: 'Clock Town Day 2', mm: [0x16, 0x23] },
+  MM_CLOCK_TOWN_DAY_3: { type: 'bgm', name: 'Clock Town Day 3', mm: [0x17] },
+  MM_BATTLE_BOSS: { type: 'bgm', name: 'Boss Battle (MM)', mm: [0x1b] },
+  MM_WOODFALL_TEMPLE: { type: 'bgm', name: 'Woodfall Temple', mm: [0x1c] },
+  MM_STOCK_POT_INN: { type: 'bgm', name: 'Stock Pot Inn', mm: [0x1f] },
+  MM_MINIGAME2: { type: 'bgm', name: 'Minigame 2 (MM)', mm: [0x25] },
+  MM_GORON_RACE: { type: 'bgm', name: 'Goron Race', mm: [0x26] },
+  MM_MUSIC_BOX_HOUSE: { type: 'bgm', name: 'Music Box House', mm: [0x27] },
+  MM_FAIRYS_FOUNTAIN: { type: 'bgm', name: 'Fairy\'s Fountain', mm: [0x28] },
+  MM_MARINE_RESEARCH_LABORATORY: { type: 'bgm', name: 'Marine Research Laboratory', mm: [0x2c] },
+  MM_ROMANI_RANCH: { type: 'bgm', name: 'Romani Ranch', mm: [0x2f] },
+  MM_GORON_VILLAGE: { type: 'bgm', name: 'Goron Village', mm: [0x30] },
+  MM_MAYOR_DOTOUR: { type: 'bgm', name: 'Mayor Dotour', mm: [0x31] },
+  MM_ZORA_HALL: { type: 'bgm', name: 'Zora Hall', mm: [0x36] },
+  MM_MINIBOSS: { type: 'bgm', name: 'Mini Boss', mm: [0x38] },
+  MM_ASTRAL_OBSERVATORY: { type: 'bgm', name: 'Astral Observatory', mm: [0x3a] },
+  MM_BOMBERS_HIDEOUT: { type: 'bgm', name: 'Bombers Hideout', mm: [0x3b] },
+  MM_MILK_BAR_LATTE: { type: 'bgm', name: 'Milk Bar Latte', mm: [0x3c] },
+  MM_WOODS_OF_MYSTERY: { type: 'bgm', name: 'Woods of Mystery', mm: [0x3e] },
+  MM_GORMAN_RACE: { type: 'bgm', name: 'Gorman Race', mm: [0x40] },
+  MM_GORMAN_BROS: { type: 'bgm', name: 'Gorman Bros.', mm: [0x42] },
+  MM_KOTAKE_POTION_SHOP: { type: 'bgm', name: 'Kotake\'s Potion Shop', mm: [0x43] },
+  MM_STORE: { type: 'bgm', name: 'Store', mm: [0x44] },
+  MM_TARGET_PRACTICE: { type: 'bgm', name: 'Target Practice', mm: [0x46] },
+  MM_SWORD_TRAINING: { type: 'bgm', name: 'Sword Training', mm: [0x50] },
+  MM_FINAL_HOURS: { type: 'bgm', name: 'Final Hours', mm: [0x57] },
+  MM_TEMPLE_SNOWHEAD: { type: 'bgm', name: 'Snowhead Temple', mm: [0x65] },
+  MM_TEMPLE_GREAT_BAY: { type: 'bgm', name: 'Great Bay Temple', mm: [0x66] },
+  MM_BATTLE_MAJORA3: { type: 'bgm', name: 'Majora\'s Wrath', mm: [0x69] },
+  MM_BATTLE_MAJORA2: { type: 'bgm', name: 'Majora\'s Incarnation', mm: [0x6a] },
+  MM_BATTLE_MAJORA1: { type: 'bgm', name: 'Majora\'s Mask', mm: [0x6b] },
+  MM_IKANA_CASTLE: { type: 'bgm', name: 'Ikana Castle', mm: [0x6f] },
+  MM_CLEAR_WOODFALL: { type: 'bgm', name: 'Woodfall Clear', mm: [0x78] },
+  MM_CLEAR_SNOWHEAD: { type: 'bgm', name: 'Snowhead Clear', mm: [0x79] },
 };
 
 type MusicFile = {
-  type: 'bgm';
+  type: 'bgm' | 'fanfare';
   seq: Buffer;
   bankIdOot: number | null;
   bankIdMm: number | null;
@@ -196,6 +198,14 @@ function saneName(name: string) {
   return name;
 }
 
+function isMusicSuitable(entry: MusicEntry, file: MusicFile) {
+  if (entry.type !== file.type) return false;
+  if (entry.oot && !file.games.includes('oot')) return false;
+  if (entry.mm && !file.games.includes('mm')) return false;
+
+  return true;
+}
+
 class MusicInjector {
   private musics: MusicFile[];
   private namesBuffer: Buffer;
@@ -249,7 +259,7 @@ class MusicInjector {
       const bankIdOot = Number(meta[1]);
       const type = meta[2];
       const games: Game[] = ['oot'];
-      if (type !== 'bgm') {
+      if (type !== 'bgm' && type !== 'fanfare') {
         continue;
       }
       let bankIdMm: number | null = null;
@@ -284,6 +294,14 @@ class MusicInjector {
         continue;
       }
 
+      /* Get the categories.txt file */
+      const categoriesTxt = musicZip.file('categories.txt');
+      if (!categoriesTxt) {
+        continue;
+      }
+      const categoriesData = await categoriesTxt.async('text');
+      const categories = categoriesData.split(',').map(x => parseInt(x, 10));
+
       /* Extract the bank ID from the zseq filename */
       let zseqFilename = zseqFiles[0].name;
       if (zseqFilename.includes('/')) {
@@ -295,7 +313,7 @@ class MusicInjector {
       /* Add the music */
       const seq = await zseqFiles[0].async('nodebuffer');
       const games: Game[] = ['mm'];
-      const type = 'bgm';
+      const type = [8, 9, 10].some(x => categories.includes(x)) ? 'fanfare' : 'bgm';
       const basename = f.name.split('/').pop()!;
       const name = saneName(basename.replace('.mmrs', ''));
 
@@ -321,7 +339,7 @@ class MusicInjector {
     return vrom;
   }
 
-  private async injectMusicOffsetId(game: Game, slot: number, vrom: number, seqLength: number, bankId: number, name: string) {
+  private async injectMusicMeta(game: Game, slot: number, vrom: number, seqLength: number, bankId: number, name: string) {
     const fileSeqTable = this.builder.fileByNameRequired(`${game}/seq_table`);
     const fileSeqBanks = this.builder.fileByNameRequired(`${game}/seq_banks`);
 
@@ -338,43 +356,16 @@ class MusicInjector {
     this.registerName(game === 'mm' ? slot + 256 : slot, name);
   }
 
-  private async injectMusicOot(slot: string, music: MusicFile) {
-    /* Add the seq data in the rom */
+  private async injectMusic(slot: string, music: MusicFile) {
+    const entry = MUSIC[slot];
     const vrom = this.appendAudio(music.seq);
 
-    /* Patch the music */
-    const slotId = OOT_MUSICS[slot as keyof typeof OOT_MUSICS];
-    await this.injectMusicOffsetId('oot', slotId, vrom, music.seq.length, music.bankIdOot!, music.name);
-
-    /* Special cases */
-    if (slot === 'Fairy Fountain') {
-      await this.injectMusicOffsetId('oot', 0x57, vrom, music.seq.length, music.bankIdOot!, music.name);
-    }
-  }
-
-  private async injectMusicMm(slot: string, music: MusicFile) {
-    /* Add the seq data in the rom */
-    const vrom = this.appendAudio(music.seq);
-
-    /* Patch the music */
-    const slotId = MM_MUSICS[slot as keyof typeof MM_MUSICS];
-    await this.injectMusicOffsetId('mm', slotId, vrom, music.seq.length, music.bankIdMm!, music.name);
-
-    /* Special cases */
-    if (slot === 'Clock Town Day 1') {
-      await this.injectMusicOffsetId('mm', 0x1d, vrom, music.seq.length, music.bankIdMm!, music.name);
+    for (const id of entry.oot || []) {
+      await this.injectMusicMeta('oot', id, vrom, music.seq.length, music.bankIdOot!, music.name);
     }
 
-    if (slot === 'Clock Town Day 2') {
-      await this.injectMusicOffsetId('mm', 0x23, vrom, music.seq.length, music.bankIdMm!, music.name);
-    }
-  }
-
-  private async injectMusic(game: Game, slot: string, music: MusicFile) {
-    if (game === 'oot') {
-      return this.injectMusicOot(slot, music);
-    } else {
-      return this.injectMusicMm(slot, music);
+    for (const id of entry.mm || []) {
+      await this.injectMusicMeta('mm', id, vrom, music.seq.length, music.bankIdMm!, music.name);
     }
   }
 
@@ -394,20 +385,24 @@ class MusicInjector {
     z.copy(filePlayerActor.data, 0x16818);
   }
 
-  private async shuffleMusics(game: Game) {
-    const musicsDefs = game === 'oot' ? OOT_MUSICS : MM_MUSICS;
-    const musics = shuffle(this.random, this.musics.filter(m => m.games.includes(game)));
-    const slots = shuffle(this.random, Object.keys(musicsDefs));
+  private async shuffleMusics() {
+    const slots = shuffle(this.random, Object.keys(MUSIC));
+    const musics = new Set(this.musics);
 
     for (;;) {
-      if (musics.length === 0 || slots.length === 0) {
+      if (musics.size === 0 || slots.length === 0) {
         break;
       }
 
-      const music = musics.pop()!;
       const slot = slots.pop()!;
+      const candidates = Array.from(musics).filter(x => isMusicSuitable(MUSIC[slot], x));
+      if (candidates.length === 0) {
+        continue;
+      }
 
-      await this.injectMusic(game, slot, music);
+      const music = sample(this.random, candidates);
+      musics.delete(music);
+      await this.injectMusic(slot, music);
     }
   }
 
@@ -416,8 +411,7 @@ class MusicInjector {
     await this.loadMusics(this.musicZipData);
 
     /* Shuffle musics */
-    await this.shuffleMusics('oot');
-    await this.shuffleMusics('mm');
+    await this.shuffleMusics();
 
     /* Run misc. patches */
     this.patchOot();
