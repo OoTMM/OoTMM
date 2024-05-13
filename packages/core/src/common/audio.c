@@ -50,56 +50,6 @@ CustomAudioTables;
 u8 gCustomAudioSeqBanks[256 * 2 + 256 * 2 + 16];
 CustomAudioTables gCustomAudioTables = { NULL, NULL, NULL, gCustomAudioSeqBanks };
 
-#if defined(GAME_OOT)
-static u8 bankForeignToNative(u8 bankId)
-{
-    switch (bankId)
-    {
-    case 0x03: return 0x03;
-    case 0x04: return 0x05;
-    case 0x05: return 0x08;
-    case 0x06: return 0x09;
-    case 0x07: return 0x0D;
-    case 0x08: return 0x11;
-    case 0x09: return 0x12;
-    case 0x0A: return 0x14;
-    case 0x0B: return 0x15;
-    case 0x0C: return 0x16;
-    case 0x0D: return 0x1C;
-    case 0x0E: return 0x1D;
-    case 0x0F: return 0x23;
-    case 0x10: return 0x24;
-    }
-
-    return 0x03;
-}
-#endif
-
-#if defined(GAME_MM)
-static u8 bankForeignToNative(u8 bankId)
-{
-    switch (bankId)
-    {
-    case 0x03: return 0x03;
-    case 0x05: return 0x04;
-    case 0x08: return 0x05;
-    case 0x09: return 0x06;
-    case 0x0D: return 0x07;
-    case 0x11: return 0x08;
-    case 0x12: return 0x09;
-    case 0x14: return 0x0A;
-    case 0x15: return 0x0B;
-    case 0x16: return 0x0C;
-    case 0x1C: return 0x0D;
-    case 0x1D: return 0x0E;
-    case 0x23: return 0x0F;
-    case 0x24: return 0x10;
-    }
-
-    return 0x03;
-}
-#endif
-
 static AudioTable* allocTable(int count)
 {
     AudioTable* table;
@@ -170,8 +120,17 @@ void AudioCustom_Init(void)
     LoadFile(banks, CUSTOM_SEQ_BANKS_FOREIGN_VROM, 0x80);
     for (int i = 0; i < 0x80; ++i)
     {
+        u8 bankId;
+
+        bankId = banks[i];
+        if (bankId > 1)
+            bankId += 0x30;
+
+        /* DEBUG */
+        bankId = 0;
+
         gCustomAudioSeqBanks[512 + 0x80 * 2 + i * 2 + 0] = 1;
-        gCustomAudioSeqBanks[512 + 0x80 * 2 + i * 2 + 1] = banks[i] + 0x30;
+        gCustomAudioSeqBanks[512 + 0x80 * 2 + i * 2 + 1] = bankId;
     }
 
     /* Sequence 0 is special */

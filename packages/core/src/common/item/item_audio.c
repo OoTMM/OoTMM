@@ -18,6 +18,8 @@
 #define FANFARE_HEART_PIECE         0x39
 #define FANFARE_MASK                FANFARE_MM(0x37)
 #define FANFARE_MEDALLION           FANFARE_OOT(0x943)
+#define FANFARE_SONG_EMPTINESS      FANFARE_MM(0x5e)
+#define FANFARE_SONG_ORDER          FANFARE_MM(0x5f)
 #define SFX_RUPEE                   0x4803
 #define SFX_MINOR_GI                0x4824
 #define SFX_MINOR_QUICK             0x4831
@@ -43,8 +45,6 @@
 # define FANFARE_SONG_GORON_HALF    FANFARE_SONG
 # define FANFARE_SONG_GORON         FANFARE_SONG
 # define FANFARE_SONG_ZORA          FANFARE_SONG
-# define FANFARE_SONG_EMPTINESS     FANFARE_SONG
-# define FANFARE_SONG_ORDER         FANFARE_SONG
 #endif
 
 #if defined(GAME_MM)
@@ -68,8 +68,6 @@
 # define FANFARE_SONG_GORON_HALF    0x951
 # define FANFARE_SONG_GORON         0x95c
 # define FANFARE_SONG_ZORA          0x95d
-# define FANFARE_SONG_EMPTINESS     0x95e
-# define FANFARE_SONG_ORDER         0x95f
 #endif
 
 void comboPlayItemFanfare(s16 gi, int isShort)
