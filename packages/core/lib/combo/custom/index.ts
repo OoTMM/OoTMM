@@ -278,6 +278,23 @@ class CustomAssetsBuilder {
     this.cg.define(`CUSTOM_SEQ_TABLE_${game.toUpperCase()}_VROM`, seqTableDataVrom);
   }
 
+  async extractAudioTable(game: Game, count: number, codeOffset: number, romOffset: number) {
+    const dataOrig = await extractRaw(this.roms, game, 'code', codeOffset, count * 0x10);
+    const dataPatched = Buffer.alloc(8 * 0x10);
+    dataOrig.copy(dataPatched);
+    for (let i = 0; i < count; ++i) {
+      let addr = dataOrig.readUint32BE(i * 0x10);
+      let size = dataOrig.readUint32BE(i * 0x10 + 4);
+      if (size) {
+        addr += romOffset;
+      }
+      dataPatched.writeUint32BE(addr, i * 0x10);
+      dataPatched.writeUint32BE(size, i * 0x10 + 4);
+    }
+    const dataVrom = this.addRawData(`${game}/audio_table`, dataPatched, false);
+    this.cg.define(`CUSTOM_AUDIO_TABLE_${game.toUpperCase()}_VROM`, dataVrom);
+  }
+
   async extractSeqBanks(game: Game, count: number, codeOffset: number) {
     const seqBankDataRaw = await extractRaw(this.roms, game, 'code', codeOffset, count * 2);
     const seqBankData = Buffer.alloc(0x80 * 2);
@@ -300,6 +317,10 @@ class CustomAssetsBuilder {
     const mmBase = 0x4d9f40;
     await this.extractSeqTable('oot', 0x6e, 0x102ae0, 0x29de0);
     await this.extractSeqTable('mm',  0x80, 0x13bb80, 0x46af0 + mmBase);
+
+    await this.extractAudioTable('oot', 0x07, 0x1031d0, 0x79470);
+    await this.extractAudioTable('mm',  0x03, 0x13c390, 0x97f70 + mmBase);
+
     await this.extractSeqBanks('oot', 0x6d, 0x1029f0);
     await this.extractSeqBanks('mm',  0x7f, 0x13ba64);
   }

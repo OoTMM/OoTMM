@@ -2,11 +2,11 @@
 
 /* Use our custom audio table */
 PATCH_START 0x80190e14
-  lui t1,%HI(gCustomAudioTable)
+  lui t1,%HI(gCustomTableSeq)
 PATCH_END
 
 PATCH_START 0x80190e24
-  addiu t1,%LO(gCustomAudioTable)
+  addiu t1,%LO(gCustomTableSeq)
 PATCH_END
 
 /* Use our custom seq -> bank table */

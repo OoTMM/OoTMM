@@ -11,17 +11,21 @@
 #endif
 
 #if defined(GAME_OOT)
-# define CUSTOM_SEQ_BANKS_NATIVE_VROM   CUSTOM_SEQ_BANKS_OOT_VROM
-# define CUSTOM_SEQ_BANKS_FOREIGN_VROM  CUSTOM_SEQ_TABLE_MM_VROM
-# define CUSTOM_SEQ_TABLE_NATIVE_VROM   CUSTOM_SEQ_TABLE_OOT_VROM
-# define CUSTOM_SEQ_TABLE_FOREIGN_VROM  CUSTOM_SEQ_TABLE_MM_VROM
+# define CUSTOM_SEQ_BANKS_NATIVE_VROM       CUSTOM_SEQ_BANKS_OOT_VROM
+# define CUSTOM_SEQ_BANKS_FOREIGN_VROM      CUSTOM_SEQ_TABLE_MM_VROM
+# define CUSTOM_SEQ_TABLE_NATIVE_VROM       CUSTOM_SEQ_TABLE_OOT_VROM
+# define CUSTOM_SEQ_TABLE_FOREIGN_VROM      CUSTOM_SEQ_TABLE_MM_VROM
+# define CUSTOM_AUDIO_TABLE_NATIVE_VROM     CUSTOM_AUDIO_TABLE_OOT_VROM
+# define CUSTOM_AUDIO_TABLE_FOREIGN_VROM    CUSTOM_AUDIO_TABLE_MM_VROM
 #endif
 
 #if defined(GAME_MM)
-# define CUSTOM_SEQ_BANKS_NATIVE_VROM  CUSTOM_SEQ_BANKS_MM_VROM
-# define CUSTOM_SEQ_BANKS_FOREIGN_VROM CUSTOM_SEQ_TABLE_OOT_VROM
-# define CUSTOM_SEQ_TABLE_NATIVE_VROM  CUSTOM_SEQ_TABLE_MM_VROM
-# define CUSTOM_SEQ_TABLE_FOREIGN_VROM CUSTOM_SEQ_TABLE_OOT_VROM
+# define CUSTOM_SEQ_BANKS_NATIVE_VROM       CUSTOM_SEQ_BANKS_MM_VROM
+# define CUSTOM_SEQ_BANKS_FOREIGN_VROM      CUSTOM_SEQ_TABLE_OOT_VROM
+# define CUSTOM_SEQ_TABLE_NATIVE_VROM       CUSTOM_SEQ_TABLE_MM_VROM
+# define CUSTOM_SEQ_TABLE_FOREIGN_VROM      CUSTOM_SEQ_TABLE_OOT_VROM
+# define CUSTOM_AUDIO_TABLE_NATIVE_VROM     CUSTOM_AUDIO_TABLE_MM_VROM
+# define CUSTOM_AUDIO_TABLE_FOREIGN_VROM    CUSTOM_AUDIO_TABLE_OOT_VROM
 #endif
 
 static u8 sDisplayMusicNames;
@@ -30,7 +34,24 @@ ALIGNED(16) static char sAudioNameBuffer[49];
 static u8 sAudioNameTTL;
 static u16 sAudioNameSeq = 0xffff;
 
-ALIGNED(16) CustomAudioTable gCustomAudioTable = { { 256 } };
+typedef struct
+{
+    AudioTableHeader header;
+    AudioTableEntry  entries[256];
+}
+CustomTableSeq;
+
+ALIGNED(16) CustomTableSeq gCustomTableSeq = { { 256 } };
+
+typedef struct
+{
+    AudioTableHeader header;
+    AudioTableEntry  entries[16];
+}
+CustomTableAudio;
+
+ALIGNED(16) CustomTableAudio gCustomTableAudio = { { 16 } };
+
 u8 gCustomAudioSeqBanks[256 * 2 + 256 * 2 + 16];
 
 #if defined(GAME_OOT)
@@ -118,8 +139,8 @@ void Audio_InitCustom(void)
     gCustomAudioSeqBanks[1025] = 1;
     gCustomAudioSeqBanks[1026] = 0;
 
-    LoadFile(gCustomAudioTable.entries + 0x00, CUSTOM_SEQ_TABLE_NATIVE_VROM, 0x80 * sizeof(AudioTableEntry));
-    LoadFile(gCustomAudioTable.entries + 0x80, CUSTOM_SEQ_TABLE_FOREIGN_VROM, 0x80 * sizeof(AudioTableEntry));
+    LoadFile(gCustomTableSeq.entries + 0x00, CUSTOM_SEQ_TABLE_NATIVE_VROM, 0x80 * sizeof(AudioTableEntry));
+    LoadFile(gCustomTableSeq.entries + 0x80, CUSTOM_SEQ_TABLE_FOREIGN_VROM, 0x80 * sizeof(AudioTableEntry));
 
     /* Resolve virtual addresses */
     for (int i = 0; i < 256; ++i)
@@ -127,7 +148,7 @@ void Audio_InitCustom(void)
         DmaEntry dmaEntry;
         AudioTableEntry* e;
 
-        e = gCustomAudioTable.entries + i;
+        e = gCustomTableSeq.entries + i;
         if (e->romAddr >= 0x08000000)
         {
             if (comboDmaLookup(&dmaEntry, e->romAddr))
@@ -136,6 +157,10 @@ void Audio_InitCustom(void)
             }
         }
     }
+
+    /* Load audio table */
+    LoadFile(gCustomTableAudio.entries + 0, CUSTOM_AUDIO_TABLE_NATIVE_VROM, 8 * sizeof(AudioTableEntry));
+    LoadFile(gCustomTableAudio.entries + 8, CUSTOM_AUDIO_TABLE_FOREIGN_VROM, 8 * sizeof(AudioTableEntry));
 }
 
 static void Audio_UpdateMusicName(void)
