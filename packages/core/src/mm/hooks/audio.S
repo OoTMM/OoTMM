@@ -1,5 +1,6 @@
 #include <combo.h>
 
+#if 0
 /* Use our custom audio table */
 PATCH_START 0x80190e14
   lui t1,%HI(gCustomTableSeq)
@@ -31,4 +32,4 @@ PATCH_END
 PATCH_START 0x80190e84
   la a1,0x97f70 + MM_BASE
 PATCH_END
-
+#endif

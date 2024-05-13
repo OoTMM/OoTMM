@@ -285,9 +285,11 @@ class CustomAssetsBuilder {
     for (let i = 0; i < count; ++i) {
       let addr = dataOrig.readUint32BE(i * 0x10);
       let size = dataOrig.readUint32BE(i * 0x10 + 4);
-      if (size) {
-        addr += romOffset;
+      if (!size) {
+        size = dataOrig.readUint32BE(addr * 0x10 + 4);
+        addr = dataOrig.readUint32BE(addr * 0x10);
       }
+      addr += romOffset;
       dataPatched.writeUint32BE(addr, i * 0x10);
       dataPatched.writeUint32BE(size, i * 0x10 + 4);
     }
@@ -302,9 +304,11 @@ class CustomAssetsBuilder {
     for (let i = 0; i < count; ++i) {
       let addr = dataOrig.readUint32BE(i * 0x10);
       let size = dataOrig.readUint32BE(i * 0x10 + 4);
-      if (size) {
-        addr += romOffset;
+      if (!size) {
+        size = dataOrig.readUint32BE(addr * 0x10 + 4);
+        addr = dataOrig.readUint32BE(addr * 0x10);
       }
+      addr += romOffset;
       dataPatched.writeUint32BE(addr, i * 0x10);
       dataPatched.writeUint32BE(size, i * 0x10 + 4);
     }

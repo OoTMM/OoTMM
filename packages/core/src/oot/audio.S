@@ -1,7 +1,7 @@
 #include <combo.h>
 
 #define AUDIO_HEAP_START  0x80600000
-#define AUDIO_HEAP_SIZE   0x80000
+#define AUDIO_HEAP_SIZE   0x100000
 
 #define FANFARE_AUDIOSEQ_SIZE   0x1000
 #define FANFARE_AUDIOBANK_SIZE  0x4800
@@ -10,21 +10,27 @@
 #define BGM_AUDIOBANK_SIZE      0x4800
 #define BGM_UNK_SIZE            0
 
-/* Use our custom seq table */
-PATCH_START 0x800b8884
-  lui t1,%HI(gCustomTableSeq)
-  lui t2,%HI(gCustomTableBank)
-  lui t3,%HI(gCustomTableAudio)
-  lui t6,%HI(gCustomAudioSeqBanks)
-  addiu t1,%LO(gCustomTableSeq)
-  addiu t2,%LO(gCustomTableBank)
-  addiu t3,%LO(gCustomTableAudio)
-  addiu t6,%LO(gCustomAudioSeqBanks)
+/* Use malloc to allocate the (now oversized) bank descriptors */
+PATCH_START 0x800b8920
+  sll a0,a1,0x02
+  jal malloc
 PATCH_END
 
-/* Use our custom table init */
+/* Use our custom seq table */
+PATCH_START 0x800b8884
+  lui t6,%HI(gCustomAudioTables)
+  addiu t6,%LO(gCustomAudioTables)
+  lw t1,0x00(t6)
+  lw t2,0x04(t6)
+  lw t3,0x08(t6)
+  lw t6,0x0c(t6)
+  nop
+  nop
+PATCH_END
+
+/* Don't re-process tables */
 PATCH_START 0x800b88d8
-  jal Audio_InitCustom
+  nop
 PATCH_END
 
 PATCH_START 0x800b88ec
