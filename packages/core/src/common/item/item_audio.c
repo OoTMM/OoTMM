@@ -18,21 +18,21 @@
 #define FANFARE_HEART_PIECE         0x39
 #define FANFARE_MASK                FANFARE_MM(0x37)
 #define FANFARE_MEDALLION           FANFARE_OOT(0x943)
-# define FANFARE_STONE              FANFARE_OOT(0x932)
+#define FANFARE_STONE               FANFARE_OOT(0x932)
 #define FANFARE_SONG_EMPTINESS      FANFARE_MM(0x5e)
 #define FANFARE_SONG_ORDER          FANFARE_MM(0x5f)
+#define FANFARE_SONG_TP_LIGHT       FANFARE_OOT(0x925)
+#define FANFARE_SONG_TP_FOREST      FANFARE_OOT(0x934)
+#define FANFARE_SONG_TP_FIRE        FANFARE_OOT(0x933)
+#define FANFARE_SONG_TP_WATER       FANFARE_OOT(0x935)
+#define FANFARE_SONG_TP_SHADOW      FANFARE_OOT(0x937)
+#define FANFARE_SONG_TP_SPIRIT      FANFARE_OOT(0x936)
 #define SFX_RUPEE                   0x4803
 #define SFX_MINOR_GI                0x4824
 #define SFX_MINOR_QUICK             0x4831
 
 #if defined(GAME_OOT)
 # define FANFARE_SONG               0x93d
-# define FANFARE_SONG_TP_LIGHT      0x925
-# define FANFARE_SONG_TP_FOREST     0x934
-# define FANFARE_SONG_TP_FIRE       0x933
-# define FANFARE_SONG_TP_WATER      0x935
-# define FANFARE_SONG_TP_SHADOW     0x937
-# define FANFARE_SONG_TP_SPIRIT     0x936
 # define FANFARE_SONG_ZELDA         0x946
 # define FANFARE_SONG_SARIA         0x944
 # define FANFARE_SONG_TIME          0x948
@@ -49,12 +49,6 @@
 
 #if defined(GAME_MM)
 # define FANFARE_SONG               0x952
-# define FANFARE_SONG_TP_LIGHT      FANFARE_SONG
-# define FANFARE_SONG_TP_FOREST     FANFARE_SONG
-# define FANFARE_SONG_TP_FIRE       FANFARE_SONG
-# define FANFARE_SONG_TP_WATER      FANFARE_SONG
-# define FANFARE_SONG_TP_SHADOW     FANFARE_SONG
-# define FANFARE_SONG_TP_SPIRIT     FANFARE_SONG
 # define FANFARE_SONG_ZELDA         FANFARE_SONG
 # define FANFARE_SONG_SARIA         FANFARE_SONG
 # define FANFARE_SONG_TIME          0x934
