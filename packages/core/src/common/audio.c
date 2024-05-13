@@ -50,6 +50,37 @@ CustomAudioTables;
 u8 gCustomAudioSeqBanks[256 * 2 + 256 * 2 + 16];
 CustomAudioTables gCustomAudioTables = { NULL, NULL, NULL, gCustomAudioSeqBanks };
 
+u8 gAudioLoadStatusSeq[0x100];
+u8 gAudioLoadStatusFont[0x60];
+u8 gAudioLoadStatusFontSample[0x30];
+
+void AudioHeap_ResetLoadStatus(void)
+{
+    for (int i = 0; i < ARRAY_SIZE(gAudioLoadStatusSeq); ++i)
+    {
+        if (gAudioLoadStatusSeq[i] != 5)
+            gAudioLoadStatusSeq[i] = 0;
+    }
+
+    for (int i = 0; i < ARRAY_SIZE(gAudioLoadStatusFont); ++i)
+    {
+        if (gAudioLoadStatusFont[i] != 5)
+            gAudioLoadStatusFont[i] = 0;
+    }
+
+    for (int i = 0; i < ARRAY_SIZE(gAudioLoadStatusFontSample); ++i)
+    {
+        if (gAudioLoadStatusFontSample[i] != 5)
+            gAudioLoadStatusFontSample[i] = 0;
+    }
+}
+
+void AudioLoad_SetSeqLoadStatus(int seqId, u8 status)
+{
+    if (seqId != 0xff && gAudioLoadStatusSeq[seqId] != 5)
+        gAudioLoadStatusSeq[seqId] = status;
+}
+
 static AudioTable* allocTable(int count)
 {
     AudioTable* table;

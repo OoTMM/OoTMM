@@ -41,6 +41,86 @@ PATCH_START 0x800b8900
   nop
 PATCH_END
 
+/* Use custom load status */
+PATCH_START 0x800b3540
+  j AudioHeap_ResetLoadStatus
+   nop
+PATCH_END
+
+#if 0
+PATCH_START 0x800b3ab8
+  lui t7,%HI(gAudioLoadStatusFont)
+  addiu t7,%LO(gAudioLoadStatusFont)
+PATCH_END
+
+PATCH_START 0x800b3acc
+  lui t8,%HI(gAudioLoadStatusFontSample)
+  addiu t8,%LO(gAudioLoadStatusFontSample)
+PATCH_END
+
+PATCH_START 0x800b3f00
+  lui t3,%HI(gAudioLoadStatusFont)
+PATCH_END
+
+PATCH_START 0x800b3f0c
+  addiu t3,%LO(gAudioLoadStatusFont)
+PATCH_END
+
+PATCH_START 0x800b3f14
+  lui t3,%HI(gAudioLoadStatusFontSample)
+PATCH_END
+
+PATCH_START 0x800b3f1c
+  addiu t3,%LO(gAudioLoadStatusFontSample)
+PATCH_END
+#endif
+
+/* Use our custom status tables */
+PATCH_START 0x800b3aa0
+  lui t6,%HI(gAudioLoadStatusSeq)
+PATCH_END
+
+PATCH_START 0x800b3aa8
+  addiu t6,%LO(gAudioLoadStatusSeq)
+PATCH_END
+
+PATCH_START 0x800b6f04
+  lui t6,%HI(gAudioLoadStatusSeq)
+  addu t6,a1
+  lbu t6,%LO(gAudioLoadStatusSeq)(t6)
+PATCH_END
+
+PATCH_START 0x800b6f2c
+  lui t7,%HI(gAudioLoadStatusSeq)
+  addu t7,v0
+  lbu t7,%LO(gAudioLoadStatusSeq)(t7)
+PATCH_END
+
+PATCH_START 0x800b789c
+  lui t6,%HI(gAudioLoadStatusSeq)
+  addu t6,v0
+  lbu t6,%LO(gAudioLoadStatusSeq)(t6)
+PATCH_END
+
+PATCH_START 0x800b82e8
+  lui t6,%HI(gAudioLoadStatusSeq)
+  addu t6,v0
+  lbu t6,%LO(gAudioLoadStatusSeq)(t6)
+PATCH_END
+
+PATCH_START 0x800b3eec
+  lui t3,%HI(gAudioLoadStatusSeq)
+PATCH_END
+
+PATCH_START 0x800b3ef8
+  addiu t3,%LO(gAudioLoadStatusSeq)
+PATCH_END
+
+PATCH_START 0x800b7008
+  j AudioLoad_SetSeqLoadStatus
+   nop
+PATCH_END
+
 /* Patch the audio heap */
 PATCH_START 0x800b87c4
   la t9,AUDIO_HEAP_START
