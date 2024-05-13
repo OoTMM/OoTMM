@@ -2,7 +2,7 @@ import path from 'path';
 import fs, { write, writeFileSync } from 'fs';
 import { FILES } from '@ootmm/data';
 
-import { Game } from '../config';
+import { GAMES, Game } from '../config';
 import { DmaData } from '../dma';
 import { splitObject } from './split';
 import { arrayToIndexMap, toU32Buffer } from '../util';
@@ -259,6 +259,71 @@ class CustomAssetsBuilder {
     }
   }
 
+  async extractSeqTable(game: Game, count: number, codeOffset: number, romOffset: number) {
+    const seqTableDataOrig = await extractRaw(this.roms, game, 'code', codeOffset, count * 0x10);
+    const seqTableDataPatched = Buffer.alloc(0x80 * 0x10);
+    seqTableDataOrig.copy(seqTableDataPatched);
+    for (let i = 0; i < count; ++i) {
+      let addr = seqTableDataOrig.readUint32BE(i * 0x10);
+      let size = seqTableDataOrig.readUint32BE(i * 0x10 + 4);
+      if (!size && addr) {
+        size = seqTableDataOrig.readUint32BE(addr * 0x10 + 4);
+        addr = seqTableDataOrig.readUint32BE(addr * 0x10);
+      }
+      addr += romOffset;
+      seqTableDataPatched.writeUint32BE(addr, i * 0x10);
+      seqTableDataPatched.writeUint32BE(size, i * 0x10 + 4);
+    }
+    const seqTableDataVrom = this.addRawData(`${game}/seq_table`, seqTableDataPatched, false);
+    this.cg.define(`CUSTOM_SEQ_TABLE_${game.toUpperCase()}_VROM`, seqTableDataVrom);
+  }
+
+  async extractAudioTable(game: Game, count: number, codeOffset: number, romOffset: number) {
+    const dataOrig = await extractRaw(this.roms, game, 'code', codeOffset, count * 0x10);
+    const dataPatched = Buffer.alloc(8 * 0x10);
+    dataOrig.copy(dataPatched);
+    for (let i = 0; i < count; ++i) {
+      let addr = dataOrig.readUint32BE(i * 0x10);
+      let size = dataOrig.readUint32BE(i * 0x10 + 4);
+      if (size) {
+        addr += romOffset;
+      }
+      dataPatched.writeUint32BE(addr, i * 0x10);
+    }
+    const dataVrom = this.addRawData(`${game}/audio_table`, dataPatched, false);
+    this.cg.define(`CUSTOM_AUDIO_TABLE_${game.toUpperCase()}_VROM`, dataVrom);
+  }
+
+  async extractBankTable(game: Game, count: number, codeOffset: number, romOffset: number) {
+    const dataOrig = await extractRaw(this.roms, game, 'code', codeOffset, count * 0x10);
+    const dataPatched = Buffer.alloc(0x30 * 0x10);
+    dataOrig.copy(dataPatched);
+    for (let i = 0; i < count; ++i) {
+      let addr = dataOrig.readUint32BE(i * 0x10);
+      let size = dataOrig.readUint32BE(i * 0x10 + 4);
+      if (!size) {
+        size = dataOrig.readUint32BE(addr * 0x10 + 4);
+        addr = dataOrig.readUint32BE(addr * 0x10);
+      }
+      addr += romOffset;
+      dataPatched.writeUint32BE(addr, i * 0x10);
+      dataPatched.writeUint32BE(size, i * 0x10 + 4);
+    }
+    const dataVrom = this.addRawData(`${game}/bank_table`, dataPatched, false);
+    this.cg.define(`CUSTOM_BANK_TABLE_${game.toUpperCase()}_VROM`, dataVrom);
+  }
+
+  async extractSeqBanks(game: Game, count: number, codeOffset: number) {
+    const seqBankDataRaw = await extractRaw(this.roms, game, 'code', codeOffset, count * 2);
+    const seqBankData = Buffer.alloc(0x80 * 2);
+    for (let i = 0; i < count; ++i) {
+      const bankId = seqBankDataRaw.readUint8(i * 2);
+      seqBankData.writeUint8(bankId, i + 1);
+    }
+    const seqBanksDataVrom = this.addRawData(`${game}/seq_banks`, seqBankData, false);
+    this.cg.define(`CUSTOM_SEQ_BANKS_${game.toUpperCase()}_VROM`, seqBanksDataVrom);
+  }
+
   async addCustomExtractedFiles() {
     const cfiles = await customExtractedFiles(this.roms);
     for (const [name, data] of Object.entries(cfiles)) {
@@ -266,62 +331,19 @@ class CustomAssetsBuilder {
       this.cg.define('CUSTOM_' + name + '_ADDR', vrom);
     }
 
-    /* Extract the OoT audio seq table */
-    const seqTableDataOotOrig = await extractRaw(this.roms, 'oot', 'code', 0x102ae0, 0x6e * 0x10);
-    const seqTableDataOotPatched = Buffer.alloc(0x80 * 0x10);
-    seqTableDataOotOrig.copy(seqTableDataOotPatched);
-    for (let i = 0; i < 0x6e; ++i) {
-      let addr = seqTableDataOotOrig.readUint32BE(i * 0x10);
-      let size = seqTableDataOotOrig.readUint32BE(i * 0x10 + 4);
-      if (!size) {
-        size = seqTableDataOotOrig.readUint32BE(addr * 0x10 + 4);
-        addr = seqTableDataOotOrig.readUint32BE(addr * 0x10);
-      }
-      addr += 0x29de0;
-      seqTableDataOotPatched.writeUint32BE(addr, i * 0x10);
-      seqTableDataOotPatched.writeUint32BE(size, i * 0x10 + 4);
-    }
-    const seqTableDataOotVrom = this.addRawData('oot/seq_table', seqTableDataOotPatched, false);
-    this.cg.define('CUSTOM_SEQ_TABLE_OOT_VROM', seqTableDataOotVrom);
+    /* Audio */
+    const mmBase = 0x4d9f40;
+    await this.extractSeqTable('oot', 0x6e, 0x102ae0, 0x29de0);
+    await this.extractSeqTable('mm',  0x80, 0x13bb80, 0x46af0 + mmBase);
 
-    /* Extract the MM audio seq table */
-    const seqTableDataMmOrig = await extractRaw(this.roms, 'mm', 'code', 0x13bb80, 0x80 * 0x10);
-    const seqTableDataMmPatched = Buffer.alloc(0x80 * 0x10);
-    seqTableDataMmOrig.copy(seqTableDataMmPatched);
-    for (let i = 0; i < 0x80; ++i) {
-      let addr = seqTableDataMmOrig.readUint32BE(i * 0x10);
-      let size = seqTableDataMmOrig.readUint32BE(i * 0x10 + 4);
-      if (size === 0 && addr) {
-        size = seqTableDataMmOrig.readUint32BE(addr * 0x10 + 4);
-        addr = seqTableDataMmOrig.readUint32BE(addr * 0x10);
-      }
-      addr += 0x4d9f40; /* MM_BASE */
-      addr += 0x46af0;
-      seqTableDataMmPatched.writeUint32BE(addr, i * 0x10);
-      seqTableDataMmPatched.writeUint32BE(size, i * 0x10 + 4);
-    }
-    const seqTableDataMmVrom = this.addRawData('mm/seq_table', seqTableDataMmPatched, false);
-    this.cg.define('CUSTOM_SEQ_TABLE_MM_VROM', seqTableDataMmVrom);
+    await this.extractBankTable('oot', 0x26, 0x1026b0, 0xd390);
+    await this.extractBankTable('mm',  0x29, 0x13b6d0, 0x20700 + mmBase);
 
-    /* Extract the OoT seq banks */
-    const seqBankDataOotRaw = await extractRaw(this.roms, 'oot', 'code', 0x1029f0, 0x6d * 2);
-    const seqBankDataOot = Buffer.alloc(0x80 * 2);
-    for (let i = 0; i < 0x6d; ++i) {
-      const bankId = seqBankDataOotRaw.readUint8(i * 2);
-      seqBankDataOot.writeUint8(bankId, i + 1);
-    }
-    const seqBanksDataOotVrom = this.addRawData('oot/seq_banks', seqBankDataOot, false);
-    this.cg.define('CUSTOM_SEQ_BANKS_OOT_VROM', seqBanksDataOotVrom);
+    await this.extractAudioTable('oot', 0x07, 0x1031d0, 0x79470);
+    await this.extractAudioTable('mm',  0x03, 0x13c390, 0x97f70 + mmBase);
 
-    /* Extract the MM seq banks */
-    const seqBankDataMmRaw = await extractRaw(this.roms, 'mm', 'code', 0x13ba64, 0x7f * 2);
-    const seqBankDataMm = Buffer.alloc(0x80 * 2);
-    for (let i = 0; i < 0x7f; ++i) {
-      const bankId = seqBankDataMmRaw.readUint8(i * 2);
-      seqBankDataMm.writeUint8(bankId, i + 1);
-    }
-    const seqBanksDataMmVrom = this.addRawData('mm/seq_banks', seqBankDataMm, false);
-    this.cg.define('CUSTOM_SEQ_BANKS_MM_VROM', seqBanksDataMmVrom);
+    await this.extractSeqBanks('oot', 0x6d, 0x1029f0);
+    await this.extractSeqBanks('mm',  0x7f, 0x13ba64);
   }
 
   async run() {

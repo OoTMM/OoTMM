@@ -18,58 +18,42 @@
 #define FANFARE_HEART_PIECE         0x39
 #define FANFARE_MASK                FANFARE_MM(0x37)
 #define FANFARE_MEDALLION           FANFARE_OOT(0x943)
+#define FANFARE_STONE               FANFARE_OOT(0x932)
+#define FANFARE_SONG_ZELDA          FANFARE_OOT(0x946)
+#define FANFARE_SONG_SARIA          FANFARE_OOT(0x944)
+#define FANFARE_SONG_TP_LIGHT       FANFARE_OOT(0x925)
+#define FANFARE_SONG_TP_FOREST      FANFARE_OOT(0x934)
+#define FANFARE_SONG_TP_FIRE        FANFARE_OOT(0x933)
+#define FANFARE_SONG_TP_WATER       FANFARE_OOT(0x935)
+#define FANFARE_SONG_TP_SHADOW      FANFARE_OOT(0x937)
+#define FANFARE_SONG_TP_SPIRIT      FANFARE_OOT(0x936)
+#define FANFARE_SONG_SOARING        FANFARE_MM(0x947)
+#define FANFARE_SONG_HEALING        FANFARE_MM(0x948)
+#define FANFARE_SONG_AWAKENING      FANFARE_MM(0x95b)
+#define FANFARE_SONG_GORON_HALF     FANFARE_MM(0x951)
+#define FANFARE_SONG_GORON          FANFARE_MM(0x95c)
+#define FANFARE_SONG_ZORA           FANFARE_MM(0x95d)
+#define FANFARE_SONG_EMPTINESS      FANFARE_MM(0x95e)
+#define FANFARE_SONG_ORDER          FANFARE_MM(0x95f)
 #define SFX_RUPEE                   0x4803
 #define SFX_MINOR_GI                0x4824
 #define SFX_MINOR_QUICK             0x4831
 
+/* These are the same but they have different IDs */
 #if defined(GAME_OOT)
-# define FANFARE_STONE              0x932
 # define FANFARE_SONG               0x93d
-# define FANFARE_SONG_TP_LIGHT      0x925
-# define FANFARE_SONG_TP_FOREST     0x934
-# define FANFARE_SONG_TP_FIRE       0x933
-# define FANFARE_SONG_TP_WATER      0x935
-# define FANFARE_SONG_TP_SHADOW     0x937
-# define FANFARE_SONG_TP_SPIRIT     0x936
-# define FANFARE_SONG_ZELDA         0x946
-# define FANFARE_SONG_SARIA         0x944
 # define FANFARE_SONG_TIME          0x948
 # define FANFARE_SONG_EPONA         0x945
 # define FANFARE_SONG_SUN           0x947
 # define FANFARE_SONG_STORMS        0x949
-# define FANFARE_SONG_SOARING       FANFARE_SONG
-# define FANFARE_SONG_HEALING       FANFARE_SONG
-# define FANFARE_SONG_AWAKENING     FANFARE_SONG
-# define FANFARE_SONG_GORON_HALF    FANFARE_SONG
-# define FANFARE_SONG_GORON         FANFARE_SONG
-# define FANFARE_SONG_ZORA          FANFARE_SONG
-# define FANFARE_SONG_EMPTINESS     FANFARE_SONG
-# define FANFARE_SONG_ORDER         FANFARE_SONG
 #endif
 
 #if defined(GAME_MM)
-# define FANFARE_STONE              FANFARE_MEDALLION
 # define FANFARE_SONG               0x952
-# define FANFARE_SONG_TP_LIGHT      FANFARE_SONG
-# define FANFARE_SONG_TP_FOREST     FANFARE_SONG
-# define FANFARE_SONG_TP_FIRE       FANFARE_SONG
-# define FANFARE_SONG_TP_WATER      FANFARE_SONG
-# define FANFARE_SONG_TP_SHADOW     FANFARE_SONG
-# define FANFARE_SONG_TP_SPIRIT     FANFARE_SONG
-# define FANFARE_SONG_ZELDA         FANFARE_SONG
-# define FANFARE_SONG_SARIA         FANFARE_SONG
 # define FANFARE_SONG_TIME          0x934
 # define FANFARE_SONG_EPONA         0x932
 # define FANFARE_SONG_SUN           0x933
 # define FANFARE_SONG_STORMS        0x935
-# define FANFARE_SONG_SOARING       0x947
-# define FANFARE_SONG_HEALING       0x948
-# define FANFARE_SONG_AWAKENING     0x95b
-# define FANFARE_SONG_GORON_HALF    0x951
-# define FANFARE_SONG_GORON         0x95c
-# define FANFARE_SONG_ZORA          0x95d
-# define FANFARE_SONG_EMPTINESS     0x95e
-# define FANFARE_SONG_ORDER         0x95f
 #endif
 
 void comboPlayItemFanfare(s16 gi, int isShort)

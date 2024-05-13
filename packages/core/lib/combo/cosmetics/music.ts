@@ -5,40 +5,6 @@ import { toU32Buffer } from '../util';
 import { Game } from '../config';
 import { RomBuilder } from '../rom-builder';
 
-const BANKS_OOT_TO_MM: {[k: number]: number} = {
-  0x03: 0x03,
-  0x05: 0x04,
-  0x08: 0x05,
-  0x09: 0x06,
-  0x0D: 0x07,
-  0x11: 0x08,
-  0x12: 0x09,
-  0x14: 0x0A,
-  0x15: 0x0B,
-  0x16: 0x0C,
-  0x1C: 0x0D,
-  0x1D: 0x0E,
-  0x23: 0x0F,
-  0x24: 0x10,
-};
-
-const BANKS_MM_TO_OOT: {[k: number]: number} = {
-  0x03: 0x03,
-  0x04: 0x05,
-  0x05: 0x08,
-  0x06: 0x09,
-  0x07: 0x0D,
-  0x08: 0x11,
-  0x09: 0x12,
-  0x0A: 0x14,
-  0x0B: 0x15,
-  0x0C: 0x16,
-  0x0D: 0x1C,
-  0x0E: 0x1D,
-  0x0F: 0x23,
-  0x10: 0x24,
-};
-
 const OOT_MUSICS = {
   "Hyrule Field": 0x02,
   "Dodongos Cavern": 0x18,
@@ -288,8 +254,8 @@ class MusicInjector {
       }
       let bankIdMm: number | null = null;
 
-      if (BANKS_OOT_TO_MM[bankIdOot] !== undefined) {
-        bankIdMm = BANKS_OOT_TO_MM[bankIdOot];
+      if (bankIdOot >= 2) {
+        bankIdMm = bankIdOot + 0x30;
         games.push('mm');
       }
 
@@ -334,8 +300,8 @@ class MusicInjector {
       const name = saneName(basename.replace('.mmrs', ''));
 
       let bankIdOot: number | null = null;
-      if (BANKS_MM_TO_OOT[bankIdMm] !== undefined) {
-        bankIdOot = BANKS_MM_TO_OOT[bankIdMm];
+      if (bankIdMm >= 2) {
+        bankIdOot = bankIdMm + 0x30;
         games.push('oot');
       }
 

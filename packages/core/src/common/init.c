@@ -11,6 +11,7 @@
 ComboGlobal g;
 
 void initHeap(void);
+void AudioCustom_Init(void);
 void comboInitObjects(void);
 
 void menuInit();
@@ -20,6 +21,7 @@ void comboInit(void)
     g.delayedSwitchFlag = 0xff;
 
     initHeap();
+    AudioCustom_Init();
     Context_Init();
     Config_Init();
     comboInitData();
