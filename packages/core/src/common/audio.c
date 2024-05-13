@@ -102,7 +102,7 @@ static u8 foreignSampleTable(u8 sampleTableId)
 {
     if (sampleTableId == 0xff)
         return 0xff;
-    return sampleTableId + 0x30;
+    return sampleTableId + 8;
 }
 
 void AudioCustom_Init(void)
@@ -124,14 +124,14 @@ void AudioCustom_Init(void)
     LoadFile(gCustomAudioTables.audio->entries + 0, CUSTOM_AUDIO_TABLE_NATIVE_VROM, 8 * sizeof(AudioTableEntry));
     LoadFile(gCustomAudioTables.audio->entries + 8, CUSTOM_AUDIO_TABLE_FOREIGN_VROM, 8 * sizeof(AudioTableEntry));
 
-    /* Fix foreign tables */
-    for (int i = 0; i < 0x30; ++i)
+    /* Fix foreign audio tables */
+    for (int i = 0; i < 8; ++i)
     {
-        e = gCustomAudioTables.bank->entries + 0x30 + i;
+        e = gCustomAudioTables.audio->entries + 8 + i;
         if (e->medium && !e->size)
         {
             /* Alias */
-            e->romAddr += 0x30;
+            e->romAddr += 8;
         }
     }
 
@@ -186,9 +186,6 @@ void AudioCustom_Init(void)
         bankId = banks[i];
         if (bankId > 1)
             bankId += 0x30;
-
-        /* DEBUG */
-        bankId = 0;
 
         gCustomAudioSeqBanks[512 + 0x80 * 2 + i * 2 + 0] = 1;
         gCustomAudioSeqBanks[512 + 0x80 * 2 + i * 2 + 1] = bankId;
