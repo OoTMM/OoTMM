@@ -27,20 +27,20 @@
 #define FANFARE_SONG_TP_WATER       FANFARE_OOT(0x935)
 #define FANFARE_SONG_TP_SHADOW      FANFARE_OOT(0x937)
 #define FANFARE_SONG_TP_SPIRIT      FANFARE_OOT(0x936)
+#define FANFARE_SONG_SOARING        FANFARE_MM(0x947)
+#define FANFARE_SONG_HEALING        FANFARE_MM(0x948)
+#define FANFARE_SONG_AWAKENING      FANFARE_MM(0x95b)
+#define FANFARE_SONG_GORON_HALF     FANFARE_MM(0x951)
+#define FANFARE_SONG_GORON          FANFARE_MM(0x95c)
+#define FANFARE_SONG_ZORA           FANFARE_MM(0x95d)
 #define FANFARE_SONG_EMPTINESS      FANFARE_MM(0x95e)
 #define FANFARE_SONG_ORDER          FANFARE_MM(0x95f)
 #define SFX_RUPEE                   0x4803
 #define SFX_MINOR_GI                0x4824
 #define SFX_MINOR_QUICK             0x4831
 
+/* These are the same but they have different IDs */
 #if defined(GAME_OOT)
-# define FANFARE_SONG_SOARING       FANFARE_SONG
-# define FANFARE_SONG_HEALING       FANFARE_SONG
-# define FANFARE_SONG_AWAKENING     FANFARE_SONG
-# define FANFARE_SONG_GORON_HALF    FANFARE_SONG
-# define FANFARE_SONG_GORON         FANFARE_SONG
-# define FANFARE_SONG_ZORA          FANFARE_SONG
-
 # define FANFARE_SONG               0x93d
 # define FANFARE_SONG_TIME          0x948
 # define FANFARE_SONG_EPONA         0x945
@@ -49,13 +49,6 @@
 #endif
 
 #if defined(GAME_MM)
-# define FANFARE_SONG_SOARING       0x947
-# define FANFARE_SONG_HEALING       0x948
-# define FANFARE_SONG_AWAKENING     0x95b
-# define FANFARE_SONG_GORON_HALF    0x951
-# define FANFARE_SONG_GORON         0x95c
-# define FANFARE_SONG_ZORA          0x95d
-
 # define FANFARE_SONG               0x952
 # define FANFARE_SONG_TIME          0x934
 # define FANFARE_SONG_EPONA         0x932
