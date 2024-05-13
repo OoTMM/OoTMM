@@ -120,7 +120,7 @@ export class LogicPassSpoiler {
     }
     this.indent('Tricks');
     for (const trick of tricks) {
-      this.write(`${TRICKS[trick as TrickKey]}`);
+      this.write(`${TRICKS[trick as TrickKey].name}`);
     }
     this.unindent('');
   }
