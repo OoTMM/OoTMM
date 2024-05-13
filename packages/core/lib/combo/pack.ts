@@ -134,7 +134,8 @@ export async function pack(args: PackArgs) {
   }
 
   /* Apply cosmetics */
-  await cosmetics(args.opts, args.addresses, romBuilder, (patchfile.meta || {}).cosmetics);
+  monitor.log("Pack: Cosmetics");
+  await cosmetics(monitor, args.opts, romBuilder, (patchfile.meta || {}).cosmetics);
 
   /* Build the final ROM */
   monitor.log("Pack: Finishing up ROM");

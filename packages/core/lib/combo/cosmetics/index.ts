@@ -12,6 +12,7 @@ import { BufferPath } from './type';
 import { toU32Buffer } from '../util';
 import { enableModelOotLinkAdult, enableModelOotLinkChild } from './model';
 import { randomizeMusic } from './music';
+import { Monitor } from '../monitor';
 
 export { makeCosmetics } from './util';
 export { COSMETICS } from './data';
@@ -59,8 +60,8 @@ class CosmeticsPass {
   private assetsPromise: Promise<Assets> | null;
 
   constructor(
+    private monitor: Monitor,
     private opts: Options,
-    private addresses: GameAddresses,
     private builder: RomBuilder,
     private meta: any,
   ) {
@@ -361,14 +362,14 @@ class CosmeticsPass {
     if (c.music) {
       const data = await this.getPathBuffer(c.music);
       if (data)
-        await randomizeMusic(this.builder, random, data);
+        await randomizeMusic(this.monitor, this.builder, random, data);
     }
     if (c.musicNames)
       this.patchSymbol('MUSIC_NAMES', Buffer.from([0x01]));
   }
 }
 
-export async function cosmetics(opts: Options, addresses: GameAddresses, builder: RomBuilder, meta: any) {
-  const x = new CosmeticsPass(opts, addresses, builder, meta);
+export async function cosmetics(monitor: Monitor, opts: Options, builder: RomBuilder, meta: any) {
+  const x = new CosmeticsPass(monitor, opts, builder, meta);
   await x.run();
 }

@@ -105,6 +105,16 @@ static u8 foreignSampleTable(u8 sampleTableId)
     return sampleTableId + 8;
 }
 
+static u8 foreignBank(u8 bankId)
+{
+    if (bankId < 2)
+        return bankId;
+    if (bankId >= 0x30)
+        return bankId - 0x30;
+    else
+        return bankId + 0x30;
+}
+
 void AudioCustom_Init(void)
 {
     AudioTableEntry* e;
@@ -169,7 +179,7 @@ void AudioCustom_Init(void)
         *tmp = 512 + i * 2;
     }
 
-    /* Load native banks */ /* DEBUG */
+    /* Load native banks */
     LoadFile(banks, CUSTOM_SEQ_BANKS_NATIVE_VROM, 0x80);
     for (int i = 0; i < 0x80; ++i)
     {
@@ -181,14 +191,8 @@ void AudioCustom_Init(void)
     LoadFile(banks, CUSTOM_SEQ_BANKS_FOREIGN_VROM, 0x80);
     for (int i = 0; i < 0x80; ++i)
     {
-        u8 bankId;
-
-        bankId = banks[i];
-        if (bankId > 1)
-            bankId += 0x30;
-
         gCustomAudioSeqBanks[512 + 0x80 * 2 + i * 2 + 0] = 1;
-        gCustomAudioSeqBanks[512 + 0x80 * 2 + i * 2 + 1] = bankId;
+        gCustomAudioSeqBanks[512 + 0x80 * 2 + i * 2 + 1] = foreignBank(banks[i]);
     }
 
     /* Sequence 0 is special */
