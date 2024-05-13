@@ -52,7 +52,7 @@ CustomAudioTables gCustomAudioTables = { NULL, NULL, NULL, gCustomAudioSeqBanks 
 
 u8 gAudioLoadStatusSeq[0x100];
 u8 gAudioLoadStatusFont[0x60];
-u8 gAudioLoadStatusFontSample[0x30];
+extern u8 gAudioLoadStatusFontSample[0x30];
 
 void AudioHeap_ResetLoadStatus(void)
 {
@@ -75,10 +75,16 @@ void AudioHeap_ResetLoadStatus(void)
     }
 }
 
-void AudioLoad_SetSeqLoadStatus(int seqId, u8 status)
+void AudioLoad_SetFontLoadStatus(int fontId, int status)
+{
+    if (fontId != 0xff && gAudioLoadStatusFont[fontId] != 5)
+        gAudioLoadStatusFont[fontId] = (u8)status;
+}
+
+void AudioLoad_SetSeqLoadStatus(int seqId, int status)
 {
     if (seqId != 0xff && gAudioLoadStatusSeq[seqId] != 5)
-        gAudioLoadStatusSeq[seqId] = status;
+        gAudioLoadStatusSeq[seqId] = (u8)status;
 }
 
 static AudioTable* allocTable(int count)

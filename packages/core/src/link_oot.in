@@ -14,6 +14,8 @@ osWritebackDCache = 0x80003440;
 osWritebackDCacheAll = 0x800d5aa0;
 DMARomToRam = 0x8000085c;
 
+gAudioLoadStatusFontSample = 0x80128a68;
+
 DrawLink = 0x80079f48;
 Audio_GetActiveSeqId = 0x800cab18;
 
