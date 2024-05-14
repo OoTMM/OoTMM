@@ -49,6 +49,7 @@ export type WorkerResultGenerate = {
   type: 'generate',
   id: number,
   data: GeneratorOutput,
+  warnings: string[],
 }
 
 export type WorkerResultGenerateLog = {
@@ -76,6 +77,7 @@ export type WorkerResult = WorkerResultItemPool | WorkerResultGenerate | WorkerR
 function onTaskGenerate(task: WorkerTaskGenerate) {
   let { oot, mm, patch, options } = task;
   options.cosmetics = { ...options.cosmetics };
+  const warnings: string[] = [];
   const onLog = (msg: string) => {
     postMessage({
       type: 'generate-log',
@@ -83,6 +85,9 @@ function onTaskGenerate(task: WorkerTaskGenerate) {
       log: msg,
     });
   };
+  const onWarn = (msg: string) => {
+    warnings.push(msg);
+  }
   const onProgress = (progress: number, total: number) => {
     postMessage({
       type: 'generate-progress',
@@ -91,12 +96,13 @@ function onTaskGenerate(task: WorkerTaskGenerate) {
       total,
     });
   };
-  const generator = generate({ oot, mm, opts: { ...options, patch, fetch: fetchFunc }, monitor: { onLog, onProgress } });
+  const generator = generate({ oot, mm, opts: { ...options, patch, fetch: fetchFunc }, monitor: { onLog, onProgress, onWarn } });
   generator.run().then(result => {
     postMessage({
       type: 'generate',
       id: task.id,
       data: result,
+      warnings,
     });
   }).catch((err) => {
     postMessage({

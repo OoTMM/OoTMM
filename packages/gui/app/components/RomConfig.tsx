@@ -10,7 +10,7 @@ import { Result } from './Result';
 export function RomConfig() {
   const { romConfig, setFileBuffer, setSeed } = useRomConfig();
   const [isPatch, setIsPatch] = useIsPatch();
-  const { error, result, archive, generate } = useGenerator();
+  const { error, result, warnings, archive, generate } = useGenerator();
   const [randomSettings, setRandomSettings] = useRandomSettings();
 
   const isRandomSettings = randomSettings.enabled;
@@ -23,7 +23,7 @@ export function RomConfig() {
     <h1>OoTMM Web Generator</h1>
     <h2>Version: {process.env.VERSION}</h2>
     {error && <div className="panel panel-error"><h2>Something went wrong</h2><p>{error}</p></div>}
-    {result && <Result archive={archive}/>}
+    {result && <Result archive={archive} warnings={warnings}/>}
     <form className="rom-config-form"
       target="_self"
       onSubmit={(e) => {

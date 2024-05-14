@@ -23,6 +23,7 @@ type GeneratorState = {
     error: string | null;
     result: GeneratorOutput | null;
     archive: API.ResultFile | null;
+    warnings: string[];
   },
   isPatch: boolean;
   settings: Settings;
@@ -74,6 +75,7 @@ function createState(): GeneratorState {
       error: null,
       result: null,
       archive: null,
+      warnings: [],
     }
   };
 }
@@ -159,10 +161,10 @@ export function useIsPatch() {
 export function useGenerator() {
   const { state, setState } = useContext(GeneratorContext);
   const { generator } = state;
-  const { isGenerating, message, progress, error, result, archive } = generator;
+  const { isGenerating, message, progress, error, result, archive, warnings } = generator;
 
   const generate = async () => {
-    setState((state) => ({ ...state, generator: { ...state.generator, isGenerating: true, archive: null, result: null, error: null } }));
+    setState((state) => ({ ...state, generator: { ...state.generator, isGenerating: true, archive: null, result: null, error: null, warnings: [] } }));
     const { oot, mm, patch } = state.romConfig.files;
     const options: OptionsInput = { seed: state.romConfig.seed, settings: state.settings, cosmetics: state.cosmetics, random: state.random };
     try {
@@ -182,16 +184,16 @@ export function useGenerator() {
         setState((state) => ({ ...state, generator: { ...state.generator, progress: newProgress } }));
       };
 
-      const result = await API.generate({ oot: oot!, mm: mm!, patch: patch ? patch : undefined }, options, onMessage, onProgress);
-      setState((state) => ({ ...state, generator: { ...state.generator, isGenerating: false, result } }));
-      const archive = await API.archive(result);
+      const { data, warnings } = await API.generate({ oot: oot!, mm: mm!, patch: patch ? patch : undefined }, options, onMessage, onProgress);
+      setState((state) => ({ ...state, generator: { ...state.generator, isGenerating: false, result: data, warnings } }));
+      const archive = await API.archive(data);
       setState((state) => ({ ...state, generator: { ...state.generator, archive } }));
     } catch (e: any) {
       setState((state) => ({ ...state, generator: { ...state.generator, isGenerating: false, error: e.toString() } }));
     }
   };
 
-  return { isGenerating, message, error, result, archive, generate, progress };
+  return { isGenerating, message, error, result, archive, generate, progress, warnings };
 }
 
 export function useSettings() {

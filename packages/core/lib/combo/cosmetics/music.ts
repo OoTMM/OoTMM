@@ -244,7 +244,13 @@ class MusicInjector {
     for (const f of files) {
       /* Get the music zip */
       const musicZipBuffer = await f.async('nodebuffer');
-      const musicZip = await JSZip.loadAsync(musicZipBuffer);
+      let musicZip: JSZip;
+      try {
+        musicZip = await JSZip.loadAsync(musicZipBuffer);
+      } catch (e) {
+        this.monitor.warn(`Skipped music file ${f.name}: invalid zip file`);
+        continue;
+      }
 
       /* Look for unsupported stuff */
       const badFiles = musicZip.file(/\.z?(bank|bankmeta|sound|)$/);
@@ -270,6 +276,10 @@ class MusicInjector {
       /* Parse the metadata */
       const metaRaw = await metaFile[0].async('text');
       const meta = metaRaw.split(/\r?\n/);
+      if (meta.length < 3) {
+        this.monitor.warn(`Skipped music file ${f.name}: metadata must have at least 3 lines`);
+        continue;
+      }
       const filename = f.name.split('/').pop()!;
       const name = saneName(meta[0]);
       const bankIdOot = Number(meta[1]);
@@ -297,7 +307,13 @@ class MusicInjector {
     for (const f of files) {
       /* Get the music zip */
       const musicZipBuffer = await f.async('nodebuffer');
-      const musicZip = await JSZip.loadAsync(musicZipBuffer);
+      let musicZip: JSZip;
+      try {
+        musicZip = await JSZip.loadAsync(musicZipBuffer);
+      } catch (e) {
+        this.monitor.warn(`Skipped music file ${f.name}: invalid zip file`);
+        continue;
+      }
 
       /* Look for unsupported stuff */
       const badFiles = musicZip.file(/\.z?(bank|bankmeta|sound|)$/);

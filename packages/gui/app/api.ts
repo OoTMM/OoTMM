@@ -104,7 +104,7 @@ export async function generate(files: { oot: Buffer, mm: Buffer, patch?: Buffer 
   if (result.type === 'generate-error') {
     throw result.error;
   }
-  return result.data;
+  return { data: result.data, warnings: result.warnings };
 }
 
 export async function archive(result: GeneratorOutput): Promise<ResultFile> {

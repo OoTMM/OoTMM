@@ -129,3 +129,20 @@ main {
   font-size: 1.2em;
   border: 1px solid #aaa;
 }
+
+.warning {
+  display: block;
+  margin: 2em;
+  padding: 1em;
+  background: rgb(126, 126, 5);
+  border: 1px solid rgb(100, 100, 4);
+  color: white;
+  border-radius: 5px;
+  min-height: 15rem;
+  max-height: 35rem;
+  overflow-y: auto;
+}
+
+.warning ul {
+  margin: 1em;
+}
