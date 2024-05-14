@@ -411,7 +411,7 @@ class MusicInjector {
         continue;
       }
       const categoriesData = await categoriesTxt.async('text');
-      const categories = categoriesData.split(',').map(x => parseInt(x, 10));
+      const categories = categoriesData.trim().split(',');
 
       /* Extract the bank ID from the zseq filename */
       let zseqFilename = zseqFiles[0].name;
@@ -423,7 +423,7 @@ class MusicInjector {
       /* Add the music */
       const seq = await zseqFiles[0].async('nodebuffer');
       const games: Game[] = ['mm'];
-      const type = [8, 9, 10].some(x => categories.includes(x)) ? 'fanfare' : 'bgm';
+      const type = ['8', '9', '10'].some(x => categories.includes(x)) ? 'fanfare' : 'bgm';
       const filename = f.name.split('/').pop()!;
       const name = saneName(filename.replace('.mmrs', ''));
 
