@@ -324,8 +324,11 @@ class MusicInjector {
       }
       const filename = f.name.split('/').pop()!;
       const name = saneName(meta[0]);
-      const type = meta[2].toLowerCase();
+      let type = meta[2].toLowerCase();
       const games: Game[] = ['oot'];
+      if (type === 'f') {
+        type = 'fanfare';
+      }
       if (type !== 'bgm' && type !== 'fanfare') {
         this.monitor.warn(`Skipped music file ${f.name}: unknown type ${type}`);
         continue;
