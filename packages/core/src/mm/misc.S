@@ -19,3 +19,8 @@ PATCH_END
 PATCH_START 0x801bfd2a
 .short 3
 PATCH_END
+
+/* Disable morning music - required to fix an OoT fanfare crash */
+PATCH_START 0x800fB8c4
+  jal 0x801a25e4
+PATCH_END
