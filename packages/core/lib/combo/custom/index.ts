@@ -313,6 +313,12 @@ class CustomAssetsBuilder {
     this.cg.define(`CUSTOM_BANK_TABLE_${game.toUpperCase()}_VROM`, dataVrom);
   }
 
+  async extractCustomBankTable() {
+    const data = Buffer.alloc((0xf0 - 0x60) * 0x10);
+    const vrom = this.addRawData(`custom/bank_table`, data, false);
+    this.cg.define(`CUSTOM_BANK_TABLE_CUSTOM_VROM`, vrom);
+  }
+
   async extractSeqBanks(game: Game, count: number, codeOffset: number) {
     const seqBankDataRaw = await extractRaw(this.roms, game, 'code', codeOffset, count * 2);
     const seqBankData = Buffer.alloc(0x80 * 2);
@@ -338,6 +344,7 @@ class CustomAssetsBuilder {
 
     await this.extractBankTable('oot', 0x26, 0x1026b0, 0xd390);
     await this.extractBankTable('mm',  0x29, 0x13b6d0, 0x20700 + mmBase);
+    await this.extractCustomBankTable();
 
     await this.extractAudioTable('oot', 0x07, 0x1031d0, 0x79470);
     await this.extractAudioTable('mm',  0x03, 0x13c390, 0x97f70 + mmBase);

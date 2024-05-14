@@ -51,7 +51,7 @@ u8 gCustomAudioSeqBanks[256 * 2 + 256 * 2 + 16];
 CustomAudioTables gCustomAudioTables = { NULL, NULL, NULL, gCustomAudioSeqBanks };
 
 u8 gAudioLoadStatusSeq[0x100];
-u8 gAudioLoadStatusFont[0x60];
+u8 gAudioLoadStatusFont[0xf0];
 extern u8 gAudioLoadStatusFontSample[0x30];
 
 void AudioHeap_ResetLoadStatus(void)
@@ -105,9 +105,23 @@ static u8 foreignSampleTable(u8 sampleTableId)
     return sampleTableId + 8;
 }
 
+static u8 customSampleTable(u8 sampleTableId)
+{
+    if (sampleTableId == 0xff)
+        return 0xff;
+
+#if defined(GAME_MM)
+    sampleTableId ^= 0x08;
+#endif
+
+    return sampleTableId;
+}
+
 static u8 foreignBank(u8 bankId)
 {
     if (bankId < 2)
+        return bankId;
+    if (bankId >= 0x60)
         return bankId;
     if (bankId >= 0x30)
         return bankId - 0x30;
@@ -123,7 +137,7 @@ void AudioCustom_Init(void)
 
     /* Init the tables */
     gCustomAudioTables.seq = allocTable(0x100);
-    gCustomAudioTables.bank = allocTable(0x60);
+    gCustomAudioTables.bank = allocTable(0xf0);
     gCustomAudioTables.audio = allocTable(0x10);
 
     /* Load the tables */
@@ -131,6 +145,7 @@ void AudioCustom_Init(void)
     LoadFile(gCustomAudioTables.seq->entries + 0x80, CUSTOM_SEQ_TABLE_FOREIGN_VROM, 0x80 * sizeof(AudioTableEntry));
     LoadFile(gCustomAudioTables.bank->entries + 0x00, CUSTOM_BANK_TABLE_NATIVE_VROM, 0x30 * sizeof(AudioTableEntry));
     LoadFile(gCustomAudioTables.bank->entries + 0x30, CUSTOM_BANK_TABLE_FOREIGN_VROM, 0x30 * sizeof(AudioTableEntry));
+    LoadFile(gCustomAudioTables.bank->entries + 0x60, CUSTOM_BANK_TABLE_CUSTOM_VROM, (0xf0 - 0x60) * sizeof(AudioTableEntry));
     LoadFile(gCustomAudioTables.audio->entries + 0, CUSTOM_AUDIO_TABLE_NATIVE_VROM, 8 * sizeof(AudioTableEntry));
     LoadFile(gCustomAudioTables.audio->entries + 8, CUSTOM_AUDIO_TABLE_FOREIGN_VROM, 8 * sizeof(AudioTableEntry));
 
@@ -156,6 +171,16 @@ void AudioCustom_Init(void)
         }
     }
 
+    for (int i = 0; i < (0xf0 - 0x60); ++i)
+    {
+        e = gCustomAudioTables.bank->entries + 0x60 + i;
+        if (e->medium)
+        {
+            e->data[0] = customSampleTable(e->data[0]);
+            e->data[1] = customSampleTable(e->data[1]);
+        }
+    }
+
     /* Resolve virtual sequence addresses (for custom music) */
     for (int i = 0; i < 256; ++i)
     {
@@ -164,6 +189,22 @@ void AudioCustom_Init(void)
 
         e = gCustomAudioTables.seq->entries + i;
         if (e->romAddr >= 0x08000000)
+        {
+            if (comboDmaLookup(&dmaEntry, e->romAddr))
+            {
+                e->romAddr = dmaEntry.pstart + (e->romAddr - dmaEntry.vstart);
+            }
+        }
+    }
+
+    /* Resolve virtual bank addresses (for custom music) */
+    for (int i = 0; i < 0xf0; ++i)
+    {
+        DmaEntry dmaEntry;
+        AudioTableEntry* e;
+
+        e = gCustomAudioTables.bank->entries + i;
+        if (e->size && e->romAddr >= 0x08000000)
         {
             if (comboDmaLookup(&dmaEntry, e->romAddr))
             {

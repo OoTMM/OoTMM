@@ -121,6 +121,7 @@ type MusicFile = {
   seq: Buffer;
   bankIdOot: number | null;
   bankIdMm: number | null;
+  bankCustom: { meta: Buffer, data: Buffer } | null;
   filename: string;
   name: string;
   games: Game[];
@@ -216,9 +217,17 @@ function isMusicSuitable(entry: MusicEntry, file: MusicFile) {
   return true;
 }
 
+function mmrSampleBank(sb: number) {
+  if (sb === 0xff) {
+    return 0xff;
+  }
+  return sb + 8;
+}
+
 class MusicInjector {
   private musics: MusicFile[];
   private namesBuffer: Buffer;
+  private bankId: number;
 
   constructor(
     private writer: LogWriter,
@@ -229,6 +238,23 @@ class MusicInjector {
   ) {
     this.musics = [];
     this.namesBuffer = Buffer.alloc(256 * 2 * 48);
+    this.bankId = 0x60;
+  }
+
+  private isMaxBank() {
+    return this.bankId >= 0xf0;
+  }
+
+  private addCustomBank(meta: Buffer, data: Buffer) {
+    const bankId = this.bankId++;
+    const dataVrom = this.appendAudio(data);
+    const dataSize = data.length;
+    const prefix = toU32Buffer([dataVrom, dataSize]);
+    const fullmeta = Buffer.concat([prefix, meta]);
+    const customFile = this.builder.fileByNameRequired('custom/bank_table');
+    const offset = (bankId - 0x60) * 0x10;
+    fullmeta.copy(customFile.data, offset);
+    return bankId;
   }
 
   private registerName(seqId: number, name: string) {
@@ -298,7 +324,7 @@ class MusicInjector {
 
       /* Add the music */
       const seq = await seqFiles[0].async('nodebuffer');
-      const music: MusicFile = { type, seq, bankIdOot, bankIdMm, filename, name, games };
+      const music: MusicFile = { type, seq, bankIdOot, bankIdMm, bankCustom: null, filename, name, games };
       this.musics.push(music);
     }
   }
@@ -315,8 +341,24 @@ class MusicInjector {
         continue;
       }
 
-      /* Look for unsupported stuff */
-      const badFiles = musicZip.file(/\.z?(bank|bankmeta|sound|)$/);
+      /* Look for custom bank data */
+      const filesBank = musicZip.file(/\.z?bank$/);
+      if (filesBank.length > 1) {
+        this.monitor.warn(`Skipped music file ${f.name}: multiple bank files`);
+        continue;
+      }
+      const filesBankmeta = musicZip.file(/\.z?bankmeta$/);
+      if (filesBankmeta.length > 1) {
+        this.monitor.warn(`Skipped music file ${f.name}: multiple bankmeta files`);
+        continue;
+      }
+
+      if (filesBank.length !== filesBankmeta.length) {
+        this.monitor.warn(`Skipped music file ${f.name}: bank and bankmeta mismatch`);
+        continue;
+      }
+
+      const badFiles = musicZip.file(/\.z?sound$/);
       if (badFiles.length > 0) {
         this.monitor.warn(`Skipped music file ${f.name}: unsupported files found`);
         continue;
@@ -344,7 +386,6 @@ class MusicInjector {
         zseqFilename = zseqFilename.split('/').pop()!;
       }
       const bankIdRaw = zseqFilename.split('.')[0];
-      const bankIdMm = parseInt(bankIdRaw, 16);
 
       /* Add the music */
       const seq = await zseqFiles[0].async('nodebuffer');
@@ -353,13 +394,28 @@ class MusicInjector {
       const filename = f.name.split('/').pop()!;
       const name = saneName(filename.replace('.mmrs', ''));
 
+      let bankCustom: { meta: Buffer, data: Buffer } | null = null;
       let bankIdOot: number | null = null;
-      if (bankIdMm >= 2) {
-        bankIdOot = bankIdMm + 0x30;
+      let bankIdMm: number | null = null;
+
+      if (filesBank.length) {
+        const bank = await filesBank[0].async('nodebuffer');
+        const bankmeta = await filesBankmeta[0].async('nodebuffer');
+        const sampleBank1 = mmrSampleBank(bankmeta.readUInt8(0x02));
+        const sampleBank2 = mmrSampleBank(bankmeta.readUInt8(0x03));
+        const sampleBanks = Buffer.from([sampleBank1, sampleBank2]);
+        sampleBanks.copy(bankmeta, 0x02);
+        bankCustom = { meta: bankmeta, data: bank };
         games.push('oot');
+      } else {
+        bankIdMm = parseInt(bankIdRaw, 16);
+        if (bankIdMm >= 2) {
+          bankIdOot = bankIdMm + 0x30;
+          games.push('oot');
+        }
       }
 
-      const music: MusicFile = { type, seq, bankIdOot, bankIdMm, filename, name, games };
+      const music: MusicFile = { type, seq, bankIdOot, bankIdMm, bankCustom, filename, name, games };
       this.musics.push(music);
     }
   }
@@ -395,13 +451,18 @@ class MusicInjector {
   private async injectMusic(slot: string, music: MusicFile) {
     const entry = MUSIC[slot];
     const vrom = this.appendAudio(music.seq);
+    let customBankId: number | null = null;
+
+    if (music.bankCustom) {
+      customBankId = this.addCustomBank(music.bankCustom.meta, music.bankCustom.data);
+    }
 
     for (const id of entry.oot || []) {
-      await this.injectMusicMeta('oot', id, vrom, music.seq.length, music.bankIdOot!, music.name);
+      await this.injectMusicMeta('oot', id, vrom, music.seq.length, customBankId || music.bankIdOot!, music.name);
     }
 
     for (const id of entry.mm || []) {
-      await this.injectMusicMeta('mm', id, vrom, music.seq.length, music.bankIdMm!, music.name);
+      await this.injectMusicMeta('mm', id, vrom, music.seq.length, customBankId || music.bankIdMm!, music.name);
     }
   }
 
@@ -432,7 +493,11 @@ class MusicInjector {
       }
 
       const slot = slots.pop()!;
-      const candidates = Array.from(musics).filter(x => isMusicSuitable(MUSIC[slot], x));
+      let candidates = Array.from(musics).filter(x => isMusicSuitable(MUSIC[slot], x));
+      if (this.isMaxBank()) {
+        candidates = candidates.filter(x => x.bankCustom === null);
+      }
+
       if (candidates.length === 0) {
         continue;
       }
