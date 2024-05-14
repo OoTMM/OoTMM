@@ -541,11 +541,6 @@ class MusicInjector {
       await this.injectMusic(slot, music);
       const entry = MUSIC[slot];
       this.writer.write(`${entry.name}: ${music.name} (${music.filename})`);
-
-      /* DEBUG */
-      if (music.bankCustom && music.games[0] === 'oot') {
-        console.log(slot);
-      }
     }
     this.writer.unindent();
   }
