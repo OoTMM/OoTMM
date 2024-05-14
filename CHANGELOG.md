@@ -30,6 +30,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix phantom shields being equipped on age travel in some very rare cases.
 - Fix Tricks section in spoiler log.
 - Fix some actors (Part-Timer in Termina Field, Running Man, Punk Kid) not being properly filtered.
 - Fix rupee scaling affecting bank withdraws.

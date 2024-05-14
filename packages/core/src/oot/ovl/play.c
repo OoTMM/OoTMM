@@ -725,10 +725,15 @@ static void TimeTravelUpdateEquipment(void)
         prevAge->buttonItems[0] = ITEM_NONE;
     memcpy(&gSave.equips, nextAge, sizeof(*nextAge));
 
+    /* Fix sword */
     if (gSave.equips.buttonItems[0] == ITEM_NONE)
         EV_OOT_SET_SWORDLESS();
     else
         EV_OOT_UNSET_SWORDLESS();
+
+    /* Fix shield, if opposite age lost it */
+    if (gSave.equips.equipment.shields && !(gSave.inventory.equipment.shields & (1 << (gSave.equips.equipment.shields - 1))))
+        gSave.equips.equipment.shields = 0;
 }
 
 PATCH_FUNC(0x8006f804, TimeTravelUpdateEquipment);
