@@ -278,8 +278,24 @@ class MusicInjector {
         continue;
       }
 
-      /* Look for unsupported stuff */
-      const badFiles = musicZip.file(/\.z?(bank|bankmeta|sound|)$/);
+      /* Look for custom bank data */
+      const filesBank = musicZip.file(/\.z?bank$/);
+      if (filesBank.length > 1) {
+        this.monitor.warn(`Skipped music file ${f.name}: multiple bank files`);
+        continue;
+      }
+      const filesBankmeta = musicZip.file(/\.z?bankmeta$/);
+      if (filesBankmeta.length > 1) {
+        this.monitor.warn(`Skipped music file ${f.name}: multiple bankmeta files`);
+        continue;
+      }
+
+      if (filesBank.length !== filesBankmeta.length) {
+        this.monitor.warn(`Skipped music file ${f.name}: bank and bankmeta mismatch`);
+        continue;
+      }
+
+      const badFiles = musicZip.file(/\.z?sound$/);
       if (badFiles.length > 0) {
         this.monitor.warn(`Skipped music file ${f.name}: unsupported files found`);
         continue;
@@ -308,23 +324,37 @@ class MusicInjector {
       }
       const filename = f.name.split('/').pop()!;
       const name = saneName(meta[0]);
-      const bankIdOot = Number(meta[1]);
       const type = meta[2].toLowerCase();
       const games: Game[] = ['oot'];
       if (type !== 'bgm' && type !== 'fanfare') {
         this.monitor.warn(`Skipped music file ${f.name}: unknown type ${type}`);
         continue;
       }
+
+      let bankCustom: { meta: Buffer, data: Buffer } | null = null;
+      let bankIdOot: number | null = null;
       let bankIdMm: number | null = null;
 
-      if (bankIdOot >= 2) {
-        bankIdMm = bankIdOot + 0x30;
+      if (filesBank.length) {
+        const bank = await filesBank[0].async('nodebuffer');
+        const bankmeta = await filesBankmeta[0].async('nodebuffer');
+        if (bankmeta.length !== 0x08) {
+          this.monitor.warn(`Skipped music file ${f.name}: invalid bankmeta length`);
+          continue;
+        }
+        bankCustom = { meta: bankmeta, data: bank };
         games.push('mm');
+      } else {
+        bankIdOot = Number(meta[1]);
+        if (bankIdOot >= 2) {
+          bankIdMm = bankIdOot + 0x30;
+          games.push('mm');
+        }
       }
 
       /* Add the music */
       const seq = await seqFiles[0].async('nodebuffer');
-      const music: MusicFile = { type, seq, bankIdOot, bankIdMm, bankCustom: null, filename, name, games };
+      const music: MusicFile = { type, seq, bankIdOot, bankIdMm, bankCustom, filename, name, games };
       this.musics.push(music);
     }
   }
@@ -401,6 +431,10 @@ class MusicInjector {
       if (filesBank.length) {
         const bank = await filesBank[0].async('nodebuffer');
         const bankmeta = await filesBankmeta[0].async('nodebuffer');
+        if (bankmeta.length !== 0x08) {
+          this.monitor.warn(`Skipped music file ${f.name}: invalid bankmeta length`);
+          continue;
+        }
         const sampleBank1 = mmrSampleBank(bankmeta.readUInt8(0x02));
         const sampleBank2 = mmrSampleBank(bankmeta.readUInt8(0x03));
         const sampleBanks = Buffer.from([sampleBank1, sampleBank2]);
@@ -507,6 +541,11 @@ class MusicInjector {
       await this.injectMusic(slot, music);
       const entry = MUSIC[slot];
       this.writer.write(`${entry.name}: ${music.name} (${music.filename})`);
+
+      /* DEBUG */
+      if (music.bankCustom && music.games[0] === 'oot') {
+        console.log(slot);
+      }
     }
     this.writer.unindent();
   }
