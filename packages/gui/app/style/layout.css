@@ -4,11 +4,13 @@
 }
 
 .tab-bar-right {
-  flex: 10;
+  flex: 1;
+  height: 100vh;
+  overflow: auto;
 }
 
 .tab-bar-left {
-  flex: 1;
+  flex: 0;
   background: #1f1e1e;
   color: white;
   min-height: 100vh;
