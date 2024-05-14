@@ -250,7 +250,7 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
         return opt(comboHasSoulMm(GI_MM_SOUL_NPC_GURU_GURU));
     case AC_EN_DAIKU:
     case AC_EN_DAIKU2:
-        if(play->sceneId == SCE_MM_MAYOR_HOUSE && play->roomCtx.curRoom.id == 0x01) 
+        if(play->sceneId == SCE_MM_MAYOR_HOUSE && play->roomCtx.curRoom.id == 0x01)
             return opt(comboHasSoulMm(GI_MM_SOUL_NPC_MAYOR_DOTOUR));
         return opt(comboHasSoulMm(GI_MM_SOUL_NPC_CARPENTERS));
     case AC_EN_MS:
@@ -280,7 +280,7 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
     case AC_EN_MUTO:
     case AC_EN_HEISHI:
     case AC_EN_BAISEN:
-        if(play->sceneId == SCE_MM_MAYOR_HOUSE && play->roomCtx.curRoom.id != 0x01) 
+        if(play->sceneId == SCE_MM_MAYOR_HOUSE && play->roomCtx.curRoom.id != 0x01)
             return 1;
         /* Fallthrough */
     case AC_EN_DT:
@@ -339,6 +339,7 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
     case AC_EN_BOMJIMB:
     case AC_EN_BOMBERS:
     case AC_EN_BOMBERS2:
+    case AC_EN_BOMBAL:
         return opt(comboHasSoulMm(GI_MM_SOUL_NPC_BOMBERS));
     case AC_EN_RSN:
         return opt(comboHasSoulMm(GI_MM_SOUL_NPC_BOMBCHU_SHOPKEEPER));
@@ -350,7 +351,7 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
         default: UNREACHABLE();
         }
     case AC_EN_ANI:
-        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_ROOFTOP_MAN)); 
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_ROOFTOP_MAN));
     case AC_EN_GO:
         switch (variable)
         {
