@@ -5,6 +5,7 @@ import { toU32Buffer } from '../util';
 import { Game } from '../config';
 import { RomBuilder } from '../rom-builder';
 import { Monitor } from '../monitor';
+import { LogWriter } from '../util/log-writer';
 
 type MusicEntry = {
   type: 'bgm' | 'fanfare';
@@ -120,6 +121,7 @@ type MusicFile = {
   seq: Buffer;
   bankIdOot: number | null;
   bankIdMm: number | null;
+  filename: string;
   name: string;
   games: Game[];
 };
@@ -219,6 +221,7 @@ class MusicInjector {
   private namesBuffer: Buffer;
 
   constructor(
+    private writer: LogWriter,
     private monitor: Monitor,
     private builder: RomBuilder,
     private random: Random,
@@ -267,6 +270,7 @@ class MusicInjector {
       /* Parse the metadata */
       const metaRaw = await metaFile[0].async('text');
       const meta = metaRaw.split(/\r?\n/);
+      const filename = f.name.split('/').pop()!;
       const name = saneName(meta[0]);
       const bankIdOot = Number(meta[1]);
       const type = meta[2].toLowerCase();
@@ -284,7 +288,7 @@ class MusicInjector {
 
       /* Add the music */
       const seq = await seqFiles[0].async('nodebuffer');
-      const music: MusicFile = { type, seq, bankIdOot, bankIdMm, name, games };
+      const music: MusicFile = { type, seq, bankIdOot, bankIdMm, filename, name, games };
       this.musics.push(music);
     }
   }
@@ -330,8 +334,8 @@ class MusicInjector {
       const seq = await zseqFiles[0].async('nodebuffer');
       const games: Game[] = ['mm'];
       const type = [8, 9, 10].some(x => categories.includes(x)) ? 'fanfare' : 'bgm';
-      const basename = f.name.split('/').pop()!;
-      const name = saneName(basename.replace('.mmrs', ''));
+      const filename = f.name.split('/').pop()!;
+      const name = saneName(filename.replace('.mmrs', ''));
 
       let bankIdOot: number | null = null;
       if (bankIdMm >= 2) {
@@ -339,7 +343,7 @@ class MusicInjector {
         games.push('oot');
       }
 
-      const music: MusicFile = { type, seq, bankIdOot, bankIdMm, name, games };
+      const music: MusicFile = { type, seq, bankIdOot, bankIdMm, filename, name, games };
       this.musics.push(music);
     }
   }
@@ -405,6 +409,7 @@ class MusicInjector {
     const slots = shuffle(this.random, Object.keys(MUSIC));
     const musics = new Set(this.musics);
 
+    this.writer.indent('Music');
     for (;;) {
       if (musics.size === 0 || slots.length === 0) {
         break;
@@ -419,7 +424,10 @@ class MusicInjector {
       const music = sample(this.random, candidates);
       musics.delete(music);
       await this.injectMusic(slot, music);
+      const entry = MUSIC[slot];
+      this.writer.write(`${entry.name}: ${music.name} (${music.filename})`);
     }
+    this.writer.unindent();
   }
 
   async run() {
@@ -438,7 +446,7 @@ class MusicInjector {
   }
 }
 
-export async function randomizeMusic(monitor: Monitor, builder: RomBuilder, random: Random, data: Buffer) {
-  const injector = new MusicInjector(monitor, builder, random, data);
+export async function randomizeMusic(writer: LogWriter, monitor: Monitor, builder: RomBuilder, random: Random, data: Buffer) {
+  const injector = new MusicInjector(writer, monitor, builder, random, data);
   await injector.run();
 }

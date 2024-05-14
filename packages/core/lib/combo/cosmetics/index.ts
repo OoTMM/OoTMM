@@ -13,6 +13,7 @@ import { toU32Buffer } from '../util';
 import { enableModelOotLinkAdult, enableModelOotLinkChild } from './model';
 import { randomizeMusic } from './music';
 import { Monitor } from '../monitor';
+import { LogWriter } from '../util/log-writer';
 
 export { makeCosmetics } from './util';
 export { COSMETICS } from './data';
@@ -58,6 +59,7 @@ function resolveColor(random: Random, c: ColorArg, auto?: () => number | null): 
 
 class CosmeticsPass {
   private assetsPromise: Promise<Assets> | null;
+  private logWriter: LogWriter;
 
   constructor(
     private monitor: Monitor,
@@ -66,6 +68,7 @@ class CosmeticsPass {
     private meta: any,
   ) {
     this.assetsPromise = null;
+    this.logWriter = new LogWriter();
   }
 
   private asset(key: keyof Assets): Promise<Buffer> {
@@ -297,7 +300,7 @@ class CosmeticsPass {
     }
   }
 
-  async run() {
+  async run(): Promise<string | null> {
     const c = this.opts.cosmetics;
 
     /* Create a random number generator */
@@ -362,14 +365,22 @@ class CosmeticsPass {
     if (c.music) {
       const data = await this.getPathBuffer(c.music);
       if (data)
-        await randomizeMusic(this.monitor, this.builder, random, data);
+        await randomizeMusic(this.logWriter, this.monitor, this.builder, random, data);
     }
-    if (c.musicNames)
+    if (c.musicNames) {
       this.patchSymbol('MUSIC_NAMES', Buffer.from([0x01]));
+    }
+
+    const log = this.logWriter.emit();
+    if (log !== '') {
+      return log;
+    } else {
+      return null;
+    }
   }
 }
 
-export async function cosmetics(monitor: Monitor, opts: Options, builder: RomBuilder, meta: any) {
+export async function cosmetics(monitor: Monitor, opts: Options, builder: RomBuilder, meta: any): Promise<string | null> {
   const x = new CosmeticsPass(monitor, opts, builder, meta);
-  await x.run();
+  return x.run();
 }

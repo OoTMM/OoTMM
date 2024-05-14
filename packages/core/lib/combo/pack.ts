@@ -94,7 +94,13 @@ type PackArgs = {
   patchfile: Patchfile;
   addresses: GameAddresses;
 };
-export async function pack(args: PackArgs) {
+
+type PackOutput = {
+  rom: Buffer;
+  cosmeticLog: string | null;
+}
+
+export async function pack(args: PackArgs): Promise<PackOutput> {
   const { monitor, roms, patchfile } = args;
   const romBuilder = new RomBuilder();
 
@@ -135,7 +141,7 @@ export async function pack(args: PackArgs) {
 
   /* Apply cosmetics */
   monitor.log("Pack: Cosmetics");
-  await cosmetics(monitor, args.opts, romBuilder, (patchfile.meta || {}).cosmetics);
+  const cosmeticLog = await cosmetics(monitor, args.opts, romBuilder, (patchfile.meta || {}).cosmetics);
 
   /* Build the final ROM */
   monitor.log("Pack: Finishing up ROM");
@@ -143,5 +149,5 @@ export async function pack(args: PackArgs) {
   const sizeMB = (size / 1024 / 1024).toFixed(2);
   monitor.debug(`Pack: ROM size: ${sizeMB}MiB`);
 
-  return rom;
+  return { rom, cosmeticLog };
 }

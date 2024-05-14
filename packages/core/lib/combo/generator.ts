@@ -101,11 +101,13 @@ export class Generator {
     const playerNumber = (id: number) => patchfiles.length === 1 ? undefined : id + 1;
 
     /* Build ROM(s) */
-    let packedRoms: Buffer[] = [];
     if (patchfiles.length === 1 || this.opts.debug) {
-      packedRoms = await Promise.all(patchfiles.map(x => pack({ opts: this.opts, monitor: this.monitor, roms, patchfile: x, addresses })));
-      for (let i = 0; i < packedRoms.length; i++) {
-        files.push(makeFile({ hash: hashFileName, data: packedRoms[i], mime: 'application/octet-stream', world: playerNumber(i), ext: 'z64' }));
+      for (let i = 0; i < patchfiles.length; i++) {
+        const { rom, cosmeticLog } = await pack({ opts: this.opts, monitor: this.monitor, roms, patchfile: patchfiles[i], addresses });
+        files.push(makeFile({ hash: hashFileName, data: rom, mime: 'application/octet-stream', world: playerNumber(i), ext: 'z64' }));
+        if (cosmeticLog) {
+          files.push(makeFile({ name: 'Cosmetics', hash: hashFileName, data: cosmeticLog, mime: 'text/plain', world: playerNumber(i), ext: 'txt' }));
+        }
       }
     }
 

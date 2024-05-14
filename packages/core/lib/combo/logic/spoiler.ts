@@ -15,12 +15,12 @@ import { Region, regionData } from './regions';
 import { PlayerItem, PlayerItems } from '../items';
 import { exportSettings } from '../settings/string';
 import { ENTRANCES } from '@ootmm/data';
+import { LogWriter } from '../util/log-writer';
 
 const VERSION = process.env.VERSION || 'XXX';
 
 export class LogicPassSpoiler {
-  private buffer: string[];
-  private indentLevel: number;
+  private writer: LogWriter;
   private isMulti: boolean;
   private worlds: number;
 
@@ -36,50 +36,20 @@ export class LogicPassSpoiler {
       startingItems: PlayerItems;
     }
   ) {
-    this.buffer = [];
-    this.indentLevel = 0;
+    this.writer = new LogWriter();
     this.isMulti = this.state.settings.mode === 'multi';
     this.worlds = this.isMulti ? this.state.settings.players : 1;
   }
 
-  private indent(str?: string) {
-    if (str !== undefined) {
-      this.write(str);
-    }
-    this.indentLevel++;
-  }
-
-  private unindent(str?: string) {
-    this.indentLevel--;
-    if (this.indentLevel < 0) {
-      throw new Error('unindent() called too many times');
-    }
-    if (str !== undefined) {
-      this.write(str);
-    }
-  }
-
-  private write(str: string) {
-    if (str === '') {
-      this.buffer.push('');
-      return;
-    }
-    this.buffer.push('  '.repeat(this.indentLevel) + str);
-  }
-
-  private writeSectionHeader() {
-    this.buffer.push('='.repeat(75));
-  }
-
   private writeHeader() {
-    this.write(`Seed: ${this.state.opts.seed}`);
-    this.write(`Version: ${VERSION}`);
-    this.write(`SettingsString: ${exportSettings(this.state.settings)}`);
-    this.write('');
+    this.writer.write(`Seed: ${this.state.opts.seed}`);
+    this.writer.write(`Version: ${VERSION}`);
+    this.writer.write(`SettingsString: ${exportSettings(this.state.settings)}`);
+    this.writer.write('');
   }
 
   private writeSettings() {
-    this.indent('Settings');
+    this.writer.indent('Settings');
     for (const s in this.state.settings) {
       if (s === 'startingItems' || s === 'tricks' || s === 'glitches' || s === 'junkLocations' || s === 'dungeon' || s === 'specialConds' || s === 'plando' || s === 'hints') {
         continue;
@@ -95,22 +65,22 @@ export class LogicPassSpoiler {
       if (data && data.cond && !data.cond(this.state.settings)) {
         continue;
       }
-      this.write(`${s}: ${v}`);
+      this.writer.write(`${s}: ${v}`);
     }
-    this.unindent('');
+    this.writer.unindent('');
   }
 
   private writeSpecialConds() {
-    this.indent('Special Conditions');
+    this.writer.indent('Special Conditions');
     for (const s in this.state.settings.specialConds) {
       const cond = this.state.settings.specialConds[s as keyof typeof this.state.settings.specialConds];
-      this.indent(`${s}:`);
+      this.writer.indent(`${s}:`);
       for (const key in cond) {
-        this.write(`${key}: ${cond[key as keyof typeof cond]}`);
+        this.writer.write(`${key}: ${cond[key as keyof typeof cond]}`);
       }
-      this.unindent();
+      this.writer.unindent();
     }
-    this.unindent('');
+    this.writer.unindent('');
   }
 
   private writeTricks() {
@@ -118,11 +88,11 @@ export class LogicPassSpoiler {
     if (tricks.length === 0) {
       return;
     }
-    this.indent('Tricks');
+    this.writer.indent('Tricks');
     for (const trick of tricks) {
-      this.write(`${TRICKS[trick as TrickKey].name}`);
+      this.writer.write(`${TRICKS[trick as TrickKey].name}`);
     }
-    this.unindent('');
+    this.writer.unindent('');
   }
 
   private writeGlitches() {
@@ -130,11 +100,11 @@ export class LogicPassSpoiler {
     if (glitches.length === 0) {
       return;
     }
-    this.indent('Glitches');
+    this.writer.indent('Glitches');
     for (const glitch of glitches) {
-      this.write(`${GLITCHES[glitch as Glitch]}`);
+      this.writer.write(`${GLITCHES[glitch as Glitch]}`);
     }
-    this.unindent('');
+    this.writer.unindent('');
   }
 
   private writeStartingItems() {
@@ -143,16 +113,16 @@ export class LogicPassSpoiler {
       return;
     }
 
-    this.indent('Starting Items');
+    this.writer.indent('Starting Items');
     for (let playerId = 0; playerId < this.state.settings.players; ++playerId) {
-      if (this.isMulti) this.indent(`Player ${playerId + 1}`);
+      if (this.isMulti) this.writer.indent(`Player ${playerId + 1}`);
       const items = new Map(Array.from(startingItems.entries()).filter(([x, _]) => x.player === playerId));
       for (const [item, count] of items) {
-        this.write(`${itemName(item.item.id)}: ${count}`);
+        this.writer.write(`${itemName(item.item.id)}: ${count}`);
       }
-      if (this.isMulti) this.unindent('');
+      if (this.isMulti) this.writer.unindent('');
     }
-    this.unindent('');
+    this.writer.unindent('');
   }
 
   private writeJunkLocations() {
@@ -161,11 +131,11 @@ export class LogicPassSpoiler {
       return;
     }
 
-    this.indent('Junk Locations');
+    this.writer.indent('Junk Locations');
     for (const location of junkLocations) {
-      this.write(`${location}`);
+      this.writer.write(`${location}`);
     }
-    this.unindent('');
+    this.writer.unindent('');
   }
 
   private writeMQ() {
@@ -177,21 +147,21 @@ export class LogicPassSpoiler {
       return;
     }
 
-    this.indent('MQ Dungeons');
+    this.writer.indent('MQ Dungeons');
     for (let i = 0; i < worlds.length; ++i) {
       if (worlds.length > 1) {
-        this.indent(`World ${i + 1}`);
+        this.writer.indent(`World ${i + 1}`);
       }
 
       for (const d of worlds[i].mq) {
-        this.write(`${d}`);
+        this.writer.write(`${d}`);
       }
 
       if (worlds.length > 1) {
-        this.unindent('');
+        this.writer.unindent('');
       }
     }
-    this.unindent('');
+    this.writer.unindent('');
   }
 
   private writeWorldFlags() {
@@ -200,33 +170,33 @@ export class LogicPassSpoiler {
       worlds = [this.state.worlds[0]];
     }
 
-    this.indent('World Flags');
+    this.writer.indent('World Flags');
     for (let i = 0; i < worlds.length; ++i) {
       const world = worlds[i];
       if (worlds.length > 1) {
-        this.indent(`World ${i + 1}`);
+        this.writer.indent(`World ${i + 1}`);
       }
 
       for (const s of WORLD_FLAGS) {
         const v = world.resolvedFlags[s as keyof typeof world.resolvedFlags];
         if (v.value === 'specific') {
-          this.indent(`${s}:`);
+          this.writer.indent(`${s}:`);
           const setting = SETTINGS.find(x => x.key === v.setting)!;
           const values = ((setting as any).values as any[]).filter(x => v.has(x.value));
           for (const value of values) {
-            this.write(`- ${value.value}`);
+            this.writer.write(`- ${value.value}`);
           }
-          this.unindent('');
+          this.writer.unindent('');
         } else {
-          this.write(`${s}: ${v.value}`);
+          this.writer.write(`${s}: ${v.value}`);
         }
       }
 
       if (worlds.length > 1) {
-        this.unindent('');
+        this.writer.unindent('');
       }
     }
-    this.unindent('');
+    this.writer.unindent('');
   }
 
   private writePreCompleted() {
@@ -238,21 +208,21 @@ export class LogicPassSpoiler {
       return;
     }
 
-    this.indent('Pre-Completed Dungeons');
+    this.writer.indent('Pre-Completed Dungeons');
     for (let i = 0; i < worlds.length; ++i) {
       if (worlds.length > 1) {
-        this.indent(`World ${i + 1}`);
+        this.writer.indent(`World ${i + 1}`);
       }
 
       for (const d of worlds[i].preCompleted) {
-        this.write(`${d}`);
+        this.writer.write(`${d}`);
       }
 
       if (worlds.length > 1) {
-        this.unindent('');
+        this.writer.unindent('');
       }
     }
-    this.unindent('');
+    this.writer.unindent('');
   }
 
   private writeEntrances() {
@@ -264,11 +234,11 @@ export class LogicPassSpoiler {
       return;
     }
 
-    this.indent('Entrances');
+    this.writer.indent('Entrances');
     for (let i = 0; i < worlds.length; ++i) {
       const world = worlds[i];
       if (worlds.length > 1) {
-        this.indent(`World ${i + 1}`);
+        this.writer.indent(`World ${i + 1}`);
       }
 
       const niceEntrances = new Array();
@@ -278,34 +248,34 @@ export class LogicPassSpoiler {
         niceEntrances.push(`${srcEntry.from} to ${srcEntry.to} (${src}) -> ${dstEntry.to} from ${dstEntry.from} (${dst})`);
       }
       for (const niceE of niceEntrances.sort()) {
-        this.write(`${niceE}`);
+        this.writer.write(`${niceE}`);
       }
 
       if (worlds.length > 1) {
-        this.unindent('');
+        this.writer.unindent('');
       }
     }
-    this.unindent('');
+    this.writer.unindent('');
   }
 
   private writePlando() {
     const { plando } = this.state.settings;
     if (Object.keys(plando.locations).length >= 1) {
-      this.indent('Plando');
+      this.writer.indent('Plando');
       for (let loc in plando.locations) {
         let item = plando.locations[loc];
         if (item)
-          this.write(`${loc}: ${itemName(item)}`)
+          this.writer.write(`${loc}: ${itemName(item)}`)
       }
-      this.unindent('');
+      this.writer.unindent('');
     }
   }
 
   private writeHints() {
     const globalHints = this.state.hints;
-    this.indent('Hints');
+    this.writer.indent('Hints');
     for (let worldId = 0; worldId < this.worlds; ++worldId) {
-      if (this.isMulti) this.indent(`World ${worldId + 1}:`);
+      if (this.isMulti) this.writer.indent(`World ${worldId + 1}:`);
       const hints = globalHints[worldId];
       const gossipStones = Object.entries(hints.gossip);
       const gossipsPaths = gossipStones.filter(stone => stone[1].type === 'path').sort() as [string, HintGossipPath][];
@@ -318,53 +288,53 @@ export class LogicPassSpoiler {
           const hints = gossipsPaths.filter(x => x[1].path === type);
           if (hints.length === 0) continue;
           const name = (HINTS_PATHS as any)[type].name;
-          this.indent(`${name}:`);
+          this.writer.indent(`${name}:`);
           for (const [stone, hint] of hints) {
-            this.write(stone);
-            this.write(`  ${this.regionName(hint.region)}    ${this.locationName(hint.location)} - ${this.itemName(this.state.items.get(hint.location)!)}`);
+            this.writer.write(stone);
+            this.writer.write(`  ${this.regionName(hint.region)}    ${this.locationName(hint.location)} - ${this.itemName(this.state.items.get(hint.location)!)}`);
           }
-          this.unindent('');
+          this.writer.unindent('');
         }
       }
 
       if (gossipsFoolish.length > 0) {
-        this.indent('Foolish:');
+        this.writer.indent('Foolish:');
         for (const [stone, hint] of gossipsFoolish) {
-          this.write(stone);
-          this.write(`  ${this.regionName(hint.region)}`);
+          this.writer.write(stone);
+          this.writer.write(`  ${this.regionName(hint.region)}`);
         }
-        this.unindent('');
+        this.writer.unindent('');
       }
 
       if (gossipsItemExact.length > 0) {
-        this.indent('Specific Hints:');
+        this.writer.indent('Specific Hints:');
         for (const [stone, hint] of gossipsItemExact) {
           const world = this.state.worlds[hint.world];
-          this.write(stone);
-          this.write(`  ${world.checkHints[hint.check].join(', ')} (${hint.items.map(x => this.itemName(x)).join(', ')})`);
+          this.writer.write(stone);
+          this.writer.write(`  ${world.checkHints[hint.check].join(', ')} (${hint.items.map(x => this.itemName(x)).join(', ')})`);
         }
-        this.unindent('');
+        this.writer.unindent('');
       }
 
       if (gossipsItemRegion.length > 0) {
-        this.indent('Regional Hints:');
+        this.writer.indent('Regional Hints:');
         for (const [stone, hint] of gossipsItemRegion) {
-          this.write(stone);
-          this.write(`  ${this.regionName(hint.region)} (${this.itemName(hint.item)})`);
+          this.writer.write(stone);
+          this.writer.write(`  ${this.regionName(hint.region)} (${this.itemName(hint.item)})`);
         }
-        this.unindent('');
+        this.writer.unindent('');
       }
-      this.write('');
-      this.indent('Foolish Regions:');
+      this.writer.write('');
+      this.writer.indent('Foolish Regions:');
       const foolish = sortBy([...hints.foolish.keys()], x => -hints.foolish.get(x)!);
       for (const f of foolish) {
         const weight = hints.foolish.get(f);
-        this.write(`${regionName(f)}: ${weight}`);
+        this.writer.write(`${regionName(f)}: ${weight}`);
       }
-      this.unindent();
-      if (this.isMulti) this.unindent('');
+      this.writer.unindent();
+      if (this.isMulti) this.writer.unindent('');
     }
-    this.unindent('');
+    this.writer.unindent('');
   }
 
   private locationName(location: Location) {
@@ -396,10 +366,10 @@ export class LogicPassSpoiler {
   private writeRaw() {
     const { worlds, items: placement, settings } = this.state;
     const allLocsCount = worlds.map(x => x.locations.size).reduce((a, b) => a + b, 0);
-    this.writeSectionHeader();
-    this.indent(`Location List (${allLocsCount})`);
+    this.writer.writeSectionHeader();
+    this.writer.indent(`Location List (${allLocsCount})`);
     for (let i = 0; i < this.state.settings.players; ++i) {
-      if (this.isMulti) this.indent(`World ${i+1} (${worlds[i].locations.size})`);
+      if (this.isMulti) this.writer.indent(`World ${i+1} (${worlds[i].locations.size})`);
       const world = worlds[i];
       const regionNames = new Set(Object.values(world.regions));
       const dungeonLocations = Object.values(world.dungeons).reduce((acc, x) => new Set([...acc, ...x]));
@@ -408,30 +378,30 @@ export class LogicPassSpoiler {
           .filter(location => world.regions[location] === region)
           .filter(location => isShuffled(settings, world, location, dungeonLocations))
           .map(loc => `${loc}: ${this.itemName(placement.get(makeLocation(loc, i))!)}`);
-        this.indent(`${regionName(region)} (${regionalLocations.length}):`);
+        this.writer.indent(`${regionName(region)} (${regionalLocations.length}):`);
         for (const loc of regionalLocations) {
-          this.write(loc);
+          this.writer.write(loc);
         }
-        this.unindent('');
+        this.writer.unindent('');
       }
-      if (this.isMulti) this.unindent('');
+      if (this.isMulti) this.writer.unindent('');
     }
-    this.unindent('');
+    this.writer.unindent('');
   }
 
   private writeSpheres() {
     const { spheres } = this.state.analysis;
-    this.writeSectionHeader();
-    this.indent('Spheres');
+    this.writer.writeSectionHeader();
+    this.writer.indent('Spheres');
     for (const i in spheres) {
-      this.indent(`Sphere ${i}`);
+      this.writer.indent(`Sphere ${i}`);
       const sphere = spheres[i].map(x => `${this.locationName(x)}: ${this.itemName(this.state.items.get(x)!)}`).sort();
       for (const loc of sphere) {
-        this.write(loc);
+        this.writer.write(loc);
       }
-      this.unindent('');
+      this.writer.unindent('');
     }
-    this.unindent();
+    this.writer.unindent();
   }
 
   run() {
@@ -458,7 +428,7 @@ export class LogicPassSpoiler {
       this.writeSpheres();
     }
     this.writeRaw();
-    const log = this.buffer.join("\n");
-    return { log };
+
+    return { log: this.writer.emit() };
   };
 }
