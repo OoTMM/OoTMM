@@ -107,7 +107,9 @@ export async function generate(files: { oot: Buffer, mm: Buffer, patch?: Buffer 
   return result.data;
 }
 
-async function makeZip(files: ResultFile[], hash: string): Promise<ResultFile> {
+export async function archive(result: GeneratorOutput): Promise<ResultFile> {
+  const { hash, files } = result;
+
   if (files.length === 1) {
     return files[0];
   }
@@ -120,35 +122,6 @@ async function makeZip(files: ResultFile[], hash: string): Promise<ResultFile> {
   });
   const f = await zip.generateAsync({ type: 'blob', compression: 'DEFLATE' });
   return { name, mime, data: f };
-}
-
-function appendHash(str: string, hash: string | null, ext: string) {
-  if (hash) {
-    return `${str}-${hash}.${ext}`;
-  }
-  return `${str}.${ext}`;
-};
-
-export async function archive(result: GeneratorOutput): Promise<ResultFile> {
-  const { hash, patches, roms, log } = result;
-  const srcFiles: ResultFile[] = [];
-  if (log) srcFiles.push({ name: appendHash('OoTMM-Spoiler', hash, 'txt'), mime: 'text/plain', data: log });
-  if (patches && patches.length === 1) {
-    srcFiles.push({ name: appendHash('OoTMM-Patch', hash, 'ootmm'), mime: 'application/octet-stream', data: patches[0] });
-  } else {
-    patches.forEach((patch, i) => {
-      srcFiles.push({ name: appendHash(`OoTMM-Patch-p${i+1}`, hash, 'ootmm'), mime: 'application/octet-stream', data: patch });
-    });
-  }
-  if (roms && roms.length === 1) {
-    srcFiles.push({ name: appendHash('OoTMM', hash, 'z64'), mime: 'application/octet-stream', data: roms[0] });
-  } else {
-    roms.forEach((rom, i) => {
-      srcFiles.push({ name: appendHash(`OoTMM-p${i+1}`, hash, 'z64'), mime: 'application/octet-stream', data: rom });
-    });
-  }
-
-  return makeZip(srcFiles, hash);
 }
 
 export function restrictItemsByPool(items: Items, pool: Items) {
