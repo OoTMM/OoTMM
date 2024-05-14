@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add the ability to use music with custom banks.
+- Add the ability to use custom fanfares.
 - Add fanfares for cross-game items.
 - Add a setting to display custom music names in-game.
 - Add Free Scarecrow for MM.
