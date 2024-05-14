@@ -41,3 +41,19 @@ PATCH_START _Interface_UpdateButtonsPart2
   j Interface_UpdateButtonsPart2Wrapper
    nop
 PATCH_END
+
+/* Handle swordless better */
+PATCH_START 0x8006e400
+  nop
+  nop
+PATCH_END
+
+/* Allow using bow on epona while swordless */
+PATCH_START 0x8006ea14
+  nop
+PATCH_END
+
+PATCH_START 0x8006e450
+  nop
+  nop
+PATCH_END

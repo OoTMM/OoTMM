@@ -183,4 +183,8 @@ void Interface_UpdateButtonsPart2Wrapper(GameState_Play* play)
         ptr = &gSave.equips.buttonItems[i + 1];
         *ptr = buttons[i];
     }
+
+    /* Fix for wrong tempB restores */
+    if (EV_OOT_IS_SWORDLESS() && gSave.equips.buttonItems[0] == 0)
+        gSave.equips.buttonItems[0] = ITEM_NONE;
 }
