@@ -38,18 +38,18 @@
 "midnight": "between(NIGHT1_AM_12_00, DAY2_AM_06_00) || between(NIGHT2_AM_12_00, DAY3_AM_06_00) || after(NIGHT3_AM_12_00)"
 
 # Region State
-"is_winter": "flag_set(MM_REGION_NORTH_CURSED) && flag_check_unset(MM_REGION_NORTH_CLEARED)"
-"is_spring": "flag_set(MM_REGION_NORTH_CLEARED) && flag_check_unset(MM_REGION_NORTH_CURSED) && event(BOSS_SNOWHEAD)"
-"is_spring_or_winter": "flag_check_unset(MM_REGION_NORTH_CLEARED) && flag_check_unset(MM_REGION_NORTH_CURSED)" # Used for hot water in edge-cases
+"is_winter": "flag_on(MM_REGION_NORTH_CURSED) && flag_off(MM_REGION_NORTH_CLEARED)"
+"is_spring": "flag_on(MM_REGION_NORTH_CLEARED) && flag_off(MM_REGION_NORTH_CURSED) && event(BOSS_SNOWHEAD)"
+"is_spring_or_winter": "flag_off(MM_REGION_NORTH_CLEARED) && flag_off(MM_REGION_NORTH_CURSED)" # Used for hot water in edge-cases
 
-"is_swamp_poisoned": "flag_set(MM_REGION_SWAMP_CURSED) && flag_check_unset(MM_REGION_SWAMP_CLEARED)"
-"is_swamp_cleared": "flag_set(MM_REGION_SWAMP_CLEARED) && flag_check_unset(MM_REGION_SWAMP_CURSED) && event(BOSS_WOODFALL)"
+"is_swamp_poisoned": "flag_on(MM_REGION_SWAMP_CURSED) && flag_off(MM_REGION_SWAMP_CLEARED)"
+"is_swamp_cleared": "flag_on(MM_REGION_SWAMP_CLEARED) && flag_off(MM_REGION_SWAMP_CURSED) && event(BOSS_WOODFALL)"
 
-"is_ocean_cursed": "flag_set(MM_REGION_OCEAN_CURSED) && flag_check_unset(MM_REGION_OCEAN_CLEARED)"
-"is_ocean_cleared": "flag_set(MM_REGION_OCEAN_CLEARED) && flag_check_unset(MM_REGION_OCEAN_CURSED) && event(BOSS_GREAT_BAY)"
+"is_ocean_cursed": "flag_on(MM_REGION_OCEAN_CURSED) && flag_off(MM_REGION_OCEAN_CLEARED)"
+"is_ocean_cleared": "flag_on(MM_REGION_OCEAN_CLEARED) && flag_off(MM_REGION_OCEAN_CURSED) && event(BOSS_GREAT_BAY)"
 
-"is_valley_cursed": "flag_set(MM_REGION_VALLEY_CURSED) && flag_check_unset(MM_REGION_VALLEY_CLEARED)"
-"is_valley_cleared": "flag_set(MM_REGION_VALLEY_CLEARED) && flag_check_unset(MM_REGION_VALLEY_CURSED) && event(BOSS_STONE_TOWER)"
+"is_valley_cursed": "flag_on(MM_REGION_VALLEY_CURSED) && flag_off(MM_REGION_VALLEY_CLEARED)"
+"is_valley_cleared": "flag_on(MM_REGION_VALLEY_CLEARED) && flag_off(MM_REGION_VALLEY_CURSED) && event(BOSS_STONE_TOWER)"
 
 # Age
 "is_child": "!setting(crossAge) || age(child)"

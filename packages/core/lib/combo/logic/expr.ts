@@ -78,7 +78,8 @@ type ExprRestrictions = {
   };
   mmTime: number;
   mmTime2: number;
-  constraintFlags: number;
+  flagsOn: number;
+  flagsOff: number;
 };
 
 export const defaultRestrictions = (): ExprRestrictions => ({
@@ -88,7 +89,8 @@ export const defaultRestrictions = (): ExprRestrictions => ({
   },
   mmTime: 0,
   mmTime2: 0,
-  constraintFlags: 0,
+  flagsOn: 0,
+  flagsOff: 0,
 });
 
 export const maxRestrictions = (): ExprRestrictions => ({
@@ -98,7 +100,8 @@ export const maxRestrictions = (): ExprRestrictions => ({
   },
   mmTime: 0xffffffff,
   mmTime2: 0xffffffff,
-  constraintFlags: 0xffffffff,
+  flagsOn: 0xffffffff,
+  flagsOff: 0xffffffff,
 });
 
 export const isDefaultRestrictions = (r: ExprRestrictions): boolean => {
@@ -106,11 +109,15 @@ export const isDefaultRestrictions = (r: ExprRestrictions): boolean => {
     r.oot.night === false &&
     r.mmTime === 0 &&
     r.mmTime2 === 0 &&
-    r.constraintFlags === 0;
+    r.flagsOn === 0 &&
+    r.flagsOff === 0;
 };
 
 function isRestrictionImpossible(r: ExprRestrictions): boolean {
   if (r.mmTime === 0xffffffff && r.mmTime2 === 0xffffffff) {
+    return true;
+  }
+  if (r.flagsOn & r.flagsOff) {
     return true;
   }
   return false;
@@ -132,7 +139,8 @@ export type AreaData = {
   };
   mmTime: number;
   mmTime2: number;
-  constraintFlags: number;
+  flagsOn: number;
+  flagsOff: number;
 };
 
 type State = {
@@ -159,7 +167,8 @@ export const exprRestrictionsAnd = (exprs: ExprResult[]): ExprRestrictions => {
     restrictions.oot.night = restrictions.oot.night || expr.restrictions.oot.night;
     restrictions.mmTime = (restrictions.mmTime | expr.restrictions.mmTime) >>> 0;
     restrictions.mmTime2 = (restrictions.mmTime2 | expr.restrictions.mmTime2) >>> 0;
-    restrictions.constraintFlags = (restrictions.constraintFlags | expr.restrictions.constraintFlags) >>> 0;
+    restrictions.flagsOn = (restrictions.flagsOn | expr.restrictions.flagsOn) >>> 0;
+    restrictions.flagsOff = (restrictions.flagsOff | expr.restrictions.flagsOff) >>> 0;
   }
 
   return restrictions;
@@ -175,7 +184,8 @@ export const exprRestrictionsOr = (exprs: ExprResult[]): ExprRestrictions => {
     restrictions.oot.night = restrictions.oot.night && expr.restrictions.oot.night;
     restrictions.mmTime = (restrictions.mmTime & expr.restrictions.mmTime) >>> 0;
     restrictions.mmTime2 = (restrictions.mmTime2 & expr.restrictions.mmTime2) >>> 0;
-    restrictions.constraintFlags = (restrictions.constraintFlags & expr.restrictions.constraintFlags) >>> 0;
+    restrictions.flagsOn = (restrictions.flagsOn & expr.restrictions.flagsOn) >>> 0;
+    restrictions.flagsOff = (restrictions.flagsOff & expr.restrictions.flagsOff) >>> 0;
   }
 
   return restrictions;
@@ -516,35 +526,43 @@ class ExprPrice extends Expr {
   }
 }
 
-class ExprFlagSet extends Expr {
+class ExprFlagOn extends Expr {
   readonly result: ExprResult;
+  readonly flagBit: number;
 
   constructor(flag: number) {
-    super(`FLAG_SET(${flag})`);
+    super(`FLAG_ON(${flag})`);
+    this.flagBit = ((1 << flag) >>> 0);
     this.result = { ...RESULT_TRUE };
     this.result.restrictions = defaultRestrictions();
-    this.result.restrictions.constraintFlags = ((1 << flag) >>> 0);
+    this.result.restrictions.flagsOn = this.flagBit;
   }
 
-  eval(_state: State): ExprResult {
+  eval(state: State): ExprResult {
+    if (state.areaData.flagsOff & this.flagBit) {
+      return RESULT_FALSE;
+    }
     return this.result;
   }
-}
+};
 
-class ExprFlagCheckUnset extends Expr {
-  readonly flag: number;
+class ExprFlagOff extends Expr {
+  readonly result: ExprResult;
+  readonly flagBit: number;
 
   constructor(flag: number) {
-    super(`FLAG_CHECK(${flag})`);
-    this.flag = ((1 << flag) >>> 0);
+    super(`FLAG_OFF(${flag})`);
+    this.flagBit = ((1 << flag) >>> 0);
+    this.result = { ...RESULT_TRUE };
+    this.result.restrictions = defaultRestrictions();
+    this.result.restrictions.flagsOff = this.flagBit;
   }
 
-  eval(state: State) {
-    if (state.areaData.constraintFlags & this.flag) {
+  eval(state: State): ExprResult {
+    if (state.areaData.flagsOn & this.flagBit) {
       return RESULT_FALSE;
-    } else {
-      return RESULT_TRUE;
     }
+    return this.result;
   }
 };
 
@@ -805,18 +823,18 @@ export const exprFish = (ageAndType: string, minPounds: number, maxPounds: numbe
   return exprOr(exprs);
 };
 
-export const exprFlagSet = (flag: string): Expr => {
+export const exprFlagOn = (flag: string): Expr => {
   const index = CONSTRAINT_FLAGS.indexOf(flag);
   if (index === -1) {
     throw new Error(`Unknown constraint flag: ${flag}`);
   }
-  return exprMemo(new ExprFlagSet(index));
+  return exprMemo(new ExprFlagOn(index));
 }
 
-export const exprFlagCheckUnset = (flag: string): Expr => {
+export const exprFlagOff = (flag: string): Expr => {
   const index = CONSTRAINT_FLAGS.indexOf(flag);
   if (index === -1) {
     throw new Error(`Unknown constraint flag: ${flag}`);
   }
-  return exprMemo(new ExprFlagCheckUnset(index));
+  return exprMemo(new ExprFlagOff(index));
 }

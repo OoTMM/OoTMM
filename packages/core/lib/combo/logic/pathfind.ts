@@ -160,7 +160,8 @@ const defaultAreaData = (): AreaData => ({
   },
   mmTime: 0,
   mmTime2: 0,
-  constraintFlags: 0,
+  flagsOn: 0,
+  flagsOff: 0,
 });
 
 const mergeAreaData = (a: AreaData, b: AreaData): AreaData => ({
@@ -170,7 +171,8 @@ const mergeAreaData = (a: AreaData, b: AreaData): AreaData => ({
   },
   mmTime: (a.mmTime | b.mmTime) >>> 0,
   mmTime2: (a.mmTime2 | b.mmTime2) >>> 0,
-  constraintFlags: (a.constraintFlags & b.constraintFlags) >>> 0,
+  flagsOn: (a.flagsOn & b.flagsOn) >>> 0,
+  flagsOff: (a.flagsOff & b.flagsOff) >>> 0,
 });
 
 const coveringAreaData = (a: AreaData, b: AreaData): boolean => {
@@ -178,7 +180,8 @@ const coveringAreaData = (a: AreaData, b: AreaData): boolean => {
   if (!a.oot.night && b.oot.night) return false;
   if (((a.mmTime | b.mmTime) >>> 0) !== a.mmTime) return false;
   if (((a.mmTime2 | b.mmTime2) >>> 0) !== a.mmTime2) return false;
-  if (((a.constraintFlags & b.constraintFlags) >>> 0) !== a.constraintFlags) return false;
+  if (((a.flagsOn & b.flagsOn) >>> 0) !== a.flagsOn) return false;
+  if (((a.flagsOff & b.flagsOff) >>> 0) !== a.flagsOff) return false;
   return true;
 }
 
@@ -189,7 +192,8 @@ const cloneAreaData = (a: AreaData): AreaData => ({
   },
   mmTime: a.mmTime,
   mmTime2: a.mmTime2,
-  constraintFlags: a.constraintFlags,
+  flagsOn: a.flagsOn,
+  flagsOff: a.flagsOff,
 });
 
 export type EntranceOverrides = {[k: string]: {[k: string]: string | null}};
@@ -537,9 +541,8 @@ export class Pathfinder {
             if (r.mmTime2) {
               areaData.mmTime2 = (areaData.mmTime2 & ~(r.mmTime2)) >>> 0;
             }
-            if (r.constraintFlags) {
-              areaData.constraintFlags = (areaData.constraintFlags | r.constraintFlags) >>> 0;
-            }
+            areaData.flagsOn = (areaData.flagsOn | r.flagsOn) >>> 0;
+            areaData.flagsOff = (areaData.flagsOff | r.flagsOff) >>> 0;
           }
           this.exploreArea(worldId, age, exit, areaData, area);
         }

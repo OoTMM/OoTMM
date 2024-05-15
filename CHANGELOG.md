@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Update MM only preset.
 - Improved custom music support.
 - Make the medallion fanfare and the mask fanfare cross-games.
 - Allow compatible OoTR music to play in MM.
@@ -30,7 +31,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
-- Update MM only preset.
+- Fixed a bug with region-state flags that could create unbeatable seeds.
 - Fix minor bugs with swordless link.
 - Fix phantom shields being equipped on age travel in some very rare cases.
 - Fix Tricks section in spoiler log.
