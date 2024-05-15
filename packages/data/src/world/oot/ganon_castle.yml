@@ -8,7 +8,7 @@
     "Ganon Castle Water": "true"
     "Ganon Castle Spirit": "true"
     "Ganon Castle Shadow": "true"
-    "Ganon Castle Stairs": "ganon_barrier"
+    "Ganon Castle Stairs": "true"
     "Ganon Castle Fairy Fountain": "has_lens"
 "Ganon Castle Spirit Wallmaster":
   region: NONE
@@ -178,4 +178,4 @@
   region: GANON_CASTLE
   exits:
     "Ganon Castle": "true"
-    "Ganon Castle Tower": "true"
+    "Ganon Castle Tower": "ganon_barrier"
