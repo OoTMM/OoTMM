@@ -30,6 +30,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Update MM only preset.
 - Fix minor bugs with swordless link.
 - Fix phantom shields being equipped on age travel in some very rare cases.
 - Fix Tricks section in spoiler log.
