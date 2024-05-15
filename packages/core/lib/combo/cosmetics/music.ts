@@ -16,6 +16,7 @@ type MusicEntry = {
 
 const MUSIC: {[k: string]: MusicEntry} = {
   OOT_HYRULE_FIELD: { type: 'bgm', name: 'Hyrule Field', oot: [0x02] },
+  OOT_DODONGO_CAVERN: { type: 'bgm', name: 'Dodongo Cavern', oot: [0x18] },
   OOT_KAKARIKO_ADULT: { type: 'bgm', name: 'Kakariko Adult', oot: [0x19] },
   OOT_BATTLE: { type: 'bgm', name: 'Battle (OoT)', oot: [0x1a] },
   OOT_BATTLE_BOSS: { type: 'bgm', name: 'Boss Battle (OoT)', oot: [0x1b] },
@@ -58,6 +59,7 @@ const MUSIC: {[k: string]: MusicEntry} = {
   OOT_ESCAPE_CASTLE: { type: 'bgm', name: 'Castle Escape', oot: [0x62] },
   OOT_UNDERGROUND_CASTLE: { type: 'bgm', name: 'Castle Underground', oot: [0x63] },
   OOT_BATTLE_GANONDORF: { type: 'bgm', name: 'Ganondorf Battle', oot: [0x64] },
+  OOT_BATTLE_GANON: { type: 'bgm', name: 'Ganon Battle', oot: [0x65] },
   OOT_BATTLE_BOSS_FIRE: { type: 'bgm', name: 'Fire Temple Boss', oot: [0x6b] },
   OOT_MINIGAME: { type: 'bgm', name: 'Minigame', oot: [0x6c] },
   MM_TERMINA_FIELD: { type: 'bgm', name: 'Termina Field', mm: [0x02] },
