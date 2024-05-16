@@ -144,7 +144,7 @@ export function GeneratorContextProvider({ children }: { children: React.ReactNo
 
     /* Save new file */
     const cosmeticData = COSMETICS.find(c => c.key === key);
-    if (cosmeticData && (cosmeticData.type === 'zip' || cosmeticData.type === 'zobj')) {
+    if (cosmeticData && (cosmeticData.type === 'file')) {
       saveFile(`cosmetics:${key}`, value).catch(console.error);
     }
 
@@ -165,7 +165,7 @@ export function GeneratorContextProvider({ children }: { children: React.ReactNo
 
     /* Cosmetics */
     for (const c of COSMETICS) {
-      if (c.type === 'zip' || c.type === 'zobj') {
+      if (c.type === 'file') {
         loadFile(`cosmetics:${c.key}`).then(x => setCosmeticRaw(c.key, x)).catch(console.error);
       }
     }

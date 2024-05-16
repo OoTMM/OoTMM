@@ -23,22 +23,12 @@ function Cosmetic({ cosmetic }: { cosmetic: keyof Cosmetics }) {
         onChange={v => setCosmetic(cosmetic, v)}
       />
     );
-  case 'zobj':
+  case 'file':
     return (
       <FileSelect
         logo="oot"
         label={data.name}
-        accept=".zobj"
-        file={cosmetics[cosmetic] as File | null}
-        onChange={(f) => setCosmetic(cosmetic, f)}
-      />
-    );
-  case 'zip':
-    return (
-      <FileSelect
-        logo="oot"
-        label={data.name}
-        accept=".zip"
+        accept={`.${data.ext}`}
         file={cosmetics[cosmetic] as File | null}
         onChange={(f) => setCosmetic(cosmetic, f)}
       />
@@ -59,9 +49,8 @@ function Cosmetic({ cosmetic }: { cosmetic: keyof Cosmetics }) {
 export function CosmeticsEditor() {
   const options: { name: string, value: string}[] = Object.entries(COLORS).map(([key, x]) => ({ name: x.name, value: key }));
   options.push({ name: "Random", value: "random" });
-  const fileTypes = ['zobj', 'zip'];
-  const nonFiles = COSMETICS.filter(c => !fileTypes.includes(c.type));
-  const files = COSMETICS.filter(c => fileTypes.includes(c.type));
+  const nonFiles = COSMETICS.filter(c => c.type !== 'file');
+  const files = COSMETICS.filter(c => c.type === 'file');
 
   return <main>
     <h1>Cosmetics</h1>

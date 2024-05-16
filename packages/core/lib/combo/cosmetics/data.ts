@@ -45,15 +45,18 @@ export const COSMETICS = [{
 }, {
   key: 'modelOotChildLink',
   name: 'Player Model - Child Link (OoT)',
-  type: 'zobj',
+  type: 'file',
+  ext: 'zobj',
 }, {
   key: 'modelOotAdultLink',
   name: 'Player Model - Adult Link (OoT)',
-  type: 'zobj',
+  type: 'file',
+  ext: 'zobj',
 }, {
   key: 'music',
   name: 'Custom Music ZIP',
-  type: 'zip',
+  type: 'file',
+  ext: 'zip',
 }, {
   key: 'musicNames',
   name: 'Display Music Names',

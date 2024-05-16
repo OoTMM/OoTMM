@@ -16,18 +16,14 @@ type CosmeticsDataBoolean = CosmeticsDataCommon & {
   readonly type: 'boolean';
 }
 
-type CosmeticsDataZobj = CosmeticsDataCommon & {
-  readonly type: 'zobj';
-}
-
-type CosmeticsDataZip = CosmeticsDataCommon & {
-  readonly type: 'zip';
+type CosmeticsDataFile = CosmeticsDataCommon & {
+  readonly type: 'file';
+  readonly ext: string;
 }
 
 type InputToShape<T> = T extends CosmeticsDataColor ? { [K in T['key']]: ColorArg }
   : T extends CosmeticsDataBoolean ? { [K in T['key']]: boolean }
-  : T extends CosmeticsDataZobj ? { [K in T['key']]: BufferPath | null }
-  : T extends CosmeticsDataZip ? { [K in T['key']]: BufferPath | null }
+  : T extends CosmeticsDataFile ? { [K in T['key']]: BufferPath | null }
   : never;
 
 type CosmeticsDataEntry = typeof COSMETICS[number];
