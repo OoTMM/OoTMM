@@ -143,7 +143,8 @@ export function GeneratorContextProvider({ children }: { children: React.ReactNo
     localStorage.setItem('cosmetics', JSON.stringify(savedCosmetics));
 
     /* Save new file */
-    if (value instanceof File) {
+    const cosmeticData = COSMETICS.find(c => c.key === key);
+    if (cosmeticData && (cosmeticData.type === 'zip' || cosmeticData.type === 'zobj')) {
       saveFile(`cosmetics:${key}`, value).catch(console.error);
     }
 
