@@ -382,6 +382,7 @@ void Player_Action_FaroresWindText(Actor_Player* this, GameState_Play* play)
             play->transitionTrigger = TRANS_TRIGGER_NORMAL;
             play->nextEntrance = gSaveContext.respawn[RESPAWN_MODE_HUMAN].entrance;
             play->transitionType = TRANS_TYPE_FADE_WHITE_FAST;
+            gNoTimeFlow = 0;
 
             /* TODO cancel timers? */
 
