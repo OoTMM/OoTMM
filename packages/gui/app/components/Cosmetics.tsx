@@ -9,7 +9,7 @@ import { Checkbox } from './Checkbox';
 const COLOR_OPTIONS: { name: string, value: string}[] = [{ value: 'default', name: 'Default' }, { value: 'auto', name: 'Auto' }, { value: 'random', name: 'Random' }, ...Object.entries(COLORS).map(([key, x]) => ({ name: x.name, value: key }))];
 
 function Cosmetic({ cosmetic }: { cosmetic: keyof Cosmetics }) {
-  const [cosmetics, setCosmetics] = useCosmetics();
+  const [cosmetics, setCosmetic] = useCosmetics();
   const data = COSMETICS.find(x => x.key === cosmetic)!;
 
   switch (data.type) {
@@ -20,7 +20,7 @@ function Cosmetic({ cosmetic }: { cosmetic: keyof Cosmetics }) {
         value={cosmetics[cosmetic] as string}
         label={data.name}
         options={COLOR_OPTIONS}
-        onChange={v => setCosmetics({ [cosmetic]: v })}
+        onChange={v => setCosmetic(cosmetic, v)}
       />
     );
   case 'zobj':
@@ -30,7 +30,7 @@ function Cosmetic({ cosmetic }: { cosmetic: keyof Cosmetics }) {
         label={data.name}
         accept=".zobj"
         file={cosmetics[cosmetic] as File | null}
-        onChange={(f) => setCosmetics({ [cosmetic]: f })}
+        onChange={(f) => setCosmetic(cosmetic, f)}
       />
     );
   case 'zip':
@@ -40,7 +40,7 @@ function Cosmetic({ cosmetic }: { cosmetic: keyof Cosmetics }) {
         label={data.name}
         accept=".zip"
         file={cosmetics[cosmetic] as File | null}
-        onChange={(f) => setCosmetics({ [cosmetic]: f })}
+        onChange={(f) => setCosmetic(cosmetic, f)}
       />
     );
   case 'boolean':
@@ -48,7 +48,7 @@ function Cosmetic({ cosmetic }: { cosmetic: keyof Cosmetics }) {
       <Checkbox
         label={data.name}
         checked={!!(cosmetics[cosmetic])}
-        onChange={(v) => setCosmetics({ [cosmetic]: v })}
+        onChange={(v) => setCosmetic(cosmetic, v)}
       />
     );
   default:

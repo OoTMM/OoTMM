@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { GeneratorOutput, Items, Settings, itemPool, OptionsInput, mergeSettings, makeSettings, SettingsPatch, Cosmetics, OptionRandomSettings } from '@ootmm/core';
+import { GeneratorOutput, Items, Settings, itemPool, OptionsInput, mergeSettings, makeSettings, SettingsPatch, Cosmetics, OptionRandomSettings, COSMETICS } from '@ootmm/core';
 import { merge } from 'lodash';
 
 import * as API from '../api';
@@ -39,7 +39,7 @@ type GeneratorContext = {
   setSeed: (seed: string) => void;
   setIsPatch: (isPatch: boolean) => void;
   setSettings: (settings: SettingsPatch) => Settings;
-  setCosmetics: (cosmetics: Partial<Cosmetics>) => Cosmetics;
+  setCosmetic: (key: string, value: any) => Cosmetics;
   overrideSettings: (settings: Settings) => Settings;
   setRandomSettings: (random: Partial<OptionRandomSettings>) => OptionRandomSettings;
 }
@@ -123,10 +123,31 @@ export function GeneratorContextProvider({ children }: { children: React.ReactNo
     return overrideSettings(newSettings);
   };
 
-  const setCosmetics = (patch: Partial<Cosmetics>) => {
-    const cosmetics = merge({}, state.cosmetics, patch);
-    setState(state => ({ ...state, cosmetics }));
-    return cosmetics;
+  const setCosmeticRaw = (key: string, value: any) => {
+    const newCosmetics = merge({}, state.cosmetics, { [key]: value });
+    setState(state => ({ ...state, cosmetics: newCosmetics }));
+    return newCosmetics;
+  };
+
+  const setCosmetic = (key: string, value: any) => {
+    const newCosmetics = setCosmeticRaw(key, value);
+
+    /* Save to localStorage */
+    const savedCosmetics = { ...newCosmetics };
+    for (const key of Object.keys(savedCosmetics)) {
+      const v = (savedCosmetics as any)[key];
+      if (v instanceof File) {
+        delete (savedCosmetics as any)[key];
+      }
+    }
+    localStorage.setItem('cosmetics', JSON.stringify(savedCosmetics));
+
+    /* Save new file */
+    if (value instanceof File) {
+      saveFile(`cosmetics:${key}`, value).catch(console.error);
+    }
+
+    return newCosmetics;
   };
 
   const setRandomSettings = (patch: Partial<OptionRandomSettings>) => {
@@ -137,12 +158,20 @@ export function GeneratorContextProvider({ children }: { children: React.ReactNo
 
   /* Async file load */
   useEffect(() => {
+    /* Roms */
     loadFile('oot').then(x => setRomConfigFileRaw('oot', x)).catch(console.error);
     loadFile('mm').then(x => setRomConfigFileRaw('mm', x)).catch(console.error);
+
+    /* Cosmetics */
+    for (const c of COSMETICS) {
+      if (c.type === 'zip' || c.type === 'zobj') {
+        loadFile(`cosmetics:${c.key}`).then(x => setCosmeticRaw(c.key, x)).catch(console.error);
+      }
+    }
   }, []);
 
   return (
-    <GeneratorContext.Provider value={{ state, setState, setRomConfigFile, setSeed, setIsPatch, setSettings, overrideSettings, setCosmetics, setRandomSettings }}>
+    <GeneratorContext.Provider value={{ state, setState, setRomConfigFile, setSeed, setIsPatch, setSettings, overrideSettings, setCosmetic, setRandomSettings }}>
       {children}
     </GeneratorContext.Provider>
   );
@@ -256,17 +285,6 @@ export function useStartingItems() {
 export function useCosmetics() {
   const ctx = useContext(GeneratorContext);
   const { cosmetics } = ctx.state;
-  const setCosmetics = (patch: Partial<Cosmetics>) => {
-    const newCosmetics = ctx.setCosmetics(patch);
-    const savedCosmetics = { ...newCosmetics };
-    for (const key of Object.keys(savedCosmetics)) {
-      const v = (savedCosmetics as any)[key];
-      if (v instanceof File) {
-        delete (savedCosmetics as any)[key];
-      }
-    }
-    localStorage.setItem('cosmetics', JSON.stringify(savedCosmetics));
-    return newCosmetics;
-  }
-  return [cosmetics, setCosmetics] as const;
+  const { setCosmetic } = ctx;
+  return [cosmetics, setCosmetic] as const;
 }
