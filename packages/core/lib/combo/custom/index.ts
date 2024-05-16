@@ -68,6 +68,12 @@ const ENTRIES: CustomEntry[] = [
   { game: 'oot', name: 'GAUNTLETS',             file: "objects/object_link_boy",     seg: { in: 0x06, out: 0x0a }, offsets: [0x25218, 0x252d8, 0x25438, 0x25598, 0x25658, 0x257b8] },
 ];
 
+const AUDIO_COPIES_OOT: {[k: number]: number} = {
+  0x6e: 0x1c, /* Deku Tree -> Grottos */
+  0x6f: 0x18, /* DC -> Graves */
+  0x70: 0x18, /* DC -> GTG */
+};
+
 const getObjectBuffer = async (roms: DecompressedRoms, game: Game, file: string) => {
   const rom = roms[game].rom;
   const dma = new DmaData(roms[game].dma);
@@ -274,6 +280,17 @@ class CustomAssetsBuilder {
       seqTableDataPatched.writeUint32BE(addr, i * 0x10);
       seqTableDataPatched.writeUint32BE(size, i * 0x10 + 4);
     }
+
+    if (game === 'oot') {
+      for (const [newSeq, oldSeq] of Object.entries(AUDIO_COPIES_OOT)) {
+        const newSeqNum = Number(newSeq);
+        const newOffset = newSeqNum * 0x10;
+        const oldOffset = oldSeq * 0x10;
+        const buf = seqTableDataPatched.subarray(oldOffset, oldOffset + 0x10);
+        buf.copy(seqTableDataPatched, newOffset);
+      }
+    }
+
     const seqTableDataVrom = this.addRawData(`${game}/seq_table`, seqTableDataPatched, false);
     this.cg.define(`CUSTOM_SEQ_TABLE_${game.toUpperCase()}_VROM`, seqTableDataVrom);
   }
@@ -326,6 +343,15 @@ class CustomAssetsBuilder {
       const bankId = seqBankDataRaw.readUint8(i * 2);
       seqBankData.writeUint8(bankId, i + 1);
     }
+
+    if (game === 'oot') {
+      for (const [newSeq, oldSeq] of Object.entries(AUDIO_COPIES_OOT)) {
+        const newSeqNum = Number(newSeq);
+        const bankId = seqBankData.readUint8(oldSeq);
+        seqBankData.writeUint8(bankId, newSeqNum);
+      }
+    }
+
     const seqBanksDataVrom = this.addRawData(`${game}/seq_banks`, seqBankData, false);
     this.cg.define(`CUSTOM_SEQ_BANKS_${game.toUpperCase()}_VROM`, seqBanksDataVrom);
   }
