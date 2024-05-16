@@ -8,7 +8,7 @@ import { SettingsImportExport } from './SettingsImportExport';
 import { Result } from './Result';
 
 export function RomConfig() {
-  const { romConfig, setFileBuffer, setSeed } = useRomConfig();
+  const { romConfig, setRomConfigFile, setSeed } = useRomConfig();
   const [isPatch, setIsPatch] = useIsPatch();
   const { error, result, warnings, archive, generate } = useGenerator();
   const [randomSettings, setRandomSettings] = useRandomSettings();
@@ -34,20 +34,20 @@ export function RomConfig() {
       <div className="rom-config-files">
         <FileSelect
           logo="oot"
-          file="oot"
           label="Ocarina of Time (1.0, U or J)"
           accept=".z64, .n64, .v64"
-          onChange={(f) => setFileBuffer('oot', f)}
+          file={romConfig.files.oot}
+          onChange={(f) => setRomConfigFile('oot', f)}
         />
         <FileSelect
           logo="mm"
-          file="mm"
           label="Majora's Mask (U only)"
           accept=".z64, .n64, .v64"
-          onChange={(f) => setFileBuffer('mm', f)}
+          file={romConfig.files.mm}
+          onChange={(f) => setRomConfigFile('mm', f)}
         />
         {isPatch && (
-          <FileSelect file="patch" logo="ootmm" label="OoTMM Patch File" accept=".ootmm" onChange={(f) => setFileBuffer('patch', f)} />
+          <FileSelect logo="ootmm" label="OoTMM Patch File" accept=".ootmm" file={romConfig.files.patch} onChange={(f) => setRomConfigFile('patch', f)} />
         )}
       </div>
       {!isPatch && <Checkbox label="Random Settings" checked={isRandomSettings} onChange={(x) => setRandomSettings({ enabled: x })} />}

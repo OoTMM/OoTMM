@@ -33,9 +33,9 @@ export type WorkerTaskItemPool = {
 export type WorkerTaskGenerate = {
   type: 'generate',
   id: number,
-  oot: Buffer,
-  mm: Buffer,
-  patch?: Buffer,
+  oot: File,
+  mm: File,
+  patch?: File,
   options: OptionsInput
 }
 
@@ -74,7 +74,25 @@ export type WorkerResultGenerateError = {
 export type WorkerTask = WorkerTaskItemPool | WorkerTaskGenerate;
 export type WorkerResult = WorkerResultItemPool | WorkerResultGenerate | WorkerResultGenerateLog | WorkerResultGenerateProgress | WorkerResultGenerateError;
 
-function onTaskGenerate(task: WorkerTaskGenerate) {
+async function readFile(f: File) {
+  const reader = new FileReader();
+  return new Promise<Buffer>((resolve, reject) => {
+    reader.onload = () => {
+      const data = reader.result;
+      if (!data) {
+        reject(new Error('No data'));
+        return;
+      }
+      return resolve(Buffer.from(data as ArrayBuffer));
+    };
+    reader.onerror = () => {
+      reject(reader.error);
+    };
+    reader.readAsArrayBuffer(f);
+  });
+}
+
+async function onTaskGenerate(task: WorkerTaskGenerate) {
   let { oot, mm, patch, options } = task;
   options.cosmetics = { ...options.cosmetics };
   const warnings: string[] = [];
@@ -96,7 +114,12 @@ function onTaskGenerate(task: WorkerTaskGenerate) {
       total,
     });
   };
-  const generator = generate({ oot, mm, opts: { ...options, patch, fetch: fetchFunc }, monitor: { onLog, onProgress, onWarn } });
+  const [ootData, mmData] = await Promise.all([readFile(oot), readFile(mm)]);
+  let patchData: Buffer | undefined;
+  if (patch) {
+    patchData = await readFile(patch);
+  }
+  const generator = generate({ oot: ootData, mm: mmData, opts: { ...options, patch: patchData, fetch: fetchFunc }, monitor: { onLog, onProgress, onWarn } });
   generator.run().then(result => {
     postMessage({
       type: 'generate',

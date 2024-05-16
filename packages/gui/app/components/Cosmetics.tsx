@@ -29,7 +29,7 @@ function Cosmetic({ cosmetic }: { cosmetic: keyof Cosmetics }) {
         logo="oot"
         label={data.name}
         accept=".zobj"
-        file={`cosmetics.${cosmetic}`}
+        file={cosmetics[cosmetic] as File | null}
         onChange={(f) => setCosmetics({ [cosmetic]: f })}
       />
     );
@@ -39,7 +39,7 @@ function Cosmetic({ cosmetic }: { cosmetic: keyof Cosmetics }) {
         logo="oot"
         label={data.name}
         accept=".zip"
-        file={`cosmetics.${cosmetic}`}
+        file={cosmetics[cosmetic] as File | null}
         onChange={(f) => setCosmetics({ [cosmetic]: f })}
       />
     );

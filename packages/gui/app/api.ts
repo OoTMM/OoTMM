@@ -84,7 +84,7 @@ export function initialCosmetics() {
   return makeCosmetics(oldCosmetics);
 }
 
-export async function generate(files: { oot: Buffer, mm: Buffer, patch?: Buffer }, options: OptionsInput, log: (msg: string) => void, progress: (current: number, total: number) => void) {
+export async function generate(files: { oot: File, mm: File, patch?: File }, options: OptionsInput, log: (msg: string) => void, progress: (current: number, total: number) => void) {
   const result = await new Promise<WorkerResultGenerate | WorkerResultGenerateError>(resolve => {
     const id = workerTaskId++;
     resolversGenerate.set(id, result => {

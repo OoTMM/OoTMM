@@ -24,7 +24,7 @@ export const Result = ({ archive, warnings }: ResultProps) => {
   return (
     <div className="panel">
       <h1>Your seed has been generated</h1>
-      {warnings.length && <div className="warning">
+      {!!warnings.length && <div className="warning">
         <h2>Warnings</h2>
         <ul>
           {warnings.map((warning, i) => <li key={i}>{warning}</li>)}

@@ -243,6 +243,18 @@ class CosmeticsPass {
       } else {
         throw new Error(`Cannot load buffers from path`);
       }
+    } else if (path instanceof File) {
+      const reader = new FileReader();
+      return new Promise<Buffer>((resolve, reject) => {
+        reader.onload = () => {
+          const buffer = Buffer.from(reader.result as ArrayBuffer);
+          resolve(buffer);
+        };
+        reader.onerror = () => {
+          reject(new Error('Failed to read file'));
+        };
+        reader.readAsArrayBuffer(path);
+      });
     } else {
       return Buffer.from(path);
     }
