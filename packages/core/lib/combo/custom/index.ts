@@ -266,7 +266,7 @@ class CustomAssetsBuilder {
     for (let i = 0; i < count; ++i) {
       let addr = seqTableDataOrig.readUint32BE(i * 0x10);
       let size = seqTableDataOrig.readUint32BE(i * 0x10 + 4);
-      if (!size && addr) {
+      if (!size) {
         size = seqTableDataOrig.readUint32BE(addr * 0x10 + 4);
         addr = seqTableDataOrig.readUint32BE(addr * 0x10);
       }

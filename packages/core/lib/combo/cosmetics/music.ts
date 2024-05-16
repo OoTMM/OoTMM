@@ -15,6 +15,7 @@ type MusicEntry = {
 }
 
 const MUSIC: {[k: string]: MusicEntry} = {
+  OOT_FILE_SELECT: { type: 'bgm', name: 'File Select', oot: [0x57] },
   OOT_HYRULE_FIELD: { type: 'bgm', name: 'Hyrule Field', oot: [0x02] },
   OOT_DODONGO_CAVERN: { type: 'bgm', name: 'Dodongo Cavern', oot: [0x18] },
   OOT_KAKARIKO_ADULT: { type: 'bgm', name: 'Kakariko Adult', oot: [0x19] },
@@ -26,7 +27,7 @@ const MUSIC: {[k: string]: MusicEntry} = {
   OOT_HOUSES: { type: 'bgm', name: 'Houses', oot: [0x1f] },
   OOT_JABU_JABU: { type: 'bgm', name: 'Jabu Jabu', oot: [0x26] },
   OOT_KAKARIKO_CHILD: { type: 'bgm', name: 'Kakariko Child', oot: [0x27] },
-  OOT_FAIRY_FOUNTAIN: { type: 'bgm', name: 'Fairy Fountain', oot: [0x28, 0x57] },
+  OOT_FAIRY_FOUNTAIN: { type: 'bgm', name: 'Fairy Fountain', oot: [0x28] },
   OOT_ZELDA_THEME: { type: 'bgm', name: 'Zelda Theme', oot: [0x29] },
   OOT_TEMPLE_FIRE: { type: 'bgm', name: 'Fire Temple', oot: [0x2a] },
   OOT_TEMPLE_FOREST: { type: 'bgm', name: 'Forest Temple', oot: [0x2c] },
@@ -83,7 +84,7 @@ const MUSIC: {[k: string]: MusicEntry} = {
   MM_MINIGAME2: { type: 'bgm', name: 'Minigame 2 (MM)', mm: [0x25] },
   MM_GORON_RACE: { type: 'bgm', name: 'Goron Race', mm: [0x26] },
   MM_MUSIC_BOX_HOUSE: { type: 'bgm', name: 'Music Box House', mm: [0x27] },
-  MM_FAIRYS_FOUNTAIN: { type: 'bgm', name: 'Fairy\'s Fountain', mm: [0x28] },
+  MM_FAIRYS_FOUNTAIN: { type: 'bgm', name: 'Fairy\'s Fountain', mm: [0x28] /* 0x18 = File Select */ },
   MM_MARINE_RESEARCH_LABORATORY: { type: 'bgm', name: 'Marine Research Laboratory', mm: [0x2c] },
   MM_ROMANI_RANCH: { type: 'bgm', name: 'Romani Ranch', mm: [0x2f] },
   MM_GORON_VILLAGE: { type: 'bgm', name: 'Goron Village', mm: [0x30] },
@@ -92,7 +93,7 @@ const MUSIC: {[k: string]: MusicEntry} = {
   MM_MINIBOSS: { type: 'bgm', name: 'Mini Boss', mm: [0x38] },
   MM_ASTRAL_OBSERVATORY: { type: 'bgm', name: 'Astral Observatory', mm: [0x3a] },
   MM_BOMBERS_HIDEOUT: { type: 'bgm', name: 'Bombers Hideout', mm: [0x3b] },
-  MM_MILK_BAR_LATTE: { type: 'bgm', name: 'Milk Bar Latte', mm: [0x3c] },
+  MM_MILK_BAR: { type: 'bgm', name: 'Milk Bar', mm: [0x3c, 0x56] },
   MM_WOODS_OF_MYSTERY: { type: 'bgm', name: 'Woods of Mystery', mm: [0x3e] },
   MM_GORMAN_RACE: { type: 'bgm', name: 'Gorman Race', mm: [0x40] },
   MM_GORMAN_BROS: { type: 'bgm', name: 'Gorman Bros.', mm: [0x42] },
@@ -100,7 +101,7 @@ const MUSIC: {[k: string]: MusicEntry} = {
   MM_STORE: { type: 'bgm', name: 'Store', mm: [0x44] },
   MM_TARGET_PRACTICE: { type: 'bgm', name: 'Target Practice', mm: [0x46] },
   MM_SWORD_TRAINING: { type: 'bgm', name: 'Sword Training', mm: [0x50] },
-  MM_FINAL_HOURS: { type: 'bgm', name: 'Final Hours', mm: [0x57] },
+  MM_FINAL_HOURS: { type: 'bgm', name: 'Final Hours', mm: [0x57, 0x60] /* Not clear why there are two versions */ },
   MM_TEMPLE_SNOWHEAD: { type: 'bgm', name: 'Snowhead Temple', mm: [0x65] },
   MM_TEMPLE_GREAT_BAY: { type: 'bgm', name: 'Great Bay Temple', mm: [0x66] },
   MM_BATTLE_MAJORA3: { type: 'bgm', name: 'Majora\'s Wrath', mm: [0x69] },
