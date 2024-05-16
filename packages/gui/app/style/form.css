@@ -156,6 +156,7 @@ li {
   background: #eee;
   padding: 1em;
   margin: 1em;
+  transform: scale(1);
 }
 
 .file-select-box-img-container {
@@ -174,6 +175,17 @@ li {
 
 .file-select-box.empty img {
   filter: grayscale(100%);
+}
+
+.file-select-box-delete {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+}
+
+.file-select-box-delete:hover {
+  color: red;
 }
 
 input[type='file'] {
