@@ -120,6 +120,8 @@ const MUSIC: {[k: string]: MusicEntry} = {
   FANFARE_SHARED_ITEM_STONE: { type: 'fanfare', name: 'Fanfare Item Stone', oot: [0x32], mm: [] },
   FANFARE_SHARED_ITEM_MEDALLION: { type: 'fanfare', name: 'Fanfare Item Medallion', oot: [0x43], mm: [] },
   FANFARE_SHARED_ITEM_OCARINA: { type: 'fanfare', name: 'Fanfare Item Ocarina', oot: [0x3d], mm: [0x52] },
+  FANFARE_OOT_GAME_OVER: { type: 'fanfare', name: 'Fanfare Game Over (OoT)', oot: [0x20] },
+  FANFARE_OOT_BOSS_CLEAR: { type: 'fanfare', name: 'Fanfare Boss Clear (OoT)', oot: [0x21] },
 };
 
 type MusicFile = {
