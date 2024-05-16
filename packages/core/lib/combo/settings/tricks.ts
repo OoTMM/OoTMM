@@ -364,15 +364,13 @@ export const TRICKS: Tricks = {
     tooltip: 'With a precise backflip on the fence, jump over the guards as human link',
     linkVideo: 'https://www.youtube.com/watch?v=-4F9lzES7tM&ab_channel=Pokemongenius88',
   },
-  MM_SHT_FIRELESS: {
-    name: 'Complete Snowhead Temple without Fire Arrows',
-    tooltip: 'Using torches and jumps, melt the ice with normal arrows',
-    linkVideo: 'https://youtu.be/arkzqsYWHWg?list=PL0NLeF-0sduxYgyvvamWsX9IfZpd4smNr',
+  MM_SHT_HOT_WATER: {
+    name: 'Complete Snowhead Temple using Hot Spring Water',
+    tooltip: 'Use Hot Spring Water to melt all the ice instead of Fire Arrows or Din\'s Fire.',
   },
   MM_SHT_STICKS_RUN: {
     name: 'Access SHT Pillar Fireless with Precise Stick Run',
-    tooltip: 'With a precise path, light the three torches (or use flame storage for a glitched run)',
-    linkVideo: 'https://www.youtube.com/watch?v=vuP_vRb6ZTI&ab_channel=Pokemongenius88',
+    tooltip: 'With a precise path, light the three torches.',
   },
   MM_SHT_PILLARLESS: {
     name: 'Snowhead Temple Skip Raising Pillar',

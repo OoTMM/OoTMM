@@ -28,6 +28,7 @@ All notable changes to this project will be documented in this file.
 - Removed the camera lock upon throwing a bomb-flower onto the rock locking Dodongo's Cavern.
 - Boat Archery now ends right as you reach 20 points.
 - Hyrulian Castle Guards now ignores you if you are wearing Stone Mask.
+- Renamed the "Snowhead Temple without Fire Arrows" trick to "...using Hot Spring Water" to reflect its purpose.
 
 ### Fixed
 
