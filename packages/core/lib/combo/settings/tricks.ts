@@ -352,12 +352,10 @@ export const TRICKS: Tricks = {
     name: 'Precise Hookshot Usage',
     tooltip:
       'Using the short hookshot gives you logical access to:<br>- the Deku Palace Bean Grotto chest<br>- the Road to Ikana chest and tree',
-    linkVideo: 'Needs Link',
   },
   MM_PFI_BOAT_HOOK: {
     name: 'Enter Pirate Fortress Interior using Hookshot from the Boats',
     tooltip: 'From the boats, you can make a precise hookshot to a barrel',
-    linkVideo: 'Needs Link',
   },
   MM_PALACE_GUARD_SKIP: {
     name: 'Backflip over Deku Palace Guards',
@@ -424,13 +422,11 @@ export const TRICKS: Tricks = {
   MM_WELL_HSW: {
     name: "Well's Hot Spring Water without Killing Dexihand",
     tooltip: 'Grab the water before the hand grabs you.',
-    linkVideo: 'Needs Link',
   },
   MM_ISTT_CHUCHU_LESS: {
     name: 'ISTT Block Room without Chuchu Jellies',
     tooltip:
       'Normally the room contains Chuchu Jellies to restock your arrows and magic. With this trick on, logic can expect to do this room without the Soul of Chuchus.',
-    linkVideo: 'Needs Link',
   },
   MM_GBT_WATERWHEEL_GORON: {
     name: 'Cross GBT Waterwheel Room as Goron',
