@@ -419,7 +419,7 @@ class MusicInjector {
         continue;
       }
       const categoriesData = await categoriesTxt.async('text');
-      const categories = categoriesData.trim().split(',');
+      const categories = categoriesData.split(/[,-]/).map(x => x.trim());
 
       /* Extract the bank ID from the zseq filename */
       let zseqFilename = zseqFiles[0].name;
