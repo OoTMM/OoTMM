@@ -79,6 +79,28 @@ void Sram_SaveEndOfCycle(GameState_Play* play)
         comboToggleSlot(ITS_MM_TRADE3);
     }
 
+    if (Config_Flag(CFG_MM_KEEP_ITEMS_RESET))
+    {
+        /* Don't show item loss in the cutscene */
+        gSave.eventInf[7] &= 0xe0;
+
+        /* Still reset pictobox */
+        gSave.inventory.ammo[ITS_MM_PICTOBOX] = 0;
+    }
+    else
+    {
+        /* Reset ammo */
+        for (int i = 0; i < 24; ++i)
+            gSave.inventory.ammo[i] = 0;
+
+        /* Reset rupees */
+        gSave.playerData.rupees = 0;
+        gSave.rupeesDelta = 0;
+
+        /* Reset chateau */
+        MM_CLEAR_EVENT_WEEK(EV_MM_WEEK_DRANK_CHATEAU_ROMANI);
+    }
+
     /* Empty bottles (except gold dust) */
     for (int i = 0; i < 6; ++i)
     {
@@ -90,8 +112,24 @@ void Sram_SaveEndOfCycle(GameState_Play* play)
         case ITEM_NONE:
         case ITEM_MM_GOLD_DUST:
             break;
-        default:
+        case ITEM_MM_SPRING_WATER_HOT:
+            if (!Config_Flag(CFG_MM_KEEP_ITEMS_RESET))
+                *slot = ITEM_MM_BOTTLE_EMPTY;
+            else
+                *slot = ITEM_MM_SPRING_WATER;
+            break;
+        case ITEM_MM_ZORA_EGG:
+        case ITEM_MM_SEAHORSE:
+        case ITEM_MM_DEKU_PRINCESS:
+        case ITEM_MM_MAGIC_MUSHROOM:
+        case ITEM_MM_BIG_POE:
+            /* Remove these items to avoid softlocks */
+            /* TODO: Maybe allow C-up/L instead? */
             *slot = ITEM_MM_BOTTLE_EMPTY;
+            break;
+        default:
+            if (!Config_Flag(CFG_MM_KEEP_ITEMS_RESET))
+                *slot = ITEM_MM_BOTTLE_EMPTY;
             break;
         }
     }

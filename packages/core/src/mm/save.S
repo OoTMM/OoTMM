@@ -260,3 +260,22 @@ PATCH_END
 PATCH_START 0x801c66e0
 .short 0xcc00
 PATCH_END
+
+/* Make chateau permanent by default */
+PATCH_START 0x801c66ec
+.short 0xc0c0
+PATCH_END
+
+/* Don't reset ammo through the default handler */
+PATCH_START 0x80144050
+  nop
+PATCH_END
+
+/* Don't reset rupees */
+PATCH_START 0x80144530
+  nop
+PATCH_END
+
+PATCH_START 0x80144544
+  nop
+PATCH_END

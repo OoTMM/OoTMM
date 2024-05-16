@@ -1108,6 +1108,14 @@ export const SETTINGS = [{
   default: 'never',
   cond: hasMM,
 }, {
+  key: 'keepItemsReset',
+  name: 'Keep Items on Cycle Reset',
+  category: 'main.misc',
+  type: 'boolean',
+  description: 'Keep items through a cycle reset',
+  default: false,
+  cond: hasMM,
+}, {
   key: 'fierceDeityAnywhere',
   name: 'Fierce Deity Anywhere in MM',
   category: 'main.misc',

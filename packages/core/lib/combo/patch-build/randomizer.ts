@@ -960,6 +960,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MM_AUTO_INVERT_ALWAYS: settings.autoInvert === 'always',
     MM_AUTO_INVERT_FIRST_CYCLE: settings.autoInvert === 'firstCycle',
     MM_MOON_CRASH_CYCLE: settings.moonCrash === 'cycle',
+    MM_KEEP_ITEMS_RESET: settings.keepItemsReset,
     OOT_OPEN_ZD_SHORTCUT: settings.openZdShortcut,
     MM_CLOCKS: settings.clocks,
     MM_CLOCKS_PROGRESSIVE: settings.progressiveClocks !== 'separate',
