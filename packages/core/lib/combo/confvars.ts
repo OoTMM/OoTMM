@@ -184,6 +184,7 @@ export const CONFVARS = [
   'ONLY_OOT',
   'ONLY_MM',
   'MM_KEEP_ITEMS_RESET',
+  'MM_FAST_MASKS',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

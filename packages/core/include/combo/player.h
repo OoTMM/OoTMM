@@ -43,6 +43,7 @@ int Player_GetStrength(void);
 
 #if defined(GAME_MM)
 void Player_DrawHookshotReticle(GameState_Play* play, Actor_Player* player, f32 distance);
+void Player_UpdateForm(Actor_Player* this, GameState_Play* play);
 #endif
 
 #endif

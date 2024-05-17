@@ -1194,3 +1194,28 @@ PATCH_VROM 0x0108CD38
 .int 0x00000000
 .int 0x00000000
 PATCH_END
+
+PATCH_GROUP PG_MM_FAST_MASKS
+/* Skip mask pull out cutscene */
+PATCH_START 0x80841ebc
+  b .+0x640
+   nop
+PATCH_END
+PATCH_GROUP_END
+
+/* Use our item hook */
+PATCH_START 0x8082ff1c
+  jal Player_UseItem
+PATCH_END
+
+PATCH_START 0x8085e910
+.int 0
+PATCH_END
+
+PATCH_START 0x808302b0
+  jal Player_UseItem
+PATCH_END
+
+PATCH_START 0x8085e958
+.int 0
+PATCH_END

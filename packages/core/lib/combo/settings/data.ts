@@ -1116,6 +1116,14 @@ export const SETTINGS = [{
   default: false,
   cond: hasMM,
 }, {
+  key: 'fastMasks',
+  name: 'Fast Form Transitions',
+  category: 'main.misc',
+  type: 'boolean',
+  description: 'Makes the mask transitions very fast',
+  default: false,
+  cond: hasMM,
+}, {
   key: 'fierceDeityAnywhere',
   name: 'Fierce Deity Anywhere in MM',
   category: 'main.misc',

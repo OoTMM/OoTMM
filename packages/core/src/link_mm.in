@@ -14,6 +14,7 @@ EnItem00_CollectedHandler = 0x800a6a40;
 EnItem00_Update = 0x800a6b98;
 
 gAudioLoadStatusFontSample = 0x80204fd8;
+Player_UpdateForm = 0x8012301c;
 
 Fault_AddHungupAndCrashImpl = 0x80083df4;
 Interface_NewDay = 0x8010ee74;

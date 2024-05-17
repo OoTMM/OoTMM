@@ -75,6 +75,7 @@ function asmPatchGroups(world: World, settings: Settings) {
     OOT_LOST_WOODS_EXITS: settings.alterLostWoodsExits,
     MM_VOID_WARP: settings.voidWarpMm,
     OOT_SWORDLESS_ADULT: settings.swordlessAdult,
+    MM_FAST_MASKS: settings.fastMasks,
   };
   const keys = Object.keys(groups) as PatchGroup[];
   return keys.filter((k) => groups[k]);

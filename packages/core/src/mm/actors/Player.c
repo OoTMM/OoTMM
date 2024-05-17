@@ -9,12 +9,25 @@
 #include <combo/dpad.h>
 #include <combo/multi.h>
 #include <combo/global.h>
+#include <combo/mask.h>
 #include "../actors.h"
 
 void ArrowCycle_Handle(Actor_Player* link, GameState_Play* play);
 
+u8 sFormChangeTimer;
+
 void Player_UpdateWrapper(Actor_Player* this, GameState_Play* play)
 {
+    if (sFormChangeTimer)
+    {
+        sFormChangeTimer--;
+
+        /* Kill speed */
+        this->base.speedXZ = 0.f;
+        this->base.velocity.x = 0.f;
+        this->base.velocity.z = 0.f;
+    }
+
     ArrowCycle_Handle(this, play);
     Player_Update(this, play);
     Dpad_Update(play);
@@ -1517,10 +1530,66 @@ s32 Player_OverrideLimbDrawGameplayDefault_Custom(GameState_Play* play, s32 limb
     return 0;
 }
 
+static void toggleForm(Actor_Player* link, int form)
+{
+    /* Sanity checks */
+    if (link->base.draw == NULL)
+        return;
+    if (link->state & 0x3c7080)
+        return;
+
+    link->state &= ~0x08000000;
+    link->state3 &= ~0x8000;
+
+    /* Toggle form */
+    if (gSave.playerForm == form)
+        gSave.playerForm = MM_PLAYER_FORM_HUMAN;
+    else
+        gSave.playerForm = (u8)form;
+
+    /* Start the process */
+    *((u8*)link + 0xae7) = 0;
+    link->base.update = Player_UpdateForm;
+    link->base.draw = NULL;
+    link->base.speedXZ = 0.f;
+    link->base.velocity.x = 0.f;
+    link->base.velocity.z = 0.f;
+    sFormChangeTimer = 2;
+}
+
 void Player_UseItem(GameState_Play* play, Actor_Player* this, s16 itemId)
 {
     void (*Player_UseItemImpl)(GameState_Play* play, Actor_Player* this, s16 itemId);
+    u8 useDefault;
 
-    Player_UseItemImpl = OverlayAddr(0x80831990);
-    Player_UseItemImpl(play, this, itemId);
+    useDefault = 1;
+
+    if (Config_Flag(CFG_MM_FAST_MASKS))
+    {
+        switch (itemId)
+        {
+        case ITEM_MM_MASK_DEKU:
+            toggleForm(this, MM_PLAYER_FORM_DEKU);
+            useDefault = 0;
+            break;
+        case ITEM_MM_MASK_GORON:
+            toggleForm(this, MM_PLAYER_FORM_GORON);
+            useDefault = 0;
+            break;
+        case ITEM_MM_MASK_ZORA:
+            toggleForm(this, MM_PLAYER_FORM_ZORA);
+            useDefault = 0;
+            break;
+        case ITEM_MM_MASK_FIERCE_DEITY:
+            toggleForm(this, MM_PLAYER_FORM_FIERCE_DEITY);
+            useDefault = 0;
+            break;
+        }
+    }
+
+    if (useDefault)
+    {
+        Player_UseItemImpl = OverlayAddr(0x80831990);
+        Player_UseItemImpl(play, this, itemId);
+    }
 }

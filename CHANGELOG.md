@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add a fast mask transforms setting.
 - Add a setting to allow the player to keep ammo/rupees/etc. through cycles.
 - Add the ability to use music with custom banks.
 - Add the ability to use custom fanfares.
