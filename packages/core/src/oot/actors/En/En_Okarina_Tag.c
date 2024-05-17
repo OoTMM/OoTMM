@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/time.h>
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x13c) = (h); } while (0)
 
@@ -8,6 +9,7 @@ void EnOkarinaTag_GiveSunSong(Actor* this, GameState_Play* play)
     if (Actor_HasParent(this))
     {
         SetEventChk(EV_OOT_CHK_SONG_SUN);
+        Time_SwapDayNight();
         ActorDestroy(this);
         return;
     }

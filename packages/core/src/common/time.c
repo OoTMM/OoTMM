@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/time.h>
 
 #if defined(GAME_MM)
 u32 Time_Game2Linear(u8 day, u16 time)
@@ -67,5 +68,21 @@ int Time_IsMoonCrashLinear(u32 time)
 int Time_IsMoonCrash(u8 day, u16 time)
 {
     return Time_IsMoonCrashLinear(Time_Game2Linear(day, time));
+}
+#endif
+
+#if defined(GAME_OOT)
+void Time_Set(u16 time)
+{
+    gSave.worldTime = time;
+    gSave.isNight = (gSave.worldTime < CLOCK_TIME(6, 30) || gSave.worldTime > CLOCK_TIME(18, 0));
+}
+
+void Time_SwapDayNight(void)
+{
+    if (gSave.isNight)
+        Time_Set(CLOCK_TIME(6, 30));
+    else
+        Time_Set(CLOCK_TIME(18, 0) + 1);
 }
 #endif

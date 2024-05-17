@@ -20,6 +20,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Make the sun song check actually swap day/night like in vanilla.
 - Update MM only preset.
 - Improved custom music support.
 - Make the medallion fanfare and the mask fanfare cross-games.
