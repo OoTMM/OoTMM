@@ -43,6 +43,8 @@ PATCH_START _Interface_UpdateButtonsPart2
 PATCH_END
 
 /* Handle swordless better */
+/* FIXME: Doesn't work very well, hence the PG */
+PATCH_GROUP PG_OOT_SWORDLESS_ADULT
 PATCH_START 0x8006e400
   nop
   nop
@@ -57,3 +59,4 @@ PATCH_START 0x8006e450
   nop
   nop
 PATCH_END
+PATCH_GROUP_END

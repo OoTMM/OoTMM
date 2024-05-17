@@ -47,6 +47,7 @@ export const PATCH_GROUPS = [
   'CRIT_WIGGLE_DISABLE',
   'OOT_LOST_WOODS_EXITS',
   'MM_VOID_WARP',
+  'OOT_SWORDLESS_ADULT',
 ] as const;
 
 export type PatchGroup = typeof PATCH_GROUPS[number];
