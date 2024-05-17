@@ -135,81 +135,69 @@ type MusicFile = {
   games: Game[];
 };
 
+const DIACRITICS_BASES = {
+  'á': 'a',
+  'à': 'a',
+  'â': 'a',
+  'ä': 'a',
+  'Á': 'A',
+  'À': 'A',
+  'Â': 'A',
+  'Ä': 'A',
+  'é': 'e',
+  'è': 'e',
+  'ê': 'e',
+  'ë': 'e',
+  'É': 'E',
+  'È': 'E',
+  'Ê': 'E',
+  'Ë': 'E',
+  'í': 'i',
+  'ì': 'i',
+  'î': 'i',
+  'ï': 'i',
+  'Í': 'I',
+  'Ì': 'I',
+  'Î': 'I',
+  'Ï': 'I',
+  'ó': 'o',
+  'ò': 'o',
+  'ô': 'o',
+  'ö': 'o',
+  'Ó': 'O',
+  'Ò': 'O',
+  'Ô': 'O',
+  'Ö': 'O',
+  'ú': 'u',
+  'ù': 'u',
+  'û': 'u',
+  'ü': 'u',
+  'Ú': 'U',
+  'Ù': 'U',
+  'Û': 'U',
+  'Ü': 'U',
+  'ý': 'y',
+  'ÿ': 'y',
+  'Ý': 'Y',
+  'Ÿ': 'Y',
+  'ç': 'c',
+  'Ç': 'C',
+  'ñ': 'n',
+  'Ñ': 'N',
+  'æ': 'ae',
+  'Æ': 'AE',
+  'œ': 'oe',
+  'Œ': 'OE',
+};
+
 function saneName(name: string) {
   /* Force NFC */
   name = name.normalize('NFC');
 
-  /* A diacritics */
-  for (const m of ['á', 'à', 'â', 'ä']) {
-    name = name.replace(m, 'a');
+  /* Remove diacritics */
+  for (const [base, repl] of Object.entries(DIACRITICS_BASES)) {
+    name = name.replaceAll(base, repl);
   }
-  for (const m of ['Á', 'À', 'Â', 'Ä']) {
-    name = name.replace(m, 'A');
-  }
-
-  /* E diacritics */
-  for (const m of ['é', 'è', 'ê', 'ë']) {
-    name = name.replace(m, 'e');
-  }
-  for (const m of ['É', 'È', 'Ê', 'Ë']) {
-    name = name.replace(m, 'E');
-  }
-
-  /* I diacritics */
-  for (const m of ['í', 'ì', 'î', 'ï']) {
-    name = name.replace(m, 'i');
-  }
-  for (const m of ['Í', 'Ì', 'Î', 'Ï']) {
-    name = name.replace(m, 'I');
-  }
-
-  /* O diacritics */
-  for (const m of ['ó', 'ò', 'ô', 'ö']) {
-    name = name.replace(m, 'o');
-  }
-  for (const m of ['Ó', 'Ò', 'Ô', 'Ö']) {
-    name = name.replace(m, 'O');
-  }
-
-  /* U diacritics */
-  for (const m of ['ú', 'ù', 'û', 'ü']) {
-    name = name.replace(m, 'u');
-  }
-  for (const m of ['Ú', 'Ù', 'Û', 'Ü']) {
-    name = name.replace(m, 'U');
-  }
-
-  /* Y diacritics */
-  for (const m of ['ý', 'ÿ']) {
-    name = name.replace(m, 'y');
-  }
-  for (const m of ['Ý', 'Ÿ']) {
-    name = name.replace(m, 'Y');
-  }
-
-  /* C diacritics */
-  for (const m of ['ç']) {
-    name = name.replace(m, 'c');
-  }
-  for (const m of ['Ç']) {
-    name = name.replace(m, 'C');
-  }
-
-  /* N diacritics */
-  for (const m of ['ñ']) {
-    name = name.replace(m, 'n');
-  }
-  for (const m of ['Ñ']) {
-    name = name.replace(m, 'N');
-  }
-
-  /* AE */
-  name = name.replace('æ', 'ae');
-  name = name.replace('Æ', 'AE');
-
-  /* OE */
-  name = name.replace('œ', 'oe');
-  name = name.replace('Œ', 'OE');
 
   /* Remove every other non-ascii */
   name = name.replace(/[^ -~]/g, '');
