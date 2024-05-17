@@ -279,10 +279,8 @@ void Fishing_FishGiveItem(Actor* this, GameState_Play* play) {
 
     int flag = this->variable - 100;
     if (gSave.age == AGE_ADULT) {
-        SetCollectibleFlag(play, flag);
-    } else {
-        SetChestFlag(play, flag);
+        flag += 17;
     }
-
+    BITMAP8_SET(gSharedCustomSave.caughtFishFlags, flag);
     this->draw = NULL;
 }
