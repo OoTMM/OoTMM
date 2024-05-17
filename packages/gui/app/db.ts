@@ -1,5 +1,3 @@
-import { reject } from "lodash";
-
 const dbPromise = openDatabase();
 
 function openDatabase(): Promise<IDBDatabase> {
