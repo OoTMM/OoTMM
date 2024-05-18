@@ -97,6 +97,8 @@ static const DungeonDef kDungeonDefsCoins[] = {
     { "Yellow Coins",   6, -1, DD_MISC },
 };
 
+static const DungeonDef kDungeonDefClocks = { "Clocks", 7, -1, DD_MISC };
+
 static const DungeonDef* gDungeonDefs[32];
 static int gDungeonDefCount = 0;
 
@@ -116,6 +118,9 @@ void menuInit()
     if (!Config_Flag(CFG_ONLY_MM)) addDefs(kDungeonDefsOot, ARRAY_SIZE(kDungeonDefsOot));
     if (!Config_Flag(CFG_ONLY_OOT)) addDefs(kDungeonDefsMm, ARRAY_SIZE(kDungeonDefsMm));
     addDefs(&kDungeonDataTokens, 1);
+
+    if (Config_Flag(CFG_MM_CLOCKS))
+        addDefs(&kDungeonDefClocks, 1);
 
     if (Config_Flag(CFG_GOAL_TRIFORCE) || Config_Flag(CFG_GOAL_TRIFORCE3))
         addDefs(&kDungeonDataTriforce, 1);
@@ -748,6 +753,30 @@ static void printSoul(GameState_Play* play, const char* const* names, int soulBa
     CLOSE_DISPS();
 }
 
+static void printMoonSun(GameState_Play* play, float x, float y, int isNight)
+{
+    u32 icon;
+    u8 id;
+    u8 alpha;
+
+    icon = isNight ? CUSTOM_KEEP_SMALL_ICON_MOON : CUSTOM_KEEP_SMALL_ICON_SUN;
+
+    OPEN_DISPS(play->gs.gfx);
+    gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, 255);
+    drawTexRGBA16_12x12(play, CK_PTR(icon), x, y);
+    for (int i = 0; i < 3; ++i)
+    {
+        id = (isNight ? 1 : 0) + 2 * i;
+        if (gSharedCustomSave.mm.halfDays & (1 << id))
+            alpha = 255;
+        else
+            alpha = 70;
+        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, alpha);
+        printDigit(play, i + 1, x + 12.f + 8.f * i, y);
+    }
+    CLOSE_DISPS();
+}
+
 static void printDungeonData(GameState_Play* play, int base, int index)
 {
     const DungeonDef* def;
@@ -888,6 +917,12 @@ static void printDungeonData(GameState_Play* play, int base, int index)
             gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 0, 255);
             drawTexRGBA16_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_COIN), x + 104.f, y);
             printNumColored(play, gSharedCustomSave.coins[3], gComboConfig.maxCoins[3], digitCount(gComboConfig.maxCoins[3]), x + 116.f, y, 1);
+            break;
+        case 7:
+            /* Clocks */
+            gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, 255);
+            printMoonSun(play, x + 110.f, y, 0);
+            printMoonSun(play, x + 170.f, y, 1);
             break;
         }
     }

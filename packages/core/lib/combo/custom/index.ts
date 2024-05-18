@@ -153,6 +153,8 @@ export const customAssetsKeep = async (opts: Options): Promise<{[k: string]: Buf
   SMALL_ICON_TRIFORCE: await png(opts, 'small_icon_triforce', 'rgba16'),
   SMALL_ICON_RUPEE: await png(opts, 'small_icon_rupee', 'rgba16'),
   SMALL_ICON_COIN: await png(opts, 'small_icon_coin', 'rgba16'),
+  SMALL_ICON_SUN: await png(opts, 'small_icon_sun', 'rgba16'),
+  SMALL_ICON_MOON: await png(opts, 'small_icon_moon', 'rgba16'),
 });
 
 const extractRaw = async (roms: DecompressedRoms, game: Game, file: string, offset: number, size: number) => {
