@@ -532,7 +532,7 @@ static int canSpawnActor(GameState_Play* play, s16 actorId, u16 variable)
     switch (actorId)
     {
     case AC_EN_SYATEKI_OKUTA:
-        if (play->sceneId == SCE_MM_SHOOTING_GALLERY && gSave.day > 3)
+        if (play->sceneId == SCE_MM_SHOOTING_GALLERY && (gSave.day > 3 || gSave.day < 1))
             return 0;
         /* Fallthrough */
     default:
