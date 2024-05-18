@@ -524,6 +524,7 @@ export class Pathfinder {
     const ws = this.state.ws[worldId];
     const world = this.worlds[worldId];
     const as = ws.ages[age];
+    const areasOptimized = this.worldsOptimized[worldId][age];
     const q = as.queues.events;
     as.queues.events = new Map();
 
@@ -534,8 +535,10 @@ export class Pathfinder {
           continue;
         }
 
+        const areaOptimized = areasOptimized[area];
+
         /* Evaluate the event */
-        const expr = world.areas[area].events[event];
+        const expr = areaOptimized.events[event];
         if (!expr) {
           throw new Error(`Event ${event} not found in area ${area}`);
         }
@@ -588,9 +591,9 @@ export class Pathfinder {
     /* Extract the queue */
     const ws = this.state.ws[worldId];
     const as = ws.ages[age];
-    const world = this.worlds[worldId];
     const q = as.queues.locations;
     as.queues.locations = new Map();
+    const areasOptimized = this.worldsOptimized[worldId][age];
 
     /* Evaluate all the locations */
     for (const [location, areas] of q) {
@@ -610,8 +613,10 @@ export class Pathfinder {
           continue;
         }
 
+        const areaOptimized = areasOptimized[area];
+
         /* Evaluate the location */
-        const expr = world.areas[area].locations[location];
+        const expr = areaOptimized.locations[location];
         const result = this.evalExpr(worldId, expr, age, area);
 
         /* If the result is true, add the location to the state and queue up everything */
@@ -636,9 +641,9 @@ export class Pathfinder {
     /* Extract the queue */
     const ws = this.state.ws[worldId];
     const as = ws.ages[age];
-    const world = this.worlds[worldId];
     const q = as.queues.gossips;
     as.queues.gossips = new Map();
+    const areasOptimized = this.worldsOptimized[worldId][age];
 
     /* Evaluate all the gossips */
     for (const [gossip, areas] of q) {
@@ -648,7 +653,8 @@ export class Pathfinder {
         }
 
         /* Evaluate the gossip */
-        const expr = world.areas[area].gossip[gossip];
+        const areaOptimized = areasOptimized[area];
+        const expr = areaOptimized.gossip[gossip];
         const result = this.evalExpr(worldId, expr, age, area);
 
         /* If any of the results are true, add the gossip to the state and queue up everything */

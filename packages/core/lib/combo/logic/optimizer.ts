@@ -1,5 +1,6 @@
 import { EXPR_FALSE, EXPR_TRUE, Expr, ExprAge, ExprAnd, ExprContainer, ExprOr, exprAge, exprAnd, exprOr } from './expr';
 import { Age } from './pathfind';
+import { World, WorldAreaExprs, WorldAreaExprsGraph } from './world';
 
 type ExprPartialEvalContext = {
   age?: Age;
@@ -75,4 +76,43 @@ function exprOptBubbleAge(expr: Expr): Expr {
 export function optimizeExpr(e: Expr): Expr {
   e = exprOptBubbleAge(e);
   return e;
+}
+
+export function partialEvalExprMap(exprMap: Record<string, Expr>, ctx: ExprPartialEvalContext): Record<string, Expr> {
+  const newExprMap: Record<string, Expr> = {};
+  for (const k in exprMap) {
+    const oldExpr = exprMap[k];
+    const newExpr = exprPartialEval(oldExpr, ctx);
+    newExprMap[k] = newExpr;
+  }
+  return newExprMap;
+
+}
+
+export function partialEvalWorldGraph(wg: WorldAreaExprsGraph, ctx: ExprPartialEvalContext) {
+  const newGraph: WorldAreaExprsGraph = {};
+  for (const area in wg) {
+    const newExprs: WorldAreaExprs = {
+      exits: partialEvalExprMap(wg[area].exits, ctx),
+      events: partialEvalExprMap(wg[area].events, ctx),
+      gossip: partialEvalExprMap(wg[area].gossip, ctx),
+      locations: partialEvalExprMap(wg[area].locations, ctx),
+      stay: null,
+    };
+
+    const oldStay = wg[area].stay;
+    if (oldStay) {
+      newExprs.stay = oldStay.map(x => exprPartialEval(x, ctx));
+    }
+
+    newGraph[area] = newExprs;
+  }
+  return newGraph;
+}
+
+export function optimizeWorld(world: World) {
+  world.optimized = {
+    child: partialEvalWorldGraph(world.areas, { age: 'child' }),
+    adult: partialEvalWorldGraph(world.areas, { age: 'adult' }),
+  };
 }
