@@ -16,6 +16,9 @@ static int opt(int x)
 
 static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
 {
+    if (g.isCredits)
+        return 1;
+
     switch (actorId)
     {
     case AC_EN_DS:

@@ -240,6 +240,9 @@ PATCH_CALL(0x8010af50, Actor_ByteCode_DisplayTextBox2_Hook);
 
 static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
 {
+    if (g.isCredits)
+        return 1;
+
     switch (actorId)
     {
     case AC_EN_GINKO_MAN:
