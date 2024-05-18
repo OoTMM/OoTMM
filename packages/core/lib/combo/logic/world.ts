@@ -147,8 +147,8 @@ export type ExprParsers = {
 export type WorldAreaExprsGraph = {[k: string]: WorldAreaExprs};
 
 export type WorldOptimized = {
-  child: WorldAreaExprsGraph | null;
-  adult: WorldAreaExprsGraph | null;
+  child: WorldAreaExprsGraph;
+  adult: WorldAreaExprsGraph;
 };
 
 export type World = {
@@ -168,7 +168,7 @@ export type World = {
   preCompleted: Set<string>;
   resolvedFlags: ResolvedWorldFlags;
   exprParsers: ExprParsers;
-  optimized: WorldOptimized;
+  optimized: WorldOptimized | null;
 };
 
 export const DUNGEONS_REGIONS: { [k: string]: string } = {
@@ -249,10 +249,14 @@ function cloneWorldArea(worldArea: WorldArea): WorldArea {
   };
 }
 
-function cloneWorldOptimized(worldOptimized: WorldOptimized): WorldOptimized {
+function cloneWorldOptimized(worldOptimized: WorldOptimized | null): WorldOptimized | null {
+  if (!worldOptimized) {
+    return null;
+  }
+
   return {
-    child: worldOptimized.child ? cloneWorldAreaExprsGraph(worldOptimized.child) : null,
-    adult: worldOptimized.adult ? cloneWorldAreaExprsGraph(worldOptimized.adult) : null,
+    child: cloneWorldAreaExprsGraph(worldOptimized.child),
+    adult: cloneWorldAreaExprsGraph(worldOptimized.adult),
   };
 }
 
@@ -276,6 +280,17 @@ export function cloneWorld(world: World): World {
     exprParsers: world.exprParsers,
     optimized: cloneWorldOptimized(world.optimized),
   };
+}
+
+export function optimizedWorldView(world: World): WorldOptimized {
+  if (!world.optimized) {
+    return {
+      child: world.areas,
+      adult: world.areas,
+    }
+  };
+
+  return world.optimized;
 }
 
 export class LogicPassWorld {
@@ -388,10 +403,7 @@ export class LogicPassWorld {
       entranceOverrides: new Map,
       resolvedFlags,
       exprParsers,
-      optimized: {
-        child: null,
-        adult: null,
-      },
+      optimized: null,
     };
   }
 
