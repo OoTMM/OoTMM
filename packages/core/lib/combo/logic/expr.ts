@@ -65,6 +65,13 @@ const CONSTRAINT_FLAGS = [
 
 type RecursiveArray<T> = Array<T | RecursiveArray<T>>;
 
+type ExprDependencies = {
+  items: Set<Item>;
+  events: Set<string>;
+};
+
+const DEPENDENCIES_EMPTY: ExprDependencies = { items: new Set(), events: new Set() };
+
 type ExprResultFalse = {
   result: false;
   depItems: RecursiveArray<Item>;
@@ -194,19 +201,14 @@ export const exprRestrictionsOr = (exprs: ExprResult[]): ExprRestrictions => {
 const itemCount = (state: State, item: Item): number => state.items.get(item) || 0;
 const itemsCount = (state: State, items: Item[]): number => items.reduce((acc, item) => acc + itemCount(state, item), 0);
 
-function resolveSpecialCond(settings: Settings, state: State, special: string): ExprResult {
+function specialCondSets(settings: Settings, special: string) {
   const { specialConds } = settings;
   if (!specialConds.hasOwnProperty(special)) {
     throw new Error(`Unknown special condition: ${special}`);
   }
-
-  if (state.ignoreItems) {
-    return RESULT_TRUE;
-  }
-
+  const cond = specialConds[special as keyof typeof specialConds];
   let items = new Set<Item>();
   let itemsUnique = new Set<Item>();
-  const cond = specialConds[special as keyof typeof specialConds];
 
   if (cond.stones) itemsUnique = new Set([...itemsUnique, ...ItemGroups.STONES]);
   if (cond.medallions) itemsUnique = new Set([...itemsUnique, ...ItemGroups.MEDALLIONS]);
@@ -228,6 +230,18 @@ function resolveSpecialCond(settings: Settings, state: State, special: string): 
   if (cond.coinsBlue) items.add(Items.OOT_COIN_BLUE);
   if (cond.coinsYellow) items.add(Items.OOT_COIN_YELLOW);
 
+  return { items, itemsUnique };
+}
+
+function resolveSpecialCond(settings: Settings, state: State, special: string): ExprResult {
+  if (state.ignoreItems) {
+    return RESULT_TRUE;
+  }
+
+  const { items, itemsUnique } = specialCondSets(settings, special);
+  const { specialConds } = settings;
+  const cond = specialConds[special as keyof typeof specialConds];
+
   const countUnique = [...itemsUnique].filter((item) => itemCount(state, item) > 0).length;
   const result = itemsCount(state, [...items]) + countUnique >= cond.count;
 
@@ -237,11 +251,31 @@ function resolveSpecialCond(settings: Settings, state: State, special: string): 
 const exprMap = new Map<string, Expr>();
 const exprKeyId = new Map<string, number>();
 
+function mergeDependencies(deps: ExprDependencies[]): ExprDependencies {
+  const items = new Set<Item>();
+  const events = new Set<string>();
+
+  for (const d of deps) {
+    for (const i of d.items) {
+      items.add(i);
+    }
+    for (const e of d.events) {
+      events.add(e);
+    }
+  }
+
+  return { items, events };
+}
+
 export abstract class Expr {
   readonly key: string;
+  readonly dependencies: ExprDependencies;
 
-  constructor(k: string) {
+  constructor(k: string, deps: ExprDependencies = DEPENDENCIES_EMPTY) {
     this.key = k;
+    this.dependencies = deps;
+
+    //console.log(`Deps: ${k} -> ${[...deps.items].map((x) => x.id).join(',')} ${[...deps.events].join(',')}`);
   }
   abstract eval(state: State): ExprResult;
 
@@ -254,7 +288,7 @@ export abstract class ExprContainer extends Expr {
   readonly exprs: Expr[];
 
   constructor(k: string, exprs: Expr[]) {
-    super(k);
+    super(k, mergeDependencies(exprs.map((x) => x.dependencies)));
     this.exprs = exprs;
   }
 
@@ -375,7 +409,7 @@ class ExprHas extends Expr {
 
   constructor(item: Item, count: number) {
     const key = `HAS(${item.id},${count})`;
-    super(key);
+    super(key, { items: new Set([item]), events: new Set() });
     this.item = item;
     this.count = count;
   }
@@ -391,7 +425,7 @@ class ExprRenewable extends Expr {
 
   constructor(item: Item) {
     const key = `RENEWABLE(${item.id})`;
-    super(key);
+    super(key, { items: new Set([item]), events: new Set() });
     this.item = item;
   }
 
@@ -406,7 +440,7 @@ class ExprLicense extends Expr {
 
   constructor(item: Item) {
     const key = `LICENSE(${item.id})`;
-    super(key);
+    super(key, { items: new Set([item]), events: new Set() });
     this.item = item;
   }
 
@@ -420,7 +454,7 @@ class ExprEvent extends Expr {
   readonly event: string;
 
   constructor(event: string) {
-    super(`EVENT(${event})`);
+    super(`EVENT(${event})`, { items: new Set(), events: new Set([event]) });
     this.event = event;
   }
 
@@ -434,7 +468,7 @@ class ExprMasks extends Expr {
   readonly count: number;
 
   constructor(count: number) {
-    super(`MASKS(${count})`);
+    super(`MASKS(${count})`, { items: new Set([...ItemGroups.MASKS_REGULAR]), events: new Set() });
     this.count = count;
   }
 
@@ -448,8 +482,9 @@ class ExprSpecial extends Expr {
   readonly type = 'special';
   readonly special: string;
 
-  constructor(special: string) {
-    super(`SPECIAL(${special})`);
+  constructor(settings: Settings, special: string) {
+    const { items, itemsUnique } = specialCondSets(settings, special);
+    super(`SPECIAL(${special})`, { items: new Set([...items, ...itemsUnique]), events: new Set() });
     this.special = special;
   }
 
@@ -680,8 +715,8 @@ export const exprMasks = (count: number): Expr => {
   return exprMemo(new ExprMasks(count));
 };
 
-export const exprSpecial = (special: string): Expr => {
-  return exprMemo(new ExprSpecial(special));
+export const exprSpecial = (settings: Settings, special: string): Expr => {
+  return exprMemo(new ExprSpecial(settings, special));
 };
 
 export const exprSetting = (settings: Settings, resolvedFlags: ResolvedWorldFlags, setting: string, value: any): Expr => {

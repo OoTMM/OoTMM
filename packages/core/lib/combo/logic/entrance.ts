@@ -12,7 +12,7 @@ import { Location, makeLocation } from './locations';
 import { LogicPassSolver } from './solve';
 import { PlayerItems } from '../items';
 import { ItemProperties } from './item-properties';
-import { optimizeExpr, optimizeWorld } from './optimizer';
+import { optimizeWorld } from './optimizer';
 
 type Entrance = keyof typeof ENTRANCES;
 
