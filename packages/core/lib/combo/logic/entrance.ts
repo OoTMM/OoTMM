@@ -12,7 +12,7 @@ import { Location, makeLocation } from './locations';
 import { LogicPassSolver } from './solve';
 import { PlayerItems } from '../items';
 import { ItemProperties } from './item-properties';
-import { optimizeExpr } from './expr-optimizer';
+import { optimizeWorld } from './optimizer';
 
 type Entrance = keyof typeof ENTRANCES;
 
@@ -859,7 +859,7 @@ export class LogicPassEntrances {
     const agePathfinder = new Pathfinder(newWorlds, this.input.settings, this.input.startingItems);
     const pathfinderState = agePathfinder.run(null, { recursive: true });
     const target = 'OOT Temple of Time';
-    if (pathfinderState.ws.some(x => !(x.areas.adult.has(target) || x.areas.child.has(target)))) {
+    if (pathfinderState.ws.some(x => !(x.ages.adult.areas.has(target) || x.ages.child.areas.has(target)))) {
       throw new LogicEntranceError('Temple of Time is unreachable from the non-starting age');
     }
   }
@@ -924,11 +924,12 @@ export class LogicPassEntrances {
 
     /* TODO: Do this somewhere else */
     for (const world of this.input.worlds) {
-      for (const area of Object.values(world.areas)) {
-        area.exits = mapValues(area.exits, e => optimizeExpr(e));
-        area.events = mapValues(area.events, e => optimizeExpr(e));
-        area.locations = mapValues(area.locations, e => optimizeExpr(e));
-      }
+      optimizeWorld(world);
+      //for (const area of Object.values(world.areas)) {
+      //  area.exits = mapValues(area.exits, e => optimizeExpr(e));
+      //  area.events = mapValues(area.events, e => optimizeExpr(e));
+      //  area.locations = mapValues(area.locations, e => optimizeExpr(e));
+      //}
     }
 
     for (;;) {
