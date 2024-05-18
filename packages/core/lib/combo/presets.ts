@@ -86,6 +86,7 @@ const BLITZ_BASE: PartialDeep<Settings> = {
   sharedScales: true,
   sharedStrength: true,
   keepItemsReset: true,
+  fastMasks: true,
   startingItems: {
     OOT_NUTS_10: 2,
     OOT_SHIELD_DEKU: 1,
