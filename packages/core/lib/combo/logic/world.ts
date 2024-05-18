@@ -100,16 +100,19 @@ export type ExprMap = {
   [k: string]: Expr;
 }
 
-export type WorldArea = {
-  game: Game;
-  boss: boolean;
-  ageChange: boolean;
-  dungeon: string | null;
+export type WorldAreaExprs = {
   exits: ExprMap;
   events: ExprMap;
   locations: ExprMap;
   gossip: ExprMap;
   stay: Expr[] | null;
+};
+
+export type WorldArea = WorldAreaExprs & {
+  game: Game;
+  boss: boolean;
+  ageChange: boolean;
+  dungeon: string | null;
   time: 'still' | 'day' | 'night' | 'flow';
   region: string;
 };
@@ -141,6 +144,13 @@ export type ExprParsers = {
   mm: ExprParser;
 }
 
+export type WorldAreaExprsGraph = {[k: string]: WorldAreaExprs};
+
+export type WorldOptimized = {
+  child: WorldAreaExprsGraph | null;
+  adult: WorldAreaExprsGraph | null;
+};
+
 export type World = {
   areas: { [k: string]: WorldArea };
   checks: { [k: string]: WorldCheck };
@@ -158,6 +168,7 @@ export type World = {
   preCompleted: Set<string>;
   resolvedFlags: ResolvedWorldFlags;
   exprParsers: ExprParsers;
+  optimized: WorldOptimized;
 };
 
 export const DUNGEONS_REGIONS: { [k: string]: string } = {
@@ -208,19 +219,40 @@ function cloneChecks(checks: { [k: string]: WorldCheck }): { [k: string]: WorldC
   return result;
 }
 
-function cloneWorldArea(worldArea: WorldArea): WorldArea {
+function cloneWorldAreaExprs(worldArea: WorldAreaExprs): WorldAreaExprs {
   return {
-    game: worldArea.game,
-    boss: worldArea.boss,
-    ageChange: worldArea.ageChange,
-    dungeon: worldArea.dungeon,
     exits: { ...worldArea.exits },
     events: { ...worldArea.events },
     locations: { ...worldArea.locations },
     gossip: { ...worldArea.gossip },
     stay: worldArea.stay ? [...worldArea.stay] : null,
+  };
+}
+
+function cloneWorldAreaExprsGraph(worldAreaExprsGraph: WorldAreaExprsGraph): WorldAreaExprsGraph {
+  const result: WorldAreaExprsGraph = {};
+  for (const [k, v] of Object.entries(worldAreaExprsGraph)) {
+    result[k] = cloneWorldAreaExprs(v);
+  }
+  return result;
+};
+
+function cloneWorldArea(worldArea: WorldArea): WorldArea {
+  return {
+    ...cloneWorldAreaExprs(worldArea),
+    game: worldArea.game,
+    boss: worldArea.boss,
+    ageChange: worldArea.ageChange,
+    dungeon: worldArea.dungeon,
     time: worldArea.time,
     region: worldArea.region,
+  };
+}
+
+function cloneWorldOptimized(worldOptimized: WorldOptimized): WorldOptimized {
+  return {
+    child: worldOptimized.child ? cloneWorldAreaExprsGraph(worldOptimized.child) : null,
+    adult: worldOptimized.adult ? cloneWorldAreaExprsGraph(worldOptimized.adult) : null,
   };
 }
 
@@ -242,6 +274,7 @@ export function cloneWorld(world: World): World {
     entranceOverrides: new Map(world.entranceOverrides),
     resolvedFlags: world.resolvedFlags,
     exprParsers: world.exprParsers,
+    optimized: cloneWorldOptimized(world.optimized),
   };
 }
 
@@ -355,6 +388,10 @@ export class LogicPassWorld {
       entranceOverrides: new Map,
       resolvedFlags,
       exprParsers,
+      optimized: {
+        child: null,
+        adult: null,
+      },
     };
   }
 
