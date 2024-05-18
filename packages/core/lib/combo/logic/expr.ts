@@ -269,13 +269,9 @@ function mergeDependencies(deps: ExprDependencies[]): ExprDependencies {
 
 export abstract class Expr {
   readonly key: string;
-  readonly dependencies: ExprDependencies;
 
-  constructor(k: string, deps: ExprDependencies = DEPENDENCIES_EMPTY) {
+  constructor(k: string) {
     this.key = k;
-    this.dependencies = deps;
-
-    //console.log(`Deps: ${k} -> ${[...deps.items].map((x) => x.id).join(',')} ${[...deps.events].join(',')}`);
   }
   abstract eval(state: State): ExprResult;
 
@@ -288,7 +284,7 @@ export abstract class ExprContainer extends Expr {
   readonly exprs: Expr[];
 
   constructor(k: string, exprs: Expr[]) {
-    super(k, mergeDependencies(exprs.map((x) => x.dependencies)));
+    super(k);
     this.exprs = exprs;
   }
 
@@ -406,75 +402,100 @@ export class ExprAge extends Expr {
 class ExprHas extends Expr {
   readonly item: Item;
   readonly count: number;
+  readonly resultFalse: ExprResultFalse;
 
   constructor(item: Item, count: number) {
     const key = `HAS(${item.id},${count})`;
-    super(key, { items: new Set([item]), events: new Set() });
+    super(key);
     this.item = item;
     this.count = count;
+    this.resultFalse = { result: false, depItems: [item], depEvents: [] };
   }
 
   eval(state: State): ExprResult {
-    const result = state.ignoreItems || itemCount(state, this.item) >= this.count;
-    return { result, depItems: [this.item], depEvents: [] };
+    if (state.ignoreItems || itemCount(state, this.item) >= this.count) {
+      return RESULT_TRUE;
+    } else {
+      return this.resultFalse;
+    }
   }
 }
 
 class ExprRenewable extends Expr {
   readonly item: Item;
+  readonly resultFalse: ExprResultFalse;
 
   constructor(item: Item) {
     const key = `RENEWABLE(${item.id})`;
-    super(key, { items: new Set([item]), events: new Set() });
+    super(key);
     this.item = item;
+    this.resultFalse = { result: false, depItems: [item], depEvents: [] };
   }
 
   eval(state: State): ExprResult {
-    const result = state.ignoreItems || (state.renewables.get(this.item) || 0) > 0;
-    return { result, depItems: [this.item], depEvents: [] };
+    if (state.ignoreItems || (state.renewables.get(this.item) || 0) > 0) {
+      return RESULT_TRUE;
+    } else {
+      return this.resultFalse;
+    }
   }
 }
 
 class ExprLicense extends Expr {
   readonly item: Item;
+  readonly resultFalse: ExprResultFalse;
 
   constructor(item: Item) {
     const key = `LICENSE(${item.id})`;
-    super(key, { items: new Set([item]), events: new Set() });
+    super(key);
     this.item = item;
+    this.resultFalse = { result: false, depItems: [item], depEvents: [] };
   }
 
   eval(state: State): ExprResult {
-    const result = state.ignoreItems || (state.licenses.get(this.item) || 0) > 0;
-    return { result, depItems: [this.item], depEvents: [] };
+    if (state.ignoreItems || (state.licenses.get(this.item) || 0) > 0) {
+      return RESULT_TRUE;
+    } else {
+      return this.resultFalse;
+    }
   }
 }
 
 class ExprEvent extends Expr {
   readonly event: string;
+  readonly resultFalse: ExprResultFalse;
 
   constructor(event: string) {
-    super(`EVENT(${event})`, { items: new Set(), events: new Set([event]) });
+    super(`EVENT(${event})`);
     this.event = event;
+    this.resultFalse = { result: false, depItems: [], depEvents: [event] };
   }
 
   eval(state: State): ExprResult {
-    const result = state.events.has(this.event);
-    return { result, depItems: [], depEvents: [this.event] };
+    if (state.events.has(this.event)) {
+      return RESULT_TRUE;
+    } else {
+      return this.resultFalse;
+    }
   }
 }
 
 class ExprMasks extends Expr {
   readonly count: number;
+  readonly resultFalse: ExprResultFalse;
 
   constructor(count: number) {
-    super(`MASKS(${count})`, { items: new Set([...ItemGroups.MASKS_REGULAR]), events: new Set() });
+    super(`MASKS(${count})`);
     this.count = count;
+    this.resultFalse = { result: false, depItems: [...ItemGroups.MASKS_REGULAR], depEvents: [] };
   }
 
   eval(state: State): ExprResult {
-    const result = state.ignoreItems || itemsCount(state, [...ItemGroups.MASKS_REGULAR]) >= this.count;
-    return { result, depItems: [...ItemGroups.MASKS_REGULAR], depEvents: [] };
+    if (state.ignoreItems || itemsCount(state, [...ItemGroups.MASKS_REGULAR]) >= this.count) {
+      return RESULT_TRUE;
+    } else {
+      return this.resultFalse;
+    }
   }
 }
 
@@ -483,8 +504,7 @@ class ExprSpecial extends Expr {
   readonly special: string;
 
   constructor(settings: Settings, special: string) {
-    const { items, itemsUnique } = specialCondSets(settings, special);
-    super(`SPECIAL(${special})`, { items: new Set([...items, ...itemsUnique]), events: new Set() });
+    super(`SPECIAL(${special})`);
     this.special = special;
   }
 
@@ -509,11 +529,7 @@ class ExprTimeOot extends Expr {
       restrictions.oot[negation] = true;
       return { result: true, depItems: [], depEvents: [], restrictions };
     } else {
-      return {
-        result: false,
-        depItems: [],
-        depEvents: [],
-      };
+      return RESULT_FALSE;
     }
   }
 }
@@ -535,11 +551,7 @@ class ExprTimeMm extends Expr {
       restrictions.mmTime2 = ~this.value2 >>> 0;
       return { result: true, restrictions, depItems: [], depEvents: [] };
     } else {
-      return {
-        result: false,
-        depItems: [],
-        depEvents: [],
-      };
+      return RESULT_FALSE;
     }
   }
 }
@@ -556,8 +568,7 @@ class ExprPrice extends Expr {
 
   eval(state: State): ExprResult {
     const price = state.world.prices[this.slot];
-    const result = price <= this.max;
-    return { result, depItems: [], depEvents: [] };
+    return price <= this.max ? RESULT_TRUE : RESULT_FALSE;
   }
 }
 
