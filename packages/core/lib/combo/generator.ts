@@ -62,6 +62,7 @@ export class Generator {
   }
 
   async run(): Promise<GeneratorOutput> {
+    const startTime = performance.now();
     const roms = await decompressGames(this.monitor, { oot: this.oot, mm: this.mm });
     const addresses = makeAddresses(roms);
     let patchfiles: Patchfile[];
@@ -123,6 +124,11 @@ export class Generator {
     if (log) {
       files.push(makeFile({ name: 'Spoiler', hash: hashFileName, data: Buffer.from(log), mime: 'text/plain', ext: 'txt' }));
     }
+
+    const endTime = performance.now();
+    const durationMs = Math.round(endTime - startTime);
+    const duration = durationMs / 1000;
+    this.monitor.debug(`Generation took ${duration.toFixed(3)}s`);
 
     return { hash, files };
   }
