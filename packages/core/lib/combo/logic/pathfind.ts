@@ -40,7 +40,6 @@ type PathfinderDependencies = {
 type PathfinderQueues = {
   locations: Map<string, Set<string>>;
   gossips: Map<string, Set<string>>;
-  exits: Map<string, Set<string>>;
 };
 
 type PathfinderAgeState = {
@@ -90,7 +89,6 @@ const defaultAgeState = (): PathfinderAgeState => ({
   queues: {
     locations: new Map(),
     gossips: new Map(),
-    exits: new Map(),
   },
   areas: new Map(),
   dependencies: {
@@ -260,7 +258,7 @@ export class Pathfinder {
     return this.state;
   }
 
-  private queue(type: 'locations' | 'exits' | 'gossips', age: Age, world: number, id: string, area: string) {
+  private queue(type: 'locations' | 'gossips', age: Age, world: number, id: string, area: string) {
     const q = this.state.ws[world].ages[age].queues[type];
     if (!q.has(id)) {
       q.set(id, new Set([area]));
@@ -364,7 +362,7 @@ export class Pathfinder {
     locs.forEach(x => this.queue('locations', age, worldId, x, area));
     Object.keys(worldAreaOptimized.events).filter(x => !ws.events.has(x)).forEach(x => this.evalEvent(worldId, age, area, x));
     const exits = Object.keys(worldAreaOptimized.exits);
-    exits.forEach(x => this.queue('exits', age, worldId, x, area));
+    exits.forEach(x => this.evalExit(worldId, age, area, x));
 
     if (this.opts.gossips) {
       Object.keys(worldAreaOptimized.gossip).forEach(x => this.queue('gossips', age, worldId, x, area));
@@ -424,7 +422,7 @@ export class Pathfinder {
       if (deps) {
         as.dependencies.items.delete(item);
         for (const [area, d] of deps) {
-          d.exits.forEach(x => this.queue('exits', age, worldId, x, area));
+          d.exits.forEach(x => this.evalExit(worldId, age, area, x));
           d.events.forEach(x => this.evalEvent(worldId, age, area, x));
           d.locations.forEach(x => this.queue('locations', age, worldId, x, area));
           if (this.opts.gossips) {
@@ -469,42 +467,34 @@ export class Pathfinder {
     }
   }
 
-  private evalExits(worldId: number, age: Age) {
+  private evalExit(worldId: number, age: Age, area: string, exit: string) {
     /* Extract the queue */
     const ws = this.state.ws[worldId];
     const as = ws.ages[age];
-    const queue = as.queues.exits;
-    as.queues.exits = new Map();
     const areasOptimized = this.worldsOptimized[worldId][age];
+    const aOptimized = areasOptimized[area];
+    const expr = aOptimized.exits[exit];
+    const exprResult = this.evalExpr(worldId, expr, age, area);
 
-    /* Evaluate all the exits */
-    for (const [exit, areas] of queue) {
-      for (const area of areas) {
-        const aOptimized = areasOptimized[area];
-        const expr = aOptimized.exits[exit];
-        const exprResult = this.evalExpr(worldId, expr, age, area);
+    /* Track dependencies */
+    this.trackDependencies('exits', as.dependencies, exit, area, exprResult);
 
-        /* Track dependencies */
-        this.trackDependencies('exits', as.dependencies, exit, area, exprResult);
-
-        if (exprResult.result) {
-          const areaData = cloneAreaData(as.areas.get(area)!);
-          const r = exprResult.restrictions;
-          if (r) {
-            if (r.oot.day) areaData.oot.day = false;
-            if (r.oot.night) areaData.oot.night = false;
-            if (r.mmTime) {
-              areaData.mmTime = (areaData.mmTime & ~(r.mmTime)) >>> 0;
-            }
-            if (r.mmTime2) {
-              areaData.mmTime2 = (areaData.mmTime2 & ~(r.mmTime2)) >>> 0;
-            }
-            areaData.flagsOn = (areaData.flagsOn | r.flagsOn) >>> 0;
-            areaData.flagsOff = (areaData.flagsOff | r.flagsOff) >>> 0;
-          }
-          this.exploreArea(worldId, age, exit, areaData, area);
+    if (exprResult.result) {
+      const areaData = cloneAreaData(as.areas.get(area)!);
+      const r = exprResult.restrictions;
+      if (r) {
+        if (r.oot.day) areaData.oot.day = false;
+        if (r.oot.night) areaData.oot.night = false;
+        if (r.mmTime) {
+          areaData.mmTime = (areaData.mmTime & ~(r.mmTime)) >>> 0;
         }
+        if (r.mmTime2) {
+          areaData.mmTime2 = (areaData.mmTime2 & ~(r.mmTime2)) >>> 0;
+        }
+        areaData.flagsOn = (areaData.flagsOn | r.flagsOn) >>> 0;
+        areaData.flagsOff = (areaData.flagsOff | r.flagsOff) >>> 0;
       }
+      this.exploreArea(worldId, age, exit, areaData, area);
     }
   }
 
@@ -536,7 +526,7 @@ export class Pathfinder {
         if (deps) {
           evAs.dependencies.events.delete(event);
           for (const [area, d] of deps) {
-            d.exits.forEach(x => this.queue('exits', evAge, worldId, x, area));
+            d.exits.forEach(x => this.evalExit(worldId, evAge, area, x));
             d.events.forEach(x => this.evalEvent(worldId, evAge, area, x));
             d.locations.forEach(x => this.queue('locations', evAge, worldId, x, area));
             if (this.opts.gossips) {
@@ -654,25 +644,6 @@ export class Pathfinder {
         continue;
       }
 
-      for (;;) {
-        /* Expand as much as possible */
-        for (const age of AGES) {
-          this.evalExits(worldId, age);
-        }
-
-        let isQueued = false;
-        for (const age of AGES) {
-          if (ws.ages[age].queues.exits.size) {
-            isQueued = true;
-            break;
-          }
-        }
-
-        if (!isQueued) {
-          break;
-        }
-      }
-
       /* Get locations */
       for (;;) {
         for (const age of AGES) {
@@ -698,7 +669,7 @@ export class Pathfinder {
       for (const age of AGES) {
         const as = ws.ages[age];
         const q = as.queues;
-        if (q.exits.size || q.locations.size)
+        if (q.locations.size)
           return true;
       }
     }
