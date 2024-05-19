@@ -38,12 +38,7 @@ type PathfinderDependencies = {
   events: PathfinderDependencySet<string>;
 };
 
-type PathfinderQueues = {
-  gossips: Map<string, Set<string>>;
-};
-
 type PathfinderAgeState = {
-  queues: PathfinderQueues;
   areas: Map<string, AreaData>;
   dependencies: PathfinderDependencies;
 };
@@ -86,9 +81,6 @@ const emptyDepList = (): PathfinderDependencyList => ({
 });
 
 const defaultAgeState = (): PathfinderAgeState => ({
-  queues: {
-    gossips: new Map(),
-  },
   areas: new Map(),
   dependencies: {
     items: new Map(),
@@ -272,15 +264,6 @@ export class Pathfinder {
     return this.state;
   }
 
-  private queue(type: 'gossips', age: Age, world: number, id: string, area: string) {
-    const q = this.state.ws[world].ages[age].queues[type];
-    if (!q.has(id)) {
-      q.set(id, new Set([area]));
-    } else {
-      q.get(id)!.add(area);
-    }
-  }
-
   /**
    * Explore an area, adding all locations and events to the queue
    */
@@ -379,7 +362,7 @@ export class Pathfinder {
     exits.forEach(x => this.evalExit(worldId, age, area, x));
 
     if (this.opts.gossips) {
-      Object.keys(worldAreaOptimized.gossip).forEach(x => this.queue('gossips', age, worldId, x, area));
+      Object.keys(worldAreaOptimized.gossip).forEach(x => this.evalGossip(worldId, age, area, x));
     }
   }
 
@@ -440,7 +423,7 @@ export class Pathfinder {
           d.events.forEach(x => this.evalEvent(worldId, age, area, x));
           d.locations.forEach(x => this.evalLocation(worldId, age, area, x));
           if (this.opts.gossips) {
-            d.gossips.forEach(x => this.queue('gossips', age, worldId, x, area));
+            d.gossips.forEach(x => this.evalGossip(worldId, age, area, x));
           }
         }
       }
@@ -555,7 +538,7 @@ export class Pathfinder {
             d.events.forEach(x => this.evalEvent(worldId, evAge, area, x));
             d.locations.forEach(x => this.evalLocation(worldId, evAge, area, x));
             if (this.opts.gossips) {
-              d.gossips.forEach(x => this.queue('gossips', evAge, worldId, x, area));
+              d.gossips.forEach(x => this.evalGossip(worldId, evAge, area, x));
             }
           }
         }
@@ -619,35 +602,28 @@ export class Pathfinder {
     }
   }
 
-  private evalGossips(worldId: number, age: Age) {
+  private evalGossip(worldId: number, age: Age, area: string, gossip: string) {
+    if (this.state.gossips[worldId].has(gossip)) {
+      return;
+    }
+
     /* Extract the queue */
     const ws = this.state.ws[worldId];
     const as = ws.ages[age];
-    const q = as.queues.gossips;
-    as.queues.gossips = new Map();
     const areasOptimized = this.worldsOptimized[worldId][age];
+    const areaOptimized = areasOptimized[area];
 
-    /* Evaluate all the gossips */
-    for (const [gossip, areas] of q) {
-      for (const area of areas) {
-        if (this.state.gossips[worldId].has(gossip)) {
-          continue;
-        }
+    /* Evaluate the gossip */
+    const expr = areaOptimized.gossip[gossip];
+    const result = this.evalExpr(worldId, expr, age, area);
 
-        /* Evaluate the gossip */
-        const areaOptimized = areasOptimized[area];
-        const expr = areaOptimized.gossip[gossip];
-        const result = this.evalExpr(worldId, expr, age, area);
-
-        /* If any of the results are true, add the gossip to the state and queue up everything */
-        /* Otherwise, track dependencies */
-        if (result.result) {
-          this.state.gossips[worldId].add(gossip);
-        } else {
-          /* Track dependencies */
-          this.trackDependencies('gossips', as.dependencies, gossip, area, result);
-        }
-      }
+    /* If any of the results are true, add the gossip to the state and queue up everything */
+    /* Otherwise, track dependencies */
+    if (result.result) {
+      this.state.gossips[worldId].add(gossip);
+    } else {
+      /* Track dependencies */
+      this.trackDependencies('gossips', as.dependencies, gossip, area, result);
     }
   }
 
@@ -769,15 +745,6 @@ export class Pathfinder {
           countMapAdd(ws.licenses, playerItem.item, delta);
           this.requeueItem(playerItem.player, playerItem.item);
           this.state.previousAssumedItems.set(playerItem, amount);
-        }
-      }
-    }
-
-    /* Check for gossips */
-    if (this.opts.gossips) {
-      for (let worldId = 0; worldId < this.worlds.length; ++worldId) {
-        for (const age of AGES) {
-          this.evalGossips(worldId, age);
         }
       }
     }
