@@ -915,22 +915,15 @@ export class LogicPassEntrances {
     }
 
     this.propagateRegions();
+    for (const w of this.worlds) {
+      optimizeWorld(w);
+    }
 
     return { worlds: this.worlds };
   }
 
   run() {
     let attempts = 1;
-
-    /* TODO: Do this somewhere else */
-    for (const world of this.input.worlds) {
-      optimizeWorld(world);
-      //for (const area of Object.values(world.areas)) {
-      //  area.exits = mapValues(area.exits, e => optimizeExpr(e));
-      //  area.events = mapValues(area.events, e => optimizeExpr(e));
-      //  area.locations = mapValues(area.locations, e => optimizeExpr(e));
-      //}
-    }
 
     for (;;) {
       try {
