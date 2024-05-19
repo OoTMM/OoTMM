@@ -24,6 +24,20 @@ const recursiveForEach = <T>(arr: any, cb: (x: T) => void) => {
   }
 }
 
+const MASKS_BITS_SET = [
+  0x00000001, 0x00000003, 0x00000007, 0x0000000f,
+  0x0000001f, 0x0000003f, 0x0000007f, 0x000000ff,
+  0x000001ff, 0x000003ff, 0x000007ff, 0x00000fff,
+  0x00001fff, 0x00003fff, 0x00007fff, 0x0000ffff,
+  0x0001ffff, 0x0003ffff, 0x0007ffff, 0x000fffff,
+  0x001fffff, 0x003fffff, 0x007fffff, 0x00ffffff,
+  0x01ffffff, 0x03ffffff, 0x07ffffff, 0x0fffffff,
+  0x1fffffff, 0x3fffffff, 0x7fffffff, 0xffffffff,
+];
+
+const MASK_MM_TIME = MM_TIME_SLICES.length > 32 ? 0xffffffff : MASKS_BITS_SET[MM_TIME_SLICES.length - 1];
+const MASK_MM_TIME2 = MM_TIME_SLICES.length > 32 ? MASKS_BITS_SET[MM_TIME_SLICES.length - 33] : 0;
+
 type PathfinderDependencyList = {
   locations: Set<string>;
   events: Set<string>;
@@ -291,27 +305,32 @@ export class Pathfinder {
         return;
       }
 
-      /* If we come from OoT, we can song of time to get back to day 1 */
-      const fa = world.areas[fromArea];
-      if (fa.game === 'oot') {
-        newAreaData.mmTime = (newAreaData.mmTime | (1 << 0)) >>> 0;
-      }
-
       if (worldAreaOptimized.stay === null) {
-        /* We can wait to reach later time slices */
-        let earliest: number;
+        let mmTime;
+        let mmTime2;
         if (newAreaData.mmTime) {
-          earliest = Math.floor(Math.log2(newAreaData.mmTime));
+          mmTime = newAreaData.mmTime;
+          mmTime = (mmTime | (mmTime << 1));
+          mmTime = (mmTime | (mmTime << 2));
+          mmTime = (mmTime | (mmTime << 4));
+          mmTime = (mmTime | (mmTime << 8));
+          mmTime = (mmTime | (mmTime << 16));
+          mmTime2 = 0xffffffff;
         } else {
-          earliest = Math.floor(Math.log2(newAreaData.mmTime2)) + 32;
+          mmTime2 = newAreaData.mmTime2;
+          mmTime2 = (mmTime2 | (mmTime2 << 1));
+          mmTime2 = (mmTime2 | (mmTime2 << 2));
+          mmTime2 = (mmTime2 | (mmTime2 << 4));
+          mmTime2 = (mmTime2 | (mmTime2 << 8));
+          mmTime2 = (mmTime2 | (mmTime2 << 16));
+          mmTime = 0;
         }
-        for (let i = earliest; i < MM_TIME_SLICES.length; ++i) {
-          if (i < 32) {
-            newAreaData.mmTime = (newAreaData.mmTime | (1 << i)) >>> 0;
-          } else {
-            newAreaData.mmTime2 = (newAreaData.mmTime2 | (1 << (i - 32))) >>> 0;
-          }
-        }
+
+        mmTime = (mmTime & MASK_MM_TIME) >>> 0;
+        mmTime2 = (mmTime2 & MASK_MM_TIME2) >>> 0;
+
+        newAreaData.mmTime = mmTime;
+        newAreaData.mmTime2 = mmTime2;
       } else {
         /* We can wait but there are conditions */
         let waitMode = false;
@@ -486,6 +505,8 @@ export class Pathfinder {
     const ws = this.state.ws[worldId];
     const as = ws.ages[age];
     const areasOptimized = this.worldsOptimized[worldId][age];
+    const world = this.worlds[worldId];
+    const a = world.areas[area];
     const aOptimized = areasOptimized[area];
     const expr = aOptimized.exits[exit];
     const exprResult = this.evalExpr(worldId, expr, age, area);
@@ -510,6 +531,13 @@ export class Pathfinder {
       }
       const previousAreaData = as.areas.get(exit);
       const exitArea = this.worlds[worldId].areas[exit];
+
+      /* If we come from OoT, we can song of time to get back to day 1 */
+      if (a.game === 'oot' && exitArea.game === 'mm') {
+        areaData.mmTime = (areaData.mmTime | 1);
+      }
+
+      /* Extremely aggressive optimization, skip some areas early if we know there won't be time expansion */
       if (!(previousAreaData && coveringAreaData(previousAreaData, areaData) && exitArea.stay === null)) {
         this.exploreArea(worldId, age, exit, areaData, area);
       }
