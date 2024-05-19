@@ -1073,7 +1073,7 @@ export class LogicPassSolver {
         /* Pathfind to see how many locations this item unlocks */
         const assumedItems: PlayerItems = new Map;
         assumedItems.set(pi, 1);
-        const pathfindState = this.pathfinder.run(null, { recursive: true, items: this.state.items, assumedItems, stopAtGoal: true });
+        const pathfindState = this.pathfinder.run(null, { recursive: true, items: this.state.items, assumedItems });
         const newAvailableLocsCount = [...pathfindState.locations].filter(x => !this.state.items.has(x)).length;
         const netGain = newAvailableLocsCount - availableLocsCount - 1;
 
@@ -1163,7 +1163,7 @@ export class LogicPassSolver {
         const loc = unplacedLocs.pop()!;
         const newPlacement = new Map(this.state.items);
         newPlacement.set(loc, requiredItem);
-        const result = this.pathfinder.run(null, { recursive: true, stopAtGoal: true, items: newPlacement, assumedItems: pool, ganonMajora: this.input.settings.goal === 'triforce3' });
+        const result = this.pathfinder.run(null, { recursive: true, items: newPlacement, assumedItems: pool, ganonMajora: this.input.settings.goal === 'triforce3' });
         let goal: boolean;
         if (this.input.settings.goal === 'triforce3') {
           goal = result.ganonMajora;

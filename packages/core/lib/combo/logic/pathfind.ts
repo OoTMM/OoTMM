@@ -8,6 +8,7 @@ import { isLocationLicenseGranting, isLocationRenewable } from './locations';
 import { ItemPlacement } from './solve';
 import { countMapAdd } from '../util';
 import { Item, Items, ItemsCount, PlayerItems } from '../items';
+import { isTriforcePiece } from '../items/helpers';
 
 export const AGES = ['child', 'adult'] as const;
 
@@ -64,6 +65,7 @@ type PathfinderWorldState = {
 }
 
 export type PathfinderState = {
+  stopped: boolean;
   goal: boolean;
   ganonMajora: boolean;
   started: boolean;
@@ -132,6 +134,7 @@ const defaultState = (startingItems: PlayerItems, worldCount: number): Pathfinde
   }
 
   return {
+    stopped: false,
     previousAssumedItems: new Map,
     goal: false,
     ganonMajora: false,
@@ -473,12 +476,17 @@ export class Pathfinder {
       if (isLocationLicenseGranting(world, globalLoc))
         countMapAdd(otherWs.licenses, playerItem.item);
       this.requeueItem(playerItem.player, playerItem.item);
+      if (isTriforcePiece(playerItem.item)) {
+        this.updateGoalFlags();
+      }
     } else {
       ws.uncollectedLocations.add(loc);
     }
   }
 
   private evalExit(worldId: number, age: Age, area: string, exit: string) {
+    if (this.state.stopped) return;
+
     /* Extract the queue */
     const ws = this.state.ws[worldId];
     const as = ws.ages[age];
@@ -510,6 +518,8 @@ export class Pathfinder {
   }
 
   private evalEvent(worldId: number, age: Age, area: string, event: string) {
+    if (this.state.stopped) return;
+
     const ws = this.state.ws[worldId];
     if (ws.events.has(event)) {
       return;
@@ -531,6 +541,10 @@ export class Pathfinder {
     /* Otherwise, track dependencies */
     if (result.result) {
       ws.events.add(event);
+      if (event === 'OOT_GANON' || event === 'MM_MAJORA') {
+        this.updateGoalFlags();
+      }
+
       for (const evAge of AGES) {
         const evAs = ws.ages[evAge];
         const deps = evAs.dependencies.events.get(event);
@@ -567,6 +581,8 @@ export class Pathfinder {
   }
 
   private evalLocation(worldId: number, age: Age, area: string, location: string) {
+    if (this.state.stopped) return;
+
     const ws = this.state.ws[worldId];
     if (ws.locations.has(location)) {
       return;
@@ -677,6 +693,18 @@ export class Pathfinder {
     return true;
   }
 
+  private updateGoalFlags() {
+    if (this.opts.ganonMajora) {
+      this.state.ganonMajora = this.isGanonMajoraReached();
+    }
+    if (this.isGoalReached()) {
+      this.state.goal = true;
+      if (this.opts.stopAtGoal) {
+        this.state.stopped = true;
+      }
+    }
+  }
+
   private pathfind() {
     /* Handle previous sphere locations */
     const prevSphere = this.state.newLocations;
@@ -716,6 +744,8 @@ export class Pathfinder {
       const initAreaData = defaultAreaData();
       initAreaData.mmTime = 1;
 
+      this.updateGoalFlags();
+
       for (let worldId = 0; worldId < this.worlds.length; ++worldId) {
         if (this.opts.singleWorld !== undefined && this.opts.singleWorld !== worldId) {
           continue;
@@ -741,14 +771,6 @@ export class Pathfinder {
           this.state.previousAssumedItems.set(playerItem, amount);
         }
       }
-    }
-
-    /* Goal */
-    if (this.opts.ganonMajora) {
-      this.state.ganonMajora = this.isGanonMajoraReached();
-    }
-    if (this.isGoalReached()) {
-      this.state.goal = true;
     }
 
     /* Check for gossips */
