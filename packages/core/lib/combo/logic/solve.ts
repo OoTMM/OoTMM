@@ -319,7 +319,7 @@ export class LogicPassSolver {
       placedCount: 0,
     }
     this.pathfinder = new Pathfinder(this.worlds, this.input.settings, this.state.startingItems);
-    this.pathfinderState = this.pathfinder.run(null);
+    this.pathfinderState = this.pathfinder.run(null, { recursive: true });
     this.makeItemPools();
   }
 
@@ -393,7 +393,7 @@ export class LogicPassSolver {
     /* Place required items */
     if (this.input.settings.logic !== 'none') {
       this.retry(() => {
-        this.pathfinderState = this.pathfinder.run(null);
+        this.pathfinderState = this.pathfinder.run(null, { recursive: true });
 
         for (;;) {
           /* Pathfind */
@@ -888,7 +888,7 @@ export class LogicPassSolver {
     /* We need to reset the pathfinder as we changed the starting items and the world */
     this.worlds.forEach(x => optimizeWorld(x));
     this.pathfinder = new Pathfinder(this.worlds, this.input.settings, this.state.startingItems);
-    this.pathfinderState = this.pathfinder.run(null);
+    this.pathfinderState = this.pathfinder.run(null, { recursive: true });
   }
 
   private placeSemiShuffled() {
