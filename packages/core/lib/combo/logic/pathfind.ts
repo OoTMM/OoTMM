@@ -1,4 +1,4 @@
-import { cloneDeep } from 'lodash';
+import { RecursiveArray, cloneDeep } from 'lodash';
 import { Settings } from '../settings';
 import { AreaData, Expr, ExprResult, MM_TIME_SLICES, isDefaultRestrictions } from './expr';
 
@@ -340,9 +340,7 @@ export class Pathfinder {
             } else {
               /* We can't wait! */
               waitMode = false;
-              const d = this.getDeps([result]);
-              this.addDependencies('exits', as.dependencies.items, area, fromArea, d.items);
-              this.addDependencies('exits', as.dependencies.events, area, fromArea, d.events);
+              this.trackDependencies('exits', as.dependencies, area, fromArea, result);
             }
           }
         }
@@ -409,11 +407,24 @@ export class Pathfinder {
     return data2;
   }
 
-  private addDependencies<T>(type: 'exits' | 'locations' | 'events' | 'gossips', set: PathfinderDependencySet<T>, id: string, area: string, dependents: Set<T>) {
-    for (const dep of dependents) {
+  private addDependencies<T>(type: 'exits' | 'locations' | 'events' | 'gossips', set: PathfinderDependencySet<T>, id: string, area: string, dependents: RecursiveArray<T>) {
+    recursiveForEach<T>(dependents, dep => {
       const data = this.dependenciesLookup(set, dep, area);
       data[type].add(id);
+    });
+  }
+
+  private resultNeedsTracking(result: ExprResult) {
+    return (result.result === false || (result.restrictions && !isDefaultRestrictions(result.restrictions)));
+  }
+
+  private trackDependencies(type: 'exits' | 'locations' | 'events' | 'gossips', deps: PathfinderDependencies, id: string, area: string, result: ExprResult) {
+    if (!this.resultNeedsTracking(result)) {
+      return;
     }
+
+    this.addDependencies(type, deps.items, id, area, result.depItems);
+    this.addDependencies(type, deps.events, id, area, result.depEvents);
   }
 
   private requeueItem(worldId: number, item: Item) {
@@ -482,9 +493,7 @@ export class Pathfinder {
         const exprResult = this.evalExpr(worldId, expr, age, area);
 
         /* Track dependencies */
-        const d = this.getDeps([exprResult]);
-        this.addDependencies('exits', as.dependencies.items, exit, area, d.items);
-        this.addDependencies('exits', as.dependencies.events, exit, area, d.events);
+        this.trackDependencies('exits', as.dependencies, exit, area, exprResult);
 
         if (exprResult.result) {
           const areaData = cloneAreaData(as.areas.get(area)!);
@@ -505,18 +514,6 @@ export class Pathfinder {
         }
       }
     }
-  }
-
-  private getDeps(res: ExprResult[]) {
-    const itemsArr = res.map(x => x.depItems);
-    const eventsArr = res.map(x => x.depEvents);
-    const items = new Set<Item>();
-    const events = new Set<string>();
-
-    recursiveForEach<Item>(itemsArr, x => items.add(x));
-    recursiveForEach<string>(eventsArr, x => events.add(x));
-
-    return { items, events };
   }
 
   private evalEvents(worldId: number, age: Age) {
@@ -579,9 +576,7 @@ export class Pathfinder {
           }
         } else {
           /* Track dependencies */
-          const d = this.getDeps([result]);
-          this.addDependencies('events', as.dependencies.items, event, area, d.items);
-          this.addDependencies('events', as.dependencies.events, event, area, d.events);
+          this.trackDependencies('events', as.dependencies, event, area, result);
         }
       }
     }
@@ -629,9 +624,7 @@ export class Pathfinder {
           }
         } else {
           /* Track dependencies */
-          const d = this.getDeps([result]);
-          this.addDependencies('locations', as.dependencies.items, location, area, d.items);
-          this.addDependencies('locations', as.dependencies.events, location, area, d.events);
+          this.trackDependencies('locations', as.dependencies, location, area, result);
         }
       }
     }
@@ -663,9 +656,7 @@ export class Pathfinder {
           this.state.gossips[worldId].add(gossip);
         } else {
           /* Track dependencies */
-          const d = this.getDeps([result]);
-          this.addDependencies('gossips', as.dependencies.items, gossip, area, d.items);
-          this.addDependencies('gossips', as.dependencies.events, gossip, area, d.events);
+          this.trackDependencies('gossips', as.dependencies, gossip, area, result);
         }
       }
     }
