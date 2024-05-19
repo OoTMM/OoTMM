@@ -747,7 +747,6 @@ class WorldShuffler {
 
 export class LogicPassEntrances {
   private worlds: World[];
-  private allItems: PlayerItems;
 
   constructor(
     private readonly input: {
@@ -757,16 +756,13 @@ export class LogicPassEntrances {
       monitor: Monitor;
       fixedLocations: Set<Location>,
       pool: PlayerItems;
+      allItems: PlayerItems;
       renewableJunks: PlayerItems;
       startingItems: PlayerItems;
       itemProperties: ItemProperties;
     },
   ) {
     this.worlds = [];
-    this.allItems = new Map(this.input.pool);
-    for (const [k, v] of this.input.startingItems) {
-      countMapAdd(this.allItems, k, v);
-    }
   }
 
   private changeRegion(worldId: number, area: string, newRegion: string, force?: boolean) {
@@ -876,7 +872,7 @@ export class LogicPassEntrances {
       return;
     this.validateAgeTemple();
     const pathfinder = new Pathfinder(this.worlds, this.input.settings, this.input.startingItems);
-    const pathfinderState = pathfinder.run(null, { assumedItems: this.allItems, recursive: true });
+    const pathfinderState = pathfinder.run(null, { assumedItems: this.input.allItems, recursive: true });
 
     /* We want to make sure everything that needs to is reachable */
     if (!pathfinderState.goal) {
@@ -903,13 +899,13 @@ export class LogicPassEntrances {
     if (this.input.settings.distinctWorlds) {
       /* Distinct worlds */
       for (let i = 0; i < this.input.worlds.length; ++i) {
-        const shuffler = new WorldShuffler(this.input.random, i, this.input.worlds, this.input.settings, this.input.startingItems, this.allItems);
+        const shuffler = new WorldShuffler(this.input.random, i, this.input.worlds, this.input.settings, this.input.startingItems, this.input.allItems);
         const newWorld = shuffler.run();
         this.worlds.push(newWorld);
       }
     } else {
       /* Shared world */
-      const shuffler = new WorldShuffler(this.input.random, 0, this.input.worlds, this.input.settings, this.input.startingItems, this.allItems);
+      const shuffler = new WorldShuffler(this.input.random, 0, this.input.worlds, this.input.settings, this.input.startingItems, this.input.allItems);
       const newWorld = shuffler.run();
       for (let i = 0; i < this.input.worlds.length; ++i) {
         this.worlds.push(cloneWorld(newWorld));

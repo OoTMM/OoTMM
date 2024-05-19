@@ -59,6 +59,7 @@ type PathfinderWorldState = {
   items: ItemsCount;
   licenses: ItemsCount;
   renewables: ItemsCount;
+  locations: Set<string>;
   forbiddenReachableLocations: Set<string>;
   events: Set<string>;
   restrictedLocations?: Set<string>;
@@ -111,6 +112,7 @@ const defaultWorldState = (startingItems: ItemsCount): PathfinderWorldState => (
   renewables: new Map(),
   forbiddenReachableLocations: new Set(),
   events: new Set(),
+  locations: new Set(),
 });
 
 const defaultWorldStates = (startingItems: PlayerItems, worldCount: number) => {
@@ -356,7 +358,7 @@ export class Pathfinder {
       return;
     }
     as.areas.set(area, newAreaData);
-    let locs = Object.keys(worldAreaOptimized.locations).filter(x => !this.state.locations.has(makeLocation(x, worldId)));
+    let locs = Object.keys(worldAreaOptimized.locations).filter(x => !ws.locations.has(x));
     if (ws.restrictedLocations && !this.opts.includeForbiddenReachable) {
       locs = locs.filter(x => ws.restrictedLocations!.has(x));
     }
@@ -449,9 +451,11 @@ export class Pathfinder {
     if (this.opts.recursive) {
       this.addLocation(worldId, loc);
     } else {
+      const ws = this.state.ws[worldId];
       const globalLoc = makeLocation(loc, worldId);
       this.state.locations.add(globalLoc);
       this.state.newLocations.add(globalLoc);
+      ws.locations.add(loc);
     }
   }
 
@@ -460,6 +464,7 @@ export class Pathfinder {
     const world = this.worlds[worldId];
     const globalLoc = makeLocation(loc, worldId);
     this.state.locations.add(globalLoc);
+    ws.locations.add(loc);
     const playerItem = this.opts.items?.get(globalLoc);
     if (playerItem) {
       const otherWs = this.state.ws[playerItem.player];
@@ -600,10 +605,8 @@ export class Pathfinder {
         }
       }
 
-      const globalLoc = makeLocation(location, worldId);
-
       for (const area of areas) {
-        if (this.state.locations.has(globalLoc)) {
+        if (ws.locations.has(location)) {
           continue;
         }
 

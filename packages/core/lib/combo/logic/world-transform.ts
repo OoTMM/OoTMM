@@ -271,6 +271,7 @@ export class LogicPassWorldTransform {
       settings: Settings;
       fixedLocations: Set<Location>;
       itemProperties: ItemProperties;
+      startingItems: PlayerItems;
     }
   ) {
     this.fixedLocations = new Set(state.fixedLocations);
@@ -1504,6 +1505,11 @@ export class LogicPassWorldTransform {
       }
     }
 
-    return { pool: this.pool, renewableJunks, fixedLocations: this.fixedLocations };
+    const allItems = new Map(this.pool);
+    for (const [k, f] of this.state.startingItems) {
+      countMapAdd(allItems, k, f);
+    }
+
+    return { pool: this.pool, allItems, renewableJunks, fixedLocations: this.fixedLocations };
   }
 }
