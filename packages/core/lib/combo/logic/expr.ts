@@ -156,7 +156,6 @@ type State = {
   licenses: ItemsCount;
   age: Age;
   events: Set<string>;
-  ignoreItems: boolean;
   areaData: AreaData;
   world: World;
   settings: Settings;
@@ -234,10 +233,6 @@ function specialCondSets(settings: Settings, special: string) {
 }
 
 function resolveSpecialCond(settings: Settings, state: State, special: string): ExprResult {
-  if (state.ignoreItems) {
-    return RESULT_TRUE;
-  }
-
   const { items, itemsUnique } = specialCondSets(settings, special);
   const { specialConds } = settings;
   const cond = specialConds[special as keyof typeof specialConds];
@@ -413,7 +408,7 @@ class ExprHas extends Expr {
   }
 
   eval(state: State): ExprResult {
-    if (state.ignoreItems || itemCount(state, this.item) >= this.count) {
+    if (itemCount(state, this.item) >= this.count) {
       return RESULT_TRUE;
     } else {
       return this.resultFalse;
@@ -433,7 +428,7 @@ class ExprRenewable extends Expr {
   }
 
   eval(state: State): ExprResult {
-    if (state.ignoreItems || (state.renewables.get(this.item) || 0) > 0) {
+    if ((state.renewables.get(this.item) || 0) > 0) {
       return RESULT_TRUE;
     } else {
       return this.resultFalse;
@@ -453,7 +448,7 @@ class ExprLicense extends Expr {
   }
 
   eval(state: State): ExprResult {
-    if (state.ignoreItems || (state.licenses.get(this.item) || 0) > 0) {
+    if ((state.licenses.get(this.item) || 0) > 0) {
       return RESULT_TRUE;
     } else {
       return this.resultFalse;
@@ -491,7 +486,7 @@ class ExprMasks extends Expr {
   }
 
   eval(state: State): ExprResult {
-    if (state.ignoreItems || itemsCount(state, [...ItemGroups.MASKS_REGULAR]) >= this.count) {
+    if (itemsCount(state, [...ItemGroups.MASKS_REGULAR]) >= this.count) {
       return RESULT_TRUE;
     } else {
       return this.resultFalse;

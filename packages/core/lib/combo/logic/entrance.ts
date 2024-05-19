@@ -13,6 +13,7 @@ import { LogicPassSolver } from './solve';
 import { PlayerItems } from '../items';
 import { ItemProperties } from './item-properties';
 import { optimizeWorld } from './optimizer';
+import { countMapAdd } from '../util';
 
 type Entrance = keyof typeof ENTRANCES;
 
@@ -37,6 +38,7 @@ class WorldShuffler {
     private worlds: World[],
     private settings: Settings,
     private startingItems: PlayerItems,
+    private allItems: PlayerItems,
   ) {
     this.backtrackCount = 0;
     this.world = worlds[worldId];
@@ -143,7 +145,7 @@ class WorldShuffler {
 
     /* Run the pathfinder */
     const pathfinder = new Pathfinder(worlds, this.settings, this.startingItems);
-    const pathfinderState = pathfinder.run(null, { singleWorld: this.worldId, ignoreItems: true, recursive: true });
+    const pathfinderState = pathfinder.run(null, { singleWorld: this.worldId, assumedItems: this.allItems, recursive: true });
 
     if (!pathfinderState.goal) {
       return false;
@@ -499,7 +501,7 @@ class WorldShuffler {
     const allWorlds = [...this.worlds];
     allWorlds[this.worldId] = world;
     const pathfinder = new Pathfinder(allWorlds, this.settings, this.startingItems);
-    const pathfinderState = pathfinder.run(null, { singleWorld: this.worldId, ignoreItems: true, recursive: true });
+    const pathfinderState = pathfinder.run(null, { singleWorld: this.worldId, assumedItems: this.allItems, recursive: true });
 
     /* Restore the override */
     delete world.areas[originalEntrance.from].exits[replacementEntrance.to]
@@ -754,6 +756,7 @@ export class LogicPassEntrances {
       monitor: Monitor;
       fixedLocations: Set<Location>,
       pool: PlayerItems;
+      allItems: PlayerItems;
       renewableJunks: PlayerItems;
       startingItems: PlayerItems;
       itemProperties: ItemProperties;
@@ -869,7 +872,7 @@ export class LogicPassEntrances {
       return;
     this.validateAgeTemple();
     const pathfinder = new Pathfinder(this.worlds, this.input.settings, this.input.startingItems);
-    const pathfinderState = pathfinder.run(null, { ignoreItems: true, recursive: true });
+    const pathfinderState = pathfinder.run(null, { assumedItems: this.input.allItems, recursive: true });
 
     /* We want to make sure everything that needs to is reachable */
     if (!pathfinderState.goal) {
@@ -896,13 +899,13 @@ export class LogicPassEntrances {
     if (this.input.settings.distinctWorlds) {
       /* Distinct worlds */
       for (let i = 0; i < this.input.worlds.length; ++i) {
-        const shuffler = new WorldShuffler(this.input.random, i, this.input.worlds, this.input.settings, this.input.startingItems);
+        const shuffler = new WorldShuffler(this.input.random, i, this.input.worlds, this.input.settings, this.input.startingItems, this.input.allItems);
         const newWorld = shuffler.run();
         this.worlds.push(newWorld);
       }
     } else {
       /* Shared world */
-      const shuffler = new WorldShuffler(this.input.random, 0, this.input.worlds, this.input.settings, this.input.startingItems);
+      const shuffler = new WorldShuffler(this.input.random, 0, this.input.worlds, this.input.settings, this.input.startingItems, this.input.allItems);
       const newWorld = shuffler.run();
       for (let i = 0; i < this.input.worlds.length; ++i) {
         this.worlds.push(cloneWorld(newWorld));

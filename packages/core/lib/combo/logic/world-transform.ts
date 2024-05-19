@@ -271,6 +271,7 @@ export class LogicPassWorldTransform {
       settings: Settings;
       fixedLocations: Set<Location>;
       itemProperties: ItemProperties;
+      startingItems: PlayerItems;
     }
   ) {
     this.fixedLocations = new Set(state.fixedLocations);
@@ -1481,16 +1482,6 @@ export class LogicPassWorldTransform {
       }
     }
 
-    /* Handle fixed locations */
-    for (const loc of this.fixedLocations) {
-      const worldId = locationData(loc).world as number;
-      const world = this.state.worlds[worldId];
-      const check = world.checks[locationData(loc).id];
-      const { item } = check;
-      const pi = makePlayerItem(item, worldId);
-      this.removePlayerItem(pi, 1);
-    }
-
     /* Handle required junks */
     const renewableJunks: PlayerItems = new Map;
     for (const pi of this.pool.keys()) {
@@ -1504,6 +1495,23 @@ export class LogicPassWorldTransform {
       }
     }
 
-    return { pool: this.pool, renewableJunks, fixedLocations: this.fixedLocations };
+    /* Build all items */
+    const allItems = new Map(this.pool);
+    for (const [k, f] of this.state.startingItems) {
+      countMapAdd(allItems, k, f);
+    }
+
+    /* Handle fixed locations */
+    for (const loc of this.fixedLocations) {
+      const worldId = locationData(loc).world as number;
+      const world = this.state.worlds[worldId];
+      const check = world.checks[locationData(loc).id];
+      const { item } = check;
+      const pi = makePlayerItem(item, worldId);
+      this.removePlayerItem(pi, 1);
+      countMapAdd(allItems, pi);
+    }
+
+    return { pool: this.pool, allItems, renewableJunks, fixedLocations: this.fixedLocations };
   }
 }
