@@ -348,21 +348,33 @@ export class Pathfinder {
       return;
     }
     as.areas.set(area, newAreaData);
-    let locs = Object.keys(worldAreaOptimized.locations).filter(x => !ws.locations.has(x));
-    if (ws.restrictedLocations && !this.opts.includeForbiddenReachable) {
-      locs = locs.filter(x => ws.restrictedLocations!.has(x));
-    }
-    if (ws.forbiddenLocations && !this.opts.includeForbiddenReachable) {
-      locs = locs.filter(x => !ws.forbiddenLocations!.has(x));
+
+    /* Eval locations */
+    for (const l in worldAreaOptimized.locations) {
+      if (ws.restrictedLocations && !this.opts.includeForbiddenReachable && !ws.restrictedLocations.has(l)) {
+        continue;
+      }
+      if (ws.forbiddenLocations && !this.opts.includeForbiddenReachable && ws.forbiddenLocations.has(l)) {
+        continue;
+      }
+      this.evalLocation(worldId, age, area, l);
     }
 
-    locs.forEach(x => this.evalLocation(worldId, age, area, x));
-    Object.keys(worldAreaOptimized.events).filter(x => !ws.events.has(x)).forEach(x => this.evalEvent(worldId, age, area, x));
-    const exits = Object.keys(worldAreaOptimized.exits);
-    exits.forEach(x => this.evalExit(worldId, age, area, x));
+    /* Eval events */
+    for (const e in worldAreaOptimized.events) {
+      this.evalEvent(worldId, age, area, e);
+    }
 
+    /* Eval exits */
+    for (const e in worldAreaOptimized.exits) {
+      this.evalExit(worldId, age, area, e);
+    }
+
+    /* Eval gossips */
     if (this.opts.gossips) {
-      Object.keys(worldAreaOptimized.gossip).forEach(x => this.evalGossip(worldId, age, area, x));
+      for (const g in worldAreaOptimized.gossip) {
+        this.evalGossip(worldId, age, area, g);
+      }
     }
   }
 
