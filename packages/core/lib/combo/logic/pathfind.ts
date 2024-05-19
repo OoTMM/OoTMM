@@ -39,7 +39,6 @@ type PathfinderDependencies = {
 
 type PathfinderQueues = {
   locations: Map<string, Set<string>>;
-  events: Map<string, Set<string>>;
   gossips: Map<string, Set<string>>;
   exits: Map<string, Set<string>>;
 };
@@ -90,7 +89,6 @@ const emptyDepList = (): PathfinderDependencyList => ({
 const defaultAgeState = (): PathfinderAgeState => ({
   queues: {
     locations: new Map(),
-    events: new Map(),
     gossips: new Map(),
     exits: new Map(),
   },
@@ -262,7 +260,7 @@ export class Pathfinder {
     return this.state;
   }
 
-  private queue(type: 'locations' | 'events' | 'exits' | 'gossips', age: Age, world: number, id: string, area: string) {
+  private queue(type: 'locations' | 'exits' | 'gossips', age: Age, world: number, id: string, area: string) {
     const q = this.state.ws[world].ages[age].queues[type];
     if (!q.has(id)) {
       q.set(id, new Set([area]));
@@ -364,7 +362,7 @@ export class Pathfinder {
     }
 
     locs.forEach(x => this.queue('locations', age, worldId, x, area));
-    Object.keys(worldAreaOptimized.events).filter(x => !ws.events.has(x)).forEach(x => this.queue('events', age, worldId, x, area));
+    Object.keys(worldAreaOptimized.events).filter(x => !ws.events.has(x)).forEach(x => this.evalEvent(worldId, age, area, x));
     const exits = Object.keys(worldAreaOptimized.exits);
     exits.forEach(x => this.queue('exits', age, worldId, x, area));
 
@@ -427,7 +425,7 @@ export class Pathfinder {
         as.dependencies.items.delete(item);
         for (const [area, d] of deps) {
           d.exits.forEach(x => this.queue('exits', age, worldId, x, area));
-          d.events.forEach(x => this.queue('events', age, worldId, x, area));
+          d.events.forEach(x => this.evalEvent(worldId, age, area, x));
           d.locations.forEach(x => this.queue('locations', age, worldId, x, area));
           if (this.opts.gossips) {
             d.gossips.forEach(x => this.queue('gossips', age, worldId, x, area));
@@ -510,69 +508,60 @@ export class Pathfinder {
     }
   }
 
-  private evalEvents(worldId: number, age: Age) {
-    /* Extract the queue */
+  private evalEvent(worldId: number, age: Age, area: string, event: string) {
     const ws = this.state.ws[worldId];
+    if (ws.events.has(event)) {
+      return;
+    }
+
     const world = this.worlds[worldId];
     const as = ws.ages[age];
     const areasOptimized = this.worldsOptimized[worldId][age];
-    const q = as.queues.events;
-    as.queues.events = new Map();
+    const areaOptimized = areasOptimized[area];
 
-    /* Evaluate all the events */
-    for (const [event, areas] of q) {
-      for (const area of areas) {
-        if (ws.events.has(event)) {
-          continue;
-        }
+    /* Evaluate the event */
+    const expr = areaOptimized.events[event];
+    if (!expr) {
+      throw new Error(`Event ${event} not found in area ${area}`);
+    }
+    const result = this.evalExpr(worldId, expr, age, area);
 
-        const areaOptimized = areasOptimized[area];
-
-        /* Evaluate the event */
-        const expr = areaOptimized.events[event];
-        if (!expr) {
-          throw new Error(`Event ${event} not found in area ${area}`);
-        }
-        const result = this.evalExpr(worldId, expr, age, area);
-
-        /* If the result is true, add the event to the state and queue up everything */
-        /* Otherwise, track dependencies */
-        if (result.result) {
-          ws.events.add(event);
-          for (const evAge of AGES) {
-            const evAs = ws.ages[evAge];
-            const deps = evAs.dependencies.events.get(event);
-            if (deps) {
-              evAs.dependencies.events.delete(event);
-              for (const [area, d] of deps) {
-                d.exits.forEach(x => this.queue('exits', evAge, worldId, x, area));
-                d.events.forEach(x => this.queue('events', evAge, worldId, x, area));
-                d.locations.forEach(x => this.queue('locations', evAge, worldId, x, area));
-                if (this.opts.gossips) {
-                  d.gossips.forEach(x => this.queue('gossips', evAge, worldId, x, area));
-                }
-              }
+    /* If the result is true, add the event to the state and queue up everything */
+    /* Otherwise, track dependencies */
+    if (result.result) {
+      ws.events.add(event);
+      for (const evAge of AGES) {
+        const evAs = ws.ages[evAge];
+        const deps = evAs.dependencies.events.get(event);
+        if (deps) {
+          evAs.dependencies.events.delete(event);
+          for (const [area, d] of deps) {
+            d.exits.forEach(x => this.queue('exits', evAge, worldId, x, area));
+            d.events.forEach(x => this.evalEvent(worldId, evAge, area, x));
+            d.locations.forEach(x => this.queue('locations', evAge, worldId, x, area));
+            if (this.opts.gossips) {
+              d.gossips.forEach(x => this.queue('gossips', evAge, worldId, x, area));
             }
           }
-
-          /* If it's time travel at will, we need to re-explore everything */
-          if (event === 'OOT_TIME_TRAVEL_AT_WILL') {
-            for (const [area, areaData] of ws.ages.child.areas) {
-              const a = world.areas[area];
-              if (a.ageChange)
-                this.exploreArea(worldId, 'child', area, cloneAreaData(areaData), area);
-            }
-            for (const [area, areaData] of ws.ages.adult.areas) {
-              const a = world.areas[area];
-              if (a.ageChange)
-                this.exploreArea(worldId, 'adult', area, cloneAreaData(areaData), area);
-            }
-          }
-        } else {
-          /* Track dependencies */
-          this.trackDependencies('events', as.dependencies, event, area, result);
         }
       }
+
+      /* If it's time travel at will, we need to re-explore everything */
+      if (event === 'OOT_TIME_TRAVEL_AT_WILL') {
+        for (const [area, areaData] of ws.ages.child.areas) {
+          const a = world.areas[area];
+          if (a.ageChange)
+            this.exploreArea(worldId, 'child', area, cloneAreaData(areaData), area);
+        }
+        for (const [area, areaData] of ws.ages.adult.areas) {
+          const a = world.areas[area];
+          if (a.ageChange)
+            this.exploreArea(worldId, 'adult', area, cloneAreaData(areaData), area);
+        }
+      }
+    } else {
+      /* Track dependencies */
+      this.trackDependencies('events', as.dependencies, event, area, result);
     }
   }
 
@@ -670,18 +659,10 @@ export class Pathfinder {
         for (const age of AGES) {
           this.evalExits(worldId, age);
         }
-        for (const age of AGES) {
-          this.evalEvents(worldId, age);
-        }
 
         let isQueued = false;
         for (const age of AGES) {
           if (ws.ages[age].queues.exits.size) {
-            isQueued = true;
-            break;
-          }
-          if (ws.ages[age].queues.events.size) {
-
             isQueued = true;
             break;
           }
@@ -717,7 +698,7 @@ export class Pathfinder {
       for (const age of AGES) {
         const as = ws.ages[age];
         const q = as.queues;
-        if (q.events.size || q.exits.size || q.locations.size)
+        if (q.exits.size || q.locations.size)
           return true;
       }
     }
