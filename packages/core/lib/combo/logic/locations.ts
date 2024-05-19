@@ -14,7 +14,10 @@ const locationRegistry: {[k: Location]: LocationDescriptor} = {};
 export function makeLocation(id: string, world?: null | number): Location {
   const w = world === undefined ? null : world;
   const x = (id + ((w === null) ? '' : `@${world}`)) as Location;
-  locationRegistry[x] = { id, world: w };
+  const data = locationRegistry[x];
+  if (!data) {
+    locationRegistry[x] = { id, world: w };
+  }
   return x;
 }
 
