@@ -250,7 +250,22 @@ export class Pathfinder {
       }
     }
 
-    this.pathfind();
+    /* Handle no logic */
+    if (this.settings.logic === 'none') {
+      this.state.goal = true;
+      const locations: Location[][] = [];
+      this.state.gossips = [];
+      for (let worldId = 0; worldId < this.worlds.length; ++worldId) {
+        const world = this.worlds[worldId];
+        const worldGossips = new Set(Object.values(world.areas).map(x => Object.keys(x.gossip || {})).flat());
+        this.state.gossips.push(worldGossips);
+        const locs = Object.keys(world.checks).map(x => makeLocation(x, worldId));
+        locations.push(locs);
+      }
+      this.state.locations = new Set(locations.flat());
+    } else {
+      this.pathfind();
+    }
     return this.state;
   }
 
@@ -726,22 +741,6 @@ export class Pathfinder {
           this.state.previousAssumedItems.set(playerItem, amount);
         }
       }
-    }
-
-    /* Handle no logic */
-    if (this.settings.logic === 'none') {
-      this.state.goal = true;
-      const locations: Location[][] = [];
-      this.state.gossips = [];
-      for (let worldId = 0; worldId < this.worlds.length; ++worldId) {
-        const world = this.worlds[worldId];
-        const worldGossips = new Set(Object.values(world.areas).map(x => Object.keys(x.gossip || {})).flat());
-        this.state.gossips.push(worldGossips);
-        const locs = Object.keys(world.checks).map(x => makeLocation(x, worldId));
-        locations.push(locs);
-      }
-      this.state.locations = new Set(locations.flat());
-      return;
     }
 
     /* Goal */
