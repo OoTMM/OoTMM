@@ -508,7 +508,11 @@ export class Pathfinder {
         areaData.flagsOn = (areaData.flagsOn | r.flagsOn) >>> 0;
         areaData.flagsOff = (areaData.flagsOff | r.flagsOff) >>> 0;
       }
-      this.exploreArea(worldId, age, exit, areaData, area);
+      const previousAreaData = as.areas.get(exit);
+      const exitArea = this.worlds[worldId].areas[exit];
+      if (!(previousAreaData && coveringAreaData(previousAreaData, areaData) && exitArea.stay === null)) {
+        this.exploreArea(worldId, age, exit, areaData, area);
+      }
     }
   }
 
