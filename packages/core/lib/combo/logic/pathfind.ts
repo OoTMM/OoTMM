@@ -66,7 +66,6 @@ type PathfinderWorldState = {
 export type PathfinderState = {
   goal: boolean;
   ganonMajora: boolean;
-  changed: boolean;
   started: boolean;
   ws: PathfinderWorldState[];
   previousAssumedItems: PlayerItems;
@@ -134,7 +133,6 @@ const defaultState = (startingItems: PlayerItems, worldCount: number): Pathfinde
 
   return {
     previousAssumedItems: new Map,
-    changed: false,
     goal: false,
     ganonMajora: false,
     started: false,

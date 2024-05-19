@@ -593,7 +593,7 @@ export class LogicPassSolver {
 
     for (;;) {
       pathfinderState = this.pathfinder.run(pathfinderState, { inPlace: true, items: this.state.items });
-      if (!pathfinderState.changed) {
+      if (!pathfinderState.newLocations.size) {
         break;
       }
       for (const l of pathfinderState.newLocations) {
