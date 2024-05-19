@@ -196,7 +196,6 @@ export type EntranceOverrides = {[k: string]: {[k: string]: string | null}};
 type PathfinderOptions = {
   assumedItems?: PlayerItems;
   items?: ItemPlacement;
-  ignoreItems?: boolean;
   recursive?: boolean;
   stopAtGoal?: boolean;
   restrictedLocations?: Set<Location>;
@@ -380,7 +379,7 @@ export class Pathfinder {
     const ws = this.state.ws[worldId];
     const as = ws.ages[age];
     const areaData = as.areas.get(area)!;
-    const state = { settings: this.settings, world, areaData, items: ws.items, renewables: ws.renewables, licenses: ws.licenses, age, events: ws.events, ignoreItems: this.opts.ignoreItems || false };
+    const state = { settings: this.settings, world, areaData, items: ws.items, renewables: ws.renewables, licenses: ws.licenses, age, events: ws.events };
     const result = expr.eval(state);
     if (result.result) {
       if (!result.restrictions || isDefaultRestrictions(result.restrictions)) {
@@ -763,8 +762,8 @@ export class Pathfinder {
       case 'ganon': worldGoal = ganon; break;
       case 'majora': worldGoal = majora; break;
       case 'both': worldGoal = ganon && majora; break;
-      case 'triforce': worldGoal = (this.opts.ignoreItems || ((ws.items.get(Items.SHARED_TRIFORCE) || 0) >= settings.triforceGoal)); break;
-      case 'triforce3': worldGoal = (this.opts.ignoreItems || (ws.items.has(Items.SHARED_TRIFORCE_POWER) && ws.items.has(Items.SHARED_TRIFORCE_COURAGE) && ws.items.has(Items.SHARED_TRIFORCE_WISDOM))); break;
+      case 'triforce': worldGoal = (((ws.items.get(Items.SHARED_TRIFORCE) || 0) >= settings.triforceGoal)); break;
+      case 'triforce3': worldGoal = ((ws.items.has(Items.SHARED_TRIFORCE_POWER) && ws.items.has(Items.SHARED_TRIFORCE_COURAGE) && ws.items.has(Items.SHARED_TRIFORCE_WISDOM))); break;
       }
 
       if (!worldGoal) {
