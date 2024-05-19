@@ -285,9 +285,6 @@ export class Pathfinder {
     const worldOptimized = this.worldsOptimized[worldId][age];
     const worldAreaOptimized = worldOptimized[area];
 
-    if (worldArea === undefined) {
-      throw new Error(`Unknown area ${area}`);
-    }
     if (worldArea.game === 'oot') {
       if (['day', 'flow'].includes(worldArea.time)) {
         newAreaData.oot.day = true;
@@ -351,7 +348,7 @@ export class Pathfinder {
     /* Age swap */
     if (ws.events.has('OOT_TIME_TRAVEL_AT_WILL') && worldArea.ageChange && area !== fromArea) {
       const otherAge = age === 'child' ? 'adult' : 'child';
-      this.exploreArea(worldId, otherAge, area, newAreaData, area);
+      this.exploreArea(worldId, otherAge, area, cloneAreaData(newAreaData), area);
     }
 
     if (previousAreaData && coveringAreaData(previousAreaData, newAreaData)) {
@@ -382,14 +379,7 @@ export class Pathfinder {
     const as = ws.ages[age];
     const areaData = as.areas.get(area)!;
     const state = { settings: this.settings, world, areaData, items: ws.items, renewables: ws.renewables, licenses: ws.licenses, age, events: ws.events };
-    const result = expr.eval(state);
-    if (result.result) {
-      if (!result.restrictions || isDefaultRestrictions(result.restrictions)) {
-        result.depItems = [];
-        result.depEvents = [];
-      }
-    }
-    return result;
+    return expr.eval(state);
   }
 
   private dependenciesLookup<T>(set: PathfinderDependencySet<T>, dependency: T, areaFrom: string) {
@@ -570,12 +560,12 @@ export class Pathfinder {
             for (const [area, areaData] of ws.ages.child.areas) {
               const a = world.areas[area];
               if (a.ageChange)
-                this.exploreArea(worldId, 'child', area, areaData, area);
+                this.exploreArea(worldId, 'child', area, cloneAreaData(areaData), area);
             }
             for (const [area, areaData] of ws.ages.adult.areas) {
               const a = world.areas[area];
               if (a.ageChange)
-                this.exploreArea(worldId, 'adult', area, areaData, area);
+                this.exploreArea(worldId, 'adult', area, cloneAreaData(areaData), area);
             }
           }
         } else {
@@ -788,8 +778,8 @@ export class Pathfinder {
         if (this.opts.singleWorld !== undefined && this.opts.singleWorld !== worldId) {
           continue;
         }
-        this.exploreArea(worldId, 'child', 'OOT SPAWN', initAreaData, 'OOT SPAWN');
-        this.exploreArea(worldId, 'adult', 'OOT SPAWN', initAreaData, 'OOT SPAWN');
+        this.exploreArea(worldId, 'child', 'OOT SPAWN', cloneAreaData(initAreaData), 'OOT SPAWN');
+        this.exploreArea(worldId, 'adult', 'OOT SPAWN', cloneAreaData(initAreaData), 'OOT SPAWN');
       }
     }
 
