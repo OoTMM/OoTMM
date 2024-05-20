@@ -8,7 +8,7 @@ import { makeSettings } from './combo';
 function parseSettings(data: any): any {
   const result = {} as any;
   for (const key in data) {
-    if (['startingItems', 'tricks', 'glitches', 'junkLocations', 'dungeon', 'specialConds', 'plando', 'hints'].includes(key)) {
+    if (['startingItems', 'tricks', 'junkLocations', 'dungeon', 'specialConds', 'plando', 'hints'].includes(key)) {
       result[key] = data[key];
       continue;
     }

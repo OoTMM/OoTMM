@@ -5,7 +5,7 @@ import { Monitor, MonitorCallbacks } from './monitor';
 import { worldState } from './logic';
 import { itemName } from './names';
 import { isShuffled } from './logic/is-shuffled';
-import { DEFAULT_SETTINGS, DUNGEONS, GLITCHES, makeSettings, mergeSettings, SETTINGS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS, TRICKS } from './settings';
+import { DEFAULT_SETTINGS, DUNGEONS, makeSettings, mergeSettings, SETTINGS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS, TRICKS } from './settings';
 import { SettingsPatch } from './settings/patch';
 import { makeCosmetics } from './cosmetics';
 import { makeRandomSettings } from './settings/random';
@@ -43,7 +43,7 @@ export const generate = (params: GeneratorParams): Generator => {
   return new Generator(params.oot, params.mm, opts, params.monitor || {});
 };
 
-export { SETTINGS, DEFAULT_SETTINGS, TRICKS, GLITCHES, itemName, DUNGEONS, mergeSettings, makeSettings, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS };
+export { SETTINGS, DEFAULT_SETTINGS, TRICKS, itemName, DUNGEONS, mergeSettings, makeSettings, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS };
 
 export type Items = {[k: string]: number};
 

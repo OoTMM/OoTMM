@@ -6,14 +6,12 @@ import { Tab, Tabs } from './Tab';
 import { SettingsEditor } from './SettingsEditor';
 import { StartingItems } from './StartingItems';
 import { Tricks } from './Tricks';
-import { Glitches } from './Glitches';
 import { JunkLocations } from './JunkLocations';
 import { Dungeons } from './Dungeons';
 import { SpecialConds } from './SpecialConds';
 import { Plando } from './Plando';
 import { CosmeticsEditor } from './Cosmetics';
 import { Hints } from './Hints';
-import { SETTINGS } from '@ootmm/core';
 
 type TabSettingsEditorProps = {
   name: string;
@@ -55,8 +53,8 @@ export function Generator() {
     </Tab>
     <Tab name="Logic" disabled={isPatch}>
       <Tabs>
-        <Tab name="Tricks"><Tricks/></Tab>
-        <Tab name="Glitches"><Glitches/></Tab>
+        <Tab name="Tricks"><Tricks glitches={false}/></Tab>
+        <Tab name="Glitches"><Tricks glitches={true}/></Tab>
         <Tab name="Junk Locations"><JunkLocations/></Tab>
       </Tabs>
     </Tab>

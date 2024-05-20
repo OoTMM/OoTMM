@@ -26,13 +26,14 @@ function trickExtra(trick: TrickKey) {
 }
 
 type GameTricksProps = {
+  glitches?: boolean;
   game: 'oot' | 'mm';
 }
-function GameTricks({ game }: GameTricksProps) {
+function GameTricks({ glitches, game }: GameTricksProps) {
   const [settings, setSettings] = useSettings();
-  const gameTricks = Object.keys(TRICKS).filter((x) => x.startsWith(game.toUpperCase()));
-  const selectedGameTricks = gameTricks.filter((x) => settings.tricks.includes(x));
-  const options = gameTricks.map((trickKey) => ({ key: trickKey, label: TRICKS[trickKey].name, extra: trickExtra(trickKey) }));
+  const tricks = Object.keys(TRICKS).filter((x) => TRICKS[x].game === game && !!(TRICKS[x].glitch) === !!glitches);
+  const selectedTricks = tricks.filter((x) => settings.tricks.includes(x));
+  const options = tricks.map((trickKey) => ({ key: trickKey, label: TRICKS[trickKey].name, extra: trickExtra(trickKey) }));
 
   const add = (t: string[]) => {
     setSettings({ tricks: { add: t } });
@@ -43,24 +44,27 @@ function GameTricks({ game }: GameTricksProps) {
   };
 
   const reset = () => {
-    setSettings({ tricks: { set: [] } });
+    setSettings({ tricks: { remove: tricks } });
   };
 
   return (
     <div>
       <GameName game={game}/>
-      <DoubleList onAdd={add} onRemove={remove} onReset={reset} options={options} selected={selectedGameTricks}/>
+      <DoubleList onAdd={add} onRemove={remove} onReset={reset} options={options} selected={selectedTricks}/>
     </div>
   );
 }
 
-export function Tricks() {
+type TricksProps = {
+  glitches?: boolean;
+}
+export function Tricks({ glitches }: TricksProps) {
   return (
     <main>
-      <h1>Tricks</h1>
+      <h1>{glitches ? "Glitches" : "Tricks"}</h1>
       <div className="dual-panels">
-        <GameTricks game="oot"/>
-        <GameTricks game="mm"/>
+        <GameTricks glitches={glitches} game="oot"/>
+        <GameTricks glitches={glitches} game="mm"/>
       </div>
     </main>
   );
