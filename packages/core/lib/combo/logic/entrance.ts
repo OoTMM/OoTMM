@@ -12,7 +12,7 @@ import { Location, makeLocation } from './locations';
 import { LogicPassSolver } from './solve';
 import { PlayerItems } from '../items';
 import { ItemProperties } from './item-properties';
-import { optimizeWorld } from './optimizer';
+import { optimizeStartingAndPool, optimizeWorld } from './optimizer';
 import { countMapAdd } from '../util';
 
 type Entrance = keyof typeof ENTRANCES;
@@ -918,7 +918,9 @@ export class LogicPassEntrances {
     }
 
     this.propagateRegions();
-    for (const w of this.worlds) {
+    for (let i = 0; i < this.worlds.length; ++i) {
+      const w = this.worlds[i];
+      optimizeStartingAndPool(w, i, this.input.startingItems, this.input.allItems);
       optimizeWorld(w);
     }
 

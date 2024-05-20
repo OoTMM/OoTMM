@@ -394,10 +394,10 @@ export class ExprAge extends Expr {
   }
 }
 
-class ExprHas extends Expr {
+export class ExprHas extends Expr {
   readonly item: Item;
   readonly count: number;
-  readonly resultFalse: ExprResultFalse;
+  private readonly resultFalse: ExprResultFalse;
 
   constructor(item: Item, count: number) {
     const key = `HAS(${item.id},${count})`;
@@ -416,7 +416,7 @@ class ExprHas extends Expr {
   }
 }
 
-class ExprRenewable extends Expr {
+export class ExprRenewable extends Expr {
   readonly item: Item;
   readonly resultFalse: ExprResultFalse;
 
@@ -436,7 +436,7 @@ class ExprRenewable extends Expr {
   }
 }
 
-class ExprLicense extends Expr {
+export class ExprLicense extends Expr {
   readonly item: Item;
   readonly resultFalse: ExprResultFalse;
 
