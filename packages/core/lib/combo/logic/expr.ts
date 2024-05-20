@@ -1,6 +1,6 @@
 import { Item, ItemGroups, Items, ItemsCount } from '../items';
 import { ItemID } from '../items/defs';
-import { GLITCHES, SETTINGS, Settings, TRICKS, TrickKey } from '../settings';
+import { SETTINGS, Settings, TRICKS, TrickKey } from '../settings';
 import { Age } from './pathfind';
 import { PRICE_RANGES } from './price';
 import { ResolvedWorldFlags, WORLD_FLAGS, World } from './world';
