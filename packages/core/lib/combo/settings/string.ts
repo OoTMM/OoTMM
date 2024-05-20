@@ -30,7 +30,7 @@ export function exportSettings(settings: Settings): string {
     }
   }
 
-  for (const k of ['specialConds', 'dungeon', 'hints', 'junkLocations', 'tricks', 'glitches', 'plando', 'startingItems']) {
+  for (const k of ['specialConds', 'dungeon', 'hints', 'junkLocations', 'tricks', 'plando', 'startingItems']) {
     if (isEqual(settings[k as keyof typeof settings], DEFAULT_SETTINGS[k as keyof typeof DEFAULT_SETTINGS])) {
       delete diff[k];
     }

@@ -3,7 +3,6 @@ import { DungeonSettings } from './dungeons';
 import { SettingHint } from './hints';
 import { SpecialConds } from './special-conds';
 import { TrickKey } from './tricks';
-import { Glitch } from './glitches';
 
 type SettingDataEnumValue = {
   readonly value: string;
@@ -66,7 +65,6 @@ export type Settings = SettingsBase & {
   startingItems: {[k: string]: number};
   junkLocations: string[];
   tricks: TrickKey[];
-  glitches: Glitch[];
   dungeon: DungeonSettings;
   specialConds: SpecialConds;
   plando: SettingsPlando;

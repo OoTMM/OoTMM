@@ -1,7 +1,7 @@
 import { sortBy } from 'lodash';
 
 import { Options } from '../options';
-import { Glitch, GLITCHES, SETTINGS, Settings, TrickKey, TRICKS } from '../settings';
+import { SETTINGS, Settings, TrickKey, TRICKS } from '../settings';
 import { HintGossipFoolish, HintGossipPath, HintGossipItemExact, HintGossipItemRegion, Hints, HINTS_PATHS } from './hints';
 import { World, WORLD_FLAGS } from './world';
 import { itemName } from '../names';
@@ -51,7 +51,7 @@ export class LogicPassSpoiler {
   private writeSettings() {
     this.writer.indent('Settings');
     for (const s in this.state.settings) {
-      if (s === 'startingItems' || s === 'tricks' || s === 'glitches' || s === 'junkLocations' || s === 'dungeon' || s === 'specialConds' || s === 'plando' || s === 'hints') {
+      if (s === 'startingItems' || s === 'tricks' || s === 'junkLocations' || s === 'dungeon' || s === 'specialConds' || s === 'plando' || s === 'hints') {
         continue;
       }
       if (this.state.settings.goal !== 'triforce' && (s === 'triforceGoal' || s === 'triforcePieces')) {
@@ -84,7 +84,8 @@ export class LogicPassSpoiler {
   }
 
   private writeTricks() {
-    const { tricks } = this.state.settings;
+    let { tricks } = this.state.settings;
+    tricks = tricks.filter(x => !TRICKS[x].glitch);
     if (tricks.length === 0) {
       return;
     }
@@ -96,13 +97,14 @@ export class LogicPassSpoiler {
   }
 
   private writeGlitches() {
-    const { glitches } = this.state.settings;
+    const { tricks } = this.state.settings;
+    const glitches = tricks.filter(x => TRICKS[x].glitch);
     if (glitches.length === 0) {
       return;
     }
     this.writer.indent('Glitches');
     for (const glitch of glitches) {
-      this.writer.write(`${GLITCHES[glitch as Glitch]}`);
+      this.writer.write(`${TRICKS[glitch].name}`);
     }
     this.writer.unindent('');
   }

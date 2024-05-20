@@ -759,13 +759,6 @@ export const exprTrick = (settings: Settings, trick: string): Expr => {
   return settings.tricks.includes(trick as TrickKey) ? EXPR_TRUE : EXPR_FALSE;
 };
 
-export const exprGlitch = (settings: Settings, glitch: string): Expr => {
-  if (!GLITCHES.hasOwnProperty(glitch)) {
-    throw new Error(`Glitch ${glitch} not found`);
-  }
-  return settings.glitches.includes(glitch as keyof typeof GLITCHES) ? EXPR_TRUE : EXPR_FALSE;
-};
-
 export const exprOotTime = (time: string): Expr => {
   switch (time) {
     case 'day':

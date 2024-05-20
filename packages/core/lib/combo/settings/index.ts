@@ -3,8 +3,6 @@ export { DEFAULT_SETTINGS, mergeSettings, makeSettings } from './util';
 export { TRICKS } from './tricks';
 export { DUNGEONS } from './dungeons';
 export { SPECIAL_CONDS, SPECIAL_CONDS_FIELDS } from './special-conds';
-export { GLITCHES } from './glitches';
 
 export type { Settings } from './type';
 export type { TrickKey } from './tricks';
-export type { Glitch } from './glitches';
