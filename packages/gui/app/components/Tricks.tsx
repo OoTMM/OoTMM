@@ -44,7 +44,7 @@ function GameTricks({ glitches, game }: GameTricksProps) {
   };
 
   const reset = () => {
-    setSettings({ tricks: { set: [] } });
+    setSettings({ tricks: { remove: tricks } });
   };
 
   return (
