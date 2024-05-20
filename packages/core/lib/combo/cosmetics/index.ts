@@ -370,8 +370,8 @@ class CosmeticsPass {
     }
 
     /* Patch models */
-    this.patchOotChildModel();
-    this.patchOotAdultModel();
+    await this.patchOotChildModel();
+    await this.patchOotAdultModel();
 
     /* Custom music */
     if (c.music) {
