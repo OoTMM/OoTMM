@@ -35,6 +35,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fixed the special conditions validator to account for the extra added masks in OoT.
 - Fixed a bug with region-state flags that could create unbeatable seeds.
 - Fix minor bugs with swordless link.
 - Fix phantom shields being equipped on age travel in some very rare cases.

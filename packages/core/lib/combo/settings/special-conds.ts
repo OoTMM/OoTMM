@@ -22,7 +22,7 @@ export const SPECIAL_CONDS_FIELDS = {
   fairyTown:        { name: "Stray Fairy (Clock Town)", max: 1 },
   masksRegular:     { name: "Regular Masks (MM)", max: 20 },
   masksTransform:   { name: "Transformation Masks (MM)", max: 4 },
-  masksOot:         { name: "Masks (OoT)", max: 8 },
+  masksOot:         { name: "Masks (OoT)", max: (s: Settings) => 8 + Object.keys(s).filter(x => x.includes('MaskOot')).length },
   triforce:         { name: "Triforce Pieces", cond: (s: Settings) => s.goal === 'triforce', max: (s: Settings) => s.triforcePieces },
   coinsRed:         { name: "Coins (Red)", cond: (s: Settings) => s.coinsRed > 0, max: (s: Settings) => s.coinsRed },
   coinsGreen:       { name: "Coins (Green)", cond: (s: Settings) => s.coinsGreen > 0, max: (s: Settings) => s.coinsGreen },
