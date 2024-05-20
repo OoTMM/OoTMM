@@ -758,23 +758,6 @@ export class Pathfinder {
       }
     }
 
-    /* Handle initial state */
-    if (!this.state.started) {
-      this.state.started = true;
-      const initAreaData = defaultAreaData();
-      initAreaData.mmTime = 1;
-
-      this.updateGoalFlags();
-
-      for (let worldId = 0; worldId < this.worlds.length; ++worldId) {
-        if (this.opts.singleWorld !== undefined && this.opts.singleWorld !== worldId) {
-          continue;
-        }
-        this.exploreArea(worldId, 'child', 'OOT SPAWN', cloneAreaData(initAreaData), 'OOT SPAWN');
-        this.exploreArea(worldId, 'adult', 'OOT SPAWN', cloneAreaData(initAreaData), 'OOT SPAWN');
-      }
-    }
-
     /* Assumed items */
     if (this.opts.assumedItems) {
       for (const [playerItem, amount] of this.opts.assumedItems.entries()) {
@@ -790,6 +773,23 @@ export class Pathfinder {
           this.requeueItem(playerItem.player, playerItem.item);
           this.state.previousAssumedItems.set(playerItem, amount);
         }
+      }
+    }
+
+    /* Handle initial state */
+    if (!this.state.started) {
+      this.state.started = true;
+      const initAreaData = defaultAreaData();
+      initAreaData.mmTime = 1;
+
+      this.updateGoalFlags();
+
+      for (let worldId = 0; worldId < this.worlds.length; ++worldId) {
+        if (this.opts.singleWorld !== undefined && this.opts.singleWorld !== worldId) {
+          continue;
+        }
+        this.exploreArea(worldId, 'child', 'OOT SPAWN', cloneAreaData(initAreaData), 'OOT SPAWN');
+        this.exploreArea(worldId, 'adult', 'OOT SPAWN', cloneAreaData(initAreaData), 'OOT SPAWN');
       }
     }
   }
