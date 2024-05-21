@@ -1537,6 +1537,8 @@ static void toggleForm(Actor_Player* link, int form)
         return;
     if (link->state & 0x3c7080)
         return;
+    if (link->state3 & 0x1000)
+        return;
 
     link->state &= ~0x08000000;
     link->state3 &= ~0x8000;
