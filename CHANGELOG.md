@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [23.0] - 2024-05-22
+
 ### Added
 
 - Add a fast mask transforms setting.
@@ -1204,7 +1206,8 @@ All notable changes to this project will be documented in this file.
 
 - Initial stable release.
 
-[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v22.0...HEAD
+[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v23.0...HEAD
+[23.0]: https://github.com/OoTMM/OoTMM/compare/v22.0...v23.0
 [22.0]: https://github.com/OoTMM/OoTMM/compare/v21.0...v22.0
 [21.0]: https://github.com/OoTMM/OoTMM/compare/v20.0...v21.0
 [20.0]: https://github.com/OoTMM/OoTMM/compare/v19.2...v20.0
