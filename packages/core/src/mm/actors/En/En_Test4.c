@@ -104,14 +104,19 @@ static void EnTest4_CheckSpawn(GameState_Play* play)
     }
 }
 
+static int isNight(u16 time)
+{
+    return !!((time < 0x4000) || (time >= 0xc000));
+}
+
 static void EnTest4_CheckTimeSkip(Actor_EnTest4* this, GameState_Play* play)
 {
     u8 day;
     u16 time;
 
     day = gSave.day;
-    time = gSave.time;
-    if (this->prevTime < 0x4000 && time >= 0x4000)
+    time = gSave.time + CLOCK_TIME(0, 1);
+    if (isNight(this->prevTime) && !isNight(time))
         day++;
 
     if (day < 4 && EnTest4_TimeSkip(play, &day, &time))
@@ -130,8 +135,7 @@ static void EnTest4_CheckTimeSkip(Actor_EnTest4* this, GameState_Play* play)
             Interface_NewDay(play, gSave.day);
             Environment_NewDay(&play->envCtx);
         }
-        this->prevTime = time - 1;
-        this->daytimeIndex = (time == 0xc000);
+        this->prevTime = time - CLOCK_TIME(0, 1);
     }
 }
 
