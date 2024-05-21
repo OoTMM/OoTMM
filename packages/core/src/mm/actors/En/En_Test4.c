@@ -63,47 +63,6 @@ static int EnTest4_TimeSkip(GameState_Play* play, u8* day, u16* time)
     return 1;
 }
 
-static void EnTest4_CheckSpawn(GameState_Play* play)
-{
-    int firstHalfDay;
-
-    /* Check if we need to skip forward in time */
-    if (!(gSave.day == 0 || (gSave.day == 1 && gSave.time == 0x4000)))
-        return;
-
-    firstHalfDay = 6;
-    for (int i = 0; i < 6; ++i)
-    {
-        if (gSharedCustomSave.mm.halfDays & (1 << i))
-        {
-            firstHalfDay = i;
-            break;
-        }
-    }
-
-    if (firstHalfDay == 0)
-    {
-        /* Work around a vanilla bug */
-        if (gSave.entranceIndex != ENTR_MM_CLOCK_TOWN)
-            gSave.time = 0x4040;
-        return;
-    }
-
-    /* We start on a later clock */
-    if (firstHalfDay & 1)
-    {
-        gSave.day = (firstHalfDay / 2) + 1;
-        gSave.time = 0xc000;
-        Interface_NewDay(play, gSave.day);
-        Environment_NewDay(&play->envCtx);
-    }
-    else
-    {
-        gSave.day = (firstHalfDay / 2);
-        gSave.time = 0x3fff;
-    }
-}
-
 static int isNight(u16 time)
 {
     return !!((time < 0x4000) || (time >= 0xc000));
@@ -153,7 +112,6 @@ void EnTest4_InitWrapper(Actor_EnTest4* this, GameState_Play* play)
 {
     void (*EnTest4_Init)(Actor_EnTest4*, GameState_Play*);
 
-    EnTest4_CheckSpawn(play);
     this->base.update = EnTest4_UpdateWrapper;
 
     EnTest4_Init = actorAddr(AC_EN_TEST4, 0x80a427e8);
