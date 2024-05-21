@@ -207,7 +207,6 @@ type PathfinderOptions = {
   gossips?: boolean;
   inPlace?: boolean;
   singleWorld?: number;
-  ganonMajora?: boolean;
 };
 
 export class Pathfinder {
@@ -568,7 +567,7 @@ export class Pathfinder {
     /* Otherwise, track dependencies */
     if (result.result) {
       ws.events.add(event);
-      if (event === 'OOT_GANON' || event === 'MM_MAJORA') {
+      if (event === 'OOT_GANON' || event === 'OOT_GANON_PRE_BOSS' || event === 'MM_MAJORA' || event === 'MM_MAJORA_PRE_BOSS') {
         this.updateGoalFlags();
       }
 
@@ -714,7 +713,7 @@ export class Pathfinder {
   }
 
   private updateGoalFlags() {
-    if (this.opts.ganonMajora) {
+    if (this.settings.goal === 'triforce3') {
       this.state.ganonMajora = this.isGanonMajoraReached();
     }
     if (this.isGoalReached()) {

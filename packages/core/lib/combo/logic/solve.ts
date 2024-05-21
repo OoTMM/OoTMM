@@ -397,7 +397,7 @@ export class LogicPassSolver {
 
         for (;;) {
           /* Pathfind */
-          this.pathfinderState = this.pathfinder.run(this.pathfinderState, { ganonMajora: this.input.settings.goal === 'triforce3', inPlace: true, recursive: true, items: this.state.items });
+          this.pathfinderState = this.pathfinder.run(this.pathfinderState, { inPlace: true, recursive: true, items: this.state.items });
 
           let goal = true;
           if (this.input.settings.logic === 'allLocations') {
@@ -1163,7 +1163,7 @@ export class LogicPassSolver {
         const loc = unplacedLocs.pop()!;
         const newPlacement = new Map(this.state.items);
         newPlacement.set(loc, requiredItem);
-        const result = this.pathfinder.run(null, { recursive: true, items: newPlacement, assumedItems: pool, ganonMajora: this.input.settings.goal === 'triforce3' });
+        const result = this.pathfinder.run(null, { recursive: true, items: newPlacement, assumedItems: pool });
         let goal: boolean;
         if (this.input.settings.goal === 'triforce3') {
           goal = result.ganonMajora;
