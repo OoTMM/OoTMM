@@ -125,7 +125,7 @@ export async function pack(args: PackArgs): Promise<PackOutput> {
   /* Add the extra files */
   for (const newFile of patchfile.newFiles) {
     const type = newFile.compressed ? 'compressed' : 'uncompressed';
-    const { data } = newFile;
+    const data = Buffer.from(newFile.data);
     const vaddr = newFile.vrom;
     let name = newFile.name;
     if (name === null) {
