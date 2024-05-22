@@ -40,9 +40,11 @@ static int EnGinkoMan_ButtonPress(GameState_Play* play)
 
     buttons = play->gs.input[0].pressed.buttons;
     if (buttons & B_BUTTON)
-        return 2;
+        return B_BUTTON;
     else if (buttons & A_BUTTON)
-        return 1;
+        return A_BUTTON;
+    else if (buttons & R_TRIG)
+        return R_TRIG;
     return 0;
 }
 
@@ -168,14 +170,26 @@ static void EnGinkoMan_CheckRewardHandler(Actor* this, GameState_Play* play)
 
 static void EnGinkoMan_TransferHandler(Actor* this, GameState_Play* play)
 {
-    int press;
+    int amount;
 
-    press = EnGinkoMan_ButtonPress(play);
-    if (!press)
+    switch (EnGinkoMan_ButtonPress(play))
+    {
+    case A_BUTTON:
+        amount = play->msgCtx.bankRupeesSelected;
+        break;
+    case B_BUTTON:
+        amount = 0;
+        break;
+    case R_TRIG:
+        amount = 9999;
+        break;
+    default:
         return;
+    }
+
     Message_Close(play);
-    if (press == 1)
-        EnGinkoMan_DoTransfer(play, play->msgCtx.bankRupeesSelected);
+    if (amount)
+        EnGinkoMan_DoTransfer(play, amount);
     SET_HANDLER(this, EnGinkoMan_CheckRewardHandler);
     EnGinkoMan_CheckRewardHandler(this, play);
 }
@@ -186,14 +200,14 @@ static void EnGinkoMan_MainBoxHandler(Actor* this, GameState_Play* play)
 
     switch (EnGinkoMan_ButtonPress(play))
     {
-    case 0:
-        return;
-    case 1:
+    case A_BUTTON:
         action = play->msgCtx.choiceIndex;
         break;
-    case 2:
+    case B_BUTTON:
         action = 2;
         break;
+    default:
+        return;
     }
 
     sIsDeposit = 0;
