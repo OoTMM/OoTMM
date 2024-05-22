@@ -1482,6 +1482,9 @@ export class LogicPassWorldTransform {
       }
     }
 
+    if(settings.ootPreplantedBeans)
+      this.removeItem(Items.OOT_MAGIC_BEAN);
+
     /* Handle required junks */
     const renewableJunks: PlayerItems = new Map;
     for (const pi of this.pool.keys()) {

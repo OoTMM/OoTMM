@@ -998,6 +998,14 @@ export const SETTINGS = [{
   default: false,
   cond: hasOoTMM,
 }, {
+  key: 'ootPreplantedBeans',
+  name: 'Pre-Planted beans (OoT)',
+  category: 'main.events',
+  type: 'boolean',
+  description: 'Automatically plants beans for ',
+  default: false,
+  cond: hasOoT,
+}, {
   key: 'crossAge',
   name: 'Cross-Games Age',
   category: 'main.cross',

@@ -87,6 +87,20 @@ static void eventFixes(GameState_Play* play)
     {
         SetEventChk(EV_OOT_CHK_RAINBOW_BRIDGE);
     }
+
+    if(Config_Flag(CFG_OOT_PLANTED_BEANS))
+    {
+        gOotSave.perm[SCE_OOT_GRAVEYARD].switches |= 0x00000008;
+        gOotSave.perm[SCE_OOT_ZORA_RIVER].switches |= 0x00000008;
+        gOotSave.perm[SCE_OOT_KOKIRI_FOREST].switches |= 0x00000200;
+        gOotSave.perm[SCE_OOT_LAKE_HYLIA].switches |= 0x00000002;
+        gOotSave.perm[SCE_OOT_GERUDO_VALLEY].switches |= 0x00000008;
+        gOotSave.perm[SCE_OOT_LOST_WOODS].switches |= 0x00040010;
+        gOotSave.perm[SCE_OOT_DESERT_COLOSSUS].switches |= 0x01000000;
+        gOotSave.perm[SCE_OOT_DEATH_MOUNTAIN_TRAIL].switches |= 0x00000040;
+        gOotSave.perm[SCE_OOT_DEATH_MOUNTAIN_CRATER].switches |= 0x00000008;
+        gOotSave.inventory.items[ITS_OOT_MAGIC_BEAN] = ITEM_OOT_MAGIC_BEAN;
+    }
 }
 
 static void sendSelfTriforce(void)

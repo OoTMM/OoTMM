@@ -180,7 +180,7 @@
 "can_ride_epona": "is_adult && can_play_epona"
 "adult_trade(x)": "is_adult && has(x)"
 "has_blue_fire": "has_blue_fire_arrows || (has_bottle && (event(BLUE_FIRE) || renewable(BLUE_FIRE) || renewable(BOTTLE_BLUE_FIRE)))"
-"can_ride_bean(x)": "is_adult && event(x)"
+"can_ride_bean(x)": "is_adult && (setting(ootPreplantedBeans) || event(x))"
 "can_damage": "has_weapon || can_use_sticks || has_explosives || can_use_slingshot || can_use_din"
 "can_damage_skull": "can_damage || can_collect_distance"
 "can_cut_grass_no_c_button": "has_weapon || has_strength_raw(1) || can_use_mask_blast"

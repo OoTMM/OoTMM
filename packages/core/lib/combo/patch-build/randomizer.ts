@@ -977,6 +977,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     OOT_EXTRA_CHILD_SWORDS: settings.extraChildSwordsOot,
     ONLY_OOT: settings.games === 'oot',
     ONLY_MM: settings.games === 'mm',
+    OOT_PLANTED_BEANS: settings.ootPreplantedBeans,
   };
 
   for (const v in exprs) {

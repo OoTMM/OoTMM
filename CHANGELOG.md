@@ -4,7 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+
+- Add a setting to automatically plant beans in OoT.
+
 ### Changed
+
 - Fill Wallets is now instantaneous.
 
 ## [23.0] - 2024-05-22
