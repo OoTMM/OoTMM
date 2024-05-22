@@ -4,6 +4,7 @@
 #include <combo/player.h>
 #include <combo/config.h>
 #include <combo/actor.h>
+#include <combo/time.h>
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x1ac) = (h); } while (0)
 
@@ -50,6 +51,12 @@ void ObjWarpstone_GiveItem(Actor* this, GameState_Play* play)
     int npc;
     s16 gi;
     u8 id;
+
+    /* Fix a vanilla bug where day-night transitions can mess up the owl */
+    if (gSave.time >= CLOCK_TIME(5, 59) && gSave.time <= CLOCK_TIME(6, 1))
+        return;
+    if (gSave.time >= CLOCK_TIME(17, 59) && gSave.time <= CLOCK_TIME(18, 1))
+        return;
 
     id = this->variable & 0xf;
 

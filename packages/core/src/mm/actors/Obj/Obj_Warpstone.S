@@ -32,7 +32,7 @@ PATCH_START 0x80b92e4c
 .byte 0x15
 PATCH_END
 
-/* Relocs */
+/* Use our own handler */
 PATCH_START 0x80b92c10
   lui a1,%HI(ObjWarpstone_GiveItem)
 PATCH_END
