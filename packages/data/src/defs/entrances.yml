@@ -91,7 +91,7 @@ OOT_LOST_WOODS_FROM_LOST_WOODS_NORTH:           { game: oot, id: 0xf01, type: on
 OOT_LOST_WOODS_FROM_LOST_WOODS_EAST:            { game: oot, id: 0x1ad, type: one-way-woods, areas: ["OOT Lost Woods Lost East", "OOT Lost Woods"] }
 OOT_LOST_WOODS_FROM_LOST_WOODS_SOUTH:           { game: oot, id: 0x1b1, type: one-way-woods, areas: ["OOT Lost Woods Lost South", "OOT Lost Woods"] }
 OOT_LOST_WOODS_FROM_LOST_WOODS_WEST:            { game: oot, id: 0x4c6, type: one-way-woods, areas: ["OOT Lost Woods Lost West", "OOT Lost Woods"] }
-OOT_HOUSE_MIDO:                                 { game: oot, id: 0x433, type: indoors, areas: ["OOT Kokiri Forest", "OOT Mido's House"], reverse: OOT_KOKIRI_FOREST_FROM_MIDO }
+OOT_HOUSE_MIDO:                                 { game: oot, id: 0x433, type: indoors, areas: ["OOT Kokiri Forest", "OOT Mido's House"], reverse: OOT_KOKIRI_FOREST_FROM_MIDO, debug: [INTERIOR, 'Midos House']}
 OOT_HOUSE_SARIA:                                { game: oot, id: 0x437, type: indoors, areas: ["OOT Kokiri Forest", "OOT Saria's House"], reverse: OOT_KOKIRI_FOREST_FROM_SARIA }
 OOT_HOUSE_TWINS:                                { game: oot, id: 0x09c, type: indoors, areas: ["OOT Kokiri Forest", "OOT House of Twins"], reverse: OOT_KOKIRI_FOREST_FROM_TWINS }
 OOT_HOUSE_KNOW_IT_ALL:                          { game: oot, id: 0x0c9, type: indoors, areas: ["OOT Kokiri Forest", "OOT Know It All House"], reverse: OOT_KOKIRI_FOREST_FROM_KNOW_IT_ALL }

@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Changed
+- Fill Wallets is now instantaneous.
+
 ## [23.0] - 2024-05-22
 
 ### Added

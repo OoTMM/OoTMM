@@ -206,7 +206,7 @@ static void addRupeesOot(GameState_Play* play, s16 delta)
 
     if (play)
     {
-        AddRupees(delta);
+        addRupeesRawOot(RupeeValueOot(delta));
         return;
     }
 
@@ -225,7 +225,7 @@ static void addRupeesMm(GameState_Play* play, s16 delta)
 
     if (play)
     {
-        AddRupees(delta);
+        addRupeesRawMm(RupeeValueMm(delta));
         return;
     }
 
