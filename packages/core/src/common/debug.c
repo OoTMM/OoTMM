@@ -480,9 +480,9 @@ static void cheatAllItems(GameState_Play* play)
     gSave.inventory.upgrades.dekuStick = 3;
     gSave.inventory.upgrades.dekuNut = 3;
     gSave.inventory.upgrades.strength = 3;
-    /*gMmExtraFlags2.childWallet = 1; */
-    /*gSave.inventory.upgrades.wallet = 3; */
-    /*gMmExtraFlags3.bottomlessWallet = 1; */
+    gMmExtraFlags2.childWallet = 1;
+    gSave.inventory.upgrades.wallet = 3;
+    //gMmExtraFlags3.bottomlessWallet = 1;
     gSave.inventory.upgrades.bombBag = 0;
 
     gSave.itemEquips.buttonItems[0][0] = ITEM_MM_SWORD_KOKIRI;
@@ -536,7 +536,7 @@ static void cheatAllItems(GameState_Play* play)
     gSave.inventory.items[ITS_MM_MASK_GIANT] = ITEM_MM_MASK_GIANT;
     gSave.inventory.items[ITS_MM_MASK_FIERCE_DEITY] = ITEM_MM_MASK_FIERCE_DEITY;
 
-    gSave.playerData.rupees = 9999;
+    gSave.playerData.rupees = 999;
 
     gSave.inventory.quest.notebook = 1;
     gSave.inventory.quest.songHealing = 1;

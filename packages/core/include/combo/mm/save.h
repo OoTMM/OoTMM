@@ -222,7 +222,7 @@ typedef struct
     u32                     unk_EC8;
     u32                     unk_ECC[2];
     u32                     stolenItems;
-    u32                     unk_DD8;
+    u32                     unk_ED8;
     u32                     bankRupees;
     u32                     unk_ee0;
     u32                     unk_ee4;
@@ -252,6 +252,15 @@ typedef struct
     char                    unk[0x2c86];
 }
 MmSave;
+
+ASSERT_SIZE(MmSave, 0x3ca0);
+ASSERT_OFFSET(MmSave, entranceIndex,    0x0000);
+ASSERT_OFFSET(MmSave, equippedMask,     0x0004);
+ASSERT_OFFSET(MmSave, isFirstCycle,     0x0005);
+ASSERT_OFFSET(MmSave, unk_006,          0x0006);
+ASSERT_OFFSET(MmSave, linkAge,          0x0007);
+ASSERT_OFFSET(MmSave, cutscene,         0x0008);
+ASSERT_OFFSET(MmSave, time,             0x000c);
 
 typedef struct
 {
@@ -337,7 +346,6 @@ typedef struct
 }
 MmSaveContext;
 
-_Static_assert(sizeof(MmSave) == 0x3ca0, "MmSave size is wrong");
 _Static_assert(sizeof(MmSaveContext) == 0x48d0, "MmSaveContext size is wrong");
 
 ASSERT_OFFSET(MmSaveContext, fileIndex,             0x3ca0);
