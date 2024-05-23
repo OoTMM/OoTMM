@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- The angle of interaction of MM gossip stones is more tolerant.
 - Make multiworld items much faster to obtain.
 - Make triforce pieces in triforce quest land in slightly more challenging locations.
 - Make Navi give random junk hints when talked to.
