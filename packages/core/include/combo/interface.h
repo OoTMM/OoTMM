@@ -3,6 +3,8 @@
 
 typedef struct GameState_Play GameState_Play;
 
+void Interface_Update(GameState_Play* play);
+
 #if defined(GAME_MM)
 void Interface_NewDay(GameState_Play* play, int day);
 #endif

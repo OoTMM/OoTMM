@@ -60,3 +60,13 @@ PATCH_START 0x8006e450
   nop
 PATCH_END
 PATCH_GROUP_END
+
+/* Don't use the default rupee delta code */
+PATCH_START 0x80078748
+  b .+0x158
+PATCH_END
+
+/* Use our wrapper */
+PATCH_START 0x8009bef8
+  jal Interface_Update
+PATCH_END

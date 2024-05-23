@@ -292,7 +292,7 @@ static int addItemWalletOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
         addWalletRawOot(param);
 
     if (Config_Flag(CFG_FILL_WALLETS))
-        addRupeesRawOot(gOotMaxRupees[gOotSave.inventory.upgrades.wallet]);
+        addRupeesOot(play, gOotMaxRupees[gOotSave.inventory.upgrades.wallet]);
 
     return 0;
 }
@@ -305,7 +305,7 @@ static int addItemWalletMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
         addWalletRawMm(param);
 
     if (Config_Flag(CFG_FILL_WALLETS))
-        addRupeesRawMm(gMmMaxRupees[gMmSave.inventory.upgrades.wallet]);
+        addRupeesMm(play, gMmMaxRupees[gMmSave.inventory.upgrades.wallet]);
 
     return 0;
 }

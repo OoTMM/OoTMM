@@ -6,11 +6,13 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add many bank QoL.
 - Add a setting to automatically plant beans in OoT.
 
 ### Changed
 
-- Fill Wallets is now instantaneous.
+- The rupee counter now goes much faster when large amounts of rupees are obtained/lost.
+- Fill Wallets is now almost instantaneous.
 
 ## [23.0] - 2024-05-22
 

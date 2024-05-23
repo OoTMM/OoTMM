@@ -26,3 +26,13 @@ PATCH_START _Interface_UpdateButtonsPart2
   j Interface_UpdateButtonsPart2Wrapper
    nop
 PATCH_END
+
+/* Don't use the default rupee delta code */
+PATCH_START 0x8012154c
+  j 0x80121648
+PATCH_END
+
+/* Use our wrapper */
+PATCH_START 0x80167c78
+  jal Interface_Update
+PATCH_END

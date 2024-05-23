@@ -81,3 +81,8 @@ void* memmove(void* dst, void* src, size_t size)
     }
     return dst;
 }
+
+int abs(int value)
+{
+    return value < 0 ? -value : value;
+}

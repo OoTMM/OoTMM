@@ -3,6 +3,9 @@ __osRestoreInt = 0x80091ad0;
 
 sFlashromMesgQueue = 0x801fbe10;
 
+
+_Interface_Update = 0x801210e0;
+
 bzero = 0x80089630;
 InitDmaManager = 0x80080d0c;
 Play_Init = 0x8016a2c8;

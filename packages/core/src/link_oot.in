@@ -1,6 +1,8 @@
 __osDisableInt = 0x80005130;
 __osRestoreInt = 0x800051a0;
 
+_Interface_Update = 0x80078290;
+
 bzero = 0x80002e80;
 osRecvMesg = 0x80002030;
 osSendMesg = 0x80001e20;
