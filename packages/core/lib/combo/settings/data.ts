@@ -2289,7 +2289,6 @@ export const SETTINGS = [{
   ],
   default: 'none',
   description: 'Shuffle every overworld entrance.',
-  cond: (x: any) => x.erRegions === 'none',
 }, {
   key: 'erIndoors',
   name: 'Shuffle Interiors',
