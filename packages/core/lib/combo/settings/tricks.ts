@@ -476,7 +476,12 @@ export const TRICKS: Tricks = {
     tooltip: 'Jump off of a piece of rubble to the slope on the wall, and jump outside the fenced wall.  Walk around the edge to get to the other side.',
     linkVideo: 'https://www.youtube.com/watch?v=9af_q8oYBhA&t=1s',
   },
-  MM_IKANA_PILLAR_TO_ENTRANCE: {
+  MM_IKANA_PILLAR_ENTRANCE_FLOAT: {
+    game: 'mm',
+    name: "Float from Ikana Castle's Roof to Entrance",
+    tooltip: 'Float from the Ikana Castle roof to the main entrance of the courtyard using Deku Mask or Hover Boots',
+  },
+  MM_IKANA_PILLAR_ENTRANCE_JUMP: {
     game: 'mm',
     name: "Jump from Ikana Castle's Roof to Entrance",
     tooltip: 'Jump from the Ikana Castle roof to the main entrance of the courtyard',

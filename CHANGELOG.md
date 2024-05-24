@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file.
 
 - The rupee counter now goes much faster when large amounts of rupees are obtained/lost.
 - Fill Wallets is now almost instantaneous.
+- Using Deku Mask or Hover Boots to float from Ikana Castle to the sun block entrance is now a trick.
 
 ## [23.0] - 2024-05-22
 

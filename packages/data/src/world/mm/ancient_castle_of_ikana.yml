@@ -60,7 +60,7 @@
     "Ancient Castle of Ikana Interior North 3": "true"
     "Ancient Castle of Ikana Roof Interior": "can_goron_bomb_jump || short_hook_anywhere"
     "Ikana Castle Exterior": "true"
-    "Ikana Castle Entrance": "has(MASK_DEKU) || has_hover_boots || trick(MM_IKANA_PILLAR_TO_ENTRANCE)"
+    "Ikana Castle Entrance": "(trick(MM_IKANA_PILLAR_ENTRANCE_FLOAT) && (has(MASK_DEKU) || has_hover_boots)) || trick(MM_IKANA_PILLAR_ENTRANCE_JUMP)"
     "SOARING": "can_play_soaring"
     "WARP_SONGS": "true"
   events:
