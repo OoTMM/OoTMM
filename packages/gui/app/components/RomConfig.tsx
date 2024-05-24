@@ -1,7 +1,8 @@
 import React from 'react';
+import ReactGA from 'react-ga4';
+
 import { useGenerator, useIsPatch, useRandomSettings, useRomConfig } from '../contexts/GeneratorContext';
 import { Checkbox } from './Checkbox';
-
 import { FileSelect } from './FileSelect';
 import { PresetSelector } from './PresetSelector';
 import { SettingsImportExport } from './SettingsImportExport';
@@ -27,6 +28,7 @@ export function RomConfig() {
     <form className="rom-config-form"
       target="_self"
       onSubmit={(e) => {
+        ReactGA.event('generate_seed');
         e.preventDefault();
         generate();
       }}
