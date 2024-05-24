@@ -14,20 +14,8 @@
 
 void ArrowCycle_Handle(Actor_Player* link, GameState_Play* play);
 
-u8 sFormChangeTimer;
-
 void Player_UpdateWrapper(Actor_Player* this, GameState_Play* play)
 {
-    if (sFormChangeTimer)
-    {
-        sFormChangeTimer--;
-
-        /* Kill speed */
-        this->base.speedXZ = 0.f;
-        this->base.velocity.x = 0.f;
-        this->base.velocity.z = 0.f;
-    }
-
     ArrowCycle_Handle(this, play);
     Player_Update(this, play);
     Dpad_Update(play);
@@ -1535,7 +1523,7 @@ static void toggleForm(Actor_Player* link, int form)
     /* Sanity checks */
     if (link->base.draw == NULL)
         return;
-    if (link->state & 0x3c7080)
+    if (link->state & 0x7c7080)
         return;
     if (link->state3 & 0x1000)
         return;
@@ -1556,7 +1544,28 @@ static void toggleForm(Actor_Player* link, int form)
     link->base.speedXZ = 0.f;
     link->base.velocity.x = 0.f;
     link->base.velocity.z = 0.f;
-    sFormChangeTimer = 2;
+    link->state |= PLAYER_ACTOR_STATE_FROZEN;
+}
+
+static s8 sNextForm = -1;
+
+void Player_TryUpdateForm(Actor_Player* this, GameState_Play* play)
+{
+    if (sNextForm != -1)
+    {
+        toggleForm(this, sNextForm);
+        sNextForm = -1;
+    }
+    else if (this->base.update == Player_UpdateForm)
+    {
+        this->base.velocity.x = 0.f;
+        this->base.velocity.y = 0.f;
+        this->base.velocity.z = 0.f;
+        this->base.speedXZ = 0.f;
+        Player_UpdateForm(this, play);
+        if (this->base.update != Player_UpdateForm)
+            this->state &= ~PLAYER_ACTOR_STATE_FROZEN;
+    }
 }
 
 void Player_UseItem(GameState_Play* play, Actor_Player* this, s16 itemId)
@@ -1571,19 +1580,19 @@ void Player_UseItem(GameState_Play* play, Actor_Player* this, s16 itemId)
         switch (itemId)
         {
         case ITEM_MM_MASK_DEKU:
-            toggleForm(this, MM_PLAYER_FORM_DEKU);
+            sNextForm = MM_PLAYER_FORM_DEKU;
             useDefault = 0;
             break;
         case ITEM_MM_MASK_GORON:
-            toggleForm(this, MM_PLAYER_FORM_GORON);
+            sNextForm = MM_PLAYER_FORM_GORON;
             useDefault = 0;
             break;
         case ITEM_MM_MASK_ZORA:
-            toggleForm(this, MM_PLAYER_FORM_ZORA);
+            sNextForm = MM_PLAYER_FORM_ZORA;
             useDefault = 0;
             break;
         case ITEM_MM_MASK_FIERCE_DEITY:
-            toggleForm(this, MM_PLAYER_FORM_FIERCE_DEITY);
+            sNextForm = MM_PLAYER_FORM_FIERCE_DEITY;
             useDefault = 0;
             break;
         }

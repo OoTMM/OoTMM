@@ -712,6 +712,7 @@ void hookPlay_Init(GameState_Play* play)
 
 void Play_UpdateWrapper(GameState_Play* play)
 {
+    Actor_Player* link;
     /* Auto-press A during credits */
     if (g.isCredits)
         play->gs.input[0].pressed.buttons = (play->gs.frameCount & 1) ? A_BUTTON : 0;
@@ -721,6 +722,8 @@ void Play_UpdateWrapper(GameState_Play* play)
     malloc_check();
     comboCacheGarbageCollect();
     comboObjectsGC();
+    link = GET_LINK(play);
+    Player_TryUpdateForm(link, play);
     Play_Update(play);
     Audio_DisplayMusicName(play);
     Debug_Update();
