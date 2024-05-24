@@ -1518,7 +1518,22 @@ s32 Player_OverrideLimbDrawGameplayDefault_Custom(GameState_Play* play, s32 limb
     return 0;
 }
 
-static void toggleForm(Actor_Player* link, int form)
+static void Player_FormChangeResetState(Actor_Player* this)
+{
+    this->base.speedXZ = 0.f;
+    this->base.velocity.x = 0.f;
+    this->base.velocity.y = 0.f;
+    this->base.velocity.z = 0.f;
+
+    /*
+     * KLUDGE: This is a workaround for various glitches related to fast-masking
+     * quickly on a shore. Should be fixed properly someday.
+     */
+    this->state ^= 0x08000000;
+    this->state3 &= ~0x8000;
+}
+
+static void Player_ToggleForm(Actor_Player* link, int form)
 {
     /* Sanity checks */
     if (link->base.draw == NULL)
@@ -1527,9 +1542,6 @@ static void toggleForm(Actor_Player* link, int form)
         return;
     if (link->state3 & 0x1000)
         return;
-
-    link->state &= ~0x08000000;
-    link->state3 &= ~0x8000;
 
     /* Toggle form */
     if (gSave.playerForm == form)
@@ -1541,10 +1553,8 @@ static void toggleForm(Actor_Player* link, int form)
     *((u8*)link + 0xae7) = 0;
     link->base.update = Player_UpdateForm;
     link->base.draw = NULL;
-    link->base.speedXZ = 0.f;
-    link->base.velocity.x = 0.f;
-    link->base.velocity.z = 0.f;
     link->state |= PLAYER_ACTOR_STATE_FROZEN;
+    Player_FormChangeResetState(link);
 }
 
 static s8 sNextForm = -1;
@@ -1553,15 +1563,12 @@ void Player_TryUpdateForm(Actor_Player* this, GameState_Play* play)
 {
     if (sNextForm != -1)
     {
-        toggleForm(this, sNextForm);
+        Player_ToggleForm(this, sNextForm);
         sNextForm = -1;
     }
     else if (this->base.update == Player_UpdateForm)
     {
-        this->base.velocity.x = 0.f;
-        this->base.velocity.y = 0.f;
-        this->base.velocity.z = 0.f;
-        this->base.speedXZ = 0.f;
+        Player_FormChangeResetState(this);
         Player_UpdateForm(this, play);
         if (this->base.update != Player_UpdateForm)
             this->state &= ~PLAYER_ACTOR_STATE_FROZEN;
