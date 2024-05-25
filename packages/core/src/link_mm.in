@@ -12,6 +12,9 @@ Play_Init = 0x8016a2c8;
 gSaveContext = 0x801ef670;
 DMARomToRam = 0x80080790;
 
+EffectSs_Delete = 0x800b0210;
+gEffectSsTable = 0x801ae3a0;
+
 EnItem00_Init = 0x800a5d70;
 EnItem00_CollectedHandler = 0x800a6a40;
 EnItem00_Update = 0x800a6b98;

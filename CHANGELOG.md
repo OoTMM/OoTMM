@@ -15,6 +15,11 @@ All notable changes to this project will be documented in this file.
 - Fill Wallets is now almost instantaneous.
 - Using Deku Mask or Hover Boots to float from Ikana Castle to the sun block entrance is now a trick.
 
+### Fixed
+
+- Fix Fast Masks softlocks.
+- Fix a Fast Mask crash when deku link petals are on screen while transforming.
+
 ## [23.0] - 2024-05-22
 
 ### Added

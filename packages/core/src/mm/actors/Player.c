@@ -9,7 +9,7 @@
 #include <combo/dpad.h>
 #include <combo/multi.h>
 #include <combo/global.h>
-#include <combo/mask.h>
+#include <combo/effect.h>
 #include "../actors.h"
 
 void ArrowCycle_Handle(Actor_Player* link, GameState_Play* play);
@@ -1518,6 +1518,20 @@ s32 Player_OverrideLimbDrawGameplayDefault_Custom(GameState_Play* play, s32 limb
     return 0;
 }
 
+static void Player_FormChangeDeleteEffects(void)
+{
+    EffectSs* eff;
+
+    for (u32 i = 0; i < gEffectSsTable.size; ++i)
+    {
+        eff = &gEffectSsTable.data[i];
+        if (eff->type == 0xf && ((u32)eff->gfx) == 0x06008860)
+        {
+            EffectSs_Delete(eff);
+        }
+    }
+}
+
 static void Player_FormChangeResetState(Actor_Player* this)
 {
     this->base.speedXZ = 0.f;
@@ -1531,6 +1545,8 @@ static void Player_FormChangeResetState(Actor_Player* this)
      */
     this->state ^= 0x08000000;
     this->state3 &= ~0x8000;
+
+    Player_FormChangeDeleteEffects();
 }
 
 static void Player_ToggleForm(Actor_Player* link, int form)
@@ -1575,6 +1591,12 @@ void Player_TryUpdateForm(Actor_Player* this, GameState_Play* play)
     }
 }
 
+static void Player_ToggleFormDelayed(int form)
+{
+    sNextForm = (s8)form;
+    Player_FormChangeDeleteEffects();
+}
+
 void Player_UseItem(GameState_Play* play, Actor_Player* this, s16 itemId)
 {
     void (*Player_UseItemImpl)(GameState_Play* play, Actor_Player* this, s16 itemId);
@@ -1587,19 +1609,19 @@ void Player_UseItem(GameState_Play* play, Actor_Player* this, s16 itemId)
         switch (itemId)
         {
         case ITEM_MM_MASK_DEKU:
-            sNextForm = MM_PLAYER_FORM_DEKU;
+            Player_ToggleFormDelayed(MM_PLAYER_FORM_DEKU);
             useDefault = 0;
             break;
         case ITEM_MM_MASK_GORON:
-            sNextForm = MM_PLAYER_FORM_GORON;
+            Player_ToggleFormDelayed(MM_PLAYER_FORM_GORON);
             useDefault = 0;
             break;
         case ITEM_MM_MASK_ZORA:
-            sNextForm = MM_PLAYER_FORM_ZORA;
+            Player_ToggleFormDelayed(MM_PLAYER_FORM_ZORA);
             useDefault = 0;
             break;
         case ITEM_MM_MASK_FIERCE_DEITY:
-            sNextForm = MM_PLAYER_FORM_FIERCE_DEITY;
+            Player_ToggleFormDelayed(MM_PLAYER_FORM_FIERCE_DEITY);
             useDefault = 0;
             break;
         }
