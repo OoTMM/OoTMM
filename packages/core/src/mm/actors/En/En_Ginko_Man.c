@@ -37,7 +37,11 @@ static void EnGinkoMan_DisplayMainBox(Actor* this, GameState_Play* play)
 static int EnGinkoMan_ButtonPress(GameState_Play* play)
 {
     u16 buttons;
+    int msgState;
 
+    msgState = Message_GetState(&play->msgCtx);
+    if (msgState != 4 && msgState != 5 && msgState != 14)
+        return 0;
     buttons = play->gs.input[0].pressed.buttons;
     if (buttons & B_BUTTON)
         return B_BUTTON;
