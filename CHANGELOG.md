@@ -11,12 +11,14 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Make OoT use the correct minimap state for fortress, graveyard and lake.
 - The rupee counter now goes much faster when large amounts of rupees are obtained/lost.
 - Fill Wallets is now almost instantaneous.
 - Using Deku Mask or Hover Boots to float from Ikana Castle to the sun block entrance is now a trick.
 
 ### Fixed
 
+- Fix custom wisps rarely despawning sometimes.
 - Fix Fast Masks softlocks.
 - Fix a Fast Mask crash when deku link petals are on screen while transforming.
 
