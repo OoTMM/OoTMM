@@ -27,7 +27,7 @@ void comboInit(void)
     comboInitData();
     comboInitObjects();
     comboInitOverride();
-    comboInitHints();
+    Hint_Init();
     comboInitEntrances();
     comboSilverRupeesInit();
     netInit();

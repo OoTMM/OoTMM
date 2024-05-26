@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Make Navi give random junk hints when talked to.
 - Make OoT use the correct minimap state for fortress, graveyard and lake.
 - The rupee counter now goes much faster when large amounts of rupees are obtained/lost.
 - Fill Wallets is now almost instantaneous.

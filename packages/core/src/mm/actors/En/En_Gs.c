@@ -38,7 +38,7 @@ void EnGs_MessageBox(GameState_Play* play, Actor* this)
         }
     }
     PlayerDisplayTextBox(play, 0x20d0, this);
-    comboHintGossip(key, play);
+    Hint_Display(play, key);
 }
 
 PATCH_CALL(0x80997e98, EnGs_MessageBox);

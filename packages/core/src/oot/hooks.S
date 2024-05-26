@@ -45,3 +45,9 @@ PATCH_END
 PATCH_START 0x8009abcc
   li v0,0
 PATCH_END
+
+/* Make Navi always return the same message */
+PATCH_START 0x8005977c
+  jr ra
+   li v0,0x0141
+PATCH_END

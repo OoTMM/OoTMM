@@ -329,6 +329,10 @@ void Player_TalkDisplayTextBox(GameState_Play* play, s16 textId, Actor* actor)
     /* Ruto's Sapphire */
     if (textId == 0x4050)
         DemoEffect_TextRutoSapphire(play);
+
+    /* Navi */
+    if (textId == 0x0141)
+        Hint_DisplayJunkRandom(play);
 }
 
 PATCH_CALL(0x80838464, Player_TalkDisplayTextBox);

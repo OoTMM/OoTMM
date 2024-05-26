@@ -72,7 +72,7 @@ static const Hint* findHint(u8 key)
     }
 }
 
-void comboInitHints(void)
+void Hint_Init(void)
 {
     size_t size;
 
@@ -102,11 +102,10 @@ static const char* kPathNames[] = {
     TEXT_COLOR_BLUE   "Path of Wisdom",
 };
 
-void comboHintGossip(u8 key, GameState_Play* play)
+static void Hint_DisplayRaw(GameState_Play* play, const Hint* hint)
 {
     char* b;
     char* start;
-    const Hint* hint;
     int itemIndex;
     int tmp;
 
@@ -121,56 +120,76 @@ void comboHintGossip(u8 key, GameState_Play* play)
     comboTextAppendStr(&b, "They say that ");
 
     /* Fetch the hint and check */
-    hint = findHint(key);
-    if (hint == NULL)
+    itemIndex = 0;
+    switch (hint->type)
     {
-        /* (Fake) junk hint */
-        comboTextAppendStr(&b, kJunkHints[key % ARRAY_SIZE(kJunkHints)]);
-    }
-    else
-    {
-        itemIndex = 0;
-        switch (hint->type)
+    case HINT_TYPE_PATH:
+        comboTextAppendRegionName(&b, hint->region, hint->world, 0);
+        comboTextAppendStr(&b, " is on the ");
+        comboTextAppendStr(&b, kPathNames[hint->items[0]]);
+        comboTextAppendClearColor(&b);
+        break;
+    case HINT_TYPE_FOOLISH:
+        comboTextAppendStr(&b, "plundering ");
+        comboTextAppendRegionName(&b, hint->region, hint->world, 0);
+        comboTextAppendStr(&b, " is a " TEXT_COLOR_PINK "foolish choice");
+        comboTextAppendClearColor(&b);
+        break;
+    case HINT_TYPE_ITEM_EXACT:
+        tmp = comboTextAppendCheckName(&b, hint->region, hint->world);
+        comboTextAppendStr(&b, (tmp & TF_PLURAL) ? " give " : " gives ");
+        appendCorrectItemName(&b, hint->items[itemIndex], hint->players[itemIndex], hint->itemImportances[itemIndex]);
+        if (hint->items[2] != -1)
         {
-        case HINT_TYPE_PATH:
-            comboTextAppendRegionName(&b, hint->region, hint->world, 0);
-            comboTextAppendStr(&b, " is on the ");
-            comboTextAppendStr(&b, kPathNames[hint->items[0]]);
-            comboTextAppendClearColor(&b);
-            break;
-        case HINT_TYPE_FOOLISH:
-            comboTextAppendStr(&b, "plundering ");
-            comboTextAppendRegionName(&b, hint->region, hint->world, 0);
-            comboTextAppendStr(&b, " is a " TEXT_COLOR_PINK "foolish choice");
-            comboTextAppendClearColor(&b);
-            break;
-        case HINT_TYPE_ITEM_EXACT:
-            tmp = comboTextAppendCheckName(&b, hint->region, hint->world);
-            comboTextAppendStr(&b, (tmp & TF_PLURAL) ? " give " : " gives ");
+            itemIndex++;
+            comboTextAppendStr(&b, ", ");
             appendCorrectItemName(&b, hint->items[itemIndex], hint->players[itemIndex], hint->itemImportances[itemIndex]);
-            if (hint->items[2] != -1)
-            {
-                itemIndex++;
-                comboTextAppendStr(&b, ", ");
-                appendCorrectItemName(&b, hint->items[itemIndex], hint->players[itemIndex], hint->itemImportances[itemIndex]);
-            }
-            if (hint->items[1] != -1)
-            {
-                itemIndex++;
-                comboTextAppendStr(&b, " and ");
-                appendCorrectItemName(&b, hint->items[itemIndex], hint->players[itemIndex], hint->itemImportances[itemIndex]);
-            }
-            break;
-        case HINT_TYPE_ITEM_REGION:
-            appendCorrectItemName(&b, hint->items[0], hint->players[0], hint->itemImportances[0]);
-            comboTextAppendStr(&b, " can be found ");
-            comboTextAppendRegionName(&b, hint->region, hint->world, TF_PREPOS);
-            break;
-        case HINT_TYPE_JUNK:
-            comboTextAppendStr(&b, kJunkHints[((u16)hint->items[0]) % ARRAY_SIZE(kJunkHints)]);
-            break;
         }
+        if (hint->items[1] != -1)
+        {
+            itemIndex++;
+            comboTextAppendStr(&b, " and ");
+            appendCorrectItemName(&b, hint->items[itemIndex], hint->players[itemIndex], hint->itemImportances[itemIndex]);
+        }
+        break;
+    case HINT_TYPE_ITEM_REGION:
+        appendCorrectItemName(&b, hint->items[0], hint->players[0], hint->itemImportances[0]);
+        comboTextAppendStr(&b, " can be found ");
+        comboTextAppendRegionName(&b, hint->region, hint->world, TF_PREPOS);
+        break;
+    case HINT_TYPE_JUNK:
+        comboTextAppendStr(&b, kJunkHints[((u16)hint->items[0]) % ARRAY_SIZE(kJunkHints)]);
+        break;
     }
     comboTextAppendStr(&b, "." TEXT_END);
     comboTextAutoLineBreaks(start);
+}
+
+void Hint_DisplayJunk(GameState_Play* play, u32 index)
+{
+    Hint h;
+
+    memset(&h, 0, sizeof(h));
+    h.type = HINT_TYPE_JUNK;
+    h.items[0] = (index % ARRAY_SIZE(kJunkHints));
+    Hint_DisplayRaw(play, &h);
+}
+
+void Hint_Display(GameState_Play* play, u8 key)
+{
+    const Hint* hint;
+
+    hint = findHint(key);
+    if (hint != NULL)
+        Hint_DisplayRaw(play, hint);
+    else
+        Hint_DisplayJunk(play, key);
+}
+
+void Hint_DisplayJunkRandom(GameState_Play* play)
+{
+    int key;
+
+    key = RandIntRange(0, 0x7fff);
+    Hint_DisplayJunk(play, key);
 }
