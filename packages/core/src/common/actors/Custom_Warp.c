@@ -95,7 +95,7 @@ static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
 
 static void CustomWarp_Init(Actor_CustomWarp* this, GameState_Play* play)
 {
-
+    this->base.room = 0xff;
 }
 
 static void CustomWarp_Update(Actor_CustomWarp* this, GameState_Play* play)
