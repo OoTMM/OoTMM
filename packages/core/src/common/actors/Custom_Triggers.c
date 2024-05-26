@@ -367,7 +367,6 @@ void CustomTriggers_Spawn(GameState_Play* play)
 
 void CustomTriggers_Draw(Actor* this, GameState_Play* play)
 {
-    Multi_DrawWisps(play);
 }
 
 ActorInit CustomTriggers_gActorInit = {
