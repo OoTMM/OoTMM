@@ -7,6 +7,7 @@
 #include <combo/config.h>
 #include <combo/global.h>
 #include <combo/context.h>
+#include <combo/hint.h>
 
 ComboGlobal g;
 

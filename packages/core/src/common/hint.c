@@ -2,6 +2,7 @@
 #include <combo/dma.h>
 #include <combo/item.h>
 #include <combo/config.h>
+#include <combo/hint.h>
 
 #if defined(GAME_OOT)
 # define HINTS_ADDR 0x03ff1000

@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/hint.h>
 
 void EnGs_TalkedTo(Actor* this, GameState_Play* play)
 {

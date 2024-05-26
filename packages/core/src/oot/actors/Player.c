@@ -9,6 +9,7 @@
 #include <combo/dpad.h>
 #include <combo/multi.h>
 #include <combo/actor.h>
+#include <combo/hint.h>
 
 void ArrowCycle_Handle(Actor_Player* link, GameState_Play* play);
 void Ocarina_HandleCustomSongs(Actor_Player* link, GameState_Play* play);
