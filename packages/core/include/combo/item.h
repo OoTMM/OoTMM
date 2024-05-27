@@ -3,6 +3,7 @@
 
 #include <combo/types.h>
 #include <combo/data/items.h>
+#include <combo/common/actors/Item_Decoy.h>
 
 /* Add funcs */
 #define IA_OOT_RUPEE            0x00
@@ -226,5 +227,7 @@ void comboPlayItemFanfare(s16 gi, int isShort);
 s16 comboItemResolve(GameState_Play* play, s16 gi);
 
 s16 comboProgressive(s16 gi, int ovflags);
+
+Actor_ItemDecoy* Item_AddWithDecoy(GameState_Play* play, const ComboItemOverride* o);
 
 #endif

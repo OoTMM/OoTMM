@@ -476,3 +476,21 @@ u8 comboItemType(s16 gi)
         gi = -gi;
     return kExtendedGetItems[gi - 1].type;
 }
+
+Actor_ItemDecoy* Item_AddWithDecoy(GameState_Play* play, const ComboItemOverride* o)
+{
+    int count;
+    Actor_ItemDecoy* decoy;
+
+    count = comboAddItemRaw(play, o->gi);
+    decoy = (Actor_ItemDecoy*)SpawnActor(&play->actorCtx, play, AC_ITEM_DECOY, 0, 0, 0, 0, 0, 0, 0);
+    if (!decoy)
+        return NULL;
+    decoy->count = (s16)count;
+    decoy->gi = o->gi;
+    decoy->player = o->player;
+    decoy->playerFrom = o->playerFrom;
+    g.decoysCount++;
+
+    return decoy;
+}

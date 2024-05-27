@@ -128,7 +128,7 @@ void EnItem00_AddXflag(Actor_EnItem00* this)
     {
         if (this->isExtendedMajor)
             comboTextHijackItem(gPlay, gi, this->decoyPlayer, this->decoyCount);
-        g.hasDecoy = 0;
+        /*g.hasDecoy = 0;*/
     }
     else
     {
@@ -297,8 +297,6 @@ Actor_EnItem00* EnItem00_SpawnDecoyEx(GameState_Play* play, s16 gi, u8 fromPlaye
     item->decoyPlayer = fromPlayer;
     item->decoyCount = count;
     item->base.draw = EnItem00_DrawXflag;
-
-    g.hasDecoy = 1;
 
     return item;
 }

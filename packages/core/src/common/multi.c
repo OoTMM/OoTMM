@@ -620,7 +620,6 @@ static void Multi_GiveItem(GameState_Play* play, s16 gi, u8 from, int flags)
 {
     ComboItemQuery q = ITEM_QUERY_INIT;
     ComboItemOverride o;
-    int count;
 
     q.gi = gi;
     q.from = from;
@@ -633,8 +632,7 @@ static void Multi_GiveItem(GameState_Play* play, s16 gi, u8 from, int flags)
     }
 
     comboItemOverride(&o, &q);
-    count = comboAddItemRawEx(play, &q, 0);
-    EnItem00_SpawnDecoyEx(play, o.gi, from, (s16)count);
+    Item_AddWithDecoy(play, &o);
 }
 
 static void Multi_ReceiveItem(GameState_Play* play, NetContext* net)
@@ -683,7 +681,7 @@ static void Multi_ReceiveItem(GameState_Play* play, NetContext* net)
     if (!isMarked && gi != GI_NOTHING)
     {
         /* Need to actually give the item */
-        if (!Multi_CanReceiveItem(play) || g.hasDecoy)
+        if (!Multi_CanReceiveItem(play) || g.decoysCount)
             return;
         Multi_GiveItem(play, gi, net->cmdIn.itemRecv.playerFrom, net->cmdIn.itemRecv.flags);
     }

@@ -9,7 +9,6 @@
 #define TRIGGER_NONE            0x00
 #define TRIGGER_GANON_BK        0x01
 #define TRIGGER_TRIFORCE        0x02
-#define TRIGGER_NET             0x03
 
 #if defined(GAME_OOT)
 # define RECOVERY_HEART GI_OOT_RECOVERY_HEART
@@ -59,51 +58,6 @@ int CustomTriggers_GiveItemDirect(Actor_CustomTriggers* this, GameState_Play* pl
     return CustomTriggers_GiveItem(this, play, &q);
 }
 
-int CustomTriggers_GiveItemNet(Actor_CustomTriggers* this, GameState_Play* play, s16 gi, u8 from, int flags)
-{
-    ComboItemQuery q = ITEM_QUERY_INIT;
-    ComboItemOverride o;
-    int isFast;
-
-    q.gi = gi;
-    q.from = from;
-
-    if ((flags & OVF_PRECOND) && (!isItemLicensed(gi)))
-    {
-        bzero(&q, sizeof(q));
-        q.ovType = OV_NONE;
-        q.gi = RECOVERY_HEART;
-    }
-
-    switch (q.gi)
-    {
-    case GI_OOT_BOMBCHU_5:
-    case GI_OOT_BOMBCHU_10:
-    case GI_OOT_BOMBCHU_20:
-    case GI_MM_BOMBCHU:
-    case GI_MM_BOMBCHU_5:
-    case GI_MM_BOMBCHU_10:
-    case GI_MM_BOMBCHU_20:
-        isFast = 0;
-        break;
-    default:
-        isFast = isItemFastBuy(q.gi);
-        break;
-    }
-
-    comboItemOverride(&o, &q);
-    if (isFast)
-    {
-        comboAddItemRawEx(play, &q, 0);
-        EnItem00_SpawnDecoy(play, o.gi);
-        return 1;
-    }
-    else
-    {
-        return CustomTriggers_GiveItem(this, play, &q);
-    }
-}
-
 int CustomTrigger_ItemSafe(Actor_CustomTriggers* this, GameState_Play* play)
 {
     Actor_Player* link;
@@ -119,56 +73,6 @@ int CustomTrigger_ItemSafe(Actor_CustomTriggers* this, GameState_Play* play)
     if (play->sceneId == SCE_OOT_BOMBCHU_BOWLING_ALLEY)
         return 0;
 #endif
-
-    gComboTriggersData.acc++;
-    if (gComboTriggersData.acc > 3)
-        return 1;
-    return 0;
-}
-
-int CustomTrigger_ItemSafeNet(Actor_CustomTriggers* this, GameState_Play* play)
-{
-    Actor_Player* link;
-
-    link = GET_LINK(play);
-    if (link->state & (PLAYER_ACTOR_STATE_GET_ITEM | PLAYER_ACTOR_STATE_CUTSCENE_FROZEN))
-    {
-        gComboTriggersData.acc = 0;
-        return 0;
-    }
-
-    switch (play->sceneId)
-    {
-#if defined(GAME_OOT)
-    case SCE_OOT_BOMBCHU_BOWLING_ALLEY:
-    case SCE_OOT_TREASURE_SHOP:
-    case SCE_OOT_SHOOTING_GALLERY:
-    case SCE_OOT_KOKIRI_SHOP:
-    case SCE_OOT_ZORA_SHOP:
-    case SCE_OOT_GORON_SHOP:
-    case SCE_OOT_BOMBCHU_SHOP:
-    case SCE_OOT_MARKET_POTION_SHOP:
-    case SCE_OOT_KAKARIKO_POTION_SHOP:
-    case SCE_OOT_BAZAAR:
-#endif
-#if defined(GAME_MM)
-    case SCE_MM_BOMB_SHOP:
-    case SCE_MM_CURIOSITY_SHOP:
-    case SCE_MM_POTION_SHOP:
-    case SCE_MM_TRADING_POST:
-    case SCE_MM_GORON_SHOP:
-    case SCE_MM_ZORA_HALL_ROOMS:
-    case SCE_MM_SHOOTING_GALLERY:
-    case SCE_MM_SHOOTING_GALLERY_SWAMP:
-    case SCE_MM_HONEY_DARLING:
-    case SCE_MM_TREASURE_SHOP:
-    case SCE_MM_WATERFALL_RAPIDS:
-#endif
-        return 0;
-
-    default:
-        break;
-    }
 
     gComboTriggersData.acc++;
     if (gComboTriggersData.acc > 3)

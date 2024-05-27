@@ -510,7 +510,7 @@ void hookPlay_Init(GameState_Play* play)
 {
     /* Pre-init */
     gIsEntranceOverride = 0;
-    g.hasDecoy = 0;
+    g.decoysCount = 0;
     preInitTitleScreen();
 
     /* Init */
