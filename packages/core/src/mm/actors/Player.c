@@ -20,7 +20,6 @@ void Player_UpdateWrapper(Actor_Player* this, GameState_Play* play)
     Player_Update(this, play);
     Dpad_Update(play);
     Ocarina_HandleWarp(this, play);
-    Multi_ProcessMessages(play);
 }
 
 int Player_DpadHook(Actor_Player* this, GameState_Play* play)

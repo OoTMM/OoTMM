@@ -1,9 +1,17 @@
 #include <combo.h>
+#include <combo/multi.h>
 #include <combo/net.h>
 #include <combo/player.h>
 #include <combo/config.h>
 #include <combo/item.h>
 #include <combo/actor.h>
+#include <combo/global.h>
+
+#if defined(GAME_OOT)
+# define RECOVERY_HEART GI_OOT_RECOVERY_HEART
+#else
+# define RECOVERY_HEART GI_MM_RECOVERY_HEART
+#endif
 
 u32 gMultiMarkChests;
 u32 gMultiMarkCollectibles;
@@ -529,7 +537,7 @@ static void processMessageIn(GameState_Play* play, NetContext* net, NetMsg* msg,
         processMessageInPlayerPos(play, net, &msg->playerPos, clientId);
 }
 
-static void processMessages(GameState_Play* play, NetContext* net)
+static void Multi_ProcessMessages(GameState_Play* play, NetContext* net)
 {
     /* Send pos */
     if ((play->gs.frameCount & 3) == 0)
@@ -556,18 +564,6 @@ static void processMessages(GameState_Play* play, NetContext* net)
             net->msgInSize[i] = 0;
         }
     }
-}
-
-void Multi_ProcessMessages(GameState_Play* play)
-{
-    NetContext* ctx;
-
-    if (!Config_Flag(CFG_MULTIPLAYER))
-        return;
-
-    ctx = netMutexLock();
-    processMessages(play, ctx);
-    netMutexUnlock();
 }
 
 static const u32 kWispColors[] = {
@@ -603,4 +599,134 @@ void Multi_ResetWisps(void)
     if (!Config_Flag(CFG_MULTIPLAYER))
         return;
     bzero(sPlayerWisps, sizeof(sPlayerWisps));
+}
+
+static int Multi_CanReceiveItem(GameState_Play* play)
+{
+    Actor_Player* link;
+
+    if (gSaveContext.gameMode || (gSaveContext.minigameState == 1))
+        return 0;
+    if (Message_GetState(&play->msgCtx) != 0)
+        return 0;
+    link = GET_LINK(play);
+    if (link->state & (PLAYER_ACTOR_STATE_GET_ITEM | PLAYER_ACTOR_STATE_FROZEN | PLAYER_ACTOR_STATE_CUTSCENE_FROZEN | PLAYER_ACTOR_STATE_EPONA))
+        return 0;
+
+    return 1;
+}
+
+static void Multi_GiveItem(GameState_Play* play, s16 gi, u8 from, int flags)
+{
+    ComboItemQuery q = ITEM_QUERY_INIT;
+    ComboItemOverride o;
+
+    q.gi = gi;
+    q.from = from;
+
+    if ((flags & OVF_PRECOND) && (!isItemLicensed(gi)))
+    {
+        bzero(&q, sizeof(q));
+        q.ovType = OV_NONE;
+        q.gi = RECOVERY_HEART;
+    }
+
+    comboItemOverride(&o, &q);
+    Item_AddWithDecoy(play, &o);
+}
+
+static void Multi_ReceiveItem(GameState_Play* play, NetContext* net)
+{
+    s16 gi;
+    u8 ovType;
+    u8 sceneId;
+    u8 roomId;
+    u8 id;
+    u8 isMarked;
+    u8 needsMarking;
+    u8 isSamePlayer;
+
+    gi = net->cmdIn.itemRecv.gi;
+    isMarked = 0;
+    needsMarking = 0;
+    isSamePlayer = (net->cmdIn.itemRecv.playerFrom == gComboConfig.playerId);
+    if (isSamePlayer)
+    {
+        if (!(net->cmdIn.itemRecv.flags & OVF_RENEW))
+        {
+            needsMarking = 1;
+            ovType = (net->cmdIn.itemRecv.key >> 24) & 0xff;
+            sceneId = (net->cmdIn.itemRecv.key >> 16) & 0xff;
+            roomId = (net->cmdIn.itemRecv.key >> 8) & 0xff;
+            id = net->cmdIn.itemRecv.key & 0xff;
+            if (net->cmdIn.itemRecv.game)
+                isMarked = Multi_IsMarkedMm(play, ovType, sceneId, roomId, id);
+            else
+                isMarked = Multi_IsMarkedOot(play, ovType, sceneId, roomId, id);
+        }
+        else
+        {
+            for (int i = 0; i < ARRAY_SIZE(gSharedCustomSave.netGiSkip); ++i)
+            {
+                if (gSharedCustomSave.netGiSkip[i] == gi)
+                {
+                    isMarked = 1;
+                    gSharedCustomSave.netGiSkip[i] = GI_NONE;
+                    break;
+                }
+            }
+        }
+    }
+
+    if (!isMarked && gi != GI_NOTHING)
+    {
+        /* Need to actually give the item */
+        if (!Multi_CanReceiveItem(play) || g.decoysCount)
+            return;
+        Multi_GiveItem(play, gi, net->cmdIn.itemRecv.playerFrom, net->cmdIn.itemRecv.flags);
+    }
+
+    /* Triggers the side-effect */
+    if (needsMarking)
+    {
+        if (net->cmdIn.itemRecv.game)
+            Multi_SetMarkedMm(play, ovType, sceneId, roomId, id);
+        else
+            Multi_SetMarkedOot(play, ovType, sceneId, roomId, id);
+    }
+
+    /* Mark as obtained on the network */
+    bzero(&net->cmdIn, sizeof(net->cmdIn));
+    gSaveLedgerBase++;
+    net->ledgerBase = gSaveLedgerBase;
+}
+
+static void Multi_ProcessItems(GameState_Play* play, NetContext* net)
+{
+    if (net->cmdIn.op == NET_OP_ITEM_RECV)
+    {
+        if (net->cmdIn.itemRecv.playerTo != gComboConfig.playerId)
+        {
+            bzero(&net->cmdIn, sizeof(net->cmdIn));
+            gSaveLedgerBase++;
+            net->ledgerBase = gSaveLedgerBase;
+        }
+        else
+        {
+            Multi_ReceiveItem(play, net);
+        }
+    }
+}
+
+void Multi_Update(GameState_Play* play)
+{
+    NetContext* ctx;
+
+    if (!Config_Flag(CFG_MULTIPLAYER))
+        return;
+
+    ctx = netMutexLock();
+    Multi_ProcessMessages(play, ctx);
+    Multi_ProcessItems(play, ctx);
+    netMutexUnlock();
 }

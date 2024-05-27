@@ -6,6 +6,7 @@
 #include <combo/config.h>
 #include <combo/global.h>
 #include <combo/inventory.h>
+#include <combo/multi.h>
 
 void EnGo_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
 void EnDnh_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
@@ -818,6 +819,7 @@ void Actor_AfterDrawAll(GameState_Play* play)
     }
 
     Actor_DrawFaroresWindPointer(play);
+    Multi_DrawWisps(play);
 }
 
 typedef struct

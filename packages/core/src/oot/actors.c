@@ -6,6 +6,7 @@
 #include <combo/config.h>
 #include <combo/global.h>
 #include <combo/actor.h>
+#include <combo/multi.h>
 
 static s16 sActorIdToSpawn;
 
@@ -456,4 +457,9 @@ void Actor_RunUpdate(Actor* this, GameState_Play* play, ActorFunc update)
         this->xzDistanceFromLink = xzDistanceFromLink;
         this->yDistanceFromLink = yDistanceFromLink;
     }
+}
+
+void Actor_AfterDrawAll(void)
+{
+    Multi_DrawWisps(gPlay);
 }

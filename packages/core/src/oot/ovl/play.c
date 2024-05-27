@@ -510,6 +510,7 @@ void hookPlay_Init(GameState_Play* play)
 {
     /* Pre-init */
     gIsEntranceOverride = 0;
+    g.decoysCount = 0;
     preInitTitleScreen();
 
     /* Init */
@@ -561,6 +562,7 @@ void Play_UpdateWrapper(GameState_Play* play)
     Debug_Input();
     comboCacheGarbageCollect();
     comboObjectsGC();
+    Multi_Update(play);
     Play_Update(play);
     Dpad_Draw(play);
     Audio_DisplayMusicName(play);

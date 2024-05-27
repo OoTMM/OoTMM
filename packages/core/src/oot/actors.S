@@ -15,3 +15,8 @@ PATCH_START 0x800240d8
   jal Actor_RunUpdate
    move a2,t9
 PATCH_END
+
+/* Hook after actors draw */
+PATCH_START 0x80024cc4
+  j Actor_AfterDrawAll
+PATCH_END

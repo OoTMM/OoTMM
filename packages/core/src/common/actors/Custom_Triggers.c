@@ -9,7 +9,6 @@
 #define TRIGGER_NONE            0x00
 #define TRIGGER_GANON_BK        0x01
 #define TRIGGER_TRIFORCE        0x02
-#define TRIGGER_NET             0x03
 
 #if defined(GAME_OOT)
 # define RECOVERY_HEART GI_OOT_RECOVERY_HEART
@@ -59,51 +58,6 @@ int CustomTriggers_GiveItemDirect(Actor_CustomTriggers* this, GameState_Play* pl
     return CustomTriggers_GiveItem(this, play, &q);
 }
 
-int CustomTriggers_GiveItemNet(Actor_CustomTriggers* this, GameState_Play* play, s16 gi, u8 from, int flags)
-{
-    ComboItemQuery q = ITEM_QUERY_INIT;
-    ComboItemOverride o;
-    int isFast;
-
-    q.gi = gi;
-    q.from = from;
-
-    if ((flags & OVF_PRECOND) && (!isItemLicensed(gi)))
-    {
-        bzero(&q, sizeof(q));
-        q.ovType = OV_NONE;
-        q.gi = RECOVERY_HEART;
-    }
-
-    switch (q.gi)
-    {
-    case GI_OOT_BOMBCHU_5:
-    case GI_OOT_BOMBCHU_10:
-    case GI_OOT_BOMBCHU_20:
-    case GI_MM_BOMBCHU:
-    case GI_MM_BOMBCHU_5:
-    case GI_MM_BOMBCHU_10:
-    case GI_MM_BOMBCHU_20:
-        isFast = 0;
-        break;
-    default:
-        isFast = isItemFastBuy(q.gi);
-        break;
-    }
-
-    comboItemOverride(&o, &q);
-    if (isFast)
-    {
-        comboAddItemRawEx(play, &q, 0);
-        EnItem00_SpawnDecoy(play, o.gi);
-        return 1;
-    }
-    else
-    {
-        return CustomTriggers_GiveItem(this, play, &q);
-    }
-}
-
 int CustomTrigger_ItemSafe(Actor_CustomTriggers* this, GameState_Play* play)
 {
     Actor_Player* link;
@@ -126,68 +80,8 @@ int CustomTrigger_ItemSafe(Actor_CustomTriggers* this, GameState_Play* play)
     return 0;
 }
 
-int CustomTrigger_ItemSafeNet(Actor_CustomTriggers* this, GameState_Play* play)
-{
-    Actor_Player* link;
-
-    link = GET_LINK(play);
-    if (link->state & (PLAYER_ACTOR_STATE_GET_ITEM | PLAYER_ACTOR_STATE_CUTSCENE_FROZEN))
-    {
-        gComboTriggersData.acc = 0;
-        return 0;
-    }
-
-    switch (play->sceneId)
-    {
-#if defined(GAME_OOT)
-    case SCE_OOT_BOMBCHU_BOWLING_ALLEY:
-    case SCE_OOT_TREASURE_SHOP:
-    case SCE_OOT_SHOOTING_GALLERY:
-    case SCE_OOT_KOKIRI_SHOP:
-    case SCE_OOT_ZORA_SHOP:
-    case SCE_OOT_GORON_SHOP:
-    case SCE_OOT_BOMBCHU_SHOP:
-    case SCE_OOT_MARKET_POTION_SHOP:
-    case SCE_OOT_KAKARIKO_POTION_SHOP:
-    case SCE_OOT_BAZAAR:
-#endif
-#if defined(GAME_MM)
-    case SCE_MM_BOMB_SHOP:
-    case SCE_MM_CURIOSITY_SHOP:
-    case SCE_MM_POTION_SHOP:
-    case SCE_MM_TRADING_POST:
-    case SCE_MM_GORON_SHOP:
-    case SCE_MM_ZORA_HALL_ROOMS:
-    case SCE_MM_SHOOTING_GALLERY:
-    case SCE_MM_SHOOTING_GALLERY_SWAMP:
-    case SCE_MM_HONEY_DARLING:
-    case SCE_MM_TREASURE_SHOP:
-    case SCE_MM_WATERFALL_RAPIDS:
-#endif
-        return 0;
-
-    default:
-        break;
-    }
-
-    gComboTriggersData.acc++;
-    if (gComboTriggersData.acc > 3)
-        return 1;
-    return 0;
-}
-
 static void CustomTriggers_HandleTrigger(Actor_CustomTriggers* this, GameState_Play* play)
 {
-    NetContext* net;
-    s16 gi;
-    u8 ovType;
-    u8 sceneId;
-    u8 roomId;
-    u8 id;
-    u8 isSamePlayer;
-    u8 isMarked;
-    u8 needsMarking;
-
     switch (gComboTriggersData.trigger)
     {
     case TRIGGER_GANON_BK:
@@ -205,59 +99,6 @@ static void CustomTriggers_HandleTrigger(Actor_CustomTriggers* this, GameState_P
             comboCreditWarp(play);
         }
         break;
-    case TRIGGER_NET:
-        net = netMutexLock();
-        gi = net->cmdIn.itemRecv.gi;
-        isMarked = 0;
-        needsMarking = 0;
-        isSamePlayer = (net->cmdIn.itemRecv.playerFrom == gComboConfig.playerId);
-        if (isSamePlayer)
-        {
-            if (!(net->cmdIn.itemRecv.flags & OVF_RENEW))
-            {
-                needsMarking = 1;
-                ovType = (net->cmdIn.itemRecv.key >> 24) & 0xff;
-                sceneId = (net->cmdIn.itemRecv.key >> 16) & 0xff;
-                roomId = (net->cmdIn.itemRecv.key >> 8) & 0xff;
-                id = net->cmdIn.itemRecv.key & 0xff;
-                if (net->cmdIn.itemRecv.game)
-                    isMarked = Multi_IsMarkedMm(play, ovType, sceneId, roomId, id);
-                else
-                    isMarked = Multi_IsMarkedOot(play, ovType, sceneId, roomId, id);
-            }
-            else
-            {
-                for (int i = 0; i < ARRAY_SIZE(gSharedCustomSave.netGiSkip); ++i)
-                {
-                    if (gSharedCustomSave.netGiSkip[i] == gi)
-                    {
-                        isMarked = 1;
-                        gSharedCustomSave.netGiSkip[i] = GI_NONE;
-                        break;
-                    }
-                }
-            }
-        }
-
-        if (isMarked || gi == GI_NOTHING || (CustomTrigger_ItemSafeNet(this, play) && CustomTriggers_GiveItemNet(this, play, gi, net->cmdIn.itemRecv.playerFrom, net->cmdIn.itemRecv.flags)))
-        {
-            /* Triggers the side-effect */
-            if (needsMarking)
-            {
-                if (net->cmdIn.itemRecv.game)
-                    Multi_SetMarkedMm(play, ovType, sceneId, roomId, id);
-                else
-                    Multi_SetMarkedOot(play, ovType, sceneId, roomId, id);
-            }
-
-            /* Mark as obtained on the network */
-            bzero(&net->cmdIn, sizeof(net->cmdIn));
-            gComboTriggersData.trigger = TRIGGER_NONE;
-            gSaveLedgerBase++;
-            net->ledgerBase = gSaveLedgerBase;
-        }
-        netMutexUnlock();
-        break;
     }
 
     CustomTriggers_HandleTriggerGame(this, play);
@@ -265,8 +106,6 @@ static void CustomTriggers_HandleTrigger(Actor_CustomTriggers* this, GameState_P
 
 static void CustomTriggers_CheckTrigger(Actor_CustomTriggers* this, GameState_Play* play)
 {
-    NetContext* net;
-
     /* Ganon BK */
     if (Config_Flag(CFG_OOT_GANON_BK_CUSTOM) && !gOotExtraFlags.ganonBossKey && Config_SpecialCond(SPECIAL_GANON_BK))
     {
@@ -298,24 +137,6 @@ static void CustomTriggers_CheckTrigger(Actor_CustomTriggers* this, GameState_Pl
         gComboTriggersData.trigger = TRIGGER_TRIFORCE;
         return;
     }
-
-    /* Net */
-    net = netMutexLock();
-    if (net->cmdIn.op == NET_OP_ITEM_RECV)
-    {
-        if (net->cmdIn.itemRecv.playerTo != gComboConfig.playerId)
-        {
-            bzero(&net->cmdIn, sizeof(net->cmdIn));
-            gSaveLedgerBase++;
-            net->ledgerBase = gSaveLedgerBase;
-        }
-        else
-        {
-            gComboTriggersData.acc = 0;
-            gComboTriggersData.trigger = TRIGGER_NET;
-        }
-    }
-    netMutexUnlock();
 
     CustomTriggers_CheckTriggerGame(this, play);
 }
@@ -367,7 +188,6 @@ void CustomTriggers_Spawn(GameState_Play* play)
 
 void CustomTriggers_Draw(Actor* this, GameState_Play* play)
 {
-    Multi_DrawWisps(play);
 }
 
 ActorInit CustomTriggers_gActorInit = {

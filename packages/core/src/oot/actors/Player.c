@@ -288,7 +288,6 @@ void Player_UpdateWrapper(Actor_Player* this, GameState_Play* play)
     }
 
     comboSrUpdate(play);
-    Multi_ProcessMessages(play);
 }
 
 int Player_DpadHook(Actor_Player* this, GameState_Play* play)

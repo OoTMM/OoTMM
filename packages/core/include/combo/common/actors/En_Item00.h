@@ -69,7 +69,6 @@ typedef struct ALIGNED(4) Actor_EnItem00
     u8      isExtended:1;
     u8      isExtendedCollected:1;
     u8      isExtendedMajor:1;
-    u8      isDecoy:1;
     s16     xflagGi;
 }
 Actor_EnItem00;
@@ -91,6 +90,5 @@ s16  EnItem00_FixDrop(s16 dropType);
 void            EnItem00_XflagInit(Actor_EnItem00* this, const Xflag* xflag);
 void            EnItem00_XflagInitFreestanding(Actor_EnItem00* this, GameState_Play* play, u8 actorIndex, u8 slice);
 Actor_EnItem00* EnItem00_DropCustom(GameState_Play* play, const Vec3f* pos, const Xflag* xflag);
-Actor_EnItem00* EnItem00_SpawnDecoy(GameState_Play* play, s16 gi);
 
 #endif
