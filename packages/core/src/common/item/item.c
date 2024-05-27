@@ -405,7 +405,7 @@ int comboAddItemRawEx(GameState_Play* play, const ComboItemQuery* q, int updateT
         netMutexUnlock();
     }
 
-    return -1;
+    return count;
 }
 
 int comboAddItemEx(GameState_Play* play, const ComboItemQuery* q, int updateText)

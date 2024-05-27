@@ -2,7 +2,7 @@
 
 /* Resize */
 PATCH_START 0x800e775c
-.int 0x1a4
+.int 0x1a8
 PATCH_END
 
 /* Use custom callbacks */

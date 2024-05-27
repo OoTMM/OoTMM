@@ -178,16 +178,6 @@ int CustomTrigger_ItemSafeNet(Actor_CustomTriggers* this, GameState_Play* play)
 
 static void CustomTriggers_HandleTrigger(Actor_CustomTriggers* this, GameState_Play* play)
 {
-    NetContext* net;
-    s16 gi;
-    u8 ovType;
-    u8 sceneId;
-    u8 roomId;
-    u8 id;
-    u8 isSamePlayer;
-    u8 isMarked;
-    u8 needsMarking;
-
     switch (gComboTriggersData.trigger)
     {
     case TRIGGER_GANON_BK:
@@ -205,59 +195,6 @@ static void CustomTriggers_HandleTrigger(Actor_CustomTriggers* this, GameState_P
             comboCreditWarp(play);
         }
         break;
-    case TRIGGER_NET:
-        net = netMutexLock();
-        gi = net->cmdIn.itemRecv.gi;
-        isMarked = 0;
-        needsMarking = 0;
-        isSamePlayer = (net->cmdIn.itemRecv.playerFrom == gComboConfig.playerId);
-        if (isSamePlayer)
-        {
-            if (!(net->cmdIn.itemRecv.flags & OVF_RENEW))
-            {
-                needsMarking = 1;
-                ovType = (net->cmdIn.itemRecv.key >> 24) & 0xff;
-                sceneId = (net->cmdIn.itemRecv.key >> 16) & 0xff;
-                roomId = (net->cmdIn.itemRecv.key >> 8) & 0xff;
-                id = net->cmdIn.itemRecv.key & 0xff;
-                if (net->cmdIn.itemRecv.game)
-                    isMarked = Multi_IsMarkedMm(play, ovType, sceneId, roomId, id);
-                else
-                    isMarked = Multi_IsMarkedOot(play, ovType, sceneId, roomId, id);
-            }
-            else
-            {
-                for (int i = 0; i < ARRAY_SIZE(gSharedCustomSave.netGiSkip); ++i)
-                {
-                    if (gSharedCustomSave.netGiSkip[i] == gi)
-                    {
-                        isMarked = 1;
-                        gSharedCustomSave.netGiSkip[i] = GI_NONE;
-                        break;
-                    }
-                }
-            }
-        }
-
-        if (isMarked || gi == GI_NOTHING || (CustomTrigger_ItemSafeNet(this, play) && CustomTriggers_GiveItemNet(this, play, gi, net->cmdIn.itemRecv.playerFrom, net->cmdIn.itemRecv.flags)))
-        {
-            /* Triggers the side-effect */
-            if (needsMarking)
-            {
-                if (net->cmdIn.itemRecv.game)
-                    Multi_SetMarkedMm(play, ovType, sceneId, roomId, id);
-                else
-                    Multi_SetMarkedOot(play, ovType, sceneId, roomId, id);
-            }
-
-            /* Mark as obtained on the network */
-            bzero(&net->cmdIn, sizeof(net->cmdIn));
-            gComboTriggersData.trigger = TRIGGER_NONE;
-            gSaveLedgerBase++;
-            net->ledgerBase = gSaveLedgerBase;
-        }
-        netMutexUnlock();
-        break;
     }
 
     CustomTriggers_HandleTriggerGame(this, play);
@@ -265,8 +202,6 @@ static void CustomTriggers_HandleTrigger(Actor_CustomTriggers* this, GameState_P
 
 static void CustomTriggers_CheckTrigger(Actor_CustomTriggers* this, GameState_Play* play)
 {
-    NetContext* net;
-
     /* Ganon BK */
     if (Config_Flag(CFG_OOT_GANON_BK_CUSTOM) && !gOotExtraFlags.ganonBossKey && Config_SpecialCond(SPECIAL_GANON_BK))
     {
@@ -298,24 +233,6 @@ static void CustomTriggers_CheckTrigger(Actor_CustomTriggers* this, GameState_Pl
         gComboTriggersData.trigger = TRIGGER_TRIFORCE;
         return;
     }
-
-    /* Net */
-    net = netMutexLock();
-    if (net->cmdIn.op == NET_OP_ITEM_RECV)
-    {
-        if (net->cmdIn.itemRecv.playerTo != gComboConfig.playerId)
-        {
-            bzero(&net->cmdIn, sizeof(net->cmdIn));
-            gSaveLedgerBase++;
-            net->ledgerBase = gSaveLedgerBase;
-        }
-        else
-        {
-            gComboTriggersData.acc = 0;
-            gComboTriggersData.trigger = TRIGGER_NET;
-        }
-    }
-    netMutexUnlock();
 
     CustomTriggers_CheckTriggerGame(this, play);
 }

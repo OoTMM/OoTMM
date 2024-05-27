@@ -197,10 +197,11 @@ void comboTextHijackItemEx(GameState_Play* play, const ComboItemOverride* o, int
     comboTextAutoLineBreaks(start);
 }
 
-void comboTextHijackItem(GameState_Play* play, s16 gi, int count)
+void comboTextHijackItem(GameState_Play* play, s16 gi, u8 fromPlayer, int count)
 {
     ComboItemOverride o;
     memset(&o, 0, sizeof(o));
     o.gi = gi;
+    o.playerFrom = fromPlayer;
     comboTextHijackItemEx(play, &o, count);
 }

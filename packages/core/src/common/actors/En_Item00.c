@@ -52,9 +52,6 @@ static int EnItem00_XflagCanCollect(Actor_EnItem00* this, GameState_Play* play)
 {
     Actor_Player* link;
 
-    if (this->isDecoy)
-        return 1;
-
     link = GET_LINK(play);
     if (link->state & (PLAYER_ACTOR_STATE_FROZEN | PLAYER_ACTOR_STATE_EPONA))
         return 0;
@@ -70,10 +67,6 @@ static void EnItem00_UpdateXflagDrop(Actor_EnItem00* this, GameState_Play* play)
 {
     Actor_Player* link;
 
-    /* Artifically disable collisions if the items shouldn't be collected */
-    if (!EnItem00_XflagCanCollect(this, play))
-        this->base.xzDistanceFromLink = 100.f;
-
     /* Handle decoys */
     if (this->isDecoy && !this->isExtendedCollected)
     {
@@ -84,25 +77,33 @@ static void EnItem00_UpdateXflagDrop(Actor_EnItem00* this, GameState_Play* play)
         this->base.xzDistanceFromLink = 1.f;
     }
 
+    /* Artifically disable collisions if the items shouldn't be collected */
+    if (!EnItem00_XflagCanCollect(this, play))
+        this->base.xzDistanceFromLink = 100.f;
+
     /* Item permanence */
-    if (!this->isExtendedCollected && !this->isDecoy)
+    if (!this->isExtendedCollected)
         this->timer++;
 
     /* Update */
     EnItem00_Update(this, play);
 }
 
+static void EnItem00_FreezeIfRequired(Actor_EnItem00* this, s16 gi)
+{
+    if (!isItemFastBuy(gi))
+    {
+        PlayerDisplayTextBox(gPlay, DUMMY_MSG, NULL);
+        Player_Freeze(gPlay);
+        this->isExtendedMajor = 1;
+    }
+}
+
 void EnItem00_AddXflag(Actor_EnItem00* this)
 {
     ComboItemQuery q;
     ComboItemOverride o;
-
-    if (this->isDecoy)
-    {
-        comboPlayItemFanfare(this->xflagGi, 1);
-        this->isExtendedCollected = 1;
-        return;
-    }
+    s16 gi;
 
     if (!this->isExtended)
     {
@@ -110,18 +111,32 @@ void EnItem00_AddXflag(Actor_EnItem00* this)
         return;
     }
 
-    /* Collect the item */
-    comboXflagItemQuery(&q, &this->xflag, 0);
-    comboItemOverride(&o, &q);
-    if (!isItemFastBuy(o.gi))
+    if (this->isDecoy)
     {
-        PlayerDisplayTextBox(gPlay, DUMMY_MSG, NULL);
-        Player_Freeze(gPlay);
-        this->isExtendedMajor = 1;
+        gi = this->xflagGi;
     }
-    comboAddItemEx(gPlay, &q, this->isExtendedMajor);
-    comboPlayItemFanfare(o.gi, 1);
-    comboXflagsSet(&this->xflag);
+    else
+    {
+        comboXflagItemQuery(&q, &this->xflag, 0);
+        comboItemOverride(&o, &q);
+        gi = o.gi;
+    }
+
+    EnItem00_FreezeIfRequired(this, gi);
+
+    if (this->isDecoy)
+    {
+        if (this->isExtendedMajor)
+            comboTextHijackItem(gPlay, gi, this->decoyPlayer, this->decoyCount);
+        g.hasDecoy = 0;
+    }
+    else
+    {
+        comboAddItemEx(gPlay, &q, this->isExtendedMajor);
+        comboXflagsSet(&this->xflag);
+    }
+
+    comboPlayItemFanfare(gi, 1);
     this->isExtendedCollected = 1;
 }
 
@@ -251,6 +266,11 @@ Actor_EnItem00* EnItem00_DropCustom(GameState_Play* play, const Vec3f* pos, cons
 
 Actor_EnItem00* EnItem00_SpawnDecoy(GameState_Play* play, s16 gi)
 {
+    return EnItem00_SpawnDecoyEx(play, gi, PLAYER_SELF, 0);
+}
+
+Actor_EnItem00* EnItem00_SpawnDecoyEx(GameState_Play* play, s16 gi, u8 fromPlayer, s16 count)
+{
     Actor_Player* link;
     Actor_EnItem00* item;
 
@@ -271,10 +291,14 @@ Actor_EnItem00* EnItem00_SpawnDecoy(GameState_Play* play, s16 gi)
     if (!item)
         return NULL;
 
+    item->isExtended = 1;
     item->isDecoy = 1;
     item->xflagGi = gi;
+    item->decoyPlayer = fromPlayer;
+    item->decoyCount = count;
     item->base.draw = EnItem00_DrawXflag;
-    item->base.update = EnItem00_UpdateXflagDrop;
+
+    g.hasDecoy = 1;
 
     return item;
 }
