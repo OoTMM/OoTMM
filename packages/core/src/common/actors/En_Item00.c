@@ -25,7 +25,6 @@ void EnItem00_InitWrapper(Actor_EnItem00* this, GameState_Play* play)
     this->isExtended = 0;
     this->isExtendedCollected = 0;
     this->isExtendedMajor = 0;
-    this->isDecoy = 0;
 }
 
 static void EnItem00_DrawXflag(Actor_EnItem00* this, GameState_Play* play)
@@ -33,7 +32,7 @@ static void EnItem00_DrawXflag(Actor_EnItem00* this, GameState_Play* play)
     ComboItemOverride o;
     s16 gi;
 
-    if (this->isExtendedCollected || this->isDecoy)
+    if (this->isExtendedCollected)
         gi = this->xflagGi;
     else
     {
@@ -65,18 +64,6 @@ static int EnItem00_XflagCanCollect(Actor_EnItem00* this, GameState_Play* play)
 
 static void EnItem00_UpdateXflagDrop(Actor_EnItem00* this, GameState_Play* play)
 {
-    Actor_Player* link;
-
-    /* Handle decoys */
-    if (this->isDecoy && !this->isExtendedCollected)
-    {
-        link = GET_LINK(play);
-        this->base.world.pos.x = link->base.world.pos.x;
-        this->base.world.pos.y = link->base.world.pos.y;
-        this->base.world.pos.z = link->base.world.pos.z;
-        this->base.xzDistanceFromLink = 1.f;
-    }
-
     /* Artifically disable collisions if the items shouldn't be collected */
     if (!EnItem00_XflagCanCollect(this, play))
         this->base.xzDistanceFromLink = 100.f;
@@ -89,21 +76,10 @@ static void EnItem00_UpdateXflagDrop(Actor_EnItem00* this, GameState_Play* play)
     EnItem00_Update(this, play);
 }
 
-static void EnItem00_FreezeIfRequired(Actor_EnItem00* this, s16 gi)
-{
-    if (!isItemFastBuy(gi))
-    {
-        PlayerDisplayTextBox(gPlay, DUMMY_MSG, NULL);
-        Player_Freeze(gPlay);
-        this->isExtendedMajor = 1;
-    }
-}
-
 void EnItem00_AddXflag(Actor_EnItem00* this)
 {
     ComboItemQuery q;
     ComboItemOverride o;
-    s16 gi;
 
     if (!this->isExtended)
     {
@@ -111,38 +87,24 @@ void EnItem00_AddXflag(Actor_EnItem00* this)
         return;
     }
 
-    if (this->isDecoy)
+    comboXflagItemQuery(&q, &this->xflag, 0);
+    comboItemOverride(&o, &q);
+    if (!isItemFastBuy(o.gi))
     {
-        gi = this->xflagGi;
+        PlayerDisplayTextBox(gPlay, DUMMY_MSG, NULL);
+        Player_Freeze(gPlay);
+        this->isExtendedMajor = 1;
     }
-    else
-    {
-        comboXflagItemQuery(&q, &this->xflag, 0);
-        comboItemOverride(&o, &q);
-        gi = o.gi;
-    }
+    comboAddItemEx(gPlay, &q, this->isExtendedMajor);
+    comboXflagsSet(&this->xflag);
 
-    EnItem00_FreezeIfRequired(this, gi);
-
-    if (this->isDecoy)
-    {
-        if (this->isExtendedMajor)
-            comboTextHijackItem(gPlay, gi, this->decoyPlayer, this->decoyCount);
-        /*g.hasDecoy = 0;*/
-    }
-    else
-    {
-        comboAddItemEx(gPlay, &q, this->isExtendedMajor);
-        comboXflagsSet(&this->xflag);
-    }
-
-    comboPlayItemFanfare(gi, 1);
+    comboPlayItemFanfare(o.gi, 1);
     this->isExtendedCollected = 1;
 }
 
 void EnItem00_PlaySoundXflag(Actor_EnItem00* this)
 {
-    if (this->isExtended || this->isDecoy)
+    if (this->isExtended)
         return;
     PlaySound(0x4803);
 }
@@ -260,43 +222,6 @@ Actor_EnItem00* EnItem00_DropCustom(GameState_Play* play, const Vec3f* pos, cons
     /* Init the custom fields */
     EnItem00_XflagInit(item, xflag);
     item->base.update = EnItem00_UpdateXflagDrop;
-
-    return item;
-}
-
-Actor_EnItem00* EnItem00_SpawnDecoy(GameState_Play* play, s16 gi)
-{
-    return EnItem00_SpawnDecoyEx(play, gi, PLAYER_SELF, 0);
-}
-
-Actor_EnItem00* EnItem00_SpawnDecoyEx(GameState_Play* play, s16 gi, u8 fromPlayer, s16 count)
-{
-    Actor_Player* link;
-    Actor_EnItem00* item;
-
-    link = GET_LINK(play);
-    item = (Actor_EnItem00*)SpawnActor(
-        &play->actorCtx,
-        play,
-        AC_EN_ITEM00,
-        link->base.world.pos.x,
-        link->base.world.pos.y,
-        link->base.world.pos.z,
-        0,
-        0,
-        0,
-        0
-    );
-
-    if (!item)
-        return NULL;
-
-    item->isExtended = 1;
-    item->isDecoy = 1;
-    item->xflagGi = gi;
-    item->decoyPlayer = fromPlayer;
-    item->decoyCount = count;
-    item->base.draw = EnItem00_DrawXflag;
 
     return item;
 }

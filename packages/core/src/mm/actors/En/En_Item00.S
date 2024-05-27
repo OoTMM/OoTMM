@@ -2,7 +2,7 @@
 
 /* Resize */
 PATCH_START 0x801adecc
-.int 0x1b4
+.int 0x1b0
 PATCH_END
 
 /* Use our init */
