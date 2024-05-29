@@ -64,3 +64,8 @@ PATCH_START 0x800B5528
   nop
   nop
 PATCH_END
+
+/* Fix a vanilla bug that can cause a crash with some custom songs */
+PATCH_START 0x800c03bc
+  move t6,t5
+PATCH_END
