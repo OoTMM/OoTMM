@@ -21,6 +21,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix multiple pathfind bugs, leading to odd age-swap logic and very odd sometimes hints.
 - Fix MM swords in OoT not working against some ennemies.
 - Fix a crash when doing cremia's escort without gorman soul.
 - Fix moon crashing having odd side-effects with the clock sometimes.
