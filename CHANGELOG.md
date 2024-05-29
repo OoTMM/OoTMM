@@ -21,6 +21,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix a crash when doing cremia's escort without gorman soul.
 - Fix moon crashing having odd side-effects with the clock sometimes.
 - Fix custom wisps rarely despawning sometimes.
 - Fix Fast Masks softlocks.
