@@ -7,8 +7,10 @@ import { RomBuilder } from '../rom-builder';
 import { Monitor } from '../monitor';
 import { LogWriter } from '../util/log-writer';
 
+type MusicType = 'bgm' | 'fanfare';
+
 type MusicEntry = {
-  type: 'bgm' | 'fanfare';
+  type: MusicType;
   name: string;
   oot?: number[];
   mm?: number[];
@@ -419,7 +421,12 @@ class MusicInjector {
       /* Add the music */
       const seq = await zseqFiles[0].async('nodebuffer');
       const games: Game[] = ['mm'];
-      const type = ['8', '9', '10'].some(x => categories.includes(x)) ? 'fanfare' : 'bgm';
+      let type: MusicType;
+      if (['8', '9', '10'].some(x => categories.includes(x))) {
+        type = 'fanfare';
+      } else {
+        type = 'bgm';
+      }
       const filename = f.name.split('/').pop()!;
       const name = saneName(filename.replace('.mmrs', ''));
 

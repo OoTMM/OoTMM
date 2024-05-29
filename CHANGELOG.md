@@ -21,6 +21,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix moon crashing having odd side-effects with the clock sometimes.
 - Fix custom wisps rarely despawning sometimes.
 - Fix Fast Masks softlocks.
 - Fix a Fast Mask crash when deku link petals are on screen while transforming.

@@ -225,6 +225,21 @@ static void MoonCrashReset(void)
         gSaveContext.cycleSceneFlags[i].clearedRoom = gSave.permanentSceneFlags[i].clearedRoom;
     }
 
+    /* Reset timers */
+    for (int i = 0; i < TIMER_ID_MAX; ++i)
+    {
+        gSaveContext.timerStates[i] = 0;
+        gSaveContext.timerCurTimes[i] = 0;
+        gSaveContext.timerTimeLimits[i] = 0;
+        gSaveContext.timerStartOsTimes[i] = 0;
+        gSaveContext.timerStopTimes[i] = 0;
+        gSaveContext.timerPausedOsTimes[i] = 0;
+    }
+
+    *((u32*)0x801bdaa0) = 1;
+    gHorseIsMounted = 0;
+    gSaveContext.powderKegTimer = 0;
+
     /* Trigger save load */
     Save_OnLoad();
 }
