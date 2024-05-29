@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [23.1] - 2024-05-30
+
 ### Added
 
 - Add many bank QoL.
@@ -1231,7 +1233,8 @@ All notable changes to this project will be documented in this file.
 
 - Initial stable release.
 
-[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v23.0...HEAD
+[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v23.1...HEAD
+[23.1]: https://github.com/OoTMM/OoTMM/compare/v23.0...v23.1
 [23.0]: https://github.com/OoTMM/OoTMM/compare/v22.0...v23.0
 [22.0]: https://github.com/OoTMM/OoTMM/compare/v21.0...v22.0
 [21.0]: https://github.com/OoTMM/OoTMM/compare/v20.0...v21.0
