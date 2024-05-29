@@ -442,7 +442,7 @@ static void Actor_UpdateDamageTable(Actor* this)
     SetDamage(tbl, 22, dmg);
     SetDamage(tbl, 25, dmg * 2);
 
-    if (dmgEffectKokiri != dmgEffectGiant)
+    if (gSharedCustomSave.extraSwordsOot && (dmgEffectKokiri != dmgEffectGiant))
     {
         SetDamageEffect(tbl, 8, dmgEffectGiant);
         SetDamageEffect(tbl, 22, dmgEffectGiant);
