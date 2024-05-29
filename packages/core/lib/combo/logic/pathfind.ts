@@ -24,6 +24,8 @@ const recursiveForEach = <T>(arr: any, cb: (x: T) => void) => {
   }
 }
 
+const EVENT_TIME_TRAVEL = 'OOT_TIME_TRAVEL_AT_WILL';
+
 const MASKS_BITS_SET = [
   0x00000001, 0x00000003, 0x00000007, 0x0000000f,
   0x0000001f, 0x0000003f, 0x0000007f, 0x000000ff,
@@ -63,6 +65,7 @@ type PathfinderWorldState = {
     adult: PathfinderAgeState;
   },
   uncollectedLocations: Set<string>;
+  collectedLocations: Set<string>;
   items: ItemsCount;
   licenses: ItemsCount;
   renewables: ItemsCount;
@@ -108,6 +111,7 @@ const defaultWorldState = (startingItems: ItemsCount): PathfinderWorldState => (
     adult: defaultAgeState(),
   },
   uncollectedLocations: new Set(),
+  collectedLocations: new Set(),
   items: new Map(startingItems),
   licenses: new Map(startingItems),
   renewables: new Map(),
@@ -357,7 +361,7 @@ export class Pathfinder {
     }
 
     /* Age swap */
-    if (ws.events.has('OOT_TIME_TRAVEL_AT_WILL') && worldArea.ageChange && area !== fromArea) {
+    if (ws.events.has(EVENT_TIME_TRAVEL) && worldArea.ageChange && area !== fromArea) {
       const otherAge = age === 'child' ? 'adult' : 'child';
       this.exploreArea(worldId, otherAge, area, cloneAreaData(newAreaData), area);
     }
@@ -469,19 +473,22 @@ export class Pathfinder {
       this.state.locations.add(globalLoc);
       this.state.newLocations.add(globalLoc);
       ws.locations.add(loc);
+      ws.uncollectedLocations.add(loc);
     }
   }
 
-  private addLocation(worldId: number, loc: string) {
+  private collectLocation(worldId: number, loc: string) {
     const ws = this.state.ws[worldId];
+    if (ws.collectedLocations.has(loc)) {
+      return;
+    }
     const world = this.worlds[worldId];
     const globalLoc = makeLocation(loc, worldId);
-    this.state.locations.add(globalLoc);
-    ws.locations.add(loc);
     const playerItem = this.opts.items?.get(globalLoc);
     if (playerItem) {
       const otherWs = this.state.ws[playerItem.player];
       ws.uncollectedLocations.delete(loc);
+      ws.collectedLocations.add(loc);
       countMapAdd(otherWs.items, playerItem.item);
       if (isLocationRenewable(world, globalLoc)) {
         countMapAdd(otherWs.renewables, playerItem.item);
@@ -495,6 +502,14 @@ export class Pathfinder {
     } else {
       ws.uncollectedLocations.add(loc);
     }
+  }
+
+  private addLocation(worldId: number, loc: string) {
+    const ws = this.state.ws[worldId];
+    const globalLoc = makeLocation(loc, worldId);
+    this.state.locations.add(globalLoc);
+    ws.locations.add(loc);
+    this.collectLocation(worldId, loc);
   }
 
   private evalExit(worldId: number, age: Age, area: string, exit: string) {
@@ -588,16 +603,16 @@ export class Pathfinder {
       }
 
       /* If it's time travel at will, we need to re-explore everything */
-      if (event === 'OOT_TIME_TRAVEL_AT_WILL') {
+      if (event === EVENT_TIME_TRAVEL) {
         for (const [area, areaData] of ws.ages.child.areas) {
           const a = world.areas[area];
           if (a.ageChange)
-            this.exploreArea(worldId, 'child', area, cloneAreaData(areaData), area);
+            this.exploreArea(worldId, 'adult', area, cloneAreaData(areaData), area);
         }
         for (const [area, areaData] of ws.ages.adult.areas) {
           const a = world.areas[area];
           if (a.ageChange)
-            this.exploreArea(worldId, 'adult', area, cloneAreaData(areaData), area);
+            this.exploreArea(worldId, 'child', area, cloneAreaData(areaData), area);
         }
       }
     } else {
@@ -725,25 +740,22 @@ export class Pathfinder {
   }
 
   private pathfind() {
-    /* Handle previous sphere locations */
-    const prevSphere = this.state.newLocations;
-    this.state.newLocations = new Set();
-    for (const loc of prevSphere) {
-      const locD = locationData(loc);
-      this.addLocation(locD.world as number, locD.id);
-    }
+    /* Reset new locations */
+    this.state.newLocations.clear();
 
-    /* Handle uncollected locations */
-    for (let worldId = 0; worldId < this.worlds.length; ++worldId) {
-      const ws = this.state.ws[worldId];
+    /* Collect previous stuff */
+    const worldsUncollectedLocations = this.state.ws.map(ws => [...ws.uncollectedLocations]);
+    const worldForbiddenReachableLocations = this.state.ws.map(ws => [...ws.forbiddenReachableLocations]);
+    for (let i = 0; i < this.state.ws.length; ++i) {
+      const uncollected = worldsUncollectedLocations[i];
+      const frl = worldForbiddenReachableLocations[i];
+      const ws = this.state.ws[i];
 
-      /* Collect previous locations */
-      for (const loc of ws.uncollectedLocations) {
-        this.addLocation(worldId, loc);
+      for (const loc of uncollected) {
+        this.collectLocation(i, loc);
       }
 
-      /* Collect previously forbidden locations */
-      for (const loc of ws.forbiddenReachableLocations) {
+      for (const loc of frl) {
         let isAllowed = true;
         if (ws.restrictedLocations && !ws.restrictedLocations.has(loc)) {
           isAllowed = false;
@@ -751,7 +763,7 @@ export class Pathfinder {
           isAllowed = false;
         }
         if (isAllowed) {
-          this.addLocation(worldId, loc);
+          this.addLocation(i, loc);
           ws.forbiddenReachableLocations.delete(loc);
         }
       }
