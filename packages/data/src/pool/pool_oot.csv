@@ -48,10 +48,6 @@ Kokiri Forest Storms Grotto Grass 1,                        grass,          NONE
 Kokiri Forest Storms Grotto Grass 2,                        grass,          NONE,                 GROTTOS,                        0x02c03,                    RANDOM
 Kokiri Forest Storms Grotto Grass 3,                        grass,          NONE,                 GROTTOS,                        0x02c04,                    RANDOM
 Kokiri Forest Storms Grotto Grass 4,                        grass,          NONE,                 GROTTOS,                        0x02c05,                    RANDOM
-Kokiri Forest Invisible Rupee 1,                            rupee,          NONE,                 KOKIRI_FOREST,                  0x00001,                    RUPEE_GREEN
-Kokiri Forest Invisible Rupee 2,                            rupee,          NONE,                 KOKIRI_FOREST,                  0x00002,                    RUPEE_GREEN
-Kokiri Forest Invisible Rupee 3,                            rupee,          NONE,                 KOKIRI_FOREST,                  0x00003,                    RUPEE_GREEN
-Kokiri Forest Invisible Rupee 4,                            rupee,          NONE,                 KOKIRI_FOREST,                  0x00004,                    RUPEE_GREEN
 Kokiri Forest Rupee Child 1,                                rupee,          NONE,                 KOKIRI_FOREST,                  0x00005,                    RUPEE_BLUE
 Kokiri Forest Rupee Child 2,                                rupee,          NONE,                 KOKIRI_FOREST,                  0x00006,                    RUPEE_BLUE
 Kokiri Forest Rupee Crawl 1,                                rupee,          NONE,                 KOKIRI_FOREST,                  0x00200,                    RUPEE_BLUE
@@ -66,14 +62,24 @@ Kokiri Forest Rupee Adult 7,                                rupee,          NONE
 Kokiri Forest Heart 1,                                      heart,          NONE,                 KOKIRI_FOREST,                  0x00013,                    RECOVERY_HEART
 Kokiri Forest Heart 2,                                      heart,          NONE,                 KOKIRI_FOREST,                  0x00014,                    RECOVERY_HEART
 Kokiri Forest Heart 3,                                      heart,          NONE,                 KOKIRI_FOREST,                  0x00015,                    RECOVERY_HEART
-Kokiri Shop Item 1,                                         shop,           NONE,                 KOKIRI_FOREST,                  0x00,                       RECOVERY_HEART
-Kokiri Shop Item 2,                                         shop,           NONE,                 KOKIRI_FOREST,                  0x01,                       ARROWS_10
-Kokiri Shop Item 3,                                         shop,           NONE,                 KOKIRI_FOREST,                  0x02,                       ARROWS_30
-Kokiri Shop Item 4,                                         shop,           NONE,                 KOKIRI_FOREST,                  0x03,                       DEKU_SEEDS_30
-Kokiri Shop Item 5,                                         shop,           NONE,                 KOKIRI_FOREST,                  0x04,                       NUTS_5
-Kokiri Shop Item 6,                                         shop,           NONE,                 KOKIRI_FOREST,                  0x05,                       NUTS_10
-Kokiri Shop Item 7,                                         shop,           NONE,                 KOKIRI_FOREST,                  0x06,                       STICK
-Kokiri Shop Item 8,                                         shop,           NONE,                 KOKIRI_FOREST,                  0x07,                       SHIELD_DEKU
+Kokiri Forest Wonder Item Invisible Rupee 1,                wonder,         NONE,                 KOKIRI_FOREST,                  0x00001,                    RUPEE_GREEN
+Kokiri Forest Wonder Item Invisible Rupee 2,                wonder,         NONE,                 KOKIRI_FOREST,                  0x00002,                    RUPEE_GREEN
+Kokiri Forest Wonder Item Invisible Rupee 3,                wonder,         NONE,                 KOKIRI_FOREST,                  0x00003,                    RUPEE_GREEN
+Kokiri Forest Wonder Item Invisible Rupee 4,                wonder,         NONE,                 KOKIRI_FOREST,                  0x00004,                    RUPEE_GREEN
+Kokiri Forest Wonder Item Sign,                             wonder,         NONE,                 KOKIRI_FOREST,                  0x00020,                    RUPEE_BLUE
+Kokiri Forest Wonder Item Midair 1,                         wonder,         NONE,                 KOKIRI_FOREST,                  0x00027,                    RUPEE_GREEN
+Kokiri Forest Wonder Item Midair 2,                         wonder,         NONE,                 KOKIRI_FOREST,                  0x00028,                    RUPEE_GREEN
+Kokiri Forest Wonder Item Midair 3,                         wonder,         NONE,                 KOKIRI_FOREST,                  0x00029,                    RUPEE_BLUE
+Kokiri Forest Wonder Item Crawl 1,                          wonder,         NONE,                 KOKIRI_FOREST,                  0x00205,                    RUPEE_GREEN
+Kokiri Forest Wonder Item Crawl 2,                          wonder,         NONE,                 KOKIRI_FOREST,                  0x00206,                    RUPEE_GREEN
+Kokiri Shop Item 1,                                         shop,           NONE,                 KOKIRI_SHOP,                    0x00,                       RECOVERY_HEART
+Kokiri Shop Item 2,                                         shop,           NONE,                 KOKIRI_SHOP,                    0x01,                       ARROWS_10
+Kokiri Shop Item 3,                                         shop,           NONE,                 KOKIRI_SHOP,                    0x02,                       ARROWS_30
+Kokiri Shop Item 4,                                         shop,           NONE,                 KOKIRI_SHOP,                    0x03,                       DEKU_SEEDS_30
+Kokiri Shop Item 5,                                         shop,           NONE,                 KOKIRI_SHOP,                    0x04,                       NUTS_5
+Kokiri Shop Item 6,                                         shop,           NONE,                 KOKIRI_SHOP,                    0x05,                       NUTS_10
+Kokiri Shop Item 7,                                         shop,           NONE,                 KOKIRI_SHOP,                    0x06,                       STICK
+Kokiri Shop Item 8,                                         shop,           NONE,                 KOKIRI_SHOP,                    0x07,                       SHIELD_DEKU
 Know It All House Pot 1,                                    pot,            NONE,                 KOKIRI_KNOW_IT_ALL,             0x0006,                     RUPEE_GREEN
 Know It All House Pot 2,                                    pot,            NONE,                 KOKIRI_KNOW_IT_ALL,             0x0007,                     RUPEE_GREEN
 Twins House Pot 1,                                          pot,            NONE,                 KOKIRI_TWINS,                   0x0002,                     RUPEE_GREEN

@@ -101,11 +101,6 @@
     "Kokiri Forest GS Soil": "gs_soil && can_damage_skull"
     "Kokiri Forest GS Night Child": "is_child && gs_night && can_damage_skull"
     "Kokiri Forest GS Night Adult": "is_adult && (can_collect_distance || climb_anywhere) && gs_night"
-    # TODO: Add this back when we have wonder items
-    #"Kokiri Forest Invisible Rupee 1": "is_child"
-    #"Kokiri Forest Invisible Rupee 2": "is_child"
-    #"Kokiri Forest Invisible Rupee 3": "is_child"
-    #"Kokiri Forest Invisible Rupee 4": "is_child"
     "Kokiri Forest Rupee Child 1": "is_child"
     "Kokiri Forest Rupee Child 2": "is_child"
     "Kokiri Forest Rupee Crawl 1": "is_child"
@@ -113,6 +108,16 @@
     "Kokiri Forest Heart 1": "is_child"
     "Kokiri Forest Heart 2": "is_child"
     "Kokiri Forest Heart 3": "is_child"
+    "Kokiri Forest Wonder Item Invisible Rupee 1": "is_child"
+    "Kokiri Forest Wonder Item Invisible Rupee 2": "is_child"
+    "Kokiri Forest Wonder Item Invisible Rupee 3": "is_child"
+    "Kokiri Forest Wonder Item Invisible Rupee 4": "is_child"
+    "Kokiri Forest Wonder Item Sign": "is_child && can_use_sword"
+    "Kokiri Forest Wonder Item Midair 1": "is_child"
+    "Kokiri Forest Wonder Item Midair 2": "is_child"
+    "Kokiri Forest Wonder Item Midair 3": "is_child"
+    "Kokiri Forest Wonder Item Crawl 1": "is_child"
+    "Kokiri Forest Wonder Item Crawl 2": "is_child"
   gossip:
     "Kokiri Gossip Near Lost Woods Open": "true"
 "Kokiri Forest Grass":
