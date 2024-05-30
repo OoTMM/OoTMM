@@ -1298,6 +1298,7 @@ Shadow Temple Heart Pre-Boss 3,                             heart,          NONE
 Shadow Temple Beamos Big Fairy,                             fairy_spot,     NONE,                 TEMPLE_SHADOW,                  0x00503,                    FAIRY_BIG
 Shadow Temple Stalfos Big Fairy,                            fairy_spot,     NONE,                 TEMPLE_SHADOW,                  0x00915,                    FAIRY_BIG
 Shadow Temple Big Fairy After Wind,                         fairy_spot,     NONE,                 TEMPLE_SHADOW,                  0x01302,                    FAIRY_BIG
+Shadow Temple Wonder Item,                                  wonder,         NONE,                 TEMPLE_SHADOW,                  0x00c01,                    ARROWS_30
 Shadow Temple Boss HC,                                      collectible,    NONE,                 LAIR_BONGO_BONGO,               0x1f,                       HEART_CONTAINER
 Shadow Temple Boss,                                         npc,            NONE,                 LAIR_BONGO_BONGO,               BLUE_WARP_BONGO_BONGO,      MEDALLION_SHADOW
 Gerudo Fortress Jail 1,                                     collectible,    NONE,                 THIEVES_HIDEOUT,                0x0c,                       SMALL_KEY_GF
