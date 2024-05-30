@@ -282,8 +282,6 @@ int IsObjectSlotLoaded(ObjectContext* ctx, int slot);
 
 typedef struct Actor_EnItem00 Actor_EnItem00;
 
-Actor_EnItem00* Item_DropCollectible(GameState_Play* play, Vec3f* pos, s16 params);
-
 void PreDraw1(Actor* actor, GameState_Play* play, int unk);
 void PreDraw2(Actor* actor, GameState_Play* play, int unk);
 
@@ -293,10 +291,10 @@ void Play_InitEnvironment(GameState_Play *play, u16 skyboxId);
 extern u8 gFogState;
 #endif
 
-Actor* SpawnCollectible(GameState_Play* play, const Vec3f* pos, u16 param);
+Actor_EnItem00* Item_DropCollectible(GameState_Play* play, const Vec3f* pos, s16 params);
+void Item_DropCollectibleRandom(GameState_Play* play, Actor* from, const Vec3f* pos, s16 params);
 
 #if defined(GAME_MM)
-void SpawnCollectible2(GameState_Play* play, int unk, void* unk2, u16 unk3);
 f32 VectDist(Vec3f* vec1, Vec3f* vec2);
 f32 Math_Vec3f_DistXYZAndStoreDiff(Vec3f* a, Vec3f* b, Vec3f* dest);
 #endif

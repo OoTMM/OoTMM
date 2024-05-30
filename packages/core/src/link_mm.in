@@ -296,7 +296,6 @@ Player_GetHeight = 0x800B6FC8;
 
 Item_DropCollectible = 0x800a7730;
 SpawnCollectible2 = 0x800a7d28;
-SpawnCollectible = 0x800a7730;
 
 EnableOwl = 0x80143a10;
 
