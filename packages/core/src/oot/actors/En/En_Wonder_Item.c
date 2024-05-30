@@ -2,6 +2,7 @@
 #include <combo/custom.h>
 #include <combo/global.h>
 #include <combo/item.h>
+#include <combo/csmc.h>
 #include <combo/oot/actors/En_Wonder_Item.h>
 
 static const Vtx kGlitterVtx[] = {
@@ -27,10 +28,37 @@ static const Gfx kDlistGlitter[] = {
 
 static Actor_EnWonderItem* sWonderItem;
 
+static u32 EnWonderItem_Color(Actor_EnWonderItem* this)
+{
+    ComboItemOverride o;
+    int type;
+
+    if (!csmcEnabled())
+        type = CSMC_SPIDER;
+    else
+    {
+        comboXflagItemOverride(&o, &this->xflag, 0);
+        type = csmcFromItem(o.gi);
+    }
+
+    switch (type)
+    {
+    case CSMC_MAJOR:
+        return 0xffff00;
+    case CSMC_SPIDER:
+    default:
+        return 0xffffff;
+    }
+}
+
 static void EnWonderItem_DrawGlitter(Actor_EnWonderItem* this, GameState_Play* play)
 {
     void* tex;
     float alpha;
+    u32 color;
+    u8 r;
+    u8 g;
+    u8 b;
 
     /* Check xflag */
     if (comboXflagsGet(&this->xflag))
@@ -38,6 +66,12 @@ static void EnWonderItem_DrawGlitter(Actor_EnWonderItem* this, GameState_Play* p
         this->base.draw = NULL;
         return;
     }
+
+    /* Get color */
+    color = EnWonderItem_Color(this);
+    r = (color >> 16) & 0xff;
+    g = (color >>  8) & 0xff;
+    b = (color >>  0) & 0xff;
 
     /* Compute alpha */
     if (this->base.xzDistanceFromLink > 1000.f)
@@ -63,9 +97,9 @@ static void EnWonderItem_DrawGlitter(Actor_EnWonderItem* this, GameState_Play* p
     OPEN_DISPS(play->gs.gfx);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPSegment(POLY_XLU_DISP++, 0x06, (u32)tex - 0x80000000);
-    gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 255, 255, 255, (alpha * 0.75f) * 255);
+    gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, r, g, b, (alpha * 0.75f) * 255);
     gSPDisplayList(POLY_XLU_DISP++, (u32)kDlistGlitter - 0x80000000);
-    gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 255, 255, 255, (alpha * 0.25f) * 255);
+    gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, r, g, b, (alpha * 0.25f) * 255);
     gSPClearGeometryMode(POLY_XLU_DISP++, G_ZBUFFER);
     gSPDisplayList(POLY_XLU_DISP++, (u32)kDlistGlitter - 0x80000000);
     gSPSetGeometryMode(POLY_XLU_DISP++, G_ZBUFFER);
