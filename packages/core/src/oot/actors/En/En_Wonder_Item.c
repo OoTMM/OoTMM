@@ -13,14 +13,11 @@ static const Gfx kDlistGlitter[] = {
     gsDPPipeSync(),
     gsDPSetTextureLUT(G_TT_NONE),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
-    gsDPLoadTextureBlock_4b(0x06000000, G_IM_FMT_IA, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD),
-    //gsDPLoadTextureBlock(0x06000000 | CUSTOM_KEEP_SF_TEXTURE_1, G_IM_FMT_IA, G_IM_SIZ_8b, 16, 16, 0, G_TX_MIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD),
-    gsDPSetCombineLERP(TEXEL1, PRIMITIVE, PRIM_LOD_FRAC, TEXEL0, TEXEL1, 1, PRIM_LOD_FRAC, TEXEL0, PRIMITIVE, ENVIRONMENT, COMBINED, ENVIRONMENT, COMBINED, 0, PRIMITIVE, 0),
+    gsDPLoadTextureBlock_4b(0x06000000, G_IM_FMT_IA, 16, 16, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD),
+    gsDPSetCombineMode(G_CC_MODULATEIA_PRIM, G_CC_PASS2),
     gsDPSetRenderMode(G_RM_PASS, G_RM_ZB_CLD_SURF2),
-    gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_ZBUFFER),
+    gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR),
     gsSPSetGeometryMode(G_FOG | G_LIGHTING),
-    gsDPSetPrimColor(0, 0, 255, 255, 255, 255),
-    gsDPSetEnvColor(255, 255, 255, 255),
     gsSPVertex(&kGlitterVtx, 4, 0),
     gsSP2Triangles(0, 2, 1, 0, 0, 3, 2, 0),
     gsSPEndDisplayList(),
@@ -29,22 +26,38 @@ static const Gfx kDlistGlitter[] = {
 void EnWonderItem_DrawGlitter(Actor* this, GameState_Play* play)
 {
     void* tex;
+    float alpha;
 
-    /* Update the display list */
+    /* Compute alpha */
+    if (this->xzDistanceFromLink > 1000.f)
+        return;
+    else if (this->xzDistanceFromLink <= 300.f)
+        alpha = 1.f;
+    else
+        alpha = (1000.f - this->xzDistanceFromLink) * (1.f / 700.f);
+
+    /* Compute the texture */
     tex = comboCacheGetFile(CUSTOM_GLITTER_ADDR);
     if (!tex)
         return;
+    if (play->gs.frameCount & 4)
+        tex = (void*)((u32)tex + 16 * 8);
 
     /* Prepare the Matrix */
     ModelViewTranslate(this->world.pos.x, this->world.pos.y, this->world.pos.z, MAT_SET);
     ModelViewUnkTransform(&play->billboardMtxF);
-    //ModelViewTranslate(0, -60.f, -15.f, MAT_MUL);
+    ModelViewTranslate(0, 20.f, 0.f, MAT_MUL);
 
     /* Draw the display list */
     OPEN_DISPS(play->gs.gfx);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPSegment(POLY_XLU_DISP++, 0x06, (u32)tex - 0x80000000);
+    gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 255, 255, 255, (alpha * 0.75f) * 255);
     gSPDisplayList(POLY_XLU_DISP++, (u32)kDlistGlitter - 0x80000000);
+    gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 255, 255, 255, (alpha * 0.25f) * 255);
+    gSPClearGeometryMode(POLY_XLU_DISP++, G_ZBUFFER);
+    gSPDisplayList(POLY_XLU_DISP++, (u32)kDlistGlitter - 0x80000000);
+    gSPSetGeometryMode(POLY_XLU_DISP++, G_ZBUFFER);
     CLOSE_DISPS();
 }
 
