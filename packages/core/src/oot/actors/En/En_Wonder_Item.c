@@ -43,11 +43,15 @@ static u32 EnWonderItem_Color(Actor_EnWonderItem* this)
 
     switch (type)
     {
-    case CSMC_MAJOR:
-        return 0xffff00;
-    case CSMC_SPIDER:
-    default:
-        return 0xffffff;
+    case CSMC_NORMAL: return 0x4a230d;
+    case CSMC_BOSS_KEY: return 0x0000ff;
+    case CSMC_MAJOR: return 0xffff00;
+    case CSMC_KEY: return 0x222222;
+    case CSMC_SPIDER: return 0xffffff;
+    case CSMC_FAIRY: return 0xfa89ef;
+    case CSMC_HEART: return 0xff0000;
+    case CSMC_SOUL: return 0x5e0cc9;
+    default: return 0xffffff;
     }
 }
 
@@ -97,7 +101,7 @@ static void EnWonderItem_DrawGlitter(Actor_EnWonderItem* this, GameState_Play* p
     OPEN_DISPS(play->gs.gfx);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPSegment(POLY_XLU_DISP++, 0x06, (u32)tex - 0x80000000);
-    gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, r, g, b, (alpha * 0.75f) * 255);
+    gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, r, g, b, (alpha * 0.90f) * 255);
     gSPDisplayList(POLY_XLU_DISP++, (u32)kDlistGlitter - 0x80000000);
     gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, r, g, b, (alpha * 0.25f) * 255);
     gSPClearGeometryMode(POLY_XLU_DISP++, G_ZBUFFER);
