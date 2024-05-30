@@ -147,6 +147,7 @@ const ACTORS_OOT = {
   BG_SPOT11_OASIS: 0x1C2,
   OBJ_MURE3: 0x1ab,
   SHOT_SUN: 0x183,
+  EN_WONDER_ITEM: 0x112,
   //DOOR_ANA: 0x9b,
 };
 
@@ -307,10 +308,25 @@ type AddressingTable = {
   bitCount: number;
 }
 
+function sliceOverrideOot(a: Actor) {
+  return -1;
+}
+
+function sliceOverrideMm(a: Actor) {
+  return -1;
+}
+
+function sliceOverride(game: Game, a: Actor) {
+  return game === 'oot' ? sliceOverrideOot(a) : sliceOverrideMm(a);
+}
+
 function sliceSize(game: Game, a: Actor) {
   const conf = CONFIGS[game];
   if (!conf.INTERESTING_ACTORS.includes(a.typeId))
     return 0;
+  const override = sliceOverride(game, a);
+  if (override !== -1)
+    return override;
   return conf.SLICES[a.typeId] || 1;
 }
 
@@ -642,6 +658,7 @@ function decPad(n: number, width: number) {
   return count > 0 ? '0'.repeat(width - s.length) + s : s;
 }
 
+/*
 function outputGrottosMm(roomActors: RoomActors[]) {
   let lastSceneId = -1;
   let lastSetupId = -1;
@@ -660,6 +677,7 @@ function outputGrottosMm(roomActors: RoomActors[]) {
     }
   }
 }
+*/
 
 function outputShotSunOot(roomActors: RoomActors[]) {
   let lastSceneId = -1;
@@ -757,6 +775,34 @@ function outputHeartsMm(roomActors: RoomActors[]) {
         /* PRINT */
         console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Heart ${decPad(actor.actorId + 1, 2)},        heart,            NONE,                 ${SCENES_BY_ID.mm[room.sceneId]}, ${hexPad(key, 5)}, ${item}`);
       }
+    }
+  }
+}
+
+function outputWonderOot(roomActors: RoomActors[]) {
+  let lastSceneId = -1;
+  let lastSetupId = -1;
+  for (const room of roomActors) {
+    for (const actor of room.actors) {
+      if (actor.typeId !== ACTORS_OOT.EN_WONDER_ITEM)
+        continue;
+      const type = (actor.params >>> 11);
+      const item = (actor.params & 0x07c0) >>> 6;
+      let count;
+      if (type == 0x02) {
+        count = actor.rz;
+      } else {
+        count = 1;
+      }
+
+      const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
+      if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
+        console.log('');
+        console.log(`### Scene: ${scenesById('oot')[room.sceneId]}`);
+        lastSceneId = room.sceneId;
+        lastSetupId = room.setupId;
+      }
+      console.log(`Wonder item ${actor.actorId + 1} type ${type} item ${item} count ${count}`);
     }
   }
 }
@@ -1087,6 +1133,7 @@ async function run() {
   //outputPotsPoolMm(mmRooms);
 
   /* Output */
+  outputWonderOot(ootRooms);
   //outputPotsPoolOot(mqRooms);
   //outputGrassWeirdPoolOot(ootRooms);
   //outputGrassPoolMm(mmRooms);

@@ -139,6 +139,7 @@ export const customFiles = async (opts: Options): Promise<{[k: string]: Buffer}>
   POT_BOSSKEY_TOP: await png(opts, 'pots/bosskey_top', 'rgba16'),
   POT_SOUL_SIDE: await png(opts, 'pots/soul_side', 'rgba16'),
   POT_SOUL_TOP: await png(opts, 'pots/soul_top', 'rgba16'),
+  GLITTER: await png(opts, 'glitter', 'i4'),
 });
 
 export const customAssetsKeep = async (opts: Options): Promise<{[k: string]: Buffer}> => ({
