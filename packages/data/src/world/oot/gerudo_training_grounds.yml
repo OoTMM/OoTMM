@@ -12,6 +12,7 @@
     "Gerudo Training Grounds Heart 1": "true"
     "Gerudo Training Grounds Heart 2": "true"
     "Gerudo Training Grounds Entrance Big Fairy": "can_play_storms"
+    "Gerudo Training Grounds Wonder Item Beamos Room": "can_use_bow"
 "Gerudo Training Grounds Wallmaster":
   region: NONE
   exits:
@@ -57,6 +58,7 @@
     GTG_LIKE_LIKE_ROOM: "true"
   locations:
     "Gerudo Training Maze Upper Cage": "can_use_bow"
+    "Gerudo Training Grounds Wonder Item Eye Statue Room": "has_hover_boots"
 "Gerudo Training Grounds Right Side":
   dungeon: GTG
   exits:
@@ -110,6 +112,7 @@
     "Gerudo Training Grounds Hammer Room": "soul_keese && soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (has_weapon || can_use_sticks || can_hammer || can_use_bow)"
     "Gerudo Training Grounds SR Lava Back Center": "soul_keese && soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (has_weapon || can_use_sticks || can_hammer || can_use_bow) && can_hookshot"
     "Gerudo Training Grounds SR Lava Back Right": "true"
+    "Gerudo Training Grounds Wonder Item Torch Slugs Room": "can_use_bow"
 "Gerudo Training Grounds Statue":
   dungeon: GTG
   exits:

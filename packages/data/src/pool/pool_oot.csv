@@ -1438,6 +1438,9 @@ Gerudo Training Grounds SR Water 5,                         sr,             NONE
 Gerudo Training Grounds Heart 1,                            heart,          NONE,                 GERUDO_TRAINING_GROUND,         0x0070a,                    RECOVERY_HEART
 Gerudo Training Grounds Heart 2,                            heart,          NONE,                 GERUDO_TRAINING_GROUND,         0x0070b,                    RECOVERY_HEART
 Gerudo Training Grounds Entrance Big Fairy,                 fairy_spot,     NONE,                 GERUDO_TRAINING_GROUND,         0x00008,                    FAIRY_BIG
+Gerudo Training Grounds Wonder Item Eye Statue Room,        wonder,         NONE,                 GERUDO_TRAINING_GROUND,         0x00402,                    MAGIC_JAR_LARGE
+Gerudo Training Grounds Wonder Item Torch Slugs Room,       wonder,         NONE,                 GERUDO_TRAINING_GROUND,         0x00510,                    RUPEE_RED
+Gerudo Training Grounds Wonder Item Beamos Room,            wonder,         NONE,                 GERUDO_TRAINING_GROUND,         0x0070c,                    FLEXIBLE
 Ganon Castle Water Chest 1,                                 chest,          NONE,                 INSIDE_GANON_CASTLE,            0x06,                       RECOVERY_HEART
 Ganon Castle Water Chest 2,                                 chest,          NONE,                 INSIDE_GANON_CASTLE,            0x07,                       ICE_TRAP
 Ganon Castle Forest Chest,                                  chest,          NONE,                 INSIDE_GANON_CASTLE,            0x09,                       RUPEE_BLUE
