@@ -204,6 +204,7 @@
     "Kokiri Shop Item 6": "shop_price(0x05)"
     "Kokiri Shop Item 7": "shop_price(0x06)"
     "Kokiri Shop Item 8": "shop_price(0x07)"
+    "Kokiri Shop Wonder Item": "true"
 "Mido's House":
   region: ENTRANCE
   exits:
@@ -919,6 +920,9 @@
     "Lost Woods Grass 2": "can_cut_grass"
     "Lost Woods Grass 3": "can_cut_grass"
     "Lost Woods Pool Big Fairy": "can_play_storms"
+    "Lost Woods Wonder Item 1": "is_child"
+    "Lost Woods Wonder Item 2": "is_child"
+    "Lost Woods Wonder Item 3": "is_child"
   gossip:
     "Lost Woods Gossip Under Bridge": "true"
 "Lost Woods Rupee Arrow":

@@ -82,6 +82,7 @@ Kokiri Shop Item 5,                                         shop,           NONE
 Kokiri Shop Item 6,                                         shop,           NONE,                 KOKIRI_SHOP,                    0x05,                       NUTS_10
 Kokiri Shop Item 7,                                         shop,           NONE,                 KOKIRI_SHOP,                    0x06,                       STICK
 Kokiri Shop Item 8,                                         shop,           NONE,                 KOKIRI_SHOP,                    0x07,                       SHIELD_DEKU
+Kokiri Shop Wonder Item,                                    wonder,         NONE,                 KOKIRI_SHOP,                    0x00004,                    RUPEE_BLUE
 Know It All House Pot 1,                                    pot,            NONE,                 KOKIRI_KNOW_IT_ALL,             0x0006,                     RUPEE_GREEN
 Know It All House Pot 2,                                    pot,            NONE,                 KOKIRI_KNOW_IT_ALL,             0x0007,                     RUPEE_GREEN
 Twins House Pot 1,                                          pot,            NONE,                 KOKIRI_TWINS,                   0x0002,                     RUPEE_GREEN
@@ -128,6 +129,9 @@ Lost Woods Rupee Arrow 7,                                   rupee,          NONE
 Lost Woods Rupee Arrow 8,                                   rupee,          NONE,                 LOST_WOODS,                     0x0030b,                    RUPEE_GREEN
 Lost Woods Rupee Boulder,                                   rupee,          NONE,                 LOST_WOODS,                     0x00704,                    RUPEE_BLUE
 Lost Woods Pool Big Fairy,                                  fairy_spot,     NONE,                 LOST_WOODS,                     0x00303,                    FAIRY_BIG
+Lost Woods Wonder Item 1,                                   wonder,         NONE,                 LOST_WOODS,                     0x00105,                    RUPEE_GREEN
+Lost Woods Wonder Item 2,                                   wonder,         NONE,                 LOST_WOODS,                     0x00106,                    RUPEE_GREEN
+Lost Woods Wonder Item 3,                                   wonder,         NONE,                 LOST_WOODS,                     0x00107,                    RUPEE_BLUE
 Deku Theater Sticks Upgrade,                                npc,            NONE,                 GROTTOS,                        THEATER_STICKS,             STICK_UPGRADE
 Deku Theater Nuts Upgrade,                                  npc,            NONE,                 GROTTOS,                        THEATER_NUTS,               NUT_UPGRADE
 Saria's Song,                                               npc,            NONE,                 SACRED_FOREST_MEADOW,           SARIA_SONG,                 SONG_SARIA
