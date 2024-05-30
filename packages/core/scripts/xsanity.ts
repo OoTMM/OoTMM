@@ -212,6 +212,42 @@ const RUPEES = new Set([
   'RUPEE_HUGE',
 ]);
 
+const OOT_WONDER_ITEM_DROPS = [
+  'NUTS_5',
+  '???',
+  'MAGIC_JAR_LARGE',
+  'MAGIC_JAR_SMALL',
+  'RECOVERY_HEART',
+  'ARROWS_5',
+  'ARROWS_10',
+  'ARROWS_30',
+  'RUPEE_GREEN',
+  'RUPEE_BLUE',
+  'RUPEE_RED',
+  'FLEXIBLE',
+  'RANDOM',
+  'RANDOM',
+  'RANDOM',
+  'RANDOM',
+  'RANDOM',
+  'RANDOM',
+  'RANDOM',
+  'RANDOM',
+  'RANDOM',
+  'RANDOM',
+  'RANDOM',
+  'RANDOM',
+  'RANDOM',
+  'RANDOM',
+  'RANDOM',
+  'RANDOM',
+  'RANDOM',
+  'RANDOM',
+  'RANDOM',
+  'RANDOM',
+  'RANDOM',
+];
+
 const ITEM00_DROPS = [
   'RUPEE_GREEN',
   'RUPEE_BLUE',
@@ -786,15 +822,11 @@ function outputWonderOot(roomActors: RoomActors[]) {
     for (const actor of room.actors) {
       if (actor.typeId !== ACTORS_OOT.EN_WONDER_ITEM)
         continue;
-      const type = (actor.params >>> 11);
-      const item = (actor.params & 0x07c0) >>> 6;
-      let count;
-      if (type == 0x02) {
-        count = actor.rz;
-      } else {
-        count = 1;
-      }
-
+      const type = (actor.params >>> 11) & 0x1f;
+      if (type !== 2 && type !== 3)
+        continue;
+      const itemId = ((actor.params & 0x07c0) >>> 6) & 0x1f;
+      const item = OOT_WONDER_ITEM_DROPS[itemId];
       const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
       if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
         console.log('');
@@ -802,7 +834,7 @@ function outputWonderOot(roomActors: RoomActors[]) {
         lastSceneId = room.sceneId;
         lastSetupId = room.setupId;
       }
-      console.log(`Wonder item ${actor.actorId + 1} type ${type} item ${item} count ${count}`);
+      console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Wonder Item ${decPad(actor.actorId + 1, 2)},        wonder,           NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
     }
   }
 }
