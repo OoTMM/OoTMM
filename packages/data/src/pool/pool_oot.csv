@@ -148,6 +148,12 @@ Sacred Meadow Fairy Fountain Fairy 5,                       fairy,          NONE
 Sacred Meadow Fairy Fountain Fairy 6,                       fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x52200,                    FAIRY
 Sacred Meadow Fairy Fountain Fairy 7,                       fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x62200,                    FAIRY
 Sacred Meadow Fairy Fountain Fairy 8,                       fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x72200,                    FAIRY
+Sacred Meadow Wonder Item Entrance,                         wonder,         NONE,                 SACRED_FOREST_MEADOW,           0x0000f,                    RUPEE_BLUE
+Sacred Meadow Wonder Item Maze 1,                           wonder,         NONE,                 SACRED_FOREST_MEADOW,           0x0000c,                    RUPEE_GREEN
+Sacred Meadow Wonder Item Maze 2,                           wonder,         NONE,                 SACRED_FOREST_MEADOW,           0x0000d,                    RUPEE_GREEN
+Sacred Meadow Wonder Item Maze 3,                           wonder,         NONE,                 SACRED_FOREST_MEADOW,           0x0000e,                    RUPEE_GREEN
+Sacred Meadow Wonder Item Maze 4,                           wonder,         NONE,                 SACRED_FOREST_MEADOW,           0x00010,                    RUPEE_BLUE
+Sacred Meadow Wonder Item Maze 5,                           wonder,         NONE,                 SACRED_FOREST_MEADOW,           0x00011,                    RUPEE_BLUE
 Kakariko Anju Bottle,                                       npc,            NONE,                 KAKARIKO_VILLAGE,               ANJU_BOTTLE,                BOTTLE_EMPTY
 Kakariko Anju Egg,                                          npc,            NONE,                 KAKARIKO_VILLAGE,               TRADE_POCKET_EGG,           POCKET_CUCCO
 Kakariko Anju Cojiro,                                       npc,            NONE,                 KAKARIKO_VILLAGE,               TRADE_COJIRO,               COJIRO

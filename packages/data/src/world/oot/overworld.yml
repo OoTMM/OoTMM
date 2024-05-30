@@ -1025,6 +1025,8 @@
     "Wolfos Grotto": "hidden_grotto_bomb"
   events:
     RUPEES: "true"
+  locations:
+    "Sacred Meadow Wonder Item Entrance": "true"
 "Wolfos Grotto":
   region: ENTRANCE
   age_change: false
@@ -1043,6 +1045,11 @@
     "Saria's Song": "met_zelda && is_child && soul_npc(SOUL_NPC_SARIA)"
     "Sacred Meadow Sheik Song": "is_adult && soul_npc(SOUL_NPC_SHEIK)"
     "Sacred Meadow GS Night Adult": "is_adult && gs_night && (can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_din)))"
+    "Sacred Meadow Wonder Item Maze 1": "true"
+    "Sacred Meadow Wonder Item Maze 2": "true"
+    "Sacred Meadow Wonder Item Maze 3": "true"
+    "Sacred Meadow Wonder Item Maze 4": "true"
+    "Sacred Meadow Wonder Item Maze 5": "true"
   gossip:
     "Sacred Meadow Gossip Near Forest Temple": "true"
     "Sacred Meadow Gossip Atop Maze Woods Side": "true"

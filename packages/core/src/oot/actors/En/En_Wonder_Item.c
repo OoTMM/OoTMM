@@ -28,6 +28,24 @@ static const Gfx kDlistGlitter[] = {
 
 static Actor_EnWonderItem* sWonderItem;
 
+static void EnWonderItem_Alias(Actor_EnWonderItem* this)
+{
+    Xflag* xflag;
+
+    xflag = &this->xflag;
+
+    switch (xflag->sceneId)
+    {
+    case SCE_OOT_SACRED_FOREST_MEADOW:
+        if (xflag->setupId == 2)
+        {
+            xflag->setupId = 0;
+            xflag->id -= 3;
+        }
+        break;
+    }
+}
+
 static u32 EnWonderItem_Color(Actor_EnWonderItem* this)
 {
     ComboItemOverride o;
@@ -174,6 +192,7 @@ void EnWonderItem_InitWrapper(Actor_EnWonderItem* this, GameState_Play* play)
     this->xflag.roomId = this->base.room;
     this->xflag.sliceId = 0;
     this->xflag.id = g.actorIndex;
+    EnWonderItem_Alias(this);
 
     comboXflagItemOverride(&o, &this->xflag, 0);
     this->isExtended = !!(o.gi && !comboXflagsGet(&this->xflag));
