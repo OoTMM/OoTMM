@@ -72,6 +72,8 @@ Kokiri Forest Wonder Item Midair 2,                         wonder,         NONE
 Kokiri Forest Wonder Item Midair 3,                         wonder,         NONE,                 KOKIRI_FOREST,                  0x00029,                    RUPEE_BLUE
 Kokiri Forest Wonder Item Crawl 1,                          wonder,         NONE,                 KOKIRI_FOREST,                  0x00205,                    RUPEE_GREEN
 Kokiri Forest Wonder Item Crawl 2,                          wonder,         NONE,                 KOKIRI_FOREST,                  0x00206,                    RUPEE_GREEN
+Kokiri Forest Wonder Item Platforms 1,                      wonder,         NONE,                 KOKIRI_FOREST,                  0x00021,                    RUPEE_BLUE
+Kokiri Forest Wonder Item Platforms 2,                      wonder,         NONE,                 KOKIRI_FOREST,                  0x00026,                    RUPEE_BLUE
 Kokiri Shop Item 1,                                         shop,           NONE,                 KOKIRI_SHOP,                    0x00,                       RECOVERY_HEART
 Kokiri Shop Item 2,                                         shop,           NONE,                 KOKIRI_SHOP,                    0x01,                       ARROWS_10
 Kokiri Shop Item 3,                                         shop,           NONE,                 KOKIRI_SHOP,                    0x02,                       ARROWS_30

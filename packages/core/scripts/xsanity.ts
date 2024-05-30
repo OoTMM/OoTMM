@@ -823,7 +823,7 @@ function outputWonderOot(roomActors: RoomActors[]) {
       if (actor.typeId !== ACTORS_OOT.EN_WONDER_ITEM)
         continue;
       const type = (actor.params >>> 11) & 0x1f;
-      if (type !== 2 && type !== 3)
+      if (type !== 2 && type !== 3 && type !== 0 && type !== 5)
         continue;
       const itemId = ((actor.params & 0x07c0) >>> 6) & 0x1f;
       const item = OOT_WONDER_ITEM_DROPS[itemId];
@@ -834,7 +834,14 @@ function outputWonderOot(roomActors: RoomActors[]) {
         lastSceneId = room.sceneId;
         lastSetupId = room.setupId;
       }
-      console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Wonder Item ${decPad(actor.actorId + 1, 2)},        wonder,           NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
+      let meta = '';
+      if (type === 0) {
+        meta = ' TYPE 0';
+      }
+      if (type === 5) {
+        meta = ' TYPE 5';
+      }
+      console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Wonder Item${meta} ${decPad(actor.actorId + 1, 2)},        wonder,           NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
     }
   }
 }

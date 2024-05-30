@@ -118,6 +118,8 @@
     "Kokiri Forest Wonder Item Midair 3": "is_child"
     "Kokiri Forest Wonder Item Crawl 1": "is_child"
     "Kokiri Forest Wonder Item Crawl 2": "is_child"
+    "Kokiri Forest Wonder Item Platforms 1": "is_child"
+    "Kokiri Forest Wonder Item Platforms 2": "is_child"
   gossip:
     "Kokiri Gossip Near Lost Woods Open": "true"
 "Kokiri Forest Grass":
