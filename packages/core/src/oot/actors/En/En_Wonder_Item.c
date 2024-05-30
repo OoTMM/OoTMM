@@ -59,6 +59,7 @@ static void EnWonderItem_DrawGlitter(Actor_EnWonderItem* this, GameState_Play* p
 {
     void* tex;
     float alpha;
+    float alphaNoZ;
     u32 color;
     u8 r;
     u8 g;
@@ -85,6 +86,13 @@ static void EnWonderItem_DrawGlitter(Actor_EnWonderItem* this, GameState_Play* p
     else
         alpha = (1000.f - this->base.xzDistanceFromLink) * (1.f / 700.f);
 
+    if (this->base.xzDistanceFromLink > 600.f)
+        alphaNoZ = 0.f;
+    else if (this->base.xzDistanceFromLink <= 300.f)
+        alphaNoZ = 1.f;
+    else
+        alphaNoZ = (600.f - this->base.xzDistanceFromLink) * (1.f / 300.f);
+
     /* Compute the texture */
     tex = comboCacheGetFile(CUSTOM_GLITTER_ADDR);
     if (!tex)
@@ -103,10 +111,13 @@ static void EnWonderItem_DrawGlitter(Actor_EnWonderItem* this, GameState_Play* p
     gSPSegment(POLY_XLU_DISP++, 0x06, (u32)tex - 0x80000000);
     gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, r, g, b, (alpha * 0.90f) * 255);
     gSPDisplayList(POLY_XLU_DISP++, (u32)kDlistGlitter - 0x80000000);
-    gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, r, g, b, (alpha * 0.25f) * 255);
-    gSPClearGeometryMode(POLY_XLU_DISP++, G_ZBUFFER);
-    gSPDisplayList(POLY_XLU_DISP++, (u32)kDlistGlitter - 0x80000000);
-    gSPSetGeometryMode(POLY_XLU_DISP++, G_ZBUFFER);
+    if (alphaNoZ > 0.f)
+    {
+        gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, r, g, b, (alphaNoZ * 0.25f) * 255);
+        gSPClearGeometryMode(POLY_XLU_DISP++, G_ZBUFFER);
+        gSPDisplayList(POLY_XLU_DISP++, (u32)kDlistGlitter - 0x80000000);
+        gSPSetGeometryMode(POLY_XLU_DISP++, G_ZBUFFER);
+    }
     CLOSE_DISPS();
 }
 
