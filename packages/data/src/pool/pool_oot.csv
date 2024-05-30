@@ -239,6 +239,21 @@ Graveyard Dampe Tomb Rupee 5,                               rupee,          NONE
 Graveyard Dampe Tomb Rupee 6,                               rupee,          NONE,                 TOMB_DAMPE_WINDMILL,            0x00202,                    RUPEE_GREEN
 Graveyard Dampe Tomb Rupee 7,                               rupee,          NONE,                 TOMB_DAMPE_WINDMILL,            0x00300,                    RUPEE_GREEN
 Graveyard Dampe Tomb Rupee 8,                               rupee,          NONE,                 TOMB_DAMPE_WINDMILL,            0x00301,                    RUPEE_GREEN
+Graveyard Dampe Tomb Wonder Item 01,                        wonder,         NONE,                 TOMB_DAMPE_WINDMILL,            0x00105,                    RUPEE_GREEN
+Graveyard Dampe Tomb Wonder Item 02,                        wonder,         NONE,                 TOMB_DAMPE_WINDMILL,            0x00106,                    RUPEE_GREEN
+Graveyard Dampe Tomb Wonder Item 03,                        wonder,         NONE,                 TOMB_DAMPE_WINDMILL,            0x00107,                    RUPEE_GREEN
+Graveyard Dampe Tomb Wonder Item 04,                        wonder,         NONE,                 TOMB_DAMPE_WINDMILL,            0x00108,                    RUPEE_GREEN
+Graveyard Dampe Tomb Wonder Item 05,                        wonder,         NONE,                 TOMB_DAMPE_WINDMILL,            0x00109,                    RUPEE_GREEN
+Graveyard Dampe Tomb Wonder Item 06,                        wonder,         NONE,                 TOMB_DAMPE_WINDMILL,            0x00207,                    RUPEE_GREEN
+Graveyard Dampe Tomb Wonder Item 07,                        wonder,         NONE,                 TOMB_DAMPE_WINDMILL,            0x00208,                    RUPEE_GREEN
+Graveyard Dampe Tomb Wonder Item 08,                        wonder,         NONE,                 TOMB_DAMPE_WINDMILL,            0x00209,                    RUPEE_GREEN
+Graveyard Dampe Tomb Wonder Item 09,                        wonder,         NONE,                 TOMB_DAMPE_WINDMILL,            0x0020a,                    RUPEE_GREEN
+Graveyard Dampe Tomb Wonder Item 10,                        wonder,         NONE,                 TOMB_DAMPE_WINDMILL,            0x0020b,                    RUPEE_GREEN
+Graveyard Dampe Tomb Wonder Item 11,                        wonder,         NONE,                 TOMB_DAMPE_WINDMILL,            0x00308,                    RUPEE_GREEN
+Graveyard Dampe Tomb Wonder Item 12,                        wonder,         NONE,                 TOMB_DAMPE_WINDMILL,            0x00309,                    RUPEE_GREEN
+Graveyard Dampe Tomb Wonder Item 13,                        wonder,         NONE,                 TOMB_DAMPE_WINDMILL,            0x0030a,                    RUPEE_GREEN
+Graveyard Dampe Tomb Wonder Item 14,                        wonder,         NONE,                 TOMB_DAMPE_WINDMILL,            0x0030b,                    RUPEE_GREEN
+Graveyard Dampe Tomb Wonder Item 15,                        wonder,         NONE,                 TOMB_DAMPE_WINDMILL,            0x0030c,                    RUPEE_GREEN
 Graveyard Crate HP,                                         collectible,    NONE,                 GRAVEYARD,                      0x04,                       HEART_PIECE
 Graveyard GS Soil,                                          gs,             NONE,                 GRAVEYARD,                      0x88,                       GS_TOKEN
 Graveyard GS Wall,                                          gs,             NONE,                 GRAVEYARD,                      0x8f,                       GS_TOKEN
