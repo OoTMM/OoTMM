@@ -1820,6 +1820,18 @@ MQ Bottom of the Well Heart Basement 2,                     heart,          NONE
 MQ Bottom of the Well Heart Basement 3,                     heart,          NONE,                 BOTTOM_OF_THE_WELL,             0x0011d,                    RECOVERY_HEART
 MQ Bottom of the Well Heart Coffin 1,                       heart,          NONE,                 BOTTOM_OF_THE_WELL,             0x0020a,                    RECOVERY_HEART
 MQ Bottom of the Well Heart Coffin 2,                       heart,          NONE,                 BOTTOM_OF_THE_WELL,             0x0020b,                    RECOVERY_HEART
+MQ Bottom of the Well Wonder Item Main Room Left 1,         wonder,         NONE,                 BOTTOM_OF_THE_WELL,             0x00005,                    MAGIC_JAR_LARGE
+MQ Bottom of the Well Wonder Item Main Room Left 2,         wonder,         NONE,                 BOTTOM_OF_THE_WELL,             0x00006,                    MAGIC_JAR_LARGE
+MQ Bottom of the Well Wonder Item Main Room Left 3,         wonder,         NONE,                 BOTTOM_OF_THE_WELL,             0x00008,                    ARROWS_30
+MQ Bottom of the Well Wonder Item Main Room Left 4,         wonder,         NONE,                 BOTTOM_OF_THE_WELL,             0x0000a,                    FLEXIBLE
+MQ Bottom of the Well Wonder Item Main Room Right 1,        wonder,         NONE,                 BOTTOM_OF_THE_WELL,             0x00007,                    MAGIC_JAR_LARGE
+MQ Bottom of the Well Wonder Item Main Room Right 2,        wonder,         NONE,                 BOTTOM_OF_THE_WELL,             0x00009,                    ARROWS_30
+MQ Bottom of the Well Wonder Item Main Room Right 3,        wonder,         NONE,                 BOTTOM_OF_THE_WELL,             0x0000b,                    FLEXIBLE
+MQ Bottom of the Well Wonder Item Main Room Right 4,        wonder,         NONE,                 BOTTOM_OF_THE_WELL,             0x0000c,                    FLEXIBLE
+MQ Bottom of the Well Wonder Item Side Room 1,              wonder,         NONE,                 BOTTOM_OF_THE_WELL,             0x00500,                    MAGIC_JAR_LARGE
+MQ Bottom of the Well Wonder Item Side Room 2,              wonder,         NONE,                 BOTTOM_OF_THE_WELL,             0x00501,                    MAGIC_JAR_LARGE
+MQ Bottom of the Well Wonder Item Side Room 3,              wonder,         NONE,                 BOTTOM_OF_THE_WELL,             0x00502,                    ARROWS_30
+MQ Bottom of the Well Wonder Item Side Room 4,              wonder,         NONE,                 BOTTOM_OF_THE_WELL,             0x00503,                    FLEXIBLE
 MQ Ice Cavern Map Chest,                                    chest,          NONE,                 ICE_CAVERN,                     0x01,                       MAP_IC
 MQ Ice Cavern Compass Chest,                                chest,          NONE,                 ICE_CAVERN,                     0x00,                       COMPASS_IC
 MQ Ice Cavern Iron Boots,                                   chest,          ICE_CAVERN_CHEST,     ICE_CAVERN,                     0x02,                       BOOTS_IRON
