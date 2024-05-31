@@ -80,6 +80,13 @@ static void EnWonderItem_Alias(Actor_EnWonderItem* this)
             }
         }
         break;
+    case SCE_OOT_KAKARIKO_VILLAGE:
+        if (xflag->setupId == 1)
+        {
+            xflag->setupId = 0;
+            xflag->id += 7;
+        }
+        break;
     }
 }
 

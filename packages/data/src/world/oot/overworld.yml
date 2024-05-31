@@ -1156,6 +1156,7 @@
     "Kakariko Grass 6": "can_cut_grass"
     "Kakariko Grass 7": "can_cut_grass"
     "Kakariko Grass 8": "can_cut_grass"
+    "Kakariko Wonder Item": "is_child"
 "Kakariko Rooftop":
   region: KAKARIKO
   exits:

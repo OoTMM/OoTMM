@@ -194,6 +194,7 @@ Kakariko Grass 5,                                           grass,          NONE
 Kakariko Grass 6,                                           grass,          NONE,                 KAKARIKO_VILLAGE,               0x00029,                    RANDOM
 Kakariko Grass 7,                                           grass,          NONE,                 KAKARIKO_VILLAGE,               0x0002a,                    RANDOM
 Kakariko Grass 8,                                           grass,          NONE,                 KAKARIKO_VILLAGE,               0x0002b,                    RANDOM
+Kakariko Wonder Item,                                       wonder,         NONE,                 KAKARIKO_VILLAGE,               0x00037,                    RUPEE_RED
 Kakariko Potion Shop Odd Potion,                            npc,            NONE,                 KAKARIKO_POTION_SHOP,           TRADE_ODD_POTION,           ODD_POTION
 Kakariko Bazaar Item 1,                                     shop,           NONE,                 BAZAAR,                         0x30,                       ARROWS_5
 Kakariko Bazaar Item 2,                                     shop,           NONE,                 BAZAAR,                         0x31,                       ARROWS_10
