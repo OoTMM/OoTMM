@@ -90,6 +90,7 @@ Twins House Pot 2,                                          pot,            NONE
 Malon Egg,                                                  npc,            NONE,                 HYRULE_CASTLE,                  MALON_EGG,                  CHICKEN
 Zelda's Letter,                                             npc,            NONE,                 CASTLE_COURTYARD,               ZELDA_LETTER,               ZELDA_LETTER
 Zelda's Song,                                               npc,            NONE,                 CASTLE_COURTYARD,               ZELDA_SONG,                 SONG_ZELDA
+Castle Courtyard Wonder Item UNUSED,                        wonder,         NONE,                 CASTLE_COURTYARD,               0x00005,                    RUPEE_RED
 Lost Woods Gift from Saria,                                 npc,            NONE,                 LOST_WOODS,                     SARIA_OCARINA,              OCARINA
 Lost Woods Target,                                          npc,            NONE,                 LOST_WOODS,                     LOST_WOODS_TARGET,          SLINGSHOT
 Lost Woods Skull Kid,                                       npc,            NONE,                 LOST_WOODS,                     LOST_WOODS_SKULL_KID,       HEART_PIECE
@@ -697,6 +698,9 @@ Hyrule Field Grass Pack 4 Bush 10,                          grass,          NONE
 Hyrule Field Grass Pack 4 Bush 11,                          grass,          NONE,                 HYRULE_FIELD,                   0xa003d,                    RANDOM
 Hyrule Field Grass Pack 4 Bush 12,                          grass,          NONE,                 HYRULE_FIELD,                   0xb003d,                    RANDOM
 Hyrule Field River Big Fairy,                               fairy_spot,     NONE,                 HYRULE_FIELD,                   0x00048,                    FAIRY_BIG
+Hyrule Field Wonder Item 1,                                 wonder,         NONE,                 HYRULE_FIELD,                   0x00034,                    RUPEE_RED
+Hyrule Field Wonder Item 2,                                 wonder,         NONE,                 HYRULE_FIELD,                   0x00035,                    RUPEE_RED
+Hyrule Field Wonder Item 3,                                 wonder,         NONE,                 HYRULE_FIELD,                   0x00036,                    RUPEE_RED
 Hyrule Field Fairy Fountain Fairy 1,                        fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x02000,                    FAIRY
 Hyrule Field Fairy Fountain Fairy 2,                        fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x12000,                    FAIRY
 Hyrule Field Fairy Fountain Fairy 3,                        fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x22000,                    FAIRY

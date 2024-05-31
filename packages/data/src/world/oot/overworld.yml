@@ -296,6 +296,9 @@
     "Hyrule Field Ocarina of Time": "is_child && has_spiritual_stones"
     "Hyrule Field Song of Time": "is_child && has_spiritual_stones"
     "Hyrule Field River Big Fairy": "can_play_storms"
+    "Hyrule Field Wonder Item 1": "is_child"
+    "Hyrule Field Wonder Item 2": "is_child"
+    "Hyrule Field Wonder Item 3": "is_child"
 "Hyrule Field Grass":
   region: HYRULE_FIELD
   age_change: false
