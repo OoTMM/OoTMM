@@ -2146,6 +2146,8 @@
     "Gerudo Valley GS Soil": "gs_soil && can_damage_skull"
     "Gerudo Valley GS Wall": "is_child && gs_night && (can_collect_distance || (climb_anywhere && (can_use_sword_master || (age_sword_adult && has(SWORD_BIGGORON)) || has_explosives || can_use_din || can_use_sticks || can_use_slingshot)))"
     "Gerudo Valley Cow": "is_child && can_play_epona"
+    "Gerudo Valley Wonder Item Lower": "is_adult"
+    "Gerudo Valley Wonder Item Upper": "is_adult"
   gossip:
     "Gerudo Valley Gossip": "true"
 "Gerudo Valley After Bridge":
