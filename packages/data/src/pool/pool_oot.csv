@@ -911,6 +911,11 @@ Desert Colossus Oasis Fairy 5,                              fairy,          NONE
 Desert Colossus Oasis Fairy 6,                              fairy,          NONE,                 DESERT_COLOSSUS,                0x50001,                    FAIRY
 Desert Colossus Oasis Fairy 7,                              fairy,          NONE,                 DESERT_COLOSSUS,                0x60001,                    FAIRY
 Desert Colossus Oasis Fairy 8,                              fairy,          NONE,                 DESERT_COLOSSUS,                0x70001,                    FAIRY
+Desert Colossus Wonder Item Oasis 1,                        wonder,         NONE,                 DESERT_COLOSSUS,                0x00013,                    MAGIC_JAR_SMALL
+Desert Colossus Wonder Item Oasis 2,                        wonder,         NONE,                 DESERT_COLOSSUS,                0x00015,                    RUPEE_BLUE
+Desert Colossus Wonder Item Oasis Child,                    wonder,         NONE,                 DESERT_COLOSSUS,                0x00016,                    RUPEE_BLUE
+Desert Colossus Wonder Item Fountain 1,                     wonder,         NONE,                 DESERT_COLOSSUS,                0x00014,                    RUPEE_BLUE
+Desert Colossus Wonder Item Fountain 2,                     wonder,         NONE,                 DESERT_COLOSSUS,                0x00017,                    RUPEE_RED
 Skulltula House 10 Tokens,                                  npc,            NONE,                 HOUSE_OF_SKULLTULA,             GS_10,                      WALLET
 Skulltula House 20 Tokens,                                  npc,            NONE,                 HOUSE_OF_SKULLTULA,             GS_20,                      STONE_OF_AGONY
 Skulltula House 30 Tokens,                                  npc,            NONE,                 HOUSE_OF_SKULLTULA,             GS_30,                      WALLET

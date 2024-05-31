@@ -61,10 +61,23 @@ static void EnWonderItem_Alias(Actor_EnWonderItem* this)
         if (xflag->setupId != 0)
         {
             xflag->setupId = 0;
-            if (xflag->id == 6)
-                xflag->id = 9;
-            else
+            if (xflag->id == 5)
                 xflag->id = 8;
+            else
+                xflag->id = 7;
+        }
+        break;
+    case SCE_OOT_DESERT_COLOSSUS:
+        if (xflag->setupId == 2)
+        {
+            xflag->setupId = 0;
+            switch (xflag->id)
+            {
+            case 22: xflag->id = 19; break;
+            case 23: xflag->id = 21; break;
+            case 24: xflag->id = 20; break;
+            case 25: xflag->id = 23; break;
+            }
         }
         break;
     }
