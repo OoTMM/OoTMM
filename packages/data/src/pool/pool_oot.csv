@@ -1945,6 +1945,20 @@ MQ Fire Temple Hammer Loop Iron Knuckle Big Fairy,          fairy_spot,     NONE
 MQ Fire Temple Heart 1,                                     heart,          NONE,                 TEMPLE_FIRE,                    0x01502,                    RECOVERY_HEART
 MQ Fire Temple Heart 2,                                     heart,          NONE,                 TEMPLE_FIRE,                    0x01503,                    RECOVERY_HEART
 MQ Fire Temple Heart 3,                                     heart,          NONE,                 TEMPLE_FIRE,                    0x01504,                    RECOVERY_HEART
+MQ Fire Temple Wonder Item Shortcut Room 1,                 wonder,         NONE,                 TEMPLE_FIRE,                    0x00406,                    MAGIC_JAR_LARGE
+MQ Fire Temple Wonder Item Shortcut Room 2,                 wonder,         NONE,                 TEMPLE_FIRE,                    0x00407,                    RECOVERY_HEART
+MQ Fire Temple Wonder Item Shortcut Room 3,                 wonder,         NONE,                 TEMPLE_FIRE,                    0x00408,                    ARROWS_10
+MQ Fire Temple Wonder Item East Maze,                       wonder,         NONE,                 TEMPLE_FIRE,                    0x00513,                    RUPEE_RED
+MQ Fire Temple Wonder Item East Climb First 1,              wonder,         NONE,                 TEMPLE_FIRE,                    0x00706,                    MAGIC_JAR_LARGE
+MQ Fire Temple Wonder Item East Climb First 2,              wonder,         NONE,                 TEMPLE_FIRE,                    0x00707,                    FLEXIBLE
+MQ Fire Temple Wonder Item East Climb Second 1,             wonder,         NONE,                 TEMPLE_FIRE,                    0x00704,                    MAGIC_JAR_LARGE
+MQ Fire Temple Wonder Item East Climb Second 2,             wonder,         NONE,                 TEMPLE_FIRE,                    0x00705,                    FLEXIBLE
+MQ Fire Temple Wonder Item Fire Maze,                       wonder,         NONE,                 TEMPLE_FIRE,                    0x00a2a,                    FLEXIBLE
+MQ Fire Temple Wonder Item After Flare Dancer,              wonder,         NONE,                 TEMPLE_FIRE,                    0x00c00,                    FLEXIBLE
+MQ Fire Temple Wonder Item Staircase,                       wonder,         NONE,                 TEMPLE_FIRE,                    0x00e01,                    FLEXIBLE
+MQ Fire Temple Wonder Item Torch Room,                      wonder,         NONE,                 TEMPLE_FIRE,                    0x01000,                    FLEXIBLE
+MQ Fire Temple Wonder Item Boss Key Room Hookshot,          wonder,         NONE,                 TEMPLE_FIRE,                    0x01309,                    FLEXIBLE
+MQ Fire Temple Wonder Item Boss Key Room Bow,               wonder,         NONE,                 TEMPLE_FIRE,                    0x0130a,                    FLEXIBLE
 MQ Water Temple Map Chest,                                  chest,          NONE,                 TEMPLE_WATER,                   0x02,                       MAP_WATER
 MQ Water Temple Compass Chest,                              chest,          NONE,                 TEMPLE_WATER,                   0x01,                       COMPASS_WATER
 MQ Water Temple Longshot Chest,                             chest,          NONE,                 TEMPLE_WATER,                   0x00,                       HOOKSHOT
