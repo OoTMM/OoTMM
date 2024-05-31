@@ -12,6 +12,8 @@
     "MQ Jabu-Jabu Pot Entrance 2": "true"
     "MQ Jabu-Jabu Grass Entrance 1": "can_cut_grass"
     "MQ Jabu-Jabu Grass Entrance 2": "can_cut_grass"
+    "MQ Jabu-Jabu Wonder Item Entrance Left Cow": "can_use_slingshot"
+    "MQ Jabu-Jabu Wonder Item Entrance Right Cow": "can_use_slingshot"
 "Jabu-Jabu Main":
   dungeon: JJ
   exits:
@@ -50,6 +52,15 @@
     "MQ Jabu-Jabu Rupee Top": "is_child || can_dive_small"
     "MQ Jabu-Jabu Heart 1": "true"
     "MQ Jabu-Jabu Heart 2": "true"
+    "MQ Jabu-Jabu Wonder Item Elevator Cow": "can_use_slingshot"
+    "MQ Jabu-Jabu Wonder Item Basement Right Cow 1": "can_use_slingshot"
+    "MQ Jabu-Jabu Wonder Item Basement Right Cow 2": "can_use_slingshot"
+    "MQ Jabu-Jabu Wonder Item Basement Right Cow 3": "can_use_slingshot"
+    "MQ Jabu-Jabu Wonder Item Basement Left Cow 1": "can_use_slingshot"
+    "MQ Jabu-Jabu Wonder Item Basement Left Cow 2": "can_use_slingshot"
+    "MQ Jabu-Jabu Wonder Item Basement Left Cow 3": "can_use_slingshot"
+    "MQ Jabu-Jabu Wonder Item After Big Octo": "event(JABU_BIG_OCTO) && can_use_slingshot"
+    "MQ Jabu-Jabu Wonder Item Platforms Cow": "event(JABU_BIG_OCTO) && can_use_slingshot"
 "Jabu-Jabu Back":
   dungeon: JJ
   exits:
@@ -64,6 +75,15 @@
     "MQ Jabu-Jabu Pot Like-Like Room 1": "true"
     "MQ Jabu-Jabu Pot Like-Like Room 2": "true"
     "MQ Jabu-Jabu Grass Torch Room": "can_cut_grass"
+    "MQ Jabu-Jabu Wonder Item Falling Like-Likes Cow Right 1": "can_use_slingshot"
+    "MQ Jabu-Jabu Wonder Item Falling Like-Likes Cow Right 2": "can_use_slingshot"
+    "MQ Jabu-Jabu Wonder Item Falling Like-Likes Cow Right 3": "can_use_slingshot"
+    "MQ Jabu-Jabu Wonder Item Falling Like-Likes Cow Left 1": "can_use_slingshot"
+    "MQ Jabu-Jabu Wonder Item Falling Like-Likes Cow Left 2": "can_use_slingshot"
+    "MQ Jabu-Jabu Wonder Item Falling Like-Likes Cow Left 3": "can_use_slingshot"
+    "MQ Jabu-Jabu Wonder Item Falling Like-Likes Explosion 1": "has_explosives"
+    "MQ Jabu-Jabu Wonder Item Falling Like-Likes Explosion 2": "has_explosives"
+    "MQ Jabu-Jabu Wonder Item Falling Like-Likes Explosion 3": "has_explosives"
 "Jabu-Jabu Basement Side Room":
   dungeon: JJ
   exits:
@@ -83,3 +103,6 @@
     "MQ Jabu-Jabu Pot Before Boss": "true"
     "MQ Jabu-Jabu Grass Before Boss 1": "can_cut_grass"
     "MQ Jabu-Jabu Grass Before Boss 2": "can_cut_grass"
+    "MQ Jabu-Jabu Wonder Item Before Boss Left Cow": "can_use_slingshot"
+    "MQ Jabu-Jabu Wonder Item Before Boss Right Cow 1": "can_use_slingshot"
+    "MQ Jabu-Jabu Wonder Item Before Boss Right Cow 2": "can_use_slingshot"
