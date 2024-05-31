@@ -2066,6 +2066,7 @@ MQ Shadow Temple Heart Shortcut 2,                          heart,          NONE
 MQ Shadow Temple Heart Pre-Boss Upper 1,                    heart,          NONE,                 TEMPLE_SHADOW,                  0x0150b,                    RECOVERY_HEART
 MQ Shadow Temple Heart Pre-Boss Upper 2,                    heart,          NONE,                 TEMPLE_SHADOW,                  0x0150c,                    RECOVERY_HEART
 MQ Shadow Temple Heart Pre-Boss Lower,                      heart,          NONE,                 TEMPLE_SHADOW,                  0x0150d,                    RECOVERY_HEART
+MQ Shadow Temple Wonder Item,                               wonder,         NONE,                 TEMPLE_SHADOW,                  0x00c01,                    ARROWS_30
 MQ Spirit Temple Entrance Initial Chest,                    chest,          NONE,                 TEMPLE_SPIRIT,                  0x1a,                       BOMBCHU_5
 MQ Spirit Temple Lobby Back-Left Chest,                     chest,          NONE,                 TEMPLE_SPIRIT,                  0x1e,                       SMALL_KEY_SPIRIT
 MQ Spirit Temple Lobby Back-Right Chest,                    chest,          NONE,                 TEMPLE_SPIRIT,                  0x1f,                       BOMBCHU_5
