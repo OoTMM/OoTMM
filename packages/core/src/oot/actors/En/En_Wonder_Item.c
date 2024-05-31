@@ -57,6 +57,16 @@ static void EnWonderItem_Alias(Actor_EnWonderItem* this)
             xflag->id += 16;
         }
         break;
+    case SCE_OOT_GERUDO_FORTRESS:
+        if (xflag->setupId != 0)
+        {
+            xflag->setupId = 0;
+            if (xflag->id == 6)
+                xflag->id = 9;
+            else
+                xflag->id = 8;
+        }
+        break;
     }
 }
 

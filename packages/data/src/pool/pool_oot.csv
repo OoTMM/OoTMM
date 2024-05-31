@@ -880,6 +880,8 @@ Gerudo Fortress Archery Reward 1,                           npc,            GERU
 Gerudo Fortress Archery Reward 2,                           npc,            GERUDO_ARCHERY,       GERUDO_FORTRESS,                GERUDO_ARCHERY_2,           BOW
 Gerudo Fortress GS Wall,                                    gs,             NONE,                 GERUDO_FORTRESS,                0xa9,                       GS_TOKEN
 Gerudo Fortress GS Target,                                  gs,             NONE,                 GERUDO_FORTRESS,                0xa8,                       GS_TOKEN
+Gerudo Fortress Wonder Item Sign Archery,                   wonder,         NONE,                 GERUDO_FORTRESS,                0x00007,                    RUPEE_RED
+Gerudo Fortress Wonder Item Sign Entrance,                  wonder,         NONE,                 GERUDO_FORTRESS,                0x00008,                    RUPEE_RED
 Gerudo Fortress Fairy Fountain Fairy 1,                     fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x02400,                    FAIRY
 Gerudo Fortress Fairy Fountain Fairy 2,                     fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x12400,                    FAIRY
 Gerudo Fortress Fairy Fountain Fairy 3,                     fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x22400,                    FAIRY

@@ -2222,6 +2222,8 @@
     "Gerudo Fortress Archery Reward 1": "can_ride_epona && can_use_bow && has(GERUDO_CARD) && can_use_wallet(1) && is_day"
     "Gerudo Fortress Archery Reward 2": "can_ride_epona && can_use_bow && has(GERUDO_CARD) && can_use_wallet(1) && is_day"
     "Gerudo Fortress GS Target": "is_adult && gs_night && (has(GERUDO_CARD) || time_travel_at_will) && (can_collect_distance || climb_anywhere)"
+    "Gerudo Fortress Wonder Item Sign Entrance": "can_use_bow"
+    "Gerudo Fortress Wonder Item Sign Archery": "can_use_bow && has(GERUDO_CARD)"
 "Gerudo Fortress Lower-Right Ledge":
   region: GERUDO_FORTRESS
   exits:
