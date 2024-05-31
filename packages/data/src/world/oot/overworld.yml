@@ -788,9 +788,21 @@
     "Hyrule Castle GS Tree": "gs && can_damage_skull"
     "Hyrule Castle Grass 1": "can_cut_grass"
     "Hyrule Castle Grass 2": "can_cut_grass"
-    # These pots fail to load
+    # Two broken actors
     "Hyrule Castle Pot 1": "true"
     "Hyrule Castle Pot 2": "true"
+    "Hyrule Castle Wonder Item Torch 1": "can_use_slingshot"
+    "Hyrule Castle Wonder Item Torch 2": "can_use_slingshot"
+    "Hyrule Castle Wonder Item Moat 01": "true"
+    "Hyrule Castle Wonder Item Moat 02": "true"
+    "Hyrule Castle Wonder Item Moat 03": "true"
+    "Hyrule Castle Wonder Item Moat 04": "true"
+    "Hyrule Castle Wonder Item Moat 05": "true"
+    "Hyrule Castle Wonder Item Moat 06": "true"
+    "Hyrule Castle Wonder Item Moat 07": "true"
+    "Hyrule Castle Wonder Item Moat 08": "true"
+    "Hyrule Castle Wonder Item Moat 09": "true"
+    "Hyrule Castle Wonder Item Moat 10": "true"
   gossip:
     "Hyrule Castle Gossip After Climb": "true"
     "Hyrule Castle Gossip Before Moat": "true"
