@@ -4,7 +4,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
-## Changed
+### Added
+
+- Add a setting to shuffle Wonder Items (OoT, non-MQ).
+
+### Changed
 
 - The angle of interaction of MM gossip stones is more tolerant.
 
