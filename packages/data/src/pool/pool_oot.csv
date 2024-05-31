@@ -2229,3 +2229,4 @@ MQ Ganon Castle Fairy Fountain Fairy 8,                     fairy,          NONE
 MQ Ganon Castle Heart Water,                                heart,          NONE,                 INSIDE_GANON_CASTLE,            0x0021d,                    RECOVERY_HEART
 MQ Ganon Castle Heart Light 1,                              heart,          NONE,                 INSIDE_GANON_CASTLE,            0x00805,                    RECOVERY_HEART
 MQ Ganon Castle Heart Light 2,                              heart,          NONE,                 INSIDE_GANON_CASTLE,            0x00806,                    RECOVERY_HEART
+MQ Ganon Castle Wonder Item,                                wonder,         NONE,                 INSIDE_GANON_CASTLE,            0x00c0c,                    NUTS_5
