@@ -52,7 +52,7 @@
 #define PLAYER_MODELTYPE_MAX                    0x15
 #define PLAYER_MODELTYPE_RH_FF                  0xff
 
-typedef struct PACKED ALIGNED(4) Actor_Player
+typedef struct Actor_Player
 {
     Actor           base;
     s8              currentTunic; /* current tunic from `PlayerTunic` */
@@ -73,7 +73,12 @@ typedef struct PACKED ALIGNED(4) Actor_Player
     u8              rightHandType;
     u8              sheathType;
     u8              mask;
-    char            unk_150[0x34];
+    Gfx**           rightHandDLists;
+    Gfx**           leftHandDLists;
+    Gfx**           sheathDLists;
+    Gfx**           waistDLists;
+    u8              giObjectLoading;
+    DmaRequest      giObjectDmaRequest;
     OSMesgQueue     objMsgQueue;
     OSMesg          objMsg;
     void*           objBuffer;
@@ -91,31 +96,35 @@ typedef struct PACKED ALIGNED(4) Actor_Player
     char            unk_684[0x1ce];
     u8              drawGiId;
     char            unk_853[0x219];
-
 }
 Actor_Player;
 
 _Static_assert(sizeof(Actor_Player) == 0xa6c, "Actor_Player size is wrong");
 
-ASSERT_OFFSET(Actor_Player, currentTunic,   0x13c);
-ASSERT_OFFSET(Actor_Player, heldItemButton, 0x140);
-ASSERT_OFFSET(Actor_Player, itemAction,     0x141);
-ASSERT_OFFSET(Actor_Player, heldItemId,     0x142);
-ASSERT_OFFSET(Actor_Player, boots,          0x143);
-ASSERT_OFFSET(Actor_Player, heldItemAction, 0x144);
-ASSERT_OFFSET(Actor_Player, mask,           0x14f);
-ASSERT_OFFSET(Actor_Player, unk_150,        0x150);
-ASSERT_OFFSET(Actor_Player, unk_1a4,        0x1a4);
-ASSERT_OFFSET(Actor_Player, gi,             0x424);
-ASSERT_OFFSET(Actor_Player, unk_426,        0x426);
-ASSERT_OFFSET(Actor_Player, unk_674,        0x674);
-ASSERT_OFFSET(Actor_Player, boomerangActor, 0x678);
-ASSERT_OFFSET(Actor_Player, naviActor,      0x67c);
-ASSERT_OFFSET(Actor_Player, naviTextId,     0x680);
-ASSERT_OFFSET(Actor_Player, state3,         0x682);
-ASSERT_OFFSET(Actor_Player, exchangeItemId, 0x683);
-ASSERT_OFFSET(Actor_Player, unk_684,        0x684);
-ASSERT_OFFSET(Actor_Player, drawGiId,       0x852);
-ASSERT_OFFSET(Actor_Player, unk_853,        0x853);
+ASSERT_OFFSET(Actor_Player, currentTunic,       0x13c);
+ASSERT_OFFSET(Actor_Player, heldItemButton,     0x140);
+ASSERT_OFFSET(Actor_Player, itemAction,         0x141);
+ASSERT_OFFSET(Actor_Player, heldItemId,         0x142);
+ASSERT_OFFSET(Actor_Player, boots,              0x143);
+ASSERT_OFFSET(Actor_Player, heldItemAction,     0x144);
+ASSERT_OFFSET(Actor_Player, mask,               0x14f);
+ASSERT_OFFSET(Actor_Player, rightHandDLists,    0x150);
+ASSERT_OFFSET(Actor_Player, leftHandDLists,     0x154);
+ASSERT_OFFSET(Actor_Player, sheathDLists,       0x158);
+ASSERT_OFFSET(Actor_Player, waistDLists,        0x15c);
+ASSERT_OFFSET(Actor_Player, giObjectLoading,    0x160);
+ASSERT_OFFSET(Actor_Player, giObjectDmaRequest, 0x164);
+ASSERT_OFFSET(Actor_Player, unk_1a4,            0x1a4);
+ASSERT_OFFSET(Actor_Player, gi,                 0x424);
+ASSERT_OFFSET(Actor_Player, unk_426,            0x426);
+ASSERT_OFFSET(Actor_Player, unk_674,            0x674);
+ASSERT_OFFSET(Actor_Player, boomerangActor,     0x678);
+ASSERT_OFFSET(Actor_Player, naviActor,          0x67c);
+ASSERT_OFFSET(Actor_Player, naviTextId,         0x680);
+ASSERT_OFFSET(Actor_Player, state3,             0x682);
+ASSERT_OFFSET(Actor_Player, exchangeItemId,     0x683);
+ASSERT_OFFSET(Actor_Player, unk_684,            0x684);
+ASSERT_OFFSET(Actor_Player, drawGiId,           0x852);
+ASSERT_OFFSET(Actor_Player, unk_853,            0x853);
 
 #endif

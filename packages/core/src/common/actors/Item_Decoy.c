@@ -11,6 +11,8 @@
 # define DUMMY_MSG 0x52
 #endif
 
+static u16 sMsgTimer;
+
 static void ItemDecoy_SetHandler(Actor_ItemDecoy* this, GameState_Play* play, Actor_ItemDecoyFunc handler)
 {
     this->handler = handler;
@@ -50,7 +52,7 @@ static int ItemDecoy_CanCollect(Actor_ItemDecoy* this, GameState_Play* play)
     if (gSaveContext.gameMode || (gSaveContext.minigameState == 1))
         return 0;
     link = GET_LINK(play);
-    if (link->state & (PLAYER_ACTOR_STATE_FROZEN | PLAYER_ACTOR_STATE_EPONA | PLAYER_ACTOR_STATE_GET_ITEM | PLAYER_ACTOR_STATE_CUTSCENE_FROZEN))
+    if (link->state & (PLAYER_ACTOR_STATE_FROZEN | PLAYER_ACTOR_STATE_GET_ITEM | PLAYER_ACTOR_STATE_CUTSCENE_FROZEN))
         return 0;
 
     /* Check for textbox */
@@ -60,10 +62,33 @@ static int ItemDecoy_CanCollect(Actor_ItemDecoy* this, GameState_Play* play)
     return 1;
 }
 
+static void ItemDecoy_HandlerMessageTimer(Actor_ItemDecoy* this, GameState_Play* play)
+{
+    int end;
+
+    end = 0;
+    if (Message_IsClosed(&this->base, play))
+        end = 1;
+    else if (sMsgTimer)
+        sMsgTimer--;
+    else
+    {
+        Message_Close(play);
+        end = 1;
+    }
+
+    if (end)
+    {
+        g.decoysCount--;
+        this->handler = ItemDecoy_HandlerTimer;
+    }
+}
+
 static void ItemDecoy_HandlerImportantItemConfirm(Actor_ItemDecoy* this, GameState_Play* play)
 {
     if (Message_IsClosed(&this->base, play))
     {
+        sMsgTimer = 0;
         Player_Unfreeze(play);
         g.decoysCount--;
         this->handler = ItemDecoy_HandlerTimer;
@@ -75,6 +100,7 @@ static void ItemDecoy_HandlerImportantItemConfirm(Actor_ItemDecoy* this, GameSta
 static void ItemDecoy_HandlerImportantItem(Actor_ItemDecoy* this, GameState_Play* play)
 {
     ComboItemOverride o;
+    Actor_Player* link;
 
     if (!ItemDecoy_CanCollect(this, play))
         return;
@@ -88,9 +114,19 @@ static void ItemDecoy_HandlerImportantItem(Actor_ItemDecoy* this, GameState_Play
     comboPlayItemFanfare(this->gi, 1);
     this->base.draw = ItemDecoy_Draw;
     PlayerDisplayTextBox(play, DUMMY_MSG, NULL);
-    Player_Freeze(play);
     comboTextHijackItemEx(play, &o, this->count);
-    this->handler = ItemDecoy_HandlerImportantItemConfirm;
+
+    link = GET_LINK(play);
+    if (link->state & PLAYER_ACTOR_STATE_EPONA)
+    {
+        sMsgTimer = 60;
+        this->handler = ItemDecoy_HandlerMessageTimer;
+    }
+    else
+    {
+        Player_Freeze(play);
+        this->handler = ItemDecoy_HandlerImportantItemConfirm;
+    }
 }
 
 static void ItemDecoy_HandlerInit(Actor_ItemDecoy* this, GameState_Play* play)
