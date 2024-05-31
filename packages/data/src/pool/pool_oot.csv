@@ -1792,6 +1792,29 @@ MQ Jabu-Jabu Rupee Middle,                                  rupee,          NONE
 MQ Jabu-Jabu Rupee Top,                                     rupee,          NONE,                 INSIDE_JABU_JABU,               0x00102,                    RUPEE_GREEN
 MQ Jabu-Jabu Heart 1,                                       heart,          NONE,                 INSIDE_JABU_JABU,               0x00108,                    RECOVERY_HEART
 MQ Jabu-Jabu Heart 2,                                       heart,          NONE,                 INSIDE_JABU_JABU,               0x00109,                    RECOVERY_HEART
+MQ Jabu-Jabu Wonder Item Entrance Left Cow,                 wonder,         NONE,                 INSIDE_JABU_JABU,               0x0000d,                    RECOVERY_HEART
+MQ Jabu-Jabu Wonder Item Entrance Right Cow,                wonder,         NONE,                 INSIDE_JABU_JABU,               0x0000e,                    RECOVERY_HEART
+MQ Jabu-Jabu Wonder Item Elevator Cow,                      wonder,         NONE,                 INSIDE_JABU_JABU,               0x00113,                    RECOVERY_HEART
+MQ Jabu-Jabu Wonder Item Basement Right Cow 1,              wonder,         NONE,                 INSIDE_JABU_JABU,               0x0030d,                    DEKU_SEEDS_5
+MQ Jabu-Jabu Wonder Item Basement Right Cow 2,              wonder,         NONE,                 INSIDE_JABU_JABU,               0x0030e,                    DEKU_SEEDS_5
+MQ Jabu-Jabu Wonder Item Basement Right Cow 3,              wonder,         NONE,                 INSIDE_JABU_JABU,               0x0030f,                    DEKU_SEEDS_5
+MQ Jabu-Jabu Wonder Item Basement Left Cow 1,               wonder,         NONE,                 INSIDE_JABU_JABU,               0x00310,                    DEKU_SEEDS_5
+MQ Jabu-Jabu Wonder Item Basement Left Cow 2,               wonder,         NONE,                 INSIDE_JABU_JABU,               0x00311,                    DEKU_SEEDS_5
+MQ Jabu-Jabu Wonder Item Basement Left Cow 3,               wonder,         NONE,                 INSIDE_JABU_JABU,               0x00312,                    DEKU_SEEDS_5
+MQ Jabu-Jabu Wonder Item Platforms Cow,                     wonder,         NONE,                 INSIDE_JABU_JABU,               0x0040d,                    DEKU_SEEDS_5
+MQ Jabu-Jabu Wonder Item Before Boss Left Cow,              wonder,         NONE,                 INSIDE_JABU_JABU,               0x0050a,                    DEKU_SEEDS_5
+MQ Jabu-Jabu Wonder Item Before Boss Right Cow 1,           wonder,         NONE,                 INSIDE_JABU_JABU,               0x00509,                    RECOVERY_HEART
+MQ Jabu-Jabu Wonder Item Before Boss Right Cow 2,           wonder,         NONE,                 INSIDE_JABU_JABU,               0x0050b,                    FLEXIBLE
+MQ Jabu-Jabu Wonder Item After Big Octo,                    wonder,         NONE,                 INSIDE_JABU_JABU,               0x00607,                    RECOVERY_HEART
+MQ Jabu-Jabu Wonder Item Falling Like-Likes Cow Right 1,    wonder,         NONE,                 INSIDE_JABU_JABU,               0x00b13,                    MAGIC_JAR_SMALL
+MQ Jabu-Jabu Wonder Item Falling Like-Likes Cow Right 2,    wonder,         NONE,                 INSIDE_JABU_JABU,               0x00b14,                    MAGIC_JAR_SMALL
+MQ Jabu-Jabu Wonder Item Falling Like-Likes Cow Right 3,    wonder,         NONE,                 INSIDE_JABU_JABU,               0x00b15,                    MAGIC_JAR_SMALL
+MQ Jabu-Jabu Wonder Item Falling Like-Likes Cow Left 1,     wonder,         NONE,                 INSIDE_JABU_JABU,               0x00b16,                    DEKU_SEEDS_5
+MQ Jabu-Jabu Wonder Item Falling Like-Likes Cow Left 2,     wonder,         NONE,                 INSIDE_JABU_JABU,               0x00b17,                    DEKU_SEEDS_5
+MQ Jabu-Jabu Wonder Item Falling Like-Likes Cow Left 3,     wonder,         NONE,                 INSIDE_JABU_JABU,               0x00b18,                    DEKU_SEEDS_5
+MQ Jabu-Jabu Wonder Item Falling Like-Likes Explosion 1,    wonder,         NONE,                 INSIDE_JABU_JABU,               0x00b1b,                    FLEXIBLE
+MQ Jabu-Jabu Wonder Item Falling Like-Likes Explosion 2,    wonder,         NONE,                 INSIDE_JABU_JABU,               0x00b1c,                    FLEXIBLE
+MQ Jabu-Jabu Wonder Item Falling Like-Likes Explosion 3,    wonder,         NONE,                 INSIDE_JABU_JABU,               0x00b1d,                    FLEXIBLE
 MQ Bottom of the Well Map Chest,                            chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x03,                       MAP_BOTW
 MQ Bottom of the Well Compass Chest,                        chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x02,                       COMPASS_BOTW
 MQ Bottom of the Well Lens Chest,                           chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x01,                       LENS
