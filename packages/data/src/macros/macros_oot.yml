@@ -106,6 +106,7 @@
 "can_use_sword_master": "age_sword_adult && has_sword_master"
 "can_use_sword_goron": "age_sword_adult && has_sword_goron"
 "can_use_sword": "can_use_sword_kokiri || can_use_sword_master || can_use_sword_goron"
+"can_use_sword_or_sticks": "can_use_sword || can_use_sticks"
 
 # Shields
 "has_shield_hylian": "cond(setting(sharedShields), renewable(SHARED_SHIELD_HYLIAN), renewable(SHIELD_HYLIAN))"
