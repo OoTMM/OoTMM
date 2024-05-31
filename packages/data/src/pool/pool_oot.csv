@@ -405,6 +405,37 @@ Zora River Rupee 1,                                         rupee,          NONE
 Zora River Rupee 2,                                         rupee,          NONE,                 ZORA_RIVER,                     0x08102,                    RUPEE_RED
 Zora River Rupee 3,                                         rupee,          NONE,                 ZORA_RIVER,                     0x08103,                    RUPEE_RED
 Zora River Rupee 4,                                         rupee,          NONE,                 ZORA_RIVER,                     0x08104,                    RUPEE_RED
+Zora River Wonder Item Front 1,                             wonder,         NONE,                 ZORA_RIVER,                     0x00010,                    RUPEE_GREEN
+Zora River Wonder Item Front 2,                             wonder,         NONE,                 ZORA_RIVER,                     0x00011,                    RUPEE_GREEN
+Zora River Wonder Item Front 3,                             wonder,         NONE,                 ZORA_RIVER,                     0x00012,                    RUPEE_GREEN
+Zora River Wonder Item Front 4,                             wonder,         NONE,                 ZORA_RIVER,                     0x00013,                    RUPEE_GREEN
+Zora River Wonder Item Back 01,                             wonder,         NONE,                 ZORA_RIVER,                     0x0000f,                    RUPEE_GREEN
+Zora River Wonder Item Back 02,                             wonder,         NONE,                 ZORA_RIVER,                     0x00014,                    RUPEE_GREEN
+Zora River Wonder Item Back 03,                             wonder,         NONE,                 ZORA_RIVER,                     0x00015,                    RUPEE_GREEN
+Zora River Wonder Item Back 04,                             wonder,         NONE,                 ZORA_RIVER,                     0x00016,                    RUPEE_GREEN
+Zora River Wonder Item Back 05,                             wonder,         NONE,                 ZORA_RIVER,                     0x00017,                    RUPEE_GREEN
+Zora River Wonder Item Back 06,                             wonder,         NONE,                 ZORA_RIVER,                     0x00018,                    RUPEE_GREEN
+Zora River Wonder Item Back 07,                             wonder,         NONE,                 ZORA_RIVER,                     0x00019,                    RUPEE_GREEN
+Zora River Wonder Item Back 08,                             wonder,         NONE,                 ZORA_RIVER,                     0x0001a,                    RUPEE_GREEN
+Zora River Wonder Item Back 09,                             wonder,         NONE,                 ZORA_RIVER,                     0x0001b,                    RUPEE_GREEN
+Zora River Wonder Item Back 10,                             wonder,         NONE,                 ZORA_RIVER,                     0x0001c,                    RUPEE_GREEN
+Zora River Wonder Item Back 11,                             wonder,         NONE,                 ZORA_RIVER,                     0x0001d,                    RUPEE_GREEN
+Zora River Wonder Item Back 12,                             wonder,         NONE,                 ZORA_RIVER,                     0x0001e,                    RUPEE_GREEN
+Zora River Wonder Item Back 13,                             wonder,         NONE,                 ZORA_RIVER,                     0x0001f,                    RUPEE_GREEN
+Zora River Wonder Item Back 14,                             wonder,         NONE,                 ZORA_RIVER,                     0x00020,                    RUPEE_GREEN
+Zora River Wonder Item Back 15,                             wonder,         NONE,                 ZORA_RIVER,                     0x00021,                    RUPEE_GREEN
+Zora River Wonder Item Back 16,                             wonder,         NONE,                 ZORA_RIVER,                     0x00022,                    RUPEE_GREEN
+Zora River Wonder Item Back 17,                             wonder,         NONE,                 ZORA_RIVER,                     0x00023,                    RUPEE_GREEN
+Zora River Wonder Item Back 18,                             wonder,         NONE,                 ZORA_RIVER,                     0x00024,                    RUPEE_GREEN
+Zora River Wonder Item Back 19,                             wonder,         NONE,                 ZORA_RIVER,                     0x00025,                    RUPEE_GREEN
+Zora River Wonder Item Back 20,                             wonder,         NONE,                 ZORA_RIVER,                     0x00026,                    RUPEE_GREEN
+Zora River Wonder Item Back 21,                             wonder,         NONE,                 ZORA_RIVER,                     0x00027,                    RUPEE_BLUE
+Zora River Wonder Item Back 22,                             wonder,         NONE,                 ZORA_RIVER,                     0x00028,                    RUPEE_BLUE
+Zora River Wonder Item Back 23,                             wonder,         NONE,                 ZORA_RIVER,                     0x00029,                    RUPEE_RED
+Zora River Wonder Item Back 24,                             wonder,         NONE,                 ZORA_RIVER,                     0x00105,                    RUPEE_GREEN
+Zora River Wonder Item Back 25,                             wonder,         NONE,                 ZORA_RIVER,                     0x00106,                    RUPEE_GREEN
+Zora River Wonder Item Back 26,                             wonder,         NONE,                 ZORA_RIVER,                     0x00107,                    RUPEE_GREEN
+Zora River Wonder Item Back 27,                             wonder,         NONE,                 ZORA_RIVER,                     0x00108,                    RUPEE_GREEN
 Zora Domain Waterfall Chest,                                chest,          NONE,                 ZORA_DOMAIN,                    0x00,                       HEART_PIECE
 Zora Domain Diving Game,                                    npc,            NONE,                 ZORA_DOMAIN,                    ZORA_DIVING_GAME,           SCALE
 Zora Domain Diving Game Green Rupee,                        collectible,    NONE,                 ZORA_DOMAIN,                    0x1,                        RUPEE_GREEN
