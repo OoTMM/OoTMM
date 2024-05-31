@@ -725,6 +725,8 @@
     "Lon Lon Ranch GS House": "is_child && gs_night && (can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_sword || can_use_sticks || can_use_din)))"
     "Lon Lon Ranch GS Rain Shed": "is_child && gs_night"
     "Lon Lon Ranch GS Back Wall": "is_child && gs_night && (can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_din)))"
+    "Lon Lon Ranch Wonder Item 1": "is_adult && can_ride_epona"
+    "Lon Lon Ranch Wonder Item 2": "is_adult && can_ride_epona"
 "Lon Lon Ranch Pots":
   region: LON_LON_RANCH
   age_change: false
