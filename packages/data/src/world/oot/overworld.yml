@@ -1232,6 +1232,7 @@
     "Kakariko": "true"
   locations:
     "Kakariko Cow": "can_play_epona"
+    "Kakariko Impa House Wonder Item": "true"
 "Impa House Back":
   region: ENTRANCE
   exits:

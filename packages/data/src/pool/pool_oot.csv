@@ -161,6 +161,7 @@ Kakariko Anju Cojiro,                                       npc,            NONE
 Kakariko Song Shadow,                                       npc,            RAVAGED_VILLAGE,      KAKARIKO_VILLAGE,               SHEIK_SHADOW,               SONG_TP_SHADOW
 Kakariko Man on Roof,                                       npc,            NONE,                 KAKARIKO_VILLAGE,               KAKARIKO_ROOF_MAN,          HEART_PIECE
 Kakariko Impa House HP,                                     collectible,    NONE,                 IMPA_HOUSE,                     0x01,                       HEART_PIECE
+Kakariko Impa House Wonder Item,                            wonder,         NONE,                 IMPA_HOUSE,                     0x00006,                    RUPEE_RED
 Kakariko Grotto Front,                                      chest,          NONE,                 GROTTOS,                        0x0a,                       RUPEE_HUGE
 Kakariko Grotto Back,                                       chest,          NONE,                 GROTTOS,                        0x08,                       RUPEE_RED
 Kakariko Grotto Back Grass 1,                               grass,          NONE,                 GROTTOS,                        0x02802,                    RANDOM
