@@ -497,6 +497,14 @@
   events:
     RICHARD: "is_night && is_child"
     RUPEES: "is_child"
+  locations:
+    "Market Wonder Item Day 1": "is_child && is_day"
+    "Market Wonder Item Day 2": "is_child && is_day"
+    "Market Wonder Item Day 3": "is_child && is_day"
+    "Market Wonder Item Day 4": "is_child && is_day"
+    "Market Wonder Item Day 5": "is_child && is_day"
+    "Market Wonder Item Night 1": "is_child && is_night"
+    "Market Wonder Item Night 2": "is_child && is_night"
 "Market Grass":
   region: MARKET
   age_change: false

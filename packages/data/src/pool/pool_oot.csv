@@ -767,6 +767,13 @@ Market Grass 5,                                             grass,          NONE
 Market Grass 6,                                             grass,          NONE,                 MARKET_CHILD_DAY,               0x0001c,                    RANDOM
 Market Grass 7,                                             grass,          NONE,                 MARKET_CHILD_DAY,               0x0001d,                    RANDOM
 Market Grass 8,                                             grass,          NONE,                 MARKET_CHILD_DAY,               0x0001e,                    RANDOM
+Market Wonder Item Day 1,                                   wonder,         NONE,                 MARKET_CHILD_DAY,               0x0000f,                    RUPEE_GREEN
+Market Wonder Item Day 2,                                   wonder,         NONE,                 MARKET_CHILD_DAY,               0x00010,                    RUPEE_GREEN
+Market Wonder Item Day 3,                                   wonder,         NONE,                 MARKET_CHILD_DAY,               0x00011,                    RUPEE_GREEN
+Market Wonder Item Day 4,                                   wonder,         NONE,                 MARKET_CHILD_DAY,               0x00012,                    RUPEE_GREEN
+Market Wonder Item Day 5,                                   wonder,         NONE,                 MARKET_CHILD_DAY,               0x00013,                    RUPEE_GREEN
+Market Wonder Item Night 1,                                 wonder,         NONE,                 MARKET_CHILD_NIGHT,             0x00005,                    RUPEE_BLUE
+Market Wonder Item Night 2,                                 wonder,         NONE,                 MARKET_CHILD_NIGHT,             0x00006,                    RUPEE_BLUE
 Bombchu Bowling Reward 1,                                   npc,            NONE,                 BOMBCHU_BOWLING_ALLEY,          BOMBCHU_BOWLING_1,          BOMB_BAG
 Bombchu Bowling Reward 2,                                   npc,            NONE,                 BOMBCHU_BOWLING_ALLEY,          BOMBCHU_BOWLING_2,          HEART_PIECE
 Treasure Chest Game Buy Key,                                npc,            NONE,                 TREASURE_SHOP,                  CHEST_GAME_KEY,             SMALL_KEY_TCG
