@@ -214,7 +214,7 @@ Actor_EnItem00* EnItem00_DropCustom(GameState_Play* play, const Vec3f* pos, cons
     }
 
     /* Spawn the item */
-    item = (Actor_EnItem00*)SpawnCollectible(play, pos, 0x0000);
+    item = Item_DropCollectible(play, pos, 0x0000);
 
     if (!item)
         return NULL;

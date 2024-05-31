@@ -259,9 +259,9 @@ osSetTimer = 0x80005a70;
 
 ParseSceneRoomHeaders_SoundSettings = 0x80082478;
 
-SpawnCollectible = 0x80013678;
 EnItem00_Init = 0x80011b4c;
 Item_DropCollectible = 0x80013678;
+Item_DropCollectibleRandom = 0x80013a84;
 EnItem00_DrawRupee = 0x80013150;
 EnItem00_Update = 0x80012938;
 EnItem00_CollectedHandler = 0x800127e0;

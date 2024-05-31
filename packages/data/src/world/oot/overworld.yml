@@ -101,11 +101,6 @@
     "Kokiri Forest GS Soil": "gs_soil && can_damage_skull"
     "Kokiri Forest GS Night Child": "is_child && gs_night && can_damage_skull"
     "Kokiri Forest GS Night Adult": "is_adult && (can_collect_distance || climb_anywhere) && gs_night"
-    # TODO: Add this back when we have wonder items
-    #"Kokiri Forest Invisible Rupee 1": "is_child"
-    #"Kokiri Forest Invisible Rupee 2": "is_child"
-    #"Kokiri Forest Invisible Rupee 3": "is_child"
-    #"Kokiri Forest Invisible Rupee 4": "is_child"
     "Kokiri Forest Rupee Child 1": "is_child"
     "Kokiri Forest Rupee Child 2": "is_child"
     "Kokiri Forest Rupee Crawl 1": "is_child"
@@ -113,6 +108,18 @@
     "Kokiri Forest Heart 1": "is_child"
     "Kokiri Forest Heart 2": "is_child"
     "Kokiri Forest Heart 3": "is_child"
+    "Kokiri Forest Wonder Item Invisible Rupee 1": "is_child"
+    "Kokiri Forest Wonder Item Invisible Rupee 2": "is_child"
+    "Kokiri Forest Wonder Item Invisible Rupee 3": "is_child"
+    "Kokiri Forest Wonder Item Invisible Rupee 4": "is_child"
+    "Kokiri Forest Wonder Item Sign": "is_child && can_use_sword"
+    "Kokiri Forest Wonder Item Midair 1": "is_child"
+    "Kokiri Forest Wonder Item Midair 2": "is_child"
+    "Kokiri Forest Wonder Item Midair 3": "is_child"
+    "Kokiri Forest Wonder Item Crawl 1": "is_child"
+    "Kokiri Forest Wonder Item Crawl 2": "is_child"
+    "Kokiri Forest Wonder Item Platforms 1": "is_child"
+    "Kokiri Forest Wonder Item Platforms 2": "is_child"
   gossip:
     "Kokiri Gossip Near Lost Woods Open": "true"
 "Kokiri Forest Grass":
@@ -197,6 +204,7 @@
     "Kokiri Shop Item 6": "shop_price(0x05)"
     "Kokiri Shop Item 7": "shop_price(0x06)"
     "Kokiri Shop Item 8": "shop_price(0x07)"
+    "Kokiri Shop Wonder Item": "true"
 "Mido's House":
   region: ENTRANCE
   exits:
@@ -288,6 +296,9 @@
     "Hyrule Field Ocarina of Time": "is_child && has_spiritual_stones"
     "Hyrule Field Song of Time": "is_child && has_spiritual_stones"
     "Hyrule Field River Big Fairy": "can_play_storms"
+    "Hyrule Field Wonder Item 1": "is_child"
+    "Hyrule Field Wonder Item 2": "is_child"
+    "Hyrule Field Wonder Item 3": "is_child"
 "Hyrule Field Grass":
   region: HYRULE_FIELD
   age_change: false
@@ -489,6 +500,14 @@
   events:
     RICHARD: "is_night && is_child"
     RUPEES: "is_child"
+  locations:
+    "Market Wonder Item Day 1": "is_child && is_day"
+    "Market Wonder Item Day 2": "is_child && is_day"
+    "Market Wonder Item Day 3": "is_child && is_day"
+    "Market Wonder Item Day 4": "is_child && is_day"
+    "Market Wonder Item Day 5": "is_child && is_day"
+    "Market Wonder Item Night 1": "is_child && is_night"
+    "Market Wonder Item Night 2": "is_child && is_night"
 "Market Grass":
   region: MARKET
   age_change: false
@@ -706,6 +725,8 @@
     "Lon Lon Ranch GS House": "is_child && gs_night && (can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_sword || can_use_sticks || can_use_din)))"
     "Lon Lon Ranch GS Rain Shed": "is_child && gs_night"
     "Lon Lon Ranch GS Back Wall": "is_child && gs_night && (can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_din)))"
+    "Lon Lon Ranch Wonder Item 1": "is_adult && can_ride_epona"
+    "Lon Lon Ranch Wonder Item 2": "is_adult && can_ride_epona"
 "Lon Lon Ranch Pots":
   region: LON_LON_RANCH
   age_change: false
@@ -772,9 +793,21 @@
     "Hyrule Castle GS Tree": "gs && can_damage_skull"
     "Hyrule Castle Grass 1": "can_cut_grass"
     "Hyrule Castle Grass 2": "can_cut_grass"
-    # These pots fail to load
+    # Two broken actors
     "Hyrule Castle Pot 1": "true"
     "Hyrule Castle Pot 2": "true"
+    "Hyrule Castle Wonder Item Torch 1": "can_use_slingshot"
+    "Hyrule Castle Wonder Item Torch 2": "can_use_slingshot"
+    "Hyrule Castle Wonder Item Moat 01": "true"
+    "Hyrule Castle Wonder Item Moat 02": "true"
+    "Hyrule Castle Wonder Item Moat 03": "true"
+    "Hyrule Castle Wonder Item Moat 04": "true"
+    "Hyrule Castle Wonder Item Moat 05": "true"
+    "Hyrule Castle Wonder Item Moat 06": "true"
+    "Hyrule Castle Wonder Item Moat 07": "true"
+    "Hyrule Castle Wonder Item Moat 08": "true"
+    "Hyrule Castle Wonder Item Moat 09": "true"
+    "Hyrule Castle Wonder Item Moat 10": "true"
   gossip:
     "Hyrule Castle Gossip After Climb": "true"
     "Hyrule Castle Gossip Before Moat": "true"
@@ -912,6 +945,9 @@
     "Lost Woods Grass 2": "can_cut_grass"
     "Lost Woods Grass 3": "can_cut_grass"
     "Lost Woods Pool Big Fairy": "can_play_storms"
+    "Lost Woods Wonder Item 1": "is_child"
+    "Lost Woods Wonder Item 2": "is_child"
+    "Lost Woods Wonder Item 3": "is_child"
   gossip:
     "Lost Woods Gossip Under Bridge": "true"
 "Lost Woods Rupee Arrow":
@@ -1014,6 +1050,8 @@
     "Wolfos Grotto": "hidden_grotto_bomb"
   events:
     RUPEES: "true"
+  locations:
+    "Sacred Meadow Wonder Item Entrance": "true"
 "Wolfos Grotto":
   region: ENTRANCE
   age_change: false
@@ -1032,6 +1070,11 @@
     "Saria's Song": "met_zelda && is_child && soul_npc(SOUL_NPC_SARIA)"
     "Sacred Meadow Sheik Song": "is_adult && soul_npc(SOUL_NPC_SHEIK)"
     "Sacred Meadow GS Night Adult": "is_adult && gs_night && (can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_din)))"
+    "Sacred Meadow Wonder Item Maze 1": "true"
+    "Sacred Meadow Wonder Item Maze 2": "true"
+    "Sacred Meadow Wonder Item Maze 3": "true"
+    "Sacred Meadow Wonder Item Maze 4": "true"
+    "Sacred Meadow Wonder Item Maze 5": "true"
   gossip:
     "Sacred Meadow Gossip Near Forest Temple": "true"
     "Sacred Meadow Gossip Atop Maze Woods Side": "true"
@@ -1113,6 +1156,7 @@
     "Kakariko Grass 6": "can_cut_grass"
     "Kakariko Grass 7": "can_cut_grass"
     "Kakariko Grass 8": "can_cut_grass"
+    "Kakariko Wonder Item": "is_child"
 "Kakariko Rooftop":
   region: KAKARIKO
   exits:
@@ -1189,6 +1233,7 @@
     "Kakariko": "true"
   locations:
     "Kakariko Cow": "can_play_epona"
+    "Kakariko Impa House Wonder Item": "true"
 "Impa House Back":
   region: ENTRANCE
   exits:
@@ -1355,6 +1400,21 @@
     "Graveyard Dampe Tomb Rupee 6": "soul_dampe"
     "Graveyard Dampe Tomb Rupee 7": "soul_dampe"
     "Graveyard Dampe Tomb Rupee 8": "soul_dampe"
+    "Graveyard Dampe Tomb Wonder Item 01": "soul_dampe"
+    "Graveyard Dampe Tomb Wonder Item 02": "soul_dampe"
+    "Graveyard Dampe Tomb Wonder Item 03": "soul_dampe"
+    "Graveyard Dampe Tomb Wonder Item 04": "soul_dampe"
+    "Graveyard Dampe Tomb Wonder Item 05": "soul_dampe"
+    "Graveyard Dampe Tomb Wonder Item 06": "soul_dampe"
+    "Graveyard Dampe Tomb Wonder Item 07": "soul_dampe"
+    "Graveyard Dampe Tomb Wonder Item 08": "soul_dampe"
+    "Graveyard Dampe Tomb Wonder Item 09": "soul_dampe"
+    "Graveyard Dampe Tomb Wonder Item 10": "soul_dampe"
+    "Graveyard Dampe Tomb Wonder Item 11": "soul_dampe"
+    "Graveyard Dampe Tomb Wonder Item 12": "soul_dampe"
+    "Graveyard Dampe Tomb Wonder Item 13": "soul_dampe"
+    "Graveyard Dampe Tomb Wonder Item 14": "soul_dampe"
+    "Graveyard Dampe Tomb Wonder Item 15": "soul_dampe"
 "Dampe Grave Entrance":
   region: NONE
   exits:
@@ -1555,6 +1615,10 @@
     "Zora River Grass Pack Bush 10": "can_cut_grass"
     "Zora River Grass Pack Bush 11": "can_cut_grass"
     "Zora River Grass Pack Bush 12": "can_cut_grass"
+    "Zora River Wonder Item Front 1": "is_child"
+    "Zora River Wonder Item Front 2": "is_child"
+    "Zora River Wonder Item Front 3": "is_child"
+    "Zora River Wonder Item Front 4": "is_child"
 "Zora River":
   region: ZORA_RIVER
   time: flow
@@ -1585,6 +1649,33 @@
     "Zora River Rupee 2": "is_adult"
     "Zora River Rupee 3": "is_adult"
     "Zora River Rupee 4": "is_adult"
+    "Zora River Wonder Item Back 01": "is_child"
+    "Zora River Wonder Item Back 02": "is_child"
+    "Zora River Wonder Item Back 03": "is_child"
+    "Zora River Wonder Item Back 04": "is_child"
+    "Zora River Wonder Item Back 05": "is_child"
+    "Zora River Wonder Item Back 06": "is_child"
+    "Zora River Wonder Item Back 07": "is_child"
+    "Zora River Wonder Item Back 08": "is_child"
+    "Zora River Wonder Item Back 09": "is_child"
+    "Zora River Wonder Item Back 10": "is_child"
+    "Zora River Wonder Item Back 11": "is_child"
+    "Zora River Wonder Item Back 12": "is_child"
+    "Zora River Wonder Item Back 13": "is_child"
+    "Zora River Wonder Item Back 14": "is_child"
+    "Zora River Wonder Item Back 15": "is_child"
+    "Zora River Wonder Item Back 16": "is_child"
+    "Zora River Wonder Item Back 17": "is_child"
+    "Zora River Wonder Item Back 18": "is_child"
+    "Zora River Wonder Item Back 19": "is_child"
+    "Zora River Wonder Item Back 20": "is_child"
+    "Zora River Wonder Item Back 21": "is_child"
+    "Zora River Wonder Item Back 22": "is_child"
+    "Zora River Wonder Item Back 23": "is_child"
+    "Zora River Wonder Item Back 24": "is_child"
+    "Zora River Wonder Item Back 25": "is_child"
+    "Zora River Wonder Item Back 26": "is_child"
+    "Zora River Wonder Item Back 27": "is_child"
   gossip:
     "Zora River Gossip High Pillar": "true"
     "Zora River Gossip Near Domain": "true"
@@ -2055,6 +2146,8 @@
     "Gerudo Valley GS Soil": "gs_soil && can_damage_skull"
     "Gerudo Valley GS Wall": "is_child && gs_night && (can_collect_distance || (climb_anywhere && (can_use_sword_master || (age_sword_adult && has(SWORD_BIGGORON)) || has_explosives || can_use_din || can_use_sticks || can_use_slingshot)))"
     "Gerudo Valley Cow": "is_child && can_play_epona"
+    "Gerudo Valley Wonder Item Lower": "is_adult"
+    "Gerudo Valley Wonder Item Upper": "is_adult"
   gossip:
     "Gerudo Valley Gossip": "true"
 "Gerudo Valley After Bridge":
@@ -2133,6 +2226,8 @@
     "Gerudo Fortress Archery Reward 1": "can_ride_epona && can_use_bow && has(GERUDO_CARD) && can_use_wallet(1) && is_day"
     "Gerudo Fortress Archery Reward 2": "can_ride_epona && can_use_bow && has(GERUDO_CARD) && can_use_wallet(1) && is_day"
     "Gerudo Fortress GS Target": "is_adult && gs_night && (has(GERUDO_CARD) || time_travel_at_will) && (can_collect_distance || climb_anywhere)"
+    "Gerudo Fortress Wonder Item Sign Entrance": "can_use_bow"
+    "Gerudo Fortress Wonder Item Sign Archery": "can_use_bow && has(GERUDO_CARD)"
 "Gerudo Fortress Lower-Right Ledge":
   region: GERUDO_FORTRESS
   exits:
@@ -2254,6 +2349,11 @@
     "Desert Colossus GS Soil": "gs_soil && can_damage_skull"
     "Desert Colossus GS Tree": "is_adult && gs_night && (can_collect_distance || (climb_anywhere && (has_explosives || has_ranged_weapon || can_use_din)))"
     "Desert Colossus GS Plateau": "is_adult && gs_night && ((can_collect_distance && trick(OOT_COLOSSUS_GS_NO_BEAN)) || can_ride_bean(BEAN_DESERT_COLOSSUS))"
+    "Desert Colossus Wonder Item Oasis 1": "can_use_bow || can_use_slingshot"
+    "Desert Colossus Wonder Item Oasis 2": "can_use_bow || can_use_slingshot"
+    "Desert Colossus Wonder Item Oasis Child": "is_child && can_use_slingshot"
+    "Desert Colossus Wonder Item Fountain 1": "can_use_bow || can_use_slingshot"
+    "Desert Colossus Wonder Item Fountain 2": "can_use_bow || can_use_slingshot"
   gossip:
     "Desert Colossus Gossip": "true"
 "Desert Colossus Oasis":
