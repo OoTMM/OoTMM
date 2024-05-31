@@ -1682,6 +1682,10 @@ MQ Deku Tree Heart Before Boss 1,                           heart,          NONE
 MQ Deku Tree Heart Before Boss 2,                           heart,          NONE,                 INSIDE_DEKU_TREE,               0x00907,                    RECOVERY_HEART
 MQ Deku Tree Heart Before Boss 3,                           heart,          NONE,                 INSIDE_DEKU_TREE,               0x00908,                    RECOVERY_HEART
 MQ Deku Tree Heart Slingshot Room,                          heart,          NONE,                 INSIDE_DEKU_TREE,               0x00a05,                    RECOVERY_HEART
+MQ Deku Tree Wonder Item 1,                                 wonder,         NONE,                 INSIDE_DEKU_TREE,               0x00709,                    RECOVERY_HEART
+MQ Deku Tree Wonder Item 2,                                 wonder,         NONE,                 INSIDE_DEKU_TREE,               0x0070a,                    RECOVERY_HEART
+MQ Deku Tree Wonder Item 3,                                 wonder,         NONE,                 INSIDE_DEKU_TREE,               0x0070b,                    RECOVERY_HEART
+MQ Deku Tree Wonder Item 4,                                 wonder,         NONE,                 INSIDE_DEKU_TREE,               0x0070c,                    RECOVERY_HEART
 MQ Dodongo Cavern Map Chest,                                chest,          NONE,                 DODONGO_CAVERN,                 0x00,                       MAP_DC
 MQ Dodongo Cavern Compass Chest,                            chest,          NONE,                 DODONGO_CAVERN,                 0x05,                       COMPASS_DC
 MQ Dodongo Cavern Larvae Room Chest,                        chest,          NONE,                 DODONGO_CAVERN,                 0x02,                       RUPEE_BLUE
