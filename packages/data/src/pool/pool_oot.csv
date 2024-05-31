@@ -2173,6 +2173,8 @@ MQ Gerudo Training Grounds Pot 1,                           pot,            NONE
 MQ Gerudo Training Grounds Pot 2,                           pot,            NONE,                 GERUDO_TRAINING_GROUND,         0x0006,                     MAGIC_JAR_SMALL
 MQ Gerudo Training Grounds Pot 3,                           pot,            NONE,                 GERUDO_TRAINING_GROUND,         0x0007,                     MAGIC_JAR_LARGE
 MQ Gerudo Training Grounds Pot 4,                           pot,            NONE,                 GERUDO_TRAINING_GROUND,         0x0008,                     RECOVERY_HEART
+MQ Gerudo Training Grounds Wonder Item Eye Statue,          wonder,         NONE,                 GERUDO_TRAINING_GROUND,         0x00404,                    MAGIC_JAR_LARGE
+MQ Gerudo Training Grounds Wonder Item Dodongo Room Wall,   wonder,         NONE,                 GERUDO_TRAINING_GROUND,         0x00709,                    FLEXIBLE
 MQ Ganon Castle Light Trial Chest,                          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x04,                       RECOVERY_HEART
 MQ Ganon Castle Forest Trial First Chest,                   chest,          NONE,                 INSIDE_GANON_CASTLE,            0x02,                       ARROWS_10
 MQ Ganon Castle Forest Trial Second Chest,                  chest,          NONE,                 INSIDE_GANON_CASTLE,            0x03,                       BOMBS_5
