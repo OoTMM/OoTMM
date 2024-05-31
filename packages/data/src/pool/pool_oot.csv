@@ -1323,6 +1323,18 @@ Gerudo Fortress Pot Jail 2 5,                               pot,            NONE
 Gerudo Fortress Pot Jail 2 6,                               pot,            NONE,                 THIEVES_HIDEOUT,                0x050c,                     RECOVERY_HEART
 Gerudo Fortress Pot Jail 2 7,                               pot,            NONE,                 THIEVES_HIDEOUT,                0x050d,                     RECOVERY_HEART
 Gerudo Fortress Kitchen Big Fairy,                          fairy_spot,     NONE,                 THIEVES_HIDEOUT,                0x00309,                    FAIRY_BIG
+Gerudo Fortress Wonder Item Jail 1 1,                       wonder,         NONE,                 THIEVES_HIDEOUT,                0x00202,                    RANDOM
+Gerudo Fortress Wonder Item Jail 1 2,                       wonder,         NONE,                 THIEVES_HIDEOUT,                0x00203,                    RANDOM
+Gerudo Fortress Wonder Item Jail 2 1,                       wonder,         NONE,                 THIEVES_HIDEOUT,                0x00502,                    RANDOM
+Gerudo Fortress Wonder Item Jail 2 2,                       wonder,         NONE,                 THIEVES_HIDEOUT,                0x00503,                    RANDOM
+Gerudo Fortress Wonder Item Jail 3 1,                       wonder,         NONE,                 THIEVES_HIDEOUT,                0x00103,                    RANDOM
+Gerudo Fortress Wonder Item Jail 3 2,                       wonder,         NONE,                 THIEVES_HIDEOUT,                0x00104,                    RANDOM
+Gerudo Fortress Wonder Item Jail 4 1,                       wonder,         NONE,                 THIEVES_HIDEOUT,                0x00402,                    RANDOM
+Gerudo Fortress Wonder Item Jail 4 2,                       wonder,         NONE,                 THIEVES_HIDEOUT,                0x00403,                    RANDOM
+Gerudo Fortress Wonder Item Break Room Bottom,              wonder,         NONE,                 THIEVES_HIDEOUT,                0x00002,                    RANDOM
+Gerudo Fortress Wonder Item Break Room Top,                 wonder,         NONE,                 THIEVES_HIDEOUT,                0x00003,                    RANDOM
+Gerudo Fortress Wonder Item Kitchen Skull,                  wonder,         NONE,                 THIEVES_HIDEOUT,                0x00303,                    RANDOM
+Gerudo Fortress Wonder Item Kitchen Soup,                   wonder,         NONE,                 THIEVES_HIDEOUT,                0x00304,                    RUPEE_RED
 Spirit Temple Child First Chest,                            chest,          NONE,                 TEMPLE_SPIRIT,                  0x08,                       SHIELD_DEKU
 Spirit Temple Child Second Chest,                           chest,          NONE,                 TEMPLE_SPIRIT,                  0x00,                       SMALL_KEY_SPIRIT
 Spirit Temple Child Climb 1,                                chest,          NONE,                 TEMPLE_SPIRIT,                  0x0c,                       SHIELD_DEKU
