@@ -2136,6 +2136,8 @@ MQ Spirit Temple Flying Pot Statue Room Stairs,             pot,            NONE
 MQ Spirit Temple Dinolfos Room Big Fairy,                   fairy_spot,     NONE,                 TEMPLE_SPIRIT,                  0x01202,                    FAIRY_BIG
 MQ Spirit Temple Heart 1,                                   heart,          NONE,                 TEMPLE_SPIRIT,                  0x0010d,                    RECOVERY_HEART
 MQ Spirit Temple Heart 2,                                   heart,          NONE,                 TEMPLE_SPIRIT,                  0x0010e,                    RECOVERY_HEART
+MQ Spirit Temple Wonder Item Chest Hammer,                  wonder,         NONE,                 TEMPLE_SPIRIT,                  0x01208,                    RECOVERY_HEART
+MQ Spirit Temple Wonder Item Chest Slash,                   wonder,         NONE,                 TEMPLE_SPIRIT,                  0x01209,                    RECOVERY_HEART
 MQ Gerudo Training Grounds Entryway Left Chest,             chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x13,                       ARROWS_10
 MQ Gerudo Training Grounds Entryway Right Chest,            chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x07,                       BOMBCHU_10
 MQ Gerudo Training Grounds Maze First Chest,                chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x0b,                       RUPEE_PURPLE
