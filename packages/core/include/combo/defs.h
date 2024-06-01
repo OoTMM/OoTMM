@@ -23,6 +23,8 @@
 #define COMBO_CTX_ADDR_MM  0x80098280
 
 #ifdef GAME_OOT
+# define HEAP_BASE      0x80700000
+# define HEAP_SIZE      0x100000
 # define PAYLOAD_RAM    0x80400000
 # define PAYLOAD_SIZE   0x80000
 # define LOADER_ADDR    0x80006600
@@ -32,8 +34,10 @@
 #endif
 
 #ifdef GAME_MM
-# define PAYLOAD_RAM    0x80740000
-# define PAYLOAD_SIZE   0x40000
+# define PAYLOAD_SIZE   0x50000
+# define PAYLOAD_RAM    (0x80780000 - PAYLOAD_SIZE)
+# define HEAP_SIZE      0x40000
+# define HEAP_BASE      (PAYLOAD_RAM - HEAP_SIZE)
 # define LOADER_ADDR    0x800982b0
 
 # define COMBO_CTX_ADDR_READ    COMBO_CTX_ADDR_MM

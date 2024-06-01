@@ -1,13 +1,5 @@
 #include <combo.h>
 
-#if defined(GAME_OOT)
-# define HEAP_BASE 0x80700000
-# define HEAP_SIZE 0x100000
-#else
-# define HEAP_BASE 0x80700000
-# define HEAP_SIZE 0x40000
-#endif
-
 #define SENTINEL 0x99999999
 
 typedef struct HeapBlockHeader HeapBlockHeader;

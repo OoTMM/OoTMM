@@ -11,7 +11,7 @@ PATCH_END
 
 /* Downsize the heap by 0x40000 + 0x40000 malloc zone */
 PATCH_START 0x80174c4c
-  lui t8,0x8070
+  lui t8,(HEAP_BASE >> 16)
 PATCH_END
 
 /* Not sure about this
