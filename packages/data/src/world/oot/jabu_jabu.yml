@@ -2,38 +2,113 @@
   dungeon: JJ
   exits:
     "Zora Fountain": "true"
-    "Jabu-Jabu Main": "has_ranged_weapon || has_explosives"
-"Jabu-Jabu Main":
+    "Jabu-Jabu Elevator": "has_ranged_weapon || has_explosives"
+"Jabu-Jabu Elevator":
   dungeon: JJ
   exits:
     "Jabu-Jabu": "true"
     "Jabu-Jabu Pre-Boss": "event(BIG_OCTO) || (has_hover_boots && (trick(OOT_JABU_BOSS_HOVER) || can_play_elegy)) || climb_anywhere || (glitch_megaflip && ((trick(OOT_JJB_BOXLESS) && can_jump_slash) || can_play_elegy))"
-  events:
-    BIG_OCTO: "soul_octorok && event(PARASITE) && soul_ruto && (has_weapon || can_use_sticks)"
-    PARASITE: "soul_enemy(SOUL_ENEMY_PARASITE) && can_boomerang && (soul_ruto || can_play_elegy)"
+    "Jabu-Jabu Hole Room": "true"
   locations:
-    "Jabu-Jabu Map Chest": "event(PARASITE)"
-    "Jabu-Jabu Compass Chest": "event(PARASITE) && soul_enemy(SOUL_ENEMY_SHABOM)"
+    "Jabu-Jabu Scrub": "(is_child || can_dive_small || time_travel_at_will) && business_scrub(0x20)"
+"Jabu-Jabu Hole Room":
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu Elevator": "true"
+    "Jabu-Jabu Parasite Fork": "true"
+    "Jabu-Jabu Basement": "true"
+    "Jabu-Jabu Before Big Octo": "event(PARASITE)"
+"Jabu-Jabu Parasite Fork":
+  events:
+    PARASITE: "event(RED_PARASITE) && event(BLUE_PARASITE) && event(GREEN_PARASITE)"
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu Hole Room": "true"
+    "Jabu-Jabu Boomerang Room": "true"
+    "Jabu-Jabu Map Room": "soul_ruto || can_play_elegy"
+    "Jabu-Jabu Compass Room": "event(RED_PARASITE)"
+    "Jabu-Jabu Blue Parasite": "event(RED_PARASITE)"
+    "Jabu-Jabu Green Parasite": "event(BLUE_PARASITE)"
+"Jabu-Jabu Boomerang Room":
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu Parasite Fork": "true"
+  locations:
     "Jabu-Jabu Boomerang Chest": "soul_enemy(SOUL_ENEMY_STINGER) && soul_ruto"
+"Jabu-Jabu Map Room":
+  events:
+    RED_PARASITE: "soul_enemy(SOUL_ENEMY_PARASITE) && can_boomerang" 
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu Parasite Fork": "true"
+  locations:
+    "Jabu-Jabu Map Chest": "event(RED_PARASITE)"
+"Jabu-Jabu Compass Room":
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu Parasite Fork": "soul_enemy(SOUL_ENEMY_SHABOM)"
+  locations:  
+    "Jabu-Jabu Compass Chest": "soul_enemy(SOUL_ENEMY_SHABOM)"
+"Jabu-Jabu Blue Parasite":
+  dungeon: JJ
+  events:
+    BLUE_PARASITE: "soul_enemy(SOUL_ENEMY_PARASITE) && can_boomerang"
+  exits:
+    "Jabu-Jabu Parasite Fork": "event(BLUE_PARASITE)"
+"Jabu-Jabu Green Parasite":
+  dungeon: JJ
+  events:
+    GREEN_PARASITE: "soul_enemy(SOUL_ENEMY_PARASITE) && can_boomerang"
+  exits:
+    "Jabu-Jabu Parasite Fork": "event(GREEN_PARASITE) && soul_enemy(SOUL_ENEMY_BIRI_BARI)"
+"Jabu-Jabu Basement":
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu Hole Room": "true"
+    "Jabu-Jabu Muscle Block Room": "true"
+    "Jabu-Jabu Water Switch Room": "true"
+  locations:
     "Jabu-Jabu GS Bottom Lower": "gs && (can_collect_distance || climb_anywhere)"
     "Jabu-Jabu GS Bottom Upper": "gs && (can_collect_distance || climb_anywhere)"
-    "Jabu-Jabu GS Water Switch": "gs"
-    "Jabu-Jabu Scrub": "(is_child || can_dive_small || time_travel_at_will) && business_scrub(0x20)"
-    "Jabu-Jabu Pot Big Octo Room 1": "event(BIG_OCTO) || climb_anywhere"
-    "Jabu-Jabu Pot Big Octo Room 2": "event(BIG_OCTO) || climb_anywhere"
-    "Jabu-Jabu Pot Big Octo Room 3": "event(BIG_OCTO) || climb_anywhere"
+"Jabu-Jabu Muscle Block Room":
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu Basement": "true"
+  locations:
     "Jabu-Jabu Pot Muscle Block Room 1": "can_boomerang || climb_anywhere"
     "Jabu-Jabu Pot Muscle Block Room 2": "can_boomerang || climb_anywhere"
     "Jabu-Jabu Pot Muscle Block Room 3": "can_boomerang || climb_anywhere"
     "Jabu-Jabu Pot Muscle Block Room 4": "can_boomerang || climb_anywhere"
     "Jabu-Jabu Pot Muscle Block Room 5": "can_boomerang || climb_anywhere"
+"Jabu-Jabu Water Switch Room":
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu Basement": "true"
+    "Jabu-Jabu Elevator": "true"
+  locations:
+    "Jabu-Jabu GS Water Switch": "gs"
     "Jabu-Jabu Pot Alcove 1": "true"
     "Jabu-Jabu Pot Alcove 2": "true"
     "Jabu-Jabu Pot Alcove 3": "true"
+"Jabu-Jabu Before Big Octo":
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu Basement": "true"
+    "Jabu-Jabu Big Octo": "true"
+"Jabu-Jabu Big Octo":
+  dungeon: JJ
+  events:
+    BIG_OCTO: "soul_octorok && event(PARASITE) && soul_ruto && (can_use_sword_kokiri || can_use_sword_master || can_use_sticks)"
+  exits:
+    "Jabu-Jabu Elevator": "event(BIG_OCTO) || climb_anywhere"
+  locations:
+    "Jabu-Jabu Pot Big Octo Room 1": "event(BIG_OCTO) || climb_anywhere"
+    "Jabu-Jabu Pot Big Octo Room 2": "event(BIG_OCTO) || climb_anywhere"
+    "Jabu-Jabu Pot Big Octo Room 3": "event(BIG_OCTO) || climb_anywhere"
 "Jabu-Jabu Pre-Boss":
   dungeon: JJ
   exits:
     "Jabu-Jabu Boss": "can_boomerang || (trick(OOT_JABU_BOSS_HIGH_SWITCH) && ((has_hover_boots && has_bombs) || can_hit_triggers_distance || can_longshot || has_bombchu)) || (climb_anywhere && (has_weapon || can_use_sticks || has_ranged_weapon || has_explosives_or_hammer))"
-    "Jabu-Jabu Main": "true"
+    "Jabu-Jabu Elevator": "true"
   locations:
     "Jabu-Jabu GS Near Boss": "gs"
