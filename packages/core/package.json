@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@ootmm/data": "^0.0.1",
+    "@ootmm/tools": "^0.0.1",
     "core-js": "^3.35.0",
     "crc-32": "^1.2.2",
     "pngjs": "^7.0.0",
