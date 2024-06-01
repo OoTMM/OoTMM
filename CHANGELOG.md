@@ -12,6 +12,10 @@ All notable changes to this project will be documented in this file.
 
 - The angle of interaction of MM gossip stones is more tolerant.
 
+## Fixed
+
+- Fix Ikana Wisp showing up even if you did not beat Stone Tower Temple. 
+
 ## [23.1] - 2024-05-30
 
 ### Added

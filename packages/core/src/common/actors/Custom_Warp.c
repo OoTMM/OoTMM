@@ -190,7 +190,7 @@ void comboSpawnCustomWarps(GameState_Play* play)
         z = 3921.f;
     }
 
-    if ((Config_Flag(CFG_ER_MAJOR_DUNGEONS) || gComboConfig.preCompleted & (1 << DUNGEONID_TEMPLE_STONE_TOWER)) && play->sceneId == SCE_MM_IKANA_CANYON && !MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_ST) && gMiscFlags.erCoastClear)
+    if ((Config_Flag(CFG_ER_MAJOR_DUNGEONS) || gComboConfig.preCompleted & (1 << DUNGEONID_TEMPLE_STONE_TOWER)) && play->sceneId == SCE_MM_IKANA_CANYON && !MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_ST) && gMiscFlags.erValleyClear)
     {
         variable = SWITCH_VALLEY_CLEAR;
         x = -700.f;
