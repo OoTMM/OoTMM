@@ -2027,6 +2027,28 @@ MQ Water Temple Pot River 2,                                pot,            NONE
 MQ Water Temple Big Fairy Before Dark Link Ledge,           fairy_spot,     NONE,                 TEMPLE_WATER,                   0x00601,                    FAIRY_BIG
 MQ Water Temple Big Fairy Before Dark Link Near Door 1,     fairy_spot,     NONE,                 TEMPLE_WATER,                   0x00605,                    FAIRY_BIG
 MQ Water Temple Big Fairy Before Dark Link Near Door 2,     fairy_spot,     NONE,                 TEMPLE_WATER,                   0x00606,                    FAIRY_BIG
+MQ Water Temple Wonder Item Under Pillar Room,              wonder,         NONE,                 TEMPLE_WATER,                   0x00218,                    MAGIC_JAR_LARGE
+MQ Water Temple Wonder Item Triple Torches,                 wonder,         NONE,                 TEMPLE_WATER,                   0x00303,                    FLEXIBLE
+MQ Water Temple Wonder Item Hookshot Staircase Right 1,     wonder,         NONE,                 TEMPLE_WATER,                   0x00502,                    NUTS_5
+MQ Water Temple Wonder Item Hookshot Staircase Right 2,     wonder,         NONE,                 TEMPLE_WATER,                   0x00503,                    RECOVERY_HEART
+MQ Water Temple Wonder Item Hookshot Staircase Right 3,     wonder,         NONE,                 TEMPLE_WATER,                   0x00504,                    RUPEE_RED
+MQ Water Temple Wonder Item Hookshot Staircase Left 1,      wonder,         NONE,                 TEMPLE_WATER,                   0x00509,                    FLEXIBLE
+MQ Water Temple Wonder Item Hookshot Staircase Left 2,      wonder,         NONE,                 TEMPLE_WATER,                   0x0050a,                    FLEXIBLE
+MQ Water Temple Wonder Item Hookshot Staircase Left 3,      wonder,         NONE,                 TEMPLE_WATER,                   0x0050b,                    FLEXIBLE
+MQ Water Temple Wonder Item After Dark Link,                wonder,         NONE,                 TEMPLE_WATER,                   0x00700,                    MAGIC_JAR_LARGE
+MQ Water Temple Wonder Item Dragon Room Eyes 1,             wonder,         NONE,                 TEMPLE_WATER,                   0x00804,                    MAGIC_JAR_LARGE
+MQ Water Temple Wonder Item Dragon Room Eyes 2,             wonder,         NONE,                 TEMPLE_WATER,                   0x00806,                    FLEXIBLE
+MQ Water Temple Wonder Item Dragon Room Portrait,           wonder,         NONE,                 TEMPLE_WATER,                   0x00805,                    MAGIC_JAR_LARGE
+MQ Water Temple Wonder Item Above 2F West Room,             wonder,         NONE,                 TEMPLE_WATER,                   0x00a01,                    RANDOM
+MQ Water Temple Wonder Item Before Boss 1,                  wonder,         NONE,                 TEMPLE_WATER,                   0x00b00,                    MAGIC_JAR_LARGE
+MQ Water Temple Wonder Item Before Boss 2,                  wonder,         NONE,                 TEMPLE_WATER,                   0x00b01,                    FLEXIBLE
+MQ Water Temple Wonder Item Water Sprouts 1,                wonder,         NONE,                 TEMPLE_WATER,                   0x00f00,                    MAGIC_JAR_SMALL
+MQ Water Temple Wonder Item Water Sprouts 2,                wonder,         NONE,                 TEMPLE_WATER,                   0x00f01,                    ARROWS_30
+MQ Water Temple Wonder Item Freestanding Room,              wonder,         NONE,                 TEMPLE_WATER,                   0x01000,                    MAGIC_JAR_LARGE
+MQ Water Temple Wonder Item Longshot Room,                  wonder,         NONE,                 TEMPLE_WATER,                   0x01107,                    MAGIC_JAR_SMALL
+MQ Water Temple Wonder Item Lizalfos Room,                  wonder,         NONE,                 TEMPLE_WATER,                   0x01203,                    RUPEE_RED
+MQ Water Temple Wonder Item Stalfos Room,                   wonder,         NONE,                 TEMPLE_WATER,                   0x01305,                    FLEXIBLE
+MQ Water Temple Wonder Item Lizalfos Hallway,               wonder,         NONE,                 TEMPLE_WATER,                   0x01402,                    ARROWS_5
 MQ Shadow Temple Compass Chest,                             chest,          NONE,                 TEMPLE_SHADOW,                  0x01,                       COMPASS_SHADOW
 MQ Shadow Temple Hover Boots Chest,                         chest,          NONE,                 TEMPLE_SHADOW,                  0x07,                       BOOTS_HOVER
 MQ Shadow Temple First Gibdos Chest,                        chest,          NONE,                 TEMPLE_SHADOW,                  0x03,                       SMALL_KEY_SHADOW

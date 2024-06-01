@@ -34,6 +34,7 @@
     "MQ Water Temple Pot Room Before High Water 1": "event(WATER_LEVEL_LOW) && (can_hookshot || can_play_elegy)"
     "MQ Water Temple Pot Room Before High Water 2": "event(WATER_LEVEL_LOW) && (can_hookshot || can_play_elegy)"
     "MQ Water Temple Pot Room Before High Water 3": "event(WATER_LEVEL_LOW) && (can_hookshot || can_play_elegy)"
+    "MQ Water Temple Wonder Item Under Pillar Room": "can_play_time && can_use_din && can_hookshot && has_iron_boots && has_tunic_zora_strict"
 "Water Temple Dark Link":
   dungeon: Water
   events:
@@ -54,6 +55,13 @@
     "MQ Water Temple Pot Boss Key Room": "soul_enemy(SOUL_ENEMY_DARK_LINK) && has_weapon && can_use_din && can_dive_small && soul_enemy(SOUL_ENEMY_STALFOS)"
     "MQ Water Temple Big Fairy Before Dark Link Near Door 1": "can_play_sun && soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon"
     "MQ Water Temple Big Fairy Before Dark Link Near Door 2": "can_play_storms && soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon"
+    "MQ Water Temple Wonder Item Hookshot Staircase Right 1": "can_longshot"
+    "MQ Water Temple Wonder Item Hookshot Staircase Right 2": "can_longshot"
+    "MQ Water Temple Wonder Item Hookshot Staircase Right 3": "can_longshot"
+    "MQ Water Temple Wonder Item Hookshot Staircase Left 1": "can_longshot"
+    "MQ Water Temple Wonder Item Hookshot Staircase Left 2": "can_longshot"
+    "MQ Water Temple Wonder Item Hookshot Staircase Left 3": "can_longshot"
+    "MQ Water Temple Wonder Item After Dark Link": "soul_enemy(SOUL_ENEMY_DARK_LINK) && has_weapon"
 "Water Temple Three Torch Room":
   dungeon: Water
   locations:
@@ -62,6 +70,7 @@
     "MQ Water Temple Pot Skull Cage 2": "has_fire_arrows && (scarecrow_hookshot || has_hover_boots)"
     "MQ Water Temple Pot Skull Cage 3": "has_fire_arrows && (scarecrow_hookshot || has_hover_boots)"
     "MQ Water Temple Pot Skull Cage 4": "has_fire_arrows && (scarecrow_hookshot || has_hover_boots)"
+    "MQ Water Temple Wonder Item Triple Torches": "has_fire_arrows && (scarecrow_hookshot || has_hover_boots) && (can_hookshot || can_use_bow)"
 "Water Temple Side Loop":
   dungeon: Water
   locations:
