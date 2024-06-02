@@ -53,6 +53,32 @@ static void EnHitTag_DrawGlitter(Actor_EnHitTag* this, GameState_Play* play)
     Draw_GlitterGi(play, &this->base, gi);
 }
 
+static void EnHitTag_ItemDropCollectible(GameState_Play* play, const Vec3f* pos, int param)
+{
+    Actor_EnHitTag* this;
+    ComboItemOverride o;
+    Xflag x;
+
+    this = sHitTag;
+    if (!this->isExtended)
+    {
+        Item_DropCollectible(play, pos, param);
+        return;
+    }
+
+    memcpy(&x, &this->xflag, sizeof(Xflag));
+    x.sliceId = sHitTagCount;
+    sHitTagCount++;
+    comboXflagItemOverride(&o, &x, 0);
+
+    if (comboXflagsGet(&x) || o.gi == 0)
+        Item_DropCollectible(play, pos, param);
+    else
+        EnItem00_DropCustom(play, pos, &x);
+}
+
+PATCH_CALL(0x80be215c, EnHitTag_ItemDropCollectible);
+
 void EnHitTag_InitWrapper(Actor_EnHitTag* this, GameState_Play* play)
 {
     int switchFlag;
