@@ -162,6 +162,8 @@ const ACTORS_MM = {
   OBJ_GRASS_UNIT: 0x10d,
   EN_KUSA2: 0x171,
   EN_ELF: 0x10,
+  EN_HIT_TAG: 0x265,
+  EN_INVISIBLE_RUPPE: 0x2af,
   //DOOR_ANA: 0x55,
 };
 
@@ -178,6 +180,7 @@ const ACTOR_SLICES_MM = {
   [ACTORS_MM.EN_KUSA2]: 9,
   [ACTORS_MM.EN_ELF]: 8,
   [ACTORS_MM.OBJ_MURE3]: 7,
+  [ACTORS_MM.EN_HIT_TAG]: 3,
 }
 
 const INTERESTING_ACTORS_OOT = Object.values(ACTORS_OOT);
@@ -846,6 +849,45 @@ function outputWonderOot(roomActors: RoomActors[]) {
   }
 }
 
+function outputWonderMm(roomActors: RoomActors[]) {
+  let lastSceneId = -1;
+  let lastSetupId = -1;
+  for (const room of roomActors) {
+    for (const actor of room.actors) {
+      let count: number;
+      let item: string;
+      switch (actor.typeId) {
+      case ACTORS_MM.EN_HIT_TAG:
+        count = 3;
+        item = 'RUPEE_GREEN';
+        break;
+      case ACTORS_MM.EN_INVISIBLE_RUPPE:
+        count = 1;
+        item = ['RUPEE_GREEN', 'RUPEE_BLUE', 'RUPEE_RED', '???'][actor.params & 3];
+        break;
+      default:
+        count = 0;
+        item = '???';
+        break;
+      }
+      if (count === 0)
+        continue;
+      const keyBase = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
+      if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
+        console.log('');
+        console.log(`### Scene: ${scenesById('mm')[room.sceneId]}`);
+        lastSceneId = room.sceneId;
+        lastSetupId = room.setupId;
+      }
+      for (let i = 0; i < count; ++i) {
+        const key = keyBase | (i << 16);
+        let post = count === 1 ? '' : ` Num ${i + 1}`;
+        console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Wonder Item ${decPad(actor.actorId + 1, 2)}${post},        wonder,           NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
+      }
+    }
+  }
+}
+
 function outputGrassPoolOot(roomActors: RoomActors[]) {
   let lastSceneId = -1;
   let lastSetupId = -1;
@@ -1172,7 +1214,8 @@ async function run() {
   //outputPotsPoolMm(mmRooms);
 
   /* Output */
-  outputWonderOot(ootRooms);
+  //outputWonderOot(ootRooms);
+  outputWonderMm(mmRooms);
   //outputPotsPoolOot(mqRooms);
   //outputGrassWeirdPoolOot(ootRooms);
   //outputGrassPoolMm(mmRooms);
