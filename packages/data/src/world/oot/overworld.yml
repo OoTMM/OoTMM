@@ -829,6 +829,7 @@
   locations:
     "Zelda's Letter": "met_zelda"
     "Zelda's Song": "met_zelda"
+    "Castle Courtyard Wonder Item": "can_use_slingshot"
 "Near Fairy Fountain Din":
   region: HYRULE_CASTLE
   age_change: false
