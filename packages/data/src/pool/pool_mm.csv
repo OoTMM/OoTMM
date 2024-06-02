@@ -78,6 +78,9 @@ Stock Pot Inn Couple's Mask,                            npc,            COUPLE_M
 Stock Pot Inn Grandma HP 1,                             npc,            NONE,                   STOCK_POT_INN,                GRANDMA_HEART_PIECE_1,      HEART_PIECE
 Stock Pot Inn Grandma HP 2,                             npc,            NONE,                   STOCK_POT_INN,                GRANDMA_HEART_PIECE_2,      HEART_PIECE
 Stock Pot Inn ??? HP,                                   npc,            NONE,                   STOCK_POT_INN,                TOILET_HEART_PIECE,         HEART_PIECE
+Stock Pot Inn Wonder Item 1,                            wonder,         NONE,                   STOCK_POT_INN,                0x0000e,                    RUPEE_GREEN
+Stock Pot Inn Wonder Item 2,                            wonder,         NONE,                   STOCK_POT_INN,                0x1000e,                    RUPEE_GREEN
+Stock Pot Inn Wonder Item 3,                            wonder,         NONE,                   STOCK_POT_INN,                0x2000e,                    RUPEE_GREEN
 Astral Observatory Passage Chest,                       chest,          NONE,                   OBSERVATORY,                  0x00,                       RUPEE_SILVER
 Astral Observatory Moon Tear,                           npc,            NONE,                   OBSERVATORY,                  MOON_TEAR,                  MOON_TEAR
 Astral Observatory Passage Pot 1,                       pot,            NONE,                   OBSERVATORY,                  0x0010,                     RECOVERY_HEART

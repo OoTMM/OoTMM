@@ -577,6 +577,9 @@
     "Stock Pot Inn Grandma HP 1": "soul_old_hag && has(MASK_ALL_NIGHT) && (is_day1 || is_day2)"
     "Stock Pot Inn Grandma HP 2": "soul_old_hag && has(MASK_ALL_NIGHT) && (is_day1 || is_day2)"
     "Stock Pot Inn ??? HP": "soul_npc(SOUL_NPC_TOILET_HAND) && cond(setting(erIndoorsExtra), has_paper && midnight, has_paper && midnight && (clock_night3 || has(ROOM_KEY) || has(MASK_DEKU) || has_hover_boots || event(SPI_ROOF_FARORE) || trick(MM_STOCK_POT_WAIT)))"
+    "Stock Pot Inn Wonder Item 1": "has_mask_zora && has_magic"
+    "Stock Pot Inn Wonder Item 2": "has_mask_zora && has_magic"
+    "Stock Pot Inn Wonder Item 3": "has_mask_zora && has_magic"
 "Clock Town East SPI Roof":
   region: CLOCK_TOWN_EAST
   exits:
