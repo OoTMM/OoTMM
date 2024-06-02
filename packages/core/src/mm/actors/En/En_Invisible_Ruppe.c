@@ -19,6 +19,34 @@ static void EnInvisibleRupee_DrawGlitter(Actor_EnInvisibleRuppe* this, GameState
     Draw_GlitterGi(play, &this->base, o.gi);
 }
 
+void EnInvisibleRupee_HandleExtended(Actor_EnInvisibleRuppe* this, GameState_Play* play)
+{
+    ComboItemOverride o;
+    EnInvisibleRuppeFunc handleNormal;
+
+    if (comboXflagsGet(&this->xflag) || !this->isExtended)
+    {
+        this->base.draw = NULL;
+        handleNormal = actorAddr(AC_EN_INVISIBLE_RUPPE, 0x80c2590c);
+        this->handler = handleNormal;
+        handleNormal(this, play);
+        return;
+    }
+
+    if (this->collider.base.ocFlags1 & 0x02)
+    {
+        comboXflagItemOverride(&o, &this->xflag, 0);
+        Item_AddWithDecoy(play, &o);
+        comboXflagsSet(&this->xflag);
+
+        if (this->switchFlag > 0)
+            SetSwitchFlag(play, this->switchFlag);
+
+        this->base.draw = NULL;
+        this->handler = actorAddr(AC_EN_INVISIBLE_RUPPE, 0x80c259e8);
+    }
+}
+
 void EnInvisibleRupee_InitWrapper(Actor_EnInvisibleRuppe* this, GameState_Play* play)
 {
     int switchFlag;
@@ -47,5 +75,8 @@ void EnInvisibleRupee_InitWrapper(Actor_EnInvisibleRuppe* this, GameState_Play* 
     init(this, play);
 
     if (this->isExtended)
+    {
         this->base.draw = EnInvisibleRupee_DrawGlitter;
+        this->handler = EnInvisibleRupee_HandleExtended;
+    }
 }
