@@ -7,7 +7,7 @@ import { sample, Random, randomInt } from '../random';
 import { Settings } from '../settings';
 import { countMapAdd, gameId } from '../util';
 import { exprTrue } from './expr';
-import { LOCATIONS_ZELDA, Location, isLocationOtherFairy, isLocationRenewable, locationData, makeLocation } from './locations';
+import { Location, isLocationOtherFairy, isLocationRenewable, locationData, locationsZelda, makeLocation } from './locations';
 import { ItemSharedDef, SharedItemGroups } from './shared';
 import { World } from './world';
 import { ItemProperties } from './item-properties';
@@ -1380,7 +1380,7 @@ export class LogicPassWorldTransform {
     /* Handle Skip Zelda */
     if (this.state.settings.skipZelda) {
       this.removeItem(Items.OOT_CHICKEN);
-      this.makeLocationStarting(LOCATIONS_ZELDA);
+      this.makeLocationStarting(locationsZelda(this.state.settings));
     }
 
     /* Handle open gate */

@@ -9,7 +9,7 @@ import { DUNGEONS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS } from '../sett
 import { HINTS_PATHS, HintGossip, WorldHints } from '../logic/hints';
 import { countMapAdd, gameId, padBuffer16, toI8Buffer, toU16Buffer, toU32Buffer, toU8Buffer } from '../util';
 import { Patchfile } from './patchfile';
-import { LOCATIONS_ZELDA, makeLocation, makePlayerLocations } from '../logic/locations';
+import { locationsZelda, makeLocation, makePlayerLocations } from '../logic/locations';
 import { CONFVARS_VALUES, Confvar } from '../confvars';
 import { Region, regionData } from '../logic/regions';
 import { Item, ItemGroups, ItemHelpers, Items, ItemsCount } from '../items';
@@ -1098,7 +1098,7 @@ const effectiveStartingItems = (worldId: number, logic: LogicResult): ItemsCount
     }
   }
 
-  if (settings.skipZelda) addStartingItemLocsWorld(worldId, logic, LOCATIONS_ZELDA, itemsCount);
+  if (settings.skipZelda) addStartingItemLocsWorld(worldId, logic, locationsZelda(settings), itemsCount);
   if (settings.gerudoFortress === 'open') addStartingItemLocsWorld(worldId, logic, ['OOT Gerudo Member Card'], itemsCount);
 
   return itemsCount;

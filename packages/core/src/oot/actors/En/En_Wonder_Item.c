@@ -3,6 +3,7 @@
 #include <combo/global.h>
 #include <combo/item.h>
 #include <combo/draw.h>
+#include <combo/config.h>
 #include <combo/oot/actors/En_Wonder_Item.h>
 
 static Actor_EnWonderItem* sWonderItem;
@@ -132,8 +133,15 @@ void EnWonderItem_InitWrapper(Actor_EnWonderItem* this, GameState_Play* play)
     this->xflag.id = g.actorIndex;
     EnWonderItem_Alias(this);
 
-    comboXflagItemOverride(&o, &this->xflag, 0);
-    this->isExtended = !!(o.gi && !comboXflagsGet(&this->xflag));
+    if (play->sceneId == SCE_OOT_CASTLE_COURTYARD && Config_Flag(CFG_OOT_SKIP_ZELDA))
+    {
+        this->isExtended = 0;
+    }
+    else
+    {
+        comboXflagItemOverride(&o, &this->xflag, 0);
+        this->isExtended = !!(o.gi && !comboXflagsGet(&this->xflag));
+    }
 
     /* Check the collectible flag */
     switchFlag = this->base.variable & 0x3f;
