@@ -105,6 +105,12 @@
     "Pirate Fortress Interior Heart 1": "can_hookshot || short_hook_anywhere || has_hover_boots"
     "Pirate Fortress Interior Heart 2": "can_hookshot || short_hook_anywhere || has_hover_boots"
     "Pirate Fortress Interior Heart 3": "can_hookshot || short_hook_anywhere || has_hover_boots"
+    "Pirate Fortress Interior Wonder Item Skull Eyes 1": "hit_target_range_close"
+    "Pirate Fortress Interior Wonder Item Skull Eyes 2": "hit_target_range_close"
+    "Pirate Fortress Interior Wonder Item Skull Eyes 3": "hit_target_range_close"
+    "Pirate Fortress Interior Wonder Item Skull Eyes 4": "hit_target_range_close"
+    "Pirate Fortress Interior Wonder Item Skull Eyes 5": "hit_target_range_close"
+    "Pirate Fortress Interior Wonder Item Skull Eyes 6": "hit_target_range_close"
 "Pirate Fortress Hookshot Room Upper":
   region: PIRATE_FORTRESS_INTERIOR
   exits:
@@ -128,6 +134,9 @@
     ZORA_EGGS_HOOKSHOT_ROOM: "can_hookshot_short && underwater_walking && event(FORTRESS_BEEHIVE)"
   locations:
     "Pirate Fortress Interior Hookshot": "event(FORTRESS_BEEHIVE)"
+    "Pirate Fortress Interior Wonder Item Skull Forehead 1": "event(FORTRESS_BEEHIVE) && hit_target_range_close"
+    "Pirate Fortress Interior Wonder Item Skull Forehead 2": "event(FORTRESS_BEEHIVE) && hit_target_range_close"
+    "Pirate Fortress Interior Wonder Item Skull Forehead 3": "event(FORTRESS_BEEHIVE) && hit_target_range_close"
 "Pirate Fortress Barrel Maze Entry":
   region: PIRATE_FORTRESS_INTERIOR
   exits:

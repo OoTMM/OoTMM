@@ -590,6 +590,14 @@ export const SETTINGS = [{
   cond: hasOoT,
   default: false
 }, {
+  key: 'shuffleWonderItemsMm',
+  name: 'Wonder Items Shuffle (MM)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the wonder items are shuffled (MM)',
+  cond: hasOoT,
+  default: false
+}, {
   key: 'shuffleOcarinasOot',
   name: 'Ocarina Shuffle (OoT)',
   category: 'main.shuffle',

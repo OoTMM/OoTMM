@@ -12,6 +12,9 @@ Clock Town Platform HP,                                 collectible,    NONE,   
 Clock Town Business Scrub,                              npc,            NONE,                   CLOCK_TOWN_SOUTH,             SCRUB_LAND,                 DEED_LAND
 Clock Town Post Box,                                    npc,            NONE,                   CLOCK_TOWN_SOUTH,             POSTBOX,                    HEART_PIECE
 Clock Town Owl Statue,                                  npc,            NONE,                   CLOCK_TOWN_SOUTH,             OWL_CLOCK_TOWN,             OWL_CLOCK_TOWN
+Clock Town South Wonder Item 1,                         wonder,         NONE,                   CLOCK_TOWN_SOUTH,             0x0001d,                    RUPEE_GREEN
+Clock Town South Wonder Item 2,                         wonder,         NONE,                   CLOCK_TOWN_SOUTH,             0x1001d,                    RUPEE_GREEN
+Clock Town South Wonder Item 3,                         wonder,         NONE,                   CLOCK_TOWN_SOUTH,             0x2001d,                    RUPEE_GREEN
 Clock Town Tree HP,                                     collectible,    NONE,                   CLOCK_TOWN_NORTH,             0x0a,                       HEART_PIECE
 Clock Town Bomber Notebook,                             npc,            NONE,                   CLOCK_TOWN_NORTH,             BOMBER_NOTEBOOK,            BOMBER_NOTEBOOK
 Clock Town Blast Mask,                                  npc,            NONE,                   CLOCK_TOWN_NORTH,             MASK_BLAST,                 MASK_BLAST
@@ -27,6 +30,15 @@ Clock Town Keaton Grass Reward 8,                       grass,          NONE,   
 Clock Town Keaton Grass Reward 9,                       grass,          NONE,                   CLOCK_TOWN_NORTH,             0x80010,                    RUPEE_RED
 Clock Town Silver Rupee Chest,                          chest,          NONE,                   CLOCK_TOWN_EAST,              0x0a,                       RUPEE_SILVER
 Clock Town Postman Hat,                                 npc,            NONE,                   CLOCK_TOWN_EAST,              MASK_POSTMAN,               MASK_POSTMAN
+Clock Town East Wonder Item Target Left 1,              wonder,         NONE,                   CLOCK_TOWN_EAST,              0x0002a,                    RUPEE_GREEN
+Clock Town East Wonder Item Target Left 2,              wonder,         NONE,                   CLOCK_TOWN_EAST,              0x1002a,                    RUPEE_GREEN
+Clock Town East Wonder Item Target Left 3,              wonder,         NONE,                   CLOCK_TOWN_EAST,              0x2002a,                    RUPEE_GREEN
+Clock Town East Wonder Item Target Right 1,             wonder,         NONE,                   CLOCK_TOWN_EAST,              0x0002b,                    RUPEE_GREEN
+Clock Town East Wonder Item Target Right 2,             wonder,         NONE,                   CLOCK_TOWN_EAST,              0x1002b,                    RUPEE_GREEN
+Clock Town East Wonder Item Target Right 3,             wonder,         NONE,                   CLOCK_TOWN_EAST,              0x2002b,                    RUPEE_GREEN
+Clock Town East Wonder Item Basket 1,                   wonder,         NONE,                   CLOCK_TOWN_EAST,              0x0002c,                    RUPEE_GREEN
+Clock Town East Wonder Item Basket 2,                   wonder,         NONE,                   CLOCK_TOWN_EAST,              0x1002c,                    RUPEE_GREEN
+Clock Town East Wonder Item Basket 3,                   wonder,         NONE,                   CLOCK_TOWN_EAST,              0x2002c,                    RUPEE_GREEN
 Clock Town Bank Reward 1,                               npc,            NONE,                   CLOCK_TOWN_WEST,              BANK_1,                     WALLET
 Clock Town Bank Reward 2,                               npc,            NONE,                   CLOCK_TOWN_WEST,              BANK_2,                     RUPEE_BLUE
 Clock Town Bank Reward 3,                               npc,            BANK_3,                 CLOCK_TOWN_WEST,              BANK_3,                     HEART_PIECE
@@ -66,6 +78,9 @@ Stock Pot Inn Couple's Mask,                            npc,            COUPLE_M
 Stock Pot Inn Grandma HP 1,                             npc,            NONE,                   STOCK_POT_INN,                GRANDMA_HEART_PIECE_1,      HEART_PIECE
 Stock Pot Inn Grandma HP 2,                             npc,            NONE,                   STOCK_POT_INN,                GRANDMA_HEART_PIECE_2,      HEART_PIECE
 Stock Pot Inn ??? HP,                                   npc,            NONE,                   STOCK_POT_INN,                TOILET_HEART_PIECE,         HEART_PIECE
+Stock Pot Inn Wonder Item 1,                            wonder,         NONE,                   STOCK_POT_INN,                0x0000e,                    RUPEE_GREEN
+Stock Pot Inn Wonder Item 2,                            wonder,         NONE,                   STOCK_POT_INN,                0x1000e,                    RUPEE_GREEN
+Stock Pot Inn Wonder Item 3,                            wonder,         NONE,                   STOCK_POT_INN,                0x2000e,                    RUPEE_GREEN
 Astral Observatory Passage Chest,                       chest,          NONE,                   OBSERVATORY,                  0x00,                       RUPEE_SILVER
 Astral Observatory Moon Tear,                           npc,            NONE,                   OBSERVATORY,                  MOON_TEAR,                  MOON_TEAR
 Astral Observatory Passage Pot 1,                       pot,            NONE,                   OBSERVATORY,                  0x0010,                     RECOVERY_HEART
@@ -361,6 +376,26 @@ Termina Field Grass Pack 18 Grass 10,                   grass,          NONE,   
 Termina Field Grass Pack 18 Grass 11,                   grass,          NONE,                   TERMINA_FIELD,                0xa00bd,                    RANDOM
 Termina Field Grass Pack 18 Grass 12,                   grass,          NONE,                   TERMINA_FIELD,                0xb00bd,                    RANDOM
 Termina Field Rupee,                                    rupee,          NONE,                   TERMINA_FIELD,                0x00004,                    RUPEE_RED
+Termina Field Wonder Item Grass 1,                      wonder,         NONE,                   TERMINA_FIELD,                0x00059,                    RUPEE_GREEN
+Termina Field Wonder Item Grass 2,                      wonder,         NONE,                   TERMINA_FIELD,                0x0005a,                    RUPEE_GREEN
+Termina Field Wonder Item Grass 3,                      wonder,         NONE,                   TERMINA_FIELD,                0x0005b,                    RUPEE_GREEN
+Termina Field Wonder Item Grass 4,                      wonder,         NONE,                   TERMINA_FIELD,                0x0005c,                    RUPEE_GREEN
+Termina Field Wonder Item Grass 5,                      wonder,         NONE,                   TERMINA_FIELD,                0x0005d,                    RUPEE_GREEN
+Termina Field Wonder Item Hollow Trunk,                 wonder,         NONE,                   TERMINA_FIELD,                0x0005e,                    RUPEE_BLUE
+Termina Field Wonder Item Fountains 1,                  wonder,         NONE,                   TERMINA_FIELD,                0x0005f,                    RUPEE_BLUE
+Termina Field Wonder Item Fountains 2,                  wonder,         NONE,                   TERMINA_FIELD,                0x00060,                    RUPEE_BLUE
+Termina Field Wonder Item North Ramp,                   wonder,         NONE,                   TERMINA_FIELD,                0x00061,                    RUPEE_BLUE
+Termina Field Wonder Item West Ramp,                    wonder,         NONE,                   TERMINA_FIELD,                0x00062,                    RUPEE_BLUE
+Termina Field Wonder Item SW Ramp,                      wonder,         NONE,                   TERMINA_FIELD,                0x00063,                    RUPEE_BLUE
+Termina Field Wonder Item Shell 1,                      wonder,         NONE,                   TERMINA_FIELD,                0x00064,                    RUPEE_GREEN
+Termina Field Wonder Item Shell 2,                      wonder,         NONE,                   TERMINA_FIELD,                0x10064,                    RUPEE_GREEN
+Termina Field Wonder Item Shell 3,                      wonder,         NONE,                   TERMINA_FIELD,                0x20064,                    RUPEE_GREEN
+Termina Field Wonder Item Shell Side 1,                 wonder,         NONE,                   TERMINA_FIELD,                0x00065,                    RUPEE_GREEN
+Termina Field Wonder Item Shell Side 2,                 wonder,         NONE,                   TERMINA_FIELD,                0x10065,                    RUPEE_GREEN
+Termina Field Wonder Item Shell Side 3,                 wonder,         NONE,                   TERMINA_FIELD,                0x20065,                    RUPEE_GREEN
+Termina Field Wonder Item Graffiti 1,                   wonder,         NONE,                   TERMINA_FIELD,                0x00066,                    RUPEE_GREEN
+Termina Field Wonder Item Graffiti 2,                   wonder,         NONE,                   TERMINA_FIELD,                0x10066,                    RUPEE_GREEN
+Termina Field Wonder Item Graffiti 3,                   wonder,         NONE,                   TERMINA_FIELD,                0x20066,                    RUPEE_GREEN
 Termina Field Cow Grotto Grass 01,                      grass,          NONE,                   GROTTOS,                      0x00a00,                    RANDOM
 Termina Field Cow Grotto Grass 02,                      grass,          NONE,                   GROTTOS,                      0x10a00,                    RANDOM
 Termina Field Cow Grotto Grass 03,                      grass,          NONE,                   GROTTOS,                      0x20a00,                    RANDOM
@@ -742,6 +777,23 @@ Swamp Spider House Pot Jar Room 4,                      pot,            NONE,   
 Swamp Spider House Pot Jar Room 5,                      pot,            NONE,                   SPIDER_HOUSE_SWAMP,           0x0416,                     RECOVERY_HEART
 Swamp Spider House Pot Jar Room 6,                      pot,            NONE,                   SPIDER_HOUSE_SWAMP,           0x0417,                     RECOVERY_HEART
 Swamp Spider House Pot Jar Room 7,                      pot,            NONE,                   SPIDER_HOUSE_SWAMP,           0x0418,                     RECOVERY_HEART
+Swamp Spider House Wonder Item Pillars 01,              wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x0010a,                    RUPEE_GREEN
+Swamp Spider House Wonder Item Pillars 02,              wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x1010a,                    RUPEE_GREEN
+Swamp Spider House Wonder Item Pillars 03,              wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x2010a,                    RUPEE_GREEN
+Swamp Spider House Wonder Item Pillars 04,              wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x0010b,                    RUPEE_GREEN
+Swamp Spider House Wonder Item Pillars 05,              wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x1010b,                    RUPEE_GREEN
+Swamp Spider House Wonder Item Pillars 06,              wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x2010b,                    RUPEE_GREEN
+Swamp Spider House Wonder Item Pillars 07,              wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x0010c,                    RUPEE_GREEN
+Swamp Spider House Wonder Item Pillars 08,              wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x1010c,                    RUPEE_GREEN
+Swamp Spider House Wonder Item Pillars 09,              wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x2010c,                    RUPEE_GREEN
+Swamp Spider House Wonder Item Pillars 10,              wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x0010d,                    RUPEE_GREEN
+Swamp Spider House Wonder Item Pillars 11,              wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x1010d,                    RUPEE_GREEN
+Swamp Spider House Wonder Item Pillars 12,              wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x2010d,                    RUPEE_GREEN
+Swamp Spider House Wonder Item Pots 1,                  wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x00419,                    RUPEE_GREEN
+Swamp Spider House Wonder Item Pots 2,                  wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x0041a,                    RUPEE_GREEN
+Swamp Spider House Wonder Item Pots 3,                  wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x0041b,                    RUPEE_GREEN
+Swamp Spider House Wonder Item Pots 4,                  wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x0041c,                    RUPEE_BLUE
+Swamp Spider House Wonder Item Pots 5,                  wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x0041d,                    RUPEE_RED
 Mountain Village Waterfall Chest,                       chest,          NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x00,                       RUPEE_RED
 Mountain Village Don Gero Mask,                         npc,            HUNGRY_GORON,           MOUNTAIN_VILLAGE_WINTER,      MASK_DON_GERO,              MASK_DON_GERO
 Mountain Village Frog Choir HP,                         npc,            DON_GERO_CHOIR,         MOUNTAIN_VILLAGE_WINTER,      FROG_HEART_PIECE,           HEART_PIECE
@@ -954,8 +1006,8 @@ Romani Ranch Cremia Escort,                             npc,            RANCH_DE
 Romani Ranch Barn Cow Left,                             cow,            NONE,                   ROMANI_RANCH,                 0x10,                       MILK
 Romani Ranch Barn Cow Right Front,                      cow,            NONE,                   ROMANI_RANCH,                 0x11,                       MILK
 Romani Ranch Barn Cow Right Back,                       cow,            NONE,                   ROMANI_RANCH,                 0x12,                       MILK
-Romani Ranch Barn Invisible Rupee 1,                    rupee,          NONE,                   RANCH_HOUSE_BARN,             0x00000,                    RUPEE_BLUE
-Romani Ranch Barn Invisible Rupee 2,                    rupee,          NONE,                   RANCH_HOUSE_BARN,             0x00001,                    RUPEE_BLUE
+Romani Ranch Barn Wonder Item 1,                        wonder,         NONE,                   RANCH_HOUSE_BARN,             0x00000,                    RUPEE_BLUE
+Romani Ranch Barn Wonder Item 2,                        wonder,         NONE,                   RANCH_HOUSE_BARN,             0x00001,                    RUPEE_BLUE
 Romani Ranch Grass Pack 1 Grass 01,                     grass,          NONE,                   ROMANI_RANCH,                 0x0001c,                    RANDOM
 Romani Ranch Grass Pack 1 Grass 02,                     grass,          NONE,                   ROMANI_RANCH,                 0x1001c,                    RANDOM
 Romani Ranch Grass Pack 1 Grass 03,                     grass,          NONE,                   ROMANI_RANCH,                 0x2001c,                    RANDOM
@@ -1013,7 +1065,19 @@ Romani Ranch Grass Pack 5 Grass 06,                     grass,          NONE,   
 Romani Ranch Grass Pack 5 Grass 07,                     grass,          NONE,                   ROMANI_RANCH,                 0x60020,                    RANDOM
 Romani Ranch Grass Pack 5 Grass 08,                     grass,          NONE,                   ROMANI_RANCH,                 0x70020,                    RANDOM
 Romani Ranch Grass Pack 5 Grass 09,                     grass,          NONE,                   ROMANI_RANCH,                 0x80020,                    RANDOM
+Romani Ranch Wonder Item Fence 1,                       wonder,         NONE,                   ROMANI_RANCH,                 0x0002a,                    RUPEE_BLUE
+Romani Ranch Wonder Item Fence 2,                       wonder,         NONE,                   ROMANI_RANCH,                 0x0002b,                    RUPEE_BLUE
+Romani Ranch Wonder Item Fence 3,                       wonder,         NONE,                   ROMANI_RANCH,                 0x0002c,                    RUPEE_GREEN
+Romani Ranch Wonder Item Fence 4,                       wonder,         NONE,                   ROMANI_RANCH,                 0x0002d,                    RUPEE_GREEN
+Romani Ranch Wonder Item Fence 5,                       wonder,         NONE,                   ROMANI_RANCH,                 0x0002e,                    RUPEE_GREEN
+Romani Ranch Wonder Item Fence 6,                       wonder,         NONE,                   ROMANI_RANCH,                 0x0002f,                    RUPEE_GREEN
 Cucco Shack Bunny Mask,                                 npc,            CUCCOS,                 CUCCO_SHACK,                  MASK_BUNNY,                 MASK_BUNNY
+Cucco Shack Wonder Item 1,                              wonder,         NONE,                   CUCCO_SHACK,                  0x00011,                    RUPEE_GREEN
+Cucco Shack Wonder Item 2,                              wonder,         NONE,                   CUCCO_SHACK,                  0x10011,                    RUPEE_GREEN
+Cucco Shack Wonder Item 3,                              wonder,         NONE,                   CUCCO_SHACK,                  0x20011,                    RUPEE_GREEN
+Cucco Shack Wonder Item 4,                              wonder,         NONE,                   CUCCO_SHACK,                  0x00012,                    RUPEE_GREEN
+Cucco Shack Wonder Item 5,                              wonder,         NONE,                   CUCCO_SHACK,                  0x10012,                    RUPEE_GREEN
+Cucco Shack Wonder Item 6,                              wonder,         NONE,                   CUCCO_SHACK,                  0x20012,                    RUPEE_GREEN
 Doggy Racetrack Chest,                                  chest,          NONE,                   DOG_RACETRACK,                0x00,                       RUPEE_PURPLE
 Doggy Racetrack HP,                                     npc,            NONE,                   DOG_RACETRACK,                DOG_LADY_HEART_PIECE,       HEART_PIECE
 Doggy Racetrack Pot 1,                                  pot,            NONE,                   DOG_RACETRACK,                0x0009,                     RUPEE_BLUE
@@ -1238,6 +1302,15 @@ Ocean Spider House Pot Storage Top 1,                   pot,            NONE,   
 Ocean Spider House Pot Storage Top 2,                   pot,            NONE,                   SPIDER_HOUSE_OCEAN,           0x050f,                     RECOVERY_HEART
 Ocean Spider House Pot Storage Top 3,                   pot,            NONE,                   SPIDER_HOUSE_OCEAN,           0x0510,                     RECOVERY_HEART
 Ocean Spider House Pot Storage 4,                       pot,            NONE,                   SPIDER_HOUSE_OCEAN,           0x0511,                     MAGIC_JAR_SMALL
+Ocean Spider House Wonder Item Masks 1,                 wonder,         NONE,                   SPIDER_HOUSE_OCEAN,           0x00100,                    RUPEE_GREEN
+Ocean Spider House Wonder Item Masks 2,                 wonder,         NONE,                   SPIDER_HOUSE_OCEAN,           0x10100,                    RUPEE_GREEN
+Ocean Spider House Wonder Item Masks 3,                 wonder,         NONE,                   SPIDER_HOUSE_OCEAN,           0x20100,                    RUPEE_GREEN
+Ocean Spider House Wonder Item Masks 4,                 wonder,         NONE,                   SPIDER_HOUSE_OCEAN,           0x00101,                    RUPEE_GREEN
+Ocean Spider House Wonder Item Masks 5,                 wonder,         NONE,                   SPIDER_HOUSE_OCEAN,           0x10101,                    RUPEE_GREEN
+Ocean Spider House Wonder Item Masks 6,                 wonder,         NONE,                   SPIDER_HOUSE_OCEAN,           0x20101,                    RUPEE_GREEN
+Ocean Spider House Wonder Item Masks 7,                 wonder,         NONE,                   SPIDER_HOUSE_OCEAN,           0x00102,                    RUPEE_GREEN
+Ocean Spider House Wonder Item Masks 8,                 wonder,         NONE,                   SPIDER_HOUSE_OCEAN,           0x10102,                    RUPEE_GREEN
+Ocean Spider House Wonder Item Masks 9,                 wonder,         NONE,                   SPIDER_HOUSE_OCEAN,           0x20102,                    RUPEE_GREEN
 Waterfall Rapids Beaver Race 1,                         npc,            NONE,                   WATERFALL_RAPIDS,             BEAVER_1,                   BOTTLE_EMPTY
 Waterfall Rapids Beaver Race 2,                         npc,            NONE,                   WATERFALL_RAPIDS,             BEAVER_2,                   HEART_PIECE
 Road to Ikana Chest,                                    chest,          NONE,                   ROAD_IKANA,                   0x00,                       RUPEE_RED
@@ -1314,6 +1387,18 @@ Ikana Graveyard Grass Pack Grass 6,                     grass,          NONE,   
 Ikana Graveyard Grass Pack Grass 7,                     grass,          NONE,                   IKANA_GRAVEYARD,              0x6012f,                    RANDOM
 Ikana Graveyard Grass Pack Grass 8,                     grass,          NONE,                   IKANA_GRAVEYARD,              0x7012f,                    RANDOM
 Ikana Graveyard Grass Pack Grass 9,                     grass,          NONE,                   IKANA_GRAVEYARD,              0x8012f,                    RANDOM
+Ikana Graveyard Wonder Item 01,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x0000a,                    RUPEE_GREEN
+Ikana Graveyard Wonder Item 02,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x1000a,                    RUPEE_GREEN
+Ikana Graveyard Wonder Item 03,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x2000a,                    RUPEE_GREEN
+Ikana Graveyard Wonder Item 04,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x0000b,                    RUPEE_GREEN
+Ikana Graveyard Wonder Item 05,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x1000b,                    RUPEE_GREEN
+Ikana Graveyard Wonder Item 06,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x2000b,                    RUPEE_GREEN
+Ikana Graveyard Wonder Item 07,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x0000c,                    RUPEE_GREEN
+Ikana Graveyard Wonder Item 08,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x1000c,                    RUPEE_GREEN
+Ikana Graveyard Wonder Item 09,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x2000c,                    RUPEE_GREEN
+Ikana Graveyard Wonder Item 10,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x00109,                    RUPEE_GREEN
+Ikana Graveyard Wonder Item 11,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x10109,                    RUPEE_GREEN
+Ikana Graveyard Wonder Item 12,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x20109,                    RUPEE_GREEN
 Beneath The Graveyard Chest,                            chest,          NONE,                   BENEATH_THE_GRAVEYARD,        0x03,                       RUPEE_PURPLE
 Beneath The Graveyard Song of Storms,                   npc,            NONE,                   BENEATH_THE_GRAVEYARD,        SONG_STORMS,                SONG_STORMS
 Beneath The Graveyard HP,                               chest,          NONE,                   BENEATH_THE_GRAVEYARD,        0x00,                       HEART_PIECE
@@ -1643,9 +1728,18 @@ Pirate Fortress Interior Pot Barrel Maze 2,             pot,            NONE,   
 Pirate Fortress Interior Pot Barrel Maze 3,             pot,            NONE,                   PIRATE_FORTRESS_INTERIOR,     0x0806,                     ARROWS_10
 Pirate Fortress Interior Pot Guarded 1,                 pot,            NONE,                   PIRATE_FORTRESS_INTERIOR,     0x0d06,                     RECOVERY_HEART
 Pirate Fortress Interior Pot Guarded 2,                 pot,            NONE,                   PIRATE_FORTRESS_INTERIOR,     0x0d07,                     ARROWS_10
+Pirate Fortress Interior Wonder Item Skull Forehead 1,  wonder,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00309,                    RUPEE_GREEN
+Pirate Fortress Interior Wonder Item Skull Forehead 2,  wonder,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x10309,                    RUPEE_GREEN
+Pirate Fortress Interior Wonder Item Skull Forehead 3,  wonder,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x20309,                    RUPEE_GREEN
 Pirate Fortress Interior Heart 1,                       heart,          NONE,                   PIRATE_FORTRESS_EXTERIOR,     0x00020,                    RECOVERY_HEART
 Pirate Fortress Interior Heart 2,                       heart,          NONE,                   PIRATE_FORTRESS_EXTERIOR,     0x00021,                    RECOVERY_HEART
 Pirate Fortress Interior Heart 3,                       heart,          NONE,                   PIRATE_FORTRESS_EXTERIOR,     0x00022,                    RECOVERY_HEART
+Pirate Fortress Interior Wonder Item Skull Eyes 1,      wonder,         NONE,                   PIRATE_FORTRESS_EXTERIOR,     0x00018,                    RUPEE_GREEN
+Pirate Fortress Interior Wonder Item Skull Eyes 2,      wonder,         NONE,                   PIRATE_FORTRESS_EXTERIOR,     0x10018,                    RUPEE_GREEN
+Pirate Fortress Interior Wonder Item Skull Eyes 3,      wonder,         NONE,                   PIRATE_FORTRESS_EXTERIOR,     0x20018,                    RUPEE_GREEN
+Pirate Fortress Interior Wonder Item Skull Eyes 4,      wonder,         NONE,                   PIRATE_FORTRESS_EXTERIOR,     0x00019,                    RUPEE_GREEN
+Pirate Fortress Interior Wonder Item Skull Eyes 5,      wonder,         NONE,                   PIRATE_FORTRESS_EXTERIOR,     0x10019,                    RUPEE_GREEN
+Pirate Fortress Interior Wonder Item Skull Eyes 6,      wonder,         NONE,                   PIRATE_FORTRESS_EXTERIOR,     0x20019,                    RUPEE_GREEN
 Great Bay Temple Map,                                   chest,          NONE,                   TEMPLE_GREAT_BAY,             0x1d,                       MAP_GB
 Great Bay Temple Baba Chest,                            chest,          NONE,                   TEMPLE_GREAT_BAY,             0x19,                       STRAY_FAIRY_GB
 Great Bay Temple Boss Key,                              chest,          NONE,                   TEMPLE_GREAT_BAY,             0x1e,                       BOSS_KEY_GB

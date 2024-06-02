@@ -222,6 +222,9 @@
     "Clock Town South Chest Upper": "(can_hookshot || short_hook_anywhere || (has(MASK_DEKU) && event(CLOCK_TOWN_SCRUB)) || (can_goron_bomb_jump && can_hookshot_short)) && final_day"
     "Clock Town Business Scrub": "soul_business_scrub && event(CLOCK_TOWN_SCRUB)"
     "Clock Town Post Box": "has(MASK_POSTMAN)"
+    "Clock Town South Wonder Item 1": "hit_target_range_far"
+    "Clock Town South Wonder Item 2": "hit_target_range_far"
+    "Clock Town South Wonder Item 3": "hit_target_range_far"
 "Clock Town South Upper West":
   region: CLOCK_TOWN_SOUTH
   exits:
@@ -330,6 +333,15 @@
   locations:
     "Clock Town Silver Rupee Chest": "true"
     "Clock Town Postman Hat": "event(POSTMAN_FREEDOM) && between(NIGHT3_PM_06_00, NIGHT3_AM_05_00)"
+    "Clock Town East Wonder Item Target Left 1": "hit_target_range_melee"
+    "Clock Town East Wonder Item Target Left 2": "hit_target_range_melee"
+    "Clock Town East Wonder Item Target Left 3": "hit_target_range_melee"
+    "Clock Town East Wonder Item Target Right 1": "hit_target_range_melee"
+    "Clock Town East Wonder Item Target Right 2": "hit_target_range_melee"
+    "Clock Town East Wonder Item Target Right 3": "hit_target_range_melee"
+    "Clock Town East Wonder Item Basket 1": "true"
+    "Clock Town East Wonder Item Basket 2": "true"
+    "Clock Town East Wonder Item Basket 3": "true"
 "Clock Town East Postbox":
   region: NONE
   exits:
@@ -565,6 +577,9 @@
     "Stock Pot Inn Grandma HP 1": "soul_old_hag && has(MASK_ALL_NIGHT) && (is_day1 || is_day2)"
     "Stock Pot Inn Grandma HP 2": "soul_old_hag && has(MASK_ALL_NIGHT) && (is_day1 || is_day2)"
     "Stock Pot Inn ??? HP": "soul_npc(SOUL_NPC_TOILET_HAND) && cond(setting(erIndoorsExtra), has_paper && midnight, has_paper && midnight && (clock_night3 || has(ROOM_KEY) || has(MASK_DEKU) || has_hover_boots || event(SPI_ROOF_FARORE) || trick(MM_STOCK_POT_WAIT)))"
+    "Stock Pot Inn Wonder Item 1": "has_mask_zora && has_magic"
+    "Stock Pot Inn Wonder Item 2": "has_mask_zora && has_magic"
+    "Stock Pot Inn Wonder Item 3": "has_mask_zora && has_magic"
 "Clock Town East SPI Roof":
   region: CLOCK_TOWN_EAST
   exits:
@@ -862,6 +877,26 @@
     "Termina Field Grass Pack 18 Grass 11": "true"
     "Termina Field Grass Pack 18 Grass 12": "true"
     "Termina Field Rupee": "true"
+    "Termina Field Wonder Item Grass 1": "true"
+    "Termina Field Wonder Item Grass 2": "true"
+    "Termina Field Wonder Item Grass 3": "true"
+    "Termina Field Wonder Item Grass 4": "true"
+    "Termina Field Wonder Item Grass 5": "true"
+    "Termina Field Wonder Item Hollow Trunk": "goron_fast_roll"
+    "Termina Field Wonder Item Fountains 1": "true"
+    "Termina Field Wonder Item Fountains 2": "true"
+    "Termina Field Wonder Item North Ramp": "has_mask_goron"
+    "Termina Field Wonder Item West Ramp": "has_mask_goron"
+    "Termina Field Wonder Item SW Ramp": "has_mask_goron"
+    "Termina Field Wonder Item Shell 1": "hit_target_range_close"
+    "Termina Field Wonder Item Shell 2": "hit_target_range_close"
+    "Termina Field Wonder Item Shell 3": "hit_target_range_close"
+    "Termina Field Wonder Item Shell Side 1": "hit_target_range_melee"
+    "Termina Field Wonder Item Shell Side 2": "hit_target_range_melee"
+    "Termina Field Wonder Item Shell Side 3": "hit_target_range_melee"
+    "Termina Field Wonder Item Graffiti 1": "hit_target_range_melee"
+    "Termina Field Wonder Item Graffiti 2": "hit_target_range_melee"
+    "Termina Field Wonder Item Graffiti 3": "hit_target_range_melee"
   gossip:
     "Termina Field Gossip Southeast": "true"
     "Termina Field Gossip Southwest": "true"
@@ -2273,6 +2308,12 @@
     "Romani Ranch Grass Pack 5 Grass 07": "true"
     "Romani Ranch Grass Pack 5 Grass 08": "true"
     "Romani Ranch Grass Pack 5 Grass 09": "true"
+    "Romani Ranch Wonder Item Fence 1": "true"
+    "Romani Ranch Wonder Item Fence 2": "true"
+    "Romani Ranch Wonder Item Fence 3": "true"
+    "Romani Ranch Wonder Item Fence 4": "true"
+    "Romani Ranch Wonder Item Fence 5": "true"
+    "Romani Ranch Wonder Item Fence 6": "true"
   gossip:
     "Romani Ranch Gossip Entrance": "true"
     "Romani Ranch Gossip Behind House": "true"
@@ -2286,6 +2327,12 @@
     "Romani Ranch": "true"
   locations:
     "Cucco Shack Bunny Mask": "soul_grog && has(MASK_BREMEN)"
+    "Cucco Shack Wonder Item 1": "true"
+    "Cucco Shack Wonder Item 2": "true"
+    "Cucco Shack Wonder Item 3": "true"
+    "Cucco Shack Wonder Item 4": "true"
+    "Cucco Shack Wonder Item 5": "true"
+    "Cucco Shack Wonder Item 6": "true"
   gossip:
     "Cucco Shack Gossip": "true"
 "Doggy Racetrack": #The race is always available
@@ -2311,9 +2358,8 @@
     "Romani Ranch Barn Cow Left": "(between(NIGHT1_PM_06_00, NIGHT1_AM_02_30) || event(ALIENS)) && can_play_epona"
     "Romani Ranch Barn Cow Right Front": "(between(NIGHT1_PM_06_00, NIGHT1_AM_02_30) || event(ALIENS)) && can_play_epona"
     "Romani Ranch Barn Cow Right Back": "(between(NIGHT1_PM_06_00, NIGHT1_AM_02_30) || event(ALIENS)) && can_play_epona"
-    # TODO: Wonder items?
-    #"Romani Ranch Barn Invisible Rupee 1": "true"
-    #"Romani Ranch Barn Invisible Rupee 2": "true"
+    "Romani Ranch Barn Wonder Item 1": "true"
+    "Romani Ranch Barn Wonder Item 2": "true"
 "Ranch House":
   region: ENTRANCE
   exits:
@@ -2809,6 +2855,18 @@
     "Ikana Graveyard Grass Pack Grass 7": "true"
     "Ikana Graveyard Grass Pack Grass 8": "true"
     "Ikana Graveyard Grass Pack Grass 9": "true"
+    "Ikana Graveyard Wonder Item 01": "hit_target_range_close"
+    "Ikana Graveyard Wonder Item 02": "hit_target_range_close"
+    "Ikana Graveyard Wonder Item 03": "hit_target_range_close"
+    "Ikana Graveyard Wonder Item 04": "hit_target_range_close"
+    "Ikana Graveyard Wonder Item 05": "hit_target_range_close"
+    "Ikana Graveyard Wonder Item 06": "hit_target_range_close"
+    "Ikana Graveyard Wonder Item 07": "hit_target_range_close"
+    "Ikana Graveyard Wonder Item 08": "hit_target_range_close"
+    "Ikana Graveyard Wonder Item 09": "hit_target_range_close"
+    "Ikana Graveyard Wonder Item 10": "hit_target_range_close"
+    "Ikana Graveyard Wonder Item 11": "hit_target_range_close"
+    "Ikana Graveyard Wonder Item 12": "hit_target_range_close"
 "Ikana Graveyard Grotto":
   region: ENTRANCE
   events:
