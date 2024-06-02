@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - The angle of interaction of MM gossip stones is more tolerant.
+- If a dungeon is pre-completed, you now start with the boss soul, keys and silver rupees of the dungeon.
 
 ## Fixed
 

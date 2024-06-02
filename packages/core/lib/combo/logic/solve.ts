@@ -888,6 +888,69 @@ export class LogicPassSolver {
       for (const be of bossEvents) {
         world.areas[(WISPS as any)[be]].events[be] = exprTrue();
       }
+
+      /* Handle boss souls */
+      const BOSSES = [
+        ['OOT Deku Tree Boss', Items.OOT_SOUL_BOSS_QUEEN_GOHMA],
+        ['OOT Dodongo Cavern Boss', Items.OOT_SOUL_BOSS_KING_DODONGO],
+        ['OOT Jabu-Jabu Boss', Items.OOT_SOUL_BOSS_BARINADE],
+        ['OOT Forest Temple Boss', Items.OOT_SOUL_BOSS_PHANTOM_GANON],
+        ['OOT Fire Temple Boss', Items.OOT_SOUL_BOSS_VOLVAGIA],
+        ['OOT Water Temple Boss', Items.OOT_SOUL_BOSS_MORPHA],
+        ['OOT Spirit Temple Boss', Items.OOT_SOUL_BOSS_TWINROVA],
+        ['OOT Shadow Temple Boss', Items.OOT_SOUL_BOSS_BONGO_BONGO],
+        ['MM Woodfall Temple Boss', Items.MM_SOUL_BOSS_ODOLWA],
+        ['MM Snowhead Temple Boss', Items.MM_SOUL_BOSS_GOHT],
+        ['MM Great Bay Temple Boss', Items.MM_SOUL_BOSS_GYORG],
+        ['MM Stone Tower Temple Boss', Items.MM_SOUL_BOSS_TWINMOLD],
+      ] as const;
+
+      for(const [loc, soul] of BOSSES) {
+        if(areasBoss.includes(loc)) {
+          const pi = makePlayerItem(soul, worldId);
+          const amount = this.state.pools.required.get(pi) || 0;
+          countMapRemove(this.state.pools.required, pi);
+          countMapAdd(this.state.startingItems, pi, amount);
+        }
+      }
+
+      /* Handle small keys and silver rupees */
+      const KEYS_SILVER_RUPEES = [
+        ['DC', [Items.OOT_RUPEE_SILVER_DC, Items.OOT_POUCH_SILVER_DC]],
+        ['Forest', [Items.OOT_SMALL_KEY_FOREST, Items.OOT_KEY_RING_FOREST, Items.OOT_BOSS_KEY_FOREST]],
+        ['Fire', [Items.OOT_SMALL_KEY_FIRE, Items.OOT_KEY_RING_FIRE, Items.OOT_BOSS_KEY_FIRE]],
+        ['Water', [Items.OOT_SMALL_KEY_WATER, Items.OOT_KEY_RING_WATER, Items.OOT_BOSS_KEY_WATER]],
+        ['Shadow', [Items.OOT_SMALL_KEY_SHADOW, Items.OOT_KEY_RING_SHADOW, Items.OOT_BOSS_KEY_SHADOW,
+            Items.OOT_RUPEE_SILVER_SHADOW_SCYTHE, Items.OOT_POUCH_SILVER_SHADOW_SCYTHE,
+            Items.OOT_RUPEE_SILVER_SHADOW_PIT,    Items.OOT_POUCH_SILVER_SHADOW_PIT,
+            Items.OOT_RUPEE_SILVER_SHADOW_SPIKES, Items.OOT_POUCH_SILVER_SHADOW_SPIKES,
+            Items.OOT_RUPEE_SILVER_SHADOW_BLADES, Items.OOT_POUCH_SILVER_SHADOW_BLADES
+          ]
+        ],
+        ['Spirit', [Items.OOT_SMALL_KEY_SPIRIT, Items.OOT_KEY_RING_SPIRIT, Items.OOT_BOSS_KEY_SPIRIT,
+            Items.OOT_RUPEE_SILVER_SPIRIT_CHILD,    Items.OOT_POUCH_SILVER_SPIRIT_CHILD,
+            Items.OOT_RUPEE_SILVER_SPIRIT_SUN,      Items.OOT_POUCH_SILVER_SPIRIT_SUN,
+            Items.OOT_RUPEE_SILVER_SPIRIT_BOULDERS, Items.OOT_POUCH_SILVER_SPIRIT_BOULDERS,
+            Items.OOT_RUPEE_SILVER_SPIRIT_LOBBY,    Items.OOT_POUCH_SILVER_SPIRIT_LOBBY,
+            Items.OOT_RUPEE_SILVER_SPIRIT_ADULT,    Items.OOT_POUCH_SILVER_SPIRIT_ADULT
+          ]
+        ],
+        ['WF', [Items.MM_SMALL_KEY_WF, Items.MM_KEY_RING_WF, Items.MM_BOSS_KEY_WF]],
+        ['SH', [Items.MM_SMALL_KEY_SH, Items.MM_KEY_RING_SH, Items.MM_BOSS_KEY_SH]],
+        ['GB', [Items.MM_SMALL_KEY_GB, Items.MM_KEY_RING_GB, Items.MM_BOSS_KEY_GB]],
+        ['ST', [Items.MM_SMALL_KEY_ST, Items.MM_KEY_RING_ST, Items.MM_BOSS_KEY_ST]],
+      ] as const;
+
+      for(const [d, keys_sr] of KEYS_SILVER_RUPEES) {
+        if(dungeons.includes(d)) {
+          for(const k of keys_sr) {
+            const pi = makePlayerItem(k, worldId);
+            const amount = this.state.pools.required.get(pi) || 0;
+            countMapRemove(this.state.pools.required, pi);
+            countMapAdd(this.state.startingItems, pi, amount);
+          }
+        }
+      }
     }
 
     /* We need to reset the pathfinder as we changed the starting items and the world */
