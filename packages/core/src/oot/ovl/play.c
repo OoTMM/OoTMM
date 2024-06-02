@@ -458,10 +458,7 @@ static void playAdjustEntrance(GameState_Play* play)
         gSave.entrance = ENTR_OOT_LOST_WOODS_FROM_KOKIRI_FOREST;
         break;
     case ENTR_OOT_CASTLE_STEALTH:
-        if (GetEventChk(EV_OOT_CHK_ZELDA_LETTER))
-            gSave.entrance = ENTR_OOT_CASTLE_CAUGHT;
-        else
-            gSave.entrance = ENTR_OOT_CASTLE_COURTYARD;
+        gSave.entrance = ENTR_OOT_CASTLE_COURTYARD;
         break;
     case ENTR_OOT_CASTLE_STEALTH_FROM_COURTYARD:
         gSave.entrance = ENTR_OOT_GANON_CASTLE_EXTERIOR_FROM_CASTLE; /* Stealth exit as child */
