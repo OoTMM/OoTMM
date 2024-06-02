@@ -75,13 +75,6 @@ static void eventFixes(GameState_Play* play)
         }
     }
 
-    /* Skip Zelda's cutscene when having all the spiritual stones */
-    if (gSave.inventory.quest.stoneEmerald && gSave.inventory.quest.stoneRuby && gSave.inventory.quest.stoneSapphire)
-    {
-        SetEventChk(EV_OOT_CHK_ZELDA_FLED);
-        SetEventChk(EV_OOT_CHK_ZELDA_FLED_BRIDGE);
-    }
-
     /* Set the rainbow bridge flag */
     if (isRainbowBridgeOpen())
     {
@@ -506,6 +499,41 @@ static void masterSwordFix(GameState_Play* play)
     EV_OOT_UNSET_SWORDLESS();
 }
 
+static void Play_SpawnOcarinaOfTime(GameState_Play* play)
+{
+    /* Check if we need to spawn the OoT */
+    if (play->sceneId != SCE_OOT_HYRULE_FIELD)
+        return;
+    if (gSave.age != AGE_CHILD)
+        return;
+    if (!gSave.inventory.quest.stoneEmerald || !gSave.inventory.quest.stoneRuby || !gSave.inventory.quest.stoneSapphire)
+        return;
+    if (!comboHasSoulOot(GI_OOT_SOUL_NPC_ZELDA))
+        return;
+    if (GetEventChk(EV_OOT_CHK_OCARINA_OF_TIME))
+        return;
+
+    /* Spawn */
+    SpawnActor(&play->actorCtx, play, AC_ITEM_OCARINA, 299.f, -136.f, 884.f, 0, 0, 0, 0x3);
+}
+
+static void Play_AfterInit(GameState_Play* play)
+{
+    gLastEntrance = gSave.entrance;
+    g.inGrotto = (play->sceneId == SCE_OOT_GROTTOS || play->sceneId == SCE_OOT_FAIRY_FOUNTAIN);
+    if (!g.inGrotto)
+    {
+        gLastScene = play->sceneId;
+    }
+
+    /* Spawn Custom Triggers */
+    CustomTriggers_Spawn(play);
+    comboSpawnCustomWarps(play);
+
+    /* Other spawns */
+    Play_SpawnOcarinaOfTime(play);
+}
+
 void hookPlay_Init(GameState_Play* play)
 {
     /* Pre-init */
@@ -534,17 +562,7 @@ void hookPlay_Init(GameState_Play* play)
     masterSwordFix(play);
 
     Play_Init(play);
-
-    gLastEntrance = gSave.entrance;
-    g.inGrotto = (play->sceneId == SCE_OOT_GROTTOS || play->sceneId == SCE_OOT_FAIRY_FOUNTAIN);
-    if (!g.inGrotto)
-    {
-        gLastScene = play->sceneId;
-    }
-
-    /* Spawn Custom Triggers */
-    CustomTriggers_Spawn(play);
-    comboSpawnCustomWarps(play);
+    Play_AfterInit(play);
 
     if (!g.customKeep)
     {

@@ -23,7 +23,6 @@ void EnKusa_Aliases(Xflag* xflag)
     case SCE_OOT_HYRULE_FIELD:
         switch (xflag->setupId)
         {
-        case 1: xflag->id += 2; break;
         case 2: xflag->id += 8; break;
         }
         xflag->setupId = 0;

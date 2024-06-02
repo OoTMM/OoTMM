@@ -181,6 +181,10 @@ static void applyStartingEvents(void)
 {
     int skippedTrials;
 
+    /* Always set */
+    SetEventChk(EV_OOT_CHK_ZELDA_FLED);
+    SetEventChk(EV_OOT_CHK_ZELDA_FLED_BRIDGE);
+
     if (Config_Flag(CFG_DOOR_OF_TIME_OPEN))
     {
         SetEventChk(EV_OOT_CHK_DOOR_TIME);

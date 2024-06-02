@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Zelda's Soul is now required for the OoT/SoT check.
 - The angle of interaction of MM gossip stones is more tolerant.
 - If a dungeon is pre-completed, you now start with the boss soul, keys and silver rupees of the dungeon.
 

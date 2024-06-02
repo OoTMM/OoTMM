@@ -89,3 +89,8 @@ PATCH_END
 PATCH_START 0x808372f4
   nop
 PATCH_END
+
+/* Don't use hyrule field setup 1 */
+PATCH_START 0x8009aa50
+  j 0x8009aac4
+PATCH_END
