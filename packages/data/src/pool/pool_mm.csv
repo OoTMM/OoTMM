@@ -1273,6 +1273,15 @@ Ocean Spider House Pot Storage Top 1,                   pot,            NONE,   
 Ocean Spider House Pot Storage Top 2,                   pot,            NONE,                   SPIDER_HOUSE_OCEAN,           0x050f,                     RECOVERY_HEART
 Ocean Spider House Pot Storage Top 3,                   pot,            NONE,                   SPIDER_HOUSE_OCEAN,           0x0510,                     RECOVERY_HEART
 Ocean Spider House Pot Storage 4,                       pot,            NONE,                   SPIDER_HOUSE_OCEAN,           0x0511,                     MAGIC_JAR_SMALL
+Ocean Spider House Wonder Item Masks 1,                 wonder,         NONE,                   SPIDER_HOUSE_OCEAN,           0x00100,                    RUPEE_GREEN
+Ocean Spider House Wonder Item Masks 2,                 wonder,         NONE,                   SPIDER_HOUSE_OCEAN,           0x10100,                    RUPEE_GREEN
+Ocean Spider House Wonder Item Masks 3,                 wonder,         NONE,                   SPIDER_HOUSE_OCEAN,           0x20100,                    RUPEE_GREEN
+Ocean Spider House Wonder Item Masks 4,                 wonder,         NONE,                   SPIDER_HOUSE_OCEAN,           0x00101,                    RUPEE_GREEN
+Ocean Spider House Wonder Item Masks 5,                 wonder,         NONE,                   SPIDER_HOUSE_OCEAN,           0x10101,                    RUPEE_GREEN
+Ocean Spider House Wonder Item Masks 6,                 wonder,         NONE,                   SPIDER_HOUSE_OCEAN,           0x20101,                    RUPEE_GREEN
+Ocean Spider House Wonder Item Masks 7,                 wonder,         NONE,                   SPIDER_HOUSE_OCEAN,           0x00102,                    RUPEE_GREEN
+Ocean Spider House Wonder Item Masks 8,                 wonder,         NONE,                   SPIDER_HOUSE_OCEAN,           0x10102,                    RUPEE_GREEN
+Ocean Spider House Wonder Item Masks 9,                 wonder,         NONE,                   SPIDER_HOUSE_OCEAN,           0x20102,                    RUPEE_GREEN
 Waterfall Rapids Beaver Race 1,                         npc,            NONE,                   WATERFALL_RAPIDS,             BEAVER_1,                   BOTTLE_EMPTY
 Waterfall Rapids Beaver Race 2,                         npc,            NONE,                   WATERFALL_RAPIDS,             BEAVER_2,                   HEART_PIECE
 Road to Ikana Chest,                                    chest,          NONE,                   ROAD_IKANA,                   0x00,                       RUPEE_RED
