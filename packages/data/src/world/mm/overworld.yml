@@ -222,9 +222,9 @@
     "Clock Town South Chest Upper": "(can_hookshot || short_hook_anywhere || (has(MASK_DEKU) && event(CLOCK_TOWN_SCRUB)) || (can_goron_bomb_jump && can_hookshot_short)) && final_day"
     "Clock Town Business Scrub": "soul_business_scrub && event(CLOCK_TOWN_SCRUB)"
     "Clock Town Post Box": "has(MASK_POSTMAN)"
-    "Clock Town South Wonder Item 1": "has_arrows || can_use_deku_bubble || can_hookshot"
-    "Clock Town South Wonder Item 2": "has_arrows || can_use_deku_bubble || can_hookshot"
-    "Clock Town South Wonder Item 3": "has_arrows || can_use_deku_bubble || can_hookshot"
+    "Clock Town South Wonder Item 1": "hit_target_range_far"
+    "Clock Town South Wonder Item 2": "hit_target_range_far"
+    "Clock Town South Wonder Item 3": "hit_target_range_far"
 "Clock Town South Upper West":
   region: CLOCK_TOWN_SOUTH
   exits:
@@ -333,6 +333,15 @@
   locations:
     "Clock Town Silver Rupee Chest": "true"
     "Clock Town Postman Hat": "event(POSTMAN_FREEDOM) && between(NIGHT3_PM_06_00, NIGHT3_AM_05_00)"
+    "Clock Town East Wonder Item Target Left 1": "hit_target_range_melee"
+    "Clock Town East Wonder Item Target Left 2": "hit_target_range_melee"
+    "Clock Town East Wonder Item Target Left 3": "hit_target_range_melee"
+    "Clock Town East Wonder Item Target Right 1": "hit_target_range_melee"
+    "Clock Town East Wonder Item Target Right 2": "hit_target_range_melee"
+    "Clock Town East Wonder Item Target Right 3": "hit_target_range_melee"
+    "Clock Town East Wonder Item Basket 1": "true"
+    "Clock Town East Wonder Item Basket 2": "true"
+    "Clock Town East Wonder Item Basket 3": "true"
 "Clock Town East Postbox":
   region: NONE
   exits:
@@ -2320,9 +2329,8 @@
     "Romani Ranch Barn Cow Left": "(between(NIGHT1_PM_06_00, NIGHT1_AM_02_30) || event(ALIENS)) && can_play_epona"
     "Romani Ranch Barn Cow Right Front": "(between(NIGHT1_PM_06_00, NIGHT1_AM_02_30) || event(ALIENS)) && can_play_epona"
     "Romani Ranch Barn Cow Right Back": "(between(NIGHT1_PM_06_00, NIGHT1_AM_02_30) || event(ALIENS)) && can_play_epona"
-    # TODO: Wonder items?
-    #"Romani Ranch Barn Invisible Rupee 1": "true"
-    #"Romani Ranch Barn Invisible Rupee 2": "true"
+    "Romani Ranch Barn Wonder Item 1": "true"
+    "Romani Ranch Barn Wonder Item 2": "true"
 "Ranch House":
   region: ENTRANCE
   exits:
