@@ -1013,6 +1013,12 @@ Romani Ranch Grass Pack 5 Grass 06,                     grass,          NONE,   
 Romani Ranch Grass Pack 5 Grass 07,                     grass,          NONE,                   ROMANI_RANCH,                 0x60020,                    RANDOM
 Romani Ranch Grass Pack 5 Grass 08,                     grass,          NONE,                   ROMANI_RANCH,                 0x70020,                    RANDOM
 Romani Ranch Grass Pack 5 Grass 09,                     grass,          NONE,                   ROMANI_RANCH,                 0x80020,                    RANDOM
+Romani Ranch Wonder Item Fence 1,                       wonder,         NONE,                   ROMANI_RANCH,                 0x0002a,                    RUPEE_BLUE
+Romani Ranch Wonder Item Fence 2,                       wonder,         NONE,                   ROMANI_RANCH,                 0x0002b,                    RUPEE_BLUE
+Romani Ranch Wonder Item Fence 3,                       wonder,         NONE,                   ROMANI_RANCH,                 0x0002c,                    RUPEE_GREEN
+Romani Ranch Wonder Item Fence 4,                       wonder,         NONE,                   ROMANI_RANCH,                 0x0002d,                    RUPEE_GREEN
+Romani Ranch Wonder Item Fence 5,                       wonder,         NONE,                   ROMANI_RANCH,                 0x0002e,                    RUPEE_GREEN
+Romani Ranch Wonder Item Fence 6,                       wonder,         NONE,                   ROMANI_RANCH,                 0x0002f,                    RUPEE_GREEN
 Cucco Shack Bunny Mask,                                 npc,            CUCCOS,                 CUCCO_SHACK,                  MASK_BUNNY,                 MASK_BUNNY
 Doggy Racetrack Chest,                                  chest,          NONE,                   DOG_RACETRACK,                0x00,                       RUPEE_PURPLE
 Doggy Racetrack HP,                                     npc,            NONE,                   DOG_RACETRACK,                DOG_LADY_HEART_PIECE,       HEART_PIECE
