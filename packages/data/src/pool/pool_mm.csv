@@ -1661,9 +1661,18 @@ Pirate Fortress Interior Pot Barrel Maze 2,             pot,            NONE,   
 Pirate Fortress Interior Pot Barrel Maze 3,             pot,            NONE,                   PIRATE_FORTRESS_INTERIOR,     0x0806,                     ARROWS_10
 Pirate Fortress Interior Pot Guarded 1,                 pot,            NONE,                   PIRATE_FORTRESS_INTERIOR,     0x0d06,                     RECOVERY_HEART
 Pirate Fortress Interior Pot Guarded 2,                 pot,            NONE,                   PIRATE_FORTRESS_INTERIOR,     0x0d07,                     ARROWS_10
+Pirate Fortress Interior Wonder Item Skull Forehead 1,  wonder,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00309,                    RUPEE_GREEN
+Pirate Fortress Interior Wonder Item Skull Forehead 2,  wonder,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x10309,                    RUPEE_GREEN
+Pirate Fortress Interior Wonder Item Skull Forehead 3,  wonder,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x20309,                    RUPEE_GREEN
 Pirate Fortress Interior Heart 1,                       heart,          NONE,                   PIRATE_FORTRESS_EXTERIOR,     0x00020,                    RECOVERY_HEART
 Pirate Fortress Interior Heart 2,                       heart,          NONE,                   PIRATE_FORTRESS_EXTERIOR,     0x00021,                    RECOVERY_HEART
 Pirate Fortress Interior Heart 3,                       heart,          NONE,                   PIRATE_FORTRESS_EXTERIOR,     0x00022,                    RECOVERY_HEART
+Pirate Fortress Interior Wonder Item Skull Eyes 1,      wonder,         NONE,                   PIRATE_FORTRESS_EXTERIOR,     0x00018,                    RUPEE_GREEN
+Pirate Fortress Interior Wonder Item Skull Eyes 2,      wonder,         NONE,                   PIRATE_FORTRESS_EXTERIOR,     0x10018,                    RUPEE_GREEN
+Pirate Fortress Interior Wonder Item Skull Eyes 3,      wonder,         NONE,                   PIRATE_FORTRESS_EXTERIOR,     0x20018,                    RUPEE_GREEN
+Pirate Fortress Interior Wonder Item Skull Eyes 4,      wonder,         NONE,                   PIRATE_FORTRESS_EXTERIOR,     0x00019,                    RUPEE_GREEN
+Pirate Fortress Interior Wonder Item Skull Eyes 5,      wonder,         NONE,                   PIRATE_FORTRESS_EXTERIOR,     0x10019,                    RUPEE_GREEN
+Pirate Fortress Interior Wonder Item Skull Eyes 6,      wonder,         NONE,                   PIRATE_FORTRESS_EXTERIOR,     0x20019,                    RUPEE_GREEN
 Great Bay Temple Map,                                   chest,          NONE,                   TEMPLE_GREAT_BAY,             0x1d,                       MAP_GB
 Great Bay Temple Baba Chest,                            chest,          NONE,                   TEMPLE_GREAT_BAY,             0x19,                       STRAY_FAIRY_GB
 Great Bay Temple Boss Key,                              chest,          NONE,                   TEMPLE_GREAT_BAY,             0x1e,                       BOSS_KEY_GB
