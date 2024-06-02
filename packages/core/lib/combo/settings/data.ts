@@ -595,7 +595,7 @@ export const SETTINGS = [{
   category: 'main.shuffle',
   type: 'boolean',
   description: 'Controls whether or not the wonder items are shuffled (MM)',
-  cond: hasOoT,
+  cond: hasMM,
   default: false
 }, {
   key: 'shuffleOcarinasOot',
