@@ -1361,6 +1361,18 @@ Ikana Graveyard Grass Pack Grass 6,                     grass,          NONE,   
 Ikana Graveyard Grass Pack Grass 7,                     grass,          NONE,                   IKANA_GRAVEYARD,              0x6012f,                    RANDOM
 Ikana Graveyard Grass Pack Grass 8,                     grass,          NONE,                   IKANA_GRAVEYARD,              0x7012f,                    RANDOM
 Ikana Graveyard Grass Pack Grass 9,                     grass,          NONE,                   IKANA_GRAVEYARD,              0x8012f,                    RANDOM
+Ikana Graveyard Wonder Item 01,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x0000a,                    RUPEE_GREEN
+Ikana Graveyard Wonder Item 02,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x1000a,                    RUPEE_GREEN
+Ikana Graveyard Wonder Item 03,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x2000a,                    RUPEE_GREEN
+Ikana Graveyard Wonder Item 04,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x0000b,                    RUPEE_GREEN
+Ikana Graveyard Wonder Item 05,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x1000b,                    RUPEE_GREEN
+Ikana Graveyard Wonder Item 06,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x2000b,                    RUPEE_GREEN
+Ikana Graveyard Wonder Item 07,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x0000c,                    RUPEE_GREEN
+Ikana Graveyard Wonder Item 08,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x1000c,                    RUPEE_GREEN
+Ikana Graveyard Wonder Item 09,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x2000c,                    RUPEE_GREEN
+Ikana Graveyard Wonder Item 10,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x00109,                    RUPEE_GREEN
+Ikana Graveyard Wonder Item 11,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x10109,                    RUPEE_GREEN
+Ikana Graveyard Wonder Item 12,                         wonder,         NONE,                   IKANA_GRAVEYARD,              0x20109,                    RUPEE_GREEN
 Beneath The Graveyard Chest,                            chest,          NONE,                   BENEATH_THE_GRAVEYARD,        0x03,                       RUPEE_PURPLE
 Beneath The Graveyard Song of Storms,                   npc,            NONE,                   BENEATH_THE_GRAVEYARD,        SONG_STORMS,                SONG_STORMS
 Beneath The Graveyard HP,                               chest,          NONE,                   BENEATH_THE_GRAVEYARD,        0x00,                       HEART_PIECE

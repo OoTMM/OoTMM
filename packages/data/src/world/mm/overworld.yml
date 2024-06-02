@@ -2829,6 +2829,18 @@
     "Ikana Graveyard Grass Pack Grass 7": "true"
     "Ikana Graveyard Grass Pack Grass 8": "true"
     "Ikana Graveyard Grass Pack Grass 9": "true"
+    "Ikana Graveyard Wonder Item 01": "hit_target_range_close"
+    "Ikana Graveyard Wonder Item 02": "hit_target_range_close"
+    "Ikana Graveyard Wonder Item 03": "hit_target_range_close"
+    "Ikana Graveyard Wonder Item 04": "hit_target_range_close"
+    "Ikana Graveyard Wonder Item 05": "hit_target_range_close"
+    "Ikana Graveyard Wonder Item 06": "hit_target_range_close"
+    "Ikana Graveyard Wonder Item 07": "hit_target_range_close"
+    "Ikana Graveyard Wonder Item 08": "hit_target_range_close"
+    "Ikana Graveyard Wonder Item 09": "hit_target_range_close"
+    "Ikana Graveyard Wonder Item 10": "hit_target_range_close"
+    "Ikana Graveyard Wonder Item 11": "hit_target_range_close"
+    "Ikana Graveyard Wonder Item 12": "hit_target_range_close"
 "Ikana Graveyard Grotto":
   region: ENTRANCE
   events:
