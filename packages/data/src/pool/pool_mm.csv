@@ -754,6 +754,23 @@ Swamp Spider House Pot Jar Room 4,                      pot,            NONE,   
 Swamp Spider House Pot Jar Room 5,                      pot,            NONE,                   SPIDER_HOUSE_SWAMP,           0x0416,                     RECOVERY_HEART
 Swamp Spider House Pot Jar Room 6,                      pot,            NONE,                   SPIDER_HOUSE_SWAMP,           0x0417,                     RECOVERY_HEART
 Swamp Spider House Pot Jar Room 7,                      pot,            NONE,                   SPIDER_HOUSE_SWAMP,           0x0418,                     RECOVERY_HEART
+Swamp Spider House Wonder Item Pillars 01,              wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x0010a,                    RUPEE_GREEN
+Swamp Spider House Wonder Item Pillars 02,              wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x1010a,                    RUPEE_GREEN
+Swamp Spider House Wonder Item Pillars 03,              wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x2010a,                    RUPEE_GREEN
+Swamp Spider House Wonder Item Pillars 04,              wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x0010b,                    RUPEE_GREEN
+Swamp Spider House Wonder Item Pillars 05,              wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x1010b,                    RUPEE_GREEN
+Swamp Spider House Wonder Item Pillars 06,              wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x2010b,                    RUPEE_GREEN
+Swamp Spider House Wonder Item Pillars 07,              wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x0010c,                    RUPEE_GREEN
+Swamp Spider House Wonder Item Pillars 08,              wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x1010c,                    RUPEE_GREEN
+Swamp Spider House Wonder Item Pillars 09,              wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x2010c,                    RUPEE_GREEN
+Swamp Spider House Wonder Item Pillars 10,              wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x0010d,                    RUPEE_GREEN
+Swamp Spider House Wonder Item Pillars 11,              wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x1010d,                    RUPEE_GREEN
+Swamp Spider House Wonder Item Pillars 12,              wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x2010d,                    RUPEE_GREEN
+Swamp Spider House Wonder Item Pots 1,                  wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x00419,                    RUPEE_GREEN
+Swamp Spider House Wonder Item Pots 2,                  wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x0041a,                    RUPEE_GREEN
+Swamp Spider House Wonder Item Pots 3,                  wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x0041b,                    RUPEE_GREEN
+Swamp Spider House Wonder Item Pots 4,                  wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x0041c,                    RUPEE_BLUE
+Swamp Spider House Wonder Item Pots 5,                  wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x0041d,                    RUPEE_RED
 Mountain Village Waterfall Chest,                       chest,          NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x00,                       RUPEE_RED
 Mountain Village Don Gero Mask,                         npc,            HUNGRY_GORON,           MOUNTAIN_VILLAGE_WINTER,      MASK_DON_GERO,              MASK_DON_GERO
 Mountain Village Frog Choir HP,                         npc,            DON_GERO_CHOIR,         MOUNTAIN_VILLAGE_WINTER,      FROG_HEART_PIECE,           HEART_PIECE
