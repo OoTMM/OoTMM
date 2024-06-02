@@ -222,6 +222,9 @@
     "Clock Town South Chest Upper": "(can_hookshot || short_hook_anywhere || (has(MASK_DEKU) && event(CLOCK_TOWN_SCRUB)) || (can_goron_bomb_jump && can_hookshot_short)) && final_day"
     "Clock Town Business Scrub": "soul_business_scrub && event(CLOCK_TOWN_SCRUB)"
     "Clock Town Post Box": "has(MASK_POSTMAN)"
+    "Clock Town South Wonder Item 1": "has_arrows || can_use_deku_bubble || can_hookshot"
+    "Clock Town South Wonder Item 2": "has_arrows || can_use_deku_bubble || can_hookshot"
+    "Clock Town South Wonder Item 3": "has_arrows || can_use_deku_bubble || can_hookshot"
 "Clock Town South Upper West":
   region: CLOCK_TOWN_SOUTH
   exits:

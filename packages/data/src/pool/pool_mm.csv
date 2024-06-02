@@ -12,6 +12,9 @@ Clock Town Platform HP,                                 collectible,    NONE,   
 Clock Town Business Scrub,                              npc,            NONE,                   CLOCK_TOWN_SOUTH,             SCRUB_LAND,                 DEED_LAND
 Clock Town Post Box,                                    npc,            NONE,                   CLOCK_TOWN_SOUTH,             POSTBOX,                    HEART_PIECE
 Clock Town Owl Statue,                                  npc,            NONE,                   CLOCK_TOWN_SOUTH,             OWL_CLOCK_TOWN,             OWL_CLOCK_TOWN
+Clock Town South Wonder Item 1,                         wonder,         NONE,                   CLOCK_TOWN_SOUTH,             0x0001d,                    RUPEE_GREEN
+Clock Town South Wonder Item 2,                         wonder,         NONE,                   CLOCK_TOWN_SOUTH,             0x1001d,                    RUPEE_GREEN
+Clock Town South Wonder Item 3,                         wonder,         NONE,                   CLOCK_TOWN_SOUTH,             0x2001d,                    RUPEE_GREEN
 Clock Town Tree HP,                                     collectible,    NONE,                   CLOCK_TOWN_NORTH,             0x0a,                       HEART_PIECE
 Clock Town Bomber Notebook,                             npc,            NONE,                   CLOCK_TOWN_NORTH,             BOMBER_NOTEBOOK,            BOMBER_NOTEBOOK
 Clock Town Blast Mask,                                  npc,            NONE,                   CLOCK_TOWN_NORTH,             MASK_BLAST,                 MASK_BLAST
