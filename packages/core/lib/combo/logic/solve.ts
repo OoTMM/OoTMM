@@ -909,7 +909,7 @@ export class LogicPassSolver {
         if(areasBoss.includes(loc)) {
           const pi = makePlayerItem(soul, worldId);
           const amount = this.state.pools.required.get(pi) || 0;
-          countMapRemove(this.state.pools.required, pi);
+          countMapRemove(this.state.pools.required, pi, amount);
           countMapAdd(this.state.startingItems, pi, amount);
         }
       }
@@ -946,7 +946,7 @@ export class LogicPassSolver {
           for(const k of keys_sr) {
             const pi = makePlayerItem(k, worldId);
             const amount = this.state.pools.required.get(pi) || 0;
-            countMapRemove(this.state.pools.required, pi);
+            countMapRemove(this.state.pools.required, pi, amount);
             countMapAdd(this.state.startingItems, pi, amount);
           }
         }
