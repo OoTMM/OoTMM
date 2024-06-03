@@ -41,7 +41,7 @@ function asmPatchGroups(world: World, settings: Settings) {
     MM_CLOCK_SPEED_VERYFAST: settings.clockSpeed === 'veryfast',
     MM_CLOCK_SPEED_SUPERFAST: settings.clockSpeed === 'superfast',
     MM_BOSS_WARP_PADS_BEATEN: settings.bossWarpPads === 'bossBeaten',
-    OOT_FIRE_TEMPLE_CHILD: settings.fireChild,
+    OOT_FIRE_TEMPLE_CHILD: world.resolvedFlags.openDungeonsOot.has('fireChild'),
     OOT_FAST_BUNNY_HOOD: settings.fastBunnyHood,
     OOT_AGELESS_SWORDS: settings.agelessSwords,
     OOT_AGELESS_SHIELDS: settings.agelessShields,

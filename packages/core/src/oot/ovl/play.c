@@ -94,6 +94,22 @@ static void eventFixes(GameState_Play* play)
         gOotSave.perm[SCE_OOT_DEATH_MOUNTAIN_CRATER].switches |= 0x00000008;
         gOotSave.inventory.items[ITS_OOT_MAGIC_BEAN] = ITEM_OOT_MAGIC_BEAN;
     }
+
+    if(Config_Flag(CFG_OOT_OPEN_JABU_JABU))
+        SetEventChk(EV_OOT_CHK_JABU_JABU_OPEN);
+
+    if(Config_Flag(CFG_OOT_OPEN_SHADOW_TEMPLE))
+        gSave.perm[SCE_OOT_GRAVEYARD].switches |= 0xc0000000;
+
+    if(Config_Flag(CFG_OOT_OPEN_DODONGO_CAVERN))
+        gSave.perm[SCE_OOT_DEATH_MOUNTAIN_TRAIL].switches |= 0x00000010;
+
+    if(Config_Flag(CFG_OOT_OPEN_WATER_TEMPLE))
+        gSave.perm[SCE_OOT_LAKE_HYLIA].switches |= 0x80000000;
+
+    if(Config_Flag(CFG_OOT_OPEN_WELL)) 
+        SetEventChk(EV_OOT_CHK_WELL_DRAINED);
+
 }
 
 static void sendSelfTriforce(void)

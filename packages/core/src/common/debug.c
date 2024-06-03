@@ -476,18 +476,18 @@ static void cheatAllItems(GameState_Play* play)
     gSave.itemEquips.sword = 1;
     gSave.itemEquips.shield = 2;
     gMmExtraFlags2.progressiveShield = 1;
-    //gSave.inventory.upgrades.quiver = 3;
+    gSave.inventory.upgrades.quiver = 3;
     gSave.inventory.upgrades.dekuStick = 3;
     gSave.inventory.upgrades.dekuNut = 3;
     gSave.inventory.upgrades.strength = 3;
     gMmExtraFlags2.childWallet = 1;
     gSave.inventory.upgrades.wallet = 3;
     //gMmExtraFlags3.bottomlessWallet = 1;
-    gSave.inventory.upgrades.bombBag = 0;
+    gSave.inventory.upgrades.bombBag = 3;
 
     gSave.itemEquips.buttonItems[0][0] = ITEM_MM_SWORD_KOKIRI;
     gSave.inventory.items[ITS_MM_OCARINA] = ITEM_MM_OCARINA_OF_TIME;
-    //gSave.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
+    gSave.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
     gSave.inventory.items[ITS_MM_ARROW_FIRE] = ITEM_MM_ARROW_FIRE;
     gSave.inventory.items[ITS_MM_ARROW_ICE] = ITEM_MM_ARROW_ICE;
     gSave.inventory.items[ITS_MM_ARROW_LIGHT] = ITEM_MM_ARROW_LIGHT;
@@ -551,7 +551,7 @@ static void cheatAllItems(GameState_Play* play)
     gSave.inventory.quest.songEmpty = 1;
     gSave.inventory.quest.songOrder = 1;
     gSave.inventory.quest.songSun = 1;
-    gSave.inventory.quest.songSaria = 0; /* left out because it currently breaks the audio channels */
+    gSave.inventory.quest.songSaria = 1;
 
     gMmSave.playerData.magicAcquired = 1;
     gMmSave.playerData.doubleMagic = 1;
@@ -567,7 +567,7 @@ static void cheatAllItems(GameState_Play* play)
     gSave.inventory.ammo[ITS_MM_BOMBS] = 40;
 
     gSave.playerData.healthMax = 0x10 * 20;
-    gSave.playerData.health = 0x10 * 3;
+    gSave.playerData.health = gSave.playerData.healthMax;
 
     gMmExtraTrade.trade1 = 0x3f;
     gMmExtraTrade.trade2 = 0x1f;

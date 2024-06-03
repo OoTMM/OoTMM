@@ -806,7 +806,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     DOOR_OF_TIME_OPEN: settings.doorOfTime === 'open',
     OOT_OPEN_DEKU: settings.dekuTree === 'open',
     OOT_CLOSED_DEKU: settings.dekuTree === 'closed',
-    OOT_ADULT_DEKU: settings.dekuTreeAdult,
+    OOT_ADULT_DEKU:  world.resolvedFlags.openDungeonsOot.has('dekuTreeAdult'),
     ER_DUNGEONS: settings.erDungeons !== 'none',
     ER_MAJOR_DUNGEONS: settings.erMajorDungeons,
     ER_BOSS: settings.erBoss !== 'none',
@@ -867,7 +867,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MM_MAJORA_CHILD_CUSTOM: settings.majoraChild === 'custom',
     FILL_WALLETS: settings.fillWallets,
     CHILD_WALLET: settings.childWallets,
-    OOT_ADULT_WELL: settings.wellAdult,
+    OOT_ADULT_WELL: world.resolvedFlags.openDungeonsOot.has('wellAdult'),
     COLOSSAL_WALLET: settings.colossalWallets,
     BOTTOMLESS_WALLET: settings.bottomlessWallets,
     OOT_AGELESS_BOOTS: settings.agelessBoots,
@@ -980,6 +980,11 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     ONLY_OOT: settings.games === 'oot',
     ONLY_MM: settings.games === 'mm',
     OOT_PLANTED_BEANS: settings.ootPreplantedBeans,
+    OOT_OPEN_JABU_JABU: world.resolvedFlags.openDungeonsOot.has('JJ'),
+    OOT_OPEN_SHADOW_TEMPLE: world.resolvedFlags.openDungeonsOot.has('Shadow'),
+    OOT_OPEN_DODONGO_CAVERN: world.resolvedFlags.openDungeonsOot.has('DC'),
+    OOT_OPEN_WATER_TEMPLE: world.resolvedFlags.openDungeonsOot.has('Water'),
+    OOT_OPEN_WELL: world.resolvedFlags.openDungeonsOot.has('BotW'),
   };
 
   for (const v in exprs) {

@@ -58,6 +58,7 @@
 #define EV_OOT_CHK_LIGHT_ARROW              0xc4
 #define EV_OOT_CHK_MEDALLION_SPIRIT         0xc8
 #define EV_OOT_CHK_FROGS_GAME               0xd0
+#define EV_OOT_CHK_JABU_JABU_OPEN           0x3a
 
 #define EV_OOT_CHK_TRIAL_LIGHT              0xbf
 #define EV_OOT_CHK_TRIAL_FIRE               0xbe

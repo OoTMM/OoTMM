@@ -185,7 +185,12 @@ export const CONFVARS = [
   'ONLY_MM',
   'MM_KEEP_ITEMS_RESET',
   'MM_FAST_MASKS',
-  'OOT_PLANTED_BEANS'
+  'OOT_PLANTED_BEANS',
+  'OOT_OPEN_JABU_JABU',
+  'OOT_OPEN_SHADOW_TEMPLE',
+  'OOT_OPEN_DODONGO_CAVERN',
+  'OOT_OPEN_WATER_TEMPLE',
+  'OOT_OPEN_WELL',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

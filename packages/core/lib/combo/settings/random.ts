@@ -220,30 +220,13 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
     base.soulsBossMm = booleanWeighted(random, 0.5);;
   }
 
-  /* Dungeon age modifiers - 25% all true, 25% all false, 50% individual */
-  switch (randomInt(random, 4)) {
-  case 0:
-    base.dekuTreeAdult = true;
-    base.wellAdult = true;
-    base.fireChild = true;
-    break;
-  case 1:
-    base.dekuTreeAdult = false;
-    base.wellAdult = false;
-    base.fireChild = false;
-    break;
-  default:
-    base.dekuTreeAdult = booleanWeighted(random, 0.5);
-    base.wellAdult = booleanWeighted(random, 0.5);
-    base.fireChild = booleanWeighted(random, 0.5);
-  }
-
   /* Events - 25% full open, 25% full closed, 50% individual */
   switch (randomInt(random, 4)) {
   case 0:
     base.skipZelda = true;
     base.openMoon = true;
     base.openDungeonsMm = { type: 'all' };
+    base.openDungeonsOot = { type: 'all' };
     base.clearStateDungeonsMm = 'both';
     base.doorOfTime = 'open';
     base.dekuTree = 'open';
@@ -255,6 +238,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
     base.skipZelda = false;
     base.openMoon = false;
     base.openDungeonsMm = { type: 'none' };
+    base.openDungeonsOot = { type: 'none' };
     base.clearStateDungeonsMm = 'none';
     base.doorOfTime = 'closed';
     base.dekuTree = 'closed';
@@ -266,6 +250,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
     base.skipZelda = booleanWeighted(random, 0.3);
     base.openMoon = booleanWeighted(random, 0.3);
     base.openDungeonsMm = { type: 'random' };
+    base.openDungeonsOot = { type: 'random' };
     base.clearStateDungeonsMm = sampleWeighted(random, { none: 5, WF: 1, GB: 1, both: 2 });
     base.doorOfTime = sampleWeighted(random, { closed: 10, open: 7 });
     base.dekuTree = sampleWeighted(random, { open: 10, closed: 7 });

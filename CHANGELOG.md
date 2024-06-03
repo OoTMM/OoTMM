@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - Add a setting to shuffle Wonder Items (non-MQ).
+- Add a setting to make some OoT dungeons open.
 
 ### Changed
 
