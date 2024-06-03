@@ -219,7 +219,7 @@
 "has_hot_water_farore": "can_use_farore && (has_hot_water_mtn || has_hot_water_well)"
 
 # Hit targets
-"hit_target_range_melee": "has_sticks || has_nuts || has_weapon || hit_target_range_close"
+"hit_target_range_melee": "has_sticks || has_nuts || has_weapon || has_bombs || hit_target_range_close"
 "hit_target_range_close": "can_hookshot_short || hit_target_range_far"
 "hit_target_range_far": "can_use_deku_bubble || has_arrows || has_mask_zora || can_hookshot"
 

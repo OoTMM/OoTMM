@@ -386,7 +386,7 @@ Termina Field Wonder Item Fountains 1,                  wonder,         NONE,   
 Termina Field Wonder Item Fountains 2,                  wonder,         NONE,                   TERMINA_FIELD,                0x00060,                    RUPEE_BLUE
 Termina Field Wonder Item North Ramp,                   wonder,         NONE,                   TERMINA_FIELD,                0x00061,                    RUPEE_BLUE
 Termina Field Wonder Item West Ramp,                    wonder,         NONE,                   TERMINA_FIELD,                0x00062,                    RUPEE_BLUE
-Termina Field Wonder Item SW Ramp,                      wonder,         NONE,                   TERMINA_FIELD,                0x00063,                    RUPEE_BLUE
+Termina Field Wonder Item South West Ramp,              wonder,         NONE,                   TERMINA_FIELD,                0x00063,                    RUPEE_BLUE
 Termina Field Wonder Item Shell 1,                      wonder,         NONE,                   TERMINA_FIELD,                0x00064,                    RUPEE_GREEN
 Termina Field Wonder Item Shell 2,                      wonder,         NONE,                   TERMINA_FIELD,                0x10064,                    RUPEE_GREEN
 Termina Field Wonder Item Shell 3,                      wonder,         NONE,                   TERMINA_FIELD,                0x20064,                    RUPEE_GREEN
