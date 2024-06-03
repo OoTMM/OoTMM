@@ -180,7 +180,7 @@
   region: KOKIRI_FOREST
   exits:
     "Kokiri Forest": "can_bypass_mido"
-    "Deku Tree": "(setting(dekuTree, open) || (is_child && setting(dekuTree, vanilla)) || event(MIDO_MOVED)) && (is_child || setting(dekuTreeAdult))"
+    "Deku Tree": "(setting(dekuTree, open) || (is_child && setting(dekuTree, vanilla)) || event(MIDO_MOVED)) && (is_child || setting(openDungeonsOot, dekuTreeAdult))"
   events:
     STICKS: "is_child && soul_deku_baba && (can_boomerang || has_weapon)"
     MIDO_MOVED: "can_move_mido"
@@ -1116,7 +1116,7 @@
     "Hyrule Field": "true"
     "Kakariko Trail Start": "setting(kakarikoGate, open) || event(KAKARIKO_GATE_OPEN) || is_adult || climb_anywhere || hookshot_anywhere"
     "Graveyard": "true"
-    "Bottom of the Well": "((setting(openDungeonsOot, BotW) || event(WELL_DRAIN)) && cond(setting(wellAdult), true, is_child)) || (is_child && (has_iron_boots || longshot_anywhere || time_travel_at_will)) || (time_travel_at_will && trick(OOT_WELL_ADULT_TT))"
+    "Bottom of the Well": "((setting(openDungeonsOot, BotW) || event(WELL_DRAIN)) && cond(setting(openDungeonsOot, wellAdult), true, is_child)) || (is_child && (has_iron_boots || longshot_anywhere || time_travel_at_will)) || (time_travel_at_will && trick(OOT_WELL_ADULT_TT))"
     "Skulltula House": "true"
     "Shooting Gallery Adult": "(is_adult && is_day) || (time_travel_at_will && trick(OOT_ADULT_GALLERY_TT))"
     "Kakariko Rooftop": "(is_child && is_day) || can_hookshot || (is_adult && trick(OOT_PASS_COLLISION)) || climb_anywhere"
@@ -2074,7 +2074,7 @@
 "Death Mountain Crater Warp":
   region: DEATH_MOUNTAIN_CRATER
   exits:
-    "Death Mountain Crater Near Temple": "has_tunic_goron && (is_adult || setting(fireChild) || has_hover_boots || climb_anywhere || hookshot_anywhere)"
+    "Death Mountain Crater Near Temple": "has_tunic_goron && (is_adult || setting(openDungeonsOot, fireChild) || has_hover_boots || climb_anywhere || hookshot_anywhere)"
     "Death Mountain Crater Bottom": "can_hookshot || has_hover_boots || can_ride_bean(BEAN_DEATH_MOUNTAIN_CRATER)"
     "Death Mountain Crater Bottom Child": "is_child"
     "Death Mountain Crater Bottom Adult Rupees": "is_adult && scarecrow_longshot"
@@ -2088,7 +2088,7 @@
   region: DEATH_MOUNTAIN_CRATER
   exits:
     "Fire Temple": "true"
-    "Death Mountain Crater Warp": "has_tunic_goron_strict && (is_adult || setting(fireChild) || has_hover_boots || climb_anywhere || hookshot_anywhere)"
+    "Death Mountain Crater Warp": "has_tunic_goron_strict && (is_adult || setting(openDungeonsOot, fireChild) || has_hover_boots || climb_anywhere || hookshot_anywhere)"
 "Death Mountain Crater Generic Grotto":
   region: ENTRANCE
   age_change: false

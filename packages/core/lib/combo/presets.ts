@@ -343,9 +343,10 @@ const PRESET_ALLSANITY = makeSettings({
   colossalWallets: true,
   fastBunnyHood: true,
   dekuTree: 'closed',
-  dekuTreeAdult: true,
-  wellAdult: true,
-  fireChild: true,
+  openDungeonsOot: {
+    type: "specific",
+    values: ["dekuTreeAdult", "wellAdult", "fireChild"]
+  },
   erBoss: 'full',
   erDungeons: 'full',
   erMajorDungeons: true,
@@ -423,9 +424,10 @@ const PRESET_HELL = makeSettings({
   colossalWallets: true,
   fastBunnyHood: true,
   dekuTree: 'closed',
-  dekuTreeAdult: true,
-  wellAdult: true,
-  fireChild: true,
+  openDungeonsOot: {
+    type: "specific",
+    values: ["dekuTreeAdult", "wellAdult", "fireChild"]
+  },
   erBoss: 'full',
   erDungeons: 'full',
   erMajorDungeons: true,
@@ -743,9 +745,10 @@ const PRESET_CROSSKEYS = makeSettings({
   swordlessAdult: true,
   doorOfTime: 'open',
   ageChange: 'oot',
-  dekuTreeAdult: true,
-  wellAdult: true,
-  fireChild: true,
+  openDungeonsOot: {
+    type: "specific",
+    values: ["dekuTreeAdult", "wellAdult", "fireChild"]
+  },
   kakarikoGate: 'open',
   openZdShortcut: true,
   zoraKing: 'open',
