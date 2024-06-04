@@ -4,14 +4,6 @@
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x33c) = (h); } while (0)
 
-void EnMa4_DisplayTextBoxAfterGame(GameState_Play* play, s16 messageId, Actor* actor)
-{
-    comboSpawnItemGiver(play, NPC_MM_SONG_EPONA);
-    PlayerDisplayTextBox(play, messageId, actor);
-}
-
-PATCH_CALL(0x80abee64, EnMa4_DisplayTextBoxAfterGame);
-
 static void EnMa4_HandleLearnSongEpona(Actor* this, GameState_Play* play)
 {
     Actor_Player* link;
