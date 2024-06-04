@@ -469,7 +469,6 @@
 # define AC_EN_VIEWER           0x01c
 # define AC_EN_BUBBLE           0x01d
 # define AC_DOOR_SHUTTER        0x01e
-# define AC_ITEM_GIVER          0x01f
 # define AC_EN_BOOM             0x020
 # define AC_EN_TORCH2           0x021
 # define AC_EN_MINIFROG         0x022
