@@ -1,8 +1,8 @@
 #include <combo.h>
 
-/* Never play the epona song cutscene */
-PATCH_START 0x80abee58
-  nop
+/* Always play the epona song cutscene */
+PATCH_START 0x80abee54
+  li t4,1
 PATCH_END
 
 /* Skip the whole alien cutscene */
