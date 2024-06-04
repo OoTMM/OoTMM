@@ -937,6 +937,7 @@
   locations:
     "Lost Woods Target": "can_use_slingshot"
     "Lost Woods Skull Kid": "is_child && can_play_saria"
+    "Lost Woods Sell Skull Mask": "is_child && can_play_saria && has(MASK_SKULL)"
     "Lost Woods Memory Game": "is_child && can_play_minigame"
     "Lost Woods Scrub Sticks Upgrade": "is_child && business_scrub(0x00)"
     "Lost Woods Odd Mushroom": "soul_grog && adult_trade(COJIRO)"

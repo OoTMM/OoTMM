@@ -94,6 +94,7 @@ Castle Courtyard Wonder Item,                               wonder,         NONE
 Lost Woods Gift from Saria,                                 npc,            NONE,                 LOST_WOODS,                     SARIA_OCARINA,              OCARINA
 Lost Woods Target,                                          npc,            NONE,                 LOST_WOODS,                     LOST_WOODS_TARGET,          SLINGSHOT
 Lost Woods Skull Kid,                                       npc,            NONE,                 LOST_WOODS,                     LOST_WOODS_SKULL_KID,       HEART_PIECE
+Lost Woods Sell Skull Mask,                                 npc,            NONE,                 LOST_WOODS,                     MASK_SELL_SKULL,            RUPEE_RED
 Lost Woods Memory Game,                                     npc,            NONE,                 LOST_WOODS,                     LOST_WOODS_MEMORY,          HEART_PIECE
 Lost Woods Scrub Sticks Upgrade,                            scrub,          NONE,                 LOST_WOODS,                     0x00,                       STICK_UPGRADE
 Lost Woods Scrub Near Theater Left,                         scrub,          NONE,                 LOST_WOODS,                     0x01,                       STICK

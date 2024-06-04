@@ -18,8 +18,3 @@ PATCH_END
 PATCH_START 0x8097e108
   nop
 PATCH_END
-
-/* Disable "SOLD OUT" when selling the mask */
-PATCH_START 0x8097e1fc
-  nop
-PATCH_END
