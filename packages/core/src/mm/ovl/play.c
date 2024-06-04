@@ -666,7 +666,6 @@ void hookPlay_Init(GameState_Play* play)
         gLastScene = play->sceneId;
     }
     CustomTriggers_Spawn(play);
-    comboSpawnItemGivers(play);
     comboSpawnCustomWarps(play);
     spawnSirloin(play);
 

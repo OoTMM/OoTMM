@@ -104,11 +104,11 @@ int DoorWarp1_ShouldTrigger(Actor* this, GameState_Play* play)
     int id;
     const BlueWarpData* data;
 
+    if (this->parent && this->parent->id != AC_PLAYER)
+        this->parent = NULL;
+
     if (DoorWarp1_Collide(this, play))
     {
-        if ((GET_LINK(play)->state & 0x400) != 0)
-            return 0;
-
         id = DoorWarp1_GetID(play);
         if (id == -1)
             return 1;
@@ -116,12 +116,21 @@ int DoorWarp1_ShouldTrigger(Actor* this, GameState_Play* play)
 
         if (!GetEventChk(data->event))
         {
-            comboSpawnItemGiver(play, data->npc);
+            if (Actor_HasParent(this))
+            {
+                SetEventChk(data->event);
+            }
+            else
+            {
+                comboGiveItemNpc(this, play, data->gi, data->npc, 16384.f, 16384.f);
+            }
             return 0;
         }
 
+        if ((GET_LINK(play)->state & 0x400) != 0)
+            return 0;
+
         comboTriggerWarp(play, id);
-        return 0;
     }
     return 0;
 }

@@ -125,6 +125,8 @@
 #define EV_MM_WEEK_DUNGEON_GB                   MM_EV(55,   7)
 #define EV_MM_WEEK_DUNGEON_ST                   MM_EV(52,   5)
 #define EV_MM_WEEK_WITCH_MUSHROOM               MM_EV(53,   3)
+#define EV_MM_WEEK_SOUND_TEST_REWARD1           MM_EV(50,   0)
+#define EV_MM_WEEK_SOUND_TEST_REWARD2           MM_EV(51,   7)
 
 #define EV_MM_WEEK_NOTEBOOK_MET_ANJU                        MM_EV(66, 0)
 #define EV_MM_WEEK_NOTEBOOK_MET_KAFEI                       MM_EV(66, 1)

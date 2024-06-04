@@ -127,7 +127,6 @@ int comboIsChateauActive(void);
 int comboIsLinkAdult(void);
 
 void comboSpawnItemGiver(GameState_Play* play, u16 npcId);
-void comboSpawnItemGivers(GameState_Play* play);
 
 /* libc */
 int toupper(int c);
