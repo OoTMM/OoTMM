@@ -215,6 +215,7 @@ Kakariko Potion Shop Item 6,                                shop,           NONE
 Kakariko Potion Shop Item 7,                                shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x3e,                       POTION_GREEN
 Kakariko Potion Shop Item 8,                                shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x3f,                       POTION_RED
 Graveyard Dampe Game,                                       collectible,    NONE,                 GRAVEYARD,                      0x1f,                       HEART_PIECE
+Graveyard Sell Spooky Mask,                                 npc,            NONE,                 GRAVEYARD,                      MASK_SELL_SPOOKY,           RUPEE_RED
 Graveyard ReDead Tomb,                                      chest,          NONE,                 TOMB_REDEAD,                    0x00,                       HEART_PIECE
 Graveyard Royal Tomb Song,                                  npc,            NONE,                 TOMB_ROYAL,                     ROYAL_TOMB_SONG,            SONG_SUN
 Graveyard Royal Tomb Chest,                                 chest,          NONE,                 TOMB_ROYAL,                     0x00,                       BOMBS_5
