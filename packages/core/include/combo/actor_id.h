@@ -5,7 +5,6 @@
 #if defined(GAME_OOT)
 # define AC_PLAYER                  0x000
 # define AC_EN_TEST                 0x002
-# define AC_ITEM_GIVER              0x003
 # define AC_EN_GIRLA                0x004
 # define AC_CUSTOM_WARP             0x005
 # define AC_CUSTOM_TRIGGERS         0x006
