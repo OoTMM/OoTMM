@@ -430,6 +430,7 @@ export const RUPEES = new Set([
   Items.OOT_RUPEE_RED,
   Items.OOT_RUPEE_PURPLE,
   Items.OOT_RUPEE_HUGE,
+  Items.OOT_RUPEE_RAINBOW,
   Items.MM_RUPEE_GREEN,
   Items.MM_RUPEE_BLUE,
   Items.MM_RUPEE_RED,
@@ -442,6 +443,7 @@ export const RUPEES = new Set([
   Items.SHARED_RUPEE_PURPLE,
   Items.SHARED_RUPEE_SILVER,
   Items.SHARED_RUPEE_GOLD,
+  Items.SHARED_RUPEE_RAINBOW,
 ]);
 
 export const RUPEES_SILVER = new Set([

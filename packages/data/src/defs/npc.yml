@@ -83,8 +83,8 @@ OOT_FAIRY_SPELL_FIRE:           0x51
 OOT_FAIRY_SPELL_WIND:           0x52
 OOT_FAIRY_SPELL_LOVE:           0x53
 OOT_MASK_SELL_KEATON:           0x54
-OOT_MASK_SELL_SPOOKY:           0x55
-OOT_MASK_SELL_SKULL:            0x56
+OOT_MASK_SELL_SKULL:            0x55
+OOT_MASK_SELL_SPOOKY:           0x56
 OOT_MASK_SELL_BUNNY:            0x57
 OOT_WEIRD_EGG:                  0x58
 OOT_POCKET_EGG:                 0x59
