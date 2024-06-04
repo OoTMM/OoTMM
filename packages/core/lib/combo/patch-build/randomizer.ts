@@ -897,6 +897,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     SHARED_SKELETON_KEY: settings.sharedSkeletonKey,
     OOT_SHUFFLE_GRASS: settings.shuffleGrassOot,
     MM_SHUFFLE_GRASS: settings.shuffleGrassMm,
+    OOT_SHUFFLE_MASK_TRADES: settings.shuffleMaskTrades,
     MENU_NOTEBOOK: settings.menuNotebook,
     OOT_AGELESS_CHILD_TRADE: settings.agelessChildTrade,
     OOT_START_ADULT: settings.startingAge === 'adult',

@@ -622,6 +622,14 @@ export const SETTINGS = [{
   cond: hasOoT,
   default: true
 }, {
+  key: 'shuffleMaskTrades',
+  name: 'Mask Trade Shuffle',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not trading the masks are checks',
+  cond: hasOoT,
+  default: false,
+}, {
   key: 'shuffleMerchantsMm',
   name: 'Merchants Shuffle (MM)',
   category: 'main.shuffle',
