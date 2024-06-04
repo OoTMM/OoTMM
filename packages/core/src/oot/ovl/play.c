@@ -107,7 +107,7 @@ static void eventFixes(GameState_Play* play)
     if(Config_Flag(CFG_OOT_OPEN_WATER_TEMPLE))
         gSave.perm[SCE_OOT_LAKE_HYLIA].switches |= 0x80000000;
 
-    if(Config_Flag(CFG_OOT_OPEN_WELL)) 
+    if(Config_Flag(CFG_OOT_OPEN_WELL))
         SetEventChk(EV_OOT_CHK_WELL_DRAINED);
 
 }
@@ -512,15 +512,18 @@ static void masterSwordFix(GameState_Play* play)
     EV_OOT_UNSET_SWORDLESS();
 }
 
-static void Play_SpawnOcarinaOfTime(GameState_Play* play)
+static void Play_SpawnExtraHyruleField(GameState_Play* play)
 {
-    /* Check if we need to spawn the OoT */
     if (play->sceneId != SCE_OOT_HYRULE_FIELD)
         return;
     if (gSave.age != AGE_CHILD)
         return;
     if (!gSave.inventory.quest.stoneEmerald || !gSave.inventory.quest.stoneRuby || !gSave.inventory.quest.stoneSapphire)
         return;
+
+    /* Spawn the running man */
+    SpawnActor(&play->actorCtx, play, AC_EN_MM, -5050.f, -300.f, 2800.f, 0, 0x11c7, 0, 0x1);
+
     if (!comboHasSoulOot(GI_OOT_SOUL_NPC_ZELDA))
         return;
     if (GetEventChk(EV_OOT_CHK_OCARINA_OF_TIME))
@@ -544,7 +547,7 @@ static void Play_AfterInit(GameState_Play* play)
     comboSpawnCustomWarps(play);
 
     /* Other spawns */
-    Play_SpawnOcarinaOfTime(play);
+    Play_SpawnExtraHyruleField(play);
 }
 
 void hookPlay_Init(GameState_Play* play)

@@ -631,6 +631,7 @@ Lon Lon Ranch Wonder Item 1,                                wonder,         NONE
 Lon Lon Ranch Wonder Item 2,                                wonder,         NONE,                 LON_LON_RANCH,                  0x08019,                    RUPEE_BLUE
 Hyrule Field Ocarina of Time,                               npc,            NONE,                 HYRULE_FIELD,                   OCARINA_TIME_ITEM,          OCARINA
 Hyrule Field Song of Time,                                  npc,            NONE,                 HYRULE_FIELD,                   OCARINA_TIME_SONG,          SONG_TIME
+Hyrule Field Sell Bunny Mask,                               npc,            NONE,                 HYRULE_FIELD,                   MASK_SELL_BUNNY,            RUPEE_RAINBOW
 Hyrule Field Grotto Scrub HP,                               scrub,          NONE,                 GROTTOS,                        0x07,                       HEART_PIECE
 Hyrule Field Grotto Scrub Big Fairy,                        fairy_spot,     NONE,                 GROTTOS,                        0x00102,                    FAIRY_BIG
 Hyrule Field Grotto Southeast,                              chest,          NONE,                 GROTTOS,                        0x02,                       RUPEE_RED
