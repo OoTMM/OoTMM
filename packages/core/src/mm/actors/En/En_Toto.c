@@ -2,16 +2,31 @@
 #include <combo/player.h>
 #include <combo/item.h>
 
+static void EnToto_GiveTroupeLeaderMask(Actor* this, GameState_Play* play)
+{
+    Actor_Player* link;
+
+    link = GET_LINK(play);
+    if (link->state & PLAYER_ACTOR_STATE_GET_ITEM)
+        return;
+
+    if (Actor_HasParent(this))
+    {
+        this->parent = NULL;
+        gMmExtraFlags2.maskTroupeLeader = 1;
+        return;
+    }
+
+    comboGiveItemNpc(this, play, GI_MM_MASK_TROUPE_LEADER, NPC_MM_MASK_TROUPE_LEADER, 16384.f, 16384.f);
+}
+
 void EnToto_UpdateWrapper(Actor* this, GameState_Play* play)
 {
-    int shouldGiveItem;
     ActorFunc EnToto_Update;
 
-    shouldGiveItem = 0;
-
-    if (shouldGiveItem)
+    if ((MM_GET_EVENT_WEEK(EV_MM_WEEK_SOUND_TEST_REWARD1) || MM_GET_EVENT_WEEK(EV_MM_WEEK_SOUND_TEST_REWARD2)) && play->sceneId == SCE_MM_MILK_BAR && !gMmExtraFlags2.maskTroupeLeader)
     {
-
+        EnToto_GiveTroupeLeaderMask(this, play);
     }
     else
     {
@@ -19,12 +34,3 @@ void EnToto_UpdateWrapper(Actor* this, GameState_Play* play)
         EnToto_Update(this, play);
     }
 }
-
-void EnToto_SpawnItemGiver(Actor* this, GameState_Play* play, s16 gi, float a, float b)
-{
-    comboGiveItemNpc(this, play, gi, NPC_MM_MASK_TROUPE_LEADER, a, b);
-    //comboSpawnItemGiver(play, NPC_MM_MASK_TROUPE_LEADER);
-    //this->parent = &GET_LINK(play)->base;
-}
-
-PATCH_CALL(0x80ba4e10, EnToto_SpawnItemGiver);
