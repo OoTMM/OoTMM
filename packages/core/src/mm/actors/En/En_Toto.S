@@ -1,6 +1,15 @@
 #include <combo.h>
 
-/* GI renumbering */
-PATCH_START 0x80ba4e0c
-  li a2,GI_MM_MASK_TROUPE_LEADER
+/* Don't give the item */
+PATCH_START 0x80ba4e10
+  nop
+PATCH_END
+
+/* Use our wrapper */
+PATCH_START 0x80ba4fe8
+.int EnToto_UpdateWrapper
+PATCH_END
+
+PATCH_START 0x80ba5348
+.int 0
 PATCH_END
