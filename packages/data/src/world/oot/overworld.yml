@@ -1135,7 +1135,7 @@
     "Kakariko Anju Cojiro": "event(TALON_AWAKE) && is_day && soul_anju"
     "Kakariko Song Shadow": "is_adult && soul_npc(SOUL_NPC_SHEIK) && has(MEDALLION_FOREST) && has(MEDALLION_FIRE) && has(MEDALLION_WATER)"
     "Kakariko Man on Roof": "(can_hookshot || trick(OOT_MAN_ON_ROOF) || climb_anywhere) && soul_rooftop_man"
-    "Kakariko Sell Keaton Mask": "is_child && (setting(kakarikoGate, open) || event(KAKARIKO_GATE_OPEN)) && has(MASK_KEATON)"
+    "Kakariko Sell Keaton Mask": "is_child && (setting(kakarikoGate, open) || event(KAKARIKO_GATE_OPEN)) && has_mask_keaton"
     "Kakariko GS Shooting Gallery": "gs_night && is_child"
     "Kakariko GS Tree": "gs_night && is_child"
     "Kakariko GS House of Skulltula": "gs_night && is_child"
