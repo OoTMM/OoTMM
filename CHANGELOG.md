@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Can now shuffle the rewards for selling the OoT masks.
 - Add a setting to shuffle Wonder Items (non-MQ).
 - Add a setting to make some OoT dungeons open.
 
