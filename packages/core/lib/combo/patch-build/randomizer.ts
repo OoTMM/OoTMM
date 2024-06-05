@@ -72,6 +72,7 @@ const SHARED_ITEMS_OOT = new Map([
   ['SHARED_RUPEE_PURPLE',     'OOT_RUPEE_PURPLE'],
   ['SHARED_RUPEE_SILVER',     'MM_RUPEE_SILVER'], /* OoT lacks silver rupee */
   ['SHARED_RUPEE_GOLD',       'OOT_RUPEE_HUGE'], /* Equivalent */
+  ['SHARED_RUPEE_RAINBOW',    'OOT_RUPEE_RAINBOW'],
   ['SHARED_HEART_PIECE',      'OOT_HEART_PIECE'],
   ['SHARED_HEART_CONTAINER',  'OOT_HEART_CONTAINER'],
   ['SHARED_RECOVERY_HEART',   'OOT_RECOVERY_HEART'],
@@ -143,6 +144,7 @@ const SHARED_ITEMS_MM = new Map([
   ['SHARED_RUPEE_PURPLE',     'MM_RUPEE_PURPLE'],
   ['SHARED_RUPEE_SILVER',     'MM_RUPEE_SILVER'],
   ['SHARED_RUPEE_GOLD',       'MM_RUPEE_GOLD'],
+  ['SHARED_RUPEE_RAINBOW',    'OOT_RUPEE_RAINBOW'], /* No MM equivalent */
   ['SHARED_HEART_PIECE',      'MM_HEART_PIECE'],
   ['SHARED_HEART_CONTAINER',  'MM_HEART_CONTAINER'],
   ['SHARED_RECOVERY_HEART',   'MM_RECOVERY_HEART'],
@@ -897,6 +899,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     SHARED_SKELETON_KEY: settings.sharedSkeletonKey,
     OOT_SHUFFLE_GRASS: settings.shuffleGrassOot,
     MM_SHUFFLE_GRASS: settings.shuffleGrassMm,
+    OOT_SHUFFLE_MASK_TRADES: settings.shuffleMaskTrades,
     MENU_NOTEBOOK: settings.menuNotebook,
     OOT_AGELESS_CHILD_TRADE: settings.agelessChildTrade,
     OOT_START_ADULT: settings.startingAge === 'adult',

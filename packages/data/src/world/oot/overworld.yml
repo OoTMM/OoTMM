@@ -295,6 +295,7 @@
   locations:
     "Hyrule Field Ocarina of Time": "is_child && has_spiritual_stones && soul_npc(SOUL_NPC_ZELDA)"
     "Hyrule Field Song of Time": "is_child && has_spiritual_stones && soul_npc(SOUL_NPC_ZELDA)"
+    "Hyrule Field Sell Bunny Mask": "is_child && has_spiritual_stones && has_mask_bunny"
     "Hyrule Field River Big Fairy": "can_play_storms"
     "Hyrule Field Wonder Item 1": "is_child"
     "Hyrule Field Wonder Item 2": "is_child"
@@ -937,6 +938,7 @@
   locations:
     "Lost Woods Target": "can_use_slingshot"
     "Lost Woods Skull Kid": "is_child && can_play_saria"
+    "Lost Woods Sell Skull Mask": "is_child && can_play_saria && has(MASK_SKULL)"
     "Lost Woods Memory Game": "is_child && can_play_minigame"
     "Lost Woods Scrub Sticks Upgrade": "is_child && business_scrub(0x00)"
     "Lost Woods Odd Mushroom": "soul_grog && adult_trade(COJIRO)"
@@ -1133,6 +1135,7 @@
     "Kakariko Anju Cojiro": "event(TALON_AWAKE) && is_day && soul_anju"
     "Kakariko Song Shadow": "is_adult && soul_npc(SOUL_NPC_SHEIK) && has(MEDALLION_FOREST) && has(MEDALLION_FIRE) && has(MEDALLION_WATER)"
     "Kakariko Man on Roof": "(can_hookshot || trick(OOT_MAN_ON_ROOF) || climb_anywhere) && soul_rooftop_man"
+    "Kakariko Sell Keaton Mask": "is_child && (setting(kakarikoGate, open) || event(KAKARIKO_GATE_OPEN)) && has(MASK_KEATON)"
     "Kakariko GS Shooting Gallery": "gs_night && is_child"
     "Kakariko GS Tree": "gs_night && is_child"
     "Kakariko GS House of Skulltula": "gs_night && is_child"
@@ -1321,6 +1324,7 @@
     MAGIC: "can_cut_grass"
   locations:
     "Graveyard Dampe Game": "is_child && can_use_wallet(1) && is_dusk && soul_dampe"
+    "Graveyard Sell Spooky Mask": "is_child && soul_bombers && has(MASK_SPOOKY)"
     "Graveyard Crate HP": "can_ride_bean(BEAN_GRAVEYARD) || can_longshot || climb_anywhere || hookshot_anywhere"
     "Graveyard GS Soil": "gs_soil && can_damage_skull"
     "Graveyard GS Wall": "is_child && gs_night && (can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_din)))"

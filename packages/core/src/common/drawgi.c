@@ -1405,6 +1405,12 @@ static const Gfx kDlistRupeeBlackXlu[] = {
  */
 void DrawGi_Rupee(GameState_Play* play, s16 index, u8 param)
 {
+    float h;
+    u32 color;
+    u8 r;
+    u8 g;
+    u8 b;
+    u8 a;
     static const float smallRupeeScale = 0.7f;
     static const RupeeColorDlists kColors[] = {
         { DLIST_RAW(kDlistRupeeBlackOpa), DLIST_RAW(kDlistRupeeBlackXlu) },
@@ -1422,12 +1428,33 @@ void DrawGi_Rupee(GameState_Play* play, s16 index, u8 param)
     OPEN_DISPS(play->gs.gfx);
     InitListPolyOpa(play->gs.gfx);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPDisplayList(POLY_OPA_DISP++, kColors[param].listColorOpa);
+    if (param < 7)
+    {
+        gSPDisplayList(POLY_OPA_DISP++, kColors[param].listColorOpa);
+    }
+    else
+    {
+        h = (play->gs.frameCount % 30) * (1.f/30.f);
+        color = hsla(h, 1.f, 0.5f, 1.f);
+        color4(&r, &g, &b, &a, color);
+        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0x80, r, g, b, a);
+        r *= 0.8f;
+        g *= 0.8f;
+        b *= 0.8f;
+        gDPSetEnvColor(POLY_OPA_DISP++, r, g, b, a);
+    }
     gSPDisplayList(POLY_OPA_DISP++, kDrawGi[index].lists[0]);
 
     InitListPolyXlu(play->gs.gfx);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPDisplayList(POLY_XLU_DISP++, kColors[param].listColorXlu);
+    if (param < 7)
+    {
+        gSPDisplayList(POLY_XLU_DISP++, kColors[param].listColorXlu);
+    }
+    else
+    {
+        gSPDisplayList(POLY_XLU_DISP++, kColors[5].listColorXlu);
+    }
     gSPDisplayList(POLY_XLU_DISP++, kDrawGi[index].lists[1]);
     CLOSE_DISPS();
 }

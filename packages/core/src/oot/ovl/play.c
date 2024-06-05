@@ -107,7 +107,7 @@ static void eventFixes(GameState_Play* play)
     if(Config_Flag(CFG_OOT_OPEN_WATER_TEMPLE))
         gSave.perm[SCE_OOT_LAKE_HYLIA].switches |= 0x80000000;
 
-    if(Config_Flag(CFG_OOT_OPEN_WELL)) 
+    if(Config_Flag(CFG_OOT_OPEN_WELL))
         SetEventChk(EV_OOT_CHK_WELL_DRAINED);
 
 }
@@ -512,24 +512,6 @@ static void masterSwordFix(GameState_Play* play)
     EV_OOT_UNSET_SWORDLESS();
 }
 
-static void Play_SpawnOcarinaOfTime(GameState_Play* play)
-{
-    /* Check if we need to spawn the OoT */
-    if (play->sceneId != SCE_OOT_HYRULE_FIELD)
-        return;
-    if (gSave.age != AGE_CHILD)
-        return;
-    if (!gSave.inventory.quest.stoneEmerald || !gSave.inventory.quest.stoneRuby || !gSave.inventory.quest.stoneSapphire)
-        return;
-    if (!comboHasSoulOot(GI_OOT_SOUL_NPC_ZELDA))
-        return;
-    if (GetEventChk(EV_OOT_CHK_OCARINA_OF_TIME))
-        return;
-
-    /* Spawn */
-    SpawnActor(&play->actorCtx, play, AC_ITEM_OCARINA, 299.f, -136.f, 884.f, 0, 0, 0, 0x3);
-}
-
 static void Play_AfterInit(GameState_Play* play)
 {
     gLastEntrance = gSave.entrance;
@@ -542,9 +524,6 @@ static void Play_AfterInit(GameState_Play* play)
     /* Spawn Custom Triggers */
     CustomTriggers_Spawn(play);
     comboSpawnCustomWarps(play);
-
-    /* Other spawns */
-    Play_SpawnOcarinaOfTime(play);
 }
 
 void hookPlay_Init(GameState_Play* play)

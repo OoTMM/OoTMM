@@ -270,7 +270,7 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
     }
 }
 
-static int canSpawnActor(GameState_Play* play, s16 actorId, u16 valid)
+static int canSpawnActor(GameState_Play* play, s16 actorId, u16 param)
 {
     switch (actorId)
     {
@@ -283,6 +283,12 @@ static int canSpawnActor(GameState_Play* play, s16 actorId, u16 valid)
             return 0;
     case AC_BG_JYA_BLOCK:
         return !Config_Flag(CFG_OOT_AGELESS_STRENGTH);
+    case AC_ITEM_OCARINA:
+        return gSave.inventory.quest.stoneEmerald && gSave.inventory.quest.stoneRuby && gSave.inventory.quest.stoneSapphire && comboHasSoulOot(GI_OOT_SOUL_NPC_ZELDA);
+    case AC_EN_MM:
+        if (param == 0x01)
+            return gSave.inventory.quest.stoneEmerald && gSave.inventory.quest.stoneRuby && gSave.inventory.quest.stoneSapphire;
+        return 1;
     default:
         return 1;
     }

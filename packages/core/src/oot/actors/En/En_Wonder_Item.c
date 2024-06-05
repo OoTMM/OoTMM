@@ -23,6 +23,13 @@ static void EnWonderItem_Alias(Actor_EnWonderItem* this)
             xflag->id -= 3;
         }
         break;
+    case SCE_OOT_HYRULE_FIELD:
+        if (xflag->setupId == 1)
+        {
+            xflag->setupId = 0;
+            xflag->id += 2;
+        }
+        break;
     case SCE_OOT_LON_LON_RANCH:
         if (xflag->setupId == 3)
         {

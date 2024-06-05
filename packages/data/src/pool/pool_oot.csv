@@ -94,6 +94,7 @@ Castle Courtyard Wonder Item,                               wonder,         NONE
 Lost Woods Gift from Saria,                                 npc,            NONE,                 LOST_WOODS,                     SARIA_OCARINA,              OCARINA
 Lost Woods Target,                                          npc,            NONE,                 LOST_WOODS,                     LOST_WOODS_TARGET,          SLINGSHOT
 Lost Woods Skull Kid,                                       npc,            NONE,                 LOST_WOODS,                     LOST_WOODS_SKULL_KID,       HEART_PIECE
+Lost Woods Sell Skull Mask,                                 npc,            NONE,                 LOST_WOODS,                     MASK_SELL_SKULL,            RUPEE_RED
 Lost Woods Memory Game,                                     npc,            NONE,                 LOST_WOODS,                     LOST_WOODS_MEMORY,          HEART_PIECE
 Lost Woods Scrub Sticks Upgrade,                            scrub,          NONE,                 LOST_WOODS,                     0x00,                       STICK_UPGRADE
 Lost Woods Scrub Near Theater Left,                         scrub,          NONE,                 LOST_WOODS,                     0x01,                       STICK
@@ -160,6 +161,7 @@ Kakariko Anju Egg,                                          npc,            NONE
 Kakariko Anju Cojiro,                                       npc,            NONE,                 KAKARIKO_VILLAGE,               TRADE_COJIRO,               COJIRO
 Kakariko Song Shadow,                                       npc,            RAVAGED_VILLAGE,      KAKARIKO_VILLAGE,               SHEIK_SHADOW,               SONG_TP_SHADOW
 Kakariko Man on Roof,                                       npc,            NONE,                 KAKARIKO_VILLAGE,               KAKARIKO_ROOF_MAN,          HEART_PIECE
+Kakariko Sell Keaton Mask,                                  npc,            NONE,                 KAKARIKO_VILLAGE,               MASK_SELL_KEATON,           RUPEE_RED
 Kakariko Impa House HP,                                     collectible,    NONE,                 IMPA_HOUSE,                     0x01,                       HEART_PIECE
 Kakariko Impa House Wonder Item,                            wonder,         NONE,                 IMPA_HOUSE,                     0x00006,                    RUPEE_RED
 Kakariko Grotto Front,                                      chest,          NONE,                 GROTTOS,                        0x0a,                       RUPEE_HUGE
@@ -213,6 +215,7 @@ Kakariko Potion Shop Item 6,                                shop,           NONE
 Kakariko Potion Shop Item 7,                                shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x3e,                       POTION_GREEN
 Kakariko Potion Shop Item 8,                                shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x3f,                       POTION_RED
 Graveyard Dampe Game,                                       collectible,    NONE,                 GRAVEYARD,                      0x1f,                       HEART_PIECE
+Graveyard Sell Spooky Mask,                                 npc,            NONE,                 GRAVEYARD,                      MASK_SELL_SPOOKY,           RUPEE_RED
 Graveyard ReDead Tomb,                                      chest,          NONE,                 TOMB_REDEAD,                    0x00,                       HEART_PIECE
 Graveyard Royal Tomb Song,                                  npc,            NONE,                 TOMB_ROYAL,                     ROYAL_TOMB_SONG,            SONG_SUN
 Graveyard Royal Tomb Chest,                                 chest,          NONE,                 TOMB_ROYAL,                     0x00,                       BOMBS_5
@@ -628,6 +631,7 @@ Lon Lon Ranch Wonder Item 1,                                wonder,         NONE
 Lon Lon Ranch Wonder Item 2,                                wonder,         NONE,                 LON_LON_RANCH,                  0x08019,                    RUPEE_BLUE
 Hyrule Field Ocarina of Time,                               npc,            NONE,                 HYRULE_FIELD,                   OCARINA_TIME_ITEM,          OCARINA
 Hyrule Field Song of Time,                                  npc,            NONE,                 HYRULE_FIELD,                   OCARINA_TIME_SONG,          SONG_TIME
+Hyrule Field Sell Bunny Mask,                               npc,            NONE,                 HYRULE_FIELD,                   MASK_SELL_BUNNY,            RUPEE_RAINBOW
 Hyrule Field Grotto Scrub HP,                               scrub,          NONE,                 GROTTOS,                        0x07,                       HEART_PIECE
 Hyrule Field Grotto Scrub Big Fairy,                        fairy_spot,     NONE,                 GROTTOS,                        0x00102,                    FAIRY_BIG
 Hyrule Field Grotto Southeast,                              chest,          NONE,                 GROTTOS,                        0x02,                       RUPEE_RED

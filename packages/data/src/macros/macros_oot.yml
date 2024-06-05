@@ -271,7 +271,9 @@
 "silver_rupees_spirit_adult": "silver_rupees(Spirit_Adult, RUPEE_SILVER_SPIRIT_ADULT, POUCH_SILVER_SPIRIT_ADULT, 5)"
 
 # Masks
+"has_mask_keaton": "has(MASK_KEATON) || has(SHARED_MASK_KEATON)"
 "has_mask_truth": "has(MASK_TRUTH) || has(SHARED_MASK_TRUTH)"
+"has_mask_bunny": "has(MASK_BUNNY) || has(SHARED_MASK_BUNNY)"
 "has_mask_stone": "setting(stoneMaskOot) && cond(setting(sharedMaskStone), has(SHARED_MASK_STONE), has(MASK_STONE))"
 "can_use_mask_stone": "age_child_trade && has_mask_stone"
 "has_mask_blast": "setting(blastMaskOot) && cond(setting(sharedMaskBlast), has(SHARED_MASK_BLAST), has(MASK_BLAST))"

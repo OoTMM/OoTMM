@@ -125,6 +125,7 @@
 - { id: OOT_UNK_7D, flags: 0x00 }
 - { id: OOT_UNK_7E, flags: 0x00 }
 - { id: OOT_UNK_7F, flags: 0x00 }
+- { id: OOT_RUPEE_RAINBOW, type: RUPEE, add: [OOT_RUPEE, 500], flags: 0x80, draw: [RUPEE, 7], object: [mm, 0x013f], name: "a <C0>Rainbow Rupee" }
 - { id: OOT_SONG_TP_FOREST, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_SONG_TP_FOREST], flags: 0x80, draw: [NOTE, 0x82], object: [oot, 0x00b6], name: "the <C2>Minuet of Forest" }
 - { id: OOT_SONG_TP_FIRE, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_SONG_TP_FIRE], flags: 0x80, draw: [NOTE, 0x85], object: [oot, 0x00b6], name: "the <C2>Bolero of Fire" }
 - { id: OOT_SONG_TP_WATER, type: MAJOR, add: [OOT_QUEST, QUEST_OOT_SONG_TP_WATER], flags: 0x80, draw: [NOTE, 0x81], object: [oot, 0x00b6], name: "the <C2>Serenade of Water" }
