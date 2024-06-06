@@ -21,6 +21,7 @@ All notable changes to this project will be documented in this file.
 
 - Fix Ikana Wisp showing up even if you did not beat Stone Tower Temple.
 - Fix some names in spoiler having their game as a suffix when they're unique.
+- Fix Moon Crash sometimes causing the Clock UI to disappear.
 
 ## [23.1] - 2024-05-30
 

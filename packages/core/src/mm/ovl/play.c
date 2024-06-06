@@ -613,6 +613,7 @@ void hookPlay_Init(GameState_Play* play)
     if ((gSave.entranceIndex == ENTR_MM_CLOCK_TOWN && gLastEntrance == ENTR_MM_CLOCK_TOWN_FROM_SONG_OF_TIME) || gSave.entranceIndex == ENTR_MM_CLOCK_TOWER_MOON_CRASH)
     {
         /* Song of Time / Moon crash */
+        gNoTimeFlow = 0;
         entrance = g.initialEntrance;
         applyCustomEntrance(&entrance);
         gSave.entranceIndex = entrance;
