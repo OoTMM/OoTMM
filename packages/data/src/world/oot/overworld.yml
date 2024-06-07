@@ -875,7 +875,7 @@
     "Ganon Castle Exterior After Bridge": "rainbow_bridge || (longshot_anywhere && trick(OOT_GANON_CASTLE_ENTRY))"
     "Near Fairy Fountain Defense": "can_lift_gold"
   locations:
-    "Ganon Castle Exterior GS": "gs"
+    "Ganon Castle Exterior GS": "gs && (has_ranged_weapon || can_use_sword)"
 "Ganon Castle Exterior After Bridge":
   region: GANON_CASTLE_EXTERIOR
   age_change: false
