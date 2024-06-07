@@ -88,7 +88,7 @@
 "Fire Temple Fire Walls":
   dungeon: Fire
   exits:
-    "Fire Temple Top": "small_keys_fire_mq(4)"
+    "Fire Temple Top": "soul_enemy(SOUL_ENEMY_FLARE_DANCER) && small_keys_fire_mq(4)"
   events:
     FIRE_TEMPLE_PILLAR_HAMMER: "true"
   locations:
