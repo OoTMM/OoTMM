@@ -295,7 +295,7 @@
   locations:
     "Hyrule Field Ocarina of Time": "is_child && has_spiritual_stones && soul_npc(SOUL_NPC_ZELDA)"
     "Hyrule Field Song of Time": "is_child && has_spiritual_stones && soul_npc(SOUL_NPC_ZELDA)"
-    "Hyrule Field Sell Bunny Mask": "is_child && has_spiritual_stones && has_mask_bunny"
+    "Hyrule Field Sell Bunny Mask": "is_child && has_spiritual_stones && has_mask_bunny && soul_citizen"
     "Hyrule Field River Big Fairy": "can_play_storms"
     "Hyrule Field Wonder Item 1": "is_child"
     "Hyrule Field Wonder Item 2": "is_child"
