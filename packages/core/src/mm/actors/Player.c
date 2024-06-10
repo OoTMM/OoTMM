@@ -1576,6 +1576,9 @@ static s8 sNextForm = -1;
 
 void Player_TryUpdateForm(Actor_Player* this, GameState_Play* play)
 {
+    if (!Config_Flag(CFG_MM_FAST_MASKS))
+        return;
+
     if (sNextForm != -1)
     {
         Player_ToggleForm(this, sNextForm);
