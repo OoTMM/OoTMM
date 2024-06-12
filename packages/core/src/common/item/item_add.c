@@ -1199,7 +1199,7 @@ static int addItemHeartPieceOot(GameState_Play* play, u8 itemId, s16 gi, u16 par
             addHeartPieceRawMm();
     }
     addHealthOot(play, 20);
-    return 0;
+    return gOotSave.inventory.quest.heartPieces;
 }
 
 static int addItemHeartPieceMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
@@ -1211,7 +1211,7 @@ static int addItemHeartPieceMm(GameState_Play* play, u8 itemId, s16 gi, u16 para
             addHeartPieceRawOot();
     }
     addHealthMm(play, 20);
-    return 0;
+    return gMmSave.inventory.quest.heartPieces;
 }
 
 static int addSmallKeyOot(u16 dungeonId)
