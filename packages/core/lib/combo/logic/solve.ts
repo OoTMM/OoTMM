@@ -1018,14 +1018,11 @@ export class LogicPassSolver {
   private placeDungeonRewardsInDungeons() {
     const allDungeons: Set<string>[] = [];
     for (let i = 0; i < this.input.settings.players; ++i) {
-      if (this.input.settings.games === 'oot') {
+      if (this.input.settings.games !== 'mm') {
         allDungeons.push(new Set([...REWARDS_DUNGEONS_OOT]));
       }
-      if (this.input.settings.games === 'mm') {
+      if (this.input.settings.games !== 'oot') {
         allDungeons.push(new Set([...REWARDS_DUNGEONS_MM]));
-      }
-      else {
-        allDungeons.push(new Set([...REWARDS_DUNGEONS_OOT, ...REWARDS_DUNGEONS_MM]));
       }
     }
 
