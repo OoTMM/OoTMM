@@ -120,12 +120,12 @@ static void fixSpawn(void)
 
 void Sram_AfterOpenSave(void)
 {
-    if (Config_Flag(CFG_ONLY_MM))
-        comboGameSwitch(NULL, ENTR_MM_CLOCK_TOWN);
-
 #if defined(DEBUG) && defined(DEBUG_OOT_ENTRANCE)
     gSave.entrance = DEBUG_OOT_ENTRANCE;
 #endif
+
+    if (Config_Flag(CFG_ONLY_MM))
+        comboGameSwitch(NULL, ENTR_MM_CLOCK_TOWN);
 
     /* Read the other save */
     Save_ReadForeign();
