@@ -75,11 +75,11 @@ class WorldShuffler {
 
     /* Change the world */
     let expr = this.getExpr(original);
-    if ((entranceOriginal.game === 'oot' || entranceOriginal.game === 'mm') && entranceReplacement.game === 'mm') {
+    if (entranceReplacement.game === 'mm') {
       if (entranceOriginal.game === 'oot' && entranceReplacement.game === 'mm' && ['overworld', 'region'].includes(entranceReplacement.type)) {
         world.areas[entranceOriginal.from].exits['MM GLOBAL'] = expr;
       }
-      if (!((entranceReplacement.flags as string[]).includes('no-sot'))) {
+      if (entranceReplacement.type !== 'one-way-statue' || (entranceOriginal.game === 'oot' && entranceReplacement.type !== 'boss')) {
         expr = this.songOfTime(expr);
       }
     }
