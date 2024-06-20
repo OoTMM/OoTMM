@@ -23,6 +23,7 @@ All notable changes to this project will be documented in this file.
 - The angle of interaction of MM gossip stones is more tolerant.
 - If a dungeon is pre-completed, you now start with the boss soul, keys and silver rupees of the dungeon.
 - Exiting Ganon's Castle is once again logical as child to reach Hyrule Castle (not the courtyard).
+- Logic for soaring and warping in MM with ER is now even more robust, allowing usage everywhere they can be used.
 
 ## Fixed
 

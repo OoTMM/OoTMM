@@ -3,8 +3,6 @@
   exits:
     "Near Swamp Spider House": "true"
     "Swamp Spider House Main": "can_reset_time_dungeon"
-    "SOARING": "can_play_soaring"
-    "WARP_SONGS": "true"
   locations:
     "Swamp Spider House Mask of Truth": "soul_citizen && has(GS_TOKEN_SWAMP, 30)"
 "Swamp Spider House Main":
@@ -16,8 +14,6 @@
     WATER: "true"
   exits:
     "Swamp Spider House": "true"
-    "SOARING": "can_play_soaring"
-    "WARP_SONGS": "true"
   locations:
     "Swamp Skulltula Main Room Near Ceiling": "gs && (can_hookshot_short || has_mask_zora || (has(MASK_DEKU) && (has_arrows || has_magic || (has_bombs || has_bombchu || trick_keg_explosives))))"
     "Swamp Skulltula Main Room Lower Right Soft Soil": "gs && has_bugs"
