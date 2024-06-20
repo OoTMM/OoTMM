@@ -2422,7 +2422,7 @@
     "Pinnacle Rock Entrance": "true"
     "Great Bay Coast": "can_reset_time"
     "SOARING": "has_mask_zora && can_play_soaring"
-    'WARP_SONGS": "has_mask_zora"
+    "WARP_SONGS": "has_mask_zora"
 "Great Bay Coast Fortress":
   region: GREAT_BAY_COAST
   exits:
@@ -2684,7 +2684,7 @@
     "Zora Cape": "can_reset_time && underwater_walking || (can_dive_small && trick(MM_ZORA_HALL_HUMAN))"
     "Zora Hall Entrance": "underwater_walking || can_dive_small"
     "SOARING": "has_mask_zora && can_play_soaring"
-    'WARP_SONGS": "has_mask_zora"
+    "WARP_SONGS": "has_mask_zora"
 "Zora Hall Entrance":
   region: ZORA_HALL
   exits:
