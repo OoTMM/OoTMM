@@ -87,10 +87,10 @@ static void EnWonderItem_DrawGlitter(Actor_EnWonderItem* this, GameState_Play* p
 
 static void EnWonderItem_DropCustomDecoy(Actor_EnWonderItem* this, GameState_Play* play)
 {
-    ComboItemOverride o;
+    ComboItemQuery q;
 
-    comboXflagItemOverride(&o, &this->xflag, 0);
-    Item_AddWithDecoy(play, &o);
+    comboXflagItemQuery(&q, &this->xflag, 0);
+    Item_AddWithDecoy(play, &q);
     comboXflagsSet(&this->xflag);
 }
 

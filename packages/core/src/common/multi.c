@@ -619,7 +619,6 @@ static int Multi_CanReceiveItem(GameState_Play* play)
 static void Multi_GiveItem(GameState_Play* play, s16 gi, u8 from, int flags)
 {
     ComboItemQuery q = ITEM_QUERY_INIT;
-    ComboItemOverride o;
 
     q.gi = gi;
     q.from = from;
@@ -631,8 +630,7 @@ static void Multi_GiveItem(GameState_Play* play, s16 gi, u8 from, int flags)
         q.gi = RECOVERY_HEART;
     }
 
-    comboItemOverride(&o, &q);
-    Item_AddWithDecoy(play, &o);
+    Item_AddWithDecoy(play, &q);
 }
 
 static void Multi_ReceiveItem(GameState_Play* play, NetContext* net)

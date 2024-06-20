@@ -228,6 +228,6 @@ s16 comboItemResolve(GameState_Play* play, s16 gi);
 
 s16 comboProgressive(s16 gi, int ovflags);
 
-Actor_ItemDecoy* Item_AddWithDecoy(GameState_Play* play, const ComboItemOverride* o);
+Actor_ItemDecoy* Item_AddWithDecoy(GameState_Play* play, const ComboItemQuery* q);
 
 #endif

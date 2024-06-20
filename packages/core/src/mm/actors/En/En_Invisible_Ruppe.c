@@ -21,7 +21,7 @@ static void EnInvisibleRupee_DrawGlitter(Actor_EnInvisibleRuppe* this, GameState
 
 void EnInvisibleRupee_HandleExtended(Actor_EnInvisibleRuppe* this, GameState_Play* play)
 {
-    ComboItemOverride o;
+    ComboItemQuery q;
     EnInvisibleRuppeFunc handleNormal;
 
     if (comboXflagsGet(&this->xflag) || !this->isExtended)
@@ -35,8 +35,8 @@ void EnInvisibleRupee_HandleExtended(Actor_EnInvisibleRuppe* this, GameState_Pla
 
     if (this->collider.base.ocFlags1 & 0x02)
     {
-        comboXflagItemOverride(&o, &this->xflag, 0);
-        Item_AddWithDecoy(play, &o);
+        comboXflagItemQuery(&q, &this->xflag, 0);
+        Item_AddWithDecoy(play, &q);
         comboXflagsSet(&this->xflag);
 
         if (this->switchFlag > 0)
