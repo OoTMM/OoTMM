@@ -62,10 +62,10 @@
 "has_bombchu_license_shared": "license(SHARED_BOMBCHU) || license(SHARED_BOMBCHU_5) || license(SHARED_BOMBCHU_10) || license(SHARED_BOMBCHU_20)"
 "has_bombchu_license": "cond(setting(bombchuBagOot), cond(setting(sharedBombchuBags), has_bombchu_license_shared, has_bombchu_license_nonshared), has_bomb_bag)"
 "has_bombchu": "has_bombchu_source && has_bombchu_license"
-"can_use_slingshot": "has(SLINGSHOT) && (is_child || setting(agelessSlingshot) || glitch_equip_swap) && (event(SEEDS) || renewable(DEKU_SEEDS_30))"
+"can_use_slingshot": "has(SLINGSHOT) && age_slingshot && (event(SEEDS) || renewable(DEKU_SEEDS_30))"
 "has_bow": "has(BOW) || has(SHARED_BOW)"
 "has_arrows": "has_bow && (event(ARROWS) || renewable(ARROWS_5) || renewable(ARROWS_10) || renewable(ARROWS_30) || renewable(SHARED_ARROWS_5) || renewable(SHARED_ARROWS_10) || renewable(SHARED_ARROWS_30) || renewable(SHARED_ARROWS_40) || (setting(sharedBows) && event(MM_ARROWS)))"
-"can_use_bow": "is_adult && has_arrows"
+"can_use_bow": "age_bow && has_arrows"
 "has_hookshot(x)": "has(HOOKSHOT, x) || has(SHARED_HOOKSHOT, x)"
 "can_hookshot_n(x)": "age_hookshot && has_hookshot(x)"
 "can_hookshot": "can_hookshot_n(1)"
@@ -90,6 +90,8 @@
 "age_tunics": "is_adult || setting(agelessTunics)"
 "age_boots": "is_adult || setting(agelessBoots)"
 "age_child_trade": "glitch_equip_swap || is_child || setting(agelessChildTrade)"
+"age_slingshot": "is_child || setting(agelessSlingshot) || glitch_equip_swap"
+"age_bow": "is_adult || setting(agelessBow) || glitch_equip_swap"
 
 # Swords
 "starts_with_master_sword": "setting(startingAge, adult) && !setting(swordlessAdult)"
