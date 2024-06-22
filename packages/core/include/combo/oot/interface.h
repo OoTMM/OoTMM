@@ -46,7 +46,10 @@ typedef struct
     u8                      mapPalette[32];
     DmaRequest              dmaRequest_160;
     DmaRequest              dmaRequest_180;
-    char                    unk_1a0[0xa4];
+    char                    unk_1a0[0x9e];
+    u16                     hbaAmmo;
+    u16                     unk_240;
+    u16                     unk_242;
     u16                     screenFillAlpha;
     u16                     aAlpha;         /* Also carrots alpha */
     u16                     bAlpha;         /* Also HBA score alpha */
@@ -75,6 +78,7 @@ ASSERT_OFFSET(InterfaceContext, mapPalette,         0x140);
 ASSERT_OFFSET(InterfaceContext, dmaRequest_160,     0x160);
 ASSERT_OFFSET(InterfaceContext, dmaRequest_180,     0x180);
 ASSERT_OFFSET(InterfaceContext, unk_1a0,            0x1a0);
+ASSERT_OFFSET(InterfaceContext, hbaAmmo,            0x23e);
 ASSERT_OFFSET(InterfaceContext, screenFillAlpha,    0x244);
 ASSERT_OFFSET(InterfaceContext, aAlpha,             0x246);
 ASSERT_OFFSET(InterfaceContext, bAlpha,             0x248);

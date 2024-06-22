@@ -817,3 +817,30 @@ static int Player_IsStrengthGoronBracelet(void)
 }
 
 PATCH_CALL(0x8007a2b4, Player_IsStrengthGoronBracelet);
+
+static int Player_ItemAndArrowType(GameState_Play* play, Actor_Player* this, int* outItem, int* outArrow)
+{
+    if (this->heldItemAction == 6)
+    {
+        /* Slingshot */
+        *outItem = ITEM_OOT_SLINGSHOT;
+        *outArrow = 9;
+    }
+    else
+    {
+        /* Bow, maybe with magical arrow */
+        *outItem = ITEM_OOT_BOW;
+        if (this->state & (1 << 23))
+            *outArrow = 1;
+        else
+            *outArrow = this->heldItemAction - 6;
+    }
+
+    if (gSaveContext.minigameState == 1)
+        return play->interfaceCtx.hbaAmmo;
+    else if (play->shootingGalleryStatus != 0)
+        return play->shootingGalleryStatus;
+    return gSave.inventory.ammo[*outItem];
+}
+
+PATCH_FUNC(0x808323dc, Player_ItemAndArrowType);
