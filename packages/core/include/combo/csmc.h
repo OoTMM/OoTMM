@@ -3,14 +3,15 @@
 
 #include <combo/types.h>
 
-#define CSMC_NORMAL     0x00
-#define CSMC_BOSS_KEY   0x01
-#define CSMC_MAJOR      0x02
-#define CSMC_KEY        0x03
-#define CSMC_SPIDER     0x04
-#define CSMC_FAIRY      0x05
-#define CSMC_HEART      0x06
-#define CSMC_SOUL       0x07
+#define CSMC_NORMAL         0x00
+#define CSMC_BOSS_KEY       0x01
+#define CSMC_MAJOR          0x02
+#define CSMC_KEY            0x03
+#define CSMC_SPIDER         0x04
+#define CSMC_FAIRY          0x05
+#define CSMC_HEART          0x06
+#define CSMC_SOUL           0x07
+#define CSMC_MAP_COMPASS    0x08
 
 #define CSMC_POT_NORMAL             0x00
 #define CSMC_POT_NORMAL_DANGEON     0x01
@@ -22,24 +23,27 @@
 #define CSMC_POT_HEART              0x07
 #define CSMC_POT_BOSSKEY            0x08
 #define CSMC_POT_SOUL               0x09
+#define CSMC_POT_MAP_COMPASS        0x0a
 
-#define CSMC_GRASS_NORMAL     0x00
-#define CSMC_GRASS_BOSS_KEY   0x01
-#define CSMC_GRASS_MAJOR      0x02
-#define CSMC_GRASS_KEY        0x03
-#define CSMC_GRASS_SPIDER     0x04
-#define CSMC_GRASS_FAIRY      0x05
-#define CSMC_GRASS_HEART      0x06
-#define CSMC_GRASS_SOUL       0x07
+#define CSMC_GRASS_NORMAL       0x00
+#define CSMC_GRASS_BOSS_KEY     0x01
+#define CSMC_GRASS_MAJOR        0x02
+#define CSMC_GRASS_KEY          0x03
+#define CSMC_GRASS_SPIDER       0x04
+#define CSMC_GRASS_FAIRY        0x05
+#define CSMC_GRASS_HEART        0x06
+#define CSMC_GRASS_SOUL         0x07
+#define CSMC_GRASS_MAP_COMPASS  0x08
 
-#define CSMC_GS_NORMAL     0x00
-#define CSMC_GS_BOSS_KEY   0x01
-#define CSMC_GS_MAJOR      0x02
-#define CSMC_GS_KEY        0x03
-#define CSMC_GS_SPIDER     0x04
-#define CSMC_GS_FAIRY      0x05
-#define CSMC_GS_HEART      0x06
-#define CSMC_GS_SOUL       0x07
+#define CSMC_GS_NORMAL          0x00
+#define CSMC_GS_BOSS_KEY        0x01
+#define CSMC_GS_MAJOR           0x02
+#define CSMC_GS_KEY             0x03
+#define CSMC_GS_SPIDER          0x04
+#define CSMC_GS_FAIRY           0x05
+#define CSMC_GS_HEART           0x06
+#define CSMC_GS_SOUL            0x07
+#define CSMC_GS_MAP_COMPASS     0x08
 
 #define CTF_MIRROR          (1 << 0)
 #define CTF_CLAMP           (1 << 1)

@@ -4,14 +4,15 @@
 #include <combo/dungeon.h>
 #include <combo/config.h>
 
-#define CSMC_CHEST_NORMAL     0x00
-#define CSMC_CHEST_BOSS_KEY   0x01
-#define CSMC_CHEST_MAJOR      0x02
-#define CSMC_CHEST_KEY        0x03
-#define CSMC_CHEST_SPIDER     0x04
-#define CSMC_CHEST_FAIRY      0x05
-#define CSMC_CHEST_HEART      0x06
-#define CSMC_CHEST_SOUL       0x07
+#define CSMC_CHEST_NORMAL           0x00
+#define CSMC_CHEST_BOSS_KEY         0x01
+#define CSMC_CHEST_MAJOR            0x02
+#define CSMC_CHEST_KEY              0x03
+#define CSMC_CHEST_SPIDER           0x04
+#define CSMC_CHEST_FAIRY            0x05
+#define CSMC_CHEST_HEART            0x06
+#define CSMC_CHEST_SOUL             0x07
+#define CSMC_CHEST_MAP_COMPASS      0x08
 
 #if defined(GAME_OOT)
 # define CHEST_TEX_NORMAL_FRONT     0x06001798
@@ -42,6 +43,7 @@ static const ChestCsmcData kCsmcData[] = {
     { 1, CUSTOM_CHEST_FAIRY_FRONT_ADDR, CUSTOM_CHEST_FAIRY_SIDE_ADDR },
     { 1, CUSTOM_CHEST_HEART_FRONT_ADDR, CUSTOM_CHEST_HEART_SIDE_ADDR },
     { 1, CUSTOM_CHEST_SOUL_FRONT_ADDR, CUSTOM_CHEST_SOUL_SIDE_ADDR },
+    { 1, CUSTOM_CHEST_MAP_FRONT_ADDR, CUSTOM_CHEST_MAP_SIDE_ADDR },
 };
 
 static int csmcChestId(s16 gi)
@@ -59,6 +61,7 @@ static int csmcChestId(s16 gi)
     case CSMC_FAIRY:        return CSMC_CHEST_FAIRY;
     case CSMC_HEART:        return CSMC_CHEST_HEART;
     case CSMC_SOUL:         return CSMC_CHEST_SOUL;
+    case CSMC_MAP_COMPASS:  return CSMC_CHEST_MAP_COMPASS;
     default:                return CSMC_CHEST_MAJOR;
     }
 }

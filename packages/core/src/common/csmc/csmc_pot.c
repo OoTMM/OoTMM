@@ -127,6 +127,16 @@ static Gfx kTexSoulTop[] = {
     gsSPEndDisplayList(),
 };
 
+static Gfx kTexMapSide[] = {
+    gsDPLoadTextureBlock(0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 5, 6, 0, 0),
+    gsSPEndDisplayList(),
+};
+
+static Gfx kTexMapTop[] = {
+    gsDPLoadTextureBlock(0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 4, 4, 0, 0),
+    gsSPEndDisplayList(),
+};
+
 static const Gfx* const kTexSide[] = {
     kTexNormalSide,
     kTexNormalDangeonSide,
@@ -138,6 +148,7 @@ static const Gfx* const kTexSide[] = {
     kTexHeartSide,
     kTexBossKeySide,
     kTexSoulSide,
+    kTexMapSide,
 };
 
 static const Gfx* const kTexTop[] = {
@@ -151,6 +162,7 @@ static const Gfx* const kTexTop[] = {
     kTexHeartTop,
     kTexBossKeyTop,
     kTexSoulTop,
+    kTexMapTop,
 };
 
 static void patchTextureList(Gfx* gfx, u32 vaddr)
@@ -195,6 +207,10 @@ static void loadTexture(int csmcPotId)
         patchTextureList(kTexSoulSide, CUSTOM_POT_SOUL_SIDE_ADDR);
         patchTextureList(kTexSoulTop, CUSTOM_POT_SOUL_TOP_ADDR);
         break;
+    case CSMC_POT_MAP_COMPASS:
+        patchTextureList(kTexMapSide, CUSTOM_POT_MAP_SIDE_ADDR);
+        patchTextureList(kTexMapTop, CUSTOM_POT_SPIDER_TOP_ADDR);
+        break;
     }
 }
 
@@ -218,6 +234,7 @@ static int csmcPotId(s16 gi, int def)
     case CSMC_HEART:        return CSMC_POT_HEART;
     case CSMC_BOSS_KEY:     return CSMC_POT_BOSSKEY;
     case CSMC_SOUL:         return CSMC_POT_SOUL;
+    case CSMC_MAP_COMPASS:  return CSMC_POT_MAP_COMPASS;
     default:                return CSMC_POT_MAJOR;
     }
 }

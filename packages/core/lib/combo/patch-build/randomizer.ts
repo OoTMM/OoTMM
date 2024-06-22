@@ -883,6 +883,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MM_NO_BOSS_KEY: settings.bossKeyShuffleMm === 'removed',
     MM_NO_SMALL_KEY: settings.smallKeyShuffleMm === 'removed',
     CSMC_HEARTS: settings.csmcHearts,
+    CSMC_MAP_COMPASS: settings.csmcMapCompass,
     OOT_BLUE_FIRE_ARROWS: settings.blueFireArrows,
     OOT_SUNLIGHT_ARROWS: settings.sunlightArrows,
     OOT_SILVER_RUPEE_SHUFFLE: settings.silverRupeeShuffle !== 'vanilla',

@@ -126,6 +126,8 @@ export const customFiles = async (opts: Options): Promise<{[k: string]: Buffer}>
   CHEST_HEART_SIDE: await png(opts, 'chests/heart_side', 'rgba16'),
   CHEST_SOUL_FRONT: await png(opts, 'chests/soul_front', 'rgba16'),
   CHEST_SOUL_SIDE: await png(opts, 'chests/soul_side', 'rgba16'),
+  CHEST_MAP_FRONT: await png(opts, 'chests/map_front', 'rgba16'),
+  CHEST_MAP_SIDE: await png(opts, 'chests/map_side', 'rgba16'),
   POT_MAJOR_SIDE: await png(opts, 'pots/major_side', 'rgba16'),
   POT_MAJOR_TOP: await png(opts, 'pots/major_top', 'rgba16'),
   POT_SPIDER_SIDE: await png(opts, 'pots/spider_side', 'rgba16'),
@@ -139,6 +141,7 @@ export const customFiles = async (opts: Options): Promise<{[k: string]: Buffer}>
   POT_BOSSKEY_TOP: await png(opts, 'pots/bosskey_top', 'rgba16'),
   POT_SOUL_SIDE: await png(opts, 'pots/soul_side', 'rgba16'),
   POT_SOUL_TOP: await png(opts, 'pots/soul_top', 'rgba16'),
+  POT_MAP_SIDE: await png(opts, 'pots/map_side', 'rgba16'),
   GLITTER: await png(opts, 'glitter', 'i4'),
 });
 

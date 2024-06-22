@@ -233,6 +233,7 @@ static u32 Draw_GetGlitterColor(s16 gi)
     case CSMC_FAIRY: return 0xfa89ef;
     case CSMC_HEART: return 0xff0000;
     case CSMC_SOUL: return 0x5e0cc9;
+    case CSMC_MAP_COMPASS: return 0xc75000;
     default: return 0xffffff;
     }
 }

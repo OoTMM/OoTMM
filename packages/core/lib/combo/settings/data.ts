@@ -1081,6 +1081,14 @@ export const SETTINGS = [{
   description: 'Use a specific texture for heart pieces/containers',
   cond: (x: any) => x.csmc !== 'never',
 }, {
+  key: 'csmcMapCompass',
+  name: 'CAMC for Maps/Compasses',
+  category: 'main.misc',
+  type: 'boolean',
+  default: true,
+  description: 'Use a specific texture for maps/compasses',
+  cond: (x: any) => x.csmc !== 'never',
+}, {
   key: 'csmcExtra',
   name: 'Skulltula CAMC',
   category: 'main.misc',

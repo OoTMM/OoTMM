@@ -50,6 +50,8 @@ int csmcFromItem(s16 gi)
         return CSMC_FAIRY;
     case ITT_HEART:
         return Config_Flag(CFG_CSMC_HEARTS) ? CSMC_HEART : CSMC_NORMAL;
+    case ITT_MAP_COMPASS:
+        return Config_Flag(CFG_CSMC_MAP_COMPASS) ? CSMC_MAP_COMPASS : CSMC_NORMAL;
     case ITT_SOUL:
         return CSMC_SOUL;
     case ITT_NONE:
