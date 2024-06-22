@@ -342,8 +342,18 @@ export class CustomObjectsBuilder {
     const obj = await this.getFile('oot', 'objects/object_link_child');
     editor.loadSegment(0x06, obj);
 
-    editor.submitList(editor.listData(0x06018048)!); /* First person */
+    const dataFPAddr = 0x06018048;
+    let dataFP = editor.listData(dataFPAddr)!;
+    dataFP = editor.stripList(dataFP, 0x06018128 - dataFPAddr, 0x06018470 - dataFPAddr);
+    editor.submitList(dataFP);
+
     editor.submitList(editor.listData(0x060221a8)!); /* First person string */
+
+    const dataTPAddr = 0x06015df0;
+    let dataTP = editor.listData(dataFPAddr)!;
+    dataTP = editor.stripList(dataTP, 0x06015F18 - dataTPAddr, 0x06015FC8 - dataTPAddr);
+    editor.submitList(dataTP);
+
     return { name: 'EQ_SLINGSHOT', ...editor.build() };
   }
 
