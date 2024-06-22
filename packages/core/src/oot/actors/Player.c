@@ -709,6 +709,22 @@ int Player_OverrideLimbDrawPauseWrapper(GameState_Play* play, s32 limbIndex, Gfx
     return 0;
 }
 
+int Player_OverrideLimbDrawGameplayFirstPersonWrapper(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Player* player)
+{
+    if (!(gSave.age == AGE_CHILD && limbIndex == PLAYER_LIMB_R_FOREARM))
+    {
+        /* Forward */
+        if (Player_OverrideLimbDrawGameplayFirstPerson(play, limbIndex, dList, pos, rot, player))
+            return 0;
+    }
+
+    /* Handle adult slingshot */
+    if (gSave.age == AGE_ADULT && limbIndex == PLAYER_LIMB_R_HAND && player->heldItemAction == 15)
+        *dList = Player_CustomEq(comboGetObject(CUSTOM_OBJECT_ID_EQ_SLINGSHOT), CUSTOM_OBJECT_EQ_SLINGSHOT_0);
+
+    return 0;
+}
+
 static Color_RGB8 sGauntletColors[] = {
     { 255, 255, 255 },
     { 254, 207, 15 },
@@ -820,7 +836,7 @@ PATCH_CALL(0x8007a2b4, Player_IsStrengthGoronBracelet);
 
 static int Player_ItemAndArrowType(GameState_Play* play, Actor_Player* this, int* outItem, int* outArrow)
 {
-    if (this->heldItemAction == 6)
+    if (this->heldItemAction == 15)
     {
         /* Slingshot */
         *outItem = ITEM_OOT_SLINGSHOT;

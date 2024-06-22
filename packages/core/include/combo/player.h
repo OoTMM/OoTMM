@@ -37,7 +37,7 @@ void Player_PlaySfx(Actor_Player* player, u16 sfxId);
 float Player_GetHeight(Actor_Player* player);
 int Player_OverrideLimbDrawGameplayDefault(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Player* player);
 int Player_OverrideLimbDrawPause(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Player* player);
-int Player_OverrideLimbDrawGameplayFirstPerson(struct GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, void*);
+int Player_OverrideLimbDrawGameplayFirstPerson(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, void*);
 void Player_SetBootData(GameState_Play* play, Actor_Player* player);
 int Player_GetStrength(void);
 

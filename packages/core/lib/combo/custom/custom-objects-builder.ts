@@ -337,6 +337,15 @@ export class CustomObjectsBuilder {
     return { name: 'EQ_HOOKSHOT', ...editor.build() };
   }
 
+  private async makeEqSlingshot(): Promise<CustomObject> {
+    const editor = new ObjectEditor(0xa);
+    const obj = await this.getFile('oot', 'objects/object_link_child');
+    editor.loadSegment(0x06, obj);
+
+    editor.submitList(editor.listData(0x06018048)!); /* First person */
+    return { name: 'EQ_SLINGSHOT', ...editor.build() };
+  }
+
   async build(): Promise<CustomObject[]> {
     return [
       await this.makeEqKokiriSword(),
@@ -361,6 +370,7 @@ export class CustomObjectsBuilder {
       await this.makeEqOcarinaFairy(),
       await this.makeEqBoomerang(),
       await this.makeEqHookshot(),
+      await this.makeEqSlingshot(),
       //await this.simpleExtract('LIMB_OOT_CHILD_LHAND_CLOSED', 'oot', 'objects/object_link_child', [], 0x06, 0x0a),
     ];
   }

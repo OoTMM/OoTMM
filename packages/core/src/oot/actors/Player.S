@@ -218,3 +218,14 @@ PATCH_START _Player_OverrideLimbDrawPause
  j Player_OverrideLimbDrawPauseWrapper
   nop
 PATCH_END
+
+.globl Player_OverrideLimbDrawGameplayFirstPerson
+Player_OverrideLimbDrawGameplayFirstPerson:
+  addiu sp,-0x20
+  j   _Player_OverrideLimbDrawGameplayFirstPerson+8
+   sw ra,0x1c(sp)
+
+PATCH_START _Player_OverrideLimbDrawGameplayFirstPerson
+ j Player_OverrideLimbDrawGameplayFirstPersonWrapper
+  nop
+PATCH_END
