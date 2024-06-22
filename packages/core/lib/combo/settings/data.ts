@@ -2071,6 +2071,14 @@ export const SETTINGS = [{
   default: false,
   cond: hasOoT,
 }, {
+  key: 'agelessSlingshot',
+  name: 'Ageless Slingshot',
+  category: 'items.ageless',
+  type: 'boolean',
+  description: 'Allows Link to use the slingshot independently of his age',
+  default: false,
+  cond: hasOoT,
+}, {
   key: 'agelessChildTrade',
   name: 'Ageless Child Trade',
   category: 'items.ageless',
