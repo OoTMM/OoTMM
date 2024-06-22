@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add CAMC to cows, where the cow ring hints at the item. If off, cow rings are collection markers instead.
 - Add an optional CAMC setting for maps and compasses.
 - Counter upon getting a Piece of Heart, showing your progression until your next heart container.
 - Can now shuffle the rewards for selling the OoT masks.

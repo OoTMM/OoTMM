@@ -70,7 +70,8 @@ void*   csmcLoadTexture(u8 custom, u32 addr, int fmt, int bpp, int w, int h, int
 void*   csmcLoadTextureEx(const CsmcDisplayList* dl);
 int     csmcFromItem(s16 gi);
 int     csmcEnabled(void);
-int     csmcEnabledExtra(void);
+int     csmcEnabledSkulltula(void);
+int     csmcEnabledCow(void);
 
 /* Chest */
 void    csmcChestInit(Actor* this, GameState_Play* play, s16 gi);

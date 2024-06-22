@@ -51,3 +51,9 @@ PATCH_END
 PATCH_START 0x8099cc4c
   li a2,GI_MM_MILK
 PATCH_END
+
+/* Use our limb handler */
+PATCH_START 0x8099d4ac
+  j EnCow_OverrideLimbDraw
+   nop
+PATCH_END

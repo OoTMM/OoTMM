@@ -72,7 +72,7 @@ static int csmcGsId(s16 gi)
 {
     int csmcId;
 
-    if (gi == 0 || !csmcEnabledExtra())
+    if (gi == 0 || !csmcEnabledSkulltula())
         return CSMC_GS_MAJOR;
 
     csmcId = csmcFromItem(gi);

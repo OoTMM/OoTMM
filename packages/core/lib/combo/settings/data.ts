@@ -1089,12 +1089,20 @@ export const SETTINGS = [{
   description: 'Use a specific texture for maps/compasses',
   cond: (x: any) => x.csmc !== 'never',
 }, {
-  key: 'csmcExtra',
+  key: 'csmcSkulltula',
   name: 'Skulltula CAMC',
   category: 'main.misc',
   type: 'boolean',
   default: false,
   description: 'Enables CAMC for shuffled Gold, Swamp, and Ocean Skulltulas',
+  cond: (x: any) => x.csmc !== 'never',
+}, {
+  key: 'csmcCow',
+  name: 'Cow CAMC',
+  category: 'main.misc',
+  type: 'boolean',
+  default: false,
+  description: 'Enables CAMC for shuffled Cows',
   cond: (x: any) => x.csmc !== 'never',
 }, {
   key: 'blastMaskCooldown',
