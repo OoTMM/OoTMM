@@ -2079,6 +2079,14 @@ export const SETTINGS = [{
   default: false,
   cond: hasOoT,
 }, {
+  key: 'agelessBow',
+  name: 'Ageless Bow',
+  category: 'items.ageless',
+  type: 'boolean',
+  description: 'Allows Link to use the bow independently of his age',
+  default: false,
+  cond: hasOoT,
+}, {
   key: 'agelessChildTrade',
   name: 'Ageless Child Trade',
   category: 'items.ageless',
