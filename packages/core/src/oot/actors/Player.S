@@ -229,3 +229,17 @@ PATCH_START _Player_OverrideLimbDrawGameplayFirstPerson
  j Player_OverrideLimbDrawGameplayFirstPersonWrapper
   nop
 PATCH_END
+
+/* Use our hook to get the bow/sling string data */
+GetBowSlingshotStringData:
+  HOOK_CALL_RET Player_GetBowSlingshotStringData
+  jr ra
+   nop
+
+PATCH_START 0x8007bbdc
+  jal GetBowSlingshotStringData
+   nop
+  move t8,v0
+  nop
+  nop
+PATCH_END

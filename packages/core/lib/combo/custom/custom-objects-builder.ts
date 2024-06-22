@@ -343,6 +343,7 @@ export class CustomObjectsBuilder {
     editor.loadSegment(0x06, obj);
 
     editor.submitList(editor.listData(0x06018048)!); /* First person */
+    editor.submitList(editor.listData(0x060221a8)!); /* First person string */
     return { name: 'EQ_SLINGSHOT', ...editor.build() };
   }
 
