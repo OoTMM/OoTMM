@@ -425,6 +425,7 @@ void Player_AfterSetEquipmentData(GameState_Play* play)
 #define DLIST_ADULT_LHAND_CLOSED    DLIST_INDIRECT(0x800f78e8)
 #define DLIST_ADULT_RHAND_CLOSED    DLIST_INDIRECT(0x800f77b8)
 #define DLIST_ADULT_RHAND_OPEN      DLIST_INDIRECT(0x800f7918)
+#define DLIST_CHILD_STRING          DLIST_INDIRECT(0x800f7c14)
 
 static void* Player_CustomHandEq(u32 handDlist, void* eqData, u32 eqDlist)
 {
@@ -441,28 +442,11 @@ static void* Player_CustomHandEq(u32 handDlist, void* eqData, u32 eqDlist)
     return dlist;
 }
 
-static void* Player_CustomHandArmEq(u32 handDlist, u32 armDlist, void* eqData, u32 eqDlist)
-{
-    Gfx* dlist;
-    Gfx* d;
-
-    if (!eqData) return (void*)kDListEmpty;
-
-    d = dlist = GRAPH_ALLOC(gPlay->gs.gfx, sizeof(Gfx) * 3);
-    gSPDisplayList(d++, handDlist);
-    gSPSegment(d++, 0x0a, eqData);
-    gSPDisplayList(d++, eqDlist);
-    gSPBranchList(d++, armDlist);
-
-    return dlist;
-}
-
 const Gfx* gDlistHookshotEnd;
 const Gfx* gDlistHookshotChain;
 const Gfx* gDlistHookshotReticle;
 const Gfx* gDlistHookshotBodyFP;
 const Gfx* gDlistHookshotBodyTP;
-const Gfx* gChildForearm;
 
 static void* Player_CustomEq(void* eqData, u32 eqDlist)
 {
@@ -688,9 +672,6 @@ static void Player_OverrideCustom(GameState_Play* play, Actor_Player* this, int 
 
 int Player_OverrideLimbDrawGameplayDefaultWrapper(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Player* player)
 {
-    if (limbIndex == PLAYER_LIMB_R_FOREARM)
-        gChildForearm = *dList;
-
     /* Forward */
     if (Player_OverrideLimbDrawGameplayDefault(play, limbIndex, dList, pos, rot, player))
         return 0;
@@ -749,7 +730,7 @@ void Player_DrawFlexLod(GameState_Play* play, void** skeleton, Vec3s* jointTable
             gDlistHookshotEnd = Player_CustomEq(hookshotObj, CUSTOM_OBJECT_EQ_HOOKSHOT_0);
             gDlistHookshotChain = Player_CustomEq(hookshotObj, CUSTOM_OBJECT_EQ_HOOKSHOT_1);
             gDlistHookshotReticle = Player_CustomEq(hookshotObj, CUSTOM_OBJECT_EQ_HOOKSHOT_2);
-            gDlistHookshotBodyFP = Player_CustomHandArmEq(DLIST_CHILD_RHAND_CLOSED, (u32)gChildForearm, hookshotObj, CUSTOM_OBJECT_EQ_HOOKSHOT_3);
+            gDlistHookshotBodyFP = Player_CustomHandEq(DLIST_CHILD_RHAND_CLOSED, hookshotObj, CUSTOM_OBJECT_EQ_HOOKSHOT_3);
             gDlistHookshotBodyTP = Player_CustomHandEq(DLIST_CHILD_RHAND_CLOSED, hookshotObj, CUSTOM_OBJECT_EQ_HOOKSHOT_4);
         }
         else
@@ -860,3 +841,39 @@ static int Player_ItemAndArrowType(GameState_Play* play, Actor_Player* this, int
 }
 
 PATCH_FUNC(0x808323dc, Player_ItemAndArrowType);
+
+typedef struct
+{
+    u32 dlist;
+    float x;
+    float y;
+    float z;
+}
+BowSlingshotString;
+
+const BowSlingshotString* Player_GetBowSlingshotStringData(void)
+{
+    static BowSlingshotString bss;
+    Actor_Player* link;
+
+    link = GET_LINK(gPlay);
+    if (link->heldItemAction == 15)
+    {
+        /* Slingshot */
+        bss.x = 606.f;
+        bss.y = 236.f;
+        bss.z = 0.f;
+        bss.dlist = (u32)kDListEmpty;
+
+        if (gSave.age == AGE_CHILD)
+        {
+            bss.dlist = DLIST_CHILD_STRING;
+        }
+        else
+        {
+            bss.dlist = (u32)Player_CustomEq(comboGetObject(CUSTOM_OBJECT_ID_EQ_SLINGSHOT), CUSTOM_OBJECT_EQ_SLINGSHOT_1);
+        }
+    }
+
+    return &bss;
+}
