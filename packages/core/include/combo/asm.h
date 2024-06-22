@@ -161,6 +161,13 @@ HOOK_SAVE
 HOOK_RESTORE
 .endm
 
+.macro HOOK_CALL_RET addr
+HOOK_SAVE
+  jal \addr
+   nop
+HOOK_RESTORE_KEEP_V0
+.endm
+
 .macro PATCH_GROUP groupId
 .section .patch, "awx"
 .int 0xffffffff

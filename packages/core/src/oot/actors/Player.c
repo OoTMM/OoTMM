@@ -425,6 +425,8 @@ void Player_AfterSetEquipmentData(GameState_Play* play)
 #define DLIST_ADULT_LHAND_CLOSED    DLIST_INDIRECT(0x800f78e8)
 #define DLIST_ADULT_RHAND_CLOSED    DLIST_INDIRECT(0x800f77b8)
 #define DLIST_ADULT_RHAND_OPEN      DLIST_INDIRECT(0x800f7918)
+#define DLIST_CHILD_STRING          DLIST_INDIRECT(0x800f7c14)
+#define DLIST_ADULT_STRING          DLIST_INDIRECT(0x800f7c04)
 
 static void* Player_CustomHandEq(u32 handDlist, void* eqData, u32 eqDlist)
 {
@@ -441,28 +443,11 @@ static void* Player_CustomHandEq(u32 handDlist, void* eqData, u32 eqDlist)
     return dlist;
 }
 
-static void* Player_CustomHandArmEq(u32 handDlist, u32 armDlist, void* eqData, u32 eqDlist)
-{
-    Gfx* dlist;
-    Gfx* d;
-
-    if (!eqData) return (void*)kDListEmpty;
-
-    d = dlist = GRAPH_ALLOC(gPlay->gs.gfx, sizeof(Gfx) * 3);
-    gSPDisplayList(d++, handDlist);
-    gSPSegment(d++, 0x0a, eqData);
-    gSPDisplayList(d++, eqDlist);
-    gSPBranchList(d++, armDlist);
-
-    return dlist;
-}
-
 const Gfx* gDlistHookshotEnd;
 const Gfx* gDlistHookshotChain;
 const Gfx* gDlistHookshotReticle;
 const Gfx* gDlistHookshotBodyFP;
 const Gfx* gDlistHookshotBodyTP;
-const Gfx* gChildForearm;
 
 static void* Player_CustomEq(void* eqData, u32 eqDlist)
 {
@@ -623,6 +608,12 @@ static void Player_OverrideAdult(GameState_Play* play, Actor_Player* this, int l
 
         if (this->rightHandType == PLAYER_MODELTYPE_RH_OCARINA)
             *dlist = Player_CustomHandEq(DLIST_ADULT_RHAND_OPEN, comboGetObject(CUSTOM_OBJECT_ID_EQ_OCARINA_FAIRY), CUSTOM_OBJECT_EQ_OCARINA_FAIRY_0);
+
+        if (this->rightHandType == PLAYER_MODELTYPE_RH_BOW_SLINGSHOT || this->rightHandType == PLAYER_MODELTYPE_RH_BOW_SLINGSHOT_2)
+        {
+            if (this->heldItemAction == 15)
+                *dlist = Player_CustomHandEq(DLIST_ADULT_RHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_SLINGSHOT), CUSTOM_OBJECT_EQ_SLINGSHOT_2);
+        }
     }
 
     if (limb == PLAYER_LIMB_SHEATH)
@@ -669,6 +660,11 @@ static void Player_OverrideChild(GameState_Play* play, Actor_Player* this, int l
             *dlist = (Gfx*)gDlistHookshotBodyTP;
         if ((this->rightHandType == PLAYER_MODELTYPE_RH_SHIELD) && gSave.equips.equipment.shields == 3)
             *dlist = Player_CustomHandEq(DLIST_CHILD_RHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_MIRROR), CUSTOM_OBJECT_EQ_SHIELD_MIRROR_0);
+        if (this->rightHandType == PLAYER_MODELTYPE_RH_BOW_SLINGSHOT || this->rightHandType == PLAYER_MODELTYPE_RH_BOW_SLINGSHOT_2)
+        {
+            if (this->heldItemAction != 15)
+                *dlist = Player_CustomHandEq(DLIST_CHILD_RHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_BOW), CUSTOM_OBJECT_EQ_BOW_2);
+        }
     }
 
     if (limb == PLAYER_LIMB_SHEATH)
@@ -688,9 +684,6 @@ static void Player_OverrideCustom(GameState_Play* play, Actor_Player* this, int 
 
 int Player_OverrideLimbDrawGameplayDefaultWrapper(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Player* player)
 {
-    if (limbIndex == PLAYER_LIMB_R_FOREARM)
-        gChildForearm = *dList;
-
     /* Forward */
     if (Player_OverrideLimbDrawGameplayDefault(play, limbIndex, dList, pos, rot, player))
         return 0;
@@ -706,6 +699,26 @@ int Player_OverrideLimbDrawPauseWrapper(GameState_Play* play, s32 limbIndex, Gfx
         return 0;
 
     Player_OverrideCustom(play, player, limbIndex, dList, 1);
+    return 0;
+}
+
+int Player_OverrideLimbDrawGameplayFirstPersonWrapper(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Player* player)
+{
+    if (!(gSave.age == AGE_CHILD && limbIndex == PLAYER_LIMB_R_FOREARM))
+    {
+        /* Forward */
+        if (Player_OverrideLimbDrawGameplayFirstPerson(play, limbIndex, dList, pos, rot, player))
+            return 0;
+    }
+
+    /* Handle adult slingshot */
+    if (gSave.age == AGE_ADULT && limbIndex == PLAYER_LIMB_R_HAND && player->heldItemAction == 15)
+        *dList = Player_CustomHandEq(DLIST_ADULT_RHAND_OPEN, comboGetObject(CUSTOM_OBJECT_ID_EQ_SLINGSHOT), CUSTOM_OBJECT_EQ_SLINGSHOT_0);
+
+    /* Handle child bow */
+    if (gSave.age == AGE_CHILD && limbIndex == PLAYER_LIMB_R_HAND && player->heldItemAction != 15)
+        *dList = Player_CustomHandEq(DLIST_CHILD_RHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_BOW), CUSTOM_OBJECT_EQ_BOW_0);
+
     return 0;
 }
 
@@ -733,7 +746,7 @@ void Player_DrawFlexLod(GameState_Play* play, void** skeleton, Vec3s* jointTable
             gDlistHookshotEnd = Player_CustomEq(hookshotObj, CUSTOM_OBJECT_EQ_HOOKSHOT_0);
             gDlistHookshotChain = Player_CustomEq(hookshotObj, CUSTOM_OBJECT_EQ_HOOKSHOT_1);
             gDlistHookshotReticle = Player_CustomEq(hookshotObj, CUSTOM_OBJECT_EQ_HOOKSHOT_2);
-            gDlistHookshotBodyFP = Player_CustomHandArmEq(DLIST_CHILD_RHAND_CLOSED, (u32)gChildForearm, hookshotObj, CUSTOM_OBJECT_EQ_HOOKSHOT_3);
+            gDlistHookshotBodyFP = Player_CustomHandEq(DLIST_CHILD_RHAND_CLOSED, hookshotObj, CUSTOM_OBJECT_EQ_HOOKSHOT_3);
             gDlistHookshotBodyTP = Player_CustomHandEq(DLIST_CHILD_RHAND_CLOSED, hookshotObj, CUSTOM_OBJECT_EQ_HOOKSHOT_4);
         }
         else
@@ -817,3 +830,82 @@ static int Player_IsStrengthGoronBracelet(void)
 }
 
 PATCH_CALL(0x8007a2b4, Player_IsStrengthGoronBracelet);
+
+static int Player_ItemAndArrowType(GameState_Play* play, Actor_Player* this, int* outItem, int* outArrow)
+{
+    if (this->heldItemAction == 15)
+    {
+        /* Slingshot */
+        *outItem = ITEM_OOT_SLINGSHOT;
+        *outArrow = 9;
+    }
+    else
+    {
+        /* Bow, maybe with magical arrow */
+        *outItem = ITEM_OOT_BOW;
+        if (this->state & (1 << 23))
+            *outArrow = 1;
+        else
+            *outArrow = this->heldItemAction - 6;
+    }
+
+    if (gSaveContext.minigameState == 1)
+        return play->interfaceCtx.hbaAmmo;
+    else if (play->shootingGalleryStatus != 0)
+        return play->shootingGalleryStatus;
+    return gSave.inventory.ammo[*outItem];
+}
+
+PATCH_FUNC(0x808323dc, Player_ItemAndArrowType);
+
+typedef struct
+{
+    u32 dlist;
+    float x;
+    float y;
+    float z;
+}
+BowSlingshotString;
+
+const BowSlingshotString* Player_GetBowSlingshotStringData(void)
+{
+    static BowSlingshotString bss;
+    Actor_Player* link;
+
+    link = GET_LINK(gPlay);
+    if (link->heldItemAction == 15)
+    {
+        /* Slingshot */
+        bss.x = 606.f;
+        bss.y = 236.f;
+        bss.z = 0.f;
+        bss.dlist = (u32)kDListEmpty;
+
+        if (gSave.age == AGE_CHILD)
+        {
+            bss.dlist = DLIST_CHILD_STRING;
+        }
+        else
+        {
+            bss.dlist = (u32)Player_CustomEq(comboGetObject(CUSTOM_OBJECT_ID_EQ_SLINGSHOT), CUSTOM_OBJECT_EQ_SLINGSHOT_1);
+        }
+    }
+    else
+    {
+        /* Bow */
+        bss.x = 0.f;
+        bss.y = -360.4f;
+        bss.z = 0.f;
+
+        if (gSave.age == AGE_ADULT)
+        {
+            bss.dlist = DLIST_ADULT_STRING;
+        }
+        else
+        {
+            bss.dlist = (u32)Player_CustomEq(comboGetObject(CUSTOM_OBJECT_ID_EQ_BOW), CUSTOM_OBJECT_EQ_BOW_1);
+        }
+    }
+
+    return &bss;
+}
