@@ -660,6 +660,11 @@ static void Player_OverrideChild(GameState_Play* play, Actor_Player* this, int l
             *dlist = (Gfx*)gDlistHookshotBodyTP;
         if ((this->rightHandType == PLAYER_MODELTYPE_RH_SHIELD) && gSave.equips.equipment.shields == 3)
             *dlist = Player_CustomHandEq(DLIST_CHILD_RHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_MIRROR), CUSTOM_OBJECT_EQ_SHIELD_MIRROR_0);
+        if (this->rightHandType == PLAYER_MODELTYPE_RH_BOW_SLINGSHOT || this->rightHandType == PLAYER_MODELTYPE_RH_BOW_SLINGSHOT_2)
+        {
+            if (this->heldItemAction != 15)
+                *dlist = Player_CustomHandEq(DLIST_CHILD_RHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_BOW), CUSTOM_OBJECT_EQ_BOW_2);
+        }
     }
 
     if (limb == PLAYER_LIMB_SHEATH)
