@@ -710,6 +710,10 @@ int Player_OverrideLimbDrawGameplayFirstPersonWrapper(GameState_Play* play, s32 
     if (gSave.age == AGE_ADULT && limbIndex == PLAYER_LIMB_R_HAND && player->heldItemAction == 15)
         *dList = Player_CustomHandEq(DLIST_ADULT_RHAND_OPEN, comboGetObject(CUSTOM_OBJECT_ID_EQ_SLINGSHOT), CUSTOM_OBJECT_EQ_SLINGSHOT_0);
 
+    /* Handle child bow */
+    if (gSave.age == AGE_CHILD && limbIndex == PLAYER_LIMB_R_HAND && player->heldItemAction != 15)
+        *dList = Player_CustomHandEq(DLIST_CHILD_RHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_BOW), CUSTOM_OBJECT_EQ_BOW_0);
+
     return 0;
 }
 
@@ -894,7 +898,7 @@ const BowSlingshotString* Player_GetBowSlingshotStringData(void)
         }
         else
         {
-            bss.dlist = (u32)kDListEmpty;
+            bss.dlist = (u32)Player_CustomEq(comboGetObject(CUSTOM_OBJECT_ID_EQ_BOW), CUSTOM_OBJECT_EQ_BOW_1);
         }
     }
 
