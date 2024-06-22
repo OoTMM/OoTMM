@@ -68,7 +68,12 @@ int csmcEnabled(void)
     return (Config_Flag(CFG_CSMC) || (Config_Flag(CFG_CSMC_AGONY) && gOotSave.inventory.quest.agonyStone));
 }
 
-int csmcEnabledExtra(void)
+int csmcEnabledSkulltula(void)
 {
-    return csmcEnabled() && Config_Flag(CFG_CSMC_EXTRA);
+    return csmcEnabled() && Config_Flag(CFG_CSMC_SKULLTULA);
+}
+
+int csmcEnabledCow(void)
+{
+    return csmcEnabled() && Config_Flag(CFG_CSMC_COW);
 }

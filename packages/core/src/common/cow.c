@@ -2,14 +2,73 @@
 #include <combo/item.h>
 #include <combo/player.h>
 #include <combo/actor.h>
+#include <combo/csmc.h>
 
 #if defined(GAME_OOT)
-# define RECOVERY_HEART GI_OOT_RECOVERY_HEART
+# define RECOVERY_HEART         GI_OOT_RECOVERY_HEART
+# define MILK                   GI_OOT_MILK
+# define HEAD_ROT_OFFSET        0x260
 #else
-# define RECOVERY_HEART GI_MM_RECOVERY_HEART
+# define RECOVERY_HEART         GI_MM_RECOVERY_HEART
+# define MILK                   GI_MM_MILK
+# define HEAD_ROT_OFFSET        0x268
 #endif
 
 static int sCowID;
+
+static const Gfx kDlistColoredRing[] = {
+    gsSPBranchList(0x060026c8),
+};
+
+static const Gfx kDlistColoredRingMajor[] = {
+    gsDPSetPrimColor(0, 0x80, 255, 255, 0, 255),
+    gsSPBranchList((u32)kDlistColoredRing - 0x80000000),
+};
+
+static const Gfx kDlistColoredRingMinor[] = {
+    gsDPSetPrimColor(0, 0x80, 0x30, 0x0f, 0x02, 255),
+    gsSPBranchList((u32)kDlistColoredRing - 0x80000000),
+};
+
+static const Gfx kDlistColoredRingBossKey[] = {
+    gsDPSetPrimColor(0, 0x80, 0x00, 0x00, 0xff, 255),
+    gsSPBranchList((u32)kDlistColoredRing - 0x80000000),
+};
+
+static const Gfx kDlistColoredRingKey[] = {
+    gsDPSetPrimColor(0, 0x80, 0x44, 0x44, 0x44, 255),
+    gsSPBranchList((u32)kDlistColoredRing - 0x80000000),
+};
+
+static const Gfx kDlistColoredRingSpider[] = {
+    gsDPSetPrimColor(0, 0x80, 0xff, 0xff, 0xff, 255),
+    gsSPBranchList((u32)kDlistColoredRing - 0x80000000),
+};
+
+static const Gfx kDlistColoredRingFairy[] = {
+    gsDPSetPrimColor(0, 0x80, 0xff, 0x7a, 0xfb, 255),
+    gsSPBranchList((u32)kDlistColoredRing - 0x80000000),
+};
+
+static const Gfx kDlistColoredRingHeart[] = {
+    gsDPSetPrimColor(0, 0x80, 0xff, 0x00, 0x00, 255),
+    gsSPBranchList((u32)kDlistColoredRing - 0x80000000),
+};
+
+static const Gfx kDlistColoredRingSoul[] = {
+    gsDPSetPrimColor(0, 0x80, 0x34, 0x0b, 0x9c, 255),
+    gsSPBranchList((u32)kDlistColoredRing - 0x80000000),
+};
+
+static const Gfx kDlistColoredRingMap[] = {
+    gsDPSetPrimColor(0, 0x80, 0xc7, 0x50, 0x00, 255),
+    gsSPBranchList((u32)kDlistColoredRing - 0x80000000),
+};
+
+static const Gfx kDlistColoredRingRenewable[] = {
+    gsDPSetPrimColor(0, 0x80, 0, 255, 0, 255),
+    gsSPBranchList((u32)kDlistColoredRing - 0x80000000),
+};
 
 static Actor* EnCow_GetNearestCow(GameState_Play* play)
 {
@@ -41,7 +100,6 @@ static Actor* EnCow_GetNearestCow(GameState_Play* play)
 #if defined(GAME_OOT)
 static int EnCow_GetCowID(Actor* cow, GameState_Play* play)
 {
-    cow = EnCow_GetNearestCow(play);
     switch (play->sceneId)
     {
     case SCE_OOT_LINK_HOUSE:
@@ -71,7 +129,6 @@ static int EnCow_GetCowID(Actor* cow, GameState_Play* play)
     sceneId = play->sceneId;
     if (sceneId == SCE_MM_GROTTOS)
         sceneId = gLastScene;
-    cow = EnCow_GetNearestCow(play);
     switch (sceneId)
     {
     case SCE_MM_TERMINA_FIELD:
@@ -87,13 +144,111 @@ static int EnCow_GetCowID(Actor* cow, GameState_Play* play)
 }
 #endif
 
-static void EnCow_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+static void EnCow_ItemQuery(GameState_Play* play, Actor* this, ComboItemQuery* q, s16 gi, int* outId)
 {
     int id;
-    Actor_Player* link;
-    ComboItemQuery q = ITEM_QUERY_INIT;
 
-    q.gi = gi;
+    memset(q, 0, sizeof(ComboItemQuery));
+    q->gi = gi;
+    id = EnCow_GetCowID(this, play);
+    if (id != -1)
+    {
+        if (outId)
+            *outId = id;
+        q->ovType = OV_COW;
+        q->id = id;
+        q->giRenew = RECOVERY_HEART;
+        if (gCowFlags & (1 << id))
+            q->ovFlags |= OVF_RENEW;
+    }
+}
+
+static const Gfx* EnCow_RingList(GameState_Play* play, Actor* this)
+{
+    ComboItemQuery q;
+    ComboItemOverride o;
+    s16 gi;
+    s16 giRenew;
+    int type;
+
+    if (!csmcEnabledCow())
+    {
+        EnCow_ItemQuery(play, this, &q, GI_NONE, NULL);
+        q.giRenew = GI_NONE;
+        comboItemOverride(&o, &q);
+
+        if (o.gi == GI_NONE)
+            return NULL;
+        else
+            return (void*)0x06002628;
+    }
+
+    EnCow_ItemQuery(play, this, &q, GI_NONE, NULL);
+    q.giRenew = GI_NONE;
+    comboItemOverride(&o, &q);
+    gi = o.gi;
+    q.ovFlags |= OVF_RENEW;
+    comboItemOverride(&o, &q);
+    giRenew = o.gi;
+
+    if (gi == GI_NONE)
+        return NULL;
+
+    type = csmcFromItem(gi);
+    if (type == CSMC_NORMAL && giRenew != GI_NONE)
+        return kDlistColoredRingRenewable;
+
+    switch (type)
+    {
+    case CSMC_NORMAL:
+        return kDlistColoredRingMinor;
+    case CSMC_BOSS_KEY:
+        return kDlistColoredRingBossKey;
+    case CSMC_KEY:
+        return kDlistColoredRingKey;
+    case CSMC_SPIDER:
+        return kDlistColoredRingSpider;
+    case CSMC_FAIRY:
+        return kDlistColoredRingFairy;
+    case CSMC_HEART:
+        return kDlistColoredRingHeart;
+    case CSMC_SOUL:
+        return kDlistColoredRingSoul;
+    case CSMC_MAP_COMPASS:
+        return kDlistColoredRingMap;
+    case CSMC_MAJOR:
+    default:
+        return kDlistColoredRingMajor;
+    }
+}
+
+int EnCow_OverrideLimbDraw(GameState_Play* play, int limbIndex, Gfx** dlist, Vec3f* pos, Vec3s* rot, Actor* this)
+{
+    const Vec3s* headRot;
+
+    switch (limbIndex)
+    {
+    case 2:
+        headRot = (const Vec3s*)((char*)this + HEAD_ROT_OFFSET);
+        rot->y += headRot->y;
+        rot->x += headRot->x;
+        break;
+    case 5:
+        *dlist = (Gfx*)EnCow_RingList(play, this);
+        break;
+    }
+
+    return FALSE;
+}
+
+static void EnCow_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+{
+    Actor* cow;
+    ComboItemQuery q;
+    Actor_Player* link;
+
+    /* Get the nearest cow */
+    cow = EnCow_GetNearestCow(play);
 
     /* Make sure any dialog is closed */
     link = GET_LINK(play);
@@ -102,16 +257,7 @@ static void EnCow_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, f
     Message_Close(play);
 
     /* Get the cow ID and attached item */
-    id = EnCow_GetCowID(this, play);
-    if (id != -1)
-    {
-        sCowID = id;
-        q.ovType = OV_COW;
-        q.id = id;
-        q.giRenew = RECOVERY_HEART;
-        if (gCowFlags & (1 << id))
-            q.ovFlags |= OVF_RENEW;
-    }
+    EnCow_ItemQuery(play, cow, &q, MILK, &sCowID);
 
     /* Give the item */
     comboGiveItem(this, play, &q, 10000.f, 10000.f);

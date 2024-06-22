@@ -38,3 +38,9 @@ PATCH_START 0x80b78014
   nop
   nop
 PATCH_END
+
+/* Use our own limb override */
+PATCH_START 0x80b78704
+  j EnCow_OverrideLimbDraw
+   nop
+PATCH_END

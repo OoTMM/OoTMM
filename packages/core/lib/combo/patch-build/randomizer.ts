@@ -443,6 +443,11 @@ const gameChecks = (worldId: number, settings: Settings, game: Game, logic: Logi
     if (c.game !== game) {
       continue;
     }
+
+    /* Skip cows if not shuffled */
+    if (c.game === 'oot' && c.type === 'cow' && !settings.cowShuffleOot) continue;
+    if (c.game === 'mm' && c.type === 'cow' && !settings.cowShuffleMm) continue;
+
     const key = checkKey(c);
     const itemGi = gi(settings, game, item.item, true);
     const b = Buffer.alloc(8, 0xff);
@@ -798,7 +803,8 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     GANON_NO_BOSS_KEY: settings.ganonBossKey === 'removed',
     SMALL_KEY_SHUFFLE: settings.smallKeyShuffleOot === 'anywhere',
     CSMC: settings.csmc === 'always',
-    CSMC_EXTRA: settings.csmcExtra,
+    CSMC_SKULLTULA: settings.csmcSkulltula,
+    CSMC_COW: settings.csmcCow,
     CSMC_AGONY: settings.csmc === 'agony',
     OOT_PROGRESSIVE_SHIELDS: settings.progressiveShieldsOot === 'progressive',
     OOT_PROGRESSIVE_SWORDS: settings.progressiveSwordsOot === 'progressive',
