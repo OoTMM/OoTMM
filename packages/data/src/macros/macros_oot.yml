@@ -62,7 +62,7 @@
 "has_bombchu_license_shared": "license(SHARED_BOMBCHU) || license(SHARED_BOMBCHU_5) || license(SHARED_BOMBCHU_10) || license(SHARED_BOMBCHU_20)"
 "has_bombchu_license": "cond(setting(bombchuBagOot), cond(setting(sharedBombchuBags), has_bombchu_license_shared, has_bombchu_license_nonshared), has_bomb_bag)"
 "has_bombchu": "has_bombchu_source && has_bombchu_license"
-"can_use_slingshot": "has(SLINGSHOT) && ((is_child && (event(SEEDS) || renewable(DEKU_SEEDS_30))) || (is_adult && glitch_equip_swap && can_use_bow))"
+"can_use_slingshot": "has(SLINGSHOT) && (is_child || setting(agelessSlingshot) || glitch_equip_swap) && (event(SEEDS) || renewable(DEKU_SEEDS_30))"
 "has_bow": "has(BOW) || has(SHARED_BOW)"
 "has_arrows": "has_bow && (event(ARROWS) || renewable(ARROWS_5) || renewable(ARROWS_10) || renewable(ARROWS_30) || renewable(SHARED_ARROWS_5) || renewable(SHARED_ARROWS_10) || renewable(SHARED_ARROWS_30) || renewable(SHARED_ARROWS_40) || (setting(sharedBows) && event(MM_ARROWS)))"
 "can_use_bow": "is_adult && has_arrows"
