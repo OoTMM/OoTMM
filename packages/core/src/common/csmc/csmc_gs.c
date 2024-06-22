@@ -50,6 +50,12 @@ static const Gfx kCsmcGsSoul[] = {
     gsSPEndDisplayList(),
 };
 
+static const Gfx kCsmcGsMap[] = {
+    gsDPSetPrimColor(0x00, 0x00, 252, 86, 3, 255),
+    gsDPSetEnvColor(74, 25, 0, 255),
+    gsSPEndDisplayList(),
+};
+
 static const Gfx* const kCsmcGs[] = {
     kCsmcGsNormal,
     kCsmcGsBossKey,
@@ -59,6 +65,7 @@ static const Gfx* const kCsmcGs[] = {
     kCsmcGsFairy,
     kCsmcGsHeart,
     kCsmcGsSoul,
+    kCsmcGsMap,
 };
 
 static int csmcGsId(s16 gi)
@@ -79,6 +86,7 @@ static int csmcGsId(s16 gi)
     case CSMC_FAIRY:        return CSMC_GS_FAIRY;
     case CSMC_HEART:        return CSMC_GS_HEART;
     case CSMC_SOUL:         return CSMC_GS_SOUL;
+    case CSMC_MAP_COMPASS:  return CSMC_GS_MAP_COMPASS;
     default:                return CSMC_GS_MAJOR;
     }
 }
