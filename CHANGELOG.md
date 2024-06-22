@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Hookshot is now visible on child.
 - Castle Courtyard can now be revisited.
 - Zelda's Soul is now required for the OoT/SoT check.
 - The angle of interaction of MM gossip stones is more tolerant.

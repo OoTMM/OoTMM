@@ -315,6 +315,28 @@ export class CustomObjectsBuilder {
     return { name: 'EQ_BOOMERANG', ...editor.build() };
   }
 
+  private async makeEqHookshot(): Promise<CustomObject> {
+    const editor = new ObjectEditor(0xa);
+    const obj = await this.getFile('oot', 'objects/object_link_boy');
+    editor.loadSegment(0x06, obj);
+
+    editor.submitList(editor.listData(0x0602b288)!); /* Pointy end */
+    editor.submitList(editor.listData(0x0602aff0)!); /* Chain */
+    editor.submitList(editor.listData(0x0602cb48)!); /* Reticle */
+
+    const dataBodyFpAddr = 0x0602a738;
+    let dataBodyFp = editor.listData(dataBodyFpAddr)!;
+    dataBodyFp = editor.stripList(dataBodyFp, 0x0602AA68 - dataBodyFpAddr, 0x0602ad50 - dataBodyFpAddr);
+    editor.submitList(dataBodyFp);
+
+    const dataBodyTpAddr = 0x06024d70;
+    let dataBodyTp = editor.listData(dataBodyTpAddr)!;
+    dataBodyTp = editor.stripList(dataBodyTp, 0x06025030 - dataBodyTpAddr, 0x06025210 - dataBodyTpAddr);
+    editor.submitList(dataBodyTp);
+
+    return { name: 'EQ_HOOKSHOT', ...editor.build() };
+  }
+
   async build(): Promise<CustomObject[]> {
     return [
       await this.makeEqKokiriSword(),
@@ -338,6 +360,7 @@ export class CustomObjectsBuilder {
       await this.makeEqSheathSwordGilded(),
       await this.makeEqOcarinaFairy(),
       await this.makeEqBoomerang(),
+      await this.makeEqHookshot(),
       //await this.simpleExtract('LIMB_OOT_CHILD_LHAND_CLOSED', 'oot', 'objects/object_link_child', [], 0x06, 0x0a),
     ];
   }
