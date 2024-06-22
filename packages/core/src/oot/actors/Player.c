@@ -441,6 +441,29 @@ static void* Player_CustomHandEq(u32 handDlist, void* eqData, u32 eqDlist)
     return dlist;
 }
 
+static void* Player_CustomHandArmEq(u32 handDlist, u32 armDlist, void* eqData, u32 eqDlist)
+{
+    Gfx* dlist;
+    Gfx* d;
+
+    if (!eqData) return (void*)kDListEmpty;
+
+    d = dlist = GRAPH_ALLOC(gPlay->gs.gfx, sizeof(Gfx) * 3);
+    gSPDisplayList(d++, handDlist);
+    gSPSegment(d++, 0x0a, eqData);
+    gSPDisplayList(d++, eqDlist);
+    gSPBranchList(d++, armDlist);
+
+    return dlist;
+}
+
+const Gfx* gDlistHookshotEnd;
+const Gfx* gDlistHookshotChain;
+const Gfx* gDlistHookshotReticle;
+const Gfx* gDlistHookshotBodyFP;
+const Gfx* gDlistHookshotBodyTP;
+const Gfx* gChildForearm;
+
 static void* Player_CustomEq(void* eqData, u32 eqDlist)
 {
     Gfx* dlist;
@@ -642,6 +665,8 @@ static void Player_OverrideChild(GameState_Play* play, Actor_Player* this, int l
 
     if (limb == PLAYER_LIMB_R_HAND)
     {
+        if (this->rightHandType == PLAYER_MODELTYPE_RH_HOOKSHOT)
+            *dlist = (Gfx*)gDlistHookshotBodyTP;
         if ((this->rightHandType == PLAYER_MODELTYPE_RH_SHIELD) && gSave.equips.equipment.shields == 3)
             *dlist = Player_CustomHandEq(DLIST_CHILD_RHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_MIRROR), CUSTOM_OBJECT_EQ_SHIELD_MIRROR_0);
     }
@@ -663,6 +688,9 @@ static void Player_OverrideCustom(GameState_Play* play, Actor_Player* this, int 
 
 int Player_OverrideLimbDrawGameplayDefaultWrapper(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Player* player)
 {
+    if (limbIndex == PLAYER_LIMB_R_FOREARM)
+        gChildForearm = *dList;
+
     /* Forward */
     if (Player_OverrideLimbDrawGameplayDefault(play, limbIndex, dList, pos, rot, player))
         return 0;
@@ -691,9 +719,32 @@ void DrawChildGauntlets(GameState_Play* play);
 void Player_DrawFlexLod(GameState_Play* play, void** skeleton, Vec3s* jointTable, s32 dListCount, void* overrideLimbDraw, void* postLimbDraw, void* arg, s32 lod)
 {
     Color_RGB8* c;
+    void* hookshotObj;
     void* bootsData;
     u32 bootsList;
     u32 bootsList2;
+
+    /* Load hookshot data if child */
+    if (gSave.age == AGE_CHILD)
+    {
+        hookshotObj = comboGetObject(CUSTOM_OBJECT_ID_EQ_HOOKSHOT);
+        if (hookshotObj)
+        {
+            gDlistHookshotEnd = Player_CustomEq(hookshotObj, CUSTOM_OBJECT_EQ_HOOKSHOT_0);
+            gDlistHookshotChain = Player_CustomEq(hookshotObj, CUSTOM_OBJECT_EQ_HOOKSHOT_1);
+            gDlistHookshotReticle = Player_CustomEq(hookshotObj, CUSTOM_OBJECT_EQ_HOOKSHOT_2);
+            gDlistHookshotBodyFP = Player_CustomHandArmEq(DLIST_CHILD_RHAND_CLOSED, (u32)gChildForearm, hookshotObj, CUSTOM_OBJECT_EQ_HOOKSHOT_3);
+            gDlistHookshotBodyTP = Player_CustomHandEq(DLIST_CHILD_RHAND_CLOSED, hookshotObj, CUSTOM_OBJECT_EQ_HOOKSHOT_4);
+        }
+        else
+        {
+            gDlistHookshotEnd = kDListEmpty;
+            gDlistHookshotChain = kDListEmpty;
+            gDlistHookshotReticle = kDListEmpty;
+            gDlistHookshotBodyFP = kDListEmpty;
+            gDlistHookshotBodyTP = kDListEmpty;
+        }
+    }
 
     /* Forward */
     SkelAnime_DrawFlexLod(play, skeleton, jointTable, dListCount, overrideLimbDraw, postLimbDraw, arg, lod);

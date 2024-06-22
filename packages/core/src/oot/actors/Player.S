@@ -94,7 +94,7 @@ ChildHookHand:
   lw   a0,(gSaveContext+0x04)
   beqz a0,ChildHookHand_End
    nop
-  la t7,kDListEmpty
+  lw t7,gDlistHookshotBodyFP
   sw t7,0(a2)
 
 ChildHookHand_End:
@@ -114,7 +114,7 @@ ChildHookAim:
   lw   a0,(gSaveContext+0x04)
   beqz a0,ChildHookAim_End
    nop
-  la t3,kDListEmpty
+  lw t3,gDlistHookshotReticle
 
 ChildHookAim_End:
   sw  t3,0x4(v1)

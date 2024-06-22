@@ -23,9 +23,9 @@ DrawHook1:
   beqz t0,DrawHook1_End
    nop
 
-  /* Disable display list */
-  sw zero,0(v1)
-  sw zero,4(v1)
+  /* Use custom pointy end */
+  lw t6,gDlistHookshotEnd
+  sw t6,4(v1)
 
 DrawHook1_End:
   jr ra
@@ -43,8 +43,7 @@ DrawHook2:
    nop
 
   /* Disable display list */
-  move t4,zero
-  move t5,zero
+  lw t5,gDlistHookshotChain
 
 DrawHook2_End:
   sw t4,0x0(v1)
