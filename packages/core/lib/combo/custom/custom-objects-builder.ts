@@ -372,9 +372,6 @@ export class CustomObjectsBuilder {
     const dataTPAddr = 0x06022da8;
     let dataTP = editor.listData(dataTPAddr)!;
     dataTP = editor.stripList(dataTP, 0x06022f00 - dataTPAddr, 0x06023158 - dataTPAddr);
-    //dataTP = editor.stripList(dataTP, 0x06022e30 - dataTPAddr, 0x06022e38 - dataTPAddr);
-    //dataTP = editor.stripList(dataTP, 0x06022e50 - dataTPAddr, 0x06023158 - dataTPAddr);
-    //dataTP = editor.stripList(dataTP, 0x06022e38 - dataTPAddr, 0x06023158 - dataTPAddr);
     editor.submitList(dataTP);
 
     return { name: 'EQ_BOW', ...editor.build() };
