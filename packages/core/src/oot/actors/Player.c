@@ -426,6 +426,7 @@ void Player_AfterSetEquipmentData(GameState_Play* play)
 #define DLIST_ADULT_RHAND_CLOSED    DLIST_INDIRECT(0x800f77b8)
 #define DLIST_ADULT_RHAND_OPEN      DLIST_INDIRECT(0x800f7918)
 #define DLIST_CHILD_STRING          DLIST_INDIRECT(0x800f7c14)
+#define DLIST_ADULT_STRING          DLIST_INDIRECT(0x800f7c04)
 
 static void* Player_CustomHandEq(u32 handDlist, void* eqData, u32 eqDlist)
 {
@@ -607,6 +608,12 @@ static void Player_OverrideAdult(GameState_Play* play, Actor_Player* this, int l
 
         if (this->rightHandType == PLAYER_MODELTYPE_RH_OCARINA)
             *dlist = Player_CustomHandEq(DLIST_ADULT_RHAND_OPEN, comboGetObject(CUSTOM_OBJECT_ID_EQ_OCARINA_FAIRY), CUSTOM_OBJECT_EQ_OCARINA_FAIRY_0);
+
+        if (this->rightHandType == PLAYER_MODELTYPE_RH_BOW_SLINGSHOT || this->rightHandType == PLAYER_MODELTYPE_RH_BOW_SLINGSHOT_2)
+        {
+            if (this->heldItemAction == 15)
+                *dlist = Player_CustomHandEq(DLIST_ADULT_RHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_SLINGSHOT), CUSTOM_OBJECT_EQ_SLINGSHOT_2);
+        }
     }
 
     if (limb == PLAYER_LIMB_SHEATH)
@@ -701,7 +708,7 @@ int Player_OverrideLimbDrawGameplayFirstPersonWrapper(GameState_Play* play, s32 
 
     /* Handle adult slingshot */
     if (gSave.age == AGE_ADULT && limbIndex == PLAYER_LIMB_R_HAND && player->heldItemAction == 15)
-        *dList = Player_CustomEq(comboGetObject(CUSTOM_OBJECT_ID_EQ_SLINGSHOT), CUSTOM_OBJECT_EQ_SLINGSHOT_0);
+        *dList = Player_CustomHandEq(DLIST_ADULT_RHAND_OPEN, comboGetObject(CUSTOM_OBJECT_ID_EQ_SLINGSHOT), CUSTOM_OBJECT_EQ_SLINGSHOT_0);
 
     return 0;
 }
@@ -872,6 +879,22 @@ const BowSlingshotString* Player_GetBowSlingshotStringData(void)
         else
         {
             bss.dlist = (u32)Player_CustomEq(comboGetObject(CUSTOM_OBJECT_ID_EQ_SLINGSHOT), CUSTOM_OBJECT_EQ_SLINGSHOT_1);
+        }
+    }
+    else
+    {
+        /* Bow */
+        bss.x = 0.f;
+        bss.y = -360.4f;
+        bss.z = 0.f;
+
+        if (gSave.age == AGE_ADULT)
+        {
+            bss.dlist = DLIST_ADULT_STRING;
+        }
+        else
+        {
+            bss.dlist = (u32)kDListEmpty;
         }
     }
 
