@@ -718,7 +718,7 @@ int Player_OverrideLimbDrawGameplayFirstPersonWrapper(GameState_Play* play, s32 
         *dList = Player_CustomHandEq(DLIST_ADULT_RHAND_OPEN, comboGetObject(CUSTOM_OBJECT_ID_EQ_SLINGSHOT), CUSTOM_OBJECT_EQ_SLINGSHOT_0);
 
     /* Handle child bow */
-    if (gSave.age == AGE_CHILD && limbIndex == PLAYER_LIMB_R_HAND && (player->rightHandType == PLAYER_MODELTYPE_RH_BOW_SLINGSHOT || player->rightHandType == PLAYER_MODELTYPE_RH_BOW_SLINGSHOT_2) && player->heldItemAction != 15)
+    if (gSave.age == AGE_CHILD && limbIndex == PLAYER_LIMB_R_HAND && (player->rightHandType == PLAYER_MODELTYPE_RH_BOW_SLINGSHOT || player->rightHandType == PLAYER_MODELTYPE_RH_BOW_SLINGSHOT_2) && player->heldItemAction != 15 && play->sceneId != SCE_OOT_SHOOTING_GALLERY)
         *dList = Player_CustomHandEq(DLIST_CHILD_RHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_BOW), CUSTOM_OBJECT_EQ_BOW_0);
 
     return 0;
@@ -835,7 +835,7 @@ PATCH_CALL(0x8007a2b4, Player_IsStrengthGoronBracelet);
 
 static int Player_ItemAndArrowType(GameState_Play* play, Actor_Player* this, int* outItem, int* outArrow)
 {
-    if (this->heldItemAction == 15)
+    if (this->heldItemAction == 15 || (gSave.age == AGE_CHILD && play->sceneId == SCE_OOT_SHOOTING_GALLERY))
     {
         /* Slingshot */
         *outItem = ITEM_OOT_SLINGSHOT;
@@ -875,7 +875,7 @@ const BowSlingshotString* Player_GetBowSlingshotStringData(void)
     Actor_Player* link;
 
     link = GET_LINK(gPlay);
-    if (link->heldItemAction == 15)
+    if (link->heldItemAction == 15 || (gSave.age == AGE_CHILD && gPlay->sceneId == SCE_OOT_SHOOTING_GALLERY))
     {
         /* Slingshot */
         bss.x = 606.f;
