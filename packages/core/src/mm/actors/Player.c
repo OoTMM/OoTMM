@@ -1531,12 +1531,17 @@ static void Player_FormChangeDeleteEffects(void)
     }
 }
 
+static Vec3f sTransformPos;
+
 static void Player_FormChangeResetState(Actor_Player* this)
 {
     this->base.speedXZ = 0.f;
     this->base.velocity.x = 0.f;
     this->base.velocity.y = 0.f;
     this->base.velocity.z = 0.f;
+    this->base.world.pos.x = sTransformPos.x;
+    this->base.world.pos.y = sTransformPos.y;
+    this->base.world.pos.z = sTransformPos.z;
 
     /*
      * KLUDGE: This is a workaround for various glitches related to fast-masking
@@ -1548,10 +1553,12 @@ static void Player_FormChangeResetState(Actor_Player* this)
     Player_FormChangeDeleteEffects();
 }
 
-static void Player_ToggleForm(Actor_Player* link, int form)
+static void Player_ToggleForm(GameState_Play* play, Actor_Player* link, int form)
 {
     /* Sanity checks */
     if (link->base.draw == NULL)
+        return;
+    if (Player_InCsMode(play))
         return;
     if (link->state & 0x207c7080)
         return;
@@ -1568,7 +1575,9 @@ static void Player_ToggleForm(Actor_Player* link, int form)
     *((u8*)link + 0xae7) = 0;
     link->base.update = Player_UpdateForm;
     link->base.draw = NULL;
-    link->state |= PLAYER_ACTOR_STATE_FROZEN;
+    sTransformPos.x = link->base.world.pos.x;
+    sTransformPos.y = link->base.world.pos.y;
+    sTransformPos.z = link->base.world.pos.z;
     Player_FormChangeResetState(link);
 }
 
@@ -1581,7 +1590,7 @@ void Player_TryUpdateForm(Actor_Player* this, GameState_Play* play)
 
     if (sNextForm != -1)
     {
-        Player_ToggleForm(this, sNextForm);
+        Player_ToggleForm(play, this, sNextForm);
         sNextForm = -1;
     }
     else if (this->base.update == Player_UpdateForm)
