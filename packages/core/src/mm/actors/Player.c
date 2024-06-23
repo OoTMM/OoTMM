@@ -1553,7 +1553,7 @@ static void Player_ToggleForm(Actor_Player* link, int form)
     /* Sanity checks */
     if (link->base.draw == NULL)
         return;
-    if (link->state & 0x7c7080)
+    if (link->state & 0x207c7080)
         return;
     if (link->state3 & 0x1000)
         return;
