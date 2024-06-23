@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Removed the deku shield in the spirit pot if restore broken actors is off, but make it logical if it's on.
 - Hookshot is now visible on child.
 - Castle Courtyard can now be revisited.
 - Zelda's Soul is now required for the OoT/SoT check.
