@@ -416,7 +416,10 @@ static void Play_FixupSpawnTime(void)
     {
         /* Work around a vanilla bug */
         if (gSave.entranceIndex != ENTR_MM_CLOCK_TOWN)
+        {
+            gSave.day = 1;
             gSave.time = CLOCK_TIME(6, 1);
+        }
         return;
     }
 

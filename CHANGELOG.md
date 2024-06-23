@@ -26,6 +26,7 @@ All notable changes to this project will be documented in this file.
 
 ## Fixed
 
+- Fix song of time sometimes respawning the player in day-0 state until the next scene load.
 - Fix bottle issues when changing age.
 - Fix a weird interaction between scarecrow and clock shuffle.
 - Fix honey and darling behaving oddly when a clock shuffle transition occurs.
