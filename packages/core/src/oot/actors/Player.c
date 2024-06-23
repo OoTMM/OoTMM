@@ -658,8 +658,10 @@ static void Player_OverrideChild(GameState_Play* play, Actor_Player* this, int l
     {
         if (this->rightHandType == PLAYER_MODELTYPE_RH_HOOKSHOT)
             *dlist = (Gfx*)gDlistHookshotBodyTP;
+
         if ((this->rightHandType == PLAYER_MODELTYPE_RH_SHIELD) && gSave.equips.equipment.shields == 3)
             *dlist = Player_CustomHandEq(DLIST_CHILD_RHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_MIRROR), CUSTOM_OBJECT_EQ_SHIELD_MIRROR_0);
+
         if (this->rightHandType == PLAYER_MODELTYPE_RH_BOW_SLINGSHOT || this->rightHandType == PLAYER_MODELTYPE_RH_BOW_SLINGSHOT_2)
         {
             if (this->heldItemAction != 15)
@@ -712,11 +714,11 @@ int Player_OverrideLimbDrawGameplayFirstPersonWrapper(GameState_Play* play, s32 
     }
 
     /* Handle adult slingshot */
-    if (gSave.age == AGE_ADULT && limbIndex == PLAYER_LIMB_R_HAND && player->heldItemAction == 15)
+    if (gSave.age == AGE_ADULT && limbIndex == PLAYER_LIMB_R_HAND && (player->rightHandType == PLAYER_MODELTYPE_RH_BOW_SLINGSHOT || player->rightHandType == PLAYER_MODELTYPE_RH_BOW_SLINGSHOT_2) && player->heldItemAction == 15)
         *dList = Player_CustomHandEq(DLIST_ADULT_RHAND_OPEN, comboGetObject(CUSTOM_OBJECT_ID_EQ_SLINGSHOT), CUSTOM_OBJECT_EQ_SLINGSHOT_0);
 
     /* Handle child bow */
-    if (gSave.age == AGE_CHILD && limbIndex == PLAYER_LIMB_R_HAND && player->heldItemAction != 15)
+    if (gSave.age == AGE_CHILD && limbIndex == PLAYER_LIMB_R_HAND && (player->rightHandType == PLAYER_MODELTYPE_RH_BOW_SLINGSHOT || player->rightHandType == PLAYER_MODELTYPE_RH_BOW_SLINGSHOT_2) && player->heldItemAction != 15)
         *dList = Player_CustomHandEq(DLIST_CHILD_RHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_BOW), CUSTOM_OBJECT_EQ_BOW_0);
 
     return 0;
