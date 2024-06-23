@@ -734,6 +734,7 @@ static void TimeTravelUpdateEquipment(void)
 {
     OotItemEquips* prevAge;
     OotItemEquips* nextAge;
+    u8 item;
 
     if (gSave.age == AGE_ADULT)
     {
@@ -750,6 +751,15 @@ static void TimeTravelUpdateEquipment(void)
     if (EV_OOT_IS_SWORDLESS())
         prevAge->buttonItems[0] = ITEM_NONE;
     memcpy(&gSave.equips, nextAge, sizeof(*nextAge));
+
+    /* Reload bottles */
+    for (int i = 0; i < 3; ++i)
+    {
+        item = gSave.equips.buttonItems[i + 1];
+        if (item >= ITEM_OOT_BOTTLE_EMPTY && item <= ITEM_OOT_POE)
+            item = gSave.inventory.items[gSave.equips.cButtonSlots[i]];
+        gSave.equips.buttonItems[i + 1] = item;
+    }
 
     /* Fix sword */
     if (gSave.equips.buttonItems[0] == ITEM_NONE)
