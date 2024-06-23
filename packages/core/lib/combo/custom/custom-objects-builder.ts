@@ -66,22 +66,14 @@ export class CustomObjectsBuilder {
     const b = 0x06014440;
     let list = editor.listData(b)!;
     //list = editor.stripList(list, 0x060242c8 - b, 0x060245a8 - b);
-
     editor.submitList(list);
+
+    const bSheath = 0x06015100;
+    let listSheath = editor.listData(bSheath)!;
+    listSheath = editor.stripList(listSheath, 0x06015130 - bSheath, 0x06015140 - bSheath);
+    editor.submitList(listSheath);
+
     return { name: 'EQ_SHIELD_DEKU', ...editor.build() };
-  }
-
-  private async makeEqSheathShieldDeku(): Promise<CustomObject> {
-    const editor = new ObjectEditor(0xa);
-    const object_link_child = await this.getFile('oot', 'objects/object_link_child');
-    editor.loadSegment(0x06, object_link_child);
-
-    const b = 0x06015100;
-    let list = editor.listData(b)!;
-    list = editor.stripList(list, 0x06015130 - b, 0x06015140 - b);
-
-    editor.submitList(list);
-    return { name: 'EQ_SHEATH_SHIELD_DEKU', ...editor.build() };
   }
 
   private async makeEqSheathShieldHylianChild(): Promise<CustomObject> {
@@ -388,7 +380,6 @@ export class CustomObjectsBuilder {
       await this.makeEqHammer(),
       await this.makeEqShieldDeku(),
       await this.makeEqShieldMirror(),
-      await this.makeEqSheathShieldDeku(),
       await this.makeEqSheathShieldHylianChild(),
       await this.makeEqSheathShieldHylianAdult(),
       await this.makeEqSheathShieldMirror(),
