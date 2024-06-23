@@ -123,7 +123,8 @@ static void EnTest4_UpdateWrapper(Actor_EnTest4* this, GameState_Play* play)
 {
     void (*EnTest4_Update)(Actor_EnTest4*, GameState_Play*);
 
-    EnTest4_CheckTimeSkip(this, play);
+    if (!BITMAP8_GET(gSave.eventInf, 0x0f))
+        EnTest4_CheckTimeSkip(this, play);
 
     EnTest4_Update = actorAddr(AC_EN_TEST4, 0x80a43274);
     EnTest4_Update(this, play);

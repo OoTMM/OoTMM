@@ -26,6 +26,7 @@ All notable changes to this project will be documented in this file.
 
 ## Fixed
 
+- Fix a weird interaction between scarecrow and clock shuffle.
 - Fix honey and darling behaving oddly when a clock shuffle transition occurs.
 - Fix some softlocks with instant transform.
 - Fix a softlock with the Roza Sisters in some cases.
