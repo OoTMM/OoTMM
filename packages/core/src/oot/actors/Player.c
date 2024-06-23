@@ -516,7 +516,7 @@ static void Player_OverrideCustomSheath(GameState_Play* play, Actor_Player* this
         switch (gSave.equips.equipment.shields)
         {
         case 1:
-            shield = Player_CustomEq(comboGetObject(CUSTOM_OBJECT_ID_EQ_SHEATH_SHIELD_DEKU), CUSTOM_OBJECT_EQ_SHEATH_SHIELD_DEKU_0);
+            shield = Player_CustomEq(comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_DEKU), CUSTOM_OBJECT_EQ_SHIELD_DEKU_1);
             break;
         case 2:
             if (gSave.age == AGE_CHILD)
