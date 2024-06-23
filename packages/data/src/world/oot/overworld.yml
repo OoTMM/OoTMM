@@ -937,7 +937,7 @@
     MAGIC: "can_cut_grass"
     BUGS: "has_bottle && can_cut_grass"
   locations:
-    "Lost Woods Target": "can_use_slingshot"
+    "Lost Woods Target": "is_child && (can_use_slingshot || can_use_bow)"
     "Lost Woods Skull Kid": "is_child && can_play_saria"
     "Lost Woods Sell Skull Mask": "is_child && can_play_saria && has(MASK_SKULL)"
     "Lost Woods Memory Game": "is_child && can_play_minigame"
