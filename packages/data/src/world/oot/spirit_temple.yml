@@ -44,6 +44,8 @@
     "Spirit Temple GS Child Fence": "gs && (can_collect_distance || (climb_anywhere && (can_use_din || has_ranged_weapon || has_explosives)))"
 "Spirit Temple Child Back Left":
   dungeon: Spirit
+  events:
+    SHIELD_DEKU: "setting(restoreBrokenActors)"
   exits:
     "Spirit Temple Child Back Right": "soul_enemy(SOUL_ENEMY_ANUBIS)"
   locations:

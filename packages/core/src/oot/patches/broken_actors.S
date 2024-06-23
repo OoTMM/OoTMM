@@ -6,9 +6,9 @@ PATCH_VROM \offset
 PATCH_END
 .endm
 
-/* Remove the broken actors */
 PATCH_GROUP PG_NO_BROKEN_ACTORS
 
+/* Remove the broken actors */
 PATCH_BROKEN_ACTOR 0x1f28000 + 0x60
 PATCH_BROKEN_ACTOR 0x1f28000 + 0x70
 PATCH_BROKEN_ACTOR 0x1f9d000 + 0x7c
@@ -40,5 +40,10 @@ PATCH_BROKEN_ACTOR 0x21bd000 + 0x110
 PATCH_BROKEN_ACTOR 0x21bd000 + 0x120
 PATCH_BROKEN_ACTOR 0x220f000 + 0xd4
 PATCH_BROKEN_ACTOR 0x220f000 + 0xe4
+
+/* There is a pot in Spirit that has a shield that fails to load - tie that to broken actors */
+PATCH_VROM 0x2bdc000 + 0xc7
+.byte 0x3f
+PATCH_END
 
 PATCH_GROUP_END
