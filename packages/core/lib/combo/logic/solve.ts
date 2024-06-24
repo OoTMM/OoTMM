@@ -1088,7 +1088,11 @@ export class LogicPassSolver {
             throw err;
           }
         }
-        if (!error) break;
+
+        if (!error) {
+          countMapRemove(this.state.pools.required, reward);
+          break;
+        }
       }
     }
   }
