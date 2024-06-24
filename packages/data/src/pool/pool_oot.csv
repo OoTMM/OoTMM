@@ -1682,6 +1682,10 @@ MQ Deku Tree Heart Before Boss 1,                           heart,          NONE
 MQ Deku Tree Heart Before Boss 2,                           heart,          NONE,                 INSIDE_DEKU_TREE,               0x00907,                    RECOVERY_HEART
 MQ Deku Tree Heart Before Boss 3,                           heart,          NONE,                 INSIDE_DEKU_TREE,               0x00908,                    RECOVERY_HEART
 MQ Deku Tree Heart Slingshot Room,                          heart,          NONE,                 INSIDE_DEKU_TREE,               0x00a05,                    RECOVERY_HEART
+MQ Deku Tree Wonder Item 1,                                 wonder,         NONE,                 INSIDE_DEKU_TREE,               0x00709,                    RECOVERY_HEART
+MQ Deku Tree Wonder Item 2,                                 wonder,         NONE,                 INSIDE_DEKU_TREE,               0x0070a,                    RECOVERY_HEART
+MQ Deku Tree Wonder Item 3,                                 wonder,         NONE,                 INSIDE_DEKU_TREE,               0x0070b,                    RECOVERY_HEART
+MQ Deku Tree Wonder Item 4,                                 wonder,         NONE,                 INSIDE_DEKU_TREE,               0x0070c,                    RECOVERY_HEART
 MQ Dodongo Cavern Map Chest,                                chest,          NONE,                 DODONGO_CAVERN,                 0x00,                       MAP_DC
 MQ Dodongo Cavern Compass Chest,                            chest,          NONE,                 DODONGO_CAVERN,                 0x05,                       COMPASS_DC
 MQ Dodongo Cavern Larvae Room Chest,                        chest,          NONE,                 DODONGO_CAVERN,                 0x02,                       RUPEE_BLUE
@@ -1788,6 +1792,29 @@ MQ Jabu-Jabu Rupee Middle,                                  rupee,          NONE
 MQ Jabu-Jabu Rupee Top,                                     rupee,          NONE,                 INSIDE_JABU_JABU,               0x00102,                    RUPEE_GREEN
 MQ Jabu-Jabu Heart 1,                                       heart,          NONE,                 INSIDE_JABU_JABU,               0x00108,                    RECOVERY_HEART
 MQ Jabu-Jabu Heart 2,                                       heart,          NONE,                 INSIDE_JABU_JABU,               0x00109,                    RECOVERY_HEART
+MQ Jabu-Jabu Wonder Item Entrance Left Cow,                 wonder,         NONE,                 INSIDE_JABU_JABU,               0x0000d,                    RECOVERY_HEART
+MQ Jabu-Jabu Wonder Item Entrance Right Cow,                wonder,         NONE,                 INSIDE_JABU_JABU,               0x0000e,                    RECOVERY_HEART
+MQ Jabu-Jabu Wonder Item Elevator Cow,                      wonder,         NONE,                 INSIDE_JABU_JABU,               0x00113,                    RECOVERY_HEART
+MQ Jabu-Jabu Wonder Item Basement Right Cow 1,              wonder,         NONE,                 INSIDE_JABU_JABU,               0x0030d,                    DEKU_SEEDS_5
+MQ Jabu-Jabu Wonder Item Basement Right Cow 2,              wonder,         NONE,                 INSIDE_JABU_JABU,               0x0030e,                    DEKU_SEEDS_5
+MQ Jabu-Jabu Wonder Item Basement Right Cow 3,              wonder,         NONE,                 INSIDE_JABU_JABU,               0x0030f,                    DEKU_SEEDS_5
+MQ Jabu-Jabu Wonder Item Basement Left Cow 1,               wonder,         NONE,                 INSIDE_JABU_JABU,               0x00310,                    DEKU_SEEDS_5
+MQ Jabu-Jabu Wonder Item Basement Left Cow 2,               wonder,         NONE,                 INSIDE_JABU_JABU,               0x00311,                    DEKU_SEEDS_5
+MQ Jabu-Jabu Wonder Item Basement Left Cow 3,               wonder,         NONE,                 INSIDE_JABU_JABU,               0x00312,                    DEKU_SEEDS_5
+MQ Jabu-Jabu Wonder Item Platforms Cow,                     wonder,         NONE,                 INSIDE_JABU_JABU,               0x0040d,                    DEKU_SEEDS_5
+MQ Jabu-Jabu Wonder Item Before Boss Left Cow,              wonder,         NONE,                 INSIDE_JABU_JABU,               0x0050a,                    DEKU_SEEDS_5
+MQ Jabu-Jabu Wonder Item Before Boss Right Cow 1,           wonder,         NONE,                 INSIDE_JABU_JABU,               0x00509,                    RECOVERY_HEART
+MQ Jabu-Jabu Wonder Item Before Boss Right Cow 2,           wonder,         NONE,                 INSIDE_JABU_JABU,               0x0050b,                    FLEXIBLE
+MQ Jabu-Jabu Wonder Item After Big Octo,                    wonder,         NONE,                 INSIDE_JABU_JABU,               0x00607,                    RECOVERY_HEART
+MQ Jabu-Jabu Wonder Item Falling Like-Likes Cow Right 1,    wonder,         NONE,                 INSIDE_JABU_JABU,               0x00b13,                    MAGIC_JAR_SMALL
+MQ Jabu-Jabu Wonder Item Falling Like-Likes Cow Right 2,    wonder,         NONE,                 INSIDE_JABU_JABU,               0x00b14,                    MAGIC_JAR_SMALL
+MQ Jabu-Jabu Wonder Item Falling Like-Likes Cow Right 3,    wonder,         NONE,                 INSIDE_JABU_JABU,               0x00b15,                    MAGIC_JAR_SMALL
+MQ Jabu-Jabu Wonder Item Falling Like-Likes Cow Left 1,     wonder,         NONE,                 INSIDE_JABU_JABU,               0x00b16,                    DEKU_SEEDS_5
+MQ Jabu-Jabu Wonder Item Falling Like-Likes Cow Left 2,     wonder,         NONE,                 INSIDE_JABU_JABU,               0x00b17,                    DEKU_SEEDS_5
+MQ Jabu-Jabu Wonder Item Falling Like-Likes Cow Left 3,     wonder,         NONE,                 INSIDE_JABU_JABU,               0x00b18,                    DEKU_SEEDS_5
+MQ Jabu-Jabu Wonder Item Falling Like-Likes Explosion 1,    wonder,         NONE,                 INSIDE_JABU_JABU,               0x00b1b,                    FLEXIBLE
+MQ Jabu-Jabu Wonder Item Falling Like-Likes Explosion 2,    wonder,         NONE,                 INSIDE_JABU_JABU,               0x00b1c,                    FLEXIBLE
+MQ Jabu-Jabu Wonder Item Falling Like-Likes Explosion 3,    wonder,         NONE,                 INSIDE_JABU_JABU,               0x00b1d,                    FLEXIBLE
 MQ Bottom of the Well Map Chest,                            chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x03,                       MAP_BOTW
 MQ Bottom of the Well Compass Chest,                        chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x02,                       COMPASS_BOTW
 MQ Bottom of the Well Lens Chest,                           chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x01,                       LENS
@@ -1816,6 +1843,18 @@ MQ Bottom of the Well Heart Basement 2,                     heart,          NONE
 MQ Bottom of the Well Heart Basement 3,                     heart,          NONE,                 BOTTOM_OF_THE_WELL,             0x0011d,                    RECOVERY_HEART
 MQ Bottom of the Well Heart Coffin 1,                       heart,          NONE,                 BOTTOM_OF_THE_WELL,             0x0020a,                    RECOVERY_HEART
 MQ Bottom of the Well Heart Coffin 2,                       heart,          NONE,                 BOTTOM_OF_THE_WELL,             0x0020b,                    RECOVERY_HEART
+MQ Bottom of the Well Wonder Item Main Room Left 1,         wonder,         NONE,                 BOTTOM_OF_THE_WELL,             0x00005,                    MAGIC_JAR_LARGE
+MQ Bottom of the Well Wonder Item Main Room Left 2,         wonder,         NONE,                 BOTTOM_OF_THE_WELL,             0x00006,                    MAGIC_JAR_LARGE
+MQ Bottom of the Well Wonder Item Main Room Left 3,         wonder,         NONE,                 BOTTOM_OF_THE_WELL,             0x00008,                    ARROWS_30
+MQ Bottom of the Well Wonder Item Main Room Left 4,         wonder,         NONE,                 BOTTOM_OF_THE_WELL,             0x0000a,                    FLEXIBLE
+MQ Bottom of the Well Wonder Item Main Room Right 1,        wonder,         NONE,                 BOTTOM_OF_THE_WELL,             0x00007,                    MAGIC_JAR_LARGE
+MQ Bottom of the Well Wonder Item Main Room Right 2,        wonder,         NONE,                 BOTTOM_OF_THE_WELL,             0x00009,                    ARROWS_30
+MQ Bottom of the Well Wonder Item Main Room Right 3,        wonder,         NONE,                 BOTTOM_OF_THE_WELL,             0x0000b,                    FLEXIBLE
+MQ Bottom of the Well Wonder Item Main Room Right 4,        wonder,         NONE,                 BOTTOM_OF_THE_WELL,             0x0000c,                    FLEXIBLE
+MQ Bottom of the Well Wonder Item Side Room 1,              wonder,         NONE,                 BOTTOM_OF_THE_WELL,             0x00500,                    MAGIC_JAR_LARGE
+MQ Bottom of the Well Wonder Item Side Room 2,              wonder,         NONE,                 BOTTOM_OF_THE_WELL,             0x00501,                    MAGIC_JAR_LARGE
+MQ Bottom of the Well Wonder Item Side Room 3,              wonder,         NONE,                 BOTTOM_OF_THE_WELL,             0x00502,                    ARROWS_30
+MQ Bottom of the Well Wonder Item Side Room 4,              wonder,         NONE,                 BOTTOM_OF_THE_WELL,             0x00503,                    FLEXIBLE
 MQ Ice Cavern Map Chest,                                    chest,          NONE,                 ICE_CAVERN,                     0x01,                       MAP_IC
 MQ Ice Cavern Compass Chest,                                chest,          NONE,                 ICE_CAVERN,                     0x00,                       COMPASS_IC
 MQ Ice Cavern Iron Boots,                                   chest,          ICE_CAVERN_CHEST,     ICE_CAVERN,                     0x02,                       BOOTS_IRON
@@ -1929,6 +1968,20 @@ MQ Fire Temple Hammer Loop Iron Knuckle Big Fairy,          fairy_spot,     NONE
 MQ Fire Temple Heart 1,                                     heart,          NONE,                 TEMPLE_FIRE,                    0x01502,                    RECOVERY_HEART
 MQ Fire Temple Heart 2,                                     heart,          NONE,                 TEMPLE_FIRE,                    0x01503,                    RECOVERY_HEART
 MQ Fire Temple Heart 3,                                     heart,          NONE,                 TEMPLE_FIRE,                    0x01504,                    RECOVERY_HEART
+MQ Fire Temple Wonder Item Shortcut Room 1,                 wonder,         NONE,                 TEMPLE_FIRE,                    0x00406,                    MAGIC_JAR_LARGE
+MQ Fire Temple Wonder Item Shortcut Room 2,                 wonder,         NONE,                 TEMPLE_FIRE,                    0x00407,                    RECOVERY_HEART
+MQ Fire Temple Wonder Item Shortcut Room 3,                 wonder,         NONE,                 TEMPLE_FIRE,                    0x00408,                    ARROWS_10
+MQ Fire Temple Wonder Item East Maze,                       wonder,         NONE,                 TEMPLE_FIRE,                    0x00513,                    RUPEE_RED
+MQ Fire Temple Wonder Item East Climb First 1,              wonder,         NONE,                 TEMPLE_FIRE,                    0x00706,                    MAGIC_JAR_LARGE
+MQ Fire Temple Wonder Item East Climb First 2,              wonder,         NONE,                 TEMPLE_FIRE,                    0x00707,                    FLEXIBLE
+MQ Fire Temple Wonder Item East Climb Second 1,             wonder,         NONE,                 TEMPLE_FIRE,                    0x00704,                    MAGIC_JAR_LARGE
+MQ Fire Temple Wonder Item East Climb Second 2,             wonder,         NONE,                 TEMPLE_FIRE,                    0x00705,                    FLEXIBLE
+MQ Fire Temple Wonder Item Fire Maze,                       wonder,         NONE,                 TEMPLE_FIRE,                    0x00a2a,                    FLEXIBLE
+MQ Fire Temple Wonder Item After Flare Dancer,              wonder,         NONE,                 TEMPLE_FIRE,                    0x00c00,                    FLEXIBLE
+MQ Fire Temple Wonder Item Staircase,                       wonder,         NONE,                 TEMPLE_FIRE,                    0x00e01,                    FLEXIBLE
+MQ Fire Temple Wonder Item Torch Room,                      wonder,         NONE,                 TEMPLE_FIRE,                    0x01000,                    FLEXIBLE
+MQ Fire Temple Wonder Item Boss Key Room Hookshot,          wonder,         NONE,                 TEMPLE_FIRE,                    0x01309,                    FLEXIBLE
+MQ Fire Temple Wonder Item Boss Key Room Bow,               wonder,         NONE,                 TEMPLE_FIRE,                    0x0130a,                    FLEXIBLE
 MQ Water Temple Map Chest,                                  chest,          NONE,                 TEMPLE_WATER,                   0x02,                       MAP_WATER
 MQ Water Temple Compass Chest,                              chest,          NONE,                 TEMPLE_WATER,                   0x01,                       COMPASS_WATER
 MQ Water Temple Longshot Chest,                             chest,          NONE,                 TEMPLE_WATER,                   0x00,                       HOOKSHOT
@@ -1974,6 +2027,28 @@ MQ Water Temple Pot River 2,                                pot,            NONE
 MQ Water Temple Big Fairy Before Dark Link Ledge,           fairy_spot,     NONE,                 TEMPLE_WATER,                   0x00601,                    FAIRY_BIG
 MQ Water Temple Big Fairy Before Dark Link Near Door 1,     fairy_spot,     NONE,                 TEMPLE_WATER,                   0x00605,                    FAIRY_BIG
 MQ Water Temple Big Fairy Before Dark Link Near Door 2,     fairy_spot,     NONE,                 TEMPLE_WATER,                   0x00606,                    FAIRY_BIG
+MQ Water Temple Wonder Item Under Pillar Room,              wonder,         NONE,                 TEMPLE_WATER,                   0x00218,                    MAGIC_JAR_LARGE
+MQ Water Temple Wonder Item Triple Torches,                 wonder,         NONE,                 TEMPLE_WATER,                   0x00303,                    FLEXIBLE
+MQ Water Temple Wonder Item Hookshot Staircase Right 1,     wonder,         NONE,                 TEMPLE_WATER,                   0x00502,                    NUTS_5
+MQ Water Temple Wonder Item Hookshot Staircase Right 2,     wonder,         NONE,                 TEMPLE_WATER,                   0x00503,                    RECOVERY_HEART
+MQ Water Temple Wonder Item Hookshot Staircase Right 3,     wonder,         NONE,                 TEMPLE_WATER,                   0x00504,                    RUPEE_RED
+MQ Water Temple Wonder Item Hookshot Staircase Left 1,      wonder,         NONE,                 TEMPLE_WATER,                   0x00509,                    FLEXIBLE
+MQ Water Temple Wonder Item Hookshot Staircase Left 2,      wonder,         NONE,                 TEMPLE_WATER,                   0x0050a,                    FLEXIBLE
+MQ Water Temple Wonder Item Hookshot Staircase Left 3,      wonder,         NONE,                 TEMPLE_WATER,                   0x0050b,                    FLEXIBLE
+MQ Water Temple Wonder Item After Dark Link,                wonder,         NONE,                 TEMPLE_WATER,                   0x00700,                    MAGIC_JAR_LARGE
+MQ Water Temple Wonder Item Dragon Room Eyes 1,             wonder,         NONE,                 TEMPLE_WATER,                   0x00804,                    MAGIC_JAR_LARGE
+MQ Water Temple Wonder Item Dragon Room Eyes 2,             wonder,         NONE,                 TEMPLE_WATER,                   0x00806,                    FLEXIBLE
+MQ Water Temple Wonder Item Dragon Room Portrait,           wonder,         NONE,                 TEMPLE_WATER,                   0x00805,                    MAGIC_JAR_LARGE
+MQ Water Temple Wonder Item Above 2F West Room,             wonder,         NONE,                 TEMPLE_WATER,                   0x00a01,                    RANDOM
+MQ Water Temple Wonder Item Before Boss 1,                  wonder,         NONE,                 TEMPLE_WATER,                   0x00b00,                    MAGIC_JAR_LARGE
+MQ Water Temple Wonder Item Before Boss 2,                  wonder,         NONE,                 TEMPLE_WATER,                   0x00b01,                    FLEXIBLE
+MQ Water Temple Wonder Item Water Sprouts 1,                wonder,         NONE,                 TEMPLE_WATER,                   0x00f00,                    MAGIC_JAR_SMALL
+MQ Water Temple Wonder Item Water Sprouts 2,                wonder,         NONE,                 TEMPLE_WATER,                   0x00f01,                    ARROWS_30
+MQ Water Temple Wonder Item Freestanding Room,              wonder,         NONE,                 TEMPLE_WATER,                   0x01000,                    MAGIC_JAR_LARGE
+MQ Water Temple Wonder Item Longshot Room,                  wonder,         NONE,                 TEMPLE_WATER,                   0x01107,                    MAGIC_JAR_SMALL
+MQ Water Temple Wonder Item Lizalfos Room,                  wonder,         NONE,                 TEMPLE_WATER,                   0x01203,                    RUPEE_RED
+MQ Water Temple Wonder Item Stalfos Room,                   wonder,         NONE,                 TEMPLE_WATER,                   0x01305,                    FLEXIBLE
+MQ Water Temple Wonder Item Lizalfos Hallway,               wonder,         NONE,                 TEMPLE_WATER,                   0x01402,                    ARROWS_5
 MQ Shadow Temple Compass Chest,                             chest,          NONE,                 TEMPLE_SHADOW,                  0x01,                       COMPASS_SHADOW
 MQ Shadow Temple Hover Boots Chest,                         chest,          NONE,                 TEMPLE_SHADOW,                  0x07,                       BOOTS_HOVER
 MQ Shadow Temple First Gibdos Chest,                        chest,          NONE,                 TEMPLE_SHADOW,                  0x03,                       SMALL_KEY_SHADOW
@@ -2062,6 +2137,7 @@ MQ Shadow Temple Heart Shortcut 2,                          heart,          NONE
 MQ Shadow Temple Heart Pre-Boss Upper 1,                    heart,          NONE,                 TEMPLE_SHADOW,                  0x0150b,                    RECOVERY_HEART
 MQ Shadow Temple Heart Pre-Boss Upper 2,                    heart,          NONE,                 TEMPLE_SHADOW,                  0x0150c,                    RECOVERY_HEART
 MQ Shadow Temple Heart Pre-Boss Lower,                      heart,          NONE,                 TEMPLE_SHADOW,                  0x0150d,                    RECOVERY_HEART
+MQ Shadow Temple Wonder Item,                               wonder,         NONE,                 TEMPLE_SHADOW,                  0x00c01,                    ARROWS_30
 MQ Spirit Temple Entrance Initial Chest,                    chest,          NONE,                 TEMPLE_SPIRIT,                  0x1a,                       BOMBCHU_5
 MQ Spirit Temple Lobby Back-Left Chest,                     chest,          NONE,                 TEMPLE_SPIRIT,                  0x1e,                       SMALL_KEY_SPIRIT
 MQ Spirit Temple Lobby Back-Right Chest,                    chest,          NONE,                 TEMPLE_SPIRIT,                  0x1f,                       BOMBCHU_5
@@ -2132,6 +2208,8 @@ MQ Spirit Temple Flying Pot Statue Room Stairs,             pot,            NONE
 MQ Spirit Temple Dinolfos Room Big Fairy,                   fairy_spot,     NONE,                 TEMPLE_SPIRIT,                  0x01202,                    FAIRY_BIG
 MQ Spirit Temple Heart 1,                                   heart,          NONE,                 TEMPLE_SPIRIT,                  0x0010d,                    RECOVERY_HEART
 MQ Spirit Temple Heart 2,                                   heart,          NONE,                 TEMPLE_SPIRIT,                  0x0010e,                    RECOVERY_HEART
+MQ Spirit Temple Wonder Item Chest Hammer,                  wonder,         NONE,                 TEMPLE_SPIRIT,                  0x01208,                    RECOVERY_HEART
+MQ Spirit Temple Wonder Item Chest Slash,                   wonder,         NONE,                 TEMPLE_SPIRIT,                  0x01209,                    RECOVERY_HEART
 MQ Gerudo Training Grounds Entryway Left Chest,             chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x13,                       ARROWS_10
 MQ Gerudo Training Grounds Entryway Right Chest,            chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x07,                       BOMBCHU_10
 MQ Gerudo Training Grounds Maze First Chest,                chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x0b,                       RUPEE_PURPLE
@@ -2167,6 +2245,8 @@ MQ Gerudo Training Grounds Pot 1,                           pot,            NONE
 MQ Gerudo Training Grounds Pot 2,                           pot,            NONE,                 GERUDO_TRAINING_GROUND,         0x0006,                     MAGIC_JAR_SMALL
 MQ Gerudo Training Grounds Pot 3,                           pot,            NONE,                 GERUDO_TRAINING_GROUND,         0x0007,                     MAGIC_JAR_LARGE
 MQ Gerudo Training Grounds Pot 4,                           pot,            NONE,                 GERUDO_TRAINING_GROUND,         0x0008,                     RECOVERY_HEART
+MQ Gerudo Training Grounds Wonder Item Eye Statue,          wonder,         NONE,                 GERUDO_TRAINING_GROUND,         0x00404,                    MAGIC_JAR_LARGE
+MQ Gerudo Training Grounds Wonder Item Dodongo Room Wall,   wonder,         NONE,                 GERUDO_TRAINING_GROUND,         0x00709,                    FLEXIBLE
 MQ Ganon Castle Light Trial Chest,                          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x04,                       RECOVERY_HEART
 MQ Ganon Castle Forest Trial First Chest,                   chest,          NONE,                 INSIDE_GANON_CASTLE,            0x02,                       ARROWS_10
 MQ Ganon Castle Forest Trial Second Chest,                  chest,          NONE,                 INSIDE_GANON_CASTLE,            0x03,                       BOMBS_5
@@ -2223,3 +2303,4 @@ MQ Ganon Castle Fairy Fountain Fairy 8,                     fairy,          NONE
 MQ Ganon Castle Heart Water,                                heart,          NONE,                 INSIDE_GANON_CASTLE,            0x0021d,                    RECOVERY_HEART
 MQ Ganon Castle Heart Light 1,                              heart,          NONE,                 INSIDE_GANON_CASTLE,            0x00805,                    RECOVERY_HEART
 MQ Ganon Castle Heart Light 2,                              heart,          NONE,                 INSIDE_GANON_CASTLE,            0x00806,                    RECOVERY_HEART
+MQ Ganon Castle Wonder Item,                                wonder,         NONE,                 INSIDE_GANON_CASTLE,            0x00c0c,                    NUTS_5

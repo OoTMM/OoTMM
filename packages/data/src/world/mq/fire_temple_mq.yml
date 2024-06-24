@@ -54,6 +54,11 @@
     "MQ Fire Temple Heart 1": "has_tunic_goron_strict && small_keys_fire_mq(2)"
     "MQ Fire Temple Heart 2": "has_tunic_goron_strict && small_keys_fire_mq(2)"
     "MQ Fire Temple Heart 3": "has_tunic_goron_strict && small_keys_fire_mq(2)"
+    "MQ Fire Temple Wonder Item Shortcut Room 1": "has_tunic_goron_strict && small_keys_fire_mq(2) && can_hammer"
+    "MQ Fire Temple Wonder Item Shortcut Room 2": "has_tunic_goron_strict && small_keys_fire_mq(2) && can_hammer"
+    "MQ Fire Temple Wonder Item Shortcut Room 3": "has_tunic_goron_strict && small_keys_fire_mq(2) && can_hammer"
+    "MQ Fire Temple Wonder Item Boss Key Room Hookshot": "has_tunic_goron && has_fire && can_hookshot"
+    "MQ Fire Temple Wonder Item Boss Key Room Bow": "has_tunic_goron && has_fire && can_hookshot && can_use_bow"
 "Fire Temple Maze Lower":
   dungeon: Fire
   exits:
@@ -62,6 +67,7 @@
   locations:
     "MQ Fire Temple Maze Lower Chest": "true"
     "MQ Fire Temple Maze Side Room Chest": "can_play_elegy"
+    "MQ Fire Temple Wonder Item East Maze": "can_hookshot"
 "Fire Temple Maze Upper":
   dungeon: Fire
   exits:
@@ -71,6 +77,10 @@
     "MQ Fire Temple Maze Upper Chest": "true"
     "MQ Fire Temple Maze Side Room Chest": "true"
     "MQ Fire Temple Compass Chest": "has_explosives"
+    "MQ Fire Temple Wonder Item East Climb First 1": "can_hookshot"
+    "MQ Fire Temple Wonder Item East Climb First 2": "can_hookshot"
+    "MQ Fire Temple Wonder Item East Climb Second 1": "can_hookshot"
+    "MQ Fire Temple Wonder Item East Climb Second 2": "can_hookshot"
 "Fire Temple Burning Block":
   dungeon: Fire
   locations:
@@ -85,6 +95,7 @@
     "MQ Fire Temple Pot Bridge Above Lava Room 1": "true"
     "MQ Fire Temple Pot Bridge Above Lava Room 2": "true"
     "MQ Fire Temple Pot Bridge Above Lava Room 3": "true"
+    "MQ Fire Temple Wonder Item Torch Room": "can_hookshot" # Unsure
 "Fire Temple Fire Walls":
   dungeon: Fire
   exits:
@@ -101,8 +112,11 @@
     "MQ Fire Temple Pot Fire Maze Room Right 2": "has_hover_boots || can_play_time"
     "MQ Fire Temple Pot Fire Maze Room Back Right 1": "can_hookshot && can_hammer"
     "MQ Fire Temple Pot Fire Maze Room Back Right 2": "can_hookshot && can_hammer"
+    "MQ Fire Temple Wonder Item Fire Maze": "can_hookshot && can_hammer"
+    "MQ Fire Temple Wonder Item After Flare Dancer": "soul_enemy(SOUL_ENEMY_FLARE_DANCER) && can_hookshot"
 "Fire Temple Top":
   dungeon: Fire
   locations:
     "MQ Fire Temple Topmost Chest": "true"
     "MQ Fire Temple GS Topmost": "gs && small_keys_fire_mq(5)"
+    "MQ Fire Temple Wonder Item Staircase": "can_hammer && can_hookshot"

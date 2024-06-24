@@ -111,6 +111,10 @@
     "MQ Deku Tree Grass Back Room 3": "can_cut_grass && (can_use_sticks || has_fire)"
     "MQ Deku Tree Grass Larvae Room 1": "can_cut_grass" #You can go backwards to get this specific grass with nothing else.
     "MQ Deku Tree Grass Larvae Room 2": "can_cut_grass" #You can go backwards to get this specific grass with nothing else.
+    "MQ Deku Tree Wonder Item 1": "can_use_sword_or_sticks"
+    "MQ Deku Tree Wonder Item 2": "can_use_sword_or_sticks"
+    "MQ Deku Tree Wonder Item 3": "can_use_sword_or_sticks"
+    "MQ Deku Tree Wonder Item 4": "can_use_sword_or_sticks"
 "Deku Tree Basement Ledge":
   dungeon: DT
   exits:
