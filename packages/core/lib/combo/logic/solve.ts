@@ -1019,14 +1019,14 @@ export class LogicPassSolver {
   private placeDungeonRewardsInDungeons() {
     const allDungeons: Set<string>[] = [];
     for (let i = 0; i < this.input.settings.players; ++i) {
-      const dungeons = [];
+      let dungeons: string[] = [];
       if (this.input.settings.games !== 'mm') {
-        dungeons.push(new Set([...REWARDS_DUNGEONS_OOT]));
+        dungeons = [...dungeons, ...REWARDS_DUNGEONS_OOT];
       }
       if (this.input.settings.games !== 'oot') {
-        dungeons.push(new Set([...REWARDS_DUNGEONS_MM]));
+        dungeons = [...dungeons, ...REWARDS_DUNGEONS_MM];
       }
-      allDungeons.push(new Set(...dungeons));
+      allDungeons.push(new Set(dungeons));
     }
 
     const rewards = shuffle(this.input.random, countMapArray(this.state.pools.required)
@@ -1059,7 +1059,11 @@ export class LogicPassSolver {
         candidates = validCandidates;
       }
 
-      for (const c of candidates) {
+      for (;;) {
+        if (!candidates.length) {
+          throw new LogicSeedError(`No valid candidates for ${reward.item}`);
+        }
+        const c = candidates.pop()!;
         const { player, dungeon } = c;
         const world = this.worlds[player];
         /* We have a reward and a dungeon - try to place it */
@@ -1084,18 +1088,8 @@ export class LogicPassSolver {
             throw err;
           }
         }
-
-        if (!error) {
-          /* We placed the reward */
-          removeItemPools(this.state.pools, reward);
-          if (this.input.settings.dungeonRewardShuffle === 'dungeonsLimited') {
-            allDungeons[player].delete(dungeon);
-          }
-          break;
-        }
+        if (!error) break;
       }
-
-      if (error) throw error;
     }
   }
 
