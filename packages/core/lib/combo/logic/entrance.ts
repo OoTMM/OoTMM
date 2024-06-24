@@ -75,8 +75,8 @@ class WorldShuffler {
 
     /* Change the world */
     let expr = this.getExpr(original);
-    if ((entranceOriginal.game === 'oot' || entranceOriginal.type === 'one-way-statue') && entranceReplacement.game === 'mm') {
-      if (entranceOriginal.game === 'oot' && entranceReplacement.game === 'mm' && ['overworld', 'region'].includes(entranceReplacement.type)) {
+    if (entranceReplacement.game === 'mm') {
+      if (!((entranceReplacement.flags as string[]).includes('no-global'))) {
         world.areas[entranceOriginal.from].exits['MM GLOBAL'] = expr;
       }
       if (!((entranceReplacement.flags as string[]).includes('no-sot'))) {
