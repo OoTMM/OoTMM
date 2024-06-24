@@ -10,6 +10,7 @@ import { Item, ItemGroups, ItemHelpers, Items, ItemsCount, PlayerItem, PlayerIte
 import { exprTrue } from './expr';
 import { ItemProperties } from './item-properties';
 import { optimizeWorld } from './optimizer';
+import { isDungeonReward } from '../items/helpers';
 
 const VALIDATION_CRITICAL_ITEMS = [
   Items.MM_SONG_TIME,
@@ -1036,6 +1037,27 @@ export class LogicPassSolver {
       candidates = shuffle(this.input.random, candidates);
       const pool = countMapCombine(this.state.pools.required);
       let error: LogicSeedError | null = null;
+
+      /* If it's limited - filter dungeons that already have rewards (plando?) */
+      if (this.input.settings.dungeonRewardShuffle === 'dungeonsLimited') {
+        let validCandidates: typeof candidates = [];
+        for (const c of candidates) {
+          const world = this.worlds[c.player];
+          const locations = Array.from(world.dungeons[c.dungeon]).map(x => makeLocation(x, c.player));
+          let valid = true;
+          for (const l of locations) {
+            const pi = this.state.items.get(l);
+            if (pi && isDungeonReward(pi.item)) {
+              valid = false;
+              break;
+            }
+          }
+          if (valid) {
+            validCandidates.push(c);
+          }
+        }
+        candidates = validCandidates;
+      }
 
       for (const c of candidates) {
         const { player, dungeon } = c;
