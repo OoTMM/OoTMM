@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Make dungeon reward shuffle with one reward per-dungeon respect plando.
 - Removed the deku shield in the spirit pot if restore broken actors is off, but make it logical if it's on.
 - Hookshot is now visible on child.
 - Castle Courtyard can now be revisited.
