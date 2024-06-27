@@ -40,6 +40,7 @@ All notable changes to this project will be documented in this file.
 - Fix Moon Crash sometimes causing the Clock UI to disappear.
 - MQ Fire Temple logic issue for the Flare Dancer Soul at the top of the temple.
 - Fix an issue where, in certain settings, the game could still expect you to do MM without a way to reset time.
+- Fix logic issue pertaining to Lost Woods and Overworld ER.
 
 ## [23.1] - 2024-05-30
 
