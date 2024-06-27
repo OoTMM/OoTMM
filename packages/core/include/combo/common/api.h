@@ -362,3 +362,7 @@ s32 Object_GetSlot(ObjectContext* objectCtx, s16 id);
 void Environment_Init(GameState_Play* play, EnvironmentContext* envCtx, int unused);
 
 extern u8 gWeatherMode;
+
+#if defined(GAME_MM)
+void AudioSeq_QueueSeqCmd(u32 cmd);    
+#endif

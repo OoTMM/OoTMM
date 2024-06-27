@@ -28,6 +28,7 @@ All notable changes to this project will be documented in this file.
 
 ## Fixed
 
+- Fix Keaton Quiz music continuing at night if the received item was minor.
 - Fix song of time sometimes respawning the player in day-0 state until the next scene load.
 - Fix bottle issues when changing age.
 - Fix a weird interaction between scarecrow and clock shuffle.
