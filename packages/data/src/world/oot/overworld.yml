@@ -915,10 +915,14 @@
   region: LOST_WOODS
   exits:
     "Lost Woods": "true"
-"Lost Woods":
+"Lost Woods Lost Forest":
   region: LOST_WOODS
   exits:
     "Kokiri Forest": "true"
+"Lost Woods":
+  region: LOST_WOODS
+  exits:
+    "Lost Woods Lost Forest": "true"
     "Lost Woods Bridge": "can_longshot || has_hover_boots || can_ride_bean(BEAN_LOST_WOODS_EARLY) || climb_anywhere || hookshot_anywhere"
     "Lost Woods Deep": "is_child || can_play_saria || trick_mido || hookshot_anywhere || climb_anywhere"
     "Lost Woods Generic Grotto": "has_explosives_or_hammer"
@@ -1005,7 +1009,7 @@
     "Sacred Meadow Entryway": "true"
     "Deku Theater": "true"
     "Lost Woods Scrub Grotto": "has_explosives_or_hammer"
-    "Kokiri Forest": "!setting(alterLostWoodsExits)"
+    "Lost Woods Lost Forest": "!setting(alterLostWoodsExits)"
     "Lost Woods Lost North": "true"
     "Lost Woods Lost East": "true"
     "Lost Woods Lost South": "true"
