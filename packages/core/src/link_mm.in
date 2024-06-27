@@ -28,6 +28,7 @@ Environment_NewDay = 0x800feaf4;
 
 Play_DrawHudButtons = 0x80117100;
 Audio_GetActiveSeqId = 0x801a8a50;
+Audio_QueueSeqCmd = 0x801a89a8;
 
 Actor_ProcessInitChain = 0x800ffadc;
 
