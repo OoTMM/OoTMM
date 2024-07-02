@@ -1720,6 +1720,13 @@ export const SETTINGS = [{
   description: 'Add rupoors to the item pool. They remove 10 rupees when collected',
   default: false
 }, {
+  key: 'songOfDoubleTimeOot',
+  name: 'Song of Double Time (OoT)',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Enables using Song of Double Time in OoT when you have Song of Time in OoT',
+  default: false
+}, {
   key: 'sharedNutsSticks',
   name: 'Shared Nuts & Sticks',
   category: 'items.shared',

@@ -995,6 +995,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     OOT_OPEN_DODONGO_CAVERN: world.resolvedFlags.openDungeonsOot.has('DC'),
     OOT_OPEN_WATER_TEMPLE: world.resolvedFlags.openDungeonsOot.has('Water'),
     OOT_OPEN_WELL: world.resolvedFlags.openDungeonsOot.has('BotW'),
+    OOT_SONG_OF_DOUBLE_TIME: settings.songOfDoubleTimeOot,
   };
 
   for (const v in exprs) {

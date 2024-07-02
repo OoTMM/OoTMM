@@ -194,6 +194,7 @@ export const CONFVARS = [
   'OOT_OPEN_DODONGO_CAVERN',
   'OOT_OPEN_WATER_TEMPLE',
   'OOT_OPEN_WELL',
+  'OOT_SONG_OF_DOUBLE_TIME',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];
