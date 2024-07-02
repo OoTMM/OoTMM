@@ -242,28 +242,22 @@
   age_change: false
   exits:
     "Kokiri Forest": "true"
-    "Kokiri Forest Storms Grotto Grass": "can_cut_grass"
   events:
+    BOMBS_OR_BOMBCHU: "can_cut_grass"
+    RUPEES: "can_cut_grass"
+    SEEDS: "is_child && can_cut_grass"
+    ARROWS: "is_adult"
+    MAGIC: "can_cut_grass"
     FISH: "has_bottle"
+    BUGS: "has_bottle && can_cut_grass_for_bugs"
   locations:
     "Kokiri Forest Storms Grotto": "true"
+    "Kokiri Forest Storms Grotto Grass 1": "can_cut_grass"
+    "Kokiri Forest Storms Grotto Grass 2": "can_cut_grass"
+    "Kokiri Forest Storms Grotto Grass 3": "can_cut_grass"
+    "Kokiri Forest Storms Grotto Grass 4": "can_cut_grass"
   gossip:
     "Kokiri Gossip Near Lost Woods Grotto": "true"
-"Kokiri Forest Storms Grotto Grass":
-  region: ENTRANCE
-  age_change: false
-  events:
-    BOMBS_OR_BOMBCHU: "true"
-    RUPEES: "true"
-    SEEDS: "is_child"
-    ARROWS: "is_adult"
-    MAGIC: "true"
-    BUGS: "has_bottle"
-  locations:
-    "Kokiri Forest Storms Grotto Grass 1": "true"
-    "Kokiri Forest Storms Grotto Grass 2": "true"
-    "Kokiri Forest Storms Grotto Grass 3": "true"
-    "Kokiri Forest Storms Grotto Grass 4": "true"
 "Hyrule Field":
   region: HYRULE_FIELD
   time: flow
@@ -377,7 +371,7 @@
     ARROWS: "is_adult"
     MAGIC: "can_cut_grass"
     FISH: "has_bottle"
-    BUGS: "has_bottle && can_cut_grass"
+    BUGS: "has_bottle && can_cut_grass_for_bugs"
   locations:
     "Hyrule Field Grotto Open": "true"
     "Hyrule Field Grotto Open Grass 1": "can_cut_grass"
@@ -398,7 +392,7 @@
     ARROWS: "is_adult"
     MAGIC: "can_cut_grass"
     FISH: "has_bottle"
-    BUGS: "has_bottle && can_cut_grass"
+    BUGS: "has_bottle && can_cut_grass_for_bugs"
   locations:
     "Hyrule Field Grotto Southeast": "true"
     "Hyrule Field Grotto Southeast Grass 1": "can_cut_grass"
@@ -419,7 +413,7 @@
     ARROWS: "is_adult"
     MAGIC: "can_cut_grass"
     FISH: "has_bottle"
-    BUGS: "has_bottle && can_cut_grass"
+    BUGS: "has_bottle && can_cut_grass_for_bugs"
   locations:
     "Hyrule Field Grotto Market": "true"
     "Hyrule Field Grotto Market Grass 1": "can_cut_grass"
@@ -442,7 +436,7 @@
     "Hyrule Field": "true"
   events:
     NUTS: "has_fire"
-    BUGS: "has_fire && can_cut_grass"
+    BUGS: "has_fire && can_cut_grass_for_bugs"
   locations:
     "Hyrule Field Grotto Near Gerudo GS": "gs && (can_collect_distance || climb_anywhere) && has_fire"
     "Hyrule Field Cow": "has_fire && can_play_epona"
@@ -939,7 +933,7 @@
     SEEDS: "is_child && can_cut_grass"
     ARROWS: "is_adult"
     MAGIC: "can_cut_grass"
-    BUGS: "has_bottle && can_cut_grass"
+    BUGS: "has_bottle && can_cut_grass_for_bugs"
   locations:
     "Lost Woods Target": "is_child && (can_use_slingshot || can_use_bow)"
     "Lost Woods Skull Kid": "is_child && can_play_saria"
@@ -981,7 +975,7 @@
     ARROWS: "is_adult"
     MAGIC: "can_cut_grass"
     FISH: "has_bottle"
-    BUGS: "has_bottle && can_cut_grass"
+    BUGS: "has_bottle && can_cut_grass_for_bugs"
   locations:
     "Lost Woods Grotto Generic": "true"
     "Lost Woods Grotto Generic Grass 1": "can_cut_grass"
@@ -1021,7 +1015,7 @@
     SEEDS: "is_child && can_cut_grass"
     ARROWS: "is_adult"
     MAGIC: "can_cut_grass"
-    BUGS: "has_bottle && can_cut_grass"
+    BUGS: "has_bottle && can_cut_grass_for_bugs"
   locations:
     "Lost Woods Scrub Near Theater Left": "is_child && business_scrub(0x01)"
     "Lost Woods Scrub Near Theater Right": "is_child && business_scrub(0x02)"
@@ -1300,7 +1294,7 @@
     ARROWS: "is_adult"
     MAGIC: "can_cut_grass"
     FISH: "has_bottle"
-    BUGS: "has_bottle && can_cut_grass"
+    BUGS: "has_bottle && can_cut_grass_for_bugs"
   locations:
     "Kakariko Grotto Back": "true"
     "Kakariko Grotto Back Grass 1": "can_cut_grass"
@@ -1484,7 +1478,7 @@
     ARROWS: "is_adult"
     MAGIC: "can_cut_grass"
     FISH: "has_bottle"
-    BUGS: "has_bottle && can_cut_grass"
+    BUGS: "has_bottle && can_cut_grass_for_bugs"
   locations:
     "Death Mountain Trail Grotto": "true"
     "Death Mountain Trail Grotto Grass 1": "can_cut_grass"
@@ -1714,7 +1708,7 @@
     ARROWS: "is_adult"
     MAGIC: "can_cut_grass"
     FISH: "has_bottle"
-    BUGS: "has_bottle && can_cut_grass"
+    BUGS: "has_bottle && can_cut_grass_for_bugs"
   locations:
     "Zora River Grotto": "true"
     "Zora River Grotto Grass 1": "can_cut_grass"
@@ -1821,7 +1815,7 @@
     SEEDS: "is_child && can_cut_grass"
     ARROWS: "is_adult"
     MAGIC: "can_cut_grass"
-    BUGS: "has_bottle && can_cut_grass && is_child"
+    BUGS: "has_bottle && can_cut_grass_for_bugs && is_child"
   locations:
     "Lake Hylia Underwater Bottle": "is_child && can_dive_small"
     "Lake Hylia Fire Arrow": "can_use_bow && (event(WATER_TEMPLE_CLEARED) || (is_adult && (scarecrow_longshot || longshot_anywhere)) || climb_anywhere)"
@@ -2110,7 +2104,7 @@
     ARROWS: "is_adult"
     MAGIC: "can_cut_grass"
     FISH: "has_bottle"
-    BUGS: "has_bottle && can_cut_grass"
+    BUGS: "has_bottle && can_cut_grass_for_bugs"
   locations:
     "Death Mountain Crater Grotto": "true"
     "Death Mountain Crater Grotto Grass 1": "can_cut_grass"
