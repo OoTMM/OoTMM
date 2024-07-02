@@ -42,6 +42,7 @@ All notable changes to this project will be documented in this file.
 - Fix an issue where, in certain settings, the game could still expect you to do MM without a way to reset time.
 - Fix logic issue pertaining to Lost Woods and Overworld ER.
 - Fix Milk Bar being able to appear in places that close at 10pm in All Locations logic.
+- Fix bugs from grass allowing Strength as an option to collect them; the bugs will not spawn by picking up and throwing the grass.
 
 ## [23.1] - 2024-05-30
 
