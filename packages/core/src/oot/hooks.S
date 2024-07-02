@@ -38,16 +38,36 @@ PATCH_START 0x80061c10
   li v0,0
 PATCH_END
 
-PATCH_START 0x8009abb8
-  li v0,0
-PATCH_END
-
-PATCH_START 0x8009abcc
-  li v0,0
-PATCH_END
-
 /* Make Navi always return the same message */
 PATCH_START 0x8005977c
   jr ra
    li v0,0x0141
+PATCH_END
+
+/* Make using song of double time correctly trigger the cucco in the morning */
+PATCH_START 0x8009ab88
+  beq v0, at, .+0x10
+   ori at, zero, 0x4555
+  bne v0, at, .+0x64
+   ori t6, zero, 0xfffd
+  lw t9, 0x0014 (s2)
+  lw t2, 0x0018 (s2)
+  addiu t4, zero, 0x0001
+  addiu t1, t9, 0x0001
+  addiu t3, t2, 0x0001
+  sw t1, 0x0014 (s2)
+  sw t3, 0x0018 (s2)
+  sb t4, 0x141c (s2)
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
 PATCH_END

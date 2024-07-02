@@ -21,6 +21,7 @@
 # define TEXT_SIGNAL         "\x0b"
 # define TEXT_ICON           "\x13"
 # define TEXT_BB             "\x04"
+# define TEXT_FADE(frames)   "\x0e" frames
 #else
 # define TEXT_FAST           "\x17"
 # define TEXT_CZ             "\x00"

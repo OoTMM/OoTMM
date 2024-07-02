@@ -5,10 +5,16 @@
 
 typedef struct
 {
-    char unk[0xfc];
+    char unk_00[0x02];
+    u16 sceneTimeSpeed;
+    char unk_04[0xdc];
+    u8 timeSeqState;
+    char unk_e1[0x1b];
 }
 EnvironmentContext;
 
 ASSERT_SIZE(EnvironmentContext, 0xfc);
+ASSERT_OFFSET(EnvironmentContext, sceneTimeSpeed, 0x02);
+ASSERT_OFFSET(EnvironmentContext, timeSeqState,   0xe0);
 
 #endif
