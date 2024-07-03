@@ -459,6 +459,9 @@ class WorldShuffler {
     if (this.settings.erOneWaysWoods) {
       pool.add('one-way-woods');
     }
+    if (this.settings.erOneWaysWaterVoids) {
+      pool.add('one-way-water-void');
+    }
 
     return { pool: Array.from(pool), opts: { ownGame: this.settings.erOneWays === 'ownGame' } };
   }
