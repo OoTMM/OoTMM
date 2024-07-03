@@ -381,6 +381,34 @@ class WorldShuffler {
     }
   }
 
+  private placeOneWays() {
+    /* Compute types */
+    const types = new Set(this.poolsTypes());
+    types.add('dungeon');
+    types.add('dungeon-minor');
+    types.add('dungeon-sh');
+
+    if (this.settings.erBoss !== 'none') {
+      types.add('boss');
+    }
+
+    /* Compute entrances */
+    const entrances = this.entrancesForTypes(types, this.settings.erDecoupled);
+    const oneWays = this.poolOneWays();
+    const entrancesSrc = new Set(this.allEntrances.filter(x => oneWays.pool.includes(ENTRANCES[x].type) && this.world.areas.hasOwnProperty(ENTRANCES[x].from)));
+    const entrancesDst = new Set(entrances);
+
+    while (entrancesSrc.size > 0) {
+      const src = sample(this.random, entrancesSrc);
+      let dstCandidates = [...entrancesDst];
+      if (this.settings.erOneWays === 'ownGame') {
+        dstCandidates = dstCandidates.filter(x => ENTRANCES[x].game === ENTRANCES[src].game);
+      }
+      const dst = sample(this.random, dstCandidates);
+      this.overrides[src] = dst;
+      entrancesSrc.delete(src);
+    }
+  }
   private poolDungeons() {
     const pool: string[] = [];
 
@@ -712,7 +740,7 @@ class WorldShuffler {
       pools.WARPS = this.poolWarps();
     }
 
-    if (this.settings.erOneWays !== 'none') {
+    if (this.settings.erOneWays !== 'none' && !this.settings.erOneWaysAnywhere) {
       pools.ONE_WAYS = this.poolOneWays();
     }
 
@@ -735,6 +763,10 @@ class WorldShuffler {
 
     if (this.settings.erSpawns) {
       this.placeSpawns();
+    }
+
+    if (this.settings.erOneWays !== 'none') {
+      this.placeOneWays();
     }
 
     this.placePools(this.makePools());
