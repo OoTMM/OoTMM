@@ -2465,4 +2465,12 @@ export const SETTINGS = [{
   description: 'Shuffle the Water Void entrances among one-way entrances. These include:<br>- Zora Cape<br>- Great Bay Coast, south of Pinnacle Rock Entrance<br>- Great Bay Coast, north of Pinnacle Rock Entrance<br>- Pinnacle Rock',
   default: false,
   cond: (x: any) => hasMM(x) && x.erOneWays !== 'none'
+}, {
+  key: 'erOneWaysAnywhere',
+  name: 'Allow One-Ways to take you elsewhere than other one-ways',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'Makes it so one-ways can take you to any place also shuffled',
+  default: false,
+  cond: (x: any) => x.erOneWays !== 'none'
 }] as const;

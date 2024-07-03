@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add a setting to allow one-ways to take you anywhere, alike wallmasters.
 - Add a setting to shuffle the few Water Void spots in MM. 
 - Add a setting altering Shadow Temple boat speed.
 - Add ageless Slingshot and Bow.
