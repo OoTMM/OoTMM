@@ -64,5 +64,6 @@ void Config_Init(void);
 int Config_Flag(int flag);
 int Config_SpecialCond(int special);
 int Config_IsGoal(void);
+int Config_IsMq(int dungeonId);
 
 #endif

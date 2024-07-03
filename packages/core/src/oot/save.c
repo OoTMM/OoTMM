@@ -208,7 +208,7 @@ static void applyStartingEvents(void)
         SetEventChk(EV_OOT_CHK_KING_ZORA_MOVED);
     }
 
-    if (gComboConfig.mq & (1 << MQ_TEMPLE_SHADOW))
+    if (Config_IsMq(MQ_TEMPLE_SHADOW))
     {
         gSave.perm[SCE_OOT_TEMPLE_SHADOW].switches |= (1 << 7);
     }

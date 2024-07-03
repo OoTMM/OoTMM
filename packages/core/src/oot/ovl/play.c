@@ -63,7 +63,7 @@ static void eventFixes(GameState_Play* play)
         gSave.eventsMisc[20] = tmp;
 
         /* Places Ruto on first floor */
-        if (!(gComboConfig.mq & (1 << MQ_JABU_JABU)))
+        if (!(Config_IsMq(MQ_JABU_JABU)))
             BITMAP16_SET(gSave.eventsMisc, EV_OOT_INF_RUTO_TOP_FLOOR);
 
         /* Ruto kidnap fixes */

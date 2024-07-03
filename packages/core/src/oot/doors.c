@@ -44,11 +44,11 @@ int comboDoorIsUnlocked(GameState_Play* play, Actor* actor)
     flag = actor->variable & 0x3f;
 
     /* Fire temple 1st door */
-    if (sceneId == SCE_OOT_TEMPLE_FIRE && flag == 0x17 && !Config_Flag(CFG_SMALL_KEY_SHUFFLE) && !(gComboConfig.mq & (1 << MQ_TEMPLE_FIRE)))
+    if (sceneId == SCE_OOT_TEMPLE_FIRE && flag == 0x17 && !Config_Flag(CFG_SMALL_KEY_SHUFFLE) && !(Config_IsMq(MQ_TEMPLE_FIRE)))
         return 1;
 
     /* Water temple water raise door */
-    if (sceneId == SCE_OOT_TEMPLE_WATER && flag == 0x15 && !(gComboConfig.mq & (1 << MQ_TEMPLE_WATER)))
+    if (sceneId == SCE_OOT_TEMPLE_WATER && flag == 0x15 && !(Config_IsMq(MQ_TEMPLE_WATER)))
         return 1;
 
     if (type == DOOR_BOSS_KEY)

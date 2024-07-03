@@ -29,13 +29,13 @@ void comboInitData(void)
     g.maxKeysMm[3] = 4;
 
     /* MQ Forest */
-    if (gComboConfig.mq & (1 << MQ_TEMPLE_FOREST))
+    if (Config_IsMq(MQ_TEMPLE_FOREST))
     {
         g.maxKeysOot[SCE_OOT_TEMPLE_FOREST] = 6;
     }
 
     /* MQ Fire / keysanity */
-    if (gComboConfig.mq & (1 << MQ_TEMPLE_FIRE))
+    if (Config_IsMq(MQ_TEMPLE_FIRE))
     {
         g.maxKeysOot[SCE_OOT_TEMPLE_FIRE] = 5;
     }
@@ -45,37 +45,37 @@ void comboInitData(void)
     }
 
     /* MQ Water */
-    if (gComboConfig.mq & (1 << MQ_TEMPLE_WATER))
+    if (Config_IsMq(MQ_TEMPLE_WATER))
     {
         g.maxKeysOot[SCE_OOT_TEMPLE_WATER] = 2;
     }
 
     /* MQ Shadow */
-    if (gComboConfig.mq & (1 << MQ_TEMPLE_SHADOW))
+    if (Config_IsMq(MQ_TEMPLE_SHADOW))
     {
         g.maxKeysOot[SCE_OOT_TEMPLE_SHADOW] = 6;
     }
 
     /* MQ Spirit */
-    if (gComboConfig.mq & (1 << MQ_TEMPLE_SPIRIT))
+    if (Config_IsMq(MQ_TEMPLE_SPIRIT))
     {
         g.maxKeysOot[SCE_OOT_TEMPLE_SPIRIT] = 7;
     }
 
     /* MQ Well */
-    if (gComboConfig.mq & (1 << MQ_BOTTOM_OF_THE_WELL))
+    if (Config_IsMq(MQ_BOTTOM_OF_THE_WELL))
     {
         g.maxKeysOot[SCE_OOT_BOTTOM_OF_THE_WELL] = 2;
     }
 
     /* MQ GTG */
-    if (gComboConfig.mq & (1 << MQ_GERUDO_TRAINING_GROUNDS))
+    if (Config_IsMq(MQ_GERUDO_TRAINING_GROUNDS))
     {
         g.maxKeysOot[SCE_OOT_GERUDO_TRAINING_GROUND] = 3;
     }
 
     /* MQ Ganon */
-    if (gComboConfig.mq & (1 << MQ_GANON_CASTLE))
+    if (Config_IsMq(MQ_GANON_CASTLE))
     {
         g.maxKeysOot[SCE_OOT_INSIDE_GANON_CASTLE] = 3;
     }
