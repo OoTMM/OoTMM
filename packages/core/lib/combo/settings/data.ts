@@ -1260,6 +1260,14 @@ export const SETTINGS = [{
   default: false,
   cond: hasMM,
 }, {
+  key: 'shadowFastBoat',
+  name: 'Fast Shadw Temple Boat',
+  category: 'main.misc',
+  type: 'boolean',
+  description: 'Speeds up the Shadow Temple Boat before the last part of the dungeon',
+  default: false,
+  cond: hasOoT,
+}, {
   key: 'fillWallets',
   name: 'Fill Wallets',
   category: 'items.extensions',

@@ -1,0 +1,35 @@
+#include <combo.h>
+
+PATCH_GROUP PG_OOT_FAST_BOAT
+
+PATCH_START 0x8097bbac
+  li t7, 0x01
+PATCH_END
+
+PATCH_START 0x8097bd94
+  lui a2, 0x4348
+PATCH_END
+
+PATCH_START 0x8097bda6
+.half 0x447a
+PATCH_END
+
+PATCH_START 0x8006a1ae
+.half 0x0001
+PATCH_END
+
+PATCH_START 0x800f3896
+.half 0x2121
+.half 0x0050
+PATCH_END
+
+PATCH_START 0x800f38a4
+.float 0.0
+.float 0.0
+.float 0.0
+.float 50.0
+.float 30.0
+.float -200.0
+PATCH_END
+
+PATCH_GROUP_END
