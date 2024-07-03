@@ -60,11 +60,13 @@ function SettingTooltip({ setting }: { setting: string }) {
   }
 
   return <>
-    {description.split('<br>').join('\n')}
-    <ul>
-      {Object.entries(values).map(x => <li key={x[0]}><strong>{x[0]}</strong>: {x[1]}</li>)}
-    </ul>
-    Default: <strong>{def}</strong>
+    <pre style={{whiteSpace: "pre-line"}}>
+      {description.split('<br>').join('\n')}
+      <ul>
+        {Object.entries(values).map(x => <li key={x[0]}><strong>{x[0]}</strong>: {x[1]}</li>)}
+      </ul>
+      Default: <strong>{def}</strong>
+    </pre>
   </>;
 }
 
