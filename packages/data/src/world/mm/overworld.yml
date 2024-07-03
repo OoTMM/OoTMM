@@ -2382,6 +2382,7 @@
     "Great Bay Grotto": "true"
     "GBC Near Cow Grotto": "can_hookshot"
     "Owl Great Bay": "true"
+    "Great Bay Coast Water Void": "true"
   events:
     MAGIC: "true"
     BOMBS_OR_BOMBCHU: "true"
@@ -2416,13 +2417,22 @@
     "Great Bay Coast Grass 5": "true"
   gossip:
     "Great Bay Coast Gossip": "true"
+"Great Bay Coast Water Void":
+  region: NONE
+  exits:
+    "VOID": "true"
 "Great Bay Coast Near Pinnacle":
   region: GREAT_BAY_COAST
   exits:
     "Pinnacle Rock Entrance": "true"
     "Great Bay Coast": "can_reset_time"
+    "Great Bay Coast Near Pinnacle Water Void": "true"
     "SOARING": "has_mask_zora && can_play_soaring"
     "WARP_SONGS": "has_mask_zora"
+"Great Bay Coast Near Pinnacle Water Void":
+  region: NONE
+  exits:
+    "VOID": "true"
 "Great Bay Coast Fortress":
   region: GREAT_BAY_COAST
   exits:
@@ -2559,11 +2569,13 @@
   exits:
     "Pinnacle Rock": "can_reset_time && underwater_walking_strict && (event(SEAHORSE) || trick(MM_NO_SEAHORSE))"
     "Great Bay Coast Near Pinnacle": "true"
+    "Pinnacle Rock Water Void": "true"
     "SOARING": "has_mask_zora && can_play_soaring"
     "WARP_SONGS": "has_mask_zora"
 "Pinnacle Rock":
   region: PINNACLE_ROCK
   exits:
+    "Pinnacle Rock Water Void": "true"
     "Pinnacle Rock Entrance": "true"
   events:
     ZORA_EGGS_PINNACLE_ROCK: "true"
@@ -2584,6 +2596,10 @@
     "Pinnacle Rock Pot 09": "true"
     "Pinnacle Rock Pot 10": "true"
     "Pinnacle Rock Pot 11": "true"
+"Pinnacle Rock Water Void":
+  region: NONE
+  exits:
+    "VOID": "true"
 "Laboratory":
   region: ENTRANCE
   exits:
@@ -2606,6 +2622,7 @@
     "Great Bay Near Fairy Fountain": "can_hookshot && (has_explosives || trick_keg_explosives || short_hook_anywhere)" #|| (can_use_ice_arrows && (has_mask_zora || can_hookshot_short))
     "Zora Cape Grotto": "can_break_boulders"
     "Zora Cape Pot Game": "soul_zora && is_day && (has_weapon || has_mask_zora || can_hookshot_short || has_bow)"
+    "Zora Cape Water Void": "true"
   locations:
     "Zora Cape Underwater Chest": "underwater_walking"
     "Zora Cape Waterfall HP": "has_mask_zora || (has_iron_boots && has_tunic_zora && (has_arrows || has_bombchu || has_mask_blast))"
@@ -2739,6 +2756,11 @@
     "Zora Hall": "true"
     "Great Bay Temple": "turtle_woken && can_hookshot"
     "Owl Zora Cape": "true"
+    "Zora Cape Water Void": "true"
+"Zora Cape Water Void":
+  region: NONE
+  exits:
+    "VOID": "true"
 "Behind Gorman Fence":
   region: MILK_ROAD
   exits:

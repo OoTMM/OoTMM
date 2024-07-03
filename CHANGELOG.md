@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add a setting to shuffle the few Water Void spots in MM.   
 - Add a setting altering Shadow Temple boat speed.
 - Add ageless Slingshot and Bow.
 - Add CAMC to cows, where the cow ring hints at the item. If off, cow rings are collection markers instead.

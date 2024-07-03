@@ -567,6 +567,10 @@ MM_GROTTO_EXIT_DEKU_PLAYGROUND:                 { game: mm, id: 0xd640, type: gr
 MM_GRAVE_EXIT_NIGHT1:                           { game: mm, id: 0x8030, type: grave-exit, maps: [MM_BENEATH_GRAVEYARD, MM_GRAVEYARD], areas: ['MM Beneath The Graveyard Night 1', 'MM Ikana Graveyard'], reverse: MM_GRAVE_NIGHT1 }
 MM_GRAVE_EXIT_NIGHT2:                           { game: mm, id: 0x8020, type: grave-exit, maps: [MM_BENEATH_GRAVEYARD, MM_GRAVEYARD], areas: ['MM Beneath The Graveyard Night 2', 'MM Ikana Graveyard'], reverse: MM_GRAVE_NIGHT2 }
 MM_GRAVE_EXIT_NIGHT3:                           { game: mm, id: 0x8010, type: grave-exit, maps: [MM_BENEATH_GRAVEYARD_DAMPE, MM_GRAVEYARD], areas: ['MM Beneath The Graveyard Night 3 Fake Exit', 'MM Ikana Graveyard'], reverse: MM_GRAVE_NIGHT3 }
+MM_VOID_GREAT_BAY:                              { game: mm, id: 0x6820, type: one-way-water-void, maps: [NONE, MM_GREAT_BAY_COAST], areas: ["MM Great Bay Coast Water Void", "MM VOID"]}
+MM_VOID_GREAT_BAY_BY_PINNACLE_ROCK:             { game: mm, id: 0x6860, type: one-way-water-void, maps: [NONE, MM_GREAT_BAY_COAST], areas: ["MM Great Bay Coast Near Pinnacle Water Void", "MM VOID"]}
+MM_VOID_ZORA_CAPE:                              { game: mm, id: 0x6a30, type: one-way-water-void, maps: [NONE, MM_ZORA_CAPE], areas: ["MM Zora Cape Water Void", "MM VOID"]}
+MM_VOID_PINNACLE_ROCK:                          { game: mm, id: 0x4410, type: one-way-water-void, maps: [NONE, MM_PINNACLE_ROCK], areas: ["MM Pinnacle Rock Water Void", "MM VOID"]}
 MM_CLOCK_TOWN:                                  { game: mm, id: 0xd800, type: none, debug: ['COMMON', 'Clock Town'] }
 MM_MOON:                                        { game: mm, id: 0xc800, type: none, debug: ['COMMON', 'Moon'] }
 MM_CLOCK_TOWN_FROM_SONG_OF_TIME:                { game: mm, id: 0x1c00, type: none }
