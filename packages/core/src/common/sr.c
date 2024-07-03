@@ -42,17 +42,17 @@ static void updateSR(int id, int count, int flag)
 
 void comboSilverRupeesInit(void)
 {
-    if (gComboConfig.mq & (1 << MQ_DODONGOS_CAVERN))
+    if (Config_IsMq(MQ_DODONGOS_CAVERN))
     {
         updateSR(SR_DC, 5, 0x25);
     }
 
-    if (gComboConfig.mq & (1 << MQ_BOTTOM_OF_THE_WELL))
+    if (Config_IsMq(MQ_BOTTOM_OF_THE_WELL))
     {
         updateSR(SR_BOTW, 0, 0);
     }
 
-    if (gComboConfig.mq & (1 << MQ_TEMPLE_SPIRIT))
+    if (Config_IsMq(MQ_TEMPLE_SPIRIT))
     {
         /* Need logic */
         updateSR(SR_SPIRIT1, 5, 0x37);
@@ -60,27 +60,27 @@ void comboSilverRupeesInit(void)
         updateSR(SR_SPIRIT3, 0, 0);
     }
 
-    if (gComboConfig.mq & (1 << MQ_TEMPLE_SHADOW))
+    if (Config_IsMq(MQ_TEMPLE_SHADOW))
     {
         updateSR(SR_SHADOW2, 10, 0x03);
         updateSR(SR_SHADOW3,  5, 0x11); /* Double check */
         updateSR(SR_SHADOW4, 10, 0x08);
     }
 
-    if (gComboConfig.mq & (1 << MQ_ICE_CAVERN))
+    if (Config_IsMq(MQ_ICE_CAVERN))
     {
         updateSR(SR_IC1, 0, 0);
         updateSR(SR_IC2, 0, 0);
     }
 
-    if (gComboConfig.mq & (1 << MQ_GERUDO_TRAINING_GROUNDS))
+    if (Config_IsMq(MQ_GERUDO_TRAINING_GROUNDS))
     {
         updateSR(SR_GTG1, 5, 0x1c);
         updateSR(SR_GTG2, 6, 0x0c);
         updateSR(SR_GTG3, 3, 0x1b);
     }
 
-    if (gComboConfig.mq & (1 << MQ_GANON_CASTLE))
+    if (Config_IsMq(MQ_GANON_CASTLE))
     {
         updateSR(SR_GANON1, 5, 0x0b);
         updateSR(SR_GANON2, 5, 0x02);

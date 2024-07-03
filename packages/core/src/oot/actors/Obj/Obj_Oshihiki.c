@@ -5,7 +5,7 @@
 static int ObjOshihiki_GetSwitchFlag(GameState_Play* play, int flag)
 {
     /* MQ Spirit fix */
-    if (play->sceneId == SCE_OOT_TEMPLE_SPIRIT && (gComboConfig.mq & (1 << MQ_TEMPLE_SPIRIT)) && gSave.age == AGE_CHILD && flag == 0x09)
+    if (play->sceneId == SCE_OOT_TEMPLE_SPIRIT && (Config_IsMq(MQ_TEMPLE_SPIRIT)) && gSave.age == AGE_CHILD && flag == 0x09)
         return 0;
     return GetSwitchFlag(play, flag);
 }

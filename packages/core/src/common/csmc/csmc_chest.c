@@ -102,7 +102,7 @@ void csmcChestInit(Actor* this, GameState_Play* play, s16 gi)
         /* Fix for IGT chest */
         if (play->sceneId == SCE_OOT_INSIDE_GANON_CASTLE)
         {
-            if ((this->variable & 0x1f) == (gComboConfig.mq & (1 << MQ_GANON_CASTLE) ? 0x04 : 0x11))
+            if ((this->variable & 0x1f) == (Config_IsMq(MQ_GANON_CASTLE) ? 0x04 : 0x11))
                 this->world.pos.z -= 10.f;
         }
 #endif

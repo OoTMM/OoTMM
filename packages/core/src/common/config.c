@@ -303,3 +303,8 @@ int Config_SpecialCond(int special)
 
     return count >= cond->count;
 }
+
+int Config_IsMq(int dungeonId)
+{
+    return gComboConfig.mq & (1 << dungeonId);
+}
