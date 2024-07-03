@@ -26,6 +26,9 @@ typedef struct Actor_Player Actor_Player;
 
 #define TRANS_GFX_TRIFORCE          0x01
 #define TRANS_GFX_BLACK             0x02
+#define TRANS_GFX_WHITE             0x03
+#define TRANS_GFX_FADE_BLACK_FAST   0x04
+#define TRANS_GFX_FADE_WHITE_FAST   0x05
 #define TRANS_GFX_SANDSTORM_SLOW    0x0e
 #define TRANS_GFX_SANDSTORM_FAST    0x0f
 #define TRANS_GFX_SHORTCUT          0x2c

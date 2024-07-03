@@ -350,6 +350,8 @@ ASSERT_OFFSET(OotSaveContext, unk_1426,                     0x1426);
 _Static_assert(sizeof(OotSave) == 0x1354, "OotSave size is wrong");
 _Static_assert(sizeof(OotSaveContext) == 0x1450, "OotSaveContext size is wrong");
 
+#define CLOCK_TIME(hr, min) ((s32)(((hr) * 60 + (min)) * (f32)0x10000 / (24 * 60) + 0.5f))
+
 #if defined(GAME_OOT)
 ALIGNED(16) extern OotSaveContext gSaveContext;
 # define gOotSave       (gSaveContext.save)
