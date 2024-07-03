@@ -9,6 +9,7 @@ typedef enum {
     CUSTOM_SONG_SOARING,
     CUSTOM_SONG_TIME,
     CUSTOM_SONG_ELEGY,
+    CUSTOM_SONG_DOUBLE_TIME,
 } CustomOcarinaSong;
 
 extern u32 gOcarinaPressedButtons;
@@ -39,6 +40,18 @@ static OcarinaSongButtons sSongElegy = {
     }
 };
 
+static OcarinaSongButtons sSongDoubleTime = {
+    6,
+    {
+        OCARINA_BTN_C_RIGHT,
+        OCARINA_BTN_C_RIGHT,
+        OCARINA_BTN_A,
+        OCARINA_BTN_A,
+        OCARINA_BTN_C_DOWN,
+        OCARINA_BTN_C_DOWN,
+    }
+};
+
 void Ocarina_CheckCustomSongs(void)
 {
     if (gMmSave.inventory.quest.songSoaring
@@ -51,6 +64,11 @@ void Ocarina_CheckCustomSongs(void)
     if (gCustomSave.hasElegy)
     {
         comboCheckSong(&sSongElegy, CUSTOM_SONG_ELEGY);
+    }
+
+    if (gSave.inventory.quest.songTime && Config_Flag(CFG_OOT_SONG_OF_DOUBLE_TIME))
+    {
+        comboCheckSong(&sSongDoubleTime, CUSTOM_SONG_DOUBLE_TIME);
     }
 }
 
@@ -401,11 +419,116 @@ static void HandleElegy(GameState_Play* play)
     Message_Close(play);
 }
 
+static void songOfDoubleTimeMessage(GameState_Play* play)
+{
+    char* b;
+
+    b = play->msgCtx.textBuffer;
+    comboTextAppendHeader(&b);
+    comboTextAppendStr(&b, "Proceed to " TEXT_COLOR_RED);
+    if (gSave.isNight)
+    {
+        comboTextAppendStr(&b, "Dawn");
+    }
+    else
+    {
+        comboTextAppendStr(&b, "Dusk");
+    }
+    comboTextAppendStr(&b, TEXT_CZ "?" TEXT_NL TEXT_NL TEXT_COLOR_GREEN TEXT_CHOICE2 "Yes" TEXT_NL "No" TEXT_END);
+}
+
+static void songOfDoubleTimeFailMessage(GameState_Play* play)
+{
+    char* b;
+
+    b = play->msgCtx.textBuffer;
+    comboTextAppendHeader(&b);
+    comboTextAppendStr(&b, "Your notes echoed far.... " TEXT_NL "but nothing happened." TEXT_FADE("\x28") TEXT_END);
+}
+
+static void SetupSongOfDoubleTime(GameState_Play* play)
+{
+    if (gSaveContext.sunSongState != 0 || (play->envCtx.sceneTimeSpeed == 0 && (play->roomCtx.curRoom.behaviorType1 == ROOM_BEHAVIOR_TYPE1_1 || play->interfaceCtx.restrictions.sunSong == 3)))
+    {
+        PlayerDisplayTextBox(play, 0x88c, NULL);
+        songOfDoubleTimeFailMessage(play);
+        play->msgCtx.ocarinaMode = 4;
+        sInCustomSong = CUSTOM_SONG_NONE;
+    }
+    else
+    {
+        PlayerDisplayTextBox(play, 0xe0, NULL); /* You want to talk to Saria, right? */
+        songOfDoubleTimeMessage(play);
+    }
+}
+
+static void HandleSongOfDoubleTime(GameState_Play* play)
+{
+    int msgState;
+
+    msgState = Message_GetState(&play->msgCtx);
+    if (msgState == 2)
+    {
+        /* Stop ocarina */
+        play->msgCtx.ocarinaMode = 4;
+        sInCustomSong = CUSTOM_SONG_NONE;
+
+        /* Check the selected option */
+        if (play->msgCtx.choice == 0)
+        {
+            if (play->envCtx.sceneTimeSpeed != 0)
+            {
+                if (gSave.isNight)
+                {
+                    gSaveContext.save.worldTime = CLOCK_TIME(6, 30);
+                }
+                else
+                {
+                    gSaveContext.save.worldTime = CLOCK_TIME(18, 0) + 1;
+                }
+                gSaveContext.skyboxTime = gSaveContext.save.worldTime;
+                if (play->envCtx.timeSeqState == 4) {
+                    play->envCtx.timeSeqState++;
+                }
+            }
+            else if (play->roomCtx.curRoom.behaviorType1 != ROOM_BEHAVIOR_TYPE1_1 && play->interfaceCtx.restrictions.sunSong != 3)
+            {
+                if (gSave.isNight)
+                {
+                    gSaveContext.nextDayTime = CLOCK_TIME(6, 30);
+                    play->transitionType = TRANS_GFX_FADE_BLACK_FAST;
+                    gSaveContext.nextTransitionType = TRANS_GFX_BLACK;
+                }
+                else
+                {
+                    gSaveContext.nextDayTime = CLOCK_TIME(18, 0) + 1;
+                    play->transitionType = TRANS_GFX_FADE_WHITE_FAST;
+                    gSaveContext.nextTransitionType = TRANS_GFX_WHITE;
+                }
+                play->haltAllActors = 1;
+
+                if (play->sceneId == SCE_OOT_HAUNTED_WASTELAND)
+                {
+                    play->transitionType = TRANS_GFX_SANDSTORM_SLOW;
+                    gSaveContext.nextTransitionType = TRANS_GFX_SANDSTORM_SLOW;
+                }
+
+                gSaveContext.respawnFlag = -2;
+                play->nextEntranceIndex = gSaveContext.save.entrance;
+                play->transitionTrigger = TRANS_TYPE_NORMAL;
+                gSaveContext.sunSongState = 0; /* SUNSSONG_INACTIVE */
+                gSaveContext.seqId = 0xff; /* NA_BGM_DISABLED */
+                gSaveContext.natureAmbienceId = 0xff; /* NATURE_ID_DISABLED */
+            }
+        }
+    }
+}
+
 u8 Ocarina_BeforeSongPlayingProcessed(GameState_Play* play)
 {
     u8 songPlayed = play->msgCtx.ocarinaStaff->state;
 
-    if (songPlayed >= 0x81 && songPlayed <= 0x83)
+    if (songPlayed >= 0x81 && songPlayed <= 0x84)
     {
         PlaySound(0x4807); /* NA_SE_SY_TRE_BOX_APPEAR */
 
@@ -418,6 +541,9 @@ u8 Ocarina_BeforeSongPlayingProcessed(GameState_Play* play)
             break;
         case CUSTOM_SONG_ELEGY:
             HandleElegy(play);
+            break;
+        case CUSTOM_SONG_DOUBLE_TIME:
+            SetupSongOfDoubleTime(play);
             break;
         }
 
@@ -436,6 +562,9 @@ void Ocarina_HandleCustomSongs(Actor_Player* player, GameState_Play* play)
         break;
     case CUSTOM_SONG_TIME:
         HandleSongOfTime(play);
+        break;
+    case CUSTOM_SONG_DOUBLE_TIME:
+        HandleSongOfDoubleTime(play);
         break;
     }
 }
