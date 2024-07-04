@@ -1261,7 +1261,7 @@ export const SETTINGS = [{
   cond: hasMM,
 }, {
   key: 'shadowFastBoat',
-  name: 'Fast Shadw Temple Boat',
+  name: 'Fast Shadow Temple Boat',
   category: 'main.misc',
   type: 'boolean',
   description: 'Speeds up the Shadow Temple Boat before the last part of the dungeon',
