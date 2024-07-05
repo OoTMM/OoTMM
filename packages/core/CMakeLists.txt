@@ -26,7 +26,9 @@ include_directories("${CMAKE_SOURCE_DIR}/include" "${CMAKE_SOURCE_DIR}/build/inc
 
 add_compile_definitions("F3DEX_GBI_2=1")
 
+# Linker scripts
 set(LDSCRIPT_IN "${CMAKE_SOURCE_DIR}/src/link.ld.in")
+set(LDSCRIPT_OVL_IN "${CMAKE_SOURCE_DIR}/src/link_ovl.ld.in")
 
 function(build game)
   # Common stuff
@@ -37,6 +39,9 @@ function(build game)
   set(ldscript_name "link_${game}.ld")
   set(ldscript "${CMAKE_BINARY_DIR}/${ldscript_name}")
 
+  set(ldscript_ovl_name "link_ovl_${game}.ld")
+  set(ldscript_ovl "${CMAKE_BINARY_DIR}/${ldscript_ovl_name}")
+
   add_custom_command(
     OUTPUT "${ldscript}"
     COMMAND "${CMAKE_C_COMPILER}" ${game_define} -I "${CMAKE_SOURCE_DIR}/include" -E -P -x c "${LDSCRIPT_IN}" -o "${ldscript}" -MMD -MF "${ldscript}.d" -MT "${ldscript_name}"
@@ -45,9 +50,20 @@ function(build game)
     COMMENT "Generating linker script for ${game}"
     VERBATIM
   )
-
   add_custom_target(
     ldscript_${game} DEPENDS "${ldscript}"
+  )
+
+  add_custom_command(
+    OUTPUT "${ldscript_ovl}"
+    COMMAND "${CMAKE_C_COMPILER}" ${game_define} -I "${CMAKE_SOURCE_DIR}/include" -E -P -x c "${LDSCRIPT_OVL_IN}" -o "${ldscript_ovl}" -MMD -MF "${ldscript_ovl}.d" -MT "${ldscript_ovl_name}"
+    DEPENDS "${LDSCRIPT_OVL_IN}"
+    DEPFILE "${ldscript_ovl}.d"
+    COMMENT "Generating overlay linker script for ${game}"
+    VERBATIM
+  )
+  add_custom_target(
+    ldscript_ovl_${game} DEPENDS "${ldscript_ovl}"
   )
 
   # Build
@@ -85,5 +101,17 @@ function(build game)
   install(FILES ${game_payload} ${game_patch} ${game_cosmetic_name} ${game_cosmetic_addr} DESTINATION "bin")
 endfunction()
 
+function (add_actor game name id file)
+  set(target_name "${game}_ovl_${name}")
+  set(ldscript_name "link_ovl_${game}.ld")
+  set(ldscript "${CMAKE_BINARY_DIR}/${ldscript_name}")
+
+  add_library(${target_name} SHARED "${CMAKE_CURRENT_SOURCE_DIR}/src/${file}")
+  set_target_properties(${target_name} PROPERTIES LINK_DEPENDS "${ldscript}" POSITION_INDEPENDENT_CODE FALSE)
+  target_link_options(${target_name} PRIVATE "-T${ldscript}")
+endfunction()
+
 build(oot)
 build(mm)
+
+add_actor(oot Obj_Tsubo 0x111 "oot/ovl_new/Obj/Obj_Tsubo.c")
