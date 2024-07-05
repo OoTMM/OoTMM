@@ -4,6 +4,7 @@ set(ARCH "mips64-ultra-elf")
 set(CMAKE_C_COMPILER "${ARCH}-gcc")
 set(CMAKE_ASM_COMPILER "${ARCH}-gcc")
 
+
 project(OoTMM C ASM)
 
 set(FLAGS "-EB -ffreestanding -nostdlib -fno-PIC -mabi=32 -mno-shared -mno-abicalls -march=vr4300 -mtune=vr4300 -mfix4300 -mfix-r4000 -G 0 -Os -Wall -Werror=implicit-function-declaration -Werror=implicit-int -Wimplicit-fallthrough")
@@ -25,6 +26,10 @@ include_directories(SYSTEM "${CMAKE_SOURCE_DIR}/third_party/ultralib/include" "$
 include_directories("${CMAKE_SOURCE_DIR}/include" "${CMAKE_SOURCE_DIR}/build/include")
 
 add_compile_definitions("F3DEX_GBI_2=1")
+
+# Tools
+set(TOOL_DIR  "${CMAKE_SOURCE_DIR}/../tools/bin")
+set(TOOL_ZOVL "${TOOL_DIR}/zovl")
 
 # Linker scripts
 set(LDSCRIPT_IN "${CMAKE_SOURCE_DIR}/src/link.ld.in")
@@ -100,10 +105,11 @@ function(build game)
   install(FILES ${game_payload} ${game_patch} ${game_cosmetic_name} ${game_cosmetic_addr} DESTINATION "bin")
 endfunction()
 
-function (add_actor game name id file)
+function (add_actor game name file)
   # Common stuff
   string(TOUPPER ${game} game_upper)
   set(target_name "${game}_ovl_${name}")
+  set(target_name_ovl "${game}_ovl_${name}.zactor")
   set(game_define "-DGAME_${game_upper}=1")
   set(game_map "${CMAKE_BINARY_DIR}/${game}_map.txt")
 
@@ -111,9 +117,20 @@ function (add_actor game name id file)
   set_target_properties(${target_name} PROPERTIES LINK_DEPENDS "${game_map}" POSITION_INDEPENDENT_CODE FALSE)
   target_link_options(${target_name} PRIVATE "-T${LDSCRIPT_OVL}" "-T${game_map}" "-Wl,--emit-relocs")
   target_compile_definitions(${target_name} PRIVATE ${game_define})
+
+  add_custom_command(
+    OUTPUT "${target_name_ovl}"
+    COMMAND "${TOOL_ZOVL}" "$<TARGET_FILE:${target_name}>" "${target_name_ovl}"
+    DEPENDS ${target_name}
+    COMMENT "Generating zactor for ${name}"
+    VERBATIM
+  )
+  add_custom_target(
+    ${target_name}_zactor ALL DEPENDS "${target_name_ovl}"
+  )
 endfunction()
 
 build(oot)
 build(mm)
 
-add_actor(mm Custom_Magic_Fire 0x02b "mm/ovl_new/Custom/Custom_Magic_Fire.c")
+add_actor(mm Custom_Magic_Fire "mm/ovl_new/Custom/Custom_Magic_Fire.c")
