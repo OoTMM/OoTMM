@@ -1,15 +1,5 @@
-#include <combo/defs.h>
-
 SECTIONS
 {
-#ifdef GAME_OOT
-# include "link_oot.in"
-#endif
-
-#ifdef GAME_MM
-# include "link_mm.in"
-#endif
-
   . = 0x80800000;
   .text : { SORT(*)(.text*); }
   .data : { SORT(*)(.data*); }
