@@ -3,6 +3,7 @@
 
 #include <combo/types.h>
 #include <combo/util.h>
+#include <combo/common/actor_init.h>
 
 typedef struct PACKED ALIGNED(0x4)
 {
@@ -34,5 +35,14 @@ typedef struct {
 } PlayerOverlay; /* size = 0x1C */
 
 _Static_assert(sizeof(PlayerOverlay) == 0x1C, "PlayerOverlay size is wrong");
+
+typedef struct
+{
+    u32              id;
+    const ActorInit* init;
+}
+OvlActorInfoMeta;
+
+#define OVL_ACTOR_INFO(id, init) __attribute__((section(".meta"))) OvlActorInfoMeta __meta = { (id), (void*)(u32)&(init) };
 
 #endif
