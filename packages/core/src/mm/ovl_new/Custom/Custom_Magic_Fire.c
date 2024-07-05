@@ -1,24 +1,14 @@
-/*
- * File: z_magic_fire.c
- * Overlay: ovl_Magic_Fire
- * Description: Din's Fire
- */
-
-#include "Custom_Magic_Fire.h"
+#include <combo.h>
 #include <combo/custom.h>
 #include <combo/player.h>
 #include <combo/magic.h>
 #include <combo/math.h>
 #include <combo/global.h>
+#include "Custom_Magic_Fire.h"
 
 #define FLAGS ((1 << 4) | (1 << 25)) /* (ACTOR_FLAG_4 | ACTOR_FLAG_25) */
 
-void MagicFire_Init(Actor* thisx, GameState_Play* play);
-void MagicFire_Destroy(Actor* thisx, GameState_Play* play);
-void MagicFire_Update(Actor* thisx, GameState_Play* play);
-void MagicFire_Draw(Actor* thisx, GameState_Play* play);
-
-void MagicFire_UpdateBeforeCast(Actor* thisx, GameState_Play* play);
+void MagicFire_UpdateBeforeCast(Actor_CustomMagicFire* this, GameState_Play* play);
 
 typedef enum {
     /* 0x00 */ DF_ACTION_INITIALIZE,
@@ -34,18 +24,6 @@ typedef enum {
     /* 0x03 */ DF_SCREEN_TINT_FADE_OUT,
     /* 0x04 */ DF_SCREEN_TINT_FINISHED
 } MagicFireScreenTint;
-
-ActorInit Magic_Fire_InitVars = {
-    /**/ AC_CUSTOM_SPELL_FIRE,
-    /**/ ACTORCAT_ITEMACTION,
-    /**/ FLAGS,
-    /**/ 1, /* OBJECT_GAMEPLAY_KEEP */
-    /**/ sizeof(MagicFire),
-    /**/ MagicFire_Init,
-    /**/ MagicFire_Destroy,
-    /**/ MagicFire_Update,
-    /**/ MagicFire_Draw,
-};
 
 static Vtx sSphereVtx[76] = {
 #include "sSphereVtx.vtx.inc"
@@ -138,9 +116,8 @@ static u8 sVertexIndices[] = {
     14, 20, 21, 23, 28, 30, 33, 34, 40, 41, 43, 48, 50, 55, 57, 62, 64, 65, 73, 74,
 };
 
-void MagicFire_Init(Actor* thisx, GameState_Play* play) {
-    MagicFire* this = (MagicFire*)thisx;
-
+void MagicFire_Init(Actor_CustomMagicFire* this, GameState_Play* play)
+{
     Actor_ProcessInitChain(&this->actor, sInitChain);
     this->action = 0;
     this->screenTintBehaviour = 0;
@@ -155,33 +132,12 @@ void MagicFire_Init(Actor* thisx, GameState_Play* play) {
     this->actor.room = -1;
 }
 
-void MagicFire_Destroy(Actor* thisx, GameState_Play* play) {
+void MagicFire_Destroy(Actor_CustomMagicFire* this, GameState_Play* play)
+{
     Magic_Reset(play);
 }
 
-void MagicFire_UpdateBeforeCast(Actor* thisx, GameState_Play* play) {
-    MagicFire* this = (MagicFire*)thisx;
-    Actor_Player* player = GET_LINK(play);
-
-    /* See `ACTOROVL_ALLOC_ABSOLUTE` */
-    /*! @bug This condition is too broad, the actor will also be killed by warp songs. But warp songs do not use an */
-    /*! actor which uses `ACTOROVL_ALLOC_ABSOLUTE`. There is no reason to kill the actor in this case. */
-    /* if ((play->msgCtx.msgMode == MSGMODE_OCARINA_CORRECT_PLAYBACK) || (play->msgCtx.msgMode == MSGMODE_SONG_PLAYED)) { */
-    /*     Actor_Kill(&this->actor); */
-    /*     return; */
-    /* } */
-
-    if (this->actionTimer > 0) {
-        this->actionTimer--;
-    } else {
-        this->actor.update = MagicFire_Update;
-        Player_PlaySfx(player, 0x879); /* NA_SE_PL_MAGIC_FIRE */
-    }
-    this->actor.world.pos = player->base.world.pos;
-}
-
-void MagicFire_Update(Actor* thisx, GameState_Play* play) {
-    MagicFire* this = (MagicFire*)thisx;
+void MagicFire_Update(Actor_CustomMagicFire* this, GameState_Play* play) {
     Actor_Player* player = GET_LINK(play);
 
     this->actor.world.pos = player->base.world.pos;
@@ -273,8 +229,32 @@ void MagicFire_Update(Actor* thisx, GameState_Play* play) {
     }
 }
 
-void MagicFire_Draw(Actor* thisx, GameState_Play* play) {
-    MagicFire* this = (MagicFire*)thisx;
+void MagicFire_UpdateBeforeCast(Actor_CustomMagicFire* this, GameState_Play* play)
+{
+    Actor_Player* player = GET_LINK(play);
+
+    /* See `ACTOROVL_ALLOC_ABSOLUTE` */
+    /*! @bug This condition is too broad, the actor will also be killed by warp songs. But warp songs do not use an */
+    /*! actor which uses `ACTOROVL_ALLOC_ABSOLUTE`. There is no reason to kill the actor in this case. */
+    /* if ((play->msgCtx.msgMode == MSGMODE_OCARINA_CORRECT_PLAYBACK) || (play->msgCtx.msgMode == MSGMODE_SONG_PLAYED)) { */
+    /*     Actor_Kill(&this->actor); */
+    /*     return; */
+    /* } */
+
+    if (this->actionTimer > 0)
+    {
+        this->actionTimer--;
+    }
+    else
+    {
+        this->actor.update = (ActorFunc)MagicFire_Update;
+        Player_PlaySfx(player, 0x879); /* NA_SE_PL_MAGIC_FIRE */
+    }
+    this->actor.world.pos = player->base.world.pos;
+}
+
+void MagicFire_Draw(Actor_CustomMagicFire* this, GameState_Play* play)
+{
     u32 gameplayFrames = play->gameplayFrames;
     s32 i;
     u8 alpha;
@@ -322,3 +302,17 @@ void MagicFire_Draw(Actor* thisx, GameState_Play* play) {
         }
     }
 }
+
+ActorInit Magic_Fire_InitVars = {
+    AC_CUSTOM_SPELL_FIRE,
+    ACTORCAT_ITEMACTION,
+    FLAGS,
+    1,
+    sizeof(Actor_CustomMagicFire),
+    (ActorFunc)MagicFire_Init,
+    (ActorFunc)MagicFire_Destroy,
+    (ActorFunc)MagicFire_Update,
+    (ActorFunc)MagicFire_Draw,
+};
+
+OVL_ACTOR_INFO(AC_CUSTOM_SPELL_FIRE, Magic_Fire_InitVars);
