@@ -109,25 +109,29 @@ function (add_actor game name file)
   # Common stuff
   string(TOUPPER ${game} game_upper)
   set(target_name "${game}_ovl_${name}")
-  set(target_name_ovl "${game}_ovl_${name}.zactor")
+  set(ovl "${CMAKE_BINARY_DIR}/ovl/${game}/${name}.zovlx")
   set(game_define "-DGAME_${game_upper}=1")
   set(game_map "${CMAKE_BINARY_DIR}/${game}_map.txt")
 
   add_executable(${target_name} "${CMAKE_CURRENT_SOURCE_DIR}/src/${file}")
-  set_target_properties(${target_name} PROPERTIES LINK_DEPENDS "${game_map};${LDSCRIPT_OVL}"  POSITION_INDEPENDENT_CODE FALSE)
+  set_target_properties(${target_name} PROPERTIES LINK_DEPENDS "${game_map};${LDSCRIPT_OVL}")
   target_link_options(${target_name} PRIVATE "-T${LDSCRIPT_OVL}" "-T${game_map}" "-Wl,--emit-relocs")
   target_compile_definitions(${target_name} PRIVATE ${game_define})
 
+  make_directory("ovl/${game}")
   add_custom_command(
-    OUTPUT "${target_name_ovl}"
-    COMMAND "${TOOL_ZOVL}" "$<TARGET_FILE:${target_name}>" "${target_name_ovl}"
+    OUTPUT "${ovl}"
+    COMMAND "${TOOL_ZOVL}" "$<TARGET_FILE:${target_name}>" "${ovl}"
     DEPENDS ${target_name} "${TOOL_ZOVL}"
     COMMENT "Generating zactor for ${name}"
     VERBATIM
   )
   add_custom_target(
-    ${target_name}_zactor ALL DEPENDS "${target_name_ovl}"
+    ${target_name}_zovl ALL DEPENDS "${ovl}"
   )
+
+  # Install
+  install(FILES ${ovl} DESTINATION "bin/ovl/${game}")
 endfunction()
 
 build(oot)
