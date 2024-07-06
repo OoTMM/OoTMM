@@ -1,29 +1,32 @@
-import { CONFIG, Game } from "./config";
-import { DecompressedRoms } from "./decompress";
+import { FILES } from '@ootmm/data';
+import { CONFIG, Game } from './config';
+import { DecompressedRoms } from './decompress';
+import { DmaData } from './dma';
 
 type VRamEntry = {
+  name: string;
   vstart: number;
   vend: number;
   base: number;
 };
 
 const DATA_VRAM_OOT: VRamEntry[] = [
-  { vstart: 0x80000460, vend: 0x80006830, base: 0x1060,   }, /* boot */
-  { vstart: 0x800110a0, vend: 0x80114dd0, base: 0xa87000, }, /* code */
-  { vstart: 0x80800000, vend: 0x808009c0, base: 0xb9da40, }, /* ovl_title */
-  { vstart: 0x80803880, vend: 0x8081379f, base: 0xba12c0, }, /* ovl_file_choose */
-  { vstart: 0x808301c0, vend: 0x80856720, base: 0xbcdb70, }, /* ovl_player_actor */
-  { vstart: 0x808137c0, vend: 0x8083014f, base: 0xbb11e0, }, /* kaleido_scope */
+  { name: 'oot/boot', vstart: 0x80000460, vend: 0x80006830, base: 0x1060,   }, /* boot */
+  { name: 'oot/code', vstart: 0x800110a0, vend: 0x80114dd0, base: 0xa87000, }, /* code */
+  { name: 'oot/ovl_title', vstart: 0x80800000, vend: 0x808009c0, base: 0xb9da40, }, /* ovl_title */
+  { name: 'oot/ovl_file_choose', vstart: 0x80803880, vend: 0x8081379f, base: 0xba12c0, }, /* ovl_file_choose */
+  { name: 'oot/ovl_player_actor', vstart: 0x808301c0, vend: 0x80856720, base: 0xbcdb70, }, /* ovl_player_actor */
+  { name: 'oot/kaleido_scope', vstart: 0x808137c0, vend: 0x8083014f, base: 0xbb11e0, }, /* kaleido_scope */
 ];
 
 const DATA_VRAM_MM: VRamEntry[] = [
-  { vstart: 0x80080060, vend: 0x8009b110, base: 0x1060,   }, /* boot */
-  { vstart: 0x800a5ac0, vend: 0x801e3fa0, base: 0xb3c000, }, /* code */
-  { vstart: 0x80800000, vend: 0x80800910, base: 0xc7a4e0, }, /* ovl_title */
-  { vstart: 0x80803df0, vend: 0x80804010, base: 0xc7e2d0, }, /* ovl_opening */
-  { vstart: 0x80804010, vend: 0x80814e80, base: 0xc7e4f0, }, /* ovl_file_choose */
-  { vstart: 0x8082da90, vend: 0x80862af0, base: 0xca7f00, }, /* ovl_player_actor */
-  { vstart: 0x808160a0, vend: 0x8082da50, base: 0xc90550, }, /* kaleido_scope */
+  { name: 'mm/boot', vstart: 0x80080060, vend: 0x8009b110, base: 0x1060,   }, /* boot */
+  { name: 'mm/code', vstart: 0x800a5ac0, vend: 0x801e3fa0, base: 0xb3c000, }, /* code */
+  { name: 'mm/ovl_title',vstart: 0x80800000, vend: 0x80800910, base: 0xc7a4e0, }, /* ovl_title */
+  { name: 'mm/ovl_opening',vstart: 0x80803df0, vend: 0x80804010, base: 0xc7e2d0, }, /* ovl_opening */
+  { name: 'mm/ovl_file_choose',vstart: 0x80804010, vend: 0x80814e80, base: 0xc7e4f0, }, /* ovl_file_choose */
+  { name: 'mm/ovl_player_actor', vstart: 0x8082da90, vend: 0x80862af0, base: 0xca7f00, }, /* ovl_player_actor */
+  { name: 'mm/kaleido_scope',vstart: 0x808160a0, vend: 0x8082da50, base: 0xc90550, }, /* kaleido_scope */
 ];
 
 const DATA_VRAM = {
@@ -33,12 +36,27 @@ const DATA_VRAM = {
 
 export class Addresses {
   private vram: VRamEntry[];
+  private dma: DmaData;
 
   constructor(
     private game: Game,
     private rom: Buffer,
   ) {
+    const gc = CONFIG[game];
+    const dmaData = rom.subarray(gc.dmaAddr, gc.dmaAddr + gc.dmaCount * 0x10);
+    this.dma = new DmaData(dmaData);
     this.vram = this.makeVramTable();
+  }
+
+  private filenameFromVaddr(vaddr: number): string {
+    for (let i = 0; i < this.dma.count(); ++i) {
+      const entry = this.dma.read(i);
+      if (vaddr >= entry.virtStart && vaddr < entry.virtEnd) {
+        return FILES[this.game][i];
+      }
+    }
+
+    throw new Error(`Virtual address ${vaddr.toString(16)} not found in dma table`);
   }
 
   private makeVramTable() {
@@ -53,7 +71,8 @@ export class Addresses {
       const vend = this.rom.readUInt32BE(addr + 0x0c);
       addr += 0x20;
       if (vstart > 0) {
-        vram.push({ vstart, vend, base });
+        const name = this.filenameFromVaddr(base);
+        vram.push({ name: `${this.game}/${name}`, vstart, vend, base });
       }
     }
 
@@ -65,20 +84,26 @@ export class Addresses {
       const vend = this.rom.readUInt32BE(addr + 0x0c);
       addr += 0x1c;
       if (vstart > 0) {
-        vram.push({ vstart, vend, base });
+        const name = this.filenameFromVaddr(base);
+        vram.push({ name, vstart, vend, base });
       }
     }
 
     return vram;
   }
 
-  virtualToPhysical(addr: number) {
+  file(addr: number) {
     for (const entry of this.vram) {
       if (addr >= entry.vstart && addr < entry.vend) {
-        return entry.base + (addr - entry.vstart);
+        return { filename: entry.name, addr: entry.base + (addr - entry.vstart) };
       }
     }
+
     throw new Error(`Virtual address ${addr.toString(16)} not found in vram table`);
+  }
+
+  virtualToPhysical(addr: number) {
+    return this.file(addr).addr;
   }
 };
 
