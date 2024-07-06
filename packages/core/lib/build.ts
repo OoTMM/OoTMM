@@ -20,20 +20,14 @@ async function build() {
     comboCodegen(dummyMonitor),
     cosmeticsAssets(opts),
   ]);
-  const b = await comboBuild({ debug: false, seed: 'BUILD', settings: DEFAULT_SETTINGS, cosmetics: DEFAULT_COSMETICS, random: DEFAULT_RANDOM_SETTINGS });
+  const installDir = await comboBuild({ debug: false, seed: 'BUILD', settings: DEFAULT_SETTINGS, cosmetics: DEFAULT_COSMETICS, random: DEFAULT_RANDOM_SETTINGS });
 
   /* Create the zip */
   const zip = new JSZip();
 
-  /* Add the payload and the patches */
-  await Promise.all(
-    Object.entries(b).map(async ([game, { payload, patches, cosmetic_name, cosmetic_addr }]) => {
-      zip.file(`${game}_payload.bin`, payload);
-      zip.file(`${game}_patch.bin`, patches);
-      zip.file(`${game}_cosmetic_name.bin`, cosmetic_name);
-      zip.file(`${game}_cosmetic_addr.bin`, cosmetic_addr);
-    })
-  );
+  /* Zip the install tree */
+  const files = globSync('**/*', { cwd: installDir, nodir: true });
+  await Promise.all(files.map(async (filename) => zip.file(filename, await fs.readFile(path.join(installDir, filename)))));
 
   /* Add the extra assets */
   await customAssetsKeep(opts);

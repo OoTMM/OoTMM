@@ -1,17 +1,16 @@
-import { GameAddresses } from "../addresses";
-import { BuildOutput } from "../build";
-import { GAMES } from "../config";
-import { DecompressedRoms } from "../decompress";
-import { LogicResult } from "../logic";
-import { Monitor } from "../monitor";
-import { Settings } from "../settings";
-import { Patcher } from "./patcher";
-import { Patchfile } from "./patchfile";
-import { patchRandomizer } from "./randomizer";
-import { PatchGroup } from "./group";
-import { isEntranceShuffle } from "../logic/helpers";
-import { Options } from "../options";
-import { World } from "../logic/world";
+import { GameAddresses } from '../addresses';
+import { GAMES } from '../config';
+import { DecompressedRoms } from '../decompress';
+import { LogicResult } from '../logic';
+import { Monitor } from '../monitor';
+import { Settings } from '../settings';
+import { Patcher } from './patcher';
+import { Patchfile } from './patchfile';
+import { patchRandomizer } from './randomizer';
+import { PatchGroup } from './group';
+import { isEntranceShuffle } from '../logic/helpers';
+import { FileResolver, Options } from '../options';
+import { World } from '../logic/world';
 
 export type BuildPatchfileIn = {
   opts: Options;
@@ -19,9 +18,9 @@ export type BuildPatchfileIn = {
   monitor: Monitor;
   roms: DecompressedRoms;
   addresses: GameAddresses;
-  build: BuildOutput;
   logic: LogicResult;
   settings: Settings;
+  resolver: FileResolver;
 };
 
 function asmPatchGroups(world: World, settings: Settings) {
@@ -84,7 +83,7 @@ function asmPatchGroups(world: World, settings: Settings) {
   return keys.filter((k) => groups[k]);
 }
 
-export function buildPatchfiles(args: BuildPatchfileIn): Patchfile[] {
+export async function buildPatchfiles(args: BuildPatchfileIn): Promise<Patchfile[]> {
   args.monitor.log("Building Patchfile");
   const patches: Patchfile[] = [];
 
@@ -96,11 +95,12 @@ export function buildPatchfiles(args: BuildPatchfileIn): Patchfile[] {
     for (const game of GAMES) {
       /* Apply ASM patches */
       const rom = args.roms[game].rom;
-      const patcher = new Patcher(args.opts, game, rom, groups, args.addresses, args.build[game].patches, p);
+      const patches = await args.resolver.fetch(`${game}_patch.bin`);
+      const patcher = new Patcher(args.opts, game, rom, groups, args.addresses, patches, p);
       patcher.run();
 
       /* Pack the payload */
-      const payload = args.build[game].payload;
+      const payload = await args.resolver.fetch(`${game}_payload.bin`);
       if (payload.length > (game === 'mm' ? 0x50000 : 0x80000)) {
         throw new Error(`Payload too large ${game}`);
       }
@@ -110,7 +110,8 @@ export function buildPatchfiles(args: BuildPatchfileIn): Patchfile[] {
       const gameCosmetics: {[k: string]: number[]} = {};
       meta.cosmetics = meta.cosmetics || {};
       meta.cosmetics[game] = gameCosmetics;
-      const { cosmetic_name, cosmetic_addr } = args.build[game];
+      const cosmetic_name = await args.resolver.fetch(`${game}_cosmetic_name.bin`);
+      const cosmetic_addr = await args.resolver.fetch(`${game}_cosmetic_addr.bin`);
       const names = cosmetic_name.toString('utf-8').split(/\0+/);
       names.pop();
 
