@@ -5,6 +5,7 @@
 #include <combo/rand.h>
 #include <combo/player.h>
 #include <combo/effect.h>
+#include <combo/csmc.h>
 #include "Obj_Tsubo.h"
 
 #define FLAGS (ACTOR_FLAG_4 | ACTOR_FLAG_23)
@@ -361,6 +362,24 @@ void ObjTsubo_Update(Actor_ObjTsubo* this, GameState_Play* play)
 
 void ObjTsubo_Draw(Actor_ObjTsubo* this, GameState_Play* play)
 {
+    int type;
+    /*
+    ActorFunc draw;
+    ComboItemOverride o;
+
+    if (ObjTsubo_IsShuffled(this))
+        comboXflagItemOverride(&o, &this->xflag, 0);
+    else
+        o.gi = 0;
+
+
+    csmcPotPreDraw(&this->base, play, o.gi, type);
+    */
+    if (this->actor.variable & (1 << 8))
+        type = CSMC_POT_NORMAL;
+    else
+        type = CSMC_POT_NORMAL_DANGEON;
+    csmcPotPreDraw(&this->actor, play, GI_OOT_RUPEE_GREEN, type); /* DEBUG */
     Gfx_DrawDListOpa(play, D_80BA1B84[(this->actor.variable >> 8) & 1]);
 }
 
