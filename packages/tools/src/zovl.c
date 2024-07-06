@@ -306,21 +306,19 @@ static int loadRelocs(State* state, int secId)
 {
     Elf32_Shdr shdr;
     Elf32_Rel rel;
-    uint16_t hi16;
-    uint32_t hi16off;
+    uint16_t hi16[32] = { 0 };
+    uint32_t hi16off[32] = { 0 };
+    int hi16pending[32] = { 0 };
     uint32_t off;
     uint32_t data;
     uint32_t addr;
-    int hi16pending;
     int count;
     int type;
+    int reg;
 
     /* Find the section */
     if (locateSection(state, &shdr, sSectionRelNames[secId]))
         return 0;
-
-    hi16 = 0;
-    hi16pending = 0;
 
     fseek(state->in, shdr.sh_offset, SEEK_SET);
     count = shdr.sh_size / sizeof(Elf32_Rel);
@@ -339,17 +337,19 @@ static int loadRelocs(State* state, int secId)
         switch (type)
         {
         case R_MIPS_HI16:
-            hi16 = data & 0xffff;
-            hi16pending = 1;
-            hi16off = off;
+            reg = (data >> 0x10) & 0x1f;
+            hi16[reg] = data & 0xffff;
+            hi16pending[reg] = 1;
+            hi16off[reg] = off;
             addr = 0;
             break;
         case R_MIPS_LO16:
-            addr = ((uint32_t)hi16 << 16) + ((int16_t)(data & 0xffff));
-            if (hi16pending)
+            reg = (data >> 0x15) & 0x1f;
+            addr = ((uint32_t)hi16[reg] << 16) + ((int16_t)(data & 0xffff));
+            if (hi16pending[reg])
             {
-                hi16pending = 0;
-                emitReloc(state, secId, R_MIPS_HI16, addr, hi16off);
+                hi16pending[reg] = 0;
+                emitReloc(state, secId, R_MIPS_HI16, addr, hi16off[reg]);
             }
             emitReloc(state, secId, R_MIPS_LO16, addr, off);
             break;
@@ -383,6 +383,7 @@ static int emit(State* state)
     vend = vstart;
     for (int i = 0; i < 4; ++i)
         vend += state->sectionSize[i];
+    vend += round16((state->relocsCount + 6) * 4);
     state->meta[2] = eswap32(vstart);
     state->meta[3] = eswap32(vend);
 

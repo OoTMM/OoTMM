@@ -1,5 +1,5 @@
 import { GameAddresses } from '../addresses';
-import { GAMES } from '../config';
+import { CONFIG, GAMES } from '../config';
 import { DecompressedRoms } from '../decompress';
 import { LogicResult } from '../logic';
 import { Monitor } from '../monitor';
@@ -83,9 +83,12 @@ function asmPatchGroups(world: World, settings: Settings) {
   return keys.filter((k) => groups[k]);
 }
 
+
+
 export async function buildPatchfiles(args: BuildPatchfileIn): Promise<Patchfile[]> {
   args.monitor.log("Building Patchfile");
   const patches: Patchfile[] = [];
+  let ovlAddr = 0xe0000000;
 
   for (let world = 0; world < args.settings.players; ++world) {
     const p = args.patch.dup();
@@ -93,6 +96,8 @@ export async function buildPatchfiles(args: BuildPatchfileIn): Promise<Patchfile
     const meta: any = {};
 
     for (const game of GAMES) {
+      const gc = CONFIG[game];
+
       /* Apply ASM patches */
       const rom = args.roms[game].rom;
       const patches = await args.resolver.fetch(`${game}_patch.bin`);
@@ -105,6 +110,36 @@ export async function buildPatchfiles(args: BuildPatchfileIn): Promise<Patchfile
         throw new Error(`Payload too large ${game}`);
       }
       p.addNewFile(`${game}/payload`, game === 'oot' ? 0xf0000000 : 0xf0100000, payload, false);
+
+      /* Handle extra overlays */
+      const allOverlays = await args.resolver.glob(/ovl\/(oot|mm)\/.+\.zovlx$/);
+      const overlays = allOverlays.filter((f) => f.startsWith(`ovl/${game}`));
+      for (const ov of overlays) {
+        /* Resolve and inject the new overlay */
+        const raw = await args.resolver.fetch(ov);
+        const header = raw.subarray(0, 0x10);
+        const data = raw.subarray(0x10);
+        p.addNewFile(ov, ovlAddr, data, true);
+        const vromStart = ovlAddr;
+        const vromEnd = ovlAddr + data.length;
+        ovlAddr = vromEnd;
+
+        /* Parse the header */
+        const actorId = header.readUInt32BE(0x00);
+        const vramInit = header.readUInt32BE(0x04);
+        const vramStart = header.readUInt32BE(0x08);
+        const vramEnd = header.readUInt32BE(0x0c);
+
+        const patch = Buffer.alloc(4 * 6);
+        patch.writeUInt32BE(vromStart,  0x00);
+        patch.writeUInt32BE(vromEnd,    0x04);
+        patch.writeUInt32BE(vramStart,  0x08);
+        patch.writeUInt32BE(vramEnd,    0x0c);
+        patch.writeUInt32BE(0,          0x10);
+        patch.writeUInt32BE(vramInit,   0x14);
+
+        p.addDataPatch(game, gc.actorsOvlAddr + actorId * 0x20, patch);
+      }
 
       /* Handle cosmetics */
       const gameCosmetics: {[k: string]: number[]} = {};
