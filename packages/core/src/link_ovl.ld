@@ -1,10 +1,12 @@
 SECTIONS
 {
   . = 0x80800000;
-  .text : { SORT(*)(.text*); }
-  .data : { SORT(*)(.data*); }
-  .rodata : { SORT(*)(.rodata*); }
-  .bss : { SORT(*)(.bss*); }
+
+  .text :   ALIGN(16) { SORT(*)(.text*); }
+  .data :   ALIGN(16) { SORT(*)(.data*); SORT(*)(.bss*); }
+  .rodata : ALIGN(16) { SORT(*)(.rodata*); }
+  .bss :    ALIGN(16) { }
+
   .meta : { SORT(*)(.meta*); }
   /DISCARD/ : { *(.*); }
 }

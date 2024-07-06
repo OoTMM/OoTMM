@@ -137,7 +137,8 @@ void MagicFire_Destroy(Actor_CustomMagicFire* this, GameState_Play* play)
     Magic_Reset(play);
 }
 
-void MagicFire_Update(Actor_CustomMagicFire* this, GameState_Play* play) {
+void MagicFire_Update(Actor_CustomMagicFire* this, GameState_Play* play)
+{
     Actor_Player* player = GET_LINK(play);
 
     this->actor.world.pos = player->base.world.pos;
@@ -314,5 +315,6 @@ ActorInit Magic_Fire_InitVars = {
     (ActorFunc)MagicFire_Update,
     (ActorFunc)MagicFire_Draw,
 };
+
 
 OVL_ACTOR_INFO(AC_CUSTOM_SPELL_FIRE, Magic_Fire_InitVars);
