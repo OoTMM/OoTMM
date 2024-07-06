@@ -3,7 +3,7 @@
 
 int EnYb_HasGivenItem(Actor* this)
 {
-    if (Actor_HasParent(this))
+    if (Actor_HasParentZ(this))
     {
         gMmExtraFlags2.maskKamaro = 1;
         return 1;

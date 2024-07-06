@@ -5,7 +5,7 @@ void EnZl4_Update6(Actor* actor, GameState_Play* play)
 {
     SetEventChk(EV_OOT_CHK_ZELDA_LETTER);
     SetEventChk(EV_OOT_CHK_SONG_ZELDA);
-    ActorDestroy(actor);
+    Actor_Kill(actor);
 
     play->transitionTrigger = TRANS_TYPE_NORMAL;
     play->transitionType = TRANS_GFX_SHORTCUT;
@@ -23,7 +23,7 @@ void EnZl4_Update5(Actor* actor, GameState_Play* play)
 
 void EnZl4_Update4(Actor* actor, GameState_Play* play)
 {
-    if (Actor_HasParent(actor))
+    if (Actor_HasParentZ(actor))
     {
         actor->parent = NULL;
         EnZl4_Update5(actor, play);
@@ -35,7 +35,7 @@ void EnZl4_Update4(Actor* actor, GameState_Play* play)
 
 void EnZl4_Update3(Actor* actor, GameState_Play* play)
 {
-    if (Actor_HasParent(actor))
+    if (Actor_HasParentZ(actor))
     {
         actor->parent = NULL;
         EnZl4_Update4(actor, play);

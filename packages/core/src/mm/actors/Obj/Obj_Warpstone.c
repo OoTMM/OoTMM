@@ -70,8 +70,8 @@ void ObjWarpstone_GiveItem(Actor* this, GameState_Play* play)
         return;
     }
 
-    link = GET_LINK(play);
-    if (Actor_HasParent(this))
+    link = GET_PLAYER(play);
+    if (Actor_HasParentZ(this))
     {
         /* Prevents duping */
         EnableOwl(id);

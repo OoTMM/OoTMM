@@ -100,7 +100,7 @@ void EnTab_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
     Actor_Player* link;
     int sc;
 
-    link = GET_LINK(play);
+    link = GET_PLAYER(play);
 
     if (link->state & PLAYER_ACTOR_STATE_GET_ITEM)
         return;
@@ -130,7 +130,7 @@ void EnTab_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
         break;
     default:
         sItemIndex = -1;
-        this->parent = &link->base;
+        this->parent = &link->actor;
         PlayerDisplayTextBox(play, 0x2b0c, NULL);
         if (sc != SC_ERR_NORUPEES)
             comboTextMessageCantBuy(play, 0);

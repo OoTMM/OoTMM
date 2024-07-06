@@ -43,7 +43,7 @@ static void EnItem00_DrawXflag(Actor_EnItem00* this, GameState_Play* play)
 
     ModelViewTranslate(this->base.world.pos.x, this->base.world.pos.y + 20.f, this->base.world.pos.z, MAT_SET);
     ModelViewScale(0.35f, 0.35f, 0.35f, MAT_MUL);
-    ModelViewRotateY(this->base.rot2.y * ((M_PI * 2.f) / 32767.f), MAT_MUL);
+    ModelViewRotateY(this->base.shape.rot.y * ((M_PI * 2.f) / 32767.f), MAT_MUL);
     Draw_Gi(play, &this->base, gi, 0);
 }
 
@@ -51,7 +51,7 @@ static int EnItem00_XflagCanCollect(Actor_EnItem00* this, GameState_Play* play)
 {
     Actor_Player* link;
 
-    link = GET_LINK(play);
+    link = GET_PLAYER(play);
     if (link->state & (PLAYER_ACTOR_STATE_FROZEN | PLAYER_ACTOR_STATE_EPONA))
         return 0;
 
@@ -66,7 +66,7 @@ static void EnItem00_UpdateXflagDrop(Actor_EnItem00* this, GameState_Play* play)
 {
     /* Artifically disable collisions if the items shouldn't be collected */
     if (!EnItem00_XflagCanCollect(this, play))
-        this->base.xzDistanceFromLink = 100.f;
+        this->base.xzDistToPlayer = 100.f;
 
     /* Item permanence */
     if (!this->isExtendedCollected)

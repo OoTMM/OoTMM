@@ -5,7 +5,7 @@ int EnGeg_HasGivenItem(Actor* actor)
 {
     int ret;
 
-    ret = Actor_HasParent(actor);
+    ret = Actor_HasParentZ(actor);
     if (ret)
         gMmExtraFlags.maskDonGero = 1;
     return ret;

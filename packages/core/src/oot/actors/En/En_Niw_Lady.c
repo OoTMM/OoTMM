@@ -22,7 +22,7 @@ void EnNiwLady_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, flo
     int npc;
 
     npc = -1;
-    if (!(GET_LINK(play)->state & PLAYER_ACTOR_STATE_GET_ITEM))
+    if (!(GET_PLAYER(play)->state & PLAYER_ACTOR_STATE_GET_ITEM))
         Message_Close(play);
     switch (gi)
     {

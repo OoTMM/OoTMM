@@ -88,7 +88,7 @@ void EnTorch2_Update(Actor_CustomEnTorch2 *this, GameState_Play *play)
 
     this->base.gravity = -1.0f;
     ActorUpdateVelocity(&this->base);
-    Actor_SetCollisionCylinder(play, &this->base, 30.0f, 20.0f, 70.0f, UPDBGCHECKINFO_FLAG_0 | UPDBGCHECKINFO_FLAG_2);
+    Actor_UpdateBgCheckInfo(play, &this->base, 30.0f, 20.0f, 70.0f, UPDBGCHECKINFO_FLAG_0 | UPDBGCHECKINFO_FLAG_2);
 
     if (this->framesUntilNextState == 0)
     {
@@ -107,7 +107,7 @@ void EnTorch2_Update(Actor_CustomEnTorch2 *this, GameState_Play *play)
             if (this->alpha == 0)
             {
                 Math_Vec3f_Copy(&this->base.world.pos, &this->base.home.pos);
-                this->base.rot2.y = this->base.home.rot.y;
+                this->base.shape.rot.y = this->base.home.rot.y;
                 this->state = TORCH2_STATE_FADING_IN;
             }
             targetAlpha = 0;
@@ -115,7 +115,7 @@ void EnTorch2_Update(Actor_CustomEnTorch2 *this, GameState_Play *play)
         else if (this->state == TORCH2_STATE_FADING_IN)
         {
             /* Stay semitransparent until the player moves away */
-            if ((this->base.xzDistanceFromLink > 32.0f) || (fabsf(this->base.yDistanceFromLink) > 70.0f))
+            if ((this->base.xzDistToPlayer > 32.0f) || (fabsf(this->base.yDistanceFromLink) > 70.0f))
             {
                 this->state = TORCH2_STATE_SOLID;
             }
@@ -147,7 +147,7 @@ void EnTorch2_UpdateDeath(Actor_CustomEnTorch2 *this, GameState_Play *play)
     /* Fall down and become transparent, then delete once invisible */
     if (Math_StepToS(&this->alpha, 0, 8))
     {
-        ActorDestroy(&this->base);
+        Actor_Kill(&this->base);
         return;
     }
 

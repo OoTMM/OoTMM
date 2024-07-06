@@ -27,20 +27,20 @@ static void ItemDecoy_Draw(Actor_ItemDecoy* this, GameState_Play* play)
     if (this->gi == GI_NONE)
         return;
 
-    link = GET_LINK(play);
-    pos.x = link->base.world.pos.x;
-    pos.y = link->base.world.pos.y + Player_GetHeight(link) + 20.f;
-    pos.z = link->base.world.pos.z;
+    link = GET_PLAYER(play);
+    pos.x = link->actor.world.pos.x;
+    pos.y = link->actor.world.pos.y + Player_GetHeight(link) + 20.f;
+    pos.z = link->actor.world.pos.z;
     ModelViewTranslate(pos.x, pos.y, pos.z, MAT_SET);
     ModelViewScale(0.35f, 0.35f, 0.35f, MAT_MUL);
-    ModelViewRotateY(this->base.rot2.y * ((M_PI * 2.f) / 32767.f), MAT_MUL);
+    ModelViewRotateY(this->base.shape.rot.y * ((M_PI * 2.f) / 32767.f), MAT_MUL);
     Draw_Gi(play, &this->base, this->gi, 0);
 }
 
 static void ItemDecoy_HandlerTimer(Actor_ItemDecoy* this, GameState_Play* play)
 {
     if (!this->timer)
-        ActorDestroy(&this->base);
+        Actor_Kill(&this->base);
 }
 
 static int ItemDecoy_CanCollect(Actor_ItemDecoy* this, GameState_Play* play)
@@ -51,7 +51,7 @@ static int ItemDecoy_CanCollect(Actor_ItemDecoy* this, GameState_Play* play)
         return 0;
     if (gSaveContext.gameMode || (gSaveContext.minigameState == 1))
         return 0;
-    link = GET_LINK(play);
+    link = GET_PLAYER(play);
     if (link->state & (PLAYER_ACTOR_STATE_FROZEN | PLAYER_ACTOR_STATE_GET_ITEM | PLAYER_ACTOR_STATE_CUTSCENE_FROZEN))
         return 0;
 
@@ -116,7 +116,7 @@ static void ItemDecoy_HandlerImportantItem(Actor_ItemDecoy* this, GameState_Play
     PlayerDisplayTextBox(play, DUMMY_MSG, NULL);
     comboTextHijackItemEx(play, &o, this->count);
 
-    link = GET_LINK(play);
+    link = GET_PLAYER(play);
     if (link->state & PLAYER_ACTOR_STATE_EPONA)
     {
         sMsgTimer = 60;
@@ -157,16 +157,16 @@ static void ItemDecoy_Update(Actor_ItemDecoy* this, GameState_Play* play)
 {
     Actor_Player* link;
 
-    link = GET_LINK(play);
-    this->base.world.pos.x = link->base.world.pos.x;
-    this->base.world.pos.y = link->base.world.pos.y;
-    this->base.world.pos.z = link->base.world.pos.z;
-    this->base.xzDistanceFromLink = 0.f;
+    link = GET_PLAYER(play);
+    this->base.world.pos.x = link->actor.world.pos.x;
+    this->base.world.pos.y = link->actor.world.pos.y;
+    this->base.world.pos.z = link->actor.world.pos.z;
+    this->base.xzDistToPlayer = 0.f;
 
     /* Rotation */
     if (this->timer)
         this->timer--;
-    this->base.rot2.y += 0x200;
+    this->base.shape.rot.y += 0x200;
     this->handler(this, play);
 }
 

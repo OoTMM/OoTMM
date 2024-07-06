@@ -7,6 +7,39 @@
 #include <combo/math/vec.h>
 #include <combo/misc.h>
 
+#define ACTOR_FLAG_0    (1 <<  0)
+#define ACTOR_FLAG_1    (1 <<  1)
+#define ACTOR_FLAG_2    (1 <<  2)
+#define ACTOR_FLAG_3    (1 <<  3)
+#define ACTOR_FLAG_4    (1 <<  4)
+#define ACTOR_FLAG_5    (1 <<  5)
+#define ACTOR_FLAG_6    (1 <<  6)
+#define ACTOR_FLAG_7    (1 <<  7)
+#define ACTOR_FLAG_8    (1 <<  8)
+#define ACTOR_FLAG_9    (1 <<  9)
+#define ACTOR_FLAG_10   (1 <<  10)
+#define ACTOR_FLAG_11   (1 <<  11)
+#define ACTOR_FLAG_12   (1 <<  12)
+#define ACTOR_FLAG_13   (1 <<  13)
+#define ACTOR_FLAG_14   (1 <<  14)
+#define ACTOR_FLAG_15   (1 <<  15)
+#define ACTOR_FLAG_16   (1 <<  16)
+#define ACTOR_FLAG_17   (1 <<  17)
+#define ACTOR_FLAG_18   (1 <<  18)
+#define ACTOR_FLAG_19   (1 <<  19)
+#define ACTOR_FLAG_20   (1 <<  20)
+#define ACTOR_FLAG_21   (1 <<  21)
+#define ACTOR_FLAG_22   (1 <<  22)
+#define ACTOR_FLAG_23   (1 <<  23)
+#define ACTOR_FLAG_24   (1 <<  24)
+#define ACTOR_FLAG_25   (1 <<  25)
+#define ACTOR_FLAG_26   (1 <<  26)
+#define ACTOR_FLAG_27   (1 <<  27)
+#define ACTOR_FLAG_28   (1 <<  28)
+#define ACTOR_FLAG_29   (1 <<  29)
+#define ACTOR_FLAG_30   (1 <<  30)
+#define ACTOR_FLAG_31   (1 <<  31)
+
 #define ACTORCAT_SWITCH         0x00
 #define ACTORCAT_BG             0x01
 #define ACTORCAT_PLAYER         0x02
@@ -21,6 +54,7 @@
 #define ACTORCAT_CHEST          0x0b
 #define ACTORCAT_MAX            0x0c
 
+typedef struct CollisionPoly CollisionPoly;
 typedef struct GameState_Play GameState_Play;
 typedef struct ActorContext ActorContext;
 typedef struct Actor Actor;
@@ -34,6 +68,33 @@ typedef struct
 }
 PosRot;
 
+typedef struct
+{
+    Vec3s   rot;
+    s16     face;
+    f32     yOffset;
+    void*   shadowDraw;
+    f32     shadowScale;
+    u8      shadowAlpha;
+    u8      feetFloorFlags;
+    u8      unk_16;
+    u8      unk_17;
+    Vec3f   feetPos[2];
+}
+ActorShape;
+
+ASSERT_SIZE(ActorShape, 0x30);
+ASSERT_OFFSET(ActorShape, rot,              0x00);
+ASSERT_OFFSET(ActorShape, face,             0x06);
+ASSERT_OFFSET(ActorShape, yOffset,          0x08);
+ASSERT_OFFSET(ActorShape, shadowDraw,       0x0c);
+ASSERT_OFFSET(ActorShape, shadowScale,      0x10);
+ASSERT_OFFSET(ActorShape, shadowAlpha,      0x14);
+ASSERT_OFFSET(ActorShape, feetFloorFlags,   0x15);
+ASSERT_OFFSET(ActorShape, unk_16,           0x16);
+ASSERT_OFFSET(ActorShape, unk_17,           0x17);
+ASSERT_OFFSET(ActorShape, feetPos,          0x18);
+
 typedef struct Actor
 {
     u16         id;
@@ -42,7 +103,7 @@ typedef struct Actor
     s32         flags;
     PosRot      home;
     u16         variable;
-    s8          objTableIndex;
+    s8          objectSlot;
     s8          targetMode;
 
 #if defined(GAME_OOT)
@@ -63,7 +124,7 @@ typedef struct Actor
     float       targetArrowOffset;
     Vec3f       scale;
     Vec3f       velocity;
-    float       speedXZ;
+    float       speed;
     float       gravity;
     float       minVelocityY;
     CollisionPoly* wallPoly; /* Wall polygon the actor is touching */
@@ -72,29 +133,34 @@ typedef struct Actor
     u8          floorBgId; /* Bg ID of the floor polygon directly below the actor */
     s16         wallYaw; /* Y rotation of the wall polygon the actor is touching */
     f32         floorHeight; /* Y position of the floor polygon directly below the actor */
-    f32         yDistToWater; /* Distance to the surface of active waterbox. Negative value means above water */
+    f32         depthInWater; /* Distance to the surface of active waterbox. Negative value means above water */
     u16         bgCheckFlags; /* Flags indicating how the actor is interacting with collision */
     s16         yawTowardsPlayer; /* Y rotation difference between the actor and the player */
     f32         xyzDistToPlayerSq; /* Squared distance between the actor and the player */
-    f32         xzDistanceFromLink;
+    f32         xzDistToPlayer;
     f32         yDistanceFromLink;
-    CollisionCheckInfo colChkInfo;
-    Vec3s       rot2;
-    char        unk_ba[2];
-    float       modelOffsetY;
-    char        unk_c0[0x4e];
-    u16         messageId;
-    u16         freezeTimer;
-    char        unk_11A[0x6];
-    Actor*      parent;
-    Actor*      child;
-    Actor*      prev;
-    Actor*      next;
-    void*       init;
-    void*       fini;
-    void*       update;
-    void*       draw;
-    void*       ovl;
+    CollisionCheckInfo  colChkInfo;
+    ActorShape          shape;
+    Vec3f               projectedPos;
+    float               projectedW;
+    float               uncullZoneForward;
+    float               uncullZoneScale;
+    float               uncullZoneDownward;
+    Vec3f               prevPos;
+    u8                  isTargeted;
+    u8                  targetPriority;
+    u16                 messageId;
+    u16                 freezeTimer;
+    char                unk_11A[0x6];
+    Actor*              parent;
+    Actor*              child;
+    Actor*              prev;
+    Actor*              next;
+    void*               init;
+    void*               fini;
+    void*               update;
+    void*               draw;
+    void*               ovl;
 }
 Actor;
 
@@ -119,8 +185,8 @@ ASSERT_OFFSET(Actor, type,      0x002);
 ASSERT_OFFSET(Actor, room,      0x003);
 ASSERT_OFFSET(Actor, home,      0x008);
 ASSERT_OFFSET(Actor, variable,  0x01c);
-ASSERT_OFFSET(Actor, parent, X(0x118));
-ASSERT_OFFSET(Actor, child, X(0x11c));
+ASSERT_OFFSET(Actor, parent,    X(0x118));
+ASSERT_OFFSET(Actor, child,     X(0x11c));
 ASSERT_OFFSET(Actor, prev,      X(0x120));
 ASSERT_OFFSET(Actor, next,      X(0x124));
 ASSERT_OFFSET(Actor, init,      X(0x128));
@@ -154,5 +220,7 @@ ASSERT_OFFSET(BlinkInfo, blinkTimer, 0x2);
 Actor* comboSpawnActor(ActorContext* actorCtx, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable);
 Actor* comboSpawnActorEx(ActorContext* actorCtx, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int ex1, int ex2, int ex3);
 void* actorAddr(u16 actorId, u32 addr);
+
+void Actor_UpdatePos(Actor *actor);
 
 #endif

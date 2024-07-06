@@ -97,7 +97,7 @@ void EnElf_Draw(Actor_EnElf* this, GameState_Play* play)
 #if defined(GAME_OOT)
 s32 EnElf_CantGiveItem(GameState_Play* play) {
     Actor_Player* link;
-    link = GET_LINK(play);
+    link = GET_PLAYER(play);
 
     if (link->state & (PLAYER_ACTOR_STATE_FROZEN | PLAYER_ACTOR_STATE_EPONA))
         return 1;

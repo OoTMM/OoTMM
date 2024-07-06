@@ -16,11 +16,11 @@ static void EnCs_MaskTradeCheck(Actor* this, GameState_Play* play)
 {
     Actor_Player* link;
 
-    link = GET_LINK(play);
+    link = GET_PLAYER(play);
     if (link->state & PLAYER_ACTOR_STATE_GET_ITEM)
         return;
 
-    if (Actor_HasParent(this))
+    if (Actor_HasParentZ(this))
     {
         this->parent = NULL;
         EnCs_AfterMaskTrade(this, play);
@@ -61,7 +61,7 @@ static int EnCs_ActorTalkedTo(Actor* this)
     Actor_Player* link;
     int ret;
 
-    link = GET_LINK(gPlay);
+    link = GET_PLAYER(gPlay);
     ret = ActorTalkedTo(this);
     if (ret && link->mask == MASK_SPOOKY && !(gSave.eventsItem[3] & 0x400))
     {

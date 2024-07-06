@@ -30,7 +30,7 @@ static void ItemEtcetera_ItemQuery(ComboItemQuery* q, Actor* this, s16 gi)
 
 static int ItemEtcetera_HasGivenItem(Actor* this)
 {
-    if (!Actor_HasParent(this))
+    if (!Actor_HasParentZ(this))
         return 0;
     if ((this->variable & 0xff) == 0x7)
         gOotExtraFlags.fireArrow = 1;

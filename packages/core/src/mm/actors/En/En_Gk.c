@@ -15,7 +15,7 @@ void EnGk_LearnSongLullaby(Actor* this, GameState_Play* play)
         return;
     }
 
-    if (Actor_HasParent(this))
+    if (Actor_HasParentZ(this))
     {
         gMmExtraFlags.songGoron = 1;
         SET_HANDLER(this, EnGk_HandlerNull);

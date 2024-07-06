@@ -726,7 +726,7 @@ void Play_UpdateWrapper(GameState_Play* play)
     malloc_check();
     comboCacheGarbageCollect();
     comboObjectsGC();
-    link = GET_LINK(play);
+    link = GET_PLAYER(play);
     Player_TryUpdateForm(link, play);
     Multi_Update(play);
     Play_Update(play);
@@ -799,8 +799,8 @@ void Play_SetupRespawnPointRaw(GameState_Play* play, int respawnId, int playerPa
 {
     Actor_Player* link;
 
-    link = GET_LINK(play);
-    Play_SetRespawnData(play, respawnId, gSave.entranceIndex, gPlay->roomCtx.curRoom.id, playerParams, &link->base.world.pos, link->base.rot2.y);
+    link = GET_PLAYER(play);
+    Play_SetRespawnData(play, respawnId, gSave.entranceIndex, gPlay->roomCtx.curRoom.id, playerParams, &link->actor.world.pos, link->actor.shape.rot.y);
 }
 
 void Play_SetupRespawnPoint(GameState_Play* play, int respawnId, int playerParams)

@@ -17,7 +17,7 @@ void comboCreditWarp(GameState_Play* play)
     Sram_SaveNewDay(play);
 
     /* Credit warp */
-    link = GET_LINK(play);
+    link = GET_PLAYER(play);
     link->state |= PLAYER_ACTOR_STATE_FROZEN;
     play->nextEntrance = ENTR_MM_TERMINA_FIELD_FROM_CLOCK_TOWN_WEST;
     play->transitionTrigger = TRANS_TRIGGER_NORMAL;

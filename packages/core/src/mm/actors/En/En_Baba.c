@@ -3,7 +3,7 @@
 
 int EnBaba_HasGiveItem(Actor* this)
 {
-    if (Actor_HasParent(this))
+    if (Actor_HasParentZ(this))
     {
         gMmExtraFlags2.maskBlast = 1;
         return 1;

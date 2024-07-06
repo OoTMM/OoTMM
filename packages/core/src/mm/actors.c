@@ -96,7 +96,7 @@ static void Actor_ByteCode_GiveItem(Actor* actor, GameState_Play* play, s16 gi, 
         func = EnBjt_GiveItem;
         break;
     default:
-        func = (void*)GiveItem;
+        func = (void*)Actor_OfferGetItem;
         break;
     }
 
@@ -117,7 +117,7 @@ static int Actor_ByteCode_HasParent(Actor* actor)
     int ret;
     void (*func)(Actor*);
 
-    ret = Actor_HasParent(actor);
+    ret = Actor_HasParentZ(actor);
     if (ret)
     {
         switch (actor->id)
@@ -675,7 +675,7 @@ void Actor_DrawFaroresWindPointer(GameState_Play* play)
             }
 
             effectPos.x = curPos->x + Rand_CenteredFloat(6.0f);
-            effectPos.y = curPos->y + 80.0f + (6.0f * RandFloat());
+            effectPos.y = curPos->y + 80.0f + (6.0f * Rand_ZeroOne());
             effectPos.z = curPos->z + Rand_CenteredFloat(6.0f);
 
             EffectSsKiraKira_SpawnDispersed(play, &effectPos, &effectVel, &effectAccel, &effectPrimCol, &effectEnvCol,

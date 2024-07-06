@@ -18,7 +18,7 @@ static void EnGo2_HandlerGiveBiggoronItem(Actor* this, GameState_Play* play)
     npc = -1;
     gi = *(s16*)((char*)this + 0x584);
 
-    if (Actor_HasParent(this))
+    if (Actor_HasParentZ(this))
     {
         SET_HANDLER(this, EnGo2_HandlerNull);
         return;
@@ -40,7 +40,7 @@ static void EnGo2_HandlerGiveBiggoronItem(Actor* this, GameState_Play* play)
         break;
     }
 
-    if (!(GET_LINK(play)->state & PLAYER_ACTOR_STATE_GET_ITEM))
+    if (!(GET_PLAYER(play)->state & PLAYER_ACTOR_STATE_GET_ITEM))
         Message_Close(play);
 
     comboGiveItemNpc(this, play, gi, npc, 10000.f, 5000.f);
@@ -129,7 +129,7 @@ void EnGo2_InitWrapper(Actor* this, GameState_Play* play)
 
     if (play->sceneId == SCE_OOT_BAZAAR && gSave.age == AGE_ADULT)
     {
-        ActorDestroy(this);
+        Actor_Kill(this);
     }
     else
     {

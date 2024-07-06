@@ -4,6 +4,14 @@
 #include <combo/util.h>
 #include <combo/math/vec.h>
 
+typedef enum
+{
+    KAKERA_COLOR_NONE = -1,
+    KAKERA_COLOR_WHITE,
+    KAKERA_COLOR_BROWN
+}
+KakeraColorIndex;
+
 typedef struct Actor Actor;
 
 typedef struct
@@ -50,5 +58,7 @@ EffectSsTable;
 extern EffectSsTable gEffectSsTable;
 
 void EffectSs_Delete(EffectSs* effectSs);
+void EffectSsGSplash_Spawn(GameState_Play* play, Vec3f* pos, Color_RGBA8* primColor, Color_RGBA8* envColor, s16 type, s16 scale);
+void EffectSsKakera_Spawn(GameState_Play* play, Vec3f* pos, Vec3f* velocity, Vec3f* arg3, s16 gravity, s16 arg5, s16 arg6, s16 arg7, s16 arg8, s16 scale, s16 arg10, s16 arg11, s32 life, s16 colorIdx, s16 objId, Gfx* dList);
 
 #endif

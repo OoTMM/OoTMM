@@ -12,7 +12,7 @@ void EnMk_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 
     npc = -1;
 
-    if (!(GET_LINK(play)->state & PLAYER_ACTOR_STATE_GET_ITEM))
+    if (!(GET_PLAYER(play)->state & PLAYER_ACTOR_STATE_GET_ITEM))
         Message_Close(play);
 
     switch (gi)
@@ -36,7 +36,7 @@ PATCH_CALL(0x80aacd48, EnMk_GiveItem);
 
 void EnMk_EyeballFrogHandler(Actor* this, GameState_Play* play)
 {
-    if (Actor_HasParent(this))
+    if (Actor_HasParentZ(this))
     {
         this->parent = NULL;
         SET_HANDLER(this, actorAddr(0x14a, 0x80aacd6c));

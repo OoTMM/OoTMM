@@ -25,5 +25,5 @@ void EnChanger_Init(Actor* this, GameState_Play* play)
         SpawnActor(&play->actorCtx, play, AC_EN_BOX, kPosTop[roomId * 3 + 0], kPosTop[roomId * 3 + 1], kPosTop[roomId * 3 + 2], 0, 0x3fff, 0, 0x4020 | (roomId * 2 + 1));
     }
 
-    ActorDestroy(this);
+    Actor_Kill(this);
 }

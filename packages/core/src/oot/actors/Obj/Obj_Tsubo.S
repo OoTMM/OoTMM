@@ -1,5 +1,6 @@
 #include <combo.h>
 
+#if 0
 /* Resize the ObjTsubo actor */
 PATCH_START 0x80a6601c
 .int 0x198
@@ -28,4 +29,12 @@ PATCH_END
 PATCH_START 0x80a65220
   j ObjTsubo_SpawnShuffledDrop
    nop
+PATCH_END
+#endif
+
+/* COPY */
+/* Relocs */
+PATCH_START 0x80a66140
+.int 0
+.int 0
 PATCH_END

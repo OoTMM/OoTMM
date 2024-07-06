@@ -10,7 +10,7 @@ void EnTk_AfterInit(void)
 float EnTk_RandFloat(void)
 {
     if (BITMAP16_GET(gSave.eventsItem, EV_OOT_ITEM_DAMPE_GRAVEYARD_HP))
-        return RandFloat();
+        return Rand_ZeroOne();
     return 1.f;
 }
 

@@ -141,10 +141,10 @@ static void EnGinkoMan_GiveRewardHandler(Actor* this, GameState_Play* play)
 {
     Actor_Player* link;
 
-    link = GET_LINK(play);
+    link = GET_PLAYER(play);
     if (link->state & PLAYER_ACTOR_STATE_GET_ITEM)
         return;
-    if (Actor_HasParent(this))
+    if (Actor_HasParentZ(this))
     {
         this->parent = NULL;
         BITMAP8_SET(gSharedCustomSave.mm.npc, NPC_MM_BANK_1 + sRewardId);

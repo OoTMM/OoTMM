@@ -31,7 +31,7 @@ void BgDyYoseizo_Update(Actor* this, GameState_Play* play)
             index += 3;
         mask = 1 << index;
 
-        if (Actor_HasParent(this) || gOotExtraFlags.greatFairies & mask)
+        if (Actor_HasParentZ(this) || gOotExtraFlags.greatFairies & mask)
         {
             /* Refill */
             if (gSave.playerData.magicUpgrade)
@@ -41,7 +41,7 @@ void BgDyYoseizo_Update(Actor* this, GameState_Play* play)
             }
             gSaveContext.healthDelta += 20 * 0x10;
             gOotExtraFlags.greatFairies |= mask;
-            ActorDestroy(this);
+            Actor_Kill(this);
             return;
         }
 

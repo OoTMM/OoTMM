@@ -137,6 +137,8 @@ endfunction()
 build(oot)
 build(mm)
 
+add_actor(oot Obj_Tsubo "oot/ovl/actors/Obj_Tsubo/Obj_Tsubo.c")
+
 add_actor(mm Custom_Magic_Fire "mm/ovl/Custom/Custom_Magic_Fire.c")
 add_actor(mm Custom_Magic_Wind "mm/ovl/Custom/Custom_Magic_Wind.c")
 add_actor(mm Custom_Magic_Dark "mm/ovl/Custom/Custom_Magic_Dark.c")

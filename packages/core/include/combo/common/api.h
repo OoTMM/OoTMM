@@ -32,15 +32,18 @@ void    SkelAnime_DrawFlexOpa(GameState_Play* play, void** skeleton, Vec3s* join
 
 void    AudioSeq_QueueSeqCmd(u32 unk);
 
-void    ActorDestroy(Actor* actor);
-int     Actor_HasParent(Actor* actor);
+void    Actor_Kill(Actor* actor);
+int     Actor_HasParent(Actor* actor, GameState_Play* play);
+int     Actor_HasParentZ(Actor* actor);
+int     Actor_HasNoParent(Actor* actor, GameState_Play* play);
+int     Actor_HasNoParentZ(Actor* actor);
 void    ActorSetScale(Actor* actor, float scale);
 void    ActorSetUnk(Actor* actor, float unk);
 void    ActorEnableGrab(Actor* actor, GameState_Play* play);
 void    ActorEnableTalk(Actor* actor, GameState_Play* play, float range);
 void    ActorEnableTalkEx(Actor* actor, GameState_Play* play, float range, u32 unk);
 /* AKA  Actor_UpdateBgCheckInfo */
-void    Actor_SetCollisionCylinder(GameState_Play* play, Actor* actor, float unk_3, float unk_4, float unk_5, u32 unk_6);
+void    Actor_UpdateBgCheckInfo(GameState_Play* play, Actor* actor, float unk_3, float unk_4, float unk_5, u32 unk_6);
 /* AKA  Actor_MoveXZGravity AKA Actor_MoveWithGravity */
 void    ActorUpdateVelocity(Actor* actor);
 int     ActorTalkedTo(Actor* actor);
@@ -80,7 +83,7 @@ void DisplayTextBox3(GameState_Play* play, Actor* actor, u16 textId);
 
 void DrawLink(GameState_Play* play, void** skeleton, Vec3s* jointTable, s32 dListCount, s32 lod, s32 tunic, s32 boots, s32 face, void* overrideLimbDraw, void* postLimbDraw, void* data);
 
-int GiveItem(Actor* actor, GameState_Play* play, s16 itemId, float a, float b);
+int Actor_OfferGetItem(Actor* actor, GameState_Play* play, s16 itemId, float a, float b);
 void GiveItemDefaultRange(Actor* actor, GameState_Play* play, s16 itemId);
 
 void PlayerDisplayTextBox(GameState_Play* play, u16 messageId, void* unk);
@@ -128,7 +131,8 @@ void MatrixStackDup(void);
 void MatrixStackPop(void);
 void Matrix_MultVec3f(Vec3f* src, Vec3f* dest);
 
-float RandFloat(void);
+void SomethingPotBreak(GameState_Play* play, Vec3f* pos, float unk1, int unk2, int unk3, int unk4, int unk5);
+
 f32 Rand_CenteredFloat(f32 scale);
 
 int GetActiveItem(GameState_Play* play);
@@ -155,7 +159,7 @@ s16 RandIntRange(s16 base, s16 amplitude);
 
 extern u32 gSegments[16];
 
-#define GET_LINK(play) ((Actor_Player*)(play->actorCtx.actors[2].first))
+#define GET_PLAYER(play) ((Actor_Player*)(play->actorCtx.actors[2].first))
 
 int  ActorCutscene_GetCanPlayNext(int cutscene);
 s16  ActorCutscene_GetCurrentIndex(void);
@@ -277,8 +281,9 @@ int IsSceneValidEpona(int sceneId);
 s32 Health_ChangeBy(GameState_Play* play, s16 amount);
 
 typedef struct ObjectContext ObjectContext;
-int GetObjectSlot(ObjectContext* ctx, int objectId);
-int IsObjectSlotLoaded(ObjectContext* ctx, int slot);
+int Object_SpawnPersistent(ObjectContext* objectCtx, s16 id);
+int Object_GetSlot(ObjectContext* objectCtx, s16 id);
+int Object_IsLoaded(ObjectContext* ctx, int slot);
 
 typedef struct Actor_EnItem00 Actor_EnItem00;
 
@@ -298,7 +303,6 @@ void Item_DropCollectibleRandom(GameState_Play* play, Actor* from, const Vec3f* 
 f32 VectDist(Vec3f* vec1, Vec3f* vec2);
 f32 Math_Vec3f_DistXYZAndStoreDiff(Vec3f* a, Vec3f* b, Vec3f* dest);
 #endif
-void Math_Vec3f_Copy(Vec3f* dest, Vec3f* src);
 
 void EffectSsIceSmoke_Spawn(GameState_Play* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, s16 scale);
 void EffectSsKiraKira_SpawnDispersed(GameState_Play* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, Color_RGBA8* primColor, Color_RGBA8* envColor, s16 scale, s32 life);
@@ -356,13 +360,10 @@ s32 SysFlashrom_ExecWrite(void* addr, u32 pageNum, u32 pageCount);
 
 EntranceTableEntry* Entrance_GetTableEntry(u16 entrance);
 
-s32 Object_SpawnPersistent(ObjectContext* objectCtx, s16 id);
-s32 Object_GetSlot(ObjectContext* objectCtx, s16 id);
-
 void Environment_Init(GameState_Play* play, EnvironmentContext* envCtx, int unused);
 
 extern u8 gWeatherMode;
 
 #if defined(GAME_MM)
-void AudioSeq_QueueSeqCmd(u32 cmd);    
+void AudioSeq_QueueSeqCmd(u32 cmd);
 #endif
