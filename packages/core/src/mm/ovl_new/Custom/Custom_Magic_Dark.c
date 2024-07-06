@@ -22,18 +22,6 @@ void MagicDark_DiamondDraw(Actor* thisx, GameState_Play* play);
 
 void MagicDark_DimLighting(GameState_Play* play, f32 intensity);
 
-ActorInit Magic_Dark_InitVars = {
-    /**/ AC_CUSTOM_SPELL_LOVE,
-    /**/ ACTORCAT_ITEMACTION,
-    /**/ FLAGS,
-    /**/ 1, /* OBJECT_GAMEPLAY_KEEP, */
-    /**/ sizeof(MagicDark),
-    /**/ MagicDark_Init,
-    /**/ MagicDark_Destroy,
-    /**/ MagicDark_OrbUpdate,
-    /**/ MagicDark_OrbDraw,
-};
-
 static Vtx sDiamondVtx[20] = {
 #include "sDiamondVtx.vtx.inc"
 };
@@ -348,3 +336,17 @@ void MagicDark_OrbDraw(Actor* thisx, GameState_Play* play) {
 
     CLOSE_DISPS();
 }
+
+ActorInit Magic_Dark_InitVars = {
+    AC_CUSTOM_SPELL_LOVE,
+    ACTORCAT_ITEMACTION,
+    FLAGS,
+    1,
+    sizeof(MagicDark),
+    MagicDark_Init,
+    MagicDark_Destroy,
+    MagicDark_OrbUpdate,
+    MagicDark_OrbDraw,
+};
+
+OVL_ACTOR_INFO(AC_CUSTOM_SPELL_LOVE, Magic_Dark_InitVars);

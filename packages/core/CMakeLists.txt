@@ -138,3 +138,5 @@ build(oot)
 build(mm)
 
 add_actor(mm Custom_Magic_Fire "mm/ovl_new/Custom/Custom_Magic_Fire.c")
+add_actor(mm Custom_Magic_Wind "mm/ovl_new/Custom/Custom_Magic_Wind.c")
+add_actor(mm Custom_Magic_Dark "mm/ovl_new/Custom/Custom_Magic_Dark.c")
