@@ -114,14 +114,14 @@ function (add_actor game name file)
   set(game_map "${CMAKE_BINARY_DIR}/${game}_map.txt")
 
   add_executable(${target_name} "${CMAKE_CURRENT_SOURCE_DIR}/src/${file}")
-  set_target_properties(${target_name} PROPERTIES LINK_DEPENDS "${game_map}" POSITION_INDEPENDENT_CODE FALSE)
+  set_target_properties(${target_name} PROPERTIES LINK_DEPENDS "${game_map};${LDSCRIPT_OVL}"  POSITION_INDEPENDENT_CODE FALSE)
   target_link_options(${target_name} PRIVATE "-T${LDSCRIPT_OVL}" "-T${game_map}" "-Wl,--emit-relocs")
   target_compile_definitions(${target_name} PRIVATE ${game_define})
 
   add_custom_command(
     OUTPUT "${target_name_ovl}"
     COMMAND "${TOOL_ZOVL}" "$<TARGET_FILE:${target_name}>" "${target_name_ovl}"
-    DEPENDS ${target_name}
+    DEPENDS ${target_name} "${TOOL_ZOVL}"
     COMMENT "Generating zactor for ${name}"
     VERBATIM
   )
