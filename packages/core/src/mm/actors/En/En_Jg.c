@@ -15,7 +15,7 @@ void EnJg_LearnSongGoronIntro(Actor* this, GameState_Play* play)
         return;
     }
 
-    if (Actor_HasParent(this))
+    if (Actor_HasParentZ(this))
     {
         gMmExtraFlags.songGoronIntro = 1;
         SET_HANDLER(this, EnJg_HandlerNull);

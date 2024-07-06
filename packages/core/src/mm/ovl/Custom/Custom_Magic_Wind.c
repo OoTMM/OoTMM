@@ -144,7 +144,7 @@ void MagicWind_SetupAction(MagicWind* this, MagicWindFunc actionFunc) {
 
 void MagicWind_Init(Actor* thisx, GameState_Play* play) {
     MagicWind* this = (MagicWind*)thisx;
-    Actor_Player* player = GET_LINK(play);
+    Actor_Player* player = GET_PLAYER(play);
 
     if (!SkelCurve_Init(play, &this->skelCurve, &sSkel, &sAnim)) {
         /* "Magic_Wind_Actor_ct (): Construct failed" */
@@ -179,7 +179,7 @@ void MagicWind_UpdateAlpha(f32 alpha) {
 }
 
 void MagicWind_WaitForTimer(MagicWind* this, GameState_Play* play) {
-    Actor_Player* player = GET_LINK(play);
+    Actor_Player* player = GET_PLAYER(play);
 
     if (this->timer > 0) {
         this->timer--;
@@ -213,13 +213,13 @@ void MagicWind_FadeOut(MagicWind* this, GameState_Play* play) {
         MagicWind_UpdateAlpha((f32)this->timer * (1.0f / 30.0f));
         this->timer--;
     } else {
-        ActorDestroy(&this->actor);
+        Actor_Kill(&this->actor);
     }
 }
 
 void MagicWind_Shrink(MagicWind* this, GameState_Play* play) {
     if (SkelCurve_Update(play, &this->skelCurve)) {
-        ActorDestroy(&this->actor);
+        Actor_Kill(&this->actor);
     }
 }
 
@@ -230,7 +230,7 @@ void MagicWind_Update(Actor* thisx, GameState_Play* play) {
     /*! @bug This condition is too broad, the actor will also be killed by warp songs. But warp songs do not use an */
     /*! actor which uses `ACTOROVL_ALLOC_ABSOLUTE`. There is no reason to kill the actor in this case. */
     /* if ((play->msgCtx.msgMode == MSGMODE_OCARINA_CORRECT_PLAYBACK) || (play->msgCtx.msgMode == MSGMODE_SONG_PLAYED)) { */
-    /*     ActorDestroy(thisx); */
+    /*     Actor_Kill(thisx); */
     /*     return; */
     /* } */
 

@@ -73,11 +73,11 @@ static f32 MagicDark_GetScale(Actor_Player* player)
 
 void MagicDark_Init(Actor* thisx, GameState_Play* play) {
     MagicDark* this = (MagicDark*)thisx;
-    Actor_Player* player = GET_LINK(play);
+    Actor_Player* player = GET_PLAYER(play);
 
     this->scale = MagicDark_GetScale(player);
 
-    thisx->world.pos = player->base.world.pos;
+    thisx->world.pos = player->actor.world.pos;
     ActorSetScale(&this->actor, 0.0f);
     thisx->room = -1;
 
@@ -103,7 +103,7 @@ void MagicDark_Destroy(Actor* thisx, GameState_Play* play) {
 void MagicDark_DiamondUpdate(Actor* thisx, GameState_Play* play) {
     MagicDark* this = (MagicDark*)thisx;
     u8 phi_a0;
-    Actor_Player* player = GET_LINK(play);
+    Actor_Player* player = GET_PLAYER(play);
     s16 nayrusLoveTimer = gSaveContext.nayrusLoveTimer;
     /* s32 msgMode = play->msgCtx.msgMode; */
 
@@ -114,14 +114,14 @@ void MagicDark_DiamondUpdate(Actor* thisx, GameState_Play* play) {
     /*! other magic actors, and the Nayru's Love actor is supposed to be spawned back after ocarina effects actors are */
     /*! done. But with warp songs, whether the player warps away or not, the actor won't be spawned back. */
     /* if ((msgMode == MSGMODE_OCARINA_CORRECT_PLAYBACK) || (msgMode == MSGMODE_SONG_PLAYED)) { */
-    /*     ActorDestroy(thisx); */
+    /*     Actor_Kill(thisx); */
     /*     return; */
     /* } */
 
     if (nayrusLoveTimer >= 1200) {
         player->invincibilityTimer = 0;
         gSaveContext.nayrusLoveTimer = 0;
-        ActorDestroy(thisx);
+        Actor_Kill(thisx);
         return;
     }
 
@@ -160,7 +160,7 @@ void MagicDark_DiamondUpdate(Actor* thisx, GameState_Play* play) {
     }
 
     thisx->world.rot.y += 0x3E8;
-    thisx->rot2.y = thisx->world.rot.y + Camera_GetCamDirYaw(GET_ACTIVE_CAM(play));
+    thisx->shape.rot.y = thisx->world.rot.y + Camera_GetCamDirYaw(GET_ACTIVE_CAM(play));
     this->timer++;
     gSaveContext.nayrusLoveTimer = nayrusLoveTimer + 1;
 
@@ -207,7 +207,7 @@ void MagicDark_DimLighting(GameState_Play* play, f32 intensity) {
 
 void MagicDark_OrbUpdate(Actor* thisx, GameState_Play* play) {
     MagicDark* this = (MagicDark*)thisx;
-    Actor_Player* player = GET_LINK(play);
+    Actor_Player* player = GET_PLAYER(play);
 
     PlayLoopingSfxAtActor(&this->actor, 0xC3); /* NA_SE_PL_MAGIC_SOUL_BALL */
     if (this->timer < 35) {
@@ -242,7 +242,7 @@ void MagicDark_DiamondDraw(Actor* thisx, GameState_Play* play) {
     InitListPolyXlu(play->gs.gfx);
 
     {
-        Actor_Player* player = GET_LINK(play);
+        Actor_Player* player = GET_PLAYER(play);
         f32 heightDiff;
 
         this->actor.world.pos.x = player->bodyPartsPos[PLAYER_BODYPART_WAIST].x;
@@ -252,7 +252,7 @@ void MagicDark_DiamondDraw(Actor* thisx, GameState_Play* play) {
         {
             if (player->state3 & 0x00001000) /* PLAYER_STATE3_GORON_ROLL */
             {
-                y = player->base.world.pos.y + Player_GetHeight(player) * 0.5f;
+                y = player->actor.world.pos.y + Player_GetHeight(player) * 0.5f;
             }
             else
             {
@@ -271,7 +271,7 @@ void MagicDark_DiamondDraw(Actor* thisx, GameState_Play* play) {
         }
         ModelViewTranslate(this->actor.world.pos.x, this->actor.world.pos.y, this->actor.world.pos.z, MAT_SET);
         ModelViewScale(this->actor.scale.x, this->actor.scale.y, this->actor.scale.z, MAT_MUL);
-        ModelViewRotateY(BINANG_TO_RAD(this->actor.rot2.y), MAT_MUL);
+        ModelViewRotateY(BINANG_TO_RAD(this->actor.shape.rot.y), MAT_MUL);
         gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx),
                   G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 170, 255, 255, (s32)(this->primAlpha * 0.6f) & 0xFF);
@@ -289,7 +289,7 @@ void MagicDark_DiamondDraw(Actor* thisx, GameState_Play* play) {
 void MagicDark_OrbDraw(Actor* thisx, GameState_Play* play) {
     MagicDark* this = (MagicDark*)thisx;
     Vec3f pos;
-    Actor_Player* player = GET_LINK(play);
+    Actor_Player* player = GET_PLAYER(play);
     f32 sp6C = play->gs.frameCount & 0x1F;
 
     if (this->timer < 32) {

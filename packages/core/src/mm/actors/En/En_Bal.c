@@ -70,7 +70,7 @@ static int EnBal_HasGivenItem(Actor* this, GameState_Play* play)
 {
     s16 mapId;
 
-    if (!Actor_HasParent(this))
+    if (!Actor_HasParentZ(this))
         return 0;
 
     mapId = *(s16*)((char*)this + 0x3ac);

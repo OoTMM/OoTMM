@@ -3,8 +3,8 @@
 
 void ArmsHook_SetTimerAndParent(Actor_ArmsHook* this, GameState_Play* play)
 {
-    Actor_Player* player = GET_LINK(play);
-    this->actor.parent = &player->base;
+    Actor_Player* player = GET_PLAYER(play);
+    this->actor.parent = &player->actor;
 
     /* should use the ItemId enum */
     /* 0x0F - ITEM_HOOKSHOT */

@@ -26,11 +26,11 @@ int CustomTriggers_GiveItem(Actor_CustomTriggers* this, GameState_Play* play, co
 {
     Actor_Player* link;
 
-    link = GET_LINK(play);
+    link = GET_PLAYER(play);
     if (link->state & PLAYER_ACTOR_STATE_GET_ITEM)
         return 0;
 
-    if (Actor_HasParent(&this->base))
+    if (Actor_HasParentZ(&this->base))
     {
         this->base.parent = NULL;
         return 1;
@@ -62,7 +62,7 @@ int CustomTrigger_ItemSafe(Actor_CustomTriggers* this, GameState_Play* play)
 {
     Actor_Player* link;
 
-    link = GET_LINK(play);
+    link = GET_PLAYER(play);
     if (link->state & (PLAYER_ACTOR_STATE_GET_ITEM | PLAYER_ACTOR_STATE_CUTSCENE_FROZEN))
     {
         gComboTriggersData.acc = 0;
@@ -155,12 +155,12 @@ static void CustomTriggers_Update(Actor_CustomTriggers* this, GameState_Play* pl
 {
     /* Always be near link */
     Actor_Player* link;
-    link = GET_LINK(play);
+    link = GET_PLAYER(play);
     if (link)
     {
-        this->base.world.pos.x = link->base.world.pos.x;
-        this->base.world.pos.y = link->base.world.pos.y;
-        this->base.world.pos.z = link->base.world.pos.z;
+        this->base.world.pos.x = link->actor.world.pos.x;
+        this->base.world.pos.y = link->actor.world.pos.y;
+        this->base.world.pos.z = link->actor.world.pos.z;
     }
 
     if (gComboTriggersData.trigger == TRIGGER_NONE)

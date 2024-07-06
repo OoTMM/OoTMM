@@ -118,7 +118,7 @@ static void comboGiveItemRaw(Actor* actor, GameState_Play* play, const ComboItem
     ComboItemOverride o;
 
     comboItemOverride(&o, q);
-    if (GiveItem(actor, play, o.gi, a, b))
+    if (Actor_OfferGetItem(actor, play, o.gi, a, b))
     {
         if (q->gi < 0)
         {
@@ -437,7 +437,7 @@ void comboPlayerAddItem(GameState_Play* play, s16 gi)
     ComboItemOverride o;
 
     /* Check for a chest */
-    player = GET_LINK(play);
+    player = GET_PLAYER(play);
     chest = *(Actor**)((char*)player + CHEST_OFF);
     if (chest && chest->id == AC_EN_BOX)
     {

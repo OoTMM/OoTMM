@@ -38,7 +38,7 @@ static int canUseDpad(GameState_Play* play)
 {
     Actor_Player* link;
 
-    link = GET_LINK(play);
+    link = GET_PLAYER(play);
     if (!canShowDpad())
         return 0;
     if (link->state & (PLAYER_ACTOR_STATE_CLIMB | PLAYER_ACTOR_STATE_CLIMB2 | PLAYER_ACTOR_STATE_EPONA | PLAYER_ACTOR_STATE_USE_ITEM | PLAYER_ACTOR_STATE_CUTSCENE_FROZEN | PLAYER_ACTOR_STATE_GET_ITEM | PLAYER_ACTOR_STATE_DEATH | PLAYER_ACTOR_STATE_TRANSITION | PLAYER_ACTOR_STATE_TRANSFORM))
@@ -51,7 +51,7 @@ static int canUseDpadItem(GameState_Play* play, s16 itemId, int flags)
     Actor_Player* link;
     int isEquip;
 
-    link = GET_LINK(play);
+    link = GET_PLAYER(play);
     isEquip = 0;
 
     /* No item == no use */
@@ -174,7 +174,7 @@ static void dpadUseItem(GameState_Play* play, int index, int flags)
     itemId = sDpadItems[index];
     if (!canUseDpadItem(play, itemId, flags))
         return;
-    Player_UseItem(play, GET_LINK(play), itemId);
+    Player_UseItem(play, GET_PLAYER(play), itemId);
 }
 
 #if defined(GAME_OOT)

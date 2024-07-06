@@ -329,7 +329,7 @@ Actor* comboSpawnActor(ActorContext* actorCtx, GameState_Play *play, short actor
     sActorIdToSpawn = actorId;
     actor = SpawnActor(actorCtx, play, actorId, x, y, z, rx, ry, rz, variable);
     if (actorId == AC_ARMS_HOOK && gSave.age == AGE_ADULT)
-        actor->objTableIndex = GetObjectSlot(&play->objectCtx, 0x14);
+        actor->objectSlot = Object_GetSlot(&play->objectCtx, 0x14);
     return actor;
 }
 
@@ -461,21 +461,21 @@ void Actor_RunUpdate(Actor* this, GameState_Play* play, ActorFunc update)
     int ignorePlayer;
     s16 yawTowardsPlayer;
     f32 xyzDistToPlayerSq;
-    f32 xzDistanceFromLink;
+    f32 xzDistToPlayer;
     f32 yDistanceFromLink;
 
     Actor_UpdateDamageTable(this);
-    ignorePlayer = shouldActorIgnorePlayer(this, GET_LINK(play));
+    ignorePlayer = shouldActorIgnorePlayer(this, GET_PLAYER(play));
     if (ignorePlayer)
     {
         yawTowardsPlayer = this->yawTowardsPlayer;
         xyzDistToPlayerSq = this->xyzDistToPlayerSq;
-        xzDistanceFromLink = this->xzDistanceFromLink;
+        xzDistToPlayer = this->xzDistToPlayer;
         yDistanceFromLink = this->yDistanceFromLink;
 
-        this->yawTowardsPlayer = (s16)(u16)(RandFloat() * 0x10000);
+        this->yawTowardsPlayer = (s16)(u16)(Rand_ZeroOne() * 0x10000);
         this->xyzDistToPlayerSq = 10000.f;
-        this->xzDistanceFromLink = 10000.f;
+        this->xzDistToPlayer = 10000.f;
         this->yDistanceFromLink = 10000.f;
     }
     update(this, play);
@@ -483,7 +483,7 @@ void Actor_RunUpdate(Actor* this, GameState_Play* play, ActorFunc update)
     {
         this->yawTowardsPlayer = yawTowardsPlayer;
         this->xyzDistToPlayerSq = xyzDistToPlayerSq;
-        this->xzDistanceFromLink = xzDistanceFromLink;
+        this->xzDistToPlayer = xzDistToPlayer;
         this->yDistanceFromLink = yDistanceFromLink;
     }
 }

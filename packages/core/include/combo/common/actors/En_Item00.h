@@ -31,6 +31,7 @@
 # define ITEM00_TUNIC_ZORA      0x17
 # define ITEM00_TUNIC_GORON     0x18
 # define ITEM00_BOMBS_5_ALT     0x19
+# define ITEM00_MAX             0x1a
 #else
 # define ITEM00_RUPEE_GREEN     0x00
 # define ITEM00_RUPEE_BLUE      0x01

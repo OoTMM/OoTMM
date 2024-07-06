@@ -13,14 +13,14 @@ void EnKnight_OnDestroy(Actor* this, GameState_Play* play)
     if (this != knightMain)
         return;
 
-    if (Actor_HasParent(this) || gMmExtraFlags.songEmptiness)
+    if (Actor_HasParentZ(this) || gMmExtraFlags.songEmptiness)
     {
         gMmExtraFlags.songEmptiness = 1;
         knightSide1 = *(Actor**)actorAddr(0x115, 0x809befd4);
         knightSide2 = *(Actor**)actorAddr(0x115, 0x809befd8);
-        ActorDestroy(knightMain);
-        ActorDestroy(knightSide1);
-        ActorDestroy(knightSide2);
+        Actor_Kill(knightMain);
+        Actor_Kill(knightSide1);
+        Actor_Kill(knightSide2);
         return;
     }
     comboGiveItemNpc(this, play, GI_MM_SONG_EMPTINESS, NPC_MM_SONG_EMPTINESS, 9999.f, 9999.f);

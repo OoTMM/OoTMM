@@ -6,24 +6,24 @@ void EnDekubaba_GiveItemDefaultRange(Actor* this, GameState_Play* play, s16 gi)
     Actor_Player* link;
     float dist;
 
-    link = GET_LINK(play);
+    link = GET_PLAYER(play);
     if (GetItemCollectBehavior(ITEM_MM_STICK) == 0xff)
     {
         GiveItemDefaultRange(this, play, gi);
         return;
     }
 
-    dist = this->xzDistanceFromLink;
+    dist = this->xzDistToPlayer;
     if (dist < 0.f)
         dist = -dist;
     if (dist < 50.f)
     {
-        dist = this->world.pos.y - link->base.world.pos.y;
+        dist = this->world.pos.y - link->actor.world.pos.y;
         if (dist < 0.f)
             dist = -dist;
         if (dist < 10.f)
         {
-            this->parent = &link->base;
+            this->parent = &link->actor;
             AddItemWithIcon(play, link, &kExtendedGetItems[gi - 1]);
         }
     }

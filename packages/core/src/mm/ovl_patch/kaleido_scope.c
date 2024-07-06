@@ -275,7 +275,7 @@ static int canSave(GameState_Play* play)
 {
     Actor_Player* link;
 
-    link = GET_LINK(play);
+    link = GET_PLAYER(play);
     if (link->state & PLAYER_ACTOR_STATE_EPONA)
         return 0;
 

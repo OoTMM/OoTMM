@@ -12,14 +12,14 @@ static void EnDntNormal_GiveReward(Actor* this, GameState_Play* play)
 {
     Actor_Player* link;
 
-    if (Actor_HasParent(this))
+    if (Actor_HasParentZ(this))
     {
         gSave.eventsItem[1] |= 0x2000;
         SET_HANDLER(this, EnDntNormal_Noop);
         return;
     }
 
-    link = GET_LINK(play);
+    link = GET_PLAYER(play);
     link->state &= ~(0x00100008);
     comboGiveItemNpc(this, play, GI_OOT_SLINGSHOT, NPC_OOT_LOST_WOODS_TARGET, 16384.f, 16384.f);
 }

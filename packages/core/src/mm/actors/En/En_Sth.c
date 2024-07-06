@@ -3,7 +3,7 @@
 
 int EnSth_HasGivenItemMaskOfTruth(Actor* this)
 {
-    if (Actor_HasParent(this))
+    if (Actor_HasParentZ(this))
     {
         gMmExtraFlags2.maskTruth = 1;
         return 1;

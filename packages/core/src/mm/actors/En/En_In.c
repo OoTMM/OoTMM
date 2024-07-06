@@ -139,7 +139,7 @@ int EnIn_HasActorGivenItem(Actor* actor)
 {
     int ret;
 
-    ret = Actor_HasParent(actor);
+    ret = Actor_HasParentZ(actor);
     if (ret)
     {
         if (sIsMask)

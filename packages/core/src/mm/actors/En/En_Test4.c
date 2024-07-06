@@ -73,8 +73,8 @@ static void EnTest4_Reload(GameState_Play* play)
 {
     Actor_Player* link;
 
-    link = GET_LINK(play);
-    Play_SetRespawnData(gPlay, 1, gSave.entranceIndex, gPlay->roomCtx.curRoom.id, 0xdff, &link->base.world.pos, link->base.rot2.y);
+    link = GET_PLAYER(play);
+    Play_SetRespawnData(gPlay, 1, gSave.entranceIndex, gPlay->roomCtx.curRoom.id, 0xdff, &link->actor.world.pos, link->actor.shape.rot.y);
     gSaveContext.respawnFlag = 2;
     gSaveContext.nextCutscene = 0;
     comboTransition(gPlay, gSave.entranceIndex);

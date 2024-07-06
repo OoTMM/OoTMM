@@ -13,7 +13,7 @@ void BgHakaTomb_LearnSongStorms(Actor* this, GameState_Play* play)
     if (!comboHasSoulMm(GI_MM_SOUL_NPC_COMPOSER_BROS))
         return;
 
-    if (gMmExtraFlags.songStorms || Actor_HasParent(this))
+    if (gMmExtraFlags.songStorms || Actor_HasParentZ(this))
     {
         gMmExtraFlags.songStorms = 1;
         SET_HANDLER(this, BgHakaTomb_HandlerNull);

@@ -6,7 +6,7 @@ static void EnPoComposer_HandlerStorms(Actor* this, GameState_Play* play)
 {
     /* Mark the valley as purified */
     MM_SET_EVENT_WEEK(MM_EV(14, 2));
-    ActorDestroy(this);
+    Actor_Kill(this);
 
     /* Reload the room */
     play->nextEntrance = ((SCE_MM_IKANA_CANYON - 3) << 9) | (14 << 4);

@@ -10,7 +10,7 @@ void EnSa_HandlerNull(Actor* this, GameState_Play* play)
 
 void EnSa_HandlerMeadow_GiveItem(Actor* this, GameState_Play* play)
 {
-    if (Actor_HasParent(this))
+    if (Actor_HasParentZ(this))
     {
         SetEventChk(EV_OOT_CHK_SONG_SARIA);
         SET_HANDLER(this, EnSa_HandlerNull);
@@ -25,7 +25,7 @@ void EnSa_HandlerMeadow(Actor* this, GameState_Play* play)
     {
         SET_HANDLER(this, EnSa_HandlerNull);
     }
-    else if (GET_LINK(play)->base.world.pos.z < -2220.f)
+    else if (GET_PLAYER(play)->actor.world.pos.z < -2220.f)
     {
         SET_HANDLER(this, EnSa_HandlerMeadow_GiveItem);
         EnSa_HandlerMeadow_GiveItem(this, play);

@@ -31,7 +31,7 @@ int EnGe1_HasGivenItem(Actor* this, GameState_Play* play)
     if (gSave.highScores[0] >= 1500 && !BITMAP16_GET(gSave.eventsItem, EV_OOT_ITEM_HBA_1500) && !BITMAP16_GET(gSave.eventsMisc, EV_OOT_INF_HBA_1000))
     {
         /* Give two items */
-        link = GET_LINK(play);
+        link = GET_PLAYER(play);
         if (link->state & PLAYER_ACTOR_STATE_GET_ITEM)
         {
             this->parent = NULL;
@@ -41,7 +41,7 @@ int EnGe1_HasGivenItem(Actor* this, GameState_Play* play)
         }
     }
 
-    return Actor_HasParent(this);
+    return Actor_HasParentZ(this);
 }
 
 PATCH_CALL(0x80a90104, EnGe1_HasGivenItem);
@@ -51,7 +51,7 @@ void EnGe1_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b
     Actor_Player* link;
     int npc;
 
-    link = GET_LINK(play);
+    link = GET_PLAYER(play);
     npc = -1;
     if (link->state & PLAYER_ACTOR_STATE_GET_ITEM)
         return;
