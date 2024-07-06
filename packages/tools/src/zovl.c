@@ -36,6 +36,7 @@ typedef struct
     Elf32_Ehdr      ehdr;
     char*           shstrtab;
     uint32_t        shstrtabSize;
+    uint32_t        meta[4];
     char*           sectionData[4];
     uint32_t        sectionStart[4];
     uint32_t        sectionSize[4];
@@ -203,7 +204,7 @@ static int setupFiles(State* st, const char* pathIn, const char* pathOut)
     return 0;
 }
 
-static int exportMeta(State* state)
+static int loadMeta(State* state)
 {
     Elf32_Shdr shdr;
     uint32_t meta[2];
@@ -216,8 +217,7 @@ static int exportMeta(State* state)
 
     /* Read */
     fseek(state->in, shdr.sh_offset, SEEK_SET);
-    fread(meta, sizeof(uint32_t) * 2, 1, state->in);
-    fwrite(meta, sizeof(uint32_t) * 2, 1, state->out);
+    fread(state->meta, sizeof(uint32_t) * 2, 1, state->in);
 
     return 0;
 }
@@ -298,8 +298,8 @@ static int emitReloc(State* state, int secId, int type, uint32_t addr, uint32_t 
     }
 
     reloc = (((secId + 1) << 30) | (type << 24) | (off & 0x00ffffff));
-    printf("N64 Reloc: 0x%08x\n", reloc);
-    return addReloc(state, reloc);
+    //printf("N64 Reloc: 0x%08x\n", reloc);
+    return addReloc(state, eswap32(reloc));
 }
 
 static int loadRelocs(State* state, int secId)
@@ -370,6 +370,55 @@ static int loadRelocs(State* state, int secId)
     return 0;
 }
 
+static int emit(State* state)
+{
+    uint32_t vstart;
+    uint32_t vend;
+    uint32_t relocHeader[5];
+    uint32_t relocHeaderSize;
+    uint32_t z;
+
+    /* Compute vsize */
+    vstart = state->sectionStart[0];
+    vend = vstart;
+    for (int i = 0; i < 4; ++i)
+        vend += state->sectionSize[i];
+    state->meta[2] = eswap32(vstart);
+    state->meta[3] = eswap32(vend);
+
+    /* Output meta */
+    fwrite(state->meta, sizeof(state->meta), 1, state->out);
+
+    /* Output sections */
+    for (int i = 0; i < 4; ++i)
+    {
+        relocHeader[i] = eswap32(state->sectionSize[i]);
+        if (state->sectionData[i])
+            fwrite(state->sectionData[i], state->sectionSize[i], 1, state->out);
+    }
+    relocHeader[4] = eswap32(state->relocsCount);
+
+    /* Output reloc header */
+    fwrite(relocHeader, sizeof(relocHeader), 1, state->out);
+
+    /* Output relocs */
+    fwrite(state->relocs, sizeof(uint32_t) * state->relocsCount, 1, state->out);
+
+    /* Compute offset and pad */
+    z = 0;
+    relocHeaderSize = sizeof(relocHeader) + sizeof(uint32_t) * state->relocsCount;
+    while (relocHeaderSize % 16 != 12)
+    {
+        fwrite(&z, 4, 1, state->out);
+        relocHeaderSize += 4;
+    }
+    relocHeaderSize += 4;
+    relocHeaderSize = eswap32(relocHeaderSize);
+    fwrite(&relocHeaderSize, 4, 1, state->out);
+
+    return 0;
+}
+
 static int run(const char* pathIn, const char* pathOut)
 {
     State state;
@@ -379,13 +428,18 @@ static int run(const char* pathIn, const char* pathOut)
     if (setupFiles(&state, pathIn, pathOut)) return 1;
     if (loadElfHeader(&state)) return 1;
     if (loadSectionStringTable(&state)) return 1;
-    //if (exportMeta(&state)) return 1;
+    if (loadMeta(&state)) return 1;
 
     for (int i = 0; i < 4; ++i)
         if (loadSection(&state, i)) return 1;
 
     for (int i = 0; i < 3; ++i)
         if (loadRelocs(&state, i)) return 1;
+
+    if (emit(&state)) return 1;
+
+    fclose(state.in);
+    fclose(state.out);
 
     return 0;
 }
