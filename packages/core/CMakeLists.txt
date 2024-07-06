@@ -58,7 +58,7 @@ function(build game)
 
   # Build
   file(GLOB_RECURSE SOURCES "src/${game}/*.c" "src/${game}/*.S" "src/common/*.c" "src/common/*.S" "build/src/${game}/*.c" "build/src/${game}/*.S" "build/src/common/*.c" "build/src/common/*.S")
-  file(GLOB_RECURSE SOURCES_OVL "src/${game}/ovl_new/*.c")
+  file(GLOB_RECURSE SOURCES_OVL "src/${game}/ovl/*.c")
   list(REMOVE_ITEM SOURCES ${SOURCES_OVL})
 
   add_executable(${game} ${SOURCES})
@@ -137,6 +137,6 @@ endfunction()
 build(oot)
 build(mm)
 
-add_actor(mm Custom_Magic_Fire "mm/ovl_new/Custom/Custom_Magic_Fire.c")
-add_actor(mm Custom_Magic_Wind "mm/ovl_new/Custom/Custom_Magic_Wind.c")
-add_actor(mm Custom_Magic_Dark "mm/ovl_new/Custom/Custom_Magic_Dark.c")
+add_actor(mm Custom_Magic_Fire "mm/ovl/Custom/Custom_Magic_Fire.c")
+add_actor(mm Custom_Magic_Wind "mm/ovl/Custom/Custom_Magic_Wind.c")
+add_actor(mm Custom_Magic_Dark "mm/ovl/Custom/Custom_Magic_Dark.c")
