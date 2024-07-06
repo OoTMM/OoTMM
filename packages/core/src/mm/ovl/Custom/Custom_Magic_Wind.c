@@ -23,18 +23,6 @@ void MagicWind_FadeOut(MagicWind* this, GameState_Play* play);
 void MagicWind_WaitAtFullSize(MagicWind* this, GameState_Play* play);
 void MagicWind_Grow(MagicWind* this, GameState_Play* play);
 
-ActorInit Magic_Wind_InitVars = {
-    /**/ AC_CUSTOM_SPELL_WIND,
-    /**/ ACTORCAT_ITEMACTION,
-    /**/ FLAGS,
-    /**/ 1, /* OBJECT_GAMEPLAY_KEEP */
-    /**/ sizeof(MagicWind),
-    /**/ MagicWind_Init,
-    /**/ MagicWind_Destroy,
-    /**/ MagicWind_Update,
-    /**/ MagicWind_Draw,
-};
-
 static Vtx sCylinderVtx[36] = {
 #include "sCylinderVtx.vtx.inc"
 };
@@ -288,3 +276,17 @@ void MagicWind_Draw(Actor* thisx, GameState_Play* play) {
 
     CLOSE_DISPS();
 }
+
+ActorInit Magic_Wind_InitVars = {
+    AC_CUSTOM_SPELL_WIND,
+    ACTORCAT_ITEMACTION,
+    FLAGS,
+    1,
+    sizeof(MagicWind),
+    MagicWind_Init,
+    MagicWind_Destroy,
+    MagicWind_Update,
+    MagicWind_Draw,
+};
+
+OVL_ACTOR_INFO(AC_CUSTOM_SPELL_WIND, Magic_Wind_InitVars);

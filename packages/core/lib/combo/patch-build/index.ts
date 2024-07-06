@@ -1,17 +1,16 @@
-import { GameAddresses } from "../addresses";
-import { BuildOutput } from "../build";
-import { GAMES } from "../config";
-import { DecompressedRoms } from "../decompress";
-import { LogicResult } from "../logic";
-import { Monitor } from "../monitor";
-import { Settings } from "../settings";
-import { Patcher } from "./patcher";
-import { Patchfile } from "./patchfile";
-import { patchRandomizer } from "./randomizer";
-import { PatchGroup } from "./group";
-import { isEntranceShuffle } from "../logic/helpers";
-import { Options } from "../options";
-import { World } from "../logic/world";
+import { GameAddresses } from '../addresses';
+import { CONFIG, GAMES } from '../config';
+import { DecompressedRoms } from '../decompress';
+import { LogicResult } from '../logic';
+import { Monitor } from '../monitor';
+import { Settings } from '../settings';
+import { Patcher } from './patcher';
+import { Patchfile } from './patchfile';
+import { patchRandomizer } from './randomizer';
+import { PatchGroup } from './group';
+import { isEntranceShuffle } from '../logic/helpers';
+import { FileResolver, Options } from '../options';
+import { World } from '../logic/world';
 
 export type BuildPatchfileIn = {
   opts: Options;
@@ -19,9 +18,9 @@ export type BuildPatchfileIn = {
   monitor: Monitor;
   roms: DecompressedRoms;
   addresses: GameAddresses;
-  build: BuildOutput;
   logic: LogicResult;
   settings: Settings;
+  resolver: FileResolver;
 };
 
 function asmPatchGroups(world: World, settings: Settings) {
@@ -84,9 +83,12 @@ function asmPatchGroups(world: World, settings: Settings) {
   return keys.filter((k) => groups[k]);
 }
 
-export function buildPatchfiles(args: BuildPatchfileIn): Patchfile[] {
+
+
+export async function buildPatchfiles(args: BuildPatchfileIn): Promise<Patchfile[]> {
   args.monitor.log("Building Patchfile");
   const patches: Patchfile[] = [];
+  let ovlAddr = 0xe0000000;
 
   for (let world = 0; world < args.settings.players; ++world) {
     const p = args.patch.dup();
@@ -94,23 +96,57 @@ export function buildPatchfiles(args: BuildPatchfileIn): Patchfile[] {
     const meta: any = {};
 
     for (const game of GAMES) {
+      const gc = CONFIG[game];
+
       /* Apply ASM patches */
       const rom = args.roms[game].rom;
-      const patcher = new Patcher(args.opts, game, rom, groups, args.addresses, args.build[game].patches, p);
+      const patches = await args.resolver.fetch(`${game}_patch.bin`);
+      const patcher = new Patcher(args.opts, game, rom, groups, args.addresses, patches, p);
       patcher.run();
 
       /* Pack the payload */
-      const payload = args.build[game].payload;
+      const payload = await args.resolver.fetch(`${game}_payload.bin`);
       if (payload.length > (game === 'mm' ? 0x50000 : 0x80000)) {
         throw new Error(`Payload too large ${game}`);
       }
       p.addNewFile(`${game}/payload`, game === 'oot' ? 0xf0000000 : 0xf0100000, payload, false);
 
+      /* Handle extra overlays */
+      const allOverlays = await args.resolver.glob(/ovl\/(oot|mm)\/.+\.zovlx$/);
+      const overlays = allOverlays.filter((f) => f.startsWith(`ovl/${game}`));
+      for (const ov of overlays) {
+        /* Resolve and inject the new overlay */
+        const raw = await args.resolver.fetch(ov);
+        const header = raw.subarray(0, 0x10);
+        const data = raw.subarray(0x10);
+        p.addNewFile(ov, ovlAddr, data, true);
+        const vromStart = ovlAddr;
+        const vromEnd = ovlAddr + data.length;
+        ovlAddr = vromEnd;
+
+        /* Parse the header */
+        const actorId = header.readUInt32BE(0x00);
+        const vramInit = header.readUInt32BE(0x04);
+        const vramStart = header.readUInt32BE(0x08);
+        const vramEnd = header.readUInt32BE(0x0c);
+
+        const patch = Buffer.alloc(4 * 6);
+        patch.writeUInt32BE(vromStart,  0x00);
+        patch.writeUInt32BE(vromEnd,    0x04);
+        patch.writeUInt32BE(vramStart,  0x08);
+        patch.writeUInt32BE(vramEnd,    0x0c);
+        patch.writeUInt32BE(0,          0x10);
+        patch.writeUInt32BE(vramInit,   0x14);
+
+        p.addDataPatch(game, gc.actorsOvlAddr + actorId * 0x20, patch);
+      }
+
       /* Handle cosmetics */
       const gameCosmetics: {[k: string]: number[]} = {};
       meta.cosmetics = meta.cosmetics || {};
       meta.cosmetics[game] = gameCosmetics;
-      const { cosmetic_name, cosmetic_addr } = args.build[game];
+      const cosmetic_name = await args.resolver.fetch(`${game}_cosmetic_name.bin`);
+      const cosmetic_addr = await args.resolver.fetch(`${game}_cosmetic_addr.bin`);
       const names = cosmetic_name.toString('utf-8').split(/\0+/);
       names.pop();
 

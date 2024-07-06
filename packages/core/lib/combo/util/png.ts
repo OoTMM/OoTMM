@@ -78,7 +78,7 @@ const parsePngBitmask = async (data: Buffer) => {
 
 export const png = async (opts: Options, filename: string, mode: 'rgba32' | 'rgba16' | 'i4' | 'bitmask') => {
   if (process.env.BROWSER) {
-    return opts.fetch!(`${filename}.bin`);
+    return opts.resolver!.fetch(`${filename}.bin`);
   } else {
     const data = await fs.promises.readFile(__dirname + '/../../../data/assets/' + filename + '.png');
     let pngBuffer: Buffer;

@@ -1,0 +1,27 @@
+{
+  "name": "@ootmm/tools",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "cmake -B build && cmake --build build && cmake --install build --prefix bin"
+  },
+  "author": "Nax",
+  "license": "MIT",
+  "nx": {
+    "targets": {
+      "build": {
+        "inputs": [
+          "{projectRoot}/src/**/*",
+          "{projectRoot}/CMakeLists.txt"
+        ],
+        "outputs": [
+          "{projectRoot}/bin/**/*"
+        ],
+        "dependsOn": [
+          "^build"
+        ]
+      }
+    }
+  }
+}

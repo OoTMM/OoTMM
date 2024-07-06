@@ -4,6 +4,7 @@ set(ARCH "mips64-ultra-elf")
 set(CMAKE_C_COMPILER "${ARCH}-gcc")
 set(CMAKE_ASM_COMPILER "${ARCH}-gcc")
 
+
 project(OoTMM C ASM)
 
 set(FLAGS "-EB -ffreestanding -nostdlib -fno-PIC -mabi=32 -mno-shared -mno-abicalls -march=vr4300 -mtune=vr4300 -mfix4300 -mfix-r4000 -G 0 -Os -Wall -Werror=implicit-function-declaration -Werror=implicit-int -Wimplicit-fallthrough")
@@ -26,7 +27,13 @@ include_directories("${CMAKE_SOURCE_DIR}/include" "${CMAKE_SOURCE_DIR}/build/inc
 
 add_compile_definitions("F3DEX_GBI_2=1")
 
+# Tools
+set(TOOL_DIR  "${CMAKE_SOURCE_DIR}/../tools/bin")
+set(TOOL_ZOVL "${TOOL_DIR}/zovl")
+
+# Linker scripts
 set(LDSCRIPT_IN "${CMAKE_SOURCE_DIR}/src/link.ld.in")
+set(LDSCRIPT_OVL "${CMAKE_SOURCE_DIR}/src/link_ovl.ld")
 
 function(build game)
   # Common stuff
@@ -45,18 +52,31 @@ function(build game)
     COMMENT "Generating linker script for ${game}"
     VERBATIM
   )
-
   add_custom_target(
     ldscript_${game} DEPENDS "${ldscript}"
   )
 
   # Build
   file(GLOB_RECURSE SOURCES "src/${game}/*.c" "src/${game}/*.S" "src/common/*.c" "src/common/*.S" "build/src/${game}/*.c" "build/src/${game}/*.S" "build/src/common/*.c" "build/src/common/*.S")
+  file(GLOB_RECURSE SOURCES_OVL "src/${game}/ovl/*.c")
+  list(REMOVE_ITEM SOURCES ${SOURCES_OVL})
+
   add_executable(${game} ${SOURCES})
   set_target_properties(${game} PROPERTIES LINK_DEPENDS "${ldscript}")
   add_dependencies(${game} ldscript_${game})
   target_compile_definitions(${game} PRIVATE ${game_define})
   target_link_options(${game} PRIVATE "-T${ldscript}")
+
+  # Extract map
+  set(game_map "${CMAKE_BINARY_DIR}/${game}_map.txt")
+  add_custom_command(
+    OUTPUT "${game_map}"
+    COMMAND "${CMAKE_SOURCE_DIR}/src/extract_sym.sh" "$<TARGET_FILE:${game}>" "${game_map}"
+    DEPENDS ${game}
+    COMMENT "Extracting map for ${game}"
+    VERBATIM
+  )
+  add_custom_target(${game}_map ALL DEPENDS "${game_map}")
 
   # Extract payload
   set(game_payload "${CMAKE_BINARY_DIR}/${game}_payload.bin")
@@ -85,5 +105,38 @@ function(build game)
   install(FILES ${game_payload} ${game_patch} ${game_cosmetic_name} ${game_cosmetic_addr} DESTINATION "bin")
 endfunction()
 
+function (add_actor game name file)
+  # Common stuff
+  string(TOUPPER ${game} game_upper)
+  set(target_name "${game}_ovl_${name}")
+  set(ovl "${CMAKE_BINARY_DIR}/ovl/${game}/${name}.zovlx")
+  set(game_define "-DGAME_${game_upper}=1")
+  set(game_map "${CMAKE_BINARY_DIR}/${game}_map.txt")
+
+  add_executable(${target_name} "${CMAKE_CURRENT_SOURCE_DIR}/src/${file}")
+  set_target_properties(${target_name} PROPERTIES LINK_DEPENDS "${game_map};${LDSCRIPT_OVL}")
+  target_link_options(${target_name} PRIVATE "-T${LDSCRIPT_OVL}" "-T${game_map}" "-Wl,--emit-relocs")
+  target_compile_definitions(${target_name} PRIVATE ${game_define})
+
+  make_directory("ovl/${game}")
+  add_custom_command(
+    OUTPUT "${ovl}"
+    COMMAND "${TOOL_ZOVL}" "$<TARGET_FILE:${target_name}>" "${ovl}"
+    DEPENDS ${target_name} "${TOOL_ZOVL}"
+    COMMENT "Generating zactor for ${name}"
+    VERBATIM
+  )
+  add_custom_target(
+    ${target_name}_zovl ALL DEPENDS "${ovl}"
+  )
+
+  # Install
+  install(FILES ${ovl} DESTINATION "bin/ovl/${game}")
+endfunction()
+
 build(oot)
 build(mm)
+
+add_actor(mm Custom_Magic_Fire "mm/ovl/Custom/Custom_Magic_Fire.c")
+add_actor(mm Custom_Magic_Wind "mm/ovl/Custom/Custom_Magic_Wind.c")
+add_actor(mm Custom_Magic_Dark "mm/ovl/Custom/Custom_Magic_Dark.c")

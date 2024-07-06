@@ -1,22 +1,9 @@
-import childProcess from "child_process";
+import childProcess from 'child_process';
 import fs from 'fs';
 import path from 'path';
 
-import { GAMES } from "./config";
-import { Options } from "./options";
-import { fileExists } from "./util";
-
-type BuildGameOutput = {
-  payload: Buffer;
-  patches: Buffer;
-  cosmetic_name: Buffer;
-  cosmetic_addr: Buffer;
-};
-
-export type BuildOutput = {
-  oot: BuildGameOutput;
-  mm: BuildGameOutput;
-};
+import { Options } from './options';
+import { fileExists } from './util';
 
 const cloneDependencies = async () => {
   const thirdPartyDir = path.resolve('third_party');
@@ -47,7 +34,7 @@ async function runCommand(cmd: string, args: string[]) {
   });
 }
 
-async function make(opts: Options) {
+export async function build(opts: Options) {
   /* Clone dependencies */
   await cloneDependencies();
 
@@ -64,39 +51,6 @@ async function make(opts: Options) {
   await runCommand('cmake', ['-B', buildDir, '-S', sourceDir, '-G', 'Ninja', `-DCMAKE_BUILD_TYPE=${opts.debug ? 'Debug' : 'Release'}`]);
   await runCommand('cmake', ['--build', buildDir]);
   await runCommand('cmake', ['--install', buildDir, '--prefix', installDir]);
+
+  return installDir + '/bin';
 }
-
-const getBuildArtifacts = async (root: string): Promise<BuildOutput> => {
-  const [oot, mm] = await Promise.all(GAMES.map(async (g) => {
-    const [payload, patches, cosmetic_name, cosmetic_addr] = await Promise.all([
-      fs.promises.readFile(path.resolve(root, g + '_payload.bin')),
-      fs.promises.readFile(path.resolve(root, g + '_patch.bin')),
-      fs.promises.readFile(path.resolve(root, g + '_cosmetic_name.bin')),
-      fs.promises.readFile(path.resolve(root, g + '_cosmetic_addr.bin')),
-    ]);
-    return { payload, patches, cosmetic_name, cosmetic_addr};
-  }));
-  return { oot, mm };
-};
-
-const fetchBuildArtifacts = async (opts: Options): Promise<BuildOutput> => {
-  const [oot, mm] = await Promise.all(GAMES.map(async (g) => {
-    const [payload, patches, cosmetic_name, cosmetic_addr] = await Promise.all([
-      opts.fetch!(`${g}_payload.bin`),
-      opts.fetch!(`${g}_patch.bin`),
-      opts.fetch!(`${g}_cosmetic_name.bin`),
-      opts.fetch!(`${g}_cosmetic_addr.bin`),
-    ]);
-    return { payload, patches, cosmetic_name, cosmetic_addr };
-  }));
-  return { oot, mm };
-};
-
-export const build = async (opts: Options): Promise<BuildOutput> => {
-  if (!process.env.BROWSER) {
-    await make(opts);
-    return getBuildArtifacts('build/bin');
-  } else {
-    return fetchBuildArtifacts(opts);
-  }
-};
