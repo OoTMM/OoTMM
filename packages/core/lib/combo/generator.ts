@@ -1,16 +1,15 @@
-
-import { build } from "./build";
-import { codegen } from "./codegen";
-import { custom } from "./custom";
-import { decompressGames } from "./decompress";
+import { codegen } from './codegen';
+import { custom } from './custom';
+import { decompressGames } from './decompress';
 import { logic } from './logic';
 import { Monitor, MonitorCallbacks } from './monitor';
-import { Options } from "./options";
-import { pack } from "./pack";
+import { Options } from './options';
+import { pack } from './pack';
 import { buildPatchfiles } from './patch-build';
 import { Patchfile } from './patch-build/patchfile';
 import { makeAddresses } from './addresses';
 import { applyRandomSettings } from './settings/random';
+import { makeResolver } from './resolve';
 
 export type GeneratorOutputFile = {
   name: string;
@@ -24,7 +23,7 @@ export type GeneratorOutput = {
 };
 
 function makeFile(opts: { name?: string, data: string | Buffer, mime: string, hash?: string, world?: number, ext: string }): GeneratorOutputFile {
-  let name = "OoTMM";
+  let name = 'OoTMM';
 
   if (opts.name) {
     name = name + '-' + opts.name;
@@ -77,17 +76,18 @@ export class Generator {
       }
       const patchfile = new Patchfile;
       await custom(this.opts, this.monitor, roms, patchfile);
-      const buildResult = await build(this.opts);
+      const resolver = await makeResolver(this.opts);
+
       /* Run logic */
       const logicResult = logic(this.monitor, this.opts);
       patchfile.setHash(logicResult.hash);
-      patchfiles = buildPatchfiles({
+      patchfiles = await buildPatchfiles({
         opts: this.opts,
         patch: patchfile,
         monitor: this.monitor,
         roms,
         addresses,
-        build: buildResult,
+        resolver,
         logic: logicResult,
         settings: this.opts.settings,
       });

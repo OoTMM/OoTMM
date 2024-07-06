@@ -14,7 +14,7 @@ async function makeDataPromise(path: string) {
 
 const dataPromise = makeDataPromise(dataVersionZipFile).then(data => JSZip.loadAsync(data));
 
-async function fetchFunc(path: string) {
+async function resolverFetchFunc(path: string) {
   const zip = await dataPromise;
   const file = zip.file(path);
   if (file) {
@@ -22,6 +22,11 @@ async function fetchFunc(path: string) {
   } else {
     throw new Error(`Failed to unzip file ${path}`);
   }
+}
+
+async function resolverGlobFunc(pattern: RegExp) {
+  const zip = await dataPromise;
+  return zip.file(pattern).map(f => f.name);
 }
 
 export type WorkerTaskItemPool = {
@@ -119,7 +124,8 @@ async function onTaskGenerate(task: WorkerTaskGenerate) {
   if (patch) {
     patchData = await readFile(patch);
   }
-  const generator = generate({ oot: ootData, mm: mmData, opts: { ...options, patch: patchData, fetch: fetchFunc }, monitor: { onLog, onProgress, onWarn } });
+  const resolver = { fetch: resolverFetchFunc, glob: resolverGlobFunc };
+  const generator = generate({ oot: ootData, mm: mmData, opts: { ...options, patch: patchData, resolver }, monitor: { onLog, onProgress, onWarn } });
   generator.run().then(result => {
     postMessage({
       type: 'generate',

@@ -3,7 +3,15 @@ import { randString } from './random';
 import { Cosmetics, makeCosmetics } from './cosmetics';
 import { makeRandomSettings, OptionRandomSettings } from './settings/random';
 
-export type FetchFunc = (filename: string) => Promise<Buffer>;
+type FileResolverFetchFunc = (filename: string) => Promise<Buffer>;
+type FileResolverGlobFunc = (pattern: RegExp) => Promise<string[]>;
+
+export type FileResolver = {
+  fetch: FileResolverFetchFunc;
+  glob: FileResolverGlobFunc;
+};
+
+export type ResolverFetchFunc = (filename: string) => Promise<Buffer>;
 
 export type Options = {
   debug: boolean;
@@ -12,12 +20,12 @@ export type Options = {
   cosmetics: Cosmetics;
   random: OptionRandomSettings;
   patch?: Buffer | ArrayBuffer;
-  fetch?: FetchFunc;
+  resolver?: FileResolver;
 };
 
 export type OptionsInput =
   Partial<
-    Pick<Options, 'debug' | 'seed' | 'patch' | 'fetch'>
+    Pick<Options, 'debug' | 'seed' | 'patch' | 'resolver'>
     & { settings: Partial<Settings> }
     & { cosmetics: Partial<Cosmetics> }
     & { random: Partial<OptionRandomSettings> }
@@ -42,7 +50,7 @@ export const options = (opts: OptionsInput): Options => {
   newOpts.settings = makeSettings(opts.settings || {});
   newOpts.cosmetics = makeCosmetics(opts.cosmetics || {});
   newOpts.random = makeRandomSettings(opts.random || {});
-  newOpts.fetch = opts.fetch;
+  newOpts.resolver = opts.resolver;
 
   return newOpts as Options;
 };
