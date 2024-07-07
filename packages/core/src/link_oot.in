@@ -243,8 +243,6 @@ Play_InCutscene = 0x8009cb08;
 
 DeathWarp = 0x8009da10;
 
-Gfx_DrawDListOpa = 0x80028048;
-
 _AddRupees = 0x800721cc;
 
 SkelAnime_DrawFlexLod = 0x800894a4;
