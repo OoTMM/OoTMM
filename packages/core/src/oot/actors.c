@@ -327,7 +327,7 @@ Actor* Actor_SpawnWrapper(ActorContext* actorCtx, GameState_Play *play, short ac
             return NULL;
 
     sActorIdToSpawn = actorId;
-    actor = Actor_Spawn(actorCtx, play, actorId, x, y, z, rx, ry, rz, variable);
+    actor = _Actor_Spawn(actorCtx, play, actorId, x, y, z, rx, ry, rz, variable);
     if (actorId == AC_ARMS_HOOK && gSave.age == AGE_ADULT)
         actor->objectSlot = Object_GetSlot(&play->objectCtx, 0x14);
     return actor;
