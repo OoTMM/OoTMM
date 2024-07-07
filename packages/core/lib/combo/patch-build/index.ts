@@ -140,14 +140,13 @@ export async function buildPatchfiles(args: BuildPatchfileIn): Promise<Patchfile
         patch.writeUInt32BE(0,          0x10);
         patch.writeUInt32BE(vramInit,   0x14);
 
-        /* Get the old header */
-        /* TODO: Delete old file */
-        //const oldHeader = rom.subarray(gc.actorsOvlAddr + actorId * 0x20, gc.actorsOvlAddr + actorId * 0x20 + 0x20);
-        //const oldVramStart = oldHeader.readUInt32BE(0x08);
-        //if (oldVramStart !== 0) {
-        //  const oldFile = args.addresses[game].file(oldVramStart);
-        //
-        //}
+        /* Delete the old overlay if possible */
+        const oldHeader = rom.subarray(gc.actorsOvlAddr + actorId * 0x20, gc.actorsOvlAddr + actorId * 0x20 + 0x20);
+        const oldVramStart = oldHeader.readUInt32BE(0x08);
+        if (oldVramStart !== 0) {
+          const oldFile = args.addresses[game].fileFromRAM(oldVramStart);
+          p.removedFiles.push(oldFile.name);
+        }
 
         const fileAddr = args.addresses[game].fileFromROM(gc.actorsOvlAddr + actorId * 0x20);
         p.addPatch(fileAddr.name, fileAddr.offset, patch);
