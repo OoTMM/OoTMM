@@ -13,6 +13,10 @@ typedef struct Actor_ObjTsubo
     Actor_ObjTsubo_ActionFunc   actionFunc;
     ColliderCylinder            collider;
     s8                          requiredObjectSlot;
+
+    /* Extended flags */
+    Xflag   xflag;
+    u8      isExtended;
 }
 Actor_ObjTsubo;
 
