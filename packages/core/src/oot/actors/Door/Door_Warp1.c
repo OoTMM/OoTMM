@@ -72,12 +72,12 @@ int DoorWarp1_Collide(Actor* this, GameState_Play* play)
 {
     float dist;
 
-    dist = this->xzDistanceFromLink;
+    dist = this->xzDistToPlayer;
     if (dist < 0.f)
         dist = -dist;
     if (dist < 60.f)
     {
-        dist = GET_LINK(play)->base.world.pos.y - this->world.pos.y;
+        dist = GET_PLAYER(play)->actor.world.pos.y - this->world.pos.y;
         if (dist < 0.f)
             dist = -dist;
         if (dist < 20.f)
@@ -116,7 +116,7 @@ int DoorWarp1_ShouldTrigger(Actor* this, GameState_Play* play)
 
         if (!GetEventChk(data->event))
         {
-            if (Actor_HasParent(this))
+            if (Actor_HasParentZ(this))
             {
                 SetEventChk(data->event);
             }
@@ -127,7 +127,7 @@ int DoorWarp1_ShouldTrigger(Actor* this, GameState_Play* play)
             return 0;
         }
 
-        if ((GET_LINK(play)->state & 0x400) != 0)
+        if ((GET_PLAYER(play)->state & 0x400) != 0)
             return 0;
 
         comboTriggerWarp(play, id);

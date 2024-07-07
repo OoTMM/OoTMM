@@ -162,7 +162,7 @@ void EnDns_MaybeDestroy(Actor* this)
 
     EnDns_ItemOverride(&o, EnDns_GetID(this));
     if (o.gi == 0)
-        ActorDestroy(this);
+        Actor_Kill(this);
 }
 
 static int EnDns_CanBuy(Actor* this)
@@ -247,8 +247,8 @@ static int EnDns_HasGivenItem(Actor* this)
     Actor_Player* link;
     int id;
 
-    link = GET_LINK(gPlay);
-    if (Actor_HasParent(this) && !(link->state & PLAYER_ACTOR_STATE_GET_ITEM))
+    link = GET_PLAYER(gPlay);
+    if (Actor_HasParentZ(this) && !(link->state & PLAYER_ACTOR_STATE_GET_ITEM))
     {
         id = EnDns_GetID(this);
         BITMAP8_SET(gCustomSave.scrubs, id);

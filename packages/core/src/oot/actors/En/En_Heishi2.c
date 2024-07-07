@@ -24,11 +24,11 @@ static void EnHeishi2_MaskTradeCheck(Actor* this, GameState_Play* play)
 {
     Actor_Player* link;
 
-    link = GET_LINK(play);
+    link = GET_PLAYER(play);
     if (link->state & PLAYER_ACTOR_STATE_GET_ITEM)
         return;
 
-    if (Actor_HasParent(this))
+    if (Actor_HasParentZ(this))
     {
         this->parent = NULL;
         EnHeishi2_AfterMaskTrade(this, play);

@@ -7,6 +7,7 @@ import { PATCH_GROUP_VALUES, PatchGroup } from './group';
 
 export class Patcher {
   private ranges: [number, number][];
+  private files: Set<string>;
   private opts: Options;
   private game: Game;
   private rom: Buffer;
@@ -20,6 +21,7 @@ export class Patcher {
 
   constructor(opts: Options, game: Game, rom: Buffer, patchGroups: PatchGroup[], addresses: GameAddresses, patches: Buffer, patchfile: Patchfile) {
     this.ranges = [];
+    this.files = new Set;
     this.opts = opts;
     this.game = game;
     this.rom = rom;
@@ -74,13 +76,19 @@ export class Patcher {
     }
   }
 
+  private virtualToPhysical(addr: number) {
+    const e = this.addresses.file(addr);
+    this.files.add(e.filename);
+    return e.addr;
+  }
+
   patchASM(patch: Buffer) {
     const addr = patch.readUInt32BE(this.cursor + 0x00);
     const size = patch.readUInt32BE(this.cursor + 0x04);
     this.cursor += 0x08;
     const data = patch.subarray(this.cursor, this.cursor + size);
     this.cursor += size;
-    const paddr = this.addresses.virtualToPhysical(addr);
+    const paddr = this.virtualToPhysical(addr);
     this.patch(paddr, data);
   }
 
@@ -108,7 +116,7 @@ export class Patcher {
     /* Patch the load/store instructions */
     for (let i = 0; i < count; ++i) {
       const addr = patch.readUInt32BE(this.cursor + i * 4);
-      const paddr = this.addresses.virtualToPhysical(addr);
+      const paddr = this.virtualToPhysical(addr);
       let instr = this.rom.readUInt32BE(paddr);
       let op = (instr >>> 26) & 0x3f;
       switch (op) {
@@ -155,7 +163,7 @@ export class Patcher {
     /* Patch the MIPS instructions */
     for (let i = 0; i < count; ++i) {
       const addr = patch.readUInt32BE(this.cursor + i * 4);
-      const paddr = this.addresses.virtualToPhysical(addr);
+      const paddr = this.virtualToPhysical(addr);
       let instr = this.rom.readUInt32BE(paddr);
       const op = (instr >>> 26) & 0x3f;
       let value = target_lo;
@@ -181,7 +189,7 @@ export class Patcher {
     /* Patch the MIPS instructions */
     for (let i = 0; i < count; ++i) {
       const addr = patch.readUInt32BE(this.cursor + i * 4);
-      const paddr = this.addresses.virtualToPhysical(addr);
+      const paddr = this.virtualToPhysical(addr);
       let instr = this.rom.readUInt32BE(paddr);
       instr = ((instr & 0xfc000000) | target) >>> 0;
       const instrBuffer = Buffer.alloc(4);
@@ -203,7 +211,7 @@ export class Patcher {
     /* Patch the MIPS instructions */
     for (let i = 0; i < count; ++i) {
       const addr = patch.readUInt32BE(this.cursor + i * 4);
-      const paddr = this.addresses.virtualToPhysical(addr);
+      const paddr = this.virtualToPhysical(addr);
       this.patch(paddr, valueBuffer);
     }
 
@@ -215,7 +223,7 @@ export class Patcher {
     const func = patch.readUInt32BE(this.cursor + 0x04);
     this.cursor += 0x08;
 
-    const paddr = this.addresses.virtualToPhysical(addr);
+    const paddr = this.virtualToPhysical(addr);
 
     const buffer = Buffer.alloc(8);
     buffer.writeUInt32BE((0x08000000 | (((func >>> 2) & 0x03ffffff) >>> 0)) >>> 0, 0);
@@ -240,7 +248,7 @@ export class Patcher {
     const func = patch.readUInt32BE(this.cursor + 0x04);
     this.cursor += 0x08;
 
-    const paddr = this.addresses.virtualToPhysical(addr);
+    const paddr = this.virtualToPhysical(addr);
     const instr = ((0x0c000000 | (((func >>> 2) & 0x03ffffff) >>> 0)) >>> 0);
     const instrBuffer = Buffer.alloc(4);
     instrBuffer.writeUInt32BE(instr, 0);
@@ -310,5 +318,7 @@ export class Patcher {
         throw new Error("Invalid patch type: " + type);
       }
     }
+
+    return { files: this.files };
   }
 }

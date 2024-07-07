@@ -4,7 +4,7 @@
 
 void EnSob1_AfterBuy(Actor_EnSob1* this, GameState_Play* play)
 {
-    if (!Actor_HasParent(&this->base))
+    if (!Actor_HasParentZ(&this->base))
         return;
 
     Shop_AfterBuy(play, this->items[this->itemIndex]);

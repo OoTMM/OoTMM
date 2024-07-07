@@ -95,7 +95,7 @@ void fixupOriginalSceneSetup(void)
     u32 entranceKey;
     u32 entrance;
 
-    entrance = gSave.entranceIndex;
+    entrance = gSave.entrance;
     entranceKey = (entrance >> 9);
 
     /* Swamp State */
@@ -157,7 +157,7 @@ void fixupOriginalSceneSetup(void)
         }
     }
 
-    gSave.entranceIndex = (entranceKey << 9) | (entrance & 0x1ff);
+    gSave.entrance = (entranceKey << 9) | (entrance & 0x1ff);
 }
 
 
@@ -240,7 +240,7 @@ static u32 entrGrottoExit(GameState_Play* play)
     switch (play->sceneId)
     {
     case SCE_MM_GROTTOS:
-        switch (play->roomCtx.curRoom.id)
+        switch (play->roomCtx.curRoom.num)
         {
         case 0x00: return ENTR_MM_GROTTO_EXIT_GOSSIPS_OCEAN;
         case 0x01: return ENTR_MM_GROTTO_EXIT_GOSSIPS_SWAMP;
@@ -327,7 +327,7 @@ static void spawnSirloin(GameState_Play* play)
     if (MM_CHECK_EVENT_INF(EV_MM_WEEK_DUNGEON_SH))
         return;
 
-    SpawnActor(&play->actorCtx, play, AC_EN_MM, -1025.f, 8.f, 400.f, 0.f, 0.f, 0.f, 0x8000);
+    Actor_Spawn(&play->actorCtx, play, AC_EN_MM, -1025.f, 8.f, 400.f, 0.f, 0.f, 0.f, 0x8000);
 }
 
 void preInitTitleScreen(void)
@@ -374,13 +374,13 @@ void preInitTitleScreen(void)
     else
         g.initialEntrance = ENTR_MM_CLOCK_TOWN;
     applyCustomEntrance(&entrance);
-    gSave.entranceIndex = entrance;
+    gSave.entrance = entrance;
 
     /* Fixup the scene/setup */
     fixupOriginalSceneSetup();
 
     /* Handle shuffled entrance */
-    switch (gSave.entranceIndex)
+    switch (gSave.entrance)
     {
     case ENTR_MM_BOSS_TEMPLE_WOODFALL:
     case ENTR_MM_BOSS_TEMPLE_SNOWHEAD:
@@ -415,7 +415,7 @@ static void Play_FixupSpawnTime(void)
     if (firstHalfDay == 0)
     {
         /* Work around a vanilla bug */
-        if (gSave.entranceIndex != ENTR_MM_CLOCK_TOWN)
+        if (gSave.entrance != ENTR_MM_CLOCK_TOWN)
         {
             gSave.day = 1;
             gSave.time = CLOCK_TIME(6, 1);
@@ -608,26 +608,26 @@ void hookPlay_Init(GameState_Play* play)
         comboLoadCustomKeep();
     }
 
-    if (gSave.entranceIndex == ENTR_MM_TERMINA_FIELD_FROM_CLOCK_TOWN_WEST && gSaveContext.nextCutscene == 0xfff7)
+    if (gSave.entrance == ENTR_MM_TERMINA_FIELD_FROM_CLOCK_TOWN_WEST && gSaveContext.nextCutscene == 0xfff7)
     {
         isEndOfGame = 1;
     }
 
-    if ((gSave.entranceIndex == ENTR_MM_CLOCK_TOWN && gLastEntrance == ENTR_MM_CLOCK_TOWN_FROM_SONG_OF_TIME) || gSave.entranceIndex == ENTR_MM_CLOCK_TOWER_MOON_CRASH)
+    if ((gSave.entrance == ENTR_MM_CLOCK_TOWN && gLastEntrance == ENTR_MM_CLOCK_TOWN_FROM_SONG_OF_TIME) || gSave.entrance == ENTR_MM_CLOCK_TOWER_MOON_CRASH)
     {
         /* Song of Time / Moon crash */
         gNoTimeFlow = 0;
         entrance = g.initialEntrance;
         applyCustomEntrance(&entrance);
-        gSave.entranceIndex = entrance;
+        gSave.entrance = entrance;
     }
 
-    if (gSave.entranceIndex == ENTR_MM_WOODFALL_FROM_TEMPLE)
+    if (gSave.entrance == ENTR_MM_WOODFALL_FROM_TEMPLE)
     {
         /* Woodfall from temple */
         if (!MM_GET_EVENT_WEEK(EV_MM_WEEK_WOODFALL_TEMPLE_RISE))
         {
-            gSave.entranceIndex = ENTR_MM_WARP_OWL_WOODFALL;
+            gSave.entrance = ENTR_MM_WARP_OWL_WOODFALL;
         }
     }
 
@@ -657,13 +657,13 @@ void hookPlay_Init(GameState_Play* play)
     if (Config_Flag(CFG_MM_OPEN_GB))
         MM_SET_EVENT_WEEK(EV_MM_WEEK_GREAT_BAY_TURTLE);
 
-    if (gSave.entranceIndex == ENTR_MM_CLOCK_TOWER || gSave.entranceIndex == ENTR_MM_MOON)
+    if (gSave.entrance == ENTR_MM_CLOCK_TOWER || gSave.entrance == ENTR_MM_MOON)
         gNoTimeFlow = 1;
 
     Play_FixupSpawnTime();
     Play_Init(play);
 
-    gLastEntrance = gSave.entranceIndex;
+    gLastEntrance = gSave.entrance;
     g.inGrotto = (play->sceneId == SCE_MM_GROTTOS);
     if (!g.inGrotto)
     {
@@ -726,7 +726,7 @@ void Play_UpdateWrapper(GameState_Play* play)
     malloc_check();
     comboCacheGarbageCollect();
     comboObjectsGC();
-    link = GET_LINK(play);
+    link = GET_PLAYER(play);
     Player_TryUpdateForm(link, play);
     Multi_Update(play);
     Play_Update(play);
@@ -747,7 +747,7 @@ void Play_TransitionDone(GameState_Play* play)
         entrance = g.nextEntrance;
         break;
     case ENTR_FW_CROSS:
-        entrance = gForeignSave.fw.entranceIndex | MASK_FOREIGN_ENTRANCE;
+        entrance = gForeignSave.fw.entrance | MASK_FOREIGN_ENTRANCE;
         gComboCtx.isFwSpawn = 1;
         break;
     }
@@ -799,8 +799,8 @@ void Play_SetupRespawnPointRaw(GameState_Play* play, int respawnId, int playerPa
 {
     Actor_Player* link;
 
-    link = GET_LINK(play);
-    Play_SetRespawnData(play, respawnId, gSave.entranceIndex, gPlay->roomCtx.curRoom.id, playerParams, &link->base.world.pos, link->base.rot2.y);
+    link = GET_PLAYER(play);
+    Play_SetRespawnData(play, respawnId, gSave.entrance, gPlay->roomCtx.curRoom.num, playerParams, &link->actor.world.pos, link->actor.shape.rot.y);
 }
 
 void Play_SetupRespawnPoint(GameState_Play* play, int respawnId, int playerParams)

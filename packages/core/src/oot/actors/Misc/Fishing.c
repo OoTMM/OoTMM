@@ -4,7 +4,7 @@
 
 int Fishing_HasGivenItem(Actor* this)
 {
-    if (Actor_HasParent(this))
+    if (Actor_HasParentZ(this))
     {
         if (gSave.age == AGE_CHILD)
             gOotExtraFlags.fishingChild = 1;
@@ -269,7 +269,7 @@ void Fishing_FishGiveItem(Actor* this, GameState_Play* play) {
     }
     else
     {
-        ActorDestroy(this);
+        Actor_Kill(this);
     }
 
     comboAddItemEx(play, &q, major);

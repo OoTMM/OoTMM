@@ -167,7 +167,7 @@ static void reloadHookshot(GameState_Play* play)
 
     if (play)
     {
-        link = GET_LINK(play);
+        link = GET_PLAYER(play);
         link->state &= ~(PLAYER_ACTOR_STATE_HOLD_ITEM | PLAYER_ACTOR_STATE_USE_ITEM);
     }
 }
@@ -1013,7 +1013,7 @@ static int addItemShieldMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 
 #if defined(GAME_MM)
     if (play)
-        UpdateEquipment(play, GET_LINK(play));
+        UpdateEquipment(play, GET_PLAYER(play));
 #endif
 
     return 0;

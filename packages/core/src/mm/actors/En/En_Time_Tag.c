@@ -11,7 +11,7 @@ void EnTimeTag_HandlerNull(Actor* this, GameState_Play* play)
 
 void EnTimeTag_GiveItemSoaring(Actor* this, GameState_Play* play)
 {
-    if (Actor_HasParent(this))
+    if (Actor_HasParentZ(this))
     {
         gMmExtraFlags.songSoaring = 1;
         SET_HANDLER(this, EnTimeTag_HandlerNull);

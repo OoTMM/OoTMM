@@ -25,7 +25,7 @@ void EnTakaraMan_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, fl
 
 int EnTakaraMan_HasGivenItem(Actor* this)
 {
-    if (!Actor_HasParent(this))
+    if (!Actor_HasParentZ(this))
         return 0;
 
     gOotExtraFlags.chestGameKey = 1;

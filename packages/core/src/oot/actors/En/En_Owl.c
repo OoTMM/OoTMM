@@ -9,7 +9,7 @@ void EnOwl_AfterInit(Actor* this)
     case 0x09:
         break;
     default:
-        ActorDestroy(this);
+        Actor_Kill(this);
         break;
     }
 }

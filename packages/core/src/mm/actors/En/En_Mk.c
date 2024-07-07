@@ -21,7 +21,7 @@ void EnMk_HandlerZoraEggs(Actor* this, GameState_Play* play)
 {
     ComboItemQuery q;
 
-    if (gSave.playerForm != MM_PLAYER_FORM_ZORA || Actor_HasParent(this))
+    if (gSave.playerForm != MM_PLAYER_FORM_ZORA || Actor_HasParentZ(this))
     {
         SET_HANDLER(this, EnMk_HandlerNull);
         return;

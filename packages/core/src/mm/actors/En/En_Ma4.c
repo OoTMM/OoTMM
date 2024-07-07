@@ -9,11 +9,11 @@ static void EnMa4_HandleLearnSongEpona(Actor* this, GameState_Play* play)
     Actor_Player* link;
     void* handler;
 
-    link = GET_LINK(play);
+    link = GET_PLAYER(play);
     if (link->state & PLAYER_ACTOR_STATE_GET_ITEM)
         return;
 
-    if (Actor_HasParent(this))
+    if (Actor_HasParentZ(this))
     {
         this->parent = NULL;
         gMmExtraFlags.songEpona = 1;

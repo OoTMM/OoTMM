@@ -9,6 +9,15 @@
 #include <combo/common/ocarina.h>
 #include <combo/mm/object.h>
 
+#define ACTORCTX_FLAG_0             (1 << 0)
+#define ACTORCTX_FLAG_TELESCOPE_ON  (1 << 1)
+#define ACTORCTX_FLAG_PICTO_BOX_ON  (1 << 2)
+#define ACTORCTX_FLAG_3             (1 << 3)
+#define ACTORCTX_FLAG_4             (1 << 4)
+#define ACTORCTX_FLAG_5             (1 << 5)
+#define ACTORCTX_FLAG_6             (1 << 6)
+#define ACTORCTX_FLAG_7             (1 << 7)
+
 typedef struct
 {
     void* readBuf;
@@ -417,7 +426,7 @@ _Static_assert(sizeof(MessageContext) == 0x120e0, "MM MessageContext size is wro
 
 typedef struct Room
 {
-    s8 id;
+    s8 num;
     u8 unk_1;
     u8 behaviorType2;
     u8 behaviorType1;
@@ -455,6 +464,12 @@ typedef struct {
     /* 0x1 */ u8   ambienceId;
 } SequenceContext; /* size = 0x2 */
 
+typedef struct CollisionContext
+{
+    char unk[0x1470];
+}
+CollisionContext;
+
 typedef struct GameState_Play
 {
     GameState           gs;
@@ -471,7 +486,8 @@ typedef struct GameState_Play
     /* 0x00812 */ s16 nextCamera;
     /* 0x00814 */ SequenceContext sequenceCtx;
     /* 0x00818 */ LightContext lightCtx;
-    char                unk_00828[0x01478];
+    char                unk_00828[0x08];
+    CollisionContext    colCtx;
     ActorContext        actorCtx;
     /* 0x01F24 */ CutsceneContext csCtx;
     char                unk_01f78[0x02740];
@@ -534,6 +550,7 @@ GameData;
 
 extern GameData* gGameData;
 
+ASSERT_OFFSET(GameState_Play, colCtx,                   0x00830);
 ASSERT_OFFSET(GameState_Play, actorCtx,                 0x01ca0);
 ASSERT_OFFSET(GameState_Play, csCtx,                    0x01f24);
 ASSERT_OFFSET(GameState_Play, sramCtx,                  0x046b8);

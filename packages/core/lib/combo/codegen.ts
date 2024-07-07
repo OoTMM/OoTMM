@@ -60,11 +60,11 @@ async function genGI() {
   cgSource.include('combo/sr.h');
   cgSource.raw('');
   cgSource.raw('#if defined(GAME_OOT)');
-  cgSource.raw('# define OBJECT_OOT(x) x');
-  cgSource.raw('# define OBJECT_MM(x) ((x) ^ MASK_FOREIGN_OBJECT)');
+  cgSource.raw('# define X_OOT(x) x');
+  cgSource.raw('# define X_MM(x) ((x) ^ MASK_FOREIGN_OBJECT)');
   cgSource.raw('#else');
-  cgSource.raw('# define OBJECT_OOT(x) ((x) ^ MASK_FOREIGN_OBJECT)');
-  cgSource.raw('# define OBJECT_MM(x) x');
+  cgSource.raw('# define X_OOT(x) ((x) ^ MASK_FOREIGN_OBJECT)');
+  cgSource.raw('# define X_MM(x) x');
   cgSource.raw('#endif');
   cgSource.raw('');
   cgSource.raw('const GetItem kExtendedGetItems[] = {');
@@ -80,7 +80,7 @@ async function genGI() {
       if (gi.object.type === 'custom') {
         fields.push(`CUSTOM_OBJECT_ID_${gi.object.id}`);
       } else {
-        fields.push(`OBJECT_${gi.object.type.toUpperCase()}(0x${gi.object.id.toString(16)})`);
+        fields.push(`X_${gi.object.type.toUpperCase()}(0x${gi.object.id.toString(16)})`);
       }
     }
     cgSource.raw(`    { ${fields.join(', ')} },`);

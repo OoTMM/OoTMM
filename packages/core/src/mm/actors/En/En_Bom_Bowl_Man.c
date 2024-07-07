@@ -3,7 +3,7 @@
 
 int EnBomBowlMan_HasGivenItem(Actor* this)
 {
-    if (Actor_HasParent(this))
+    if (Actor_HasParentZ(this))
     {
         gMmExtraFlags2.notebook = 1;
         return 1;

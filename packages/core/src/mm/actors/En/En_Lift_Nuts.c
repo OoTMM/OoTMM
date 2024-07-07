@@ -3,7 +3,7 @@
 
 int EnLiftNuts_HasGivenItem(Actor* this)
 {
-    if (Actor_HasParent(this))
+    if (Actor_HasParentZ(this))
     {
         gMmExtraFlags2.dekuPlayground = 1;
         return 1;

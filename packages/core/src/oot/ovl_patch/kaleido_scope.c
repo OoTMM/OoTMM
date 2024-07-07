@@ -52,7 +52,7 @@ static int checkItemToggle(GameState_Play* play)
             comboToggleSlot(itemCursor);
             if (itemCursor == ITS_OOT_TRADE_CHILD)
             {
-                link = GET_LINK(play);
+                link = GET_PLAYER(play);
                 link->mask = 0;
                 Interface_LoadItemIconImpl(play, 0);
             }
@@ -84,7 +84,7 @@ static int checkItemToggle(GameState_Play* play)
 
     if (gSave.age == AGE_CHILD && itemId == ITEM_OOT_SWORD_KOKIRI && gSave.equips.equipment.swords == 1)
     {
-        if (!(GET_LINK(play)->state2 & PLAYER_ACTOR_STATE_WATER))
+        if (!(GET_PLAYER(play)->state2 & PLAYER_ACTOR_STATE_WATER))
         {
             ret = 1;
             if (press)

@@ -54,7 +54,7 @@
 
 typedef struct Actor_Player
 {
-    Actor           base;
+    Actor           actor;
     s8              currentTunic; /* current tunic from `PlayerTunic` */
     s8              currentSwordItemId;
     s8              currentShield; /* current shield from `PlayerShield` */

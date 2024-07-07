@@ -22,14 +22,14 @@ static void DmChar02_ItemOverride(ComboItemOverride* o, int npc)
 void DmChar02_InitScaleHook(Actor* this, float scale)
 {
     this->world.pos.y = -1000.0f;
-    ActorSetScale(this, scale);
+    Actor_SetScale(this, scale);
 }
 
 PATCH_CALL(0x80aab008, DmChar02_InitScaleHook);
 
 int DmChar02_HasGivenItem(Actor* this)
 {
-    if (Actor_HasParent(this))
+    if (Actor_HasParentZ(this))
     {
         if (!gMmExtraFlags2.ocarina)
         {
@@ -50,7 +50,7 @@ void DmChar02_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float
     Actor_Player* link;
     int npc;
 
-    link = GET_LINK(play);
+    link = GET_PLAYER(play);
     if (link->state & PLAYER_ACTOR_STATE_GET_ITEM)
         return;
 

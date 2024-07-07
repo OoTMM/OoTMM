@@ -4,7 +4,6 @@ set(ARCH "mips64-ultra-elf")
 set(CMAKE_C_COMPILER "${ARCH}-gcc")
 set(CMAKE_ASM_COMPILER "${ARCH}-gcc")
 
-
 project(OoTMM C ASM)
 
 set(FLAGS "-EB -ffreestanding -nostdlib -fno-PIC -mabi=32 -mno-shared -mno-abicalls -march=vr4300 -mtune=vr4300 -mfix4300 -mfix-r4000 -G 0 -Os -Wall -Werror=implicit-function-declaration -Werror=implicit-int -Wimplicit-fallthrough")
@@ -117,6 +116,7 @@ function (add_actor game name file)
   set_target_properties(${target_name} PROPERTIES LINK_DEPENDS "${game_map};${LDSCRIPT_OVL}")
   target_link_options(${target_name} PRIVATE "-T${LDSCRIPT_OVL}" "-T${game_map}" "-Wl,--emit-relocs")
   target_compile_definitions(${target_name} PRIVATE ${game_define})
+  target_compile_options(${target_name} PRIVATE "-fno-merge-constants" "-mno-explicit-relocs" "-mno-split-addresses")
 
   make_directory("ovl/${game}")
   add_custom_command(
@@ -137,6 +137,9 @@ endfunction()
 build(oot)
 build(mm)
 
-add_actor(mm Custom_Magic_Fire "mm/ovl/Custom/Custom_Magic_Fire.c")
-add_actor(mm Custom_Magic_Wind "mm/ovl/Custom/Custom_Magic_Wind.c")
-add_actor(mm Custom_Magic_Dark "mm/ovl/Custom/Custom_Magic_Dark.c")
+add_actor(oot Obj_Tsubo "oot/ovl/actors/Obj_Tsubo/Obj_Tsubo.c")
+
+add_actor(mm Obj_Tsubo          "mm/ovl/actors/Obj_Tsubo/Obj_Tsubo.c")
+add_actor(mm Custom_Magic_Fire  "mm/ovl/Custom/Custom_Magic_Fire.c")
+add_actor(mm Custom_Magic_Wind  "mm/ovl/Custom/Custom_Magic_Wind.c")
+add_actor(mm Custom_Magic_Dark  "mm/ovl/Custom/Custom_Magic_Dark.c")

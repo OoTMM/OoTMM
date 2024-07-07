@@ -586,4 +586,5 @@ MM_GORMAN_TRACK_UNK2:                           { game: mm, id: 0xce10, type: no
 MM_GORMAN_TRACK_UNK3:                           { game: mm, id: 0xce20, type: none }
 MM_GORMAN_TRACK_UNK5:                           { game: mm, id: 0xce40, type: none }
 MM_GORMAN_TRACK_UNK6:                           { game: mm, id: 0xce50, type: none }
+MM_GORON_RACETRACK_ALT:                         { game: mm, id: 0xd010, type: none }
 MM_INTERNAL_EXIT_GROTTO:                        { game: mm, id: 0xffff, type: none }

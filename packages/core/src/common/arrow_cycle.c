@@ -252,8 +252,8 @@ static Actor* ArrowCycle_FindArrow(Actor_Player* link, GameState_Play* play)
 {
     Actor* attached;
 
-    attached = link->base.child;
-    if (attached && attached->id == AC_EN_ARROW && attached->parent == &link->base) {
+    attached = link->actor.child;
+    if (attached && attached->id == AC_EN_ARROW && attached->parent == &link->actor) {
         return attached;
     } else {
         return NULL;

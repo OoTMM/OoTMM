@@ -4,7 +4,7 @@
 
 static void BgTokiSwd_GiveItem(Actor* this, GameState_Play* play, s16 gi, int npc, int event)
 {
-    if (Actor_HasParent(this))
+    if (Actor_HasParentZ(this))
     {
         this->parent = NULL;
         SetEventChk(event);
@@ -28,7 +28,7 @@ void BgTokiSwd_Handler(Actor* this, GameState_Play* play)
         return;
     }
 
-    if (Actor_HasParent(this))
+    if (Actor_HasParentZ(this))
     {
         /* Swap farore */
         swapFarore();
@@ -39,7 +39,7 @@ void BgTokiSwd_Handler(Actor* this, GameState_Play* play)
         play->nextEntranceIndex = 0x02ca;
         play->linkAgeOnLoad = !(gSave.age);
 
-        ActorDestroy(this);
+        Actor_Kill(this);
     }
     else
     {

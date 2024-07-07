@@ -81,7 +81,7 @@ void EnExItem_Draw(Actor* actor, GameState_Play* play)
     EnExItem_Reward(&q, actor);
     comboItemOverride(&o, &q);
     scale = *(float*)(((char*)actor) + 0x154);
-    ActorSetScale(actor, scale);
+    Actor_SetScale(actor, scale);
     Draw_Gi(play, actor, o.gi, 0);
 }
 

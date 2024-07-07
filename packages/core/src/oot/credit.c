@@ -13,7 +13,7 @@ void comboCreditWarp(GameState_Play* play)
     Save_DoSave(play, 0);
 
     /* Credit warp */
-    link = GET_LINK(play);
+    link = GET_PLAYER(play);
     link->state |= PLAYER_ACTOR_STATE_FROZEN;
     play->transitionTrigger = TRANS_TYPE_NORMAL;
     play->transitionType = TRANS_GFX_BLACK;

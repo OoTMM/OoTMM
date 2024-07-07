@@ -73,7 +73,7 @@ static void LoadCustomItemIconSlot(GameState_Play* play, int slot, int isInit)
     if (slot == 0 && !isInit)
     {
         /* Masks can overwrite the B icon */
-        link = GET_LINK(play);
+        link = GET_PLAYER(play);
         switch (link->mask)
         {
         case MASK_BLAST:

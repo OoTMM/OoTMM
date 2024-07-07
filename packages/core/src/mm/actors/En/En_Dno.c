@@ -3,7 +3,7 @@
 
 int EnDno_HasGivenItem(Actor* this)
 {
-    if (Actor_HasParent(this))
+    if (Actor_HasParentZ(this))
     {
         gMmExtraFlags2.maskScents = 1;
         return 1;

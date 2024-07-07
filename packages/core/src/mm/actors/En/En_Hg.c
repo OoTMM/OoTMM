@@ -3,11 +3,11 @@
 
 void EnHg_HandlerGiveMask(Actor* this, GameState_Play* play)
 {
-    if (gMmExtraFlags.maskGibdo || Actor_HasParent(this))
+    if (gMmExtraFlags.maskGibdo || Actor_HasParentZ(this))
     {
         gMmExtraFlags.maskGibdo = 1;
         MM_SET_EVENT_WEEK(EV_MM_WEEK_PAMELA_FATHER);
-        ActorDestroy(this);
+        Actor_Kill(this);
         return;
     }
 

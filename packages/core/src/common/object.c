@@ -381,7 +381,7 @@ void comboExObjectsReset(void)
     memset(sExObjectsIds, 0xff, sizeof(sExObjectsIds));
 }
 
-int comboGetObjectSlot(ObjectContext* objectCtx, u16 objectId)
+int Object_GetSlotWrapper(ObjectContext* objectCtx, u16 objectId)
 {
     int slot;
     int freeSlot;
@@ -389,7 +389,7 @@ int comboGetObjectSlot(ObjectContext* objectCtx, u16 objectId)
     u32 size;
 
     /* Forward */
-    slot = GetObjectSlot(objectCtx, objectId);
+    slot = _Object_GetSlot(objectCtx, objectId);
     if (slot >= 0)
         return slot;
 
@@ -439,13 +439,12 @@ int comboGetObjectSlot(ObjectContext* objectCtx, u16 objectId)
     return slot;
 }
 
-int comboIsObjectSlotLoaded(ObjectContext* objectCtx, int slot)
+int Object_IsLoadedWrapper(ObjectContext* objectCtx, int slot)
 {
     if (slot < EX_OBJECT_SLOTS_NORMAL)
-        return IsObjectSlotLoaded(objectCtx, slot);
+        return _Object_IsLoaded(objectCtx, slot);
     else
         return (gExObjectsAddr[slot] != NULL);
-        /*return 0; */
 }
 
 static void comboActorSetObjectSegment(GameState_Play* play, Actor* actor)
@@ -453,9 +452,9 @@ static void comboActorSetObjectSegment(GameState_Play* play, Actor* actor)
     int slot;
     void* segment;
 
-    slot = actor->objTableIndex;
+    slot = actor->objectSlot;
     if (slot < EX_OBJECT_SLOTS_NORMAL)
-        segment = play->objectCtx.status[actor->objTableIndex].segment;
+        segment = play->objectCtx.status[actor->objectSlot].segment;
     else
         segment = gExObjectsAddr[slot];
     segment = (void*)((u32)segment - 0x80000000);

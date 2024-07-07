@@ -70,5 +70,5 @@ void EnTest7_TriggerWarpWrapper(Actor* actor, GameState_Play* play)
     }
 
     comboTransition(play, entrance);
-    ActorDestroy(actor);
+    Actor_Kill(actor);
 }

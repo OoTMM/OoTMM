@@ -32,7 +32,7 @@ PATCH_FUNC(0x80c06910, ObjMoonStone_Draw);
 
 int ObjMoonStone_HasGivenItem(Actor* this)
 {
-    if (Actor_HasParent(this))
+    if (Actor_HasParentZ(this))
     {
         gMmExtraFlags2.moonTear = 1;
         return 1;

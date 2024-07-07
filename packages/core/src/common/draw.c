@@ -255,19 +255,19 @@ void Draw_GlitterGi(GameState_Play* play, Actor* actor, s16 gi)
     b = (color >>  0) & 0xff;
 
     /* Compute alpha */
-    if (actor->xzDistanceFromLink > 1000.f)
+    if (actor->xzDistToPlayer > 1000.f)
         return;
-    else if (actor->xzDistanceFromLink <= 300.f)
+    else if (actor->xzDistToPlayer <= 300.f)
         alpha = 1.f;
     else
-        alpha = (1000.f - actor->xzDistanceFromLink) * (1.f / 700.f);
+        alpha = (1000.f - actor->xzDistToPlayer) * (1.f / 700.f);
 
-    if (actor->xzDistanceFromLink > 600.f)
+    if (actor->xzDistToPlayer > 600.f)
         alphaNoZ = 0.f;
-    else if (actor->xzDistanceFromLink <= 300.f)
+    else if (actor->xzDistToPlayer <= 300.f)
         alphaNoZ = 1.f;
     else
-        alphaNoZ = (600.f - actor->xzDistanceFromLink) * (1.f / 300.f);
+        alphaNoZ = (600.f - actor->xzDistToPlayer) * (1.f / 300.f);
 
     /* Compute the texture */
     tex = comboCacheGetFile(CUSTOM_GLITTER_ADDR);

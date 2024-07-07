@@ -8,7 +8,7 @@ static void EnDnp_KingCutscene(Actor* this, GameState_Play* play)
 
     MM_SET_EVENT_WEEK(EV_MM_WEEK_PRINCESS_RETURNED);
 
-    ActorDestroy(this);
+    Actor_Kill(this);
 }
 
 PATCH_FUNC(0x80b3d558, EnDnp_KingCutscene);

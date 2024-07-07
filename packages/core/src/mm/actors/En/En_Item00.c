@@ -29,7 +29,7 @@ void EnItem00_GiveItem(Actor_EnItem00* this, GameState_Play* play, s16 gi, float
     s16 itemId;
 
     EnItem00_ItemQuery(&q, this, play, gi);
-    link = GET_LINK(play);
+    link = GET_PLAYER(play);
     itemId = -1;
 
     if (q.ovType == OV_NONE)
@@ -41,7 +41,7 @@ void EnItem00_GiveItem(Actor_EnItem00* this, GameState_Play* play, s16 gi, float
 
     if (itemId >= 0)
     {
-        this->base.parent = &link->base;
+        this->base.parent = &link->actor;
         AddItemWithIcon(play, link, &kExtendedGetItems[gi - 1]);
         return;
     }
@@ -103,7 +103,7 @@ static s16 bombDrop(s16 dropId)
     }
 
     /* Not low, return at random */
-    if (RandFloat() < 0.5f)
+    if (Rand_ZeroOne() < 0.5f)
         return ITEM00_BOMBCHU;
     return dropId;
 }
