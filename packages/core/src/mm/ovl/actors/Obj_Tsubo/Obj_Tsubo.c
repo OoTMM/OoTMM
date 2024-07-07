@@ -210,6 +210,12 @@ int func_809275C0(Actor_ObjTsubo* this, GameState_Play* play)
 
 void ObjTsubo_SpawnCollectibleFlexible(Actor_ObjTsubo* this, GameState_Play* play)
 {
+    if (ObjTsubo_IsShuffled(this))
+    {
+        EnItem00_DropCustom(play, &this->actor.world.pos, &this->xflag);
+        return;
+    }
+
     if (!OBJ_TSUBO_P0010(&this->actor) && (OBJ_TSUBO_ZROT(&this->actor) != 2))
     {
         Item_DropCollectibleRandom(play, NULL, &this->actor.world.pos, OBJ_TSUBO_P000F(&this->actor) << 4);
@@ -219,6 +225,12 @@ void ObjTsubo_SpawnCollectibleFlexible(Actor_ObjTsubo* this, GameState_Play* pla
 void ObjTsubo_SpawnCollectible(Actor_ObjTsubo* this, GameState_Play* play)
 {
     s32 itemDrop;
+
+    if (ObjTsubo_IsShuffled(this))
+    {
+        EnItem00_DropCustom(play, &this->actor.world.pos, &this->xflag);
+        return;
+    }
 
     if (!this->unk_197 && (OBJ_TSUBO_ZROT(&this->actor) != 2))
     {
