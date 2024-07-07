@@ -106,18 +106,14 @@ export async function pack(args: PackArgs): Promise<PackOutput> {
 
   monitor.log("Pack: Building ROM");
 
-  /*
-      const dg = roms[game];
-    const patches = patchfile.gamePatches[game];
-
-    for (const patch of patches) {
-      patch.data.copy(dg.rom, patch.addr);
-    }
-  */
-
   /* Extract every file */
   for (const game of GAMES) {
     extractFiles(game, roms, romBuilder);
+  }
+
+  /* Dummy out removed files */
+  for (const f of patchfile.removedFiles) {
+    romBuilder.dummyOutFile(f);
   }
 
   /* Apply patches */
