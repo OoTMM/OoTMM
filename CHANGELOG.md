@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## Fixed
+
+- The diamond around Link after using Nayru's Love in MM rotates instead of being static
+
 ## [24.0] - 2024-07-06
 
 ### Added
