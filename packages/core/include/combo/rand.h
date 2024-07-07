@@ -11,5 +11,7 @@ void    Rand_Seed_Variable(u32* rndNum, u32 seed);
 u32     Rand_Next_Variable(u32* rndNum);
 float   Rand_ZeroOne_Variable(u32* rndNum);
 float   Rand_Centered_Variable(u32* rndNum);
+s16     Rand_S16Offset(s16 base, s16 range);
+s16     Rand_S16OffsetStride(s16 base, s16 stride, s16 range);
 
 #endif

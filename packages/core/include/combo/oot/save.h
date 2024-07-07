@@ -163,7 +163,7 @@ typedef struct
     Vec3i   pos;
     s32     yaw;
     s32     playerParams;
-    s32     entranceIndex;
+    s32     entrance;
     s32     roomIndex;
     s32     set;
     s32     tempSwitchFlags;
@@ -245,7 +245,7 @@ typedef struct
     Vec3f   pos;
     s16     yaw;
     s16     playerParams;
-    s16     entranceIndex;
+    s16     entrance;
     u8      roomIndex;
     s8      data;
     u32     tempSwitchFlags;

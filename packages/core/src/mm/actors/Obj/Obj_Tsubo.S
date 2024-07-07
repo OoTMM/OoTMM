@@ -1,5 +1,6 @@
 #include <combo.h>
 
+#if 0
 /* Resize the actor */
 PATCH_START 0x8092951c
 .int 0x1a4
@@ -74,3 +75,5 @@ PATCH_END
 PATCH_START 0x80929848
 .int 0
 PATCH_END
+
+#endif

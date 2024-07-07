@@ -14,11 +14,7 @@ static void CustomWarp_Reload(void)
 {
     Play_SetupRespawnPoint(gPlay, 1, 0xdff);
     gSaveContext.respawnFlag = 2;
-#if defined(GAME_OOT)
     comboTransition(gPlay, gSave.entrance);
-#else
-    comboTransition(gPlay, gSave.entranceIndex);
-#endif
 }
 
 #if defined(GAME_OOT)
@@ -236,7 +232,7 @@ void comboSpawnCustomWarps(GameState_Play* play)
     if (variable == -1)
         return;
 
-    SpawnActor(
+    Actor_Spawn(
         &play->actorCtx,
         play,
         AC_CUSTOM_WARP,

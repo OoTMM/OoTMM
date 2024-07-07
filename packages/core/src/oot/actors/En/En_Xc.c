@@ -60,7 +60,7 @@ static void EnXc_Update_IceCavern(Actor* actor, GameState_Play* play)
         return;
 
     link = GET_PLAYER(play);
-    if (GetChestFlag(play, 0x02))
+    if (Flags_GetTreasure(play, 0x02))
     {
         if (link->state & PLAYER_ACTOR_STATE_GET_ITEM)
         {

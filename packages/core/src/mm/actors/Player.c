@@ -197,7 +197,7 @@ static s32 Player_ActionToTunic(Actor_Player* this, s32 itemAction)
 
 Actor* Player_SpawnMagicSpellActor(GameState_Play* play, Actor_Player* this, s8 magicSpell)
 {
-    return SpawnActor(&play->actorCtx, play, sMagicSpellActorIds[magicSpell], this->actor.world.pos.x, this->actor.world.pos.y, this->actor.world.pos.z, 0, 0, 0, 0);
+    return Actor_Spawn(&play->actorCtx, play, sMagicSpellActorIds[magicSpell], this->actor.world.pos.x, this->actor.world.pos.y, this->actor.world.pos.z, 0, 0, 0, 0);
 }      /* size = 0x4 */
 
 typedef void (*Player_PlayAnimSfx)(Actor_Player*, AnimSfxEntry*);

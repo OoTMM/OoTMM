@@ -65,6 +65,7 @@ typedef struct OcLine OcLine;
 typedef struct CollisionCheckInfoInit CollisionCheckInfoInit;
 typedef struct DamageTable DamageTable;
 typedef struct CollisionCheckInfoInit2 CollisionCheckInfoInit2;
+typedef struct DynaPolyActor DynaPolyActor;
 
 void    BgCheck_Allocate(CollisionContext* colCtx, GameState_Play* play, CollisionHeader* colHeader);
 float   BgCheck_EntityRaycastDown1(CollisionContext* colCtx, CollisionPoly** outGroundPoly, Vec3f* pos);
@@ -115,5 +116,7 @@ void CollisionCheck_SetInfoGetDamageTable(CollisionCheckInfo* info, s32 index, C
 void CollisionCheck_Damage(GameState_Play* play, CollisionCheckContext* colChkCtx);
 s32 CollisionCheck_LineOCCheckAll(GameState_Play* play, CollisionCheckContext* colChkCtx, Vec3f* a, Vec3f* b);
 s32 CollisionCheck_LineOCCheck(GameState_Play* play, CollisionCheckContext* colChkCtx, Vec3f* a, Vec3f* b, Actor** exclusions, s32 numExclusions);
+
+DynaPolyActor* DynaPoly_GetActor(CollisionContext* colCtx, s32 bgId);
 
 #endif

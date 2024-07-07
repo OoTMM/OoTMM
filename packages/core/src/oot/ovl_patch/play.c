@@ -346,7 +346,7 @@ static void applyGrottoExit(u32* entrance, int id)
     rs->pos.y = ge->pos[1];
     rs->pos.z = ge->pos[2];
     rs->yaw = 0;
-    rs->entranceIndex = ge->entrance;
+    rs->entrance = ge->entrance;
     rs->playerParams = 0x04ff;
     rs->data = 0;
     rs->roomIndex = ge->room;
@@ -359,7 +359,7 @@ static void applyGrottoExit(u32* entrance, int id)
     /* Set the respawn flags */
     gSaveContext.respawnFlag = 2;
     gSaveContext.nextTransitionType = 3;
-    *entrance = rs->entranceIndex;
+    *entrance = rs->entrance;
 }
 
 static void applyCustomEntrance(u32* entrance)
@@ -427,7 +427,7 @@ static void preInitTitleScreen(void)
                 gSaveContext.respawn[RESPAWN_MODE_TOP].pos.z = fw->pos.z;
                 gSaveContext.respawn[RESPAWN_MODE_TOP].yaw = fw->yaw;
                 gSaveContext.respawn[RESPAWN_MODE_TOP].playerParams = fw->playerParams;
-                gSaveContext.respawn[RESPAWN_MODE_TOP].entranceIndex = fw->entranceIndex;
+                gSaveContext.respawn[RESPAWN_MODE_TOP].entrance = fw->entrance;
                 gSaveContext.respawn[RESPAWN_MODE_TOP].roomIndex = fw->roomIndex;
                 gSaveContext.respawn[RESPAWN_MODE_TOP].tempSwitchFlags = fw->tempSwitchFlags;
                 gSaveContext.respawn[RESPAWN_MODE_TOP].tempCollectFlags = fw->tempCollectFlags;
@@ -702,7 +702,7 @@ void Play_TransitionDone(GameState_Play* play)
         if (entrance == ENTR_OOT_INTERNAL_EXIT_GROTTO)
         {
             gIsEntranceOverride = 0;
-            entrance = gSaveContext.respawn[1].entranceIndex;
+            entrance = gSaveContext.respawn[1].entrance;
             gSaveContext.respawnFlag = 2;
             gSaveContext.nextTransitionType = 3;
         }

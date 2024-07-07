@@ -167,7 +167,7 @@ typedef struct {
     /* 0x00 */ Vec3f pos; /* Normally it's a Vec3i, but this is easier. */
     /* 0x0C */ s32 yaw;
     /* 0x10 */ s32 playerParams;
-    /* 0x14 */ s32 entranceIndex;
+    /* 0x14 */ s32 entrance;
     /* 0x18 */ s32 roomIndex;
     /* 0x1C */ s32 set;
     /* 0x20 */ s32 tempSwchFlags;
@@ -188,7 +188,7 @@ typedef struct RespawnData {
 
 typedef struct
 {
-    s32                     entranceIndex;
+    s32                     entrance;
     u8                      equippedMask;
     u8                      isFirstCycle;
     char                    unk_006;
@@ -254,7 +254,7 @@ typedef struct
 MmSave;
 
 ASSERT_SIZE(MmSave, 0x3ca0);
-ASSERT_OFFSET(MmSave, entranceIndex,    0x0000);
+ASSERT_OFFSET(MmSave, entrance,    0x0000);
 ASSERT_OFFSET(MmSave, equippedMask,     0x0004);
 ASSERT_OFFSET(MmSave, isFirstCycle,     0x0005);
 ASSERT_OFFSET(MmSave, unk_006,          0x0006);

@@ -24,7 +24,7 @@ PATCH_FUNC(0x80b943c0, EnZog_GiveItem);
 
 void EnZog_InitSetScaleHook(Actor* this, float scale)
 {
-    ActorSetScale(this, scale);
+    Actor_SetScale(this, scale);
     if (gMmExtraFlags.maskZora)
         Actor_Kill(this);
 }

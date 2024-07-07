@@ -81,7 +81,6 @@ typedef union {
 #define BINANG_TO_RAD_ALT2(binang) (((f32)(binang) * M_PI) / 0x8000)
 
 struct Actor;
-struct PlayState;
 
 typedef enum {
     /*  0 */ COLTYPE_HIT0, /* Blue blood, white hitmark */
@@ -542,7 +541,7 @@ typedef enum LightType {
 } LightType;
 
 typedef void (*LightsBindFunc)(Lights* lights, LightParams* params, Vec3f* vec);
-typedef void (*LightsPosBindFunc)(Lights* lights, LightParams* params, struct PlayState* play);
+typedef void (*LightsPosBindFunc)(Lights* lights, LightParams* params, GameState_Play* play);
 
 
 /* Model has limbs with only rigid meshes */
@@ -575,7 +574,7 @@ typedef struct SkelAnime {
     /* 0x2C */ f32 morphRate;     /* Reciprocal of the number of frames in the morph */
     /* 0x30 */ union {
                     s32 (*normal)(struct SkelAnime*);/* Can be Loop, Partial loop, Play once, Morph, or Tapered morph */
-                    s32 (*player)(struct PlayState*, struct SkelAnime*); /* Loop, Play once, and Morph */
+                    s32 (*player)(GameState_Play*, struct SkelAnime*); /* Loop, Play once, and Morph */
                 } update;
     /* 0x34 */ s8 initFlags;      /* Flags used when initializing Player's skeleton */
     /* 0x35 */ u8 moveFlags;      /* Flags used for animations that move the actor in worldspace. */

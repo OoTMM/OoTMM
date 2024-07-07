@@ -123,7 +123,7 @@ void MagicFire_Init(Actor_CustomMagicFire* this, GameState_Play* play)
     this->screenTintBehaviour = 0;
     this->actionTimer = 0;
     this->alphaMultiplier = -3.0f;
-    ActorSetScale(&this->actor, 0.0f);
+    Actor_SetScale(&this->actor, 0.0f);
     Collider_InitCylinder(play, &this->collider);
     Collider_SetCylinder(play, &this->collider, &this->actor, &sCylinderInit);
     Collider_UpdateCylinder(&this->actor, &this->collider);

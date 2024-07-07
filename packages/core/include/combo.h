@@ -10,15 +10,19 @@
 # define FISH_WEIGHT_TO_LENGTH(weight) (sqrtf((weight - 0.5f) / 0.0036f) + 1.0f) /* Add 1.0 to prevent errors due to truncating */
 
 # include <ultra64.h>
-# include <combo/collision.h>
 # include <combo/actor_ovl.h>
+# include <combo/collision.h>
+# include <combo/csmc.h>
 # include <combo/defs.h>
+# include <combo/effect.h>
 # include <combo/equipment.h>
+# include <combo/math.h>
+# include <combo/npc.h>
 # include <combo/object.h>
 # include <combo/patch.h>
-# include <combo/npc.h>
-# include <combo/text.h>
+# include <combo/player.h>
 # include <combo/rand.h>
+# include <combo/text.h>
 # include <combo/common/ocarina.h>
 # include <combo/common/color.h>
 # include <combo/common/actors/Obj_Mure2.h>
@@ -54,7 +58,6 @@
 #  include <combo/mm/actors/Obj_Grass_Carry.h>
 #  include <combo/mm/actors/En_Kusa.h>
 #  include <combo/mm/actors/En_Elf.h>
-#  include <combo/mm/actors/Obj_Tsubo.h>
 # endif
 
 # include <combo/sfx_source.h>
@@ -67,6 +70,7 @@
 
 /* Shared with assembler */
 #include <combo/sfx_id.h>
+#include <combo/object_id.h>
 #include <combo/save.h>
 #include <combo/gi.h>
 #include <combo/data/items.h>

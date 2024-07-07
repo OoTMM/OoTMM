@@ -22,7 +22,7 @@ static void DmChar02_ItemOverride(ComboItemOverride* o, int npc)
 void DmChar02_InitScaleHook(Actor* this, float scale)
 {
     this->world.pos.y = -1000.0f;
-    ActorSetScale(this, scale);
+    Actor_SetScale(this, scale);
 }
 
 PATCH_CALL(0x80aab008, DmChar02_InitScaleHook);

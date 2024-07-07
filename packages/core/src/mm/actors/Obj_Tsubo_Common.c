@@ -3,6 +3,7 @@
 #include <combo/global.h>
 #include <combo/actor.h>
 
+#if 0
 #if defined(GAME_OOT)
 # define ADDR_FUNC_INIT 0x80a653a8
 #endif
@@ -41,3 +42,4 @@ int ObjTsubo_IsShuffled(Actor_ObjTsubo* this)
         return 0;
     return 1;
 }
+#endif

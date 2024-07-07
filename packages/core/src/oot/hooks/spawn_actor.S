@@ -1,12 +1,12 @@
 #include <combo.h>
 
-PATCH_START _SpawnActor
-  j comboSpawnActor
+PATCH_START Actor_Spawn
+  j Actor_SpawnWrapper
    nop
 PATCH_END
 
-.globl SpawnActor
-SpawnActor:
+.globl _Actor_Spawn
+_Actor_Spawn:
   addiu   sp,-0x58
-  j       _SpawnActor+0x8
+  j       Actor_Spawn+0x8
     sw    a2,0x60(sp)
