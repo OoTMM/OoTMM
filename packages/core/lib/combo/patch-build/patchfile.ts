@@ -4,7 +4,7 @@ import { toU32BufferLE } from '../util';
 const REVISION = 2;
 const MAGIC = 'OoTMM-P2';
 
-type DataPatch = {
+type Patch = {
   addr: number;
   data: Buffer;
 }
@@ -17,21 +17,21 @@ type NewFile = {
 }
 
 export class Patchfile {
-  public gamePatches: {[k in Game]: DataPatch[] };
+  public patches: {[k: string]: Patch[]};
   public newFiles: NewFile[];
+  public removedFiles: string[];
   public hash: string;
   public meta: any;
 
   constructor(data?: Buffer) {
-    this.gamePatches = {
-      oot: [],
-      mm: [],
-    };
+    this.patches = {};
     this.newFiles = [];
+    this.removedFiles = [];
     this.hash = 'XXXXXXXX';
     this.meta = {};
 
     if (data) {
+      /*
       if (data.toString('utf8', 0, 8) !== MAGIC) {
         throw new Error('Invalid patch file');
       }
@@ -60,9 +60,11 @@ export class Patchfile {
       for (let i = 0; i < patchCountNewFile; i++) {
         offset = this.parseNewFilePatch(data, offset);
       }
+      */
     }
   }
 
+  /*
   private parseGamePatch(game: Game, data: Buffer, offset: number) {
     const addr = data.readUInt32LE(offset);
     const size = data.readUInt32LE(offset + 4);
@@ -85,6 +87,7 @@ export class Patchfile {
     this.newFiles.push({ name, vrom, data: patch, compressed });
     return offset;
   }
+  */
 
   setHash(hash: string) {
     this.hash = hash;
@@ -94,8 +97,10 @@ export class Patchfile {
     this.meta = meta;
   }
 
-  addDataPatch(game: Game, addr: number, data: Buffer) {
-    this.gamePatches[game].push({ addr, data });
+  addPatch(file: string, addr: number, data: Buffer) {
+    const patches = this.patches[file] || [];
+    patches.push({ addr, data });
+    this.patches[file] = patches;
   }
 
   addNewFile(name: string | null, vrom: number, data: Buffer, compressed: boolean) {
@@ -103,6 +108,7 @@ export class Patchfile {
   }
 
   toBuffer(): Buffer {
+    /*
     const buffers: Buffer[] = [];
     const header = Buffer.alloc(0x40, 0xff);
     header.write(MAGIC, 0x00, 0x08, 'utf8');
@@ -140,14 +146,19 @@ export class Patchfile {
     header.writeUInt32LE(metaLen, 0x24);
 
     return Buffer.concat(buffers);
+    */
+    return Buffer.alloc(0);
   }
 
   dup() {
     const ret = new Patchfile();
     ret.hash = this.hash;
     ret.meta = JSON.parse(JSON.stringify(this.meta));
-    ret.gamePatches.oot = [...this.gamePatches.oot];
-    ret.gamePatches.mm = [...this.gamePatches.mm];
+    ret.patches = {};
+    for (const k in this.patches) {
+      ret.patches[k] = [...this.patches[k]];
+    }
+    ret.removedFiles = [...this.removedFiles];
     ret.newFiles = [...this.newFiles];
     return ret;
   }
