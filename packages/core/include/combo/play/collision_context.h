@@ -158,7 +158,7 @@ typedef struct
 }
 DynaSSNodeList;
 
-typedef struct
+typedef struct DynaCollisionContext
 {
     u8                  bitFlag;
     BgActor             bgActors[BG_ACTOR_MAX];

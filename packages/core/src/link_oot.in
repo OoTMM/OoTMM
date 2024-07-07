@@ -100,6 +100,8 @@ GetMatrixMV             = 0x800ab900;
 Gfx_DrawDListOpa        = 0x80028048;
 Gfx_DrawDListXlu        = 0x800280c8;
 
+UnkFuncActorCollision = 0x8002650c;
+
 CollisionCheck_SetOC = 0x8004c130;
 CollisionCheck_SetAT = 0x8004bd50;
 CollisionCheck_SetAC = 0x8004bf40;
@@ -108,6 +110,12 @@ BgCheck_EntityRaycastDown4 = 0x8002f4b8;
 
 Math_Vec3f_Sum = 0x80063d10;
 
+DynaPoly_DeleteBgActor = 0x80031638;
+DynaPoly_SetBgActor = 0x800313a4;
+DynaPoly_DisableCollision = 0x800314d8;
+DynaPolyActor_Init = 0x80035260;
+
+CollisionHeader_GetVirtual = 0x80033ef4;
 IsSceneValidEpona = 0x8005a3c0;
 Actor_Spawn = 0x80025110;
 gActorOvl = 0x800e8530;

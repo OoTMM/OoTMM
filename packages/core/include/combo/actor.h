@@ -164,6 +164,19 @@ typedef struct Actor
 }
 Actor;
 
+typedef struct DynaPolyActor
+{
+    Actor   actor;
+    s32     bgId;
+    f32     unk_150;
+    f32     unk_154;
+    s16     unk_158;
+    u32     transformFlags;
+    u8      interactFlags;
+    s16     unk_162;
+}
+DynaPolyActor;
+
 #if defined(GAME_MM)
 typedef struct
 {
@@ -219,6 +232,7 @@ ASSERT_OFFSET(BlinkInfo, blinkTimer, 0x2);
 
 void* actorAddr(u16 actorId, u32 addr);
 
+void DynaPolyActor_Init(DynaPolyActor* dynaActor, s32 transformFlags);
 void Actor_UpdatePos(Actor *actor);
 
 #endif
