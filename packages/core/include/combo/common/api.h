@@ -9,12 +9,31 @@ typedef struct GameState_Play GameState_Play;
 typedef struct ActorContext ActorContext;
 typedef struct Actor Actor;
 typedef struct Actor_Player Actor_Player;
+typedef struct DynaCollisionContext DynaCollisionContext;
 
 float Actor_WorldDistXZToActor(Actor* a, Actor* b);
 float Actor_HeightDiff(Actor* a, Actor* b);
 u16   Actor_Angle(Actor* a, Actor* b);
 
-void Interface_UpdateButtonsPart2(GameState_Play* play);
+/* Unknown */
+void* UnkFuncActorCollision(GameState_Play* play, Actor* actor);
+
+s32             DynaPoly_IsBgIdBgActor(s32 bgId);
+void            DynaPoly_DisableCollision(GameState_Play* play, DynaCollisionContext* dyna, s32 bgId);
+void            DynaPoly_EnableCollision(GameState_Play* play, DynaCollisionContext* dyna, s32 bgId);
+void            DynaPoly_DisableCeilingCollision(GameState_Play* play, DynaCollisionContext* dyna, s32 bgId);
+s32             DynaPoly_SetBgActor(GameState_Play* play, DynaCollisionContext* dyna, Actor* actor, CollisionHeader* colHeader);
+DynaPolyActor*  DynaPoly_GetActor(CollisionContext* colCtx, s32 bgId);
+void            DynaPoly_DeleteBgActor(GameState_Play* play, DynaCollisionContext* dyna, s32 bgId);
+void            DynaPoly_InvalidateLookup(GameState_Play* play, DynaCollisionContext* dyna);
+void            DynaPoly_UnsetAllInteractFlags(GameState_Play* play, DynaCollisionContext* dyna, Actor* actor);
+void            DynaPoly_UpdateContext(GameState_Play* play, DynaCollisionContext* dyna);
+void            DynaPoly_UpdateBgActorTransforms(GameState_Play* play, DynaCollisionContext* dyna);
+void            DynaPoly_DeleteBgActor(GameState_Play* play, DynaCollisionContext* dyna, s32 bgId);
+s32             DynaPoly_SetBgActor(GameState_Play* play, DynaCollisionContext* dyna, Actor* actor, CollisionHeader* colHeader);
+
+void    CollisionHeader_GetVirtual(void* colHeader, CollisionHeader** dest);
+void    Interface_UpdateButtonsPart2(GameState_Play* play);
 
 int    LoadFile(void* dst, u32 vromAddr, u32 size);
 
