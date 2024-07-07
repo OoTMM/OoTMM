@@ -51,31 +51,6 @@ export class Patchfile {
     this.meta = {};
   }
 
-  /*
-  private parseGamePatch(game: Game, data: Buffer, offset: number) {
-    const addr = data.readUInt32LE(offset);
-    const size = data.readUInt32LE(offset + 4);
-    const patch = data.subarray(offset + 8, offset + 8 + size);
-    offset += 8 + size;
-    this.gamePatches[game].push({ addr, data: patch });
-    return offset;
-  }
-
-  private parseNewFilePatch(data: Buffer, offset: number) {
-    let name: string | null = data.toString('utf8', offset, offset + 0x40).replace(/\0/g, '');
-    if (name === '') {
-      name = null;
-    }
-    const vrom = data.readUInt32LE(offset + 0x40);
-    const compressed = data.readUInt32LE(offset + 0x44) === 1;
-    const size = data.readUInt32LE(offset + 0x48);
-    const patch = data.subarray(offset + 0x50, offset + 0x50 + size);
-    offset += 0x50 + size;
-    this.newFiles.push({ name, vrom, data: patch, compressed });
-    return offset;
-  }
-  */
-
   setHash(hash: string) {
     this.hash = hash;
   }
