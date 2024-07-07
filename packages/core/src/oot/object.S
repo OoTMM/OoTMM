@@ -1,25 +1,25 @@
 #include <combo.h>
 
-PATCH_START _Object_GetSlot
-  j comboObjectGetSlot
+PATCH_START Object_GetSlot
+  j Object_GetSlotWrapper
    nop
 PATCH_END
 
-.globl Object_GetSlot
-Object_GetSlot:
+.globl _Object_GetSlot
+_Object_GetSlot:
   sll   a3,a1,0x10
-  j     _Object_GetSlot+0x8
+  j     Object_GetSlot+0x8
    sra  a3,a3,0x10
 
-PATCH_START _Object_IsLoaded
-  j comboObjectIsLoaded
+PATCH_START Object_IsLoaded
+  j Object_IsLoadedWrapper
    nop
 PATCH_END
 
-.globl Object_IsLoaded
-Object_IsLoaded:
+.globl _Object_IsLoaded
+_Object_IsLoaded:
   sll   t6,a1,0x4
-  j     _Object_IsLoaded+0x8
+  j     Object_IsLoaded+0x8
    addu t6,a1
 
 /* Disable some actor draw code */

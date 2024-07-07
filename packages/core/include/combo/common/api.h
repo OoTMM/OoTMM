@@ -283,7 +283,9 @@ s32 Health_ChangeBy(GameState_Play* play, s16 amount);
 typedef struct ObjectContext ObjectContext;
 int Object_SpawnPersistent(ObjectContext* objectCtx, s16 id);
 int Object_GetSlot(ObjectContext* objectCtx, s16 id);
+int _Object_GetSlot(ObjectContext* objectCtx, s16 id);
 int Object_IsLoaded(ObjectContext* ctx, int slot);
+int _Object_IsLoaded(ObjectContext* ctx, int slot);
 
 typedef struct Actor_EnItem00 Actor_EnItem00;
 
