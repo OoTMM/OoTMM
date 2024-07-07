@@ -279,6 +279,7 @@ void ObjTsubo_Idle(Actor_ObjTsubo* this, GameState_Play* play)
                 CollisionCheck_SetOC(play, &play->colChkCtx, &this->collider.base);
             }
         }
+
         if (this->actor.xzDistToPlayer < 100.0f)
         {
             temp_v0 = this->actor.yawTowardsPlayer - GET_PLAYER(play)->actor.world.rot.y;
