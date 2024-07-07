@@ -176,7 +176,7 @@ void CustomTriggers_Spawn(GameState_Play* play)
 
     bzero(&gComboTriggersData, sizeof(gComboTriggersData));
 
-    gActorCustomTriggers = (Actor_CustomTriggers*)SpawnActor(
+    gActorCustomTriggers = (Actor_CustomTriggers*)Actor_Spawn(
         &play->actorCtx,
         play,
         AC_CUSTOM_TRIGGERS,

@@ -85,7 +85,7 @@ Actor* SpawnRoomActor(ActorContext* actorCtx, GameState_Play *play, short actorI
 {
     Actor* a;
 
-    a = comboSpawnActor(actorCtx, play, actorId, x, y, z, rx, ry, rz, variable);
+    a = Actor_Spawn(actorCtx, play, actorId, x, y, z, rx, ry, rz, variable);
     if (a != NULL && actorId == AC_EN_ITEM00)
         EnItem00_XflagInitFreestanding((Actor_EnItem00*)a, play, g.actorIndex, 0);
     g.actorIndex++;

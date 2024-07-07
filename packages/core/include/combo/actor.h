@@ -217,8 +217,6 @@ ASSERT_SIZE(BlinkInfo, 0x4);
 ASSERT_OFFSET(BlinkInfo, eyeTexIndex, 0x0);
 ASSERT_OFFSET(BlinkInfo, blinkTimer, 0x2);
 
-Actor* comboSpawnActor(ActorContext* actorCtx, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable);
-Actor* comboSpawnActorEx(ActorContext* actorCtx, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int ex1, int ex2, int ex3);
 void* actorAddr(u16 actorId, u32 addr);
 
 void Actor_UpdatePos(Actor *actor);

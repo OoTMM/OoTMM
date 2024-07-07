@@ -18,10 +18,15 @@ void Interface_UpdateButtonsPart2(GameState_Play* play);
 
 int    LoadFile(void* dst, u32 vromAddr, u32 size);
 
-Actor*  SpawnActor(ActorContext* actorCtx, GameState_Play* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable);
-#if defined(GAME_MM)
-Actor*  SpawnActorEx(ActorContext* actorCtx, GameState_Play* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int ex1, int ex2, int ex3);
+Actor*  Actor_Spawn(ActorContext* actorCtx, GameState_Play* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable);
 
+#if defined(GAME_OOT)
+Actor*  _Actor_Spawn(ActorContext* actorCtx, GameState_Play* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable);
+#endif
+
+#if defined(GAME_MM)
+Actor*  Actor_SpawnAsChildAndCutscene(ActorContext* actorCtx, GameState_Play* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int ex1, int ex2, int ex3);
+Actor*  _Actor_SpawnAsChildAndCutscene(ActorContext* actorCtx, GameState_Play* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int ex1, int ex2, int ex3);
 int Schedule_CheckMiscS(GameState_Play* play, void* unk);
 #endif
 
@@ -32,26 +37,26 @@ void    SkelAnime_DrawFlexOpa(GameState_Play* play, void** skeleton, Vec3s* join
 
 void    AudioSeq_QueueSeqCmd(u32 unk);
 
+void    ActorShadow_DrawCircle(Actor* actor, Lights* lights, GameState_Play* play);
+
 void    Actor_Kill(Actor* actor);
 int     Actor_HasParent(Actor* actor, GameState_Play* play);
 int     Actor_HasParentZ(Actor* actor);
 int     Actor_HasNoParent(Actor* actor, GameState_Play* play);
 int     Actor_HasNoParentZ(Actor* actor);
-void    ActorSetScale(Actor* actor, float scale);
+void    Actor_SetScale(Actor* actor, float scale);
 void    ActorSetUnk(Actor* actor, float unk);
 void    ActorEnableGrab(Actor* actor, GameState_Play* play);
 void    ActorEnableTalk(Actor* actor, GameState_Play* play, float range);
 void    ActorEnableTalkEx(Actor* actor, GameState_Play* play, float range, u32 unk);
-/* AKA  Actor_UpdateBgCheckInfo */
 void    Actor_UpdateBgCheckInfo(GameState_Play* play, Actor* actor, float unk_3, float unk_4, float unk_5, u32 unk_6);
-/* AKA  Actor_MoveXZGravity AKA Actor_MoveWithGravity */
-void    ActorUpdateVelocity(Actor* actor);
+void    Actor_MoveWithGravity(Actor* actor);
 int     ActorTalkedTo(Actor* actor);
 u8      CollisionCheck_GetSwordDamage(u32 dmgFlags);
 
 void    EnableOwl(u8 owlId);
 
-u32     GetChestFlag(GameState_Play* play, int flag);
+u32     Flags_GetTreasure(GameState_Play* play, int flag);
 void    SetChestFlag(GameState_Play* play, int flag);
 u32     GetCollectibleFlag(GameState_Play* play, int flag);
 void    SetCollectibleFlag(GameState_Play* play, int flag);
@@ -155,7 +160,6 @@ void Sram_SaveNewDay(GameState_Play* play);
 #endif
 
 void Grayscale(void* buffer, u16 size);
-s16 RandIntRange(s16 base, s16 amplitude);
 
 extern u32 gSegments[16];
 
@@ -298,8 +302,14 @@ void Play_InitEnvironment(GameState_Play *play, u16 skyboxId);
 extern u8 gFogState;
 #endif
 
+#if defined(GAME_MM)
+int Item_CollectibleDropTable(u32 index);
+int Item_CollectibleDropTable2(u32 index);
+#endif
+
 Actor_EnItem00* Item_DropCollectible(GameState_Play* play, const Vec3f* pos, s16 params);
 void Item_DropCollectibleRandom(GameState_Play* play, Actor* from, const Vec3f* pos, s16 params);
+int Item_CanDropBigFairy(GameState_Play* play, s32 index, s32 collectibleFlag);
 
 #if defined(GAME_MM)
 f32 VectDist(Vec3f* vec1, Vec3f* vec2);

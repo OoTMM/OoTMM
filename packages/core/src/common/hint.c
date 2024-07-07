@@ -191,6 +191,6 @@ void Hint_DisplayJunkRandom(GameState_Play* play)
 {
     int key;
 
-    key = RandIntRange(0, 0x7fff);
+    key = Rand_S16Offset(0, 0x7fff);
     Hint_DisplayJunk(play, key);
 }

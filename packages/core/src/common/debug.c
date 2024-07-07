@@ -316,10 +316,10 @@ static void DebugHandler_Reload(int trigger)
 
     link = GET_PLAYER(gPlay);
     setPage(DEBUGMENU_PAGE_NONE);
-    Play_SetRespawnData(gPlay, 1, gSave.entranceIndex, gPlay->roomCtx.curRoom.id, 0xdff, &link->actor.world.pos, link->actor.shape.rot.y);
+    Play_SetRespawnData(gPlay, 1, gSave.entrance, gPlay->roomCtx.curRoom.num, 0xdff, &link->actor.world.pos, link->actor.shape.rot.y);
     gSaveContext.respawnFlag = 2;
     gSaveContext.nextCutscene = 0;
-    comboTransition(gPlay, gSave.entranceIndex);
+    comboTransition(gPlay, gSave.entrance);
 }
 #endif
 

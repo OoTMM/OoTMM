@@ -87,7 +87,7 @@ void EnTorch2_Update(Actor_CustomEnTorch2 *this, GameState_Play *play)
     }
 
     this->base.gravity = -1.0f;
-    ActorUpdateVelocity(&this->base);
+    Actor_MoveWithGravity(&this->base);
     Actor_UpdateBgCheckInfo(play, &this->base, 30.0f, 20.0f, 70.0f, UPDBGCHECKINFO_FLAG_0 | UPDBGCHECKINFO_FLAG_2);
 
     if (this->framesUntilNextState == 0)
@@ -152,7 +152,7 @@ void EnTorch2_UpdateDeath(Actor_CustomEnTorch2 *this, GameState_Play *play)
     }
 
     this->base.gravity = -1.0f;
-    ActorUpdateVelocity(&this->base);
+    Actor_MoveWithGravity(&this->base);
 }
 
 void EnTorch2_Draw(Actor_CustomEnTorch2 *this, GameState_Play *play)

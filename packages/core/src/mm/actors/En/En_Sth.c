@@ -43,7 +43,7 @@ void EnSth_AfterInit(Actor* this, GameState_Play* play)
     /* Spawn the cursed skull if required */
     if ((this->variable & 0xf) == 4 && gSave.skullCountOcean < 30)
     {
-        SpawnActor(
+        Actor_Spawn(
             &play->actorCtx,
             play,
             0xd4,

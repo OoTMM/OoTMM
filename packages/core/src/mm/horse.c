@@ -57,7 +57,7 @@ static int Horse_IsValidEntrance(u32 entranceId)
 
 void Horse_SpawnOverworldWrapper(GameState_Play* play, Actor_Player* link)
 {
-    if (!Horse_IsValidEntrance(gSave.entranceIndex))
+    if (!Horse_IsValidEntrance(gSave.entrance))
         gHorseIsMounted = 0;
     Horse_SpawnOverworld(play, link);
 }

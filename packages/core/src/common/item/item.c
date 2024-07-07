@@ -73,13 +73,13 @@ void comboSyncItems(void)
         if (fw->data > 0 && foreignFw->set <= 0)
         {
             foreignFw->set = 1;
-            foreignFw->entranceIndex = ENTR_FW_CROSS;
+            foreignFw->entrance = ENTR_FW_CROSS;
         }
 #else
         RespawnData* foreignFw = &gSharedCustomSave.mm.fw[gSave.age];
         OotFaroreWind* fw = &gSave.fw;
 
-        if (fw->set <= 0 || fw->entranceIndex != ENTR_FW_CROSS)
+        if (fw->set <= 0 || fw->entrance != ENTR_FW_CROSS)
         {
             foreignFw->data = 0;
         }
@@ -485,7 +485,7 @@ Actor_ItemDecoy* Item_AddWithDecoy(GameState_Play* play, const ComboItemQuery* q
 
     comboItemOverride(&o, q);
     count = comboAddItemEx(play, q, FALSE);
-    decoy = (Actor_ItemDecoy*)SpawnActor(&play->actorCtx, play, AC_ITEM_DECOY, 0, 0, 0, 0, 0, 0, 0);
+    decoy = (Actor_ItemDecoy*)Actor_Spawn(&play->actorCtx, play, AC_ITEM_DECOY, 0, 0, 0, 0, 0, 0, 0);
     if (!decoy)
         return NULL;
     decoy->count = (s16)count;

@@ -78,7 +78,7 @@ void MagicDark_Init(Actor* thisx, GameState_Play* play) {
     this->scale = MagicDark_GetScale(player);
 
     thisx->world.pos = player->actor.world.pos;
-    ActorSetScale(&this->actor, 0.0f);
+    Actor_SetScale(&this->actor, 0.0f);
     thisx->room = -1;
 
     if (gSaveContext.nayrusLoveTimer != 0) {
@@ -213,9 +213,9 @@ void MagicDark_OrbUpdate(Actor* thisx, GameState_Play* play) {
     if (this->timer < 35) {
         MagicDark_DimLighting(play, this->timer * (1 / 45.0f));
         Math_SmoothStepToF(&thisx->scale.x, this->scale * (1 / 12.000001f), 0.05f, 0.01f, 0.0001f);
-        ActorSetScale(&this->actor, thisx->scale.x);
+        Actor_SetScale(&this->actor, thisx->scale.x);
     } else if (this->timer < 55) {
-        ActorSetScale(&this->actor, thisx->scale.x * 0.9f);
+        Actor_SetScale(&this->actor, thisx->scale.x * 0.9f);
         Math_SmoothStepToF(&this->orbOffset.y, player->bodyPartsPos[PLAYER_BODYPART_WAIST].y, 0.5f, 3.0f, 1.0f);
         if (this->timer > 48) {
             MagicDark_DimLighting(play, (54 - this->timer) * 0.2f);

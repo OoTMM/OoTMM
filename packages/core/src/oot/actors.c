@@ -294,7 +294,7 @@ static int canSpawnActor(GameState_Play* play, s16 actorId, u16 param)
     }
 }
 
-Actor* comboSpawnActor(ActorContext* actorCtx, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable)
+Actor* Actor_SpawnWrapper(ActorContext* actorCtx, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable)
 {
     int ret;
     Actor* actor;
@@ -327,7 +327,7 @@ Actor* comboSpawnActor(ActorContext* actorCtx, GameState_Play *play, short actor
             return NULL;
 
     sActorIdToSpawn = actorId;
-    actor = SpawnActor(actorCtx, play, actorId, x, y, z, rx, ry, rz, variable);
+    actor = Actor_Spawn(actorCtx, play, actorId, x, y, z, rx, ry, rz, variable);
     if (actorId == AC_ARMS_HOOK && gSave.age == AGE_ADULT)
         actor->objectSlot = Object_GetSlot(&play->objectCtx, 0x14);
     return actor;
