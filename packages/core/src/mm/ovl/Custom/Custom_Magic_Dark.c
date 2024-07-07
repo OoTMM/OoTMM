@@ -160,7 +160,7 @@ void MagicDark_DiamondUpdate(Actor* thisx, GameState_Play* play) {
     }
 
     thisx->world.rot.y += 0x3E8;
-    thisx->rot2.y = thisx->world.pos.y + Camera_GetCamDirYaw(GET_ACTIVE_CAM(play));
+    thisx->rot2.y = thisx->world.rot.y + Camera_GetCamDirYaw(GET_ACTIVE_CAM(play));
     this->timer++;
     gSaveContext.nayrusLoveTimer = nayrusLoveTimer + 1;
 
