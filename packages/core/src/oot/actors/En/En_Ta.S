@@ -2,7 +2,7 @@
 
 /*
     File:   Talon - Actor
-    Start:  0x80921830 - 0xcbefa0	
+    Start:  0x80921830 - 0xcbefa0
     End:    0x809251f0 - 0xcc2960
     Size:   0x39c0
 */
@@ -50,7 +50,7 @@ return:
   jr     ra
   addiu    sp, sp, 0x20
 
-PATCH_VROM 0x80921830 + 0x1098
+PATCH_START 0x80921830 + 0x1098
   jal    talon_break_free
   lw     a0, 0x0018(sp)
 PATCH_END

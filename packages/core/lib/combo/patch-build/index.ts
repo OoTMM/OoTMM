@@ -149,7 +149,8 @@ export async function buildPatchfiles(args: BuildPatchfileIn): Promise<Patchfile
         //
         //}
 
-        p.addDataPatch(game, gc.actorsOvlAddr + actorId * 0x20, patch);
+        const fileAddr = args.addresses[game].fileFromROM(gc.actorsOvlAddr + actorId * 0x20);
+        p.addPatch(fileAddr.name, fileAddr.offset, patch);
       }
 
       /* Handle cosmetics */
