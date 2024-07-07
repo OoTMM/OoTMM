@@ -168,6 +168,14 @@ export class RomBuilder {
     return file.vaddr;
   }
 
+  dummyOutFile(name: string) {
+    const f = this.fileByNameRequired(name);
+    if (!f.injected) {
+      f.type = 'dummy';
+      f.data = Buffer.alloc(0);
+    }
+  }
+
   alias(to: string, from: string) {
     const fileTo = this.fileByNameRequired(to);
     const fileFrom = this.fileByNameRequired(from);
