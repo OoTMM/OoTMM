@@ -117,6 +117,7 @@ function (add_actor game name file)
   set_target_properties(${target_name} PROPERTIES LINK_DEPENDS "${game_map};${LDSCRIPT_OVL}")
   target_link_options(${target_name} PRIVATE "-T${LDSCRIPT_OVL}" "-T${game_map}" "-Wl,--emit-relocs")
   target_compile_definitions(${target_name} PRIVATE ${game_define})
+  target_compile_options(${target_name} PRIVATE "-fno-merge-constants" "-mno-explicit-relocs" "-mno-split-addresses")
 
   make_directory("ovl/${game}")
   add_custom_command(
