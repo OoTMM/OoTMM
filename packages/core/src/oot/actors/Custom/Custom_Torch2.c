@@ -9,7 +9,7 @@
 #include <combo/math.h>
 #include <combo/actor.h>
 
-#define FLAGS (1 << 4) /* (ACTOR_FLAG_10) */
+#define FLAGS (ACTOR_FLAG_OOT_4)
 
 void EnTorch2_Init(Actor_CustomEnTorch2 *this, GameState_Play *play);
 void EnTorch2_Destroy(Actor_CustomEnTorch2 *this, GameState_Play *play);
@@ -63,7 +63,7 @@ void EnTorch2_Init(Actor_CustomEnTorch2 *this, GameState_Play *play)
     Collider_InitCylinder(play, &this->collider);
     Collider_SetCylinder(play, &this->collider, &this->base, &sCylinderInit);
 
-    this->base.flags |= (1 << 26); /* ACTOR_FLAG_CAN_PRESS_SWITCH; */
+    this->base.flags |= ACTOR_FLAG_OOT_26;
 
     this->framesUntilNextState = 20;
 }

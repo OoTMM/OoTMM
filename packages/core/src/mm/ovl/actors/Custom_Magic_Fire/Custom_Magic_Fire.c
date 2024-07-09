@@ -6,7 +6,7 @@
 #include <combo/global.h>
 #include "Custom_Magic_Fire.h"
 
-#define FLAGS ((1 << 4) | (1 << 25)) /* (ACTOR_FLAG_4 | ACTOR_FLAG_25) */
+#define FLAGS (ACTOR_FLAG_OOT_4 | ACTOR_FLAG_OOT_25)
 
 void MagicFire_UpdateBeforeCast(Actor_CustomMagicFire* this, GameState_Play* play);
 
