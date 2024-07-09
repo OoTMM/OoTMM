@@ -88,7 +88,7 @@ void EnTorch2_Update(Actor_CustomEnTorch2 *this, GameState_Play *play)
 
     this->base.gravity = -1.0f;
     Actor_MoveWithGravity(&this->base);
-    Actor_UpdateBgCheckInfo(play, &this->base, 30.0f, 20.0f, 70.0f, UPDBGCHECKINFO_FLAG_0 | UPDBGCHECKINFO_FLAG_2);
+    Actor_UpdateBgCheckInfo(play, &this->base, 30.0f, 20.0f, 70.0f, UPDBGCHECKINFO_FLAG_WALL | UPDBGCHECKINFO_FLAG_FLOOR);
 
     if (this->framesUntilNextState == 0)
     {

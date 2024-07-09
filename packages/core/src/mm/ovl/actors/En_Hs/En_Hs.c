@@ -292,7 +292,7 @@ void EnHs_Update(Actor_EnHs* this, GameState_Play* play)
     CollisionCheck_SetOC(play, &play->colChkCtx, &this->collider.base);
 
     Actor_MoveWithGravity(&this->actor);
-    Actor_UpdateBgCheckInfo(play, &this->actor, 0.0f, 0.0f, 0.0f, UPDBGCHECKINFO_FLAG_2);
+    Actor_UpdateBgCheckInfo(play, &this->actor, 0.0f, 0.0f, 0.0f, UPDBGCHECKINFO_FLAG_FLOOR);
 
     if (SkelAnime_Update(&this->skelAnime))
         this->skelAnime.curFrame = 0.0f;
