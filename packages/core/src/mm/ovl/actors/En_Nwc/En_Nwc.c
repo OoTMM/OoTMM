@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/sfx.h>
 #include "En_Nwc.h"
 
 #define FLAGS (ACTOR_FLAG_MM_10 | ACTOR_FLAG_MM_80000000)
@@ -228,8 +229,7 @@ void EnNwc_CheckFound(Actor_EnNwc* this, GameState_Play* play)
             this->grog->actor.home.rot.z += 2;
 
         EnNwc_ChangeState(this, NWC_STATE_FOLLOWING);
-        Vec3f sfxDefaultPos = {0.f, 0.f, 0.f};
-        Audio_PlaySfx_AtPosWithAllChannelsIO(&sfxDefaultPos, NA_SE_SY_CHICK_JOIN_CHIME, currentChickCount);
+        Audio_PlaySfx_AtPosWithAllChannelsIO(&gSfxDefaultPos, NA_SE_SY_CHICK_JOIN_CHIME, currentChickCount);
     }
 }
 

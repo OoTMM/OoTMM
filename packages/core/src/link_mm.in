@@ -330,6 +330,8 @@ Math_StepToF = 0x800FF03C;
 Math_StepToS = 0x800fef2c;
 Math_SmoothStepToF = 0x800FFCD8;
 
+gSfxDefaultPos = 0x801db4a4;
+
 Math_SmoothStepToS = 0x800ffebc;
 Math_Vec3f_Yaw = 0x800ffa60;
 Math_Vec3f_Pitch = 0x800ffa94;
