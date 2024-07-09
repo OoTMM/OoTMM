@@ -6,6 +6,8 @@
 
 #define fabsf(f) __builtin_fabsf(f)
 
+#define SQXZ(vec) ((vec.x) * (vec.x) + (vec.z) * (vec.z))
+
 float sqrtf(float value);
 
 float   Math_CosS(s16 angle);

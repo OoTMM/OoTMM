@@ -141,6 +141,8 @@ add_actor(oot Obj_Tsubo   "oot/ovl/actors/Obj_Tsubo/Obj_Tsubo.c")
 add_actor(oot Obj_Kibako2 "oot/ovl/actors/Obj_Kibako2/Obj_Kibako2.c")
 
 add_actor(mm Obj_Tsubo          "mm/ovl/actors/Obj_Tsubo/Obj_Tsubo.c")
+add_actor(mm En_Hs              "mm/ovl/actors/En_Hs/En_Hs.c")
+add_actor(mm En_Nwc             "mm/ovl/actors/En_Nwc/En_Nwc.c")
 add_actor(mm Custom_Magic_Fire  "mm/ovl/actors/Custom_Magic_Fire/Custom_Magic_Fire.c")
 add_actor(mm Custom_Magic_Wind  "mm/ovl/actors/Custom_Magic_Wind/Custom_Magic_Wind.c")
 add_actor(mm Custom_Magic_Dark  "mm/ovl/actors/Custom_Magic_Dark/Custom_Magic_Dark.c")
