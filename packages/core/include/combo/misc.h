@@ -1213,20 +1213,30 @@ typedef struct {
     /* 0x2 */ u16 flags;
 } EntranceTableEntry; /* size = 0x4 */
 
-#define UPDBGCHECKINFO_FLAG_0 (1 << 0) /* check wall */
-#define UPDBGCHECKINFO_FLAG_1 (1 << 1) /* check ceiling */
-#define UPDBGCHECKINFO_FLAG_2 (1 << 2) /* check floor and water */
-#define UPDBGCHECKINFO_FLAG_3 (1 << 3)
-#define UPDBGCHECKINFO_FLAG_4 (1 << 4)
-#define UPDBGCHECKINFO_FLAG_5 (1 << 5) /* unused */
-#define UPDBGCHECKINFO_FLAG_6 (1 << 6) /* disable water ripples */
-#define UPDBGCHECKINFO_FLAG_7 (1 << 7) /* alternate wall check? */
+#define UPDBGCHECKINFO_FLAG_OOT_0   (1 << 0) /* check wall */
+#define UPDBGCHECKINFO_FLAG_OOT_1   (1 << 1) /* check ceiling */
+#define UPDBGCHECKINFO_FLAG_OOT_2   (1 << 2) /* check floor and water */
+#define UPDBGCHECKINFO_FLAG_OOT_3   (1 << 3)
+#define UPDBGCHECKINFO_FLAG_OOT_4   (1 << 4)
+#define UPDBGCHECKINFO_FLAG_OOT_5   (1 << 5) /* unused */
+#define UPDBGCHECKINFO_FLAG_OOT_6   (1 << 6) /* disable water ripples */
+#define UPDBGCHECKINFO_FLAG_OOT_7   (1 << 7) /* alternate wall check? */
 
-/* MM */
+#define UPDBGCHECKINFO_FLAG_MM_1        (1 << 0) /* check wall */
+#define UPDBGCHECKINFO_FLAG_MM_2        (1 << 1) /* check ceiling */
+#define UPDBGCHECKINFO_FLAG_MM_4        (1 << 2) /* check floor and water */
+#define UPDBGCHECKINFO_FLAG_MM_8        (1 << 3)
+#define UPDBGCHECKINFO_FLAG_MM_10       (1 << 4)
+#define UPDBGCHECKINFO_FLAG_MM_20       (1 << 5)
+#define UPDBGCHECKINFO_FLAG_MM_40       (1 << 6)
+#define UPDBGCHECKINFO_FLAG_MM_80       (1 << 7)
+#define UPDBGCHECKINFO_FLAG_MM_100      (1 << 8)
+#define UPDBGCHECKINFO_FLAG_MM_200      (1 << 9)
+#define UPDBGCHECKINFO_FLAG_MM_400      (1 << 10) /* check water */
+#define UPDBGCHECKINFO_FLAG_MM_800      (1 << 11)
 
-#define UPDBGCHECKINFO_FLAG_8 (1 << 8)
-#define UPDBGCHECKINFO_FLAG_9 (1 << 9)
-#define UPDBGCHECKINFO_FLAG_10 (1 << 10) /* check water */
-#define UPDBGCHECKINFO_FLAG_11 (1 << 11)
+#define UPDBGCHECKINFO_FLAG_WALL        (1 << 0)
+#define UPDBGCHECKINFO_FLAG_CEILING     (1 << 1)
+#define UPDBGCHECKINFO_FLAG_FLOOR       (1 << 2)
 
 #endif /* TYPES_H */

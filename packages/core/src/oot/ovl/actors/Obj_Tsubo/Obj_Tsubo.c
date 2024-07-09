@@ -410,7 +410,7 @@ void ObjTsubo_LiftedUp(Actor_ObjTsubo* this, GameState_Play* play)
         ObjTsubo_SetupThrown(this);
         ObjTsubo_ApplyGravity(this);
         Actor_UpdatePos(&this->actor);
-        Actor_UpdateBgCheckInfo(play, &this->actor, 5.0f, 15.0f, 0.0f, UPDBGCHECKINFO_FLAG_0 | UPDBGCHECKINFO_FLAG_2 | UPDBGCHECKINFO_FLAG_7);
+        Actor_UpdateBgCheckInfo(play, &this->actor, 5.0f, 15.0f, 0.0f, UPDBGCHECKINFO_FLAG_FLOOR | UPDBGCHECKINFO_FLAG_WALL | UPDBGCHECKINFO_FLAG_OOT_7);
     }
 }
 
@@ -449,7 +449,7 @@ void ObjTsubo_Thrown(Actor_ObjTsubo* this, GameState_Play* play)
         Math_StepToS(&D_80BA1B5C, D_80BA1B58, 0x64);
         this->actor.shape.rot.x += D_80BA1B54;
         this->actor.shape.rot.y += D_80BA1B5C;
-        Actor_UpdateBgCheckInfo(play, &this->actor, 5.0f, 15.0f, 0.0f, UPDBGCHECKINFO_FLAG_0 | UPDBGCHECKINFO_FLAG_2 | UPDBGCHECKINFO_FLAG_7);
+        Actor_UpdateBgCheckInfo(play, &this->actor, 5.0f, 15.0f, 0.0f, UPDBGCHECKINFO_FLAG_FLOOR | UPDBGCHECKINFO_FLAG_WALL | UPDBGCHECKINFO_FLAG_OOT_7);
         Collider_UpdateCylinder(&this->actor, &this->collider);
         CollisionCheck_SetOC(play, &play->colChkCtx, &this->collider.base);
         CollisionCheck_SetAT(play, &play->colChkCtx, &this->collider.base);
