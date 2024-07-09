@@ -472,8 +472,8 @@ void Player_CheckCustomBoots(GameState_Play* play)
     if (player->transformation == MM_PLAYER_FORM_HUMAN)
     {
         s32 isAdult = comboIsLinkAdult();
-        player->actor.flags &= ~(1 << 17); /* ~ACTOR_FLAG_CAN_PRESS_HEAVY_SWITCH */
-        player->actor.flags |= (1 << 26); /* ACTOR_FLAG_CAN_PRESS_SWITCH */
+        player->actor.flags &= ~ACTOR_FLAG_MM_CAN_PRESS_HEAVY_SWITCH;
+        player->actor.flags |= ACTOR_FLAG_MM_CAN_PRESS_SWITCH;
 
         if (gSaveContext.save.itemEquips.boots > 0 || isAdult)
         {
@@ -487,7 +487,7 @@ void Player_CheckCustomBoots(GameState_Play* play)
             {
             case PLAYER_BOOTS_IRON:
                 player->currentBoots = 6; /* PLAYER_BOOTS_GORON */
-                player->actor.flags |= (1 << 17); /* ACTOR_FLAG_CAN_PRESS_HEAVY_SWITCH */
+                player->actor.flags |= ACTOR_FLAG_MM_CAN_PRESS_HEAVY_SWITCH;
                 if (player->state & PLAYER_ACTOR_STATE_WATER)
                 {
                     currentBoots = 3; /* Iron Underwater */
@@ -497,7 +497,7 @@ void Player_CheckCustomBoots(GameState_Play* play)
                 break;
             case PLAYER_BOOTS_HOVER:
                 player->currentBoots = 0; /* PLAYER_BOOTS_FIERCE_DEITY */
-                player->actor.flags &= ~(1 << 26); /* ~ACTOR_FLAG_CAN_PRESS_SWITCH */
+                player->actor.flags &= ~ACTOR_FLAG_MM_CAN_PRESS_SWITCH;
                 break;
             }
 

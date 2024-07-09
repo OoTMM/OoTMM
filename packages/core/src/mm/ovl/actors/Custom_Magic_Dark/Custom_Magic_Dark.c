@@ -1,9 +1,3 @@
-/*
- * File: z_magic_dark.c
- * Overlay: ovl_Magic_Dark
- * Description: Nayru's Love
- */
-
 #include "Custom_Magic_Dark.h"
 #include <combo/custom.h>
 #include <combo/player.h>
@@ -11,7 +5,7 @@
 #include <combo/math.h>
 #include <combo/global.h>
 
-#define FLAGS ((1 << 4) | (1 << 25)) /* (ACTOR_FLAG_4 | ACTOR_FLAG_25) */
+#define FLAGS (ACTOR_FLAG_OOT_4 | ACTOR_FLAG_OOT_25)
 
 void MagicDark_Init(Actor* thisx, GameState_Play* play);
 void MagicDark_Destroy(Actor* thisx, GameState_Play* play);

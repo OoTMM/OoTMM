@@ -1,7 +1,7 @@
 #include <combo.h>
 #include "En_Nwc.h"
 
-#define FLAGS (ACTOR_FLAG_4 | ACTOR_FLAG_31)
+#define FLAGS (ACTOR_FLAG_MM_10 | ACTOR_FLAG_MM_80000000)
 
 #if defined(GAME_MM)
 # define SEGADDR_NIW_SKEL           ((void*)0x06002530)
@@ -27,7 +27,7 @@ void EnNwc_CheckForBreman(Actor_EnNwc* this, GameState_Play* play);
 void EnNwc_DrawAdultBody(Actor_EnNwc* this, GameState_Play* play);
 Actor_EnHs* EnNwc_FindGrog(GameState_Play* play);
 
-typedef enum EnNwcState 
+typedef enum EnNwcState
 {
     /* -1 */ NWC_STATE_NIW_LOADED = -1, // set after loading object_niw
     /*  0 */ NWC_STATE_CHECK_BREMAN,    // checking for breman mask
@@ -35,10 +35,10 @@ typedef enum EnNwcState
     /*  2 */ NWC_STATE_HOPPING_FORWARD, // hopping to go explore
     /*  3 */ NWC_STATE_FOLLOWING,       // following the player
     /*  4 */ NWC_STATE_RUNNING          // running from the player after failed breman march
-} 
+}
 EnNwcState;
 
-void EnNwc_Init(Actor_EnNwc* this, GameState_Play* play) 
+void EnNwc_Init(Actor_EnNwc* this, GameState_Play* play)
 {
     s32 niwObjectSlot;
 
@@ -288,8 +288,8 @@ void EnNwc_Follow(Actor_EnNwc* this, GameState_Play* play)
         Math_SmoothStepToS(&this->footRotZ, targetFootRot, 2, 0x1B58, 0x3E8);
         Math_SmoothStepToS(&this->upperBodyRotY, targetUpperBodyRot, 2, 0x1B58, 0x3E8);
 
-    } 
-    else 
+    }
+    else
     { // NOT grown up
         if (((this->stateTimer & 3) == 3) && ((this->stateTimer & 0x14) != 0))
             this->actor.velocity.y = 2.0f; // hop up and down
@@ -468,7 +468,7 @@ void EnNwc_Update(Actor_EnNwc* this, GameState_Play* play)
         this->actor.objectSlot = this->niwObjectSlot;
         this->actor.draw = EnNwc_DrawAdultBody;
         this->actor.shape.shadowScale = 15.0f;
-    } 
+    }
     else
     {
         this->actor.objectSlot = this->nwcObjectIndex;
@@ -522,7 +522,7 @@ void EnNwc_DrawAdultBody(Actor_EnNwc* this, GameState_Play* play)
                           EnNwc_OverrideLimbDraw, NULL, &this->actor);
 }
 
-ActorInit EnNwc_InitVars = 
+ActorInit EnNwc_InitVars =
 {
     AC_EN_NWC,
     ACTORCAT_PROP,

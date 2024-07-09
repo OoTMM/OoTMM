@@ -9,7 +9,7 @@
 #include <combo/global.h>
 #include "Obj_Tsubo.h"
 
-#define FLAGS (ACTOR_FLAG_4 | ACTOR_FLAG_23)
+#define FLAGS (ACTOR_FLAG_OOT_4 | ACTOR_FLAG_OOT_23)
 
 #if defined(GAME_OOT)
 # define DL_WHOLE_KEEP          0x05017870
@@ -335,7 +335,7 @@ void ObjTsubo_WaitForObject(Actor_ObjTsubo* this, GameState_Play* play)
         this->actor.draw = ObjTsubo_Draw;
         this->actor.objectSlot = this->requiredObjectSlot;
         ObjTsubo_SetupIdle(this);
-        this->actor.flags &= ~ACTOR_FLAG_4;
+        this->actor.flags &= ~ACTOR_FLAG_OOT_4;
     }
 }
 
@@ -399,7 +399,7 @@ void ObjTsubo_SetupLiftedUp(Actor_ObjTsubo* this)
     this->actor.room = -1;
     //! @bug: This is an unsafe cast, although the sound effect will still play
     Player_PlaySfx((Actor_Player*)&this->actor, NA_SE_PL_PULL_UP_POT);
-    this->actor.flags |= ACTOR_FLAG_4;
+    this->actor.flags |= ACTOR_FLAG_OOT_4;
 }
 
 void ObjTsubo_LiftedUp(Actor_ObjTsubo* this, GameState_Play* play)

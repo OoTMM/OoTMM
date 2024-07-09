@@ -104,7 +104,7 @@ void Ocarina_HandleLastPlayedSong(GameState_Play* play, Actor_Player* player, s1
     /* Displaced code: */
     case OCARINA_SONG_SARIAS:
         player->naviTextId = -0xE0;
-        player->naviActor->flags |= (1 << 16); /* ACTOR_FLAG_16 */
+        player->naviActor->flags |= ACTOR_FLAG_OOT_16;
         break;
     /* End displaced code. */
     case OCARINA_SONG_TIME:

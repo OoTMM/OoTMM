@@ -3,7 +3,7 @@
 #include <combo/global.h>
 #include "Obj_Tsubo.h"
 
-#define FLAGS (ACTOR_FLAG_4 | ACTOR_FLAG_23 | ACTOR_FLAG_26)
+#define FLAGS (ACTOR_FLAG_MM_10 | ACTOR_FLAG_MM_800000 | ACTOR_FLAG_MM_CAN_PRESS_SWITCH)
 
 #define OBJ_TSUBO_P000F(thisx)      ((thisx)->variable & 0x0F)
 #define OBJ_TSUBO_P001F(thisx)      ((thisx)->variable & 0x1F)
@@ -697,7 +697,7 @@ void func_80928D80(Actor_ObjTsubo* this, GameState_Play* play)
     if (Actor_HasNoParent(&this->actor, play)) {
         this->actor.room = play->roomCtx.curRoom.num;
         Actor_MoveWithGravity(&this->actor);
-        this->actor.flags &= ~ACTOR_FLAG_26;
+        this->actor.flags &= ~ACTOR_FLAG_MM_CAN_PRESS_SWITCH;
         Actor_UpdateBgCheckInfo(play, &this->actor, 15.0f, 15.0f, 0.0f, 0x01 | 0x04 | 0x40 | 0x80);
         func_80928E74(this);
     } else {
@@ -807,7 +807,7 @@ void func_8092926C(Actor_ObjTsubo* this, GameState_Play* play) {
     } else {
         scale = sPotTypeData[OBJ_TSUBO_GET_TYPE(&this->actor)].scale;
         if (Math_StepToF(&this->actor.scale.x, scale, scale * 0.1f)) {
-            this->actor.flags |= ACTOR_FLAG_26;
+            this->actor.flags |= ACTOR_FLAG_MM_CAN_PRESS_SWITCH;
             func_809289B4(this);
         }
         this->actor.scale.z = this->actor.scale.y = this->actor.scale.x;

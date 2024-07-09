@@ -130,7 +130,7 @@ void ObjKibako2_Idle(Actor_ObjKibako2* this, GameState_Play* play)
     {
         ObjKibako2_Break(this, play);
         SfxSource_PlaySfxAtFixedWorldPos(play, &this->dyna.actor.world.pos, 20, NA_SE_EV_WOODBOX_BREAK);
-        this->dyna.actor.flags |= ACTOR_FLAG_4;
+        this->dyna.actor.flags |= ACTOR_FLAG_OOT_4;
         DynaPoly_DisableCollision(play, &play->colCtx.dyna, this->dyna.bgId);
         this->dyna.actor.draw = NULL;
         this->actionFunc = ObjKibako2_Kill;

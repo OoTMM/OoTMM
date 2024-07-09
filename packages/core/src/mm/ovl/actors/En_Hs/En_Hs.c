@@ -5,7 +5,7 @@
 #include <combo/mm/bombers_notebook.h>
 #include "En_Hs.h"
 
-#define FLAGS (ACTOR_FLAG_0 | ACTOR_FLAG_3 | ACTOR_FLAG_4)
+#define FLAGS (ACTOR_FLAG_MM_1 | ACTOR_FLAG_MM_8 | ACTOR_FLAG_MM_10)
 
 #define THIS ((Actor_EnHs*)thisx)
 
@@ -74,7 +74,7 @@ void EnHs_Init(Actor_EnHs* this, GameState_Play* play)
     this->actionFunc = func_8095345C;
 
     if (play->curSpawn == 1)
-        this->actor.flags |= ACTOR_FLAG_16;
+        this->actor.flags |= ACTOR_FLAG_MM_10000;
 
     this->stateFlags = 0;
     this->actor.targetMode = 6;
@@ -153,10 +153,10 @@ void func_80953098(Actor_EnHs* this, GameState_Play* play)
         gMmExtraFlags.maskBunny = 1;
         this->actor.parent = NULL;
         this->actionFunc = func_8095345C;
-        this->actor.flags |= ACTOR_FLAG_16;
+        this->actor.flags |= ACTOR_FLAG_MM_10000;
         this->stateFlags |= 0x10;
         Actor_OfferTalkExchange(&this->actor, play, 1000.0f, 1000.0f, PLAYER_IA_MINUS1);
-    } 
+    }
     else
     {
         this->stateFlags |= 8;
@@ -171,7 +171,7 @@ void func_80953180(Actor_EnHs* this, GameState_Play* play)
 {
     if ((Message_GetState(&play->msgCtx) == 5) && Message_ShouldAdvance(play))
     {
-        switch (play->msgCtx.currentTextId) 
+        switch (play->msgCtx.currentTextId)
         {
             case 0x33F4: // laughing that they are all roosters (!)
             case 0x33F6: // Grog regrets not being able to see his chicks reach adult hood
@@ -180,14 +180,14 @@ void func_80953180(Actor_EnHs* this, GameState_Play* play)
                 break;
 
             case 0x33F7: // notice his chicks are grown up, happy, wants to give you bunny hood
-                this->actor.flags &= ~ACTOR_FLAG_16;
+                this->actor.flags &= ~ACTOR_FLAG_MM_10000;
                 Message_Close(play);
                 this->actionFunc = func_80953098;
                 func_80953098(this, play);
                 break;
 
             case 0x33F9: // laughing that they are all roosters (.)
-                this->actor.flags &= ~ACTOR_FLAG_16;
+                this->actor.flags &= ~ACTOR_FLAG_MM_10000;
                 Message_Close(play);
                 this->actionFunc = func_8095345C;
                 break;
@@ -210,7 +210,7 @@ void func_80953180(Actor_EnHs* this, GameState_Play* play)
 
 void EnHs_DoNothing(Actor_EnHs* this, GameState_Play* play) { }
 
-void EnHs_SceneTransitToBunnyHoodDialogue(Actor_EnHs* this, GameState_Play* play) 
+void EnHs_SceneTransitToBunnyHoodDialogue(Actor_EnHs* this, GameState_Play* play)
 {
     if (DECR(this->stateTimer) == 0)
     {
@@ -238,7 +238,7 @@ void func_809533A0(Actor_EnHs* this, GameState_Play* play)
     {
         sp1E = 0x33F7;
         this->stateFlags |= 0x20;
-    } 
+    }
     else if (this->stateFlags & 0x10)
     {
         sp1E = 0x33F9;
@@ -246,7 +246,7 @@ void func_809533A0(Actor_EnHs* this, GameState_Play* play)
     }
     else if (MM_GET_EVENT_WEEK(EV_MM_WEEK_GROG_GROWN_CHICKEN))
         sp1E = 0x33F4;
-    else 
+    else
         sp1E = 0x33F5;
 
     PlayerDisplayTextBox(play, sp1E, &this->actor);
@@ -266,18 +266,18 @@ void func_8095345C(Actor_EnHs* this, GameState_Play* play)
             func_80952DFC(play);
             this->stateFlags &= ~8;
         }
-    } 
+    }
     else if (this->actor.home.rot.x >= 20) // chicks turned adult >= 10
     {
         this->actionFunc = func_80953354;
         this->stateTimer = 40;
     }
-    else if ((this->actor.flags & ACTOR_FLAG_16) == ACTOR_FLAG_16) 
+    else if (this->actor.flags & ACTOR_FLAG_MM_10000)
     {
         Actor_OfferTalkExchange(&this->actor, play, 1000.0f, 1000.0f, -1);
         this->stateFlags |= 1;
     }
-    else if ((this->actor.xzDistToPlayer < 120.0f) && Player_IsFacingActor(&this->actor, 0x2000, play)) 
+    else if ((this->actor.xzDistToPlayer < 120.0f) && Player_IsFacingActor(&this->actor, 0x2000, play))
     {
         Actor_OfferTalk(&this->actor, play, 130.0f);
         this->stateFlags |= 1;
@@ -341,7 +341,7 @@ s32 EnHs_OverrideLimbDraw(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3
         // these two limbs both have empty enddisplaylist, they do nothing
         // at the same time (params == HS_TYPE_UNK1) is always false, because vanilla params is 0xFE01
         case 0xc:
-            if (this->actor.variable == HS_TYPE_UNK1) 
+            if (this->actor.variable == HS_TYPE_UNK1)
             {
                 *dList = NULL;
                 return 0;
@@ -349,7 +349,7 @@ s32 EnHs_OverrideLimbDraw(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3
             break;
 
         case 0xd:
-            if (this->actor.variable == HS_TYPE_UNK1) 
+            if (this->actor.variable == HS_TYPE_UNK1)
             {
                 *dList = NULL;
                 return 0;
@@ -371,11 +371,10 @@ void EnHs_PostLimbDraw(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3s* 
 void EnHs_Draw(Actor_EnHs* this, GameState_Play* play)
 {
     InitListPolyOpa(play->gs.gfx);
-    SkelAnime_DrawFlexOpa(play, this->skelAnime.skeleton, this->skelAnime.jointTable, this->skelAnime.dListCount,
-                          EnHs_OverrideLimbDraw, EnHs_PostLimbDraw, &this->actor);
+    SkelAnime_DrawFlexOpa(play, this->skelAnime.skeleton, this->skelAnime.jointTable, this->skelAnime.dListCount, EnHs_OverrideLimbDraw, EnHs_PostLimbDraw, &this->actor);
 }
 
-ActorInit EnHs_InitVars = 
+ActorInit EnHs_InitVars =
 {
     AC_EN_HS,
     ACTORCAT_NPC,
