@@ -10,6 +10,13 @@ typedef struct ActorContext ActorContext;
 typedef struct Actor Actor;
 typedef struct Actor_Player Actor_Player;
 typedef struct DynaCollisionContext DynaCollisionContext;
+typedef struct AnimationHeader AnimationHeader;
+typedef enum PlayerItemAction PlayerItemAction;
+#if defined(GAME_MM)
+typedef enum BombersNotebookPerson BombersNotebookPerson;
+typedef enum BombersNotebookEvent BombersNotebookEvent;
+typedef void (*ActorShadowFunc)(struct Actor* actor, struct Lights* mapper, GameState_Play* play);
+#endif
 
 float Actor_WorldDistXZToActor(Actor* a, Actor* b);
 float Actor_HeightDiff(Actor* a, Actor* b);
@@ -233,6 +240,20 @@ void Audio_PlaySfx(u16 sfxId, Vec3f* pos, u8 token, f32* freqScale, f32* volume,
 
 #if defined(GAME_MM)
 void AudioOcarina_SetInstrument(u8 ocarinaInstrumentId);
+void Animation_PlayLoop(SkelAnime* skelAnime, AnimationHeader* animation);
+void ActorShape_Init(ActorShape* actorShape, f32 yOffset, ActorShadowFunc shadowDraw, f32 shadowScale);
+s32 Collider_InitAndSetCylinder(GameState_Play* play, ColliderCylinder* collider, struct Actor* actor, ColliderCylinderInit* src);
+void Message_BombersNotebookQueueEvent(GameState_Play* play, u8 event);
+s32 Player_IsFacingActor(Actor* actor, s16 maxAngleDiff, GameState_Play* play);
+s32 Actor_TrackPlayer(GameState_Play* play, Actor* actor, Vec3s* headRot, Vec3s* torsoRot, Vec3f focusPos);
+s16 Animation_GetLastFrame(void* animation);
+void* Lib_SegmentedToVirtual(void* ptr);
+s8 Play_InCsMode(GameState_Play* this);
+
+s32 Player_SetCsActionWithHaltedActors(GameState_Play* play, Actor* csActor, u8 csAction);
+s32 Actor_TalkOfferAccepted(Actor* actor, GameState* gameState);
+s32 Actor_OfferTalkExchange(Actor* actor, GameState_Play* play, f32 xzRange, f32 yRange, PlayerItemAction exchangeItemAction);
+s32 Actor_OfferTalk(Actor* actor, GameState_Play* play, f32 radius);
 #endif
 
 int Actor_RunByteCode(Actor* this, GameState_Play* play, void* bytecode, void* unk1, void* unk2);
@@ -333,6 +354,17 @@ int Item_CanDropBigFairy(GameState_Play* play, s32 index, s32 collectibleFlag);
 #if defined(GAME_MM)
 f32 VectDist(Vec3f* vec1, Vec3f* vec2);
 f32 Math_Vec3f_DistXYZAndStoreDiff(Vec3f* a, Vec3f* b, Vec3f* dest);
+void Audio_PlaySfx_AtPosWithAllChannelsIO(Vec3f* pos, u16 sfxId, u8 ioData);
+
+s16 Math_Vec3f_Yaw(Vec3f* origin, Vec3f* point);
+s16 Math_Vec3f_Pitch(Vec3f* origin, Vec3f* point);
+s16 Math_SmoothStepToS(s16* pValue, s16 target, s16 scale, s16 step, s16 minStep);
+void EffectSsDust_Spawn_2_Normal(GameState_Play* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, Color_RGBA8* primColor, Color_RGBA8* envColor, s16 scale, s16 scaleStep, s16 life);
+
+s32 SkelAnime_Update(SkelAnime* skelAnime);
+void SkelAnime_InitFlex(GameState_Play* play, SkelAnime* skelAnime, FlexSkeletonHeader* skeletonHeaderSeg, AnimationHeader* animation, Vec3s* jointTable, Vec3s* morphTable, s32 limbCount);
+void Animation_Change(SkelAnime* skelAnime, AnimationHeader* animation, f32 playSpeed, f32 startFrame, f32 endFrame, u8 mode, f32 morphFrames);
+void Matrix_MultVec3f(Vec3f* src, Vec3f* dest);
 #endif
 
 void EffectSsIceSmoke_Spawn(GameState_Play* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, s16 scale);

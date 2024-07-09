@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## Added
+
+- The baby chickens in Cucco Shack are now displayed on the mini-map. 
+
 ## Fixed
 
 - The diamond around Link after using Nayru's Love in MM rotates instead of being static

@@ -295,6 +295,7 @@ SetRoomClear = 0x800b5d30;
 
 Rand_ZeroOne = 0x80086fdc;
 Rand_Next = 0x80086fa0;
+Rand_ZeroFloat = 0x80179594;
 gHorseIsMounted = 0x801bda9c;
 Horse_SpawnOverworld = 0x800f3c44;
 SomethingPotBreak = 0x800BBFB0;
@@ -317,6 +318,7 @@ Item_CanDropBigFairy = 0x800a81a4;
 EnableOwl = 0x80143a10;
 
 Math_Vec3f_Copy = 0x800FF50C;
+Math_Vec3f_Diff = 0x800FF5F4;
 Math_Vec3f_DistXYZAndStoreDiff = 0x800FF8D4;
 VectDist = 0x800ff92c;
 
@@ -327,6 +329,32 @@ Math_SinS = 0x800FED84;
 Math_StepToF = 0x800FF03C;
 Math_StepToS = 0x800fef2c;
 Math_SmoothStepToF = 0x800FFCD8;
+
+Math_SmoothStepToS = 0x800ffebc;
+Math_Vec3f_Yaw = 0x800ffa60;
+Math_Vec3f_Pitch = 0x800ffa94;
+EffectSsDust_Spawn_2_Normal = 0x800b0f80;
+
+Audio_PlaySfx_AtPosWithAllChannelsIO = 0x801a0868;
+SkelAnime_Update = 0x80136cd0;
+SkelAnime_InitFlex = 0x80136b30;
+Animation_Change = 0x801373e8;
+
+Player_SetCsActionWithHaltedActors = 0x800b7298;
+Actor_TalkOfferAccepted = 0x800b84d0;
+Actor_OfferTalkExchange = 0x800b8500;
+Actor_OfferTalk = 0x800b8614;
+ActorShape_Init = 0x800b3ba4;
+Animation_PlayLoop = 0x80137540;
+Collider_InitAndSetCylinder = 0x800e1374;
+Message_BombersNotebookQueueEvent = 0x80151bb4;
+Player_IsFacingActor = 0x800b7320;
+Actor_TrackPlayer = 0x800e9250;
+Animation_GetLastFrame = 0x80134748;
+Lib_SegmentedToVirtual = 0x80100504;
+Play_InCsMode = 0x801690cc;
+SkelAnime_DrawFlexOpa = 0x80133f28;
+Matrix_MultVec3f = 0x80181a98;
 
 Rand_CenteredFloat = 0x801795C0;
 

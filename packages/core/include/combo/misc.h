@@ -630,9 +630,83 @@ typedef struct {
     /* 0x04 */ u32* vromEnd;
 } RomFile; /* size = 0x8 */
 
+// TODO: Move this into its own file
 typedef struct {
-    u8 unk_000[0x178];
+    u8 unk_000[0x50]; // paramData, bunch of pointers
+    Vec3f at;
+    Vec3f eye;
+    Vec3f up;
+    Vec3f eyeNext;
+    Vec3f quakeOffset;
+    struct PlayState* play;
+    Actor* focalActor;
+    struct {
+        Vec3f pos;
+        Vec3s rot;
+    } focalActorPosRot;
+    Actor* target;
+    struct {
+        Vec3f pos;
+        Vec3s rot;
+    } targetPosRot;
+    f32 rUpdateRateInv;
+    f32 pitchUpdateRateInv;
+    f32 yawUpdateRateInv;
+    f32 xzOffsetUpdateRate;
+    f32 yOffsetUpdateRate;
+    f32 fovUpdateRate;
+    f32 xzSpeed;
+    f32 dist;
+    f32 speedRatio;
+    Vec3f playerToAtOffset;
+    Vec3f playerPosDelta;
+    f32 fov;
+    f32 atLERPStepScale;
+    f32 playerGroundY;
+    Vec3f floorNorm;
+    f32 waterYPos;
+    s32 bgCamIndexBeforeUnderwater;
+    s32 waterCamSetting;
+    s32 waterQuakeIndex;
+    void* data0;
+    void* data1;
+    s16 data2;
+    s16 data3;
+    s16 uid;
+    char unk_132[2];
+    Vec3s inputDir;
+    Vec3s camDir;
+    s16 status;
+    s16 setting;
+    s16 mode;
+    s16 bgId; // bgId the camera is currently interacting with
+    s16 bgCamIndex;
+    s16 behaviorFlags; // includes flags on settings, modes, bgCam. All related to camera update behaviour
+    s16 stateFlags;
+    s16 childCamId;
+    s16 waterDistortionTimer;
+    s16 distortionFlags;
+    s16 prevSetting;
+    s16 nextBgCamIndex;
+    s16 nextBgId;
+    s16 roll;
+    s16 viewFlags; // For setting params: at, eye, up, target, targetPos, fov, roll
+    s16 animState;
+    s16 timer;
+    s16 parentCamId;
+    s16 camId;
+    s16 prevBgCamIndex;
+    s16 csId;
+#if defined(GAME_MM)
+    Vec3f meshActorPos;
+#endif
 } Camera;
+
+#if defined(GAME_OOT)
+_Static_assert(sizeof(Camera) == 0x16c, "MM Camera size is wrong");
+#elif defined(GAME_MM)
+_Static_assert(sizeof(Camera) == 0x178, "MM Camera size is wrong");
+#endif
 
 typedef struct {
     /* 0x0 */ s16 frameCount;
