@@ -565,7 +565,6 @@ ASSERT_OFFSET(GameState_Play, transitionMode,           0x18b4a);
 
 #define TRANS_TRIGGER_NONE          0x00
 #define TRANS_TRIGGER_NORMAL        0x14
-#define TRANS_TRIGGER_START         0x20
 
 _Static_assert(sizeof(GameState_Play) == 0x19258, "MM GameState_Play size is wrong");
 
