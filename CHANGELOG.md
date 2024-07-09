@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 ## Fixed
 
 - The diamond around Link after using Nayru's Love in MM rotates instead of being static
+- Entrances for Zora Hall <-> Zora Cape Peninsula were reversed; this is now fixed.
 
 ## [24.0] - 2024-07-06
 
