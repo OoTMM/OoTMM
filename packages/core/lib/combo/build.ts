@@ -46,7 +46,7 @@ export async function build(opts: Options) {
   const ovlDir = path.resolve(binDir, 'ovl');
 
   /* Remove old overlays */
-  await fs.promises.rm(ovlDir, { recursive: true });
+  await fs.promises.rm(ovlDir, { recursive: true, force: true });
 
   /* Make directories */
   await fs.promises.mkdir(buildDir, { recursive: true });
