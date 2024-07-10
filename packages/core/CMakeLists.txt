@@ -118,7 +118,6 @@ function (add_actor game name file)
   target_compile_definitions(${target_name} PRIVATE ${game_define})
   target_compile_options(${target_name} PRIVATE "-fno-merge-constants" "-mno-explicit-relocs" "-mno-split-addresses")
 
-  make_directory("ovl/${game}")
   add_custom_command(
     OUTPUT "${ovl}"
     COMMAND "${TOOL_ZOVL}" "$<TARGET_FILE:${target_name}>" "${ovl}"
