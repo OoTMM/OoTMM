@@ -5,6 +5,7 @@
 #include <combo/math/vec.h>
 #include <combo/gi.h>
 
+typedef struct Font Font;
 typedef struct GameState_Play GameState_Play;
 typedef struct ActorContext ActorContext;
 typedef struct Actor Actor;
@@ -22,8 +23,16 @@ float Actor_WorldDistXZToActor(Actor* a, Actor* b);
 float Actor_HeightDiff(Actor* a, Actor* b);
 u16   Actor_Angle(Actor* a, Actor* b);
 
+Gfx* Gfx_Open(Gfx* gfx);
+void Gfx_Close(Gfx* gfxRef, Gfx* gfx);
+
+void Gfx_SetupDL_39Ptr(Gfx** gfxPtr);
+void Gfx_SetupDL_56Ptr(Gfx** gfxPtr);
+
 /* Unknown */
 void* UnkFuncActorCollision(GameState_Play* play, Actor* actor);
+
+int CutsceneFlags_Get(GameState_Play* play, int flag);
 
 s32             DynaPoly_IsBgIdBgActor(s32 bgId);
 void            DynaPoly_DisableCollision(GameState_Play* play, DynaCollisionContext* dyna, s32 bgId);
@@ -308,6 +317,8 @@ void LoadMapMark(void*);
 void Inventory_SetWorldMapCloudVisibility(s16 tingleId);
 
 #endif
+
+void Font_LoadOrderedFont(Font* font);
 
 void Horse_ForceUnmount(GameState_Play* play);
 void Horse_Spawn(GameState_Play* play, Actor_Player* link);

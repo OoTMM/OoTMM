@@ -20,7 +20,15 @@ gAudioLoadStatusFontSample = 0x80128a68;
 
 Player_GetHeight = 0x80021600;
 
+Gfx_Open = 0x800a1aa0;
+Gfx_Close = 0x800a1aac;
+
+Gfx_SetupDL_39Ptr = 0x8007e63c;
+Gfx_SetupDL_56Ptr = 0x8007e9c8;
+
+CutsceneFlags_Get = 0x8005991c;
 DrawLink = 0x80079f48;
+Audio_SetCutsceneFlag = 0x800c75dc;
 Audio_GetActiveSeqId = 0x800cab18;
 
 Actor_ProcessInitChain = 0x80063f7c;
@@ -100,6 +108,7 @@ GetMatrixMV             = 0x800ab900;
 Gfx_DrawDListOpa        = 0x80028048;
 Gfx_DrawDListXlu        = 0x800280c8;
 
+Font_LoadOrderedFont = 0x8005bd78;
 UnkFuncActorCollision = 0x8002650c;
 
 CollisionCheck_SetOC = 0x8004c130;

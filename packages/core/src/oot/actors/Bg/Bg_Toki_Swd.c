@@ -34,7 +34,7 @@ void BgTokiSwd_Handler(Actor* this, GameState_Play* play)
         swapFarore();
 
         /* Time Travel */
-        play->transitionTrigger = TRANS_TYPE_NORMAL;
+        play->transitionTrigger = TRANS_TRIGGER_NORMAL;
         play->transitionType = TRANS_GFX_SHORTCUT;
         play->nextEntranceIndex = 0x02ca;
         play->linkAgeOnLoad = !(gSave.age);

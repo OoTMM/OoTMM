@@ -3,6 +3,27 @@
 
 #include <combo/util.h>
 
+#define FONT_CHAR_TEX_WIDTH  16
+#define FONT_CHAR_TEX_HEIGHT 16
+#define FONT_CHAR_TEX_SIZE ((FONT_CHAR_TEX_WIDTH * FONT_CHAR_TEX_HEIGHT) / 2)
+
+typedef struct Font
+{
+    u32 msgOffset;
+    u32 msgLength;
+    ALIGNED(8) u8 charTexBuf[FONT_CHAR_TEX_SIZE * 120];
+    ALIGNED(8) u8 iconBuf[FONT_CHAR_TEX_SIZE];
+    ALIGNED(8) u8 fontBuf[FONT_CHAR_TEX_SIZE * 320];
+    ALIGNED(8) union
+    {
+        char msgBuf[1280];
+        u16 msgBufWide[640];
+    };
+}
+Font;
+
+ASSERT_SIZE(Font, 0xe188);
+
 typedef struct PACKED
 {
     char view[0x128];

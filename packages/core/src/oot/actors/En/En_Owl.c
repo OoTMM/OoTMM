@@ -16,7 +16,7 @@ void EnOwl_AfterInit(Actor* this)
 
 static void EnOwl_StartCutscene(void)
 {
-    gPlay->transitionTrigger = TRANS_TYPE_NORMAL;
+    gPlay->transitionTrigger = TRANS_TRIGGER_NORMAL;
     gPlay->transitionType = TRANS_GFX_SHORTCUT;
 
     switch (gPlay->sceneId)
