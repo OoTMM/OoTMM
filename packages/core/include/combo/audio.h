@@ -31,6 +31,7 @@ AudioTable;
 
 typedef struct GameState_Play GameState_Play;
 
+void    Audio_SetCutsceneFlag(int flag);
 u16     Audio_GetActiveSeqId(int channel);
 void    Audio_DisplayMusicName(GameState_Play* play);
 

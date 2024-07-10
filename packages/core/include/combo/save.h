@@ -1,6 +1,14 @@
 #ifndef COMBO_SAVE_H
 #define COMBO_SAVE_H
 
+#define GAMEMODE_NORMAL         0
+#define GAMEMODE_TITLE_SCREEN   1
+#define GAMEMODE_FILE_SELECT    2
+#define GAMEMODE_END_CREDIT     3
+#if defined(GAME_MM)
+# define GAMEMODE_OWL_SAVE      4
+#endif
+
 #if !defined(__ASSEMBLER__)
 # include <combo/oot/save.h>
 # include <combo/mm/save.h>

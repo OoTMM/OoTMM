@@ -15,7 +15,7 @@ void comboCreditWarp(GameState_Play* play)
     /* Credit warp */
     link = GET_PLAYER(play);
     link->state |= PLAYER_ACTOR_STATE_FROZEN;
-    play->transitionTrigger = TRANS_TYPE_NORMAL;
+    play->transitionTrigger = TRANS_TRIGGER_NORMAL;
     play->transitionType = TRANS_GFX_BLACK;
     play->nextEntranceIndex = 0x06b;
     gSaveContext.nextCutscene = 0xfff2;
