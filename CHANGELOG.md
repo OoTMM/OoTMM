@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 
 - The diamond around Link after using Nayru's Love in MM rotates instead of being static
 - Entrances for Zora Hall <-> Zora Cape Peninsula were reversed; this is now fixed.
+- The Sticks event in MQ Dodongo's Cavern now requires the Deku Baba Soul and has been moved to its correct room.
 
 ## [24.0] - 2024-07-06
 
