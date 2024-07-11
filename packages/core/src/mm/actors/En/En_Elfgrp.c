@@ -51,7 +51,7 @@ static void EnElfgrp_GiveReward(Actor* actor, GameState_Play* play)
     if (gMmExtraFlags.greatFairies & mask)
         return;
 
-    if (Actor_HasParent(actor))
+    if (Actor_HasParentZ(actor))
     {
         gMmExtraFlags.greatFairies |= mask;
         actor->parent = NULL;

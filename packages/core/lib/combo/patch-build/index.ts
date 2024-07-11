@@ -83,11 +83,10 @@ function asmPatchGroups(world: World, settings: Settings) {
   return keys.filter((k) => groups[k]);
 }
 
-
-
 export async function buildPatchfiles(args: BuildPatchfileIn): Promise<Patchfile[]> {
   args.monitor.log("Building Patchfile");
   const patches: Patchfile[] = [];
+  const patchedFiles = new Set<string>();
   let ovlAddr = 0xe0000000;
 
   for (let world = 0; world < args.settings.players; ++world) {
@@ -102,7 +101,10 @@ export async function buildPatchfiles(args: BuildPatchfileIn): Promise<Patchfile
       const rom = args.roms[game].rom;
       const patches = await args.resolver.fetch(`${game}_patch.bin`);
       const patcher = new Patcher(args.opts, game, rom, groups, args.addresses, patches, p);
-      patcher.run();
+      const { files } = patcher.run();
+      for (const f of files) {
+        patchedFiles.add(f);
+      }
 
       /* Pack the payload */
       const payload = await args.resolver.fetch(`${game}_payload.bin`);
@@ -138,7 +140,16 @@ export async function buildPatchfiles(args: BuildPatchfileIn): Promise<Patchfile
         patch.writeUInt32BE(0,          0x10);
         patch.writeUInt32BE(vramInit,   0x14);
 
-        p.addDataPatch(game, gc.actorsOvlAddr + actorId * 0x20, patch);
+        /* Delete the old overlay if possible */
+        const oldHeader = rom.subarray(gc.actorsOvlAddr + actorId * 0x20, gc.actorsOvlAddr + actorId * 0x20 + 0x20);
+        const oldVramStart = oldHeader.readUInt32BE(0x08);
+        if (oldVramStart !== 0) {
+          const oldFile = args.addresses[game].fileFromRAM(oldVramStart);
+          p.removedFiles.push(oldFile.name);
+        }
+
+        const fileAddr = args.addresses[game].fileFromROM(gc.actorsOvlAddr + actorId * 0x20);
+        p.addPatch(fileAddr.name, fileAddr.offset, patch);
       }
 
       /* Handle cosmetics */

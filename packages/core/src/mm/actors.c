@@ -96,7 +96,7 @@ static void Actor_ByteCode_GiveItem(Actor* actor, GameState_Play* play, s16 gi, 
         func = EnBjt_GiveItem;
         break;
     default:
-        func = (void*)GiveItem;
+        func = (void*)Actor_OfferGetItem;
         break;
     }
 
@@ -117,7 +117,7 @@ static int Actor_ByteCode_HasParent(Actor* actor)
     int ret;
     void (*func)(Actor*);
 
-    ret = Actor_HasParent(actor);
+    ret = Actor_HasParentZ(actor);
     if (ret)
     {
         switch (actor->id)
@@ -254,7 +254,7 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
         return opt(comboHasSoulMm(GI_MM_SOUL_NPC_GURU_GURU));
     case AC_EN_DAIKU:
     case AC_EN_DAIKU2:
-        if(play->sceneId == SCE_MM_MAYOR_HOUSE && play->roomCtx.curRoom.id == 0x01)
+        if(play->sceneId == SCE_MM_MAYOR_HOUSE && play->roomCtx.curRoom.num == 0x01)
             return opt(comboHasSoulMm(GI_MM_SOUL_NPC_MAYOR_DOTOUR));
         return opt(comboHasSoulMm(GI_MM_SOUL_NPC_CARPENTERS));
     case AC_EN_MS:
@@ -284,7 +284,7 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
     case AC_EN_MUTO:
     case AC_EN_HEISHI:
     case AC_EN_BAISEN:
-        if(play->sceneId == SCE_MM_MAYOR_HOUSE && play->roomCtx.curRoom.id != 0x01)
+        if(play->sceneId == SCE_MM_MAYOR_HOUSE && play->roomCtx.curRoom.num != 0x01)
             return 1;
         /* Fallthrough */
     case AC_EN_DT:
@@ -514,7 +514,7 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
     case AC_EN_NEO_REEBA:
         return comboHasSoulMm(GI_MM_SOUL_ENEMY_LEEVER);
     case AC_EN_SKB:
-        if ((play->sceneId == SCE_MM_IKANA_GRAVEYARD) && (play->roomCtx.curRoom.id == 0x01)) /* Upper graveyard */
+        if ((play->sceneId == SCE_MM_IKANA_GRAVEYARD) && (play->roomCtx.curRoom.num == 0x01)) /* Upper graveyard */
             return 1;
         /* Fallthrough */
     case AC_EN_HINT_SKB:
@@ -544,7 +544,7 @@ static int canSpawnActor(GameState_Play* play, s16 actorId, u16 variable)
 
 static s16 sActorIdToSpawn;
 
-Actor* comboSpawnActorEx(ActorContext* actorCtx, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int ex1, int ex2, int ex3)
+Actor* Actor_SpawnAsChildAndCutsceneWrapper(ActorContext* actorCtx, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int ex1, int ex2, int ex3)
 {
     int ret;
 
@@ -563,7 +563,7 @@ Actor* comboSpawnActorEx(ActorContext* actorCtx, GameState_Play *play, short act
         return NULL;
     }
     sActorIdToSpawn = actorId;
-    return SpawnActorEx(actorCtx, play, actorId, x, y, z, rx, ry, rz, variable, ex1, ex2, ex3);
+    return _Actor_SpawnAsChildAndCutscene(actorCtx, play, actorId, x, y, z, rx, ry, rz, variable, ex1, ex2, ex3);
 }
 
 static int GetRoomClearFlagForActor(GameState_Play* play, int flag)
@@ -675,7 +675,7 @@ void Actor_DrawFaroresWindPointer(GameState_Play* play)
             }
 
             effectPos.x = curPos->x + Rand_CenteredFloat(6.0f);
-            effectPos.y = curPos->y + 80.0f + (6.0f * RandFloat());
+            effectPos.y = curPos->y + 80.0f + (6.0f * Rand_ZeroOne());
             effectPos.z = curPos->z + Rand_CenteredFloat(6.0f);
 
             EffectSsKiraKira_SpawnDispersed(play, &effectPos, &effectVel, &effectAccel, &effectPrimCol, &effectEnvCol,
@@ -774,7 +774,7 @@ void Actor_DrawFaroresWindPointer(GameState_Play* play)
         }
 
         s32 shouldDraw = sceneMatches
-                && (D_8015BC18 != 0.0f || fwRoomId == play->roomCtx.curRoom.id || fwRoomId == play->roomCtx.prefRoom.id);
+                && (D_8015BC18 != 0.0f || fwRoomId == play->roomCtx.curRoom.num || fwRoomId == play->roomCtx.prefRoom.num);
 
         if ((play->csCtx.state == CS_STATE_IDLE) && shouldDraw)
         {

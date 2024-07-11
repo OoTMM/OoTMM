@@ -306,9 +306,9 @@ static int loadRelocs(State* state, int secId)
 {
     Elf32_Shdr shdr;
     Elf32_Rel rel;
-    uint16_t hi16[32] = { 0 };
-    uint32_t hi16off[32] = { 0 };
-    int hi16pending[32] = { 0 };
+    uint16_t hi16;
+    uint32_t hi16off;
+    int hi16pending;
     uint32_t off;
     uint32_t data;
     uint32_t addr;
@@ -337,19 +337,18 @@ static int loadRelocs(State* state, int secId)
         switch (type)
         {
         case R_MIPS_HI16:
-            reg = (data >> 0x10) & 0x1f;
-            hi16[reg] = data & 0xffff;
-            hi16pending[reg] = 1;
-            hi16off[reg] = off;
+            hi16 = data & 0xffff;
+            hi16pending = 1;
+            hi16off = off;
             addr = 0;
             break;
         case R_MIPS_LO16:
             reg = (data >> 0x15) & 0x1f;
-            addr = ((uint32_t)hi16[reg] << 16) + ((int16_t)(data & 0xffff));
-            if (hi16pending[reg])
+            addr = ((uint32_t)hi16 << 16) + ((int16_t)(data & 0xffff));
+            if (hi16pending)
             {
-                hi16pending[reg] = 0;
-                emitReloc(state, secId, R_MIPS_HI16, addr, hi16off[reg]);
+                hi16pending = 0;
+                emitReloc(state, secId, R_MIPS_HI16, addr, hi16off);
             }
             emitReloc(state, secId, R_MIPS_LO16, addr, off);
             break;

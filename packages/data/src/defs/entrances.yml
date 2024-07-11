@@ -370,8 +370,8 @@ MM_PINNACLE_ROCK:                               { game: mm, id: 0x4400, type: ov
 MM_GREAT_BAY_FROM_PINNACLE_ROCK:                { game: mm, id: 0x6830, type: overworld, flags: [no-sot, no-global], maps: [MM_PINNACLE_ROCK, MM_GREAT_BAY_COAST], areas: ["MM Pinnacle Rock Entrance", "MM Great Bay Coast Near Pinnacle"], reverse: MM_PINNACLE_ROCK}
 MM_ZORA_CAPE_FROM_HALL_WATER:                   { game: mm, id: 0x6a10, type: overworld, flags: [no-sot, no-global], maps: [MM_ZORA_HALL, MM_ZORA_CAPE], areas: ["MM Zora Hall", "MM Zora Hall Entrance"], reverse: MM_ZORA_HALL_UNDERWATER }
 MM_ZORA_HALL_UNDERWATER:                        { game: mm, id: 0x6000, type: overworld, maps: [MM_ZORA_CAPE, MM_ZORA_HALL], areas: ["MM Zora Hall Entrance", "MM Zora Hall"], reverse: MM_ZORA_CAPE_FROM_HALL_WATER }
-MM_ZORA_CAPE_PENINSULA:                         { game: mm, id: 0x6010, type: overworld, maps: [MM_ZORA_HALL, MM_ZORA_CAPE], areas: ["MM Zora Hall", "MM Zora Cape Peninsula"], reverse: MM_ZORA_HALL_LEDGE }
-MM_ZORA_HALL_LEDGE:                             { game: mm, id: 0x6a20, type: overworld, maps: [MM_ZORA_CAPE, MM_ZORA_HALL], areas: ["MM Zora Cape Peninsula", "MM Zora Hall"], reverse: MM_ZORA_CAPE_PENINSULA }
+MM_ZORA_CAPE_PENINSULA:                         { game: mm, id: 0x6a20, type: overworld, maps: [MM_ZORA_HALL, MM_ZORA_CAPE], areas: ["MM Zora Hall", "MM Zora Cape Peninsula"], reverse: MM_ZORA_HALL_LEDGE }
+MM_ZORA_HALL_LEDGE:                             { game: mm, id: 0x6010, type: overworld, maps: [MM_ZORA_CAPE, MM_ZORA_HALL], areas: ["MM Zora Cape Peninsula", "MM Zora Hall"], reverse: MM_ZORA_CAPE_PENINSULA }
 MM_DEKU_PALACE_MAIN_ENTRANCE:                   { game: mm, id: 0x5000, type: overworld, maps: [MM_SWAMP, MM_DEKU_PALACE], areas: ["MM Swamp Back", "MM Deku Palace Front"], reverse: MM_SWAMP_FROM_PALACE_MAIN_ENTRANCE }
 MM_SWAMP_FROM_PALACE_MAIN_ENTRANCE:             { game: mm, id: 0x8430, type: overworld, maps: [MM_DEKU_PALACE, MM_SWAMP], areas: ["MM Deku Palace Front", "MM Swamp Back"], reverse: MM_DEKU_PALACE_MAIN_ENTRANCE }
 MM_DEKU_PALACE_LEDGE:                           { game: mm, id: 0x5050, type: overworld, maps: [MM_SWAMP, MM_DEKU_PALACE], areas: ["MM Swamp Canopy Front", "MM Deku Palace Cliff"], reverse: MM_SWAMP_FROM_PALACE_LEDGE }
@@ -432,7 +432,7 @@ MM_BLACKSMITH:                                  { game: mm, id: 0x5200, type: in
 MM_SWAMP_ARCHERY:                               { game: mm, id: 0x4200, type: indoors, areas: ["MM Road to Southern Swamp", "MM Swamp Archery"], reverse: MM_SWAMP_ROAD_FROM_ARCHERY }
 MM_GORON_RACETRACK:                             { game: mm, id: 0xd000, type: indoors, areas: ["MM Near Goron Race", "MM Goron Race"], reverse: MM_TWIN_ISLANDS_FROM_GORON_RACETRACK, debug: [INTERIOR, "Goron Race"] }
 MM_BEAVERS:                                     { game: mm, id: 0x8e00, type: indoors, areas: ["MM Waterfall Cliffs", "MM Waterfall Rapids"], reverse: MM_ZORA_CAPE_FROM_BEAVERS }
-MM_CUCCO_SHACK:                                 { game: mm, id: 0x7e00, type: indoors, areas: ["MM Romani Ranch", "MM Cucco Shack"], reverse: MM_ROMANI_RANCH_FROM_CUCCO_SHACK }
+MM_CUCCO_SHACK:                                 { game: mm, id: 0x7e00, type: indoors, areas: ["MM Romani Ranch", "MM Cucco Shack"], reverse: MM_ROMANI_RANCH_FROM_CUCCO_SHACK, debug: [INTERIOR, "Cucco Shack"] }
 MM_DOGGY_RACETRACK:                             { game: mm, id: 0x7c00, type: indoors, areas: ["MM Romani Ranch", "MM Doggy Racetrack"], reverse: MM_ROMANI_RANCH_FROM_DOGGY_RACETRACK }
 MM_STABLES:                                     { game: mm, id: 0x0600, type: indoors, flags: [no-global], areas: ["MM Romani Ranch", "MM Stables"], reverse: MM_ROMANI_RANCH_FROM_STABLES }
 MM_RANCH_HOUSE:                                 { game: mm, id: 0x0610, type: indoors, flags: [no-global], areas: ["MM Romani Ranch", "MM Ranch House"], reverse: MM_ROMANI_RANCH_FROM_RANCH_HOUSE }
@@ -586,4 +586,5 @@ MM_GORMAN_TRACK_UNK2:                           { game: mm, id: 0xce10, type: no
 MM_GORMAN_TRACK_UNK3:                           { game: mm, id: 0xce20, type: none }
 MM_GORMAN_TRACK_UNK5:                           { game: mm, id: 0xce40, type: none }
 MM_GORMAN_TRACK_UNK6:                           { game: mm, id: 0xce50, type: none }
+MM_GORON_RACETRACK_ALT:                         { game: mm, id: 0xd010, type: none }
 MM_INTERNAL_EXIT_GROTTO:                        { game: mm, id: 0xffff, type: none }

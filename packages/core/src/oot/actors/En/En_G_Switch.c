@@ -187,7 +187,7 @@ void EnGSwitch_HandlerAfterCollected(Actor* this, GameState_Play* play)
     if (Message_IsClosed(this, play))
     {
         Player_Unfreeze(play);
-        ActorDestroy(this);
+        Actor_Kill(this);
     }
     else
     {

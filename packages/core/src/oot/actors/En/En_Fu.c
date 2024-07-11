@@ -9,7 +9,7 @@ void EnFu_HandlerNull(Actor* actor, GameState_Play* play)
 
 void EnFu_HandlerAdultOcarina2(Actor* actor, GameState_Play* play)
 {
-    if (Actor_HasParent(actor))
+    if (Actor_HasParentZ(actor))
     {
         SetEventChk(EV_OOT_CHK_SONG_STORMS);
         SET_HANDLER(actor, EnFu_HandlerNull);

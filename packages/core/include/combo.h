@@ -11,17 +11,22 @@
 
 # include <ultra64.h>
 # include <combo/actor_ovl.h>
+# include <combo/collision.h>
+# include <combo/csmc.h>
 # include <combo/defs.h>
+# include <combo/effect.h>
 # include <combo/equipment.h>
+# include <combo/math.h>
+# include <combo/npc.h>
 # include <combo/object.h>
 # include <combo/patch.h>
-# include <combo/npc.h>
+# include <combo/player.h>
+# include <combo/rand.h>
 # include <combo/text.h>
 # include <combo/common/ocarina.h>
 # include <combo/common/color.h>
 # include <combo/common/actors/Obj_Mure2.h>
 # include <combo/common/actors/Obj_Mure3.h>
-# include <combo/common/actors/Obj_Tsubo.h>
 # include <combo/common/actors/En_Tubo_Trap.h>
 
 # if defined(GAME_OOT)
@@ -55,6 +60,7 @@
 #  include <combo/mm/actors/En_Elf.h>
 # endif
 
+# include <combo/sfx_source.h>
 # include <combo/common/actors/En_Item00.h>
 # include <combo/common/actors/En_GirlA.h>
 # include <combo/common/actor_init.h>
@@ -63,6 +69,8 @@
 #endif
 
 /* Shared with assembler */
+#include <combo/sfx_id.h>
+#include <combo/object_id.h>
 #include <combo/save.h>
 #include <combo/gi.h>
 #include <combo/data/items.h>

@@ -1,7 +1,6 @@
 #ifndef COMBO_ACTOR_ID_H
 #define COMBO_ACTOR_ID_H
 
-
 #if defined(GAME_OOT)
 # define AC_PLAYER                  0x000
 # define AC_EN_TEST                 0x002

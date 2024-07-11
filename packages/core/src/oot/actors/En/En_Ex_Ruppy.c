@@ -69,7 +69,7 @@ void EnExRuppy_HandlerCollected(Actor_EnExRuppy* this, GameState_Play* play)
         divingGame = (Actor_EnDivingGame*)this->actor.parent;
         divingGame->grabbedRupeesCounter++;
         Player_Unfreeze(play);
-        ActorDestroy(&this->actor);
+        Actor_Kill(&this->actor);
     }
     else
     {
@@ -84,7 +84,7 @@ void EnExRuppy_GiveItem(Actor_EnExRuppy* this, GameState_Play* play, Actor_EnDiv
     ComboItemOverride o;
     int major;
 
-    link = GET_LINK(play);
+    link = GET_PLAYER(play);
     if (link->state & (PLAYER_ACTOR_STATE_FROZEN | PLAYER_ACTOR_STATE_EPONA))
         return;
 
@@ -109,7 +109,7 @@ void EnExRuppy_GiveItem(Actor_EnExRuppy* this, GameState_Play* play, Actor_EnDiv
     else
     {
         divingGame->grabbedRupeesCounter++;
-        ActorDestroy(&this->actor);
+        Actor_Kill(&this->actor);
     }
 
     comboAddItemEx(play, &q, major);

@@ -42,6 +42,11 @@ export async function build(opts: Options) {
   const installDir = path.resolve(__dirname, '..', '..', 'build');
   const buildDir = path.resolve(installDir, 'tree', opts.debug ? 'Debug' : 'Release');
   const sourceDir = path.resolve(__dirname, '..', '..');
+  const binDir = path.resolve(installDir, 'bin');
+  const ovlDir = path.resolve(binDir, 'ovl');
+
+  /* Remove old overlays */
+  await fs.promises.rm(ovlDir, { recursive: true, force: true });
 
   /* Make directories */
   await fs.promises.mkdir(buildDir, { recursive: true });
@@ -52,5 +57,5 @@ export async function build(opts: Options) {
   await runCommand('cmake', ['--build', buildDir]);
   await runCommand('cmake', ['--install', buildDir, '--prefix', installDir]);
 
-  return installDir + '/bin';
+  return binDir;
 }

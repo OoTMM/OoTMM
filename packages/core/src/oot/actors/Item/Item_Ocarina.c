@@ -23,10 +23,10 @@ void ItemOcarina_HandlerItem2(Actor* this, GameState_Play* play)
 {
     if (Message_IsClosed(this, play))
     {
-        play->transitionTrigger = TRANS_TYPE_NORMAL;
+        play->transitionTrigger = TRANS_TRIGGER_NORMAL;
         play->transitionType = TRANS_GFX_SHORTCUT;
         play->nextEntranceIndex = 0x050f;
-        ActorDestroy(this);
+        Actor_Kill(this);
     }
 }
 
@@ -34,7 +34,7 @@ void ItemOcarina_HandlerItem(Actor* this, GameState_Play* play)
 {
     ComboItemQuery q;
 
-    if (Actor_HasParent(this))
+    if (Actor_HasParentZ(this))
     {
         SetEventChk(EV_OOT_CHK_SONG_TIME);
         SetSwitchFlag(play, 3);
@@ -52,10 +52,10 @@ void ItemOcarina_HandlerSong(Actor* this, GameState_Play* play)
 {
     ComboItemQuery q;
 
-    if (Actor_HasParent(this))
+    if (Actor_HasParentZ(this))
     {
         SetEventChk(EV_OOT_CHK_OCARINA_OF_TIME);
-        ActorDestroy(this);
+        Actor_Kill(this);
         return;
     }
 

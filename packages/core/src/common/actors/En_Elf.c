@@ -97,7 +97,7 @@ void EnElf_Draw(Actor_EnElf* this, GameState_Play* play)
 #if defined(GAME_OOT)
 s32 EnElf_CantGiveItem(GameState_Play* play) {
     Actor_Player* link;
-    link = GET_LINK(play);
+    link = GET_PLAYER(play);
 
     if (link->state & (PLAYER_ACTOR_STATE_FROZEN | PLAYER_ACTOR_STATE_EPONA))
         return 1;
@@ -202,7 +202,7 @@ void EnElf_SpawnFairyGroupMember(Actor_EnElf* spawner, GameState_Play* play, s16
 {
     ComboItemQuery q;
     ComboItemOverride o;
-    Actor_EnElf* fairy = (Actor_EnElf*)SpawnActor(&play->actorCtx, play, actorId, x, y, z, rx, ry, rz, variable);
+    Actor_EnElf* fairy = (Actor_EnElf*)Actor_Spawn(&play->actorCtx, play, actorId, x, y, z, rx, ry, rz, variable);
 
     if (!fairy)
     {

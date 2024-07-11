@@ -6,6 +6,7 @@
 #include <combo/actor.h>
 #include <combo/oot/regs.h>
 #include <combo/common/color.h>
+#include <combo/play/collision_context.h>
 
 #include <combo/oot/actor.h>
 #include <combo/oot/cutscene.h>
@@ -21,8 +22,8 @@
 
 typedef struct Actor_Player Actor_Player;
 
-#define TRANS_TYPE_NONE     0x00
-#define TRANS_TYPE_NORMAL   0x14
+#define TRANS_TRIGGER_NONE     0x00
+#define TRANS_TRIGGER_NORMAL   0x14
 
 #define TRANS_GFX_TRIFORCE          0x01
 #define TRANS_GFX_BLACK             0x02
@@ -47,7 +48,8 @@ typedef struct GameState_Play
     u16                    sceneId;
     char                   unk_000a6[0xa];
     void*                  sceneSegment;
-    char                   unk_000b4[0x1b6e];
+    char                   unk_000b4[0x70a];
+    CollisionContext       colCtx;
     ActorContext           actorCtx;
     CutsceneContext        cutscene;
     char                   unk_1d94[0x344];
@@ -105,6 +107,7 @@ GameState_Play;
 
 ASSERT_SIZE(GameState_Play, 0x12518);
 ASSERT_OFFSET(GameState_Play, sceneSegment,             0x000b0);
+ASSERT_OFFSET(GameState_Play, colCtx,                   0x007c0);
 ASSERT_OFFSET(GameState_Play, actorCtx,                 0x01c24);
 ASSERT_OFFSET(GameState_Play, cutscene,                 0x01d64);
 ASSERT_OFFSET(GameState_Play, msgCtx,                   0x020d8);

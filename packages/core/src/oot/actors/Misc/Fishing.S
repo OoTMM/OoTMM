@@ -382,7 +382,7 @@ Replaces:
   NOP
 */
 PATCH_START 0x80a3f4e8
-  jal       ActorDestroy
+  jal       Actor_Kill
   or        a0, s0, zero
   nop
   b         .+0x38

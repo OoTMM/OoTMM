@@ -3,6 +3,7 @@
 #include <combo/player.h>
 #include <combo/config.h>
 #include <combo/actor.h>
+#include <combo/math.h>
 
 typedef enum {
     CUSTOM_SONG_NONE,
@@ -103,7 +104,7 @@ void Ocarina_HandleLastPlayedSong(GameState_Play* play, Actor_Player* player, s1
     /* Displaced code: */
     case OCARINA_SONG_SARIAS:
         player->naviTextId = -0xE0;
-        player->naviActor->flags |= (1 << 16); /* ACTOR_FLAG_16 */
+        player->naviActor->flags |= ACTOR_FLAG_OOT_16;
         break;
     /* End displaced code. */
     case OCARINA_SONG_TIME:
@@ -253,9 +254,9 @@ static void HandleSoaring(GameState_Play* play)
 
                     if (play->msgCtx.choice == 0)
                     {
-                        link = GET_LINK(play);
+                        link = GET_PLAYER(play);
                         link->state |= (PLAYER_ACTOR_STATE_CUTSCENE_FROZEN | PLAYER_ACTOR_STATE_FROZEN);
-                        link->base.freezeTimer = 10000;
+                        link->actor.freezeTimer = 10000;
                         u32 entrance = gComboConfig.entrancesOwl[songId] ^ MASK_FOREIGN_ENTRANCE;
                         comboTransition(play, entrance);
                     }
@@ -282,7 +283,7 @@ void ageSwap(GameState_Play* play)
     play->linkAgeOnLoad = !gSaveContext.save.age;
     Play_SetupRespawnPoint(play, 1, 0xdff);
     gSaveContext.respawnFlag = 2;
-    play->transitionTrigger = TRANS_TYPE_NORMAL;
+    play->transitionTrigger = TRANS_TRIGGER_NORMAL;
     play->nextEntranceIndex = gSaveContext.save.entrance;
     play->transitionType = TRANS_GFX_SHORTCUT;
 
@@ -390,23 +391,23 @@ Actor_CustomEnTorch2* gElegyShell;
 static void HandleElegy(GameState_Play* play)
 {
     sInCustomSong = CUSTOM_SONG_NONE;
-    Actor_Player* player = GET_LINK(play);
+    Actor_Player* player = GET_PLAYER(play);
 
     if (gElegyShell != NULL)
     {
-        Math_Vec3f_Copy(&gElegyShell->base.home.pos, &player->base.world.pos);
-        gElegyShell->base.home.rot.y = player->base.rot2.y;
+        Math_Vec3f_Copy(&gElegyShell->base.home.pos, &player->actor.world.pos);
+        gElegyShell->base.home.rot.y = player->actor.shape.rot.y;
         gElegyShell->state = 0;
         gElegyShell->framesUntilNextState = 20;
     }
     else
     {
-        gElegyShell = (Actor_CustomEnTorch2*)SpawnActor(&play->actorCtx, play, AC_CUSTOM_TORCH2, player->base.world.pos.x,
-                                        player->base.world.pos.y, player->base.world.pos.z, 0, player->base.rot2.y, 0, 0);
+        gElegyShell = (Actor_CustomEnTorch2*)Actor_Spawn(&play->actorCtx, play, AC_CUSTOM_TORCH2, player->actor.world.pos.x,
+                                        player->actor.world.pos.y, player->actor.world.pos.z, 0, player->actor.shape.rot.y, 0, 0);
     }
 
-    Actor_DemoEffect* effect = (Actor_DemoEffect*) SpawnActor(&play->actorCtx, play, AC_DEMO_EFFECT, player->base.world.pos.x, player->base.world.pos.y,
-                                player->base.world.pos.z, 0, player->base.rot2.y, 0, DEMO_EFFECT_TIMEWARP_TIMEBLOCK_SMALL);
+    Actor_DemoEffect* effect = (Actor_DemoEffect*)Actor_Spawn(&play->actorCtx, play, AC_DEMO_EFFECT, player->actor.world.pos.x, player->actor.world.pos.y,
+                                player->actor.world.pos.z, 0, player->actor.shape.rot.y, 0, DEMO_EFFECT_TIMEWARP_TIMEBLOCK_SMALL);
 
     if (effect != NULL)
     {
@@ -515,7 +516,7 @@ static void HandleSongOfDoubleTime(GameState_Play* play)
 
                 gSaveContext.respawnFlag = -2;
                 play->nextEntranceIndex = gSaveContext.save.entrance;
-                play->transitionTrigger = TRANS_TYPE_NORMAL;
+                play->transitionTrigger = TRANS_TRIGGER_NORMAL;
                 gSaveContext.sunSongState = 0; /* SUNSSONG_INACTIVE */
                 gSaveContext.seqId = 0xff; /* NA_BGM_DISABLED */
                 gSaveContext.natureAmbienceId = 0xff; /* NATURE_ID_DISABLED */

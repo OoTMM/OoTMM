@@ -105,17 +105,23 @@ export async function pack(args: PackArgs): Promise<PackOutput> {
   const romBuilder = new RomBuilder();
 
   monitor.log("Pack: Building ROM");
+
+  /* Extract every file */
   for (const game of GAMES) {
-    const dg = roms[game];
-    const patches = patchfile.gamePatches[game];
-
-    /* Apply patches */
-    for (const patch of patches) {
-      patch.data.copy(dg.rom, patch.addr);
-    }
-
-    /* Extract files */
     extractFiles(game, roms, romBuilder);
+  }
+
+  /* Dummy out removed files */
+  for (const f of patchfile.removedFiles) {
+    romBuilder.dummyOutFile(f);
+  }
+
+  /* Apply patches */
+  for (const [filename, patchList] of Object.entries(patchfile.patches)) {
+    const f = romBuilder.fileByNameRequired(filename);
+    for (const patch of patchList) {
+      patch.data.copy(f.data, patch.addr);
+    }
   }
 
   /* We need to pack a few static files before we can pack the rest */

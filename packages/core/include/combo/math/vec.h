@@ -42,4 +42,12 @@ typedef struct
 }
 VecPolar;
 
+/* TODO: Move this */
+typedef struct
+{
+    Vec3s   center;
+    s16     radius;
+}
+Sphere16;
+
 #endif

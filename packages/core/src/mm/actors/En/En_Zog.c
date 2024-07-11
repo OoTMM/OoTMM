@@ -4,15 +4,15 @@
 
 void EnZog_GiveItem(Actor* this, GameState_Play* play)
 {
-    if (Actor_HasParent(this))
+    if (Actor_HasParentZ(this))
     {
         gMmExtraFlags.maskZora = 1;
-        if (!(GET_LINK(play)->state & PLAYER_ACTOR_STATE_GET_ITEM))
+        if (!(GET_PLAYER(play)->state & PLAYER_ACTOR_STATE_GET_ITEM))
         {
             play->nextEntrance = ENTR_MM_COAST_FROM_MIKAU_CS;
             play->transitionTrigger = TRANS_TRIGGER_NORMAL;
             play->transitionType = TRANS_TYPE_FADE_BLACK;
-            ActorDestroy(this);
+            Actor_Kill(this);
         }
         return;
     }
@@ -24,9 +24,9 @@ PATCH_FUNC(0x80b943c0, EnZog_GiveItem);
 
 void EnZog_InitSetScaleHook(Actor* this, float scale)
 {
-    ActorSetScale(this, scale);
+    Actor_SetScale(this, scale);
     if (gMmExtraFlags.maskZora)
-        ActorDestroy(this);
+        Actor_Kill(this);
 }
 
 PATCH_CALL(0x80b935dc, EnZog_InitSetScaleHook);
@@ -37,7 +37,7 @@ s32 EnZog_OfferGrab(Actor* actor, GameState_Play* play, s32 getItemId, f32 xzRan
     {
         yRange = 96.0f;
     }
-    return GiveItem(actor, play, getItemId, xzRange, yRange);
+    return Actor_OfferGetItem(actor, play, getItemId, xzRange, yRange);
 }
 
 PATCH_CALL(0x80b95024, EnZog_OfferGrab);

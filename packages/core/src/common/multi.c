@@ -450,8 +450,8 @@ static void processMessagesSendPlayerPos(GameState_Play* play, NetContext* net)
         return;
 
     /* We have a suitable index, send the message */
-    link = GET_LINK(play);
-    if (!link || (link->base.id != AC_PLAYER))
+    link = GET_PLAYER(play);
+    if (!link || (link->actor.id != AC_PLAYER))
         return;
 
     msg = &net->msgBuffer[index];
@@ -461,9 +461,9 @@ static void processMessagesSendPlayerPos(GameState_Play* play, NetContext* net)
 #if defined(GAME_MM)
     msg->playerPos.sceneKey |= 0x8000;
 #endif
-    msg->playerPos.x = (s16)link->base.world.pos.x;
-    msg->playerPos.y = (s16)link->base.world.pos.y;
-    msg->playerPos.z = (s16)link->base.world.pos.z;
+    msg->playerPos.x = (s16)link->actor.world.pos.x;
+    msg->playerPos.y = (s16)link->actor.world.pos.y;
+    msg->playerPos.z = (s16)link->actor.world.pos.z;
     net->msgOutSize[index] = 0x10;
 }
 
@@ -609,7 +609,7 @@ static int Multi_CanReceiveItem(GameState_Play* play)
         return 0;
     if (Message_GetState(&play->msgCtx) != 0)
         return 0;
-    link = GET_LINK(play);
+    link = GET_PLAYER(play);
     if (link->state & (PLAYER_ACTOR_STATE_GET_ITEM | PLAYER_ACTOR_STATE_FROZEN | PLAYER_ACTOR_STATE_CUTSCENE_FROZEN | PLAYER_ACTOR_STATE_EPONA))
         return 0;
 

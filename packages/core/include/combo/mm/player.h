@@ -75,6 +75,100 @@ typedef enum PlayerBodyPart {
     /* 0x12 */ PLAYER_BODYPART_MAX
 } PlayerBodyPart;
 
+typedef enum PlayerItemAction {
+    /*   -1 */ PLAYER_IA_MINUS1 = -1, // TODO: determine usages with more player docs, possibly split into seperate values (see known usages above)
+    /* 0x00 */ PLAYER_IA_NONE,
+    /* 0x01 */ PLAYER_IA_LAST_USED,
+    /* 0x02 */ PLAYER_IA_FISHING_ROD,
+    /* 0x03 */ PLAYER_IA_SWORD_MIN,
+    /* 0x03 */ PLAYER_IA_SWORD_KOKIRI = PLAYER_IA_SWORD_MIN,
+    /* 0x04 */ PLAYER_IA_SWORD_RAZOR,
+    /* 0x05 */ PLAYER_IA_SWORD_GILDED,
+    /* 0x06 */ PLAYER_IA_SWORD_TWO_HANDED,
+    /* 0x07 */ PLAYER_IA_DEKU_STICK,
+    /* 0x08 */ PLAYER_IA_ZORA_FINS,
+    /* 0x09 */ PLAYER_IA_BOW,
+    /* 0x0A */ PLAYER_IA_BOW_FIRE,
+    /* 0x0B */ PLAYER_IA_BOW_ICE,
+    /* 0x0C */ PLAYER_IA_BOW_LIGHT,
+    /* 0x0D */ PLAYER_IA_HOOKSHOT,
+    /* 0x0E */ PLAYER_IA_EXPLOSIVE_MIN,
+    /* 0x0E */ PLAYER_IA_BOMB = PLAYER_IA_EXPLOSIVE_MIN,
+    /* 0x0F */ PLAYER_IA_POWDER_KEG,
+    /* 0x10 */ PLAYER_IA_BOMBCHU,
+    /* 0x11 */ PLAYER_IA_11,
+    /* 0x12 */ PLAYER_IA_DEKU_NUT,
+    /* 0x13 */ PLAYER_IA_PICTOGRAPH_BOX,
+    /* 0x14 */ PLAYER_IA_OCARINA,
+    /* 0x15 */ PLAYER_IA_BOTTLE_MIN,
+    /* 0x15 */ PLAYER_IA_BOTTLE_EMPTY = PLAYER_IA_BOTTLE_MIN,
+    /* 0x16 */ PLAYER_IA_BOTTLE_FISH,
+    /* 0x17 */ PLAYER_IA_BOTTLE_SPRING_WATER,
+    /* 0x18 */ PLAYER_IA_BOTTLE_HOT_SPRING_WATER,
+    /* 0x19 */ PLAYER_IA_BOTTLE_ZORA_EGG,
+    /* 0x1A */ PLAYER_IA_BOTTLE_DEKU_PRINCESS,
+    /* 0x1B */ PLAYER_IA_BOTTLE_GOLD_DUST,
+    /* 0x1C */ PLAYER_IA_BOTTLE_1C,
+    /* 0x1D */ PLAYER_IA_BOTTLE_SEAHORSE,
+    /* 0x1E */ PLAYER_IA_BOTTLE_MUSHROOM,
+    /* 0x1F */ PLAYER_IA_BOTTLE_HYLIAN_LOACH,
+    /* 0x20 */ PLAYER_IA_BOTTLE_BUG,
+    /* 0x21 */ PLAYER_IA_BOTTLE_POE,
+    /* 0x22 */ PLAYER_IA_BOTTLE_BIG_POE,
+    /* 0x23 */ PLAYER_IA_BOTTLE_POTION_RED,
+    /* 0x24 */ PLAYER_IA_BOTTLE_POTION_BLUE,
+    /* 0x25 */ PLAYER_IA_BOTTLE_POTION_GREEN,
+    /* 0x26 */ PLAYER_IA_BOTTLE_MILK,
+    /* 0x27 */ PLAYER_IA_BOTTLE_MILK_HALF,
+    /* 0x28 */ PLAYER_IA_BOTTLE_CHATEAU,
+    /* 0x29 */ PLAYER_IA_BOTTLE_FAIRY,
+    /* 0x2A */ PLAYER_IA_MOONS_TEAR,
+    /* 0x2B */ PLAYER_IA_DEED_LAND,
+    /* 0x2C */ PLAYER_IA_ROOM_KEY,
+    /* 0x2D */ PLAYER_IA_LETTER_TO_KAFEI,
+    /* 0x2E */ PLAYER_IA_MAGIC_BEANS,
+    /* 0x2F */ PLAYER_IA_DEED_SWAMP,
+    /* 0x30 */ PLAYER_IA_DEED_MOUNTAIN,
+    /* 0x31 */ PLAYER_IA_DEED_OCEAN,
+    /* 0x32 */ PLAYER_IA_32,
+    /* 0x33 */ PLAYER_IA_LETTER_MAMA,
+    /* 0x34 */ PLAYER_IA_34,
+    /* 0x35 */ PLAYER_IA_35,
+    /* 0x36 */ PLAYER_IA_PENDANT_OF_MEMORIES,
+    /* 0x37 */ PLAYER_IA_37,
+    /* 0x38 */ PLAYER_IA_38,
+    /* 0x39 */ PLAYER_IA_39,
+    /* 0x3A */ PLAYER_IA_MASK_MIN,
+    /* 0x3A */ PLAYER_IA_MASK_TRUTH = PLAYER_IA_MASK_MIN,
+    /* 0x3B */ PLAYER_IA_MASK_KAFEIS_MASK,
+    /* 0x3C */ PLAYER_IA_MASK_ALL_NIGHT,
+    /* 0x3D */ PLAYER_IA_MASK_BUNNY,
+    /* 0x3E */ PLAYER_IA_MASK_KEATON,
+    /* 0x3F */ PLAYER_IA_MASK_GARO,
+    /* 0x40 */ PLAYER_IA_MASK_ROMANI,
+    /* 0x41 */ PLAYER_IA_MASK_CIRCUS_LEADER,
+    /* 0x42 */ PLAYER_IA_MASK_POSTMAN,
+    /* 0x43 */ PLAYER_IA_MASK_COUPLE,
+    /* 0x44 */ PLAYER_IA_MASK_GREAT_FAIRY,
+    /* 0x45 */ PLAYER_IA_MASK_GIBDO,
+    /* 0x46 */ PLAYER_IA_MASK_DON_GERO,
+    /* 0x47 */ PLAYER_IA_MASK_KAMARO,
+    /* 0x48 */ PLAYER_IA_MASK_CAPTAIN,
+    /* 0x49 */ PLAYER_IA_MASK_STONE,
+    /* 0x4A */ PLAYER_IA_MASK_BREMEN,
+    /* 0x4B */ PLAYER_IA_MASK_BLAST,
+    /* 0x4C */ PLAYER_IA_MASK_SCENTS,
+    /* 0x4D */ PLAYER_IA_MASK_GIANT,
+    /* 0x4E */ PLAYER_IA_MASK_TRANSFORMATION_MIN,
+    /* 0x4E */ PLAYER_IA_MASK_FIERCE_DEITY = PLAYER_IA_MASK_TRANSFORMATION_MIN,
+    /* 0x4F */ PLAYER_IA_MASK_GORON,
+    /* 0x50 */ PLAYER_IA_MASK_ZORA,
+    /* 0x51 */ PLAYER_IA_MASK_DEKU,
+    /* 0x51 */ PLAYER_IA_MASK_MAX = PLAYER_IA_MASK_DEKU,
+    /* 0x52 */ PLAYER_IA_LENS_OF_TRUTH,
+    /* 0x53 */ PLAYER_IA_MAX
+} PlayerItemAction;
+
 typedef enum {
     /* 0 */ PLAYER_ENV_HAZARD_NONE,
     /* 1 */ PLAYER_ENV_HAZARD_HOTROOM,
@@ -133,7 +227,7 @@ typedef void (*PlayerFuncD58)(struct GameState_Play* play, struct Actor_Player* 
 
 typedef struct Actor_Player
 {
-    /* 0x000 */ Actor base;
+    /* 0x000 */ Actor actor;
     /* 0x144 */ s8 currentShield;
     /* 0x145 */ s8 currentBoots;
     /* 0x146 */ s8 heldItemButton;
@@ -381,6 +475,6 @@ typedef struct {
     /* 0x00 */ u32 maskDListEntry[24];
 } PlayerMaskDList; /* size = 0x60 */
 
-#define GET_PLAYER_CUSTOM_BOOTS(player) (player->base.id == AC_PLAYER && player->transformation == MM_PLAYER_FORM_HUMAN ? (player->currentBoots == 6 ? PLAYER_BOOTS_IRON : (player->currentBoots == 0 ? PLAYER_BOOTS_HOVER : -1)) : -1)
+#define GET_PLAYER_CUSTOM_BOOTS(player) (player->actor.id == AC_PLAYER && player->transformation == MM_PLAYER_FORM_HUMAN ? (player->currentBoots == 6 ? PLAYER_BOOTS_IRON : (player->currentBoots == 0 ? PLAYER_BOOTS_HOVER : -1)) : -1)
 
 #endif

@@ -6,13 +6,13 @@ static int checkSetEvent(Actor* actor, int event)
 {
     if (GetEventChk(event))
     {
-        ActorDestroy(actor);
+        Actor_Kill(actor);
         return 1;
     }
-    if (Actor_HasParent(actor))
+    if (Actor_HasParentZ(actor))
     {
         SetEventChk(event);
-        ActorDestroy(actor);
+        Actor_Kill(actor);
         return 1;
     }
     return 0;
@@ -22,7 +22,7 @@ static void EnXc_Update_ForestMeadow(Actor* actor, GameState_Play* play)
 {
     if (checkSetEvent(actor, EV_OOT_CHK_SONG_TP_FOREST))
         return;
-    if (GET_LINK(play)->base.world.pos.z < -2225.f)
+    if (GET_PLAYER(play)->actor.world.pos.z < -2225.f)
         comboGiveItemNpc(actor, play, GI_OOT_SONG_TP_FOREST, NPC_OOT_SHEIK_FOREST, 10000.f, 50.f);
 }
 
@@ -35,9 +35,9 @@ static void EnXc_Update_DeathMountainCrater(Actor* actor, GameState_Play* play)
     if (checkSetEvent(actor, EV_OOT_CHK_SONG_TP_FIRE))
         return;
 
-    x = GET_LINK(play)->base.world.pos.x;
-    y = GET_LINK(play)->base.world.pos.y;
-    z = GET_LINK(play)->base.world.pos.z;
+    x = GET_PLAYER(play)->actor.world.pos.x;
+    y = GET_PLAYER(play)->actor.world.pos.y;
+    z = GET_PLAYER(play)->actor.world.pos.z;
 
     if (x <= -784.f || x >= -584.f)
         return;
@@ -59,8 +59,8 @@ static void EnXc_Update_IceCavern(Actor* actor, GameState_Play* play)
     if (checkSetEvent(actor, EV_OOT_CHK_SONG_TP_WATER))
         return;
 
-    link = GET_LINK(play);
-    if (GetChestFlag(play, 0x02))
+    link = GET_PLAYER(play);
+    if (Flags_GetTreasure(play, 0x02))
     {
         if (link->state & PLAYER_ACTOR_STATE_GET_ITEM)
         {
@@ -81,7 +81,7 @@ static void EnXc_Update_IceCavern(Actor* actor, GameState_Play* play)
 static void EnXc_Update_TempleOfTime(Actor* this, GameState_Play* play)
 {
     if (!gSave.inventory.quest.medallionForest || GetEventChk(EV_OOT_CHK_SONG_TP_LIGHT))
-        ActorDestroy(this);
+        Actor_Kill(this);
 
     if (checkSetEvent(this, EV_OOT_CHK_SONG_TP_LIGHT))
         return;
@@ -94,7 +94,7 @@ static void EnXc_Init(Actor* this, GameState_Play* play)
     this->draw = NULL;
     if (gSave.age == AGE_CHILD && this->variable != 0 && this->variable != 0x8)
     {
-        ActorDestroy(this);
+        Actor_Kill(this);
     }
 }
 
@@ -115,7 +115,7 @@ void EnXc_Update(Actor* this, GameState_Play* play)
         EnXc_Update_TempleOfTime(this, play);
         break;
     default:
-        ActorDestroy(this);
+        Actor_Kill(this);
         break;
     }
 }

@@ -4,7 +4,7 @@
 
 static int EnOssan_HasGiveItem(Actor_EnOssan* this, GameState_Play* play)
 {
-    if (!Actor_HasParent(&this->base))
+    if (!Actor_HasParentZ(&this->base))
         return 0;
 
     Shop_AfterBuy(play, this->items[this->itemIndex]);

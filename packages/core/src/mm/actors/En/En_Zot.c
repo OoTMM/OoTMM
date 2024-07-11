@@ -6,7 +6,7 @@ int EnZot_HasGivenItem(Actor* this)
 {
     int ret;
 
-    ret = Actor_HasParent(this);
+    ret = Actor_HasParentZ(this);
     if (ret)
         gMmExtraFlags.zoraHallLights = 1;
     return ret;

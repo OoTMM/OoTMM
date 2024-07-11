@@ -197,7 +197,7 @@ static s32 Player_ActionToTunic(Actor_Player* this, s32 itemAction)
 
 Actor* Player_SpawnMagicSpellActor(GameState_Play* play, Actor_Player* this, s8 magicSpell)
 {
-    return SpawnActor(&play->actorCtx, play, sMagicSpellActorIds[magicSpell], this->base.world.pos.x, this->base.world.pos.y, this->base.world.pos.z, 0, 0, 0, 0);
+    return Actor_Spawn(&play->actorCtx, play, sMagicSpellActorIds[magicSpell], this->actor.world.pos.x, this->actor.world.pos.y, this->actor.world.pos.z, 0, 0, 0, 0);
 }      /* size = 0x4 */
 
 typedef void (*Player_PlayAnimSfx)(Actor_Player*, AnimSfxEntry*);
@@ -304,7 +304,7 @@ void Player_Action_CastingSpell(Actor_Player* this, GameState_Play* play)
             else if (sMagicSpellLoopTimer[this->av1.actionVar1] < this->av2.actionVar2++)
             {
                 PlayerAnimation_PlayOnceSetSpeed(play, &this->skelAnime, sMagicSpellThirdAnimation[this->av1.actionVar1], 0.83f);
-                this->currentYaw = this->base.rot2.y;
+                this->currentYaw = this->actor.shape.rot.y;
                 this->av1.actionVar1 = -1;
             }
         }
@@ -359,7 +359,7 @@ void Player_Action_FaroresWindText(Actor_Player* this, GameState_Play* play)
     if (this->av2.actionVar2 == 0)
     {
         /* Message Id is the same as OoT, but here it's the Great Fairy's Sword get-item message. Doesn't matter though. */
-        PlayerDisplayTextBox(play, 0x3B, &this->base);
+        PlayerDisplayTextBox(play, 0x3B, &this->actor);
         b = play->msgCtx.font.textBuffer.schar;
         b[2] = 0xFE; /* Use No icon. */
         b += 11;
@@ -468,12 +468,12 @@ s16 sBootData[7][18] = {
 
 void Player_CheckCustomBoots(GameState_Play* play)
 {
-    Actor_Player* player = GET_LINK(play);
+    Actor_Player* player = GET_PLAYER(play);
     if (player->transformation == MM_PLAYER_FORM_HUMAN)
     {
         s32 isAdult = comboIsLinkAdult();
-        player->base.flags &= ~(1 << 17); /* ~ACTOR_FLAG_CAN_PRESS_HEAVY_SWITCH */
-        player->base.flags |= (1 << 26); /* ACTOR_FLAG_CAN_PRESS_SWITCH */
+        player->actor.flags &= ~ACTOR_FLAG_MM_CAN_PRESS_HEAVY_SWITCH;
+        player->actor.flags |= ACTOR_FLAG_MM_CAN_PRESS_SWITCH;
 
         if (gSaveContext.save.itemEquips.boots > 0 || isAdult)
         {
@@ -487,7 +487,7 @@ void Player_CheckCustomBoots(GameState_Play* play)
             {
             case PLAYER_BOOTS_IRON:
                 player->currentBoots = 6; /* PLAYER_BOOTS_GORON */
-                player->base.flags |= (1 << 17); /* ACTOR_FLAG_CAN_PRESS_HEAVY_SWITCH */
+                player->actor.flags |= ACTOR_FLAG_MM_CAN_PRESS_HEAVY_SWITCH;
                 if (player->state & PLAYER_ACTOR_STATE_WATER)
                 {
                     currentBoots = 3; /* Iron Underwater */
@@ -497,7 +497,7 @@ void Player_CheckCustomBoots(GameState_Play* play)
                 break;
             case PLAYER_BOOTS_HOVER:
                 player->currentBoots = 0; /* PLAYER_BOOTS_FIERCE_DEITY */
-                player->base.flags &= ~(1 << 26); /* ~ACTOR_FLAG_CAN_PRESS_SWITCH */
+                player->actor.flags &= ~ACTOR_FLAG_MM_CAN_PRESS_SWITCH;
                 break;
             }
 
@@ -624,8 +624,8 @@ void Player_Action_FaroresWindSpawning(Actor_Player* this, GameState_Play* play)
     if (this->av2.actionVar2 > 20)
     {
         Player_Draw = OverlayAddr(0x80846528);
-        this->base.draw = Player_Draw;
-        this->base.world.pos.y += 60.0f;
+        this->actor.draw = Player_Draw;
+        this->actor.world.pos.y += 60.0f;
         Player_func_80833AA0 = OverlayAddr(0x80833AA0);
         Player_func_80833AA0(this, play);
         return;
@@ -641,7 +641,7 @@ void Player_Action_FaroresWindSpawning(Actor_Player* this, GameState_Play* play)
 void Player_InitFaroresWindRespawn(GameState_Play* play, Actor_Player* this)
 {
     Player_SetAction Player_SetAction = OverlayAddr(0x80831494);
-    this->base.draw = NULL;
+    this->actor.draw = NULL;
     Player_SetAction(play, this, Player_Action_FaroresWindSpawning, 0);
     this->state |= 0x20000000; /* PLAYER_STATE1_20000000 */
 }
@@ -651,7 +651,7 @@ void Player_AfterInit(GameState_Play* play)
     /* Displaced code: */
     Map_SetAreaEntrypoint(play);
 
-    Actor_Player* player = GET_LINK(play);
+    Actor_Player* player = GET_PLAYER(play);
 
     if (gSaveContext.nayrusLoveTimer != 0)
     {
@@ -1047,7 +1047,7 @@ void Player_SkelAnime_DrawFlexLod(GameState_Play* play, void** skeleton, Vec3s* 
         gDPSetEnvColor(POLY_OPA_DISP++, tunicColor->r, tunicColor->g, tunicColor->b, 0xFF);
     }
 
-    SkelAnime_DrawFlexLod(play, skeleton, jointTable, dListCount, overrideLimbDraw, postLimbDraw, &player->base, lod);
+    SkelAnime_DrawFlexLod(play, skeleton, jointTable, dListCount, overrideLimbDraw, postLimbDraw, &player->actor, lod);
 
 
     if (overrideLimbDraw != Player_OverrideLimbDrawGameplayFirstPerson && gSaveContext.gameMode != 3) /* GAMEMODE_END_CREDITS */
@@ -1086,7 +1086,7 @@ void Player_SkelAnime_DrawFlexLod(GameState_Play* play, void** skeleton, Vec3s* 
 
     gSPSegment(POLY_XLU_DISP++, 0x08, g.customKeep);
 
-    if (GET_PLAYER_CUSTOM_BOOTS(player) == PLAYER_BOOTS_HOVER && !(player->base.bgCheckFlags & BGCHECKFLAG_GROUND)
+    if (GET_PLAYER_CUSTOM_BOOTS(player) == PLAYER_BOOTS_HOVER && !(player->actor.bgCheckFlags & BGCHECKFLAG_GROUND)
         && !(player->state & (1 << 23)) && player->hoverBootsTimer != 0)
     {
         s32 sp5C;
@@ -1108,8 +1108,8 @@ void Player_SkelAnime_DrawFlexLod(GameState_Play* play, void** skeleton, Vec3s* 
                 sHoverBootCircleAlpha *= sp5C * (1.0f / 9.0f);
             }
 
-            Matrix_SetTranslateRotateYXZ(player->base.world.pos.x, player->base.world.pos.y + 2.0f,
-                                         player->base.world.pos.z, &sHoverBootsRot);
+            Matrix_SetTranslateRotateYXZ(player->actor.world.pos.x, player->actor.world.pos.y + 2.0f,
+                                         player->actor.world.pos.z, &sHoverBootsRot);
             ModelViewScale(4.0f, 4.0f, 4.0f, MAT_MUL);
 
             gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
@@ -1176,7 +1176,7 @@ s32 Player_ShouldCheckItemUsabilityWhileSwimming(Actor_Player* player, u8 itemAc
 
 f32 Player_GetEnvironmentWindSpeed(GameState_Play* play)
 {
-    Actor_Player* player = GET_LINK(play);
+    Actor_Player* player = GET_PLAYER(play);
     if (GET_PLAYER_CUSTOM_BOOTS(player) == PLAYER_BOOTS_IRON)
     {
         return 0.0f;
@@ -1213,10 +1213,10 @@ s32 Player_PlayHoverSound(Actor_Player* this, f32* arg1Ptr)
     /* End displaced code */
 
     if (GET_PLAYER_CUSTOM_BOOTS(this) == PLAYER_BOOTS_HOVER
-        && !(this->base.bgCheckFlags & BGCHECKFLAG_GROUND)
+        && !(this->actor.bgCheckFlags & BGCHECKFLAG_GROUND)
         && this->hoverBootsTimer != 0)
     {
-        Actor_PlaySfx_FlaggedCentered1(&this->base, 0xC9); /* NA_SE_PL_HOBBERBOOTS_LV - SFX_FLAG */
+        Actor_PlaySfx_FlaggedCentered1(&this->actor, 0xC9); /* NA_SE_PL_HOBBERBOOTS_LV - SFX_FLAG */
         return 1;
     }
 
@@ -1249,9 +1249,9 @@ s32 Player_UpdateHoverBoots(Actor_Player* this)
     Player_func_8083784C Player_func_8083784C = OverlayAddr(0x8083784C);
     s32 canHoverOnGround;
 
-    if (this->transformation == MM_PLAYER_FORM_DEKU && this->base.bgCheckFlags & BGCHECKFLAG_GROUND && Player_func_8083784C(this))
+    if (this->transformation == MM_PLAYER_FORM_DEKU && this->actor.bgCheckFlags & BGCHECKFLAG_GROUND && Player_func_8083784C(this))
     {
-        this->base.bgCheckFlags &= ~BGCHECKFLAG_GROUND;
+        this->actor.bgCheckFlags &= ~BGCHECKFLAG_GROUND;
     }
 
     if ((GET_PLAYER_CUSTOM_BOOTS(this) == PLAYER_BOOTS_HOVER) && (this->hoverBootsTimer != 0))
@@ -1265,14 +1265,14 @@ s32 Player_UpdateHoverBoots(Actor_Player* this)
 
     canHoverOnGround =
         (GET_PLAYER_CUSTOM_BOOTS(this) == PLAYER_BOOTS_HOVER) &&
-        ((this->base.yDistToWater >= 0.0f) || (Player_func_808340AC(*sPlayerFloorType) >= 0) || Player_func_808340D4(*sPlayerFloorType));
+        ((this->actor.depthInWater >= 0.0f) || (Player_func_808340AC(*sPlayerFloorType) >= 0) || Player_func_808340D4(*sPlayerFloorType));
 
-    if (canHoverOnGround && (this->base.bgCheckFlags & BGCHECKFLAG_GROUND) && (this->hoverBootsTimer != 0))
+    if (canHoverOnGround && (this->actor.bgCheckFlags & BGCHECKFLAG_GROUND) && (this->hoverBootsTimer != 0))
     {
-        this->base.bgCheckFlags &= ~BGCHECKFLAG_GROUND;
+        this->actor.bgCheckFlags &= ~BGCHECKFLAG_GROUND;
     }
 
-    if (this->base.bgCheckFlags & BGCHECKFLAG_GROUND)
+    if (this->actor.bgCheckFlags & BGCHECKFLAG_GROUND)
     {
         if (!canHoverOnGround) {
             this->hoverBootsTimer = 19;
@@ -1300,7 +1300,7 @@ s32 Player_CheckHoverBoots(Actor_Player* player)
     if (player->hoverBootsTimer != 0)
     {
         s32* sPlayerPrevFloorProperty = OverlayAddr(0x80862B1C);
-        player->base.velocity.y = 1.0f;
+        player->actor.velocity.y = 1.0f;
         *sPlayerPrevFloorProperty = 9; /* FLOOR_PROPERTY_9 */
         return 1;
     }
@@ -1315,7 +1315,7 @@ s32 Player_IsFloorSlippery(Actor_Player* player, s32 floorType)
     }
 
     /* Displaced code: */
-    return (player->base.bgCheckFlags & BGCHECKFLAG_GROUND) && floorType == 5 && player->currentBoots < 5; /* PLAYER_BOOTS_ZORA_UNDERWATER */
+    return (player->actor.bgCheckFlags & BGCHECKFLAG_GROUND) && floorType == 5 && player->currentBoots < 5; /* PLAYER_BOOTS_ZORA_UNDERWATER */
     /* End displaced code */
 }
 
@@ -1329,10 +1329,10 @@ s32 Player_ShouldTakeFloorDamage(Actor_Player* player, s32 isWallDamaging, s32 f
 {
     /* (floorDamageType < 0 && !isWallDamaging) never enters this code */
 
-    if (isFloorDamaging || isWallDamaging || player->base.yDistToWater > 0.0f)
+    if (isFloorDamaging || isWallDamaging || player->actor.depthInWater > 0.0f)
     {
         player->floorTypeTimer = 0;
-        player->base.colChkInfo.damage = 4;
+        player->actor.colChkInfo.damage = 4;
         return 1;
     }
 
@@ -1345,7 +1345,7 @@ s32 Player_ShouldTakeFloorDamage(Actor_Player* player, s32 isWallDamaging, s32 f
     if (gSaveContext.save.itemEquips.tunic != PLAYER_TUNIC_GORON || player->floorTypeTimer >= sFloorDamageDelay[floorDamageType])
     {
         player->floorTypeTimer = 0;
-        player->base.colChkInfo.damage = 4;
+        player->actor.colChkInfo.damage = 4;
         return 1;
     }
 
@@ -1354,7 +1354,7 @@ s32 Player_ShouldTakeFloorDamage(Actor_Player* player, s32 isWallDamaging, s32 f
 
 /* This skips the environment hazard text for hot rooms, but there are no hot rooms in MM. */
 s32 Player_GetEnvironmentalHazardCustom(GameState_Play* play) {
-    Actor_Player* player = GET_LINK(play);
+    Actor_Player* player = GET_PLAYER(play);
 
     if (play->roomCtx.curRoom.behaviorType2 == ROOM_BEHAVIOR_TYPE2_HOT)
     {
@@ -1363,7 +1363,7 @@ s32 Player_GetEnvironmentalHazardCustom(GameState_Play* play) {
     else if (player->transformation != MM_PLAYER_FORM_ZORA && player->underwaterTimer > 80
         && (!Config_Flag(CFG_MM_SCALES) || GET_PLAYER_CUSTOM_BOOTS(player) == PLAYER_BOOTS_IRON || player->underwaterTimer >= 300))
     {
-        if (GET_PLAYER_CUSTOM_BOOTS(player) == PLAYER_BOOTS_IRON && (player->base.bgCheckFlags & BGCHECKFLAG_GROUND))
+        if (GET_PLAYER_CUSTOM_BOOTS(player) == PLAYER_BOOTS_IRON && (player->actor.bgCheckFlags & BGCHECKFLAG_GROUND))
         {
             return PLAYER_ENV_HAZARD_UNDERWATER_FLOOR;
         }
@@ -1373,7 +1373,7 @@ s32 Player_GetEnvironmentalHazardCustom(GameState_Play* play) {
     {
         if ((player->transformation == MM_PLAYER_FORM_ZORA)
             && (player->currentBoots >= 5) /* PLAYER_BOOTS_ZORA_UNDERWATER */
-            && (player->base.bgCheckFlags & BGCHECKFLAG_GROUND))
+            && (player->actor.bgCheckFlags & BGCHECKFLAG_GROUND))
         {
             return PLAYER_ENV_HAZARD_UNDERWATER_FLOOR;
         }
@@ -1426,7 +1426,7 @@ static u8 sDiveDoActions[] = { DO_ACTION_1, DO_ACTION_2, DO_ACTION_3, DO_ACTION_
 
 u8 Player_GetActionAWhileDiving(Actor_Player* this)
 {
-    s32 diveIndex = (sDiveDepths[gSaveContext.save.inventory.upgrades.scale] - this->base.yDistToWater) / 40.0f;
+    s32 diveIndex = (sDiveDepths[gSaveContext.save.inventory.upgrades.scale] - this->actor.depthInWater) / 40.0f;
     diveIndex = CLAMP(diveIndex, 0, ARRAY_SIZE(sDiveDoActions) - 1);
     return sDiveDoActions[diveIndex];
 }
@@ -1465,7 +1465,7 @@ u8 Player_AfterMaskLoaded(Actor_Player* player)
 {
     player->maskObjectLoadState = 0;
 
-    if (player->base.id == AC_PLAYER && comboIsLinkAdult())
+    if (player->actor.id == AC_PLAYER && comboIsLinkAdult())
     {
         u32* maskObjectSegment;
         switch (player->currentMask)
@@ -1535,13 +1535,13 @@ static Vec3f sTransformPos;
 
 static void Player_FormChangeResetState(Actor_Player* this)
 {
-    this->base.speedXZ = 0.f;
-    this->base.velocity.x = 0.f;
-    this->base.velocity.y = 0.f;
-    this->base.velocity.z = 0.f;
-    this->base.world.pos.x = sTransformPos.x;
-    this->base.world.pos.y = sTransformPos.y;
-    this->base.world.pos.z = sTransformPos.z;
+    this->actor.speed = 0.f;
+    this->actor.velocity.x = 0.f;
+    this->actor.velocity.y = 0.f;
+    this->actor.velocity.z = 0.f;
+    this->actor.world.pos.x = sTransformPos.x;
+    this->actor.world.pos.y = sTransformPos.y;
+    this->actor.world.pos.z = sTransformPos.z;
 
     /*
      * KLUDGE: This is a workaround for various glitches related to fast-masking
@@ -1556,7 +1556,7 @@ static void Player_FormChangeResetState(Actor_Player* this)
 static void Player_ToggleForm(GameState_Play* play, Actor_Player* link, int form)
 {
     /* Sanity checks */
-    if (link->base.draw == NULL)
+    if (link->actor.draw == NULL)
         return;
     if (Player_InCsMode(play))
         return;
@@ -1573,11 +1573,11 @@ static void Player_ToggleForm(GameState_Play* play, Actor_Player* link, int form
 
     /* Start the process */
     *((u8*)link + 0xae7) = 0;
-    link->base.update = Player_UpdateForm;
-    link->base.draw = NULL;
-    sTransformPos.x = link->base.world.pos.x;
-    sTransformPos.y = link->base.world.pos.y;
-    sTransformPos.z = link->base.world.pos.z;
+    link->actor.update = Player_UpdateForm;
+    link->actor.draw = NULL;
+    sTransformPos.x = link->actor.world.pos.x;
+    sTransformPos.y = link->actor.world.pos.y;
+    sTransformPos.z = link->actor.world.pos.z;
     Player_FormChangeResetState(link);
 }
 
@@ -1593,11 +1593,11 @@ void Player_TryUpdateForm(Actor_Player* this, GameState_Play* play)
         Player_ToggleForm(play, this, sNextForm);
         sNextForm = -1;
     }
-    else if (this->base.update == Player_UpdateForm)
+    else if (this->actor.update == Player_UpdateForm)
     {
         Player_FormChangeResetState(this);
         Player_UpdateForm(this, play);
-        if (this->base.update != Player_UpdateForm)
+        if (this->actor.update != Player_UpdateForm)
             this->state &= ~PLAYER_ACTOR_STATE_FROZEN;
     }
 }

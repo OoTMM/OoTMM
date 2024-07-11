@@ -108,7 +108,7 @@ s32 Items_ShouldCheckItemUsabilityWhileSwimming(GameState_Play* play, u8 item)
         return 0;
     }
 
-    Actor_Player* player = GET_LINK(play);
+    Actor_Player* player = GET_PLAYER(play);
     if (player->transformation == MM_PLAYER_FORM_HUMAN)
     {
         switch (item)

@@ -57,7 +57,7 @@ void ShotSun_SpawnFairy(Actor_ShotSun* this, GameState_Play* play, s16 actorId, 
 {
     ComboItemQuery q;
     ComboItemOverride o;
-    Actor_EnElf* fairy = (Actor_EnElf*)SpawnActor(&play->actorCtx, play, actorId, x, y, z, rx, ry, rz, variable);
+    Actor_EnElf* fairy = (Actor_EnElf*)Actor_Spawn(&play->actorCtx, play, actorId, x, y, z, rx, ry, rz, variable);
 
     if (!fairy)
     {

@@ -41,7 +41,7 @@ static void Player_UseBoots(GameState_Play* play, Actor_Player* this, int bootsI
         gSave.equips.equipment.boots = 1;
     else
         gSave.equips.equipment.boots = bootsId;
-    UpdateEquipment(play, GET_LINK(play));
+    UpdateEquipment(play, GET_PLAYER(play));
     PlaySound(0x835);
 }
 
@@ -234,7 +234,7 @@ void comboDrawExtendedMask(void)
     int index;
 
     play = gPlay;
-    link = GET_LINK(play);
+    link = GET_PLAYER(play);
 
     if (link->mask == 0)
         return;
@@ -357,7 +357,7 @@ static void Player_BlastMask(GameState_Play* play, Actor_Player* link)
 
     if (gBlastMaskDelayAcc)
         return;
-    bomb = SpawnActor(&play->actorCtx, play, AC_EN_BOM, link->base.focus.pos.x, link->base.focus.pos.y, link->base.focus.pos.z, 0, 0, 0, 0);
+    bomb = Actor_Spawn(&play->actorCtx, play, AC_EN_BOM, link->actor.focus.pos.x, link->actor.focus.pos.y, link->actor.focus.pos.z, 0, 0, 0, 0);
     if (!bomb)
         return;
     bombTimer = (void*)((char*)bomb + 0x1e8);
@@ -409,7 +409,7 @@ void Player_DrawDekuStick(void)
 
 void Player_AfterSetEquipmentData(GameState_Play* play)
 {
-    Actor_Player* player = GET_LINK(play);
+    Actor_Player* player = GET_PLAYER(play);
     if (player->rightHandType != 0xd && /* PLAYER_MODELTYPE_RH_OCARINA */
         player->rightHandType != 0xe && /* PLAYER_MODELTYPE_RH_OOT */
         (player->heldItemAction == 0x1c || /* PLAYER_IA_OCARINA_FAIRY */
@@ -874,7 +874,7 @@ const BowSlingshotString* Player_GetBowSlingshotStringData(void)
     static BowSlingshotString bss;
     Actor_Player* link;
 
-    link = GET_LINK(gPlay);
+    link = GET_PLAYER(gPlay);
     if (link->heldItemAction == 15 || (gSave.age == AGE_CHILD && gPlay->sceneId == SCE_OOT_SHOOTING_GALLERY))
     {
         /* Slingshot */

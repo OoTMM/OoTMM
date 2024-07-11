@@ -12,8 +12,6 @@
     "Dodongo Cavern Upper Ledges": "has_explosives_or_hammer || can_use_din"
     "Dodongo Cavern Lower Tunnel": "has_explosives_or_hammer || (event(DC_MQ_SHORTCUT) && has_goron_bracelet)"
     "Dodongo Cavern Bomb Bag Ledge": "is_adult"
-  events:
-    STICKS: "(has_bombflowers || can_hammer) && (has_weapon || can_boomerang)"
   locations:
     "MQ Dodongo Cavern Map Chest": "has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall"
     "MQ Dodongo Cavern Lobby Scrub Front": "business_scrub(0x1c)"
@@ -25,6 +23,8 @@
   exits:
     "Dodongo Cavern Main": "true"
     "Dodongo Cavern Upper Staircase": "has_bombflowers"
+  events:
+    STICKS: "soul_deku_baba && ((has_bombflowers || can_hammer) && (has_weapon || can_boomerang))"
   locations:
     "MQ Dodongo Cavern GS Time Blocks": "gs && can_play_time && can_damage_skull"
     "MQ Dodongo Cavern SR Beamos": "true"

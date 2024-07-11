@@ -11,7 +11,7 @@ void EnMm_InitWrapper(Actor* this, GameState_Play* play)
     {
         if (gSharedCustomSave.storedSirloin && play->sceneId != SCE_MM_MOUNTAIN_VILLAGE_WINTER)
         {
-            ActorDestroy(this);
+            Actor_Kill(this);
             return;
         }
     }
@@ -24,19 +24,19 @@ static int EnMm_ActorHasParent(Actor* this)
 {
     Actor_Player* link;
 
-    if (!Actor_HasParent(this))
+    if (!Actor_HasParentZ(this))
         return 0;
 
     if (Config_Flag(CFG_ER_OVERWORLD) || Config_Flag(CFG_ER_INDOORS))
     {
         if (gPlay->sceneId == SCE_MM_GORON_SHRINE)
         {
-            link = GET_LINK(gPlay);
+            link = GET_PLAYER(gPlay);
             gSharedCustomSave.storedSirloin = 1;
             PlaySound(0x4802);
-            link->base.child = NULL;
+            link->actor.child = NULL;
             this->parent = NULL;
-            ActorDestroy(this);
+            Actor_Kill(this);
             return 0;
         }
     }

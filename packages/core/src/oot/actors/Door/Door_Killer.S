@@ -1,6 +1,6 @@
 #include <combo.h>
 
-/* Do not use the extended GetObjectSlot when loading this actor, as it scans for multiple objects */
+/* Do not use the extended Object_GetSlot when loading this actor, as it scans for multiple objects */
 PATCH_START 0x80b742b0
-  jal GetObjectSlot
+  jal _Object_GetSlot
 PATCH_END

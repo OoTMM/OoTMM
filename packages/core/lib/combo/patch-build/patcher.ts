@@ -2,11 +2,12 @@
 import { Options } from '../options';
 import { Game, CONFIG } from "../config";
 import { Patchfile } from '../patch-build/patchfile';
-import { Addresses, GameAddresses } from '../addresses';
+import { Addresses, FileAddress, GameAddresses } from '../addresses';
 import { PATCH_GROUP_VALUES, PatchGroup } from './group';
 
 export class Patcher {
   private ranges: [number, number][];
+  private files: Set<string>;
   private opts: Options;
   private game: Game;
   private rom: Buffer;
@@ -20,6 +21,7 @@ export class Patcher {
 
   constructor(opts: Options, game: Game, rom: Buffer, patchGroups: PatchGroup[], addresses: GameAddresses, patches: Buffer, patchfile: Patchfile) {
     this.ranges = [];
+    this.files = new Set;
     this.opts = opts;
     this.game = game;
     this.rom = rom;
@@ -67,11 +69,23 @@ export class Patcher {
     this.ranges.push([start, size]);
   }
 
-  private patch(romAddr: number, data: Buffer) {
+  private patch(fileAddr: FileAddress, data: Buffer) {
     if (this.enabled) {
-      this.rangeCheck(romAddr, data.length);
-      this.patchfile.addDataPatch(this.game, romAddr, data);
+      //this.rangeCheck(romAddr, data.length);
+      this.patchfile.addPatch(fileAddr.name, fileAddr.offset, data);
     }
+  }
+
+  private fileFromRAM(addr: number) {
+    const f = this.addresses.fileFromRAM(addr);
+    this.files.add(f.name);
+    return f;
+  }
+
+  private fileFromROM(addr: number) {
+    const f = this.addresses.fileFromROM(addr);
+    this.files.add(f.name);
+    return f;
   }
 
   patchASM(patch: Buffer) {
@@ -80,8 +94,8 @@ export class Patcher {
     this.cursor += 0x08;
     const data = patch.subarray(this.cursor, this.cursor + size);
     this.cursor += size;
-    const paddr = this.addresses.virtualToPhysical(addr);
-    this.patch(paddr, data);
+    const fileAddr = this.fileFromRAM(addr);
+    this.patch(fileAddr, data);
   }
 
   patchLoadStore(patch: Buffer) {
@@ -108,8 +122,8 @@ export class Patcher {
     /* Patch the load/store instructions */
     for (let i = 0; i < count; ++i) {
       const addr = patch.readUInt32BE(this.cursor + i * 4);
-      const paddr = this.addresses.virtualToPhysical(addr);
-      let instr = this.rom.readUInt32BE(paddr);
+      const fileAddr = this.fileFromRAM(addr);
+      let instr = this.rom.readUInt32BE(fileAddr.addr);
       let op = (instr >>> 26) & 0x3f;
       switch (op) {
       case 0x20:
@@ -129,12 +143,12 @@ export class Patcher {
         op = op_store;
         break;
       default:
-        throw new Error(`Invalid load/store opcode ${op.toString(16)} at ${paddr.toString(16)}`);
+        throw new Error(`Invalid load/store opcode ${op.toString(16)} at ${fileAddr.addr.toString(16)}`);
       }
       instr = ((instr & 0x3ffffff) | (op << 26)) >>> 0;
       const instrBuffer = Buffer.alloc(4);
       instrBuffer.writeUInt32BE(instr, 0);
-      this.patch(paddr, instrBuffer);
+      this.patch(fileAddr, instrBuffer);
     }
 
     this.cursor += count * 4;
@@ -155,8 +169,8 @@ export class Patcher {
     /* Patch the MIPS instructions */
     for (let i = 0; i < count; ++i) {
       const addr = patch.readUInt32BE(this.cursor + i * 4);
-      const paddr = this.addresses.virtualToPhysical(addr);
-      let instr = this.rom.readUInt32BE(paddr);
+      const fileAddr = this.fileFromRAM(addr);
+      let instr = this.rom.readUInt32BE(fileAddr.addr);
       const op = (instr >>> 26) & 0x3f;
       let value = target_lo;
       if (op === 0x0f) {
@@ -165,7 +179,7 @@ export class Patcher {
       instr = ((instr & 0xffff0000) | value) >>> 0;
       const instrBuffer = Buffer.alloc(4);
       instrBuffer.writeUInt32BE(instr, 0);
-      this.patch(paddr, instrBuffer);
+      this.patch(fileAddr, instrBuffer);
     }
 
     this.cursor += count * 4;
@@ -181,12 +195,12 @@ export class Patcher {
     /* Patch the MIPS instructions */
     for (let i = 0; i < count; ++i) {
       const addr = patch.readUInt32BE(this.cursor + i * 4);
-      const paddr = this.addresses.virtualToPhysical(addr);
-      let instr = this.rom.readUInt32BE(paddr);
+      const fileAddr = this.fileFromRAM(addr);
+      let instr = this.rom.readUInt32BE(fileAddr.addr);
       instr = ((instr & 0xfc000000) | target) >>> 0;
       const instrBuffer = Buffer.alloc(4);
       instrBuffer.writeUInt32BE(instr, 0);
-      this.patch(paddr, instrBuffer);
+      this.patch(fileAddr, instrBuffer);
     }
 
     this.cursor += count * 4;
@@ -203,8 +217,8 @@ export class Patcher {
     /* Patch the MIPS instructions */
     for (let i = 0; i < count; ++i) {
       const addr = patch.readUInt32BE(this.cursor + i * 4);
-      const paddr = this.addresses.virtualToPhysical(addr);
-      this.patch(paddr, valueBuffer);
+      const fileAddr = this.fileFromRAM(addr);
+      this.patch(fileAddr, valueBuffer);
     }
 
     this.cursor += count * 4;
@@ -215,12 +229,12 @@ export class Patcher {
     const func = patch.readUInt32BE(this.cursor + 0x04);
     this.cursor += 0x08;
 
-    const paddr = this.addresses.virtualToPhysical(addr);
+    const fileAddr = this.fileFromRAM(addr);
 
     const buffer = Buffer.alloc(8);
     buffer.writeUInt32BE((0x08000000 | (((func >>> 2) & 0x03ffffff) >>> 0)) >>> 0, 0);
     buffer.writeUInt32BE(0x0, 4);
-    this.patch(paddr, buffer);
+    this.patch(fileAddr, buffer);
   }
 
   patchObject(patch: Buffer) {
@@ -230,9 +244,10 @@ export class Patcher {
     this.cursor += 0x0c;
 
     const paddr = this.objectToPhysical(objectId, offset);
+    const fileAddr = this.fileFromROM(paddr);
     const data = patch.subarray(this.cursor, this.cursor + size);
     this.cursor += size;
-    this.patch(paddr, data);
+    this.patch(fileAddr, data);
   }
 
   patchCall = (patch: Buffer) => {
@@ -240,11 +255,11 @@ export class Patcher {
     const func = patch.readUInt32BE(this.cursor + 0x04);
     this.cursor += 0x08;
 
-    const paddr = this.addresses.virtualToPhysical(addr);
+    const fileAddr = this.fileFromRAM(addr);
     const instr = ((0x0c000000 | (((func >>> 2) & 0x03ffffff) >>> 0)) >>> 0);
     const instrBuffer = Buffer.alloc(4);
     instrBuffer.writeUInt32BE(instr, 0);
-    this.patch(paddr, instrBuffer);
+    this.patch(fileAddr, instrBuffer);
   }
 
   patchVROM(patch: Buffer) {
@@ -253,7 +268,8 @@ export class Patcher {
     this.cursor += 0x08;
     const data = patch.subarray(this.cursor, this.cursor + size);
     this.cursor += size;
-    this.patch(paddr, data);
+    const fileAddr = this.fileFromROM(paddr);
+    this.patch(fileAddr, data);
   }
 
   patchGroup(patch: Buffer) {
@@ -310,5 +326,7 @@ export class Patcher {
         throw new Error("Invalid patch type: " + type);
       }
     }
+
+    return { files: this.files };
   }
 }

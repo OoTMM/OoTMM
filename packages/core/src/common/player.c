@@ -4,15 +4,15 @@
 void Player_Freeze(GameState_Play* play)
 {
     Actor_Player* link;
-    link = GET_LINK(play);
-    link->base.freezeTimer = 100;
+    link = GET_PLAYER(play);
+    link->actor.freezeTimer = 100;
     link->state |= PLAYER_ACTOR_STATE_FROZEN;
 }
 
 void Player_Unfreeze(GameState_Play* play)
 {
     Actor_Player* link;
-    link = GET_LINK(play);
-    link->base.freezeTimer = 0;
+    link = GET_PLAYER(play);
+    link->actor.freezeTimer = 0;
     link->state &= ~PLAYER_ACTOR_STATE_FROZEN;
 }

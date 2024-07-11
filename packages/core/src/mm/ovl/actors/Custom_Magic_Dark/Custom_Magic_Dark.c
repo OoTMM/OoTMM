@@ -1,9 +1,3 @@
-/*
- * File: z_magic_dark.c
- * Overlay: ovl_Magic_Dark
- * Description: Nayru's Love
- */
-
 #include "Custom_Magic_Dark.h"
 #include <combo/custom.h>
 #include <combo/player.h>
@@ -11,7 +5,7 @@
 #include <combo/math.h>
 #include <combo/global.h>
 
-#define FLAGS ((1 << 4) | (1 << 25)) /* (ACTOR_FLAG_4 | ACTOR_FLAG_25) */
+#define FLAGS (ACTOR_FLAG_OOT_4 | ACTOR_FLAG_OOT_25)
 
 void MagicDark_Init(Actor* thisx, GameState_Play* play);
 void MagicDark_Destroy(Actor* thisx, GameState_Play* play);
@@ -73,12 +67,12 @@ static f32 MagicDark_GetScale(Actor_Player* player)
 
 void MagicDark_Init(Actor* thisx, GameState_Play* play) {
     MagicDark* this = (MagicDark*)thisx;
-    Actor_Player* player = GET_LINK(play);
+    Actor_Player* player = GET_PLAYER(play);
 
     this->scale = MagicDark_GetScale(player);
 
-    thisx->world.pos = player->base.world.pos;
-    ActorSetScale(&this->actor, 0.0f);
+    thisx->world.pos = player->actor.world.pos;
+    Actor_SetScale(&this->actor, 0.0f);
     thisx->room = -1;
 
     if (gSaveContext.nayrusLoveTimer != 0) {
@@ -103,7 +97,7 @@ void MagicDark_Destroy(Actor* thisx, GameState_Play* play) {
 void MagicDark_DiamondUpdate(Actor* thisx, GameState_Play* play) {
     MagicDark* this = (MagicDark*)thisx;
     u8 phi_a0;
-    Actor_Player* player = GET_LINK(play);
+    Actor_Player* player = GET_PLAYER(play);
     s16 nayrusLoveTimer = gSaveContext.nayrusLoveTimer;
     /* s32 msgMode = play->msgCtx.msgMode; */
 
@@ -114,14 +108,14 @@ void MagicDark_DiamondUpdate(Actor* thisx, GameState_Play* play) {
     /*! other magic actors, and the Nayru's Love actor is supposed to be spawned back after ocarina effects actors are */
     /*! done. But with warp songs, whether the player warps away or not, the actor won't be spawned back. */
     /* if ((msgMode == MSGMODE_OCARINA_CORRECT_PLAYBACK) || (msgMode == MSGMODE_SONG_PLAYED)) { */
-    /*     ActorDestroy(thisx); */
+    /*     Actor_Kill(thisx); */
     /*     return; */
     /* } */
 
     if (nayrusLoveTimer >= 1200) {
         player->invincibilityTimer = 0;
         gSaveContext.nayrusLoveTimer = 0;
-        ActorDestroy(thisx);
+        Actor_Kill(thisx);
         return;
     }
 
@@ -160,7 +154,7 @@ void MagicDark_DiamondUpdate(Actor* thisx, GameState_Play* play) {
     }
 
     thisx->world.rot.y += 0x3E8;
-    thisx->rot2.y = thisx->world.pos.y + Camera_GetCamDirYaw(GET_ACTIVE_CAM(play));
+    thisx->shape.rot.y = thisx->world.rot.y + Camera_GetCamDirYaw(GET_ACTIVE_CAM(play));
     this->timer++;
     gSaveContext.nayrusLoveTimer = nayrusLoveTimer + 1;
 
@@ -207,15 +201,15 @@ void MagicDark_DimLighting(GameState_Play* play, f32 intensity) {
 
 void MagicDark_OrbUpdate(Actor* thisx, GameState_Play* play) {
     MagicDark* this = (MagicDark*)thisx;
-    Actor_Player* player = GET_LINK(play);
+    Actor_Player* player = GET_PLAYER(play);
 
     PlayLoopingSfxAtActor(&this->actor, 0xC3); /* NA_SE_PL_MAGIC_SOUL_BALL */
     if (this->timer < 35) {
         MagicDark_DimLighting(play, this->timer * (1 / 45.0f));
         Math_SmoothStepToF(&thisx->scale.x, this->scale * (1 / 12.000001f), 0.05f, 0.01f, 0.0001f);
-        ActorSetScale(&this->actor, thisx->scale.x);
+        Actor_SetScale(&this->actor, thisx->scale.x);
     } else if (this->timer < 55) {
-        ActorSetScale(&this->actor, thisx->scale.x * 0.9f);
+        Actor_SetScale(&this->actor, thisx->scale.x * 0.9f);
         Math_SmoothStepToF(&this->orbOffset.y, player->bodyPartsPos[PLAYER_BODYPART_WAIST].y, 0.5f, 3.0f, 1.0f);
         if (this->timer > 48) {
             MagicDark_DimLighting(play, (54 - this->timer) * 0.2f);
@@ -242,7 +236,7 @@ void MagicDark_DiamondDraw(Actor* thisx, GameState_Play* play) {
     InitListPolyXlu(play->gs.gfx);
 
     {
-        Actor_Player* player = GET_LINK(play);
+        Actor_Player* player = GET_PLAYER(play);
         f32 heightDiff;
 
         this->actor.world.pos.x = player->bodyPartsPos[PLAYER_BODYPART_WAIST].x;
@@ -252,7 +246,7 @@ void MagicDark_DiamondDraw(Actor* thisx, GameState_Play* play) {
         {
             if (player->state3 & 0x00001000) /* PLAYER_STATE3_GORON_ROLL */
             {
-                y = player->base.world.pos.y + Player_GetHeight(player) * 0.5f;
+                y = player->actor.world.pos.y + Player_GetHeight(player) * 0.5f;
             }
             else
             {
@@ -271,7 +265,7 @@ void MagicDark_DiamondDraw(Actor* thisx, GameState_Play* play) {
         }
         ModelViewTranslate(this->actor.world.pos.x, this->actor.world.pos.y, this->actor.world.pos.z, MAT_SET);
         ModelViewScale(this->actor.scale.x, this->actor.scale.y, this->actor.scale.z, MAT_MUL);
-        ModelViewRotateY(BINANG_TO_RAD(this->actor.rot2.y), MAT_MUL);
+        ModelViewRotateY(BINANG_TO_RAD(this->actor.shape.rot.y), MAT_MUL);
         gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx),
                   G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 170, 255, 255, (s32)(this->primAlpha * 0.6f) & 0xFF);
@@ -289,7 +283,7 @@ void MagicDark_DiamondDraw(Actor* thisx, GameState_Play* play) {
 void MagicDark_OrbDraw(Actor* thisx, GameState_Play* play) {
     MagicDark* this = (MagicDark*)thisx;
     Vec3f pos;
-    Actor_Player* player = GET_LINK(play);
+    Actor_Player* player = GET_PLAYER(play);
     f32 sp6C = play->gs.frameCount & 0x1F;
 
     if (this->timer < 32) {

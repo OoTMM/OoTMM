@@ -9,7 +9,7 @@ void EnMa1_HandlerNull(Actor* actor, GameState_Play* play)
 
 void EnMa1_HandlerOcarina2(Actor* actor, GameState_Play* play)
 {
-    if (Actor_HasParent(actor))
+    if (Actor_HasParentZ(actor))
     {
         SetEventChk(EV_OOT_CHK_SONG_EPONA);
         SET_HANDLER(actor, EnMa1_HandlerNull);
@@ -29,7 +29,7 @@ PATCH_FUNC(0x809f1414, EnMa1_HandlerOcarina);
 
 void EnMa1_HandlerEgg(Actor* this, GameState_Play* play)
 {
-    if (Actor_HasParent(this))
+    if (Actor_HasParentZ(this))
     {
         if (Message_IsClosed(this, play))
         {

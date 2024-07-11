@@ -6,7 +6,7 @@
 #include <combo/global.h>
 #include "Custom_Magic_Fire.h"
 
-#define FLAGS ((1 << 4) | (1 << 25)) /* (ACTOR_FLAG_4 | ACTOR_FLAG_25) */
+#define FLAGS (ACTOR_FLAG_OOT_4 | ACTOR_FLAG_OOT_25)
 
 void MagicFire_UpdateBeforeCast(Actor_CustomMagicFire* this, GameState_Play* play);
 
@@ -123,7 +123,7 @@ void MagicFire_Init(Actor_CustomMagicFire* this, GameState_Play* play)
     this->screenTintBehaviour = 0;
     this->actionTimer = 0;
     this->alphaMultiplier = -3.0f;
-    ActorSetScale(&this->actor, 0.0f);
+    Actor_SetScale(&this->actor, 0.0f);
     Collider_InitCylinder(play, &this->collider);
     Collider_SetCylinder(play, &this->collider, &this->actor, &sCylinderInit);
     Collider_UpdateCylinder(&this->actor, &this->collider);
@@ -139,9 +139,9 @@ void MagicFire_Destroy(Actor_CustomMagicFire* this, GameState_Play* play)
 
 void MagicFire_Update(Actor_CustomMagicFire* this, GameState_Play* play)
 {
-    Actor_Player* player = GET_LINK(play);
+    Actor_Player* player = GET_PLAYER(play);
 
-    this->actor.world.pos = player->base.world.pos;
+    this->actor.world.pos = player->actor.world.pos;
 
     /* See `ACTOROVL_ALLOC_ABSOLUTE` */
     /*! @bug This condition is too broad, the actor will also be killed by warp songs. But warp songs do not use an */
@@ -162,7 +162,7 @@ void MagicFire_Update(Actor_CustomMagicFire* this, GameState_Play* play)
             this->actionTimer = 30;
             this->actor.scale.x = this->actor.scale.y = this->actor.scale.z = 0.0f;
             this->actor.world.rot.x = this->actor.world.rot.y = this->actor.world.rot.z = 0;
-            this->actor.rot2.x = this->actor.rot2.y = this->actor.rot2.z = 0;
+            this->actor.shape.rot.x = this->actor.shape.rot.y = this->actor.shape.rot.z = 0;
             this->alphaMultiplier = 0.0f;
             this->scalingSpeed = 0.08f;
             this->action++;
@@ -191,7 +191,7 @@ void MagicFire_Update(Actor_CustomMagicFire* this, GameState_Play* play)
             this->actor.scale.z += this->scalingSpeed;
             if (this->alphaMultiplier <= 0.0f) {
                 this->action = 0;
-                ActorDestroy(&this->actor);
+                Actor_Kill(&this->actor);
             }
             break;
     }
@@ -232,7 +232,7 @@ void MagicFire_Update(Actor_CustomMagicFire* this, GameState_Play* play)
 
 void MagicFire_UpdateBeforeCast(Actor_CustomMagicFire* this, GameState_Play* play)
 {
-    Actor_Player* player = GET_LINK(play);
+    Actor_Player* player = GET_PLAYER(play);
 
     /* See `ACTOROVL_ALLOC_ABSOLUTE` */
     /*! @bug This condition is too broad, the actor will also be killed by warp songs. But warp songs do not use an */
@@ -251,7 +251,7 @@ void MagicFire_UpdateBeforeCast(Actor_CustomMagicFire* this, GameState_Play* pla
         this->actor.update = (ActorFunc)MagicFire_Update;
         Player_PlaySfx(player, 0x879); /* NA_SE_PL_MAGIC_FIRE */
     }
-    this->actor.world.pos = player->base.world.pos;
+    this->actor.world.pos = player->actor.world.pos;
 }
 
 void MagicFire_Draw(Actor_CustomMagicFire* this, GameState_Play* play)

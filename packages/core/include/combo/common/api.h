@@ -5,23 +5,63 @@
 #include <combo/math/vec.h>
 #include <combo/gi.h>
 
+typedef struct Font Font;
 typedef struct GameState_Play GameState_Play;
 typedef struct ActorContext ActorContext;
 typedef struct Actor Actor;
 typedef struct Actor_Player Actor_Player;
+typedef struct DynaCollisionContext DynaCollisionContext;
+typedef struct AnimationHeader AnimationHeader;
+typedef enum PlayerItemAction PlayerItemAction;
+#if defined(GAME_MM)
+typedef enum BombersNotebookPerson BombersNotebookPerson;
+typedef enum BombersNotebookEvent BombersNotebookEvent;
+typedef void (*ActorShadowFunc)(struct Actor* actor, struct Lights* mapper, GameState_Play* play);
+#endif
 
 float Actor_WorldDistXZToActor(Actor* a, Actor* b);
 float Actor_HeightDiff(Actor* a, Actor* b);
 u16   Actor_Angle(Actor* a, Actor* b);
 
-void Interface_UpdateButtonsPart2(GameState_Play* play);
+Gfx* Gfx_Open(Gfx* gfx);
+void Gfx_Close(Gfx* gfxRef, Gfx* gfx);
+
+void Gfx_SetupDL_39Ptr(Gfx** gfxPtr);
+void Gfx_SetupDL_56Ptr(Gfx** gfxPtr);
+
+/* Unknown */
+void* UnkFuncActorCollision(GameState_Play* play, Actor* actor);
+
+int CutsceneFlags_Get(GameState_Play* play, int flag);
+
+s32             DynaPoly_IsBgIdBgActor(s32 bgId);
+void            DynaPoly_DisableCollision(GameState_Play* play, DynaCollisionContext* dyna, s32 bgId);
+void            DynaPoly_EnableCollision(GameState_Play* play, DynaCollisionContext* dyna, s32 bgId);
+void            DynaPoly_DisableCeilingCollision(GameState_Play* play, DynaCollisionContext* dyna, s32 bgId);
+s32             DynaPoly_SetBgActor(GameState_Play* play, DynaCollisionContext* dyna, Actor* actor, CollisionHeader* colHeader);
+DynaPolyActor*  DynaPoly_GetActor(CollisionContext* colCtx, s32 bgId);
+void            DynaPoly_DeleteBgActor(GameState_Play* play, DynaCollisionContext* dyna, s32 bgId);
+void            DynaPoly_InvalidateLookup(GameState_Play* play, DynaCollisionContext* dyna);
+void            DynaPoly_UnsetAllInteractFlags(GameState_Play* play, DynaCollisionContext* dyna, Actor* actor);
+void            DynaPoly_UpdateContext(GameState_Play* play, DynaCollisionContext* dyna);
+void            DynaPoly_UpdateBgActorTransforms(GameState_Play* play, DynaCollisionContext* dyna);
+void            DynaPoly_DeleteBgActor(GameState_Play* play, DynaCollisionContext* dyna, s32 bgId);
+s32             DynaPoly_SetBgActor(GameState_Play* play, DynaCollisionContext* dyna, Actor* actor, CollisionHeader* colHeader);
+
+void    CollisionHeader_GetVirtual(void* colHeader, CollisionHeader** dest);
+void    Interface_UpdateButtonsPart2(GameState_Play* play);
 
 int    LoadFile(void* dst, u32 vromAddr, u32 size);
 
-Actor*  SpawnActor(ActorContext* actorCtx, GameState_Play* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable);
-#if defined(GAME_MM)
-Actor*  SpawnActorEx(ActorContext* actorCtx, GameState_Play* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int ex1, int ex2, int ex3);
+Actor*  Actor_Spawn(ActorContext* actorCtx, GameState_Play* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable);
 
+#if defined(GAME_OOT)
+Actor*  _Actor_Spawn(ActorContext* actorCtx, GameState_Play* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable);
+#endif
+
+#if defined(GAME_MM)
+Actor*  Actor_SpawnAsChildAndCutscene(ActorContext* actorCtx, GameState_Play* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int ex1, int ex2, int ex3);
+Actor*  _Actor_SpawnAsChildAndCutscene(ActorContext* actorCtx, GameState_Play* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int ex1, int ex2, int ex3);
 int Schedule_CheckMiscS(GameState_Play* play, void* unk);
 #endif
 
@@ -32,23 +72,26 @@ void    SkelAnime_DrawFlexOpa(GameState_Play* play, void** skeleton, Vec3s* join
 
 void    AudioSeq_QueueSeqCmd(u32 unk);
 
-void    ActorDestroy(Actor* actor);
-int     Actor_HasParent(Actor* actor);
-void    ActorSetScale(Actor* actor, float scale);
+void    ActorShadow_DrawCircle(Actor* actor, Lights* lights, GameState_Play* play);
+
+void    Actor_Kill(Actor* actor);
+int     Actor_HasParent(Actor* actor, GameState_Play* play);
+int     Actor_HasParentZ(Actor* actor);
+int     Actor_HasNoParent(Actor* actor, GameState_Play* play);
+int     Actor_HasNoParentZ(Actor* actor);
+void    Actor_SetScale(Actor* actor, float scale);
 void    ActorSetUnk(Actor* actor, float unk);
 void    ActorEnableGrab(Actor* actor, GameState_Play* play);
 void    ActorEnableTalk(Actor* actor, GameState_Play* play, float range);
 void    ActorEnableTalkEx(Actor* actor, GameState_Play* play, float range, u32 unk);
-/* AKA  Actor_UpdateBgCheckInfo */
-void    Actor_SetCollisionCylinder(GameState_Play* play, Actor* actor, float unk_3, float unk_4, float unk_5, u32 unk_6);
-/* AKA  Actor_MoveXZGravity AKA Actor_MoveWithGravity */
-void    ActorUpdateVelocity(Actor* actor);
+void    Actor_UpdateBgCheckInfo(GameState_Play* play, Actor* actor, float unk_3, float unk_4, float unk_5, u32 unk_6);
+void    Actor_MoveWithGravity(Actor* actor);
 int     ActorTalkedTo(Actor* actor);
 u8      CollisionCheck_GetSwordDamage(u32 dmgFlags);
 
 void    EnableOwl(u8 owlId);
 
-u32     GetChestFlag(GameState_Play* play, int flag);
+u32     Flags_GetTreasure(GameState_Play* play, int flag);
 void    SetChestFlag(GameState_Play* play, int flag);
 u32     GetCollectibleFlag(GameState_Play* play, int flag);
 void    SetCollectibleFlag(GameState_Play* play, int flag);
@@ -80,7 +123,7 @@ void DisplayTextBox3(GameState_Play* play, Actor* actor, u16 textId);
 
 void DrawLink(GameState_Play* play, void** skeleton, Vec3s* jointTable, s32 dListCount, s32 lod, s32 tunic, s32 boots, s32 face, void* overrideLimbDraw, void* postLimbDraw, void* data);
 
-int GiveItem(Actor* actor, GameState_Play* play, s16 itemId, float a, float b);
+int Actor_OfferGetItem(Actor* actor, GameState_Play* play, s16 itemId, float a, float b);
 void GiveItemDefaultRange(Actor* actor, GameState_Play* play, s16 itemId);
 
 void PlayerDisplayTextBox(GameState_Play* play, u16 messageId, void* unk);
@@ -128,7 +171,8 @@ void MatrixStackDup(void);
 void MatrixStackPop(void);
 void Matrix_MultVec3f(Vec3f* src, Vec3f* dest);
 
-float RandFloat(void);
+void SomethingPotBreak(GameState_Play* play, Vec3f* pos, float unk1, int unk2, int unk3, int unk4, int unk5);
+
 f32 Rand_CenteredFloat(f32 scale);
 
 int GetActiveItem(GameState_Play* play);
@@ -151,11 +195,10 @@ void Sram_SaveNewDay(GameState_Play* play);
 #endif
 
 void Grayscale(void* buffer, u16 size);
-s16 RandIntRange(s16 base, s16 amplitude);
 
 extern u32 gSegments[16];
 
-#define GET_LINK(play) ((Actor_Player*)(play->actorCtx.actors[2].first))
+#define GET_PLAYER(play) ((Actor_Player*)(play->actorCtx.actors[2].first))
 
 int  ActorCutscene_GetCanPlayNext(int cutscene);
 s16  ActorCutscene_GetCurrentIndex(void);
@@ -206,6 +249,20 @@ void Audio_PlaySfx(u16 sfxId, Vec3f* pos, u8 token, f32* freqScale, f32* volume,
 
 #if defined(GAME_MM)
 void AudioOcarina_SetInstrument(u8 ocarinaInstrumentId);
+void Animation_PlayLoop(SkelAnime* skelAnime, AnimationHeader* animation);
+void ActorShape_Init(ActorShape* actorShape, f32 yOffset, ActorShadowFunc shadowDraw, f32 shadowScale);
+s32 Collider_InitAndSetCylinder(GameState_Play* play, ColliderCylinder* collider, struct Actor* actor, ColliderCylinderInit* src);
+void Message_BombersNotebookQueueEvent(GameState_Play* play, u8 event);
+s32 Player_IsFacingActor(Actor* actor, s16 maxAngleDiff, GameState_Play* play);
+s32 Actor_TrackPlayer(GameState_Play* play, Actor* actor, Vec3s* headRot, Vec3s* torsoRot, Vec3f focusPos);
+s16 Animation_GetLastFrame(void* animation);
+void* Lib_SegmentedToVirtual(void* ptr);
+s8 Play_InCsMode(GameState_Play* this);
+
+s32 Player_SetCsActionWithHaltedActors(GameState_Play* play, Actor* csActor, u8 csAction);
+s32 Actor_TalkOfferAccepted(Actor* actor, GameState* gameState);
+s32 Actor_OfferTalkExchange(Actor* actor, GameState_Play* play, f32 xzRange, f32 yRange, PlayerItemAction exchangeItemAction);
+s32 Actor_OfferTalk(Actor* actor, GameState_Play* play, f32 radius);
 #endif
 
 int Actor_RunByteCode(Actor* this, GameState_Play* play, void* bytecode, void* unk1, void* unk2);
@@ -261,6 +318,8 @@ void Inventory_SetWorldMapCloudVisibility(s16 tingleId);
 
 #endif
 
+void Font_LoadOrderedFont(Font* font);
+
 void Horse_ForceUnmount(GameState_Play* play);
 void Horse_Spawn(GameState_Play* play, Actor_Player* link);
 void Horse_SpawnOverworld(GameState_Play* play, Actor_Player* link);
@@ -277,8 +336,11 @@ int IsSceneValidEpona(int sceneId);
 s32 Health_ChangeBy(GameState_Play* play, s16 amount);
 
 typedef struct ObjectContext ObjectContext;
-int GetObjectSlot(ObjectContext* ctx, int objectId);
-int IsObjectSlotLoaded(ObjectContext* ctx, int slot);
+int Object_SpawnPersistent(ObjectContext* objectCtx, s16 id);
+int Object_GetSlot(ObjectContext* objectCtx, s16 id);
+int _Object_GetSlot(ObjectContext* objectCtx, s16 id);
+int Object_IsLoaded(ObjectContext* ctx, int slot);
+int _Object_IsLoaded(ObjectContext* ctx, int slot);
 
 typedef struct Actor_EnItem00 Actor_EnItem00;
 
@@ -291,14 +353,30 @@ void Play_InitEnvironment(GameState_Play *play, u16 skyboxId);
 extern u8 gFogState;
 #endif
 
+#if defined(GAME_MM)
+int Item_CollectibleDropTable(u32 index);
+int Item_CollectibleDropTable2(u32 index);
+#endif
+
 Actor_EnItem00* Item_DropCollectible(GameState_Play* play, const Vec3f* pos, s16 params);
 void Item_DropCollectibleRandom(GameState_Play* play, Actor* from, const Vec3f* pos, s16 params);
+int Item_CanDropBigFairy(GameState_Play* play, s32 index, s32 collectibleFlag);
 
 #if defined(GAME_MM)
 f32 VectDist(Vec3f* vec1, Vec3f* vec2);
 f32 Math_Vec3f_DistXYZAndStoreDiff(Vec3f* a, Vec3f* b, Vec3f* dest);
+void Audio_PlaySfx_AtPosWithAllChannelsIO(Vec3f* pos, u16 sfxId, u8 ioData);
+
+s16 Math_Vec3f_Yaw(Vec3f* origin, Vec3f* point);
+s16 Math_Vec3f_Pitch(Vec3f* origin, Vec3f* point);
+s16 Math_SmoothStepToS(s16* pValue, s16 target, s16 scale, s16 step, s16 minStep);
+void EffectSsDust_Spawn_2_Normal(GameState_Play* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, Color_RGBA8* primColor, Color_RGBA8* envColor, s16 scale, s16 scaleStep, s16 life);
+
+s32 SkelAnime_Update(SkelAnime* skelAnime);
+void SkelAnime_InitFlex(GameState_Play* play, SkelAnime* skelAnime, FlexSkeletonHeader* skeletonHeaderSeg, AnimationHeader* animation, Vec3s* jointTable, Vec3s* morphTable, s32 limbCount);
+void Animation_Change(SkelAnime* skelAnime, AnimationHeader* animation, f32 playSpeed, f32 startFrame, f32 endFrame, u8 mode, f32 morphFrames);
+void Matrix_MultVec3f(Vec3f* src, Vec3f* dest);
 #endif
-void Math_Vec3f_Copy(Vec3f* dest, Vec3f* src);
 
 void EffectSsIceSmoke_Spawn(GameState_Play* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, s16 scale);
 void EffectSsKiraKira_SpawnDispersed(GameState_Play* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, Color_RGBA8* primColor, Color_RGBA8* envColor, s16 scale, s32 life);
@@ -356,13 +434,10 @@ s32 SysFlashrom_ExecWrite(void* addr, u32 pageNum, u32 pageCount);
 
 EntranceTableEntry* Entrance_GetTableEntry(u16 entrance);
 
-s32 Object_SpawnPersistent(ObjectContext* objectCtx, s16 id);
-s32 Object_GetSlot(ObjectContext* objectCtx, s16 id);
-
 void Environment_Init(GameState_Play* play, EnvironmentContext* envCtx, int unused);
 
 extern u8 gWeatherMode;
 
 #if defined(GAME_MM)
-void AudioSeq_QueueSeqCmd(u32 cmd);    
+void AudioSeq_QueueSeqCmd(u32 cmd);
 #endif

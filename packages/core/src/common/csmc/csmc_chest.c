@@ -94,7 +94,7 @@ void csmcChestInit(Actor* this, GameState_Play* play, s16 gi)
     type = csmcFromItem(gi);
     if (type == CSMC_MAJOR || type == CSMC_BOSS_KEY)
     {
-        ActorSetScale(this, 0.01f);
+        Actor_SetScale(this, 0.01f);
         ActorSetUnk(this, 40.f);
 
 
@@ -110,7 +110,7 @@ void csmcChestInit(Actor* this, GameState_Play* play, s16 gi)
     else
     {
 #if defined(GAME_OOT)
-        ActorSetScale(this, 0.005f);
+        Actor_SetScale(this, 0.005f);
         /* Fix for spirit temple chest */
         if (play->sceneId == SCE_OOT_TEMPLE_SPIRIT && (this->variable & 0x1f) == 0x04)
         {
@@ -118,7 +118,7 @@ void csmcChestInit(Actor* this, GameState_Play* play, s16 gi)
             this->world.pos.z += 40.f;
         }
 #else
-        ActorSetScale(this, 0.0075f);
+        Actor_SetScale(this, 0.0075f);
 #endif
         ActorSetUnk(this, 20.f);
     }

@@ -63,12 +63,12 @@ int DoorWarp1_Collide(Actor* this, GameState_Play* play)
 {
     float dist;
 
-    dist = this->xzDistanceFromLink;
+    dist = this->xzDistToPlayer;
     if (dist < 0.f)
         dist = -dist;
     if (dist < 60.f)
     {
-        dist = GET_LINK(play)->base.world.pos.y - this->world.pos.y;
+        dist = GET_PLAYER(play)->actor.world.pos.y - this->world.pos.y;
         if (dist < 0.f)
             dist = -dist;
         if (dist < 20.f)
@@ -96,7 +96,7 @@ int DoorWarp1_ShouldTrigger(Actor* this, GameState_Play* play)
     data = &kBlueWarpData[id];
 
     /* Check if the item is being obtained */
-    if (Actor_HasParent(this))
+    if (Actor_HasParentZ(this))
     {
         if (!gMmExtraFlags2.songOath)
         {
@@ -110,7 +110,7 @@ int DoorWarp1_ShouldTrigger(Actor* this, GameState_Play* play)
     }
 
     /* Check if we are obtaining an item */
-    link = GET_LINK(play);
+    link = GET_PLAYER(play);
     if (link->state & PLAYER_ACTOR_STATE_GET_ITEM)
         return 0;
 

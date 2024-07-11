@@ -12,7 +12,7 @@ static void EnGm_ItemQuery(ComboItemQuery* q)
 
 int EnGm_HasGivenItem(Actor* this)
 {
-    if (Actor_HasParent(this))
+    if (Actor_HasParentZ(this))
     {
         BITMAP16_SET(gSave.eventsMisc, EV_OOT_INF_MEDIGORON);
         return 1;

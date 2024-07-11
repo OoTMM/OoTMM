@@ -53,7 +53,7 @@ void comboTransition(GameState_Play* play, u32 entrance)
 #if defined(GAME_OOT)
     g.nextEntrance = entrance;
     play->nextEntranceIndex = ENTR_EXTENDED;
-    play->transitionTrigger = TRANS_TYPE_NORMAL;
+    play->transitionTrigger = TRANS_TRIGGER_NORMAL;
     play->transitionType = TRANS_GFX_BLACK;
 #endif
 

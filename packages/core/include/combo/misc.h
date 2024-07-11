@@ -9,11 +9,6 @@
 #define ABS_ALT(x) ((x) < 0 ? -(x) : (x))
 
 typedef struct {
-    /* 0x0 */ Vec3s center;
-    /* 0x6 */ s16   radius;
-} Sphere16; /* size = 0x8 */
-
-typedef struct {
     /* 0x0 */ Vec3f center;
     /* 0xC */ f32   radius;
 } Spheref; /* size = 0x10 */
@@ -86,7 +81,6 @@ typedef union {
 #define BINANG_TO_RAD_ALT2(binang) (((f32)(binang) * M_PI) / 0x8000)
 
 struct Actor;
-struct PlayState;
 
 typedef enum {
     /*  0 */ COLTYPE_HIT0, /* Blue blood, white hitmark */
@@ -165,6 +159,29 @@ typedef enum {
 #define OC2_TYPE_2 OC1_TYPE_2 /* Has OC type 2 */
 #define OC2_FIRST_ONLY (1 << 6) /* Skips AC checks on elements after the first collision. Only used by Ganon */
 
+#define ATELEM_NONE 0 // No flags set. Cannot have AT collisions
+#define ATELEM_ON (1 << 0) // Can have AT collisions
+#define ATELEM_HIT (1 << 1) // Had an AT collision
+#define ATELEM_NEAREST (1 << 2) // For COLSHAPE_QUAD colliders, only collide with the closest AC element
+#define ATELEM_SFX_MASK (3 << 3)
+#define ATELEM_SFX_NORMAL (0 << 3) // Hit sound effect based on AC collider's type
+#define ATELEM_SFX_HARD (1 << 3) // Always uses hard deflection sound
+#define ATELEM_SFX_WOOD (2 << 3) // Always uses wood deflection sound
+#define ATELEM_SFX_NONE (3 << 3) // No hit sound effect
+#define ATELEM_AT_HITMARK (1 << 5) // Draw hitmarks for every AT collision
+#define ATELEM_DREW_HITMARK (1 << 6) // Already drew hitmark for this frame
+#define ATELEM_UNK7 (1 << 7) // Unknown purpose. Used by some enemy quads
+
+#define ACELEM_NONE 0 // No flags set. Cannot have AC collisions
+#define ACELEM_ON (1 << 0) // Can have AC collisions
+#define ACELEM_HIT (1 << 1) // Had an AC collision
+#define ACELEM_HOOKABLE (1 << 2) // Can be hooked if actor has hookability flags set.
+#define ACELEM_NO_AT_INFO (1 << 3) // Does not give its info to the AT collider that hit it.
+#define ACELEM_NO_DAMAGE (1 << 4) // Does not take damage.
+#define ACELEM_NO_SWORD_SFX (1 << 5) // Does not have a sound effect when hit by player-attached AT colliders.
+#define ACELEM_NO_HITMARK (1 << 6) // Skips hit effects.
+#define ACELEM_DRAW_HITMARK (1 << 7) // Draw hitmark for AC collision this frame.
+
 #define TOUCH_NONE 0 /* No flags set. Cannot have AT collisions */
 #define TOUCH_ON (1 << 0) /* Can have AT collisions */
 #define TOUCH_HIT (1 << 1) /* Had an AT collision */
@@ -196,7 +213,7 @@ typedef enum {
 #define OCLINE_NONE 0 /* Did not have an OcLine collision */
 #define OCLINE_HIT (1 << 0) /* Had an OcLine collision */
 
-typedef struct {
+typedef struct Collider {
     /* 0x00 */ struct Actor* actor; /* Attached actor */
     /* 0x04 */ struct Actor* at; /* Actor attached to what it collided with as an AT collider. */
     /* 0x08 */ struct Actor* ac; /* Actor attached to what it collided with as an AC collider. */
@@ -234,11 +251,13 @@ typedef struct {
     /* 0x7 */ u8 shape; /* JntSph, Cylinder, Tris, or Quad */
 } ColliderInitToActor; /* size = 0x8 */
 
-typedef struct {
+typedef struct
+{
     /* 0x0 */ u32 dmgFlags; /* Toucher damage type flags. */
     /* 0x4 */ u8 effect; /* Damage Effect (Knockback, Fire, etc.) */
     /* 0x5 */ u8 damage; /* Damage or Stun Timer */
-} ColliderTouch; /* size = 0x8 */
+}
+ColliderElementDamageInfoAT; /* size = 0x8 */
 
 typedef struct {
     /* 0x0 */ u32 dmgFlags; /* Toucher damage type flags. */
@@ -246,12 +265,14 @@ typedef struct {
     /* 0x5 */ u8 damage; /* Damage or Stun Timer */
 } ColliderTouchInit; /* size = 0x8 */
 
-typedef struct {
+typedef struct
+{
     /* 0x0 */ u32 dmgFlags; /* Bumper damage type flags. */
     /* 0x4 */ u8 effect; /* Damage Effect (Knockback, Fire, etc.) */
     /* 0x5 */ u8 defense; /* Damage Resistance */
     /* 0x6 */ Vec3s hitPos; /* Point of contact */
-} ColliderBump; /* size = 0xC */
+}
+ColliderElementDamageInfoAC; /* size = 0xC */
 
 typedef struct {
     /* 0x0 */ u32 dmgFlags; /* Bumper exclusion mask */
@@ -259,18 +280,20 @@ typedef struct {
     /* 0x5 */ u8 defense; /* Damage Resistance */
 } ColliderBumpInit; /* size = 0x8 */
 
-typedef struct ColliderInfo {
-    /* 0x00 */ ColliderTouch toucher; /* Damage properties when acting as an AT collider */
-    /* 0x08 */ ColliderBump bumper; /* Damage properties when acting as an AC collider */
+typedef struct ColliderElement
+{
+    /* 0x00 */ ColliderElementDamageInfoAT atDmgInfo; /* Damage properties when acting as an AT collider */
+    /* 0x08 */ ColliderElementDamageInfoAC acDmgInfo; /* Damage properties when acting as an AC collider */
     /* 0x14 */ u8 elemType; /* Affects sfx reaction when attacked by Link and hookability. Full purpose unknown. */
     /* 0x15 */ u8 toucherFlags; /* Information flags for AT collisions */
     /* 0x16 */ u8 bumperFlags; /* Information flags for AC collisions */
     /* 0x17 */ u8 ocElemFlags; /* Information flags for OC collisions */
     /* 0x18 */ Collider* atHit; /* object touching this element's AT collider */
     /* 0x1C */ Collider* acHit; /* object touching this element's AC collider */
-    /* 0x20 */ struct ColliderInfo* atHitInfo; /* element that hit the AT collider */
-    /* 0x24 */ struct ColliderInfo* acHitInfo; /* element that hit the AC collider */
-} ColliderInfo; /* size = 0x28 */
+    /* 0x20 */ struct ColliderElement* atHitElem; /* element that hit the AT collider */
+    /* 0x24 */ struct ColliderElement* acHitElem; /* element that hit the AC collider */
+}
+ColliderElement;
 
 typedef struct {
     /* 0x00 */ u8 elemType; /* Affects sfx reaction when attacked by Link and hookability. Full purpose unknown. */
@@ -295,7 +318,7 @@ typedef struct {
 } ColliderJntSphElementDimInit; /* size = 0xC */
 
 typedef struct {
-    /* 0x00 */ ColliderInfo info;
+    /* 0x00 */ ColliderElement elem;
     /* 0x28 */ ColliderJntSphElementDim dim;
 } ColliderJntSphElement; /* size = 0x40 */
 
@@ -328,11 +351,13 @@ typedef struct {
     /* 0xC */ ColliderJntSphElementInit* elements;
 } ColliderJntSphInitToActor; /* size = 0x10 */
 
-typedef struct {
-    /* 0x00 */ Collider base;
-    /* 0x18 */ ColliderInfo info;
-    /* 0x40 */ Cylinder16 dim;
-} ColliderCylinder; /* size = 0x4C */
+typedef struct
+{
+    Collider        base;
+    ColliderElement elem;
+    Cylinder16      dim;
+}
+ColliderCylinder;
 
 typedef struct {
     /* 0x00 */ ColliderInit base;
@@ -357,7 +382,7 @@ typedef struct {
 } ColliderTrisElementDimInit; /* size = 0x24 */
 
 typedef struct {
-    /* 0x00 */ ColliderInfo info;
+    /* 0x00 */ ColliderElement elem;
     /* 0x28 */ TriNorm dim;
 } ColliderTrisElement; /* size = 0x5C */
 
@@ -397,7 +422,7 @@ typedef struct {
 
 typedef struct {
     /* 0x00 */ Collider base;
-    /* 0x18 */ ColliderInfo info;
+    /* 0x18 */ ColliderElement elem;
     /* 0x40 */ ColliderQuadDim dim;
 } ColliderQuad; /* size = 0x80 */
 
@@ -415,7 +440,7 @@ typedef struct {
 
 typedef struct {
     /* 0x00 */ Collider base;
-    /* 0x18 */ ColliderInfo info;
+    /* 0x18 */ ColliderElement elem;
     /* 0x40 */ ColliderJntSphElementDim dim;
 } ColliderSphere; /* size = 0x58 */
 
@@ -425,12 +450,15 @@ typedef struct {
     /* 0x20 */ ColliderJntSphElementDimInit dim;
 } ColliderSphereInit; /* size = 0x2C */
 
-typedef struct {
+typedef struct OcLine
+{
     /* 0x00 */ Linef line;
     /* 0x18 */ u16 ocFlags;
-} OcLine; /* size = 0x1C */
+}
+OcLine;
 
-typedef struct {
+typedef struct CollisionCheckContext
+{
     /* 0x000 */ s16 colATCount;
     /* 0x002 */ u16 sacFlags; /* Controls whether new collidors can be added or removed, or only swapped */
     /* 0x004 */ Collider* colAT[50];
@@ -440,7 +468,8 @@ typedef struct {
     /* 0x1C4 */ Collider* colOC[50];
     /* 0x28C */ s32 colLineCount;
     /* 0x290 */ OcLine* colLine[3];
-} CollisionCheckContext; /* size = 0x29C */
+}
+CollisionCheckContext;
 
 typedef struct {
     /* 0x00 */ s16 ambientColor[3];
@@ -512,7 +541,7 @@ typedef enum LightType {
 } LightType;
 
 typedef void (*LightsBindFunc)(Lights* lights, LightParams* params, Vec3f* vec);
-typedef void (*LightsPosBindFunc)(Lights* lights, LightParams* params, struct PlayState* play);
+typedef void (*LightsPosBindFunc)(Lights* lights, LightParams* params, GameState_Play* play);
 
 
 /* Model has limbs with only rigid meshes */
@@ -545,7 +574,7 @@ typedef struct SkelAnime {
     /* 0x2C */ f32 morphRate;     /* Reciprocal of the number of frames in the morph */
     /* 0x30 */ union {
                     s32 (*normal)(struct SkelAnime*);/* Can be Loop, Partial loop, Play once, Morph, or Tapered morph */
-                    s32 (*player)(struct PlayState*, struct SkelAnime*); /* Loop, Play once, and Morph */
+                    s32 (*player)(GameState_Play*, struct SkelAnime*); /* Loop, Play once, and Morph */
                 } update;
     /* 0x34 */ s8 initFlags;      /* Flags used when initializing Player's skeleton */
     /* 0x35 */ u8 moveFlags;      /* Flags used for animations that move the actor in worldspace. */
@@ -601,9 +630,83 @@ typedef struct {
     /* 0x04 */ u32* vromEnd;
 } RomFile; /* size = 0x8 */
 
+// TODO: Move this into its own file
 typedef struct {
-    u8 unk_000[0x178];
+    u8 unk_000[0x50]; // paramData, bunch of pointers
+    Vec3f at;
+    Vec3f eye;
+    Vec3f up;
+    Vec3f eyeNext;
+    Vec3f quakeOffset;
+    struct PlayState* play;
+    Actor* focalActor;
+    struct {
+        Vec3f pos;
+        Vec3s rot;
+    } focalActorPosRot;
+    Actor* target;
+    struct {
+        Vec3f pos;
+        Vec3s rot;
+    } targetPosRot;
+    f32 rUpdateRateInv;
+    f32 pitchUpdateRateInv;
+    f32 yawUpdateRateInv;
+    f32 xzOffsetUpdateRate;
+    f32 yOffsetUpdateRate;
+    f32 fovUpdateRate;
+    f32 xzSpeed;
+    f32 dist;
+    f32 speedRatio;
+    Vec3f playerToAtOffset;
+    Vec3f playerPosDelta;
+    f32 fov;
+    f32 atLERPStepScale;
+    f32 playerGroundY;
+    Vec3f floorNorm;
+    f32 waterYPos;
+    s32 bgCamIndexBeforeUnderwater;
+    s32 waterCamSetting;
+    s32 waterQuakeIndex;
+    void* data0;
+    void* data1;
+    s16 data2;
+    s16 data3;
+    s16 uid;
+    char unk_132[2];
+    Vec3s inputDir;
+    Vec3s camDir;
+    s16 status;
+    s16 setting;
+    s16 mode;
+    s16 bgId; // bgId the camera is currently interacting with
+    s16 bgCamIndex;
+    s16 behaviorFlags; // includes flags on settings, modes, bgCam. All related to camera update behaviour
+    s16 stateFlags;
+    s16 childCamId;
+    s16 waterDistortionTimer;
+    s16 distortionFlags;
+    s16 prevSetting;
+    s16 nextBgCamIndex;
+    s16 nextBgId;
+    s16 roll;
+    s16 viewFlags; // For setting params: at, eye, up, target, targetPos, fov, roll
+    s16 animState;
+    s16 timer;
+    s16 parentCamId;
+    s16 camId;
+    s16 prevBgCamIndex;
+    s16 csId;
+#if defined(GAME_MM)
+    Vec3f meshActorPos;
+#endif
 } Camera;
+
+#if defined(GAME_OOT)
+_Static_assert(sizeof(Camera) == 0x16c, "MM Camera size is wrong");
+#elif defined(GAME_MM)
+_Static_assert(sizeof(Camera) == 0x178, "MM Camera size is wrong");
+#endif
 
 typedef struct {
     /* 0x0 */ s16 frameCount;
@@ -977,23 +1080,6 @@ typedef enum {
     /* 86 */ TRANS_TYPE_86 = 86
 } TransitionType;
 
-typedef struct {
-    /* 0x00 */ u16 type;
-    union {
-        u16 vtxData[3];
-        struct {
-            /* 0x02 */ u16 flags_vIA; /* 0xE000 is poly exclusion flags (xpFlags), 0x1FFF is vtxId */
-            /* 0x04 */ u16 flags_vIB; /* 0xE000 is flags, 0x1FFF is vtxId */
-                                      /* 0x2000 = poly IsFloorConveyor surface */
-            /* 0x06 */ u16 vIC;
-        };
-    };
-    /* 0x08 */ Vec3s normal; /* Unit normal vector */
-                             /* Value ranges from -0x7FFF to 0x7FFF, representing -1.0 to 1.0; 0x8000 is invalid */
-
-    /* 0x0E */ s16 dist; /* Plane distance from origin along the normal */
-} CollisionPoly; /* size = 0x10 */
-
 typedef struct DamageTable {
     /* 0x00 */ u8 attack[32];
 } DamageTable; /* size = 0x20 */
@@ -1127,20 +1213,30 @@ typedef struct {
     /* 0x2 */ u16 flags;
 } EntranceTableEntry; /* size = 0x4 */
 
-#define UPDBGCHECKINFO_FLAG_0 (1 << 0) /* check wall */
-#define UPDBGCHECKINFO_FLAG_1 (1 << 1) /* check ceiling */
-#define UPDBGCHECKINFO_FLAG_2 (1 << 2) /* check floor and water */
-#define UPDBGCHECKINFO_FLAG_3 (1 << 3)
-#define UPDBGCHECKINFO_FLAG_4 (1 << 4)
-#define UPDBGCHECKINFO_FLAG_5 (1 << 5) /* unused */
-#define UPDBGCHECKINFO_FLAG_6 (1 << 6) /* disable water ripples */
-#define UPDBGCHECKINFO_FLAG_7 (1 << 7) /* alternate wall check? */
+#define UPDBGCHECKINFO_FLAG_OOT_0   (1 << 0) /* check wall */
+#define UPDBGCHECKINFO_FLAG_OOT_1   (1 << 1) /* check ceiling */
+#define UPDBGCHECKINFO_FLAG_OOT_2   (1 << 2) /* check floor and water */
+#define UPDBGCHECKINFO_FLAG_OOT_3   (1 << 3)
+#define UPDBGCHECKINFO_FLAG_OOT_4   (1 << 4)
+#define UPDBGCHECKINFO_FLAG_OOT_5   (1 << 5) /* unused */
+#define UPDBGCHECKINFO_FLAG_OOT_6   (1 << 6) /* disable water ripples */
+#define UPDBGCHECKINFO_FLAG_OOT_7   (1 << 7) /* alternate wall check? */
 
-/* MM */
+#define UPDBGCHECKINFO_FLAG_MM_1        (1 << 0) /* check wall */
+#define UPDBGCHECKINFO_FLAG_MM_2        (1 << 1) /* check ceiling */
+#define UPDBGCHECKINFO_FLAG_MM_4        (1 << 2) /* check floor and water */
+#define UPDBGCHECKINFO_FLAG_MM_8        (1 << 3)
+#define UPDBGCHECKINFO_FLAG_MM_10       (1 << 4)
+#define UPDBGCHECKINFO_FLAG_MM_20       (1 << 5)
+#define UPDBGCHECKINFO_FLAG_MM_40       (1 << 6)
+#define UPDBGCHECKINFO_FLAG_MM_80       (1 << 7)
+#define UPDBGCHECKINFO_FLAG_MM_100      (1 << 8)
+#define UPDBGCHECKINFO_FLAG_MM_200      (1 << 9)
+#define UPDBGCHECKINFO_FLAG_MM_400      (1 << 10) /* check water */
+#define UPDBGCHECKINFO_FLAG_MM_800      (1 << 11)
 
-#define UPDBGCHECKINFO_FLAG_8 (1 << 8)
-#define UPDBGCHECKINFO_FLAG_9 (1 << 9)
-#define UPDBGCHECKINFO_FLAG_10 (1 << 10) /* check water */
-#define UPDBGCHECKINFO_FLAG_11 (1 << 11)
+#define UPDBGCHECKINFO_FLAG_WALL        (1 << 0)
+#define UPDBGCHECKINFO_FLAG_CEILING     (1 << 1)
+#define UPDBGCHECKINFO_FLAG_FLOOR       (1 << 2)
 
 #endif /* TYPES_H */

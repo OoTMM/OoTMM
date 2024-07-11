@@ -99,7 +99,7 @@ gDmaDataCount = 0x8009b2bc;
 
 RequestDma = 0x80080c04;
 kObjectsTable = 0x801c2740;
-GiveItem = 0x800b8a1c;
+Actor_OfferGetItem = 0x800b8a1c;
 
 DisplayTextBox2 = 0x80151938;
 DisplayTextBox3 = 0x800e8ea0;
@@ -150,16 +150,21 @@ ActorFree = 0x80102ce0;
 
 LoadObjectGi = 0x80838830;
 
-ActorSetScale = 0x800b67e0;
+SfxSource_PlaySfxAtFixedWorldPos = 0x800f0568;
+
+Actor_SetScale = 0x800b67e0;
 ActorSetUnk = 0x800b675c;
-Actor_HasParent = 0x800b89f8;
-ActorDestroy = 0x800b670c;
+Actor_HasParent  = 0x800b89f8;
+Actor_HasParentZ = 0x800b89f8;
+Actor_HasNoParent = 0x800b8bfc;
+Actor_HasNoParentZ = 0x800b8bfc;
+Actor_Kill = 0x800b670c;
 
 SetCollectibleFlag = 0x800b5db0;
 GetCollectibleFlag = 0x800b5d6c;
 
-SpawnActor = 0x800bac60;
-_SpawnActorEx = 0x800bae14;
+Actor_Spawn = 0x800bac60;
+Actor_SpawnAsChildAndCutscene = 0x800bae14;
 ConvertMatrix = 0x801817fc;
 MatrixRotation = 0x801809ac;
 
@@ -186,7 +191,7 @@ Message_Close = 0x801477b4;
 Audio_PlaySfx_MessageDecide = 0x8019F208;
 Audio_PlaySfx = 0x801a5cfc;
 
-RandIntRange = 0x800ff450;
+Rand_S16Offset = 0x800ff450;
 
 gSegments = 0x801f8180;
 AddItem = 0x80112e80;
@@ -242,7 +247,7 @@ PlayMusic = 0x801a3238;
 Player_UsingItem = 0x801240dc;
 Player_GetEnvironmentalHazard = 0x801242dc;
 Player_DrawHookshotReticle = 0x80124cc4;
-GetChestFlag = 0x800b5c78;
+Flags_GetTreasure = 0x800b5c78;
 SetChestFlag = 0x800b5c90;
 Audio_PlayFanfare = 0x801a3098;
 
@@ -254,7 +259,7 @@ gGameData = 0x801f3f60;
 
 Gfx_DrawDListOpa = 0x800bdfc0;
 
-Actor_SetCollisionCylinder = 0x800b78b8;
+Actor_UpdateBgCheckInfo = 0x800b78b8;
 
 MatrixStackDup = 0x8018019c;
 MatrixStackPop = 0x801801cc;
@@ -288,19 +293,32 @@ DmaCompressed = 0x80081178;
 osSetThreadPri = 0x8008fc00;
 SetRoomClear = 0x800b5d30;
 
-RandFloat = 0x80086fdc;
+Rand_ZeroOne = 0x80086fdc;
+Rand_Next = 0x80086fa0;
+Rand_ZeroFloat = 0x80179594;
 gHorseIsMounted = 0x801bda9c;
 Horse_SpawnOverworld = 0x800f3c44;
+SomethingPotBreak = 0x800BBFB0;
 
-ActorUpdateVelocity = 0x800b6a88;
+Actor_MoveWithGravity = 0x800b6a88;
 Player_GetHeight = 0x800B6FC8;
 
+Collider_DestroyCylinder = 0x800e11ec;
+
+ActorShadow_DrawCircle = 0x800b3fc0;
+
+BgCheck_EntityRaycastDown4 = 0x800c411c;
+
+Item_CollectibleDropTable = 0x800a8150;
+Item_CollectibleDropTable2 = 0x800a817c;
 Item_DropCollectible = 0x800a7730;
-SpawnCollectible2 = 0x800a7d28;
+Item_DropCollectibleRandom = 0x800a7d28;
+Item_CanDropBigFairy = 0x800a81a4;
 
 EnableOwl = 0x80143a10;
 
 Math_Vec3f_Copy = 0x800FF50C;
+Math_Vec3f_Diff = 0x800FF5F4;
 Math_Vec3f_DistXYZAndStoreDiff = 0x800FF8D4;
 VectDist = 0x800ff92c;
 
@@ -309,12 +327,45 @@ sqrtf = 0x8008D700;
 Math_CosS = 0x800FED44;
 Math_SinS = 0x800FED84;
 Math_StepToF = 0x800FF03C;
+Math_StepToS = 0x800fef2c;
 Math_SmoothStepToF = 0x800FFCD8;
+
+gSfxDefaultPos = 0x801db4a4;
+
+Math_SmoothStepToS = 0x800ffebc;
+Math_Vec3f_Yaw = 0x800ffa60;
+Math_Vec3f_Pitch = 0x800ffa94;
+EffectSsDust_Spawn_2_Normal = 0x800b0f80;
+
+Audio_PlaySfx_AtPosWithAllChannelsIO = 0x801a0868;
+SkelAnime_Update = 0x80136cd0;
+SkelAnime_InitFlex = 0x80136b30;
+Animation_Change = 0x801373e8;
+
+Player_SetCsActionWithHaltedActors = 0x800b7298;
+Actor_TalkOfferAccepted = 0x800b84d0;
+Actor_OfferTalkExchange = 0x800b8500;
+Actor_OfferTalk = 0x800b8614;
+ActorShape_Init = 0x800b3ba4;
+Animation_PlayLoop = 0x80137540;
+Collider_InitAndSetCylinder = 0x800e1374;
+Message_BombersNotebookQueueEvent = 0x80151bb4;
+Player_IsFacingActor = 0x800b7320;
+Actor_TrackPlayer = 0x800e9250;
+Animation_GetLastFrame = 0x80134748;
+Lib_SegmentedToVirtual = 0x80100504;
+Play_InCsMode = 0x801690cc;
+SkelAnime_DrawFlexOpa = 0x80133f28;
+Matrix_MultVec3f = 0x80181a98;
 
 Rand_CenteredFloat = 0x801795C0;
 
 EffectSsIceSmoke_Spawn = 0x800B320C;
 EffectSsKiraKira_SpawnDispersed = 0x800B16F4;
+EffectSsGSplash_Spawn = 0x800b1f4c;
+EffectSsGRipple_Spawn = 0x800b1ef4;
+EffectSsKakera_Spawn = 0x800b2810;
+EffectSsBubble_Spawn = 0x800b1e94;
 
 PlayerAnimation_Update = 0x801360e0;
 PlayerAnimation_PlayOnce = 0x8013658C;
@@ -328,11 +379,15 @@ Camera_GetCamDirPitch = 0x800DFCB4;
 Camera_GetCamDirYaw = 0x800DFCDC;
 Camera_SetCameraData = 0x800E01DC;
 
+DynaPoly_GetActor = 0x800c6248;
+
 Collider_InitCylinder = 0x800E119C;
 Collider_SetCylinder = 0x800E130C;
 Collider_UpdateCylinder = 0x800E7DF8;
 
 CollisionCheck_SetAT = 0x800E2558;
+CollisionCheck_SetAC = 0x800e2740;
+CollisionCheck_SetOC = 0x800e2928;
 
 Map_SetAreaEntrypoint = 0x8010A2DC;
 
@@ -358,8 +413,11 @@ Player_OverrideLimbDrawGameplayFirstPerson = 0x801262C8;
 Player_SetBootData = 0x80123140;
 Player_GetStrength = 0x80124020;
 
+Math_Vec3f_Sum = 0x800ff5bc;
+
 Entrance_GetTableEntry = 0x801322c0;
 
+Object_IsLoaded = 0x8012f668;
 Object_SpawnPersistent = 0x8012f2e0;
 Object_GetSlot = 0x8012f608;
 

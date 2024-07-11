@@ -29,18 +29,18 @@ PATCH_CALL(0x80a6f860, EnSkj_GiveItem_MemoryGame);
 static void EnSkj_AfterMaskTrade(Actor* this, GameState_Play* play)
 {
     gSave.eventsItem[3] |= 0x200;
-    ActorDestroy(this);
+    Actor_Kill(this);
 }
 
 static void EnSkj_MaskTradeCheck(Actor* this, GameState_Play* play)
 {
     Actor_Player* link;
 
-    link = GET_LINK(play);
+    link = GET_PLAYER(play);
     if (link->state & PLAYER_ACTOR_STATE_GET_ITEM)
         return;
 
-    if (Actor_HasParent(this))
+    if (Actor_HasParentZ(this))
     {
         this->parent = NULL;
         EnSkj_AfterMaskTrade(this, play);

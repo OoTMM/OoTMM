@@ -20,7 +20,15 @@ gAudioLoadStatusFontSample = 0x80128a68;
 
 Player_GetHeight = 0x80021600;
 
+Gfx_Open = 0x800a1aa0;
+Gfx_Close = 0x800a1aac;
+
+Gfx_SetupDL_39Ptr = 0x8007e63c;
+Gfx_SetupDL_56Ptr = 0x8007e9c8;
+
+CutsceneFlags_Get = 0x8005991c;
 DrawLink = 0x80079f48;
+Audio_SetCutsceneFlag = 0x800c75dc;
 Audio_GetActiveSeqId = 0x800cab18;
 
 Actor_ProcessInitChain = 0x80063f7c;
@@ -47,7 +55,7 @@ Play_Init = 0x8009a750;
 Play_Update = 0x8009cac8;
 
 PlayMusic = 0x800c6b54;
-GiveItem = 0x80022bd4;
+Actor_OfferGetItem = 0x80022bd4;
 GiveItemDefaultRange = 0x80022cf4;
 DisplayTextBox = 0x800dc838;
 DisplayTextBox2 = 0x800dce80;
@@ -100,14 +108,31 @@ GetMatrixMV             = 0x800ab900;
 Gfx_DrawDListOpa        = 0x80028048;
 Gfx_DrawDListXlu        = 0x800280c8;
 
+Font_LoadOrderedFont = 0x8005bd78;
+UnkFuncActorCollision = 0x8002650c;
+
+CollisionCheck_SetOC = 0x8004c130;
+CollisionCheck_SetAT = 0x8004bd50;
+CollisionCheck_SetAC = 0x8004bf40;
+
+BgCheck_EntityRaycastDown4 = 0x8002f4b8;
+
+Math_Vec3f_Sum = 0x80063d10;
+
+DynaPoly_DeleteBgActor = 0x80031638;
+DynaPoly_SetBgActor = 0x800313a4;
+DynaPoly_DisableCollision = 0x800314d8;
+DynaPolyActor_Init = 0x80035260;
+
+CollisionHeader_GetVirtual = 0x80033ef4;
 IsSceneValidEpona = 0x8005a3c0;
-_SpawnActor = 0x80025110;
+Actor_Spawn = 0x80025110;
 gActorOvl = 0x800e8530;
 LoadObject = 0x800812f0;
-_GetObjectSlot = 0x80081628;
-_IsObjectSlotLoaded = 0x80081688;
+Object_GetSlot = 0x80081628;
+Object_IsLoaded = 0x80081688;
 SkelAnime_DrawFlexOpa = 0x80089D8C;
-ActorSetScale = 0x80020f88;
+Actor_SetScale = 0x80020f88;
 ActorSetUnk = 0x80020f04;
 
 PlaySound = 0x800646f0;
@@ -116,11 +141,23 @@ Actor_PlaySfx = 0x80022fd0;
 PlayLoopingSfxAtActor = 0x8002313c;
 Horse_Spawn = 0x8005aefc;
 
-Actor_HasParent = 0x80022bb0;
-ActorDestroy = 0x80020eb4;
+Player_PlaySfx = 0x80022f84;
+
+EffectSsKakera_Spawn = 0x8001d998;
+EffectSsGSplash_Spawn = 0x8001cf94;
+CollisionCheck_SetInfo = 0x80050344;
+
+SfxSource_PlaySfxAtFixedWorldPos = 0x80058ff8;
+
 Actor_UpdatePos = 0x80021124;
-ActorUpdateVelocity = 0x8002121c;
-Actor_SetCollisionCylinder = 0x80021e6c;
+Actor_HasParent  = 0x80022bb0;
+Actor_HasParentZ = 0x80022bb0;
+Actor_HasNoParent  = 0x80022d40;
+Actor_HasNoParentZ = 0x80022d40;
+Actor_Kill = 0x80020eb4;
+Actor_UpdatePos = 0x80021124;
+Actor_MoveWithGravity = 0x8002121c;
+Actor_UpdateBgCheckInfo = 0x80021e6c;
 
 GetEventChk = 0x800288b4;
 SetEventChk = 0x800288e0;
@@ -167,8 +204,10 @@ ModelViewRotateZ = 0x800aad4c;
 ModelViewTranslate = 0x800aa7f4;
 ModelViewScale = 0x800aa8fc;
 
-RandFloat = 0x800cdccc;
-GetChestFlag = 0x8002060c;
+SomethingPotBreak = 0x80026308;
+
+Rand_ZeroOne = 0x800cdccc;
+Flags_GetTreasure = 0x8002060c;
 SetChestFlag = 0x80020624;
 GetActiveItem = 0x80022b04;
 
@@ -181,7 +220,7 @@ Interface_LoadActionLabelB = 0x80071FF8;
 Math_CosS = 0x80063684;
 Math_SinS = 0x800636C4;
 Math_StepToS = 0x800637d4;
-RandIntRange = 0x80063bf0;
+Rand_S16Offset = 0x80063bf0;
 Math_Vec3f_Copy = 0x80063cac;
 gSegments = 0x80120c38;
 osSetIntMask = 0x80003cc0;
@@ -212,8 +251,6 @@ CollisionCheck_GetSwordDamage = 0x80051a34;
 Play_InCutscene = 0x8009cb08;
 
 DeathWarp = 0x8009da10;
-
-Gfx_DrawDListOpa = 0x80028048;
 
 _AddRupees = 0x800721cc;
 
