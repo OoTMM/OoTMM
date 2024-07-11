@@ -4,11 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
-## Added
+## [24.1] - 2024-07-11
 
-- The baby chickens in Cucco Shack are now displayed on the mini-map. 
+### Added
 
-## Fixed
+- The baby chickens in Cucco Shack are now displayed on the mini-map.
+
+### Fixed
 
 - The diamond around Link after using Nayru's Love in MM rotates instead of being static
 - Entrances for Zora Hall <-> Zora Cape Peninsula were reversed; this is now fixed.
@@ -19,7 +21,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - Add a setting to allow one-ways to take you anywhere, alike wallmasters.
-- Add a setting to shuffle the few Water Void spots in MM. 
+- Add a setting to shuffle the few Water Void spots in MM.
 - Add a setting altering Shadow Temple boat speed.
 - Add ageless Slingshot and Bow.
 - Add CAMC to cows, where the cow ring hints at the item. If off, cow rings are collection markers instead.
@@ -42,7 +44,7 @@ All notable changes to this project will be documented in this file.
 - Exiting Ganon's Castle is once again logical as child to reach Hyrule Castle (not the courtyard).
 - Logic for soaring and warping in MM with ER is now even more robust, allowing usage everywhere they can be used.
 
-## Fixed
+### Fixed
 
 - Fix website tooltips no longer having breaklines.
 - Fix Keaton Quiz music continuing at night if the received item was minor.
@@ -1291,7 +1293,8 @@ All notable changes to this project will be documented in this file.
 
 - Initial stable release.
 
-[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v24.0...HEAD
+[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v24.1...HEAD
+[24.1]: https://github.com/OoTMM/OoTMM/compare/v24.0...v24.1
 [24.0]: https://github.com/OoTMM/OoTMM/compare/v23.1...v24.0
 [23.1]: https://github.com/OoTMM/OoTMM/compare/v23.0...v23.1
 [23.0]: https://github.com/OoTMM/OoTMM/compare/v22.0...v23.0
