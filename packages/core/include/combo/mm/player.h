@@ -182,26 +182,6 @@ typedef struct PlayerAnimationFrame {
     /* 0x108 */ s16 appearanceInfo; /* bitpack containing the face and hands info */
 } PlayerAnimationFrame; /* size = 0x10A */
 
-#define PLAYER_PARAMS(startBgCamIndex, initMode) ((startBgCamIndex & 0xFF) | ((initMode & 0xF) << 8))
-
-#define PLAYER_INITMODE_0 0x0
-#define PLAYER_INITMODE_1 0x1
-#define PLAYER_INITMODE_2 0x2
-#define PLAYER_INITMODE_3 0x3
-#define PLAYER_INITMODE_4 0x4
-#define PLAYER_INITMODE_5 0x5
-#define PLAYER_INITMODE_6 0x6
-#define PLAYER_INITMODE_7 0x7
-#define PLAYER_INITMODE_8 0x8
-#define PLAYER_INITMODE_9 0x9
-#define PLAYER_INITMODE_A 0xA
-#define PLAYER_INITMODE_B 0xB
-#define PLAYER_INITMODE_TELESCOPE 0xC
-#define PLAYER_INITMODE_D 0xD
-#define PLAYER_INITMODE_E 0xE
-#define PLAYER_INITMODE_F 0xF
-#define PLAYER_INITMODE_MAX 0x10
-
 typedef struct PlayerAgeProperties {
     /* 0x00 */ f32 ceilingCheckHeight;
     /* 0x04 */ f32 shadowScale;

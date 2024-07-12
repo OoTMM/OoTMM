@@ -245,7 +245,7 @@ void PlayLoopingSfxAtActor(Actor* actor, u32 id);
 void Actor_PlaySfx_FlaggedCentered1(Actor* actor, u16 sfxId);
 void Audio_PlaySfx_AtPos(Vec3f* pos, u16 sfxId);
 void Audio_PlaySfx_MessageDecide(void);
-void AudioSfx_PlaySfx(u16 sfxId, Vec3f* pos, u8 token, f32* freqScale, f32* volume, s8* reverbAdd);
+void Audio_PlaySfx(u16 sfxId, Vec3f* pos, u8 token, f32* freqScale, f32* volume, s8* reverbAdd);
 
 #if defined(GAME_MM)
 void AudioOcarina_SetInstrument(u8 ocarinaInstrumentId);
@@ -439,22 +439,5 @@ void Environment_Init(GameState_Play* play, EnvironmentContext* envCtx, int unus
 extern u8 gWeatherMode;
 
 #if defined(GAME_MM)
-extern u8 gSceneSeqState;
-extern s16 gSkyboxNumStars;
 void AudioSeq_QueueSeqCmd(u32 cmd);
-void DayTelop_Init(GameState_Play* play);
-void Audio_PlaySfx(u16 sfxId);
-void Audio_PlaySfx_2(u16 sfxId);
-
-void Message_DisplaySceneTitleCard(GameState_Play* play, u16 textId);
-void Sram_IncrementDay(void);
-s32 Play_IsDebugCamEnabled(void);
-u16 Entrance_CreateFromSpawn(s32 spawn);
-void func_80169EFC(GameState_Play* play);
-void Audio_PlaySfx_BigBells(Vec3f* pos, u8 volumeIndex);
-s16 CutsceneManager_IsNext(s16 csId);
-void CutsceneManager_Queue(s16 csId);
-s16 CutsceneManager_Start(s16 csId, Actor* actor);
-s16 CutsceneManager_Stop(s16 csId);
-CutsceneEntry* CutsceneManager_GetCutsceneEntry(s16 csId);
 #endif
