@@ -291,7 +291,7 @@ static int emitReloc(State* state, int secId, int type, uint32_t addr, uint32_t 
 {
     uint32_t reloc;
 
-    if (addr < 0x80800000 || addr >= 0x82000000)
+    if (addr < 0x80d00000 || addr >= 0x81000000)
     {
         //fprintf(stderr, "Warn: Address %08X is out of range\n", addr);
         return 0;
