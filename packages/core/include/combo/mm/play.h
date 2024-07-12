@@ -18,12 +18,6 @@
 #define ACTORCTX_FLAG_6             (1 << 6)
 #define ACTORCTX_FLAG_7             (1 << 7)
 
-#define GAMEMODE_NORMAL 0
-#define GAMEMODE_TITLE_SCREEN 1
-#define GAMEMODE_FILE_SELECT 2
-#define GAMEMODE_END_CREDITS 3
-#define GAMEMODE_OWL_SAVE 4
-
 typedef struct
 {
     void* readBuf;
@@ -475,34 +469,6 @@ typedef struct CollisionContext
     char unk[0x1470];
 }
 CollisionContext;
-
-typedef struct {
-    /* 0x000 */ GameState state;
-    /* 0x0A4 */ void* daytelopStaticFile;
-    /* 0x0A8 */ void* gameoverStaticFile;
-    /* 0x0B0 */ View view;
-    /* 0x218 */ char unk_218[0x28];
-    /* 0x240 */ s16 transitionCountdown;
-    /* 0x242 */ s16 fadeInState;
-    /* 0x244 */ s16 alpha;
-} DayTelopState; // size = 0x248
-
-_Static_assert(sizeof(DayTelopState) == 0x248, "MM DayTelopState Size is wrong");
-
-#define STOP_GAMESTATE(curState)     \
-    do {                             \
-        GameState* state = curState; \
-                                     \
-        state->running = 0;          \
-    } while(0)
-
-#define SET_NEXT_GAMESTATE(curState, nextInit, nextSize) \
-    do {                                                 \
-        GameState* state = curState;                     \
-                                                         \
-        (state)->nextGameStateInit = nextInit;                        \
-        (state)->nextGameStateSize = nextSize;                        \
-    } while (0)
 
 typedef struct GameState_Play
 {

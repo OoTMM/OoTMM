@@ -189,26 +189,7 @@ PlayLoopingSfxAtActor = 0x800B9010;
 Actor_PlaySfx_FlaggedCentered1 = 0x800B8F98;
 Message_Close = 0x801477b4;
 Audio_PlaySfx_MessageDecide = 0x8019F208;
-AudioSfx_PlaySfx = 0x801a5cfc;
-Audio_PlaySfx = 0x8019f0c8;
-Audio_PlaySfx_2 = 0x8019f128;
-
-Message_DisplaySceneTitleCard = 0x80151a68;
-Sram_IncrementDay = 0x80144574;
-Play_IsDebugCamEnabled = 0x8016a168;
-Entrance_CreateFromSpawn = 0x80130784;
-func_80169EFC = 0x80169efc;
-Audio_PlaySfx_BigBells = 0x801a0124;
-CutsceneManager_IsNext = 0x800f1be4;
-CutsceneManager_Queue = 0x800f1ba4;
-CutsceneManager_Start = 0x800f1d84;
-CutsceneManager_Stop = 0x800f1fbc;
-Interface_SetHudVisibility = 0x8010ef68;
-Environment_PlayStormNatureAmbience = 0x800fd78c;
-Environment_StopStormNatureAmbience = 0x800fd858;
-Environment_PlaySceneSequence = 0x800fb758;
-Environment_GetStormState = 0x800fe4b8;
-CutsceneManager_GetCutsceneEntry = 0x800f208c;
+Audio_PlaySfx = 0x801a5cfc;
 
 Rand_S16Offset = 0x800ff450;
 
@@ -444,6 +425,3 @@ Player_OverrideLimbDrawGameplayDefault = 0x80125d4c;
 
 Environment_Init = 0x800f510c;
 gWeatherMode = 0x801BDBB0;
-gSceneSeqState = 0x801bdbc8;
-gSkyboxNumStars = 0x801f4e7a;
-DayTelop_Init = 0x80815820;
