@@ -2425,7 +2425,7 @@
   region: GREAT_BAY_COAST
   exits:
     "Pinnacle Rock Entrance": "true"
-    "Great Bay Coast": "can_reset_time"
+    "Great Bay Coast": "true"
     "Great Bay Coast Near Pinnacle Water Void": "true"
     "SOARING": "has_mask_zora && can_play_soaring"
     "WARP_SONGS": "has_mask_zora"
@@ -2436,7 +2436,7 @@
 "Great Bay Coast Fortress":
   region: GREAT_BAY_COAST
   exits:
-    "Great Bay Coast": "underwater_walking && can_reset_time"
+    "Great Bay Coast": "underwater_walking"
     "Pirate Fortress": "true"
     "SOARING": "has_mask_zora && can_play_soaring"
     "WARP_SONGS": "has_mask_zora"
@@ -2567,7 +2567,7 @@
 "Pinnacle Rock Entrance":
   region: PINNACLE_ROCK
   exits:
-    "Pinnacle Rock": "can_reset_time && underwater_walking_strict && (event(SEAHORSE) || trick(MM_NO_SEAHORSE))"
+    "Pinnacle Rock": "underwater_walking_strict && (event(SEAHORSE) || trick(MM_NO_SEAHORSE))"
     "Great Bay Coast Near Pinnacle": "true"
     "Pinnacle Rock Water Void": "true"
     "SOARING": "has_mask_zora && can_play_soaring"
@@ -2698,7 +2698,7 @@
 "Zora Cape Near Hall":
   region: ZORA_CAPE
   exits:
-    "Zora Cape": "can_reset_time && underwater_walking || (can_dive_small && trick(MM_ZORA_HALL_HUMAN))"
+    "Zora Cape": "underwater_walking || (can_dive_small && trick(MM_ZORA_HALL_HUMAN))"
     "Zora Hall Entrance": "underwater_walking || can_dive_small"
     "SOARING": "has_mask_zora && can_play_soaring"
     "WARP_SONGS": "has_mask_zora"
