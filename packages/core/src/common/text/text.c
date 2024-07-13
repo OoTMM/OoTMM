@@ -710,14 +710,16 @@ void comboTextAppendNum(char** b, int num)
 void comboTextAppendOrd(char** b, int num)
 {
     const char* suffix;
+    int numTwoDigits;
 
-    if (num >= 11 && num <= 13)
+    numTwoDigits = num % 100;
+    if (numTwoDigits >= 11 && numTwoDigits <= 13)
     {
         suffix = "th";
     }
     else
     {
-        switch (num % 10)
+        switch (numTwoDigits % 10)
         {
         case 1:
             suffix = "st";
