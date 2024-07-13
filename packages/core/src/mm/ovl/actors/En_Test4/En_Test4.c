@@ -413,7 +413,7 @@ void EnTest4_HandleEvents(Actor_EnTest4* this, GameState_Play* play)
                 else
                 {
                     gSaveContext.screenScale = 0.0f;
-                    Play_SetRespawnData(play, RESPAWN_MODE_DOWN, Entrance_CreateFromSpawn(gSave.entrance), player->unk_3CE,
+                    Play_SetRespawnData(play, RESPAWN_MODE_DOWN, Entrance_CreateFromSpawn(0), player->unk_3CE,
                                         PLAYER_PARAMS(0xFF, PLAYER_INITMODE_B), &player->unk_3C0, player->unk_3CC);
                     func_80169EFC(play);
                     if (player->state & (1 << 23))
