@@ -19,7 +19,7 @@ static s32 sIsLoaded = 0;
 static s16 sCsIdList[THREEDAY_DAYTIME_MAX];
 static s16 sCurCsId;
 
-void EnTest4_HandleDayNightSwapFromInit(Actor_EnTest4* this, GameState_Play* play) 
+void EnTest4_HandleDayNightSwapFromInit(Actor_EnTest4* this, GameState_Play* play)
 {
     static s16 sNightOfTextIds[] = { 0x1bb4, 0x1bb5, 0x1bb6 };
     static s16 sDawnOfTextIds[] = { 0x1bb2, 0x1bb2, 0x1bb3 };
@@ -61,8 +61,8 @@ void EnTest4_HandleDayNightSwapFromInit(Actor_EnTest4* this, GameState_Play* pla
             Audio_PlaySfx(NA_SE_EV_CHICKEN_CRY_M);
         else
             Audio_PlaySfx_2(NA_SE_EV_DOG_CRY_EVENING);
-    } 
-    else 
+    }
+    else
     {
         this->actionFunc = EnTest4_HandleEvents;
         if (this->daytimeIndex == THREEDAY_DAYTIME_NIGHT)
@@ -250,7 +250,7 @@ void EnTest4_GetBellTimeOnDay3(Actor_EnTest4* this)
 
 void EnTest4_GetBellTimeAndShrinkScreenBeforeDay3(Actor_EnTest4* this, GameState_Play* play)
 {
-    if ((CURRENT_TIME >= CLOCK_TIME(6, 0)) && (CURRENT_TIME < CLOCK_TIME(18, 0))) 
+    if ((CURRENT_TIME >= CLOCK_TIME(6, 0)) && (CURRENT_TIME < CLOCK_TIME(18, 0)))
     {
         if (CURRENT_TIME < CLOCK_TIME(17, 30))
             this->nextBellTime = CLOCK_TIME(17, 30);
@@ -262,12 +262,12 @@ void EnTest4_GetBellTimeAndShrinkScreenBeforeDay3(Actor_EnTest4* this, GameState
             this->nextBellTime = CLOCK_TIME(17, 48);
         else if (CURRENT_TIME < CLOCK_TIME(17, 54))
             this->nextBellTime = CLOCK_TIME(17, 54);
-        else 
+        else
             this->nextBellTime = CLOCK_TIME(5, 30);
     }
-    else 
+    else
     {
-        if (CURRENT_TIME < CLOCK_TIME(5, 30)) 
+        if (CURRENT_TIME < CLOCK_TIME(5, 30))
             this->nextBellTime = CLOCK_TIME(5, 30);
         else if (CURRENT_TIME < CLOCK_TIME(5, 36))
             this->nextBellTime = CLOCK_TIME(5, 36);
@@ -291,7 +291,7 @@ void EnTest4_Init(Actor_EnTest4* this, GameState_Play* play)
     s8 csId = this->actor.csId;
 
     sCsIdList[THREEDAY_DAYTIME_NIGHT] = csId;
-    if (csId > -1) 
+    if (csId > -1)
     {
         CutsceneEntry* csEntry = CutsceneManager_GetCutsceneEntry(sCsIdList[THREEDAY_DAYTIME_NIGHT]);
         MM_SET_EVENT_INF(EVENTINF_HAS_DAYTIME_TRANSITION_CS);
@@ -398,7 +398,7 @@ void EnTest4_HandleEvents(Actor_EnTest4* this, GameState_Play* play)
 
             if (transitionTime != CLOCK_TIME(6, 0))
                 EnTest4_HandleDayNightSwap(this, play);
-            else if (transitionTime == CLOCK_TIME(6, 0)) 
+            else if (transitionTime == CLOCK_TIME(6, 0))
             {
                 if (gMmSave.day == 3)
                 {
@@ -413,7 +413,7 @@ void EnTest4_HandleEvents(Actor_EnTest4* this, GameState_Play* play)
                 else
                 {
                     gSaveContext.screenScale = 0.0f;
-                    Play_SetRespawnData(play, RESPAWN_MODE_DOWN, (gMmSave.entrance >> 9), player->unk_3CE,
+                    Play_SetRespawnData(play, RESPAWN_MODE_DOWN, Entrance_CreateFromSpawn(gSave.entrance), player->unk_3CE,
                                         PLAYER_PARAMS(0xFF, PLAYER_INITMODE_B), &player->unk_3C0, player->unk_3CC);
                     func_80169EFC(play);
                     if (player->state & (1 << 23))
@@ -476,12 +476,12 @@ void EnTest4_HandleCutscene(Actor_EnTest4* this, GameState_Play* play)
         {
             if (!CutsceneManager_IsNext(sCurCsId))
                 CutsceneManager_Queue(sCurCsId);
-            else 
+            else
             {
                 CutsceneManager_Start(sCurCsId, &this->actor);
                 this->transitionCsTimer = 1;
             }
-        } 
+        }
         else
             this->transitionCsTimer = 1;
     }
@@ -531,7 +531,7 @@ void EnTest4_UpdateWeatherClear(Actor_EnTest4* this, GameState_Play* play)
         Environment_PlayStormNatureAmbience(play);
         play->envCtx.lightningState = LIGHTNING_ON;
         play->envCtx.precipitation[PRECIP_RAIN_MAX] = 60;
-    } 
+    }
     else if ((play->envCtx.precipitation[PRECIP_RAIN_MAX] != 0) && ((play->gameplayFrames % 4) == 0))
     {
         play->envCtx.precipitation[PRECIP_RAIN_MAX]--;
@@ -667,7 +667,7 @@ static void EnTest4_CheckTimeSkip(Actor_EnTest4* this, GameState_Play* play)
     }
 }
 
-void EnTest4_Update(Actor_EnTest4* this, GameState_Play* play) 
+void EnTest4_Update(Actor_EnTest4* this, GameState_Play* play)
 {
     if (!BITMAP8_GET(gSave.eventInf, 0x0f))
         EnTest4_CheckTimeSkip(this, play);
@@ -696,7 +696,7 @@ void EnTest4_Update(Actor_EnTest4* this, GameState_Play* play)
     EnTest4_SetSkyboxNumStars(this, play);
 }
 
-ActorInit En_Test4_InitVars = 
+ActorInit En_Test4_InitVars =
 {
     AC_EN_TEST4,
     ACTORCAT_SWITCH,
