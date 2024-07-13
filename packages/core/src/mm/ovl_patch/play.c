@@ -338,7 +338,8 @@ void preInitTitleScreen(void)
         return;
 
     /* Disable Title screen */
-    gSaveContext.gameMode = 0;
+    gSaveContext.gameMode = GAMEMODE_NORMAL;
+    gSaveContext.showTitleCard = TRUE;
 
     /* Load save */
     gSaveContext.fileIndex = gComboCtx.saveIndex;

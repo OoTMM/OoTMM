@@ -407,7 +407,8 @@ static void preInitTitleScreen(void)
     if (gComboCtx.valid)
     {
         /* Disable Title screen */
-        gSaveContext.gameMode = 0;
+        gSaveContext.gameMode = GAMEMODE_NORMAL;
+        gSaveContext.showTitleCard = TRUE;
 
         /* Set file and load */
         gSaveContext.fileIndex = gComboCtx.saveIndex;
