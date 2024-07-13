@@ -59,6 +59,9 @@
     FOREST_TWIST_SWITCH: "true"
   locations:
     "MQ Forest Temple ReDead Chest": "soul_redead_gibdo"
+    "MQ Forest Temple Heart Garden 1": "true"
+    "MQ Forest Temple Heart Garden 2": "true"
+    "MQ Forest Temple Heart Garden 3": "true"
 "Forest Temple West Garden":
   dungeon: Forest
   exits:
@@ -91,9 +94,6 @@
   locations:
     "MQ Forest Temple East Garden High Ledge Chest": "true"
     "MQ Forest Temple GS East Garden": "gs && can_play_time"
-    "MQ Forest Temple Heart Garden 1": "true"
-    "MQ Forest Temple Heart Garden 2": "true"
-    "MQ Forest Temple Heart Garden 3": "true"
 "Forest Temple East Garden Ledge":
   dungeon: Forest
   exits:
