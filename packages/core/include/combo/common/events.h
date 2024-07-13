@@ -185,6 +185,74 @@
 #define EV_MM_WEEK_NOTEBOOK_RECEIVED_STONE_MASK             MM_EV(72, 5)
 #define EV_MM_WEEK_NOTEBOOK_RECEIVED_BREMEN_MASK            MM_EV(72, 6)
 
+#define EVENTINF_10 0x10
+#define EVENTINF_11 0x11
+#define EVENTINF_12 0x12
+#define EVENTINF_13 0x13
+#define EVENTINF_14 0x14
+#define EVENTINF_15 0x15
+#define EVENTINF_16 0x16
+#define EVENTINF_17 0x17
+#define EVENTINF_20 0x20
+#define EVENTINF_21 0x21
+#define EVENTINF_22 0x22
+#define EVENTINF_23 0x23
+#define EVENTINF_24 0x24
+#define EVENTINF_25 0x25
+#define EVENTINF_26 0x26
+// "Dawn of ... day". Must be triggered with respawnFlag -4 or -99
+#define EVENTINF_TRIGGER_DAYTELOP 0x27
+#define EVENTINF_30 0x30
+
+// EVENTINF_31 is used to track if Player is within range of EnGakufu (2D Song Buttons Appearing on Wall)
+#define EVENTINF_31 0x31
+// EVENTINF_32 is used to track if Player has played the notes of EnGakufu (2D Song Buttons Appearing on Wall)
+#define EVENTINF_32 0x32
+
+#define EVENTINF_33 0x33
+
+// Related to Deku playground minigame
+#define EVENTINF_34 0x34
+#define EVENTINF_35 0x35
+#define EVENTINF_36 0x36
+#define EVENTINF_37 0x37
+#define EVENTINF_40 0x40
+
+// Related to swamp boat (non-minigame)?
+#define EVENTINF_41 0x41
+#define EVENTINF_42 0x42
+#define EVENTINF_43 0x43
+#define EVENTINF_44 0x44
+#define EVENTINF_45 0x45
+#define EVENTINF_46 0x46
+#define EVENTINF_47 0x47
+#define EVENTINF_50 0x50
+#define EVENTINF_51 0x51
+#define EVENTINF_HAS_DAYTIME_TRANSITION_CS 0x52
+
+// Enabled when various boss intro cutscene has been watched
+#define EVENTINF_INTRO_CS_WATCHED_GOHT 0x53
+#define EVENTINF_INTRO_CS_WATCHED_ODOLWA 0x54
+#define EVENTINF_INTRO_CS_WATCHED_TWINMOLD 0x55
+#define EVENTINF_INTRO_CS_WATCHED_GYORG 0x56
+#define EVENTINF_INTRO_CS_WATCHED_IGOS_DU_IKANA 0x57
+#define EVENTINF_INTRO_CS_WATCHED_WART 0x60
+#define EVENTINF_INTRO_CS_WATCHED_MAJORA 0x61
+#define EVENTINF_ENTR_CS_WATCHED_GOHT 0x62
+#define EVENTINF_INTRO_CS_WATCHED_GOMESS 0x63
+
+#define EVENTINF_64 0x64
+#define EVENTINF_65 0x65
+#define EVENTINF_66 0x66
+#define EVENTINF_67 0x67
+
+// Tracks which ammo is lost during the three day reset
+#define EVENTINF_THREEDAYRESET_LOST_RUPEES 0x70
+#define EVENTINF_THREEDAYRESET_LOST_BOMB_AMMO 0x71
+#define EVENTINF_THREEDAYRESET_LOST_NUT_AMMO 0x72
+#define EVENTINF_THREEDAYRESET_LOST_STICK_AMMO 0x73
+#define EVENTINF_THREEDAYRESET_LOST_ARROW_AMMO 0x74
+
 #define EV_OOT_IS_SWORDLESS()                               (!!(gOotSave.eventsMisc[29]))
 #define EV_OOT_SET_SWORDLESS()                              do { gOotSave.eventsMisc[29] = 1; } while (0)
 #define EV_OOT_UNSET_SWORDLESS()                            do { gOotSave.eventsMisc[29] = 0; } while (0)
@@ -194,6 +262,8 @@
 # define MM_CLEAR_EVENT_WEEK(x)     (gMmSave.weekEventReg[(x) / 8] &= ~(1 << ((x) % 8)))
 # define MM_GET_EVENT_WEEK(x)       (gMmSave.weekEventReg[(x) / 8] & (1 << ((x) % 8)))
 # define MM_CHECK_EVENT_INF(x)      (gMmSave.eventInf[(x) >> 4] & (1 << ((x) & 0xf)))
+# define MM_SET_EVENT_INF(x)        (gMmSave.eventInf[(x) >> 4] |= (1 << ((x) & 0xf)))
+# define MM_CLEAR_EVENT_INF(x)      (gMmSave.eventInf[(x) >> 4] &= ~(1 << ((x) & 0xf)))
 int  GetEventChk(int index);
 void SetEventChk(int index);
 #endif

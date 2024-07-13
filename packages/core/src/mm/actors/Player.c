@@ -1456,7 +1456,7 @@ void Player_PlaySfx_GiantsMask(u16 sfxId, Vec3f* pos, u8 token, f32* freqScale, 
     {
         sfxId -= 0x20;
     }
-    Audio_PlaySfx(sfxId, pos, token, freqScale, volume, reverbAdd);
+    AudioSfx_PlaySfx(sfxId, pos, token, freqScale, volume, reverbAdd);
 }
 
 PATCH_CALL(0x8019f874, Player_PlaySfx_GiantsMask);
