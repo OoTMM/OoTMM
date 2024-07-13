@@ -198,7 +198,7 @@ typedef struct
     u16                     owlLocation;
     s32                     isNight;
     s32                     daySpeed;
-    s32                     day;
+    u32                     day;
     u32                     daysElapsed;
     u8                      playerForm;
     u8                      snowheadCleared;
@@ -338,9 +338,20 @@ typedef struct
     SaveOptions         options;
     char                unk_3f46[0x4];
     u16                 nextCutscene;
-    char                unk_3f4c[0xe];
+    u8                  cutsceneTrigger;
+    u8                  chamberCutsceneNum;
+    u16                 nextDayTime;
+    u8                  transFadeDuration;
+    u8                  transWipeSpeed;
+    u16                 skyboxTime;
+    u8                  dogIsLost;
+    u8                  nextTransitionType;
+    s16                 worldMapArea;
+    s16                 sunsSongState;
     u16                 healthDelta;
-    char                unk_3f5c[0xc];
+    s32                 betRupees;
+    u8                  screenScaleFlag;
+    f32                 screenScale;
     MmCycleSceneFlags   cycleSceneFlags[120];
     u16                 dungeonId;
 }
@@ -359,11 +370,37 @@ ASSERT_OFFSET(MmSaveContext, minigameScore,         0x3f3a);
 ASSERT_OFFSET(MmSaveContext, minigameHiddenScore,   0x3f3c);
 ASSERT_OFFSET(MmSaveContext, options,               0x3f40);
 ASSERT_OFFSET(MmSaveContext, nextCutscene,          0x3f4a);
-ASSERT_OFFSET(MmSaveContext, unk_3f4c,              0x3f4c);
+ASSERT_OFFSET(MmSaveContext, cutsceneTrigger,       0x3f4c);
 ASSERT_OFFSET(MmSaveContext, healthDelta,           0x3f5a);
-ASSERT_OFFSET(MmSaveContext, unk_3f5c,              0x3f5c);
+ASSERT_OFFSET(MmSaveContext, betRupees,             0x3f5c);
 ASSERT_OFFSET(MmSaveContext, cycleSceneFlags,       0x3f68);
 ASSERT_OFFSET(MmSaveContext, dungeonId,             0x48c8);
+
+#define HUD_VISIBILITY_IDLE                                     0
+#define HUD_VISIBILITY_NONE                                     1
+#define HUD_VISIBILITY_NONE_ALT                                 2
+#define HUD_VISIBILITY_HEARTS_WITH_OVERWRITE                    3
+#define HUD_VISIBILITY_A                                        4
+#define HUD_VISIBILITY_A_HEARTS_MAGIC_WITH_OVERWRITE            5
+#define HUD_VISIBILITY_A_HEARTS_MAGIC_MINIMAP_WITH_OVERWRITE    6
+#define HUD_VISIBILITY_ALL_NO_MINIMAP_W_DISABLED                7
+#define HUD_VISIBILITY_B                                        8
+#define HUD_VISIBILITY_HEARTS_MAGIC                             9
+#define HUD_VISIBILITY_B_ALT                                    10
+#define HUD_VISIBILITY_HEARTS                                   11
+#define HUD_VISIBILITY_A_B_MINIMAP                              12
+#define HUD_VISIBILITY_HEARTS_MAGIC_WITH_OVERWRITE              13
+#define HUD_VISIBILITY_HEARTS_MAGIC_C                           14
+#define HUD_VISIBILITY_ALL_NO_MINIMAP                           15
+#define HUD_VISIBILITY_A_B_C                                    16
+#define HUD_VISIBILITY_B_MINIMAP                                17
+#define HUD_VISIBILITY_HEARTS_MAGIC_MINIMAP                     18
+#define HUD_VISIBILITY_A_HEARTS_MAGIC_MINIMAP                   19
+#define HUD_VISIBILITY_B_MAGIC                                  20
+#define HUD_VISIBILITY_A_B                                      21
+#define HUD_VISIBILITY_A_B_HEARTS_MAGIC_MINIMAP                 22
+#define HUD_VISIBILITY_ALL                                      50
+#define HUD_VISIBILITY_NONE_INSTANT                             52
 
 #if defined(GAME_MM)
 ALIGNED(16) extern MmSaveContext gSaveContext;
