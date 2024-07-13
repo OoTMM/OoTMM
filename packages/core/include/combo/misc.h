@@ -999,9 +999,24 @@ typedef struct {
 
 /* ZAPD compatibility typedefs */
 /* TODO: Remove when ZAPD adds support for them */
+#if defined(GAME_OOT)
 typedef CutsceneScriptEntry CutsceneEntry;
+#endif
 
 #if defined(GAME_MM)
+typedef struct {
+    /* 0x00 */ s16 priority; // Lower means higher priority. -1 means it ignores priority
+    /* 0x02 */ s16 length;
+    /* 0x04 */ s16 csCamId; // Index of CsCameraEntry to use. Negative indices use sGlobalCamDataSettings. Indices 0 and above use CsCameraEntry from a sceneLayer
+    /* 0x06 */ s16 scriptIndex;
+    /* 0x08 */ s16 additionalCsId;
+    /* 0x0A */ u8 endSfx;
+    /* 0x0B */ u8 customValue; // 0 - 99: actor-specific custom value. 100+: spawn. 255: none
+    /* 0x0C */ s16 hudVisibility; 
+    /* 0x0E */ u8 endCam;
+    /* 0x0F */ u8 letterboxSize;
+} CutsceneEntry; // size = 0x10
+
 /* TODO consolidate type with oot's type */
 typedef struct {
     /* 0x00 */ u8 scriptListCount;
