@@ -266,7 +266,15 @@ typedef struct
     s32             sceneSetupId;
     s32             respawnFlag;
     OotRespawnData  respawn[3];
-    char            unk_13bc[0x10];
+    float           entranceSpeed;
+    u16             entranceSound;
+    char            unk_13c2[1];
+    u8              retainWeatherMode;
+    u16             dogParams;
+    u8              envHazardTextTriggerFlags;
+    u8              showTitleCard;
+    s16             nayrusLoveTimer;
+    char            unk_13ca[2];
     s16             rupeesDelta;
     /* 0x13CE */ s16 timerState; /* See `TimerState` */
     /* 0x13D0 */ s16 timerSeconds;

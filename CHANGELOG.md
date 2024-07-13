@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Fixed
+
+- Title cards not being displayed on game transitions.
+
 ## [24.1] - 2024-07-11
 
 ### Added
