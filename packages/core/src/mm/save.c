@@ -43,6 +43,9 @@ void Sram_SaveEndOfCycle(GameState_Play* play)
     /* Disable sirloin */
     gSharedCustomSave.storedSirloin = 0;
 
+    /* Reset Anju's reservation */
+    MM_CLEAR_EVENT_WEEK(EV_MM_WEEK_ANJU_RESERVATION_FAILED);
+
     /* Store a dummy scene/entrance in OoT (prevents reloading into a temple - could lead to softlocks) */
     gOotSave.sceneId = SCE_OOT_TEMPLE_OF_TIME;
     gOotSave.entrance = ENTR_OOT_WARP_SONG_TEMPLE;
