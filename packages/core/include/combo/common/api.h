@@ -74,6 +74,7 @@ void    SkelAnime_DrawFlexOpa(GameState_Play* play, void** skeleton, Vec3s* join
 void    AudioSeq_QueueSeqCmd(u32 unk);
 
 void    ActorShadow_DrawCircle(Actor* actor, Lights* lights, GameState_Play* play);
+void    ActorShadow_DrawSquare(Actor* actor, Lights* lights, GameState_Play* play);
 
 void    Actor_Kill(Actor* actor);
 int     Actor_HasParent(Actor* actor, GameState_Play* play);
