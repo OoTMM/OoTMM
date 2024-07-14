@@ -18,5 +18,7 @@ float   Math_SmoothStepToF(float* pValue, float target, float fraction, float st
 void    Math_Vec3f_Copy(Vec3f* dest, Vec3f* src);
 void    Math_Vec3f_Sum(Vec3f* a, Vec3f* b, Vec3f* dest);
 void    Math_Vec3f_Diff(Vec3f* a, Vec3f* b, Vec3f* dest);
+s32     Math_ScaledStepToS(s16* pValue, s16 target, s16 step);
+float   Math3D_Vec3fDistSq(const Vec3f* a, const Vec3f* b);
 
 #endif

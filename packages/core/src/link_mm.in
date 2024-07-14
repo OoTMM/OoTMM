@@ -324,7 +324,11 @@ Player_GetHeight = 0x800B6FC8;
 
 Collider_DestroyCylinder = 0x800e11ec;
 
+Math_ScaledStepToS = 0x800fee70;
+Math3D_Vec3fDistSq = 0x8017a6f8;
+
 ActorShadow_DrawCircle = 0x800b3fc0;
+ActorShadow_DrawSquare = 0x800b4024;
 
 BgCheck_EntityRaycastDown4 = 0x800c411c;
 
