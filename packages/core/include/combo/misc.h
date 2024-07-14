@@ -606,8 +606,15 @@ typedef struct {
     /* 0x01 */ u8 room;
 } Spawn;
 
+#define PATH_INDEX_NONE -1
+#define ADDITIONAL_PATH_INDEX_NONE (u8)-1
+
 typedef struct {
     /* 0x00 */ u8 count; /* number of points in the path */
+    #if defined(GAME_MM)
+    u8 additionalPathIndex;
+    s16 customValue;
+    #endif
     /* 0x04 */ Vec3s* points; /* Segment Address to the array of points */
 } Path; /* size = 0x8 */
 
@@ -874,6 +881,10 @@ typedef enum {
     /* 0x5B */ CAM_SET_MAX
 } CameraSettingType;
 
+#define CAM_ID_MAIN 0
+#define CAM_ID_SUB_FIRST 1
+#define CAM_ID_NONE -1
+
 typedef enum {
     /* 0 */ ROOM_BEHAVIOR_TYPE1_0,
     /* 1 */ ROOM_BEHAVIOR_TYPE1_1,
@@ -1012,7 +1023,7 @@ typedef struct {
     /* 0x08 */ s16 additionalCsId;
     /* 0x0A */ u8 endSfx;
     /* 0x0B */ u8 customValue; // 0 - 99: actor-specific custom value. 100+: spawn. 255: none
-    /* 0x0C */ s16 hudVisibility; 
+    /* 0x0C */ s16 hudVisibility;
     /* 0x0E */ u8 endCam;
     /* 0x0F */ u8 letterboxSize;
 } CutsceneEntry; // size = 0x10
@@ -1041,6 +1052,19 @@ typedef enum {
     /* 3 */ CS_STATE_STOP,
     /* 4 */ CS_STATE_RUN_UNSTOPPABLE
 } CutsceneState;
+
+typedef enum {
+    /*   -1 */ CS_ID_NONE = -1,
+    // CsId's 0 - 119 are sceneLayer-specific and index `CutsceneEntry`
+    /* 0x78 */ CS_ID_GLOBAL_78 = 120,
+    /* 0x79 */ CS_ID_GLOBAL_79,
+    /* 0x7A */ CS_ID_GLOBAL_7A,
+    /* 0x7B */ CS_ID_GLOBAL_ELEGY,
+    /* 0x7C */ CS_ID_GLOBAL_TALK,
+    /* 0x7D */ CS_ID_GLOBAL_DOOR,
+    /* 0x7E */ CS_ID_GLOBAL_RETURN_TO_CAM, // smoothly return to the previous camera
+    /* 0x7F */ CS_ID_GLOBAL_END
+} CutsceneId;
 
 typedef enum RespawnMode {
     /* 0 */ RESPAWN_MODE_DOWN,                          /* "RESTART_MODE_DOWN" */

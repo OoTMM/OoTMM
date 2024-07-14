@@ -45,8 +45,6 @@ void            DynaPoly_InvalidateLookup(GameState_Play* play, DynaCollisionCon
 void            DynaPoly_UnsetAllInteractFlags(GameState_Play* play, DynaCollisionContext* dyna, Actor* actor);
 void            DynaPoly_UpdateContext(GameState_Play* play, DynaCollisionContext* dyna);
 void            DynaPoly_UpdateBgActorTransforms(GameState_Play* play, DynaCollisionContext* dyna);
-void            DynaPoly_DeleteBgActor(GameState_Play* play, DynaCollisionContext* dyna, s32 bgId);
-s32             DynaPoly_SetBgActor(GameState_Play* play, DynaCollisionContext* dyna, Actor* actor, CollisionHeader* colHeader);
 
 void    CollisionHeader_GetVirtual(void* colHeader, CollisionHeader** dest);
 void    Interface_UpdateButtonsPart2(GameState_Play* play);
@@ -441,6 +439,24 @@ extern u8 gWeatherMode;
 #if defined(GAME_MM)
 extern u8 gSceneSeqState;
 extern s16 gSkyboxNumStars;
+extern Vec3f gZeroVec3f;
+
+Actor* SubS_FindActor(GameState_Play* play, Actor* actorListStart, u8 actorCategory, s16 actorId);
+void SubS_TimePathing_FillKnots(f32 knots[], s32 order, s32 numPoints);
+s32 SubS_TimePathing_Update(Path* path, f32* progress, s32* elapsedTime, s32 waypointTime, s32 totalTime, s32* waypoint, f32 knots[], Vec3f* targetPos, s32 timeSpeed);
+s16 CutsceneManager_GetCurrentCsId(void);
+void Environment_StartTime(void);
+void Environment_StopTime(void);
+void Audio_PlaySfx_MessageCancel(void);
+void Audio_PlaySfx_MessageDecide(void);
+void DynaPolyActor_LoadMesh(GameState_Play* play, DynaPolyActor* dynaActor, CollisionHeader* meshHeader);
+Path* SubS_GetAdditionalPath(GameState_Play* play, u8 pathIndex, s32 limit);
+void Math_Vec3s_ToVec3f(Vec3f* dest, Vec3s* src);
+void Interface_InitMinigame(GameState_Play* play);
+
+s32 DynaPolyActor_IsPlayerOnTop(DynaPolyActor* dynaActor);
+void DynaPolyActor_Init(DynaPolyActor* dynaActor, s32 transformFlags);
+
 void AudioSeq_QueueSeqCmd(u32 cmd);
 void DayTelop_Init(GameState_Play* play);
 void Audio_PlaySfx(u16 sfxId);

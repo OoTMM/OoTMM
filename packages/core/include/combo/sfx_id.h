@@ -552,6 +552,8 @@
 
 #if defined(GAME_MM)
 # define NA_SE_NONE 0
+# define SFX_FLAG 0x800
+# define SFX_FLAG_MASK 0xC00
 # define NA_SE_PL_WALK_GROUND 0x800
 # define NA_SE_PL_WALK_SAND 0x801
 # define NA_SE_PL_WALK_CONCRETE 0x802

@@ -158,6 +158,11 @@ typedef struct
 }
 DynaSSNodeList;
 
+typedef struct {
+    /* 0x0 */ s32 unk0;
+    /* 0x4 */ WaterBox* boxes;
+} DynaWaterBoxList; // size = 0x8
+
 typedef struct DynaCollisionContext
 {
     u8                  bitFlag;
