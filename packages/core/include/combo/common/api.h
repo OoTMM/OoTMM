@@ -8,6 +8,7 @@
 typedef struct Font Font;
 typedef struct GameState_Play GameState_Play;
 typedef struct ActorContext ActorContext;
+typedef struct TitleCardContext TitleCardContext;
 typedef struct Actor Actor;
 typedef struct Actor_Player Actor_Player;
 typedef struct DynaCollisionContext DynaCollisionContext;
@@ -18,6 +19,8 @@ typedef enum BombersNotebookPerson BombersNotebookPerson;
 typedef enum BombersNotebookEvent BombersNotebookEvent;
 typedef void (*ActorShadowFunc)(struct Actor* actor, struct Lights* mapper, GameState_Play* play);
 #endif
+
+int TitleCard_Clear(GameState_Play* play, TitleCardContext* titleCtx);
 
 float Actor_WorldDistXZToActor(Actor* a, Actor* b);
 float Actor_HeightDiff(Actor* a, Actor* b);
