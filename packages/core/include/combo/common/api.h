@@ -291,6 +291,7 @@ void ParseSceneRoomHeaders_SoundSettings(GameState_Play* play, void* cmd);
 void Interface_StartMoonCrash(GameState_Play* play);
 
 void SpawnRoomActors(GameState_Play* play, int id);
+void SpawnTransitionActors(GameState_Play* play, int id);
 
 extern u8 gPlayedOcarinaSong;
 extern u8 gIsOcarinaEnabled;

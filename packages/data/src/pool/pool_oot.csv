@@ -778,6 +778,10 @@ Market Pot House Adult Pot 8,                               pot,            NONE
 Market Pot House Adult Pot 9,                               pot,            NONE,                 GUARD_HOUSE,                    0x8009,                     RECOVERY_HEART
 Market Pot House Adult Pot 10,                              pot,            NONE,                 GUARD_HOUSE,                    0x800a,                     NOTHING
 Market Pot House Adult Pot 11,                              pot,            NONE,                 GUARD_HOUSE,                    0x800b,                     RUPEE_GREEN
+Market Pot House Crate 1,                                   crate,          NONE,                 GUARD_HOUSE,                    0x00003,                    NOTHING
+Market Pot House Crate 2,                                   crate,          NONE,                 GUARD_HOUSE,                    0x00004,                    NOTHING
+Market Pot House Crate 3,                                   crate,          NONE,                 GUARD_HOUSE,                    0x00005,                    RUPEE_GREEN
+Market Pot House Crate 4,                                   crate,          NONE,                 GUARD_HOUSE,                    0x00006,                    NOTHING
 Market Bazaar Item 1,                                       shop,           NONE,                 BAZAAR,                         0x20,                       ARROWS_5
 Market Bazaar Item 2,                                       shop,           NONE,                 BAZAAR,                         0x21,                       ARROWS_10
 Market Bazaar Item 3,                                       shop,           NONE,                 BAZAAR,                         0x22,                       ARROWS_30

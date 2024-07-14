@@ -630,6 +630,10 @@
     "Market Pot House Child Pot Ground 42": "true"
     "Market Pot House Child Pot Above 1": "true"
     "Market Pot House Child Pot Above 2": "true"
+    "Market Pot House Crate 1": "true"
+    "Market Pot House Crate 2": "true"
+    "Market Pot House Crate 3": "true"
+    "Market Pot House Crate 4": "true"
 "Market Pot House Adult":
   region: ENTRANCE
   age_change: false

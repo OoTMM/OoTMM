@@ -1,4 +1,6 @@
 #include <combo.h>
+#include <combo/item.h>
+#include <combo/global.h>
 #include "Obj_Kibako2.h"
 
 #define FLAGS 0
@@ -89,10 +91,23 @@ void ObjKibako2_Break(Actor_ObjKibako2* this, GameState_Play* play)
     SpawnSomeDust(play, thisPos, 90.0f, 6, 100, 160, 1);
 }
 
+static int ObjKibako2_IsShuffled(Actor_ObjKibako2* this)
+{
+    if (!this->isExtended || comboXflagsGet(&this->xflag))
+        return 0;
+    return 1;
+}
+
 void ObjKibako2_SpawnCollectible(Actor_ObjKibako2* this, GameState_Play* play)
 {
     s16 itemDropped;
     s16 collectibleFlagTemp;
+
+    if (ObjKibako2_IsShuffled(this))
+    {
+        EnItem00_DropCustom(play, &this->dyna.actor.world.pos, &this->xflag);
+        return;
+    }
 
     collectibleFlagTemp = this->collectibleFlag;
     itemDropped = this->dyna.actor.home.rot.x;
@@ -101,10 +116,30 @@ void ObjKibako2_SpawnCollectible(Actor_ObjKibako2* this, GameState_Play* play)
     }
 }
 
+static void ObjKibako2_Alias(Actor_ObjKibako2* this)
+{
+}
+
 void ObjKibako2_Init(Actor_ObjKibako2* this, GameState_Play* play)
 {
+    static int sSeen = 0;
+    ComboItemOverride o;
     CollisionHeader* colHeader;
     u32 bgId;
+
+    /* Set the extended properties */
+    this->xflag.sceneId = play->sceneId;
+    this->xflag.setupId = g.sceneSetupId;
+    this->xflag.roomId = this->dyna.actor.room;
+    this->xflag.sliceId = 0;
+    this->xflag.id = this->dyna.actor.actorIndex;
+
+    /* Fix the aliases */
+    ObjKibako2_Alias(this);
+
+    /* Detect xflags */
+    comboXflagItemOverride(&o, &this->xflag, 0);
+    this->isExtended = !!(o.gi && !comboXflagsGet(&this->xflag));
 
     colHeader = NULL;
     DynaPolyActor_Init(&this->dyna, 0);

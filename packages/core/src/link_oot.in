@@ -261,7 +261,7 @@ _Player_OverrideLimbDrawGameplayDefault = 0x8007aa94;
 _Player_OverrideLimbDrawPause = 0x8007c1c8;
 _Player_OverrideLimbDrawGameplayFirstPerson = 0x8007ad80;
 
-SpawnRoomActors = 0x80025488;
+SpawnTransitionActors = 0x80025488;
 
 gPlayedOcarinaSong = 0x80102b74;
 gIsOcarinaEnabled = 0x80102208;

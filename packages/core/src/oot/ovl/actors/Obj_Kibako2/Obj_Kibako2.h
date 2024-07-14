@@ -5,6 +5,7 @@
 #include <combo/actor.h>
 #include <combo/collision.h>
 #include <combo/misc.h>
+#include <combo/xflags.h>
 
 typedef struct Actor_ObjKibako2 Actor_ObjKibako2;
 typedef struct GameState_Play GameState_Play;
@@ -17,6 +18,10 @@ typedef struct Actor_ObjKibako2
     ColliderCylinder        collider;
     Actor_ObjKibako2Func    actionFunc;
     s16                     collectibleFlag;
+
+    /* Extended */
+    Xflag   xflag;
+    u8      isExtended;
 }
 Actor_ObjKibako2;
 
