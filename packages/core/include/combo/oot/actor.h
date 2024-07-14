@@ -48,18 +48,54 @@ TargetContext; /* size = 0x98 */
 
 _Static_assert(sizeof(TargetContext) == 0x98, "TargetContext size is wrong");
 
+typedef struct ActorContextSceneFlags
+{
+    u32 swch;
+    u32 tempSwch;
+    u32 unk0;
+    u32 unk1;
+    u32 chest;
+    u32 clear;
+    u32 tempClear;
+    u32 collect;
+    u32 tempCollect;
+}
+ActorContextSceneFlags;
+
+ASSERT_SIZE(ActorContextSceneFlags, 0x24);
+
+typedef struct TitleCardContext
+{
+    void* texture;
+    s16 x;
+    s16 y;
+    u8 width;
+    u8 height;
+    u8 durationTimer;
+    u8 delayTimer;
+    s16 alpha;
+    s16 intensity;
+}
+TitleCardContext;
+
+ASSERT_SIZE(TitleCardContext, 0x10);
+
 typedef struct ActorContext
 {
-    char            unk_000[0xc];
-    ActorList       actors[12];
-    TargetContext   targetCtx;
-    char            unk_104[0x3c];
+    char                    unk_000[0xc];
+    ActorList               actors[12];
+    TargetContext           targetCtx;
+    ActorContextSceneFlags  flags;
+    TitleCardContext        titleCtx;
+    char                    unk_138[0x08];
 }
 ActorContext;
 
-ASSERT_OFFSET(ActorContext, actors, 0x00c);
-ASSERT_OFFSET(ActorContext, targetCtx, 0x06c);
-ASSERT_OFFSET(ActorContext, unk_104, 0x104);
+ASSERT_OFFSET(ActorContext, actors,     0x00c);
+ASSERT_OFFSET(ActorContext, targetCtx,  0x06c);
+ASSERT_OFFSET(ActorContext, flags,      0x104);
+ASSERT_OFFSET(ActorContext, titleCtx,   0x128);
+ASSERT_OFFSET(ActorContext, unk_138,    0x138);
 _Static_assert(sizeof(ActorContext) == 0x140, "OOT ActorContext size is wrong");
 
 typedef struct

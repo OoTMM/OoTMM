@@ -3,6 +3,8 @@ __osRestoreInt = 0x800051a0;
 
 _Interface_Update = 0x80078290;
 
+TitleCard_Clear = 0x80020e80;
+
 bzero = 0x80002e80;
 osRecvMesg = 0x80002030;
 osSendMesg = 0x80001e20;

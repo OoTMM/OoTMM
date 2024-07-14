@@ -48,6 +48,7 @@ static void EnXc_Update_DeathMountainCrater(Actor* actor, GameState_Play* play)
     if (z <= -446.f || z >= -246.f)
         return;
 
+    play->actorCtx.titleCtx.alpha = 0;
     comboGiveItemNpc(actor, play, GI_OOT_SONG_TP_FIRE, NPC_OOT_SHEIK_FIRE, 10000.f, 50.f);
 }
 

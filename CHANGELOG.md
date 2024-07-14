@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Minor collection delay for Bolero.
 - Long-standing issue where Anju's reservation worked inconsistently.
 - Title cards not being displayed on game transitions.
 - MQ Forest Temple freestanding hearts logic issue.
