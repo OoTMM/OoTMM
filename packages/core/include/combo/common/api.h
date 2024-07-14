@@ -82,7 +82,7 @@ int     Actor_HasNoParent(Actor* actor, GameState_Play* play);
 int     Actor_HasNoParentZ(Actor* actor);
 void    Actor_SetScale(Actor* actor, float scale);
 void    ActorSetUnk(Actor* actor, float unk);
-void    ActorEnableGrab(Actor* actor, GameState_Play* play);
+void    Actor_OfferCarry(Actor* actor, GameState_Play* play);
 void    ActorEnableTalk(Actor* actor, GameState_Play* play, float range);
 void    ActorEnableTalkEx(Actor* actor, GameState_Play* play, float range, u32 unk);
 void    Actor_UpdateBgCheckInfo(GameState_Play* play, Actor* actor, float unk_3, float unk_4, float unk_5, u32 unk_6);
@@ -172,7 +172,7 @@ void MatrixStackDup(void);
 void MatrixStackPop(void);
 void Matrix_MultVec3f(Vec3f* src, Vec3f* dest);
 
-void SomethingPotBreak(GameState_Play* play, Vec3f* pos, float unk1, int unk2, int unk3, int unk4, int unk5);
+void SpawnSomeDust(GameState_Play* play, Vec3f* pos, float unk1, int unk2, int unk3, int unk4, int unk5);
 
 f32 Rand_CenteredFloat(f32 scale);
 

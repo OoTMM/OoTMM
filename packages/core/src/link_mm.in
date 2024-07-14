@@ -317,7 +317,7 @@ Rand_Next = 0x80086fa0;
 Rand_ZeroFloat = 0x80179594;
 gHorseIsMounted = 0x801bda9c;
 Horse_SpawnOverworld = 0x800f3c44;
-SomethingPotBreak = 0x800BBFB0;
+SpawnSomeDust = 0x800BBFB0;
 
 Actor_MoveWithGravity = 0x800b6a88;
 Player_GetHeight = 0x800B6FC8;

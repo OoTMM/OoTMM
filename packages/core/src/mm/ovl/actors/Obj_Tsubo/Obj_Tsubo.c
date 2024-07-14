@@ -386,8 +386,8 @@ void ObjTsubo_PotBreak1(Actor_ObjTsubo* this, GameState_Play* play)
         EffectSsKakera_Spawn(play, &pos, &velocity, &this->actor.world.pos, -260, phi_s0, 20, 0, 0, scale, 0, 0, 50, -1, typeData->objectId, typeData->shardDL);
     }
 
-    SomethingPotBreak(play, &this->actor.world.pos, 30.0f, 2, 20, 50, TRUE);
-    SomethingPotBreak(play, &this->actor.world.pos, 30.0f, 2, 10, 80, TRUE);
+    SpawnSomeDust(play, &this->actor.world.pos, 30.0f, 2, 20, 50, TRUE);
+    SpawnSomeDust(play, &this->actor.world.pos, 30.0f, 2, 10, 80, TRUE);
 }
 
 void ObjTsubo_MagicPotBreak1(Actor_ObjTsubo* this, GameState_Play* play)
@@ -424,8 +424,8 @@ void ObjTsubo_MagicPotBreak1(Actor_ObjTsubo* this, GameState_Play* play)
         scale = Rand_ZeroOne() * 160.0f + 15.0f;
         EffectSsKakera_Spawn(play, &pos, &velocity, &this->actor.world.pos, -340, phi_s0, 20, 0, 0, scale, 0, 0, 50, -1, typeData->objectId, typeData->shardDL);
     }
-    SomethingPotBreak(play, &this->actor.world.pos, 50.0f, 2, 40, 50, TRUE);
-    SomethingPotBreak(play, &this->actor.world.pos, 50.0f, 2, 20, 80, TRUE);
+    SpawnSomeDust(play, &this->actor.world.pos, 50.0f, 2, 40, 50, TRUE);
+    SpawnSomeDust(play, &this->actor.world.pos, 50.0f, 2, 20, 80, TRUE);
 }
 
 void ObjTsubo_PotBreak2(Actor_ObjTsubo* this, GameState_Play* play2) {

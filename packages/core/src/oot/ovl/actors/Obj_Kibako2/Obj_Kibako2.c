@@ -86,7 +86,7 @@ void ObjKibako2_Break(Actor_ObjKibako2* this, GameState_Play* play)
         }
         EffectSsKakera_Spawn(play, &pos, &velocity, &pos, -200, phi_s0, 28, 2, 0, (Rand_ZeroOne() * 30.0f) + 5.0f, 0, 0, 70, KAKERA_COLOR_NONE, OBJECT_KIBAKO2, SEGADDR_FRAGMENT_DL);
     }
-    SomethingPotBreak(play, thisPos, 90.0f, 6, 100, 160, 1);
+    SpawnSomeDust(play, thisPos, 90.0f, 6, 100, 160, 1);
 }
 
 void ObjKibako2_SpawnCollectible(Actor_ObjKibako2* this, GameState_Play* play)
