@@ -137,6 +137,7 @@ build(oot)
 build(mm)
 
 add_actor(oot Obj_Tsubo   "oot/ovl/actors/Obj_Tsubo/Obj_Tsubo.c")
+add_actor(oot Obj_Kibako  "oot/ovl/actors/Obj_Kibako/Obj_Kibako.c")
 add_actor(oot Obj_Kibako2 "oot/ovl/actors/Obj_Kibako2/Obj_Kibako2.c")
 add_actor(oot En_Mag      "oot/ovl/actors/En_Mag/En_Mag.c")
 

@@ -288,7 +288,7 @@ void ObjTsubo_AirBreak(Actor_ObjTsubo* this, GameState_Play* play)
             sObjectIds[(this->actor.variable >> 8) & 1], D_80BA1B8C[(this->actor.variable >> 8) & 1]
         );
     }
-    SomethingPotBreak(play, &this->actor.world.pos, 30.0f, 4, 20, 50, 1);
+    SpawnSomeDust(play, &this->actor.world.pos, 30.0f, 4, 20, 50, 1);
 }
 
 void ObjTsubo_WaterBreak(Actor_ObjTsubo* this, GameState_Play* play)

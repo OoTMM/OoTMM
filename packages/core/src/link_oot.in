@@ -183,7 +183,7 @@ PreDraw1 = 0x80022438;
 PreDraw2 = 0x80022554;
 
 LoadObjectGi = 0x80838f6c;
-ActorEnableGrab = 0x80022d20;
+Actor_OfferCarry = 0x80022d20;
 ActorEnableTalk = 0x80022a68;
 ActorEnableTalkEx = 0x80022a34;
 ActorTalkedTo = 0x80022930;
@@ -206,7 +206,7 @@ ModelViewRotateZ = 0x800aad4c;
 ModelViewTranslate = 0x800aa7f4;
 ModelViewScale = 0x800aa8fc;
 
-SomethingPotBreak = 0x80026308;
+SpawnSomeDust = 0x80026308;
 
 Rand_ZeroOne = 0x800cdccc;
 Flags_GetTreasure = 0x8002060c;
