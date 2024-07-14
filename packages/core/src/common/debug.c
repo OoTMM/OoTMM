@@ -580,6 +580,9 @@ static void cheatAllItems(GameState_Play* play)
     gSave.inventory.items[ITS_MM_TRADE3] = ITEM_MM_PENDANT_OF_MEMORIES;
 
     gMmOwlFlags = 0x3ff; /* all owls statues */
+
+    MM_SET_EVENT_WEEK(EV_MM_WEEK_HEALED_WITCH_WOODS);
+    
 }
 #endif
 

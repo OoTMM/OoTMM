@@ -100,6 +100,7 @@
 #define EV_MM_WEEK_ENTERED_CLOCK_TOWN_NORTH     MM_EV(2,  5)
 #define EV_MM_WEEK_TOWN_FAIRY                   MM_EV(8,  7)
 #define EV_MM_WEEK_MONKEY_PUNISHED              MM_EV(9,  7)
+#define EV_MM_WEEK_HEALED_WITCH_WOODS           MM_EV(12, 3)
 #define EV_MM_WEEK_BOTTLE_RED_POTION            MM_EV(12, 4)
 #define EV_MM_WEEK_TOWN_GUARDS                  MM_EV(12, 5)
 #define EV_MM_WEEK_DRANK_CHATEAU_ROMANI         MM_EV(14, 3)
@@ -129,6 +130,7 @@
 #define EV_MM_WEEK_RECEIVED_ROOM_KEY            MM_EV(75, 4)
 #define EV_MM_WEEK_PAMELA_FATHER                MM_EV(75, 5)
 
+#define EV_MM_WEEK_WEEKEVENTREG_90_6            MM_EV(90, 6)
 
 #define EV_MM_WEEK_NOTEBOOK_MET_ANJU                        MM_EV(66, 0)
 #define EV_MM_WEEK_NOTEBOOK_MET_KAFEI                       MM_EV(66, 1)

@@ -8,6 +8,8 @@
 #include <combo/mm/types.h>
 #include <combo/common/ocarina.h>
 #include <combo/mm/object.h>
+#include <combo/mm/message.h>
+#include <combo/play/collision_context.h>
 
 #define ACTORCTX_FLAG_0             (1 << 0)
 #define ACTORCTX_FLAG_TELESCOPE_ON  (1 << 1)
@@ -470,12 +472,6 @@ typedef struct {
     /* 0x1 */ u8   ambienceId;
 } SequenceContext; /* size = 0x2 */
 
-typedef struct CollisionContext
-{
-    char unk[0x1470];
-}
-CollisionContext;
-
 typedef struct {
     /* 0x000 */ GameState state;
     /* 0x0A4 */ void* daytelopStaticFile;
@@ -552,7 +548,7 @@ typedef struct GameState_Play
     void*               actorCsCamList;
     void*               setupEntranceList;
     u16*                setupExitList;
-    void*               setupPathList;
+    Path*               setupPathList;
     void*               naviQuestHints;
     void*               sceneMaterialAnims;
     void*               specialEffects;
@@ -561,7 +557,7 @@ typedef struct GameState_Play
     s16                 worldCoverAlpha;
     s16                 bgCoverAlpha;
     u16                 nextEntrance;
-    s8                  unk_1887c;
+    s8                  bButtonAmmoPlusOne;
     s8                  unk_1887d;
     s8                  unk_1887e;
     u8                  transitionType;
