@@ -72,6 +72,7 @@ int     csmcFromItem(s16 gi);
 int     csmcEnabled(void);
 int     csmcEnabledSkulltula(void);
 int     csmcEnabledCow(void);
+int     csmcEnabledGrassPot(void);
 
 /* Chest */
 void    csmcChestInit(Actor* this, GameState_Play* play, s16 gi);
