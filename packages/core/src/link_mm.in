@@ -332,6 +332,8 @@ ActorShadow_DrawSquare = 0x800b4024;
 
 BgCheck_EntityRaycastDown4 = 0x800c411c;
 
+DynaPoly_DisableCollision = 0x800c62bc;
+
 Item_CollectibleDropTable = 0x800a8150;
 Item_CollectibleDropTable2 = 0x800a817c;
 Item_DropCollectible = 0x800a7730;
