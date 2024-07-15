@@ -30,6 +30,8 @@ Clock Town Keaton Grass Reward 8,                       grass,          NONE,   
 Clock Town Keaton Grass Reward 9,                       grass,          NONE,                   CLOCK_TOWN_NORTH,             0x80010,                    RUPEE_RED
 Clock Town Silver Rupee Chest,                          chest,          NONE,                   CLOCK_TOWN_EAST,              0x0a,                       RUPEE_SILVER
 Clock Town Postman Hat,                                 npc,            NONE,                   CLOCK_TOWN_EAST,              MASK_POSTMAN,               MASK_POSTMAN
+Clock Town East Small Crate 1,                          crate,          NONE,                   CLOCK_TOWN_EAST,              0x0000a,                    RUPEE_GREEN
+Clock Town East Small Crate 2,                          crate,          NONE,                   CLOCK_TOWN_EAST,              0x0000b,                    RECOVERY_HEART
 Clock Town East Wonder Item Target Left 1,              wonder,         NONE,                   CLOCK_TOWN_EAST,              0x0002a,                    RUPEE_GREEN
 Clock Town East Wonder Item Target Left 2,              wonder,         NONE,                   CLOCK_TOWN_EAST,              0x1002a,                    RUPEE_GREEN
 Clock Town East Wonder Item Target Left 3,              wonder,         NONE,                   CLOCK_TOWN_EAST,              0x2002a,                    RUPEE_GREEN
@@ -45,6 +47,7 @@ Clock Town Bank Reward 3,                               npc,            BANK_3, 
 Clock Town Rosa Sisters HP,                             npc,            NONE,                   CLOCK_TOWN_WEST,              ROSA_HEART_PIECE,           HEART_PIECE
 Clock Town Guru Guru Mask Bremen,                       npc,            NONE,                   LAUNDRY_POOL,                 MASK_BREMEN,                MASK_BREMEN
 Clock Town Stray Fairy,                                 npc,            NONE,                   LAUNDRY_POOL,                 STRAY_FAIRY_TOWN,           STRAY_FAIRY_TOWN
+Clock Town Laundry Pool Small Crate,                    crate,          NONE,                   LAUNDRY_POOL,                 0x00007,                    RUPEE_BLUE
 Clock Town Laundry Pool Grass 1,                        grass,          NONE,                   LAUNDRY_POOL,                 0x0000d,                    RANDOM
 Clock Town Laundry Pool Grass 2,                        grass,          NONE,                   LAUNDRY_POOL,                 0x0000e,                    RANDOM
 Clock Town Laundry Pool Grass 3,                        grass,          NONE,                   LAUNDRY_POOL,                 0x0000f,                    RANDOM

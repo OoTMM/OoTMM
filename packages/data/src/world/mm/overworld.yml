@@ -342,6 +342,8 @@
     "Clock Town East Wonder Item Basket 1": "true"
     "Clock Town East Wonder Item Basket 2": "true"
     "Clock Town East Wonder Item Basket 3": "true"
+    "Clock Town East Small Crate 1": "true"
+    "Clock Town East Small Crate 2": "true"
 "Clock Town East Postbox":
   region: NONE
   exits:
@@ -393,6 +395,7 @@
   locations:
     "Clock Town Guru Guru Mask Bremen": "soul_guru_guru && (is_night1 || is_night2)"
     "Clock Town Stray Fairy": "is_day"
+    "Clock Town Laundry Pool Small Crate": "true"
     "Clock Town Laundry Pool Grass 1": "true"
     "Clock Town Laundry Pool Grass 2": "true"
     "Clock Town Laundry Pool Grass 3": "true"
