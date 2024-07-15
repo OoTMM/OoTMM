@@ -1078,6 +1078,9 @@ Cucco Shack Wonder Item 3,                              wonder,         NONE,   
 Cucco Shack Wonder Item 4,                              wonder,         NONE,                   CUCCO_SHACK,                  0x00012,                    RUPEE_GREEN
 Cucco Shack Wonder Item 5,                              wonder,         NONE,                   CUCCO_SHACK,                  0x10012,                    RUPEE_GREEN
 Cucco Shack Wonder Item 6,                              wonder,         NONE,                   CUCCO_SHACK,                  0x20012,                    RUPEE_GREEN
+Cucco Shack Crate 1,                                    crate,          NONE,                   CUCCO_SHACK,                  0x0000e,                    NOTHING
+Cucco Shack Crate 2,                                    crate,          NONE,                   CUCCO_SHACK,                  0x0000f,                    NOTHING
+Cucco Shack Crate 3,                                    crate,          NONE,                   CUCCO_SHACK,                  0x00016,                    ARROWS_10
 Doggy Racetrack Chest,                                  chest,          NONE,                   DOG_RACETRACK,                0x00,                       RUPEE_PURPLE
 Doggy Racetrack HP,                                     npc,            NONE,                   DOG_RACETRACK,                DOG_LADY_HEART_PIECE,       HEART_PIECE
 Doggy Racetrack Pot 1,                                  pot,            NONE,                   DOG_RACETRACK,                0x0009,                     RUPEE_BLUE

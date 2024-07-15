@@ -166,6 +166,8 @@ const ACTORS_MM = {
   EN_ELF: 0x10,
   EN_HIT_TAG: 0x265,
   EN_INVISIBLE_RUPPE: 0x2af,
+  OBJ_KIBAKO: 0x81,
+  OBJ_KIBAKO2: 0xe5,
   //DOOR_ANA: 0x55,
 };
 
@@ -307,7 +309,45 @@ const ITEM00_DROPS_MM = [
   'RECOVERY_HEART',
   '???',
   'NUTS_10',
+  '???',
+  '???',
+  'STRAY_FAIRY',
+  '???',
+  '???',
+  '???',
+  '???',
+  '???',
 ];
+
+const MM_ITEM00_DROP_COLLECTIBLE_TABLE = [
+  -1, 0, 1, -1,
+  0x02, 0x14, -1, 0x13,
+  0x1c, 0x1d, 0x3, 0x15,
+  0x6, 0x7, 0xf, 0xe,
+  0x12, 0x1a, -1, 0x17,
+  -1, 0x4, -1, -1,
+  -1, 0xd, -1, -1,
+  -1, -1, 5, 8,
+];
+
+function mmCollectibleDrop(index: number) {
+  let index00: number;
+  let item: string;
+
+  if (index < 0 || index >= MM_ITEM00_DROP_COLLECTIBLE_TABLE.length) {
+    index00 = -1;
+  } else {
+    index00 = MM_ITEM00_DROP_COLLECTIBLE_TABLE[index];
+  }
+
+  if (index00 === -1 || index00 >= ITEM00_DROPS_MM.length) {
+    item = 'NOTHING';
+  } else {
+    item = ITEM00_DROPS_MM[index00];
+  }
+
+  return item;
+}
 
 const FLYING_POT_DROPS = [
   'RECOVERY_HEART',
@@ -1096,41 +1136,25 @@ function outputCratesPoolMm(roomActors: RoomActors[]) {
   for (const room of roomActors) {
     for (const actor of room.actors) {
       const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
-      if (actor.typeId === ACTORS_OOT.OBJ_KIBAKO || actor.typeId === ACTORS_OOT.OBJ_KIBAKO2) {
+      if (actor.typeId === ACTORS_MM.OBJ_KIBAKO || actor.typeId === ACTORS_MM.OBJ_KIBAKO2) {
         if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
           console.log('');
-          console.log(`### Scene: ${scenesById('oot')[room.sceneId]}`);
+          console.log(`### Scene: ${scenesById('mm')[room.sceneId]}`);
           lastSceneId = room.sceneId;
           lastSetupId = room.setupId;
         }
 
         /* Large crate */
-        if (actor.typeId === ACTORS_OOT.OBJ_KIBAKO2) {
-          if (actor.params !== 0xffff)
-            continue;
-          const itemId = actor.rx & 0xff;
-          let item: string;
-          if (itemId >= ITEM00_DROPS.length) {
-            item = 'NOTHING';
-          } else {
-            item = ITEM00_DROPS[actor.rx & 0xff];
-          }
+        if (actor.typeId === ACTORS_MM.OBJ_KIBAKO2) {
+          if (actor.params & 0x8000) continue;
+          const item = mmCollectibleDrop(actor.params & 0x3f);
+          if (item === 'STRAY_FAIRY') continue;
           console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Large Crate ${decPad(actor.actorId + 1, 2)},        crate,            NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
         }
 
         /* Small crate */
-        if (actor.typeId === ACTORS_OOT.OBJ_KIBAKO) {
-          let item: string;
-          if (actor.params === 0xffff) {
-            item = 'NOTHING';
-          } else {
-            const itemId = actor.params & 0xff;
-            if (itemId >= ITEM00_DROPS.length) {
-              item = 'NOTHING';
-            } else {
-              item = ITEM00_DROPS[actor.params & 0xff];
-            }
-          }
+        if (actor.typeId === ACTORS_MM.OBJ_KIBAKO) {
+          const item = mmCollectibleDrop(actor.params & 0x3f);
           console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Small Crate ${decPad(actor.actorId + 1, 2)},        crate,            NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
         }
       }
@@ -1329,7 +1353,8 @@ async function run() {
   //outputShotSunOot(ootRooms);
   //outputShotSunOot(mqRooms);
   //outputGrottosMm(mmRooms);
-  outputCratesPoolOot(ootRooms);
+  //outputCratesPoolOot(ootRooms);
+  outputCratesPoolMm(mmRooms);
 }
 
 run().catch(e => {
