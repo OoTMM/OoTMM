@@ -364,6 +364,15 @@ static void ObjKibako2_Alias(Actor_ObjKibako2* this)
 #if defined(GAME_MM)
 static void ObjKibako2_Alias(Actor_ObjKibako2* this)
 {
+    Xflag* xf;
+
+    xf = &this->xflag;
+    switch (xf->sceneId)
+    {
+    case SCE_MM_GORON_VILLAGE_SPRING:
+        xf->sceneId = SCE_MM_GORON_VILLAGE_WINTER;
+        break;
+    }
 }
 #endif
 
