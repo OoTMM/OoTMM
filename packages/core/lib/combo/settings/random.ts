@@ -285,11 +285,11 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
     base.csmcHearts = booleanWeighted(random, 0.75);
   }
   switch (randomInt(random, 4)) {
-  case 0;
-  base.csmcGrassPot - false;
+  case 0:
+  base.csmcGrassPot = false;
     break;
-  case 1;
-  base.csmcGrassPot - true;
+  case 1:
+  base.csmcGrassPot = true;
     break;
   default:
     base.csmcGrassPot = booleanWeighted(random, 0.5);
