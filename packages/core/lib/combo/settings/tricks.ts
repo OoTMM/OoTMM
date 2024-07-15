@@ -324,6 +324,11 @@ export const TRICKS: Tricks = {
     name: "Enter Zelda's Courtyard using Age Swap in Ganon's Castle",
     tooltip: "Exiting Ganon's Castle as Child puts you in front of the crawlspace to Zelda. This will allow Age Swap to be logical for doing this.",
   },
+  OOT_BOTW_MQ_BACKFLIP: {
+    game: 'oot',
+    name: "Backflip Over Gap to Reach BotW MQ's Main Room's Center",
+    tooltip: "Makes reachable the center of the main room without Zelda's Lullaby (that opens gates) or Hover Boots.",
+  },
   MM_LENS: {
     game: 'mm',
     name: 'Fewer Lens Requirements (MM)',
