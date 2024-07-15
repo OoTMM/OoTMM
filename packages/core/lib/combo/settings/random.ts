@@ -278,7 +278,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
 
   base.sunSongMm = booleanWeighted(random, 0.5);
   base.elegyOot = booleanWeighted(random, 0.5);
-  
+
   /* CAMC settings */
   base.csmc = sampleWeighted(random, { always: 18, agony: 1, never: 1 });
   if (base.csmc !== 'never') {
