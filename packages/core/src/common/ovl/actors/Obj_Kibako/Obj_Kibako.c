@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 #include <combo/global.h>
+#include <combo/custom.h>
 #include "Obj_Kibako.h"
 
 #define FLAGS (ACTOR_FLAG_OOT_4 | ACTOR_FLAG_OOT_26)
@@ -45,6 +46,59 @@ static void ObjKibako_InitXflag(Actor_ObjKibako* this, GameState_Play* play)
     /* Detect xflags */
     comboXflagItemOverride(&o, &this->xflag, 0);
     this->isExtended = !!(o.gi && !comboXflagsGet(&this->xflag));
+}
+
+static int ObjKibako_CsmcType(Actor_ObjKibako* this)
+{
+    ComboItemOverride o;
+
+    if (!ObjKibako_IsExtended(this))
+        o.gi = GI_NONE;
+    else
+        comboXflagItemOverride(&o, &this->xflag, 0);
+
+    if (!csmcEnabled())
+        return o.gi ? CSMC_MAJOR : CSMC_NORMAL;
+
+    return csmcFromItem(o.gi);
+}
+
+static void ObjKibako_DrawWithTexture(Actor_ObjKibako* this, GameState_Play* play, u32 dlist, u32 baseTex)
+{
+    int type;
+    u32 customVrom;
+    void* data;
+
+    type = ObjKibako_CsmcType(this);
+    switch (type)
+    {
+    case CSMC_BOSS_KEY: customVrom = CUSTOM_POT_BOSSKEY_SIDE_ADDR; break; /* TODO: Need a texture */
+    case CSMC_MAJOR: customVrom = CUSTOM_CHEST_MAJOR_FRONT_ADDR; break;
+    case CSMC_KEY: customVrom = CUSTOM_CHEST_KEY_FRONT_ADDR; break;
+    case CSMC_SPIDER: customVrom = CUSTOM_CHEST_SPIDER_FRONT_ADDR; break;
+    case CSMC_FAIRY: customVrom = CUSTOM_CHEST_FAIRY_FRONT_ADDR; break;
+    case CSMC_HEART: customVrom = CUSTOM_CHEST_HEART_FRONT_ADDR; break;
+    case CSMC_SOUL: customVrom = CUSTOM_CHEST_SOUL_FRONT_ADDR; break;
+    case CSMC_MAP_COMPASS: customVrom = CUSTOM_CHEST_MAP_FRONT_ADDR; break;
+    default: customVrom = 0; break;
+    }
+
+    if (customVrom)
+    {
+        data = comboCacheGetFile(customVrom);
+        if (!data)
+            return;
+    }
+    else
+    {
+        data = (void*)(gSegments[baseTex >> 24] + (baseTex & 0xffffff));
+    }
+
+    /* Draw */
+    OPEN_DISPS(play->gs.gfx);
+    gSPSegment(POLY_OPA_DISP++, 0x08, data);
+    CLOSE_DISPS();
+    Gfx_DrawDListOpa(play, (void*)dlist);
 }
 
 #if defined(GAME_OOT)
@@ -315,7 +369,7 @@ void ObjKibako_Update(Actor_ObjKibako* this, GameState_Play* play)
 
 void ObjKibako_Draw(Actor_ObjKibako* this, GameState_Play* play)
 {
-    Gfx_DrawDListOpa(play, SEGADDR_CRATE_DL);
+    ObjKibako_DrawWithTexture(this, play, (u32)SEGADDR_CRATE_DL, 0x05011ca0);
 }
 #endif
 
@@ -372,6 +426,8 @@ static s16 sObjectIds[] = { OBJECT_GAMEPLAY_DANGEON_KEEP, OBJECT_KIBAKO };
 static Gfx* sKakeraDisplayLists[] = { SEGADDR_KEEP_FRAGMENT_DL, SEGADDR_OBJ_FRAGMENT_DL };
 
 static Gfx* sDisplayLists[] = { SEGADDR_KEEP_CRATE_DL, SEGADDR_OBJ_CRATE_DL };
+
+static u32 sTextures[] = { 0x050122c0, 0x06000000 };
 
 static InitChainEntry sInitChain[] = {
     ICHAIN_F32_DIV1000(gravity, -1500, ICHAIN_CONTINUE),
@@ -724,7 +780,7 @@ void ObjKibako_Update(Actor_ObjKibako* this, GameState_Play* play)
 
 void ObjKibako_Draw(Actor_ObjKibako* this, GameState_Play* play)
 {
-    Gfx_DrawDListOpa(play, sDisplayLists[KIBAKO_BANK_INDEX(this)]);
+    ObjKibako_DrawWithTexture(this, play, (u32)sDisplayLists[KIBAKO_BANK_INDEX(this)], sTextures[KIBAKO_BANK_INDEX(this)]);
 }
 #endif
 
