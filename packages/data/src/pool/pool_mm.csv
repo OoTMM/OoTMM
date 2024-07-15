@@ -781,6 +781,14 @@ Swamp Spider House Pot Jar Room 4,                      pot,            NONE,   
 Swamp Spider House Pot Jar Room 5,                      pot,            NONE,                   SPIDER_HOUSE_SWAMP,           0x0416,                     RECOVERY_HEART
 Swamp Spider House Pot Jar Room 6,                      pot,            NONE,                   SPIDER_HOUSE_SWAMP,           0x0417,                     RECOVERY_HEART
 Swamp Spider House Pot Jar Room 7,                      pot,            NONE,                   SPIDER_HOUSE_SWAMP,           0x0418,                     RECOVERY_HEART
+Swamp Spider House Crate Gold 1,                        crate,          NONE,                   SPIDER_HOUSE_SWAMP,           0x00207,                    NOTHING
+Swamp Spider House Crate Gold 2,                        crate,          NONE,                   SPIDER_HOUSE_SWAMP,           0x00208,                    NOTHING
+Swamp Spider House Crate Monument 1,                    crate,          NONE,                   SPIDER_HOUSE_SWAMP,           0x00305,                    NOTHING
+Swamp Spider House Crate Monument 2,                    crate,          NONE,                   SPIDER_HOUSE_SWAMP,           0x00306,                    NOTHING
+Swamp Spider House Crate Monument 3,                    crate,          NONE,                   SPIDER_HOUSE_SWAMP,           0x00307,                    NOTHING
+Swamp Spider House Crate Monument 4,                    crate,          NONE,                   SPIDER_HOUSE_SWAMP,           0x00308,                    NOTHING
+Swamp Spider House Crate Monument 5,                    crate,          NONE,                   SPIDER_HOUSE_SWAMP,           0x00309,                    NOTHING
+Swamp Spider House Crate Monument 6,                    crate,          NONE,                   SPIDER_HOUSE_SWAMP,           0x0030a,                    NOTHING
 Swamp Spider House Wonder Item Pillars 01,              wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x0010a,                    RUPEE_GREEN
 Swamp Spider House Wonder Item Pillars 02,              wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x1010a,                    RUPEE_GREEN
 Swamp Spider House Wonder Item Pillars 03,              wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x2010a,                    RUPEE_GREEN
