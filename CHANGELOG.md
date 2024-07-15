@@ -8,6 +8,10 @@ All notable changes to this project will be documented in this file.
 
 - The boat cruise is now faster if you are not playing the archery.
 
+### Changed
+
+- Grass and Pot CAMC is now its own setting and separated from the rest.
+
 ### Fixed
 
 - Minor collection delay for Bolero.

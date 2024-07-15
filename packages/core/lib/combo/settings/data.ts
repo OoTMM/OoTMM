@@ -1110,7 +1110,7 @@ export const SETTINGS = [{
   category: 'main.misc',
   type: 'boolean',
   default: false,
-  description: 'Enables CAMC for shuffled Grass and Pots',
+  description: 'Enables CAMC for shuffled Grass and Pots. This is still affected by the Stone of Agony setting.',
   cond: (x: any) => x.shuffleGrassOot || x.shuffleGrassMm || x.shufflePotsOot || x.shufflePotsMm,
 }, {
   key: 'blastMaskCooldown',
