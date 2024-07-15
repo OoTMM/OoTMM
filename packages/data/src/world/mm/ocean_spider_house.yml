@@ -65,6 +65,7 @@
     "Ocean Spider House Pot Storage Top 1": "has_fire_sticks && can_hookshot_short"
     "Ocean Spider House Pot Storage Top 2": "has_fire_sticks && can_hookshot_short"
     "Ocean Spider House Pot Storage Top 3": "has_fire_sticks && can_hookshot_short"
+    "Ocean Spider House Crate": "has_fire_sticks"
     "Ocean Spider House Wonder Item Masks 1": "hit_target_range_close"
     "Ocean Spider House Wonder Item Masks 2": "hit_target_range_close"
     "Ocean Spider House Wonder Item Masks 3": "hit_target_range_close"

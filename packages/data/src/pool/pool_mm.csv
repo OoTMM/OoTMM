@@ -1311,6 +1311,7 @@ Ocean Spider House Pot Storage Top 1,                   pot,            NONE,   
 Ocean Spider House Pot Storage Top 2,                   pot,            NONE,                   SPIDER_HOUSE_OCEAN,           0x050f,                     RECOVERY_HEART
 Ocean Spider House Pot Storage Top 3,                   pot,            NONE,                   SPIDER_HOUSE_OCEAN,           0x0510,                     RECOVERY_HEART
 Ocean Spider House Pot Storage 4,                       pot,            NONE,                   SPIDER_HOUSE_OCEAN,           0x0511,                     MAGIC_JAR_SMALL
+Ocean Spider House Crate,                               crate,          NONE,                   SPIDER_HOUSE_OCEAN,           0x00504,                    NOTHING
 Ocean Spider House Wonder Item Masks 1,                 wonder,         NONE,                   SPIDER_HOUSE_OCEAN,           0x00100,                    RUPEE_GREEN
 Ocean Spider House Wonder Item Masks 2,                 wonder,         NONE,                   SPIDER_HOUSE_OCEAN,           0x10100,                    RUPEE_GREEN
 Ocean Spider House Wonder Item Masks 3,                 wonder,         NONE,                   SPIDER_HOUSE_OCEAN,           0x20100,                    RUPEE_GREEN
