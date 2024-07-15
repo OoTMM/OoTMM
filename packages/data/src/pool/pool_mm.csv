@@ -1728,6 +1728,9 @@ Pirate Fortress Interior Aquarium,                      chest,          NONE,   
 Pirate Fortress Interior Silver Rupee Chest,            chest,          NONE,                   PIRATE_FORTRESS_INTERIOR,     0x03,                       RUPEE_SILVER
 Pirate Fortress Interior Lower Chest,                   chest,          NONE,                   PIRATE_FORTRESS_EXTERIOR,     0x00,                       RUPEE_RED
 Pirate Fortress Interior Upper Chest,                   chest,          NONE,                   PIRATE_FORTRESS_EXTERIOR,     0x01,                       RUPEE_RED
+Pirate Fortress Interior Crate Entrance,                crate,          NONE,                   PIRATE_FORTRESS_EXTERIOR,     0x0001b,                    NOTHING
+Pirate Fortress Interior Crate Middle 1,                crate,          NONE,                   PIRATE_FORTRESS_EXTERIOR,     0x0001c,                    NOTHING
+Pirate Fortress Interior Crate Middle 2,                crate,          NONE,                   PIRATE_FORTRESS_EXTERIOR,     0x0001d,                    NOTHING
 Pirate Fortress Interior Pot Beehive 1,                 pot,            NONE,                   PIRATE_FORTRESS_INTERIOR,     0x030c,                     ARROWS_10
 Pirate Fortress Interior Pot Beehive 2,                 pot,            NONE,                   PIRATE_FORTRESS_INTERIOR,     0x030d,                     ARROWS_10
 Pirate Fortress Interior Pot Chest Aquarium 1,          pot,            NONE,                   PIRATE_FORTRESS_INTERIOR,     0x0603,                     RECOVERY_HEART

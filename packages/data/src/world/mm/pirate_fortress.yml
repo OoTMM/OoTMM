@@ -94,6 +94,9 @@
   locations:
     "Pirate Fortress Interior Lower Chest": "true"
     "Pirate Fortress Interior Upper Chest": "can_hookshot || short_hook_anywhere || (has_mask_goron && trick(MM_OOB_MOVEMENT))"
+    "Pirate Fortress Interior Crate Entrance": "true"
+    "Pirate Fortress Interior Crate Middle 1": "can_evade_gerudo"
+    "Pirate Fortress Interior Crate Middle 2": "can_evade_gerudo"
     "Pirate Fortress Interior Heart 1": "can_hookshot || short_hook_anywhere || has_hover_boots"
     "Pirate Fortress Interior Heart 2": "can_hookshot || short_hook_anywhere || has_hover_boots"
     "Pirate Fortress Interior Heart 3": "can_hookshot || short_hook_anywhere || has_hover_boots"
