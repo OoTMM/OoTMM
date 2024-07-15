@@ -141,14 +141,13 @@ endfunction()
 build(oot)
 build(mm)
 
-add_actor_common(Obj_Kibako2 "common/ovl/actors/Obj_Kibako2/Obj_Kibako2.c")
+add_actor_common(Obj_Kibako   "common/ovl/actors/Obj_Kibako/Obj_Kibako.c")
+add_actor_common(Obj_Kibako2  "common/ovl/actors/Obj_Kibako2/Obj_Kibako2.c")
 
 add_actor(oot Obj_Tsubo   "oot/ovl/actors/Obj_Tsubo/Obj_Tsubo.c")
-add_actor(oot Obj_Kibako  "oot/ovl/actors/Obj_Kibako/Obj_Kibako.c")
 add_actor(oot En_Mag      "oot/ovl/actors/En_Mag/En_Mag.c")
 
 add_actor(mm Obj_Tsubo          "mm/ovl/actors/Obj_Tsubo/Obj_Tsubo.c")
-add_actor(mm Obj_Kibako         "mm/ovl/actors/Obj_Kibako/Obj_Kibako.c")
 add_actor(mm En_Hs              "mm/ovl/actors/En_Hs/En_Hs.c")
 add_actor(mm En_Nwc             "mm/ovl/actors/En_Nwc/En_Nwc.c")
 add_actor(mm En_Test4           "mm/ovl/actors/En_Test4/En_Test4.c")

@@ -30,6 +30,8 @@
     "Jabu-Jabu Pot Alcove 1": "true"
     "Jabu-Jabu Pot Alcove 2": "true"
     "Jabu-Jabu Pot Alcove 3": "true"
+    "Jabu-Jabu Small Crate 1": "true"
+    "Jabu-Jabu Small Crate 2": "true"
 "Jabu-Jabu Pre-Boss":
   dungeon: JJ
   exits:

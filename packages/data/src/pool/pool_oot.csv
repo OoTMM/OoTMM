@@ -1063,6 +1063,8 @@ Jabu-Jabu Pot Muscle Block Room 5,                          pot,            NONE
 Jabu-Jabu Pot Alcove 1,                                     pot,            NONE,                 INSIDE_JABU_JABU,               0x0e07,                     DEKU_SEEDS_5
 Jabu-Jabu Pot Alcove 2,                                     pot,            NONE,                 INSIDE_JABU_JABU,               0x0e08,                     FAIRY
 Jabu-Jabu Pot Alcove 3,                                     pot,            NONE,                 INSIDE_JABU_JABU,               0x0e09,                     DEKU_SEEDS_5
+Jabu-Jabu Small Crate 1,                                    crate,          NONE,                 INSIDE_JABU_JABU,               0x00106,                    NOTHING
+Jabu-Jabu Small Crate 2,                                    crate,          NONE,                 INSIDE_JABU_JABU,               0x00107,                    RECOVERY_HEART
 Jabu-Jabu Boss Container,                                   collectible,    NONE,                 LAIR_BARINADE,                  0x1f,                       HEART_CONTAINER
 Jabu-Jabu Boss,                                             npc,            NONE,                 LAIR_BARINADE,                  BLUE_WARP_BARINADE,         STONE_SAPPHIRE
 Jabu-Jabu Boss Pot 1,                                       pot,            NONE,                 LAIR_BARINADE,                  0x0101,                     RECOVERY_HEART
