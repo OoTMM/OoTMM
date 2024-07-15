@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/csmc.h>
 #include "Obj_Kibako.h"
 
 #define FLAGS (ACTOR_FLAG_MM_10 | ACTOR_FLAG_MM_CAN_PRESS_SWITCH)

@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 #include <combo/global.h>
+#include <combo/custom.h>
 #include "Obj_Kibako2.h"
 
 #define FLAGS 0
@@ -461,9 +462,103 @@ static void ObjKibako2_Update(Actor_ObjKibako2* this, GameState_Play* play)
     this->actionFunc(this, play);
 }
 
+static const Gfx sTextureLoaderCI4[] = {
+    gsDPSetTextureLUT(G_TT_RGBA16),
+    gsSPTexture(0xffff, 0xffff, 0, G_TX_RENDERTILE, G_ON),
+    gsDPLoadTextureBlock_4b(0x09000000, G_IM_FMT_CI, 32, 64, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 5, 6, 0, 0),
+    gsDPLoadTLUT(16, 0x100, 0x06000000),
+    gsSPEndDisplayList(),
+};
+
+static const Gfx sTextureLoaderRGBA16[] = {
+    gsDPSetTextureLUT(G_TT_NONE),
+    gsSPTexture(0xffff, 0xffff, 0, G_TX_RENDERTILE, G_ON),
+    gsDPLoadTextureBlock(0x09000000, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_CLAMP, 5, 6, 15, 0),
+    gsSPEndDisplayList(),
+};
+
+static int ObjKibako2_CsmcType(Actor_ObjKibako2* this)
+{
+    ComboItemOverride o;
+
+    if (!ObjKibako2_IsShuffled(this))
+        o.gi = GI_NONE;
+    else
+        comboXflagItemOverride(&o, &this->xflag, 0);
+
+    if (!csmcEnabled())
+        return o.gi ? CSMC_MAJOR : CSMC_NORMAL;
+
+    return csmcFromItem(o.gi);
+}
+
+static void ObjKibako2_PreDraw(GameState_Play* play, const Gfx* loader, void* tex1, void* tex2)
+{
+    Gfx* gfx;
+    Gfx* gfxEnd;
+
+    gfx = GRAPH_ALLOC(play->gs.gfx, sizeof(Gfx) * 4);
+    gfxEnd = gfx;
+    gSPSegment(gfxEnd++, 0x09, tex1);
+    gSPBranchList(gfxEnd++, loader);
+    gSPSegment(gfxEnd++, 0x09, tex2);
+    gSPBranchList(gfxEnd++, loader);
+
+    OPEN_DISPS(play->gs.gfx);
+    gSPSegment(POLY_OPA_DISP++, 0x08, gfx);
+    CLOSE_DISPS();
+}
+
+static int ObjKibako2_PreDrawDefaultTexture(Actor_ObjKibako2* this, GameState_Play* play)
+{
+    void* tex1;
+    void* tex2;
+
+    tex1 = (void*)gSegments[0x06] + 0x020;
+    tex2 = (void*)gSegments[0x06] + 0x420;
+    ObjKibako2_PreDraw(play, sTextureLoaderCI4, tex1, tex2);
+    return TRUE;
+}
+
+static int ObjKibako2_PreDrawCustomTexture(Actor_ObjKibako2* this, GameState_Play* play, u32 customVrom)
+{
+    void* data;
+
+    data = comboCacheGetFile(customVrom);
+    if (!data)
+        return FALSE;
+
+    ObjKibako2_PreDraw(play, sTextureLoaderRGBA16, data, data);
+    return TRUE;
+}
+
 static void ObjKibako2_Draw(Actor_ObjKibako2* this, GameState_Play* play)
 {
-    Gfx_DrawDListOpa(play, SEGADDR_CRATE_DL);
+    int type;
+    int ret;
+    u32 customVrom;
+
+    type = ObjKibako2_CsmcType(this);
+    switch (type)
+    {
+    case CSMC_BOSS_KEY: customVrom = CUSTOM_POT_BOSSKEY_SIDE_ADDR; break; /* TODO: Need a texture */
+    case CSMC_MAJOR: customVrom = CUSTOM_CHEST_MAJOR_FRONT_ADDR; break;
+    case CSMC_KEY: customVrom = CUSTOM_CHEST_KEY_FRONT_ADDR; break;
+    case CSMC_SPIDER: customVrom = CUSTOM_CHEST_SPIDER_FRONT_ADDR; break;
+    case CSMC_FAIRY: customVrom = CUSTOM_CHEST_FAIRY_FRONT_ADDR; break;
+    case CSMC_HEART: customVrom = CUSTOM_CHEST_HEART_FRONT_ADDR; break;
+    case CSMC_SOUL: customVrom = CUSTOM_CHEST_SOUL_FRONT_ADDR; break;
+    case CSMC_MAP_COMPASS: customVrom = CUSTOM_CHEST_MAP_FRONT_ADDR; break;
+    default: customVrom = 0; break;
+    }
+
+    if (customVrom)
+        ret = ObjKibako2_PreDrawCustomTexture(this, play, customVrom);
+    else
+        ret = ObjKibako2_PreDrawDefaultTexture(this, play);
+
+    if (ret)
+        Gfx_DrawDListOpa(play, SEGADDR_CRATE_DL);
 }
 
 ActorInit Obj_Kibako2_InitVars = {
