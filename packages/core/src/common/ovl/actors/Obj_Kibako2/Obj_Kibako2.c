@@ -5,14 +5,19 @@
 
 #define FLAGS 0
 
+static int ObjKibako2_IsShuffled(Actor_ObjKibako2* this)
+{
+    if (!this->isExtended || comboXflagsGet(&this->xflag))
+        return 0;
+    return 1;
+}
+
 #if defined(GAME_OOT)
 # define SEGADDR_COLLIDER       ((void*)0x06000b70)
 # define SEGADDR_CRATE_DL       ((void*)0x06000960)
 # define SEGADDR_FRAGMENT_DL    ((void*)0x06001000)
-void ObjKibako2_Init(Actor_ObjKibako2* this, GameState_Play* play);
+
 void ObjKibako2_Destroy(Actor_ObjKibako2* this, GameState_Play* play);
-void ObjKibako2_Update(Actor_ObjKibako2* this, GameState_Play* play);
-void ObjKibako2_Draw(Actor_ObjKibako2* this, GameState_Play* play);
 void ObjKibako2_Idle(Actor_ObjKibako2* this, GameState_Play* play);
 void ObjKibako2_Kill(Actor_ObjKibako2* this, GameState_Play* play);
 
@@ -42,13 +47,6 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_F32(uncullZoneScale, 500, ICHAIN_CONTINUE),
     ICHAIN_F32(uncullZoneDownward, 1000, ICHAIN_STOP),
 };
-
-static void ObjKibako2_InitCollider(Actor_ObjKibako2* this, GameState_Play* play)
-{
-    Collider_InitCylinder(play, &this->collider);
-    Collider_SetCylinder(play, &this->collider, &this->dyna.actor, &sCylinderInit);
-    Collider_UpdateCylinder(&this->dyna.actor, &this->collider);
-}
 
 void ObjKibako2_Break(Actor_ObjKibako2* this, GameState_Play* play)
 {
@@ -89,13 +87,6 @@ void ObjKibako2_Break(Actor_ObjKibako2* this, GameState_Play* play)
     SpawnSomeDust(play, thisPos, 90.0f, 6, 100, 160, 1);
 }
 
-static int ObjKibako2_IsShuffled(Actor_ObjKibako2* this)
-{
-    if (!this->isExtended || comboXflagsGet(&this->xflag))
-        return 0;
-    return 1;
-}
-
 void ObjKibako2_SpawnCollectible(Actor_ObjKibako2* this, GameState_Play* play)
 {
     s16 itemDropped;
@@ -112,42 +103,6 @@ void ObjKibako2_SpawnCollectible(Actor_ObjKibako2* this, GameState_Play* play)
     if (itemDropped >= 0 && itemDropped < ITEM00_MAX) {
         Item_DropCollectible(play, &this->dyna.actor.world.pos, itemDropped | (collectibleFlagTemp << 8));
     }
-}
-
-static void ObjKibako2_Alias(Actor_ObjKibako2* this)
-{
-}
-
-void ObjKibako2_Init(Actor_ObjKibako2* this, GameState_Play* play)
-{
-    ComboItemOverride o;
-    CollisionHeader* colHeader;
-    u32 bgId;
-
-    /* Set the extended properties */
-    this->xflag.sceneId = play->sceneId;
-    this->xflag.setupId = g.sceneSetupId;
-    this->xflag.roomId = this->dyna.actor.room;
-    this->xflag.sliceId = 0;
-    this->xflag.id = this->dyna.actor.actorIndex;
-
-    /* Fix the aliases */
-    ObjKibako2_Alias(this);
-
-    /* Detect xflags */
-    comboXflagItemOverride(&o, &this->xflag, 0);
-    this->isExtended = !!(o.gi && !comboXflagsGet(&this->xflag));
-
-    colHeader = NULL;
-    DynaPolyActor_Init(&this->dyna, 0);
-    Actor_ProcessInitChain(&this->dyna.actor, sInitChain);
-    ObjKibako2_InitCollider(this, play);
-    CollisionHeader_GetVirtual(SEGADDR_COLLIDER, &colHeader);
-    bgId = DynaPoly_SetBgActor(play, &play->colCtx.dyna, &this->dyna.actor, colHeader);
-    this->dyna.bgId = bgId;
-    this->collectibleFlag = this->dyna.actor.home.rot.z & 0x3F;
-    this->actionFunc = ObjKibako2_Idle;
-    this->dyna.actor.home.rot.z = this->dyna.actor.world.rot.z = this->dyna.actor.shape.rot.z = this->dyna.actor.world.rot.x = this->dyna.actor.shape.rot.x = 0;
 }
 
 void ObjKibako2_Destroy(Actor_ObjKibako2* this, GameState_Play* play)
@@ -188,30 +143,6 @@ void ObjKibako2_Kill(Actor_ObjKibako2* this, GameState_Play* play) {
     ObjKibako2_SpawnCollectible(this, play);
     Actor_Kill(&this->dyna.actor);
 }
-
-void ObjKibako2_Update(Actor_ObjKibako2* this, GameState_Play* play)
-{
-    this->actionFunc(this, play);
-}
-
-void ObjKibako2_Draw(Actor_ObjKibako2* this, GameState_Play* play)
-{
-    Gfx_DrawDListOpa(play, SEGADDR_CRATE_DL);
-}
-
-ActorInit Obj_Kibako2_InitVars = {
-    AC_OBJ_KIBAKO2,
-    ACTORCAT_BG,
-    FLAGS,
-    OBJECT_KIBAKO2,
-    sizeof(Actor_ObjKibako2),
-    (ActorFunc)ObjKibako2_Init,
-    (ActorFunc)ObjKibako2_Destroy,
-    (ActorFunc)ObjKibako2_Update,
-    (ActorFunc)ObjKibako2_Draw,
-};
-
-OVL_ACTOR_INFO(AC_OBJ_KIBAKO2, Obj_Kibako2_InitVars);
 #endif
 
 #if defined(GAME_MM)
@@ -231,10 +162,7 @@ typedef enum
 }
 Actor_ObjKibako2Contents;
 
-void ObjKibako2_Init(Actor_ObjKibako2* this, GameState_Play* play);
 void ObjKibako2_Destroy(Actor_ObjKibako2* this, GameState_Play* play);
-void ObjKibako2_Update(Actor_ObjKibako2* this, GameState_Play* play);
-void ObjKibako2_Draw(Actor_ObjKibako2* this, GameState_Play* play);
 void ObjKibako2_Idle(Actor_ObjKibako2* this, GameState_Play* play);
 void ObjKibako2_Kill(Actor_ObjKibako2* this, GameState_Play* play);
 
@@ -312,8 +240,16 @@ void ObjKibako2_Break(Actor_ObjKibako2* this, GameState_Play* play)
     SpawnSomeDust(play, thisPos, 90.0f, 6, 100, 160, 1);
 }
 
-void ObjKibako2_SpawnCollectible(Actor_ObjKibako2* this, GameState_Play* play) {
+void ObjKibako2_SpawnCollectible(Actor_ObjKibako2* this, GameState_Play* play)
+{
     s32 dropItem00Id;
+
+    if (ObjKibako2_IsShuffled(this))
+    {
+        EnItem00_DropCustom(play, &this->dyna.actor.world.pos, &this->xflag);
+        return;
+
+    }
 
     dropItem00Id = Item_CollectibleDropTable(KIBAKO2_COLLECTIBLE_ID(this));
     if (dropItem00Id > ITEM00_NO_DROP) {
@@ -322,7 +258,8 @@ void ObjKibako2_SpawnCollectible(Actor_ObjKibako2* this, GameState_Play* play) {
     }
 }
 
-void ObjKibako2_SpawnSkulltula(Actor_ObjKibako2* this, GameState_Play* play) {
+void ObjKibako2_SpawnSkulltula(Actor_ObjKibako2* this, GameState_Play* play)
+{
     s16 yRotation;
     s32 actorSpawnParam;
     Actor* skulltula;
@@ -348,35 +285,6 @@ void ObjKibako2_SpawnContents(Actor_ObjKibako2* this, GameState_Play* play)
     } else {
         ObjKibako2_SpawnSkulltula(this, play);
     }
-}
-
-void ObjKibako2_Init(Actor_ObjKibako2* this, GameState_Play* play)
-{
-    s32 contents;
-
-    contents = KIBAKO2_CONTENTS(this);
-    DynaPolyActor_Init(&this->dyna, 0);
-    Collider_InitCylinder(play, &this->collider);
-    Actor_ProcessInitChain(&this->dyna.actor, sInitChain);
-    DynaPolyActor_LoadMesh(play, &this->dyna, SEGADDR_COLLIDER);
-    Collider_SetCylinder(play, &this->collider, &this->dyna.actor, &sCylinderInit);
-    Collider_UpdateCylinder(&this->dyna.actor, &this->collider);
-    this->dyna.actor.home.rot.z = 0;
-    this->dyna.actor.world.rot.z = 0;
-    this->dyna.actor.shape.rot.z = 0;
-    this->dyna.actor.world.rot.x = 0;
-    this->dyna.actor.shape.rot.x = 0;
-    if (contents == OBJKIBAKO2_CONTENTS_COLLECTIBLE) {
-        if (Item_CanDropBigFairy(play, KIBAKO2_COLLECTIBLE_ID(this),
-                                 KIBAKO2_COLLECTIBLE_FLAG(this))) {
-            this->unk_1AC = 1;
-            this->dyna.actor.flags |= ACTOR_FLAG_MM_10;
-        }
-    }
-    if ((contents != OBJKIBAKO2_CONTENTS_SKULLTULA) || !ObjKibako2_ContainsSkulltula(this, play)) {
-        this->skulltulaNoiseTimer = -1;
-    }
-    this->actionFunc = ObjKibako2_Idle;
 }
 
 void ObjKibako2_Destroy(Actor_ObjKibako2* this, GameState_Play* play)
@@ -437,9 +345,99 @@ void ObjKibako2_Kill(Actor_ObjKibako2* this, GameState_Play* play)
     ObjKibako2_SpawnContents(this, play);
     Actor_Kill(&this->dyna.actor);
 }
+#endif
 
-void ObjKibako2_Update(Actor_ObjKibako2* this, GameState_Play* play)
+static void ObjKibako2_InitCollider(Actor_ObjKibako2* this, GameState_Play* play)
 {
+    Collider_InitCylinder(play, &this->collider);
+    Collider_SetCylinder(play, &this->collider, &this->dyna.actor, &sCylinderInit);
+    Collider_UpdateCylinder(&this->dyna.actor, &this->collider);
+}
+
+#if defined(GAME_OOT)
+static void ObjKibako2_Alias(Actor_ObjKibako2* this)
+{
+}
+#endif
+
+#if defined(GAME_MM)
+static void ObjKibako2_Alias(Actor_ObjKibako2* this)
+{
+}
+#endif
+
+static void ObjKibako2_InitXflag(Actor_ObjKibako2* this, GameState_Play* play)
+{
+    ComboItemOverride o;
+
+    /* Set the extended properties */
+    this->xflag.sceneId = play->sceneId;
+    this->xflag.setupId = g.sceneSetupId;
+    this->xflag.roomId = this->dyna.actor.room;
+    this->xflag.sliceId = 0;
+    this->xflag.id = this->dyna.actor.actorIndex;
+
+    /* Fix the aliases */
+    ObjKibako2_Alias(this);
+
+    /* Detect xflags */
+    comboXflagItemOverride(&o, &this->xflag, 0);
+    this->isExtended = !!(o.gi && !comboXflagsGet(&this->xflag));
+}
+
+#if defined(GAME_OOT)
+static void ObjKibako2_Init(Actor_ObjKibako2* this, GameState_Play* play)
+{
+    CollisionHeader* colHeader;
+    u32 bgId;
+
+    ObjKibako2_InitXflag(this, play);
+    colHeader = NULL;
+    DynaPolyActor_Init(&this->dyna, 0);
+    Actor_ProcessInitChain(&this->dyna.actor, sInitChain);
+    ObjKibako2_InitCollider(this, play);
+    CollisionHeader_GetVirtual(SEGADDR_COLLIDER, &colHeader);
+    bgId = DynaPoly_SetBgActor(play, &play->colCtx.dyna, &this->dyna.actor, colHeader);
+    this->dyna.bgId = bgId;
+    this->collectibleFlag = this->dyna.actor.home.rot.z & 0x3F;
+    this->actionFunc = ObjKibako2_Idle;
+    this->dyna.actor.home.rot.z = this->dyna.actor.world.rot.z = this->dyna.actor.shape.rot.z = this->dyna.actor.world.rot.x = this->dyna.actor.shape.rot.x = 0;
+}
+#endif
+
+#if defined(GAME_MM)
+static void ObjKibako2_Init(Actor_ObjKibako2* this, GameState_Play* play)
+{
+    s32 contents;
+
+    ObjKibako2_InitXflag(this, play);
+    contents = KIBAKO2_CONTENTS(this);
+    DynaPolyActor_Init(&this->dyna, 0);
+    Actor_ProcessInitChain(&this->dyna.actor, sInitChain);
+    ObjKibako2_InitCollider(this, play);
+    DynaPolyActor_LoadMesh(play, &this->dyna, SEGADDR_COLLIDER);
+    this->dyna.actor.home.rot.z = 0;
+    this->dyna.actor.world.rot.z = 0;
+    this->dyna.actor.shape.rot.z = 0;
+    this->dyna.actor.world.rot.x = 0;
+    this->dyna.actor.shape.rot.x = 0;
+    if (contents == OBJKIBAKO2_CONTENTS_COLLECTIBLE) {
+        if (Item_CanDropBigFairy(play, KIBAKO2_COLLECTIBLE_ID(this),
+                                 KIBAKO2_COLLECTIBLE_FLAG(this))) {
+            this->unk_1AC = 1;
+            this->dyna.actor.flags |= ACTOR_FLAG_MM_10;
+        }
+    }
+    if ((contents != OBJKIBAKO2_CONTENTS_SKULLTULA) || !ObjKibako2_ContainsSkulltula(this, play)) {
+        this->skulltulaNoiseTimer = -1;
+    }
+    this->actionFunc = ObjKibako2_Idle;
+}
+#endif
+
+static void ObjKibako2_Update(Actor_ObjKibako2* this, GameState_Play* play)
+{
+#if defined(GAME_MM)
     if (this->unk_1AC != 0) {
         play->actorCtx.flags |= ACTORCTX_FLAG_3;
     }
@@ -458,10 +456,12 @@ void ObjKibako2_Update(Actor_ObjKibako2* this, GameState_Play* play)
             this->skulltulaNoiseTimer--;
         }
     }
+#endif
+
     this->actionFunc(this, play);
 }
 
-void ObjKibako2_Draw(Actor_ObjKibako2* this, GameState_Play* play)
+static void ObjKibako2_Draw(Actor_ObjKibako2* this, GameState_Play* play)
 {
     Gfx_DrawDListOpa(play, SEGADDR_CRATE_DL);
 }
@@ -479,4 +479,3 @@ ActorInit Obj_Kibako2_InitVars = {
 };
 
 OVL_ACTOR_INFO(AC_OBJ_KIBAKO2, Obj_Kibako2_InitVars);
-#endif
