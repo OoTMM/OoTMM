@@ -17,7 +17,15 @@ typedef struct Actor_ObjKibako2
     DynaPolyActor           dyna;
     ColliderCylinder        collider;
     Actor_ObjKibako2Func    actionFunc;
+
+#if defined(GAME_OOT)
     s16                     collectibleFlag;
+#endif
+
+#if defined(GAME_MM)
+    s8                      unk_1AC;
+    s8                      skulltulaNoiseTimer;
+#endif
 
     /* Extended */
     Xflag   xflag;
