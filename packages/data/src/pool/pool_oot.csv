@@ -1456,6 +1456,19 @@ Gerudo Fortress Pot Jail 2 4,                               pot,            NONE
 Gerudo Fortress Pot Jail 2 5,                               pot,            NONE,                 THIEVES_HIDEOUT,                0x050b,                     RECOVERY_HEART
 Gerudo Fortress Pot Jail 2 6,                               pot,            NONE,                 THIEVES_HIDEOUT,                0x050c,                     RECOVERY_HEART
 Gerudo Fortress Pot Jail 2 7,                               pot,            NONE,                 THIEVES_HIDEOUT,                0x050d,                     RECOVERY_HEART
+Thieves Hideout Crate Break Room 1,                         crate,          NONE,                 THIEVES_HIDEOUT,                0x00006,                    RUPEE_GREEN
+Thieves Hideout Crate Break Room 2,                         crate,          NONE,                 THIEVES_HIDEOUT,                0x00007,                    RUPEE_GREEN
+Thieves Hideout Crate Break Room 3,                         crate,          NONE,                 THIEVES_HIDEOUT,                0x00008,                    RUPEE_GREEN
+Thieves Hideout Crate Break Room 4,                         crate,          NONE,                 THIEVES_HIDEOUT,                0x00009,                    RUPEE_GREEN
+Thieves Hideout Crate Jail 3,                               crate,          NONE,                 THIEVES_HIDEOUT,                0x0010a,                    RUPEE_GREEN
+Thieves Hideout Crate Jail 1,                               crate,          NONE,                 THIEVES_HIDEOUT,                0x0020a,                    RUPEE_GREEN
+Thieves Hideout Crate Kitchen,                              crate,          NONE,                 THIEVES_HIDEOUT,                0x00307,                    RUPEE_GREEN
+Thieves Hideout Crate Kitchen Corridor 1,                   crate,          NONE,                 THIEVES_HIDEOUT,                0x0030a,                    RUPEE_GREEN
+Thieves Hideout Crate Kitchen Corridor 2,                   crate,          NONE,                 THIEVES_HIDEOUT,                0x0030b,                    RUPEE_GREEN
+Thieves Hideout Crate Kitchen Corridor 3,                   crate,          NONE,                 THIEVES_HIDEOUT,                0x0030c,                    RUPEE_GREEN
+Thieves Hideout Crate Kitchen Corridor 4,                   crate,          NONE,                 THIEVES_HIDEOUT,                0x0030d,                    RUPEE_GREEN
+Thieves Hideout Crate Jail 2 1,                             crate,          NONE,                 THIEVES_HIDEOUT,                0x0050f,                    RUPEE_GREEN
+Thieves Hideout Crate Jail 2 2,                             crate,          NONE,                 THIEVES_HIDEOUT,                0x00510,                    RUPEE_GREEN
 Gerudo Fortress Kitchen Big Fairy,                          fairy_spot,     NONE,                 THIEVES_HIDEOUT,                0x00309,                    FAIRY_BIG
 Gerudo Fortress Wonder Item Jail 1 1,                       wonder,         NONE,                 THIEVES_HIDEOUT,                0x00202,                    RANDOM
 Gerudo Fortress Wonder Item Jail 1 2,                       wonder,         NONE,                 THIEVES_HIDEOUT,                0x00203,                    RANDOM

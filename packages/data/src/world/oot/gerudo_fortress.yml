@@ -14,6 +14,7 @@
     "Gerudo Fortress Pot Jail 1 1": "true"
     "Gerudo Fortress Pot Jail 1 2": "true"
     "Gerudo Fortress Pot Jail 1 3": "true"
+    "Thieves Hideout Crate Jail 1": "true"
     "Gerudo Fortress Wonder Item Jail 1 1": "can_use_bow"
     "Gerudo Fortress Wonder Item Jail 1 2": "can_use_bow"
 "Gerudo Fortress Carpenter 1 Right":
@@ -39,6 +40,8 @@
     "Gerudo Fortress Pot Jail 2 5": "true"
     "Gerudo Fortress Pot Jail 2 6": "true"
     "Gerudo Fortress Pot Jail 2 7": "true"
+    "Thieves Hideout Crate Jail 2 1": "true"
+    "Thieves Hideout Crate Jail 2 2": "true"
     "Gerudo Fortress Wonder Item Jail 2 1": "can_use_bow"
     "Gerudo Fortress Wonder Item Jail 2 2": "can_use_bow"
 "Gerudo Fortress Carpenter 2 Top":
@@ -75,6 +78,11 @@
     "Gerudo Fortress Lower-Right Ledge": "true"
     "Gerudo Fortress Kitchen Tunnel End": "true"
     "Gerudo Fortress Kitchen Bottom": "evade_gerudo"
+  locations:
+    "Thieves Hideout Crate Kitchen Corridor 1": "true"
+    "Thieves Hideout Crate Kitchen Corridor 2": "true"
+    "Thieves Hideout Crate Kitchen Corridor 3": "true"
+    "Thieves Hideout Crate Kitchen Corridor 4": "true"
 "Gerudo Fortress Kitchen Bottom":
   dungeon: GF
   exits:
@@ -84,6 +92,7 @@
   locations:
     "Gerudo Fortress Pot Kitchen 1": "true"
     "Gerudo Fortress Pot Kitchen 2": "true"
+    "Thieves Hideout Crate Kitchen": "true"
     "Gerudo Fortress Kitchen Big Fairy": "can_play_sun"
     "Gerudo Fortress Wonder Item Kitchen Skull": "can_use_bow"
     "Gerudo Fortress Wonder Item Kitchen Soup": "evade_gerudo"
@@ -110,6 +119,7 @@
     "Gerudo Member Card": "carpenters_rescued"
     "Gerudo Fortress Pot Jail 3 1": "true"
     "Gerudo Fortress Pot Jail 3 2": "true"
+    "Thieves Hideout Crate Jail 3": "true"
     "Gerudo Fortress Wonder Item Jail 3 1": "can_use_bow"
     "Gerudo Fortress Wonder Item Jail 3 2": "can_use_bow"
 "Gerudo Fortress Break Room Bottom":
@@ -125,6 +135,10 @@
     "Gerudo Fortress Pot Break Room 1": "true"
     "Gerudo Fortress Pot Break Room 2": "true"
     "Gerudo Fortress Wonder Item Break Room Bottom": "can_use_bow"
+    "Thieves Hideout Crate Break Room 1": "true"
+    "Thieves Hideout Crate Break Room 2": "true"
+    "Thieves Hideout Crate Break Room 3": "true"
+    "Thieves Hideout Crate Break Room 4": "true"
 "Gerudo Fortress Break Room Top":
   dungeon: GF
   exits:
