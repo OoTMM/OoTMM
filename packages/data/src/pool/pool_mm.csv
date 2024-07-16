@@ -2057,6 +2057,17 @@ Stone Tower Temple Inverted Flying Pot Pre-Boss 1,      pot,            NONE,   
 Stone Tower Temple Inverted Flying Pot Pre-Boss 2,      pot,            NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x081b,                     NOTHING
 Stone Tower Temple Inverted Flying Pot Pre-Boss 3,      pot,            NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x081c,                     NOTHING
 Stone Tower Temple Inverted Flying Pot Pre-Boss 4,      pot,            NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x081d,                     NOTHING
+Stone Tower Temple Inverted Crate Entrance Right 1,     crate,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x0000b,                    RECOVERY_HEART
+Stone Tower Temple Inverted Crate Entrance Right 2,     crate,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x0000c,                    RECOVERY_HEART
+Stone Tower Temple Inverted Crate Entrance Left 1,      crate,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x0000d,                    MAGIC_JAR_LARGE
+Stone Tower Temple Inverted Crate Entrance Left 2,      crate,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x0000e,                    MAGIC_JAR_LARGE
+Stone Tower Temple Inverted Crate Entrance Left 3,      crate,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x0000f,                    MAGIC_JAR_LARGE
+Stone Tower Temple Inverted Crate Before Gomess 1,      crate,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x00327,                    MAGIC_JAR_LARGE
+Stone Tower Temple Inverted Crate Before Gomess 2,      crate,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x00328,                    MAGIC_JAR_LARGE
+Stone Tower Temple Inverted Crate Before Gomess 3,      crate,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x00329,                    MAGIC_JAR_LARGE
+Stone Tower Temple Inverted Crate Before Gomess 4,      crate,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x0032a,                    BOMBS_5
+Stone Tower Temple Inverted Crate Before Gomess 5,      crate,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x0032b,                    ARROWS_10
+Stone Tower Temple Inverted Crate Before Gomess 6,      crate,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x0032c,                    ARROWS_10
 Stone Tower Temple Inverted Rupee Dexihand 1,           rupee,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x00100,                    RUPEE_RED
 Stone Tower Temple Inverted Rupee Dexihand 2,           rupee,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x00101,                    RUPEE_GREEN
 Stone Tower Temple Inverted Rupee Dexihand 3,           rupee,          NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x00102,                    RUPEE_BLUE
