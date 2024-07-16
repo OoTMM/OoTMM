@@ -1859,6 +1859,34 @@ Great Bay Temple Pot Before Wart 09,                    pot,            NONE,   
 Great Bay Temple Pot Before Wart 10,                    pot,            NONE,                   TEMPLE_GREAT_BAY,             0x0e0c,                     RECOVERY_HEART
 Great Bay Temple Pot Before Wart 11,                    pot,            NONE,                   TEMPLE_GREAT_BAY,             0x0e0d,                     RECOVERY_HEART
 Great Bay Temple Pot Before Wart 12,                    pot,            NONE,                   TEMPLE_GREAT_BAY,             0x0e0e,                     RECOVERY_HEART
+Great Bay Temple Crate Chu Room 1,                      crate,          NONE,                   TEMPLE_GREAT_BAY,             0x0020a,                    RECOVERY_HEART
+Great Bay Temple Crate Chu Room 2,                      crate,          NONE,                   TEMPLE_GREAT_BAY,             0x0020b,                    RECOVERY_HEART
+Great Bay Temple Crate Chu Room 3,                      crate,          NONE,                   TEMPLE_GREAT_BAY,             0x0020c,                    MAGIC_JAR_LARGE
+Great Bay Temple Crate Chu Room 4,                      crate,          NONE,                   TEMPLE_GREAT_BAY,             0x0020d,                    MAGIC_JAR_LARGE
+Great Bay Temple Crate Chu Room 5,                      crate,          NONE,                   TEMPLE_GREAT_BAY,             0x0020e,                    ARROWS_10
+Great Bay Temple Crate Before Boss Key 01,              crate,          NONE,                   TEMPLE_GREAT_BAY,             0x00502,                    MAGIC_JAR_LARGE
+Great Bay Temple Crate Before Boss Key 02,              crate,          NONE,                   TEMPLE_GREAT_BAY,             0x00503,                    MAGIC_JAR_LARGE
+Great Bay Temple Crate Before Boss Key 03,              crate,          NONE,                   TEMPLE_GREAT_BAY,             0x00504,                    MAGIC_JAR_LARGE
+Great Bay Temple Crate Before Boss Key 04,              crate,          NONE,                   TEMPLE_GREAT_BAY,             0x00505,                    MAGIC_JAR_LARGE
+Great Bay Temple Crate Before Boss Key 05,              crate,          NONE,                   TEMPLE_GREAT_BAY,             0x00506,                    MAGIC_JAR_LARGE
+Great Bay Temple Crate Before Boss Key 06,              crate,          NONE,                   TEMPLE_GREAT_BAY,             0x00507,                    MAGIC_JAR_LARGE
+Great Bay Temple Crate Before Boss Key 07,              crate,          NONE,                   TEMPLE_GREAT_BAY,             0x00508,                    MAGIC_JAR_LARGE
+Great Bay Temple Crate Before Boss Key 08,              crate,          NONE,                   TEMPLE_GREAT_BAY,             0x00509,                    MAGIC_JAR_LARGE
+Great Bay Temple Crate Before Boss Key 09,              crate,          NONE,                   TEMPLE_GREAT_BAY,             0x0050a,                    ARROWS_10
+Great Bay Temple Crate Before Boss Key 10,              crate,          NONE,                   TEMPLE_GREAT_BAY,             0x0050b,                    ARROWS_10
+Great Bay Temple Crate Before Boss Key 11,              crate,          NONE,                   TEMPLE_GREAT_BAY,             0x0050c,                    ARROWS_10
+Great Bay Temple Crate Before Boss Key 12,              crate,          NONE,                   TEMPLE_GREAT_BAY,             0x0050d,                    ARROWS_10
+Great Bay Temple Crate Before Boss Key 13,              crate,          NONE,                   TEMPLE_GREAT_BAY,             0x0050e,                    ARROWS_10
+Great Bay Temple Crate Before Boss Key 14,              crate,          NONE,                   TEMPLE_GREAT_BAY,             0x0050f,                    ARROWS_10
+Great Bay Temple Crate Before Boss Key 15,              crate,          NONE,                   TEMPLE_GREAT_BAY,             0x00510,                    ARROWS_10
+Great Bay Temple Crate Before Boss Key 16,              crate,          NONE,                   TEMPLE_GREAT_BAY,             0x00511,                    ARROWS_10
+Great Bay Temple Crate Green Pipe 1,                    crate,          NONE,                   TEMPLE_GREAT_BAY,             0x00a16,                    RECOVERY_HEART
+Great Bay Temple Crate Green Pipe 2,                    crate,          NONE,                   TEMPLE_GREAT_BAY,             0x00a17,                    RECOVERY_HEART
+Great Bay Temple Crate Green Pipe 3,                    crate,          NONE,                   TEMPLE_GREAT_BAY,             0x00a18,                    RECOVERY_HEART
+Great Bay Temple Crate Green Pipe 4,                    crate,          NONE,                   TEMPLE_GREAT_BAY,             0x00a19,                    RECOVERY_HEART
+Great Bay Temple Crate Green Pipe 5,                    crate,          NONE,                   TEMPLE_GREAT_BAY,             0x00a1a,                    MAGIC_JAR_LARGE
+Great Bay Temple Crate Green Pipe 6,                    crate,          NONE,                   TEMPLE_GREAT_BAY,             0x00a1b,                    MAGIC_JAR_LARGE
+Great Bay Temple Crate Green Pipe 7,                    crate,          NONE,                   TEMPLE_GREAT_BAY,             0x00a1c,                    MAGIC_JAR_LARGE
 Great Bay Temple Rupee Compass Room 1,                  rupee,          NONE,                   TEMPLE_GREAT_BAY,             0x00400,                    RUPEE_RED
 Great Bay Temple Rupee Compass Room 2,                  rupee,          NONE,                   TEMPLE_GREAT_BAY,             0x00401,                    RUPEE_RED
 Great Bay Temple Rupee Entrance 1,                      rupee,          NONE,                   TEMPLE_GREAT_BAY,             0x00800,                    RUPEE_RED
