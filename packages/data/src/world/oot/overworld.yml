@@ -503,6 +503,10 @@
     "Market Wonder Item Day 5": "is_child && is_day"
     "Market Wonder Item Night 1": "is_child && is_night"
     "Market Wonder Item Night 2": "is_child && is_night"
+    "Market Crate 1": "is_child"
+    "Market Crate 2": "is_child"
+    "Market Crate 3": "is_child"
+    "Market Crate 4": "is_child"
 "Market Grass":
   region: MARKET
   age_change: false

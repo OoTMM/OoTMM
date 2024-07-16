@@ -358,6 +358,16 @@ static void ObjKibako2_InitCollider(Actor_ObjKibako2* this, GameState_Play* play
 #if defined(GAME_OOT)
 static void ObjKibako2_Alias(Actor_ObjKibako2* this)
 {
+    Xflag* xf;
+
+    xf = &this->xflag;
+    switch (xf->sceneId)
+    {
+    case SCE_OOT_MARKET_CHILD_NIGHT:
+        xf->sceneId = SCE_OOT_MARKET_CHILD_DAY;
+        xf->id += 11;
+        break;
+    }
 }
 #endif
 

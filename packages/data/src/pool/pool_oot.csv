@@ -806,6 +806,10 @@ Market Bombchu Shop Item 5,                                 shop,           NONE
 Market Bombchu Shop Item 6,                                 shop,           NONE,                 BOMBCHU_SHOP,                   0x0d,                       BOMBCHU_10
 Market Bombchu Shop Item 7,                                 shop,           NONE,                 BOMBCHU_SHOP,                   0x0e,                       BOMBCHU_10
 Market Bombchu Shop Item 8,                                 shop,           NONE,                 BOMBCHU_SHOP,                   0x0f,                       BOMBCHU_10
+Market Crate 1,                                             crate,          NONE,                 MARKET_CHILD_DAY,               0x00021,                    RUPEE_RED
+Market Crate 2,                                             crate,          NONE,                 MARKET_CHILD_DAY,               0x00022,                    RUPEE_GREEN
+Market Crate 3,                                             crate,          NONE,                 MARKET_CHILD_DAY,               0x00023,                    RUPEE_GREEN
+Market Crate 4,                                             crate,          NONE,                 MARKET_CHILD_DAY,               0x00024,                    RUPEE_GREEN
 Market Grass 1,                                             grass,          NONE,                 MARKET_CHILD_DAY,               0x00017,                    RANDOM
 Market Grass 2,                                             grass,          NONE,                 MARKET_CHILD_DAY,               0x00018,                    RANDOM
 Market Grass 3,                                             grass,          NONE,                 MARKET_CHILD_DAY,               0x00019,                    RANDOM
