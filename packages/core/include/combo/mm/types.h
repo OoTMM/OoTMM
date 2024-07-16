@@ -5,7 +5,7 @@
 
 typedef struct View {
     /* 0x000 */ u32 magic; /* string literal "VIEW" / 0x56494557 */
-    /* 0x004 */ struct GraphicsContext* gfxCtx;
+    /* 0x004 */ GfxContext* gfxCtx;
     /* 0x008 */ Viewport viewport;
     /* 0x018 */ f32 fovy;  /* vertical field of view in degrees */
     /* 0x01C */ f32 zNear; /* distance to near clipping plane */

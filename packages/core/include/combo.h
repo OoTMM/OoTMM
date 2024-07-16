@@ -54,6 +54,7 @@
 #  include <combo/mm/actor_arms_hook.h>
 #  include <combo/mm/actor_bgingate.h>
 #  include <combo/mm/actor_objboat.h>
+#  include <combo/mm/sequence.h>
 #  include <combo/mm/actors/Obj_Grass.h>
 #  include <combo/mm/actors/Obj_Grass_Carry.h>
 #  include <combo/mm/actors/En_Kusa.h>

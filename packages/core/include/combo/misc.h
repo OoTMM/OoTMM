@@ -734,6 +734,153 @@ typedef struct {
     s32 value:  16;
 } InitChainEntry;
 
+#if defined(GAME_MM)
+/* TODO: Move to En_Door_Warp1 once ported */
+typedef enum
+{
+    ENDOORWARP1_FF_0,
+    ENDOORWARP1_FF_1,
+    ENDOORWARP1_FF_2,
+    ENDOORWARP1_FF_3,
+    ENDOORWARP1_FF_4,
+    ENDOORWARP1_FF_5,
+    ENDOORWARP1_FF_6
+}
+DoorWarp1Param;
+
+/* TODO: Move to Item_B_Heart once ported */
+typedef enum
+{
+    BHEART_PARAM_NORMAL,
+    BHEART_PARAM_SMALL = 35
+}
+ItemBHeartParam;
+
+typedef enum
+{
+    CLEAR_TAG_SMALL_EXPLOSION,
+    CLEAR_TAG_LARGE_EXPLOSION,
+    CLEAR_TAG_POP,
+    CLEAR_TAG_SMALL_LIGHT_RAYS,
+    CLEAR_TAG_LARGE_LIGHT_RAYS,
+    CLEAR_TAG_SPLASH = 35,
+    CLEAR_TAG_SMOKE = 200
+}
+ClearTagType;
+
+#define BODYPART_NONE -1
+
+// Camera is on
+#define CAM_STATUS_CUT        0 // The camera is not updated at all
+#define CAM_STATUS_WAIT       1 // There is minimally/partially updated, action function is not run
+#define CAM_STATUS_UNK3       3 // The camera is mostly updated including running its action function, but data is not set to view
+#define CAM_STATUS_ACTIVE     7 // The camera is fully updated, info is sent to view
+// Camera is off
+#define CAM_STATUS_INACTIVE   0x100
+
+typedef enum {
+    /* 0x00 */ CAM_FUNC_NONE,
+    /* 0x01 */ CAM_FUNC_NORMAL0,
+    /* 0x02 */ CAM_FUNC_NORMAL1,
+    /* 0x03 */ CAM_FUNC_NORMAL2,
+    /* 0x04 */ CAM_FUNC_NORMAL3,
+    /* 0x05 */ CAM_FUNC_NORMAL4,
+    /* 0x06 */ CAM_FUNC_PARALLEL0,
+    /* 0x07 */ CAM_FUNC_PARALLEL1,
+    /* 0x08 */ CAM_FUNC_PARALLEL2,
+    /* 0x09 */ CAM_FUNC_PARALLEL3,
+    /* 0x0A */ CAM_FUNC_PARALLEL4,
+    /* 0x0B */ CAM_FUNC_KEEPON0,
+    /* 0x0C */ CAM_FUNC_KEEPON1,
+    /* 0x0D */ CAM_FUNC_KEEPON2,
+    /* 0x0E */ CAM_FUNC_KEEPON3,
+    /* 0x0F */ CAM_FUNC_KEEPON4,
+    /* 0x10 */ CAM_FUNC_SUBJECT0,
+    /* 0x11 */ CAM_FUNC_SUBJECT1,
+    /* 0x12 */ CAM_FUNC_SUBJECT2,
+    /* 0x13 */ CAM_FUNC_SUBJECT3,
+    /* 0x14 */ CAM_FUNC_SUBJECT4,
+    /* 0x15 */ CAM_FUNC_JUMP0,
+    /* 0x16 */ CAM_FUNC_JUMP1,
+    /* 0x17 */ CAM_FUNC_JUMP2,
+    /* 0x18 */ CAM_FUNC_JUMP3,
+    /* 0x19 */ CAM_FUNC_JUMP4,
+    /* 0x1A */ CAM_FUNC_BATTLE0,
+    /* 0x1B */ CAM_FUNC_BATTLE1,
+    /* 0x1C */ CAM_FUNC_BATTLE2,
+    /* 0x1D */ CAM_FUNC_BATTLE3,
+    /* 0x1E */ CAM_FUNC_BATTLE4,
+    /* 0x1F */ CAM_FUNC_FIXED0,
+    /* 0x20 */ CAM_FUNC_FIXED1,
+    /* 0x21 */ CAM_FUNC_FIXED2,
+    /* 0x22 */ CAM_FUNC_FIXED3,
+    /* 0x23 */ CAM_FUNC_FIXED4,
+    /* 0x24 */ CAM_FUNC_DATA0,
+    /* 0x25 */ CAM_FUNC_DATA1,
+    /* 0x26 */ CAM_FUNC_DATA2,
+    /* 0x27 */ CAM_FUNC_DATA3,
+    /* 0x28 */ CAM_FUNC_DATA4,
+    /* 0x29 */ CAM_FUNC_UNIQUE0,
+    /* 0x2A */ CAM_FUNC_UNIQUE1,
+    /* 0x2B */ CAM_FUNC_UNIQUE2,
+    /* 0x2C */ CAM_FUNC_UNIQUE3,
+    /* 0x2D */ CAM_FUNC_UNIQUE4,
+    /* 0x2E */ CAM_FUNC_UNIQUE5,
+    /* 0x2F */ CAM_FUNC_UNIQUE6,
+    /* 0x30 */ CAM_FUNC_UNIQUE7,
+    /* 0x31 */ CAM_FUNC_UNIQUE8,
+    /* 0x32 */ CAM_FUNC_UNIQUE9,
+    /* 0x33 */ CAM_FUNC_DEMO0,
+    /* 0x34 */ CAM_FUNC_DEMO1,
+    /* 0x35 */ CAM_FUNC_DEMO2,
+    /* 0x36 */ CAM_FUNC_DEMO3,
+    /* 0x37 */ CAM_FUNC_DEMO4,
+    /* 0x38 */ CAM_FUNC_DEMO5,
+    /* 0x39 */ CAM_FUNC_DEMO6,
+    /* 0x3A */ CAM_FUNC_DEMO7,
+    /* 0x3B */ CAM_FUNC_DEMO8,
+    /* 0x3C */ CAM_FUNC_DEMO9,
+    /* 0x3D */ CAM_FUNC_SPECIAL0,
+    /* 0x3E */ CAM_FUNC_SPECIAL1,
+    /* 0x3F */ CAM_FUNC_SPECIAL2,
+    /* 0x40 */ CAM_FUNC_SPECIAL3,
+    /* 0x41 */ CAM_FUNC_SPECIAL4,
+    /* 0x42 */ CAM_FUNC_SPECIAL5,
+    /* 0x43 */ CAM_FUNC_SPECIAL6,
+    /* 0x44 */ CAM_FUNC_SPECIAL7,
+    /* 0x45 */ CAM_FUNC_SPECIAL8,
+    /* 0x46 */ CAM_FUNC_SPECIAL9,
+    /* 0x47 */ CAM_FUNC_MAX
+} CameraFuncType;
+
+typedef enum {
+    /* 0x00 */ CAM_DATA_Y_OFFSET,
+    /* 0x01 */ CAM_DATA_01,
+    /* 0x02 */ CAM_DATA_02,
+    /* 0x03 */ CAM_DATA_PITCH_TARGET,
+    /* 0x04 */ CAM_DATA_04,
+    /* 0x05 */ CAM_DATA_05,
+    /* 0x06 */ CAM_DATA_YAW_DIFF_RANGE,
+    /* 0x07 */ CAM_DATA_FOV,
+    /* 0x08 */ CAM_DATA_08,
+    /* 0x09 */ CAM_DATA_INTERFACE_FLAGS,
+    /* 0x0A */ CAM_DATA_10,
+    /* 0x0B */ CAM_DATA_11,
+    /* 0x0C */ CAM_DATA_12,
+    /* 0x0D */ CAM_DATA_13,
+    /* 0x0E */ CAM_DATA_14,
+    /* 0x0F */ CAM_DATA_15,
+    /* 0x10 */ CAM_DATA_16,
+    /* 0x11 */ CAM_DATA_17,
+    /* 0x12 */ CAM_DATA_18,
+    /* 0x13 */ CAM_DATA_19,
+    /* 0x14 */ CAM_DATA_20,
+    /* 0x15 */ CAM_DATA_21
+} CameraDataType;
+
+
+#endif
+
 typedef enum {
     /* 0x0 */ ICHAINTYPE_U8,            /* sets byte */
     /* 0x1 */ ICHAINTYPE_S8,
@@ -884,6 +1031,8 @@ typedef enum {
 #define CAM_ID_MAIN 0
 #define CAM_ID_SUB_FIRST 1
 #define CAM_ID_NONE -1
+
+#define SUB_CAM_ID_DONE 0
 
 typedef enum {
     /* 0 */ ROOM_BEHAVIOR_TYPE1_0,

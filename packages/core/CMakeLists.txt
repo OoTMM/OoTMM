@@ -147,6 +147,7 @@ add_actor_common(Obj_Kibako2  "common/ovl/actors/Obj_Kibako2/Obj_Kibako2.c")
 add_actor(oot Obj_Tsubo   "oot/ovl/actors/Obj_Tsubo/Obj_Tsubo.c")
 add_actor(oot En_Mag      "oot/ovl/actors/En_Mag/En_Mag.c")
 
+add_actor(mm Boss_01            "mm/ovl/actors/Boss_01/Boss_01.c")
 add_actor(mm Obj_Tsubo          "mm/ovl/actors/Obj_Tsubo/Obj_Tsubo.c")
 add_actor(mm En_Hs              "mm/ovl/actors/En_Hs/En_Hs.c")
 add_actor(mm En_Nwc             "mm/ovl/actors/En_Nwc/En_Nwc.c")

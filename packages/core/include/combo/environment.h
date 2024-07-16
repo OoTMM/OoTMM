@@ -23,6 +23,11 @@ u32 Environment_GetStormState(struct GameState_Play* play);
 
 #define STORM_STATE_OFF 0
 #define STORM_STATE_ON 1
+
+#define LIGHT_BLEND_OVERRIDE_NONE 0
+#define LIGHT_BLEND_OVERRIDE_ON 1
+#define LIGHT_BLEND_OVERRIDE_FULL_CONTROL 2
+
 #endif
 
 #endif

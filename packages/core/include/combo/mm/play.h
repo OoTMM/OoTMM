@@ -208,6 +208,25 @@ ASSERT_OFFSET(EnvironmentContext, loadMsg,                0x080);
 
 _Static_assert(sizeof(EnvironmentContext) == 0x100, "MM EnvironmentContext size is wrong");
 
+typedef struct TitleCardContext {
+    /* 0x0 */ void* texture;
+    /* 0x4 */ s16 x;
+    /* 0x6 */ s16 y;
+    /* 0x8 */ u8 width;
+    /* 0x9 */ u8 height;
+    /* 0xA */ u8 durationTimer; // how long the title card appears for before fading
+    /* 0xB */ u8 delayTimer; // how long the title card waits to appear
+    /* 0xC */ s16 alpha;
+    /* 0xE */ s16 intensity;
+} TitleCardContext; // size = 0x10
+
+typedef struct PlayerImpact {
+    /* 0x00 */ u8 type;
+    /* 0x01 */ u8 timer;
+    /* 0x04 */ f32 dist;
+    /* 0x08 */ Vec3f pos;
+} PlayerImpact; // size = 0x14
+
 typedef struct ActorContext
 {
     /* 0x000 */ u8 freezeFlashTimer;
@@ -223,7 +242,10 @@ typedef struct ActorContext
     /* 0x00F */ u8 numLensActors;
     ActorList   actors[12];
     /* 0x0A0 */ Actor* lensActors[32]; /* LENS_ACTOR_MAX // Draws up to LENS_ACTOR_MAX number of invisible actors */
-    char        unk_120[0x134];
+    char        unk_120[0xc4];
+    /* 0x1E4 */ TitleCardContext titleCtx;
+    /* 0x1F4 */ PlayerImpact playerImpact;
+    char        unk_208[0x4c];
     Actor*      elegyStatues[4];
     char        unk_264[0x4];
     u8          unk_268;
@@ -232,6 +254,8 @@ typedef struct ActorContext
 ActorContext;
 
 ASSERT_OFFSET(ActorContext, actors,         0x010);
+ASSERT_OFFSET(ActorContext, unk_120,        0x120);
+ASSERT_OFFSET(ActorContext, titleCtx,       0x1e4);
 ASSERT_OFFSET(ActorContext, elegyStatues,   0x254);
 ASSERT_OFFSET(ActorContext, unk_264,        0x264);
 ASSERT_OFFSET(ActorContext, unk_268,        0x268);
