@@ -2104,6 +2104,20 @@ Stone Tower Temple Pot Wind Room 1,                     pot,            NONE,   
 Stone Tower Temple Pot Wind Room 2,                     pot,            NONE,                   TEMPLE_STONE_TOWER,           0x090c,                     RECOVERY_HEART
 Stone Tower Temple Pot Wind Room 3,                     pot,            NONE,                   TEMPLE_STONE_TOWER,           0x090d,                     RECOVERY_HEART
 Stone Tower Temple Pot Wind Room 4,                     pot,            NONE,                   TEMPLE_STONE_TOWER,           0x090e,                     RECOVERY_HEART
+Stone Tower Temple Crate Entrance 1,                    crate,          NONE,                   TEMPLE_STONE_TOWER,           0x00011,                    RECOVERY_HEART
+Stone Tower Temple Crate Entrance 2,                    crate,          NONE,                   TEMPLE_STONE_TOWER,           0x00012,                    ARROWS_10
+Stone Tower Temple Crate Water 1,                       crate,          NONE,                   TEMPLE_STONE_TOWER,           0x00116,                    RECOVERY_HEART
+Stone Tower Temple Crate Water 2,                       crate,          NONE,                   TEMPLE_STONE_TOWER,           0x00117,                    MAGIC_JAR_LARGE
+Stone Tower Temple Crate Water 3,                       crate,          NONE,                   TEMPLE_STONE_TOWER,           0x00118,                    ARROWS_20
+Stone Tower Temple Crate Maze Large 1,                  crate,          NONE,                   TEMPLE_STONE_TOWER,           0x00218,                    NOTHING
+Stone Tower Temple Crate Maze Large 2,                  crate,          NONE,                   TEMPLE_STONE_TOWER,           0x00219,                    NOTHING
+Stone Tower Temple Crate Maze Large 3,                  crate,          NONE,                   TEMPLE_STONE_TOWER,           0x0021a,                    NOTHING
+Stone Tower Temple Crate Maze Large 4,                  crate,          NONE,                   TEMPLE_STONE_TOWER,           0x0021b,                    NOTHING
+Stone Tower Temple Crate Maze Large 5,                  crate,          NONE,                   TEMPLE_STONE_TOWER,           0x0021c,                    NOTHING
+Stone Tower Temple Crate Maze Small 1,                  crate,          NONE,                   TEMPLE_STONE_TOWER,           0x0021e,                    BOMBS_5
+Stone Tower Temple Crate Maze Small 2,                  crate,          NONE,                   TEMPLE_STONE_TOWER,           0x0021f,                    BOMBS_5
+Stone Tower Temple Crate Mirrors 1,                     crate,          NONE,                   TEMPLE_STONE_TOWER,           0x0071d,                    RUPEE_RED
+Stone Tower Temple Crate Mirrors 2,                     crate,          NONE,                   TEMPLE_STONE_TOWER,           0x0071e,                    RUPEE_RED
 Stone Tower Temple Grass Entrance 1,                    grass,          NONE,                   TEMPLE_STONE_TOWER,           0x0000a,                    RANDOM
 Stone Tower Temple Grass Entrance 2,                    grass,          NONE,                   TEMPLE_STONE_TOWER,           0x0000b,                    RANDOM
 Stone Tower Temple Grass Entrance 3,                    grass,          NONE,                   TEMPLE_STONE_TOWER,           0x0000c,                    RANDOM
