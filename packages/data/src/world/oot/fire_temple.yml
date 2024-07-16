@@ -126,3 +126,6 @@
     "Fire Temple Pillar Ledge": "can_hammer"
   locations:
     "Fire Temple Hammer": "true"
+    # TODO: Review this
+    "Fire Temple Crate 1": "can_hammer"
+    "Fire Temple Crate 2": "can_hammer"

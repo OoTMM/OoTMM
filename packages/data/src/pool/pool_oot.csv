@@ -1207,6 +1207,8 @@ Fire Temple Pot Ring 1,                                     pot,            NONE
 Fire Temple Pot Ring 2,                                     pot,            NONE,                 TEMPLE_FIRE,                    0x0a38,                     RECOVERY_HEART
 Fire Temple Pot Ring 3,                                     pot,            NONE,                 TEMPLE_FIRE,                    0x0a39,                     RECOVERY_HEART
 Fire Temple Pot Ring 4,                                     pot,            NONE,                 TEMPLE_FIRE,                    0x0a3a,                     RECOVERY_HEART
+Fire Temple Crate 1,                                        crate,          NONE,                 TEMPLE_FIRE,                    0x00e02,                    NOTHING
+Fire Temple Crate 2,                                        crate,          NONE,                 TEMPLE_FIRE,                    0x00e03,                    NOTHING
 Fire Temple Heart Ledge Above Main 1,                       heart,          NONE,                 TEMPLE_FIRE,                    0x00600,                    RECOVERY_HEART
 Fire Temple Heart Ledge Above Main 2,                       heart,          NONE,                 TEMPLE_FIRE,                    0x00601,                    RECOVERY_HEART
 Fire Temple Heart Ledge Above Main 3,                       heart,          NONE,                 TEMPLE_FIRE,                    0x00602,                    RECOVERY_HEART
