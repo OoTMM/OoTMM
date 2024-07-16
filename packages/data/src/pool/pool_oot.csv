@@ -188,6 +188,24 @@ Kakariko Pot 08,                                            pot,            NONE
 Kakariko Pot 09,                                            pot,            NONE,                 KAKARIKO_VILLAGE,               0x0010,                     RECOVERY_HEART
 Kakariko Pot 10,                                            pot,            NONE,                 KAKARIKO_VILLAGE,               0x0011,                     RECOVERY_HEART
 Kakariko Pot 11,                                            pot,            NONE,                 KAKARIKO_VILLAGE,               0x0012,                     RECOVERY_HEART
+Kakariko Crate Child Near Trail,                            crate,          NONE,                 KAKARIKO_VILLAGE,               0x00031,                    NOTHING
+Kakariko Crate Child Near House,                            crate,          NONE,                 KAKARIKO_VILLAGE,               0x00032,                    NOTHING
+Kakariko Crate Child Near Windmill Bottom,                  crate,          NONE,                 KAKARIKO_VILLAGE,               0x00033,                    NOTHING
+Kakariko Crate Child Near Windmill Top,                     crate,          NONE,                 KAKARIKO_VILLAGE,               0x00034,                    NOTHING
+Kakariko Crate Child Near Graveyard,                        crate,          NONE,                 KAKARIKO_VILLAGE,               0x00035,                    NOTHING
+Kakariko Crate Adult Near First House,                      crate,          NONE,                 KAKARIKO_VILLAGE,               0x08022,                    NOTHING
+Kakariko Crate Adult Near Trail 1,                          crate,          NONE,                 KAKARIKO_VILLAGE,               0x08023,                    NOTHING
+Kakariko Crate Adult Near Trail 2,                          crate,          NONE,                 KAKARIKO_VILLAGE,               0x08024,                    ARROWS_5
+Kakariko Crate Adult Near Impa 1,                           crate,          NONE,                 KAKARIKO_VILLAGE,               0x08025,                    NOTHING
+Kakariko Crate Adult Near Impa 2,                           crate,          NONE,                 KAKARIKO_VILLAGE,               0x08026,                    NOTHING
+Kakariko Crate Adult Center 1,                              crate,          NONE,                 KAKARIKO_VILLAGE,               0x08027,                    NOTHING
+Kakariko Crate Adult Center 2,                              crate,          NONE,                 KAKARIKO_VILLAGE,               0x08028,                    NOTHING
+Kakariko Crate Adult Near Archery,                          crate,          NONE,                 KAKARIKO_VILLAGE,               0x08029,                    NOTHING
+Kakariko Crate Adult Near Potion Shop,                      crate,          NONE,                 KAKARIKO_VILLAGE,               0x0802a,                    NOTHING
+Kakariko Crate Adult Back 1,                                crate,          NONE,                 KAKARIKO_VILLAGE,               0x0802b,                    NOTHING
+Kakariko Crate Adult Back 2,                                crate,          NONE,                 KAKARIKO_VILLAGE,               0x0802c,                    NOTHING
+Kakariko Crate Adult Back 3,                                crate,          NONE,                 KAKARIKO_VILLAGE,               0x0802d,                    RUPEE_RED
+Kakariko Crate Adult Back 4,                                crate,          NONE,                 KAKARIKO_VILLAGE,               0x0802e,                    NOTHING
 Kakariko Grass 1,                                           grass,          NONE,                 KAKARIKO_VILLAGE,               0x00024,                    RANDOM
 Kakariko Grass 2,                                           grass,          NONE,                 KAKARIKO_VILLAGE,               0x00025,                    RANDOM
 Kakariko Grass 3,                                           grass,          NONE,                 KAKARIKO_VILLAGE,               0x00026,                    RANDOM

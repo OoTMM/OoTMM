@@ -390,6 +390,18 @@ static void ObjKibako2_Alias(Actor_ObjKibako2* this)
             xf->id += 8;
         }
         break;
+    case SCE_OOT_KAKARIKO_VILLAGE:
+        if (xf->setupId == 1)
+        {
+            xf->setupId = 0;
+            xf->id += 7;
+        }
+        else if (xf->setupId == 3)
+        {
+            xf->setupId = 2;
+            xf->id += 2;
+        }
+        break;
     case SCE_OOT_GERUDO_FORTRESS:
         switch (xf->roomId)
         {
