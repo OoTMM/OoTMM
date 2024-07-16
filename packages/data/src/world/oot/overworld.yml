@@ -668,6 +668,7 @@
     "Back Alley": "true"
   locations:
     "Market Dog Lady HP": "event(RICHARD) && is_night && soul_dog_lady"
+    "Market Dog Lady Crate": "true"
 "Market Back Alley East Home":
   region: ENTRANCE
   exits:

@@ -738,6 +738,7 @@ Hyrule Field Fairy Fountain Fairy 6,                        fairy,          NONE
 Hyrule Field Fairy Fountain Fairy 7,                        fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x62000,                    FAIRY
 Hyrule Field Fairy Fountain Fairy 8,                        fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x72000,                    FAIRY
 Market Dog Lady HP,                                         npc,            NONE,                 BACK_ALLEY_HOUSE2,              DOG_LADY,                   HEART_PIECE
+Market Dog Lady Crate,                                      crate,          NONE,                 BACK_ALLEY_HOUSE2,              0x00002,                    RUPEE_BLUE
 Market Back Alley East House Pot 1,                         pot,            NONE,                 BACK_ALLEY_HOUSE,               0x0002,                     RECOVERY_HEART
 Market Back Alley East House Pot 2,                         pot,            NONE,                 BACK_ALLEY_HOUSE,               0x0003,                     RECOVERY_HEART
 Market Back Alley East House Pot 3,                         pot,            NONE,                 BACK_ALLEY_HOUSE,               0x0004,                     MAGIC_JAR_SMALL
