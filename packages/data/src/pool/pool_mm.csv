@@ -1697,6 +1697,14 @@ Snowhead Temple Pot Wizzrobe 4,                         pot,            NONE,   
 Snowhead Temple Pot Wizzrobe 5,                         pot,            NONE,                   TEMPLE_SNOWHEAD,              0x0c0c,                     ARROWS_10
 Snowhead Temple Flying Pot 1,                           pot,            NONE,                   TEMPLE_SNOWHEAD,              0x0308,                     NOTHING
 Snowhead Temple Flying Pot 2,                           pot,            NONE,                   TEMPLE_SNOWHEAD,              0x0309,                     NOTHING
+Snowhead Temple Crate Bridge,                           crate,          NONE,                   TEMPLE_SNOWHEAD,              0x00211,                    RECOVERY_HEART
+Snowhead Temple Crate Dual Switches 1,                  crate,          NONE,                   TEMPLE_SNOWHEAD,              0x0080f,                    MAGIC_JAR_LARGE
+Snowhead Temple Crate Dual Switches 2,                  crate,          NONE,                   TEMPLE_SNOWHEAD,              0x00810,                    MAGIC_JAR_LARGE
+Snowhead Temple Crate Map Room 1,                       crate,          NONE,                   TEMPLE_SNOWHEAD,              0x00906,                    RUPEE_BLUE
+Snowhead Temple Crate Map Room 2,                       crate,          NONE,                   TEMPLE_SNOWHEAD,              0x00907,                    RUPEE_BLUE
+Snowhead Temple Crate Map Room 3,                       crate,          NONE,                   TEMPLE_SNOWHEAD,              0x00908,                    RUPEE_BLUE
+Snowhead Temple Crate Map Room 4,                       crate,          NONE,                   TEMPLE_SNOWHEAD,              0x00909,                    RUPEE_BLUE
+Snowhead Temple Crate Map Room 5,                       crate,          NONE,                   TEMPLE_SNOWHEAD,              0x0090a,                    RUPEE_BLUE
 Snowhead Temple Grass 01,                               grass,          NONE,                   TEMPLE_SNOWHEAD,              0x0043c,                    RANDOM
 Snowhead Temple Grass 02,                               grass,          NONE,                   TEMPLE_SNOWHEAD,              0x0043d,                    RANDOM
 Snowhead Temple Grass 03,                               grass,          NONE,                   TEMPLE_SNOWHEAD,              0x0043e,                    RANDOM

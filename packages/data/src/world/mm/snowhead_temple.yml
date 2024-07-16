@@ -57,6 +57,7 @@
     "Snowhead Temple SF Bridge Under Platform": "has_weapon_range && has(MASK_GREAT_FAIRY)"
     "Snowhead Temple Pot Bridge Room After 1": "true"
     "Snowhead Temple Pot Bridge Room After 2": "true"
+    "Snowhead Temple Crate Bridge": "true"
 "Snowhead Temple Map Room":
   dungeon: SH
   exits:
@@ -66,6 +67,11 @@
   locations:
     "Snowhead Temple Map": "true"
     "Snowhead Temple SF Map Room": "true"
+    "Snowhead Temple Crate Map Room 1": "true"
+    "Snowhead Temple Crate Map Room 2": "true"
+    "Snowhead Temple Crate Map Room 3": "true"
+    "Snowhead Temple Crate Map Room 4": "true"
+    "Snowhead Temple Crate Map Room 5": "true"
 "Snowhead Temple Map Room Upper":
   dungeon: SH
   exits:
@@ -206,7 +212,8 @@
     "WARP_SONGS": "true"
   locations:
     "Snowhead Temple SF Dual Switches": "can_use_lens && ((has_arrows || can_hookshot) && has(MASK_GREAT_FAIRY))"
-    # crates will go here
+    "Snowhead Temple Crate Dual Switches 1": "true"
+    "Snowhead Temple Crate Dual Switches 2": "true"
 "Snowhead Temple Center Level 2 Dual":
   dungeon: SH
   exits:
