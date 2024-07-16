@@ -1553,6 +1553,8 @@ Spirit Temple Flying Pot Topmost 3,                         pot,            NONE
 Spirit Temple Flying Pot Topmost 4,                         pot,            NONE,                 TEMPLE_SPIRIT,                  0x1907,                     RECOVERY_HEART
 Spirit Temple Flying Pot Topmost 5,                         pot,            NONE,                 TEMPLE_SPIRIT,                  0x1908,                     NUTS_5
 Spirit Temple Flying Pot Topmost 6,                         pot,            NONE,                 TEMPLE_SPIRIT,                  0x1909,                     NUTS_5
+Spirit Temple Crate 1,                                      crate,          NONE,                 TEMPLE_SPIRIT,                  0x00109,                    NUTS_5
+Spirit Temple Crate 2,                                      crate,          NONE,                 TEMPLE_SPIRIT,                  0x0010a,                    BOMB
 Spirit Temple Heart 1,                                      heart,          NONE,                 TEMPLE_SPIRIT,                  0x01702,                    RECOVERY_HEART
 Spirit Temple Heart 2,                                      heart,          NONE,                 TEMPLE_SPIRIT,                  0x01703,                    RECOVERY_HEART
 Spirit Temple Adult Silver Rupees Big Fairy,                fairy_spot,     NONE,                 TEMPLE_SPIRIT,                  0x00c01,                    FAIRY_BIG
