@@ -883,6 +883,12 @@ Gerudo Valley GS Wall,                                      gs,             NONE
 Gerudo Valley GS Tent,                                      gs,             NONE,                 GERUDO_VALLEY,                  0xa3,                       GS_TOKEN
 Gerudo Valley GS Pillar,                                    gs,             NONE,                 GERUDO_VALLEY,                  0xa2,                       GS_TOKEN
 Gerudo Valley Cow,                                          cow,            NONE,                 GERUDO_VALLEY,                  0x08,                       MILK
+Gerudo Valley Crate Child Unreachable 1,                    crate,          NONE,                 GERUDO_VALLEY,                  0x00021,                    RUPEE_GREEN
+Gerudo Valley Crate Child Unreachable 2,                    crate,          NONE,                 GERUDO_VALLEY,                  0x00022,                    RUPEE_GREEN
+Gerudo Valley Crate Child Unreachable 3,                    crate,          NONE,                 GERUDO_VALLEY,                  0x00023,                    RUPEE_GREEN
+Gerudo Valley Crate Child Unreachable 4,                    crate,          NONE,                 GERUDO_VALLEY,                  0x00024,                    RUPEE_GREEN
+Gerudo Valley Crate Child Bottom,                           crate,          NONE,                 GERUDO_VALLEY,                  0x00025,                    RUPEE_GREEN
+Gerudo Valley Crate Ledge,                                  crate,          NONE,                 GERUDO_VALLEY,                  0x00026,                    RUPEE_GREEN
 Gerudo Valley Wonder Item Lower,                            wonder,         NONE,                 GERUDO_VALLEY,                  0x08028,                    RUPEE_RED
 Gerudo Valley Wonder Item Upper,                            wonder,         NONE,                 GERUDO_VALLEY,                  0x08029,                    RUPEE_RED
 Gerudo Valley Octorok Grotto Rupee 1,                       rupee,          NONE,                 GROTTOS,                        0x00501,                    RUPEE_BLUE

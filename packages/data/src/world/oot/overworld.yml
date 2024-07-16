@@ -2160,6 +2160,8 @@
     "Gerudo Valley GS Soil": "gs_soil && can_damage_skull"
     "Gerudo Valley GS Wall": "is_child && gs_night && (can_collect_distance || (climb_anywhere && (can_use_sword_master || (age_sword_adult && has(SWORD_BIGGORON)) || has_explosives || can_use_din || can_use_sticks || can_use_slingshot)))"
     "Gerudo Valley Cow": "is_child && can_play_epona"
+    "Gerudo Valley Crate Ledge": "is_child || can_longshot || climb_anywhere"
+    "Gerudo Valley Crate Child Bottom": "is_child"
     "Gerudo Valley Wonder Item Lower": "is_adult"
     "Gerudo Valley Wonder Item Upper": "is_adult"
   gossip:
@@ -2179,6 +2181,11 @@
     "Gerudo Valley GS Tent": "is_adult && gs_night && (can_collect_distance || (climb_anywhere && (has_explosives || has(SWORD_BIGGORON) || has_ranged_weapon || can_use_din)))"
     "Gerudo Valley GS Pillar": "is_adult && can_collect_distance && gs_night"
     "Gerudo Valley Crate HP": "climb_anywhere"
+    # Unreachable with some settings, need a way to detect that
+    #"Gerudo Valley Crate Child Unreachable 1": "is_child"
+    #"Gerudo Valley Crate Child Unreachable 2": "is_child"
+    #"Gerudo Valley Crate Child Unreachable 3": "is_child"
+    #"Gerudo Valley Crate Child Unreachable 4": "is_child"
 "Octorok Grotto Ledge":
   region: GERUDO_VALLEY
   time: flow

@@ -383,6 +383,13 @@ static void ObjKibako2_Alias(Actor_ObjKibako2* this)
         }
         xf->setupId = 0;
         break;
+    case SCE_OOT_GERUDO_VALLEY:
+        if (xf->setupId == 2)
+        {
+            xf->setupId = 0;
+            xf->id += 8;
+        }
+        break;
     }
 }
 #endif
