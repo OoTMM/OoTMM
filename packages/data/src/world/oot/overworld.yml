@@ -2247,6 +2247,28 @@
     "Gerudo Fortress Archery Reward 1": "can_ride_epona && can_use_bow && has(GERUDO_CARD) && can_use_wallet(1) && is_day"
     "Gerudo Fortress Archery Reward 2": "can_ride_epona && can_use_bow && has(GERUDO_CARD) && can_use_wallet(1) && is_day"
     "Gerudo Fortress GS Target": "is_adult && gs_night && (has(GERUDO_CARD) || time_travel_at_will) && (can_collect_distance || climb_anywhere)"
+    "Gerudo Fortress Crate Main 1": "true"
+    "Gerudo Fortress Crate Main 2": "true"
+    "Gerudo Fortress Crate Main 3": "true"
+    "Gerudo Fortress Crate Main 4": "true"
+    "Gerudo Fortress Crate Main 5": "true"
+    "Gerudo Fortress Crate Main 6": "true"
+    "Gerudo Fortress Crate Jail Top": "is_adult && can_hookshot"
+    "Gerudo Fortress Crate Archery 01": "is_child || has(GERUDO_CARD)"
+    "Gerudo Fortress Crate Archery 02": "is_child || has(GERUDO_CARD)"
+    "Gerudo Fortress Crate Archery 03": "is_child || has(GERUDO_CARD)"
+    "Gerudo Fortress Crate Archery 04": "is_child || has(GERUDO_CARD)"
+    "Gerudo Fortress Crate Archery 05": "is_child || has(GERUDO_CARD)"
+    "Gerudo Fortress Crate Archery 06": "is_child || has(GERUDO_CARD)"
+    "Gerudo Fortress Crate Archery 07": "is_child || has(GERUDO_CARD)"
+    "Gerudo Fortress Crate Archery 08": "is_child || has(GERUDO_CARD)"
+    "Gerudo Fortress Crate Archery 09": "is_child || has(GERUDO_CARD)"
+    "Gerudo Fortress Crate Archery 10": "is_child || has(GERUDO_CARD)"
+    "Gerudo Fortress Crate Archery 11": "is_child || has(GERUDO_CARD)"
+    "Gerudo Fortress Crate Archery 12": "is_child || has(GERUDO_CARD)"
+    "Gerudo Fortress Crate Archery 13": "is_child || has(GERUDO_CARD)"
+    # Might be unreachable
+    #"Gerudo Fortress Crate Archery Child": "is_child"
     "Gerudo Fortress Wonder Item Sign Entrance": "can_use_bow"
     "Gerudo Fortress Wonder Item Sign Archery": "can_use_bow && has(GERUDO_CARD)"
 "Gerudo Fortress Lower-Right Ledge":
@@ -2333,6 +2355,8 @@
   exits:
     "Fortress Near Wasteland": "true"
     "Haunted Wasteland Structure": "can_longshot || has_hover_boots || trick(OOT_SAND_RIVER_NOTHING)"
+  locations:
+    "Haunted Wasteland Crate Entrance": "true"
 "Haunted Wasteland Structure":
   region: HAUNTED_WASTELAND
   exits:
@@ -2347,6 +2371,10 @@
     "Haunted Wasteland Pot 2": "true"
     "Haunted Wasteland Pot 3": "true"
     "Haunted Wasteland Pot 4": "true"
+    "Haunted Wasteland Crate After Pit 1": "true"
+    "Haunted Wasteland Crate After Pit 2": "true"
+    "Haunted Wasteland Crate After Pit 3": "true"
+    "Haunted Wasteland Crate Deep": "has_lens_strict || trick(OOT_BLIND_WASTELAND)"
 "Haunted Wasteland End":
   region: HAUNTED_WASTELAND
   exits:

@@ -904,6 +904,27 @@ Gerudo Fortress Archery Reward 1,                           npc,            GERU
 Gerudo Fortress Archery Reward 2,                           npc,            GERUDO_ARCHERY,       GERUDO_FORTRESS,                GERUDO_ARCHERY_2,           BOW
 Gerudo Fortress GS Wall,                                    gs,             NONE,                 GERUDO_FORTRESS,                0xa9,                       GS_TOKEN
 Gerudo Fortress GS Target,                                  gs,             NONE,                 GERUDO_FORTRESS,                0xa8,                       GS_TOKEN
+Gerudo Fortress Crate Main 1,                               crate,          NONE,                 GERUDO_FORTRESS,                0x0800c,                    RUPEE_GREEN
+Gerudo Fortress Crate Main 2,                               crate,          NONE,                 GERUDO_FORTRESS,                0x0800d,                    RUPEE_GREEN
+Gerudo Fortress Crate Main 3,                               crate,          NONE,                 GERUDO_FORTRESS,                0x0800e,                    RUPEE_GREEN
+Gerudo Fortress Crate Main 4,                               crate,          NONE,                 GERUDO_FORTRESS,                0x0800f,                    RUPEE_GREEN
+Gerudo Fortress Crate Main 5,                               crate,          NONE,                 GERUDO_FORTRESS,                0x08010,                    RUPEE_GREEN
+Gerudo Fortress Crate Main 6,                               crate,          NONE,                 GERUDO_FORTRESS,                0x08011,                    RUPEE_GREEN
+Gerudo Fortress Crate Jail Top,                             crate,          NONE,                 GERUDO_FORTRESS,                0x08012,                    RUPEE_PURPLE
+Gerudo Fortress Crate Archery Child,                        crate,          NONE,                 GERUDO_FORTRESS,                0x00103,                    RUPEE_GREEN
+Gerudo Fortress Crate Archery 01,                           crate,          NONE,                 GERUDO_FORTRESS,                0x00100,                    RUPEE_GREEN
+Gerudo Fortress Crate Archery 02,                           crate,          NONE,                 GERUDO_FORTRESS,                0x00101,                    RUPEE_GREEN
+Gerudo Fortress Crate Archery 03,                           crate,          NONE,                 GERUDO_FORTRESS,                0x00102,                    RUPEE_GREEN
+Gerudo Fortress Crate Archery 04,                           crate,          NONE,                 GERUDO_FORTRESS,                0x00104,                    RUPEE_GREEN
+Gerudo Fortress Crate Archery 05,                           crate,          NONE,                 GERUDO_FORTRESS,                0x00105,                    RUPEE_GREEN
+Gerudo Fortress Crate Archery 06,                           crate,          NONE,                 GERUDO_FORTRESS,                0x00106,                    RUPEE_GREEN
+Gerudo Fortress Crate Archery 07,                           crate,          NONE,                 GERUDO_FORTRESS,                0x00107,                    RUPEE_GREEN
+Gerudo Fortress Crate Archery 08,                           crate,          NONE,                 GERUDO_FORTRESS,                0x00108,                    RUPEE_GREEN
+Gerudo Fortress Crate Archery 09,                           crate,          NONE,                 GERUDO_FORTRESS,                0x00109,                    RUPEE_GREEN
+Gerudo Fortress Crate Archery 10,                           crate,          NONE,                 GERUDO_FORTRESS,                0x0010a,                    RUPEE_GREEN
+Gerudo Fortress Crate Archery 11,                           crate,          NONE,                 GERUDO_FORTRESS,                0x0010b,                    RUPEE_GREEN
+Gerudo Fortress Crate Archery 12,                           crate,          NONE,                 GERUDO_FORTRESS,                0x0010c,                    RUPEE_GREEN
+Gerudo Fortress Crate Archery 13,                           crate,          NONE,                 GERUDO_FORTRESS,                0x0010d,                    RUPEE_GREEN
 Gerudo Fortress Wonder Item Sign Archery,                   wonder,         NONE,                 GERUDO_FORTRESS,                0x00007,                    RUPEE_RED
 Gerudo Fortress Wonder Item Sign Entrance,                  wonder,         NONE,                 GERUDO_FORTRESS,                0x00008,                    RUPEE_RED
 Gerudo Fortress Fairy Fountain Fairy 1,                     fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x02400,                    FAIRY
@@ -920,6 +941,11 @@ Haunted Wasteland Pot 1,                                    pot,            NONE
 Haunted Wasteland Pot 2,                                    pot,            NONE,                 HAUNTED_WASTELAND,              0x0001,                     NUTS_5
 Haunted Wasteland Pot 3,                                    pot,            NONE,                 HAUNTED_WASTELAND,              0x0002,                     FAIRY
 Haunted Wasteland Pot 4,                                    pot,            NONE,                 HAUNTED_WASTELAND,              0x0003,                     MAGIC_JAR_SMALL
+Haunted Wasteland Crate Entrance,                           crate,          NONE,                 HAUNTED_WASTELAND,              0x00125,                    RUPEE_GREEN
+Haunted Wasteland Crate After Pit 1,                        crate,          NONE,                 HAUNTED_WASTELAND,              0x00122,                    RUPEE_GREEN
+Haunted Wasteland Crate After Pit 2,                        crate,          NONE,                 HAUNTED_WASTELAND,              0x00123,                    RUPEE_GREEN
+Haunted Wasteland Crate After Pit 3,                        crate,          NONE,                 HAUNTED_WASTELAND,              0x00124,                    RUPEE_GREEN
+Haunted Wasteland Crate Deep,                               crate,          NONE,                 HAUNTED_WASTELAND,              0x00121,                    RUPEE_GREEN
 Desert Colossus HP,                                         collectible,    NONE,                 DESERT_COLOSSUS,                0x0d,                       HEART_PIECE
 Desert Colossus Song Spirit,                                npc,            NONE,                 DESERT_COLOSSUS,                SHEIK_SPIRIT,               SONG_TP_SPIRIT
 Desert Colossus Grotto Front Scrub,                         scrub,          NONE,                 GROTTOS,                        0x19,                       POTION_GREEN
