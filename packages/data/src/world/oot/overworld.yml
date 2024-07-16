@@ -728,6 +728,7 @@
     "Lon Lon Ranch GS House": "is_child && gs_night && (can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_sword || can_use_sticks || can_use_din)))"
     "Lon Lon Ranch GS Rain Shed": "is_child && gs_night"
     "Lon Lon Ranch GS Back Wall": "is_child && gs_night && (can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_din)))"
+    "Lon Lon Ranch Crate": "is_child"
     "Lon Lon Ranch Wonder Item 1": "is_adult && can_ride_epona"
     "Lon Lon Ranch Wonder Item 2": "is_adult && can_ride_epona"
 "Lon Lon Ranch Pots":
@@ -1333,6 +1334,7 @@
     "Graveyard Dampe Game": "is_child && can_use_wallet(1) && is_dusk && soul_dampe"
     "Graveyard Sell Spooky Mask": "is_child && soul_bombers && has(MASK_SPOOKY)"
     "Graveyard Crate HP": "can_ride_bean(BEAN_GRAVEYARD) || can_longshot || climb_anywhere || hookshot_anywhere"
+    "Graveyard Crate": "can_ride_bean(BEAN_GRAVEYARD) || can_longshot || climb_anywhere || hookshot_anywhere"
     "Graveyard GS Soil": "gs_soil && can_damage_skull"
     "Graveyard GS Wall": "is_child && gs_night && (can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_din)))"
     "Graveyard Grass 01": "can_cut_grass"

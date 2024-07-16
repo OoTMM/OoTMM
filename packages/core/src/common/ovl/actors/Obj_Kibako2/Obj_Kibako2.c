@@ -367,6 +367,22 @@ static void ObjKibako2_Alias(Actor_ObjKibako2* this)
         xf->sceneId = SCE_OOT_MARKET_CHILD_DAY;
         xf->id += 11;
         break;
+    case SCE_OOT_LON_LON_RANCH:
+        if (xf->setupId == 1)
+        {
+            xf->setupId = 0;
+            xf->id -= 5;
+        }
+        break;
+    case SCE_OOT_GRAVEYARD:
+        switch (xf->setupId)
+        {
+        case 1: xf->id -= 2; break;
+        case 2: /* Fallthrough */
+        case 3: xf->id -= 12; break;
+        }
+        xf->setupId = 0;
+        break;
     }
 }
 #endif
