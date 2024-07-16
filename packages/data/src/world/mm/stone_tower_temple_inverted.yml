@@ -18,6 +18,11 @@
     "WARP_SONGS": "true"
   locations:
     "Stone Tower Temple Inverted Entrance Chest": "can_use_light_arrows"
+    "Stone Tower Temple Inverted Crate Entrance Right 1": "true"
+    "Stone Tower Temple Inverted Crate Entrance Right 2": "true"
+    "Stone Tower Temple Inverted Crate Entrance Left 1": "true"
+    "Stone Tower Temple Inverted Crate Entrance Left 2": "true"
+    "Stone Tower Temple Inverted Crate Entrance Left 3": "true"
 "Stone Tower Temple Inverted East":
   dungeon: IST
   exits:
@@ -122,6 +127,13 @@
     "Stone Tower Temple Inverted Pot Gomess 2": "true"
     "Stone Tower Temple Inverted Pot Gomess 3": "true"
     "Stone Tower Temple Inverted Pot Gomess 4": "true"
+    # Todo: Move to a corridor room
+    "Stone Tower Temple Inverted Crate Before Gomess 1": "true"
+    "Stone Tower Temple Inverted Crate Before Gomess 2": "true"
+    "Stone Tower Temple Inverted Crate Before Gomess 3": "true"
+    "Stone Tower Temple Inverted Crate Before Gomess 4": "true"
+    "Stone Tower Temple Inverted Crate Before Gomess 5": "true"
+    "Stone Tower Temple Inverted Crate Before Gomess 6": "true"
 "Stone Tower Temple Inverted Entrance Ledge":
   dungeon: IST
   exits:

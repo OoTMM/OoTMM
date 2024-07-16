@@ -390,6 +390,7 @@ function checkKey(check: WorldCheck): number {
     typeId = 0x0A;
     break;
   case 'pot':
+  case 'crate':
   case 'grass':
   case 'fairy':
   case 'rupee':
@@ -408,6 +409,7 @@ function checkKey(check: WorldCheck): number {
   case 'collectible':
   case 'sf':
   case 'pot':
+  case 'crate':
   case 'grass':
   case 'fairy':
   case 'rupee':

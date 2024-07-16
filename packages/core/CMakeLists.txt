@@ -57,7 +57,7 @@ function(build game)
 
   # Build
   file(GLOB_RECURSE SOURCES "src/${game}/*.c" "src/${game}/*.S" "src/common/*.c" "src/common/*.S" "build/src/${game}/*.c" "build/src/${game}/*.S" "build/src/common/*.c" "build/src/common/*.S")
-  file(GLOB_RECURSE SOURCES_OVL "src/${game}/ovl/*.c")
+  file(GLOB_RECURSE SOURCES_OVL "src/${game}/ovl/*.c" "src/common/ovl/*.c")
   list(REMOVE_ITEM SOURCES ${SOURCES_OVL})
 
   add_executable(${game} ${SOURCES})
@@ -133,16 +133,21 @@ function (add_actor game name file)
   install(FILES ${ovl} DESTINATION "bin/ovl/${game}")
 endfunction()
 
+function (add_actor_common)
+  add_actor(oot ${ARGN})
+  add_actor(mm ${ARGN})
+endfunction()
+
 build(oot)
 build(mm)
 
+add_actor_common(Obj_Kibako   "common/ovl/actors/Obj_Kibako/Obj_Kibako.c")
+add_actor_common(Obj_Kibako2  "common/ovl/actors/Obj_Kibako2/Obj_Kibako2.c")
+
 add_actor(oot Obj_Tsubo   "oot/ovl/actors/Obj_Tsubo/Obj_Tsubo.c")
-add_actor(oot Obj_Kibako  "oot/ovl/actors/Obj_Kibako/Obj_Kibako.c")
-add_actor(oot Obj_Kibako2 "oot/ovl/actors/Obj_Kibako2/Obj_Kibako2.c")
 add_actor(oot En_Mag      "oot/ovl/actors/En_Mag/En_Mag.c")
 
 add_actor(mm Obj_Tsubo          "mm/ovl/actors/Obj_Tsubo/Obj_Tsubo.c")
-add_actor(mm Obj_Kibako         "mm/ovl/actors/Obj_Kibako/Obj_Kibako.c")
 add_actor(mm En_Hs              "mm/ovl/actors/En_Hs/En_Hs.c")
 add_actor(mm En_Nwc             "mm/ovl/actors/En_Nwc/En_Nwc.c")
 add_actor(mm En_Test4           "mm/ovl/actors/En_Test4/En_Test4.c")

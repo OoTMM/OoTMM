@@ -534,6 +534,22 @@ export const SETTINGS = [{
   cond: hasMM,
   default: false
 }, {
+  key: 'shuffleCratesOot',
+  name: 'Crates Shuffle (OoT)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the crates are shuffled (OoT).',
+  cond: hasOoT,
+  default: false
+}, {
+  key: 'shuffleCratesMm',
+  name: 'Crates Shuffle (MM)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the crates are shuffled (MM).',
+  cond: hasMM,
+  default: false
+}, {
   key: 'shuffleGrassOot',
   name: 'Grass Shuffle (OoT)',
   category: 'main.shuffle',

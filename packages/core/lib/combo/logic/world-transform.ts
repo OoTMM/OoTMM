@@ -1045,6 +1045,17 @@ export class LogicPassWorldTransform {
       }
     }
 
+    /* Crates */
+    if (!settings.shuffleCratesOot) {
+      const locs = POOL.oot.filter((x: any) => x.type === 'crate').map((x: any) => gameId('oot', x.location, ' ')) as string[];
+      this.removeLocations(locs);
+    }
+
+    if (!settings.shuffleCratesMm) {
+      const locs = POOL.mm.filter((x: any) => x.type === 'crate').map((x: any) => gameId('mm', x.location, ' ')) as string[];
+      this.removeLocations(locs);
+    }
+
     /* Grasssanity */
     if (!settings.shuffleGrassOot) {
       const grass = POOL.oot.filter((x: any) => x.type === 'grass').map((x: any) => gameId('oot', x.location, ' ')) as string[];

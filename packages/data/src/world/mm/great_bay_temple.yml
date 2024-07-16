@@ -155,6 +155,12 @@
   events:
     GB_PIPE_RED2: "(soul_enemy(SOUL_ENEMY_CHUCHU) && can_use_ice_arrows) || short_hook_anywhere"
     MAGIC: "true"
+  locations:
+    "Great Bay Temple Crate Chu Room 1": "true"
+    "Great Bay Temple Crate Chu Room 2": "true"
+    "Great Bay Temple Crate Chu Room 3": "true"
+    "Great Bay Temple Crate Chu Room 4": "true"
+    "Great Bay Temple Crate Chu Room 5": "true"
 "Great Bay Temple Boss Key Room":
   dungeon: GB
   exits:
@@ -162,6 +168,23 @@
     "WARP_SONGS": "true"
   events:
     FROG_4: "has(MASK_DON_GERO) && soul_enemy(SOUL_ENEMY_GEKKO) && can_use_ice_arrows"
+  locations:
+    "Great Bay Temple Crate Before Boss Key 01": "true"
+    "Great Bay Temple Crate Before Boss Key 02": "true"
+    "Great Bay Temple Crate Before Boss Key 03": "true"
+    "Great Bay Temple Crate Before Boss Key 04": "true"
+    "Great Bay Temple Crate Before Boss Key 05": "true"
+    "Great Bay Temple Crate Before Boss Key 06": "true"
+    "Great Bay Temple Crate Before Boss Key 07": "true"
+    "Great Bay Temple Crate Before Boss Key 08": "true"
+    "Great Bay Temple Crate Before Boss Key 09": "true"
+    "Great Bay Temple Crate Before Boss Key 10": "true"
+    "Great Bay Temple Crate Before Boss Key 11": "true"
+    "Great Bay Temple Crate Before Boss Key 12": "true"
+    "Great Bay Temple Crate Before Boss Key 13": "true"
+    "Great Bay Temple Crate Before Boss Key 14": "true"
+    "Great Bay Temple Crate Before Boss Key 15": "true"
+    "Great Bay Temple Crate Before Boss Key 16": "true"
 "Great Bay Temple After Boss Key":
   dungeon: GB
   exits:
@@ -215,6 +238,13 @@
     "Great Bay Temple Pot Green Pipe 3 Upper 1": "(can_use_fire_arrows && can_use_ice_arrows && is_tall) || (trick(MM_GBT_FIRELESS) && has(MASK_DEKU) && (has_mask_zora || (is_adult && (has_weapon || has_sticks)))) || short_hook_anywhere || has_hover_boots"
     "Great Bay Temple Pot Green Pipe 3 Upper 2": "(can_use_fire_arrows && can_use_ice_arrows && is_tall) || (trick(MM_GBT_FIRELESS) && has(MASK_DEKU) && (has_mask_zora || (is_adult && (has_weapon || has_sticks)))) || short_hook_anywhere || has_hover_boots"
     "Great Bay Temple Pot Green Pipe 3 Lower": "true"
+    "Great Bay Temple Crate Green Pipe 1": "true"
+    "Great Bay Temple Crate Green Pipe 2": "true"
+    "Great Bay Temple Crate Green Pipe 3": "true"
+    "Great Bay Temple Crate Green Pipe 4": "true"
+    "Great Bay Temple Crate Green Pipe 5": "true"
+    "Great Bay Temple Crate Green Pipe 6": "true"
+    "Great Bay Temple Crate Green Pipe 7": "true"
 "Great Bay Temple Pre-Boss":
   dungeon: GB
   exits:

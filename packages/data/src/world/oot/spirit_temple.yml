@@ -28,6 +28,9 @@
     "Spirit Temple Child Climb": "is_child && cond(!setting(climbMostSurfacesOot, off), (small_keys_spirit(1) && can_reflect_light && has_explosives) || small_keys_spirit(2), small_keys_spirit(1))" #1 is safe if you have the means to lower the light platform, otherwise 2 is safe.
     "Spirit Temple Child Left": "soul_keese && soul_armos && (can_use_sticks || has_explosives_or_hammer || ((can_boomerang || has_nuts) && (has_weapon || can_use_slingshot)) || time_travel_at_will)"
     "Spirit Temple Child Right": "soul_keese && soul_armos && (can_use_sticks || has_explosives_or_hammer || ((can_boomerang || has_nuts) && (has_weapon || can_use_slingshot)) || time_travel_at_will)"
+  locations:
+    "Spirit Temple Crate 1": "true"
+    "Spirit Temple Crate 2": "true"
 "Spirit Temple Child Left":
   dungeon: Spirit
   exits:

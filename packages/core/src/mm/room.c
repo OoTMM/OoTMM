@@ -68,6 +68,14 @@ void OnRoomChange(GameState_Play* play, void* arg2)
     OnRoomChangeOriginal(play, arg2);
 }
 
+static void ZeroActor(Actor* this, int size)
+{
+    memset(this, 0, size);
+    this->actorIndex = g.actorIndex;
+}
+
+PATCH_CALL(0x800baf54, ZeroActor);
+
 Actor* SpawnRoomActorEx(ActorContext* actorCtx, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int ex1, int ex2, int ex3)
 {
     Actor* a;

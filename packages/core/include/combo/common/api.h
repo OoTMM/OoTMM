@@ -249,6 +249,8 @@ void Audio_PlaySfx_AtPos(Vec3f* pos, u16 sfxId);
 void Audio_PlaySfx_MessageDecide(void);
 void AudioSfx_PlaySfx(u16 sfxId, Vec3f* pos, u8 token, f32* freqScale, f32* volume, s8* reverbAdd);
 
+void* Lib_SegmentedToVirtual(void* ptr);
+
 #if defined(GAME_MM)
 void AudioOcarina_SetInstrument(u8 ocarinaInstrumentId);
 void Animation_PlayLoop(SkelAnime* skelAnime, AnimationHeader* animation);
@@ -258,7 +260,6 @@ void Message_BombersNotebookQueueEvent(GameState_Play* play, u8 event);
 s32 Player_IsFacingActor(Actor* actor, s16 maxAngleDiff, GameState_Play* play);
 s32 Actor_TrackPlayer(GameState_Play* play, Actor* actor, Vec3s* headRot, Vec3s* torsoRot, Vec3f focusPos);
 s16 Animation_GetLastFrame(void* animation);
-void* Lib_SegmentedToVirtual(void* ptr);
 s8 Play_InCsMode(GameState_Play* this);
 
 s32 Player_SetCsActionWithHaltedActors(GameState_Play* play, Actor* csActor, u8 csAction);
@@ -291,6 +292,7 @@ void ParseSceneRoomHeaders_SoundSettings(GameState_Play* play, void* cmd);
 void Interface_StartMoonCrash(GameState_Play* play);
 
 void SpawnRoomActors(GameState_Play* play, int id);
+void SpawnTransitionActors(GameState_Play* play, int id);
 
 extern u8 gPlayedOcarinaSong;
 extern u8 gIsOcarinaEnabled;

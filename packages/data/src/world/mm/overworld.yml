@@ -342,6 +342,8 @@
     "Clock Town East Wonder Item Basket 1": "true"
     "Clock Town East Wonder Item Basket 2": "true"
     "Clock Town East Wonder Item Basket 3": "true"
+    "Clock Town East Small Crate 1": "true"
+    "Clock Town East Small Crate 2": "true"
 "Clock Town East Postbox":
   region: NONE
   exits:
@@ -393,6 +395,7 @@
   locations:
     "Clock Town Guru Guru Mask Bremen": "soul_guru_guru && (is_night1 || is_night2)"
     "Clock Town Stray Fairy": "is_day"
+    "Clock Town Laundry Pool Small Crate": "true"
     "Clock Town Laundry Pool Grass 1": "true"
     "Clock Town Laundry Pool Grass 2": "true"
     "Clock Town Laundry Pool Grass 3": "true"
@@ -1010,6 +1013,7 @@
   locations:
     "Termina Field Scrub": "event(SCRUB_TELESCOPE) && can_use_wallet(2)"
     "Termina Field Scrub Pot": "true"
+    "Termina Field Scrub Crate": "true"
 "Termina Field Cow Grotto":
   region: ENTRANCE
   events:
@@ -1966,6 +1970,7 @@
     "Goron Village Scrub Bomb Bag": "soul_business_scrub && has_mask_goron && can_use_wallet(2)"
 #    "Goron Village Scrub Bomb Bag": "(has_mask_goron || (has(MOON_TEAR) && has(DEED_LAND) && has(DEED_SWAMP))) && can_use_wallet(2)"
     "Goron Powder Keg": "event(TRIAL_BOULDER) && (event(POWDER_KEG_TRIAL) || (short_hook_anywhere && trick(MM_KEG_TRIAL_HEATLESS)))"
+    "Goron Village Crate": "is_spring || can_use_fire_short_range"
 "Front of Lone Peak Shrine":
   region: GORON_VILLAGE
   exits:
@@ -2251,6 +2256,7 @@
     "Romani Ranch Epona Song": "soul_malon && (before(NIGHT1_PM_06_00) || (trick(MM_RANCH_FARORE) && can_use_farore && clock_day1))"
     "Romani Ranch Aliens": "event(ALIENS)"
     "Romani Ranch Cremia Escort": "event(ALIENS) && (at(NIGHT2_PM_06_00) || (trick(MM_RANCH_FARORE) && can_use_farore && clock_night2))"
+    "Romani Ranch Crate": "true"
     "Romani Ranch Grass Pack 1 Grass 01": "true"
     "Romani Ranch Grass Pack 1 Grass 02": "true"
     "Romani Ranch Grass Pack 1 Grass 03": "true"
@@ -2333,6 +2339,9 @@
     "Cucco Shack Wonder Item 4": "true"
     "Cucco Shack Wonder Item 5": "true"
     "Cucco Shack Wonder Item 6": "true"
+    "Cucco Shack Crate 1": "true"
+    "Cucco Shack Crate 2": "true"
+    "Cucco Shack Crate 3": "true"
   gossip:
     "Cucco Shack Gossip": "true"
 "Doggy Racetrack": #The race is always available
@@ -2774,6 +2783,7 @@
   locations:
     "Gorman Track Garo Mask": "soul_gorman && can_play_epona && can_use_wallet(1) && is_day"
     "Gorman Track Milk Purchase": "soul_gorman && can_use_wallet(1) && is_day"
+    "Gorman Track Crate": "true"
 "Gorman Track Back":
   region: MILK_ROAD
   exits:

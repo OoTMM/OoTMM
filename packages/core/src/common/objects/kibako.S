@@ -1,0 +1,19 @@
+#include <combo.h>
+
+#if defined(GAME_OOT)
+#define DANGEON_OFF 0x5290
+#endif
+
+#if defined(GAME_MM)
+#define DANGEON_OFF 0x7890
+#endif
+
+PATCH_OBJECT OBJECT_GAMEPLAY_DANGEON_KEEP, DANGEON_OFF + 0x1c
+.int 0x08000000
+PATCH_END
+
+#if defined(GAME_MM)
+PATCH_OBJECT OBJECT_KIBAKO, 0x119c
+.int 0x08000000
+PATCH_END
+#endif

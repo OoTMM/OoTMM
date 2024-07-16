@@ -503,6 +503,10 @@
     "Market Wonder Item Day 5": "is_child && is_day"
     "Market Wonder Item Night 1": "is_child && is_night"
     "Market Wonder Item Night 2": "is_child && is_night"
+    "Market Crate 1": "is_child"
+    "Market Crate 2": "is_child"
+    "Market Crate 3": "is_child"
+    "Market Crate 4": "is_child"
 "Market Grass":
   region: MARKET
   age_change: false
@@ -630,6 +634,10 @@
     "Market Pot House Child Pot Ground 42": "true"
     "Market Pot House Child Pot Above 1": "true"
     "Market Pot House Child Pot Above 2": "true"
+    "Market Pot House Crate 1": "true"
+    "Market Pot House Crate 2": "true"
+    "Market Pot House Crate 3": "true"
+    "Market Pot House Crate 4": "true"
 "Market Pot House Adult":
   region: ENTRANCE
   age_change: false
@@ -660,6 +668,7 @@
     "Back Alley": "true"
   locations:
     "Market Dog Lady HP": "event(RICHARD) && is_night && soul_dog_lady"
+    "Market Dog Lady Crate": "true"
 "Market Back Alley East Home":
   region: ENTRANCE
   exits:
@@ -720,6 +729,7 @@
     "Lon Lon Ranch GS House": "is_child && gs_night && (can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_sword || can_use_sticks || can_use_din)))"
     "Lon Lon Ranch GS Rain Shed": "is_child && gs_night"
     "Lon Lon Ranch GS Back Wall": "is_child && gs_night && (can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_din)))"
+    "Lon Lon Ranch Crate": "is_child"
     "Lon Lon Ranch Wonder Item 1": "is_adult && can_ride_epona"
     "Lon Lon Ranch Wonder Item 2": "is_adult && can_ride_epona"
 "Lon Lon Ranch Pots":
@@ -1151,6 +1161,24 @@
     "Kakariko Pot 09": "is_child"
     "Kakariko Pot 10": "is_child"
     "Kakariko Pot 11": "is_child"
+    "Kakariko Crate Child Near Trail": "is_child"
+    "Kakariko Crate Child Near House": "is_child"
+    "Kakariko Crate Child Near Windmill Bottom": "is_child"
+    "Kakariko Crate Child Near Windmill Top": "is_child"
+    "Kakariko Crate Child Near Graveyard": "is_child"
+    "Kakariko Crate Adult Near First House": "is_adult"
+    "Kakariko Crate Adult Near Trail 1": "is_adult"
+    "Kakariko Crate Adult Near Trail 2": "is_adult"
+    "Kakariko Crate Adult Near Impa 1": "is_adult"
+    "Kakariko Crate Adult Near Impa 2": "is_adult"
+    "Kakariko Crate Adult Center 1": "is_adult"
+    "Kakariko Crate Adult Center 2": "is_adult"
+    "Kakariko Crate Adult Near Archery": "is_adult"
+    "Kakariko Crate Adult Near Potion Shop": "is_adult"
+    "Kakariko Crate Adult Back 1": "is_adult"
+    "Kakariko Crate Adult Back 2": "is_adult"
+    "Kakariko Crate Adult Back 3": "is_adult"
+    "Kakariko Crate Adult Back 4": "is_adult"
     "Kakariko Grass 1": "can_cut_grass"
     "Kakariko Grass 2": "can_cut_grass"
     "Kakariko Grass 3": "can_cut_grass"
@@ -1325,6 +1353,7 @@
     "Graveyard Dampe Game": "is_child && can_use_wallet(1) && is_dusk && soul_dampe"
     "Graveyard Sell Spooky Mask": "is_child && soul_bombers && has(MASK_SPOOKY)"
     "Graveyard Crate HP": "can_ride_bean(BEAN_GRAVEYARD) || can_longshot || climb_anywhere || hookshot_anywhere"
+    "Graveyard Crate": "can_ride_bean(BEAN_GRAVEYARD) || can_longshot || climb_anywhere || hookshot_anywhere"
     "Graveyard GS Soil": "gs_soil && can_damage_skull"
     "Graveyard GS Wall": "is_child && gs_night && (can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_din)))"
     "Graveyard Grass 01": "can_cut_grass"
@@ -2150,6 +2179,8 @@
     "Gerudo Valley GS Soil": "gs_soil && can_damage_skull"
     "Gerudo Valley GS Wall": "is_child && gs_night && (can_collect_distance || (climb_anywhere && (can_use_sword_master || (age_sword_adult && has(SWORD_BIGGORON)) || has_explosives || can_use_din || can_use_sticks || can_use_slingshot)))"
     "Gerudo Valley Cow": "is_child && can_play_epona"
+    "Gerudo Valley Crate Ledge": "is_child || can_longshot || climb_anywhere"
+    "Gerudo Valley Crate Child Bottom": "is_child"
     "Gerudo Valley Wonder Item Lower": "is_adult"
     "Gerudo Valley Wonder Item Upper": "is_adult"
   gossip:
@@ -2169,6 +2200,11 @@
     "Gerudo Valley GS Tent": "is_adult && gs_night && (can_collect_distance || (climb_anywhere && (has_explosives || has(SWORD_BIGGORON) || has_ranged_weapon || can_use_din)))"
     "Gerudo Valley GS Pillar": "is_adult && can_collect_distance && gs_night"
     "Gerudo Valley Crate HP": "climb_anywhere"
+    # Unreachable with some settings, need a way to detect that
+    #"Gerudo Valley Crate Child Unreachable 1": "is_child"
+    #"Gerudo Valley Crate Child Unreachable 2": "is_child"
+    #"Gerudo Valley Crate Child Unreachable 3": "is_child"
+    #"Gerudo Valley Crate Child Unreachable 4": "is_child"
 "Octorok Grotto Ledge":
   region: GERUDO_VALLEY
   time: flow
@@ -2230,6 +2266,28 @@
     "Gerudo Fortress Archery Reward 1": "can_ride_epona && can_use_bow && has(GERUDO_CARD) && can_use_wallet(1) && is_day"
     "Gerudo Fortress Archery Reward 2": "can_ride_epona && can_use_bow && has(GERUDO_CARD) && can_use_wallet(1) && is_day"
     "Gerudo Fortress GS Target": "is_adult && gs_night && (has(GERUDO_CARD) || time_travel_at_will) && (can_collect_distance || climb_anywhere)"
+    "Gerudo Fortress Crate Main 1": "true"
+    "Gerudo Fortress Crate Main 2": "true"
+    "Gerudo Fortress Crate Main 3": "true"
+    "Gerudo Fortress Crate Main 4": "true"
+    "Gerudo Fortress Crate Main 5": "true"
+    "Gerudo Fortress Crate Main 6": "true"
+    "Gerudo Fortress Crate Jail Top": "is_adult && can_hookshot"
+    "Gerudo Fortress Crate Archery 01": "is_child || has(GERUDO_CARD)"
+    "Gerudo Fortress Crate Archery 02": "is_child || has(GERUDO_CARD)"
+    "Gerudo Fortress Crate Archery 03": "is_child || has(GERUDO_CARD)"
+    "Gerudo Fortress Crate Archery 04": "is_child || has(GERUDO_CARD)"
+    "Gerudo Fortress Crate Archery 05": "is_child || has(GERUDO_CARD)"
+    "Gerudo Fortress Crate Archery 06": "is_child || has(GERUDO_CARD)"
+    "Gerudo Fortress Crate Archery 07": "is_child || has(GERUDO_CARD)"
+    "Gerudo Fortress Crate Archery 08": "is_child || has(GERUDO_CARD)"
+    "Gerudo Fortress Crate Archery 09": "is_child || has(GERUDO_CARD)"
+    "Gerudo Fortress Crate Archery 10": "is_child || has(GERUDO_CARD)"
+    "Gerudo Fortress Crate Archery 11": "is_child || has(GERUDO_CARD)"
+    "Gerudo Fortress Crate Archery 12": "is_child || has(GERUDO_CARD)"
+    "Gerudo Fortress Crate Archery 13": "is_child || has(GERUDO_CARD)"
+    # Might be unreachable
+    #"Gerudo Fortress Crate Archery Child": "is_child"
     "Gerudo Fortress Wonder Item Sign Entrance": "can_use_bow"
     "Gerudo Fortress Wonder Item Sign Archery": "can_use_bow && has(GERUDO_CARD)"
 "Gerudo Fortress Lower-Right Ledge":
@@ -2316,6 +2374,8 @@
   exits:
     "Fortress Near Wasteland": "true"
     "Haunted Wasteland Structure": "can_longshot || has_hover_boots || trick(OOT_SAND_RIVER_NOTHING)"
+  locations:
+    "Haunted Wasteland Crate Entrance": "true"
 "Haunted Wasteland Structure":
   region: HAUNTED_WASTELAND
   exits:
@@ -2330,6 +2390,10 @@
     "Haunted Wasteland Pot 2": "true"
     "Haunted Wasteland Pot 3": "true"
     "Haunted Wasteland Pot 4": "true"
+    "Haunted Wasteland Crate After Pit 1": "true"
+    "Haunted Wasteland Crate After Pit 2": "true"
+    "Haunted Wasteland Crate After Pit 3": "true"
+    "Haunted Wasteland Crate Deep": "has_lens_strict || trick(OOT_BLIND_WASTELAND)"
 "Haunted Wasteland End":
   region: HAUNTED_WASTELAND
   exits:

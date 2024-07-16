@@ -148,6 +148,8 @@ const ACTORS_OOT = {
   OBJ_MURE3: 0x1ab,
   SHOT_SUN: 0x183,
   EN_WONDER_ITEM: 0x112,
+  OBJ_KIBAKO: 0x110,
+  OBJ_KIBAKO2: 0x1a0,
   //DOOR_ANA: 0x9b,
 };
 
@@ -164,6 +166,8 @@ const ACTORS_MM = {
   EN_ELF: 0x10,
   EN_HIT_TAG: 0x265,
   EN_INVISIBLE_RUPPE: 0x2af,
+  OBJ_KIBAKO: 0x81,
+  OBJ_KIBAKO2: 0xe5,
   //DOOR_ANA: 0x55,
 };
 
@@ -305,7 +309,45 @@ const ITEM00_DROPS_MM = [
   'RECOVERY_HEART',
   '???',
   'NUTS_10',
+  '???',
+  '???',
+  'STRAY_FAIRY',
+  '???',
+  '???',
+  '???',
+  '???',
+  '???',
 ];
+
+const MM_ITEM00_DROP_COLLECTIBLE_TABLE = [
+  -1, 0, 1, -1,
+  0x02, 0x14, -1, 0x13,
+  0x1c, 0x1d, 0x3, 0x15,
+  0x6, 0x7, 0xf, 0xe,
+  0x12, 0x1a, -1, 0x17,
+  -1, 0x4, -1, -1,
+  -1, 0xd, -1, -1,
+  -1, -1, 5, 8,
+];
+
+function mmCollectibleDrop(index: number) {
+  let index00: number;
+  let item: string;
+
+  if (index < 0 || index >= MM_ITEM00_DROP_COLLECTIBLE_TABLE.length) {
+    index00 = -1;
+  } else {
+    index00 = MM_ITEM00_DROP_COLLECTIBLE_TABLE[index];
+  }
+
+  if (index00 === -1 || index00 >= ITEM00_DROPS_MM.length) {
+    item = 'NOTHING';
+  } else {
+    item = ITEM00_DROPS_MM[index00];
+  }
+
+  return item;
+}
 
 const FLYING_POT_DROPS = [
   'RECOVERY_HEART',
@@ -329,6 +371,8 @@ type Actor = {
   actorId: number;
   typeId: number;
   pos: [number, number, number];
+  rx: number;
+  ry: number;
   rz: number;
   params: number;
 }
@@ -517,9 +561,11 @@ function parseRoomActors(rom: Buffer, raw: RawRoom, game: Game): RoomActors[] {
       const posx = rom.readInt16BE(actorVromBase + 0x02);
       const posy = rom.readInt16BE(actorVromBase + 0x04);
       const posz = rom.readInt16BE(actorVromBase + 0x06);
+      const rx = rom.readUInt16BE(actorVromBase + 0x08);
+      const ry = rom.readUInt16BE(actorVromBase + 0x0a);
       const rz = rom.readUInt16BE(actorVromBase + 0x0c);
       const params = rom.readUInt16BE(actorVromBase + 0x0e);
-      actors.push({ actorId, typeId, pos: [posx, posy, posz], rz, params });
+      actors.push({ actorId, typeId, pos: [posx, posy, posz], rx, ry, rz, params });
     }
   }
   actors = filterActors(actors, game);
@@ -1036,6 +1082,86 @@ function outputKeatonGrassPoolMm(roomActors: RoomActors[]) {
   }
 }
 
+function outputCratesPoolOot(roomActors: RoomActors[]) {
+  let lastSceneId = -1;
+  let lastSetupId = -1;
+  for (const room of roomActors) {
+    for (const actor of room.actors) {
+      const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
+      if (actor.typeId === ACTORS_OOT.OBJ_KIBAKO || actor.typeId === ACTORS_OOT.OBJ_KIBAKO2) {
+        if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
+          console.log('');
+          console.log(`### Scene: ${scenesById('oot')[room.sceneId]}`);
+          lastSceneId = room.sceneId;
+          lastSetupId = room.setupId;
+        }
+
+        /* Large crate */
+        if (actor.typeId === ACTORS_OOT.OBJ_KIBAKO2) {
+          if (actor.params !== 0xffff)
+            continue;
+          const itemId = actor.rx & 0xff;
+          let item: string;
+          if (itemId >= ITEM00_DROPS.length) {
+            item = 'NOTHING';
+          } else {
+            item = ITEM00_DROPS[actor.rx & 0xff];
+          }
+          console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Large Crate ${decPad(actor.actorId + 1, 2)},        crate,            NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
+        }
+
+        /* Small crate */
+        if (actor.typeId === ACTORS_OOT.OBJ_KIBAKO) {
+          let item: string;
+          if (actor.params === 0xffff) {
+            item = 'NOTHING';
+          } else {
+            const itemId = actor.params & 0xff;
+            if (itemId >= ITEM00_DROPS.length) {
+              item = 'NOTHING';
+            } else {
+              item = ITEM00_DROPS[actor.params & 0xff];
+            }
+          }
+          console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Small Crate ${decPad(actor.actorId + 1, 2)},        crate,            NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
+        }
+      }
+    }
+  }
+}
+
+function outputCratesPoolMm(roomActors: RoomActors[]) {
+  let lastSceneId = -1;
+  let lastSetupId = -1;
+  for (const room of roomActors) {
+    for (const actor of room.actors) {
+      const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
+      if (actor.typeId === ACTORS_MM.OBJ_KIBAKO || actor.typeId === ACTORS_MM.OBJ_KIBAKO2) {
+        if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
+          console.log('');
+          console.log(`### Scene: ${scenesById('mm')[room.sceneId]}`);
+          lastSceneId = room.sceneId;
+          lastSetupId = room.setupId;
+        }
+
+        /* Large crate */
+        if (actor.typeId === ACTORS_MM.OBJ_KIBAKO2) {
+          if (actor.params & 0x8000) continue;
+          const item = mmCollectibleDrop(actor.params & 0x3f);
+          if (item === 'STRAY_FAIRY') continue;
+          console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Large Crate ${decPad(actor.actorId + 1, 2)},        crate,            NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
+        }
+
+        /* Small crate */
+        if (actor.typeId === ACTORS_MM.OBJ_KIBAKO) {
+          const item = mmCollectibleDrop(actor.params & 0x3f);
+          console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Small Crate ${decPad(actor.actorId + 1, 2)},        crate,            NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
+        }
+      }
+    }
+  }
+}
+
 function outputGrassWeirdPoolOot(roomActors: RoomActors[]) {
   let lastSceneId = -1;
   let lastSetupId = -1;
@@ -1154,11 +1280,11 @@ function roomActorsFromRaw(rom: Buffer, raw: RawRoom[], game: Game): RoomActors[
       roomId: 0x00,
       setupId: 0x00,
       actors: [
-        { actorId: 0, typeId: ACTORS_MM.POT, pos: [0, 0, 0], params: 0x00, rz: 0x0000, },
-        { actorId: 1, typeId: ACTORS_MM.POT, pos: [0, 0, 0], params: 0x00, rz: 0x0000, },
-        { actorId: 2, typeId: ACTORS_MM.POT, pos: [0, 0, 0], params: 0x00, rz: 0x0000, },
-        { actorId: 3, typeId: ACTORS_MM.POT, pos: [0, 0, 0], params: 0x00, rz: 0x0000, },
-        { actorId: 4, typeId: ACTORS_MM.POT, pos: [0, 0, 0], params: 0x00, rz: 0x0000, },
+        { actorId: 0, typeId: ACTORS_MM.POT, pos: [0, 0, 0], params: 0x00, rx: 0, ry: 0, rz: 0x0000, },
+        { actorId: 1, typeId: ACTORS_MM.POT, pos: [0, 0, 0], params: 0x00, rx: 0, ry: 0, rz: 0x0000, },
+        { actorId: 2, typeId: ACTORS_MM.POT, pos: [0, 0, 0], params: 0x00, rx: 0, ry: 0, rz: 0x0000, },
+        { actorId: 3, typeId: ACTORS_MM.POT, pos: [0, 0, 0], params: 0x00, rx: 0, ry: 0, rz: 0x0000, },
+        { actorId: 4, typeId: ACTORS_MM.POT, pos: [0, 0, 0], params: 0x00, rx: 0, ry: 0, rz: 0x0000, },
       ]
     });
   }
@@ -1215,7 +1341,7 @@ async function run() {
 
   /* Output */
   //outputWonderOot(ootRooms);
-  outputWonderMm(mmRooms);
+  //outputWonderMm(mmRooms);
   //outputPotsPoolOot(mqRooms);
   //outputGrassWeirdPoolOot(ootRooms);
   //outputGrassPoolMm(mmRooms);
@@ -1227,6 +1353,8 @@ async function run() {
   //outputShotSunOot(ootRooms);
   //outputShotSunOot(mqRooms);
   //outputGrottosMm(mmRooms);
+  //outputCratesPoolOot(ootRooms);
+  outputCratesPoolMm(mmRooms);
 }
 
 run().catch(e => {
