@@ -2106,7 +2106,7 @@
 "Death Mountain Crater Warp":
   region: DEATH_MOUNTAIN_CRATER
   exits:
-    "Death Mountain Crater Near Temple": "has_tunic_goron && (is_adult || setting(openDungeonsOot, fireChild) || has_hover_boots || climb_anywhere || hookshot_anywhere)"
+    "Death Mountain Crater Near Temple": "has_tunic_goron && (is_adult || setting(openDungeonsOot, fireChild) || fire_temple_hovers || climb_anywhere || hookshot_anywhere)"
     "Death Mountain Crater Bottom": "can_hookshot || has_hover_boots || can_ride_bean(BEAN_DEATH_MOUNTAIN_CRATER)"
     "Death Mountain Crater Bottom Child": "is_child"
     "Death Mountain Crater Bottom Adult Rupees": "is_adult && scarecrow_longshot"

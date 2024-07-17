@@ -199,6 +199,7 @@
 #Trick Macros
 "has_lens": "has_lens_strict || trick(OOT_LENS)"
 "trick_mido": "trick(OOT_MIDO_SKIP) && (has_bow || has_hookshot(1) || has(SHARED_ARROW_FIRE) || has(ARROW_FIRE) || has(SHARED_ARROW_LIGHT) || has(ARROW_LIGHT))"
+"fire_temple_hovers": "trick(OOT_FIRE_TEMPLE_HOVERS) && has_hover_boots && is_child"
 
 # Mido / Deku Tree
 "can_move_mido_reqs": "is_child && has_sword_kokiri && renewable(SHIELD_DEKU)"

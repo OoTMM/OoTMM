@@ -324,6 +324,11 @@ export const TRICKS: Tricks = {
     name: "Enter Zelda's Courtyard using Age Swap in Ganon's Castle",
     tooltip: "Exiting Ganon's Castle as Child puts you in front of the crawlspace to Zelda. This will allow Age Swap to be logical for doing this.",
   },
+  OOT_FIRE_TEMPLE_HOVERS: {
+    game: 'oot',
+    name: "Enter Fire Temple as Child with Hover Boots",
+    tooltip: "You can hover around the Silver Boulders as child with ageless Hover Boots. There is just enough room to do so.",
+  },
   MM_LENS: {
     game: 'mm',
     name: 'Fewer Lens Requirements (MM)',
