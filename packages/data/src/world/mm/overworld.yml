@@ -89,6 +89,8 @@
     WATER: "true"
   locations:
     "Southern Swamp Owl Statue": "has_sticks || has_weapon"
+    "Southern Swamp Grass Owl 1": "true"
+    "Southern Swamp Grass Owl 2": "true"
 "Owl Woodfall":
   region: WOODFALL
   exits:
@@ -129,7 +131,7 @@
   region: GREAT_BAY_COAST
   exits:
     "Great Bay Coast": "can_reset_time"
-    "Tingle Great Bay": "soul_npc(SOUL_NPC_TINGLE) && (can_hookshot || has_arrows)"
+    "Tingle Great Bay": "soul_npc(SOUL_NPC_TINGLE) && has_arrows"
   events:
     PICTURE_TINGLE: "soul_npc(SOUL_NPC_TINGLE) && has(PICTOGRAPH_BOX)"
   locations:
@@ -1304,8 +1306,6 @@
     "Southern Swamp Grass Front 10": "true"
     "Southern Swamp Grass Front 11": "true"
     "Southern Swamp Grass Front 12": "true"
-    "Southern Swamp Grass Owl 1": "true"
-    "Southern Swamp Grass Owl 2": "true"
     "Southern Swamp Grass Near Witch Pack 1 Grass 01": "true"
     "Southern Swamp Grass Near Witch Pack 1 Grass 02": "true"
     "Southern Swamp Grass Near Witch Pack 1 Grass 03": "true"
