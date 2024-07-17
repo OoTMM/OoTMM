@@ -12,7 +12,7 @@
     "Dodongo Cavern Main Room Upper Skull Side": "event(MQ_DC_PILLAR_RAISE) || climb_anywhere || hookshot_anywhere" #You can use hook anywhere to get on top of the skull and again to get on the bridge without longshot.
     "Dodongo Cavern Main Room Upper Entrance Side": "climb_anywhere || longshot_anywhere"
     "Dodongo Cavern Lower Tunnel": "has_explosives_or_hammer || (event(DC_MQ_SHORTCUT) && has_goron_bracelet) || has_blue_fire || has_blue_fire_arrows_mudwall"
-    "Dodongo Cavern Bomb Bag Ledge": "is_adult || climb_anywhere || hookshot_anywhere"
+    "Dodongo Cavern Bomb Bag Ledge": "is_adult || climb_anywhere || can_hookshot"
   events:
     MQ_DC_PILLAR_RAISE: "has_bombflowers || can_hammer"
     MQ_DC_OPEN_SKULL: "(hookshot_anywhere || climb_anywhere) && has_explosives"
@@ -244,7 +244,7 @@
     "Dodongo Cavern Boss Loop Start": "event(MQ_DC_BOSS_LOOP_FIRE_WALL_CRYSTAL) || climb_anywhere || hookshot_anywhere"
     "Dodongo Cavern Boss Loop After Armos Wall": "climb_anywhere || hookshot_anywhere || has_fire || has_explosives"
   events:
-    MQ_DC_BOSS_LOOP_FIRE_WALL_CRYSTAL: "has_weapon || has_bombs || has_bombchu || can_use_bow || can_use_slingshot || can_hookshot || can_use_sticks || can_hammer || can_boomerang"
+    MQ_DC_BOSS_LOOP_FIRE_WALL_CRYSTAL: "has_weapon || has_bombs || can_use_mask_blast || has_bombchu || can_use_bow || can_use_slingshot || can_hookshot || can_use_sticks || can_hammer || can_boomerang" #Many ways to hit crystal switch
   locations:
     "MQ Dodongo Cavern GS Near Boss": "gs && can_damage_skull"
     "MQ Dodongo Cavern Grass Boss Loop": "can_cut_grass"
