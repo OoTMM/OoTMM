@@ -1,16 +1,38 @@
 "Ganon Castle Tower":
   dungeon: Tower
-  locations:
-    "Ganon Castle Boss Key": "has_weapon && soul_lizalfos_dinalfos && soul_enemy(SOUL_ENEMY_STALFOS)"
   exits:
     "Ganon Castle Stairs": "true"
-    "Ganon Castle Tower Pre-Boss": "has_weapon && soul_lizalfos_dinalfos && soul_enemy(SOUL_ENEMY_STALFOS) && soul_iron_knuckle"
+    "Ganon Castle Tower Lizalfos Room": "true"
+"Ganon Castle Tower Lizalfos Room":
+  dungeon: Tower
+  exits:
+    "Ganon Castle Tower": "event(GANON_TOWER_LIZALFOS_CLEAR)"
+    "Ganon Castle Tower Stalfos Room": "event(GANON_TOWER_LIZALFOS_CLEAR)"
+  events:
+    GANON_TOWER_LIZALFOS_CLEAR: "soul_lizalfos_dinalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
+"Ganon Castle Tower Stalfos Room":
+  dungeon: Tower
+  exits:
+    "Ganon Castle Tower Lizalfos Room": "event(GANON_TOWER_STALFOS_CLEAR)"
+    "Ganon Castle Tower Iron Knuckle Room": "event(GANON_TOWER_STALFOS_CLEAR)"
+  events:
+    GANON_TOWER_STALFOS_CLEAR: "soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon"
+  locations:
+    "Ganon Castle Boss Key": "event(GANON_TOWER_STALFOS_CLEAR)"
+"Ganon Castle Tower Iron Knuckle Room":
+  dungeon: Tower
+  exits:
+    "Ganon Castle Tower Stalfos Room": "event(GANON_TOWER_IRON_KNUCKLE_CLEAR)"
+    "Ganon Castle Tower Pre-Boss": "event(GANON_TOWER_IRON_KNUCKLE_CLEAR)"
+  events:
+    GANON_TOWER_IRON_KNUCKLE_CLEAR: "soul_iron_knuckle && has_weapon"
 "Ganon Castle Tower Pre-Boss":
   dungeon: Tower
+  exits:
+    "Ganon Castle Tower Iron Knuckle Room": "true"
+    "Ganon Castle Tower Boss": "setting(ganonBossKey, removed) || has(BOSS_KEY_GANON) || (setting(ganonBossKey, custom) && special(GANON_BK))"
   events:
     GANON_PRE_BOSS: "true"
-  exits:
-    "Ganon Castle Tower Boss": "setting(ganonBossKey, removed) || has(BOSS_KEY_GANON) || (setting(ganonBossKey, custom) && special(GANON_BK))"
 "Ganon Castle Tower Boss":
   dungeon: Tower
   age_change: false
