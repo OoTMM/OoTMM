@@ -17,6 +17,7 @@ form.vertical {
 label {
   display: flex;
   align-items: center;
+  align-content: flex-start;
   font-size: 1em;
   flex-wrap: wrap;
   margin: var(--margin);
