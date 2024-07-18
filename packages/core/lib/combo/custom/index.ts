@@ -128,6 +128,7 @@ export const customFiles = async (opts: Options): Promise<{[k: string]: Buffer}>
   CHEST_SOUL_SIDE: await png(opts, 'chests/soul_side', 'rgba16'),
   CHEST_MAP_FRONT: await png(opts, 'chests/map_front', 'rgba16'),
   CHEST_MAP_SIDE: await png(opts, 'chests/map_side', 'rgba16'),
+  CRATE_BOSS_KEY: await png(opts, 'crates/boss_key', 'rgba16'),
   POT_MAJOR_SIDE: await png(opts, 'pots/major_side', 'rgba16'),
   POT_MAJOR_TOP: await png(opts, 'pots/major_top', 'rgba16'),
   POT_SPIDER_SIDE: await png(opts, 'pots/spider_side', 'rgba16'),

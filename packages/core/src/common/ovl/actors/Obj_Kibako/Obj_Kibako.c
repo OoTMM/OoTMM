@@ -72,7 +72,7 @@ static void ObjKibako_DrawWithTexture(Actor_ObjKibako* this, GameState_Play* pla
     type = ObjKibako_CsmcType(this);
     switch (type)
     {
-    case CSMC_BOSS_KEY: customVrom = CUSTOM_POT_BOSSKEY_SIDE_ADDR; break; /* TODO: Need a texture */
+    case CSMC_BOSS_KEY: customVrom = CUSTOM_CRATE_BOSS_KEY_ADDR; break; /* TODO: Need a texture */
     case CSMC_MAJOR: customVrom = CUSTOM_CHEST_MAJOR_FRONT_ADDR; break;
     case CSMC_KEY: customVrom = CUSTOM_CHEST_KEY_FRONT_ADDR; break;
     case CSMC_SPIDER: customVrom = CUSTOM_CHEST_SPIDER_FRONT_ADDR; break;
