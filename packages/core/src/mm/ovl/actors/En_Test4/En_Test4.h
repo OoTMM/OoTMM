@@ -3,8 +3,8 @@
 
 #include <combo/actor.h>
 
-#define THREEDAY_GET_SKYBOX_NUM_STARS(this) (((this)->variable >> 10) * 100)
-#define THREEDAY_GET_BIG_BELLS_SFX_VOLUME_INDEX(this) (((this)->variable >> 5) & 0xF)
+#define THREEDAY_GET_SKYBOX_NUM_STARS(this)             (((((s16)(this)->variable)) >> 10) * 100)
+#define THREEDAY_GET_BIG_BELLS_SFX_VOLUME_INDEX(this)   (((this)->variable >> 5) & 0xF)
 
 struct Actor_EnTest4;
 
@@ -19,7 +19,7 @@ typedef void (*Actor_EnTest4_ActionFunc)(struct Actor_EnTest4*, GameState_Play*)
 
 #define CURRENT_TIME ((void)0, gSaveContext.save.time)
 
-typedef struct Actor_EnTest4 
+typedef struct Actor_EnTest4
 {
     Actor actor;
     s8 daytimeIndex; // See `ThreeDayDaytime`
@@ -29,7 +29,7 @@ typedef struct Actor_EnTest4
     u16 prevBellTime; // Last time the bell sounded
     u8 weather; // See `ThreeDayWeather`
     Actor_EnTest4_ActionFunc actionFunc;
-} 
+}
 Actor_EnTest4; // size = 0x154
 
 _Static_assert(sizeof(Actor_EnTest4) == 0x154, "Size of MM Actor_EnTest4 is wrong");
