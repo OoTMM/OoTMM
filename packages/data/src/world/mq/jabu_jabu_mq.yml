@@ -52,7 +52,7 @@
 "Jabu-Jabu Main Elevator Room Ledge Before Pre-Boss":
   dungeon: JJ
   exits:
-    "Jabu-Jabu Main Elevator Room Upper": "has_hover_boots || event(JABU_BIG_OCTO) || climb_anywhere"
+    "Jabu-Jabu Main Elevator Room Upper": "has_hover_boots || event(JABU_MQ_LOWER_BIG_OCTO_PLATFORM) || climb_anywhere"
     "Jabu-Jabu Main Elevator Room Lower": "true"
     "Jabu-Jabu Main Elevator Room Ledge Before Pre-Boss After Red Tentacle": "event(JABU_TENTACLE_RED)" #This tentacle can block in door rando, so it needs its own region.
   locations:
