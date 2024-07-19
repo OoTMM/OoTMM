@@ -288,6 +288,17 @@ static void applyStartingEvents(void)
         gMmSave.permanentSceneFlags[SCE_MM_TEMPLE_GREAT_BAY].switch1 |= 0x00078000;
         gMmSave.permanentSceneFlags[SCE_MM_TEMPLE_GREAT_BAY].collectible |= 0x7c000000;
     }
+    if (Config_Flag(CFG_MM_PRE_ACTIVATED_OWL_GB)) gMmSave.playerData.owlActivationFlags |= (1 << 0);
+    if (Config_Flag(CFG_MM_PRE_ACTIVATED_OWL_ZC)) gMmSave.playerData.owlActivationFlags |= (1 << 1);
+    if (Config_Flag(CFG_MM_PRE_ACTIVATED_OWL_SH)) gMmSave.playerData.owlActivationFlags |= (1 << 2);
+    if (Config_Flag(CFG_MM_PRE_ACTIVATED_OWL_MV)) gMmSave.playerData.owlActivationFlags |= (1 << 3);
+    if (Config_Flag(CFG_MM_PRE_ACTIVATED_OWL_CT)) gMmSave.playerData.owlActivationFlags |= (1 << 4);
+    if (Config_Flag(CFG_MM_PRE_ACTIVATED_OWL_MR)) gMmSave.playerData.owlActivationFlags |= (1 << 5);
+    if (Config_Flag(CFG_MM_PRE_ACTIVATED_OWL_WF)) gMmSave.playerData.owlActivationFlags |= (1 << 6);
+    if (Config_Flag(CFG_MM_PRE_ACTIVATED_OWL_SS)) gMmSave.playerData.owlActivationFlags |= (1 << 7);
+    if (Config_Flag(CFG_MM_PRE_ACTIVATED_OWL_IC)) gMmSave.playerData.owlActivationFlags |= (1 << 8);
+    if (Config_Flag(CFG_MM_PRE_ACTIVATED_OWL_ST)) gMmSave.playerData.owlActivationFlags |= (1 << 9);
+
 }
 
 void comboCreateSave(void* unk, void* buffer)

@@ -998,6 +998,16 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     OOT_OPEN_WATER_TEMPLE: world.resolvedFlags.openDungeonsOot.has('Water'),
     OOT_OPEN_WELL: world.resolvedFlags.openDungeonsOot.has('BotW'),
     OOT_SONG_OF_DOUBLE_TIME: settings.songOfDoubleTimeOot,
+    MM_PRE_ACTIVATED_OWL_CT: world.resolvedFlags.mmPreActivatedOwls.has('clocktown'),
+    MM_PRE_ACTIVATED_OWL_MR: world.resolvedFlags.mmPreActivatedOwls.has('milkroad'),
+    MM_PRE_ACTIVATED_OWL_SS: world.resolvedFlags.mmPreActivatedOwls.has('swamp'),
+    MM_PRE_ACTIVATED_OWL_WF: world.resolvedFlags.mmPreActivatedOwls.has('woodfall'),
+    MM_PRE_ACTIVATED_OWL_MV: world.resolvedFlags.mmPreActivatedOwls.has('mountain'),
+    MM_PRE_ACTIVATED_OWL_SH: world.resolvedFlags.mmPreActivatedOwls.has('snowhead'),
+    MM_PRE_ACTIVATED_OWL_GB: world.resolvedFlags.mmPreActivatedOwls.has('greatbay'),
+    MM_PRE_ACTIVATED_OWL_ZC: world.resolvedFlags.mmPreActivatedOwls.has('zoracape'),
+    MM_PRE_ACTIVATED_OWL_IC: world.resolvedFlags.mmPreActivatedOwls.has('canyon'),
+    MM_PRE_ACTIVATED_OWL_ST: world.resolvedFlags.mmPreActivatedOwls.has('tower'),
   };
 
   for (const v in exprs) {
@@ -1118,6 +1128,20 @@ const effectiveStartingItems = (worldId: number, logic: LogicResult): ItemsCount
 
   if (settings.skipZelda) addStartingItemLocsWorld(worldId, logic, locationsZelda(settings), itemsCount);
   if (settings.gerudoFortress === 'open') addStartingItemLocsWorld(worldId, logic, ['OOT Gerudo Member Card'], itemsCount);
+  if (settings.mmPreActivatedOwls.type != 'none')
+  {
+    if (logic.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('clocktown')) addStartingItemLocsWorld(worldId, logic, ['MM Clock Town Owl Statue'], itemsCount);
+    if (logic.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('milkroad')) addStartingItemLocsWorld(worldId, logic, ['MM Milk Road Owl Statue'], itemsCount);
+    if (logic.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('swamp')) addStartingItemLocsWorld(worldId, logic, ['MM Southern Swamp Owl Statue'], itemsCount);
+    if (logic.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('woodfall')) addStartingItemLocsWorld(worldId, logic, ['MM Woodfall Owl Statue'], itemsCount);
+    if (logic.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('mountain')) addStartingItemLocsWorld(worldId, logic, ['MM Mountain Village Owl Statue'], itemsCount);
+    if (logic.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('snowhead')) addStartingItemLocsWorld(worldId, logic, ['MM Snowhead Owl Statue'], itemsCount);
+    if (logic.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('greatbay')) addStartingItemLocsWorld(worldId, logic, ['MM Great Bay Coast Owl Statue'], itemsCount);
+    if (logic.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('zoracape')) addStartingItemLocsWorld(worldId, logic, ['MM Zora Cape Owl Statue'], itemsCount);
+    if (logic.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('canyon')) addStartingItemLocsWorld(worldId, logic, ['MM Ikana Canyon Owl Statue'], itemsCount);
+    if (logic.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('tower')) addStartingItemLocsWorld(worldId, logic, ['MM Stone Tower Owl Statue'], itemsCount);
+  }
+
 
   return itemsCount;
 }

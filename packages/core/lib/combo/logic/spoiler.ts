@@ -181,16 +181,17 @@ export class LogicPassSpoiler {
 
       for (const s of WORLD_FLAGS) {
         const v = world.resolvedFlags[s as keyof typeof world.resolvedFlags];
+        const setting_name = SETTINGS.find(x => x.key === s)!.name;
         if (v.value === 'specific') {
-          this.writer.indent(`${s}:`);
+          this.writer.indent(`${setting_name}:`);
           const setting = SETTINGS.find(x => x.key === v.setting)!;
           const values = ((setting as any).values as any[]).filter(x => v.has(x.value));
           for (const value of values) {
-            this.writer.write(`- ${value.value}`);
+            this.writer.write(`- ${value.name}`);
           }
           this.writer.unindent('');
         } else {
-          this.writer.write(`${s}: ${v.value}`);
+          this.writer.write(`${setting_name}: ${v.value}`);
         }
       }
 

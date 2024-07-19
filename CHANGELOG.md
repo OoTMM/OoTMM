@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Choice to pre-activate owl statues.
 - Crates shuffle, for OoT and MM.
 - The boat cruise is now faster if you are not playing the archery.
 
