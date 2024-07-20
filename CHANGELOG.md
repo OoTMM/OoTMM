@@ -17,6 +17,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Starting age no longer defaults to either child or adult after generating a random starting age seed.
 - Minor collection delay for Bolero.
 - Long-standing issue where Anju's reservation worked inconsistently.
 - Title cards not being displayed on game transitions.

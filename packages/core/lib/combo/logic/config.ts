@@ -54,7 +54,7 @@ export class LogicPassConfig {
   run() {
     this.state.monitor.log('Logic: Config');
 
-    const { settings } = this.state;
+    const settings = { ...this.state.settings };
 
     /* Handle starting age */
     if (settings.startingAge === 'random') {
@@ -108,6 +108,6 @@ export class LogicPassConfig {
       }
     }
 
-    return { startingItems: this.startingItems };
+    return { settings, startingItems: this.startingItems };
   }
 }
