@@ -6,7 +6,7 @@ import { useCosmetics } from '../contexts/GeneratorContext';
 import { FileSelect } from './FileSelect';
 import { Checkbox } from './Checkbox';
 
-const COLOR_OPTIONS: { name: string, value: string}[] = [{ value: 'default', name: 'Default' }, { value: 'auto', name: 'Auto' }, { value: 'random', name: 'Random' }, { value: 'fully-radom', name: 'Fully-Random' }, ...Object.entries(COLORS).map(([key, x]) => ({ name: x.name, value: key }))];
+const COLOR_OPTIONS: { name: string, value: string}[] = [{ value: 'default', name: 'Default' }, { value: 'auto', name: 'Auto' }, { value: 'random', name: 'Random' }, { value: 'fully-radom', name: 'Fully Random' }, ...Object.entries(COLORS).map(([key, x]) => ({ name: x.name, value: key }))];
 
 function Cosmetic({ cosmetic }: { cosmetic: keyof Cosmetics }) {
   const [cosmetics, setCosmetic] = useCosmetics();
@@ -49,7 +49,7 @@ function Cosmetic({ cosmetic }: { cosmetic: keyof Cosmetics }) {
 export function CosmeticsEditor() {
   const options: { name: string, value: string}[] = Object.entries(COLORS).map(([key, x]) => ({ name: x.name, value: key }));
   options.push({ name: "Random", value: "random" });
-  options.push({ name: "Fully Random", value: "fully-random" });
+  // options.push({ name: "Fully Random", value: "fully-random" });
   const nonFiles = COSMETICS.filter(c => c.type !== 'file');
   const files = COSMETICS.filter(c => c.type === 'file');
 

@@ -321,6 +321,7 @@ class CosmeticsPass {
 
   private logColor(color: CosmeticColor | null): string {
     if (color === null) return "Default"
+    if (color === undefined) return "Default"
     return `${color.name} (${this.hexPadding(color.value)})`
   }
 
@@ -349,32 +350,32 @@ class CosmeticsPass {
     }
 
     /* Patch human tunics */
-    if (colorOotTunicKokiri !== null) {
-      await this.patchOotTunic(0, colorOotTunicKokiri.value);
+    if (colorOotTunicKokiri !== undefined) {
+      await this.patchOotTunic(0, colorOotTunicKokiri!.value);
     }
 
-    if (colorOotTunicGoron !== null) {
-      await this.patchOotTunic(1, colorOotTunicGoron.value);
-      this.patchSymbol('MM_COLOR_TUNIC_GORON', colorBufferRGB(colorOotTunicGoron.value));
+    if (colorOotTunicGoron !== undefined) {
+      await this.patchOotTunic(1, colorOotTunicGoron!.value);
+      this.patchSymbol('MM_COLOR_TUNIC_GORON', colorBufferRGB(colorOotTunicGoron!.value));
     }
 
-    if (colorOotTunicZora !== null) {
-      await this.patchOotTunic(2, colorOotTunicZora.value);
-      this.patchSymbol('MM_COLOR_TUNIC_ZORA', colorBufferRGB(colorOotTunicZora.value));
+    if (colorOotTunicZora !== undefined) {
+      await this.patchOotTunic(2, colorOotTunicZora!.value);
+      this.patchSymbol('MM_COLOR_TUNIC_ZORA', colorBufferRGB(colorOotTunicZora!.value));
     }
 
-    if (colorMmTunicHuman !== null) {
-      this.patchSymbol('MM_COLOR_TUNIC_KOKIRI', colorBufferRGB(colorMmTunicHuman.value));
+    if (colorMmTunicHuman !== undefined) {
+      this.patchSymbol('MM_COLOR_TUNIC_KOKIRI', colorBufferRGB(colorMmTunicHuman!.value));
     }
 
     /* Forms */
-    if (colorMmTunicDeku !== null) this.patchMmTunicDeku(colorMmTunicDeku.value);
-    if (colorMmTunicGoron !== null) this.patchMmTunicGoron(colorMmTunicGoron.value);
-    if (colorMmTunicZora !== null) this.patchMmTunicZora(colorMmTunicZora.value);
-    if (colorMmTunicFierceDeity !== null) this.patchMmTunicFierceDeity(colorMmTunicFierceDeity.value);
+    if (colorMmTunicDeku !== undefined) this.patchMmTunicDeku(colorMmTunicDeku!.value);
+    if (colorMmTunicGoron !== undefined) this.patchMmTunicGoron(colorMmTunicGoron!.value);
+    if (colorMmTunicZora !== undefined) this.patchMmTunicZora(colorMmTunicZora!.value);
+    if (colorMmTunicFierceDeity !== undefined) this.patchMmTunicFierceDeity(colorMmTunicFierceDeity!.value);
 
     /* Patch OoT Mirror Shield */
-    if (colorOotShieldMirror !== null) this.patchOotShieldMirror(colorOotShieldMirror.value);
+    if (colorOotShieldMirror !== undefined) this.patchOotShieldMirror(colorOotShieldMirror!.value);
 
     /* Patch D-Pad */
     if (colorDpad !== null) {
