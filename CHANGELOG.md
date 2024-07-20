@@ -12,6 +12,10 @@ All notable changes to this project will be documented in this file.
 - Crates shuffle, for OoT and MM.
 - The boat cruise is now faster if you are not playing the archery.
 
+### Changed
+
+- Internal names of the music tracks, for an easier sorting in the cosmetics log.
+
 ### Fixed
 
 - Minor collection delay for Bolero.
