@@ -69,7 +69,7 @@ static int EnElfgrp_GetFairyCount(GameState_Play* play, int type)
 {
     if (type == 0 || type > 4)
         return 0;
-    if (gSave.inventory.strayFairies[type - 1] >= 15)
+    if (gSave.inventory.strayFairies[type - 1] >= gComboConfig.strayFairyRewardCount)
         return 25;
     return 0;
 }
@@ -86,7 +86,14 @@ static void fairyHint(GameState_Play* play, int index)
     b = play->msgCtx.font.textBuffer.schar;
     comboTextAppendHeader(&b);
     start = b;
-    comboTextAppendStr(&b, "Young one, please help us! If you bring the " TEXT_COLOR_PINK "15 Stray Fairies");
+    comboTextAppendStr(&b, "Young one, please help us! If you bring the " TEXT_COLOR_PINK);
+    if (gComboConfig.strayFairyRewardCount > 1)
+    {
+        comboTextAppendNum(&b, gComboConfig.strayFairyRewardCount);
+        comboTextAppendStr(&b, " Stray Fairies");
+    }
+    else
+        comboTextAppendStr(&b, "Stray Fairy");
     comboTextAppendClearColor(&b);
     comboTextAppendStr(&b, " here, we will give you ");
     comboTextAppendItemNameQueryEx(&b, &q, TF_PREPOS | TF_PROGRESSIVE, gComboConfig.staticHintsImportance[9 + (index - 2)]);

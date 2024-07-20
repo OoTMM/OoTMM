@@ -31,11 +31,16 @@ type Macro = {
 export class ExprParser {
   private ctx: ParseContext[] = [];
   private macros: {[k: string]: Macro} = {};
+  private vars: Map<string, number> = new Map;
 
   constructor(private settings: Settings, private resolvedFlags: ResolvedWorldFlags, private game: Game) {}
 
   addMacro(name: string, args: string[], buffer: string) {
     this.macros[name] = { args, buffer };
+  }
+
+  addVar(name: string, value: number) {
+    this.vars.set(name, value);
   }
 
   parse(input: string) {
@@ -51,11 +56,32 @@ export class ExprParser {
     return expr;
   }
 
-  private parseNumericSingle(): number | undefined {
-    const n = this.accept('number');
-    if (n !== undefined) {
-      return n;
+  private parseVar(): number | undefined {
+    const kw = this.accept('identifier');
+    if (kw !== 'var') {
+      return undefined;
     }
+    this.expect('(');
+    const name = this.expect('identifier');
+    this.expect(')');
+    if (this.vars.has(name)) {
+      return this.vars.get(name)!;
+    } else {
+      throw this.error(`Unknown var ${name}`);
+    }
+  }
+
+  private parseNumericSingle(): number | undefined {
+    let v;
+    v = this.accept('number');
+    if (v !== undefined) {
+      return v;
+    }
+    v = this.parseVar();
+    if (v !== undefined) {
+      return v;
+    }
+
     if (this.accept('(')) {
       const nexpr = this.parseNumeric();
       if (nexpr === undefined) {

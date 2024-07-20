@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/config.h>
 
 #define FANFARE_FOREIGN(x) ((x) | 0x80)
 
@@ -192,19 +193,19 @@ void comboPlayItemFanfare(s16 gi, int isShort)
             fanfare = FANFARE_MAJOR;
         break;
     case GI_MM_STRAY_FAIRY_WF:
-        if (gMmSave.inventory.strayFairies[0] >= 15)
+        if (gMmSave.inventory.strayFairies[0] == gComboConfig.strayFairyRewardCount)
             fanfare = FANFARE_MAJOR;
         break;
     case GI_MM_STRAY_FAIRY_SH:
-        if (gMmSave.inventory.strayFairies[1] >= 15)
+        if (gMmSave.inventory.strayFairies[1] == gComboConfig.strayFairyRewardCount)
             fanfare = FANFARE_MAJOR;
         break;
     case GI_MM_STRAY_FAIRY_GB:
-        if (gMmSave.inventory.strayFairies[2] >= 15)
+        if (gMmSave.inventory.strayFairies[2] == gComboConfig.strayFairyRewardCount)
             fanfare = FANFARE_MAJOR;
         break;
     case GI_MM_STRAY_FAIRY_ST:
-        if (gMmSave.inventory.strayFairies[3] >= 15)
+        if (gMmSave.inventory.strayFairies[3] == gComboConfig.strayFairyRewardCount)
             fanfare = FANFARE_MAJOR;
         break;
     case GI_MM_STRAY_FAIRY_TOWN:

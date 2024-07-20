@@ -372,6 +372,9 @@ export class LogicPassWorld {
       exprParsers[g] = parser;
     }
 
+    /* Expr parser settings */
+    exprParsers.mm.addVar('STRAY_FAIRY_COUNT', this.state.settings.strayFairyRewardCount);
+
     /* MQ */
     const mq = new Set<string>;
     let d: keyof typeof DUNGEONS;

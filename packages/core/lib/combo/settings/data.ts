@@ -976,6 +976,16 @@ export const SETTINGS = [{
   default: false,
   cond: hasMM,
 }, {
+  key: 'strayFairyRewardCount',
+  name: 'Stray Fairy Reward Count',
+  category: 'main.events',
+  type: 'number',
+  description: 'How many stray fairies are required to get a reward.',
+  default: 15,
+  min: 0,
+  max: 15,
+  cond: hasMM,
+}, {
   key: 'preCompletedDungeons',
   name: 'Pre-Completed Dungeons',
   category: 'main.events',

@@ -1091,6 +1091,7 @@ export const randomizerData = (worldId: number, logic: LogicResult): Buffer => {
   buffers.push(toI8Buffer(logic.hints[worldId].staticHintsImportances));
   buffers.push(zoraSapphireBuffer(worldId, logic));
   buffers.push(randomizerBoss(worldId, logic));
+  buffers.push(toU8Buffer([logic.settings.strayFairyRewardCount]));
   return Buffer.concat(buffers);
 };
 
