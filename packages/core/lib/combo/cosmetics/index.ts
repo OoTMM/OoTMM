@@ -7,7 +7,7 @@ import { Options } from '../options';
 import { Random, randString, sample } from '../random';
 import { RomBuilder } from '../rom-builder';
 import { png } from '../util/png';
-import { COLORS, ColorArg } from './color';
+import { COLORS, CosmeticColor, ColorArg } from './color';
 import { BufferPath } from './type';
 import { toU32Buffer } from '../util';
 import { enableModelOotLinkAdult, enableModelOotLinkChild } from './model';
@@ -45,7 +45,7 @@ function brightness(color: number, bright: number): number {
 }
 
 /* TODO: review typing */
-function resolveColor(random: Random, c: ColorArg, auto?: () => ColorArg): any | null {
+function resolveColor(random: Random, c: ColorArg, auto?: () => CosmeticColor): CosmeticColor | null {
   switch (c) {
   case 'default':
     return null;
@@ -319,6 +319,11 @@ class CosmeticsPass {
     return "#" + ('000000' + int.toString(16)).slice(-6);
   }
 
+  private logColor(color: CosmeticColor | null): string {
+    if (color === null) return "Default"
+    return `${color.name} (${this.hexPadding(color.value)})`
+  }
+
   async run(): Promise<string | null> {
     const c = this.opts.cosmetics;
 
@@ -330,10 +335,10 @@ class CosmeticsPass {
     const colorOotTunicKokiri = resolveColor(random, c.ootTunicKokiri);
     const colorOotTunicGoron = resolveColor(random, c.ootTunicGoron);
     const colorOotTunicZora = resolveColor(random, c.ootTunicZora);
-    const colorMmTunicHuman = resolveColor(random, c.mmTunicHuman, () => colorOotTunicKokiri);
-    const colorMmTunicDeku = resolveColor(random, c.mmTunicDeku, () => colorMmTunicHuman);
-    const colorMmTunicGoron = resolveColor(random, c.mmTunicGoron, () => colorMmTunicHuman);
-    const colorMmTunicZora = resolveColor(random, c.mmTunicZora, () => colorMmTunicHuman);
+    const colorMmTunicHuman = resolveColor(random, c.mmTunicHuman, () => colorOotTunicKokiri!);
+    const colorMmTunicDeku = resolveColor(random, c.mmTunicDeku, () => colorMmTunicHuman!);
+    const colorMmTunicGoron = resolveColor(random, c.mmTunicGoron, () => colorMmTunicHuman!);
+    const colorMmTunicZora = resolveColor(random, c.mmTunicZora, () => colorMmTunicHuman!);
     const colorMmTunicFierceDeity = resolveColor(random, c.mmTunicFierceDeity);
     const colorOotShieldMirror = resolveColor(random, c.ootShieldMirror);
     const colorDpad = resolveColor(random, c.dpad);
@@ -377,17 +382,17 @@ class CosmeticsPass {
     }
 
     this.logWriter.write(`Hold D-Pad by default: ${c.defaultHold}`);
-    this.logWriter.write(`D-Pad color: ${colorDpad.name} (${this.hexPadding(colorDpad.value)})`);
-    this.logWriter.write(`OoT - Mirror Shield: ${colorOotShieldMirror.name} (${this.hexPadding(colorOotShieldMirror.value)})`);
+    this.logWriter.write(`D-Pad color: ${this.logColor(colorDpad)}`);
+    this.logWriter.write(`OoT - Mirror Shield: ${this.logColor(colorOotShieldMirror)}`);
     this.logWriter.indent('Tunics:');
-    this.logWriter.write(`OoT - Kokiri Tunic: ${colorOotTunicKokiri.name} (${this.hexPadding(colorOotTunicKokiri.value)})`);
-    this.logWriter.write(`OoT - Goron Tunic: ${colorOotTunicGoron.name} (${this.hexPadding(colorOotTunicGoron.value)})`);
-    this.logWriter.write(`OoT - Zora Tunic: ${colorOotTunicZora.name} (${this.hexPadding(colorOotTunicZora.value)})`);
-    this.logWriter.write(`MM - Human Tunic: ${colorMmTunicHuman.name} (${this.hexPadding(colorMmTunicHuman.value)})`);
-    this.logWriter.write(`MM - Deku Tunic: ${colorMmTunicDeku.name} (${this.hexPadding(colorMmTunicDeku.value)})`);
-    this.logWriter.write(`MM - Goron Tunic: ${colorMmTunicGoron.name} (${this.hexPadding(colorMmTunicGoron.value)})`);
-    this.logWriter.write(`MM - Zora Tunic: ${colorMmTunicZora.name} (${this.hexPadding(colorMmTunicZora.value)})`);
-    this.logWriter.write(`MM - Fierce Deity Tunic: ${colorMmTunicFierceDeity.name} (${this.hexPadding(colorMmTunicFierceDeity.value)})`);
+    this.logWriter.write(`OoT - Kokiri Tunic: ${this.logColor(colorOotTunicKokiri)}`);
+    this.logWriter.write(`OoT - Goron Tunic: ${this.logColor(colorOotTunicGoron)}`);
+    this.logWriter.write(`OoT - Zora Tunic: ${this.logColor(colorOotTunicZora)}`);
+    this.logWriter.write(`MM - Human Tunic: ${this.logColor(colorMmTunicHuman)}`);
+    this.logWriter.write(`MM - Deku Tunic: ${this.logColor(colorMmTunicDeku)}`);
+    this.logWriter.write(`MM - Goron Tunic: ${this.logColor(colorMmTunicGoron)}`);
+    this.logWriter.write(`MM - Zora Tunic: ${this.logColor(colorMmTunicZora)}`);
+    this.logWriter.write(`MM - Fierce Deity Tunic: ${this.logColor(colorMmTunicFierceDeity)}`);
     this.logWriter.unindent();
     this.logWriter.write('');
 

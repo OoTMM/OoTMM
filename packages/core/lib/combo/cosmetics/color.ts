@@ -1,4 +1,4 @@
-type CosmeticColor = {
+export type CosmeticColor = {
   name: string;
   value: number;
 };
