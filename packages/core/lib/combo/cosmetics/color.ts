@@ -1,4 +1,4 @@
-export type CosmeticColor = {
+type CosmeticColor = {
   name: string;
   value: number;
 };
@@ -155,4 +155,4 @@ export const COLORS = {
 
 export type Color = keyof typeof COLORS;
 export type ColorRandom = Color | 'random';
-export type ColorArg = Color | 'random' | 'auto' | 'default' | 'fully-random';
+export type ColorArg = Color | 'random' | 'auto' | 'default';

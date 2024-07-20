@@ -6,8 +6,6 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- Added most of the cosmetics options in the cosmetics log.
-- Added a fully-random option color for cosmetics.
 - Choice to pre-activate owl statues.
 - Crates shuffle, for OoT and MM.
 - The boat cruise is now faster if you are not playing the archery.

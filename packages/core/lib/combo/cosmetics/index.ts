@@ -7,7 +7,7 @@ import { Options } from '../options';
 import { Random, randString, sample } from '../random';
 import { RomBuilder } from '../rom-builder';
 import { png } from '../util/png';
-import { COLORS, CosmeticColor, ColorArg } from './color';
+import { COLORS, ColorArg } from './color';
 import { BufferPath } from './type';
 import { toU32Buffer } from '../util';
 import { enableModelOotLinkAdult, enableModelOotLinkChild } from './model';
@@ -44,19 +44,16 @@ function brightness(color: number, bright: number): number {
   return (r & 0xff) << 16 | (g & 0xff) << 8 | (b & 0xff);
 }
 
-/* TODO: review typing */
-function resolveColor(random: Random, c: ColorArg, auto?: () => CosmeticColor): CosmeticColor | null {
+function resolveColor(random: Random, c: ColorArg, auto?: () => number | null): number | null {
   switch (c) {
   case 'default':
     return null;
   case 'random':
-    return sample(random, Object.values(COLORS));
+    return sample(random, Object.values(COLORS)).value;
   case 'auto':
     return auto ? auto() : null;
-  case 'fully-random':
-    return {name: "Fully random", value: Math.floor(Math.random() * 0xffffff)};
   default:
-    return COLORS[c];
+    return COLORS[c].value;
   }
 }
 
@@ -315,16 +312,6 @@ class CosmeticsPass {
     }
   }
 
-  private hexPadding(int: number): string {
-    return "#" + ('000000' + int.toString(16)).slice(-6);
-  }
-
-  private logColor(color: CosmeticColor | null): string {
-    if (color === null) return "Default"
-    if (color === undefined) return "Default"
-    return `${color.name} (${this.hexPadding(color.value)})`
-  }
-
   async run(): Promise<string | null> {
     const c = this.opts.cosmetics;
 
@@ -336,10 +323,10 @@ class CosmeticsPass {
     const colorOotTunicKokiri = resolveColor(random, c.ootTunicKokiri);
     const colorOotTunicGoron = resolveColor(random, c.ootTunicGoron);
     const colorOotTunicZora = resolveColor(random, c.ootTunicZora);
-    const colorMmTunicHuman = resolveColor(random, c.mmTunicHuman, () => colorOotTunicKokiri!);
-    const colorMmTunicDeku = resolveColor(random, c.mmTunicDeku, () => colorMmTunicHuman!);
-    const colorMmTunicGoron = resolveColor(random, c.mmTunicGoron, () => colorMmTunicHuman!);
-    const colorMmTunicZora = resolveColor(random, c.mmTunicZora, () => colorMmTunicHuman!);
+    const colorMmTunicHuman = resolveColor(random, c.mmTunicHuman, () => colorOotTunicKokiri);
+    const colorMmTunicDeku = resolveColor(random, c.mmTunicDeku, () => colorMmTunicHuman);
+    const colorMmTunicGoron = resolveColor(random, c.mmTunicGoron, () => colorMmTunicHuman);
+    const colorMmTunicZora = resolveColor(random, c.mmTunicZora, () => colorMmTunicHuman);
     const colorMmTunicFierceDeity = resolveColor(random, c.mmTunicFierceDeity);
     const colorOotShieldMirror = resolveColor(random, c.ootShieldMirror);
     const colorDpad = resolveColor(random, c.dpad);
@@ -350,52 +337,37 @@ class CosmeticsPass {
     }
 
     /* Patch human tunics */
-    if (colorOotTunicKokiri !== undefined) {
-      await this.patchOotTunic(0, colorOotTunicKokiri!.value);
+    if (colorOotTunicKokiri !== null) {
+      await this.patchOotTunic(0, colorOotTunicKokiri);
     }
 
-    if (colorOotTunicGoron !== undefined) {
-      await this.patchOotTunic(1, colorOotTunicGoron!.value);
-      this.patchSymbol('MM_COLOR_TUNIC_GORON', colorBufferRGB(colorOotTunicGoron!.value));
+    if (colorOotTunicGoron !== null) {
+      await this.patchOotTunic(1, colorOotTunicGoron);
+      this.patchSymbol('MM_COLOR_TUNIC_GORON', colorBufferRGB(colorOotTunicGoron));
     }
 
-    if (colorOotTunicZora !== undefined) {
-      await this.patchOotTunic(2, colorOotTunicZora!.value);
-      this.patchSymbol('MM_COLOR_TUNIC_ZORA', colorBufferRGB(colorOotTunicZora!.value));
+    if (colorOotTunicZora !== null) {
+      await this.patchOotTunic(2, colorOotTunicZora);
+      this.patchSymbol('MM_COLOR_TUNIC_ZORA', colorBufferRGB(colorOotTunicZora));
     }
 
-    if (colorMmTunicHuman !== undefined) {
-      this.patchSymbol('MM_COLOR_TUNIC_KOKIRI', colorBufferRGB(colorMmTunicHuman!.value));
+    if (colorMmTunicHuman !== null) {
+      this.patchSymbol('MM_COLOR_TUNIC_KOKIRI', colorBufferRGB(colorMmTunicHuman));
     }
 
     /* Forms */
-    if (colorMmTunicDeku !== undefined) this.patchMmTunicDeku(colorMmTunicDeku!.value);
-    if (colorMmTunicGoron !== undefined) this.patchMmTunicGoron(colorMmTunicGoron!.value);
-    if (colorMmTunicZora !== undefined) this.patchMmTunicZora(colorMmTunicZora!.value);
-    if (colorMmTunicFierceDeity !== undefined) this.patchMmTunicFierceDeity(colorMmTunicFierceDeity!.value);
+    if (colorMmTunicDeku !== null) this.patchMmTunicDeku(colorMmTunicDeku);
+    if (colorMmTunicGoron !== null) this.patchMmTunicGoron(colorMmTunicGoron);
+    if (colorMmTunicZora !== null) this.patchMmTunicZora(colorMmTunicZora);
+    if (colorMmTunicFierceDeity !== null) this.patchMmTunicFierceDeity(colorMmTunicFierceDeity);
 
     /* Patch OoT Mirror Shield */
-    if (colorOotShieldMirror !== undefined) this.patchOotShieldMirror(colorOotShieldMirror!.value);
+    if (colorOotShieldMirror !== null) this.patchOotShieldMirror(colorOotShieldMirror);
 
     /* Patch D-Pad */
     if (colorDpad !== null) {
-      this.patchSymbol('DPAD_COLOR', colorBufferRGB(colorDpad.value));
+      this.patchSymbol('DPAD_COLOR', colorBufferRGB(colorDpad));
     }
-
-    this.logWriter.write(`Hold D-Pad by default: ${c.defaultHold}`);
-    this.logWriter.write(`D-Pad color: ${this.logColor(colorDpad)}`);
-    this.logWriter.write(`OoT - Mirror Shield: ${this.logColor(colorOotShieldMirror)}`);
-    this.logWriter.indent('Tunics:');
-    this.logWriter.write(`OoT - Kokiri Tunic: ${this.logColor(colorOotTunicKokiri)}`);
-    this.logWriter.write(`OoT - Goron Tunic: ${this.logColor(colorOotTunicGoron)}`);
-    this.logWriter.write(`OoT - Zora Tunic: ${this.logColor(colorOotTunicZora)}`);
-    this.logWriter.write(`MM - Human Tunic: ${this.logColor(colorMmTunicHuman)}`);
-    this.logWriter.write(`MM - Deku Tunic: ${this.logColor(colorMmTunicDeku)}`);
-    this.logWriter.write(`MM - Goron Tunic: ${this.logColor(colorMmTunicGoron)}`);
-    this.logWriter.write(`MM - Zora Tunic: ${this.logColor(colorMmTunicZora)}`);
-    this.logWriter.write(`MM - Fierce Deity Tunic: ${this.logColor(colorMmTunicFierceDeity)}`);
-    this.logWriter.unindent();
-    this.logWriter.write('');
 
     /* Patch models */
     await this.patchOotChildModel();
