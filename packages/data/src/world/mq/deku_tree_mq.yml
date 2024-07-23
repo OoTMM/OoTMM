@@ -179,7 +179,7 @@
     "Deku Tree Water Room Entry Door": "true"
     "Deku Tree Water Room Back": "true" #You can do this as both adult and child, without a shield, by rolling under the spike.
   events:
-    MQ_DEKU_WATER_TORCHES: "(is_child && can_use_sticks) || (can_use_bow && can_play_elegy)" #You can do this as both adult and child, without a shield, by rolling under the spike.
+    MQ_DEKU_WATER_TORCHES: "can_use_sticks || (can_use_bow && can_play_elegy)" #You can do this as both adult and child, without a shield, by rolling under the spike.
   locations:
     "MQ Deku Tree Before Water Platform Chest": "true"
     "MQ Deku Tree Grass Spike Room Front 1": "can_cut_grass"
