@@ -8,6 +8,8 @@
 
 struct Actor_Player;
 
+int Player_GetMask(GameState_Play* play);
+
 typedef struct {
     /* 0x00 */ s32 active;
     /* 0x04 */ Vec3f tip;
@@ -168,6 +170,35 @@ typedef enum PlayerItemAction {
     /* 0x52 */ PLAYER_IA_LENS_OF_TRUTH,
     /* 0x53 */ PLAYER_IA_MAX
 } PlayerItemAction;
+
+#define GET_MASK_FROM_IA(itemAction) ((itemAction) - (PLAYER_IA_MASK_MIN - 1))
+
+#define PLAYER_MASK_NONE            0x00
+#define PLAYER_MASK_TRUTH           0x01
+#define PLAYER_MASK_KAFEIS_MASK     0x02
+#define PLAYER_MASK_ALL_NIGHT       0x03
+#define PLAYER_MASK_BUNNY           0x04
+#define PLAYER_MASK_KEATON          0x05
+#define PLAYER_MASK_GARO            0x06
+#define PLAYER_MASK_ROMANI          0x07
+#define PLAYER_MASK_CIRCUS_LEADER   0x08
+#define PLAYER_MASK_POSTMAN         0x09
+#define PLAYER_MASK_COUPLE          0x0a
+#define PLAYER_MASK_GREAT_FAIRY     0x0b
+#define PLAYER_MASK_GIBDO           0x0c
+#define PLAYER_MASK_DON_GERO        0x0d
+#define PLAYER_MASK_KAMARO          0x0e
+#define PLAYER_MASK_CAPTAIN         0x0f
+#define PLAYER_MASK_STONE           0x10
+#define PLAYER_MASK_BREMEN          0x11
+#define PLAYER_MASK_BLAST           0x12
+#define PLAYER_MASK_SCENTS          0x13
+#define PLAYER_MASK_GIANT           0x14
+#define PLAYER_MASK_FIERCE_DEITY    0x15
+#define PLAYER_MASK_GORON           0x16
+#define PLAYER_MASK_ZORA            0x17
+#define PLAYER_MASK_DEKU            0x18
+#define PLAYER_MASK_MAX             0x19
 
 typedef enum PlayerCsAction {
     /*   -1 */ PLAYER_CSACTION_NEG1 = -1, // Specific to Kafei, any negative number works

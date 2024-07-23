@@ -532,11 +532,30 @@ Gfx* Gfx_TwoTexScroll(GfxContext* gfxCtx, s32 tile1, u32 x1, u32 y1, s32 width1,
 Gfx* Gfx_SetFog(Gfx* gfx, s32 r, s32 g, s32 b, s32 a, s32 n, s32 f);
 void Gfx_SetupDL25_Xlu(GfxContext* gfxCtx);
 void Gfx_SetupDL44_Xlu(GfxContext* gfxCtx);
+Gfx* Gfx_SetupDL71(Gfx* gfx);
+Gfx* Gfx_SetupDL72(Gfx* gfx);
+
+s16 CutsceneManager_GetAdditionalCsId(s16 csId);
+void PlayerAnimation_Change(GameState_Play* play, SkelAnime* skelAnime, PlayerAnimationHeader* animation, f32 playSpeed, f32 startFrame, f32 endFrame, u8 mode, f32 morphFrames);
+s32 Actor_IsFacingPlayer(Actor* actor, s16 angle);
+void Actor_PlaySeq_FlaggedKamaroDance(Actor* actor);
+s16 CutsceneManager_StartWithPlayerCs(s16 csId, Actor* actor);
+void Scene_SetRenderModeXlu(GameState_Play* play, s32 index, u32 flags);
+
+typedef s32 (*OverrideLimbDraw)(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot,
+                                Actor* thisx, Gfx** gfx);
+
+typedef void (*PostLimbDraw)(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3s* rot,
+                             Actor* thisx, Gfx** gfx);
+
+Gfx* SkelAnime_DrawFlex(GameState_Play* play, void** skeleton, Vec3s* jointTable, s32 dListCount, OverrideLimbDraw overrideLimbDraw, PostLimbDraw postLimbDraw, struct Actor* actor, Gfx* gfx);
 
 // TODO: rename
 void func_80169EFC(GameState_Play* play);
 void func_800B0EB0(GameState_Play* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, Color_RGBA8* primColor, Color_RGBA8* envColor, s16 scale, s16 scaleStep, s16 life);
 void func_80169AFC(GameState_Play* play, s16 camId, s16 timer);
 void func_800B8D50(GameState_Play* play, Actor* actor, f32 arg2, s16 yaw, f32 arg4, u32 arg5);
+void func_800B4AEC(GameState_Play* play, Actor* actor, f32 y);
+void func_800B3030(GameState_Play* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, s16 scale, s16 scaleStep, s32 colorIndex);
 
 #endif

@@ -17,8 +17,6 @@ typedef void (*Actor_EnTest4_ActionFunc)(struct Actor_EnTest4*, GameState_Play*)
 #define THREEDAY_WEATHER_CLEAR  0
 #define THREEDAY_WEATHER_RAIN   1
 
-#define CURRENT_TIME ((void)0, gSaveContext.save.time)
-
 typedef struct Actor_EnTest4
 {
     Actor actor;

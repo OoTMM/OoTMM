@@ -67,7 +67,7 @@ union SongStateResults {
 
 u32 SongState_HandlePlayback(GameState_Play* play, MessageContext* msgCtxt) {
     s8 song = msgCtxt->songInfo->frameInfo[0].storedSong;
-    if (song == 3) {
+    if (song == OCARINA_SONG_ELEGY) {
         /* Process state for Elegy of Emptiness */
         /* Disable sfx being "dampened" (normally action 0x17 would do this before advancing to 0x18) */
         AudioOcarina_SetInstrument(0);

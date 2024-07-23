@@ -523,3 +523,16 @@ SoundSource_PlaySfxAtFixedWorldPos = 0x800f0568;
 Enemy_StartFinishingBlow = 0x800bba88;
 Cutscene_StartManual = 0x800ea0d4;
 Cutscene_StopManual = 0x800ea0ec;
+
+CutsceneManager_GetAdditionalCsId = 0x800f20b8;
+func_800B4AEC = 0x800b4aec;
+PlayerAnimation_Change = 0x80136414;
+Actor_IsFacingPlayer = 0x800b73e0;
+Actor_PlaySeq_FlaggedKamaroDance = 0x800b9084;
+func_800B3030 = 0x800b3030;
+CutsceneManager_StartWithPlayerCs = 0x800f1c68;
+Gfx_SetupDL71 = 0x8012c2b4;
+Gfx_SetupDL72 = 0x8012c304;
+Scene_SetRenderModeXlu = 0x80131df0;
+Player_GetMask = 0x8012403c;
+SkelAnime_DrawFlex = 0x80134dbc;

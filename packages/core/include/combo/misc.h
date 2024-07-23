@@ -1192,6 +1192,20 @@ typedef struct {
     /* 0x28 */ CsCmdActorCue* actorCues[10]; /* "npcdemopnt" */
     /* 0x50 */ CutsceneScriptEntry* scriptList;
 } CutsceneContext; /* size = 0x54 */
+
+#define CURRENT_TIME ((void)0, gSaveContext.save.time)
+#define SEGADDR_FROM_OFFSET(segment, offset) ((void*)(((segment) << 24) | offset))
+#define CHECK_FLAG_ALL(flags, mask) (((flags) & (mask)) == (mask))
+
+typedef enum AnimationMode {
+    /* 0 */ ANIMMODE_LOOP,
+    /* 1 */ ANIMMODE_LOOP_INTERP,
+    /* 2 */ ANIMMODE_ONCE,
+    /* 3 */ ANIMMODE_ONCE_INTERP,
+    /* 4 */ ANIMMODE_LOOP_PARTIAL,
+    /* 5 */ ANIMMODE_LOOP_PARTIAL_INTERP
+} AnimationMode;
+
 #endif
 
 typedef enum {
