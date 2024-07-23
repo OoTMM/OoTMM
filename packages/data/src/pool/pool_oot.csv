@@ -1075,10 +1075,10 @@ Dodongo Cavern Pot Miniboss 1,                              pot,            NONE
 Dodongo Cavern Pot Miniboss 2,                              pot,            NONE,                 DODONGO_CAVERN,                 0x0309,                     RECOVERY_HEART
 Dodongo Cavern Pot Miniboss 3,                              pot,            NONE,                 DODONGO_CAVERN,                 0x030a,                     RUPEE_BLUE
 Dodongo Cavern Pot Miniboss 4,                              pot,            NONE,                 DODONGO_CAVERN,                 0x030b,                     RUPEE_BLUE
-Dodongo Cavern Pot Green Roon Pot 1,                        pot,            NONE,                 DODONGO_CAVERN,                 0x040a,                     RUPEE_BLUE
-Dodongo Cavern Pot Green Roon Pot 2,                        pot,            NONE,                 DODONGO_CAVERN,                 0x040b,                     RUPEE_GREEN
-Dodongo Cavern Pot Green Roon Pot 3,                        pot,            NONE,                 DODONGO_CAVERN,                 0x040c,                     RUPEE_BLUE
-Dodongo Cavern Pot Green Roon Pot 4,                        pot,            NONE,                 DODONGO_CAVERN,                 0x040d,                     RECOVERY_HEART
+Dodongo Cavern Pot Green Room Pot 1,                        pot,            NONE,                 DODONGO_CAVERN,                 0x040a,                     RUPEE_BLUE
+Dodongo Cavern Pot Green Room Pot 2,                        pot,            NONE,                 DODONGO_CAVERN,                 0x040b,                     RUPEE_GREEN
+Dodongo Cavern Pot Green Room Pot 3,                        pot,            NONE,                 DODONGO_CAVERN,                 0x040c,                     RUPEE_BLUE
+Dodongo Cavern Pot Green Room Pot 4,                        pot,            NONE,                 DODONGO_CAVERN,                 0x040d,                     RECOVERY_HEART
 Dodongo Cavern Pot Skull 1,                                 pot,            NONE,                 DODONGO_CAVERN,                 0x0706,                     BOMB
 Dodongo Cavern Pot Skull 2,                                 pot,            NONE,                 DODONGO_CAVERN,                 0x0707,                     RECOVERY_HEART
 Dodongo Cavern Pot Skull 3,                                 pot,            NONE,                 DODONGO_CAVERN,                 0x0806,                     DEKU_SEEDS_5
@@ -1321,12 +1321,12 @@ Bottom of the Well SR 2,                                    sr,             NONE
 Bottom of the Well SR 3,                                    sr,             NONE,                 BOTTOM_OF_THE_WELL,             0x07,                       RUPEE_SILVER_BOTW
 Bottom of the Well SR 4,                                    sr,             NONE,                 BOTTOM_OF_THE_WELL,             0x08,                       RUPEE_SILVER_BOTW
 Bottom of the Well SR 5,                                    sr,             NONE,                 BOTTOM_OF_THE_WELL,             0x09,                       RUPEE_SILVER_BOTW
-Bottom of the Well Pot Main Roon 1,                         pot,            NONE,                 BOTTOM_OF_THE_WELL,             0x0016,                     RECOVERY_HEART
-Bottom of the Well Pot Main Roon 2,                         pot,            NONE,                 BOTTOM_OF_THE_WELL,             0x0017,                     MAGIC_JAR_SMALL
-Bottom of the Well Pot Main Roon 3,                         pot,            NONE,                 BOTTOM_OF_THE_WELL,             0x0018,                     RECOVERY_HEART
-Bottom of the Well Pot Main Roon 4,                         pot,            NONE,                 BOTTOM_OF_THE_WELL,             0x001a,                     STICK
-Bottom of the Well Pot Main Roon 5,                         pot,            NONE,                 BOTTOM_OF_THE_WELL,             0x001b,                     MAGIC_JAR_SMALL
-Bottom of the Well Pot Main Roon Underwater,                pot,            NONE,                 BOTTOM_OF_THE_WELL,             0x001d,                     BOMB
+Bottom of the Well Pot Main Room 1,                         pot,            NONE,                 BOTTOM_OF_THE_WELL,             0x0016,                     RECOVERY_HEART
+Bottom of the Well Pot Main Room 2,                         pot,            NONE,                 BOTTOM_OF_THE_WELL,             0x0017,                     MAGIC_JAR_SMALL
+Bottom of the Well Pot Main Room 3,                         pot,            NONE,                 BOTTOM_OF_THE_WELL,             0x0018,                     RECOVERY_HEART
+Bottom of the Well Pot Main Room 4,                         pot,            NONE,                 BOTTOM_OF_THE_WELL,             0x001a,                     STICK
+Bottom of the Well Pot Main Room 5,                         pot,            NONE,                 BOTTOM_OF_THE_WELL,             0x001b,                     MAGIC_JAR_SMALL
+Bottom of the Well Pot Main Room Underwater,                pot,            NONE,                 BOTTOM_OF_THE_WELL,             0x001d,                     BOMB
 Bottom of the Well Pot Basement 01,                         pot,            NONE,                 BOTTOM_OF_THE_WELL,             0x012c,                     RECOVERY_HEART
 Bottom of the Well Pot Basement 02,                         pot,            NONE,                 BOTTOM_OF_THE_WELL,             0x012d,                     MAGIC_JAR_LARGE
 Bottom of the Well Pot Basement 03,                         pot,            NONE,                 BOTTOM_OF_THE_WELL,             0x012e,                     RECOVERY_HEART
