@@ -132,7 +132,7 @@
     "Deku Tree Basement Ledge": "is_adult || event(DEKU_BLOCK) || trick(OOT_DEKU_SKIP) || has_hover_boots || hookshot_anywhere || climb_anywhere"
     "Deku Tree Basement Door": "true"
   events:
-    #DEKU_MQ_WATER_PATH_TORCH1: "has_fire || can_use_sticks" #You need to go through the next room with fire sticks for this event. NEEDS A !(SETTINGS.DOORRANDO) or something....
+    DEKU_MQ_WATER_PATH_TORCH1: "has_fire || can_use_sticks" #You need to go through the next room with fire sticks for this event. From xeno: "cond(setting.doorShuffle !== none, has_fire, (roomClearEvent && has_sticks) || has_fire)"
     DEKU_MQ_BASEMENT_EYE_SWITCH: "can_use_bow || can_use_slingshot"
   locations:
     "MQ Deku Tree Basement Chest": "can_use_sticks || has_fire"
