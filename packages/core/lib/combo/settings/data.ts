@@ -1779,7 +1779,8 @@ export const SETTINGS = [{
   category: 'items.extensions',
   type: 'boolean',
   description: 'Enables using Song of Double Time in OoT when you have Song of Time in OoT',
-  default: false
+  default: false,
+  cond: hasOoT
 }, {
   key: 'sharedNutsSticks',
   name: 'Shared Nuts & Sticks',
