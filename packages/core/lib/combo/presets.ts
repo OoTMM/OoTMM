@@ -87,6 +87,12 @@ const BLITZ_BASE: PartialDeep<Settings> = {
   sharedStrength: true,
   keepItemsReset: true,
   fastMasks: true,
+  shadowFastBoat: true,
+  songOfDoubleTimeOot: true,
+  mmPreActivatedOwls: {
+    type: 'specific',
+    values: ["clocktown"]
+  },
   startingItems: {
     OOT_NUTS_10: 2,
     OOT_SHIELD_DEKU: 1,
