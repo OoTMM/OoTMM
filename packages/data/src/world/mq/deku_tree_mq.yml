@@ -23,28 +23,28 @@
   exits:
     "Deku Tree Lobby": "true"
     "Deku Tree 3rd Floor": "true"
-    "Deku Tree 2nd Floor Door": "has_fire || (can_use_sticks && event(DEKU_MQ_MAIN_TORCH)) || (event(DEKU_MQ_MAIN_TORCH) && can_use_bow)"
+    "Deku Tree Room Before Compass Room Entry Door": "has_fire || (can_use_sticks && event(DEKU_MQ_MAIN_TORCH)) || (event(DEKU_MQ_MAIN_TORCH) && can_use_bow)"
   locations:
     "MQ Deku Tree Map Chest": "true"
     "MQ Deku Tree GS Lobby Crate": "gs && can_damage_skull"
     "MQ Deku Tree Heart Lobby": "true"
     "MQ Deku Tree Grass Entrance Upper 1": "can_cut_grass"
     "MQ Deku Tree Grass Entrance Upper 2": "can_cut_grass"
-"Deku Tree 2nd Floor Door":
-  dungeon: DT
-  exits:
-    "Deku Tree 2nd Floor": "true"
-    "Deku Tree Room Before Compass Room Entry Door": "true"
 "Deku Tree Room Before Compass Room Entry Door":
   dungeon: DT
   exits:
-    "Deku Tree 2nd Floor Door": "true"
+    "Deku Tree 2nd Floor": "true"
+    "Deku Tree Room Before Compass Room Door to 2nd Floor": "true"
+"Deku Tree Room Before Compass Room Door to 2nd Floor":
+  dungeon: DT
+  exits:
+    "Deku Tree Room Before Compass Room Entry Door": "true"
     "Deku Tree Room Before Compass Room": "true"
 "Deku Tree Room Before Compass Room":
   dungeon: DT
   exits:
-    "Deku Tree Room Before Compass Room Entry Door": "true"
-    "Deku Tree Room Before Compass Room Exit Door": "true"
+    "Deku Tree Room Before Compass Room Door to 2nd Floor": "true"
+    "Deku Tree Compass Room Entry Door": "true"
   events:
     #STICKS: "can_kill_baba_sticks"  #Big Deku Baba here
     #NUTS: "can_kill_baba_nuts" #Big Deku Baba here
@@ -58,20 +58,20 @@
     "MQ Deku Tree Grass Room Before Compass 5": "can_cut_grass"
     "MQ Deku Tree Grass Room Before Compass 6": "can_cut_grass"
     "MQ Deku Tree Grass Room Before Compass 7": "can_cut_grass"
-"Deku Tree Room Before Compass Room Exit Door":
-  dungeon: DT
-  exits:
-    "Deku Tree Room Before Compass Room": "true"
-    "Deku Tree Compass Room Entry Door": "event(DEKU_MQ_BEFORE_COMPASS_EYE_SWITCH)"
 "Deku Tree Compass Room Entry Door":
   dungeon: DT
   exits:
-    "Deku Tree Room Before Compass Room Exit Door": "true"
+    "Deku Tree Room Before Compass Room": "true"
+    "Deku Tree Compass Room Exit Door": "event(DEKU_MQ_BEFORE_COMPASS_EYE_SWITCH)"
+"Deku Tree Compass Room Exit Door":
+  dungeon: DT
+  exits:
+    "Deku Tree Compass Room Entry Door": "true"
     "Deku Tree MQ Compass Room Entrance": "true"
 "Deku Tree MQ Compass Room Entrance":
   dungeon: DT
   exits:
-    "Deku Tree Compass Room Entry Door": "true"
+    "Deku Tree Compass Room Exit Door": "true"
     "Deku Tree MQ Compass Room Chest Side": "true"
 "Deku Tree MQ Compass Room Chest Side":
   dungeon: DT
@@ -97,23 +97,23 @@
     "Deku Tree 2nd Floor": "true"
     "Deku Tree Lobby": "true"
     "Deku Tree Basement": "true"
-    "Deku Tree 3rd Floor Door": "has_fire || event(DEKU_MQ_MAIN_TORCH)"
+    "Deku Tree Slingshot Room Entry Door": "has_fire || event(DEKU_MQ_MAIN_TORCH)"
   events:
     DEKU_MQ_MAIN_TORCH: "true"
-"Deku Tree 3rd Floor Door":
-  dungeon: DT
-  exits:
-    "Deku Tree 3rd Floor": "true"
-    "Deku Tree Slingshot Room Entry Door": "true"
 "Deku Tree Slingshot Room Entry Door":
   dungeon: DT
   exits:
-    "Deku Tree 3rd Floor Door": "event(DEKU_MQ_SLINGSHOT_ENEMIES)"
+    "Deku Tree 3rd Floor": "true"
+    "Deku Tree Slingshot Room Exit Door": "true"
+"Deku Tree Slingshot Room Exit Door":
+  dungeon: DT
+  exits:
+    "Deku Tree Slingshot Room Entry Door": "event(DEKU_MQ_SLINGSHOT_ENEMIES)"
     "Deku Tree MQ Slingshot Room": "true"
 "Deku Tree MQ Slingshot Room":
   dungeon: DT
   exits:
-    "Deku Tree Slingshot Room Entry Door": "true"
+    "Deku Tree Slingshot Room Exit Door": "true"
   events:
     DEKU_MQ_SLINGSHOT_ENEMIES: "soul_deku_baba && soul_enemy(SOUL_ENEMY_GOHMA_LARVA) && (has_weapon || can_use_sticks || has_ranged_weapon_child)" #Bombs and Din's work, but it's horrible.
     DEKU_MQ_SLINGSHOT_TORCH: "has_fire || can_use_sticks"
@@ -130,7 +130,7 @@
   exits:
     "Deku Tree Lobby": "true"
     "Deku Tree Basement Ledge": "is_adult || event(DEKU_BLOCK) || trick(OOT_DEKU_SKIP) || has_hover_boots || hookshot_anywhere || climb_anywhere"
-    "Deku Tree Basement Door": "true"
+    "Deku Tree Room Before Water Room Entry Door": "true"
   events:
     DEKU_MQ_WATER_PATH_TORCH1: "has_fire || can_use_sticks" #You need to go through the next room with fire sticks for this event. From xeno: "cond(setting.doorShuffle !== none, has_fire, (roomClearEvent && has_sticks) || has_fire)"
     DEKU_MQ_BASEMENT_EYE_SWITCH: "can_use_bow || can_use_slingshot"
@@ -140,21 +140,21 @@
     "MQ Deku Tree Grass Basement Lower 2": "can_cut_grass"
     "MQ Deku Tree Grass Basement Lower 3": "can_cut_grass"
     "MQ Deku Tree Grass Basement Lower 4": "can_cut_grass"
-"Deku Tree Basement Door":
-  dungeon: DT
-  exits:
-    "Deku Tree Basement": "true"
-    "Deku Tree Room Before Water Room Entry Door": "event(DEKU_MQ_BASEMENT_EYE_SWITCH)"
 "Deku Tree Room Before Water Room Entry Door":
   dungeon: DT
   exits:
-    "Deku Tree Basement Door": "event(DEKU_MQ_ROOM_BEFORE_WATER_CLEAR)"
+    "Deku Tree Basement": "true"
+    "Deku Tree Room Before Water Room Door to Basement": "event(DEKU_MQ_BASEMENT_EYE_SWITCH)"
+"Deku Tree Room Before Water Room Door to Basement":
+  dungeon: DT
+  exits:
+    "Deku Tree Room Before Water Room Entry Door": "event(DEKU_MQ_ROOM_BEFORE_WATER_CLEAR)"
     "Deku Tree Room Before Water Room": "true"
 "Deku Tree Room Before Water Room":
   dungeon: DT
   exits:
-    "Deku Tree Room Before Water Room Entry Door": "true"
-    "Deku Tree Room Before Water Room Exit Door": "true"
+    "Deku Tree Room Before Water Room Door to Basement": "true"
+    "Deku Tree Room Before Water Room Door to Water Room": "true"
   events:
     DEKU_MQ_WATER_PATH_TORCH1: "has_fire"
     DEKU_MQ_ROOM_BEFORE_WATER_CLEAR: "soul_deku_scrub && soul_enemy(SOUL_ENEMY_GOHMA_LARVA) && can_damage"
@@ -163,20 +163,20 @@
     "MQ Deku Tree Grass Room Before Spike 2": "can_cut_grass"
     "MQ Deku Tree Grass Room Before Spike 3": "can_cut_grass"
     "MQ Deku Tree Grass Room Before Spike 4": "can_cut_grass"
-"Deku Tree Room Before Water Room Exit Door":
+"Deku Tree Room Before Water Room Door to Water Room":
   dungeon: DT
   exits:
     "Deku Tree Room Before Water Room": "true"
-    "Deku Tree Water Room Entry Door": "event(DEKU_MQ_WATER_PATH_TORCH1)"
-"Deku Tree Water Room Entry Door":
+    "Deku Tree Water Room Door to Room Before Water Room": "event(DEKU_MQ_WATER_PATH_TORCH1)"
+"Deku Tree Water Room Door to Room Before Water Room":
   dungeon: DT
   exits:
-    "Deku Tree Room Before Water Room Exit Door": "true"
+    "Deku Tree Room Before Water Room Door to Water Room": "true"
     "Deku Tree Water Room Front": "true"
 "Deku Tree Water Room Front":
   dungeon: DT
   exits:
-    "Deku Tree Water Room Entry Door": "true"
+    "Deku Tree Water Room Door to Room Before Water Room": "true"
     "Deku Tree Water Room Back": "true" #You can do this as both adult and child, without a shield, by rolling under the spike.
   events:
     MQ_DEKU_WATER_TORCHES: "can_use_sticks || (can_use_bow && can_play_elegy)" #You can do this as both adult and child, without a shield, by rolling under the spike.
@@ -189,48 +189,48 @@
   dungeon: DT
   exits:
     "Deku Tree Water Room Front": "true"
-    "Deku Tree Water Room Exit Door": "climb_anywhere || hookshot_anywhere || can_damage" #Need to kill the skultulla blocking the way.
+    "Deku Tree Water Room Door to Room After Water Room": "climb_anywhere || hookshot_anywhere || can_damage" #Need to kill the skultulla blocking the way.
   events:
     MQ_DEKU_WATER_TORCHES: "has_fire"
   locations:
     "MQ Deku Tree After Water Platform Chest": "can_play_time"
     "MQ Deku Tree Grass Spike Room Back 1": "can_cut_grass"
     "MQ Deku Tree Grass Spike Room Back 2": "can_cut_grass"
-"Deku Tree Water Room Exit Door":
+"Deku Tree Water Room Door to Room After Water Room":
   dungeon: DT
   exits:
     "Deku Tree Water Room Back": "true"
-    "Deku Tree Room After Water Room Entry Door": "event(MQ_DEKU_WATER_TORCHES)"
-"Deku Tree Room After Water Room Entry Door":
+    "Deku Tree Room After Water Room Door to Water Room": "event(MQ_DEKU_WATER_TORCHES)"
+"Deku Tree Room After Water Room Door to Water Room":
   dungeon: DT
   exits:
-    "Deku Tree Water Room Exit Door": "event(DEKU_MQ_ROOM_AFTER_WATER_CLEAR)"
+    "Deku Tree Water Room Door to Room After Water Room": "event(DEKU_MQ_ROOM_AFTER_WATER_CLEAR)"
     "Deku Tree Room After Water Room": "true"
 "Deku Tree Room After Water Room":
   dungeon: DT
   exits:
-    "Deku Tree Room After Water Room Entry Door": "true"
-    "Deku Tree Room After Water Room Exit Door": "true"
+    "Deku Tree Room After Water Room Door to Water Room": "true"
+    "Deku Tree Room After Water Room Door to Gravestone Room": "true"
   events:
     DEKU_MQ_ROOM_AFTER_WATER_CLEAR: "soul_keese && soul_deku_scrub && soul_enemy(SOUL_ENEMY_GOHMA_LARVA) && (has_weapon || has_ranged_weapon_child)" #Judgment call, this fight is way too big for sticks and nuts to be forced.
   locations:
     "MQ Deku Tree Grass Larvae Room 1": "can_cut_grass"
     "MQ Deku Tree Grass Larvae Room 2": "can_cut_grass"
-"Deku Tree Room After Water Room Exit Door":
+"Deku Tree Room After Water Room Door to Gravestone Room":
   dungeon: DT
   exits:
     "Deku Tree Room After Water Room": "true"
-    "Deku Tree Gravestone Room Entry Door": "event(DEKU_MQ_ROOM_AFTER_WATER_CLEAR)"
-"Deku Tree Gravestone Room Entry Door":
+    "Deku Tree Gravestone Room Door to Room After Water Room": "event(DEKU_MQ_ROOM_AFTER_WATER_CLEAR)"
+"Deku Tree Gravestone Room Door to Room After Water Room":
   dungeon: DT
   exits:
-    "Deku Tree Room After Water Room Exit Door": "true"
+    "Deku Tree Room After Water Room Door to Gravestone Room": "true"
     "Deku Tree MQ Grave Room": "true"
 "Deku Tree MQ Grave Room":
   dungeon: DT
   exits:
-    "Deku Tree Gravestone Room Entry Door": "true"
-    "Deku Tree Gravestone Room Back Room Door": "can_use_sticks || has_fire"
+    "Deku Tree Gravestone Room Door to Room After Water Room": "true"
+    "Deku Tree Back Side Room Entry Door": "can_use_sticks || has_fire"
     "Deku Tree Basement Ledge": "is_child && (can_use_sticks || can_use_din)"
   events:
     STICKS: "can_kill_baba_sticks"
@@ -246,20 +246,20 @@
     "MQ Deku Tree Wonder Item 2": "can_use_sword_or_sticks"
     "MQ Deku Tree Wonder Item 3": "can_use_sword_or_sticks"
     "MQ Deku Tree Wonder Item 4": "can_use_sword_or_sticks"
-"Deku Tree Gravestone Room Back Room Door":
+"Deku Tree Back Side Room Entry Door":
   dungeon: DT
   exits:
     "Deku Tree MQ Grave Room": "true"
-    "Deku Tree Back Room Entry Door": "true"
-"Deku Tree Back Room Entry Door":
+    "Deku Tree Back Side Room Exit Door": "true"
+"Deku Tree Back Side Room Exit Door":
   dungeon: DT
   exits:
-    "Deku Tree Gravestone Room Back Room Door": "true"
+    "Deku Tree Back Side Room Entry Door": "true"
     "Deku Tree Back Side Room": "true"
 "Deku Tree Back Side Room":
   dungeon: DT
   exits:
-    "Deku Tree Back Room Entry Door": "true" #One-sided collision for webbing; might need to be changed for door rando.
+    "Deku Tree Back Side Room Exit Door": "true" #One-sided collision for webbing; might need to be changed for door rando.
   #events:
     #STICKS: "can_kill_baba_sticks"  #Big Deku Baba here
     #NUTS: "can_kill_baba_nuts" #Big Deku Baba here
