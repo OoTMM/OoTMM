@@ -47,9 +47,9 @@ static void EnElforg_Draw(Actor* this, GameState_Play* play)
     }
 
     angle = (play->gs.frameCount % kRotDivisor) * (1.f / kRotDivisor) * M_PI * 2.f;
-    ModelViewTranslate(this->world.pos.x, this->world.pos.y, this->world.pos.z, MAT_SET);
-    ModelViewScale(0.35f, 0.35f, 0.35f, MAT_MUL);
-    ModelViewRotateY(angle, MAT_MUL);
+    Matrix_Translate(this->world.pos.x, this->world.pos.y, this->world.pos.z, MAT_SET);
+    Matrix_Scale(0.35f, 0.35f, 0.35f, MAT_MUL);
+    Matrix_RotateY(angle, MAT_MUL);
     Draw_Gi(play, this, o.gi, 0);
 }
 

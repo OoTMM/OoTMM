@@ -370,7 +370,7 @@ void EnHs_PostLimbDraw(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3s* 
 
 void EnHs_Draw(Actor_EnHs* this, GameState_Play* play)
 {
-    InitListPolyOpa(play->gs.gfx);
+    Gfx_SetupDL25_Opa(play->gs.gfx);
     SkelAnime_DrawFlexOpa(play, this->skelAnime.skeleton, this->skelAnime.jointTable, this->skelAnime.dListCount, EnHs_OverrideLimbDraw, EnHs_PostLimbDraw, &this->actor);
 }
 

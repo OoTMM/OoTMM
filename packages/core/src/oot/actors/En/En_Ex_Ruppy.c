@@ -33,7 +33,7 @@ void EnExRuppy_ItemQuery(ComboItemQuery* q, Actor_EnExRuppy* this, GameState_Pla
         break;
     }
     q->giRenew = q->gi;
-    if (GetCollectibleFlag(play, q->id)) {
+    if (Flags_GetCollectible(play, q->id)) {
         q->ovFlags |= OVF_RENEW;
     }
 }
@@ -57,7 +57,7 @@ void EnExRuppy_Draw(Actor_EnExRuppy* this, GameState_Play* play)
 
     EnExRuppy_ItemQuery(&q, this, play);
     comboItemOverride(&o, &q);
-    ModelViewScale(25.0f, 25.0f, 25.0f, MAT_MUL);
+    Matrix_Scale(25.0f, 25.0f, 25.0f, MAT_MUL);
     Draw_Gi(play, &this->actor, o.gi, 0);
 }
 
@@ -113,7 +113,7 @@ void EnExRuppy_GiveItem(Actor_EnExRuppy* this, GameState_Play* play, Actor_EnDiv
     }
 
     comboAddItemEx(play, &q, major);
-    SetCollectibleFlag(play, this->colorIdx + 1);
+    Flags_SetCollectible(play, this->colorIdx + 1);
 
     /* Play the sound */
     comboPlayItemFanfare(o.gi, 1);

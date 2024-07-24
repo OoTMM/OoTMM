@@ -1110,7 +1110,7 @@ void Player_SkelAnime_DrawFlexLod(GameState_Play* play, void** skeleton, Vec3s* 
 
             Matrix_SetTranslateRotateYXZ(player->actor.world.pos.x, player->actor.world.pos.y + 2.0f,
                                          player->actor.world.pos.z, &sHoverBootsRot);
-            ModelViewScale(4.0f, 4.0f, 4.0f, MAT_MUL);
+            Matrix_Scale(4.0f, 4.0f, 4.0f, MAT_MUL);
 
             gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             gSPSegment(POLY_XLU_DISP++, 0x09,

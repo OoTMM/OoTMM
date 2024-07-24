@@ -6,7 +6,7 @@ void DrawGi_Opa01(GameState_Play* play, s16 drawGiId)
     drawGi = &kDrawGi[drawGiId];
 
     OPEN_DISPS(play->gs.gfx);
-    InitListPolyOpa(play->gs.gfx);
+    Gfx_SetupDL25_Opa(play->gs.gfx);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[1]);
@@ -24,8 +24,8 @@ void DrawGi_MoonTear(GameState_Play* play, s16 drawGiId)
     drawGi = &kDrawGi[drawGiId];
 
     OPEN_DISPS(play->gs.gfx);
-    InitListPolyOpa(play->gs.gfx);
-    InitListPolyXlu(play->gs.gfx);
+    Gfx_SetupDL25_Opa(play->gs.gfx);
+    Gfx_SetupDL25_Xlu(play->gs.gfx);
     gSPSegment(POLY_OPA_DISP++, 0x09, kDummyList);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);

@@ -277,9 +277,9 @@ void Draw_GlitterGi(GameState_Play* play, Actor* actor, s16 gi)
         tex = (void*)((u32)tex + 16 * 8);
 
     /* Prepare the Matrix */
-    ModelViewTranslate(actor->world.pos.x, actor->world.pos.y, actor->world.pos.z, MAT_SET);
+    Matrix_Translate(actor->world.pos.x, actor->world.pos.y, actor->world.pos.z, MAT_SET);
     ModelViewUnkTransform(&play->billboardMtxF);
-    ModelViewTranslate(0, 20.f, 0.f, MAT_MUL);
+    Matrix_Translate(0, 20.f, 0.f, MAT_MUL);
 
     /* Draw the display list */
     OPEN_DISPS(play->gs.gfx);

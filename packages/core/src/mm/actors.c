@@ -782,8 +782,8 @@ void Actor_DrawFaroresWindPointer(GameState_Play* play)
 
             POLY_XLU_DISP = Gfx_SetupDL(POLY_XLU_DISP, 25); /* SETUPDL_25 */
 
-            ModelViewTranslate(gSaveContext.respawn[RESPAWN_MODE_HUMAN].pos.x, yPos, gSaveContext.respawn[RESPAWN_MODE_HUMAN].pos.z, MAT_SET);
-            ModelViewScale(scale, scale, scale, MAT_MUL);
+            Matrix_Translate(gSaveContext.respawn[RESPAWN_MODE_HUMAN].pos.x, yPos, gSaveContext.respawn[RESPAWN_MODE_HUMAN].pos.z, MAT_SET);
+            Matrix_Scale(scale, scale, scale, MAT_MUL);
             ModelViewMult(&play->billboardMtxF, MAT_MUL);
             MatrixStackDup();
 
@@ -791,13 +791,13 @@ void Actor_DrawFaroresWindPointer(GameState_Play* play)
             gDPSetPrimColor(POLY_XLU_DISP++, 128, 128, 255, 255, 200, alpha);
             gDPSetEnvColor(POLY_XLU_DISP++, 100, 200, 0, 255);
 
-            ModelViewRotateZ(BINANG_TO_RAD_ALT2((play->gameplayFrames * 1500) & 0xFFFF), MAT_MUL);
+            Matrix_RotateZ(BINANG_TO_RAD_ALT2((play->gameplayFrames * 1500) & 0xFFFF), MAT_MUL);
             gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx),
                       G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
             gSPDisplayList(POLY_XLU_DISP++, 0x04000000 | 0x23210); /* gEffFlash1DL */
 
             MatrixStackPop();
-            ModelViewRotateZ(BINANG_TO_RAD_ALT2(~((play->gameplayFrames * 1200) & 0xFFFF)), MAT_MUL);
+            Matrix_RotateZ(BINANG_TO_RAD_ALT2(~((play->gameplayFrames * 1200) & 0xFFFF)), MAT_MUL);
 
             gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx),
                       G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);

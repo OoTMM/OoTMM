@@ -103,8 +103,8 @@ void    EnableOwl(u8 owlId);
 
 u32     Flags_GetTreasure(GameState_Play* play, int flag);
 void    SetChestFlag(GameState_Play* play, int flag);
-u32     GetCollectibleFlag(GameState_Play* play, int flag);
-void    SetCollectibleFlag(GameState_Play* play, int flag);
+u32     Flags_GetCollectible(GameState_Play* play, int flag);
+void    Flags_SetCollectible(GameState_Play* play, int flag);
 u32     GetSwitchFlag(GameState_Play* play, int flag);
 u32     SetSwitchFlag(GameState_Play* play, int flag);
 void    ClearSwitchFlag(GameState_Play* play, int flag);
@@ -168,12 +168,21 @@ void OcarinaAction2(GameState_Play *play, u16 ocarinaAction);
 
 extern float* gModelView;
 
+int     Collider_InitJntSph(GameState_Play* play, ColliderJntSph* jntSph);
+int     Collider_FreeJntSph(GameState_Play* play, ColliderJntSph* jntSph);
+int     Collider_DestroyJntSph(GameState_Play* play, ColliderJntSph* jntSph);
+int     Collider_SetJntSphToActor(GameState_Play* play, ColliderJntSph* dest, ColliderJntSphInitToActor* src);
+int     Collider_SetJntSphAllocType1(GameState_Play* play, ColliderJntSph* dest, Actor* actor, ColliderJntSphInitType1* src);
+int     Collider_SetJntSphAlloc(GameState_Play* play, ColliderJntSph* dest, Actor* actor, ColliderJntSphInit* src);
+int     Collider_SetJntSph(GameState_Play* play, ColliderJntSph* dest, Actor* actor, ColliderJntSphInit* src, ColliderJntSphElement* jntSphElements);
+void    Collider_UpdateSpheres(s32 limb, ColliderJntSph* jntSph);
+
 void ModelViewUnkTransform(MtxF* unk);
-void ModelViewRotateX(float angle, int mode);
-void ModelViewRotateY(float angle, int mode);
-void ModelViewRotateZ(float angle, int mode);
-void ModelViewTranslate(float tx, float ty, float tz, int mode);
-void ModelViewScale(float sx, float sy, float sz, int mode);
+void Matrix_RotateX(float angle, int mode);
+void Matrix_RotateY(float angle, int mode);
+void Matrix_RotateZ(float angle, int mode);
+void Matrix_Translate(float tx, float ty, float tz, int mode);
+void Matrix_Scale(float sx, float sy, float sz, int mode);
 void ModelViewMult(MtxF* mf, s32 mode);
 void Matrix_SetTranslateRotateYXZ(f32 translateX, f32 translateY, f32 translateZ, Vec3s* rot);
 

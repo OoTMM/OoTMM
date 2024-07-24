@@ -93,7 +93,7 @@ void Fishing_DrawFish_SkelAnime(GameState_Play* play, void** skeleton, Vec3s* jo
     Vec3f* fishMouthPos = (Vec3f*)(((u8*)this) + 0x1B0);
     Matrix_MultVec3f(&mouthOffset, fishMouthPos);
 
-    ModelViewScale(56.0f, 56.0f, 56.0f, MAT_MUL);
+    Matrix_Scale(56.0f, 56.0f, 56.0f, MAT_MUL);
     Draw_Gi(play, this, o.gi, 0);
 }
 

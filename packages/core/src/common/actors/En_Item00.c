@@ -41,9 +41,9 @@ static void EnItem00_DrawXflag(Actor_EnItem00* this, GameState_Play* play)
         this->xflagGi = gi;
     }
 
-    ModelViewTranslate(this->base.world.pos.x, this->base.world.pos.y + 20.f, this->base.world.pos.z, MAT_SET);
-    ModelViewScale(0.35f, 0.35f, 0.35f, MAT_MUL);
-    ModelViewRotateY(this->base.shape.rot.y * ((M_PI * 2.f) / 32767.f), MAT_MUL);
+    Matrix_Translate(this->base.world.pos.x, this->base.world.pos.y + 20.f, this->base.world.pos.z, MAT_SET);
+    Matrix_Scale(0.35f, 0.35f, 0.35f, MAT_MUL);
+    Matrix_RotateY(this->base.shape.rot.y * ((M_PI * 2.f) / 32767.f), MAT_MUL);
     Draw_Gi(play, &this->base, gi, 0);
 }
 

@@ -130,12 +130,12 @@ static void CustomWarp_Draw(Actor_CustomWarp* this, GameState_Play* play)
     static const float scale = 0.003f;
 
     /* Transform */
-    ModelViewTranslate(this->base.world.pos.x, this->base.world.pos.y, this->base.world.pos.z, MAT_SET);
-    ModelViewScale(scale, scale, scale, MAT_MUL);
+    Matrix_Translate(this->base.world.pos.x, this->base.world.pos.y, this->base.world.pos.z, MAT_SET);
+    Matrix_Scale(scale, scale, scale, MAT_MUL);
 
     /* Draw */
     OPEN_DISPS(play->gs.gfx);
-    InitListPolyXlu(play->gs.gfx);
+    Gfx_SetupDL25_Xlu(play->gs.gfx);
     shaderFlameEffect(play);
     CLOSE_DISPS();
 }
