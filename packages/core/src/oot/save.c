@@ -300,6 +300,7 @@ static void applyStartingEvents(void)
     if (Config_Flag(CFG_MM_PRE_ACTIVATED_OWL_ST)) gMmSave.playerData.owlActivationFlags |= (1 << 9);
 
     BITMAP16_SET(gSave.eventsMisc, EV_OOT_INF_OWL_LAKE_HYLIA_SPOKEN);
+    BITMAP16_SET(gSave.eventsMisc, EV_OOT_INF_MALON_RANCH_SAVED);
 
 }
 

@@ -76,6 +76,7 @@
 #define EV_OOT_INF_KAKARIKO_GATE_OPEN       0x076
 #define EV_OOT_INF_KING_ZORA_THAWED         0x138
 #define EV_OOT_INF_MAGIC_JAR                0x198
+#define EV_OOT_INF_MALON_RANCH_SAVED        OOT_EV(11, 8)
 #define EV_OOT_INF_GORON_LINK               OOT_EV(16, 12)
 #define EV_OOT_INF_RUTO_ON_BLUE_SWITCH      OOT_EV(20, 0)
 #define EV_OOT_INF_RUTO_MET                 OOT_EV(20, 1)
