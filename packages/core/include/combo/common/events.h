@@ -86,6 +86,7 @@
 #define EV_OOT_INF_RUTO_KIDNAPPED           OOT_EV(20, 6)
 #define EV_OOT_INF_RUTO_TOP_FLOOR           OOT_EV(20, 7)
 #define EV_OOT_INF_HBA_1000                 OOT_EV(25, 0)
+#define EV_OOT_INF_OWL_LAKE_HYLIA_SPOKEN    OOT_EV(25, 5)
 
 /* Custom flags that seems unused */
 #define EV_OOT_CHK_SONG_SARIA               0x58

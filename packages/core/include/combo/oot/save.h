@@ -233,6 +233,7 @@ ASSERT_OFFSET(OotSave, sceneId,                 0x66);
 ASSERT_OFFSET(OotSave, equips,                  0x68);
 ASSERT_OFFSET(OotSave, inventory.equipment,     0x9c);
 ASSERT_OFFSET(OotSave, perm,                    0xd4);
+ASSERT_OFFSET(OotSave, eventsMisc,              0xef8);
 ASSERT_OFFSET(OotSave, unk_f34,                 0xf34);
 ASSERT_OFFSET(OotSave, unk_f3c,                 0xf3c);
 ASSERT_OFFSET(OotSave, unk_12a1,                0x12a1);

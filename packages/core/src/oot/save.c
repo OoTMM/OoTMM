@@ -299,6 +299,8 @@ static void applyStartingEvents(void)
     if (Config_Flag(CFG_MM_PRE_ACTIVATED_OWL_IC)) gMmSave.playerData.owlActivationFlags |= (1 << 8);
     if (Config_Flag(CFG_MM_PRE_ACTIVATED_OWL_ST)) gMmSave.playerData.owlActivationFlags |= (1 << 9);
 
+    BITMAP16_SET(gSave.eventsMisc, EV_OOT_INF_OWL_LAKE_HYLIA_SPOKEN);
+
 }
 
 void comboCreateSave(void* unk, void* buffer)
