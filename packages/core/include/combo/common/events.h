@@ -102,6 +102,7 @@
 #define EV_MM_WEEK_ENTERED_CLOCK_TOWN_NORTH     MM_EV(2,  5)
 #define EV_MM_WEEK_TOWN_FAIRY                   MM_EV(8,  7)
 #define EV_MM_WEEK_MONKEY_PUNISHED              MM_EV(9,  7)
+#define EV_MM_WEEK_TINGLE_TALKED                MM_EV(10, 0)
 #define EV_MM_WEEK_HEALED_WITCH_WOODS           MM_EV(12, 3)
 #define EV_MM_WEEK_BOTTLE_RED_POTION            MM_EV(12, 4)
 #define EV_MM_WEEK_TOWN_GUARDS                  MM_EV(12, 5)
@@ -129,6 +130,8 @@
 #define EV_MM_WEEK_ARCHERY_SWAMP_QUIVER         MM_EV(59, 4)
 #define EV_MM_WEEK_ARCHERY_TOWN_QUIVER          MM_EV(59, 5)
 #define EV_MM_WEEK_FIRST_CYCLE                  MM_EV(59, 2)
+#define EV_MM_WEEK_TINGLE_FORM_LOW              MM_EV(64, 3)
+#define EV_MM_WEEK_TINGLE_FORM_HIGH             MM_EV(64, 4)
 #define EV_MM_WEEK_RECEIVED_ROOM_KEY            MM_EV(75, 4)
 #define EV_MM_WEEK_PAMELA_FATHER                MM_EV(75, 5)
 

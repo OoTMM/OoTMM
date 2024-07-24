@@ -56,3 +56,10 @@ PATCH_END
 PATCH_START 0x80a635ac
   li a2,GI_MM_WORLD_MAP_CLOCK_TOWN
 PATCH_END
+
+/* Force this->inflateEarly to false so the inflateTimer is set to 0 instead of 290 in North Clock Town
+if the player is lacking magic */
+PATCH_START 0x80a6265c
+  li t1, 0
+PATCH_END
+

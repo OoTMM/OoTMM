@@ -498,6 +498,7 @@ void hookPlay_Init(GameState_Play* play)
         gCustomSave.fw[gOotSave.age].pos = *pos;
     }
 
+
     if (comboIsLinkAdult())
     {
         s16* playerFormObjectIds = (s16*)0x801c2730;
@@ -645,6 +646,9 @@ void hookPlay_Init(GameState_Play* play)
     MM_SET_EVENT_WEEK(MM_EV(81, 7));
     MM_SET_EVENT_WEEK(MM_EV(82, 0));
     MM_SET_EVENT_WEEK(MM_EV(82, 1));
+
+    /* Tingle already knows about the player */
+    MM_SET_EVENT_WEEK(EV_MM_WEEK_TINGLE_TALKED);
 
     /* Raise Woodfall Temple with setting enabled */
     if (Config_Flag(CFG_MM_OPEN_WF))
