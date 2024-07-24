@@ -269,8 +269,7 @@ void EnYb_ReceiveMask(Actor_EnYb* this, GameState_Play* play) {
         this->actor.flags |= ACTOR_FLAG_MM_10000;
         Actor_OfferTalkExchange(&this->actor, play, 1000.0f, 1000.0f, PLAYER_IA_MINUS1);
     } else
-        comboGiveItemNpc(this, play, GI_MM_MASK_KAMARO, NPC_MM_MASK_KAMARO, 10000.0f, 100.0f);
-        // Actor_OfferGetItem(&this->actor, play, GI_MM_MASK_KAMARO, 10000.0f, 100.0f);
+        comboGiveItemNpc((Actor*)this, play, GI_MM_MASK_KAMARO, NPC_MM_MASK_KAMARO, 10000.0f, 100.0f);
 
     EnYb_EnableProximityMusic(this);
 }
