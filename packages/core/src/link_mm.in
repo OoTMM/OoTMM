@@ -129,8 +129,8 @@ DrawGi_BottleFairy          = 0x800ef4d4;
 Player_InCsMode = 0x801233e4;
 
 Gfx_SetupDL57 = 0x8012BFC4;
-InitListPolyOpa = 0x8012c28c;
-InitListPolyXlu = 0x8012c2dc;
+Gfx_SetupDL25_Opa = 0x8012c28c;
+Gfx_SetupDL25_Xlu = 0x8012c2dc;
 Gfx_SetupDL_42Opa = 0x8012c8ac;
 GetMatrixMV     = 0x80181a40;
 DisplaceTexture = 0x8012cbd0;
@@ -152,16 +152,21 @@ LoadObjectGi = 0x80838830;
 
 SfxSource_PlaySfxAtFixedWorldPos = 0x800f0568;
 
+Collider_InitJntSph = 0x800e0b4c;
+Collider_SetJntSph = 0x800e0e60;
+Collider_UpdateSpheres = 0x800e7fdc;
+Collider_DestroyJntSph = 0x800e0c18;
+
 Actor_SetScale = 0x800b67e0;
-ActorSetUnk = 0x800b675c;
+Actor_SetFocus = 0x800b675c;
 Actor_HasParent  = 0x800b89f8;
 Actor_HasParentZ = 0x800b89f8;
 Actor_HasNoParent = 0x800b8bfc;
 Actor_HasNoParentZ = 0x800b8bfc;
 Actor_Kill = 0x800b670c;
 
-SetCollectibleFlag = 0x800b5db0;
-GetCollectibleFlag = 0x800b5d6c;
+Flags_SetCollectible = 0x800b5db0;
+Flags_GetCollectible = 0x800b5d6c;
 
 Actor_Spawn = 0x800bac60;
 Actor_SpawnAsChildAndCutscene = 0x800bae14;
@@ -170,11 +175,11 @@ MatrixRotation = 0x801809ac;
 
 gModelView = 0x801fbe04;
 
-ModelViewScale = 0x8018039c;
-ModelViewRotateX = 0x80180610;
-ModelViewRotateY = 0x80180b48;
-ModelViewRotateZ = 0x80180e90;
-ModelViewTranslate = 0x8018029c;
+Matrix_Scale = 0x8018039c;
+Matrix_RotateX = 0x80180610;
+Matrix_RotateY = 0x80180b48;
+Matrix_RotateZ = 0x80180e90;
+Matrix_Translate = 0x8018029c;
 Matrix_SetTranslateRotateYXZ = 0x80181650;
 ModelViewUnkTransform = 0x801820a0;
 ModelViewMult = 0x80180244;
@@ -333,6 +338,9 @@ ActorShadow_DrawSquare = 0x800b4024;
 BgCheck_EntityRaycastDown4 = 0x800c411c;
 
 DynaPoly_DisableCollision = 0x800c62bc;
+
+Actor_PlaySfx_Flagged = 0x800B9010;
+CutsceneManager_GetCutsceneScriptIndex = 0x800f2138;
 
 Item_CollectibleDropTable = 0x800a8150;
 Item_CollectibleDropTable2 = 0x800a817c;

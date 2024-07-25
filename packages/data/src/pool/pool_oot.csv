@@ -48,6 +48,8 @@ Kokiri Forest Storms Grotto Grass 1,                        grass,          NONE
 Kokiri Forest Storms Grotto Grass 2,                        grass,          NONE,                 GROTTOS,                        0x02c03,                    RANDOM
 Kokiri Forest Storms Grotto Grass 3,                        grass,          NONE,                 GROTTOS,                        0x02c04,                    RANDOM
 Kokiri Forest Storms Grotto Grass 4,                        grass,          NONE,                 GROTTOS,                        0x02c05,                    RANDOM
+Kokiri Forest Storms Grotto Hive 1,                         hive,           NONE,                 GROTTOS,                        0x02c07,                    RUPEE_BLUE
+Kokiri Forest Storms Grotto Hive 2,                         hive,           NONE,                 GROTTOS,                        0x02c08,                    RUPEE_RED
 Kokiri Forest Rupee Child 1,                                rupee,          NONE,                 KOKIRI_FOREST,                  0x00005,                    RUPEE_BLUE
 Kokiri Forest Rupee Child 2,                                rupee,          NONE,                 KOKIRI_FOREST,                  0x00006,                    RUPEE_BLUE
 Kokiri Forest Rupee Crawl 1,                                rupee,          NONE,                 KOKIRI_FOREST,                  0x00200,                    RUPEE_BLUE
@@ -113,11 +115,14 @@ Lost Woods Grass Deep 6,                                    grass,          NONE
 Lost Woods Grotto Scrub Nuts Upgrade,                       scrub,          NONE,                 GROTTOS,                        0x03,                       NUT_UPGRADE
 Lost Woods Grotto Scrub Back,                               scrub,          NONE,                 GROTTOS,                        0x04,                       DEKU_SEEDS_30
 Lost Woods Grotto Scrub Big Fairy,                          fairy_spot,     NONE,                 GROTTOS,                        0x00600,                    FAIRY_BIG
+Lost Woods Grotto Scrub Hive,                               hive,           NONE,                 GROTTOS,                        0x00603,                    RUPEE_RED
 Lost Woods Grotto Generic,                                  chest,          NONE,                 GROTTOS,                        0x14,                       RUPEE_BLUE
 Lost Woods Grotto Generic Grass 1,                          grass,          NONE,                 GROTTOS,                        0x03402,                    RANDOM
 Lost Woods Grotto Generic Grass 2,                          grass,          NONE,                 GROTTOS,                        0x03403,                    RANDOM
 Lost Woods Grotto Generic Grass 3,                          grass,          NONE,                 GROTTOS,                        0x03404,                    RANDOM
 Lost Woods Grotto Generic Grass 4,                          grass,          NONE,                 GROTTOS,                        0x03405,                    RANDOM
+Lost Woods Grotto Generic Hive 1,                           hive,           NONE,                 GROTTOS,                        0x03407,                    RUPEE_BLUE
+Lost Woods Grotto Generic Hive 2,                           hive,           NONE,                 GROTTOS,                        0x03408,                    RUPEE_RED
 Lost Woods GS Soil Bridge,                                  gs,             NONE,                 LOST_WOODS,                     0x70,                       GS_TOKEN
 Lost Woods GS Soil Theater,                                 gs,             NONE,                 LOST_WOODS,                     0x71,                       GS_TOKEN
 Lost Woods GS Bean Ride,                                    gs,             NONE,                 LOST_WOODS,                     0x72,                       GS_TOKEN
@@ -142,6 +147,7 @@ Sacred Meadow Grotto,                                       chest,          NONE
 Sacred Meadow GS Night Adult,                               gs,             NONE,                 SACRED_FOREST_MEADOW,           0x73,                       GS_TOKEN
 Sacred Meadow Storms Grotto Front Scrub,                    scrub,          NONE,                 GROTTOS,                        0x05,                       POTION_GREEN
 Sacred Meadow Storms Grotto Back Scrub,                     scrub,          NONE,                 GROTTOS,                        0x06,                       POTION_RED
+Sacred Meadow Storms Grotto Hive,                           hive,           NONE,                 GROTTOS,                        0x02102,                    RUPEE_RED
 Sacred Meadow Fairy Fountain Fairy 1,                       fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x02200,                    FAIRY
 Sacred Meadow Fairy Fountain Fairy 2,                       fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x12200,                    FAIRY
 Sacred Meadow Fairy Fountain Fairy 3,                       fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x22200,                    FAIRY
@@ -170,6 +176,8 @@ Kakariko Grotto Back Grass 1,                               grass,          NONE
 Kakariko Grotto Back Grass 2,                               grass,          NONE,                 GROTTOS,                        0x02803,                    RANDOM
 Kakariko Grotto Back Grass 3,                               grass,          NONE,                 GROTTOS,                        0x02804,                    RANDOM
 Kakariko Grotto Back Grass 4,                               grass,          NONE,                 GROTTOS,                        0x02805,                    RANDOM
+Kakariko Grotto Back Hive 1,                                hive,           NONE,                 GROTTOS,                        0x02807,                    RUPEE_BLUE
+Kakariko Grotto Back Hive 2,                                hive,           NONE,                 GROTTOS,                        0x02808,                    RUPEE_RED
 Kakariko GS Roof,                                           gs,             NONE,                 KAKARIKO_VILLAGE,               0x8e,                       GS_TOKEN
 Kakariko GS Shooting Gallery,                               gs,             NONE,                 KAKARIKO_VILLAGE,               0x8b,                       GS_TOKEN
 Kakariko GS Tree,                                           gs,             NONE,                 KAKARIKO_VILLAGE,               0x8d,                       GS_TOKEN
@@ -304,6 +312,8 @@ Death Mountain Trail Grotto Grass 1,                        grass,          NONE
 Death Mountain Trail Grotto Grass 2,                        grass,          NONE,                 GROTTOS,                        0x03703,                    RANDOM
 Death Mountain Trail Grotto Grass 3,                        grass,          NONE,                 GROTTOS,                        0x03704,                    RANDOM
 Death Mountain Trail Grotto Grass 4,                        grass,          NONE,                 GROTTOS,                        0x03705,                    RANDOM
+Death Mountain Trail Grotto Hive 1,                         hive,           NONE,                 GROTTOS,                        0x03707,                    RUPEE_BLUE
+Death Mountain Trail Grotto Hive 2,                         hive,           NONE,                 GROTTOS,                        0x03708,                    RUPEE_RED
 Death Mountain Trail GS Entrance,                           gs,             NONE,                 DEATH_MOUNTAIN_TRAIL,           0x82,                       GS_TOKEN
 Death Mountain Trail GS Soil,                               gs,             NONE,                 DEATH_MOUNTAIN_TRAIL,           0x81,                       GS_TOKEN
 Death Mountain Trail GS Above Dodongo,                      gs,             NONE,                 DEATH_MOUNTAIN_TRAIL,           0x83,                       GS_TOKEN
@@ -323,6 +333,7 @@ Death Mountain Trail Cow Grotto Heart 2,                    heart,          NONE
 Death Mountain Trail Cow Grotto Heart 3,                    heart,          NONE,                 GROTTOS,                        0x00308,                    RECOVERY_HEART
 Death Mountain Trail Cow Grotto Heart 4,                    heart,          NONE,                 GROTTOS,                        0x00309,                    RECOVERY_HEART
 Death Mountain Trail Cow Grotto Big Fairy,                  fairy_spot,     NONE,                 GROTTOS,                        0x00304,                    FAIRY_BIG
+Death Mountain Trail Cow Grotto Hive,                       hive,           NONE,                 GROTTOS,                        0x00303,                    RUPEE_RED
 Death Mountain Trail Rupee Upper,                           rupee,          NONE,                 DEATH_MOUNTAIN_TRAIL,           0x00001,                    RUPEE_RED
 Death Mountain Trail Rupee Lower,                           rupee,          NONE,                 DEATH_MOUNTAIN_TRAIL,           0x00002,                    RUPEE_BLUE
 Death Mountain Trail Big Fairy,                             fairy_spot,     NONE,                 DEATH_MOUNTAIN_TRAIL,           0x00026,                    FAIRY_BIG
@@ -339,6 +350,7 @@ Goron City GS Maze,                                         gs,             NONE
 Goron City Grotto Left Scrub,                               scrub,          NONE,                 GROTTOS,                        0x0b,                       NUTS_5
 Goron City Grotto Center Scrub,                             scrub,          NONE,                 GROTTOS,                        0x0c,                       DEKU_SEEDS_30
 Goron City Grotto Right Scrub,                              scrub,          NONE,                 GROTTOS,                        0x0d,                       BOMBS_5
+Goron City Grotto Hive,                                     hive,           NONE,                 GROTTOS,                        0x02a03,                    RUPEE_RED
 Goron City Pot Darunia Room 1,                              pot,            NONE,                 GORON_CITY,                     0x0105,                     STICK
 Goron City Pot Darunia Room 2,                              pot,            NONE,                 GORON_CITY,                     0x0106,                     RUPEE_GREEN
 Goron City Pot Darunia Room 3,                              pot,            NONE,                 GORON_CITY,                     0x0107,                     STICK
@@ -364,10 +376,13 @@ Death Mountain Crater Grotto Grass 1,                       grass,          NONE
 Death Mountain Crater Grotto Grass 2,                       grass,          NONE,                 GROTTOS,                        0x03a03,                    RANDOM
 Death Mountain Crater Grotto Grass 3,                       grass,          NONE,                 GROTTOS,                        0x03a04,                    RANDOM
 Death Mountain Crater Grotto Grass 4,                       grass,          NONE,                 GROTTOS,                        0x03a05,                    RANDOM
+Death Mountain Crater Grotto Hive 1,                        hive,           NONE,                 GROTTOS,                        0x03a07,                    RUPEE_BLUE
+Death Mountain Crater Grotto Hive 2,                        hive,           NONE,                 GROTTOS,                        0x03a08,                    RUPEE_RED
 Death Mountain Crater Scrub Child,                          scrub,          DMC_SCRUB,            DEATH_MOUNTAIN_CRATER,          0x0e,                       BOMBS_5
 Death Mountain Crater Grotto Left Scrub,                    scrub,          NONE,                 GROTTOS,                        0x0f,                       NUTS_5
 Death Mountain Crater Grotto Center Scrub,                  scrub,          NONE,                 GROTTOS,                        0x10,                       DEKU_SEEDS_30
 Death Mountain Crater Grotto Right Scrub,                   scrub,          NONE,                 GROTTOS,                        0x11,                       BOMBS_5
+Death Mountain Crater Scrub Grotto Hive,                    hive,           NONE,                 GROTTOS,                        0x02b03,                    RUPEE_RED
 Death Mountain Crater GS Soil,                              gs,             NONE,                 DEATH_MOUNTAIN_CRATER,          0x80,                       GS_TOKEN
 Death Mountain Crater GS Crate,                             gs,             NONE,                 DEATH_MOUNTAIN_CRATER,          0x87,                       GS_TOKEN
 Death Mountain Crater Pot 1,                                pot,            NONE,                 DEATH_MOUNTAIN_CRATER,          0x810d,                     RECOVERY_HEART
@@ -399,8 +414,11 @@ Zora River Grotto Grass 1,                                  grass,          NONE
 Zora River Grotto Grass 2,                                  grass,          NONE,                 GROTTOS,                        0x02903,                    RANDOM
 Zora River Grotto Grass 3,                                  grass,          NONE,                 GROTTOS,                        0x02904,                    RANDOM
 Zora River Grotto Grass 4,                                  grass,          NONE,                 GROTTOS,                        0x02905,                    RANDOM
+Zora River Grotto Hive 1,                                   hive,           NONE,                 GROTTOS,                        0x02907,                    RUPEE_BLUE
+Zora River Grotto Hive 2,                                   hive,           NONE,                 GROTTOS,                        0x02908,                    RUPEE_RED
 Zora River Storms Grotto Front Scrub,                       scrub,          NONE,                 GROTTOS,                        0x12,                       POTION_GREEN
 Zora River Storms Grotto Back Scrub,                        scrub,          NONE,                 GROTTOS,                        0x13,                       POTION_RED
+Zora River Storms Grotto Hive,                              hive,           NONE,                 GROTTOS,                        0x02402,                    RUPEE_RED
 Zora River GS Tree,                                         gs,             NONE,                 ZORA_RIVER,                     0x91,                       GS_TOKEN
 Zora River GS Ladder,                                       gs,             NONE,                 ZORA_RIVER,                     0x90,                       GS_TOKEN
 Zora River GS Near Grotto,                                  gs,             NONE,                 ZORA_RIVER,                     0x94,                       GS_TOKEN
@@ -476,6 +494,9 @@ Zora Domain Pot 2,                                          pot,            NONE
 Zora Domain Pot 3,                                          pot,            NONE,                 ZORA_DOMAIN,                    0x0117,                     RECOVERY_HEART
 Zora Domain Pot 4,                                          pot,            NONE,                 ZORA_DOMAIN,                    0x0118,                     NUTS_5
 Zora Domain Pot 5,                                          pot,            NONE,                 ZORA_DOMAIN,                    0x0119,                     STICK
+Zora Domain Hive Front 1,                                   hive,           NONE,                 ZORA_DOMAIN,                    0x00009,                    RUPEE_RED
+Zora Domain Hive Front 2,                                   hive,           NONE,                 ZORA_DOMAIN,                    0x0000a,                    RUPEE_RED
+Zora Domain Hive Back,                                      hive,           NONE,                 ZORA_DOMAIN,                    0x0000b,                    RUPEE_RED
 Zora Domain Fairy Fountain Fairy 1,                         fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x02300,                    FAIRY
 Zora Domain Fairy Fountain Fairy 2,                         fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x12300,                    FAIRY
 Zora Domain Fairy Fountain Fairy 3,                         fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x22300,                    FAIRY
@@ -528,6 +549,7 @@ Lake Hylia HP,                                              collectible,    NONE
 Lake Hylia Grotto Left Scrub,                               scrub,          NONE,                 GROTTOS,                        0x14,                       NUTS_5
 Lake Hylia Grotto Center Scrub,                             scrub,          NONE,                 GROTTOS,                        0x15,                       DEKU_SEEDS_30
 Lake Hylia Grotto Right Scrub,                              scrub,          NONE,                 GROTTOS,                        0x16,                       BOMBS_5
+Lake Hylia Grotto Hive,                                     hive,           NONE,                 GROTTOS,                        0x02d03,                    RUPEE_RED
 Lake Hylia GS Lab Wall,                                     gs,             NONE,                 LAKE_HYLIA,                     0x9a,                       GS_TOKEN
 Lake Hylia GS Island,                                       gs,             NONE,                 LAKE_HYLIA,                     0x99,                       GS_TOKEN
 Lake Hylia GS Soil,                                         gs,             NONE,                 LAKE_HYLIA,                     0x98,                       GS_TOKEN
@@ -639,6 +661,7 @@ Lon Lon Ranch Silo Cow Back,                                cow,            NONE
 Lon Lon Ranch Grotto Left Scrub,                            scrub,          NONE,                 GROTTOS,                        0x08,                       NUTS_5
 Lon Lon Ranch Grotto Center Scrub,                          scrub,          NONE,                 GROTTOS,                        0x09,                       DEKU_SEEDS_30
 Lon Lon Ranch Grotto Right Scrub,                           scrub,          NONE,                 GROTTOS,                        0x0a,                       BOMBS_5
+Lon Lon Ranch Grotto Hive,                                  hive,           NONE,                 GROTTOS,                        0x02703,                    RUPEE_RED
 Lon Lon Ranch Pot 1,                                        pot,            NONE,                 LON_LON_RANCH,                  0x0003,                     RUPEE_GREEN
 Lon Lon Ranch Pot 2,                                        pot,            NONE,                 LON_LON_RANCH,                  0x0004,                     RUPEE_GREEN
 Lon Lon Ranch Pot 3,                                        pot,            NONE,                 LON_LON_RANCH,                  0x0005,                     RECOVERY_HEART
@@ -654,21 +677,28 @@ Hyrule Field Song of Time,                                  npc,            NONE
 Hyrule Field Sell Bunny Mask,                               npc,            NONE,                 HYRULE_FIELD,                   MASK_SELL_BUNNY,            RUPEE_RAINBOW
 Hyrule Field Grotto Scrub HP,                               scrub,          NONE,                 GROTTOS,                        0x07,                       HEART_PIECE
 Hyrule Field Grotto Scrub Big Fairy,                        fairy_spot,     NONE,                 GROTTOS,                        0x00102,                    FAIRY_BIG
+Hyrule Field Grotto Scrub Hive,                             hive,           NONE,                 GROTTOS,                        0x00101,                    RUPEE_RED
 Hyrule Field Grotto Southeast,                              chest,          NONE,                 GROTTOS,                        0x02,                       RUPEE_RED
 Hyrule Field Grotto Southeast Grass 1,                      grass,          NONE,                 GROTTOS,                        0x02202,                    RANDOM
 Hyrule Field Grotto Southeast Grass 2,                      grass,          NONE,                 GROTTOS,                        0x02203,                    RANDOM
 Hyrule Field Grotto Southeast Grass 3,                      grass,          NONE,                 GROTTOS,                        0x02204,                    RANDOM
 Hyrule Field Grotto Southeast Grass 4,                      grass,          NONE,                 GROTTOS,                        0x02205,                    RANDOM
+Hyrule Field Grotto Southeast Hive 1,                       hive,           NONE,                 GROTTOS,                        0x02207,                    RUPEE_BLUE
+Hyrule Field Grotto Southeast Hive 2,                       hive,           NONE,                 GROTTOS,                        0x02208,                    RUPEE_RED
 Hyrule Field Grotto Open,                                   chest,          NONE,                 GROTTOS,                        0x03,                       RUPEE_BLUE
 Hyrule Field Grotto Open Grass 1,                           grass,          NONE,                 GROTTOS,                        0x02302,                    RANDOM
 Hyrule Field Grotto Open Grass 2,                           grass,          NONE,                 GROTTOS,                        0x02303,                    RANDOM
 Hyrule Field Grotto Open Grass 3,                           grass,          NONE,                 GROTTOS,                        0x02304,                    RANDOM
 Hyrule Field Grotto Open Grass 4,                           grass,          NONE,                 GROTTOS,                        0x02305,                    RANDOM
+Hyrule Field Grotto Open Hive 1,                            hive,           NONE,                 GROTTOS,                        0x02307,                    RUPEE_BLUE
+Hyrule Field Grotto Open Hive 2,                            hive,           NONE,                 GROTTOS,                        0x02308,                    RUPEE_RED
 Hyrule Field Grotto Market,                                 chest,          NONE,                 GROTTOS,                        0x00,                       RUPEE_BLUE
 Hyrule Field Grotto Market Grass 1,                         grass,          NONE,                 GROTTOS,                        0x02002,                    RANDOM
 Hyrule Field Grotto Market Grass 2,                         grass,          NONE,                 GROTTOS,                        0x02003,                    RANDOM
 Hyrule Field Grotto Market Grass 3,                         grass,          NONE,                 GROTTOS,                        0x02004,                    RANDOM
 Hyrule Field Grotto Market Grass 4,                         grass,          NONE,                 GROTTOS,                        0x02005,                    RANDOM
+Hyrule Field Grotto Market Hive 1,                          hive,           NONE,                 GROTTOS,                        0x02007,                    RUPEE_BLUE
+Hyrule Field Grotto Market Hive 2,                          hive,           NONE,                 GROTTOS,                        0x02008,                    RUPEE_RED
 Hyrule Field Grotto Tektite HP,                             collectible,    NONE,                 GROTTOS,                        0x01,                       HEART_PIECE
 Hyrule Field Grotto Near Kakariko GS,                       gs,             NONE,                 GROTTOS,                        0x59,                       GS_TOKEN
 Hyrule Field Grotto Near Gerudo GS,                         gs,             NONE,                 GROTTOS,                        0x58,                       GS_TOKEN
@@ -897,6 +927,7 @@ Gerudo Valley Waterfall HP,                                 collectible,    NONE
 Gerudo Valley Broken Goron Sword,                           npc,            NONE,                 GERUDO_VALLEY,                  TRADE_BROKEN_GORON_SWORD,   BROKEN_GORON_SWORD
 Gerudo Valley Grotto Front Scrub,                           scrub,          NONE,                 GROTTOS,                        0x17,                       POTION_GREEN
 Gerudo Valley Grotto Back Scrub,                            scrub,          NONE,                 GROTTOS,                        0x18,                       POTION_RED
+Gerudo Valley Grotto Hive,                                  hive,           NONE,                 GROTTOS,                        0x02502,                    RUPEE_RED
 Gerudo Valley GS Soil,                                      gs,             NONE,                 GERUDO_VALLEY,                  0xa0,                       GS_TOKEN
 Gerudo Valley GS Wall,                                      gs,             NONE,                 GERUDO_VALLEY,                  0xa1,                       GS_TOKEN
 Gerudo Valley GS Tent,                                      gs,             NONE,                 GERUDO_VALLEY,                  0xa3,                       GS_TOKEN
@@ -969,6 +1000,7 @@ Desert Colossus HP,                                         collectible,    NONE
 Desert Colossus Song Spirit,                                npc,            NONE,                 DESERT_COLOSSUS,                SHEIK_SPIRIT,               SONG_TP_SPIRIT
 Desert Colossus Grotto Front Scrub,                         scrub,          NONE,                 GROTTOS,                        0x19,                       POTION_GREEN
 Desert Colossus Grotto Back Scrub,                          scrub,          NONE,                 GROTTOS,                        0x1a,                       POTION_RED
+Desert Colossus Grotto Hive,                                hive,           NONE,                 GROTTOS,                        0x02602,                    RUPEE_RED
 Desert Colossus GS Soil,                                    gs,             NONE,                 DESERT_COLOSSUS,                0xb0,                       GS_TOKEN
 Desert Colossus GS Tree,                                    gs,             NONE,                 DESERT_COLOSSUS,                0xb3,                       GS_TOKEN
 Desert Colossus GS Plateau,                                 gs,             NONE,                 DESERT_COLOSSUS,                0xb2,                       GS_TOKEN

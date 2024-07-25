@@ -156,6 +156,8 @@ Termina Field Pillar Grotto Grass 14,                   grass,          NONE,   
 Termina Field Peahat Grotto,                            chest,          NONE,                   GROTTOS,                      0x04,                       HEART_PIECE
 Termina Field Dodongo Grotto,                           chest,          NONE,                   GROTTOS,                      0x00,                       HEART_PIECE
 Termina Field Bio Baba Grotto,                          collectible,    NONE,                   GROTTOS,                      0x02,                       HEART_PIECE
+Termina Field Bio Baba Grotto Hive 1,                   hive,           NONE,                   GROTTOS,                      0x00b09,                    RUPEE_BLUE
+Termina Field Bio Baba Grotto Hive 2,                   hive,           NONE,                   GROTTOS,                      0x00b0a,                    NOTHING
 Termina Field Scrub,                                    npc,            NONE,                   GROTTOS,                      SCRUB_TELESCOPE,            HEART_PIECE
 Termina Field Scrub Pot,                                pot,            NONE,                   GROTTOS,                      0x0903,                     RECOVERY_HEART
 Termina Field Scrub Crate,                              crate,          NONE,                   GROTTOS,                      0x00900,                    NOTHING
@@ -472,11 +474,13 @@ Termina Field Cow Grotto Grass 69,                      grass,          NONE,   
 Termina Field Cow Grotto Grass 70,                      grass,          NONE,                   GROTTOS,                      0x90a09,                    RANDOM
 Termina Field Cow Grotto Grass 71,                      grass,          NONE,                   GROTTOS,                      0xa0a09,                    RANDOM
 Termina Field Cow Grotto Grass 72,                      grass,          NONE,                   GROTTOS,                      0xb0a09,                    RANDOM
+Termina Field Cow Grotto Hive,                          hive,           NONE,                   GROTTOS,                      0x00a02,                    NOTHING
 Ocean Gossip Grotto Grass 1,                            grass,          NONE,                   GROTTOS,                      0x00001,                    RANDOM
 Ocean Gossip Grotto Grass 2,                            grass,          NONE,                   GROTTOS,                      0x00004,                    RANDOM
 Ocean Gossip Grotto Grass 3,                            grass,          NONE,                   GROTTOS,                      0x00006,                    RANDOM
 Ocean Gossip Grotto Grass 4,                            grass,          NONE,                   GROTTOS,                      0x00007,                    RANDOM
 Ocean Gossip Grotto Grass 5,                            grass,          NONE,                   GROTTOS,                      0x00008,                    RANDOM
+Ocean Gossip Grotto Hive,                               hive,           NONE,                   GROTTOS,                      0x00000,                    NOTHING
 Canyon Gossip Grotto Grass 1,                           grass,          NONE,                   GROTTOS,                      0x00200,                    RANDOM
 Canyon Gossip Grotto Grass 2,                           grass,          NONE,                   GROTTOS,                      0x00201,                    RANDOM
 Canyon Gossip Grotto Grass 3,                           grass,          NONE,                   GROTTOS,                      0x00202,                    RANDOM
@@ -591,6 +595,7 @@ Southern Swamp Grass Near Witch 1,                      grass,          NONE,   
 Southern Swamp Grass Near Witch 2,                      grass,          NONE,                   SOUTHERN_SWAMP,               0x00212,                    RANDOM
 Southern Swamp Rupee 1,                                 rupee,          NONE,                   SOUTHERN_SWAMP,               0x00028,                    RUPEE_BLUE
 Southern Swamp Rupee 2,                                 rupee,          NONE,                   SOUTHERN_SWAMP,               0x00029,                    RUPEE_BLUE
+Southern Swamp Hive,                                    hive,           NONE,                   SOUTHERN_SWAMP,               0x0002b,                    RUPEE_RED
 Woods of Mystery Grotto,                                chest,          NONE,                   GROTTOS,                      0x1c,                       RUPEE_PURPLE
 Woods of Mystery Grotto Grass 01,                       grass,          NONE,                   GROTTOS,                      0x03c00,                    RANDOM
 Woods of Mystery Grotto Grass 02,                       grass,          NONE,                   GROTTOS,                      0x03c01,                    RANDOM
@@ -806,6 +811,15 @@ Swamp Spider House Wonder Item Pots 2,                  wonder,         NONE,   
 Swamp Spider House Wonder Item Pots 3,                  wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x0041b,                    RUPEE_GREEN
 Swamp Spider House Wonder Item Pots 4,                  wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x0041c,                    RUPEE_BLUE
 Swamp Spider House Wonder Item Pots 5,                  wonder,         NONE,                   SPIDER_HOUSE_SWAMP,           0x0041d,                    RUPEE_RED
+Swamp Spider House Hive Gold Room 1,                    hive,           NONE,                   SPIDER_HOUSE_SWAMP,           0x00209,                    MAGIC_JAR_SMALL
+Swamp Spider House Hive Gold Room 2,                    hive,           NONE,                   SPIDER_HOUSE_SWAMP,           0x0020a,                    NOTHING
+Swamp Spider House Hive Gold Room 3,                    hive,           NONE,                   SPIDER_HOUSE_SWAMP,           0x0020b,                    NOTHING
+Swamp Spider House Hive Jars Room 1,                    hive,           NONE,                   SPIDER_HOUSE_SWAMP,           0x00407,                    MAGIC_JAR_SMALL
+Swamp Spider House Hive Jars Room 2,                    hive,           NONE,                   SPIDER_HOUSE_SWAMP,           0x00408,                    NOTHING
+Swamp Spider House Hive Jars Room 3,                    hive,           NONE,                   SPIDER_HOUSE_SWAMP,           0x0040b,                    NOTHING
+Swamp Spider House Hive Tree Room 1,                    hive,           NONE,                   SPIDER_HOUSE_SWAMP,           0x00506,                    RECOVERY_HEART
+Swamp Spider House Hive Tree Room 2,                    hive,           NONE,                   SPIDER_HOUSE_SWAMP,           0x00507,                    MAGIC_JAR_SMALL
+Swamp Spider House Hive Tree Room 3,                    hive,           NONE,                   SPIDER_HOUSE_SWAMP,           0x00509,                    NOTHING
 Mountain Village Waterfall Chest,                       chest,          NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x00,                       RUPEE_RED
 Mountain Village Don Gero Mask,                         npc,            HUNGRY_GORON,           MOUNTAIN_VILLAGE_WINTER,      MASK_DON_GERO,              MASK_DON_GERO
 Mountain Village Frog Choir HP,                         npc,            DON_GERO_CHOIR,         MOUNTAIN_VILLAGE_WINTER,      FROG_HEART_PIECE,           HEART_PIECE
@@ -866,6 +880,7 @@ Mountain Village Keaton Grass Reward 7,                 grass,          NONE,   
 Mountain Village Keaton Grass Reward 8,                 grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x7002c,                    RUPEE_GREEN
 Mountain Village Keaton Grass Reward 9,                 grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x8002c,                    RUPEE_RED
 Mountain Village Rupee,                                 rupee,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x00028,                    RUPEE_RED
+Mountain Village Hive,                                  hive,           NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x00024,                    NOTHING
 Blacksmith Razor Blade,                                 npc,            BLACKSMITH,             BLACKSMITH,                   SWORD_RAZOR,                SWORD
 Blacksmith Gilded Sword,                                npc,            BLACKSMITH,             BLACKSMITH,                   SWORD_GILDED,               SWORD
 Lone Peak Shrine Lens Chest,                            chest,          NONE,                   GROTTOS,                      0x01,                       LENS
@@ -1214,6 +1229,7 @@ Great Bay Cow Grotto Grass 69,                          grass,          NONE,   
 Great Bay Cow Grotto Grass 70,                          grass,          NONE,                   GROTTOS,                      0x90f09,                    RANDOM
 Great Bay Cow Grotto Grass 71,                          grass,          NONE,                   GROTTOS,                      0xa0f09,                    RANDOM
 Great Bay Cow Grotto Grass 72,                          grass,          NONE,                   GROTTOS,                      0xb0f09,                    RANDOM
+Great Bay Cow Grotto Hive,                              hive,           NONE,                   GROTTOS,                      0x00f02,                    NOTHING
 Zora Cape Ledge Chest 1,                                chest,          NONE,                   ZORA_CAPE,                    0x01,                       RUPEE_RED
 Zora Cape Ledge Chest 2,                                chest,          NONE,                   ZORA_CAPE,                    0x02,                       RUPEE_RED
 Zora Cape Underwater Chest,                             chest,          NONE,                   ZORA_CAPE,                    0x00,                       RUPEE_PURPLE
@@ -1595,6 +1611,8 @@ Woodfall Temple Rupee Lower 1,                          rupee,          NONE,   
 Woodfall Temple Rupee Lower 2,                          rupee,          NONE,                   TEMPLE_WOODFALL,              0x00003,                    RUPEE_BLUE
 Woodfall Temple Rupee Lower 3,                          rupee,          NONE,                   TEMPLE_WOODFALL,              0x00004,                    RUPEE_BLUE
 Woodfall Temple Rupee Lower 4,                          rupee,          NONE,                   TEMPLE_WOODFALL,              0x00005,                    RUPEE_BLUE
+Woodfall Temple Hive Entrance,                          hive,           NONE,                   TEMPLE_WOODFALL,              0x0021d,                    RUPEE_BLUE
+Woodfall Temple Hive Maze,                              hive,           NONE,                   TEMPLE_WOODFALL,              0x00311,                    NOTHING
 Woodfall Temple Boss Container,                         collectible,    NONE,                   LAIR_ODOLWA,                  0x1f,                       HEART_CONTAINER
 Woodfall Temple Boss,                                   npc,            NONE,                   LAIR_ODOLWA,                  REMAINS_ODOLWA,             REMAINS_ODOLWA
 Woodfall Temple Boss Grass 01,                          grass,          NONE,                   LAIR_ODOLWA,                  0x0000a,                    RANDOM

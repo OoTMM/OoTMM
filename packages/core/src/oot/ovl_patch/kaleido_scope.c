@@ -932,10 +932,10 @@ static void KaleidoScope_DrawOwlWarpMapPage(GameState_Play* play)
 
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 180, 180, 120, 255);
 
-    ModelViewTranslate((f32)WREG(3) / 100.0f, (f32)WREG(2) / 100.0f, 0.0f, MAT_SET);
-    ModelViewScale(0.78f, 0.78f, 0.78f, MAT_MUL);
-    ModelViewRotateZ(-pauseCtx->mapPageRoll / 100.0f, MAT_MUL);
-    ModelViewRotateY(-1.57f, MAT_MUL);
+    Matrix_Translate((f32)WREG(3) / 100.0f, (f32)WREG(2) / 100.0f, 0.0f, MAT_SET);
+    Matrix_Scale(0.78f, 0.78f, 0.78f, MAT_MUL);
+    Matrix_RotateZ(-pauseCtx->mapPageRoll / 100.0f, MAT_MUL);
+    Matrix_RotateY(-1.57f, MAT_MUL);
 
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
@@ -1101,8 +1101,8 @@ static void KaleidoScope_DrawOwlWarpInfoPanel(GameState_Play* play)
 
     gDPSetCombineMode(POLY_OPA_DISP++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
 
-    ModelViewTranslate(0.0f, 0.0f, -144.0f, MAT_SET);
-    ModelViewScale(1.0f, 1.0f, 1.0f, MAT_MUL);
+    Matrix_Translate(0.0f, 0.0f, -144.0f, MAT_SET);
+    Matrix_Scale(1.0f, 1.0f, 1.0f, MAT_MUL);
 
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
@@ -1243,12 +1243,12 @@ static void KaleidoScope_DrawCursor(GameState_Play* play) {
         gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, sCursorPrimR, sCursorPrimG, sCursorPrimB, 255);
         gDPSetEnvColor(POLY_OPA_DISP++, sCursorEnvR, sCursorEnvG, sCursorEnvB, 255);
 
-        ModelViewTranslate(sCursorX, sCursorY, -50.0f, MAT_SET);
-        ModelViewScale(1.0f, 1.0f, 1.0f, MAT_MUL);
+        Matrix_Translate(sCursorX, sCursorY, -50.0f, MAT_SET);
+        Matrix_Scale(1.0f, 1.0f, 1.0f, MAT_MUL);
 
         for (i = 0; i < 4; i++) {
             MatrixStackDup();
-            ModelViewTranslate(sCursorCirclesX[i], sCursorCirclesY[i], -50.0f, MAT_MUL);
+            Matrix_Translate(sCursorCirclesX[i], sCursorCirclesY[i], -50.0f, MAT_MUL);
             gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             gDPPipeSync(POLY_OPA_DISP++);
             gDPLoadTextureBlock_4b(POLY_OPA_DISP++, sCursorTexs[i], G_IM_FMT_IA, 16, 16, 0,

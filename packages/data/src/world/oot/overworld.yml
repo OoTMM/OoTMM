@@ -256,6 +256,8 @@
     "Kokiri Forest Storms Grotto Grass 2": "can_cut_grass"
     "Kokiri Forest Storms Grotto Grass 3": "can_cut_grass"
     "Kokiri Forest Storms Grotto Grass 4": "can_cut_grass"
+    "Kokiri Forest Storms Grotto Hive 1": "break_hive"
+    "Kokiri Forest Storms Grotto Hive 2": "break_hive"
   gossip:
     "Kokiri Gossip Near Lost Woods Grotto": "true"
 "Hyrule Field":
@@ -359,6 +361,7 @@
   locations:
     "Hyrule Field Grotto Scrub HP": "business_scrub(0x07)"
     "Hyrule Field Grotto Scrub Big Fairy": "can_play_storms"
+    "Hyrule Field Grotto Scrub Hive": "break_hive"
 "Hyrule Field Open Grotto":
   region: ENTRANCE
   age_change: false
@@ -378,6 +381,8 @@
     "Hyrule Field Grotto Open Grass 2": "can_cut_grass"
     "Hyrule Field Grotto Open Grass 3": "can_cut_grass"
     "Hyrule Field Grotto Open Grass 4": "can_cut_grass"
+    "Hyrule Field Grotto Open Hive 1": "break_hive"
+    "Hyrule Field Grotto Open Hive 2": "break_hive"
   gossip:
     "Hyrule Field Gossip Near Lake Hylia": "true"
 "Hyrule Field Southeast Grotto":
@@ -399,6 +404,8 @@
     "Hyrule Field Grotto Southeast Grass 2": "can_cut_grass"
     "Hyrule Field Grotto Southeast Grass 3": "can_cut_grass"
     "Hyrule Field Grotto Southeast Grass 4": "can_cut_grass"
+    "Hyrule Field Grotto Southeast Hive 1": "break_hive"
+    "Hyrule Field Grotto Southeast Hive 2": "break_hive"
   gossip:
     "Hyrule Field Gossip Southeast Grotto": "true"
 "Hyrule Field Grotto Near Market":
@@ -420,6 +427,8 @@
     "Hyrule Field Grotto Market Grass 2": "can_cut_grass"
     "Hyrule Field Grotto Market Grass 3": "can_cut_grass"
     "Hyrule Field Grotto Market Grass 4": "can_cut_grass"
+    "Hyrule Field Grotto Market Hive 1": "break_hive"
+    "Hyrule Field Grotto Market Hive 2": "break_hive"
   gossip:
     "Hyrule Field Gossip Near Castle Town": "true"
 "Hyrule Field Tektite Grotto":
@@ -776,6 +785,7 @@
     "Lon Lon Ranch Grotto Left Scrub": "is_child && business_scrub(0x08)"
     "Lon Lon Ranch Grotto Center Scrub": "is_child && business_scrub(0x09)"
     "Lon Lon Ranch Grotto Right Scrub": "is_child && business_scrub(0x0a)"
+    "Lon Lon Ranch Grotto Hive": "break_hive"
 "Hyrule Castle":
   region: HYRULE_CASTLE
   age_change: false
@@ -992,6 +1002,8 @@
     "Lost Woods Grotto Generic Grass 2": "can_cut_grass"
     "Lost Woods Grotto Generic Grass 3": "can_cut_grass"
     "Lost Woods Grotto Generic Grass 4": "can_cut_grass"
+    "Lost Woods Grotto Generic Hive 1": "break_hive"
+    "Lost Woods Grotto Generic Hive 2": "break_hive"
   gossip:
     "Lost Woods Gossip Grotto": "true"
 "Lost Woods Bridge":
@@ -1054,6 +1066,7 @@
     "Lost Woods Grotto Scrub Nuts Upgrade": "business_scrub(0x03)"
     "Lost Woods Grotto Scrub Back": "business_scrub(0x04)"
     "Lost Woods Grotto Scrub Big Fairy": "can_play_sun"
+    "Lost Woods Grotto Scrub Hive": "break_hive"
 "Sacred Meadow Entryway":
   region: SACRED_MEADOW
   exits:
@@ -1099,6 +1112,7 @@
   locations:
     "Sacred Meadow Storms Grotto Front Scrub": "business_scrub(0x05)"
     "Sacred Meadow Storms Grotto Back Scrub": "business_scrub(0x06)"
+    "Sacred Meadow Storms Grotto Hive": "break_hive"
 "Sacred Meadow Fairy Grotto":
   region: ENTRANCE
   age_change: false
@@ -1330,6 +1344,8 @@
     "Kakariko Grotto Back Grass 2": "can_cut_grass"
     "Kakariko Grotto Back Grass 3": "can_cut_grass"
     "Kakariko Grotto Back Grass 4": "can_cut_grass"
+    "Kakariko Grotto Back Hive 1": "break_hive"
+    "Kakariko Grotto Back Hive 2": "break_hive"
   gossip:
     "Kakariko Gossip Grotto": "true"
 "Graveyard":
@@ -1515,6 +1531,8 @@
     "Death Mountain Trail Grotto Grass 2": "can_cut_grass"
     "Death Mountain Trail Grotto Grass 3": "can_cut_grass"
     "Death Mountain Trail Grotto Grass 4": "can_cut_grass"
+    "Death Mountain Trail Grotto Hive 1": "break_hive"
+    "Death Mountain Trail Grotto Hive 2": "break_hive"
   gossip:
     "Death Mountain Trail Gossip Grotto": "true"
 "Death Mountain Cow Grotto":
@@ -1540,6 +1558,7 @@
     "Death Mountain Trail Cow Grotto Heart 3": "true"
     "Death Mountain Trail Cow Grotto Heart 4": "true"
     "Death Mountain Trail Cow Grotto Big Fairy": "can_play_storms"
+    "Death Mountain Trail Cow Grotto Hive": "break_hive"
 "Fairy Fountain Magic":
   region: ENTRANCE
   exits:
@@ -1623,6 +1642,7 @@
     "Goron City Grotto Left Scrub": "business_scrub(0x0b)"
     "Goron City Grotto Center Scrub": "business_scrub(0x0c)"
     "Goron City Grotto Right Scrub": "business_scrub(0x0d)"
+    "Goron City Grotto Hive": "break_hive"
 "Zora River Front":
   region: ZORA_RIVER
   time: flow
@@ -1727,6 +1747,7 @@
   locations:
     "Zora River Storms Grotto Front Scrub": "business_scrub(0x12)"
     "Zora River Storms Grotto Back Scrub": "business_scrub(0x13)"
+    "Zora River Storms Grotto Hive": "break_hive"
 "Zora River Open Grotto":
   region: ENTRANCE
   exits:
@@ -1745,6 +1766,8 @@
     "Zora River Grotto Grass 2": "can_cut_grass"
     "Zora River Grotto Grass 3": "can_cut_grass"
     "Zora River Grotto Grass 4": "can_cut_grass"
+    "Zora River Grotto Hive 1": "break_hive"
+    "Zora River Grotto Hive 2": "break_hive"
   gossip:
     "Zora River Gossip Grotto": "true"
 "Zora River Boulder Grotto":
@@ -1791,6 +1814,8 @@
     "Zora Domain Pot 3": "true"
     "Zora Domain Pot 4": "true"
     "Zora Domain Pot 5": "true"
+    "Zora Domain Hive Front 1": "is_child && break_hive"
+    "Zora Domain Hive Front 2": "is_child && break_hive"
   gossip:
     "Zora Domain Gossip": "true"
 "Zora Domain Back":
@@ -1798,6 +1823,8 @@
   exits:
     "Zora Fountain": "true"
     "Zora Domain": "king_zora_moved || climb_anywhere || hookshot_anywhere"
+  locations:
+    "Zora Domain Hive Back": "is_child && break_hive"
 "Zora Shop":
   region: ENTRANCE
   exits:
@@ -1969,6 +1996,7 @@
     "Lake Hylia Grotto Left Scrub": "business_scrub(0x14)"
     "Lake Hylia Grotto Center Scrub": "business_scrub(0x15)"
     "Lake Hylia Grotto Right Scrub": "business_scrub(0x16)"
+    "Lake Hylia Grotto Hive": "break_hive"
 "Zora Fountain":
   region: ZORA_FOUNTAIN
   exits:
@@ -2141,6 +2169,8 @@
     "Death Mountain Crater Grotto Grass 2": "can_cut_grass"
     "Death Mountain Crater Grotto Grass 3": "can_cut_grass"
     "Death Mountain Crater Grotto Grass 4": "can_cut_grass"
+    "Death Mountain Crater Grotto Hive 1": "break_hive"
+    "Death Mountain Crater Grotto Hive 2": "break_hive"
   gossip:
     "Death Mountain Crater Gossip Grotto": "true"
 "Death Mountain Crater Scrub Grotto":
@@ -2152,6 +2182,7 @@
     "Death Mountain Crater Grotto Left Scrub": "business_scrub(0x0f)"
     "Death Mountain Crater Grotto Center Scrub": "business_scrub(0x10)"
     "Death Mountain Crater Grotto Right Scrub": "business_scrub(0x11)"
+    "Death Mountain Crater Scrub Grotto Hive": "break_hive"
 "Fairy Fountain Double Magic":
   region: ENTRANCE
   exits:
@@ -2245,6 +2276,7 @@
   locations:
     "Gerudo Valley Grotto Front Scrub": "business_scrub(0x17)"
     "Gerudo Valley Grotto Back Scrub": "business_scrub(0x18)"
+    "Gerudo Valley Grotto Hive": "break_hive"
 "Gerudo Valley Tent":
   region: ENTRANCE
   exits:
@@ -2460,3 +2492,4 @@
   locations:
     "Desert Colossus Grotto Front Scrub": "business_scrub(0x19)"
     "Desert Colossus Grotto Back Scrub": "business_scrub(0x1a)"
+    "Desert Colossus Grotto Hive": "break_hive"

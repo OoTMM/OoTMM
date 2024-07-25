@@ -73,7 +73,7 @@ void DrawGi_Xlu0(GameState_Play* play, s16 drawGiId)
 
     drawGi = &kDrawGi[drawGiId];
     OPEN_DISPS(play->gs.gfx);
-    InitListPolyXlu(play->gs.gfx);
+    Gfx_SetupDL25_Xlu(play->gs.gfx);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[0]);
     CLOSE_DISPS();
@@ -103,10 +103,10 @@ void DrawGi_CustomNote(GameState_Play* play, s16 drawGiId, u8 param)
         angle += M_PI;
     color4(&r, &g, &b, &a, kColors[param & 0xf]);
 
-    ModelViewRotateZ(angle, MAT_MUL);
+    Matrix_RotateZ(angle, MAT_MUL);
 
     OPEN_DISPS(play->gs.gfx);
-    InitListPolyXlu(play->gs.gfx);
+    Gfx_SetupDL25_Xlu(play->gs.gfx);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, a);
     gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[0]);
@@ -140,7 +140,7 @@ void DrawGi_CustomHeartContainer(GameState_Play* play, s16 drawGiId)
     c = drawGi->lists[0];
 
     OPEN_DISPS(play->gs.gfx);
-    InitListPolyXlu(play->gs.gfx);
+    Gfx_SetupDL25_Xlu(play->gs.gfx);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     color4(&r, &g, &b, &a, colors[c * 4 + 0]);
     gDPSetPrimColor(POLY_XLU_DISP++, 0, 0x80, r, g, b, a);
@@ -196,8 +196,8 @@ void Gfx_DrawFlameColor(GameState_Play* play, u32 color, float scale, float offs
 
     OPEN_DISPS(play->gs.gfx);
     ModelViewUnkTransform(&play->billboardMtxF);
-    ModelViewTranslate(0.f, -(30.f + offsetY), -15.f, MAT_MUL);
-    ModelViewScale(flameScale * 1.7f, flameScale, flameScale, MAT_MUL);
+    Matrix_Translate(0.f, -(30.f + offsetY), -15.f, MAT_MUL);
+    Matrix_Scale(flameScale * 1.7f, flameScale, flameScale, MAT_MUL);
     gSPSegment(POLY_XLU_DISP++, 0x08, DisplaceTexture(play->gs.gfx, 0, 0, 0, 0x20, 0x40, 1, 0, (-play->gs.frameCount & 0x7f) << 2, 0x20, 0x80));
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     color4(&r, &g, &b, &a, primColor);
@@ -227,8 +227,8 @@ static void drawFire(GameState_Play* play, u32 primColor, u32 envColor, float sc
     /* Set the correct billboard matrix*/
     MatrixStackDup();
     flameScale = 0.0055f * scale;
-    ModelViewTranslate(0.f, offsetY, 0.f, MAT_MUL);
-    ModelViewScale(flameScale * 1.7f, flameScale, flameScale, MAT_MUL);
+    Matrix_Translate(0.f, offsetY, 0.f, MAT_MUL);
+    Matrix_Scale(flameScale * 1.7f, flameScale, flameScale, MAT_MUL);
     ModelViewUnkTransform(&play->billboardMtxF);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     MatrixStackPop();
@@ -277,8 +277,8 @@ static void shaderFlameEffect(GameState_Play* play, int colorIndex, float scale,
 
     OPEN_DISPS(play->gs.gfx);
     ModelViewUnkTransform(&play->billboardMtxF);
-    ModelViewTranslate(0.f, -(30.f + offsetY), -15.f, MAT_MUL);
-    ModelViewScale(flameScale * 1.7f, flameScale, flameScale, MAT_MUL);
+    Matrix_Translate(0.f, -(30.f + offsetY), -15.f, MAT_MUL);
+    Matrix_Scale(flameScale * 1.7f, flameScale, flameScale, MAT_MUL);
     gSPSegment(POLY_XLU_DISP++, 0x08, DisplaceTexture(play->gs.gfx, 0, 0, 0, 0x20, 0x40, 1, 0, (-play->gs.frameCount & 0x7f) << 2, 0x20, 0x80));
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     color4(&r, &g, &b, &a, kPrimColors[colorIndex]);
@@ -311,7 +311,7 @@ void DrawGi_CustomStick(GameState_Play* play, s16 drawGiId)
     drawGi = &kDrawGi[drawGiId];
 
     OPEN_DISPS(play->gs.gfx);
-    InitListPolyOpa(play->gs.gfx);
+    Gfx_SetupDL25_Opa(play->gs.gfx);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     color4(&r, &g, &b, &a, kNutStickPrimColors[drawGi->lists[1]]);
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, r, g, b, a);
@@ -322,7 +322,7 @@ void DrawGi_CustomStick(GameState_Play* play, s16 drawGiId)
     /* Draw fire */
     if (drawGi->lists[1])
     {
-        InitListPolyXlu(play->gs.gfx);
+        Gfx_SetupDL25_Xlu(play->gs.gfx);
         shaderFlameEffect(play, drawGi->lists[1] - 1, 1.f, 0.f);
     }
 
@@ -342,7 +342,7 @@ void DrawGi_CustomNut(GameState_Play* play, s16 drawGiId)
     fc = play->gs.frameCount * 6;
 
     OPEN_DISPS(play->gs.gfx);
-    InitListPolyOpa(play->gs.gfx);
+    Gfx_SetupDL25_Opa(play->gs.gfx);
     gSPSegment(POLY_OPA_DISP++, 0x09, DisplaceTexture(play->gs.gfx, 0, fc, fc, 0x20, 0x20, 1, fc, fc, 0x20, 0x20));
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     color4(&r, &g, &b, &a, kNutStickPrimColors[drawGi->lists[1]]);
@@ -354,7 +354,7 @@ void DrawGi_CustomNut(GameState_Play* play, s16 drawGiId)
     /* Draw fire */
     if (drawGi->lists[1])
     {
-        InitListPolyXlu(play->gs.gfx);
+        Gfx_SetupDL25_Xlu(play->gs.gfx);
         shaderFlameEffect(play, drawGi->lists[1] - 1, 1.f, 0.f);
     }
 
@@ -387,7 +387,7 @@ void DrawGi_BossRemains(GameState_Play* play, s16 drawGiId)
     OPEN_DISPS(play->gs.gfx);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPMatrix(POLY_OPA_DISP++, pushMatrix(play->gs.gfx, kMatrixScale), G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    InitListPolyOpa(play->gs.gfx);
+    Gfx_SetupDL25_Opa(play->gs.gfx);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
     CLOSE_DISPS();
 }
@@ -432,14 +432,14 @@ void DrawGi_SpiritualStones(GameState_Play* play, s16 drawGiId)
     gSPSegment(POLY_XLU_DISP++, 9, kDListEmpty);
     gSPSegment(POLY_OPA_DISP++, 8, kDListEmpty);
 
-    InitListPolyXlu(play->gs.gfx);
+    Gfx_SetupDL25_Xlu(play->gs.gfx);
     color4(&r, &g, &b, &a, kPrimColors[colorIndex]);
     gDPSetPrimColor(POLY_XLU_DISP++, 0x00, 0x80, r, g, b, a);
     color4(&r, &g, &b, &a, kEnvColors[colorIndex]);
     gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, a);
     gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[1]);
 
-    InitListPolyOpa(play->gs.gfx);
+    Gfx_SetupDL25_Opa(play->gs.gfx);
     gDPSetPrimColor(POLY_OPA_DISP++, 0x00, 0x80, 0xff, 0xff, 0xaa, 0xff);
     gDPSetEnvColor(POLY_OPA_DISP++, 0x96, 0x78, 0x00, 0xFF);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[2]);
@@ -455,11 +455,11 @@ void DrawGi_MasterSword(GameState_Play* play, s16 drawGiId)
     drawGi = &kDrawGi[drawGiId];
 
     OPEN_DISPS(play->gs.gfx);
-    ModelViewScale(scale, scale, scale, MAT_MUL);
-    ModelViewRotateZ(3.f * M_PI * 0.25f, MAT_MUL);
+    Matrix_Scale(scale, scale, scale, MAT_MUL);
+    Matrix_RotateZ(3.f * M_PI * 0.25f, MAT_MUL);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPSegment(POLY_OPA_DISP++, 8, Gfx_TexScroll(play->gs.gfx, 0, -(play->gameplayFrames & 0x7f), 32, 32));
-    InitListPolyOpa(play->gs.gfx);
+    Gfx_SetupDL25_Opa(play->gs.gfx);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
     CLOSE_DISPS();
 }
@@ -474,15 +474,15 @@ void DrawGi_CustomSpin(GameState_Play* play, s16 drawGiId)
 
     rot = (play->gs.frameCount * 0.01f);
     OPEN_DISPS(play->gs.gfx);
-    ModelViewRotateX(rot * 3, MAT_MUL);
-    ModelViewRotateY(rot * 5, MAT_MUL);
-    ModelViewRotateZ(rot * 7, MAT_MUL);
+    Matrix_RotateX(rot * 3, MAT_MUL);
+    Matrix_RotateY(rot * 5, MAT_MUL);
+    Matrix_RotateZ(rot * 7, MAT_MUL);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    InitListPolyOpa(play->gs.gfx);
+    Gfx_SetupDL25_Opa(play->gs.gfx);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[1]);
 
-    InitListPolyXlu(play->gs.gfx);
+    Gfx_SetupDL25_Xlu(play->gs.gfx);
     shaderFlameEffect(play, 2, 1.f, 0.f);
     CLOSE_DISPS();
 }
@@ -494,9 +494,9 @@ void DrawGi_CustomOwl(GameState_Play* play, s16 drawGiId)
 
     drawGi = &kDrawGi[drawGiId];
     OPEN_DISPS(play->gs.gfx);
-    ModelViewScale(scale, scale, scale, MAT_MUL);
+    Matrix_Scale(scale, scale, scale, MAT_MUL);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    InitListPolyOpa(play->gs.gfx);
+    Gfx_SetupDL25_Opa(play->gs.gfx);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
     CLOSE_DISPS();
 }
@@ -623,7 +623,7 @@ void DrawGi_CustomStrayFairy(GameState_Play* play, s16 drawGiId)
     Draw_SetObjectSegment(play->gs.gfx, &kStrayFairyObj);
     ModelViewUnkTransform(&play->billboardMtxF);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    InitListPolyXlu(play->gs.gfx);
+    Gfx_SetupDL25_Xlu(play->gs.gfx);
     color4(&r, &gg, &b, &a, kEnvColors[index - 1]);
     gDPSetEnvColor(POLY_XLU_DISP++, r, gg, b, a);
     color4(&r, &gg, &b, &a, kPrimColors[index - 1]);
@@ -663,7 +663,7 @@ void DrawGi_CustomBottlePotion(GameState_Play* play, s16 index, u8 param)
 
     drawGi = &kDrawGi[index];
     OPEN_DISPS(play->gs.gfx);
-    InitListPolyXlu(play->gs.gfx);
+    Gfx_SetupDL25_Xlu(play->gs.gfx);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     color4(&r, &g, &b, &a, kPrimColors[param]);
     gDPSetPrimColor(POLY_XLU_DISP++, 0, 0x80, r, g, b, a);
@@ -699,7 +699,7 @@ void DrawGi_CustomGS(GameState_Play* play, s16 index)
     fc = play->gs.frameCount;
 
     OPEN_DISPS(play->gs.gfx);
-    InitListPolyOpa(play->gs.gfx);
+    Gfx_SetupDL25_Opa(play->gs.gfx);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     color4(&r, &g, &b, &a, gsc->skullEnv);
     gDPSetEnvColor(POLY_OPA_DISP++, r, g, b, a);
@@ -707,7 +707,7 @@ void DrawGi_CustomGS(GameState_Play* play, s16 index)
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0x80, r, g, b, a);
     gSPDisplayList(POLY_OPA_DISP++, 0x06000330);
 
-    InitListPolyXlu(play->gs.gfx);
+    Gfx_SetupDL25_Xlu(play->gs.gfx);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPSegment(POLY_XLU_DISP++, 0x08, DisplaceTexture(play->gs.gfx, 0, 0, fc * -5, 0x20, 0x20, 1, 0, 0, 0x20, 0x40));
     color4(&r, &g, &b, &a, gsc->flameEnv);
@@ -795,7 +795,7 @@ void DrawGi_CustomPotion(GameState_Play* play, s16 index)
     fc = play->gs.frameCount;
     OPEN_DISPS(play->gs.gfx);
     /* Opa */
-    InitListPolyOpa(play->gs.gfx);
+    Gfx_SetupDL25_Opa(play->gs.gfx);
     gSPSegment(POLY_OPA_DISP++, 0x08, DisplaceTexture(play->gs.gfx, 0, -fc, fc, 0x20, 0x20, 1, -fc, fc, 0x20, 0x20));
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     color4(&r, &g, &b, &a, kPrimColors1[colorIndex]);
@@ -815,7 +815,7 @@ void DrawGi_CustomPotion(GameState_Play* play, s16 index)
     gSPDisplayList(POLY_OPA_DISP++, 0x06001790);
 
     /* Xlu */
-    InitListPolyXlu(play->gs.gfx);
+    Gfx_SetupDL25_Xlu(play->gs.gfx);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     color4(&r, &g, &b, &a, kPrimColors3[colorIndex]);
     gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, r, g, b, a);
@@ -878,8 +878,8 @@ static void drawColoredRupee(GameState_Play* play, u32 color)
 
     color4(&c[0], &c[1], &c[2], &c[3], color);
     OPEN_DISPS(play->gs.gfx);
-    InitListPolyOpa(play->gs.gfx);
-    ModelViewScale(scale, scale, scale, MAT_MUL);
+    Gfx_SetupDL25_Opa(play->gs.gfx);
+    Matrix_Scale(scale, scale, scale, MAT_MUL);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPSegment(POLY_OPA_DISP++, 0x08, &kSilverRupeeLUT);
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, c[0], c[1], c[2], c[3]);
@@ -907,14 +907,14 @@ void DrawGi_RutosLetter(GameState_Play* play, s16 index)
     const DrawGi* drawGi;
     drawGi = &kDrawGi[index];
     OPEN_DISPS(play->gs.gfx);
-    ModelViewRotateZ((M_PI / 2.f), 1);
+    Matrix_RotateZ((M_PI / 2.f), 1);
 
-    InitListPolyOpa(play->gs.gfx);
+    Gfx_SetupDL25_Opa(play->gs.gfx);
 
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
 
-    InitListPolyXlu(play->gs.gfx);
+    Gfx_SetupDL25_Xlu(play->gs.gfx);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
     gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[1]);
     CLOSE_DISPS();
@@ -926,7 +926,7 @@ void DrawGi_CustomSmallKey(GameState_Play* play, s16 index)
 
     drawGi = &kDrawGi[index];
     OPEN_DISPS(play->gs.gfx);
-    InitListPolyOpa(play->gs.gfx);
+    Gfx_SetupDL25_Opa(play->gs.gfx);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
     switch (drawGi->lists[1])
     {
@@ -952,14 +952,14 @@ void DrawGi_Coin(GameState_Play* play, s16 index)
 
     drawGi = &kDrawGi[index];
     OPEN_DISPS(play->gs.gfx);
-    InitListPolyOpa(play->gs.gfx);
-    ModelViewScale(scale, scale, scale, MAT_MUL);
+    Gfx_SetupDL25_Opa(play->gs.gfx);
+    Matrix_Scale(scale, scale, scale, MAT_MUL);
 
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[1]);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
 
-    InitListPolyXlu(play->gs.gfx);
+    Gfx_SetupDL25_Xlu(play->gs.gfx);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
     gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[2]);
     CLOSE_DISPS();
@@ -1006,7 +1006,7 @@ void DrawGi_MagicJar(GameState_Play* play, s16 index)
     }
 
     OPEN_DISPS(play->gs.gfx);
-    InitListPolyOpa(play->gs.gfx);
+    Gfx_SetupDL25_Opa(play->gs.gfx);
     gSPSegment(POLY_OPA_DISP++, 0x08, colorJar);
     gSPSegment(POLY_OPA_DISP++, 0x09, colorDetail);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
@@ -1015,7 +1015,7 @@ void DrawGi_MagicJar(GameState_Play* play, s16 index)
 
     if (isUpgrade)
     {
-        InitListPolyXlu(play->gs.gfx);
+        Gfx_SetupDL25_Xlu(play->gs.gfx);
         shaderFlameEffect(play, 3, 1.5f, 20.f);
     }
 }
@@ -1028,7 +1028,7 @@ void DrawGi_Triforce(GameState_Play* play, s16 index, u8 param)
     drawGi = &kDrawGi[index];
 
     OPEN_DISPS(play->gs.gfx);
-    InitListPolyOpa(play->gs.gfx);
+    Gfx_SetupDL25_Opa(play->gs.gfx);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
     CLOSE_DISPS();
@@ -1052,7 +1052,7 @@ void DrawGi_Triforce(GameState_Play* play, s16 index, u8 param)
         break;
     }
 
-    InitListPolyXlu(play->gs.gfx);
+    Gfx_SetupDL25_Xlu(play->gs.gfx);
     Gfx_DrawFlameColor(play, color, 1.5f, 20.f);
 }
 
@@ -1064,23 +1064,23 @@ void DrawGi_TriforceFull(GameState_Play* play, s16 index, u8 param)
     drawGi = &kDrawGi[index];
 
     OPEN_DISPS(play->gs.gfx);
-    InitListPolyOpa(play->gs.gfx);
-    ModelViewScale(scale, scale, scale, MAT_MUL);
+    Gfx_SetupDL25_Opa(play->gs.gfx);
+    Matrix_Scale(scale, scale, scale, MAT_MUL);
 
     MatrixStackDup();
-    ModelViewTranslate(0.f, 40.f, 0.f, MAT_MUL);
+    Matrix_Translate(0.f, 40.f, 0.f, MAT_MUL);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
     MatrixStackPop();
 
     MatrixStackDup();
-    ModelViewTranslate(-23.f, 0.f, 0.f, MAT_MUL);
+    Matrix_Translate(-23.f, 0.f, 0.f, MAT_MUL);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
     MatrixStackPop();
 
     MatrixStackDup();
-    ModelViewTranslate(23.f, 0.f, 0.f, MAT_MUL);
+    Matrix_Translate(23.f, 0.f, 0.f, MAT_MUL);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
     MatrixStackPop();
@@ -1096,10 +1096,10 @@ void DrawGi_MaskMajora(GameState_Play* play, s16 index, u8 param)
     drawGi = &kDrawGi[index];
 
     OPEN_DISPS(play->gs.gfx);
-    InitListPolyOpa(play->gs.gfx);
-    ModelViewScale(scale, scale, scale, MAT_MUL);
-    ModelViewRotateX(M_PI, MAT_MUL);
-    ModelViewTranslate(-300.f, 0.f, 0.f, MAT_MUL);
+    Gfx_SetupDL25_Opa(play->gs.gfx);
+    Matrix_Scale(scale, scale, scale, MAT_MUL);
+    Matrix_RotateX(M_PI, MAT_MUL);
+    Matrix_Translate(-300.f, 0.f, 0.f, MAT_MUL);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
     CLOSE_DISPS();
@@ -1183,7 +1183,7 @@ void DrawGi_Wallet(GameState_Play* play, s16 index)
     drawGi = &kDrawGi[index];
 
     OPEN_DISPS(play->gs.gfx);
-    InitListPolyOpa(play->gs.gfx);
+    Gfx_SetupDL25_Opa(play->gs.gfx);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
     gSPDisplayList(POLY_OPA_DISP++, LIST_PTR(kWalletBody[drawGi->lists[1]]));
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
@@ -1202,9 +1202,9 @@ void DrawGi_Button(GameState_Play* play, s16 index)
     drawGi = &kDrawGi[index];
 
     OPEN_DISPS(play->gs.gfx);
-    InitListPolyOpa(play->gs.gfx);
+    Gfx_SetupDL25_Opa(play->gs.gfx);
     if (drawGi->lists[1])
-        ModelViewRotateZ(M_PI, 1);
+        Matrix_RotateZ(M_PI, 1);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
     if (drawGi->lists[0])
     {
@@ -1231,14 +1231,14 @@ void DrawGi_CustomBottleFairy(GameState_Play* play, s16 drawGiId, u8 param)
     u8 c[4];
 
     OPEN_DISPS(play->gs.gfx);
-    InitListPolyOpa(play->gs.gfx);
-    InitListPolyXlu(play->gs.gfx);
+    Gfx_SetupDL25_Opa(play->gs.gfx);
+    Gfx_SetupDL25_Xlu(play->gs.gfx);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[1]);
     ModelViewUnkTransform(&play->billboardMtxF);
-    ModelViewTranslate(0.f, -8.f, 0.f, MAT_MUL);
+    Matrix_Translate(0.f, -8.f, 0.f, MAT_MUL);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     color4(&c[0], &c[1], &c[2], &c[3], kColors[param]);
     gDPSetEnvColor(POLY_XLU_DISP++, c[0], c[1], c[2], c[3]);
@@ -1259,7 +1259,7 @@ void DrawGi_BombchuBag(GameState_Play* play, s16 drawGiId, u8 param)
     drawGi = &kDrawGi[drawGiId];
 
     OPEN_DISPS(play->gs.gfx);
-    InitListPolyXlu(play->gs.gfx);
+    Gfx_SetupDL25_Xlu(play->gs.gfx);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     color4(&r, &g, &b, &a, kPrimColor2);
     gDPSetPrimColor(POLY_XLU_DISP++, 0, 0x80, r, g, b, a);
@@ -1271,7 +1271,7 @@ void DrawGi_BombchuBag(GameState_Play* play, s16 drawGiId, u8 param)
     color4(&r, &g, &b, &a, kEnvColor);
     gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, a);
     gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[1]);
-    InitListPolyOpa(play->gs.gfx);
+    Gfx_SetupDL25_Opa(play->gs.gfx);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[2]);
     CLOSE_DISPS();
@@ -1286,7 +1286,7 @@ void DrawGi_BigFairy(GameState_Play* play, s16 drawGiId)
 
     OPEN_DISPS(play->gs.gfx);
 
-    InitListPolyXlu(play->gs.gfx);
+    Gfx_SetupDL25_Xlu(play->gs.gfx);
     gDPSetRenderMode(POLY_XLU_DISP++, G_RM_PASS, G_RM_ZB_CLD_SURF2);
     tex = DisplaceTexture(
         play->gs.gfx,
@@ -1298,8 +1298,8 @@ void DrawGi_BigFairy(GameState_Play* play, s16 drawGiId)
         32, 32
     );
     gSPSegment(POLY_XLU_DISP++, 0x08, tex);
-    ModelViewTranslate(0.0f, -6.0f, 0.0f, MAT_MUL);
-    ModelViewScale(2.0f, 2.0f, 2.0f, MAT_MUL);
+    Matrix_Translate(0.0f, -6.0f, 0.0f, MAT_MUL);
+    Matrix_Scale(2.0f, 2.0f, 2.0f, MAT_MUL);
     ModelViewUnkTransform(&play->billboardMtxF);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[2]);
@@ -1315,11 +1315,11 @@ void DrawGi_BottleBlueFire(GameState_Play* play, s16 drawGiId)
 
     OPEN_DISPS(play->gs.gfx);
 
-    InitListPolyOpa(play->gs.gfx);
+    Gfx_SetupDL25_Opa(play->gs.gfx);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
 
-    InitListPolyXlu(play->gs.gfx);
+    Gfx_SetupDL25_Xlu(play->gs.gfx);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[1]);
 
@@ -1336,16 +1336,16 @@ void DrawGi_Clock(GameState_Play* play, s16 index)
     drawGi = &kDrawGi[index];
 
     OPEN_DISPS(play->gs.gfx);
-    ModelViewScale(scale, scale, scale, MAT_MUL);
+    Matrix_Scale(scale, scale, scale, MAT_MUL);
     MatrixStackDup();
-    ModelViewRotateZ(M_PI, MAT_MUL);
+    Matrix_RotateZ(M_PI, MAT_MUL);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[1]);
     MatrixStackPop();
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[2]);
-    ModelViewTranslate(0.f, 1100.f, -50.f, MAT_MUL);
+    Matrix_Translate(0.f, 1100.f, -50.f, MAT_MUL);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[3]);
     CLOSE_DISPS();
@@ -1364,8 +1364,8 @@ void DrawGi_PondFish(GameState_Play* play, s16 index, u8 param)
     scale = scaleActual / scaleBase;
 
     OPEN_DISPS(play->gs.gfx);
-    InitListPolyOpa(play->gs.gfx);
-    ModelViewScale(scale, scale, scale, MAT_MUL);
+    Gfx_SetupDL25_Opa(play->gs.gfx);
+    Matrix_Scale(scale, scale, scale, MAT_MUL);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
     CLOSE_DISPS();
@@ -1423,10 +1423,10 @@ void DrawGi_Rupee(GameState_Play* play, s16 index, u8 param)
     };
 
     if (param < 4)
-        ModelViewScale(smallRupeeScale, smallRupeeScale, smallRupeeScale, MAT_MUL);
+        Matrix_Scale(smallRupeeScale, smallRupeeScale, smallRupeeScale, MAT_MUL);
 
     OPEN_DISPS(play->gs.gfx);
-    InitListPolyOpa(play->gs.gfx);
+    Gfx_SetupDL25_Opa(play->gs.gfx);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     if (param < 7)
     {
@@ -1445,7 +1445,7 @@ void DrawGi_Rupee(GameState_Play* play, s16 index, u8 param)
     }
     gSPDisplayList(POLY_OPA_DISP++, kDrawGi[index].lists[0]);
 
-    InitListPolyXlu(play->gs.gfx);
+    Gfx_SetupDL25_Xlu(play->gs.gfx);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     if (param < 7)
     {

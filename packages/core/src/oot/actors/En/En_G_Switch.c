@@ -152,7 +152,7 @@ void EnGSwitch_DrawSilverRupee(Actor* this, GameState_Play* play)
     ComboItemOverride o;
 
     EnGSwitch_ItemOverride(&o, this, play);
-    ModelViewScale(scale, scale, scale, MAT_MUL);
+    Matrix_Scale(scale, scale, scale, MAT_MUL);
     Draw_Gi(play, this, o.gi, 0);
 }
 
@@ -172,7 +172,7 @@ void EnGSwitch_DrawArcheryPot(Actor* this, GameState_Play* play)
         return;
 
     OPEN_DISPS(play->gs.gfx);
-    InitListPolyOpa(play->gs.gfx);
+    Gfx_SetupDL25_Opa(play->gs.gfx);
     gSPSegment(POLY_OPA_DISP++, 0x0a, kPotDrawListNormalSide);
     gSPSegment(POLY_OPA_DISP++, 0x0b, kPotDrawListNormalTop);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);

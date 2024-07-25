@@ -123,7 +123,7 @@ static void setCollectibleMarkOot(GameState_Play* play, int sceneId, int flagId)
 #if defined(GAME_OOT)
     if (play && play->sceneId == sceneId)
     {
-        SetCollectibleFlag(play, flagId);
+        Flags_SetCollectible(play, flagId);
         gMultiMarkCollectibles |= (1 << flagId);
         return;
     }
@@ -139,7 +139,7 @@ static void setCollectibleMarkMm(GameState_Play* play, int sceneId, int flagId)
 #if defined(GAME_MM)
     if (play && mmSceneId(play->sceneId) == sceneId)
     {
-        SetCollectibleFlag(play, flagId);
+        Flags_SetCollectible(play, flagId);
         gMultiMarkCollectibles |= (1 << flagId);
         return;
     }
@@ -576,7 +576,7 @@ static const u32 kWispColors[] = {
 static void drawSingleWisp(GameState_Play* play, const PlayerWisp* wisp)
 {
     OPEN_DISPS(play->gs.gfx);
-    ModelViewTranslate(wisp->pos.x, wisp->pos.y, wisp->pos.z, MAT_SET);
+    Matrix_Translate(wisp->pos.x, wisp->pos.y, wisp->pos.z, MAT_SET);
     Gfx_DrawFlameColor(play, kWispColors[wisp->clientId & 0xf], 0.35f, -50.0f);
     CLOSE_DISPS();
 }
@@ -586,7 +586,7 @@ void Multi_DrawWisps(GameState_Play* play)
     if (!Config_Flag(CFG_MULTIPLAYER))
         return;
 
-    InitListPolyXlu(play->gs.gfx);
+    Gfx_SetupDL25_Xlu(play->gs.gfx);
     for (int i = 0; i < ARRAY_SIZE(sPlayerWisps); ++i)
     {
         if (sPlayerWisps[i].ttl)

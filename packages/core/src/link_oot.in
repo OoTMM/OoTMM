@@ -102,13 +102,18 @@ Health_ChangeBy         = 0x800720bc;
 Magic_RequestChange     = 0x80072588;
 Magic_Update            = 0x80072840;
 
-InitListPolyOpa         = 0x8007e298;
-InitListPolyXlu         = 0x8007e2c0;
+Gfx_SetupDL25_Opa       = 0x8007e298;
+Gfx_SetupDL25_Xlu       = 0x8007e2c0;
 Gfx_SetupDL_42Opa       = 0x8007e868;
 Matrix_MultVec3f        = 0x800ab958;
 GetMatrixMV             = 0x800ab900;
 Gfx_DrawDListOpa        = 0x80028048;
 Gfx_DrawDListXlu        = 0x800280c8;
+
+Collider_UpdateSpheres  = 0x80050ce4;
+Collider_InitJntSph     = 0x8004a484;
+Collider_SetJntSph      = 0x8004a874;
+Collider_DestroyJntSph  = 0x8004a550;
 
 Font_LoadOrderedFont = 0x8005bd78;
 UnkFuncActorCollision = 0x8002650c;
@@ -135,7 +140,7 @@ Object_GetSlot = 0x80081628;
 Object_IsLoaded = 0x80081688;
 SkelAnime_DrawFlexOpa = 0x80089D8C;
 Actor_SetScale = 0x80020f88;
-ActorSetUnk = 0x80020f04;
+Actor_SetFocus = 0x80020f04;
 
 PlaySound = 0x800646f0;
 PlaySound6 = 0x800c806c;
@@ -164,8 +169,8 @@ Actor_UpdateBgCheckInfo = 0x80021e6c;
 GetEventChk = 0x800288b4;
 SetEventChk = 0x800288e0;
 
-SetCollectibleFlag = 0x8002071c;
-GetCollectibleFlag = 0x800206e8;
+Flags_SetCollectible = 0x8002071c;
+Flags_GetCollectible = 0x800206e8;
 GetSwitchFlag = 0x8002049c;
 SetSwitchFlag = 0x800204d0;
 ClearSwitchFlag = 0x80020510;
@@ -200,11 +205,11 @@ gModelView = 0x80121204;
 MatrixStackDup = 0x800AA6EC;
 MatrixStackPop = 0x800AA724;
 ModelViewUnkTransform = 0x800abe54;
-ModelViewRotateX = 0x800aa9e0;
-ModelViewRotateY = 0x800aab94;
-ModelViewRotateZ = 0x800aad4c;
-ModelViewTranslate = 0x800aa7f4;
-ModelViewScale = 0x800aa8fc;
+Matrix_RotateX = 0x800aa9e0;
+Matrix_RotateY = 0x800aab94;
+Matrix_RotateZ = 0x800aad4c;
+Matrix_Translate = 0x800aa7f4;
+Matrix_Scale = 0x800aa8fc;
 
 SpawnSomeDust = 0x80026308;
 

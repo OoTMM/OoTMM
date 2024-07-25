@@ -78,7 +78,7 @@ void EnItem00_DrawHeartPieceSmallKey(Actor_EnItem00* this, GameState_Play* play)
 
     EnItem00_ItemQuery(&q, this, play, -1);
     comboItemOverride(&o, &q);
-    ModelViewScale(scale, scale, scale, MAT_MUL);
+    Matrix_Scale(scale, scale, scale, MAT_MUL);
     Draw_Gi(play, &this->base, o.gi, 0);
 }
 

@@ -233,7 +233,7 @@ void MagicDark_DiamondDraw(Actor* thisx, GameState_Play* play) {
     OPEN_DISPS(play->gs.gfx);
     gSPSegment(POLY_XLU_DISP++, 0x08, g.customKeep);
 
-    InitListPolyXlu(play->gs.gfx);
+    Gfx_SetupDL25_Xlu(play->gs.gfx);
 
     {
         Actor_Player* player = GET_PLAYER(play);
@@ -263,9 +263,9 @@ void MagicDark_DiamondDraw(Actor* thisx, GameState_Play* play) {
         } else if (heightDiff > 2.0f) {
             this->actor.world.pos.y = y - 2.0f;
         }
-        ModelViewTranslate(this->actor.world.pos.x, this->actor.world.pos.y, this->actor.world.pos.z, MAT_SET);
-        ModelViewScale(this->actor.scale.x, this->actor.scale.y, this->actor.scale.z, MAT_MUL);
-        ModelViewRotateY(BINANG_TO_RAD(this->actor.shape.rot.y), MAT_MUL);
+        Matrix_Translate(this->actor.world.pos.x, this->actor.world.pos.y, this->actor.world.pos.z, MAT_SET);
+        Matrix_Scale(this->actor.scale.x, this->actor.scale.y, this->actor.scale.z, MAT_MUL);
+        Matrix_RotateY(BINANG_TO_RAD(this->actor.shape.rot.y), MAT_MUL);
         gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx),
                   G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 170, 255, 255, (s32)(this->primAlpha * 0.6f) & 0xFF);
@@ -311,19 +311,19 @@ void MagicDark_OrbDraw(Actor* thisx, GameState_Play* play) {
 
     OPEN_DISPS(play->gs.gfx);
 
-    InitListPolyXlu(play->gs.gfx);
+    Gfx_SetupDL25_Xlu(play->gs.gfx);
     gDPSetPrimColor(POLY_XLU_DISP++, 0, 0x80, 170, 255, 255, 255);
     gDPSetEnvColor(POLY_XLU_DISP++, 0, 150, 255, 255);
-    ModelViewTranslate(pos.x, pos.y, pos.z, MAT_SET);
-    ModelViewScale(this->actor.scale.x, this->actor.scale.y, this->actor.scale.z, MAT_MUL);
+    Matrix_Translate(pos.x, pos.y, pos.z, MAT_SET);
+    Matrix_Scale(this->actor.scale.x, this->actor.scale.y, this->actor.scale.z, MAT_MUL);
     ModelViewMult(&play->billboardMtxF, MAT_MUL);
     MatrixStackDup();
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    ModelViewRotateZ(sp6C * (M_PI / 32), MAT_MUL);
+    Matrix_RotateZ(sp6C * (M_PI / 32), MAT_MUL);
     gSPDisplayList(POLY_XLU_DISP++, 0x04000000 | 0x23210); /* gEffFlash1DL */
     MatrixStackPop();
-    ModelViewRotateZ(-sp6C * (M_PI / 32), MAT_MUL);
+    Matrix_RotateZ(-sp6C * (M_PI / 32), MAT_MUL);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_XLU_DISP++, 0x04000000 | 0x23210); /* gEffFlash1DL */

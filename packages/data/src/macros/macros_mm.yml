@@ -129,6 +129,8 @@
 "keaton_grass_easy": "has_weapon && has_magic"
 "keaton_grass_hard": "keaton_grass_easy && (has(SPIN_UPGRADE) || has(GREAT_FAIRY_SWORD) || has_sword_level(3))"
 
+"break_hive": "has_weapon_range"
+
 "has_sword_level(n)": "cond(setting(sharedSwords), has(SHARED_SWORD, n), has(SWORD, n))"
 "has_sword": "has_sword_level(1)"
 "has_weapon": "has_sword || has(GREAT_FAIRY_SWORD)"

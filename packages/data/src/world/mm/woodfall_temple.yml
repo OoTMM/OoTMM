@@ -24,6 +24,7 @@
     "Woodfall Temple Grass Entrance Bottom 3": "true"
     "Woodfall Temple Grass Entrance Ledge 1": "has(MASK_DEKU) || can_hookshot_short"
     "Woodfall Temple Grass Entrance Ledge 2": "has(MASK_DEKU) || can_hookshot_short"
+    "Woodfall Temple Hive Entrance": "break_hive"
 "Woodfall Temple Main":
   dungeon: WF
   exits:
@@ -87,6 +88,7 @@
     "Woodfall Temple SF Maze Bubble": "(has(MASK_GREAT_FAIRY) && (has_arrows || can_hookshot_short)) || event(WOODFALL_TEMPLE_MAIN_FLOWER) || can_use_nayru"
     "Woodfall Temple Pot Maze 1": "true"
     "Woodfall Temple Pot Maze 2": "true"
+    "Woodfall Temple Hive Maze": "break_hive"
 "Woodfall Temple Compass Room":
   dungeon: WF
   exits:

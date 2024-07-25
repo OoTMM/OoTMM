@@ -31,9 +31,9 @@ static void ItemDecoy_Draw(Actor_ItemDecoy* this, GameState_Play* play)
     pos.x = link->actor.world.pos.x;
     pos.y = link->actor.world.pos.y + Player_GetHeight(link) + 20.f;
     pos.z = link->actor.world.pos.z;
-    ModelViewTranslate(pos.x, pos.y, pos.z, MAT_SET);
-    ModelViewScale(0.35f, 0.35f, 0.35f, MAT_MUL);
-    ModelViewRotateY(this->base.shape.rot.y * ((M_PI * 2.f) / 32767.f), MAT_MUL);
+    Matrix_Translate(pos.x, pos.y, pos.z, MAT_SET);
+    Matrix_Scale(0.35f, 0.35f, 0.35f, MAT_MUL);
+    Matrix_RotateY(this->base.shape.rot.y * ((M_PI * 2.f) / 32767.f), MAT_MUL);
     Draw_Gi(play, &this->base, this->gi, 0);
 }
 

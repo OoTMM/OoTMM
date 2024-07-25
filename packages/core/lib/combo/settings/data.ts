@@ -550,6 +550,22 @@ export const SETTINGS = [{
   cond: hasMM,
   default: false
 }, {
+  key: 'shuffleHivesOot',
+  name: 'Hives Shuffle (OoT)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the beehives are shuffled (OoT)',
+  cond: hasOoT,
+  default: false
+}, {
+  key: 'shuffleHivesMm',
+  name: 'Hives Shuffle (MM)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the beehives are shuffled (MM)',
+  cond: hasMM,
+  default: false
+}, {
   key: 'shuffleGrassOot',
   name: 'Grass Shuffle (OoT)',
   category: 'main.shuffle',

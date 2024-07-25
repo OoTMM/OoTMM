@@ -90,7 +90,7 @@ int     Actor_HasParentZ(Actor* actor);
 int     Actor_HasNoParent(Actor* actor, GameState_Play* play);
 int     Actor_HasNoParentZ(Actor* actor);
 void    Actor_SetScale(Actor* actor, float scale);
-void    ActorSetUnk(Actor* actor, float unk);
+void    Actor_SetFocus(Actor* actor, float height);
 void    Actor_OfferCarry(Actor* actor, GameState_Play* play);
 void    ActorEnableTalk(Actor* actor, GameState_Play* play, float range);
 void    ActorEnableTalkEx(Actor* actor, GameState_Play* play, float range, u32 unk);
@@ -103,8 +103,8 @@ void    EnableOwl(u8 owlId);
 
 u32     Flags_GetTreasure(GameState_Play* play, int flag);
 void    SetChestFlag(GameState_Play* play, int flag);
-u32     GetCollectibleFlag(GameState_Play* play, int flag);
-void    SetCollectibleFlag(GameState_Play* play, int flag);
+u32     Flags_GetCollectible(GameState_Play* play, int flag);
+void    Flags_SetCollectible(GameState_Play* play, int flag);
 u32     GetSwitchFlag(GameState_Play* play, int flag);
 u32     SetSwitchFlag(GameState_Play* play, int flag);
 void    ClearSwitchFlag(GameState_Play* play, int flag);
@@ -168,12 +168,21 @@ void OcarinaAction2(GameState_Play *play, u16 ocarinaAction);
 
 extern float* gModelView;
 
+int     Collider_InitJntSph(GameState_Play* play, ColliderJntSph* jntSph);
+int     Collider_FreeJntSph(GameState_Play* play, ColliderJntSph* jntSph);
+int     Collider_DestroyJntSph(GameState_Play* play, ColliderJntSph* jntSph);
+int     Collider_SetJntSphToActor(GameState_Play* play, ColliderJntSph* dest, ColliderJntSphInitToActor* src);
+int     Collider_SetJntSphAllocType1(GameState_Play* play, ColliderJntSph* dest, Actor* actor, ColliderJntSphInitType1* src);
+int     Collider_SetJntSphAlloc(GameState_Play* play, ColliderJntSph* dest, Actor* actor, ColliderJntSphInit* src);
+int     Collider_SetJntSph(GameState_Play* play, ColliderJntSph* dest, Actor* actor, ColliderJntSphInit* src, ColliderJntSphElement* jntSphElements);
+void    Collider_UpdateSpheres(s32 limb, ColliderJntSph* jntSph);
+
 void ModelViewUnkTransform(MtxF* unk);
-void ModelViewRotateX(float angle, int mode);
-void ModelViewRotateY(float angle, int mode);
-void ModelViewRotateZ(float angle, int mode);
-void ModelViewTranslate(float tx, float ty, float tz, int mode);
-void ModelViewScale(float sx, float sy, float sz, int mode);
+void Matrix_RotateX(float angle, int mode);
+void Matrix_RotateY(float angle, int mode);
+void Matrix_RotateZ(float angle, int mode);
+void Matrix_Translate(float tx, float ty, float tz, int mode);
+void Matrix_Scale(float sx, float sy, float sz, int mode);
 void ModelViewMult(MtxF* mf, s32 mode);
 void Matrix_SetTranslateRotateYXZ(f32 translateX, f32 translateY, f32 translateZ, Vec3s* rot);
 
@@ -251,8 +260,9 @@ void CmpDma_LoadAllFiles(u32 vrom, void* dst, size_t size);
 void PlaySound(u16 soundId);
 void PlayMusic(int arg0, int arg1, int arg2, int arg3, int arg4);
 void Actor_PlaySfx(Actor* actor, u32 id);
-void PlayLoopingSfxAtActor(Actor* actor, u32 id);
+void Actor_PlaySfx_Flagged(Actor* actor, u16 sfxId);
 void Actor_PlaySfx_FlaggedCentered1(Actor* actor, u16 sfxId);
+void PlayLoopingSfxAtActor(Actor* actor, u32 id);
 void Audio_PlaySfx_AtPos(Vec3f* pos, u16 sfxId);
 void Audio_PlaySfx_MessageDecide(void);
 void AudioSfx_PlaySfx(u16 sfxId, Vec3f* pos, u8 token, f32* freqScale, f32* volume, s8* reverbAdd);
@@ -485,6 +495,8 @@ s16 CutsceneManager_IsNext(s16 csId);
 void CutsceneManager_Queue(s16 csId);
 s16 CutsceneManager_Start(s16 csId, Actor* actor);
 s16 CutsceneManager_Stop(s16 csId);
+s16 CutsceneManager_GetCutsceneScriptIndex(s16 csId);
+s16 CutsceneManager_GetCutsceneCustomValue(s16 csId);
 CutsceneEntry* CutsceneManager_GetCutsceneEntry(s16 csId);
 
 void Actor_ChangeCategory(GameState_Play* play, ActorContext* actorCtx, Actor* actor, u8 actorCategory);

@@ -2,6 +2,7 @@
 #define COMBO_CSMC_H
 
 #include <combo/types.h>
+#include <combo/common/color.h>
 
 #define CSMC_NORMAL         0x00
 #define CSMC_BOSS_KEY       0x01
@@ -86,5 +87,7 @@ void csmcGrassPreDraw(GameState_Play* play, s16 gi, int def, int alt, int direct
 
 /* GS */
 void csmcGsPreDraw(GameState_Play* play, s16 gi);
+
+const Color_RGB8* csmcTypeColor(int type);
 
 #endif

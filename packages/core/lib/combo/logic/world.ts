@@ -120,7 +120,7 @@ export type WorldArea = WorldAreaExprs & {
 };
 
 type WorldCheckNumeric = {
-  type: 'chest' | 'collectible' | 'gs' | 'sf' | 'cow' | 'shop' | 'scrub' | 'sr' | 'pot' | 'crate' | 'grass' | 'wonder' | 'fish' | 'fairy' | 'rupee' | 'heart' | 'fairy_spot';
+  type: 'chest' | 'collectible' | 'gs' | 'sf' | 'cow' | 'shop' | 'scrub' | 'sr' | 'pot' | 'crate' | 'grass' | 'wonder' | 'fish' | 'fairy' | 'hive' | 'rupee' | 'heart' | 'fairy_spot';
   id: number;
 };
 

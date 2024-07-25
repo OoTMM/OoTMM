@@ -61,7 +61,7 @@ void EnItem00_DrawHeartPiece(Actor_EnItem00* this, GameState_Play* play)
 
     EnItem00_ItemQuery(&q, this, play, GI_OOT_HEART_PIECE);
     comboItemOverride(&o, &q);
-    ModelViewScale(scale, scale, scale, MAT_MUL);
+    Matrix_Scale(scale, scale, scale, MAT_MUL);
     Draw_Gi(play, &this->base, o.gi, 0);
 }
 

@@ -39,8 +39,8 @@ ALIGNED(16) extern const Gfx kDListEmpty[];
 
 Gfx*    Gfx_SetupDL(Gfx* gfx, u32 i);
 Gfx*    Gfx_SetupDL57(Gfx* gfx);
-void    InitListPolyOpa(GfxContext* gfx);
-void    InitListPolyXlu(GfxContext* gfx);
+void    Gfx_SetupDL25_Opa(GfxContext* gfx);
+void    Gfx_SetupDL25_Xlu(GfxContext* gfx);
 void    Gfx_SetupDL_42Opa(GfxContext* gfx);
 void*   GetMatrixMV(GfxContext* gfx);
 u32     DisplaceTexture(GfxContext* gfx, int, int, int, int, int, int, int, int, int, int);

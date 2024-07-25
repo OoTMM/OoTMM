@@ -143,6 +143,7 @@ build(mm)
 
 add_actor_common(Obj_Kibako   "common/ovl/actors/Obj_Kibako/Obj_Kibako.c")
 add_actor_common(Obj_Kibako2  "common/ovl/actors/Obj_Kibako2/Obj_Kibako2.c")
+add_actor_common(Obj_Comb     "common/ovl/actors/Obj_Comb/Obj_Comb.c")
 
 add_actor(oot Obj_Tsubo   "oot/ovl/actors/Obj_Tsubo/Obj_Tsubo.c")
 add_actor(oot En_Mag      "oot/ovl/actors/En_Mag/En_Mag.c")

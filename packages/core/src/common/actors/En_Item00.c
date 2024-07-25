@@ -41,9 +41,9 @@ static void EnItem00_DrawXflag(Actor_EnItem00* this, GameState_Play* play)
         this->xflagGi = gi;
     }
 
-    ModelViewTranslate(this->base.world.pos.x, this->base.world.pos.y + 20.f, this->base.world.pos.z, MAT_SET);
-    ModelViewScale(0.35f, 0.35f, 0.35f, MAT_MUL);
-    ModelViewRotateY(this->base.shape.rot.y * ((M_PI * 2.f) / 32767.f), MAT_MUL);
+    Matrix_Translate(this->base.world.pos.x, this->base.world.pos.y + 20.f, this->base.world.pos.z, MAT_SET);
+    Matrix_Scale(0.35f, 0.35f, 0.35f, MAT_MUL);
+    Matrix_RotateY(this->base.shape.rot.y * ((M_PI * 2.f) / 32767.f), MAT_MUL);
     Draw_Gi(play, &this->base, gi, 0);
 }
 
@@ -223,5 +223,19 @@ Actor_EnItem00* EnItem00_DropCustom(GameState_Play* play, const Vec3f* pos, cons
     EnItem00_XflagInit(item, xflag);
     item->base.update = EnItem00_UpdateXflagDrop;
 
+    return item;
+}
+
+Actor_EnItem00* EnItem00_DropCustomNoInertia(GameState_Play* play, const Vec3f* pos, const Xflag* xflag)
+{
+    Actor_EnItem00* item;
+
+    item = EnItem00_DropCustom(play, pos, xflag);
+    if (!item)
+        return NULL;
+    item->base.speed = 0.f;
+    item->base.velocity.x = 0.f;
+    item->base.velocity.y = 0.f;
+    item->base.velocity.z = 0.f;
     return item;
 }

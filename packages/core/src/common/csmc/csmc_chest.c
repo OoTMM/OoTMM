@@ -95,7 +95,7 @@ void csmcChestInit(Actor* this, GameState_Play* play, s16 gi)
     if (type == CSMC_MAJOR || type == CSMC_BOSS_KEY)
     {
         Actor_SetScale(this, 0.01f);
-        ActorSetUnk(this, 40.f);
+        Actor_SetFocus(this, 40.f);
 
 
 #if defined(GAME_OOT)
@@ -120,7 +120,7 @@ void csmcChestInit(Actor* this, GameState_Play* play, s16 gi)
 #else
         Actor_SetScale(this, 0.0075f);
 #endif
-        ActorSetUnk(this, 20.f);
+        Actor_SetFocus(this, 20.f);
     }
 
 }
