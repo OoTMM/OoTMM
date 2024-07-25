@@ -350,6 +350,7 @@ Goron City GS Maze,                                         gs,             NONE
 Goron City Grotto Left Scrub,                               scrub,          NONE,                 GROTTOS,                        0x0b,                       NUTS_5
 Goron City Grotto Center Scrub,                             scrub,          NONE,                 GROTTOS,                        0x0c,                       DEKU_SEEDS_30
 Goron City Grotto Right Scrub,                              scrub,          NONE,                 GROTTOS,                        0x0d,                       BOMBS_5
+Goron City Grotto Hive,                                     hive,           NONE,                 GROTTOS,                        0x02a03,                    RUPEE_RED
 Goron City Pot Darunia Room 1,                              pot,            NONE,                 GORON_CITY,                     0x0105,                     STICK
 Goron City Pot Darunia Room 2,                              pot,            NONE,                 GORON_CITY,                     0x0106,                     RUPEE_GREEN
 Goron City Pot Darunia Room 3,                              pot,            NONE,                 GORON_CITY,                     0x0107,                     STICK
@@ -381,6 +382,7 @@ Death Mountain Crater Scrub Child,                          scrub,          DMC_
 Death Mountain Crater Grotto Left Scrub,                    scrub,          NONE,                 GROTTOS,                        0x0f,                       NUTS_5
 Death Mountain Crater Grotto Center Scrub,                  scrub,          NONE,                 GROTTOS,                        0x10,                       DEKU_SEEDS_30
 Death Mountain Crater Grotto Right Scrub,                   scrub,          NONE,                 GROTTOS,                        0x11,                       BOMBS_5
+Death Mountain Crater Scrub Grotto Hive,                    hive,           NONE,                 GROTTOS,                        0x02b03,                    RUPEE_RED
 Death Mountain Crater GS Soil,                              gs,             NONE,                 DEATH_MOUNTAIN_CRATER,          0x80,                       GS_TOKEN
 Death Mountain Crater GS Crate,                             gs,             NONE,                 DEATH_MOUNTAIN_CRATER,          0x87,                       GS_TOKEN
 Death Mountain Crater Pot 1,                                pot,            NONE,                 DEATH_MOUNTAIN_CRATER,          0x810d,                     RECOVERY_HEART
@@ -547,6 +549,7 @@ Lake Hylia HP,                                              collectible,    NONE
 Lake Hylia Grotto Left Scrub,                               scrub,          NONE,                 GROTTOS,                        0x14,                       NUTS_5
 Lake Hylia Grotto Center Scrub,                             scrub,          NONE,                 GROTTOS,                        0x15,                       DEKU_SEEDS_30
 Lake Hylia Grotto Right Scrub,                              scrub,          NONE,                 GROTTOS,                        0x16,                       BOMBS_5
+Lake Hylia Grotto Hive,                                     hive,           NONE,                 GROTTOS,                        0x02d03,                    RUPEE_RED
 Lake Hylia GS Lab Wall,                                     gs,             NONE,                 LAKE_HYLIA,                     0x9a,                       GS_TOKEN
 Lake Hylia GS Island,                                       gs,             NONE,                 LAKE_HYLIA,                     0x99,                       GS_TOKEN
 Lake Hylia GS Soil,                                         gs,             NONE,                 LAKE_HYLIA,                     0x98,                       GS_TOKEN
@@ -658,6 +661,7 @@ Lon Lon Ranch Silo Cow Back,                                cow,            NONE
 Lon Lon Ranch Grotto Left Scrub,                            scrub,          NONE,                 GROTTOS,                        0x08,                       NUTS_5
 Lon Lon Ranch Grotto Center Scrub,                          scrub,          NONE,                 GROTTOS,                        0x09,                       DEKU_SEEDS_30
 Lon Lon Ranch Grotto Right Scrub,                           scrub,          NONE,                 GROTTOS,                        0x0a,                       BOMBS_5
+Lon Lon Ranch Grotto Hive,                                  hive,           NONE,                 GROTTOS,                        0x02703,                    RUPEE_RED
 Lon Lon Ranch Pot 1,                                        pot,            NONE,                 LON_LON_RANCH,                  0x0003,                     RUPEE_GREEN
 Lon Lon Ranch Pot 2,                                        pot,            NONE,                 LON_LON_RANCH,                  0x0004,                     RUPEE_GREEN
 Lon Lon Ranch Pot 3,                                        pot,            NONE,                 LON_LON_RANCH,                  0x0005,                     RECOVERY_HEART

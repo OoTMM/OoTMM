@@ -785,6 +785,7 @@
     "Lon Lon Ranch Grotto Left Scrub": "is_child && business_scrub(0x08)"
     "Lon Lon Ranch Grotto Center Scrub": "is_child && business_scrub(0x09)"
     "Lon Lon Ranch Grotto Right Scrub": "is_child && business_scrub(0x0a)"
+    "Lon Lon Ranch Grotto Hive": "break_hive"
 "Hyrule Castle":
   region: HYRULE_CASTLE
   age_change: false
@@ -1641,6 +1642,7 @@
     "Goron City Grotto Left Scrub": "business_scrub(0x0b)"
     "Goron City Grotto Center Scrub": "business_scrub(0x0c)"
     "Goron City Grotto Right Scrub": "business_scrub(0x0d)"
+    "Goron City Grotto Hive": "break_hive"
 "Zora River Front":
   region: ZORA_RIVER
   time: flow
@@ -1994,6 +1996,7 @@
     "Lake Hylia Grotto Left Scrub": "business_scrub(0x14)"
     "Lake Hylia Grotto Center Scrub": "business_scrub(0x15)"
     "Lake Hylia Grotto Right Scrub": "business_scrub(0x16)"
+    "Lake Hylia Grotto Hive": "break_hive"
 "Zora Fountain":
   region: ZORA_FOUNTAIN
   exits:
@@ -2179,6 +2182,7 @@
     "Death Mountain Crater Grotto Left Scrub": "business_scrub(0x0f)"
     "Death Mountain Crater Grotto Center Scrub": "business_scrub(0x10)"
     "Death Mountain Crater Grotto Right Scrub": "business_scrub(0x11)"
+    "Death Mountain Crater Scrub Grotto Hive": "break_hive"
 "Fairy Fountain Double Magic":
   region: ENTRANCE
   exits:
