@@ -2,6 +2,7 @@
 #include <combo/item.h>
 #include <combo/global.h>
 #include <combo/csmc.h>
+#include <combo/custom.h>
 #include "Obj_Comb.h"
 
 #define FLAGS 0
@@ -42,6 +43,7 @@ static void ObjComb_InitXflag(Actor_ObjComb* this, GameState_Play* play)
 # define OBJECT             OBJECT_GAMEPLAY_FIELD_KEEP
 # define HIVE_FRAGMENT_DL   ((Gfx*)0x05009940)
 # define HIVE_DL            ((Gfx*)0x050095b0)
+# define HIVE_TEXTURE       0x05008900
 
 void ObjComb_Break(Actor_ObjComb* this, GameState_Play* play);
 void ObjComb_ChooseItemDrop(Actor_ObjComb* this, GameState_Play* play);
@@ -236,6 +238,7 @@ void ObjComb_Update(Actor_ObjComb* this, GameState_Play* play)
 
 # define HIVE_FRAGMENT_DL           ((Gfx*)0x06001040)
 # define HIVE_DL                    ((Gfx*)0x06000cb0)
+# define HIVE_TEXTURE               0x06000000
 
 void func_8098DC44(Actor_ObjComb* this);
 void func_8098DC60(Actor_ObjComb* this, GameState_Play* play);
@@ -773,7 +776,18 @@ void ObjComb_Update(Actor_ObjComb* this, GameState_Play* play)
 }
 #endif
 
-static void ObjComb_Draw(Actor_ObjComb* this, GameState_Play* play)
+static const Gfx sListLoadTextureDefault[] = {
+    gsDPSetPrimColor(0x00, 0x00, 255, 255, 255, 255),
+    gsDPLoadTextureBlock(HIVE_TEXTURE, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 5, 0, 0),
+    gsSPEndDisplayList(),
+};
+
+static const Gfx sListLoadTextureCustom[] = {
+    gsDPLoadTextureBlock(0x09000000, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 5, 0, 0),
+    gsSPEndDisplayList(),
+};
+
+static void ObjComb_DrawImpl(Actor_ObjComb* this, GameState_Play* play)
 {
     OPEN_DISPS(play->gs.gfx);
     Gfx_SetupDL25_Opa(play->gs.gfx);
@@ -788,6 +802,48 @@ static void ObjComb_Draw(Actor_ObjComb* this, GameState_Play* play)
     gSPDisplayList(POLY_OPA_DISP++, HIVE_DL);
 
     Collider_UpdateSpheres(0, &this->collider);
+    CLOSE_DISPS();
+}
+
+static int ObjComb_CsmcType(Actor_ObjComb* this, GameState_Play* play)
+{
+    ComboItemOverride o;
+
+    if (!ObjComb_IsShuffled(this))
+        return CSMC_NORMAL;
+
+    if (!csmcEnabled())
+        return CSMC_MAJOR;
+
+    comboXflagItemOverride(&o, &this->xflag, 0);
+    return csmcFromItem(o.gi);
+}
+
+static void ObjComb_Draw(Actor_ObjComb* this, GameState_Play* play)
+{
+    int                 type;
+    void*               tex;
+    const void*         preList;
+    const Color_RGB8*   color;
+
+    OPEN_DISPS(play->gs.gfx);
+    type = ObjComb_CsmcType(this, play);
+    if (type == CSMC_NORMAL)
+    {
+        preList = sListLoadTextureDefault;
+    }
+    else
+    {
+        tex = comboCacheGetFile(CUSTOM_HIVE_ADDR);
+        if (!tex)
+            return;
+        gSPSegment(POLY_OPA_DISP++, 0x09, (u32)tex & 0xffffff);
+        preList = sListLoadTextureCustom;
+        color = csmcTypeColor(type);
+        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, color->r, color->g, color->b, 255);
+    }
+    gSPSegment(POLY_OPA_DISP++, 0x08, (u32)preList & 0xffffff);
+    ObjComb_DrawImpl(this, play);
     CLOSE_DISPS();
 }
 
