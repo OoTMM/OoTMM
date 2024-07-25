@@ -476,6 +476,9 @@ Zora Domain Pot 2,                                          pot,            NONE
 Zora Domain Pot 3,                                          pot,            NONE,                 ZORA_DOMAIN,                    0x0117,                     RECOVERY_HEART
 Zora Domain Pot 4,                                          pot,            NONE,                 ZORA_DOMAIN,                    0x0118,                     NUTS_5
 Zora Domain Pot 5,                                          pot,            NONE,                 ZORA_DOMAIN,                    0x0119,                     STICK
+Zora Domain Hive Front 1,                                   hive,           NONE,                 ZORA_DOMAIN,                    0x00009,                    RUPEE_RED
+Zora Domain Hive Front 2,                                   hive,           NONE,                 ZORA_DOMAIN,                    0x0000a,                    RUPEE_RED
+Zora Domain Hive Back,                                      hive,           NONE,                 ZORA_DOMAIN,                    0x0000b,                    RUPEE_RED
 Zora Domain Fairy Fountain Fairy 1,                         fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x02300,                    FAIRY
 Zora Domain Fairy Fountain Fairy 2,                         fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x12300,                    FAIRY
 Zora Domain Fairy Fountain Fairy 3,                         fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x22300,                    FAIRY

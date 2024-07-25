@@ -1791,6 +1791,8 @@
     "Zora Domain Pot 3": "true"
     "Zora Domain Pot 4": "true"
     "Zora Domain Pot 5": "true"
+    "Zora Domain Hive Front 1": "is_child && break_hive"
+    "Zora Domain Hive Front 2": "is_child && break_hive"
   gossip:
     "Zora Domain Gossip": "true"
 "Zora Domain Back":
@@ -1798,6 +1800,8 @@
   exits:
     "Zora Fountain": "true"
     "Zora Domain": "king_zora_moved || climb_anywhere || hookshot_anywhere"
+  locations:
+    "Zora Domain Hive Back": "is_child && break_hive"
 "Zora Shop":
   region: ENTRANCE
   exits:
