@@ -25,14 +25,22 @@ static int ObjComb_DropCustom(Actor_ObjComb* this, GameState_Play* play)
 
 static void ObjComb_InitXflag(Actor_ObjComb* this, GameState_Play* play)
 {
-    ComboItemOverride o;
+    ComboItemOverride   o;
+    Xflag*              xflag;
 
     /* Set the extended properties */
-    this->xflag.sceneId = play->sceneId;
-    this->xflag.setupId = g.sceneSetupId;
-    this->xflag.roomId = this->actor.room;
-    this->xflag.sliceId = 0;
-    this->xflag.id = this->actor.actorIndex;
+    xflag = &this->xflag;
+    xflag->sceneId = play->sceneId;
+    xflag->setupId = g.sceneSetupId;
+    xflag->roomId = this->actor.room;
+    xflag->sliceId = 0;
+    xflag->id = this->actor.actorIndex;
+
+#if defined(GAME_OOT)
+    /* Generic grottos */
+    if (xflag->sceneId == SCE_OOT_GROTTOS && xflag->roomId == 0x00)
+        xflag->roomId = 0x20 | (gGrottoData & 0x1f);
+#endif
 
     /* Detect xflags */
     comboXflagItemOverride(&o, &this->xflag, 0);
