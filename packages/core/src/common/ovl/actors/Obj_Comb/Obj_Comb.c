@@ -72,6 +72,11 @@ static void ObjComb_InitXflag(Actor_ObjComb* this, GameState_Play* play)
     }
 #endif
 
+#if defined(GAME_MM)
+    if (xflag->roomId == 0x0a && gLastScene == SCE_MM_GREAT_BAY_COAST)
+        xflag->roomId = 0x0f;
+#endif
+
     /* Detect xflags */
     comboXflagItemOverride(&o, &this->xflag, 0);
     this->isExtended = !!(o.gi && !comboXflagsGet(&this->xflag));

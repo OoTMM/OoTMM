@@ -1103,6 +1103,7 @@
     "Termina Field Cow Grotto Grass 70": "true"
     "Termina Field Cow Grotto Grass 71": "true"
     "Termina Field Cow Grotto Grass 72": "true"
+    "Termina Field Cow Grotto Hive": "break_hive"
 "Swamp Gossip Grotto":
   region: ENTRANCE
   events:
@@ -1157,6 +1158,7 @@
     "Ocean Gossip Grotto Grass 3": "true"
     "Ocean Gossip Grotto Grass 4": "true"
     "Ocean Gossip Grotto Grass 5": "true"
+    "Ocean Gossip Grotto Hive": "break_hive"
   gossip:
     "Termina Field Gossip Grotto Leftmost": "true"
     "Termina Field Gossip Grotto Left-Center": "true"
@@ -2569,6 +2571,7 @@
     "Great Bay Cow Grotto Grass 70": "true"
     "Great Bay Cow Grotto Grass 71": "true"
     "Great Bay Cow Grotto Grass 72": "true"
+    "Great Bay Cow Grotto Hive": "break_hive"
 "Fisher's Hut":
   region: ENTRANCE
   exits:

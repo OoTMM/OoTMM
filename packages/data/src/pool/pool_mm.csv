@@ -474,11 +474,13 @@ Termina Field Cow Grotto Grass 69,                      grass,          NONE,   
 Termina Field Cow Grotto Grass 70,                      grass,          NONE,                   GROTTOS,                      0x90a09,                    RANDOM
 Termina Field Cow Grotto Grass 71,                      grass,          NONE,                   GROTTOS,                      0xa0a09,                    RANDOM
 Termina Field Cow Grotto Grass 72,                      grass,          NONE,                   GROTTOS,                      0xb0a09,                    RANDOM
+Termina Field Cow Grotto Hive,                          hive,           NONE,                   GROTTOS,                      0x00a02,                    NOTHING
 Ocean Gossip Grotto Grass 1,                            grass,          NONE,                   GROTTOS,                      0x00001,                    RANDOM
 Ocean Gossip Grotto Grass 2,                            grass,          NONE,                   GROTTOS,                      0x00004,                    RANDOM
 Ocean Gossip Grotto Grass 3,                            grass,          NONE,                   GROTTOS,                      0x00006,                    RANDOM
 Ocean Gossip Grotto Grass 4,                            grass,          NONE,                   GROTTOS,                      0x00007,                    RANDOM
 Ocean Gossip Grotto Grass 5,                            grass,          NONE,                   GROTTOS,                      0x00008,                    RANDOM
+Ocean Gossip Grotto Hive,                               hive,           NONE,                   GROTTOS,                      0x00000,                    NOTHING
 Canyon Gossip Grotto Grass 1,                           grass,          NONE,                   GROTTOS,                      0x00200,                    RANDOM
 Canyon Gossip Grotto Grass 2,                           grass,          NONE,                   GROTTOS,                      0x00201,                    RANDOM
 Canyon Gossip Grotto Grass 3,                           grass,          NONE,                   GROTTOS,                      0x00202,                    RANDOM
@@ -1216,6 +1218,7 @@ Great Bay Cow Grotto Grass 69,                          grass,          NONE,   
 Great Bay Cow Grotto Grass 70,                          grass,          NONE,                   GROTTOS,                      0x90f09,                    RANDOM
 Great Bay Cow Grotto Grass 71,                          grass,          NONE,                   GROTTOS,                      0xa0f09,                    RANDOM
 Great Bay Cow Grotto Grass 72,                          grass,          NONE,                   GROTTOS,                      0xb0f09,                    RANDOM
+Great Bay Cow Grotto Hive,                              hive,           NONE,                   GROTTOS,                      0x00f02,                    NOTHING
 Zora Cape Ledge Chest 1,                                chest,          NONE,                   ZORA_CAPE,                    0x01,                       RUPEE_RED
 Zora Cape Ledge Chest 2,                                chest,          NONE,                   ZORA_CAPE,                    0x02,                       RUPEE_RED
 Zora Cape Underwater Chest,                             chest,          NONE,                   ZORA_CAPE,                    0x00,                       RUPEE_PURPLE
