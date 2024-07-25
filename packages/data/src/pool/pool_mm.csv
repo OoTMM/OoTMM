@@ -1602,6 +1602,8 @@ Woodfall Temple Rupee Lower 1,                          rupee,          NONE,   
 Woodfall Temple Rupee Lower 2,                          rupee,          NONE,                   TEMPLE_WOODFALL,              0x00003,                    RUPEE_BLUE
 Woodfall Temple Rupee Lower 3,                          rupee,          NONE,                   TEMPLE_WOODFALL,              0x00004,                    RUPEE_BLUE
 Woodfall Temple Rupee Lower 4,                          rupee,          NONE,                   TEMPLE_WOODFALL,              0x00005,                    RUPEE_BLUE
+Woodfall Temple Hive Entrance,                          hive,           NONE,                   TEMPLE_WOODFALL,              0x0021d,                    RUPEE_BLUE
+Woodfall Temple Hive Maze,                              hive,           NONE,                   TEMPLE_WOODFALL,              0x00311,                    NOTHING
 Woodfall Temple Boss Container,                         collectible,    NONE,                   LAIR_ODOLWA,                  0x1f,                       HEART_CONTAINER
 Woodfall Temple Boss,                                   npc,            NONE,                   LAIR_ODOLWA,                  REMAINS_ODOLWA,             REMAINS_ODOLWA
 Woodfall Temple Boss Grass 01,                          grass,          NONE,                   LAIR_ODOLWA,                  0x0000a,                    RANDOM
