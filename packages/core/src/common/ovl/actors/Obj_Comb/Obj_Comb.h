@@ -2,6 +2,7 @@
 #define OVL_OBJ_COMB_H
 
 #include <combo/actor.h>
+#include <combo/xflags.h>
 
 typedef struct Actor_ObjComb Actor_ObjComb;
 
@@ -33,6 +34,9 @@ struct Actor_ObjComb
     s8                      unk_1B7;
     s8                      unk_1B8;
 #endif
+
+    Xflag   xflag;
+    u8      isExtended;
 };
 
 #endif

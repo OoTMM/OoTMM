@@ -1,10 +1,42 @@
 #include <combo.h>
+#include <combo/item.h>
+#include <combo/global.h>
+#include <combo/csmc.h>
 #include "Obj_Comb.h"
 
 #define FLAGS 0
 
 void ObjComb_Init(Actor_ObjComb* this, GameState_Play* play);
 void ObjComb_Update(Actor_ObjComb* this, GameState_Play* play);
+
+static int ObjComb_IsShuffled(Actor_ObjComb* this)
+{
+    return !!(this->isExtended && !comboXflagsGet(&this->xflag));
+}
+
+static int ObjComb_DropCustom(Actor_ObjComb* this, GameState_Play* play)
+{
+    if (!ObjComb_IsShuffled(this))
+        return 0;
+    EnItem00_DropCustom(play, &this->actor.world.pos, &this->xflag);
+    return 1;
+}
+
+static void ObjComb_InitXflag(Actor_ObjComb* this, GameState_Play* play)
+{
+    ComboItemOverride o;
+
+    /* Set the extended properties */
+    this->xflag.sceneId = play->sceneId;
+    this->xflag.setupId = g.sceneSetupId;
+    this->xflag.roomId = this->actor.room;
+    this->xflag.sliceId = 0;
+    this->xflag.id = this->actor.actorIndex;
+
+    /* Detect xflags */
+    comboXflagItemOverride(&o, &this->xflag, 0);
+    this->isExtended = !!(o.gi && !comboXflagsGet(&this->xflag));
+}
 
 #if defined(GAME_OOT)
 # define OBJECT             OBJECT_GAMEPLAY_FIELD_KEEP
@@ -115,6 +147,9 @@ void ObjComb_ChooseItemDrop(Actor_ObjComb* this, GameState_Play* play)
 {
     s16 params = this->actor.variable & 0x1f;
 
+    if (ObjComb_DropCustom(this, play))
+        return;
+
     if ((params > 0) || (params < ITEM00_MAX))
     {
         if (params == ITEM00_HEART_PIECE) {
@@ -134,6 +169,7 @@ void ObjComb_ChooseItemDrop(Actor_ObjComb* this, GameState_Play* play)
 
 void ObjComb_Init(Actor_ObjComb* this, GameState_Play* play)
 {
+    ObjComb_InitXflag(this, play);
     Actor_ProcessInitChain(&this->actor, sInitChain);
     Collider_InitJntSph(play, &this->collider);
     Collider_SetJntSph(play, &this->collider, &this->actor, &sJntSphInit, this->colliderItems);
@@ -445,7 +481,7 @@ void func_8098D870(Actor_ObjComb* this, GameState_Play* play)
         Item_DropCollectible(play, &this->actor.world.pos, ((OBJCOMB_GET_7F00(this)) << 8) | id);
 }
 
-void func_8098D8C8(Actor_ObjComb* this, GameState_Play* play)
+void ObjComb_SpawnBees(Actor_ObjComb* this, GameState_Play* play)
 {
     s32 params = OBJCOMB_GET_F(this);
     s32 i;
@@ -467,7 +503,7 @@ void func_8098D8C8(Actor_ObjComb* this, GameState_Play* play)
     }
 }
 
-void func_8098D99C(Actor_ObjComb* this, GameState_Play* play)
+void ObjComb_SpawnSkulltula(Actor_ObjComb* this, GameState_Play* play)
 {
     s32 params;
     Actor* temp_v0;
@@ -496,17 +532,20 @@ void func_8098DA74(Actor_ObjComb* this, GameState_Play* play)
 {
     s32 temp_v0 = OBJCOMB_GET_8000(this) | OBJCOMB_GET_80(this);
 
+    if (ObjComb_DropCustom(this, play))
+        return;
+
     if (temp_v0 == 0)
     {
         func_8098D870(this, play);
     }
     else if (temp_v0 == 1)
     {
-        func_8098D8C8(this, play);
+        ObjComb_SpawnBees(this, play);
     }
     else
     {
-        func_8098D99C(this, play);
+        ObjComb_SpawnSkulltula(this, play);
     }
 }
 
@@ -514,6 +553,7 @@ void ObjComb_Init(Actor_ObjComb* this, GameState_Play* play)
 {
     s32 sp2C = OBJCOMB_GET_8000(this) | OBJCOMB_GET_80(this);
 
+    ObjComb_InitXflag(this, play);
     Actor_ProcessInitChain(&this->actor, sInitChain);
     Collider_InitJntSph(play, &this->collider);
 
