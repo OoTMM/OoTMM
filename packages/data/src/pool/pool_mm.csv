@@ -595,6 +595,7 @@ Southern Swamp Grass Near Witch 1,                      grass,          NONE,   
 Southern Swamp Grass Near Witch 2,                      grass,          NONE,                   SOUTHERN_SWAMP,               0x00212,                    RANDOM
 Southern Swamp Rupee 1,                                 rupee,          NONE,                   SOUTHERN_SWAMP,               0x00028,                    RUPEE_BLUE
 Southern Swamp Rupee 2,                                 rupee,          NONE,                   SOUTHERN_SWAMP,               0x00029,                    RUPEE_BLUE
+Southern Swamp Hive,                                    hive,           NONE,                   SOUTHERN_SWAMP,               0x0002b,                    RUPEE_RED
 Woods of Mystery Grotto,                                chest,          NONE,                   GROTTOS,                      0x1c,                       RUPEE_PURPLE
 Woods of Mystery Grotto Grass 01,                       grass,          NONE,                   GROTTOS,                      0x03c00,                    RANDOM
 Woods of Mystery Grotto Grass 02,                       grass,          NONE,                   GROTTOS,                      0x03c01,                    RANDOM
@@ -870,6 +871,7 @@ Mountain Village Keaton Grass Reward 7,                 grass,          NONE,   
 Mountain Village Keaton Grass Reward 8,                 grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x7002c,                    RUPEE_GREEN
 Mountain Village Keaton Grass Reward 9,                 grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x8002c,                    RUPEE_RED
 Mountain Village Rupee,                                 rupee,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x00028,                    RUPEE_RED
+Mountain Village Hive,                                  hive,           NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x00024,                    NOTHING
 Blacksmith Razor Blade,                                 npc,            BLACKSMITH,             BLACKSMITH,                   SWORD_RAZOR,                SWORD
 Blacksmith Gilded Sword,                                npc,            BLACKSMITH,             BLACKSMITH,                   SWORD_GILDED,               SWORD
 Lone Peak Shrine Lens Chest,                            chest,          NONE,                   GROTTOS,                      0x01,                       LENS

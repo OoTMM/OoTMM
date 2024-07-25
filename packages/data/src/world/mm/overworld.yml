@@ -1332,6 +1332,7 @@
     "Southern Swamp Grass Near Witch 2": "true"
     "Southern Swamp Rupee 1": "has(MASK_DEKU) || is_tall || short_hook_anywhere || has_hover_boots"
     "Southern Swamp Rupee 2": "has(MASK_DEKU) || is_tall || short_hook_anywhere || has_hover_boots"
+    "Southern Swamp Hive": "is_swamp_poisoned && break_hive && (event(BOAT_RIDE) || has_arrows || can_hookshot_short || can_use_din)"
   gossip:
     "Southern Swamp Gossip": "true"
 "Swamp Back":
@@ -1804,6 +1805,7 @@
     "Mountain Village Keaton Grass Reward 8": "is_spring && keaton_grass_hard"
     "Mountain Village Keaton Grass Reward 9": "is_spring && keaton_grass_hard"
     "Mountain Village Rupee": "is_spring && has_mask_goron"
+    "Mountain Village Hive": "is_spring && break_hive"
 "Mountain Village Elder":
   region: NONE
   exits:
