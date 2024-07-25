@@ -361,6 +361,7 @@
   locations:
     "Hyrule Field Grotto Scrub HP": "business_scrub(0x07)"
     "Hyrule Field Grotto Scrub Big Fairy": "can_play_storms"
+    "Hyrule Field Grotto Scrub Hive": "break_hive"
 "Hyrule Field Open Grotto":
   region: ENTRANCE
   age_change: false

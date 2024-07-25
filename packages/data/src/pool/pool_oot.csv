@@ -669,6 +669,7 @@ Hyrule Field Song of Time,                                  npc,            NONE
 Hyrule Field Sell Bunny Mask,                               npc,            NONE,                 HYRULE_FIELD,                   MASK_SELL_BUNNY,            RUPEE_RAINBOW
 Hyrule Field Grotto Scrub HP,                               scrub,          NONE,                 GROTTOS,                        0x07,                       HEART_PIECE
 Hyrule Field Grotto Scrub Big Fairy,                        fairy_spot,     NONE,                 GROTTOS,                        0x00102,                    FAIRY_BIG
+Hyrule Field Grotto Scrub Hive,                             hive,           NONE,                 GROTTOS,                        0x00101,                    RUPEE_RED
 Hyrule Field Grotto Southeast,                              chest,          NONE,                 GROTTOS,                        0x02,                       RUPEE_RED
 Hyrule Field Grotto Southeast Grass 1,                      grass,          NONE,                 GROTTOS,                        0x02202,                    RANDOM
 Hyrule Field Grotto Southeast Grass 2,                      grass,          NONE,                 GROTTOS,                        0x02203,                    RANDOM
