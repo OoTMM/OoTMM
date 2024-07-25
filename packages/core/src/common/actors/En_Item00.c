@@ -225,3 +225,17 @@ Actor_EnItem00* EnItem00_DropCustom(GameState_Play* play, const Vec3f* pos, cons
 
     return item;
 }
+
+Actor_EnItem00* EnItem00_DropCustomNoInertia(GameState_Play* play, const Vec3f* pos, const Xflag* xflag)
+{
+    Actor_EnItem00* item;
+
+    item = EnItem00_DropCustom(play, pos, xflag);
+    if (!item)
+        return NULL;
+    item->base.speed = 0.f;
+    item->base.velocity.x = 0.f;
+    item->base.velocity.y = 0.f;
+    item->base.velocity.z = 0.f;
+    return item;
+}

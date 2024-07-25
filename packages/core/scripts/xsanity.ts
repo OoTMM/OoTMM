@@ -3,19 +3,31 @@ import { SCENES } from '@ootmm/data';
 
 import { CodeGen } from '../lib/combo/util/codegen';
 import { decompressGame } from '../lib/combo/decompress';
-import { CONFIG } from '../lib/combo/config';
-import { mkdir } from 'fs';
 
 const OOT_GENERIC_GROTTOS = [
-  0x0c, /* Kokiri Forest */
-  0x14, /* Lost Woods */
-  0x08, /* Kakariko */
-  0x17, /* Death Mountain Trail */
-  0x1a, /* Death Mountain Crater */
-  0x09, /* Zora River */
+  0x00, /* Hyrule Field Market */
   0x02, /* Hyrule Field Southwest */
   0x03, /* Hyrule Field Open */
-  0x00, /* Hyrule Field Market */
+  0x08, /* Kakariko */
+  0x09, /* Zora River */
+  0x0c, /* Kokiri Forest */
+  0x14, /* Lost Woods */
+  0x17, /* Death Mountain Trail */
+  0x1a, /* Death Mountain Crater */
+];
+
+const OOT_SCRUBS_X2_GROTTOS = [
+  0x01, /* Sacred Forest Meadow */
+  0x04, /* River */
+  0x05, /* Valley */
+  0x06, /* Colossus */
+];
+
+const OOT_SCRUBS_X3_GROTTOS = [
+  0x07, /* RANCH */
+  0x0a, /* GORON_CITY */
+  0x0b, /* DMC */
+  0x0d, /* LAKE */
 ];
 
 const OOT_FAIRY_FOUNTAINS = [
@@ -587,8 +599,9 @@ function parseRoomActors(rom: Buffer, raw: RawRoom, game: Game): RoomActors[] {
     }
   }
   actors = filterActors(actors, game);
+
+  /* OoT generic grottos */
   if (game !== 'mm' && raw.sceneId === 0x3e && raw.roomId === 0x00) {
-    /* OoT generic grottos */
     let genericRooms: RoomActors[] = [];
     for (const genericId of OOT_GENERIC_GROTTOS) {
       const genericRoomId = genericId | 0x20;
@@ -598,8 +611,30 @@ function parseRoomActors(rom: Buffer, raw: RawRoom, game: Game): RoomActors[] {
     return genericRooms;
   }
 
+  /* OoT scrub x2 grottos */
+  if (game !== 'mm' && raw.sceneId === 0x3e && raw.roomId === 0x09) {
+    let genericRooms: RoomActors[] = [];
+    for (const genericId of OOT_SCRUBS_X2_GROTTOS) {
+      const genericRoomId = genericId | 0x20;
+      const genericActors = actors.map(x => ({...x, roomId: genericRoomId }));
+      genericRooms.push({ sceneId: raw.sceneId, setupId: raw.setupId, roomId: genericRoomId, actors: genericActors });
+    }
+    return genericRooms;
+  }
+
+  /* OoT scrub x3 grottos */
+  if (game !== 'mm' && raw.sceneId === 0x3e && raw.roomId === 0x0c) {
+    let genericRooms: RoomActors[] = [];
+    for (const genericId of OOT_SCRUBS_X3_GROTTOS) {
+      const genericRoomId = genericId | 0x20;
+      const genericActors = actors.map(x => ({...x, roomId: genericRoomId }));
+      genericRooms.push({ sceneId: raw.sceneId, setupId: raw.setupId, roomId: genericRoomId, actors: genericActors });
+    }
+    return genericRooms;
+  }
+
+  /* OoT fairy fountains */
   if (game !== 'mm' && raw.sceneId === 0x3c && raw.roomId === 0x00) {
-    /* OoT fairy fountains */
     let genericRooms: RoomActors[] = [];
     for (const genericId of OOT_FAIRY_FOUNTAINS) {
       const genericRoomId = genericId | 0x20;
@@ -609,8 +644,8 @@ function parseRoomActors(rom: Buffer, raw: RawRoom, game: Game): RoomActors[] {
     return genericRooms;
   }
 
+  /* MM generic grottos */
   if (game === 'mm' && raw.sceneId === 0x07 && raw.roomId === 0x04) {
-    /* MM generic grottos */
     let genericRooms: RoomActors[] = [];
     for (const genericId of MM_GENERIC_GROTTOS) {
       const genericRoomId = genericId | 0x20;
@@ -620,8 +655,8 @@ function parseRoomActors(rom: Buffer, raw: RawRoom, game: Game): RoomActors[] {
     return genericRooms;
   }
 
+  /* MM cow grottos */
   if (game === 'mm' && raw.sceneId === 0x07 && raw.roomId === 0x0a) {
-    /* MM cow grottos */
     let cowRooms: RoomActors[] = [];
     cowRooms.push({ sceneId: raw.sceneId, setupId: raw.setupId, roomId: raw.roomId, actors });
     const altRoomId = 0x0f;

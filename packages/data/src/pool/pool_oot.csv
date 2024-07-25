@@ -115,6 +115,7 @@ Lost Woods Grass Deep 6,                                    grass,          NONE
 Lost Woods Grotto Scrub Nuts Upgrade,                       scrub,          NONE,                 GROTTOS,                        0x03,                       NUT_UPGRADE
 Lost Woods Grotto Scrub Back,                               scrub,          NONE,                 GROTTOS,                        0x04,                       DEKU_SEEDS_30
 Lost Woods Grotto Scrub Big Fairy,                          fairy_spot,     NONE,                 GROTTOS,                        0x00600,                    FAIRY_BIG
+Lost Woods Grotto Scrub Hive,                               hive,           NONE,                 GROTTOS,                        0x00603,                    RUPEE_RED
 Lost Woods Grotto Generic,                                  chest,          NONE,                 GROTTOS,                        0x14,                       RUPEE_BLUE
 Lost Woods Grotto Generic Grass 1,                          grass,          NONE,                 GROTTOS,                        0x03402,                    RANDOM
 Lost Woods Grotto Generic Grass 2,                          grass,          NONE,                 GROTTOS,                        0x03403,                    RANDOM
@@ -146,6 +147,7 @@ Sacred Meadow Grotto,                                       chest,          NONE
 Sacred Meadow GS Night Adult,                               gs,             NONE,                 SACRED_FOREST_MEADOW,           0x73,                       GS_TOKEN
 Sacred Meadow Storms Grotto Front Scrub,                    scrub,          NONE,                 GROTTOS,                        0x05,                       POTION_GREEN
 Sacred Meadow Storms Grotto Back Scrub,                     scrub,          NONE,                 GROTTOS,                        0x06,                       POTION_RED
+Sacred Meadow Storms Grotto Hive,                           hive,           NONE,                 GROTTOS,                        0x02102,                    RUPEE_RED
 Sacred Meadow Fairy Fountain Fairy 1,                       fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x02200,                    FAIRY
 Sacred Meadow Fairy Fountain Fairy 2,                       fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x12200,                    FAIRY
 Sacred Meadow Fairy Fountain Fairy 3,                       fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x22200,                    FAIRY
@@ -331,6 +333,7 @@ Death Mountain Trail Cow Grotto Heart 2,                    heart,          NONE
 Death Mountain Trail Cow Grotto Heart 3,                    heart,          NONE,                 GROTTOS,                        0x00308,                    RECOVERY_HEART
 Death Mountain Trail Cow Grotto Heart 4,                    heart,          NONE,                 GROTTOS,                        0x00309,                    RECOVERY_HEART
 Death Mountain Trail Cow Grotto Big Fairy,                  fairy_spot,     NONE,                 GROTTOS,                        0x00304,                    FAIRY_BIG
+Death Mountain Trail Cow Grotto Hive,                       hive,           NONE,                 GROTTOS,                        0x00303,                    RUPEE_RED
 Death Mountain Trail Rupee Upper,                           rupee,          NONE,                 DEATH_MOUNTAIN_TRAIL,           0x00001,                    RUPEE_RED
 Death Mountain Trail Rupee Lower,                           rupee,          NONE,                 DEATH_MOUNTAIN_TRAIL,           0x00002,                    RUPEE_BLUE
 Death Mountain Trail Big Fairy,                             fairy_spot,     NONE,                 DEATH_MOUNTAIN_TRAIL,           0x00026,                    FAIRY_BIG
@@ -413,6 +416,7 @@ Zora River Grotto Hive 1,                                   hive,           NONE
 Zora River Grotto Hive 2,                                   hive,           NONE,                 GROTTOS,                        0x02908,                    RUPEE_RED
 Zora River Storms Grotto Front Scrub,                       scrub,          NONE,                 GROTTOS,                        0x12,                       POTION_GREEN
 Zora River Storms Grotto Back Scrub,                        scrub,          NONE,                 GROTTOS,                        0x13,                       POTION_RED
+Zora River Storms Grotto Hive,                              hive,           NONE,                 GROTTOS,                        0x02402,                    RUPEE_RED
 Zora River GS Tree,                                         gs,             NONE,                 ZORA_RIVER,                     0x91,                       GS_TOKEN
 Zora River GS Ladder,                                       gs,             NONE,                 ZORA_RIVER,                     0x90,                       GS_TOKEN
 Zora River GS Near Grotto,                                  gs,             NONE,                 ZORA_RIVER,                     0x94,                       GS_TOKEN
@@ -919,6 +923,7 @@ Gerudo Valley Waterfall HP,                                 collectible,    NONE
 Gerudo Valley Broken Goron Sword,                           npc,            NONE,                 GERUDO_VALLEY,                  TRADE_BROKEN_GORON_SWORD,   BROKEN_GORON_SWORD
 Gerudo Valley Grotto Front Scrub,                           scrub,          NONE,                 GROTTOS,                        0x17,                       POTION_GREEN
 Gerudo Valley Grotto Back Scrub,                            scrub,          NONE,                 GROTTOS,                        0x18,                       POTION_RED
+Gerudo Valley Grotto Hive,                                  hive,           NONE,                 GROTTOS,                        0x02502,                    RUPEE_RED
 Gerudo Valley GS Soil,                                      gs,             NONE,                 GERUDO_VALLEY,                  0xa0,                       GS_TOKEN
 Gerudo Valley GS Wall,                                      gs,             NONE,                 GERUDO_VALLEY,                  0xa1,                       GS_TOKEN
 Gerudo Valley GS Tent,                                      gs,             NONE,                 GERUDO_VALLEY,                  0xa3,                       GS_TOKEN
@@ -991,6 +996,7 @@ Desert Colossus HP,                                         collectible,    NONE
 Desert Colossus Song Spirit,                                npc,            NONE,                 DESERT_COLOSSUS,                SHEIK_SPIRIT,               SONG_TP_SPIRIT
 Desert Colossus Grotto Front Scrub,                         scrub,          NONE,                 GROTTOS,                        0x19,                       POTION_GREEN
 Desert Colossus Grotto Back Scrub,                          scrub,          NONE,                 GROTTOS,                        0x1a,                       POTION_RED
+Desert Colossus Grotto Hive,                                hive,           NONE,                 GROTTOS,                        0x02602,                    RUPEE_RED
 Desert Colossus GS Soil,                                    gs,             NONE,                 DESERT_COLOSSUS,                0xb0,                       GS_TOKEN
 Desert Colossus GS Tree,                                    gs,             NONE,                 DESERT_COLOSSUS,                0xb3,                       GS_TOKEN
 Desert Colossus GS Plateau,                                 gs,             NONE,                 DESERT_COLOSSUS,                0xb2,                       GS_TOKEN

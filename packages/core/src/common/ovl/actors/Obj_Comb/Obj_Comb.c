@@ -19,7 +19,7 @@ static int ObjComb_DropCustom(Actor_ObjComb* this, GameState_Play* play)
 {
     if (!ObjComb_IsShuffled(this))
         return 0;
-    EnItem00_DropCustom(play, &this->actor.world.pos, &this->xflag);
+    EnItem00_DropCustomNoInertia(play, &this->actor.world.pos, &this->xflag);
     return 1;
 }
 
@@ -37,9 +37,39 @@ static void ObjComb_InitXflag(Actor_ObjComb* this, GameState_Play* play)
     xflag->id = this->actor.actorIndex;
 
 #if defined(GAME_OOT)
-    /* Generic grottos */
-    if (xflag->sceneId == SCE_OOT_GROTTOS && xflag->roomId == 0x00)
-        xflag->roomId = 0x20 | (gGrottoData & 0x1f);
+    if (xflag->sceneId == SCE_OOT_GROTTOS)
+    {
+        /* Grottos */
+        switch (xflag->roomId)
+        {
+        case 0x00:
+            /* Genertic grottos */
+            xflag->roomId = 0x20 | (gGrottoData & 0x1f);
+            break;
+        case 0x09:
+            /* Scrubs x2 */
+            switch (gLastScene)
+            {
+            case SCE_OOT_SACRED_FOREST_MEADOW: xflag->roomId = 0x21; break;
+            case SCE_OOT_ZORA_RIVER: xflag->roomId = 0x24; break;
+            case SCE_OOT_GERUDO_VALLEY: xflag->roomId = 0x25; break;
+            case SCE_OOT_DESERT_COLOSSUS: xflag->roomId = 0x26; break;
+            default: UNREACHABLE(); break;
+            }
+            break;
+        case 0x0c:
+            /* Scrubs x3 */
+            switch (gLastScene)
+            {
+            case SCE_OOT_LON_LON_RANCH: xflag->roomId = 0x27; break;
+            case SCE_OOT_GORON_CITY: xflag->roomId = 0x2a; break;
+            case SCE_OOT_DEATH_MOUNTAIN_CRATER: xflag->roomId = 0x2b; break;
+            case SCE_OOT_LAKE_HYLIA: xflag->roomId = 0x2d; break;
+            default: UNREACHABLE(); break;
+            }
+            break;
+        }
+    }
 #endif
 
     /* Detect xflags */
