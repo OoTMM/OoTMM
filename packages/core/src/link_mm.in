@@ -152,8 +152,13 @@ LoadObjectGi = 0x80838830;
 
 SfxSource_PlaySfxAtFixedWorldPos = 0x800f0568;
 
+Collider_InitJntSph = 0x800e0b4c;
+Collider_SetJntSph = 0x800e0e60;
+Collider_UpdateSpheres = 0x800e7fdc;
+Collider_DestroyJntSph = 0x800e0c18;
+
 Actor_SetScale = 0x800b67e0;
-ActorSetUnk = 0x800b675c;
+Actor_SetFocus = 0x800b675c;
 Actor_HasParent  = 0x800b89f8;
 Actor_HasParentZ = 0x800b89f8;
 Actor_HasNoParent = 0x800b8bfc;
@@ -333,6 +338,9 @@ ActorShadow_DrawSquare = 0x800b4024;
 BgCheck_EntityRaycastDown4 = 0x800c411c;
 
 DynaPoly_DisableCollision = 0x800c62bc;
+
+Actor_PlaySfx_Flagged = 0x800B9010;
+CutsceneManager_GetCutsceneScriptIndex = 0x800f2138;
 
 Item_CollectibleDropTable = 0x800a8150;
 Item_CollectibleDropTable2 = 0x800a817c;

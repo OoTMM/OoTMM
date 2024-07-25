@@ -1340,9 +1340,21 @@ function actorHandlerOotObjComb(checks: Check[], ra: RoomActor) {
 }
 
 function actorHandlerMmObjComb(checks: Check[], ra: RoomActor) {
-  const item = mmCollectibleDrop(ra.actor.params & 0x3f);
-  if (item === 'STRAY_FAIRY' || item === 'HEART_PIECE')
-    return;
+  const flag = !!(ra.actor.params & 0x10);
+  let type = 0;
+  if (ra.actor.params & 0x80) type += 1;
+  if (ra.actor.params & 0x8000) type += 2;
+  if (type === 1 && flag) return; /* Pirate */
+
+  let item: string;
+  switch (type) {
+  case 0: item = mmCollectibleDrop(ra.actor.params & 0x3f); break;
+  case 1: item = 'NOTHING'; break;
+  default: return; /* Skulltulas */
+  }
+
+  if (item === 'STRAY_FAIRY' || item === 'HEART_PIECE') return;
+
   checks.push({ roomActor: ra, item, name: 'Hive', type: 'hive' });
 }
 

@@ -140,7 +140,7 @@ Object_GetSlot = 0x80081628;
 Object_IsLoaded = 0x80081688;
 SkelAnime_DrawFlexOpa = 0x80089D8C;
 Actor_SetScale = 0x80020f88;
-ActorSetUnk = 0x80020f04;
+Actor_SetFocus = 0x80020f04;
 
 PlaySound = 0x800646f0;
 PlaySound6 = 0x800c806c;
