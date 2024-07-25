@@ -44,7 +44,7 @@
   exits:
     "Stone Tower Temple Inverted East": "true"
     "Stone Tower Temple Inverted Center Bridge": "(trick(MM_ISTT_EYEGORE) && ((has_mask_zora && has_bombs) || (has_shield && has_explosives))) || short_hook_anywhere"
-    "Stone Tower Temple Inverted Boss Key Room": trick(MM_ISTT_EYEGORE) || short_hook_anywhere || has_hover_boots
+    "Stone Tower Temple Inverted Gomess Corridor": trick(MM_ISTT_EYEGORE) || short_hook_anywhere || has_hover_boots
     "WARP_SONGS": "true"
   locations:
     "Stone Tower Temple Inverted East Middle Chest": "true"
@@ -104,7 +104,7 @@
 "Stone Tower Temple Inverted Center":
   dungeon: IST
   exits:
-    "Stone Tower Temple Inverted Boss Key Room": "(has(MASK_DEKU) && has_weapon_range) || hookshot_anywhere"
+    "Stone Tower Temple Inverted Gomess Corridor": "(has(MASK_DEKU) && has_weapon_range) || hookshot_anywhere"
     "Stone Tower Temple Inverted Entrance Ledge": "true"
     "Stone Tower Temple Inverted Death Armos Maze": "true"
     "Stone Tower Temple Inverted Center Bridge": "(trick(MM_ISTT_EYEGORE) && can_use_light_arrows && can_hookshot) || hookshot_anywhere"
@@ -112,14 +112,27 @@
   locations:
     "Stone Tower Temple Inverted Flying Pot Center 1": "((has(MASK_DEKU) && has_weapon_range) || hookshot_anywhere) && soul_flying_pot"
     "Stone Tower Temple Inverted Flying Pot Center 2": "((has(MASK_DEKU) && has_weapon_range) || hookshot_anywhere) && soul_flying_pot"
-"Stone Tower Temple Inverted Boss Key Room":
+"Stone Tower Temple Inverted Gomess Corridor":
   dungeon: IST
   events:
     ARROWS: "true"
     BOMBS_OR_BOMBCHU: "true"
+    MAGIC: "true"
   exits:
     "Stone Tower Temple Inverted Center": "has(MASK_DEKU) || hookshot_anywhere"
     "Stone Tower Temple Inverted Center Bridge": "(trick(MM_ISTT_EYEGORE) && can_use_light_arrows && can_hookshot) || hookshot_anywhere"
+    "Stone Tower Temple Inverted Boss Key Room": "true"
+    "WARP_SONGS": "true"
+  locations:
+    "Stone Tower Temple Inverted Crate Before Gomess 1": "true"
+    "Stone Tower Temple Inverted Crate Before Gomess 2": "true"
+    "Stone Tower Temple Inverted Crate Before Gomess 3": "true"
+    "Stone Tower Temple Inverted Crate Before Gomess 4": "true"
+    "Stone Tower Temple Inverted Crate Before Gomess 5": "true"
+    "Stone Tower Temple Inverted Crate Before Gomess 6": "true"
+"Stone Tower Temple Inverted Boss Key Room":
+  dungeon: IST
+  exits:
     "WARP_SONGS": "true"
   locations:
     "Stone Tower Temple Inverted Boss Key": "soul_enemy(SOUL_ENEMY_GOMESS) && can_use_light_arrows && can_fight" # Mercy fight requirements so you dont need to rely on magic and arrow drops from bats if you only have Light Arrows
@@ -127,13 +140,6 @@
     "Stone Tower Temple Inverted Pot Gomess 2": "true"
     "Stone Tower Temple Inverted Pot Gomess 3": "true"
     "Stone Tower Temple Inverted Pot Gomess 4": "true"
-    # Todo: Move to a corridor room
-    "Stone Tower Temple Inverted Crate Before Gomess 1": "true"
-    "Stone Tower Temple Inverted Crate Before Gomess 2": "true"
-    "Stone Tower Temple Inverted Crate Before Gomess 3": "true"
-    "Stone Tower Temple Inverted Crate Before Gomess 4": "true"
-    "Stone Tower Temple Inverted Crate Before Gomess 5": "true"
-    "Stone Tower Temple Inverted Crate Before Gomess 6": "true"
 "Stone Tower Temple Inverted Entrance Ledge":
   dungeon: IST
   exits:
@@ -152,7 +158,7 @@
   dungeon: IST
   exits:
     "Stone Tower Temple Inverted Pre-Boss": "soul_enemy(SOUL_ENEMY_EYEGORE) && (has_explosives || has_arrows || can_hookshot_short || has_mask_zora || has_mask_goron)"
-    "Stone Tower Temple Inverted Boss Key Room": "(trick(MM_ISTT_EYEGORE) && has_explosives) || has_mask_goron || has_hover_boots || short_hook_anywhere"
+    "Stone Tower Temple Inverted Gomess Corridor": "(trick(MM_ISTT_EYEGORE) && has_explosives) || has_mask_goron || has_hover_boots || short_hook_anywhere"
     "Stone Tower Temple Inverted Center": "(trick(MM_ISTT_EYEGORE) && has_explosives) || has_mask_goron || has_hover_boots || short_hook_anywhere"
     "Stone Tower Temple Inverted Entrance Top": "small_keys_st(4)"
     "WARP_SONGS": "true"

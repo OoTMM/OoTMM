@@ -32,13 +32,13 @@
     "Stone Tower Temple West Garden": "can_play_emptiness && has_mask_goron && (has_explosives || trick_keg_explosives)"
     "WARP_SONGS": "true"
   locations:
-    "Stone Tower Temple Crate Maze Large 1": "true"
-    "Stone Tower Temple Crate Maze Large 2": "true"
-    "Stone Tower Temple Crate Maze Large 3": "true"
-    "Stone Tower Temple Crate Maze Large 4": "true"
-    "Stone Tower Temple Crate Maze Large 5": "true"
-    "Stone Tower Temple Crate Maze Small 1": "true"
-    "Stone Tower Temple Crate Maze Small 2": "true"
+    "Stone Tower Temple Crate Maze Large 1": "has_explosives || trick_keg_explosives"
+    "Stone Tower Temple Crate Maze Large 2": "has_explosives || trick_keg_explosives"
+    "Stone Tower Temple Crate Maze Large 3": "has_explosives || trick_keg_explosives"
+    "Stone Tower Temple Crate Maze Large 4": "has_explosives || trick_keg_explosives"
+    "Stone Tower Temple Crate Maze Large 5": "has_explosives || trick_keg_explosives"
+    "Stone Tower Temple Crate Maze Small 1": "has_explosives || trick_keg_explosives"
+    "Stone Tower Temple Crate Maze Small 2": "has_explosives || trick_keg_explosives"
 "Stone Tower Temple West Garden":
   dungeon: ST
   exits:
@@ -81,15 +81,14 @@
   dungeon: ST
   exits:
     "Stone Tower Temple West Garden": "small_keys_st(4) || (small_keys_st(3) && has_mask_goron && (has_explosives || trick_keg_explosives) && can_play_emptiness)"
-    "Stone Tower Temple Center": "has_mask_zora || soul_enemy(SOUL_ENEMY_DEXIHAND) || (has_tunic_zora && has_iron_boots && can_hookshot) || (has_tunic_zora && has_iron_boots && short_hook_anywhere)"
+    "Stone Tower Temple Center": "has_mask_zora || soul_enemy(SOUL_ENEMY_DEXIHAND) || (has_tunic_zora && has_iron_boots && can_hookshot)"
+    "Stone Tower Temple Water Room": "underwater_walking || can_dive_small"
     "Stone Tower Temple Water Bridge": "(can_goron_bomb_jump && can_use_ice_arrows) || short_hook_anywhere"
     "WARP_SONGS": "true"
   locations:
-    "Stone Tower Temple Center Sun Block Chest": "short_hook_anywhere || (can_goron_bomb_jump && can_use_ice_arrows && can_use_light_arrows) || (((has(MASK_DEKU) || has_explosives || (has_magic && (has_weapon && has(SPIN_UPGRADE))) || has_sword_level(3) || has(GREAT_FAIRY_SWORD) || can_use_ice_arrows) && (has_mask_zora || soul_enemy(SOUL_ENEMY_DEXIHAND))) && can_use_light_arrows)"
+    "Stone Tower Temple Center Sun Block Chest": "short_hook_anywhere || (can_use_light_arrows && ((can_goron_bomb_jump && can_use_ice_arrows) || event(ST_WATER_CRYSTAL)))"
     "Stone Tower Temple Rupee Center Room Left": "can_use_light_arrows || short_hook_anywhere"
-    "Stone Tower Temple Crate Water 1": "true"
-    "Stone Tower Temple Crate Water 2": "true"
-    "Stone Tower Temple Crate Water 3": "true"
+    "Stone Tower Temple Rupee Center Room Right": "can_goron_bomb_jump && can_use_ice_arrows"
 "Stone Tower Temple Center":
   dungeon: ST
   exits:
@@ -97,11 +96,15 @@
     "Stone Tower Temple Center Ledge": "has_mask_zora"
     "Stone Tower Temple Water Bridge": "(can_goron_bomb_jump && can_use_ice_arrows) || short_hook_anywhere"
     "WARP_SONGS": "true"
+  events:
+    ST_WATER_CRYSTAL: "((has_mask_zora || has(MASK_DEKU) || can_use_ice_arrows) && can_use_light_arrows) || has_explosives || (has_magic && has_weapon && has(SPIN_UPGRADE)) || has_sword_level(3) || has(GREAT_FAIRY_SWORD)"
   locations:
     "Stone Tower Temple Center Across Water Chest": "true"
     "Stone Tower Temple Center Sun Block Chest": "((has_mask_zora || (can_goron_bomb_jump && can_use_ice_arrows)) && can_use_light_arrows) || short_hook_anywhere"
-    # TODO: From the left you don't need zora probably
     "Stone Tower Temple Rupee Center Room Right": "((has_mask_zora || has(MASK_DEKU) || can_use_ice_arrows) && can_use_light_arrows) || short_hook_anywhere"
+    "Stone Tower Temple Crate Water 1": "true"
+    "Stone Tower Temple Crate Water 2": "true"
+    "Stone Tower Temple Crate Water 3": "true"
 "Stone Tower Temple Water Room":
   dungeon: ST
   exits:
@@ -133,8 +136,8 @@
     "Stone Tower Temple Mirrors Room Right Chest": "(has_mask_goron && has_mirror_shield) || can_use_light_arrows || short_hook_anywhere"
     "Stone Tower Temple Pot Mirror Room 1": "true"
     "Stone Tower Temple Pot Mirror Room 2": "true"
-    "Stone Tower Temple Crate Mirrors 1": "true"
-    "Stone Tower Temple Crate Mirrors 2": "true"
+    "Stone Tower Temple Crate Mirrors 1": "(has_mask_goron && has_mirror_shield) || can_use_light_arrows || short_hook_anywhere"
+    "Stone Tower Temple Crate Mirrors 2": "(has_mask_goron && has_mirror_shield) || can_use_light_arrows || short_hook_anywhere"
 "Stone Tower Temple Wind Room":
   dungeon: ST
   exits:

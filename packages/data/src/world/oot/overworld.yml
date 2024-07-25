@@ -1150,6 +1150,7 @@
     "Kakariko GS House of Skulltula": "gs_night && is_child"
     "Kakariko GS Bazaar": "gs_night && is_child"
     "Kakariko GS Ladder": "gs_night && is_child && (can_use_slingshot || has_bombchu || can_longshot || (climb_anywhere && ((has_weapon || can_use_sticks) || can_use_din)) || (time_travel_at_will && can_use_din))"
+    # TODO: Some of these pots and crates should be in the Kakariko Back region
     "Kakariko Pot 01": "is_child"
     "Kakariko Pot 02": "is_child"
     "Kakariko Pot 03": "is_child"
@@ -2272,7 +2273,6 @@
     "Gerudo Fortress Crate Main 4": "true"
     "Gerudo Fortress Crate Main 5": "true"
     "Gerudo Fortress Crate Main 6": "true"
-    "Gerudo Fortress Crate Jail Top": "is_adult && can_hookshot"
     "Gerudo Fortress Crate Archery 01": "is_child || has(GERUDO_CARD)"
     "Gerudo Fortress Crate Archery 02": "is_child || has(GERUDO_CARD)"
     "Gerudo Fortress Crate Archery 03": "is_child || has(GERUDO_CARD)"
@@ -2346,7 +2346,8 @@
   exits:
     "Gerudo Fortress Exterior": "true"
     "Gerudo Fortress Lower-Left Ledge": "true"
-  #locations:
+  locations:
+    "Gerudo Fortress Crate Jail Top": "is_adult"
     #"Gerudo Fortress Unintended PoH": "is_child"
 "Fortress Near Wasteland":
   region: GERUDO_FORTRESS
@@ -2393,12 +2394,13 @@
     "Haunted Wasteland Crate After Pit 1": "true"
     "Haunted Wasteland Crate After Pit 2": "true"
     "Haunted Wasteland Crate After Pit 3": "true"
-    "Haunted Wasteland Crate Deep": "has_lens_strict || trick(OOT_BLIND_WASTELAND)"
 "Haunted Wasteland End":
   region: HAUNTED_WASTELAND
   exits:
     "Haunted Wasteland Structure": "trick(OOT_BLIND_WASTELAND)"
     "Desert Colossus": "true"
+  locations:
+    "Haunted Wasteland Crate Deep": "true"
 "Desert Colossus":
   region: DESERT_COLOSSUS
   time: flow

@@ -25,12 +25,9 @@
   dungeon: Spirit
   exits:
     "Spirit Temple": "is_child"
-    "Spirit Temple Child Climb": "is_child && cond(!setting(climbMostSurfacesOot, off), (small_keys_spirit(1) && can_reflect_light && has_explosives) || small_keys_spirit(2), small_keys_spirit(1))" #1 is safe if you have the means to lower the light platform, otherwise 2 is safe.
     "Spirit Temple Child Left": "soul_keese && soul_armos && (can_use_sticks || has_explosives_or_hammer || ((can_boomerang || has_nuts) && (has_weapon || can_use_slingshot)) || time_travel_at_will)"
     "Spirit Temple Child Right": "soul_keese && soul_armos && (can_use_sticks || has_explosives_or_hammer || ((can_boomerang || has_nuts) && (has_weapon || can_use_slingshot)) || time_travel_at_will)"
-  locations:
-    "Spirit Temple Crate 1": "true"
-    "Spirit Temple Crate 2": "true"
+    "Spirit Temple Child Crawlspace": "is_child"
 "Spirit Temple Child Left":
   dungeon: Spirit
   exits:
@@ -76,10 +73,19 @@
     "Spirit Temple Pot Child Anubis Room 2": "true"
     "Spirit Temple Pot Child Anubis Room 3": "true"
     "Spirit Temple Pot Child Anubis Room 4": "true"
+"Spirit Temple Child Crawlspace":
+  dungeon: Spirit
+  exits:
+    "Spirit Temple Child Entrance": "is_child"
+    "Spirit Temple Child Climb": "cond(!setting(climbMostSurfacesOot, off), (small_keys_spirit(1) && can_reflect_light && has_explosives) || small_keys_spirit(2), small_keys_spirit(1))" #1 is safe if you have the means to lower the light platform, otherwise 2 is safe.
+  locations:
+    "Spirit Temple Crate 1": "is_child"
+    "Spirit Temple Crate 2": "is_child"
 "Spirit Temple Child Climb":
   dungeon: Spirit
   exits:
     "Spirit Temple Statue": "has_explosives"
+    "Spirit Temple Child Crawlspace": "small_keys_spirit(5)"
   locations:
     "Spirit Temple Child Climb 1": "has_ranged_weapon_both || (climb_anywhere && (has_weapon || can_use_sticks || can_hammer)) || (event(SPIRIT_CHILD_DOOR) && (has_ranged_weapon_child || can_hookshot)) || (event(SPIRIT_ADULT_DOOR) && (has_ranged_weapon_adult || can_boomerang))"
     "Spirit Temple Child Climb 2": "has_ranged_weapon_both || (climb_anywhere && (has_weapon || can_use_sticks || can_hammer)) || (event(SPIRIT_CHILD_DOOR) && (has_ranged_weapon_child || can_hookshot)) || (event(SPIRIT_ADULT_DOOR) && (has_ranged_weapon_adult || can_boomerang))"
