@@ -52,6 +52,7 @@ export const PATCH_GROUPS = [
   'OOT_SWORDLESS_ADULT',
   'MM_FAST_MASKS',
   'OOT_FAST_BOAT',
+  'MM_WELL_OPEN_OR_REMORSELESS',
 ] as const;
 
 export type PatchGroup = typeof PATCH_GROUPS[number];

@@ -498,7 +498,6 @@ void hookPlay_Init(GameState_Play* play)
         gCustomSave.fw[gOotSave.age].pos = *pos;
     }
 
-
     if (comboIsLinkAdult())
     {
         s16* playerFormObjectIds = (s16*)0x801c2730;

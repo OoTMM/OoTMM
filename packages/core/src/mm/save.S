@@ -247,6 +247,17 @@ PATCH_START 0x801c5fc0 + 0x10 * SCE_MM_TEMPLE_STONE_TOWER_INVERTED
 .int 0x00000000
 PATCH_END
 
+PATCH_GROUP PG_MM_WELL_OPEN_OR_REMORSELESS
+
+PATCH_START 0x801c5fc0 + 0x10 * SCE_MM_BENEATH_THE_WELL
+.int 0xc0000000 | 0x00000082  /* Gibdos | final sun block & ladder */
+.int 0x000007ff               /* Gibdos */
+.int 0xffffffff               /* Chests */
+.int 0x00000000
+PATCH_END
+
+PATCH_GROUP_END
+
 /* Disable save options write */
 PATCH_START 0x8080a518
   nop

@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Behavioral setting for the Gibdos in Beneath The Well (Vanilla, Remorseless and Open).
 - Skip Kamaro teaching the dance when healing him.
 - Fast elemental arrow equip in MM.
 - Ability to choose how many stray fairies are required to obtain a reward.

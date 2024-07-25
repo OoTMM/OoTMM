@@ -78,6 +78,7 @@ function asmPatchGroups(world: World, settings: Settings) {
     OOT_SWORDLESS_ADULT: settings.swordlessAdult,
     MM_FAST_MASKS: settings.fastMasks,
     OOT_FAST_BOAT: settings.shadowFastBoat,
+    MM_WELL_OPEN_OR_REMORSELESS: settings.beneathWell !== 'vanilla',
   };
   const keys = Object.keys(groups) as PatchGroup[];
   return keys.filter((k) => groups[k]);

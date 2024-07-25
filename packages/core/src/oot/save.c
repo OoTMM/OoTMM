@@ -288,6 +288,7 @@ static void applyStartingEvents(void)
         gMmSave.permanentSceneFlags[SCE_MM_TEMPLE_GREAT_BAY].switch1 |= 0x00078000;
         gMmSave.permanentSceneFlags[SCE_MM_TEMPLE_GREAT_BAY].collectible |= 0x7c000000;
     }
+
     if (Config_Flag(CFG_MM_PRE_ACTIVATED_OWL_GB)) gMmSave.playerData.owlActivationFlags |= (1 << 0);
     if (Config_Flag(CFG_MM_PRE_ACTIVATED_OWL_ZC)) gMmSave.playerData.owlActivationFlags |= (1 << 1);
     if (Config_Flag(CFG_MM_PRE_ACTIVATED_OWL_SH)) gMmSave.playerData.owlActivationFlags |= (1 << 2);
@@ -302,6 +303,11 @@ static void applyStartingEvents(void)
     BITMAP16_SET(gSave.eventsMisc, EV_OOT_INF_OWL_LAKE_HYLIA_SPOKEN);
     BITMAP16_SET(gSave.eventsMisc, EV_OOT_INF_MALON_RANCH_SAVED);
 
+    if (Config_Flag(CFG_MM_WELL_OPEN))
+    {
+        gMmSave.permanentSceneFlags[SCE_MM_BENEATH_THE_WELL].switch0 |= 0xc0000082;
+        gMmSave.permanentSceneFlags[SCE_MM_BENEATH_THE_WELL].switch1 |= 0x000007ff;
+    }
 }
 
 void comboCreateSave(void* unk, void* buffer)
