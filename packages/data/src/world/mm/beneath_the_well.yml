@@ -72,6 +72,8 @@
   dungeon: BtW
   exits:
     "Beneath The Well Near Fountain": "true"
+  events:
+    RUPEES: "soul_keese && can_use_light_arrows"
   locations:
     "Beneath The Well Keese Chest": "can_use_lens"
 "Beneath The Well East Section":
@@ -152,12 +154,13 @@
     "Beneath The Well Sun Block": "setting(beneathWell, open) || (can_pass_gibdo && has_milk)"
   events:
     RUPEES: "(can_fight || has_weapon_range || has_explosives) && soul_wallmaster"
+    BUGS: "can_use_fire_short_range || (has_sticks && (setting(BeneathWell, open) || (has_big_poe && can_pass_gibdo)))" # No longer valid in door rando
   locations:
-    "Beneath The Well Grass Near End 1": "has_fire_sticks" # No longer valid in door rando
-    "Beneath The Well Grass Near End 2": "has_fire_sticks" # No longer valid in door rando
-    "Beneath The Well Grass Near End 3": "has_fire_sticks" # No longer valid in door rando
-    "Beneath The Well Grass Near End 4": "has_fire_sticks" # No longer valid in door rando
-    "Beneath The Well Grass Near End 5": "has_fire_sticks" # No longer valid in door rando
+    "Beneath The Well Grass Near End 1": "can_use_fire_short_range || (has_sticks && (setting(BeneathWell, open) || (has_big_poe && can_pass_gibdo)))" # No longer valid in door rando
+    "Beneath The Well Grass Near End 2": "can_use_fire_short_range || (has_sticks && (setting(BeneathWell, open) || (has_big_poe && can_pass_gibdo)))" # No longer valid in door rando
+    "Beneath The Well Grass Near End 3": "can_use_fire_short_range || (has_sticks && (setting(BeneathWell, open) || (has_big_poe && can_pass_gibdo)))" # No longer valid in door rando
+    "Beneath The Well Grass Near End 4": "can_use_fire_short_range || (has_sticks && (setting(BeneathWell, open) || (has_big_poe && can_pass_gibdo)))" # No longer valid in door rando
+    "Beneath The Well Grass Near End 5": "can_use_fire_short_range || (has_sticks && (setting(BeneathWell, open) || (has_big_poe && can_pass_gibdo)))" # No longer valid in door rando
 "Beneath The Well Sun Block":
   dungeon: BtW
   exits:
