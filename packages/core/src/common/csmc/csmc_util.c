@@ -3,6 +3,31 @@
 #include <combo/item.h>
 #include <combo/config.h>
 
+static const Color_RGB8 kColorBossKey  = { 0x00, 0x00, 0xff };
+static const Color_RGB8 kColorMajor    = { 0xff, 0xff, 0x00 };
+static const Color_RGB8 kColorKey      = { 0x44, 0x44, 0x44 };
+static const Color_RGB8 kColorSpider   = { 0xff, 0xff, 0xff };
+static const Color_RGB8 kColorFairy    = { 0xff, 0x7a, 0xfb };
+static const Color_RGB8 kColorHeart    = { 0xff, 0x00, 0x00 };
+static const Color_RGB8 kColorSoul     = { 0x34, 0x0b, 0x9c };
+static const Color_RGB8 kColorMap      = { 0xc7, 0x50, 0x00 };
+
+const Color_RGB8* csmcTypeColor(int type)
+{
+    switch (type)
+    {
+    case CSMC_BOSS_KEY: return &kColorBossKey;
+    case CSMC_MAJOR: return &kColorMajor;
+    case CSMC_KEY: return &kColorKey;
+    case CSMC_SPIDER: return &kColorSpider;
+    case CSMC_FAIRY: return &kColorFairy;
+    case CSMC_HEART: return &kColorHeart;
+    case CSMC_SOUL: return &kColorSoul;
+    case CSMC_MAP_COMPASS: return &kColorMap;
+    default: return NULL;
+    }
+}
+
 int csmcFromItem(s16 gi)
 {
     if (gi == 0)

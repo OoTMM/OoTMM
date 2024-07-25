@@ -3,14 +3,13 @@
 
 #define FLAGS 0
 
+void ObjComb_Init(Actor_ObjComb* this, GameState_Play* play);
+void ObjComb_Update(Actor_ObjComb* this, GameState_Play* play);
+
 #if defined(GAME_OOT)
 # define OBJECT             OBJECT_GAMEPLAY_FIELD_KEEP
 # define HIVE_FRAGMENT_DL   ((Gfx*)0x05009940)
 # define HIVE_DL            ((Gfx*)0x050095b0)
-
-void ObjComb_Init(Actor_ObjComb* this, GameState_Play* play);
-void ObjComb_Update(Actor_ObjComb* this, GameState_Play* play);
-void ObjComb_Draw(Actor_ObjComb* this, GameState_Play* play);
 
 void ObjComb_Break(Actor_ObjComb* this, GameState_Play* play);
 void ObjComb_ChooseItemDrop(Actor_ObjComb* this, GameState_Play* play);
@@ -186,26 +185,6 @@ void ObjComb_Update(Actor_ObjComb* this, GameState_Play* play)
     this->actionFunc(this, play);
     this->actor.shape.rot.x = Math_SinS(this->unk_1B2) * this->unk_1B0 + this->actor.home.rot.x;
 }
-
-void ObjComb_Draw(Actor_ObjComb* this, GameState_Play* play)
-{
-    OPEN_DISPS(play->gs.gfx);
-
-    Gfx_SetupDL25_Opa(play->gs.gfx);
-    Matrix_Translate(this->actor.world.pos.x, this->actor.world.pos.y + (118.0f * this->actor.scale.y), this->actor.world.pos.z, MAT_SET);
-    Matrix_RotateY(BINANG_TO_RAD(this->actor.shape.rot.y), MAT_MUL);
-    Matrix_RotateX(BINANG_TO_RAD(this->actor.shape.rot.x), MAT_MUL);
-Matrix_RotateZ(BINANG_TO_RAD(this->actor.shape.rot.z), MAT_MUL);
-    Matrix_Translate(0, -(this->actor.scale.y * 118.0f), 0, MAT_MUL);
-    Matrix_Scale(this->actor.scale.x, this->actor.scale.y, this->actor.scale.z, MAT_MUL);
-
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPDisplayList(POLY_OPA_DISP++, HIVE_DL);
-
-    Collider_UpdateSpheres(0, &this->collider);
-
-    CLOSE_DISPS();
-}
 #endif
 
 #if defined(GAME_MM)
@@ -221,10 +200,6 @@ Matrix_RotateZ(BINANG_TO_RAD(this->actor.shape.rot.z), MAT_MUL);
 
 # define HIVE_FRAGMENT_DL           ((Gfx*)0x06001040)
 # define HIVE_DL                    ((Gfx*)0x06000cb0)
-
-void ObjComb_Init(Actor_ObjComb* this, GameState_Play* play);
-void ObjComb_Update(Actor_ObjComb* this, GameState_Play* play);
-void ObjComb_Draw(Actor_ObjComb* this, GameState_Play* play);
 
 void func_8098DC44(Actor_ObjComb* this);
 void func_8098DC60(Actor_ObjComb* this, GameState_Play* play);
@@ -756,16 +731,16 @@ void ObjComb_Update(Actor_ObjComb* this, GameState_Play* play)
         }
     }
 }
+#endif
 
-void ObjComb_Draw(Actor_ObjComb* this, GameState_Play* play)
+static void ObjComb_Draw(Actor_ObjComb* this, GameState_Play* play)
 {
     OPEN_DISPS(play->gs.gfx);
     Gfx_SetupDL25_Opa(play->gs.gfx);
-    Matrix_Translate(this->actor.world.pos.x, this->actor.world.pos.y + (118.0f * this->actor.scale.y),
-                     this->actor.world.pos.z, MAT_SET);
-    Matrix_RotateYS(this->actor.shape.rot.y, MAT_MUL);
-    Matrix_RotateXS(this->actor.shape.rot.x, MAT_MUL);
-    Matrix_RotateZS(this->actor.shape.rot.z, MAT_MUL);
+    Matrix_Translate(this->actor.world.pos.x, this->actor.world.pos.y + (118.0f * this->actor.scale.y), this->actor.world.pos.z, MAT_SET);
+    Matrix_RotateY(BINANG_TO_RAD(this->actor.shape.rot.y), MAT_MUL);
+    Matrix_RotateX(BINANG_TO_RAD(this->actor.shape.rot.x), MAT_MUL);
+    Matrix_RotateZ(BINANG_TO_RAD(this->actor.shape.rot.z), MAT_MUL);
     Matrix_Translate(0.0f, -(this->actor.scale.y * 118.0f), 0.0f, MAT_MUL);
     Matrix_Scale(this->actor.scale.x, this->actor.scale.y, this->actor.scale.z, MAT_MUL);
 
@@ -775,7 +750,6 @@ void ObjComb_Draw(Actor_ObjComb* this, GameState_Play* play)
     Collider_UpdateSpheres(0, &this->collider);
     CLOSE_DISPS();
 }
-#endif
 
 static void ObjComb_Destroy(Actor_ObjComb* this, GameState_Play* play)
 {
