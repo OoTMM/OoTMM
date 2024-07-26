@@ -2367,7 +2367,7 @@ export const SETTINGS = [{
   category: 'entrances',
   type: 'boolean',
   default: false,
-  cond: (x: any) => hasMM(x) && x.erDungeons !== 'none' && !x.erPiratesWorld
+  cond: (x: any) => hasMM(x) && x.erDungeons !== 'none' && ((x.erPiratesWorld && x.erOverworld === 'none') || !x.erPiratesWorld)
 }, {
   key: 'erBeneathWell',
   name: 'Shuffle Beneath The Well with Dungeons',
@@ -2437,7 +2437,7 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false,
   description: 'Shuffle some entrances within Pirate\'s Fortress, including the main entrance.',
-  cond: (x: any) => hasMM(x) && !x.erPirateFortress && (x.erOverworld !== 'none' || x.erIndoorsExtra)
+  cond: (x: any) => hasMM(x) && (x.erOverworld !== 'none') || x.erIndoorsExtra)
 }, {
   key: 'erIndoors',
   name: 'Shuffle Interiors',
