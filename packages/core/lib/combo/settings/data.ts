@@ -2367,7 +2367,7 @@ export const SETTINGS = [{
   category: 'entrances',
   type: 'boolean',
   default: false,
-  description: 'Shuffles the main Pirate Fortress entrance among dungeons. Option disabled if the other entrances are shuffled among the overworld.'
+  description: 'Shuffles the main Pirate Fortress entrance among dungeons. Option disabled if the other entrances are shuffled among the overworld.',
   cond: (x: any) => hasMM(x) && x.erDungeons !== 'none' && ((x.erPiratesWorld && x.erOverworld === 'none') || !x.erPiratesWorld)
 }, {
   key: 'erBeneathWell',
