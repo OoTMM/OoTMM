@@ -23,6 +23,9 @@ All notable changes to this project will be documented in this file.
 - Lake Hylia Owl no longer has its slow text when you first talk to it.
 - Internal names of the music tracks, for an easier sorting in the cosmetics log.
 - Adult can now jump from the windmill to the back of Kakariko within logic.
+- Pirate Fortress Sewers Exit door now requires the Pirate Fortress Entrances option to be shuffled.
+- Pirate Fortress Sewers Gate and interior passages now require the Pirate Fortress Entrances option to be shuffled.
+- Pirate Fortress will no longer be considered a dungeon if its entrances are shuffled among the overworld.
 
 ### Fixed
 
