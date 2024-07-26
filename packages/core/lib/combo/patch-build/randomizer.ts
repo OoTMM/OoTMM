@@ -761,6 +761,9 @@ const randomizerDungeonsBits = (worldId: number, logic: LogicResult): Buffer => 
 
   for (let i = 0; i < DUNGEONS_PRECOMPLETED.length; ++i) {
     const dungeon = DUNGEONS_PRECOMPLETED[i];
+    if (this.input.settings.erPiratesWorld && world.preCompleted.has('PF')) {
+      continue;
+    }
     if (world.preCompleted.has(dungeon)) {
       preCompleted |= 1 << i;
     }
