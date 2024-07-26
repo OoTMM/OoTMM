@@ -1145,7 +1145,7 @@
     "Skulltula House": "true"
     "Shooting Gallery Adult": "(is_adult && is_day) || (time_travel_at_will && trick(OOT_ADULT_GALLERY_TT))"
     "Kakariko Rooftop": "(is_child && is_day) || can_hookshot || (is_adult && trick(OOT_PASS_COLLISION)) || climb_anywhere"
-    "Kakariko Back": "can_hookshot || has_hover_boots || (is_day && is_child) || (trick(OOT_MAN_ON_ROOF) && (is_adult || can_use_slingshot || has_bombchu)) || climb_anywhere"
+    "Kakariko Back": "is_adult || can_hookshot || has_hover_boots || is_day || (trick(OOT_MAN_ON_ROOF) && (can_use_slingshot || has_bombchu)) || climb_anywhere"
     "Kakariko Bazaar": "is_adult && is_day"
     "Kakariko Potion Shop": "is_day"
     "Windmill": "true"
