@@ -564,6 +564,7 @@ const PRESET_HELL = makeSettings({
     'OOT_GANON_CASTLE_ENTRY',
     'OOT_SHADOW_TEMPLE_STICKS',
     'OOT_WATER_GOLD_SCALE',
+    'OOT_HIVE_BOMBCHU',
     'MM_LENS',
     'MM_PALACE_BEAN_SKIP',
     'MM_DARMANI_WALL',
@@ -631,6 +632,7 @@ const PRESET_HELL = makeSettings({
     'MM_RANCH_FARORE',
     'MM_EVAN_FARORE',
     'MM_KEG_TRIAL_HEATLESS',
+    'MM_HIVE_BOMBCHU',
   ]
 });
 

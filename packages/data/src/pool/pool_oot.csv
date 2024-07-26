@@ -194,8 +194,8 @@ Kakariko Pot 06,                                            pot,            NONE
 Kakariko Pot 07,                                            pot,            NONE,                 KAKARIKO_VILLAGE,               0x000e,                     RECOVERY_HEART
 Kakariko Pot 08,                                            pot,            NONE,                 KAKARIKO_VILLAGE,               0x000f,                     RECOVERY_HEART
 Kakariko Pot 09,                                            pot,            NONE,                 KAKARIKO_VILLAGE,               0x0010,                     RECOVERY_HEART
-Kakariko Pot 10,                                            pot,            NONE,                 KAKARIKO_VILLAGE,               0x0011,                     RECOVERY_HEART
-Kakariko Pot 11,                                            pot,            NONE,                 KAKARIKO_VILLAGE,               0x0012,                     RECOVERY_HEART
+Kakariko Back Pot 1,                                        pot,            NONE,                 KAKARIKO_VILLAGE,               0x0011,                     RECOVERY_HEART
+Kakariko Back Pot 2,                                        pot,            NONE,                 KAKARIKO_VILLAGE,               0x0012,                     RECOVERY_HEART
 Kakariko Crate Child Near Trail,                            crate,          NONE,                 KAKARIKO_VILLAGE,               0x00031,                    NOTHING
 Kakariko Crate Child Near House,                            crate,          NONE,                 KAKARIKO_VILLAGE,               0x00032,                    NOTHING
 Kakariko Crate Child Near Windmill Bottom,                  crate,          NONE,                 KAKARIKO_VILLAGE,               0x00033,                    NOTHING

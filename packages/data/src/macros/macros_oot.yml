@@ -299,7 +299,8 @@
 "hookshot_anywhere": "can_hookshot && setting(hookshotAnywhereOot, logical)"
 "longshot_anywhere": "can_longshot && setting(hookshotAnywhereOot, logical)"
 "evade_gerudo": "can_use_bow || can_hookshot || has(GERUDO_CARD) || can_use_mask_stone"
-"break_hive": "can_collect_distance"
+"break_hive_low": "can_collect_distance || has_bombs || (has_bombchu && trick(OOT_HIVE_BOMBCHU))"
+"break_hive_high": "can_collect_distance || (has_bombchu && trick(OOT_HIVE_BOMBCHU))"
 
 # Events
 "ganon_trial_light": "!setting(ganonTrials, Light) || event(GANON_TRIAL_LIGHT)"

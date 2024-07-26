@@ -29,6 +29,7 @@ All notable changes to this project will be documented in this file.
 - Long-standing issue where Anju's reservation worked inconsistently.
 - Title cards not being displayed on game transitions.
 - MQ Forest Temple freestanding hearts logic issue.
+- The two pots next to the hag's potion shop in Kakariko now check for being in the back.
 
 ## [24.1] - 2024-07-11
 

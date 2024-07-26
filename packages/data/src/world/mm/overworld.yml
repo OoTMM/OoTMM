@@ -969,8 +969,8 @@
     "Termina Field Bio Baba Grotto": "has_mask_zora || ((underwater_walking || can_dive_big || (trick(MM_BIO_BABA_LUCK) && soul_enemy(SOUL_ENEMY_BIO_BABA))) && (has_weapon_range || (has_bombs && soul_enemy(SOUL_ENEMY_BIO_BABA)) || (has_bombchu && trick(MM_BIO_BABA_CHU))))"
     "Bio Baba Grotto Grass 1": "true"
     "Bio Baba Grotto Grass 2": "true"
-    "Termina Field Bio Baba Grotto Hive 1": "has_mask_zora || (break_hive && (underwater_walking || can_dive_big))"
-    "Termina Field Bio Baba Grotto Hive 2": "has_mask_zora || (break_hive && (underwater_walking || can_dive_big))"
+    "Termina Field Bio Baba Grotto Hive Middle": "has_mask_zora || ((break_hive || (has_bombs && soul_enemy(SOUL_ENEMY_BIO_BABA)) || (has_bombchu && trick(MM_BIO_BABA_CHU))) && (underwater_walking || can_dive_big || hookshot_anywhere || (short_hook_anywhere && soul_enemy(SOUL_ENEMY_BIO_BABA))))"
+    "Termina Field Bio Baba Grotto Hive Left": "has_mask_zora || ((break_hive || (has_bombs && soul_enemy(SOUL_ENEMY_BIO_BABA)) || (has_bombchu && trick(MM_BIO_BABA_CHU))) && (underwater_walking || can_dive_big || short_hook_anywhere))"
 "Dodongo Grotto":
   region: ENTRANCE
   exits:
@@ -1103,7 +1103,7 @@
     "Termina Field Cow Grotto Grass 70": "true"
     "Termina Field Cow Grotto Grass 71": "true"
     "Termina Field Cow Grotto Grass 72": "true"
-    "Termina Field Cow Grotto Hive": "break_hive"
+    "Termina Field Cow Grotto Hive": "break_hive || (has_bombchu && trick(MM_HIVE_BOMBCHU))"
 "Swamp Gossip Grotto":
   region: ENTRANCE
   events:
@@ -1158,7 +1158,7 @@
     "Ocean Gossip Grotto Grass 3": "true"
     "Ocean Gossip Grotto Grass 4": "true"
     "Ocean Gossip Grotto Grass 5": "true"
-    "Ocean Gossip Grotto Hive": "break_hive"
+    "Ocean Gossip Grotto Hive": "break_hive || (has_bombchu && trick(MM_HIVE_BOMBCHU))"
   gossip:
     "Termina Field Gossip Grotto Leftmost": "true"
     "Termina Field Gossip Grotto Left-Center": "true"
@@ -1332,7 +1332,7 @@
     "Southern Swamp Grass Near Witch 2": "true"
     "Southern Swamp Rupee 1": "has(MASK_DEKU) || is_tall || short_hook_anywhere || has_hover_boots"
     "Southern Swamp Rupee 2": "has(MASK_DEKU) || is_tall || short_hook_anywhere || has_hover_boots"
-    "Southern Swamp Hive": "is_swamp_poisoned && break_hive && (event(BOAT_RIDE) || has_arrows || can_hookshot_short || can_use_din)"
+    "Southern Swamp Hive": "is_swamp_poisoned && (has_mask_zora || can_use_deku_bubble || has_arrows || can_hookshot || ((is_adult || has_hover_boots) && (can_hookshot_short || (has_bombchu && trick(MM_HIVE_BOMBCHU)))))"
   gossip:
     "Southern Swamp Gossip": "true"
 "Swamp Back":
@@ -1805,7 +1805,7 @@
     "Mountain Village Keaton Grass Reward 8": "is_spring && keaton_grass_hard"
     "Mountain Village Keaton Grass Reward 9": "is_spring && keaton_grass_hard"
     "Mountain Village Rupee": "is_spring && has_mask_goron"
-    "Mountain Village Hive": "is_spring && break_hive"
+    "Mountain Village Hive": "is_spring && (break_hive || (has_bombchu && trick(MM_HIVE_BOMBCHU)))"
 "Mountain Village Elder":
   region: NONE
   exits:
@@ -2573,7 +2573,7 @@
     "Great Bay Cow Grotto Grass 70": "true"
     "Great Bay Cow Grotto Grass 71": "true"
     "Great Bay Cow Grotto Grass 72": "true"
-    "Great Bay Cow Grotto Hive": "break_hive"
+    "Great Bay Cow Grotto Hive": "break_hive || (has_bombchu && trick(MM_HIVE_BOMBCHU))"
 "Fisher's Hut":
   region: ENTRANCE
   exits:

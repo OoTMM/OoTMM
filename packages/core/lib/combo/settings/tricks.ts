@@ -324,6 +324,11 @@ export const TRICKS: Tricks = {
     name: "Enter Zelda's Courtyard using Age Swap in Ganon's Castle",
     tooltip: "Exiting Ganon's Castle as Child puts you in front of the crawlspace to Zelda. This will allow Age Swap to be logical for doing this.",
   },
+  OOT_HIVE_BOMBCHU: {
+    game: 'oot',
+    name: "Destroy Beehives using Bombchu (OOT)",
+    tooltip: "Use some careful timing with a Bombchu to blow up the beehives across Hyrule.",
+  },
   MM_LENS: {
     game: 'mm',
     name: 'Fewer Lens Requirements (MM)',
@@ -585,8 +590,8 @@ export const TRICKS: Tricks = {
   },
   MM_BIO_BABA_CHU: {
     game: 'mm',
-    name: 'Destroy the Bio Baba Grotto Hive with a Bombchu',
-    tooltip: 'The hive in this grotto can be destroyed with a precise bombchu toss.',
+    name: 'Destroy the Bio Baba Grotto Hives with a Bombchu',
+    tooltip: 'The hives in this grotto can be destroyed with a precise bombchu toss.',
   },
   MM_BIO_BABA_LUCK: {
     game: 'mm',
@@ -706,6 +711,11 @@ export const TRICKS: Tricks = {
     game: 'oot',
     name: "Megaflips (OoT)",
     glitch: true,
+  },
+  MM_HIVE_BOMBCHU: {
+    game: 'mm',
+    name: "Destroy Beehives using Bombchu (MM)",
+    tooltip: "Use some careful timing with a Bombchu to blow up the beehives across Termina.",
   },
 };
 

@@ -156,8 +156,8 @@ Termina Field Pillar Grotto Grass 14,                   grass,          NONE,   
 Termina Field Peahat Grotto,                            chest,          NONE,                   GROTTOS,                      0x04,                       HEART_PIECE
 Termina Field Dodongo Grotto,                           chest,          NONE,                   GROTTOS,                      0x00,                       HEART_PIECE
 Termina Field Bio Baba Grotto,                          collectible,    NONE,                   GROTTOS,                      0x02,                       HEART_PIECE
-Termina Field Bio Baba Grotto Hive 1,                   hive,           NONE,                   GROTTOS,                      0x00b09,                    RUPEE_BLUE
-Termina Field Bio Baba Grotto Hive 2,                   hive,           NONE,                   GROTTOS,                      0x00b0a,                    NOTHING
+Termina Field Bio Baba Grotto Hive Middle,              hive,           NONE,                   GROTTOS,                      0x00b09,                    RUPEE_BLUE
+Termina Field Bio Baba Grotto Hive Left,                hive,           NONE,                   GROTTOS,                      0x00b0a,                    NOTHING
 Termina Field Scrub,                                    npc,            NONE,                   GROTTOS,                      SCRUB_TELESCOPE,            HEART_PIECE
 Termina Field Scrub Pot,                                pot,            NONE,                   GROTTOS,                      0x0903,                     RECOVERY_HEART
 Termina Field Scrub Crate,                              crate,          NONE,                   GROTTOS,                      0x00900,                    NOTHING
