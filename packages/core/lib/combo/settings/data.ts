@@ -2437,7 +2437,7 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false,
   description: 'Shuffle some entrances within Pirate\'s Fortress, including the main entrance.',
-  cond: (x: any) => hasMM(x) && !x.erPirateFortress && x.erOverworld !== 'none'
+  cond: (x: any) => hasMM(x) && !x.erPirateFortress && (x.erOverworld !== 'none' || erIndoorsExtra)
 }, {
   key: 'erIndoors',
   name: 'Shuffle Interiors',
