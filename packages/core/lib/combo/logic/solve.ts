@@ -1027,8 +1027,8 @@ export class LogicPassSolver {
         dungeons = [...dungeons, ...REWARDS_DUNGEONS_MM];
       }
       allDungeons.push(new Set(dungeons));
-      if {this.input.settings.erPiratesWorld} {
-        allDungeons.delete('PF');
+      if (this.input.settings.erPiratesWorld) {
+        allDungeons.pop('PF');
       }
     }
 

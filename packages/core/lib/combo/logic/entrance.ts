@@ -439,7 +439,7 @@ class WorldShuffler {
 
   private poolOverworld() {
     const pool = ['region', 'region-extra', 'region-shortcut', 'region-exit', 'overworld'];
-    if {this.settings.erPiratesWorld} pool.push('overworld-pf', 'dungeon-pf');
+    if (this.settings.erPiratesWorld) pool.push('overworld-pf', 'dungeon-pf');
     return { pool, opts: { ownGame: this.settings.erOverworld === 'ownGame' } };
   }
 
