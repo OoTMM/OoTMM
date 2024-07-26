@@ -224,11 +224,23 @@ const REWARDS_DUNGEONS_MM = [
   'ST',
   'SSH',
   'OSH',
+  'PF',
   'BtW',
   'ACoI',
   'SS',
 ];
 
+const REWARDS_DUNGEONS_MM_2 = [
+  'WF',
+  'SH',
+  'GB',
+  'ST',
+  'SSH',
+  'OSH',
+  'BtW',
+  'ACoI',
+  'SS',
+];
 type ItemPools = {
   extra: PlayerItems,
   required: PlayerItems,
@@ -1022,13 +1034,13 @@ export class LogicPassSolver {
       if (this.input.settings.games !== 'mm') {
         dungeons = [...dungeons, ...REWARDS_DUNGEONS_OOT];
       }
-      if (this.input.settings.games !== 'oot') {
+      if (this.input.settings.games !== 'oot' && !this.input.settings.erPiratesWorld) {
         dungeons = [...dungeons, ...REWARDS_DUNGEONS_MM];
       }
-      allDungeons.push(new Set(dungeons));
-      if (!this.input.settings.erPiratesWorld) {
-        allDungeons.push('PF');
+      if (this.input.settings.games !== 'oot' && this.input.settings.erPiratesWorld) {
+        dungeons = [...dungeons, ...REWARDS_DUNGEONS_MM_2];
       }
+      allDungeons.push(new Set(dungeons));
     }
 
     const rewards = shuffle(this.input.random, countMapArray(this.state.pools.required)
