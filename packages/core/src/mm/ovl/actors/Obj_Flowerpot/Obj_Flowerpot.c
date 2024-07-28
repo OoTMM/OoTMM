@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 #include <combo/global.h>
+#include <combo/custom.h>
 #include "Obj_Flowerpot.h"
 
 #define FLAGS 0
@@ -725,13 +726,85 @@ void ObjFlowerpot_Update(Actor_ObjFlowerpot* this, GameState_Play* play)
     }
 }
 
-void ObjFlowerpot_Draw(Actor_ObjFlowerpot* this, GameState_Play* play)
+static const Gfx sListLoaderPotDefault[] = {
+    gsDPLoadTextureBlock(0x06000000, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 32, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 4, 5, 0, 0),
+    gsSPEndDisplayList(),
+};
+
+static const Gfx sListLoaderPotCustom[] = {
+    gsDPLoadTextureBlock(0x09000000, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 6, 0, 0),
+    gsSPEndDisplayList(),
+};
+
+static int ObjFlowerpot_CsmcType(Actor_ObjFlowerpot* this, int slice)
+{
+    s16 gi;
+
+    gi = ObjFlowerpot_ShuffledItem(this, slice);
+    if (gi == GI_NONE)
+        return CSMC_NORMAL;
+    if (!csmcEnabled())
+        return CSMC_MAJOR;
+    return csmcFromItem(gi);
+}
+
+static void ObjFlowerpot_DrawPot(Actor_ObjFlowerpot* this, GameState_Play* play)
+{
+    int type;
+    u32 customTextureAddr;
+    void* customTexture;
+
+    OPEN_DISPS(play->gs.gfx);
+    type = ObjFlowerpot_CsmcType(this, SLICE_POT);
+    if (type == CSMC_NORMAL)
+    {
+        gSPSegment(POLY_OPA_DISP++, 0x08, sListLoaderPotDefault);
+    }
+    else
+    {
+        switch (type)
+        {
+        case CSMC_BOSS_KEY: customTextureAddr = CUSTOM_POT_BOSSKEY_SIDE_ADDR; break;
+        case CSMC_MAJOR: customTextureAddr = CUSTOM_POT_MAJOR_SIDE_ADDR; break;
+        case CSMC_KEY: customTextureAddr = CUSTOM_POT_KEY_SIDE_ADDR; break;
+        case CSMC_SPIDER: customTextureAddr = CUSTOM_POT_SPIDER_SIDE_ADDR; break;
+        case CSMC_FAIRY: customTextureAddr = CUSTOM_POT_FAIRY_SIDE_ADDR; break;
+        case CSMC_HEART: customTextureAddr = CUSTOM_POT_HEART_SIDE_ADDR; break;
+        case CSMC_SOUL: customTextureAddr = CUSTOM_POT_SOUL_SIDE_ADDR; break;
+        case CSMC_MAP_COMPASS: customTextureAddr = CUSTOM_POT_MAP_SIDE_ADDR; break;
+        default: UNREACHABLE(); break;
+        }
+
+        customTexture = comboCacheGetFile(customTextureAddr);
+        if (!customTexture)
+            return;
+        gSPSegment(POLY_OPA_DISP++, 0x08, sListLoaderPotCustom);
+        gSPSegment(POLY_OPA_DISP++, 0x09, customTexture);
+    }
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(POLY_OPA_DISP++, 0x060012e0);
+    CLOSE_DISPS();
+}
+
+static void ObjFlowerpot_DrawGrass(Actor_ObjFlowerpot* this, GameState_Play* play)
 {
     OPEN_DISPS(play->gs.gfx);
-    Gfx_SetupDL25_Opa(play->gs.gfx);
+    if ((play->roomCtx.curRoom.behaviorType1 == ROOM_BEHAVIOR_TYPE1_0) && (this->actionFunc == func_80A1C838))
+    {
+        if ((this->actor.projectedPos.z > -150.0f) && (this->actor.projectedPos.z < 400.0f))
+        {
+            func_80A1B840(&D_80A1D838[this->unk_1EB]);
+            gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        }
+    }
+    gSPDisplayList(POLY_OPA_DISP++, 0x06001408);
+    CLOSE_DISPS();
+}
 
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPDisplayList(POLY_OPA_DISP++, 0x060012E0);
+void ObjFlowerpot_Draw(Actor_ObjFlowerpot* this, GameState_Play* play)
+{
+    Gfx_SetupDL25_Opa(play->gs.gfx);
+    ObjFlowerpot_DrawPot(this, play);
 
     if ((this->actionFunc != func_80A1C838) || (this->unk_1EA & 1)) {
         Collider_UpdateSpheres(0, &this->collider);
@@ -741,19 +814,7 @@ void ObjFlowerpot_Draw(Actor_ObjFlowerpot* this, GameState_Play* play)
     }
 
     if (!(this->unk_1EA & 2))
-    {
-        if ((play->roomCtx.curRoom.behaviorType1 == ROOM_BEHAVIOR_TYPE1_0) && (this->actionFunc == func_80A1C838))
-        {
-            if ((this->actor.projectedPos.z > -150.0f) && (this->actor.projectedPos.z < 400.0f))
-            {
-                func_80A1B840(&D_80A1D838[this->unk_1EB]);
-                gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-            }
-        }
-        gSPDisplayList(POLY_OPA_DISP++, 0x06001408);
-    }
-
-    CLOSE_DISPS();
+        ObjFlowerpot_DrawGrass(this, play);
 }
 
 ActorInit ObjFlowerpot_InitVars =

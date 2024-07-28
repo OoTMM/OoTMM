@@ -1,0 +1,11 @@
+#include <combo.h>
+
+PATCH_OBJECT OBJECT_FLOWERPOT, 0x1378
+.quad 0xde00000008000000
+.quad 0x0
+.quad 0x0
+.quad 0x0
+.quad 0x0
+.quad 0x0
+.quad 0x0
+PATCH_END
