@@ -726,16 +726,6 @@ void ObjFlowerpot_Update(Actor_ObjFlowerpot* this, GameState_Play* play)
     }
 }
 
-static const Gfx sListLoaderPotDefault[] = {
-    gsDPLoadTextureBlock(0x06000000, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 32, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 4, 5, 0, 0),
-    gsSPEndDisplayList(),
-};
-
-static const Gfx sListLoaderPotCustom[] = {
-    gsDPLoadTextureBlock(0x09000000, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 6, 0, 0),
-    gsSPEndDisplayList(),
-};
-
 static int ObjFlowerpot_CsmcType(Actor_ObjFlowerpot* this, int slice)
 {
     s16 gi;
@@ -747,6 +737,16 @@ static int ObjFlowerpot_CsmcType(Actor_ObjFlowerpot* this, int slice)
         return CSMC_MAJOR;
     return csmcFromItem(gi);
 }
+
+static const Gfx sListLoaderPotDefault[] = {
+    gsDPLoadTextureBlock(0x06000000, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 32, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 4, 5, 0, 0),
+    gsSPEndDisplayList(),
+};
+
+static const Gfx sListLoaderPotCustom[] = {
+    gsDPLoadTextureBlock(0x09000000, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 6, 0, 0),
+    gsSPEndDisplayList(),
+};
 
 static void ObjFlowerpot_DrawPot(Actor_ObjFlowerpot* this, GameState_Play* play)
 {
@@ -786,9 +786,39 @@ static void ObjFlowerpot_DrawPot(Actor_ObjFlowerpot* this, GameState_Play* play)
     CLOSE_DISPS();
 }
 
+static const Gfx sListLoaderGrassDefault[] = {
+    gsDPLoadTextureBlock(0x06000800, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 5, 5, 0, 0),
+    gsSPEndDisplayList(),
+};
+
+static const Gfx sListLoaderGrassCustom[] = {
+    gsDPLoadTextureBlock(0x09000000, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 5, 5, 0, 0),
+    gsSPEndDisplayList(),
+};
+
 static void ObjFlowerpot_DrawGrass(Actor_ObjFlowerpot* this, GameState_Play* play)
 {
+    int type;
+    void* customTexture;
+    const Color_RGB8* color;
+
     OPEN_DISPS(play->gs.gfx);
+    type = ObjFlowerpot_CsmcType(this, SLICE_GRASS);
+    if (type == CSMC_NORMAL)
+    {
+        gSPSegment(POLY_OPA_DISP++, 0x08, sListLoaderGrassDefault);
+    }
+    else
+    {
+        customTexture = comboCacheGetFile(CUSTOM_GRASS_ALT_ADDR);
+        if (!customTexture)
+            return;
+        color = csmcTypeColor(type);
+        gSPSegment(POLY_OPA_DISP++, 0x08, sListLoaderGrassCustom);
+        gSPSegment(POLY_OPA_DISP++, 0x09, customTexture);
+        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0x80, color->r, color->g, color->b, 255);
+    }
+
     if ((play->roomCtx.curRoom.behaviorType1 == ROOM_BEHAVIOR_TYPE1_0) && (this->actionFunc == func_80A1C838))
     {
         if ((this->actor.projectedPos.z > -150.0f) && (this->actor.projectedPos.z < 400.0f))
