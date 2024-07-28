@@ -1236,6 +1236,10 @@
     "Road to Southern Swamp Grass Pack 2 Grass 09": "true"
     "Road to Southern Swamp Grass 1": "true"
     "Road to Southern Swamp Grass 2": "true"
+    "Road to Southern Swamp Potted Plant 1 Pot": "true"
+    "Road to Southern Swamp Potted Plant 1 Grass": "true"
+    "Road to Southern Swamp Potted Plant 2 Pot": "true"
+    "Road to Southern Swamp Potted Plant 2 Grass": "true"
   gossip:
     "Road to Southern Swamp Gossip": "true"
 "Swamp Archery":
@@ -1810,6 +1814,10 @@
     "Mountain Village Keaton Grass Reward 9": "is_spring && keaton_grass_hard"
     "Mountain Village Rupee": "is_spring && has_mask_goron"
     "Mountain Village Hive": "is_spring && (break_hive || (has_bombchu && trick(MM_HIVE_BOMBCHU)))"
+    "Mountain Village Potted Plant 1 Pot": "is_day"
+    "Mountain Village Potted Plant 1 Grass": "is_day"
+    "Mountain Village Potted Plant 2 Pot": "is_day"
+    "Mountain Village Potted Plant 2 Grass": "is_day"
 "Mountain Village Elder":
   region: NONE
   exits:
@@ -1868,6 +1876,10 @@
   locations:
     "Blacksmith Razor Blade": "soul_npc(SOUL_NPC_BLACKSMITHS) && can_use_wallet(2) && event(BLACKSMITH_ENABLED)"
     "Blacksmith Gilded Sword": "event(GOLD_DUST_USED)"
+    "Blacksmith Potted Plant 1 Pot": "is_night"
+    "Blacksmith Potted Plant 1 Grass": "is_night"
+    "Blacksmith Potted Plant 2 Pot": "is_night"
+    "Blacksmith Potted Plant 2 Grass": "is_night"
 "Twin Islands":
   region: TWIN_ISLANDS
   events:
@@ -2352,6 +2364,10 @@
     "Cucco Shack Crate 1": "true"
     "Cucco Shack Crate 2": "true"
     "Cucco Shack Crate 3": "true"
+    "Cucco Shack Potted Plant 1 Pot": "true"
+    "Cucco Shack Potted Plant 1 Grass": "true"
+    "Cucco Shack Potted Plant 2 Pot": "true"
+    "Cucco Shack Potted Plant 2 Grass": "true"
   gossip:
     "Cucco Shack Gossip": "true"
 "Doggy Racetrack": #The race is always available

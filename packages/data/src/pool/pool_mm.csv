@@ -536,6 +536,10 @@ Road to Southern Swamp Grass Pack 2 Grass 08,           grass,          NONE,   
 Road to Southern Swamp Grass Pack 2 Grass 09,           grass,          NONE,                   ROAD_SOUTHERN_SWAMP,          0x80024,                    RANDOM
 Road to Southern Swamp Grass 1,                         grass,          NONE,                   ROAD_SOUTHERN_SWAMP,          0x0002f,                    RANDOM
 Road to Southern Swamp Grass 2,                         grass,          NONE,                   ROAD_SOUTHERN_SWAMP,          0x00030,                    RANDOM
+Road to Southern Swamp Potted Plant 1 Pot,              pot,            NONE,                   ROAD_SOUTHERN_SWAMP,          0x00028,                    NOTHING
+Road to Southern Swamp Potted Plant 1 Grass,            grass,          NONE,                   ROAD_SOUTHERN_SWAMP,          0x10028,                    RECOVERY_HEART
+Road to Southern Swamp Potted Plant 2 Pot,              pot,            NONE,                   ROAD_SOUTHERN_SWAMP,          0x00029,                    NOTHING
+Road to Southern Swamp Potted Plant 2 Grass,            grass,          NONE,                   ROAD_SOUTHERN_SWAMP,          0x10029,                    RECOVERY_HEART
 Southern Swamp HP,                                      collectible,    NONE,                   SOUTHERN_SWAMP,               0x1e,                       HEART_PIECE
 Southern Swamp Scrub Deed,                              npc,            NONE,                   SOUTHERN_SWAMP,               SCRUB_SWAMP,                DEED_SWAMP
 Southern Swamp Scrub Shop,                              npc,            NONE,                   SOUTHERN_SWAMP,               SCRUB_SHOP_BEANS,           MAGIC_BEAN
@@ -881,8 +885,16 @@ Mountain Village Keaton Grass Reward 8,                 grass,          NONE,   
 Mountain Village Keaton Grass Reward 9,                 grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x8002c,                    RUPEE_RED
 Mountain Village Rupee,                                 rupee,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x00028,                    RUPEE_RED
 Mountain Village Hive,                                  hive,           NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x00024,                    NOTHING
+Mountain Village Potted Plant 1 Pot,                    pot,            NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x00023,                    NOTHING
+Mountain Village Potted Plant 1 Grass,                  grass,          NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x10023,                    RECOVERY_HEART
+Mountain Village Potted Plant 2 Pot,                    pot,            NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x00024,                    NOTHING
+Mountain Village Potted Plant 2 Grass,                  grass,          NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x10024,                    RECOVERY_HEART
 Blacksmith Razor Blade,                                 npc,            BLACKSMITH,             BLACKSMITH,                   SWORD_RAZOR,                SWORD
 Blacksmith Gilded Sword,                                npc,            BLACKSMITH,             BLACKSMITH,                   SWORD_GILDED,               SWORD
+Blacksmith Potted Plant 1 Pot,                          pot,            NONE,                   BLACKSMITH,                   0x00004,                    NOTHING
+Blacksmith Potted Plant 1 Grass,                        grass,          NONE,                   BLACKSMITH,                   0x10004,                    RECOVERY_HEART
+Blacksmith Potted Plant 2 Pot,                          pot,            NONE,                   BLACKSMITH,                   0x00008,                    NOTHING
+Blacksmith Potted Plant 2 Grass,                        grass,          NONE,                   BLACKSMITH,                   0x10008,                    RECOVERY_HEART
 Lone Peak Shrine Lens Chest,                            chest,          NONE,                   GROTTOS,                      0x01,                       LENS
 Lone Peak Shrine Boulder Chest,                         chest,          NONE,                   GROTTOS,                      0x06,                       RUPEE_RED
 Lone Peak Shrine Invisible Chest,                       chest,          NONE,                   GROTTOS,                      0x03,                       RUPEE_PURPLE
@@ -1110,6 +1122,10 @@ Cucco Shack Wonder Item 6,                              wonder,         NONE,   
 Cucco Shack Crate 1,                                    crate,          NONE,                   CUCCO_SHACK,                  0x0000e,                    NOTHING
 Cucco Shack Crate 2,                                    crate,          NONE,                   CUCCO_SHACK,                  0x0000f,                    NOTHING
 Cucco Shack Crate 3,                                    crate,          NONE,                   CUCCO_SHACK,                  0x00016,                    ARROWS_10
+Cucco Shack Potted Plant 1 Pot,                         pot,            NONE,                   CUCCO_SHACK,                  0x0000d,                    NOTHING
+Cucco Shack Potted Plant 1 Grass,                       grass,          NONE,                   CUCCO_SHACK,                  0x1000d,                    NOTHING
+Cucco Shack Potted Plant 2 Pot,                         pot,            NONE,                   CUCCO_SHACK,                  0x00017,                    NOTHING
+Cucco Shack Potted Plant 2 Grass,                       grass,          NONE,                   CUCCO_SHACK,                  0x10017,                    RUPEE_BLUE
 Doggy Racetrack Chest,                                  chest,          NONE,                   DOG_RACETRACK,                0x00,                       RUPEE_PURPLE
 Doggy Racetrack HP,                                     npc,            NONE,                   DOG_RACETRACK,                DOG_LADY_HEART_PIECE,       HEART_PIECE
 Doggy Racetrack Pot 1,                                  pot,            NONE,                   DOG_RACETRACK,                0x0009,                     RUPEE_BLUE
