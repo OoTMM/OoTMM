@@ -113,6 +113,13 @@ static s16 ObjFlowerpot_ShuffledItem(Actor_ObjFlowerpot* this, int slice)
 
 static void ObjFlowerpot_Alias(Xflag* xf)
 {
+    switch (xf->sceneId)
+    {
+    case SCE_MM_MOUNTAIN_VILLAGE_SPRING:
+        xf->sceneId = SCE_MM_MOUNTAIN_VILLAGE_WINTER;
+        xf->id -= 6;
+        break;
+    }
 }
 
 static void ObjFlowerpot_InitXflag(Actor_ObjFlowerpot* this, GameState_Play* play)
