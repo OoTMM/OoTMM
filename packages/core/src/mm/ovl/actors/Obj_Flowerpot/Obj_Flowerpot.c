@@ -1,7 +1,12 @@
 #include <combo.h>
+#include <combo/item.h>
+#include <combo/global.h>
 #include "Obj_Flowerpot.h"
 
 #define FLAGS 0
+
+#define SLICE_POT   0
+#define SLICE_GRASS 1
 
 #define ENOBJFLOWERPOT_GET_3F(thisx) ((thisx)->actor.variable & 0x3F)
 #define ENOBJFLOWERPOT_GET_7F00(thisx) (((thisx)->actor.variable >> 8) & 0x7F)
@@ -80,7 +85,70 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_F32(uncullZoneScale, 100, ICHAIN_CONTINUE),   ICHAIN_F32(uncullZoneDownward, 100, ICHAIN_STOP),
 };
 
-void func_80A1B3D0(void) {
+static void ObjFlowerpot_Xflag(Xflag* dst, int slice, Actor_ObjFlowerpot* this)
+{
+    memcpy(dst, &this->xflags, sizeof(Xflag));
+    dst->sliceId = slice;
+}
+
+static int ObjFlowerpot_IsShuffled(Actor_ObjFlowerpot* this, int slice)
+{
+    Xflag xflags;
+
+    ObjFlowerpot_Xflag(&xflags, slice, this);
+    return !!((this->isExtendedFlags & (1 << slice)) && (!comboXflagsGet(&xflags)));
+}
+
+static s16 ObjFlowerpot_ShuffledItem(Actor_ObjFlowerpot* this, int slice)
+{
+    ComboItemOverride o;
+    Xflag xf;
+
+    ObjFlowerpot_Xflag(&xf, slice, this);
+    comboXflagItemOverride(&o, &xf, 0);
+    if (o.gi && !comboXflagsGet(&xf))
+        return o.gi;
+    return 0;
+}
+
+static void ObjFlowerpot_Alias(Xflag* xf)
+{
+}
+
+static void ObjFlowerpot_InitXflag(Actor_ObjFlowerpot* this, GameState_Play* play)
+{
+    Xflag* xflag;
+
+    xflag = &this->xflags;
+    xflag->sceneId = play->sceneId;
+    xflag->setupId = g.sceneSetupId;
+    xflag->roomId = this->actor.room;
+    xflag->sliceId = 0;
+    xflag->id = this->actor.actorIndex;
+
+    ObjFlowerpot_Alias(xflag);
+
+    this->isExtendedFlags = 0;
+    for (int i = 0; i < 2; ++i)
+    {
+        if (ObjFlowerpot_ShuffledItem(this, i))
+            this->isExtendedFlags |= 1 << i;
+    }
+}
+
+static int ObjFlowerpot_DropCustom(Actor_ObjFlowerpot* this, GameState_Play* play, int slice)
+{
+    Xflag xf;
+
+    if (!ObjFlowerpot_IsShuffled(this, slice))
+        return 0;
+    ObjFlowerpot_Xflag(&xf, slice, this);
+    EnItem00_DropCustom(play, &this->actor.world.pos, &xf);
+    return 1;
+}
+
+void func_80A1B3D0(void)
+{
     s32 i;
     f32 spB4;
     f32* ptr;
@@ -168,8 +236,16 @@ void func_80A1B840(MtxF* matrix) {
     }
 }
 
-void func_80A1B914(Actor_ObjFlowerpot* this, GameState_Play* play)
+void ObjFlowerpot_PotSpawnCollectible(Actor_ObjFlowerpot* this, GameState_Play* play)
 {
+    ObjFlowerpot_DropCustom(this, play, SLICE_POT);
+}
+
+void ObjFlowerpot_GrassSpawnCollectible(Actor_ObjFlowerpot* this, GameState_Play* play)
+{
+    if (ObjFlowerpot_DropCustom(this, play, SLICE_GRASS))
+        return;
+
     if (!(this->unk_1EA & 4)) {
         s32 temp_v0 = Item_CollectibleDropTable(ENOBJFLOWERPOT_GET_3F(this));
 
@@ -196,7 +272,7 @@ void func_80A1BA04(Actor_ObjFlowerpot* this, Vec3f* arg1) {
     Matrix_MultVec3f(&D_80A1D408, arg1);
 }
 
-void func_80A1BA44(Actor_ObjFlowerpot* this, GameState_Play* play) {
+void ObjFlowerpot_Break1(Actor_ObjFlowerpot* this, GameState_Play* play) {
     s32 i;
     Vec3f spD0;
     Vec3f spC4;
@@ -246,7 +322,7 @@ void func_80A1BA44(Actor_ObjFlowerpot* this, GameState_Play* play) {
     SpawnSomeDust(play, &spD0, 30.0f, 1, 10, 40, 1);
 }
 
-void func_80A1BD80(Actor_ObjFlowerpot* this, GameState_Play* play) {
+void ObjFlowerpot_Break2(Actor_ObjFlowerpot* this, GameState_Play* play) {
     s32 i;
     Vec3f spC8;
     Vec3f spBC;
@@ -377,6 +453,7 @@ void func_80A1C62C(Actor_ObjFlowerpot* this, GameState_Play* play) {
 
 void ObjFlowerpot_Init(Actor_ObjFlowerpot* this, GameState_Play* play)
 {
+    ObjFlowerpot_InitXflag(this, play);
     Actor_ProcessInitChain(&this->actor, sInitChain);
 
     if (this->actor.shape.rot.y == 0) {
@@ -430,7 +507,7 @@ void func_80A1C838(Actor_ObjFlowerpot* this, GameState_Play* play)
         this->actor.flags |= ACTOR_FLAG_MM_10;
         if (Item_CollectibleDropTable2(ENOBJFLOWERPOT_GET_3F(this)))
         {
-            func_80A1B914(this, play);
+            ObjFlowerpot_GrassSpawnCollectible(this, play);
         }
 
         //! @bug: This function should only pass Player*: it uses *(this + 0x153), which is meant to be
@@ -438,23 +515,25 @@ void func_80A1C838(Actor_ObjFlowerpot* this, GameState_Play* play)
         Player_PlaySfx((void*)&this->actor, NA_SE_PL_PULL_UP_POT);
     } else if ((this->actor.bgCheckFlags & BGCHECKFLAG_WATER) && (this->actor.depthInWater > 19.0f)) {
         if (!(this->unk_1EA & 2)) {
-            func_80A1B914(this, play);
+            ObjFlowerpot_GrassSpawnCollectible(this, play);
             func_80A1C328(this, play);
             func_80A1B9CC(this, play);
             this->unk_1EA |= 2;
         }
-        func_80A1BD80(this, play);
+        ObjFlowerpot_PotSpawnCollectible(this, play);
+        ObjFlowerpot_Break2(this, play);
         func_80A1B994(this, play);
         Actor_Kill(&this->actor);
     } else if ((this->collider.elements[0].elem.bumperFlags & BUMP_HIT) &&
                (this->collider.elements[0].elem.acHitElem->atDmgInfo.dmgFlags & 0x058BFFBC)) {
         if (!(this->unk_1EA & 2)) {
-            func_80A1B914(this, play);
+            ObjFlowerpot_GrassSpawnCollectible(this, play);
             func_80A1C0FC(this, play);
             func_80A1B9CC(this, play);
             this->unk_1EA |= 2;
         }
-        func_80A1BA44(this, play);
+        ObjFlowerpot_PotSpawnCollectible(this, play);
+        ObjFlowerpot_Break1(this, play);
         func_80A1B994(this, play);
         Actor_Kill(&this->actor);
     } else {
@@ -463,7 +542,7 @@ void func_80A1C838(Actor_ObjFlowerpot* this, GameState_Play* play)
                 this->unk_1EA |= 2;
                 this->collider.elements[1].elem.bumperFlags &= ~BUMP_ON;
                 func_80A1C0FC(this, play);
-                func_80A1B914(this, play);
+                ObjFlowerpot_GrassSpawnCollectible(this, play);
                 func_80A1B9CC(this, play);
             }
         }
@@ -584,12 +663,13 @@ void func_80A1CEF4(Actor_ObjFlowerpot* this, GameState_Play* play)
     if ((this->actor.bgCheckFlags & (BGCHECKFLAG_GROUND | BGCHECKFLAG_GROUND_TOUCH | BGCHECKFLAG_WALL)) || sp28 ||
         (this->unk_1E8 <= 0)) {
         if (!(this->unk_1EA & 2)) {
-            func_80A1B914(this, play);
+            ObjFlowerpot_GrassSpawnCollectible(this, play);
             func_80A1C0FC(this, play);
             func_80A1B9CC(this, play);
             this->unk_1EA |= 2;
         }
-        func_80A1BA44(this, play);
+        ObjFlowerpot_PotSpawnCollectible(this, play);
+        ObjFlowerpot_Break1(this, play);
         func_80A1B994(this, play);
         Actor_Kill(&this->actor);
         return;
@@ -597,12 +677,13 @@ void func_80A1CEF4(Actor_ObjFlowerpot* this, GameState_Play* play)
 
     if (this->actor.bgCheckFlags & BGCHECKFLAG_WATER_TOUCH) {
         if (!(this->unk_1EA & 2)) {
-            func_80A1B914(this, play);
+            ObjFlowerpot_GrassSpawnCollectible(this, play);
             func_80A1C328(this, play);
             func_80A1B9CC(this, play);
             this->unk_1EA |= 2;
         }
-        func_80A1BD80(this, play);
+        ObjFlowerpot_PotSpawnCollectible(this, play);
+        ObjFlowerpot_Break2(this, play);
         func_80A1B994(this, play);
         SoundSource_PlaySfxAtFixedWorldPos(play, &this->actor.world.pos, 40, NA_SE_EV_DIVE_INTO_WATER_L);
         Actor_Kill(&this->actor);

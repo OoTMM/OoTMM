@@ -2,6 +2,7 @@
 #define OVL_OBJ_FLOWERPOT_H
 
 #include <combo/actor.h>
+#include <combo/xflags.h>
 
 typedef struct Actor_ObjFlowerpot Actor_ObjFlowerpot;
 
@@ -17,6 +18,9 @@ struct Actor_ObjFlowerpot
     u8                      unk_1EA;
     s8                      unk_1EB;
     s8                      unk_1EC;
+
+    Xflag  xflags;
+    u8     isExtendedFlags;
 };
 
 #endif

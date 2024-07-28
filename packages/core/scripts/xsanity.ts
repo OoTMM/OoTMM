@@ -1375,7 +1375,8 @@ function actorHandlerMmObjComb(checks: Check[], ra: RoomActor) {
 }
 
 function actorHandlerMmObjFlowerpot(checks: Check[], ra: RoomActor) {
-  checks.push({ roomActor: ra, sliceId: 0, item: 'NOTHING', name: 'Potted Plant', name2: 'Pot', type: 'pot' });
+  const item = mmCollectibleDrop(ra.actor.params & 0x3f);
+  checks.push({ roomActor: ra, sliceId: 0, item, name: 'Potted Plant', name2: 'Pot', type: 'pot' });
   checks.push({ roomActor: ra, sliceId: 1, item: 'NOTHING', name: 'Potted Plant', name2: 'Grass', type: 'grass' });
 }
 
