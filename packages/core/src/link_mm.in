@@ -150,6 +150,7 @@ ActorFree = 0x80102ce0;
 
 LoadObjectGi = 0x80838830;
 
+Matrix_GetCurrent = 0x80180234;
 SfxSource_PlaySfxAtFixedWorldPos = 0x800f0568;
 
 Collider_InitJntSph = 0x800e0b4c;
