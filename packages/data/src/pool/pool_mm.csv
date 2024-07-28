@@ -1112,8 +1112,8 @@ Cucco Shack Crate 2,                                    crate,          NONE,   
 Cucco Shack Crate 3,                                    crate,          NONE,                   CUCCO_SHACK,                  0x00016,                    ARROWS_10
 Cucco Shack Potted Plant 1 Pot,                         pot,            NONE,                   CUCCO_SHACK,                  0x0000d,                    NOTHING
 Cucco Shack Potted Plant 1 Grass,                       grass,          NONE,                   CUCCO_SHACK,                  0x1000d,                    NOTHING
-Cucco Shack Potted Plant 2 Pot,                         pot,            NONE,                   CUCCO_SHACK,                  0x00017,                    RUPEE_BLUE
-Cucco Shack Potted Plant 2 Grass,                       grass,          NONE,                   CUCCO_SHACK,                  0x10017,                    NOTHING
+Cucco Shack Potted Plant 2 Pot,                         pot,            NONE,                   CUCCO_SHACK,                  0x00017,                    NOTHING
+Cucco Shack Potted Plant 2 Grass,                       grass,          NONE,                   CUCCO_SHACK,                  0x10017,                    RUPEE_BLUE
 Doggy Racetrack Chest,                                  chest,          NONE,                   DOG_RACETRACK,                0x00,                       RUPEE_PURPLE
 Doggy Racetrack HP,                                     npc,            NONE,                   DOG_RACETRACK,                DOG_LADY_HEART_PIECE,       HEART_PIECE
 Doggy Racetrack Pot 1,                                  pot,            NONE,                   DOG_RACETRACK,                0x0009,                     RUPEE_BLUE
