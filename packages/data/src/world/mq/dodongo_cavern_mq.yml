@@ -141,7 +141,7 @@
   exits:
     "Dodongo Cavern Room Before Upper Lizalfos": "event(MQ_DC_UPPER_LIZALFOS_CLEAR)"
     "Dodongo Cavern Room After Upper Lizalfos": "event(MQ_DC_UPPER_LIZALFOS_CLEAR)"
-    "Dodongo Cavern Lower Lizalfos": "has_explosives_or_hammer || hookshot_anywhere || climb_anywhere"
+    #"Dodongo Cavern Lower Lizalfos": "has_explosives_or_hammer || hookshot_anywhere || climb_anywhere"
   events:
     MQ_DC_UPPER_LIZALFOS_CLEAR: "soul_lizalfos_dinalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
   locations:
@@ -150,6 +150,7 @@
     "MQ Dodongo Cavern Pot Miniboss 2": "true"
     "MQ Dodongo Cavern Pot Miniboss 3": "true"
     "MQ Dodongo Cavern Pot Miniboss 4": "true"
+    "MQ Dodongo Cavern Heart Lizalfos Room": "has_explosives_or_hammer || hookshot_anywhere || climb_anywhere" #In Lower section, putting it here too because of the lizalfos event won't trigger when starting in opposite section.
 "Dodongo Cavern Lower Tunnel":
   dungeon: DC
   exits:
@@ -179,11 +180,16 @@
   exits:
     "Dodongo Cavern Corridor Before Lower Lizalfos": "event(MQ_DC_LOWER_LIZALFOS_CLEAR)"
     "Dodongo Cavern Poe Room": "event(MQ_DC_LOWER_LIZALFOS_CLEAR)"
-    "Dodongo Cavern Upper Lizalfos": "climb_anywhere || longshot_anywhere"
+    #"Dodongo Cavern Upper Lizalfos": "climb_anywhere || longshot_anywhere"
   events:
     MQ_DC_LOWER_LIZALFOS_CLEAR: "soul_lizalfos_dinalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
   locations:
     "MQ Dodongo Cavern Heart Lizalfos Room": "true"
+    "MQ Dodongo Cavern GS Upper Lizalfos": "gs && (climb_anywhere || longshot_anywhere) && (has_explosives_or_hammer || longshot_anywhere)" #In Upper section, putting it here too because of the lizalfos event won't trigger when starting in opposite section.
+    "MQ Dodongo Cavern Pot Miniboss 1": "climb_anywhere || longshot_anywhere" #In Upper section, putting it here too because of the lizalfos event won't trigger when starting in opposite section.
+    "MQ Dodongo Cavern Pot Miniboss 2": "climb_anywhere || longshot_anywhere" #In Upper section, putting it here too because of the lizalfos event won't trigger when starting in opposite section.
+    "MQ Dodongo Cavern Pot Miniboss 3": "climb_anywhere || longshot_anywhere" #In Upper section, putting it here too because of the lizalfos event won't trigger when starting in opposite section.
+    "MQ Dodongo Cavern Pot Miniboss 4": "climb_anywhere || longshot_anywhere" #In Upper section, putting it here too because of the lizalfos event won't trigger when starting in opposite section.
 "Dodongo Cavern Poe Room":
   dungeon: DC
   exits:
