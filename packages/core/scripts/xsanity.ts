@@ -1135,54 +1135,6 @@ function outputKeatonGrassPoolMm(roomActors: RoomActors[]) {
   }
 }
 
-function outputCratesPoolOot(roomActors: RoomActors[]) {
-  let lastSceneId = -1;
-  let lastSetupId = -1;
-  for (const room of roomActors) {
-    for (const actor of room.actors) {
-      const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
-      if (actor.typeId === ACTORS_OOT.OBJ_KIBAKO || actor.typeId === ACTORS_OOT.OBJ_KIBAKO2) {
-        if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
-          console.log('');
-          console.log(`### Scene: ${scenesById('oot')[room.sceneId]}`);
-          lastSceneId = room.sceneId;
-          lastSetupId = room.setupId;
-        }
-
-        /* Large crate */
-        if (actor.typeId === ACTORS_OOT.OBJ_KIBAKO2) {
-          if (actor.params !== 0xffff)
-            continue;
-          const itemId = actor.rx & 0xff;
-          let item: string;
-          if (itemId >= ITEM00_DROPS.length) {
-            item = 'NOTHING';
-          } else {
-            item = ITEM00_DROPS[actor.rx & 0xff];
-          }
-          console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Large Crate ${decPad(actor.actorId + 1, 2)},        crate,            NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
-        }
-
-        /* Small crate */
-        if (actor.typeId === ACTORS_OOT.OBJ_KIBAKO) {
-          let item: string;
-          if (actor.params === 0xffff) {
-            item = 'NOTHING';
-          } else {
-            const itemId = actor.params & 0xff;
-            if (itemId >= ITEM00_DROPS.length) {
-              item = 'NOTHING';
-            } else {
-              item = ITEM00_DROPS[actor.params & 0xff];
-            }
-          }
-          console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Small Crate ${decPad(actor.actorId + 1, 2)},        crate,            NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
-        }
-      }
-    }
-  }
-}
-
 function outputCratesPoolMm(roomActors: RoomActors[]) {
   let lastSceneId = -1;
   let lastSetupId = -1;
@@ -1374,6 +1326,33 @@ function actorHandlerOotObjComb(checks: Check[], ra: RoomActor) {
   checks.push({ roomActor: ra, item, name: 'Hive', type: 'hive' });
 }
 
+function actorHandlerOotObjKibako(checks: Check[], ra: RoomActor) {
+  let item: string;
+  if (ra.actor.params === 0xffff) {
+    item = 'NOTHING';
+  } else {
+    const itemId = ra.actor.params & 0xff;
+    if (itemId >= ITEM00_DROPS.length) {
+      item = 'NOTHING';
+    } else {
+      item = ITEM00_DROPS[itemId];
+    }
+  }
+  checks.push({ roomActor: ra, item, name: 'Small Crate', type: 'crate' });
+}
+
+function actorHandlerOotObjKibako2(checks: Check[], ra: RoomActor) {
+  if (ra.actor.params !== 0xffff) return; /* Skulltulas */
+  const itemId = ra.actor.rx & 0xff;
+  let item: string;
+  if (itemId >= ITEM00_DROPS.length) {
+    item = 'NOTHING';
+  } else {
+    item = ITEM00_DROPS[itemId];
+  }
+  checks.push({ roomActor: ra, item, name: 'Large Crate', type: 'crate' });
+}
+
 function actorHandlerMmObjComb(checks: Check[], ra: RoomActor) {
   const flag = !!(ra.actor.params & 0x10);
   let type = 0;
@@ -1396,6 +1375,8 @@ function actorHandlerMmObjComb(checks: Check[], ra: RoomActor) {
 const ACTORS_HANDLERS_OOT = {
   [ACTORS_OOT.EN_KUSA]: actorHandlerOotEnKusa,
   [ACTORS_OOT.OBJ_COMB]: actorHandlerOotObjComb,
+  [ACTORS_OOT.OBJ_KIBAKO]: actorHandlerOotObjKibako,
+  [ACTORS_OOT.OBJ_KIBAKO2]: actorHandlerOotObjKibako2,
 };
 
 const ACTORS_HANDLERS_MM = {
@@ -1490,7 +1471,10 @@ async function build() {
   await writeAddressingTable('oot', addrTableOotMq);
   await writeAddressingTable('mm', addrTableMm);
 
-  return { oot: ootRooms, mm: mmRooms, mq: mqRooms };
+  /* Compute the MQ subset */
+  const mqRoomsOnly = mqRooms.filter(r => r.sceneId < 0x0a || r.sceneId == 0x0b || r.sceneId == 0x0d);
+
+  return { oot: ootRooms, mm: mmRooms, mq: mqRoomsOnly };
 }
 
 async function run() {
