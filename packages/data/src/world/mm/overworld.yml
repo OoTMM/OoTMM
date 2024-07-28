@@ -470,6 +470,9 @@
   stay:
     NIGHT2_PM_10_00: "false"
     NIGHT3_PM_10_00: "false"
+    # Fake start of day kicks
+    DAY2_AM_06_00: "false"
+    DAY3_AM_06_00: "false"
   exits:
     "Laundry Pool": "true"
   events:
