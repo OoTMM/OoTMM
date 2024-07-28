@@ -1,7 +1,7 @@
 import { HINTS, ENTRANCES, REGIONS, SCENES, NPC } from '@ootmm/data';
 
 import { LogicResult } from '../logic';
-import { isEntranceShuffle } from '../logic/helpers';
+import { isEntranceShuffle, isPreactivatedOwls } from '../logic/helpers';
 import { GI, DATA_HINTS_POOL } from '../data';
 import { Game } from "../config";
 import { World, WorldCheck } from '../logic/world';
@@ -1010,6 +1010,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MM_PRE_ACTIVATED_OWL_ZC: world.resolvedFlags.mmPreActivatedOwls.has('zoracape'),
     MM_PRE_ACTIVATED_OWL_IC: world.resolvedFlags.mmPreActivatedOwls.has('canyon'),
     MM_PRE_ACTIVATED_OWL_ST: world.resolvedFlags.mmPreActivatedOwls.has('tower'),
+    MM_PRE_ACTIVATED_OWL_ANY: isPreactivatedOwls(world),
     MM_WELL_OPEN: settings.beneathWell === 'open',
   };
 
