@@ -450,8 +450,6 @@
     "Trading Post Item 6": "shop_price(0x0a)"
     "Trading Post Item 7": "shop_price(0x0b)"
     "Trading Post Item 8": "shop_price(0x0c)"
-
-
 "Curiosity Shop":
   region: ENTRANCE
   exits:
@@ -469,6 +467,9 @@
     "Bomb Shop Bomb Bag 2": "shop_ex_price(0x00) && is_night3"
 "Kafei Hideout":
   region: ENTRANCE
+  stay:
+    NIGHT2_PM_10_00: "false"
+    NIGHT3_PM_10_00: "false"
   exits:
     "Laundry Pool": "true"
   events:

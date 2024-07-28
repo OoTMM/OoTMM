@@ -25,6 +25,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Logic issue with Kafei's check in seeds without shuffled interiors.
 - Starting age no longer defaults to either child or adult after generating a random starting age seed.
 - Minor collection delay for Bolero.
 - Long-standing issue where Anju's reservation worked inconsistently.
