@@ -1755,6 +1755,7 @@ Snowhead Temple Rupee 3,                                rupee,          NONE,   
 Pirate Fortress Entrance Chest 1,                       chest,          NONE,                   PIRATE_FORTRESS_ENTRANCE,     0x00,                       RUPEE_RED
 Pirate Fortress Entrance Chest 2,                       chest,          NONE,                   PIRATE_FORTRESS_ENTRANCE,     0x01,                       RUPEE_RED
 Pirate Fortress Entrance Chest 3,                       chest,          NONE,                   PIRATE_FORTRESS_ENTRANCE,     0x02,                       RUPEE_RED
+Pirate Fortress Entrance Barrel,                        barrel,         NONE,                   PIRATE_FORTRESS_ENTRANCE,     0x00007,                    NOTHING
 Pirate Fortress Sewers Chest 1,                         chest,          NONE,                   PIRATE_FORTRESS_INTERIOR,     0x01,                       RUPEE_RED
 Pirate Fortress Sewers Chest 2,                         chest,          NONE,                   PIRATE_FORTRESS_INTERIOR,     0x04,                       RUPEE_RED
 Pirate Fortress Sewers Chest 3,                         chest,          NONE,                   PIRATE_FORTRESS_INTERIOR,     0x06,                       RUPEE_BLUE
@@ -1792,9 +1793,34 @@ Pirate Fortress Interior Pot Barrel Maze 2,             pot,            NONE,   
 Pirate Fortress Interior Pot Barrel Maze 3,             pot,            NONE,                   PIRATE_FORTRESS_INTERIOR,     0x0806,                     ARROWS_10
 Pirate Fortress Interior Pot Guarded 1,                 pot,            NONE,                   PIRATE_FORTRESS_INTERIOR,     0x0d06,                     RECOVERY_HEART
 Pirate Fortress Interior Pot Guarded 2,                 pot,            NONE,                   PIRATE_FORTRESS_INTERIOR,     0x0d07,                     ARROWS_10
+Pirate Fortress Interior Barrel Hookshot Room 1,        barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00306,                    NOTHING
+Pirate Fortress Interior Barrel Hookshot Room 2,        barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00307,                    NOTHING
+Pirate Fortress Interior Barrel Aquarium,               barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00d01,                    NOTHING
+Pirate Fortress Sewers Barrel End 1,                    barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00905,                    NOTHING
+Pirate Fortress Sewers Barrel End 2,                    barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00906,                    NOTHING
+Pirate Fortress Sewers Barrel End 3,                    barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00907,                    NOTHING
+Pirate Fortress Sewers Barrel End 4,                    barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00908,                    NOTHING
+Pirate Fortress Sewers Barrel End 5,                    barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00909,                    NOTHING
+Pirate Fortress Sewers Barrel Cage Room 01,             barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b06,                    NOTHING
+Pirate Fortress Sewers Barrel Cage Room 02,             barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b07,                    NOTHING
+Pirate Fortress Sewers Barrel Cage Room 03,             barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b08,                    NOTHING
+Pirate Fortress Sewers Barrel Cage Room 04,             barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b09,                    NOTHING
+Pirate Fortress Sewers Barrel Cage Room 05,             barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b0a,                    NOTHING
+Pirate Fortress Sewers Barrel Cage Room 06,             barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b0b,                    NOTHING
+Pirate Fortress Sewers Barrel Cage Room 07,             barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b0c,                    NOTHING
+Pirate Fortress Sewers Barrel Cage Room 08,             barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b0d,                    NOTHING
+Pirate Fortress Sewers Barrel Cage Room 09,             barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b0e,                    NOTHING
+Pirate Fortress Sewers Barrel Cage Room 10,             barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b0f,                    NOTHING
+Pirate Fortress Sewers Barrel Cage Room 11,             barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b10,                    NOTHING
+Pirate Fortress Sewers Barrel Cage Room 12,             barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b11,                    NOTHING
+Pirate Fortress Sewers Barrel Cage Room 13,             barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b12,                    NOTHING
+Pirate Fortress Sewers Barrel Cage Room 14,             barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b13,                    NOTHING
+Pirate Fortress Sewers Barrel Cage Room 15,             barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b14,                    NOTHING
+Pirate Fortress Sewers Barrel Cage Room 16,             barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b15,                    NOTHING
 Pirate Fortress Interior Wonder Item Skull Forehead 1,  wonder,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00309,                    RUPEE_GREEN
 Pirate Fortress Interior Wonder Item Skull Forehead 2,  wonder,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x10309,                    RUPEE_GREEN
 Pirate Fortress Interior Wonder Item Skull Forehead 3,  wonder,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x20309,                    RUPEE_GREEN
+Pirate Fortress Interior Barrel Outside,                barrel,         NONE,                   PIRATE_FORTRESS_EXTERIOR,     0x00008,                    NOTHING
 Pirate Fortress Interior Heart 1,                       heart,          NONE,                   PIRATE_FORTRESS_EXTERIOR,     0x00020,                    RECOVERY_HEART
 Pirate Fortress Interior Heart 2,                       heart,          NONE,                   PIRATE_FORTRESS_EXTERIOR,     0x00021,                    RECOVERY_HEART
 Pirate Fortress Interior Heart 3,                       heart,          NONE,                   PIRATE_FORTRESS_EXTERIOR,     0x00022,                    RECOVERY_HEART
@@ -1929,6 +1955,24 @@ Great Bay Temple Crate Green Pipe 4,                    crate,          NONE,   
 Great Bay Temple Crate Green Pipe 5,                    crate,          NONE,                   TEMPLE_GREAT_BAY,             0x00a1a,                    MAGIC_JAR_LARGE
 Great Bay Temple Crate Green Pipe 6,                    crate,          NONE,                   TEMPLE_GREAT_BAY,             0x00a1b,                    MAGIC_JAR_LARGE
 Great Bay Temple Crate Green Pipe 7,                    crate,          NONE,                   TEMPLE_GREAT_BAY,             0x00a1c,                    MAGIC_JAR_LARGE
+Great Bay Temple Barrel Entrance 1,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00d00,                    NOTHING
+Great Bay Temple Barrel Entrance 2,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00d01,                    RECOVERY_HEART
+Great Bay Temple Barrel Entrance 3,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00d02,                    RECOVERY_HEART
+Great Bay Temple Barrel Entrance 4,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00d03,                    FLEXIBLE
+Great Bay Temple Barrel Entrance 5,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00d04,                    BOMBS_5
+Great Bay Temple Barrel Entrance 6,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00d05,                    BOMBS_5
+Great Bay Temple Barrel Entrance 7,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00d06,                    ARROWS_10
+Great Bay Temple Barrel Entrance 8,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00d07,                    ARROWS_10
+Great Bay Temple Barrel Chu Room 1,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00202,                    NOTHING
+Great Bay Temple Barrel Chu Room 2,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00203,                    RECOVERY_HEART
+Great Bay Temple Barrel Chu Room 3,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00204,                    RECOVERY_HEART
+Great Bay Temple Barrel Chu Room 4,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00205,                    BOMBS_5
+Great Bay Temple Barrel Chu Room 5,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00206,                    ARROWS_10
+Great Bay Temple Barrel Green Pipe 1 1,                 barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00c0a,                    RECOVERY_HEART
+Great Bay Temple Barrel Green Pipe 1 2,                 barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00c0b,                    BOMBS_5
+Great Bay Temple Barrel Green Pipe 1 3,                 barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00c0c,                    ARROWS_20
+Great Bay Temple Barrel Green Pipe 2 1,                 barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00906,                    MAGIC_JAR_LARGE
+Great Bay Temple Barrel Green Pipe 2 2,                 barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00907,                    MAGIC_JAR_LARGE
 Great Bay Temple Rupee Compass Room 1,                  rupee,          NONE,                   TEMPLE_GREAT_BAY,             0x00400,                    RUPEE_RED
 Great Bay Temple Rupee Compass Room 2,                  rupee,          NONE,                   TEMPLE_GREAT_BAY,             0x00401,                    RUPEE_RED
 Great Bay Temple Rupee Entrance 1,                      rupee,          NONE,                   TEMPLE_GREAT_BAY,             0x00800,                    RUPEE_RED

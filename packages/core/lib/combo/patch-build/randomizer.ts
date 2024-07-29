@@ -391,6 +391,7 @@ function checkKey(check: WorldCheck): number {
     break;
   case 'pot':
   case 'crate':
+  case 'barrel':
   case 'grass':
   case 'fairy':
   case 'hive':
@@ -411,6 +412,7 @@ function checkKey(check: WorldCheck): number {
   case 'sf':
   case 'pot':
   case 'crate':
+  case 'barrel':
   case 'grass':
   case 'fairy':
   case 'hive':
