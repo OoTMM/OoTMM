@@ -2185,12 +2185,12 @@ MQ Fire Temple Wonder Item Staircase,                       wonder,         NONE
 MQ Fire Temple Wonder Item Torch Room,                      wonder,         NONE,                 TEMPLE_FIRE,                    0x01000,                    FLEXIBLE
 MQ Fire Temple Wonder Item Boss Key Room Hookshot,          wonder,         NONE,                 TEMPLE_FIRE,                    0x01309,                    FLEXIBLE
 MQ Fire Temple Wonder Item Boss Key Room Bow,               wonder,         NONE,                 TEMPLE_FIRE,                    0x0130a,                    FLEXIBLE
-MQ Fire Temple Room 0x02 Large Crate 11,                    crate,          NONE,                 TEMPLE_FIRE,                    0x0020a,                    RUPEE_GREEN
-MQ Fire Temple Room 0x02 Large Crate 12,                    crate,          NONE,                 TEMPLE_FIRE,                    0x0020b,                    RUPEE_GREEN
-MQ Fire Temple Room 0x02 Large Crate 13,                    crate,          NONE,                 TEMPLE_FIRE,                    0x0020c,                    RUPEE_GREEN
-MQ Fire Temple Room 0x02 Large Crate 14,                    crate,          NONE,                 TEMPLE_FIRE,                    0x0020d,                    RUPEE_GREEN
-MQ Fire Temple Room 0x02 Large Crate 15,                    crate,          NONE,                 TEMPLE_FIRE,                    0x0020e,                    RUPEE_GREEN
-MQ Fire Temple Room 0x02 Large Crate 16,                    crate,          NONE,                 TEMPLE_FIRE,                    0x0020f,                    RUPEE_GREEN
+MQ Fire Temple Pre-Boss Room Tall Ledge Low Large Crate 1,  crate,          NONE,                 TEMPLE_FIRE,                    0x0020a,                    RUPEE_GREEN
+MQ Fire Temple Pre-Boss Room Tall Ledge Low Large Crate 2,  crate,          NONE,                 TEMPLE_FIRE,                    0x0020b,                    RUPEE_GREEN
+MQ Fire Temple Pre-Boss Room Tall Ledge Middle Large Crate, crate,          NONE,                 TEMPLE_FIRE,                    0x0020c,                    RUPEE_GREEN
+MQ Fire Temple Pre-Boss Room Near Cage Large Crate 1,       crate,          NONE,                 TEMPLE_FIRE,                    0x0020d,                    RUPEE_GREEN
+MQ Fire Temple Pre-Boss Room Near Cage Large Crate 2,       crate,          NONE,                 TEMPLE_FIRE,                    0x0020e,                    RUPEE_GREEN
+MQ Fire Temple Pre-Boss Room Tall Ledge Top Large Crate,    crate,          NONE,                 TEMPLE_FIRE,                    0x0020f,                    RUPEE_GREEN
 MQ Fire Temple Room 0x04 Large Crate 11,                    crate,          NONE,                 TEMPLE_FIRE,                    0x0040a,                    RUPEE_GREEN
 MQ Fire Temple Room 0x04 Large Crate 12,                    crate,          NONE,                 TEMPLE_FIRE,                    0x0040b,                    RUPEE_GREEN
 MQ Fire Temple Room 0x04 Large Crate 13,                    crate,          NONE,                 TEMPLE_FIRE,                    0x0040c,                    RUPEE_GREEN
