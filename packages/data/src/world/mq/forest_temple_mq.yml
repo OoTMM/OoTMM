@@ -126,6 +126,9 @@
     "MQ Forest Temple Pot Blue Poe 1": "soul_enemy(SOUL_ENEMY_STALFOS) && soul_wolfos"
     "MQ Forest Temple Pot Blue Poe 2": "soul_enemy(SOUL_ENEMY_STALFOS) && soul_wolfos"
     "MQ Forest Temple Pot Blue Poe 3": "soul_enemy(SOUL_ENEMY_STALFOS) && soul_wolfos"
+    "MQ Forest Temple Spinning Red Pool Room Small Crate 1": "soul_enemy(SOUL_ENEMY_STALFOS) && soul_wolfos && has_weapon && small_keys_forest(5)"
+    "MQ Forest Temple Spinning Red Pool Room Small Crate 2": "soul_enemy(SOUL_ENEMY_STALFOS) && soul_wolfos && has_weapon && small_keys_forest(5)"
+    "MQ Forest Temple Spinning Red Pool Room Small Crate 3": "soul_enemy(SOUL_ENEMY_STALFOS) && soul_wolfos && has_weapon && small_keys_forest(5)"
 "Forest Temple Falling Ceiling":
   dungeon: Forest
   events:
