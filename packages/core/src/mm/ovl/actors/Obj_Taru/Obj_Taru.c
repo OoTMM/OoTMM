@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/global.h>
 #include <combo/item.h>
+#include <combo/custom.h>
 #include "Obj_Taru.h"
 
 #define FLAGS 0
@@ -287,15 +288,87 @@ void ObjTaru_Update(Actor_ObjTaru* this, GameState_Play* play)
     this->actionFunc(this, play);
 }
 
-void ObjTaru_Draw(Actor_ObjTaru* this, GameState_Play* play) {
-    Gfx* dList;
+static int ObjTaru_CsmcType(Actor_ObjTaru* this)
+{
+    ComboItemOverride o;
 
-    if (OBJ_TARU_GET_80(this)) {
-        dList = (Gfx*)0x06001140;
-    } else {
-        dList = (Gfx*)0x06000420;
+    if (!ObjTaru_IsShuffled(this))
+        return CSMC_NORMAL;
+
+    if (!csmcEnabled())
+        return CSMC_MAJOR;
+
+    comboXflagItemOverride(&o, &this->xflag, 0);
+    return csmcFromItem(o.gi);
+}
+
+static const Gfx sListLoaderSideDefault[] = {
+    gsDPLoadTextureBlock(0x06000670, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 32, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 4, 5, 0, 0),
+    gsSPEndDisplayList(),
+};
+
+static const Gfx sListLoaderTopDefault[] = {
+    gsDPLoadTextureBlock(0x06000A70, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 16, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 5, 4, 0, 0),
+    gsSPEndDisplayList(),
+};
+
+static const Gfx sListLoaderCustom[] = {
+    gsDPLoadTextureBlock(0x0a000000, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 5, 6, 0, 0),
+    gsSPEndDisplayList(),
+};
+
+
+static void ObjTaru_DrawBarrel(Actor_ObjTaru* this, GameState_Play* play)
+{
+    int type;
+    u32 textureAddr;
+    void* tex;
+
+    type = ObjTaru_CsmcType(this);
+    OPEN_DISPS(play->gs.gfx);
+    if (type == CSMC_NORMAL)
+    {
+        gSPSegment(POLY_OPA_DISP++, 0x08, sListLoaderSideDefault);
+        gSPSegment(POLY_OPA_DISP++, 0x09, sListLoaderTopDefault);
     }
-    Gfx_DrawDListOpa(play, dList);
+    else
+    {
+        switch (type)
+        {
+        case CSMC_BOSS_KEY: textureAddr = CUSTOM_POT_BOSSKEY_SIDE_ADDR; break;
+        case CSMC_MAJOR: textureAddr = CUSTOM_POT_MAJOR_SIDE_ADDR; break;
+        case CSMC_KEY: textureAddr = CUSTOM_POT_KEY_SIDE_ADDR; break;
+        case CSMC_SPIDER: textureAddr = CUSTOM_POT_SPIDER_SIDE_ADDR; break;
+        case CSMC_FAIRY: textureAddr = CUSTOM_POT_FAIRY_SIDE_ADDR; break;
+        case CSMC_HEART: textureAddr = CUSTOM_POT_HEART_SIDE_ADDR; break;
+        case CSMC_SOUL: textureAddr = CUSTOM_POT_SOUL_SIDE_ADDR; break;
+        case CSMC_MAP_COMPASS: textureAddr = CUSTOM_POT_MAP_SIDE_ADDR; break;
+        default: UNREACHABLE(); break;
+        }
+
+        tex = comboCacheGetFile(textureAddr);
+        if (!tex)
+            return;
+        gSPSegment(POLY_OPA_DISP++, 0x08, sListLoaderCustom);
+        gSPSegment(POLY_OPA_DISP++, 0x09, sListLoaderCustom);
+        gSPSegment(POLY_OPA_DISP++, 0x0a, tex);
+    }
+    CLOSE_DISPS();
+
+    Gfx_DrawDListOpa(play, (Gfx*)0x06000420);
+}
+
+static void ObjTaru_DrawPlank(Actor_ObjTaru* this, GameState_Play* play)
+{
+    Gfx_DrawDListOpa(play, (Gfx*)0x06001140);
+}
+
+void ObjTaru_Draw(Actor_ObjTaru* this, GameState_Play* play)
+{
+    if (OBJ_TARU_GET_80(this))
+        ObjTaru_DrawPlank(this, play);
+    else
+        ObjTaru_DrawBarrel(this, play);
 }
 
 ActorInit ObjTaru_InitVars = {
