@@ -183,6 +183,7 @@ const ACTORS_MM = {
   OBJ_KIBAKO2: 0xe5,
   OBJ_COMB: 0x0e4,
   OBJ_FLOWERPOT: 0x13e,
+  OBJ_TARU: 0x22d,
   //DOOR_ANA: 0x55,
 };
 
@@ -1380,6 +1381,13 @@ function actorHandlerMmObjFlowerpot(checks: Check[], ra: RoomActor) {
   checks.push({ roomActor: ra, sliceId: 1, item: item, name: 'Potted Plant', name2: 'Grass', type: 'grass' });
 }
 
+function actorHandlerMmObjTaru(checks: Check[], ra: RoomActor) {
+  if (ra.actor.params & 0x80) return; /* Weird fake-barrel */
+  const item = mmCollectibleDrop(ra.actor.params & 0x3f);
+  if (item === 'STRAY_FAIRY' || item === 'HEART_PIECE') return;
+  checks.push({ roomActor: ra, item, name: 'Barrel', type: 'barrel' });
+}
+
 const ACTORS_HANDLERS_OOT = {
   [ACTORS_OOT.EN_KUSA]: actorHandlerOotEnKusa,
   [ACTORS_OOT.OBJ_COMB]: actorHandlerOotObjComb,
@@ -1390,6 +1398,7 @@ const ACTORS_HANDLERS_OOT = {
 const ACTORS_HANDLERS_MM = {
   [ACTORS_MM.OBJ_COMB]: actorHandlerMmObjComb,
   [ACTORS_MM.OBJ_FLOWERPOT]: actorHandlerMmObjFlowerpot,
+  [ACTORS_MM.OBJ_TARU]: actorHandlerMmObjTaru,
 };
 
 const ACTORS_HANDLERS = {
