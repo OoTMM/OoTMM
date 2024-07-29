@@ -2,19 +2,15 @@
   dungeon: GTG
   exits:
     "Gerudo Fortress Exterior": "true"
-    "Gerudo Training Grounds Right Path": "event(GTG_RIGHT_SIDE) && is_adult"
-    "Gerudo Training Grounds Left Path": "event(GTG_LEFT_SIDE)"
+    "Gerudo Training Grounds Right Path First Room": "event(GTG_RIGHT_SIDE)"
+    "Gerudo Training Grounds Left Path First Room": "event(GTG_LEFT_SIDE)"
+    "Gerudo Training Grounds Maze Entrance Fork": "true"
   events:
-    GTG_RIGHT_SIDE: "can_hit_triggers_distance"
+    GTG_RIGHT_SIDE: "can_use_slingshot || can_use_bow"
     GTG_LEFT_SIDE: "has_fire"
-    GTG_ICE_ARROWS: "small_keys_gtg(3) && can_hammer"
   locations:
     "MQ Gerudo Training Grounds Entryway Left Chest": "true"
     "MQ Gerudo Training Grounds Entryway Right Chest": "true"
-    "MQ Gerudo Training Grounds Maze First Chest": "has_lens"
-    "MQ Gerudo Training Grounds Maze Second Chest": "true"
-    "MQ Gerudo Training Grounds Maze Third Chest": "true"
-    "MQ Gerudo Training Grounds Maze Fourth Chest": "small_keys_gtg(1)"
     "MQ Gerudo Training Grounds Pot 1": "true"
     "MQ Gerudo Training Grounds Pot 2": "true"
     "MQ Gerudo Training Grounds Pot 3": "true"
@@ -23,40 +19,171 @@
   region: NONE
   exits:
     "VOID": "true"
-"Gerudo Training Grounds Right Path":
+"Gerudo Training Grounds Maze Entrance Fork":
   dungeon: GTG
   exits:
     "Gerudo Training Grounds": "true"
-    "Gerudo Training Grounds Lava Room": "soul_lizalfos_dinalfos && soul_armos && soul_dodongo && (can_use_sword_master || can_use_sword_goron)"
-  locations:
-    "MQ Gerudo Training Grounds Right Side Dinolfos Chest": "soul_lizalfos_dinalfos && soul_armos && soul_dodongo && (can_use_sword_master || can_use_sword_goron)" #This room is too difficult for child to do with other means
-    "MQ Gerudo Training Grounds Wonder Item Dodongo Room Wall": "can_use_bow"
-"Gerudo Training Grounds Lava Room":
+    "Gerudo Training Grounds Maze Left Room 1": "true"
+    "Gerudo Training Grounds Maze Right Room 1": "event(GTG_ICE_ARROWS_SWITCH)"
+"Gerudo Training Grounds Maze Left Room 1":
   dungeon: GTG
   exits:
-    "Gerudo Training Grounds Right Path": "true"
-    "Gerudo Training Grounds Water Room": "silver_rupees_gtg_lava_mq && (can_longshot || can_use_bow || (trick(OOT_MQ_GTG_FLAMES) && (can_hookshot || has_hover_boots)))"
-  events:
-    GTG_LAVA_TARGETS: "silver_rupees_gtg_lava_mq"
+    "Gerudo Training Grounds Maze Entrance Fork": "true"
+    "Gerudo Training Grounds Maze Left Room 2": "true"
+    "Gerudo Training Grounds Maze Left Hidden Room": "has_lens"
+"Gerudo Training Grounds Maze Left Hidden Room":
+  dungeon: GTG
+  exits:
+    "Gerudo Training Grounds Maze Left Room 1": "true"
   locations:
-    "MQ Gerudo Training Grounds SR Lava Back-Left": "(has_hover_boots || event(GTG_LAVA_TARGETS)) && (can_use_bow || ((can_longshot || (trick(OOT_MQ_GTG_FLAMES) && can_hookshot)) && has_fire) || (trick(OOT_MQ_GTG_FLAMES) && has_hover_boots && has_fire_or_sticks))"
-    "MQ Gerudo Training Grounds SR Lava Back-Right": "(has_hover_boots || event(GTG_LAVA_TARGETS)) && (can_use_bow || ((can_longshot || (trick(OOT_MQ_GTG_FLAMES) && can_hookshot)) && has_fire) || (trick(OOT_MQ_GTG_FLAMES) && has_hover_boots && has_fire_or_sticks))"
-    "MQ Gerudo Training Grounds SR Lava Center": "(has_hover_boots || event(GTG_LAVA_TARGETS)) && (can_use_bow || ((can_longshot || (trick(OOT_MQ_GTG_FLAMES) && can_hookshot)) && has_fire) || (trick(OOT_MQ_GTG_FLAMES) && has_hover_boots && has_fire_or_sticks))"
-    "MQ Gerudo Training Grounds SR Lava Front-Right": "can_use_bow || (can_longshot && has_fire) || (can_hookshot && trick(OOT_MQ_GTG_FLAMES)) || (has_hover_boots && trick(OOT_MQ_GTG_FLAMES) && has_fire_or_sticks)"
-    "MQ Gerudo Training Grounds SR Lava Front-Left": "can_use_bow || ((can_longshot || (can_hookshot && trick(OOT_MQ_GTG_FLAMES))) && has_fire) || (has_hover_boots && trick(OOT_MQ_GTG_FLAMES) && has_fire_or_sticks) || ((has_weapon || can_use_sticks || can_hammer) && trick(OOT_MQ_GTG_FLAMES))"
-    "MQ Gerudo Training Grounds SR Lava Front": "can_use_bow || (can_longshot && has_fire) || (can_hookshot && trick(OOT_MQ_GTG_FLAMES)) || (has_hover_boots && trick(OOT_MQ_GTG_FLAMES) && has_fire_or_sticks)"
-    "MQ Gerudo Training Grounds Maze Right Side Middle Chest": "can_use_bow && can_hookshot && event(GTG_LAVA_HAMMER)"
-    "MQ Gerudo Training Grounds Maze Right Side Right Chest": "can_use_bow && can_hookshot && event(GTG_LAVA_HAMMER)"
+    "MQ Gerudo Training Grounds Maze First Chest": "true"
+"Gerudo Training Grounds Maze Left Room 2":
+  dungeon: GTG
+  exits:
+    "Gerudo Training Grounds Maze Left Room 1": "true"
+    "Gerudo Training Grounds Maze Left Room 3": "true"
+  locations:
+    "MQ Gerudo Training Grounds Maze Second Chest": "true"
+"Gerudo Training Grounds Maze Left Room 3":
+  dungeon: GTG
+  exits:
+    "Gerudo Training Grounds Maze Left Room 2": "true"
+    "Gerudo Training Grounds Maze Left Room 4": "true"
+"Gerudo Training Grounds Maze Left Room 4":
+  dungeon: GTG
+  exits:
+    "Gerudo Training Grounds Maze Left Room 3": "true"
+    "Gerudo Training Grounds Maze Left Room 5": "small_keys_gtg(1)"
+  locations:
+    "MQ Gerudo Training Grounds Maze Third Chest": "true"
+"Gerudo Training Grounds Maze Left Room 5":
+  dungeon: GTG
+  exits:
+    "Gerudo Training Grounds Maze Left Room 4": "small_keys_gtg(2)"
+    "Gerudo Training Grounds Maze Left Room 6": "small_keys_gtg(2)"
+  locations:
+    "MQ Gerudo Training Grounds Maze Fourth Chest": "true"
+"Gerudo Training Grounds Maze Left Room 6":
+  dungeon: GTG
+  exits:
+    "Gerudo Training Grounds Maze Left Room 5": "small_keys_gtg(3)"
+    "Gerudo Training Grounds Maze Center Room": "small_keys_gtg(3)"
+"Gerudo Training Grounds Maze Center Room":
+  dungeon: GTG
+  exits:
+    "Gerudo Training Grounds Maze Left Room 6": "small_keys_gtg(3)"
+  events:
+    GTG_ICE_ARROWS_SWITCH: "can_hammer"
+"Gerudo Training Grounds Maze Right Room 1":
+  dungeon: GTG
+  exits:
+    "Gerudo Training Grounds Maze Entrance Fork": "true"
+    "Gerudo Training Grounds Maze Right Room 2": "true"
+"Gerudo Training Grounds Maze Right Room 2":
+  dungeon: GTG
+  exits:
+    "Gerudo Training Grounds Maze Right Room 1": "true"
+    "Gerudo Training Grounds Lava Room Maze Ledge": "true"
+  locations:
+    "MQ Gerudo Training Grounds Maze Right Side Middle Chest": "true"
+    "MQ Gerudo Training Grounds Maze Right Side Right Chest": "true"
+"Gerudo Training Grounds Right Path First Room":
+  dungeon: GTG
+  exits:
+    "Gerudo Training Grounds": "true"
+    "Gerudo Training Grounds Lava Room Near Beginning": "event(GTG_MQ_RIGHT_FIRST_CLEAR)"
+  events:
+    GTG_MQ_RIGHT_FIRST_CLEAR: "soul_lizalfos_dinalfos && soul_armos && soul_dodongo && has_weapon"
+  locations:
+    "MQ Gerudo Training Grounds Right Side Dinolfos Chest": "event(GTG_MQ_RIGHT_FIRST_CLEAR)"
+    "MQ Gerudo Training Grounds Wonder Item Dodongo Room Wall": "can_use_bow"
+"Gerudo Training Grounds Lava Room Near Beginning":
+  dungeon: GTG
+  exits:
+    "Gerudo Training Grounds Right Path First Room": "true"
+    "Gerudo Training Grounds Lava Room Ledge Before Water Room": "can_longshot || event(GTG_MQ_LAVA_TORCH_ENTRANCE_SIDE) || (trick(OOT_MQ_GTG_FLAMES) && (can_hookshot || has_hover_boots)) || hookshot_anywhere || climb_anywhere"
+    "Gerudo Training Grounds Lava Room Maze Ledge": "(event(GTG_MQ_LAVA_HAMMER_SWITCH) && can_longshot) || (event(GTG_MQ_LAVA_TORCH_ENTRANCE_SIDE) && event(GTG_MQ_LAVA_HAMMER_SWITCH) && can_hookshot) || hookshot_anywhere || climb_anywhere"
+    "Gerudo Training Grounds Lava Room Deep Side Ledge": "hookshot_anywhere || (can_longshot && has_hover_boots && climb_anywhere && event(GTG_LAVA_HOOK_TARGETS))"
+  events:
+    GTG_LAVA_HOOK_TARGETS: "silver_rupees_gtg_lava_mq"
+    GTG_MQ_LAVA_TORCH_ENTRANCE_SIDE: "can_use_bow"
+    GTG_MQ_LAVA_TORCH_FAR: "has_fire_arrows"
+    GTG_MQ_LAVA_TORCH_COMMON_PLATFORMS_ENTRANCE: "(event(GTG_MQ_LAVA_TORCH_ENTRANCE_SIDE) && (is_adult || (is_child && (has_hover_boots || climb_anywhere || ((event(GTG_LAVA_HOOK_TARGETS) && can_hookshot) || hookshot_anywhere))))) || (trick(OOT_MQ_GTG_FLAMES) && (has_hover_boots || (can_hookshot && event(GTG_LAVA_HOOK_TARGETS)) || hookshot_anywhere))"
+    #GTG_MQ_LAVA_SR_HOOK_ANYWHERE: "settings.silverRupeeShuffle && hookshot_anywhere"
+  locations:
+    "MQ Gerudo Training Grounds SR Lava Back-Left": "event(GTG_MQ_LAVA_TORCH_COMMON_PLATFORMS_ENTRANCE)"
+    "MQ Gerudo Training Grounds SR Lava Back-Right": "event(GTG_MQ_LAVA_TORCH_COMMON_PLATFORMS_ENTRANCE)"
+    "MQ Gerudo Training Grounds SR Lava Center": "event(GTG_MQ_LAVA_TORCH_COMMON_PLATFORMS_ENTRANCE)"
+    "MQ Gerudo Training Grounds SR Lava Front-Right": "event(GTG_MQ_LAVA_TORCH_COMMON_PLATFORMS_ENTRANCE)"
+    "MQ Gerudo Training Grounds SR Lava Front-Left": "event(GTG_MQ_LAVA_TORCH_COMMON_PLATFORMS_ENTRANCE)"
+    "MQ Gerudo Training Grounds SR Lava Front": "event(GTG_MQ_LAVA_TORCH_COMMON_PLATFORMS_ENTRANCE)"
+"Gerudo Training Grounds Lava Room Ledge Before Water Room":
+  dungeon: GTG
+  exits:
+    "Gerudo Training Grounds Lava Room Near Beginning": "can_longshot || event(GTG_MQ_LAVA_TORCH_WATER_ROOM_SIDE) || (trick(OOT_MQ_GTG_FLAMES) && (has_hover_boots || can_hookshot)) || hookshot_anywhere || climb_anywhere"
+    "Gerudo Training Grounds Lava Room Maze Ledge": "(event(GTG_MQ_LAVA_HAMMER_SWITCH) && can_longshot) || hookshot_anywhere || (climb_anywhere && event(GTG_LAVA_HOOK_TARGETS) && event(GTG_MQ_LAVA_TORCH_WATER_ROOM_SIDE)) || (event(GTG_MQ_LAVA_HAMMER_SWITCH) && can_hookshot && event(GTG_MQ_LAVA_TORCH_WATER_ROOM_SIDE))"
+    "Gerudo Training Grounds Lava Room Deep Side Ledge": "hookshot_anywhere || climb_anywhere"
+    "Gerudo Training Grounds Water Room": "silver_rupees_gtg_lava_mq"
+  events:
+    GTG_LAVA_HOOK_TARGETS: "silver_rupees_gtg_lava_mq"
+    GTG_MQ_LAVA_TORCH_WATER_ROOM_SIDE: "has_fire"
+    GTG_MQ_LAVA_TORCH_COMMON_PLATFORMS_WATER_SIDE: "(event(GTG_MQ_LAVA_TORCH_WATER_ROOM_SIDE) && (is_adult || (is_child && (has_hover_boots || climb_anywhere || ((event(GTG_LAVA_HOOK_TARGETS) && can_hookshot) || hookshot_anywhere))))) || (trick(OOT_MQ_GTG_FLAMES) && (has_hover_boots || (can_hookshot && event(GTG_LAVA_HOOK_TARGETS)) || hookshot_anywhere))"
+    #GTG_MQ_LAVA_SR_HOOK_ANYWHERE: "settings.silverRupeeShuffle && hookshot_anywhere"
+  locations:
+    "MQ Gerudo Training Grounds SR Lava Back-Left": "event(GTG_MQ_LAVA_TORCH_COMMON_PLATFORMS_WATER_SIDE)"
+    "MQ Gerudo Training Grounds SR Lava Back-Right": "event(GTG_MQ_LAVA_TORCH_COMMON_PLATFORMS_WATER_SIDE)"
+    "MQ Gerudo Training Grounds SR Lava Center": "event(GTG_MQ_LAVA_TORCH_COMMON_PLATFORMS_WATER_SIDE)"
+    "MQ Gerudo Training Grounds SR Lava Front-Right": "event(GTG_MQ_LAVA_TORCH_COMMON_PLATFORMS_WATER_SIDE)"
+    "MQ Gerudo Training Grounds SR Lava Front-Left": "event(GTG_MQ_LAVA_TORCH_COMMON_PLATFORMS_WATER_SIDE)"
+    "MQ Gerudo Training Grounds SR Lava Front": "event(GTG_MQ_LAVA_TORCH_COMMON_PLATFORMS_WATER_SIDE)"
+"Gerudo Training Grounds Lava Room Maze Ledge":
+  dungeon: GTG
+  exits:
+    "Gerudo Training Grounds Lava Room Near Beginning": "can_hookshot || climb_anywhere || event(GTG_MQ_LAVA_TORCH_FAR) || (trick(OOT_MQ_GTG_FLAMES) && has_hover_boots)"
+    "Gerudo Training Grounds Lava Room Ledge Before Water Room": "can_longshot || hookshot_anywhere || event(GTG_MQ_LAVA_TORCH_FAR) || (can_hookshot && event(GTG_LAVA_HOOK_TARGETS)) || (has_hover_boots && event(GTG_LAVA_HOOK_TARGETS) && trick(OOT_MQ_GTG_FLAMES))"
+    "Gerudo Training Grounds Lava Room Deep Side Ledge": "hookshot_anywhere || climb_anywhere"
+    "Gerudo Training Grounds Maze Right Room 2": "true"
+  events:
+    GTG_LAVA_HOOK_TARGETS: "silver_rupees_gtg_lava_mq"
+    GTG_MQ_LAVA_TORCH_FAR: "has_fire_arrows"
+    GTG_MQ_LAVA_TORCH_COMMON_PLATFORMS_FAR: "(event(GTG_MQ_LAVA_TORCH_FAR) && (is_adult || (is_child && (has_hover_boots || climb_anywhere || ((event(GTG_LAVA_HOOK_TARGETS) && can_hookshot) || hookshot_anywhere))))) || (trick(OOT_MQ_GTG_FLAMES) && (has_hover_boots || (can_hookshot && event(GTG_LAVA_HOOK_TARGETS)) || hookshot_anywhere))"
+    #GTG_MQ_LAVA_SR_HOOK_ANYWHERE: "settings.silverRupeeShuffle && hookshot_anywhere"
+  locations:
+    "MQ Gerudo Training Grounds SR Lava Back-Left": "event(GTG_MQ_LAVA_TORCH_COMMON_PLATFORMS_FAR)"
+    "MQ Gerudo Training Grounds SR Lava Back-Right": "event(GTG_MQ_LAVA_TORCH_COMMON_PLATFORMS_FAR)"
+    "MQ Gerudo Training Grounds SR Lava Center": "event(GTG_MQ_LAVA_TORCH_COMMON_PLATFORMS_FAR)"
+    "MQ Gerudo Training Grounds SR Lava Front-Right": "event(GTG_MQ_LAVA_TORCH_COMMON_PLATFORMS_FAR)"
+    "MQ Gerudo Training Grounds SR Lava Front-Left": "event(GTG_MQ_LAVA_TORCH_COMMON_PLATFORMS_FAR)"
+    "MQ Gerudo Training Grounds SR Lava Front": "event(GTG_MQ_LAVA_TORCH_COMMON_PLATFORMS_FAR)"
+"Gerudo Training Grounds Lava Room Deep Side Ledge":
+  dungeon: GTG
+  exits:
+    "Gerudo Training Grounds Lava Room Near Beginning": "hookshot_anywhere || (event(GTG_MQ_LAVA_TORCH_FAR) && (is_adult || (is_child && (climb_anywhere || has_hover_boots))))"
+    "Gerudo Training Grounds Lava Room Maze Ledge": "(event(GTG_MQ_LAVA_HAMMER_SWITCH) && can_longshot) || (event(GTG_LAVA_HOOK_TARGETS) && (is_adult || (is_child && has_hover_boots)) && can_hookshot) || hookshot_anywhere || climb_anywhere"
+    "Gerudo Training Grounds Lava Room Ledge Before Water Room": "can_longshot || hookshot_anywhere || climb_anywhere || (event(GTG_MQ_LAVA_TORCH_FAR) && (can_hookshot || has_hover_boots)) || (event(GTG_LAVA_HOOK_TARGETS) && (is_adult || (is_child && has_hover_boots)) && can_hookshot)"
+  events:
+    GTG_LAVA_HOOK_TARGETS: "silver_rupees_gtg_lava_mq"
+    GTG_MQ_LAVA_HAMMER_SWITCH: "can_hammer"
+    GTG_MQ_LAVA_TORCH_FAR: "has_fire_arrows"
+    GTG_MQ_LAVA_TORCH_COMMON_PLATFORMS_FAR: "(event(GTG_MQ_LAVA_TORCH_FAR) && (is_adult || (is_child && (has_hover_boots || climb_anywhere || ((event(GTG_LAVA_HOOK_TARGETS) && can_hookshot) || hookshot_anywhere))))) || (trick(OOT_MQ_GTG_FLAMES) && (has_hover_boots || (can_hookshot && event(GTG_LAVA_HOOK_TARGETS)) || hookshot_anywhere))"
+    #GTG_MQ_LAVA_SR_HOOK_ANYWHERE: "settings.silverRupeeShuffle && hookshot_anywhere"
+  locations:
+    "MQ Gerudo Training Grounds SR Lava Back-Left": "event(GTG_MQ_LAVA_TORCH_COMMON_PLATFORMS_FAR)"
+    "MQ Gerudo Training Grounds SR Lava Back-Right": "event(GTG_MQ_LAVA_TORCH_COMMON_PLATFORMS_FAR)"
+    "MQ Gerudo Training Grounds SR Lava Center": "event(GTG_MQ_LAVA_TORCH_COMMON_PLATFORMS_FAR)"
+    "MQ Gerudo Training Grounds SR Lava Front-Right": "event(GTG_MQ_LAVA_TORCH_COMMON_PLATFORMS_FAR)"
+    "MQ Gerudo Training Grounds SR Lava Front-Left": "event(GTG_MQ_LAVA_TORCH_COMMON_PLATFORMS_FAR)"
+    "MQ Gerudo Training Grounds SR Lava Front": "event(GTG_MQ_LAVA_TORCH_COMMON_PLATFORMS_FAR)"
 "Gerudo Training Grounds Water Room":
   dungeon: GTG
   exits:
-    "Gerudo Training Grounds Lava Room": "true"
+    "Gerudo Training Grounds Lava Room Ledge Before Water Room": "true"
   locations:
     "MQ Gerudo Training Grounds Water Room Chest": "silver_rupees_gtg_water_mq"
     "MQ Gerudo Training Grounds SR Water Top-Left": "has_iron_boots && has_tunic_zora && has_fire"
     "MQ Gerudo Training Grounds SR Water Center": "has_iron_boots && has_tunic_zora && has_fire"
     "MQ Gerudo Training Grounds SR Water Bottom-Right": "has_iron_boots && has_tunic_zora && has_fire"
-"Gerudo Training Grounds Left Path":
+"Gerudo Training Grounds Left Path First Room":
   dungeon: GTG
   events:
     GTG_IRON_KNUCKLE: "soul_iron_knuckle && (has_weapon || can_use_sticks) && (has_shield || is_adult)" #Kid's size, the sand, and the time limit together make this fight unreasonable without shield, mountains of health, or Nayru's.
@@ -69,10 +196,12 @@
   dungeon: GTG
   exits:
     "Gerudo Training Grounds Wallmaster": "soul_wallmaster"
-    "Gerudo Training Grounds Left Path": "true"
+    "Gerudo Training Grounds Left Path First Room": "true"
     "Gerudo Training Grounds Stalfos Room": "silver_rupees_gtg_slopes"
+  events:
+    GTG_MQ_SLOPES_STALAGMITES: "has_explosives || can_use_mask_blast || has_weapon || can_hammer || climb_anywhere || hookshot_anywhere"
   locations:
-    "MQ Gerudo Training Grounds SR Slopes Top Right": "true"
+    "MQ Gerudo Training Grounds SR Slopes Top Right": "event(GTG_MQ_SLOPES_STALAGMITES)"
     "MQ Gerudo Training Grounds SR Slopes Middle": "true"
     "MQ Gerudo Training Grounds SR Slopes Front": "can_longshot"
     "MQ Gerudo Training Grounds SR Slopes Front-Left": "true"
@@ -80,27 +209,77 @@
 "Gerudo Training Grounds Stalfos Room":
   dungeon: GTG
   exits:
-    "Gerudo Training Grounds Spinning Statue Room": "soul_enemy(SOUL_ENEMY_STALFOS) && soul_skulltula && has_blue_fire && can_play_time && has_lens && is_adult"
+    "Gerudo Training Grounds Slopes": "true"
+    "Gerudo Training Grounds Stalfos Room Ledge Before Red Ice": "has_lens && ((can_play_time && is_adult) || climb_anywhere || hookshot_anywhere)"
+    "Gerudo Training Grounds Stalfos Room After Silver Block": "event(GTG_MQ_SILVER_BLOCK_PUSH)"
   events:
     BLUE_FIRE: "has_bottle"
+    GTG_MQ_STALFOS_CLEAR: "soul_enemy(SOUL_ENEMY_STALFOS) && soul_skulltula && has_weapon"
+    GTG_MQ_SILVER_BLOCK_PUSH: "can_lift_silver"
   locations:
-    "MQ Gerudo Training Grounds Stalfos Room Chest": "soul_enemy(SOUL_ENEMY_STALFOS) && soul_skulltula" # Should maybe check for fight?
-    "MQ Gerudo Training Grounds Silver Block Room Chest": "soul_enemy(SOUL_ENEMY_STALFOS) && soul_skulltula && can_lift_silver && soul_enemy(SOUL_ENEMY_SPIKE) && soul_freezard"
-"Gerudo Training Grounds Spinning Statue Room":
+    "MQ Gerudo Training Grounds Stalfos Room Chest": "event(GTG_MQ_STALFOS_CLEAR)"
+"Gerudo Training Grounds Stalfos Room After Silver Block":
   dungeon: GTG
   exits:
-    "Gerudo Training Grounds Lava Room": "can_longshot || (can_hookshot && (has_fire_arrows || trick(OOT_MQ_GTG_FLAMES))) || (has_hover_boots && trick(OOT_MQ_GTG_FLAMES) && event(GTG_LAVA_TARGETS))"
-    "Gerudo Training Grounds Water Room": "silver_rupees_gtg_lava_mq && event(GTG_LAVA_TARGETS) && (can_hookshot || has_hover_boots || trick(OOT_MQ_GTG_FLAMES))"
+    "Gerudo Training Grounds Stalfos Room": "event(GTG_MQ_SILVER_BLOCK_PUSH)"
+    "Gerudo Training Grounds Stalfos Room Side Room": "event(GTG_MQ_STALFOS_CLEAR)"
+"Gerudo Training Grounds Stalfos Room Side Room":
+  dungeon: GTG
+  exits:
+    "Gerudo Training Grounds Stalfos Room After Silver Block": "true"
   events:
-    GTG_LAVA_HAMMER: "can_hammer"
-    GTG_LAVA_TARGETS: "silver_rupees_gtg_lava_mq"
+    GTG_MQ_STALFOS_SIDE_CLEAR: "soul_enemy(SOUL_ENEMY_SPIKE) && soul_freezard && (can_use_sword_master || can_use_sword_razor || (has(SWORD_BIGGORON) && (is_adult || (is_child && age_sword_adult))))" #Kokiri Sword is too weak against freezards
   locations:
-    "MQ Gerudo Training Grounds Spinning Statue Chest": "can_use_bow"
-    "MQ Gerudo Training Grounds Torch Slug Room Clear Chest": "soul_iron_knuckle && soul_enemy(SOUL_ENEMY_TORCH_SLUG)"
-    "MQ Gerudo Training Grounds Torch Slug Room Switch Chest": "has_ranged_weapon" #You are no longer guaranteed a hook due to silver rupee shuffle.
-    "MQ Gerudo Training Grounds Maze Right Side Middle Chest": "event(GTG_LAVA_HAMMER) && (can_longshot || (can_hookshot && (has_fire_arrows || (has_hover_boots && event(GTG_LAVA_TARGETS)) || trick(OOT_MQ_GTG_FLAMES))))"
-    "MQ Gerudo Training Grounds Maze Right Side Right Chest": "event(GTG_LAVA_HAMMER) && (can_longshot || (can_hookshot && (has_fire_arrows || (has_hover_boots && event(GTG_LAVA_TARGETS)) || trick(OOT_MQ_GTG_FLAMES))))"
-    "MQ Gerudo Training Grounds Ice Arrows Chest": "event(GTG_ICE_ARROWS)"
-    "MQ Gerudo Training Grounds SR Lava Back-Right": "has_fire_arrows"
-    "MQ Gerudo Training Grounds SR Lava Center": "has_fire_arrows"
-    "MQ Gerudo Training Grounds Wonder Item Eye Statue": "has_hover_boots"
+    "MQ Gerudo Training Grounds Silver Block Room Chest": "event(GTG_MQ_STALFOS_SIDE_CLEAR)"
+"Gerudo Training Grounds Stalfos Room Ledge Before Red Ice":
+  dungeon: GTG
+  exits:
+    "Gerudo Training Grounds Stalfos Room Ledge After Red Ice": "has_blue_fire"
+    "Gerudo Training Grounds Stalfos Room": "has_lens"
+"Gerudo Training Grounds Stalfos Room Ledge After Red Ice":
+  dungeon: GTG
+  exits:
+    "Gerudo Training Grounds Stalfos Room Ledge Before Red Ice": "has_blue_fire" #Might not be solid from other side.
+    "Gerudo Training Grounds Spinning Statue Room Upper": "event(GTG_MQ_STALFOS_CLEAR)"
+"Gerudo Training Grounds Spinning Statue Room Upper":
+  dungeon: GTG
+  exits:
+    "Gerudo Training Grounds Stalfos Room Ledge After Red Ice": "true"
+    "Gerudo Training Grounds Spinning Statue Room Upper Side Door": "event(GTG_MQ_SPINNING_STATUE_CRYSTAL)"
+    "Gerudo Training Grounds Spinning Statue Room Lower": "true"
+    "Gerudo Training Grounds Spinning Statue Room Statue Middle": "has_hover_boots || can_longshot || hookshot_anywhere"
+"Gerudo Training Grounds Spinning Statue Room Upper Side Door":
+  dungeon: GTG
+  exits:
+    "Gerudo Training Grounds Spinning Statue Room Upper": "true"
+  locations:
+    "MQ Gerudo Training Grounds Ice Arrows Chest": "event(GTG_ICE_ARROWS_SWITCH)"
+"Gerudo Training Grounds Spinning Statue Room Lower":
+  dungeon: GTG
+  exits:
+    "Gerudo Training Grounds Spinning Statue Room Upper": "can_longshot || hookshot_anywhere || climb_anywhere"
+    "Gerudo Training Grounds Spinning Statue Room Statue Middle": "hookshot_anywhere || (climb_anywhere && can_hookshot)"
+    "Gerudo Training Grounds Room After Spinning Statue": "true"
+  events:
+    GTG_MQ_SPINNING_STATUE_EYES: "can_use_bow"
+    GTG_MQ_SPINNING_STATUE_CRYSTAL: "can_use_bow || can_use_slingshot || can_hookshot || has_explosives || can_boomerang"
+  locations:
+    "MQ Gerudo Training Grounds Spinning Statue Chest": "event(GTG_MQ_SPINNING_STATUE_EYES)"
+"Gerudo Training Grounds Spinning Statue Room Statue Middle":
+  dungeon: GTG
+  exits:
+    "Gerudo Training Grounds Spinning Statue Room Upper": "can_hookshot && (is_adult || (is_child && has_hover_boots))"
+    "Gerudo Training Grounds Spinning Statue Room Lower": "is_adult || (is_child && has_hover_boots) || hookshot_anywhere"
+  locations:
+    "MQ Gerudo Training Grounds Wonder Item Eye Statue": "true"
+"Gerudo Training Grounds Room After Spinning Statue":
+  dungeon: GTG
+  exits:
+    "Gerudo Training Grounds Spinning Statue Room Lower": "event(GTG_MQ_KNUCKLE_AND_SLUGS_CLEAR)"
+    "Gerudo Training Grounds Lava Room Deep Side Ledge": "event(GTG_MQ_KNUCKLE_AND_SLUGS_CLEAR)"
+  events:
+    GTG_MQ_KNUCKLE_AND_SLUGS_CLEAR: "soul_iron_knuckle && soul_enemy(SOUL_ENEMY_TORCH_SLUG) && has_weapon"
+    GTG_MQ_KNUCKLE_AND_SLUGS_WALL_CRYSTAL: "has_ranged_weapon || has_explosives || (climb_anywhere && (can_use_mask_blast || can_jump_slash))"
+  locations:
+    "MQ Gerudo Training Grounds Torch Slug Room Clear Chest": "event(GTG_MQ_KNUCKLE_AND_SLUGS_CLEAR)"
+    "MQ Gerudo Training Grounds Torch Slug Room Switch Chest": "event( GTG_MQ_KNUCKLE_AND_SLUGS_WALL_CRYSTAL)"
