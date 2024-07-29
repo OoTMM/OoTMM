@@ -91,7 +91,7 @@ gPictoboxPhotoTaken = 0x801bf888;
 
 SpawnRoomActors = 0x800bb140;
 
-GetSwitchFlag = 0x800b5bb0;
+Flags_GetSwitch = 0x800b5bb0;
 
 gMemorySize = 0x80000318;
 ClearMemoryRange = 0x80080150;
@@ -236,7 +236,7 @@ ActorCutscene_GetCanPlayNext = 0x800f1be4;
 
 gActorOvl = 0x801aefd0;
 
-SetSwitchFlag = 0x800b5bf4;
+Flags_SetSwitch = 0x800b5bf4;
 ClearSwitchFlag = 0x800b5c34;
 GetItemCollectBehavior = 0x801143cc;
 RemoveItem = 0x801149a0;

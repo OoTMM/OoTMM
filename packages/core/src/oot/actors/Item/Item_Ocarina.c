@@ -37,7 +37,7 @@ void ItemOcarina_HandlerItem(Actor* this, GameState_Play* play)
     if (Actor_HasParentZ(this))
     {
         SetEventChk(EV_OOT_CHK_SONG_TIME);
-        SetSwitchFlag(play, 3);
+        Flags_SetSwitch(play, 3);
         this->draw = NULL;
         this->update = ItemOcarina_HandlerItem2;
         ItemOcarina_HandlerItem2(this, play);

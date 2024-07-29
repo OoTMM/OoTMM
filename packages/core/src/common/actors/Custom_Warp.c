@@ -79,7 +79,7 @@ static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
         break;
     case SWITCH_OPEN_ST_NORMAL:
         play->nextEntrance = 0xac00;
-        SetSwitchFlag(play, 0x14);
+        Flags_SetSwitch(play, 0x14);
         break;
     case SWITCH_OPEN_ST_INVERTED:
         play->nextEntrance = 0xaa10;

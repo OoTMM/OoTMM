@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Shuffle MM barrels.
 - Shuffle the MM potted plants, two checks each, one is a pot, one is grass.
 - Hive shuffle, for OoT and MM.
 - Behavioral setting for the Gibdos in Beneath The Well (Vanilla, Remorseless and Open).

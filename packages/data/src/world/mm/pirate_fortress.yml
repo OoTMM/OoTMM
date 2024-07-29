@@ -48,6 +48,22 @@
     "Pirate Fortress Sewers Rupee Near Cage 3": "true"
     "Pirate Fortress Sewers Rupee Near Cage 4": "true"
     "Pirate Fortress Sewers Rupee Cage": "true"
+    "Pirate Fortress Sewers Barrel Cage Room 01": "true"
+    "Pirate Fortress Sewers Barrel Cage Room 02": "true"
+    "Pirate Fortress Sewers Barrel Cage Room 03": "true"
+    "Pirate Fortress Sewers Barrel Cage Room 04": "true"
+    "Pirate Fortress Sewers Barrel Cage Room 05": "true"
+    "Pirate Fortress Sewers Barrel Cage Room 06": "true"
+    "Pirate Fortress Sewers Barrel Cage Room 07": "true"
+    "Pirate Fortress Sewers Barrel Cage Room 08": "true"
+    "Pirate Fortress Sewers Barrel Cage Room 09": "true"
+    "Pirate Fortress Sewers Barrel Cage Room 10": "true"
+    "Pirate Fortress Sewers Barrel Cage Room 11": "true"
+    "Pirate Fortress Sewers Barrel Cage Room 12": "true"
+    "Pirate Fortress Sewers Barrel Cage Room 13": "true"
+    "Pirate Fortress Sewers Barrel Cage Room 14": "true"
+    "Pirate Fortress Sewers Barrel Cage Room 15": "true"
+    "Pirate Fortress Sewers Barrel Cage Room 16": "true"
 "Pirate Fortress Sewers After Gate":
   region: PIRATE_FORTRESS_SEWERS
   exits:
@@ -72,6 +88,11 @@
     "Pirate Fortress Sewers Rupee Water Elevator 1": "true"
     "Pirate Fortress Sewers Rupee Water Elevator 2": "true"
     "Pirate Fortress Sewers Rupee Water Elevator 3": "true"
+    "Pirate Fortress Sewers Barrel End 1": "true"
+    "Pirate Fortress Sewers Barrel End 2": "true"
+    "Pirate Fortress Sewers Barrel End 3": "true"
+    "Pirate Fortress Sewers Barrel End 4": "true"
+    "Pirate Fortress Sewers Barrel End 5": "true"
 "Pirate Fortress Sewers Entrance":
   dungeon: PF
   exits:
@@ -128,6 +149,8 @@
     "Pirate Fortress Interior Wonder Item Skull Forehead 1": "event(FORTRESS_BEEHIVE) && hit_target_range_close"
     "Pirate Fortress Interior Wonder Item Skull Forehead 2": "event(FORTRESS_BEEHIVE) && hit_target_range_close"
     "Pirate Fortress Interior Wonder Item Skull Forehead 3": "event(FORTRESS_BEEHIVE) && hit_target_range_close"
+    "Pirate Fortress Interior Barrel Hookshot Room 1": "event(FORTRESS_BEEHIVE)"
+    "Pirate Fortress Interior Barrel Hookshot Room 2": "event(FORTRESS_BEEHIVE)"
 "Pirate Fortress Barrel Maze Entry":
   region: PIRATE_FORTRESS_INTERIOR
   exits:
@@ -139,6 +162,8 @@
   exits:
     "Pirate Fortress Barrel Maze Entry": "true"
     "Pirate Fortress Entrance": "true"
+  locations:
+    "Pirate Fortress Entrance Barrel": "true"
 "Pirate Fortress Barrel Maze":
   region: PIRATE_FORTRESS_INTERIOR
   exits:
@@ -198,6 +223,8 @@
   exits:
     "Pirate Fortress Interior": "can_evade_gerudo"
     "Pirate Fortress Treasure Room": "true"
+  locations:
+    "Pirate Fortress Interior Barrel Outside": "true"
 "Pirate Fortress Treasure Room":
   region: PIRATE_FORTRESS_INTERIOR
   exits:
@@ -216,6 +243,7 @@
   locations:
     "Pirate Fortress Interior Pot Guarded 1": "true"
     "Pirate Fortress Interior Pot Guarded 2": "true"
+    "Pirate Fortress Interior Barrel Aquarium": "true"
 "Pirate Fortress Treasure Room Exit":
   region: PIRATE_FORTRESS_INTERIOR
   exits:
