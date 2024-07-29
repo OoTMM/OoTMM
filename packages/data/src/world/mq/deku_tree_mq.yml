@@ -30,6 +30,7 @@
     "MQ Deku Tree Heart Lobby": "true"
     "MQ Deku Tree Grass Entrance Upper 1": "can_cut_grass"
     "MQ Deku Tree Grass Entrance Upper 2": "can_cut_grass"
+    "MQ Deku Tree Main Room 2nd Floor Crate": "true"
 "MQ Deku Tree Room Before Compass Room Entry Door":
   dungeon: DT
   exits:
@@ -125,6 +126,8 @@
     "MQ Deku Tree Grass Slingshot Room Front 2": "can_cut_grass"
     "MQ Deku Tree Grass Slingshot Room Back 1": "can_cut_grass"
     "MQ Deku Tree Grass Slingshot Room Back 2": "can_cut_grass"
+    "MQ Deku Tree Slingshot Room Large Crate 1": "true"
+    "MQ Deku Tree Slingshot Room Large Crate 2": "true"
 "MQ Deku Tree Basement":
   dungeon: DT
   exits:
