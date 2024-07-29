@@ -329,6 +329,11 @@ export const TRICKS: Tricks = {
     name: "Destroy Beehives using Bombchu (OOT)",
     tooltip: "Use some careful timing with a Bombchu to blow up the beehives across Hyrule.",
   },
+  OOT_BOTW_MQ_BACKFLIP: {
+    game: 'oot',
+    name: "Backflip Over Gap to Reach BotW MQ's Main Room's Center",
+    tooltip: "Makes reachable the center of the main room without Zelda's Lullaby (that opens gates) or Hover Boots.",
+  },
   MM_LENS: {
     game: 'mm',
     name: 'Fewer Lens Requirements (MM)',
