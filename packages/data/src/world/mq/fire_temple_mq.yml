@@ -22,6 +22,12 @@
     "MQ Fire Temple Pre-Boss Chest": "has_tunic_goron && has_fire && (can_use_bow || has_hover_boots || (has_tunic_goron_strict && is_adult))"
     "MQ Fire Temple Pot Pre-Boss 1": "has_tunic_goron && (has_hover_boots || can_hookshot)"
     "MQ Fire Temple Pot Pre-Boss 2": "has_tunic_goron && (has_hover_boots || can_hookshot)"
+    "MQ Fire Temple Pre-Boss Room Near Cage Large Crate 1": "has_tunic_goron"
+    "MQ Fire Temple Pre-Boss Room Near Cage Large Crate 2": "has_tunic_goron"
+    "MQ Fire Temple Pre-Boss Room Tall Ledge Low Large Crate 1": "has_tunic_goron && (has_hover_boots || can_hookshot)"
+    "MQ Fire Temple Pre-Boss Room Tall Ledge Low Large Crate 2": "has_tunic_goron && (has_hover_boots || can_hookshot)"
+    "MQ Fire Temple Pre-Boss Room Tall Ledge Middle Large Crate": "has_tunic_goron && (has_hover_boots || can_hookshot)" #Child can rach this by jumping off the hookshot platform that has the torch.
+    "MQ Fire Temple Pre-Boss Room Tall Ledge Top Large Crate": "has_tunic_goron && (has_hover_boots || can_hookshot)" #Child can rach this by using the middle crate as a platform.
 "Fire Temple Vanilla Hammer Loop":
   dungeon: Fire
   locations:
