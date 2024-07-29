@@ -71,9 +71,12 @@
     "Fire Temple 1f Lava Room": "true"
     "Fire Temple Maze Upper": "can_hookshot && (trick(OOT_HAMMER_WALLS) || has_explosives)"
   locations:
-    "MQ Fire Temple Maze Lower Chest": "true"
+    "MQ Fire Temple Maze Lower Chest": "true" #Not too sure about this.
     "MQ Fire Temple Maze Side Room Chest": "can_play_elegy"
     "MQ Fire Temple Wonder Item East Maze": "can_hookshot"
+    "MQ Fire Temple Maze Room Lower Cage Large Crate 1: "true" #Consistent with chest logic, but something is up here.
+    "MQ Fire Temple Maze Room Lower Cage Large Crate 2: "true" #Consistent with chest logic, but something is up here.
+    "MQ Fire Temple Maze Room Lower Cage Large Crate 3: "true" #Consistent with chest logic, but something is up here.
 "Fire Temple Maze Upper":
   dungeon: Fire
   exits:
@@ -87,6 +90,11 @@
     "MQ Fire Temple Wonder Item East Climb First 2": "can_hookshot"
     "MQ Fire Temple Wonder Item East Climb Second 1": "can_hookshot"
     "MQ Fire Temple Wonder Item East Climb Second 2": "can_hookshot"
+    "MQ Fire Temple Maze Room Upper Cage Large Crate 1": "true"
+    "MQ Fire Temple Maze Room Upper Cage Large Crate 2": "true"
+    "MQ Fire Temple Maze Room Upper Cage Large Crate 3": "true"
+    "MQ Fire Temple Maze Room Upper Cage Small Crate 1": "true"
+    "MQ Fire Temple Maze Room Upper Cage Small Crate 2": "true"
 "Fire Temple Burning Block":
   dungeon: Fire
   locations:
