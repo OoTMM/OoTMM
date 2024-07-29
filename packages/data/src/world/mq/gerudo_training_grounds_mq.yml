@@ -74,6 +74,8 @@
     "Gerudo Training Grounds Maze Left Room 6": "small_keys_gtg(3)"
   events:
     GTG_ICE_ARROWS_SWITCH: "can_hammer"
+  locations:
+    "MQ Gerudo Training Grounds Maze Center Room Large Crate": "true"
 "Gerudo Training Grounds Maze Right Room 1":
   dungeon: GTG
   exits:
