@@ -2406,10 +2406,10 @@ MQ Shadow Temple Heart Pre-Boss Upper 1,                    heart,          NONE
 MQ Shadow Temple Heart Pre-Boss Upper 2,                    heart,          NONE,                 TEMPLE_SHADOW,                  0x0150c,                    RECOVERY_HEART
 MQ Shadow Temple Heart Pre-Boss Lower,                      heart,          NONE,                 TEMPLE_SHADOW,                  0x0150d,                    RECOVERY_HEART
 MQ Shadow Temple Wonder Item,                               wonder,         NONE,                 TEMPLE_SHADOW,                  0x00c01,                    ARROWS_30
-MQ Shadow Temple Room 0x02 Small Crate 18,                  crate,          NONE,                 TEMPLE_SHADOW,                  0x00211,                    ARROWS_10
-MQ Shadow Temple Room 0x02 Small Crate 19,                  crate,          NONE,                 TEMPLE_SHADOW,                  0x00212,                    MAGIC_JAR_LARGE
-MQ Shadow Temple Room 0x02 Small Crate 20,                  crate,          NONE,                 TEMPLE_SHADOW,                  0x00213,                    BOMB
-MQ Shadow Temple Room 0x02 Small Crate 21,                  crate,          NONE,                 TEMPLE_SHADOW,                  0x00214,                    RECOVERY_HEART
+MQ Shadow Temple Truth Spinner Room Small Crate 1,          crate,          NONE,                 TEMPLE_SHADOW,                  0x00211,                    ARROWS_10
+MQ Shadow Temple Truth Spinner Room Small Crate 2,          crate,          NONE,                 TEMPLE_SHADOW,                  0x00212,                    MAGIC_JAR_LARGE
+MQ Shadow Temple Truth Spinner Room Small Crate 3,          crate,          NONE,                 TEMPLE_SHADOW,                  0x00213,                    BOMB
+MQ Shadow Temple Truth Spinner Room Small Crate 4,          crate,          NONE,                 TEMPLE_SHADOW,                  0x00214,                    RECOVERY_HEART
 MQ Spirit Temple Entrance Initial Chest,                    chest,          NONE,                 TEMPLE_SPIRIT,                  0x1a,                       BOMBCHU_5
 MQ Spirit Temple Lobby Back-Left Chest,                     chest,          NONE,                 TEMPLE_SPIRIT,                  0x1e,                       SMALL_KEY_SPIRIT
 MQ Spirit Temple Lobby Back-Right Chest,                    chest,          NONE,                 TEMPLE_SPIRIT,                  0x1f,                       BOMBCHU_5
@@ -2527,7 +2527,7 @@ MQ Gerudo Training Grounds Pot 3,                           pot,            NONE
 MQ Gerudo Training Grounds Pot 4,                           pot,            NONE,                 GERUDO_TRAINING_GROUND,         0x0008,                     RECOVERY_HEART
 MQ Gerudo Training Grounds Wonder Item Eye Statue,          wonder,         NONE,                 GERUDO_TRAINING_GROUND,         0x00404,                    MAGIC_JAR_LARGE
 MQ Gerudo Training Grounds Wonder Item Dodongo Room Wall,   wonder,         NONE,                 GERUDO_TRAINING_GROUND,         0x00709,                    FLEXIBLE
-MQ Gerudo Training Grounds Room 0x08 Large Crate 02,        crate,          NONE,                 GERUDO_TRAINING_GROUND,         0x00801,                    RUPEE_GREEN
+MQ Gerudo Training Grounds Maze Center Room Large Crate,    crate,          NONE,                 GERUDO_TRAINING_GROUND,         0x00801,                    RUPEE_GREEN
 MQ Ganon Castle Light Trial Chest,                          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x04,                       RECOVERY_HEART
 MQ Ganon Castle Forest Trial First Chest,                   chest,          NONE,                 INSIDE_GANON_CASTLE,            0x02,                       ARROWS_10
 MQ Ganon Castle Forest Trial Second Chest,                  chest,          NONE,                 INSIDE_GANON_CASTLE,            0x03,                       BOMBS_5
