@@ -48,6 +48,8 @@
     "MQ Dodongo Cavern Pot Stairs 2": "true"
     "MQ Dodongo Cavern Pot Stairs 3": "true"
     "MQ Dodongo Cavern Pot Stairs 4": "true"
+    "MQ Dodongo Cavern Staircase Room Lower Large Crate 1": "true"
+    "MQ Dodongo Cavern Staircase Room Lower Large Crate 2": "true"
 "Dodongo Cavern MQ Song of Time Block Room":
   dungeon: DC
   exits:
@@ -64,6 +66,10 @@
     "MQ Dodongo Cavern SR Vines": "true"
     "MQ Dodongo Cavern SR Upper Corner High": "true"
     "MQ Dodongo Cavern Staircase Scrub": "business_scrub(0x1f)"
+    "MQ Dodongo Cavern Staircase Room Upper Large Crate 1": "true"
+    "MQ Dodongo Cavern Staircase Room Upper Large Crate 2": "true"
+    "MQ Dodongo Cavern Staircase Room Upper Large Crate 3": "true"
+    "MQ Dodongo Cavern Staircase Room Upper Large Crate 4": "true"
 "Dodongo Cavern Room After Upper Staircase":
   dungeon: DC
   exits:
@@ -118,6 +124,12 @@
   locations:
     "MQ Dodongo Cavern Larvae Room Chest": "event(MQ_DC_CLEAR_LARVAE_ROOM)"
     "MQ Dodongo Cavern GS Larve Room": "gs && can_damage_skull"
+    "MQ Dodongo Cavern Larve Room Large Crate 1": "true"
+    "MQ Dodongo Cavern Larve Room Large Crate 2": "true"
+    "MQ Dodongo Cavern Larve Room Large Crate 3": "true"
+    "MQ Dodongo Cavern Larve Room Large Crate 4": "true"
+    "MQ Dodongo Cavern Larve Room Large Crate 5": "true"
+    "MQ Dodongo Cavern Larve Room Large Crate 6": "true"
 "Dodongo Cavern Room Before Upper Lizalfos":
   dungeon: DC
   exits:
@@ -136,6 +148,8 @@
   locations:
     "MQ Dodongo Cavern Pot After Miniboss 1": "true"
     "MQ Dodongo Cavern Pot After Miniboss 2": "true"
+    "MQ Dodongo Cavern Room After Upper Lizalfos Large Crate 1": "true"
+    "MQ Dodongo Cavern Room After Upper Lizalfos Large Crate 2": "true"
 "Dodongo Cavern Upper Lizalfos":
   dungeon: DC
   exits:
@@ -203,6 +217,14 @@
     "MQ Dodongo Cavern Pot Green Room 2": "true"
     "MQ Dodongo Cavern Pot Green Room 3": "true"
     "MQ Dodongo Cavern Pot Green Room 4": "true"
+    "MQ Dodongo Cavern Poe Room Large Crate 1": "true"
+    "MQ Dodongo Cavern Poe Room Large Crate 2": "true"
+    "MQ Dodongo Cavern Poe Room Large Crate 3": "true"
+    "MQ Dodongo Cavern Poe Room Large Crate 4": "true"
+    "MQ Dodongo Cavern Poe Room Large Crate 5": "true"
+    "MQ Dodongo Cavern Poe Room Large Crate 6": "true"
+    "MQ Dodongo Cavern Poe Room Large Crate 7": "true"
+    "MQ Dodongo Cavern Poe Room Large Crate 8": "true"
 "Dodongo Cavern MQ Poe Room Side Room":
   dungeon: DC
   exits:
