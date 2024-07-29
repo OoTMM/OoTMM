@@ -2011,10 +2011,10 @@ MQ Jabu-Jabu Wonder Item Falling Like-Likes Cow Left 3,     wonder,         NONE
 MQ Jabu-Jabu Wonder Item Falling Like-Likes Explosion 1,    wonder,         NONE,                 INSIDE_JABU_JABU,               0x00b1b,                    FLEXIBLE
 MQ Jabu-Jabu Wonder Item Falling Like-Likes Explosion 2,    wonder,         NONE,                 INSIDE_JABU_JABU,               0x00b1c,                    FLEXIBLE
 MQ Jabu-Jabu Wonder Item Falling Like-Likes Explosion 3,    wonder,         NONE,                 INSIDE_JABU_JABU,               0x00b1d,                    FLEXIBLE
-MQ Jabu-Jabu Room 0x04 Small Crate 12,                      crate,          NONE,                 INSIDE_JABU_JABU,               0x0040b,                    NOTHING
-MQ Jabu-Jabu Room 0x04 Small Crate 13,                      crate,          NONE,                 INSIDE_JABU_JABU,               0x0040c,                    NOTHING
-MQ Jabu-Jabu Room 0x07 Small Crate 06,                      crate,          NONE,                 INSIDE_JABU_JABU,               0x00705,                    NOTHING
-MQ Jabu-Jabu Room 0x07 Small Crate 07,                      crate,          NONE,                 INSIDE_JABU_JABU,               0x00706,                    NOTHING
+MQ Jabu-Jabu Room After Above Big Octo Small Crate 1,       crate,          NONE,                 INSIDE_JABU_JABU,               0x0040b,                    NOTHING
+MQ Jabu-Jabu Room After Above Big Octo Small Crate 2,       crate,          NONE,                 INSIDE_JABU_JABU,               0x0040c,                    NOTHING
+MQ Jabu-Jabu Back Forked Paths Main Room Small Crate 1,     crate,          NONE,                 INSIDE_JABU_JABU,               0x00705,                    NOTHING
+MQ Jabu-Jabu Back Forked Paths Main Room Small Crate 2,     crate,          NONE,                 INSIDE_JABU_JABU,               0x00706,                    NOTHING
 MQ Bottom of the Well Map Chest,                            chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x03,                       MAP_BOTW
 MQ Bottom of the Well Compass Chest,                        chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x02,                       COMPASS_BOTW
 MQ Bottom of the Well Lens Chest,                           chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x01,                       LENS
