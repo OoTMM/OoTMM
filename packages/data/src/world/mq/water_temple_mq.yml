@@ -296,6 +296,9 @@
     WATER_LEVEL_MID: "event(WATER_LEVEL_LOW) && can_play_zelda"
     MOVE_WATER_TIME_BLOCK: "can_play_time && (can_longshot || hookshot_anywhere || climb_anywhere)"
     WATER_CENTRAL_GATE: "event(MOVE_WATER_TIME_BLOCK) && can_use_din && (event(WATER_LEVEL_HIGH) || ((event(WATER_LEVEL_LOW) || event(WATER_LEVEL_MID)) && hookshot_anywhere))"
+  locations:
+    "MQ Water Temple Central Tower Top Large Crate 1": "(event(WATER_LEVEL_HIGH) && (has_iron_boots || has_explosives_or_hammer)) || ((event(WATER_LEVEL_LOW) || event(WATER_LEVEL_MID)) && (can_longshot || hookshot_anywhere || climb_anywhere))"
+    "MQ Water Temple Central Tower Top Large Crate 2": "(event(WATER_LEVEL_HIGH) && (has_iron_boots || has_explosives_or_hammer)) || ((event(WATER_LEVEL_LOW) || event(WATER_LEVEL_MID)) && (can_longshot || hookshot_anywhere || climb_anywhere))"
 "Water Temple Central Tower Under Gate":
   dungeon: Water
   exits:
