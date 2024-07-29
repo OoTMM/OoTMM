@@ -2197,24 +2197,24 @@ MQ Fire Temple Cell Below Maze Large Crate 3,               crate,          NONE
 MQ Fire Temple Cell Below Maze Large Crate 4,               crate,          NONE,                 TEMPLE_FIRE,                    0x0040d,                    RUPEE_GREEN
 MQ Fire Temple Cell Below Maze Large Crate 5,               crate,          NONE,                 TEMPLE_FIRE,                    0x0040e,                    RUPEE_GREEN
 MQ Fire Temple Cell Below Maze Large Crate 6,               crate,          NONE,                 TEMPLE_FIRE,                    0x0040f,                    RUPEE_GREEN
-MQ Fire Temple Maze Room Upper Cage Large Crate 1,                    crate,          NONE,                 TEMPLE_FIRE,                    0x00518,                    RUPEE_GREEN
-MQ Fire Temple Maze Room Upper Cage Large Crate 2,                    crate,          NONE,                 TEMPLE_FIRE,                    0x00519,                    RUPEE_GREEN
-MQ Fire Temple Maze Room Upper Cage Large Crate 3,                    crate,          NONE,                 TEMPLE_FIRE,                    0x0051a,                    RUPEE_GREEN
-MQ Fire Temple Maze Room Lower Cage Large Crate 1,                    crate,          NONE,                 TEMPLE_FIRE,                    0x0051b,                    RUPEE_GREEN
-MQ Fire Temple Maze Room Lower Cage Large Crate 2,                    crate,          NONE,                 TEMPLE_FIRE,                    0x0051c,                    RUPEE_GREEN
-MQ Fire Temple Maze Room Lower Cage Large Crate 3,                    crate,          NONE,                 TEMPLE_FIRE,                    0x0051d,                    RUPEE_GREEN
-MQ Fire Temple Maze Room Upper Cage Small Crate 1,                    crate,          NONE,                 TEMPLE_FIRE,                    0x00520,                    NOTHING
-MQ Fire Temple Maze Room Upper Cage Small Crate 2,                    crate,          NONE,                 TEMPLE_FIRE,                    0x00521,                    NOTHING
-MQ Fire Temple Room 0x10 Large Crate 09,                    crate,          NONE,                 TEMPLE_FIRE,                    0x01008,                    RUPEE_GREEN
-MQ Fire Temple Room 0x10 Large Crate 10,                    crate,          NONE,                 TEMPLE_FIRE,                    0x01009,                    RUPEE_GREEN
-MQ Fire Temple Room 0x10 Large Crate 11,                    crate,          NONE,                 TEMPLE_FIRE,                    0x0100a,                    RUPEE_GREEN
-MQ Fire Temple Room 0x10 Large Crate 12,                    crate,          NONE,                 TEMPLE_FIRE,                    0x0100b,                    RUPEE_GREEN
-MQ Fire Temple Room 0x10 Large Crate 13,                    crate,          NONE,                 TEMPLE_FIRE,                    0x0100c,                    RUPEE_GREEN
-MQ Fire Temple Room 0x10 Small Crate 14,                    crate,          NONE,                 TEMPLE_FIRE,                    0x0100d,                    NOTHING
-MQ Fire Temple Room 0x10 Small Crate 15,                    crate,          NONE,                 TEMPLE_FIRE,                    0x0100e,                    NOTHING
-MQ Fire Temple Room 0x10 Small Crate 16,                    crate,          NONE,                 TEMPLE_FIRE,                    0x0100f,                    NOTHING
-MQ Fire Temple Room 0x10 Small Crate 17,                    crate,          NONE,                 TEMPLE_FIRE,                    0x01010,                    NOTHING
-MQ Fire Temple Room 0x10 Small Crate 18,                    crate,          NONE,                 TEMPLE_FIRE,                    0x01011,                    NOTHING
+MQ Fire Temple Maze Room Upper Cage Large Crate 1,          crate,          NONE,                 TEMPLE_FIRE,                    0x00518,                    RUPEE_GREEN
+MQ Fire Temple Maze Room Upper Cage Large Crate 2,          crate,          NONE,                 TEMPLE_FIRE,                    0x00519,                    RUPEE_GREEN
+MQ Fire Temple Maze Room Upper Cage Large Crate 3,          crate,          NONE,                 TEMPLE_FIRE,                    0x0051a,                    RUPEE_GREEN
+MQ Fire Temple Maze Room Lower Cage Large Crate 1,          crate,          NONE,                 TEMPLE_FIRE,                    0x0051b,                    RUPEE_GREEN
+MQ Fire Temple Maze Room Lower Cage Large Crate 2,          crate,          NONE,                 TEMPLE_FIRE,                    0x0051c,                    RUPEE_GREEN
+MQ Fire Temple Maze Room Lower Cage Large Crate 3,          crate,          NONE,                 TEMPLE_FIRE,                    0x0051d,                    RUPEE_GREEN
+MQ Fire Temple Maze Room Upper Cage Small Crate 1,          crate,          NONE,                 TEMPLE_FIRE,                    0x00520,                    NOTHING
+MQ Fire Temple Maze Room Upper Cage Small Crate 2,          crate,          NONE,                 TEMPLE_FIRE,                    0x00521,                    NOTHING
+MQ Fire Temple 3F Lava Room Near Cage Large Crate,          crate,          NONE,                 TEMPLE_FIRE,                    0x01008,                    RUPEE_GREEN
+MQ Fire Temple 3F Lava Room Lower Large Crate 1,            crate,          NONE,                 TEMPLE_FIRE,                    0x01009,                    RUPEE_GREEN
+MQ Fire Temple 3F Lava Room Lower Large Crate 2,            crate,          NONE,                 TEMPLE_FIRE,                    0x0100a,                    RUPEE_GREEN
+MQ Fire Temple 3F Lava Room High Ledge Large Crate,         crate,          NONE,                 TEMPLE_FIRE,                    0x0100b,                    RUPEE_GREEN
+MQ Fire Temple 3F Lava Room Lower Large Crate 3,            crate,          NONE,                 TEMPLE_FIRE,                    0x0100c,                    RUPEE_GREEN
+MQ Fire Temple 3F Lava Room Near Cage Small Crate 1,        crate,          NONE,                 TEMPLE_FIRE,                    0x0100d,                    NOTHING
+MQ Fire Temple 3F Lava Room Near Cage Small Crate 2,        crate,          NONE,                 TEMPLE_FIRE,                    0x0100e,                    NOTHING
+MQ Fire Temple 3F Lava Room Lower Small Crate 1,            crate,          NONE,                 TEMPLE_FIRE,                    0x0100f,                    NOTHING
+MQ Fire Temple 3F Lava Room Lower Small Crate 2,            crate,          NONE,                 TEMPLE_FIRE,                    0x01010,                    NOTHING
+MQ Fire Temple 3F Lava Room High Ledge Small Crate,         crate,          NONE,                 TEMPLE_FIRE,                    0x01011,                    NOTHING
 MQ Water Temple Map Chest,                                  chest,          NONE,                 TEMPLE_WATER,                   0x02,                       MAP_WATER
 MQ Water Temple Compass Chest,                              chest,          NONE,                 TEMPLE_WATER,                   0x01,                       COMPASS_WATER
 MQ Water Temple Longshot Chest,                             chest,          NONE,                 TEMPLE_WATER,                   0x00,                       HOOKSHOT
