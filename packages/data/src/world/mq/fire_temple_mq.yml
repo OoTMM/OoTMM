@@ -74,9 +74,9 @@
     "MQ Fire Temple Maze Lower Chest": "true" #Not too sure about this.
     "MQ Fire Temple Maze Side Room Chest": "can_play_elegy"
     "MQ Fire Temple Wonder Item East Maze": "can_hookshot"
-    "MQ Fire Temple Maze Room Lower Cage Large Crate 1: "true" #Consistent with chest logic, but something is up here.
-    "MQ Fire Temple Maze Room Lower Cage Large Crate 2: "true" #Consistent with chest logic, but something is up here.
-    "MQ Fire Temple Maze Room Lower Cage Large Crate 3: "true" #Consistent with chest logic, but something is up here.
+    "MQ Fire Temple Maze Room Lower Cage Large Crate 1": "true" #Consistent with chest logic, but something is up here.
+    "MQ Fire Temple Maze Room Lower Cage Large Crate 2": "true" #Consistent with chest logic, but something is up here.
+    "MQ Fire Temple Maze Room Lower Cage Large Crate 3": "true" #Consistent with chest logic, but something is up here.
 "Fire Temple Maze Upper":
   dungeon: Fire
   exits:
@@ -95,6 +95,12 @@
     "MQ Fire Temple Maze Room Upper Cage Large Crate 3": "true"
     "MQ Fire Temple Maze Room Upper Cage Small Crate 1": "true"
     "MQ Fire Temple Maze Room Upper Cage Small Crate 2": "true"
+    "MQ Fire Temple Cell Below Maze Large Crate 1": "has_explosives"
+    "MQ Fire Temple Cell Below Maze Large Crate 2": "has_explosives"
+    "MQ Fire Temple Cell Below Maze Large Crate 3": "has_explosives"
+    "MQ Fire Temple Cell Below Maze Large Crate 4": "has_explosives"
+    "MQ Fire Temple Cell Below Maze Large Crate 5": "has_explosives"
+    "MQ Fire Temple Cell Below Maze Large Crate 6": "has_explosives"
 "Fire Temple Burning Block":
   dungeon: Fire
   locations:
