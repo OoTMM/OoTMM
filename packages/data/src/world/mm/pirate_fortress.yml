@@ -118,7 +118,6 @@
     "Pirate Fortress Interior Crate Entrance": "true"
     "Pirate Fortress Interior Crate Middle 1": "can_evade_gerudo"
     "Pirate Fortress Interior Crate Middle 2": "can_evade_gerudo"
-    "Pirate Fortress Interior Barrel Outside": "can_hookshot || short_hook_anywhere"
     "Pirate Fortress Interior Heart 1": "can_hookshot || short_hook_anywhere || has_hover_boots"
     "Pirate Fortress Interior Heart 2": "can_hookshot || short_hook_anywhere || has_hover_boots"
     "Pirate Fortress Interior Heart 3": "can_hookshot || short_hook_anywhere || has_hover_boots"
@@ -224,6 +223,8 @@
   exits:
     "Pirate Fortress Interior": "can_evade_gerudo"
     "Pirate Fortress Treasure Room": "true"
+  locations:
+    "Pirate Fortress Interior Barrel Outside": "true"
 "Pirate Fortress Treasure Room":
   region: PIRATE_FORTRESS_INTERIOR
   exits:
