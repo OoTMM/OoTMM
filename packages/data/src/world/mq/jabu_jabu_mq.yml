@@ -2,7 +2,7 @@
   dungeon: JJ
   exits:
     "Zora Fountain": "true"
-    "Jabu-Jabu Main": "event(JABU_MQ_START)"
+    "Jabu-Jabu Main Elevator Room Upper": "event(JABU_MQ_START)"
   events:
     JABU_MQ_START: "can_use_slingshot"
   locations:
@@ -14,64 +14,180 @@
     "MQ Jabu-Jabu Grass Entrance 2": "can_cut_grass"
     "MQ Jabu-Jabu Wonder Item Entrance Left Cow": "can_use_slingshot"
     "MQ Jabu-Jabu Wonder Item Entrance Right Cow": "can_use_slingshot"
-"Jabu-Jabu Main":
+"Jabu-Jabu Main Elevator Room Upper":
   dungeon: JJ
   exits:
     "Jabu-Jabu": "true"
-    "Jabu-Jabu Back": "can_boomerang && event(JABU_MQ_BACK)"
-    "Jabu-Jabu Pre-Boss": "event(JABU_TENTACLE_RED) && (event(JABU_BIG_OCTO) || can_hookshot || has_hover_boots)"
-    "Jabu-Jabu Basement Side Room": "event(JABU_TENTACLE_RED)"
+    "Jabu-Jabu Vanilla Ruto Falling Room": "event(JABU_MQ_UNDERWATER_ALCOVE_SWITCH)"
+    "Jabu-Jabu Main Elevator Room Ledge Before Pre-Boss": "has_hover_boots || (can_use_slingshot && can_hookshot) || event(JABU_MQ_LOWER_BIG_OCTO_PLATFORM) || climb_anywhere" #Glitches need to be accounted for still.
+    "Jabu-Jabu Main Elevator Room Lower": "true"
+    "Jabu-Jabu Main Elevator Room High Ledge": "climb_anywhere"
   events:
-    JABU_BIG_OCTO: "event(JABU_TENTACLE_GREEN) && soul_octorok && (can_use_sticks || has_weapon) && soul_ruto"
-    JABU_MQ_BACK: "can_use_slingshot && has_explosives" #This allows adult to get to the back of Jabu.
+    JABU_MQ_LOWER_BIG_OCTO_PLATFORM: "climb_anywhere || longshot_anywhere" #This lowering platform actually has solid collision to longshot to.
   locations:
-    "MQ Jabu-Jabu Compass Chest": "can_use_slingshot && (is_child || (is_adult && can_dive_small))" #Future-proofing this for eventual ageless bow and slingshot. Adult cannot dive to the alcove without a scale.
+    "MQ Jabu-Jabu Heart 1": "true"
+    "MQ Jabu-Jabu Heart 2": "true"
+"Jabu-Jabu Main Elevator Room Lower":
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu Main Elevator Room Upper": "true"
+    "Jabu-Jabu Main Elevator Room Lower Switch Alcove": "is_child || (is_adult && can_dive_small)" #Adult cannot dive to the alcove without a scale.
+    "Jabu Jabu Basement Loop to Main Elevator": "event(JABU_MQ_WATER_SPOUTS)"
+  locations:
     "MQ Jabu-Jabu Second Room B1 Chest": "true"
-    "MQ Jabu-Jabu Second Room 1F Chest": "can_use_slingshot && (has_hover_boots || can_hookshot || event(JABU_BIG_OCTO))"
-    "MQ Jabu-Jabu Third Room West Chest": "can_use_slingshot && (is_child || (is_adult && can_dive_small))" #Future-proofing this for eventual ageless bow and slingshot. Adult cannot dive to the alcove without a scale.
-    "MQ Jabu-Jabu Third Room East Chest": "can_use_slingshot && (is_child || (is_adult && can_dive_small))" #Future-proofing this for eventual ageless bow and slingshot. Adult cannot dive to the alcove without a scale.
-    "MQ Jabu-Jabu SoT Room Lower Chest": "(soul_ruto || can_play_elegy) && (is_child || (is_adult && can_dive_small))" #Future-proofing this for eventual ageless bow and slingshot. Adult cannot dive to the alcove without a scale.
-    "MQ Jabu-Jabu Boomerang Chest": "(soul_ruto || can_play_elegy) && soul_lizalfos_dinalfos && soul_like_like && soul_enemy(SOUL_ENEMY_STINGER)" #You will always have an acceptable weapon for this.
-    "MQ Jabu-Jabu GS SoT Block": "gs && (soul_ruto || can_play_elegy) && can_play_time && (is_child || (is_adult && can_dive_small))" #Future-proofing this for eventual ageless bow and slingshot. Adult cannot dive to the alcove without a scale.
-    "MQ Jabu-Jabu Cow": "can_play_epona && event(JABU_BIG_OCTO) && can_use_slingshot"
-    "MQ Jabu-Jabu Pot Underwater Alcove 1": "is_child || (is_adult && can_dive_small)" #Future-proofing this for eventual ageless bow and slingshot. Adult cannot dive to the alcove without a scale.
-    "MQ Jabu-Jabu Pot Underwater Alcove 2": "is_child || (is_adult && can_dive_small)" #Future-proofing this for eventual ageless bow and slingshot. Adult cannot dive to the alcove without a scale.
-    "MQ Jabu-Jabu Pot Boomerang Room 1": "(soul_ruto || can_play_elegy) && (is_child || (is_adult && can_dive_small))" #Future-proofing this for eventual ageless bow and slingshot. Adult cannot dive to the alcove without a scale.
-    "MQ Jabu-Jabu Pot Boomerang Room 2": "(soul_ruto || can_play_elegy) && (is_child || (is_adult && can_dive_small))" #Future-proofing this for eventual ageless bow and slingshot. Adult cannot dive to the alcove without a scale.
-    "MQ Jabu-Jabu Grass Main Room Top 1": "(is_child || (is_adult && can_dive_small)) && can_cut_grass && has_explosives_or_hammer"
-    "MQ Jabu-Jabu Grass Main Room Top 2": "(is_child || (is_adult && can_dive_small)) && can_cut_grass && has_explosives_or_hammer"
-    "MQ Jabu-Jabu Grass Main Room Bottom 1": "(is_child || (is_adult && can_dive_small)) && can_cut_grass"
-    "MQ Jabu-Jabu Grass Main Room Bottom 2": "(is_child || (is_adult && can_dive_small)) && can_cut_grass"
-    "MQ Jabu-Jabu Grass Main Room Bottom 3": "(is_child || (is_adult && can_dive_small)) && can_cut_grass"
-    "MQ Jabu-Jabu Grass Boomerang Room": "(is_child || (is_adult && can_dive_small)) && can_cut_grass"
-    "MQ Jabu-Jabu Grass Big Octo Top 1": "event(JABU_BIG_OCTO) && can_cut_grass"
-    "MQ Jabu-Jabu Grass Big Octo Top 2": "event(JABU_BIG_OCTO) && can_cut_grass"
-    "MQ Jabu-Jabu Grass Room After Big Octo": "event(JABU_BIG_OCTO) && can_cut_grass && can_use_slingshot"
+    "MQ Jabu-Jabu Wonder Item Elevator Cow": "can_use_slingshot"
+"Jabu-Jabu Main Elevator Room Lower Switch Alcove":
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu Main Elevator Room Lower": "is_child || (is_adult && can_dive_small)" #Adult cannot dive to the alcove without a scale.
+  events:
+    JABU_MQ_UNDERWATER_ALCOVE_SWITCH: "true"
+  locations:
+    "MQ Jabu-Jabu Compass Chest": "can_use_slingshot"
+    "MQ Jabu-Jabu Pot Underwater Alcove 1": "true"
+    "MQ Jabu-Jabu Pot Underwater Alcove 2": "true"
     "MQ Jabu-Jabu Rupee Bottom": "(is_child && can_dive_small) || can_dive_big"
     "MQ Jabu-Jabu Rupee Middle": "can_dive_small"
     "MQ Jabu-Jabu Rupee Top": "is_child || can_dive_small"
-    "MQ Jabu-Jabu Heart 1": "true"
-    "MQ Jabu-Jabu Heart 2": "true"
-    "MQ Jabu-Jabu Wonder Item Elevator Cow": "can_use_slingshot"
+"Jabu-Jabu Main Elevator Room Ledge Before Pre-Boss":
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu Main Elevator Room Upper": "has_hover_boots || event(JABU_MQ_LOWER_BIG_OCTO_PLATFORM) || climb_anywhere"
+    "Jabu-Jabu Main Elevator Room Lower": "true"
+    "Jabu-Jabu Main Elevator Room Ledge Before Pre-Boss After Red Tentacle": "event(JABU_TENTACLE_RED)" #This tentacle can block in door rando, so it needs its own region.
+  locations:
+    "MQ Jabu-Jabu Second Room 1F Chest": "can_use_slingshot"
+"Jabu-Jabu Main Elevator Room Ledge Before Pre-Boss After Red Tentacle":
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu Main Elevator Room Ledge Before Pre-Boss": "event(JABU_TENTACLE_RED)" #This tentacle can block in door rando, so it needs its own region.
+    "Jabu-Jabu Pre-Boss Room": "true"
+"Jabu-Jabu Vanilla Ruto Falling Room":
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu Main Elevator Room Upper": "true"
+    "Jabu-Jabu Vanilla Ruto Falling Room After Wiggling Thing": "can_boomerang" #This can block in door rando, so it needs its own region.
+    "Jabu-Jabu Ruto Section Bottom Floor": "true"
+    "Jabu-Jabu Basement Ledge Before Big Octo": "true"
+  events:
+    JABU_MQ_BACK_UNLOCK: "can_use_slingshot && (has_explosives || (climb_anywhere && (can_hammer || can_use_mask_blast)))"
+  locations:
+    "MQ Jabu-Jabu Grass Main Room Top 1": "can_cut_grass && has_explosives_or_hammer"
+    "MQ Jabu-Jabu Grass Main Room Top 2": "can_cut_grass && has_explosives_or_hammer"
+"Jabu-Jabu Vanilla Ruto Falling Room After Wiggling Thing":
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu Vanilla Ruto Falling Room": "can_boomerang"
+    "Jabu-Jabu Back Forked Paths": "event(JABU_MQ_BACK_UNLOCK)"
+"Jabu-Jabu Ruto Section Bottom Floor":
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu Vanilla Ruto Falling Room": "true"
+    "Jabu-Jabu Basement Side Room": "event(JABU_TENTACLE_RED)"
+    "Jabu Jabu Basement Loop to Main Elevator": "soul_ruto || can_play_elegy"
+    "Jabu-Jabu Basement Ledge Before Big Octo": "climb_anywhere"
+  locations:
+    "MQ Jabu-Jabu Third Room West Chest": "can_use_slingshot"
+    "MQ Jabu-Jabu Third Room East Chest": "can_use_slingshot"
+    "MQ Jabu-Jabu Grass Main Room Bottom 1": "can_cut_grass"
+    "MQ Jabu-Jabu Grass Main Room Bottom 2": "can_cut_grass"
+    "MQ Jabu-Jabu Grass Main Room Bottom 3": "can_cut_grass"
+"Jabu Jabu Basement Loop to Main Elevator":
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu Ruto Section Bottom Floor": "true"
+    "Jabu-Jabu Main Elevator Room Lower": "event(JABU_MQ_WATER_SPOUTS)"
+  events:
+    JABU_MQ_WATER_SPOUTS: "soul_lizalfos_dinalfos && soul_like_like && soul_enemy(SOUL_ENEMY_STINGER) && has_weapon"
+  locations:
+    "MQ Jabu-Jabu Boomerang Chest": "event(JABU_MQ_WATER_SPOUTS)"
+    "MQ Jabu-Jabu SoT Room Lower Chest": "true"
+    "MQ Jabu-Jabu Pot Boomerang Room 1": "true"
+    "MQ Jabu-Jabu Pot Boomerang Room 2": "true"
+    "MQ Jabu-Jabu GS SoT Block": "gs && can_play_time && can_damage_skull"
+    "MQ Jabu-Jabu Grass Boomerang Room": "can_cut_grass"
+"Jabu-Jabu Basement Ledge Before Big Octo":
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu Ruto Section Bottom Floor": "true"
+    "Jabu-Jabu Basement Ledge Before Big Octo After Green Tentacle": "event(JABU_TENTACLE_GREEN)" #This tentacle can block in door rando, so it needs its own region.
+  locations:
     "MQ Jabu-Jabu Wonder Item Basement Right Cow 1": "can_use_slingshot"
     "MQ Jabu-Jabu Wonder Item Basement Right Cow 2": "can_use_slingshot"
     "MQ Jabu-Jabu Wonder Item Basement Right Cow 3": "can_use_slingshot"
     "MQ Jabu-Jabu Wonder Item Basement Left Cow 1": "can_use_slingshot"
     "MQ Jabu-Jabu Wonder Item Basement Left Cow 2": "can_use_slingshot"
     "MQ Jabu-Jabu Wonder Item Basement Left Cow 3": "can_use_slingshot"
-    "MQ Jabu-Jabu Wonder Item After Big Octo": "event(JABU_BIG_OCTO) && can_use_slingshot"
-    "MQ Jabu-Jabu Wonder Item Platforms Cow": "event(JABU_BIG_OCTO) && can_use_slingshot"
-"Jabu-Jabu Back":
+"Jabu-Jabu Basement Ledge Before Big Octo After Green Tentacle":
   dungeon: JJ
   exits:
-    "Jabu-Jabu Main": "true"
+    "Jabu-Jabu Basement Ledge Before Big Octo": "event(JABU_TENTACLE_GREEN)" #This tentacle can block in door rando, so it needs its own region.
+    "Jabu-Jabu Big Octo Room": "true"
+"Jabu-Jabu Big Octo Room":
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu Basement Ledge Before Big Octo After Green Tentacle": "true"
+    "Jabu-Jabu Above Big Octo Fight": "event(JABU_BIG_OCTO)"
   events:
-    "JABU_TENTACLE_BLUE": "((can_use_sticks && soul_like_like && can_use_slingshot) || has_fire) && can_boomerang && soul_enemy(SOUL_ENEMY_PARASITE)"
-    "JABU_TENTACLE_RED": "can_boomerang && soul_enemy(SOUL_ENEMY_PARASITE)"
-    "JABU_TENTACLE_GREEN": "event(JABU_TENTACLE_BLUE)"
+    JABU_BIG_OCTO: "event(JABU_TENTACLE_GREEN) && soul_octorok && (can_use_sticks || has_weapon) && soul_ruto"
+"Jabu-Jabu Above Big Octo Fight":
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu Room After Above Big Octo": "can_use_slingshot"
   locations:
-    "MQ Jabu-Jabu Back Chest": "soul_like_like && can_use_slingshot"
-    "MQ Jabu-Jabu GS Back": "gs && event(JABU_TENTACLE_BLUE)"
+    "MQ Jabu-Jabu Grass Big Octo Top 1": "can_cut_grass"
+    "MQ Jabu-Jabu Grass Big Octo Top 2": "can_cut_grass"
+    "MQ Jabu-Jabu Wonder Item After Big Octo": "can_use_slingshot"
+"Jabu-Jabu Room After Above Big Octo":
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu Above Big Octo Fight": "true"
+    "Jabu-Jabu Main Elevator Room High Ledge": "(climb_anywhere && can_play_elegy) || can_boomerang"
+  locations:
+    "MQ Jabu-Jabu Cow": "can_play_epona && can_use_slingshot"
+    "MQ Jabu-Jabu Grass Room After Big Octo": "can_cut_grass"
+    "MQ Jabu-Jabu Wonder Item Platforms Cow": "can_use_slingshot"
+"Jabu-Jabu Main Elevator Room High Ledge":
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu Room After Above Big Octo": "true"
+    "Jabu-Jabu Main Elevator Room Upper": "true"
+    "Jabu-Jabu Main Elevator Room Lower": "true"
+  events:
+    JABU_MQ_LOWER_BIG_OCTO_PLATFORM: "true"
+"Jabu-Jabu Back Forked Paths":
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu Vanilla Ruto Falling Room After Wiggling Thing": "true"
+    "Jabu-Jabu Back Forked Paths Left 1": "event(JABU_TENTACLE_BLUE)"
+    "Jabu-Jabu Back Forked Paths Left 2": "event(JABU_TENTACLE_BLUE)"
+    "Jabu-Jabu Back Forked Paths Center After Rocks": "has_explosives_or_hammer || climb_anywhere" #These rocks can block in door rando, so it needs its own region.
+    "Jabu-Jabu Back Forked Paths Right 1": "true"
+    "Jabu-Jabu Back Forked Paths Right 2": "event(JABU_MQ_BACK_FIRE_WEB)"
+  events:
+    JABU_MQ_BACK_CENTER_SWITCH: "has_explosives_or_hammer" #Event is split up because of the rocks.
+    JABU_MQ_BACK_FIRE_WEB: "has_fire || (can_use_sticks && event(JABU_MQ_LIKE_LIKE_ROOM_CLEAR))" #Good for now, but can't use sticks method with door rando.
+"Jabu-Jabu Back Forked Paths Center After Rocks":
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu Back Forked Paths": "has_explosives_or_hammer || climb_anywhere"
+    "Jabu-Jabu Back Forked Paths Center Room": "event(JABU_MQ_BACK_CENTER_SWITCH)"
+  events:
+    JABU_MQ_BACK_CENTER_SWITCH: "can_play_elegy" #Event is split up because of the rocks.
+"Jabu-Jabu Back Forked Paths Center Room":
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu Back Forked Paths Center After Rocks": "true"
+  events:
+    JABU_TENTACLE_RED: "can_boomerang && soul_enemy(SOUL_ENEMY_PARASITE)"
+"Jabu-Jabu Back Forked Paths Right 1":
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu Back Forked Paths": "event(JABU_MQ_LIKE_LIKE_ROOM_CLEAR)"
+  events:
+    JABU_MQ_LIKE_LIKE_ROOM_CLEAR: "soul_like_like && can_use_slingshot"
+  locations:
+    "MQ Jabu-Jabu Back Chest": "event(JABU_MQ_LIKE_LIKE_ROOM_CLEAR)"
     "MQ Jabu-Jabu Pot Like-Like Room 1": "true"
     "MQ Jabu-Jabu Pot Like-Like Room 2": "true"
     "MQ Jabu-Jabu Grass Torch Room": "can_cut_grass"
@@ -84,22 +200,43 @@
     "MQ Jabu-Jabu Wonder Item Falling Like-Likes Explosion 1": "has_explosives"
     "MQ Jabu-Jabu Wonder Item Falling Like-Likes Explosion 2": "has_explosives"
     "MQ Jabu-Jabu Wonder Item Falling Like-Likes Explosion 3": "has_explosives"
+"Jabu-Jabu Back Forked Paths Right 2":
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu Back Forked Paths": "true" #One-sided collision on the web
+  events:
+    JABU_TENTACLE_BLUE: "can_boomerang && soul_enemy(SOUL_ENEMY_PARASITE)"
+"Jabu-Jabu Back Forked Paths Left 1":
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu Back Forked Paths": "true"
+  events:
+    JABU_TENTACLE_GREEN: "can_boomerang && soul_enemy(SOUL_ENEMY_PARASITE)"
+"Jabu-Jabu Back Forked Paths Left 2":
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu Back Forked Paths": "true"
+  locations:
+    "MQ Jabu-Jabu GS Back": "gs && ((climb_anywhere && (can_hammer || can_use_mask_blast)) || (has_explosives && can_collect_distance))"
 "Jabu-Jabu Basement Side Room":
   dungeon: JJ
   exits:
-    "Jabu-Jabu Main": "true"
+    "Jabu-Jabu Ruto Section Bottom Floor": "event(JABU_MQ_BASEMENT_SIDE_BUTTON)" #Hard to tell if the Red Tentacle will interfere exiting the room with how close to the door it is.
+  events:
+    JABU_MQ_BASEMENT_SIDE_PLATFORM: "has_lens && soul_keese && soul_enemy(SOUL_ENEMY_STINGER) && has_ranged_weapon"
+    JABU_MQ_BASEMENT_SIDE_BUTTON: "true" #Listed here for action shuffle
   locations:
-    "MQ Jabu-Jabu GS Basement Side Room": "gs && ((has_lens && soul_keese && soul_enemy(SOUL_ENEMY_STINGER)) || (has_hover_boots && can_collect_distance) || (has_fire_arrows && can_longshot))"
-"Jabu-Jabu Pre-Boss":
+    "MQ Jabu-Jabu GS Basement Side Room": "gs && ((event(JABU_MQ_BASEMENT_SIDE_PLATFORM) && can_collect_distance) || (has_hover_boots && can_collect_distance) || (has_fire_arrows && can_longshot) || (climb_anywhere && can_collect_distance))"
+"Jabu-Jabu Pre-Boss Room":
   dungeon: JJ
   exits:
+    "Jabu-Jabu Main Elevator Room Ledge Before Pre-Boss After Red Tentacle": "true"
     "Jabu-Jabu Boss": "event(JABU_MQ_END)"
-    "Jabu-Jabu Main": "true"
   events:
     "JABU_MQ_END": "can_use_slingshot"
   locations:
     "MQ Jabu-Jabu Pre-Boss Chest": "can_use_slingshot"
-    "MQ Jabu-Jabu GS Pre-Boss": "gs && can_boomerang" #Adult probably has some solutions here, but it doesn't matter
+    "MQ Jabu-Jabu GS Pre-Boss": "gs && can_boomerang" #Hookshot or longshot might be viable here; needs testing.
     "MQ Jabu-Jabu Pot Before Boss": "true"
     "MQ Jabu-Jabu Grass Before Boss 1": "can_cut_grass"
     "MQ Jabu-Jabu Grass Before Boss 2": "can_cut_grass"
