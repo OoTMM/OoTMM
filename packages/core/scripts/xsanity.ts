@@ -1,8 +1,9 @@
-import { promises as fs } from 'fs';
+import { promises as fs, rmSync } from 'fs';
 import { SCENES } from '@ootmm/data';
 
 import { CodeGen } from '../lib/combo/util/codegen';
 import { decompressGame } from '../lib/combo/decompress';
+import { table } from 'console';
 
 const OOT_GENERIC_GROTTOS = [
   0x00, /* Hyrule Field Market */
@@ -184,6 +185,8 @@ const ACTORS_MM = {
   OBJ_COMB: 0x0e4,
   OBJ_FLOWERPOT: 0x13e,
   OBJ_TARU: 0x22d,
+  OBJ_SNOWBALL: 0x1dc,
+  OBJ_SNOWBALL2: 0x1f9
   //DOOR_ANA: 0x55,
 };
 
@@ -594,9 +597,10 @@ function parseRoomActors(rom: Buffer, raw: RawRoom, game: Game): RoomActors[] {
       const posx = rom.readInt16BE(actorVromBase + 0x02);
       const posy = rom.readInt16BE(actorVromBase + 0x04);
       const posz = rom.readInt16BE(actorVromBase + 0x06);
-      const rx = rom.readUInt16BE(actorVromBase + 0x08);
-      const ry = rom.readUInt16BE(actorVromBase + 0x0a);
-      const rz = rom.readUInt16BE(actorVromBase + 0x0c);
+      const rshift = (game === 'mm') ? 7 : 0;
+      const rx = rom.readUInt16BE(actorVromBase + 0x08) >>> rshift;
+      const ry = rom.readUInt16BE(actorVromBase + 0x0a) >>> rshift;
+      const rz = rom.readUInt16BE(actorVromBase + 0x0c) >>> rshift;
       const params = rom.readUInt16BE(actorVromBase + 0x0e);
       actors.push({ actorId, typeId, pos: [posx, posy, posz], rx, ry, rz, params });
     }
@@ -1381,6 +1385,18 @@ function actorHandlerMmObjFlowerpot(checks: Check[], ra: RoomActor) {
   checks.push({ roomActor: ra, sliceId: 1, item: item, name: 'Potted Plant', name2: 'Grass', type: 'grass' });
 }
 
+function actorHandlerMmObjSnowball(checks: Check[], ra: RoomActor) {
+  if (ra.actor.ry == 1) return; /* Goron Elder */
+
+  const item = mmCollectibleDrop(ra.actor.params & 0x3f);
+  checks.push({ roomActor: ra, item, name: 'Big Snowball', type: 'snowball' })
+}
+
+function actorHandlerMmObjSnowball2(checks: Check[], ra: RoomActor) {
+  const item = mmCollectibleDrop(ra.actor.params & 0x3f);
+  checks.push({ roomActor: ra, item, name: 'Small Snowball', type: 'snowball' })
+}
+
 function actorHandlerMmObjTaru(checks: Check[], ra: RoomActor) {
   if (ra.actor.params & 0x80) return; /* Weird fake-barrel */
   const item = mmCollectibleDrop(ra.actor.params & 0x3f);
@@ -1399,6 +1415,8 @@ const ACTORS_HANDLERS_MM = {
   [ACTORS_MM.OBJ_COMB]: actorHandlerMmObjComb,
   [ACTORS_MM.OBJ_FLOWERPOT]: actorHandlerMmObjFlowerpot,
   [ACTORS_MM.OBJ_TARU]: actorHandlerMmObjTaru,
+  [ACTORS_MM.OBJ_SNOWBALL]: actorHandlerMmObjSnowball,
+  [ACTORS_MM.OBJ_SNOWBALL2]: actorHandlerMmObjSnowball2,
 };
 
 const ACTORS_HANDLERS = {
@@ -1442,7 +1460,7 @@ function outputChecks(game: 'oot' | 'mm', checks: Check[], filter?: string) {
     }
 
     const key = ((check.sliceId ?? 0) << 16) | ((ra.setupId & 0x3) << 14) | (ra.roomId << 8) | ra.actor.actorId;
-    let name = `Scene ${ra.sceneId.toString(16)} Setup ${ra.setupId} Room ${hexPad(ra.roomId, 2)} ${check.name} ${decPad(ra.actor.actorId + 1, 2)}`;
+    let name = `Scene ${ra.sceneId.toString(16)} Setup ${ra.setupId} Room ${decPad(ra.roomId+1, 2)} ${check.name} ${decPad(ra.actor.actorId + 1, 2)}`; /* Room + 1 , to match SceneNavi/SceneTatl */
     if (check.name2) {
       name = `${name} ${check.name2}`;
     }
@@ -1450,7 +1468,7 @@ function outputChecks(game: 'oot' | 'mm', checks: Check[], filter?: string) {
     components.push(`${name},`.padEnd(60));
     components.push(`${check.type},`.padEnd(16));
     components.push('NONE,'.padEnd(22));
-    components.push(`SCENE_${ra.sceneId.toString(16)},`.padEnd(32));
+    components.push(`${scenesById(game)[ra.sceneId].slice(3 + Number(game === 'oot'))},`.padEnd(32));
     components.push(`${hexPad(key, 5)},`.padEnd(28));
     components.push(check.item);
     console.log(components.join(''));
