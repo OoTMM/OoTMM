@@ -126,7 +126,7 @@ int comboSilverRupeesIncCount(GameState_Play* play, int id)
                 g.delayedSwitchFlag = data->flag;
             }
             else
-                SetSwitchFlag(play, data->flag);
+                Flags_SetSwitch(play, data->flag);
         }
 #endif
     }
@@ -149,6 +149,6 @@ void comboSrUpdate(GameState_Play* play)
         if (comboSilverRupeesGetCount(sr) < data->count)
             continue;
 
-        SetSwitchFlag(play, data->flag);
+        Flags_SetSwitch(play, data->flag);
     }
 }

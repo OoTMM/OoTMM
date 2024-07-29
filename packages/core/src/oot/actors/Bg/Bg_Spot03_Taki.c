@@ -2,7 +2,7 @@
 
 int comboZoraWaterfallDown(GameState_Play* play, int flag)
 {
-    if (GetSwitchFlag(play, flag))
-        SetSwitchFlag(play, 0x0);
-    return GetSwitchFlag(play, 0x0);
+    if (Flags_GetSwitch(play, flag))
+        Flags_SetSwitch(play, 0x0);
+    return Flags_GetSwitch(play, 0x0);
 }
