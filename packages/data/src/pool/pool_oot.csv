@@ -2132,12 +2132,12 @@ MQ Fire Temple Pre-Boss Room Tall Ledge Middle Large Crate, crate,          NONE
 MQ Fire Temple Pre-Boss Room Near Cage Large Crate 1,       crate,          NONE,                 TEMPLE_FIRE,                    0x0020d,                    RUPEE_GREEN
 MQ Fire Temple Pre-Boss Room Near Cage Large Crate 2,       crate,          NONE,                 TEMPLE_FIRE,                    0x0020e,                    RUPEE_GREEN
 MQ Fire Temple Pre-Boss Room Tall Ledge Top Large Crate,    crate,          NONE,                 TEMPLE_FIRE,                    0x0020f,                    RUPEE_GREEN
-MQ Fire Temple Room 0x04 Large Crate 11,                    crate,          NONE,                 TEMPLE_FIRE,                    0x0040a,                    RUPEE_GREEN
-MQ Fire Temple Room 0x04 Large Crate 12,                    crate,          NONE,                 TEMPLE_FIRE,                    0x0040b,                    RUPEE_GREEN
-MQ Fire Temple Room 0x04 Large Crate 13,                    crate,          NONE,                 TEMPLE_FIRE,                    0x0040c,                    RUPEE_GREEN
-MQ Fire Temple Room 0x04 Large Crate 14,                    crate,          NONE,                 TEMPLE_FIRE,                    0x0040d,                    RUPEE_GREEN
-MQ Fire Temple Room 0x04 Large Crate 15,                    crate,          NONE,                 TEMPLE_FIRE,                    0x0040e,                    RUPEE_GREEN
-MQ Fire Temple Room 0x04 Large Crate 16,                    crate,          NONE,                 TEMPLE_FIRE,                    0x0040f,                    RUPEE_GREEN
+MQ Fire Temple Cell Below Maze Large Crate 1,               crate,          NONE,                 TEMPLE_FIRE,                    0x0040a,                    RUPEE_GREEN
+MQ Fire Temple Cell Below Maze Large Crate 2,               crate,          NONE,                 TEMPLE_FIRE,                    0x0040b,                    RUPEE_GREEN
+MQ Fire Temple Cell Below Maze Large Crate 3,               crate,          NONE,                 TEMPLE_FIRE,                    0x0040c,                    RUPEE_GREEN
+MQ Fire Temple Cell Below Maze Large Crate 4,               crate,          NONE,                 TEMPLE_FIRE,                    0x0040d,                    RUPEE_GREEN
+MQ Fire Temple Cell Below Maze Large Crate 5,               crate,          NONE,                 TEMPLE_FIRE,                    0x0040e,                    RUPEE_GREEN
+MQ Fire Temple Cell Below Maze Large Crate 6,               crate,          NONE,                 TEMPLE_FIRE,                    0x0040f,                    RUPEE_GREEN
 MQ Fire Temple Room 0x05 Large Crate 25,                    crate,          NONE,                 TEMPLE_FIRE,                    0x00518,                    RUPEE_GREEN
 MQ Fire Temple Room 0x05 Large Crate 26,                    crate,          NONE,                 TEMPLE_FIRE,                    0x00519,                    RUPEE_GREEN
 MQ Fire Temple Room 0x05 Large Crate 27,                    crate,          NONE,                 TEMPLE_FIRE,                    0x0051a,                    RUPEE_GREEN
