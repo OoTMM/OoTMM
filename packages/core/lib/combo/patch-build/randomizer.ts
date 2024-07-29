@@ -394,6 +394,7 @@ function checkKey(check: WorldCheck): number {
   case 'barrel':
   case 'grass':
   case 'fairy':
+  case 'snowball':
   case 'hive':
   case 'rupee':
   case 'heart':

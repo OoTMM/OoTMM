@@ -61,7 +61,6 @@
 # define SEGADDR_ODOLWA_VERTICAL_HOP_ANIM           SEGADDR_FROM_OFFSET(6, 0x1af18)
 # define SEGADDR_ODOLWA_VERTICAL_SLASH_ANIM         SEGADDR_FROM_OFFSET(6, 0x00c44)
 
-# define SEGADDR_CIRCLE_SHADOW_DL                   SEGADDR_FROM_OFFSET(4, 0x76BC0)
 # define SEGADDR_EFF_FIRE1_DL                       SEGADDR_FROM_OFFSET(4, 0x7D590)
 
 #endif
@@ -3444,7 +3443,7 @@ void Boss01_DrawEffects(GameState_Play* play) {
             Matrix_Translate(effect->pos.x, 0.0f, effect->pos.z, MAT_SET);
             Matrix_Scale(effect->scale * 50.0f, 1.0f, effect->scale * 50.0f, MAT_MUL);
             gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-            gSPDisplayList(POLY_XLU_DISP++, OS_K0_TO_PHYSICAL(SEGADDR_FROM_OFFSET(4, 0x76BC0))); // gCircleShadowDL in gameplay_keep
+            gSPDisplayList(POLY_XLU_DISP++, SEGADDR_CIRCLE_SHADOW_DL); // gCircleShadowDL in gameplay_keep
         }
     }
 

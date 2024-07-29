@@ -158,6 +158,8 @@ s32 CollisionCheck_LineOCCheck(GameState_Play* play, CollisionCheckContext* colC
 /* Unsure if that same function exists in OoT */
 #if defined(GAME_MM)
 void CollisionCheck_SpawnShieldParticles(GameState_Play* play, Vec3f* v);
+f32 BgCheck_EntityRaycastFloor5(CollisionContext* colCtx, CollisionPoly** outPoly, s32* outBgId, struct Actor* actor, Vec3f* pos);
+
 #endif
 
 DynaPolyActor* DynaPoly_GetActor(CollisionContext* colCtx, s32 bgId);

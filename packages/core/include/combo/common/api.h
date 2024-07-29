@@ -284,6 +284,7 @@ s32 Player_SetCsActionWithHaltedActors(GameState_Play* play, Actor* csActor, u8 
 s32 Actor_TalkOfferAccepted(Actor* actor, GameState* gameState);
 s32 Actor_OfferTalkExchange(Actor* actor, GameState_Play* play, f32 xzRange, f32 yRange, PlayerItemAction exchangeItemAction);
 s32 Actor_OfferTalk(Actor* actor, GameState_Play* play, f32 radius);
+s32 Actor_TextboxIsClosing(Actor* actor, GameState_Play* play);
 #endif
 
 int Actor_RunByteCode(Actor* this, GameState_Play* play, void* bytecode, void* unk1, void* unk2);
@@ -518,10 +519,12 @@ void Matrix_RotateYS(s16 y, int mode);
 void Matrix_RotateYF(f32 y, int mode);
 void Matrix_RotateZS(s16 z, int mode);
 void Matrix_RotateZF(f32 z, int mode);
+void Matrix_RotateZYX(s16 x, s16 y, s16 z, int mode);
 void Matrix_MultZero(Vec3f* dest);
 void Matrix_RotateXFApply(f32 x);
 void Matrix_ReplaceRotation(MtxF* mf);
 void Matrix_RotateXFNew(f32 x);
+void Matrix_Put(MtxF* src);
 
 s16 Play_CreateSubCamera(GameState_Play* this);
 s32 Play_ChangeCameraStatus(GameState_Play* this, s16 camId, s16 status);
@@ -571,5 +574,9 @@ void func_80169AFC(GameState_Play* play, s16 camId, s16 timer);
 void func_800B8D50(GameState_Play* play, Actor* actor, f32 arg2, s16 yaw, f32 arg4, u32 arg5);
 void func_800B4AEC(GameState_Play* play, Actor* actor, f32 y);
 void func_800B3030(GameState_Play* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, s16 scale, s16 scaleStep, s32 colorIndex);
+void func_800B0E48(GameState_Play* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, Color_RGBA8* primColor, Color_RGBA8* envColor, s16 scale, s16 scaleStep);
+
+/* Compute transform matrix mapping +y (up) to the collision poly's normal */
+void func_800C0094(CollisionPoly* poly, f32 tx, f32 ty, f32 tz, MtxF* dest);
 
 #endif

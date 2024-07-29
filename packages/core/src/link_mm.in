@@ -133,6 +133,7 @@ Gfx_SetupDL25_Opa = 0x8012c28c;
 Gfx_SetupDL25_Xlu = 0x8012c2dc;
 Gfx_SetupDL_42Opa = 0x8012c8ac;
 GetMatrixMV     = 0x80181a40;
+Matrix_Put      = 0x8018020c;
 DisplaceTexture = 0x8012cbd0;
 Gfx_SetupDL = 0x8012BF78;
 
@@ -545,3 +546,10 @@ Gfx_SetupDL72 = 0x8012c304;
 Scene_SetRenderModeXlu = 0x80131df0;
 Player_GetMask = 0x8012403c;
 SkelAnime_DrawFlex = 0x80134dbc;
+
+Actor_TextboxIsClosing = 0x800b867c;
+func_800B0E48 = 0x800b0e48;
+BgCheck_EntityRaycastFloor5 = 0x800c411c;
+Matrix_RotateZYX = 0x8018103c;
+Math3D_CosOut = 0x80179eac;
+func_800C0094 = 0x800c0094;
