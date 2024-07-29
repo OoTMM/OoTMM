@@ -102,6 +102,16 @@
     "MQ Fire Temple Pot Bridge Above Lava Room 2": "true"
     "MQ Fire Temple Pot Bridge Above Lava Room 3": "true"
     "MQ Fire Temple Wonder Item Torch Room": "can_hookshot" # Unsure
+    "MQ Fire Temple 3F Lava Room Near Cage Large Crate": "can_hookshot || is_adult"
+    "MQ Fire Temple 3F Lava Room Near Cage Small Crate 1": "can_hookshot || is_adult"
+    "MQ Fire Temple 3F Lava Room Near Cage Small Crate 2": "can_hookshot || is_adult"
+    "MQ Fire Temple 3F Lava Room High Ledge Large Crate": "can_hookshot || is_adult"
+    "MQ Fire Temple 3F Lava Room High Ledge Small Crate": "can_hookshot || is_adult"
+    "MQ Fire Temple 3F Lava Room Lower Large Crate 1": "true"
+    "MQ Fire Temple 3F Lava Room Lower Large Crate 2": "true"
+    "MQ Fire Temple 3F Lava Room Lower Large Crate 3": "true"
+    "MQ Fire Temple 3F Lava Room Lower Small Crate 1": "true"
+    "MQ Fire Temple 3F Lava Room Lower Small Crate 2": "true"
 "Fire Temple Fire Walls":
   dungeon: Fire
   exits:
