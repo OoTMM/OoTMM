@@ -384,6 +384,8 @@ Actor_EnItem00* Item_DropCollectible(GameState_Play* play, const Vec3f* pos, s16
 void Item_DropCollectibleRandom(GameState_Play* play, Actor* from, const Vec3f* pos, s16 params);
 int Item_CanDropBigFairy(GameState_Play* play, s32 index, s32 collectibleFlag);
 
+MtxF* Matrix_GetCurrent(void);
+
 #if defined(GAME_MM)
 f32 VectDist(Vec3f* vec1, Vec3f* vec2);
 f32 Math_Vec3f_DistXYZAndStoreDiff(Vec3f* a, Vec3f* b, Vec3f* dest);
