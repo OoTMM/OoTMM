@@ -1,4 +1,6 @@
 #include <combo.h>
+#include <combo/global.h>
+#include <combo/item.h>
 #include "Obj_Taru.h"
 
 #define FLAGS 0
@@ -44,6 +46,36 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_F32(uncullZoneScale, 200, ICHAIN_CONTINUE),
     ICHAIN_F32(uncullZoneDownward, 200, ICHAIN_STOP),
 };
+
+static int ObjTaru_IsShuffled(Actor_ObjTaru* this)
+{
+    return !!(this->isExtended && !comboXflagsGet(&this->xflag));
+}
+
+static int ObjTaru_DropCustom(Actor_ObjTaru* this, GameState_Play* play)
+{
+    if (!ObjTaru_IsShuffled(this))
+        return 0;
+    EnItem00_DropCustom(play, &this->dyna.actor.world.pos, &this->xflag);
+    return 1;
+}
+
+static void ObjTaru_InitXflag(Actor_ObjTaru* this, GameState_Play* play)
+{
+    ComboItemOverride   o;
+    Xflag*              xflag;
+
+    /* Set the extended properties */
+    xflag = &this->xflag;
+    xflag->sceneId = play->sceneId;
+    xflag->setupId = g.sceneSetupId;
+    xflag->roomId = this->dyna.actor.room;
+    xflag->sliceId = 0;
+    xflag->id = this->dyna.actor.actorIndex;
+
+    comboXflagItemOverride(&o, &this->xflag, 0);
+    this->isExtended = !!(o.gi && !comboXflagsGet(&this->xflag));
+}
 
 void func_80B9B74C(Actor_ObjTaru* this, GameState_Play* play)
 {
@@ -131,6 +163,9 @@ void func_80B9B9C8(Actor_ObjTaru* this, GameState_Play* play) {
 void ObjTaru_DropCollectible(Actor_ObjTaru* this, GameState_Play* play) {
     s32 item;
 
+    if (ObjTaru_DropCustom(this, play))
+        return;
+
     item = Item_CollectibleDropTable(OBJ_TARU_GET_3F(this));
     if (item >= 0) {
         Item_DropCollectible(play, &this->dyna.actor.world.pos, (OBJ_TARU_GET_7F00(this) << 8) | item);
@@ -139,6 +174,7 @@ void ObjTaru_DropCollectible(Actor_ObjTaru* this, GameState_Play* play) {
 
 void ObjTaru_Init(Actor_ObjTaru* this, GameState_Play* play)
 {
+    ObjTaru_InitXflag(this, play);
     DynaPolyActor_Init(&this->dyna, 0);
     Actor_ProcessInitChain(&this->dyna.actor, sInitChain);
 

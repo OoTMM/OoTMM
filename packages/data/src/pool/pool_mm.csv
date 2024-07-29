@@ -1929,6 +1929,14 @@ Great Bay Temple Crate Green Pipe 4,                    crate,          NONE,   
 Great Bay Temple Crate Green Pipe 5,                    crate,          NONE,                   TEMPLE_GREAT_BAY,             0x00a1a,                    MAGIC_JAR_LARGE
 Great Bay Temple Crate Green Pipe 6,                    crate,          NONE,                   TEMPLE_GREAT_BAY,             0x00a1b,                    MAGIC_JAR_LARGE
 Great Bay Temple Crate Green Pipe 7,                    crate,          NONE,                   TEMPLE_GREAT_BAY,             0x00a1c,                    MAGIC_JAR_LARGE
+Great Bay Temple Barrel Entrance 1,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00d00,                    NOTHING
+Great Bay Temple Barrel Entrance 2,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00d01,                    RECOVERY_HEART
+Great Bay Temple Barrel Entrance 3,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00d02,                    RECOVERY_HEART
+Great Bay Temple Barrel Entrance 4,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00d03,                    FLEXIBLE
+Great Bay Temple Barrel Entrance 5,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00d04,                    BOMBS_5
+Great Bay Temple Barrel Entrance 6,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00d05,                    BOMBS_5
+Great Bay Temple Barrel Entrance 7,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00d06,                    ARROWS_10
+Great Bay Temple Barrel Entrance 8,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00d07,                    ARROWS_10
 Great Bay Temple Rupee Compass Room 1,                  rupee,          NONE,                   TEMPLE_GREAT_BAY,             0x00400,                    RUPEE_RED
 Great Bay Temple Rupee Compass Room 2,                  rupee,          NONE,                   TEMPLE_GREAT_BAY,             0x00401,                    RUPEE_RED
 Great Bay Temple Rupee Entrance 1,                      rupee,          NONE,                   TEMPLE_GREAT_BAY,             0x00800,                    RUPEE_RED

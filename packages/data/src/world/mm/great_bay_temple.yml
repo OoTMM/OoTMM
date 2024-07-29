@@ -18,6 +18,14 @@
     "WARP_SONGS": "true"
   locations:
     "Great Bay Temple Entrance Chest": "has_sticks || can_use_fire_short_range || (has_arrows && trick(MM_GBT_ENTRANCE_BOW))"
+    "Great Bay Temple Barrel Entrance 1": "true"
+    "Great Bay Temple Barrel Entrance 2": "true"
+    "Great Bay Temple Barrel Entrance 3": "true"
+    "Great Bay Temple Barrel Entrance 4": "true"
+    "Great Bay Temple Barrel Entrance 5": "true"
+    "Great Bay Temple Barrel Entrance 6": "true"
+    "Great Bay Temple Barrel Entrance 7": "true"
+    "Great Bay Temple Barrel Entrance 8": "true"
 "Great Bay Temple Water Wheel":
   dungeon: GB
   events:

@@ -2,6 +2,7 @@
 #define OVL_OBJ_TARU_H
 
 #include <combo/actor.h>
+#include <combo/xflags.h>
 
 typedef struct Actor_ObjTaru Actor_ObjTaru;
 
@@ -13,6 +14,8 @@ struct Actor_ObjTaru
     ColliderCylinder    collider;
     Actor_ObjTaruFunc   actionFunc;
     s8                  unk_1AC;
+    Xflag               xflag;
+    u8                  isExtended;
 };
 
 #endif
