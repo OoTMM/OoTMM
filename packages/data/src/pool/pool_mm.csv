@@ -1963,6 +1963,16 @@ Great Bay Temple Barrel Entrance 5,                     barrel,         NONE,   
 Great Bay Temple Barrel Entrance 6,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00d05,                    BOMBS_5
 Great Bay Temple Barrel Entrance 7,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00d06,                    ARROWS_10
 Great Bay Temple Barrel Entrance 8,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00d07,                    ARROWS_10
+Great Bay Temple Barrel Chu Room 1,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00202,                    NOTHING
+Great Bay Temple Barrel Chu Room 2,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00203,                    RECOVERY_HEART
+Great Bay Temple Barrel Chu Room 3,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00204,                    RECOVERY_HEART
+Great Bay Temple Barrel Chu Room 4,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00205,                    BOMBS_5
+Great Bay Temple Barrel Chu Room 5,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00206,                    ARROWS_10
+Great Bay Temple Barrel Green Pipe 1 1,                 barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00c0a,                    RECOVERY_HEART
+Great Bay Temple Barrel Green Pipe 1 2,                 barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00c0b,                    BOMBS_5
+Great Bay Temple Barrel Green Pipe 1 3,                 barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00c0c,                    ARROWS_20
+Great Bay Temple Barrel Green Pipe 2 1,                 barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00906,                    MAGIC_JAR_LARGE
+Great Bay Temple Barrel Green Pipe 2 2,                 barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00907,                    MAGIC_JAR_LARGE
 Great Bay Temple Rupee Compass Room 1,                  rupee,          NONE,                   TEMPLE_GREAT_BAY,             0x00400,                    RUPEE_RED
 Great Bay Temple Rupee Compass Room 2,                  rupee,          NONE,                   TEMPLE_GREAT_BAY,             0x00401,                    RUPEE_RED
 Great Bay Temple Rupee Entrance 1,                      rupee,          NONE,                   TEMPLE_GREAT_BAY,             0x00800,                    RUPEE_RED
