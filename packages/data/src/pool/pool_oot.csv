@@ -1798,9 +1798,9 @@ MQ Deku Tree Wonder Item 1,                                 wonder,         NONE
 MQ Deku Tree Wonder Item 2,                                 wonder,         NONE,                 INSIDE_DEKU_TREE,               0x0070a,                    RECOVERY_HEART
 MQ Deku Tree Wonder Item 3,                                 wonder,         NONE,                 INSIDE_DEKU_TREE,               0x0070b,                    RECOVERY_HEART
 MQ Deku Tree Wonder Item 4,                                 wonder,         NONE,                 INSIDE_DEKU_TREE,               0x0070c,                    RECOVERY_HEART
-MQ Deku Tree Room 0x00 Large Crate 29,                      crate,          NONE,                 INSIDE_DEKU_TREE,               0x0001c,                    RUPEE_GREEN
-MQ Deku Tree Room 0x0a Large Crate 17,                      crate,          NONE,                 INSIDE_DEKU_TREE,               0x00a10,                    RUPEE_GREEN
-MQ Deku Tree Room 0x0a Large Crate 18,                      crate,          NONE,                 INSIDE_DEKU_TREE,               0x00a11,                    RUPEE_GREEN
+MQ Deku Tree Main Room 2nd Floor Crate,                     crate,          NONE,                 INSIDE_DEKU_TREE,               0x0001c,                    RUPEE_GREEN
+MQ Deku Tree Slingshot Room Large Crate 1,                  crate,          NONE,                 INSIDE_DEKU_TREE,               0x00a10,                    RUPEE_GREEN
+MQ Deku Tree Slingshot Room Large Crate 2,                  crate,          NONE,                 INSIDE_DEKU_TREE,               0x00a11,                    RUPEE_GREEN
 MQ Dodongo Cavern Map Chest,                                chest,          NONE,                 DODONGO_CAVERN,                 0x00,                       MAP_DC
 MQ Dodongo Cavern Compass Chest,                            chest,          NONE,                 DODONGO_CAVERN,                 0x05,                       COMPASS_DC
 MQ Dodongo Cavern Larvae Room Chest,                        chest,          NONE,                 DODONGO_CAVERN,                 0x02,                       RUPEE_BLUE
@@ -1863,28 +1863,28 @@ MQ Dodongo Cavern Grass Green Corridor Side Room 2,         grass,          NONE
 MQ Dodongo Cavern Grass Boss Loop Side Room,                grass,          NONE,                 DODONGO_CAVERN,                 0x00e00,                    DEKU_SEEDS_5
 MQ Dodongo Cavern Heart Lizalfos Room,                      heart,          NONE,                 DODONGO_CAVERN,                 0x00305,                    RECOVERY_HEART
 MQ Dodongo Cavern Heart Vanilla Bomb Bag Room,              heart,          NONE,                 DODONGO_CAVERN,                 0x00905,                    RECOVERY_HEART
-MQ Dodongo Cavern Room 0x02 Large Crate 39,                 crate,          NONE,                 DODONGO_CAVERN,                 0x00226,                    RUPEE_GREEN
-MQ Dodongo Cavern Room 0x02 Large Crate 40,                 crate,          NONE,                 DODONGO_CAVERN,                 0x00227,                    RUPEE_GREEN
-MQ Dodongo Cavern Room 0x02 Large Crate 41,                 crate,          NONE,                 DODONGO_CAVERN,                 0x00228,                    RUPEE_GREEN
-MQ Dodongo Cavern Room 0x02 Large Crate 42,                 crate,          NONE,                 DODONGO_CAVERN,                 0x00229,                    RUPEE_GREEN
-MQ Dodongo Cavern Room 0x02 Large Crate 43,                 crate,          NONE,                 DODONGO_CAVERN,                 0x0022a,                    RUPEE_GREEN
-MQ Dodongo Cavern Room 0x02 Large Crate 44,                 crate,          NONE,                 DODONGO_CAVERN,                 0x0022b,                    RUPEE_GREEN
-MQ Dodongo Cavern Room 0x04 Large Crate 23,                 crate,          NONE,                 DODONGO_CAVERN,                 0x00416,                    RUPEE_GREEN
-MQ Dodongo Cavern Room 0x04 Large Crate 24,                 crate,          NONE,                 DODONGO_CAVERN,                 0x00417,                    RUPEE_GREEN
-MQ Dodongo Cavern Room 0x04 Large Crate 25,                 crate,          NONE,                 DODONGO_CAVERN,                 0x00418,                    RUPEE_GREEN
-MQ Dodongo Cavern Room 0x04 Large Crate 26,                 crate,          NONE,                 DODONGO_CAVERN,                 0x00419,                    RUPEE_GREEN
-MQ Dodongo Cavern Room 0x04 Large Crate 27,                 crate,          NONE,                 DODONGO_CAVERN,                 0x0041a,                    RUPEE_GREEN
-MQ Dodongo Cavern Room 0x04 Large Crate 28,                 crate,          NONE,                 DODONGO_CAVERN,                 0x0041b,                    RUPEE_GREEN
-MQ Dodongo Cavern Room 0x04 Large Crate 29,                 crate,          NONE,                 DODONGO_CAVERN,                 0x0041c,                    RUPEE_GREEN
-MQ Dodongo Cavern Room 0x04 Large Crate 30,                 crate,          NONE,                 DODONGO_CAVERN,                 0x0041d,                    RUPEE_GREEN
-MQ Dodongo Cavern Room 0x06 Large Crate 07,                 crate,          NONE,                 DODONGO_CAVERN,                 0x00606,                    RUPEE_GREEN
-MQ Dodongo Cavern Room 0x06 Large Crate 08,                 crate,          NONE,                 DODONGO_CAVERN,                 0x00607,                    RUPEE_GREEN
-MQ Dodongo Cavern Room 0x06 Large Crate 09,                 crate,          NONE,                 DODONGO_CAVERN,                 0x00608,                    RUPEE_GREEN
-MQ Dodongo Cavern Room 0x06 Large Crate 10,                 crate,          NONE,                 DODONGO_CAVERN,                 0x00609,                    RUPEE_GREEN
-MQ Dodongo Cavern Room 0x06 Large Crate 11,                 crate,          NONE,                 DODONGO_CAVERN,                 0x0060a,                    RUPEE_GREEN
-MQ Dodongo Cavern Room 0x06 Large Crate 12,                 crate,          NONE,                 DODONGO_CAVERN,                 0x0060b,                    RUPEE_GREEN
-MQ Dodongo Cavern Room 0x0c Large Crate 11,                 crate,          NONE,                 DODONGO_CAVERN,                 0x00c0a,                    RUPEE_GREEN
-MQ Dodongo Cavern Room 0x0c Large Crate 12,                 crate,          NONE,                 DODONGO_CAVERN,                 0x00c0b,                    RUPEE_GREEN
+MQ Dodongo Cavern Staircase Room Upper Large Crate 1,       crate,          NONE,                 DODONGO_CAVERN,                 0x00226,                    RUPEE_GREEN
+MQ Dodongo Cavern Staircase Room Upper Large Crate 2,       crate,          NONE,                 DODONGO_CAVERN,                 0x00227,                    RUPEE_GREEN
+MQ Dodongo Cavern Staircase Room Lower Large Crate 1,       crate,          NONE,                 DODONGO_CAVERN,                 0x00228,                    RUPEE_GREEN
+MQ Dodongo Cavern Staircase Room Lower Large Crate 2,       crate,          NONE,                 DODONGO_CAVERN,                 0x00229,                    RUPEE_GREEN
+MQ Dodongo Cavern Staircase Room Upper Large Crate 3,       crate,          NONE,                 DODONGO_CAVERN,                 0x0022a,                    RUPEE_GREEN
+MQ Dodongo Cavern Staircase Room Upper Large Crate 4,       crate,          NONE,                 DODONGO_CAVERN,                 0x0022b,                    RUPEE_GREEN
+MQ Dodongo Cavern Poe Room Large Crate 1,                   crate,          NONE,                 DODONGO_CAVERN,                 0x00416,                    RUPEE_GREEN
+MQ Dodongo Cavern Poe Room Large Crate 2,                   crate,          NONE,                 DODONGO_CAVERN,                 0x00417,                    RUPEE_GREEN
+MQ Dodongo Cavern Poe Room Large Crate 3,                   crate,          NONE,                 DODONGO_CAVERN,                 0x00418,                    RUPEE_GREEN
+MQ Dodongo Cavern Poe Room Large Crate 4,                   crate,          NONE,                 DODONGO_CAVERN,                 0x00419,                    RUPEE_GREEN
+MQ Dodongo Cavern Poe Room Large Crate 5,                   crate,          NONE,                 DODONGO_CAVERN,                 0x0041a,                    RUPEE_GREEN
+MQ Dodongo Cavern Poe Room Large Crate 6,                   crate,          NONE,                 DODONGO_CAVERN,                 0x0041b,                    RUPEE_GREEN
+MQ Dodongo Cavern Poe Room Large Crate 7,                   crate,          NONE,                 DODONGO_CAVERN,                 0x0041c,                    RUPEE_GREEN
+MQ Dodongo Cavern Poe Room Large Crate 8,                   crate,          NONE,                 DODONGO_CAVERN,                 0x0041d,                    RUPEE_GREEN
+MQ Dodongo Cavern Larve Room Large Crate 1,                 crate,          NONE,                 DODONGO_CAVERN,                 0x00606,                    RUPEE_GREEN
+MQ Dodongo Cavern Larve Room Large Crate 2,                 crate,          NONE,                 DODONGO_CAVERN,                 0x00607,                    RUPEE_GREEN
+MQ Dodongo Cavern Larve Room Large Crate 3,                 crate,          NONE,                 DODONGO_CAVERN,                 0x00608,                    RUPEE_GREEN
+MQ Dodongo Cavern Larve Room Large Crate 4,                 crate,          NONE,                 DODONGO_CAVERN,                 0x00609,                    RUPEE_GREEN
+MQ Dodongo Cavern Larve Room Large Crate 5,                 crate,          NONE,                 DODONGO_CAVERN,                 0x0060a,                    RUPEE_GREEN
+MQ Dodongo Cavern Larve Room Large Crate 6,                 crate,          NONE,                 DODONGO_CAVERN,                 0x0060b,                    RUPEE_GREEN
+MQ Dodongo Cavern Room After Upper Lizalfos Large Crate 1,  crate,          NONE,                 DODONGO_CAVERN,                 0x00c0a,                    RUPEE_GREEN
+MQ Dodongo Cavern Room After Upper Lizalfos Large Crate 2,  crate,          NONE,                 DODONGO_CAVERN,                 0x00c0b,                    RUPEE_GREEN
 MQ Jabu-Jabu Map Chest,                                     chest,          NONE,                 INSIDE_JABU_JABU,               0x03,                       MAP_JJ
 MQ Jabu-Jabu Entry Chest,                                   chest,          NONE,                 INSIDE_JABU_JABU,               0x05,                       NUTS_5
 MQ Jabu-Jabu Compass Chest,                                 chest,          NONE,                 INSIDE_JABU_JABU,               0x00,                       COMPASS_JJ
