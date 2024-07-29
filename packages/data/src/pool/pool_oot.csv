@@ -2118,9 +2118,9 @@ MQ Forest Temple Heart Garden 3,                            heart,          NONE
 MQ Forest Temple Heart Well 1,                              heart,          NONE,                 TEMPLE_FOREST,                  0x00904,                    RECOVERY_HEART
 MQ Forest Temple Heart Well 2,                              heart,          NONE,                 TEMPLE_FOREST,                  0x00905,                    RECOVERY_HEART
 MQ Forest Temple Heart Well 3,                              heart,          NONE,                 TEMPLE_FOREST,                  0x00906,                    RECOVERY_HEART
-MQ Forest Temple Room 0x0e Small Crate 08,                  crate,          NONE,                 TEMPLE_FOREST,                  0x00e07,                    ARROWS_5
-MQ Forest Temple Room 0x0e Small Crate 09,                  crate,          NONE,                 TEMPLE_FOREST,                  0x00e08,                    ARROWS_5
-MQ Forest Temple Room 0x0e Small Crate 10,                  crate,          NONE,                 TEMPLE_FOREST,                  0x00e09,                    RECOVERY_HEART
+MQ Forest Temple Spinning Red Pool Room Small Crate 1,      crate,          NONE,                 TEMPLE_FOREST,                  0x00e07,                    ARROWS_5
+MQ Forest Temple Spinning Red Pool Room Small Crate 2,      crate,          NONE,                 TEMPLE_FOREST,                  0x00e08,                    ARROWS_5
+MQ Forest Temple Spinning Red Pool Room Small Crate 3,      crate,          NONE,                 TEMPLE_FOREST,                  0x00e09,                    RECOVERY_HEART
 MQ Fire Temple Early Lower Left Chest,                      chest,          NONE,                 TEMPLE_FIRE,                    0x02,                       RUPEE_BLUE
 MQ Fire Temple Pre-Boss Chest,                              chest,          NONE,                 TEMPLE_FIRE,                    0x07,                       SMALL_KEY_FIRE
 MQ Fire Temple Hammer Chest,                                chest,          NONE,                 TEMPLE_FIRE,                    0x00,                       HAMMER
