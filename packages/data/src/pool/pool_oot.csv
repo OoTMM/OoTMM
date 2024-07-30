@@ -2245,9 +2245,9 @@ MQ Water Temple Three Torch Room Large Crate 3,             crate,          NONE
 MQ Water Temple Three Torch Room Large Crate 4,             crate,          NONE,                 TEMPLE_WATER,                   0x0030a,                    RUPEE_GREEN
 MQ Water Temple Three Torch Room Large Crate 5,             crate,          NONE,                 TEMPLE_WATER,                   0x0030b,                    RUPEE_GREEN
 MQ Water Temple Three Torch Room Large Crate 6,             crate,          NONE,                 TEMPLE_WATER,                   0x0030c,                    RUPEE_GREEN
-MQ Water Temple Three Torch Room Large Crate 7,             crate,          NONE,                 TEMPLE_WATER,                   0x0030d,                    RUPEE_GREEN
-MQ Water Temple Three Torch Room Large Crate 8,             crate,          NONE,                 TEMPLE_WATER,                   0x0030e,                    RUPEE_GREEN
-MQ Water Temple Three Torch Room Large Crate 9,             crate,          NONE,                 TEMPLE_WATER,                   0x0030f,                    RUPEE_GREEN
+MQ Water Temple Three Torch Room Behind Gate Large Crate 1, crate,          NONE,                 TEMPLE_WATER,                   0x0030d,                    RUPEE_GREEN
+MQ Water Temple Three Torch Room Behind Gate Large Crate 2, crate,          NONE,                 TEMPLE_WATER,                   0x0030e,                    RUPEE_GREEN
+MQ Water Temple Three Torch Room Behind Gate Large Crate 3, crate,          NONE,                 TEMPLE_WATER,                   0x0030f,                    RUPEE_GREEN
 MQ Water Temple Storage Room Large Crate 1,                 crate,          NONE,                 TEMPLE_WATER,                   0x00402,                    RUPEE_GREEN
 MQ Water Temple Storage Room Large Crate 2,                 crate,          NONE,                 TEMPLE_WATER,                   0x00403,                    RUPEE_GREEN
 MQ Water Temple Storage Room Large Crate 3,                 crate,          NONE,                 TEMPLE_WATER,                   0x00404,                    RUPEE_GREEN
