@@ -2318,22 +2318,22 @@ MQ Water Temple Storage Room Small Crate 1,                 crate,          NONE
 MQ Water Temple Storage Room Small Crate 2,                 crate,          NONE,                 TEMPLE_WATER,                   0x0040a,                    NOTHING
 MQ Water Temple Storage Room Small Crate 3,                 crate,          NONE,                 TEMPLE_WATER,                   0x0040b,                    NOTHING
 MQ Water Temple Storage Room Small Crate 4,                 crate,          NONE,                 TEMPLE_WATER,                   0x0040c,                    NOTHING
-MQ Water Temple Dragon Room Large Crate 1,                  crate,          NONE,                 TEMPLE_WATER,                   0x00808,                    RUPEE_GREEN
-MQ Water Temple Dragon Room Large Crate 2,                  crate,          NONE,                 TEMPLE_WATER,                   0x00809,                    RUPEE_GREEN
-MQ Water Temple Dragon Room Large Crate 3,                  crate,          NONE,                 TEMPLE_WATER,                   0x0080a,                    RUPEE_GREEN
-MQ Water Temple Dragon Room Large Crate 4,                  crate,          NONE,                 TEMPLE_WATER,                   0x0080b,                    RUPEE_GREEN
-MQ Water Temple Dragon Room Large Crate 5,                  crate,          NONE,                 TEMPLE_WATER,                   0x0080c,                    RUPEE_GREEN
-MQ Water Temple Dragon Room Large Crate 6,                  crate,          NONE,                 TEMPLE_WATER,                   0x0080d,                    RUPEE_GREEN
-MQ Water Temple Dragon Room Large Crate 7,                  crate,          NONE,                 TEMPLE_WATER,                   0x0080e,                    RUPEE_GREEN
-MQ Water Temple Dragon Room Large Crate 8,                  crate,          NONE,                 TEMPLE_WATER,                   0x0080f,                    RUPEE_GREEN
-MQ Water Temple Dragon Room Small Crate 1,                  crate,          NONE,                 TEMPLE_WATER,                   0x00810,                    NOTHING
-MQ Water Temple Dragon Room Small Crate 2,                  crate,          NONE,                 TEMPLE_WATER,                   0x00811,                    NOTHING
-MQ Water Temple Dragon Room Small Crate 3,                  crate,          NONE,                 TEMPLE_WATER,                   0x00812,                    NOTHING
-MQ Water Temple Boss Key Room Large Crate 1,                crate,          NONE,                 TEMPLE_WATER,                   0x00901,                    RUPEE_GREEN
-MQ Water Temple Boss Key Room Large Crate 2,                crate,          NONE,                 TEMPLE_WATER,                   0x00902,                    RUPEE_GREEN
-MQ Water Temple Boss Key Room Large Crate 3,                crate,          NONE,                 TEMPLE_WATER,                   0x00903,                    RUPEE_GREEN
-MQ Water Temple Boss Key Room Large Crate 4,                crate,          NONE,                 TEMPLE_WATER,                   0x00904,                    RUPEE_GREEN
-MQ Water Temple Boss Key Room Large Crate 5,                crate,          NONE,                 TEMPLE_WATER,                   0x00905,                    RUPEE_GREEN
+MQ Water Temple Dragon Room At Torches Large Crate 1,       crate,          NONE,                 TEMPLE_WATER,                   0x00808,                    RUPEE_GREEN
+MQ Water Temple Dragon Room At Torches Large Crate 2,       crate,          NONE,                 TEMPLE_WATER,                   0x00809,                    RUPEE_GREEN
+MQ Water Temple Dragon Room At Door Large Crate 1,          crate,          NONE,                 TEMPLE_WATER,                   0x0080a,                    RUPEE_GREEN
+MQ Water Temple Dragon Room At Door Large Crate 2,          crate,          NONE,                 TEMPLE_WATER,                   0x0080b,                    RUPEE_GREEN
+MQ Water Temple Dragon Room Underwater Large Crate 1,       crate,          NONE,                 TEMPLE_WATER,                   0x0080c,                    RUPEE_GREEN
+MQ Water Temple Dragon Room Underwater Large Crate 2,       crate,          NONE,                 TEMPLE_WATER,                   0x0080d,                    RUPEE_GREEN
+MQ Water Temple Dragon Room Underwater Large Crate 3,       crate,          NONE,                 TEMPLE_WATER,                   0x0080e,                    RUPEE_GREEN
+MQ Water Temple Dragon Room Underwater Large Crate 4,       crate,          NONE,                 TEMPLE_WATER,                   0x0080f,                    RUPEE_GREEN
+MQ Water Temple Dragon Room At Torches Small Crate 1,       crate,          NONE,                 TEMPLE_WATER,                   0x00810,                    NOTHING
+MQ Water Temple Dragon Room At Torches Small Crate 2,       crate,          NONE,                 TEMPLE_WATER,                   0x00811,                    NOTHING
+MQ Water Temple Dragon Room At Torches Small Crate 3,       crate,          NONE,                 TEMPLE_WATER,                   0x00812,                    NOTHING
+MQ Water Temple Boss Key Room In Center Large Crate 1,      crate,          NONE,                 TEMPLE_WATER,                   0x00901,                    RUPEE_GREEN
+MQ Water Temple Boss Key Room By Switch Large Crate,        crate,          NONE,                 TEMPLE_WATER,                   0x00902,                    RUPEE_GREEN
+MQ Water Temple Boss Key Room In Center Large Crate 2,      crate,          NONE,                 TEMPLE_WATER,                   0x00903,                    RUPEE_GREEN
+MQ Water Temple Boss Key Room In Center Large Crate 3,      crate,          NONE,                 TEMPLE_WATER,                   0x00904,                    RUPEE_GREEN
+MQ Water Temple Boss Key Room In Center Large Crate 4,      crate,          NONE,                 TEMPLE_WATER,                   0x00905,                    RUPEE_GREEN
 MQ Water Temple Room Before High Water Lower Large Crate 1, crate,          NONE,                 TEMPLE_WATER,                   0x00a03,                    RUPEE_GREEN
 MQ Water Temple Room Before High Water Lower Large Crate 2, crate,          NONE,                 TEMPLE_WATER,                   0x00a04,                    RUPEE_GREEN
 MQ Water Temple Room Before High Water Lower Large Crate 3, crate,          NONE,                 TEMPLE_WATER,                   0x00a05,                    RUPEE_GREEN
