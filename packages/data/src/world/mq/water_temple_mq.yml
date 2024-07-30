@@ -254,6 +254,15 @@
     "Water Temple Leading To Side Loop After Spikes": "true"
     "Water Temple Side Loop Scarecrow Alcove": "scarecrow_hookshot || (has_hover_boots && is_adult) || hookshot_anywhere || climb_anywhere"
     "Water Temple Side Loop Gate Room Past Gate": "(has_iron_boots && hookshot_anywhere) || (climb_anywhere && can_jump_slash)"
+  locations:
+    "MQ Water Temple Side Loop First Room At Door Large Crate 1": "true"
+    "MQ Water Temple Side Loop First Room At Door Large Crate 2": "true"
+    "MQ Water Temple Side Loop First Room Water Large Crate 1": "has_iron_boots && has_tunic_zora"
+    "MQ Water Temple Side Loop First Room Water Large Crate 2": "has_iron_boots && has_tunic_zora"
+    "MQ Water Temple Side Loop First Room Water Large Crate 3": "has_iron_boots && has_tunic_zora"
+    "MQ Water Temple Side Loop First Room Water Large Crate 4": "has_iron_boots && has_tunic_zora"
+    "MQ Water Temple Side Loop First Room Water Large Crate 5": "has_iron_boots && has_tunic_zora"
+    "MQ Water Temple Side Loop First Room Water Large Crate 6": "has_iron_boots && has_tunic_zora"
 "Water Temple Side Loop Scarecrow Alcove":
   dungeon: Water
   exits:
@@ -387,14 +396,14 @@
     "MQ Water Temple Wonder Item Lizalfos Hallway": "can_hookshot"
     "MQ Water Temple Lizalfos Hallway Behind Gate Large Crate 1": "(event(WATER_LEVEL_LOW) || event(WATER_LEVEL_MID)) && can_use_din"
     "MQ Water Temple Lizalfos Hallway Behind Gate Large Crate 2": "(event(WATER_LEVEL_LOW) || event(WATER_LEVEL_MID)) && can_use_din"
-    "MQ Water Temple Lizalfos Hallway Large Crate 1": "(event(WATER_LEVEL_LOW) || event(WATER_LEVEL_MID)) || (event(WATER_LEVEL_HIGH) && has_iron_boots && has_tunic_zora"
-    "MQ Water Temple Lizalfos Hallway Large Crate 2": "(event(WATER_LEVEL_LOW) || event(WATER_LEVEL_MID)) || (event(WATER_LEVEL_HIGH) && has_iron_boots && has_tunic_zora"
-    "MQ Water Temple Lizalfos Hallway Large Crate 3": "(event(WATER_LEVEL_LOW) || event(WATER_LEVEL_MID)) || (event(WATER_LEVEL_HIGH) && has_iron_boots && has_tunic_zora"
-    "MQ Water Temple Lizalfos Hallway Large Crate 4": "(event(WATER_LEVEL_LOW) || event(WATER_LEVEL_MID)) || (event(WATER_LEVEL_HIGH) && has_iron_boots && has_tunic_zora"
-    "MQ Water Temple Lizalfos Hallway Large Crate 5": "(event(WATER_LEVEL_LOW) || event(WATER_LEVEL_MID)) || (event(WATER_LEVEL_HIGH) && has_iron_boots && has_tunic_zora"
-    "MQ Water Temple Lizalfos Hallway Large Crate 6": "(event(WATER_LEVEL_LOW) || event(WATER_LEVEL_MID)) || (event(WATER_LEVEL_HIGH) && has_iron_boots && has_tunic_zora"
-    "MQ Water Temple Lizalfos Hallway Large Crate 7": "(event(WATER_LEVEL_LOW) || event(WATER_LEVEL_MID)) || (event(WATER_LEVEL_HIGH) && has_iron_boots && has_tunic_zora"
-    "MQ Water Temple Lizalfos Hallway Large Crate 8": "(event(WATER_LEVEL_LOW) || event(WATER_LEVEL_MID)) || (event(WATER_LEVEL_HIGH) && has_iron_boots && has_tunic_zora"
+    "MQ Water Temple Lizalfos Hallway Large Crate 1": "(event(WATER_LEVEL_LOW) || event(WATER_LEVEL_MID)) || (event(WATER_LEVEL_HIGH) && has_iron_boots && has_tunic_zora)"
+    "MQ Water Temple Lizalfos Hallway Large Crate 2": "(event(WATER_LEVEL_LOW) || event(WATER_LEVEL_MID)) || (event(WATER_LEVEL_HIGH) && has_iron_boots && has_tunic_zora)"
+    "MQ Water Temple Lizalfos Hallway Large Crate 3": "(event(WATER_LEVEL_LOW) || event(WATER_LEVEL_MID)) || (event(WATER_LEVEL_HIGH) && has_iron_boots && has_tunic_zora)"
+    "MQ Water Temple Lizalfos Hallway Large Crate 4": "(event(WATER_LEVEL_LOW) || event(WATER_LEVEL_MID)) || (event(WATER_LEVEL_HIGH) && has_iron_boots && has_tunic_zora)"
+    "MQ Water Temple Lizalfos Hallway Large Crate 5": "(event(WATER_LEVEL_LOW) || event(WATER_LEVEL_MID)) || (event(WATER_LEVEL_HIGH) && has_iron_boots && has_tunic_zora)"
+    "MQ Water Temple Lizalfos Hallway Large Crate 6": "(event(WATER_LEVEL_LOW) || event(WATER_LEVEL_MID)) || (event(WATER_LEVEL_HIGH) && has_iron_boots && has_tunic_zora)"
+    "MQ Water Temple Lizalfos Hallway Large Crate 7": "(event(WATER_LEVEL_LOW) || event(WATER_LEVEL_MID)) || (event(WATER_LEVEL_HIGH) && has_iron_boots && has_tunic_zora)"
+    "MQ Water Temple Lizalfos Hallway Large Crate 8": "(event(WATER_LEVEL_LOW) || event(WATER_LEVEL_MID)) || (event(WATER_LEVEL_HIGH) && has_iron_boots && has_tunic_zora)"
 "Water Temple High Water Level Ledge":
   dungeon: Water
   exits:
