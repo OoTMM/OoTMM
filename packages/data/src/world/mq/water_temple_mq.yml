@@ -284,6 +284,11 @@
   locations:
     "MQ Water Temple Pot Loop 1": "true"
     "MQ Water Temple Pot Loop 2": "true"
+    "MQ Water Temple Dodongo Room Large Crate 1": "true"
+    "MQ Water Temple Dodongo Room Large Crate 2": "true"
+    "MQ Water Temple Dodongo Room Large Crate 3": "true"
+    "MQ Water Temple Dodongo Room Large Crate 4": "true"
+    "MQ Water Temple Dodongo Room Large Crate 5": "true"
 "Water Temple Side Loop Gate Room Past Gate":
   dungeon: Water
   exits:
@@ -291,6 +296,10 @@
     "Water Temple Side Loop Gate Room Main": "hookshot_anywhere"
   locations:
     "MQ Water Temple GS Side Loop": "gs && can_damage_skull"
+    "MQ Water Temple Side Loop First Room In Gate Large Crate 1": "true"
+    "MQ Water Temple Side Loop First Room In Gate Large Crate 2": "true"
+    "MQ Water Temple Side Loop First Room In Gate Large Crate 3": "true"
+    "MQ Water Temple Side Loop First Room In Gate Large Crate 4": "true"
 "Water Temple Side Loop Scarecrow Alcove Underwater Path":
   dungeon: Water
   exits:
@@ -305,6 +314,11 @@
     "MQ Water Temple Pot Stalfos Room 1": "true"
     "MQ Water Temple Pot Stalfos Room 2": "true"
     "MQ Water Temple Wonder Item Freestanding Room": "can_hookshot"
+    "MQ Water Temple Side Loop Stalfos Room Large Crate 1": "true"
+    "MQ Water Temple Side Loop Stalfos Room Large Crate 2": "true"
+    "MQ Water Temple Side Loop Stalfos Room Large Crate 3": "true"
+    "MQ Water Temple Side Loop Stalfos Room Large Crate 4": "true"
+    "MQ Water Temple Side Loop Stalfos Room Large Crate 5": "true"
 "Water Temple Main Room Antichamber Ledge":
   dungeon: Water
   exits:
