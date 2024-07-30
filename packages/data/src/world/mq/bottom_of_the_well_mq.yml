@@ -6,7 +6,7 @@
 "MQ Bottom of the Well Entrance":
   dungeon: BotW
   exits:
-    "MQ Bottom of the Well": "true"
+    "Bottom of the Well": "true"
     "MQ Bottom of the Well Main": "is_child"
 "Bottom of the Well Wallmaster Main":
   region: NONE
