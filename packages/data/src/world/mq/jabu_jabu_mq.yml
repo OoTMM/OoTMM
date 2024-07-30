@@ -22,7 +22,7 @@
 "MQ Jabu-Jabu Main Elevator Room Upper":
   dungeon: JJ
   exits:
-    "MQ Jabu-Jabu": "true"
+    "MQ Jabu-Jabu Lobby": "true"
     "MQ Jabu-Jabu Vanilla Ruto Falling Room": "event(JABU_MQ_UNDERWATER_ALCOVE_SWITCH)"
     "MQ Jabu-Jabu Main Elevator Room Ledge Before Pre-Boss": "has_hover_boots || (can_use_slingshot && can_hookshot) || event(JABU_MQ_LOWER_BIG_OCTO_PLATFORM) || climb_anywhere" #Glitches need to be accounted for still.
     "MQ Jabu-Jabu Main Elevator Room Lower": "true"
