@@ -2,7 +2,6 @@
 #include <combo/global.h>
 #include <combo/item.h>
 #include <combo/config.h>
-#include <combo/custom.h>
 #include "Obj_Snowball.h"
 
 #define OBJSNOWBALL_GET_SWITCH_FLAG(thisx) ((thisx)->variable & 0x3F)
@@ -931,6 +930,28 @@ static int ObjSnowball_CsmcType(Actor_ObjSnowball* this)
 }
 
 void ObjSnowball_Draw(Actor_ObjSnowball* this, GameState_Play* play) {
+    int type;
+    const Color_RGB8* color;
+    u8 gray;
+
+    OPEN_DISPS(play->gs.gfx);
+    type = ObjSnowball_CsmcType(this);
+    switch(type)
+    {
+        case CSMC_NORMAL:
+            gDPSetPrimColor(POLY_OPA_DISP++, 0, 0x80, 255, 255, 255, 255);
+            break;
+        case CSMC_SPIDER:
+            gray = 0x90;
+            gDPSetPrimColor(POLY_OPA_DISP++, 0, 0x80, gray, gray, gray, 255);
+            break;
+        default:
+            color = csmcTypeColor(type);
+            gDPSetPrimColor(POLY_OPA_DISP++, 0, 0x80, color->r, color->g, color->b, 255);
+            break;
+
+    }
+    CLOSE_DISPS();
     Gfx_DrawDListOpa(play, SEGADDR_GOROIWA_DL_008B90);
 }
 
@@ -939,6 +960,8 @@ void func_80B04D34(Actor_ObjSnowball* this, GameState_Play* play) {
     s32 i;
     MtxF sp88;
     Vec3s sp80;
+    int type;
+    const Color_RGB8* color;
 
     for (i = 0; i < ARRAY_SIZE(this->unk_1A8); i++) {
         ptr = &this->unk_1A8[i];
