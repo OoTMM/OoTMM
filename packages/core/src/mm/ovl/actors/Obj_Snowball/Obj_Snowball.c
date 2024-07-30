@@ -2,6 +2,7 @@
 #include <combo/global.h>
 #include <combo/item.h>
 #include <combo/config.h>
+#include <combo/custom.h>
 #include "Obj_Snowball.h"
 
 #define OBJSNOWBALL_GET_SWITCH_FLAG(thisx) ((thisx)->variable & 0x3F)
@@ -152,6 +153,51 @@ static void ObjSnowball_Alias(Actor_ObjSnowball* this)
             case 47:
             case 44:
                 xflag->id = 18; break;
+        }
+    }
+    else if (xflag->sceneId == SCE_MM_TWIN_ISLANDS_WINTER)
+    {
+        switch(xflag->id)
+        {
+            /* Goron Elder on day 2 */
+            case 14:
+                xflag->id = 59; break;
+            case 16:
+            case 46:
+                xflag->id = 58; break;
+            case 20:
+            case 48:
+                xflag->id = 57; break;
+            case 13:
+            case 51:
+                xflag->id = 55; break;
+            case 17:
+            case 42:
+                xflag->id = 22; break;
+            case 41:
+            case 29:
+                xflag->id = 60; break;
+            case 53:
+            case 43:
+                xflag->id = 19; break;
+            /* Goron Elder on day 1 */
+            case 50:
+                xflag->id = 5; break;
+            case 40:
+            case 47:
+                xflag->id = 56; break;
+            case 44:
+            case 52:
+                xflag->id = 30; break;
+            case 21:
+            case 28:
+                xflag->id = 54; break;
+            case 45:
+            case 49:
+                xflag->id = 18; break;
+            /* Only here on day 1 and 3 for some reason */
+            case 15:
+                xflag->id = 61; break;
         }
     }
 }
@@ -868,6 +914,20 @@ void ObjSnowball_Update(Actor_ObjSnowball* this, GameState_Play* play) {
     } else {
         this->actor.shape.shadowDraw = NULL;
     }
+}
+
+static int ObjSnowball_CsmcType(Actor_ObjSnowball* this)
+{
+    ComboItemOverride o;
+
+    if(!ObjSnowball_IsShuffled(this))
+        return CSMC_NORMAL;
+
+    if(!csmcEnabled())
+        return CSMC_MAJOR;
+
+    comboXflagItemOverride(&o, &this->xflag, 0);
+    return csmcFromItem(o.gi);
 }
 
 void ObjSnowball_Draw(Actor_ObjSnowball* this, GameState_Play* play) {

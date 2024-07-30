@@ -973,6 +973,19 @@ Twin Islands Rupee 1,                                   rupee,          NONE,   
 Twin Islands Rupee 2,                                   rupee,          NONE,                   TWIN_ISLANDS_SPRING,          0x0000f,                    RUPEE_BLUE
 Twin Islands Rupee 3,                                   rupee,          NONE,                   TWIN_ISLANDS_SPRING,          0x00010,                    RUPEE_BLUE
 Twin Islands Rupee 4,                                   rupee,          NONE,                   TWIN_ISLANDS_SPRING,          0x00012,                    RUPEE_BLUE
+Twin Islands Big Snowball 01,                           snowball,       NONE,                   TWIN_ISLANDS_WINTER,          0x0003b,                    MAGIC_JAR_SMALL
+Twin Islands Big Snowball 02,                           snowball,       NONE,                   TWIN_ISLANDS_WINTER,          0x0003a,                    RECOVERY_HEART
+Twin Islands Big Snowball 03,                           snowball,       NONE,                   TWIN_ISLANDS_WINTER,          0x00039,                    MAGIC_JAR_SMALL
+Twin Islands Big Snowball 04,                           snowball,       NONE,                   TWIN_ISLANDS_WINTER,          0x00037,                    RECOVERY_HEART
+Twin Islands Big Snowball 05,                           snowball,       NONE,                   TWIN_ISLANDS_WINTER,          0x00016,                    NOTHING
+Twin Islands Big Snowball 06,                           snowball,       NONE,                   TWIN_ISLANDS_WINTER,          0x0003c,                    RECOVERY_HEART
+Twin Islands Big Snowball 07,                           snowball,       NONE,                   TWIN_ISLANDS_WINTER,          0x00013,                    NOTHING
+Twin Islands Big Snowball 08,                           snowball,       NONE,                   TWIN_ISLANDS_WINTER,          0x00005,                    NOTHING
+Twin Islands Big Snowball 09,                           snowball,       NONE,                   TWIN_ISLANDS_WINTER,          0x00038,                    MAGIC_JAR_SMALL
+Twin Islands Big Snowball 10,                           snowball,       NONE,                   TWIN_ISLANDS_WINTER,          0x0001e,                    NOTHING
+Twin Islands Big Snowball 11,                           snowball,       NONE,                   TWIN_ISLANDS_WINTER,          0x00036,                    MAGIC_JAR_SMALL
+Twin Islands Big Snowball 12,                           snowball,       NONE,                   TWIN_ISLANDS_WINTER,          0x00012,                    NOTHING
+Twin Islands Big Snowball 13,                           snowball,       NONE,                   TWIN_ISLANDS_WINTER,          0x0003d,                    MAGIC_JAR_SMALL
 Goron Elder,                                            npc,            NONE,                   TWIN_ISLANDS_WINTER,          GORON_ELDER,                SONG_GORON_HALF
 Goron Baby,                                             npc,            NONE,                   GORON_SHRINE,                 GORON_BABY,                 SONG_GORON
 Goron Shrine Pot 01,                                    pot,            NONE,                   GORON_SHRINE,                 0x0023,                     STICK
@@ -994,7 +1007,20 @@ Goron Village Scrub Deed,                               npc,            NONE,   
 Goron Village Scrub Bomb Bag,                           npc,            NONE,                   GORON_VILLAGE_WINTER,         SCRUB_BOMB_BAG,             BOMB_BAG
 Goron Powder Keg,                                       npc,            NONE,                   GORON_VILLAGE_WINTER,         GORON_KEG,                  POWDER_KEG
 Goron Village Crate,                                    crate,          NONE,                   GORON_VILLAGE_WINTER,         0x00103,                    NOTHING
+Goron Village Big Snowball 1,                           snowball,       NONE,                   GORON_VILLAGE_WINTER,         0x00032,                    RUPEE_BLUE
+Goron Village Big Snowball 2,                           snowball,       NONE,                   GORON_VILLAGE_WINTER,         0x00033,                    RUPEE_BLUE
+Goron Village Big Snowball 3,                           snowball,       NONE,                   GORON_VILLAGE_WINTER,         0x00034,                    RUPEE_BLUE
+Goron Village Big Snowball 4,                           snowball,       NONE,                   GORON_VILLAGE_WINTER,         0x00035,                    MAGIC_JAR_SMALL
+Goron Village Big Snowball 5,                           snowball,       NONE,                   GORON_VILLAGE_WINTER,         0x00036,                    MAGIC_JAR_SMALL
+Goron Village Big Snowball 6,                           snowball,       NONE,                   GORON_VILLAGE_WINTER,         0x00037,                    MAGIC_JAR_SMALL
+Goron Village Big Snowball 7,                           snowball,       NONE,                   GORON_VILLAGE_WINTER,         0x00038,                    NOTHING
+Goron Village Big Snowball 8,                           snowball,       NONE,                   GORON_VILLAGE_WINTER,         0x00039,                    NOTHING
+Goron Village Big Snowball 9,                           snowball,       NONE,                   GORON_VILLAGE_WINTER,         0x0003a,                    NOTHING
 Path to Snowhead HP,                                    collectible,    NONE,                   PATH_SNOWHEAD,                0x08,                       HEART_PIECE
+Path to Snowhead Big Snowball Middle 1,                 snowball,       NONE,                   PATH_SNOWHEAD,                0x0001e,                    MAGIC_JAR_SMALL
+Path to Snowhead Big Snowball Middle 2,                 snowball,       NONE,                   PATH_SNOWHEAD,                0x0001f,                    MAGIC_JAR_SMALL
+Path to Snowhead Big Snowball Back 1,                   snowball,       NONE,                   PATH_SNOWHEAD,                0x0001c,                    MAGIC_JAR_SMALL
+Path to Snowhead Big Snowball Back 2,                   snowball,       NONE,                   PATH_SNOWHEAD,                0x0001d,                    MAGIC_JAR_SMALL
 Path to Snowhead Grotto,                                chest,          NONE,                   GROTTOS,                      0x13,                       RUPEE_RED
 Path to Snowhead Grotto Grass 01,                       grass,          NONE,                   GROTTOS,                      0x03300,                    RANDOM
 Path to Snowhead Grotto Grass 02,                       grass,          NONE,                   GROTTOS,                      0x03301,                    RANDOM
@@ -1012,6 +1038,12 @@ Path to Snowhead Grotto Grass 13,                       grass,          NONE,   
 Path to Snowhead Grotto Grass 14,                       grass,          NONE,                   GROTTOS,                      0x03313,                    RANDOM
 Snowhead Great Fairy,                                   npc,            NONE,                   FAIRY_FOUNTAIN,               GREAT_FAIRY_MOUNTAIN,       MAGIC_UPGRADE
 Snowhead Owl Statue,                                    npc,            NONE,                   FAIRY_FOUNTAIN,               OWL_SNOWHEAD,               OWL_SNOWHEAD
+Snowhead Big Snowball 1,                                snowball,       NONE,                   SNOWHEAD,                     0x0002e,                    MAGIC_JAR_SMALL
+Snowhead Big Snowball 2,                                snowball,       NONE,                   SNOWHEAD,                     0x0002f,                    MAGIC_JAR_SMALL
+Snowhead Big Snowball 3,                                snowball,       NONE,                   SNOWHEAD,                     0x00030,                    MAGIC_JAR_SMALL
+Snowhead Big Snowball 4,                                snowball,       NONE,                   SNOWHEAD,                     0x00031,                    MAGIC_JAR_SMALL
+Snowhead Big Snowball 5,                                snowball,       NONE,                   SNOWHEAD,                     0x00032,                    MAGIC_JAR_SMALL
+Snowhead Big Snowball 6,                                snowball,       NONE,                   SNOWHEAD,                     0x00033,                    MAGIC_JAR_SMALL
 Goron Race Reward,                                      npc,            GORON_RACE,             GORON_RACETRACK,              GORON_RACE,                 BOTTLED_GOLD_DUST
 Goron Race Pot 01,                                      pot,            NONE,                   GORON_RACETRACK,              0x0002,                     MAGIC_JAR_LARGE
 Goron Race Pot 02,                                      pot,            NONE,                   GORON_RACETRACK,              0x0003,                     MAGIC_JAR_LARGE
@@ -1768,6 +1800,11 @@ Snowhead Temple Grass 10,                               grass,          NONE,   
 Snowhead Temple Rupee 1,                                rupee,          NONE,                   TEMPLE_SNOWHEAD,              0x00700,                    RUPEE_RED
 Snowhead Temple Rupee 2,                                rupee,          NONE,                   TEMPLE_SNOWHEAD,              0x00701,                    RUPEE_RED
 Snowhead Temple Rupee 3,                                rupee,          NONE,                   TEMPLE_SNOWHEAD,              0x00702,                    RUPEE_RED
+Snowhead Temple Big Snowball Central Room 1,            snowball,       NONE,                   TEMPLE_SNOWHEAD,              0x0044b,                    RECOVERY_HEART
+Snowhead Temple Big Snowball Central Room 2,            snowball,       NONE,                   TEMPLE_SNOWHEAD,              0x0044c,                    RECOVERY_HEART
+Snowhead Temple Big Snowball Central Room 3,            snowball,       NONE,                   TEMPLE_SNOWHEAD,              0x0044d,                    MAGIC_JAR_LARGE
+Snowhead Temple Big Snowball Central Room 4,            snowball,       NONE,                   TEMPLE_SNOWHEAD,              0x0044e,                    MAGIC_JAR_LARGE
+Snowhead Temple Big Snowball Icicle Room,               snowball,       NONE,                   TEMPLE_SNOWHEAD,              0x0071a,                    NOTHING
 Pirate Fortress Entrance Chest 1,                       chest,          NONE,                   PIRATE_FORTRESS_ENTRANCE,     0x00,                       RUPEE_RED
 Pirate Fortress Entrance Chest 2,                       chest,          NONE,                   PIRATE_FORTRESS_ENTRANCE,     0x01,                       RUPEE_RED
 Pirate Fortress Entrance Chest 3,                       chest,          NONE,                   PIRATE_FORTRESS_ENTRANCE,     0x02,                       RUPEE_RED

@@ -1935,6 +1935,19 @@
     "Twin Islands Rupee 2": "is_spring && (underwater_walking || can_dive_small)"
     "Twin Islands Rupee 3": "is_spring && (underwater_walking || can_dive_small)"
     "Twin Islands Rupee 4": "is_spring && (underwater_walking || can_dive_small)"
+    "Twin Islands Big Snowball 01": "(first_day || final_day) && is_winter && can_break_snowballs"
+    "Twin Islands Big Snowball 02": "is_winter && can_break_snowballs"
+    "Twin Islands Big Snowball 03": "is_winter && can_break_snowballs"
+    "Twin Islands Big Snowball 04": "is_winter && can_break_snowballs"
+    "Twin Islands Big Snowball 05": "is_winter && can_break_snowballs"
+    "Twin Islands Big Snowball 06": "is_winter && can_break_snowballs"
+    "Twin Islands Big Snowball 07": "is_winter && can_break_snowballs"
+    "Twin Islands Big Snowball 08": "(second_day || final_day) && is_winter && can_break_snowballs"
+    "Twin Islands Big Snowball 09": "is_winter && can_break_snowballs"
+    "Twin Islands Big Snowball 10": "is_winter && can_break_snowballs"
+    "Twin Islands Big Snowball 11": "is_winter && can_break_snowballs"
+    "Twin Islands Big Snowball 12": "is_winter && can_break_snowballs"
+    "Twin Islands Big Snowball 13": "(first_day || final_day) && is_winter && can_break_snowballs"
 "Twin Islands Ramp Grotto":
   region: ENTRANCE
   exits:
@@ -2015,6 +2028,15 @@
 #    "Goron Village Scrub Bomb Bag": "(has_mask_goron || (has(MOON_TEAR) && has(DEED_LAND) && has(DEED_SWAMP))) && can_use_wallet(2)"
     "Goron Powder Keg": "event(TRIAL_BOULDER) && (event(POWDER_KEG_TRIAL) || (short_hook_anywhere && trick(MM_KEG_TRIAL_HEATLESS)))"
     "Goron Village Crate": "is_spring || can_use_fire_short_range || (short_hook_anywhere && trick(MM_KEG_TRIAL_HEATLESS))"
+    "Goron Village Big Snowball 1": "is_winter && can_break_snowballs"
+    "Goron Village Big Snowball 2": "is_winter && can_break_snowballs"
+    "Goron Village Big Snowball 3": "is_winter && can_break_snowballs"
+    "Goron Village Big Snowball 4": "is_winter && can_break_snowballs"
+    "Goron Village Big Snowball 5": "is_winter && can_break_snowballs"
+    "Goron Village Big Snowball 6": "is_winter && can_break_snowballs"
+    "Goron Village Big Snowball 7": "is_winter && can_break_snowballs"
+    "Goron Village Big Snowball 8": "is_winter && can_break_snowballs"
+    "Goron Village Big Snowball 9": "is_winter && can_break_snowballs"
 "Front of Lone Peak Shrine":
   region: GORON_VILLAGE
   exits:
@@ -2134,6 +2156,8 @@
     "Path to Snowhead Back": "true"
   locations:
     "Path to Snowhead HP": "can_use_lens && (scarecrow_hookshot || hookshot_anywhere)"
+    "Path to Snowhead Big Snowball Middle 1": "is_winter && can_break_snowballs"
+    "Path to Snowhead Big Snowball Middle 2": "is_winter && can_break_snowballs"
 "Path to Snowhead Back":
   region: PATH_TO_SNOWHEAD
   events:
@@ -2142,6 +2166,9 @@
     "Path to Snowhead Middle": "goron_fast_roll || hookshot_anywhere || (has_hover_boots && trick(MM_PATH_SNOWHEAD_HOVERS))"
     "Snowhead Entrance": "true"
     "Path to Snowhead Grotto": "has_explosives || trick_keg_explosives"
+  locations:
+    "Path to Snowhead Big Snowball Back 1": "is_winter && can_break_snowballs"
+    "Path to Snowhead Big Snowball Back 2": "is_winter && can_break_snowballs"
 "Path to Snowhead Grotto":
   region: ENTRANCE
   exits:
@@ -2191,10 +2218,17 @@
     "Snowhead Entrance": "(can_lullaby && has_mask_goron) || blizzard_stopped || has_iron_boots"
     "Snowhead Temple": "true"
     "Snowhead Near Fairy Fountain": "blizzard_stopped || has_iron_boots"
+  locations:
+    "Snowhead Big Snowball 1": "is_winter && can_break_snowballs"
+    "Snowhead Big Snowball 2": "is_winter && can_break_snowballs"
+    "Snowhead Big Snowball 3": "is_winter && can_break_snowballs"
+    "Snowhead Big Snowball 4": "is_winter && can_break_snowballs"
+    "Snowhead Big Snowball 5": "is_winter && can_break_snowballs"
+    "Snowhead Big Snowball 6": "is_winter && can_break_snowballs"
 "Snowhead Near Fairy Fountain":
   region: SNOWHEAD
   events:
-    MAGIC: "((blizzard_stopped || has_iron_boots) && can_break_boulders) || is_spring"
+    MAGIC: "((blizzard_stopped || has_iron_boots) && can_break_snowballs) || is_spring"
     RUPEES: "blizzard_stopped && can_use_light_arrows && soul_wolfos"
   exits:
     "Snowhead Entrance": "blizzard_stopped || has_iron_boots"

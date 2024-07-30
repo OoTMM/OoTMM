@@ -302,7 +302,7 @@ static int ObjTaru_CsmcType(Actor_ObjTaru* this)
     return csmcFromItem(o.gi);
 }
 
-static const Gfx sListLoaderSideDefault[] = {
+static const Gfx sListLoaderTextureDefault[] = {
     gsDPLoadTextureBlock(0x06000670, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 32, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 4, 5, 0, 0),
     gsSPEndDisplayList(),
 };
@@ -328,7 +328,7 @@ static void ObjTaru_DrawBarrel(Actor_ObjTaru* this, GameState_Play* play)
     OPEN_DISPS(play->gs.gfx);
     if (type == CSMC_NORMAL)
     {
-        gSPSegment(POLY_OPA_DISP++, 0x08, sListLoaderSideDefault);
+        gSPSegment(POLY_OPA_DISP++, 0x08, sListLoaderTextureDefault);
         gSPSegment(POLY_OPA_DISP++, 0x09, sListLoaderTopDefault);
     }
     else
