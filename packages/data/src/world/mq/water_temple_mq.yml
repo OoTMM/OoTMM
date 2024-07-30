@@ -201,6 +201,11 @@
     "Water Temple Boss Key Room Switch Side": "(has_explosives_or_hammer || can_hit_triggers_distance || can_use_sword_or_sticks) && can_use_din"
   locations:
     "MQ Water Temple Pot Boss Key Room": "true"
+    "MQ Water Temple Boss Key Room By Switch Large Crate": "true"
+    "MQ Water Temple Boss Key Room In Center Large Crate 1": "true"
+    "MQ Water Temple Boss Key Room In Center Large Crate 2": "true"
+    "MQ Water Temple Boss Key Room In Center Large Crate 3": "true"
+    "MQ Water Temple Boss Key Room In Center Large Crate 4": "true"
 "Water Temple Boss Key Room Switch Side":
   dungeon: Water
   exits: 
@@ -385,6 +390,13 @@
     "MQ Water Temple Pot Room Before High Water 2": "true"
     "MQ Water Temple Pot Room Before High Water 3": "true"
     "MQ Water Temple Wonder Item Above 2F West Room": "can_hookshot" #This wonderitem seems broken. Sound happens but no item spawns.
+    "MQ Water Temple Room Before High Water Lower Large Crate 1": "true"
+    "MQ Water Temple Room Before High Water Lower Large Crate 2": "true"
+    "MQ Water Temple Room Before High Water Lower Large Crate 3": "true"
+    "MQ Water Temple Room Before High Water Lower Large Crate 4": "true"
+    "MQ Water Temple Room Before High Water Lower Large Crate 5": "true"
+    "MQ Water Temple Room Before High Water Lower Large Crate 6": "true"
+    "MQ Water Temple Room Before High Water Lower Small Crate": "true"
 "Water Temple Room Before Water Raise":
   dungeon: Water
   exits:
@@ -392,3 +404,6 @@
     "Water Temple High Water Level Ledge": "true"
   locations:
     "MQ Water Temple GS High Water Changer": "gs && can_damage_skull"
+    "MQ Water Temple Room Before High Water Upper Large Crate 1": "true"
+    "MQ Water Temple Room Before High Water Upper Large Crate 2": "true"
+    "MQ Water Temple Room Before High Water Upper Small Crate": "true"
