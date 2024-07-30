@@ -2,7 +2,12 @@
   dungeon: BotW
   exits:
     "Kakariko": "true"
-    "Bottom of the Well Main": "is_child"
+    "MQ Bottom of the Well Entrance": "true"
+"MQ Bottom of the Well Entrance":
+  dungeon: BotW
+  exits:
+    "MQ Bottom of the Well": "true"
+    "MQ Bottom of the Well Main": "is_child"
 "Bottom of the Well Wallmaster Main":
   region: NONE
   exits:
@@ -15,16 +20,16 @@
   region: NONE
   exits:
     "VOID": "true"
-"Bottom of the Well Main":
+"MQ Bottom of the Well Main":
   dungeon: BotW
   exits:
-    "Bottom of the Well": "is_child"
-    "Bottom of the Well Main Room Center": "event(BOTW_MQ_CENTER_GATES_LOWERED)"
-    "Bottom of the Well Main Room Center Switch Corner": "has_explosives_or_hammer"
-    "Bottom of the Well Basement": "true"
-    "Bottom of the Well Coffin Room": "(event(BOTW_MQ_DRAIN_WATER) || can_dive_small) && small_keys_botw(2)"
-    "Bottom of the Well Before Dead Hand": "event(BOTW_MQ_DRAIN_WATER) && is_child"
-    "Bottom of the Well Main Side Room Before Pit": "is_child"
+    "MQ Bottom of the Well Entrance": "is_child"
+    "MQ Bottom of the Well Main Room Center": "event(BOTW_MQ_CENTER_GATES_LOWERED)"
+    "MQ Bottom of the Well Main Room Center Switch Corner": "has_explosives_or_hammer"
+    "MQ Bottom of the Well Basement": "true"
+    "MQ Bottom of the Well Coffin Room": "(event(BOTW_MQ_DRAIN_WATER) || can_dive_small) && small_keys_botw(2)"
+    "MQ Bottom of the Well Before Dead Hand": "event(BOTW_MQ_DRAIN_WATER) && is_child"
+    "MQ Bottom of the Well Main Side Room Before Pit": "is_child"
   events:
     BOTW_MQ_CENTER_GATES_LOWERED: "can_play_zelda"
     BOTW_MQ_DRAIN_WATER: "has_ranged_weapon || has_explosives_or_hammer || can_use_sticks || can_use_sword"
@@ -41,23 +46,23 @@
     "MQ Bottom of the Well Wonder Item Main Room Right 2": "can_use_slingshot"
     "MQ Bottom of the Well Wonder Item Main Room Right 3": "can_use_slingshot"
     "MQ Bottom of the Well Wonder Item Main Room Right 4": "can_use_slingshot"
-"Bottom of the Well Main Room Center Switch Corner":
+"MQ Bottom of the Well Main Room Center Switch Corner":
   dungeon: BotW
   exits:
-    "Bottom of the Well Main": "has_explosives_or_hammer"
-    "Bottom of the Well Main Room Center": "has_hover_boots || trick(OOT_BOTW_MQ_BACKFLIP) || hookshot_anywhere || climb_anywhere"
-    "Bottom of the Well Basement": "true"
+    "MQ Bottom of the Well Main": "has_explosives_or_hammer"
+    "MQ Bottom of the Well Main Room Center": "has_hover_boots || trick(OOT_BOTW_MQ_BACKFLIP) || hookshot_anywhere || climb_anywhere"
+    "MQ Bottom of the Well Basement": "true"
   events:
     BOTW_CENTER_WEST_TORCH: "true"
-"Bottom of the Well Main Room Center":
+"MQ Bottom of the Well Main Room Center":
   dungeon: BotW
   exits:
     "Bottom of the Well Wallmaster Main": "soul_wallmaster"
-    "Bottom of the Well Main Room Center Switch Corner": "has_hover_boots || trick(OOT_BOTW_MQ_BACKFLIP) || hookshot_anywhere || climb_anywhere"
-    "Bottom of the Well West Center Room": "event(BOTW_CENTER_WEST_TORCH)"
-    "Bottom of the Well East Center Room": "event(BOTW_CENTER_EAST_TORCH)"
-    "Bottom of the Well Basement Switch Ledge": "event(BOTW_MQ_GATE_FROM_SWITCH)"
-    "Bottom of the Well Basement": "true"
+    "MQ Bottom of the Well Main Room Center Switch Corner": "has_hover_boots || trick(OOT_BOTW_MQ_BACKFLIP) || hookshot_anywhere || climb_anywhere"
+    "MQ Bottom of the Well West Center Room": "event(BOTW_CENTER_WEST_TORCH)"
+    "MQ Bottom of the Well East Center Room": "event(BOTW_CENTER_EAST_TORCH)"
+    "MQ Bottom of the Well Basement Switch Ledge": "event(BOTW_MQ_GATE_FROM_SWITCH)"
+    "MQ Bottom of the Well Basement": "true"
   events:
     BOTW_CENTER_EAST_TORCH: "can_hit_triggers_distance || can_hookshot || has_explosives || can_use_mask_blast"
   locations:
@@ -66,11 +71,11 @@
     "MQ Bottom of the Well Pot Lobby Cage 2": "true"
     "MQ Bottom of the Well Pot Lobby Cage 3": "true"
     "MQ Bottom of the Well Lobby Cage Big Fairy": "can_play_sun"
-"Bottom of the Well Basement":
+"MQ Bottom of the Well Basement":
   dungeon: BotW
   exits:
-    "Bottom of the Well Main": "true"
-    "Bottom of the Well Basement Switch Ledge": "climb_anywhere || hookshot_anywhere"
+    "MQ Bottom of the Well Main": "true"
+    "MQ Bottom of the Well Basement Switch Ledge": "climb_anywhere || hookshot_anywhere"
     "Bottom of the Well Wallmaster Basement": "soul_wallmaster"
   locations:
     "MQ Bottom of the Well Lens Chest": "event(BOTW_MQ_REDEAD_CHEST) && (has_weapon || can_use_sticks || can_use_din || has_iron_boots || can_play_sun)" #Trying to get past these ReDeads/Wallmaster with actually nothing isn't fair.'
@@ -79,16 +84,16 @@
     "MQ Bottom of the Well Heart Basement 1": "true"
     "MQ Bottom of the Well Heart Basement 2": "true"
     "MQ Bottom of the Well Heart Basement 3": "true"
-"Bottom of the Well West Center Room":
+"MQ Bottom of the Well West Center Room":
   dungeon: BotW
   exits:
-    "Bottom of the Well Main Room Center": "true"
+    "MQ Bottom of the Well Main Room Center": "true"
   locations:
     "MQ Bottom of the Well GS West Middle Room": "gs && can_damage"
-"Bottom of the Well East Center Room":
+"MQ Bottom of the Well East Center Room":
   dungeon: BotW
   exits:
-    "Bottom of the Well Main Room Center": "true"
+    "MQ Bottom of the Well Main Room Center": "true"
   locations:
     "MQ Bottom of the Well East Middle Room Key": "true"
     "MQ Bottom of the Well Pot Side Room 1": "true"
@@ -98,30 +103,30 @@
     "MQ Bottom of the Well Wonder Item Side Room 2": "can_use_slingshot"
     "MQ Bottom of the Well Wonder Item Side Room 3": "can_use_slingshot"
     "MQ Bottom of the Well Wonder Item Side Room 4": "can_use_slingshot"
-"Bottom of the Well Basement Switch Ledge":
+"MQ Bottom of the Well Basement Switch Ledge":
   dungeon: BotW
   exits:
-    "Bottom of the Well Basement": "true"
-    "Bottom of the Well Main Room Center": "climb_anywhere && hookshot_anywhere"
+    "MQ Bottom of the Well Basement": "true"
+    "MQ Bottom of the Well Main Room Center": "climb_anywhere && hookshot_anywhere"
   events:
     BOTW_MQ_REDEAD_CHEST: "true"
-"Bottom of the Well Coffin Room":
+"MQ Bottom of the Well Coffin Room":
   dungeon: BotW
   exits:
-    "Bottom of the Well Main": "true"
+    "MQ Bottom of the Well Main": "true"
   locations:
     "MQ Bottom of the Well GS Coffin Room": "gs && can_damage_skull"
     "MQ Bottom of the Well Heart Coffin 1": "has_fire_or_sticks"
     "MQ Bottom of the Well Heart Coffin 2": "has_fire_or_sticks"
-"Bottom of the Well Before Dead Hand":
+"MQ Bottom of the Well Before Dead Hand":
   dungeon: BotW
   exits:
-    "Bottom of the Well Main": "event(BOTW_MQ_DRAIN_WATER) && is_child"
-    "Bottom of the Well Dead Hand Room": "true"
-"Bottom of the Well Dead Hand Room":
+    "MQ Bottom of the Well Main": "event(BOTW_MQ_DRAIN_WATER) && is_child"
+    "MQ Bottom of the Well Dead Hand Room": "true"
+"MQ Bottom of the Well Dead Hand Room":
   dungeon: BotW
   exits:
-    "Bottom of the Well Before Dead Hand": "soul_enemy(SOUL_ENEMY_DEAD_HAND) && (has_weapon || (can_use_sticks && trick(OOT_DEAD_HAND_STICKS)))"
+    "MQ Bottom of the Well Before Dead Hand": "soul_enemy(SOUL_ENEMY_DEAD_HAND) && (has_weapon || (can_use_sticks && trick(OOT_DEAD_HAND_STICKS)))"
   locations:
     "MQ Bottom of the Well Compass Chest": "soul_enemy(SOUL_ENEMY_DEAD_HAND) && (has_weapon || (can_use_sticks && trick(OOT_DEAD_HAND_STICKS)))"
     "MQ Bottom of the Well Dead Hand Key": "has_explosives"
@@ -129,20 +134,20 @@
     "MQ Bottom of the Well Grass Dead-Hand 2": "can_cut_grass"
     "MQ Bottom of the Well Grass Dead-Hand 3": "can_cut_grass"
     "MQ Bottom of the Well Grass Dead-Hand 4": "can_cut_grass"
-"Bottom of the Well Main Side Room Before Pit":
+"MQ Bottom of the Well Main Side Room Before Pit":
   dungeon: BotW
   exits:
-    "Bottom of the Well Main": "is_child"
-    "Bottom of the Well Pit Before Cage": "can_hit_triggers_distance || can_boomerang || has_explosives || can_hookshot"
-"Bottom of the Well Pit Before Cage":
+    "MQ Bottom of the Well Main": "is_child"
+    "MQ Bottom of the Well Pit Before Cage": "can_hit_triggers_distance || can_boomerang || has_explosives || can_hookshot"
+"MQ Bottom of the Well Pit Before Cage":
   dungeon: BotW
   exits:
-    "Bottom of the Well Main Side Room Before Pit": "true"
-    "Bottom of the Well Cage": "small_keys_botw(2)"
+    "MQ Bottom of the Well Main Side Room Before Pit": "true"
+    "MQ Bottom of the Well Cage": "small_keys_botw(2)"
     "Bottom of the Well Wallmaster Pit": "soul_wallmaster"
-"Bottom of the Well Cage":
+"MQ Bottom of the Well Cage":
   dungeon: BotW
   exits:
-    "Bottom of the Well Pit Before Cage": "true"
+    "MQ Bottom of the Well Pit Before Cage": "true"
   events:
     BOTW_MQ_GATE_FROM_SWITCH: "has_explosives"
