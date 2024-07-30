@@ -2289,14 +2289,14 @@ MQ Water Temple Side Loop First Room In Gate Large Crate 1, crate,          NONE
 MQ Water Temple Side Loop First Room In Gate Large Crate 2, crate,          NONE,                 TEMPLE_WATER,                   0x00c0a,                    RUPEE_GREEN
 MQ Water Temple Side Loop First Room In Gate Large Crate 3, crate,          NONE,                 TEMPLE_WATER,                   0x00c0b,                    RUPEE_GREEN
 MQ Water Temple Side Loop First Room In Gate Large Crate 4, crate,          NONE,                 TEMPLE_WATER,                   0x00c0c,                    RUPEE_GREEN
-MQ Water Temple Side Loop First Room Main Large Crate 1,    crate,          NONE,                 TEMPLE_WATER,                   0x00c0d,                    RUPEE_GREEN
-MQ Water Temple Side Loop First Room Main Large Crate 2,    crate,          NONE,                 TEMPLE_WATER,                   0x00c0e,                    RUPEE_GREEN
-MQ Water Temple Side Loop First Room Main Large Crate 3,    crate,          NONE,                 TEMPLE_WATER,                   0x00c0f,                    RUPEE_GREEN
-MQ Water Temple Side Loop First Room Main Large Crate 4,    crate,          NONE,                 TEMPLE_WATER,                   0x00c10,                    RUPEE_GREEN
-MQ Water Temple Side Loop First Room Main Large Crate 5,    crate,          NONE,                 TEMPLE_WATER,                   0x00c11,                    RUPEE_GREEN
-MQ Water Temple Side Loop First Room Main Large Crate 6,    crate,          NONE,                 TEMPLE_WATER,                   0x00c12,                    RUPEE_GREEN
-MQ Water Temple Side Loop First Room Main Large Crate 7,    crate,          NONE,                 TEMPLE_WATER,                   0x00c13,                    RUPEE_GREEN
-MQ Water Temple Side Loop First Room Main Large Crate 8,    crate,          NONE,                 TEMPLE_WATER,                   0x00c14,                    RUPEE_GREEN
+MQ Water Temple Side Loop First Room At Door Large Crate 1, crate,          NONE,                 TEMPLE_WATER,                   0x00c0d,                    RUPEE_GREEN
+MQ Water Temple Side Loop First Room At Door Large Crate 2, crate,          NONE,                 TEMPLE_WATER,                   0x00c0e,                    RUPEE_GREEN
+MQ Water Temple Side Loop First Room Water Large Crate 1,   crate,          NONE,                 TEMPLE_WATER,                   0x00c0f,                    RUPEE_GREEN
+MQ Water Temple Side Loop First Room Water Large Crate 2,   crate,          NONE,                 TEMPLE_WATER,                   0x00c10,                    RUPEE_GREEN
+MQ Water Temple Side Loop First Room Water Large Crate 3,   crate,          NONE,                 TEMPLE_WATER,                   0x00c11,                    RUPEE_GREEN
+MQ Water Temple Side Loop First Room Water Large Crate 4,   crate,          NONE,                 TEMPLE_WATER,                   0x00c12,                    RUPEE_GREEN
+MQ Water Temple Side Loop First Room Water Large Crate 5,   crate,          NONE,                 TEMPLE_WATER,                   0x00c13,                    RUPEE_GREEN
+MQ Water Temple Side Loop First Room Water Large Crate 6,   crate,          NONE,                 TEMPLE_WATER,                   0x00c14,                    RUPEE_GREEN
 MQ Water Temple Dodongo Room Large Crate 1,                 crate,          NONE,                 TEMPLE_WATER,                   0x00e08,                    RUPEE_GREEN
 MQ Water Temple Dodongo Room Large Crate 2,                 crate,          NONE,                 TEMPLE_WATER,                   0x00e09,                    RUPEE_GREEN
 MQ Water Temple Dodongo Room Large Crate 3,                 crate,          NONE,                 TEMPLE_WATER,                   0x00e0a,                    RUPEE_GREEN
