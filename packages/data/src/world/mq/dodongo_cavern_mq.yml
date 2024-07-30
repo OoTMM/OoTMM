@@ -17,7 +17,7 @@
     "MQ Dodongo Cavern Lobby Scrub Front": "business_scrub(0x1c)"
     "MQ Dodongo Cavern Lobby Scrub Back": "business_scrub(0x1d)"
   gossip:
-    "MQ Dodongo Cavern Gossip": "has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall"
+    "Dodongo Cavern Gossip": "has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall"
 "MQ Dodongo Cavern Staircase":
   dungeon: DC
   exits:
