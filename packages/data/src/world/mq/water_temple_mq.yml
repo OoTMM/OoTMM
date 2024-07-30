@@ -203,13 +203,25 @@
   dungeon: Water
   exits:
     "Water Temple Main Room Bottom Floor": "(has_iron_boots && has_tunic_zora_strict) || (longshot_anywhere && has_tunic_zora_strict)"
+    #"Water Temple Three Torch Room Gate Ledge": "scarecrow_hookshot || has_hover_boots || hookshot_anywhere || climb_anywhere" #Incorporate later. Not needed at the moment.
+  events:
+    WATER_MQ_THREE_TORCH_ROOM_GATE: "has_fire_arrows"
   locations:
-    "MQ Water Temple GS Three Torch": "gs && has_fire_arrows && (scarecrow_hookshot || has_hover_boots || hookshot_anywhere || climb_anywhere)"
-    "MQ Water Temple Pot Skull Cage 1": "has_fire_arrows && (scarecrow_hookshot || has_hover_boots || hookshot_anywhere || climb_anywhere)"
-    "MQ Water Temple Pot Skull Cage 2": "has_fire_arrows && (scarecrow_hookshot || has_hover_boots || hookshot_anywhere || climb_anywhere)"
-    "MQ Water Temple Pot Skull Cage 3": "has_fire_arrows && (scarecrow_hookshot || has_hover_boots || hookshot_anywhere || climb_anywhere)"
-    "MQ Water Temple Pot Skull Cage 4": "has_fire_arrows && (scarecrow_hookshot || has_hover_boots || hookshot_anywhere || climb_anywhere)"
-    "MQ Water Temple Wonder Item Triple Torches": "has_fire_arrows && (scarecrow_hookshot || has_hover_boots || hookshot_anywhere || climb_anywhere) && (can_hookshot || can_use_bow)"
+    "MQ Water Temple GS Three Torch": "gs && event(WATER_MQ_THREE_TORCH_ROOM_GATE) && (scarecrow_hookshot || has_hover_boots || hookshot_anywhere || climb_anywhere)"
+    "MQ Water Temple Pot Skull Cage 1": "event(WATER_MQ_THREE_TORCH_ROOM_GATE) && (scarecrow_hookshot || has_hover_boots || hookshot_anywhere || climb_anywhere)"
+    "MQ Water Temple Pot Skull Cage 2": "event(WATER_MQ_THREE_TORCH_ROOM_GATE) && (scarecrow_hookshot || has_hover_boots || hookshot_anywhere || climb_anywhere)"
+    "MQ Water Temple Pot Skull Cage 3": "event(WATER_MQ_THREE_TORCH_ROOM_GATE) && (scarecrow_hookshot || has_hover_boots || hookshot_anywhere || climb_anywhere)"
+    "MQ Water Temple Pot Skull Cage 4": "event(WATER_MQ_THREE_TORCH_ROOM_GATE) && (scarecrow_hookshot || has_hover_boots || hookshot_anywhere || climb_anywhere)"
+    "MQ Water Temple Wonder Item Triple Torches": "event(WATER_MQ_THREE_TORCH_ROOM_GATE) && (scarecrow_hookshot || has_hover_boots || hookshot_anywhere || climb_anywhere) && (can_hookshot || can_use_bow)"
+    "MQ Water Temple Three Torch Room Large Crate 1": "true"
+    "MQ Water Temple Three Torch Room Large Crate 2": "true"
+    "MQ Water Temple Three Torch Room Large Crate 3": "true"
+    "MQ Water Temple Three Torch Room Large Crate 4": "true"
+    "MQ Water Temple Three Torch Room Large Crate 5": "true"
+    "MQ Water Temple Three Torch Room Large Crate 6": "true"
+    "MQ Water Temple Three Torch Room Behind Gate Large Crate 1": "event(WATER_MQ_THREE_TORCH_ROOM_GATE) && (scarecrow_hookshot || has_hover_boots || hookshot_anywhere || climb_anywhere)"
+    "MQ Water Temple Three Torch Room Behind Gate Large Crate 2": "event(WATER_MQ_THREE_TORCH_ROOM_GATE) && (scarecrow_hookshot || has_hover_boots || hookshot_anywhere || climb_anywhere)"
+    "MQ Water Temple Three Torch Room Behind Gate Large Crate 3": "event(WATER_MQ_THREE_TORCH_ROOM_GATE) && (scarecrow_hookshot || has_hover_boots || hookshot_anywhere || climb_anywhere)"
 "Water Temple Leading To Side Loop Before Spikes":
   dungeon: Water
   exits:
