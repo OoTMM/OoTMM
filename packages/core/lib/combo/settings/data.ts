@@ -638,6 +638,14 @@ export const SETTINGS = [{
   cond: hasMM,
   default: false
 }, {
+  key: 'shuffleSnowballsMm',
+  name: 'Snowball Shuffle (MM)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the snowballs are shuffled (MM)',
+  cond: hasMM,
+  default: false
+}, {
   key: 'shuffleOcarinasOot',
   name: 'Ocarina Shuffle (OoT)',
   category: 'main.shuffle',

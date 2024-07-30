@@ -824,6 +824,17 @@ Swamp Spider House Hive Jars Room 3,                    hive,           NONE,   
 Swamp Spider House Hive Tree Room 1,                    hive,           NONE,                   SPIDER_HOUSE_SWAMP,           0x00506,                    RECOVERY_HEART
 Swamp Spider House Hive Tree Room 2,                    hive,           NONE,                   SPIDER_HOUSE_SWAMP,           0x00507,                    MAGIC_JAR_SMALL
 Swamp Spider House Hive Tree Room 3,                    hive,           NONE,                   SPIDER_HOUSE_SWAMP,           0x00509,                    NOTHING
+Path to Mountain Village Lower Big Snowball 1,          snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x0001a,                    NOTHING
+Path to Mountain Village Lower Big Snowball 2,          snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x0002a,                    NOTHING
+Path to Mountain Village Lower Big Snowball 3,          snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x0001e,                    RECOVERY_HEART
+Path to Mountain Village Lower Big Snowball 4,          snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x0001f,                    NOTHING
+Path to Mountain Village Middle Big Snowball 1,         snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x00023,                    NOTHING
+Path to Mountain Village Middle Big Snowball 2,         snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x00022,                    NOTHING
+Path to Mountain Village Middle Big Snowball 3,         snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x00021,                    NOTHING
+Path to Mountain Village Middle Big Snowball 4,         snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x00024,                    NOTHING
+Path to Mountain Village Upper Big Snowball 1,          snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x0002b,                    RECOVERY_HEART
+Path to Mountain Village Upper Big Snowball 2,          snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x00029,                    RECOVERY_HEART
+Path to Mountain Village Upper Big Snowball 3,          snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x0002c,                    RECOVERY_HEART
 Mountain Village Waterfall Chest,                       chest,          NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x00,                       RUPEE_RED
 Mountain Village Don Gero Mask,                         npc,            HUNGRY_GORON,           MOUNTAIN_VILLAGE_WINTER,      MASK_DON_GERO,              MASK_DON_GERO
 Mountain Village Frog Choir HP,                         npc,            DON_GERO_CHOIR,         MOUNTAIN_VILLAGE_WINTER,      FROG_HEART_PIECE,           HEART_PIECE

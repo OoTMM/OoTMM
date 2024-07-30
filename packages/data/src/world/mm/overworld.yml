@@ -1739,6 +1739,15 @@
     "Mountain Village Path Upper": "can_break_snowballs || is_spring || short_hook_anywhere"
   gossip:
     "Mountain Village Path Gossip": "true"
+  locations:
+    "Path to Mountain Village Lower Big Snowball 1": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Lower Big Snowball 2": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Lower Big Snowball 3": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Lower Big Snowball 4": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Middle Big Snowball 1": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Middle Big Snowball 2": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Middle Big Snowball 3": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Middle Big Snowball 4": "is_winter && can_break_snowballs"
 "Mountain Village Path Upper":
   region: PATH_TO_MOUNTAIN_VILLAGE
   events:
@@ -1747,6 +1756,14 @@
   exits:
     "Mountain Village Path Lower": "true"
     "Mountain Village": "true"
+  locations:
+    "Path to Mountain Village Middle Big Snowball 1": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Middle Big Snowball 2": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Middle Big Snowball 3": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Middle Big Snowball 4": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Upper Big Snowball 1": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Upper Big Snowball 2": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Upper Big Snowball 3": "is_winter && can_break_snowballs"
 "Mountain Village":
   region: MOUNTAIN_VILLAGE
   exits:

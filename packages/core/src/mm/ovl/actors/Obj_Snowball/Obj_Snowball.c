@@ -1,4 +1,7 @@
 #include <combo.h>
+#include <combo/global.h>
+#include <combo/item.h>
+#include <combo/config.h>
 #include "Obj_Snowball.h"
 
 #define OBJSNOWBALL_GET_SWITCH_FLAG(thisx) ((thisx)->variable & 0x3F)
@@ -21,8 +24,8 @@ void ObjSnowball_Draw(Actor_ObjSnowball* this, GameState_Play* play);
 
 void ObjSnowball_SpawnEnemy(Actor_ObjSnowball* this, GameState_Play* play);
 void ObjSnowball_DropCollectible(Actor_ObjSnowball* this, GameState_Play* play);
-void func_80B02DB0(Actor_ObjSnowball* this, GameState_Play* play);
-void func_80B02E54(Actor_ObjSnowball* this, GameState_Play* play);
+void ObkSnowball_SpawnGoronElder(Actor_ObjSnowball* this, GameState_Play* play);
+void ObjSnowball_SpawnWolfos(Actor_ObjSnowball* this, GameState_Play* play);
 void func_80B04338(Actor_ObjSnowball* this, GameState_Play* play);
 void func_80B04350(Actor_ObjSnowball* this, GameState_Play* play);
 void func_80B04540(Actor_ObjSnowball* this, GameState_Play* play);
@@ -70,11 +73,11 @@ typedef struct {
 
 static ObjSnowballStruct2 D_80B04F84[] = {
     { -1, 0, ObjSnowball_DropCollectible },
-    { AC_EN_JG, 0, func_80B02DB0 },
-    { AC_EN_WF, 1, func_80B02E54 },
+    { AC_EN_JG, 0, ObkSnowball_SpawnGoronElder },
+    { AC_EN_WF, 1, ObjSnowball_SpawnWolfos },
     { AC_EN_TITE, -4, ObjSnowball_SpawnEnemy },
     { AC_EN_KAME, 0, ObjSnowball_SpawnEnemy },
-    { -1, 0, NULL },
+    { -1, 0, ObjSnowball_DropCollectible },
 };
 
 static Color_RGBA8 primColor = { 250, 250, 250, 255 };
@@ -91,7 +94,82 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_F32(uncullZoneForward, 2000, ICHAIN_STOP),
 };
 
+static void ObjSnowball_Alias(Actor_ObjSnowball* this)
+{
+    Xflag* xflag;
+
+    xflag = &this->xflag;
+
+    if (xflag->sceneId == SCE_MM_PATH_MOUNTAIN_VILLAGE)
+    {
+        switch(xflag->id)
+        {
+            case 28:
+            case 23:
+                xflag->id = 26; /* Lower 1 */
+                break;
+            case 24:
+            case 19:
+                xflag->id = 42; /* Lower 2 */
+                break;
+            case 27:
+            case 29:
+                xflag->id = 30; /* Lower 3 */
+                break;
+            case 46:
+            case 22:
+                xflag->id = 31; /* Lower 4 */
+                break;
+            case 48:
+            case 20:
+                xflag->id = 43; /* Upper 1 */
+                break;
+            case 45:
+            case 47:
+                xflag->id = 41; /* Upper 2 */
+                break;
+            case 25:
+            case 21:
+                xflag->id = 44; /* Upper 3 */
+                break;
+        }
+    }
+}
+
+static int ObjSnowball_IsShuffled(Actor_ObjSnowball* this)
+{
+    return !!(this->isExtended && !comboXflagsGet(&this->xflag));
+}
+
+static int ObjSnowball_DropCustom(Actor_ObjSnowball* this, GameState_Play* play)
+{
+    if (!ObjSnowball_IsShuffled(this))
+        return 0;
+    EnItem00_DropCustom(play, &this->actor.world.pos, &this->xflag);
+    return 1;
+}
+
+static void ObjSnowball_InitXflag(Actor_ObjSnowball* this, GameState_Play* play)
+{
+    ComboItemOverride   o;
+    Xflag*              xflag;
+
+    /* Set the extended properties */
+    xflag = &this->xflag;
+    xflag->sceneId = play->sceneId;
+    xflag->setupId = g.sceneSetupId;
+    xflag->roomId = this->actor.room;
+    xflag->sliceId = 0;
+    xflag->id = this->actor.actorIndex;
+
+    ObjSnowball_Alias(this);
+
+    comboXflagItemOverride(&o, &this->xflag, 0);
+    this->isExtended = !!(o.gi && !comboXflagsGet(&this->xflag));
+}
+
 void ObjSnowball_SpawnEnemy(Actor_ObjSnowball* this, GameState_Play* play) {
+    ObjSnowball_DropCustom(this, play);
     ObjSnowballStruct2* ptr = &D_80B04F84[this->actor.home.rot.y];
 
     Actor_SpawnAsChildAndCutscene(&play->actorCtx, play, ptr->unk_00, this->actor.home.pos.x, this->actor.home.pos.y,
@@ -100,14 +178,18 @@ void ObjSnowball_SpawnEnemy(Actor_ObjSnowball* this, GameState_Play* play) {
 }
 
 void ObjSnowball_DropCollectible(Actor_ObjSnowball* this, GameState_Play* play) {
-    s32 temp_v0 = Item_CollectibleDropTable(OBJSNOWBALL_GET_SWITCH_FLAG(&this->actor));
+    if(ObjSnowball_DropCustom(this, play))
+        return;
 
-    if (temp_v0 >= 0) {
-        Item_DropCollectible(play, &this->actor.home.pos, (OBJSNOWBALL_GET_7F00(&this->actor) << 8) | temp_v0);
+    s32 item;
+
+    item = Item_CollectibleDropTable(OBJSNOWBALL_GET_SWITCH_FLAG(&this->actor));
+    if (item >= 0) {
+        Item_DropCollectible(play, &this->actor.home.pos, (OBJSNOWBALL_GET_7F00(&this->actor) << 8) | item);
     }
 }
 
-void func_80B02DB0(Actor_ObjSnowball* this, GameState_Play* play) {
+void ObkSnowball_SpawnGoronElder(Actor_ObjSnowball* this, GameState_Play* play) {
     ObjSnowballStruct2* ptr = &D_80B04F84[this->actor.home.rot.y];
 
     Actor_SpawnAsChildAndCutscene(&play->actorCtx, play, ptr->unk_00, this->actor.home.pos.x, this->actor.home.pos.y,
@@ -116,7 +198,8 @@ void func_80B02DB0(Actor_ObjSnowball* this, GameState_Play* play) {
                                   this->actor.halfDaysBits, NULL);
 }
 
-void func_80B02E54(Actor_ObjSnowball* this, GameState_Play* play) {
+void ObjSnowball_SpawnWolfos(Actor_ObjSnowball* this, GameState_Play* play) {
+    ObjSnowball_DropCustom(this, play);
     ObjSnowballStruct2* ptr = &D_80B04F84[this->actor.home.rot.y];
 
     Actor_SpawnAsChildAndCutscene(&play->actorCtx, play, ptr->unk_00, this->actor.home.pos.x, this->actor.home.pos.y,
@@ -441,6 +524,7 @@ void ObjSnowball_Init(Actor_ObjSnowball* this, GameState_Play* play) {
     s32 sp34;
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
+    ObjSnowball_InitXflag(this, play);
 
     sp34 = sp40 == 1;
     if (sp34) {
@@ -492,7 +576,7 @@ void ObjSnowball_Init(Actor_ObjSnowball* this, GameState_Play* play) {
 
     func_80B04338(this, play);
 
-    if ((sp40 == 5) && Flags_GetSwitch(play, OBJSNOWBALL_GET_SWITCH_FLAG(&this->actor))) {
+    if ((sp40 == 5) && Flags_GetSwitch(play, OBJSNOWBALL_GET_SWITCH_FLAG(&this->actor)) && !ObjSnowball_IsShuffled(this)) {
         Actor_Kill(&this->actor);
     }
 }

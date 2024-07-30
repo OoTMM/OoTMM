@@ -37,8 +37,8 @@ typedef struct Actor_ObjSnowball {
     s8 unk_210;
     s8 unk_211;
 
-    Xflag  xflags;
-    u8     isExtendedFlags;
+    Xflag  xflag;
+    u8     isExtended;
 } Actor_ObjSnowball; // size = 0x214
 
 #endif
