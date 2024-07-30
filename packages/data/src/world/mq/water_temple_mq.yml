@@ -98,6 +98,17 @@
     "MQ Water Temple Pot Storage Room 1": "true"
     "MQ Water Temple Pot Storage Room 2": "true"
     "MQ Water Temple Pot Storage Room 3": "true"
+    "MQ Water Temple Storage Room Large Crate 1": "true"
+    "MQ Water Temple Storage Room Large Crate 2": "true"
+    "MQ Water Temple Storage Room Large Crate 3": "true"
+    "MQ Water Temple Storage Room Large Crate 4": "true"
+    "MQ Water Temple Storage Room Large Crate 5": "true"
+    "MQ Water Temple Storage Room Large Crate 6": "true"
+    "MQ Water Temple Storage Room Large Crate 7": "true"
+    "MQ Water Temple Storage Room Small Crate 1": "true"
+    "MQ Water Temple Storage Room Small Crate 2": "true"
+    "MQ Water Temple Storage Room Small Crate 3": "true"
+    "MQ Water Temple Storage Room Small Crate 4": "true"
 "Water Temple Hookshot Staircase from Main":
   dungeon: Water
   exits:
@@ -306,6 +317,20 @@
   locations:
     "MQ Water Temple Central Pillar Chest": "can_hookshot"
     "MQ Water Temple Wonder Item Under Pillar Room": "can_hookshot"
+    "MQ Water Temple Central Tower Under Gate Large Crate 1": "true"
+    "MQ Water Temple Central Tower Under Gate Large Crate 2": "true"
+    "MQ Water Temple Central Tower Under Gate Large Crate 3": "true"
+    "MQ Water Temple Central Tower Under Gate Large Crate 4": "true"
+    "MQ Water Temple Central Tower Under Gate Large Crate 5": "true"
+    "MQ Water Temple Central Tower Under Gate Large Crate 6": "true"
+    "MQ Water Temple Central Tower Under Gate Large Crate 7": "true"
+    "MQ Water Temple Central Tower Under Gate Large Crate 8": "true"
+    "MQ Water Temple Central Tower Under Gate Large Crate 9": "true"
+    "MQ Water Temple Central Tower Under Gate Large Crate 10": "true"
+    "MQ Water Temple Central Tower Under Gate Large Crate 11": "true"
+    "MQ Water Temple Central Tower Under Gate Large Crate 12": "true"
+    "MQ Water Temple Central Tower Under Gate Large Crate 13": "true"
+    "MQ Water Temple Central Tower Under Gate Large Crate 14": "true"
 "Water Temple Lizalfos Hallway":
   dungeon: Water
   exits:
