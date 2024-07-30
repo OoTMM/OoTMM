@@ -183,6 +183,17 @@
     "MQ Water Temple Wonder Item Dragon Room Eyes 1": "has_iron_boots && can_hookshot"
     "MQ Water Temple Wonder Item Dragon Room Eyes 2": "has_iron_boots && can_hookshot"
     "MQ Water Temple Wonder Item Dragon Room Portrait": "can_dive_small && has_tunic_zora && can_hookshot" #Scale and timing can be used to dive here to reach the portrait section.
+    "MQ Water Temple Dragon Room At Door Large Crate 1": "true"
+    "MQ Water Temple Dragon Room At Door Large Crate 2": "true"
+    "MQ Water Temple Dragon Room Underwater Large Crate 1": "has_iron_boots && has_tunic_zora"
+    "MQ Water Temple Dragon Room Underwater Large Crate 2": "has_iron_boots && has_tunic_zora"
+    "MQ Water Temple Dragon Room Underwater Large Crate 3": "has_iron_boots && has_tunic_zora"
+    "MQ Water Temple Dragon Room Underwater Large Crate 4": "has_iron_boots && has_tunic_zora"
+    "MQ Water Temple Dragon Room At Torches Large Crate 1": "can_dive_small && has_tunic_zora" #Scale and timing can be used to dive here to reach the portrait section.
+    "MQ Water Temple Dragon Room At Torches Large Crate 2": "can_dive_small && has_tunic_zora" #Scale and timing can be used to dive here to reach the portrait section.
+    "MQ Water Temple Dragon Room At Torches Small Crate 1": "can_dive_small && has_tunic_zora" #Scale and timing can be used to dive here to reach the portrait section.
+    "MQ Water Temple Dragon Room At Torches Small Crate 2": "can_dive_small && has_tunic_zora" #Scale and timing can be used to dive here to reach the portrait section.
+    "MQ Water Temple Dragon Room At Torches Small Crate 3": "can_dive_small && has_tunic_zora" #Scale and timing can be used to dive here to reach the portrait section.
 "Water Temple Boss Key Room Dragon Side":
   dungeon: Water
   exits:
