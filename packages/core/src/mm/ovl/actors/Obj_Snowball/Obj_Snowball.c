@@ -134,6 +134,26 @@ static void ObjSnowball_Alias(Actor_ObjSnowball* this)
                 break;
         }
     }
+    else if (xflag->sceneId == SCE_MM_MOUNTAIN_VILLAGE_WINTER)
+    {
+        switch(xflag->id)
+        {
+            case 12:
+            case 13:
+                xflag->id = 17; break;
+            case 45:
+            case 16:
+                xflag->id = 14; break;
+            case 48:
+                xflag->id = 46; break;
+            case 15:
+            case 51:
+                xflag->id = 52; break;
+            case 47:
+            case 44:
+                xflag->id = 18; break;
+        }
+    }
 }
 
 static int ObjSnowball_IsShuffled(Actor_ObjSnowball* this)

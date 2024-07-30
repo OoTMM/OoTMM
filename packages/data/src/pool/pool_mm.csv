@@ -900,6 +900,11 @@ Mountain Village Potted Plant 1 Pot,                    pot,            NONE,   
 Mountain Village Potted Plant 1 Grass,                  grass,          NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x10023,                    RECOVERY_HEART
 Mountain Village Potted Plant 2 Pot,                    pot,            NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x00024,                    NOTHING
 Mountain Village Potted Plant 2 Grass,                  grass,          NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x10024,                    RECOVERY_HEART
+Mountain Village Big Snowball 1,                        snowball,       NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x00011,                    NOTHING
+Mountain Village Big Snowball 2,                        snowball,       NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x0000e,                    NOTHING
+Mountain Village Big Snowball 3,                        snowball,       NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x0002e,                    MAGIC_JAR_SMALL
+Mountain Village Big Snowball 4,                        snowball,       NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x00034,                    RECOVERY_HEART
+Mountain Village Big Snowball 5,                        snowball,       NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x00012,                    NOTHING
 Blacksmith Razor Blade,                                 npc,            BLACKSMITH,             BLACKSMITH,                   SWORD_RAZOR,                SWORD
 Blacksmith Gilded Sword,                                npc,            BLACKSMITH,             BLACKSMITH,                   SWORD_GILDED,               SWORD
 Blacksmith Potted Plant 1 Pot,                          pot,            NONE,                   BLACKSMITH,                   0x00004,                    NOTHING

@@ -1835,6 +1835,11 @@
     "Mountain Village Potted Plant 1 Grass": "is_day"
     "Mountain Village Potted Plant 2 Pot": "is_day"
     "Mountain Village Potted Plant 2 Grass": "is_day"
+    "Mountain Village Big Snowball 1": "is_winter && can_break_snowballs"
+    "Mountain Village Big Snowball 2": "is_winter && can_break_snowballs"
+    "Mountain Village Big Snowball 3": "(first_day || second_day) && is_winter && can_break_snowballs" # Goron Elder is in this snowball in Final day
+    "Mountain Village Big Snowball 4": "is_winter && can_break_snowballs"
+    "Mountain Village Big Snowball 5": "is_winter && can_break_snowballs"
 "Mountain Village Elder":
   region: NONE
   exits:
