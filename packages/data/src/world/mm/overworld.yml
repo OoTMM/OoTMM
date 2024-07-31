@@ -127,6 +127,10 @@
     FAIRY: "true"
   locations:
     "Snowhead Owl Statue": "has_sticks || has_weapon"
+    "Snowhead Small Snowball 1": "true"
+    "Snowhead Small Snowball 2": "true"
+    "Snowhead Small Snowball 3": "true"
+    "Snowhead Small Snowball 4": "true"
 "Owl Great Bay":
   region: GREAT_BAY_COAST
   exits:
@@ -2277,16 +2281,12 @@
     "Snowhead": "blizzard_stopped || has_iron_boots"
     "Snowhead Fairy Fountain": "true"
   locations:
-    "Snowhead Big Snowball 1": "is_winter && can_break_snowballs"
-    "Snowhead Big Snowball 2": "is_winter && can_break_snowballs"
-    "Snowhead Big Snowball 3": "is_winter && can_break_snowballs"
-    "Snowhead Big Snowball 4": "is_winter && can_break_snowballs"
-    "Snowhead Big Snowball 5": "is_winter && can_break_snowballs"
-    "Snowhead Big Snowball 6": "is_winter && can_break_snowballs"
-    "Snowhead Small Snowball 1": "true"
-    "Snowhead Small Snowball 2": "true"
-    "Snowhead Small Snowball 3": "true"
-    "Snowhead Small Snowball 4": "true"
+    "Snowhead Big Snowball 1": "(blizzard_stopped || has_iron_boots) && is_winter && can_break_snowballs"
+    "Snowhead Big Snowball 2": "(blizzard_stopped || has_iron_boots) && is_winter && can_break_snowballs"
+    "Snowhead Big Snowball 3": "(blizzard_stopped || has_iron_boots) && is_winter && can_break_snowballs"
+    "Snowhead Big Snowball 4": "(blizzard_stopped || has_iron_boots) && is_winter && can_break_snowballs"
+    "Snowhead Big Snowball 5": "(blizzard_stopped || has_iron_boots) && is_winter && can_break_snowballs"
+    "Snowhead Big Snowball 6": "(blizzard_stopped || has_iron_boots) && is_winter && can_break_snowballs"
     "Snowhead Small Snowball Spring 1": "is_spring"
     "Snowhead Small Snowball Spring 2": "is_spring"
     "Snowhead Small Snowball Spring 3": "is_spring"
