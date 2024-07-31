@@ -2267,13 +2267,6 @@
     "Snowhead Entrance": "(can_lullaby && has_mask_goron) || blizzard_stopped || has_iron_boots"
     "Snowhead Temple": "true"
     "Snowhead Near Fairy Fountain": "blizzard_stopped || has_iron_boots"
-  locations:
-    "Snowhead Big Snowball 1": "is_winter && can_break_snowballs"
-    "Snowhead Big Snowball 2": "is_winter && can_break_snowballs"
-    "Snowhead Big Snowball 3": "is_winter && can_break_snowballs"
-    "Snowhead Big Snowball 4": "is_winter && can_break_snowballs"
-    "Snowhead Big Snowball 5": "is_winter && can_break_snowballs"
-    "Snowhead Big Snowball 6": "is_winter && can_break_snowballs"
 "Snowhead Near Fairy Fountain":
   region: SNOWHEAD
   events:
@@ -2283,6 +2276,23 @@
     "Snowhead Entrance": "blizzard_stopped || has_iron_boots"
     "Snowhead": "blizzard_stopped || has_iron_boots"
     "Snowhead Fairy Fountain": "true"
+  locations:
+    "Snowhead Big Snowball 1": "is_winter && can_break_snowballs"
+    "Snowhead Big Snowball 2": "is_winter && can_break_snowballs"
+    "Snowhead Big Snowball 3": "is_winter && can_break_snowballs"
+    "Snowhead Big Snowball 4": "is_winter && can_break_snowballs"
+    "Snowhead Big Snowball 5": "is_winter && can_break_snowballs"
+    "Snowhead Big Snowball 6": "is_winter && can_break_snowballs"
+    "Snowhead Small Snowball 1": "true"
+    "Snowhead Small Snowball 2": "true"
+    "Snowhead Small Snowball 3": "true"
+    "Snowhead Small Snowball 4": "true"
+    "Snowhead Small Snowball Spring 1": "is_spring"
+    "Snowhead Small Snowball Spring 2": "is_spring"
+    "Snowhead Small Snowball Spring 3": "is_spring"
+    "Snowhead Small Snowball Spring 4": "is_spring"
+    "Snowhead Small Snowball Spring 5": "is_spring"
+    "Snowhead Small Snowball Spring 6": "is_spring"
 "Snowhead Fairy Fountain":
   region: ENTRANCE
   exits:

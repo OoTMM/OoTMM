@@ -1091,6 +1091,16 @@ Snowhead Big Snowball 3,                                snowball,       NONE,   
 Snowhead Big Snowball 4,                                snowball,       NONE,                   SNOWHEAD,                     0x00031,                    MAGIC_JAR_SMALL
 Snowhead Big Snowball 5,                                snowball,       NONE,                   SNOWHEAD,                     0x00032,                    MAGIC_JAR_SMALL
 Snowhead Big Snowball 6,                                snowball,       NONE,                   SNOWHEAD,                     0x00033,                    MAGIC_JAR_SMALL
+Snowhead Small Snowball 1,                              snowball,       NONE,                   SNOWHEAD,                     0x0002a,                    BOMBS_5
+Snowhead Small Snowball 2,                              snowball,       NONE,                   SNOWHEAD,                     0x0002b,                    ARROWS_20
+Snowhead Small Snowball 3,                              snowball,       NONE,                   SNOWHEAD,                     0x0002c,                    FLEXIBLE
+Snowhead Small Snowball 4,                              snowball,       NONE,                   SNOWHEAD,                     0x0002d,                    MAGIC_JAR_LARGE
+Snowhead Small Snowball Spring 1,                       snowball,       NONE,                   SNOWHEAD,                     0x0400e,                    RECOVERY_HEART
+Snowhead Small Snowball Spring 2,                       snowball,       NONE,                   SNOWHEAD,                     0x0400f,                    RECOVERY_HEART
+Snowhead Small Snowball Spring 3,                       snowball,       NONE,                   SNOWHEAD,                     0x04010,                    MAGIC_JAR_SMALL
+Snowhead Small Snowball Spring 4,                       snowball,       NONE,                   SNOWHEAD,                     0x04011,                    RECOVERY_HEART
+Snowhead Small Snowball Spring 5,                       snowball,       NONE,                   SNOWHEAD,                     0x04012,                    MAGIC_JAR_SMALL
+Snowhead Small Snowball Spring 6,                       snowball,       NONE,                   SNOWHEAD,                     0x04013,                    MAGIC_JAR_SMALL
 Goron Race Reward,                                      npc,            GORON_RACE,             GORON_RACETRACK,              GORON_RACE,                 BOTTLED_GOLD_DUST
 Goron Race Pot 01,                                      pot,            NONE,                   GORON_RACETRACK,              0x0002,                     MAGIC_JAR_LARGE
 Goron Race Pot 02,                                      pot,            NONE,                   GORON_RACETRACK,              0x0003,                     MAGIC_JAR_LARGE

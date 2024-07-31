@@ -113,6 +113,29 @@ void ObjSnowball2_Alias(Actor_ObjSnowball2* this)
             case 18:
             case 19:
                 xflag->id -= 8;
+                xflag->setupId = 0;
+                break;
+        }
+    }
+    if (xflag->sceneId == SCE_MM_SNOWHEAD)
+    {
+        switch(xflag->id)
+        {
+            case 11:
+                xflag->id = 43;
+                xflag->setupId = 0;
+                break;
+            case 12:
+                xflag->id = 45;
+                xflag->setupId = 0;
+                break;
+            case 13:
+                xflag->id = 42;
+                xflag->setupId = 0;
+                break;
+            case 20:
+                xflag->id = 4;
+                xflag->setupId = 0;
                 break;
         }
     }
