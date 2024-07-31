@@ -7,6 +7,7 @@
 #define fabsf(f) __builtin_fabsf(f)
 
 #define BINANG_SUB(a, b) ((s16)(a - b))
+#define BINANG_ADD(a, b) ((s16)(a + b)) 
 #define BINANG_ROT180(angle) ((s16)(angle + 0x8000))
 
 #define SQXZ(vec) ((vec.x) * (vec.x) + (vec.z) * (vec.z))

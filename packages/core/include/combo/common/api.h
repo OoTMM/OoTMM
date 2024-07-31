@@ -567,7 +567,29 @@ typedef void (*PostLimbDraw)(GameState_Play* play, s32 limbIndex, Gfx** dList, V
 
 Gfx* SkelAnime_DrawFlex(GameState_Play* play, void** skeleton, Vec3s* jointTable, s32 dListCount, OverrideLimbDraw overrideLimbDraw, PostLimbDraw postLimbDraw, struct Actor* actor, Gfx* gfx);
 
+f32 Math3D_Vec3fMagnitude(Vec3f* vec);
+f32 Math3D_Vec3f_DistXYZ(Vec3f* a, Vec3f* b);
+void Actor_UpdateVelocityWithGravity(Actor* actor);
+void Math_Vec3f_Scale(Vec3f* vec, f32 scale);
+s16 Quake_Request(Camera* camera, u32 type);
+u32 Quake_SetSpeed(s16 index, s16 speed);
+u32 Quake_SetPerturbations(s16 index, s16 y, s16 x, s16 fov, s16 roll);
+u32 Quake_SetDuration(s16 index, s16 duration);
+f32 BgCheck_EntityRaycastFloor5_2(GameState_Play* play, CollisionContext* colCtx, CollisionPoly** outPoly, s32* bgId, Actor* actor, Vec3f* pos);
+s32 WaterBox_GetSurface1_2(GameState_Play* play, CollisionContext* colCtx, f32 x, f32 z, f32* ySurface, WaterBox** outWaterBox);
+f32 Math3D_Vec3fMagnitudeSq(Vec3f* vec);
+void Math3D_Vec3f_Cross(Vec3f* a, Vec3f* b, Vec3f* ret);
+void Matrix_RotateAxisF(f32 angle, Vec3f* axis, int mode);
+void Matrix_Get(MtxF* dest);
+void Matrix_MtxFToYXZRot(MtxF* src, Vec3s* dest, s32 nonUniformScale);
+void Effect_Add(GameState_Play* play, s32* pIndex, int type, u8 arg3, u8 arg4, void* initParams);
+void Effect_Destroy(GameState_Play* play, s32 index);
+int SurfaceType_GetFloorType(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId);
+void* Effect_GetByIndex(s32 index);
+
 // TODO: rename
+void func_800AE930(CollisionContext* colCtx, void* this, Vec3f* pos, f32 arg3, s16 angle, CollisionPoly* colPoly, s32 bgId);
+void func_800AEF44(void* this);
 void func_80169EFC(GameState_Play* play);
 void func_800B0EB0(GameState_Play* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, Color_RGBA8* primColor, Color_RGBA8* envColor, s16 scale, s16 scaleStep, s16 life);
 void func_80169AFC(GameState_Play* play, s16 camId, s16 timer);
