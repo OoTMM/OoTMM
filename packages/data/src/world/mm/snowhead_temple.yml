@@ -45,6 +45,8 @@
     "Snowhead Temple Pot Bridge Room 3": "true"
     "Snowhead Temple Pot Bridge Room 4": "true"
     "Snowhead Temple Pot Bridge Room 5": "true"
+    "Snowhead Temple Small Snowball Bridge Room 1": "true"
+    "Snowhead Temple Small Snowball Bridge Room 2": "true"
 "Snowhead Temple Bridge Back":
   dungeon: SH
   exits:
