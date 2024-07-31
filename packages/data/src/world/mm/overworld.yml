@@ -1740,14 +1740,21 @@
   gossip:
     "Mountain Village Path Gossip": "true"
   locations:
-    "Path to Mountain Village Lower Big Snowball 1": "is_winter && can_break_snowballs"
-    "Path to Mountain Village Lower Big Snowball 2": "is_winter && can_break_snowballs"
-    "Path to Mountain Village Lower Big Snowball 3": "is_winter && can_break_snowballs"
-    "Path to Mountain Village Lower Big Snowball 4": "is_winter && can_break_snowballs"
-    "Path to Mountain Village Middle Big Snowball 1": "is_winter && can_break_snowballs"
-    "Path to Mountain Village Middle Big Snowball 2": "is_winter && can_break_snowballs"
-    "Path to Mountain Village Middle Big Snowball 3": "is_winter && can_break_snowballs"
-    "Path to Mountain Village Middle Big Snowball 4": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Lower 1": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Lower 2": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Lower 3": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Lower 4": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Middle 1": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Middle 2": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Middle 3": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Middle 4": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Small Snowball Lower Winter 1": "is_winter"
+    "Path to Mountain Village Small Snowball Lower Winter 2": "is_winter"
+    "Path to Mountain Village Small Snowball Lower Winter 3": "is_winter"
+    "Path to Mountain Village Small Snowball Lower Spring 1": "is_spring"
+    "Path to Mountain Village Small Snowball Lower Spring 2": "is_spring"
+    "Path to Mountain Village Small Snowball Lower Spring 3": "is_spring"
+    "Path to Mountain Village Small Snowball Lower Spring 4": "is_spring"
 "Mountain Village Path Upper":
   region: PATH_TO_MOUNTAIN_VILLAGE
   events:
@@ -1757,13 +1764,17 @@
     "Mountain Village Path Lower": "true"
     "Mountain Village": "true"
   locations:
-    "Path to Mountain Village Middle Big Snowball 1": "is_winter && can_break_snowballs"
-    "Path to Mountain Village Middle Big Snowball 2": "is_winter && can_break_snowballs"
-    "Path to Mountain Village Middle Big Snowball 3": "is_winter && can_break_snowballs"
-    "Path to Mountain Village Middle Big Snowball 4": "is_winter && can_break_snowballs"
-    "Path to Mountain Village Upper Big Snowball 1": "is_winter && can_break_snowballs"
-    "Path to Mountain Village Upper Big Snowball 2": "is_winter && can_break_snowballs"
-    "Path to Mountain Village Upper Big Snowball 3": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Middle 1": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Middle 2": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Middle 3": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Middle 4": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Upper 1": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Upper 2": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Upper 3": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Small Snowball Upper Winter": "is_winter"
+    "Path to Mountain Village Small Snowball Upper Spring 1": "is_spring"
+    "Path to Mountain Village Small Snowball Upper Spring 2": "is_spring"
+    "Path to Mountain Village Small Snowball Upper Spring 3": "is_spring"
 "Mountain Village":
   region: MOUNTAIN_VILLAGE
   exits:
@@ -1840,6 +1851,15 @@
     "Mountain Village Big Snowball 3": "(first_day || second_day) && is_winter && can_break_snowballs" # Goron Elder is in this snowball in Final day
     "Mountain Village Big Snowball 4": "is_winter && can_break_snowballs"
     "Mountain Village Big Snowball 5": "is_winter && can_break_snowballs"
+    "Mountain Village Small Snowball 1": "true"
+    "Mountain Village Small Snowball 2": "true"
+    "Mountain Village Small Snowball 3": "true"
+    "Mountain Village Small Snowball 4": "true"
+    "Mountain Village Small Snowball 5": "true"
+    "Mountain Village Small Snowball Winter 1": "is_winter"
+    "Mountain Village Small Snowball Winter 2": "is_winter"
+    "Mountain Village Small Snowball Winter 3": "is_winter"
+    "Mountain Village Small Snowball Winter 4": "is_winter"
 "Mountain Village Elder":
   region: NONE
   exits:
@@ -1948,6 +1968,9 @@
     "Twin Islands Big Snowball 11": "is_winter && can_break_snowballs"
     "Twin Islands Big Snowball 12": "is_winter && can_break_snowballs"
     "Twin Islands Big Snowball 13": "(first_day || final_day) && is_winter && can_break_snowballs"
+    "Twin Islands Small Snowball 1": "is_winter"
+    "Twin Islands Small Snowball 2": "is_winter"
+    "Twin Islands Small Snowball 3": "is_winter"
 "Twin Islands Ramp Grotto":
   region: ENTRANCE
   exits:
@@ -2006,6 +2029,10 @@
   exits:
     "Twin Islands": "true"
     "Twin Islands Ramp Grotto": "has_explosives || trick_keg_explosives || (trick(MM_KEG_EXPLOSIVES) && event(POWDER_KEG_TRIAL))"
+  locations:
+    "Twin Islands Small Snowball Ramp 1": "is_winter"
+    "Twin Islands Small Snowball Ramp 2": "is_winter"
+    "Twin Islands Small Snowball Ramp 3": "is_winter"
 "Goron Village":
   region: GORON_VILLAGE
   exits:
@@ -2037,6 +2064,18 @@
     "Goron Village Big Snowball 7": "is_winter && can_break_snowballs"
     "Goron Village Big Snowball 8": "is_winter && can_break_snowballs"
     "Goron Village Big Snowball 9": "is_winter && can_break_snowballs"
+    "Goron Village Small Snowball 01": "is_winter"
+    "Goron Village Small Snowball 02": "is_winter"
+    "Goron Village Small Snowball 03": "is_winter"
+    "Goron Village Small Snowball 04": "is_winter"
+    "Goron Village Small Snowball 05": "is_winter"
+    "Goron Village Small Snowball 06": "is_winter"
+    "Goron Village Small Snowball 07": "is_winter"
+    "Goron Village Small Snowball 08": "is_winter"
+    "Goron Village Small Snowball 09": "is_winter"
+    "Goron Village Small Snowball 10": "is_winter"
+    "Goron Village Small Snowball 11": "is_winter"
+    "Goron Village Small Snowball 12": "is_winter"
 "Front of Lone Peak Shrine":
   region: GORON_VILLAGE
   exits:
@@ -2087,6 +2126,9 @@
   events:
     MAGIC: "true"
     ARROWS: "is_spring"
+  locations:
+    "Mountain Village Small Snowball Cliff 1": "is_winter"
+    "Mountain Village Small Snowball Cliff 2": "is_winter"
 "Near Goron Graveyard":
   region: MOUNTAIN_VILLAGE
   exits:
@@ -2158,6 +2200,8 @@
     "Path to Snowhead HP": "can_use_lens && (scarecrow_hookshot || hookshot_anywhere)"
     "Path to Snowhead Big Snowball Middle 1": "is_winter && can_break_snowballs"
     "Path to Snowhead Big Snowball Middle 2": "is_winter && can_break_snowballs"
+    "Path to Snowhead Small Snowball Spring Middle 1": "is_spring"
+    "Path to Snowhead Small Snowball Spring Middle 2": "is_spring"
 "Path to Snowhead Back":
   region: PATH_TO_SNOWHEAD
   events:
@@ -2169,6 +2213,11 @@
   locations:
     "Path to Snowhead Big Snowball Back 1": "is_winter && can_break_snowballs"
     "Path to Snowhead Big Snowball Back 2": "is_winter && can_break_snowballs"
+    "Path to Snowhead Small Snowball Back 1": "true"
+    "Path to Snowhead Small Snowball Back 2": "true"
+    "Path to Snowhead Small Snowball Back 3": "true"
+    "Path to Snowhead Small Snowball Spring Back 1": "is_spring"
+    "Path to Snowhead Small Snowball Spring Back 2": "is_spring"
 "Path to Snowhead Grotto":
   region: ENTRANCE
   exits:

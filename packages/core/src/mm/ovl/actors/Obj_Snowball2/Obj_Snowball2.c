@@ -4,8 +4,9 @@
 #define ENOBJSNOWBALL2_GET_3F(thisx) ((thisx)->variable & 0x3F)
 #define ENOBJSNOWBALL2_GET_7F00(thisx) (((thisx)->variable >> 8) & 0x7F)
 
-
 #include <combo.h>
+#include <combo/global.h>
+#include <combo/item.h>
 #include "Obj_Snowball2.h"
 
 #define FLAGS (ACTOR_FLAG_MM_800000)
@@ -80,14 +81,81 @@ void func_80B38E20(Actor_ObjSnowball2* this) {
     Collider_UpdateSpheres(0, &this->collider);
 }
 
-void func_80B38E88(Actor_ObjSnowball2* this, GameState_Play* play) {
-    s32 temp_v0;
+void ObjSnowball2_Alias(Actor_ObjSnowball2* this)
+{
+    Xflag* xflag;
+    xflag = &this->xflag;
 
-    if (this->unk_1AE == 0) {
-        temp_v0 = Item_CollectibleDropTable(ENOBJSNOWBALL2_GET_3F(&this->actor));
-        if (temp_v0 >= 0) {
-            Item_DropCollectible(play, &this->actor.world.pos, (ENOBJSNOWBALL2_GET_7F00(&this->actor) << 8) | temp_v0);
-            this->unk_1AE = 1;
+    if (xflag->sceneId == SCE_MM_MOUNTAIN_VILLAGE_SPRING)
+    {
+        switch(xflag->id)
+        {
+            case 45:
+                xflag->sceneId = SCE_MM_MOUNTAIN_VILLAGE_WINTER;
+                xflag->id = 41;
+                break;
+            case 47:
+            case 48:
+            case 49:
+            case 50:
+                xflag->sceneId = SCE_MM_MOUNTAIN_VILLAGE_WINTER;
+                xflag->id += 6;
+                break;
+            default:
+                UNREACHABLE();
+        }
+    }
+    if (xflag->sceneId == SCE_MM_PATH_SNOWHEAD)
+    {
+        switch(xflag->id)
+        {
+            case 17:
+            case 18:
+            case 19:
+                xflag->id -= 8;
+                break;
+        }
+    }
+}
+
+static int ObjSnowball2_IsShuffled(Actor_ObjSnowball2* this)
+{
+    return !!(this->isExtended && !comboXflagsGet(&this->xflag));
+}
+
+static void ObjSnowball2_InitXflag(Actor_ObjSnowball2* this, GameState_Play* play)
+{
+    ComboItemOverride   o;
+    Xflag*              xflag;
+
+    /* Set the extended properties */
+    xflag = &this->xflag;
+    xflag->sceneId = play->sceneId;
+    xflag->setupId = g.sceneSetupId;
+    xflag->roomId = this->actor.room;
+    xflag->sliceId = 0;
+    xflag->id = this->actor.actorIndex;
+
+    ObjSnowball2_Alias(this);
+
+    comboXflagItemOverride(&o, &this->xflag, 0);
+    this->isExtended = !!(o.gi && !comboXflagsGet(&this->xflag));
+}
+
+void ObjSnowball2_DropCollectible(Actor_ObjSnowball2* this, GameState_Play* play) {
+    s32 itemDrop;
+
+    if (ObjSnowball2_IsShuffled(this))
+    {
+        EnItem00_DropCustom(play, &this->actor.world.pos, &this->xflag);
+        return;
+    }
+
+    if (!this->unk_1AE) {
+        itemDrop = Item_CollectibleDropTable(ENOBJSNOWBALL2_GET_3F(&this->actor));
+        if (itemDrop > ITEM00_NO_DROP) {
+            Item_DropCollectible(play, &this->actor.world.pos, (ENOBJSNOWBALL2_GET_7F00(&this->actor) << 8) | itemDrop);
+            this->unk_1AE = TRUE;
         }
     }
 }
@@ -302,6 +370,7 @@ static InitChainEntry sInitChain[] = {
 };
 
 void ObjSnowball2_Init(Actor_ObjSnowball2* this, GameState_Play* play) {
+    ObjSnowball2_InitXflag(this, play);
     Actor_ProcessInitChain(&this->actor, sInitChain);
     Collider_InitJntSph(play, &this->collider);
     this->actor.shape.rot.x = 0;
@@ -337,7 +406,7 @@ void func_80B39C9C(Actor_ObjSnowball2* this, GameState_Play* play) {
         this->actor.room = -1;
         this->actor.flags |= ACTOR_FLAG_MM_10;
         if (Item_CollectibleDropTable2(ENOBJSNOWBALL2_GET_3F(&this->actor))) {
-            func_80B38E88(this, play);
+            ObjSnowball2_DropCollectible(this, play);
         }
         func_80B38EFC(this, play);
         Player_PlaySfx(GET_PLAYER(play), NA_SE_PL_PULL_UP_SNOWBALL);
@@ -346,7 +415,7 @@ void func_80B39C9C(Actor_ObjSnowball2* this, GameState_Play* play) {
                ((this->actor.shape.yOffset * this->actor.scale.y) < this->actor.depthInWater)) {
         func_80B3A498(this);
     } else if (sp38 && (this->collider.elements->elem.acHitElem->atDmgInfo.dmgFlags & 0x0583FFBC)) {
-        func_80B38E88(this, play);
+        ObjSnowball2_DropCollectible(this, play);
         func_80B39108(this, play);
         func_80B39B5C(this, play);
         Actor_Kill(&this->actor);
@@ -448,7 +517,7 @@ void func_80B3A13C(Actor_ObjSnowball2* this, GameState_Play* play) {
     if ((((this->actor.bgCheckFlags & (BGCHECKFLAG_GROUND | BGCHECKFLAG_WALL)) || sp38) &&
          !(this->actor.bgCheckFlags & BGCHECKFLAG_WATER)) ||
         (this->unk_1AC <= 0)) {
-        func_80B38E88(this, play);
+        ObjSnowball2_DropCollectible(this, play);
         func_80B39108(this, play);
         func_80B39B5C(this, play);
         Actor_Kill(&this->actor);
@@ -571,7 +640,7 @@ void func_80B3A500(Actor_ObjSnowball2* this, GameState_Play* play) {
         }
 
         if (this->unk_1AC == 10) {
-            func_80B38E88(this, play);
+            ObjSnowball2_DropCollectible(this, play);
         }
 
         Actor_PlaySfx_Flagged(&this->actor, NA_SE_EV_ICE_MELT_LEVEL - SFX_FLAG);
@@ -599,7 +668,43 @@ void ObjSnowball2_Update(Actor_ObjSnowball2* this, GameState_Play* play) {
     }
 }
 
+static int ObjSnowball2_CsmcType(Actor_ObjSnowball2* this)
+{
+    ComboItemOverride o;
+
+    if(!ObjSnowball2_IsShuffled(this))
+        return CSMC_NORMAL;
+
+    if(!csmcEnabled())
+        return CSMC_MAJOR;
+
+    comboXflagItemOverride(&o, &this->xflag, 0);
+    return csmcFromItem(o.gi);
+}
+
 void ObjSnowball2_Draw(Actor_ObjSnowball2* this, GameState_Play* play) {
+    int type;
+    const Color_RGB8* color;
+    u8 gray;
+
+    OPEN_DISPS(play->gs.gfx);
+    type = ObjSnowball2_CsmcType(this);
+    switch(type)
+    {
+        case CSMC_NORMAL:
+            gDPSetPrimColor(POLY_OPA_DISP++, 0, 0x80, 255, 255, 255, 255);
+            break;
+        case CSMC_SPIDER:
+            gray = 0x90;
+            gDPSetPrimColor(POLY_OPA_DISP++, 0, 0x80, gray, gray, gray, 255);
+            break;
+        default:
+            color = csmcTypeColor(type);
+            gDPSetPrimColor(POLY_OPA_DISP++, 0, 0x80, color->r, color->g, color->b, 255);
+            break;
+
+    }
+    CLOSE_DISPS();
     Gfx_DrawDListOpa(play, SEGADDR_GOROIWA_DL_008B90);
 }
 

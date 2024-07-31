@@ -960,8 +960,6 @@ void func_80B04D34(Actor_ObjSnowball* this, GameState_Play* play) {
     s32 i;
     MtxF sp88;
     Vec3s sp80;
-    int type;
-    const Color_RGB8* color;
 
     for (i = 0; i < ARRAY_SIZE(this->unk_1A8); i++) {
         ptr = &this->unk_1A8[i];
