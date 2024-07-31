@@ -25,6 +25,7 @@ All notable changes to this project will be documented in this file.
 - Lake Hylia Owl no longer has its slow text when you first talk to it.
 - Internal names of the music tracks, for an easier sorting in the cosmetics log.
 - Adult can now jump from the windmill to the back of Kakariko within logic.
+- It is now logical for adult to cross the Gerudo Fortress gate in reverse by getting captured.
 
 ### Fixed
 
