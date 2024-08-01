@@ -2292,7 +2292,7 @@
     "Snowhead Small Snowball Spring 3": "is_spring"
     "Snowhead Small Snowball Spring 4": "is_spring"
     "Snowhead Small Snowball Spring 5": "is_spring"
-    "Snowhead Small Snowball Spring 6": "is_spring"
+    # "Snowhead Small Snowball Spring Out of Bounds": "is_spring"
 "Snowhead Fairy Fountain":
   region: ENTRANCE
   exits:
