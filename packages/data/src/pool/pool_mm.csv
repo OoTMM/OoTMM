@@ -1098,9 +1098,9 @@ Snowhead Small Snowball 4,                              snowball,       NONE,   
 Snowhead Small Snowball Spring 1,                       snowball,       NONE,                   SNOWHEAD,                     0x0400e,                    RECOVERY_HEART
 Snowhead Small Snowball Spring 2,                       snowball,       NONE,                   SNOWHEAD,                     0x0400f,                    RECOVERY_HEART
 Snowhead Small Snowball Spring 3,                       snowball,       NONE,                   SNOWHEAD,                     0x04010,                    MAGIC_JAR_SMALL
-Snowhead Small Snowball Spring 4,                       snowball,       NONE,                   SNOWHEAD,                     0x04012,                    MAGIC_JAR_SMALL
+Snowhead Small Snowball Spring 4,                       snowball,       NONE,                   SNOWHEAD,                     0x04011,                    RECOVERY_HEART
 Snowhead Small Snowball Spring 5,                       snowball,       NONE,                   SNOWHEAD,                     0x04013,                    MAGIC_JAR_SMALL
-Snowhead Small Snowball Spring Out of Bounds,           snowball,       NONE,                   SNOWHEAD,                     0x04011,                    RECOVERY_HEART
+Snowhead Small Snowball Spring Out of Bounds,           snowball,       NONE,                   SNOWHEAD,                     0x04012,                    MAGIC_JAR_SMALL
 Goron Race Reward,                                      npc,            GORON_RACE,             GORON_RACETRACK,              GORON_RACE,                 BOTTLED_GOLD_DUST
 Goron Race Pot 01,                                      pot,            NONE,                   GORON_RACETRACK,              0x0002,                     MAGIC_JAR_LARGE
 Goron Race Pot 02,                                      pot,            NONE,                   GORON_RACETRACK,              0x0003,                     MAGIC_JAR_LARGE
