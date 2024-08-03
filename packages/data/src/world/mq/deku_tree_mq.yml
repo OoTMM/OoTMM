@@ -30,7 +30,7 @@
     "MQ Deku Tree Heart Lobby": "true"
     "MQ Deku Tree Grass Entrance Upper 1": "can_cut_grass"
     "MQ Deku Tree Grass Entrance Upper 2": "can_cut_grass"
-    #"MQ Deku Tree Main Room 2nd Floor Crate": "true"
+    "MQ Deku Tree Main Room 2nd Floor Crate": "true"
 "MQ Deku Tree Room Before Compass Room Entry Door":
   dungeon: DT
   exits:
@@ -126,8 +126,8 @@
     "MQ Deku Tree Grass Slingshot Room Front 2": "can_cut_grass"
     "MQ Deku Tree Grass Slingshot Room Back 1": "can_cut_grass"
     "MQ Deku Tree Grass Slingshot Room Back 2": "can_cut_grass"
-    #"MQ Deku Tree Slingshot Room Large Crate 1": "true"
-    #"MQ Deku Tree Slingshot Room Large Crate 2": "true"
+    "MQ Deku Tree Slingshot Room Large Crate 1": "true"
+    "MQ Deku Tree Slingshot Room Large Crate 2": "true"
 "MQ Deku Tree Basement":
   dungeon: DT
   exits:
@@ -299,3 +299,16 @@
     "MQ Deku Tree Heart Before Boss 1": "true"
     "MQ Deku Tree Heart Before Boss 2": "true"
     "MQ Deku Tree Heart Before Boss 3": "true"
+#The below is for later on. Keeping here as a backup.
+#"MQ Deku Tree MQ Compass Room Entrance":
+  #dungeon: DT
+  #exits:
+    #"MQ Deku Tree Compass Room Exit Door": "true"
+  #locations:
+    #"MQ Deku Tree Compass Chest": "can_climb || can_jump || hookshot_anywhere"
+    #"MQ Deku Tree Grass Compass Room 1": "(can_climb || can_jump || hookshot_anywhere) && can_cut_grass"
+    #"MQ Deku Tree Grass Compass Room 2": "(can_climb || can_jump || hookshot_anywhere) && can_cut_grass"
+    #"MQ Deku Tree Grass Compass Room 3": "(can_climb || can_jump || hookshot_anywhere) && can_cut_grass"
+    #"MQ Deku Tree Grass Compass Room 4": "(can_climb || can_jump || hookshot_anywhere) && can_cut_grass"
+    #"MQ Deku Tree GS Compass Room": "gs && ((can_climb && (has_bombchu || has_mask_blast || (can_play_time && has_explosives_or_hammer)) && can_collect_distance) || hookshot_anywhere || (climb_anywhere && (has_explosives_close || has_weapon_range || can_use_din)))"
+    #"MQ Deku Tree Heart Compass Room": "climb_anywhere || hookshot_anywhere || (can_climb && (has_bombchu || has_mask_blast || (can_play_time && has_explosives_or_hammer)))"
