@@ -30,6 +30,7 @@
     "MQ Deku Tree Heart Lobby": "true"
     "MQ Deku Tree Grass Entrance Upper 1": "can_cut_grass"
     "MQ Deku Tree Grass Entrance Upper 2": "can_cut_grass"
+    #"MQ Deku Tree Main Room 2nd Floor Crate": "true"
 "MQ Deku Tree Room Before Compass Room Entry Door":
   dungeon: DT
   exits:
@@ -125,6 +126,8 @@
     "MQ Deku Tree Grass Slingshot Room Front 2": "can_cut_grass"
     "MQ Deku Tree Grass Slingshot Room Back 1": "can_cut_grass"
     "MQ Deku Tree Grass Slingshot Room Back 2": "can_cut_grass"
+    #"MQ Deku Tree Slingshot Room Large Crate 1": "true"
+    #"MQ Deku Tree Slingshot Room Large Crate 2": "true"
 "MQ Deku Tree Basement":
   dungeon: DT
   exits:
@@ -132,7 +135,7 @@
     "MQ Deku Tree Basement Ledge": "is_adult || event(DEKU_BLOCK) || trick(OOT_DEKU_SKIP) || has_hover_boots || hookshot_anywhere || climb_anywhere"
     "MQ Deku Tree Room Before Water Room Entry Door": "true"
   events:
-    DEKU_MQ_WATER_PATH_TORCH1: "has_fire || can_use_sticks" #You need to go through the next room with fire sticks for this event. From xeno: "cond(setting.doorShuffle !== none, has_fire, (roomClearEvent && has_sticks) || has_fire)"
+    DEKU_MQ_WATER_PATH_TORCH1: "has_fire || can_use_sticks" #You need to go through the next room with fire sticks for this event.
     DEKU_MQ_BASEMENT_EYE_SWITCH: "can_use_bow || can_use_slingshot"
   locations:
     "MQ Deku Tree Basement Chest": "can_use_sticks || has_fire"
@@ -156,7 +159,7 @@
     "MQ Deku Tree Room Before Water Room Door to Basement": "true"
     "MQ Deku Tree Room Before Water Room Door to Water Room": "true"
   events:
-    DEKU_MQ_WATER_PATH_TORCH1: "has_fire"
+    DEKU_MQ_WATER_PATH_TORCH1: "has_fire" #From xeno: "cond(setting.doorShuffle !== none, has_fire, (roomClearEvent && has_sticks) || has_fire)"
     DEKU_MQ_ROOM_BEFORE_WATER_CLEAR: "soul_deku_scrub && soul_enemy(SOUL_ENEMY_GOHMA_LARVA) && can_damage"
   locations:
     "MQ Deku Tree Grass Room Before Spike 1": "can_cut_grass"
@@ -230,11 +233,12 @@
   dungeon: DT
   exits:
     "MQ Deku Tree Gravestone Room Door to Room After Water Room": "true"
-    "MQ Deku Tree Back Side Room Entry Door": "can_use_sticks || has_fire"
-    "MQ Deku Tree Basement Ledge": "is_child && (can_use_sticks || can_use_din)"
+    "MQ Deku Tree Back Side Room Entry Door": "event(DEKU_MQ_GRAVE_ROOM_WEBS)"
+    "MQ Deku Tree Basement Ledge": "is_child && event(DEKU_MQ_GRAVE_ROOM_WEBS)"
   events:
     STICKS: "can_kill_baba_sticks"
     NUTS: "can_kill_baba_nuts"
+    DEKU_MQ_GRAVE_ROOM_WEBS: "can_use_sticks || has_fire || can_use_bow" #Bow works as both child and adult, but the one to the back room can be a precise shot.
   locations:
     "MQ Deku Tree GS Song of Time Blocks": "gs && ((can_play_time && can_collect_distance) || can_longshot)"
     "MQ Deku Tree Grass Gravestone Room 1": "can_cut_grass"
@@ -272,7 +276,7 @@
   dungeon: DT
   exits:
     "MQ Deku Tree Basement": "true"
-    "Deku Tree Before Boss": "(can_use_sticks && (is_adult || (is_child && event(DEKU_BLLOCK)))) || has_fire"
+    "Deku Tree Before Boss": "(can_use_sticks && (is_adult || (is_child && (has_hover_boots || event(DEKU_BLOCK))))) || has_fire"
     "MQ Deku Tree MQ Grave Room": "is_child"
   events:
     DEKU_BLOCK: "true"
