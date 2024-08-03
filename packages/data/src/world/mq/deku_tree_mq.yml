@@ -26,7 +26,7 @@
     "MQ Deku Tree Room Before Compass Room Entry Door": "has_fire || (can_use_sticks && event(DEKU_MQ_MAIN_TORCH)) || (event(DEKU_MQ_MAIN_TORCH) && can_use_bow)"
   locations:
     "MQ Deku Tree Map Chest": "true"
-    "MQ Deku Tree GS Lobby Crate": "gs && can_damage_skull"
+    "MQ Deku Tree GS Lobby Crate": "gs && can_damage_skull" #Edit: Hookshot might have an issue without breaking crate. I did it before, but I can't replicate after being asked to test again.
     "MQ Deku Tree Heart Lobby": "true"
     "MQ Deku Tree Grass Entrance Upper 1": "can_cut_grass"
     "MQ Deku Tree Grass Entrance Upper 2": "can_cut_grass"
