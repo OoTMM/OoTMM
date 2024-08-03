@@ -26,7 +26,7 @@
     "MQ Deku Tree Room Before Compass Room Entry Door": "has_fire || (can_use_sticks && event(DEKU_MQ_MAIN_TORCH)) || (event(DEKU_MQ_MAIN_TORCH) && can_use_bow)"
   locations:
     "MQ Deku Tree Map Chest": "true"
-    "MQ Deku Tree GS Lobby Crate": "gs && can_damage_skull"
+    "MQ Deku Tree GS Lobby Crate": "gs && can_damage_skull" #Edit: Hookshot might have an issue without breaking crate. I did it before, but I can't replicate after being asked to test again.
     "MQ Deku Tree Heart Lobby": "true"
     "MQ Deku Tree Grass Entrance Upper 1": "can_cut_grass"
     "MQ Deku Tree Grass Entrance Upper 2": "can_cut_grass"
@@ -135,7 +135,7 @@
     "MQ Deku Tree Basement Ledge": "is_adult || event(DEKU_BLOCK) || trick(OOT_DEKU_SKIP) || has_hover_boots || hookshot_anywhere || climb_anywhere"
     "MQ Deku Tree Room Before Water Room Entry Door": "true"
   events:
-    DEKU_MQ_WATER_PATH_TORCH1: "has_fire || can_use_sticks" #You need to go through the next room with fire sticks for this event. From xeno: "cond(setting.doorShuffle !== none, has_fire, (roomClearEvent && has_sticks) || has_fire)"
+    DEKU_MQ_WATER_PATH_TORCH1: "has_fire || can_use_sticks" #You need to go through the next room with fire sticks for this event.
     DEKU_MQ_BASEMENT_EYE_SWITCH: "can_use_bow || can_use_slingshot"
   locations:
     "MQ Deku Tree Basement Chest": "can_use_sticks || has_fire"
@@ -159,7 +159,7 @@
     "MQ Deku Tree Room Before Water Room Door to Basement": "true"
     "MQ Deku Tree Room Before Water Room Door to Water Room": "true"
   events:
-    DEKU_MQ_WATER_PATH_TORCH1: "has_fire"
+    DEKU_MQ_WATER_PATH_TORCH1: "has_fire" #From xeno: "cond(setting.doorShuffle !== none, has_fire, (roomClearEvent && has_sticks) || has_fire)"
     DEKU_MQ_ROOM_BEFORE_WATER_CLEAR: "soul_deku_scrub && soul_enemy(SOUL_ENEMY_GOHMA_LARVA) && can_damage"
   locations:
     "MQ Deku Tree Grass Room Before Spike 1": "can_cut_grass"
@@ -233,11 +233,12 @@
   dungeon: DT
   exits:
     "MQ Deku Tree Gravestone Room Door to Room After Water Room": "true"
-    "MQ Deku Tree Back Side Room Entry Door": "can_use_sticks || has_fire"
-    "MQ Deku Tree Basement Ledge": "is_child && (can_use_sticks || can_use_din)"
+    "MQ Deku Tree Back Side Room Entry Door": "event(DEKU_MQ_GRAVE_ROOM_WEBS)"
+    "MQ Deku Tree Basement Ledge": "is_child && event(DEKU_MQ_GRAVE_ROOM_WEBS)"
   events:
     STICKS: "can_kill_baba_sticks"
     NUTS: "can_kill_baba_nuts"
+    DEKU_MQ_GRAVE_ROOM_WEBS: "can_use_sticks || has_fire || can_use_bow" #Bow works as both child and adult, but the one to the back room can be a precise shot.
   locations:
     "MQ Deku Tree GS Song of Time Blocks": "gs && ((can_play_time && can_collect_distance) || can_longshot)"
     "MQ Deku Tree Grass Gravestone Room 1": "can_cut_grass"
@@ -275,7 +276,7 @@
   dungeon: DT
   exits:
     "MQ Deku Tree Basement": "true"
-    "Deku Tree Before Boss": "(can_use_sticks && (is_adult || (is_child && event(DEKU_BLLOCK)))) || has_fire"
+    "Deku Tree Before Boss": "(can_use_sticks && (is_adult || (is_child && (has_hover_boots || event(DEKU_BLOCK))))) || has_fire"
     "MQ Deku Tree MQ Grave Room": "is_child"
   events:
     DEKU_BLOCK: "true"
@@ -298,3 +299,16 @@
     "MQ Deku Tree Heart Before Boss 1": "true"
     "MQ Deku Tree Heart Before Boss 2": "true"
     "MQ Deku Tree Heart Before Boss 3": "true"
+#The below is for later on. Keeping here as a backup.
+#"MQ Deku Tree MQ Compass Room Entrance":
+  #dungeon: DT
+  #exits:
+    #"MQ Deku Tree Compass Room Exit Door": "true"
+  #locations:
+    #"MQ Deku Tree Compass Chest": "can_climb || can_jump || hookshot_anywhere"
+    #"MQ Deku Tree Grass Compass Room 1": "(can_climb || can_jump || hookshot_anywhere) && can_cut_grass"
+    #"MQ Deku Tree Grass Compass Room 2": "(can_climb || can_jump || hookshot_anywhere) && can_cut_grass"
+    #"MQ Deku Tree Grass Compass Room 3": "(can_climb || can_jump || hookshot_anywhere) && can_cut_grass"
+    #"MQ Deku Tree Grass Compass Room 4": "(can_climb || can_jump || hookshot_anywhere) && can_cut_grass"
+    #"MQ Deku Tree GS Compass Room": "gs && ((can_climb && (has_bombchu || has_mask_blast || (can_play_time && has_explosives_or_hammer)) && can_collect_distance) || hookshot_anywhere || (climb_anywhere && (has_explosives_close || has_weapon_range || can_use_din)))"
+    #"MQ Deku Tree Heart Compass Room": "climb_anywhere || hookshot_anywhere || (can_climb && (has_bombchu || has_mask_blast || (can_play_time && has_explosives_or_hammer)))"
