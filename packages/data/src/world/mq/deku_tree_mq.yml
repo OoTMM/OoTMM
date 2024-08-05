@@ -180,7 +180,7 @@
   dungeon: DT
   exits:
     "MQ Deku Tree Water Room Door to Room Before Water Room": "true"
-    "MQ Deku Tree Water Room Back": "true" #You can do this as both adult and child, without a shield, by rolling under the spike.
+    "MQ Deku Tree Water Room Back": "(is_child && has_shield) || can_longshot || (can_hookshot && has_iron_boots) || trick(OOT_DEKU_MQ_WATER_ROOM_SPIKE_ROLL)"
   events:
     MQ_DEKU_WATER_TORCHES: "can_use_sticks || (can_use_bow && can_play_elegy)" #You can do this as both adult and child, without a shield, by rolling under the spike.
   locations:
