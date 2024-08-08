@@ -11,7 +11,7 @@
 "Dodongo Cavern Main Room Lower":
   dungeon: DC
   exits:
-    "Dodongo Cavern Entrance": "has_explosives_or_hammer || has_blue_fire_arrows_mudwall" #We need to see if you can go backwards without breaking it, like other mudwalls.
+    "Dodongo Cavern Entrance": "has_explosives_or_hammer || (is_adult && has_bombflowers) || has_blue_fire_arrows_mudwall" #We need to see if you can go backwards without breaking it, like other mudwalls.
     "Dodongo Cavern Main Room Inside Skull": "event(MQ_DC_OPEN_SKULL)"
     "Dodongo Cavern Staircase Room Lower": "event(MQ_DC_STAIRCASE_SWITCH)"
     "Dodongo Cavern Main Room Upper Skull Side": "event(MQ_DC_PILLAR_RAISE) || climb_anywhere || hookshot_anywhere" #You can use hook anywhere to get on top of the skull and again to get on the bridge without longshot.
@@ -42,9 +42,9 @@
   exits:
     "Dodongo Cavern Main Room Lower": "true"
     "Dodongo Cavern Staircase Room Upper": "event(DC_MQ_STAIRCASE) || climb_anywhere || hookshot_anywhere"
-    "Dodongo Cavern MQ Song of Time Block Room": "has_bombflowers || can_hammer || has_blue_fire || has_blue_fire_arrows_mudwall"
+    "Dodongo Cavern MQ Song of Time Block Room": "has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall"
   events:
-    STICKS: "soul_deku_baba && ((has_bombflowers || can_hammer || has_blue_fire || has_blue_fire_arrows_mudwall) && (has_weapon || can_boomerang))"
+    STICKS: "soul_deku_baba && ((has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall) && (has_weapon || can_boomerang))"
     DC_MQ_STAIRCASE: "has_bombflowers || can_use_din"
   locations:
     "MQ Dodongo Cavern SR Beamos": "true"
@@ -99,7 +99,7 @@
   dungeon: DC
   exits:
     "Dodongo Cavern Main Room Upper Entrance Side": "true"
-    "Dodongo Cavern Room Before Upper Lizalfos": "can_use_sticks || has_fire"
+    "Dodongo Cavern Room Before Upper Lizalfos": "(can_use_sticks && event(OPEN_MQ_DC_LARVAE_ROOM)) || has_fire"
     "Dodongo Cavern Vanilla Bomb Bag Room Upper": "can_hookshot || has_hover_boots || (is_adult && trick(OOT_DC_JUMP)) || climb_anywhere"
     "Dodongo Cavern MQ Larvae Room": "event(OPEN_MQ_DC_LARVAE_ROOM)"
   events:
@@ -115,7 +115,7 @@
     "Dodongo Cavern Main Room Upper Skull Side": "event(DC_MQ_SHORTCUT) || climb_anywhere"
     "Dodongo Cavern Room After Upper Lizalfos": "true"
   events:
-    DC_MQ_SHORTCUT: "has_bombflowers || has_fire || has_explosives_or_hammer"
+    DC_MQ_SHORTCUT: "has_bombflowers || can_use_din || can_use_bow || has_explosives_or_hammer"
   locations:
     "MQ Dodongo Cavern Upper Ledge Chest": "true"
     "MQ Dodongo Cavern Pot Vanilla Bomb Bag Room 1": "true"
@@ -138,8 +138,10 @@
 "Dodongo Cavern Room Before Upper Lizalfos":
   dungeon: DC
   exits:
-    "Dodongo Cavern Upper Lizalfos": "(can_use_sticks && has_goron_bracelet) || has_explosives_or_hammer || has_blue_fire || has_blue_fire_arrows_mudwall" #Needs macro for getting past enemies still in path
+    "Dodongo Cavern Upper Lizalfos": "(event(MQ_DC_ROOM_BEFORE_UPPER_LIZALFOS_GOLD_TORCH) && can_use_sticks && has_goron_bracelet) || has_explosives_or_hammer || has_blue_fire_arrows_mudwall" #Needs macro for getting past enemies still in path
     "Dodongo Cavern Vanilla Bomb Bag Room Lower": "has_fire"
+  events:
+    MQ_DC_ROOM_BEFORE_UPPER_LIZALFOS_GOLD_TORCH: "(can_use_sticks && event(OPEN_MQ_DC_LARVAE_ROOM)) || has_fire"
   locations:
     "MQ Dodongo Cavern Pot Before Miniboss 1": "true"
     "MQ Dodongo Cavern Pot Before Miniboss 2": "true"
@@ -165,7 +167,7 @@
     MQ_DC_UPPER_LIZALFOS_CLEAR_FROM_UPPER: "soul_lizalfos_dinalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
     MQ_DC_LOWER_LIZALFOS_CLEAR_FROM_UPPER: "(time_travel_at_will && (has_explosives_or_hammer || hookshot_anywhere || climb_anywhere)) && soul_lizalfos_dinalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
   locations:
-    "MQ Dodongo Cavern GS Upper Lizalfos": "gs && (has_explosives_or_hammer || longshot_anywhere)"
+    "MQ Dodongo Cavern GS Upper Lizalfos": "gs && (has_explosives_or_hammer || climb_anywhere || longshot_anywhere)"
     "MQ Dodongo Cavern Pot Miniboss 1": "true"
     "MQ Dodongo Cavern Pot Miniboss 2": "true"
     "MQ Dodongo Cavern Pot Miniboss 3": "true"
