@@ -720,7 +720,7 @@ const gameEntrances = (worldId: number, game: Game, logic: LogicResult) => {
   return padBuffer16(toU32Buffer(data));
 };
 
-const randomizerDungeonsBits = (worldId: number, logic: LogicResult, settings: Settings): Buffer => {
+const randomizerDungeonsBits = (worldId: number, logic: LogicResult): Buffer => {
   const DUNGEONS_PRECOMPLETED = [
     'DT',
     'DC',
@@ -761,9 +761,6 @@ const randomizerDungeonsBits = (worldId: number, logic: LogicResult, settings: S
 
   for (let i = 0; i < DUNGEONS_PRECOMPLETED.length; ++i) {
     const dungeon = DUNGEONS_PRECOMPLETED[i];
-    if (settings.erPiratesWorld && world.preCompleted.has('PF')) {
-      continue;
-    }
     if (world.preCompleted.has(dungeon)) {
       preCompleted |= 1 << i;
     }
@@ -1086,7 +1083,7 @@ export const randomizerData = (worldId: number, logic: LogicResult): Buffer => {
   buffers.push(toU8Buffer([worldId + 1, 0, 0, 0]));
   buffers.push(dungeonWarpsBuffer(logic.worlds[worldId]));
   buffers.push(dungeonEntrancesBuffer(logic.worlds[worldId]));
-  buffers.push(randomizerDungeonsBits(worldId, logic, logic.settings));
+  buffers.push(randomizerDungeonsBits(worldId, logic));
   buffers.push(randomizerWarps(worldId, logic));
   buffers.push(randomizerConfig(logic.worlds[worldId], logic.settings));
   buffers.push(specialConds(logic.settings));

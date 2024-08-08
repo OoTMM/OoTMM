@@ -451,7 +451,7 @@ class WorldShuffler {
     if (this.settings.erIndoorsExtra) {
       pool.add('indoors-extra');
     }
-    if (this.settings.erPiratesWorld) {
+    if (this.settings.erIndoorsExtra && this.settings.erPiratesWorld) {
       pool.add('indoors-pf');
     }
     return { pool: Array.from(pool), opts: { ownGame: this.settings.erIndoors === 'ownGame' } };
