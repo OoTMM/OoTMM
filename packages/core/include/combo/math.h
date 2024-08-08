@@ -7,6 +7,7 @@
 #define fabsf(f) __builtin_fabsf(f)
 
 #define BINANG_SUB(a, b) ((s16)(a - b))
+#define BINANG_ADD(a, b) ((s16)(a + b)) 
 #define BINANG_ROT180(angle) ((s16)(angle + 0x8000))
 
 #define SQXZ(vec) ((vec.x) * (vec.x) + (vec.z) * (vec.z))
@@ -43,5 +44,6 @@ void    Math_Vec3f_Sum(Vec3f* a, Vec3f* b, Vec3f* dest);
 void    Math_Vec3f_Diff(Vec3f* a, Vec3f* b, Vec3f* dest);
 s32     Math_ScaledStepToS(s16* pValue, s16 target, s16 step);
 float   Math3D_Vec3fDistSq(const Vec3f* a, const Vec3f* b);
+s32     Math3D_CosOut(Vec3f* a, Vec3f* b, f32* dst);
 
 #endif

@@ -91,7 +91,7 @@ gPictoboxPhotoTaken = 0x801bf888;
 
 SpawnRoomActors = 0x800bb140;
 
-GetSwitchFlag = 0x800b5bb0;
+Flags_GetSwitch = 0x800b5bb0;
 
 gMemorySize = 0x80000318;
 ClearMemoryRange = 0x80080150;
@@ -133,6 +133,7 @@ Gfx_SetupDL25_Opa = 0x8012c28c;
 Gfx_SetupDL25_Xlu = 0x8012c2dc;
 Gfx_SetupDL_42Opa = 0x8012c8ac;
 GetMatrixMV     = 0x80181a40;
+Matrix_Put      = 0x8018020c;
 DisplaceTexture = 0x8012cbd0;
 Gfx_SetupDL = 0x8012BF78;
 
@@ -150,6 +151,7 @@ ActorFree = 0x80102ce0;
 
 LoadObjectGi = 0x80838830;
 
+Matrix_GetCurrent = 0x80180234;
 SfxSource_PlaySfxAtFixedWorldPos = 0x800f0568;
 
 Collider_InitJntSph = 0x800e0b4c;
@@ -235,7 +237,7 @@ ActorCutscene_GetCanPlayNext = 0x800f1be4;
 
 gActorOvl = 0x801aefd0;
 
-SetSwitchFlag = 0x800b5bf4;
+Flags_SetSwitch = 0x800b5bf4;
 ClearSwitchFlag = 0x800b5c34;
 GetItemCollectBehavior = 0x801143cc;
 RemoveItem = 0x801149a0;
@@ -544,3 +546,33 @@ Gfx_SetupDL72 = 0x8012c304;
 Scene_SetRenderModeXlu = 0x80131df0;
 Player_GetMask = 0x8012403c;
 SkelAnime_DrawFlex = 0x80134dbc;
+
+Actor_TextboxIsClosing = 0x800b867c;
+func_800B0E48 = 0x800b0e48;
+BgCheck_EntityRaycastFloor5 = 0x800c411c;
+Matrix_RotateZYX = 0x8018103c;
+Math3D_CosOut = 0x80179eac;
+func_800C0094 = 0x800c0094;
+
+Math3D_Vec3fMagnitude = 0x8017a6d4;
+Math3D_Vec3f_DistXYZ = 0x8017a720;
+Actor_UpdateVelocityWithGravity = 0x800b6a10;
+Math_Vec3f_Scale = 0x800ff688;
+Quake_Request = 0x8012aa9c;
+Quake_SetSpeed = 0x8012a8a8;
+Quake_SetPerturbations = 0x8012a8f0;
+Quake_SetDuration = 0x8012a978;
+BgCheck_EntityRaycastFloor5_2 = 0x800c4188;
+WaterBox_GetSurface1_2 = 0x800ca1e8;
+Math3D_Vec3fMagnitudeSq = 0x8017a6a8;
+Math3D_Vec3f_Cross = 0x8017a878;
+Matrix_RotateAxisF = 0x801823ec;
+Matrix_Get = 0x801801e8;
+Matrix_MtxFToYXZRot = 0x8018219c;
+Effect_Add = 0x800af960;
+Effect_Destroy = 0x800afdcc;
+SurfaceType_GetFloorType = 0x800c99d4;
+func_800AE930 = 0x800ae930;
+Effect_GetByIndex = 0x800af720;
+func_800AEF44 = 0x800aef44;
+CollisionCheck_SetInfo = 0x800e7530;

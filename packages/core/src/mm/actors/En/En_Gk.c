@@ -41,7 +41,7 @@ void EnGk_CheckLullaby(Actor* this, GameState_Play* play)
             {
                 play->msgCtx.ocarinaSong = 0x0e;
                 SET_HANDLER(this, EnGk_LearnSongLullaby);
-                SetSwitchFlag(play, 0x14);
+                Flags_SetSwitch(play, 0x14);
             }
             break;
         }

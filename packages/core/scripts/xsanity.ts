@@ -1,8 +1,9 @@
-import { promises as fs } from 'fs';
+import { promises as fs, rmSync } from 'fs';
 import { SCENES } from '@ootmm/data';
 
 import { CodeGen } from '../lib/combo/util/codegen';
 import { decompressGame } from '../lib/combo/decompress';
+import { table } from 'console';
 
 const OOT_GENERIC_GROTTOS = [
   0x00, /* Hyrule Field Market */
@@ -182,6 +183,10 @@ const ACTORS_MM = {
   OBJ_KIBAKO: 0x81,
   OBJ_KIBAKO2: 0xe5,
   OBJ_COMB: 0x0e4,
+  OBJ_FLOWERPOT: 0x13e,
+  OBJ_TARU: 0x22d,
+  OBJ_SNOWBALL: 0x1dc,
+  OBJ_SNOWBALL2: 0x1f9
   //DOOR_ANA: 0x55,
 };
 
@@ -199,6 +204,7 @@ const ACTOR_SLICES_MM = {
   [ACTORS_MM.EN_ELF]: 8,
   [ACTORS_MM.OBJ_MURE3]: 7,
   [ACTORS_MM.EN_HIT_TAG]: 3,
+  [ACTORS_MM.OBJ_FLOWERPOT]: 2,
 }
 
 const INTERESTING_ACTORS_OOT = Object.values(ACTORS_OOT);
@@ -591,9 +597,10 @@ function parseRoomActors(rom: Buffer, raw: RawRoom, game: Game): RoomActors[] {
       const posx = rom.readInt16BE(actorVromBase + 0x02);
       const posy = rom.readInt16BE(actorVromBase + 0x04);
       const posz = rom.readInt16BE(actorVromBase + 0x06);
-      const rx = rom.readUInt16BE(actorVromBase + 0x08);
-      const ry = rom.readUInt16BE(actorVromBase + 0x0a);
-      const rz = rom.readUInt16BE(actorVromBase + 0x0c);
+      const rshift = (game === 'mm') ? 7 : 0;
+      const rx = rom.readUInt16BE(actorVromBase + 0x08) >>> rshift;
+      const ry = rom.readUInt16BE(actorVromBase + 0x0a) >>> rshift;
+      const rz = rom.readUInt16BE(actorVromBase + 0x0c) >>> rshift;
       const params = rom.readUInt16BE(actorVromBase + 0x0e);
       actors.push({ actorId, typeId, pos: [posx, posy, posz], rx, ry, rz, params });
     }
@@ -1135,54 +1142,6 @@ function outputKeatonGrassPoolMm(roomActors: RoomActors[]) {
   }
 }
 
-function outputCratesPoolOot(roomActors: RoomActors[]) {
-  let lastSceneId = -1;
-  let lastSetupId = -1;
-  for (const room of roomActors) {
-    for (const actor of room.actors) {
-      const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
-      if (actor.typeId === ACTORS_OOT.OBJ_KIBAKO || actor.typeId === ACTORS_OOT.OBJ_KIBAKO2) {
-        if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
-          console.log('');
-          console.log(`### Scene: ${scenesById('oot')[room.sceneId]}`);
-          lastSceneId = room.sceneId;
-          lastSetupId = room.setupId;
-        }
-
-        /* Large crate */
-        if (actor.typeId === ACTORS_OOT.OBJ_KIBAKO2) {
-          if (actor.params !== 0xffff)
-            continue;
-          const itemId = actor.rx & 0xff;
-          let item: string;
-          if (itemId >= ITEM00_DROPS.length) {
-            item = 'NOTHING';
-          } else {
-            item = ITEM00_DROPS[actor.rx & 0xff];
-          }
-          console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Large Crate ${decPad(actor.actorId + 1, 2)},        crate,            NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
-        }
-
-        /* Small crate */
-        if (actor.typeId === ACTORS_OOT.OBJ_KIBAKO) {
-          let item: string;
-          if (actor.params === 0xffff) {
-            item = 'NOTHING';
-          } else {
-            const itemId = actor.params & 0xff;
-            if (itemId >= ITEM00_DROPS.length) {
-              item = 'NOTHING';
-            } else {
-              item = ITEM00_DROPS[actor.params & 0xff];
-            }
-          }
-          console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Small Crate ${decPad(actor.actorId + 1, 2)},        crate,            NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
-        }
-      }
-    }
-  }
-}
-
 function outputCratesPoolMm(roomActors: RoomActors[]) {
   let lastSceneId = -1;
   let lastSetupId = -1;
@@ -1374,6 +1333,33 @@ function actorHandlerOotObjComb(checks: Check[], ra: RoomActor) {
   checks.push({ roomActor: ra, item, name: 'Hive', type: 'hive' });
 }
 
+function actorHandlerOotObjKibako(checks: Check[], ra: RoomActor) {
+  let item: string;
+  if (ra.actor.params === 0xffff) {
+    item = 'NOTHING';
+  } else {
+    const itemId = ra.actor.params & 0xff;
+    if (itemId >= ITEM00_DROPS.length) {
+      item = 'NOTHING';
+    } else {
+      item = ITEM00_DROPS[itemId];
+    }
+  }
+  checks.push({ roomActor: ra, item, name: 'Small Crate', type: 'crate' });
+}
+
+function actorHandlerOotObjKibako2(checks: Check[], ra: RoomActor) {
+  if (ra.actor.params !== 0xffff) return; /* Skulltulas */
+  const itemId = ra.actor.rx & 0xff;
+  let item: string;
+  if (itemId >= ITEM00_DROPS.length) {
+    item = 'NOTHING';
+  } else {
+    item = ITEM00_DROPS[itemId];
+  }
+  checks.push({ roomActor: ra, item, name: 'Large Crate', type: 'crate' });
+}
+
 function actorHandlerMmObjComb(checks: Check[], ra: RoomActor) {
   const flag = !!(ra.actor.params & 0x10);
   let type = 0;
@@ -1393,13 +1379,44 @@ function actorHandlerMmObjComb(checks: Check[], ra: RoomActor) {
   checks.push({ roomActor: ra, item, name: 'Hive', type: 'hive' });
 }
 
+function actorHandlerMmObjFlowerpot(checks: Check[], ra: RoomActor) {
+  const item = mmCollectibleDrop(ra.actor.params & 0x3f);
+  checks.push({ roomActor: ra, sliceId: 0, item: 'NOTHING', name: 'Potted Plant', name2: 'Pot', type: 'pot' });
+  checks.push({ roomActor: ra, sliceId: 1, item: item, name: 'Potted Plant', name2: 'Grass', type: 'grass' });
+}
+
+function actorHandlerMmObjSnowball(checks: Check[], ra: RoomActor) {
+  if (ra.actor.ry == 1) return; /* Goron Elder */
+
+  const item = mmCollectibleDrop(ra.actor.params & 0x3f);
+  checks.push({ roomActor: ra, item, name: 'Big Snowball', type: 'snowball' })
+}
+
+function actorHandlerMmObjSnowball2(checks: Check[], ra: RoomActor) {
+  const item = mmCollectibleDrop(ra.actor.params & 0x3f);
+  checks.push({ roomActor: ra, item, name: 'Small Snowball', type: 'snowball' })
+}
+
+function actorHandlerMmObjTaru(checks: Check[], ra: RoomActor) {
+  if (ra.actor.params & 0x80) return; /* Weird fake-barrel */
+  const item = mmCollectibleDrop(ra.actor.params & 0x3f);
+  if (item === 'STRAY_FAIRY' || item === 'HEART_PIECE') return;
+  checks.push({ roomActor: ra, item, name: 'Barrel', type: 'barrel' });
+}
+
 const ACTORS_HANDLERS_OOT = {
   [ACTORS_OOT.EN_KUSA]: actorHandlerOotEnKusa,
   [ACTORS_OOT.OBJ_COMB]: actorHandlerOotObjComb,
+  [ACTORS_OOT.OBJ_KIBAKO]: actorHandlerOotObjKibako,
+  [ACTORS_OOT.OBJ_KIBAKO2]: actorHandlerOotObjKibako2,
 };
 
 const ACTORS_HANDLERS_MM = {
   [ACTORS_MM.OBJ_COMB]: actorHandlerMmObjComb,
+  [ACTORS_MM.OBJ_FLOWERPOT]: actorHandlerMmObjFlowerpot,
+  [ACTORS_MM.OBJ_TARU]: actorHandlerMmObjTaru,
+  [ACTORS_MM.OBJ_SNOWBALL]: actorHandlerMmObjSnowball,
+  [ACTORS_MM.OBJ_SNOWBALL2]: actorHandlerMmObjSnowball2,
 };
 
 const ACTORS_HANDLERS = {
@@ -1443,11 +1460,18 @@ function outputChecks(game: 'oot' | 'mm', checks: Check[], filter?: string) {
     }
 
     const key = ((check.sliceId ?? 0) << 16) | ((ra.setupId & 0x3) << 14) | (ra.roomId << 8) | ra.actor.actorId;
-    let name = `Scene ${ra.sceneId.toString(16)} Setup ${ra.setupId} Room ${hexPad(ra.roomId, 2)} ${check.name} ${decPad(ra.actor.actorId + 1, 2)}`;
+    let name = `Scene ${ra.sceneId.toString(16)} Setup ${ra.setupId} Room ${decPad(ra.roomId+1, 2)} ${check.name} ${decPad(ra.actor.actorId + 1, 2)}`; /* Room + 1 , to match SceneNavi/SceneTatl */
     if (check.name2) {
       name = `${name} ${check.name2}`;
     }
-    console.log(`${name},        ${check.type},            NONE,                 SCENE_${ra.sceneId.toString(16)}, ${hexPad(key, 5)}, ${check.item}`);
+    const components: string[] = [];
+    components.push(`${name},`.padEnd(60));
+    components.push(`${check.type},`.padEnd(16));
+    components.push('NONE,'.padEnd(22));
+    components.push(`${scenesById(game)[ra.sceneId].slice(3 + Number(game === 'oot'))},`.padEnd(32));
+    components.push(`${hexPad(key, 5)},`.padEnd(28));
+    components.push(check.item);
+    console.log(components.join(''));
   }
 }
 
@@ -1490,7 +1514,10 @@ async function build() {
   await writeAddressingTable('oot', addrTableOotMq);
   await writeAddressingTable('mm', addrTableMm);
 
-  return { oot: ootRooms, mm: mmRooms, mq: mqRooms };
+  /* Compute the MQ subset */
+  const mqRoomsOnly = mqRooms.filter(r => r.sceneId < 0x0a || r.sceneId == 0x0b || r.sceneId == 0x0d);
+
+  return { oot: ootRooms, mm: mmRooms, mq: mqRoomsOnly };
 }
 
 async function run() {

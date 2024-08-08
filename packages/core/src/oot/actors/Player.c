@@ -282,7 +282,7 @@ void Player_UpdateWrapper(Actor_Player* this, GameState_Play* play)
     {
         if (g.delayedSwitchFlag != 0xff)
         {
-            SetSwitchFlag(play, g.delayedSwitchFlag);
+            Flags_SetSwitch(play, g.delayedSwitchFlag);
             g.delayedSwitchFlag = 0xff;
         }
     }

@@ -6,6 +6,9 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Shuffle MM snowballs.
+- Shuffle MM barrels.
+- Shuffle the MM potted plants, two checks each, one is a pot, one is grass.
 - Hive shuffle, for OoT and MM.
 - Behavioral setting for the Gibdos in Beneath The Well (Vanilla, Remorseless and Open).
 - Skip Kamaro teaching the dance when healing him.
@@ -23,12 +26,15 @@ All notable changes to this project will be documented in this file.
 - Lake Hylia Owl no longer has its slow text when you first talk to it.
 - Internal names of the music tracks, for an easier sorting in the cosmetics log.
 - Adult can now jump from the windmill to the back of Kakariko within logic.
+- It is now logical for adult to cross the Gerudo Fortress gate in reverse by getting captured.
 - Pirate Fortress Sewers Exit door now requires the Pirate Fortress Entrances option to be shuffled.
 - Pirate Fortress Sewers Gate and interior passages now require the Pirate Fortress Entrances option to be shuffled.
 - Pirate Fortress will no longer be considered a dungeon if its entrances are shuffled among the overworld.
 
 ### Fixed
 
+- Logic issue with Romani Ranch Stables access.
+- Logic issue with Kafei's check in seeds without shuffled interiors.
 - Starting age no longer defaults to either child or adult after generating a random starting age seed.
 - Minor collection delay for Bolero.
 - Long-standing issue where Anju's reservation worked inconsistently.

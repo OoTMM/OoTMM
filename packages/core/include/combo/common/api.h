@@ -105,8 +105,8 @@ u32     Flags_GetTreasure(GameState_Play* play, int flag);
 void    SetChestFlag(GameState_Play* play, int flag);
 u32     Flags_GetCollectible(GameState_Play* play, int flag);
 void    Flags_SetCollectible(GameState_Play* play, int flag);
-u32     GetSwitchFlag(GameState_Play* play, int flag);
-u32     SetSwitchFlag(GameState_Play* play, int flag);
+u32     Flags_GetSwitch(GameState_Play* play, int flag);
+u32     Flags_SetSwitch(GameState_Play* play, int flag);
 void    ClearSwitchFlag(GameState_Play* play, int flag);
 void    SetRoomClear(GameState_Play* play, int flag);
 u32     GetRoomClearFlag(GameState_Play* play, int flag);
@@ -284,6 +284,7 @@ s32 Player_SetCsActionWithHaltedActors(GameState_Play* play, Actor* csActor, u8 
 s32 Actor_TalkOfferAccepted(Actor* actor, GameState* gameState);
 s32 Actor_OfferTalkExchange(Actor* actor, GameState_Play* play, f32 xzRange, f32 yRange, PlayerItemAction exchangeItemAction);
 s32 Actor_OfferTalk(Actor* actor, GameState_Play* play, f32 radius);
+s32 Actor_TextboxIsClosing(Actor* actor, GameState_Play* play);
 #endif
 
 int Actor_RunByteCode(Actor* this, GameState_Play* play, void* bytecode, void* unk1, void* unk2);
@@ -383,6 +384,8 @@ int Item_CollectibleDropTable2(u32 index);
 Actor_EnItem00* Item_DropCollectible(GameState_Play* play, const Vec3f* pos, s16 params);
 void Item_DropCollectibleRandom(GameState_Play* play, Actor* from, const Vec3f* pos, s16 params);
 int Item_CanDropBigFairy(GameState_Play* play, s32 index, s32 collectibleFlag);
+
+MtxF* Matrix_GetCurrent(void);
 
 #if defined(GAME_MM)
 f32 VectDist(Vec3f* vec1, Vec3f* vec2);
@@ -516,10 +519,12 @@ void Matrix_RotateYS(s16 y, int mode);
 void Matrix_RotateYF(f32 y, int mode);
 void Matrix_RotateZS(s16 z, int mode);
 void Matrix_RotateZF(f32 z, int mode);
+void Matrix_RotateZYX(s16 x, s16 y, s16 z, int mode);
 void Matrix_MultZero(Vec3f* dest);
 void Matrix_RotateXFApply(f32 x);
 void Matrix_ReplaceRotation(MtxF* mf);
 void Matrix_RotateXFNew(f32 x);
+void Matrix_Put(MtxF* src);
 
 s16 Play_CreateSubCamera(GameState_Play* this);
 s32 Play_ChangeCameraStatus(GameState_Play* this, s16 camId, s16 status);
@@ -562,12 +567,38 @@ typedef void (*PostLimbDraw)(GameState_Play* play, s32 limbIndex, Gfx** dList, V
 
 Gfx* SkelAnime_DrawFlex(GameState_Play* play, void** skeleton, Vec3s* jointTable, s32 dListCount, OverrideLimbDraw overrideLimbDraw, PostLimbDraw postLimbDraw, struct Actor* actor, Gfx* gfx);
 
+f32 Math3D_Vec3fMagnitude(Vec3f* vec);
+f32 Math3D_Vec3f_DistXYZ(Vec3f* a, Vec3f* b);
+void Actor_UpdateVelocityWithGravity(Actor* actor);
+void Math_Vec3f_Scale(Vec3f* vec, f32 scale);
+s16 Quake_Request(Camera* camera, u32 type);
+u32 Quake_SetSpeed(s16 index, s16 speed);
+u32 Quake_SetPerturbations(s16 index, s16 y, s16 x, s16 fov, s16 roll);
+u32 Quake_SetDuration(s16 index, s16 duration);
+f32 BgCheck_EntityRaycastFloor5_2(GameState_Play* play, CollisionContext* colCtx, CollisionPoly** outPoly, s32* bgId, Actor* actor, Vec3f* pos);
+s32 WaterBox_GetSurface1_2(GameState_Play* play, CollisionContext* colCtx, f32 x, f32 z, f32* ySurface, WaterBox** outWaterBox);
+f32 Math3D_Vec3fMagnitudeSq(Vec3f* vec);
+void Math3D_Vec3f_Cross(Vec3f* a, Vec3f* b, Vec3f* ret);
+void Matrix_RotateAxisF(f32 angle, Vec3f* axis, int mode);
+void Matrix_Get(MtxF* dest);
+void Matrix_MtxFToYXZRot(MtxF* src, Vec3s* dest, s32 nonUniformScale);
+void Effect_Add(GameState_Play* play, s32* pIndex, int type, u8 arg3, u8 arg4, void* initParams);
+void Effect_Destroy(GameState_Play* play, s32 index);
+int SurfaceType_GetFloorType(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId);
+void* Effect_GetByIndex(s32 index);
+
 // TODO: rename
+void func_800AE930(CollisionContext* colCtx, void* this, Vec3f* pos, f32 arg3, s16 angle, CollisionPoly* colPoly, s32 bgId);
+void func_800AEF44(void* this);
 void func_80169EFC(GameState_Play* play);
 void func_800B0EB0(GameState_Play* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, Color_RGBA8* primColor, Color_RGBA8* envColor, s16 scale, s16 scaleStep, s16 life);
 void func_80169AFC(GameState_Play* play, s16 camId, s16 timer);
 void func_800B8D50(GameState_Play* play, Actor* actor, f32 arg2, s16 yaw, f32 arg4, u32 arg5);
 void func_800B4AEC(GameState_Play* play, Actor* actor, f32 y);
 void func_800B3030(GameState_Play* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, s16 scale, s16 scaleStep, s32 colorIndex);
+void func_800B0E48(GameState_Play* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, Color_RGBA8* primColor, Color_RGBA8* envColor, s16 scale, s16 scaleStep);
+
+/* Compute transform matrix mapping +y (up) to the collision poly's normal */
+void func_800C0094(CollisionPoly* poly, f32 tx, f32 ty, f32 tz, MtxF* dest);
 
 #endif

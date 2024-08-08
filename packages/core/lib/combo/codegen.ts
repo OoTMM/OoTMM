@@ -6,7 +6,9 @@ import { Monitor } from './monitor';
 import { PATCH_GROUP_VALUES } from './patch-build/group';
 import { CONFVARS_VALUES } from './confvars';
 import { PRICE_RANGES } from './logic/price';
+import { SETTINGS } from './settings';
 import { CodeGen } from './util/codegen';
+import { COSMETICS } from './cosmetics';
 
 const ENTRANCES_DEBUG_CATEGORIES = {
   COMMON: 'Common',
@@ -167,12 +169,43 @@ async function genEntrances() {
   await debug.emit();
 }
 
+async function genDefaultConfig() {
+  const defaultConfig = new CodeGen(path.resolve('config_default.yml'));
+  defaultConfig.raw('settings:');
+  for (const setting of SETTINGS) {
+    defaultConfig.raw(`  ${setting.key}: ${setting.default}`);
+    defaultConfig.raw(`  # Default: ${setting.default}`);
+    if (setting.type == 'boolean')
+      defaultConfig.raw(`  # true/false`);
+    if (setting.type == 'enum')
+      defaultConfig.raw(`  # ${setting.values.map(v => v.value).join('/')}`);
+    if (setting.type == 'number')
+      if (`${setting.min}`.includes('=>'))
+        defaultConfig.raw('  # dynamic');
+      else if (`${setting.max}`.includes('=>'))
+        defaultConfig.raw(`  # ${setting.min} - dynamic`);
+      else
+        defaultConfig.raw(`  # ${setting.min} - ${setting.max}`)
+    if (setting.type == 'set')
+      for (const v of ['all', 'none', 'random', ...setting.values.map(v => v.value)])
+        defaultConfig.raw(`  # ${v}`)
+    defaultConfig.raw('');
+  }
+  defaultConfig.raw('');
+  defaultConfig.raw('# cosmetics:')
+  for (const c of COSMETICS) {
+    defaultConfig.raw(`#  ${c.key}: random`)
+  }
+  await defaultConfig.emit();
+}
+
 export const codegen = async (monitor: Monitor) => {
   monitor.log("Codegen");
   return Promise.all([
     genGI(),
     genDrawGI(),
     genEntrances(),
+    genDefaultConfig(),
     codegenFile(SCENES,               "SCE",      "scenes.h",             "GENERATED_SCENES_H"),
     codegenFile(NPC,                  "NPC",      "npc.h",                "GENERATED_NPC_H"),
     codegenFile(CONFVARS_VALUES,      "CFG",      "generated_config.h",   "GENERATED_CONFIG_H"),
