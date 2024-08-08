@@ -2,26 +2,31 @@
   dungeon: DC
   exits:
     "Death Mountain": "true"
-    "Dodongo Cavern Main Room Lower": "has_bombflowers || can_hammer || has_blue_fire || has_blue_fire_arrows_mudwall"
+    "Dodongo Cavern Entrance": "true"
+"Dodongo Cavern Entrance":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern": "true"
+    "Dodongo Cavern Main Room Lower": "has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall"
 "Dodongo Cavern Main Room Lower":
   dungeon: DC
   exits:
-    "Dodongo Cavern": "has_explosives_or_hammer || has_blue_fire || has_blue_fire_arrows_mudwall" #We need to see if you can go backwards without breaking it, like other mudwalls.
+    "Dodongo Cavern Entrance": "has_explosives_or_hammer || has_blue_fire_arrows_mudwall" #We need to see if you can go backwards without breaking it, like other mudwalls.
     "Dodongo Cavern Main Room Inside Skull": "event(MQ_DC_OPEN_SKULL)"
     "Dodongo Cavern Staircase Room Lower": "event(MQ_DC_STAIRCASE_SWITCH)"
     "Dodongo Cavern Main Room Upper Skull Side": "event(MQ_DC_PILLAR_RAISE) || climb_anywhere || hookshot_anywhere" #You can use hook anywhere to get on top of the skull and again to get on the bridge without longshot.
     "Dodongo Cavern Main Room Upper Entrance Side": "climb_anywhere || longshot_anywhere"
-    "Dodongo Cavern Lower Tunnel": "has_explosives_or_hammer || (event(DC_MQ_SHORTCUT) && has_goron_bracelet) || has_blue_fire || has_blue_fire_arrows_mudwall"
+    "Dodongo Cavern Lower Tunnel": "has_explosives_or_hammer || (event(DC_MQ_SHORTCUT) && has_goron_bracelet) || has_blue_fire_arrows_mudwall"
     "Dodongo Cavern Bomb Bag Ledge": "is_adult || climb_anywhere || can_hookshot"
   events:
     MQ_DC_PILLAR_RAISE: "has_bombflowers || can_hammer"
     MQ_DC_OPEN_SKULL: "(hookshot_anywhere || climb_anywhere) && has_explosives"
   locations:
-    "MQ Dodongo Cavern Map Chest": "has_bombflowers || can_hammer || has_blue_fire || has_blue_fire_arrows_mudwall"
+    "MQ Dodongo Cavern Map Chest": "has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall"
     "MQ Dodongo Cavern Lobby Scrub Front": "business_scrub(0x1c)"
     "MQ Dodongo Cavern Lobby Scrub Back": "business_scrub(0x1d)"
   gossip:
-    "Dodongo Cavern Gossip": "has_bombflowers || can_hammer || has_blue_fire || has_blue_fire_arrows_mudwall"
+    "Dodongo Cavern Gossip": "has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall"
 "Dodongo Cavern Main Room Upper Skull Side":
   dungeon: DC
   exits:
@@ -156,7 +161,7 @@
   exits:
     "Dodongo Cavern Corridor Before Lower Lizalfos": "event(MQ_DC_LOWER_TUNNEL_EYE_SWITCH)"
     "Dodongo Cavern Main Room Lower": "true"
-    "Dodongo Cavern Lower Tunnel Side Room": "has_bombflowers || has_explosives_or_hammer || has_blue_fire || has_blue_fire_arrows_mudwall"
+    "Dodongo Cavern Lower Tunnel Side Room": "has_bombflowers || has_explosives_or_hammer || has_blue_fire_arrows_mudwall"
   events:
     MQ_DC_LOWER_TUNNEL_EYE_SWITCH: "can_use_bow || ((has_bombflowers || can_use_din) && can_use_slingshot)"
   locations:
@@ -185,7 +190,7 @@
     MQ_DC_LOWER_LIZALFOS_CLEAR: "soul_lizalfos_dinalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
   locations:
     "MQ Dodongo Cavern Heart Lizalfos Room": "true"
-    "MQ Dodongo Cavern GS Upper Lizalfos": "gs && (climb_anywhere || longshot_anywhere) && (has_explosives_or_hammer || longshot_anywhere)" #In Upper section, putting it here too because of the lizalfos event won't trigger when starting in opposite section.
+    "MQ Dodongo Cavern GS Upper Lizalfos": "gs && (longshot_anywhere || (climb_anywhere && can_damage_skull))" #In Upper section, putting it here too because of the lizalfos event won't trigger when starting in opposite section.
     "MQ Dodongo Cavern Pot Miniboss 1": "climb_anywhere || longshot_anywhere" #In Upper section, putting it here too because of the lizalfos event won't trigger when starting in opposite section.
     "MQ Dodongo Cavern Pot Miniboss 2": "climb_anywhere || longshot_anywhere" #In Upper section, putting it here too because of the lizalfos event won't trigger when starting in opposite section.
     "MQ Dodongo Cavern Pot Miniboss 3": "climb_anywhere || longshot_anywhere" #In Upper section, putting it here too because of the lizalfos event won't trigger when starting in opposite section.
