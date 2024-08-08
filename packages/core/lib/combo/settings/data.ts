@@ -550,6 +550,14 @@ export const SETTINGS = [{
   cond: hasMM,
   default: false
 }, {
+  key: 'shuffleBarrelsMm',
+  name: 'Barrels Shuffle (MM)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the barrels are shuffled (MM).',
+  cond: hasMM,
+  default: false
+}, {
   key: 'shuffleHivesOot',
   name: 'Hives Shuffle (OoT)',
   category: 'main.shuffle',

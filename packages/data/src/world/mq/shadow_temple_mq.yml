@@ -12,6 +12,11 @@
     ARROWS: "true"
     BOMBS_OR_BOMBCHU: "true"
     MAGIC: "true"
+  locations:
+    "MQ Shadow Temple Truth Spinner Room Small Crate 1": "true"
+    "MQ Shadow Temple Truth Spinner Room Small Crate 2": "true"
+    "MQ Shadow Temple Truth Spinner Room Small Crate 3": "true"
+    "MQ Shadow Temple Truth Spinner Room Small Crate 4": "true"
 "Shadow Temple First Locked Door":
   dungeon: Shadow
   locations:

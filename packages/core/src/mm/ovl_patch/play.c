@@ -681,7 +681,7 @@ void hookPlay_Init(GameState_Play* play)
     {
         if (play->sceneId == SCE_MM_STONE_TOWER_INVERTED)
         {
-            SetSwitchFlag(play, 0x14);
+            Flags_SetSwitch(play, 0x14);
         }
         else if (play->sceneId == SCE_MM_STONE_TOWER)
         {

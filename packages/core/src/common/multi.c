@@ -184,7 +184,7 @@ static void setSwitch0MarkMm(GameState_Play* play, int sceneId, int flagId)
 #if defined(GAME_MM)
     if (play && mmSceneId(play->sceneId) == sceneId)
     {
-        SetSwitchFlag(play, flagId);
+        Flags_SetSwitch(play, flagId);
         gMultiMarkSwitch0 |= (1 << flagId);
         return;
     }
@@ -201,7 +201,7 @@ static void setSwitch1MarkMm(GameState_Play* play, int sceneId, int flagId)
 #if defined(GAME_MM)
     if (play && mmSceneId(play->sceneId) == sceneId)
     {
-        SetSwitchFlag(play, flagId | 0x20);
+        Flags_SetSwitch(play, flagId | 0x20);
         gMultiMarkSwitch1 |= (1 << flagId);
         return;
     }
