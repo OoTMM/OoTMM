@@ -391,8 +391,10 @@ function checkKey(check: WorldCheck): number {
     break;
   case 'pot':
   case 'crate':
+  case 'barrel':
   case 'grass':
   case 'fairy':
+  case 'snowball':
   case 'hive':
   case 'rupee':
   case 'heart':
@@ -411,8 +413,10 @@ function checkKey(check: WorldCheck): number {
   case 'sf':
   case 'pot':
   case 'crate':
+  case 'barrel':
   case 'grass':
   case 'fairy':
+  case 'snowball':
   case 'hive':
   case 'rupee':
   case 'heart':

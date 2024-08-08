@@ -6,6 +6,9 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Shuffle MM snowballs.
+- Shuffle MM barrels.
+- Shuffle the MM potted plants, two checks each, one is a pot, one is grass.
 - Hive shuffle, for OoT and MM.
 - Behavioral setting for the Gibdos in Beneath The Well (Vanilla, Remorseless and Open).
 - Skip Kamaro teaching the dance when healing him.
@@ -22,11 +25,13 @@ All notable changes to this project will be documented in this file.
 - Lake Hylia Owl no longer has its slow text when you first talk to it.
 - Internal names of the music tracks, for an easier sorting in the cosmetics log.
 - Adult can now jump from the windmill to the back of Kakariko within logic.
+- It is now logical for adult to cross the Gerudo Fortress gate in reverse by getting captured.
 - MM Cycle reset will now always spawn wherever you entered under additional circumstances.
 - - These would be combining: starting as adult, closed door of time or swordless requiring Master Sword for time travel, cross-soaring for adult, and owl shuffle or preactivated owls.
 
 ### Fixed
 
+- Logic issue with Romani Ranch Stables access.
 - Logic issue with Kafei's check in seeds without shuffled interiors.
 - Starting age no longer defaults to either child or adult after generating a random starting age seed.
 - Minor collection delay for Bolero.

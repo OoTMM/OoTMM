@@ -127,6 +127,10 @@
     FAIRY: "true"
   locations:
     "Snowhead Owl Statue": "has_sticks || has_weapon"
+    "Snowhead Small Snowball 1": "true"
+    "Snowhead Small Snowball 2": "true"
+    "Snowhead Small Snowball 3": "true"
+    "Snowhead Small Snowball 4": "true"
 "Owl Great Bay":
   region: GREAT_BAY_COAST
   exits:
@@ -1236,6 +1240,10 @@
     "Road to Southern Swamp Grass Pack 2 Grass 09": "true"
     "Road to Southern Swamp Grass 1": "true"
     "Road to Southern Swamp Grass 2": "true"
+    "Road to Southern Swamp Potted Plant 1 Pot": "true"
+    "Road to Southern Swamp Potted Plant 1 Grass": "true"
+    "Road to Southern Swamp Potted Plant 2 Pot": "true"
+    "Road to Southern Swamp Potted Plant 2 Grass": "true"
   gossip:
     "Road to Southern Swamp Gossip": "true"
 "Swamp Archery":
@@ -1735,6 +1743,22 @@
     "Mountain Village Path Upper": "can_break_snowballs || is_spring || short_hook_anywhere"
   gossip:
     "Mountain Village Path Gossip": "true"
+  locations:
+    "Path to Mountain Village Big Snowball Lower 1": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Lower 2": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Lower 3": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Lower 4": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Middle 1": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Middle 2": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Middle 3": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Middle 4": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Small Snowball Lower Winter 1": "is_winter"
+    "Path to Mountain Village Small Snowball Lower Winter 2": "is_winter"
+    "Path to Mountain Village Small Snowball Lower Winter 3": "is_winter"
+    "Path to Mountain Village Small Snowball Lower Spring 1": "is_spring"
+    "Path to Mountain Village Small Snowball Lower Spring 2": "is_spring"
+    "Path to Mountain Village Small Snowball Lower Spring 3": "is_spring"
+    "Path to Mountain Village Small Snowball Lower Spring 4": "is_spring"
 "Mountain Village Path Upper":
   region: PATH_TO_MOUNTAIN_VILLAGE
   events:
@@ -1743,6 +1767,18 @@
   exits:
     "Mountain Village Path Lower": "true"
     "Mountain Village": "true"
+  locations:
+    "Path to Mountain Village Big Snowball Middle 1": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Middle 2": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Middle 3": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Middle 4": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Upper 1": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Upper 2": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Big Snowball Upper 3": "is_winter && can_break_snowballs"
+    "Path to Mountain Village Small Snowball Upper Winter": "is_winter"
+    "Path to Mountain Village Small Snowball Upper Spring 1": "is_spring"
+    "Path to Mountain Village Small Snowball Upper Spring 2": "is_spring"
+    "Path to Mountain Village Small Snowball Upper Spring 3": "is_spring"
 "Mountain Village":
   region: MOUNTAIN_VILLAGE
   exits:
@@ -1810,6 +1846,24 @@
     "Mountain Village Keaton Grass Reward 9": "is_spring && keaton_grass_hard"
     "Mountain Village Rupee": "is_spring && has_mask_goron"
     "Mountain Village Hive": "is_spring && (break_hive || (has_bombchu && trick(MM_HIVE_BOMBCHU)))"
+    "Mountain Village Potted Plant 1 Pot": "is_day"
+    "Mountain Village Potted Plant 1 Grass": "is_day"
+    "Mountain Village Potted Plant 2 Pot": "is_day"
+    "Mountain Village Potted Plant 2 Grass": "is_day"
+    "Mountain Village Big Snowball 1": "is_winter && can_break_snowballs"
+    "Mountain Village Big Snowball 2": "is_winter && can_break_snowballs"
+    "Mountain Village Big Snowball 3": "(first_day || second_day) && is_winter && can_break_snowballs" # Goron Elder is in this snowball in Final day
+    "Mountain Village Big Snowball 4": "is_winter && can_break_snowballs"
+    "Mountain Village Big Snowball 5": "is_winter && can_break_snowballs"
+    "Mountain Village Small Snowball 1": "true"
+    "Mountain Village Small Snowball 2": "true"
+    "Mountain Village Small Snowball 3": "true"
+    "Mountain Village Small Snowball 4": "true"
+    "Mountain Village Small Snowball 5": "true"
+    "Mountain Village Small Snowball Winter 1": "is_winter"
+    "Mountain Village Small Snowball Winter 2": "is_winter"
+    "Mountain Village Small Snowball Winter 3": "is_winter"
+    "Mountain Village Small Snowball Winter 4": "is_winter"
 "Mountain Village Elder":
   region: NONE
   exits:
@@ -1868,6 +1922,10 @@
   locations:
     "Blacksmith Razor Blade": "soul_npc(SOUL_NPC_BLACKSMITHS) && can_use_wallet(2) && event(BLACKSMITH_ENABLED)"
     "Blacksmith Gilded Sword": "event(GOLD_DUST_USED)"
+    "Blacksmith Potted Plant 1 Pot": "is_night"
+    "Blacksmith Potted Plant 1 Grass": "is_night"
+    "Blacksmith Potted Plant 2 Pot": "is_night"
+    "Blacksmith Potted Plant 2 Grass": "is_night"
 "Twin Islands":
   region: TWIN_ISLANDS
   events:
@@ -1901,6 +1959,22 @@
     "Twin Islands Rupee 2": "is_spring && (underwater_walking || can_dive_small)"
     "Twin Islands Rupee 3": "is_spring && (underwater_walking || can_dive_small)"
     "Twin Islands Rupee 4": "is_spring && (underwater_walking || can_dive_small)"
+    "Twin Islands Big Snowball 01": "(first_day || final_day) && is_winter && can_break_snowballs"
+    "Twin Islands Big Snowball 02": "is_winter && can_break_snowballs"
+    "Twin Islands Big Snowball 03": "is_winter && can_break_snowballs"
+    "Twin Islands Big Snowball 04": "is_winter && can_break_snowballs"
+    "Twin Islands Big Snowball 05": "is_winter && can_break_snowballs"
+    "Twin Islands Big Snowball 06": "is_winter && can_break_snowballs"
+    "Twin Islands Big Snowball 07": "is_winter && can_break_snowballs"
+    "Twin Islands Big Snowball 08": "(second_day || final_day) && is_winter && can_break_snowballs"
+    "Twin Islands Big Snowball 09": "is_winter && can_break_snowballs"
+    "Twin Islands Big Snowball 10": "is_winter && can_break_snowballs"
+    "Twin Islands Big Snowball 11": "is_winter && can_break_snowballs"
+    "Twin Islands Big Snowball 12": "is_winter && can_break_snowballs"
+    "Twin Islands Big Snowball 13": "(first_day || final_day) && is_winter && can_break_snowballs"
+    "Twin Islands Small Snowball 1": "is_winter"
+    "Twin Islands Small Snowball 2": "is_winter"
+    "Twin Islands Small Snowball 3": "is_winter"
 "Twin Islands Ramp Grotto":
   region: ENTRANCE
   exits:
@@ -1959,6 +2033,10 @@
   exits:
     "Twin Islands": "true"
     "Twin Islands Ramp Grotto": "has_explosives || trick_keg_explosives || (trick(MM_KEG_EXPLOSIVES) && event(POWDER_KEG_TRIAL))"
+  locations:
+    "Twin Islands Small Snowball Ramp 1": "is_winter"
+    "Twin Islands Small Snowball Ramp 2": "is_winter"
+    "Twin Islands Small Snowball Ramp 3": "is_winter"
 "Goron Village":
   region: GORON_VILLAGE
   exits:
@@ -1981,6 +2059,27 @@
 #    "Goron Village Scrub Bomb Bag": "(has_mask_goron || (has(MOON_TEAR) && has(DEED_LAND) && has(DEED_SWAMP))) && can_use_wallet(2)"
     "Goron Powder Keg": "event(TRIAL_BOULDER) && (event(POWDER_KEG_TRIAL) || (short_hook_anywhere && trick(MM_KEG_TRIAL_HEATLESS)))"
     "Goron Village Crate": "is_spring || can_use_fire_short_range || (short_hook_anywhere && trick(MM_KEG_TRIAL_HEATLESS))"
+    "Goron Village Big Snowball 1": "is_winter && can_break_snowballs"
+    "Goron Village Big Snowball 2": "is_winter && can_break_snowballs"
+    "Goron Village Big Snowball 3": "is_winter && can_break_snowballs"
+    "Goron Village Big Snowball 4": "is_winter && can_break_snowballs"
+    "Goron Village Big Snowball 5": "is_winter && can_break_snowballs"
+    "Goron Village Big Snowball 6": "is_winter && can_break_snowballs"
+    "Goron Village Big Snowball 7": "is_winter && can_break_snowballs"
+    "Goron Village Big Snowball 8": "is_winter && can_break_snowballs"
+    "Goron Village Big Snowball 9": "is_winter && can_break_snowballs"
+    "Goron Village Small Snowball 01": "is_winter"
+    "Goron Village Small Snowball 02": "is_winter"
+    "Goron Village Small Snowball 03": "is_winter"
+    "Goron Village Small Snowball 04": "is_winter"
+    "Goron Village Small Snowball 05": "is_winter"
+    "Goron Village Small Snowball 06": "is_winter"
+    "Goron Village Small Snowball 07": "is_winter"
+    "Goron Village Small Snowball 08": "is_winter"
+    "Goron Village Small Snowball 09": "is_winter"
+    "Goron Village Small Snowball 10": "is_winter"
+    "Goron Village Small Snowball 11": "is_winter"
+    "Goron Village Small Snowball 12": "is_winter"
 "Front of Lone Peak Shrine":
   region: GORON_VILLAGE
   exits:
@@ -2031,6 +2130,9 @@
   events:
     MAGIC: "true"
     ARROWS: "is_spring"
+  locations:
+    "Mountain Village Small Snowball Cliff 1": "is_winter"
+    "Mountain Village Small Snowball Cliff 2": "is_winter"
 "Near Goron Graveyard":
   region: MOUNTAIN_VILLAGE
   exits:
@@ -2100,6 +2202,10 @@
     "Path to Snowhead Back": "true"
   locations:
     "Path to Snowhead HP": "can_use_lens && (scarecrow_hookshot || hookshot_anywhere)"
+    "Path to Snowhead Big Snowball Middle 1": "is_winter && can_break_snowballs"
+    "Path to Snowhead Big Snowball Middle 2": "is_winter && can_break_snowballs"
+    "Path to Snowhead Small Snowball Spring Middle 1": "is_spring"
+    "Path to Snowhead Small Snowball Spring Middle 2": "is_spring"
 "Path to Snowhead Back":
   region: PATH_TO_SNOWHEAD
   events:
@@ -2108,6 +2214,14 @@
     "Path to Snowhead Middle": "goron_fast_roll || hookshot_anywhere || (has_hover_boots && trick(MM_PATH_SNOWHEAD_HOVERS))"
     "Snowhead Entrance": "true"
     "Path to Snowhead Grotto": "has_explosives || trick_keg_explosives"
+  locations:
+    "Path to Snowhead Big Snowball Back 1": "is_winter && can_break_snowballs"
+    "Path to Snowhead Big Snowball Back 2": "is_winter && can_break_snowballs"
+    "Path to Snowhead Small Snowball Back 1": "true"
+    "Path to Snowhead Small Snowball Back 2": "true"
+    "Path to Snowhead Small Snowball Back 3": "true"
+    "Path to Snowhead Small Snowball Spring Back 1": "is_spring"
+    "Path to Snowhead Small Snowball Spring Back 2": "is_spring"
 "Path to Snowhead Grotto":
   region: ENTRANCE
   exits:
@@ -2160,12 +2274,25 @@
 "Snowhead Near Fairy Fountain":
   region: SNOWHEAD
   events:
-    MAGIC: "((blizzard_stopped || has_iron_boots) && can_break_boulders) || is_spring"
+    MAGIC: "((blizzard_stopped || has_iron_boots) && can_break_snowballs) || is_spring"
     RUPEES: "blizzard_stopped && can_use_light_arrows && soul_wolfos"
   exits:
     "Snowhead Entrance": "blizzard_stopped || has_iron_boots"
     "Snowhead": "blizzard_stopped || has_iron_boots"
     "Snowhead Fairy Fountain": "true"
+  locations:
+    "Snowhead Big Snowball 1": "(blizzard_stopped || has_iron_boots) && is_winter && can_break_snowballs"
+    "Snowhead Big Snowball 2": "(blizzard_stopped || has_iron_boots) && is_winter && can_break_snowballs"
+    "Snowhead Big Snowball 3": "(blizzard_stopped || has_iron_boots) && is_winter && can_break_snowballs"
+    "Snowhead Big Snowball 4": "(blizzard_stopped || has_iron_boots) && is_winter && can_break_snowballs"
+    "Snowhead Big Snowball 5": "(blizzard_stopped || has_iron_boots) && is_winter && can_break_snowballs"
+    "Snowhead Big Snowball 6": "(blizzard_stopped || has_iron_boots) && is_winter && can_break_snowballs"
+    "Snowhead Small Snowball Spring 1": "is_spring"
+    "Snowhead Small Snowball Spring 2": "is_spring"
+    "Snowhead Small Snowball Spring 3": "is_spring"
+    "Snowhead Small Snowball Spring 4": "is_spring"
+    "Snowhead Small Snowball Spring 5": "is_spring"
+    # "Snowhead Small Snowball Spring Out of Bounds": "is_spring"
 "Snowhead Fairy Fountain":
   region: ENTRANCE
   exits:
@@ -2260,7 +2387,7 @@
     "Near Romani Ranch": "true"
     "Cucco Shack": "between(DAY1_AM_06_00, NIGHT1_PM_08_00) || between(DAY2_AM_06_00, NIGHT2_PM_08_00) || between(DAY3_AM_06_00, NIGHT3_PM_08_00)"
     "Doggy Racetrack": "between(DAY1_AM_06_00, NIGHT1_PM_08_00) || between(DAY2_AM_06_00, NIGHT2_PM_08_00) || between(DAY3_AM_06_00, NIGHT3_PM_08_00)"
-    "Stables": "true"
+    "Stables": "between(DAY1_AM_06_00, NIGHT1_AM_02_30) || second_day || between(DAY3_AM_06_00, NIGHT3_PM_08_00)"
     "Ranch House": "between(DAY1_AM_06_00, NIGHT1_PM_08_00) || between(DAY2_AM_06_00, NIGHT2_PM_08_00) || between(DAY3_AM_06_00, NIGHT3_PM_08_00)"
   locations:
     "Romani Ranch Epona Song": "soul_malon && (before(NIGHT1_PM_06_00) || (trick(MM_RANCH_FARORE) && can_use_farore && clock_day1))"
@@ -2352,6 +2479,10 @@
     "Cucco Shack Crate 1": "true"
     "Cucco Shack Crate 2": "true"
     "Cucco Shack Crate 3": "true"
+    "Cucco Shack Potted Plant 1 Pot": "true"
+    "Cucco Shack Potted Plant 1 Grass": "true"
+    "Cucco Shack Potted Plant 2 Pot": "true"
+    "Cucco Shack Potted Plant 2 Grass": "true"
   gossip:
     "Cucco Shack Gossip": "true"
 "Doggy Racetrack": #The race is always available

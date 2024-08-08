@@ -40,7 +40,7 @@ void EnInvisibleRupee_HandleExtended(Actor_EnInvisibleRuppe* this, GameState_Pla
         comboXflagsSet(&this->xflag);
 
         if (this->switchFlag > 0)
-            SetSwitchFlag(play, this->switchFlag);
+            Flags_SetSwitch(play, this->switchFlag);
 
         this->base.draw = NULL;
         this->handler = actorAddr(AC_EN_INVISIBLE_RUPPE, 0x80c259e8);
@@ -64,7 +64,7 @@ void EnInvisibleRupee_InitWrapper(Actor_EnInvisibleRuppe* this, GameState_Play* 
     this->isExtended = !!(o.gi && !comboXflagsGet(&this->xflag));
 
     switchFlag = (this->base.variable & 0x1fc) >> 2;
-    if (this->isExtended && switchFlag != 0x7f && GetSwitchFlag(play, switchFlag))
+    if (this->isExtended && switchFlag != 0x7f && Flags_GetSwitch(play, switchFlag))
     {
         /* Already collected but no xflag */
         this->base.variable |= 0x1fc;

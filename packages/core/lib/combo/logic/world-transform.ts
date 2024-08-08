@@ -1056,6 +1056,12 @@ export class LogicPassWorldTransform {
       this.removeLocations(locs);
     }
 
+    /* Barrels */
+    if (!settings.shuffleBarrelsMm) {
+      const locs = POOL.mm.filter((x: any) => x.type === 'barrel').map((x: any) => gameId('mm', x.location, ' ')) as string[];
+      this.removeLocations(locs);
+    }
+
     /* Hives */
     if (!settings.shuffleHivesOot) {
       const data = POOL.oot.filter((x: any) => x.type === 'hive').map((x: any) => gameId('oot', x.location, ' ')) as string[];
@@ -1105,6 +1111,11 @@ export class LogicPassWorldTransform {
 
     if (!settings.shuffleWonderItemsMm) {
       const locs = POOL.mm.filter((x: any) => x.type === 'wonder').map((x: any) => gameId('mm', x.location, ' ')) as string[];
+      this.removeLocations(locs);
+    }
+
+    if (!settings.shuffleSnowballsMm) {
+      const locs = POOL.mm.filter((x: any) => x.type === 'snowball').map((x: any) => gameId('mm', x.location, ' ')) as string[];
       this.removeLocations(locs);
     }
 

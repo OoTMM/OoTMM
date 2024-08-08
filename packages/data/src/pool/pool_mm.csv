@@ -536,6 +536,10 @@ Road to Southern Swamp Grass Pack 2 Grass 08,           grass,          NONE,   
 Road to Southern Swamp Grass Pack 2 Grass 09,           grass,          NONE,                   ROAD_SOUTHERN_SWAMP,          0x80024,                    RANDOM
 Road to Southern Swamp Grass 1,                         grass,          NONE,                   ROAD_SOUTHERN_SWAMP,          0x0002f,                    RANDOM
 Road to Southern Swamp Grass 2,                         grass,          NONE,                   ROAD_SOUTHERN_SWAMP,          0x00030,                    RANDOM
+Road to Southern Swamp Potted Plant 1 Pot,              pot,            NONE,                   ROAD_SOUTHERN_SWAMP,          0x00028,                    NOTHING
+Road to Southern Swamp Potted Plant 1 Grass,            grass,          NONE,                   ROAD_SOUTHERN_SWAMP,          0x10028,                    RECOVERY_HEART
+Road to Southern Swamp Potted Plant 2 Pot,              pot,            NONE,                   ROAD_SOUTHERN_SWAMP,          0x00029,                    NOTHING
+Road to Southern Swamp Potted Plant 2 Grass,            grass,          NONE,                   ROAD_SOUTHERN_SWAMP,          0x10029,                    RECOVERY_HEART
 Southern Swamp HP,                                      collectible,    NONE,                   SOUTHERN_SWAMP,               0x1e,                       HEART_PIECE
 Southern Swamp Scrub Deed,                              npc,            NONE,                   SOUTHERN_SWAMP,               SCRUB_SWAMP,                DEED_SWAMP
 Southern Swamp Scrub Shop,                              npc,            NONE,                   SOUTHERN_SWAMP,               SCRUB_SHOP_BEANS,           MAGIC_BEAN
@@ -820,6 +824,28 @@ Swamp Spider House Hive Jars Room 3,                    hive,           NONE,   
 Swamp Spider House Hive Tree Room 1,                    hive,           NONE,                   SPIDER_HOUSE_SWAMP,           0x00506,                    RECOVERY_HEART
 Swamp Spider House Hive Tree Room 2,                    hive,           NONE,                   SPIDER_HOUSE_SWAMP,           0x00507,                    MAGIC_JAR_SMALL
 Swamp Spider House Hive Tree Room 3,                    hive,           NONE,                   SPIDER_HOUSE_SWAMP,           0x00509,                    NOTHING
+Path to Mountain Village Big Snowball Lower 1,          snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x0001a,                    NOTHING
+Path to Mountain Village Big Snowball Lower 2,          snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x0002a,                    NOTHING
+Path to Mountain Village Big Snowball Lower 3,          snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x0001e,                    RECOVERY_HEART
+Path to Mountain Village Big Snowball Lower 4,          snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x0001f,                    NOTHING
+Path to Mountain Village Big Snowball Middle 1,         snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x00023,                    NOTHING
+Path to Mountain Village Big Snowball Middle 2,         snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x00022,                    NOTHING
+Path to Mountain Village Big Snowball Middle 3,         snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x00021,                    NOTHING
+Path to Mountain Village Big Snowball Middle 4,         snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x00024,                    NOTHING
+Path to Mountain Village Big Snowball Upper 1,          snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x0002b,                    RECOVERY_HEART
+Path to Mountain Village Big Snowball Upper 2,          snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x00029,                    RECOVERY_HEART
+Path to Mountain Village Big Snowball Upper 3,          snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x0002c,                    RECOVERY_HEART
+Path to Mountain Village Small Snowball Lower Winter 1, snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x00025,                    NOTHING
+Path to Mountain Village Small Snowball Lower Winter 2, snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x00026,                    RECOVERY_HEART
+Path to Mountain Village Small Snowball Lower Winter 3, snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x00027,                    RECOVERY_HEART
+Path to Mountain Village Small Snowball Upper Winter,   snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x00028,                    MAGIC_JAR_SMALL
+Path to Mountain Village Small Snowball Lower Spring 1, snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x0400c,                    MAGIC_JAR_SMALL
+Path to Mountain Village Small Snowball Lower Spring 2, snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x04011,                    RECOVERY_HEART
+Path to Mountain Village Small Snowball Lower Spring 3, snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x0400f,                    RECOVERY_HEART
+Path to Mountain Village Small Snowball Lower Spring 4, snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x04010,                    MAGIC_JAR_SMALL
+Path to Mountain Village Small Snowball Upper Spring 1, snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x0400d,                    MAGIC_JAR_SMALL
+Path to Mountain Village Small Snowball Upper Spring 2, snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x0400b,                    RECOVERY_HEART
+Path to Mountain Village Small Snowball Upper Spring 3, snowball,       NONE,                   PATH_MOUNTAIN_VILLAGE,        0x0400e,                    RECOVERY_HEART
 Mountain Village Waterfall Chest,                       chest,          NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x00,                       RUPEE_RED
 Mountain Village Don Gero Mask,                         npc,            HUNGRY_GORON,           MOUNTAIN_VILLAGE_WINTER,      MASK_DON_GERO,              MASK_DON_GERO
 Mountain Village Frog Choir HP,                         npc,            DON_GERO_CHOIR,         MOUNTAIN_VILLAGE_WINTER,      FROG_HEART_PIECE,           HEART_PIECE
@@ -881,8 +907,32 @@ Mountain Village Keaton Grass Reward 8,                 grass,          NONE,   
 Mountain Village Keaton Grass Reward 9,                 grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x8002c,                    RUPEE_RED
 Mountain Village Rupee,                                 rupee,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x00028,                    RUPEE_RED
 Mountain Village Hive,                                  hive,           NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x00024,                    NOTHING
+Mountain Village Potted Plant 1 Pot,                    pot,            NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x00023,                    NOTHING
+Mountain Village Potted Plant 1 Grass,                  grass,          NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x10023,                    RECOVERY_HEART
+Mountain Village Potted Plant 2 Pot,                    pot,            NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x00024,                    NOTHING
+Mountain Village Potted Plant 2 Grass,                  grass,          NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x10024,                    RECOVERY_HEART
+Mountain Village Big Snowball 1,                        snowball,       NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x00011,                    NOTHING
+Mountain Village Big Snowball 2,                        snowball,       NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x0000e,                    NOTHING
+Mountain Village Big Snowball 3,                        snowball,       NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x0002e,                    MAGIC_JAR_SMALL
+Mountain Village Big Snowball 4,                        snowball,       NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x00034,                    RECOVERY_HEART
+Mountain Village Big Snowball 5,                        snowball,       NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x00012,                    NOTHING
+Mountain Village Small Snowball 1,                      snowball,       NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x00029,                    RECOVERY_HEART
+Mountain Village Small Snowball 2,                      snowball,       NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x00038,                    MAGIC_JAR_LARGE
+Mountain Village Small Snowball 3,                      snowball,       NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x00035,                    BOMBS_5
+Mountain Village Small Snowball 4,                      snowball,       NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x00036,                    ARROWS_20
+Mountain Village Small Snowball 5,                      snowball,       NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x00037,                    FLEXIBLE
+Mountain Village Small Snowball Winter 1,               snowball,       NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x0002a,                    RECOVERY_HEART
+Mountain Village Small Snowball Winter 2,               snowball,       NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x00028,                    NOTHING
+Mountain Village Small Snowball Winter 3,               snowball,       NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x00027,                    MAGIC_JAR_SMALL
+Mountain Village Small Snowball Winter 4,               snowball,       NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x0002b,                    MAGIC_JAR_SMALL
+Mountain Village Small Snowball Cliff 1,                snowball,       NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x00031,                    MAGIC_JAR_LARGE
+Mountain Village Small Snowball Cliff 2,                snowball,       NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x00032,                    MAGIC_JAR_LARGE
 Blacksmith Razor Blade,                                 npc,            BLACKSMITH,             BLACKSMITH,                   SWORD_RAZOR,                SWORD
 Blacksmith Gilded Sword,                                npc,            BLACKSMITH,             BLACKSMITH,                   SWORD_GILDED,               SWORD
+Blacksmith Potted Plant 1 Pot,                          pot,            NONE,                   BLACKSMITH,                   0x00004,                    NOTHING
+Blacksmith Potted Plant 1 Grass,                        grass,          NONE,                   BLACKSMITH,                   0x10004,                    RECOVERY_HEART
+Blacksmith Potted Plant 2 Pot,                          pot,            NONE,                   BLACKSMITH,                   0x00008,                    NOTHING
+Blacksmith Potted Plant 2 Grass,                        grass,          NONE,                   BLACKSMITH,                   0x10008,                    RECOVERY_HEART
 Lone Peak Shrine Lens Chest,                            chest,          NONE,                   GROTTOS,                      0x01,                       LENS
 Lone Peak Shrine Boulder Chest,                         chest,          NONE,                   GROTTOS,                      0x06,                       RUPEE_RED
 Lone Peak Shrine Invisible Chest,                       chest,          NONE,                   GROTTOS,                      0x03,                       RUPEE_PURPLE
@@ -945,6 +995,25 @@ Twin Islands Rupee 1,                                   rupee,          NONE,   
 Twin Islands Rupee 2,                                   rupee,          NONE,                   TWIN_ISLANDS_SPRING,          0x0000f,                    RUPEE_BLUE
 Twin Islands Rupee 3,                                   rupee,          NONE,                   TWIN_ISLANDS_SPRING,          0x00010,                    RUPEE_BLUE
 Twin Islands Rupee 4,                                   rupee,          NONE,                   TWIN_ISLANDS_SPRING,          0x00012,                    RUPEE_BLUE
+Twin Islands Big Snowball 01,                           snowball,       NONE,                   TWIN_ISLANDS_WINTER,          0x0003b,                    MAGIC_JAR_SMALL
+Twin Islands Big Snowball 02,                           snowball,       NONE,                   TWIN_ISLANDS_WINTER,          0x0003a,                    RECOVERY_HEART
+Twin Islands Big Snowball 03,                           snowball,       NONE,                   TWIN_ISLANDS_WINTER,          0x00039,                    MAGIC_JAR_SMALL
+Twin Islands Big Snowball 04,                           snowball,       NONE,                   TWIN_ISLANDS_WINTER,          0x00037,                    RECOVERY_HEART
+Twin Islands Big Snowball 05,                           snowball,       NONE,                   TWIN_ISLANDS_WINTER,          0x00016,                    NOTHING
+Twin Islands Big Snowball 06,                           snowball,       NONE,                   TWIN_ISLANDS_WINTER,          0x0003c,                    RECOVERY_HEART
+Twin Islands Big Snowball 07,                           snowball,       NONE,                   TWIN_ISLANDS_WINTER,          0x00013,                    NOTHING
+Twin Islands Big Snowball 08,                           snowball,       NONE,                   TWIN_ISLANDS_WINTER,          0x00005,                    NOTHING
+Twin Islands Big Snowball 09,                           snowball,       NONE,                   TWIN_ISLANDS_WINTER,          0x00038,                    MAGIC_JAR_SMALL
+Twin Islands Big Snowball 10,                           snowball,       NONE,                   TWIN_ISLANDS_WINTER,          0x0001e,                    NOTHING
+Twin Islands Big Snowball 11,                           snowball,       NONE,                   TWIN_ISLANDS_WINTER,          0x00036,                    MAGIC_JAR_SMALL
+Twin Islands Big Snowball 12,                           snowball,       NONE,                   TWIN_ISLANDS_WINTER,          0x00012,                    NOTHING
+Twin Islands Big Snowball 13,                           snowball,       NONE,                   TWIN_ISLANDS_WINTER,          0x0003d,                    MAGIC_JAR_SMALL
+Twin Islands Small Snowball 1,                          snowball,       NONE,                   TWIN_ISLANDS_WINTER,          0x0003e,                    MAGIC_JAR_SMALL
+Twin Islands Small Snowball 2,                          snowball,       NONE,                   TWIN_ISLANDS_WINTER,          0x0003f,                    RECOVERY_HEART
+Twin Islands Small Snowball 3,                          snowball,       NONE,                   TWIN_ISLANDS_WINTER,          0x00040,                    MAGIC_JAR_SMALL
+Twin Islands Small Snowball Ramp 1,                     snowball,       NONE,                   TWIN_ISLANDS_WINTER,          0x00041,                    MAGIC_JAR_SMALL
+Twin Islands Small Snowball Ramp 2,                     snowball,       NONE,                   TWIN_ISLANDS_WINTER,          0x00042,                    RECOVERY_HEART
+Twin Islands Small Snowball Ramp 3,                     snowball,       NONE,                   TWIN_ISLANDS_WINTER,          0x00043,                    RECOVERY_HEART
 Goron Elder,                                            npc,            NONE,                   TWIN_ISLANDS_WINTER,          GORON_ELDER,                SONG_GORON_HALF
 Goron Baby,                                             npc,            NONE,                   GORON_SHRINE,                 GORON_BABY,                 SONG_GORON
 Goron Shrine Pot 01,                                    pot,            NONE,                   GORON_SHRINE,                 0x0023,                     STICK
@@ -966,7 +1035,39 @@ Goron Village Scrub Deed,                               npc,            NONE,   
 Goron Village Scrub Bomb Bag,                           npc,            NONE,                   GORON_VILLAGE_WINTER,         SCRUB_BOMB_BAG,             BOMB_BAG
 Goron Powder Keg,                                       npc,            NONE,                   GORON_VILLAGE_WINTER,         GORON_KEG,                  POWDER_KEG
 Goron Village Crate,                                    crate,          NONE,                   GORON_VILLAGE_WINTER,         0x00103,                    NOTHING
+Goron Village Big Snowball 1,                           snowball,       NONE,                   GORON_VILLAGE_WINTER,         0x00032,                    RUPEE_BLUE
+Goron Village Big Snowball 2,                           snowball,       NONE,                   GORON_VILLAGE_WINTER,         0x00033,                    RUPEE_BLUE
+Goron Village Big Snowball 3,                           snowball,       NONE,                   GORON_VILLAGE_WINTER,         0x00034,                    RUPEE_BLUE
+Goron Village Big Snowball 4,                           snowball,       NONE,                   GORON_VILLAGE_WINTER,         0x00035,                    MAGIC_JAR_SMALL
+Goron Village Big Snowball 5,                           snowball,       NONE,                   GORON_VILLAGE_WINTER,         0x00036,                    MAGIC_JAR_SMALL
+Goron Village Big Snowball 6,                           snowball,       NONE,                   GORON_VILLAGE_WINTER,         0x00037,                    MAGIC_JAR_SMALL
+Goron Village Big Snowball 7,                           snowball,       NONE,                   GORON_VILLAGE_WINTER,         0x00038,                    NOTHING
+Goron Village Big Snowball 8,                           snowball,       NONE,                   GORON_VILLAGE_WINTER,         0x00039,                    NOTHING
+Goron Village Big Snowball 9,                           snowball,       NONE,                   GORON_VILLAGE_WINTER,         0x0003a,                    NOTHING
+Goron Village Small Snowball 01,                        snowball,       NONE,                   GORON_VILLAGE_WINTER,         0x0001d,                    RECOVERY_HEART
+Goron Village Small Snowball 02,                        snowball,       NONE,                   GORON_VILLAGE_WINTER,         0x0001e,                    RECOVERY_HEART
+Goron Village Small Snowball 03,                        snowball,       NONE,                   GORON_VILLAGE_WINTER,         0x0001f,                    MAGIC_JAR_SMALL
+Goron Village Small Snowball 04,                        snowball,       NONE,                   GORON_VILLAGE_WINTER,         0x00020,                    MAGIC_JAR_SMALL
+Goron Village Small Snowball 05,                        snowball,       NONE,                   GORON_VILLAGE_WINTER,         0x00021,                    NUTS_10
+Goron Village Small Snowball 06,                        snowball,       NONE,                   GORON_VILLAGE_WINTER,         0x00022,                    NUTS_10
+Goron Village Small Snowball 07,                        snowball,       NONE,                   GORON_VILLAGE_WINTER,         0x00023,                    BOMBS_5
+Goron Village Small Snowball 08,                        snowball,       NONE,                   GORON_VILLAGE_WINTER,         0x00024,                    BOMBS_5
+Goron Village Small Snowball 09,                        snowball,       NONE,                   GORON_VILLAGE_WINTER,         0x00025,                    STICK
+Goron Village Small Snowball 10,                        snowball,       NONE,                   GORON_VILLAGE_WINTER,         0x00026,                    STICK
+Goron Village Small Snowball 11,                        snowball,       NONE,                   GORON_VILLAGE_WINTER,         0x00027,                    ARROWS_10
+Goron Village Small Snowball 12,                        snowball,       NONE,                   GORON_VILLAGE_WINTER,         0x00028,                    ARROWS_10
 Path to Snowhead HP,                                    collectible,    NONE,                   PATH_SNOWHEAD,                0x08,                       HEART_PIECE
+Path to Snowhead Big Snowball Middle 1,                 snowball,       NONE,                   PATH_SNOWHEAD,                0x0001e,                    MAGIC_JAR_SMALL
+Path to Snowhead Big Snowball Middle 2,                 snowball,       NONE,                   PATH_SNOWHEAD,                0x0001f,                    MAGIC_JAR_SMALL
+Path to Snowhead Big Snowball Back 1,                   snowball,       NONE,                   PATH_SNOWHEAD,                0x0001c,                    MAGIC_JAR_SMALL
+Path to Snowhead Big Snowball Back 2,                   snowball,       NONE,                   PATH_SNOWHEAD,                0x0001d,                    MAGIC_JAR_SMALL
+Path to Snowhead Small Snowball Back 1,                 snowball,       NONE,                   PATH_SNOWHEAD,                0x00009,                    NOTHING
+Path to Snowhead Small Snowball Back 2,                 snowball,       NONE,                   PATH_SNOWHEAD,                0x0000a,                    NOTHING
+Path to Snowhead Small Snowball Back 3,                 snowball,       NONE,                   PATH_SNOWHEAD,                0x0000b,                    NOTHING
+Path to Snowhead Small Snowball Spring Middle 1,        snowball,       NONE,                   PATH_SNOWHEAD,                0x04005,                    MAGIC_JAR_LARGE
+Path to Snowhead Small Snowball Spring Middle 2,        snowball,       NONE,                   PATH_SNOWHEAD,                0x04006,                    MAGIC_JAR_LARGE
+Path to Snowhead Small Snowball Spring Back 1,          snowball,       NONE,                   PATH_SNOWHEAD,                0x04007,                    MAGIC_JAR_LARGE
+Path to Snowhead Small Snowball Spring Back 2,          snowball,       NONE,                   PATH_SNOWHEAD,                0x04008,                    MAGIC_JAR_LARGE
 Path to Snowhead Grotto,                                chest,          NONE,                   GROTTOS,                      0x13,                       RUPEE_RED
 Path to Snowhead Grotto Grass 01,                       grass,          NONE,                   GROTTOS,                      0x03300,                    RANDOM
 Path to Snowhead Grotto Grass 02,                       grass,          NONE,                   GROTTOS,                      0x03301,                    RANDOM
@@ -984,6 +1085,22 @@ Path to Snowhead Grotto Grass 13,                       grass,          NONE,   
 Path to Snowhead Grotto Grass 14,                       grass,          NONE,                   GROTTOS,                      0x03313,                    RANDOM
 Snowhead Great Fairy,                                   npc,            NONE,                   FAIRY_FOUNTAIN,               GREAT_FAIRY_MOUNTAIN,       MAGIC_UPGRADE
 Snowhead Owl Statue,                                    npc,            NONE,                   FAIRY_FOUNTAIN,               OWL_SNOWHEAD,               OWL_SNOWHEAD
+Snowhead Big Snowball 1,                                snowball,       NONE,                   SNOWHEAD,                     0x0002e,                    MAGIC_JAR_SMALL
+Snowhead Big Snowball 2,                                snowball,       NONE,                   SNOWHEAD,                     0x0002f,                    MAGIC_JAR_SMALL
+Snowhead Big Snowball 3,                                snowball,       NONE,                   SNOWHEAD,                     0x00030,                    MAGIC_JAR_SMALL
+Snowhead Big Snowball 4,                                snowball,       NONE,                   SNOWHEAD,                     0x00031,                    MAGIC_JAR_SMALL
+Snowhead Big Snowball 5,                                snowball,       NONE,                   SNOWHEAD,                     0x00032,                    MAGIC_JAR_SMALL
+Snowhead Big Snowball 6,                                snowball,       NONE,                   SNOWHEAD,                     0x00033,                    MAGIC_JAR_SMALL
+Snowhead Small Snowball 1,                              snowball,       NONE,                   SNOWHEAD,                     0x0002a,                    BOMBS_5
+Snowhead Small Snowball 2,                              snowball,       NONE,                   SNOWHEAD,                     0x0002b,                    ARROWS_20
+Snowhead Small Snowball 3,                              snowball,       NONE,                   SNOWHEAD,                     0x0002c,                    FLEXIBLE
+Snowhead Small Snowball 4,                              snowball,       NONE,                   SNOWHEAD,                     0x0002d,                    MAGIC_JAR_LARGE
+Snowhead Small Snowball Spring 1,                       snowball,       NONE,                   SNOWHEAD,                     0x0400e,                    RECOVERY_HEART
+Snowhead Small Snowball Spring 2,                       snowball,       NONE,                   SNOWHEAD,                     0x0400f,                    RECOVERY_HEART
+Snowhead Small Snowball Spring 3,                       snowball,       NONE,                   SNOWHEAD,                     0x04010,                    MAGIC_JAR_SMALL
+Snowhead Small Snowball Spring 4,                       snowball,       NONE,                   SNOWHEAD,                     0x04011,                    RECOVERY_HEART
+Snowhead Small Snowball Spring 5,                       snowball,       NONE,                   SNOWHEAD,                     0x04013,                    MAGIC_JAR_SMALL
+Snowhead Small Snowball Spring Out of Bounds,           snowball,       NONE,                   SNOWHEAD,                     0x04012,                    MAGIC_JAR_SMALL
 Goron Race Reward,                                      npc,            GORON_RACE,             GORON_RACETRACK,              GORON_RACE,                 BOTTLED_GOLD_DUST
 Goron Race Pot 01,                                      pot,            NONE,                   GORON_RACETRACK,              0x0002,                     MAGIC_JAR_LARGE
 Goron Race Pot 02,                                      pot,            NONE,                   GORON_RACETRACK,              0x0003,                     MAGIC_JAR_LARGE
@@ -1110,6 +1227,10 @@ Cucco Shack Wonder Item 6,                              wonder,         NONE,   
 Cucco Shack Crate 1,                                    crate,          NONE,                   CUCCO_SHACK,                  0x0000e,                    NOTHING
 Cucco Shack Crate 2,                                    crate,          NONE,                   CUCCO_SHACK,                  0x0000f,                    NOTHING
 Cucco Shack Crate 3,                                    crate,          NONE,                   CUCCO_SHACK,                  0x00016,                    ARROWS_10
+Cucco Shack Potted Plant 1 Pot,                         pot,            NONE,                   CUCCO_SHACK,                  0x0000d,                    NOTHING
+Cucco Shack Potted Plant 1 Grass,                       grass,          NONE,                   CUCCO_SHACK,                  0x1000d,                    NOTHING
+Cucco Shack Potted Plant 2 Pot,                         pot,            NONE,                   CUCCO_SHACK,                  0x00017,                    NOTHING
+Cucco Shack Potted Plant 2 Grass,                       grass,          NONE,                   CUCCO_SHACK,                  0x10017,                    RUPEE_BLUE
 Doggy Racetrack Chest,                                  chest,          NONE,                   DOG_RACETRACK,                0x00,                       RUPEE_PURPLE
 Doggy Racetrack HP,                                     npc,            NONE,                   DOG_RACETRACK,                DOG_LADY_HEART_PIECE,       HEART_PIECE
 Doggy Racetrack Pot 1,                                  pot,            NONE,                   DOG_RACETRACK,                0x0009,                     RUPEE_BLUE
@@ -1736,9 +1857,36 @@ Snowhead Temple Grass 10,                               grass,          NONE,   
 Snowhead Temple Rupee 1,                                rupee,          NONE,                   TEMPLE_SNOWHEAD,              0x00700,                    RUPEE_RED
 Snowhead Temple Rupee 2,                                rupee,          NONE,                   TEMPLE_SNOWHEAD,              0x00701,                    RUPEE_RED
 Snowhead Temple Rupee 3,                                rupee,          NONE,                   TEMPLE_SNOWHEAD,              0x00702,                    RUPEE_RED
+Snowhead Temple Big Snowball Central Room 1,            snowball,       NONE,                   TEMPLE_SNOWHEAD,              0x0044b,                    RECOVERY_HEART
+Snowhead Temple Big Snowball Central Room 2,            snowball,       NONE,                   TEMPLE_SNOWHEAD,              0x0044c,                    RECOVERY_HEART
+Snowhead Temple Big Snowball Central Room 3,            snowball,       NONE,                   TEMPLE_SNOWHEAD,              0x0044d,                    MAGIC_JAR_LARGE
+Snowhead Temple Big Snowball Central Room 4,            snowball,       NONE,                   TEMPLE_SNOWHEAD,              0x0044e,                    MAGIC_JAR_LARGE
+Snowhead Temple Big Snowball Icicle Room,               snowball,       NONE,                   TEMPLE_SNOWHEAD,              0x0071a,                    NOTHING
+Snowhead Temple Small Snowball Bridge Room 1,           snowball,       NONE,                   TEMPLE_SNOWHEAD,              0x00203,                    MAGIC_JAR_SMALL
+Snowhead Temple Small Snowball Bridge Room 2,           snowball,       NONE,                   TEMPLE_SNOWHEAD,              0x00204,                    MAGIC_JAR_SMALL
+Snowhead Temple Small Snowball Icicles Room 1,          snowball,       NONE,                   TEMPLE_SNOWHEAD,              0x00708,                    RUPEE_BLUE
+Snowhead Temple Small Snowball Icicles Room 2,          snowball,       NONE,                   TEMPLE_SNOWHEAD,              0x00709,                    RUPEE_BLUE
+Snowhead Temple Small Snowball Icicles Room 3,          snowball,       NONE,                   TEMPLE_SNOWHEAD,              0x0070a,                    RUPEE_BLUE
+Snowhead Temple Small Snowball Icicles Room 4,          snowball,       NONE,                   TEMPLE_SNOWHEAD,              0x0070b,                    ARROWS_10
+Snowhead Temple Small Snowball Icicles Room 5,          snowball,       NONE,                   TEMPLE_SNOWHEAD,              0x0070c,                    ARROWS_10
+Snowhead Temple Small Snowball Snow Room 1,             snowball,       NONE,                   TEMPLE_SNOWHEAD,              0x00a08,                    NOTHING
+Snowhead Temple Small Snowball Snow Room 2,             snowball,       NONE,                   TEMPLE_SNOWHEAD,              0x00a09,                    NOTHING
+Snowhead Temple Small Snowball Snow Room 3,             snowball,       NONE,                   TEMPLE_SNOWHEAD,              0x00a0a,                    NOTHING
+Snowhead Temple Small Snowball Snow Room 4,             snowball,       NONE,                   TEMPLE_SNOWHEAD,              0x00a0b,                    NOTHING
+Snowhead Temple Small Snowball Snow Room 5,             snowball,       NONE,                   TEMPLE_SNOWHEAD,              0x00a0c,                    NOTHING
+Snowhead Temple Small Snowball Snow Room 6,             snowball,       NONE,                   TEMPLE_SNOWHEAD,              0x00a0d,                    MAGIC_JAR_SMALL
+Snowhead Temple Small Snowball Snow Room 7,             snowball,       NONE,                   TEMPLE_SNOWHEAD,              0x00a0e,                    MAGIC_JAR_SMALL
+Snowhead Temple Small Snowball Snow Room 8,             snowball,       NONE,                   TEMPLE_SNOWHEAD,              0x00a0f,                    MAGIC_JAR_SMALL
+Snowhead Temple Small Snowball Central Room 1,          snowball,       NONE,                   TEMPLE_SNOWHEAD,              0x00421,                    RECOVERY_HEART
+Snowhead Temple Small Snowball Central Room 2,          snowball,       NONE,                   TEMPLE_SNOWHEAD,              0x00422,                    RECOVERY_HEART
+Snowhead Temple Small Snowball Central Room 3,          snowball,       NONE,                   TEMPLE_SNOWHEAD,              0x00426,                    ARROWS_10
+Snowhead Temple Small Snowball Central Room 4,          snowball,       NONE,                   TEMPLE_SNOWHEAD,              0x00423,                    MAGIC_JAR_SMALL
+Snowhead Temple Small Snowball Central Room 5,          snowball,       NONE,                   TEMPLE_SNOWHEAD,              0x00424,                    MAGIC_JAR_SMALL
+Snowhead Temple Small Snowball Central Room 6,          snowball,       NONE,                   TEMPLE_SNOWHEAD,              0x00425,                    MAGIC_JAR_SMALL
 Pirate Fortress Entrance Chest 1,                       chest,          NONE,                   PIRATE_FORTRESS_ENTRANCE,     0x00,                       RUPEE_RED
 Pirate Fortress Entrance Chest 2,                       chest,          NONE,                   PIRATE_FORTRESS_ENTRANCE,     0x01,                       RUPEE_RED
 Pirate Fortress Entrance Chest 3,                       chest,          NONE,                   PIRATE_FORTRESS_ENTRANCE,     0x02,                       RUPEE_RED
+Pirate Fortress Entrance Barrel,                        barrel,         NONE,                   PIRATE_FORTRESS_ENTRANCE,     0x00007,                    NOTHING
 Pirate Fortress Sewers Chest 1,                         chest,          NONE,                   PIRATE_FORTRESS_INTERIOR,     0x01,                       RUPEE_RED
 Pirate Fortress Sewers Chest 2,                         chest,          NONE,                   PIRATE_FORTRESS_INTERIOR,     0x04,                       RUPEE_RED
 Pirate Fortress Sewers Chest 3,                         chest,          NONE,                   PIRATE_FORTRESS_INTERIOR,     0x06,                       RUPEE_BLUE
@@ -1776,9 +1924,34 @@ Pirate Fortress Interior Pot Barrel Maze 2,             pot,            NONE,   
 Pirate Fortress Interior Pot Barrel Maze 3,             pot,            NONE,                   PIRATE_FORTRESS_INTERIOR,     0x0806,                     ARROWS_10
 Pirate Fortress Interior Pot Guarded 1,                 pot,            NONE,                   PIRATE_FORTRESS_INTERIOR,     0x0d06,                     RECOVERY_HEART
 Pirate Fortress Interior Pot Guarded 2,                 pot,            NONE,                   PIRATE_FORTRESS_INTERIOR,     0x0d07,                     ARROWS_10
+Pirate Fortress Interior Barrel Hookshot Room 1,        barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00306,                    NOTHING
+Pirate Fortress Interior Barrel Hookshot Room 2,        barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00307,                    NOTHING
+Pirate Fortress Interior Barrel Aquarium,               barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00d01,                    NOTHING
+Pirate Fortress Sewers Barrel End 1,                    barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00905,                    NOTHING
+Pirate Fortress Sewers Barrel End 2,                    barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00906,                    NOTHING
+Pirate Fortress Sewers Barrel End 3,                    barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00907,                    NOTHING
+Pirate Fortress Sewers Barrel End 4,                    barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00908,                    NOTHING
+Pirate Fortress Sewers Barrel End 5,                    barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00909,                    NOTHING
+Pirate Fortress Sewers Barrel Cage Room 01,             barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b06,                    NOTHING
+Pirate Fortress Sewers Barrel Cage Room 02,             barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b07,                    NOTHING
+Pirate Fortress Sewers Barrel Cage Room 03,             barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b08,                    NOTHING
+Pirate Fortress Sewers Barrel Cage Room 04,             barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b09,                    NOTHING
+Pirate Fortress Sewers Barrel Cage Room 05,             barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b0a,                    NOTHING
+Pirate Fortress Sewers Barrel Cage Room 06,             barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b0b,                    NOTHING
+Pirate Fortress Sewers Barrel Cage Room 07,             barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b0c,                    NOTHING
+Pirate Fortress Sewers Barrel Cage Room 08,             barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b0d,                    NOTHING
+Pirate Fortress Sewers Barrel Cage Room 09,             barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b0e,                    NOTHING
+Pirate Fortress Sewers Barrel Cage Room 10,             barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b0f,                    NOTHING
+Pirate Fortress Sewers Barrel Cage Room 11,             barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b10,                    NOTHING
+Pirate Fortress Sewers Barrel Cage Room 12,             barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b11,                    NOTHING
+Pirate Fortress Sewers Barrel Cage Room 13,             barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b12,                    NOTHING
+Pirate Fortress Sewers Barrel Cage Room 14,             barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b13,                    NOTHING
+Pirate Fortress Sewers Barrel Cage Room 15,             barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b14,                    NOTHING
+Pirate Fortress Sewers Barrel Cage Room 16,             barrel,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00b15,                    NOTHING
 Pirate Fortress Interior Wonder Item Skull Forehead 1,  wonder,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x00309,                    RUPEE_GREEN
 Pirate Fortress Interior Wonder Item Skull Forehead 2,  wonder,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x10309,                    RUPEE_GREEN
 Pirate Fortress Interior Wonder Item Skull Forehead 3,  wonder,         NONE,                   PIRATE_FORTRESS_INTERIOR,     0x20309,                    RUPEE_GREEN
+Pirate Fortress Interior Barrel Outside,                barrel,         NONE,                   PIRATE_FORTRESS_EXTERIOR,     0x00008,                    NOTHING
 Pirate Fortress Interior Heart 1,                       heart,          NONE,                   PIRATE_FORTRESS_EXTERIOR,     0x00020,                    RECOVERY_HEART
 Pirate Fortress Interior Heart 2,                       heart,          NONE,                   PIRATE_FORTRESS_EXTERIOR,     0x00021,                    RECOVERY_HEART
 Pirate Fortress Interior Heart 3,                       heart,          NONE,                   PIRATE_FORTRESS_EXTERIOR,     0x00022,                    RECOVERY_HEART
@@ -1913,6 +2086,24 @@ Great Bay Temple Crate Green Pipe 4,                    crate,          NONE,   
 Great Bay Temple Crate Green Pipe 5,                    crate,          NONE,                   TEMPLE_GREAT_BAY,             0x00a1a,                    MAGIC_JAR_LARGE
 Great Bay Temple Crate Green Pipe 6,                    crate,          NONE,                   TEMPLE_GREAT_BAY,             0x00a1b,                    MAGIC_JAR_LARGE
 Great Bay Temple Crate Green Pipe 7,                    crate,          NONE,                   TEMPLE_GREAT_BAY,             0x00a1c,                    MAGIC_JAR_LARGE
+Great Bay Temple Barrel Entrance 1,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00d00,                    NOTHING
+Great Bay Temple Barrel Entrance 2,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00d01,                    RECOVERY_HEART
+Great Bay Temple Barrel Entrance 3,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00d02,                    RECOVERY_HEART
+Great Bay Temple Barrel Entrance 4,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00d03,                    FLEXIBLE
+Great Bay Temple Barrel Entrance 5,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00d04,                    BOMBS_5
+Great Bay Temple Barrel Entrance 6,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00d05,                    BOMBS_5
+Great Bay Temple Barrel Entrance 7,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00d06,                    ARROWS_10
+Great Bay Temple Barrel Entrance 8,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00d07,                    ARROWS_10
+Great Bay Temple Barrel Chu Room 1,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00202,                    NOTHING
+Great Bay Temple Barrel Chu Room 2,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00203,                    RECOVERY_HEART
+Great Bay Temple Barrel Chu Room 3,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00204,                    RECOVERY_HEART
+Great Bay Temple Barrel Chu Room 4,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00205,                    BOMBS_5
+Great Bay Temple Barrel Chu Room 5,                     barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00206,                    ARROWS_10
+Great Bay Temple Barrel Green Pipe 1 1,                 barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00c0a,                    RECOVERY_HEART
+Great Bay Temple Barrel Green Pipe 1 2,                 barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00c0b,                    BOMBS_5
+Great Bay Temple Barrel Green Pipe 1 3,                 barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00c0c,                    ARROWS_20
+Great Bay Temple Barrel Green Pipe 2 1,                 barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00906,                    MAGIC_JAR_LARGE
+Great Bay Temple Barrel Green Pipe 2 2,                 barrel,         NONE,                   TEMPLE_GREAT_BAY,             0x00907,                    MAGIC_JAR_LARGE
 Great Bay Temple Rupee Compass Room 1,                  rupee,          NONE,                   TEMPLE_GREAT_BAY,             0x00400,                    RUPEE_RED
 Great Bay Temple Rupee Compass Room 2,                  rupee,          NONE,                   TEMPLE_GREAT_BAY,             0x00401,                    RUPEE_RED
 Great Bay Temple Rupee Entrance 1,                      rupee,          NONE,                   TEMPLE_GREAT_BAY,             0x00800,                    RUPEE_RED

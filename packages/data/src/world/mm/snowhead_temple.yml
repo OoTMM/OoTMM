@@ -45,6 +45,8 @@
     "Snowhead Temple Pot Bridge Room 3": "true"
     "Snowhead Temple Pot Bridge Room 4": "true"
     "Snowhead Temple Pot Bridge Room 5": "true"
+    "Snowhead Temple Small Snowball Bridge Room 1": "true"
+    "Snowhead Temple Small Snowball Bridge Room 2": "true"
 "Snowhead Temple Bridge Back":
   dungeon: SH
   exits:
@@ -194,6 +196,12 @@
     "Snowhead Temple Rupee 1": "has_arrows"
     "Snowhead Temple Rupee 2": "has_arrows"
     "Snowhead Temple Rupee 3": "has_arrows"
+    "Snowhead Temple Big Snowball Icicle Room": "((has_arrows || is_tall || can_use_lens || short_hook_anywhere) && has_mask_goron) || has_explosives || trick_keg_explosives || can_use_fire_short_range"
+    "Snowhead Temple Small Snowball Icicles Room 1": "is_tall || has_arrows || short_hook_anywhere"
+    "Snowhead Temple Small Snowball Icicles Room 2": "is_tall || has_arrows || short_hook_anywhere"
+    "Snowhead Temple Small Snowball Icicles Room 3": "is_tall || has_arrows || short_hook_anywhere"
+    "Snowhead Temple Small Snowball Icicles Room 4": "true"
+    "Snowhead Temple Small Snowball Icicles Room 5": "true"
 "Snowhead Temple Dual Switches Locked":
   dungeon: SH
   exits:
@@ -247,6 +255,9 @@
     "WARP_SONGS": "true"
   locations:
     "Snowhead Temple Central Room Alcove": "can_use_lens"
+    "Snowhead Temple Small Snowball Central Room 1": "true"
+    "Snowhead Temple Small Snowball Central Room 2": "true"
+    "Snowhead Temple Small Snowball Central Room 3": "true"
 "Snowhead Temple Center Level 3 Iced":
   dungeon: SH
   events:
@@ -260,6 +271,9 @@
     "WARP_SONGS": "true"
   locations:
     "Snowhead Temple Central Room Alcove": "can_use_lens"
+    "Snowhead Temple Small Snowball Central Room 4": "true"
+    "Snowhead Temple Small Snowball Central Room 5": "true"
+    "Snowhead Temple Small Snowball Central Room 6": "true"
 "Snowhead Temple Snow Room":
   dungeon: SH
   exits:
@@ -268,6 +282,14 @@
     "WARP_SONGS": "true"
   locations:
     "Snowhead Temple SF Snow Room": "can_use_lens && (((has_arrows || can_hookshot_short) && has(MASK_GREAT_FAIRY)) || short_hook_anywhere)"
+    "Snowhead Temple Small Snowball Snow Room 1": "true"
+    "Snowhead Temple Small Snowball Snow Room 2": "true"
+    "Snowhead Temple Small Snowball Snow Room 3": "true"
+    "Snowhead Temple Small Snowball Snow Room 4": "true"
+    "Snowhead Temple Small Snowball Snow Room 5": "true"
+    "Snowhead Temple Small Snowball Snow Room 6": "true"
+    "Snowhead Temple Small Snowball Snow Room 7": "true"
+    "Snowhead Temple Small Snowball Snow Room 8": "true"
 "Snowhead Temple Dinolfos Room":
   dungeon: SH
   exits:
@@ -306,6 +328,11 @@
     "Snowhead Temple Boss Key Room": "has_mask_goron || short_hook_anywhere"
     "Snowhead Temple Dinolfos Room": "has_mask_goron || short_hook_anywhere"
     "WARP_SONGS": "true"
+  locations:
+    "Snowhead Temple Big Snowball Central Room 1": "can_break_snowballs"
+    "Snowhead Temple Big Snowball Central Room 2": "can_break_snowballs"
+    "Snowhead Temple Big Snowball Central Room 3": "can_break_snowballs"
+    "Snowhead Temple Big Snowball Central Room 4": "can_break_snowballs"
 "Snowhead Temple Boss Access":
   dungeon: SH
   exits:

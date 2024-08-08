@@ -1197,6 +1197,8 @@ typedef struct {
 #define SEGADDR_FROM_OFFSET(segment, offset) ((void*)(((segment) << 24) | offset))
 #define CHECK_FLAG_ALL(flags, mask) (((flags) & (mask)) == (mask))
 
+#define SEGADDR_CIRCLE_SHADOW_DL (OS_K0_TO_PHYSICAL(SEGADDR_FROM_OFFSET(4, 0x76BC0)))
+
 typedef enum AnimationMode {
     /* 0 */ ANIMMODE_LOOP,
     /* 1 */ ANIMMODE_LOOP_INTERP,
