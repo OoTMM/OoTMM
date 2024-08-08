@@ -69,7 +69,7 @@ export function isPreactivatedOwls(world: World) {
     return true;
   if (world.resolvedFlags.mmPreActivatedOwls.has('canyon'))
     return true;
-  if (world.resolvedFlags.mmPreActivatedOwls.has('cower'))
+  if (world.resolvedFlags.mmPreActivatedOwls.has('tower'))
     return true;
   return false;
 }
