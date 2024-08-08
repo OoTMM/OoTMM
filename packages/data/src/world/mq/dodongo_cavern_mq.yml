@@ -144,12 +144,12 @@
 "Dodongo Cavern Upper Lizalfos":
   dungeon: DC
   exits:
-    "Dodongo Cavern Room Before Upper Lizalfos": "event(MQ_DC_UPPER_LIZALFOS_CLEAR_FROM_UPPER) || (event(MQ_DC_UPPER_LIZALFOS_CLEAR_FROM_LOWER)"
-    "Dodongo Cavern Room After Upper Lizalfos": "event(MQ_DC_UPPER_LIZALFOS_CLEAR_FROM_UPPER) || (event(MQ_DC_UPPER_LIZALFOS_CLEAR_FROM_LOWER)"
+    "Dodongo Cavern Room Before Upper Lizalfos": "event(MQ_DC_UPPER_LIZALFOS_CLEAR_FROM_UPPER) || event(MQ_DC_UPPER_LIZALFOS_CLEAR_FROM_LOWER)"
+    "Dodongo Cavern Room After Upper Lizalfos": "event(MQ_DC_UPPER_LIZALFOS_CLEAR_FROM_UPPER) || event(MQ_DC_UPPER_LIZALFOS_CLEAR_FROM_LOWER)"
     #"Dodongo Cavern Lower Lizalfos": "has_explosives_or_hammer || hookshot_anywhere || climb_anywhere"
   events:
     MMQ_DC_UPPER_LIZALFOS_CLEAR_FROM_UPPER: "soul_lizalfos_dinalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
-    MQ_DC_LOWER_LIZALFOS_CLEAR_FROM_UPPER: "(has_explosives_or_hammer || hookshot_anywhere || climb_anywhere) && soul_lizalfos_dinalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
+    MQ_DC_LOWER_LIZALFOS_CLEAR_FROM_UPPER: "(time_travel_at_will && (has_explosives_or_hammer || hookshot_anywhere || climb_anywhere)) && soul_lizalfos_dinalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
   locations:
     "MQ Dodongo Cavern GS Upper Lizalfos": "gs && (has_explosives_or_hammer || longshot_anywhere)"
     "MQ Dodongo Cavern Pot Miniboss 1": "true"
