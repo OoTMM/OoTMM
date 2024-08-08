@@ -336,8 +336,8 @@ export const TRICKS: Tricks = {
   },
   OOT_BOTW_MQ_BACKFLIP: {
     game: 'oot',
-    name: "Backflip Over Gap to Reach BotW MQ's Main Room's Center",
-    tooltip: "Makes reachable the center of the main room without Zelda's Lullaby (that opens gates) or Hover Boots.",
+    name: "Backflip/Sidehop Over Gap to Reach BotW MQ's Main Room's Center",
+    tooltip: "Makes reachable the center of the main room without Zelda's Lullaby or Hover Boots.",
   },
   MM_LENS: {
     game: 'mm',
