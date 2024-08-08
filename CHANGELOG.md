@@ -17,6 +17,7 @@ All notable changes to this project will be documented in this file.
 - Choice to pre-activate owl statues.
 - Crates shuffle, for OoT and MM.
 - The boat cruise is now faster if you are not playing the archery.
+- New entrance option for Pirate Fortress that includes all the currently shuffled entrances.
 
 ### Changed
 
@@ -26,6 +27,9 @@ All notable changes to this project will be documented in this file.
 - Internal names of the music tracks, for an easier sorting in the cosmetics log.
 - Adult can now jump from the windmill to the back of Kakariko within logic.
 - It is now logical for adult to cross the Gerudo Fortress gate in reverse by getting captured.
+- Pirate Fortress Sewers Exit door now requires the Pirate Fortress Entrances option to be shuffled.
+- Pirate Fortress Sewers Gate and interior passages now require the Pirate Fortress Entrances option to be shuffled.
+- Pirate Fortress will no longer be considered a dungeon if its entrances are shuffled among the overworld.
 
 ### Fixed
 
