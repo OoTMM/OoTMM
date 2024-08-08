@@ -167,7 +167,7 @@
     MQ_DC_UPPER_LIZALFOS_CLEAR_FROM_UPPER: "soul_lizalfos_dinalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
     MQ_DC_LOWER_LIZALFOS_CLEAR_FROM_UPPER: "(time_travel_at_will && (has_explosives_or_hammer || hookshot_anywhere || climb_anywhere)) && soul_lizalfos_dinalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
   locations:
-    "MQ Dodongo Cavern GS Upper Lizalfos": "gs && (has_explosives_or_hammer || climb_anywhere || longshot_anywhere)"
+    "MQ Dodongo Cavern GS Upper Lizalfos": "gs && (has_explosives_or_hammer || (climb_anywhere && can_damage_skull) || longshot_anywhere)"
     "MQ Dodongo Cavern Pot Miniboss 1": "true"
     "MQ Dodongo Cavern Pot Miniboss 2": "true"
     "MQ Dodongo Cavern Pot Miniboss 3": "true"
