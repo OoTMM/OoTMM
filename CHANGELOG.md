@@ -29,7 +29,6 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
-- Logic issue with the Gold Skulltula on the plateau of Desert Colossus
 - Logic issue with Romani Ranch Stables access.
 - Logic issue with Kafei's check in seeds without shuffled interiors.
 - Starting age no longer defaults to either child or adult after generating a random starting age seed.
@@ -38,6 +37,7 @@ All notable changes to this project will be documented in this file.
 - Title cards not being displayed on game transitions.
 - MQ Forest Temple freestanding hearts logic issue.
 - The two pots next to the hag's potion shop in Kakariko now check for being in the back.
+- All adult logic now correctly check for some way to do damage.
 
 ## [24.1] - 2024-07-11
 

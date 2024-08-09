@@ -11,7 +11,7 @@
     "Water Temple Center Bottom": "event(WATER_LEVEL_LOW) && small_keys_water(5)"
     "Water Temple Center Middle": "event(WATER_LEVEL_LOW) && (can_use_din || can_use_bow)"
     "Water Temple Compass Room": "(has_tunic_zora && has_iron_boots && can_hookshot) || (event(WATER_LEVEL_LOW) && (can_hookshot || climb_anywhere))"
-    "Water Temple Dragon Room": "event(WATER_LEVEL_LOW) && has_goron_bracelet && can_dive_small && (has_weapon || has_ranged_weapon || has_explosives_or_hammer)"
+    "Water Temple Dragon Room": "event(WATER_LEVEL_LOW) && has_goron_bracelet && can_dive_small && (can_use_sword || has_ranged_weapon || has_explosives_or_hammer)"
     "Water Temple Elevator": "(small_keys_water(5) && (can_hookshot || climb_anywhere)) || can_use_bow || can_use_din"
     "Water Temple Corridor": "(can_longshot || has_hover_boots || hookshot_anywhere) && can_hit_triggers_distance && event(WATER_LEVEL_LOW)"
     "Water Temple Waterfalls": "has_tunic_zora && small_keys_water(4) && (can_longshot || climb_anywhere || hookshot_anywhere) && (has_iron_boots || event(WATER_LEVEL_LOW))"
@@ -69,7 +69,7 @@
 "Water Temple Compass Room":
   dungeon: Water
   locations:
-    "Water Temple Compass": "has_weapon || can_use_sticks || has_ranged_weapon || has_explosives_or_hammer"
+    "Water Temple Compass": "can_use_sword || can_use_sticks || has_ranged_weapon || has_explosives_or_hammer"
     "Water Temple Pot Compass Room 1": "true"
     "Water Temple Pot Compass Room 2": "true"
     "Water Temple Pot Compass Room 3": "true"
@@ -106,7 +106,7 @@
   exits:
     "Water Temple Boss Key Room": "small_keys_water(5) && ((is_adult && can_dive_small) || has_iron_boots || hookshot_anywhere)"
   locations:
-    "Water Temple GS Waterfalls": "gs && (is_adult || can_collect_distance || ((can_use_sword_master || (age_sword_adult && has(SWORD_BIGGORON)) || can_use_sticks || has_ranged_weapon || can_use_din || (has_hover_boots && (can_use_sword_kokiri || can_use_sword_goron || has_explosives))) && (has_hover_boots || climb_anywhere)))"
+    "Water Temple GS Waterfalls": "gs && (can_collect_distance || ((can_use_sword_gilded || can_use_sword_master || (age_sword_adult && has(SWORD_BIGGORON)) || can_use_sticks || has_ranged_weapon || can_use_din || (has_hover_boots && (can_use_sword_kokiri || can_use_sword_goron || has_explosives))) && (has_hover_boots || climb_anywhere)))"
 "Water Temple Boss Key Room":
   dungeon: Water
   locations:
@@ -129,8 +129,8 @@
 "Water Temple Dark Link":
   dungeon: Water
   exits:
-    "Water Temple Longshot Room": "soul_enemy(SOUL_ENEMY_DARK_LINK) && has_weapon"
-    "Water Temple Before Dark Link": "soul_enemy(SOUL_ENEMY_DARK_LINK) && has_weapon"
+    "Water Temple Longshot Room": "soul_enemy(SOUL_ENEMY_DARK_LINK) && can_use_sword"
+    "Water Temple Before Dark Link": "soul_enemy(SOUL_ENEMY_DARK_LINK) && can_use_sword"
 "Water Temple Longshot Room":
   dungeon: Water
   exits:
@@ -167,11 +167,11 @@
 "Water Temple Inside Cage":
   dungeon: Water
   locations:
-    "Water Temple GS Cage": "gs && (has_weapon || can_use_sticks)"
-    "Water Temple Pot Skull Cage 1": "has_weapon || can_use_sticks"
-    "Water Temple Pot Skull Cage 2": "has_weapon || can_use_sticks"
-    "Water Temple Pot Skull Cage 3": "has_weapon || can_use_sticks"
-    "Water Temple Pot Skull Cage 4": "has_weapon || can_use_sticks"
+    "Water Temple GS Cage": "gs && can_use_sword_or_sticks"
+    "Water Temple Pot Skull Cage 1": "can_use_sword_or_sticks"
+    "Water Temple Pot Skull Cage 2": "can_use_sword_or_sticks"
+    "Water Temple Pot Skull Cage 3": "can_use_sword_or_sticks"
+    "Water Temple Pot Skull Cage 4": "can_use_sword_or_sticks"
 "Water Temple Antichamber Room":
   dungeon: Water
   exits:

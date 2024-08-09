@@ -20,7 +20,7 @@
   dungeon: DC
   exits:
     "Dodongo Cavern Main": "true"
-    "Dodongo Cavern Side Room": "(soul_enemy(SOUL_ENEMY_BABY_DODONGO) && (has_weapon || can_use_sticks)) || has_explosives_or_hammer || has_blue_fire_arrows_mudwall"
+    "Dodongo Cavern Side Room": "(soul_enemy(SOUL_ENEMY_BABY_DODONGO) && (can_use_sword || can_use_sticks)) || has_explosives_or_hammer || has_blue_fire_arrows_mudwall"
     "Dodongo Cavern Miniboss 1": "true"
   locations:
     "Dodongo Cavern GS Scarecrow": "gs && ((is_adult && scarecrow_hookshot) || (climb_anywhere && can_damage_skull) || hookshot_anywhere)"
@@ -41,8 +41,8 @@
 "Dodongo Cavern Miniboss 1":
   dungeon: DC
   exits:
-    "Dodongo Cavern Right Corridor": "soul_lizalfos_dinalfos && (can_use_sticks || has_weapon || can_use_slingshot || can_hammer)"
-    "Dodongo Cavern Green Room": "soul_lizalfos_dinalfos && (can_use_sticks || has_weapon || can_use_slingshot || can_hammer)"
+    "Dodongo Cavern Right Corridor": "soul_lizalfos_dinalfos && (can_use_sticks || can_use_sword || can_use_slingshot || can_hammer)"
+    "Dodongo Cavern Green Room": "soul_lizalfos_dinalfos && (can_use_sticks || can_use_sword || can_use_slingshot || can_hammer)"
     "Dodongo Cavern Miniboss 2": "time_travel_at_will && (climb_anywhere || (is_adult && hookshot_anywhere) || longshot_anywhere)"
   locations:
     "Dodongo Cavern Pot Miniboss 1": "true"
@@ -123,8 +123,8 @@
 "Dodongo Cavern Miniboss 2":
   dungeon: DC
   exits:
-    "Dodongo Cavern Bomb Bag Room 1": "soul_lizalfos_dinalfos && (can_use_sticks || has_weapon || can_use_slingshot || can_hammer)"
-    "Dodongo Cavern Bomb Bag Room 2": "soul_lizalfos_dinalfos && (can_use_sticks || has_weapon || can_use_slingshot || can_hammer)"
+    "Dodongo Cavern Bomb Bag Room 1": "soul_lizalfos_dinalfos && (can_use_sticks || can_use_sword || can_use_slingshot || can_hammer)"
+    "Dodongo Cavern Bomb Bag Room 2": "soul_lizalfos_dinalfos && (can_use_sticks || can_use_sword || can_use_slingshot || can_hammer)"
     "Dodongo Cavern Miniboss 1": "time_travel_at_will"
   locations:
     "Dodongo Cavern Pot Miniboss 1": "true"

@@ -87,7 +87,7 @@
   dungeon: Fire
   locations:
     "Fire Temple Scarecrow Chest": "true"
-    "Fire Temple GS Scarecrow Wall": "gs && (has_weapon || has_ranged_weapon || has_explosives || can_use_sticks || can_use_din)"
+    "Fire Temple GS Scarecrow Wall": "gs && (can_use_sword || has_ranged_weapon || has_explosives || can_use_sticks || can_use_din)"
     "Fire Temple GS Scarecrow Top": "gs && (can_hookshot || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_din)))"
 "Fire Temple Ring":
   dungeon: Fire
@@ -103,7 +103,7 @@
 "Fire Temple Before Miniboss":
   dungeon: Fire
   exits:
-    "Fire Temple After Miniboss": "soul_enemy(SOUL_ENEMY_FLARE_DANCER) && has_explosives && (has_weapon || can_hammer || can_use_sticks)"
+    "Fire Temple After Miniboss": "soul_enemy(SOUL_ENEMY_FLARE_DANCER) && has_explosives && (can_use_sword || can_hammer || can_use_sticks)"
     "Fire Temple Pillar Ledge": "can_play_time || hookshot_anywhere || climb_anywhere"
   locations:
     "Fire Temple Ring Jail": "can_hammer && can_play_time"
