@@ -158,6 +158,7 @@
 "has_ranged_weapon_child": "can_use_slingshot || can_boomerang"
 "has_ranged_weapon_adult": "can_use_bow || can_hookshot"
 "has_ranged_weapon": "has_ranged_weapon_child || has_ranged_weapon_adult"
+"has_weapon": "can_use_sword"
 "can_collect_distance": "can_hookshot || can_boomerang"
 "scarecrow_hookshot": "has_ocarina && can_hookshot && (event(SCARECROW) || setting(freeScarecrowOot))"
 "scarecrow_longshot": "has_ocarina && can_longshot && (event(SCARECROW) || setting(freeScarecrowOot))"
