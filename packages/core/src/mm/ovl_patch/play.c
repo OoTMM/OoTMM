@@ -370,7 +370,7 @@ void preInitTitleScreen(void)
 
     /* Load the entrance */
     entrance = gComboCtx.entrance;
-    if (Config_Flag(CFG_ER_ANY))
+    if (Config_Flag(CFG_ER_ANY) || (Config_Flag(CFG_OOT_START_ADULT) && (!Config_Flag(CFG_DOOR_OF_TIME_OPEN) || (Config_Flag(CFG_OOT_SWORDLESS_ADULT) && Config_Flag(CFG_OOT_TIME_TRAVEL_REQUIRES_MS))) && Config_Flag(CFG_MM_CROSS_WARP_ADULT) && (Config_Flag(CFG_MM_OWL_SHUFFLE) || Config_Flag(CFG_MM_PRE_ACTIVATED_OWL_ANY))))
         g.initialEntrance = entrance;
     else
         g.initialEntrance = ENTR_MM_CLOCK_TOWN;
