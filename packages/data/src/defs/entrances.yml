@@ -103,7 +103,7 @@ OOT_VALLEY_TENT:                                { game: oot, id: 0x3a0, type: in
 OOT_HOUSE_CARPENTER:                            { game: oot, id: 0x2fd, type: indoors, areas: ["OOT Kakariko", "OOT Kakariko Carpenter House"], reverse: OOT_KAKARIKO_FROM_CARPENTER }
 OOT_HOUSE_SKULLTULA:                            { game: oot, id: 0x550, type: indoors, areas: ["OOT Kakariko", "OOT Skulltula House"], reverse: OOT_KAKARIKO_FROM_SKULLTULA }
 OOT_HOUSE_IMPA:                                 { game: oot, id: 0x39c, type: indoors, maps: [OOT_KAKARIKO, OOT_HOUSE_IMPA], areas: ["OOT Kakariko", "OOT Impa House Front"], reverse: OOT_KAKARIKO_FROM_IMPA }
-OOT_HOUSE_IMPA_BACK:                            { game: oot, id: 0x5c8, type: indoors, maps: [OOT_KAKARIKO, OOT_HOUSE_IMPA], areas: ["OOT Kakariko Rooftop", "OOT Impa House Back"], reverse: OOT_KAKARIKO_FROM_IMPA_BACK }
+OOT_HOUSE_IMPA_BACK:                            { game: oot, id: 0x5c8, type: indoors, maps: [OOT_KAKARIKO, OOT_HOUSE_IMPA], areas: ["OOT Kakariko Balcony", "OOT Impa House Back"], reverse: OOT_KAKARIKO_FROM_IMPA_BACK }
 OOT_SHOP_GRANNY:                                { game: oot, id: 0x072, type: indoors, areas: ["OOT Kakariko Back", "OOT Kakariko Granny Shop"], reverse: OOT_KAKARIKO_FROM_GRANNY }
 OOT_HOUSE_DAMPE:                                { game: oot, id: 0x30d, type: indoors, areas: ["OOT Graveyard", "OOT Dampe House"], reverse: OOT_GRAVEYARD_FROM_DAMPE }
 OOT_SHOP_GORON:                                 { game: oot, id: 0x37c, type: indoors, areas: ["OOT Goron City", "OOT Goron Shop"], reverse: OOT_GORON_CITY_FROM_SHOP }
@@ -143,7 +143,7 @@ OOT_GERUDO_VALLEY_FROM_TENT:                    { game: oot, id: 0x3d0, type: in
 OOT_KAKARIKO_FROM_CARPENTER:                    { game: oot, id: 0x349, type: indoors-exit, maps: [NONE, OOT_KAKARIKO], areas: ["OOT Kakariko Carpenter House", "OOT Kakariko"], reverse: OOT_HOUSE_CARPENTER }
 OOT_KAKARIKO_FROM_SKULLTULA:                    { game: oot, id: 0x4ee, type: indoors-exit, maps: [NONE, OOT_KAKARIKO], areas: ["OOT Skulltula House", "OOT Kakariko"], reverse: OOT_HOUSE_SKULLTULA }
 OOT_KAKARIKO_FROM_IMPA:                         { game: oot, id: 0x345, type: indoors-exit, maps: [OOT_HOUSE_IMPA, OOT_KAKARIKO], areas: ["OOT Impa House Front", "OOT Kakariko"], reverse: OOT_HOUSE_IMPA }
-OOT_KAKARIKO_FROM_IMPA_BACK:                    { game: oot, id: 0x5dc, type: indoors-exit, maps: [OOT_HOUSE_IMPA, OOT_KAKARIKO], areas: ["OOT Impa House Back", "OOT Kakariko Rooftop"], reverse: OOT_HOUSE_IMPA_BACK }
+OOT_KAKARIKO_FROM_IMPA_BACK:                    { game: oot, id: 0x5dc, type: indoors-exit, maps: [OOT_HOUSE_IMPA, OOT_KAKARIKO], areas: ["OOT Impa House Back", "OOT Kakariko Balcony"], reverse: OOT_HOUSE_IMPA_BACK }
 OOT_KAKARIKO_FROM_GRANNY:                       { game: oot, id: 0x34d, type: indoors-exit, maps: [NONE, OOT_KAKARIKO], areas: ["OOT Kakariko Granny Shop", "OOT Kakariko Back"], reverse: OOT_SHOP_GRANNY }
 OOT_GRAVEYARD_FROM_DAMPE:                       { game: oot, id: 0x355, type: indoors-exit, maps: [NONE, OOT_GRAVEYARD], areas: ["OOT Dampe House", "OOT Graveyard"], reverse: OOT_HOUSE_DAMPE }
 OOT_GORON_CITY_FROM_SHOP:                       { game: oot, id: 0x3fc, type: indoors-exit, maps: [NONE, OOT_GORON_CITY], areas: ["OOT Goron Shop", "OOT Goron City"], reverse: OOT_SHOP_GORON }

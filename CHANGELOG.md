@@ -26,6 +26,7 @@ All notable changes to this project will be documented in this file.
 - Internal names of the music tracks, for an easier sorting in the cosmetics log.
 - Adult can now jump from the windmill to the back of Kakariko within logic.
 - It is now logical for adult to cross the Gerudo Fortress gate in reverse by getting captured.
+- The trick for Blue Fire Arrows on mudwalls is now logical for the ones in Goron City.
 
 ### Fixed
 

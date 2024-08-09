@@ -596,7 +596,8 @@
     RUPEES: "true"
 "Market Pot House Child":
   region: ENTRANCE
-  age_change: false
+  exits:
+    "Market Pot House": "true"
   locations:
     "Market Pot House GS": "gs"
     "Market Pot House Child Pot Ground 1": "true"
@@ -649,7 +650,8 @@
     "Market Pot House Crate 4": "true"
 "Market Pot House Adult":
   region: ENTRANCE
-  age_change: false
+  exits:
+    "Market Pot House": "true"
   locations:
     "Market Pot House Big Poes": "has_big_poe && soul_poe_collector"
     "Market Pot House Adult Pot 1": "true"
@@ -1144,7 +1146,8 @@
     "Bottom of the Well": "((setting(openDungeonsOot, BotW) || event(WELL_DRAIN)) && cond(setting(openDungeonsOot, wellAdult), true, is_child)) || (is_child && (has_iron_boots || longshot_anywhere || time_travel_at_will)) || (time_travel_at_will && trick(OOT_WELL_ADULT_TT))"
     "Skulltula House": "true"
     "Shooting Gallery Adult": "(is_adult && is_day) || (time_travel_at_will && trick(OOT_ADULT_GALLERY_TT))"
-    "Kakariko Rooftop": "(is_child && is_day) || can_hookshot || (is_adult && trick(OOT_PASS_COLLISION)) || climb_anywhere"
+    "Kakariko Balcony": "(is_child && is_day) || (is_adult && trick(OOT_PASS_COLLISION)) || climb_anywhere"
+    "Kakariko Rooftop": "can_hookshot || climb_anywhere"
     "Kakariko Back": "is_adult || can_hookshot || has_hover_boots || is_day || (trick(OOT_MAN_ON_ROOF) && (can_use_slingshot || has_bombchu)) || climb_anywhere"
     "Kakariko Bazaar": "is_adult && is_day"
     "Kakariko Potion Shop": "is_day"
@@ -1197,11 +1200,17 @@
     "Kakariko Grass 7": "can_cut_grass"
     "Kakariko Grass 8": "can_cut_grass"
     "Kakariko Wonder Item": "is_child"
+"Kakariko Balcony":
+  region: KAKARIKO
+  exits:
+    "Kakariko": "true"
+    "Kakariko Rooftop": "climb_anywhere"
+    "Impa House Back": "true"
 "Kakariko Rooftop":
   region: KAKARIKO
   exits:
     "Kakariko": "true"
-    "Impa House Back": "true"
+    "Kakariko Balcony": "true"
   locations:
     "Kakariko GS Roof": "is_adult && gs_night && (can_hookshot || (climb_anywhere && can_damage))"
 "Kakariko Trail Start":
@@ -1284,7 +1293,7 @@
 "Impa House Back":
   region: ENTRANCE
   exits:
-    "Kakariko Rooftop": "true"
+    "Kakariko Balcony": "true"
   locations:
     "Kakariko Cow": "can_play_epona"
     "Kakariko Impa House HP": "true"
@@ -1581,7 +1590,7 @@
     "Goron City Shortcut": "event(GORON_CITY_SHORTCUT) || climb_anywhere || hookshot_anywhere"
     "Death Mountain": "true"
     "Darunia Chamber": "(is_adult && (has_explosives || can_use_bow || has_goron_bracelet) && soul_goron_child) || (is_child && can_play_zelda)"
-    "Goron Shop": "(has_bombflowers && (is_child || time_travel_at_will || (is_adult && soul_goron_child))) || (can_use_bow && soul_goron_child && (is_adult || time_travel_at_will)) || ((can_use_din || event(DARUNIA_TORCH)) && (is_child || time_travel_at_will))"
+    "Goron Shop": "(has_bombflowers && (is_child || time_travel_at_will || (is_adult && soul_goron_child))) || (can_use_bow && soul_goron_child && (is_adult || time_travel_at_will)) || ((can_use_din || event(DARUNIA_TORCH)) && (is_child || time_travel_at_will)) || (has_blue_fire_arrows_mudwall && (is_child || time_travel_at_will))"
     "Goron City Grotto": "(is_adult && can_play_time) || (can_hookshot && (has_tunic_goron_strict || can_use_nayru)) || climb_anywhere"
   events:
     GORON_CITY_SHORTCUT: "has_bombflowers || can_hammer || can_use_bow || can_use_din || event(DARUNIA_TORCH)"
@@ -1595,7 +1604,7 @@
     "Goron City Big Pot HP": "is_child && has_bombs && (event(DARUNIA_TORCH) || has_fire)"
     "Goron City Tunic": "is_adult && (has_explosives || can_use_bow || has_goron_bracelet) && soul_goron_child"
     "Goron City Bomb Bag": "is_child && has_explosives && soul_goron"
-    "Goron City Medigoron Giant Knife": "is_adult && (has_bombflowers || can_hammer) && can_use_wallet(2) && soul_medigoron"
+    "Goron City Medigoron Giant Knife": "is_adult && (has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall) && can_use_wallet(2) && soul_medigoron"
     "Goron City GS Platform": "gs && is_adult && can_damage_skull"
     "Goron City GS Maze": "gs && is_child && (has_explosives_or_hammer || (climb_anywhere && can_damage_skull) || hookshot_anywhere)"
     "Goron City Pot Stairs 1": "true"
@@ -1603,7 +1612,7 @@
     "Goron City Pot Stairs 3": "true"
     "Goron City Pot Stairs 4": "true"
     "Goron City Pot Stairs 5": "true"
-    "Goron City Pot Medigoron Room": "has_bombflowers || can_hammer"
+    "Goron City Pot Medigoron Room": "has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall"
   gossip:
     "Goron City Gossip Boulder Maze": "has_explosives_or_hammer || can_lift_silver || climb_anywhere || hookshot_anywhere"
     "Goron City Gossip Near Medigoron": "has_bombflowers || can_hammer"
