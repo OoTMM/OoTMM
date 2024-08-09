@@ -1510,7 +1510,7 @@
     "Death Mountain Trail Prescription": "adult_trade(BROKEN_GORON_SWORD) && soul_biggoron"
     "Death Mountain Trail Claim Check": "adult_trade(EYE_DROPS) && soul_biggoron"
     "Death Mountain Trail Biggoron Sword": "adult_trade(CLAIM_CHECK) && soul_biggoron"
-    "Death Mountain Trail GS Before Climb": "is_adult && gs_night && (can_hammer || (trick(OOT_DMT_RED_ROCK_GS) && can_use_sword)"
+    "Death Mountain Trail GS Before Climb": "is_adult && gs_night && (can_hammer || (trick(OOT_DMT_RED_ROCK_GS) && can_use_sword))"
   gossip:
     "Death Mountain Trail Gossip on Climb": "true"
 "Death Mountain Storms Grotto":
