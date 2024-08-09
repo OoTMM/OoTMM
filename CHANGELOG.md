@@ -29,6 +29,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Logic issue with the Gold Skulltula on the plateau of Desert Colossus
 - Logic issue with Romani Ranch Stables access.
 - Logic issue with Kafei's check in seeds without shuffled interiors.
 - Starting age no longer defaults to either child or adult after generating a random starting age seed.
