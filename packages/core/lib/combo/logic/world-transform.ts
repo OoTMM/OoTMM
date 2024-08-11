@@ -1180,6 +1180,11 @@ export class LogicPassWorldTransform {
       }
     }
 
+    /* Only MM Agony CAMC */
+    if (['mm'].includes(this.state.settings.games) && settings.csmc === 'agony') {
+      this.addItem(OOT_STONE_OF_AGONY);
+    }
+
     /* Add souls */
     if (settings.soulsEnemyOot) this.addItems(ItemGroups.OOT_SOULS_ENEMY);
     if (settings.soulsBossOot) this.addItems(ItemGroups.OOT_SOULS_BOSS);
