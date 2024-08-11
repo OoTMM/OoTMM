@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- D-Pad can now fast pass the transformation mask equip cutscene.
 - Shuffle MM snowballs.
 - Shuffle MM barrels.
 - Shuffle the MM potted plants, two checks each, one is a pot, one is grass.
