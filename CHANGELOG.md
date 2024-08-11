@@ -39,6 +39,7 @@ All notable changes to this project will be documented in this file.
 - MQ Forest Temple freestanding hearts logic issue.
 - The two pots next to the hag's potion shop in Kakariko now check for being in the back.
 - All adult logic now correctly check for some way to do damage.
+- Fixed MQ Spirit Child Hand logic not checking for the Iron Knuckle Soul.
 
 ## [24.1] - 2024-07-11
 
