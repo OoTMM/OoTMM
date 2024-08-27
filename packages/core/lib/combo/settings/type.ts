@@ -61,6 +61,9 @@ export type SettingsBase = UnionToIntersection<SettingShapes>;
 type SettingsPlando = {
   locations: {[k: string]: string | null},
 };
+type SettingsRandomIndividual = {
+  randomSettings: string[],
+};
 export type Settings = SettingsBase & {
   startingItems: {[k: string]: number};
   junkLocations: string[];
@@ -69,4 +72,5 @@ export type Settings = SettingsBase & {
   specialConds: SpecialConds;
   plando: SettingsPlando;
   hints: SettingHint[];
+  individualRandom: SettingsRandomIndividual;
 };

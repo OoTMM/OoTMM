@@ -9,6 +9,7 @@ import { buildPatchfiles } from './patch-build';
 import { Patchfile } from './patch-build/patchfile';
 import { makeAddresses } from './addresses';
 import { applyRandomSettings } from './settings/random';
+import { applyIndividualRandomSettings } from './settings/individual-random'
 import { makeResolver } from './resolve';
 
 export type GeneratorOutputFile = {
@@ -68,6 +69,7 @@ export class Generator {
     let log: string | null = null;
 
     /* Apply random settings (if enabled) */
+    this.opts.settings = applyIndividualRandomSettings(this.opts.settings);
     this.opts.settings = applyRandomSettings(this.opts.random, this.opts.settings);
 
     if (!this.opts.patch) {

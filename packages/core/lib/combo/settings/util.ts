@@ -22,6 +22,7 @@ export const DEFAULT_SETTINGS: Settings = { ...SETTINGS.map(s => {
   specialConds: { ...DEFAULT_SPECIAL_CONDS },
   plando: { locations: {} },
   hints: [ ...SETTINGS_DEFAULT_HINTS ],
+  individualRandom: { randomSettings: [] as string[] },
 } as Settings;
 
 const sortUnique = <T>(arr: T[]): T[] => {
@@ -200,6 +201,11 @@ export function makeSettings(arg: PartialDeep<Settings>): Settings {
 
   if (arg.hints !== undefined) {
     result.hints = [ ...arg.hints ];
+  }
+
+  /* Apply individual random */
+  if (arg.individualRandom !== undefined) {
+    result.individualRandom = { ...arg.individualRandom } as Settings['individualRandom'];
   }
 
   return validateSettings(result);

@@ -6,6 +6,7 @@ import { Dropdown } from './Dropdown';
 import { Checkbox } from './Checkbox';
 import { useSettings } from '../contexts/GeneratorContext';
 import { InputNumber } from './InputNumber';
+import { DiceBlock } from './DiceBlock';
 
 const SET_OPTIONS = [
   { value: 'none', name: 'None' },
@@ -108,6 +109,18 @@ function SettingSet({ setting }: { setting: string }) {
   );
 }
 
+function assignRandomSetting(settings: any, setSettings: Function, data: any, v: boolean) {
+  if (v) {
+    setSettings({ individualRandom: { randomSettings: settings.individualRandom.randomSettings.push(data.key) } });
+  }
+  else {
+    let index = settings.individualRandom.randomSettings.indexOf(data.key);
+    if (index > -1) { 
+      setSettings({ individualRandom: { randomSettings: settings.individualRandom.randomSettings.splice(index, 1)  } });
+    }
+  }
+}
+
 function Setting({ setting }: { setting: string }) {
   const [settings, setSettings] = useSettings();
   const data = SETTINGS.find(x => x.key === setting)!;
@@ -117,27 +130,58 @@ function Setting({ setting }: { setting: string }) {
     return null;
   }
 
+  const excludeKeys = ['mode', 'players', 'distinctWorlds', 'generateSpoilerLog', 'probabilisticFoolish', 'noPlandoHints', 'extraHintRegions', 'hintImportance', 'startingAge', 'lacs', 'majoraChild', 'preCompletedDungeons', 'coins', 'erOneWaysSongs', 'erOneWaysStatues', 'erWarps'];
+
   switch (data.type) {
   case 'enum':
-    return (
-      <Dropdown
-        value={settings[data.key] as string}
-        label={data.name}
-        options={(data as any).values.filter((x: any) => x.cond === undefined || x.cond(settings))}
-        tooltip={data.description && <SettingTooltip setting={data.key}/>}
-        onChange={(v) => setSettings({ [data.key]: v })}
-      />
-    );
+    if (excludeKeys.includes(data.key)) {
+      return (
+        <Dropdown
+          value={settings[data.key] as string}
+          label={data.name}
+          options={(data as any).values.filter((x: any) => x.cond === undefined || x.cond(settings))}
+          tooltip={data.description && <SettingTooltip setting={data.key}/>}
+          onChange={(v) => setSettings({ [data.key]: v })}
+        />
+      );
+    }
+    else {
+      return (
+        <Dropdown
+          randomBlock={<DiceBlock checked={settings.individualRandom.randomSettings.includes(data.key) as boolean} onChange={(v) => assignRandomSetting(settings, setSettings, data, v)}/>}
+          value={settings[data.key] as string}
+          label={data.name}
+          options={(data as any).values.filter((x: any) => x.cond === undefined || x.cond(settings))}
+          tooltip={data.description && <SettingTooltip setting={data.key}/>}
+          onChange={(v) => setSettings({ [data.key]: v })}
+          disabled = {settings.individualRandom.randomSettings.includes(data.key) as boolean}
+        />
+      );
+    }
   case 'set': return <SettingSet setting={setting}/>;
   case 'boolean':
-    return (
-      <Checkbox
-        label={data.name}
-        tooltip={(data as any).description && <SettingTooltip setting={data.key}/>}
-        checked={settings[data.key] as boolean}
-        onChange={(v) => setSettings({ [data.key]: v })}
-      />
-    );
+    if (excludeKeys.includes(data.key)) {
+      return (
+        <Checkbox
+          label={data.name}
+          tooltip={(data as any).description && <SettingTooltip setting={data.key}/>}
+          checked={settings[data.key] as boolean}
+          onChange={(v) => setSettings({ [data.key]: v })}
+        />
+      );
+    }
+    else {
+      return (
+        <Checkbox
+          randomBlock={<DiceBlock checked={settings.individualRandom.randomSettings.includes(data.key) as boolean} onChange={(v) => assignRandomSetting(settings, setSettings, data, v)}/>}
+          label={data.name}
+          tooltip={(data as any).description && <SettingTooltip setting={data.key}/>}
+          checked={settings[data.key] as boolean}
+          onChange={(v) => setSettings({ [data.key]: v })}
+          disabled = {settings.individualRandom.randomSettings.includes(data.key) as boolean}
+        />
+      );
+    }
   case 'number':
     const min = (data as any).min;
     const max = (data as any).max;
