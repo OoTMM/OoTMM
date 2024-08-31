@@ -1,12 +1,20 @@
 cmake_minimum_required(VERSION 3.10)
 
-set(ARCH "mips64-ultra-elf")
-set(CMAKE_C_COMPILER "${ARCH}-gcc")
-set(CMAKE_ASM_COMPILER "${ARCH}-gcc")
+set(ARCH_CANDIDATES "mips64-ultra-elf" "mips-linux-gnu" "mips64-linux-gnu" "mipsel-linux-gnu" "mips64el-linux-gnu")
+
+foreach(arch ${ARCH_CANDIDATES})
+  find_program(CMAKE_C_COMPILER "${arch}-gcc")
+  find_program(CMAKE_ASM_COMPILER "${arch}-gcc")
+  if(CMAKE_C_COMPILER AND CMAKE_ASM_COMPILER)
+    set(ARCH "${arch}")
+    message(STATUS "Found compiler for ${ARCH}")
+    break()
+  endif()
+endforeach()
 
 project(OoTMM C ASM)
 
-set(FLAGS "-EB -ffreestanding -nostdlib -fno-PIC -mabi=32 -mno-shared -mno-abicalls -march=vr4300 -mtune=vr4300 -mfix4300 -mfix-r4000 -G 0 -Os -Wall -Werror=implicit-function-declaration -Werror=implicit-int -Wimplicit-fallthrough")
+set(FLAGS "-EB -static -fomit-frame-pointer -ffreestanding -nostdlib -fno-PIC -mabi=32 -mno-shared -mno-abicalls -march=vr4300 -mtune=vr4300 -mfix4300 -mfix-r4000 -G 0 -Os -Wall -Werror=implicit-function-declaration -Werror=implicit-int -Wimplicit-fallthrough -Wl,--build-id=none")
 set(CMAKE_C_FLAGS "${FLAGS} -D_LANGUAGE_C=1")
 set(CMAKE_ASM_FLAGS "${FLAGS}")
 
