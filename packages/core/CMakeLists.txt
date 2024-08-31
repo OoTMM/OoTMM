@@ -1,8 +1,16 @@
 cmake_minimum_required(VERSION 3.10)
 
-set(ARCH "mips-linux-gnu")
-set(CMAKE_C_COMPILER "${ARCH}-gcc")
-set(CMAKE_ASM_COMPILER "${ARCH}-gcc")
+set(ARCH_CANDIDATES "mips64-ultra-elf" "mips-linux-gnu" "mips64-linux-gnu" "mipsel-linux-gnu" "mips64el-linux-gnu")
+
+foreach(arch ${ARCH_CANDIDATES})
+  find_program(CMAKE_C_COMPILER "${arch}-gcc")
+  find_program(CMAKE_ASM_COMPILER "${arch}-gcc")
+  if(CMAKE_C_COMPILER AND CMAKE_ASM_COMPILER)
+    set(ARCH "${arch}")
+    message(STATUS "Found compiler for ${ARCH}")
+    break()
+  endif()
+endforeach()
 
 project(OoTMM C ASM)
 
