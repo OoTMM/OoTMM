@@ -157,7 +157,8 @@ export const SETTINGS = [{
   category: 'hints',
   type: 'boolean',
   description: 'Hints will tell if an item is foolish, sometimes required, or always required',
-  default: false
+  default: false,
+  cond: (s: any) => s.logic !== 'none',
 }, {
   key: 'songs',
   name: 'Song Shuffle',
