@@ -12,6 +12,7 @@ void malloc_check(void);
 #define CHEAT_ALL_ITEMS     0
 #define CHEAT_HEALTH        1
 #define CHEAT_MAGIC         2
+#define CHEAT_AMMO          3
 
 #if defined(DEBUG)
 typedef struct
@@ -28,6 +29,7 @@ void Debug_Update(void);
 extern const DebugMenuEntry kDebugMenuWarp[];
 
 # define CHEAT_ON(x) (BITMAP8_GET(gSharedCustomSave.cheats, x))
+# define CHEAT_CLEAR(x) (BITMAP8_CLEAR(gSharedCustomSave.cheats, x))
 
 #else
 # define Debug_Init() do {} while (0)
