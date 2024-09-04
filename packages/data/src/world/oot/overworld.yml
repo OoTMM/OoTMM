@@ -916,23 +916,23 @@
   locations:
     "Great Fairy Defense Upgrade": "can_play_zelda"
 "Lost Woods Lost North":
-  region: LOST_WOODS
+  region: NONE
   exits:
     "Lost Woods": "true"
 "Lost Woods Lost East":
-  region: LOST_WOODS
+  region: NONE
   exits:
     "Lost Woods": "true"
 "Lost Woods Lost South":
-  region: LOST_WOODS
+  region: NONE
   exits:
     "Lost Woods": "true"
 "Lost Woods Lost West":
-  region: LOST_WOODS
+  region: NONE
   exits:
     "Lost Woods": "true"
 "Lost Woods Lost Forest":
-  region: LOST_WOODS
+  region: NONE
   exits:
     "Kokiri Forest": "true"
 "Lost Woods":
