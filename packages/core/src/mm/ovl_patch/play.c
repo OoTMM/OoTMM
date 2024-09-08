@@ -129,6 +129,12 @@ void fixupOriginalSceneSetup(void)
         case 0x59: /* Snowhead */
             gSaveContext.nextCutscene = 0xfff0;
             break;
+        case 0x19: /* Path to Mountain Village */
+            gSaveContext.nextCutscene = 0xfff0;
+            break;
+        case 0x58: /* Path to Snowhead */
+            gSaveContext.nextCutscene = 0xfff0;
+            break;
         }
     }
 
