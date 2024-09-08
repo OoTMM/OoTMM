@@ -21,6 +21,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Force Hint Importance off if playing No Logic.
 - Tingle no longer has extra text boxes when you first talk to him during a cycle.
 - Adult Malon in Lon Lon Ranch no longer has her slow text when you first talk to her.
 - Lake Hylia Owl no longer has its slow text when you first talk to it.
@@ -31,6 +32,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Issue with Spring not applying properly with ER.
 - Logic issue with Romani Ranch Stables access.
 - Logic issue with Kafei's check in seeds without shuffled interiors.
 - Starting age no longer defaults to either child or adult after generating a random starting age seed.
