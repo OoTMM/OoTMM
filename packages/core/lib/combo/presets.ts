@@ -86,7 +86,6 @@ const BLITZ_BASE: PartialDeep<Settings> = {
   sharedScales: true,
   sharedStrength: true,
   keepItemsReset: true,
-  fastMasks: true,
   shadowFastBoat: true,
   songOfDoubleTimeOot: true,
   mmPreActivatedOwls: {
