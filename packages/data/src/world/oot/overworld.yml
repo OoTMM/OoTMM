@@ -932,7 +932,7 @@
   exits:
     "Lost Woods": "true"
 "Lost Woods Lost Forest":
-  region: NONE
+  region: LOST_WOODS
   exits:
     "Kokiri Forest": "true"
 "Lost Woods":
