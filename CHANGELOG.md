@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [25.0] - 2024-09-08
+
 ### Added
 
 - D-Pad can now fast pass the transformation mask equip cutscene.
@@ -1338,7 +1340,8 @@ All notable changes to this project will be documented in this file.
 
 - Initial stable release.
 
-[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v24.1...HEAD
+[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v25.0...HEAD
+[25.0]: https://github.com/OoTMM/OoTMM/compare/v24.1...v25.0
 [24.1]: https://github.com/OoTMM/OoTMM/compare/v24.0...v24.1
 [24.0]: https://github.com/OoTMM/OoTMM/compare/v23.1...v24.0
 [23.1]: https://github.com/OoTMM/OoTMM/compare/v23.0...v23.1
