@@ -667,9 +667,6 @@ void hookPlay_Init(GameState_Play* play)
     if (Config_Flag(CFG_MM_OPEN_GB))
         MM_SET_EVENT_WEEK(EV_MM_WEEK_GREAT_BAY_TURTLE);
 
-    if (gSave.entrance == ENTR_MM_CLOCK_TOWER || gSave.entrance == ENTR_MM_MOON)
-        gNoTimeFlow = 1;
-
     Play_FixupSpawnTime();
     Play_Init(play);
 

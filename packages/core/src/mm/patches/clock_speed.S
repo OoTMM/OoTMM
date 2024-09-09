@@ -6,10 +6,10 @@ PATCH_GROUP \group
 /* Clock speed setting */
 PATCH_START 0x80130134
   lui     at,1
-  bne     a3,v0,.+0x10
+  bne     a3,v0,.+0x0c
    addu   at,a2
   li      v0,0
-  b       .+0x1c
+  beqz    v0,.+0x0c
    nop
   li      v0,\speed
   sh      v0,0x7006(at)
