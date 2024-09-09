@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Fixed
+
+- Logic no longer thinks you can swap ages in the Deku Theater.
+
 ## [25.0] - 2024-09-08
 
 ### Added

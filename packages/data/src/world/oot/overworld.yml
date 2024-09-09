@@ -1054,6 +1054,7 @@
     "Lost Woods Rupee Boulder": "has_explosives_or_hammer"
 "Deku Theater":
   region: ENTRANCE
+  age_change: false
   exits:
     "Lost Woods Deep": "true"
   locations:
