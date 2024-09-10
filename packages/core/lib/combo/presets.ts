@@ -123,6 +123,7 @@ const BLITZ_BASE: PartialDeep<Settings> = {
     "OOT_TUNICS",
     "OOT_VOLCANO_HOVERS",
     "OOT_WINDMILL_HP_NOTHING",
+    "MM_TWINMOLD_BOW"
   ],
   plando: {
     locations: {

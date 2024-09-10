@@ -717,6 +717,11 @@ export const TRICKS: Tricks = {
     name: "Destroy Beehives using Bombchu (MM)",
     tooltip: "Use some careful timing with a Bombchu to blow up the beehives across Termina.",
   },
+  MM_TWINMOLD_BOW: {
+    game: 'mm',
+    name: "Twinmold with Bow (MM)",
+    tooltip: "Defeat Twinmold using only the Bow.",
+  },
 };
 
 export const DEFAULT_TRICKS: TrickKey[] = ['OOT_NIGHT_GS'];

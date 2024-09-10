@@ -206,7 +206,7 @@
   boss: true
   dungeon: IST
   exits:
-    "Stone Tower After Boss": "soul_boss(SOUL_BOSS_TWINMOLD) && (has_magic && ((has(MASK_GIANT) && has_sword) || has(MASK_FIERCE_DEITY)))"
+    "Stone Tower After Boss": "soul_boss(SOUL_BOSS_TWINMOLD) && ((has_arrows && trick(MM_TWINMOLD_BOW)) || (has_magic && ((has(MASK_GIANT) && has_sword) || has(MASK_FIERCE_DEITY))))"
     "WARP_SONGS": "can_reset_time" #Only relevant when the boss is in an OOT dungeon. Must account for resetting time so that it can be repeated.
 "Stone Tower After Boss":
   boss: true

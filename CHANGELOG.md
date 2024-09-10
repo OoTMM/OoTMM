@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - New entrance option for Pirate Fortress that includes all the currently shuffled entrances.
+- Trick to defeat Twinmold only using arrows.
 
 ### Chanegd
 
