@@ -820,6 +820,12 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   MM_SOUL_MISC_BUSINESS_SCRUB: "Soul of Business Scrubs (MM)",
   SHARED_SOUL_MISC_GS: "Soul of Gold Skulltulas",
   SHARED_SOUL_MISC_BUSINESS_SCRUB: "Soul of Business Scrubs",
+  OOT_SOUL_NPC_THIEVES: 'Soul of the Patrolling Gerudos',
+  MM_SOUL_NPC_THIEVES: 'Soul of the Patrolling Pirates and their Chief',
+  OOT_SOUL_ENEMY_THIEVES: 'Soul of the Fighting Gerudos',
+  MM_SOUL_ENEMY_THIEVES: 'Soul of the Fighting Pirates',
+  SHARED_SOUL_NPC_THIEVES: 'Soul of the Patrolling Thieves and their Chief',
+  SHARED_SOUL_ENEMY_THIEVES: 'Soul of Fighting Thieves',
 };
 
 export function itemName(item: string) {

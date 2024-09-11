@@ -535,6 +535,7 @@ export const OOT_SOULS_ENEMY = new Set([
   Items.OOT_SOUL_ENEMY_WOLFOS,
   Items.OOT_SOUL_ENEMY_STALCHILD,
   Items.OOT_SOUL_ENEMY_GUAY,
+  Items.OOT_SOUL_ENEMY_THIEVES,
 ]);
 
 export const OOT_SOULS_BOSS = new Set([
@@ -594,6 +595,7 @@ export const OOT_SOULS_NPC = new Set([
   Items.OOT_SOUL_NPC_CARPET_MAN,
   Items.OOT_SOUL_NPC_OLD_HAG,
   Items.OOT_SOUL_NPC_BANKER,
+  Items.OOT_SOUL_NPC_THIEVES,
 ]);
 
 export const MM_SOULS_NPC = new Set([
@@ -649,6 +651,7 @@ export const MM_SOULS_NPC = new Set([
   Items.MM_SOUL_NPC_TOURIST_CENTER,
   Items.MM_SOUL_NPC_BANKER,
   Items.MM_SOUL_NPC_MOON_CHILDREN,
+  Items.MM_SOUL_NPC_THIEVES,
 ]);
 
 export const SHARED_SOULS_NPC = new Set([
@@ -687,6 +690,7 @@ export const SHARED_SOULS_NPC = new Set([
   Items.SHARED_SOUL_NPC_CARPET_MAN,
   Items.SHARED_SOUL_NPC_OLD_HAG,
   Items.SHARED_SOUL_NPC_BANKER,
+  Items.SHARED_SOUL_NPC_THIEVES,
 ]);
 
 export const OOT_SOULS_MISC = new Set([
@@ -741,6 +745,7 @@ export const MM_SOULS_ENEMY = new Set([
   Items.MM_SOUL_ENEMY_SNAPPER,
   Items.MM_SOUL_ENEMY_WART,
   Items.MM_SOUL_ENEMY_CAPTAIN_KEETA,
+  Items.MM_SOUL_ENEMY_THIEVES,
 ]);
 
 export const MM_SOULS_BOSS = new Set([
@@ -782,6 +787,7 @@ export const SHARED_SOULS_ENEMY = new Set([
   Items.SHARED_SOUL_ENEMY_FLOORMASTER,
   Items.SHARED_SOUL_ENEMY_LEEVER,
   Items.SHARED_SOUL_ENEMY_STALCHILD,
+  Items.SHARED_SOUL_ENEMY_THIEVES,
 ]);
 
 export const SHARED_SOULS_MISC = new Set([

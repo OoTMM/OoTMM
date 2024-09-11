@@ -524,6 +524,12 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
     case AC_EN_SCOPENUTS:
     case AC_EN_AKINDONUTS:
         return opt(comboHasSoulMm(GI_MM_SOUL_MISC_BUSINESS_SCRUB));
+    case AC_EN_GE1:
+    case AC_EN_GE2:
+    case AC_EN_GE3:
+        return opt(comboHasSoulMm(GI_MM_SOUL_NPC_THIEVES));
+    case AC_EN_KAIZOKU:
+        return comboHasSoulMm(GI_MM_SOUL_ENEMY_THIEVES);
     default:
         return 1;
     }

@@ -168,13 +168,13 @@
   region: PIRATE_FORTRESS_INTERIOR
   exits:
     "Pirate Fortress Barrel Maze Entry": "true"
-    "Pirate Fortress Barrel Maze Aquarium": "can_fight && can_evade_gerudo"
+    "Pirate Fortress Barrel Maze Aquarium": "soul_thief_fighter && can_fight && can_evade_gerudo"
     "SOARING": "can_play_soaring"
     "WARP_SONGS": "true"
 "Pirate Fortress Barrel Maze Aquarium":
   region: PIRATE_FORTRESS_INTERIOR
   exits:
-    "Pirate Fortress Barrel Maze": "can_fight && can_evade_gerudo"
+    "Pirate Fortress Barrel Maze": "soul_thief_fighter && can_fight && can_evade_gerudo"
     "Pirate Fortress Barrel Maze Exit": "true"
   events:
     ZORA_EGGS_BARREL_MAZE: "can_hookshot_short && underwater_walking"
@@ -198,12 +198,12 @@
 "Pirate Fortress Lone Guard":
   region: PIRATE_FORTRESS_INTERIOR
   exits:
-    "Pirate Fortress Lone Guard Aquarium": "can_fight && can_evade_gerudo"
+    "Pirate Fortress Lone Guard Aquarium": "soul_thief_fighter && can_fight && can_evade_gerudo"
     "Pirate Fortress Lone Guard Entry": "true"
 "Pirate Fortress Lone Guard Aquarium":
   region: PIRATE_FORTRESS_INTERIOR
   exits:
-    "Pirate Fortress Lone Guard": "can_fight && can_evade_gerudo"
+    "Pirate Fortress Lone Guard": "soul_thief_fighter && can_fight && can_evade_gerudo"
     "Pirate Fortress Lone Guard Exit": "true"
   events:
     ZORA_EGGS_LONE_GUARD: "can_hookshot_short && underwater_walking"
@@ -228,14 +228,14 @@
 "Pirate Fortress Treasure Room":
   region: PIRATE_FORTRESS_INTERIOR
   exits:
-    "Pirate Fortress Treasure Room Aquarium": "can_fight && can_evade_gerudo"
+    "Pirate Fortress Treasure Room Aquarium": "soul_thief_fighter && can_fight && can_evade_gerudo"
     "Pirate Fortress Treasure Room Entry": "true"
   locations:
     "Pirate Fortress Interior Silver Rupee Chest": "can_evade_gerudo"
 "Pirate Fortress Treasure Room Aquarium":
   region: PIRATE_FORTRESS_INTERIOR
   exits:
-    "Pirate Fortress Treasure Room": "can_fight && can_evade_gerudo"
+    "Pirate Fortress Treasure Room": "soul_thief_fighter && can_fight && can_evade_gerudo"
     "Pirate Fortress Treasure Room Exit": "true"
   events:
     ZORA_EGGS_TREASURE_ROOM: "can_hookshot_short && underwater_walking"

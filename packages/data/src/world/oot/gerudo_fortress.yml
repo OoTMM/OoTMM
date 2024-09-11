@@ -63,7 +63,7 @@
     RUPEES: "true"
     CARPENTER_4: "can_rescue_carpenter"
   locations:
-    "Gerudo Fortress Jail 4": "(can_use_sword || ((can_boomerang || has_nuts) && can_use_sticks)) && soul_carpenters"
+    "Gerudo Fortress Jail 4": "can_rescue_carpenter"
     "Gerudo Member Card": "carpenters_rescued"
     "Gerudo Fortress Wonder Item Jail 4 1": "can_use_bow"
     "Gerudo Fortress Wonder Item Jail 4 2": "can_use_bow"

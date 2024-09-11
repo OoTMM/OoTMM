@@ -193,7 +193,7 @@
 "can_kill_baba_sticks": "soul_deku_baba && (can_boomerang || (can_use_sword && (is_child || has_nuts || can_hookshot || can_hammer)))"
 "can_kill_baba_nuts": "soul_deku_baba && (can_use_sword || has_explosives || can_use_slingshot)"
 "can_hit_scrub": "has_nuts || can_hit_triggers_distance || has_shield_for_scrubs || can_collect_distance || can_hammer || has_explosives"
-"can_rescue_carpenter": "small_keys_hideout_all && (can_use_sword || ((can_boomerang || has_nuts) && can_use_sticks)) && soul_carpenters"
+"can_rescue_carpenter": "small_keys_hideout_all && (can_use_sword || ((can_boomerang || has_nuts) && can_use_sticks)) && soul_carpenters && soul_thief_fighter"
 "carpenters_rescued": "setting(gerudoFortress, open) || (event(CARPENTER_1) && (setting(gerudoFortress, single) || (event(CARPENTER_2) && event(CARPENTER_3) && event(CARPENTER_4))))"
 
 #Trick Macros

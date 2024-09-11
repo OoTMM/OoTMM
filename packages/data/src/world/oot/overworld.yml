@@ -2316,14 +2316,14 @@
     "Gerudo Fortress Carpenter 2 Bottom": "true"
     "Gerudo Valley After Bridge": "true"
     "Fortress Near Wasteland": "event(OPEN_FORTRESS_GATE) || climb_anywhere || hookshot_anywhere"
-    "Gerudo Training Grounds": "has(GERUDO_CARD) && can_use_wallet(1) && (is_adult || (time_travel_at_will && trick(OOT_GTG_CHILD_TT)))"
+    "Gerudo Training Grounds": "soul_thief_guard && has(GERUDO_CARD) && can_use_wallet(1) && (is_adult || (time_travel_at_will && trick(OOT_GTG_CHILD_TT)))"
     "Gerudo Fortress Grotto": "is_adult && hidden_grotto_storms"
     "Gerudo Fortress Lower-Right Ledge": "is_child || evade_gerudo"
   events:
-    OPEN_FORTRESS_GATE: "has(GERUDO_CARD) && is_adult"
+    OPEN_FORTRESS_GATE: "soul_thief_guard && has(GERUDO_CARD) && is_adult"
   locations:
-    "Gerudo Fortress Archery Reward 1": "can_ride_epona && can_use_bow && has(GERUDO_CARD) && can_use_wallet(1) && is_day"
-    "Gerudo Fortress Archery Reward 2": "can_ride_epona && can_use_bow && has(GERUDO_CARD) && can_use_wallet(1) && is_day"
+    "Gerudo Fortress Archery Reward 1": "soul_thief_guard && can_ride_epona && can_use_bow && has(GERUDO_CARD) && can_use_wallet(1) && is_day"
+    "Gerudo Fortress Archery Reward 2": "soul_thief_guard && can_ride_epona && can_use_bow && has(GERUDO_CARD) && can_use_wallet(1) && is_day"
     "Gerudo Fortress GS Target": "is_adult && gs_night && (has(GERUDO_CARD) || time_travel_at_will) && (can_collect_distance || (climb_anywhere && can_damage))"
     "Gerudo Fortress Crate Main 1": "true"
     "Gerudo Fortress Crate Main 2": "true"
@@ -2413,7 +2413,7 @@
     "Gerudo Fortress Exterior": "event(OPEN_FORTRESS_GATE) || is_adult || climb_anywhere || hookshot_anywhere"
     "Haunted Wasteland Start": "true"
   events:
-    OPEN_FORTRESS_GATE: "has(GERUDO_CARD) && is_adult"
+    OPEN_FORTRESS_GATE: "soul_thief_guard && has(GERUDO_CARD) && is_adult"
 "Gerudo Fortress Grotto":
   region: ENTRANCE
   age_change: false
