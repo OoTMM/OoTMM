@@ -1,7 +1,7 @@
 "Bottom of the Well":
   dungeon: BotW
   exits:
-    "Kakariko": "true"
+    "Kakariko Well": "true"
     "Bottom of the Well Main": "is_child"
 "Bottom of the Well Wallmaster Main":
   region: NONE

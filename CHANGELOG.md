@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Chanegd
+
+- Logic now accounts for appearing at the well's bottom in Kakariko when coming out of it.
+
 ### Fixed
 
 - Logic no longer thinks you can swap ages in the Deku Theater.
