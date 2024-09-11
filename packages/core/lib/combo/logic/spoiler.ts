@@ -41,6 +41,14 @@ export class LogicPassSpoiler {
     this.worlds = this.isMulti ? this.state.settings.players : 1;
   }
 
+  private getMaxKeyLength(map: [string, any][]): number {
+    let maxLength = 0;
+    for (const key of map) {
+      maxLength = Math.max(maxLength, key[0].length);
+    }
+    return maxLength+1;
+  }
+
   private writeHeader() {
     this.writer.write(`Seed: ${this.state.opts.seed}`);
     this.writer.write(`Version: ${VERSION}`);
@@ -292,9 +300,10 @@ export class LogicPassSpoiler {
           if (hints.length === 0) continue;
           const name = (HINTS_PATHS as any)[type].name;
           this.writer.indent(`${name}:`);
+          const longestRegionNameLength = [...hints].reduce( function (a, b) { return regionName(a[1].location).length > regionName(b[1].location).length ? a : b; } )[1].location.length;
+          const longestGossipNameLength = this.getMaxKeyLength(hints);
           for (const [stone, hint] of hints) {
-            this.writer.write(stone);
-            this.writer.write(`  ${this.regionName(hint.region)}    ${this.locationName(hint.location)} - ${this.itemName(this.state.items.get(hint.location)!)}`);
+            this.writer.write(`${stone.padEnd(longestGossipNameLength)} ${this.locationName(hint.location).padEnd(longestRegionNameLength)} ${this.itemName(this.state.items.get(hint.location)!)}`);
           }
           this.writer.unindent('');
         }
@@ -302,37 +311,47 @@ export class LogicPassSpoiler {
 
       if (gossipsFoolish.length > 0) {
         this.writer.indent('Foolish:');
+        const longestGossipNameLength = this.getMaxKeyLength(gossipsFoolish);
         for (const [stone, hint] of gossipsFoolish) {
-          this.writer.write(stone);
-          this.writer.write(`  ${this.regionName(hint.region)}`);
+          this.writer.write(`${stone.padEnd(longestGossipNameLength)} ${this.regionName(hint.region)}`);
         }
         this.writer.unindent('');
       }
 
       if (gossipsItemExact.length > 0) {
         this.writer.indent('Specific Hints:');
+        let longestLocationNameLength = 0;
         for (const [stone, hint] of gossipsItemExact) {
           const world = this.state.worlds[hint.world];
-          this.writer.write(stone);
-          this.writer.write(`  ${world.checkHints[hint.check].join(', ')} (${hint.items.map(x => this.itemName(x)).join(', ')})`);
+          const longestLocationName = [...world.checkHints[hint.check]].reduce(  (a, b) => { return a.length > b.length ? a : b; }).length;
+          longestLocationNameLength = Math.max(longestLocationNameLength, longestLocationName);
+        }
+        for (const [stone, hint] of gossipsItemExact) {
+          const world = this.state.worlds[hint.world];
+          const longestGossipNameLength = this.getMaxKeyLength(gossipsItemExact);
+          for(let i = 0; i < hint.items.length; i++) {
+            this.writer.write(`${(i ? " ": stone).padEnd(longestGossipNameLength)} ${world.checkHints[hint.check][i].padEnd(longestLocationNameLength + 1)} ${this.itemName(hint.items[i])}`);
+          }
         }
         this.writer.unindent('');
       }
 
       if (gossipsItemRegion.length > 0) {
         this.writer.indent('Regional Hints:');
+        const longestRegionNameLength = this.regionName([...gossipsItemRegion.values()].reduce(  (a, b) => { return this.regionName(a[1].region).length > this.regionName(b[1].region).length ? a : b; } )[1].region).length;
+        const longestGossipNameLength = this.getMaxKeyLength(gossipsItemRegion);
         for (const [stone, hint] of gossipsItemRegion) {
-          this.writer.write(stone);
-          this.writer.write(`  ${this.regionName(hint.region)} (${this.itemName(hint.item)})`);
+          this.writer.write(`${stone.padEnd(longestGossipNameLength)} ${this.regionName(hint.region).padEnd(longestRegionNameLength + 1)} ${this.itemName(hint.item)}`);
         }
         this.writer.unindent('');
       }
       this.writer.write('');
       this.writer.indent('Foolish Regions:');
       const foolish = sortBy([...hints.foolish.keys()], x => -hints.foolish.get(x)!);
+      const longestRegionName = foolish.reduce( function (a, b) { return regionName(a).length > regionName(b).length ? regionName(a) : regionName(b); } ).length;
       for (const f of foolish) {
         const weight = hints.foolish.get(f);
-        this.writer.write(`${regionName(f)}: ${weight}`);
+        this.writer.write(`${regionName(f).padEnd(longestRegionName + 1)}: ${weight}`);
       }
       this.writer.unindent();
       if (this.isMulti) this.writer.unindent('');
@@ -340,10 +359,17 @@ export class LogicPassSpoiler {
     this.writer.unindent('');
   }
 
+  private decPad(n: number, width: number) {
+    const s = n.toString();
+    const count = width - s.length;
+    return count > 0 ? '0'.repeat(width - s.length) + s : s;
+  }
+
   private locationName(location: Location) {
     const data = locationData(location);
     if (this.isMulti) {
-      return `World ${data.world as number + 1} ${data.id}`;
+      const id = data.world as number + 1
+      return `World ${this.decPad(id, this.state.worlds.length.toString().length)} ${data.id}`;
     } else {
       return data.id;
     }
@@ -351,7 +377,8 @@ export class LogicPassSpoiler {
 
   private itemName(item: PlayerItem) {
     if (this.isMulti) {
-      return `Player ${item.player + 1} ${itemName(item.item.id)}`;
+      const id = item.player + 1;
+      return `Player ${this.decPad(id, this.state.worlds.length.toString().length)} ${itemName(item.item.id)}`;
     } else {
       return itemName(item.item.id);
     }
@@ -360,7 +387,8 @@ export class LogicPassSpoiler {
   private regionName(region: Region) {
     const data = regionData(region);
     if (this.isMulti) {
-      return `World ${data.world + 1} ${regionName(data.id)}`;
+      const id = data.world + 1;
+      return `World ${this.decPad(id, this.state.worlds.length.toString().length)} ${regionName(data.id)}`;
     } else {
       return regionName(data.id);
     }
