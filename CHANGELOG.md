@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 
 ### Chanegd
 
+- Default hint distribution for crosskeys preset.
 - Logic now accounts for appearing at the well's bottom in Kakariko when coming out of it.
 - Logic now accounts for appearing underwater in Zora's Domain when coming from the shortcut.
 - Pirate Fortress Sewers Exit door now requires the Pirate Fortress Entrances option to be shuffled.
