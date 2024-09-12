@@ -330,8 +330,8 @@ static void writeFlash(u32 devAddr, void* dramAddr, u32 size)
 
         int blockSize = CLAMP_MAX(size, SECTOR_SIZE - sectorOffset);
 
-        int need_write = FALSE;
-        int need_erase = FALSE;
+        int needWrite = FALSE;
+        int needErase = FALSE;
 
         for (int i = 0; i < blockSize; i++)
         {
@@ -340,20 +340,20 @@ static void writeFlash(u32 devAddr, void* dramAddr, u32 size)
 
             if (currentValue != targetValue)
             {
-                need_write = TRUE;
+                needWrite = TRUE;
                 if ((currentValue & targetValue) != targetValue)
                 {
-                    need_erase = TRUE;
+                    needErase = TRUE;
                     break;
                 }
             }
         }
 
-        if (need_write)
+        if (needWrite)
         {
             memcpy(buffer + sectorOffset, dramAddr, blockSize);
             
-            if (need_erase)
+            if (needErase)
             {
                 SysFlashrom_EraseSector(sectorPage);
                 doWrite(buffer, sectorPage, PAGES_IN_SECTOR);
