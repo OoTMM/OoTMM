@@ -2,7 +2,7 @@
   dungeon: Forest
   exits:
     "Sacred Meadow": "true"
-    "Forest Temple Main": "is_adult || has_nuts || has_weapon || has_explosives_or_hammer || has_ranged_weapon_child"
+    "Forest Temple Main": "can_damage || can_collect_distance || can_hammer"
   locations:
     "Forest Temple Tree Small Key": "true"
     "Forest Temple GS Entrance": "gs && (has_ranged_weapon || has_explosives || can_use_din)"
@@ -37,7 +37,7 @@
 "Forest Temple Mini-Boss":
   dungeon: Forest
   locations:
-    "Forest Temple Mini-Boss Key": "has_weapon && soul_enemy(SOUL_ENEMY_STALFOS)"
+    "Forest Temple Mini-Boss Key": "can_use_sword && soul_enemy(SOUL_ENEMY_STALFOS)"
     "Forest Temple Pot Miniboss Lower 1": "true"
     "Forest Temple Pot Miniboss Lower 2": "true"
 "Forest Temple Garden West":
@@ -48,8 +48,8 @@
     "Forest Temple Well": "event(FOREST_WELL) || can_dive_big"
     "Forest Temple Garden West Ledge": "climb_anywhere || hookshot_anywhere"
   events:
-    STICKS: "can_hookshot || can_hammer || can_boomerang || (has_nuts && has_weapon)"
-    NUTS: "is_adult || has_weapon || has_explosives || can_use_slingshot"
+    STICKS: "can_hookshot || can_hammer || can_boomerang || (has_nuts && can_use_sword)"
+    NUTS: "can_use_sword || has_explosives || can_use_slingshot"
   locations:
     "Forest Temple GS Garden West": "gs && ((can_longshot || (climb_anywhere && has_bombchu)) || (event(FOREST_LEDGE_REACHED) && (can_collect_distance || (climb_anywhere && has_ranged_weapon))))"
 "Forest Temple Garden West Ledge":
@@ -67,14 +67,14 @@
 "Forest Temple Floormaster":
   dungeon: Forest
   locations:
-    "Forest Temple Floormaster": "soul_floormaster && (has_weapon || can_use_sticks)"
+    "Forest Temple Floormaster": "soul_floormaster && (can_use_sword || can_use_sticks)"
 "Forest Temple Map Room":
   dungeon: Forest
   exits:
-    "Forest Temple Garden West": "soul_bubble && (can_use_bow || has_explosives || ((can_hookshot || has_nuts || can_boomerang || has_shield) && (has_weapon || can_use_slingshot || can_use_sticks)))"
-    "Forest Temple Garden East Ledge": "soul_bubble && (can_use_bow || has_explosives || ((can_hookshot || has_nuts || can_boomerang || has_shield) && (has_weapon || can_use_slingshot || can_use_sticks)))"
+    "Forest Temple Garden West": "soul_bubble && (can_use_bow || has_explosives || ((can_hookshot || has_nuts || can_boomerang || has_shield) && (can_use_sword || can_use_slingshot || can_use_sticks)))"
+    "Forest Temple Garden East Ledge": "soul_bubble && (can_use_bow || has_explosives || ((can_hookshot || has_nuts || can_boomerang || has_shield) && (can_use_sword || can_use_slingshot || can_use_sticks)))"
   locations:
-    "Forest Temple Map": "soul_bubble && (can_use_bow || has_explosives || ((can_hookshot || has_nuts || can_boomerang || has_shield) && (has_weapon || can_use_slingshot || can_use_sticks)))"
+    "Forest Temple Map": "soul_bubble && (can_use_bow || has_explosives || ((can_hookshot || has_nuts || can_boomerang || has_shield) && (can_use_sword || can_use_slingshot || can_use_sticks)))"
 "Forest Temple Garden East Ledge":
   dungeon: Forest
   exits:
@@ -89,8 +89,8 @@
     "Forest Temple Garden East Ledge": "can_longshot || (can_hookshot && trick(OOT_FOREST_HOOK)) || climb_anywhere"
     "Forest Temple Checkerboard": "climb_anywhere || hookshot_anywhere"
   events:
-    STICKS: "can_hookshot || can_hammer || can_boomerang || (has_nuts && has_weapon)"
-    NUTS: "is_adult || has_weapon || has_explosives || can_use_slingshot"
+    STICKS: "can_hookshot || can_hammer || can_boomerang || (has_nuts && can_use_sword)"
+    NUTS: "can_use_sword || has_explosives || can_use_slingshot"
   locations:
     "Forest Temple Garden": "can_hookshot || climb_anywhere"
     "Forest Temple GS Garden East": "gs && (can_hookshot || (climb_anywhere && (has_ranged_weapon || can_use_sword_master || has_explosives || can_use_din || (age_sword_adult && has(SWORD_BIGGORON)) || can_use_sticks || (can_use_sword_kokiri && has_hover_boots))))"
@@ -137,9 +137,9 @@
 "Forest Temple Mini-Boss 2":
   dungeon: Forest
   exits:
-    "Forest Temple Poe 2": "has_weapon && soul_enemy(SOUL_ENEMY_STALFOS)"
+    "Forest Temple Poe 2": "can_use_sword && soul_enemy(SOUL_ENEMY_STALFOS)"
   locations:
-    "Forest Temple Bow": "has_weapon && soul_enemy(SOUL_ENEMY_STALFOS)"
+    "Forest Temple Bow": "can_use_sword && soul_enemy(SOUL_ENEMY_STALFOS)"
     "Forest Temple Pot Miniboss Upper 1": "true"
     "Forest Temple Pot Miniboss Upper 2": "true"
     "Forest Temple Pot Miniboss Upper 3": "true"

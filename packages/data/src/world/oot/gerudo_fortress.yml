@@ -9,7 +9,7 @@
     SEEDS: "is_child"
     CARPENTER_1: "can_rescue_carpenter"
   locations:
-    "Gerudo Fortress Jail 1": "(has_weapon || ((can_boomerang || has_nuts) && can_use_sticks)) && soul_carpenters"
+    "Gerudo Fortress Jail 1": "(can_use_sword || ((can_boomerang || has_nuts) && can_use_sticks)) && soul_carpenters"
     "Gerudo Member Card": "carpenters_rescued"
     "Gerudo Fortress Pot Jail 1 1": "true"
     "Gerudo Fortress Pot Jail 1 2": "true"
@@ -31,7 +31,7 @@
     RUPEES: "true"
     CARPENTER_2: "can_rescue_carpenter"
   locations:
-    "Gerudo Fortress Jail 2": "(has_weapon || ((can_boomerang || has_nuts) && can_use_sticks)) && soul_carpenters"
+    "Gerudo Fortress Jail 2": "(can_use_sword || ((can_boomerang || has_nuts) && can_use_sticks)) && soul_carpenters"
     "Gerudo Member Card": "carpenters_rescued"
     "Gerudo Fortress Pot Jail 2 1": "true"
     "Gerudo Fortress Pot Jail 2 2": "true"
@@ -63,7 +63,7 @@
     RUPEES: "true"
     CARPENTER_4: "can_rescue_carpenter"
   locations:
-    "Gerudo Fortress Jail 4": "(has_weapon || ((can_boomerang || has_nuts) && can_use_sticks)) && soul_carpenters"
+    "Gerudo Fortress Jail 4": "(can_use_sword || ((can_boomerang || has_nuts) && can_use_sticks)) && soul_carpenters"
     "Gerudo Member Card": "carpenters_rescued"
     "Gerudo Fortress Wonder Item Jail 4 1": "can_use_bow"
     "Gerudo Fortress Wonder Item Jail 4 2": "can_use_bow"
@@ -115,7 +115,7 @@
   events:
     CARPENTER_3: "can_rescue_carpenter"
   locations:
-    "Gerudo Fortress Jail 3": "(has_weapon || ((can_boomerang || has_nuts) && can_use_sticks)) && soul_carpenters"
+    "Gerudo Fortress Jail 3": "(can_use_sword || ((can_boomerang || has_nuts) && can_use_sticks)) && soul_carpenters"
     "Gerudo Member Card": "carpenters_rescued"
     "Gerudo Fortress Pot Jail 3 1": "true"
     "Gerudo Fortress Pot Jail 3 2": "true"
@@ -129,7 +129,7 @@
     "Gerudo Fortress Break Room Top": "can_hookshot || climb_anywhere"
   events:
     MAGIC: "evade_gerudo"
-    ARROWS: "is_adult && (has(GERUDO_CARD) || can_hookshot)"
+    ARROWS: "is_adult && (has(GERUDO_CARD) || can_hookshot || has_mask_stone)"
     SEEDS: "is_child && has(GERUDO_CARD)"
   locations:
     "Gerudo Fortress Pot Break Room 1": "true"

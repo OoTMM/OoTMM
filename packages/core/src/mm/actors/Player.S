@@ -124,6 +124,11 @@ PATCH_START 0x808555E4
   nop
 PATCH_END
 
+/* Account for D-pad inputs to skip the mask pull faster */
+PATCH_START 0x808555f4
+  andi v0, v0, 0xcf0f
+PATCH_END
+
 PATCH_GROUP PG_MM_LENIENT_SPIKES
 
 PATCH_START 0x8082da90 + 0x2a95e

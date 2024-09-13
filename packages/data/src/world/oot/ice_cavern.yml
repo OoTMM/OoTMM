@@ -14,7 +14,7 @@
     "Ice Cavern Block Room": "has_blue_fire"
     "Ice Cavern First Fire Room": "(is_adult || climb_anywhere || hookshot_anywhere) && silver_rupees_ic_scythe"
   locations:
-    "Ice Cavern GS Scythe Room": "gs && (can_collect_distance || (climb_anywhere && (has_weapon || can_use_sticks || has_ranged_weapon || has_explosives || can_use_din)))"
+    "Ice Cavern GS Scythe Room": "gs && (can_collect_distance || (climb_anywhere && (can_use_sword || can_use_sticks || has_ranged_weapon || has_explosives || can_use_din)))"
     "Ice Cavern SR Scythe Left": "true"
     "Ice Cavern SR Scythe Center Left": "true"
     "Ice Cavern SR Scythe Back": "true"
@@ -33,7 +33,7 @@
   locations:
     "Ice Cavern Compass": "true"
     "Ice Cavern HP": "true"
-    "Ice Cavern GS HP Room": "gs && (can_collect_distance || (climb_anywhere && (has_weapon || can_use_sticks || has_ranged_weapon || has_explosives || can_use_din)))"
+    "Ice Cavern GS HP Room": "gs && (can_collect_distance || (climb_anywhere && (can_use_sword || can_use_sticks || has_ranged_weapon || has_explosives || can_use_din)))"
 "Ice Cavern First Fire Room":
   dungeon: IC
   events:
@@ -66,9 +66,9 @@
 "Ice Cavern End":
   dungeon: IC
   exits:
-    "Ice Cavern Block Room": "(climb_anywhere || hookshot_anywhere || has_blue_fire) && soul_wolfos && (has_weapon || can_hit_triggers_distance || has_explosives_or_hammer || can_use_din || can_use_sticks)"
+    "Ice Cavern Block Room": "(climb_anywhere || hookshot_anywhere || has_blue_fire) && soul_wolfos && (can_use_sword || can_hit_triggers_distance || has_explosives_or_hammer || can_use_din || can_use_sticks)"
   locations:
-    "Ice Cavern Iron Boots": "soul_wolfos && (has_weapon || can_hit_triggers_distance || has_explosives_or_hammer || can_use_din || can_use_sticks)"
-    "Ice Cavern Sheik Song": "soul_wolfos && soul_npc(SOUL_NPC_SHEIK) && (has_weapon || can_hit_triggers_distance || has_explosives_or_hammer || can_use_din || can_use_sticks)"
-    "Ice Cavern Pot Red Ice 1": "soul_wolfos && has_blue_fire && (has_weapon || can_hit_triggers_distance || has_explosives_or_hammer || can_use_din || can_use_sticks)"
-    "Ice Cavern Pot Red Ice 2": "soul_wolfos && has_blue_fire && (has_weapon || can_hit_triggers_distance || has_explosives_or_hammer || can_use_din || can_use_sticks)"
+    "Ice Cavern Iron Boots": "soul_wolfos && (can_use_sword || can_hit_triggers_distance || has_explosives_or_hammer || can_use_din || can_use_sticks)"
+    "Ice Cavern Sheik Song": "soul_wolfos && soul_npc(SOUL_NPC_SHEIK) && (can_use_sword || can_hit_triggers_distance || has_explosives_or_hammer || can_use_din || can_use_sticks)"
+    "Ice Cavern Pot Red Ice 1": "soul_wolfos && has_blue_fire && (can_use_sword || can_hit_triggers_distance || has_explosives_or_hammer || can_use_din || can_use_sticks)"
+    "Ice Cavern Pot Red Ice 2": "soul_wolfos && has_blue_fire && (can_use_sword || can_hit_triggers_distance || has_explosives_or_hammer || can_use_din || can_use_sticks)"

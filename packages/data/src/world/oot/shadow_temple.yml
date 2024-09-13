@@ -15,8 +15,8 @@
     #There are a lot of ways this works, but it always needs this trick.
     MAGIC: "trick(OOT_LENS)"
   locations:
-    "Shadow Temple Map": "soul_redead_gibdo && soul_keese && has_lens && (has_weapon || can_use_sticks || can_use_din || can_hammer)"
-    "Shadow Temple Hover Boots": "soul_enemy(SOUL_ENEMY_DEAD_HAND) && has_lens && (has_weapon || (can_use_sticks && trick(OOT_DEAD_HAND_STICKS)))"
+    "Shadow Temple Map": "soul_redead_gibdo && soul_keese && has_lens && (can_use_sword || can_use_sticks || can_use_din || can_hammer)"
+    "Shadow Temple Hover Boots": "soul_enemy(SOUL_ENEMY_DEAD_HAND) && has_lens && (can_use_sword || (can_use_sticks && trick(OOT_DEAD_HAND_STICKS)))"
     "Shadow Temple Pot Early Maze 1": "has_lens"
     "Shadow Temple Pot Early Maze 2": "has_lens"
     "Shadow Temple Pot Early Maze 3": "has_lens"
@@ -32,7 +32,7 @@
     "Shadow Temple Open": "cond(!setting(climbMostSurfacesOot, off), small_keys_shadow(4), small_keys_shadow(1)) && has_explosives"
     "Shadow Temple Scythe Silver Rupees": "true"
   locations:
-    "Shadow Temple Compass": "soul_redead_gibdo && (has_weapon || can_use_sticks || can_use_din || can_hammer)"
+    "Shadow Temple Compass": "soul_redead_gibdo && (can_use_sword || can_use_sticks || can_use_din || can_hammer)"
     "Shadow Temple Beamos Big Fairy": "can_play_storms"
 "Shadow Temple Scythe Silver Rupees":
   dungeon: Shadow
@@ -49,7 +49,7 @@
 "Shadow Temple Open":
   dungeon: Shadow
   events:
-    SHADOW_INVISIBLE_SCYTHE_GATE: "soul_like_like && soul_keese && (has_ranged_weapon_adult || can_use_slingshot || can_use_sticks || has_explosives_or_hammer || has_weapon)"
+    SHADOW_INVISIBLE_SCYTHE_GATE: "soul_like_like && soul_keese && (has_ranged_weapon_adult || can_use_slingshot || can_use_sticks || has_explosives_or_hammer || can_use_sword)"
   exits:
     "Shadow Temple Falling Spikes": "silver_rupees_shadow_pit"
     "Shadow Temple Invisible Spikes": "cond(!setting(climbMostSurfacesOot, off), small_keys_shadow(4), small_keys_shadow(2))"
@@ -81,15 +81,15 @@
   dungeon: Shadow
   exits:
     "Shadow Temple Open": "small_keys_shadow(4)"
-    "Shadow Temple Wind Front": "cond(!setting(climbMostSurfacesOot, off), small_keys_shadow(4), small_keys_shadow(3) && ((is_adult && soul_redead_gibdo && can_hookshot) || can_longshot))"
+    "Shadow Temple Wind Front": "cond(!setting(climbMostSurfacesOot, off), small_keys_shadow(4), small_keys_shadow(3) && ((is_adult && (can_use_sword_or_sticks || can_use_din) && soul_redead_gibdo && can_hookshot) || can_longshot))"
     "Shadow Temple Skull Pot": "silver_rupees_shadow_spikes"
   locations:
     "Shadow Temple SR Spikes Back Left": "has_lens && (can_hookshot || climb_anywhere)"
     "Shadow Temple SR Spikes Right": "can_hookshot || climb_anywhere"
     "Shadow Temple SR Spikes Center": "true"
     "Shadow Temple SR Spikes Front Left": "can_hookshot || climb_anywhere"
-    "Shadow Temple SR Spikes Midair": "has_lens && (can_hookshot || climb_anywhere) && (has_weapon || can_use_sticks || can_hammer || has_hover_boots || longshot_anywhere)"
-    "Shadow Temple Invisible Spike Room": "soul_redead_gibdo && (has_weapon || can_use_sticks || can_use_din || can_hammer)"
+    "Shadow Temple SR Spikes Midair": "has_lens && (can_hookshot || climb_anywhere) && (can_use_sword || can_use_sticks || can_hammer || has_hover_boots || longshot_anywhere)"
+    "Shadow Temple Invisible Spike Room": "soul_redead_gibdo && (can_use_sword || can_use_sticks || can_use_din || can_hammer)"
 "Shadow Temple Skull Pot":
   dungeon: Shadow
   locations:
@@ -111,9 +111,9 @@
   dungeon: Shadow
   exits:
     "Shadow Temple Boat": "small_keys_shadow(4)"
-    "Shadow Temple Wind Back": "soul_redead_gibdo && (has_weapon || can_use_din || can_use_sticks || can_hammer)"
+    "Shadow Temple Wind Back": "soul_redead_gibdo && (can_use_sword || can_use_din || can_use_sticks || can_hammer)"
   locations:
-    "Shadow Temple After Wind": "soul_redead_gibdo && (has_weapon || can_use_din || can_use_sticks || can_hammer)"
+    "Shadow Temple After Wind": "soul_redead_gibdo && (can_use_sword || can_use_din || can_use_sticks || can_hammer)"
     "Shadow Temple After Wind Invisible": "has_explosives"
     "Shadow Temple Pot After Wind 1": "true"
     "Shadow Temple Pot After Wind 2": "true"
@@ -129,7 +129,7 @@
   events:
     SHADOW_SHORTCUT: "has_goron_bracelet"
   locations:
-    "Shadow Temple GS Near Boat": "gs && (can_longshot || hookshot_anywhere || (climb_anywhere && (has_weapon || has_ranged_weapon || has_explosives || can_use_din)))"
+    "Shadow Temple GS Near Boat": "gs && (can_longshot || hookshot_anywhere || (climb_anywhere && (can_use_sword || has_ranged_weapon || has_explosives || can_use_din)))"
     "Shadow Temple Heart Shortcut 1": "scarecrow_longshot || hookshot_anywhere || climb_anywhere"
     "Shadow Temple Heart Shortcut 2": "scarecrow_longshot || hookshot_anywhere || climb_anywhere"
 "Shadow Temple After Boat":
@@ -141,8 +141,8 @@
   locations:
     "Shadow Temple Boss Key Room 1": "can_use_din || climb_anywhere || hookshot_anywhere"
     "Shadow Temple Boss Key Room 2": "can_use_din || climb_anywhere || hookshot_anywhere"
-    "Shadow Temple Invisible Floormaster": "soul_floormaster && (has_weapon || can_hit_triggers_distance || can_use_din || can_use_sticks || can_hammer)"
-    "Shadow Temple GS Triple Skull Pot": "gs && (can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_weapon || can_use_sticks || can_use_din || has_bombflowers)))"
+    "Shadow Temple Invisible Floormaster": "soul_floormaster && (can_use_sword || can_hit_triggers_distance || can_use_din || can_use_sticks || can_hammer)"
+    "Shadow Temple GS Triple Skull Pot": "gs && (can_collect_distance || (climb_anywhere && (has_ranged_weapon || can_use_sword || can_use_sticks || can_use_din || has_bombflowers)))"
     "Shadow Temple Pot Boss Key Room": "true"
     "Shadow Temple Pot Invisible Floormaster Room 1": "true"
     "Shadow Temple Pot Invisible Floormaster Room 2": "true"

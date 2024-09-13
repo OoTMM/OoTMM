@@ -3,7 +3,7 @@
   age_change: false
   dungeon: DT
   exits:
-    "Deku Tree After Boss": "soul_boss(SOUL_BOSS_QUEEN_GOHMA) && (has_nuts || can_use_slingshot) && (can_use_sticks || has_weapon)"
+    "Deku Tree After Boss": "soul_boss(SOUL_BOSS_QUEEN_GOHMA) && (has_nuts || can_use_slingshot) && (can_use_sticks || can_use_sword)"
   locations:
     "Deku Tree Boss Grass 1": "can_cut_grass"
     "Deku Tree Boss Grass 2": "can_cut_grass"
@@ -25,7 +25,7 @@
   age_change: false
   dungeon: DC
   exits:
-    "Dodongo Cavern After Boss": "(has_bombs || (has_explosives && has_strength_raw(1))) && soul_boss(SOUL_BOSS_KING_DODONGO) && (can_use_sticks || has_weapon)"
+    "Dodongo Cavern After Boss": "(has_bombs || (has_explosives && has_strength_raw(1))) && soul_boss(SOUL_BOSS_KING_DODONGO) && (can_use_sticks || can_use_sword)"
   locations:
     "Dodongo Cavern Boss Chest": "true"
 "Dodongo Cavern After Boss":
@@ -40,7 +40,7 @@
   age_change: false
   dungeon: JJ
   exits:
-    "Jabu-Jabu After Boss": "soul_boss(SOUL_BOSS_BARINADE) && can_boomerang && (can_use_sticks || has_weapon)"
+    "Jabu-Jabu After Boss": "soul_boss(SOUL_BOSS_BARINADE) && can_boomerang && (can_use_sticks || can_use_sword)"
   locations:
     "Jabu-Jabu Boss Pot 1": "true"
     "Jabu-Jabu Boss Pot 2": "true"
@@ -60,7 +60,7 @@
   age_change: false
   dungeon: Forest
   exits:
-    "Forest Temple After Boss": "soul_boss(SOUL_BOSS_PHANTOM_GANON) && (has_ranged_weapon_adult || can_use_slingshot) && has_weapon"
+    "Forest Temple After Boss": "soul_boss(SOUL_BOSS_PHANTOM_GANON) && (has_ranged_weapon_adult || can_use_slingshot) && can_use_sword"
 "Forest Temple After Boss":
   boss: true
   age_change: false
@@ -86,7 +86,7 @@
   age_change: false
   dungeon: Water
   exits:
-    "Water Temple After Boss": "soul_boss(SOUL_BOSS_MORPHA) && can_hookshot && has_weapon"
+    "Water Temple After Boss": "soul_boss(SOUL_BOSS_MORPHA) && can_hookshot && can_use_sword"
 "Water Temple After Boss":
   boss: true
   age_change: false
@@ -101,7 +101,7 @@
   age_change: false
   dungeon: Spirit
   exits:
-    "Spirit Temple After Boss": "soul_boss(SOUL_BOSS_TWINROVA) && soul_iron_knuckle && has_mirror_shield && has_weapon"
+    "Spirit Temple After Boss": "soul_boss(SOUL_BOSS_TWINROVA) && soul_iron_knuckle && has_mirror_shield && can_use_sword"
 "Spirit Temple After Boss":
   boss: true
   age_change: false
@@ -114,7 +114,7 @@
   age_change: false
   dungeon: Shadow
   exits:
-    "Shadow Temple After Boss": "soul_boss(SOUL_BOSS_BONGO_BONGO) && has_weapon && has_lens && (can_use_bow || can_use_slingshot)"
+    "Shadow Temple After Boss": "soul_boss(SOUL_BOSS_BONGO_BONGO) && can_use_sword && has_lens && (can_use_bow || can_use_slingshot)"
 "Shadow Temple After Boss":
   boss: true
   age_change: false

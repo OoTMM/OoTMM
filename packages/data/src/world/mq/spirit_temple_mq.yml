@@ -95,7 +95,7 @@
   exits:
     #This looks weird but is the last way to account for a very specific scenario involving adult access to the Silver Gauntlets chest and the Colossus drop.
     "Spirit Temple Wallmaster Child Sun": "soul_wallmaster"
-    "Spirit Temple Child Hand": "soul_iron_knuckle && (small_keys_spirit(7) && (has_weapon || can_use_sticks)) || (is_adult && small_keys_spirit(4) && has_lens && (can_play_time || can_play_elegy) && soul_floormaster)"
+    "Spirit Temple Child Hand": "soul_iron_knuckle && ((small_keys_spirit(7) && (has_weapon || can_use_sticks)) || (is_adult && small_keys_spirit(4) && has_lens && (can_play_time || can_play_elegy) && soul_floormaster))"
   locations:
     "MQ Spirit Temple Sun Block Room Chest": "true"
     "MQ Spirit Temple GS Sun Block Room": "gs && is_adult"

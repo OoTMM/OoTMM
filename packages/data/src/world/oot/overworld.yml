@@ -100,7 +100,7 @@
     "Kokiri Forest Kokiri Sword Chest": "is_child"
     "Kokiri Forest GS Soil": "gs_soil && can_damage_skull"
     "Kokiri Forest GS Night Child": "is_child && gs_night && can_damage_skull"
-    "Kokiri Forest GS Night Adult": "is_adult && (can_collect_distance || climb_anywhere) && gs_night"
+    "Kokiri Forest GS Night Adult": "is_adult && (can_collect_distance || (climb_anywhere && can_damage_skull)) && gs_night"
     "Kokiri Forest Rupee Child 1": "is_child"
     "Kokiri Forest Rupee Child 2": "is_child"
     "Kokiri Forest Rupee Crawl 1": "is_child"
@@ -182,7 +182,7 @@
     "Kokiri Forest": "can_bypass_mido"
     "Deku Tree": "(setting(dekuTree, open) || (is_child && setting(dekuTree, vanilla)) || event(MIDO_MOVED)) && (is_child || setting(openDungeonsOot, dekuTreeAdult))"
   events:
-    STICKS: "is_child && soul_deku_baba && (can_boomerang || has_weapon)"
+    STICKS: "is_child && soul_deku_baba && (can_boomerang || can_use_sword)"
     MIDO_MOVED: "can_move_mido"
   gossip:
     "Kokiri Gossip Left of Deku Tree": "true"
@@ -246,7 +246,7 @@
     BOMBS_OR_BOMBCHU: "can_cut_grass"
     RUPEES: "can_cut_grass"
     SEEDS: "is_child && can_cut_grass"
-    ARROWS: "is_adult"
+    ARROWS: "is_adult && can_cut_grass"
     MAGIC: "can_cut_grass"
     FISH: "has_bottle"
     BUGS: "has_bottle && can_cut_grass_for_bugs"
@@ -371,7 +371,7 @@
     BOMBS_OR_BOMBCHU: "can_cut_grass"
     RUPEES: "can_cut_grass"
     SEEDS: "is_child && can_cut_grass"
-    ARROWS: "is_adult"
+    ARROWS: "is_adult && can_cut_grass"
     MAGIC: "can_cut_grass"
     FISH: "has_bottle"
     BUGS: "has_bottle && can_cut_grass_for_bugs"
@@ -394,7 +394,7 @@
     BOMBS_OR_BOMBCHU: "can_cut_grass"
     RUPEES: "can_cut_grass"
     SEEDS: "is_child && can_cut_grass"
-    ARROWS: "is_adult"
+    ARROWS: "is_adult && can_cut_grass"
     MAGIC: "can_cut_grass"
     FISH: "has_bottle"
     BUGS: "has_bottle && can_cut_grass_for_bugs"
@@ -417,7 +417,7 @@
     BOMBS_OR_BOMBCHU: "can_cut_grass"
     RUPEES: "can_cut_grass"
     SEEDS: "is_child && can_cut_grass"
-    ARROWS: "is_adult"
+    ARROWS: "is_adult && can_cut_grass"
     MAGIC: "can_cut_grass"
     FISH: "has_bottle"
     BUGS: "has_bottle && can_cut_grass_for_bugs"
@@ -461,8 +461,8 @@
   exits:
     "Hyrule Field": "true"
   events:
-    SEEDS: "has_sword_kokiri"
-    ARROWS: "is_adult"
+    SEEDS: "is_child && can_use_sword"
+    ARROWS: "is_adult && can_use_sword"
   locations:
     "Hyrule Field Grotto Near Kakariko GS": "gs && (can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_din)))"
 "Hyrule Field Fairy Grotto":
@@ -596,7 +596,8 @@
     RUPEES: "true"
 "Market Pot House Child":
   region: ENTRANCE
-  age_change: false
+  exits:
+    "Market Pot House": "true"
   locations:
     "Market Pot House GS": "gs"
     "Market Pot House Child Pot Ground 1": "true"
@@ -649,7 +650,8 @@
     "Market Pot House Crate 4": "true"
 "Market Pot House Adult":
   region: ENTRANCE
-  age_change: false
+  exits:
+    "Market Pot House": "true"
   locations:
     "Market Pot House Big Poes": "has_big_poe && soul_poe_collector"
     "Market Pot House Adult Pot 1": "true"
@@ -914,19 +916,19 @@
   locations:
     "Great Fairy Defense Upgrade": "can_play_zelda"
 "Lost Woods Lost North":
-  region: LOST_WOODS
+  region: NONE
   exits:
     "Lost Woods": "true"
 "Lost Woods Lost East":
-  region: LOST_WOODS
+  region: NONE
   exits:
     "Lost Woods": "true"
 "Lost Woods Lost South":
-  region: LOST_WOODS
+  region: NONE
   exits:
     "Lost Woods": "true"
 "Lost Woods Lost West":
-  region: LOST_WOODS
+  region: NONE
   exits:
     "Lost Woods": "true"
 "Lost Woods Lost Forest":
@@ -951,7 +953,7 @@
     RUPEES: "true"
     BOMBS_OR_BOMBCHU: "can_cut_grass"
     SEEDS: "is_child && can_cut_grass"
-    ARROWS: "is_adult"
+    ARROWS: "is_adult && can_cut_grass"
     MAGIC: "can_cut_grass"
     BUGS: "has_bottle && can_cut_grass_for_bugs"
   locations:
@@ -992,7 +994,7 @@
     BOMBS_OR_BOMBCHU: "can_cut_grass"
     RUPEES: "can_cut_grass"
     SEEDS: "is_child && can_cut_grass"
-    ARROWS: "is_adult"
+    ARROWS: "is_adult && can_cut_grass"
     MAGIC: "can_cut_grass"
     FISH: "has_bottle"
     BUGS: "has_bottle && can_cut_grass_for_bugs"
@@ -1035,14 +1037,14 @@
     RUPEES: "can_cut_grass"
     BOMBS_OR_BOMBCHU: "can_cut_grass"
     SEEDS: "is_child && can_cut_grass"
-    ARROWS: "is_adult"
+    ARROWS: "is_adult && can_cut_grass"
     MAGIC: "can_cut_grass"
     BUGS: "has_bottle && can_cut_grass_for_bugs"
   locations:
     "Lost Woods Scrub Near Theater Left": "is_child && business_scrub(0x01)"
     "Lost Woods Scrub Near Theater Right": "is_child && business_scrub(0x02)"
     "Lost Woods GS Soil Theater": "gs_soil && can_damage_skull"
-    "Lost Woods GS Bean Ride": "is_adult && gs_night && (can_ride_bean(BEAN_LOST_WOODS_LATE) || climb_anywhere || hookshot_anywhere || (trick(OOT_LOST_WOODS_ADULT_GS) && can_collect_distance && (can_longshot || can_use_bow || has_bombchu || can_use_din)))"
+    "Lost Woods GS Bean Ride": "is_adult && gs_night && (((can_ride_bean(BEAN_LOST_WOODS_LATE) || climb_anywhere) && can_damage_skull) || hookshot_anywhere || (trick(OOT_LOST_WOODS_ADULT_GS) && can_collect_distance && (can_longshot || can_use_bow || has_bombchu || can_use_din)))"
     "Lost Woods Grass Deep 1": "can_cut_grass"
     "Lost Woods Grass Deep 2": "can_cut_grass"
     "Lost Woods Grass Deep 3": "can_cut_grass"
@@ -1052,6 +1054,7 @@
     "Lost Woods Rupee Boulder": "has_explosives_or_hammer"
 "Deku Theater":
   region: ENTRANCE
+  age_change: false
   exits:
     "Lost Woods Deep": "true"
   locations:
@@ -1071,7 +1074,7 @@
   region: SACRED_MEADOW
   exits:
     "Lost Woods Deep": "true"
-    "Sacred Meadow": "(is_child && can_damage && soul_wolfos) || is_adult || climb_anywhere || hookshot_anywhere"
+    "Sacred Meadow": "(is_child && (can_damage || can_hammer) && soul_wolfos) || is_adult || climb_anywhere || hookshot_anywhere"
     "Wolfos Grotto": "hidden_grotto_bomb"
   events:
     RUPEES: "true"
@@ -1083,7 +1086,7 @@
   exits:
     "Sacred Meadow Entryway": "true"
   locations:
-    "Sacred Meadow Grotto": "soul_wolfos && can_damage"
+    "Sacred Meadow Grotto": "soul_wolfos && (can_damage || can_hammer)"
 "Sacred Meadow":
   region: SACRED_MEADOW
   exits:
@@ -1141,10 +1144,11 @@
     "Hyrule Field": "true"
     "Kakariko Trail Start": "setting(kakarikoGate, open) || event(KAKARIKO_GATE_OPEN) || is_adult || climb_anywhere || hookshot_anywhere"
     "Graveyard": "true"
-    "Bottom of the Well": "((setting(openDungeonsOot, BotW) || event(WELL_DRAIN)) && cond(setting(openDungeonsOot, wellAdult), true, is_child)) || (is_child && (has_iron_boots || longshot_anywhere || time_travel_at_will)) || (time_travel_at_will && trick(OOT_WELL_ADULT_TT))"
+    "Kakariko Well": "is_adult || has_iron_boots || longshot_anywhere || event(WELL_DRAIN) || setting(openDungeonsOot, BotW)"
     "Skulltula House": "true"
     "Shooting Gallery Adult": "(is_adult && is_day) || (time_travel_at_will && trick(OOT_ADULT_GALLERY_TT))"
-    "Kakariko Rooftop": "(is_child && is_day) || can_hookshot || (is_adult && trick(OOT_PASS_COLLISION)) || climb_anywhere"
+    "Kakariko Balcony": "(is_child && is_day) || (is_adult && trick(OOT_PASS_COLLISION)) || climb_anywhere"
+    "Kakariko Rooftop": "can_hookshot || climb_anywhere"
     "Kakariko Back": "is_adult || can_hookshot || has_hover_boots || is_day || (trick(OOT_MAN_ON_ROOF) && (can_use_slingshot || has_bombchu)) || climb_anywhere"
     "Kakariko Bazaar": "is_adult && is_day"
     "Kakariko Potion Shop": "is_day"
@@ -1163,7 +1167,7 @@
     "Kakariko GS Tree": "gs_night && is_child"
     "Kakariko GS House of Skulltula": "gs_night && is_child"
     "Kakariko GS Bazaar": "gs_night && is_child"
-    "Kakariko GS Ladder": "gs_night && is_child && (can_use_slingshot || has_bombchu || can_longshot || (climb_anywhere && ((has_weapon || can_use_sticks) || can_use_din)) || (time_travel_at_will && can_use_din))"
+    "Kakariko GS Ladder": "gs_night && is_child && (can_use_slingshot || has_bombchu || can_longshot || (climb_anywhere && ((can_use_sword || can_use_sticks) || can_use_din)) || (time_travel_at_will && can_use_din))"
     # TODO: Some of these pots and crates should be in the Kakariko Back region
     "Kakariko Pot 01": "is_child"
     "Kakariko Pot 02": "is_child"
@@ -1197,13 +1201,19 @@
     "Kakariko Grass 7": "can_cut_grass"
     "Kakariko Grass 8": "can_cut_grass"
     "Kakariko Wonder Item": "is_child"
+"Kakariko Balcony":
+  region: KAKARIKO
+  exits:
+    "Kakariko": "true"
+    "Kakariko Rooftop": "climb_anywhere"
+    "Impa House Back": "true"
 "Kakariko Rooftop":
   region: KAKARIKO
   exits:
     "Kakariko": "true"
-    "Impa House Back": "true"
+    "Kakariko Balcony": "true"
   locations:
-    "Kakariko GS Roof": "is_adult && gs_night && (can_hookshot || climb_anywhere)"
+    "Kakariko GS Roof": "is_adult && gs_night && (can_hookshot || (climb_anywhere && can_damage))"
 "Kakariko Trail Start":
   region: KAKARIKO
   exits:
@@ -1223,6 +1233,11 @@
     "Kakariko Crate Adult Back 2": "is_adult"
     "Kakariko Crate Adult Back 3": "is_adult"
     "Kakariko Crate Adult Back 4": "is_adult"
+"Kakariko Well":
+  region: KAKARIKO
+  exits:
+    "Kakariko": "true"
+    "Bottom of the Well": "is_child || setting(openDungeonsOot, wellAdult) || (time_travel_at_will && trick(OOT_WELL_ADULT_TT))"
 "Kakariko Bazaar":
   region: ENTRANCE
   exits:
@@ -1258,7 +1273,7 @@
 "Kakariko Potion Shop Back":
   region: ENTRANCE
   exits:
-    "Kakariko Back": "is_adult"
+    "Kakariko Back": "is_adult || climb_anywhere"
     "Kakariko Potion Shop Junction": "true"
 "Kakariko Granny Shop":
   region: ENTRANCE
@@ -1284,7 +1299,7 @@
 "Impa House Back":
   region: ENTRANCE
   exits:
-    "Kakariko Rooftop": "true"
+    "Kakariko Balcony": "true"
   locations:
     "Kakariko Cow": "can_play_epona"
     "Kakariko Impa House HP": "true"
@@ -1325,7 +1340,7 @@
   exits:
     "Kakariko": "true"
   locations:
-    "Kakariko Grotto Front": "soul_redead_gibdo && (has_weapon || can_use_sticks || can_use_din || can_hammer)"
+    "Kakariko Grotto Front": "soul_redead_gibdo && (can_use_sword || can_use_sticks || can_use_din || can_hammer)"
 "Kakariko Generic Grotto":
   region: ENTRANCE
   age_change: false
@@ -1335,7 +1350,7 @@
     BOMBS_OR_BOMBCHU: "can_cut_grass"
     RUPEES: "can_cut_grass"
     SEEDS: "is_child && can_cut_grass"
-    ARROWS: "is_adult"
+    ARROWS: "is_adult && can_cut_grass"
     MAGIC: "can_cut_grass"
     FISH: "has_bottle"
     BUGS: "has_bottle && can_cut_grass_for_bugs"
@@ -1365,7 +1380,7 @@
     BOMBS_OR_BOMBCHU: "can_cut_grass"
     RUPEES: "can_cut_grass"
     SEEDS: "is_child && can_cut_grass"
-    ARROWS: "is_adult"
+    ARROWS: "is_adult && can_cut_grass"
     MAGIC: "can_cut_grass"
   locations:
     "Graveyard Dampe Game": "is_child && can_use_wallet(1) && is_dusk && soul_dampe"
@@ -1492,9 +1507,9 @@
   locations:
     "Death Mountain Trail Chest": "has_explosives_or_hammer"
     "Death Mountain Trail HP": "true"
-    "Death Mountain Trail GS Entrance": "gs && (has_explosives || (can_hammer && (is_adult || can_use_sticks || (age_sword_adult && has(SWORD_BIGGORON)) || has_ranged_weapon_child || can_use_din)))"
+    "Death Mountain Trail GS Entrance": "gs && (has_explosives || (can_hammer && (can_use_sticks || can_use_sword_master || can_use_sword_gilded || (age_sword_adult && has(SWORD_BIGGORON)) || has_ranged_weapon || can_use_din)))"
     "Death Mountain Trail GS Soil": "gs_soil && has_bombflowers && can_damage_skull"
-    "Death Mountain Trail GS Above Dodongo":  "gs_night && is_adult && (can_hammer || trick(OOT_DMT_RED_ROCK_GS))"
+    "Death Mountain Trail GS Above Dodongo":  "gs_night && is_adult && (can_hammer || (trick(OOT_DMT_RED_ROCK_GS) && can_use_sword))"
     "Death Mountain Trail Rupee Upper": "is_child && event(BOULDER_DEATH_MOUNTAIN)"
     "Death Mountain Trail Rupee Lower": "is_child && has_explosives_or_hammer"
     "Death Mountain Trail Big Fairy": "can_play_sun"
@@ -1510,7 +1525,7 @@
     "Death Mountain Trail Prescription": "adult_trade(BROKEN_GORON_SWORD) && soul_biggoron"
     "Death Mountain Trail Claim Check": "adult_trade(EYE_DROPS) && soul_biggoron"
     "Death Mountain Trail Biggoron Sword": "adult_trade(CLAIM_CHECK) && soul_biggoron"
-    "Death Mountain Trail GS Before Climb": "is_adult && gs_night && (can_hammer || trick(OOT_DMT_RED_ROCK_GS))"
+    "Death Mountain Trail GS Before Climb": "is_adult && gs_night && (can_hammer || (trick(OOT_DMT_RED_ROCK_GS) && can_use_sword))"
   gossip:
     "Death Mountain Trail Gossip on Climb": "true"
 "Death Mountain Storms Grotto":
@@ -1522,7 +1537,7 @@
     BOMBS_OR_BOMBCHU: "can_cut_grass"
     RUPEES: "can_cut_grass"
     SEEDS: "is_child && can_cut_grass"
-    ARROWS: "is_adult"
+    ARROWS: "is_adult && can_cut_grass"
     MAGIC: "can_cut_grass"
     FISH: "has_bottle"
     BUGS: "has_bottle && can_cut_grass_for_bugs"
@@ -1581,7 +1596,7 @@
     "Goron City Shortcut": "event(GORON_CITY_SHORTCUT) || climb_anywhere || hookshot_anywhere"
     "Death Mountain": "true"
     "Darunia Chamber": "(is_adult && (has_explosives || can_use_bow || has_goron_bracelet) && soul_goron_child) || (is_child && can_play_zelda)"
-    "Goron Shop": "(has_bombflowers && (is_child || time_travel_at_will || (is_adult && soul_goron_child))) || (can_use_bow && soul_goron_child && (is_adult || time_travel_at_will)) || ((can_use_din || event(DARUNIA_TORCH)) && (is_child || time_travel_at_will))"
+    "Goron Shop": "(has_bombflowers && (is_child || time_travel_at_will || (is_adult && soul_goron_child))) || (can_use_bow && soul_goron_child && (is_adult || time_travel_at_will)) || ((can_use_din || event(DARUNIA_TORCH)) && (is_child || time_travel_at_will)) || (has_blue_fire_arrows_mudwall && (is_child || time_travel_at_will))"
     "Goron City Grotto": "(is_adult && can_play_time) || (can_hookshot && (has_tunic_goron_strict || can_use_nayru)) || climb_anywhere"
   events:
     GORON_CITY_SHORTCUT: "has_bombflowers || can_hammer || can_use_bow || can_use_din || event(DARUNIA_TORCH)"
@@ -1595,15 +1610,15 @@
     "Goron City Big Pot HP": "is_child && has_bombs && (event(DARUNIA_TORCH) || has_fire)"
     "Goron City Tunic": "is_adult && (has_explosives || can_use_bow || has_goron_bracelet) && soul_goron_child"
     "Goron City Bomb Bag": "is_child && has_explosives && soul_goron"
-    "Goron City Medigoron Giant Knife": "is_adult && (has_bombflowers || can_hammer) && can_use_wallet(2) && soul_medigoron"
-    "Goron City GS Platform": "gs && is_adult"
+    "Goron City Medigoron Giant Knife": "is_adult && (has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall) && can_use_wallet(2) && soul_medigoron"
+    "Goron City GS Platform": "gs && is_adult && can_damage_skull"
     "Goron City GS Maze": "gs && is_child && (has_explosives_or_hammer || (climb_anywhere && can_damage_skull) || hookshot_anywhere)"
     "Goron City Pot Stairs 1": "true"
     "Goron City Pot Stairs 2": "true"
     "Goron City Pot Stairs 3": "true"
     "Goron City Pot Stairs 4": "true"
     "Goron City Pot Stairs 5": "true"
-    "Goron City Pot Medigoron Room": "has_bombflowers || can_hammer"
+    "Goron City Pot Medigoron Room": "has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall"
   gossip:
     "Goron City Gossip Boulder Maze": "has_explosives_or_hammer || can_lift_silver || climb_anywhere || hookshot_anywhere"
     "Goron City Gossip Near Medigoron": "has_bombflowers || can_hammer"
@@ -1654,7 +1669,7 @@
     BOMBS_OR_BOMBCHU: "can_cut_grass"
     RUPEES: "can_cut_grass"
     SEEDS: "is_child && can_cut_grass"
-    ARROWS: "is_adult"
+    ARROWS: "is_adult && can_cut_grass"
     MAGIC: "can_cut_grass"
   locations:
     "Zora River GS Tree": "gs && is_child && can_damage_skull"
@@ -1696,8 +1711,8 @@
     "Zora River HP Platform": "is_child || has_hover_boots || climb_anywhere || hookshot_anywhere || glitch_megaflip"
     "Zora River Frogs Storms": "is_child && can_play_storms"
     "Zora River Frogs Game": "is_child && can_play_zelda && can_play_saria && can_play_epona && can_play_sun && can_play_time && can_play_storms && can_play_minigame"
-    "Zora River GS Ladder": "is_child && gs_night && can_damage_skull"
-    "Zora River GS Near Grotto": "is_adult && gs_night && (can_collect_distance || climb_anywhere)"
+    "Zora River GS Ladder": "is_child && gs_night && can_damage"
+    "Zora River GS Near Grotto": "is_adult && gs_night && (can_collect_distance || (climb_anywhere && can_damage))"
     "Zora River GS Near Bridge": "is_adult && gs_night && (can_hookshot || (climb_anywhere && (has_ranged_weapon || has_bombchu)))"
     "Zora River Grass": "(is_child || has_hover_boots || hookshot_anywhere || climb_anywhere) && can_cut_grass"
     "Zora River Rupee 1": "is_adult"
@@ -1757,7 +1772,7 @@
     BOMBS_OR_BOMBCHU: "can_cut_grass"
     RUPEES: "can_cut_grass"
     SEEDS: "is_child && can_cut_grass"
-    ARROWS: "is_adult"
+    ARROWS: "is_adult && can_cut_grass"
     MAGIC: "can_cut_grass"
     FISH: "has_bottle"
     BUGS: "has_bottle && can_cut_grass_for_bugs"
@@ -1809,7 +1824,7 @@
     "Zora Domain Diving Game Huge Rupee": "is_child && can_use_wallet(1) && soul_zora"
     "Zora Domain Tunic": "is_adult && has_blue_fire && soul_npc(SOUL_NPC_KING_ZORA)"
     "Zora Domain Eyeball Frog": "has_blue_fire && adult_trade(PRESCRIPTION) && soul_npc(SOUL_NPC_KING_ZORA)"
-    "Zora Domain GS Waterfall": "is_adult && gs_night && (has_ranged_weapon || has_magic || has_explosives)"
+    "Zora Domain GS Waterfall": "is_adult && gs_night && (has_ranged_weapon || (has_magic && can_use_sword) || has_explosives)"
     "Zora Domain Pot 1": "true"
     "Zora Domain Pot 2": "true"
     "Zora Domain Pot 3": "true"
@@ -1871,17 +1886,17 @@
     BOMBS_OR_BOMBCHU: "can_cut_grass"
     RUPEES: "can_cut_grass"
     SEEDS: "is_child && can_cut_grass"
-    ARROWS: "is_adult"
+    ARROWS: "is_adult && can_cut_grass"
     MAGIC: "can_cut_grass"
     BUGS: "has_bottle && can_cut_grass_for_bugs && is_child"
   locations:
     "Lake Hylia Underwater Bottle": "is_child && can_dive_small"
-    "Lake Hylia Fire Arrow": "can_use_bow && (event(WATER_TEMPLE_CLEARED) || (is_adult && (scarecrow_longshot || longshot_anywhere)) || climb_anywhere)"
+    "Lake Hylia Fire Arrow": "is_adult && can_use_bow && (event(WATER_TEMPLE_CLEARED) || scarecrow_longshot || longshot_anywhere || climb_anywhere)"
     "Lake Hylia HP": "can_ride_bean(BEAN_LAKE_HYLIA) || (is_adult && scarecrow_hookshot) || hookshot_anywhere"
     "Lake Hylia GS Lab Wall": "is_child && gs_night && (can_collect_distance || (trick(OOT_LAB_WALL_GS) && (can_use_sword || can_use_sticks)) || (time_travel_at_will && (scarecrow_hookshot || hookshot_anywhere || can_ride_bean(BEAN_LAKE_HYLIA)) && (has_explosives_or_hammer || can_use_din || can_use_slingshot)))"
     "Lake Hylia GS Island": "is_child && gs_night && can_damage_skull"
     "Lake Hylia GS Soil": "gs_soil && can_damage_skull"
-    "Lake Hylia GS Big Tree": "is_adult && gs_night && (can_longshot || climb_anywhere)"
+    "Lake Hylia GS Big Tree": "is_adult && gs_night && (can_longshot || (climb_anywhere && can_damage_skull))"
     "Lake Hylia Island Big Fairy": "can_play_sun && (is_child || scarecrow_longshot || longshot_anywhere || climb_anywhere)"
     # These pots do exist in the vanilla game but they fail to load
     "Lake Hylia Pot 1": "is_child"
@@ -2002,7 +2017,7 @@
   region: ZORA_FOUNTAIN
   exits:
     "Zora Domain Back": "true"
-    "Jabu-Jabu": "is_child && (setting(openDungeonsOot, JJ) || has_fish || (trick(OOT_ENTER_JABU) && (climb_anywhere || hookshot_anywhere || has_weapon || can_use_sticks || time_travel_at_will)))"
+    "Jabu-Jabu": "is_child && (setting(openDungeonsOot, JJ) || has_fish || (trick(OOT_ENTER_JABU) && (climb_anywhere || hookshot_anywhere || can_use_sword || can_use_sticks || time_travel_at_will)))"
     "Zora Fountain Frozen": "is_adult || climb_anywhere || longshot_anywhere"
     "Fairy Fountain Farore": "has_explosives"
     "Zora Fountain Deep": "is_adult && has_tunic_zora && has_iron_boots"
@@ -2079,7 +2094,7 @@
   region: DEATH_MOUNTAIN_CRATER
   exits:
     "Death Mountain Summit": "true"
-    "Death Mountain Crater Bottom": "(is_adult && event(RED_BOULDER_BROKEN)) || (has_hover_boots && (has_weapon || can_hammer || can_use_sticks)) || climb_anywhere || hookshot_anywhere"
+    "Death Mountain Crater Bottom": "(is_adult && event(RED_BOULDER_BROKEN)) || (has_hover_boots && (can_use_sword || can_hammer || can_use_sticks)) || climb_anywhere || hookshot_anywhere"
     "Death Mountain Crater Warp": "has_tunic_goron_strict && ((is_adult && scarecrow_longshot) || longshot_anywhere || glitch_megaflip)"
     "Death Mountain Crater Generic Grotto": "has_explosives_or_hammer"
     "Fairy Fountain Double Magic": "glitch_megaflip"
@@ -2160,7 +2175,7 @@
     BOMBS_OR_BOMBCHU: "can_cut_grass"
     RUPEES: "can_cut_grass"
     SEEDS: "is_child && can_cut_grass"
-    ARROWS: "is_adult"
+    ARROWS: "is_adult && can_cut_grass"
     MAGIC: "can_cut_grass"
     FISH: "has_bottle"
     BUGS: "has_bottle && can_cut_grass_for_bugs"
@@ -2299,7 +2314,7 @@
   locations:
     "Gerudo Fortress Archery Reward 1": "can_ride_epona && can_use_bow && has(GERUDO_CARD) && can_use_wallet(1) && is_day"
     "Gerudo Fortress Archery Reward 2": "can_ride_epona && can_use_bow && has(GERUDO_CARD) && can_use_wallet(1) && is_day"
-    "Gerudo Fortress GS Target": "is_adult && gs_night && (has(GERUDO_CARD) || time_travel_at_will) && (can_collect_distance || climb_anywhere)"
+    "Gerudo Fortress GS Target": "is_adult && gs_night && (has(GERUDO_CARD) || time_travel_at_will) && (can_collect_distance || (climb_anywhere && can_damage))"
     "Gerudo Fortress Crate Main 1": "true"
     "Gerudo Fortress Crate Main 2": "true"
     "Gerudo Fortress Crate Main 3": "true"
@@ -2355,7 +2370,7 @@
     "Gerudo Fortress Upper-Left Ledge": "(is_adult && scarecrow_hookshot) || can_longshot || has_hover_boots || climb_anywhere || hookshot_anywhere || glitch_megaflip"
     "Gerudo Fortress Center Ledge": "true"
   locations:
-    "Gerudo Fortress GS Wall": "is_adult && gs_night && (can_collect_distance || climb_anywhere)"
+    "Gerudo Fortress GS Wall": "is_adult && gs_night && (can_collect_distance || (climb_anywhere && can_damage))"
 "Gerudo Fortress Upper-Left Ledge":
   region: GERUDO_FORTRESS
   exits:
@@ -2451,7 +2466,7 @@
     "Desert Colossus HP": "can_ride_bean(BEAN_DESERT_COLOSSUS)"
     "Desert Colossus GS Soil": "gs_soil && can_damage_skull"
     "Desert Colossus GS Tree": "is_adult && gs_night && (can_collect_distance || (climb_anywhere && (has_explosives || has_ranged_weapon || can_use_din)))"
-    "Desert Colossus GS Plateau": "is_adult && gs_night && ((can_collect_distance && trick(OOT_COLOSSUS_GS_NO_BEAN)) || can_ride_bean(BEAN_DESERT_COLOSSUS))"
+    "Desert Colossus GS Plateau": "is_adult && gs_night && ((can_collect_distance && trick(OOT_COLOSSUS_GS_NO_BEAN)) || (can_ride_bean(BEAN_DESERT_COLOSSUS) && can_damage_skull))"
     "Desert Colossus Wonder Item Oasis 1": "can_use_bow || can_use_slingshot"
     "Desert Colossus Wonder Item Oasis 2": "can_use_bow || can_use_slingshot"
     "Desert Colossus Wonder Item Oasis Child": "is_child && can_use_slingshot"

@@ -157,7 +157,8 @@ export const SETTINGS = [{
   category: 'hints',
   type: 'boolean',
   description: 'Hints will tell if an item is foolish, sometimes required, or always required',
-  default: false
+  default: false,
+  cond: (s: any) => s.logic !== 'none',
 }, {
   key: 'songs',
   name: 'Song Shuffle',
@@ -570,7 +571,7 @@ export const SETTINGS = [{
   name: 'Hives Shuffle (MM)',
   category: 'main.shuffle',
   type: 'boolean',
-  description: 'Controls whether or not the beehives are shuffled (MM)',
+  description: 'Controls whether or not the beehives are shuffled (MM)<br>One beehive in the grotto with Bio Babas will always be shuffled regardless of this setting, thus CAMC will not affect it.',
   cond: hasMM,
   default: false
 }, {
@@ -2571,7 +2572,7 @@ export const SETTINGS = [{
   name: 'Allow One-Ways to take you elsewhere than other one-ways',
   category: 'entrances',
   type: 'boolean',
-  description: 'Makes it so one-ways can take you to any place also shuffled',
+  description: 'Makes it so one-ways can take you to any place also shuffled.<br>This also affect warp songs and soaring locations if they are included in one-ways.',
   default: false,
   cond: (x: any) => x.erOneWays !== 'none'
 }] as const;

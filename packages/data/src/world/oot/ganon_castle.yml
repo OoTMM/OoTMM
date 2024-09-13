@@ -44,7 +44,7 @@
     "Ganon Castle Light Chest Around 4": "true"
     "Ganon Castle Light Chest Around 5": "true"
     "Ganon Castle Light Chest Around 6": "true"
-    "Ganon Castle Light Chest Center": "soul_keese && soul_skulltula && has_lens && (has_weapon || has_explosives_or_hammer || can_use_slingshot || can_use_sticks)"
+    "Ganon Castle Light Chest Center": "soul_keese && soul_skulltula && has_lens && (can_use_sword || has_explosives_or_hammer || can_use_slingshot || can_use_sticks)"
     "Ganon Castle Light Chest Lullaby": "small_keys_ganon(1) && can_play_zelda"
 "Ganon Castle Light 2":
   dungeon: Ganon
@@ -70,7 +70,7 @@
   exits:
     "Ganon Castle Forest 2": "has_fire_arrows || (can_use_din && (has_ranged_weapon_adult || climb_anywhere))"
   locations:
-    "Ganon Castle Forest Chest": "soul_wolfos && (has_weapon || has_explosives_or_hammer || can_hit_triggers_distance || can_use_sticks || can_use_din)"
+    "Ganon Castle Forest Chest": "soul_wolfos && (can_use_sword || has_explosives_or_hammer || can_hit_triggers_distance || can_use_sticks || can_use_din)"
 "Ganon Castle Forest 2":
   dungeon: Ganon
   exits:
@@ -109,7 +109,7 @@
 "Ganon Castle Water":
   dungeon: Ganon
   events:
-    BLUE_FIRE: "has_bottle && (has_weapon || has_explosives_or_hammer || can_use_sticks)"
+    BLUE_FIRE: "has_bottle && (can_use_sword || has_explosives_or_hammer || can_use_sticks)"
   exits:
     "Ganon Castle Water 2": "soul_freezard && has_blue_fire && (can_use_sword_master || can_use_sword_goron || can_use_sticks || has_explosives_or_hammer || can_use_din)"
   locations:
