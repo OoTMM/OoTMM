@@ -61,7 +61,7 @@
   dungeon: IC
   exits:
     "Ice Cavern Main Room": "has_blue_fire || hookshot_anywhere"
-    "Ice Cavern Vanilla Push Block Room Scarecrow Ledge": "climb_anywhere || hookshot_anywhere || scarecrow_hookshot ||(is_adult && trick(OOT_MQ_ICE_SCARE_NOTHING)) || (has_hover_boots && (can_longshot || (is_adult && trick(OOT_MQ_ICE_SCARE_HOVER))))"
+    "Ice Cavern Vanilla Push Block Room Scarecrow Ledge": "climb_anywhere || hookshot_anywhere || scarecrow_hookshot || (is_adult && trick(OOT_MQ_ICE_SCARE_NOTHING)) || (has_hover_boots && (can_longshot || (is_adult && trick(OOT_MQ_ICE_SCARE_HOVER))))"
     "Ice Cavern Past Red Ice Before Shiek": "climb_anywhere || hookshot_anywhere || (has_blue_fire && (is_adult || (can_play_time && has_hover_boots)))"
   events:
     BLUE_FIRE: "has_bottle && (climb_anywhere || hookshot_anywhere || can_play_time)"
