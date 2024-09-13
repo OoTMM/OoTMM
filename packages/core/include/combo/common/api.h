@@ -105,8 +105,8 @@ u32     Flags_GetTreasure(GameState_Play* play, int flag);
 void    SetChestFlag(GameState_Play* play, int flag);
 u32     Flags_GetCollectible(GameState_Play* play, int flag);
 void    Flags_SetCollectible(GameState_Play* play, int flag);
-u32     GetSwitchFlag(GameState_Play* play, int flag);
-u32     SetSwitchFlag(GameState_Play* play, int flag);
+u32     Flags_GetSwitch(GameState_Play* play, int flag);
+u32     Flags_SetSwitch(GameState_Play* play, int flag);
 void    ClearSwitchFlag(GameState_Play* play, int flag);
 void    SetRoomClear(GameState_Play* play, int flag);
 u32     GetRoomClearFlag(GameState_Play* play, int flag);
@@ -383,6 +383,8 @@ int Item_CollectibleDropTable2(u32 index);
 Actor_EnItem00* Item_DropCollectible(GameState_Play* play, const Vec3f* pos, s16 params);
 void Item_DropCollectibleRandom(GameState_Play* play, Actor* from, const Vec3f* pos, s16 params);
 int Item_CanDropBigFairy(GameState_Play* play, s32 index, s32 collectibleFlag);
+
+MtxF* Matrix_GetCurrent(void);
 
 #if defined(GAME_MM)
 f32 VectDist(Vec3f* vec1, Vec3f* vec2);

@@ -13,7 +13,7 @@ export function itemByID(id: string): Item {
   if (['OOT_FLEXIBLE', 'OOT_RANDOM'].includes(id)) {
     id = 'OOT_RUPEE_GREEN';
   }
-  if (['MM_???', 'MM_RANDOM'].includes(id)) {
+  if (['MM_???', 'MM_FLEXIBLE', 'MM_RANDOM'].includes(id)) {
     id = 'MM_RUPEE_GREEN';
   }
   if (['MM_ARROWS_20'].includes(id)) {

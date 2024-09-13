@@ -18,6 +18,14 @@
     "WARP_SONGS": "true"
   locations:
     "Great Bay Temple Entrance Chest": "has_sticks || can_use_fire_short_range || (has_arrows && trick(MM_GBT_ENTRANCE_BOW))"
+    "Great Bay Temple Barrel Entrance 1": "true"
+    "Great Bay Temple Barrel Entrance 2": "true"
+    "Great Bay Temple Barrel Entrance 3": "true"
+    "Great Bay Temple Barrel Entrance 4": "true"
+    "Great Bay Temple Barrel Entrance 5": "true"
+    "Great Bay Temple Barrel Entrance 6": "true"
+    "Great Bay Temple Barrel Entrance 7": "true"
+    "Great Bay Temple Barrel Entrance 8": "true"
 "Great Bay Temple Water Wheel":
   dungeon: GB
   events:
@@ -161,6 +169,11 @@
     "Great Bay Temple Crate Chu Room 3": "true"
     "Great Bay Temple Crate Chu Room 4": "true"
     "Great Bay Temple Crate Chu Room 5": "true"
+    "Great Bay Temple Barrel Chu Room 1": "true"
+    "Great Bay Temple Barrel Chu Room 2": "true"
+    "Great Bay Temple Barrel Chu Room 3": "true"
+    "Great Bay Temple Barrel Chu Room 4": "true"
+    "Great Bay Temple Barrel Chu Room 5": "true"
 "Great Bay Temple Boss Key Room":
   dungeon: GB
   exits:
@@ -206,6 +219,9 @@
     "Great Bay Temple Pot Green Pipe 1 2": "underwater_walking || hookshot_anywhere"
     "Great Bay Temple Pot Green Pipe 1 3": "underwater_walking || hookshot_anywhere"
     "Great Bay Temple Pot Green Pipe 1 4": "underwater_walking || hookshot_anywhere"
+    "Great Bay Temple Barrel Green Pipe 1 1": "can_use_ice_arrows"
+    "Great Bay Temple Barrel Green Pipe 1 2": "can_use_ice_arrows"
+    "Great Bay Temple Barrel Green Pipe 1 3": "can_use_ice_arrows"
     "Great Bay Temple Rupee Hookshot 1": "can_hookshot || short_hook_anywhere"
     "Great Bay Temple Rupee Hookshot 2": "can_hookshot || short_hook_anywhere"
 "Great Bay Temple Green Pipe 2":
@@ -224,6 +240,8 @@
     "Great Bay Temple Pot Green Pipe 2 6": "(can_dive_small && (has_arrows || has_bombchu || can_hookshot)) || underwater_walking || hookshot_anywhere || (can_use_ice_arrows && short_hook_anywhere)"
     "Great Bay Temple Pot Green Pipe 2 7": "(can_dive_small && (has_arrows || has_bombchu)) || underwater_walking || (can_use_ice_arrows && short_hook_anywhere)"
     "Great Bay Temple Pot Green Pipe 2 8": "(can_dive_small && (has_arrows || has_bombchu)) || underwater_walking || (can_use_ice_arrows && short_hook_anywhere)"
+    "Great Bay Temple Barrel Green Pipe 2 1": "true"
+    "Great Bay Temple Barrel Green Pipe 2 2": "true"
 "Great Bay Temple Green Pipe 3":
   dungeon: GB
   exits:

@@ -3,7 +3,7 @@
 static void EnBsb_OnDeath(Actor* this, GameState_Play* play)
 {
     /* Disable the fire ring */
-    SetSwitchFlag(play, 0xb);
+    Flags_SetSwitch(play, 0xb);
 
     /* Mark Keeta as dead */
     MM_SET_EVENT_WEEK(EV_MM_WEEK_KEETA_DEAD);

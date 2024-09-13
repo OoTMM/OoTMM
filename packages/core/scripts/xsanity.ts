@@ -182,6 +182,8 @@ const ACTORS_MM = {
   OBJ_KIBAKO: 0x81,
   OBJ_KIBAKO2: 0xe5,
   OBJ_COMB: 0x0e4,
+  OBJ_FLOWERPOT: 0x13e,
+  OBJ_TARU: 0x22d,
   //DOOR_ANA: 0x55,
 };
 
@@ -199,6 +201,7 @@ const ACTOR_SLICES_MM = {
   [ACTORS_MM.EN_ELF]: 8,
   [ACTORS_MM.OBJ_MURE3]: 7,
   [ACTORS_MM.EN_HIT_TAG]: 3,
+  [ACTORS_MM.OBJ_FLOWERPOT]: 2,
 }
 
 const INTERESTING_ACTORS_OOT = Object.values(ACTORS_OOT);
@@ -1372,6 +1375,19 @@ function actorHandlerMmObjComb(checks: Check[], ra: RoomActor) {
   checks.push({ roomActor: ra, item, name: 'Hive', type: 'hive' });
 }
 
+function actorHandlerMmObjFlowerpot(checks: Check[], ra: RoomActor) {
+  const item = mmCollectibleDrop(ra.actor.params & 0x3f);
+  checks.push({ roomActor: ra, sliceId: 0, item: 'NOTHING', name: 'Potted Plant', name2: 'Pot', type: 'pot' });
+  checks.push({ roomActor: ra, sliceId: 1, item: item, name: 'Potted Plant', name2: 'Grass', type: 'grass' });
+}
+
+function actorHandlerMmObjTaru(checks: Check[], ra: RoomActor) {
+  if (ra.actor.params & 0x80) return; /* Weird fake-barrel */
+  const item = mmCollectibleDrop(ra.actor.params & 0x3f);
+  if (item === 'STRAY_FAIRY' || item === 'HEART_PIECE') return;
+  checks.push({ roomActor: ra, item, name: 'Barrel', type: 'barrel' });
+}
+
 const ACTORS_HANDLERS_OOT = {
   [ACTORS_OOT.EN_KUSA]: actorHandlerOotEnKusa,
   [ACTORS_OOT.OBJ_COMB]: actorHandlerOotObjComb,
@@ -1381,6 +1397,8 @@ const ACTORS_HANDLERS_OOT = {
 
 const ACTORS_HANDLERS_MM = {
   [ACTORS_MM.OBJ_COMB]: actorHandlerMmObjComb,
+  [ACTORS_MM.OBJ_FLOWERPOT]: actorHandlerMmObjFlowerpot,
+  [ACTORS_MM.OBJ_TARU]: actorHandlerMmObjTaru,
 };
 
 const ACTORS_HANDLERS = {
@@ -1428,7 +1446,14 @@ function outputChecks(game: 'oot' | 'mm', checks: Check[], filter?: string) {
     if (check.name2) {
       name = `${name} ${check.name2}`;
     }
-    console.log(`${name},        ${check.type},            NONE,                 SCENE_${ra.sceneId.toString(16)}, ${hexPad(key, 5)}, ${check.item}`);
+    const components: string[] = [];
+    components.push(`${name},`.padEnd(60));
+    components.push(`${check.type},`.padEnd(16));
+    components.push('NONE,'.padEnd(22));
+    components.push(`SCENE_${ra.sceneId.toString(16)},`.padEnd(32));
+    components.push(`${hexPad(key, 5)},`.padEnd(28));
+    components.push(check.item);
+    console.log(components.join(''));
   }
 }
 

@@ -329,6 +329,16 @@ export const TRICKS: Tricks = {
     name: "Destroy Beehives using Bombchu (OOT)",
     tooltip: "Use some careful timing with a Bombchu to blow up the beehives across Hyrule.",
   },
+  OOT_BOTW_MQ_BACKFLIP: {
+    game: 'oot',
+    name: "Backflip/Sidehop Over Gap to Reach BotW MQ's Main Room's Center",
+    tooltip: "Makes reachable the center of the main room without Zelda's Lullaby or Hover Boots.",
+  },
+  OOT_DEKU_MQ_WATER_ROOM_SPIKE_ROLL: {
+    game: 'oot',
+    name: "Roll Under Deku Tree MQ Water Room's Rotating Spike.",
+    tooltip: "Puts crossing the Water Room in Deku Tree MQ in logic with no items, as any age.",
+  },
   MM_LENS: {
     game: 'mm',
     name: 'Fewer Lens Requirements (MM)',

@@ -69,5 +69,5 @@ int comboDoorIsUnlocked(GameState_Play* play, Actor* actor)
     else if (type == DOOR_SMALL_KEY && Config_Flag(CFG_OOT_NO_SMALL_KEY))
         return 1;
 
-    return GetSwitchFlag(play, flag);
+    return Flags_GetSwitch(play, flag);
 }
