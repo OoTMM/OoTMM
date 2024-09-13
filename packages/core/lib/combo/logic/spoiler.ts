@@ -49,6 +49,17 @@ export class LogicPassSpoiler {
     return maxLength+1;
   }
 
+  private getImportanceSuffix(importance: number): string {
+    if(this.state.opts.settings.logic === 'none') return ""; // No need for importance in no-logic
+    switch (importance) {
+      case -1:
+      case  0: return "";
+      case  1: return "(sometimes required)";
+      case  2: return "(REQUIRED)";
+      default: return "Unreachable";
+    }
+  }
+
   private writeHeader() {
     this.writer.write(`Seed: ${this.state.opts.seed}`);
     this.writer.write(`Version: ${VERSION}`);
@@ -330,7 +341,7 @@ export class LogicPassSpoiler {
           const world = this.state.worlds[hint.world];
           const longestGossipNameLength = this.getMaxKeyLength(gossipsItemExact);
           for(let i = 0; i < hint.items.length; i++) {
-            this.writer.write(`${(i ? " ": stone).padEnd(longestGossipNameLength)} ${world.checkHints[hint.check][i].padEnd(longestLocationNameLength + 1)} ${this.itemName(hint.items[i])}`);
+            this.writer.write(`${(i ? " ": stone).padEnd(longestGossipNameLength)} ${world.checkHints[hint.check][i].padEnd(longestLocationNameLength + 1)} ${this.itemName(hint.items[i])} ${this.getImportanceSuffix(hint.importances[i])}`);
           }
         }
         this.writer.unindent('');
@@ -338,14 +349,14 @@ export class LogicPassSpoiler {
 
       if (gossipsItemRegion.length > 0) {
         this.writer.indent('Regional Hints:');
-        const longestRegionNameLength = this.regionName([...gossipsItemRegion.values()].reduce(  (a, b) => { return this.regionName(a[1].region).length > this.regionName(b[1].region).length ? a : b; } )[1].region).length;
+        const longestRegionNameLength = this.regionName([...gossipsItemRegion.values()].reduce((a, b) => { return this.regionName(a[1].region).length > this.regionName(b[1].region).length ? a : b; } )[1].region).length;
         const longestGossipNameLength = this.getMaxKeyLength(gossipsItemRegion);
         for (const [stone, hint] of gossipsItemRegion) {
-          this.writer.write(`${stone.padEnd(longestGossipNameLength)} ${this.regionName(hint.region).padEnd(longestRegionNameLength + 1)} ${this.itemName(hint.item)}`);
+          this.writer.write(`${stone.padEnd(longestGossipNameLength)} ${this.regionName(hint.region).padEnd(longestRegionNameLength + 1)} ${this.itemName(hint.item)} ${this.getImportanceSuffix(hint.importance)}`);
         }
         this.writer.unindent('');
       }
-      this.writer.write('');
+
       this.writer.indent('Foolish Regions:');
       const foolish = sortBy([...hints.foolish.keys()], x => -hints.foolish.get(x)!);
       const longestRegionName = foolish.reduce( function (a, b) { return regionName(a).length > regionName(b).length ? regionName(a) : regionName(b); } ).length;
