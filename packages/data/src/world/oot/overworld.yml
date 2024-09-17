@@ -1804,7 +1804,7 @@
   region: ZORA_DOMAIN
   exits:
     "Zora River Behind Falls": "true"
-    "Lake Hylia": "is_child && (can_dive_small || longshot_anywhere || (trick(OOT_LAKE_SHORTCUT) && hookshot_anywhere))"
+    "Zora Domain Shortcut": "is_child && (can_dive_small || longshot_anywhere || (trick(OOT_LAKE_SHORTCUT) && hookshot_anywhere))"
     "Zora Domain Back": "king_zora_moved || (is_adult && trick(OOT_KZ_SKIP)) || climb_anywhere || hookshot_anywhere"
     "Zora Shop": "is_child || has_blue_fire"
     "Zora Domain Grotto": "hidden_grotto_storms"
@@ -1834,6 +1834,16 @@
     "Zora Domain Hive Front 2": "is_child && break_hive_high"
   gossip:
     "Zora Domain Gossip": "true"
+"Zora Domain Underwater":
+  region: ZORA_DOMAIN
+  exits:
+    "Zora Domain": "true"
+    "Zora Domain Shortcut": "has_iron_boots"
+"Zora Domain Shortcut":
+  region: ZORA_DOMAIN
+  exits:
+    "Zora Domain Underwater": "true"
+    "Lake Hylia": "true"
 "Zora Domain Back":
   region: ZORA_DOMAIN
   exits:
@@ -1874,7 +1884,7 @@
   exits:
     "Hyrule Field": "true"
     "Hyrule Field Drawbridge": "is_child"
-    "Zora Domain": "(is_child && (can_dive_small || longshot_anywhere || (trick(OOT_LAKE_SHORTCUT) && hookshot_anywhere))) || time_travel_at_will || (is_adult && setting(openZdShortcut))"
+    "Zora Domain Shortcut": "(is_child && (can_dive_small || longshot_anywhere || (trick(OOT_LAKE_SHORTCUT) && hookshot_anywhere))) || time_travel_at_will || (is_adult && setting(openZdShortcut))"
     "Laboratory": "true"
     "Water Temple": "(has_iron_boots && has_tunic_zora && (can_hookshot || setting(openDungeonsOot, Water))) || (trick(OOT_WATER_GOLD_SCALE) && is_adult && (can_longshot || setting(openDungeonsOot, Water)) && has_scale_raw(2))"
     "Fishing Pond": "is_child || event(WATER_TEMPLE_CLEARED) || (is_adult && scarecrow_hookshot) || can_ride_bean(BEAN_LAKE_HYLIA) || hookshot_anywhere || climb_anywhere || time_travel_at_will"

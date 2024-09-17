@@ -7,10 +7,12 @@ All notable changes to this project will be documented in this file.
 ### Chanegd
 
 - Logic now accounts for appearing at the well's bottom in Kakariko when coming out of it.
+- Logic now accounts for appearing underwater in Zora's Domain when coming from the shortcut.
 
 ### Fixed
 
 - Logic no longer thinks you can swap ages in the Deku Theater.
+- Logic now accounts for the Hylian Guard Soul for the Keaton Mask sale in Kakariko.
 
 ## [25.0] - 2024-09-08
 
