@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 ### Chanegd
 
 - Logic now accounts for appearing at the well's bottom in Kakariko when coming out of it.
+- Logic now accounts for appearing underwater in Zora's Domain when coming from the shortcut.
 - Pirate Fortress Sewers Exit door now requires the Pirate Fortress Entrances option to be shuffled.
 - Pirate Fortress Sewers Gate and interior passages now require the Pirate Fortress Entrances option to be shuffled.
 - Pirate Fortress will no longer be considered a dungeon if its entrances are shuffled among the overworld.
@@ -18,6 +19,7 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 
 - Logic no longer thinks you can swap ages in the Deku Theater.
+- Logic now accounts for the Hylian Guard Soul for the Keaton Mask sale in Kakariko.
 
 ## [25.0] - 2024-09-08
 
