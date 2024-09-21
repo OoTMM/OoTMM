@@ -1,6 +1,6 @@
 #include <combo.h>
 
-/* Don't turn into child immediately */
+/* Do not turn into child immediately */
 PATCH_START 0x80b0a7c0
   nop
 PATCH_END
@@ -16,4 +16,13 @@ PATCH_END
 
 PATCH_START 0x80b07a30
   b .+0x10
+PATCH_END
+
+/* Skip the pan out before gaining control of Link */
+PATCH_START 0x80b05bbc
+  li t9, 0x4
+PATCH_END
+
+PATCH_START 0x80b061c8
+  li at, 0x1
 PATCH_END
