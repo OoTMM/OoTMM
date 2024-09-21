@@ -134,6 +134,7 @@
     "Woodfall Temple Main": "true"
     "Woodfall Temple Pits Room": "true"
     "Woodfall Temple Pre-Boss": "has_arrows"
+    "Woodfall Temple Water Room Upper": "true"
     "WARP_SONGS": "true"
   events:
     WOODFALL_TEMPLE_MAIN_FLOWER: "has_arrows"

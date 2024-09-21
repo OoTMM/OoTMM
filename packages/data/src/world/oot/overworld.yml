@@ -2313,7 +2313,7 @@
     "Gerudo Fortress Carpenter 1 Left": "true"
     "Gerudo Fortress Carpenter 1 Right": "true"
     "Gerudo Fortress Kitchen Tunnel End": "true"
-    "Gerudo Fortress Carpenter 2 Bottom": "true"
+    "Gerudo Fortress Carpenter 4 Bottom": "true"
     "Gerudo Valley After Bridge": "true"
     "Fortress Near Wasteland": "event(OPEN_FORTRESS_GATE) || climb_anywhere || hookshot_anywhere"
     "Gerudo Training Grounds": "soul_thief_guard && has(GERUDO_CARD) && can_use_wallet(1) && (is_adult || (time_travel_at_will && trick(OOT_GTG_CHILD_TT)))"
