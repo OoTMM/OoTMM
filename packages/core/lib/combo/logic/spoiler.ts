@@ -357,14 +357,17 @@ export class LogicPassSpoiler {
         this.writer.unindent('');
       }
 
-      this.writer.indent('Foolish Regions:');
-      const foolish = sortBy([...hints.foolish.keys()], x => -hints.foolish.get(x)!);
-      const longestRegionName = foolish.reduce( function (a, b) { return regionName(a).length > regionName(b).length ? regionName(a) : regionName(b); } ).length;
-      for (const f of foolish) {
-        const weight = hints.foolish.get(f);
-        this.writer.write(`${regionName(f).padEnd(longestRegionName + 1)}: ${weight}`);
+      if(hints.foolish.size > 0) {
+        this.writer.indent('Foolish Regions:');
+        const foolish = sortBy([...hints.foolish.keys()], x => -hints.foolish.get(x)!);
+        const longestRegionName = foolish.reduce( function (a, b) { return regionName(a).length > regionName(b).length ? regionName(a) : regionName(b); } ).length;
+        for (const f of foolish) {
+          const weight = hints.foolish.get(f);
+          this.writer.write(`${regionName(f).padEnd(longestRegionName + 1)}: ${weight}`);
+        }
+        this.writer.unindent();
       }
-      this.writer.unindent();
+      
       if (this.isMulti) this.writer.unindent('');
     }
     this.writer.unindent('');
