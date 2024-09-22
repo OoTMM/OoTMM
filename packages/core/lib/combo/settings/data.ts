@@ -2384,7 +2384,8 @@ export const SETTINGS = [{
   category: 'entrances',
   type: 'boolean',
   default: false,
-  cond: (x: any) => hasMM(x) && x.erDungeons !== 'none'
+  description: 'Shuffles the main Pirate Fortress entrance among dungeons. Option disabled if the other entrances are shuffled among the overworld.',
+  cond: (x: any) => hasMM(x) && x.erDungeons !== 'none' && ((x.erPiratesWorld && x.erOverworld === 'none') || !x.erPiratesWorld)
 }, {
   key: 'erBeneathWell',
   name: 'Shuffle Beneath The Well with Dungeons',
@@ -2448,6 +2449,14 @@ export const SETTINGS = [{
   default: 'none',
   description: 'Shuffle every overworld entrance.',
 }, {
+  key: 'erPiratesWorld',
+  name: 'Shuffle Pirate Fortress Entrances',
+  category: 'entrances',
+  type: 'boolean',
+  default: false,
+  description: 'Shuffle some entrances within Pirate\'s Fortress, including the main entrance if Overworld ER is enabled.<br>Shuffle the Sewers exit door if Extra Interiors are enabled.',
+  cond: (x: any) => hasMM(x) && (x.erOverworld !== 'none' || x.erIndoorsExtra)
+}, {
   key: 'erIndoors',
   name: 'Shuffle Interiors',
   category: 'entrances',
@@ -2472,7 +2481,7 @@ export const SETTINGS = [{
   name: 'Shuffle Extra Interiors',
   category: 'entrances',
   type: 'boolean',
-  description: 'Shuffle additional, more complex interiors. These include:<br>- OOT: Link\'s House, Temple of Time, Windmill, Kak Potion Shop<br>- MM: Stock Pot Inn, Astral Observatory/Bombers\' Hideout, Swamp Tourist Hut, Ikana Spring Cave, Music Box House',
+  description: 'Shuffle additional, more complex interiors. These include:<br>- OOT: Link\'s House, Temple of Time, Windmill, Kak Potion Shop<br>- MM: Stock Pot Inn, Astral Observatory/Bombers\' Hideout, Swamp Tourist Hut, Ikana Spring Cave, Music Box House<br>- Pirate\'s Fortress Sewers Exit is included if Shuffle Pirate Fortress Entrances is enabled',
   default: false,
   cond: (x: any) => x.erIndoors !== 'none'
 }, {
