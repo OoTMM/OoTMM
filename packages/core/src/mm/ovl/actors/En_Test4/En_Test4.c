@@ -3,6 +3,7 @@
 #include <combo/entrance.h>
 #include <combo/environment.h>
 #include <combo/interface.h>
+#include <combo/config.h>
 #include "En_Test4.h"
 
 #define FLAGS (ACTOR_FLAG_MM_10 | ACTOR_FLAG_MM_20 | ACTOR_FLAG_MM_100000)
@@ -402,9 +403,13 @@ void EnTest4_HandleEvents(Actor_EnTest4* this, GameState_Play* play)
             {
                 if (gMmSave.day == 3)
                 {
-                    Interface_StartMoonCrash(play);
-                    Actor_Kill(&this->actor);
-                    MM_SET_EVENT_INF(EVENTINF_17);
+                    Interface_SkipMoonCrash(play);
+                    if(!Config_Flag(CFG_MM_MOON_CRASH_CYCLE))
+                    {
+                        Actor_Kill(&this->actor);
+                        MM_SET_EVENT_INF(EVENTINF_17);
+                    }
+
                 }
                 else if (((sCsIdList[this->daytimeIndex] <= -1) ||
                             (play->actorCtx.flags & ACTORCTX_FLAG_TELESCOPE_ON)) &&

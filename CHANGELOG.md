@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file.
 
 ### Chanegd
 
+- Moon Crash cutscene is skipped in Cycle behavior.
 - Hint section now shows the hint importance.
 - Hint section format in Spoiler log.
 - Default hint distribution for crosskeys preset.
