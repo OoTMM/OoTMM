@@ -924,6 +924,11 @@ export class LogicPassWorldTransform {
       if (settings.coinsYellow)
         this.pool.set(makePlayerItem(Items.OOT_COIN_YELLOW, i), settings.coinsYellow);
     }
+
+    if(settings.games === 'mm') {
+      this.addItem(Items.OOT_STONE_OF_AGONY);
+    }
+
   }
 
   private removeLocations(locs: string[]) {

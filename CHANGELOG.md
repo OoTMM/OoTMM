@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Stone of Agony in MM only mode.
 - Skipped the camera pan out over Ganon's Castle being demolished.
 - New entrance option for Pirate Fortress that includes all the currently shuffled entrances.
 - Trick to defeat Twinmold only using arrows.
