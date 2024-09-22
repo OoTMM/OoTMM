@@ -23,6 +23,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Unshare the flags between late ReDeads and the First Scythe Rupee Puzzle in Shadow Temple (Vanilla + MQ).
 - Logic no longer thinks you can swap ages in the Deku Theater.
 - Logic now accounts for the Hylian Guard Soul for the Keaton Mask sale in Kakariko.
 
