@@ -369,14 +369,19 @@ class WorldShuffler {
 
     /* Compute entrances */
     const entrances = this.entrancesForTypes(types, true).filter(x => ENTRANCES[x].game === 'oot');
-    const entrancesSrc = new Set((Object.keys(ENTRANCES) as Entrance[]).filter(x => ENTRANCES[x].type === 'spawn'));
+    let entrancesSrc: Set<Entrance>;
+    if(this.settings.erSpawns === 'child' || this.settings.erSpawns === 'adult') {
+      entrancesSrc = new Set((Object.keys(ENTRANCES) as Entrance[]).filter(x => ENTRANCES[x].type === `spawn-${this.settings.erSpawns}`));
+    } else if(this.settings.erSpawns === 'both') {
+      entrancesSrc = new Set((Object.keys(ENTRANCES) as Entrance[]).filter(x => ENTRANCES[x].type.includes('spawn')));
+    }
     const entrancesDst = new Set(entrances);
 
-    while (entrancesSrc.size > 0) {
-      const src = sample(this.random, entrancesSrc);
+    while (entrancesSrc!.size > 0) {
+      const src = sample(this.random, entrancesSrc!);
       const dst = sample(this.random, entrancesDst);
       this.overrides[src] = dst;
-      entrancesSrc.delete(src);
+      entrancesSrc!.delete(src);
       entrancesDst.delete(dst);
     }
   }
@@ -765,7 +770,7 @@ class WorldShuffler {
       this.placeWallmasters();
     }
 
-    if (this.settings.erSpawns) {
+    if (this.settings.erSpawns !== 'none') {
       this.placeSpawns();
     }
 

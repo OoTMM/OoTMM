@@ -2329,9 +2329,15 @@ export const SETTINGS = [{
   key: 'erSpawns',
   name: 'Spawn Shuffle',
   category: 'entrances',
-  type: 'boolean',
+  type: 'enum',
   description: 'Shuffle the starting positions of the player.',
-  default: false,
+  values: [
+    { value: 'none', name: 'None' },
+    { value: 'child', name: 'Child Only' },
+    { value: 'adult', name: 'Adult Only' },
+    { value: 'both', name: 'Both' },
+  ],
+  default: 'none',
   cond: hasOoT,
 }, {
   key: 'erMajorDungeons',

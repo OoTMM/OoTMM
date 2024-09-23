@@ -1,5 +1,5 @@
-OOT_SPAWN_CHILD:                                { game: oot, id: 0x0bb, type: spawn, maps: [NONE, NONE], areas: ['OOT SPAWN CHILD', "OOT Link's House"], debug: ['COMMON', "Link's House"] }
-OOT_SPAWN_ADULT:                                { game: oot, id: 0xf20, type: spawn, maps: [NONE, OOT_TEMPLE_OF_TIME], areas: ['OOT SPAWN ADULT', 'OOT Temple of Time'] }
+OOT_SPAWN_CHILD:                                { game: oot, id: 0x0bb, type: spawn-child, maps: [NONE, NONE], areas: ['OOT SPAWN CHILD', "OOT Link's House"], debug: ['COMMON', "Link's House"] }
+OOT_SPAWN_ADULT:                                { game: oot, id: 0xf20, type: spawn-adult, maps: [NONE, OOT_TEMPLE_OF_TIME], areas: ['OOT SPAWN ADULT', 'OOT Temple of Time'] }
 OOT_BOSS_DEKU_TREE:                             { game: oot, id: 0x40f, type: boss, maps: [OOT_DEKU_TREE, OOT_BOSS_DEKU_TREE], areas: ["OOT Deku Tree Before Boss", "OOT Deku Tree Boss"], debug: ['BOSS', 'Gohma'] }
 OOT_BOSS_DODONGO_CAVERN:                        { game: oot, id: 0x40b, type: boss, maps: [OOT_DODONGO_CAVERN, OOT_BOSS_DODONGO_CAVERN], areas: ["OOT Dodongo Cavern Skull", "OOT Dodongo Cavern Boss"], debug: ['BOSS', 'King Dodongo'] }
 OOT_BOSS_JABU_JABU:                             { game: oot, id: 0x301, type: boss, maps: [OOT_JABU_JABU, OOT_BOSS_JABU_JABU], areas: ["OOT Jabu-Jabu Pre-Boss", "OOT Jabu-Jabu Boss"], debug: ['BOSS', 'Barinade'] }
@@ -472,7 +472,7 @@ MM_IKANA_CANYON_FROM_GHOST_HUT:                 { game: mm, id: 0x2010, type: in
 MM_IKANA_CANYON_FROM_MUSIC_BOX_HOUSE:           { game: mm, id: 0x2020, type: indoors-exit, maps: [NONE, MM_IKANA_VALLEY], areas: ["MM Music Box House", "MM Ikana Canyon"], reverse: MM_MUSIC_BOX_HOUSE }
 MM_IKANA_CANYON_FROM_FAIRY_FOUNTAIN:            { game: mm, id: 0x20b0, type: indoors-exit, maps: [NONE, MM_IKANA_VALLEY], areas: ["MM Ikana Fairy Fountain", "MM Ikana Canyon"], reverse: MM_FAIRY_FOUNTAIN_IKANA }
 MM_IKANA_CANYON_FROM_CAVERN:                    { game: mm, id: 0x20d0, type: indoors-exit, maps: [NONE, MM_IKANA_VALLEY], areas: ["MM Ikana Spring Water Cave", "MM Ikana Canyon"], reverse: MM_IKANA_CAVERN }
-MM_EXTERIOR_DOOR_FROM_SEWERS:                   { game: mm, id: 0x7060, type: indoors-exit, maps: [MM_PIRATE_SEWERS, MM_PIRATE_ENTRANCE], areas: ["MM Pirate Fortress Sewers End", "MM Pirate Fortress Entrance Balcony"], reverse: MM_SEWERS_FROM_EXTERIOR_DOOR }
+MM_EXTERIOR_DOOR_FROM_SEWERS:                   { game: mm, id: 0x7060, type: indoors-exit, maps: [MM_PIRATE_SEWERS, MM_PIRATE_ENTRANCE], areas: ["MM Pirate Fortress Sewers End", "MM Pirate Fortress Entrance Balcony"], reverse: MM_SEWERS_FROM_EXTERIOR_DOOR, debug: [DUNGEON, "PFS to PFE Door"] }
 MM_GREAT_BAY_FROM_FAIRY_FOUNTAIN:               { game: mm, id: 0x6a50, type: indoors-exit, maps: [NONE, MM_ZORA_CAPE], areas: ["MM Great Bay Fairy Fountain", "MM Great Bay Near Fairy Fountain"], reverse: MM_FAIRY_FOUNTAIN_GREAT_BAY }
 MM_SNOWHEAD_FROM_FAIRY_FOUNTAIN:                { game: mm, id: 0xb220, type: indoors-exit, maps: [NONE, MM_SNOWHEAD], areas: ["MM Snowhead Fairy Fountain", "MM Snowhead Near Fairy Fountain"], reverse: MM_FAIRY_FOUNTAIN_SNOWHEAD }
 MM_SWAMP_FROM_TOURIST_INFORMATION:              { game: mm, id: 0x8410, type: indoors-exit, maps: [NONE, MM_SWAMP], areas: ["MM Tourist Information", "MM Swamp Front"], reverse: MM_TOURIST_INFORMATION }
