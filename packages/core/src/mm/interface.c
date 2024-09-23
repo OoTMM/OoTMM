@@ -31,14 +31,23 @@ void Interface_SkipMoonCrash(GameState_Play* play)
 {
     if(play->actorCtx.flags & (1 << 1))
         AudioSeq_QueueSeqCmd((14 << 28) | (1 << 8));
-    gSave.day = Config_Flag(CFG_MM_MOON_CRASH_CYCLE) ? 0 : 4;
-    gSave.daysElapsed = Config_Flag(CFG_MM_MOON_CRASH_CYCLE) ? 0 : 4;
-    gSave.time = CLOCK_TIME(6, 0) + Config_Flag(CFG_MM_MOON_CRASH_CYCLE) ? -1 : 10;
-    play->nextEntrance = Config_Flag(CFG_MM_MOON_CRASH_CYCLE) ? ENTR_MM_CLOCK_TOWER_MOON_CRASH : 0x54c0;
+    if(Config_Flag(CFG_MM_MOON_CRASH_CYCLE))
+    {
+        gSave.day = 0;
+        gSave.daysElapsed = 0;
+        play->nextEntrance = ENTR_MM_CLOCK_TOWER_MOON_CRASH;
+        Sram_SaveEndOfCycle(play);
+    }
+    else
+    {
+        gSave.day = 4;
+        gSave.daysElapsed = 4;
+        play->nextEntrance = 0x54c0;
+    }
     gSave.cutscene = 0;
+    gSave.time = CLOCK_TIME(6, 0) + 10;
     play->transitionTrigger = TRANS_TRIGGER_NORMAL;
     play->transitionType = TRANS_TYPE_FADE_WHITE;
 }
-
 
 PATCH_CALL(0x8011d3f4, Interface_SkipMoonCrash)

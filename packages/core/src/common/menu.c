@@ -174,6 +174,7 @@ static const char* const kSoulsEnemyOot[] = {
     "Wolfos",
     "Stalchildren",
     "Guays",
+    "Gerudo Fighters",
 };
 
 static const char* const kSoulsBossOot[] = {
@@ -233,6 +234,7 @@ static const char* const kSoulsNpcOot[] = {
     "Carpet Man",
     "Old Hag",
     "Beggar",
+    "Gerudo Guards",
 };
 
 static const char* const kSoulsEnemyMm[] = {
@@ -282,6 +284,7 @@ static const char* const kSoulsEnemyMm[] = {
     "Snappers",
     "Warts",
     "Captain Keeta",
+    "Pirate Fighters",
 };
 
 static const char* const kSoulsBossMm[] = {
@@ -345,6 +348,7 @@ static const char* const kSoulsNpcMm[] = {
     "Boat Cruise Man",
     "Banker",
     "Moon Children",
+    "Pirate Guards"
 };
 
 static const char* const kSoulsMiscOot[] = {

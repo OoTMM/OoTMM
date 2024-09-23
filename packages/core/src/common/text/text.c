@@ -811,6 +811,12 @@ static const char* nameOverride(s16 gi)
         case GI_OOT_SOUL_NPC_BANKER:
         case GI_MM_SOUL_NPC_BANKER:
             return "the " TEXT_C1 "Soul of the Beggar/Banker";
+        case GI_OOT_SOUL_NPC_THIEVES:
+        case GI_MM_SOUL_NPC_THIEVES:
+            return "the " TEXT_C1 "Soul of the Patrolling Thieves and their Chief";
+        case GI_OOT_SOUL_ENEMY_THIEVES:
+        case GI_MM_SOUL_ENEMY_THIEVES:
+            return "the " TEXT_C1 "Soul of the Fighting Thieves";
         }
     }
 
