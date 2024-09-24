@@ -7,7 +7,7 @@ import { sample, Random, randomInt } from '../random';
 import { Settings } from '../settings';
 import { countMapAdd, gameId } from '../util';
 import { exprTrue } from './expr';
-import { Location, isLocationOtherFairy, isLocationRenewable, locationData, locationsZelda, makeLocation } from './locations';
+import { Location, isLocationOtherFairy, isLocationRenewable, locationData, locationsZelda, makeLocation, isLocationInDungeon } from './locations';
 import { ItemSharedDef, SharedItemGroups } from './shared';
 import { World } from './world';
 import { ItemProperties } from './item-properties';
@@ -957,6 +957,25 @@ export class LogicPassWorldTransform {
     }
   }
 
+  private filterLocations(
+    value: "none" | "all" | "overworld" | "dungeons",
+    type: "grass" | "snowball" | "rupee" | "heart" | "crate" | "wonder" | "barrel",
+    game: "oot" | "mm") {
+    if (value === 'all') {
+      return;
+    }
+
+    let locationsToRemove: string[];
+    if (value === 'overworld') {
+      locationsToRemove = POOL[game].filter((x: any) => x.type === type && isLocationInDungeon(x.scene)).map((x: any) => gameId(game, x.location, ' ')) as string[];
+    } else if (value === 'dungeons') {
+      locationsToRemove = POOL[game].filter((x: any) => x.type === type && !isLocationInDungeon(x.scene)).map((x: any) => gameId(game, x.location, ' ')) as string[];
+    } else {
+      locationsToRemove = POOL[game].filter((x: any) => x.type === type).map((x: any) => gameId(game, x.location, ' ')) as string[];
+    }
+    this.removeLocations(locationsToRemove);
+  }
+
   private makeLocationStarting(loc: string | string[]) {
     if (typeof loc === 'string') {
       loc = [loc];
@@ -1030,42 +1049,49 @@ export class LogicPassWorldTransform {
     }
 
     /* Potsanity */
-    if (!settings.shufflePotsOot) {
+    if (settings.shufflePotsOot === 'none') {
       const pots = POOL.oot.filter((x: any) => x.type === 'pot').map((x: any) => gameId('oot', x.location, ' ')) as string[];
       this.removeLocations(pots);
+    } else if(settings.shufflePotsOot === 'overworld') {
+      const potsDungeons = POOL.oot.filter((x: any) => x.type === 'pot' && isLocationInDungeon(x.scene)).map((x: any) => gameId('oot', x.location, ' ')) as string[];
+      this.removeLocations(potsDungeons);
     } else {
+      if (settings.shufflePotsOot === 'dungeons') {
+        const potsOverworld = POOL.oot.filter((x: any) => x.type === 'pot' && !isLocationInDungeon(x.scene)).map((x: any) => gameId('oot', x.location, ' ')) as string[];
+        this.removeLocations(potsOverworld);
+      }
       if (settings.goal === 'triforce' || settings.goal === 'triforce3') {
         const potsGanonTower = POOL.oot.filter((x: any) => x.type === 'pot' && x.scene === 'GANON_TOWER').map((x: any) => gameId('oot', x.location, ' ')) as string[];
         this.removeLocations(potsGanonTower);
       }
     }
 
-    if (!settings.shufflePotsMm) {
+    if (settings.shufflePotsMm === 'none') {
       const pots = POOL.mm.filter((x: any) => x.type === 'pot').map((x: any) => gameId('mm', x.location, ' ')) as string[];
       this.removeLocations(pots);
+    } else if(settings.shufflePotsMm === 'overworld') {
+      const potsDungeons = POOL.mm.filter((x: any) => x.type === 'pot' && isLocationInDungeon(x.scene)).map((x: any) => gameId('mm', x.location, ' ')) as string[];
+      this.removeLocations(potsDungeons);
     } else {
+      if (settings.shufflePotsMm === 'dungeons') {
+        const potsOverworld = POOL.mm.filter((x: any) => x.type === 'pot' && !isLocationInDungeon(x.scene)).map((x: any) => gameId('mm', x.location, ' ')) as string[];
+        this.removeLocations(potsOverworld);
+      }
       if (settings.goal === 'triforce' || settings.goal === 'triforce3') {
         const potsMajora = POOL.mm.filter((x: any) => x.type === 'pot' && x.scene === 'LAIR_MAJORA').map((x: any) => gameId('mm', x.location, ' ')) as string[];
         this.removeLocations(potsMajora);
       }
     }
 
-    /* Crates */
-    if (!settings.shuffleCratesOot) {
-      const locs = POOL.oot.filter((x: any) => x.type === 'crate').map((x: any) => gameId('oot', x.location, ' ')) as string[];
-      this.removeLocations(locs);
-    }
+    this.filterLocations(settings.shuffleCratesOot, 'crate', 'oot');
+    this.filterLocations(settings.shuffleCratesMm, 'crate', 'mm');
+    this.filterLocations(settings.shuffleBarrelsMm, 'barrel', 'mm');
+    this.filterLocations(settings.shuffleFreeRupeesOot, 'rupee', 'oot');
+    this.filterLocations(settings.shuffleFreeRupeesMm, 'rupee', 'mm');
+    this.filterLocations(settings.shuffleFreeHeartsOot, 'heart', 'oot');
+    this.filterLocations(settings.shuffleWonderItemsOot, 'wonder', 'oot');
+    this.filterLocations(settings.shuffleSnowballsMm, 'snowball', 'mm');
 
-    if (!settings.shuffleCratesMm) {
-      const locs = POOL.mm.filter((x: any) => x.type === 'crate').map((x: any) => gameId('mm', x.location, ' ')) as string[];
-      this.removeLocations(locs);
-    }
-
-    /* Barrels */
-    if (!settings.shuffleBarrelsMm) {
-      const locs = POOL.mm.filter((x: any) => x.type === 'barrel').map((x: any) => gameId('mm', x.location, ' ')) as string[];
-      this.removeLocations(locs);
-    }
 
     /* Hives */
     if (!settings.shuffleHivesOot) {
@@ -1079,48 +1105,33 @@ export class LogicPassWorldTransform {
     }
 
     /* Grasssanity */
-    if (!settings.shuffleGrassOot) {
-      const grass = POOL.oot.filter((x: any) => x.type === 'grass').map((x: any) => gameId('oot', x.location, ' ')) as string[];
-      this.removeLocations(grass);
-    }
+    this.filterLocations(settings.shuffleGrassOot, 'grass', 'oot');
 
-    if (!settings.shuffleGrassMm) {
+    if (settings.shuffleGrassMm === 'none') {
       const grass = POOL.mm.filter((x: any) => x.type === 'grass').map((x: any) => gameId('mm', x.location, ' ')) as string[];
       this.removeLocations(grass);
-    }
-
-    if (!settings.shuffleFreeRupeesOot) {
-      const locs = POOL.oot.filter((x: any) => x.type === 'rupee').map((x: any) => gameId('oot', x.location, ' ')) as string[];
-      this.removeLocations(locs);
-    }
-
-    if (!settings.shuffleFreeRupeesMm) {
-      const locs = POOL.mm.filter((x: any) => x.type === 'rupee').map((x: any) => gameId('mm', x.location, ' ')) as string[];
-      this.removeLocations(locs);
-    }
-
-    if (!settings.shuffleFreeHeartsOot) {
-      const locs = POOL.oot.filter((x: any) => x.type === 'heart').map((x: any) => gameId('oot', x.location, ' ')) as string[];
-      this.removeLocations(locs);
+    } else if (settings.shuffleGrassMm === 'dungeons') {
+      const grassOverworld = POOL.mm.filter((x: any) => x.type === 'grass' && !isLocationInDungeon(x.scene)).map((x: any) => gameId('mm', x.location, ' ')) as string[];
+      this.removeLocations(grassOverworld);
+    } else {
+      if(settings.shuffleGrassMm === 'overworld') {
+        const grassDungeons = POOL.mm.filter((x: any) => x.type === 'grass' && isLocationInDungeon(x.scene)).map((x: any) => gameId('mm', x.location, ' ')) as string[];
+        this.removeLocations(grassDungeons);
+      }
+      if(settings.shuffleTFGrassMm) {
+        const grassTerminaField = POOL.mm.filter((x: any) => x.type === 'grass' && x.scene === 'TERMINA_FIELD').map((x: any) => gameId('mm', x.location, ' ')) as string[];
+        this.removeLocations(grassTerminaField);
+      }
     }
 
     if (!settings.shuffleFreeHeartsMm) {
-      const locs = POOL.mm.filter((x: any) => x.type === 'heart').map((x: any) => gameId('mm', x.location, ' ')) as string[];
-      this.removeLocations(locs);
+      const hearts = POOL.mm.filter((x: any) => x.type === 'heart').map((x: any) => gameId('mm', x.location, ' ')) as string[];
+      this.removeLocations(hearts);
     }
 
-    if (!settings.shuffleWonderItemsOot) {
-      const locs = POOL.oot.filter((x: any) => x.type === 'wonder').map((x: any) => gameId('oot', x.location, ' ')) as string[];
-      this.removeLocations(locs);
-    }
 
     if (!settings.shuffleWonderItemsMm) {
       const locs = POOL.mm.filter((x: any) => x.type === 'wonder').map((x: any) => gameId('mm', x.location, ' ')) as string[];
-      this.removeLocations(locs);
-    }
-
-    if (!settings.shuffleSnowballsMm) {
-      const locs = POOL.mm.filter((x: any) => x.type === 'snowball').map((x: any) => gameId('mm', x.location, ' ')) as string[];
       this.removeLocations(locs);
     }
 

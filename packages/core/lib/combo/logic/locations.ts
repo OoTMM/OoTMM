@@ -59,7 +59,7 @@ export const OOT_ONE_TIME_SCRUBS = [
 
 export function locationsZelda(settings: Settings) {
   const locs = ['OOT Zelda\'s Letter', 'OOT Zelda\'s Song'];
-  if (settings.shuffleWonderItemsOot) {
+  if (settings.shuffleWonderItemsOot !== 'none') {
     locs.push('OOT Castle Courtyard Wonder Item');
   }
   return locs;
@@ -112,6 +112,35 @@ type IsLocationFullyShuffledOptions = {
   songs?: boolean;
   rewards?: boolean;
 };
+
+const DUNGEON_SCENES = [
+  'INSIDE_DEKU_TREE',       'LAIR_GOHMA',
+  'DODONGO_CAVERN',         'LAIR_KING_DODONGO',
+  'INSIDE_JABU_JABU',       'LAIR_BARINADE',
+  'TEMPLE_FOREST',          'LAIR_PHANTOM_GANON',
+  'TEMPLE_FIRE',            'LAIR_VOLVAGIA',
+  'TEMPLE_WATER',           'LAIR_MORPHA',
+  'TEMPLE_SPIRIT',          'LAIR_TWINROVA',
+  'TEMPLE_SHADOW',          'LAIR_BONGO_BONGO',
+  'GANON_TOWER',            'LAIR_GANONDORF',
+  'BOTTOM_OF_THE_WELL',     'ICE_CAVERN',
+  'GERUDO_TRAINING_GROUND', 'THIEVES_HIDEOUT',
+  'INSIDE_GANON_CASTLE',
+
+  'PIRATE_FORTRESS_EXTERIOR', 'PIRATE_FORTRESS_INTERIOR',    'PIRATE_FORTRESS_ENTRANCE',
+  'TEMPLE_STONE_TOWER',       'TEMPLE_STONE_TOWER_INVERTED', 'LAIR_TWINMOLD',
+  'TEMPLE_WOODFALL',          'LAIR_ODOLWA',
+  'CASTLE_IKANA',             'LAIR_IKANA',
+  'TEMPLE_SNOWHEAD',          'LAIR_GOHT',
+  'SPIDER_HOUSE_SWAMP',       'SPIDER_HOUSE_OCEAN',
+  'MOON', 'LAIR_MAJORA',      'MOON_DEKU', 'MOON_GORON', 'MOON_ZORA', 'MOON_LINK',
+  'TEMPLE_GREAT_BAY',         'LAIR_GYORG',
+  'BENEATH_THE_WELL',         'SECRET_SHRINE',
+]
+
+export function isLocationInDungeon(scene: string) {
+  return DUNGEON_SCENES.includes(scene);
+}
 
 export function isLocationFullyShuffled(settings: Settings, fixedLocations: Set<Location>, items: ItemPlacement,  loc: Location, opts: IsLocationFullyShuffledOptions): boolean {
   if (fixedLocations.has(loc)) {
