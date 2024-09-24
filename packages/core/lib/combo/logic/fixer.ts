@@ -107,6 +107,22 @@ export class LogicPassFixer {
       return true;
     }
 
+    if(ItemHelpers.isSmallKeyRegularOot(item) && this.state.settings.smallKeyShuffleOot === 'vanilla') {
+      return true;
+    }
+
+    if(ItemHelpers.isSmallKeyRegularMm(item) && this.state.settings.smallKeyShuffleMm === 'vanilla') {
+      return true;
+    }
+
+    if(ItemHelpers.isRegularBossKeyOot(item) && this.state.settings.bossKeyShuffleOot === 'vanilla') {
+      return true;
+    }
+
+    if(ItemHelpers.isRegularBossKeyMm(item) && this.state.settings.bossKeyShuffleMm === 'vanilla') {
+      return true;
+    }
+
     return false;
   }
 

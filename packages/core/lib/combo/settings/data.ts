@@ -234,6 +234,7 @@ export const SETTINGS = [{
     { value: 'ownDungeon', name: 'Own Dungeon', description: 'Dungeon Small Keys can only be found in their own dungeons' },
     { value: 'anywhere', name: 'Anywhere', description: 'Dungeon Small Keys can be found anywhere' },
     { value: 'removed', name: 'Removed', description: 'Small keys are removed and small key doors are unlocked' },
+    { value: 'vanilla', name: 'Vanilla', description: 'Dungeon small keys are placed in their original chests', cond: (s: any) => s.smallKeyRingOot.type === 'none' },
   ],
   cond: hasOoT,
   default: 'ownDungeon'
@@ -247,6 +248,7 @@ export const SETTINGS = [{
     { value: 'ownDungeon', name: 'Own Dungeon', description: 'Dungeon Small Keys can only be found in their own dungeons' },
     { value: 'anywhere', name: 'Anywhere', description: 'Dungeon Small Keys can be found anywhere' },
     { value: 'removed', name: 'Removed', description: 'Small keys are removed and small key doors are unlocked' },
+    { value: 'vanilla', name: 'Vanilla', description: 'Dungeon small keys are placed in their original chests', cond: (s: any) => s.smallKeyRingMm.type === 'none' },
   ],
   cond: hasMM,
   default: 'ownDungeon'
@@ -286,6 +288,7 @@ export const SETTINGS = [{
     { value: 'ownDungeon', name: 'Own Dungeon', description: 'Boss Keys can only be in their own dungeons' },
     { value: 'anywhere', name: 'Anywhere', description: 'Boss Keys can be found anywhere' },
     { value: 'removed', name: 'Removed', description: 'Boss Keys are removed and boss doors are unlocked' },
+    { value: 'vanilla', name: 'Vanilla', description: 'Boss Keys are placed in their original chest' },
   ],
   cond: hasOoT,
   default: 'ownDungeon'
@@ -299,6 +302,7 @@ export const SETTINGS = [{
     { value: 'ownDungeon', name: 'Own Dungeon', description: 'Boss Keys can only be in their own dungeons' },
     { value: 'anywhere', name: 'Anywhere', description: 'Boss Keys can be found anywhere' },
     { value: 'removed', name: 'Removed', description: 'Boss Keys are removed and boss doors are unlocked' },
+    { value: 'vanilla', name: 'Vanilla', description: 'Boss Keys are placed in their original chest' },
   ],
   cond: hasMM,
   default: 'ownDungeon'
