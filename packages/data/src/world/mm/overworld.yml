@@ -47,16 +47,16 @@
 "SOARING":
   region: NONE
   exits:
-    "Owl Clock Town": "has(OWL_CLOCK_TOWN) || setting(mmPreActivatedOwls, clocktown)"
-    "Owl Milk Road": "has(OWL_MILK_ROAD) || setting(mmPreActivatedOwls, milkroad)"
-    "Owl Swamp": "has(OWL_SOUTHERN_SWAMP) || setting(mmPreActivatedOwls, swamp)"
-    "Owl Woodfall": "has(OWL_WOODFALL) || setting(mmPreActivatedOwls, woodfall)"
-    "Owl Mountain": "has(OWL_MOUNTAIN_VILLAGE) || setting(mmPreActivatedOwls, mountain)"
-    "Owl Snowhead": "has(OWL_SNOWHEAD) || setting(mmPreActivatedOwls, snowhead)"
-    "Owl Great Bay": "has(OWL_GREAT_BAY) || setting(mmPreActivatedOwls, greatbay)"
-    "Owl Zora Cape": "has(OWL_ZORA_CAPE) || setting(mmPreActivatedOwls, zoracape)"
-    "Owl Ikana": "has(OWL_IKANA_CANYON) || setting(mmPreActivatedOwls, canyon)"
-    "Owl Stone Tower": "has(OWL_STONE_TOWER) || setting(mmPreActivatedOwls, tower)"
+    "Owl Clock Town": "has(OWL_CLOCK_TOWN)"
+    "Owl Milk Road": "has(OWL_MILK_ROAD)"
+    "Owl Swamp": "has(OWL_SOUTHERN_SWAMP)"
+    "Owl Woodfall": "has(OWL_WOODFALL)"
+    "Owl Mountain": "has(OWL_MOUNTAIN_VILLAGE)"
+    "Owl Snowhead": "has(OWL_SNOWHEAD)"
+    "Owl Great Bay": "has(OWL_GREAT_BAY)"
+    "Owl Zora Cape": "has(OWL_ZORA_CAPE)"
+    "Owl Ikana": "has(OWL_IKANA_CANYON)"
+    "Owl Stone Tower": "has(OWL_STONE_TOWER)"
 "Owl Clock Town":
   region: CLOCK_TOWN_SOUTH
   exits:

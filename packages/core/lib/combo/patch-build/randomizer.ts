@@ -1136,20 +1136,6 @@ const effectiveStartingItems = (worldId: number, logic: LogicResult): ItemsCount
 
   if (settings.skipZelda) addStartingItemLocsWorld(worldId, logic, locationsZelda(settings), itemsCount);
   if (settings.gerudoFortress === 'open') addStartingItemLocsWorld(worldId, logic, ['OOT Gerudo Member Card'], itemsCount);
-  if (settings.mmPreActivatedOwls.type != 'none')
-  {
-    if (logic.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('clocktown')) addStartingItemLocsWorld(worldId, logic, ['MM Clock Town Owl Statue'], itemsCount);
-    if (logic.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('milkroad')) addStartingItemLocsWorld(worldId, logic, ['MM Milk Road Owl Statue'], itemsCount);
-    if (logic.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('swamp')) addStartingItemLocsWorld(worldId, logic, ['MM Southern Swamp Owl Statue'], itemsCount);
-    if (logic.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('woodfall')) addStartingItemLocsWorld(worldId, logic, ['MM Woodfall Owl Statue'], itemsCount);
-    if (logic.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('mountain')) addStartingItemLocsWorld(worldId, logic, ['MM Mountain Village Owl Statue'], itemsCount);
-    if (logic.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('snowhead')) addStartingItemLocsWorld(worldId, logic, ['MM Snowhead Owl Statue'], itemsCount);
-    if (logic.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('greatbay')) addStartingItemLocsWorld(worldId, logic, ['MM Great Bay Coast Owl Statue'], itemsCount);
-    if (logic.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('zoracape')) addStartingItemLocsWorld(worldId, logic, ['MM Zora Cape Owl Statue'], itemsCount);
-    if (logic.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('canyon')) addStartingItemLocsWorld(worldId, logic, ['MM Ikana Canyon Owl Statue'], itemsCount);
-    if (logic.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('tower')) addStartingItemLocsWorld(worldId, logic, ['MM Stone Tower Owl Statue'], itemsCount);
-  }
-
 
   return itemsCount;
 }

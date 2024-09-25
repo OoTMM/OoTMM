@@ -1028,6 +1028,23 @@ export class LogicPassWorldTransform {
     }
   }
 
+  private addStartingOwlStatues() {
+    let preActivatedOwls: string[] = [];
+    for(let worldId = 0; worldId < this.state.worlds.length; worldId++) {
+      if (this.state.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('clocktown')) preActivatedOwls.push('MM Clock Town Owl Statue');
+      if (this.state.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('milkroad'))  preActivatedOwls.push('MM Milk Road Owl Statue');
+      if (this.state.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('swamp'))     preActivatedOwls.push('MM Southern Swamp Owl Statue');
+      if (this.state.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('woodfall'))  preActivatedOwls.push('MM Woodfall Owl Statue');
+      if (this.state.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('mountain'))  preActivatedOwls.push('MM Mountain Village Owl Statue');
+      if (this.state.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('snowhead'))  preActivatedOwls.push('MM Snowhead Owl Statue');
+      if (this.state.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('greatbay'))  preActivatedOwls.push('MM Great Bay Coast Owl');
+      if (this.state.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('zoracape'))  preActivatedOwls.push('MM Zora Cape Owl Statue');
+      if (this.state.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('canyon'))    preActivatedOwls.push('MM Ikana Canyon Owl Statue');
+      if (this.state.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('tower'))     preActivatedOwls.push('MM Stone Tower Owl Statue');
+    }
+    this.makeLocationStarting(preActivatedOwls);
+  }
+
   run() {
     const { settings } = this.state;
     this.state.monitor.log('Logic: World Transform');
@@ -1445,6 +1462,11 @@ export class LogicPassWorldTransform {
       this.makeLocationStarting(locationsZelda(this.state.settings));
     }
 
+    /* Handle Pre-Activated owls */
+    if (this.state.settings.mmPreActivatedOwls.type !== 'none'){
+      this.addStartingOwlStatues();
+    }
+    
     /* Handle open gate */
     if (this.state.settings.kakarikoGate === 'open') {
       this.removeItem(Items.OOT_ZELDA_LETTER);
