@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Grass/Barrels/Pots/Snowballs/Hearts/Rupees/Wonder Items settings were broken up by All/None/Overworld/Dungeons.
 - Moon Crash cutscene is skipped in Cycle behavior.
 - Hint section now shows the hint importance.
 - Hint section format in Spoiler log.
@@ -337,7 +338,6 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- Grass/Barrels/Pots/Snowballs/Hearts/Rupees/Wonder Items settings were broken up by All/None/Overworld/Dungeons.
 - Change the dpad texture.
 - Make bombchu bag and hints play a little nicer.
 - Change OoT boss room death/respawn behavior slightly to avoid gaining out of logic access to market.
