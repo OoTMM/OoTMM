@@ -2410,7 +2410,7 @@
 "Fortress Near Wasteland":
   region: GERUDO_FORTRESS
   exits:
-    "Gerudo Fortress Exterior": "event(OPEN_FORTRESS_GATE) || is_adult || climb_anywhere || hookshot_anywhere"
+    "Gerudo Fortress Exterior": "event(OPEN_FORTRESS_GATE) || (is_adult && soul_thief_guard) || climb_anywhere || hookshot_anywhere"
     "Haunted Wasteland Start": "true"
   events:
     OPEN_FORTRESS_GATE: "soul_thief_guard && has(GERUDO_CARD) && is_adult"
