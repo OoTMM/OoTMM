@@ -1135,7 +1135,7 @@ export class LogicPassWorldTransform {
         const grassDungeons = POOL.mm.filter((x: any) => x.type === 'grass' && isLocationInDungeon(x.scene)).map((x: any) => gameId('mm', x.location, ' ')) as string[];
         this.removeLocations(grassDungeons);
       }
-      if(settings.shuffleTFGrassMm) {
+      if(!settings.shuffleTFGrassMm) {
         const grassTerminaField = POOL.mm.filter((x: any) => x.type === 'grass' && x.scene === 'TERMINA_FIELD').map((x: any) => gameId('mm', x.location, ' ')) as string[];
         this.removeLocations(grassTerminaField);
       }
@@ -1466,7 +1466,7 @@ export class LogicPassWorldTransform {
     if (this.state.settings.mmPreActivatedOwls.type !== 'none'){
       this.addStartingOwlStatues();
     }
-    
+
     /* Handle open gate */
     if (this.state.settings.kakarikoGate === 'open') {
       this.removeItem(Items.OOT_ZELDA_LETTER);
