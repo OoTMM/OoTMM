@@ -7,7 +7,7 @@ import { sample, Random, randomInt } from '../random';
 import { Settings } from '../settings';
 import { countMapAdd, gameId } from '../util';
 import { exprTrue } from './expr';
-import { Location, isLocationOtherFairy, isLocationRenewable, locationData, locationsZelda, makeLocation, isLocationInDungeon } from './locations';
+import { Location, isLocationOtherFairy, isLocationRenewable, locationData, locationsZelda, makeLocation, isLocationInDungeon, getPreActivatedOwlsLocations } from './locations';
 import { ItemSharedDef, SharedItemGroups } from './shared';
 import { World } from './world';
 import { ItemProperties } from './item-properties';
@@ -1028,23 +1028,6 @@ export class LogicPassWorldTransform {
     }
   }
 
-  private addStartingOwlStatues() {
-    let preActivatedOwls: string[] = [];
-    for(let worldId = 0; worldId < this.state.worlds.length; worldId++) {
-      if (this.state.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('clocktown')) preActivatedOwls.push('MM Clock Town Owl Statue');
-      if (this.state.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('milkroad'))  preActivatedOwls.push('MM Milk Road Owl Statue');
-      if (this.state.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('swamp'))     preActivatedOwls.push('MM Southern Swamp Owl Statue');
-      if (this.state.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('woodfall'))  preActivatedOwls.push('MM Woodfall Owl Statue');
-      if (this.state.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('mountain'))  preActivatedOwls.push('MM Mountain Village Owl Statue');
-      if (this.state.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('snowhead'))  preActivatedOwls.push('MM Snowhead Owl Statue');
-      if (this.state.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('greatbay'))  preActivatedOwls.push('MM Great Bay Coast Owl');
-      if (this.state.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('zoracape'))  preActivatedOwls.push('MM Zora Cape Owl Statue');
-      if (this.state.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('canyon'))    preActivatedOwls.push('MM Ikana Canyon Owl Statue');
-      if (this.state.worlds[worldId].resolvedFlags.mmPreActivatedOwls.has('tower'))     preActivatedOwls.push('MM Stone Tower Owl Statue');
-    }
-    this.makeLocationStarting(preActivatedOwls);
-  }
-
   run() {
     const { settings } = this.state;
     this.state.monitor.log('Logic: World Transform');
@@ -1463,8 +1446,10 @@ export class LogicPassWorldTransform {
     }
 
     /* Handle Pre-Activated owls */
-    if (this.state.settings.mmPreActivatedOwls.type !== 'none'){
-      this.addStartingOwlStatues();
+    if (this.state.settings.mmPreActivatedOwls.type !== 'none') {
+      for(let i = 0; i < this.state.settings.players; i++) {
+        this.makeLocationStarting(getPreActivatedOwlsLocations(this.state.worlds[i]));
+      }
     }
 
     /* Handle open gate */
