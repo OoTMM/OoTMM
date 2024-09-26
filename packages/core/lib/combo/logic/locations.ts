@@ -59,7 +59,7 @@ export const OOT_ONE_TIME_SCRUBS = [
 
 export function locationsZelda(settings: Settings) {
   const locs = ['OOT Zelda\'s Letter', 'OOT Zelda\'s Song'];
-  if (settings.shuffleWonderItemsOot !== 'none') {
+  if (settings.shuffleWonderItemsOot === 'all' || settings.shuffleWonderItemsOot === 'overworld') {
     locs.push('OOT Castle Courtyard Wonder Item');
   }
   return locs;

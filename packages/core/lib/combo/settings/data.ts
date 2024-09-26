@@ -642,7 +642,7 @@ export const SETTINGS = [{
   category: 'main.shuffle',
   type: 'boolean',
   description: 'Controls whether or not the Termina Field (grottos do not count towards this) grass is shuffled (MM)',
-  cond: hasMM,
+  cond: (s: any) => hasMM(s) && (s.shuffleGrassMm === 'overworld' || s.shuffleGrassMm === 'all'),
   default: false
 }, {
   key: 'shuffleFreeRupeesOot',
