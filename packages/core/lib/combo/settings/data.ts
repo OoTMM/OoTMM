@@ -617,8 +617,8 @@ export const SETTINGS = [{
   values: [
     { value: 'none', name: 'None' },
     { value: 'all', name: 'All' },
-    { value: 'overworld', name: 'Overworld' },
-    { value: 'dungeons', name: 'Dungeons only' },
+    { value: 'overworld', name: 'Overworld', cond: (s: any) => s.shuffleGrassOot === 'overworld' },
+    { value: 'dungeons', name: 'Dungeons only', cond: (s: any) => s.shuffleGrassOot === 'overworld' },
   ],
   cond: hasOoT,
   default: 'none'
@@ -631,8 +631,8 @@ export const SETTINGS = [{
   values: [
     { value: 'none', name: 'None' },
     { value: 'all', name: 'All' },
-    { value: 'overworld', name: 'Overworld' },
-    { value: 'dungeons', name: 'Dungeons only' },
+    { value: 'overworld', name: 'Overworld', cond: (s: any) => s.shuffleTFGrassMm },
+    { value: 'dungeons', name: 'Dungeons only', cond: (s: any) => s.shuffleTFGrassMm },
   ],
   cond: hasMM,
   default: 'none'
@@ -642,7 +642,7 @@ export const SETTINGS = [{
   category: 'main.shuffle',
   type: 'boolean',
   description: 'Controls whether or not the Termina Field (grottos do not count towards this) grass is shuffled (MM)',
-  cond: (s: any) => hasMM(s) && (s.shuffleGrassMm === 'overworld' || s.shuffleGrassMm === 'all'),
+  cond: (s: any) => s.shuffleTFGrassMm && hasMM(s) && (s.shuffleGrassMm === 'overworld' || s.shuffleGrassMm === 'all'),
   default: false
 }, {
   key: 'shuffleFreeRupeesOot',
