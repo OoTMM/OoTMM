@@ -28,6 +28,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Logic for Open Bottom of the Well as adult.
 - Pre-Activated Owl Statues able to create unbeatable seeds.
 - Unshare the flags between late ReDeads and the First Scythe Rupee Puzzle in Shadow Temple (Vanilla + MQ).
 - Logic no longer thinks you can swap ages in the Deku Theater.
