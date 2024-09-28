@@ -1118,10 +1118,10 @@ export class LogicPassWorldTransform {
         const grassDungeons = POOL.mm.filter((x: any) => x.type === 'grass' && isLocationInDungeon(x.scene)).map((x: any) => gameId('mm', x.location, ' ')) as string[];
         this.removeLocations(grassDungeons);
       }
-      if(!settings.shuffleTFGrassMm) {
-        const grassTerminaField = POOL.mm.filter((x: any) => x.type === 'grass' && x.scene === 'TERMINA_FIELD').map((x: any) => gameId('mm', x.location, ' ')) as string[];
-        this.removeLocations(grassTerminaField);
-      }
+      // if(!settings.shuffleTFGrassMm) {
+      //   const grassTerminaField = POOL.mm.filter((x: any) => x.type === 'grass' && x.scene === 'TERMINA_FIELD').map((x: any) => gameId('mm', x.location, ' ')) as string[];
+      //   this.removeLocations(grassTerminaField);
+      // }
     }
 
     if (!settings.shuffleFreeHeartsMm) {
