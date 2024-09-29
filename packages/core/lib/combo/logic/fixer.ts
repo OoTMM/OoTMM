@@ -71,7 +71,7 @@ export class LogicPassFixer {
       return true;
     }
 
-    if (ItemHelpers.isMasterSword(item) && !this.state.settings.shuffleMasterSword && settings.startingAge !== 'adult') {
+    if (ItemHelpers.isMasterSword(item) && !this.state.settings.shuffleMasterSword) {
       return true;
     }
 

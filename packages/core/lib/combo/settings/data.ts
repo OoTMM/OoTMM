@@ -744,7 +744,7 @@ export const SETTINGS = [{
   category: 'main.shuffle',
   type: 'boolean',
   description: 'Controls whether or not the Master Sword is shuffled',
-  cond: hasOoT,
+  cond: (s: any) => hasOoT(s) && (s.swordlessAdult || (s.startingAge === 'child' && s.shuffleMasterSword)),
   default: true
 }, {
   key: 'shuffleGerudoCard',
@@ -879,7 +879,7 @@ export const SETTINGS = [{
   type: 'boolean',
   description: 'Choose whether or not Link needs the Master Sword to travel through time',
   default: true,
-  cond: (s: any) => hasOoT(s) && s.swordlessAdult,
+  cond: (s: any) => hasOoT(s) && (s.startingAge === 'child' || !s.swordlessAdult || s.shuffleMasterSword),
 }, {
   key: 'doorOfTime',
   name: 'Door of Time',
