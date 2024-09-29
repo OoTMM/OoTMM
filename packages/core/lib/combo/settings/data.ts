@@ -744,7 +744,7 @@ export const SETTINGS = [{
   category: 'main.shuffle',
   type: 'boolean',
   description: 'Controls whether or not the Master Sword is shuffled',
-  cond: (s: any) => hasOoT(s) && (s.swordlessAdult || (s.startingAge === 'child' && s.shuffleMasterSword)),
+  cond: (s: any) => hasOoT(s) && (s.swordlessAdult || (s.startingAge === 'child' && s.TimeTravelSword)),
   default: true
 }, {
   key: 'shuffleGerudoCard',
