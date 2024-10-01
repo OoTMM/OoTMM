@@ -50,8 +50,6 @@ void EnTimeTag_MoonCutscene(Actor* this, PlayState* play)
     if (Config_SpecialCond(SPECIAL_MOON))
     {
         /* Skip to Moon */
-        gSave.day = 3;
-        gSave.time = 0x4000;
         play->nextEntrance = ((SCE_MM_MOON - 3) << 9);
         play->transitionTrigger = TRANS_TRIGGER_START;
         play->transitionType = TRANS_TYPE_FADE_BLACK;

@@ -39,8 +39,10 @@ _Static_assert(sizeof(SramContext) == 0x28, "MM SramContext size is wrong");
 
 typedef struct PACKED
 {
-    char unk_000[0x222];
-    s16 unk_222;
+    char unk_000[0x174];
+    u8* doActionSegment;
+    char unk_178[0xaa];
+    s16 bButtonInterfaceDoActionActive;
     char unk_224[0x40];
     struct PACKED
     {
@@ -75,19 +77,26 @@ typedef struct PACKED
 }
 InterfaceContext;
 
-ASSERT_OFFSET(InterfaceContext, unk_000,        0x000);
-ASSERT_OFFSET(InterfaceContext, alpha,          0x264);
-ASSERT_OFFSET(InterfaceContext, unk_278,        0x278);
-ASSERT_OFFSET(InterfaceContext, restrictions,   0x30e);
-ASSERT_OFFSET(InterfaceContext, unk_31a,        0x31a);
+ASSERT_OFFSET(InterfaceContext, unk_000,                        0x000);
+ASSERT_OFFSET(InterfaceContext, doActionSegment,                0x174);
+ASSERT_OFFSET(InterfaceContext, bButtonInterfaceDoActionActive, 0x222);
+ASSERT_OFFSET(InterfaceContext, alpha,                          0x264);
+ASSERT_OFFSET(InterfaceContext, unk_278,                        0x278);
+ASSERT_OFFSET(InterfaceContext, restrictions,                   0x30e);
+ASSERT_OFFSET(InterfaceContext, unk_31a,                        0x31a);
 
 typedef struct
 {
     char    unk_000[0x190];
     /* 0x190 */ Vtx* vtxBuf;
-    char    unk_194[0x70];
+    char    unk_194[0x58];
+    u16     state;
+    char    unk_1ee[0x12];
+    u16     mainState;
+    u16     nextPageMode;
     u16     screenIndex;
-    /* 0x206 */ u8 pad206[0x6];
+    u16     switchPageTimer;
+    u16     savePromptState;
     /* 0x20C */ f32 unk20C;
     /* 0x210 */ f32 unk210;
     /* 0x214 */ f32 unk214;
@@ -105,12 +114,18 @@ typedef struct
     u16     equipTargetItem;
     char    unk_274[0x010];
     s16     cursorColorIndex;
-    char    unk_286[0x04a];
+    char    unk_286[0x033];
+    u8      itemDescriptionOn;
+    char    unk_2ba[0x016];
 }
 PauseContext;
 
-ASSERT_OFFSET(PauseContext, unk_000,        0x000);
-ASSERT_OFFSET(PauseContext, screenIndex,    0x204);
+ASSERT_OFFSET(PauseContext, unk_000,            0x000);
+ASSERT_OFFSET(PauseContext, state,              0x1ec);
+ASSERT_OFFSET(PauseContext, mainState,          0x200);
+ASSERT_OFFSET(PauseContext, screenIndex,        0x204);
+ASSERT_OFFSET(PauseContext, savePromptState,    0x208);
+ASSERT_OFFSET(PauseContext, itemDescriptionOn,  0x2b9);
 _Static_assert(sizeof(PauseContext) == 0x2d0, "MM PauseContext size is wrong");
 
 typedef struct
@@ -505,15 +520,6 @@ typedef struct PlayState
     char                unk_18b4b[0x70d];
 }
 PlayState;
-
-typedef struct
-{
-    char unk[0x32];
-    u16  clockSpeed;
-}
-GameData;
-
-extern GameData* gGameData;
 
 ASSERT_OFFSET(PlayState, colCtx,                   0x00830);
 ASSERT_OFFSET(PlayState, actorCtx,                 0x01ca0);

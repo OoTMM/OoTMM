@@ -4,10 +4,12 @@
 #include <combo/menu.h>
 #include <combo/item.h>
 #include <combo/player.h>
-#include <combo/config.h>
 #include <combo/global.h>
 #include <combo/dpad.h>
 #include <combo/inventory.h>
+#include <combo/entrance.h>
+#include <combo/misc.h>
+#include <combo/common/Kaleido_Scope.h>
 
 void KaleidoScope_AfterSetCutsorColor(PlayState* play)
 {
@@ -285,59 +287,6 @@ static void KaleidoScope_DrawDungeonUnk2(void* unk)
 PATCH_CALL(0x80822a00, KaleidoScope_DrawDungeonUnk2);
 PATCH_CALL(0x80822f68, KaleidoScope_DrawDungeonUnk2);
 
-static int canSave(PlayState* play)
-{
-    Player* link;
-
-    link = GET_PLAYER(play);
-    if (link->stateFlags1 & PLAYER_ACTOR_STATE_EPONA)
-        return 0;
-
-    switch (play->sceneId)
-    {
-    case SCE_MM_MOON:
-    case SCE_MM_MOON_DEKU:
-    case SCE_MM_MOON_GORON:
-    case SCE_MM_MOON_LINK:
-    case SCE_MM_MOON_ZORA:
-    case SCE_MM_LAIR_MAJORA:
-        return 0;
-    case SCE_MM_CLOCK_TOWER_ROOFTOP:
-        return !!Config_Flag(CFG_ER_MOON) || !!Config_Flag(CFG_MM_MOON_CRASH_CYCLE);
-    case SCE_MM_SOUTHERN_SWAMP:
-        return gSave.entrance != 0x8460 && !MM_CHECK_EVENT_INF(0x35) && !MM_CHECK_EVENT_INF(0x41);
-    default:
-        return 1;
-    }
-}
-
-static void menuSave(PlayState* play)
-{
-    /* Can't save in some scenes */
-    if (!canSave(play))
-        return;
-
-    /* Save the game */
-    Save_DoSave(play, SF_OWL);
-    PlaySound(0x4823);
-}
-
-static void KaleidoScope_UpdateSomeMenu(PlayState* play)
-{
-    KaleidoScopeHandler handler;
-
-    /* Call the handler */
-    handler = OverlayAddr(0x80817b5c);
-    handler(play);
-
-    if (play->state.input[0].press.button & (L_TRIG | U_CBUTTONS))
-    {
-        menuSave(play);
-    }
-}
-
-PATCH_CALL(0x8082ae10, KaleidoScope_UpdateSomeMenu);
-
 u32 gCustomIconAddr;
 
 static u32 sCustomIcons[] = {
@@ -519,3 +468,23 @@ void KaleidoScope_DrawIconCustom(GraphicsContext* gfxCtx, u8 item, u16 width, u1
         DrawIcon(gfxCtx, vtx, texture, width, height, point);
     }
 }
+
+void KaleidoScope_SetSaveButton(PlayState* play, s16 bButtonDoAction)
+{
+    DmaEntry dma;
+    if (KaleidoScope_CanSave(play))
+    {
+        s16 texIndex = 14 + 29; /* DO_ACTION_SAVE + DO_ACTION_MAX */
+        comboDmaLookupForeignId(&dma, 17);
+        u32 textureFileAddress = dma.pstart;
+        u32 textureOffset = DO_ACTION_TEX_SIZE * texIndex;
+        DMARomToRam((textureFileAddress + textureOffset) | PI_DOM1_ADDR2, play->interfaceCtx.doActionSegment + 3 * DO_ACTION_TEX_SIZE, DO_ACTION_TEX_SIZE);
+        play->interfaceCtx.bButtonInterfaceDoActionActive = 1;
+    }
+    else
+    {
+        Interface_SetBButtonInterfaceDoAction(play, bButtonDoAction);
+    }
+}
+
+PATCH_CALL(0x80828908, KaleidoScope_SetSaveButton);

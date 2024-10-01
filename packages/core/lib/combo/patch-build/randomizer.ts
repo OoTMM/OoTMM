@@ -819,7 +819,13 @@ function randomizerWarps(worldId: number, logic: LogicResult): Uint8Array {
   ];
   const owlStatuesBuffer = toU32Buffer(owlStatues.map(e => entrance(e, logic.worlds[worldId])));
 
-  return concatUint8Arrays([warpSongs, owlStatuesBuffer]);
+  const spawns = [
+    'OOT_SPAWN_ADULT',
+    'OOT_SPAWN_CHILD'
+  ];
+  const spawnsBuffer = toU32Buffer(spawns.map(e => entrance(e, logic.worlds[worldId])));
+
+  return concatUint8Arrays([warpSongs, owlStatuesBuffer, spawnsBuffer]);
 }
 
 function worldConfig(world: World, settings: Settings): Set<Confvar> {

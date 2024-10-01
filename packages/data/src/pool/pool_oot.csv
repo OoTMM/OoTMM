@@ -1095,47 +1095,47 @@ Great Fairy Defense Upgrade,                                npc,            GANO
 Great Fairy Din's Fire,                                     npc,            NONE,                 GREAT_FAIRY_FOUNTAIN_SPELLS,    FAIRY_SPELL_FIRE,           SPELL_FIRE
 Great Fairy Farore's Wind,                                  npc,            NONE,                 GREAT_FAIRY_FOUNTAIN_SPELLS,    FAIRY_SPELL_WIND,           SPELL_WIND
 Great Fairy Nayru's Love,                                   npc,            NONE,                 GREAT_FAIRY_FOUNTAIN_SPELLS,    FAIRY_SPELL_LOVE,           SPELL_LOVE
-Deku Tree Map Chest,                                        chest,          NONE,                 INSIDE_DEKU_TREE,               0x03,                       MAP_DT
-Deku Tree Compass Chest,                                    chest,          NONE,                 INSIDE_DEKU_TREE,               0x02,                       COMPASS_DT
-Deku Tree Compass Room Side Chest,                          chest,          NONE,                 INSIDE_DEKU_TREE,               0x06,                       RECOVERY_HEART
-Deku Tree Slingshot Chest,                                  chest,          NONE,                 INSIDE_DEKU_TREE,               0x01,                       SLINGSHOT
-Deku Tree Slingshot Side Chest,                             chest,          NONE,                 INSIDE_DEKU_TREE,               0x05,                       RECOVERY_HEART
-Deku Tree Basement Chest,                                   chest,          NONE,                 INSIDE_DEKU_TREE,               0x04,                       RECOVERY_HEART
-Deku Tree GS Compass,                                       gs,             NONE,                 INSIDE_DEKU_TREE,               0x0b,                       GS_TOKEN
-Deku Tree GS Basement Vines,                                gs,             NONE,                 INSIDE_DEKU_TREE,               0x0a,                       GS_TOKEN
-Deku Tree GS Basement Gate,                                 gs,             NONE,                 INSIDE_DEKU_TREE,               0x09,                       GS_TOKEN
-Deku Tree GS Basement Back Room,                            gs,             DEKU_BACK_SKULL,      INSIDE_DEKU_TREE,               0x08,                       GS_TOKEN
-Deku Tree Grass Lobby 1,                                    grass,          NONE,                 INSIDE_DEKU_TREE,               0x00006,                    DEKU_SEEDS_5
-Deku Tree Grass Lobby 2,                                    grass,          NONE,                 INSIDE_DEKU_TREE,               0x00007,                    RECOVERY_HEART
-Deku Tree Grass Lobby 3,                                    grass,          NONE,                 INSIDE_DEKU_TREE,               0x00008,                    DEKU_SEEDS_5
-Deku Tree Grass Lobby 4,                                    grass,          NONE,                 INSIDE_DEKU_TREE,               0x00009,                    RECOVERY_HEART
-Deku Tree Grass Lobby 5,                                    grass,          NONE,                 INSIDE_DEKU_TREE,               0x0000a,                    DEKU_SEEDS_5
-Deku Tree Grass Slingshot Room 1,                           grass,          NONE,                 INSIDE_DEKU_TREE,               0x00200,                    RECOVERY_HEART
-Deku Tree Grass Slingshot Room 2,                           grass,          NONE,                 INSIDE_DEKU_TREE,               0x00201,                    DEKU_SEEDS_5
-Deku Tree Grass Slingshot Room 3,                           grass,          NONE,                 INSIDE_DEKU_TREE,               0x00202,                    RECOVERY_HEART
-Deku Tree Grass Slingshot Room 4,                           grass,          NONE,                 INSIDE_DEKU_TREE,               0x00203,                    DEKU_SEEDS_5
-Deku Tree Grass Basement Main 1,                            grass,          NONE,                 INSIDE_DEKU_TREE,               0x00301,                    RECOVERY_HEART
-Deku Tree Grass Basement Main 2,                            grass,          NONE,                 INSIDE_DEKU_TREE,               0x00302,                    DEKU_SEEDS_5
-Deku Tree Grass Eye Switch Room 1,                          grass,          NONE,                 INSIDE_DEKU_TREE,               0x00400,                    RECOVERY_HEART
-Deku Tree Grass Eye Switch Room 2,                          grass,          NONE,                 INSIDE_DEKU_TREE,               0x00401,                    DEKU_SEEDS_5
-Deku Tree Grass Eye Switch Room 3,                          grass,          NONE,                 INSIDE_DEKU_TREE,               0x00402,                    RECOVERY_HEART
-Deku Tree Grass Eye Switch Room 4,                          grass,          NONE,                 INSIDE_DEKU_TREE,               0x00403,                    DEKU_SEEDS_5
-Deku Tree Grass Water Room 1,                               grass,          NONE,                 INSIDE_DEKU_TREE,               0x00501,                    RECOVERY_HEART
-Deku Tree Grass Water Room 2,                               grass,          NONE,                 INSIDE_DEKU_TREE,               0x00502,                    DEKU_SEEDS_5
-Deku Tree Grass Torch Room 1,                               grass,          NONE,                 INSIDE_DEKU_TREE,               0x00602,                    RECOVERY_HEART
-Deku Tree Grass Torch Room 2,                               grass,          NONE,                 INSIDE_DEKU_TREE,               0x00603,                    DEKU_SEEDS_5
-Deku Tree Grass Larva Room 1,                               grass,          NONE,                 INSIDE_DEKU_TREE,               0x00702,                    RECOVERY_HEART
-Deku Tree Grass Larva Room 2,                               grass,          NONE,                 INSIDE_DEKU_TREE,               0x00703,                    DEKU_SEEDS_5
-Deku Tree Grass Pre-Boss Room 1,                            grass,          NONE,                 INSIDE_DEKU_TREE,               0x00900,                    RECOVERY_HEART
-Deku Tree Grass Pre-Boss Room 2,                            grass,          NONE,                 INSIDE_DEKU_TREE,               0x00901,                    DEKU_SEEDS_5
-Deku Tree Grass Pre-Boss Room 3,                            grass,          NONE,                 INSIDE_DEKU_TREE,               0x00902,                    RECOVERY_HEART
-Deku Tree Grass Compass Room 1,                             grass,          NONE,                 INSIDE_DEKU_TREE,               0x00a02,                    DEKU_SEEDS_5
-Deku Tree Grass Compass Room 2,                             grass,          NONE,                 INSIDE_DEKU_TREE,               0x00a03,                    RECOVERY_HEART
-Deku Tree Heart Main Room Lower,                            heart,          NONE,                 INSIDE_DEKU_TREE,               0x00019,                    RECOVERY_HEART
-Deku Tree Heart Main Room Upper,                            heart,          NONE,                 INSIDE_DEKU_TREE,               0x0001a,                    RECOVERY_HEART
-Deku Tree Heart Pre-Boss 1,                                 heart,          NONE,                 INSIDE_DEKU_TREE,               0x00906,                    RECOVERY_HEART
-Deku Tree Heart Pre-Boss 2,                                 heart,          NONE,                 INSIDE_DEKU_TREE,               0x00907,                    RECOVERY_HEART
-Deku Tree Heart Pre-Boss 3,                                 heart,          NONE,                 INSIDE_DEKU_TREE,               0x00908,                    RECOVERY_HEART
+Deku Tree Map Chest,                                        chest,          NONE,                 DEKU_TREE,                      0x03,                       MAP_DT
+Deku Tree Compass Chest,                                    chest,          NONE,                 DEKU_TREE,                      0x02,                       COMPASS_DT
+Deku Tree Compass Room Side Chest,                          chest,          NONE,                 DEKU_TREE,                      0x06,                       RECOVERY_HEART
+Deku Tree Slingshot Chest,                                  chest,          NONE,                 DEKU_TREE,                      0x01,                       SLINGSHOT
+Deku Tree Slingshot Side Chest,                             chest,          NONE,                 DEKU_TREE,                      0x05,                       RECOVERY_HEART
+Deku Tree Basement Chest,                                   chest,          NONE,                 DEKU_TREE,                      0x04,                       RECOVERY_HEART
+Deku Tree GS Compass,                                       gs,             NONE,                 DEKU_TREE,                      0x0b,                       GS_TOKEN
+Deku Tree GS Basement Vines,                                gs,             NONE,                 DEKU_TREE,                      0x0a,                       GS_TOKEN
+Deku Tree GS Basement Gate,                                 gs,             NONE,                 DEKU_TREE,                      0x09,                       GS_TOKEN
+Deku Tree GS Basement Back Room,                            gs,             DEKU_BACK_SKULL,      DEKU_TREE,                      0x08,                       GS_TOKEN
+Deku Tree Grass Lobby 1,                                    grass,          NONE,                 DEKU_TREE,                      0x00006,                    DEKU_SEEDS_5
+Deku Tree Grass Lobby 2,                                    grass,          NONE,                 DEKU_TREE,                      0x00007,                    RECOVERY_HEART
+Deku Tree Grass Lobby 3,                                    grass,          NONE,                 DEKU_TREE,                      0x00008,                    DEKU_SEEDS_5
+Deku Tree Grass Lobby 4,                                    grass,          NONE,                 DEKU_TREE,                      0x00009,                    RECOVERY_HEART
+Deku Tree Grass Lobby 5,                                    grass,          NONE,                 DEKU_TREE,                      0x0000a,                    DEKU_SEEDS_5
+Deku Tree Grass Slingshot Room 1,                           grass,          NONE,                 DEKU_TREE,                      0x00200,                    RECOVERY_HEART
+Deku Tree Grass Slingshot Room 2,                           grass,          NONE,                 DEKU_TREE,                      0x00201,                    DEKU_SEEDS_5
+Deku Tree Grass Slingshot Room 3,                           grass,          NONE,                 DEKU_TREE,                      0x00202,                    RECOVERY_HEART
+Deku Tree Grass Slingshot Room 4,                           grass,          NONE,                 DEKU_TREE,                      0x00203,                    DEKU_SEEDS_5
+Deku Tree Grass Basement Main 1,                            grass,          NONE,                 DEKU_TREE,                      0x00301,                    RECOVERY_HEART
+Deku Tree Grass Basement Main 2,                            grass,          NONE,                 DEKU_TREE,                      0x00302,                    DEKU_SEEDS_5
+Deku Tree Grass Eye Switch Room 1,                          grass,          NONE,                 DEKU_TREE,                      0x00400,                    RECOVERY_HEART
+Deku Tree Grass Eye Switch Room 2,                          grass,          NONE,                 DEKU_TREE,                      0x00401,                    DEKU_SEEDS_5
+Deku Tree Grass Eye Switch Room 3,                          grass,          NONE,                 DEKU_TREE,                      0x00402,                    RECOVERY_HEART
+Deku Tree Grass Eye Switch Room 4,                          grass,          NONE,                 DEKU_TREE,                      0x00403,                    DEKU_SEEDS_5
+Deku Tree Grass Water Room 1,                               grass,          NONE,                 DEKU_TREE,                      0x00501,                    RECOVERY_HEART
+Deku Tree Grass Water Room 2,                               grass,          NONE,                 DEKU_TREE,                      0x00502,                    DEKU_SEEDS_5
+Deku Tree Grass Torch Room 1,                               grass,          NONE,                 DEKU_TREE,                      0x00602,                    RECOVERY_HEART
+Deku Tree Grass Torch Room 2,                               grass,          NONE,                 DEKU_TREE,                      0x00603,                    DEKU_SEEDS_5
+Deku Tree Grass Larva Room 1,                               grass,          NONE,                 DEKU_TREE,                      0x00702,                    RECOVERY_HEART
+Deku Tree Grass Larva Room 2,                               grass,          NONE,                 DEKU_TREE,                      0x00703,                    DEKU_SEEDS_5
+Deku Tree Grass Pre-Boss Room 1,                            grass,          NONE,                 DEKU_TREE,                      0x00900,                    RECOVERY_HEART
+Deku Tree Grass Pre-Boss Room 2,                            grass,          NONE,                 DEKU_TREE,                      0x00901,                    DEKU_SEEDS_5
+Deku Tree Grass Pre-Boss Room 3,                            grass,          NONE,                 DEKU_TREE,                      0x00902,                    RECOVERY_HEART
+Deku Tree Grass Compass Room 1,                             grass,          NONE,                 DEKU_TREE,                      0x00a02,                    DEKU_SEEDS_5
+Deku Tree Grass Compass Room 2,                             grass,          NONE,                 DEKU_TREE,                      0x00a03,                    RECOVERY_HEART
+Deku Tree Heart Main Room Lower,                            heart,          NONE,                 DEKU_TREE,                      0x00019,                    RECOVERY_HEART
+Deku Tree Heart Main Room Upper,                            heart,          NONE,                 DEKU_TREE,                      0x0001a,                    RECOVERY_HEART
+Deku Tree Heart Pre-Boss 1,                                 heart,          NONE,                 DEKU_TREE,                      0x00906,                    RECOVERY_HEART
+Deku Tree Heart Pre-Boss 2,                                 heart,          NONE,                 DEKU_TREE,                      0x00907,                    RECOVERY_HEART
+Deku Tree Heart Pre-Boss 3,                                 heart,          NONE,                 DEKU_TREE,                      0x00908,                    RECOVERY_HEART
 Deku Tree Boss Container,                                   collectible,    NONE,                 LAIR_GOHMA,                     0x1f,                       HEART_CONTAINER
 Deku Tree Boss,                                             npc,            NONE,                 LAIR_GOHMA,                     BLUE_WARP_GOHMA,            STONE_EMERALD
 Deku Tree Boss Grass 1,                                     grass,          NONE,                 LAIR_GOHMA,                     0x00101,                    RECOVERY_HEART
@@ -1791,83 +1791,83 @@ Ganon Tower Pot 15,                                         pot,            NONE
 Ganon Tower Pot 16,                                         pot,            NONE,                 GANON_TOWER,                    0x0810,                     NOTHING
 Ganon Tower Pot 17,                                         pot,            NONE,                 GANON_TOWER,                    0x0811,                     NOTHING
 Ganon Tower Pot 18,                                         pot,            NONE,                 GANON_TOWER,                    0x0812,                     ARROWS_10
-MQ Deku Tree Map Chest,                                     chest,          NONE,                 INSIDE_DEKU_TREE,               0x03,                       MAP_DT
-MQ Deku Tree Compass Chest,                                 chest,          NONE,                 INSIDE_DEKU_TREE,               0x01,                       COMPASS_DT
-MQ Deku Tree Slingshot Chest,                               chest,          NONE,                 INSIDE_DEKU_TREE,               0x06,                       SLINGSHOT
-MQ Deku Tree Slingshot Room Far Chest,                      chest,          NONE,                 INSIDE_DEKU_TREE,               0x02,                       RUPEE_BLUE
-MQ Deku Tree Basement Chest,                                chest,          NONE,                 INSIDE_DEKU_TREE,               0x04,                       RUPEE_BLUE
-MQ Deku Tree Before Water Platform Chest,                   chest,          NONE,                 INSIDE_DEKU_TREE,               0x05,                       RECOVERY_HEART
-MQ Deku Tree After Water Platform Chest,                    chest,          MQ_DEKU_TIME_BLOCK,   INSIDE_DEKU_TREE,               0x00,                       RUPEE_PURPLE
-MQ Deku Tree Scrub,                                         scrub,          NONE,                 INSIDE_DEKU_TREE,               0x1b,                       SHIELD_DEKU
-MQ Deku Tree GS Back Room,                                  gs,             DEKU_BACK_SKULL,      INSIDE_DEKU_TREE,               0x08,                       GS_TOKEN
-MQ Deku Tree GS Lobby Crate,                                gs,             NONE,                 INSIDE_DEKU_TREE,               0x09,                       GS_TOKEN
-MQ Deku Tree GS Song of Time Blocks,                        gs,             NONE,                 INSIDE_DEKU_TREE,               0x0a,                       GS_TOKEN
-MQ Deku Tree GS Compass Room,                               gs,             NONE,                 INSIDE_DEKU_TREE,               0x0b,                       GS_TOKEN
-MQ Deku Tree Grass Entrance Lower 1,                        grass,          NONE,                 INSIDE_DEKU_TREE,               0x00005,                    DEKU_SEEDS_5
-MQ Deku Tree Grass Entrance Lower 2,                        grass,          NONE,                 INSIDE_DEKU_TREE,               0x00006,                    RECOVERY_HEART
-MQ Deku Tree Grass Entrance Lower 3,                        grass,          NONE,                 INSIDE_DEKU_TREE,               0x00007,                    DEKU_SEEDS_5
-MQ Deku Tree Grass Entrance Lower 4,                        grass,          NONE,                 INSIDE_DEKU_TREE,               0x00014,                    RANDOM
-MQ Deku Tree Grass Entrance Lower 5,                        grass,          NONE,                 INSIDE_DEKU_TREE,               0x00015,                    RANDOM
-MQ Deku Tree Grass Entrance Upper 1,                        grass,          NONE,                 INSIDE_DEKU_TREE,               0x00008,                    RECOVERY_HEART
-MQ Deku Tree Grass Entrance Upper 2,                        grass,          NONE,                 INSIDE_DEKU_TREE,               0x00009,                    DEKU_SEEDS_5
-MQ Deku Tree Grass Room Before Compass 1,                   grass,          NONE,                 INSIDE_DEKU_TREE,               0x00100,                    RECOVERY_HEART
-MQ Deku Tree Grass Room Before Compass 2,                   grass,          NONE,                 INSIDE_DEKU_TREE,               0x00101,                    DEKU_SEEDS_5
-MQ Deku Tree Grass Room Before Compass 3,                   grass,          NONE,                 INSIDE_DEKU_TREE,               0x00102,                    RECOVERY_HEART
-MQ Deku Tree Grass Room Before Compass 4,                   grass,          NONE,                 INSIDE_DEKU_TREE,               0x00105,                    RANDOM
-MQ Deku Tree Grass Room Before Compass 5,                   grass,          NONE,                 INSIDE_DEKU_TREE,               0x00106,                    RANDOM
-MQ Deku Tree Grass Room Before Compass 6,                   grass,          NONE,                 INSIDE_DEKU_TREE,               0x00107,                    RANDOM
-MQ Deku Tree Grass Room Before Compass 7,                   grass,          NONE,                 INSIDE_DEKU_TREE,               0x00108,                    RANDOM
-MQ Deku Tree Grass Compass Room 1,                          grass,          NONE,                 INSIDE_DEKU_TREE,               0x00203,                    DEKU_SEEDS_5
-MQ Deku Tree Grass Compass Room 2,                          grass,          NONE,                 INSIDE_DEKU_TREE,               0x00204,                    RECOVERY_HEART
-MQ Deku Tree Grass Compass Room 3,                          grass,          NONE,                 INSIDE_DEKU_TREE,               0x00205,                    DEKU_SEEDS_5
-MQ Deku Tree Grass Compass Room 4,                          grass,          NONE,                 INSIDE_DEKU_TREE,               0x00206,                    RECOVERY_HEART
-MQ Deku Tree Grass Basement Lower 1,                        grass,          NONE,                 INSIDE_DEKU_TREE,               0x00301,                    DEKU_SEEDS_5
-MQ Deku Tree Grass Basement Lower 2,                        grass,          NONE,                 INSIDE_DEKU_TREE,               0x00302,                    RECOVERY_HEART
-MQ Deku Tree Grass Basement Lower 3,                        grass,          NONE,                 INSIDE_DEKU_TREE,               0x0030b,                    RANDOM
-MQ Deku Tree Grass Basement Lower 4,                        grass,          NONE,                 INSIDE_DEKU_TREE,               0x0030c,                    RANDOM
-MQ Deku Tree Grass Basement Upper 1,                        grass,          NONE,                 INSIDE_DEKU_TREE,               0x00303,                    DEKU_SEEDS_5
-MQ Deku Tree Grass Basement Upper 2,                        grass,          NONE,                 INSIDE_DEKU_TREE,               0x00304,                    RECOVERY_HEART
-MQ Deku Tree Grass Basement Upper 3,                        grass,          NONE,                 INSIDE_DEKU_TREE,               0x00305,                    DEKU_SEEDS_5
-MQ Deku Tree Grass Room Before Spike 1,                     grass,          NONE,                 INSIDE_DEKU_TREE,               0x00400,                    RECOVERY_HEART
-MQ Deku Tree Grass Room Before Spike 2,                     grass,          NONE,                 INSIDE_DEKU_TREE,               0x00401,                    DEKU_SEEDS_5
-MQ Deku Tree Grass Room Before Spike 3,                     grass,          NONE,                 INSIDE_DEKU_TREE,               0x00402,                    RECOVERY_HEART
-MQ Deku Tree Grass Room Before Spike 4,                     grass,          NONE,                 INSIDE_DEKU_TREE,               0x00403,                    DEKU_SEEDS_5
-MQ Deku Tree Grass Spike Room Back 1,                       grass,          NONE,                 INSIDE_DEKU_TREE,               0x00502,                    RECOVERY_HEART
-MQ Deku Tree Grass Spike Room Back 2,                       grass,          NONE,                 INSIDE_DEKU_TREE,               0x00503,                    DEKU_SEEDS_5
-MQ Deku Tree Grass Spike Room Front 1,                      grass,          NONE,                 INSIDE_DEKU_TREE,               0x00504,                    RANDOM
-MQ Deku Tree Grass Spike Room Front 2,                      grass,          NONE,                 INSIDE_DEKU_TREE,               0x00505,                    RANDOM
-MQ Deku Tree Grass Spike Room Front 3,                      grass,          NONE,                 INSIDE_DEKU_TREE,               0x00506,                    RANDOM
-MQ Deku Tree Grass Larvae Room 1,                           grass,          NONE,                 INSIDE_DEKU_TREE,               0x00601,                    RECOVERY_HEART
-MQ Deku Tree Grass Larvae Room 2,                           grass,          NONE,                 INSIDE_DEKU_TREE,               0x00602,                    DEKU_SEEDS_5
-MQ Deku Tree Grass Gravestone Room 1,                       grass,          NONE,                 INSIDE_DEKU_TREE,               0x00705,                    RECOVERY_HEART
-MQ Deku Tree Grass Gravestone Room 2,                       grass,          NONE,                 INSIDE_DEKU_TREE,               0x0070d,                    RANDOM
-MQ Deku Tree Grass Gravestone Room 3,                       grass,          NONE,                 INSIDE_DEKU_TREE,               0x0070e,                    RANDOM
-MQ Deku Tree Grass Gravestone Room 4,                       grass,          NONE,                 INSIDE_DEKU_TREE,               0x0070f,                    RANDOM
-MQ Deku Tree Grass Gravestone Room 5,                       grass,          NONE,                 INSIDE_DEKU_TREE,               0x00710,                    RANDOM
-MQ Deku Tree Grass Back Room 1,                             grass,          NONE,                 INSIDE_DEKU_TREE,               0x00804,                    RANDOM
-MQ Deku Tree Grass Back Room 2,                             grass,          NONE,                 INSIDE_DEKU_TREE,               0x00805,                    RANDOM
-MQ Deku Tree Grass Back Room 3,                             grass,          NONE,                 INSIDE_DEKU_TREE,               0x00806,                    RANDOM
-MQ Deku Tree Grass Room Before Boss 1,                      grass,          NONE,                 INSIDE_DEKU_TREE,               0x00900,                    DEKU_SEEDS_5
-MQ Deku Tree Grass Room Before Boss 2,                      grass,          NONE,                 INSIDE_DEKU_TREE,               0x00901,                    RECOVERY_HEART
-MQ Deku Tree Grass Room Before Boss 3,                      grass,          NONE,                 INSIDE_DEKU_TREE,               0x00902,                    DEKU_SEEDS_5
-MQ Deku Tree Grass Slingshot Room Back 1,                   grass,          NONE,                 INSIDE_DEKU_TREE,               0x00a00,                    RECOVERY_HEART
-MQ Deku Tree Grass Slingshot Room Back 2,                   grass,          NONE,                 INSIDE_DEKU_TREE,               0x00a01,                    DEKU_SEEDS_5
-MQ Deku Tree Grass Slingshot Room Front 1,                  grass,          NONE,                 INSIDE_DEKU_TREE,               0x00a02,                    RECOVERY_HEART
-MQ Deku Tree Grass Slingshot Room Front 2,                  grass,          NONE,                 INSIDE_DEKU_TREE,               0x00a03,                    DEKU_SEEDS_5
-MQ Deku Tree Heart Lobby,                                   heart,          NONE,                 INSIDE_DEKU_TREE,               0x00012,                    RECOVERY_HEART
-MQ Deku Tree Heart Before Compass,                          heart,          NONE,                 INSIDE_DEKU_TREE,               0x00104,                    RECOVERY_HEART
-MQ Deku Tree Heart Compass Room,                            heart,          NONE,                 INSIDE_DEKU_TREE,               0x0020b,                    RECOVERY_HEART
-MQ Deku Tree Heart Before Boss 1,                           heart,          NONE,                 INSIDE_DEKU_TREE,               0x00906,                    RECOVERY_HEART
-MQ Deku Tree Heart Before Boss 2,                           heart,          NONE,                 INSIDE_DEKU_TREE,               0x00907,                    RECOVERY_HEART
-MQ Deku Tree Heart Before Boss 3,                           heart,          NONE,                 INSIDE_DEKU_TREE,               0x00908,                    RECOVERY_HEART
-MQ Deku Tree Heart Slingshot Room,                          heart,          NONE,                 INSIDE_DEKU_TREE,               0x00a05,                    RECOVERY_HEART
-MQ Deku Tree Wonder Item 1,                                 wonder,         NONE,                 INSIDE_DEKU_TREE,               0x00709,                    RECOVERY_HEART
-MQ Deku Tree Wonder Item 2,                                 wonder,         NONE,                 INSIDE_DEKU_TREE,               0x0070a,                    RECOVERY_HEART
-MQ Deku Tree Wonder Item 3,                                 wonder,         NONE,                 INSIDE_DEKU_TREE,               0x0070b,                    RECOVERY_HEART
-MQ Deku Tree Wonder Item 4,                                 wonder,         NONE,                 INSIDE_DEKU_TREE,               0x0070c,                    RECOVERY_HEART
-MQ Deku Tree Main Room 2nd Floor Crate,                     crate,          NONE,                 INSIDE_DEKU_TREE,               0x0001c,                    RUPEE_GREEN
-MQ Deku Tree Slingshot Room Large Crate 1,                  crate,          NONE,                 INSIDE_DEKU_TREE,               0x00a10,                    RUPEE_GREEN
-MQ Deku Tree Slingshot Room Large Crate 2,                  crate,          NONE,                 INSIDE_DEKU_TREE,               0x00a11,                    RUPEE_GREEN
+MQ Deku Tree Map Chest,                                     chest,          NONE,                 DEKU_TREE,                      0x03,                       MAP_DT
+MQ Deku Tree Compass Chest,                                 chest,          NONE,                 DEKU_TREE,                      0x01,                       COMPASS_DT
+MQ Deku Tree Slingshot Chest,                               chest,          NONE,                 DEKU_TREE,                      0x06,                       SLINGSHOT
+MQ Deku Tree Slingshot Room Far Chest,                      chest,          NONE,                 DEKU_TREE,                      0x02,                       RUPEE_BLUE
+MQ Deku Tree Basement Chest,                                chest,          NONE,                 DEKU_TREE,                      0x04,                       RUPEE_BLUE
+MQ Deku Tree Before Water Platform Chest,                   chest,          NONE,                 DEKU_TREE,                      0x05,                       RECOVERY_HEART
+MQ Deku Tree After Water Platform Chest,                    chest,          MQ_DEKU_TIME_BLOCK,   DEKU_TREE,                      0x00,                       RUPEE_PURPLE
+MQ Deku Tree Scrub,                                         scrub,          NONE,                 DEKU_TREE,                      0x1b,                       SHIELD_DEKU
+MQ Deku Tree GS Back Room,                                  gs,             DEKU_BACK_SKULL,      DEKU_TREE,                      0x08,                       GS_TOKEN
+MQ Deku Tree GS Lobby Crate,                                gs,             NONE,                 DEKU_TREE,                      0x09,                       GS_TOKEN
+MQ Deku Tree GS Song of Time Blocks,                        gs,             NONE,                 DEKU_TREE,                      0x0a,                       GS_TOKEN
+MQ Deku Tree GS Compass Room,                               gs,             NONE,                 DEKU_TREE,                      0x0b,                       GS_TOKEN
+MQ Deku Tree Grass Entrance Lower 1,                        grass,          NONE,                 DEKU_TREE,                      0x00005,                    DEKU_SEEDS_5
+MQ Deku Tree Grass Entrance Lower 2,                        grass,          NONE,                 DEKU_TREE,                      0x00006,                    RECOVERY_HEART
+MQ Deku Tree Grass Entrance Lower 3,                        grass,          NONE,                 DEKU_TREE,                      0x00007,                    DEKU_SEEDS_5
+MQ Deku Tree Grass Entrance Lower 4,                        grass,          NONE,                 DEKU_TREE,                      0x00014,                    RANDOM
+MQ Deku Tree Grass Entrance Lower 5,                        grass,          NONE,                 DEKU_TREE,                      0x00015,                    RANDOM
+MQ Deku Tree Grass Entrance Upper 1,                        grass,          NONE,                 DEKU_TREE,                      0x00008,                    RECOVERY_HEART
+MQ Deku Tree Grass Entrance Upper 2,                        grass,          NONE,                 DEKU_TREE,                      0x00009,                    DEKU_SEEDS_5
+MQ Deku Tree Grass Room Before Compass 1,                   grass,          NONE,                 DEKU_TREE,                      0x00100,                    RECOVERY_HEART
+MQ Deku Tree Grass Room Before Compass 2,                   grass,          NONE,                 DEKU_TREE,                      0x00101,                    DEKU_SEEDS_5
+MQ Deku Tree Grass Room Before Compass 3,                   grass,          NONE,                 DEKU_TREE,                      0x00102,                    RECOVERY_HEART
+MQ Deku Tree Grass Room Before Compass 4,                   grass,          NONE,                 DEKU_TREE,                      0x00105,                    RANDOM
+MQ Deku Tree Grass Room Before Compass 5,                   grass,          NONE,                 DEKU_TREE,                      0x00106,                    RANDOM
+MQ Deku Tree Grass Room Before Compass 6,                   grass,          NONE,                 DEKU_TREE,                      0x00107,                    RANDOM
+MQ Deku Tree Grass Room Before Compass 7,                   grass,          NONE,                 DEKU_TREE,                      0x00108,                    RANDOM
+MQ Deku Tree Grass Compass Room 1,                          grass,          NONE,                 DEKU_TREE,                      0x00203,                    DEKU_SEEDS_5
+MQ Deku Tree Grass Compass Room 2,                          grass,          NONE,                 DEKU_TREE,                      0x00204,                    RECOVERY_HEART
+MQ Deku Tree Grass Compass Room 3,                          grass,          NONE,                 DEKU_TREE,                      0x00205,                    DEKU_SEEDS_5
+MQ Deku Tree Grass Compass Room 4,                          grass,          NONE,                 DEKU_TREE,                      0x00206,                    RECOVERY_HEART
+MQ Deku Tree Grass Basement Lower 1,                        grass,          NONE,                 DEKU_TREE,                      0x00301,                    DEKU_SEEDS_5
+MQ Deku Tree Grass Basement Lower 2,                        grass,          NONE,                 DEKU_TREE,                      0x00302,                    RECOVERY_HEART
+MQ Deku Tree Grass Basement Lower 3,                        grass,          NONE,                 DEKU_TREE,                      0x0030b,                    RANDOM
+MQ Deku Tree Grass Basement Lower 4,                        grass,          NONE,                 DEKU_TREE,                      0x0030c,                    RANDOM
+MQ Deku Tree Grass Basement Upper 1,                        grass,          NONE,                 DEKU_TREE,                      0x00303,                    DEKU_SEEDS_5
+MQ Deku Tree Grass Basement Upper 2,                        grass,          NONE,                 DEKU_TREE,                      0x00304,                    RECOVERY_HEART
+MQ Deku Tree Grass Basement Upper 3,                        grass,          NONE,                 DEKU_TREE,                      0x00305,                    DEKU_SEEDS_5
+MQ Deku Tree Grass Room Before Spike 1,                     grass,          NONE,                 DEKU_TREE,                      0x00400,                    RECOVERY_HEART
+MQ Deku Tree Grass Room Before Spike 2,                     grass,          NONE,                 DEKU_TREE,                      0x00401,                    DEKU_SEEDS_5
+MQ Deku Tree Grass Room Before Spike 3,                     grass,          NONE,                 DEKU_TREE,                      0x00402,                    RECOVERY_HEART
+MQ Deku Tree Grass Room Before Spike 4,                     grass,          NONE,                 DEKU_TREE,                      0x00403,                    DEKU_SEEDS_5
+MQ Deku Tree Grass Spike Room Back 1,                       grass,          NONE,                 DEKU_TREE,                      0x00502,                    RECOVERY_HEART
+MQ Deku Tree Grass Spike Room Back 2,                       grass,          NONE,                 DEKU_TREE,                      0x00503,                    DEKU_SEEDS_5
+MQ Deku Tree Grass Spike Room Front 1,                      grass,          NONE,                 DEKU_TREE,                      0x00504,                    RANDOM
+MQ Deku Tree Grass Spike Room Front 2,                      grass,          NONE,                 DEKU_TREE,                      0x00505,                    RANDOM
+MQ Deku Tree Grass Spike Room Front 3,                      grass,          NONE,                 DEKU_TREE,                      0x00506,                    RANDOM
+MQ Deku Tree Grass Larvae Room 1,                           grass,          NONE,                 DEKU_TREE,                      0x00601,                    RECOVERY_HEART
+MQ Deku Tree Grass Larvae Room 2,                           grass,          NONE,                 DEKU_TREE,                      0x00602,                    DEKU_SEEDS_5
+MQ Deku Tree Grass Gravestone Room 1,                       grass,          NONE,                 DEKU_TREE,                      0x00705,                    RECOVERY_HEART
+MQ Deku Tree Grass Gravestone Room 2,                       grass,          NONE,                 DEKU_TREE,                      0x0070d,                    RANDOM
+MQ Deku Tree Grass Gravestone Room 3,                       grass,          NONE,                 DEKU_TREE,                      0x0070e,                    RANDOM
+MQ Deku Tree Grass Gravestone Room 4,                       grass,          NONE,                 DEKU_TREE,                      0x0070f,                    RANDOM
+MQ Deku Tree Grass Gravestone Room 5,                       grass,          NONE,                 DEKU_TREE,                      0x00710,                    RANDOM
+MQ Deku Tree Grass Back Room 1,                             grass,          NONE,                 DEKU_TREE,                      0x00804,                    RANDOM
+MQ Deku Tree Grass Back Room 2,                             grass,          NONE,                 DEKU_TREE,                      0x00805,                    RANDOM
+MQ Deku Tree Grass Back Room 3,                             grass,          NONE,                 DEKU_TREE,                      0x00806,                    RANDOM
+MQ Deku Tree Grass Room Before Boss 1,                      grass,          NONE,                 DEKU_TREE,                      0x00900,                    DEKU_SEEDS_5
+MQ Deku Tree Grass Room Before Boss 2,                      grass,          NONE,                 DEKU_TREE,                      0x00901,                    RECOVERY_HEART
+MQ Deku Tree Grass Room Before Boss 3,                      grass,          NONE,                 DEKU_TREE,                      0x00902,                    DEKU_SEEDS_5
+MQ Deku Tree Grass Slingshot Room Back 1,                   grass,          NONE,                 DEKU_TREE,                      0x00a00,                    RECOVERY_HEART
+MQ Deku Tree Grass Slingshot Room Back 2,                   grass,          NONE,                 DEKU_TREE,                      0x00a01,                    DEKU_SEEDS_5
+MQ Deku Tree Grass Slingshot Room Front 1,                  grass,          NONE,                 DEKU_TREE,                      0x00a02,                    RECOVERY_HEART
+MQ Deku Tree Grass Slingshot Room Front 2,                  grass,          NONE,                 DEKU_TREE,                      0x00a03,                    DEKU_SEEDS_5
+MQ Deku Tree Heart Lobby,                                   heart,          NONE,                 DEKU_TREE,                      0x00012,                    RECOVERY_HEART
+MQ Deku Tree Heart Before Compass,                          heart,          NONE,                 DEKU_TREE,                      0x00104,                    RECOVERY_HEART
+MQ Deku Tree Heart Compass Room,                            heart,          NONE,                 DEKU_TREE,                      0x0020b,                    RECOVERY_HEART
+MQ Deku Tree Heart Before Boss 1,                           heart,          NONE,                 DEKU_TREE,                      0x00906,                    RECOVERY_HEART
+MQ Deku Tree Heart Before Boss 2,                           heart,          NONE,                 DEKU_TREE,                      0x00907,                    RECOVERY_HEART
+MQ Deku Tree Heart Before Boss 3,                           heart,          NONE,                 DEKU_TREE,                      0x00908,                    RECOVERY_HEART
+MQ Deku Tree Heart Slingshot Room,                          heart,          NONE,                 DEKU_TREE,                      0x00a05,                    RECOVERY_HEART
+MQ Deku Tree Wonder Item 1,                                 wonder,         NONE,                 DEKU_TREE,                      0x00709,                    RECOVERY_HEART
+MQ Deku Tree Wonder Item 2,                                 wonder,         NONE,                 DEKU_TREE,                      0x0070a,                    RECOVERY_HEART
+MQ Deku Tree Wonder Item 3,                                 wonder,         NONE,                 DEKU_TREE,                      0x0070b,                    RECOVERY_HEART
+MQ Deku Tree Wonder Item 4,                                 wonder,         NONE,                 DEKU_TREE,                      0x0070c,                    RECOVERY_HEART
+MQ Deku Tree Main Room 2nd Floor Crate,                     crate,          NONE,                 DEKU_TREE,                      0x0001c,                    RUPEE_GREEN
+MQ Deku Tree Slingshot Room Large Crate 1,                  crate,          NONE,                 DEKU_TREE,                      0x00a10,                    RUPEE_GREEN
+MQ Deku Tree Slingshot Room Large Crate 2,                  crate,          NONE,                 DEKU_TREE,                      0x00a11,                    RUPEE_GREEN
 MQ Dodongo Cavern Map Chest,                                chest,          NONE,                 DODONGO_CAVERN,                 0x00,                       MAP_DC
 MQ Dodongo Cavern Compass Chest,                            chest,          NONE,                 DODONGO_CAVERN,                 0x05,                       COMPASS_DC
 MQ Dodongo Cavern Larvae Room Chest,                        chest,          NONE,                 DODONGO_CAVERN,                 0x02,                       RUPEE_BLUE

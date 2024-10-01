@@ -155,7 +155,7 @@ void Ocarina_HandleWarp(Player* player, PlayState* play)
 
         if (play->msgCtx.ocarinaMode == 2) /* OCARINA_MODE_WARP */
         {
-            play->interfaceCtx.unk_222 = 0;
+            play->interfaceCtx.bButtonInterfaceDoActionActive = 0;
             ActorCutscene_Stop(play->playerActorCsIds[0]);
             player->actor.flags &= ~ACTOR_FLAG_MM_20000000;
             Actor* actor = Actor_Spawn(&play->actorCtx, play, ACTOR_EN_TEST7, player->actor.world.pos.x, player->actor.world.pos.y, player->actor.world.pos.z, 0, 0, 0, 0x8000 | sWarpSongPlayed);

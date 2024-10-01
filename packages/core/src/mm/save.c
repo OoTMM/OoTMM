@@ -2,6 +2,7 @@
 #include <combo/net.h>
 #include <combo/config.h>
 #include <combo/inventory.h>
+#include <combo/entrance.h>
 
 void Sram_AfterOpenSave(void)
 {
@@ -253,3 +254,27 @@ void Sram_ResetSaveFromMoonCrash(void)
 }
 
 PATCH_FUNC(0x80144a94, Sram_ResetSaveFromMoonCrash);
+
+void DeathWarpWrapper(PlayState* play)
+{
+    DeathWarp(play);
+
+    RespawnData* dungeonEntranceRespawn = &gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE];
+    if (dungeonEntranceRespawn->playerParams)
+    {
+        if (!(dungeonEntranceRespawn->data & 0x80))
+        {
+            play->nextEntrance = ENTR_CROSS_RESPAWN;
+        }
+        else
+        {
+            memcpy(&gSaveContext.respawn[RESPAWN_MODE_TOP], dungeonEntranceRespawn, sizeof(RespawnData));
+            gSaveContext.respawn[RESPAWN_MODE_TOP].data &= 0x7f;
+            play->nextEntrance = dungeonEntranceRespawn->entrance;
+        }
+    }
+}
+
+PATCH_CALL(0x80169fe4, DeathWarpWrapper);
+PATCH_CALL(0x801aa8b8, DeathWarpWrapper);
+PATCH_CALL(0x80af23e8, DeathWarpWrapper);

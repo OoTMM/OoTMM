@@ -30,7 +30,6 @@ PATCH_END
 
 PATCH_START 0x8082d8fc
 .int 0
-.int 0
 PATCH_END
 
 /* Hide dummy sun song from quest screen */
@@ -195,6 +194,31 @@ PATCH_END
 
 PATCH_START 0x8081c744
   li t8, 0x5
+PATCH_END
+
+PATCH_START 0x80163bc4
+  jal   KaleidoScope_UpdateWrapper
+   move a1, t9
+PATCH_END
+
+PATCH_START 0x808240d0
+  li    t9, -0x2b
+PATCH_END
+
+PATCH_START 0x80824114
+  addiu   v1, v1, 0x16
+PATCH_END
+
+PATCH_START 0x80824134
+  addiu   v1, v1, 0x40
+PATCH_END
+
+PATCH_START 0x80824150
+  li    t7, 0x800
+PATCH_END
+
+PATCH_START 0x808241e4
+  li    a3, 0x40
 PATCH_END
 
 /*

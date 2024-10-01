@@ -94,7 +94,7 @@ static int mqDungeonId(PlayState* play)
 {
     switch (play->sceneId)
     {
-    case SCE_OOT_INSIDE_DEKU_TREE:
+    case SCE_OOT_DEKU_TREE:
         return MQ_DEKU_TREE;
     case SCE_OOT_DODONGO_CAVERN:
         return MQ_DODONGOS_CAVERN;

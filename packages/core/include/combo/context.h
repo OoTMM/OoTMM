@@ -10,6 +10,7 @@ typedef struct PACKED ALIGNED(4)
     u32  saveIndex;
     u32  entrance;
     s32  isFwSpawn;
+    s32  isDungeonEntranceSpawn;
 }
 ComboContext;
 

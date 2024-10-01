@@ -7,7 +7,7 @@
 void comboInitData(void)
 {
     /* Normal keys OoT */
-    g.maxKeysOot[SCE_OOT_INSIDE_DEKU_TREE] = 0;
+    g.maxKeysOot[SCE_OOT_DEKU_TREE] = 0;
     g.maxKeysOot[SCE_OOT_DODONGO_CAVERN] = 0;
     g.maxKeysOot[SCE_OOT_INSIDE_JABU_JABU] = 0;
     g.maxKeysOot[SCE_OOT_TEMPLE_FOREST] = 5;

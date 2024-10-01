@@ -195,30 +195,6 @@ void Ocarina_HandleLastPlayedSong(PlayState* play, Player* player, s16 lastPlaye
     }
 }
 
-static const char* kSoarNames[] = {
-    "Great Bay Coast",
-    "Zora Cape",
-    "Snowhead",
-    "Mountain Village",
-    "Clock Town",
-    "Milk Road",
-    "Woodfall",
-    "Southern Swamp",
-    "Ikana Canyon",
-    "Stone Tower"
-};
-
-static void soaringMessage(PlayState* play, u8 soaringIndex)
-{
-    char* b;
-
-    b = play->msgCtx.textBuffer;
-    comboTextAppendHeader(&b);
-    comboTextAppendStr(&b, "Soar to " TEXT_COLOR_RED);
-    comboTextAppendStr(&b, kSoarNames[soaringIndex]);
-    comboTextAppendStr(&b, TEXT_CZ "?" TEXT_NL TEXT_NL TEXT_COLOR_GREEN TEXT_CHOICE2 "OK" TEXT_NL "No" TEXT_END);
-}
-
 static void soaringNoStatuesMessage(PlayState* play)
 {
     char* b;
@@ -234,39 +210,23 @@ static void soaringNoStatuesMessage(PlayState* play)
 static void HandleSoaring(PlayState* play)
 {
     Player* link;
-    int msgState;
     int songId;
     if (play->pauseCtx.state == 0)
     {
         if (gSoaringIndexSelected >= 0 && gSoaringIndexSelected < 10)
         {
-            msgState = Message_GetState(&play->msgCtx);
-            if (msgState)
-            {
-                if (msgState == 2)
-                {
-                    songId = gSoaringIndexSelected;
+            songId = gSoaringIndexSelected;
 
-                    /* Stop ocarina */
-                    sInCustomSong = CUSTOM_SONG_NONE;
-                    play->msgCtx.ocarinaMode = 4; /* OCARINA_MODE_END */
-                    gSoaringIndexSelected = -1;
+            /* Stop ocarina */
+            sInCustomSong = CUSTOM_SONG_NONE;
+            play->msgCtx.ocarinaMode = 4; /* OCARINA_MODE_END */
+            gSoaringIndexSelected = -1;
 
-                    if (play->msgCtx.choice == 0)
-                    {
-                        link = GET_PLAYER(play);
-                        link->stateFlags1 |= (PLAYER_ACTOR_STATE_CUTSCENE_FROZEN | PLAYER_ACTOR_STATE_FROZEN);
-                        link->actor.freezeTimer = 10000;
-                        u32 entrance = gComboConfig.entrancesOwl[songId] ^ MASK_FOREIGN_ENTRANCE;
-                        comboTransition(play, entrance);
-                    }
-                }
-            }
-            else
-            {
-                PlayerDisplayTextBox(play, 0x88d, NULL);
-                soaringMessage(play, gSoaringIndexSelected);
-            }
+            link = GET_PLAYER(play);
+            link->stateFlags1 |= (PLAYER_ACTOR_STATE_CUTSCENE_FROZEN | PLAYER_ACTOR_STATE_FROZEN);
+            link->actor.freezeTimer = 10000;
+            u32 entrance = gComboConfig.entrancesOwl[songId] ^ MASK_FOREIGN_ENTRANCE;
+            comboTransition(play, entrance);
         }
         else
         {
@@ -301,7 +261,7 @@ static void HandleSongOfTime(PlayState* play)
         /* Stop ocarina */
         sInCustomSong = CUSTOM_SONG_NONE;
 
-        if (play->msgCtx.choice == 0)
+        if (play->msgCtx.choiceIndex == 0)
         {
             ageSwap(play);
         }
@@ -321,7 +281,7 @@ static void PrepareSoaringScreen(PlayState* play)
     /* Rumble_StateReset(); */
 
     pauseCtx->switchPageTimer = 0;
-    pauseCtx->changing = 1; /* PAUSE_MAIN_STATE_SWITCHING_PAGE; */
+    pauseCtx->mainState = 1; /* PAUSE_MAIN_STATE_SWITCHING_PAGE; */
 
     /* Set eye position and pageIndex such that scrolling left brings to the desired page */
     pauseCtx->eye.x = -64.0f; /* sKaleidoSetupEyeX1[pauseCtx->pageIndex]; */
@@ -374,7 +334,7 @@ static void SetupSoaring(PlayState* play)
             PrepareSoaringScreen(play);
             pauseCtx->screen_idx = 1;
             gSaveContext.prevHudVisibilityMode = gSaveContext.hudVisibilityMode;
-            gSaveContext.nextHudVisibilityMode = 0xC; /* HUD_VISIBILITY_A | HUD_VISIBILITY_B; */
+            gSaveContext.nextHudVisibilityMode = 0x1; /* HUD_VISIBILITY_NOTHING; */
             R_UPDATE_RATE = 2;
             if (Letterbox_GetSizeTarget() != 0) {
                 Letterbox_SetSizeTarget(0);
@@ -475,7 +435,7 @@ static void HandleSongOfDoubleTime(PlayState* play)
         sInCustomSong = CUSTOM_SONG_NONE;
 
         /* Check the selected option */
-        if (play->msgCtx.choice == 0)
+        if (play->msgCtx.choiceIndex == 0)
         {
             if (play->envCtx.sceneTimeSpeed != 0)
             {
