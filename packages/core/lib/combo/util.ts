@@ -1,4 +1,5 @@
 import fs from 'fs';
+
 import { Game } from './config';
 
 export type Optional<T> = T extends {} ? {[K in keyof T]?: T[K]} : T | undefined;

@@ -42,14 +42,14 @@ function booleanWeighted(rng: Random, chance: number): boolean {
   return randomInt(rng, mul) < (chance * mul);
 }
 
-export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Settings): Settings {
+export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Settings): Promise<Settings> {
   if (!rnd.enabled) {
     return oldSettings;
   }
 
   /* Get a new RNG */
   const random = new Random();
-  random.seed(randString());
+  await random.seed(randString());
 
   /* Get base random settings */
   const base = makeSettings({});

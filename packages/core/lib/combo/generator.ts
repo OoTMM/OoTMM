@@ -68,7 +68,7 @@ export class Generator {
     let log: string | null = null;
 
     /* Apply random settings (if enabled) */
-    this.opts.settings = applyRandomSettings(this.opts.random, this.opts.settings);
+    this.opts.settings = await applyRandomSettings(this.opts.random, this.opts.settings);
 
     if (!this.opts.patch) {
       if (!process.env.BROWSER) {
@@ -79,7 +79,7 @@ export class Generator {
       const resolver = await makeResolver(this.opts);
 
       /* Run logic */
-      const logicResult = logic(this.monitor, this.opts);
+      const logicResult = await logic(this.monitor, this.opts);
       patchfile.setHash(logicResult.hash);
       patchfiles = await buildPatchfiles({
         opts: this.opts,

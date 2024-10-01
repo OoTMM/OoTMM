@@ -1,5 +1,5 @@
 import { makeTestSeed } from '../helper';
 
-test("Can make a seed - default", () => {
-  makeTestSeed("DEFAULT", {});
+test("Can make a seed - default", async () => {
+  await makeTestSeed("DEFAULT", {});
 });

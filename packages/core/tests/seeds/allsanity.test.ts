@@ -1,7 +1,7 @@
 import { makeTestSeed } from '../helper';
 
-test("Can make a seed - allsanity", () => {
-  makeTestSeed("ALLSANITY", {
+test("Can make a seed - allsanity", async () => {
+  await makeTestSeed("ALLSANITY", {
     songs: 'anywhere',
     goldSkulltulaTokens: 'all',
     housesSkulltulaTokens: 'all',

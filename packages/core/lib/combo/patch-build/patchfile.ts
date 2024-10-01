@@ -1,4 +1,4 @@
-import JSZip from "jszip";
+import JSZip from 'jszip';
 
 const VERSION = '1.0';
 
@@ -77,7 +77,7 @@ export class Patchfile {
       /* Load from the zip */
       const zip = await JSZip.loadAsync(data);
       meta = JSON.parse(await zip.file('meta.json')!.async('text'));
-      blob = await zip.file('blob.bin')!.async('nodebuffer');
+      blob = Buffer.from(await zip.file('blob.bin')!.async('arraybuffer'));
     } catch (e) {
       throw new Error(`Failed to load patchfile: ${e}`);
     }
@@ -148,7 +148,7 @@ export class Patchfile {
     zip.file('meta.json', JSON.stringify(meta));
     zip.file('blob.bin', blobBuilder.concat());
 
-    return zip.generateAsync({ type: 'nodebuffer', compression: 'DEFLATE' });
+    return Buffer.from(await zip.generateAsync({ type: 'arraybuffer', compression: 'DEFLATE' }));
   }
 
   dup() {

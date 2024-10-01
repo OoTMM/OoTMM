@@ -1,6 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-import crypto from 'crypto';
 import Yaz0 from 'yaz0';
 
 import { fileExists } from './util';
@@ -22,6 +21,7 @@ export const compressFile = async (data: Buffer): Promise<Buffer> => {
   let filename = "";
 
   if (!process.env.BROWSER) {
+    const crypto = await import('node:crypto');
     const hash = crypto.createHash('sha256').update(data).digest('hex');
     const dir = path.resolve('build', 'cache', 'yaz0', hash.slice(0, 2));
     filename = path.resolve(dir, hash);

@@ -1,3 +1,6 @@
+import { Buffer } from 'buffer';
+globalThis.Buffer ||= Buffer;
+
 import JSZip from 'jszip';
 import { Settings, itemPool, Items, OptionsInput, GeneratorOutput, generate } from '@ootmm/core';
 import dataVersionZipFile from '@ootmm/core/dist/data.zip?url';
@@ -139,15 +142,17 @@ async function onTaskGenerate(task: WorkerTaskGenerate) {
       id: task.id,
       error: err,
     });
+    console.error(err);
   });
 }
 
 function onTaskItemPool(task: WorkerTaskItemPool) {
-  const result = itemPool(task.settings);
-  postMessage({
-    type: 'itemPool',
-    id: task.id,
-    itemPool: result,
+  itemPool(task.settings).then((result) => {
+    postMessage({
+      type: 'itemPool',
+      id: task.id,
+      itemPool: result,
+    });
   });
 }
 

@@ -1,7 +1,7 @@
 import { makeTestSeed } from '../helper';
 
-test("Can make a seed - Full ER: Separated Warps", () => {
-  makeTestSeed("FULL ER SEPARATED WARPS", {
+test("Can make a seed - Full ER: Separated Warps", async () => {
+  await makeTestSeed("FULL ER SEPARATED WARPS", {
     songs: 'anywhere',
     erDungeons: 'full',
     erBoss: 'full',

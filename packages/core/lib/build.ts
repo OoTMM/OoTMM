@@ -41,7 +41,7 @@ async function build() {
   }
 
   /* Compress the data */
-  const zipBuf = await zip.generateAsync({ type: 'nodebuffer', compression: 'DEFLATE', compressionOptions: { level: 9 } });
+  const zipBuf = Buffer.from(await zip.generateAsync({ type: 'arraybuffer', compression: 'DEFLATE', compressionOptions: { level: 9 } }));
   await fs.mkdir('dist', { recursive: true });
   await fs.writeFile('dist/data.zip', zipBuf);
 }

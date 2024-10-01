@@ -7,13 +7,13 @@ import { solvedWorldState } from "../lib/combo/logic";
 import { makeCosmetics } from "../lib/combo";
 import { makeRandomSettings } from "../lib/combo/settings/random";
 
-export const makeTestSeed = (seed: string, settings: Optional<Settings>) => {
+export const makeTestSeed = async (seed: string, settings: Optional<Settings>) => {
   const monitor = new Monitor({ onLog: () => {} });
   const cosmetics = makeCosmetics({});
   const random = makeRandomSettings({});
   const s = merge({}, DEFAULT_SETTINGS, settings, {
     probabilisticFoolish: false,
   });
-  const ws = solvedWorldState(monitor, { cosmetics, debug: false, seed, settings: s, random });
+  const ws = await solvedWorldState(monitor, { cosmetics, debug: false, seed, settings: s, random });
   return ws;
 }

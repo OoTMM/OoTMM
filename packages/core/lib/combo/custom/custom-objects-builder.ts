@@ -1,4 +1,5 @@
 import { FILES } from '@ootmm/data';
+
 import { Game } from '../config';
 import { DecompressedRoms } from '../decompress';
 import { DmaData } from '../dma';

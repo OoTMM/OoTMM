@@ -1,4 +1,4 @@
-import crypto from 'crypto';
+import randomBytes from 'randombytes';
 
 import { Random } from '../random';
 import { LogicPassSolver } from './solve';
@@ -43,9 +43,9 @@ function pipeline<State>(state: State): LogicPipeline<State> {
   return new LogicPipeline(state);
 }
 
-export const worldState = (monitor: Monitor, opts: Options) => {
+export const worldState = async (monitor: Monitor, opts: Options) => {
   const random = new Random();
-  random.seed(opts.seed + opts.settings.generateSpoilerLog);
+  await random.seed(opts.seed + opts.settings.generateSpoilerLog);
   const state = { monitor, opts, settings: opts.settings, random, attempts: 0 };
 
   return pipeline(state)
@@ -57,8 +57,8 @@ export const worldState = (monitor: Monitor, opts: Options) => {
     .exec();
 };
 
-export const solvedWorldState = (monitor: Monitor, opts: Options) => {
-  let state = worldState(monitor, opts);
+export const solvedWorldState = async (monitor: Monitor, opts: Options) => {
+  let state = await worldState(monitor, opts);
   return pipeline(state)
     .apply(LogicPassPrice)
     .apply(LogicPassEntrances)
@@ -67,8 +67,8 @@ export const solvedWorldState = (monitor: Monitor, opts: Options) => {
     .exec();
 }
 
-export const logic = (monitor: Monitor, opts: Options) => {
-  const state = solvedWorldState(monitor, opts);
+export const logic = async (monitor: Monitor, opts: Options) => {
+  const state = await solvedWorldState(monitor, opts);
 
   const data = pipeline(state)
     .apply(LogicPassAnalysis)
@@ -78,9 +78,9 @@ export const logic = (monitor: Monitor, opts: Options) => {
     .apply(LogicPassHash)
     .exec();
 
-    const uuid = crypto.randomBytes(16);
+    const uuid = randomBytes(16);
 
     return { ...data, uuid };
 };
 
-export type LogicResult = ReturnType<typeof logic>;
+export type LogicResult = Awaited<ReturnType<typeof logic>>;

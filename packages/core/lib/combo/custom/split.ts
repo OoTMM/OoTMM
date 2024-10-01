@@ -1,4 +1,3 @@
-
 export type SplitObject = {
   data: Buffer;
   offsets: number[];

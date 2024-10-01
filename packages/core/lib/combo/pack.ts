@@ -1,4 +1,3 @@
-
 import { FILES } from '@ootmm/data';
 
 import { CONFIG, GAMES, Game } from './config';

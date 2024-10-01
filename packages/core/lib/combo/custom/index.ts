@@ -1,5 +1,5 @@
 import path from 'path';
-import fs, { write, writeFileSync } from 'fs';
+import fs from 'fs';
 import { FILES } from '@ootmm/data';
 
 import { GAMES, Game } from '../config';

@@ -1,7 +1,7 @@
 import { makeTestSeed } from "../helper";
 
-test("Can make a seed - junk song locations", () => {
-  makeTestSeed("JUNKSONGS", {
+test("Can make a seed - junk song locations", async () => {
+  await makeTestSeed("JUNKSONGS", {
     startingItems: {
       OOT_SONG_TIME: 1,
       MM_SONG_TIME: 1,

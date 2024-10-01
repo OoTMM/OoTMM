@@ -10,7 +10,7 @@
   "dependencies": {
     "@ootmm/data": "^0.0.1",
     "@ootmm/tools": "^0.0.1",
-    "core-js": "^3.35.0",
+    "core-js": "^3.38.1",
     "crc-32": "^1.2.2",
     "pngjs": "^7.0.0",
     "randombytes": "^2.1.0",
@@ -18,13 +18,13 @@
   },
   "main": "lib/combo/index.ts",
   "devDependencies": {
-    "@types/lodash": "^4.14.202",
-    "@types/pngjs": "^6.0.4",
+    "@types/lodash": "^4.17.9",
+    "@types/pngjs": "^6.0.5",
     "@types/randombytes": "^2.0.3",
-    "@types/webpack-env": "^1.18.4",
+    "@types/webpack-env": "^1.18.5",
     "cross-env": "^7.0.3",
-    "csv": "^6.3.6",
-    "type-fest": "^4.9.0"
+    "csv": "^6.3.10",
+    "type-fest": "^4.26.1"
   },
   "files": [
     "dist/data"

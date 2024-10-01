@@ -9,7 +9,7 @@
   "author": "Nax",
   "license": "MIT",
   "devDependencies": {
-    "csv": "^6.3.6"
+    "csv": "^6.3.10"
   },
   "nx": {
     "targets": {

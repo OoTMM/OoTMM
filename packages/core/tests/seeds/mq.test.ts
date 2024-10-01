@@ -1,7 +1,7 @@
 import { makeTestSeed } from "../helper";
 
-test("Can make a seed - MQ", () => {
-  makeTestSeed("MQ", {
+test("Can make a seed - MQ", async () => {
+  await makeTestSeed("MQ", {
     dungeon: {
       DT: 'mq',
       DC: 'mq',

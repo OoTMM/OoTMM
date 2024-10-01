@@ -317,7 +317,7 @@ class CosmeticsPass {
 
     /* Create a random number generator */
     const random = new Random();
-    random.seed(randString());
+    await random.seed(randString());
 
     /* Resolve colors */
     const colorOotTunicKokiri = resolveColor(random, c.ootTunicKokiri);

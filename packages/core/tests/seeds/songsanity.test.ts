@@ -1,5 +1,5 @@
-import { makeTestSeed } from "../helper";
+import { makeTestSeed } from '../helper';
 
-test("Can make a seed - songsanity", () => {
-  makeTestSeed("SONGSANITY", { songs: "anywhere" });
+test("Can make a seed - songsanity", async () => {
+  await makeTestSeed("SONGSANITY", { songs: "anywhere" });
 });

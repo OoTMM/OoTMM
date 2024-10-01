@@ -1,6 +1,6 @@
 
 import { Options } from '../options';
-import { Game, CONFIG } from "../config";
+import { Game, CONFIG } from '../config';
 import { Patchfile } from '../patch-build/patchfile';
 import { Addresses, FileAddress, GameAddresses } from '../addresses';
 import { PATCH_GROUP_VALUES, PatchGroup } from './group';

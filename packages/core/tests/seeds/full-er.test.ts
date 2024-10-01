@@ -1,7 +1,7 @@
 import { makeTestSeed } from '../helper';
 
-test("Can make a seed - Full ER", () => {
-  makeTestSeed("FULL ER", {
+test("Can make a seed - Full ER", async () => {
+  await makeTestSeed("FULL ER", {
     songs: 'anywhere',
     erDungeons: 'full',
     erBoss: 'full',

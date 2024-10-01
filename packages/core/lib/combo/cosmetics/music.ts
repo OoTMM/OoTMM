@@ -267,7 +267,7 @@ class MusicInjector {
   private async loadMusicsOotrs(files: JSZip.JSZipObject[]) {
     for (const f of files) {
       /* Get the music zip */
-      const musicZipBuffer = await f.async('nodebuffer');
+      const musicZipBuffer = Buffer.from(await f.async('arraybuffer'));
       let musicZip: JSZip;
       try {
         musicZip = await JSZip.loadAsync(musicZipBuffer);
@@ -337,8 +337,8 @@ class MusicInjector {
       let bankIdMm: number | null = null;
 
       if (filesBank.length) {
-        const bank = await filesBank[0].async('nodebuffer');
-        const bankmeta = await filesBankmeta[0].async('nodebuffer');
+        const bank = Buffer.from(await filesBank[0].async('arraybuffer'));
+        const bankmeta = Buffer.from(await filesBankmeta[0].async('arraybuffer'));
         if (bankmeta.length !== 0x08) {
           this.monitor.warn(`Skipped music file ${f.name}: invalid bankmeta length`);
           continue;
@@ -354,7 +354,7 @@ class MusicInjector {
       }
 
       /* Add the music */
-      const seq = await seqFiles[0].async('nodebuffer');
+      const seq = Buffer.from(await seqFiles[0].async('arraybuffer'));
       const music: MusicFile = { type, seq, bankIdOot, bankIdMm, bankCustom, filename, name, games };
       this.musics.push(music);
     }
@@ -363,7 +363,7 @@ class MusicInjector {
   private async loadMusicsMmrs(files: JSZip.JSZipObject[]) {
     for (const f of files) {
       /* Get the music zip */
-      const musicZipBuffer = await f.async('nodebuffer');
+      const musicZipBuffer = Buffer.from(await f.async('arraybuffer'));
       let musicZip: JSZip;
       try {
         musicZip = await JSZip.loadAsync(musicZipBuffer);
@@ -419,7 +419,7 @@ class MusicInjector {
       const bankIdRaw = zseqFilename.split('.')[0];
 
       /* Add the music */
-      const seq = await zseqFiles[0].async('nodebuffer');
+      const seq = Buffer.from(await zseqFiles[0].async('arraybuffer'));
       const games: Game[] = ['mm'];
       let type: MusicType;
       if (['8', '9', '10'].some(x => categories.includes(x))) {
@@ -435,8 +435,8 @@ class MusicInjector {
       let bankIdMm: number | null = null;
 
       if (filesBank.length) {
-        const bank = await filesBank[0].async('nodebuffer');
-        const bankmeta = await filesBankmeta[0].async('nodebuffer');
+        const bank = Buffer.from(await filesBank[0].async('arraybuffer'));
+        const bankmeta = Buffer.from(await filesBankmeta[0].async('arraybuffer'));
         if (bankmeta.length !== 0x08) {
           this.monitor.warn(`Skipped music file ${f.name}: invalid bankmeta length`);
           continue;

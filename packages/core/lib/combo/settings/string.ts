@@ -1,7 +1,8 @@
 import { isEqual } from 'lodash';
 import { deflate, inflate } from 'pako';
-import { DEFAULT_SETTINGS, SETTINGS, Settings, makeSettings } from '../settings';
 import { PartialDeep } from 'type-fest';
+
+import { DEFAULT_SETTINGS, SETTINGS, Settings, makeSettings } from '../settings';
 
 export function exportSettings(settings: Settings): string {
   const diff: any = {};

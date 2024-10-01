@@ -1,7 +1,7 @@
-import { makeTestSeed } from "../helper";
+import { makeTestSeed } from '../helper';
 
-test("Can make a seed - Shared Items", () => {
-  makeTestSeed("SHARED-ITEMS", {
+test("Can make a seed - Shared Items", async () => {
+  await makeTestSeed("SHARED-ITEMS", {
     sharedBows: true,
     sharedBombBags: true,
     sharedMagic: true,

@@ -47,11 +47,11 @@ export { SETTINGS, DEFAULT_SETTINGS, TRICKS, itemName, DUNGEONS, mergeSettings, 
 
 export type Items = {[k: string]: number};
 
-export const itemPool = (settings: Settings): Items => {
+export const itemPool = async (settings: Settings): Promise<Items> => {
   const cosmetics = makeCosmetics({});
   const monitor = new Monitor({ onLog: () => {} });
   const random = makeRandomSettings({});
-  const { pool, worlds, itemProperties } = worldState(monitor, { settings, cosmetics, debug: false, seed: "--- INTERNAL ---", random });
+  const { pool, worlds, itemProperties } = await worldState(monitor, { settings, cosmetics, debug: false, seed: "--- INTERNAL ---", random });
 
   /* Extract relevant items from the pool */
   for (const pi of pool.keys()) {
@@ -85,12 +85,12 @@ export const itemPool = (settings: Settings): Items => {
   return itemPool;
 }
 
-export const locationList = (aSettings: Partial<Settings>) => {
+export const locationList = async (aSettings: Partial<Settings>) => {
   const settings: Settings = { ...DEFAULT_SETTINGS, ...aSettings };
   const cosmetics = makeCosmetics({});
   const monitor = new Monitor({ onLog: () => {} });
   const random = makeRandomSettings({});
-  const { worlds, fixedLocations } = worldState(monitor, { settings, cosmetics, debug: false, seed: "--- INTERNAL ---", random });
+  const { worlds, fixedLocations } = await worldState(monitor, { settings, cosmetics, debug: false, seed: "--- INTERNAL ---", random });
 
   // Precalculate this to avoid doing it more than once in the gui
   const dungeonLocations = Object.values(worlds[0].dungeons).reduce((acc, x) => new Set([...acc, ...x]));
