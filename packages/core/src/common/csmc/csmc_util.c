@@ -102,3 +102,8 @@ int csmcEnabledCow(void)
 {
     return csmcEnabled() && Config_Flag(CFG_CSMC_COW);
 }
+
+int csmcEnabledGrassPot(void)
+{
+    return (Config_Flag(CFG_CSMC_GRASS_POT) && !Config_Flag(CFG_CSMC_AGONY)) || (Config_Flag(CFG_CSMC_GRASS_POT) && Config_Flag(CFG_CSMC_AGONY) && gOotSave.inventory.quest.agonyStone));
+}
