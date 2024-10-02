@@ -30,6 +30,7 @@ type GeneratorState = {
   random: OptionRandomSettings;
   cosmetics: Cosmetics;
   itemPool: Items;
+  locations: string[];
 }
 
 type GeneratorContext = {
@@ -50,8 +51,7 @@ function createState(): GeneratorState {
   const settings = API.initialSettings();
   const random = API.initialRandomSettings();
   const cosmetics = API.initialCosmetics();
-  const ip = itemPool(settings);
-  settings.startingItems = API.restrictItemsByPool(settings.startingItems, ip);
+
   return {
     romConfig: {
       files: {
@@ -65,7 +65,8 @@ function createState(): GeneratorState {
     settings,
     random,
     cosmetics,
-    itemPool: ip,
+    itemPool: {},
+    locations: [],
     generator: {
       isGenerating: false,
       message: null,
@@ -104,15 +105,15 @@ export function GeneratorContextProvider({ children }: { children: React.ReactNo
     const ticket = ++settingsTicket;
     setState(state => ({ ...state, settings }));
     localStorage.setItem('settings', JSON.stringify(settings));
-    API.itemPoolFromSettings(settings).then((itemPool) => {
+    API.metaFromSettings(settings).then((meta) => {
       if (ticket !== settingsTicket) {
         return;
       }
       setState((state) => {
-        const startingItems = API.restrictItemsByPool(state.settings.startingItems, itemPool);
+        const startingItems = API.restrictItemsByPool(state.settings.startingItems, meta.itemPool);
         const newSettings = { ...state.settings, startingItems };
         localStorage.setItem('settings', JSON.stringify(newSettings));
-        return { ...state, settings: makeSettings(newSettings), itemPool };
+        return { ...state, settings: makeSettings(newSettings), itemPool: meta.itemPool, locations: meta.locations };
       });
     });
     return settings;
@@ -157,8 +158,11 @@ export function GeneratorContextProvider({ children }: { children: React.ReactNo
     return random;
   };
 
-  /* Async file load */
+  /* Async init */
   useEffect(() => {
+    /* Setting */
+    overrideSettings(state.settings);
+
     /* Roms */
     loadFile('oot').then(x => setRomConfigFileRaw('oot', x)).catch(console.error);
     loadFile('mm').then(x => setRomConfigFileRaw('mm', x)).catch(console.error);
@@ -250,6 +254,11 @@ export function useOverrideSettings() {
 export function useItemPool() {
   const { state } = useContext(GeneratorContext);
   return state.itemPool;
+}
+
+export function useLocations() {
+  const { state } = useContext(GeneratorContext);
+  return state.locations;
 }
 
 export function useStartingItems() {

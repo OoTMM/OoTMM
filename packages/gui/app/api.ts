@@ -1,5 +1,5 @@
 import { Items, Settings, OptionsInput, makeSettings, makeCosmetics, makeRandomSettings, GeneratorOutput } from '@ootmm/core';
-import type { WorkerResult, WorkerResultGenerate, WorkerResultGenerateError, WorkerResultItemPool } from './worker';
+import type { WorkerResult, WorkerResultGenerate, WorkerResultGenerateError, WorkerResultMeta } from './worker';
 import Worker from './worker?worker';
 import JSZip from 'jszip';
 
@@ -11,7 +11,7 @@ export type ResultFile = {
 
 let workerTaskId = 0;
 const worker = new Worker();
-const resolversItemPool = new Map<number, (result: WorkerResultItemPool) => void>();
+const resolversMeta = new Map<number, (result: WorkerResultMeta) => void>();
 const resolversGenerate = new Map<number, (result: WorkerResultGenerate | WorkerResultGenerateError) => void>();
 const loggersGenerate = new Map<number, (log: string) => void>();
 const loggersProgress = new Map<number, (progress: number, total: number) => void>();
@@ -19,10 +19,10 @@ const loggersProgress = new Map<number, (progress: number, total: number) => voi
 worker.onmessage = (event: MessageEvent<WorkerResult>) => {
   const result = event.data;
   switch (result.type) {
-  case 'itemPool': {
-    const resolver = resolversItemPool.get(result.id);
+  case 'meta': {
+    const resolver = resolversMeta.get(result.id);
     if (resolver) {
-      resolversItemPool.delete(result.id);
+      resolversMeta.delete(result.id);
       resolver(result);
     }
     break;
@@ -64,19 +64,19 @@ export function initialRandomSettings() {
   return makeRandomSettings(oldRandomSettings);
 }
 
-export async function itemPoolFromSettings(settings: Settings): Promise<Items> {
+export async function metaFromSettings(settings: Settings): Promise<{ itemPool: Items, locations: string[] }> {
   const id = workerTaskId++;
-  const result = await new Promise<WorkerResultItemPool>(resolve => {
-    resolversItemPool.set(id, result => {
+  const result = await new Promise<WorkerResultMeta>(resolve => {
+    resolversMeta.set(id, result => {
       resolve(result);
     });
     worker.postMessage({
-      type: 'itemPool',
+      type: 'meta',
       id,
       settings,
     });
   });
-  return result.itemPool;
+  return { itemPool: result.itemPool, locations: result.locations };
 }
 
 export function initialCosmetics() {

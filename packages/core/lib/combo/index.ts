@@ -34,10 +34,6 @@ export type GeneratorParams = {
 
 export type { GeneratorOutput, Settings, OptionsInput, SettingsPatch };
 
-type LocInfo = {
-  [k: string]: string[]
-}
-
 export const generate = (params: GeneratorParams): Generator => {
   const opts = options(params.opts || {});
   return new Generator(params.oot, params.mm, opts, params.monitor || {});
@@ -95,15 +91,14 @@ export const locationList = async (aSettings: Partial<Settings>) => {
   // Precalculate this to avoid doing it more than once in the gui
   const dungeonLocations = Object.values(worlds[0].dungeons).reduce((acc, x) => new Set([...acc, ...x]));
 
-  /* Everywhere below Check.type is a placeholder for Check.flags that I am going to add to the item tables. */
-  const locations: LocInfo = {};
+  const locations: string[] = [];
   for (const loc in worlds[0].checks) {
     const pl = makeLocation(loc, 0);
     if (fixedLocations.has(pl) || !isShuffled(settings, worlds[0], loc, dungeonLocations)) {
       continue;
     }
-    locations[loc] = [worlds[0].checks[loc].type];
+    locations.push(loc);
   }
 
-  return locations;
+  return locations.sort();
 }

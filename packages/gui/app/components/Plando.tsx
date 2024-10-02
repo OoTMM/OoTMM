@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
-import { itemName, locationList } from '@ootmm/core';
+import { itemName } from '@ootmm/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
-import { useItemPool, useSettings } from '../contexts/GeneratorContext';
+import { useItemPool, useLocations, useSettings } from '../contexts/GeneratorContext';
 
 export function Plando() {
   const [selectedLoc, setSelectedLoc] = useState<string>();
   const [selectedItem, setSelectedItem] = useState<string>();
   const [settings, setSettings] = useSettings();
   const itemPool = useItemPool();
-  const locs = Object.keys(locationList(settings)).sort();
+  const locs = useLocations();
   const locsOptions = locs.map((loc) => ({ value: loc, label: loc }));
   const itemOptions = Object.keys(itemPool).map((item) => ({ value: item, label: itemName(item) }));
 

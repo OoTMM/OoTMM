@@ -2,7 +2,7 @@ import { Buffer } from 'buffer';
 globalThis.Buffer ||= Buffer;
 
 import JSZip from 'jszip';
-import { Settings, itemPool, Items, OptionsInput, GeneratorOutput, generate } from '@ootmm/core';
+import { Settings, itemPool, Items, OptionsInput, GeneratorOutput, generate, locationList } from '@ootmm/core';
 import dataVersionZipFile from '@ootmm/core/dist/data.zip?url';
 
 async function makeDataPromise(path: string) {
@@ -32,8 +32,8 @@ async function resolverGlobFunc(pattern: RegExp) {
   return zip.file(pattern).map(f => f.name);
 }
 
-export type WorkerTaskItemPool = {
-  type: 'itemPool',
+export type WorkerTaskMeta = {
+  type: 'meta',
   id: number,
   settings: Settings,
 }
@@ -47,10 +47,11 @@ export type WorkerTaskGenerate = {
   options: OptionsInput
 }
 
-export type WorkerResultItemPool = {
-  type: 'itemPool',
+export type WorkerResultMeta = {
+  type: 'meta',
   id: number,
   itemPool: Items,
+  locations: string[],
 }
 
 export type WorkerResultGenerate = {
@@ -79,8 +80,8 @@ export type WorkerResultGenerateError = {
   error: any,
 }
 
-export type WorkerTask = WorkerTaskItemPool | WorkerTaskGenerate;
-export type WorkerResult = WorkerResultItemPool | WorkerResultGenerate | WorkerResultGenerateLog | WorkerResultGenerateProgress | WorkerResultGenerateError;
+export type WorkerTask = WorkerTaskMeta | WorkerTaskGenerate;
+export type WorkerResult = WorkerResultMeta | WorkerResultGenerate | WorkerResultGenerateLog | WorkerResultGenerateProgress | WorkerResultGenerateError;
 
 async function readFile(f: File) {
   const reader = new FileReader();
@@ -146,12 +147,13 @@ async function onTaskGenerate(task: WorkerTaskGenerate) {
   });
 }
 
-function onTaskItemPool(task: WorkerTaskItemPool) {
-  itemPool(task.settings).then((result) => {
+function onTaskMeta(task: WorkerTaskMeta) {
+  Promise.all([itemPool(task.settings), locationList(task.settings)]).then(([itemPool, locations]) => {
     postMessage({
-      type: 'itemPool',
+      type: 'meta',
       id: task.id,
-      itemPool: result,
+      itemPool,
+      locations,
     });
   });
 }
@@ -159,8 +161,8 @@ function onTaskItemPool(task: WorkerTaskItemPool) {
 function onMessage(event: MessageEvent<WorkerTask>) {
   const task = event.data;
   switch (task.type) {
-  case 'itemPool':
-    onTaskItemPool(task);
+  case 'meta':
+    onTaskMeta(task);
     break;
   case 'generate':
     onTaskGenerate(task);

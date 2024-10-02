@@ -1,12 +1,11 @@
 import React from 'react';
-import { locationList } from '@ootmm/core';
 
-import { useSettings } from '../contexts/GeneratorContext';
+import { useLocations, useSettings } from '../contexts/GeneratorContext';
 import { ArrayList } from './ArrayList';
 
 export function JunkLocations() {
   const [settings, setSettings] = useSettings();
-  const locs = Object.keys(locationList(settings)).sort();
+  const locs = useLocations();
   const options = locs.map(loc => ({ value: loc, label: loc }));
 
   const add = (loc: string) => {
