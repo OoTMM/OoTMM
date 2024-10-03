@@ -248,7 +248,7 @@ export function getPreActivatedOwlsLocations(world: World): string[] {
   if (world.resolvedFlags.mmPreActivatedOwls.has('woodfall'))  preActivatedOwls.push('MM Woodfall Owl Statue');
   if (world.resolvedFlags.mmPreActivatedOwls.has('mountain'))  preActivatedOwls.push('MM Mountain Village Owl Statue');
   if (world.resolvedFlags.mmPreActivatedOwls.has('snowhead'))  preActivatedOwls.push('MM Snowhead Owl Statue');
-  if (world.resolvedFlags.mmPreActivatedOwls.has('greatbay'))  preActivatedOwls.push('MM Great Bay Coast Owl');
+  if (world.resolvedFlags.mmPreActivatedOwls.has('greatbay'))  preActivatedOwls.push('MM Great Bay Coast Owl Statue');
   if (world.resolvedFlags.mmPreActivatedOwls.has('zoracape'))  preActivatedOwls.push('MM Zora Cape Owl Statue');
   if (world.resolvedFlags.mmPreActivatedOwls.has('canyon'))    preActivatedOwls.push('MM Ikana Canyon Owl Statue');
   if (world.resolvedFlags.mmPreActivatedOwls.has('tower'))     preActivatedOwls.push('MM Stone Tower Owl Statue');
