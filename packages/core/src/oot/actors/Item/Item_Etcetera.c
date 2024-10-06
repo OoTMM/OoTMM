@@ -7,7 +7,7 @@ static void ItemEtcetera_ItemQuery(ComboItemQuery* q, Actor* this, s16 gi)
     bzero(q, sizeof(ComboItemQuery));
 
     q->gi = gi;
-    switch (this->variable & 0xff)
+    switch (this->params & 0xff)
     {
     case 0x1:
         q->ovType = OV_NPC;
@@ -32,7 +32,7 @@ static int ItemEtcetera_HasGivenItem(Actor* this)
 {
     if (!Actor_HasParentZ(this))
         return 0;
-    if ((this->variable & 0xff) == 0x7)
+    if ((this->params & 0xff) == 0x7)
         gOotExtraFlags.fireArrow = 1;
     return 1;
 }
@@ -72,7 +72,7 @@ void ItemEtcetera_DrawTreasureGame(Actor_ItemEtcetera* this, GameState_Play* pla
     if (*(u8*)((char*)play + 0x1c27) == 0)
         return;
 
-    switch (this->base.variable & 0xff)
+    switch (this->base.params & 0xff)
     {
     case 0x8:
         gi = GI_OOT_RUPEE_GREEN;

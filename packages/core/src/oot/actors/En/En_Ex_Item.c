@@ -69,7 +69,7 @@ void EnExItem_RewardByIndex(ComboItemQuery* q, int index)
 
 void EnExItem_Reward(ComboItemQuery* q, const Actor* actor)
 {
-    EnExItem_RewardByIndex(q, actor->variable & 0x1f);
+    EnExItem_RewardByIndex(q, actor->params & 0x1f);
 }
 
 void EnExItem_Draw(Actor* actor, GameState_Play* play)

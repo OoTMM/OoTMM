@@ -27,9 +27,9 @@ void EnTest7_TriggerWarpWrapper(Actor* actor, GameState_Play* play)
     s8 bossId;
     s8 dungeonId;
 
-    if (actor->variable & 0x8000)
+    if (actor->params & 0x8000)
     {
-        entrance = gComboConfig.entrancesSong[actor->variable & 0xff] ^ MASK_FOREIGN_ENTRANCE;
+        entrance = gComboConfig.entrancesSong[actor->params & 0xff] ^ MASK_FOREIGN_ENTRANCE;
     }
     else
     {
@@ -66,7 +66,7 @@ void EnTest7_TriggerWarpWrapper(Actor* actor, GameState_Play* play)
             entrance = kDungeonEntrances[dungeonId];
         }
         else
-            entrance = gComboConfig.entrancesOwl[(actor->variable & 0xff) - 0x1c];
+            entrance = gComboConfig.entrancesOwl[(actor->params & 0xff) - 0x1c];
     }
 
     comboTransition(play, entrance);

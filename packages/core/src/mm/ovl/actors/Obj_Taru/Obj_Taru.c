@@ -6,11 +6,11 @@
 
 #define FLAGS 0
 
-#define OBJ_TARU_GET_100(thisx)             ((thisx)->dyna.actor.variable & 0x100)
-#define OBJ_TARU_GET_3F(thisx)              ((thisx)->dyna.actor.variable & 0x3F)
-#define OBJ_TARU_GET_SWITCH_FLAG(thisx)     ((thisx)->dyna.actor.variable & 0x7F)
-#define OBJ_TARU_GET_7F00(thisx)            (((thisx)->dyna.actor.variable >> 8) & 0x7F)
-#define OBJ_TARU_GET_80(thisx)              ((thisx)->dyna.actor.variable & 0x80)
+#define OBJ_TARU_GET_100(thisx)             ((thisx)->dyna.actor.params & 0x100)
+#define OBJ_TARU_GET_3F(thisx)              ((thisx)->dyna.actor.params & 0x3F)
+#define OBJ_TARU_GET_SWITCH_FLAG(thisx)     ((thisx)->dyna.actor.params & 0x7F)
+#define OBJ_TARU_GET_7F00(thisx)            (((thisx)->dyna.actor.params >> 8) & 0x7F)
+#define OBJ_TARU_GET_80(thisx)              ((thisx)->dyna.actor.params & 0x80)
 
 void ObjTaru_Init(Actor_ObjTaru* this, GameState_Play* play);
 void ObjTaru_Destroy(Actor_ObjTaru* this, GameState_Play* play);

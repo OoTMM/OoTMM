@@ -155,7 +155,7 @@ int ObjTsubo_IsShuffled(Actor_ObjTsubo* this)
 
 void ObjTsubo_SpawnCollectible(Actor_ObjTsubo* this, GameState_Play* play)
 {
-    s16 dropParams = this->actor.variable & 0x1F;
+    s16 dropParams = this->actor.params & 0x1F;
 
     /* Potsanity */
     if (ObjTsubo_IsShuffled(this))
@@ -166,7 +166,7 @@ void ObjTsubo_SpawnCollectible(Actor_ObjTsubo* this, GameState_Play* play)
 
     if ((dropParams >= 0) && (dropParams < ITEM00_MAX))
     {
-        Item_DropCollectible(play, &this->actor.world.pos, (dropParams | (((this->actor.variable >> 9) & 0x3F) << 8)));
+        Item_DropCollectible(play, &this->actor.world.pos, (dropParams | (((this->actor.params >> 9) & 0x3F) << 8)));
     }
 }
 
@@ -235,7 +235,7 @@ void ObjTsubo_Init(Actor_ObjTsubo* this, GameState_Play* play)
         Actor_Kill(&this->actor);
         return;
     }
-    this->requiredObjectSlot = Object_GetSlot(&play->objectCtx, sObjectIds[(this->actor.variable >> 8) & 1]);
+    this->requiredObjectSlot = Object_GetSlot(&play->objectCtx, sObjectIds[(this->actor.params >> 8) & 1]);
     if (this->requiredObjectSlot < 0)
     {
         Actor_Kill(&this->actor);
@@ -285,7 +285,7 @@ void ObjTsubo_AirBreak(Actor_ObjTsubo* this, GameState_Play* play)
             play, &pos, &velocity,
             &this->actor.world.pos, -240, arg5, 10, 10, 0,
             (Rand_ZeroOne() * 95.0f) + 15.0f, 0, 32, 60, KAKERA_COLOR_NONE,
-            sObjectIds[(this->actor.variable >> 8) & 1], D_80BA1B8C[(this->actor.variable >> 8) & 1]
+            sObjectIds[(this->actor.params >> 8) & 1], D_80BA1B8C[(this->actor.params >> 8) & 1]
         );
     }
     SpawnSomeDust(play, &this->actor.world.pos, 30.0f, 4, 20, 50, 1);
@@ -318,7 +318,7 @@ void ObjTsubo_WaterBreak(Actor_ObjTsubo* this, GameState_Play* play)
             play, &pos, &velocity,
             &this->actor.world.pos, -180, phi_s0, 30, 30, 0,
             (Rand_ZeroOne() * 95.0f) + 15.0f, 0, 32, 70, KAKERA_COLOR_NONE,
-            sObjectIds[(this->actor.variable >> 8) & 1], D_80BA1B8C[(this->actor.variable >> 8) & 1]
+            sObjectIds[(this->actor.params >> 8) & 1], D_80BA1B8C[(this->actor.params >> 8) & 1]
         );
     }
 }
@@ -471,12 +471,12 @@ void ObjTsubo_Draw(Actor_ObjTsubo* this, GameState_Play* play)
     else
         o.gi = 0;
 
-    if (this->actor.variable & (1 << 8))
+    if (this->actor.params & (1 << 8))
         type = CSMC_POT_NORMAL;
     else
         type = CSMC_POT_NORMAL_DANGEON;
     csmcPotPreDraw(&this->actor, play, o.gi, type);
-    Gfx_DrawDListOpa(play, D_80BA1B84[(this->actor.variable >> 8) & 1]);
+    Gfx_DrawDListOpa(play, D_80BA1B84[(this->actor.params >> 8) & 1]);
 }
 
 static ActorInit ObjTsubo_InitVars =

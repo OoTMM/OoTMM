@@ -23,7 +23,7 @@ static void CustomWarp_Reload(void)
 
 static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
 {
-    switch (this->base.variable)
+    switch (this->base.params)
     {
     case SWITCH_LAKE_HYLIA_WATER:
         CustomWarp_Reload();
@@ -51,7 +51,7 @@ static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
     play->transitionTrigger = TRANS_TRIGGER_NORMAL;
     play->transitionType = TRANS_TYPE_FADE_BLACK;
 
-    switch (this->base.variable)
+    switch (this->base.params)
     {
     case SWITCH_SPRING:
         MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH);

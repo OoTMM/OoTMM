@@ -49,7 +49,7 @@ u8 Shop_ItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
     switch (play->sceneId)
     {
     case SCE_MM_BOMB_SHOP:
-        switch (girlA->base.variable)
+        switch (girlA->base.params)
         {
         case SHOP_BOMBS_10: return 0x00;
         case SHOP_BOMBCHU_10: return 0x01;
@@ -60,7 +60,7 @@ u8 Shop_ItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
         }
         break;
     case SCE_MM_CURIOSITY_SHOP:
-        switch (girlA->base.variable)
+        switch (girlA->base.params)
         {
         case SHOP_MASK_ALL_NIGHT: return 0x04;
         case SHOP_BOMB_BAG2: return 0x03;
@@ -68,7 +68,7 @@ u8 Shop_ItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
         }
         break;
     case SCE_MM_TRADING_POST:
-        switch (girlA->base.variable)
+        switch (girlA->base.params)
         {
         case SHOP_POTION_RED:
         case SHOP_POTION_RED_ALT:
@@ -103,7 +103,7 @@ u8 Shop_ItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
         }
         break;
     case SCE_MM_POTION_SHOP:
-        switch (girlA->base.variable)
+        switch (girlA->base.params)
         {
         case SHOP_POTION_BLUE:
             return 0x0d;
@@ -121,7 +121,7 @@ u8 Shop_ItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
         }
         break;
     case SCE_MM_GORON_SHOP:
-        switch (girlA->base.variable)
+        switch (girlA->base.params)
         {
         case SHOP_BOMBS_10:
         case SHOP_BOMBS_10_ALT:
@@ -141,7 +141,7 @@ u8 Shop_ItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
         }
         break;
     case SCE_MM_ZORA_HALL_ROOMS:
-        switch (girlA->base.variable)
+        switch (girlA->base.params)
         {
         case SHOP_SHIELD_HERO:
         case SHOP_SHIELD_HERO_ALT:

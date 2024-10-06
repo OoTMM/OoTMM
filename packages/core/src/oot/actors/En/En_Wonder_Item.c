@@ -151,11 +151,11 @@ void EnWonderItem_InitWrapper(Actor_EnWonderItem* this, GameState_Play* play)
     }
 
     /* Check the collectible flag */
-    switchFlag = this->base.variable & 0x3f;
+    switchFlag = this->base.params & 0x3f;
     if (switchFlag != 0x3f && Flags_GetSwitch(play, switchFlag) && this->isExtended)
     {
         /* Flag is set but item wasn't collected - ignore the flag */
-        this->base.variable |= 0x3f;
+        this->base.params |= 0x3f;
     }
 
     /* Forward */

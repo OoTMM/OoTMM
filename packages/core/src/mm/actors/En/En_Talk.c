@@ -6,7 +6,7 @@ int EnTalk_TalkedTo(Actor* this, GameState_Play* play)
     static int sInMessage;
     int messageState;
 
-    if ((this->variable & 0x3f) != 0x18)
+    if ((this->params & 0x3f) != 0x18)
         return ActorTalkedTo(this);
 
     if (!ActorTalkedTo(this) && !sInMessage)

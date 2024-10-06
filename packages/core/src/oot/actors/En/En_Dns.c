@@ -45,7 +45,7 @@ static int EnDns_GetID(Actor* this)
 
     inGrotto = (gPlay->sceneId == SCE_OOT_GROTTOS);
     lastScene = scrubSceneKey(gPlay, inGrotto);
-    key = KEY(lastScene, inGrotto, this->variable & 0xff);
+    key = KEY(lastScene, inGrotto, this->params & 0xff);
 
     switch (key)
     {

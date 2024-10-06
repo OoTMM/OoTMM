@@ -45,7 +45,7 @@ static void EnBox_ItemQuery(ComboItemQuery* q, Actor* this, GameState_Play* play
     {
         q->ovType = OV_CHEST;
         q->sceneId = comboSceneKey(play->sceneId);
-        q->id = this->variable & 0x1f;
+        q->id = this->params & 0x1f;
     }
 }
 

@@ -5,7 +5,7 @@
 
 struct Actor_Boss01;
 
-#define ODOLWA_GET_TYPE(thisx) ((thisx)->variable)
+#define ODOLWA_GET_TYPE(thisx) ((thisx)->params)
 #define ODOLWA_GET_AFTERIMAGE_DESPAWN_TIMER(thisx) ((thisx)->world.rot.z)
 
 #define ODOLWA_SHADOW_TEX_WIDTH 64

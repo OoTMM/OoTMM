@@ -82,7 +82,7 @@ void Fishing_DrawFish_SkelAnime(GameState_Play* play, void** skeleton, Vec3s* jo
                            void* overrideLimbDraw, void* postLimbDraw, Actor* this) {
     ComboItemOverride o;
 
-    Fishing_Fish_ItemOverride(play, &o, this->variable);
+    Fishing_Fish_ItemOverride(play, &o, this->params);
     if (o.gi >= GI_OOT_FISHING_POND_CHILD_FISH_2LBS && o.gi <= GI_OOT_FISHING_POND_ADULT_LOACH_36LBS)
     {
         SkelAnime_DrawFlexOpa(play, skeleton, jointTable, dListCount, overrideLimbDraw, postLimbDraw, this);
@@ -156,7 +156,7 @@ void Fishing_SetCaughtId(Actor* actor, u16* sFishingCaughtTextId) {
     u8* stateAndTimer = ((u8*)actor) + 0x1C5;
     *stateAndTimer = 0;
 
-    *sFishingCaughtTextId = actor->variable;
+    *sFishingCaughtTextId = actor->params;
 }
 
 void Fishing_HijackCaughtMessage(GameState_Play* play, u16 textId, Actor* this) {
@@ -212,7 +212,7 @@ void Fishing_OverrideInitFishLength(u8 linkAge, f32 childMultiplier, Actor* this
 
     ComboItemOverride o;
 
-    Fishing_Fish_ItemOverride(NULL, &o, this->variable);
+    Fishing_Fish_ItemOverride(NULL, &o, this->params);
 
     u8 pounds;
 
@@ -253,7 +253,7 @@ void Fishing_FishGiveItem(Actor* this, GameState_Play* play) {
     ComboItemOverride o;
     int major;
 
-    Fishing_Fish_ItemQuery(play, &q, this->variable);
+    Fishing_Fish_ItemQuery(play, &q, this->params);
 
     comboItemOverride(&o, &q);
     major = !isItemFastBuy(o.gi);
@@ -277,7 +277,7 @@ void Fishing_FishGiveItem(Actor* this, GameState_Play* play) {
     /* Play the sound */
     comboPlayItemFanfare(o.gi, 0);
 
-    int flag = this->variable - 100;
+    int flag = this->params - 100;
     if (gSave.age == AGE_ADULT) {
         flag += 17;
     }

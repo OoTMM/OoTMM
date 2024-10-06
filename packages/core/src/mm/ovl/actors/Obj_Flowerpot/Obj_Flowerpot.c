@@ -9,8 +9,8 @@
 #define SLICE_POT   0
 #define SLICE_GRASS 1
 
-#define ENOBJFLOWERPOT_GET_3F(thisx) ((thisx)->actor.variable & 0x3F)
-#define ENOBJFLOWERPOT_GET_7F00(thisx) (((thisx)->actor.variable >> 8) & 0x7F)
+#define ENOBJFLOWERPOT_GET_3F(thisx) ((thisx)->actor.params & 0x3F)
+#define ENOBJFLOWERPOT_GET_7F00(thisx) (((thisx)->actor.params >> 8) & 0x7F)
 
 void ObjFlowerpot_Init(Actor_ObjFlowerpot* this, GameState_Play* play);
 void ObjFlowerpot_Destroy(Actor_ObjFlowerpot* this, GameState_Play* play);

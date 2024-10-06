@@ -8,7 +8,7 @@ static void EnItem00_ItemQuery(ComboItemQuery* q, Actor_EnItem00* this, GameStat
 {
     memset(q, 0, sizeof(*q));
 
-    if (this->base.variable == 0x06)
+    if (this->base.params == 0x06)
     {
         q->ovType = OV_COLLECTIBLE;
         q->sceneId = comboSceneKey(play->sceneId);

@@ -129,7 +129,7 @@ void EnItem00_XflagInit(Actor_EnItem00* this, const Xflag* xflag)
 
     /* Use our draw func */
     this->base.draw = EnItem00_DrawXflag;
-    this->base.variable = 0;
+    this->base.params = 0;
 }
 
 void EnItem00_XflagInitFreestanding(Actor_EnItem00* this, GameState_Play* play, u8 actorIndex, u8 slice)
@@ -145,7 +145,7 @@ void EnItem00_XflagInitFreestanding(Actor_EnItem00* this, GameState_Play* play, 
     xflag.id = actorIndex;
 
     /* Alias as required */
-    switch (this->base.variable & 0xff)
+    switch (this->base.params & 0xff)
     {
     case ITEM00_RUPEE_GREEN:
     case ITEM00_RUPEE_BLUE:

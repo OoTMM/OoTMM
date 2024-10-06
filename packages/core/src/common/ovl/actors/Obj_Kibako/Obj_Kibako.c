@@ -152,9 +152,9 @@ void ObjKibako_SpawnCollectible(Actor_ObjKibako* this, GameState_Play* play)
         return;
     }
 
-    collectible = this->actor.variable & 0x1F;
+    collectible = this->actor.params & 0x1F;
     if ((collectible >= 0) && (collectible < ITEM00_MAX)) {
-        Item_DropCollectible(play, &this->actor.world.pos, collectible | (((this->actor.variable >> 8) & 0x3F) << 8));
+        Item_DropCollectible(play, &this->actor.world.pos, collectible | (((this->actor.params >> 8) & 0x3F) << 8));
     }
 }
 
@@ -375,10 +375,10 @@ void ObjKibako_Draw(Actor_ObjKibako* this, GameState_Play* play)
 
 #if defined(GAME_MM)
 # define OBJECT                                 OBJECT_GAMEPLAY_KEEP
-# define KIBAKO_COLLECTIBLE_ID(thisx)           ((thisx)->actor.variable & 0x3F)
-# define KIBAKO_COLLECTIBLE_FLAG(thisx)         (((thisx)->actor.variable >> 0x8) & 0x7F)
-# define KIBAKO_BANK_INDEX(thisx)               (((thisx)->actor.variable >> 0xF) & 1)
-# define KIBAKO_BOMBER_CAN_HIDE_IN_BOX(thisx)   (((thisx)->actor.variable >> 7) & 1)
+# define KIBAKO_COLLECTIBLE_ID(thisx)           ((thisx)->actor.params & 0x3F)
+# define KIBAKO_COLLECTIBLE_FLAG(thisx)         (((thisx)->actor.params >> 0x8) & 0x7F)
+# define KIBAKO_BANK_INDEX(thisx)               (((thisx)->actor.params >> 0xF) & 1)
+# define KIBAKO_BOMBER_CAN_HIDE_IN_BOX(thisx)   (((thisx)->actor.params >> 7) & 1)
 # define SEGADDR_KEEP_CRATE_DL                  ((void*)0x05007890)
 # define SEGADDR_KEEP_FRAGMENT_DL               ((void*)0x05007980)
 # define SEGADDR_OBJ_CRATE_DL                   ((void*)0x06001180)

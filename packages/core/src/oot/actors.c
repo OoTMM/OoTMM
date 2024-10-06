@@ -365,7 +365,7 @@ static int shouldActorIgnorePlayer(Actor* this, Actor_Player* link)
     if (link->mask != MASK_STONE)
         return 0;
 
-    variable = this->variable;
+    variable = this->params;
 
     switch (this->id)
     {

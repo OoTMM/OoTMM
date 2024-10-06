@@ -199,7 +199,7 @@ static void HandleFrameDelay(Actor_Player* link, GameState_Play* play, Actor* ar
     prevEffectState = gSaveContext.magicState;
 #endif
 
-    curInfo = GetArrowInfo(arrow->variable);
+    curInfo = GetArrowInfo(arrow->params);
     if (arrow && curInfo)
     {
         special = arrow->child;
@@ -292,7 +292,7 @@ void ArrowCycle_Handle(Actor_Player* link, GameState_Play* play)
         return;
 
     /* Filter deku bubbles */
-    if (!(2 <= arrow->variable && arrow->variable < 6))
+    if (!(2 <= arrow->params && arrow->params < 6))
         return;
 
     selectedItem = BUTTON(link->heldItemButton);
@@ -306,8 +306,8 @@ void ArrowCycle_Handle(Actor_Player* link, GameState_Play* play)
     play->gs.input[0].pressed.buttons &= ~R_TRIG;
 
     /* get the various infos */
-    curInfo = GetArrowInfo(arrow->variable);
-    nextInfo = GetNextArrowInfo(arrow->variable);
+    curInfo = GetArrowInfo(arrow->params);
+    nextInfo = GetNextArrowInfo(arrow->params);
 
     /* Handle not having anything to cycle */
     if (!curInfo || !nextInfo || curInfo->var == nextInfo->var)
@@ -329,7 +329,7 @@ void ArrowCycle_Handle(Actor_Player* link, GameState_Play* play)
     }
 
     /* Update the arrow and reload it */
-    arrow->variable = nextInfo->var;
+    arrow->params = nextInfo->var;
     ReinitializeArrow(arrow, play);
 
     special = arrow->child;

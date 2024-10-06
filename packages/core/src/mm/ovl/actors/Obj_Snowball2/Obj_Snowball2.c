@@ -1,8 +1,8 @@
 
 
 
-#define ENOBJSNOWBALL2_GET_3F(thisx) ((thisx)->variable & 0x3F)
-#define ENOBJSNOWBALL2_GET_7F00(thisx) (((thisx)->variable >> 8) & 0x7F)
+#define ENOBJSNOWBALL2_GET_3F(thisx) ((thisx)->params & 0x3F)
+#define ENOBJSNOWBALL2_GET_7F00(thisx) (((thisx)->params >> 8) & 0x7F)
 
 #include <combo.h>
 #include <combo/global.h>

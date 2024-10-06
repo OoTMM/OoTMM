@@ -25,7 +25,7 @@ static void EnGe2_ThrowPlayerOut(Actor* this, GameState_Play* play)
 
     if (override == -1 || (u32)override == entrance)
     {
-        play->nextEntrance = play->setupExitList[this->variable & 0x1f];
+        play->nextEntrance = play->setupExitList[this->params & 0x1f];
         play->transitionTrigger = TRANS_TRIGGER_NORMAL;
         play->transitionType = 0x26;
     }

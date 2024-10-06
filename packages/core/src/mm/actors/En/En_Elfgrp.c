@@ -33,7 +33,7 @@ static u8 EnElfgrp_GetFairyIndex(Actor* this)
 {
     u8 index;
 
-    index = (this->variable & 0xf) + 1;
+    index = (this->params & 0xf) + 1;
     if (index == 1 && gSave.playerForm == 0x04)
         index = 0;
     return index;

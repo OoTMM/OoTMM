@@ -8,11 +8,11 @@ struct Actor_EnGoroiwa;
 typedef void (*Actor_EnGoroiwaActionFunc)(struct Actor_EnGoroiwa*, GameState_Play*);
 typedef s32 (*Actor_EnGoroiwaUnkFunc)(struct Actor_EnGoroiwa*);
 
-#define ENGOROIWA_GET_C000(thisx) (((thisx)->variable >> 0xE) & 3)
-#define ENGOROIWA_GET_3000(thisx) (((thisx)->variable >> 0xC) & 3)
-#define ENGOROIWA_GET_400(thisx) (((thisx)->variable >> 0xA) & 1)
-#define ENGOROIWA_GET_300(thisx) (((thisx)->variable >> 0x8) & 3)
-#define ENGOROIWA_GET_PATH_INDEX(thisx) ((thisx)->variable & 0xFF)
+#define ENGOROIWA_GET_C000(thisx) (((thisx)->params >> 0xE) & 3)
+#define ENGOROIWA_GET_3000(thisx) (((thisx)->params >> 0xC) & 3)
+#define ENGOROIWA_GET_400(thisx) (((thisx)->params >> 0xA) & 1)
+#define ENGOROIWA_GET_300(thisx) (((thisx)->params >> 0x8) & 3)
+#define ENGOROIWA_GET_PATH_INDEX(thisx) ((thisx)->params & 0xFF)
 
 #define ENGOROIWA_PATH_INDEX_NONE 0xFF
 

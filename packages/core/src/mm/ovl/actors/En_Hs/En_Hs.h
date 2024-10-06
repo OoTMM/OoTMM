@@ -7,7 +7,7 @@ struct Actor_EnHs;
 
 typedef void (*Actor_EnHs_ActionFunc)(struct Actor_EnHs*, GameState_Play*);
 
-#define HS_GET_EXIT_INDEX(this) ((this)->variable & 0xF)
+#define HS_GET_EXIT_INDEX(this) ((this)->params & 0xF)
 
 #define HS_TYPE_UNK1 1
 
@@ -21,7 +21,7 @@ typedef void (*Actor_EnHs_ActionFunc)(struct Actor_EnHs*, GameState_Play*);
 // The count of [chicks following the player]   is stored in [this->actor.home.rot.z] (incremented by 2)
 // The count of [chicks transformed into adult] is stored in [this->actor.home.rot.x] (incremented by 2)
 
-typedef struct Actor_EnHs 
+typedef struct Actor_EnHs
 {
     Actor actor;
     ColliderCylinder collider;
@@ -34,7 +34,7 @@ typedef struct Actor_EnHs
     s16 stateTimer;
     Vec3f nwcPos[20]; // actual chick position are even values, odd values seem to be extra values for smoother chain
     Actor_EnHs_ActionFunc actionFunc;
-} 
+}
 Actor_EnHs; // size = 0x398
 
 _Static_assert(sizeof(Actor_EnHs) == 0x398, "Size of MM Actor_EnHs is wrong");

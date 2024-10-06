@@ -72,7 +72,7 @@ static int csmcEnabledActor(Actor* this, GameState_Play* play)
         return 0;
 
 #if defined(GAME_OOT)
-    if (play->sceneId == SCE_OOT_TREASURE_SHOP && (this->variable & 0x1f) != 0x0a && !Config_Flag(CFG_OOT_CHEST_GAME_SHUFFLE))
+    if (play->sceneId == SCE_OOT_TREASURE_SHOP && (this->params & 0x1f) != 0x0a && !Config_Flag(CFG_OOT_CHEST_GAME_SHUFFLE))
         return 0;
 #endif
 
@@ -102,7 +102,7 @@ void csmcChestInit(Actor* this, GameState_Play* play, s16 gi)
         /* Fix for IGT chest */
         if (play->sceneId == SCE_OOT_INSIDE_GANON_CASTLE)
         {
-            if ((this->variable & 0x1f) == (Config_IsMq(MQ_GANON_CASTLE) ? 0x04 : 0x11))
+            if ((this->params & 0x1f) == (Config_IsMq(MQ_GANON_CASTLE) ? 0x04 : 0x11))
                 this->world.pos.z -= 10.f;
         }
 #endif
@@ -112,7 +112,7 @@ void csmcChestInit(Actor* this, GameState_Play* play, s16 gi)
 #if defined(GAME_OOT)
         Actor_SetScale(this, 0.005f);
         /* Fix for spirit temple chest */
-        if (play->sceneId == SCE_OOT_TEMPLE_SPIRIT && (this->variable & 0x1f) == 0x04)
+        if (play->sceneId == SCE_OOT_TEMPLE_SPIRIT && (this->params & 0x1f) == 0x04)
         {
             this->world.pos.x += 40.f;
             this->world.pos.z += 40.f;

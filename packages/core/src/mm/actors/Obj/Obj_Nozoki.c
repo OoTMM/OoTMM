@@ -9,7 +9,7 @@ static int ObjNozoki_CanOpenDoorForKafeiWrapper(Actor* actor, GameState_Play* pl
 
     /* We need to check for souls explicitely here, as this doesn't use the normal flags */
     checkMsgBox = 0;
-    switch (actor->variable & 0x7f)
+    switch (actor->params & 0x7f)
     {
     case 0x42:
     case 0x43:

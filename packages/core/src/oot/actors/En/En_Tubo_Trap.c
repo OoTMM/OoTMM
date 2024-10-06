@@ -11,7 +11,7 @@ void EnTuboTrap_SpawnShuffledDrop(Actor_EnTuboTrap* this, GameState_Play* play)
         return;
     }
 
-    var = this->base.variable;
+    var = this->base.params;
     unk = (var >> 6) & 0x3ff;
     if (unk < 0x1a)
     {

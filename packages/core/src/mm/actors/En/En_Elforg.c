@@ -18,7 +18,7 @@ static void EnElforg_ItemQuery(ComboItemQuery* q, Actor* this, GameState_Play* p
     default:
         q->ovType = OV_SF;
         q->sceneId = comboSceneKey(play->sceneId);
-        q->id = (this->variable & 0xfe00) >> 9;
+        q->id = (this->params & 0xfe00) >> 9;
         break;
     }
 }
@@ -87,7 +87,7 @@ void EnElforg_GiveItem(GameState_Play* play, Actor* this)
     comboPlayItemFanfare(o.gi, 1);
 
     /* If it's a town fairy */
-    if ((this->variable & 0xF) == 3) {
+    if ((this->params & 0xF) == 3) {
         gMmExtraFlags2.townStrayFairy = 1;
     }
 }

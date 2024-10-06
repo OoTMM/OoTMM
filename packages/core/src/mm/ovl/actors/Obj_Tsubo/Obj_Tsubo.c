@@ -5,12 +5,12 @@
 
 #define FLAGS (ACTOR_FLAG_MM_10 | ACTOR_FLAG_MM_800000 | ACTOR_FLAG_MM_CAN_PRESS_SWITCH)
 
-#define OBJ_TSUBO_P000F(thisx)      ((thisx)->variable & 0x0F)
-#define OBJ_TSUBO_P001F(thisx)      ((thisx)->variable & 0x1F)
-#define OBJ_TSUBO_P003F(thisx)      ((thisx)->variable & 0x3F)
-#define OBJ_TSUBO_P0010(thisx)      (((thisx)->variable >> 4) & 1)
-#define OBJ_TSUBO_GET_TYPE(thisx)   (((thisx)->variable >> 7) & 3)
-#define OBJ_TSUBO_PFE00(thisx)      (((thisx)->variable >> 9) & 0x7F)
+#define OBJ_TSUBO_P000F(thisx)      ((thisx)->params & 0x0F)
+#define OBJ_TSUBO_P001F(thisx)      ((thisx)->params & 0x1F)
+#define OBJ_TSUBO_P003F(thisx)      ((thisx)->params & 0x3F)
+#define OBJ_TSUBO_P0010(thisx)      (((thisx)->params >> 4) & 1)
+#define OBJ_TSUBO_GET_TYPE(thisx)   (((thisx)->params >> 7) & 3)
+#define OBJ_TSUBO_PFE00(thisx)      (((thisx)->params >> 9) & 0x7F)
 #define OBJ_TSUBO_ZROT(thisx)       ((thisx)->home.rot.z)
 
 typedef enum
@@ -105,7 +105,7 @@ static void ObjTsubo_Alias(Actor_ObjTsubo* this)
     xflag = &this->xflag;
 
     /* Check for zora game pots */
-    if (xflag->sceneId == SCE_MM_ZORA_CAPE && this->actor.variable == 0x13f)
+    if (xflag->sceneId == SCE_MM_ZORA_CAPE && this->actor.params == 0x13f)
     {
         xflag->sceneId = SCE_MM_EXTRA;
         xflag->setupId = 0;
@@ -858,7 +858,7 @@ void ObjTsubo_Draw(Actor_ObjTsubo* this, GameState_Play* play)
     int type;
 
     /* Get the default pot drawing */
-    switch ((this->actor.variable >> 7) & 3)
+    switch ((this->actor.params >> 7) & 3)
     {
     case 0:
     case 3:

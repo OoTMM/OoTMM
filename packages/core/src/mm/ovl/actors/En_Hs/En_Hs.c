@@ -341,7 +341,7 @@ s32 EnHs_OverrideLimbDraw(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3
         // these two limbs both have empty enddisplaylist, they do nothing
         // at the same time (params == HS_TYPE_UNK1) is always false, because vanilla params is 0xFE01
         case 0xc:
-            if (this->actor.variable == HS_TYPE_UNK1)
+            if (this->actor.params == HS_TYPE_UNK1)
             {
                 *dList = NULL;
                 return 0;
@@ -349,7 +349,7 @@ s32 EnHs_OverrideLimbDraw(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3
             break;
 
         case 0xd:
-            if (this->actor.variable == HS_TYPE_UNK1)
+            if (this->actor.params == HS_TYPE_UNK1)
             {
                 *dList = NULL;
                 return 0;

@@ -39,7 +39,7 @@ void ObjMure2_SpawnChildrenWrapper(Actor_ObjMure2* this, GameState_Play* play)
     ObjMure2_SpawnChildren(&this->base, play);
 
     /* Check for type */
-    switch (this->base.variable & 3)
+    switch (this->base.params & 3)
     {
     case 0:
         count = 9;

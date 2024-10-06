@@ -107,7 +107,7 @@ void EnHitTag_InitWrapper(Actor_EnHitTag* this, GameState_Play* play)
     }
 
     /* Switch flag */
-    switchFlag = (this->base.variable & 0xfe00) >> 9;
+    switchFlag = (this->base.params & 0xfe00) >> 9;
     if (this->isExtended && Flags_GetSwitch(play, switchFlag))
         ClearSwitchFlag(play, switchFlag);
 

@@ -32,7 +32,7 @@ static const s16 kGI[] = {
 
 static int EnAkindonuts_ShopID(Actor* this)
 {
-    return this->variable & 0x3;
+    return this->params & 0x3;
 }
 
 static void EnAkindonuts_ShopItemQuery(ComboItemQuery* q, int id)

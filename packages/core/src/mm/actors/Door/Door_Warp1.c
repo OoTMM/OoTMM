@@ -20,7 +20,7 @@ static const BlueWarpData kBlueWarpData[] = {
 
 static const int DoorWarp1_GetID(Actor* this, GameState_Play* play)
 {
-    if ((this->variable & 0xff) != 0x01)
+    if ((this->params & 0xff) != 0x01)
         return -1;
     switch (play->sceneId)
     {

@@ -190,7 +190,7 @@ void ObjComb_Break(Actor_ObjComb* this, GameState_Play* play)
 
 void ObjComb_ChooseItemDrop(Actor_ObjComb* this, GameState_Play* play)
 {
-    s16 params = this->actor.variable & 0x1f;
+    s16 params = this->actor.params & 0x1f;
 
     if (ObjComb_DropCustom(this, play))
         return;
@@ -198,10 +198,10 @@ void ObjComb_ChooseItemDrop(Actor_ObjComb* this, GameState_Play* play)
     if ((params > 0) || (params < ITEM00_MAX))
     {
         if (params == ITEM00_HEART_PIECE) {
-            if (Flags_GetCollectible(play, (this->actor.variable >> 8) & 0x3F)) {
+            if (Flags_GetCollectible(play, (this->actor.params >> 8) & 0x3F)) {
                 params = -1;
             } else {
-                params = (params | (((this->actor.variable >> 8) & 0x3F) << 8));
+                params = (params | (((this->actor.params >> 8) & 0x3F) << 8));
             }
         } else if (Rand_ZeroOne() < 0.5f) {
             params = -1;
@@ -271,13 +271,13 @@ void ObjComb_Update(Actor_ObjComb* this, GameState_Play* play)
 #if defined(GAME_MM)
 # define OBJECT                     OBJECT_COMB
 
-# define OBJCOMB_GET_F(thisx)       ((thisx)->actor.variable & 0xF)
-# define OBJCOMB_GET_10(thisx)      (((thisx)->actor.variable >> 4) & 0x1)
-# define OBJCOMB_GET_1F(thisx)      ((thisx)->actor.variable & 0x1F)
-# define OBJCOMB_GET_3F(thisx)      ((thisx)->actor.variable & 0x3F)
-# define OBJCOMB_GET_80(thisx)      (((thisx)->actor.variable >> 7) & 0x1)
-# define OBJCOMB_GET_7F00(thisx)    (((thisx)->actor.variable >> 0x8) & 0x7F)
-# define OBJCOMB_GET_8000(thisx)    (((thisx)->actor.variable >> 0xE) & 2)
+# define OBJCOMB_GET_F(thisx)       ((thisx)->actor.params & 0xF)
+# define OBJCOMB_GET_10(thisx)      (((thisx)->actor.params >> 4) & 0x1)
+# define OBJCOMB_GET_1F(thisx)      ((thisx)->actor.params & 0x1F)
+# define OBJCOMB_GET_3F(thisx)      ((thisx)->actor.params & 0x3F)
+# define OBJCOMB_GET_80(thisx)      (((thisx)->actor.params >> 7) & 0x1)
+# define OBJCOMB_GET_7F00(thisx)    (((thisx)->actor.params >> 0x8) & 0x7F)
+# define OBJCOMB_GET_8000(thisx)    (((thisx)->actor.params >> 0xE) & 2)
 
 # define HIVE_FRAGMENT_DL           ((Gfx*)0x06001040)
 # define HIVE_DL                    ((Gfx*)0x06000cb0)

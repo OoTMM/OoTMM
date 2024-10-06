@@ -181,7 +181,7 @@ void EnElf_InitWrapper(Actor_EnElf* this, GameState_Play* play)
     ActorCallback init;
 
     /* Fairy Group Spawner */
-    if (this->base.variable == 4) {
+    if (this->base.params == 4) {
         EnElf_Aliases(this, play);
     }
 

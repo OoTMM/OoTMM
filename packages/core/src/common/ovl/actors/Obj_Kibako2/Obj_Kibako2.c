@@ -130,7 +130,7 @@ void ObjKibako2_Idle(Actor_ObjKibako2* this, GameState_Play* play)
 }
 
 void ObjKibako2_Kill(Actor_ObjKibako2* this, GameState_Play* play) {
-    s16 params = this->dyna.actor.variable;
+    s16 params = this->dyna.actor.params;
 
     if ((params & 0x8000) == 0)
     {
@@ -147,10 +147,10 @@ void ObjKibako2_Kill(Actor_ObjKibako2* this, GameState_Play* play) {
 #endif
 
 #if defined(GAME_MM)
-# define KIBAKO2_COLLECTIBLE_ID(thisx) ((thisx)->dyna.actor.variable & 0x3F)
-# define KIBAKO2_COLLECTIBLE_FLAG(thisx) (((thisx)->dyna.actor.variable >> 0x8) & 0x7F)
-# define KIBAKO2_SKULLTULA_SPAWN_PARAM(thisx) ((((thisx)->dyna.actor.variable & 0x1F) << 2) | 0xFF01)
-# define KIBAKO2_CONTENTS(thisx) (((thisx)->dyna.actor.variable >> 0xF) & 1)
+# define KIBAKO2_COLLECTIBLE_ID(thisx) ((thisx)->dyna.actor.params & 0x3F)
+# define KIBAKO2_COLLECTIBLE_FLAG(thisx) (((thisx)->dyna.actor.params >> 0x8) & 0x7F)
+# define KIBAKO2_SKULLTULA_SPAWN_PARAM(thisx) ((((thisx)->dyna.actor.params & 0x1F) << 2) | 0xFF01)
+# define KIBAKO2_CONTENTS(thisx) (((thisx)->dyna.actor.params >> 0xF) & 1)
 
 # define SEGADDR_COLLIDER       ((void*)0x06000b70)
 # define SEGADDR_CRATE_DL       ((void*)0x06000960)

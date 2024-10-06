@@ -20,7 +20,7 @@ void EnGs_MessageBox(GameState_Play* play, Actor* this)
     u16 tmp;
     u8 key;
 
-    if (this->variable == 1 || this->variable == 2)
+    if (this->params == 1 || this->params == 2)
     {
         tmp = *(u16*)((char*)this + 0x198);
         key = (tmp & 0x1f) | 0x20;

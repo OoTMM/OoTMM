@@ -93,7 +93,7 @@ static void EnXc_Update_TempleOfTime(Actor* this, GameState_Play* play)
 static void EnXc_Init(Actor* this, GameState_Play* play)
 {
     this->draw = NULL;
-    if (gSave.age == AGE_CHILD && this->variable != 0 && this->variable != 0x8)
+    if (gSave.age == AGE_CHILD && this->params != 0 && this->params != 0x8)
     {
         Actor_Kill(this);
     }
@@ -101,7 +101,7 @@ static void EnXc_Init(Actor* this, GameState_Play* play)
 
 void EnXc_Update(Actor* this, GameState_Play* play)
 {
-    switch (this->variable)
+    switch (this->params)
     {
     case 0x6:
         EnXc_Update_ForestMeadow(this, play);
