@@ -11,12 +11,6 @@ struct Actor_Player;
 int Player_GetMask(GameState_Play* play);
 
 typedef struct {
-    /* 0x00 */ s32 active;
-    /* 0x04 */ Vec3f tip;
-    /* 0x10 */ Vec3f base;
-} WeaponInfo; /* size = 0x1C */
-
-typedef struct {
     /* 0x00 */ u8 unk_00;
     /* 0x01 */ u8 alpha;
     /* 0x04 */ MtxF mf;
