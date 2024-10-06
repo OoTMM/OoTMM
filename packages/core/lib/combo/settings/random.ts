@@ -225,12 +225,15 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
     base.ganonTrials = { type: 'none' };
     base.openDungeonsMm = { type: 'all' };
     base.openDungeonsOot = { type: 'all' };
+    base.openMaskShop = true;
     base.clearStateDungeonsMm = 'both';
     base.doorOfTime = 'open';
     base.dekuTree = 'open';
     base.kakarikoGate = 'open';
     base.zoraKing = 'open';
     base.gerudoFortress = 'open';
+    base.beneathWell = 'open';
+    base.openZdShortcut = true;
     break;
   case 1:
     base.skipZelda = false;
@@ -239,11 +242,14 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
     base.openDungeonsMm = { type: 'none' };
     base.openDungeonsOot = { type: 'none' };
     base.clearStateDungeonsMm = 'none';
+    base.openMaskShop = false;
     base.doorOfTime = 'closed';
     base.dekuTree = 'closed';
     base.kakarikoGate = 'closed';
     base.zoraKing = 'vanilla';
     base.gerudoFortress = 'vanilla';
+    base.beneathWell = 'vanilla';
+    base.openZdShortcut = false;
     break;
   default:
     base.skipZelda = booleanWeighted(random, 0.3);
@@ -251,29 +257,45 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
     base.ganonTrials = { type: 'random' };
     base.openDungeonsMm = { type: 'random' };
     base.openDungeonsOot = { type: 'random' };
+    base.openMaskShop = booleanWeighted(random, 0.3);
     base.clearStateDungeonsMm = sampleWeighted(random, { none: 5, WF: 1, GB: 1, both: 2 });
     base.doorOfTime = sampleWeighted(random, { closed: 10, open: 7 });
     base.dekuTree = sampleWeighted(random, { open: 10, closed: 7 });
     base.kakarikoGate = sampleWeighted(random, { closed: 10, open: 7 });
     base.zoraKing = sampleWeighted(random, { vanilla: 10, open: 5, adult: 5 });
     base.gerudoFortress = sampleWeighted(random, { vanilla: 1, single: 1, open: 1 });
+    base.beneathWell = sampleWeighted(random, { vanilla: 1, remorseless: 1, open: 1 });
+    base.openZdShortcut = booleanWeighted(random, 0.5);
   }
 
+  base.startingAge = sampleWeighted(random, { child: 10, adult: 10 });
+  base.swordlessAdult = booleanWeighted(random, 0.5);
+  base.timeTravelSword = booleanWeighted(random, 0.5);
+  base.ageChange = sampleWeighted(random, { none: 10, always: 5, oot: 5 });
+  base.moonCrash = sampleWeighted(random, { cycle: 3, reset: 10 });
   base.bossWarpPads = sampleWeighted(random, { bossBeaten: 10, remains: 4 });
+  base.freeScarecrowOot = booleanWeighted(random, 0.5);
+  base.freeScarecrowMm = booleanWeighted(random, 0.5);
+  base.ootPreplantedBeans = booleanWeighted(random, 0.5);
+  base.strayFairyRewardCount = randomInt(random, 16);
+  base.crossAge = booleanWeighted(random, 0.5);
 
-  /* Cross warp - 25% disabled, 25% enabled, 50% individual */
+  /* Cross warp & FW - 25% disabled, 25% enabled, 50% individual */
   switch (randomInt(random, 4)) {
   case 0:
     base.crossWarpOot = false;
     base.crossWarpMm = 'none';
+    base.crossGameFw = false;
     break;
   case 1:
     base.crossWarpOot = true;
     base.crossWarpMm = 'full';
+    base.crossGameFw = true;
     break;
   default:
     base.crossWarpOot = booleanWeighted(random, 0.5);
     base.crossWarpMm = sampleWeighted(random, { none: 10, full: 7, childOnly: 3 });
+    base.crossGameFw = booleanWeighted(random, 0.5);
   }
 
   base.sunSongMm = booleanWeighted(random, 0.5);
