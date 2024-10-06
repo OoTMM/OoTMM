@@ -158,7 +158,9 @@ const ACTORS_OOT = {
   OBJ_HANA: 0x14f,
   EN_ELF: 0x18,
   BG_SPOT11_OASIS: 0x1C2,
+  OBJ_MURE: 0x094,
   OBJ_MURE3: 0x1ab,
+  EN_BUTTE: 0x01e,
   SHOT_SUN: 0x183,
   EN_WONDER_ITEM: 0x112,
   OBJ_KIBAKO: 0x110,
@@ -1360,6 +1362,17 @@ function actorHandlerOotObjKibako2(checks: Check[], ra: RoomActor) {
   checks.push({ roomActor: ra, item, name: 'Large Crate', type: 'crate' });
 }
 
+function actorHandlerOotEnButte(checks: Check[], ra: RoomActor) {
+  checks.push({ roomActor: ra, item: 'FAIRY', name: 'Butterfly', type: 'butterfly' });
+}
+
+function actorHandlerOotObjMure(checks: Check[], ra: RoomActor) {
+  const subtype = ra.actor.params & 0x1f;
+  if (subtype === 0x04) {
+    checks.push({ roomActor: ra, item: 'FAIRY', name: 'Butterfly', type: 'butterfly' });
+  }
+}
+
 function actorHandlerMmObjComb(checks: Check[], ra: RoomActor) {
   const flag = !!(ra.actor.params & 0x10);
   let type = 0;
@@ -1409,6 +1422,8 @@ const ACTORS_HANDLERS_OOT = {
   [ACTORS_OOT.OBJ_COMB]: actorHandlerOotObjComb,
   [ACTORS_OOT.OBJ_KIBAKO]: actorHandlerOotObjKibako,
   [ACTORS_OOT.OBJ_KIBAKO2]: actorHandlerOotObjKibako2,
+  [ACTORS_OOT.EN_BUTTE]: actorHandlerOotEnButte,
+  [ACTORS_OOT.OBJ_MURE]: actorHandlerOotObjMure,
 };
 
 const ACTORS_HANDLERS_MM = {
