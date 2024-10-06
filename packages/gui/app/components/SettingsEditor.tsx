@@ -108,7 +108,7 @@ function SettingSet({ setting }: { setting: string }) {
   );
 }
 
-function Setting({ setting }: { setting: string }) {
+export function Setting({ setting }: { setting: string }) {
   const [settings, setSettings] = useSettings();
   const data = SETTINGS.find(x => x.key === setting)!;
   const cond = (data as any).cond;

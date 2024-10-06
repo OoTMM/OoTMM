@@ -53,6 +53,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
   base.junkLocations = oldSettings.junkLocations;
   base.tricks = oldSettings.tricks;
   base.hints = oldSettings.hints;
+  base.games = oldSettings.games;
 
   /* Main Settings */
   base.goal = sampleWeighted(random, { both: 10, triforce: 3, triforce3: 3 });

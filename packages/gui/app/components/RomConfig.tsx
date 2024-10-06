@@ -7,6 +7,7 @@ import { FileSelect } from './FileSelect';
 import { PresetSelector } from './PresetSelector';
 import { SettingsImportExport } from './SettingsImportExport';
 import { Result } from './Result';
+import { Setting } from './SettingsEditor';
 
 export function RomConfig() {
   const { romConfig, setRomConfigFile, setSeed } = useRomConfig();
@@ -55,6 +56,7 @@ export function RomConfig() {
       {!isPatch && <Checkbox label="Random Settings" checked={isRandomSettings} onChange={(x) => setRandomSettings({ enabled: x })} />}
         {isRandomSettings && (
           <>
+            <Setting setting='games'/>
             <Checkbox label="Random Settings: MQ" checked={randomSettings.mq} onChange={(x) => setRandomSettings({ mq: x })} />
             <Checkbox label="Random Settings: Entrances" checked={randomSettings.er} onChange={(x) => setRandomSettings({ er: x })} />
             <Checkbox label="Random Settings: Extra Shuffles" checked={randomSettings.extraShuffles} onChange={(x) => setRandomSettings({ extraShuffles: x })} />
