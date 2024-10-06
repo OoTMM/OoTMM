@@ -218,9 +218,9 @@ export const SETTINGS = [{
   type: 'enum',
   description: 'Controls where Maps and Compasses can be',
   values: [
-    { value: 'ownDungeon', name: 'Own Dungeon', description: ' Maps and Compasses will be in their own dungeons' },
-    { value: 'anywhere', name: 'Anywhere', description: ' Maps and Compasses can be on any location' },
-    { value: 'starting', name: 'Starting Items', description: ' Maps and Compasses will be in Link\'s Pocket' },
+    { value: 'ownDungeon', name: 'Own Dungeon', description: 'Maps and Compasses will be in their own dungeons' },
+    { value: 'anywhere', name: 'Anywhere', description: 'Maps and Compasses can be on any location' },
+    { value: 'starting', name: 'Starting Items', description: 'Maps and Compasses will be in Link\'s Pocket' },
     { value: 'removed', name: 'Removed', description: 'Fully removed and cannot be obtained' },
   ],
   default: 'ownDungeon'

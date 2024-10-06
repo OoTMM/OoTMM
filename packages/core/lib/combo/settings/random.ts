@@ -1,18 +1,15 @@
-import { Random, randString, randomInt } from "../random";
-import { Settings } from "./type";
-import { makeSettings, validateSettings } from "./util";
+import { Random, randString, randomInt } from '../random';
+import { Settings } from './type';
+import { makeSettings, validateSettings } from './util';
 
-export type OptionRandomSettings = {
-  enabled: boolean;
-  mq: boolean;
-  er: boolean;
-};
-
-export const DEFAULT_RANDOM_SETTINGS: OptionRandomSettings = {
+export const DEFAULT_RANDOM_SETTINGS = {
   enabled: false,
   mq: false,
   er: false,
+  extraShuffles: false,
 };
+
+export type OptionRandomSettings = typeof DEFAULT_RANDOM_SETTINGS;
 
 export function makeRandomSettings(arg: Partial<OptionRandomSettings>): OptionRandomSettings {
   return { ...DEFAULT_RANDOM_SETTINGS, ...arg };
@@ -685,6 +682,84 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
       base.erOneWaysSongs = booleanWeighted(random, 0.5);
       base.erOneWaysStatues = booleanWeighted(random, 0.5);
       base.erOneWaysOwls = booleanWeighted(random, 0.5);
+    }
+  }
+
+  /* Extra shuffles */
+  if (rnd.extraShuffles) {
+    /* 15% none, 5% all, 5% OW, 5% dungeons, 70% individual */
+    switch (randomInt(random, 20)) {
+    case 0:
+    case 1:
+      break;
+    case 2:
+      base.shufflePotsOot = 'all';
+      base.shufflePotsMm = 'all';
+      base.shuffleCratesOot = 'all';
+      base.shuffleCratesMm = 'all';
+      base.shuffleGrassOot = 'all';
+      base.shuffleGrassMm = 'all';
+      base.shuffleFreeHeartsOot = 'all';
+      base.shuffleFreeHeartsMm = true;
+      base.shuffleFreeRupeesOot = 'all';
+      base.shuffleFreeRupeesMm = 'all';
+      base.shuffleBarrelsMm = 'all';
+      base.shuffleHivesOot = true;
+      base.shuffleHivesMm = true;
+      base.shuffleSnowballsMm = 'all';
+      base.shuffleWonderItemsOot = 'all';
+      base.shuffleWonderItemsMm = true;
+      break;
+    case 3:
+      base.shufflePotsOot = 'overworld';
+      base.shufflePotsMm = 'overworld';
+      base.shuffleCratesOot = 'overworld';
+      base.shuffleCratesMm = 'overworld';
+      base.shuffleGrassOot = 'overworld';
+      base.shuffleGrassMm = 'overworld';
+      base.shuffleFreeHeartsOot = 'overworld';
+      base.shuffleFreeRupeesOot = 'overworld';
+      base.shuffleFreeRupeesMm = 'overworld';
+      base.shuffleBarrelsMm = 'overworld';
+      base.shuffleHivesOot = true;
+      base.shuffleHivesMm = true;
+      base.shuffleSnowballsMm = 'overworld';
+      base.shuffleWonderItemsOot = 'overworld';
+      base.shuffleWonderItemsMm = true;
+      break;
+    case 4:
+      base.shufflePotsOot = 'dungeons';
+      base.shufflePotsMm = 'dungeons';
+      base.shuffleCratesOot = 'dungeons';
+      base.shuffleCratesMm = 'dungeons';
+      base.shuffleGrassOot = 'dungeons';
+      base.shuffleGrassMm = 'dungeons';
+      base.shuffleFreeHeartsOot = 'dungeons';
+      base.shuffleFreeHeartsMm = true;
+      base.shuffleFreeRupeesOot = 'dungeons';
+      base.shuffleFreeRupeesMm = 'dungeons';
+      base.shuffleBarrelsMm = 'dungeons';
+      base.shuffleSnowballsMm = 'dungeons';
+      base.shuffleWonderItemsOot = 'dungeons';
+      break;
+    default:
+      base.shufflePotsOot = sampleWeighted(random, { none: 10, overworld: 10, dungeons: 10 });
+      base.shufflePotsMm = sampleWeighted(random, { none: 10, overworld: 10, dungeons: 10 });
+      base.shuffleCratesOot = sampleWeighted(random, { none: 10, overworld: 10, dungeons: 10 });
+      base.shuffleCratesMm = sampleWeighted(random, { none: 10, overworld: 10, dungeons: 10 });
+      base.shuffleGrassOot = sampleWeighted(random, { none: 10, overworld: 10, dungeons: 10 });
+      base.shuffleGrassMm = sampleWeighted(random, { none: 10, overworld: 10, dungeons: 10 });
+      base.shuffleFreeHeartsOot = sampleWeighted(random, { none: 10, overworld: 10, dungeons: 10 });
+      base.shuffleFreeHeartsMm = booleanWeighted(random, 0.5);
+      base.shuffleFreeRupeesOot = sampleWeighted(random, { none: 10, overworld: 10, dungeons: 10 });
+      base.shuffleFreeRupeesMm = sampleWeighted(random, { none: 10, overworld: 10, dungeons: 10 });
+      base.shuffleBarrelsMm = sampleWeighted(random, { none: 10, overworld: 10, dungeons: 10 });
+      base.shuffleHivesOot = booleanWeighted(random, 0.5);
+      base.shuffleHivesMm = booleanWeighted(random, 0.5);
+      base.shuffleSnowballsMm = sampleWeighted(random, { none: 10, overworld: 10, dungeons: 10 });
+      base.shuffleWonderItemsOot = sampleWeighted(random, { none: 10, overworld: 10, dungeons: 10 });
+      base.shuffleWonderItemsMm = booleanWeighted(random, 0.5);
+      break;
     }
   }
 

@@ -57,6 +57,7 @@ export function RomConfig() {
           <>
             <Checkbox label="Random Settings: MQ" checked={randomSettings.mq} onChange={(x) => setRandomSettings({ mq: x })} />
             <Checkbox label="Random Settings: Entrances" checked={randomSettings.er} onChange={(x) => setRandomSettings({ er: x })} />
+            <Checkbox label="Random Settings: Extra Shuffles" checked={randomSettings.extraShuffles} onChange={(x) => setRandomSettings({ extraShuffles: x })} />
           </>
         )}
         {!isPatch && !isRandomSettings && (
