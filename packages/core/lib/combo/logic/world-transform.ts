@@ -1107,6 +1107,12 @@ export class LogicPassWorldTransform {
     /* Grasssanity */
     this.filterLocations(settings.shuffleGrassOot, 'grass', 'oot');
 
+    /* Butterflies */
+    if (!settings.shuffleButterfliesOot) {
+      const data = POOL.oot.filter((x: any) => x.type === 'butterfly').map((x: any) => gameId('oot', x.location, ' ')) as string[];
+      this.removeLocations(data);
+    }
+
     if (settings.shuffleGrassMm === 'none') {
       const grass = POOL.mm.filter((x: any) => x.type === 'grass').map((x: any) => gameId('mm', x.location, ' ')) as string[];
       this.removeLocations(grass);

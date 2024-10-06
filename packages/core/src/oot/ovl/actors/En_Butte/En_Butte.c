@@ -1,3 +1,5 @@
+#include <combo/xflags.h>
+#include <combo/global.h>
 #include "En_Butte.h"
 
 #define FLAGS 0
@@ -21,6 +23,8 @@ void EnButte_SetupTransformIntoFairy(Actor_EnButte* this);
 void EnButte_TransformIntoFairy(Actor_EnButte* this, GameState_Play* play);
 void EnButte_SetupWaitToDie(Actor_EnButte* this);
 void EnButte_WaitToDie(Actor_EnButte* this, GameState_Play* play);
+
+static s8 sQuickTransform;
 
 static ColliderJntSphElementInit sJntSphElementsInit[] = {
     { {
@@ -83,12 +87,48 @@ void EnButte_SelectFlightParams(Actor_EnButte* this, EnButteFlightParams* flight
 static f32 sTransformationEffectScale = 0.0f;
 static s16 sTransformationEffectAlpha = 0;
 
-void EnButte_ResetTransformationEffect(void) {
+static void EnButte_Xflags(Xflag* xflag, Actor_EnButte* this, GameState_Play* play)
+{
+    xflag->id = this->actor.actorIndex;
+    xflag->roomId = this->actor.room;
+    xflag->sceneId = play->sceneId;
+    xflag->setupId = g.sceneSetupId;
+    xflag->sliceId = this->actor.params;
+}
+
+static int EnButte_IsShuffled(Actor_EnButte* this, GameState_Play* play)
+{
+    Xflag xflag;
+    ComboItemQuery q;
+    ComboItemOverride o;
+
+    EnButte_Xflags(&xflag, this, play);
+    if (comboXflagsGet(&xflag))
+        return FALSE;
+    comboXflagItemQuery(&q, &xflag, 0);
+    comboItemOverride(&o, &q);
+    if (o.gi == GI_NONE)
+        return FALSE;
+    return TRUE;
+}
+
+static int EnButte_CanTransform(Actor_EnButte* this, GameState_Play* play)
+{
+    if (this->actor.params == 0)
+        return TRUE;
+    if (EnButte_IsShuffled(this, play))
+        return TRUE;
+    return FALSE;
+}
+
+void EnButte_ResetTransformationEffect(void)
+{
     sTransformationEffectScale = 0.0f;
     sTransformationEffectAlpha = 0;
 }
 
-void EnButte_UpdateTransformationEffect(void) {
+void EnButte_UpdateTransformationEffect(void)
+{
     sTransformationEffectScale += 0.003f;
     sTransformationEffectAlpha += 4000;
 }
@@ -130,13 +170,10 @@ static InitChainEntry sInitChain[] = {
 
 void EnButte_Init(Actor_EnButte* this, GameState_Play* play)
 {
-    if (this->actor.params == 0xffff) {
-        this->actor.params = 0;
-    }
-
     Actor_ProcessInitChain(&this->actor, sInitChain);
 
-    if (PARAMS_GET_U(this->actor.params, 0, 1) == 1) {
+    if (EnButte_CanTransform(this, play))
+    {
         this->actor.uncullZoneScale = 200.0f;
     }
 
@@ -247,7 +284,7 @@ void EnButte_FlyAround(Actor_EnButte* this, GameState_Play* play) {
         EnButte_SelectFlightParams(this, &sFlyAroundParams[this->flightParamsIdx]);
     }
 
-    if ((PARAMS_GET_U(this->actor.params, 0, 1) == 1) && (player->heldItemAction == 0x06 /*PLAYER_IA_DEKU_STICK/*/) &&
+    if (EnButte_CanTransform(this, play) && (player->heldItemAction == 0x06 /*PLAYER_IA_DEKU_STICK/*/) &&
         (this->swordDownTimer <= 0) &&
         ((Math3D_Dist2DSq(player->actor.world.pos.x, player->actor.world.pos.z, this->actor.home.pos.x,
                           this->actor.home.pos.z) < SQ(120.0f)) ||
@@ -317,7 +354,7 @@ void EnButte_FollowLink(Actor_EnButte* this, GameState_Play* play) {
     if (!((player->heldItemAction == 0x06) && (fabsf(player->actor.speed) < 1.8f) &&
           (this->swordDownTimer <= 0) && (distSqFromHome < SQ(320.0f)))) {
         EnButte_SetupFlyAround(this);
-    } else if (distSqFromHome > SQ(240.0f)) {
+    } else if (distSqFromHome > SQ(240.0f) || sQuickTransform) {
         distSqFromSword = Math3D_Dist2DSq(player->meleeWeaponInfo[0].tip.x, player->meleeWeaponInfo[0].tip.z,
                                           this->actor.world.pos.x, this->actor.world.pos.z);
         if (distSqFromSword < SQ(60.0f)) {
@@ -340,12 +377,21 @@ void EnButte_TransformIntoFairy(Actor_EnButte* this, GameState_Play* play)
     SkelAnime_Update(&this->skelAnime);
     EnButte_UpdateTransformationEffect();
 
-    if (this->timer == 5) {
+    if (this->timer == 5)
+    {
         SfxSource_PlaySfxAtFixedWorldPos(play, &this->actor.world.pos, 60, NA_SE_EV_BUTTERFRY_TO_FAIRY);
-    } else if (this->timer == 4) {
+    }
+    else if (this->timer == 4)
+    {
+        g.actorIndex = this->actor.actorIndex;
+        g.actorSliceId = this->actor.params;
         Actor_Spawn(&play->actorCtx, play, AC_EN_ELF, this->actor.focus.pos.x, this->actor.focus.pos.y, this->actor.focus.pos.z, 0, this->actor.shape.rot.y, 0, 0x0002);
+        g.actorIndex = 0xff;
+        g.actorSliceId = 0;
         this->drawSkelAnime = FALSE;
-    } else if (this->timer <= 0) {
+    }
+    else if (this->timer <= 0)
+    {
         EnButte_SetupWaitToDie(this);
     }
 }
@@ -364,6 +410,8 @@ void EnButte_WaitToDie(Actor_EnButte* this, GameState_Play* play) {
 
 void EnButte_Update(Actor_EnButte* this, GameState_Play* play)
 {
+    sQuickTransform = (u8)EnButte_IsShuffled(this, play);
+
     if ((this->actor.child != NULL) && (this->actor.child->update == NULL) && (this->actor.child != &this->actor)) {
         this->actor.child = NULL;
     }
@@ -376,10 +424,13 @@ void EnButte_Update(Actor_EnButte* this, GameState_Play* play)
     this->unk_25E += 0x1000;
     this->unk_260 += 0x600;
 
-    if (PARAMS_GET_U(this->actor.params, 0, 1) == 1) {
+    if (EnButte_CanTransform(this, play)) {
         if (GET_PLAYER(play)->meleeWeaponState == 0) {
             if (this->swordDownTimer > 0) {
-                this->swordDownTimer--;
+                if (sQuickTransform)
+                    this->swordDownTimer = 0;
+                else
+                    this->swordDownTimer--;
             }
         } else {
             this->swordDownTimer = 80;
@@ -406,7 +457,7 @@ void EnButte_Draw(Actor_EnButte* this, GameState_Play* play)
         Collider_UpdateSpheres(0, &this->collider);
     }
 
-    if ((PARAMS_GET_U(this->actor.params, 0, 1) == 1) && (this->actionFunc == EnButte_TransformIntoFairy)) {
+    if (EnButte_CanTransform(this, play) && (this->actionFunc == EnButte_TransformIntoFairy)) {
         EnButte_DrawTransformationEffect(this, play);
     }
 }

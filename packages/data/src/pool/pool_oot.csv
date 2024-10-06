@@ -914,6 +914,18 @@ Hyrule Castle Wonder Item Moat 07,                          wonder,         NONE
 Hyrule Castle Wonder Item Moat 08,                          wonder,         NONE,                 HYRULE_CASTLE,                  0x00027,                    RUPEE_GREEN
 Hyrule Castle Wonder Item Moat 09,                          wonder,         NONE,                 HYRULE_CASTLE,                  0x00028,                    RUPEE_GREEN
 Hyrule Castle Wonder Item Moat 10,                          wonder,         NONE,                 HYRULE_CASTLE,                  0x00029,                    RUPEE_BLUE
+Hyrule Castle Butterfly Pack 1 Butterfly 1,                 butterfly,      NONE,                 HYRULE_CASTLE,                  0x00033,                    FAIRY
+Hyrule Castle Butterfly Pack 1 Butterfly 2,                 butterfly,      NONE,                 HYRULE_CASTLE,                  0x10033,                    FAIRY
+Hyrule Castle Butterfly Pack 2 Butterfly 1,                 butterfly,      NONE,                 HYRULE_CASTLE,                  0x00034,                    FAIRY
+Hyrule Castle Butterfly Pack 2 Butterfly 2,                 butterfly,      NONE,                 HYRULE_CASTLE,                  0x10034,                    FAIRY
+Hyrule Castle Butterfly Pack 3 Butterfly 1,                 butterfly,      NONE,                 HYRULE_CASTLE,                  0x00035,                    FAIRY
+Hyrule Castle Butterfly Pack 3 Butterfly 2,                 butterfly,      NONE,                 HYRULE_CASTLE,                  0x10035,                    FAIRY
+Hyrule Castle Butterfly Pack 3 Butterfly 3,                 butterfly,      NONE,                 HYRULE_CASTLE,                  0x20035,                    FAIRY
+Hyrule Castle Butterfly Pack 4 Butterfly 1,                 butterfly,      NONE,                 HYRULE_CASTLE,                  0x00036,                    FAIRY
+Hyrule Castle Butterfly Pack 4 Butterfly 2,                 butterfly,      NONE,                 HYRULE_CASTLE,                  0x10036,                    FAIRY
+Hyrule Castle Butterfly Pack 4 Butterfly 3,                 butterfly,      NONE,                 HYRULE_CASTLE,                  0x20036,                    FAIRY
+Hyrule Castle Butterfly Pack 4 Butterfly 4,                 butterfly,      NONE,                 HYRULE_CASTLE,                  0x30036,                    FAIRY
+Hyrule Castle Butterfly Pack 4 Butterfly 5,                 butterfly,      NONE,                 HYRULE_CASTLE,                  0x40036,                    FAIRY
 Ganon Castle Exterior GS,                                   gs,             NONE,                 GANON_CASTLE_EXTERIOR,          0x78,                       GS_TOKEN
 Temple of Time Master Sword,                                npc,            NONE,                 TEMPLE_OF_TIME,                 MASTER_SWORD,               SWORD_MASTER
 Temple of Time Medallion,                                   npc,            NONE,                 TEMPLE_OF_TIME,                 LIGHT_MEDALLION,            MEDALLION_LIGHT
