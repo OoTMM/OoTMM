@@ -280,7 +280,6 @@ static int EnCow_HasGivenItem(Actor* this)
     return 0;
 }
 
-
 static int EnCow_TalkedTo(Actor* this, GameState_Play* play)
 {
     return 1;

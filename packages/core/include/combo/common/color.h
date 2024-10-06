@@ -20,7 +20,7 @@ typedef union {
 } Color_RGBA8_u32;
 
 typedef struct {
-    f32 r, g, b, a;
+    float r, g, b, a;
 } Color_RGBAf;
 
 typedef union {

@@ -1,0 +1,31 @@
+#include <combo.h>
+
+PATCH_OBJECT OBJECT_GAMEPLAY_FIELD_KEEP, 0x2480
+.quad 0x0
+.quad 0x0
+PATCH_END
+
+PATCH_OBJECT OBJECT_GAMEPLAY_FIELD_KEEP, 0x24b8
+.quad 0x0
+.quad 0x0
+.quad 0x0
+.quad 0x0
+.quad 0x0
+.quad 0x0
+.quad 0x0
+PATCH_END
+
+PATCH_OBJECT OBJECT_GAMEPLAY_FIELD_KEEP, 0x2580
+.quad 0x0
+.quad 0x0
+PATCH_END
+
+PATCH_OBJECT OBJECT_GAMEPLAY_FIELD_KEEP, 0x25b8
+.quad 0x0
+.quad 0x0
+.quad 0x0
+.quad 0x0
+.quad 0x0
+.quad 0x0
+.quad 0x0
+PATCH_END

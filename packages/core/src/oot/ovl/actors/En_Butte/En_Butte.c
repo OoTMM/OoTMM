@@ -1,5 +1,7 @@
 #include <combo/xflags.h>
 #include <combo/global.h>
+#include <combo/csmc.h>
+#include <combo/custom.h>
 #include "En_Butte.h"
 
 #define FLAGS 0
@@ -449,11 +451,74 @@ void EnButte_Update(Actor_EnButte* this, GameState_Play* play)
     }
 }
 
+static const Gfx kLoadTextureDefault[] =
+{
+    gsDPLoadTextureBlock(0x05002680, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 5, 6, 0, 0),
+    gsSPEndDisplayList(),
+};
+
+static Gfx sLoadTextureCustom[] =
+{
+    gsDPLoadTextureBlock(0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 5, 6, 0, 0),
+    gsSPEndDisplayList(),
+};
+
+static void EnButte_DrawButterfly(Actor_EnButte* this, GameState_Play* play)
+{
+    const Color_RGB8* color;
+    Xflag xflag;
+    ComboItemQuery q;
+    ComboItemOverride o;
+    int csmcType;
+    void* customTexture;
+
+    EnButte_Xflags(&xflag, this, play);
+    comboXflagItemQuery(&q, &xflag, 0);
+    comboItemOverride(&o, &q);
+
+    /* Get CSMC type */
+    if (o.gi == GI_NONE)
+    {
+        csmcType = CSMC_MAJOR;
+    }
+    else if (comboXflagsGet(&xflag))
+    {
+        csmcType = CSMC_NORMAL;
+    }
+    else if (csmcEnabled())
+    {
+        csmcType = csmcFromItem(o.gi);
+    }
+    else
+    {
+        csmcType = CSMC_MAJOR;
+    }
+
+    Gfx_SetupDL25_Opa(play->gs.gfx);
+    OPEN_DISPS(play->gs.gfx);
+    if (csmcType != CSMC_MAJOR)
+    {
+        customTexture = comboCacheGetFile(CUSTOM_BUTTERFLY_ADDR);
+        if (!customTexture)
+            return;
+        sLoadTextureCustom[0].words.w1 = ((u32)customTexture - 0x80000000);
+        color = csmcTypeColor(csmcType);
+        gSPDisplayList(POLY_OPA_DISP++, &sLoadTextureCustom);
+        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0x01, color->r, color->g, color->b, 255);
+    }
+    else
+    {
+        gSPDisplayList(POLY_OPA_DISP++, &kLoadTextureDefault);
+        gDPSetPrimColor(POLY_OPA_DISP++, 0x00, 0x01, 255, 255, 255, 255);
+    }
+    SkelAnime_DrawOpa(play, this->skelAnime.skeleton, this->skelAnime.jointTable, NULL, NULL, NULL);
+    CLOSE_DISPS();
+}
+
 void EnButte_Draw(Actor_EnButte* this, GameState_Play* play)
 {
     if (this->drawSkelAnime) {
-        Gfx_SetupDL25_Opa(play->gs.gfx);
-        SkelAnime_DrawOpa(play, this->skelAnime.skeleton, this->skelAnime.jointTable, NULL, NULL, NULL);
+        EnButte_DrawButterfly(this, play);
         Collider_UpdateSpheres(0, &this->collider);
     }
 
