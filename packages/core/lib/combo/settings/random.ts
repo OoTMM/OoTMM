@@ -222,6 +222,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
   case 0:
     base.skipZelda = true;
     base.openMoon = true;
+    base.ganonTrials = { type: 'none' };
     base.openDungeonsMm = { type: 'all' };
     base.openDungeonsOot = { type: 'all' };
     base.clearStateDungeonsMm = 'both';
@@ -234,6 +235,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
   case 1:
     base.skipZelda = false;
     base.openMoon = false;
+    base.ganonTrials = { type: 'all' };
     base.openDungeonsMm = { type: 'none' };
     base.openDungeonsOot = { type: 'none' };
     base.clearStateDungeonsMm = 'none';
@@ -246,6 +248,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
   default:
     base.skipZelda = booleanWeighted(random, 0.3);
     base.openMoon = booleanWeighted(random, 0.3);
+    base.ganonTrials = { type: 'random' };
     base.openDungeonsMm = { type: 'random' };
     base.openDungeonsOot = { type: 'random' };
     base.clearStateDungeonsMm = sampleWeighted(random, { none: 5, WF: 1, GB: 1, both: 2 });
