@@ -430,19 +430,20 @@ void EnButte_TransformIntoFairy(Actor_EnButte* this, GameState_Play* play)
         EnButte_SetupWaitToDie(this);
     }
 }
+#endif
 
-void EnButte_SetupWaitToDie(Actor_EnButte* this) {
+void EnButte_SetupWaitToDie(Actor_EnButte* this)
+{
     this->timer = 64;
     this->actionFunc = EnButte_WaitToDie;
     this->actor.draw = NULL;
 }
 
-void EnButte_WaitToDie(Actor_EnButte* this, GameState_Play* play) {
-    if (this->timer <= 0) {
+void EnButte_WaitToDie(Actor_EnButte* this, GameState_Play* play)
+{
+    if (this->timer <= 0)
         Actor_Kill(&this->actor);
-    }
 }
-#endif
 
 void EnButte_Update(Actor_EnButte* this, GameState_Play* play)
 {
@@ -496,15 +497,7 @@ void EnButte_Update(Actor_EnButte* this, GameState_Play* play)
 }
 
 #if defined(GAME_MM)
-f32 D_8091D3C0[] = { 50.0f, 80.0f, 100.0f };
-
-f32 D_8091D3CC[] = { 30.0f, 40.0f, 50.0f };
-
-f32 D_8091D3D8[] = { 15.0f, 20.0f, 25.0f };
-
-f32 D_8091D3E4[] = { 7.5f, 10.0f, 12.5f };
-
-s32 D_8091D3F0 = 1500;
+static s32 D_8091D3F0 = 1500;
 
 void EnButte_FlyAround(Actor_EnButte* this, GameState_Play* play) {
     EnButteFlightParams* flightParams = &sFlyAroundParams[this->flightParamsIdx];
@@ -663,18 +656,6 @@ void EnButte_TransformIntoFairy(Actor_EnButte* this, GameState_Play* play) {
         this->drawSkelAnime = 0;
     } else if (this->timer <= 0) {
         EnButte_SetupWaitToDie(this);
-    }
-}
-
-void EnButte_SetupWaitToDie(Actor_EnButte* this) {
-    this->timer = 64;
-    this->actionFunc = EnButte_WaitToDie;
-    this->actor.draw = NULL;
-}
-
-void EnButte_WaitToDie(Actor_EnButte* this, GameState_Play* play) {
-    if (this->timer <= 0) {
-        Actor_Kill(&this->actor);
     }
 }
 #endif
