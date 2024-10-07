@@ -1,8 +1,9 @@
+#include "En_Butte.h"
+#include <combo/item.h>
 #include <combo/xflags.h>
 #include <combo/global.h>
 #include <combo/csmc.h>
 #include <combo/custom.h>
-#include "En_Butte.h"
 
 #define FLAGS 0x00000000
 
@@ -99,7 +100,6 @@ void EnButte_SelectFlightParams(Actor_EnButte* this, EnButteFlightParams* flight
     this->timer = Rand_S16Offset(flightParams->minTime, flightParams->maxTime);
 }
 
-#if defined(GAME_OOT)
 void EnButte_SetupFollowLink(Actor_EnButte* this);
 void EnButte_FollowLink(Actor_EnButte* this, GameState_Play* play);
 void EnButte_SetupTransformIntoFairy(Actor_EnButte* this);
@@ -191,23 +191,33 @@ static InitChainEntry sInitChain[] = {
 void EnButte_Init(Actor_EnButte* this, GameState_Play* play)
 {
     this->sliceId = g.actorSliceId;
-    if (this->actor.params == 0xffff)
-        this->actor.params = 0;
+    if (BUTTERFLY_GET(&this->actor) == BUTTERFLY_MINUS1)
+        this->actor.params = BUTTERFLY_0;
+
+#if defined(GAME_MM)
+    this->actor.world.rot.y = Rand_Next();
+    this->actor.home.rot.y = this->actor.world.rot.y;
+    this->actor.shape.rot.y = this->actor.world.rot.y;
+#endif
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
 
     if (EnButte_CanTransform(this, play))
-    {
         this->actor.uncullZoneScale = 200.0f;
-    }
 
     SkelAnime_Init(play, &this->skelAnime, (void*)GAMEPLAY_FIELD_KEEP_SKEL_BUTTERFLY, (void*)GAMEPLAY_FIELD_KEEP_ANIM_BUTTERFLY, this->jointTable, this->morphTable, 8);
     Collider_InitJntSph(play, &this->collider);
     Collider_SetJntSph(play, &this->collider, &this->actor, &sColliderInit, this->colliderItems);
+
+#if defined(GAME_MM)
+    this->collider.elements[0].dim.worldSphere.radius = this->collider.elements[0].dim.scale * this->collider.elements[0].dim.modelSphere.radius;
+#endif
+
     this->actor.colChkInfo.mass = 0;
     this->unk_25C = Rand_ZeroOne() * 0xFFFF;
     this->unk_25E = Rand_ZeroOne() * 0xFFFF;
     this->unk_260 = Rand_ZeroOne() * 0xFFFF;
+
     Animation_Change(&this->skelAnime, (void*)GAMEPLAY_FIELD_KEEP_ANIM_BUTTERFLY, 1.0f, 0.0f, 0.0f, ANIMMODE_LOOP_INTERP, 0.0f);
     EnButte_SetupFlyAround(this);
     this->actor.shape.rot.x -= 0x2320;
@@ -219,6 +229,7 @@ void EnButte_Destroy(Actor_EnButte* this, GameState_Play* play)
     Collider_DestroyJntSph(play, &this->collider);
 }
 
+#if defined(GAME_OOT)
 void func_809CD56C(Actor_EnButte* this) {
     static f32 D_809CE3E0[] = { 50.0f, 80.0f, 100.0f };
     static f32 D_809CE3EC[] = { 30.0f, 40.0f, 50.0f };
@@ -470,102 +481,9 @@ void EnButte_Update(Actor_EnButte* this, GameState_Play* play)
         Actor_SetFocus(&this->actor, this->actor.shape.yOffset * this->actor.scale.y);
     }
 }
-
-static const Gfx kLoadTextureDefault[] =
-{
-    gsDPLoadTextureBlock(0x05002680, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 5, 6, 0, 0),
-    gsSPEndDisplayList(),
-};
-
-static Gfx sLoadTextureCustom[] =
-{
-    gsDPLoadTextureBlock(0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 5, 6, 0, 0),
-    gsSPEndDisplayList(),
-};
-
-static void EnButte_DrawButterfly(Actor_EnButte* this, GameState_Play* play)
-{
-    const Color_RGB8* color;
-    Xflag xflag;
-    ComboItemQuery q;
-    ComboItemOverride o;
-    int csmcType;
-    void* customTexture;
-
-    EnButte_Xflags(&xflag, this, play);
-    comboXflagItemQuery(&q, &xflag, 0);
-    comboItemOverride(&o, &q);
-
-    /* Get CSMC type */
-    if (o.gi == GI_NONE)
-    {
-        csmcType = CSMC_MAJOR;
-    }
-    else if (comboXflagsGet(&xflag))
-    {
-        csmcType = CSMC_NORMAL;
-    }
-    else if (csmcEnabled())
-    {
-        csmcType = csmcFromItem(o.gi);
-    }
-    else
-    {
-        csmcType = CSMC_MAJOR;
-    }
-
-    Gfx_SetupDL25_Opa(play->gs.gfx);
-    OPEN_DISPS(play->gs.gfx);
-    if (csmcType != CSMC_MAJOR)
-    {
-        customTexture = comboCacheGetFile(CUSTOM_BUTTERFLY_ADDR);
-        if (!customTexture)
-            return;
-        sLoadTextureCustom[0].words.w1 = ((u32)customTexture - 0x80000000);
-        color = csmcTypeColor(csmcType);
-        gSPDisplayList(POLY_OPA_DISP++, &sLoadTextureCustom);
-        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0x01, color->r, color->g, color->b, 255);
-    }
-    else
-    {
-        gSPDisplayList(POLY_OPA_DISP++, &kLoadTextureDefault);
-        gDPSetPrimColor(POLY_OPA_DISP++, 0x00, 0x01, 255, 255, 255, 255);
-    }
-    SkelAnime_DrawOpa(play, this->skelAnime.skeleton, this->skelAnime.jointTable, NULL, NULL, NULL);
-    CLOSE_DISPS();
-}
-
-void EnButte_Draw(Actor_EnButte* this, GameState_Play* play)
-{
-    if (this->drawSkelAnime)
-    {
-        EnButte_DrawButterfly(this, play);
-        Collider_UpdateSpheres(0, &this->collider);
-    }
-
-    if (EnButte_CanTransform(this, play) && (this->actionFunc == EnButte_TransformIntoFairy)) {
-        EnButte_DrawTransformationEffect(this, play);
-    }
-}
 #endif
 
 #if defined(GAME_MM)
-void func_8091CB68(Actor_EnButte* this);
-void func_8091CBB4(Actor_EnButte* this, GameState_Play* play);
-void func_8091CF64(Actor_EnButte* this);
-void func_8091CFB4(Actor_EnButte* this, GameState_Play* play);
-void func_8091D070(Actor_EnButte* this);
-void func_8091D090(Actor_EnButte* this, GameState_Play* play);
-
-Vec3f D_8091D3A4 = { 0.0f, 0.0f, -3.0f };
-
-static InitChainEntry sInitChain[] = {
-    ICHAIN_VEC3F_DIV1000(scale, 10, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneForward, 700, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneScale, 20, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneDownward, 60, ICHAIN_STOP),
-};
-
 f32 D_8091D3C0[] = { 50.0f, 80.0f, 100.0f };
 
 f32 D_8091D3CC[] = { 30.0f, 40.0f, 50.0f };
@@ -575,82 +493,6 @@ f32 D_8091D3D8[] = { 15.0f, 20.0f, 25.0f };
 f32 D_8091D3E4[] = { 7.5f, 10.0f, 12.5f };
 
 s32 D_8091D3F0 = 1500;
-
-void func_8091C124(void) {
-    sTransformationEffectScale = 0.0f;
-    sTransformationEffectAlpha = 0;
-}
-
-void func_8091C140(void) {
-    sTransformationEffectScale += 0.003f;
-    sTransformationEffectAlpha += 0xFA0;
-}
-
-void func_8091C178(Actor_EnButte* this, GameState_Play* play)
-{
-    Vec3f sp4C;
-    s32 sp48;
-    Vec3s sp40;
-
-    OPEN_DISPS(play->gs.gfx);
-
-    Gfx_SetupDL25_Xlu(play->gs.gfx);
-    sp48 = Math_SinS(sTransformationEffectAlpha) * 250.0f;
-    sp48 = CLAMP(sp48, 0, 255);
-
-    sp40 = Camera_GetCamDir(GET_ACTIVE_CAM(play));
-    Matrix_RotateYS(sp40.y, MAT_SET);
-    Matrix_RotateXS(sp40.x, MAT_MUL);
-    Matrix_RotateZS(sp40.z, MAT_MUL);
-    Matrix_MultVec3f(&D_8091D3A4, &sp4C);
-    Matrix_SetTranslateRotateYXZ(this->actor.focus.pos.x + sp4C.x, this->actor.focus.pos.y + sp4C.y,
-                                 this->actor.focus.pos.z + sp4C.z, &sp40);
-    Matrix_Scale(sTransformationEffectScale, sTransformationEffectScale, sTransformationEffectScale, MAT_MUL);
-
-    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gDPSetPrimColor(POLY_XLU_DISP++, 0x80, 0x80, 200, 200, 180, sp48);
-    gDPSetEnvColor(POLY_XLU_DISP++, 200, 200, 210, 255);
-    gSPDisplayList(POLY_XLU_DISP++, (void*)GAMEPLAY_KEEP_DL_EFFECT_FLASH1);
-
-    CLOSE_DISPS();
-}
-
-void EnButte_Init(Actor_EnButte* this, GameState_Play* play)
-{
-    if (BUTTERFLY_GET(&this->actor) == BUTTERFLY_MINUS1)
-        this->actor.params = BUTTERFLY_0;
-
-    this->actor.world.rot.y = Rand_Next();
-    this->actor.home.rot.y = this->actor.world.rot.y;
-    this->actor.shape.rot.y = this->actor.world.rot.y;
-    Actor_ProcessInitChain(&this->actor, sInitChain);
-
-    if ((BUTTERFLY_GET_1(&this->actor) & 0xFF) == BUTTERFLY_1) {
-        this->actor.uncullZoneScale = 200.0f;
-    }
-
-    SkelAnime_Init(play, &this->skelAnime, (void*)GAMEPLAY_FIELD_KEEP_SKEL_BUTTERFLY, (void*)GAMEPLAY_FIELD_KEEP_ANIM_BUTTERFLY, this->jointTable, this->morphTable, 8);
-    Collider_InitJntSph(play, &this->collider);
-    Collider_SetJntSph(play, &this->collider, &this->actor, &sColliderInit, this->colliderItems);
-
-    this->collider.elements[0].dim.worldSphere.radius =
-        this->collider.elements[0].dim.scale * this->collider.elements[0].dim.modelSphere.radius;
-
-    this->actor.colChkInfo.mass = 0;
-    this->unk_25C = Rand_ZeroOne() * 0xFFFF;
-    this->unk_25E = Rand_ZeroOne() * 0xFFFF;
-    this->unk_260 = Rand_ZeroOne() * 0xFFFF;
-
-    Animation_Change(&this->skelAnime, (void*)GAMEPLAY_FIELD_KEEP_ANIM_BUTTERFLY, 1.0f, 0.0f, 0.0f, ANIMMODE_LOOP_INTERP, 0.0f);
-    EnButte_SetupFlyAround(this);
-    this->actor.shape.rot.x -= 0x2320;
-    this->drawSkelAnime = 1;
-}
-
-void EnButte_Destroy(Actor_EnButte* this, GameState_Play* play)
-{
-    Collider_DestroyJntSph(play, &this->collider);
-}
 
 void func_8091C524(Actor_EnButte* this) {
     this->actor.shape.yOffset +=
@@ -740,7 +582,7 @@ void EnButte_FlyAround(Actor_EnButte* this, GameState_Play* play) {
         ((Math3D_Dist2DSq(player->actor.world.pos.x, player->actor.world.pos.z, this->actor.home.pos.x,
                           this->actor.home.pos.z) < SQ(120.0f)) ||
          (this->actor.xzDistToPlayer < 60.0f))) {
-        func_8091CB68(this);
+        EnButte_SetupFollowLink(this);
         this->unk_257 = 2;
     } else if (this->actor.xzDistToPlayer < 120.0f) {
         this->unk_257 = 1;
@@ -749,12 +591,12 @@ void EnButte_FlyAround(Actor_EnButte* this, GameState_Play* play) {
     }
 }
 
-void func_8091CB68(Actor_EnButte* this) {
+void EnButte_SetupFollowLink(Actor_EnButte* this) {
     EnButte_SelectFlightParams(this, &sFollowLinkParams[this->flightParamsIdx]);
-    this->actionFunc = func_8091CBB4;
+    this->actionFunc = EnButte_FollowLink;
 }
 
-void func_8091CBB4(Actor_EnButte* this, GameState_Play* play)
+void EnButte_FollowLink(Actor_EnButte* this, GameState_Play* play)
 {
     EnButteFlightParams* flightParams = &sFollowLinkParams[this->flightParamsIdx];
     Actor_Player* player;
@@ -810,21 +652,21 @@ void func_8091CBB4(Actor_EnButte* this, GameState_Play* play)
     } else if ((distSq > SQ(240.0f)) &&
                (Math3D_Dist2DSq(player->meleeWeaponInfo[0].tip.x, player->meleeWeaponInfo[0].tip.z,
                                 this->actor.world.pos.x, this->actor.world.pos.z) < SQ(60.0f))) {
-        func_8091CF64(this);
+        EnButte_SetupTransformIntoFairy(this);
     }
 }
 
-void func_8091CF64(Actor_EnButte* this) {
+void EnButte_SetupTransformIntoFairy(Actor_EnButte* this) {
     this->timer = 9;
     this->actor.flags |= ACTOR_FLAG_MM_10;
     this->skelAnime.playSpeed = 1.0f;
-    func_8091C124();
-    this->actionFunc = func_8091CFB4;
+    EnButte_ResetTransformationEffect();
+    this->actionFunc = EnButte_TransformIntoFairy;
 }
 
-void func_8091CFB4(Actor_EnButte* this, GameState_Play* play) {
+void EnButte_TransformIntoFairy(Actor_EnButte* this, GameState_Play* play) {
     SkelAnime_Update(&this->skelAnime);
-    func_8091C140();
+    EnButte_UpdateTransformationEffect();
 
     if (this->timer == 5) {
         SoundSource_PlaySfxAtFixedWorldPos(play, &this->actor.world.pos, 60, NA_SE_EV_BUTTERFRY_TO_FAIRY);
@@ -833,17 +675,17 @@ void func_8091CFB4(Actor_EnButte* this, GameState_Play* play) {
                     this->actor.focus.pos.z, 0, this->actor.shape.rot.y, 0, 0x0002);
         this->drawSkelAnime = 0;
     } else if (this->timer <= 0) {
-        func_8091D070(this);
+        EnButte_SetupWaitToDie(this);
     }
 }
 
-void func_8091D070(Actor_EnButte* this) {
+void EnButte_SetupWaitToDie(Actor_EnButte* this) {
     this->timer = 64;
-    this->actionFunc = func_8091D090;
+    this->actionFunc = EnButte_WaitToDie;
     this->actor.draw = NULL;
 }
 
-void func_8091D090(Actor_EnButte* this, GameState_Play* play) {
+void EnButte_WaitToDie(Actor_EnButte* this, GameState_Play* play) {
     if (this->timer <= 0) {
         Actor_Kill(&this->actor);
     }
@@ -889,20 +731,84 @@ void EnButte_Update(Actor_EnButte* this, GameState_Play* play)
         Actor_SetFocus(&this->actor, this->actor.shape.yOffset * this->actor.scale.y);
     }
 }
+#endif
+
+static const Gfx kLoadTextureDefault[] =
+{
+    gsDPLoadTextureBlock(0x05002680, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 5, 6, 0, 0),
+    gsSPEndDisplayList(),
+};
+
+static Gfx sLoadTextureCustom[] =
+{
+    gsDPLoadTextureBlock(0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 5, 6, 0, 0),
+    gsSPEndDisplayList(),
+};
+
+static void EnButte_DrawButterfly(Actor_EnButte* this, GameState_Play* play)
+{
+    const Color_RGB8* color;
+    Xflag xflag;
+    ComboItemQuery q;
+    ComboItemOverride o;
+    int csmcType;
+    void* customTexture;
+
+    EnButte_Xflags(&xflag, this, play);
+    comboXflagItemQuery(&q, &xflag, 0);
+    comboItemOverride(&o, &q);
+
+    /* Get CSMC type */
+    if (o.gi == GI_NONE)
+    {
+        csmcType = CSMC_MAJOR;
+    }
+    else if (comboXflagsGet(&xflag))
+    {
+        csmcType = CSMC_NORMAL;
+    }
+    else if (csmcEnabled())
+    {
+        csmcType = csmcFromItem(o.gi);
+    }
+    else
+    {
+        csmcType = CSMC_MAJOR;
+    }
+
+    Gfx_SetupDL25_Opa(play->gs.gfx);
+    OPEN_DISPS(play->gs.gfx);
+    if (csmcType != CSMC_MAJOR)
+    {
+        customTexture = comboCacheGetFile(CUSTOM_BUTTERFLY_ADDR);
+        if (!customTexture)
+            return;
+        sLoadTextureCustom[0].words.w1 = ((u32)customTexture - 0x80000000);
+        color = csmcTypeColor(csmcType);
+        gSPDisplayList(POLY_OPA_DISP++, &sLoadTextureCustom);
+        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0x01, color->r, color->g, color->b, 255);
+    }
+    else
+    {
+        gSPDisplayList(POLY_OPA_DISP++, &kLoadTextureDefault);
+        gDPSetPrimColor(POLY_OPA_DISP++, 0x00, 0x01, 255, 255, 255, 255);
+    }
+    SkelAnime_DrawOpa(play, this->skelAnime.skeleton, this->skelAnime.jointTable, NULL, NULL, NULL);
+    CLOSE_DISPS();
+}
 
 void EnButte_Draw(Actor_EnButte* this, GameState_Play* play)
 {
-    if (this->drawSkelAnime != 0) {
-        Gfx_SetupDL25_Opa(play->gs.gfx);
-        SkelAnime_DrawOpa(play, this->skelAnime.skeleton, this->skelAnime.jointTable, NULL, NULL, NULL);
+    if (this->drawSkelAnime)
+    {
+        EnButte_DrawButterfly(this, play);
+        Collider_UpdateSpheres(0, &this->collider);
     }
 
-    if ((BUTTERFLY_GET_1(&this->actor) == BUTTERFLY_1) && (this->actionFunc == func_8091CFB4))
-    {
-        func_8091C178(this, play);
+    if (EnButte_CanTransform(this, play) && (this->actionFunc == EnButte_TransformIntoFairy)) {
+        EnButte_DrawTransformationEffect(this, play);
     }
 }
-#endif
 
 static ActorInit EnButte_ActorInit =
 {

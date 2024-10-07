@@ -10,7 +10,7 @@ typedef void (*Actor_EnButteFunc)(Actor_EnButte*, GameState_Play*);
 #define BUTTERFLY_GET(thisx) ((thisx)->params)
 #define BUTTERFLY_GET_1(thisx) ((thisx)->params & 1)
 
-#define BUTTERFLY_MINUS1    -1
+#define BUTTERFLY_MINUS1    0xffff
 #define BUTTERFLY_0         0
 #define BUTTERFLY_1         1
 
