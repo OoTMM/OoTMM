@@ -739,6 +739,14 @@ export const SETTINGS = [{
   cond: hasOoT,
   default: false,
 }, {
+  key: 'shuffleButterfliesMm',
+  name: 'Butterflies Shuffle (MM)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the butterflies are shuffled (MM)',
+  cond: hasMM,
+  default: false,
+}, {
   key: 'shuffleOcarinasOot',
   name: 'Ocarina Shuffle (OoT)',
   category: 'main.shuffle',

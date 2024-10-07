@@ -1140,6 +1140,10 @@ export class LogicPassWorldTransform {
       const data = POOL.oot.filter((x: any) => x.type === 'butterfly').map((x: any) => gameId('oot', x.location, ' ')) as string[];
       this.removeLocations(data);
     }
+    if (!settings.shuffleButterfliesMm) {
+      const data = POOL.mm.filter((x: any) => x.type === 'butterfly').map((x: any) => gameId('mm', x.location, ' ')) as string[];
+      this.removeLocations(data);
+    }
 
     /* Carpenters */
     if (['open', 'single'].includes(settings.gerudoFortress)) {
