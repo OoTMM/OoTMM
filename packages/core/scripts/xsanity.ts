@@ -1,9 +1,8 @@
-import { promises as fs, rmSync } from 'fs';
+import { promises as fs } from 'fs';
 import { SCENES } from '@ootmm/data';
 
 import { CodeGen } from '../lib/combo/util/codegen';
 import { decompressGame } from '../lib/combo/decompress';
-import { table } from 'console';
 
 const OOT_GENERIC_GROTTOS = [
   0x00, /* Hyrule Field Market */
@@ -174,6 +173,8 @@ const ACTORS_MM = {
   POT: 0x82,
   FLYING_POT: 0x8d,
   EN_KUSA: 0x90,
+  EN_BUTTE: 0x15,
+  OBJ_MURE: 0x4f,
   OBJ_MURE2: 0xb3,
   OBJ_MURE3: 0xe8,
   OBJ_GRASS: 0x10b,
@@ -188,7 +189,7 @@ const ACTORS_MM = {
   OBJ_FLOWERPOT: 0x13e,
   OBJ_TARU: 0x22d,
   OBJ_SNOWBALL: 0x1dc,
-  OBJ_SNOWBALL2: 0x1f9
+  OBJ_SNOWBALL2: 0x1f9,
   //DOOR_ANA: 0x55,
 };
 
@@ -1367,6 +1368,11 @@ function actorHandlerOotEnButte(checks: Check[], ra: RoomActor) {
   checks.push({ roomActor: ra, item: 'FAIRY', name: 'Butterfly', type: 'butterfly' });
 }
 
+function actorHandlerMmEnButte(checks: Check[], ra: RoomActor) {
+  checks.push({ roomActor: ra, item: 'FAIRY', name: 'Butterfly', type: 'butterfly' });
+  console.log("Params: " + ra.actor.params);
+}
+
 function actorHandlerOotObjMure(checks: Check[], ra: RoomActor) {
   const subtype = ra.actor.params & 0x1f;
   let count = (ra.actor.params >> 12);
@@ -1441,6 +1447,7 @@ const ACTORS_HANDLERS_MM = {
   [ACTORS_MM.OBJ_TARU]: actorHandlerMmObjTaru,
   [ACTORS_MM.OBJ_SNOWBALL]: actorHandlerMmObjSnowball,
   [ACTORS_MM.OBJ_SNOWBALL2]: actorHandlerMmObjSnowball2,
+  [ACTORS_MM.EN_BUTTE]: actorHandlerMmEnButte,
 };
 
 const ACTORS_HANDLERS = {

@@ -2,6 +2,6 @@
 #define XFLAGS_DATA
 
 #define XFLAGS_COUNT_OOT 0x23f
-#define XFLAGS_COUNT_MM 0x234
+#define XFLAGS_COUNT_MM 0x241
 
 #endif
