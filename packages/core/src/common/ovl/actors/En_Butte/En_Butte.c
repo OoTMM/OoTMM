@@ -415,6 +415,37 @@ void EnButte_SetupTransformIntoFairy(Actor_EnButte* this)
     this->actionFunc = EnButte_TransformIntoFairy;
 }
 
+static int EnButte_ShouldSpawnFairy(Actor_EnButte* this, GameState_Play* play)
+{
+    Xflag xflag;
+    ComboItemQuery q;
+    ComboItemOverride o;
+
+    EnButte_Xflags(&xflag, this, play);
+    if (comboXflagsGet(&xflag))
+        return TRUE;
+    comboXflagItemQuery(&q, &xflag, 0);
+    comboItemOverride(&o, &q);
+    if (o.gi == GI_NOTHING)
+    {
+        comboXflagsSet(&xflag);
+        return FALSE;
+    }
+    return TRUE;
+}
+
+static void EnButte_SpawnFairy(Actor_EnButte* this, GameState_Play* play)
+{
+    if (!EnButte_ShouldSpawnFairy(this, play))
+        return;
+
+    g.actorIndex = this->actor.actorIndex;
+    g.actorSliceId = this->sliceId;
+    Actor_Spawn(&play->actorCtx, play, AC_EN_ELF, this->actor.focus.pos.x, this->actor.focus.pos.y, this->actor.focus.pos.z, 0, this->actor.shape.rot.y, 0, 0x0002);
+    g.actorIndex = 0xff;
+    g.actorSliceId = 0;
+}
+
 void EnButte_TransformIntoFairy(Actor_EnButte* this, GameState_Play* play)
 {
     SkelAnime_Update(&this->skelAnime);
@@ -426,11 +457,7 @@ void EnButte_TransformIntoFairy(Actor_EnButte* this, GameState_Play* play)
     }
     else if (this->timer == 4)
     {
-        g.actorIndex = this->actor.actorIndex;
-        g.actorSliceId = this->sliceId;
-        Actor_Spawn(&play->actorCtx, play, AC_EN_ELF, this->actor.focus.pos.x, this->actor.focus.pos.y, this->actor.focus.pos.z, 0, this->actor.shape.rot.y, 0, 0x0002);
-        g.actorIndex = 0xff;
-        g.actorSliceId = 0;
+        EnButte_SpawnFairy(this, play);
         this->drawSkelAnime = FALSE;
     }
     else if (this->timer <= 0)
