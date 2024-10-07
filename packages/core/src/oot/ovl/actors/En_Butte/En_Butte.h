@@ -20,6 +20,7 @@ struct Actor_EnButte
     u8                      flightParamsIdx;
     u8                      unk_257;
     u8                      drawSkelAnime;
+    u8                      sliceId;
     s16                     swordDownTimer;
     s16                     unk_25C;
     s16                     unk_25E;

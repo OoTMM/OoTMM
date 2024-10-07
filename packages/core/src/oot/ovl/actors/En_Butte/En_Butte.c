@@ -95,7 +95,7 @@ static void EnButte_Xflags(Xflag* xflag, Actor_EnButte* this, GameState_Play* pl
     xflag->roomId = this->actor.room;
     xflag->sceneId = play->sceneId;
     xflag->setupId = g.sceneSetupId;
-    xflag->sliceId = this->actor.params;
+    xflag->sliceId = this->sliceId;
 }
 
 static int EnButte_IsShuffled(Actor_EnButte* this, GameState_Play* play)
@@ -116,7 +116,7 @@ static int EnButte_IsShuffled(Actor_EnButte* this, GameState_Play* play)
 
 static int EnButte_CanTransform(Actor_EnButte* this, GameState_Play* play)
 {
-    if (this->actor.params == 0)
+    if (this->actor.params & 1)
         return TRUE;
     if (EnButte_IsShuffled(this, play))
         return TRUE;
@@ -172,6 +172,10 @@ static InitChainEntry sInitChain[] = {
 
 void EnButte_Init(Actor_EnButte* this, GameState_Play* play)
 {
+    this->sliceId = g.actorSliceId;
+    if (this->actor.params == 0xffff)
+        this->actor.params = 0;
+
     Actor_ProcessInitChain(&this->actor, sInitChain);
 
     if (EnButte_CanTransform(this, play))
@@ -386,7 +390,7 @@ void EnButte_TransformIntoFairy(Actor_EnButte* this, GameState_Play* play)
     else if (this->timer == 4)
     {
         g.actorIndex = this->actor.actorIndex;
-        g.actorSliceId = this->actor.params;
+        g.actorSliceId = this->sliceId;
         Actor_Spawn(&play->actorCtx, play, AC_EN_ELF, this->actor.focus.pos.x, this->actor.focus.pos.y, this->actor.focus.pos.z, 0, this->actor.shape.rot.y, 0, 0x0002);
         g.actorIndex = 0xff;
         g.actorSliceId = 0;

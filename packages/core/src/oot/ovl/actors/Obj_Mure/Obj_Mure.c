@@ -41,11 +41,17 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_F32(uncullZoneDownward, 1200, ICHAIN_STOP),
 };
 
-static Actor* ObjMure_SpawnActor(ActorContext* actorCtx, GameState_Play* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int index)
+static Actor* ObjMure_SpawnActor(Actor_ObjMure* this, GameState_Play* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int index)
 {
-    if (actorId == AC_EN_BUTTE)
-        variable = (u16)index;
-    return Actor_Spawn(actorCtx, play, actorId, x, y, z, rx, ry, rz, variable);
+    Actor* tmp;
+
+    g.actorIndex = this->actor.actorIndex;
+    g.actorSliceId = (u8)index;
+    tmp = Actor_Spawn(&play->actorCtx, play, actorId, x, y, z, rx, ry, rz, variable);
+    g.actorIndex = 0xff;
+    g.actorSliceId = 0;
+
+    return tmp;
 }
 
 s32 ObjMure_SetCullingImpl(Actor_ObjMure* this, GameState_Play* play)
@@ -120,7 +126,7 @@ void ObjMure_SpawnActors0(Actor_ObjMure* this, GameState_Play* play) {
             case OBJMURE_CHILD_STATE_2:
                 ObjMure_GetSpawnPos(&pos, &actor->world.pos, this->ptn, i);
                 this->children[i] =
-                    ObjMure_SpawnActor(&play->actorCtx, play, sSpawnActorIds[this->type], pos.x, pos.y, pos.z,
+                    ObjMure_SpawnActor(this, play, sSpawnActorIds[this->type], pos.x, pos.y, pos.z,
                                 actor->world.rot.x, actor->world.rot.y, actor->world.rot.z, sSpawnParams[this->type], i);
                 if (this->children[i] != NULL) {
                     this->children[i]->flags |= ACTOR_FLAG_OOT_ENKUSA_CUT;
@@ -130,7 +136,7 @@ void ObjMure_SpawnActors0(Actor_ObjMure* this, GameState_Play* play) {
             default:
                 ObjMure_GetSpawnPos(&pos, &actor->world.pos, this->ptn, i);
                 this->children[i] =
-                    ObjMure_SpawnActor(&play->actorCtx, play, sSpawnActorIds[this->type], pos.x, pos.y, pos.z,
+                    ObjMure_SpawnActor(this, play, sSpawnActorIds[this->type], pos.x, pos.y, pos.z,
                                 actor->world.rot.x, actor->world.rot.y, actor->world.rot.z, sSpawnParams[this->type], i);
                 if (this->children[i] != NULL) {
                     this->children[i]->room = actor->room;
@@ -140,8 +146,7 @@ void ObjMure_SpawnActors0(Actor_ObjMure* this, GameState_Play* play) {
     }
 }
 
-void ObjMure_SpawnActors1(Actor_ObjMure* this, GameState_Play* play2) {
-    GameState_Play* play = play2;
+void ObjMure_SpawnActors1(Actor_ObjMure* this, GameState_Play* play) {
     Actor* actor = &this->actor;
     Vec3f spawnPos;
     s32 maxChildren = ObjMure_GetMaxChildSpawns(this);
@@ -149,11 +154,9 @@ void ObjMure_SpawnActors1(Actor_ObjMure* this, GameState_Play* play2) {
 
     for (i = 0; i < maxChildren; i++) {
         ObjMure_GetSpawnPos(&spawnPos, &actor->world.pos, this->ptn, i);
-        g.actorIndex = this->actor.actorIndex;
-        this->children[i] = ObjMure_SpawnActor(&play2->actorCtx, play, sSpawnActorIds[this->type], spawnPos.x, spawnPos.y,
+        this->children[i] = ObjMure_SpawnActor(this, play, sSpawnActorIds[this->type], spawnPos.x, spawnPos.y,
                                         spawnPos.z, actor->world.rot.x, actor->world.rot.y, actor->world.rot.z,
-                                        sSpawnParams[this->type], i);
-        g.actorIndex = 0xff;
+                                        (this->type == 4 && i == 0) ? 1 : sSpawnParams[this->type], i);
         if (this->children[i] != NULL) {
             this->childrenStates[i] = OBJMURE_CHILD_STATE_0;
             this->children[i]->room = actor->room;

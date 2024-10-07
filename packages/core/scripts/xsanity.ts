@@ -1365,15 +1365,17 @@ function actorHandlerOotObjKibako2(checks: Check[], ra: RoomActor) {
 }
 
 function actorHandlerOotEnButte(checks: Check[], ra: RoomActor) {
-  checks.push({ roomActor: ra, item: 'FAIRY', name: 'Butterfly', type: 'butterfly' });
+  const item = (ra.actor.params === 0xffff || !(ra.actor.params & 1)) ? 'NOTHING' : 'FAIRY';
+  checks.push({ roomActor: ra, item, name: 'Butterfly', type: 'butterfly' });
 }
 
 function actorHandlerMmEnButte(checks: Check[], ra: RoomActor) {
-  checks.push({ roomActor: ra, item: 'FAIRY', name: 'Butterfly', type: 'butterfly' });
-  console.log("Params: " + ra.actor.params);
+  const item = (ra.actor.params === 0xffff || !(ra.actor.params & 1)) ? 'NOTHING' : 'FAIRY';
+  checks.push({ roomActor: ra, item, name: 'Butterfly', type: 'butterfly' });
 }
 
 function actorHandlerOotObjMure(checks: Check[], ra: RoomActor) {
+  const svNum = (ra.actor.params >> 5) & 3;
   const subtype = ra.actor.params & 0x1f;
   let count = (ra.actor.params >> 12);
   if (count === 0) {
@@ -1383,7 +1385,8 @@ function actorHandlerOotObjMure(checks: Check[], ra: RoomActor) {
   }
   for (let i = 0; i < count; ++i) {
     if (subtype === 0x04) {
-      checks.push({ roomActor: ra, item: 'FAIRY', name: 'Butterfly Pack', type: 'butterfly', sliceId: i, name2: `Butterfly ${i + 1}` });
+      const item = (i === 0) ? 'FAIRY' : 'NOTHING';
+      checks.push({ roomActor: ra, item, name: 'Butterfly Pack', type: 'butterfly', sliceId: i, name2: `Butterfly ${i + 1}` });
     }
   }
 }
