@@ -1791,6 +1791,7 @@
     "Owl Mountain": "true"
     "Mountain Village Elder": "true"
     "Mountain Village Keaton": "true"
+    "Mountain Village Butterflies": "is_spring && has_sticks"
   gossip:
     "Mountain Village Gossip Outside": "is_spring"
     "Mountain Village Gossip Tunnel": "is_spring && (has_mask_goron || short_hook_anywhere)"
@@ -1864,6 +1865,18 @@
     "Mountain Village Small Snowball Winter 2": "is_winter"
     "Mountain Village Small Snowball Winter 3": "is_winter"
     "Mountain Village Small Snowball Winter 4": "is_winter"
+"Mountain Village Butterflies":
+  region: MOUNTAIN_VILLAGE
+  locations:
+    "Mountain Village Butterfly Pack 1 Butterfly 1": "true"
+    "Mountain Village Butterfly Pack 1 Butterfly 2": "true"
+    "Mountain Village Butterfly Pack 1 Butterfly 3": "true"
+    "Mountain Village Butterfly Pack 1 Butterfly 4": "true"
+    "Mountain Village Butterfly Pack 2 Butterfly 1": "true"
+    "Mountain Village Butterfly Pack 2 Butterfly 2": "true"
+    "Mountain Village Butterfly Pack 2 Butterfly 3": "true"
+    "Mountain Village Butterfly Pack 2 Butterfly 4": "true"
+    "Mountain Village Butterfly Pack 2 Butterfly 5": "true"
 "Mountain Village Elder":
   region: NONE
   exits:

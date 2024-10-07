@@ -927,6 +927,15 @@ Mountain Village Small Snowball Winter 3,               snowball,       NONE,   
 Mountain Village Small Snowball Winter 4,               snowball,       NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x0002b,                    MAGIC_JAR_SMALL
 Mountain Village Small Snowball Cliff 1,                snowball,       NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x00031,                    MAGIC_JAR_LARGE
 Mountain Village Small Snowball Cliff 2,                snowball,       NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x00032,                    MAGIC_JAR_LARGE
+Mountain Village Butterfly Pack 1 Butterfly 1,          butterfly,      NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x00020,                    FAIRY
+Mountain Village Butterfly Pack 1 Butterfly 2,          butterfly,      NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x10020,                    NOTHING
+Mountain Village Butterfly Pack 1 Butterfly 3,          butterfly,      NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x20020,                    NOTHING
+Mountain Village Butterfly Pack 1 Butterfly 4,          butterfly,      NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x30020,                    NOTHING
+Mountain Village Butterfly Pack 2 Butterfly 1,          butterfly,      NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x00021,                    FAIRY
+Mountain Village Butterfly Pack 2 Butterfly 2,          butterfly,      NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x10021,                    NOTHING
+Mountain Village Butterfly Pack 2 Butterfly 3,          butterfly,      NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x20021,                    NOTHING
+Mountain Village Butterfly Pack 2 Butterfly 4,          butterfly,      NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x30021,                    NOTHING
+Mountain Village Butterfly Pack 2 Butterfly 5,          butterfly,      NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x40021,                    NOTHING
 Blacksmith Razor Blade,                                 npc,            BLACKSMITH,             BLACKSMITH,                   SWORD_RAZOR,                SWORD
 Blacksmith Gilded Sword,                                npc,            BLACKSMITH,             BLACKSMITH,                   SWORD_GILDED,               SWORD
 Blacksmith Potted Plant 1 Pot,                          pot,            NONE,                   BLACKSMITH,                   0x00004,                    NOTHING
