@@ -4,7 +4,7 @@
 #include <combo/custom.h>
 #include "En_Butte.h"
 
-#define FLAGS 0
+#define FLAGS 0x00000000
 
 #if defined(GAME_OOT)
 # define GAMEPLAY_KEEP_DL_EFFECT_FLASH1         0x040105d0
@@ -12,6 +12,13 @@
 # define GAMEPLAY_FIELD_KEEP_ANIM_BUTTERFLY     0x05002470
 #endif
 
+#if defined(GAME_MM)
+# define GAMEPLAY_KEEP_DL_EFFECT_FLASH1         0x04023210
+# define GAMEPLAY_FIELD_KEEP_SKEL_BUTTERFLY     0x05002fa0
+# define GAMEPLAY_FIELD_KEEP_ANIM_BUTTERFLY     0x05001d20
+#endif
+
+#if defined(GAME_OOT)
 void EnButte_Init(Actor_EnButte* this, GameState_Play* play);
 void EnButte_Destroy(Actor_EnButte* this, GameState_Play* play2);
 void EnButte_Update(Actor_EnButte* this, GameState_Play* play);
@@ -232,7 +239,8 @@ void EnButte_SetupFlyAround(Actor_EnButte* this) {
     this->actionFunc = EnButte_FlyAround;
 }
 
-void EnButte_FlyAround(Actor_EnButte* this, GameState_Play* play) {
+void EnButte_FlyAround(Actor_EnButte* this, GameState_Play* play)
+{
     EnButteFlightParams* flightParams = &sFlyAroundParams[this->flightParamsIdx];
     s16 yaw;
     f32 distSqFromHome;
@@ -243,8 +251,7 @@ void EnButte_FlyAround(Actor_EnButte* this, GameState_Play* play) {
     Actor_Player* player;
 
     player = GET_PLAYER(play);
-    distSqFromHome = Math3D_Dist2DSq(this->actor.world.pos.x, this->actor.world.pos.z, this->actor.home.pos.x,
-                                     this->actor.home.pos.z);
+    distSqFromHome = Math3D_Dist2DSq(this->actor.world.pos.x, this->actor.world.pos.z, this->actor.home.pos.x, this->actor.home.pos.z);
     func_809CD56C(this);
     Math_SmoothStepToF(&this->actor.speed, flightParams->speedXZTarget, flightParams->speedXZScale,
                        flightParams->speedXZStep, 0.0f);
@@ -545,3 +552,446 @@ static ActorInit EnButte_ActorInit =
 };
 
 OVL_ACTOR_INFO(AC_EN_BUTTE, EnButte_ActorInit);
+#endif
+
+#if defined(GAME_MM)
+void EnButte_Init(Actor_EnButte* this, GameState_Play* play);
+void EnButte_Destroy(Actor_EnButte* this, GameState_Play* play2);
+void EnButte_Update(Actor_EnButte* this, GameState_Play* play);
+void EnButte_Draw(Actor_EnButte* this, GameState_Play* play);
+
+void func_8091C748(Actor_EnButte* this);
+void func_8091C794(Actor_EnButte* this, GameState_Play* play);
+void func_8091CB68(Actor_EnButte* this);
+void func_8091CBB4(Actor_EnButte* this, GameState_Play* play);
+void func_8091CF64(Actor_EnButte* this);
+void func_8091CFB4(Actor_EnButte* this, GameState_Play* play);
+void func_8091D070(Actor_EnButte* this);
+void func_8091D090(Actor_EnButte* this, GameState_Play* play);
+
+static ColliderJntSphElementInit sJntSphElementsInit[1] = {
+    {
+        {
+            ELEMTYPE_UNK0,
+            { 0x00000000, 0x00, 0x00 },
+            { 0xF7CFFFFF, 0x00, 0x00 },
+            TOUCH_NONE | TOUCH_SFX_NORMAL,
+            BUMP_NONE,
+            OCELEM_ON,
+        },
+        { 0, { { 0, 0, 0 }, 5 }, 100 },
+    },
+};
+
+static ColliderJntSphInit sJntSphInit = {
+    {
+        COLTYPE_NONE,
+        AT_NONE,
+        AC_NONE,
+        OC1_ON | OC1_TYPE_PLAYER | OC1_TYPE_1,
+        OC2_TYPE_1,
+        COLSHAPE_JNTSPH,
+    },
+    ARRAY_SIZE(sJntSphElementsInit),
+    sJntSphElementsInit,
+};
+
+typedef struct {
+    /* 0x00 */ s16 unk_00;
+    /* 0x02 */ s16 unk_02;
+    /* 0x04 */ f32 unk_04;
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ s16 unk_10;
+} EnButteStruct; // size = 0x14
+
+EnButteStruct D_8091D324[] = {
+    { 5, 35, 0.0f, 0.1f, 0.5f, 0 },
+    { 10, 45, 1.1f, 0.1f, 0.25f, 1000 },
+    { 10, 40, 1.5f, 0.1f, 0.3f, 2000 },
+};
+
+EnButteStruct D_8091D360[] = {
+    { 3, 3, 0.8f, 0.1f, 0.2f, 0 },
+    { 10, 20, 2.0f, 0.3f, 1.0f, 0 },
+    { 10, 20, 2.4f, 0.3f, 1.0f, 0 },
+};
+
+f32 D_8091D39C = 0.0f;
+
+s16 D_8091D3A0 = 0;
+
+Vec3f D_8091D3A4 = { 0.0f, 0.0f, -3.0f };
+
+static InitChainEntry sInitChain[] = {
+    ICHAIN_VEC3F_DIV1000(scale, 10, ICHAIN_CONTINUE),
+    ICHAIN_F32(uncullZoneForward, 700, ICHAIN_CONTINUE),
+    ICHAIN_F32(uncullZoneScale, 20, ICHAIN_CONTINUE),
+    ICHAIN_F32(uncullZoneDownward, 60, ICHAIN_STOP),
+};
+
+f32 D_8091D3C0[] = { 50.0f, 80.0f, 100.0f };
+
+f32 D_8091D3CC[] = { 30.0f, 40.0f, 50.0f };
+
+f32 D_8091D3D8[] = { 15.0f, 20.0f, 25.0f };
+
+f32 D_8091D3E4[] = { 7.5f, 10.0f, 12.5f };
+
+s32 D_8091D3F0 = 1500;
+
+void func_8091C0A0(Actor_EnButte* this, EnButteStruct* arg1) {
+    if (this->flightParamsIdx == 0) {
+        if (Rand_ZeroOne() < 0.6f) {
+            this->flightParamsIdx = 1;
+        } else {
+            this->flightParamsIdx = 2;
+        }
+    } else {
+        this->flightParamsIdx = 0;
+    }
+    this->timer = Rand_S16Offset(arg1->unk_00, arg1->unk_02);
+}
+
+void func_8091C124(void) {
+    D_8091D39C = 0.0f;
+    D_8091D3A0 = 0;
+}
+
+void func_8091C140(void) {
+    D_8091D39C += 0.003f;
+    D_8091D3A0 += 0xFA0;
+}
+
+void func_8091C178(Actor_EnButte* this, GameState_Play* play)
+{
+    Vec3f sp4C;
+    s32 sp48;
+    Vec3s sp40;
+
+    OPEN_DISPS(play->gs.gfx);
+
+    Gfx_SetupDL25_Xlu(play->gs.gfx);
+    sp48 = Math_SinS(D_8091D3A0) * 250.0f;
+    sp48 = CLAMP(sp48, 0, 255);
+
+    sp40 = Camera_GetCamDir(GET_ACTIVE_CAM(play));
+    Matrix_RotateYS(sp40.y, MAT_SET);
+    Matrix_RotateXS(sp40.x, MAT_MUL);
+    Matrix_RotateZS(sp40.z, MAT_MUL);
+    Matrix_MultVec3f(&D_8091D3A4, &sp4C);
+    Matrix_SetTranslateRotateYXZ(this->actor.focus.pos.x + sp4C.x, this->actor.focus.pos.y + sp4C.y,
+                                 this->actor.focus.pos.z + sp4C.z, &sp40);
+    Matrix_Scale(D_8091D39C, D_8091D39C, D_8091D39C, MAT_MUL);
+
+    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gDPSetPrimColor(POLY_XLU_DISP++, 0x80, 0x80, 200, 200, 180, sp48);
+    gDPSetEnvColor(POLY_XLU_DISP++, 200, 200, 210, 255);
+    gSPDisplayList(POLY_XLU_DISP++, (void*)GAMEPLAY_KEEP_DL_EFFECT_FLASH1);
+
+    CLOSE_DISPS();
+}
+
+void EnButte_Init(Actor_EnButte* this, GameState_Play* play)
+{
+    if (BUTTERFLY_GET(&this->actor) == BUTTERFLY_MINUS1)
+        this->actor.params = BUTTERFLY_0;
+
+    this->actor.world.rot.y = Rand_Next();
+    this->actor.home.rot.y = this->actor.world.rot.y;
+    this->actor.shape.rot.y = this->actor.world.rot.y;
+    Actor_ProcessInitChain(&this->actor, sInitChain);
+
+    if ((BUTTERFLY_GET_1(&this->actor) & 0xFF) == BUTTERFLY_1) {
+        this->actor.uncullZoneScale = 200.0f;
+    }
+
+    SkelAnime_Init(play, &this->skelAnime, (void*)GAMEPLAY_FIELD_KEEP_SKEL_BUTTERFLY, (void*)GAMEPLAY_FIELD_KEEP_ANIM_BUTTERFLY, this->jointTable, this->morphTable, 8);
+    Collider_InitJntSph(play, &this->collider);
+    Collider_SetJntSph(play, &this->collider, &this->actor, &sJntSphInit, this->colliderItems);
+
+    this->collider.elements[0].dim.worldSphere.radius =
+        this->collider.elements[0].dim.scale * this->collider.elements[0].dim.modelSphere.radius;
+
+    this->actor.colChkInfo.mass = 0;
+    this->unk_25C = Rand_ZeroOne() * 0xFFFF;
+    this->unk_25E = Rand_ZeroOne() * 0xFFFF;
+    this->unk_260 = Rand_ZeroOne() * 0xFFFF;
+
+    Animation_Change(&this->skelAnime, (void*)GAMEPLAY_FIELD_KEEP_ANIM_BUTTERFLY, 1.0f, 0.0f, 0.0f, ANIMMODE_LOOP_INTERP, 0.0f);
+    func_8091C748(this);
+    this->actor.shape.rot.x -= 0x2320;
+    this->drawSkelAnime = 1;
+}
+
+void EnButte_Destroy(Actor_EnButte* this, GameState_Play* play)
+{
+    Collider_DestroyJntSph(play, &this->collider);
+}
+
+void func_8091C524(Actor_EnButte* this) {
+    this->actor.shape.yOffset +=
+        (Math_SinS(this->unk_25C) * D_8091D3C0[this->flightParamsIdx]) + (Math_SinS(this->unk_25E) * D_8091D3CC[this->flightParamsIdx]);
+    this->actor.shape.yOffset = CLAMP(this->actor.shape.yOffset, -2000.0f, 2000.0f);
+}
+
+void func_8091C5EC(Actor_EnButte* this) {
+    this->actor.shape.yOffset +=
+        (Math_SinS(this->unk_25C) * D_8091D3D8[this->flightParamsIdx]) + (Math_SinS(this->unk_25E) * D_8091D3E4[this->flightParamsIdx]);
+    this->actor.shape.yOffset = CLAMP(this->actor.shape.yOffset, -500.0f, 500.0f);
+}
+
+void func_8091C6B4(Actor_EnButte* this) {
+    s16 temp_a1 = BINANG_ROT180(this->actor.world.rot.y);
+    s16 temp_v0 = temp_a1 - this->actor.shape.rot.y;
+
+    Math_ScaledStepToS(&this->actor.shape.rot.y, temp_a1, ABS_ALT(temp_v0) >> 3);
+    this->actor.shape.rot.x = TRUNCF_BINANG(Math_SinS(this->unk_260) * 600.0f) - 0x2320;
+}
+
+void func_8091C748(Actor_EnButte* this) {
+    func_8091C0A0(this, &D_8091D324[this->flightParamsIdx]);
+    this->actionFunc = func_8091C794;
+}
+
+void func_8091C794(Actor_EnButte* this, GameState_Play* play) {
+    EnButteStruct* sp4C = &D_8091D324[this->flightParamsIdx];
+    f32 distSq;
+    Actor_Player* player;
+    f32 distFromHomeSq = Math3D_Dist2DSq(this->actor.world.pos.x, this->actor.world.pos.z, this->actor.home.pos.x,
+                                         this->actor.home.pos.z);
+    f32 playSpeed;
+    f32 sp38;
+    s16 sp32;
+    s16 yaw;
+
+    player = GET_PLAYER(play);
+    func_8091C524(this);
+    Math_SmoothStepToF(&this->actor.speed, sp4C->unk_04, sp4C->unk_08, sp4C->unk_0C, 0.0f);
+
+    if (this->unk_257 == 1) {
+        distSq = SQ(100.0f);
+        sp32 = 0x3E8;
+    } else {
+        distSq = SQ(35.0f);
+        sp32 = 0x258;
+    }
+
+    sp38 = 0.0f;
+    this->posYTarget = this->actor.home.pos.y;
+
+    if ((this->flightParamsIdx != 0) && ((distSq < distFromHomeSq) || (this->timer < 4))) {
+        yaw = Math_Vec3f_Yaw(&this->actor.world.pos, &this->actor.home.pos);
+        if (!Math_ScaledStepToS(&this->actor.world.rot.y, yaw, sp4C->unk_10)) {
+            sp38 = 0.5f;
+        }
+    } else if ((this->unk_257 == 0) && (this->actor.child != NULL) && (&this->actor != this->actor.child)) {
+        yaw = Math_Vec3f_Yaw(&this->actor.world.pos, &this->actor.child->world.pos);
+        if (!Math_ScaledStepToS(&this->actor.world.rot.y, yaw, sp32)) {
+            sp38 = 0.3f;
+        }
+    } else if (this->unk_257 == 1) {
+        if (!Math_ScaledStepToS(&this->actor.world.rot.y,
+                                (s32)((Rand_ZeroOne() - 0.5f) * 0x6000) + this->actor.yawTowardsPlayer + 0x8000,
+                                sp32)) {
+            sp38 = 0.4f;
+        }
+    } else {
+        this->actor.world.rot.y += TRUNCF_BINANG(Math_SinS(this->unk_25C) * 100.0f);
+    }
+
+    func_8091C6B4(this);
+
+    playSpeed = (((this->actor.speed * 0.5f) + (Rand_ZeroOne() * 0.2f)) + ((1.0f - Math_SinS(this->unk_260)) * 0.15f)) +
+                ((1.0f - Math_SinS(this->unk_25E)) * 0.3f) + sp38;
+    this->skelAnime.playSpeed = CLAMP(playSpeed, 0.2f, 1.5f);
+
+    SkelAnime_Update(&this->skelAnime);
+
+    if (this->timer <= 0) {
+        func_8091C0A0(this, &D_8091D324[this->flightParamsIdx]);
+    }
+
+    if ((BUTTERFLY_GET_1(&this->actor) == BUTTERFLY_1) && (player->heldItemAction == PLAYER_IA_DEKU_STICK) &&
+        (this->swordDownTimer <= 0) &&
+        ((Math3D_Dist2DSq(player->actor.world.pos.x, player->actor.world.pos.z, this->actor.home.pos.x,
+                          this->actor.home.pos.z) < SQ(120.0f)) ||
+         (this->actor.xzDistToPlayer < 60.0f))) {
+        func_8091CB68(this);
+        this->unk_257 = 2;
+    } else if (this->actor.xzDistToPlayer < 120.0f) {
+        this->unk_257 = 1;
+    } else {
+        this->unk_257 = 0;
+    }
+}
+
+void func_8091CB68(Actor_EnButte* this) {
+    func_8091C0A0(this, &D_8091D360[this->flightParamsIdx]);
+    this->actionFunc = func_8091CBB4;
+}
+
+void func_8091CBB4(Actor_EnButte* this, GameState_Play* play)
+{
+    EnButteStruct* sp5C = &D_8091D360[this->flightParamsIdx];
+    Actor_Player* player;
+    f32 playSpeed;
+    Vec3f sp48;
+    f32 distSq;
+    f32 sp40;
+    s16 yaw;
+
+    player = GET_PLAYER(play);
+    func_8091C5EC(this);
+    Math_SmoothStepToF(&this->actor.speed, sp5C->unk_04, sp5C->unk_08, sp5C->unk_0C, 0.0f);
+    sp40 = 0.0f;
+
+    if ((this->flightParamsIdx != 0) && (this->timer < 12)) {
+        sp48.x = player->meleeWeaponInfo[0].tip.x + (Math_SinS(player->actor.shape.rot.y) * 10.0f);
+        sp48.y = player->meleeWeaponInfo[0].tip.y;
+        sp48.z = player->meleeWeaponInfo[0].tip.z + (Math_CosS(player->actor.shape.rot.y) * 10.0f);
+
+        yaw = Math_Vec3f_Yaw(&this->actor.world.pos, &sp48);
+        if (Math_ScaledStepToS(&this->actor.world.rot.y, yaw + (s32)(Rand_ZeroOne() * D_8091D3F0), 0x7D0)) {
+            if ((play->gameplayFrames & 0x30) == 0x30) {
+                this->actor.world.rot.y += TRUNCF_BINANG(Math_SinS(this->unk_25C) * 60.0f);
+            }
+        } else {
+            sp40 = 0.3f;
+        }
+    }
+
+    if (player->meleeWeaponInfo[0].tip.y < player->actor.world.pos.y + 30.0f) {
+        this->posYTarget = player->actor.world.pos.y + 30.0f;
+    } else {
+        this->posYTarget = player->meleeWeaponInfo[0].tip.y;
+    }
+
+    func_8091C6B4(this);
+
+    playSpeed = ((this->actor.speed * 0.5f) + (Rand_ZeroOne() * 0.2f) + ((1.0f - Math_SinS(this->unk_260)) * 0.15f)) +
+                ((1.0f - Math_SinS(this->unk_25E)) * 0.3f) + sp40;
+    this->skelAnime.playSpeed = CLAMP(playSpeed, 0.2f, 1.5f);
+    SkelAnime_Update(&this->skelAnime);
+
+    if (this->timer <= 0) {
+        func_8091C0A0(this, &D_8091D360[this->flightParamsIdx]);
+        D_8091D3F0 = -D_8091D3F0;
+    }
+
+    distSq = Math3D_Dist2DSq(this->actor.world.pos.x, this->actor.world.pos.z, this->actor.home.pos.x,
+                             this->actor.home.pos.z);
+    if ((player->heldItemAction != PLAYER_IA_DEKU_STICK) || !(fabsf(player->actor.speed) < 1.8f) ||
+        (this->swordDownTimer > 0) || !(distSq < SQ(320.0f))) {
+        func_8091C748(this);
+    } else if ((distSq > SQ(240.0f)) &&
+               (Math3D_Dist2DSq(player->meleeWeaponInfo[0].tip.x, player->meleeWeaponInfo[0].tip.z,
+                                this->actor.world.pos.x, this->actor.world.pos.z) < SQ(60.0f))) {
+        func_8091CF64(this);
+    }
+}
+
+void func_8091CF64(Actor_EnButte* this) {
+    this->timer = 9;
+    this->actor.flags |= ACTOR_FLAG_MM_10;
+    this->skelAnime.playSpeed = 1.0f;
+    func_8091C124();
+    this->actionFunc = func_8091CFB4;
+}
+
+void func_8091CFB4(Actor_EnButte* this, GameState_Play* play) {
+    SkelAnime_Update(&this->skelAnime);
+    func_8091C140();
+
+    if (this->timer == 5) {
+        SoundSource_PlaySfxAtFixedWorldPos(play, &this->actor.world.pos, 60, NA_SE_EV_BUTTERFRY_TO_FAIRY);
+    } else if (this->timer == 4) {
+        Actor_Spawn(&play->actorCtx, play, AC_EN_ELF, this->actor.focus.pos.x, this->actor.focus.pos.y,
+                    this->actor.focus.pos.z, 0, this->actor.shape.rot.y, 0, 0x0002);
+        this->drawSkelAnime = 0;
+    } else if (this->timer <= 0) {
+        func_8091D070(this);
+    }
+}
+
+void func_8091D070(Actor_EnButte* this) {
+    this->timer = 64;
+    this->actionFunc = func_8091D090;
+    this->actor.draw = NULL;
+}
+
+void func_8091D090(Actor_EnButte* this, GameState_Play* play) {
+    if (this->timer <= 0) {
+        Actor_Kill(&this->actor);
+    }
+}
+
+void EnButte_Update(Actor_EnButte* this, GameState_Play* play)
+{
+    if ((this->actor.child != NULL) && (this->actor.child->update == NULL) && (&this->actor != this->actor.child)) {
+        this->actor.child = NULL;
+    }
+
+    if (this->timer > 0) {
+        this->timer--;
+    }
+
+    this->unk_25C += 0x222;
+    this->unk_25E += 0x1000;
+    this->unk_260 += 0x600;
+
+    if (BUTTERFLY_GET_1(&this->actor) == BUTTERFLY_1) {
+        if (GET_PLAYER(play)->meleeWeaponState == 0) {
+            if (this->swordDownTimer > 0) {
+                this->swordDownTimer--;
+            }
+        } else {
+            this->swordDownTimer = 80;
+        }
+    }
+
+    this->actionFunc(this, play);
+
+    if (this->actor.update != NULL) {
+        Actor_MoveWithGravity(&this->actor);
+        Math_StepToF(&this->actor.world.pos.y, this->posYTarget, 0.6f);
+        if (this->actor.xyzDistToPlayerSq < 5000.0f) {
+            ColliderJntSphElement* element = &this->collider.elements[0];
+
+            element->dim.worldSphere.center.x = this->actor.world.pos.x;
+            element->dim.worldSphere.center.y = this->actor.world.pos.y;
+            element->dim.worldSphere.center.z = this->actor.world.pos.z;
+            CollisionCheck_SetOC(play, &play->colChkCtx, &this->collider.base);
+        }
+        Actor_SetFocus(&this->actor, this->actor.shape.yOffset * this->actor.scale.y);
+    }
+}
+
+void EnButte_Draw(Actor_EnButte* this, GameState_Play* play)
+{
+    if (this->drawSkelAnime != 0) {
+        Gfx_SetupDL25_Opa(play->gs.gfx);
+        SkelAnime_DrawOpa(play, this->skelAnime.skeleton, this->skelAnime.jointTable, NULL, NULL, NULL);
+    }
+
+    if ((BUTTERFLY_GET_1(&this->actor) == BUTTERFLY_1) && (this->actionFunc == func_8091CFB4))
+    {
+        func_8091C178(this, play);
+    }
+}
+
+static ActorInit EnButte_ActorInit =
+{
+    AC_EN_BUTTE,
+    ACTORCAT_ITEMACTION,
+    FLAGS,
+    OBJECT_GAMEPLAY_FIELD_KEEP,
+    sizeof(Actor_EnButte),
+    (ActorFunc)EnButte_Init,
+    (ActorFunc)EnButte_Destroy,
+    (ActorFunc)EnButte_Update,
+    (ActorFunc)EnButte_Draw,
+};
+
+OVL_ACTOR_INFO(AC_EN_BUTTE, EnButte_ActorInit);
+#endif
