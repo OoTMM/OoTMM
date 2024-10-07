@@ -8,12 +8,14 @@
 #define FLAGS 0x00000000
 
 #if defined(GAME_OOT)
+# define PLAYER_IA_DEKU_STICK                   0x06
 # define GAMEPLAY_KEEP_DL_EFFECT_FLASH1         0x040105d0
 # define GAMEPLAY_FIELD_KEEP_SKEL_BUTTERFLY     0x050036f0
 # define GAMEPLAY_FIELD_KEEP_ANIM_BUTTERFLY     0x05002470
 #endif
 
 #if defined(GAME_MM)
+# define PLAYER_IA_DEKU_STICK                   0x07
 # define GAMEPLAY_KEEP_DL_EFFECT_FLASH1         0x04023210
 # define GAMEPLAY_FIELD_KEEP_SKEL_BUTTERFLY     0x05002fa0
 # define GAMEPLAY_FIELD_KEEP_ANIM_BUTTERFLY     0x05001d20
@@ -262,7 +264,6 @@ void EnButte_SetupFlyAround(Actor_EnButte* this)
     this->actionFunc = EnButte_FlyAround;
 }
 
-#if defined(GAME_OOT)
 void EnButte_FlyAround(Actor_EnButte* this, GameState_Play* play)
 {
     EnButteFlightParams* flightParams = &sFlyAroundParams[this->flightParamsIdx];
@@ -320,7 +321,7 @@ void EnButte_FlyAround(Actor_EnButte* this, GameState_Play* play)
         EnButte_SelectFlightParams(this, &sFlyAroundParams[this->flightParamsIdx]);
     }
 
-    if (EnButte_CanTransform(this, play) && (player->heldItemAction == 0x06 /*PLAYER_IA_DEKU_STICK/*/) &&
+    if (EnButte_CanTransform(this, play) && (player->heldItemAction == PLAYER_IA_DEKU_STICK) &&
         (this->swordDownTimer <= 0) &&
         ((Math3D_Dist2DSq(player->actor.world.pos.x, player->actor.world.pos.z, this->actor.home.pos.x,
                           this->actor.home.pos.z) < SQ(120.0f)) ||
@@ -362,7 +363,12 @@ void EnButte_FollowLink(Actor_EnButte* this, GameState_Play* play) {
 
         yaw = Math_Vec3f_Yaw(&this->actor.world.pos, &swordTip) + (s16)(Rand_ZeroOne() * D_809CE410);
         if (Math_ScaledStepToS(&this->actor.world.rot.y, yaw, 2000) != 0) {
-            if (play->gameplayFrames % 2) {
+#if defined(GAME_OOT)
+            if (play->gameplayFrames % 2)
+#else
+            if ((play->gameplayFrames & 0x30) == 0x30)
+#endif
+            {
                 this->actor.world.rot.y += (s16)(sinf(this->unk_25C) * 60.0f);
             }
         } else {
@@ -374,7 +380,7 @@ void EnButte_FollowLink(Actor_EnButte* this, GameState_Play* play) {
 
     EnButte_Turn(this);
 
-    animSpeed = this->actor.speed / 2.0f + Rand_ZeroOne() * 0.2f + (1.0f - Math_SinS(this->unk_260)) * 0.15f +
+    animSpeed = this->actor.speed * 0.5f + Rand_ZeroOne() * 0.2f + (1.0f - Math_SinS(this->unk_260)) * 0.15f +
                 (1.0f - Math_SinS(this->unk_25E)) * 0.3f + minAnimSpeed;
     this->skelAnime.playSpeed = CLAMP(animSpeed, 0.2f, 1.5f);
     SkelAnime_Update(&this->skelAnime);
@@ -386,7 +392,7 @@ void EnButte_FollowLink(Actor_EnButte* this, GameState_Play* play) {
 
     distSqFromHome = Math3D_Dist2DSq(this->actor.world.pos.x, this->actor.world.pos.z, this->actor.home.pos.x,
                                      this->actor.home.pos.z);
-    if (!((player->heldItemAction == 0x06) && (fabsf(player->actor.speed) < 1.8f) &&
+    if (!((player->heldItemAction == PLAYER_IA_DEKU_STICK) && (fabsf(player->actor.speed) < 1.8f) &&
           (this->swordDownTimer <= 0) && (distSqFromHome < SQ(320.0f)))) {
         EnButte_SetupFlyAround(this);
     } else if (distSqFromHome > SQ(240.0f) || sQuickTransform) {
@@ -430,7 +436,6 @@ void EnButte_TransformIntoFairy(Actor_EnButte* this, GameState_Play* play)
         EnButte_SetupWaitToDie(this);
     }
 }
-#endif
 
 void EnButte_SetupWaitToDie(Actor_EnButte* this)
 {
@@ -495,170 +500,6 @@ void EnButte_Update(Actor_EnButte* this, GameState_Play* play)
         Actor_SetFocus(&this->actor, this->actor.shape.yOffset * this->actor.scale.y);
     }
 }
-
-#if defined(GAME_MM)
-static s32 D_8091D3F0 = 1500;
-
-void EnButte_FlyAround(Actor_EnButte* this, GameState_Play* play) {
-    EnButteFlightParams* flightParams = &sFlyAroundParams[this->flightParamsIdx];
-    f32 distSq;
-    Actor_Player* player;
-    f32 distFromHomeSq = Math3D_Dist2DSq(this->actor.world.pos.x, this->actor.world.pos.z, this->actor.home.pos.x,
-                                         this->actor.home.pos.z);
-    f32 playSpeed;
-    f32 sp38;
-    s16 sp32;
-    s16 yaw;
-
-    player = GET_PLAYER(play);
-    func_809CD56C(this);
-    Math_SmoothStepToF(&this->actor.speed, flightParams->speedXZTarget, flightParams->speedXZScale, flightParams->speedXZStep, 0.0f);
-
-    if (this->unk_257 == 1) {
-        distSq = SQ(100.0f);
-        sp32 = 0x3E8;
-    } else {
-        distSq = SQ(35.0f);
-        sp32 = 0x258;
-    }
-
-    sp38 = 0.0f;
-    this->posYTarget = this->actor.home.pos.y;
-
-    if ((this->flightParamsIdx != 0) && ((distSq < distFromHomeSq) || (this->timer < 4))) {
-        yaw = Math_Vec3f_Yaw(&this->actor.world.pos, &this->actor.home.pos);
-        if (!Math_ScaledStepToS(&this->actor.world.rot.y, yaw, flightParams->rotYStep)) {
-            sp38 = 0.5f;
-        }
-    } else if ((this->unk_257 == 0) && (this->actor.child != NULL) && (&this->actor != this->actor.child)) {
-        yaw = Math_Vec3f_Yaw(&this->actor.world.pos, &this->actor.child->world.pos);
-        if (!Math_ScaledStepToS(&this->actor.world.rot.y, yaw, sp32)) {
-            sp38 = 0.3f;
-        }
-    } else if (this->unk_257 == 1) {
-        if (!Math_ScaledStepToS(&this->actor.world.rot.y,
-                                (s32)((Rand_ZeroOne() - 0.5f) * 0x6000) + this->actor.yawTowardsPlayer + 0x8000,
-                                sp32)) {
-            sp38 = 0.4f;
-        }
-    } else {
-        this->actor.world.rot.y += TRUNCF_BINANG(Math_SinS(this->unk_25C) * 100.0f);
-    }
-
-    EnButte_Turn(this);
-
-    playSpeed = (((this->actor.speed * 0.5f) + (Rand_ZeroOne() * 0.2f)) + ((1.0f - Math_SinS(this->unk_260)) * 0.15f)) +
-                ((1.0f - Math_SinS(this->unk_25E)) * 0.3f) + sp38;
-    this->skelAnime.playSpeed = CLAMP(playSpeed, 0.2f, 1.5f);
-
-    SkelAnime_Update(&this->skelAnime);
-
-    if (this->timer <= 0) {
-        EnButte_SelectFlightParams(this, &sFlyAroundParams[this->flightParamsIdx]);
-    }
-
-    if ((BUTTERFLY_GET_1(&this->actor) == BUTTERFLY_1) && (player->heldItemAction == PLAYER_IA_DEKU_STICK) &&
-        (this->swordDownTimer <= 0) &&
-        ((Math3D_Dist2DSq(player->actor.world.pos.x, player->actor.world.pos.z, this->actor.home.pos.x,
-                          this->actor.home.pos.z) < SQ(120.0f)) ||
-         (this->actor.xzDistToPlayer < 60.0f))) {
-        EnButte_SetupFollowLink(this);
-        this->unk_257 = 2;
-    } else if (this->actor.xzDistToPlayer < 120.0f) {
-        this->unk_257 = 1;
-    } else {
-        this->unk_257 = 0;
-    }
-}
-
-void EnButte_SetupFollowLink(Actor_EnButte* this) {
-    EnButte_SelectFlightParams(this, &sFollowLinkParams[this->flightParamsIdx]);
-    this->actionFunc = EnButte_FollowLink;
-}
-
-void EnButte_FollowLink(Actor_EnButte* this, GameState_Play* play)
-{
-    EnButteFlightParams* flightParams = &sFollowLinkParams[this->flightParamsIdx];
-    Actor_Player* player;
-    f32 playSpeed;
-    Vec3f sp48;
-    f32 distSq;
-    f32 sp40;
-    s16 yaw;
-
-    player = GET_PLAYER(play);
-    func_809CD634(this);
-    Math_SmoothStepToF(&this->actor.speed, flightParams->speedXZTarget, flightParams->speedXZScale, flightParams->speedXZStep, 0.0f);
-    sp40 = 0.0f;
-
-    if ((this->flightParamsIdx != 0) && (this->timer < 12)) {
-        sp48.x = player->meleeWeaponInfo[0].tip.x + (Math_SinS(player->actor.shape.rot.y) * 10.0f);
-        sp48.y = player->meleeWeaponInfo[0].tip.y;
-        sp48.z = player->meleeWeaponInfo[0].tip.z + (Math_CosS(player->actor.shape.rot.y) * 10.0f);
-
-        yaw = Math_Vec3f_Yaw(&this->actor.world.pos, &sp48);
-        if (Math_ScaledStepToS(&this->actor.world.rot.y, yaw + (s32)(Rand_ZeroOne() * D_8091D3F0), 0x7D0)) {
-            if ((play->gameplayFrames & 0x30) == 0x30) {
-                this->actor.world.rot.y += TRUNCF_BINANG(Math_SinS(this->unk_25C) * 60.0f);
-            }
-        } else {
-            sp40 = 0.3f;
-        }
-    }
-
-    if (player->meleeWeaponInfo[0].tip.y < player->actor.world.pos.y + 30.0f) {
-        this->posYTarget = player->actor.world.pos.y + 30.0f;
-    } else {
-        this->posYTarget = player->meleeWeaponInfo[0].tip.y;
-    }
-
-    EnButte_Turn(this);
-
-    playSpeed = ((this->actor.speed * 0.5f) + (Rand_ZeroOne() * 0.2f) + ((1.0f - Math_SinS(this->unk_260)) * 0.15f)) +
-                ((1.0f - Math_SinS(this->unk_25E)) * 0.3f) + sp40;
-    this->skelAnime.playSpeed = CLAMP(playSpeed, 0.2f, 1.5f);
-    SkelAnime_Update(&this->skelAnime);
-
-    if (this->timer <= 0) {
-        EnButte_SelectFlightParams(this, &sFollowLinkParams[this->flightParamsIdx]);
-        D_8091D3F0 = -D_8091D3F0;
-    }
-
-    distSq = Math3D_Dist2DSq(this->actor.world.pos.x, this->actor.world.pos.z, this->actor.home.pos.x,
-                             this->actor.home.pos.z);
-    if ((player->heldItemAction != PLAYER_IA_DEKU_STICK) || !(fabsf(player->actor.speed) < 1.8f) ||
-        (this->swordDownTimer > 0) || !(distSq < SQ(320.0f))) {
-        EnButte_SetupFlyAround(this);
-    } else if ((distSq > SQ(240.0f)) &&
-               (Math3D_Dist2DSq(player->meleeWeaponInfo[0].tip.x, player->meleeWeaponInfo[0].tip.z,
-                                this->actor.world.pos.x, this->actor.world.pos.z) < SQ(60.0f))) {
-        EnButte_SetupTransformIntoFairy(this);
-    }
-}
-
-void EnButte_SetupTransformIntoFairy(Actor_EnButte* this) {
-    this->timer = 9;
-    this->actor.flags |= ACTOR_FLAG_MM_10;
-    this->skelAnime.playSpeed = 1.0f;
-    EnButte_ResetTransformationEffect();
-    this->actionFunc = EnButte_TransformIntoFairy;
-}
-
-void EnButte_TransformIntoFairy(Actor_EnButte* this, GameState_Play* play) {
-    SkelAnime_Update(&this->skelAnime);
-    EnButte_UpdateTransformationEffect();
-
-    if (this->timer == 5) {
-        SoundSource_PlaySfxAtFixedWorldPos(play, &this->actor.world.pos, 60, NA_SE_EV_BUTTERFRY_TO_FAIRY);
-    } else if (this->timer == 4) {
-        Actor_Spawn(&play->actorCtx, play, AC_EN_ELF, this->actor.focus.pos.x, this->actor.focus.pos.y,
-                    this->actor.focus.pos.z, 0, this->actor.shape.rot.y, 0, 0x0002);
-        this->drawSkelAnime = 0;
-    } else if (this->timer <= 0) {
-        EnButte_SetupWaitToDie(this);
-    }
-}
-#endif
 
 static const Gfx kLoadTextureDefault[] =
 {
