@@ -229,38 +229,40 @@ void EnButte_Destroy(Actor_EnButte* this, GameState_Play* play)
     Collider_DestroyJntSph(play, &this->collider);
 }
 
-#if defined(GAME_OOT)
-void func_809CD56C(Actor_EnButte* this) {
+void func_809CD56C(Actor_EnButte* this)
+{
     static f32 D_809CE3E0[] = { 50.0f, 80.0f, 100.0f };
     static f32 D_809CE3EC[] = { 30.0f, 40.0f, 50.0f };
 
-    this->actor.shape.yOffset += Math_SinS(this->unk_25C) * D_809CE3E0[this->flightParamsIdx] +
-                                 Math_SinS(this->unk_25E) * D_809CE3EC[this->flightParamsIdx];
+    this->actor.shape.yOffset += Math_SinS(this->unk_25C) * D_809CE3E0[this->flightParamsIdx] + Math_SinS(this->unk_25E) * D_809CE3EC[this->flightParamsIdx];
     this->actor.shape.yOffset = CLAMP(this->actor.shape.yOffset, -2000.0f, 2000.0f);
 }
 
-void func_809CD634(Actor_EnButte* this) {
+void func_809CD634(Actor_EnButte* this)
+{
     static f32 D_809CE3F8[] = { 15.0f, 20.0f, 25.0f };
     static f32 D_809CE404[] = { 7.5f, 10.0f, 12.5f };
 
-    this->actor.shape.yOffset += Math_SinS(this->unk_25C) * D_809CE3F8[this->flightParamsIdx] +
-                                 Math_SinS(this->unk_25E) * D_809CE404[this->flightParamsIdx];
+    this->actor.shape.yOffset += Math_SinS(this->unk_25C) * D_809CE3F8[this->flightParamsIdx] + Math_SinS(this->unk_25E) * D_809CE404[this->flightParamsIdx];
     this->actor.shape.yOffset = CLAMP(this->actor.shape.yOffset, -500.0f, 500.0f);
 }
 
-void EnButte_Turn(Actor_EnButte* this) {
-    s16 target = this->actor.world.rot.y + 0x8000;
+void EnButte_Turn(Actor_EnButte* this)
+{
+    s16 target = BINANG_ROT180(this->actor.world.rot.y);
     s16 diff = target - this->actor.shape.rot.y;
 
     Math_ScaledStepToS(&this->actor.shape.rot.y, target, ABS(diff) >> 3);
     this->actor.shape.rot.x = (s16)(sinf(this->unk_260) * 600.0f) - 0x2320;
 }
 
-void EnButte_SetupFlyAround(Actor_EnButte* this) {
+void EnButte_SetupFlyAround(Actor_EnButte* this)
+{
     EnButte_SelectFlightParams(this, &sFlyAroundParams[this->flightParamsIdx]);
     this->actionFunc = EnButte_FlyAround;
 }
 
+#if defined(GAME_OOT)
 void EnButte_FlyAround(Actor_EnButte* this, GameState_Play* play)
 {
     EnButteFlightParams* flightParams = &sFlyAroundParams[this->flightParamsIdx];
@@ -440,6 +442,7 @@ void EnButte_WaitToDie(Actor_EnButte* this, GameState_Play* play) {
         Actor_Kill(&this->actor);
     }
 }
+#endif
 
 void EnButte_Update(Actor_EnButte* this, GameState_Play* play)
 {
@@ -457,7 +460,8 @@ void EnButte_Update(Actor_EnButte* this, GameState_Play* play)
     this->unk_25E += 0x1000;
     this->unk_260 += 0x600;
 
-    if (EnButte_CanTransform(this, play)) {
+    if (EnButte_CanTransform(this, play))
+    {
         if (GET_PLAYER(play)->meleeWeaponState == 0) {
             if (this->swordDownTimer > 0) {
                 if (sQuickTransform)
@@ -472,16 +476,24 @@ void EnButte_Update(Actor_EnButte* this, GameState_Play* play)
 
     this->actionFunc(this, play);
 
-    if (this->actor.update != NULL) {
+    if (this->actor.update != NULL)
+    {
         Actor_MoveWithGravity(&this->actor);
         Math_StepToF(&this->actor.world.pos.y, this->posYTarget, 0.6f);
-        if (this->actor.xyzDistToPlayerSq < 5000.0f) {
+        if (this->actor.xyzDistToPlayerSq < 5000.0f)
+        {
+#if defined(GAME_MM)
+            ColliderJntSphElement* element = &this->collider.elements[0];
+
+            element->dim.worldSphere.center.x = this->actor.world.pos.x;
+            element->dim.worldSphere.center.y = this->actor.world.pos.y;
+            element->dim.worldSphere.center.z = this->actor.world.pos.z;
+#endif
             CollisionCheck_SetOC(play, &play->colChkCtx, &this->collider.base);
         }
         Actor_SetFocus(&this->actor, this->actor.shape.yOffset * this->actor.scale.y);
     }
 }
-#endif
 
 #if defined(GAME_MM)
 f32 D_8091D3C0[] = { 50.0f, 80.0f, 100.0f };
@@ -493,31 +505,6 @@ f32 D_8091D3D8[] = { 15.0f, 20.0f, 25.0f };
 f32 D_8091D3E4[] = { 7.5f, 10.0f, 12.5f };
 
 s32 D_8091D3F0 = 1500;
-
-void func_8091C524(Actor_EnButte* this) {
-    this->actor.shape.yOffset +=
-        (Math_SinS(this->unk_25C) * D_8091D3C0[this->flightParamsIdx]) + (Math_SinS(this->unk_25E) * D_8091D3CC[this->flightParamsIdx]);
-    this->actor.shape.yOffset = CLAMP(this->actor.shape.yOffset, -2000.0f, 2000.0f);
-}
-
-void func_8091C5EC(Actor_EnButte* this) {
-    this->actor.shape.yOffset +=
-        (Math_SinS(this->unk_25C) * D_8091D3D8[this->flightParamsIdx]) + (Math_SinS(this->unk_25E) * D_8091D3E4[this->flightParamsIdx]);
-    this->actor.shape.yOffset = CLAMP(this->actor.shape.yOffset, -500.0f, 500.0f);
-}
-
-void func_8091C6B4(Actor_EnButte* this) {
-    s16 temp_a1 = BINANG_ROT180(this->actor.world.rot.y);
-    s16 temp_v0 = temp_a1 - this->actor.shape.rot.y;
-
-    Math_ScaledStepToS(&this->actor.shape.rot.y, temp_a1, ABS_ALT(temp_v0) >> 3);
-    this->actor.shape.rot.x = TRUNCF_BINANG(Math_SinS(this->unk_260) * 600.0f) - 0x2320;
-}
-
-void EnButte_SetupFlyAround(Actor_EnButte* this) {
-    EnButte_SelectFlightParams(this, &sFlyAroundParams[this->flightParamsIdx]);
-    this->actionFunc = EnButte_FlyAround;
-}
 
 void EnButte_FlyAround(Actor_EnButte* this, GameState_Play* play) {
     EnButteFlightParams* flightParams = &sFlyAroundParams[this->flightParamsIdx];
@@ -531,7 +518,7 @@ void EnButte_FlyAround(Actor_EnButte* this, GameState_Play* play) {
     s16 yaw;
 
     player = GET_PLAYER(play);
-    func_8091C524(this);
+    func_809CD56C(this);
     Math_SmoothStepToF(&this->actor.speed, flightParams->speedXZTarget, flightParams->speedXZScale, flightParams->speedXZStep, 0.0f);
 
     if (this->unk_257 == 1) {
@@ -565,7 +552,7 @@ void EnButte_FlyAround(Actor_EnButte* this, GameState_Play* play) {
         this->actor.world.rot.y += TRUNCF_BINANG(Math_SinS(this->unk_25C) * 100.0f);
     }
 
-    func_8091C6B4(this);
+    EnButte_Turn(this);
 
     playSpeed = (((this->actor.speed * 0.5f) + (Rand_ZeroOne() * 0.2f)) + ((1.0f - Math_SinS(this->unk_260)) * 0.15f)) +
                 ((1.0f - Math_SinS(this->unk_25E)) * 0.3f) + sp38;
@@ -607,7 +594,7 @@ void EnButte_FollowLink(Actor_EnButte* this, GameState_Play* play)
     s16 yaw;
 
     player = GET_PLAYER(play);
-    func_8091C5EC(this);
+    func_809CD634(this);
     Math_SmoothStepToF(&this->actor.speed, flightParams->speedXZTarget, flightParams->speedXZScale, flightParams->speedXZStep, 0.0f);
     sp40 = 0.0f;
 
@@ -632,7 +619,7 @@ void EnButte_FollowLink(Actor_EnButte* this, GameState_Play* play)
         this->posYTarget = player->meleeWeaponInfo[0].tip.y;
     }
 
-    func_8091C6B4(this);
+    EnButte_Turn(this);
 
     playSpeed = ((this->actor.speed * 0.5f) + (Rand_ZeroOne() * 0.2f) + ((1.0f - Math_SinS(this->unk_260)) * 0.15f)) +
                 ((1.0f - Math_SinS(this->unk_25E)) * 0.3f) + sp40;
@@ -688,47 +675,6 @@ void EnButte_SetupWaitToDie(Actor_EnButte* this) {
 void EnButte_WaitToDie(Actor_EnButte* this, GameState_Play* play) {
     if (this->timer <= 0) {
         Actor_Kill(&this->actor);
-    }
-}
-
-void EnButte_Update(Actor_EnButte* this, GameState_Play* play)
-{
-    if ((this->actor.child != NULL) && (this->actor.child->update == NULL) && (&this->actor != this->actor.child)) {
-        this->actor.child = NULL;
-    }
-
-    if (this->timer > 0) {
-        this->timer--;
-    }
-
-    this->unk_25C += 0x222;
-    this->unk_25E += 0x1000;
-    this->unk_260 += 0x600;
-
-    if (BUTTERFLY_GET_1(&this->actor) == BUTTERFLY_1) {
-        if (GET_PLAYER(play)->meleeWeaponState == 0) {
-            if (this->swordDownTimer > 0) {
-                this->swordDownTimer--;
-            }
-        } else {
-            this->swordDownTimer = 80;
-        }
-    }
-
-    this->actionFunc(this, play);
-
-    if (this->actor.update != NULL) {
-        Actor_MoveWithGravity(&this->actor);
-        Math_StepToF(&this->actor.world.pos.y, this->posYTarget, 0.6f);
-        if (this->actor.xyzDistToPlayerSq < 5000.0f) {
-            ColliderJntSphElement* element = &this->collider.elements[0];
-
-            element->dim.worldSphere.center.x = this->actor.world.pos.x;
-            element->dim.worldSphere.center.y = this->actor.world.pos.y;
-            element->dim.worldSphere.center.z = this->actor.world.pos.z;
-            CollisionCheck_SetOC(play, &play->colChkCtx, &this->collider.base);
-        }
-        Actor_SetFocus(&this->actor, this->actor.shape.yOffset * this->actor.scale.y);
     }
 }
 #endif
