@@ -209,6 +209,7 @@ const ACTOR_SLICES_MM = {
   [ACTORS_MM.OBJ_MURE3]: 7,
   [ACTORS_MM.EN_HIT_TAG]: 3,
   [ACTORS_MM.OBJ_FLOWERPOT]: 2,
+  [ACTORS_MM.OBJ_MURE]: 5,
 }
 
 const INTERESTING_ACTORS_OOT = Object.values(ACTORS_OOT);
@@ -1375,7 +1376,22 @@ function actorHandlerMmEnButte(checks: Check[], ra: RoomActor) {
 }
 
 function actorHandlerOotObjMure(checks: Check[], ra: RoomActor) {
-  const svNum = (ra.actor.params >> 5) & 3;
+  const subtype = ra.actor.params & 0x1f;
+  let count = (ra.actor.params >> 12);
+  if (count === 0) {
+    const lut = [12, 9, 8];
+    const id = (ra.actor.params >> 8) & 3;
+    count = id < lut.length ? lut[id] : 0;
+  }
+  for (let i = 0; i < count; ++i) {
+    if (subtype === 0x04) {
+      const item = (i === 0) ? 'FAIRY' : 'NOTHING';
+      checks.push({ roomActor: ra, item, name: 'Butterfly Pack', type: 'butterfly', sliceId: i, name2: `Butterfly ${i + 1}` });
+    }
+  }
+}
+
+function actorHandlerMmObjMure(checks: Check[], ra: RoomActor) {
   const subtype = ra.actor.params & 0x1f;
   let count = (ra.actor.params >> 12);
   if (count === 0) {
@@ -1451,6 +1467,7 @@ const ACTORS_HANDLERS_MM = {
   [ACTORS_MM.OBJ_SNOWBALL]: actorHandlerMmObjSnowball,
   [ACTORS_MM.OBJ_SNOWBALL2]: actorHandlerMmObjSnowball2,
   [ACTORS_MM.EN_BUTTE]: actorHandlerMmEnButte,
+  [ACTORS_MM.OBJ_MURE]: actorHandlerMmObjMure,
 };
 
 const ACTORS_HANDLERS = {
