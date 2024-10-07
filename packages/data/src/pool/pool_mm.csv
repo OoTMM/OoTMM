@@ -2443,6 +2443,19 @@ Moon Trial Link Pot 5,                                  pot,            NONE,   
 Moon Trial Link Pot 6,                                  pot,            NONE,                   MOON_LINK,                    0x0006,                     MAGIC_JAR_LARGE
 Moon Trial Link Pot 7,                                  pot,            NONE,                   MOON_LINK,                    0x0007,                     MAGIC_JAR_LARGE
 Moon Trial Link Pot 8,                                  pot,            NONE,                   MOON_LINK,                    0x0008,                     MAGIC_JAR_LARGE
-Moon Fierce Deity Mask,                                 npc,            NONE,                   MOON_LINK,                    MASK_FIERCE_DEITY,          MASK_FIERCE_DEITY
+Moon Fierce Deity Mask,                                 npc,            NONE,                   MOON,                         MASK_FIERCE_DEITY,          MASK_FIERCE_DEITY
+Moon Butterfly 01,                                      butterfly,      NONE,                   MOON,                         0x00005,                    FAIRY
+Moon Butterfly 02,                                      butterfly,      NONE,                   MOON,                         0x00006,                    FAIRY
+Moon Butterfly 03,                                      butterfly,      NONE,                   MOON,                         0x00007,                    FAIRY
+Moon Butterfly 04,                                      butterfly,      NONE,                   MOON,                         0x00008,                    FAIRY
+Moon Butterfly 05,                                      butterfly,      NONE,                   MOON,                         0x00009,                    NOTHING
+Moon Butterfly 06,                                      butterfly,      NONE,                   MOON,                         0x0000a,                    FAIRY
+Moon Butterfly 07,                                      butterfly,      NONE,                   MOON,                         0x0000b,                    FAIRY
+Moon Butterfly 08,                                      butterfly,      NONE,                   MOON,                         0x0000c,                    FAIRY
+Moon Butterfly 09,                                      butterfly,      NONE,                   MOON,                         0x0000d,                    FAIRY
+Moon Butterfly 10,                                      butterfly,      NONE,                   MOON,                         0x0000e,                    FAIRY
+Moon Butterfly 11,                                      butterfly,      NONE,                   MOON,                         0x0000f,                    FAIRY
+Moon Butterfly 12,                                      butterfly,      NONE,                   MOON,                         0x00010,                    FAIRY
+Moon Butterfly 13,                                      butterfly,      NONE,                   MOON,                         0x00011,                    FAIRY
 Moon Majora Pot 1,                                      pot,            NONE,                   LAIR_MAJORA,                  0x0001,                     ARROWS_20
 Moon Majora Pot 2,                                      pot,            NONE,                   LAIR_MAJORA,                  0x0002,                     MAGIC_JAR_LARGE

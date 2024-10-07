@@ -12,6 +12,7 @@
 # define GAMEPLAY_KEEP_DL_EFFECT_FLASH1         0x040105d0
 # define GAMEPLAY_FIELD_KEEP_SKEL_BUTTERFLY     0x050036f0
 # define GAMEPLAY_FIELD_KEEP_ANIM_BUTTERFLY     0x05002470
+# define GAMEPLAY_FIELD_KEEP_TEX_BUTTERFLY      0x05002680
 #endif
 
 #if defined(GAME_MM)
@@ -19,6 +20,7 @@
 # define GAMEPLAY_KEEP_DL_EFFECT_FLASH1         0x04023210
 # define GAMEPLAY_FIELD_KEEP_SKEL_BUTTERFLY     0x05002fa0
 # define GAMEPLAY_FIELD_KEEP_ANIM_BUTTERFLY     0x05001d20
+# define GAMEPLAY_FIELD_KEEP_TEX_BUTTERFLY      0x05001f30
 #endif
 
 void EnButte_Init(Actor_EnButte* this, GameState_Play* play);
@@ -503,7 +505,7 @@ void EnButte_Update(Actor_EnButte* this, GameState_Play* play)
 
 static const Gfx kLoadTextureDefault[] =
 {
-    gsDPLoadTextureBlock(0x05002680, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 5, 6, 0, 0),
+    gsDPLoadTextureBlock(GAMEPLAY_FIELD_KEEP_TEX_BUTTERFLY, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 5, 6, 0, 0),
     gsSPEndDisplayList(),
 };
 

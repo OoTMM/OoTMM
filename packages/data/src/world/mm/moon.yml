@@ -21,9 +21,26 @@
     "Moon Trial Goron Entrance": "soul_npc(SOUL_NPC_MOON_CHILDREN) && can_reset_time_on_moon && masks(2)"
     "Moon Trial Zora": "soul_npc(SOUL_NPC_MOON_CHILDREN) && can_reset_time_on_moon && masks(3)"
     "Moon Trial Link Entrance": "soul_npc(SOUL_NPC_MOON_CHILDREN) && can_reset_time_on_moon && masks(4)"
+    "Moon Butterflies": "has_sticks"
     "Moon Boss": "soul_npc(SOUL_NPC_MOON_CHILDREN) && (setting(majoraChild, none) || (setting(majoraChild, custom) && special(MAJORA)))"
   locations:
     "Moon Fierce Deity Mask": "soul_npc(SOUL_NPC_MOON_CHILDREN) && can_reset_time_on_moon && masks(20) && event(MOON_TRIAL_DEKU) && event(MOON_TRIAL_GORON) && event(MOON_TRIAL_ZORA) && event(MOON_TRIAL_LINK)"
+"Moon Butterflies":
+  region: MOON
+  locations:
+    "Moon Butterfly 01": "true"
+    "Moon Butterfly 02": "true"
+    "Moon Butterfly 03": "true"
+    "Moon Butterfly 04": "true"
+    "Moon Butterfly 05": "true"
+    "Moon Butterfly 06": "true"
+    "Moon Butterfly 07": "true"
+    "Moon Butterfly 08": "true"
+    "Moon Butterfly 09": "true"
+    "Moon Butterfly 10": "true"
+    "Moon Butterfly 11": "true"
+    "Moon Butterfly 12": "true"
+    "Moon Butterfly 13": "true"
 "Moon Trial Deku Entrance":
   region: MOON
   exits:
