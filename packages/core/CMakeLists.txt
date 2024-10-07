@@ -159,6 +159,7 @@ add_actor(oot Obj_Tsubo   "oot/ovl/actors/Obj_Tsubo/Obj_Tsubo.c")
 add_actor(oot En_Mag      "oot/ovl/actors/En_Mag/En_Mag.c")
 
 add_actor(mm Boss_01            "mm/ovl/actors/Boss_01/Boss_01.c")
+add_actor(mm Obj_Mure           "mm/ovl/actors/Obj_Mure/Obj_Mure.c")
 add_actor(mm Obj_Tsubo          "mm/ovl/actors/Obj_Tsubo/Obj_Tsubo.c")
 add_actor(mm Obj_Taru           "mm/ovl/actors/Obj_Taru/Obj_Taru.c")
 add_actor(mm Obj_Flowerpot      "mm/ovl/actors/Obj_Flowerpot/Obj_Flowerpot.c")
