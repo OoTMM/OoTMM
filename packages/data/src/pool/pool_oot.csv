@@ -50,6 +50,9 @@ Kokiri Forest Storms Grotto Grass 3,                        grass,          NONE
 Kokiri Forest Storms Grotto Grass 4,                        grass,          NONE,                 GROTTOS,                        0x02c05,                    RANDOM
 Kokiri Forest Storms Grotto Hive 1,                         hive,           NONE,                 GROTTOS,                        0x02c07,                    RUPEE_BLUE
 Kokiri Forest Storms Grotto Hive 2,                         hive,           NONE,                 GROTTOS,                        0x02c08,                    RUPEE_RED
+Kokiri Forest Storms Grotto Butterfly 1,                    butterfly,      NONE,                 GROTTOS,                        0x02c06,                    FAIRY
+Kokiri Forest Storms Grotto Butterfly 2,                    butterfly,      NONE,                 GROTTOS,                        0x12c06,                    NOTHING
+Kokiri Forest Storms Grotto Butterfly 3,                    butterfly,      NONE,                 GROTTOS,                        0x22c06,                    NOTHING
 Kokiri Forest Rupee Child 1,                                rupee,          NONE,                 KOKIRI_FOREST,                  0x00005,                    RUPEE_BLUE
 Kokiri Forest Rupee Child 2,                                rupee,          NONE,                 KOKIRI_FOREST,                  0x00006,                    RUPEE_BLUE
 Kokiri Forest Rupee Crawl 1,                                rupee,          NONE,                 KOKIRI_FOREST,                  0x00200,                    RUPEE_BLUE
@@ -123,6 +126,9 @@ Lost Woods Grotto Generic Grass 3,                          grass,          NONE
 Lost Woods Grotto Generic Grass 4,                          grass,          NONE,                 GROTTOS,                        0x03405,                    RANDOM
 Lost Woods Grotto Generic Hive 1,                           hive,           NONE,                 GROTTOS,                        0x03407,                    RUPEE_BLUE
 Lost Woods Grotto Generic Hive 2,                           hive,           NONE,                 GROTTOS,                        0x03408,                    RUPEE_RED
+Lost Woods Grotto Generic Butterfly 1,                      butterfly,      NONE,                 GROTTOS,                        0x03406,                    FAIRY
+Lost Woods Grotto Generic Butterfly 2,                      butterfly,      NONE,                 GROTTOS,                        0x13406,                    NOTHING
+Lost Woods Grotto Generic Butterfly 3,                      butterfly,      NONE,                 GROTTOS,                        0x23406,                    NOTHING
 Lost Woods GS Soil Bridge,                                  gs,             NONE,                 LOST_WOODS,                     0x70,                       GS_TOKEN
 Lost Woods GS Soil Theater,                                 gs,             NONE,                 LOST_WOODS,                     0x71,                       GS_TOKEN
 Lost Woods GS Bean Ride,                                    gs,             NONE,                 LOST_WOODS,                     0x72,                       GS_TOKEN
@@ -183,6 +189,9 @@ Kakariko Grotto Back Grass 3,                               grass,          NONE
 Kakariko Grotto Back Grass 4,                               grass,          NONE,                 GROTTOS,                        0x02805,                    RANDOM
 Kakariko Grotto Back Hive 1,                                hive,           NONE,                 GROTTOS,                        0x02807,                    RUPEE_BLUE
 Kakariko Grotto Back Hive 2,                                hive,           NONE,                 GROTTOS,                        0x02808,                    RUPEE_RED
+Kakariko Grotto Butterfly 1,                                butterfly,      NONE,                 GROTTOS,                        0x02806,                    FAIRY
+Kakariko Grotto Butterfly 2,                                butterfly,      NONE,                 GROTTOS,                        0x12806,                    NOTHING
+Kakariko Grotto Butterfly 3,                                butterfly,      NONE,                 GROTTOS,                        0x22806,                    NOTHING
 Kakariko GS Roof,                                           gs,             NONE,                 KAKARIKO_VILLAGE,               0x8e,                       GS_TOKEN
 Kakariko GS Shooting Gallery,                               gs,             NONE,                 KAKARIKO_VILLAGE,               0x8b,                       GS_TOKEN
 Kakariko GS Tree,                                           gs,             NONE,                 KAKARIKO_VILLAGE,               0x8d,                       GS_TOKEN
@@ -324,6 +333,9 @@ Death Mountain Trail Grotto Grass 3,                        grass,          NONE
 Death Mountain Trail Grotto Grass 4,                        grass,          NONE,                 GROTTOS,                        0x03705,                    RANDOM
 Death Mountain Trail Grotto Hive 1,                         hive,           NONE,                 GROTTOS,                        0x03707,                    RUPEE_BLUE
 Death Mountain Trail Grotto Hive 2,                         hive,           NONE,                 GROTTOS,                        0x03708,                    RUPEE_RED
+Death Mountain Trail Grotto Butterfly 1,                    butterfly,      NONE,                 GROTTOS,                        0x03706,                    FAIRY
+Death Mountain Trail Grotto Butterfly 2,                    butterfly,      NONE,                 GROTTOS,                        0x13706,                    NOTHING
+Death Mountain Trail Grotto Butterfly 3,                    butterfly,      NONE,                 GROTTOS,                        0x23706,                    NOTHING
 Death Mountain Trail GS Entrance,                           gs,             NONE,                 DEATH_MOUNTAIN_TRAIL,           0x82,                       GS_TOKEN
 Death Mountain Trail GS Soil,                               gs,             NONE,                 DEATH_MOUNTAIN_TRAIL,           0x81,                       GS_TOKEN
 Death Mountain Trail GS Above Dodongo,                      gs,             NONE,                 DEATH_MOUNTAIN_TRAIL,           0x83,                       GS_TOKEN
@@ -388,6 +400,9 @@ Death Mountain Crater Grotto Grass 3,                       grass,          NONE
 Death Mountain Crater Grotto Grass 4,                       grass,          NONE,                 GROTTOS,                        0x03a05,                    RANDOM
 Death Mountain Crater Grotto Hive 1,                        hive,           NONE,                 GROTTOS,                        0x03a07,                    RUPEE_BLUE
 Death Mountain Crater Grotto Hive 2,                        hive,           NONE,                 GROTTOS,                        0x03a08,                    RUPEE_RED
+Death Mountain Crater Grotto Butterfly 1,                   butterfly,      NONE,                 GROTTOS,                        0x03a06,                    FAIRY
+Death Mountain Crater Grotto Butterfly 2,                   butterfly,      NONE,                 GROTTOS,                        0x13a06,                    NOTHING
+Death Mountain Crater Grotto Butterfly 3,                   butterfly,      NONE,                 GROTTOS,                        0x23a06,                    NOTHING
 Death Mountain Crater Scrub Child,                          scrub,          DMC_SCRUB,            DEATH_MOUNTAIN_CRATER,          0x0e,                       BOMBS_5
 Death Mountain Crater Grotto Left Scrub,                    scrub,          NONE,                 GROTTOS,                        0x0f,                       NUTS_5
 Death Mountain Crater Grotto Center Scrub,                  scrub,          NONE,                 GROTTOS,                        0x10,                       DEKU_SEEDS_30
@@ -426,6 +441,9 @@ Zora River Grotto Grass 3,                                  grass,          NONE
 Zora River Grotto Grass 4,                                  grass,          NONE,                 GROTTOS,                        0x02905,                    RANDOM
 Zora River Grotto Hive 1,                                   hive,           NONE,                 GROTTOS,                        0x02907,                    RUPEE_BLUE
 Zora River Grotto Hive 2,                                   hive,           NONE,                 GROTTOS,                        0x02908,                    RUPEE_RED
+Zora River Grotto Butterfly 1,                              butterfly,      NONE,                 GROTTOS,                        0x02906,                    FAIRY
+Zora River Grotto Butterfly 2,                              butterfly,      NONE,                 GROTTOS,                        0x12906,                    NOTHING
+Zora River Grotto Butterfly 3,                              butterfly,      NONE,                 GROTTOS,                        0x22906,                    NOTHING
 Zora River Storms Grotto Front Scrub,                       scrub,          NONE,                 GROTTOS,                        0x12,                       POTION_GREEN
 Zora River Storms Grotto Back Scrub,                        scrub,          NONE,                 GROTTOS,                        0x13,                       POTION_RED
 Zora River Storms Grotto Hive,                              hive,           NONE,                 GROTTOS,                        0x02402,                    RUPEE_RED
@@ -705,6 +723,9 @@ Hyrule Field Grotto Southeast Grass 3,                      grass,          NONE
 Hyrule Field Grotto Southeast Grass 4,                      grass,          NONE,                 GROTTOS,                        0x02205,                    RANDOM
 Hyrule Field Grotto Southeast Hive 1,                       hive,           NONE,                 GROTTOS,                        0x02207,                    RUPEE_BLUE
 Hyrule Field Grotto Southeast Hive 2,                       hive,           NONE,                 GROTTOS,                        0x02208,                    RUPEE_RED
+Hyrule Field Grotto Southeast Butterfly 1,                  butterfly,      NONE,                 GROTTOS,                        0x02206,                    FAIRY
+Hyrule Field Grotto Southeast Butterfly 2,                  butterfly,      NONE,                 GROTTOS,                        0x12206,                    NOTHING
+Hyrule Field Grotto Southeast Butterfly 3,                  butterfly,      NONE,                 GROTTOS,                        0x22206,                    NOTHING
 Hyrule Field Grotto Open,                                   chest,          NONE,                 GROTTOS,                        0x03,                       RUPEE_BLUE
 Hyrule Field Grotto Open Grass 1,                           grass,          NONE,                 GROTTOS,                        0x02302,                    RANDOM
 Hyrule Field Grotto Open Grass 2,                           grass,          NONE,                 GROTTOS,                        0x02303,                    RANDOM
@@ -712,6 +733,9 @@ Hyrule Field Grotto Open Grass 3,                           grass,          NONE
 Hyrule Field Grotto Open Grass 4,                           grass,          NONE,                 GROTTOS,                        0x02305,                    RANDOM
 Hyrule Field Grotto Open Hive 1,                            hive,           NONE,                 GROTTOS,                        0x02307,                    RUPEE_BLUE
 Hyrule Field Grotto Open Hive 2,                            hive,           NONE,                 GROTTOS,                        0x02308,                    RUPEE_RED
+Hyrule Field Grotto Open Butterfly 1,                       butterfly,      NONE,                 GROTTOS,                        0x02306,                    FAIRY
+Hyrule Field Grotto Open Butterfly 2,                       butterfly,      NONE,                 GROTTOS,                        0x12306,                    NOTHING
+Hyrule Field Grotto Open Butterfly 3,                       butterfly,      NONE,                 GROTTOS,                        0x22306,                    NOTHING
 Hyrule Field Grotto Market,                                 chest,          NONE,                 GROTTOS,                        0x00,                       RUPEE_BLUE
 Hyrule Field Grotto Market Grass 1,                         grass,          NONE,                 GROTTOS,                        0x02002,                    RANDOM
 Hyrule Field Grotto Market Grass 2,                         grass,          NONE,                 GROTTOS,                        0x02003,                    RANDOM
@@ -719,6 +743,9 @@ Hyrule Field Grotto Market Grass 3,                         grass,          NONE
 Hyrule Field Grotto Market Grass 4,                         grass,          NONE,                 GROTTOS,                        0x02005,                    RANDOM
 Hyrule Field Grotto Market Hive 1,                          hive,           NONE,                 GROTTOS,                        0x02007,                    RUPEE_BLUE
 Hyrule Field Grotto Market Hive 2,                          hive,           NONE,                 GROTTOS,                        0x02008,                    RUPEE_RED
+Hyrule Field Grotto Market Butterfly 1,                     butterfly,      NONE,                 GROTTOS,                        0x02006,                    FAIRY
+Hyrule Field Grotto Market Butterfly 2,                     butterfly,      NONE,                 GROTTOS,                        0x12006,                    NOTHING
+Hyrule Field Grotto Market Butterfly 3,                     butterfly,      NONE,                 GROTTOS,                        0x22006,                    NOTHING
 Hyrule Field Grotto Tektite HP,                             collectible,    NONE,                 GROTTOS,                        0x01,                       HEART_PIECE
 Hyrule Field Grotto Near Kakariko GS,                       gs,             NONE,                 GROTTOS,                        0x59,                       GS_TOKEN
 Hyrule Field Grotto Near Gerudo GS,                         gs,             NONE,                 GROTTOS,                        0x58,                       GS_TOKEN
