@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add butterfly shuffle, for both games.
 - Vanilla Small and Boss Keys setting.
 - Stone of Agony in MM only mode.
 - Skipped the camera pan out over Ganon's Castle being demolished.
