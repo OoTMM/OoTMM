@@ -116,11 +116,11 @@ static int EnButte_IsShuffled(Actor_EnButte* this, GameState_Play* play)
     ComboItemQuery q;
     ComboItemOverride o;
 
-    if (comboXflagsGet(&this->xflag))
-        return FALSE;
     comboXflagItemQuery(&q, &this->xflag, 0);
     comboItemOverride(&o, &q);
     if (o.gi == GI_NONE)
+        return FALSE;
+    if (comboXflagsGet(&this->xflag))
         return FALSE;
     return TRUE;
 }
@@ -181,36 +181,9 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_F32(uncullZoneDownward, 600, ICHAIN_STOP),
 };
 
-#if defined(GAME_OOT)
-void EnButte_Alias(Actor_EnButte* this)
-{
-
-}
-#endif
-
-#if defined(GAME_MM)
-void EnButte_Alias(Actor_EnButte* this)
-{
-    Xflag* xf;
-
-    xf = &this->xflag;
-    switch (xf->sceneId)
-    {
-    case SCE_MM_GREAT_BAY_COAST:
-        if (xf->setupId == 0)
-        {
-            xf->setupId = 1;
-            xf->id += 69;
-        }
-        break;
-    }
-}
-#endif
-
 void EnButte_Init(Actor_EnButte* this, GameState_Play* play)
 {
     comboXflagInit(&this->xflag, &this->actor, play);
-    EnButte_Alias(this);
 
     if (BUTTERFLY_GET(&this->actor) == BUTTERFLY_MINUS1)
         this->actor.params = BUTTERFLY_0;

@@ -68,9 +68,38 @@ s32 func_808D7928(Actor_ObjMure* this, GameState_Play* play)
     return TRUE;
 }
 
+void ObjMure_AliasButterfly(Actor_ObjMure* this)
+{
+    Xflag* xf;
+
+    xf = &this->xflag;
+    switch (xf->sceneId)
+    {
+    case SCE_MM_GREAT_BAY_COAST:
+        if (xf->setupId == 0)
+        {
+            xf->setupId = 1;
+            xf->id += 69;
+        }
+        break;
+    }
+}
+
+void ObjMure_Alias(Actor_ObjMure* this)
+{
+    switch (OBJ_MURE_GET_TYPE(&this->actor))
+    {
+    case OBJMURE_TYPE_BUTTERFLY:
+        ObjMure_AliasButterfly(this);
+        break;
+    }
+}
+
 void ObjMure_Init(Actor_ObjMure* this, GameState_Play* play)
 {
     comboXflagInit(&this->xflag, &this->actor, play);
+    if (!g.xflagOverride)
+        ObjMure_Alias(this);
 
     this->chNum = OBJ_MURE_GET_CHNUM(&this->actor);
     this->ptn = OBJ_MURE_GET_PTN(&this->actor);
