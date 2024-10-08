@@ -67,6 +67,7 @@ void    Interface_UpdateButtonsPart2(PlayState* play);
 
 int    LoadFile(void* dst, u32 vromAddr, u32 size);
 
+void    Actor_Noop(Actor* actor, PlayState* play);
 Actor*  Actor_Spawn(ActorContext* actorCtx, PlayState* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable);
 
 #if defined(GAME_OOT)
