@@ -133,5 +133,33 @@ void comboXflagInit(Xflag* xf, Actor* actor, GameState_Play* play)
         xf->roomId = actor->room;
         xf->sliceId = 0;
         xf->id = actor->actorIndex;
+
+#if defined(GAME_OOT)
+    if (xf->sceneId == SCE_OOT_GROTTOS)
+    {
+        switch (xf->roomId)
+        {
+        case 0x00:
+            /* Generic grottos */
+            xf->roomId = 0x20 | (gGrottoData & 0x1f);
+            break;
+        }
+    }
+#endif
+
+#if defined(GAME_MM)
+    if (xf->sceneId == SCE_MM_GROTTOS)
+    {
+        switch (xf->roomId)
+        {
+        case 0x0a:
+            /* Cow grottos */
+            if (gLastScene == SCE_MM_GREAT_BAY_COAST)
+                xf->roomId = 0x0f;
+            break;
+        }
+    }
+#endif
+
     }
 }
