@@ -701,7 +701,7 @@ void EnTest4_Update(Actor_EnTest4* this, GameState_Play* play)
     EnTest4_SetSkyboxNumStars(this, play);
 }
 
-ActorInit En_Test4_InitVars =
+ActorProfile En_Test4_InitVars =
 {
     AC_EN_TEST4,
     ACTORCAT_SWITCH,

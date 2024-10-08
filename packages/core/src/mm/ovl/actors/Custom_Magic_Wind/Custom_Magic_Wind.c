@@ -277,7 +277,7 @@ void MagicWind_Draw(Actor* thisx, GameState_Play* play) {
     CLOSE_DISPS();
 }
 
-ActorInit Magic_Wind_InitVars = {
+ActorProfile Magic_Wind_InitVars = {
     AC_CUSTOM_SPELL_WIND,
     ACTORCAT_ITEMACTION,
     FLAGS,

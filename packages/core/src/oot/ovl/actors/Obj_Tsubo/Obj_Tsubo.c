@@ -479,7 +479,7 @@ void ObjTsubo_Draw(Actor_ObjTsubo* this, GameState_Play* play)
     Gfx_DrawDListOpa(play, D_80BA1B84[(this->actor.params >> 8) & 1]);
 }
 
-static ActorInit ObjTsubo_InitVars =
+static ActorProfile ObjTsubo_InitVars =
 {
     AC_OBJ_TSUBO,
     ACTORCAT_PROP,

@@ -140,7 +140,7 @@ static void CustomWarp_Draw(Actor_CustomWarp* this, GameState_Play* play)
     CLOSE_DISPS();
 }
 
-ActorInit CustomWarp_gActorInit = {
+ActorProfile CustomWarp_gActorProfile = {
     AC_CUSTOM_WARP,
     0x7,
     0x11,

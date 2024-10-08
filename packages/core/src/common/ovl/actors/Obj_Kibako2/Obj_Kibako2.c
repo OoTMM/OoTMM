@@ -650,7 +650,7 @@ static void ObjKibako2_Draw(Actor_ObjKibako2* this, GameState_Play* play)
         Gfx_DrawDListOpa(play, SEGADDR_CRATE_DL);
 }
 
-ActorInit Obj_Kibako2_InitVars = {
+ActorProfile Obj_Kibako2_InitVars = {
     AC_OBJ_KIBAKO2,
     ACTORCAT_BG,
     FLAGS,

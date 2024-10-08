@@ -1,5 +1,7 @@
 #include <combo.h>
 
+#if 0
+
 /* Resize */
 PATCH_START 0x80abdfec
 .int 0x180
@@ -24,3 +26,5 @@ PATCH_END
 PATCH_START 0x80abe128
 .int 0
 PATCH_END
+
+#endif

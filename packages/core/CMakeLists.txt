@@ -155,6 +155,7 @@ add_actor_common(Obj_Comb     "common/ovl/actors/Obj_Comb/Obj_Comb.c")
 add_actor_common(En_Butte     "common/ovl/actors/En_Butte/En_Butte.c")
 
 add_actor(oot Obj_Mure    "oot/ovl/actors/Obj_Mure/Obj_Mure.c")
+add_actor(oot Obj_Mure2   "oot/ovl/actors/Obj_Mure2/Obj_Mure2.c")
 add_actor(oot Obj_Tsubo   "oot/ovl/actors/Obj_Tsubo/Obj_Tsubo.c")
 add_actor(oot En_Mag      "oot/ovl/actors/En_Mag/En_Mag.c")
 

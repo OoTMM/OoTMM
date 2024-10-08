@@ -190,7 +190,7 @@ void CustomTriggers_Draw(Actor* this, GameState_Play* play)
 {
 }
 
-ActorInit CustomTriggers_gActorInit = {
+ActorProfile CustomTriggers_gActorProfile = {
     AC_CUSTOM_TRIGGERS,
     0x8,
     0x10,

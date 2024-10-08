@@ -10,6 +10,8 @@
 # define ADDR_SPAWN_CHILDREN    0x8096104c
 #endif
 
+#if defined(GAME_MM)
+
 void EnKusa_Aliases(Xflag* xflag);
 
 void ObjMure2_InitWrapper(Actor_ObjMure2* this, GameState_Play* play)
@@ -68,3 +70,5 @@ void ObjMure2_SpawnChildrenWrapper(Actor_ObjMure2* this, GameState_Play* play)
         EnKusa_Aliases(&kusa->xflag);
     }
 }
+
+#endif

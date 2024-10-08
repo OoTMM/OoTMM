@@ -45,6 +45,7 @@ void    Math_Vec3f_Diff(Vec3f* a, Vec3f* b, Vec3f* dest);
 s32     Math_ScaledStepToS(s16* pValue, s16 target, s16 step);
 float   Math3D_Vec3fDistSq(const Vec3f* a, const Vec3f* b);
 s32     Math3D_CosOut(Vec3f* a, Vec3f* b, f32* dst);
+float   Math3D_Dist1DSq(float a, float b);
 float   Math3D_Dist2DSq(float x1, float y1, float x2, float y2);
 s16     Math_Vec3f_Yaw(Vec3f* origin, Vec3f* point);
 s16     Math_Vec3f_Pitch(Vec3f* origin, Vec3f* point);

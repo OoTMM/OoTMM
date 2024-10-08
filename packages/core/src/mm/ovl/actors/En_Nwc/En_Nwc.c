@@ -522,7 +522,7 @@ void EnNwc_DrawAdultBody(Actor_EnNwc* this, GameState_Play* play)
                           EnNwc_OverrideLimbDraw, NULL, &this->actor);
 }
 
-ActorInit EnNwc_InitVars =
+ActorProfile EnNwc_InitVars =
 {
     AC_EN_NWC,
     ACTORCAT_PROP,

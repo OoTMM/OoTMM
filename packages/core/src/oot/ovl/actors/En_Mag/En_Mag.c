@@ -787,7 +787,7 @@ void EnMag_Draw(Actor_EnMag* this, GameState_Play* play)
     CLOSE_DISPS();
 }
 
-ActorInit En_Mag_InitVars = {
+ActorProfile En_Mag_InitVars = {
     AC_EN_MAG,
     ACTORCAT_PROP,
     FLAGS,

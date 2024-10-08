@@ -371,7 +371,7 @@ void ObjTaru_Draw(Actor_ObjTaru* this, GameState_Play* play)
         ObjTaru_DrawBarrel(this, play);
 }
 
-ActorInit ObjTaru_InitVars = {
+ActorProfile ObjTaru_InitVars = {
     AC_OBJ_TARU,
     ACTORCAT_BG,
     FLAGS,

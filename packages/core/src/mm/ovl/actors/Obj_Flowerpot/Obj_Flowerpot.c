@@ -847,7 +847,7 @@ void ObjFlowerpot_Draw(Actor_ObjFlowerpot* this, GameState_Play* play)
         ObjFlowerpot_DrawGrass(this, play);
 }
 
-ActorInit ObjFlowerpot_InitVars =
+ActorProfile ObjFlowerpot_InitVars =
 {
     AC_OBJ_FLOWERPOT,
     ACTORCAT_PROP,

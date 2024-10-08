@@ -39,7 +39,7 @@ _Static_assert(sizeof(PlayerOverlay) == 0x1C, "PlayerOverlay size is wrong");
 typedef struct
 {
     u32              id;
-    const ActorInit* init;
+    const ActorProfile* init;
 }
 OvlActorInfoMeta;
 

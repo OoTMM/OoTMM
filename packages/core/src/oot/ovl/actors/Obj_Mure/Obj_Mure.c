@@ -379,7 +379,7 @@ void ObjMure_Update(Actor_ObjMure* this, GameState_Play* play) {
     this->actionFunc(this, play);
 }
 
-ActorInit ObjMure_InitVars =
+ActorProfile ObjMure_InitVars =
 {
     AC_OBJ_MURE,
     ACTORCAT_ITEMACTION,

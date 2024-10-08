@@ -21,7 +21,7 @@ void EnTorch2_UpdateDeath(Actor_CustomEnTorch2 *this, GameState_Play *play);
 
 extern Actor_CustomEnTorch2 *gElegyShell;
 
-ActorInit En_Torch2_InitVars = {
+ActorProfile En_Torch2_InitVars = {
     AC_CUSTOM_TORCH2,
     ACTORCAT_ITEMACTION,
     FLAGS,

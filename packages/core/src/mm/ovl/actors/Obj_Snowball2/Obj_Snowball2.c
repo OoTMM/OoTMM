@@ -731,7 +731,7 @@ void ObjSnowball2_Draw(Actor_ObjSnowball2* this, GameState_Play* play) {
     Gfx_DrawDListOpa(play, SEGADDR_GOROIWA_DL_008B90);
 }
 
-ActorInit Obj_Snowball2_InitVars = {
+ActorProfile Obj_Snowball2_InitVars = {
     AC_OBJ_SNOWBALL2,
     ACTORCAT_PROP,
     FLAGS,

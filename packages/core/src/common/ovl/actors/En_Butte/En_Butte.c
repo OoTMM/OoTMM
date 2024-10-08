@@ -593,7 +593,7 @@ void EnButte_Draw(Actor_EnButte* this, GameState_Play* play)
     }
 }
 
-static ActorInit EnButte_ActorInit =
+static ActorProfile EnButte_ActorProfile =
 {
     AC_EN_BUTTE,
     ACTORCAT_ITEMACTION,
@@ -606,4 +606,4 @@ static ActorInit EnButte_ActorInit =
     (ActorFunc)EnButte_Draw,
 };
 
-OVL_ACTOR_INFO(AC_EN_BUTTE, EnButte_ActorInit);
+OVL_ACTOR_INFO(AC_EN_BUTTE, EnButte_ActorProfile);

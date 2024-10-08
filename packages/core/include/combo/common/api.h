@@ -54,6 +54,8 @@ void    Interface_UpdateButtonsPart2(GameState_Play* play);
 
 int    LoadFile(void* dst, u32 vromAddr, u32 size);
 
+void Actor_Noop(Actor* actor, GameState_Play* play);
+
 Actor*  Actor_Spawn(ActorContext* actorCtx, GameState_Play* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable);
 
 #if defined(GAME_OOT)
@@ -447,7 +449,7 @@ void Lights_PointNoGlowSetInfo(LightInfo* info, s16 x, s16 y, s16 z, u8 r, u8 g,
 LightNode* LightContext_InsertLight(GameState_Play* play, LightContext* lightCtx, LightInfo* info);
 
 void Actor_DrawLensActors(GameState_Play* play, s32 numLensActors, Actor** lensActors);
-ActorInit* Actor_LoadOverlay(ActorContext* actorCtx, s16 index);
+ActorProfile* Actor_LoadOverlay(ActorContext* actorCtx, s16 index);
 
 s32 Entrance_GetSceneIdAbsolute(u16 entrance);
 

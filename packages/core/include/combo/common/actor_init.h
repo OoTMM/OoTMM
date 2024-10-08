@@ -19,8 +19,8 @@ typedef struct
     ActorFunc   update;
     ActorFunc   draw;
 }
-ActorInit;
+ActorProfile;
 
-_Static_assert(sizeof(ActorInit) == 0x20, "ActorInit size is wrong");
+_Static_assert(sizeof(ActorProfile) == 0x20, "ActorProfile size is wrong");
 
 #endif

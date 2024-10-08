@@ -895,7 +895,7 @@ static void ObjComb_Destroy(Actor_ObjComb* this, GameState_Play* play)
     Collider_DestroyJntSph(play, &this->collider);
 }
 
-static const ActorInit ObjComb_InitVars =
+static const ActorProfile ObjComb_InitVars =
 {
     AC_OBJ_COMB,
     ACTORCAT_PROP,

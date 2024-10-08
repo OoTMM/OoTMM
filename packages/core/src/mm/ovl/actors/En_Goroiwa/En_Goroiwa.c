@@ -1597,7 +1597,7 @@ void EnGoroiwa_Draw(Actor_EnGoroiwa* this, GameState_Play* play) {
     }
 }
 
-ActorInit Actor_EnGoroiwa_InitVars = {
+ActorProfile Actor_EnGoroiwa_InitVars = {
     AC_EN_GOROIWA,
     ACTORCAT_PROP,
     FLAGS,

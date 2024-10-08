@@ -998,9 +998,9 @@ static void Actor_PatchPlayerFormProperties()
     }
 }
 
-ActorInit* Actor_LoadOverlayCustom(ActorContext* actorCtx, s16 index)
+ActorProfile* Actor_LoadOverlayCustom(ActorContext* actorCtx, s16 index)
 {
-    ActorInit* actorInit = Actor_LoadOverlay(actorCtx, index);
+    ActorProfile* ActorProfile = Actor_LoadOverlay(actorCtx, index);
 
     ActorOvl* overlayEntry = &gActorOvl[index];
 
@@ -1014,7 +1014,7 @@ ActorInit* Actor_LoadOverlayCustom(ActorContext* actorCtx, s16 index)
         }
     }
 
-    return actorInit;
+    return ActorProfile;
 }
 
 PATCH_CALL(0x800bae44, Actor_LoadOverlayCustom);

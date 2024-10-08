@@ -3,5 +3,5 @@
 
 /* Custom actor */
 PATCH_START gActorOvl + 0x20 * AC_ITEM_DECOY + 0x14
-.int ItemDecoy_gActorInit
+.int ItemDecoy_gActorProfile
 PATCH_END

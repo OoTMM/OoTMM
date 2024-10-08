@@ -146,8 +146,10 @@ SkelAnime_Init = 0x8008c684;
 SkelAnime_Update = 0x8008c9c0;
 Camera_GetCamDir = 0x80049730;
 Matrix_SetTranslateRotateYXZ = 0x800ab510;
+Actor_Noop = 0x80027ef4;
 
 sinf = 0x800cf470;
+Math3D_Dist1DSq = 0x800a5434;
 Math3D_Dist2DSq = 0x800a5470;
 Math_ScaledStepToS = 0x80063704;
 Math_SmoothStepToF = 0x80064178;
