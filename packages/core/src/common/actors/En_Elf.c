@@ -197,9 +197,13 @@ static int EnElf_IsShuffled(Actor_EnElf* this, GameState_Play* play)
 
 void EnElf_InitWrapper(Actor_EnElf* this, GameState_Play* play)
 {
+    int type;
     ActorCallback init;
 
-    EnElf_Aliases(this, play);
+    type = this->base.params & 0xf;
+    memset(&this->xflag, 0, sizeof(Xflag));
+    if (type >= 2)
+        EnElf_Aliases(this, play);
 
     init = actorAddr(AC_EN_ELF, EN_ELF_INIT_VROM);
     init(&this->base, play);
@@ -214,7 +218,7 @@ void EnElf_InitWrapper(Actor_EnElf* this, GameState_Play* play)
     }
 
     /* Fairy Group Spawner */
-    if (this->base.params != 4)
+    if (type >= 2 && type != 4)
     {
         if (EnElf_IsShuffled(this, play))
         {
