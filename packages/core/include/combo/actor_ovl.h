@@ -47,9 +47,9 @@ OvlInfoMeta;
 
 typedef struct
 {
-    OvlInfoMeta         base;
-    u32                 id;
-    const ActorProfile*    init;
+    OvlInfoMeta             base;
+    u32                     id;
+    const ActorProfile*     init;
 }
 OvlInfoMetaActor;
 

@@ -5,21 +5,27 @@
 
 typedef struct
 {
-    char unk_00[4];
-    u32  next;
-    u8   active;
-    char unk_09[0x1f];
-    u16* unk_28;
-    char unk_2c[0x4];
+    char    unk_00[0x4];
+    void*   script;
+    u8      state;
+    float   timer;
+    u16     curFrame;
+    u16     unk_12;
+    s32     subCamId;
+    u16     camEyeSplinePointsAppliedFrame;
+    u8      camAtReady;
+    u8      camEyeReady;
+    void*   camAtPoints;
+    void*   camEyePoints;
+    void*   playerCue;
+    void*   actorCues[10];
 }
 CutsceneContext;
 
-ASSERT_SIZE(CutsceneContext, 0x30);
+ASSERT_SIZE(CutsceneContext, 0x50);
 ASSERT_OFFSET(CutsceneContext, unk_00,  0x00);
-ASSERT_OFFSET(CutsceneContext, next,    0x04);
-ASSERT_OFFSET(CutsceneContext, active,  0x08);
-ASSERT_OFFSET(CutsceneContext, unk_09,  0x09);
-ASSERT_OFFSET(CutsceneContext, unk_28,  0x28);
-ASSERT_OFFSET(CutsceneContext, unk_2c,  0x2c);
+ASSERT_OFFSET(CutsceneContext, script,  0x04);
+ASSERT_OFFSET(CutsceneContext, state,   0x08);
+ASSERT_OFFSET(CutsceneContext, timer,   0x0c);
 
 #endif
