@@ -22,6 +22,7 @@ struct Actor_ObjMure
     s16                 unk_1A4;
     s16                 unk_1A6;
     s16                 unk_1A8;
+    Xflag               xflag;
 };
 
 #endif

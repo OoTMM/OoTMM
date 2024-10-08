@@ -25,11 +25,7 @@
 void EnElf_Aliases(Actor_EnElf* this, GameState_Play* play)
 {
     /* Set the extended properties */
-    this->xflag.sceneId = play->sceneId;
-    this->xflag.setupId = g.sceneSetupId;
-    this->xflag.roomId = this->base.room;
-    this->xflag.sliceId = g.actorSliceId;
-    this->xflag.id = g.actorIndex;
+    comboXflagInit(&this->xflag, &this->base, play);
 
 #if defined(GAME_OOT)
     switch (this->xflag.sceneId)

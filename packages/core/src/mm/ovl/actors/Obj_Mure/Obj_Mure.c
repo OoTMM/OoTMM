@@ -70,6 +70,8 @@ s32 func_808D7928(Actor_ObjMure* this, GameState_Play* play)
 
 void ObjMure_Init(Actor_ObjMure* this, GameState_Play* play)
 {
+    comboXflagInit(&this->xflag, &this->actor, play);
+
     this->chNum = OBJ_MURE_GET_CHNUM(&this->actor);
     this->ptn = OBJ_MURE_GET_PTN(&this->actor);
     this->svNum = OBJ_MURE_GET_SVNUM(&this->actor);
@@ -99,7 +101,8 @@ s32 ObjMure_GetMaxChildSpawns(Actor_ObjMure* this) {
     return this->chNum;
 }
 
-void ObjMure_GetSpawnPos(Vec3f* outPos, Vec3f* inPos, s32 ptn, s32 idx) {
+void ObjMure_GetSpawnPos(Vec3f* outPos, Vec3f* inPos, s32 ptn, s32 idx)
+{
     *outPos = *inPos;
 }
 
@@ -107,11 +110,11 @@ static Actor* ObjMure_SpawnActor(Actor_ObjMure* this, GameState_Play* play, s16 
 {
     Actor* tmp;
 
-    g.actorIndex = this->actor.actorIndex;
-    g.actorSliceId = (u8)index;
+    memcpy(&g.xflag, &this->xflag, sizeof(Xflag));
+    g.xflag.sliceId = (u8)index;
+    g.xflagOverride = TRUE;
     tmp = Actor_SpawnAsChildAndCutscene(&play->actorCtx, play, actorId, x, y, z, rx, ry, rz, variable, ex1, ex2, ex3);
-    g.actorIndex = 0xff;
-    g.actorSliceId = 0;
+    g.xflagOverride = FALSE;
 
     return tmp;
 }

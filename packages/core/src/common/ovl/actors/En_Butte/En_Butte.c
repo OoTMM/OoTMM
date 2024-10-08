@@ -111,25 +111,14 @@ void EnButte_TransformIntoFairy(Actor_EnButte* this, GameState_Play* play);
 void EnButte_SetupWaitToDie(Actor_EnButte* this);
 void EnButte_WaitToDie(Actor_EnButte* this, GameState_Play* play);
 
-static void EnButte_Xflags(Xflag* xflag, Actor_EnButte* this, GameState_Play* play)
-{
-    xflag->id = this->actor.actorIndex;
-    xflag->roomId = this->actor.room;
-    xflag->sceneId = play->sceneId;
-    xflag->setupId = g.sceneSetupId;
-    xflag->sliceId = this->sliceId;
-}
-
 static int EnButte_IsShuffled(Actor_EnButte* this, GameState_Play* play)
 {
-    Xflag xflag;
     ComboItemQuery q;
     ComboItemOverride o;
 
-    EnButte_Xflags(&xflag, this, play);
-    if (comboXflagsGet(&xflag))
+    if (comboXflagsGet(&this->xflag))
         return FALSE;
-    comboXflagItemQuery(&q, &xflag, 0);
+    comboXflagItemQuery(&q, &this->xflag, 0);
     comboItemOverride(&o, &q);
     if (o.gi == GI_NONE)
         return FALSE;
@@ -192,9 +181,37 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_F32(uncullZoneDownward, 600, ICHAIN_STOP),
 };
 
+#if defined(GAME_OOT)
+void EnButte_Alias(Actor_EnButte* this)
+{
+
+}
+#endif
+
+#if defined(GAME_MM)
+void EnButte_Alias(Actor_EnButte* this)
+{
+    Xflag* xf;
+
+    xf = &this->xflag;
+    switch (xf->sceneId)
+    {
+    case SCE_MM_GREAT_BAY_COAST:
+        if (xf->setupId == 0)
+        {
+            xf->setupId = 1;
+            xf->id += 69;
+        }
+        break;
+    }
+}
+#endif
+
 void EnButte_Init(Actor_EnButte* this, GameState_Play* play)
 {
-    this->sliceId = g.actorSliceId;
+    comboXflagInit(&this->xflag, &this->actor, play);
+    EnButte_Alias(this);
+
     if (BUTTERFLY_GET(&this->actor) == BUTTERFLY_MINUS1)
         this->actor.params = BUTTERFLY_0;
 
@@ -337,7 +354,8 @@ void EnButte_FlyAround(Actor_EnButte* this, GameState_Play* play)
     }
 }
 
-void EnButte_SetupFollowLink(Actor_EnButte* this) {
+void EnButte_SetupFollowLink(Actor_EnButte* this)
+{
     EnButte_SelectFlightParams(this, &sFollowLinkParams[this->flightParamsIdx]);
     this->actionFunc = EnButte_FollowLink;
 }
@@ -417,18 +435,16 @@ void EnButte_SetupTransformIntoFairy(Actor_EnButte* this)
 
 static int EnButte_ShouldSpawnFairy(Actor_EnButte* this, GameState_Play* play)
 {
-    Xflag xflag;
     ComboItemQuery q;
     ComboItemOverride o;
 
-    EnButte_Xflags(&xflag, this, play);
-    if (comboXflagsGet(&xflag))
+    if (comboXflagsGet(&this->xflag))
         return TRUE;
-    comboXflagItemQuery(&q, &xflag, 0);
+    comboXflagItemQuery(&q, &this->xflag, 0);
     comboItemOverride(&o, &q);
     if (o.gi == GI_NOTHING)
     {
-        comboXflagsSet(&xflag);
+        comboXflagsSet(&this->xflag);
         return FALSE;
     }
     return TRUE;
@@ -439,11 +455,10 @@ static void EnButte_SpawnFairy(Actor_EnButte* this, GameState_Play* play)
     if (!EnButte_ShouldSpawnFairy(this, play))
         return;
 
-    g.actorIndex = this->actor.actorIndex;
-    g.actorSliceId = this->sliceId;
+    memcpy(&g.xflag, &this->xflag, sizeof(Xflag));
+    g.xflagOverride = TRUE;
     Actor_Spawn(&play->actorCtx, play, AC_EN_ELF, this->actor.focus.pos.x, this->actor.focus.pos.y, this->actor.focus.pos.z, 0, this->actor.shape.rot.y, 0, 0x0002);
-    g.actorIndex = 0xff;
-    g.actorSliceId = 0;
+    g.xflagOverride = FALSE;
 }
 
 void EnButte_TransformIntoFairy(Actor_EnButte* this, GameState_Play* play)
@@ -545,14 +560,12 @@ static Gfx sLoadTextureCustom[] =
 static void EnButte_DrawButterfly(Actor_EnButte* this, GameState_Play* play)
 {
     const Color_RGB8* color;
-    Xflag xflag;
     ComboItemQuery q;
     ComboItemOverride o;
     int csmcType;
     void* customTexture;
 
-    EnButte_Xflags(&xflag, this, play);
-    comboXflagItemQuery(&q, &xflag, 0);
+    comboXflagItemQuery(&q, &this->xflag, 0);
     comboItemOverride(&o, &q);
 
     /* Get CSMC type */
@@ -560,7 +573,7 @@ static void EnButte_DrawButterfly(Actor_EnButte* this, GameState_Play* play)
     {
         csmcType = CSMC_MAJOR;
     }
-    else if (comboXflagsGet(&xflag))
+    else if (comboXflagsGet(&this->xflag))
     {
         csmcType = CSMC_NORMAL;
     }

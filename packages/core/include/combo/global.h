@@ -2,6 +2,7 @@
 #define COMBO_GLOBAL_H
 
 #include <combo/types.h>
+#include <combo/xflags.h>
 
 typedef struct ComboItemQuery ComboItemQuery;
 
@@ -18,6 +19,7 @@ typedef struct
     u8                      delayedSwitchFlag;
     u8                      roomEnemyLackSoul:1;
     u8                      spawnExtended:1;
+    u8                      xflagOverride:1;
     u8                      decoysCount;
     u8                      menuScreen;
     u8                      menuCursor;
@@ -25,10 +27,10 @@ typedef struct
     u8                      maxKeysOot[0x11];
     u8                      maxKeysMm[4];
     u8                      actorIndex;
-    u8                      actorSliceId;
     u8                      sceneSetupId;
     s8                      keatonGrassMax;
     u32                     nextEntrance;
+    Xflag                   xflag;
 }
 ComboGlobal;
 

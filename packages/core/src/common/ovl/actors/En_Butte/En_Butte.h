@@ -2,6 +2,7 @@
 #define OVL_EN_BUTTE_H
 
 #include <combo.h>
+#include <combo/xflags.h>
 
 typedef struct Actor_EnButte Actor_EnButte;
 
@@ -29,12 +30,12 @@ struct Actor_EnButte
     u8                      flightParamsIdx;
     u8                      unk_257;
     u8                      drawSkelAnime;
-    u8                      sliceId;
     s16                     swordDownTimer;
     s16                     unk_25C;
     s16                     unk_25E;
     s16                     unk_260;
     f32                     posYTarget;
+    Xflag                   xflag;
 };
 
 #endif // Z_EN_BUTTE_H

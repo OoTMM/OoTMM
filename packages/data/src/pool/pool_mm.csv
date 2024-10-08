@@ -402,6 +402,8 @@ Termina Field Wonder Item Shell Side 3,                 wonder,         NONE,   
 Termina Field Wonder Item Graffiti 1,                   wonder,         NONE,                   TERMINA_FIELD,                0x00066,                    RUPEE_GREEN
 Termina Field Wonder Item Graffiti 2,                   wonder,         NONE,                   TERMINA_FIELD,                0x10066,                    RUPEE_GREEN
 Termina Field Wonder Item Graffiti 3,                   wonder,         NONE,                   TERMINA_FIELD,                0x20066,                    RUPEE_GREEN
+Termina Field Butterfly 1,                              butterfly,      NONE,                   TERMINA_FIELD,                0x000ab,                    FAIRY
+Termina Field Butterfly 2,                              butterfly,      NONE,                   TERMINA_FIELD,                0x100ab,                    NOTHING
 Termina Field Cow Grotto Grass 01,                      grass,          NONE,                   GROTTOS,                      0x00a00,                    RANDOM
 Termina Field Cow Grotto Grass 02,                      grass,          NONE,                   GROTTOS,                      0x10a00,                    RANDOM
 Termina Field Cow Grotto Grass 03,                      grass,          NONE,                   GROTTOS,                      0x20a00,                    RANDOM
@@ -1287,6 +1289,10 @@ Great Bay Coast Grass 2,                                grass,          NONE,   
 Great Bay Coast Grass 3,                                grass,          NONE,                   GREAT_BAY_COAST,              0x00070,                    RANDOM
 Great Bay Coast Grass 4,                                grass,          NONE,                   GREAT_BAY_COAST,              0x00071,                    RANDOM
 Great Bay Coast Grass 5,                                grass,          NONE,                   GREAT_BAY_COAST,              0x00072,                    RANDOM
+Great Bay Coast Common Butterfly 1,                     butterfly,      NONE,                   GREAT_BAY_COAST,              0x04085,                    FAIRY
+Great Bay Coast Common Butterfly 2,                     butterfly,      NONE,                   GREAT_BAY_COAST,              0x14085,                    NOTHING
+Great Bay Coast Cleared Butterfly 1,                    butterfly,      NONE,                   GREAT_BAY_COAST,              0x24085,                    NOTHING
+Great Bay Coast Cleared Butterfly 2,                    butterfly,      NONE,                   GREAT_BAY_COAST,              0x34085,                    NOTHING
 Great Bay Cow Grotto Grass 01,                          grass,          NONE,                   GROTTOS,                      0x00f00,                    RANDOM
 Great Bay Cow Grotto Grass 02,                          grass,          NONE,                   GROTTOS,                      0x10f00,                    RANDOM
 Great Bay Cow Grotto Grass 03,                          grass,          NONE,                   GROTTOS,                      0x20f00,                    RANDOM

@@ -667,6 +667,7 @@
     "Mountain Gossip Grotto": "true"
     "Ocean Gossip Grotto": "can_break_boulders"
     "Canyon Gossip Grotto": "true"
+    "Termina Field Butterflies": "has_sticks"
   locations:
     "Termina Field Water Chest": "underwater_walking"
     "Termina Field Tall Grass Chest": "true"
@@ -916,6 +917,11 @@
     "Termina Field Gossip Northeast": "true"
     "Termina Field Gossip Near Mountain": "true"
     "Termina Field Gossip Near Kamaro": "true"
+"Termina Field Butterflies":
+  region: TERMINA_FIELD
+  locations:
+    "Termina Field Butterfly 1": "true"
+    "Termina Field Butterfly 2": "true"
 "Grass Grotto":
   region: ENTRANCE
   events:
@@ -2546,6 +2552,7 @@
     "GBC Near Cow Grotto": "can_hookshot"
     "Owl Great Bay": "true"
     "Great Bay Coast Water Void": "true"
+    "Great Bay Coast Butterflies": "has_sticks"
   events:
     MAGIC: "true"
     BOMBS_OR_BOMBCHU: "true"
@@ -2580,6 +2587,13 @@
     "Great Bay Coast Grass 5": "true"
   gossip:
     "Great Bay Coast Gossip": "true"
+"Great Bay Coast Butterflies":
+  region: GREAT_BAY_COAST
+  locations:
+    "Great Bay Coast Common Butterfly 1": "true"
+    "Great Bay Coast Common Butterfly 2": "true"
+    "Great Bay Coast Cleared Butterfly 1": "is_ocean_cleared"
+    "Great Bay Coast Cleared Butterfly 2": "is_ocean_cleared"
 "Great Bay Coast Water Void":
   region: NONE
   exits:

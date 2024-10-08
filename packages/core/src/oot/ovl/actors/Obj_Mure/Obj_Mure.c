@@ -45,11 +45,11 @@ static Actor* ObjMure_SpawnActor(Actor_ObjMure* this, GameState_Play* play, s16 
 {
     Actor* tmp;
 
-    g.actorIndex = this->actor.actorIndex;
-    g.actorSliceId = (u8)index;
+    memcpy(&g.xflag, &this->xflag, sizeof(Xflag));
+    g.xflag.sliceId = (u8)index;
+    g.xflagOverride = TRUE;
     tmp = Actor_Spawn(&play->actorCtx, play, actorId, x, y, z, rx, ry, rz, variable);
-    g.actorIndex = 0xff;
-    g.actorSliceId = 0;
+    g.xflagOverride = FALSE;
 
     return tmp;
 }
@@ -80,6 +80,8 @@ s32 ObjMure_SetCulling(Actor_ObjMure* thisx, GameState_Play* play)
 
 void ObjMure_Init(Actor_ObjMure* this, GameState_Play* play)
 {
+    comboXflagInit(&this->xflag, &this->actor, play);
+
     this->chNum = PARAMS_GET_U(this->actor.params, 12, 4);
     this->ptn = PARAMS_GET_U(this->actor.params, 8, 3);
     this->svNum = PARAMS_GET_U(this->actor.params, 5, 2);
