@@ -1,9 +1,8 @@
-import { promises as fs, rmSync } from 'fs';
+import { promises as fs } from 'fs';
 import { SCENES } from '@ootmm/data';
 
 import { CodeGen } from '../lib/combo/util/codegen';
 import { decompressGame } from '../lib/combo/decompress';
-import { table } from 'console';
 
 const OOT_GENERIC_GROTTOS = [
   0x00, /* Hyrule Field Market */
@@ -158,7 +157,9 @@ const ACTORS_OOT = {
   OBJ_HANA: 0x14f,
   EN_ELF: 0x18,
   BG_SPOT11_OASIS: 0x1C2,
+  OBJ_MURE: 0x094,
   OBJ_MURE3: 0x1ab,
+  EN_BUTTE: 0x01e,
   SHOT_SUN: 0x183,
   EN_WONDER_ITEM: 0x112,
   OBJ_KIBAKO: 0x110,
@@ -172,6 +173,8 @@ const ACTORS_MM = {
   POT: 0x82,
   FLYING_POT: 0x8d,
   EN_KUSA: 0x90,
+  EN_BUTTE: 0x15,
+  OBJ_MURE: 0x4f,
   OBJ_MURE2: 0xb3,
   OBJ_MURE3: 0xe8,
   OBJ_GRASS: 0x10b,
@@ -186,7 +189,7 @@ const ACTORS_MM = {
   OBJ_FLOWERPOT: 0x13e,
   OBJ_TARU: 0x22d,
   OBJ_SNOWBALL: 0x1dc,
-  OBJ_SNOWBALL2: 0x1f9
+  OBJ_SNOWBALL2: 0x1f9,
   //DOOR_ANA: 0x55,
 };
 
@@ -195,6 +198,7 @@ const ACTOR_SLICES_OOT = {
   [ACTORS_OOT.EN_ELF]: 8,
   [ACTORS_OOT.BG_SPOT11_OASIS]: 8,
   [ACTORS_OOT.OBJ_MURE3]: 7,
+  [ACTORS_OOT.OBJ_MURE]: 5,
 }
 
 const ACTOR_SLICES_MM = {
@@ -205,6 +209,7 @@ const ACTOR_SLICES_MM = {
   [ACTORS_MM.OBJ_MURE3]: 7,
   [ACTORS_MM.EN_HIT_TAG]: 3,
   [ACTORS_MM.OBJ_FLOWERPOT]: 2,
+  [ACTORS_MM.OBJ_MURE]: 5,
 }
 
 const INTERESTING_ACTORS_OOT = Object.values(ACTORS_OOT);
@@ -1360,6 +1365,48 @@ function actorHandlerOotObjKibako2(checks: Check[], ra: RoomActor) {
   checks.push({ roomActor: ra, item, name: 'Large Crate', type: 'crate' });
 }
 
+function actorHandlerOotEnButte(checks: Check[], ra: RoomActor) {
+  const item = (ra.actor.params === 0xffff || !(ra.actor.params & 1)) ? 'NOTHING' : 'FAIRY';
+  checks.push({ roomActor: ra, item, name: 'Butterfly', type: 'butterfly' });
+}
+
+function actorHandlerMmEnButte(checks: Check[], ra: RoomActor) {
+  const item = (ra.actor.params === 0xffff || !(ra.actor.params & 1)) ? 'NOTHING' : 'FAIRY';
+  checks.push({ roomActor: ra, item, name: 'Butterfly', type: 'butterfly' });
+}
+
+function actorHandlerOotObjMure(checks: Check[], ra: RoomActor) {
+  const subtype = ra.actor.params & 0x1f;
+  let count = (ra.actor.params >> 12);
+  if (count === 0) {
+    const lut = [12, 9, 8];
+    const id = (ra.actor.params >> 8) & 3;
+    count = id < lut.length ? lut[id] : 0;
+  }
+  for (let i = 0; i < count; ++i) {
+    if (subtype === 0x04) {
+      const item = (i === 0) ? 'FAIRY' : 'NOTHING';
+      checks.push({ roomActor: ra, item, name: 'Butterfly Pack', type: 'butterfly', sliceId: i, name2: `Butterfly ${i + 1}` });
+    }
+  }
+}
+
+function actorHandlerMmObjMure(checks: Check[], ra: RoomActor) {
+  const subtype = ra.actor.params & 0x1f;
+  let count = (ra.actor.params >> 12);
+  if (count === 0) {
+    const lut = [12, 9, 8];
+    const id = (ra.actor.params >> 8) & 3;
+    count = id < lut.length ? lut[id] : 0;
+  }
+  for (let i = 0; i < count; ++i) {
+    if (subtype === 0x04) {
+      const item = (i === 0) ? 'FAIRY' : 'NOTHING';
+      checks.push({ roomActor: ra, item, name: 'Butterfly Pack', type: 'butterfly', sliceId: i, name2: `Butterfly ${i + 1}` });
+    }
+  }
+}
+
 function actorHandlerMmObjComb(checks: Check[], ra: RoomActor) {
   const flag = !!(ra.actor.params & 0x10);
   let type = 0;
@@ -1409,6 +1456,8 @@ const ACTORS_HANDLERS_OOT = {
   [ACTORS_OOT.OBJ_COMB]: actorHandlerOotObjComb,
   [ACTORS_OOT.OBJ_KIBAKO]: actorHandlerOotObjKibako,
   [ACTORS_OOT.OBJ_KIBAKO2]: actorHandlerOotObjKibako2,
+  [ACTORS_OOT.EN_BUTTE]: actorHandlerOotEnButte,
+  [ACTORS_OOT.OBJ_MURE]: actorHandlerOotObjMure,
 };
 
 const ACTORS_HANDLERS_MM = {
@@ -1417,6 +1466,8 @@ const ACTORS_HANDLERS_MM = {
   [ACTORS_MM.OBJ_TARU]: actorHandlerMmObjTaru,
   [ACTORS_MM.OBJ_SNOWBALL]: actorHandlerMmObjSnowball,
   [ACTORS_MM.OBJ_SNOWBALL2]: actorHandlerMmObjSnowball2,
+  [ACTORS_MM.EN_BUTTE]: actorHandlerMmEnButte,
+  [ACTORS_MM.OBJ_MURE]: actorHandlerMmObjMure,
 };
 
 const ACTORS_HANDLERS = {
@@ -1460,7 +1511,7 @@ function outputChecks(game: 'oot' | 'mm', checks: Check[], filter?: string) {
     }
 
     const key = ((check.sliceId ?? 0) << 16) | ((ra.setupId & 0x3) << 14) | (ra.roomId << 8) | ra.actor.actorId;
-    let name = `Scene ${ra.sceneId.toString(16)} Setup ${ra.setupId} Room ${decPad(ra.roomId+1, 2)} ${check.name} ${decPad(ra.actor.actorId + 1, 2)}`; /* Room + 1 , to match SceneNavi/SceneTatl */
+    let name = `Scene ${ra.sceneId.toString(16)} Setup ${ra.setupId} Room ${decPad(ra.roomId, 2)} ${check.name} ${decPad(ra.actor.actorId + 1, 2)}`; /* Room + 1 , to match SceneNavi/SceneTatl */
     if (check.name2) {
       name = `${name} ${check.name2}`;
     }

@@ -7,38 +7,42 @@
 #include <combo/math/vec.h>
 #include <combo/misc.h>
 
-#define ACTOR_FLAG_OOT_0    (1 <<  0)
-#define ACTOR_FLAG_OOT_1    (1 <<  1)
-#define ACTOR_FLAG_OOT_2    (1 <<  2)
-#define ACTOR_FLAG_OOT_3    (1 <<  3)
-#define ACTOR_FLAG_OOT_4    (1 <<  4)
-#define ACTOR_FLAG_OOT_5    (1 <<  5)
-#define ACTOR_FLAG_OOT_6    (1 <<  6)
-#define ACTOR_FLAG_OOT_7    (1 <<  7)
-#define ACTOR_FLAG_OOT_8    (1 <<  8)
-#define ACTOR_FLAG_OOT_9    (1 <<  9)
-#define ACTOR_FLAG_OOT_10   (1 <<  10)
-#define ACTOR_FLAG_OOT_11   (1 <<  11)
-#define ACTOR_FLAG_OOT_12   (1 <<  12)
-#define ACTOR_FLAG_OOT_13   (1 <<  13)
-#define ACTOR_FLAG_OOT_14   (1 <<  14)
-#define ACTOR_FLAG_OOT_15   (1 <<  15)
-#define ACTOR_FLAG_OOT_16   (1 <<  16)
-#define ACTOR_FLAG_OOT_17   (1 <<  17)
-#define ACTOR_FLAG_OOT_18   (1 <<  18)
-#define ACTOR_FLAG_OOT_19   (1 <<  19)
-#define ACTOR_FLAG_OOT_20   (1 <<  20)
-#define ACTOR_FLAG_OOT_21   (1 <<  21)
-#define ACTOR_FLAG_OOT_22   (1 <<  22)
-#define ACTOR_FLAG_OOT_23   (1 <<  23)
-#define ACTOR_FLAG_OOT_24   (1 <<  24)
-#define ACTOR_FLAG_OOT_25   (1 <<  25)
-#define ACTOR_FLAG_OOT_26   (1 <<  26)
-#define ACTOR_FLAG_OOT_27   (1 <<  27)
-#define ACTOR_FLAG_OOT_28   (1 <<  28)
-#define ACTOR_FLAG_OOT_29   (1 <<  29)
-#define ACTOR_FLAG_OOT_30   (1 <<  30)
-#define ACTOR_FLAG_OOT_31   (1 <<  31)
+#define NBITS_TO_MASK(n)        ((1 << (n)) - 1)
+#define PARAMS_GET_U(p, s, n)   (((p) >> (s)) & NBITS_TO_MASK(n))
+#define PARAMS_GET_S(p, s, n)   (((p) & (NBITS_TO_MASK(n) << (s))) >> (s))
+
+#define ACTOR_FLAG_OOT_0            (1 <<  0)
+#define ACTOR_FLAG_OOT_1            (1 <<  1)
+#define ACTOR_FLAG_OOT_2            (1 <<  2)
+#define ACTOR_FLAG_OOT_3            (1 <<  3)
+#define ACTOR_FLAG_OOT_4            (1 <<  4)
+#define ACTOR_FLAG_OOT_5            (1 <<  5)
+#define ACTOR_FLAG_OOT_6            (1 <<  6)
+#define ACTOR_FLAG_OOT_7            (1 <<  7)
+#define ACTOR_FLAG_OOT_8            (1 <<  8)
+#define ACTOR_FLAG_OOT_9            (1 <<  9)
+#define ACTOR_FLAG_OOT_10           (1 <<  10)
+#define ACTOR_FLAG_OOT_ENKUSA_CUT   (1 <<  11)
+#define ACTOR_FLAG_OOT_12           (1 <<  12)
+#define ACTOR_FLAG_OOT_13           (1 <<  13)
+#define ACTOR_FLAG_OOT_14           (1 <<  14)
+#define ACTOR_FLAG_OOT_15           (1 <<  15)
+#define ACTOR_FLAG_OOT_16           (1 <<  16)
+#define ACTOR_FLAG_OOT_17           (1 <<  17)
+#define ACTOR_FLAG_OOT_18           (1 <<  18)
+#define ACTOR_FLAG_OOT_19           (1 <<  19)
+#define ACTOR_FLAG_OOT_20           (1 <<  20)
+#define ACTOR_FLAG_OOT_21           (1 <<  21)
+#define ACTOR_FLAG_OOT_22           (1 <<  22)
+#define ACTOR_FLAG_OOT_23           (1 <<  23)
+#define ACTOR_FLAG_OOT_24           (1 <<  24)
+#define ACTOR_FLAG_OOT_25           (1 <<  25)
+#define ACTOR_FLAG_OOT_26           (1 <<  26)
+#define ACTOR_FLAG_OOT_27           (1 <<  27)
+#define ACTOR_FLAG_OOT_28           (1 <<  28)
+#define ACTOR_FLAG_OOT_29           (1 <<  29)
+#define ACTOR_FLAG_OOT_30           (1 <<  30)
+#define ACTOR_FLAG_OOT_31           (1 <<  31)
 
 #define ACTOR_FLAG_MM_1                         (1 <<  0)
 #define ACTOR_FLAG_MM_2                         (1 <<  1)
@@ -135,7 +139,7 @@ typedef struct Actor
     u8          room;
     s32         flags;
     PosRot      home;
-    u16         variable;
+    u16         params;
     s8          objectSlot;
     s8          targetMode;
 
@@ -385,7 +389,7 @@ ASSERT_OFFSET(Actor, id,        0x000);
 ASSERT_OFFSET(Actor, type,      0x002);
 ASSERT_OFFSET(Actor, room,      0x003);
 ASSERT_OFFSET(Actor, home,      0x008);
-ASSERT_OFFSET(Actor, variable,  0x01c);
+ASSERT_OFFSET(Actor, params,    0x01c);
 ASSERT_OFFSET(Actor, parent,    X(0x118));
 ASSERT_OFFSET(Actor, child,     X(0x11c));
 ASSERT_OFFSET(Actor, prev,      X(0x120));

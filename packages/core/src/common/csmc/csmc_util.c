@@ -11,6 +11,7 @@ static const Color_RGB8 kColorFairy    = { 0xff, 0x7a, 0xfb };
 static const Color_RGB8 kColorHeart    = { 0xff, 0x00, 0x00 };
 static const Color_RGB8 kColorSoul     = { 0x34, 0x0b, 0x9c };
 static const Color_RGB8 kColorMap      = { 0xc7, 0x50, 0x00 };
+static const Color_RGB8 kColorNormal   = { 0x29, 0x14, 0x0a };
 
 const Color_RGB8* csmcTypeColor(int type)
 {
@@ -24,7 +25,8 @@ const Color_RGB8* csmcTypeColor(int type)
     case CSMC_HEART: return &kColorHeart;
     case CSMC_SOUL: return &kColorSoul;
     case CSMC_MAP_COMPASS: return &kColorMap;
-    default: return NULL;
+    case CSMC_NORMAL: return &kColorNormal;
+    default: UNREACHABLE();
     }
 }
 

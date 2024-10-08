@@ -647,7 +647,6 @@ void func_80940090(Actor_EnGoroiwa* this, GameState_Play* play) {
     Vec3f sp10C;
     Vec3f sp100;
     Vec3f spF4;
-    s32 phi_s6;
     f32 spEC;
     Gfx* phi_s1;
     s16 phi_s7;

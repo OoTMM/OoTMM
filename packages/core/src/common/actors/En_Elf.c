@@ -25,11 +25,7 @@
 void EnElf_Aliases(Actor_EnElf* this, GameState_Play* play)
 {
     /* Set the extended properties */
-    this->xflag.sceneId = play->sceneId;
-    this->xflag.setupId = g.sceneSetupId;
-    this->xflag.roomId = this->base.room;
-    this->xflag.sliceId = 0;
-    this->xflag.id = g.actorIndex;
+    comboXflagInit(&this->xflag, &this->base, play);
 
 #if defined(GAME_OOT)
     switch (this->xflag.sceneId)
@@ -55,13 +51,9 @@ void EnElf_Aliases(Actor_EnElf* this, GameState_Play* play)
         }
         this->xflag.roomId = 0x20 | fairyFountainIndex;
         break;
-    case SCE_OOT_TOMB_FAIRY:
-        break;
     case SCE_OOT_DESERT_COLOSSUS:
         this->xflag.id = 1;
         this->xflag.setupId = 0;
-        break;
-    case SCE_OOT_GANON_TOWER:
         break;
     }
 #endif
@@ -74,6 +66,21 @@ void EnElf_ItemQuery(ComboItemQuery* q, Actor_EnElf* this)
     if (comboXflagsGet(&this->xflag)) {
         q->ovFlags = OVF_RENEW;
     }
+}
+
+static void EnElf_ItemOverride(ComboItemOverride* o, Actor_EnElf* this)
+{
+    ComboItemQuery q;
+
+    EnElf_ItemQuery(&q, this);
+    comboItemOverride(o, &q);
+}
+
+static s16 EnElf_ItemGi(Actor_EnElf* this)
+{
+    ComboItemOverride o;
+    EnElf_ItemOverride(&o, this);
+    return o.gi;
 }
 
 void EnElf_Draw(Actor_EnElf* this, GameState_Play* play)
@@ -176,14 +183,27 @@ void EnElf_GiveItem(Actor_EnElf* this, GameState_Play* play)
     comboPlayItemFanfare(o.gi, 1);
 }
 
+static int EnElf_IsShuffled(Actor_EnElf* this, GameState_Play* play)
+{
+    ComboItemQuery q;
+    ComboItemOverride o;
+
+    comboXflagItemQuery(&q, &this->xflag, 0);
+    if (comboXflagsGet(&this->xflag))
+        q.ovFlags |= OVF_RENEW;
+    comboItemOverride(&o, &q);
+    return o.gi != GI_NONE;
+}
+
 void EnElf_InitWrapper(Actor_EnElf* this, GameState_Play* play)
 {
+    int type;
     ActorCallback init;
 
-    /* Fairy Group Spawner */
-    if (this->base.variable == 4) {
+    type = this->base.params & 0xf;
+    memset(&this->xflag, 0, sizeof(Xflag));
+    if (type >= 2)
         EnElf_Aliases(this, play);
-    }
 
     init = actorAddr(AC_EN_ELF, EN_ELF_INIT_VROM);
     init(&this->base, play);
@@ -195,6 +215,17 @@ void EnElf_InitWrapper(Actor_EnElf* this, GameState_Play* play)
     else
     {
         this->extendedGi = EN_ELF_DEFAULT_GI;
+    }
+
+    /* Fairy Group Spawner */
+    if (type >= 2 && type != 4)
+    {
+        if (EnElf_IsShuffled(this, play))
+        {
+            this->itemGiven = 0;
+            this->extendedGiDraw = EnElf_ItemGi(this);
+            this->base.draw = EnElf_Draw;
+        }
     }
 }
 

@@ -13,7 +13,7 @@ static int doorType(GameState_Play* play, Actor* this)
     switch (this->id)
     {
     case AC_DOOR_SHUTTER:
-        tmp = (this->variable >> 7) & 7;
+        tmp = (this->params >> 7) & 7;
         if (tmp == 0x04)
             return DOOR_SMALL_KEY;
         if (tmp == 0x05)
@@ -30,7 +30,7 @@ int comboDoorIsUnlocked(GameState_Play* play, Actor* actor)
     int flag;
 
     type = doorType(play, actor);
-    flag = actor->variable & 0x7f;
+    flag = actor->params & 0x7f;
 
     if (type == DOOR_BOSS_KEY && Config_Flag(CFG_MM_NO_BOSS_KEY))
         return 1;

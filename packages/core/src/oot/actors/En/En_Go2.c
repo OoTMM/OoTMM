@@ -51,7 +51,7 @@ void EnGo2_SetBiggoronMessageId(Actor* this, GameState_Play* play, Actor* dst)
     u16 msgId;
     s16 gi;
 
-    if ((this->variable & 0x1f) != 2)
+    if ((this->params & 0x1f) != 2)
         return;
 
     msgId = 0x3053;

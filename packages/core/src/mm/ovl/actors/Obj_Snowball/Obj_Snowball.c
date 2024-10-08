@@ -4,8 +4,8 @@
 #include <combo/config.h>
 #include "Obj_Snowball.h"
 
-#define OBJSNOWBALL_GET_SWITCH_FLAG(thisx) ((thisx)->variable & 0x3F)
-#define OBJSNOWBALL_GET_7F00(thisx) (((thisx)->variable >> 8) & 0x7F)
+#define OBJSNOWBALL_GET_SWITCH_FLAG(thisx) ((thisx)->params & 0x3F)
+#define OBJSNOWBALL_GET_7F00(thisx) (((thisx)->params >> 8) & 0x7F)
 
 #if defined(GAME_MM)
 # define SEGADDR_GOROIWA_DL_0072F0 SEGADDR_FROM_OFFSET(6, 0x72f0)
@@ -259,7 +259,7 @@ void ObkSnowball_SpawnGoronElder(Actor_ObjSnowball* this, GameState_Play* play) 
 
     Actor_SpawnAsChildAndCutscene(&play->actorCtx, play, ptr->unk_00, this->actor.home.pos.x, this->actor.home.pos.y,
                                   this->actor.home.pos.z, this->actor.home.rot.x, 0, this->actor.home.rot.z,
-                                  this->actor.variable | ptr->unk_02, CutsceneManager_GetAdditionalCsId(this->actor.csId),
+                                  this->actor.params | ptr->unk_02, CutsceneManager_GetAdditionalCsId(this->actor.csId),
                                   this->actor.halfDaysBits, NULL);
 }
 
@@ -269,7 +269,7 @@ void ObjSnowball_SpawnWolfos(Actor_ObjSnowball* this, GameState_Play* play) {
 
     Actor_SpawnAsChildAndCutscene(&play->actorCtx, play, ptr->unk_00, this->actor.home.pos.x, this->actor.home.pos.y,
                                   this->actor.home.pos.z, this->actor.home.rot.x, 0, this->actor.home.rot.z,
-                                  this->actor.variable | ptr->unk_02, CS_ID_NONE, this->actor.halfDaysBits, NULL);
+                                  this->actor.params | ptr->unk_02, CS_ID_NONE, this->actor.halfDaysBits, NULL);
 }
 
 void func_80B02EE4(Actor_ObjSnowball* this, GameState_Play* play) {

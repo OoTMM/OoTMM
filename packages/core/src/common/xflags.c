@@ -3,6 +3,7 @@
 #include <combo/item.h>
 #include <combo/custom.h>
 #include <combo/dma.h>
+#include <combo/global.h>
 #include <combo/io.h>
 
 static u16 bitPosLookup(const Xflag* xf, u32 paddrTableScenes, u32 paddrTableSetups, u32 paddrTableRooms)
@@ -117,4 +118,48 @@ void comboXflagItemOverride(ComboItemOverride* o, const Xflag* xf, s16 gi)
 
     comboXflagItemQuery(&q, xf, gi);
     comboItemOverride(o, &q);
+}
+
+void comboXflagInit(Xflag* xf, Actor* actor, GameState_Play* play)
+{
+    if (g.xflagOverride)
+    {
+        memcpy(xf, &g.xflag, sizeof(*xf));
+    }
+    else
+    {
+        xf->sceneId = play->sceneId;
+        xf->setupId = g.sceneSetupId;
+        xf->roomId = actor->room;
+        xf->sliceId = 0;
+        xf->id = actor->actorIndex;
+
+#if defined(GAME_OOT)
+    if (xf->sceneId == SCE_OOT_GROTTOS)
+    {
+        switch (xf->roomId)
+        {
+        case 0x00:
+            /* Generic grottos */
+            xf->roomId = 0x20 | (gGrottoData & 0x1f);
+            break;
+        }
+    }
+#endif
+
+#if defined(GAME_MM)
+    if (xf->sceneId == SCE_MM_GROTTOS)
+    {
+        switch (xf->roomId)
+        {
+        case 0x0a:
+            /* Cow grottos */
+            if (gLastScene == SCE_MM_GREAT_BAY_COAST)
+                xf->roomId = 0x0f;
+            break;
+        }
+    }
+#endif
+
+    }
 }

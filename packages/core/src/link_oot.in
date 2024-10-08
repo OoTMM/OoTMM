@@ -138,9 +138,23 @@ gActorOvl = 0x800e8530;
 LoadObject = 0x800812f0;
 Object_GetSlot = 0x80081628;
 Object_IsLoaded = 0x80081688;
+SkelAnime_DrawOpa = 0x8008993c;
 SkelAnime_DrawFlexOpa = 0x80089D8C;
 Actor_SetScale = 0x80020f88;
 Actor_SetFocus = 0x80020f04;
+SkelAnime_Init = 0x8008c684;
+SkelAnime_Update = 0x8008c9c0;
+Camera_GetCamDir = 0x80049730;
+Matrix_SetTranslateRotateYXZ = 0x800ab510;
+
+sinf = 0x800cf470;
+Math3D_Dist2DSq = 0x800a5470;
+Math_ScaledStepToS = 0x80063704;
+Math_SmoothStepToF = 0x80064178;
+Math_Vec3f_Yaw = 0x80063f00;
+
+Math_StepToF = 0x8006385c;
+Animation_Change = 0x8008d17c;
 
 PlaySound = 0x800646f0;
 PlaySound6 = 0x800c806c;

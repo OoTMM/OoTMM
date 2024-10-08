@@ -13,7 +13,7 @@ static void EnBox_ItemQuery(ComboItemQuery* q, Actor* this, GameState_Play* play
     {
         q->ovType = OV_CHEST;
         q->sceneId = play->sceneId;
-        q->id = this->variable & 0x1f;
+        q->id = this->params & 0x1f;
     }
     else
     {
@@ -34,7 +34,7 @@ static s16 EnBox_Item(Actor* this, GameState_Play* play, s16 gi)
 
 static s16 EnBox_GetGI(Actor* this)
 {
-    return -((this->variable >> 5) & 0x7f);
+    return -((this->params >> 5) & 0x7f);
 }
 
 void EnBox_GiveItem(Actor* actor, GameState_Play* play, s16 gi)

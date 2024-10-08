@@ -2,7 +2,7 @@
 
 f32 ObjBoat_GetTopSpeed(Actor_ObjBoat* boat, GameState_Play* play)
 {
-    if (boat->base.variable == 0x47F)
+    if (boat->base.params == 0x47F)
     {
         Vec3f platformProximity = { -455.0, 0.0, -680.0};
         int nearPlatform = (VectDist(&boat->base.world.pos, &platformProximity) < 750.0);
@@ -17,7 +17,7 @@ f32 ObjBoat_GetTopSpeed(Actor_ObjBoat* boat, GameState_Play* play)
 
 f32 ObjBoat_GetAccelSpeed(Actor_ObjBoat* boat, GameState_Play* play)
 {
-    if (boat->base.variable == 0x47F && (boat->speedMultiplier < 0 || boat->pathProgress < 0xC))
+    if (boat->base.params == 0x47F && (boat->speedMultiplier < 0 || boat->pathProgress < 0xC))
     {
         return 0.2;
     }

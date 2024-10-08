@@ -22,7 +22,7 @@ void ObjMure3_SetPostSpawnHandler(Actor_ObjMure3* this)
     this->handler = actorAddr(AC_OBJ_MURE3, ADDR_HANDLER_POST_SPAWN);
 
     /* Upgrade spawns */
-    count = ((this->base.variable & 0xe000) == 0x4000) ? 7 : 5;
+    count = ((this->base.params & 0xe000) == 0x4000) ? 7 : 5;
     for (int i = 0; i < count; ++i)
     {
         if (this->children[i])

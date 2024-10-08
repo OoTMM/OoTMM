@@ -3050,7 +3050,7 @@ void Boss01_Bug_Crawl(Actor_Boss01* this, GameState_Play* play) {
         this->skelAnime.playSpeed = 1.0f;
 
         while (explosive != NULL) {
-            if (explosive->variable == 1) {
+            if (explosive->params == 1) {
                 explosive = explosive->next;
             } else {
                 targetSpeed = 5.0f;

@@ -667,6 +667,7 @@
     "Mountain Gossip Grotto": "true"
     "Ocean Gossip Grotto": "can_break_boulders"
     "Canyon Gossip Grotto": "true"
+    "Termina Field Butterflies": "has_sticks"
   locations:
     "Termina Field Water Chest": "underwater_walking"
     "Termina Field Tall Grass Chest": "true"
@@ -916,6 +917,11 @@
     "Termina Field Gossip Northeast": "true"
     "Termina Field Gossip Near Mountain": "true"
     "Termina Field Gossip Near Kamaro": "true"
+"Termina Field Butterflies":
+  region: TERMINA_FIELD
+  locations:
+    "Termina Field Butterfly 1": "true"
+    "Termina Field Butterfly 2": "true"
 "Grass Grotto":
   region: ENTRANCE
   events:
@@ -1112,6 +1118,9 @@
     "Termina Field Cow Grotto Grass 71": "true"
     "Termina Field Cow Grotto Grass 72": "true"
     "Termina Field Cow Grotto Hive": "break_hive || (has_bombchu && trick(MM_HIVE_BOMBCHU))"
+    "Termina Field Cow Grotto Butterfly 1": "has_sticks"
+    "Termina Field Cow Grotto Butterfly 2": "has_sticks"
+    "Termina Field Cow Grotto Butterfly 3": "has_sticks"
 "Swamp Gossip Grotto":
   region: ENTRANCE
   events:
@@ -1167,6 +1176,8 @@
     "Ocean Gossip Grotto Grass 4": "true"
     "Ocean Gossip Grotto Grass 5": "true"
     "Ocean Gossip Grotto Hive": "break_hive || (has_bombchu && trick(MM_HIVE_BOMBCHU))"
+    "Ocean Gossip Grotto Butterfly 1": "has_sticks"
+    "Ocean Gossip Grotto Butterfly 2": "has_sticks"
   gossip:
     "Termina Field Gossip Grotto Leftmost": "true"
     "Termina Field Gossip Grotto Left-Center": "true"
@@ -1581,6 +1592,7 @@
   region: ENTRANCE
   exits:
     "Deku Palace Main": "true"
+    "Deku Palace Grotto Butterflies": "has_sticks"
   events:
     MAGIC_BEANS_PALACE: "soul_bean_salesman && can_use_wallet(1)"
     ARROWS: "true"
@@ -1603,6 +1615,13 @@
     "Deku Palace Grotto Grass 12": "true"
 #    "Deku Palace Free Bean": "true"
 #    "Deku Palace Bean Purchase": "can_use_wallet(1)"
+"Deku Palace Grotto Butterflies":
+  region: ENTRANCE
+  locations:
+    "Deku Palace Grotto Butterfly 1": "true"
+    "Deku Palace Grotto Butterfly 2": "true"
+    "Deku Palace Grotto Butterfly 3": "true"
+    "Deku Palace Grotto Butterfly 4": "true"
 "Deku Palace Cliff":
   region: DEKU_PALACE
   exits:
@@ -1791,6 +1810,7 @@
     "Owl Mountain": "true"
     "Mountain Village Elder": "true"
     "Mountain Village Keaton": "true"
+    "Mountain Village Butterflies": "is_spring && has_sticks"
   gossip:
     "Mountain Village Gossip Outside": "is_spring"
     "Mountain Village Gossip Tunnel": "is_spring && (has_mask_goron || short_hook_anywhere)"
@@ -1864,6 +1884,18 @@
     "Mountain Village Small Snowball Winter 2": "is_winter"
     "Mountain Village Small Snowball Winter 3": "is_winter"
     "Mountain Village Small Snowball Winter 4": "is_winter"
+"Mountain Village Butterflies":
+  region: MOUNTAIN_VILLAGE
+  locations:
+    "Mountain Village Butterfly Pack 1 Butterfly 1": "true"
+    "Mountain Village Butterfly Pack 1 Butterfly 2": "true"
+    "Mountain Village Butterfly Pack 1 Butterfly 3": "true"
+    "Mountain Village Butterfly Pack 1 Butterfly 4": "true"
+    "Mountain Village Butterfly Pack 2 Butterfly 1": "true"
+    "Mountain Village Butterfly Pack 2 Butterfly 2": "true"
+    "Mountain Village Butterfly Pack 2 Butterfly 3": "true"
+    "Mountain Village Butterfly Pack 2 Butterfly 4": "true"
+    "Mountain Village Butterfly Pack 2 Butterfly 5": "true"
 "Mountain Village Elder":
   region: NONE
   exits:
@@ -2533,6 +2565,7 @@
     "GBC Near Cow Grotto": "can_hookshot"
     "Owl Great Bay": "true"
     "Great Bay Coast Water Void": "true"
+    "Great Bay Coast Butterflies": "has_sticks"
   events:
     MAGIC: "true"
     BOMBS_OR_BOMBCHU: "true"
@@ -2567,6 +2600,13 @@
     "Great Bay Coast Grass 5": "true"
   gossip:
     "Great Bay Coast Gossip": "true"
+"Great Bay Coast Butterflies":
+  region: GREAT_BAY_COAST
+  locations:
+    "Great Bay Coast Common Butterfly 1": "true"
+    "Great Bay Coast Common Butterfly 2": "true"
+    "Great Bay Coast Cleared Butterfly 1": "is_ocean_cleared"
+    "Great Bay Coast Cleared Butterfly 2": "is_ocean_cleared"
 "Great Bay Coast Water Void":
   region: NONE
   exits:
@@ -2709,6 +2749,9 @@
     "Great Bay Cow Grotto Grass 71": "true"
     "Great Bay Cow Grotto Grass 72": "true"
     "Great Bay Cow Grotto Hive": "break_hive || (has_bombchu && trick(MM_HIVE_BOMBCHU))"
+    "Great Bay Cow Grotto Butterfly 1": "has_sticks"
+    "Great Bay Cow Grotto Butterfly 2": "has_sticks"
+    "Great Bay Cow Grotto Butterfly 3": "has_sticks"
 "Fisher's Hut":
   region: ENTRANCE
   exits:

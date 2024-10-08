@@ -47,7 +47,7 @@ int Elegy_Darken(Actor* actor, GameState_Play* play)
 
 void Elegy_Update(Actor* actor, GameState_Play* play)
 {
-    u8 index = actor->variable & 7;
+    u8 index = actor->params & 7;
     Actor* statue = play->actorCtx.elegyStatues[index];
     if (statue != NULL)
     {

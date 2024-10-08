@@ -48,7 +48,13 @@ typedef struct GameState_Play
     u16                    sceneId;
     char                   unk_000a6[0xa];
     void*                  sceneSegment;
-    char                   unk_000b4[0x70a];
+    View                   view;
+    Camera                 mainCamera;
+    Camera                 subCameras[3];
+    Camera*                cameraPtrs[4];
+    s16                    activeCamId;
+    s16                    nextCamId;
+    char                   unk_007a4[0x1c];
     CollisionContext       colCtx;
     ActorContext           actorCtx;
     CutsceneContext        cutscene;

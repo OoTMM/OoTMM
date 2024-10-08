@@ -3,8 +3,8 @@
 
 #include <combo/actor.h>
 
-#define THREEDAY_GET_SKYBOX_NUM_STARS(this)             (((((s16)(this)->variable)) >> 10) * 100)
-#define THREEDAY_GET_BIG_BELLS_SFX_VOLUME_INDEX(this)   (((this)->variable >> 5) & 0xF)
+#define THREEDAY_GET_SKYBOX_NUM_STARS(this)             (((((s16)(this)->params)) >> 10) * 100)
+#define THREEDAY_GET_BIG_BELLS_SFX_VOLUME_INDEX(this)   (((this)->params >> 5) & 0xF)
 
 struct Actor_EnTest4;
 

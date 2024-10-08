@@ -7,7 +7,7 @@ static void EnSi_ItemQuery(ComboItemQuery* q, Actor* this)
     u16 key;
 
     /* Poor man's ctz */
-    switch (this->variable & 0xff)
+    switch (this->params & 0xff)
     {
     case 0x01: key = 0x00; break;
     case 0x02: key = 0x01; break;
@@ -20,7 +20,7 @@ static void EnSi_ItemQuery(ComboItemQuery* q, Actor* this)
     default:
         UNREACHABLE();
     }
-    key += ((((this->variable + 0x100) >> 8) & 0x1f) * 8);
+    key += ((((this->params + 0x100) >> 8) & 0x1f) * 8);
 
     bzero(q, sizeof(*q));
     q->ovType = OV_GS;

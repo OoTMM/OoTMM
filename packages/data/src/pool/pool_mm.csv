@@ -402,6 +402,8 @@ Termina Field Wonder Item Shell Side 3,                 wonder,         NONE,   
 Termina Field Wonder Item Graffiti 1,                   wonder,         NONE,                   TERMINA_FIELD,                0x00066,                    RUPEE_GREEN
 Termina Field Wonder Item Graffiti 2,                   wonder,         NONE,                   TERMINA_FIELD,                0x10066,                    RUPEE_GREEN
 Termina Field Wonder Item Graffiti 3,                   wonder,         NONE,                   TERMINA_FIELD,                0x20066,                    RUPEE_GREEN
+Termina Field Butterfly 1,                              butterfly,      NONE,                   TERMINA_FIELD,                0x000ab,                    FAIRY
+Termina Field Butterfly 2,                              butterfly,      NONE,                   TERMINA_FIELD,                0x100ab,                    NOTHING
 Termina Field Cow Grotto Grass 01,                      grass,          NONE,                   GROTTOS,                      0x00a00,                    RANDOM
 Termina Field Cow Grotto Grass 02,                      grass,          NONE,                   GROTTOS,                      0x10a00,                    RANDOM
 Termina Field Cow Grotto Grass 03,                      grass,          NONE,                   GROTTOS,                      0x20a00,                    RANDOM
@@ -475,12 +477,17 @@ Termina Field Cow Grotto Grass 70,                      grass,          NONE,   
 Termina Field Cow Grotto Grass 71,                      grass,          NONE,                   GROTTOS,                      0xa0a09,                    RANDOM
 Termina Field Cow Grotto Grass 72,                      grass,          NONE,                   GROTTOS,                      0xb0a09,                    RANDOM
 Termina Field Cow Grotto Hive,                          hive,           NONE,                   GROTTOS,                      0x00a02,                    NOTHING
+Termina Field Cow Grotto Butterfly 1,                   butterfly,      NONE,                   GROTTOS,                      0x00a06,                    FAIRY
+Termina Field Cow Grotto Butterfly 2,                   butterfly,      NONE,                   GROTTOS,                      0x10a06,                    NOTHING
+Termina Field Cow Grotto Butterfly 3,                   butterfly,      NONE,                   GROTTOS,                      0x20a06,                    NOTHING
 Ocean Gossip Grotto Grass 1,                            grass,          NONE,                   GROTTOS,                      0x00001,                    RANDOM
 Ocean Gossip Grotto Grass 2,                            grass,          NONE,                   GROTTOS,                      0x00004,                    RANDOM
 Ocean Gossip Grotto Grass 3,                            grass,          NONE,                   GROTTOS,                      0x00006,                    RANDOM
 Ocean Gossip Grotto Grass 4,                            grass,          NONE,                   GROTTOS,                      0x00007,                    RANDOM
 Ocean Gossip Grotto Grass 5,                            grass,          NONE,                   GROTTOS,                      0x00008,                    RANDOM
 Ocean Gossip Grotto Hive,                               hive,           NONE,                   GROTTOS,                      0x00000,                    NOTHING
+Ocean Gossip Grotto Butterfly 1,                        butterfly,      NONE,                   GROTTOS,                      0x00002,                    FAIRY
+Ocean Gossip Grotto Butterfly 2,                        butterfly,      NONE,                   GROTTOS,                      0x10002,                    NOTHING
 Canyon Gossip Grotto Grass 1,                           grass,          NONE,                   GROTTOS,                      0x00200,                    RANDOM
 Canyon Gossip Grotto Grass 2,                           grass,          NONE,                   GROTTOS,                      0x00201,                    RANDOM
 Canyon Gossip Grotto Grass 3,                           grass,          NONE,                   GROTTOS,                      0x00202,                    RANDOM
@@ -665,6 +672,10 @@ Deku Palace Grotto Grass 09,                            grass,          NONE,   
 Deku Palace Grotto Grass 10,                            grass,          NONE,                   GROTTOS,                      0x90c03,                    RANDOM
 Deku Palace Grotto Grass 11,                            grass,          NONE,                   GROTTOS,                      0xa0c03,                    RANDOM
 Deku Palace Grotto Grass 12,                            grass,          NONE,                   GROTTOS,                      0xb0c03,                    RANDOM
+Deku Palace Grotto Butterfly 1,                         butterfly,      NONE,                   GROTTOS,                      0x00c04,                    FAIRY
+Deku Palace Grotto Butterfly 2,                         butterfly,      NONE,                   GROTTOS,                      0x10c04,                    NOTHING
+Deku Palace Grotto Butterfly 3,                         butterfly,      NONE,                   GROTTOS,                      0x20c04,                    NOTHING
+Deku Palace Grotto Butterfly 4,                         butterfly,      NONE,                   GROTTOS,                      0x30c04,                    NOTHING
 Deku Palace Rupee Right 01,                             rupee,          NONE,                   DEKU_PALACE,                  0x00100,                    RUPEE_GREEN
 Deku Palace Rupee Right 02,                             rupee,          NONE,                   DEKU_PALACE,                  0x00101,                    RUPEE_GREEN
 Deku Palace Rupee Right 03,                             rupee,          NONE,                   DEKU_PALACE,                  0x00102,                    RUPEE_GREEN
@@ -927,6 +938,15 @@ Mountain Village Small Snowball Winter 3,               snowball,       NONE,   
 Mountain Village Small Snowball Winter 4,               snowball,       NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x0002b,                    MAGIC_JAR_SMALL
 Mountain Village Small Snowball Cliff 1,                snowball,       NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x00031,                    MAGIC_JAR_LARGE
 Mountain Village Small Snowball Cliff 2,                snowball,       NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x00032,                    MAGIC_JAR_LARGE
+Mountain Village Butterfly Pack 1 Butterfly 1,          butterfly,      NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x00020,                    FAIRY
+Mountain Village Butterfly Pack 1 Butterfly 2,          butterfly,      NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x10020,                    NOTHING
+Mountain Village Butterfly Pack 1 Butterfly 3,          butterfly,      NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x20020,                    NOTHING
+Mountain Village Butterfly Pack 1 Butterfly 4,          butterfly,      NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x30020,                    NOTHING
+Mountain Village Butterfly Pack 2 Butterfly 1,          butterfly,      NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x00021,                    FAIRY
+Mountain Village Butterfly Pack 2 Butterfly 2,          butterfly,      NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x10021,                    NOTHING
+Mountain Village Butterfly Pack 2 Butterfly 3,          butterfly,      NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x20021,                    NOTHING
+Mountain Village Butterfly Pack 2 Butterfly 4,          butterfly,      NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x30021,                    NOTHING
+Mountain Village Butterfly Pack 2 Butterfly 5,          butterfly,      NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x40021,                    NOTHING
 Blacksmith Razor Blade,                                 npc,            BLACKSMITH,             BLACKSMITH,                   SWORD_RAZOR,                SWORD
 Blacksmith Gilded Sword,                                npc,            BLACKSMITH,             BLACKSMITH,                   SWORD_GILDED,               SWORD
 Blacksmith Potted Plant 1 Pot,                          pot,            NONE,                   BLACKSMITH,                   0x00004,                    NOTHING
@@ -1278,6 +1298,10 @@ Great Bay Coast Grass 2,                                grass,          NONE,   
 Great Bay Coast Grass 3,                                grass,          NONE,                   GREAT_BAY_COAST,              0x00070,                    RANDOM
 Great Bay Coast Grass 4,                                grass,          NONE,                   GREAT_BAY_COAST,              0x00071,                    RANDOM
 Great Bay Coast Grass 5,                                grass,          NONE,                   GREAT_BAY_COAST,              0x00072,                    RANDOM
+Great Bay Coast Common Butterfly 1,                     butterfly,      NONE,                   GREAT_BAY_COAST,              0x04085,                    FAIRY
+Great Bay Coast Common Butterfly 2,                     butterfly,      NONE,                   GREAT_BAY_COAST,              0x14085,                    NOTHING
+Great Bay Coast Cleared Butterfly 1,                    butterfly,      NONE,                   GREAT_BAY_COAST,              0x24085,                    NOTHING
+Great Bay Coast Cleared Butterfly 2,                    butterfly,      NONE,                   GREAT_BAY_COAST,              0x34085,                    NOTHING
 Great Bay Cow Grotto Grass 01,                          grass,          NONE,                   GROTTOS,                      0x00f00,                    RANDOM
 Great Bay Cow Grotto Grass 02,                          grass,          NONE,                   GROTTOS,                      0x10f00,                    RANDOM
 Great Bay Cow Grotto Grass 03,                          grass,          NONE,                   GROTTOS,                      0x20f00,                    RANDOM
@@ -1351,6 +1375,9 @@ Great Bay Cow Grotto Grass 70,                          grass,          NONE,   
 Great Bay Cow Grotto Grass 71,                          grass,          NONE,                   GROTTOS,                      0xa0f09,                    RANDOM
 Great Bay Cow Grotto Grass 72,                          grass,          NONE,                   GROTTOS,                      0xb0f09,                    RANDOM
 Great Bay Cow Grotto Hive,                              hive,           NONE,                   GROTTOS,                      0x00f02,                    NOTHING
+Great Bay Cow Grotto Butterfly 1,                       butterfly,      NONE,                   GROTTOS,                      0x00f06,                    FAIRY
+Great Bay Cow Grotto Butterfly 2,                       butterfly,      NONE,                   GROTTOS,                      0x10f06,                    NOTHING
+Great Bay Cow Grotto Butterfly 3,                       butterfly,      NONE,                   GROTTOS,                      0x20f06,                    NOTHING
 Zora Cape Ledge Chest 1,                                chest,          NONE,                   ZORA_CAPE,                    0x01,                       RUPEE_RED
 Zora Cape Ledge Chest 2,                                chest,          NONE,                   ZORA_CAPE,                    0x02,                       RUPEE_RED
 Zora Cape Underwater Chest,                             chest,          NONE,                   ZORA_CAPE,                    0x00,                       RUPEE_PURPLE
@@ -2443,6 +2470,19 @@ Moon Trial Link Pot 5,                                  pot,            NONE,   
 Moon Trial Link Pot 6,                                  pot,            NONE,                   MOON_LINK,                    0x0006,                     MAGIC_JAR_LARGE
 Moon Trial Link Pot 7,                                  pot,            NONE,                   MOON_LINK,                    0x0007,                     MAGIC_JAR_LARGE
 Moon Trial Link Pot 8,                                  pot,            NONE,                   MOON_LINK,                    0x0008,                     MAGIC_JAR_LARGE
-Moon Fierce Deity Mask,                                 npc,            NONE,                   MOON_LINK,                    MASK_FIERCE_DEITY,          MASK_FIERCE_DEITY
+Moon Fierce Deity Mask,                                 npc,            NONE,                   MOON,                         MASK_FIERCE_DEITY,          MASK_FIERCE_DEITY
+Moon Butterfly 01,                                      butterfly,      NONE,                   MOON,                         0x00005,                    FAIRY
+Moon Butterfly 02,                                      butterfly,      NONE,                   MOON,                         0x00006,                    FAIRY
+Moon Butterfly 03,                                      butterfly,      NONE,                   MOON,                         0x00007,                    FAIRY
+Moon Butterfly 04,                                      butterfly,      NONE,                   MOON,                         0x00008,                    FAIRY
+Moon Butterfly 05,                                      butterfly,      NONE,                   MOON,                         0x00009,                    NOTHING
+Moon Butterfly 06,                                      butterfly,      NONE,                   MOON,                         0x0000a,                    FAIRY
+Moon Butterfly 07,                                      butterfly,      NONE,                   MOON,                         0x0000b,                    FAIRY
+Moon Butterfly 08,                                      butterfly,      NONE,                   MOON,                         0x0000c,                    FAIRY
+Moon Butterfly 09,                                      butterfly,      NONE,                   MOON,                         0x0000d,                    FAIRY
+Moon Butterfly 10,                                      butterfly,      NONE,                   MOON,                         0x0000e,                    FAIRY
+Moon Butterfly 11,                                      butterfly,      NONE,                   MOON,                         0x0000f,                    FAIRY
+Moon Butterfly 12,                                      butterfly,      NONE,                   MOON,                         0x00010,                    FAIRY
+Moon Butterfly 13,                                      butterfly,      NONE,                   MOON,                         0x00011,                    FAIRY
 Moon Majora Pot 1,                                      pot,            NONE,                   LAIR_MAJORA,                  0x0001,                     ARROWS_20
 Moon Majora Pot 2,                                      pot,            NONE,                   LAIR_MAJORA,                  0x0002,                     MAGIC_JAR_LARGE

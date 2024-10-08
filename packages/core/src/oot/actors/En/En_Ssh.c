@@ -43,8 +43,8 @@ static void EnSsh_Hint(GameState_Play* play, int index)
 void EnSsh_TalkedTo(Actor* this, GameState_Play* play)
 {
     /* Big skulltula */
-    if (this->variable == 0)
+    if (this->params == 0)
         return;
 
-    EnSsh_Hint(play, this->variable - 1);
+    EnSsh_Hint(play, this->params - 1);
 }

@@ -8,7 +8,7 @@ static void EnItem00_ItemQuery(ComboItemQuery* q, Actor_EnItem00* this, GameStat
 {
     memset(q, 0, sizeof(*q));
 
-    switch (this->base.variable)
+    switch (this->base.params)
     {
     case 0x06:
         q->ovType = OV_COLLECTIBLE;
@@ -64,7 +64,7 @@ void EnItem00_DrawHeartPieceSmallKey(Actor_EnItem00* this, GameState_Play* play)
     ComboItemOverride o;
     float scale;
 
-    switch (this->base.variable)
+    switch (this->base.params)
     {
     case 0x06:
         scale = 17.5f;

@@ -11,6 +11,8 @@ InitDmaManager = 0x80080d0c;
 Play_Init = 0x8016a2c8;
 gSaveContext = 0x801ef670;
 DMARomToRam = 0x80080790;
+Camera_GetCamDir = 0x800DFC90;
+SkelAnime_DrawOpa = 0x80133b3c;
 
 EffectSs_Delete = 0x800b0210;
 gEffectSsTable = 0x801ae3a0;
@@ -373,9 +375,11 @@ Math_Vec3f_Pitch = 0x800ffa94;
 EffectSsDust_Spawn_2_Normal = 0x800b0f80;
 
 Audio_PlaySfx_AtPosWithAllChannelsIO = 0x801a0868;
+SkelAnime_Init = 0x80136A7C;
 SkelAnime_Update = 0x80136cd0;
 SkelAnime_InitFlex = 0x80136b30;
 Animation_Change = 0x801373e8;
+Math3D_Dist2DSq = 0x8017A634;
 
 Player_SetCsActionWithHaltedActors = 0x800b7298;
 Actor_TalkOfferAccepted = 0x800b84d0;

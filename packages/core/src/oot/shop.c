@@ -54,7 +54,7 @@ u8 Shop_ItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
     if (play->sceneId == SCE_OOT_KOKIRI_SHOP)
     {
         /* Kokiri shop */
-        switch (girlA->base.variable)
+        switch (girlA->base.params)
         {
         case SHOP_RECOVERY_HEART:   return 0x00;
         case SHOP_ARROWS_10:        return 0x01;
@@ -69,7 +69,7 @@ u8 Shop_ItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
     else if (play->sceneId == SCE_OOT_BOMBCHU_SHOP)
     {
         /* Bombchu shop */
-        switch (girlA->base.variable)
+        switch (girlA->base.params)
         {
         case SHOP_BOMBCHU_20_1:     return 0x08;
         case SHOP_BOMBCHU_20_2:     return 0x09;
@@ -84,7 +84,7 @@ u8 Shop_ItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
     else if (play->sceneId == SCE_OOT_ZORA_SHOP)
     {
         /* Zora shop */
-        switch (girlA->base.variable)
+        switch (girlA->base.params)
         {
         case SHOP_POTION_RED_ALT2:  return 0x10;
         case SHOP_ARROWS_50:        return 0x11;
@@ -99,7 +99,7 @@ u8 Shop_ItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
     else if (play->sceneId == SCE_OOT_GORON_SHOP)
     {
         /* Goron shop */
-        switch (girlA->base.variable)
+        switch (girlA->base.params)
         {
         case SHOP_RECOVERY_HEART:   return girlA->base.world.pos.x < -60.f ? 0x18 : 0x19;
         case SHOP_POTION_RED_ALT:   return 0x1a;
@@ -114,7 +114,7 @@ u8 Shop_ItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
     {
         /* Market / Kakariko Bazaar */
         ageMask = (gSave.entrance == ENTR_OOT_KAKARIKO_BAZAAR ? 0x10 : 0x00);
-        switch (girlA->base.variable)
+        switch (girlA->base.params)
         {
         case SHOP_ARROWS_10:        return 0x20 | ageMask;
         case SHOP_ARROWS_30:        return 0x21 | ageMask;
@@ -130,7 +130,7 @@ u8 Shop_ItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
     {
         /* Market / Kakriko Potion Shop */
         ageMask = (play->sceneId == SCE_OOT_KAKARIKO_POTION_SHOP) ? 0x10 : 0x00;
-        switch (girlA->base.variable)
+        switch (girlA->base.params)
         {
         case SHOP_FISH:         return 0x28 | ageMask;
         case SHOP_BUG:          return 0x29 | ageMask;

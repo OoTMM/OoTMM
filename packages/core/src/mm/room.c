@@ -60,6 +60,7 @@ void OnRoomChange(GameState_Play* play, void* arg2)
     g.silverRupee = 0;
     g.roomEnemyLackSoul = 0;
     g.actorIndex = 0;
+    g.xflagOverride = 0;
 
     /* Update the scene setup */
     updateSceneSetup(play);

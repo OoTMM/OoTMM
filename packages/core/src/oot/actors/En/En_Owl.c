@@ -2,7 +2,7 @@
 
 void EnOwl_AfterInit(Actor* this)
 {
-    switch ((this->variable & 0xfc0) >> 6)
+    switch ((this->params & 0xfc0) >> 6)
     {
     case 0x07:
     case 0x08:

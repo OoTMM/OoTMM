@@ -91,7 +91,7 @@ void EnKusa_DrawWrapper(Actor_EnKusa* this, GameState_Play* play)
         o.gi = 0;
 
     /* Prepare */
-    if ((this->base.variable & 3) == 0)
+    if ((this->base.params & 3) == 0)
         alt = 0;
     else
         alt = 1;

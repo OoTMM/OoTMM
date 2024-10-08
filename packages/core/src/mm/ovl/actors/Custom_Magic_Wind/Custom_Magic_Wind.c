@@ -150,7 +150,7 @@ void MagicWind_Init(Actor* thisx, GameState_Play* play) {
         /* "Magic_Wind_Actor_ct (): Construct failed" */
     }
     this->actor.room = -1;
-    switch (this->actor.variable) {
+    switch (this->actor.params) {
         case 0:
             SkelCurve_SetAnim(&this->skelCurve, &sAnim, 0.0f, 60.0f, 0.0f, 1.0f);
             this->timer = 29;

@@ -58,7 +58,7 @@ void ObjWarpstone_GiveItem(Actor* this, GameState_Play* play)
     if (gSave.time >= CLOCK_TIME(17, 59) && gSave.time <= CLOCK_TIME(18, 1))
         return;
 
-    id = this->variable & 0xf;
+    id = this->params & 0xf;
 
     if (!Config_Flag(CFG_MM_OWL_SHUFFLE) || (id == 0xf))
     {

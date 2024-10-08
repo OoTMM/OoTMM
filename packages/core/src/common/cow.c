@@ -85,7 +85,7 @@ static Actor* EnCow_GetNearestCow(GameState_Play* play)
         tmp = play->actorCtx.actors[i].first;
         while (tmp && count)
         {
-            if (tmp->id == AC_EN_COW && tmp->variable != 1 && (!cow || cowDist > tmp->xzDistToPlayer))
+            if (tmp->id == AC_EN_COW && tmp->params != 1 && (!cow || cowDist > tmp->xzDistToPlayer))
             {
                 cow = tmp;
                 cowDist = tmp->xzDistToPlayer;
@@ -279,7 +279,6 @@ static int EnCow_HasGivenItem(Actor* this)
     }
     return 0;
 }
-
 
 static int EnCow_TalkedTo(Actor* this, GameState_Play* play)
 {

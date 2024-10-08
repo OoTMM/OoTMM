@@ -63,11 +63,11 @@ void EnInvisibleRupee_InitWrapper(Actor_EnInvisibleRuppe* this, GameState_Play* 
     comboXflagItemOverride(&o, &this->xflag, 0);
     this->isExtended = !!(o.gi && !comboXflagsGet(&this->xflag));
 
-    switchFlag = (this->base.variable & 0x1fc) >> 2;
+    switchFlag = (this->base.params & 0x1fc) >> 2;
     if (this->isExtended && switchFlag != 0x7f && Flags_GetSwitch(play, switchFlag))
     {
         /* Already collected but no xflag */
-        this->base.variable |= 0x1fc;
+        this->base.params |= 0x1fc;
     }
 
     /* Forward */

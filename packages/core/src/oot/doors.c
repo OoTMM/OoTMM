@@ -17,12 +17,12 @@ static int doorType(GameState_Play* play, Actor* this)
     switch (this->id)
     {
     case AC_EN_DOOR:
-        tmp = (this->variable >> 7) & 7;
+        tmp = (this->params >> 7) & 7;
         if (tmp == 1)
             return DOOR_SMALL_KEY;
         break;
     case AC_DOOR_SHUTTER:
-        tmp = (this->variable >> 6) & 0xf;
+        tmp = (this->params >> 6) & 0xf;
         if (tmp == 0x05)
             return DOOR_BOSS_KEY;
         if (tmp == 0x0b)
@@ -41,7 +41,7 @@ int comboDoorIsUnlocked(GameState_Play* play, Actor* actor)
 
     sceneId = play->sceneId;
     type = doorType(play, actor);
-    flag = actor->variable & 0x3f;
+    flag = actor->params & 0x3f;
 
     /* Fire temple 1st door */
     if (sceneId == SCE_OOT_TEMPLE_FIRE && flag == 0x17 && !Config_Flag(CFG_SMALL_KEY_SHUFFLE) && !(Config_IsMq(MQ_TEMPLE_FIRE)))

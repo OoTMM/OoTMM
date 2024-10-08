@@ -56,7 +56,7 @@ void Shop_UpdateItem(GameState_Play* play, Actor_EnGirlA* girlA)
 void Shop_SetupItem(GameState_Play* play, Actor_EnGirlA* girlA)
 {
 #if defined(GAME_MM)
-    if (girlA->base.variable == 2)
+    if (girlA->base.params == 2)
         girlA->disabled = !(MM_GET_EVENT_WEEK(EV_MM_WEEK_WITCH_MUSHROOM));
 #endif
 
@@ -84,7 +84,7 @@ void Shop_DisplayTextBox(GameState_Play* play, Actor_EnGirlA* girlA)
         girlA->disabled = 1;
     }
 #if defined(GAME_MM)
-    if (girlA->base.variable == 2 && o.gi != SOLD_OUT && !(MM_GET_EVENT_WEEK(EV_MM_WEEK_WITCH_MUSHROOM)))
+    if (girlA->base.params == 2 && o.gi != SOLD_OUT && !(MM_GET_EVENT_WEEK(EV_MM_WEEK_WITCH_MUSHROOM)))
     {
         flags |= TFS_MUSHROOM;
     }

@@ -50,6 +50,9 @@ Kokiri Forest Storms Grotto Grass 3,                        grass,          NONE
 Kokiri Forest Storms Grotto Grass 4,                        grass,          NONE,                 GROTTOS,                        0x02c05,                    RANDOM
 Kokiri Forest Storms Grotto Hive 1,                         hive,           NONE,                 GROTTOS,                        0x02c07,                    RUPEE_BLUE
 Kokiri Forest Storms Grotto Hive 2,                         hive,           NONE,                 GROTTOS,                        0x02c08,                    RUPEE_RED
+Kokiri Forest Storms Grotto Butterfly 1,                    butterfly,      NONE,                 GROTTOS,                        0x02c06,                    FAIRY
+Kokiri Forest Storms Grotto Butterfly 2,                    butterfly,      NONE,                 GROTTOS,                        0x12c06,                    NOTHING
+Kokiri Forest Storms Grotto Butterfly 3,                    butterfly,      NONE,                 GROTTOS,                        0x22c06,                    NOTHING
 Kokiri Forest Rupee Child 1,                                rupee,          NONE,                 KOKIRI_FOREST,                  0x00005,                    RUPEE_BLUE
 Kokiri Forest Rupee Child 2,                                rupee,          NONE,                 KOKIRI_FOREST,                  0x00006,                    RUPEE_BLUE
 Kokiri Forest Rupee Crawl 1,                                rupee,          NONE,                 KOKIRI_FOREST,                  0x00200,                    RUPEE_BLUE
@@ -123,6 +126,9 @@ Lost Woods Grotto Generic Grass 3,                          grass,          NONE
 Lost Woods Grotto Generic Grass 4,                          grass,          NONE,                 GROTTOS,                        0x03405,                    RANDOM
 Lost Woods Grotto Generic Hive 1,                           hive,           NONE,                 GROTTOS,                        0x03407,                    RUPEE_BLUE
 Lost Woods Grotto Generic Hive 2,                           hive,           NONE,                 GROTTOS,                        0x03408,                    RUPEE_RED
+Lost Woods Grotto Generic Butterfly 1,                      butterfly,      NONE,                 GROTTOS,                        0x03406,                    FAIRY
+Lost Woods Grotto Generic Butterfly 2,                      butterfly,      NONE,                 GROTTOS,                        0x13406,                    NOTHING
+Lost Woods Grotto Generic Butterfly 3,                      butterfly,      NONE,                 GROTTOS,                        0x23406,                    NOTHING
 Lost Woods GS Soil Bridge,                                  gs,             NONE,                 LOST_WOODS,                     0x70,                       GS_TOKEN
 Lost Woods GS Soil Theater,                                 gs,             NONE,                 LOST_WOODS,                     0x71,                       GS_TOKEN
 Lost Woods GS Bean Ride,                                    gs,             NONE,                 LOST_WOODS,                     0x72,                       GS_TOKEN
@@ -139,6 +145,11 @@ Lost Woods Pool Big Fairy,                                  fairy_spot,     NONE
 Lost Woods Wonder Item 1,                                   wonder,         NONE,                 LOST_WOODS,                     0x00105,                    RUPEE_GREEN
 Lost Woods Wonder Item 2,                                   wonder,         NONE,                 LOST_WOODS,                     0x00106,                    RUPEE_GREEN
 Lost Woods Wonder Item 3,                                   wonder,         NONE,                 LOST_WOODS,                     0x00107,                    RUPEE_BLUE
+Lost Woods Butterfly 1,                                     butterfly,      NONE,                 LOST_WOODS,                     0x00601,                    FAIRY
+Lost Woods Butterfly 2,                                     butterfly,      NONE,                 LOST_WOODS,                     0x10601,                    NOTHING
+Lost Woods Butterfly 3,                                     butterfly,      NONE,                 LOST_WOODS,                     0x20601,                    NOTHING
+Lost Woods Butterfly 4,                                     butterfly,      NONE,                 LOST_WOODS,                     0x30601,                    NOTHING
+Lost Woods Butterfly 5,                                     butterfly,      NONE,                 LOST_WOODS,                     0x40601,                    NOTHING
 Deku Theater Sticks Upgrade,                                npc,            NONE,                 GROTTOS,                        THEATER_STICKS,             STICK_UPGRADE
 Deku Theater Nuts Upgrade,                                  npc,            NONE,                 GROTTOS,                        THEATER_NUTS,               NUT_UPGRADE
 Saria's Song,                                               npc,            NONE,                 SACRED_FOREST_MEADOW,           SARIA_SONG,                 SONG_SARIA
@@ -178,6 +189,9 @@ Kakariko Grotto Back Grass 3,                               grass,          NONE
 Kakariko Grotto Back Grass 4,                               grass,          NONE,                 GROTTOS,                        0x02805,                    RANDOM
 Kakariko Grotto Back Hive 1,                                hive,           NONE,                 GROTTOS,                        0x02807,                    RUPEE_BLUE
 Kakariko Grotto Back Hive 2,                                hive,           NONE,                 GROTTOS,                        0x02808,                    RUPEE_RED
+Kakariko Grotto Butterfly 1,                                butterfly,      NONE,                 GROTTOS,                        0x02806,                    FAIRY
+Kakariko Grotto Butterfly 2,                                butterfly,      NONE,                 GROTTOS,                        0x12806,                    NOTHING
+Kakariko Grotto Butterfly 3,                                butterfly,      NONE,                 GROTTOS,                        0x22806,                    NOTHING
 Kakariko GS Roof,                                           gs,             NONE,                 KAKARIKO_VILLAGE,               0x8e,                       GS_TOKEN
 Kakariko GS Shooting Gallery,                               gs,             NONE,                 KAKARIKO_VILLAGE,               0x8b,                       GS_TOKEN
 Kakariko GS Tree,                                           gs,             NONE,                 KAKARIKO_VILLAGE,               0x8d,                       GS_TOKEN
@@ -223,6 +237,8 @@ Kakariko Grass 6,                                           grass,          NONE
 Kakariko Grass 7,                                           grass,          NONE,                 KAKARIKO_VILLAGE,               0x0002a,                    RANDOM
 Kakariko Grass 8,                                           grass,          NONE,                 KAKARIKO_VILLAGE,               0x0002b,                    RANDOM
 Kakariko Wonder Item,                                       wonder,         NONE,                 KAKARIKO_VILLAGE,               0x00037,                    RUPEE_RED
+Kakariko Butterfly 1,                                       butterfly,      NONE,                 KAKARIKO_VILLAGE,               0x0002e,                    FAIRY
+Kakariko Butterfly 2,                                       butterfly,      NONE,                 KAKARIKO_VILLAGE,               0x1002e,                    NOTHING
 Kakariko Potion Shop Odd Potion,                            npc,            NONE,                 KAKARIKO_POTION_SHOP,           TRADE_ODD_POTION,           ODD_POTION
 Kakariko Bazaar Item 1,                                     shop,           NONE,                 BAZAAR,                         0x30,                       ARROWS_5
 Kakariko Bazaar Item 2,                                     shop,           NONE,                 BAZAAR,                         0x31,                       ARROWS_10
@@ -242,6 +258,9 @@ Kakariko Potion Shop Item 7,                                shop,           NONE
 Kakariko Potion Shop Item 8,                                shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x3f,                       POTION_RED
 Graveyard Dampe Game,                                       collectible,    NONE,                 GRAVEYARD,                      0x1f,                       HEART_PIECE
 Graveyard Sell Spooky Mask,                                 npc,            NONE,                 GRAVEYARD,                      MASK_SELL_SPOOKY,           RUPEE_RED
+Graveyard Butterfly 1,                                      butterfly,      NONE,                 GRAVEYARD,                      0x00111,                    FAIRY
+Graveyard Butterfly 2,                                      butterfly,      NONE,                 GRAVEYARD,                      0x10111,                    NOTHING
+Graveyard Butterfly 3,                                      butterfly,      NONE,                 GRAVEYARD,                      0x20111,                    NOTHING
 Graveyard ReDead Tomb,                                      chest,          NONE,                 TOMB_REDEAD,                    0x00,                       HEART_PIECE
 Graveyard Royal Tomb Song,                                  npc,            NONE,                 TOMB_ROYAL,                     ROYAL_TOMB_SONG,            SONG_SUN
 Graveyard Royal Tomb Chest,                                 chest,          NONE,                 TOMB_ROYAL,                     0x00,                       BOMBS_5
@@ -314,6 +333,9 @@ Death Mountain Trail Grotto Grass 3,                        grass,          NONE
 Death Mountain Trail Grotto Grass 4,                        grass,          NONE,                 GROTTOS,                        0x03705,                    RANDOM
 Death Mountain Trail Grotto Hive 1,                         hive,           NONE,                 GROTTOS,                        0x03707,                    RUPEE_BLUE
 Death Mountain Trail Grotto Hive 2,                         hive,           NONE,                 GROTTOS,                        0x03708,                    RUPEE_RED
+Death Mountain Trail Grotto Butterfly 1,                    butterfly,      NONE,                 GROTTOS,                        0x03706,                    FAIRY
+Death Mountain Trail Grotto Butterfly 2,                    butterfly,      NONE,                 GROTTOS,                        0x13706,                    NOTHING
+Death Mountain Trail Grotto Butterfly 3,                    butterfly,      NONE,                 GROTTOS,                        0x23706,                    NOTHING
 Death Mountain Trail GS Entrance,                           gs,             NONE,                 DEATH_MOUNTAIN_TRAIL,           0x82,                       GS_TOKEN
 Death Mountain Trail GS Soil,                               gs,             NONE,                 DEATH_MOUNTAIN_TRAIL,           0x81,                       GS_TOKEN
 Death Mountain Trail GS Above Dodongo,                      gs,             NONE,                 DEATH_MOUNTAIN_TRAIL,           0x83,                       GS_TOKEN
@@ -378,6 +400,9 @@ Death Mountain Crater Grotto Grass 3,                       grass,          NONE
 Death Mountain Crater Grotto Grass 4,                       grass,          NONE,                 GROTTOS,                        0x03a05,                    RANDOM
 Death Mountain Crater Grotto Hive 1,                        hive,           NONE,                 GROTTOS,                        0x03a07,                    RUPEE_BLUE
 Death Mountain Crater Grotto Hive 2,                        hive,           NONE,                 GROTTOS,                        0x03a08,                    RUPEE_RED
+Death Mountain Crater Grotto Butterfly 1,                   butterfly,      NONE,                 GROTTOS,                        0x03a06,                    FAIRY
+Death Mountain Crater Grotto Butterfly 2,                   butterfly,      NONE,                 GROTTOS,                        0x13a06,                    NOTHING
+Death Mountain Crater Grotto Butterfly 3,                   butterfly,      NONE,                 GROTTOS,                        0x23a06,                    NOTHING
 Death Mountain Crater Scrub Child,                          scrub,          DMC_SCRUB,            DEATH_MOUNTAIN_CRATER,          0x0e,                       BOMBS_5
 Death Mountain Crater Grotto Left Scrub,                    scrub,          NONE,                 GROTTOS,                        0x0f,                       NUTS_5
 Death Mountain Crater Grotto Center Scrub,                  scrub,          NONE,                 GROTTOS,                        0x10,                       DEKU_SEEDS_30
@@ -416,6 +441,9 @@ Zora River Grotto Grass 3,                                  grass,          NONE
 Zora River Grotto Grass 4,                                  grass,          NONE,                 GROTTOS,                        0x02905,                    RANDOM
 Zora River Grotto Hive 1,                                   hive,           NONE,                 GROTTOS,                        0x02907,                    RUPEE_BLUE
 Zora River Grotto Hive 2,                                   hive,           NONE,                 GROTTOS,                        0x02908,                    RUPEE_RED
+Zora River Grotto Butterfly 1,                              butterfly,      NONE,                 GROTTOS,                        0x02906,                    FAIRY
+Zora River Grotto Butterfly 2,                              butterfly,      NONE,                 GROTTOS,                        0x12906,                    NOTHING
+Zora River Grotto Butterfly 3,                              butterfly,      NONE,                 GROTTOS,                        0x22906,                    NOTHING
 Zora River Storms Grotto Front Scrub,                       scrub,          NONE,                 GROTTOS,                        0x12,                       POTION_GREEN
 Zora River Storms Grotto Back Scrub,                        scrub,          NONE,                 GROTTOS,                        0x13,                       POTION_RED
 Zora River Storms Grotto Hive,                              hive,           NONE,                 GROTTOS,                        0x02402,                    RUPEE_RED
@@ -436,6 +464,11 @@ Zora River Grass Pack Bush 09,                              grass,          NONE
 Zora River Grass Pack Bush 10,                              grass,          NONE,                 ZORA_RIVER,                     0x90035,                    RANDOM
 Zora River Grass Pack Bush 11,                              grass,          NONE,                 ZORA_RIVER,                     0xa0035,                    RANDOM
 Zora River Grass Pack Bush 12,                              grass,          NONE,                 ZORA_RIVER,                     0xb0035,                    RANDOM
+Zora River Butterfly Near Beans 1,                          butterfly,      NONE,                 ZORA_RIVER,                     0x00037,                    FAIRY
+Zora River Butterfly Near Beans 2,                          butterfly,      NONE,                 ZORA_RIVER,                     0x10037,                    NOTHING
+Zora River Butterfly Near Waterfall 1,                      butterfly,      NONE,                 ZORA_RIVER,                     0x0010a,                    FAIRY
+Zora River Butterfly Near Waterfall 2,                      butterfly,      NONE,                 ZORA_RIVER,                     0x1010a,                    NOTHING
+Zora River Butterfly Near Waterfall 3,                      butterfly,      NONE,                 ZORA_RIVER,                     0x2010a,                    NOTHING
 Zora River Fairy Fountain Fairy 1,                          fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x02100,                    FAIRY
 Zora River Fairy Fountain Fairy 2,                          fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x12100,                    FAIRY
 Zora River Fairy Fountain Fairy 3,                          fairy,          NONE,                 FAIRY_FOUNTAIN,                 0x22100,                    FAIRY
@@ -543,6 +576,8 @@ Zora Fountain Rupee 15,                                     rupee,          NONE
 Zora Fountain Rupee 16,                                     rupee,          NONE,                 ZORA_FOUNTAIN,                  0x0800f,                    RUPEE_GREEN
 Zora Fountain Rupee 17,                                     rupee,          NONE,                 ZORA_FOUNTAIN,                  0x08010,                    RUPEE_GREEN
 Zora Fountain Rupee 18,                                     rupee,          NONE,                 ZORA_FOUNTAIN,                  0x08011,                    RUPEE_GREEN
+Zora Fountain Butterfly 1,                                  butterfly,      NONE,                 ZORA_FOUNTAIN,                  0x0000e,                    FAIRY
+Zora Fountain Butterfly 2,                                  butterfly,      NONE,                 ZORA_FOUNTAIN,                  0x1000e,                    NOTHING
 Lake Hylia Underwater Bottle,                               npc,            NONE,                 LAKE_HYLIA,                     RUTO_LETTER,                RUTO_LETTER
 Lake Hylia Fire Arrow,                                      npc,            SHOOT_SUN,            LAKE_HYLIA,                     FIRE_ARROW,                 ARROW_FIRE
 Lake Hylia HP,                                              collectible,    NONE,                 LAKE_HYLIA,                     0x1e,                       HEART_PIECE
@@ -603,6 +638,9 @@ Lake Hylia Rupee 1,                                         rupee,          NONE
 Lake Hylia Rupee 2,                                         rupee,          NONE,                 LAKE_HYLIA,                     0x00032,                    RUPEE_GREEN
 Lake Hylia Rupee 3,                                         rupee,          NONE,                 LAKE_HYLIA,                     0x00033,                    RUPEE_GREEN
 Lake Hylia Island Big Fairy,                                fairy_spot,     NONE,                 LAKE_HYLIA,                     0x00037,                    FAIRY_BIG
+Lake Hylia Butterfly 1,                                     butterfly,      NONE,                 LAKE_HYLIA,                     0x00021,                    FAIRY
+Lake Hylia Butterfly 2,                                     butterfly,      NONE,                 LAKE_HYLIA,                     0x10021,                    NOTHING
+Lake Hylia Butterfly 3,                                     butterfly,      NONE,                 LAKE_HYLIA,                     0x20021,                    NOTHING
 Laboratory Dive,                                            npc,            NONE,                 LABORATORY,                     LABORATORY_DIVE,            HEART_PIECE
 Laboratory Eye Drops,                                       npc,            NONE,                 LABORATORY,                     TRADE_EYE_DROPS,            EYE_DROPS
 Laboratory GS Crate,                                        gs,             NONE,                 LABORATORY,                     0x9b,                       GS_TOKEN
@@ -685,6 +723,9 @@ Hyrule Field Grotto Southeast Grass 3,                      grass,          NONE
 Hyrule Field Grotto Southeast Grass 4,                      grass,          NONE,                 GROTTOS,                        0x02205,                    RANDOM
 Hyrule Field Grotto Southeast Hive 1,                       hive,           NONE,                 GROTTOS,                        0x02207,                    RUPEE_BLUE
 Hyrule Field Grotto Southeast Hive 2,                       hive,           NONE,                 GROTTOS,                        0x02208,                    RUPEE_RED
+Hyrule Field Grotto Southeast Butterfly 1,                  butterfly,      NONE,                 GROTTOS,                        0x02206,                    FAIRY
+Hyrule Field Grotto Southeast Butterfly 2,                  butterfly,      NONE,                 GROTTOS,                        0x12206,                    NOTHING
+Hyrule Field Grotto Southeast Butterfly 3,                  butterfly,      NONE,                 GROTTOS,                        0x22206,                    NOTHING
 Hyrule Field Grotto Open,                                   chest,          NONE,                 GROTTOS,                        0x03,                       RUPEE_BLUE
 Hyrule Field Grotto Open Grass 1,                           grass,          NONE,                 GROTTOS,                        0x02302,                    RANDOM
 Hyrule Field Grotto Open Grass 2,                           grass,          NONE,                 GROTTOS,                        0x02303,                    RANDOM
@@ -692,6 +733,9 @@ Hyrule Field Grotto Open Grass 3,                           grass,          NONE
 Hyrule Field Grotto Open Grass 4,                           grass,          NONE,                 GROTTOS,                        0x02305,                    RANDOM
 Hyrule Field Grotto Open Hive 1,                            hive,           NONE,                 GROTTOS,                        0x02307,                    RUPEE_BLUE
 Hyrule Field Grotto Open Hive 2,                            hive,           NONE,                 GROTTOS,                        0x02308,                    RUPEE_RED
+Hyrule Field Grotto Open Butterfly 1,                       butterfly,      NONE,                 GROTTOS,                        0x02306,                    FAIRY
+Hyrule Field Grotto Open Butterfly 2,                       butterfly,      NONE,                 GROTTOS,                        0x12306,                    NOTHING
+Hyrule Field Grotto Open Butterfly 3,                       butterfly,      NONE,                 GROTTOS,                        0x22306,                    NOTHING
 Hyrule Field Grotto Market,                                 chest,          NONE,                 GROTTOS,                        0x00,                       RUPEE_BLUE
 Hyrule Field Grotto Market Grass 1,                         grass,          NONE,                 GROTTOS,                        0x02002,                    RANDOM
 Hyrule Field Grotto Market Grass 2,                         grass,          NONE,                 GROTTOS,                        0x02003,                    RANDOM
@@ -699,6 +743,9 @@ Hyrule Field Grotto Market Grass 3,                         grass,          NONE
 Hyrule Field Grotto Market Grass 4,                         grass,          NONE,                 GROTTOS,                        0x02005,                    RANDOM
 Hyrule Field Grotto Market Hive 1,                          hive,           NONE,                 GROTTOS,                        0x02007,                    RUPEE_BLUE
 Hyrule Field Grotto Market Hive 2,                          hive,           NONE,                 GROTTOS,                        0x02008,                    RUPEE_RED
+Hyrule Field Grotto Market Butterfly 1,                     butterfly,      NONE,                 GROTTOS,                        0x02006,                    FAIRY
+Hyrule Field Grotto Market Butterfly 2,                     butterfly,      NONE,                 GROTTOS,                        0x12006,                    NOTHING
+Hyrule Field Grotto Market Butterfly 3,                     butterfly,      NONE,                 GROTTOS,                        0x22006,                    NOTHING
 Hyrule Field Grotto Tektite HP,                             collectible,    NONE,                 GROTTOS,                        0x01,                       HEART_PIECE
 Hyrule Field Grotto Near Kakariko GS,                       gs,             NONE,                 GROTTOS,                        0x59,                       GS_TOKEN
 Hyrule Field Grotto Near Gerudo GS,                         gs,             NONE,                 GROTTOS,                        0x58,                       GS_TOKEN
@@ -914,6 +961,18 @@ Hyrule Castle Wonder Item Moat 07,                          wonder,         NONE
 Hyrule Castle Wonder Item Moat 08,                          wonder,         NONE,                 HYRULE_CASTLE,                  0x00027,                    RUPEE_GREEN
 Hyrule Castle Wonder Item Moat 09,                          wonder,         NONE,                 HYRULE_CASTLE,                  0x00028,                    RUPEE_GREEN
 Hyrule Castle Wonder Item Moat 10,                          wonder,         NONE,                 HYRULE_CASTLE,                  0x00029,                    RUPEE_BLUE
+Hyrule Castle Butterfly Pack 1 Butterfly 1,                 butterfly,      NONE,                 HYRULE_CASTLE,                  0x00033,                    FAIRY
+Hyrule Castle Butterfly Pack 1 Butterfly 2,                 butterfly,      NONE,                 HYRULE_CASTLE,                  0x10033,                    NOTHING
+Hyrule Castle Butterfly Pack 2 Butterfly 1,                 butterfly,      NONE,                 HYRULE_CASTLE,                  0x00034,                    FAIRY
+Hyrule Castle Butterfly Pack 2 Butterfly 2,                 butterfly,      NONE,                 HYRULE_CASTLE,                  0x10034,                    NOTHING
+Hyrule Castle Butterfly Pack 3 Butterfly 1,                 butterfly,      NONE,                 HYRULE_CASTLE,                  0x00035,                    FAIRY
+Hyrule Castle Butterfly Pack 3 Butterfly 2,                 butterfly,      NONE,                 HYRULE_CASTLE,                  0x10035,                    NOTHING
+Hyrule Castle Butterfly Pack 3 Butterfly 3,                 butterfly,      NONE,                 HYRULE_CASTLE,                  0x20035,                    NOTHING
+Hyrule Castle Butterfly Pack 4 Butterfly 1,                 butterfly,      NONE,                 HYRULE_CASTLE,                  0x00036,                    FAIRY
+Hyrule Castle Butterfly Pack 4 Butterfly 2,                 butterfly,      NONE,                 HYRULE_CASTLE,                  0x10036,                    NOTHING
+Hyrule Castle Butterfly Pack 4 Butterfly 3,                 butterfly,      NONE,                 HYRULE_CASTLE,                  0x20036,                    NOTHING
+Hyrule Castle Butterfly Pack 4 Butterfly 4,                 butterfly,      NONE,                 HYRULE_CASTLE,                  0x30036,                    NOTHING
+Hyrule Castle Butterfly Pack 4 Butterfly 5,                 butterfly,      NONE,                 HYRULE_CASTLE,                  0x40036,                    NOTHING
 Ganon Castle Exterior GS,                                   gs,             NONE,                 GANON_CASTLE_EXTERIOR,          0x78,                       GS_TOKEN
 Temple of Time Master Sword,                                npc,            NONE,                 TEMPLE_OF_TIME,                 MASTER_SWORD,               SWORD_MASTER
 Temple of Time Medallion,                                   npc,            NONE,                 TEMPLE_OF_TIME,                 LIGHT_MEDALLION,            MEDALLION_LIGHT

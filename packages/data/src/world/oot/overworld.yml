@@ -258,6 +258,9 @@
     "Kokiri Forest Storms Grotto Grass 4": "can_cut_grass"
     "Kokiri Forest Storms Grotto Hive 1": "break_hive_low"
     "Kokiri Forest Storms Grotto Hive 2": "break_hive_low"
+    "Kokiri Forest Storms Grotto Butterfly 1": "can_use_sticks"
+    "Kokiri Forest Storms Grotto Butterfly 2": "can_use_sticks"
+    "Kokiri Forest Storms Grotto Butterfly 3": "can_use_sticks"
   gossip:
     "Kokiri Gossip Near Lost Woods Grotto": "true"
 "Hyrule Field":
@@ -383,6 +386,9 @@
     "Hyrule Field Grotto Open Grass 4": "can_cut_grass"
     "Hyrule Field Grotto Open Hive 1": "break_hive_low"
     "Hyrule Field Grotto Open Hive 2": "break_hive_low"
+    "Hyrule Field Grotto Open Butterfly 1": "can_use_sticks"
+    "Hyrule Field Grotto Open Butterfly 2": "can_use_sticks"
+    "Hyrule Field Grotto Open Butterfly 3": "can_use_sticks"
   gossip:
     "Hyrule Field Gossip Near Lake Hylia": "true"
 "Hyrule Field Southeast Grotto":
@@ -406,6 +412,9 @@
     "Hyrule Field Grotto Southeast Grass 4": "can_cut_grass"
     "Hyrule Field Grotto Southeast Hive 1": "break_hive_low"
     "Hyrule Field Grotto Southeast Hive 2": "break_hive_low"
+    "Hyrule Field Grotto Southeast Butterfly 1": "can_use_sticks"
+    "Hyrule Field Grotto Southeast Butterfly 2": "can_use_sticks"
+    "Hyrule Field Grotto Southeast Butterfly 3": "can_use_sticks"
   gossip:
     "Hyrule Field Gossip Southeast Grotto": "true"
 "Hyrule Field Grotto Near Market":
@@ -429,6 +438,9 @@
     "Hyrule Field Grotto Market Grass 4": "can_cut_grass"
     "Hyrule Field Grotto Market Hive 1": "break_hive_low"
     "Hyrule Field Grotto Market Hive 2": "break_hive_low"
+    "Hyrule Field Grotto Market Butterfly 1": "can_use_sticks"
+    "Hyrule Field Grotto Market Butterfly 2": "can_use_sticks"
+    "Hyrule Field Grotto Market Butterfly 3": "can_use_sticks"
   gossip:
     "Hyrule Field Gossip Near Castle Town": "true"
 "Hyrule Field Tektite Grotto":
@@ -825,6 +837,18 @@
     "Hyrule Castle Wonder Item Moat 08": "true"
     "Hyrule Castle Wonder Item Moat 09": "true"
     "Hyrule Castle Wonder Item Moat 10": "true"
+    "Hyrule Castle Butterfly Pack 1 Butterfly 1": "can_use_sticks"
+    "Hyrule Castle Butterfly Pack 1 Butterfly 2": "can_use_sticks"
+    "Hyrule Castle Butterfly Pack 2 Butterfly 1": "can_use_sticks"
+    "Hyrule Castle Butterfly Pack 2 Butterfly 2": "can_use_sticks"
+    "Hyrule Castle Butterfly Pack 3 Butterfly 1": "can_use_sticks"
+    "Hyrule Castle Butterfly Pack 3 Butterfly 2": "can_use_sticks"
+    "Hyrule Castle Butterfly Pack 3 Butterfly 3": "can_use_sticks"
+    "Hyrule Castle Butterfly Pack 4 Butterfly 1": "can_use_sticks"
+    "Hyrule Castle Butterfly Pack 4 Butterfly 2": "can_use_sticks"
+    "Hyrule Castle Butterfly Pack 4 Butterfly 3": "can_use_sticks"
+    "Hyrule Castle Butterfly Pack 4 Butterfly 4": "can_use_sticks"
+    "Hyrule Castle Butterfly Pack 4 Butterfly 5": "can_use_sticks"
   gossip:
     "Hyrule Castle Gossip After Climb": "true"
     "Hyrule Castle Gossip Before Moat": "true"
@@ -1006,6 +1030,9 @@
     "Lost Woods Grotto Generic Grass 4": "can_cut_grass"
     "Lost Woods Grotto Generic Hive 1": "break_hive_low"
     "Lost Woods Grotto Generic Hive 2": "break_hive_low"
+    "Lost Woods Grotto Generic Butterfly 1": "can_use_sticks"
+    "Lost Woods Grotto Generic Butterfly 2": "can_use_sticks"
+    "Lost Woods Grotto Generic Butterfly 3": "can_use_sticks"
   gossip:
     "Lost Woods Gossip Grotto": "true"
 "Lost Woods Bridge":
@@ -1052,6 +1079,11 @@
     "Lost Woods Grass Deep 5": "can_cut_grass"
     "Lost Woods Grass Deep 6": "can_cut_grass"
     "Lost Woods Rupee Boulder": "has_explosives_or_hammer"
+    "Lost Woods Butterfly 1": "is_child && can_use_sticks"
+    "Lost Woods Butterfly 2": "is_child && can_use_sticks"
+    "Lost Woods Butterfly 3": "is_child && can_use_sticks"
+    "Lost Woods Butterfly 4": "is_child && can_use_sticks"
+    "Lost Woods Butterfly 5": "is_child && can_use_sticks"
 "Deku Theater":
   region: ENTRANCE
   age_change: false
@@ -1201,6 +1233,9 @@
     "Kakariko Grass 7": "can_cut_grass"
     "Kakariko Grass 8": "can_cut_grass"
     "Kakariko Wonder Item": "is_child"
+    # TODO: Too restrictive, we need a pseudo-region to represent the top of the watchtower
+    "Kakariko Butterfly 1": "is_day && is_child && can_use_sticks"
+    "Kakariko Butterfly 2": "is_day && is_child && can_use_sticks"
 "Kakariko Balcony":
   region: KAKARIKO
   exits:
@@ -1362,6 +1397,9 @@
     "Kakariko Grotto Back Grass 4": "can_cut_grass"
     "Kakariko Grotto Back Hive 1": "break_hive_low"
     "Kakariko Grotto Back Hive 2": "break_hive_low"
+    "Kakariko Grotto Butterfly 1": "can_use_sticks"
+    "Kakariko Grotto Butterfly 2": "can_use_sticks"
+    "Kakariko Grotto Butterfly 3": "can_use_sticks"
   gossip:
     "Kakariko Gossip Grotto": "true"
 "Graveyard":
@@ -1401,6 +1439,9 @@
     "Graveyard Grass 10": "can_cut_grass"
     "Graveyard Grass 11": "can_cut_grass"
     "Graveyard Grass 12": "can_cut_grass"
+    "Graveyard Butterfly 1": "is_child && can_use_sticks"
+    "Graveyard Butterfly 2": "is_child && can_use_sticks"
+    "Graveyard Butterfly 3": "is_child && can_use_sticks"
 "Graveyard Upper":
   region: GRAVEYARD
   exits:
@@ -1549,6 +1590,9 @@
     "Death Mountain Trail Grotto Grass 4": "can_cut_grass"
     "Death Mountain Trail Grotto Hive 1": "break_hive_low"
     "Death Mountain Trail Grotto Hive 2": "break_hive_low"
+    "Death Mountain Trail Grotto Butterfly 1": "can_use_sticks"
+    "Death Mountain Trail Grotto Butterfly 2": "can_use_sticks"
+    "Death Mountain Trail Grotto Butterfly 3": "can_use_sticks"
   gossip:
     "Death Mountain Trail Gossip Grotto": "true"
 "Death Mountain Cow Grotto":
@@ -1746,6 +1790,11 @@
     "Zora River Wonder Item Back 25": "is_child"
     "Zora River Wonder Item Back 26": "is_child"
     "Zora River Wonder Item Back 27": "is_child"
+    "Zora River Butterfly Near Beans 1": "is_child && can_use_sticks"
+    "Zora River Butterfly Near Beans 2": "is_child && can_use_sticks"
+    "Zora River Butterfly Near Waterfall 1": "is_child && can_use_sticks"
+    "Zora River Butterfly Near Waterfall 2": "is_child && can_use_sticks"
+    "Zora River Butterfly Near Waterfall 3": "is_child && can_use_sticks"
   gossip:
     "Zora River Gossip High Pillar": "true"
     "Zora River Gossip Near Domain": "true"
@@ -1784,6 +1833,9 @@
     "Zora River Grotto Grass 4": "can_cut_grass"
     "Zora River Grotto Hive 1": "break_hive_low"
     "Zora River Grotto Hive 2": "break_hive_low"
+    "Zora River Grotto Butterfly 1": "can_use_sticks"
+    "Zora River Grotto Butterfly 2": "can_use_sticks"
+    "Zora River Grotto Butterfly 3": "can_use_sticks"
   gossip:
     "Zora River Gossip Grotto": "true"
 "Zora River Boulder Grotto":
@@ -1957,6 +2009,9 @@
     "Lake Hylia Rupee 1": "is_child" #this rupee can be gotten with base dive distance
     "Lake Hylia Rupee 2": "is_child && can_dive_small"
     "Lake Hylia Rupee 3": "is_child && can_dive_small"
+    "Lake Hylia Butterfly 1": "is_child && can_use_sticks"
+    "Lake Hylia Butterfly 2": "is_child && can_use_sticks"
+    "Lake Hylia Butterfly 3": "is_child && can_use_sticks"
   gossip:
     "Lake Hylia Gossip Near River": "true"
     "Lake Hylia Gossip Southeast Lake": "true"
@@ -2045,6 +2100,8 @@
     "Zora Fountain Adult Pot 1": "is_adult && ((can_lift_silver && has_explosives_or_hammer) || climb_anywhere)"
     "Zora Fountain Adult Pot 2": "is_adult && ((can_lift_silver && has_explosives_or_hammer) || climb_anywhere)"
     "Zora Fountain Adult Pot 3": "is_adult && ((can_lift_silver && has_explosives_or_hammer) || climb_anywhere)"
+    "Zora Fountain Butterfly 1": "is_child && can_use_sticks"
+    "Zora Fountain Butterfly 2": "is_child && can_use_sticks"
   gossip:
     "Zora Fountain Gossip Northwest": "true"
     "Zora Fountain Gossip Near Fairy": "true"
@@ -2197,6 +2254,9 @@
     "Death Mountain Crater Grotto Grass 4": "can_cut_grass"
     "Death Mountain Crater Grotto Hive 1": "break_hive_low"
     "Death Mountain Crater Grotto Hive 2": "break_hive_low"
+    "Death Mountain Crater Grotto Butterfly 1": "can_use_sticks"
+    "Death Mountain Crater Grotto Butterfly 2": "can_use_sticks"
+    "Death Mountain Crater Grotto Butterfly 3": "can_use_sticks"
   gossip:
     "Death Mountain Crater Gossip Grotto": "true"
 "Death Mountain Crater Scrub Grotto":

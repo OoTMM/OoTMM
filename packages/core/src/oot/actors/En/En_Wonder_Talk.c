@@ -76,7 +76,7 @@ int EnWonderTalk_TalkedTo(Actor* this, GameState_Play* play)
 {
     if (ActorTalkedTo(this))
     {
-        if ((this->variable & 0xf800) == 0x0800)
+        if ((this->params & 0xf800) == 0x0800)
         {
             hintDungeons(play);
         }

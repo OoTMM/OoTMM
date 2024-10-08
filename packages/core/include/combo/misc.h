@@ -1199,6 +1199,16 @@ typedef struct {
 
 #define SEGADDR_CIRCLE_SHADOW_DL (OS_K0_TO_PHYSICAL(SEGADDR_FROM_OFFSET(4, 0x76BC0)))
 
+#endif
+
+typedef struct
+{
+    s32 active;
+    Vec3f tip;
+    Vec3f base;
+}
+WeaponInfo;
+
 typedef enum AnimationMode {
     /* 0 */ ANIMMODE_LOOP,
     /* 1 */ ANIMMODE_LOOP_INTERP,
@@ -1207,8 +1217,6 @@ typedef enum AnimationMode {
     /* 4 */ ANIMMODE_LOOP_PARTIAL,
     /* 5 */ ANIMMODE_LOOP_PARTIAL_INTERP
 } AnimationMode;
-
-#endif
 
 typedef enum {
     /* 0 */ CS_STATE_IDLE,
