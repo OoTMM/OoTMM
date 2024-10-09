@@ -49,7 +49,6 @@
 "Ganon Castle Light 2":
   dungeon: Ganon
   exits:
-    "Ganon Castle Light Wallmaster": "true"
     "Ganon Castle Light End": "silver_rupees_ganon_light && has_lens"
   locations:
     "Ganon Castle SR Light Alcove Right": "true"
@@ -60,6 +59,8 @@
     "Ganon Castle Pot Light": "true"
 "Ganon Castle Light End":
   dungeon: Ganon
+  exits:
+    "Ganon Castle Light Wallmaster": "soul_wallmaster"
   events:
     GANON_TRIAL_LIGHT: "can_use_light_arrows"
   locations:

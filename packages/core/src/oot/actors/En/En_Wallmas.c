@@ -37,7 +37,7 @@ static int EnWallmas_GetDestEr(Actor* this, GameState_Play* play)
     case SCE_OOT_INSIDE_GANON_CASTLE:
         switch (room)
         {
-        case 0x08: return ENTR_OOT_WALLMASTER_GANON_LIGHT;
+        case 0x0a: return ENTR_OOT_WALLMASTER_GANON_LIGHT;
         default: return ENTR_OOT_WALLMASTER_GANON_SPIRIT;
         }
     default:
