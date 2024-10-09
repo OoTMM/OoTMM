@@ -141,7 +141,8 @@ void ObjMure2_CleanupAndDie(Actor_ObjMure2* this, GameState_Play* play)
     }
 }
 
-void func_80B9A534(Actor_ObjMure2* this) {
+void func_80B9A534(Actor_ObjMure2* this)
+{
     s32 i;
 
     for (i = 0; i < D_80B9A818[PARAMS_GET_U(this->actor.params, 0, 2)]; i++) {
