@@ -152,12 +152,12 @@ const ACTORS_OOT = {
   EN_ITEM00: 0x15,
   POT: 0x111,
   FLYING_POT: 0x11d,
-  ROCK_BUSH_GROUP: 0x151,
   EN_KUSA: 0x125,
   OBJ_HANA: 0x14f,
   EN_ELF: 0x18,
   BG_SPOT11_OASIS: 0x1C2,
   OBJ_MURE: 0x094,
+  OBJ_MURE2: 0x151,
   OBJ_MURE3: 0x1ab,
   EN_BUTTE: 0x01e,
   SHOT_SUN: 0x183,
@@ -194,7 +194,7 @@ const ACTORS_MM = {
 };
 
 const ACTOR_SLICES_OOT = {
-  [ACTORS_OOT.ROCK_BUSH_GROUP]: 12,
+  [ACTORS_OOT.OBJ_MURE2]: 12,
   [ACTORS_OOT.EN_ELF]: 8,
   [ACTORS_OOT.BG_SPOT11_OASIS]: 8,
   [ACTORS_OOT.OBJ_MURE3]: 7,
@@ -999,59 +999,6 @@ function outputWonderMm(roomActors: RoomActors[]) {
   }
 }
 
-function outputGrassPoolOot(roomActors: RoomActors[]) {
-  let lastSceneId = -1;
-  let lastSetupId = -1;
-  let altGrassAcc = 0;
-  for (const room of roomActors) {
-    for (const actor of room.actors) {
-      if (actor.typeId === ACTORS_OOT.EN_KUSA) {
-        const grassType = (actor.params) & 3;
-        if (grassType == 3) {
-          console.log("Grass type 3????");
-        }
-        let item: string;
-        if (grassType == 0 || grassType == 2) {
-          item = 'RANDOM';
-        } else {
-          item = (altGrassAcc & 1) ? 'RECOVERY_HEART' : 'DEKU_SEEDS_5/ARROWS_5';
-          altGrassAcc++;
-        }
-        const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
-        if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
-          console.log('');
-          lastSceneId = room.sceneId;
-          lastSetupId = room.setupId;
-        }
-        console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Grass ${decPad(actor.actorId + 1, 2)},        grass,            NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
-      }
-
-      if (actor.typeId === ACTORS_OOT.ROCK_BUSH_GROUP) {
-        const type = (actor.params) & 3;
-        let count: number;
-        if (type > 1) {
-          continue;
-        }
-        if (type == 0) {
-          count = 9;
-        } else {
-          count = 12;
-        }
-        const item = 'RANDOM';
-        if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
-          console.log('');
-          lastSceneId = room.sceneId;
-          lastSetupId = room.setupId;
-        }
-        for (let i = 0; i < count; ++i) {
-          const key = (i << 16) | ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
-          console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Grass Pack ${decPad(actor.actorId + 1, 2)} Grass ${decPad(i + 1, 2)},             grass,            NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
-        }
-      }
-    }
-  }
-}
-
 function outputGrassPoolMm(roomActors: RoomActors[]) {
   let lastSceneId = -1;
   let lastSetupId = -1;
@@ -1174,29 +1121,6 @@ function outputCratesPoolMm(roomActors: RoomActors[]) {
           const item = mmCollectibleDrop(actor.params & 0x3f);
           console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Small Crate ${decPad(actor.actorId + 1, 2)},        crate,            NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
         }
-      }
-    }
-  }
-}
-
-function outputGrassWeirdPoolOot(roomActors: RoomActors[]) {
-  let lastSceneId = -1;
-  let lastSetupId = -1;
-  let altGrassAcc = 0;
-  for (const room of roomActors) {
-    for (const actor of room.actors) {
-      if (actor.typeId === ACTORS_OOT.OBJ_HANA) {
-        const type = (actor.params) & 3;
-        if (type !== 2)
-          continue;
-        const item = 'NOTHING';
-        const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
-        if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
-          console.log('');
-          lastSceneId = room.sceneId;
-          lastSetupId = room.setupId;
-        }
-        console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Grass Weird ${decPad(actor.actorId + 1, 2)},        grass,            NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
       }
     }
   }
@@ -1333,6 +1257,31 @@ function actorHandlerOotEnKusa(checks: Check[], ra: RoomActor) {
   checks.push({ roomActor: ra, item, name: 'Grass', type: 'grass' });
 }
 
+function actorHandlerOotObjHana(checks: Check[], ra: RoomActor) {
+  const type = ra.actor.params & 3;
+  if (type !== 2)
+    return;
+  const item = 'NOTHING';
+  checks.push({ roomActor: ra, item, name: 'Grass Weird', type: 'grass' });
+}
+
+function actorHandlerOotObjMure2(checks: Check[], ra: RoomActor) {
+  const type = (ra.actor.params) & 3;
+  let count: number;
+  if (type > 1) {
+    return;
+  }
+  if (type == 0) {
+    count = 9;
+  } else {
+    count = 12;
+  }
+  const item = 'RANDOM';
+  for (let i = 0; i < count; ++i) {
+    checks.push({ roomActor: ra, item, name: 'Grass Pack', type: 'grass', sliceId: i, name2: `Grass ${i + 1}` });
+  }
+}
+
 function actorHandlerOotObjComb(checks: Check[], ra: RoomActor) {
   const item = ITEM00_DROPS[ra.actor.params & 0x1f];
   checks.push({ roomActor: ra, item, name: 'Hive', type: 'hive' });
@@ -1458,6 +1407,8 @@ const ACTORS_HANDLERS_OOT = {
   [ACTORS_OOT.OBJ_KIBAKO2]: actorHandlerOotObjKibako2,
   [ACTORS_OOT.EN_BUTTE]: actorHandlerOotEnButte,
   [ACTORS_OOT.OBJ_MURE]: actorHandlerOotObjMure,
+  [ACTORS_OOT.OBJ_HANA]: actorHandlerOotObjHana,
+  [ACTORS_OOT.OBJ_MURE2]: actorHandlerOotObjMure2,
 };
 
 const ACTORS_HANDLERS_MM = {
