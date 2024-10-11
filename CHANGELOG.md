@@ -27,6 +27,10 @@ All notable changes to this project will be documented in this file.
 - Pirate Fortress Sewers Gate and interior passages now require the Pirate Fortress Entrances option to be shuffled.
 - Pirate Fortress will no longer be considered a dungeon if its entrances are shuffled among the overworld.
 
+### Changed
+
+- Grass and Pot CAMC is now its own setting and separated from the rest.
+
 ### Fixed
 
 - Logic for obtaining the Seahorse.
