@@ -761,7 +761,7 @@ export const SETTINGS = [{
   type: 'boolean',
   description: 'Controls whether or not the Master Sword is shuffled',
   cond: (s: any) => hasOoT(s) && s.swordlessAdult,
-  default: true
+  default: false
 }, {
   key: 'shuffleGerudoCard',
   name: 'Gerudo Card Shuffle',
@@ -894,7 +894,7 @@ export const SETTINGS = [{
   category: 'main.events',
   type: 'boolean',
   description: 'Choose whether or not Link needs the Master Sword to travel through time',
-  default: true,
+  default: false,
   cond: (s: any) => hasOoT(s) && s.swordlessAdult && (s.shuffleMasterSword || s.progressiveSwordsOot === 'progressive'),
 }, {
   key: 'doorOfTime',
