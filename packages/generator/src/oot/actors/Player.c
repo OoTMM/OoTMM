@@ -57,7 +57,39 @@ static void Player_UseBoots(PlayState* play, Player* this, int bootsId)
     PlaySound(0x835);
 }
 
-void Player_UseItem(PlayState* play, Player* link, s16 itemId)
+static void Player_UseTunic(PlayState* play, Player* this, int tunicId)
+{
+    if (gSave.info.equips.equipment.tunics == tunicId)
+        gSave.info.equips.equipment.tunics = 1;
+    else
+        gSave.info.equips.equipment.tunics = tunicId;
+    UpdateEquipment(play, GET_PLAYER(play));
+    PlaySound(0x835);
+}
+
+static int Player_UseSword(PlayState* play, Player* this, int swordId)
+{
+    if (gSave.info.equips.equipment.swords == swordId)
+        return 1;
+    gSave.info.equips.equipment.swords = swordId;
+    gSave.info.equips.buttonItems[0] = ITEM_OOT_SWORD_KOKIRI + swordId - 1;
+    UpdateEquipment(play, GET_PLAYER(play));
+    PlaySound(0x835);
+    Interface_LoadItemIconImpl(play, 0);
+    return 0;
+}
+
+static void Player_UseShield(PlayState* play, Player* this, int shieldId)
+{
+    if (gSave.info.equips.equipment.shields == shieldId)
+        gSave.info.equips.equipment.shields = 0;
+    else
+        gSave.info.equips.equipment.shields = shieldId;
+    UpdateEquipment(play, GET_PLAYER(play));
+    PlaySound(0x835);
+}
+
+void Player_UseItem(PlayState* play, Player* link, s16 itemId, int fromDpad)
 {
     void (*Player_UseItemImpl)(PlayState* play, Player* link, s16 itemId);
     u8 prevMask;
@@ -86,6 +118,42 @@ void Player_UseItem(PlayState* play, Player* link, s16 itemId)
     case ITEM_OOT_BOOTS_HOVER:
         Player_UseBoots(play, link, 3);
         break;
+    case ITEM_OOT_TUNIC_GORON:
+        Player_UseTunic(play, link, 2);
+        break;
+    case ITEM_OOT_TUNIC_ZORA:
+        Player_UseTunic(play, link, 3);
+        break;
+    case ITEM_OOT_SWORD_KOKIRI:
+        if (Player_UseSword(play, link, 1) && !fromDpad)
+        {
+            Player_UseItemImpl = OverlayAddr(0x80834000);
+            Player_UseItemImpl(play, link, itemId);
+        }
+        break;
+    case ITEM_OOT_SWORD_MASTER:
+        if (Player_UseSword(play, link, 2) && !fromDpad)
+        {
+            Player_UseItemImpl = OverlayAddr(0x80834000);
+            Player_UseItemImpl(play, link, itemId);
+        }
+        break;
+    case ITEM_OOT_SWORD_KNIFE_BIGGORON:
+        if (Player_UseSword(play, link, 3) && !fromDpad)
+        {
+            Player_UseItemImpl = OverlayAddr(0x80834000);
+            Player_UseItemImpl(play, link, itemId);
+        }
+        break;
+    case ITEM_OOT_SHIELD_DEKU:
+        Player_UseShield(play, link, 1);
+        break;
+    case ITEM_OOT_SHIELD_HYLIAN:
+        Player_UseShield(play, link, 2);
+        break;
+    case ITEM_OOT_SHIELD_MIRROR:
+        Player_UseShield(play, link, 3);
+        break;
     default:
         Player_UseItemImpl = OverlayAddr(0x80834000);
         Player_UseItemImpl(play, link, itemId);
@@ -96,7 +164,12 @@ void Player_UseItem(PlayState* play, Player* link, s16 itemId)
         Interface_LoadItemIconImpl(play, 0);
 }
 
-PATCH_CALL(0x8083212c, Player_UseItem);
+void Player_UseItemWrapper(PlayState* play, Player* link, s16 itemId)
+{
+    Player_UseItem(play, link, itemId, 0);
+}
+
+PATCH_CALL(0x8083212c, Player_UseItemWrapper);
 
 s32 Player_CustomActionToModelGroup(Player* player, s32 itemAction) {
     switch (itemAction)

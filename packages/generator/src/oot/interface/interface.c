@@ -57,6 +57,21 @@ void LoadMmItemIcon(void* dst, int iconId)
 
 void comboItemIcon(void* dst, int itemId)
 {
+    if (itemId == ITEM_OOT_SWORD_KOKIRI)
+    {
+        if (gSharedCustomSave.extraSwordsOot == 1)
+        {
+            LoadMmItemIcon(dst, ITEM_MM_SWORD_RAZOR);
+            return;
+        }
+
+        if (gSharedCustomSave.extraSwordsOot == 2)
+        {
+            LoadMmItemIcon(dst, ITEM_MM_SWORD_GILDED);
+            return;
+        }
+    }
+
     switch (itemId)
     {
     case ITEM_OOT_MASK_BLAST:
@@ -126,21 +141,6 @@ static void LoadCustomItemIconSlot(PlayState* play, int slot, int isInit)
             return;
         case MASK_KAMARO:
             comboItemIcon(dst, ITEM_OOT_MASK_KAMARO);
-            return;
-        }
-    }
-
-    if (itemId == ITEM_OOT_SWORD_KOKIRI)
-    {
-        if (gSharedCustomSave.extraSwordsOot == 1)
-        {
-            LoadMmItemIcon(dst, ITEM_MM_SWORD_RAZOR);
-            return;
-        }
-
-        if (gSharedCustomSave.extraSwordsOot == 2)
-        {
-            LoadMmItemIcon(dst, ITEM_MM_SWORD_GILDED);
             return;
         }
     }

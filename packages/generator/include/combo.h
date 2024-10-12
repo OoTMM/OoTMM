@@ -116,6 +116,7 @@ void comboInitOverride(void);
 void comboInitData(void);
 
 void comboItemIcon(void* dst, int itemId);
+void comboCustomItemIcon(void* dst, int itemId);
 void comboLoadMmIcon(void* dst, u32 iconBank, int iconId);
 
 void LoadIconItem24Oot(void* dst, int id);
@@ -204,6 +205,7 @@ void comboHandleAutoInvertClockSpeed(void);
 void comboClearCustomRespawn(CustomRespawnMode customRespawnMode);
 
 void LoadMmItemIcon(void* dst, int iconId);
+void LoadOotItemIcon(void* dst, int iconId);
 
 void Triggers_Update(PlayState* play);
 void Triggers_Reset(void);

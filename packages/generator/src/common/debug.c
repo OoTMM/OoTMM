@@ -4,6 +4,7 @@
 #include <combo/entrance.h>
 #include <combo/player.h>
 #include <combo/global.h>
+#include <combo/dpad.h>
 
 #if defined(DEBUG)
 #define DEBUGMENU_PAGE_NONE     0
@@ -740,6 +741,7 @@ static void cheatAllItems(PlayState* play)
     gCustomSave.hasSongZora = 1;
     gCustomSave.hasSongOrder = 1;
     gOotExtraFlags.spinUpgrade = 1;
+    Dpad_Refresh();
 }
 #endif
 

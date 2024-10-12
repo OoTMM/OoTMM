@@ -6,6 +6,7 @@
 #include <combo/magic.h>
 #include <combo/config.h>
 #include <combo/global.h>
+#include <combo/dpad.h>
 
 #if defined(GAME_OOT)
 # define addRupeesRaw  addRupeesRawOot
@@ -2021,6 +2022,7 @@ static int addItemSwordExtraOot(PlayState* play, u8 itemId, s16 gi, u16 param)
         gSharedCustomSave.extraSwordsOot = (u8)param;
 
 #if defined(GAME_OOT)
+    Dpad_Refresh();
     if (play)
         Interface_LoadItemIconImpl(play, 0);
 #endif

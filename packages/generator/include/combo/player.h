@@ -193,7 +193,7 @@ int Player_GetEnvironmentalHazard(PlayState* play);
 int Player_InCsMode(PlayState* play);
 void Player_Freeze(PlayState* play);
 void Player_Unfreeze(PlayState* play);
-void Player_UseItem(PlayState* play, Player* link, s16 itemId);
+void Player_UseItem(PlayState* play, Player* link, s16 itemId, int fromDpad);
 s32 Player_CheckHostileLockOn(Player* link);
 s32 Player_IsChildWithHylianShield(Player* link);
 void Player_PlaySfx(Player* player, u16 sfxId);

@@ -9,5 +9,6 @@ typedef struct PlayState PlayState;
 void Dpad_Draw(PlayState* play);
 void Dpad_Update(PlayState* play);
 int  Dpad_Use(PlayState* play, int flags);
+void Dpad_Refresh();
 
 #endif

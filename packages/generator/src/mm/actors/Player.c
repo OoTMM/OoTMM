@@ -55,6 +55,7 @@ void Player_UpdateWrapper(Player* this, PlayState* play)
     Player_Update(this, play);
     Player_HandleBronzeScale(this, play);
     Dpad_Update(play);
+    Dpad_Use(play, DPF_EQUIP);
     Ocarina_HandleWarp(this, play);
 }
 
@@ -1807,7 +1808,7 @@ static void Player_ToggleFormDelayed(int form)
     Player_FormChangeDeleteEffects();
 }
 
-void Player_UseItem(PlayState* play, Player* this, s16 itemId)
+void Player_UseItem(PlayState* play, Player* this, s16 itemId, int fromDpad)
 {
     void (*Player_UseItemImpl)(PlayState* play, Player* this, s16 itemId);
     u8 useDefault;

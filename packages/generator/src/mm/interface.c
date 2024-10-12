@@ -51,3 +51,64 @@ void Interface_SkipMoonCrash(PlayState* play)
 }
 
 PATCH_CALL(0x8011d3f4, Interface_SkipMoonCrash)
+
+void LoadOotItemIcon(void* dst, int id)
+{
+    DmaEntry dma;
+    comboDmaLookupForeignId(&dma, 8);
+    u32 textureFileAddress = dma.pstart;
+    u32 textureOffset = 0x1000 * id;
+    DMARomToRam((textureFileAddress + textureOffset) | PI_DOM1_ADDR2, dst, 0x1000);
+}
+
+void comboCustomItemIcon(void* dst, int itemId)
+{
+    switch(itemId)
+    {
+    case ITEM_MM_SPELL_FIRE:
+        itemId = ITEM_OOT_SPELL_FIRE;
+        break;
+    case ITEM_MM_SPELL_WIND:
+        itemId = ITEM_OOT_SPELL_WIND;
+        break;
+    case ITEM_MM_SPELL_LOVE:
+        itemId = ITEM_OOT_SPELL_LOVE;
+        break;
+    case ITEM_MM_BOOTS_IRON:
+        itemId = ITEM_OOT_BOOTS_IRON;
+        break;
+    case ITEM_MM_BOOTS_HOVER:
+        itemId = ITEM_OOT_BOOTS_HOVER;
+        break;
+    case ITEM_MM_TUNIC_GORON:
+        itemId = ITEM_OOT_TUNIC_GORON;
+        break;
+    case ITEM_MM_TUNIC_ZORA:
+        itemId = ITEM_OOT_TUNIC_ZORA;
+        break;
+    case ITEM_MM_HAMMER:
+        itemId = ITEM_OOT_HAMMER;
+        break;
+    case ITEM_MM_BOOMERANG:
+        itemId = ITEM_OOT_BOOMERANG;
+        break;
+    case ITEM_MM_RUTO_LETTER:
+        itemId = ITEM_OOT_RUTO_LETTER;
+        break;
+    default:
+        return;
+    }
+    LoadOotItemIcon(dst, itemId);
+}
+
+void comboItemIcon(void* dst, int itemId)
+{
+    if (itemId < ITEM_MM_CUSTOM_MIN)
+    {
+        LoadIcon(0xa36c10, itemId, dst, 0x1000);
+    }
+    else
+    {
+        comboCustomItemIcon(dst, itemId);
+    }
+}

@@ -106,9 +106,11 @@ export function worldConfig(world: LogicResultWorld, settings: Settings): Set<Co
     OOT_AGELESS_STICKS: settings.agelessSticks,
     OOT_AGELESS_BOW: settings.agelessBow,
     OOT_AGELESS_SLINGSHOT: settings.agelessSlingshot,
+    OOT_AGELESS_TUNICS: settings.agelessTunics,
     OOT_AGELESS_BOOTS: settings.agelessBoots,
     OOT_AGELESS_STRENGTH: settings.agelessStrength,
     OOT_AGELESS_SWORDS: settings.agelessSwords,
+    OOT_AGELESS_SHIELDS: settings.agelessShields,
     OOT_AGELESS_SOARING: settings.agelessSoaring,
     OOT_AGELESS_HAMMER: settings.agelessHammer,
     OOT_AGELESS_GREAT_FAIRY_SWORD: settings.agelessGFS,
@@ -291,6 +293,7 @@ export function worldConfig(world: LogicResultWorld, settings: Settings): Set<Co
     MM_MOON_COND_VANILLA: settings.moon === 'vanilla',
     MM_MOON_COND_CUSTOM: settings.moon === 'custom',
     OOT_AIR_PHYSICS_MM: settings.mmStyleAirMovementOot,
+    QOL_EXTEND_DPAD: settings.extendDpad,
   };
 
   for (const v in exprs) {

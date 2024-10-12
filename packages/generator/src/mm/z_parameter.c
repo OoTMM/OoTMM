@@ -4,52 +4,13 @@
 
 void Interface_LoadItemIconCustom(u32 vrom, s32 id, void* dst, size_t size)
 {
-    DmaEntry dma;
-
     if (id < ITEM_MM_CUSTOM_MIN)
     {
         LoadIcon(vrom, id, dst, size);
     }
     else
     {
-        switch(id)
-        {
-        case ITEM_MM_SPELL_FIRE:
-            id = ITEM_OOT_SPELL_FIRE;
-            break;
-        case ITEM_MM_SPELL_WIND:
-            id = ITEM_OOT_SPELL_WIND;
-            break;
-        case ITEM_MM_SPELL_LOVE:
-            id = ITEM_OOT_SPELL_LOVE;
-            break;
-        case ITEM_MM_BOOTS_IRON:
-            id = ITEM_OOT_BOOTS_IRON;
-            break;
-        case ITEM_MM_BOOTS_HOVER:
-            id = ITEM_OOT_BOOTS_HOVER;
-            break;
-        case ITEM_MM_TUNIC_GORON:
-            id = ITEM_OOT_TUNIC_GORON;
-            break;
-        case ITEM_MM_TUNIC_ZORA:
-            id = ITEM_OOT_TUNIC_ZORA;
-            break;
-        case ITEM_MM_HAMMER:
-            id = ITEM_OOT_HAMMER;
-            break;
-        case ITEM_MM_BOOMERANG:
-            id = ITEM_OOT_BOOMERANG;
-            break;
-        case ITEM_MM_RUTO_LETTER:
-            id = ITEM_OOT_RUTO_LETTER;
-            break;
-        }
-
-        comboDmaLookupForeignId(&dma, 8);
-        u32 textureFileAddress = dma.pstart;
-        u32 textureOffset = 0x1000 * id;
-        DMARomToRam((textureFileAddress + textureOffset) | PI_DOM1_ADDR2, dst, size);
+        comboCustomItemIcon(dst, id);
     }
 }
 

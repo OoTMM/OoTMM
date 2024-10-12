@@ -3612,6 +3612,13 @@ export const SETTINGS = [{
   default: false,
   cond: hasMM,
 }, {
+  key: 'extendDpad',
+  name: 'Extended D-Pad',
+  category: 'main.qol',
+  type: 'boolean',
+  description: 'Adds additional pages to the D-Pad for tunics and boots in MM, and for shields, sword and tunics in OoT.',
+  default: false
+}, {
   key: 'autoInvert',
   name: 'Auto-Invert Time (MM)',
   category: 'main.qol',

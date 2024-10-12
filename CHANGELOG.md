@@ -28,6 +28,7 @@ All notable changes to this project will be documented in this file.
 - Add Shared settings variants of each song above.
 - Add setting for MM-style air movement in OoT.
 - Add Powder Keg (OoT).
+- Add setting to extend the D-Pad. Adds additional pages to the D-Pad for tunics and boots in MM, and for shields, sword and tunics in OoT.
 
 ### Changed
 
