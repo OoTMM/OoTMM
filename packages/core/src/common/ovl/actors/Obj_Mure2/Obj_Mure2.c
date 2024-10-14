@@ -44,21 +44,21 @@ static VecPolarS sScatteredBushSpawnInfo[OBJ_MURE2_CHILD_MAX] = {
     { 80, 0x4000 }, { 80, 0x6CCC }, { 80, -0x6CCD }, { 80, -0x5334 }, { 80, -0x399A }, { 60, -0x2000 },
 };
 
+void ObjMure2_Init(Actor_ObjMure2* this, GameState_Play* play);
+void ObjMure2_Update(Actor_ObjMure2* this, GameState_Play* play);
+
 #if defined(GAME_OOT)
 typedef void (*ObjMure2SetPosFunc)(Vec3f* vec, Actor_ObjMure2* this);
-
-void ObjMure2_Init(Actor_ObjMure2* thisx, GameState_Play* play);
-void ObjMure2_Update(Actor_ObjMure2* thisx, GameState_Play* play);
 
 void ObjMure2_SetPosShrubCircle(Vec3f* vec, Actor_ObjMure2* this);
 void ObjMure2_SetPosShrubScattered(Vec3f* vec, Actor_ObjMure2* this);
 void ObjMure2_SetPosRockCircle(Vec3f* vec, Actor_ObjMure2* this);
 void ObjMure2_Wait(Actor_ObjMure2* this, GameState_Play* play);
-void func_80B9A668(Actor_ObjMure2* this, GameState_Play* play);
-void func_80B9A6F8(Actor_ObjMure2* this, GameState_Play* play);
+void ObjMure2_WaitForPlayerInRange(Actor_ObjMure2* this, GameState_Play* play);
+void ObjMure2_WaitForPlayerOutOfRange(Actor_ObjMure2* this, GameState_Play* play);
 void ObjMure2_SetupWait(Actor_ObjMure2* this);
-void func_80B9A658(Actor_ObjMure2* this);
-void func_80B9A6E8(Actor_ObjMure2* this);
+void ObjMure2_SetupWaitForPlayerInRange(Actor_ObjMure2* this);
+void ObjMure2_SetupWaitForPlayerOutOfRange(Actor_ObjMure2* this);
 
 void ObjMure2_SetPosShrubCircle(Vec3f* vec, Actor_ObjMure2* this) {
     s32 i;
@@ -106,7 +106,7 @@ void ObjMure2_SetActorSpawnParams(s16* params, Actor_ObjMure2* this)
     *params |= (dropTable << 8);
 }
 
-void ObjMure2_SpawnActors(Actor_ObjMure2* this, GameState_Play* play)
+void ObjMure2_SpawnChildren(Actor_ObjMure2* this, GameState_Play* play)
 {
     static ObjMure2SetPosFunc setPosFunc[] = {
         ObjMure2_SetPosShrubCircle,
@@ -137,7 +137,7 @@ void ObjMure2_SpawnActors(Actor_ObjMure2* this, GameState_Play* play)
     }
 }
 
-void ObjMure2_CleanupAndDie(Actor_ObjMure2* this, GameState_Play* play)
+void ObjMure2_KillChildren(Actor_ObjMure2* this, GameState_Play* play)
 {
     s32 i;
 
@@ -165,7 +165,7 @@ void ObjMure2_CleanupAndDie(Actor_ObjMure2* this, GameState_Play* play)
     }
 }
 
-void func_80B9A534(Actor_ObjMure2* this)
+void ObjMure2_ClearChildrenList(Actor_ObjMure2* this)
 {
     s32 i;
 
@@ -177,101 +177,15 @@ void func_80B9A534(Actor_ObjMure2* this)
         }
     }
 }
-
-static InitChainEntry sInitChain[] = {
-    ICHAIN_F32(uncullZoneForward, 100, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneScale, 2100, ICHAIN_CONTINUE),
-    ICHAIN_F32(uncullZoneDownward, 100, ICHAIN_STOP),
-};
-
-void ObjMure2_Init(Actor_ObjMure2* this, GameState_Play* play)
-{
-    Actor_ProcessInitChain(&this->actor, sInitChain);
-    if (play->csCtx.state != CS_STATE_IDLE) {
-        this->actor.uncullZoneForward += 1200.0f;
-    }
-    ObjMure2_SetupWait(this);
-}
-
-void ObjMure2_SetupWait(Actor_ObjMure2* this)
-{
-    this->actionFunc = ObjMure2_Wait;
-}
-
-void ObjMure2_Wait(Actor_ObjMure2* this, GameState_Play* play)
-{
-    func_80B9A658(this);
-}
-
-void func_80B9A658(Actor_ObjMure2* this)
-{
-    this->actionFunc = func_80B9A668;
-}
-
-void func_80B9A668(Actor_ObjMure2* this, GameState_Play* play)
-{
-    if (Math3D_Dist1DSq(this->actor.projectedPos.x, this->actor.projectedPos.z) < (sActivationRangesSq[PARAMS_GET_U(this->actor.params, 0, 2)] * this->rangeMultiplier))
-    {
-        this->actor.flags |= ACTOR_FLAG_OOT_4;
-        ObjMure2_SpawnActors(this, play);
-        func_80B9A6E8(this);
-    }
-}
-
-void func_80B9A6E8(Actor_ObjMure2* this) {
-    this->actionFunc = func_80B9A6F8;
-}
-
-void func_80B9A6F8(Actor_ObjMure2* this, GameState_Play* play)
-{
-    func_80B9A534(this);
-    if ((sDeactivationRangesSq[PARAMS_GET_U(this->actor.params, 0, 2)] * this->rangeMultiplier) <= Math3D_Dist1DSq(this->actor.projectedPos.x, this->actor.projectedPos.z))
-    {
-        this->actor.flags &= ~ACTOR_FLAG_OOT_4;
-        ObjMure2_CleanupAndDie(this, play);
-        func_80B9A658(this);
-    }
-}
-
-void ObjMure2_Update(Actor_ObjMure2* this, GameState_Play* play)
-{
-    if (play->csCtx.state == CS_STATE_IDLE)
-    {
-        this->rangeMultiplier = 1.0f;
-    }
-    else
-    {
-        this->rangeMultiplier = 4.0f;
-    }
-    this->actionFunc(this, play);
-}
-
-ActorProfile ObjMure2_Profile =
-{
-    AC_OBJ_MURE2,
-    ACTORCAT_PROP,
-    FLAGS,
-    OBJECT_GAMEPLAY_KEEP,
-    sizeof(Actor_ObjMure2),
-    (ActorFunc)ObjMure2_Init,
-    (ActorFunc)Actor_Noop,
-    (ActorFunc)ObjMure2_Update,
-    NULL,
-};
-
-OVL_ACTOR_INFO(AC_OBJ_MURE2, ObjMure2_Profile);
 #endif
 
 #if defined(GAME_MM)
-void ObjMure2_Init(Actor_ObjMure2* thisx, GameState_Play* play);
-void ObjMure2_Update(Actor_ObjMure2* thisx, GameState_Play* play);
-
 void ObjMure2_SpawnChildren(Actor_ObjMure2* this, GameState_Play* play);
-void func_809613C4(Actor_ObjMure2* this, GameState_Play* play);
+void ObjMure2_Wait(Actor_ObjMure2* this, GameState_Play* play);
 void ObjMure2_WaitForPlayerInRange(Actor_ObjMure2* this, GameState_Play* play);
 void ObjMure2_WaitForPlayerOutOfRange(Actor_ObjMure2* this, GameState_Play* play);
 void ObjMure2_KillChildren(Actor_ObjMure2* this, GameState_Play* play);
-void func_809613B0(Actor_ObjMure2* this);
+void ObjMure2_SetupWait(Actor_ObjMure2* this);
 void ObjMure2_SetupWaitForPlayerInRange(Actor_ObjMure2* this);
 void ObjMure2_SetupWaitForPlayerOutOfRange(Actor_ObjMure2* this);
 void ObjMure2_GetChildParams(s16*, Actor_ObjMure2*);
@@ -382,6 +296,7 @@ void ObjMure2_ClearChildrenList(Actor_ObjMure2* this) {
         }
     }
 }
+#endif
 
 static InitChainEntry sInitChain[] = {
     ICHAIN_F32(uncullZoneForward, 100, ICHAIN_CONTINUE),
@@ -392,21 +307,23 @@ static InitChainEntry sInitChain[] = {
 void ObjMure2_Init(Actor_ObjMure2* this, GameState_Play* play)
 {
     Actor_ProcessInitChain(&this->actor, sInitChain);
-    if (play->csCtx.state != CS_STATE_IDLE) {
+    if (play->csCtx.state != CS_STATE_IDLE)
         this->actor.uncullZoneForward += 1200.0f;
-    }
-    func_809613B0(this);
+    ObjMure2_SetupWait(this);
 }
 
-void func_809613B0(Actor_ObjMure2* this) {
-    this->actionFunc = func_809613C4;
+void ObjMure2_SetupWait(Actor_ObjMure2* this)
+{
+    this->actionFunc = ObjMure2_Wait;
 }
 
-void func_809613C4(Actor_ObjMure2* this, GameState_Play* play) {
+void ObjMure2_Wait(Actor_ObjMure2* this, GameState_Play* play)
+{
     ObjMure2_SetupWaitForPlayerInRange(this);
 }
 
-void ObjMure2_SetupWaitForPlayerInRange(Actor_ObjMure2* this) {
+void ObjMure2_SetupWaitForPlayerInRange(Actor_ObjMure2* this)
+{
     this->actionFunc = ObjMure2_WaitForPlayerInRange;
 }
 
@@ -414,13 +331,14 @@ void ObjMure2_WaitForPlayerInRange(Actor_ObjMure2* this, GameState_Play* play)
 {
     if (Math3D_Dist1DSq(this->actor.projectedPos.x, this->actor.projectedPos.z) <
         sActivationRangesSq[OBJ_MURE2_GET_CHILD_TYPE(&this->actor)] * this->rangeMultiplier) {
-        this->actor.flags |= ACTOR_FLAG_MM_10;
+        this->actor.flags |= ACTOR_FLAG_OOT_4;
         ObjMure2_SpawnChildren(this, play);
         ObjMure2_SetupWaitForPlayerOutOfRange(this);
     }
 }
 
-void ObjMure2_SetupWaitForPlayerOutOfRange(Actor_ObjMure2* this) {
+void ObjMure2_SetupWaitForPlayerOutOfRange(Actor_ObjMure2* this)
+{
     this->actionFunc = ObjMure2_WaitForPlayerOutOfRange;
 }
 
@@ -428,9 +346,9 @@ void ObjMure2_WaitForPlayerOutOfRange(Actor_ObjMure2* this, GameState_Play* play
 {
     ObjMure2_ClearChildrenList(this);
 
-    if ((sDeactivationRangesSq[OBJ_MURE2_GET_CHILD_TYPE(&this->actor)] * this->rangeMultiplier) <=
-        Math3D_Dist1DSq(this->actor.projectedPos.x, this->actor.projectedPos.z)) {
-        this->actor.flags &= ~ACTOR_FLAG_MM_10;
+    if ((sDeactivationRangesSq[OBJ_MURE2_GET_CHILD_TYPE(&this->actor)] * this->rangeMultiplier) <= Math3D_Dist1DSq(this->actor.projectedPos.x, this->actor.projectedPos.z))
+    {
+        this->actor.flags &= ~ACTOR_FLAG_OOT_4;
         ObjMure2_KillChildren(this, play);
         ObjMure2_SetupWaitForPlayerInRange(this);
     }
@@ -438,15 +356,18 @@ void ObjMure2_WaitForPlayerOutOfRange(Actor_ObjMure2* this, GameState_Play* play
 
 void ObjMure2_Update(Actor_ObjMure2* this, GameState_Play* play)
 {
-    if (play->csCtx.state == CS_STATE_IDLE) {
+    if (play->csCtx.state == CS_STATE_IDLE)
+    {
         this->rangeMultiplier = 1.0f;
-    } else {
+    }
+    else
+    {
         this->rangeMultiplier = 4.0f;
     }
     this->actionFunc(this, play);
 }
 
-ActorProfile Obj_Mure2_Profile =
+ActorProfile ObjMure2_Profile =
 {
     AC_OBJ_MURE2,
     ACTORCAT_PROP,
@@ -459,5 +380,4 @@ ActorProfile Obj_Mure2_Profile =
     NULL,
 };
 
-OVL_ACTOR_INFO(AC_OBJ_MURE2, Obj_Mure2_Profile);
-#endif
+OVL_ACTOR_INFO(AC_OBJ_MURE2, ObjMure2_Profile);
