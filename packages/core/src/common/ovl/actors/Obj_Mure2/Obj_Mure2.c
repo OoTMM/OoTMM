@@ -1,16 +1,51 @@
-#if defined(GAME_OOT)
 #include "Obj_Mure2.h"
 
 #define FLAGS 0
 
-typedef void (*ObjMure2SetPosFunc)(Vec3f* vec, Actor_ObjMure2* this);
+#define OBJ_MURE2_CHILD_COUNT_BUSH_RING         9
+#define OBJ_MURE2_CHILD_COUNT_BUSH_SCATTERED    12
+#define OBJ_MURE2_CHILD_COUNT_ROCK_RING         8
 
-typedef struct Mure2sScatteredShrubInfo
+typedef enum Mure2ChildType
 {
-    s16 radius;
-    s16 angle;
+    OBJMURE2_CHILDTYPE_BUSH_RING,
+    OBJMURE2_CHILDTYPE_BUSH_SCATTERED,
+    OBJMURE2_CHILDTYPE_ROCK_RING,
+    OBJMURE2_CHILDTYPE_MAX
 }
-Mure2sScatteredShrubInfo;
+Mure2ChildType;
+
+static f32 sActivationRangesSq[OBJMURE2_CHILDTYPE_MAX] = {
+    SQ(1600.0f), // OBJMURE2_CHILDTYPE_BUSH_RING
+    SQ(1600.0f), // OBJMURE2_CHILDTYPE_BUSH_SCATTERED
+    SQ(1600.0f), // OBJMURE2_CHILDTYPE_ROCK_RING
+};
+
+static f32 sDeactivationRangesSq[OBJMURE2_CHILDTYPE_MAX] = {
+    SQ(1705.0f), // OBJMURE2_CHILDTYPE_BUSH_RING
+    SQ(1705.0f), // OBJMURE2_CHILDTYPE_BUSH_SCATTERED
+    SQ(1705.0f), // OBJMURE2_CHILDTYPE_ROCK_RING
+};
+
+static s16 sChildCounts[OBJMURE2_CHILDTYPE_MAX] = {
+    OBJ_MURE2_CHILD_COUNT_BUSH_RING,      // OBJMURE2_CHILDTYPE_BUSH_RING
+    OBJ_MURE2_CHILD_COUNT_BUSH_SCATTERED, // OBJMURE2_CHILDTYPE_BUSH_SCATTERED
+    OBJ_MURE2_CHILD_COUNT_ROCK_RING,      // OBJMURE2_CHILDTYPE_ROCK_RING
+};
+
+static s16 sActorIds[OBJMURE2_CHILDTYPE_MAX] = {
+    AC_EN_KUSA, // OBJMURE2_CHILDTYPE_BUSH_RING
+    AC_EN_KUSA, // OBJMURE2_CHILDTYPE_BUSH_SCATTERED
+    AC_EN_ISHI, // OBJMURE2_CHILDTYPE_ROCK_RING
+};
+
+static VecPolarS sScatteredBushSpawnInfo[OBJ_MURE2_CHILD_MAX] = {
+    { 40, 0x0666 }, { 40, 0x2CCC }, { 40, 0x5999 },  { 40, -0x799A }, { 20, -0x4000 }, { 80, 0x1333 },
+    { 80, 0x4000 }, { 80, 0x6CCC }, { 80, -0x6CCD }, { 80, -0x5334 }, { 80, -0x399A }, { 60, -0x2000 },
+};
+
+#if defined(GAME_OOT)
+typedef void (*ObjMure2SetPosFunc)(Vec3f* vec, Actor_ObjMure2* this);
 
 void ObjMure2_Init(Actor_ObjMure2* thisx, GameState_Play* play);
 void ObjMure2_Update(Actor_ObjMure2* thisx, GameState_Play* play);
@@ -25,38 +60,26 @@ void ObjMure2_SetupWait(Actor_ObjMure2* this);
 void func_80B9A658(Actor_ObjMure2* this);
 void func_80B9A6E8(Actor_ObjMure2* this);
 
-static f32 sDistSquared1[] = { SQ(1600.0f), SQ(1600.0f), SQ(1600.0f) };
-
-static f32 sDistSquared2[] = { SQ(1705.0f), SQ(1705.0f), SQ(1705.0f) };
-
-static s16 D_80B9A818[] = { 9, 12, 8 };
-
-static s16 sActorSpawnIDs[] = { AC_EN_KUSA, AC_EN_KUSA, AC_EN_ISHI };
-
 void ObjMure2_SetPosShrubCircle(Vec3f* vec, Actor_ObjMure2* this) {
     s32 i;
 
     Math_Vec3f_Copy(vec, &this->actor.world.pos);
-    for (i = 1; i < D_80B9A818[PARAMS_GET_U(this->actor.params, 0, 2)]; i++) {
+    for (i = 1; i < sChildCounts[PARAMS_GET_U(this->actor.params, 0, 2)]; i++) {
         Math_Vec3f_Copy(vec + i, &this->actor.world.pos);
         (vec + i)->x += (80.0f * Math_SinS((i - 1) * 0x2000));
         (vec + i)->z += (80.0f * Math_CosS((i - 1) * 0x2000));
     }
 }
 
-static Mure2sScatteredShrubInfo sScatteredShrubInfo[] = {
-    { 40, 0x0666 }, { 40, 0x2CCC }, { 40, 0x5999 }, { 40, 0x8666 }, { 20, 0xC000 }, { 80, 0x1333 },
-    { 80, 0x4000 }, { 80, 0x6CCC }, { 80, 0x9333 }, { 80, 0xACCC }, { 80, 0xC666 }, { 60, 0xE000 },
-};
 
 void ObjMure2_SetPosShrubScattered(Vec3f* vec, Actor_ObjMure2* this)
 {
     s32 i;
 
-    for (i = 0; i < D_80B9A818[PARAMS_GET_U(this->actor.params, 0, 2)]; i++) {
+    for (i = 0; i < sChildCounts[PARAMS_GET_U(this->actor.params, 0, 2)]; i++) {
         Math_Vec3f_Copy(vec + i, &this->actor.world.pos);
-        (vec + i)->x += (sScatteredShrubInfo[i].radius * Math_CosS(sScatteredShrubInfo[i].angle));
-        (vec + i)->z -= (sScatteredShrubInfo[i].radius * Math_SinS(sScatteredShrubInfo[i].angle));
+        (vec + i)->x += (sScatteredBushSpawnInfo[i].distance * Math_CosS(sScatteredBushSpawnInfo[i].angle));
+        (vec + i)->z -= (sScatteredBushSpawnInfo[i].distance * Math_SinS(sScatteredBushSpawnInfo[i].angle));
     }
 }
 
@@ -64,7 +87,7 @@ void ObjMure2_SetPosRockCircle(Vec3f* vec, Actor_ObjMure2* this)
 {
     s32 i;
 
-    for (i = 0; i < D_80B9A818[PARAMS_GET_U(this->actor.params, 0, 2)]; i++) {
+    for (i = 0; i < sChildCounts[PARAMS_GET_U(this->actor.params, 0, 2)]; i++) {
         Math_Vec3f_Copy(vec + i, &this->actor.world.pos);
         (vec + i)->x += (80.0f * Math_SinS(i * 0x2000));
         (vec + i)->z += (80.0f * Math_CosS(i * 0x2000));
@@ -98,14 +121,14 @@ void ObjMure2_SpawnActors(Actor_ObjMure2* this, GameState_Play* play)
     setPosFunc[actorNum](spawnPos, this);
     ObjMure2_SetActorSpawnParams(&params, this);
 
-    for (i = 0; i < D_80B9A818[actorNum]; i++) {
+    for (i = 0; i < sChildCounts[actorNum]; i++) {
         if (this->actors[i] != NULL) {
             continue;
         }
 
         if (((this->spawnFlags >> i) & 1) == 0) {
             this->actors[i] =
-                Actor_Spawn(&play->actorCtx, play, sActorSpawnIDs[actorNum], spawnPos[i].x, spawnPos[i].y,
+                Actor_Spawn(&play->actorCtx, play, sActorIds[actorNum], spawnPos[i].x, spawnPos[i].y,
                             spawnPos[i].z, this->actor.world.rot.x, 0, this->actor.world.rot.z, params);
             if (this->actors[i] != NULL) {
                 this->actors[i]->room = this->actor.room;
@@ -118,7 +141,7 @@ void ObjMure2_CleanupAndDie(Actor_ObjMure2* this, GameState_Play* play)
 {
     s32 i;
 
-    for (i = 0; i < D_80B9A818[PARAMS_GET_U(this->actor.params, 0, 2)]; i++)
+    for (i = 0; i < sChildCounts[PARAMS_GET_U(this->actor.params, 0, 2)]; i++)
     {
         if (((this->spawnFlags >> i) & 1) == 0)
         {
@@ -146,7 +169,7 @@ void func_80B9A534(Actor_ObjMure2* this)
 {
     s32 i;
 
-    for (i = 0; i < D_80B9A818[PARAMS_GET_U(this->actor.params, 0, 2)]; i++) {
+    for (i = 0; i < sChildCounts[PARAMS_GET_U(this->actor.params, 0, 2)]; i++) {
         if (this->actors[i] != NULL && (((this->spawnFlags >> i) & 1) == 0) &&
             (this->actors[i]->update == NULL)) {
             this->spawnFlags |= (1 << i);
@@ -187,7 +210,7 @@ void func_80B9A658(Actor_ObjMure2* this)
 
 void func_80B9A668(Actor_ObjMure2* this, GameState_Play* play)
 {
-    if (Math3D_Dist1DSq(this->actor.projectedPos.x, this->actor.projectedPos.z) < (sDistSquared1[PARAMS_GET_U(this->actor.params, 0, 2)] * this->rangeMultiplier))
+    if (Math3D_Dist1DSq(this->actor.projectedPos.x, this->actor.projectedPos.z) < (sActivationRangesSq[PARAMS_GET_U(this->actor.params, 0, 2)] * this->rangeMultiplier))
     {
         this->actor.flags |= ACTOR_FLAG_OOT_4;
         ObjMure2_SpawnActors(this, play);
@@ -202,7 +225,7 @@ void func_80B9A6E8(Actor_ObjMure2* this) {
 void func_80B9A6F8(Actor_ObjMure2* this, GameState_Play* play)
 {
     func_80B9A534(this);
-    if ((sDistSquared2[PARAMS_GET_U(this->actor.params, 0, 2)] * this->rangeMultiplier) <= Math3D_Dist1DSq(this->actor.projectedPos.x, this->actor.projectedPos.z))
+    if ((sDeactivationRangesSq[PARAMS_GET_U(this->actor.params, 0, 2)] * this->rangeMultiplier) <= Math3D_Dist1DSq(this->actor.projectedPos.x, this->actor.projectedPos.z))
     {
         this->actor.flags &= ~ACTOR_FLAG_OOT_4;
         ObjMure2_CleanupAndDie(this, play);
@@ -240,21 +263,6 @@ OVL_ACTOR_INFO(AC_OBJ_MURE2, ObjMure2_Profile);
 #endif
 
 #if defined(GAME_MM)
-#include "Obj_Mure2.h"
-
-#define FLAGS 0
-
-#define OBJ_MURE2_CHILD_COUNT_BUSH_RING 9
-#define OBJ_MURE2_CHILD_COUNT_BUSH_SCATTERED 12
-#define OBJ_MURE2_CHILD_COUNT_ROCK_RING 8
-
-typedef enum Mure2ChildType {
-    /* 0 */ OBJMURE2_CHILDTYPE_BUSH_RING,
-    /* 1 */ OBJMURE2_CHILDTYPE_BUSH_SCATTERED,
-    /* 2 */ OBJMURE2_CHILDTYPE_ROCK_RING,
-    /* 3 */ OBJMURE2_CHILDTYPE_MAX
-} Mure2ChildType;
-
 void ObjMure2_Init(Actor_ObjMure2* thisx, GameState_Play* play);
 void ObjMure2_Update(Actor_ObjMure2* thisx, GameState_Play* play);
 
@@ -267,35 +275,6 @@ void func_809613B0(Actor_ObjMure2* this);
 void ObjMure2_SetupWaitForPlayerInRange(Actor_ObjMure2* this);
 void ObjMure2_SetupWaitForPlayerOutOfRange(Actor_ObjMure2* this);
 void ObjMure2_GetChildParams(s16*, Actor_ObjMure2*);
-
-static f32 sActivationRangesSq[OBJMURE2_CHILDTYPE_MAX] = {
-    SQ(1600.0f), // OBJMURE2_CHILDTYPE_BUSH_RING
-    SQ(1600.0f), // OBJMURE2_CHILDTYPE_BUSH_SCATTERED
-    SQ(1600.0f), // OBJMURE2_CHILDTYPE_ROCK_RING
-};
-
-static f32 sDeactivationRangesSq[OBJMURE2_CHILDTYPE_MAX] = {
-    SQ(1705.0f), // OBJMURE2_CHILDTYPE_BUSH_RING
-    SQ(1705.0f), // OBJMURE2_CHILDTYPE_BUSH_SCATTERED
-    SQ(1705.0f), // OBJMURE2_CHILDTYPE_ROCK_RING
-};
-
-static s16 sChildCounts[OBJMURE2_CHILDTYPE_MAX] = {
-    OBJ_MURE2_CHILD_COUNT_BUSH_RING,      // OBJMURE2_CHILDTYPE_BUSH_RING
-    OBJ_MURE2_CHILD_COUNT_BUSH_SCATTERED, // OBJMURE2_CHILDTYPE_BUSH_SCATTERED
-    OBJ_MURE2_CHILD_COUNT_ROCK_RING,      // OBJMURE2_CHILDTYPE_ROCK_RING
-};
-
-static s16 sActorIds[OBJMURE2_CHILDTYPE_MAX] = {
-    AC_EN_KUSA, // OBJMURE2_CHILDTYPE_BUSH_RING
-    AC_EN_KUSA, // OBJMURE2_CHILDTYPE_BUSH_SCATTERED
-    AC_EN_ISHI, // OBJMURE2_CHILDTYPE_ROCK_RING
-};
-
-static VecPolarS sScatteredBushSpawnInfo[OBJ_MURE2_CHILD_MAX] = {
-    { 40, 0x0666 }, { 40, 0x2CCC }, { 40, 0x5999 },  { 40, -0x799A }, { 20, -0x4000 }, { 80, 0x1333 },
-    { 80, 0x4000 }, { 80, 0x6CCC }, { 80, -0x6CCD }, { 80, -0x5334 }, { 80, -0x399A }, { 60, -0x2000 },
-};
 
 void ObjMure2_GetBushCircleSpawnPos(Vec3f pos[OBJ_MURE2_CHILD_MAX], Actor_ObjMure2* this)
 {
