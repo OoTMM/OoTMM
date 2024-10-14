@@ -99,16 +99,16 @@ void ObjMure2_SpawnActors(Actor_ObjMure2* this, GameState_Play* play)
     ObjMure2_SetActorSpawnParams(&params, this);
 
     for (i = 0; i < D_80B9A818[actorNum]; i++) {
-        if (this->actorSpawnPtrList[i] != NULL) {
+        if (this->actors[i] != NULL) {
             continue;
         }
 
-        if (((this->currentActorNum >> i) & 1) == 0) {
-            this->actorSpawnPtrList[i] =
+        if (((this->spawnFlags >> i) & 1) == 0) {
+            this->actors[i] =
                 Actor_Spawn(&play->actorCtx, play, sActorSpawnIDs[actorNum], spawnPos[i].x, spawnPos[i].y,
                             spawnPos[i].z, this->actor.world.rot.x, 0, this->actor.world.rot.z, params);
-            if (this->actorSpawnPtrList[i] != NULL) {
-                this->actorSpawnPtrList[i]->room = this->actor.room;
+            if (this->actors[i] != NULL) {
+                this->actors[i]->room = this->actor.room;
             }
         }
     }
@@ -120,24 +120,24 @@ void ObjMure2_CleanupAndDie(Actor_ObjMure2* this, GameState_Play* play)
 
     for (i = 0; i < D_80B9A818[PARAMS_GET_U(this->actor.params, 0, 2)]; i++)
     {
-        if (((this->currentActorNum >> i) & 1) == 0)
+        if (((this->spawnFlags >> i) & 1) == 0)
         {
-            if (this->actorSpawnPtrList[i] != NULL)
+            if (this->actors[i] != NULL)
             {
-                if (Actor_HasParent(this->actorSpawnPtrList[i], play))
+                if (Actor_HasParent(this->actors[i], play))
                 {
-                    this->currentActorNum |= (1 << i);
+                    this->spawnFlags |= (1 << i);
                 }
                 else
                 {
-                    Actor_Kill(this->actorSpawnPtrList[i]);
+                    Actor_Kill(this->actors[i]);
                 }
-                this->actorSpawnPtrList[i] = NULL;
+                this->actors[i] = NULL;
             }
         }
         else
         {
-            this->actorSpawnPtrList[i] = NULL;
+            this->actors[i] = NULL;
         }
     }
 }
@@ -147,10 +147,10 @@ void func_80B9A534(Actor_ObjMure2* this)
     s32 i;
 
     for (i = 0; i < D_80B9A818[PARAMS_GET_U(this->actor.params, 0, 2)]; i++) {
-        if (this->actorSpawnPtrList[i] != NULL && (((this->currentActorNum >> i) & 1) == 0) &&
-            (this->actorSpawnPtrList[i]->update == NULL)) {
-            this->currentActorNum |= (1 << i);
-            this->actorSpawnPtrList[i] = NULL;
+        if (this->actors[i] != NULL && (((this->spawnFlags >> i) & 1) == 0) &&
+            (this->actors[i]->update == NULL)) {
+            this->spawnFlags |= (1 << i);
+            this->actors[i] = NULL;
         }
     }
 }
@@ -187,7 +187,7 @@ void func_80B9A658(Actor_ObjMure2* this)
 
 void func_80B9A668(Actor_ObjMure2* this, GameState_Play* play)
 {
-    if (Math3D_Dist1DSq(this->actor.projectedPos.x, this->actor.projectedPos.z) < (sDistSquared1[PARAMS_GET_U(this->actor.params, 0, 2)] * this->unk_184))
+    if (Math3D_Dist1DSq(this->actor.projectedPos.x, this->actor.projectedPos.z) < (sDistSquared1[PARAMS_GET_U(this->actor.params, 0, 2)] * this->rangeMultiplier))
     {
         this->actor.flags |= ACTOR_FLAG_OOT_4;
         ObjMure2_SpawnActors(this, play);
@@ -202,7 +202,7 @@ void func_80B9A6E8(Actor_ObjMure2* this) {
 void func_80B9A6F8(Actor_ObjMure2* this, GameState_Play* play)
 {
     func_80B9A534(this);
-    if ((sDistSquared2[PARAMS_GET_U(this->actor.params, 0, 2)] * this->unk_184) <= Math3D_Dist1DSq(this->actor.projectedPos.x, this->actor.projectedPos.z))
+    if ((sDistSquared2[PARAMS_GET_U(this->actor.params, 0, 2)] * this->rangeMultiplier) <= Math3D_Dist1DSq(this->actor.projectedPos.x, this->actor.projectedPos.z))
     {
         this->actor.flags &= ~ACTOR_FLAG_OOT_4;
         ObjMure2_CleanupAndDie(this, play);
@@ -214,11 +214,11 @@ void ObjMure2_Update(Actor_ObjMure2* this, GameState_Play* play)
 {
     if (play->csCtx.state == CS_STATE_IDLE)
     {
-        this->unk_184 = 1.0f;
+        this->rangeMultiplier = 1.0f;
     }
     else
     {
-        this->unk_184 = 4.0f;
+        this->rangeMultiplier = 4.0f;
     }
     this->actionFunc(this, play);
 }
