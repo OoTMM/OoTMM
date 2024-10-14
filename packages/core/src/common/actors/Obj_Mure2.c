@@ -1,3 +1,4 @@
+#if 0
 #include <combo.h>
 #include <combo/global.h>
 #include <combo/actor.h>
@@ -71,4 +72,5 @@ void ObjMure2_SpawnChildrenWrapper(Actor_ObjMure2* this, PlayState* play)
     }
 }
 
+#endif
 #endif
