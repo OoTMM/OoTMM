@@ -1,4 +1,5 @@
 #include "Obj_Mure2.h"
+#include <combo/global.h>
 
 #define FLAGS 0
 
@@ -47,109 +48,144 @@ static VecPolarS sScatteredBushSpawnInfo[OBJ_MURE2_CHILD_MAX] = {
 void ObjMure2_Init(Actor_ObjMure2* this, GameState_Play* play);
 void ObjMure2_Update(Actor_ObjMure2* this, GameState_Play* play);
 
-#if defined(GAME_OOT)
-typedef void (*ObjMure2SetPosFunc)(Vec3f* vec, Actor_ObjMure2* this);
-
-void ObjMure2_SetPosShrubCircle(Vec3f* vec, Actor_ObjMure2* this);
-void ObjMure2_SetPosShrubScattered(Vec3f* vec, Actor_ObjMure2* this);
-void ObjMure2_SetPosRockCircle(Vec3f* vec, Actor_ObjMure2* this);
+void ObjMure2_SpawnChildren(Actor_ObjMure2* this, GameState_Play* play);
 void ObjMure2_Wait(Actor_ObjMure2* this, GameState_Play* play);
 void ObjMure2_WaitForPlayerInRange(Actor_ObjMure2* this, GameState_Play* play);
 void ObjMure2_WaitForPlayerOutOfRange(Actor_ObjMure2* this, GameState_Play* play);
+void ObjMure2_KillChildren(Actor_ObjMure2* this, GameState_Play* play);
 void ObjMure2_SetupWait(Actor_ObjMure2* this);
 void ObjMure2_SetupWaitForPlayerInRange(Actor_ObjMure2* this);
 void ObjMure2_SetupWaitForPlayerOutOfRange(Actor_ObjMure2* this);
+void ObjMure2_GetChildParams(s16*, Actor_ObjMure2*);
 
-void ObjMure2_SetPosShrubCircle(Vec3f* vec, Actor_ObjMure2* this) {
-    s32 i;
-
-    Math_Vec3f_Copy(vec, &this->actor.world.pos);
-    for (i = 1; i < sChildCounts[PARAMS_GET_U(this->actor.params, 0, 2)]; i++) {
-        Math_Vec3f_Copy(vec + i, &this->actor.world.pos);
-        (vec + i)->x += (80.0f * Math_SinS((i - 1) * 0x2000));
-        (vec + i)->z += (80.0f * Math_CosS((i - 1) * 0x2000));
+void ObjMure2_GetBushCircleSpawnPos(Vec3f pos[OBJ_MURE2_CHILD_MAX], Actor_ObjMure2* this)
+{
+    Math_Vec3f_Copy(&pos[0], &this->actor.world.pos);
+    for (int i = 1; i < sChildCounts[OBJ_MURE2_GET_CHILD_TYPE(&this->actor)]; i++)
+    {
+        Math_Vec3f_Copy(&pos[i], &this->actor.world.pos);
+        (pos + i)->x += 80.0f * Math_SinS((i - 1) * 0x2000);
+        (pos + i)->z += 80.0f * Math_CosS((i - 1) * 0x2000);
     }
 }
 
-
-void ObjMure2_SetPosShrubScattered(Vec3f* vec, Actor_ObjMure2* this)
+void ObjMure2_GetBushScatteredPos(Vec3f pos[OBJ_MURE2_CHILD_MAX], Actor_ObjMure2* this)
 {
-    s32 i;
-
-    for (i = 0; i < sChildCounts[PARAMS_GET_U(this->actor.params, 0, 2)]; i++) {
-        Math_Vec3f_Copy(vec + i, &this->actor.world.pos);
-        (vec + i)->x += (sScatteredBushSpawnInfo[i].distance * Math_CosS(sScatteredBushSpawnInfo[i].angle));
-        (vec + i)->z -= (sScatteredBushSpawnInfo[i].distance * Math_SinS(sScatteredBushSpawnInfo[i].angle));
+    for (int i = 0; i < sChildCounts[OBJ_MURE2_GET_CHILD_TYPE(&this->actor)]; i++)
+    {
+        Math_Vec3f_Copy(pos + i, &this->actor.world.pos);
+        (pos + i)->x += sScatteredBushSpawnInfo[i].distance * Math_CosS(sScatteredBushSpawnInfo[i].angle);
+        (pos + i)->z -= sScatteredBushSpawnInfo[i].distance * Math_SinS(sScatteredBushSpawnInfo[i].angle);
     }
 }
 
-void ObjMure2_SetPosRockCircle(Vec3f* vec, Actor_ObjMure2* this)
+void ObjMure2_GetRocksSpawnPos(Vec3f pos[OBJ_MURE2_CHILD_MAX], Actor_ObjMure2* this)
 {
-    s32 i;
-
-    for (i = 0; i < sChildCounts[PARAMS_GET_U(this->actor.params, 0, 2)]; i++) {
-        Math_Vec3f_Copy(vec + i, &this->actor.world.pos);
-        (vec + i)->x += (80.0f * Math_SinS(i * 0x2000));
-        (vec + i)->z += (80.0f * Math_CosS(i * 0x2000));
+    for (int i = 0; i < sChildCounts[OBJ_MURE2_GET_CHILD_TYPE(&this->actor)]; i++)
+    {
+        Math_Vec3f_Copy(&pos[i], &this->actor.world.pos);
+        (pos + i)->x += 80.0f * Math_SinS(i * 0x2000);
+        (pos + i)->z += 80.0f * Math_CosS(i * 0x2000);
     }
 }
 
-void ObjMure2_SetActorSpawnParams(s16* params, Actor_ObjMure2* this)
+#if defined(GAME_OOT)
+void ObjMure2_GetChildParams(s16* params, Actor_ObjMure2* this)
 {
-    static s16 actorSpawnParams[] = { 0, 0, 0 };
-    s16 dropTable = PARAMS_GET_U(this->actor.params, 8, 4);
+    s16 dropTable;
 
-    if (dropTable >= 13) {
+    dropTable = OBJ_MURE2_GET_CHILD_UPPER_PARAMS(&this->actor);
+    if (dropTable >= 13)
         dropTable = 0;
-    }
-    *params = actorSpawnParams[PARAMS_GET_U(this->actor.params, 0, 2)] & 0xF0FF;
-    *params |= (dropTable << 8);
+
+    *params = (dropTable << 8);
 }
+#endif
+
+#if defined(GAME_MM)
+void ObjMure2_GetChildParams(s16* childParams, Actor_ObjMure2* this)
+{
+    Mure2ChildType childType;
+    s32 dropTable;
+
+    childType = OBJ_MURE2_GET_CHILD_TYPE(&this->actor);
+    dropTable = OBJ_MURE2_GET_CHILD_UPPER_PARAMS(&this->actor);
+    if (childType == OBJMURE2_CHILDTYPE_ROCK_RING)
+        *childParams = dropTable << 4;
+    else
+        *childParams = dropTable << 8;
+}
+#endif
+
+Actor* ObjMure2_ActorSpawn(Actor_ObjMure2* this, GameState_Play* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable)
+{
+#if defined(GAME_OOT)
+    return Actor_Spawn(&play->actorCtx, play, actorId, x, y, z, rx, ry, rz, variable);
+#endif
+
+#if defined(GAME_MM)
+    return Actor_SpawnAsChildAndCutscene(&play->actorCtx, play, actorId, x, y, z, rx, ry, rz, variable, this->actor.csId, this->actor.halfDaysBits, NULL);
+#endif
+}
+
+Actor* ObjMure2_ActorSpawnEx(Actor_ObjMure2* this, GameState_Play* play, int i, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable)
+{
+    Actor* tmp;
+
+    memcpy(&g.xflag, &this->xflag, sizeof(Xflag));
+    g.xflag.sliceId = (u8)i;
+    g.xflagOverride = TRUE;
+    tmp = ObjMure2_ActorSpawn(this, play, actorId, x, y, z, rx, ry, rz, variable);
+    g.xflagOverride = FALSE;
+
+    return tmp;
+}
+
+typedef void (*ObjMure2SpawnPosFunc)(Vec3f[OBJ_MURE2_CHILD_MAX], Actor_ObjMure2*);
+static ObjMure2SpawnPosFunc sSpawnPosFuncs[OBJMURE2_CHILDTYPE_MAX] =
+{
+    ObjMure2_GetBushCircleSpawnPos,
+    ObjMure2_GetBushScatteredPos,
+    ObjMure2_GetRocksSpawnPos,
+};
 
 void ObjMure2_SpawnChildren(Actor_ObjMure2* this, GameState_Play* play)
 {
-    static ObjMure2SetPosFunc setPosFunc[] = {
-        ObjMure2_SetPosShrubCircle,
-        ObjMure2_SetPosShrubScattered,
-        ObjMure2_SetPosRockCircle,
-    };
-    s32 actorNum = PARAMS_GET_U(this->actor.params, 0, 2);
-    s32 i;
-    Vec3f spawnPos[12];
-    s16 params;
+    Vec3f* pos;
+    Mure2ChildType childType;
+    Vec3f spawnPos[OBJ_MURE2_CHILD_MAX];
+    s16 childParams;
 
-    setPosFunc[actorNum](spawnPos, this);
-    ObjMure2_SetActorSpawnParams(&params, this);
+    childType = OBJ_MURE2_GET_CHILD_TYPE(&this->actor);
+    sSpawnPosFuncs[childType](spawnPos, this);
+    ObjMure2_GetChildParams(&childParams, this);
 
-    for (i = 0; i < sChildCounts[actorNum]; i++) {
-        if (this->actors[i] != NULL) {
+    for (int i = 0; i < sChildCounts[childType]; i++)
+    {
+        if (this->actors[i] != NULL)
             continue;
-        }
 
-        if (((this->spawnFlags >> i) & 1) == 0) {
-            this->actors[i] =
-                Actor_Spawn(&play->actorCtx, play, sActorIds[actorNum], spawnPos[i].x, spawnPos[i].y,
-                            spawnPos[i].z, this->actor.world.rot.x, 0, this->actor.world.rot.z, params);
-            if (this->actors[i] != NULL) {
+        if (((this->spawnFlags >> i) & 1) == 0)
+        {
+            pos = &spawnPos[i];
+            this->actors[i] = ObjMure2_ActorSpawnEx(this, play, i, sActorIds[childType], pos->x, pos->y, pos->z, this->actor.world.rot.x, 0, this->actor.world.rot.z, childParams);
+            if (this->actors[i] != NULL)
                 this->actors[i]->room = this->actor.room;
-            }
         }
     }
 }
 
 void ObjMure2_KillChildren(Actor_ObjMure2* this, GameState_Play* play)
 {
-    s32 i;
-
-    for (i = 0; i < sChildCounts[PARAMS_GET_U(this->actor.params, 0, 2)]; i++)
+    for (int i = 0; i < sChildCounts[OBJ_MURE2_GET_CHILD_TYPE(&this->actor)]; i++)
     {
         if (((this->spawnFlags >> i) & 1) == 0)
         {
             if (this->actors[i] != NULL)
             {
-                if (Actor_HasParent(this->actors[i], play))
+                if (Actor_HasParentZ(this->actors[i]))
                 {
-                    this->spawnFlags |= (1 << i);
+                    this->spawnFlags |= 1 << i;
                 }
                 else
                 {
@@ -167,136 +203,18 @@ void ObjMure2_KillChildren(Actor_ObjMure2* this, GameState_Play* play)
 
 void ObjMure2_ClearChildrenList(Actor_ObjMure2* this)
 {
-    s32 i;
-
-    for (i = 0; i < sChildCounts[PARAMS_GET_U(this->actor.params, 0, 2)]; i++) {
-        if (this->actors[i] != NULL && (((this->spawnFlags >> i) & 1) == 0) &&
-            (this->actors[i]->update == NULL)) {
-            this->spawnFlags |= (1 << i);
-            this->actors[i] = NULL;
-        }
-    }
-}
-#endif
-
-#if defined(GAME_MM)
-void ObjMure2_SpawnChildren(Actor_ObjMure2* this, GameState_Play* play);
-void ObjMure2_Wait(Actor_ObjMure2* this, GameState_Play* play);
-void ObjMure2_WaitForPlayerInRange(Actor_ObjMure2* this, GameState_Play* play);
-void ObjMure2_WaitForPlayerOutOfRange(Actor_ObjMure2* this, GameState_Play* play);
-void ObjMure2_KillChildren(Actor_ObjMure2* this, GameState_Play* play);
-void ObjMure2_SetupWait(Actor_ObjMure2* this);
-void ObjMure2_SetupWaitForPlayerInRange(Actor_ObjMure2* this);
-void ObjMure2_SetupWaitForPlayerOutOfRange(Actor_ObjMure2* this);
-void ObjMure2_GetChildParams(s16*, Actor_ObjMure2*);
-
-void ObjMure2_GetBushCircleSpawnPos(Vec3f pos[OBJ_MURE2_CHILD_MAX], Actor_ObjMure2* this)
-{
-    Math_Vec3f_Copy(&pos[0], &this->actor.world.pos);
-    for (int i = 1; i < sChildCounts[OBJ_MURE2_GET_CHILD_TYPE(&this->actor)]; i++) {
-        Math_Vec3f_Copy(&pos[i], &this->actor.world.pos);
-        (pos + i)->x += 80.0f * Math_SinS((i - 1) * 0x2000);
-        (pos + i)->z += 80.0f * Math_CosS((i - 1) * 0x2000);
-    }
-}
-
-void ObjMure2_GetBushScatteredPos(Vec3f pos[OBJ_MURE2_CHILD_MAX], Actor_ObjMure2* this)
-{
-    for (int i = 0; i < sChildCounts[OBJ_MURE2_GET_CHILD_TYPE(&this->actor)]; i++) {
-        Math_Vec3f_Copy(pos + i, &this->actor.world.pos);
-        (pos + i)->x += sScatteredBushSpawnInfo[i].distance * Math_CosS(sScatteredBushSpawnInfo[i].angle);
-        (pos + i)->z -= sScatteredBushSpawnInfo[i].distance * Math_SinS(sScatteredBushSpawnInfo[i].angle);
-    }
-}
-
-void ObjMure2_GetRocksSpawnPos(Vec3f pos[OBJ_MURE2_CHILD_MAX], Actor_ObjMure2* this)
-{
     for (int i = 0; i < sChildCounts[OBJ_MURE2_GET_CHILD_TYPE(&this->actor)]; i++)
     {
-        Math_Vec3f_Copy(&pos[i], &this->actor.world.pos);
-        (pos + i)->x += 80.0f * Math_SinS(i * 0x2000);
-        (pos + i)->z += 80.0f * Math_CosS(i * 0x2000);
-    }
-}
-
-void ObjMure2_GetChildParams(s16* childParams, Actor_ObjMure2* this)
-{
-    Mure2ChildType childType = OBJ_MURE2_GET_CHILD_TYPE(&this->actor);
-    s32 temp_a2 = OBJ_MURE2_GET_CHILD_UPPER_PARAMS(&this->actor);
-
-    if (childType == OBJMURE2_CHILDTYPE_ROCK_RING) {
-        *childParams = temp_a2 << 4;
-    } else {
-        *childParams = temp_a2 << 8;
-    }
-}
-
-typedef void (*ObjMure2SpawnPosFunc)(Vec3f[OBJ_MURE2_CHILD_MAX], Actor_ObjMure2*);
-static ObjMure2SpawnPosFunc sSpawnPosFuncs[OBJMURE2_CHILDTYPE_MAX] = {
-    ObjMure2_GetBushCircleSpawnPos, // OBJMURE2_CHILDTYPE_BUSH_RING
-    ObjMure2_GetBushScatteredPos,   // OBJMURE2_CHILDTYPE_BUSH_SCATTERED
-    ObjMure2_GetRocksSpawnPos,      // OBJMURE2_CHILDTYPE_ROCK_RING
-};
-
-void ObjMure2_SpawnChildren(Actor_ObjMure2* this, GameState_Play* play)
-{
-    Vec3f* pos;
-    Mure2ChildType childType = OBJ_MURE2_GET_CHILD_TYPE(&this->actor);
-    Vec3f spawnPos[OBJ_MURE2_CHILD_MAX];
-    s16 childParams;
-    s32 i;
-
-    sSpawnPosFuncs[childType](spawnPos, this);
-    ObjMure2_GetChildParams(&childParams, this);
-    for (i = 0; i < sChildCounts[childType]; i++) {
-        if (this->actors[i] != NULL) {
+        if (this->actors[i] == NULL)
             continue;
-        }
-        if (((this->spawnFlags >> i) & 1) == 0) {
-            pos = &spawnPos[i];
-            this->actors[i] = Actor_SpawnAsChildAndCutscene(
-                &play->actorCtx, play, sActorIds[childType], pos->x, pos->y, pos->z, this->actor.world.rot.x, 0,
-                this->actor.world.rot.z, childParams, this->actor.csId, this->actor.halfDaysBits, NULL);
-            if (this->actors[i] != NULL) {
-                this->actors[i]->room = this->actor.room;
-            }
-        }
-    }
-}
 
-void ObjMure2_KillChildren(Actor_ObjMure2* this, GameState_Play* play) {
-    s32 i;
-
-    for (i = 0; i < sChildCounts[OBJ_MURE2_GET_CHILD_TYPE(&this->actor)]; i++) {
-        if (((this->spawnFlags >> i) & 1) == 0) {
-            if (this->actors[i] != NULL) {
-                if (Actor_HasParent(this->actors[i], play)) {
-                    this->spawnFlags |= 1 << i;
-                } else {
-                    Actor_Kill(this->actors[i]);
-                }
-                this->actors[i] = NULL;
-            }
-        } else {
-            this->actors[i] = NULL;
-        }
-    }
-}
-
-void ObjMure2_ClearChildrenList(Actor_ObjMure2* this) {
-    s32 i;
-
-    for (i = 0; i < sChildCounts[OBJ_MURE2_GET_CHILD_TYPE(&this->actor)]; i++) {
-        if (this->actors[i] == NULL) {
-            continue;
-        }
-        if ((((this->spawnFlags >> i) & 1) == 0) && (this->actors[i]->update == NULL)) {
+        if ((((this->spawnFlags >> i) & 1) == 0) && (this->actors[i]->update == NULL))
+        {
             this->spawnFlags |= (1 << i);
             this->actors[i] = NULL;
         }
     }
 }
-#endif
 
 static InitChainEntry sInitChain[] = {
     ICHAIN_F32(uncullZoneForward, 100, ICHAIN_CONTINUE),
@@ -306,6 +224,8 @@ static InitChainEntry sInitChain[] = {
 
 void ObjMure2_Init(Actor_ObjMure2* this, GameState_Play* play)
 {
+    comboXflagInit(&this->xflag, &this->actor, play);
+
     Actor_ProcessInitChain(&this->actor, sInitChain);
     if (play->csCtx.state != CS_STATE_IDLE)
         this->actor.uncullZoneForward += 1200.0f;
