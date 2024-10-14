@@ -538,6 +538,8 @@ SoundSource_PlaySfxAtFixedWorldPos = 0x800f0568;
 Enemy_StartFinishingBlow = 0x800bba88;
 Cutscene_StartManual = 0x800ea0d4;
 Cutscene_StopManual = 0x800ea0ec;
+Actor_Noop = 0x800bdfb0;
+Math3D_Dist1DSq = 0x8017a5f8;
 
 CutsceneManager_GetAdditionalCsId = 0x800f20b8;
 func_800B4AEC = 0x800b4aec;
