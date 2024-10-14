@@ -2,6 +2,7 @@
 #define OVL_OBJ_MURE2_H
 
 #include <combo.h>
+#include <combo/xflags.h>
 
 typedef struct Actor_ObjMure2 Actor_ObjMure2;
 
@@ -18,6 +19,7 @@ struct Actor_ObjMure2
     Actor*              actors[OBJ_MURE2_CHILD_MAX];
     u16                 spawnFlags;
     float               rangeMultiplier;
+    Xflag               xflag;
 };
 
 #endif
