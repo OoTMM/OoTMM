@@ -222,9 +222,39 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_F32(uncullZoneDownward, 100, ICHAIN_STOP),
 };
 
+void ObjMure2_AliasGrass(Xflag* xf)
+{
+#if defined(GAME_OOT)
+#endif
+
+#if defined(GAME_MM)
+#endif
+}
+
+void ObjMure2_AliasRocks(Xflag* xf)
+{
+#if defined(GAME_OOT)
+#endif
+
+#if defined(GAME_MM)
+#endif
+}
+
+void ObjMure2_Alias(Actor_ObjMure2* this, GameState_Play* play)
+{
+    Xflag* xf;
+
+    xf = &this->xflag;
+    if (OBJ_MURE2_GET_CHILD_TYPE(&this->actor) == OBJMURE2_CHILDTYPE_ROCK_RING)
+        ObjMure2_AliasRocks(xf);
+    else
+        ObjMure2_AliasGrass(xf);
+}
+
 void ObjMure2_Init(Actor_ObjMure2* this, GameState_Play* play)
 {
     comboXflagInit(&this->xflag, &this->actor, play);
+    ObjMure2_Alias(this, play);
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
     if (play->csCtx.state != CS_STATE_IDLE)
