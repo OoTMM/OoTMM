@@ -2086,6 +2086,7 @@
     "Zora Fountain Frozen": "is_adult || climb_anywhere || longshot_anywhere"
     "Fairy Fountain Farore": "has_explosives"
     "Zora Fountain Deep": "is_adult && has_tunic_zora && has_iron_boots"
+    "Zora Fountain Butterflies": "is_child && can_use_sticks && is_day"
   events:
     SEEDS: "is_child"
   locations:
@@ -2100,11 +2101,15 @@
     "Zora Fountain Adult Pot 1": "is_adult && ((can_lift_silver && has_explosives_or_hammer) || climb_anywhere)"
     "Zora Fountain Adult Pot 2": "is_adult && ((can_lift_silver && has_explosives_or_hammer) || climb_anywhere)"
     "Zora Fountain Adult Pot 3": "is_adult && ((can_lift_silver && has_explosives_or_hammer) || climb_anywhere)"
-    "Zora Fountain Butterfly 1": "is_child && can_use_sticks"
-    "Zora Fountain Butterfly 2": "is_child && can_use_sticks"
   gossip:
     "Zora Fountain Gossip Northwest": "true"
     "Zora Fountain Gossip Near Fairy": "true"
+"Zora Fountain Butterflies":
+  region: ZORA_FOUNTAIN
+  age_change: false
+  locations:
+    "Zora Fountain Butterfly 1": "true"
+    "Zora Fountain Butterfly 2": "true"
 "Zora Fountain Deep":
   region: ZORA_FOUNTAIN
   locations:

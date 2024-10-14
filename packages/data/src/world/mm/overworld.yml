@@ -1810,7 +1810,7 @@
     "Owl Mountain": "true"
     "Mountain Village Elder": "true"
     "Mountain Village Keaton": "true"
-    "Mountain Village Butterflies": "is_spring && has_sticks"
+    "Mountain Village Butterflies": "is_spring && has_sticks && is_day"
   gossip:
     "Mountain Village Gossip Outside": "is_spring"
     "Mountain Village Gossip Tunnel": "is_spring && (has_mask_goron || short_hook_anywhere)"
