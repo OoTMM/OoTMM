@@ -29,6 +29,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix possible softlock in Ice Cavern with shuffled silver rupees.
 - Logic for obtaining the Seahorse.
 - Logic for Open Bottom of the Well as adult.
 - Pre-Activated Owl Statues able to create unbeatable seeds.
