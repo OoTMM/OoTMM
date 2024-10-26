@@ -1,4 +1,4 @@
-import { merge } from 'lodash-es';
+import { merge } from 'lodash';
 
 import { Optional } from "../lib/combo/util";
 import { DEFAULT_SETTINGS, Settings } from "../lib/combo/settings";

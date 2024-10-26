@@ -1,4 +1,4 @@
-import { isEqual } from 'lodash-es';
+import { isEqual } from 'lodash';
 import { deflate, inflate } from 'pako';
 import { PartialDeep } from 'type-fest';
 

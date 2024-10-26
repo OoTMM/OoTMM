@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { uniqueId } from 'lodash-es';
+import { uniqueId } from 'lodash';
 import { createPortal } from 'react-dom';
 import { Tooltip as ReactTooltip } from 'react-tooltip';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

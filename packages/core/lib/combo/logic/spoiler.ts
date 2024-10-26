@@ -1,4 +1,4 @@
-import { sortBy } from 'lodash-es';
+import { sortBy } from 'lodash';
 
 import { Options } from '../options';
 import { SETTINGS, Settings, TrickKey, TRICKS } from '../settings';
