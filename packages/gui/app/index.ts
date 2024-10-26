@@ -9,4 +9,4 @@ import AppContainer from './components/AppContainer';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
-root.render(React.createElement(AppContainer));
+root.render(React.createElement(AppContainer, {}));

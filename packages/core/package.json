@@ -8,8 +8,8 @@
     "test": "cross-env NODE_ENV=test jest"
   },
   "dependencies": {
-    "@ootmm/data": "^0.0.1",
-    "@ootmm/tools": "^0.0.1",
+    "@ootmm/data": "*",
+    "@ootmm/tools": "*",
     "core-js": "^3.38.1",
     "crc-32": "^1.2.2",
     "pngjs": "^7.0.0",

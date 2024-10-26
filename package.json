@@ -1,10 +1,8 @@
 {
   "name": "root",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "start:core": "nx run @ootmm/core:start",
     "start:core:debug": "nx run @ootmm/core:start:debug",
     "build": "nx run @ootmm/gui:build",
@@ -36,5 +34,6 @@
     "tsx": "^4.19.1",
     "typescript": "^5.6.3",
     "yaml": "^2.6.0"
-  }
+  },
+  "packageManager": "pnpm@9.12.2+sha512.22721b3a11f81661ae1ec68ce1a7b879425a1ca5b991c975b074ac220b187ce56c708fe5db69f4c962c989452eee76c82877f4ee80f474cebd61ee13461b6228"
 }
