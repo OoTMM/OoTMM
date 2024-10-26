@@ -35,6 +35,9 @@ void Interface_LoadItemIconCustom(u32 vrom, s32 id, void* dst, size_t size)
         case ITEM_MM_TUNIC_ZORA:
             id = ITEM_OOT_TUNIC_ZORA;
             break;
+        case ITEM_MM_HAMMER:
+            id = ITEM_OOT_HAMMER;
+            break;
         }
 
         comboDmaLookupForeignId(&dma, 8);

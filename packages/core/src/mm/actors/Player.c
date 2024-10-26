@@ -52,6 +52,7 @@ static s32 sCustomItemActions[] =
     PLAYER_CUSTOM_IA_BOOTS_HOVER,
     PLAYER_CUSTOM_IA_TUNIC_GORON,
     PLAYER_CUSTOM_IA_TUNIC_ZORA,
+    PLAYER_CUSTOM_IA_HAMMER,
 };
 
 static u8 sMagicSpellCosts[] =
@@ -1644,3 +1645,209 @@ void Player_UseItem(GameState_Play* play, Actor_Player* this, s16 itemId)
         Player_UseItemImpl(play, this, itemId);
     }
 }
+
+/* Hammer Stuff */
+
+s32 Player_CustomActionToModelGroup(Actor_Player* player, s32 itemAction) {
+    u8* sActionModelGroups = (u8*)0x801BFF3C; /* using original table also means original glitches, if that matters */
+    s32 modelGroup = sActionModelGroups[itemAction];
+
+    if (itemAction == PLAYER_CUSTOM_IA_HAMMER) {
+        modelGroup = sActionModelGroups[6];
+    }
+
+    /* if ((modelGroup == PLAYER_MODELGROUP_ONE_HAND_SWORD) && Player_IsGoronOrDeku(player)) { */
+    if ((modelGroup == 2) && (player->transformation == MM_PLAYER_FORM_GORON || player->transformation == MM_PLAYER_FORM_DEKU)) {
+        /* return PLAYER_MODELGROUP_1;  */
+        return 1;
+    }
+    return modelGroup;
+}
+
+/*
+    first two arguments match Player_SetUpperAction which allows it to replace relevant calls in which the third argument would always be this->heldItemAction
+*/
+void Player_SetCustomItemActionUpperFunc(GameState_Play* play, Actor_Player* player) {
+    PlayerUpperActionFunc* sPlayerUpperActionUpdateFuncs = (PlayerUpperActionFunc*)OverlayAddr(0x8085c9f0);
+    void (*Player_SetUpperAction)(GameState_Play* play, Actor_Player* this, PlayerUpperActionFunc upperActionFunc) = OverlayAddr(0x8082f43c);
+
+    if (player->heldItemAction == PLAYER_CUSTOM_IA_HAMMER) {
+        Player_SetUpperAction(play, player, sPlayerUpperActionUpdateFuncs[6]);
+    } else {
+        Player_SetUpperAction(play, player, sPlayerUpperActionUpdateFuncs[player->heldItemAction]);
+    }
+}
+
+void Player_RunCustomItemActionInitFunc(GameState_Play* play, Actor_Player* player, s32 itemAction) {
+    PlayerInitItemActionFunc* sPlayerItemActionInitFuncs = (PlayerInitItemActionFunc*)OverlayAddr(0x8085cb3c);
+    
+    if (player->heldItemAction == PLAYER_CUSTOM_IA_HAMMER) {
+        sPlayerItemActionInitFuncs[6](play, player);
+    } else {
+        sPlayerItemActionInitFuncs[itemAction](play, player);
+    }
+}
+
+PATCH_CALL(0x80830A14, Player_SetCustomItemActionUpperFunc);
+PATCH_CALL(0x808488B4, Player_SetCustomItemActionUpperFunc);
+PATCH_CALL(0x80848B10, Player_SetCustomItemActionUpperFunc);
+PATCH_CALL(0x8082F914, Player_RunCustomItemActionInitFunc); /* this was not a function but it's ok */
+
+PlayerMeleeWeapon Player_CustomMeleeWeaponFromIA(PlayerItemAction itemAction) {
+    PlayerMeleeWeapon weapon = GET_MELEE_WEAPON_FROM_IA(itemAction);
+
+    if ((weapon > PLAYER_MELEEWEAPON_NONE) && (weapon < PLAYER_MELEEWEAPON_MAX)) {
+        return weapon;
+    }
+
+    return PLAYER_MELEEWEAPON_NONE;
+}
+
+PATCH_FUNC(0x80124168, Player_CustomMeleeWeaponFromIA);
+
+void Player_GetCustomSwordLength(GameState_Play* play, Actor_Player* player) {
+    Vec3f* D_801C0994 = (Vec3f*)0x801C0994;
+    f32* sMeleeWeaponLengths = (f32*)0x801C0D78;
+    PlayerMeleeWeapon (*Player_GetMeleeWeaponHeld)(Actor_Player* this) = (void*)0x80124190;
+
+    if (player->itemAction == PLAYER_CUSTOM_IA_HAMMER) {
+        D_801C0994->x = 2500.0f;
+    } else if (player->itemAction == PLAYER_IA_DEKU_STICK) {
+        D_801C0994->x = player->unk_B0C * 5000.0f;
+    } else {
+        D_801C0994->x = sMeleeWeaponLengths[Player_GetMeleeWeaponHeld(player)];
+    }
+}
+
+static MeleeWeaponDamageInfo megatonHammerDmgInfo = { DMG_GORON_PUNCH | DMG_GORON_POUND, 3, 6, 3, 6 };
+
+void Player_SetMeleeWeaponInfo(Actor_Player* this, PlayerMeleeWeaponAnimation meleeWeaponAnim) {
+    MeleeWeaponDamageInfo* D_8085D09C = OverlayAddr(0x8085D09C);
+    MeleeWeaponDamageInfo* dmgInfo = &D_8085D09C[0];
+    PlayerMeleeWeapon (*Player_GetMeleeWeaponHeld)(Actor_Player* this) = (void*)0x80124190;
+    void (*func_80833728)(Actor_Player* this, s32 index, u32 dmgFlags, s32 damage) = OverlayAddr(0x80833728);
+
+    s32 damage;
+
+    if (this->actor.id == AC_EN_TEST3) {
+        // Was Kafei originally intended to be able to punch?
+        meleeWeaponAnim = PLAYER_MWA_GORON_PUNCH_LEFT;
+        this->meleeWeaponAnimation = -1;
+    } else if (this->heldItemAction == PLAYER_CUSTOM_IA_HAMMER) {
+        dmgInfo = &megatonHammerDmgInfo;
+    } else {
+        //! @bug Quick Put Away Damage: Since 0 is also the "no weapon" value, producing a weapon quad without a weapon
+        //! in hand, such as during Quick Put Away, produced a quad with the Goron punch properties, which does 0 damage
+        //! as human.
+        dmgInfo = &D_8085D09C[(this->transformation == MM_PLAYER_FORM_GORON) ? PLAYER_MELEEWEAPON_NONE
+                                                                          : Player_GetMeleeWeaponHeld(this)];
+    }
+
+    //! @bug Great Deku Sword: Presumably the dmgTransformed fields are intended for Fierce Deity, but also work for
+    //! Deku if it is able to equip a sword (such as with the "0th day" glitch), giving Great Fairy's Sword damage.
+    damage =
+        ((meleeWeaponAnim >= PLAYER_MWA_FLIPSLASH_START) && (meleeWeaponAnim <= PLAYER_MWA_ZORA_JUMPKICK_FINISH))
+            ? ((this->transformation == MM_PLAYER_FORM_HUMAN) ? dmgInfo->dmgHumanStrong : dmgInfo->dmgTransformedStrong)
+            : ((this->transformation == MM_PLAYER_FORM_HUMAN) ? dmgInfo->dmgHumanNormal : dmgInfo->dmgTransformedNormal);
+
+    func_80833728(this, 0, dmgInfo->dmgFlags, damage);
+    func_80833728(this, 1, dmgInfo->dmgFlags, damage);
+}
+
+PATCH_FUNC(0x8083375C, Player_SetMeleeWeaponInfo)
+
+static AttackAnimInfo sHammerAttackAnimInfo[] = {
+    /* PLAYER_MWA_HAMMER_FORWARD */
+    //{ &gPlayerAnim_link_hammer_hit, &gPlayerAnim_link_hammer_hit_end, &gPlayerAnim_link_hammer_hit_endR, 3, 10 },
+    { (PlayerAnimationHeader*)0x0400E4E8, (PlayerAnimationHeader*)0x0400E4F0, (PlayerAnimationHeader*)0x0400E4E0, 3, 10 },
+    /* PLAYER_MWA_HAMMER_SIDE */
+    //{ &gPlayerAnim_link_hammer_side_hit, &gPlayerAnim_link_hammer_side_hit_end, &gPlayerAnim_link_hammer_side_hit_endR, 2, 11 },
+    { (PlayerAnimationHeader*)0x0400E4D8, (PlayerAnimationHeader*)0x0400E4D0, (PlayerAnimationHeader*)0x0400E4C8, 2, 11 },
+};
+
+AttackAnimInfo* Player_GetMeleeAttackAnimInfo(void* a0, Actor_Player* player, PlayerMeleeWeaponAnimation meleeWeaponAnim) {
+    asm("sw $a1, 0x0018 ($sp)"); // keep player in a1
+    AttackAnimInfo* sMeleeAttackAnimInfo = OverlayAddr(0x8085cd30);
+    AttackAnimInfo* ret = &sMeleeAttackAnimInfo[meleeWeaponAnim];
+
+    if (player->heldItemAction == PLAYER_CUSTOM_IA_HAMMER && meleeWeaponAnim < PLAYER_MWA_FLIPSLASH_START) {
+        if (meleeWeaponAnim == PLAYER_MWA_RIGHT_SLASH_2H) {
+            ret = &sHammerAttackAnimInfo[1];
+        } else {
+            ret = &sHammerAttackAnimInfo[0];
+        }
+    }
+    
+    asm("lw $a1, 0x0018 ($sp)"); // keep player in a1
+    return ret;
+}
+
+s32 Player_IsHoldingTwoHandedWeapon(Actor_Player* player) {
+    // Relies on the itemActions for two-handed weapons being contiguous.
+    if (((player->heldItemAction >= PLAYER_IA_SWORD_TWO_HANDED) && (player->heldItemAction <= PLAYER_IA_DEKU_STICK)) || (player->heldItemAction == PLAYER_CUSTOM_IA_HAMMER)) {
+        return 1;
+    }
+
+    return 0;
+}
+
+PATCH_FUNC(0x801241b4, Player_IsHoldingTwoHandedWeapon)
+
+static s8 sHammerAttackAnims[] = {
+    PLAYER_MWA_FORWARD_SLASH_1H,
+    PLAYER_MWA_RIGHT_SLASH_1H,
+    PLAYER_MWA_FORWARD_SLASH_1H,
+    PLAYER_MWA_RIGHT_SLASH_1H,
+};
+
+void Player_SpecialMeleeWeaponAnim(Actor_Player* this, void* a1, PlayerMeleeWeaponAnimation* animation) {
+    s32 temp_a1 = this->unk_AE3[this->unk_ADE];
+
+    if (this->heldItemAction == PLAYER_CUSTOM_IA_HAMMER) {
+        *animation = sHammerAttackAnims[temp_a1];
+    } else if (this->heldItemAction == PLAYER_IA_DEKU_STICK) {
+        *animation = PLAYER_MWA_FORWARD_SLASH_1H;
+    }
+
+    /* compiler insists that a0 should have an item action in it but I disagree */
+    asm("addiu $a0, $s0, 0x0");
+}
+
+s32 Player_CanQuickspin(Actor_Player* this) {
+    s8 sp3C[4];
+    s8* iter;
+    s8* iter2;
+    s8 temp1;
+    s8 temp2;
+    s32 i;
+
+    if (this->heldItemAction == PLAYER_IA_DEKU_STICK || this->heldItemAction == PLAYER_CUSTOM_IA_HAMMER) {
+        return 0;
+    }
+
+    iter = &this->unk_ADF[0];
+    iter2 = &sp3C[0];
+    for (i = 0; i < 4; i++, iter++, iter2++) {
+        if ((*iter2 = *iter) < 0) {
+            return 0;
+        }
+        *iter2 *= 2;
+    }
+
+    temp1 = sp3C[0] - sp3C[1];
+    if (ABS_ALT(temp1) < 10) {
+        return 0;
+    }
+
+    iter2 = &sp3C[1];
+    for (i = 1; i < 3; i++, iter2++) {
+        temp2 = *iter2 - *(iter2 + 1);
+        if ((ABS_ALT(temp2) < 10) || (temp2 * temp1 < 0)) {
+            return 0;
+        }
+    }
+
+    return 1;
+}
+
+PATCH_FUNC(0x808333CC, Player_CanQuickspin)
