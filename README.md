@@ -66,11 +66,13 @@ On windows, we recommend using [WSL](https://docs.microsoft.com/en-us/windows/ws
 
 Install the required dependencies:
 
-    npm i
+    corepack enable pnpm
+    corepack use pnpm
+    pnpm i
 
 Then you can build the project:
 
-    npm start
+    pnpm start
 
 The output will be `out/OoTMM.z64`.
 

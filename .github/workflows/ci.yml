@@ -14,10 +14,10 @@ jobs:
           node-version: 22.x
 
       - name: Install dependencies
-        run: npm i
+        run: pnpm i
 
       - name: Test
-        run: npm test
+        run: pnpm test
   deploy:
     if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/master' || contains(github.ref, 'refs/tags/')) }}
     needs: test
@@ -54,11 +54,11 @@ jobs:
           node-version: 22.x
 
       - name: Install dependencies
-        run: npm i
+        run: pnpm i
 
       - name: Build
         run: |
-          npm run build
+          pnpm run build
 
       - name: Deploy to netlify (stable)
         if: ${{ contains(github.ref, 'refs/tags/') }}
