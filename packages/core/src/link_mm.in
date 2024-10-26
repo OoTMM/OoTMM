@@ -357,6 +357,7 @@ EnableOwl = 0x80143a10;
 Math_Vec3f_Copy = 0x800FF50C;
 Math_Vec3f_Diff = 0x800FF5F4;
 Math_Vec3f_DistXYZAndStoreDiff = 0x800FF8D4;
+Math_Vec3f_DistXYZ = 0x800ff884;
 VectDist = 0x800ff92c;
 
 sqrtf = 0x8008D700;

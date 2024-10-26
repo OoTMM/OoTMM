@@ -1817,7 +1817,7 @@ void Player_GetCustomSwordLength(GameState_Play* play, Actor_Player* player) {
     }
 }
 
-static MeleeWeaponDamageInfo megatonHammerDmgInfo = { DMG_GORON_PUNCH | DMG_GORON_POUND, 3, 6, 3, 6 };
+static MeleeWeaponDamageInfo megatonHammerDmgInfo = { DMG_GORON_PUNCH, 2, 4, 2, 4 };
 
 void Player_SetMeleeWeaponInfo(Actor_Player* this, PlayerMeleeWeaponAnimation meleeWeaponAnim) {
     MeleeWeaponDamageInfo* D_8085D09C = OverlayAddr(0x8085D09C);
@@ -1947,7 +1947,25 @@ s32 Player_CanQuickspin(Actor_Player* this) {
 
 PATCH_FUNC(0x808333CC, Player_CanQuickspin)
 
-// 806CD684
+Actor* Player_FindGrottoNearPos(GameState_Play* play, Vec3f* refPos, f32 distanceXZ, f32 distanceY) {
+    Actor* actor = play->actorCtx.actors[ACTORCAT_ITEMACTION].first;
+
+    while (actor != NULL) {
+        if (AC_DOOR_ANA != actor->id) {
+            actor = actor->next;
+            continue;
+        }
+
+        if (VectDist(refPos, &actor->world.pos) <= distanceXZ && fabsf(refPos->y - actor->world.pos.y) <= distanceY) {
+            return actor;
+        }
+
+        actor = actor->next;
+    }
+
+    return NULL;
+}
+
 s32 Player_CollideMeleeWithWall(GameState_Play* play, Actor_Player* this) {
     s32 (*SurfaceType_IsIgnoredByEntities)(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId) = (void*)0x800c9d14;
     s32 (*func_800B90AC)(GameState_Play* play, Actor* actor, CollisionPoly* polygon, s32 bgId, Vec3f* arg4) = (void*)0x800B90AC;
@@ -1963,9 +1981,10 @@ s32 Player_CollideMeleeWithWall(GameState_Play* play, Actor_Player* this) {
     u8 (*func_8083FFEC)(GameState_Play* play, Actor_Player* this) = OverlayAddr(0x8083FFEC);
     void (*func_80833B18)(GameState_Play* play, Actor_Player* this, s32 arg2, f32 speed, f32 velocityY, s16 arg5, s32 invincibilityTimer) = OverlayAddr(0x80833B18);
     s32 (*BgCheck_EntityLineTest2)(CollisionContext* colCtx, Vec3f* posA, Vec3f* posB, Vec3f* posResult, CollisionPoly** outPoly, s32 checkWall, s32 checkFloor, s32 checkCeil, s32 checkOneFace, s32* bgId, Actor* actor) = (void*)0x800c5650;
-    f32 (*func_8083973C)(GameState_Play* play, Actor_Player* this, Vec3f* arg2, Vec3f* arg3) = OverlayAddr(0x80835D2C); /* oot function name, addr mm equivalent */
-    s32 (*func_80836AB8)(Actor_Player* this, s32 arg1) = OverlayAddr(0x80832754); /* oot function name, addr mm equivalent */
+    f32 (*func_80835CD8)(GameState_Play* play, Actor_Player* this, Vec3f* arg2, Vec3f* pos, CollisionPoly** outPoly, s32* outBgId) = OverlayAddr(0x80835CD8);
+    s32 (*func_80832754)(Actor_Player* this, s32 arg1) = OverlayAddr(0x80832754);
     void (*EffectSsBlast_SpawnWhiteShockwave)(GameState_Play* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel) = (void*)0x800b1b10;
+    Actor* (*Actor_FindNearby)(GameState_Play* play, Actor* inActor, s16 actorId, u8 actorCategory, f32 distance) = (void*)0x800be0b8;
 
     if (this->meleeWeaponState >= 1) {
         s32 temp_v0_3;
@@ -2026,15 +2045,18 @@ s32 Player_CollideMeleeWithWall(GameState_Play* play, Actor_Player* this) {
                                         This statement despite normally only being accessible checks for the goron form a couple more times.
                                         Probably intended for before the Hammer was removed. This piece right here does not check the form and
                                         may also have been intended for the Hammer, but this is not in OoT so I blocked it off anyway.
+                                        When enabled it just makes the hammer hit dynapoly objects multiple times.
                                     */
                                     if (bgId != BGCHECK_SCENE && this->heldItemAction != PLAYER_CUSTOM_IA_HAMMER) {
-                                        temp_v0 = DynaPoly_GetActor(&play->colCtx, bgId);
+                                        if (this->heldItemAction != PLAYER_CUSTOM_IA_HAMMER) {
+                                            temp_v0 = DynaPoly_GetActor(&play->colCtx, bgId);
 
-                                        if (((this->meleeWeaponQuads[0].base.atFlags & AT_HIT) &&
-                                             (&temp_v0->actor == this->meleeWeaponQuads[0].base.at)) ||
-                                            ((this->meleeWeaponQuads[1].base.atFlags & AT_HIT) &&
-                                             (&temp_v0->actor == this->meleeWeaponQuads[1].base.at))) {
-                                            return 0;
+                                            if (((this->meleeWeaponQuads[0].base.atFlags & AT_HIT) &&
+                                                (&temp_v0->actor == this->meleeWeaponQuads[0].base.at)) ||
+                                                ((this->meleeWeaponQuads[1].base.atFlags & AT_HIT) &&
+                                                (&temp_v0->actor == this->meleeWeaponQuads[1].base.at))) {
+                                                return 0;
+                                            }
                                         }
                                     }
 
@@ -2084,15 +2106,17 @@ s32 Player_CollideMeleeWithWall(GameState_Play* play, Actor_Player* this) {
                 (this->meleeWeaponAnimation == PLAYER_MWA_JUMPSLASH_FINISH)) {
                 static Vec3f sShockwaveOffset = { 0.0f, 40.0f, 45.0f };
                 static Vec3f zeroVec = { 0.0f, 0.0f, 0.0f };
+                Actor* nearbyGrotto = NULL;
                 Vec3f shockwavePos;
                 f32 sp2C;
+                CollisionPoly* poly;
+                s32 bgId;
 
-                shockwavePos.y = func_8083973C(play, this, &sShockwaveOffset, &shockwavePos);
+                shockwavePos.y = func_80835CD8(play, this, &sShockwaveOffset, &shockwavePos, &poly, &bgId); // OoT uses a wrapper for this function that discards the poly and bgId. MM has this too at 0x80835D2C, but I need those for the goron switch check.
                 sp2C = this->actor.world.pos.y - shockwavePos.y;
 
-                /* Math_ScaledStepToS(&this->actor.focus.rot.x, Math_Atan2S(45.0f, sp2C), 800); */
-                Math_ScaledStepToS(&this->actor.focus.rot.x, Math_Atan2S_XY(45.0f, sp2C), 800); /* fake match because for some reason this behaves differently from expected in MM. It looks ok though. Maybe because I relocated the behavior */
-                func_80836AB8(this, 1);
+                Math_ScaledStepToS(&this->actor.focus.rot.x, Math_Atan2S_XY(45.0f, sp2C), 800);
+                func_80832754(this, 1);
 
                 if ((((this->meleeWeaponAnimation == PLAYER_MWA_FORWARD_SLASH_2H) &&
                     PlayerAnimation_OnFrame(&this->skelAnime, 7.0f)) ||
@@ -2103,6 +2127,29 @@ s32 Player_CollideMeleeWithWall(GameState_Play* play, Actor_Player* this) {
                     Player_RequestQuakeAndRumble(play, this, NA_SE_IT_HAMMER_HIT);
                     EffectSsBlast_SpawnWhiteShockwave(play, &shockwavePos, &zeroVec, &zeroVec);
                     Actor_SetPlayerImpact(play, PLAYER_IMPACT_BONK, 2, 100.0f, &this->actor.world.pos); /* If set to PLAYER_IMPACT_GORON_GROUND_POUND, may have opened the goron shrine door */
+                    play->actorCtx.unk2 = 4; /* flips some things over like tektites and snappers */
+
+                    /* Somewhat unusual solution to flipping the goron switch without the pound damage type. */
+                    if (bgId != BGCHECK_SCENE) {
+                        DynaPolyActor* dynaActor = DynaPoly_GetActor(&play->colCtx, bgId);
+
+                        if (dynaActor != NULL && dynaActor->actor.id == AC_BG_HAKUGIN_SWITCH) {
+                            /* the cylinder collider for Bg_Hakugin_Switch is at Actor + 0x15C.
+                                the purpose of this is to be able to press it with the hammer without there being a damage type for it. */
+                            ColliderCylinder* hakuginSwitchCyl = (ColliderCylinder*)((void*)dynaActor + 0x15C);
+                            hakuginSwitchCyl->base.acFlags |= AC_HIT;
+                        }
+                    }
+
+                    /* Somewhat unusual solution to opening bomb grottos with the Hammer. Alternative option is to make the grotto bomb collider detect goron punch, but ignore it if you are not a human */
+                    if ((nearbyGrotto = Player_FindGrottoNearPos(play, &shockwavePos, 50.0f, 10.0f)) != NULL) {
+                        u8 isBombGrotto = ((nearbyGrotto->params & 0x300) == 0x200);
+                        if (isBombGrotto) {
+                            ColliderCylinder* bombCollider = ((void*)nearbyGrotto + 0x144); /* collider is only checked if grotto is closed */
+                            bombCollider->base.acFlags |= AC_HIT;
+                        }
+
+                    }
                 }
             }
         }
