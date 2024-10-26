@@ -17,7 +17,9 @@ function AppContent() {
   return <Generator/>;
 }
 
-export const App = () =>
+const App = () =>
   <GeneratorContextProvider>
     <AppContent/>
   </GeneratorContextProvider>;
+
+export default App;
