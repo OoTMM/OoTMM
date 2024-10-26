@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import type { GeneratorOutput, Items, Settings, OptionsInput, OptionRandomSettings, SettingsPatch, Cosmetics } from '@ootmm/core';
 import { mergeSettings, makeSettings, COSMETICS } from '@ootmm/core';
-import { merge } from 'lodash';
+import { merge } from 'lodash-es';
 
 import * as API from '../api';
 import { loadFile, saveFile } from '../db';

@@ -3,7 +3,7 @@ import { Settings } from '../settings';
 import { World } from './world';
 import { Pathfinder, PathfinderState } from './pathfind';
 import { Monitor } from '../monitor';
-import { cloneDeep } from 'lodash';
+import { cloneDeep } from 'lodash-es';
 import { isLocationRenewable, makePlayerLocations, Location, makeLocation, locationData } from './locations';
 import { ItemPlacement } from './solve';
 import { ItemGroups, ItemHelpers, Items, ItemsCount, PlayerItem, PlayerItems } from '../items';

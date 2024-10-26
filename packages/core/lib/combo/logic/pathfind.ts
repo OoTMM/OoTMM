@@ -1,4 +1,4 @@
-import { RecursiveArray, cloneDeep } from 'lodash';
+import { RecursiveArray, cloneDeep } from 'lodash-es';
 import { Settings } from '../settings';
 import { AreaData, Expr, ExprResult, MM_TIME_SLICES, isDefaultRestrictions } from './expr';
 

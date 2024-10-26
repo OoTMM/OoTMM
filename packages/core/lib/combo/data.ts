@@ -1,4 +1,4 @@
-import { isArray } from 'lodash';
+import { isArray } from 'lodash-es';
 import { RAW_GI, RAW_DRAWGI, RAW_HINTS_DATA } from '@ootmm/data';
 
 import { Game } from './config';

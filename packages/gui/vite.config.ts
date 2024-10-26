@@ -1,11 +1,13 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 const VERSION = process.env.VERSION || 'XXX';
 
 export default defineConfig({
   plugins: [
     react(),
+    visualizer({ open: true, filename: 'bundle-visualization.html' }),
   ],
   define: {
     'process.env.VERSION': JSON.stringify(VERSION),
