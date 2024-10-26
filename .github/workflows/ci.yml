@@ -8,16 +8,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
       - name: Use Node.js 22.x
         uses: actions/setup-node@v4
         with:
           node-version: 22.x
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: npm i
+        run: pnpm i
 
       - name: Test
-        run: npm test
+        run: pnpm test
   deploy:
     if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/master' || contains(github.ref, 'refs/tags/')) }}
     needs: test
@@ -48,17 +52,21 @@ jobs:
       - name: Install system dependencies
         run: sudo apt-get install n64-ultra cmake ninja-build
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
       - name: Use Node.js 22.x
         uses: actions/setup-node@v4
         with:
           node-version: 22.x
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: npm i
+        run: pnpm i
 
       - name: Build
         run: |
-          npm run build
+          pnpm run build
 
       - name: Deploy to netlify (stable)
         if: ${{ contains(github.ref, 'refs/tags/') }}
