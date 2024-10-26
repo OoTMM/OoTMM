@@ -2,7 +2,7 @@ import { Buffer } from 'buffer';
 globalThis.Buffer ||= Buffer;
 
 import JSZip from 'jszip';
-import { Settings, itemPool, Items, OptionsInput, GeneratorOutput, generate, locationList } from '@ootmm/core';
+import { Settings, itemPool, Items, OptionsInput, GeneratorOutput, generate, locationList, makeSettings, makeRandomSettings, mergeSettings } from '@ootmm/core';
 import dataVersionZipFile from '@ootmm/core/dist/data.zip?url';
 
 async function makeDataPromise(path: string) {
@@ -80,8 +80,22 @@ export type WorkerResultGenerateError = {
   error: any,
 }
 
-export type WorkerTask = WorkerTaskMeta | WorkerTaskGenerate;
-export type WorkerResult = WorkerResultMeta | WorkerResultGenerate | WorkerResultGenerateLog | WorkerResultGenerateProgress | WorkerResultGenerateError;
+export type WorkerMessageCall = {
+  type: 'call',
+  id: number,
+  func: string,
+  args: any[],
+};
+
+export type WorkerMessageCallResult = {
+  type: 'call-result',
+  id: number,
+  success: boolean,
+  data: any,
+};
+
+export type WorkerTask = WorkerTaskMeta | WorkerTaskGenerate | WorkerMessageCall;
+export type WorkerResult = WorkerResultMeta | WorkerResultGenerate | WorkerResultGenerateLog | WorkerResultGenerateProgress | WorkerResultGenerateError | WorkerMessageCallResult;
 
 async function readFile(f: File) {
   const reader = new FileReader();
@@ -158,9 +172,52 @@ function onTaskMeta(task: WorkerTaskMeta) {
   });
 }
 
+const FUNCS: {[k: string]: (...args: any[]) => any} = {
+  'itemPool': itemPool,
+  'locationList': locationList,
+  'makeSettings': makeSettings,
+  'makeRandomSettings': makeRandomSettings,
+  'mergeSettings': mergeSettings,
+};
+
+function taskCallCompletion(id: number, success: boolean, data: any) {
+  postMessage({
+    type: 'call-result',
+    id,
+    success,
+    data,
+  });
+}
+
+function taskCallSuccess(id: number, data: any) {
+  taskCallCompletion(id, true, data);
+}
+
+function taskCallError(id: number, data: any) {
+  taskCallCompletion(id, false, data);
+}
+
+function onTaskCall(task: WorkerMessageCall) {
+  try {
+    const func = FUNCS[task.func];
+    const result = func(...task.args);
+    const resultP = Promise.resolve(result);
+    resultP.then((data) => {
+      taskCallSuccess(task.id, data);
+    }).catch((e) => {
+      taskCallError(task.id, e);
+    });
+  } catch (e) {
+    taskCallError(task.id, e);
+  }
+}
+
 function onMessage(event: MessageEvent<WorkerTask>) {
   const task = event.data;
   switch (task.type) {
+  case 'call':
+    onTaskCall(task);
+    break;
   case 'meta':
     onTaskMeta(task);
     break;

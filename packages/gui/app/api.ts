@@ -1,5 +1,6 @@
-import { Items, Settings, OptionsInput, makeSettings, makeCosmetics, makeRandomSettings, GeneratorOutput } from '@ootmm/core';
+import { Items, Settings, OptionsInput, GeneratorOutput, makeCosmetics, makeSettings, makeRandomSettings } from '@ootmm/core';
 import type { WorkerResult, WorkerResultGenerate, WorkerResultGenerateError, WorkerResultMeta } from './worker';
+import type { OptionRandomSettings, SettingsPatch } from '@ootmm/core';
 import Worker from './worker?worker';
 import JSZip from 'jszip';
 
@@ -9,8 +10,14 @@ export type ResultFile = {
   data: Buffer | Blob | string;
 };
 
+type Resolver = {
+  resolve: (value: any) => void;
+  reject: (reason: any) => void;
+};
+
 let workerTaskId = 0;
 const worker = new Worker();
+const resolvers = new Map<number, Resolver>();
 const resolversMeta = new Map<number, (result: WorkerResultMeta) => void>();
 const resolversGenerate = new Map<number, (result: WorkerResultGenerate | WorkerResultGenerateError) => void>();
 const loggersGenerate = new Map<number, (log: string) => void>();
@@ -19,6 +26,15 @@ const loggersProgress = new Map<number, (progress: number, total: number) => voi
 worker.onmessage = (event: MessageEvent<WorkerResult>) => {
   const result = event.data;
   switch (result.type) {
+  case 'call-result': {
+    const resolver = resolvers.get(result.id);
+    if (resolver) {
+      resolvers.delete(result.id);
+      const cb = result.success ? resolver.resolve : resolver.reject;
+      cb(result.data);
+    }
+    break;
+  }
   case 'meta': {
     const resolver = resolversMeta.get(result.id);
     if (resolver) {
@@ -54,6 +70,25 @@ worker.onmessage = (event: MessageEvent<WorkerResult>) => {
   }
 };
 
+function workerCall<T>(func: string, args: any[]): Promise<T> {
+  return new Promise((resolve, reject) => {
+    const id = workerTaskId++;
+    resolvers.set(id, { resolve, reject });
+    worker.postMessage({
+      type: 'call',
+      id,
+      func,
+      args,
+    });
+  });
+}
+
+export const itemPool = (settings: Settings) => workerCall<Items>('itemPool', [settings]);
+export const locationList = (settings: Partial<Settings>) => workerCall<string[]>('locationList', [settings]);
+//export const makeSettings = (settings: Partial<Settings>) => workerCall<Settings>('makeSettings', [settings]);
+//export const makeRandomSettings = (settings: Partial<OptionRandomSettings>) => workerCall<OptionRandomSettings>('makeRandomSettings', [settings]);
+//export const mergeSettings = (settings: Settings, patch: SettingsPatch) => workerCall<Settings>('mergeSettings', [settings, patch]);
+
 export function initialSettings() {
   const oldSettings = JSON.parse(localStorage.getItem('settings') ?? "{}");
   return makeSettings(oldSettings);
@@ -62,21 +97,6 @@ export function initialSettings() {
 export function initialRandomSettings() {
   const oldRandomSettings = JSON.parse(localStorage.getItem('randomSettings') ?? "{}");
   return makeRandomSettings(oldRandomSettings);
-}
-
-export async function metaFromSettings(settings: Settings): Promise<{ itemPool: Items, locations: string[] }> {
-  const id = workerTaskId++;
-  const result = await new Promise<WorkerResultMeta>(resolve => {
-    resolversMeta.set(id, result => {
-      resolve(result);
-    });
-    worker.postMessage({
-      type: 'meta',
-      id,
-      settings,
-    });
-  });
-  return { itemPool: result.itemPool, locations: result.locations };
 }
 
 export function initialCosmetics() {
