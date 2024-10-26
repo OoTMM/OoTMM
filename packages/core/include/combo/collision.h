@@ -5,6 +5,7 @@
 #include <combo/math/vec.h>
 
 #define BG_ACTOR_MAX        50
+#define BGCHECK_SCENE       BG_ACTOR_MAX
 #define BGCHECK_Y_MIN       -32000.0f
 #define BGCHECK_XYZ_ABSMAX  32760.0f
 
@@ -163,5 +164,53 @@ f32 BgCheck_EntityRaycastFloor5(CollisionContext* colCtx, CollisionPoly** outPol
 #endif
 
 DynaPolyActor* DynaPoly_GetActor(CollisionContext* colCtx, s32 bgId);
+
+/* bgcheck things */
+#if defined(GAME_MM)
+typedef enum FloorType {
+    /*  0 */ FLOOR_TYPE_0,
+    /*  1 */ FLOOR_TYPE_1,
+    /*  2 */ FLOOR_TYPE_2,
+    /*  3 */ FLOOR_TYPE_3,
+    /*  4 */ FLOOR_TYPE_4,
+    /*  5 */ FLOOR_TYPE_5,
+    /*  6 */ FLOOR_TYPE_6,
+    /*  7 */ FLOOR_TYPE_7,
+    /*  8 */ FLOOR_TYPE_8,
+    /*  9 */ FLOOR_TYPE_9,
+    /* 10 */ FLOOR_TYPE_10,
+    /* 11 */ FLOOR_TYPE_11,
+    /* 12 */ FLOOR_TYPE_12,
+    /* 13 */ FLOOR_TYPE_13,
+    /* 14 */ FLOOR_TYPE_14,
+    /* 15 */ FLOOR_TYPE_15
+} FloorType;
+
+typedef enum SurfaceMaterial {
+    /*  0 */ SURFACE_MATERIAL_DIRT,
+    /*  1 */ SURFACE_MATERIAL_SAND,
+    /*  2 */ SURFACE_MATERIAL_STONE,
+    /*  3 */ SURFACE_MATERIAL_DIRT_SHALLOW,
+    /*  4 */ SURFACE_MATERIAL_WATER_SHALLOW,
+    /*  5 */ SURFACE_MATERIAL_WATER_DEEP,
+    /*  6 */ SURFACE_MATERIAL_TALL_GRASS,
+    /*  7 */ SURFACE_MATERIAL_LAVA, // MAGMA?
+    /*  8 */ SURFACE_MATERIAL_GRASS,
+    /*  9 */ SURFACE_MATERIAL_BRIDGE, // WOOD_PLANK?
+    /* 10 */ SURFACE_MATERIAL_WOOD,
+    /* 11 */ SURFACE_MATERIAL_DIRT_SOFT,
+    /* 12 */ SURFACE_MATERIAL_ICE,
+    /* 13 */ SURFACE_MATERIAL_CARPET,
+    /* 14 */ SURFACE_MATERIAL_SNOW,
+    /* 15 */ SURFACE_MATERIAL_MAX
+} SurfaceMaterial;
+
+#define COLPOLY_NORMAL_FRAC (1.0f / 32767.0f)
+#define COLPOLY_SNORMAL(x) ((s16)((x) * 32767.0f))
+#define COLPOLY_GET_NORMAL(n) ((n)*COLPOLY_NORMAL_FRAC)
+#define COLPOLY_VIA_FLAG_TEST(vIA, flags) ((vIA) & (((flags)&7) << 13))
+#define COLPOLY_VTX_INDEX(vI) ((vI)&0x1FFF)
+
+#endif
 
 #endif

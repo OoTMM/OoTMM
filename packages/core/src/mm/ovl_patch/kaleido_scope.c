@@ -195,7 +195,9 @@ void KaleidoScope_ShowItemMessage(GameState_Play* play, u16 messageId, u8 yPosit
         b += 11;
         comboTextAppendStr(&b, TEXT_COLOR_RED "Megaton Hammer" TEXT_NL);
         comboTextAppendClearColor(&b);
-        comboTextAppendStr(&b, "todo" TEXT_NL "todo" TEXT_END);
+        comboTextAppendStr(&b, "Press " TEXT_COLOR_YELLOW "\xB2");
+        comboTextAppendClearColor(&b);
+        comboTextAppendStr(&b, " to smash and break " TEXT_NL "junk! It's so heavy, you need to " TEXT_NL "use two hands to swing it!" TEXT_END);
         break;
     }
 }
