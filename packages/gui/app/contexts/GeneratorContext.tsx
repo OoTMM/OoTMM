@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { GeneratorOutput, Items, Settings, itemPool, OptionsInput, mergeSettings, makeSettings, SettingsPatch, Cosmetics, OptionRandomSettings, COSMETICS } from '@ootmm/core';
-import { merge } from 'lodash';
+import type { GeneratorOutput, Items, Settings, OptionsInput, OptionRandomSettings, SettingsPatch, Cosmetics } from '@ootmm/core';
+import { mergeSettings, makeSettings, COSMETICS, DEFAULT_SETTINGS } from '@ootmm/core';
+import { merge } from 'lodash-es';
 
 import * as API from '../api';
 import { loadFile, saveFile } from '../db';
@@ -105,15 +106,18 @@ export function GeneratorContextProvider({ children }: { children: React.ReactNo
     const ticket = ++settingsTicket;
     setState(state => ({ ...state, settings }));
     localStorage.setItem('settings', JSON.stringify(settings));
-    API.metaFromSettings(settings).then((meta) => {
+    Promise.all([
+      API.itemPool(settings),
+      API.locationList(settings),
+    ]).then(([itemPool, locations]) => {
       if (ticket !== settingsTicket) {
         return;
       }
       setState((state) => {
-        const startingItems = API.restrictItemsByPool(state.settings.startingItems, meta.itemPool);
+        const startingItems = API.restrictItemsByPool(state.settings.startingItems, itemPool);
         const newSettings = { ...state.settings, startingItems };
         localStorage.setItem('settings', JSON.stringify(newSettings));
-        return { ...state, settings: makeSettings(newSettings), itemPool: meta.itemPool, locations: meta.locations };
+        return { ...state, settings: makeSettings(newSettings), itemPool, locations };
       });
     });
     return settings;

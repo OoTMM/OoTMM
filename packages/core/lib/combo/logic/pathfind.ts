@@ -1,7 +1,7 @@
-import { RecursiveArray, cloneDeep } from 'lodash';
-import { Settings } from '../settings';
-import { AreaData, Expr, ExprResult, MM_TIME_SLICES, isDefaultRestrictions } from './expr';
+import { cloneDeep } from 'lodash-es';
 
+import { Settings } from '../settings';
+import { AreaData, Expr, ExprResult, MM_TIME_SLICES, RecursiveArray, isDefaultRestrictions } from './expr';
 import { Location, locationData, makeLocation } from './locations';
 import { World, WorldOptimized, optimizedWorldView } from './world';
 import { isLocationLicenseGranting, isLocationRenewable } from './locations';

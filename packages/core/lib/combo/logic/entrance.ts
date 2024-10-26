@@ -1,4 +1,4 @@
-import { mapValues } from 'lodash';
+import { mapValues } from 'lodash-es';
 import { ENTRANCES } from '@ootmm/data';
 
 import { Random, sample } from '../random';

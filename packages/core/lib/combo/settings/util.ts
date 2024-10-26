@@ -1,4 +1,4 @@
-import { cloneDeep, isEqual } from 'lodash';
+import { cloneDeep, isEqual } from 'lodash-es';
 import type { PartialDeep } from 'type-fest';
 import type { Settings, SettingsBase } from './type';
 import { SETTINGS } from './data';

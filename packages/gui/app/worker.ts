@@ -2,7 +2,7 @@ import { Buffer } from 'buffer';
 globalThis.Buffer ||= Buffer;
 
 import JSZip from 'jszip';
-import { Settings, itemPool, Items, OptionsInput, GeneratorOutput, generate, locationList } from '@ootmm/core';
+import { Settings, itemPool, Items, OptionsInput, GeneratorOutput, generate, locationList, makeSettings, makeRandomSettings, mergeSettings } from '@ootmm/core';
 import dataVersionZipFile from '@ootmm/core/dist/data.zip?url';
 
 async function makeDataPromise(path: string) {
@@ -32,11 +32,12 @@ async function resolverGlobFunc(pattern: RegExp) {
   return zip.file(pattern).map(f => f.name);
 }
 
-export type WorkerTaskMeta = {
-  type: 'meta',
+export type WorkerTaskCall = {
+  type: 'call',
   id: number,
-  settings: Settings,
-}
+  func: string,
+  args: any[],
+};
 
 export type WorkerTaskGenerate = {
   type: 'generate',
@@ -47,12 +48,12 @@ export type WorkerTaskGenerate = {
   options: OptionsInput
 }
 
-export type WorkerResultMeta = {
-  type: 'meta',
+export type WorkerResultCall = {
+  type: 'call-result',
   id: number,
-  itemPool: Items,
-  locations: string[],
-}
+  success: boolean,
+  data: any,
+};
 
 export type WorkerResultGenerate = {
   type: 'generate',
@@ -80,8 +81,8 @@ export type WorkerResultGenerateError = {
   error: any,
 }
 
-export type WorkerTask = WorkerTaskMeta | WorkerTaskGenerate;
-export type WorkerResult = WorkerResultMeta | WorkerResultGenerate | WorkerResultGenerateLog | WorkerResultGenerateProgress | WorkerResultGenerateError;
+export type WorkerTask = WorkerTaskCall | WorkerTaskGenerate;
+export type WorkerResult = WorkerResultCall | WorkerResultGenerate | WorkerResultGenerateLog | WorkerResultGenerateProgress | WorkerResultGenerateError;
 
 async function readFile(f: File) {
   const reader = new FileReader();
@@ -147,22 +148,51 @@ async function onTaskGenerate(task: WorkerTaskGenerate) {
   });
 }
 
-function onTaskMeta(task: WorkerTaskMeta) {
-  Promise.all([itemPool(task.settings), locationList(task.settings)]).then(([itemPool, locations]) => {
-    postMessage({
-      type: 'meta',
-      id: task.id,
-      itemPool,
-      locations,
-    });
+const FUNCS: {[k: string]: (...args: any[]) => any} = {
+  'itemPool': itemPool,
+  'locationList': locationList,
+  'makeSettings': makeSettings,
+  'makeRandomSettings': makeRandomSettings,
+  'mergeSettings': mergeSettings,
+};
+
+function taskCallCompletion(id: number, success: boolean, data: any) {
+  postMessage({
+    type: 'call-result',
+    id,
+    success,
+    data,
   });
+}
+
+function taskCallSuccess(id: number, data: any) {
+  taskCallCompletion(id, true, data);
+}
+
+function taskCallError(id: number, data: any) {
+  taskCallCompletion(id, false, data);
+}
+
+function onTaskCall(task: WorkerTaskCall) {
+  try {
+    const func = FUNCS[task.func];
+    const result = func(...task.args);
+    const resultP = Promise.resolve(result);
+    resultP.then((data) => {
+      taskCallSuccess(task.id, data);
+    }).catch((e) => {
+      taskCallError(task.id, e);
+    });
+  } catch (e) {
+    taskCallError(task.id, e);
+  }
 }
 
 function onMessage(event: MessageEvent<WorkerTask>) {
   const task = event.data;
   switch (task.type) {
-  case 'meta':
-    onTaskMeta(task);
+  case 'call':
+    onTaskCall(task);
     break;
   case 'generate':
     onTaskGenerate(task);

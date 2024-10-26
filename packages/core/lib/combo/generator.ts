@@ -3,7 +3,7 @@ import { custom } from './custom';
 import { decompressGames } from './decompress';
 import { logic } from './logic';
 import { Monitor, MonitorCallbacks } from './monitor';
-import { Options } from './options';
+import { options, Options, OptionsInput } from './options';
 import { pack } from './pack';
 import { buildPatchfiles } from './patch-build';
 import { Patchfile } from './patch-build/patchfile';
@@ -133,4 +133,16 @@ export class Generator {
 
     return { hash, files };
   }
+};
+
+export type GeneratorParams = {
+  oot: Buffer,
+  mm: Buffer,
+  opts?: OptionsInput,
+  monitor?: MonitorCallbacks
+};
+
+export const generate = (params: GeneratorParams): Generator => {
+  const opts = options(params.opts || {});
+  return new Generator(params.oot, params.mm, opts, params.monitor || {});
 };

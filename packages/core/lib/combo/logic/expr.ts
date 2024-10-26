@@ -63,7 +63,7 @@ const CONSTRAINT_FLAGS = [
   'MM_REGION_VALLEY_CLEARED',
 ];
 
-type RecursiveArray<T> = Array<T | RecursiveArray<T>>;
+export type RecursiveArray<T> = Array<T | RecursiveArray<T>>;
 
 type ExprDependencies = {
   items: Set<Item>;

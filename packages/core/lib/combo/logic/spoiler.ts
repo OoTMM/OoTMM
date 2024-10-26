@@ -1,4 +1,4 @@
-import { sortBy } from 'lodash';
+import { sortBy } from 'lodash-es';
 
 import { Options } from '../options';
 import { SETTINGS, Settings, TrickKey, TRICKS } from '../settings';
@@ -367,7 +367,7 @@ export class LogicPassSpoiler {
         }
         this.writer.unindent();
       }
-      
+
       if (this.isMulti) this.writer.unindent('');
     }
     this.writer.unindent('');
