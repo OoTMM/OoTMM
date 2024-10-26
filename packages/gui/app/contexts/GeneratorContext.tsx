@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { GeneratorOutput, Items, Settings, itemPool, OptionsInput, mergeSettings, makeSettings, SettingsPatch, Cosmetics, OptionRandomSettings, COSMETICS } from '@ootmm/core';
+import type { GeneratorOutput, Items, Settings, OptionsInput, OptionRandomSettings, SettingsPatch, Cosmetics } from '@ootmm/core';
+import { mergeSettings, makeSettings, COSMETICS } from '@ootmm/core';
 import { merge } from 'lodash';
 
 import * as API from '../api';

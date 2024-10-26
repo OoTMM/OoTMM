@@ -1,9 +1,8 @@
 import { promises as fs } from 'fs';
 import YAML from 'yaml';
 
-import { SETTINGS, generate, importSettings } from "./combo";
-import { OptionsInput } from "./combo/options";
-import { makeSettings } from './combo';
+import { SETTINGS, generate, importSettings, makeSettings } from './combo';
+import { OptionsInput } from './combo/options';
 
 function parseSettings(data: any): any {
   const result = {} as any;
@@ -40,16 +39,16 @@ const makeOptions = async (args: string[]): Promise<OptionsInput> => {
   for (let i = 0; i < args.length; i++) {
     const opt = args[i];
     switch (opt) {
-    case "--debug":
+    case '--debug':
       opts.debug = true;
       break;
-    case "--seed":
+    case '--seed':
       opts.seed = args[++i];
       break;
-    case "--random":
+    case '--random':
       opts.random = { enabled: true };
       break;
-    case "--config": {
+    case '--config': {
       const configFile = await fs.readFile(args[++i]);
       const config = YAML.parse(configFile.toString());
       if (config.settings) {
@@ -60,12 +59,12 @@ const makeOptions = async (args: string[]): Promise<OptionsInput> => {
       }
       break;
     }
-    case "--patch": {
+    case '--patch': {
       const patch = await fs.readFile(args[++i]);
       opts.patch = patch;
       break;
     }
-    case "--settings": {
+    case '--settings': {
       opts.settings = makeSettings(importSettings(args[++i]));
       break;
     }
