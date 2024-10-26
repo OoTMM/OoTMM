@@ -1,6 +1,5 @@
 import { Items, Settings, OptionsInput, GeneratorOutput, makeCosmetics, makeSettings, makeRandomSettings } from '@ootmm/core';
-import type { WorkerResult, WorkerResultGenerate, WorkerResultGenerateError, WorkerResultMeta } from './worker';
-import type { OptionRandomSettings, SettingsPatch } from '@ootmm/core';
+import type { WorkerResult, WorkerResultGenerate, WorkerResultGenerateError } from './worker';
 import Worker from './worker?worker';
 import JSZip from 'jszip';
 
@@ -18,7 +17,6 @@ type Resolver = {
 let workerTaskId = 0;
 const worker = new Worker();
 const resolvers = new Map<number, Resolver>();
-const resolversMeta = new Map<number, (result: WorkerResultMeta) => void>();
 const resolversGenerate = new Map<number, (result: WorkerResultGenerate | WorkerResultGenerateError) => void>();
 const loggersGenerate = new Map<number, (log: string) => void>();
 const loggersProgress = new Map<number, (progress: number, total: number) => void>();
@@ -32,14 +30,6 @@ worker.onmessage = (event: MessageEvent<WorkerResult>) => {
       resolvers.delete(result.id);
       const cb = result.success ? resolver.resolve : resolver.reject;
       cb(result.data);
-    }
-    break;
-  }
-  case 'meta': {
-    const resolver = resolversMeta.get(result.id);
-    if (resolver) {
-      resolversMeta.delete(result.id);
-      resolver(result);
     }
     break;
   }
