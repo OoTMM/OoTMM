@@ -939,6 +939,88 @@ Gfx gLinkChildGoronBraceletDL[] = {
     gsSPEndDisplayList(),
 };
 
+/* Conveniently, OoT's Megaton Hammer only used GPK textures that still have equivalents in MM */
+const u32 gDekuStickTex = 0x0400CC30;
+const u32 gHilite1Tex = 0x0400C830;
+
+const Vtx sHammerVtx[] = {
+#include "sHammerVtx.vtx.inc"
+};
+
+Gfx gHammerDL[] = {
+    gsSPMatrix(0x0D000300, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW),
+    gsDPPipeSync(),
+    gsDPSetTextureLUT(G_TT_NONE),
+    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
+    gsDPLoadTextureBlock(gDekuStickTex, G_IM_FMT_I, G_IM_SIZ_8b, 8, 8, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR |
+                         G_TX_WRAP, 3, 3, G_TX_NOLOD, G_TX_NOLOD),
+    gsDPSetCombineLERP(TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, 1, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
+    gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_OPA_SURF2),
+    gsSPClearGeometryMode(G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR),
+    gsSPSetGeometryMode(G_FOG),
+    gsSPDisplayList(0x0C000000),
+    gsDPSetPrimColor(0, 0, 79, 0, 0, 255),
+    gsSPVertex(&sHammerVtx[0], 9, 0),
+    gsSP2Triangles(0, 1, 2, 0, 3, 4, 2, 0),
+    gsSP2Triangles(5, 1, 0, 0, 2, 6, 0, 0),
+    gsSP2Triangles(7, 3, 5, 0, 7, 5, 0, 0),
+    gsSP2Triangles(8, 4, 3, 0, 4, 6, 2, 0),
+    gsSP2Triangles(3, 2, 1, 0, 3, 1, 5, 0),
+    gsDPPipeSync(),
+    gsSPTexture(0x07D0, 0x09C4, 0, G_TX_RENDERTILE, G_ON),
+    gsDPLoadTextureBlock(gHilite1Tex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR |
+                         G_TX_WRAP, 4, 4, G_TX_NOLOD, 15),
+    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, 1, COMBINED, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED),
+    gsSPSetGeometryMode(G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR),
+    gsDPSetPrimColor(0, 0, 155, 192, 201, 255),
+    gsSPVertex(&sHammerVtx[9], 3, 0),
+    gsSP1Triangle(0, 1, 2, 0),
+    gsSPVertex(&sHammerVtx[12], 32, 0),
+    gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
+    gsSP2Triangles(6, 7, 8, 0, 9, 10, 11, 0),
+    gsSP2Triangles(12, 13, 14, 0, 15, 16, 17, 0),
+    gsSP2Triangles(18, 19, 20, 0, 21, 22, 23, 0),
+    gsSP2Triangles(21, 23, 24, 0, 25, 26, 27, 0),
+    gsSP2Triangles(27, 28, 25, 0, 29, 30, 31, 0),
+    gsSPVertex(&sHammerVtx[44], 32, 0),
+    gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
+    gsSP2Triangles(6, 7, 8, 0, 9, 10, 11, 0),
+    gsSP2Triangles(12, 13, 14, 0, 15, 16, 17, 0),
+    gsSP2Triangles(18, 19, 20, 0, 21, 22, 23, 0),
+    gsSP2Triangles(24, 25, 26, 0, 27, 28, 29, 0),
+    gsSPVertex(&sHammerVtx[74], 29, 0),
+    gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
+    gsSP2Triangles(6, 7, 8, 0, 9, 10, 11, 0),
+    gsSP2Triangles(12, 13, 14, 0, 12, 15, 13, 0),
+    gsSP2Triangles(16, 17, 18, 0, 19, 20, 21, 0),
+    gsSP2Triangles(22, 23, 24, 0, 22, 25, 23, 0),
+    gsSP1Triangle(26, 27, 28, 0),
+    gsSPVertex(&sHammerVtx[103], 30, 0),
+    gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
+    gsSP2Triangles(6, 7, 8, 0, 9, 10, 11, 0),
+    gsSP2Triangles(12, 13, 14, 0, 15, 16, 17, 0),
+    gsSP2Triangles(18, 19, 20, 0, 21, 22, 23, 0),
+    gsSP2Triangles(24, 25, 26, 0, 27, 28, 29, 0),
+    gsSPVertex(&sHammerVtx[133], 32, 0),
+    gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
+    gsSP2Triangles(6, 7, 8, 0, 9, 10, 11, 0),
+    gsSP2Triangles(12, 13, 14, 0, 15, 16, 17, 0),
+    gsSP2Triangles(18, 19, 20, 0, 21, 22, 23, 0),
+    gsSP2Triangles(24, 25, 26, 0, 27, 28, 29, 0),
+    gsSP1Triangle(27, 30, 28, 0),
+    gsSPVertex(&sHammerVtx[164], 32, 0),
+    gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
+    gsSP2Triangles(3, 6, 4, 0, 7, 8, 9, 0),
+    gsSP2Triangles(10, 11, 12, 0, 13, 14, 15, 0),
+    gsSP2Triangles(16, 17, 18, 0, 19, 20, 21, 0),
+    gsSP2Triangles(22, 23, 24, 0, 22, 25, 23, 0),
+    gsSP2Triangles(26, 27, 28, 0, 26, 29, 27, 0),
+    gsSPVertex(&sHammerVtx[194], 9, 0),
+    gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
+    gsSP1Triangle(6, 7, 8, 0),
+    gsSPEndDisplayList(),
+};
+
 static int prepareObject(GameState_Play* play, u16 objectId)
 {
     void* obj;
@@ -952,6 +1034,13 @@ static int prepareObject(GameState_Play* play, u16 objectId)
     CLOSE_DISPS();
 
     return 1;
+}
+
+static void DrawHammer(GameState_Play* play)
+{
+    OPEN_DISPS(play->gs.gfx);
+    gSPDisplayList(POLY_OPA_DISP++, gHammerDL);
+    CLOSE_DISPS();
 }
 
 static void DrawBootsIron(GameState_Play* play, Actor_Player* link)
@@ -1066,6 +1155,10 @@ void Player_SkelAnime_DrawFlexLod(GameState_Play* play, void** skeleton, Vec3s* 
         case PLAYER_BOOTS_HOVER:
             DrawBootsHover(play, player);
             break;
+        }
+
+        if (player->transformation == MM_PLAYER_FORM_HUMAN && player->itemAction == PLAYER_CUSTOM_IA_HAMMER) {
+            DrawHammer(play);
         }
 
         if (player->transformation == MM_PLAYER_FORM_HUMAN && Config_Flag(CFG_MM_STRENGTH))
@@ -1658,7 +1751,7 @@ s32 Player_CustomActionToModelGroup(Actor_Player* player, s32 itemAction) {
     s32 modelGroup = sActionModelGroups[itemAction];
 
     if (itemAction == PLAYER_CUSTOM_IA_HAMMER) {
-        modelGroup = sActionModelGroups[6];
+        modelGroup = sActionModelGroups[7]; /* uses deku stick model group but does not draw deku stick because of the way the original draw code for it works */
     }
 
     /* if ((modelGroup == PLAYER_MODELGROUP_ONE_HAND_SWORD) && Player_IsGoronOrDeku(player)) { */
@@ -1735,21 +1828,16 @@ void Player_SetMeleeWeaponInfo(Actor_Player* this, PlayerMeleeWeaponAnimation me
     s32 damage;
 
     if (this->actor.id == AC_EN_TEST3) {
-        // Was Kafei originally intended to be able to punch?
+        /* Was Kafei originally intended to be able to punch? (Part of the original function)*/
         meleeWeaponAnim = PLAYER_MWA_GORON_PUNCH_LEFT;
         this->meleeWeaponAnimation = -1;
     } else if (this->heldItemAction == PLAYER_CUSTOM_IA_HAMMER) {
         dmgInfo = &megatonHammerDmgInfo;
     } else {
-        //! @bug Quick Put Away Damage: Since 0 is also the "no weapon" value, producing a weapon quad without a weapon
-        //! in hand, such as during Quick Put Away, produced a quad with the Goron punch properties, which does 0 damage
-        //! as human.
         dmgInfo = &D_8085D09C[(this->transformation == MM_PLAYER_FORM_GORON) ? PLAYER_MELEEWEAPON_NONE
                                                                           : Player_GetMeleeWeaponHeld(this)];
     }
 
-    //! @bug Great Deku Sword: Presumably the dmgTransformed fields are intended for Fierce Deity, but also work for
-    //! Deku if it is able to equip a sword (such as with the "0th day" glitch), giving Great Fairy's Sword damage.
     damage =
         ((meleeWeaponAnim >= PLAYER_MWA_FLIPSLASH_START) && (meleeWeaponAnim <= PLAYER_MWA_ZORA_JUMPKICK_FINISH))
             ? ((this->transformation == MM_PLAYER_FORM_HUMAN) ? dmgInfo->dmgHumanStrong : dmgInfo->dmgTransformedStrong)
@@ -1771,7 +1859,7 @@ static AttackAnimInfo sHammerAttackAnimInfo[] = {
 };
 
 AttackAnimInfo* Player_GetMeleeAttackAnimInfo(void* a0, Actor_Player* player, PlayerMeleeWeaponAnimation meleeWeaponAnim) {
-    asm("sw $a1, 0x0018 ($sp)"); // keep player in a1
+    asm("sw $a1, 0x0018 ($sp)"); /* keep player in a1 */
     AttackAnimInfo* sMeleeAttackAnimInfo = OverlayAddr(0x8085cd30);
     AttackAnimInfo* ret = &sMeleeAttackAnimInfo[meleeWeaponAnim];
 
@@ -1783,12 +1871,11 @@ AttackAnimInfo* Player_GetMeleeAttackAnimInfo(void* a0, Actor_Player* player, Pl
         }
     }
     
-    asm("lw $a1, 0x0018 ($sp)"); // keep player in a1
+    asm("lw $a1, 0x0018 ($sp)"); /* keep player in a1 */
     return ret;
 }
 
 s32 Player_IsHoldingTwoHandedWeapon(Actor_Player* player) {
-    // Relies on the itemActions for two-handed weapons being contiguous.
     if (((player->heldItemAction >= PLAYER_IA_SWORD_TWO_HANDED) && (player->heldItemAction <= PLAYER_IA_DEKU_STICK)) || (player->heldItemAction == PLAYER_CUSTOM_IA_HAMMER)) {
         return 1;
     }
@@ -1810,6 +1897,9 @@ void Player_SpecialMeleeWeaponAnim(Actor_Player* this, void* a1, PlayerMeleeWeap
 
     if (this->heldItemAction == PLAYER_CUSTOM_IA_HAMMER) {
         *animation = sHammerAttackAnims[temp_a1];
+        /* no combo and no lunge */
+        this->unk_ADD = 0;
+        this->state2 &= ~(1 << 30);
     } else if (this->heldItemAction == PLAYER_IA_DEKU_STICK) {
         *animation = PLAYER_MWA_FORWARD_SLASH_1H;
     }
@@ -1856,3 +1946,190 @@ s32 Player_CanQuickspin(Actor_Player* this) {
 }
 
 PATCH_FUNC(0x808333CC, Player_CanQuickspin)
+
+// 806CD684
+s32 Player_CollideMeleeWithWall(GameState_Play* play, Actor_Player* this) {
+    s32 (*SurfaceType_IsIgnoredByEntities)(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId) = (void*)0x800c9d14;
+    s32 (*func_800B90AC)(GameState_Play* play, Actor* actor, CollisionPoly* polygon, s32 bgId, Vec3f* arg4) = (void*)0x800B90AC;
+    void (*func_8082DF2C)(GameState_Play* play) = OverlayAddr(0x8082DF2C);
+    void (*Player_RequestQuakeAndRumble)(GameState_Play* play, Actor_Player* this, u16 sfxId) = OverlayAddr(0x8083fe90);
+    s32 (*Actor_SetPlayerImpact)(GameState_Play* play, PlayerImpactType type, s32 timer, f32 dist, Vec3f* pos) = (void*)0x800b648c;
+    void (*func_808400CC)(GameState_Play* play, Actor_Player* this) = OverlayAddr(0x808400CC);
+    SurfaceMaterial (*SurfaceType_GetMaterial)(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId) = (void*)0x800c9bb8;
+    void (*CollisionCheck_SpawnShieldParticlesWood)(GameState_Play* play, Vec3f* v, Vec3f* pos) = (void*)0x800e86e0;
+    void (*func_80840094)(GameState_Play* play, Actor_Player* this) = OverlayAddr(0x80840094);
+    void (*Player_RequestRumble)(GameState_Play* play, Actor_Player* this, s32 sourceIntensity, s32 decayTimer, s32 decayStep, s32 distSq) = OverlayAddr(0x8082df48);
+    u8 (*func_8083FF30)(GameState_Play* play, Actor_Player* this) = OverlayAddr(0x8083FF30);
+    u8 (*func_8083FFEC)(GameState_Play* play, Actor_Player* this) = OverlayAddr(0x8083FFEC);
+    void (*func_80833B18)(GameState_Play* play, Actor_Player* this, s32 arg2, f32 speed, f32 velocityY, s16 arg5, s32 invincibilityTimer) = OverlayAddr(0x80833B18);
+    s32 (*BgCheck_EntityLineTest2)(CollisionContext* colCtx, Vec3f* posA, Vec3f* posB, Vec3f* posResult, CollisionPoly** outPoly, s32 checkWall, s32 checkFloor, s32 checkCeil, s32 checkOneFace, s32* bgId, Actor* actor) = (void*)0x800c5650;
+    f32 (*func_8083973C)(GameState_Play* play, Actor_Player* this, Vec3f* arg2, Vec3f* arg3) = OverlayAddr(0x80835D2C); /* oot function name, addr mm equivalent */
+    s32 (*func_80836AB8)(Actor_Player* this, s32 arg1) = OverlayAddr(0x80832754); /* oot function name, addr mm equivalent */
+    void (*EffectSsBlast_SpawnWhiteShockwave)(GameState_Play* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel) = (void*)0x800b1b10;
+
+    if (this->meleeWeaponState >= 1) {
+        s32 temp_v0_3;
+
+        if (this->meleeWeaponAnimation < PLAYER_MWA_SPIN_ATTACK_1H) {
+            if (!(this->meleeWeaponQuads[0].base.atFlags & AT_BOUNCED) &&
+                !(this->meleeWeaponQuads[1].base.atFlags & AT_BOUNCED)) {
+                if (this->skelAnime.curFrame >= 2.0f) {
+                    CollisionPoly* poly;
+                    s32 bgId;
+                    Vec3f spC8;
+                    Vec3f pos;
+                    Vec3f spB0;
+                    Vec3f* var_a1;
+                    Vec3f* temp_a0 = &this->meleeWeaponInfo[0].tip;
+                    f32 var_fv1;
+
+                    if (this->linearVelocity >= 0.0f) {
+                        var_a1 = &this->meleeWeaponInfo[0].base;
+                        if ((this->transformation == MM_PLAYER_FORM_GORON) || (this->actor.id == AC_EN_TEST3)) {
+                            var_a1 = &this->unk_AF0[1];
+                        }
+
+                        var_fv1 = Math_Vec3f_DistXYZAndStoreDiff(temp_a0, var_a1, &spB0);
+                        if (var_fv1 != 0.0f) {
+                            var_fv1 = (var_fv1 + 10.0f) / var_fv1;
+                        }
+
+                        spC8.x = temp_a0->x + (spB0.x * var_fv1);
+                        spC8.y = temp_a0->y + (spB0.y * var_fv1);
+                        spC8.z = temp_a0->z + (spB0.z * var_fv1);
+                        if (BgCheck_EntityLineTest2(&play->colCtx, &spC8, temp_a0, &pos, &poly, 1, 0, 0, 1, &bgId,
+                                                    &this->actor)) {
+                            if (!SurfaceType_IsIgnoredByEntities(&play->colCtx, poly, bgId) &&
+                                (SurfaceType_GetFloorType(&play->colCtx, poly, bgId) != FLOOR_TYPE_6) &&
+                                !func_800B90AC(play, &this->actor, poly, bgId, &pos)) {
+                                if (this->transformation == MM_PLAYER_FORM_GORON || this->heldItemAction == PLAYER_CUSTOM_IA_HAMMER) { // for hammer
+                                    MtxF sp64;
+                                    Vec3s actorRot;
+                                    DynaPolyActor* temp_v0;
+
+                                    func_8082DF2C(play);
+                                    Player_RequestQuakeAndRumble(play, this, NA_SE_IT_HAMMER_HIT);
+                                    if (this->transformation == MM_PLAYER_FORM_GORON) {
+                                        Actor_SetPlayerImpact(play, PLAYER_IMPACT_BONK, 2, 100.0f,
+                                                              &this->actor.world.pos);
+                                        func_800C0094(poly, pos.x, pos.y, pos.z, &sp64);
+                                        Matrix_MtxFToYXZRot(&sp64, &actorRot, 1);
+                                        Actor_Spawn(&play->actorCtx, play, AC_EN_TEST, pos.x, pos.y, pos.z,
+                                                    actorRot.x, actorRot.y, actorRot.z, 500);
+                                    }
+
+                                    if (this->heldItemAction == PLAYER_CUSTOM_IA_HAMMER) {
+                                        Actor_SetPlayerImpact(play, PLAYER_IMPACT_BONK, 2, 100.0f, &this->actor.world.pos);
+                                    }
+
+                                    /*
+                                        This statement despite normally only being accessible checks for the goron form a couple more times.
+                                        Probably intended for before the Hammer was removed. This piece right here does not check the form and
+                                        may also have been intended for the Hammer, but this is not in OoT so I blocked it off anyway.
+                                    */
+                                    if (bgId != BGCHECK_SCENE && this->heldItemAction != PLAYER_CUSTOM_IA_HAMMER) {
+                                        temp_v0 = DynaPoly_GetActor(&play->colCtx, bgId);
+
+                                        if (((this->meleeWeaponQuads[0].base.atFlags & AT_HIT) &&
+                                             (&temp_v0->actor == this->meleeWeaponQuads[0].base.at)) ||
+                                            ((this->meleeWeaponQuads[1].base.atFlags & AT_HIT) &&
+                                             (&temp_v0->actor == this->meleeWeaponQuads[1].base.at))) {
+                                            return 0;
+                                        }
+                                    }
+
+                                    func_808400CC(play, this);
+                                    if (this->transformation != MM_PLAYER_FORM_GORON) {
+                                        return 1;
+                                    }
+                                    return 0;
+                                }
+
+                                if (this->linearVelocity >= 0.0f) {
+                                    SurfaceMaterial surfaceMaterial =
+                                        SurfaceType_GetMaterial(&play->colCtx, poly, bgId);
+
+                                    if (surfaceMaterial == SURFACE_MATERIAL_WOOD) {
+                                        CollisionCheck_SpawnShieldParticlesWood(play, &pos, &this->actor.projectedPos);
+                                    } else {
+                                        pos.x += 8.0f * COLPOLY_GET_NORMAL(poly->normal.x);
+                                        pos.y += 8.0f * COLPOLY_GET_NORMAL(poly->normal.y);
+                                        pos.x += 8.0f * COLPOLY_GET_NORMAL(poly->normal.z);
+                                        CollisionCheck_SpawnShieldParticles(play, &pos);
+
+                                        if (surfaceMaterial == SURFACE_MATERIAL_DIRT_SOFT) {
+                                            Player_PlaySfx(this, NA_SE_IT_WALL_HIT_SOFT);
+                                        } else {
+                                            Player_PlaySfx(this, NA_SE_IT_WALL_HIT_HARD);
+                                        }
+                                    }
+
+                                    func_80840094(play, this);
+                                    Player_RequestRumble(play, this, 180, 20, 100, SQ(0));
+                                    this->linearVelocity = -14.0f;
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                func_808400CC(play, this);
+                func_8082DF2C(play);
+                return 1;
+            }
+        }
+
+        if (!PlayerAnimation_OnFrame(&this->skelAnime, this->skelAnime.endFrame) && this->heldItemAction == PLAYER_CUSTOM_IA_HAMMER) { // OoT floor bonk function, originally somewhere else completely
+            if ((this->meleeWeaponAnimation == PLAYER_MWA_FORWARD_SLASH_2H) ||
+                (this->meleeWeaponAnimation == PLAYER_MWA_JUMPSLASH_FINISH)) {
+                static Vec3f sShockwaveOffset = { 0.0f, 40.0f, 45.0f };
+                static Vec3f zeroVec = { 0.0f, 0.0f, 0.0f };
+                Vec3f shockwavePos;
+                f32 sp2C;
+
+                shockwavePos.y = func_8083973C(play, this, &sShockwaveOffset, &shockwavePos);
+                sp2C = this->actor.world.pos.y - shockwavePos.y;
+
+                /* Math_ScaledStepToS(&this->actor.focus.rot.x, Math_Atan2S(45.0f, sp2C), 800); */
+                Math_ScaledStepToS(&this->actor.focus.rot.x, Math_Atan2S_XY(45.0f, sp2C), 800); /* fake match because for some reason this behaves differently from expected in MM. It looks ok though. Maybe because I relocated the behavior */
+                func_80836AB8(this, 1);
+
+                if ((((this->meleeWeaponAnimation == PLAYER_MWA_FORWARD_SLASH_2H) &&
+                    PlayerAnimation_OnFrame(&this->skelAnime, 7.0f)) ||
+                    ((this->meleeWeaponAnimation == PLAYER_MWA_JUMPSLASH_FINISH) &&
+                    PlayerAnimation_OnFrame(&this->skelAnime, 2.0f))) &&
+                    (sp2C > -40.0f) && (sp2C < 40.0f)) {
+                    //func_80842A28(play, this);
+                    Player_RequestQuakeAndRumble(play, this, NA_SE_IT_HAMMER_HIT);
+                    EffectSsBlast_SpawnWhiteShockwave(play, &shockwavePos, &zeroVec, &zeroVec);
+                    Actor_SetPlayerImpact(play, PLAYER_IMPACT_BONK, 2, 100.0f, &this->actor.world.pos); /* If set to PLAYER_IMPACT_GORON_GROUND_POUND, may have opened the goron shrine door */
+                }
+            }
+        }
+
+        temp_v0_3 = (this->meleeWeaponQuads[0].base.atFlags & AT_HIT) != 0;
+        if (temp_v0_3 || (this->meleeWeaponQuads[1].base.atFlags & AT_HIT)) {
+            if ((this->meleeWeaponAnimation < PLAYER_MWA_SPIN_ATTACK_1H) &&
+                (this->transformation != MM_PLAYER_FORM_GORON)) {
+                Actor* temp_v1 = this->meleeWeaponQuads[temp_v0_3 ? 0 : 1].base.at;
+
+                if ((temp_v1 != NULL) && (temp_v1->id != AC_EN_KANBAN)) {
+                    func_8082DF2C(play);
+                }
+            }
+
+            if (!func_8083FF30(play, this)) {
+                func_8083FFEC(play, this);
+                if (this->actor.colChkInfo.atHitEffect == 1) {
+                    this->actor.colChkInfo.damage = 8;
+                    func_80833B18(play, this, 4, 0.0f, 0.0f, this->actor.shape.rot.y, 20);
+                    return 1;
+                }
+            }
+        }
+    }
+
+    return 0;
+}
+
+PATCH_FUNC(0x808401F4, Player_CollideMeleeWithWall)

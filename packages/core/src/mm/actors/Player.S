@@ -1280,6 +1280,12 @@ PATCH_START 0x808548CC
   lw        a1, 0x0044 (sp)
 PATCH_END
 
+PATCH_START 0x8082FAF4
+  beq       t9, at, .+0x0C
+  addiu     at, zero, PLAYER_CUSTOM_IA_HAMMER
+  beql      t9, at, .+0x04
+PATCH_END
+
 /* Hammer Related Relocs */
 
 PATCH_START 0x8085E9E8
