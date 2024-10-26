@@ -25,15 +25,12 @@
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@ootmm/core": "*",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "@preact/compat": "^18.3.1",
     "react-ga4": "^2.1.0",
     "react-select": "^5.8.1",
     "react-tooltip": "^5.28.0"
   },
   "devDependencies": {
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.3",
     "cssnano": "^7.0.6",
     "postcss": "^8.4.47",

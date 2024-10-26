@@ -3,6 +3,14 @@
   "compilerOptions": {
     "types": ["vite/client"],
     "module": "esnext",
-    "jsx": "preserve"
-  }
+    "jsx": "preserve",
+    //"jsxFactory": "h",
+    //"jsxFragmentFactory": "Fragment",
+    "paths": {
+      "react": ["./node_modules/preact/compat/"],
+      "react/jsx-runtime": ["./node_modules/preact/jsx-runtime"],
+      "react-dom": ["./node_modules/preact/compat/"],
+      "react-dom/*": ["./node_modules/preact/compat/*"]
+    }
+  },
 }

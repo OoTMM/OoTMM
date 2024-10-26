@@ -5,6 +5,11 @@ import { visualizer } from 'rollup-plugin-visualizer';
 const VERSION = process.env.VERSION || 'XXX';
 
 export default defineConfig({
+  esbuild: {
+    //jsxFactory: 'h',
+    //jsxFragment: 'Fragment',
+    //jsxInject: `import { h, Fragment } from 'preact'`,
+  },
   plugins: [
     react(),
     visualizer({ open: true, filename: 'bundle-visualization.html' }),
@@ -14,4 +19,10 @@ export default defineConfig({
     'process.env.BROWSER': JSON.stringify(true),
     global: 'globalThis',
   },
-})
+  resolve: {
+    alias: {
+      react: 'preact/compat',
+      'react-dom': 'preact/compat'
+    }
+  }
+});
