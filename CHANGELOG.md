@@ -29,6 +29,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix precompleted Stone Tower not setting some flags correctly.
 - Fix possible softlock in Ice Cavern with shuffled silver rupees.
 - Logic for obtaining the Seahorse.
 - Logic for Open Bottom of the Well as adult.
