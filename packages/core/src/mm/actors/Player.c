@@ -1747,13 +1747,10 @@ void Player_UseItem(GameState_Play* play, Actor_Player* this, s16 itemId)
 /* Hammer Stuff */
 
 s32 Player_CustomActionToModelGroup(Actor_Player* player, s32 itemAction) {
+    if (itemAction == PLAYER_CUSTOM_IA_HAMMER) return 10; /* uses deku stick model group but does not draw deku stick because of the way the original draw code for it works */
+
     u8* sActionModelGroups = (u8*)0x801BFF3C; /* using original table also means original glitches, if that matters */
     s32 modelGroup = sActionModelGroups[itemAction];
-
-    if (itemAction == PLAYER_CUSTOM_IA_HAMMER) {
-        modelGroup = sActionModelGroups[7]; /* uses deku stick model group but does not draw deku stick because of the way the original draw code for it works */
-    }
-
     /* if ((modelGroup == PLAYER_MODELGROUP_ONE_HAND_SWORD) && Player_IsGoronOrDeku(player)) { */
     if ((modelGroup == 2) && (player->transformation == MM_PLAYER_FORM_GORON || player->transformation == MM_PLAYER_FORM_DEKU)) {
         /* return PLAYER_MODELGROUP_1;  */
@@ -1761,6 +1758,8 @@ s32 Player_CustomActionToModelGroup(Actor_Player* player, s32 itemAction) {
     }
     return modelGroup;
 }
+
+PATCH_FUNC(0x80123960, Player_CustomActionToModelGroup)
 
 /*
     first two arguments match Player_SetUpperAction which allows it to replace relevant calls in which the third argument would always be this->heldItemAction
@@ -1770,7 +1769,8 @@ void Player_SetCustomItemActionUpperFunc(GameState_Play* play, Actor_Player* pla
     void (*Player_SetUpperAction)(GameState_Play* play, Actor_Player* this, PlayerUpperActionFunc upperActionFunc) = OverlayAddr(0x8082f43c);
 
     if (player->heldItemAction == PLAYER_CUSTOM_IA_HAMMER) {
-        Player_SetUpperAction(play, player, sPlayerUpperActionUpdateFuncs[6]);
+        /* If more custom items were to be added that go to this extent I would suggest a sPlayerCustomUpperActionUpdateFuncs array */
+        Player_SetUpperAction(play, player, sPlayerUpperActionUpdateFuncs[PLAYER_IA_SWORD_TWO_HANDED]);
     } else {
         Player_SetUpperAction(play, player, sPlayerUpperActionUpdateFuncs[player->heldItemAction]);
     }
@@ -1780,7 +1780,7 @@ void Player_RunCustomItemActionInitFunc(GameState_Play* play, Actor_Player* play
     PlayerInitItemActionFunc* sPlayerItemActionInitFuncs = (PlayerInitItemActionFunc*)OverlayAddr(0x8085cb3c);
     
     if (player->heldItemAction == PLAYER_CUSTOM_IA_HAMMER) {
-        sPlayerItemActionInitFuncs[6](play, player);
+        sPlayerItemActionInitFuncs[PLAYER_IA_SWORD_TWO_HANDED](play, player);
     } else {
         sPlayerItemActionInitFuncs[itemAction](play, player);
     }

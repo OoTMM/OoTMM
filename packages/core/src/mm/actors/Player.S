@@ -1251,9 +1251,9 @@ PATCH_START 0x80123960
 PATCH_END
 
 PATCH_START 0x80128DDC
-  addiu     a0, s2, 0x0
+  nop
   jal       Player_GetCustomSwordLength
-  addiu     a1, s1, 0x0
+  move      a1, s1
   j         0x80128E24
   nop
 PATCH_END
