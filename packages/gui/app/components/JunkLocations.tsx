@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { useLocations, useSettings } from '../contexts/GeneratorContext';
 import { ArrayList } from './ArrayList';
 

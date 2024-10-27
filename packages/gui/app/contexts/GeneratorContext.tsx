@@ -1,6 +1,7 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import { ComponentChildren, createContext } from 'preact';
+import { useContext, useEffect, useState, StateUpdater, Dispatch } from 'preact/hooks';
 import type { GeneratorOutput, Items, Settings, OptionsInput, OptionRandomSettings, SettingsPatch, Cosmetics } from '@ootmm/core';
-import { mergeSettings, makeSettings, COSMETICS, DEFAULT_SETTINGS } from '@ootmm/core';
+import { mergeSettings, makeSettings, COSMETICS } from '@ootmm/core';
 import { merge } from 'lodash';
 
 import * as API from '../api';
@@ -36,7 +37,7 @@ type GeneratorState = {
 
 type GeneratorContext = {
   state: GeneratorState;
-  setState: React.Dispatch<React.SetStateAction<GeneratorState>>;
+  setState: Dispatch<StateUpdater<GeneratorState>>;
   setRomConfigFile: (key: keyof GeneratorState['romConfig']['files'], file: File | null) => void;
   setSeed: (seed: string) => void;
   setIsPatch: (isPatch: boolean) => void;
@@ -80,7 +81,7 @@ function createState(): GeneratorState {
   };
 }
 
-export function GeneratorContextProvider({ children }: { children: React.ReactNode }) {
+export function GeneratorContextProvider({ children }: { children: ComponentChildren }) {
   const [state, setState] = useState(createState);
 
   const setRomConfigFileRaw = (key: keyof GeneratorState['romConfig']['files'], file: File | null) => {

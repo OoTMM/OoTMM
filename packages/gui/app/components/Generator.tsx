@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { useIsPatch, useRandomSettings, useSettings } from '../contexts/GeneratorContext';
 import { RomConfig } from './RomConfig';
 import { Tab, Tabs } from './Tab';

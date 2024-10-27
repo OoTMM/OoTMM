@@ -1,4 +1,3 @@
-import React from 'react';
 import imgTriforce from '../assets/blacktriforce.png';
 import imgMajora from '../assets/blackmask.png';
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'preact/hooks';
 import CreatableSelect from 'react-select/creatable';
 
 import { PRESETS, Settings } from '@ootmm/core';
@@ -30,7 +30,7 @@ export const PresetSelector = () => {
   const options = makePresetOptions();
   const [value, setValue] = useState<Option>(options[0]);
 
-  const onChange = (o: Option | null) => {
+  const onInput = (o: Option | null) => {
     if (!o || o.value === null) {
       /* Clear */
       delete customPresets[value.label];
@@ -58,7 +58,7 @@ export const PresetSelector = () => {
       className="select"
       isClearable={!PRESETS.hasOwnProperty(value.label) && value.value !== null}
       options={options as any[]}
-      onChange={(x) => onChange(x)}
+      onChange={(x) => onInput(x)}
       onCreateOption={(x) => onCreate(x)}
       value={value}
     />

@@ -1,4 +1,3 @@
-import React from 'react';
 import { DUNGEONS } from '@ootmm/core';
 
 import { useSettings } from '../contexts/GeneratorContext';
@@ -28,7 +27,7 @@ export function Dungeons() {
             label={(DUNGEONS as any)[d]}
             options={options}
             value={(dungeon as any)[d]}
-            onChange={v => setSettings({ dungeon: { [d as keyof typeof DUNGEONS]: v } })}
+            onInput={v => setSettings({ dungeon: { [d as keyof typeof DUNGEONS]: v } })}
           />
         )}
       </form>

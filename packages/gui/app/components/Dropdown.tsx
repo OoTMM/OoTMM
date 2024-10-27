@@ -1,22 +1,21 @@
-import React from 'react';
-
+import { VNode } from 'preact';
 import { Tooltip } from './Tooltip';
 
 type DropdownProps = {
   label?: string;
   options: { value: string; name: string }[];
   value: string;
-  tooltip?: React.ReactNode;
-  onChange: (value: string) => void;
+  tooltip?: VNode;
+  onInput: (value: string) => void;
 }
-export const Dropdown = ({ label, options, value, tooltip, onChange }: DropdownProps) => {
+export const Dropdown = ({ label, options, value, tooltip, onInput }: DropdownProps) => {
   return (
     <label>
       <>
         {label}
         {tooltip && <Tooltip>{tooltip}</Tooltip>}
       </>
-      <select value={value} onChange={(e) => onChange(e.target.value)}>
+      <select value={value} onInput={(e) => onInput(e.currentTarget.value)}>
         {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.name}

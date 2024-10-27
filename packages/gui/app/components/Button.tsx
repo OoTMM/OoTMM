@@ -1,9 +1,9 @@
-import React from 'react';
+import { ComponentChildren } from 'preact';
 
 type ButtonProps = {
   onClick?: () => void;
   type?: 'primary' | 'danger';
-  children: React.ReactNode;
+  children: ComponentChildren;
 }
 export function Button({ onClick, type, children }: ButtonProps) {
   const klasses = ['btn'];

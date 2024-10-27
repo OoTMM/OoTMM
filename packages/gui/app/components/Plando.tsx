@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'preact/hooks';
 import Select from 'react-select';
 import { itemName } from '@ootmm/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

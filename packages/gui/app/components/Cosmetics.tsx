@@ -1,4 +1,3 @@
-import React from 'react';
 import { COLORS, COSMETICS, Cosmetics } from '@ootmm/core';
 
 import { Dropdown } from './Dropdown';
@@ -20,7 +19,7 @@ function Cosmetic({ cosmetic }: { cosmetic: keyof Cosmetics }) {
         value={cosmetics[cosmetic] as string}
         label={data.name}
         options={COLOR_OPTIONS}
-        onChange={v => setCosmetic(cosmetic, v)}
+        onInput={v => setCosmetic(cosmetic, v)}
       />
     );
   case 'file':
@@ -30,7 +29,7 @@ function Cosmetic({ cosmetic }: { cosmetic: keyof Cosmetics }) {
         label={data.name}
         accept={`.${data.ext}`}
         file={cosmetics[cosmetic] as File | null}
-        onChange={(f) => setCosmetic(cosmetic, f)}
+        onInput={(f) => setCosmetic(cosmetic, f)}
       />
     );
   case 'boolean':
@@ -38,7 +37,7 @@ function Cosmetic({ cosmetic }: { cosmetic: keyof Cosmetics }) {
       <Checkbox
         label={data.name}
         checked={!!(cosmetics[cosmetic])}
-        onChange={(v) => setCosmetic(cosmetic, v)}
+        onInput={(v) => setCosmetic(cosmetic, v)}
       />
     );
   default:

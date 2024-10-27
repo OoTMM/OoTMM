@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactGA from 'react-ga4';
 
 import { GeneratorContextProvider, useGenerator } from '../contexts/GeneratorContext';

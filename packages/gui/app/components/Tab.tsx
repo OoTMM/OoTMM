@@ -1,20 +1,21 @@
-import React, { useState } from 'react';
+import { ComponentChildren, toChildArray, VNode } from 'preact';
+import { useState } from 'preact/hooks';
 
 type TabProps = {
   name: string;
-  children?: React.ReactNode;
   disabled?: boolean;
+  children: ComponentChildren;
 };
 export function Tab({ disabled, children }: TabProps) {
-  return disabled ? null : children;
+  return disabled ? null : <>{children}</>;
 };
 
 type TabsProps = {
-  children?: React.ReactNode;
+  children: ComponentChildren;
 };
 export function Tabs({ children }: TabsProps) {
   const [activeTab, setActiveTab] = useState(0);
-  const tabs = React.Children.toArray(children) as React.ReactElement<TabProps>[];
+  const tabs = toChildArray(children) as VNode<TabProps>[];
 
   return (
     <div className="tab-bar">

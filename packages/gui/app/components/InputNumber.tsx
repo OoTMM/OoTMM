@@ -1,17 +1,16 @@
-import React from 'react';
-
+import { VNode } from 'preact';
 import { Tooltip } from './Tooltip';
 
 type InputNumberProps = {
   label?: string;
   value: number;
-  onChange: (value: number) => void;
+  onInput: (value: number) => void;
   min?: number;
   max?: number;
-  tooltip?: React.ReactNode;
+  tooltip?: VNode;
 }
 
-export const InputNumber = ({ label, value, onChange, min, max, tooltip }: InputNumberProps) => {
+export const InputNumber = ({ label, value, onInput, min, max, tooltip }: InputNumberProps) => {
   return (
     <label>
        <>
@@ -24,7 +23,7 @@ export const InputNumber = ({ label, value, onChange, min, max, tooltip }: Input
           min={min ?? 0}
           max={max}
           value={value}
-          onChange={(e) => onChange(e.target.valueAsNumber)}
+          onInput={(e) => onInput(e.currentTarget.valueAsNumber)}
         />
        </>
     </label>

@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import { VNode } from 'preact';
+import { useState } from 'preact/hooks';
 import { Button } from './Button';
 
 type DoubleListOption = {
   key: string;
-  label: React.ReactNode;
-  extra?: React.ReactNode;
+  label: string;
+  extra?: VNode;
 };
 
 type DoubleListColProps = {
@@ -17,7 +18,7 @@ function DoubleListCol({ values, selected, onSelect }: DoubleListColProps) {
     <ul className="double-list-col">
       {values.map(x =>
         <li className="double-list-row" key={x.key}>
-          <input type="checkbox" checked={selected.includes(x.key)} onChange={e => onSelect(x.key, e.target.checked)}/>{x.label}
+          <input type="checkbox" checked={selected.includes(x.key)} onInput={e => onSelect(x.key, e.currentTarget.checked)}/>{x.label}
           {x.extra && <span className="double-list-row-extra">{x.extra}</span>}
         </li>
       )}
