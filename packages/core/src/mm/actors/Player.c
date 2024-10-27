@@ -947,7 +947,7 @@ const Vtx sHammerVtx[] = {
 #include "sHammerVtx.vtx.inc"
 };
 
-Gfx gHammerDL[] = {
+static Gfx gHammerDL[] = {
     gsSPMatrix(0x0D000300, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW),
     gsDPPipeSync(),
     gsDPSetTextureLUT(G_TT_NONE),
