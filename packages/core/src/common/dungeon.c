@@ -48,6 +48,7 @@ void comboDungeonSetFlags(int dungeonId, int mmCycle)
         }
         gMiscFlags.erCoastClear = 1;
         break;
+    case DUNGEONID_TEMPLE_STONE_TOWER:
     case DUNGEONID_TEMPLE_STONE_TOWER_INVERTED:
         gMmExtraBoss.boss |= (1 << 3);
         if (mmCycle)
