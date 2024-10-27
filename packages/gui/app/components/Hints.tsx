@@ -1,4 +1,3 @@
-import React from 'react';
 import Select from 'react-select';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
@@ -31,7 +30,7 @@ export function HintEditor({ index }: HintEditorProps) {
     setSettings({ hints: { set: newArray } });
   };
 
-  const onChangeType = (type: keyof typeof HINT_TYPES) => {
+  const onInputType = (type: keyof typeof HINT_TYPES) => {
     const newHint = { ...hint, type };
     if (type === 'item') {
       newHint.item = 'MM_SONG_SOARING';
@@ -41,23 +40,23 @@ export function HintEditor({ index }: HintEditorProps) {
     updateHint(newHint);
   };
 
-  const onChangeAmount = (amount: number) => {
+  const onInputAmount = (amount: number) => {
     const newHint = { ...hint, amount };
     updateHint(newHint);
   };
 
-  const onChangeExtra = (extra: number) => {
+  const onInputExtra = (extra: number) => {
     const newHint = { ...hint, extra };
     updateHint(newHint);
   };
 
-  const onChangeMax = (max: boolean) => {
+  const onInputMax = (max: boolean) => {
     const newHint = { ...hint };
     newHint.amount = max ? 'max' : 1;
     updateHint(newHint);
   };
 
-  const onChangeItem = (item?: string) => {
+  const onInputItem = (item?: string) => {
     if (!item) return;
     const newHint = { ...hint, item };
     updateHint(newHint);
@@ -103,19 +102,19 @@ export function HintEditor({ index }: HintEditorProps) {
         </span>
       </td>
       <td>
-        <Dropdown options={hintOptions} value={hint.type} onChange={onChangeType as any} />
+        <Dropdown options={hintOptions} value={hint.type} onInput={onInputType as any} />
       </td>
       <td>
         {hint.type === 'item' && (
-          <Select className="select" options={itemOptions} onChange={(v) => onChangeItem(v?.value)} value={selectedItem} />
+          <Select className="select" options={itemOptions} onChange={(v) => onInputItem(v?.value)} value={selectedItem}/>
         )}
       </td>
-      <td>{hint.amount !== 'max' && <InputNumber value={hint.amount} onChange={onChangeAmount} />}</td>
+      <td>{hint.amount !== 'max' && <InputNumber value={hint.amount} onInput={onInputAmount} />}</td>
       <td>
-        <Checkbox checked={hint.amount === 'max'} onChange={onChangeMax} />
+        <Checkbox checked={hint.amount === 'max'} onInput={onInputMax} />
       </td>
       <td>
-        <InputNumber value={hint.extra} onChange={onChangeExtra} />
+        <InputNumber value={hint.extra} onInput={onInputExtra} />
       </td>
     </tr>
   );

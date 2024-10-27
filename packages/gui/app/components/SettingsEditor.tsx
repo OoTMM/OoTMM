@@ -1,4 +1,3 @@
-import React from 'react';
 import Select, { MultiValue } from 'react-select';
 import { SETTINGS } from '@ootmm/core';
 
@@ -95,7 +94,7 @@ function SettingSet({ setting }: { setting: string }) {
         label={data.name}
         options={SET_OPTIONS}
         tooltip={(data as any).description && <SettingTooltip setting={data.key}/>}
-        onChange={(v) => setSettings({ [data.key]: { type: v, values: s.values } as any })}
+        onInput={(v) => setSettings({ [data.key]: { type: v, values: s.values } as any })}
       />
       {s.type === 'specific' &&
         <Select
@@ -125,7 +124,7 @@ export function Setting({ setting }: { setting: string }) {
         label={data.name}
         options={(data as any).values.filter((x: any) => x.cond === undefined || x.cond(settings))}
         tooltip={data.description && <SettingTooltip setting={data.key}/>}
-        onChange={(v) => setSettings({ [data.key]: v })}
+        onInput={(v) => setSettings({ [data.key]: v })}
       />
     );
   case 'set': return <SettingSet setting={setting}/>;
@@ -135,7 +134,7 @@ export function Setting({ setting }: { setting: string }) {
         label={data.name}
         tooltip={(data as any).description && <SettingTooltip setting={data.key}/>}
         checked={settings[data.key] as boolean}
-        onChange={(v) => setSettings({ [data.key]: v })}
+        onInput={(v) => setSettings({ [data.key]: v })}
       />
     );
   case 'number':
@@ -156,7 +155,7 @@ export function Setting({ setting }: { setting: string }) {
         label={data.name}
         tooltip={(data as any).description && <SettingTooltip setting={data.key}/>}
         value={settings[data.key] as number}
-        onChange={(v) => setSettings({ [data.key]: v })}
+        onInput={(v) => setSettings({ [data.key]: v })}
         min={minValue}
         max={maxValue}
       />

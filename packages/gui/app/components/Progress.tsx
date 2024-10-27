@@ -1,5 +1,3 @@
-import React from 'react';
-
 type ProgressProps = {
   message: string;
   progress: number | null;

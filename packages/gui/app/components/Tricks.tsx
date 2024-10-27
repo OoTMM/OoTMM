@@ -1,4 +1,3 @@
-import React from 'react';
 import { DoubleList } from './DoubleList';
 import { TRICKS } from '@ootmm/core';
 import { TrickKey } from '@ootmm/core/lib/combo/settings';

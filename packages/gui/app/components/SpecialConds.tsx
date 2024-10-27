@@ -1,4 +1,3 @@
-import React from 'react';
 import { Settings, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS } from '@ootmm/core';
 
 import { useSettings } from '../contexts/GeneratorContext';
@@ -44,11 +43,11 @@ function SpecialCondsPanel({ cond }: SpecialCondsPanelProps) {
             key={key}
             label={(SPECIAL_CONDS_FIELDS as any)[key].name}
             checked={(c as any)[key]}
-            onChange={x => setSettings({ specialConds: { [cond]: { [key]: x } }} as any)}
+            onInput={x => setSettings({ specialConds: { [cond]: { [key]: x } }} as any)}
           />
         )}
       </>
-      <InputNumber max={max} label={label} value={c.count} onChange={x => setSettings({ specialConds: { [cond]: { count: x } }} as any)}/>
+      <InputNumber max={max} label={label} value={c.count} onInput={x => setSettings({ specialConds: { [cond]: { count: x } }} as any)}/>
     </form>
   );
 }

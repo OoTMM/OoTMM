@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'preact/hooks';
 
 import logoOot from '../assets/oot.png';
 import logoMm from '../assets/mm.png';
@@ -17,10 +17,10 @@ type FileSelectProps = {
   label: string;
   accept: string;
   file: File | null;
-  onChange: (file: File | null) => void;
+  onInput: (file: File | null) => void;
 }
 
-export const FileSelect = ({ logo, label, accept, onChange, file }: FileSelectProps) => {
+export const FileSelect = ({ logo, label, accept, onInput, file }: FileSelectProps) => {
   return (
     <label className="file-select-label">
       {label}
@@ -28,11 +28,11 @@ export const FileSelect = ({ logo, label, accept, onChange, file }: FileSelectPr
         <div className='file-select-box-img-container'>
           <img src={LOGOS[logo]} width="100%"/>
         </div>
-        <input type="file" accept={accept} onChange={e => e.target.files && e.target.files[0] && onChange(e.target.files[0])}/>
+        <input type="file" accept={accept} onInput={e => e.currentTarget.files && e.currentTarget.files[0] && onInput(e.currentTarget.files[0])}/>
         {!file && <>No file selected</>}
         {file && <>
           {file.name}
-          <span className="file-select-box-delete" onClick={(e) => { onChange(null); e.preventDefault(); }}><FontAwesomeIcon icon={faXmark} /></span>
+          <span className="file-select-box-delete" onClick={(e) => { onInput(null); e.preventDefault(); }}><FontAwesomeIcon icon={faXmark} /></span>
         </>}
       </div>
     </label>

@@ -1,13 +1,12 @@
-import React from 'react';
+import { lazy, Suspense } from 'preact/compat';
 
 import AppSkeleton from './AppSkeleton';
-
-const App = React.lazy(() => import('./App'));
+const App = lazy(() => import('./App'));
 
 export default function AppContainer() {
   return (
-    <React.Suspense fallback={<AppSkeleton/>}>
+    <Suspense fallback={<AppSkeleton/>}>
       <App/>
-    </React.Suspense>
+    </Suspense>
   );
 }

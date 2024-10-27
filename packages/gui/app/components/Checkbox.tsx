@@ -1,20 +1,20 @@
-import React from 'react';
+import { VNode } from 'preact';
 import { Tooltip } from './Tooltip';
 
 type CheckboxProps = {
   label?: string;
   checked: boolean;
-  tooltip?: React.ReactNode;
-  onChange: (checked: boolean) => void;
+  tooltip?: VNode;
+  onInput: (checked: boolean) => void;
 }
 
-export const Checkbox = ({ label, checked, tooltip, onChange }: CheckboxProps) => (
+export const Checkbox = ({ label, checked, tooltip, onInput }: CheckboxProps) => (
   <label>
     <>
       <input
         type="checkbox"
         checked={checked}
-        onChange={(e) => onChange(e.target.checked)}
+        onInput={(e) => onInput(e.currentTarget.checked)}
         />
         <>
           {label}

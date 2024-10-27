@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'preact/hooks';
 import { importSettings, exportSettings } from '@ootmm/core';
 
 import { useOverrideSettings, useSettings } from '../contexts/GeneratorContext';
@@ -8,7 +8,7 @@ export const SettingsImportExport = () => {
   const overrideSettings = useOverrideSettings();
   const settingsString = useMemo(() => exportSettings(settings), [settings]);
 
-  const onChange = (newStr: string) => {
+  const onInput = (newStr: string) => {
     const newSettings = importSettings(newStr);
     overrideSettings(newSettings);
   };
@@ -16,7 +16,7 @@ export const SettingsImportExport = () => {
   return (
     <label>
       Import/Export Settings
-      <textarea className='settings-string' value={settingsString} onChange={x => onChange(x.target.value)}/>
+      <textarea class='settings-string' value={settingsString} onInput={x => onInput(x.currentTarget.value)}/>
     </label>
   )
 };

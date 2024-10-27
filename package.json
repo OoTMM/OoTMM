@@ -8,7 +8,7 @@
     "build": "nx run @ootmm/gui:build",
     "test": "nx run-many --output-style=stream-without-prefix --target=test",
     "serve": "nx run-many -t serve",
-    "typecheck": "tsc --module es2020 --jsx react --noEmit"
+    "typecheck": "nx run-many -t typecheck"
   },
   "dependencies": {
     "buffer": "^6.0.3",

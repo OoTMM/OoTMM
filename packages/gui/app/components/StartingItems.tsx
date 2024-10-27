@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { itemName } from '@ootmm/core';
 import { useStartingItems } from '../contexts/GeneratorContext';
 import { InputNumber } from './InputNumber';
@@ -26,7 +24,7 @@ export function StartingItems() {
         <InputNumber
           key={item}
           value={startingItems[item] || 0}
-          onChange={e => alterItem(item, e)}
+          onInput={e => alterItem(item, e)}
           min={0}
           label={itemName(item)}
         />

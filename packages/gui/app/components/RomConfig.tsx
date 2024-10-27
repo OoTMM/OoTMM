@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactGA from 'react-ga4';
 
 import { useGenerator, useIsPatch, useRandomSettings, useRomConfig } from '../contexts/GeneratorContext';
@@ -40,26 +39,26 @@ export function RomConfig() {
           label="Ocarina of Time (1.0, U or J)"
           accept=".z64, .n64, .v64"
           file={romConfig.files.oot}
-          onChange={(f) => setRomConfigFile('oot', f)}
+          onInput={(f) => setRomConfigFile('oot', f)}
         />
         <FileSelect
           logo="mm"
           label="Majora's Mask (U only)"
           accept=".z64, .n64, .v64"
           file={romConfig.files.mm}
-          onChange={(f) => setRomConfigFile('mm', f)}
+          onInput={(f) => setRomConfigFile('mm', f)}
         />
         {isPatch && (
-          <FileSelect logo="ootmm" label="OoTMM Patch File" accept=".ootmm" file={romConfig.files.patch} onChange={(f) => setRomConfigFile('patch', f)} />
+          <FileSelect logo="ootmm" label="OoTMM Patch File" accept=".ootmm" file={romConfig.files.patch} onInput={(f) => setRomConfigFile('patch', f)} />
         )}
       </div>
-      {!isPatch && <Checkbox label="Random Settings" checked={isRandomSettings} onChange={(x) => setRandomSettings({ enabled: x })} />}
+      {!isPatch && <Checkbox label="Random Settings" checked={isRandomSettings} onInput={(x) => setRandomSettings({ enabled: x })} />}
         {isRandomSettings && (
           <>
             <Setting setting='games'/>
-            <Checkbox label="Random Settings: MQ" checked={randomSettings.mq} onChange={(x) => setRandomSettings({ mq: x })} />
-            <Checkbox label="Random Settings: Entrances" checked={randomSettings.er} onChange={(x) => setRandomSettings({ er: x })} />
-            <Checkbox label="Random Settings: Extra Shuffles" checked={randomSettings.extraShuffles} onChange={(x) => setRandomSettings({ extraShuffles: x })} />
+            <Checkbox label="Random Settings: MQ" checked={randomSettings.mq} onInput={(x) => setRandomSettings({ mq: x })} />
+            <Checkbox label="Random Settings: Entrances" checked={randomSettings.er} onInput={(x) => setRandomSettings({ er: x })} />
+            <Checkbox label="Random Settings: Extra Shuffles" checked={randomSettings.extraShuffles} onInput={(x) => setRandomSettings({ extraShuffles: x })} />
           </>
         )}
         {!isPatch && !isRandomSettings && (
@@ -68,11 +67,11 @@ export function RomConfig() {
             <SettingsImportExport />
           </>
         )}
-        {!isRandomSettings && <Checkbox label="Use a patch file" checked={isPatch} onChange={setIsPatch} />}
+        {!isRandomSettings && <Checkbox label="Use a patch file" checked={isPatch} onInput={setIsPatch} />}
         {!isPatch && !isRandomSettings && (
           <label>
             Seed (leave blank to auto-generate)
-            <input type="text" value={romConfig.seed} onChange={(e) => setSeed(e.target.value)} />
+            <input type="text" value={romConfig.seed} onInput={(e) => setSeed(e.currentTarget.value)} />
           </label>
         )}
         <button disabled={!isReady} className="btn btn-primary" type="submit" style={{ width: '105px' }}>Generate</button>

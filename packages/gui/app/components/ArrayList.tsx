@@ -1,9 +1,9 @@
-import React from 'react';
+import { ComponentChildren } from 'preact';
 import Select, { createFilter, components } from 'react-select';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
-const CustomOption = ({ children, ...props }: { children?: React.ReactNode, props: any }) => {
+const CustomOption = ({ children, ...props }: { children: ComponentChildren, props: any }) => {
   const { onMouseMove, onMouseOver, ...rest } = (props as any).innerProps;
   const newProps = { ...props, innerProps: rest };
   return (

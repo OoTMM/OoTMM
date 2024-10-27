@@ -1,5 +1,5 @@
+import { useEffect, useState } from 'preact/hooks';
 import { GeneratorOutput } from '@ootmm/core';
-import React, { useEffect, useState } from 'react';
 import { ResultFile } from '../api';
 import { useGenerator } from '../contexts/GeneratorContext';
 
