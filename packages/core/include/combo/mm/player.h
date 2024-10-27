@@ -740,10 +740,4 @@ typedef struct AttackAnimInfo {
     /* 0x0D */ u8 unk_D;
 } AttackAnimInfo; // size = 0x10
 
-typedef enum {
-    /* 0 */ PLAYER_IMPACT_GORON_GROUND_POUND,
-    /* 1 */ PLAYER_IMPACT_ZORA_BARRIER,
-    /* 2 */ PLAYER_IMPACT_BONK // also activated by goron attack
-} PlayerImpactType;
-
 #endif

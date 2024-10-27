@@ -581,3 +581,11 @@ func_800AE930 = 0x800ae930;
 Effect_GetByIndex = 0x800af720;
 func_800AEF44 = 0x800aef44;
 CollisionCheck_SetInfo = 0x800e7530;
+
+SurfaceType_IsIgnoredByEntities = 0x800c9d14;
+func_800B90AC = 0x800B90AC;
+Actor_SetPlayerImpact = 0x800b648c;
+SurfaceType_GetMaterial = 0x800c9bb8;
+CollisionCheck_SpawnShieldParticlesWood = 0x800e86e0;
+BgCheck_EntityLineTest2 = 0x800c5650;
+EffectSsBlast_SpawnWhiteShockwave = 0x800b1b10;

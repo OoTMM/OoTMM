@@ -1967,14 +1967,6 @@ Actor* Player_FindGrottoNearPos(GameState_Play* play, Vec3f* refPos, f32 distanc
 }
 
 s32 Player_CollideMeleeWithWall(GameState_Play* play, Actor_Player* this) {
-    /* Can be moved */
-    s32 (*SurfaceType_IsIgnoredByEntities)(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId) = (void*)0x800c9d14;
-    s32 (*func_800B90AC)(GameState_Play* play, Actor* actor, CollisionPoly* polygon, s32 bgId, Vec3f* arg4) = (void*)0x800B90AC;
-    s32 (*Actor_SetPlayerImpact)(GameState_Play* play, PlayerImpactType type, s32 timer, f32 dist, Vec3f* pos) = (void*)0x800b648c;
-    SurfaceMaterial (*SurfaceType_GetMaterial)(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId) = (void*)0x800c9bb8;
-    void (*CollisionCheck_SpawnShieldParticlesWood)(GameState_Play* play, Vec3f* v, Vec3f* pos) = (void*)0x800e86e0;
-    s32 (*BgCheck_EntityLineTest2)(CollisionContext* colCtx, Vec3f* posA, Vec3f* posB, Vec3f* posResult, CollisionPoly** outPoly, s32 checkWall, s32 checkFloor, s32 checkCeil, s32 checkOneFace, s32* bgId, Actor* actor) = (void*)0x800c5650;
-
     void (*func_808400CC)(GameState_Play* play, Actor_Player* this) = OverlayAddr(0x808400CC);
     void (*func_80840094)(GameState_Play* play, Actor_Player* this) = OverlayAddr(0x80840094);
     void (*Player_RequestRumble)(GameState_Play* play, Actor_Player* this, s32 sourceIntensity, s32 decayTimer, s32 decayStep, s32 distSq) = OverlayAddr(0x8082df48);
@@ -2126,9 +2118,6 @@ s32 Player_CollideMeleeWithWall(GameState_Play* play, Actor_Player* this) {
 
 void Player_HammerShockwaveCheck(GameState_Play* play, Actor_Player* this) {
     /* Can be moved */
-    void (*EffectSsBlast_SpawnWhiteShockwave)(GameState_Play* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel) = (void*)0x800b1b10;
-    s32 (*Actor_SetPlayerImpact)(GameState_Play* play, PlayerImpactType type, s32 timer, f32 dist, Vec3f* pos) = (void*)0x800b648c;
-
     void (*Player_RequestQuakeAndRumble)(GameState_Play* play, Actor_Player* this, u16 sfxId) = OverlayAddr(0x8083fe90);
     f32 (*func_80835CD8)(GameState_Play* play, Actor_Player* this, Vec3f* arg2, Vec3f* pos, CollisionPoly** outPoly, s32* outBgId) = OverlayAddr(0x80835CD8);
     s32 (*func_80832754)(Actor_Player* this, s32 arg1) = OverlayAddr(0x80832754);

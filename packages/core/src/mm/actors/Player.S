@@ -1305,6 +1305,20 @@ PATCH_START 0x80861D88
   .int 0x00000000
 PATCH_END
 
+Player_BeginHammerShockwaveCheck:
+  lw	      a0, 0x0044 (sp)
+  sw        ra, 0x0024 (sp)
+  jal       Player_HammerShockwaveCheck
+  lw        a1, 0x0020 (sp)     
+  lw        ra, 0x0024 (sp)
+  jr ra
+  addiu     sp, sp, 0x40
+
+PATCH_START 0x80854C64
+  j Player_BeginHammerShockwaveCheck
+  nop
+PATCH_END 
+
 /* Hammer link_animetion Patches */
 /* These animations should overwrite unused Ganon/Ganondorf related animations from OoT */
 /* PATCH_VROM link_animation start + frame data offset */
@@ -9037,17 +9051,3 @@ PATCH_VROM 0x65d000 + 0x1CBB10
   .short 0x0000
   .short 0x0000
 PATCH_END
-
-Player_BeginHammerShockwaveCheck:
-  lw	      a0, 0x0044 (sp)
-  sw        ra, 0x0024 (sp)
-  jal       Player_HammerShockwaveCheck
-  lw        a1, 0x0020 (sp)     
-  lw        ra, 0x0024 (sp)
-  jr ra
-  addiu     sp, sp, 0x40
-
-PATCH_START 0x80854C64
-  j Player_BeginHammerShockwaveCheck
-  nop
-PATCH_END 
