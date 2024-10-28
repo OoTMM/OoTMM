@@ -443,6 +443,11 @@ s32 Player_CustomCsItem(Actor_Player* this, GameState_Play* play)
     return 0;
 }
 
+/* Written as a function because there are several uses for this */
+u8 Player_IsHumanChild(Actor_Player* player) {
+    return (player->transformation == MM_PLAYER_FORM_HUMAN && !comboIsLinkAdult());
+}
+
 s16 sBootData[7][18] = {
     /* Child Link - Iron Boots */
     { 200, 1000, 300, 700, 550, 270, 1000, 0, 120, 800, 300, -160, 600, 590, 750, 125, 200, 130 },
@@ -1400,7 +1405,7 @@ s32 Player_GetItemCamMode(Actor_Player* this)
 {
     if (this->transformation == MM_PLAYER_FORM_HUMAN)
     {
-        if (this->heldItemAction == 0xD && (this->state & 0x8000000)) /* PLAYER_IA_HOOKSHOT // PLAYER_STATE1_8000000 // Swimming */
+        if ((this->heldItemAction == PLAYER_IA_HOOKSHOT && (this->state & 0x8000000)) || (comboIsLinkAdult())) /* PLAYER_IA_HOOKSHOT // PLAYER_STATE1_8000000 // Swimming */
         {
             return CAM_MODE_BOWARROW;
         }
