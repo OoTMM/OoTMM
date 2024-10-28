@@ -869,7 +869,7 @@ PATCH_START 0x80128CE4
   beq     v1, at, .+0x74
    lui     a2, 0x801C
   jal     Player_IsHumanChild
-  nop
+   nop
   beqzl   v0, .+0xC
    addiu   a0, a2, 0x0D60
   addiu   a0, a2, 0x0D6C
