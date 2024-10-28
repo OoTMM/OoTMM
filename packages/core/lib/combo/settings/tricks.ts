@@ -324,11 +324,6 @@ export const TRICKS: Tricks = {
     name: "Enter Zelda's Courtyard using Age Swap in Ganon's Castle",
     tooltip: "Exiting Ganon's Castle as Child puts you in front of the crawlspace to Zelda. This will allow Age Swap to be logical for doing this.",
   },
-  OOT_DEKU_MQ_WATER_ROOM_SPIKE_ROLL: {
-    game: 'oot',
-    name: "Roll Under Deku Tree MQ Water Room's Rotating Spike.",
-    tooltip: "Puts crossing the Water Room in Deku Tree MQ in logic with no items, as any age.",
-  },
   MM_LENS: {
     game: 'mm',
     name: 'Fewer Lens Requirements (MM)',
