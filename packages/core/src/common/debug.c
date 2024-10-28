@@ -575,6 +575,7 @@ static void cheatAllItems(GameState_Play* play)
     gMmExtraTrade.trade3 = 0x1f;
     gMmExtraItems.hookshot = 3;
     gMmExtraItems.ocarina = 3;
+    gMmExtraItems.hammerGFS = 3;
 
     gSave.inventory.items[ITS_MM_TRADE1] = ITEM_MM_DEED_LAND;
     gSave.inventory.items[ITS_MM_TRADE2] = ITEM_MM_ROOM_KEY;
