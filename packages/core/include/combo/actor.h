@@ -367,6 +367,12 @@ typedef enum
 }
 ActorDrawDamageEffectType;
 
+typedef enum {
+    /* 0 */ PLAYER_IMPACT_GORON_GROUND_POUND,
+    /* 1 */ PLAYER_IMPACT_ZORA_BARRIER,
+    /* 2 */ PLAYER_IMPACT_BONK // also activated by goron attack
+} PlayerImpactType;
+
 #define COLORFILTER_COLORFLAG_NONE 0xC000
 #define COLORFILTER_COLORFLAG_GRAY 0x8000
 #define COLORFILTER_COLORFLAG_RED  0x4000
@@ -435,5 +441,10 @@ void* actorAddr(u16 actorId, u32 addr);
 
 void DynaPolyActor_Init(DynaPolyActor* dynaActor, s32 transformFlags);
 void Actor_UpdatePos(Actor *actor);
+
+#if defined(GAME_MM)
+s32 func_800B90AC(GameState_Play* play, Actor* actor, CollisionPoly* polygon, s32 bgId, Vec3f* arg4);
+s32 Actor_SetPlayerImpact(GameState_Play* play, PlayerImpactType type, s32 timer, f32 dist, Vec3f* pos);
+#endif
 
 #endif
