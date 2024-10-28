@@ -1791,15 +1791,10 @@ static int addItemSwordExtraOot(GameState_Play* play, u8 itemId, s16 gi, u16 par
 
 static int addItemGFSHammer(GameState_Play* play, u8 itemId, s16 gi, u16 param)
 {
-    switch(param)
-    {
-    case 0:
-        gMmSave.inventory.items[ITS_MM_GREAT_FAIRY_SWORD] = ITEM_MM_GREAT_FAIRY_SWORD;
-        break;
-    case 1:
-        gMmExtraItems.hammer = 1;
-        break;
-    }
+    itemId = kMmGFSHammer[param];
+    if (gMmSave.inventory.items[ITS_MM_GREAT_FAIRY_SWORD] == ITEM_NONE)
+        gMmSave.inventory.items[ITS_MM_GREAT_FAIRY_SWORD] = itemId;
+    gMmExtraItems.hammerGFS |= (1 << (u8)param);
     return 0;
 }
 
