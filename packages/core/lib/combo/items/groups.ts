@@ -1202,4 +1202,5 @@ export const REQUIRED = new Set([
   Items.SHARED_MASK_STONE,
   Items.OOT_SONG_EMPTINESS,
   Items.SHARED_SONG_EMPTINESS,
+  Items.SHARED_HAMMER,
 ]);

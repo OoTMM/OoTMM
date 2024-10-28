@@ -100,6 +100,7 @@ const SHARED_ITEMS_OOT = new Map([
   ['SHARED_STRENGTH',         'OOT_STRENGTH'],
   ['SHARED_TRAP_RUPOOR',      'OOT_TRAP_RUPOOR'],
   ['SHARED_SONG_EMPTINESS',   'OOT_SONG_EMPTINESS'],
+  ['SHARED_HAMMER',           'OOT_HAMMER'],
 ]);
 
 const SHARED_ITEMS_MM = new Map([
@@ -172,6 +173,7 @@ const SHARED_ITEMS_MM = new Map([
   ['SHARED_STRENGTH',         'MM_STRENGTH'],
   ['SHARED_TRAP_RUPOOR',      'MM_TRAP_RUPOOR'],
   ['SHARED_SONG_EMPTINESS',   'MM_SONG_EMPTINESS'],
+  ['SHARED_HAMMER',           'MM_HAMMER'],
 ]);
 
 const SHARED_ITEMS = {
