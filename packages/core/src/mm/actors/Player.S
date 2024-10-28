@@ -862,6 +862,19 @@ PATCH_END
 
 PATCH_GROUP_END
 
+/* Fix Adult Link arrow position */
+PATCH_START 0x80128CE4
+  lbu     v1, 0x014B (s1)
+  li      at,3
+  beq     v1, at, .+0x74
+   lui     a2, 0x801C
+  jal     Player_IsHumanChild
+   nop
+  beqzl   v0, .+0xC
+   addiu   a0, a2, 0x0D60
+  addiu   a0, a2, 0x0D6C
+PATCH_END
+
 PATCH_START 0x80122ab8
   jal     Player_AfterMaskLoaded
    move   a0, s2

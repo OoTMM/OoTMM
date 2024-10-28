@@ -1253,6 +1253,7 @@ All notable changes to this project will be documented in this file.
 - Fix logic for ISTT.
 - Fix some seeds failing to generate properly.
 - Fix various issues with swordless link.
+- Fix first person camera and arrow position for MM Adult Link
 
 ## [1.2.0] - 2023-02-16
 
