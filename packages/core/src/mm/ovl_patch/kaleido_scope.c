@@ -59,13 +59,13 @@ void KaleidoScope_LoadNamedItemCustom(void* segment, u32 texIndex)
     u32 isForeign = 0;
     switch (texIndex)
     {
-    case 0x5: /* MM Fairy Ocarina */
+    case ITEM_MM_OCARINA_FAIRY:
         isForeign = 1;
-        texIndex = 0x7b + 0x7; /* OoT Fairy Ocarina */
+        texIndex = 0x7b + ITEM_OOT_OCARINA_FAIRY;
         break;
-    case 0x11: /* MM OoT Hookshot */
+    case ITEM_MM_HOOKSHOT_SHORT:
         isForeign = 1;
-        texIndex = 0x7b + 0xA; /* OoT OoT Hookshot */
+        texIndex = 0x7b + ITEM_OOT_HOOKSHOT;
         break;
     case ITEM_MM_SPELL_FIRE:
         isForeign = 1;

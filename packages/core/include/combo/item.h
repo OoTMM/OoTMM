@@ -197,6 +197,7 @@ extern const u8 kOotTradeAdult[];
 extern const u8 kMmTrade1[];
 extern const u8 kMmTrade2[];
 extern const u8 kMmTrade3[];
+extern const u8 kMmGFSHammer[];
 
 void comboSyncItems(void);
 

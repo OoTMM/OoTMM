@@ -68,7 +68,7 @@ const u8 kMmTrade3[] = {
 };
 
 const u8 kMmHookshot[] = {
-    0x11, /* ITEM_MM_BOTTLE_POTION_RED but that enum is wrong */
+    ITEM_MM_HOOKSHOT_SHORT,
     ITEM_MM_HOOKSHOT,
 };
 
@@ -121,7 +121,7 @@ s32 comboGetSlotExtras(u32 slot, u8** outItemPtr, u32* outFlags, const u8** outT
         result = 4;
         break;
     case ITS_MM_GREAT_FAIRY_SWORD:
-        *outFlags = gMmExtraItems.hammer;
+        *outFlags = gMmExtraItems.hammerGFS;
         *outTable = kMmGFSHammer;
         *outTableSize = ARRAY_SIZE(kMmGFSHammer);
         result = 5;
