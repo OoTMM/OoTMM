@@ -265,7 +265,7 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   OOT_FISH: "Fish (OoT)",
   OOT_GERUDO_CARD: "Gerudo's Membership Card",
   OOT_GS_TOKEN: "Gold Skulltula Token",
-  OOT_HAMMER: "Megaton Hammer",
+  OOT_HAMMER: "Megaton Hammer (OoT)",
   OOT_HEART_CONTAINER: "Heart Container (OoT)",
   OOT_HEART_PIECE: "Piece of Heart (OoT)",
   OOT_HOOKSHOT: "Progressive Hookshot (OoT)",
@@ -826,6 +826,8 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   MM_SOUL_ENEMY_THIEVES: 'Soul of the Fighting Pirates',
   SHARED_SOUL_NPC_THIEVES: 'Soul of the Patrolling Thieves and their Chief',
   SHARED_SOUL_ENEMY_THIEVES: 'Soul of Fighting Thieves',
+  MM_HAMMER: 'Megaton Hammer (MM)',
+  SHARED_HAMMER: 'Megaton Hammer'
 };
 
 export function itemName(item: string) {
