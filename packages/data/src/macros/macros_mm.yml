@@ -81,6 +81,9 @@
 "can_lift_silver": "setting(strengthMm) && has_strength_raw(2)"
 "can_lift_gold": "setting(strengthMm) && has_strength_raw(3)"
 
+# Megaton Hammer
+"can_hammer": "setting(hammerMm) && has_hammer_raw"
+
 # Ocarina
 "ocarina_button(x, y)": "cond(setting(ocarinaButtonsShuffleMm), cond(setting(sharedOcarinaButtons), has(y), has(x)), true)"
 "ocarina_button_a": "ocarina_button(BUTTON_A, SHARED_BUTTON_A)"
@@ -135,7 +138,7 @@
 "has_sword": "has_sword_level(1)"
 "has_weapon": "has_sword || has(GREAT_FAIRY_SWORD)"
 
-"can_break_boulders": "has_explosives || has_mask_goron"
+"can_break_boulders": "has_explosives || has_mask_goron || can_hammer"
 "can_use_fire_short_range": "can_use_fire_arrows || can_use_din"
 "can_break_snowballs": "can_break_boulders || can_use_fire_short_range"
 "can_use_lens": "can_use_lens_strict || trick(MM_LENS)"

@@ -662,7 +662,7 @@
     "Dodongo Grotto": "true"
     "Pillar Grotto": "true"
     "Scrub Grotto": "true"
-    "Termina Field Cow Grotto": "has_explosives"
+    "Termina Field Cow Grotto": "has_explosives || trick_keg_explosives || can_hammer"
     "Swamp Gossip Grotto": "true"
     "Mountain Gossip Grotto": "true"
     "Ocean Gossip Grotto": "can_break_boulders"
@@ -990,7 +990,7 @@
   exits:
     "Termina Field": "true"
   locations:
-    "Termina Field Dodongo Grotto": "soul_dodongo && (has_weapon || has_explosives || has_mask_goron || has_arrows)"
+    "Termina Field Dodongo Grotto": "soul_dodongo && (has_weapon || has_explosives || has_mask_goron || has_arrows || can_hammer)"
 "Pillar Grotto":
   region: ENTRANCE
   events:
@@ -1523,7 +1523,7 @@
     "Deku Palace Main": "has(MASK_DEKU) || trick(MM_PALACE_GUARD_SKIP) || short_hook_anywhere"
     "Deku Palace Upper": "(is_swamp_cleared || has(MASK_DEKU) || can_use_nayru) && can_use_beans"
   events:
-    NUTS: "soul_deku_baba && (has(MASK_DEKU) || short_hook_anywhere || ((is_swamp_cleared || has_hover_boots) && (can_fight || has_arrows || has_explosives || can_hookshot_short)))"
+    NUTS: "soul_deku_baba && (has(MASK_DEKU) || short_hook_anywhere || ((is_swamp_cleared || has_hover_boots) && (can_fight || has_arrows || has_explosives || can_hookshot_short || can_hammer)))"
 "Deku Palace Main":
   region: DEKU_PALACE
   exits:
@@ -2049,7 +2049,7 @@
     STICKS: "can_kill_baba_sticks"
     MUSHROOM: "has(MASK_SCENTS)"
   locations:
-    "Twin Islands Frozen Grotto Chest": "(has_explosives || trick_keg_explosives || (trick(MM_KEG_EXPLOSIVES) && event(POWDER_KEG_TRIAL)))"
+    "Twin Islands Frozen Grotto Chest": "has_explosives || trick_keg_explosives || (trick(MM_KEG_EXPLOSIVES) && event(POWDER_KEG_TRIAL))"
 "Near Goron Race":
   region: TWIN_ISLANDS
   exits:
@@ -2064,7 +2064,7 @@
     MAGIC: "true"
   exits:
     "Twin Islands": "true"
-    "Twin Islands Ramp Grotto": "has_explosives || trick_keg_explosives || (trick(MM_KEG_EXPLOSIVES) && event(POWDER_KEG_TRIAL))"
+    "Twin Islands Ramp Grotto": "has_explosives || trick_keg_explosives || (trick(MM_KEG_EXPLOSIVES) && event(POWDER_KEG_TRIAL)) || can_hammer"
   locations:
     "Twin Islands Small Snowball Ramp 1": "is_winter"
     "Twin Islands Small Snowball Ramp 2": "is_winter"
@@ -2245,7 +2245,7 @@
   exits:
     "Path to Snowhead Middle": "goron_fast_roll || hookshot_anywhere || (has_hover_boots && trick(MM_PATH_SNOWHEAD_HOVERS))"
     "Snowhead Entrance": "true"
-    "Path to Snowhead Grotto": "has_explosives || trick_keg_explosives"
+    "Path to Snowhead Grotto": "has_explosives || trick_keg_explosives || can_hammer"
   locations:
     "Path to Snowhead Big Snowball Back 1": "is_winter && can_break_snowballs"
     "Path to Snowhead Big Snowball Back 2": "is_winter && can_break_snowballs"
@@ -3010,7 +3010,7 @@
     RUPEES: "can_use_light_arrows && is_night && soul_bubble"
   exits:
     "Termina Field": "true"
-    "Road to Ikana Grotto": "has_mask_goron"
+    "Road to Ikana Grotto": "has_mask_goron || can_hammer"
     "Road to Ikana Center": "can_play_epona || short_hook_anywhere || (can_goron_bomb_jump && has_bombs)"
   locations:
     "Road to Ikana Chest": "can_hookshot || (can_hookshot_short && trick(MM_HARD_HOOKSHOT))"
@@ -3065,7 +3065,7 @@
     RUPEES: "true"
   exits:
     "Road to Ikana Center": "true"
-    "Ikana Graveyard Grotto": "has_explosives || trick_keg_explosives"
+    "Ikana Graveyard Grotto": "has_explosives || trick_keg_explosives || can_hammer"
     "Beneath The Graveyard Night 1": "soul_stalchild && has(MASK_CAPTAIN) && is_night1"
     "Beneath The Graveyard Night 2": "soul_stalchild && has(MASK_CAPTAIN) && is_night2"
     "Beneath The Graveyard Night 3": "soul_stalchild && has(MASK_CAPTAIN) && is_night3"
@@ -3135,7 +3135,7 @@
     "Beneath The Graveyard Night 1/2 Exchange": "short_hook_anywhere || has_hover_boots"
   locations:
     "Beneath The Graveyard Chest": "soul_enemy(SOUL_ENEMY_BAD_BAT) && (can_fight || has_explosives || has_arrows || can_hookshot_short || has(MASK_DEKU))"
-    "Beneath The Graveyard Song of Storms": "soul_composer_bros && soul_iron_knuckle && (has_weapon || has_mask_goron || has_explosives) && has_fire_sticks"
+    "Beneath The Graveyard Song of Storms": "soul_composer_bros && soul_iron_knuckle && (has_weapon || has_mask_goron || has_explosives || can_hammer) && has_fire_sticks"
     "Beneath The Graveyard Pot Night 1 Early 1": "true"
     "Beneath The Graveyard Pot Night 1 Early 2": "true"
     "Beneath The Graveyard Pot Night 1 Bats 1": "true"
@@ -3155,7 +3155,7 @@
     "Ikana Graveyard": "true"
     "Beneath The Graveyard Night 1/2 Exchange": "short_hook_anywhere || has_hover_boots"
   locations:
-    "Beneath The Graveyard HP": "soul_iron_knuckle && (has_explosives || trick_keg_explosives) && (can_use_lens || short_hook_anywhere)"
+    "Beneath The Graveyard HP": "soul_iron_knuckle && (has_explosives || trick_keg_explosives) && (can_use_lens || short_hook_anywhere) && (has_weapon || has_mask_goron || has_explosives || can_hammer)"
     "Beneath The Graveyard Pot Night 2 Early": "true"
     "Beneath The Graveyard Pot Night 2 Before Pit 1": "can_use_lens"
     "Beneath The Graveyard Pot Night 2 Before Pit 2": "can_use_lens"
