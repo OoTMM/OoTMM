@@ -71,7 +71,7 @@
 "can_hookshot": "can_hookshot_n(1)"
 "can_longshot": "can_hookshot_n(2)"
 "can_boomerang": "age_boomerang && has(BOOMERANG)"
-"can_hammer": "age_hammer && has(HAMMER)"
+"can_hammer": "age_hammer && has_hammer_raw"
 "has_bottle": "has(BOTTLE_EMPTY) || has(BOTTLE_MILK) || has(BOTTLE_POTION_RED) || has(BOTTLE_POTION_GREEN) || has(BOTTLE_POTION_BLUE) || (event(KING_ZORA_LETTER) && soul_npc(SOUL_NPC_KING_ZORA)) || has(BOTTLE_FAIRY) || has(BOTTLE_POE) || has(BOTTLE_BIG_POE) || has(BOTTLE_BLUE_FIRE)"
 "has_big_poe": "has_bottle && (event(BIG_POE) || renewable(BOTTLE_BIG_POE) || renewable(BIG_POE))"
 "can_use_beans": "is_child && has(MAGIC_BEAN)"
