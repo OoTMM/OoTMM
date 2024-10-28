@@ -1,6 +1,7 @@
 #include <combo.h>
 
 /* Hammer Animations - Patch AnimHeader Frame Count */
+/* TODO: Eventual cross-anim support */
 
 /* gPlayerAnim_Link_otituku_w -> gPlayerAnim_link_hammer_hit */
 PATCH_OBJECT OBJECT_GAMEPLAY_KEEP, 0xE4E8

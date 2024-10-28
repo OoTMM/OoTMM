@@ -1767,23 +1767,25 @@ PATCH_FUNC(0x80123960, Player_CustomActionToModelGroup)
 void Player_SetCustomItemActionUpperFunc(GameState_Play* play, Actor_Player* player) {
     PlayerUpperActionFunc* sPlayerUpperActionUpdateFuncs = (PlayerUpperActionFunc*)OverlayAddr(0x8085c9f0);
     void (*Player_SetUpperAction)(GameState_Play* play, Actor_Player* this, PlayerUpperActionFunc upperActionFunc) = OverlayAddr(0x8082f43c);
+    s8 upperItemAction = player->heldItemAction;
 
-    if (player->heldItemAction == PLAYER_CUSTOM_IA_HAMMER) {
-        /* If more custom items were to be added that go to this extent I would suggest a sPlayerCustomUpperActionUpdateFuncs array */
-        Player_SetUpperAction(play, player, sPlayerUpperActionUpdateFuncs[PLAYER_IA_SWORD_TWO_HANDED]);
-    } else {
-        Player_SetUpperAction(play, player, sPlayerUpperActionUpdateFuncs[player->heldItemAction]);
+    if (upperItemAction == PLAYER_CUSTOM_IA_HAMMER) {
+        upperItemAction = PLAYER_IA_SWORD_TWO_HANDED;
     }
+
+    /* If more custom items were to be added that go to this extent I would suggest a sPlayerCustomUpperActionUpdateFuncs array */
+    Player_SetUpperAction(play, player, sPlayerUpperActionUpdateFuncs[upperItemAction]);
 }
 
 void Player_RunCustomItemActionInitFunc(GameState_Play* play, Actor_Player* player, s32 itemAction) {
     PlayerInitItemActionFunc* sPlayerItemActionInitFuncs = (PlayerInitItemActionFunc*)OverlayAddr(0x8085cb3c);
-    
-    if (player->heldItemAction == PLAYER_CUSTOM_IA_HAMMER) {
-        sPlayerItemActionInitFuncs[PLAYER_IA_SWORD_TWO_HANDED](play, player);
-    } else {
-        sPlayerItemActionInitFuncs[itemAction](play, player);
+
+    if (itemAction == PLAYER_CUSTOM_IA_HAMMER) {
+        itemAction = PLAYER_IA_SWORD_TWO_HANDED;
     }
+
+    /* If more custom items were to be added that go to this extent I would suggest a sPlayerItemActionInitFuncs array */
+    sPlayerItemActionInitFuncs[itemAction](play, player);
 }
 
 PATCH_CALL(0x80830A14, Player_SetCustomItemActionUpperFunc);
@@ -1859,7 +1861,6 @@ static AttackAnimInfo sHammerAttackAnimInfo[] = {
 };
 
 AttackAnimInfo* Player_GetMeleeAttackAnimInfo(void* a0, Actor_Player* player, PlayerMeleeWeaponAnimation meleeWeaponAnim) {
-    asm("sw $a1, 0x0018 ($sp)"); /* keep player in a1 */
     AttackAnimInfo* sMeleeAttackAnimInfo = OverlayAddr(0x8085cd30);
     AttackAnimInfo* ret = &sMeleeAttackAnimInfo[meleeWeaponAnim];
 
@@ -1871,7 +1872,6 @@ AttackAnimInfo* Player_GetMeleeAttackAnimInfo(void* a0, Actor_Player* player, Pl
         }
     }
     
-    asm("lw $a1, 0x0018 ($sp)"); /* keep player in a1 */
     return ret;
 }
 
@@ -1903,9 +1903,6 @@ void Player_SpecialMeleeWeaponAnim(Actor_Player* this, void* a1, PlayerMeleeWeap
     } else if (this->heldItemAction == PLAYER_IA_DEKU_STICK) {
         *animation = PLAYER_MWA_FORWARD_SLASH_1H;
     }
-
-    /* compiler insists that a0 should have an item action in it but I disagree */
-    asm("addiu $a0, $s0, 0x0");
 }
 
 s32 Player_CanQuickspin(Actor_Player* this) {
