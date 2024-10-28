@@ -897,6 +897,12 @@ export class LogicPassWorldTransform {
       this.replaceItem(Items.MM_SHIELD_HERO,    Items.SHARED_SHIELD_HYLIAN);
     }
 
+    if(settings.sharedHammer) {
+      this.replaceItem(Items.OOT_HAMMER, Items.SHARED_HAMMER);
+    } else if (settings.hammerMm) {
+      this.addItem(Items.MM_HAMMER);
+    }
+
     /* Triforce hunt */
     if (settings.goal === 'triforce') {
       for (let i = 0; i < this.state.worlds.length; ++i) {

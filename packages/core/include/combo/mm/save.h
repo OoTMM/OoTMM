@@ -426,7 +426,8 @@ typedef struct
     u8 hookshot:2;
     u8 ocarina:2;
     u8 goldDust:1;
-    u8 unused:7;
+    u8 hammer:1;
+    u8 unused:2;
     u8 unused2;
 }
 MmExtraItems;

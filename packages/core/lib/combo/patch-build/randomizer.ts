@@ -824,7 +824,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     DOOR_OF_TIME_OPEN: settings.doorOfTime === 'open',
     OOT_OPEN_DEKU: settings.dekuTree === 'open',
     OOT_CLOSED_DEKU: settings.dekuTree === 'closed',
-    OOT_ADULT_DEKU:  world.resolvedFlags.openDungeonsOot.has('dekuTreeAdult'),
+    OOT_ADULT_DEKU: world.resolvedFlags.openDungeonsOot.has('dekuTreeAdult'),
     ER_DUNGEONS: settings.erDungeons !== 'none',
     ER_MAJOR_DUNGEONS: settings.erMajorDungeons,
     ER_BOSS: settings.erBoss !== 'none',
@@ -1017,6 +1017,8 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MM_PRE_ACTIVATED_OWL_IC: world.resolvedFlags.mmPreActivatedOwls.has('canyon'),
     MM_PRE_ACTIVATED_OWL_ST: world.resolvedFlags.mmPreActivatedOwls.has('tower'),
     MM_WELL_OPEN: settings.beneathWell === 'open',
+    MM_HAMMER: settings.hammerMm,
+    SHARED_HAMMER: settings.sharedHammer
   };
 
   for (const v in exprs) {
