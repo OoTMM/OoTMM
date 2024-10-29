@@ -1819,7 +1819,7 @@ void Player_GetCustomSwordLength(GameState_Play* play, Actor_Player* player) {
     }
 }
 
-static MeleeWeaponDamageInfo megatonHammerDmgInfo = { DMG_GORON_PUNCH | DMG_GORON_POUND, 2, 4, 2, 4 };
+static MeleeWeaponDamageInfo megatonHammerDmgInfo = { DMG_GORON_PUNCH, 2, 4, 2, 4 };
 
 void Player_SetMeleeWeaponInfo(Actor_Player* this, PlayerMeleeWeaponAnimation meleeWeaponAnim) {
     MeleeWeaponDamageInfo* D_8085D09C = OverlayAddr(0x8085D09C);
@@ -1827,17 +1827,23 @@ void Player_SetMeleeWeaponInfo(Actor_Player* this, PlayerMeleeWeaponAnimation me
     PlayerMeleeWeapon (*Player_GetMeleeWeaponHeld)(Actor_Player* this) = (void*)0x80124190;
     void (*func_80833728)(Actor_Player* this, s32 index, u32 dmgFlags, s32 damage) = OverlayAddr(0x80833728);
 
+    u32 dmgFlags;
     s32 damage;
 
     if (this->actor.id == AC_EN_TEST3) {
         /* Was Kafei originally intended to be able to punch? (Part of the original function)*/
         meleeWeaponAnim = PLAYER_MWA_GORON_PUNCH_LEFT;
         this->meleeWeaponAnimation = -1;
+        dmgFlags = dmgInfo->dmgFlags;
     } else if (this->heldItemAction == PLAYER_CUSTOM_IA_HAMMER) {
         dmgInfo = &megatonHammerDmgInfo;
+        dmgFlags = dmgInfo->dmgFlags;
+
+        if (gPlay->sceneId == SCE_MM_TEMPLE_WOODFALL && gPlay->roomCtx.curRoom.num == 0x08)
+            dmgFlags |= DMG_GORON_POUND; /* Hack for snapper miniboss */
     } else {
-        dmgInfo = &D_8085D09C[(this->transformation == MM_PLAYER_FORM_GORON) ? PLAYER_MELEEWEAPON_NONE
-                                                                          : Player_GetMeleeWeaponHeld(this)];
+        dmgInfo = &D_8085D09C[(this->transformation == MM_PLAYER_FORM_GORON) ? PLAYER_MELEEWEAPON_NONE : Player_GetMeleeWeaponHeld(this)];
+        dmgFlags = dmgInfo->dmgFlags;
     }
 
     damage =
@@ -1845,8 +1851,8 @@ void Player_SetMeleeWeaponInfo(Actor_Player* this, PlayerMeleeWeaponAnimation me
             ? ((this->transformation == MM_PLAYER_FORM_HUMAN) ? dmgInfo->dmgHumanStrong : dmgInfo->dmgTransformedStrong)
             : ((this->transformation == MM_PLAYER_FORM_HUMAN) ? dmgInfo->dmgHumanNormal : dmgInfo->dmgTransformedNormal);
 
-    func_80833728(this, 0, dmgInfo->dmgFlags, damage);
-    func_80833728(this, 1, dmgInfo->dmgFlags, damage);
+    func_80833728(this, 0, dmgFlags, damage);
+    func_80833728(this, 1, dmgFlags, damage);
 }
 
 PATCH_FUNC(0x8083375C, Player_SetMeleeWeaponInfo)
@@ -2144,7 +2150,7 @@ void Player_HammerShockwaveCheck(GameState_Play* play, Actor_Player* this) {
                 //func_80842A28(play, this);
                 Player_RequestQuakeAndRumble(play, this, NA_SE_IT_HAMMER_HIT);
                 EffectSsBlast_SpawnWhiteShockwave(play, &shockwavePos, &zeroVec, &zeroVec);
-                Actor_SetPlayerImpact(play, PLAYER_IMPACT_BONK, 2, 100.0f, &this->actor.world.pos); /* If set to PLAYER_IMPACT_GORON_GROUND_POUND, may have opened the goron shrine door */
+                Actor_SetPlayerImpact(play, PLAYER_IMPACT_GORON_GROUND_POUND, 2, 100.0f, &this->actor.world.pos);
                 play->actorCtx.unk2 = 4; /* flips some things over like tektites and snappers */
 
                 /* Somewhat unusual solution to flipping the goron switch without the pound damage type. */
