@@ -939,88 +939,6 @@ Gfx gLinkChildGoronBraceletDL[] = {
     gsSPEndDisplayList(),
 };
 
-/* Conveniently, OoT's Megaton Hammer only used GPK textures that still have equivalents in MM */
-const u32 gDekuStickTex = 0x0400CC30;
-const u32 gHilite1Tex = 0x0400C830;
-
-const Vtx sHammerVtx[] = {
-#include "sHammerVtx.vtx.inc"
-};
-
-static Gfx gHammerDL[] = {
-    gsSPMatrix(0x0D000300, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW),
-    gsDPPipeSync(),
-    gsDPSetTextureLUT(G_TT_NONE),
-    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
-    gsDPLoadTextureBlock(gDekuStickTex, G_IM_FMT_I, G_IM_SIZ_8b, 8, 8, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR |
-                         G_TX_WRAP, 3, 3, G_TX_NOLOD, G_TX_NOLOD),
-    gsDPSetCombineLERP(TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, 1, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
-    gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_OPA_SURF2),
-    gsSPClearGeometryMode(G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR),
-    gsSPSetGeometryMode(G_FOG),
-    gsSPDisplayList(0x0C000000),
-    gsDPSetPrimColor(0, 0, 79, 0, 0, 255),
-    gsSPVertex(&sHammerVtx[0], 9, 0),
-    gsSP2Triangles(0, 1, 2, 0, 3, 4, 2, 0),
-    gsSP2Triangles(5, 1, 0, 0, 2, 6, 0, 0),
-    gsSP2Triangles(7, 3, 5, 0, 7, 5, 0, 0),
-    gsSP2Triangles(8, 4, 3, 0, 4, 6, 2, 0),
-    gsSP2Triangles(3, 2, 1, 0, 3, 1, 5, 0),
-    gsDPPipeSync(),
-    gsSPTexture(0x07D0, 0x09C4, 0, G_TX_RENDERTILE, G_ON),
-    gsDPLoadTextureBlock(gHilite1Tex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR |
-                         G_TX_WRAP, 4, 4, G_TX_NOLOD, 15),
-    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, 1, COMBINED, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED),
-    gsSPSetGeometryMode(G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR),
-    gsDPSetPrimColor(0, 0, 155, 192, 201, 255),
-    gsSPVertex(&sHammerVtx[9], 3, 0),
-    gsSP1Triangle(0, 1, 2, 0),
-    gsSPVertex(&sHammerVtx[12], 32, 0),
-    gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
-    gsSP2Triangles(6, 7, 8, 0, 9, 10, 11, 0),
-    gsSP2Triangles(12, 13, 14, 0, 15, 16, 17, 0),
-    gsSP2Triangles(18, 19, 20, 0, 21, 22, 23, 0),
-    gsSP2Triangles(21, 23, 24, 0, 25, 26, 27, 0),
-    gsSP2Triangles(27, 28, 25, 0, 29, 30, 31, 0),
-    gsSPVertex(&sHammerVtx[44], 32, 0),
-    gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
-    gsSP2Triangles(6, 7, 8, 0, 9, 10, 11, 0),
-    gsSP2Triangles(12, 13, 14, 0, 15, 16, 17, 0),
-    gsSP2Triangles(18, 19, 20, 0, 21, 22, 23, 0),
-    gsSP2Triangles(24, 25, 26, 0, 27, 28, 29, 0),
-    gsSPVertex(&sHammerVtx[74], 29, 0),
-    gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
-    gsSP2Triangles(6, 7, 8, 0, 9, 10, 11, 0),
-    gsSP2Triangles(12, 13, 14, 0, 12, 15, 13, 0),
-    gsSP2Triangles(16, 17, 18, 0, 19, 20, 21, 0),
-    gsSP2Triangles(22, 23, 24, 0, 22, 25, 23, 0),
-    gsSP1Triangle(26, 27, 28, 0),
-    gsSPVertex(&sHammerVtx[103], 30, 0),
-    gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
-    gsSP2Triangles(6, 7, 8, 0, 9, 10, 11, 0),
-    gsSP2Triangles(12, 13, 14, 0, 15, 16, 17, 0),
-    gsSP2Triangles(18, 19, 20, 0, 21, 22, 23, 0),
-    gsSP2Triangles(24, 25, 26, 0, 27, 28, 29, 0),
-    gsSPVertex(&sHammerVtx[133], 32, 0),
-    gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
-    gsSP2Triangles(6, 7, 8, 0, 9, 10, 11, 0),
-    gsSP2Triangles(12, 13, 14, 0, 15, 16, 17, 0),
-    gsSP2Triangles(18, 19, 20, 0, 21, 22, 23, 0),
-    gsSP2Triangles(24, 25, 26, 0, 27, 28, 29, 0),
-    gsSP1Triangle(27, 30, 28, 0),
-    gsSPVertex(&sHammerVtx[164], 32, 0),
-    gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
-    gsSP2Triangles(3, 6, 4, 0, 7, 8, 9, 0),
-    gsSP2Triangles(10, 11, 12, 0, 13, 14, 15, 0),
-    gsSP2Triangles(16, 17, 18, 0, 19, 20, 21, 0),
-    gsSP2Triangles(22, 23, 24, 0, 22, 25, 23, 0),
-    gsSP2Triangles(26, 27, 28, 0, 26, 29, 27, 0),
-    gsSPVertex(&sHammerVtx[194], 9, 0),
-    gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
-    gsSP1Triangle(6, 7, 8, 0),
-    gsSPEndDisplayList(),
-};
-
 static int prepareObject(GameState_Play* play, u16 objectId)
 {
     void* obj;
@@ -1038,8 +956,12 @@ static int prepareObject(GameState_Play* play, u16 objectId)
 
 static void DrawHammer(GameState_Play* play)
 {
+    if (!prepareObject(play, CUSTOM_OBJECT_ID_EQ_HAMMER))
+        return;
+
     OPEN_DISPS(play->gs.gfx);
-    gSPDisplayList(POLY_OPA_DISP++, gHammerDL);
+    gSPMatrix(POLY_OPA_DISP++, 0x0D000300, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_EQ_HAMMER_0);
     CLOSE_DISPS();
 }
 
@@ -1127,8 +1049,7 @@ COSMETIC(MM_COLOR_TUNIC_KOKIRI, sTunicColors[0]);
 COSMETIC(MM_COLOR_TUNIC_GORON, sTunicColors[2]);
 COSMETIC(MM_COLOR_TUNIC_ZORA, sTunicColors[3]);
 
-void Player_SkelAnime_DrawFlexLod(GameState_Play* play, void** skeleton, Vec3s* jointTable, s32 dListCount,
-                                  OverrideLimbDrawOpa overrideLimbDraw, PostLimbDrawOpa postLimbDraw, Actor_Player* player, s32 lod)
+void Player_SkelAnime_DrawFlexLod(GameState_Play* play, void** skeleton, Vec3s* jointTable, s32 dListCount, OverrideLimbDrawOpa overrideLimbDraw, PostLimbDrawOpa postLimbDraw, Actor_Player* player, s32 lod)
 {
     OPEN_DISPS(play->gs.gfx);
 

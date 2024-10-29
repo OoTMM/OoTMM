@@ -42,6 +42,8 @@ static const ObjectTexturePatch kObjectTexturePatches[] = {
     { 0x33530, 0x453b0 },
     { 0x39450, 0x54f20 },
     { 0x53390, 0x7df10 },
+    { 0x00000, 0x0c830 }, /* gHilite1Tex */
+    { 0x01a00, 0x0CC30 }, /* gDekuStickTex */
 };
 
 ALIGNED(16) ObjectData kCustomObjectsTable[128];
@@ -161,7 +163,8 @@ static const ObjectPatch kObjectPatches[] = {
     { CUSTOM_OBJECT_ID_GI_MEDALLION_SHADOW, { 0x308, 0xd78 } },
     { CUSTOM_OBJECT_ID_GI_MEDALLION_LIGHT,  { 0x508, 0xf98 } },
     { CUSTOM_OBJECT_ID_BOMBCHU_BAG,         { 0x6a8, 0x8f0 } },
-    { CUSTOM_OBJECT_ID_GI_MASTER_SWORD,     { 0x11a8, 0x12a8 } }
+    { CUSTOM_OBJECT_ID_GI_MASTER_SWORD,     { 0x11a8, 0x12a8 } },
+    { CUSTOM_OBJECT_ID_EQ_HAMMER,           { 0x0d18, 0x0dc0 } },
 #endif
 };
 
