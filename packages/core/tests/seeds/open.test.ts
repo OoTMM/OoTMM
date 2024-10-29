@@ -1,7 +1,9 @@
+import { test, expect } from 'vitest';
+
 import { makeTestSeed } from '../helper';
 
 test("Can make a seed - open", async () => {
-  await makeTestSeed("OPEN", {
+  const res = await makeTestSeed("OPEN", {
     startingItems: {
       OOT_SONG_TIME: 1,
       MM_SONG_TIME: 1,
@@ -14,4 +16,6 @@ test("Can make a seed - open", async () => {
     shuffleMasterSword: false,
     shuffleGerudoCard: false,
   });
+
+  expect(res).toBeDefined();
 });

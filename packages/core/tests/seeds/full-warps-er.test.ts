@@ -1,7 +1,9 @@
+import { test, expect } from 'vitest';
+
 import { makeTestSeed } from '../helper';
 
 test("Can make a seed - Full ER: Separated Warps", async () => {
-  await makeTestSeed("FULL ER SEPARATED WARPS", {
+  const res = await makeTestSeed("FULL ER SEPARATED WARPS", {
     songs: 'anywhere',
     erDungeons: 'full',
     erBoss: 'full',
@@ -22,4 +24,5 @@ test("Can make a seed - Full ER: Separated Warps", async () => {
     erIkanaCastle: true,
     erSecretShrine: true,
   });
+  expect(res).toBeDefined();
 });

@@ -3,4 +3,10 @@ module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
   slowTestThreshold: 30,
+  extensionsToTreatAsEsm: ['.ts'],
+  globals: {
+    "ts-jest": {
+      useESM: true,
+    },
+  }
 };

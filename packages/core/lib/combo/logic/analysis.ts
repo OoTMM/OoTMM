@@ -4,9 +4,9 @@ import { World } from './world';
 import { Pathfinder, PathfinderState } from './pathfind';
 import { Monitor } from '../monitor';
 import { cloneDeep } from 'lodash';
-import { isLocationRenewable, makePlayerLocations, Location, makeLocation, locationData } from './locations';
+import { isLocationRenewable, Location, makeLocation, locationData } from './locations';
 import { ItemPlacement } from './solve';
-import { ItemGroups, ItemHelpers, Items, ItemsCount, PlayerItem, PlayerItems } from '../items';
+import { ItemGroups, ItemHelpers, Items, PlayerItem, PlayerItems } from '../items';
 import { ItemProperties } from './item-properties';
 
 const SIMPLE_DEPENDENCIES: {[k: string]: string[]} = {

@@ -5,7 +5,7 @@
     "build": "tsx ./lib/build.ts",
     "start": "tsx ./lib/cli.ts",
     "start:debug": "tsx ./lib/cli.ts --debug --config config.yml",
-    "test": "cross-env NODE_ENV=test jest",
+    "test": "vitest run --reporter=dot",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

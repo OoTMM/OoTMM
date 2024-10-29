@@ -1,7 +1,9 @@
-import { makeTestSeed } from "../helper";
+import { test, expect } from 'vitest';
+
+import { makeTestSeed } from '../helper';
 
 test("Can make a seed - MQ", async () => {
-  await makeTestSeed("MQ", {
+  const res = await makeTestSeed("MQ", {
     dungeon: {
       DT: 'mq',
       DC: 'mq',
@@ -17,4 +19,5 @@ test("Can make a seed - MQ", async () => {
       Ganon: 'mq',
     }
   });
+  expect(res).toBeDefined();
 });

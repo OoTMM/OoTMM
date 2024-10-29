@@ -1,7 +1,9 @@
+import { test, expect } from 'vitest';
+
 import { makeTestSeed } from '../helper';
 
 test("Can make a seed - Full ER", async () => {
-  await makeTestSeed("FULL ER", {
+  const res = await makeTestSeed("FULL ER", {
     songs: 'anywhere',
     erDungeons: 'full',
     erBoss: 'full',
@@ -25,4 +27,5 @@ test("Can make a seed - Full ER", async () => {
     erIkanaCastle: true,
     erSecretShrine: true,
   });
+  expect(res).toBeDefined();
 });

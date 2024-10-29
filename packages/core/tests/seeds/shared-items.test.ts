@@ -1,7 +1,9 @@
+import { test, expect } from 'vitest';
+
 import { makeTestSeed } from '../helper';
 
 test("Can make a seed - Shared Items", async () => {
-  await makeTestSeed("SHARED-ITEMS", {
+  const res = await makeTestSeed("SHARED-ITEMS", {
     sharedBows: true,
     sharedBombBags: true,
     sharedMagic: true,
@@ -24,4 +26,5 @@ test("Can make a seed - Shared Items", async () => {
     sharedWallets: true,
     sharedHealth: true,
   });
+  expect(res).toBeDefined();
 });

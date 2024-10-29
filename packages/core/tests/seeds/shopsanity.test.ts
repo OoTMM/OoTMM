@@ -1,8 +1,11 @@
+import { test, expect } from 'vitest';
+
 import { makeTestSeed } from '../helper';
 
 test("Can make a seed - shopsanity", async () => {
-  await makeTestSeed("SHOPSANITY", {
+  const res = await makeTestSeed("SHOPSANITY", {
     shopShuffleOot: "full",
     shopShuffleMm: "full",
   });
+  expect(res).toBeDefined();
 });

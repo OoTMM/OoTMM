@@ -1,7 +1,9 @@
+import { test, expect } from 'vitest';
+
 import { makeTestSeed } from '../helper';
 
 test("Can make a seed - allsanity", async () => {
-  await makeTestSeed("ALLSANITY", {
+  const res = await makeTestSeed("ALLSANITY", {
     songs: 'anywhere',
     goldSkulltulaTokens: 'all',
     housesSkulltulaTokens: 'all',
@@ -28,4 +30,5 @@ test("Can make a seed - allsanity", async () => {
     tingleShuffle: 'anywhere',
     owlShuffle: 'anywhere',
   });
+  expect(res).toBeDefined();
 });
