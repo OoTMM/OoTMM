@@ -1943,7 +1943,7 @@ s32 Player_CollideMeleeWithWall(GameState_Play* play, Actor_Player* this) {
                                     func_8082DF2C(play);
                                     Player_RequestQuakeAndRumble(play, this, NA_SE_IT_HAMMER_HIT);
                                     if (this->transformation == MM_PLAYER_FORM_GORON) {
-                                        Actor_SetPlayerImpact(play, PLAYER_IMPACT_BONK, 2, 100.0f,
+                                        Actor_SetPlayerImpact(play, PLAYER_IMPACT_GORON_GROUND_POUND, 2, 100.0f,
                                                               &this->actor.world.pos);
                                         func_800C0094(poly, pos.x, pos.y, pos.z, &sp64);
                                         Matrix_MtxFToYXZRot(&sp64, &actorRot, 1);
@@ -1952,7 +1952,7 @@ s32 Player_CollideMeleeWithWall(GameState_Play* play, Actor_Player* this) {
                                     }
 
                                     if (this->heldItemAction == PLAYER_CUSTOM_IA_HAMMER) {
-                                        Actor_SetPlayerImpact(play, PLAYER_IMPACT_BONK, 2, 100.0f, &this->actor.world.pos);
+                                        Actor_SetPlayerImpact(play, PLAYER_IMPACT_GORON_GROUND_POUND, 2, 100.0f, &this->actor.world.pos);
                                     }
 
                                     /*
