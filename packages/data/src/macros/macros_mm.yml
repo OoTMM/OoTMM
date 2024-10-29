@@ -135,8 +135,9 @@
 "break_hive": "has_weapon_range"
 
 "has_sword_level(n)": "cond(setting(sharedSwords), has(SHARED_SWORD, n), has(SWORD, n))"
-"has_sword": "has_sword_level(1)"
-"has_weapon": "has_sword || has(GREAT_FAIRY_SWORD) || can_hammer"
+"has_b_sword": "has_sword_level(1)"
+"has_sword": "has_b_sword || has(GREAT_FAIRY_SWORD)"
+"has_weapon": "has_sword || can_hammer"
 
 "can_break_boulders": "has_explosives || has_mask_goron || can_hammer"
 "can_use_fire_short_range": "can_use_fire_arrows || can_use_din"

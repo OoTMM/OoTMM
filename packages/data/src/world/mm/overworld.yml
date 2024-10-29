@@ -259,7 +259,7 @@
     "Clock Town East": "true"
     "Clock Town Fairy Fountain": "true"
     "Deku Playground": "true"
-    "Tingle Town": "soul_npc(SOUL_NPC_TINGLE) && is_day && (has_weapon_range || (has_sword && (trick(MM_NCT_TINGLE) || has_hover_boots)))"
+    "Tingle Town": "soul_npc(SOUL_NPC_TINGLE) && is_day && (has_weapon_range || (has_weapon && (trick(MM_NCT_TINGLE) || has_hover_boots)))"
     "Clock Town North Postbox": "true"
   events:
     HIDE_SEEK1: "soul_bombers && has_weapon_range && first_day"
@@ -500,12 +500,12 @@
   stay:
     NIGHT3_PM_11_00: "false"
   locations:
-    "Swordsman School HP": "soul_carpet_man && has_sword && can_use_wallet(1) && before(NIGHT3_PM_11_00)"
-    "Swordsman School Pot 1": "has_sword && after(NIGHT3_AM_12_00)"
-    "Swordsman School Pot 2": "has_sword && after(NIGHT3_AM_12_00)"
-    "Swordsman School Pot 3": "has_sword && after(NIGHT3_AM_12_00)"
-    "Swordsman School Pot 4": "has_sword && after(NIGHT3_AM_12_00)"
-    "Swordsman School Pot 5": "has_sword && after(NIGHT3_AM_12_00)"
+    "Swordsman School HP": "soul_carpet_man && has_b_sword && can_use_wallet(1) && before(NIGHT3_PM_11_00)"
+    "Swordsman School Pot 1": "has_b_sword && after(NIGHT3_AM_12_00)"
+    "Swordsman School Pot 2": "has_b_sword && after(NIGHT3_AM_12_00)"
+    "Swordsman School Pot 3": "has_b_sword && after(NIGHT3_AM_12_00)"
+    "Swordsman School Pot 4": "has_b_sword && after(NIGHT3_AM_12_00)"
+    "Swordsman School Pot 5": "has_b_sword && after(NIGHT3_AM_12_00)"
 "Lottery":
   region: ENTRANCE
   events:
@@ -2074,7 +2074,7 @@
   exits:
     "Twin Islands": "true"
     "Front of Lone Peak Shrine": "is_winter"
-    "Goron Shrine": "(soul_goron && (first_day || (can_hammer && (can_use_fire_short_range || has_hot_water_mtn || has_hot_water_er || has_hot_water_farore || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE)))))) || has_mask_goron"
+    "Goron Shrine": "(soul_goron && (first_day || can_hammer)) || has_mask_goron"
   events:
     POWDER_KEG_TRIAL: "soul_medigoron && (is_spring || can_use_fire_short_range) && has_mask_goron"
     BUY_KEG: "soul_medigoron && event(POWDER_KEG_TRIAL) && event(TRIAL_BOULDER) && has(POWDER_KEG) && can_use_wallet(2)"
