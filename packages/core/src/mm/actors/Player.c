@@ -1890,6 +1890,23 @@ Actor* Player_FindGrottoNearPos(GameState_Play* play, Vec3f* refPos, f32 distanc
     return NULL;
 }
 
+/* This function hits all of the active colliders for all of the HakuginPost actors */
+/* This seems bad, but because these actors have a somewhat deranged check to make sure you're in front and facing it, I think this is okay. */
+void Player_HammerBonkHakuginPost(BgHakuginPost* hakuginPost) {
+    BgHakuginPostUnkStruct* hakuginPostCrazyStruct = actorAddr(AC_BG_HAKUGIN_POST, 0x80a9e028);
+    ColliderCylinder* collider;
+    s32 i;
+
+    for (i = 0; i < hakuginPostCrazyStruct->count; i++) {
+        collider = hakuginPostCrazyStruct->unk_0000[i].collider;
+
+        /* Force hit one of the Hakugin_Post colliders belonging to the one you just smacked with a hammer */
+        if (collider != NULL) {
+            collider->base.acFlags |= AC_HIT;
+        }
+    }
+}
+
 s32 Player_CollideMeleeWithWall(GameState_Play* play, Actor_Player* this) {
     void (*func_808400CC)(GameState_Play* play, Actor_Player* this) = OverlayAddr(0x808400CC);
     void (*func_80840094)(GameState_Play* play, Actor_Player* this) = OverlayAddr(0x80840094);
@@ -1961,15 +1978,19 @@ s32 Player_CollideMeleeWithWall(GameState_Play* play, Actor_Player* this) {
                                         may also have been intended for the Hammer, but this is not in OoT so I blocked it off anyway.
                                         When enabled it just makes the hammer hit dynapoly objects multiple times.
                                     */
-                                    if (bgId != BGCHECK_SCENE && this->heldItemAction != PLAYER_CUSTOM_IA_HAMMER) {
-                                        if (this->heldItemAction != PLAYER_CUSTOM_IA_HAMMER) {
-                                            temp_v0 = DynaPoly_GetActor(&play->colCtx, bgId);
+                                    if (bgId != BGCHECK_SCENE) {
+                                        temp_v0 = DynaPoly_GetActor(&play->colCtx, bgId);
 
+                                        if (this->heldItemAction != PLAYER_CUSTOM_IA_HAMMER) {
                                             if (((this->meleeWeaponQuads[0].base.atFlags & AT_HIT) &&
                                                 (&temp_v0->actor == this->meleeWeaponQuads[0].base.at)) ||
                                                 ((this->meleeWeaponQuads[1].base.atFlags & AT_HIT) &&
                                                 (&temp_v0->actor == this->meleeWeaponQuads[1].base.at))) {
                                                 return 0;
+                                            }
+                                        } else if (temp_v0 != NULL) { /* hammer versus dynapoly object */
+                                            if (temp_v0->actor.id == AC_BG_HAKUGIN_POST) { /* inactive snowhead temple ice pillar */
+                                                Player_HammerBonkHakuginPost((BgHakuginPost*)temp_v0);
                                             }
                                         }
                                     }

@@ -59,6 +59,7 @@
 #  include <combo/mm/actors/Obj_Grass_Carry.h>
 #  include <combo/mm/actors/En_Kusa.h>
 #  include <combo/mm/actors/En_Elf.h>
+#  include <combo/mm/actors/Bg_Hakugin_Post.h>
 # endif
 
 # include <combo/sfx_source.h>
