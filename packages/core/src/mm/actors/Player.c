@@ -1893,23 +1893,17 @@ Actor* Player_FindGrottoNearPos(GameState_Play* play, Vec3f* refPos, f32 distanc
 /* This function hits all of the active colliders for all of the HakuginPost actors */
 /* This seems bad, but because these actors have a somewhat deranged check to make sure you're in front and facing it, I think this is okay. */
 void Player_HammerBonkHakuginPost(BgHakuginPost* hakuginPost) {
-    ActorOverlay* gActorOverlayTable = (ActorOverlay*)0x801aefd0;
-    void* hakuginPostOvlRamAddr = gActorOverlayTable[AC_BG_HAKUGIN_POST].loadedRamAddr;
+    BgHakuginPostUnkStruct* hakuginPostCrazyStruct = actorAddr(AC_BG_HAKUGIN_POST, 0x80a9e028);
+    ColliderCylinder* collider;
+    s32 i;
 
-    if (hakuginPostOvlRamAddr != NULL) { /* Should be impossible for this to be NULL if you just hit a hakugin post with your Hammer, but... */
-        BgHakuginPostUnkStruct* hakuginPostCrazyStruct = hakuginPostOvlRamAddr + ((void*)0x80a9e028 - gActorOverlayTable[AC_BG_HAKUGIN_POST].vramStart);
-        ColliderCylinder* collider;
-        s32 i;
+    for (i = 0; i < hakuginPostCrazyStruct->count; i++) {
+        collider = hakuginPostCrazyStruct->unk_0000[i].collider;
 
-        for (i = 0; i < hakuginPostCrazyStruct->count; i++) {
-            collider = hakuginPostCrazyStruct->unk_0000[i].collider;
-
-            /* Force hit one of the Hakugin_Post colliders belonging to the one you just smacked with a hammer */
-            if (collider != NULL) {
-                collider->base.acFlags |= AC_HIT;
-            }
+        /* Force hit one of the Hakugin_Post colliders belonging to the one you just smacked with a hammer */
+        if (collider != NULL) {
+            collider->base.acFlags |= AC_HIT;
         }
-
     }
 }
 
