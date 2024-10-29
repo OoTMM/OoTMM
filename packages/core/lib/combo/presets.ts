@@ -44,6 +44,7 @@ const BLITZ_BASE: PartialDeep<Settings> = {
   spellFireMm: true,
   spellWindMm: true,
   spellLoveMm: true,
+  hammerMm: true,
   sharedBows: true,
   sharedBombBags: true,
   sharedMagic: true,
@@ -74,6 +75,7 @@ const BLITZ_BASE: PartialDeep<Settings> = {
   sharedBootsHover: true,
   sharedTunicGoron: true,
   sharedTunicZora: true,
+  sharedHammer: true,
   blastMaskOot: true,
   stoneMaskOot: true,
   elegyOot: true,
@@ -633,6 +635,7 @@ const PRESET_HELL = makeSettings({
     'MM_EVAN_FARORE',
     'MM_KEG_TRIAL_HEATLESS',
     'MM_HIVE_BOMBCHU',
+    'MM_STT_LAVA_SWITCH_HAMMER',
   ]
 });
 

@@ -399,6 +399,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
     base.sharedBootsHover = true;
     base.sharedTunicGoron = true;
     base.sharedTunicZora = true;
+    base.sharedHammer = true;
     break;
   default:
     base.sharedNutsSticks = booleanWeighted(random, 0.5);
@@ -412,6 +413,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
     base.sharedHealth = booleanWeighted(random, 0.5);
     base.sharedSoulsEnemy = booleanWeighted(random, 0.5);
     base.sharedSkeletonKey = booleanWeighted(random, 0.5);
+    base.sharedHammer = booleanWeighted(random, 0.5);
 
     /* Boots - grouping */
     switch (randomInt(random, 4)) {
@@ -522,6 +524,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
   base.shortHookshotMm = booleanWeighted(random, 0.25);
   base.blastMaskOot = booleanWeighted(random, 0.25);
   base.stoneMaskOot = booleanWeighted(random, 0.25);
+  base.hammerMm = booleanWeighted(random, 0.25);
 
   /* Boots - 50% disabled, 25% enabled, 25% individual */
   switch (randomInt(random, 4)) {

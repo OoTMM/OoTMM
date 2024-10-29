@@ -170,7 +170,7 @@
 #define ITEM_MM_LENS_OF_TRUTH               0x0e
 #define ITEM_MM_HOOKSHOT                    0x0f
 #define ITEM_MM_GREAT_FAIRY_SWORD           0x10
-#define ITEM_MM_BOTTLE_POTION_RED           0x11
+#define ITEM_MM_HOOKSHOT_SHORT              0x11
 #define ITEM_MM_BOTTLE_EMPTY                0x12
 #define ITEM_MM_POTION_RED                  0x13
 #define ITEM_MM_POTION_GREEN                0x14
@@ -306,7 +306,10 @@
 #define ITEM_MM_BOOTS_HOVER                 0xb2
 #define ITEM_MM_TUNIC_GORON                 0xb3
 #define ITEM_MM_TUNIC_ZORA                  0xb4
-/* If we want to use values above 0xb5 we need to fix a lot of code related to magic arrows */
+#define ITEM_MM_HAMMER                      0xb5
+#define ITEM_MM_CUSTOM_MAX                  0xb6
+
+/* Setting values above ITEM_MM_CUSTOM_MAX without updating this will cause magic arrow issues */
 
 #define ITEM_NONE       0xff
 

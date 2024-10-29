@@ -1789,6 +1789,15 @@ static int addItemSwordExtraOot(GameState_Play* play, u8 itemId, s16 gi, u16 par
     return 0;
 }
 
+static int addItemGFSHammer(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+{
+    itemId = kMmGFSHammer[param];
+    if (gMmSave.inventory.items[ITS_MM_GREAT_FAIRY_SWORD] == ITEM_NONE)
+        gMmSave.inventory.items[ITS_MM_GREAT_FAIRY_SWORD] = itemId;
+    gMmExtraItems.hammerGFS |= (1 << (u8)param);
+    return 0;
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -1889,6 +1898,7 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemEndgame,
     addElegyOot,
     addItemSwordExtraOot,
+    addItemGFSHammer,
 };
 
 extern const u8 kAddItemFuncs[];
@@ -2010,6 +2020,7 @@ static const SharedItem kSimpleSharedItems[] = {
     { CFG_SHARED_SWORDS, GI_OOT_SWORD_GILDED, GI_MM_SWORD_GILDED },
     { CFG_SHARED_SOULS_NPC, GI_OOT_SOUL_NPC_THIEVES, GI_MM_SOUL_NPC_THIEVES },
     { CFG_SHARED_SOULS_ENEMY, GI_OOT_SOUL_ENEMY_THIEVES, GI_MM_SOUL_ENEMY_THIEVES },
+    { CFG_SHARED_HAMMER, GI_OOT_HAMMER, GI_MM_HAMMER },
 };
 
 static int addItem(GameState_Play* play, s16 gi)

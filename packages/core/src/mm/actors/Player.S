@@ -1237,3 +1237,105 @@ PATCH_END
 PATCH_START 0x8085e958
 .int 0
 PATCH_END
+
+/* Hammer Related ASM */
+
+PATCH_START 0x80123960
+  addiu     sp, sp, -0x20
+  sw        ra, 0x0014 (sp)
+  jal       Player_CustomActionToModelGroup
+  nop
+  lw        ra, 0x0014 (sp)
+  jr        ra
+  addiu     sp, sp, 0x20
+PATCH_END
+
+PATCH_START 0x80128DDC
+  nop
+  jal       Player_GetCustomSwordLength
+  move      a1, s1
+  j         0x80128E24
+  nop
+PATCH_END
+
+Player_SpecialMeleeWeaponAnim_Hook:
+  addiu     sp, sp, -0x20
+  sw        ra, 0x0014 (sp)
+  jal       Player_SpecialMeleeWeaponAnim
+  nop
+  lw        ra, 0x0014 (sp)
+  addiu     sp, sp, 0x20
+  jr        ra
+  move      a0, s0
+
+PATCH_START 0x808336EC
+  nop
+  addiu     a2, sp, 0x0018
+  jal       Player_SpecialMeleeWeaponAnim_Hook
+  sw	      v1, 0x0018 (sp)
+  lw        v1, 0x0018 (sp)
+  jal       0x801241B4
+PATCH_END
+
+Player_GetMeleeAttackAnimInfo_Hook:
+  addiu     sp, sp, -0x20
+  sw        ra, 0x0014 (sp)
+  jal       Player_GetMeleeAttackAnimInfo
+  sw        a1, 0x0018 (sp)
+  lw        a1, 0x0018 (sp)
+  lw        ra, 0x0014 (sp)
+  jr        ra
+  addiu     sp, sp, 0x20
+
+
+PATCH_START 0x80833910
+  jal       Player_GetMeleeAttackAnimInfo_Hook
+  move      a2, s1
+PATCH_END
+
+PATCH_START 0x808548CC
+  move      a1, a0
+  jal       Player_GetMeleeAttackAnimInfo_Hook
+  lb        a2, 0x0ada (s0)
+  move      t9, v0
+  lw        a1, 0x0044 (sp)
+PATCH_END
+
+PATCH_START 0x8082FAF4
+  beq       t9, at, .+0x0C
+  addiu     at, zero, PLAYER_CUSTOM_IA_HAMMER
+  beql      t9, at, .+0x04
+PATCH_END
+
+/* Hammer Related Relocs */
+
+PATCH_START 0x8085E9E8
+  .int 0x00000000
+PATCH_END
+
+PATCH_START 0x80860A18
+  .int 0x00000000
+PATCH_END
+
+PATCH_START 0x80860A74
+  .int 0x00000000
+PATCH_END
+
+PATCH_START 0x80861D88
+  .int 0x00000000
+  .int 0x00000000
+PATCH_END
+
+Player_HammerShockwaveCheck_Hook:
+  lw	      a0, 0x0044 (sp)
+  sw        ra, 0x0024 (sp)
+  jal       Player_HammerShockwaveCheck
+  lw        a1, 0x0020 (sp)     
+  lw        ra, 0x0024 (sp)
+  jr ra
+  addiu     sp, sp, 0x40
+
+PATCH_START 0x80854C64
+  j Player_HammerShockwaveCheck_Hook
+  nop
+PATCH_END 

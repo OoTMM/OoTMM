@@ -423,11 +423,11 @@ MmExtraBoss;
 
 typedef struct
 {
-    u8 hookshot:2;
-    u8 ocarina:2;
-    u8 goldDust:1;
-    u8 unused:7;
-    u8 unused2;
+    u32 hookshot:2;
+    u32 ocarina:2;
+    u32 goldDust:1;
+    u32 hammerGFS:2;
+    u32 unused:25;
 }
 MmExtraItems;
 

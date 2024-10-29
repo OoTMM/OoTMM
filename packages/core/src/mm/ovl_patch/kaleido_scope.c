@@ -59,13 +59,13 @@ void KaleidoScope_LoadNamedItemCustom(void* segment, u32 texIndex)
     u32 isForeign = 0;
     switch (texIndex)
     {
-    case 0x5: /* MM Fairy Ocarina */
+    case ITEM_MM_OCARINA_FAIRY:
         isForeign = 1;
-        texIndex = 0x7b + 0x7; /* OoT Fairy Ocarina */
+        texIndex = 0x7b + ITEM_OOT_OCARINA_FAIRY;
         break;
-    case 0x11: /* MM OoT Hookshot */
+    case ITEM_MM_HOOKSHOT_SHORT:
         isForeign = 1;
-        texIndex = 0x7b + 0xA; /* OoT OoT Hookshot */
+        texIndex = 0x7b + ITEM_OOT_HOOKSHOT;
         break;
     case ITEM_MM_SPELL_FIRE:
         isForeign = 1;
@@ -94,6 +94,10 @@ void KaleidoScope_LoadNamedItemCustom(void* segment, u32 texIndex)
     case ITEM_MM_TUNIC_ZORA:
         isForeign = 1;
         texIndex = 0x7b + ITEM_OOT_TUNIC_ZORA;
+        break;
+    case ITEM_MM_HAMMER:
+        isForeign = 1;
+        texIndex = 0x7b + ITEM_OOT_HAMMER;
         break;
     }
     if (isForeign)
@@ -184,6 +188,16 @@ void KaleidoScope_ShowItemMessage(GameState_Play* play, u16 messageId, u8 yPosit
         comboTextAppendStr(&b, TEXT_COLOR_RED "Zora Tunic" TEXT_NL);
         comboTextAppendClearColor(&b);
         comboTextAppendStr(&b, "Wear this diving suit and you" TEXT_NL "won't drown underwater." TEXT_END);
+        break;
+    case ITEM_MM_HAMMER:
+        b = play->msgCtx.font.textBuffer.schar;
+        b[2] = 0xFE; /* Use No Icon */
+        b += 11;
+        comboTextAppendStr(&b, TEXT_COLOR_RED "Megaton Hammer" TEXT_NL);
+        comboTextAppendClearColor(&b);
+        comboTextAppendStr(&b, "Press " TEXT_COLOR_YELLOW "\xB2");
+        comboTextAppendClearColor(&b);
+        comboTextAppendStr(&b, " to smash and break " TEXT_NL "junk! It's so heavy, you need to " TEXT_NL "use two hands to swing it!" TEXT_END);
         break;
     }
 }
@@ -334,15 +348,16 @@ static u32 sCustomIcons[] = {
     ITEM_MM_BOOTS_HOVER,
     ITEM_MM_TUNIC_GORON,
     ITEM_MM_TUNIC_ZORA,
+    ITEM_MM_HAMMER,
 };
 
-s8 gPlayerFormCustomItemRestrictions[5][8] =
+s8 gPlayerFormCustomItemRestrictions[5][ITEM_MM_CUSTOM_MAX - ITEM_MM_CUSTOM_MIN] =
 {
     { 0, 0, 0, 0, 0, 0, 0, 0 },
     { 0, 0, 0, 0, 0, 0, 0, 0 },
     { 0, 0, 0, 0, 0, 0, 0, 0 },
     { 0, 0, 0, 0, 0, 0, 0, 0 },
-    { 1, 1, 1, -1, -1, -1, -1, 0 },
+    { 1, 1, 1, -1, -1, -1, -1, 1 },
 };
 
 typedef void (*KaleidoScope_GrayOutTextureRGBA32)(u32*, u16);
@@ -388,6 +403,9 @@ void KaleidoScope_LoadIcons(u32 vrom, void* dst, size_t* size)
         case ITEM_MM_TUNIC_ZORA:
             foreignIcon = ITEM_OOT_TUNIC_ZORA;
             break;
+        case ITEM_MM_HAMMER:
+            foreignIcon = ITEM_OOT_HAMMER;
+            break;
         default:
             continue;
         }
@@ -396,7 +414,7 @@ void KaleidoScope_LoadIcons(u32 vrom, void* dst, size_t* size)
         DMARomToRam((textureFileAddress + textureOffset) | PI_DOM1_ADDR2, (void*)customDestination, customIconSize);
 
         u8 customItemIndex = icon - ITEM_MM_CUSTOM_MIN;
-        if (customItemIndex >= 8 || !gPlayerFormCustomItemRestrictions[gSaveContext.save.playerForm][customItemIndex])
+        if (customItemIndex >= (ITEM_MM_CUSTOM_MAX - ITEM_MM_CUSTOM_MIN) || !gPlayerFormCustomItemRestrictions[gSaveContext.save.playerForm][customItemIndex])
         {
             KaleidoScope_GrayOutTextureRGBA32((u32*)customDestination, customIconSize);
         }
@@ -434,15 +452,16 @@ static u8 GetNextItem(u32 slot, s32* outTableIndex)
 }
 
 /* Vertex buffers. */
-static Vtx gVertexBufs[(4 * 5) * 2];
+static Vtx gVertexBufs[(4 * 6) * 2];
 
 /* Vertex buffer pointers. */
-static Vtx* gVertex[5] = {
+static Vtx* gVertex[6] = {
     &gVertexBufs[(4 * 0) * 2],
     &gVertexBufs[(4 * 1) * 2],
     &gVertexBufs[(4 * 2) * 2],
     &gVertexBufs[(4 * 3) * 2],
     &gVertexBufs[(4 * 4) * 2],
+    &gVertexBufs[(4 * 5) * 2],
 };
 
 static Vtx* GetVtxBuffer(GameState_Play* play, u32 vertIdx, u32 slot) {

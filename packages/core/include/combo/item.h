@@ -105,6 +105,7 @@
 #define IA_ENDGAME              0x60
 #define IA_OOT_SONG_EMPTINESS   0x61
 #define IA_OOT_SWORD_EXTRA      0x62
+#define IA_MM_GFS_HAMMER        0x63
 #define IA_NONE                 0xff
 
 #define ITT_NONE        0x00
@@ -196,6 +197,7 @@ extern const u8 kOotTradeAdult[];
 extern const u8 kMmTrade1[];
 extern const u8 kMmTrade2[];
 extern const u8 kMmTrade3[];
+extern const u8 kMmGFSHammer[];
 
 void comboSyncItems(void);
 

@@ -5,6 +5,7 @@
 #include <combo/math/vec.h>
 
 #define BG_ACTOR_MAX        50
+#define BGCHECK_SCENE       BG_ACTOR_MAX
 #define BGCHECK_Y_MIN       -32000.0f
 #define BGCHECK_XYZ_ABSMAX  32760.0f
 
@@ -91,6 +92,54 @@
 
 #endif
 
+/* MM bgcheck things */
+#if defined(GAME_MM)
+typedef enum FloorType {
+    /*  0 */ FLOOR_TYPE_0,
+    /*  1 */ FLOOR_TYPE_1,
+    /*  2 */ FLOOR_TYPE_2,
+    /*  3 */ FLOOR_TYPE_3,
+    /*  4 */ FLOOR_TYPE_4,
+    /*  5 */ FLOOR_TYPE_5,
+    /*  6 */ FLOOR_TYPE_6,
+    /*  7 */ FLOOR_TYPE_7,
+    /*  8 */ FLOOR_TYPE_8,
+    /*  9 */ FLOOR_TYPE_9,
+    /* 10 */ FLOOR_TYPE_10,
+    /* 11 */ FLOOR_TYPE_11,
+    /* 12 */ FLOOR_TYPE_12,
+    /* 13 */ FLOOR_TYPE_13,
+    /* 14 */ FLOOR_TYPE_14,
+    /* 15 */ FLOOR_TYPE_15
+} FloorType;
+
+typedef enum SurfaceMaterial {
+    /*  0 */ SURFACE_MATERIAL_DIRT,
+    /*  1 */ SURFACE_MATERIAL_SAND,
+    /*  2 */ SURFACE_MATERIAL_STONE,
+    /*  3 */ SURFACE_MATERIAL_DIRT_SHALLOW,
+    /*  4 */ SURFACE_MATERIAL_WATER_SHALLOW,
+    /*  5 */ SURFACE_MATERIAL_WATER_DEEP,
+    /*  6 */ SURFACE_MATERIAL_TALL_GRASS,
+    /*  7 */ SURFACE_MATERIAL_LAVA, // MAGMA?
+    /*  8 */ SURFACE_MATERIAL_GRASS,
+    /*  9 */ SURFACE_MATERIAL_BRIDGE, // WOOD_PLANK?
+    /* 10 */ SURFACE_MATERIAL_WOOD,
+    /* 11 */ SURFACE_MATERIAL_DIRT_SOFT,
+    /* 12 */ SURFACE_MATERIAL_ICE,
+    /* 13 */ SURFACE_MATERIAL_CARPET,
+    /* 14 */ SURFACE_MATERIAL_SNOW,
+    /* 15 */ SURFACE_MATERIAL_MAX
+} SurfaceMaterial;
+
+#define COLPOLY_NORMAL_FRAC (1.0f / 32767.0f)
+#define COLPOLY_SNORMAL(x) ((s16)((x) * 32767.0f))
+#define COLPOLY_GET_NORMAL(n) ((n)*COLPOLY_NORMAL_FRAC)
+#define COLPOLY_VIA_FLAG_TEST(vIA, flags) ((vIA) & (((flags)&7) << 13))
+#define COLPOLY_VTX_INDEX(vI) ((vI)&0x1FFF)
+
+#endif
+
 typedef struct Actor Actor;
 typedef struct Collider Collider;
 typedef struct CollisionCheckContext CollisionCheckContext;
@@ -158,7 +207,12 @@ s32 CollisionCheck_LineOCCheck(GameState_Play* play, CollisionCheckContext* colC
 /* Unsure if that same function exists in OoT */
 #if defined(GAME_MM)
 void CollisionCheck_SpawnShieldParticles(GameState_Play* play, Vec3f* v);
-f32 BgCheck_EntityRaycastFloor5(CollisionContext* colCtx, CollisionPoly** outPoly, s32* outBgId, struct Actor* actor, Vec3f* pos);
+f32 BgCheck_EntityRaycastFloor5(CollisionContext* colCtx, CollisionPoly** outPoly, s32* outBgId, Actor* actor, Vec3f* pos);
+s32 SurfaceType_IsIgnoredByEntities(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId);
+SurfaceMaterial SurfaceType_GetMaterial(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId);
+void CollisionCheck_SpawnShieldParticlesWood(GameState_Play* play, Vec3f* v, Vec3f* pos);
+s32 BgCheck_EntityLineTest2(CollisionContext* colCtx, Vec3f* posA, Vec3f* posB, Vec3f* posResult, CollisionPoly** outPoly, s32 checkWall, s32 checkFloor, s32 checkCeil, s32 checkOneFace, s32* bgId, Actor* actor);
+void EffectSsBlast_SpawnWhiteShockwave(GameState_Play* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel);
 
 #endif
 

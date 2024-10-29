@@ -98,3 +98,13 @@ PATCH_START 0x80121B54
    lhu    t4, 0x3f38 (t0)
   nop
 PATCH_END
+
+/* Patches for shifting magic arrow unique select item ID to allow more custom items */
+
+PATCH_START 0x80119296
+    .short ITEM_MM_CUSTOM_MAX
+PATCH_END
+
+PATCH_START 0x8011929E
+    .short 0 - ITEM_MM_CUSTOM_MAX
+PATCH_END

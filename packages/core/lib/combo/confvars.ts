@@ -206,6 +206,8 @@ export const CONFVARS = [
   'MM_PRE_ACTIVATED_OWL_IC',
   'MM_PRE_ACTIVATED_OWL_ST',
   'MM_WELL_OPEN',
+  'MM_HAMMER',
+  'SHARED_HAMMER',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

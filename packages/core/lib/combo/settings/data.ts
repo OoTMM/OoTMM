@@ -1730,6 +1730,14 @@ export const SETTINGS = [{
   default: false,
   cond: hasMM,
 }, {
+  key: 'hammerMm',
+  name: "Megaton Hammer (MM)",
+  category: 'items.extensions',
+  type: 'boolean',
+  description: "Adds Megaton Hammmr in Majora's Mask.",
+  default: false,
+  cond: hasMM,
+}, {
   key: 'extraChildSwordsOot',
   name: "Extra Child Swords (OoT)",
   category: 'items.extensions',
@@ -2214,6 +2222,13 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false,
   cond: (s: any) => hasOoTMM(s) && s.strengthMm,
+}, {
+  key: 'sharedHammer',
+  name: "Shared Megaton Hammer",
+  category: 'items.shared',
+  type: 'boolean',
+  default: false,
+  cond: (s: any) => hasOoTMM(s) && s.hammerMm,
 }, {
   key: 'agelessSwords',
   name: 'Ageless Swords',

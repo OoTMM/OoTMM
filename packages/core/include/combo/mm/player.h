@@ -411,6 +411,8 @@ typedef struct PlayerAgeProperties {
 
 #define PLAYER_LIMB_BUF_SIZE (ALIGN16(sizeof(PlayerAnimationFrame)) + 0xF)
 
+typedef void (*PlayerInitItemActionFunc)(struct GameState_Play* play, struct Actor_Player* this);
+
 typedef void (*PlayerActionFunc)(struct Actor_Player* this, struct GameState_Play* play);
 typedef s32 (*PlayerUpperActionFunc)(struct Actor_Player* this, struct GameState_Play* play);
 typedef void (*PlayerFuncD58)(struct GameState_Play* play, struct Actor_Player* this);
@@ -666,5 +668,76 @@ typedef struct {
 } PlayerMaskDList; /* size = 0x60 */
 
 #define GET_PLAYER_CUSTOM_BOOTS(player) (player->actor.id == AC_PLAYER && player->transformation == MM_PLAYER_FORM_HUMAN ? (player->currentBoots == 6 ? PLAYER_BOOTS_IRON : (player->currentBoots == 0 ? PLAYER_BOOTS_HOVER : -1)) : -1)
+
+// Relies on melee weapon related item actions to be contiguous
+#define GET_MELEE_WEAPON_FROM_IA(itemAction) ((itemAction) - PLAYER_IA_SWORD_MIN + 1)
+
+typedef enum PlayerMeleeWeapon {
+    /* 0 */ PLAYER_MELEEWEAPON_NONE,
+    /* 1 */ PLAYER_MELEEWEAPON_SWORD_KOKIRI = GET_MELEE_WEAPON_FROM_IA(PLAYER_IA_SWORD_KOKIRI),
+    /* 2 */ PLAYER_MELEEWEAPON_SWORD_RAZOR = GET_MELEE_WEAPON_FROM_IA(PLAYER_IA_SWORD_RAZOR),
+    /* 3 */ PLAYER_MELEEWEAPON_SWORD_GILDED = GET_MELEE_WEAPON_FROM_IA(PLAYER_IA_SWORD_GILDED),
+    /* 4 */ PLAYER_MELEEWEAPON_SWORD_TWO_HANDED = GET_MELEE_WEAPON_FROM_IA(PLAYER_IA_SWORD_TWO_HANDED),
+    /* 5 */ PLAYER_MELEEWEAPON_DEKU_STICK = GET_MELEE_WEAPON_FROM_IA(PLAYER_IA_DEKU_STICK),
+    /* 6 */ PLAYER_MELEEWEAPON_ZORA_FINS = GET_MELEE_WEAPON_FROM_IA(PLAYER_IA_ZORA_FINS),
+    /* 7 */ PLAYER_MELEEWEAPON_MAX,
+            PLAYER_MELEEWEAPON_HAMMER = GET_MELEE_WEAPON_FROM_IA(0x55), // deliberately placed after MAX
+} PlayerMeleeWeapon;
+
+typedef enum PlayerMeleeWeaponAnimation {
+    /*  0 */ PLAYER_MWA_FORWARD_SLASH_1H,      // Vertical one-handed slash
+    /*  1 */ PLAYER_MWA_FORWARD_SLASH_2H,      // Vertical two-handed slash
+    /*  2 */ PLAYER_MWA_FORWARD_COMBO_1H,      // Third vertical one-handed slash
+    /*  3 */ PLAYER_MWA_FORWARD_COMBO_2H,      // Third vertical two-handed slash
+    /*  4 */ PLAYER_MWA_RIGHT_SLASH_1H,        // Horizontal one-handed slash
+    /*  5 */ PLAYER_MWA_RIGHT_SLASH_2H,        // Horizontal two-handed slash
+    /*  6 */ PLAYER_MWA_RIGHT_COMBO_1H,        // Third horizontal one-handed slash
+    /*  7 */ PLAYER_MWA_RIGHT_COMBO_2H,        // Third horizontal two-handed slash
+    /*  8 */ PLAYER_MWA_LEFT_SLASH_1H,         // Targeted one-handed rightwalk slash
+    /*  9 */ PLAYER_MWA_LEFT_SLASH_2H,         // Targeted two-handed rightwalk slash
+    /* 10 */ PLAYER_MWA_LEFT_COMBO_1H,         // Third targeted one-handed rightwalk slash
+    /* 11 */ PLAYER_MWA_LEFT_COMBO_2H,         // Third targeted two-handed rightwalk slash
+    /* 12 */ PLAYER_MWA_STAB_1H,               // Crouch stab/targeted one-handed stab
+    /* 13 */ PLAYER_MWA_STAB_2H,               // Targeted two-handed stab
+    /* 14 */ PLAYER_MWA_STAB_COMBO_1H,         // Third targeted one-handed stab
+    /* 15 */ PLAYER_MWA_STAB_COMBO_2H,         // Third targeted two-handed stab
+    // These animations result in double damage
+    /* 16 */ PLAYER_MWA_FLIPSLASH_START,       // unused
+    /* 17 */ PLAYER_MWA_JUMPSLASH_START,       // Start of jumpslash
+    /* 18 */ PLAYER_MWA_ZORA_JUMPKICK_START,   // Start of Zora jump attack
+    /* 19 */ PLAYER_MWA_FLIPSLASH_FINISH,      // unused
+    /* 20 */ PLAYER_MWA_JUMPSLASH_FINISH,      // End of jumpslash
+    /* 21 */ PLAYER_MWA_ZORA_JUMPKICK_FINISH,  // End of Zora jump attack
+    /* 22 */ PLAYER_MWA_BACKSLASH_RIGHT,       // unused
+    /* 23 */ PLAYER_MWA_BACKSLASH_LEFT,        // unused
+    /* 24 */ PLAYER_MWA_GORON_PUNCH_LEFT,      // Goron punch
+    /* 25 */ PLAYER_MWA_GORON_PUNCH_RIGHT,     // Second Goron punch
+    /* 26 */ PLAYER_MWA_GORON_PUNCH_BUTT,      // Goron butt punch
+    /* 27 */ PLAYER_MWA_ZORA_PUNCH_LEFT,       // Zora punch
+    /* 28 */ PLAYER_MWA_ZORA_PUNCH_COMBO,      // Second Zora punch
+    /* 29 */ PLAYER_MWA_ZORA_PUNCH_KICK,       // Zora kick
+    /* 30 */ PLAYER_MWA_SPIN_ATTACK_1H,        // Half-charged one-handed spin
+    /* 31 */ PLAYER_MWA_SPIN_ATTACK_2H,        // Half-charged two-handed spin
+    /* 32 */ PLAYER_MWA_BIG_SPIN_1H,           // Fully-charged one-handed spin
+    /* 33 */ PLAYER_MWA_BIG_SPIN_2H,           // Fully-charged two-handed spin
+    /* 34 */ PLAYER_MWA_MAX
+} PlayerMeleeWeaponAnimation;
+
+typedef struct MeleeWeaponDamageInfo {
+    /* 0x0 */ s32 dmgFlags;
+    // Presumably these two fields are intended for Fierce Deity, but will also work for Deku if it can equip a sword
+    /* 0x4 */ u8 dmgTransformedNormal;
+    /* 0x5 */ u8 dmgTransformedStrong;
+    /* 0x6 */ u8 dmgHumanNormal;
+    /* 0x7 */ u8 dmgHumanStrong;
+} MeleeWeaponDamageInfo; // size = 0x8
+
+typedef struct AttackAnimInfo {
+    /* 0x00 */ PlayerAnimationHeader* unk_0;
+    /* 0x04 */ PlayerAnimationHeader* unk_4;
+    /* 0x08 */ PlayerAnimationHeader* unk_8;
+    /* 0x0C */ u8 unk_C;
+    /* 0x0D */ u8 unk_D;
+} AttackAnimInfo; // size = 0x10
 
 #endif

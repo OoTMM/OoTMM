@@ -7,7 +7,7 @@
   dungeon: PF
   exits:
     "Pirate Fortress": "true"
-    "Pirate Fortress Sewers": "underwater_walking && has_mask_goron"
+    "Pirate Fortress Sewers": "underwater_walking && (has_mask_goron || can_hammer)"
     "Pirate Fortress Entrance Balcony": "can_hookshot || (can_hookshot_short && trick(MM_PFI_BOAT_HOOK))"
     "Pirate Fortress Entrance Lookout": can_hookshot_short && trick(MM_PFI_BOAT_HOOK)
   events:

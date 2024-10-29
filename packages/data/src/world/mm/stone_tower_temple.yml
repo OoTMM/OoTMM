@@ -97,7 +97,7 @@
     "Stone Tower Temple Water Bridge": "(can_goron_bomb_jump && can_use_ice_arrows) || short_hook_anywhere"
     "WARP_SONGS": "true"
   events:
-    ST_WATER_CRYSTAL: "((has_mask_zora || has(MASK_DEKU) || can_use_ice_arrows) && can_use_light_arrows) || has_explosives || (has_magic && has_weapon && has(SPIN_UPGRADE)) || has_sword_level(3) || has(GREAT_FAIRY_SWORD)"
+    ST_WATER_CRYSTAL: "((has_mask_zora || has(MASK_DEKU) || can_use_ice_arrows) && can_use_light_arrows) || has_explosives || (has_magic && has_sword && has(SPIN_UPGRADE)) || has_sword_level(3) || has(GREAT_FAIRY_SWORD)"
   locations:
     "Stone Tower Temple Center Across Water Chest": "true"
     "Stone Tower Temple Center Sun Block Chest": "((has_mask_zora || (can_goron_bomb_jump && can_use_ice_arrows)) && can_use_light_arrows) || short_hook_anywhere"
@@ -129,15 +129,15 @@
 "Stone Tower Temple Mirrors Room":
   dungeon: ST
   exits:
-    "Stone Tower Temple Wind Room": "(has_mask_goron && has_mirror_shield) || can_use_light_arrows || short_hook_anywhere"
+    "Stone Tower Temple Wind Room": "((has_mask_goron || can_hammer) && has_mirror_shield) || can_use_light_arrows || short_hook_anywhere"
     "WARP_SONGS": "true"
   locations:
-    "Stone Tower Temple Mirrors Room Center Chest": "(has_mask_goron && has_mirror_shield) || can_use_light_arrows"
-    "Stone Tower Temple Mirrors Room Right Chest": "(has_mask_goron && has_mirror_shield) || can_use_light_arrows || short_hook_anywhere"
+    "Stone Tower Temple Mirrors Room Center Chest": "((has_mask_goron || can_hammer) && has_mirror_shield) || can_use_light_arrows"
+    "Stone Tower Temple Mirrors Room Right Chest": "((has_mask_goron || can_hammer) && has_mirror_shield) || can_use_light_arrows || short_hook_anywhere"
     "Stone Tower Temple Pot Mirror Room 1": "true"
     "Stone Tower Temple Pot Mirror Room 2": "true"
-    "Stone Tower Temple Crate Mirrors 1": "(has_mask_goron && has_mirror_shield) || can_use_light_arrows || short_hook_anywhere"
-    "Stone Tower Temple Crate Mirrors 2": "(has_mask_goron && has_mirror_shield) || can_use_light_arrows || short_hook_anywhere"
+    "Stone Tower Temple Crate Mirrors 1": "((has_mask_goron || can_hammer) && has_mirror_shield) || can_use_light_arrows || short_hook_anywhere"
+    "Stone Tower Temple Crate Mirrors 2": "((has_mask_goron || can_hammer) && has_mirror_shield) || can_use_light_arrows || short_hook_anywhere"
 "Stone Tower Temple Wind Room":
   dungeon: ST
   exits:
@@ -145,7 +145,7 @@
     "WARP_SONGS": "true"
   locations:
     "Stone Tower Temple Wind Room Ledge Chest": "has(MASK_DEKU) || (trick(MM_ST_UPDRAFTS) && (short_hook_anywhere || (has_hover_boots && has_iron_boots))) || hookshot_anywhere"
-    "Stone Tower Temple Wind Room Jail Chest": "(has(MASK_DEKU) || can_use_light_arrows || (short_hook_anywhere && has_weapon && trick(MM_ST_UPDRAFTS)) || hookshot_anywhere) && has_mask_goron"
+    "Stone Tower Temple Wind Room Jail Chest": "(has(MASK_DEKU) || can_use_light_arrows || (short_hook_anywhere && has_weapon && trick(MM_ST_UPDRAFTS)) || hookshot_anywhere) && (has_mask_goron || (can_hammer && has_iron_boots && has_mask_bunny && trick(MM_STT_LAVA_SWITCH_HAMMER)))"
     "Stone Tower Temple Pot Wind Room 1": "has(MASK_DEKU) || can_use_light_arrows || (short_hook_anywhere && has_weapon && trick(MM_ST_UPDRAFTS)) || hookshot_anywhere"
     "Stone Tower Temple Pot Wind Room 2": "has(MASK_DEKU) || can_use_light_arrows || (short_hook_anywhere && has_weapon && trick(MM_ST_UPDRAFTS)) || hookshot_anywhere"
     "Stone Tower Temple Pot Wind Room 3": "has(MASK_DEKU) || can_use_light_arrows || (short_hook_anywhere && has_weapon && trick(MM_ST_UPDRAFTS)) || hookshot_anywhere"
@@ -196,4 +196,4 @@
     "Stone Tower Temple Center Ledge": "(can_goron_bomb_jump && (can_use_ice_arrows || has_mask_zora)) || short_hook_anywhere"
     "WARP_SONGS": "true"
   locations:
-    "Stone Tower Temple Water Bridge Chest": "soul_enemy(SOUL_ENEMY_EYEGORE) && (has_explosives || has_arrows || can_hookshot_short || has_mask_zora || has_mask_goron)"
+    "Stone Tower Temple Water Bridge Chest": "soul_enemy(SOUL_ENEMY_EYEGORE) && (has_explosives || has_arrows || can_hookshot_short || has_mask_zora || has_mask_goron || can_hammer)"

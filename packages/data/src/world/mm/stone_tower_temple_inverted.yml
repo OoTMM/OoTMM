@@ -157,13 +157,13 @@
 "Stone Tower Temple Inverted Center Bridge":
   dungeon: IST
   exits:
-    "Stone Tower Temple Inverted Pre-Boss": "soul_enemy(SOUL_ENEMY_EYEGORE) && (has_explosives || has_arrows || can_hookshot_short || has_mask_zora || has_mask_goron)"
+    "Stone Tower Temple Inverted Pre-Boss": "soul_enemy(SOUL_ENEMY_EYEGORE) && (has_explosives || has_arrows || can_hookshot_short || has_mask_zora || has_mask_goron || can_hammer)"
     "Stone Tower Temple Inverted Gomess Corridor": "(trick(MM_ISTT_EYEGORE) && has_explosives) || has_mask_goron || has_hover_boots || short_hook_anywhere"
     "Stone Tower Temple Inverted Center": "(trick(MM_ISTT_EYEGORE) && has_explosives) || has_mask_goron || has_hover_boots || short_hook_anywhere"
     "Stone Tower Temple Inverted Entrance Top": "small_keys_st(4)"
     "WARP_SONGS": "true"
   locations:
-    "Stone Tower Temple Inverted Giant Mask": "soul_enemy(SOUL_ENEMY_EYEGORE) && (has_explosives || has_arrows || can_hookshot_short || has_mask_zora || has_mask_goron)"
+    "Stone Tower Temple Inverted Giant Mask": "soul_enemy(SOUL_ENEMY_EYEGORE) && (has_explosives || has_arrows || can_hookshot_short || has_mask_zora || has_mask_goron || can_hammer)"
 "Stone Tower Temple Inverted Pre-Boss":
   dungeon: IST
   exits:

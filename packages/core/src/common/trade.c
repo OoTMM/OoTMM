@@ -68,13 +68,18 @@ const u8 kMmTrade3[] = {
 };
 
 const u8 kMmHookshot[] = {
-    0x11, /* ITEM_MM_BOTTLE_POTION_RED but that enum is wrong */
+    ITEM_MM_HOOKSHOT_SHORT,
     ITEM_MM_HOOKSHOT,
 };
 
 const u8 kMmOcarina[] = {
     ITEM_MM_OCARINA_FAIRY,
     ITEM_MM_OCARINA_OF_TIME,
+};
+
+const u8 kMmGFSHammer[] = {
+    ITEM_MM_GREAT_FAIRY_SWORD,
+    ITEM_MM_HAMMER,
 };
 
 /* Return value is used to index gVertex */
@@ -114,6 +119,12 @@ s32 comboGetSlotExtras(u32 slot, u8** outItemPtr, u32* outFlags, const u8** outT
         *outTable = kMmOcarina;
         *outTableSize = ARRAY_SIZE(kMmOcarina);
         result = 4;
+        break;
+    case ITS_MM_GREAT_FAIRY_SWORD:
+        *outFlags = gMmExtraItems.hammerGFS;
+        *outTable = kMmGFSHammer;
+        *outTableSize = ARRAY_SIZE(kMmGFSHammer);
+        result = 5;
         break;
 #else
     case ITS_OOT_TRADE_ADULT:

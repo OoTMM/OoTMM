@@ -481,7 +481,7 @@
 - { id: MM_SWORD_RAZOR, item: MM_SWORD_RAZOR, type: MAJOR, add: [MM_SWORD, 2], flags: 0xa0, draw: MM_SWORD_RAZOR, object: [mm, 0x01f9], name: "the <C1>Razor Sword" }
 - { id: MM_SWORD_GILDED, item: MM_SWORD_GILDED, type: MAJOR, add: [MM_SWORD, 3], flags: 0xa0, draw: MM_SWORD_GILDED, object: [mm, 0x01fa], name: "the <C1>Gilded Sword" }
 - { id: MM_BOMBCHU_5, item: MM_BOMBCHU_5, type: NORMAL, add: [MM_BOMBCHU, 5], flags: 0xc0, draw: BOMBCHU, object: [mm, 0x00b0], name: "<C0>5 Bombchu" }
-- { id: MM_GREAT_FAIRY_SWORD, item: MM_GREAT_FAIRY_SWORD, type: MAJOR, add: MM_NORMAL, flags: 0xa0, draw: MM_GREAT_FAIRY_SWORD, object: [mm, 0x01fb], name: "the <C1>Great Fairy's Sword" }
+- { id: MM_GREAT_FAIRY_SWORD, item: MM_GREAT_FAIRY_SWORD, type: MAJOR, add: [MM_GFS_HAMMER, 0], flags: 0xa0, draw: MM_GREAT_FAIRY_SWORD, object: [mm, 0x01fb], name: "the <C1>Great Fairy's Sword" }
 - { id: MM_SMALL_KEY, item: MM_SMALL_KEY, type: KEY, add: [MM_SMALL_KEY, 0xffff], flags: 0xa0, draw: SMALL_KEY, object: [mm, 0x0086], name: "a <C0>Small Key" }
 - { id: MM_BOSS_KEY, item: MM_BOSS_KEY, type: BOSS_KEY, add: [MM_BOSS_KEY, 0xffff], flags: 0xa0, draw: BOSS_KEY, object: [mm, 0x0092], name: "the <C0>Boss Key" }
 - { id: MM_MAP, item: MM_MAP, type: MAP_COMPASS, add: [MM_MAP, 0xffff], flags: 0xa0, draw: MAP, object: [mm, 0x00a0], name: "the <C0>Dungeon Map" }
@@ -755,6 +755,7 @@
 - { id: MM_CLOCK5, type: MAJOR, add: [MM_CLOCK, 4], flags: 0xa0, draw: CLOCK, object: GI_CLOCK, name: "a <C1>Clock (Day 3)" }
 - { id: MM_CLOCK6, type: MAJOR, add: [MM_CLOCK, 5], flags: 0xa0, draw: CLOCK, object: GI_CLOCK, name: "a <C1>Clock (Night 3)" }
 - { id: MM_TRAP_RUPOOR, type: RUPEE, add: [MM_RUPEE, -10], flags: 0x80, draw: [RUPEE, 0], object: [mm, 0x013f], name: "a <COLOR_BLUE>Rupoor" }
+- { id: MM_HAMMER, item: MM_HAMMER, type: MAJOR, add: [MM_GFS_HAMMER, 1], flags: 0x80, draw: OOT_MEGATON_HAMMER, object: [oot, 0x00f6], name: "the <C1>Megaton Hammer" }
 - { id: MM_MASK_MAJORA, type: MAJOR, add: [ENDGAME, 1], flags: 0xa0, draw: MASK_MAJORA, object: GI_MASK_MAJORA, name: "<C3>Majora's Mask" }
 - { id: MM_SOLD_OUT, flags: 0xa0, draw: OOT_SOLD_OUT, object: [mm, 0x0113] }
 - { id: NOTHING,  flags: 0xa0, name: "<C0>Nothing" }
