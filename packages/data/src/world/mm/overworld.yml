@@ -64,7 +64,7 @@
     "OOT Market": "true"
     "Clock Tower Platform": "true"
   locations:
-    "Clock Town Owl Statue": "has_sticks || has_weapon"
+    "Clock Town Owl Statue": "has_sticks || has_sword"
 "Owl Milk Road":
   region: MILK_ROAD
   exits:
@@ -74,7 +74,7 @@
     ARROWS: "true"
     FAIRY: "true"
   locations:
-    "Milk Road Owl Statue": "has_sticks || has_weapon"
+    "Milk Road Owl Statue": "has_sticks || has_sword"
     "Milk Road Grass 1": "true"
     "Milk Road Grass 2": "true"
     "Milk Road Grass 3": "true"
@@ -88,7 +88,7 @@
     FAIRY: "true"
     WATER: "true"
   locations:
-    "Southern Swamp Owl Statue": "has_sticks || has_weapon"
+    "Southern Swamp Owl Statue": "has_sticks || has_sword"
     "Southern Swamp Grass Owl 1": "true"
     "Southern Swamp Grass Owl 2": "true"
 "Owl Woodfall":
@@ -100,7 +100,7 @@
     NUTS: "true"
     FAIRY: "true"
   locations:
-    "Woodfall Owl Statue": "has_sticks || has_weapon"
+    "Woodfall Owl Statue": "has_sticks || has_sword"
     "Woodfall Near Owl Chest": "has(MASK_DEKU) || can_hookshot"
     "Woodfall Pot 1": "true"
     "Woodfall Pot 2": "true"
@@ -115,7 +115,7 @@
     BOMBS_OR_BOMBCHU: "true"
     FAIRY: "true"
   locations:
-    "Mountain Village Owl Statue": "has_sticks || has_weapon"
+    "Mountain Village Owl Statue": "has_sticks || has_sword"
 "Owl Snowhead":
   region: SNOWHEAD
   exits:
@@ -126,7 +126,7 @@
     BOMBS_OR_BOMBCHU: "true"
     FAIRY: "true"
   locations:
-    "Snowhead Owl Statue": "has_sticks || has_weapon"
+    "Snowhead Owl Statue": "has_sticks || has_sword"
     "Snowhead Small Snowball 1": "true"
     "Snowhead Small Snowball 2": "true"
     "Snowhead Small Snowball 3": "true"
@@ -139,7 +139,7 @@
   events:
     PICTURE_TINGLE: "soul_npc(SOUL_NPC_TINGLE) && has(PICTOGRAPH_BOX)"
   locations:
-    "Great Bay Coast Owl Statue": "has_sticks || has_weapon"
+    "Great Bay Coast Owl Statue": "has_sticks || has_sword"
 "Owl Zora Cape":
   region: ZORA_CAPE
   exits:
@@ -150,7 +150,7 @@
     BOMBS_OR_BOMBCHU: "true"
     FAIRY: "true"
   locations:
-    "Zora Cape Owl Statue": "has_sticks || has_weapon"
+    "Zora Cape Owl Statue": "has_sticks || has_sword"
     "Zora Cape Pot Near Owl Statue 1": "true"
     "Zora Cape Pot Near Owl Statue 2": "true"
     "Zora Cape Pot Near Owl Statue 3": "true"
@@ -165,7 +165,7 @@
     BOMBS_OR_BOMBCHU: "true"
     FAIRY: "true"
   locations:
-    "Ikana Canyon Owl Statue": "has_sticks || has_weapon"
+    "Ikana Canyon Owl Statue": "has_sticks || has_sword"
     "Ikana Canyon Grass 1": "true"
     "Ikana Canyon Grass 2": "true"
     "Ikana Canyon Grass 3": "true"
@@ -180,7 +180,7 @@
     BOMBS_OR_BOMBCHU: "true"
     FAIRY: "true"
   locations:
-    "Stone Tower Owl Statue": "has_sticks || has_weapon"
+    "Stone Tower Owl Statue": "has_sticks || has_sword"
     "Stone Tower Pot Owl Statue 1": "true"
     "Stone Tower Pot Owl Statue 2": "true"
     "Stone Tower Pot Owl Statue 3": "true"
@@ -259,7 +259,7 @@
     "Clock Town East": "true"
     "Clock Town Fairy Fountain": "true"
     "Deku Playground": "true"
-    "Tingle Town": "soul_npc(SOUL_NPC_TINGLE) && is_day && (has_weapon_range || (has_weapon && (trick(MM_NCT_TINGLE) || has_hover_boots)))"
+    "Tingle Town": "soul_npc(SOUL_NPC_TINGLE) && is_day && (has_weapon_range || (has_sword && (trick(MM_NCT_TINGLE) || has_hover_boots)))"
     "Clock Town North Postbox": "true"
   events:
     HIDE_SEEK1: "soul_bombers && has_weapon_range && first_day"
@@ -990,7 +990,7 @@
   exits:
     "Termina Field": "true"
   locations:
-    "Termina Field Dodongo Grotto": "soul_dodongo && (has_weapon || has_explosives || has_mask_goron || has_arrows || can_hammer)"
+    "Termina Field Dodongo Grotto": "soul_dodongo && (has_weapon || has_explosives || has_mask_goron || has_arrows)"
 "Pillar Grotto":
   region: ENTRANCE
   events:
@@ -1864,7 +1864,7 @@
     "Mountain Village Keaton Grass Reward 7": "is_spring && keaton_grass_hard"
     "Mountain Village Keaton Grass Reward 8": "is_spring && keaton_grass_hard"
     "Mountain Village Keaton Grass Reward 9": "is_spring && keaton_grass_hard"
-    "Mountain Village Rupee": "is_spring && has_mask_goron"
+    "Mountain Village Rupee": "is_spring && (has_mask_goron || can_hammer)"
     "Mountain Village Hive": "is_spring && (break_hive || (has_bombchu && trick(MM_HIVE_BOMBCHU)))"
     "Mountain Village Potted Plant 1 Pot": "is_day"
     "Mountain Village Potted Plant 1 Grass": "is_day"
@@ -1969,7 +1969,7 @@
     "Goron Village": "true"
     "Near Goron Race": "has_mask_goron || scarecrow_hookshot || short_hook_anywhere"
     "Near Ramp Grotto": "has_mask_goron || short_hook_anywhere"
-    "Twin Islands Frozen Grotto": "is_spring || (is_winter && (can_use_fire_short_range || has_hot_water_mtn || has_hot_water_er || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE))))"
+    "Twin Islands Frozen Grotto": "is_spring || (is_winter && (can_use_fire_short_range || has_hot_water_mtn || has_hot_water_er || has_hot_water_farore || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE))))"
     "Tingle Mountain": "soul_npc(SOUL_NPC_TINGLE) && has_weapon_range"
   locations:
     "Twin Islands Underwater Chest 1": "is_spring && underwater_walking"
@@ -2074,7 +2074,7 @@
   exits:
     "Twin Islands": "true"
     "Front of Lone Peak Shrine": "is_winter"
-    "Goron Shrine": "(soul_goron && first_day) || has_mask_goron"
+    "Goron Shrine": "(soul_goron && (first_day || (can_hammer && (can_use_fire_short_range || has_hot_water_mtn || has_hot_water_er || has_hot_water_farore || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE)))))) || has_mask_goron"
   events:
     POWDER_KEG_TRIAL: "soul_medigoron && (is_spring || can_use_fire_short_range) && has_mask_goron"
     BUY_KEG: "soul_medigoron && event(POWDER_KEG_TRIAL) && event(TRIAL_BOULDER) && has(POWDER_KEG) && can_use_wallet(2)"
@@ -3135,7 +3135,7 @@
     "Beneath The Graveyard Night 1/2 Exchange": "short_hook_anywhere || has_hover_boots"
   locations:
     "Beneath The Graveyard Chest": "soul_enemy(SOUL_ENEMY_BAD_BAT) && (can_fight || has_explosives || has_arrows || can_hookshot_short || has(MASK_DEKU))"
-    "Beneath The Graveyard Song of Storms": "soul_composer_bros && soul_iron_knuckle && (has_weapon || has_mask_goron || has_explosives || can_hammer) && has_fire_sticks"
+    "Beneath The Graveyard Song of Storms": "soul_composer_bros && soul_iron_knuckle && (has_weapon || has_mask_goron || has_explosives) && has_fire_sticks"
     "Beneath The Graveyard Pot Night 1 Early 1": "true"
     "Beneath The Graveyard Pot Night 1 Early 2": "true"
     "Beneath The Graveyard Pot Night 1 Bats 1": "true"
@@ -3155,7 +3155,7 @@
     "Ikana Graveyard": "true"
     "Beneath The Graveyard Night 1/2 Exchange": "short_hook_anywhere || has_hover_boots"
   locations:
-    "Beneath The Graveyard HP": "soul_iron_knuckle && (has_explosives || trick_keg_explosives) && (can_use_lens || short_hook_anywhere) && (has_weapon || has_mask_goron || has_explosives || can_hammer)"
+    "Beneath The Graveyard HP": "soul_iron_knuckle && (has_explosives || trick_keg_explosives) && (can_use_lens || short_hook_anywhere) && (has_weapon || has_mask_goron || has_explosives)"
     "Beneath The Graveyard Pot Night 2 Early": "true"
     "Beneath The Graveyard Pot Night 2 Before Pit 1": "can_use_lens"
     "Beneath The Graveyard Pot Night 2 Before Pit 2": "can_use_lens"

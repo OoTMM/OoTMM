@@ -40,7 +40,7 @@
     "Swamp Skulltula Monument Room Torch": "gs"
     "Swamp Skulltula Pot Room Hive 1": "gs && (has_weapon_range || has_bombchu)"
     "Swamp Skulltula Pot Room Hive 2": "gs && (has_weapon_range || has_bombchu)"
-    "Swamp Skulltula Pot Room Behind Vines": "gs && has_weapon"
+    "Swamp Skulltula Pot Room Behind Vines": "gs && has_sword"
     "Swamp Skulltula Pot Room Pot 1": "gs"
     "Swamp Skulltula Pot Room Pot 2": "gs"
     "Swamp Skulltula Pot Room Jar": "gs"

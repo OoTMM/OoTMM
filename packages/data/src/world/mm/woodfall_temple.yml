@@ -69,7 +69,7 @@
     "Woodfall Temple Water Room": "true"
     "WARP_SONGS": "true"
   locations:
-    "Woodfall Temple Map": "soul_enemy(SOUL_ENEMY_SNAPPER) && (has(MASK_DEKU) || has_explosives || has_mask_goron)"
+    "Woodfall Temple Map": "soul_enemy(SOUL_ENEMY_SNAPPER) && (has(MASK_DEKU) || has_explosives || has_mask_goron || can_hammer)"
     "Woodfall Temple Grass Map Room 1": "true"
     "Woodfall Temple Grass Map Room 2": "true"
     "Woodfall Temple Grass Map Room 3": "true"
@@ -168,7 +168,7 @@
 "Woodfall Temple Boss Key Room":
   dungeon: WF
   exits:
-    "Woodfall Temple Boss Key Room Cage": "soul_enemy(SOUL_ENEMY_GEKKO) && has_arrows && (has(MASK_DEKU) || has_mask_goron || has_explosives)"
+    "Woodfall Temple Boss Key Room Cage": "soul_enemy(SOUL_ENEMY_GEKKO) && has_arrows && (has(MASK_DEKU) || has_mask_goron || can_hammer || has_explosives)"
     "WARP_SONGS": "true"
 "Woodfall Temple Boss Key Room Cage":
   dungeon: WF
@@ -214,7 +214,7 @@
 "Woodfall Temple Princess Jail":
   dungeon: WF
   events:
-    DEKU_PRINCESS: "has_weapon && soul_npc(SOUL_NPC_DEKU_PRINCESS)"
+    DEKU_PRINCESS: "has_sword && soul_npc(SOUL_NPC_DEKU_PRINCESS)"
   exits:
     "Woodfall": "true"
     "WARP_SONGS": "true"

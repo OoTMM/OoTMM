@@ -180,7 +180,7 @@
   region: MOON
   events:
     MAJORA_PHASE_1: "has_arrows || has_mask_zora || (has(MASK_FIERCE_DEITY) && has_magic)"
-    MAJORA: "!is_goal_triforce && event(MAJORA_PHASE_1) && (has_weapon || has_mask_zora || (has(MASK_FIERCE_DEITY) && has_magic))"
+    MAJORA: "!is_goal_triforce && event(MAJORA_PHASE_1) && (has_sword || has_mask_zora || (has(MASK_FIERCE_DEITY) && has_magic))"
   locations:
     "Moon Majora Pot 1": "(can_play_time || event(MAJORA))"
     "Moon Majora Pot 2": "(can_play_time || event(MAJORA))"

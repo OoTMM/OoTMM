@@ -635,6 +635,7 @@ const PRESET_HELL = makeSettings({
     'MM_EVAN_FARORE',
     'MM_KEG_TRIAL_HEATLESS',
     'MM_HIVE_BOMBCHU',
+    'MM_STT_LAVA_SWITCH_HAMMER',
   ]
 });
 

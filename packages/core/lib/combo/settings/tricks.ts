@@ -697,6 +697,11 @@ export const TRICKS: Tricks = {
     game: 'mm',
     name: 'Powder Keg Trial without Thawing Ice using Hookshot Anywhere',
   },
+  MM_STT_LAVA_SWITCH_HAMMER: {
+    game: 'mm',
+    name: 'Stone Tower Temple Lava Room switch without Goron',
+    tooltip: "The switch in the lava room with updrafts can be done without Goron by using Megaton Hammer, Iron Boots, and Bunny Hood. It has pretty tight timing.",
+  },
   GLITCH_OOT_EQUIP_SWAP: {
     game: 'oot',
     name: "Equip Swap (OoT)",

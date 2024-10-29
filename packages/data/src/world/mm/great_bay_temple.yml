@@ -129,7 +129,7 @@
 "Great Bay Temple Ice Arrow Room":
   dungeon: GB
   events:
-    MAGIC: "soul_enemy(SOUL_ENEMY_CHUCHU) && (has_weapon || has_mask_zora || has(MASK_DEKU) || has_explosives)"
+    MAGIC: "soul_enemy(SOUL_ENEMY_CHUCHU) && (has_sword || has_mask_zora || has(MASK_DEKU) || has_explosives)"
   exits:
     "Great Bay Temple Red Pipe 1": "true"
     "WARP_SONGS": "true"
