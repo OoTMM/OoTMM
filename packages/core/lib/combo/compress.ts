@@ -34,9 +34,10 @@ export const compressFile = async (data: Buffer): Promise<Buffer> => {
   }
 
   /* Cache miss - compress */
-  const compressed = await Yaz0.compress(data, 7);
+  const d = new Uint8Array(data.buffer, data.byteOffset, data.byteLength);
+  const compressed = await Yaz0.compress(d, 7);
   if (!process.env.BROWSER) {
     await fsRetry(() => fs.promises.writeFile(filename, compressed));
   }
-  return compressed;
+  return Buffer.from(compressed.buffer);
 };

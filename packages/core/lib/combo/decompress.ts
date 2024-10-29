@@ -7,7 +7,9 @@ import { Monitor } from './monitor';
 
 export const copyFile = async (src: Buffer, dst: Buffer, compressed: boolean) => {
   if (compressed) {
-    src = await Yaz0.decompress(src);
+    const srcD = new Uint8Array(src.buffer, src.byteOffset, src.byteLength);
+    const decompressed = await Yaz0.decompress(srcD);
+    src = Buffer.from(decompressed.buffer);
   }
   src.copy(dst);
 };

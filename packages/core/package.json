@@ -15,7 +15,7 @@
     "crc-32": "^1.2.2",
     "pngjs": "^7.0.0",
     "randombytes": "^2.1.0",
-    "yaz0": "^2.0.5"
+    "yaz0": "^3.0.1"
   },
   "main": "lib/combo/index.ts",
   "devDependencies": {
