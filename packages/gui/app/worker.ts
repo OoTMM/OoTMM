@@ -1,15 +1,12 @@
-import { Buffer } from 'buffer';
-globalThis.Buffer ||= Buffer;
-
 import JSZip from 'jszip';
-import { Settings, itemPool, Items, OptionsInput, GeneratorOutput, generate, locationList, makeSettings, makeRandomSettings, mergeSettings } from '@ootmm/core';
+import { itemPool, OptionsInput, GeneratorOutput, generate, locationList, makeSettings, makeRandomSettings, mergeSettings } from '@ootmm/core';
 import dataVersionZipFile from '@ootmm/core/dist/data.zip?url';
 
 async function makeDataPromise(path: string) {
   const reply = await fetch(path);
   if (reply.ok) {
     const ab = await reply.arrayBuffer();
-    return Buffer.from(ab);
+    return new Uint8Array(ab);
   } else {
     throw new Error(`Failed to download ${path}`);
   }
@@ -21,7 +18,7 @@ async function resolverFetchFunc(path: string) {
   const zip = await dataPromise;
   const file = zip.file(path);
   if (file) {
-    return file.async('arraybuffer').then(ab => Buffer.from(ab));
+    return file.async('uint8array');
   } else {
     throw new Error(`Failed to unzip file ${path}`);
   }
@@ -86,14 +83,14 @@ export type WorkerResult = WorkerResultCall | WorkerResultGenerate | WorkerResul
 
 async function readFile(f: File) {
   const reader = new FileReader();
-  return new Promise<Buffer>((resolve, reject) => {
+  return new Promise<Uint8Array>((resolve, reject) => {
     reader.onload = () => {
       const data = reader.result;
       if (!data) {
         reject(new Error('No data'));
         return;
       }
-      return resolve(Buffer.from(data as ArrayBuffer));
+      return resolve(new Uint8Array(data as ArrayBuffer));
     };
     reader.onerror = () => {
       reject(reader.error);
@@ -125,7 +122,7 @@ async function onTaskGenerate(task: WorkerTaskGenerate) {
     });
   };
   const [ootData, mmData] = await Promise.all([readFile(oot), readFile(mm)]);
-  let patchData: Buffer | undefined;
+  let patchData: Uint8Array | undefined;
   if (patch) {
     patchData = await readFile(patch);
   }

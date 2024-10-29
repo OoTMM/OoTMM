@@ -17,7 +17,7 @@ function fsRetry<T>(fn: () => Promise<T>, retries = 5): Promise<T> {
   });
 }
 
-export const compressFile = async (data: Buffer): Promise<Buffer> => {
+export const compressFile = async (data: Uint8Array): Promise<Uint8Array> => {
   let filename = "";
 
   if (!process.env.BROWSER) {
@@ -29,15 +29,14 @@ export const compressFile = async (data: Buffer): Promise<Buffer> => {
     /* Check for the file in cache */
     await fs.promises.mkdir(dir, { recursive: true });
     if (await fileExists(filename)) {
-      return fsRetry(() => fs.promises.readFile(filename));
+      return fsRetry(() => fs.promises.readFile(filename).then(x => new Uint8Array(x.buffer, x.byteOffset, x.byteLength)));
     }
   }
 
   /* Cache miss - compress */
-  const d = new Uint8Array(data.buffer, data.byteOffset, data.byteLength);
-  const compressed = await Yaz0.compress(d, 7);
+  const compressed = await Yaz0.compress(data, 7);
   if (!process.env.BROWSER) {
     await fsRetry(() => fs.promises.writeFile(filename, compressed));
   }
-  return Buffer.from(compressed.buffer);
+  return compressed;
 };

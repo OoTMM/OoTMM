@@ -1,6 +1,7 @@
 import fs from 'fs';
 
 import { Game } from './config';
+import { bufWriteI8, bufWriteU16BE, bufWriteU32BE, bufWriteU32LE, bufWriteU8 } from './util/buffer';
 
 export type Optional<T> = T extends {} ? {[K in keyof T]?: T[K]} : T | undefined;
 
@@ -94,52 +95,49 @@ export const gameId = (game: Game | 'shared', id: string, char: string) => {
 }
 
 export const toU8Buffer = (data: number[]) => {
-  const buf = Buffer.alloc(data.length);
-  for (let i = 0; i < data.length; ++i) {
-    buf.writeUInt8(data[i], i);
-  }
-  return buf;
+  return new Uint8Array(data);
 };
 
 export const toI8Buffer = (data: number[]) => {
-  const buf = Buffer.alloc(data.length);
+  const buf = new Uint8Array(data.length);
   for (let i = 0; i < data.length; ++i) {
-    buf.writeInt8(data[i], i);
+    bufWriteI8(buf, i, data[i]);
   }
   return buf;
 };
 
 export const toU16Buffer = (data: number[]) => {
-  const buf = Buffer.alloc(data.length * 2);
+  const buf = new Uint8Array(data.length * 2);
   for (let i = 0; i < data.length; ++i) {
-    buf.writeUInt16BE(data[i], i * 2);
+    bufWriteU16BE(buf, i * 2, data[i]);
   }
   return buf;
 };
 
 export const toU32Buffer = (data: number[]) => {
-  const buf = Buffer.alloc(data.length * 4);
+  const buf = new Uint8Array(data.length * 4);
   for (let i = 0; i < data.length; ++i) {
-    buf.writeUInt32BE(data[i], i * 4);
+    bufWriteU32BE(buf, i * 4, data[i]);
   }
   return buf;
 };
 
 export const toU32BufferLE = (data: number[]) => {
-  const buf = Buffer.alloc(data.length * 4);
+  const buf = new Uint8Array(data.length * 4);
   for (let i = 0; i < data.length; ++i) {
-    buf.writeUInt32LE(data[i], i * 4);
+    bufWriteU32LE(buf, i * 4, data[i]);
   }
   return buf;
 };
 
-export function padBuffer16(data: Buffer, fill = 0xff) {
+export function padBuffer16(data: Uint8Array, fill = 0xff) {
   const len = data.length;
   const newLen = align(len, 16);
   if (newLen === len) {
     return data;
   }
-  const buf = Buffer.alloc(newLen, fill);
-  data.copy(buf);
+  const buf = new Uint8Array(newLen);
+  buf.fill(fill);
+  buf.set(data);
   return buf;
 }

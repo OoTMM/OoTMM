@@ -6,7 +6,7 @@ import JSZip from 'jszip';
 export type ResultFile = {
   name: string;
   mime: string;
-  data: Buffer | Blob | string;
+  data: Uint8Array | Blob | string;
 };
 
 type Resolver = {

@@ -3,6 +3,7 @@ import { deflate, inflate } from 'pako';
 import { PartialDeep } from 'type-fest';
 
 import { DEFAULT_SETTINGS, SETTINGS, Settings, makeSettings } from '../settings';
+import { base64ToUint8Array, uint8ArrayToBase64 } from 'uint8array-extras';
 
 export function exportSettings(settings: Settings): string {
   const diff: any = {};
@@ -39,7 +40,7 @@ export function exportSettings(settings: Settings): string {
 
   const j = JSON.stringify(diff);
   const compressed = deflate(j);
-  const str = Buffer.from(compressed).toString('base64');
+  const str = uint8ArrayToBase64(compressed);
   return `v1.${str}`;
 }
 
@@ -61,14 +62,15 @@ export function importSettings(str: string): Settings {
 
 function importSettingsV1(str: string): any {
   const data = str.slice(3);
-  const buf = Buffer.from(data, 'base64');
+  const buf = base64ToUint8Array(data);
   const decompressed = inflate(buf, { to: 'string' });
   const partial = JSON.parse(decompressed);
   return partial;
 }
 
 function importSettingsV0(str: string): any {
-  const buf = Buffer.from(str, 'base64');
-  const partial = JSON.parse(buf.toString());
+  const bufBinary = base64ToUint8Array(str);
+  const buf = new TextDecoder().decode(bufBinary);
+  const partial = JSON.parse(buf);
   return partial;
 }

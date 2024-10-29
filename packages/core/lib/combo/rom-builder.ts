@@ -1,10 +1,11 @@
 import { compressFile } from './compress';
 import { CONFIG, Game } from './config';
 import { DmaData, DmaDataRecord } from './dma';
+import { bufReadU32BE, bufWriteU32BE } from './util/buffer';
 
 const rol = (v: number, b: number) => (((v << b) | (v >>> (32 - b))) & 0xffffffff) >>> 0;
 
-function checksum(rom: Buffer) {
+function checksum(rom: Uint8Array) {
   const seed = 0xdf26f436;
   let t1 = seed;
   let t2 = seed;
@@ -15,7 +16,7 @@ function checksum(rom: Buffer) {
 
   for (let i = 0; i < 0x100000 / 4; ++i) {
     const offset = 0x1000 + i * 4;
-    const d = rom.readUInt32BE(offset);
+    const d = bufReadU32BE(rom, offset);
     if ((((t6 + d) & 0xffffffff) >>> 0) < t6) {
       t4 = ((t4 + 1) & 0xffffffff) >>> 0;
     }
@@ -29,7 +30,7 @@ function checksum(rom: Buffer) {
       t2 = (t2 ^ t6 ^ d) >>> 0;
     }
     const offset2 = 0x750 + ((i * 4) & 0xff);
-    const x = rom.readUInt32BE(offset2);
+    const x = bufReadU32BE(rom, offset2);
     t1 = ((t1 + ((x ^ d) >>> 0)) & 0xffffffff) >>> 0;
   }
 
@@ -42,7 +43,7 @@ export type RomFile = {
   game: 'oot' | 'mm' | 'custom' | 'raw';
   index?: number;
   injected: boolean;
-  data: Buffer;
+  data: Uint8Array;
   paddr?: number;
   vaddr?: number;
   alias?: RomFile;
@@ -53,7 +54,7 @@ type AddFileArgs = Omit<RomFile, 'injected'>;
 
 export class RomBuilder {
   private files: RomFile[];
-  private out: Buffer;
+  private out: Uint8Array;
   private paddr: number;
   private vaddr: number;
   private dma: { oot: DmaData; mm: DmaData; };
@@ -61,12 +62,12 @@ export class RomBuilder {
 
   constructor() {
     this.files = [];
-    this.out = Buffer.alloc(64 * 1024 * 1024);
+    this.out = new Uint8Array(64 * 1024 * 1024);
     this.paddr = 0;
     this.vaddr = 0xc0000000;
     this.dma = {
-      oot: new DmaData(Buffer.alloc(CONFIG.oot.dmaCount * 0x10)),
-      mm: new DmaData(Buffer.alloc(CONFIG.mm.dmaCount * 0x10)),
+      oot: new DmaData(new Uint8Array(CONFIG.oot.dmaCount * 0x10)),
+      mm: new DmaData(new Uint8Array(CONFIG.mm.dmaCount * 0x10)),
     };
     this.extraDma = [];
   }
@@ -128,7 +129,7 @@ export class RomBuilder {
         this.out.set(compressedData, file.paddr);
         dma = { physStart: file.paddr, physEnd: file.paddr + compressedSizeAligned, virtStart: vaddr, virtEnd: vaddr + uncompressedSizeAligned };
         /* We cannot alias compressed data */
-        file.data = Buffer.alloc(0);
+        file.data = new Uint8Array(0);
         break;
       }
       case 'dummy':
@@ -172,7 +173,7 @@ export class RomBuilder {
     const f = this.fileByNameRequired(name);
     if (!f.injected) {
       f.type = 'dummy';
-      f.data = Buffer.alloc(0);
+      f.data = new Uint8Array(0);
     }
   }
 
@@ -208,8 +209,8 @@ export class RomBuilder {
 
   private fixChecksum() {
     const [c1, c2] = checksum(this.out);
-    this.out.writeUInt32BE(c1, 0x10);
-    this.out.writeUInt32BE(c2, 0x14);
+    bufWriteU32BE(this.out, 0x10, c1);
+    bufWriteU32BE(this.out, 0x14, c2);
   }
 
   async run() {
@@ -221,11 +222,12 @@ export class RomBuilder {
     /* Write DMA */
     const fileDmaOot = this.fileByName('oot/dmadata')!;
     const fileDmaMm = this.fileByName('mm/dmadata')!;
-    this.dma.oot.data().copy(this.out, fileDmaOot.paddr!);
-    this.dma.mm.data().copy(this.out, fileDmaMm.paddr!);
+    this.out.set(this.dma.oot.data(), fileDmaOot.paddr!);
+    this.out.set(this.dma.mm.data(), fileDmaMm.paddr!);
+
 
     /* Build extra DMA table */
-    const extraDmaBuffer = Buffer.alloc(this.extraDma.length * 0x10);
+    const extraDmaBuffer = new Uint8Array(this.extraDma.length * 0x10);
     const extraDma = new DmaData(extraDmaBuffer);
     for (let i = 0; i < this.extraDma.length; ++i) {
       extraDma.write(i, this.extraDma[i]);
@@ -233,23 +235,23 @@ export class RomBuilder {
 
     /* Write extra DMA */
     const extraDmaPaddr = this.paddr;
-    extraDmaBuffer.copy(this.out, extraDmaPaddr);
+    this.out.set(extraDmaBuffer, extraDmaPaddr);
 
     /* Build meta */
-    const meta = Buffer.alloc(0x1000);
+    const meta = new Uint8Array(0x1000);
     const payloadOot = this.fileByName('oot/payload')!;
     const payloadMm = this.fileByName('mm/payload')!;
-    meta.writeUInt32BE(extraDmaPaddr, 0x00);
-    meta.writeUInt32BE(this.extraDma.length, 0x04);
-    meta.writeUInt32BE(payloadOot.paddr!, 0x08);
-    meta.writeUInt32BE(payloadOot.data.length, 0x0c);
-    meta.writeUInt32BE(payloadMm.paddr!, 0x10);
-    meta.writeUInt32BE(payloadMm.data.length, 0x14);
-    meta.copy(this.out, this.out.length - meta.length);
+    bufWriteU32BE(meta, 0x00, extraDmaPaddr);
+    bufWriteU32BE(meta, 0x04, this.extraDma.length);
+    bufWriteU32BE(meta, 0x08, payloadOot.paddr!);
+    bufWriteU32BE(meta, 0x0c, payloadOot.data.length);
+    bufWriteU32BE(meta, 0x10, payloadMm.paddr!);
+    bufWriteU32BE(meta, 0x14, payloadMm.data.length);
+    this.out.set(meta, this.out.length - meta.length);
 
     /* Patch rom header */
-    Buffer.from('OOT+MM COMBO       ').copy(this.out, 0x20);
-    Buffer.from('NEDEP').copy(this.out, 0x3b);
+    this.out.set(new TextEncoder().encode('OOT+MM COMBO       '), 0x20);
+    this.out.set(new TextEncoder().encode('NEDEP'), 0x3b);
 
     /* Fix checksum */
     this.fixChecksum();

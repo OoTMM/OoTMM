@@ -13,7 +13,7 @@ import { makeResolver } from './resolve';
 
 export type GeneratorOutputFile = {
   name: string;
-  data: string | Buffer;
+  data: string | Uint8Array;
   mime: string;
 };
 
@@ -22,7 +22,7 @@ export type GeneratorOutput = {
   files: GeneratorOutputFile[];
 };
 
-function makeFile(opts: { name?: string, data: string | Buffer, mime: string, hash?: string, world?: number, ext: string }): GeneratorOutputFile {
+function makeFile(opts: { name?: string, data: string | Uint8Array, mime: string, hash?: string, world?: number, ext: string }): GeneratorOutputFile {
   let name = 'OoTMM';
 
   if (opts.name) {
@@ -44,18 +44,18 @@ function makeFile(opts: { name?: string, data: string | Buffer, mime: string, ha
 
 export class Generator {
   private monitor: Monitor;
-  private oot: Buffer;
-  private mm: Buffer;
+  private oot: Uint8Array;
+  private mm: Uint8Array;
   private opts: Options;
 
   constructor(
-    oot: Buffer | ArrayBuffer,
-    mm: Buffer | ArrayBuffer,
+    oot: Uint8Array,
+    mm: Uint8Array,
     opts: Options,
     monitorCallbacks: MonitorCallbacks,
   ) {
-    this.oot = Buffer.from(oot);
-    this.mm = Buffer.from(mm);
+    this.oot = oot;
+    this.mm = mm;
     this.opts = opts;
     this.monitor = new Monitor(monitorCallbacks, opts.debug);
   }
@@ -94,7 +94,7 @@ export class Generator {
       log = logicResult.log;
     } else {
       const patchfile = new Patchfile;
-      await patchfile.deserialize(Buffer.from(this.opts.patch));
+      await patchfile.deserialize(this.opts.patch);
       patchfiles = [patchfile];
     }
 
@@ -123,7 +123,7 @@ export class Generator {
     }
 
     if (log) {
-      files.push(makeFile({ name: 'Spoiler', hash: hashFileName, data: Buffer.from(log), mime: 'text/plain', ext: 'txt' }));
+      files.push(makeFile({ name: 'Spoiler', hash: hashFileName, data: log, mime: 'text/plain', ext: 'txt' }));
     }
 
     const endTime = performance.now();
@@ -136,8 +136,8 @@ export class Generator {
 };
 
 export type GeneratorParams = {
-  oot: Buffer,
-  mm: Buffer,
+  oot: Uint8Array,
+  mm: Uint8Array,
   opts?: OptionsInput,
   monitor?: MonitorCallbacks
 };

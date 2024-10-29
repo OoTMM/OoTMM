@@ -2,7 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import { FILES } from '@ootmm/data';
 
-import { GAMES, Game } from '../config';
+import { Game } from '../config';
 import { DmaData } from '../dma';
 import { splitObject } from './split';
 import { arrayToIndexMap, toU32Buffer } from '../util';
@@ -17,6 +17,7 @@ import { Options } from '../options';
 import { Patchfile } from '../patch-build/patchfile';
 import { grayscale } from '../image';
 import { CustomObjectsBuilder } from './custom-objects-builder';
+import { bufReadU32BE, bufWriteU32BE } from '../util/buffer';
 
 const FILES_TO_INDEX = {
   oot: arrayToIndexMap(FILES.oot),
@@ -82,7 +83,7 @@ const getObjectBuffer = async (roms: DecompressedRoms, game: Game, file: string)
     throw new Error(`File ${file} not found in game ${game}`);
   }
   const dmaEntry = dma.read(index);
-  return Buffer.from(rom.subarray(dmaEntry.virtStart, dmaEntry.virtEnd));
+  return rom.slice(dmaEntry.virtStart, dmaEntry.virtEnd);
 };
 
 /* TODO: Cache this */
@@ -108,14 +109,14 @@ const extractFileData = async (roms: DecompressedRoms, game: Game, file: string,
   return tex;
 };
 
-export const customExtractedFiles = async (roms: DecompressedRoms): Promise<{[k: string]: Buffer}> => ({
+export const customExtractedFiles = async (roms: DecompressedRoms): Promise<{[k: string]: Uint8Array}> => ({
   GRASS: await extractFileData(roms, 'oot', 'objects/gameplay_field_keep', 0xb140, 32 * 32 * 2).then(t => grayscale(t, 'rgba16', 0.25)),
   GRASS_ALT: await extractFileData(roms, 'oot', 'objects/gameplay_keep', 0x35BD0, 32 * 32 * 2).then(t => grayscale(t, 'rgba16', 0.25)),
   HIVE: await extractFileData(roms, 'mm', 'objects/object_comb', 0x0000, 32 * 32 * 2).then(t => grayscale(t, 'rgba16', 0.25)),
   BUTTERFLY: await extractFileData(roms, 'oot', 'objects/gameplay_field_keep', 0x2680, 32 * 64 * 2).then(t => grayscale(t, 'rgba16', 0.25)),
 });
 
-export const customFiles = async (opts: Options): Promise<{[k: string]: Buffer}> => ({
+export const customFiles = async (opts: Options): Promise<{[k: string]: Uint8Array}> => ({
   CHEST_MAJOR_FRONT: await png(opts, 'chests/major_front', 'rgba16'),
   CHEST_MAJOR_SIDE: await png(opts, 'chests/major_side', 'rgba16'),
   CHEST_KEY_FRONT: await png(opts, 'chests/key_front', 'rgba16'),
@@ -148,7 +149,7 @@ export const customFiles = async (opts: Options): Promise<{[k: string]: Buffer}>
   GLITTER: await png(opts, 'glitter', 'i4'),
 });
 
-export const customAssetsKeep = async (opts: Options): Promise<{[k: string]: Buffer}> => ({
+export const customAssetsKeep = async (opts: Options): Promise<{[k: string]: Uint8Array}> => ({
   DPAD: await png(opts, 'dpad', 'rgba16'),
   FONT: await font(opts, 'font_8x12'),
   SMALL_ICON_KEY: await png(opts, 'small_icon_key', 'rgba16'),
@@ -169,7 +170,7 @@ const extractRaw = async (roms: DecompressedRoms, game: Game, file: string, offs
   return obj.subarray(offset, offset + size);
 };
 
-export const extractedAssets = async (roms: DecompressedRoms): Promise<{[k: string]: Buffer}> => ({
+export const extractedAssets = async (roms: DecompressedRoms): Promise<{[k: string]: Uint8Array}> => ({
   SF_TEXTURE_1: await extractRaw(roms, 'mm', 'objects/gameplay_keep', 0x2c030, 16 * 32),
   SF_TEXTURE_2: await extractRaw(roms, 'mm', 'objects/gameplay_keep', 0x2c630, 16 * 16),
   SF_TEXTURE_3: await extractRaw(roms, 'mm', 'objects/gameplay_keep', 0x2bc30, 32 * 32),
@@ -218,7 +219,7 @@ class CustomAssetsBuilder {
     return objectId;
   }
 
-  addRawData(name: string | null, data: Buffer, compressed: boolean) {
+  addRawData(name: string | null, data: Uint8Array, compressed: boolean) {
     const sizeAligned = (data.length + 0xf) & ~0xf;
     const vrom = this.vrom;
     this.vrom += sizeAligned;
@@ -233,7 +234,7 @@ class CustomAssetsBuilder {
     return vrom;
   }
 
-  async addCustomObject(name: string, data: Buffer, defines: number[]) {
+  async addCustomObject(name: string, data: Uint8Array, defines: number[]) {
     const vrom = this.addRawData(`custom/${name.toLowerCase()}`, data, true);
     const objectId = this.addObjectEntry(vrom, data.length);
     this.cg.define('CUSTOM_OBJECT_ID_' + name, objectId);
@@ -276,18 +277,18 @@ class CustomAssetsBuilder {
 
   async extractSeqTable(game: Game, count: number, codeOffset: number, romOffset: number) {
     const seqTableDataOrig = await extractRaw(this.roms, game, 'code', codeOffset, count * 0x10);
-    const seqTableDataPatched = Buffer.alloc(0x80 * 0x10);
-    seqTableDataOrig.copy(seqTableDataPatched);
+    const seqTableDataPatched = new Uint8Array(0x80 * 0x10);
+    seqTableDataPatched.set(seqTableDataOrig);
     for (let i = 0; i < count; ++i) {
-      let addr = seqTableDataOrig.readUint32BE(i * 0x10);
-      let size = seqTableDataOrig.readUint32BE(i * 0x10 + 4);
+      let addr = bufReadU32BE(seqTableDataOrig, i * 0x10);
+      let size = bufReadU32BE(seqTableDataOrig, i * 0x10 + 4);
       if (!size) {
-        size = seqTableDataOrig.readUint32BE(addr * 0x10 + 4);
-        addr = seqTableDataOrig.readUint32BE(addr * 0x10);
+        size = bufReadU32BE(seqTableDataOrig, addr * 0x10 + 4);
+        addr = bufReadU32BE(seqTableDataOrig, addr * 0x10);
       }
       addr += romOffset;
-      seqTableDataPatched.writeUint32BE(addr, i * 0x10);
-      seqTableDataPatched.writeUint32BE(size, i * 0x10 + 4);
+      bufWriteU32BE(seqTableDataPatched, i * 0x10, addr);
+      bufWriteU32BE(seqTableDataPatched, i * 0x10 + 4, size);
     }
 
     if (game === 'oot') {
@@ -296,7 +297,7 @@ class CustomAssetsBuilder {
         const newOffset = newSeqNum * 0x10;
         const oldOffset = oldSeq * 0x10;
         const buf = seqTableDataPatched.subarray(oldOffset, oldOffset + 0x10);
-        buf.copy(seqTableDataPatched, newOffset);
+        seqTableDataPatched.set(buf, newOffset);
       }
     }
 
@@ -306,15 +307,15 @@ class CustomAssetsBuilder {
 
   async extractAudioTable(game: Game, count: number, codeOffset: number, romOffset: number) {
     const dataOrig = await extractRaw(this.roms, game, 'code', codeOffset, count * 0x10);
-    const dataPatched = Buffer.alloc(8 * 0x10);
-    dataOrig.copy(dataPatched);
+    const dataPatched = new Uint8Array(8 * 0x10);
+    dataPatched.set(dataOrig);
     for (let i = 0; i < count; ++i) {
-      let addr = dataOrig.readUint32BE(i * 0x10);
-      let size = dataOrig.readUint32BE(i * 0x10 + 4);
+      let addr = bufReadU32BE(dataOrig, i * 0x10);
+      let size = bufReadU32BE(dataOrig, i * 0x10 + 4);
       if (size) {
         addr += romOffset;
       }
-      dataPatched.writeUint32BE(addr, i * 0x10);
+      bufWriteU32BE(dataPatched, i * 0x10, addr);
     }
     const dataVrom = this.addRawData(`${game}/audio_table`, dataPatched, false);
     this.cg.define(`CUSTOM_AUDIO_TABLE_${game.toUpperCase()}_VROM`, dataVrom);
@@ -322,42 +323,42 @@ class CustomAssetsBuilder {
 
   async extractBankTable(game: Game, count: number, codeOffset: number, romOffset: number) {
     const dataOrig = await extractRaw(this.roms, game, 'code', codeOffset, count * 0x10);
-    const dataPatched = Buffer.alloc(0x30 * 0x10);
-    dataOrig.copy(dataPatched);
+    const dataPatched = new Uint8Array(0x30 * 0x10);
+    dataPatched.set(dataOrig);
     for (let i = 0; i < count; ++i) {
-      let addr = dataOrig.readUint32BE(i * 0x10);
-      let size = dataOrig.readUint32BE(i * 0x10 + 4);
+      let addr = bufReadU32BE(dataOrig, i * 0x10);
+      let size = bufReadU32BE(dataOrig, i * 0x10 + 4);
       if (!size) {
-        size = dataOrig.readUint32BE(addr * 0x10 + 4);
-        addr = dataOrig.readUint32BE(addr * 0x10);
+        size = bufReadU32BE(dataOrig, addr * 0x10 + 4);
+        addr = bufReadU32BE(dataOrig, addr * 0x10);
       }
       addr += romOffset;
-      dataPatched.writeUint32BE(addr, i * 0x10);
-      dataPatched.writeUint32BE(size, i * 0x10 + 4);
+      bufWriteU32BE(dataPatched, i * 0x10, addr);
+      bufWriteU32BE(dataPatched, i * 0x10 + 4, size);
     }
     const dataVrom = this.addRawData(`${game}/bank_table`, dataPatched, false);
     this.cg.define(`CUSTOM_BANK_TABLE_${game.toUpperCase()}_VROM`, dataVrom);
   }
 
   async extractCustomBankTable() {
-    const data = Buffer.alloc((0xf0 - 0x60) * 0x10);
+    const data = new Uint8Array((0xf0 - 0x60) * 0x10);
     const vrom = this.addRawData(`custom/bank_table`, data, false);
     this.cg.define(`CUSTOM_BANK_TABLE_CUSTOM_VROM`, vrom);
   }
 
   async extractSeqBanks(game: Game, count: number, codeOffset: number) {
     const seqBankDataRaw = await extractRaw(this.roms, game, 'code', codeOffset, count * 2);
-    const seqBankData = Buffer.alloc(0x80 * 2);
+    const seqBankData = new Uint8Array(0x80 * 2);
     for (let i = 0; i < count; ++i) {
-      const bankId = seqBankDataRaw.readUint8(i * 2);
-      seqBankData.writeUint8(bankId, i + 1);
+      const bankId = seqBankDataRaw[i * 2];
+      seqBankData[i + 1] = bankId;
     }
 
     if (game === 'oot') {
       for (const [newSeq, oldSeq] of Object.entries(AUDIO_COPIES_OOT)) {
         const newSeqNum = Number(newSeq);
-        const bankId = seqBankData.readUint8(oldSeq);
-        seqBankData.writeUint8(bankId, newSeqNum);
+        const bankId = seqBankData[oldSeq];
+        seqBankData[newSeqNum] = bankId;
       }
     }
 

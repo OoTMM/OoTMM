@@ -6,6 +6,7 @@ import { Game } from '../config';
 import { RomBuilder } from '../rom-builder';
 import { Monitor } from '../monitor';
 import { LogWriter } from '../util/log-writer';
+import { concatUint8Arrays } from 'uint8array-extras';
 
 type MusicType = 'bgm' | 'fanfare';
 
@@ -128,10 +129,10 @@ const MUSIC: {[k: string]: MusicEntry} = {
 
 type MusicFile = {
   type: 'bgm' | 'fanfare';
-  seq: Buffer;
+  seq: Uint8Array;
   bankIdOot: number | null;
   bankIdMm: number | null;
-  bankCustom: { meta: Buffer, data: Buffer } | null;
+  bankCustom: { meta: Uint8Array, data: Uint8Array } | null;
   filename: string;
   name: string;
   games: Game[];
@@ -224,7 +225,7 @@ function mmrSampleBank(sb: number) {
 
 class MusicInjector {
   private musics: MusicFile[];
-  private namesBuffer: Buffer;
+  private namesBuffer: Uint8Array;
   private bankId: number;
 
   constructor(
@@ -232,10 +233,10 @@ class MusicInjector {
     private monitor: Monitor,
     private builder: RomBuilder,
     private random: Random,
-    private musicZipData: Buffer,
+    private musicZipData: Uint8Array,
   ) {
     this.musics = [];
-    this.namesBuffer = Buffer.alloc(256 * 2 * 48);
+    this.namesBuffer = new Uint8Array(256 * 2 * 48);
     this.bankId = 0x60;
   }
 
@@ -243,15 +244,15 @@ class MusicInjector {
     return this.bankId >= 0xf0;
   }
 
-  private addCustomBank(meta: Buffer, data: Buffer) {
+  private addCustomBank(meta: Uint8Array, data: Uint8Array) {
     const bankId = this.bankId++;
     const dataVrom = this.appendAudio(data);
     const dataSize = data.length;
     const prefix = toU32Buffer([dataVrom, dataSize]);
-    const fullmeta = Buffer.concat([prefix, meta]);
+    const fullmeta = concatUint8Arrays([prefix, meta]);
     const customFile = this.builder.fileByNameRequired('custom/bank_table');
     const offset = (bankId - 0x60) * 0x10;
-    fullmeta.copy(customFile.data, offset);
+    customFile.data.set(fullmeta, offset);
     return bankId;
   }
 
@@ -261,13 +262,14 @@ class MusicInjector {
 
     /* Write to buffer */
     const offset = seqId * 48;
-    this.namesBuffer.write(name, offset, 'utf-8');
+    const nameEncoded = new TextEncoder().encode(name);
+    this.namesBuffer.set(nameEncoded, offset);
   }
 
   private async loadMusicsOotrs(files: JSZip.JSZipObject[]) {
     for (const f of files) {
       /* Get the music zip */
-      const musicZipBuffer = Buffer.from(await f.async('arraybuffer'));
+      const musicZipBuffer = await f.async('uint8array');
       let musicZip: JSZip;
       try {
         musicZip = await JSZip.loadAsync(musicZipBuffer);
@@ -332,13 +334,13 @@ class MusicInjector {
         continue;
       }
 
-      let bankCustom: { meta: Buffer, data: Buffer } | null = null;
+      let bankCustom: { meta: Uint8Array, data: Uint8Array } | null = null;
       let bankIdOot: number | null = null;
       let bankIdMm: number | null = null;
 
       if (filesBank.length) {
-        const bank = Buffer.from(await filesBank[0].async('arraybuffer'));
-        const bankmeta = Buffer.from(await filesBankmeta[0].async('arraybuffer'));
+        const bank = await filesBank[0].async('uint8array');
+        const bankmeta = await filesBankmeta[0].async('uint8array');
         if (bankmeta.length !== 0x08) {
           this.monitor.warn(`Skipped music file ${f.name}: invalid bankmeta length`);
           continue;
@@ -354,7 +356,7 @@ class MusicInjector {
       }
 
       /* Add the music */
-      const seq = Buffer.from(await seqFiles[0].async('arraybuffer'));
+      const seq = await seqFiles[0].async('uint8array');
       const music: MusicFile = { type, seq, bankIdOot, bankIdMm, bankCustom, filename, name, games };
       this.musics.push(music);
     }
@@ -363,7 +365,7 @@ class MusicInjector {
   private async loadMusicsMmrs(files: JSZip.JSZipObject[]) {
     for (const f of files) {
       /* Get the music zip */
-      const musicZipBuffer = Buffer.from(await f.async('arraybuffer'));
+      const musicZipBuffer = await f.async('uint8array');
       let musicZip: JSZip;
       try {
         musicZip = await JSZip.loadAsync(musicZipBuffer);
@@ -419,7 +421,7 @@ class MusicInjector {
       const bankIdRaw = zseqFilename.split('.')[0];
 
       /* Add the music */
-      const seq = Buffer.from(await zseqFiles[0].async('arraybuffer'));
+      const seq = await zseqFiles[0].async('uint8array');
       const games: Game[] = ['mm'];
       let type: MusicType;
       if (['8', '9', '10'].some(x => categories.includes(x))) {
@@ -430,21 +432,21 @@ class MusicInjector {
       const filename = f.name.split('/').pop()!;
       const name = saneName(filename.replace('.mmrs', ''));
 
-      let bankCustom: { meta: Buffer, data: Buffer } | null = null;
+      let bankCustom: { meta: Uint8Array, data: Uint8Array } | null = null;
       let bankIdOot: number | null = null;
       let bankIdMm: number | null = null;
 
       if (filesBank.length) {
-        const bank = Buffer.from(await filesBank[0].async('arraybuffer'));
-        const bankmeta = Buffer.from(await filesBankmeta[0].async('arraybuffer'));
+        const bank = await filesBank[0].async('uint8array');
+        const bankmeta = await filesBankmeta[0].async('uint8array');
         if (bankmeta.length !== 0x08) {
           this.monitor.warn(`Skipped music file ${f.name}: invalid bankmeta length`);
           continue;
         }
-        const sampleBank1 = mmrSampleBank(bankmeta.readUInt8(0x02));
-        const sampleBank2 = mmrSampleBank(bankmeta.readUInt8(0x03));
-        const sampleBanks = Buffer.from([sampleBank1, sampleBank2]);
-        sampleBanks.copy(bankmeta, 0x02);
+        const sampleBank1 = mmrSampleBank(bankmeta[0x02]);
+        const sampleBank2 = mmrSampleBank(bankmeta[0x03]);
+        const sampleBanks = new Uint8Array([sampleBank1, sampleBank2]);
+        bankmeta.set(sampleBanks, 0x02);
         bankCustom = { meta: bankmeta, data: bank };
         games.push('oot');
       } else {
@@ -460,13 +462,13 @@ class MusicInjector {
     }
   }
 
-  private async loadMusics(data: Buffer) {
+  private async loadMusics(data: Uint8Array) {
     const zip = await JSZip.loadAsync(data);
     await this.loadMusicsOotrs(zip.file(/\.ootrs$/));
     await this.loadMusicsMmrs(zip.file(/\.mmrs$/));
   }
 
-  private appendAudio(seq: Buffer) {
+  private appendAudio(seq: Uint8Array) {
     const vrom = this.builder.addFile({ game: 'custom', type: 'uncompressed', data: seq })!;
     return vrom;
   }
@@ -476,13 +478,11 @@ class MusicInjector {
     const fileSeqBanks = this.builder.fileByNameRequired(`${game}/seq_banks`);
 
     /* Patch the bank ID */
-    const bankIdBuf = Buffer.alloc(1);
-    bankIdBuf.writeUInt8(bankId);
-    bankIdBuf.copy(fileSeqBanks.data, slot);
+    fileSeqBanks.data[slot] = bankId;
 
     /* Add the pointer */
     const seqTableData = toU32Buffer([vrom, seqLength]);
-    seqTableData.copy(fileSeqTable.data, slot * 0x10);
+    fileSeqTable.data.set(seqTableData, slot * 0x10);
 
     /* Register the name */
     this.registerName(game === 'mm' ? slot + 256 : slot, name);
@@ -509,17 +509,14 @@ class MusicInjector {
   private patchOot() {
     /* Disable battle music */
     const filePlayerActor = this.builder.fileByNameRequired('oot/ovl_player_actor');
-    const z = Buffer.alloc(1);
-    z.writeUInt8(0);
-    z.copy(filePlayerActor.data, 0x1690f);
+    filePlayerActor.data[0x1690f] = 0;
   }
 
   private patchMm() {
     /* Disable battle music */
     const filePlayerActor = this.builder.fileByNameRequired('mm/ovl_player_actor');
-    const z = Buffer.alloc(2);
-    z.writeUInt16BE(0x1000);
-    z.copy(filePlayerActor.data, 0x16818);
+    filePlayerActor.data[0x16818] = 0x10;
+    filePlayerActor.data[0x16819] = 0x00;
   }
 
   private async shuffleMusics() {
@@ -571,7 +568,7 @@ class MusicInjector {
   }
 }
 
-export async function randomizeMusic(writer: LogWriter, monitor: Monitor, builder: RomBuilder, random: Random, data: Buffer) {
+export async function randomizeMusic(writer: LogWriter, monitor: Monitor, builder: RomBuilder, random: Random, data: Uint8Array) {
   const injector = new MusicInjector(writer, monitor, builder, random, data);
   await injector.run();
 }

@@ -70,7 +70,7 @@ function extractFiles(game: Game, roms: DecompressedRoms, romBuilder: RomBuilder
     const compressedEntry = compressedDma.read(i);
     const name = `${game}/${FILES[game][i]}`;
     if (compressedEntry.physEnd === 0xffffffff) {
-      romBuilder.addFile({ type: 'dummy', data: Buffer.alloc(0), name, game, index: i, vaddr: uncompressedEntry.virtStart });
+      romBuilder.addFile({ type: 'dummy', data: new Uint8Array(0), name, game, index: i, vaddr: uncompressedEntry.virtStart });
       continue;
     }
     const data = rom.subarray(uncompressedEntry.virtStart, uncompressedEntry.virtEnd);
@@ -95,7 +95,7 @@ type PackArgs = {
 };
 
 type PackOutput = {
-  rom: Buffer;
+  rom: Uint8Array;
   cosmeticLog: string | null;
 }
 
@@ -119,7 +119,7 @@ export async function pack(args: PackArgs): Promise<PackOutput> {
   for (const [filename, patchList] of Object.entries(patchfile.patches)) {
     const f = romBuilder.fileByNameRequired(filename);
     for (const patch of patchList) {
-      patch.data.copy(f.data, patch.addr);
+      f.data.set(patch.data, patch.addr);
     }
   }
 
@@ -130,7 +130,7 @@ export async function pack(args: PackArgs): Promise<PackOutput> {
   /* Add the extra files */
   for (const newFile of patchfile.newFiles) {
     const type = newFile.compressed ? 'compressed' : 'uncompressed';
-    const data = Buffer.from(newFile.data);
+    const data = new Uint8Array(newFile.data);
     const vaddr = newFile.vrom;
     let name = newFile.name;
     if (name === null) {

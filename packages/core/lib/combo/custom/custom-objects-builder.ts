@@ -4,7 +4,8 @@ import { Game } from '../config';
 import { DecompressedRoms } from '../decompress';
 import { DmaData } from '../dma';
 import { arrayToIndexMap } from '../util';
-import { ObjectEditor, ObjectEditorOut } from './object-editor';
+import { ObjectEditor } from './object-editor';
+import { concatUint8Arrays } from 'uint8array-extras';
 
 const FILES_TO_INDEX = {
   oot: arrayToIndexMap(FILES.oot),
@@ -13,7 +14,7 @@ const FILES_TO_INDEX = {
 
 export type CustomObject = {
   name: string;
-  data: Buffer;
+  data: Uint8Array;
   offsets: number[];
 };
 
@@ -31,19 +32,7 @@ export class CustomObjectsBuilder {
       throw new Error(`File ${filename} not found in game ${game}`);
     }
     const dmaEntry = dma.read(index);
-    return Buffer.from(rom.subarray(dmaEntry.virtStart, dmaEntry.virtEnd));
-  }
-
-  private async simpleExtract(name: string, game: Game, file: string, offsets: number[], segIn: number, segOut: number) {
-    const data = await this.getFile(game, file);
-    const editor = new ObjectEditor(segOut);
-    editor.loadSegment(segIn, data);
-    for (const offset of offsets) {
-      const list = editor.listData(offset)!;
-      editor.submitList(list);
-    }
-    const out = editor.build();
-    return { name, data: out.data, offsets: out.offsets };
+    return rom.slice(dmaEntry.virtStart, dmaEntry.virtEnd);
   }
 
   private async makeEqShieldMirror(): Promise<CustomObject> {
@@ -302,7 +291,7 @@ export class CustomObjectsBuilder {
     const b = 0x06016908;
     let data = editor.segData(b, 0x06016998 - b)!;
     const data2 = editor.listData(0x06018580)!;
-    const dataCombined = Buffer.concat([data, data2]);
+    const dataCombined = concatUint8Arrays([data, data2]);
 
     editor.submitList(dataCombined);
     return { name: 'EQ_BOOMERANG', ...editor.build() };

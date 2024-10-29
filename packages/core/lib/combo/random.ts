@@ -1,5 +1,3 @@
-import randomBytes from 'randombytes';
-
 export class Random {
   private state: number[] = [0, 0, 0, 0, 0];
   private counter: number = 0;
@@ -24,7 +22,7 @@ export class Random {
   }
 
   async seed(seed: string) {
-    const digest = await crypto.subtle.digest('SHA-512', Buffer.from(seed));
+    const digest = await crypto.subtle.digest('SHA-512', new TextEncoder().encode(seed));
     for (let i = 0; i < 5; ++i) {
       this.state[i] = new DataView(digest).getUint32(i * 4);
     }
@@ -33,7 +31,8 @@ export class Random {
 }
 
 export const randString = () => {
-  return randomBytes(48).toString('hex');
+  const bytes = crypto.getRandomValues(new Uint8Array(48));
+  return Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
 export const randomInt = (random: Random, max: number) => {

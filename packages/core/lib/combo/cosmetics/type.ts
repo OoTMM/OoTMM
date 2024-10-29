@@ -1,7 +1,7 @@
 import { ColorArg } from './color';
 import { COSMETICS } from './data';
 
-export type BufferPath = string | Buffer | ArrayBuffer | File;
+export type BufferPath = string | Uint8Array | File;
 
 type CosmeticsDataCommon = {
   readonly key: string;

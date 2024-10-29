@@ -709,7 +709,7 @@ async function run() {
   /* Get OoT ROM */
   const ootRomCompressed = await fs.readFile(__dirname + '/../../../roms/oot.z64');
   const ootDecompressed = await decompressGame('oot', ootRomCompressed);
-  const ootRom = ootDecompressed.rom;
+  const ootRom = Buffer.from(ootDecompressed.rom);
 
   /* Get MQ ROM */
   const mqRom = await fs.readFile(__dirname + '/../../../roms/mq.z64');

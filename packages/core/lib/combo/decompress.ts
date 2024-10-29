@@ -4,23 +4,22 @@ import CRC32 from 'crc-32';
 import { DmaData } from './dma';
 import { CONFIG, Game, GAMES } from './config';
 import { Monitor } from './monitor';
+import { bufReadU16LE, bufReadU32BE, bufReadU32LE, bufWriteU16BE, bufWriteU32BE } from './util/buffer';
 
-export const copyFile = async (src: Buffer, dst: Buffer, compressed: boolean) => {
+export const copyFile = async (src: Uint8Array, dst: Uint8Array, compressed: boolean) => {
   if (compressed) {
-    const srcD = new Uint8Array(src.buffer, src.byteOffset, src.byteLength);
-    const decompressed = await Yaz0.decompress(srcD);
-    src = Buffer.from(decompressed.buffer);
+    src = await Yaz0.decompress(src);
   }
-  src.copy(dst);
+  dst.set(src);
 };
 
 export type DecompressedGame = {
-  rom: Buffer,
-  dma: Buffer,
+  rom: Uint8Array,
+  dma: Uint8Array,
 };
 
-const swapIfNecessary = (rom: Buffer) => {
-  const sig = rom.readUInt32BE(0) >>> 0;
+const swapIfNecessary = (rom: Uint8Array) => {
+  const sig = bufReadU32BE(rom, 0);
   let swap32 = false;
   let swap16 = false;
   switch (sig) {
@@ -45,17 +44,17 @@ const swapIfNecessary = (rom: Buffer) => {
   }
   if (swap32) {
     for (let i = 0; i < rom.length; i += 4) {
-      rom.writeUInt32BE(rom.readUInt32LE(i), i);
+      bufWriteU32BE(rom, i, bufReadU32LE(rom, i));
     }
   }
   if (swap16) {
     for (let i = 0; i < rom.length; i += 2) {
-      rom.writeUInt16BE(rom.readUInt16LE(i), i);
+      bufWriteU16BE(rom, i, bufReadU16LE(rom, i));
     }
   }
 };
 
-const checkGameHash = (game: Game, rom: Buffer) => {
+const checkGameHash = (game: Game, rom: Uint8Array) => {
   const h = CRC32.buf(rom, 0) >>> 0;
   const hashes = CONFIG[game].crc32;
   if (!hashes.includes(h)) {
@@ -69,11 +68,11 @@ const checkGameHash = (game: Game, rom: Buffer) => {
   }
 };
 
-export const decompressGame = async (game: Game, rom: Buffer): Promise<DecompressedGame> => {
+export const decompressGame = async (game: Game, rom: Uint8Array): Promise<DecompressedGame> => {
   const conf = CONFIG[game];
-  const dmaBuffer = Buffer.from(rom.subarray(conf.dmaAddr, conf.dmaAddr + conf.dmaCount * 16));
-  const dma = new DmaData(Buffer.from(dmaBuffer));
-  const out = Buffer.alloc(64 * 1024 * 1024);
+  const dmaBuffer = rom.slice(conf.dmaAddr, conf.dmaAddr + conf.dmaCount * 16);
+  const dma = new DmaData(new Uint8Array(dmaBuffer));
+  const out = new Uint8Array(64 * 1024 * 1024);
   const promises: Promise<void>[] = [];
 
   for (let i = 0; i < dma.count(); ++i) {
@@ -95,14 +94,14 @@ export const decompressGame = async (game: Game, rom: Buffer): Promise<Decompres
 
   await Promise.all(promises);
 
-  dma.data().copy(out, conf.dmaAddr);
+  out.set(dma.data(), conf.dmaAddr);
 
   return { rom: out, dma: dmaBuffer };
 };
 
 type DecompressGamesParams = {
-  oot: Buffer;
-  mm: Buffer;
+  oot: Uint8Array;
+  mm: Uint8Array;
 };
 
 export type DecompressedRoms = {

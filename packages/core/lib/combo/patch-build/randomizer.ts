@@ -14,6 +14,8 @@ import { CONFVARS_VALUES, Confvar } from '../confvars';
 import { Region, regionData } from '../logic/regions';
 import { Item, ItemGroups, ItemHelpers, Items, ItemsCount } from '../items';
 import { SharedItemGroups } from '../logic/shared';
+import { bufReadU32BE, bufWriteI8, bufWriteU16BE, bufWriteU32BE, bufWriteU8 } from '../util/buffer';
+import { concatUint8Arrays } from 'uint8array-extras';
 
 const DUNGEON_REWARD_LOCATIONS = [
   'OOT Deku Tree Boss',
@@ -347,7 +349,7 @@ function zoraSapphireGI(worldId: number, logic: LogicResult): number | null {
   return gi(logic.settings, 'oot', item.item, false);
 }
 
-function zoraSapphireBuffer(world: number, logic: LogicResult): Buffer {
+function zoraSapphireBuffer(world: number, logic: LogicResult): Uint8Array {
   let value = zoraSapphireGI(world, logic);
   if (value === null)
     value = gi(logic.settings, 'oot', Items.OOT_STONE_SAPPHIRE, false);
@@ -444,8 +446,8 @@ function checkKey(check: WorldCheck): number {
   return key;
 }
 
-const gameChecks = (worldId: number, settings: Settings, game: Game, logic: LogicResult): Buffer => {
-  const buffers: Buffer[] = [];
+const gameChecks = (worldId: number, settings: Settings, game: Game, logic: LogicResult): Uint8Array => {
+  const buffers: Uint8Array[] = [];
   const world = logic.worlds[worldId];
   for (const locId in world.checks) {
     const loc = makeLocation(locId, worldId);
@@ -462,15 +464,15 @@ const gameChecks = (worldId: number, settings: Settings, game: Game, logic: Logi
 
     const key = checkKey(c);
     const itemGi = gi(settings, game, item.item, true);
-    const b = Buffer.alloc(8, 0xff);
-    b.writeUInt32BE(key, 0);
-    b.writeUint16BE(item.player + 1, 4);
-    b.writeUInt16BE(itemGi, 6);
+    const b = new Uint8Array(8);
+    bufWriteU32BE(b, 0, key);
+    bufWriteU16BE(b, 4, item.player + 1);
+    bufWriteU16BE(b, 6, itemGi);
     buffers.push(b);
   }
   /* Sort by key ascending */
-  buffers.sort((a, b) => a.readUInt32BE(0) < b.readUInt32BE(0) ? -1 : 1);
-  return padBuffer16(Buffer.concat(buffers));
+  buffers.sort((a, b) => bufReadU32BE(a, 0) < bufReadU32BE(b, 0) ? -1 : 1);
+  return padBuffer16(concatUint8Arrays(buffers));
 };
 
 const HINT_OFFSETS = {
@@ -489,8 +491,9 @@ const HINT_OFFSETS = {
   IMPORTANCE3: 15,
 };
 
-const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGossip): Buffer => {
-  const data = Buffer.alloc(0x10, 0xff);
+const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGossip): Uint8Array => {
+  const data = new Uint8Array(0x10);
+  data.fill(0xff);
   let gossipData = DATA_HINTS_POOL[game][gossip];
   if (!gossipData) {
     throw new Error(`Unknown gossip ${gossip} for game ${game}`);
@@ -516,11 +519,11 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
       if (region === undefined) {
         throw new Error(`Unknown region ${hint.region}`);
       }
-      data.writeUInt8(id, HINT_OFFSETS.KEY);
-      data.writeUInt8(0x00, HINT_OFFSETS.TYPE);
-      data.writeUInt8(region, HINT_OFFSETS.REGION);
-      data.writeUInt8(regionD.world + 1, HINT_OFFSETS.WORLD);
-      data.writeUInt16BE(pathId, HINT_OFFSETS.ITEM);
+      bufWriteU8(data, HINT_OFFSETS.KEY, id);
+      bufWriteU8(data, HINT_OFFSETS.TYPE, 0x00);
+      bufWriteU8(data, HINT_OFFSETS.REGION, region);
+      bufWriteU8(data, HINT_OFFSETS.WORLD, regionD.world + 1);
+      bufWriteU16BE(data, HINT_OFFSETS.ITEM, pathId);
     }
     break;
   case 'foolish':
@@ -530,10 +533,10 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
       if (region === undefined) {
         throw new Error(`Unknown region ${hint.region}`);
       }
-      data.writeUInt8(id, HINT_OFFSETS.KEY);
-      data.writeUInt8(0x01, HINT_OFFSETS.TYPE);
-      data.writeUInt8(region, HINT_OFFSETS.REGION);
-      data.writeUInt8(regionD.world + 1, HINT_OFFSETS.WORLD);
+      bufWriteU8(data, HINT_OFFSETS.KEY, id);
+      bufWriteU8(data, HINT_OFFSETS.TYPE, 0x01);
+      bufWriteU8(data, HINT_OFFSETS.REGION, region);
+      bufWriteU8(data, HINT_OFFSETS.WORLD, regionD.world + 1);
     }
     break;
   case 'item-exact':
@@ -544,22 +547,22 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
       }
       const items = hint.items;
       const itemsGI = hint.items.map((item) => gi(settings, 'oot', item.item, false));
-      data.writeUInt8(id, HINT_OFFSETS.KEY);
-      data.writeUInt8(0x02, HINT_OFFSETS.TYPE);
-      data.writeUInt8(check, HINT_OFFSETS.REGION);
-      data.writeUInt8(hint.world + 1, HINT_OFFSETS.WORLD);
-      data.writeUInt16BE(itemsGI[0], HINT_OFFSETS.ITEM);
-      data.writeUint8(items[0].player + 1, HINT_OFFSETS.PLAYER);
-      data.writeInt8(hint.importances[0], HINT_OFFSETS.IMPORTANCE);
+      bufWriteU8(data, HINT_OFFSETS.KEY, id);
+      bufWriteU8(data, HINT_OFFSETS.TYPE, 0x02);
+      bufWriteU8(data, HINT_OFFSETS.REGION, check);
+      bufWriteU8(data, HINT_OFFSETS.WORLD, hint.world + 1);
+      bufWriteU16BE(data, HINT_OFFSETS.ITEM, itemsGI[0]);
+      bufWriteU8(data, HINT_OFFSETS.PLAYER, items[0].player + 1);
+      bufWriteI8(data, HINT_OFFSETS.IMPORTANCE, hint.importances[0]);
       if (items.length > 1) {
-        data.writeUInt16BE(itemsGI[1], HINT_OFFSETS.ITEM2);
-        data.writeUint8(items[1].player + 1, HINT_OFFSETS.PLAYER2);
-        data.writeInt8(hint.importances[1], HINT_OFFSETS.IMPORTANCE2);
+        bufWriteU16BE(data, HINT_OFFSETS.ITEM2, itemsGI[1]);
+        bufWriteU8(data, HINT_OFFSETS.PLAYER2, items[1].player + 1);
+        bufWriteI8(data, HINT_OFFSETS.IMPORTANCE2, hint.importances[1]);
       }
       if (items.length > 2) {
-        data.writeUInt16BE(itemsGI[2], HINT_OFFSETS.ITEM3);
-        data.writeUint8(items[2].player + 1, HINT_OFFSETS.PLAYER3);
-        data.writeInt8(hint.importances[2], HINT_OFFSETS.IMPORTANCE3);
+        bufWriteU16BE(data, HINT_OFFSETS.ITEM3, itemsGI[2]);
+        bufWriteU8(data, HINT_OFFSETS.PLAYER3, items[2].player + 1);
+        bufWriteI8(data, HINT_OFFSETS.IMPORTANCE3, hint.importances[2]);
       }
     }
     break;
@@ -572,28 +575,28 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
           throw new Error(`Unknown region ${hint.region}`);
         }
         const itemGI = gi(settings, 'oot', item.item, false);
-        data.writeUInt8(id, HINT_OFFSETS.KEY);
-        data.writeUInt8(0x03, HINT_OFFSETS.TYPE);
-        data.writeUInt8(region, HINT_OFFSETS.REGION);
-        data.writeUInt8(regionD.world + 1, HINT_OFFSETS.WORLD);
-        data.writeUInt16BE(itemGI, HINT_OFFSETS.ITEM);
-        data.writeUint8(item.player + 1, HINT_OFFSETS.PLAYER);
-        data.writeInt8(hint.importance, HINT_OFFSETS.IMPORTANCE);
+        bufWriteU8(data, HINT_OFFSETS.KEY, id);
+        bufWriteU8(data, HINT_OFFSETS.TYPE, 0x03);
+        bufWriteU8(data, HINT_OFFSETS.REGION, region);
+        bufWriteU8(data, HINT_OFFSETS.WORLD, regionD.world + 1);
+        bufWriteU16BE(data, HINT_OFFSETS.ITEM, itemGI);
+        bufWriteU8(data, HINT_OFFSETS.PLAYER, item.player + 1);
+        bufWriteI8(data, HINT_OFFSETS.IMPORTANCE, hint.importance);
       }
       break;
   case 'junk':
     {
-      data.writeUInt8(id, HINT_OFFSETS.KEY);
-      data.writeUInt8(0x04, HINT_OFFSETS.TYPE);
-      data.writeUInt16BE(hint.id, HINT_OFFSETS.ITEM);
+      bufWriteU8(data, HINT_OFFSETS.KEY, id);
+      bufWriteU8(data, HINT_OFFSETS.TYPE, 0x04);
+      bufWriteU16BE(data, HINT_OFFSETS.ITEM, hint.id);
     }
     break;
   }
   return data;
 }
 
-const gameHints = (settings: Settings, game: Game, hints: WorldHints): Buffer => {
-  const buffers: Buffer[] = [];
+const gameHints = (settings: Settings, game: Game, hints: WorldHints): Uint8Array => {
+  const buffers: Uint8Array[] = [];
   for (const gossip in hints.gossip) {
     const h = hints.gossip[gossip];
     if (h.game !== game) {
@@ -601,8 +604,10 @@ const gameHints = (settings: Settings, game: Game, hints: WorldHints): Buffer =>
     }
     buffers.push(hintBuffer(settings, game, gossip, h));
   }
-  buffers.push(Buffer.alloc(0x10, 0xff));
-  return padBuffer16(Buffer.concat(buffers));
+  const b = new Uint8Array(0x10);
+  b.fill(0xff);
+  buffers.push(b);
+  return padBuffer16(concatUint8Arrays(buffers));
 }
 
 function dungeonWarpsBuffer(world: World) {
@@ -684,7 +689,7 @@ function dungeonEntrancesBuffer(world: World) {
     }
   }
 
-  const buffers: Buffer[] = [];
+  const buffers: Uint8Array[] = [];
   for (let i = 0; i < defaultEntrances.length; ++i) {
     const dungeonIndex = mainDungeonsReverse[i];
     let region = mainDungeonRegions[i] || 'NAMELESS';
@@ -696,7 +701,7 @@ function dungeonEntrancesBuffer(world: World) {
     }
   }
 
-  return Buffer.concat(buffers);
+  return concatUint8Arrays(buffers);
 }
 
 const regionsBuffer = (regions: Region[]) => {
@@ -728,7 +733,7 @@ const gameEntrances = (worldId: number, game: Game, logic: LogicResult) => {
   return padBuffer16(toU32Buffer(data));
 };
 
-const randomizerDungeonsBits = (worldId: number, logic: LogicResult): Buffer => {
+const randomizerDungeonsBits = (worldId: number, logic: LogicResult): Uint8Array => {
   const DUNGEONS_PRECOMPLETED = [
     'DT',
     'DC',
@@ -774,13 +779,13 @@ const randomizerDungeonsBits = (worldId: number, logic: LogicResult): Buffer => 
     }
   }
 
-  const buffer = Buffer.alloc(8);
-  buffer.writeUInt32BE(mq, 0);
-  buffer.writeUInt32BE(preCompleted, 4);
+  const buffer = new Uint8Array(8);
+  bufWriteU32BE(buffer, 0, mq);
+  bufWriteU32BE(buffer, 4, preCompleted);
   return buffer;
 }
 
-function randomizerWarps(worldId: number, logic: LogicResult): Buffer {
+function randomizerWarps(worldId: number, logic: LogicResult): Uint8Array {
   const songs = [
     'OOT_WARP_SONG_MEADOW',
     'OOT_WARP_SONG_CRATER',
@@ -805,7 +810,7 @@ function randomizerWarps(worldId: number, logic: LogicResult): Buffer {
   ];
   const owlStatuesBuffer = toU32Buffer(owlStatues.map(e => entrance(e, logic.worlds[worldId])));
 
-  return Buffer.concat([warpSongs, owlStatuesBuffer]);
+  return concatUint8Arrays([warpSongs, owlStatuesBuffer]);
 }
 
 function worldConfig(world: World, settings: Settings): Set<Confvar> {
@@ -1032,7 +1037,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
   return config;
 }
 
-export const randomizerConfig = (world: World, settings: Settings): Buffer => {
+export const randomizerConfig = (world: World, settings: Settings): Uint8Array => {
   const config = worldConfig(world, settings);
   const bits = Array.from(config).map((c) => {
     const bit = CONFVARS_VALUES[c];
@@ -1041,7 +1046,7 @@ export const randomizerConfig = (world: World, settings: Settings): Buffer => {
     }
     return bit;
   });
-  const block = Buffer.alloc(0x40, 0);
+  const block = new Uint8Array(0x40);
   for (const bit of bits) {
     const byte = Math.floor(bit / 8);
     const mask = 1 << (bit % 8);
@@ -1050,21 +1055,21 @@ export const randomizerConfig = (world: World, settings: Settings): Buffer => {
   return block;
 };
 
-export const randomizerHints = (world: number, logic: LogicResult): Buffer => {
-  const buffers: Buffer[] = [];
+export const randomizerHints = (world: number, logic: LogicResult): Uint8Array => {
+  const buffers: Uint8Array[] = [];
   const h = logic.hints[world];
   buffers.push(regionsBuffer(h.dungeonRewards));
   buffers.push(regionsBuffer([h.lightArrow]));
   buffers.push(regionsBuffer([h.oathToOrder]));
   buffers.push(regionsBuffer([h.ganonBossKey]));
-  return Buffer.concat(buffers);
+  return concatUint8Arrays(buffers);
 };
 
-const randomizerBoss = (worldId: number, logic: LogicResult): Buffer => toU8Buffer(logic.worlds[worldId].bossIds);
-const randomizerTriforce = (logic: LogicResult): Buffer => toU16Buffer([logic.settings.triforcePieces, logic.settings.triforceGoal]);
+const randomizerBoss = (worldId: number, logic: LogicResult): Uint8Array => toU8Buffer(logic.worlds[worldId].bossIds);
+const randomizerTriforce = (logic: LogicResult): Uint8Array => toU16Buffer([logic.settings.triforcePieces, logic.settings.triforceGoal]);
 
 function specialConds(settings: Settings) {
-  const buffers: Buffer[] = [];
+  const buffers: Uint8Array[] = [];
   const flagsKeys: keyof typeof SPECIAL_CONDS_FIELDS = Object.keys(SPECIAL_CONDS_FIELDS) as any;
   for (const special in SPECIAL_CONDS) {
     const cond = settings.specialConds[special as keyof typeof SPECIAL_CONDS];
@@ -1075,19 +1080,19 @@ function specialConds(settings: Settings) {
         flags = (flags | (1 << i)) >>> 0;
       }
     }
-    const buffer = Buffer.alloc(8);
-    buffer.writeUInt32BE(flags, 0);
-    buffer.writeUInt16BE(cond.count, 4);
+    const buffer = new Uint8Array(8);
+    bufWriteU32BE(buffer, 0, flags);
+    bufWriteU16BE(buffer, 4, cond.count);
     buffers.push(buffer);
   }
-  return Buffer.concat(buffers);
+  return concatUint8Arrays(buffers);
 }
 
-export const prices = (worldId: number, logic: LogicResult): Buffer => {
+export const prices = (worldId: number, logic: LogicResult): Uint8Array => {
   return toU16Buffer(logic.worlds[worldId].prices);
 };
 
-export const randomizerData = (worldId: number, logic: LogicResult): Buffer => {
+export const randomizerData = (worldId: number, logic: LogicResult): Uint8Array => {
   const buffers = [];
   buffers.push(logic.uuid);
   buffers.push(toU8Buffer([worldId + 1, 0, 0, 0]));
@@ -1105,7 +1110,7 @@ export const randomizerData = (worldId: number, logic: LogicResult): Buffer => {
   buffers.push(zoraSapphireBuffer(worldId, logic));
   buffers.push(randomizerBoss(worldId, logic));
   buffers.push(toU8Buffer([logic.settings.strayFairyRewardCount]));
-  return Buffer.concat(buffers);
+  return concatUint8Arrays(buffers);
 };
 
 function addStartingItemLocsWorld(world: number, logic: LogicResult, locs: string[], items: ItemsCount) {
@@ -1147,7 +1152,7 @@ const effectiveStartingItems = (worldId: number, logic: LogicResult): ItemsCount
   return itemsCount;
 }
 
-const randomizerStartingItems = (world: number, logic: LogicResult): Buffer => {
+const randomizerStartingItems = (world: number, logic: LogicResult): Uint8Array => {
   const { settings } = logic;
   const ids: number[] = [];
   const ids2: number[] = [];

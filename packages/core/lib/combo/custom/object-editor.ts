@@ -1,12 +1,15 @@
+import { concatUint8Arrays } from "uint8array-extras";
+import { bufReadU32BE, bufWriteU32BE } from "../util/buffer";
+
 export type ObjectEditorOut = {
-  data: Buffer;
+  data: Uint8Array;
   offsets: number[];
 };
 
 export class ObjectEditor {
-  private segments: Map<number, Buffer> = new Map();
+  private segments: Map<number, Uint8Array> = new Map();
   private seen: Map<number, number> = new Map();
-  private out: Buffer[] = [];
+  private out: Uint8Array[] = [];
   private outSize: number = 0;
   private outOffsets: number[] = [];
 
@@ -23,7 +26,7 @@ export class ObjectEditor {
     this.submitOut(this.processListAddr(addr));
   }
 
-  submitList(aList: Buffer) {
+  submitList(aList: Uint8Array) {
     this.submitOut(this.processList(aList));
   }
 
@@ -41,26 +44,26 @@ export class ObjectEditor {
     return newAddr;
   }
 
-  processList(aList: Buffer) {
+  processList(aList: Uint8Array) {
     const size = aList.length;
-    const list = Buffer.from(aList);
+    const list = new Uint8Array(aList);
 
     for (let i = 0; i < size; i += 8) {
-      const data = list.readUInt32BE(i);
+      const data = bufReadU32BE(list, i);
       const op = (data >>> 24);
       if (op === 0x01) {
         /* Vertices */
         const count = (data >> 12) & 0xff;
-        const addr = list.readUInt32BE(i + 4);
+        const addr = bufReadU32BE(list, i + 4);
         const newAddr = this.copy(addr, count * 0x10);
-        list.writeUInt32BE(newAddr, i + 4);
+        bufWriteU32BE(list, i + 4, newAddr);
       } else if (op === 0xfd) {
         /* Texture or palette */
-        const data2 = list.readUInt32BE(i + 8 * 1);
+        const data2 = bufReadU32BE(list, i + 8 * 1);
         const op2 = data2 >>> 24;
         if (op2 === 0xf5) {
           /* Texture */
-          const fmt = (list.readUInt32BE(i + 0x28) >> 19) & 3;
+          const fmt = (bufReadU32BE(list, i + 0x28) >>> 19) & 3;
           let bpp = 0;
           switch (fmt) {
           case 0:
@@ -78,28 +81,28 @@ export class ObjectEditor {
           default:
             throw new Error(`Unknown texture format 0x${fmt.toString(16)}`);
           }
-          const data3 = list.readUInt32BE(i + 8 * 6 + 4);
+          const data3 = bufReadU32BE(list, i + 8 * 6 + 4);
           const w = (((data3 >>> 12) & 0xfff) / 4) + 1;
           const h = (((data3 >>>  0) & 0xfff) / 4) + 1;
-          const addr = list.readUInt32BE(i + 4);
+          const addr = bufReadU32BE(list, i + 4);
           const newAddr = this.copy(addr, (w * h * bpp) / 8);
-          list.writeUInt32BE(newAddr, i + 4);
+          bufWriteU32BE(list, i + 4, newAddr);
         } else if (op2 === 0xe8) {
           /* Palette */
-          const count = ((list.readUInt32BE(i + 0x24) & 0xffffff) >> 14) + 1;
-          const addr = list.readUInt32BE(i + 4);
+          const count = ((bufReadU32BE(list, i + 0x24) & 0xffffff) >> 14) + 1;
+          const addr = bufReadU32BE(list, i + 4);
           const newAddr = this.copy(addr, count * 2);
-          list.writeUInt32BE(newAddr, i + 4);
+          bufWriteU32BE(list, i + 4, newAddr);
         }
       } else if (op === 0xda) {
-        const addr = list.readUInt32BE(i + 4);
+        const addr = bufReadU32BE(list, i + 4);
         const newAddr = this.copy(addr, 0x40);
-        list.writeUInt32BE(newAddr, i + 4);
+        bufWriteU32BE(list, i + 4, newAddr);
       } else if (op === 0xde) {
         /* List */
-        const addr = list.readUInt32BE(i + 4);
+        const addr = bufReadU32BE(list, i + 4);
         const newAddr = this.processListAddr(addr);
-        list.writeUInt32BE(newAddr, i + 4);
+        bufWriteU32BE(list, i + 4, newAddr);
       }
     }
 
@@ -108,7 +111,7 @@ export class ObjectEditor {
     this.out.push(list);
     if (this.outSize % 16) {
       const extraSize = 16 - (this.outSize % 16);
-      const extraBuf = Buffer.alloc(extraSize);
+      const extraBuf = new Uint8Array(extraSize);
       this.outSize += extraSize;
       this.out.push(extraBuf);
     }
@@ -116,7 +119,7 @@ export class ObjectEditor {
     return outAddr;
   }
 
-  loadSegment(num: number, data: Buffer | null) {
+  loadSegment(num: number, data: Uint8Array | null) {
     if (data === null) {
       this.segments.delete(num);
     } else {
@@ -145,7 +148,7 @@ export class ObjectEditor {
 
     let i = 0;
     for (;;) {
-      const data = d.readUInt32BE(i);
+      const data = bufReadU32BE(d, i);
       const op = (data >>> 24);
       const op2 = (data >>> 16) & 0xff;
       i += 8;
@@ -163,28 +166,28 @@ export class ObjectEditor {
     return this.segData(addr, size);
   }
 
-  stripList(list: Buffer, from: number, to: number) {
+  stripList(list: Uint8Array, from: number, to: number) {
     const size = list.length;
-    const out = Buffer.alloc(size - (to - from));
-    list.copy(out, 0, 0, from);
-    list.copy(out, from, to);
+    const out = new Uint8Array(size - (to - from));
+    out.set(list.subarray(0, from));
+    out.set(list.subarray(to), from);
     return out;
   }
 
   combineListsAddrs(lists: number[]) {
-    const newList = Buffer.alloc(lists.length * 8);
+    const newList = new Uint8Array(lists.length * 8);
     for (let i = 0; i < lists.length; i++) {
       const op = 0xde;
       const op2 = (i === lists.length - 1) ? 0x01 : 0x00;
-      newList.writeUInt32BE((((op << 24) >>> 0) | (op2 << 16)) >>> 0, i * 8);
-      newList.writeUInt32BE(lists[i], i * 8 + 4);
+      bufWriteU32BE(newList, i * 8, (((op << 24) >>> 0) | (op2 << 16)) >>> 0);
+      bufWriteU32BE(newList, i * 8 + 4, lists[i]);
     }
     return newList;
   }
 
   build(): ObjectEditorOut {
     return {
-      data: Buffer.concat(this.out),
+      data: concatUint8Arrays(this.out),
       offsets: this.outOffsets,
     };
   }

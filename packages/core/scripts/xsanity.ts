@@ -1530,12 +1530,12 @@ async function build() {
   /* Get OoT ROM */
   const ootRomCompressed = await fs.readFile(__dirname + '/../../../roms/oot.z64');
   const ootDecompressed = await decompressGame('oot', ootRomCompressed);
-  const ootRom = ootDecompressed.rom;
+  const ootRom = Buffer.from(ootDecompressed.rom);
 
   /* Get MM ROM */
   const mmRomCompressed = await fs.readFile(__dirname + '/../../../roms/mm.z64');
   const mmDecompressed = await decompressGame('mm', mmRomCompressed);
-  const mmRom = mmDecompressed.rom;
+  const mmRom = Buffer.from(mmDecompressed.rom);
 
   /* Get MM Rooms */
   const mmRooms = getGameRoomActor(mmRom, 'mm');

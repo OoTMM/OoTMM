@@ -1,5 +1,3 @@
-import randomBytes from 'randombytes';
-
 import { Random } from '../random';
 import { LogicPassSolver } from './solve';
 import { LogicPassWorld } from './world';
@@ -78,7 +76,7 @@ export const logic = async (monitor: Monitor, opts: Options) => {
     .apply(LogicPassHash)
     .exec();
 
-    const uuid = randomBytes(16);
+    const uuid = crypto.getRandomValues(new Uint8Array(16));
 
     return { ...data, uuid };
 };

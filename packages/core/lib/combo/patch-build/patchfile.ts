@@ -1,9 +1,10 @@
 import JSZip from 'jszip';
+import { concatUint8Arrays } from 'uint8array-extras';
 
 const VERSION = '1.0';
 
 class BlobBuilder {
-  private parts: Buffer[];
+  private parts: Uint8Array[];
   private length: number;
 
   constructor() {
@@ -11,7 +12,7 @@ class BlobBuilder {
     this.length = 0;
   }
 
-  append(data: Buffer) {
+  append(data: Uint8Array) {
     const offset = this.length;
     const size = data.length;
     this.parts.push(data);
@@ -20,19 +21,19 @@ class BlobBuilder {
   }
 
   concat() {
-    return Buffer.concat(this.parts);
+    return concatUint8Arrays(this.parts);
   }
 }
 
 type Patch = {
   addr: number;
-  data: Buffer;
+  data: Uint8Array;
 }
 
 type NewFile = {
   name: string | null;
   vrom: number;
-  data: Buffer;
+  data: Uint8Array;
   compressed: boolean;
 }
 
@@ -59,25 +60,25 @@ export class Patchfile {
     this.meta = meta;
   }
 
-  addPatch(file: string, addr: number, data: Buffer) {
+  addPatch(file: string, addr: number, data: Uint8Array) {
     const patches = this.patches[file] || [];
     patches.push({ addr, data });
     this.patches[file] = patches;
   }
 
-  addNewFile(name: string | null, vrom: number, data: Buffer, compressed: boolean) {
+  addNewFile(name: string | null, vrom: number, data: Uint8Array, compressed: boolean) {
     this.newFiles.push({ name, vrom, data, compressed });
   }
 
-  async deserialize(data: Buffer) {
+  async deserialize(data: Uint8Array) {
     let meta: any;
-    let blob: Buffer;
+    let blob: Uint8Array;
 
     try {
       /* Load from the zip */
       const zip = await JSZip.loadAsync(data);
       meta = JSON.parse(await zip.file('meta.json')!.async('text'));
-      blob = Buffer.from(await zip.file('blob.bin')!.async('arraybuffer'));
+      blob = await zip.file('blob.bin')!.async('uint8array');
     } catch (e) {
       throw new Error(`Failed to load patchfile: ${e}`);
     }
@@ -108,7 +109,7 @@ export class Patchfile {
     }
   }
 
-  async serialize(): Promise<Buffer> {
+  async serialize(): Promise<Uint8Array> {
     const zip = new JSZip();
     const blobBuilder = new BlobBuilder();
     const meta: any = {};
@@ -148,7 +149,7 @@ export class Patchfile {
     zip.file('meta.json', JSON.stringify(meta));
     zip.file('blob.bin', blobBuilder.concat());
 
-    return Buffer.from(await zip.generateAsync({ type: 'arraybuffer', compression: 'DEFLATE' }));
+    return await zip.generateAsync({ type: 'uint8array', compression: 'DEFLATE' });
   }
 
   dup() {

@@ -1,3 +1,4 @@
+import { bufReadU32BE, bufWriteU32BE } from './util/buffer';
 
 export type DmaDataRecord = {
   virtStart: number;
@@ -7,24 +8,25 @@ export type DmaDataRecord = {
 };
 
 export class DmaData {
-  constructor(private buffer: Buffer) {}
+  constructor(private buffer: Uint8Array) {}
 
   read(index: number): DmaDataRecord {
     const offset = index * 16;
     return {
-      virtStart: this.buffer.readUInt32BE(offset + 0),
-      virtEnd: this.buffer.readUInt32BE(offset + 4),
-      physStart: this.buffer.readUInt32BE(offset + 8),
-      physEnd: this.buffer.readUInt32BE(offset + 12),
+      virtStart: bufReadU32BE(this.buffer, offset + 0),
+      virtEnd: bufReadU32BE(this.buffer, offset + 4),
+      physStart: bufReadU32BE(this.buffer, offset + 8),
+      physEnd: bufReadU32BE(this.buffer, offset + 12),
     };
   }
 
   write(index: number, record: DmaDataRecord) {
     const offset = index * 16;
-    this.buffer.writeUInt32BE(record.virtStart, offset + 0);
-    this.buffer.writeUInt32BE(record.virtEnd, offset + 4);
-    this.buffer.writeUInt32BE(record.physStart, offset + 8);
-    this.buffer.writeUInt32BE(record.physEnd, offset + 12);
+
+    bufWriteU32BE(this.buffer, offset + 0, record.virtStart);
+    bufWriteU32BE(this.buffer, offset + 4, record.virtEnd);
+    bufWriteU32BE(this.buffer, offset + 8, record.physStart);
+    bufWriteU32BE(this.buffer, offset + 12, record.physEnd);
   }
 
   count() {

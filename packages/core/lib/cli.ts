@@ -4,6 +4,10 @@ import YAML from 'yaml';
 import { SETTINGS, generate, importSettings, makeSettings } from './combo';
 import { OptionsInput } from './combo/options';
 
+function readFileUint8(path: string): Promise<Uint8Array> {
+  return fs.readFile(path).then((x) => new Uint8Array(x.buffer, x.byteOffset, x.byteLength));
+}
+
 function parseSettings(data: any): any {
   const result = {} as any;
   for (const key in data) {
@@ -60,7 +64,7 @@ const makeOptions = async (args: string[]): Promise<OptionsInput> => {
       break;
     }
     case '--patch': {
-      const patch = await fs.readFile(args[++i]);
+      const patch = await readFileUint8(args[++i]);
       opts.patch = patch;
       break;
     }
@@ -75,21 +79,11 @@ const makeOptions = async (args: string[]): Promise<OptionsInput> => {
   return opts;
 };
 
-function writeFiles(data: (Buffer | string)[], name: string, ext: string) {
-  if (data.length === 1) {
-    return [fs.writeFile(`${name}.${ext}`, data[0])];
-  }
-
-  return data.map((x, i) => {
-    return fs.writeFile(`${name}-${i+1}.${ext}`, x);
-  });
-}
-
 const main = async () => {
   const opts = await makeOptions(process.argv.slice(2));
   const [oot, mm] = await Promise.all([
-    fs.readFile('../../roms/oot.z64'),
-    fs.readFile('../../roms/mm.z64'),
+    readFileUint8('../../roms/oot.z64'),
+    readFileUint8('../../roms/mm.z64'),
   ]);
   const gen = generate({ oot, mm, opts });
   const { files } = await gen.run();

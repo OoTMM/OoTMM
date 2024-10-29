@@ -2,6 +2,7 @@ import { FILES } from '@ootmm/data';
 import { CONFIG, Game } from './config';
 import { DecompressedRoms } from './decompress';
 import { DmaData } from './dma';
+import { bufReadU32BE } from './util/buffer';
 
 export type FileAddress = {
   name: string;
@@ -47,7 +48,7 @@ export class Addresses {
 
   constructor(
     private game: Game,
-    private rom: Buffer,
+    private rom: Uint8Array,
   ) {
     const gc = CONFIG[game];
     const dmaData = rom.subarray(gc.dmaAddr, gc.dmaAddr + gc.dmaCount * 0x10);
@@ -74,9 +75,9 @@ export class Addresses {
     /* Resolve actors */
     let addr = meta.actorsOvlAddr;
     for (let i = 0; i < meta.actorsOvlCount; ++i) {
-      const base = this.rom.readUInt32BE(addr + 0x00);
-      const vstart = this.rom.readUInt32BE(addr + 0x08);
-      const vend = this.rom.readUInt32BE(addr + 0x0c);
+      const base = bufReadU32BE(this.rom, addr + 0x00);
+      const vstart = bufReadU32BE(this.rom, addr + 0x08);
+      const vend = bufReadU32BE(this.rom, addr + 0x0c);
       addr += 0x20;
       if (vstart > 0) {
         const name = this.filenameFromVaddr(base);
@@ -87,9 +88,9 @@ export class Addresses {
     /* Resolve effects */
     addr = meta.effectsOvlAddr;
     for (let i = 0; i < meta.effectsOvlCount; ++i) {
-      const base = this.rom.readUInt32BE(addr + 0x00);
-      const vstart = this.rom.readUInt32BE(addr + 0x08);
-      const vend = this.rom.readUInt32BE(addr + 0x0c);
+      const base = bufReadU32BE(this.rom, addr + 0x00);
+      const vstart = bufReadU32BE(this.rom, addr + 0x08);
+      const vend = bufReadU32BE(this.rom, addr + 0x0c);
       addr += 0x1c;
       if (vstart > 0) {
         const name = this.filenameFromVaddr(base);

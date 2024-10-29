@@ -3,7 +3,7 @@ import { png } from '../util/png';
 
 export const font = async (opts: Options, filename: string) => {
   const original = await png(opts, filename, 'i4');
-  const newBuffer = Buffer.alloc(original.byteLength);
+  const newBuffer = new Uint8Array(original.byteLength);
   const indexMax = original.byteLength / ((8 * 12) / 2);
 
   /* Make font vertical */
@@ -14,8 +14,8 @@ export const font = async (opts: Options, filename: string) => {
     for (let row = 0; row < 12; ++row) {
       const rowPos = ((indexY * 12) + row) * ((8 * 16) / 2) + indexX * (8 / 2);
       for (let i = 0; i < 4; ++i) {
-        const v = original.readUint8(rowPos + i);
-        newBuffer.writeUint8(v, cursor);
+        const v = original[rowPos + i];
+        newBuffer[cursor] = v;
         cursor++;
       }
     }

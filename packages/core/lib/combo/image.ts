@@ -1,3 +1,5 @@
+import { bufReadU16BE, bufReadU32BE, bufWriteU16BE, bufWriteU32BE } from "./util/buffer";
+
 type ImageFormat = 'rgba32' | 'rgba16';
 
 function packToRgb(color: number) {
@@ -92,12 +94,12 @@ function bits5to8(x: number) {
   return (x << 3) | (x >>> 2);
 }
 
-function fromRgba16(image: Buffer) {
-  const newBuf = Buffer.alloc(image.length * 2);
+function fromRgba16(image: Uint8Array) {
+  const newBuf = new Uint8Array(image.length * 2);
   for (let i = 0; i < image.length / 2; ++i) {
     const srcIndex = i * 2;
     const dstIndex = i * 4;
-    const rawColor = image.readUInt16BE(srcIndex);
+    const rawColor = bufReadU16BE(image, srcIndex);
     const r5 = (rawColor >>> 11) & 0x1f;
     const g5 = (rawColor >>>  6) & 0x1f;
     const b5 = (rawColor >>>  1) & 0x1f;
@@ -106,15 +108,15 @@ function fromRgba16(image: Buffer) {
     const g8 = bits5to8(g5);
     const b8 = bits5to8(b5);
     const a8 = a1 ? 0xff : 0x00;
-    newBuf.writeUInt8(r8, dstIndex + 0);
-    newBuf.writeUInt8(g8, dstIndex + 1);
-    newBuf.writeUInt8(b8, dstIndex + 2);
-    newBuf.writeUInt8(a8, dstIndex + 3);
+    newBuf[dstIndex + 0] = r8;
+    newBuf[dstIndex + 1] = g8;
+    newBuf[dstIndex + 2] = b8;
+    newBuf[dstIndex + 3] = a8;
   }
   return newBuf;
 }
 
-function fromFormat(image: Buffer, format: 'rgba32' | 'rgba16') {
+function fromFormat(image: Uint8Array, format: 'rgba32' | 'rgba16') {
   if (format === 'rgba32') {
     return image;
   } else {
@@ -122,55 +124,56 @@ function fromFormat(image: Buffer, format: 'rgba32' | 'rgba16') {
   }
 }
 
-function toRgba16(image: Buffer) {
-  const newBuf = Buffer.alloc(image.length / 2);
+function toRgba16(image: Uint8Array) {
+  const newBuf = new Uint8Array(image.length / 2);
   for (let i = 0; i < image.length / 4; ++i) {
     const srcIndex = i * 4;
     const dstIndex = i * 2;
-    const r8 = image.readUInt8(srcIndex + 0);
-    const g8 = image.readUInt8(srcIndex + 1);
-    const b8 = image.readUInt8(srcIndex + 2);
-    const a8 = image.readUInt8(srcIndex + 3);
+    const r8 = image[srcIndex + 0];
+    const g8 = image[srcIndex + 1];
+    const b8 = image[srcIndex + 2];
+    const a8 = image[srcIndex + 3];
     const r5 = (r8 >>> 3) & 0x1f;
     const g5 = (g8 >>> 3) & 0x1f;
     const b5 = (b8 >>> 3) & 0x1f;
     const a1 = (a8 >= 0x80) ? 0x01 : 0x00;
     const rawColor = (r5 << 11) | (g5 << 6) | (b5 << 1) | (a1 << 0);
-    newBuf.writeUInt16BE(rawColor, dstIndex);
+    bufWriteU16BE(newBuf, dstIndex, rawColor);
   }
   return newBuf;
 }
 
-function toFormat(image: Buffer, format: ImageFormat) {
+function toFormat(image: Uint8Array, format: ImageFormat) {
   if (format === 'rgba32') {
-    return Buffer.from(image);
+    return new Uint8Array(image);
   } else {
     return toRgba16(image);
   }
 }
 
-export function grayscale(image: Buffer, format: ImageFormat, gamma = 1) {
+export function grayscale(image: Uint8Array, format: ImageFormat, gamma = 1) {
   image = fromFormat(image, format);
 
   for (let i = 0; i < image.length; i += 4) {
-    const r = image.readUInt8(i + 0);
-    const g = image.readUInt8(i + 1);
-    const b = image.readUInt8(i + 2);
+    const r = image[i + 0];
+    const g = image[i + 1];
+    const b = image[i + 2];
     const l = Math.max(r, g, b);
     const lGamma = Math.round(Math.pow(l / 255, gamma) * 255);
-    image.writeUInt8(lGamma, i + 0);
-    image.writeUInt8(lGamma, i + 1);
-    image.writeUInt8(lGamma, i + 2);
+    image[i + 0] = lGamma;
+    image[i + 1] = lGamma;
+    image[i + 2] = lGamma;
   }
 
   return toFormat(image, format);
 }
 
-export function recolorImage(format: ImageFormat, image: Buffer, mask: Buffer | null, defaultColor: number, color: number) {
+export function recolorImage(format: ImageFormat, image: Uint8Array, mask: Uint8Array | null, defaultColor: number, color: number) {
   image = fromFormat(image, format);
-  const newBuffer = Buffer.alloc(image.length);
+  const newBuffer = new Uint8Array(image.length);
   if (mask === null) {
-    mask = Buffer.alloc(image.length, 0xff);
+    mask = new Uint8Array(image.length);
+    mask.fill(0xff);
   }
 
   /* Extract new color */
@@ -188,24 +191,24 @@ export function recolorImage(format: ImageFormat, image: Buffer, mask: Buffer | 
 
   for (let i = 0; i < image.length; i += 4) {
     /* Fetch the pixel */
-    const data = image.readUInt32BE(i);
+    const data = bufReadU32BE(image, i);
     const [pr, pg, pb, pa] = packToRgba(data);
 
     /* Convert to grayscale */
     const pl = Math.max(pr, pg, pb);
 
     /* Check if the pixel is inside the mask */
-    const maskByte = mask.readUInt8(Math.floor(i / 32));
+    const maskByte = mask[Math.floor(i / 32)];
     const maskBit = (maskByte >> ((i / 4) % 8)) & 1;
     if (maskBit) {
       /* Pixel is within tolerance, recolor it */
       const newR = Math.floor(clamp01(r * pl * boost) * 255);
       const newG = Math.floor(clamp01(g * pl * boost) * 255);
       const newB = Math.floor(clamp01(b * pl * boost) * 255);
-      newBuffer.writeUInt32BE(((newR << 24) | (newG << 16) | (newB << 8) | pa * 255) >>> 0, i);
+      bufWriteU32BE(newBuffer, i, ((newR << 24) | (newG << 16) | (newB << 8) | pa * 255) >>> 0);
     } else {
       /* Pixel is not within tolerance, copy it over */
-      newBuffer.writeUInt32BE(data, i);
+      bufWriteU32BE(newBuffer, i, data);
     }
   }
 

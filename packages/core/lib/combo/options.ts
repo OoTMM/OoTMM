@@ -3,7 +3,7 @@ import { randString } from './random';
 import { Cosmetics, makeCosmetics } from './cosmetics';
 import { makeRandomSettings, OptionRandomSettings } from './settings/random';
 
-type FileResolverFetchFunc = (filename: string) => Promise<Buffer>;
+type FileResolverFetchFunc = (filename: string) => Promise<Uint8Array>;
 type FileResolverGlobFunc = (pattern: RegExp) => Promise<string[]>;
 
 export type FileResolver = {
@@ -11,7 +11,7 @@ export type FileResolver = {
   glob: FileResolverGlobFunc;
 };
 
-export type ResolverFetchFunc = (filename: string) => Promise<Buffer>;
+export type ResolverFetchFunc = (filename: string) => Promise<Uint8Array>;
 
 export type Options = {
   debug: boolean;
@@ -19,7 +19,7 @@ export type Options = {
   settings: Settings;
   cosmetics: Cosmetics;
   random: OptionRandomSettings;
-  patch?: Buffer | ArrayBuffer;
+  patch?: Uint8Array;
   resolver?: FileResolver;
 };
 

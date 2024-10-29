@@ -11,6 +11,7 @@ import { PatchGroup } from './group';
 import { isEntranceShuffle } from '../logic/helpers';
 import { FileResolver, Options } from '../options';
 import { World } from '../logic/world';
+import { bufReadU32BE, bufWriteU32BE } from '../util/buffer';
 
 export type BuildPatchfileIn = {
   opts: Options;
@@ -128,22 +129,22 @@ export async function buildPatchfiles(args: BuildPatchfileIn): Promise<Patchfile
         ovlAddr = vromEnd;
 
         /* Parse the header */
-        const actorId = header.readUInt32BE(0x00);
-        const vramInit = header.readUInt32BE(0x04);
-        const vramStart = header.readUInt32BE(0x08);
-        const vramEnd = header.readUInt32BE(0x0c);
+        const actorId = bufReadU32BE(header, 0x00);
+        const vramInit = bufReadU32BE(header, 0x04);
+        const vramStart = bufReadU32BE(header, 0x08);
+        const vramEnd = bufReadU32BE(header, 0x0c);
 
-        const patch = Buffer.alloc(4 * 6);
-        patch.writeUInt32BE(vromStart,  0x00);
-        patch.writeUInt32BE(vromEnd,    0x04);
-        patch.writeUInt32BE(vramStart,  0x08);
-        patch.writeUInt32BE(vramEnd,    0x0c);
-        patch.writeUInt32BE(0,          0x10);
-        patch.writeUInt32BE(vramInit,   0x14);
+        const patch = new Uint8Array(4 * 6);
+        bufWriteU32BE(patch, 0x00, vromStart);
+        bufWriteU32BE(patch, 0x04, vromEnd);
+        bufWriteU32BE(patch, 0x08, vramStart);
+        bufWriteU32BE(patch, 0x0c, vramEnd);
+        bufWriteU32BE(patch, 0x10, 0);
+        bufWriteU32BE(patch, 0x14, vramInit);
 
         /* Delete the old overlay if possible */
         const oldHeader = rom.subarray(gc.actorsOvlAddr + actorId * 0x20, gc.actorsOvlAddr + actorId * 0x20 + 0x20);
-        const oldVramStart = oldHeader.readUInt32BE(0x08);
+        const oldVramStart = bufReadU32BE(oldHeader, 0x08);
         if (oldVramStart !== 0) {
           const oldFile = args.addresses[game].fileFromRAM(oldVramStart);
           p.removedFiles.push(oldFile.name);
@@ -159,12 +160,12 @@ export async function buildPatchfiles(args: BuildPatchfileIn): Promise<Patchfile
       meta.cosmetics[game] = gameCosmetics;
       const cosmetic_name = await args.resolver.fetch(`${game}_cosmetic_name.bin`);
       const cosmetic_addr = await args.resolver.fetch(`${game}_cosmetic_addr.bin`);
-      const names = cosmetic_name.toString('utf-8').split(/\0+/);
+      const names = new TextDecoder().decode(cosmetic_name).split(/\0+/);
       names.pop();
 
       for (let i = 0; i < names.length; i++) {
         const name = names[i];
-        const addr = cosmetic_addr.readUint32BE(i * 4);
+        const addr = bufReadU32BE(cosmetic_addr, i * 4);
         if (gameCosmetics[name] === undefined) {
           gameCosmetics[name] = [];
         }

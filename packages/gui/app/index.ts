@@ -1,8 +1,5 @@
 import './index.css';
 
-import { Buffer } from 'buffer';
-globalThis.Buffer ||= Buffer;
-
 import { render, createElement } from 'preact';
 import AppContainer from './components/AppContainer';
 

@@ -14,13 +14,12 @@
     "core-js": "^3.38.1",
     "crc-32": "^1.2.2",
     "pngjs": "^7.0.0",
-    "randombytes": "^2.1.0",
+    "uint8array-extras": "^1.4.0",
     "yaz0": "^3.0.1"
   },
   "main": "lib/combo/index.ts",
   "devDependencies": {
     "@types/pngjs": "^6.0.5",
-    "@types/randombytes": "^2.0.3",
     "cross-env": "^7.0.3",
     "csv": "^6.3.10",
     "type-fest": "^4.26.1"
