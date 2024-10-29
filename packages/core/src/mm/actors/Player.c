@@ -1819,7 +1819,7 @@ void Player_GetCustomSwordLength(GameState_Play* play, Actor_Player* player) {
     }
 }
 
-static MeleeWeaponDamageInfo megatonHammerDmgInfo = { DMG_GORON_PUNCH, 2, 4, 2, 4 };
+static MeleeWeaponDamageInfo megatonHammerDmgInfo = { DMG_GORON_PUNCH | DMG_GORON_POUND, 2, 4, 2, 4 };
 
 void Player_SetMeleeWeaponInfo(Actor_Player* this, PlayerMeleeWeaponAnimation meleeWeaponAnim) {
     MeleeWeaponDamageInfo* D_8085D09C = OverlayAddr(0x8085D09C);
@@ -1871,7 +1871,7 @@ AttackAnimInfo* Player_GetMeleeAttackAnimInfo(void* a0, Actor_Player* player, Pl
             ret = &sHammerAttackAnimInfo[0];
         }
     }
-    
+
     return ret;
 }
 
