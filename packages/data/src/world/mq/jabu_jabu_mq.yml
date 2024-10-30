@@ -142,11 +142,13 @@
   dungeon: JJ
   exits:
     "Jabu-Jabu Above Big Octo Fight": "true"
-    "Jabu-Jabu Main Elevator Room High Ledge": "(climb_anywhere && can_play_elegy) || can_boomerang"
+    "Jabu-Jabu Main Elevator Room High Ledge": "(can_play_elegy && (climb_anywhere || longshot_anywhere || can_boomerang)) || (can_boomerang && event(MQ_JABU_AFTER_ABOVE_BIG_OCTO_SPAWN_COW_AND_CRATES))"
+  events:
+    MQ_JABU_AFTER_ABOVE_BIG_OCTO_SPAWN_COW_AND_CRATES: "can_use_slingshot"
   locations:
-    "MQ Jabu-Jabu Cow": "can_play_epona && can_use_slingshot"
+    "MQ Jabu-Jabu Cow": "can_play_epona && event(MQ_JABU_AFTER_ABOVE_BIG_OCTO_SPAWN_COW_AND_CRATES)"
     "MQ Jabu-Jabu Grass Room After Big Octo": "can_cut_grass"
-    "MQ Jabu-Jabu Wonder Item Platforms Cow": "can_use_slingshot"
+    "MQ Jabu-Jabu Wonder Item Platforms Cow": "event(MQ_JABU_AFTER_ABOVE_BIG_OCTO_SPAWN_COW_AND_CRATES)"
 "Jabu-Jabu Main Elevator Room High Ledge":
   dungeon: JJ
   exits:
