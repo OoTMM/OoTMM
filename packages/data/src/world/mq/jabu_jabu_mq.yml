@@ -96,7 +96,7 @@
   dungeon: JJ
   exits:
     "Jabu-Jabu Ruto Section Bottom Floor": "true"
-    "Jabu-Jabu Main Elevator Room Lower": "event(JABU_MQ_WATER_SPOUTS)"
+    "Jabu-Jabu Main Elevator Room Lower": "event(JABU_MQ_WATER_SPOUTS)" #We are going to need a buffer region here for behind the water spout. You can use Hover Boots with Bunny Hood or backwalking to get through the spout, or climb anywhere. There is not another one blocking the door on this side. It should also probably be a trick, even with climb anywhere.
   events:
     JABU_MQ_WATER_SPOUTS: "soul_lizalfos_dinalfos && soul_like_like && soul_enemy(SOUL_ENEMY_STINGER) && has_weapon"
   locations:
@@ -163,8 +163,8 @@
   dungeon: JJ
   exits:
     "Jabu-Jabu Vanilla Ruto Falling Room After Wiggling Thing": "true"
-    "Jabu-Jabu Back Forked Paths Left 1": "event(JABU_TENTACLE_BLUE)"
-    "Jabu-Jabu Back Forked Paths Left 2": "event(JABU_TENTACLE_BLUE)"
+    "Jabu-Jabu Back Forked Paths Left 1": "event(JABU_TENTACLE_BLUE)" #We will need buffer regions for left 1 and left 2. You can stand behind them while the parasites are there. And you can also just have them hit you to take you into the main part.
+    "Jabu-Jabu Back Forked Paths Left 2": "event(JABU_TENTACLE_BLUE)" #We will need buffer regions for left 1 and left 2. You can stand behind them while the parasites are there. And you can also just have them hit you to take you into the main part.
     "Jabu-Jabu Back Forked Paths Center After Rocks": "has_explosives_or_hammer || climb_anywhere" #These rocks can block in door rando, so it needs its own region.
     "Jabu-Jabu Back Forked Paths Right 1": "true"
     "Jabu-Jabu Back Forked Paths After Right 2 Web": "event(JABU_MQ_BACK_FIRE_WEB)"
