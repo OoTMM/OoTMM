@@ -232,7 +232,7 @@
 "Jabu-Jabu Pre-Boss Room":
   dungeon: JJ
   exits:
-    "Jabu-Jabu Main Elevator Room Ledge Before Pre-Boss": "event(JABU_TENTACLE_RED)"
+    "Jabu-Jabu Main Elevator Room Ledge Before Pre-Boss": "true"
     "Jabu-Jabu Boss": "event(JABU_MQ_END)"
   events:
     "JABU_MQ_END": "can_use_slingshot"
