@@ -228,7 +228,7 @@
 "Jabu-Jabu Basement Side Room":
   dungeon: JJ
   exits:
-    "Jabu-Jabu Ruto Section Bottom Floor": "event(JABU_MQ_BASEMENT_SIDE_BUTTON)" #Hard to tell if the Red Tentacle will interfere exiting the room with how close to the door it is.
+    "Jabu-Jabu Ruto Section Bottom Floor": "event(JABU_MQ_BASEMENT_SIDE_BUTTON)"
   events:
     JABU_MQ_BASEMENT_SIDE_PLATFORM: "has_lens && soul_keese && soul_enemy(SOUL_ENEMY_STINGER) && has_ranged_weapon"
     JABU_MQ_BASEMENT_SIDE_BUTTON: "true" #Listed here for action shuffle
