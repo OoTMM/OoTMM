@@ -6,7 +6,7 @@
     "Gerudo Training Grounds Left Path First Room": "event(GTG_LEFT_SIDE)"
     "Gerudo Training Grounds Maze Entrance Fork": "true"
   events:
-    GTG_RIGHT_SIDE: "can_use_slingshot || can_use_bow"
+    GTG_RIGHT_SIDE: "can_hit_triggers_distance"
     GTG_LEFT_SIDE: "has_fire"
   locations:
     "MQ Gerudo Training Grounds Entryway Left Chest": "true"
@@ -241,7 +241,7 @@
 "Gerudo Training Grounds Stalfos Room Ledge After Red Ice":
   dungeon: GTG
   exits:
-    "Gerudo Training Grounds Stalfos Room Ledge Before Red Ice": "has_blue_fire" #Might not be solid from other side.
+    "Gerudo Training Grounds Stalfos Room Ledge Before Red Ice": "true" #Only solid on one side.
     "Gerudo Training Grounds Spinning Statue Room Upper": "event(GTG_MQ_STALFOS_CLEAR)"
 "Gerudo Training Grounds Spinning Statue Room Upper":
   dungeon: GTG
