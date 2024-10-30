@@ -1734,7 +1734,7 @@ export const SETTINGS = [{
   name: "Megaton Hammer (MM)",
   category: 'items.extensions',
   type: 'boolean',
-  description: "Adds Megaton Hammmr in Majora's Mask.",
+  description: "Adds Megaton Hammer in Majora's Mask.",
   default: false,
   cond: hasMM,
 }, {
