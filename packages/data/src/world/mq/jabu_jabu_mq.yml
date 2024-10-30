@@ -165,7 +165,7 @@
     "Jabu-Jabu Back Forked Paths Left 2": "event(JABU_TENTACLE_BLUE)"
     "Jabu-Jabu Back Forked Paths Center After Rocks": "has_explosives_or_hammer || climb_anywhere" #These rocks can block in door rando, so it needs its own region.
     "Jabu-Jabu Back Forked Paths Right 1": "true"
-    "Jabu-Jabu Back Forked Paths Right 2": "event(JABU_MQ_BACK_FIRE_WEB)"
+    "Jabu-Jabu Back Forked Paths After Right 2 Web": "event(JABU_MQ_BACK_FIRE_WEB)"
   events:
     JABU_MQ_BACK_CENTER_SWITCH: "has_explosives_or_hammer" #Event is split up because of the rocks.
     JABU_MQ_BACK_FIRE_WEB: "has_fire || (can_use_sticks && event(JABU_MQ_LIKE_LIKE_ROOM_CLEAR))" #Good for now, but can't use sticks method with door rando.
@@ -202,10 +202,15 @@
     "MQ Jabu-Jabu Wonder Item Falling Like-Likes Explosion 1": "has_explosives"
     "MQ Jabu-Jabu Wonder Item Falling Like-Likes Explosion 2": "has_explosives"
     "MQ Jabu-Jabu Wonder Item Falling Like-Likes Explosion 3": "has_explosives"
-"Jabu-Jabu Back Forked Paths Right 2":
+"Jabu-Jabu Back Forked Paths After Right 2 Web":
   dungeon: JJ
   exits:
     "Jabu-Jabu Back Forked Paths": "true" #One-sided collision on the web
+    "Jabu-Jabu Back Forked Paths Right 2": "true"
+"Jabu-Jabu Back Forked Paths Right 2":
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu Back Forked Paths After Right 2 Web": "true"
   events:
     JABU_TENTACLE_BLUE: "can_boomerang && soul_enemy(SOUL_ENEMY_PARASITE)"
 "Jabu-Jabu Back Forked Paths Left 1":
