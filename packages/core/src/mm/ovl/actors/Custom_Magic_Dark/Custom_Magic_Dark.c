@@ -1,4 +1,4 @@
-#include "Custom_Magic_Dark.h"
+#include <actors/Custom_Magic_Dark/Custom_Magic_Dark.h>
 #include <combo/custom.h>
 #include <combo/player.h>
 #include <combo/magic.h>

@@ -43,6 +43,9 @@ set(LDSCRIPT_IN "${CMAKE_SOURCE_DIR}/src/link.ld.in")
 set(LDSCRIPT_OVL "${CMAKE_SOURCE_DIR}/src/link_ovl.ld")
 
 function(build game)
+  # Includes for OVLs
+  include_directories("${CMAKE_SOURCE_DIR}/src/common/ovl" "${CMAKE_SOURCE_DIR}/src/${game}/ovl")
+
   # Common stuff
   string(TOUPPER ${game} game_upper)
   set(game_define "-DGAME_${game_upper}=1")
@@ -116,6 +119,9 @@ function (add_actor game dir)
   get_filename_component(name "${dir}" NAME)
   file(GLOB srcs "${dir}/*.c" "${dir}/*.S")
 
+  # Includes for OVLs
+  include_directories("${CMAKE_SOURCE_DIR}/src/common/ovl" "${CMAKE_SOURCE_DIR}/src/${game}/ovl")
+
   # Common stuff
   string(TOUPPER ${game} game_upper)
   set(target_name "${game}_ovl_${name}")
@@ -153,8 +159,8 @@ function (add_actors game)
   endforeach()
 endfunction()
 
-build(oot)
-build(mm)
-
-add_actors(oot "src/oot/ovl/actors" "src/common/ovl/actors")
-add_actors(mm "src/mm/ovl/actors" "src/common/ovl/actors")
+# Build
+foreach(game oot mm)
+  build(${game})
+  add_actors(${game} "src/${game}/ovl/actors" "src/common/ovl/actors")
+endforeach()
