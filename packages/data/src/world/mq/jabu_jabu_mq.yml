@@ -233,7 +233,7 @@
     JABU_MQ_BASEMENT_SIDE_PLATFORM: "has_lens && soul_keese && soul_enemy(SOUL_ENEMY_STINGER) && has_ranged_weapon"
     JABU_MQ_BASEMENT_SIDE_BUTTON: "true" #Listed here for action shuffle
   locations:
-    "MQ Jabu-Jabu GS Basement Side Room": "gs && ((event(JABU_MQ_BASEMENT_SIDE_PLATFORM) && can_collect_distance) || (has_hover_boots && can_collect_distance) || (has_fire_arrows && can_longshot) || (climb_anywhere && can_collect_distance))"
+    "MQ Jabu-Jabu GS Basement Side Room": "gs && ((event(JABU_MQ_BASEMENT_SIDE_PLATFORM) && can_collect_distance) || (has_hover_boots && can_collect_distance) || (has_fire_arrows && can_longshot) || (climb_anywhere && can_damage_skull))"
 "Jabu-Jabu Pre-Boss Room":
   dungeon: JJ
   exits:
