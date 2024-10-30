@@ -95,7 +95,7 @@
     "Gerudo Training Grounds": "true"
     "Gerudo Training Grounds Lava Room Near Beginning": "event(GTG_MQ_RIGHT_FIRST_CLEAR)"
   events:
-    GTG_MQ_RIGHT_FIRST_CLEAR: "soul_lizalfos_dinalfos && soul_armos && soul_dodongo && has_weapon"
+    GTG_MQ_RIGHT_FIRST_CLEAR: "soul_lizalfos_dinalfos && soul_armos && soul_dodongo && (can_use_sword_master || (can_use_sword_goron && has(SWORD_BIGGORON)))"
   locations:
     "MQ Gerudo Training Grounds Right Side Dinolfos Chest": "event(GTG_MQ_RIGHT_FIRST_CLEAR)"
     "MQ Gerudo Training Grounds Wonder Item Dodongo Room Wall": "can_use_bow"
