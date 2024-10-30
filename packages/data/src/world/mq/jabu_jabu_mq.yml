@@ -243,7 +243,7 @@
     "JABU_MQ_END": "can_use_slingshot"
   locations:
     "MQ Jabu-Jabu Pre-Boss Chest": "can_use_slingshot"
-    "MQ Jabu-Jabu GS Pre-Boss": "gs && can_boomerang" #Hookshot or longshot might be viable here; needs testing.
+    "MQ Jabu-Jabu GS Pre-Boss": "gs && can_collect_distance"
     "MQ Jabu-Jabu Pot Before Boss": "true"
     "MQ Jabu-Jabu Grass Before Boss 1": "can_cut_grass"
     "MQ Jabu-Jabu Grass Before Boss 2": "can_cut_grass"
