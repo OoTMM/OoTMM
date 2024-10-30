@@ -43,7 +43,7 @@
   events:
     JABU_MQ_UNDERWATER_ALCOVE_SWITCH: "true"
   locations:
-    "MQ Jabu-Jabu Compass Chest": "can_use_slingshot"
+    "MQ Jabu-Jabu Compass Chest": "can_hit_triggers_distance || can_hookshot || has_bombchu"
     "MQ Jabu-Jabu Pot Underwater Alcove 1": "true"
     "MQ Jabu-Jabu Pot Underwater Alcove 2": "true"
     "MQ Jabu-Jabu Rupee Bottom": "(is_child && can_dive_small) || can_dive_big"
@@ -129,7 +129,7 @@
     "Jabu-Jabu Basement Ledge Before Big Octo After Green Tentacle": "true"
     "Jabu-Jabu Above Big Octo Fight": "event(JABU_BIG_OCTO)"
   events:
-    JABU_BIG_OCTO: "event(JABU_TENTACLE_GREEN) && soul_octorok && (can_use_sticks || has_weapon) && soul_ruto"
+    JABU_BIG_OCTO: "soul_octorok && (can_use_sticks || has_weapon) && soul_ruto"
 "Jabu-Jabu Above Big Octo Fight":
   dungeon: JJ
   exits:
