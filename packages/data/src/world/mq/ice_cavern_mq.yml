@@ -2,42 +2,98 @@
   dungeon: IC
   exits:
     "Zora Fountain Frozen": "true"
-    "Ice Cavern Main": "has_ranged_weapon || has_explosives" #The pot carry is very trick territory; this crystal switch is a problem.
+    "Ice Cavern Room After Entrance Boulder": "true"
   locations:
     "MQ Ice Cavern Pot Entrance": "true"
-"Ice Cavern Main":
+"Ice Cavern Room After Entrance Boulder":
   dungeon: IC
   exits:
-    "Ice Cavern Map Room": "soul_wolfos && soul_freezard && (has_weapon || can_use_sticks || has_explosives)"
-    "Ice Cavern Compass Room": "is_adult && has_blue_fire"
-    "Ice Cavern Big Room": "has_blue_fire"
+    "Ice Cavern": "true"
+    "Ice Cavern Ledge After Shiek": "climb_anywhere || hookshot_anywhere"
+    "Ice Cavern After Initial Ice Block": "event(ICE_MQ_FIRST_CRYSTAL)"
+  events:
+    ICE_MQ_FIRST_CRYSTAL: "has_ranged_weapon || has_explosives || (is_adult && (has(SWORD_BIGGORON) || can_use_mask_blast))" #Biggoron Jump Slash as Adult hits it, so does Adult Blast Mask. The pot carry is very trick territory; this crystal switch is a problem.
+"Ice Cavern After Initial Ice Block":
+  dungeon: IC
+  exits:
+    "Ice Cavern Room After Entrance Boulder": "event(ICE_MQ_FIRST_CRYSTAL)"
+    "Ice Cavern Main Room": "true"
   locations:
     "MQ Ice Cavern Pot First Room 1": "true"
     "MQ Ice Cavern Pot First Room 2": "true"
+"Ice Cavern Main Room":
+  dungeon: IC
+  exits:
+    "Ice Cavern After Initial Ice Block": "true"
+    "Ice Cavern Map Room": "event(ICE_MQ_MAIN_ENEMIES_CLEAR)"
+    "Ice Cavern Compass Room": "(has_blue_fire && is_adult) || climb_anywhere || hookshot_anywhere"
+    "Ice Cavern Vanilla Push Block Room": "has_blue_fire || climb_anywhere || hookshot_anywhere"
+  events:
+    ICE_MQ_MAIN_ENEMIES_CLEAR: "soul_wolfos && soul_freezard && (has_weapon || can_use_sticks || has_explosives)"
+  locations:
     "MQ Ice Cavern Pot Main Room 1": "true"
     "MQ Ice Cavern Pot Main Room 2": "true"
     "MQ Ice Cavern Pot Main Room 3": "true"
     "MQ Ice Cavern Pot Main Room 4": "true"
 "Ice Cavern Map Room":
   dungeon: IC
+  exits:
+    "Ice Cavern Main Room": "true"
+  events:
+    BLUE_FIRE: "has_bottle && event(ICE_MQ_MAP_STALAGMITES)"
+    ICE_MQ_MAP_STALAGMITES: "true" #Need to get past ice stalagmites to reach Blue Fire, trivial until action shuffle is implemented as we can roll between them (albeit finnickly).
+    ICE_MQ_MAP_SWITCH: "has_weapon || has_bombs || can_use_mask_blast || has_bombchu || can_use_bow || can_use_slingshot || can_hookshot || can_use_sticks || can_hammer || can_boomerang" #Many ways to hit crystal switch
+  locations:
+    "MQ Ice Cavern Map Chest": "event(ICE_MQ_MAP_SWITCH) && has_blue_fire"
+"Ice Cavern Compass Room":
+  dungeon: IC
+  exits:
+    "Ice Cavern Main Room": "has_blue_fire || climb_anywhere || hookshot_anywhere" #Climbing works if you start further down the hall
   events:
     BLUE_FIRE: "has_bottle"
   locations:
-    "MQ Ice Cavern Map Chest": "has_blue_fire"
-"Ice Cavern Compass Room":
-  dungeon: IC
-  locations:
     "MQ Ice Cavern Compass Chest": "true"
-    "MQ Ice Cavern Piece of Heart": "has_explosives"
-    "MQ Ice Cavern GS Compass Room": "gs && (can_play_time || has_blue_fire_arrows || can_boomerang)"
+    "MQ Ice Cavern Piece of Heart": "has_explosives || (can_use_mask_blast && (is_child || (is_adult && has_shield)))" #Blast Mask can only hit when adult if crouching with shield.
+    "MQ Ice Cavern GS Compass Room": "gs && ((can_play_time && has_blue_fire && can_damage_skull) || has_blue_fire_arrows || can_boomerang)"
     "MQ Ice Cavern Pot Compass Room 1": "true"
     "MQ Ice Cavern Pot Compass Room 2": "true"
-"Ice Cavern Big Room":
+"Ice Cavern Vanilla Push Block Room":
   dungeon: IC
+  exits:
+    "Ice Cavern Main Room": "has_blue_fire || hookshot_anywhere"
+    "Ice Cavern Vanilla Push Block Room Scarecrow Ledge": "climb_anywhere || hookshot_anywhere || scarecrow_hookshot || (is_adult && trick(OOT_MQ_ICE_SCARE_NOTHING)) || (has_hover_boots && (can_longshot || (is_adult && trick(OOT_MQ_ICE_SCARE_HOVER))))"
+    "Ice Cavern Past Red Ice Before Shiek": "climb_anywhere || hookshot_anywhere || (has_blue_fire && (is_adult || (can_play_time && has_hover_boots)))"
+  events:
+    BLUE_FIRE: "has_bottle && (climb_anywhere || hookshot_anywhere || can_play_time)"
+    ICE_MQ_SECOND_CRYSTAL: "has_ranged_weapon || has_explosives || (is_adult && (has(SWORD_BIGGORON) || can_use_mask_blast))" #Biggoron Jump Slash as Adult hits it, so does Adult Blast Mask.
   locations:
-    "MQ Ice Cavern Iron Boots": "soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon && (is_adult || (can_play_time && has_hover_boots))"
-    "MQ Ice Cavern Sheik Song": "soul_npc(SOUL_NPC_SHEIK) && soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon && (is_adult || (can_play_time && has_hover_boots))"
-    "MQ Ice Cavern GS Scarecrow": "gs && (scarecrow_hookshot || (has_hover_boots && (can_longshot || (is_adult && trick(OOT_MQ_ICE_SCARE_HOVER)))) || (is_adult && trick(OOT_MQ_ICE_SCARE_NOTHING)))"
-    "MQ Ice Cavern GS Clear Blocks": "gs && (has_ranged_weapon || has_explosives)" #Again, I'm not making people carry pots through boulder hell. Biggoron Sword also works here.
-    "MQ Ice Cavern Pot Final Corridor 1": "is_adult || (can_play_time && has_hover_boots)"
-    "MQ Ice Cavern Pot Final Corridor 2": "is_adult || (can_play_time && has_hover_boots)"
+    "MQ Ice Cavern GS Clear Blocks": "gs && event(ICE_MQ_SECOND_CRYSTAL) && can_damage_skull"
+"Ice Cavern Vanilla Push Block Room Scarecrow Ledge":
+  dungeon: IC
+  exits:
+    "Ice Cavern Vanilla Push Block Room": "true"
+  locations:
+    "MQ Ice Cavern GS Scarecrow": "gs && can_damage_skull"
+"Ice Cavern Past Red Ice Before Shiek":
+  dungeon: IC
+  exits:
+    "Ice Cavern Vanilla Push Block Room": "has_blue_fire || hookshot_anywhere"
+    "Ice Cavern Serenade Room": "true"
+  locations:
+    "MQ Ice Cavern Pot Final Corridor 1": "true"
+    "MQ Ice Cavern Pot Final Corridor 2": "true"
+"Ice Cavern Serenade Room":
+  dungeon: IC
+  exits:
+    "Ice Cavern Past Red Ice Before Shiek": "event(ICE_MQ_FINAL_ROOM_CLEAR)"
+    "Ice Cavern Ledge After Shiek": "event(ICE_MQ_FINAL_ROOM_CLEAR) && has_iron_boots"
+  events:
+    ICE_MQ_FINAL_ROOM_CLEAR: "soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon"
+  locations:
+    "MQ Ice Cavern Iron Boots": "event(ICE_MQ_FINAL_ROOM_CLEAR)"
+    "MQ Ice Cavern Sheik Song": "event(ICE_MQ_FINAL_ROOM_CLEAR) && soul_npc(SOUL_NPC_SHEIK)"
+"Ice Cavern Ledge After Shiek":
+  dungeon: IC
+  exits:
+    "Ice Cavern Room After Entrance Boulder": "true"
+    "Ice Cavern Serenade Room": "has_iron_boots"
