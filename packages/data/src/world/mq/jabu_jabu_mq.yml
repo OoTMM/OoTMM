@@ -46,7 +46,7 @@
     "MQ Jabu-Jabu Compass Chest": "can_hit_triggers_distance || can_hookshot || has_bombchu"
     "MQ Jabu-Jabu Pot Underwater Alcove 1": "true"
     "MQ Jabu-Jabu Pot Underwater Alcove 2": "true"
-    "MQ Jabu-Jabu Rupee Bottom": "(is_child && can_dive_small) || can_dive_big"
+    "MQ Jabu-Jabu Rupee Bottom": "can_dive_big"
     "MQ Jabu-Jabu Rupee Middle": "can_dive_small"
     "MQ Jabu-Jabu Rupee Top": "is_child || can_dive_small"
 "Jabu-Jabu Main Elevator Room Ledge Before Pre-Boss":
