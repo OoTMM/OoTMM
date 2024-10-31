@@ -119,7 +119,12 @@ export async function pack(args: PackArgs): Promise<PackOutput> {
   for (const [filename, patchList] of Object.entries(patchfile.patches)) {
     const f = romBuilder.fileByNameRequired(filename);
     for (const patch of patchList) {
-      f.data.set(patch.data, patch.addr);
+      try {
+        f.data.set(patch.data, patch.addr);
+      } catch (e) {
+        monitor.log(`Failed to apply patch to ${filename} at 0x${patch.addr.toString(16)}: ${e}`);
+        throw e;
+      }
     }
   }
 

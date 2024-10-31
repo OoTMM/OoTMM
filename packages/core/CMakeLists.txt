@@ -51,7 +51,7 @@ function(build game)
   set(game_define "-DGAME_${game_upper}=1")
 
   # Overlays
-  file(GLOB ovls "src/${game}/ovl/actors/*" "src/common/ovl/actors/*")
+  file(GLOB ovls "src/${game}/ovl/actors/*" "src/common/ovl/actors/*" "src/${game}/ovl/gamemodes/*")
   set(OVL_OBJECTS "")
   set(OVL_NAMES "")
   foreach(ovl ${ovls})
@@ -76,7 +76,7 @@ function(build game)
         --rename-section .bss=.${name}.bss
         --rename-section .meta=.${name}.meta
         "${target_file}"
-      DEPENDS ${target_name} "${LDSCRIPT_OVL}"
+      DEPENDS $<TARGET_OBJECTS:${target_name}> "${LDSCRIPT_OVL}"
       COMMENT "Merging objects for ${name}"
       VERBATIM
     )
@@ -150,6 +150,7 @@ function(build game)
       DEPENDS ${game}
       COMMENT "Generating zovlx for ${ovl}"
       VERBATIM
+      USES_TERMINAL
     )
     add_custom_target(zovlx_${game}_${ovl} ALL DEPENDS "${ovl_extracted}")
     install(FILES ${ovl_extracted} DESTINATION "bin/ovl/${game}")

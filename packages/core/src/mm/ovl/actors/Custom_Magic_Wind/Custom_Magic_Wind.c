@@ -289,4 +289,4 @@ ActorInit Magic_Wind_InitVars = {
     MagicWind_Draw,
 };
 
-OVL_ACTOR_INFO(AC_CUSTOM_SPELL_WIND, Magic_Wind_InitVars);
+OVL_INFO_ACTOR(AC_CUSTOM_SPELL_WIND, Magic_Wind_InitVars);

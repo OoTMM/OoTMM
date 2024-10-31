@@ -147,7 +147,8 @@ void Sram_CopySaveWrapper(void* fileSelect, void* sramCtx)
     Save_CopyMM(*(short*)((char*)fileSelect + 0x1ca50), *(short*)((char*)fileSelect + 0x1ca38));
 }
 
-PATCH_CALL(0x808048d8, Sram_CopySaveWrapper);
+/* TODO: Fix this */
+//PATCH_CALL(0x808048d8, Sram_CopySaveWrapper);
 
 ALIGNED(16) static u16 gStartingItemsBuffer[64];
 

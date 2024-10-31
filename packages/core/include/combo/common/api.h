@@ -464,6 +464,9 @@ void Environment_Init(GameState_Play* play, EnvironmentContext* envCtx, int unus
 
 extern u8 gWeatherMode;
 
+/* Gamemodes */
+void FileSelect_Init(GameState* this);
+
 #if defined(GAME_MM)
 extern u8 gSceneSeqState;
 extern s16 gSkyboxNumStars;

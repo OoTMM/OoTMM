@@ -797,4 +797,4 @@ ActorInit Obj_Kibako_InitVars =
     NULL,
 };
 
-OVL_ACTOR_INFO(AC_OBJ_KIBAKO, Obj_Kibako_InitVars);
+OVL_INFO_ACTOR(AC_OBJ_KIBAKO, Obj_Kibako_InitVars);

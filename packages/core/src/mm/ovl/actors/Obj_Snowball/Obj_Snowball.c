@@ -1008,4 +1008,4 @@ ActorInit Actor_Obj_Snowball_InitVars = {
     (ActorFunc)ObjSnowball_Draw,
 };
 
-OVL_ACTOR_INFO(AC_OBJ_SNOWBALL, Actor_Obj_Snowball_InitVars);
+OVL_INFO_ACTOR(AC_OBJ_SNOWBALL, Actor_Obj_Snowball_InitVars);

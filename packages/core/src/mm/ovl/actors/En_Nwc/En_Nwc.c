@@ -535,4 +535,4 @@ ActorInit EnNwc_InitVars =
     (ActorFunc)EnNwc_Draw,
 };
 
-OVL_ACTOR_INFO(AC_EN_NWC, EnNwc_InitVars);
+OVL_INFO_ACTOR(AC_EN_NWC, EnNwc_InitVars);

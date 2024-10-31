@@ -388,4 +388,4 @@ ActorInit Actor_Bg_Ingate_InitVars =
     (ActorFunc)BgIngate_Draw,
 };
 
-OVL_ACTOR_INFO(AC_BG_INGATE, Actor_Bg_Ingate_InitVars);
+OVL_INFO_ACTOR(AC_BG_INGATE, Actor_Bg_Ingate_InitVars);

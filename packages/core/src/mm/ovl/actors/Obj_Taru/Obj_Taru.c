@@ -383,4 +383,4 @@ ActorInit ObjTaru_InitVars = {
     (ActorFunc)ObjTaru_Draw,
 };
 
-OVL_ACTOR_INFO(AC_OBJ_TARU, ObjTaru_InitVars);
+OVL_INFO_ACTOR(AC_OBJ_TARU, ObjTaru_InitVars);

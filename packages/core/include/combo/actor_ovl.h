@@ -36,13 +36,34 @@ typedef struct {
 
 _Static_assert(sizeof(PlayerOverlay) == 0x1C, "PlayerOverlay size is wrong");
 
+#define OVL_TYPE_ACTOR      0x01
+#define OVL_TYPE_GAMEMODE   0x02
+
 typedef struct
 {
-    u32              id;
-    const ActorInit* init;
+    u32 type;
 }
-OvlActorInfoMeta;
+OvlInfoMeta;
 
-#define OVL_ACTOR_INFO(id, init) __attribute__((section(".meta"),used)) static OvlActorInfoMeta __meta = { (id), (void*)(u32)&(init) };
+typedef struct
+{
+    OvlInfoMeta         base;
+    u32                 id;
+    const ActorInit*    init;
+}
+OvlInfoMetaActor;
+
+typedef struct
+{
+    OvlInfoMeta         base;
+    u32                 id;
+    const void*         ctor;
+    const void*         dtor;
+    u32                 size;
+}
+OvlInfoMetaGamemode;
+
+#define OVL_INFO_ACTOR(id, init)                    __attribute__((section(".meta"),used)) static OvlInfoMetaActor __meta = { { OVL_TYPE_ACTOR }, (id), (void*)(u32)&(init) };
+#define OVL_INFO_GAMEMODE(id, ctor, dtor, size)     __attribute__((section(".meta"),used)) static OvlInfoMetaGamemode __meta = { { OVL_TYPE_GAMEMODE }, (id), (void*)(u32)&(ctor), (void*)(u32)&(dtor), (size) };
 
 #endif

@@ -343,4 +343,4 @@ ActorInit Magic_Dark_InitVars = {
     MagicDark_OrbDraw,
 };
 
-OVL_ACTOR_INFO(AC_CUSTOM_SPELL_LOVE, Magic_Dark_InitVars);
+OVL_INFO_ACTOR(AC_CUSTOM_SPELL_LOVE, Magic_Dark_InitVars);

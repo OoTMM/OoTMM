@@ -480,4 +480,4 @@ ActorInit En_Yb_InitVars = {
     (ActorFunc)EnYb_Draw,
 };
 
-OVL_ACTOR_INFO(AC_EN_YB, En_Yb_InitVars);
+OVL_INFO_ACTOR(AC_EN_YB, En_Yb_InitVars);

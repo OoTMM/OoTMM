@@ -714,4 +714,4 @@ ActorInit En_Test4_InitVars =
     NULL,
 };
 
-OVL_ACTOR_INFO(AC_EN_TEST4, En_Test4_InitVars);
+OVL_INFO_ACTOR(AC_EN_TEST4, En_Test4_InitVars);

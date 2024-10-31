@@ -441,4 +441,4 @@ static ActorInit ObjMure_ActorInit =
     NULL,
 };
 
-OVL_ACTOR_INFO(AC_OBJ_MURE, ObjMure_ActorInit);
+OVL_INFO_ACTOR(AC_OBJ_MURE, ObjMure_ActorInit);

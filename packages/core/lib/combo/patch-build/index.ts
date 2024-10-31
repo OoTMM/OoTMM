@@ -121,37 +121,73 @@ export async function buildPatchfiles(args: BuildPatchfileIn): Promise<Patchfile
       for (const ov of overlays) {
         /* Resolve and inject the new overlay */
         const raw = await args.resolver.fetch(ov);
-        const header = raw.subarray(0, 0x10);
-        const data = raw.subarray(0x10);
+        const headerSize = raw.subarray(0, 8);
+        const header = raw.subarray(8, 64);
+        const data = raw.subarray(64);
         p.addNewFile(ov, ovlAddr, data, true);
         const vromStart = ovlAddr;
         const vromEnd = ovlAddr + data.length;
         ovlAddr = vromEnd;
 
-        /* Parse the header */
-        const actorId = bufReadU32BE(header, 0x00);
-        const vramInit = bufReadU32BE(header, 0x04);
-        const vramStart = bufReadU32BE(header, 0x08);
-        const vramEnd = bufReadU32BE(header, 0x0c);
+        const vramStart = bufReadU32BE(headerSize, 0x00);
+        const vramEnd = bufReadU32BE(headerSize, 0x04);
 
-        const patch = new Uint8Array(4 * 6);
-        bufWriteU32BE(patch, 0x00, vromStart);
-        bufWriteU32BE(patch, 0x04, vromEnd);
-        bufWriteU32BE(patch, 0x08, vramStart);
-        bufWriteU32BE(patch, 0x0c, vramEnd);
-        bufWriteU32BE(patch, 0x10, 0);
-        bufWriteU32BE(patch, 0x14, vramInit);
+        const type = bufReadU32BE(header, 0x00);
 
-        /* Delete the old overlay if possible */
-        const oldHeader = rom.subarray(gc.actorsOvlAddr + actorId * 0x20, gc.actorsOvlAddr + actorId * 0x20 + 0x20);
-        const oldVramStart = bufReadU32BE(oldHeader, 0x08);
-        if (oldVramStart !== 0) {
-          const oldFile = args.addresses[game].fileFromRAM(oldVramStart);
-          p.removedFiles.push(oldFile.name);
+        if (type === 0x01) {
+          /* Actor */
+          const actorId = bufReadU32BE(header, 0x04);
+          const vramInit = bufReadU32BE(header, 0x08);
+
+          const patch = new Uint8Array(4 * 6);
+          bufWriteU32BE(patch, 0x00, vromStart);
+          bufWriteU32BE(patch, 0x04, vromEnd);
+          bufWriteU32BE(patch, 0x08, vramStart);
+          bufWriteU32BE(patch, 0x0c, vramEnd);
+          bufWriteU32BE(patch, 0x10, 0);
+          bufWriteU32BE(patch, 0x14, vramInit);
+
+          /* Delete the old overlay if possible */
+          const oldHeader = rom.subarray(gc.actorsOvlAddr + actorId * 0x20, gc.actorsOvlAddr + actorId * 0x20 + 0x20);
+          const oldVramStart = bufReadU32BE(oldHeader, 0x08);
+          if (oldVramStart !== 0) {
+            const oldFile = args.addresses[game].fileFromRAM(oldVramStart);
+            p.removedFiles.push(oldFile.name);
+          }
+
+          const fileAddr = args.addresses[game].fileFromROM(gc.actorsOvlAddr + actorId * 0x20);
+          p.addPatch(fileAddr.name, fileAddr.offset, patch);
         }
 
-        const fileAddr = args.addresses[game].fileFromROM(gc.actorsOvlAddr + actorId * 0x20);
-        p.addPatch(fileAddr.name, fileAddr.offset, patch);
+        if (type === 0x02) {
+          /* Gamemode */
+          const id = bufReadU32BE(header, 0x04);
+          const ctor = bufReadU32BE(header, 0x08);
+          const dtor = bufReadU32BE(header, 0x0c);
+          const size = bufReadU32BE(header, 0x10);
+
+          const patch = new Uint8Array(0x30);
+          bufWriteU32BE(patch, 0x00, 0);
+          bufWriteU32BE(patch, 0x04, vromStart);
+          bufWriteU32BE(patch, 0x08, vromEnd);
+          bufWriteU32BE(patch, 0x0c, vramStart);
+          bufWriteU32BE(patch, 0x10, vramEnd);
+          bufWriteU32BE(patch, 0x18, ctor);
+          bufWriteU32BE(patch, 0x1c, dtor);
+          bufWriteU32BE(patch, 0x2c, size);
+
+          /* Delete the old overlay if possible */
+          const base = gc.gamestatesOvlAddr + id * 0x30;
+          const oldHeader = rom.subarray(base, base + 0x30);
+          const oldVramStart = bufReadU32BE(oldHeader, 0x0c);
+          if (oldVramStart !== 0) {
+            const oldFile = args.addresses[game].fileFromRAM(oldVramStart);
+            p.removedFiles.push(oldFile.name);
+          }
+
+          const fileAddr = args.addresses[game].fileFromROM(base);
+          p.addPatch(fileAddr.name, fileAddr.offset, patch);
+        }
       }
 
       /* Handle cosmetics */

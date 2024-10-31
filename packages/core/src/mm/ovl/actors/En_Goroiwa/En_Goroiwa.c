@@ -1609,4 +1609,4 @@ ActorInit Actor_EnGoroiwa_InitVars = {
     (ActorFunc)EnGoroiwa_Draw,
 };
 
-OVL_ACTOR_INFO(AC_EN_GOROIWA, Actor_EnGoroiwa_InitVars);
+OVL_INFO_ACTOR(AC_EN_GOROIWA, Actor_EnGoroiwa_InitVars);

@@ -387,4 +387,4 @@ ActorInit EnHs_InitVars =
     (ActorFunc)EnHs_Draw,
 };
 
-OVL_ACTOR_INFO(AC_EN_HS, EnHs_InitVars);
+OVL_INFO_ACTOR(AC_EN_HS, EnHs_InitVars);

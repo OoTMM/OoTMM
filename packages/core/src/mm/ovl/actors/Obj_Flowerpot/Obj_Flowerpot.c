@@ -860,4 +860,4 @@ ActorInit ObjFlowerpot_InitVars =
     (ActorFunc)ObjFlowerpot_Draw,
 };
 
-OVL_ACTOR_INFO(AC_OBJ_FLOWERPOT, ObjFlowerpot_InitVars);
+OVL_INFO_ACTOR(AC_OBJ_FLOWERPOT, ObjFlowerpot_InitVars);

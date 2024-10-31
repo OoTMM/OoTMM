@@ -894,4 +894,4 @@ ActorInit ObjTsubo_InitVars =
     NULL,
 };
 
-OVL_ACTOR_INFO(AC_OBJ_TSUBO, ObjTsubo_InitVars);
+OVL_INFO_ACTOR(AC_OBJ_TSUBO, ObjTsubo_InitVars);

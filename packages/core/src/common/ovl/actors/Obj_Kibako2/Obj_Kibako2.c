@@ -662,4 +662,4 @@ ActorInit Obj_Kibako2_InitVars = {
     (ActorFunc)ObjKibako2_Draw,
 };
 
-OVL_ACTOR_INFO(AC_OBJ_KIBAKO2, Obj_Kibako2_InitVars);
+OVL_INFO_ACTOR(AC_OBJ_KIBAKO2, Obj_Kibako2_InitVars);

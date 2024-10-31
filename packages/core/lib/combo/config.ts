@@ -11,6 +11,7 @@ type GameConfig = {
   actorsOvlCount: number;
   effectsOvlAddr: number;
   effectsOvlCount: number;
+  gamestatesOvlAddr: number;
   objectTableAddr: number;
   objectCount: number;
 };
@@ -24,6 +25,7 @@ export const CONFIG_OOT: GameConfig = {
   actorsOvlCount: 471,
   effectsOvlAddr: 0xB5DBA0,
   effectsOvlCount: 37,
+  gamestatesOvlAddr: 0xb672a0,
   objectTableAddr: 0xb6ef58,
   objectCount: 0x192,
 };
@@ -35,8 +37,9 @@ export const CONFIG_MM: GameConfig = {
   dmaCount: 1552,
   actorsOvlAddr: 0xc45510,
   actorsOvlCount: 690,
-  effectsOvlAddr: 0,
-  effectsOvlCount: 0,
+  effectsOvlAddr: 0, /* FIXME */
+  effectsOvlCount: 0, /* FIXME */
+  gamestatesOvlAddr: 0, /* FIXME */
   objectTableAddr: 0xc58c80,
   objectCount: 0x283,
 };

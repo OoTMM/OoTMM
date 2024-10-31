@@ -606,4 +606,4 @@ static ActorInit EnButte_ActorInit =
     (ActorFunc)EnButte_Draw,
 };
 
-OVL_ACTOR_INFO(AC_EN_BUTTE, EnButte_ActorInit);
+OVL_INFO_ACTOR(AC_EN_BUTTE, EnButte_ActorInit);

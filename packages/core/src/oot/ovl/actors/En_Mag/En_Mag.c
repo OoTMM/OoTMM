@@ -799,4 +799,4 @@ ActorInit En_Mag_InitVars = {
     (ActorFunc)EnMag_Draw,
 };
 
-OVL_ACTOR_INFO(AC_EN_MAG, En_Mag_InitVars);
+OVL_INFO_ACTOR(AC_EN_MAG, En_Mag_InitVars);

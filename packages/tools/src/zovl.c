@@ -33,7 +33,8 @@ typedef struct
     Elf32_Ehdr      ehdr;
     char*           shstrtab;
     uint32_t        shstrtabSize;
-    uint32_t        meta[4];
+    uint32_t        metaSize[2];
+    char            meta[56];
     char*           sectionData[4];
     uint32_t        sectionStart[4];
     uint32_t        sectionSize[4];
@@ -220,6 +221,7 @@ static int setupFiles(State* st, const char* pathIn, const char* pathOut)
 static int loadMeta(State* state)
 {
     Elf32_Shdr shdr;
+    int size;
     uint32_t meta[2];
 
     if (locateSection(state, &shdr, ".meta", 0))
@@ -228,9 +230,17 @@ static int loadMeta(State* state)
         return 1;
     }
 
+    size = shdr.sh_size;
+    if (size > sizeof(state->meta))
+    {
+        fprintf(stderr, "Error: .meta section is too large\n");
+        return 1;
+    }
+
     /* Read */
+    memset(state->meta, 0, sizeof(state->meta));
     fseek(state->in, shdr.sh_offset, SEEK_SET);
-    fread(state->meta, sizeof(uint32_t) * 2, 1, state->in);
+    fread(state->meta, size, 1, state->in);
 
     return 0;
 }
@@ -406,10 +416,11 @@ static int emit(State* state)
     for (int i = 0; i < 4; ++i)
         vend += state->sectionSize[i];
     vend += round16((state->relocsCount + 6) * 4);
-    state->meta[2] = eswap32(vstart);
-    state->meta[3] = eswap32(vend);
+    state->metaSize[0] = eswap32(vstart);
+    state->metaSize[1] = eswap32(vend);
 
     /* Output meta */
+    fwrite(state->metaSize, sizeof(state->metaSize), 1, state->out);
     fwrite(state->meta, sizeof(state->meta), 1, state->out);
 
     /* Output sections */

@@ -392,4 +392,4 @@ ActorInit ObjMure_InitVars =
     NULL,
 };
 
-OVL_ACTOR_INFO(AC_OBJ_MURE, ObjMure_InitVars);
+OVL_INFO_ACTOR(AC_OBJ_MURE, ObjMure_InitVars);

@@ -908,4 +908,4 @@ static const ActorInit ObjComb_InitVars =
     (ActorFunc)ObjComb_Draw,
 };
 
-OVL_ACTOR_INFO(AC_OBJ_COMB, ObjComb_InitVars);
+OVL_INFO_ACTOR(AC_OBJ_COMB, ObjComb_InitVars);

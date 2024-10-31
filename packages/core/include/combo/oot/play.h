@@ -16,6 +16,8 @@
 #include <combo/oot/room.h>
 #include <combo/oot/object.h>
 #include <combo/oot/environment.h>
+#include <combo/oot/sram.h>
+#include <combo/oot/skybox.h>
 
 #define AGE_ADULT 0
 #define AGE_CHILD 1
@@ -181,5 +183,83 @@ ASSERT_OFFSET(RegEditor, regCur,            0x08);
 ASSERT_OFFSET(RegEditor, dPadInputPrev,     0x0c);
 ASSERT_OFFSET(RegEditor, inputRepeatTimer,  0x10);
 ASSERT_OFFSET(RegEditor, data,              0x14);
+
+typedef struct FileSelectState {
+    GameState           state;
+    Vtx*                windowVtx;
+    u8*                 staticSegment;
+    u8*                 parameterSegment;
+    View                view;
+    SramContext         sramCtx;
+    char                unk_1E4[0x4];
+    SkyboxContext       skyboxCtx;
+    MessageContext      msgCtx;
+    Font                font;
+    EnvironmentContext  envCtx;
+    char                unk_1C9E4[0x4];
+    Vtx*                windowContentVtx;
+    Vtx*                keyboardVtx;
+    Vtx*                nameEntryVtx;
+    u8                  n64ddFlag;
+    u16                 deaths[3];
+    u8                  fileNames[3][8];
+    u16                 healthCapacities[3];
+    u32                 questItems[3];
+    s16                 n64ddFlags[3];
+    s8                  defense[3];
+    s16                 buttonIndex;
+    s16                 confirmButtonIndex;
+    s16                 menuMode;
+    s16                 configMode;
+    s16                 prevConfigMode;
+    s16                 nextConfigMode;
+    s16                 selectMode;
+    s16                 selectedFileIndex;
+    char                unk_1CA48[0x2];
+    s16                 fileNamesY[3];
+    s16                 actionTimer;
+    s16                 buttonYOffsets[6];
+    s16                 copyDestFileIndex;
+    s16                 warningLabel;
+    s16                 warningButtonIndex;
+    s16                 titleLabel;
+    s16                 nextTitleLabel;
+    s16                 windowColor[3];
+    s16                 titleAlpha[2];
+    s16                 windowAlpha;
+    s16                 fileButtonAlpha[3];
+    s16                 nameBoxAlpha[3];
+    s16                 nameAlpha[3];
+    s16                 connectorAlpha[3];
+    s16                 fileInfoAlpha[3];
+    s16                 actionButtonAlpha[2];
+    s16                 confirmButtonAlpha[2];
+    s16                 optionButtonAlpha;
+    s16                 nameEntryBoxAlpha;
+    s16                 controlsAlpha;
+    s16                 emptyFileTextAlpha;
+    s16                 highlightColor[4];
+    s16                 highlightPulseDir;
+    s16                 unk_1CAAC;
+    s16                 confirmButtonTexIndices[2];
+    s16                 inputTimerX;
+    s16                 inputTimerY;
+    s16                 stickXDir;
+    s16                 stickYDir;
+    s16                 stickAdjX;
+    s16                 stickAdjY;
+    s16                 nameEntryBoxPosX;
+    s16                 windowPosX;
+    f32                 windowRot;
+    s16                 kbdButton;
+    s16                 charPage;
+    s16                 charBgAlpha;
+    s16                 charIndex;
+    s16                 kbdX;
+    s16                 kbdY;
+    s16                 newFileNameCharCount;
+    s16                 unk_1CAD6[5];
+}
+FileSelectState;
 
 #endif

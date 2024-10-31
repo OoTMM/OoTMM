@@ -3500,4 +3500,4 @@ ActorInit Actor_Boss01_InitVars =
     (ActorFunc)Boss01_Draw,
 };
 
-OVL_ACTOR_INFO(AC_BOSS_01, Actor_Boss01_InitVars);
+OVL_INFO_ACTOR(AC_BOSS_01, Actor_Boss01_InitVars);

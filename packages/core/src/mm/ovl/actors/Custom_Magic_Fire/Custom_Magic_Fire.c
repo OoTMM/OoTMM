@@ -317,4 +317,4 @@ ActorInit Magic_Fire_InitVars = {
 };
 
 
-OVL_ACTOR_INFO(AC_CUSTOM_SPELL_FIRE, Magic_Fire_InitVars);
+OVL_INFO_ACTOR(AC_CUSTOM_SPELL_FIRE, Magic_Fire_InitVars);
