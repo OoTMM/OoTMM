@@ -260,7 +260,7 @@
   dungeon: GTG
   exits:
     "Gerudo Training Grounds Spinning Statue Room Upper": "can_longshot || hookshot_anywhere || climb_anywhere"
-    "Gerudo Training Grounds Spinning Statue Room Statue Middle": "hookshot_anywhere || (climb_anywhere && can_hookshot)"
+    "Gerudo Training Grounds Spinning Statue Room Statue Middle": "hookshot_anywhere || climb_anywhere"
     "Gerudo Training Grounds Room After Spinning Statue": "true"
   events:
     GTG_MQ_SPINNING_STATUE_EYES: "can_use_bow"
