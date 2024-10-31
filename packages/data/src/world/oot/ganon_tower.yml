@@ -2,43 +2,57 @@
   dungeon: Tower
   exits:
     "Ganon Castle Stairs": "true"
-    "Ganon Castle Tower Lizalfos Room": "true"
-"Ganon Castle Tower Lizalfos Room":
+    "Ganon Castle Tower Lobby": "true"
+"Ganon Castle Tower Lobby":
   dungeon: Tower
   exits:
-    "Ganon Castle Tower": "event(GANON_TOWER_LIZALFOS_CLEAR)"
-    "Ganon Castle Tower Stalfos Room": "event(GANON_TOWER_LIZALFOS_CLEAR)"
+    "Ganon Castle Tower": "true"
+    "Ganon Castle Tower Dinalfos Room": "true"
+"Ganon Castle Tower Dinalfos Room":
+  dungeon: Tower
+  exits:
+    "Ganon Castle Tower Lobby": "event(GANON_TOWER_LIZALFOS_CLEAR)"
+    "Ganon Castle Tower First Transitional Staircase": "event(GANON_TOWER_LIZALFOS_CLEAR)"
   events:
     GANON_TOWER_LIZALFOS_CLEAR: "soul_lizalfos_dinalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
+"Ganon Castle Tower First Transitional Staircase":
+  dungeon: Tower
+  exits:
+    "Ganon Castle Tower Dinalfos Room": "true"
+    "Ganon Castle Tower Stalfos Room": "true"
 "Ganon Castle Tower Stalfos Room":
   dungeon: Tower
   exits:
-    "Ganon Castle Tower Lizalfos Room": "event(GANON_TOWER_STALFOS_CLEAR)"
-    "Ganon Castle Tower Iron Knuckle Room": "event(GANON_TOWER_STALFOS_CLEAR)"
+    "Ganon Castle Tower First Transitional Staircase": "event(GANON_TOWER_STALFOS_CLEAR)"
+    "Ganon Castle Tower Second Transitional Staircase": "event(GANON_TOWER_STALFOS_CLEAR)"
   events:
     GANON_TOWER_STALFOS_CLEAR: "soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon"
   locations:
     "Ganon Castle Boss Key": "event(GANON_TOWER_STALFOS_CLEAR)"
+"Ganon Castle Tower Second Transitional Staircase":
+  dungeon: Tower
+  exits:
+    "Ganon Castle Tower Stalfos Room": "true"
+    "Ganon Castle Tower Iron Knuckle Room": "true"
 "Ganon Castle Tower Iron Knuckle Room":
   dungeon: Tower
   exits:
-    "Ganon Castle Tower Stalfos Room": "event(GANON_TOWER_IRON_KNUCKLE_CLEAR)"
-    "Ganon Castle Tower Pre-Boss": "event(GANON_TOWER_IRON_KNUCKLE_CLEAR)"
+    "Ganon Castle Tower Second Transitional Staircase": "event(GANON_TOWER_IRON_KNUCKLE_CLEAR)"
+    "Ganon Castle Tower Staircase Before Boss Door": "event(GANON_TOWER_IRON_KNUCKLE_CLEAR)"
   events:
     GANON_TOWER_IRON_KNUCKLE_CLEAR: "soul_iron_knuckle && has_weapon"
-"Ganon Castle Tower Pre-Boss":
+"Ganon Castle Tower Staircase Before Boss Door":
   dungeon: Tower
   exits:
     "Ganon Castle Tower Iron Knuckle Room": "true"
-    "Ganon Castle Tower Boss": "setting(ganonBossKey, removed) || has(BOSS_KEY_GANON) || (setting(ganonBossKey, custom) && special(GANON_BK))"
+    "Ganon Castle Tower Lower Arena": "setting(ganonBossKey, removed) || has(BOSS_KEY_GANON) || (setting(ganonBossKey, custom) && special(GANON_BK))"
+"Ganon Castle Tower Lower Arena":
+  dungeon: Tower
+  exits:
+    "Ganon Castle Tower Staircase Before Boss Door": "true" #Is it locked from both sides like a normal locked door?
+    "Ganon Castle Tower Final Staircase": "true"
   events:
     GANON_PRE_BOSS: "true"
-"Ganon Castle Tower Boss":
-  dungeon: Tower
-  age_change: false
-  events:
-    GANON_START: "!is_goal_triforce"
-    GANON: "event(GANON_START) && can_use_light_arrows && soul_npc(SOUL_NPC_ZELDA) && can_use_sword_master"
   locations:
     "Ganon Tower Pot 01": "true"
     "Ganon Tower Pot 02": "true"
@@ -58,3 +72,14 @@
     "Ganon Tower Pot 16": "true"
     "Ganon Tower Pot 17": "true"
     "Ganon Tower Pot 18": "true"
+"Ganon Castle Tower Final Staircase":
+  dungeon: Tower
+  exits:
+    "Ganon Castle Tower Lower Arena": "true"
+    "Ganon Castle Tower Boss": "true"
+"Ganon Castle Tower Boss":
+  dungeon: Tower
+  age_change: false
+  events:
+    GANON_START: "!is_goal_triforce"
+    GANON: "event(GANON_START) && can_use_light_arrows && soul_npc(SOUL_NPC_ZELDA) && can_use_sword_master"
