@@ -144,8 +144,8 @@
     "MQ Jabu-Jabu Cow": "can_play_epona && event(MQ_JABU_AFTER_ABOVE_BIG_OCTO_SPAWN_COW_AND_CRATES)"
     "MQ Jabu-Jabu Grass Room After Big Octo": "can_cut_grass"
     "MQ Jabu-Jabu Wonder Item Platforms Cow": "event(MQ_JABU_AFTER_ABOVE_BIG_OCTO_SPAWN_COW_AND_CRATES)"
-    "MQ Jabu-Jabu Room After Above Big Octo Small Crate 1": "true"
-    "MQ Jabu-Jabu Room After Above Big Octo Small Crate 2": "true"
+    "MQ Jabu-Jabu Room After Above Big Octo Small Crate 1": "event(MQ_JABU_AFTER_ABOVE_BIG_OCTO_SPAWN_COW_AND_CRATES)"
+    "MQ Jabu-Jabu Room After Above Big Octo Small Crate 2": "event(MQ_JABU_AFTER_ABOVE_BIG_OCTO_SPAWN_COW_AND_CRATES)"
 "Jabu-Jabu Main Elevator Room High Ledge":
   dungeon: JJ
   exits:
