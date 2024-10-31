@@ -49,7 +49,7 @@
 "Ganon Castle Tower Lower Arena":
   dungeon: Tower
   exits:
-    "Ganon Castle Tower Staircase Before Boss Door": "true" #Is it locked from both sides like a normal locked door?
+    "Ganon Castle Tower Staircase Before Boss Door": "false"
     "Ganon Castle Tower Final Staircase": "true"
   events:
     GANON_PRE_BOSS: "true"
@@ -75,7 +75,7 @@
 "Ganon Castle Tower Final Staircase":
   dungeon: Tower
   exits:
-    "Ganon Castle Tower Lower Arena": "true"
+    #"Ganon Castle Tower Lower Arena": "true"
     "Ganon Castle Tower Boss": "true"
 "Ganon Castle Tower Boss":
   dungeon: Tower
