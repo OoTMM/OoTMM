@@ -230,7 +230,7 @@
   exits:
     "Gerudo Training Grounds Stalfos Room After Silver Block": "true"
   events:
-    GTG_MQ_STALFOS_SIDE_CLEAR: "soul_enemy(SOUL_ENEMY_SPIKE) && soul_freezard && (can_use_sword_master || can_use_sword_razor || (has(SWORD_BIGGORON) && (is_adult || (is_child && age_sword_adult))))" #Kokiri Sword is too weak against freezards
+    GTG_MQ_STALFOS_SIDE_CLEAR: "soul_enemy(SOUL_ENEMY_SPIKE) && soul_freezard && (can_use_sword_master || can_use_sword_razor || (has(SWORD_BIGGORON) && age_sword_adult))" #Kokiri Sword is too weak against freezards
   locations:
     "MQ Gerudo Training Grounds Silver Block Room Chest": "event(GTG_MQ_STALFOS_SIDE_CLEAR)"
 "Gerudo Training Grounds Stalfos Room Ledge Before Red Ice":
