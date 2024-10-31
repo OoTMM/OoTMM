@@ -16,12 +16,6 @@ static const char* sSectionNames[] = {
     ".bss",
 };
 
-static const char* sSectionRelNames[] = {
-    ".rel.text",
-    ".rel.data",
-    ".rel.rodata",
-};
-
 typedef struct
 {
     char*       data;
@@ -31,6 +25,9 @@ StateSection;
 
 typedef struct
 {
+    uint32_t        addrMin;
+    uint32_t        addrMax;
+    const char*     ovlName;
     FILE*           in;
     FILE*           out;
     Elf32_Ehdr      ehdr;
@@ -65,11 +62,27 @@ static uint32_t round16(uint32_t val)
     return (val + 15) & ~15;
 }
 
-static int locateSection(State* state, Elf32_Shdr* shdr, const char* name)
+static const char* getSectionName(State* state, const char* baseName, int rel)
 {
+    static char buffer[0x100];
+
+    buffer[0] = 0;
+    if (rel)
+        strcat(buffer, ".rel");
+    strcat(buffer, ".");
+    strcat(buffer, state->ovlName);
+    strcat(buffer, baseName);
+
+    return buffer;
+}
+
+static int locateSection(State* state, Elf32_Shdr* shdr, const char* name, int rel)
+{
+    const char* secName;
     Elf32_Shdr tshdr;
     int ret;
 
+    secName = getSectionName(state, name, rel);
     for (int i = 0; i < state->ehdr.e_shnum; ++i)
     {
         /* Read */
@@ -88,7 +101,7 @@ static int locateSection(State* state, Elf32_Shdr* shdr, const char* name)
         tshdr.sh_addralign = eswap32(tshdr.sh_addralign);
         tshdr.sh_entsize = eswap32(tshdr.sh_entsize);
 
-        if (strcmp(state->shstrtab + tshdr.sh_name, name) == 0)
+        if (strcmp(state->shstrtab + tshdr.sh_name, secName) == 0)
         {
             memcpy(shdr, &tshdr, sizeof(Elf32_Shdr));
             return 0;
@@ -209,7 +222,7 @@ static int loadMeta(State* state)
     Elf32_Shdr shdr;
     uint32_t meta[2];
 
-    if (locateSection(state, &shdr, ".meta"))
+    if (locateSection(state, &shdr, ".meta", 0))
     {
         fprintf(stderr, "Error: Failed to locate .meta section\n");
         return 1;
@@ -228,10 +241,12 @@ static int loadSection(State* state, int secId)
     const char* secName;
     char* data;
     uint32_t size;
+    uint32_t startAddr;
+    uint32_t endAddr;
 
     /* Find the section */
     secName = sSectionNames[secId];
-    if (locateSection(state, &shdr, secName))
+    if (locateSection(state, &shdr, secName, 0))
         return 0;
     size = round16(shdr.sh_size);
 
@@ -259,6 +274,14 @@ static int loadSection(State* state, int secId)
     state->sectionData[secId] = data;
     state->sectionStart[secId] = shdr.sh_addr;
     state->sectionSize[secId] = size;
+
+    startAddr = shdr.sh_addr;
+    endAddr = startAddr + size;
+
+    if (startAddr < state->addrMin)
+        state->addrMin = startAddr;
+    if (endAddr > state->addrMax)
+        state->addrMax = endAddr;
 
     return 0;
 }
@@ -291,7 +314,7 @@ static int emitReloc(State* state, int secId, int type, uint32_t addr, uint32_t 
 {
     uint32_t reloc;
 
-    if (addr < 0x80d00000 || addr >= 0x81000000)
+    if (addr < state->addrMin || addr >= state->addrMax)
     {
         //fprintf(stderr, "Warn: Address %08X is out of range\n", addr);
         return 0;
@@ -306,10 +329,10 @@ static int loadRelocs(State* state, int secId)
 {
     Elf32_Shdr shdr;
     Elf32_Rel rel;
+    uint32_t off;
     uint16_t hi16;
     uint32_t hi16off;
     int hi16pending;
-    uint32_t off;
     uint32_t data;
     uint32_t addr;
     int count;
@@ -317,7 +340,7 @@ static int loadRelocs(State* state, int secId)
     int reg;
 
     /* Find the section */
-    if (locateSection(state, &shdr, sSectionRelNames[secId]))
+    if (locateSection(state, &shdr, sSectionNames[secId], 1))
         return 0;
 
     fseek(state->in, shdr.sh_offset, SEEK_SET);
@@ -419,12 +442,15 @@ static int emit(State* state)
     return 0;
 }
 
-static int run(const char* pathIn, const char* pathOut)
+static int run(const char* pathIn, const char* ovlName, const char* pathOut)
 {
     State state;
     int ret;
 
     memset(&state, 0, sizeof(State));
+    state.ovlName = ovlName;
+    state.addrMin = 0xffffffff;
+    state.addrMax = 0x00000000;
     if (setupFiles(&state, pathIn, pathOut)) return 1;
     if (loadElfHeader(&state)) return 1;
     if (loadSectionStringTable(&state)) return 1;
@@ -448,8 +474,8 @@ int main(int argc, char** argv)
 {
     State state;
 
-    if (argc != 3)
+    if (argc != 4)
         return 1;
 
-    return run(argv[1], argv[2]);
+    return run(argv[1], argv[2], argv[3]);
 }

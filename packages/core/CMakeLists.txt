@@ -50,13 +50,52 @@ function(build game)
   string(TOUPPER ${game} game_upper)
   set(game_define "-DGAME_${game_upper}=1")
 
+  # Overlays
+  file(GLOB ovls "src/${game}/ovl/actors/*" "src/common/ovl/actors/*")
+  set(OVL_OBJECTS "")
+  set(OVL_NAMES "")
+  foreach(ovl ${ovls})
+    get_filename_component(name "${ovl}" NAME)
+    file(GLOB_RECURSE OVL_SOURCES "${ovl}/*.c" "${ovl}/*.S")
+
+    # Compile the OVL into objects
+    set(target_name "${game}_ovl_${name}")
+    add_library(${target_name} OBJECT ${OVL_SOURCES})
+    target_compile_options(${target_name} PRIVATE "-fno-merge-constants" "-mno-explicit-relocs" "-mno-split-addresses")
+    target_compile_definitions(${target_name} PRIVATE ${game_define})
+
+    # Merge the objects into a single file, with fixed segments
+    set(target_file "${CMAKE_BINARY_DIR}/${game}_ovl_${name}.o")
+    add_custom_command(
+      OUTPUT "${target_file}"
+      COMMAND "${ARCH}-ld" -r -o "${target_file}" "-T${LDSCRIPT_OVL}" $<TARGET_OBJECTS:${target_name}>
+      COMMAND "${ARCH}-objcopy"
+        --rename-section .text=.${name}.text
+        --rename-section .data=.${name}.data
+        --rename-section .rodata=.${name}.rodata
+        --rename-section .bss=.${name}.bss
+        --rename-section .meta=.${name}.meta
+        "${target_file}"
+      DEPENDS ${target_name} "${LDSCRIPT_OVL}"
+      COMMENT "Merging objects for ${name}"
+      VERBATIM
+    )
+
+    list(APPEND OVL_OBJECTS ${target_file})
+    list(APPEND OVL_NAMES ${name})
+  endforeach()
+
   # Linker script
   set(ldscript_name "link_${game}.ld")
   set(ldscript "${CMAKE_BINARY_DIR}/${ldscript_name}")
+  set(OVL_DEFINE "${OVL_NAMES}")
+  list(TRANSFORM OVL_DEFINE PREPEND "OVL(")
+  list(TRANSFORM OVL_DEFINE APPEND ")")
+  string(REPLACE ";" " " OVL_DEFINE "${OVL_DEFINE}")
 
   add_custom_command(
     OUTPUT "${ldscript}"
-    COMMAND "${CMAKE_C_COMPILER}" ${game_define} -I "${CMAKE_SOURCE_DIR}/include" -E -P -x c "${LDSCRIPT_IN}" -o "${ldscript}" -MMD -MF "${ldscript}.d" -MT "${ldscript_name}"
+    COMMAND "${CMAKE_C_COMPILER}" ${game_define} "-D __OVERLAYS__=${OVL_DEFINE}" -I "${CMAKE_SOURCE_DIR}/include" -E -P -x c "${LDSCRIPT_IN}" -o "${ldscript}" -MMD -MF "${ldscript}.d" -MT "${ldscript_name}"
     DEPENDS "${LDSCRIPT_IN}"
     DEPFILE "${ldscript}.d"
     COMMENT "Generating linker script for ${game}"
@@ -71,24 +110,14 @@ function(build game)
   file(GLOB_RECURSE SOURCES_OVL "src/${game}/ovl/*.c" "src/common/ovl/*.c")
   list(REMOVE_ITEM SOURCES ${SOURCES_OVL})
 
-  add_executable(${game} ${SOURCES})
+  add_executable(${game} ${SOURCES} ${OVL_OBJECTS})
   set_target_properties(${game} PROPERTIES LINK_DEPENDS "${ldscript}")
   add_dependencies(${game} ldscript_${game})
   target_compile_definitions(${game} PRIVATE ${game_define})
-  target_link_options(${game} PRIVATE "-T${ldscript}")
+  target_link_libraries(${game})
+  target_link_options(${game} PRIVATE "-Wl,--emit-relocs" "-T${ldscript}")
 
-  # Extract map
-  set(game_map "${CMAKE_BINARY_DIR}/${game}_map.txt")
-  add_custom_command(
-    OUTPUT "${game_map}"
-    COMMAND "${CMAKE_SOURCE_DIR}/src/extract_sym.sh" "$<TARGET_FILE:${game}>" "${game_map}"
-    DEPENDS ${game}
-    COMMENT "Extracting map for ${game}"
-    VERBATIM
-  )
-  add_custom_target(${game}_map ALL DEPENDS "${game_map}")
-
-  # Extract payload
+  # Extract main sections
   set(game_payload "${CMAKE_BINARY_DIR}/${game}_payload.bin")
   set(game_patch "${CMAKE_BINARY_DIR}/${game}_patch.bin")
   set(game_cosmetic_name "${CMAKE_BINARY_DIR}/${game}_cosmetic_name.bin")
@@ -110,57 +139,24 @@ function(build game)
   add_custom_target(
     ${game}_sections ALL DEPENDS "${game_payload}" "${game_patch}" "${game_cosmetic_name}" "${game_cosmetic_addr}"
   )
-
-  # Install
   install(FILES ${game_payload} ${game_patch} ${game_cosmetic_name} ${game_cosmetic_addr} DESTINATION "bin")
-endfunction()
 
-function (add_actor game dir)
-  get_filename_component(name "${dir}" NAME)
-  file(GLOB srcs "${dir}/*.c" "${dir}/*.S")
-
-  # Includes for OVLs
-  include_directories("${CMAKE_SOURCE_DIR}/src/common/ovl" "${CMAKE_SOURCE_DIR}/src/${game}/ovl")
-
-  # Common stuff
-  string(TOUPPER ${game} game_upper)
-  set(target_name "${game}_ovl_${name}")
-  set(ovl "${CMAKE_BINARY_DIR}/ovl/${game}/${name}.zovlx")
-  set(game_define "-DGAME_${game_upper}=1")
-  set(game_map "${CMAKE_BINARY_DIR}/${game}_map.txt")
-
-  add_executable(${target_name} ${srcs})
-  set_target_properties(${target_name} PROPERTIES LINK_DEPENDS "${game_map};${LDSCRIPT_OVL}")
-  target_link_options(${target_name} PRIVATE "-T${LDSCRIPT_OVL}" "-T${game_map}" "-Wl,--emit-relocs")
-  target_compile_definitions(${target_name} PRIVATE ${game_define})
-  target_compile_options(${target_name} PRIVATE "-fno-merge-constants" "-mno-explicit-relocs" "-mno-split-addresses")
-
-  add_custom_command(
-    OUTPUT "${ovl}"
-    COMMAND "${TOOL_ZOVL}" "$<TARGET_FILE:${target_name}>" "${ovl}"
-    DEPENDS ${target_name} "${TOOL_ZOVL}"
-    COMMENT "Generating zactor for ${name}"
-    VERBATIM
-  )
-  add_custom_target(
-    ${target_name}_zovl ALL DEPENDS "${ovl}"
-  )
-
-  # Install
-  install(FILES ${ovl} DESTINATION "bin/ovl/${game}")
-endfunction()
-
-function (add_actors game)
-  foreach(topdir ${ARGN})
-    file(GLOB dirs "${topdir}/*")
-    foreach(dir ${dirs})
-      add_actor(${game} ${dir})
-    endforeach()
+  # Extract overlays
+  foreach(ovl ${OVL_NAMES})
+    set(ovl_extracted "${CMAKE_BINARY_DIR}/${game}_ovl_${ovl}.zovlx")
+    add_custom_command(
+      OUTPUT "${ovl_extracted}"
+      COMMAND "${TOOL_ZOVL}" "$<TARGET_FILE:${game}>" "${ovl}" "${ovl_extracted}"
+      DEPENDS ${game}
+      COMMENT "Generating zovlx for ${ovl}"
+      VERBATIM
+    )
+    add_custom_target(zovlx_${game}_${ovl} ALL DEPENDS "${ovl_extracted}")
+    install(FILES ${ovl_extracted} DESTINATION "bin/ovl/${game}")
   endforeach()
 endfunction()
 
 # Build
 foreach(game oot mm)
   build(${game})
-  add_actors(${game} "src/${game}/ovl/actors" "src/common/ovl/actors")
 endforeach()

@@ -43,6 +43,6 @@ typedef struct
 }
 OvlActorInfoMeta;
 
-#define OVL_ACTOR_INFO(id, init) __attribute__((section(".meta"))) OvlActorInfoMeta __meta = { (id), (void*)(u32)&(init) };
+#define OVL_ACTOR_INFO(id, init) __attribute__((section(".meta"),used)) static OvlActorInfoMeta __meta = { (id), (void*)(u32)&(init) };
 
 #endif
