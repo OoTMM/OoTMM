@@ -75,7 +75,7 @@
 "Ganon Castle Tower Final Staircase":
   dungeon: Tower
   exits:
-    #"Ganon Castle Tower Lower Arena": "true"
+    "Ganon Castle Tower Lower Arena": "false"
     "Ganon Castle Tower Boss": "true"
 "Ganon Castle Tower Boss":
   dungeon: Tower
