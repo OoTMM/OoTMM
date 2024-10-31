@@ -2,6 +2,7 @@ import { test, expect } from 'vitest';
 
 import { makeTestSeed } from '../helper';
 
+
 test("Can make a seed - allsanity", async () => {
   const res = await makeTestSeed("ALLSANITY", {
     songs: 'anywhere',

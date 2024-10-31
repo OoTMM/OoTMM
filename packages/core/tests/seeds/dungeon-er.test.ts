@@ -7,6 +7,9 @@ test("Can make a seed - Dungeon ER", async () => {
     songs: 'anywhere',
     erDungeons: 'full',
     erMajorDungeons: true,
+    erMinorDungeons: true,
+    erSpiderHouses: true,
+    erIkanaCastle: true,
   });
   expect(res).toBeDefined();
 });

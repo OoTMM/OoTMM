@@ -4,7 +4,7 @@ import { makeTestSeed } from '../helper';
 
 
 test("Can make a seed - Boss/Dungeon ER", async () => {
-  const res = await makeTestSeed("BOSS ER", {
+  const res = await makeTestSeed("Boss/Dungeon ER", {
     songs: 'anywhere',
     erBoss: 'full',
     erDungeons: 'full',
