@@ -168,7 +168,7 @@
     JABU_MQ_BACK_FIRE_WEB: "has_fire || (can_use_sticks && event(JABU_MQ_LIKE_LIKE_ROOM_CLEAR))" #Good for now, but can't use sticks method with door rando.
   locations:
     "MQ Jabu-Jabu Back Forked Paths Main Room Small Crate 1": "true"
-    "MQ Jabu-Jabu Back Forked Paths Main Room Small Crate 2": "true
+    "MQ Jabu-Jabu Back Forked Paths Main Room Small Crate 2": "true"
 "Jabu-Jabu Back Forked Paths Center After Rocks":
   dungeon: JJ
   exits:
