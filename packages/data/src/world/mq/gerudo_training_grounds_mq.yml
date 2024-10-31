@@ -269,7 +269,7 @@
   dungeon: GTG
   exits:
     "Gerudo Training Grounds Spinning Statue Room Upper": "can_hookshot && (is_adult || (is_child && has_hover_boots))"
-    "Gerudo Training Grounds Spinning Statue Room Lower": "is_adult || (is_child && has_hover_boots) || hookshot_anywhere"
+    "Gerudo Training Grounds Spinning Statue Room Lower": "is_adult || (is_child && (has_hover_boots || climb_anywhere)) || hookshot_anywhere"
   locations:
     "MQ Gerudo Training Grounds Wonder Item Eye Statue": "true"
 "Gerudo Training Grounds Room After Spinning Statue":
