@@ -10,7 +10,7 @@
     "Dodongo Cavern Right Corridor": "true"
     "Dodongo Cavern Main Ledge": "is_adult || climb_anywhere || hookshot_anywhere"
     "Dodongo Cavern Stairs": "event(DC_MAIN_SWITCH)"
-    "Dodongo Cavern Skull": "event(DC_BOMB_EYES)"
+    "Dodongo Cavern Pre-Boss Lobby": "event(DC_BOMB_EYES)"
   locations:
     "Dodongo Cavern Map Chest": "true"
     "Dodongo Cavern Lobby Scrub": "business_scrub(0x1f)"
@@ -154,7 +154,7 @@
     DC_BOMB_EYES: "has_explosives"
   locations:
     "Dodongo Cavern Bridge Chest": "has_explosives_or_hammer || has_blue_fire_arrows_mudwall"
-"Dodongo Cavern Skull":
+"Dodongo Cavern Pre-Boss Lobby":
   dungeon: DC
   exits:
     "Dodongo Cavern Main": "true"

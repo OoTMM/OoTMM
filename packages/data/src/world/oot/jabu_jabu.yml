@@ -7,7 +7,7 @@
   dungeon: JJ
   exits:
     "Jabu-Jabu": "true"
-    "Jabu-Jabu Pre-Boss": "event(BIG_OCTO) || (has_hover_boots && (trick(OOT_JABU_BOSS_HOVER) || can_play_elegy)) || climb_anywhere || (glitch_megaflip && ((trick(OOT_JJB_BOXLESS) && can_jump_slash) || can_play_elegy))"
+    "Jabu-Jabu Pre-Boss Room": "event(BIG_OCTO) || (has_hover_boots && (trick(OOT_JABU_BOSS_HOVER) || can_play_elegy)) || climb_anywhere || (glitch_megaflip && ((trick(OOT_JJB_BOXLESS) && can_jump_slash) || can_play_elegy))"
     "Jabu-Jabu Hole Room": "true"
   locations:
     "Jabu-Jabu Scrub": "(is_child || can_dive_small || time_travel_at_will) && business_scrub(0x20)"
@@ -107,7 +107,7 @@
     "Jabu-Jabu Pot Big Octo Room 1": "event(BIG_OCTO) || climb_anywhere"
     "Jabu-Jabu Pot Big Octo Room 2": "event(BIG_OCTO) || climb_anywhere"
     "Jabu-Jabu Pot Big Octo Room 3": "event(BIG_OCTO) || climb_anywhere"
-"Jabu-Jabu Pre-Boss":
+"Jabu-Jabu Pre-Boss Room":
   dungeon: JJ
   exits:
     "Jabu-Jabu Boss": "can_boomerang || (trick(OOT_JABU_BOSS_HIGH_SWITCH) && ((has_hover_boots && has_bombs) || can_hit_triggers_distance || can_longshot || has_bombchu)) || (climb_anywhere && (can_use_sword || can_use_sticks || has_ranged_weapon || has_explosives_or_hammer))"
