@@ -65,3 +65,9 @@ PATCH_END
 PATCH_START 0x80835508
   nop
 PATCH_END
+
+/* Fast transition to MM */
+PATCH_START 0x80173324
+  j Play_FastInit
+   move a0,v0
+PATCH_END
