@@ -6,7 +6,7 @@
 
 struct Actor_ObjSnowball;
 
-typedef void (*Actor_ObjSnowballActionFunc)(struct Actor_ObjSnowball*, GameState_Play*);
+typedef void (*Actor_ObjSnowballActionFunc)(struct Actor_ObjSnowball*, PlayState*);
 
 typedef struct {
     Vec3f unk_00;

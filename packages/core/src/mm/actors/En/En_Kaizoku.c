@@ -1,7 +1,7 @@
 #include <combo.h>
 #include <combo/entrance.h>
 
-void EnKaizoku_ThrowOut(GameState_Play* play)
+void EnKaizoku_ThrowOut(PlayState* play)
 {
     u32 entrance;
     s32 override;

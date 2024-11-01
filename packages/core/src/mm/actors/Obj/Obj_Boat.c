@@ -1,6 +1,6 @@
 #include <combo.h>
 
-f32 ObjBoat_GetTopSpeed(Actor_ObjBoat* boat, GameState_Play* play)
+f32 ObjBoat_GetTopSpeed(Actor_ObjBoat* boat, PlayState* play)
 {
     if (boat->base.params == 0x47F)
     {
@@ -15,7 +15,7 @@ f32 ObjBoat_GetTopSpeed(Actor_ObjBoat* boat, GameState_Play* play)
     return 3.0;
 }
 
-f32 ObjBoat_GetAccelSpeed(Actor_ObjBoat* boat, GameState_Play* play)
+f32 ObjBoat_GetAccelSpeed(Actor_ObjBoat* boat, PlayState* play)
 {
     if (boat->base.params == 0x47F && (boat->speedMultiplier < 0 || boat->pathProgress < 0xC))
     {

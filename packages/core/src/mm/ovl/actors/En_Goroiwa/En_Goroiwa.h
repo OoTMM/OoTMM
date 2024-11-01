@@ -5,7 +5,7 @@
 
 struct Actor_EnGoroiwa;
 
-typedef void (*Actor_EnGoroiwaActionFunc)(struct Actor_EnGoroiwa*, GameState_Play*);
+typedef void (*Actor_EnGoroiwaActionFunc)(struct Actor_EnGoroiwa*, PlayState*);
 typedef s32 (*Actor_EnGoroiwaUnkFunc)(struct Actor_EnGoroiwa*);
 
 #define ENGOROIWA_GET_C000(thisx) (((thisx)->params >> 0xE) & 3)

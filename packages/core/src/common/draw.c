@@ -8,8 +8,8 @@ ALIGNED(16) const Gfx kDListEmpty[] = {
     gsSPEndDisplayList(),
 };
 
-void PreDraw1(Actor* actor, GameState_Play* play, int unk);
-void PreDraw2(Actor* actor, GameState_Play* play, int unk);
+void PreDraw1(Actor* actor, PlayState* play, int unk);
+void PreDraw2(Actor* actor, PlayState* play, int unk);
 
 void Draw_SetObjectSegment(GfxContext* gfx, void* buffer)
 {
@@ -30,7 +30,7 @@ static u8 paramForGi(s16 gi)
     return kGetItemDrawGiParam[gi - 1];
 }
 
-static void drawGiParamDrawId(GameState_Play* play, u8 drawGiId, u8 param)
+static void drawGiParamDrawId(PlayState* play, u8 drawGiId, u8 param)
 {
     if (drawGiId == DRAWGI_NONE)
         return;
@@ -38,7 +38,7 @@ static void drawGiParamDrawId(GameState_Play* play, u8 drawGiId, u8 param)
     kDrawGi[drawGiId - 1].func(play, drawGiId - 1, param);
 }
 
-static void drawGiParam(GameState_Play* play, s16 gi)
+static void drawGiParam(PlayState* play, s16 gi)
 {
     const GetItem* giEntry;
     u16 drawGiId;
@@ -50,7 +50,7 @@ static void drawGiParam(GameState_Play* play, s16 gi)
     drawGiParamDrawId(play, drawGiId, param);
 }
 
-void Draw_Gi(GameState_Play* play, Actor* actor, s16 gi, int flags)
+void Draw_Gi(PlayState* play, Actor* actor, s16 gi, int flags)
 {
     const GetItem* giEntry;
     void* objBuffer;
@@ -71,7 +71,7 @@ void Draw_Gi(GameState_Play* play, Actor* actor, s16 gi, int flags)
     drawGiParam(play, gi);
 }
 
-void comboPlayerDrawGI(GameState_Play* play, int drawGiMinusOne)
+void comboPlayerDrawGI(PlayState* play, int drawGiMinusOne)
 {
     drawGiParamDrawId(play, (u8)(drawGiMinusOne + 1), playerDrawGiParam);
 }
@@ -238,7 +238,7 @@ static u32 Draw_GetGlitterColor(s16 gi)
     }
 }
 
-void Draw_GlitterGi(GameState_Play* play, Actor* actor, s16 gi)
+void Draw_GlitterGi(PlayState* play, Actor* actor, s16 gi)
 {
     void* tex;
     float alpha;

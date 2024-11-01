@@ -1,6 +1,6 @@
 #include <combo.h>
 
-static int EnPoRelay_GetHeartPieceFlag(GameState_Play* play, int flag)
+static int EnPoRelay_GetHeartPieceFlag(PlayState* play, int flag)
 {
     /* Also spawn chest */
     SetRoomClear(play, 4);

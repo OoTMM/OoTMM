@@ -1,6 +1,6 @@
 #include <combo.h>
 
-void DmChar08_WarpToTemple(Actor* this, GameState_Play* play)
+void DmChar08_WarpToTemple(Actor* this, PlayState* play)
 {
     play->nextEntrance = ((SCE_MM_TEMPLE_GREAT_BAY - 3) << 9) | (0 << 4);
     play->transitionTrigger = TRANS_TRIGGER_NORMAL;
@@ -11,14 +11,14 @@ void DmChar08_WarpToTemple(Actor* this, GameState_Play* play)
 
 PATCH_FUNC(0x80aafa18, DmChar08_WarpToTemple);
 
-static void DmChar08_AfterWarpFromTemple(Actor* this, GameState_Play* play)
+static void DmChar08_AfterWarpFromTemple(Actor* this, PlayState* play)
 {
     gIsEntranceOverride = 1;
 }
 
 PATCH_FUNC(0x80aafb94, DmChar08_AfterWarpFromTemple);
 
-void DmChar08_Emerge(GameState_Play* play, Actor* this)
+void DmChar08_Emerge(PlayState* play, Actor* this)
 {
     this->world.pos.x = -6480.f;
     this->world.pos.z = 1750.f;

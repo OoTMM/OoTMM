@@ -8,7 +8,7 @@
 
 #define FLAGS (ACTOR_FLAG_OOT_4 | ACTOR_FLAG_OOT_25)
 
-void MagicFire_UpdateBeforeCast(Actor_CustomMagicFire* this, GameState_Play* play);
+void MagicFire_UpdateBeforeCast(Actor_CustomMagicFire* this, PlayState* play);
 
 typedef enum {
     /* 0x00 */ DF_ACTION_INITIALIZE,
@@ -116,7 +116,7 @@ static u8 sVertexIndices[] = {
     14, 20, 21, 23, 28, 30, 33, 34, 40, 41, 43, 48, 50, 55, 57, 62, 64, 65, 73, 74,
 };
 
-void MagicFire_Init(Actor_CustomMagicFire* this, GameState_Play* play)
+void MagicFire_Init(Actor_CustomMagicFire* this, PlayState* play)
 {
     Actor_ProcessInitChain(&this->actor, sInitChain);
     this->action = 0;
@@ -132,12 +132,12 @@ void MagicFire_Init(Actor_CustomMagicFire* this, GameState_Play* play)
     this->actor.room = -1;
 }
 
-void MagicFire_Destroy(Actor_CustomMagicFire* this, GameState_Play* play)
+void MagicFire_Destroy(Actor_CustomMagicFire* this, PlayState* play)
 {
     Magic_Reset(play);
 }
 
-void MagicFire_Update(Actor_CustomMagicFire* this, GameState_Play* play)
+void MagicFire_Update(Actor_CustomMagicFire* this, PlayState* play)
 {
     Actor_Player* player = GET_PLAYER(play);
 
@@ -230,7 +230,7 @@ void MagicFire_Update(Actor_CustomMagicFire* this, GameState_Play* play)
     }
 }
 
-void MagicFire_UpdateBeforeCast(Actor_CustomMagicFire* this, GameState_Play* play)
+void MagicFire_UpdateBeforeCast(Actor_CustomMagicFire* this, PlayState* play)
 {
     Actor_Player* player = GET_PLAYER(play);
 
@@ -254,7 +254,7 @@ void MagicFire_UpdateBeforeCast(Actor_CustomMagicFire* this, GameState_Play* pla
     this->actor.world.pos = player->actor.world.pos;
 }
 
-void MagicFire_Draw(Actor_CustomMagicFire* this, GameState_Play* play)
+void MagicFire_Draw(Actor_CustomMagicFire* this, PlayState* play)
 {
     u32 gameplayFrames = play->gameplayFrames;
     s32 i;

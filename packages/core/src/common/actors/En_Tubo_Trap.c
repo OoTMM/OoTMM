@@ -16,7 +16,7 @@
 # define ADDR_DLIST     0x5017ea0
 #endif
 
-void EnTuboTrap_InitWrapper(Actor_EnTuboTrap* this, GameState_Play* play)
+void EnTuboTrap_InitWrapper(Actor_EnTuboTrap* this, PlayState* play)
 {
     ComboItemOverride o;
     ActorFunc EnTuboTrap_Init;
@@ -42,7 +42,7 @@ int EnTuboTrap_IsShuffled(Actor_EnTuboTrap* this)
     return this->isExtended && !comboXflagsGet(&this->xflag);
 }
 
-static void EnTuboTrap_Draw(Actor_EnTuboTrap* this, GameState_Play* play)
+static void EnTuboTrap_Draw(Actor_EnTuboTrap* this, PlayState* play)
 {
     ComboItemOverride o;
 

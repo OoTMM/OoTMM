@@ -2,7 +2,7 @@
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x234) = (h); } while (0)
 
-static void EnPoComposer_HandlerStorms(Actor* this, GameState_Play* play)
+static void EnPoComposer_HandlerStorms(Actor* this, PlayState* play)
 {
     /* Mark the valley as purified */
     MM_SET_EVENT_WEEK(MM_EV(14, 2));

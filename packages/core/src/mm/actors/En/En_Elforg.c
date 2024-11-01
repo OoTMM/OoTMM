@@ -3,7 +3,7 @@
 #include <combo/draw.h>
 #include <combo/actor.h>
 
-static void EnElforg_ItemQuery(ComboItemQuery* q, Actor* this, GameState_Play* play)
+static void EnElforg_ItemQuery(ComboItemQuery* q, Actor* this, PlayState* play)
 {
     bzero(q, sizeof(*q));
 
@@ -23,7 +23,7 @@ static void EnElforg_ItemQuery(ComboItemQuery* q, Actor* this, GameState_Play* p
     }
 }
 
-static void EnElforg_ItemOverride(ComboItemOverride* o, Actor* this, GameState_Play* play)
+static void EnElforg_ItemOverride(ComboItemOverride* o, Actor* this, PlayState* play)
 {
     ComboItemQuery q;
 
@@ -31,7 +31,7 @@ static void EnElforg_ItemOverride(ComboItemOverride* o, Actor* this, GameState_P
     comboItemOverride(o, &q);
 }
 
-static void EnElforg_Draw(Actor* this, GameState_Play* play)
+static void EnElforg_Draw(Actor* this, PlayState* play)
 {
     ComboItemOverride o;
     ActorCallback draw;
@@ -53,7 +53,7 @@ static void EnElforg_Draw(Actor* this, GameState_Play* play)
     Draw_Gi(play, this, o.gi, 0);
 }
 
-void EnElforg_DrawWrapper(Actor* this, GameState_Play* play)
+void EnElforg_DrawWrapper(Actor* this, PlayState* play)
 {
     ActorCallback draw;
 
@@ -75,7 +75,7 @@ void EnElforg_DrawWrapper(Actor* this, GameState_Play* play)
     draw(this, play);
 }
 
-void EnElforg_GiveItem(GameState_Play* play, Actor* this)
+void EnElforg_GiveItem(PlayState* play, Actor* this)
 {
     ComboItemQuery q;
     ComboItemOverride o;

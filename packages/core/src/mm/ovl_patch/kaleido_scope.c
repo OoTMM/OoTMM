@@ -9,7 +9,7 @@
 #include <combo/dpad.h>
 #include <combo/inventory.h>
 
-void KaleidoScope_AfterSetCutsorColor(GameState_Play* play)
+void KaleidoScope_AfterSetCutsorColor(PlayState* play)
 {
     u16 cursorSlot;
     int press;
@@ -114,7 +114,7 @@ void KaleidoScope_LoadNamedItemCustom(void* segment, u32 texIndex)
 
 }
 
-void KaleidoScope_ShowItemMessage(GameState_Play* play, u16 messageId, u8 yPosition)
+void KaleidoScope_ShowItemMessage(PlayState* play, u16 messageId, u8 yPosition)
 {
     char* b;
     if (messageId == 0x1711)
@@ -202,9 +202,9 @@ void KaleidoScope_ShowItemMessage(GameState_Play* play, u16 messageId, u8 yPosit
     }
 }
 
-typedef void (*KaleidoScopeHandler)(GameState_Play*);
+typedef void (*KaleidoScopeHandler)(PlayState*);
 
-static void KaleidoScope_DrawMapDungeonMenu(GameState_Play* play, u32 overlayAddr)
+static void KaleidoScope_DrawMapDungeonMenu(PlayState* play, u32 overlayAddr)
 {
     KaleidoScopeHandler handler;
 
@@ -219,7 +219,7 @@ static void KaleidoScope_DrawMapDungeonMenu(GameState_Play* play, u32 overlayAdd
     }
 }
 
-static void KaleidoScope_UpdateMapDungeonMenu(GameState_Play* play, u32 overlayAddr)
+static void KaleidoScope_UpdateMapDungeonMenu(PlayState* play, u32 overlayAddr)
 {
     KaleidoScopeHandler handler;
 
@@ -237,7 +237,7 @@ static void KaleidoScope_UpdateMapDungeonMenu(GameState_Play* play, u32 overlayA
     }
 }
 
-static void KaleidoScope_DrawMapMenu(GameState_Play *play)
+static void KaleidoScope_DrawMapMenu(PlayState *play)
 {
     KaleidoScope_DrawMapDungeonMenu(play, 0x8081e7d8);
 }
@@ -245,7 +245,7 @@ static void KaleidoScope_DrawMapMenu(GameState_Play *play)
 PATCH_CALL(0x80822a14, KaleidoScope_DrawMapMenu);
 PATCH_CALL(0x808230e4, KaleidoScope_DrawMapMenu);
 
-static void KaleidoScope_DrawDungeonMenu(GameState_Play *play)
+static void KaleidoScope_DrawDungeonMenu(PlayState *play)
 {
     KaleidoScope_DrawMapDungeonMenu(play, 0x8081d6dc);
 }
@@ -253,14 +253,14 @@ static void KaleidoScope_DrawDungeonMenu(GameState_Play *play)
 PATCH_CALL(0x808229cc, KaleidoScope_DrawDungeonMenu);
 PATCH_CALL(0x80822f34, KaleidoScope_DrawDungeonMenu);
 
-static void KaleidoScope_UpdateMapMenu(GameState_Play* play)
+static void KaleidoScope_UpdateMapMenu(PlayState* play)
 {
     KaleidoScope_UpdateMapDungeonMenu(play, 0x8081fb1c);
 }
 
 PATCH_CALL(0x8082ae00, KaleidoScope_UpdateMapMenu);
 
-static void KaleidoScope_UpdateDungeonMenu(GameState_Play* play)
+static void KaleidoScope_UpdateDungeonMenu(PlayState* play)
 {
     KaleidoScope_UpdateMapDungeonMenu(play, 0x8081e118);
 }
@@ -285,7 +285,7 @@ static void KaleidoScope_DrawDungeonUnk2(void* unk)
 PATCH_CALL(0x80822a00, KaleidoScope_DrawDungeonUnk2);
 PATCH_CALL(0x80822f68, KaleidoScope_DrawDungeonUnk2);
 
-static int canSave(GameState_Play* play)
+static int canSave(PlayState* play)
 {
     Actor_Player* link;
 
@@ -311,7 +311,7 @@ static int canSave(GameState_Play* play)
     }
 }
 
-static void menuSave(GameState_Play* play)
+static void menuSave(PlayState* play)
 {
     /* Can't save in some scenes */
     if (!canSave(play))
@@ -322,7 +322,7 @@ static void menuSave(GameState_Play* play)
     PlaySound(0x4823);
 }
 
-static void KaleidoScope_UpdateSomeMenu(GameState_Play* play)
+static void KaleidoScope_UpdateSomeMenu(PlayState* play)
 {
     KaleidoScopeHandler handler;
 
@@ -464,7 +464,7 @@ static Vtx* gVertex[6] = {
     &gVertexBufs[(4 * 5) * 2],
 };
 
-static Vtx* GetVtxBuffer(GameState_Play* play, u32 vertIdx, u32 slot) {
+static Vtx* GetVtxBuffer(PlayState* play, u32 vertIdx, u32 slot) {
     /* Get vertex of current icon drawing to Item Select screen */
     const Vtx* srcVtx = play->pauseCtx.vtxBuf + vertIdx;
 

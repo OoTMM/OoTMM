@@ -5,7 +5,7 @@
 
 typedef struct Actor_ShotSun Actor_ShotSun;
 
-typedef void (*ShotSunActionFunc)(Actor_ShotSun*, GameState_Play*);
+typedef void (*ShotSunActionFunc)(Actor_ShotSun*, PlayState*);
 
 struct Actor_ShotSun
 {

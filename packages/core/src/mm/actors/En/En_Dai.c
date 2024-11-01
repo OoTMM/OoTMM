@@ -1,6 +1,6 @@
 #include <combo.h>
 
-void EnDai_FallAsleep(Actor* this, GameState_Play* play)
+void EnDai_FallAsleep(Actor* this, PlayState* play)
 {
     MM_SET_EVENT_WEEK(MM_EV(30, 0));
     Actor_Kill(this);

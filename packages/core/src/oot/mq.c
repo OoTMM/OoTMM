@@ -90,7 +90,7 @@ ALIGNED(16) static char sMqBufferScene[SCENE_BUFFER_SIZE];
 static char* sMqBufferRoomPtr = sMqBufferRoom;
 static char* sMqBufferRoom2Ptr = sMqBufferRoom2;
 
-static int mqDungeonId(GameState_Play* play)
+static int mqDungeonId(PlayState* play)
 {
     switch (play->sceneId)
     {
@@ -139,7 +139,7 @@ static void swapMqRooms(void)
     *(u32*)((ptr) + 8 * (index) + 0x00) = (hi); \
     *(u32*)((ptr) + 8 * (index) + 0x04) = (lo);
 
-static void mqPatchCollisions(GameState_Play* play, MqSceneHeader* scene, void* collisions)
+static void mqPatchCollisions(PlayState* play, MqSceneHeader* scene, void* collisions)
 {
     u32 segPolys;
     u32 segPolyTypes;
@@ -217,7 +217,7 @@ static void mqPatchCollisions(GameState_Play* play, MqSceneHeader* scene, void* 
     }
 }
 
-static int findMqOverrideScene(GameState_Play* play, MqSceneHeader* dst)
+static int findMqOverrideScene(PlayState* play, MqSceneHeader* dst)
 {
     u32             headerCount;
     MqSceneHeader*  header;
@@ -257,7 +257,7 @@ static int findMqOverrideScene(GameState_Play* play, MqSceneHeader* dst)
     return 0;
 }
 
-static int findMqOverrideRoom(GameState_Play* play, MqRoomHeader* dst)
+static int findMqOverrideRoom(PlayState* play, MqRoomHeader* dst)
 {
     u32             headerCount;
     MqRoomHeader*   header;
@@ -297,7 +297,7 @@ static int findMqOverrideRoom(GameState_Play* play, MqRoomHeader* dst)
     return 0;
 }
 
-static void loadMqSceneMaybe(GameState_Play* play)
+static void loadMqSceneMaybe(PlayState* play)
 {
     MqSceneHeader mqHeader;
     SceneRoomHeader* sceneHeader;
@@ -358,7 +358,7 @@ static void loadMqSceneMaybe(GameState_Play* play)
     }
 }
 
-static void loadMqRoomMaybe(GameState_Play* play)
+static void loadMqRoomMaybe(PlayState* play)
 {
     MqRoomHeader mqHeader;
     SceneRoomHeader* roomHeader;
@@ -410,26 +410,26 @@ static void loadMqRoomMaybe(GameState_Play* play)
     }
 }
 
-static void Play_LoadRoom_Hook(GameState_Play* play, void* unk)
+static void Play_LoadRoom_Hook(PlayState* play, void* unk)
 {
     /* MQ */
     loadMqRoomMaybe(play);
 
     /* Forward the call */
-    void (*callback)(GameState_Play*, void*);
+    void (*callback)(PlayState*, void*);
     callback = (void*)0x800817a0;
     callback(play, unk);
 }
 
 PATCH_CALL(0x80080c00, Play_LoadRoom_Hook);
 
-static void Play_LoadScene_Hook(GameState_Play* play, void* unk)
+static void Play_LoadScene_Hook(PlayState* play, void* unk)
 {
     /* MQ */
     loadMqSceneMaybe(play);
 
     /* Forward the call */
-    void (*callback)(GameState_Play*, void*);
+    void (*callback)(PlayState*, void*);
     callback = (void*)0x8009cde8;
     callback(play, unk);
 }
@@ -449,7 +449,7 @@ DungeonMapFloor;
 
 _Static_assert(sizeof(DungeonMapFloor) == 0xa4, "DungeonMapFloor size mismatch");
 
-void comboMqKaleidoHook(GameState_Play* play)
+void comboMqKaleidoHook(PlayState* play)
 {
     static const int kMapCount = 34 * 3;
 

@@ -3,7 +3,7 @@
 #include <combo/player.h>
 #include <combo/inventory.h>
 
-int EnNiwLady_GetActiveItem(GameState_Play* play)
+int EnNiwLady_GetActiveItem(PlayState* play)
 {
     int itemAction;
 
@@ -17,7 +17,7 @@ int EnNiwLady_GetActiveItem(GameState_Play* play)
 
 PATCH_CALL(0x80a9eb04, EnNiwLady_GetActiveItem);
 
-void EnNiwLady_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+void EnNiwLady_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b)
 {
     int npc;
 
@@ -45,7 +45,7 @@ PATCH_CALL(0x80a9ec70, EnNiwLady_GiveItem);
 PATCH_CALL(0x80a9edc4, EnNiwLady_GiveItem);
 PATCH_CALL(0x80a9eea8, EnNiwLady_GiveItem);
 
-static void EnNiwLady_GiveItemInit(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+static void EnNiwLady_GiveItemInit(Actor* actor, PlayState* play, s16 gi, float a, float b)
 {
     actor->parent = NULL;
     EnNiwLady_GiveItem(actor, play, gi, a, b);

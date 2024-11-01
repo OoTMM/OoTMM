@@ -7,7 +7,7 @@ void EnGk_HandlerNull(void)
 {
 }
 
-void EnGk_LearnSongLullaby(Actor* this, GameState_Play* play)
+void EnGk_LearnSongLullaby(Actor* this, PlayState* play)
 {
     if (gMmExtraFlags.songGoron)
     {
@@ -25,7 +25,7 @@ void EnGk_LearnSongLullaby(Actor* this, GameState_Play* play)
     comboGiveItemNpc(this, play, GI_MM_SONG_GORON, NPC_MM_GORON_BABY, 9999.f, 9999.f);
 }
 
-void EnGk_CheckLullaby(Actor* this, GameState_Play* play)
+void EnGk_CheckLullaby(Actor* this, PlayState* play)
 {
     if (play->msgCtx.ocarinaMode == 3 && gSave.playerForm == MM_PLAYER_FORM_GORON)
     {
@@ -50,7 +50,7 @@ void EnGk_CheckLullaby(Actor* this, GameState_Play* play)
 
 PATCH_FUNC(0x80b51410, EnGk_CheckLullaby);
 
-void EnGk_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+void EnGk_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b)
 {
     int npc;
 

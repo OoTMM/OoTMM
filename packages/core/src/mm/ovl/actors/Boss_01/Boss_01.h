@@ -12,7 +12,7 @@ struct Actor_Boss01;
 #define ODOLWA_SHADOW_TEX_HEIGHT 64
 #define ODOLWA_SHADOW_TEX_SIZE ((s32)sizeof(u8[ODOLWA_SHADOW_TEX_HEIGHT][ODOLWA_SHADOW_TEX_WIDTH]))
 
-typedef void (*Actor_Boss01ActionFunc)(struct Actor_Boss01*, GameState_Play*);
+typedef void (*Actor_Boss01ActionFunc)(struct Actor_Boss01*, PlayState*);
 
 typedef enum OdolwaType
 {

@@ -5,7 +5,7 @@
 
 typedef struct Actor_EnDivingGame Actor_EnDivingGame;
 
-typedef void (*EnDivingGameActionFunc)(struct Actor_EnDivingGame*, GameState_Play*);
+typedef void (*EnDivingGameActionFunc)(struct Actor_EnDivingGame*, PlayState*);
 
 struct Actor_EnDivingGame
 {

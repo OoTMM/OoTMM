@@ -68,7 +68,7 @@ static int csmcGrassId(s16 gi, int def)
     }
 }
 
-void csmcGrassPreDraw(GameState_Play* play, s16 gi, int def, int alt, int direct)
+void csmcGrassPreDraw(PlayState* play, s16 gi, int def, int alt, int direct)
 {
     const CsmcDisplayList* dlists;
     int id;

@@ -10,12 +10,12 @@ union ElegyLockParams
     u32 value;
 };
 
-f32 Elegy_BlockSpeed(Actor* actor, GameState_Play* play, int type)
+f32 Elegy_BlockSpeed(Actor* actor, PlayState* play, int type)
 {
     return 40.0;
 }
 
-u32 Elegy_LockParams(Actor_Player* player, GameState_Play* play)
+u32 Elegy_LockParams(Actor_Player* player, PlayState* play)
 {
     union ElegyLockParams result = {
         .frameCount = 0x01,
@@ -24,28 +24,28 @@ u32 Elegy_LockParams(Actor_Player* player, GameState_Play* play)
     return result.value;
 }
 
-u16 Elegy_DespawnCounter(GameState_Play* play, Actor_Player* player)
+u16 Elegy_DespawnCounter(PlayState* play, Actor_Player* player)
 {
     return 0x1;
 }
 
-u16 Elegy_FadeSpeed(GameState_Play* play, Actor_Player* player)
+u16 Elegy_FadeSpeed(PlayState* play, Actor_Player* player)
 {
     return 0x20;
 }
 
 
-int Elegy_UpdateCamera(Actor* actor, GameState_Play* play)
+int Elegy_UpdateCamera(Actor* actor, PlayState* play)
 {
     return 0;
 }
 
-int Elegy_Darken(Actor* actor, GameState_Play* play)
+int Elegy_Darken(Actor* actor, PlayState* play)
 {
     return 0;
 }
 
-void Elegy_Update(Actor* actor, GameState_Play* play)
+void Elegy_Update(Actor* actor, PlayState* play)
 {
     u8 index = actor->params & 7;
     Actor* statue = play->actorCtx.elegyStatues[index];
@@ -65,7 +65,7 @@ union SongStateResults {
     u32 value;
 };
 
-u32 SongState_HandlePlayback(GameState_Play* play, MessageContext* msgCtxt) {
+u32 SongState_HandlePlayback(PlayState* play, MessageContext* msgCtxt) {
     s8 song = msgCtxt->songInfo->frameInfo[0].storedSong;
     if (song == OCARINA_SONG_ELEGY) {
         /* Process state for Elegy of Emptiness */

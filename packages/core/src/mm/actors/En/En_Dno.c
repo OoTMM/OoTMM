@@ -13,7 +13,7 @@ int EnDno_HasGivenItem(Actor* this)
 
 PATCH_CALL(0x80a72bb4, EnDno_HasGivenItem);
 
-void EnDno_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnDno_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 {
     int npc;
 

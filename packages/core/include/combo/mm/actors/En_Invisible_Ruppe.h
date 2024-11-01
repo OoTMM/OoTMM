@@ -6,7 +6,7 @@
 
 typedef struct Actor_EnInvisibleRuppe Actor_EnInvisibleRuppe;
 
-typedef void (*EnInvisibleRuppeFunc)(Actor_EnInvisibleRuppe*, GameState_Play*);
+typedef void (*EnInvisibleRuppeFunc)(Actor_EnInvisibleRuppe*, PlayState*);
 
 struct ALIGNED(4) Actor_EnInvisibleRuppe
 {

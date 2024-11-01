@@ -44,7 +44,7 @@ int DmChar02_HasGivenItem(Actor* this)
 
 PATCH_CALL(0x80aab1d4, DmChar02_HasGivenItem);
 
-void DmChar02_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void DmChar02_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 {
     ComboItemQuery q;
     Actor_Player* link;
@@ -64,7 +64,7 @@ void DmChar02_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float
 
 PATCH_CALL(0x80aab1fc, DmChar02_GiveItem);
 
-void DmChar02_DrawOcarina(Actor* this, GameState_Play* play)
+void DmChar02_DrawOcarina(Actor* this, PlayState* play)
 {
     static const float scale = 25.0f;
     ComboItemOverride o;

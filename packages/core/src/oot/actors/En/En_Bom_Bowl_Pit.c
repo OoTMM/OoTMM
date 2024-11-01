@@ -3,7 +3,7 @@
 
 void EnExItem_RewardByIndex(ComboItemQuery* q, int index);
 
-void EnBomBowlPit_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+void EnBomBowlPit_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b)
 {
     ComboItemQuery q;
 

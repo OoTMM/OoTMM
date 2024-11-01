@@ -1,7 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 
-void EnZl4_Update6(Actor* actor, GameState_Play* play)
+void EnZl4_Update6(Actor* actor, PlayState* play)
 {
     SetEventChk(EV_OOT_CHK_ZELDA_LETTER);
     SetEventChk(EV_OOT_CHK_SONG_ZELDA);
@@ -12,7 +12,7 @@ void EnZl4_Update6(Actor* actor, GameState_Play* play)
     play->nextEntranceIndex = ENTR_OOT_CASTLE_CAUGHT;
 }
 
-void EnZl4_Update5(Actor* actor, GameState_Play* play)
+void EnZl4_Update5(Actor* actor, PlayState* play)
 {
     if (Message_GetState(&play->msgCtx) == 2)
     {
@@ -21,7 +21,7 @@ void EnZl4_Update5(Actor* actor, GameState_Play* play)
     }
 }
 
-void EnZl4_Update4(Actor* actor, GameState_Play* play)
+void EnZl4_Update4(Actor* actor, PlayState* play)
 {
     if (Actor_HasParentZ(actor))
     {
@@ -33,7 +33,7 @@ void EnZl4_Update4(Actor* actor, GameState_Play* play)
     comboGiveItemNpc(actor, play, GI_OOT_SONG_ZELDA, NPC_OOT_ZELDA_SONG, 10000.f, 400.f);
 }
 
-void EnZl4_Update3(Actor* actor, GameState_Play* play)
+void EnZl4_Update3(Actor* actor, PlayState* play)
 {
     if (Actor_HasParentZ(actor))
     {
@@ -45,14 +45,14 @@ void EnZl4_Update3(Actor* actor, GameState_Play* play)
     comboGiveItemNpc(actor, play, GI_OOT_ZELDA_LETTER, NPC_OOT_ZELDA_LETTER, 10000.f, 400.f);
 }
 
-void EnZl4_Update2(Actor* actor, GameState_Play* play)
+void EnZl4_Update2(Actor* actor, PlayState* play)
 {
     Message_Close(play);
     EnZl4_Update3(actor, play);
     actor->update = EnZl4_Update3;
 }
 
-void EnZl4_Update(Actor* actor, GameState_Play* play)
+void EnZl4_Update(Actor* actor, PlayState* play)
 {
     actor->messageId = 0x2005;
     if (ActorTalkedTo(actor))

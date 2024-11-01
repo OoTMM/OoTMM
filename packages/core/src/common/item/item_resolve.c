@@ -1,6 +1,6 @@
 #include <combo.h>
 
-s16 comboItemResolve(GameState_Play* play, s16 gi)
+s16 comboItemResolve(PlayState* play, s16 gi)
 {
     int isNeg;
 

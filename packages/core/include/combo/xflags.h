@@ -15,7 +15,7 @@
 typedef struct ComboItemQuery ComboItemQuery;
 typedef struct ComboItemOverride ComboItemOverride;
 typedef struct Actor Actor;
-typedef struct GameState_Play GameState_Play;
+typedef struct PlayState PlayState;
 
 typedef struct Xflag
 {
@@ -33,6 +33,6 @@ void comboXflagsSetOot(const Xflag* xf);
 void comboXflagsSetMm(const Xflag* xf);
 void comboXflagItemQuery(ComboItemQuery* q, const Xflag* xf, s16 gi);
 void comboXflagItemOverride(ComboItemOverride* o, const Xflag* xf, s16 gi);
-void comboXflagInit(Xflag* xf, Actor* actor, GameState_Play* play);
+void comboXflagInit(Xflag* xf, Actor* actor, PlayState* play);
 
 #endif /* COMBO_XFLAGS_H */

@@ -97,7 +97,7 @@ static OcarinaSongButtons sWarpSongs[6] = {
 
 static u8 sWarpSongPlayed = 0xff;
 
-u8 Ocarina_BeforeSongPlayingProcessed(GameState_Play* ctxt)
+u8 Ocarina_BeforeSongPlayingProcessed(PlayState* ctxt)
 {
     char* b;
     u8 songPlayed = ctxt->msgCtx.songInfo->frameInfo[0].storedSong;
@@ -133,7 +133,7 @@ u8 Ocarina_BeforeSongPlayingProcessed(GameState_Play* ctxt)
     return songPlayed;
 }
 
-void Ocarina_HandleWarp(Actor_Player* player, GameState_Play* play)
+void Ocarina_HandleWarp(Actor_Player* player, PlayState* play)
 {
     int messageState;
     if (sWarpSongPlayed >= 0 && sWarpSongPlayed <= 5)
@@ -164,7 +164,7 @@ void Ocarina_HandleWarp(Actor_Player* player, GameState_Play* play)
                 player->state &= ~0x20000000; /* PLAYER_STATE1_TIME_STOP */
                 player->csMode = 0; /* csMode = PLAYER_CSMODE_0; */
 
-                void (*Player_func_8085B28C)(GameState_Play* play, Actor_Player* link, s32 csMode);
+                void (*Player_func_8085B28C)(PlayState* play, Actor_Player* link, s32 csMode);
                 Player_func_8085B28C = OverlayAddr(0x8085B28C);
                 Player_func_8085B28C(play, NULL, 19);
 

@@ -29,11 +29,11 @@ typedef struct
 }
 AudioTable;
 
-typedef struct GameState_Play GameState_Play;
+typedef struct PlayState PlayState;
 
 void    Audio_ApplySoundMode(u8 mode);
 void    Audio_SetCutsceneFlag(int flag);
 u16     Audio_GetActiveSeqId(int channel);
-void    Audio_DisplayMusicName(GameState_Play* play);
+void    Audio_DisplayMusicName(PlayState* play);
 
 #endif

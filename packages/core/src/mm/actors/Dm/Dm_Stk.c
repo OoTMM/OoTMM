@@ -4,7 +4,7 @@
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x290) = (h); } while (0)
 
-static void DmStk_Start(Actor* this, GameState_Play* play)
+static void DmStk_Start(Actor* this, PlayState* play)
 {
     if (Config_SpecialCond(SPECIAL_MOON) && !Config_Flag(CFG_MM_OPEN_MOON))
     {
@@ -14,7 +14,7 @@ static void DmStk_Start(Actor* this, GameState_Play* play)
     PlayMusic(0, 0x38, 0, 7, 0xff);
 }
 
-void DmStk_StartCutsceneWithOcarina(Actor* this, GameState_Play* play)
+void DmStk_StartCutsceneWithOcarina(Actor* this, PlayState* play)
 {
     DmStk_Start(this, play);
     SET_HANDLER(this, actorAddr(0x191, 0x80aa192c));
@@ -22,7 +22,7 @@ void DmStk_StartCutsceneWithOcarina(Actor* this, GameState_Play* play)
 
 PATCH_FUNC(0x80aa18d8, DmStk_StartCutsceneWithOcarina);
 
-void DmStk_StartCutsceneWithoutOcarina(Actor* this, GameState_Play* play)
+void DmStk_StartCutsceneWithoutOcarina(Actor* this, PlayState* play)
 {
     DmStk_Start(this, play);
     SET_HANDLER(this, actorAddr(0x191, 0x80aa19ec));

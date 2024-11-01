@@ -120,7 +120,7 @@ void comboXflagItemOverride(ComboItemOverride* o, const Xflag* xf, s16 gi)
     comboItemOverride(o, &q);
 }
 
-void comboXflagInit(Xflag* xf, Actor* actor, GameState_Play* play)
+void comboXflagInit(Xflag* xf, Actor* actor, PlayState* play)
 {
     if (g.xflagOverride)
     {

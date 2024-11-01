@@ -18,7 +18,7 @@ int EnFu_HasGivenItem(Actor* this)
 
 PATCH_CALL(0x80963574, EnFu_HasGivenItem);
 
-void EnFu_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnFu_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 {
     int npc;
 

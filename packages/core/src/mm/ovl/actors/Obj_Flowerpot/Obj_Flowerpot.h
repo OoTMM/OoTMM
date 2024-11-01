@@ -6,7 +6,7 @@
 
 typedef struct Actor_ObjFlowerpot Actor_ObjFlowerpot;
 
-typedef void (*Actor_ObjFlowerpotFunc)(Actor_ObjFlowerpot*, GameState_Play*);
+typedef void (*Actor_ObjFlowerpotFunc)(Actor_ObjFlowerpot*, PlayState*);
 
 struct Actor_ObjFlowerpot
 {

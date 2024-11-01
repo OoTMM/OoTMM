@@ -409,7 +409,7 @@ static void DebugHandler_Time(int trigger)
 #endif
 
 #if defined(GAME_OOT)
-void ageSwap(GameState_Play* play);
+void ageSwap(PlayState* play);
 
 static void DebugHandler_Age(int trigger)
 {
@@ -463,7 +463,7 @@ void Debug_Init(void)
 }
 
 #if defined(GAME_MM)
-static void cheatAllItems(GameState_Play* play)
+static void cheatAllItems(PlayState* play)
 {
     /* Notebook */
     gSave.weekEventReg[66] = 0xff;
@@ -589,7 +589,7 @@ static void cheatAllItems(GameState_Play* play)
 #endif
 
 #if defined(GAME_OOT)
-static void cheatAllItems(GameState_Play* play)
+static void cheatAllItems(PlayState* play)
 {
     // gSave.inventory.quest.gerudoCard = 1;
     MM_SET_EVENT_WEEK(EV_MM_WEEK_DRANK_CHATEAU_ROMANI);

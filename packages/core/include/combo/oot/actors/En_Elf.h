@@ -6,8 +6,8 @@
 
 typedef struct Actor_EnElf Actor_EnElf;
 
-typedef void (*EnElfActionFunc)(Actor_EnElf*, GameState_Play*);
-typedef void (*EnElfUnkFunc)(Actor_EnElf*, GameState_Play*);
+typedef void (*EnElfActionFunc)(Actor_EnElf*, PlayState*);
+typedef void (*EnElfUnkFunc)(Actor_EnElf*, PlayState*);
 
 struct Actor_EnElf
 {
@@ -51,7 +51,7 @@ struct Actor_EnElf
 };
 
 void EnElf_ItemQuery(ComboItemQuery* q, Actor_EnElf* this);
-void EnElf_Draw(Actor_EnElf* this, GameState_Play* play);
+void EnElf_Draw(Actor_EnElf* this, PlayState* play);
 
 _Static_assert(sizeof(Actor_EnElf) == 0x02CC, "OoT Actor_EnElf size is wrong");
 

@@ -5,7 +5,7 @@
 
 struct MagicWind;
 
-typedef void (*MagicWindFunc)(struct MagicWind* this, GameState_Play* play);
+typedef void (*MagicWindFunc)(struct MagicWind* this, PlayState* play);
 
 typedef struct MagicWind {
     /* 0x0000 */ Actor actor;

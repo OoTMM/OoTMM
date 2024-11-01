@@ -11,8 +11,8 @@
 #include <combo/actor.h>
 #include <combo/hint.h>
 
-void ArrowCycle_Handle(Actor_Player* link, GameState_Play* play);
-void Ocarina_HandleCustomSongs(Actor_Player* link, GameState_Play* play);
+void ArrowCycle_Handle(Actor_Player* link, PlayState* play);
+void Ocarina_HandleCustomSongs(Actor_Player* link, PlayState* play);
 
 void* Player_AllocObjectBuffer(u32 size)
 {
@@ -23,7 +23,7 @@ void* Player_AllocObjectBuffer(u32 size)
     return sBuffer;
 }
 
-static void maskToggle(GameState_Play* play, Actor_Player* player, u8 maskId)
+static void maskToggle(PlayState* play, Actor_Player* player, u8 maskId)
 {
     /* Set the mask */
     if (player->mask)
@@ -35,7 +35,7 @@ static void maskToggle(GameState_Play* play, Actor_Player* player, u8 maskId)
     PlaySound(0x835);
 }
 
-static void Player_UseBoots(GameState_Play* play, Actor_Player* this, int bootsId)
+static void Player_UseBoots(PlayState* play, Actor_Player* this, int bootsId)
 {
     if (gSave.equips.equipment.boots == bootsId)
         gSave.equips.equipment.boots = 1;
@@ -45,9 +45,9 @@ static void Player_UseBoots(GameState_Play* play, Actor_Player* this, int bootsI
     PlaySound(0x835);
 }
 
-void Player_UseItem(GameState_Play* play, Actor_Player* link, s16 itemId)
+void Player_UseItem(PlayState* play, Actor_Player* link, s16 itemId)
 {
-    void (*Player_UseItemImpl)(GameState_Play* play, Actor_Player* link, s16 itemId);
+    void (*Player_UseItemImpl)(PlayState* play, Actor_Player* link, s16 itemId);
     u8 prevMask;
 
     prevMask = link->mask;
@@ -83,7 +83,7 @@ void Player_UseItem(GameState_Play* play, Actor_Player* link, s16 itemId)
 
 PATCH_CALL(0x8083212c, Player_UseItem);
 
-static int prepareMask(GameState_Play* play, u16 objectId, int needsMatrix)
+static int prepareMask(PlayState* play, u16 objectId, int needsMatrix)
 {
     void* obj;
 
@@ -100,7 +100,7 @@ static int prepareMask(GameState_Play* play, u16 objectId, int needsMatrix)
     return 1;
 }
 
-static void DrawExtendedMaskKeaton(GameState_Play* play, Actor_Player* link)
+static void DrawExtendedMaskKeaton(PlayState* play, Actor_Player* link)
 {
     if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_KEATON, 1))
         return;
@@ -109,7 +109,7 @@ static void DrawExtendedMaskKeaton(GameState_Play* play, Actor_Player* link)
     CLOSE_DISPS();
 }
 
-static void DrawExtendedMaskSkull(GameState_Play* play, Actor_Player* link)
+static void DrawExtendedMaskSkull(PlayState* play, Actor_Player* link)
 {
     if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_SKULL, 1))
         return;
@@ -118,7 +118,7 @@ static void DrawExtendedMaskSkull(GameState_Play* play, Actor_Player* link)
     CLOSE_DISPS();
 }
 
-static void DrawExtendedMaskSpooky(GameState_Play* play, Actor_Player* link)
+static void DrawExtendedMaskSpooky(PlayState* play, Actor_Player* link)
 {
     if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_SPOOKY, 1))
         return;
@@ -127,7 +127,7 @@ static void DrawExtendedMaskSpooky(GameState_Play* play, Actor_Player* link)
     CLOSE_DISPS();
 }
 
-static void DrawExtendedMaskBunny(GameState_Play* play, Actor_Player* link)
+static void DrawExtendedMaskBunny(PlayState* play, Actor_Player* link)
 {
     if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_BUNNY, 0))
         return;
@@ -137,7 +137,7 @@ static void DrawExtendedMaskBunny(GameState_Play* play, Actor_Player* link)
     CLOSE_DISPS();
 }
 
-static void DrawExtendedMaskGoron(GameState_Play* play, Actor_Player* link)
+static void DrawExtendedMaskGoron(PlayState* play, Actor_Player* link)
 {
     if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_GORON, 1))
         return;
@@ -146,7 +146,7 @@ static void DrawExtendedMaskGoron(GameState_Play* play, Actor_Player* link)
     CLOSE_DISPS();
 }
 
-static void DrawExtendedMaskZora(GameState_Play* play, Actor_Player* link)
+static void DrawExtendedMaskZora(PlayState* play, Actor_Player* link)
 {
     if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_ZORA, 1))
         return;
@@ -155,7 +155,7 @@ static void DrawExtendedMaskZora(GameState_Play* play, Actor_Player* link)
     CLOSE_DISPS();
 }
 
-static void DrawExtendedMaskGerudo(GameState_Play* play, Actor_Player* link)
+static void DrawExtendedMaskGerudo(PlayState* play, Actor_Player* link)
 {
     if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_GERUDO, 1))
         return;
@@ -164,7 +164,7 @@ static void DrawExtendedMaskGerudo(GameState_Play* play, Actor_Player* link)
     CLOSE_DISPS();
 }
 
-static void DrawExtendedMaskTruth(GameState_Play* play, Actor_Player* link)
+static void DrawExtendedMaskTruth(PlayState* play, Actor_Player* link)
 {
     if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_TRUTH, 1))
         return;
@@ -173,7 +173,7 @@ static void DrawExtendedMaskTruth(GameState_Play* play, Actor_Player* link)
     CLOSE_DISPS();
 }
 
-static void DrawExtendedMaskBlast(GameState_Play* play, Actor_Player* link)
+static void DrawExtendedMaskBlast(PlayState* play, Actor_Player* link)
 {
     u8 opacity;
 
@@ -201,7 +201,7 @@ static void DrawExtendedMaskBlast(GameState_Play* play, Actor_Player* link)
     CLOSE_DISPS();
 }
 
-static void DrawExtendedMaskStone(GameState_Play* play, Actor_Player* link)
+static void DrawExtendedMaskStone(PlayState* play, Actor_Player* link)
 {
     if (!prepareMask(play, 0x24e | MASK_FOREIGN_OBJECT, 1))
         return;
@@ -211,7 +211,7 @@ static void DrawExtendedMaskStone(GameState_Play* play, Actor_Player* link)
     CLOSE_DISPS();
 }
 
-typedef void (*MaskCallback)(GameState_Play*, Actor_Player*);
+typedef void (*MaskCallback)(PlayState*, Actor_Player*);
 
 static const MaskCallback kMaskCallbacks[] = {
     DrawExtendedMaskKeaton,
@@ -228,7 +228,7 @@ static const MaskCallback kMaskCallbacks[] = {
 
 void comboDrawExtendedMask(void)
 {
-    GameState_Play* play;
+    PlayState* play;
     Actor_Player* link;
     MaskCallback cb;
     int index;
@@ -261,7 +261,7 @@ static void updateKokiriSwordLength(void)
     }
 }
 
-void Player_UpdateWrapper(Actor_Player* this, GameState_Play* play)
+void Player_UpdateWrapper(Actor_Player* this, PlayState* play)
 {
     updateKokiriSwordLength();
 
@@ -290,21 +290,21 @@ void Player_UpdateWrapper(Actor_Player* this, GameState_Play* play)
     comboSrUpdate(play);
 }
 
-int Player_DpadHook(Actor_Player* this, GameState_Play* play)
+int Player_DpadHook(Actor_Player* this, PlayState* play)
 {
     if (Player_UsingItem(this))
         return 1;
     return Dpad_Use(play, DPF_ITEMS);
 }
 
-void EnGs_TalkedTo(Actor*, GameState_Play*);
-void EnGm_TalkedTo(Actor*, GameState_Play*);
-void EnMs_TalkedTo(Actor*, GameState_Play*);
-void EnSsh_TalkedTo(Actor*, GameState_Play*);
+void EnGs_TalkedTo(Actor*, PlayState*);
+void EnGm_TalkedTo(Actor*, PlayState*);
+void EnMs_TalkedTo(Actor*, PlayState*);
+void EnSsh_TalkedTo(Actor*, PlayState*);
 
-void DemoEffect_TextRutoSapphire(GameState_Play*);
+void DemoEffect_TextRutoSapphire(PlayState*);
 
-void Player_TalkDisplayTextBox(GameState_Play* play, s16 textId, Actor* actor)
+void Player_TalkDisplayTextBox(PlayState* play, s16 textId, Actor* actor)
 {
     PlayerDisplayTextBox(play, textId, actor);
     if (actor)
@@ -350,7 +350,7 @@ static u16 blastMaskDelay(void)
     return 0x136;
 }
 
-static void Player_BlastMask(GameState_Play* play, Actor_Player* link)
+static void Player_BlastMask(PlayState* play, Actor_Player* link)
 {
     Actor* bomb;
     s16* bombTimer;
@@ -366,9 +366,9 @@ static void Player_BlastMask(GameState_Play* play, Actor_Player* link)
     Interface_LoadItemIconImpl(play, 0);
 }
 
-void Player_ProcessItemButtonsWrapper(Actor_Player* link, GameState_Play* play)
+void Player_ProcessItemButtonsWrapper(Actor_Player* link, PlayState* play)
 {
-    void (*Player_ProcessItemButtons)(Actor_Player* link, GameState_Play* play);
+    void (*Player_ProcessItemButtons)(Actor_Player* link, PlayState* play);
     ControllerInput* input;
     int bPress;
 
@@ -393,7 +393,7 @@ void Player_ProcessItemButtonsWrapper(Actor_Player* link, GameState_Play* play)
 
 void Player_DrawDekuStick(void)
 {
-    GameState_Play* play;
+    PlayState* play;
     void* obj;
 
     play = gPlay;
@@ -407,7 +407,7 @@ void Player_DrawDekuStick(void)
     CLOSE_DISPS();
 }
 
-void Player_AfterSetEquipmentData(GameState_Play* play)
+void Player_AfterSetEquipmentData(PlayState* play)
 {
     Actor_Player* player = GET_PLAYER(play);
     if (player->rightHandType != 0xd && /* PLAYER_MODELTYPE_RH_OCARINA */
@@ -482,7 +482,7 @@ static void* Player_CustomPair(void* a, void* b)
     return dlist;
 }
 
-static void Player_OverrideCustomSheath(GameState_Play* play, Actor_Player* this, Gfx** dlist, int isPause)
+static void Player_OverrideCustomSheath(PlayState* play, Actor_Player* this, Gfx** dlist, int isPause)
 {
     void*   shield;
     void*   sword;
@@ -561,7 +561,7 @@ static void Player_OverrideCustomSheath(GameState_Play* play, Actor_Player* this
     *dlist = Player_CustomPair(shield, sword);
 }
 
-static void fixTunicColoLimb(GameState_Play* play, int limb)
+static void fixTunicColoLimb(PlayState* play, int limb)
 {
     static const u8* kColors = (const u8*)0x800f7ad8;
     int index;
@@ -581,7 +581,7 @@ static void fixTunicColoLimb(GameState_Play* play, int limb)
     CLOSE_DISPS();
 }
 
-static void Player_OverrideAdult(GameState_Play* play, Actor_Player* this, int limb, Gfx** dlist, int isPause)
+static void Player_OverrideAdult(PlayState* play, Actor_Player* this, int limb, Gfx** dlist, int isPause)
 {
     fixTunicColoLimb(play, limb);
 
@@ -623,7 +623,7 @@ static void Player_OverrideAdult(GameState_Play* play, Actor_Player* this, int l
     }
 }
 
-static void Player_OverrideChild(GameState_Play* play, Actor_Player* this, int limb, Gfx** dlist, int isPause)
+static void Player_OverrideChild(PlayState* play, Actor_Player* this, int limb, Gfx** dlist, int isPause)
 {
     fixTunicColoLimb(play, limb);
 
@@ -676,7 +676,7 @@ static void Player_OverrideChild(GameState_Play* play, Actor_Player* this, int l
     }
 }
 
-static void Player_OverrideCustom(GameState_Play* play, Actor_Player* this, int limb, Gfx** dlist, int isPause)
+static void Player_OverrideCustom(PlayState* play, Actor_Player* this, int limb, Gfx** dlist, int isPause)
 {
     if (gSave.age == AGE_CHILD)
         Player_OverrideChild(play, this, limb, dlist, isPause);
@@ -684,7 +684,7 @@ static void Player_OverrideCustom(GameState_Play* play, Actor_Player* this, int 
         Player_OverrideAdult(play, this, limb, dlist, isPause);
 }
 
-int Player_OverrideLimbDrawGameplayDefaultWrapper(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Player* player)
+int Player_OverrideLimbDrawGameplayDefaultWrapper(PlayState* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Player* player)
 {
     /* Forward */
     if (Player_OverrideLimbDrawGameplayDefault(play, limbIndex, dList, pos, rot, player))
@@ -694,7 +694,7 @@ int Player_OverrideLimbDrawGameplayDefaultWrapper(GameState_Play* play, s32 limb
     return 0;
 }
 
-int Player_OverrideLimbDrawPauseWrapper(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Player* player)
+int Player_OverrideLimbDrawPauseWrapper(PlayState* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Player* player)
 {
     /* Forward */
     if (Player_OverrideLimbDrawPause(play, limbIndex, dList, pos, rot, player))
@@ -704,7 +704,7 @@ int Player_OverrideLimbDrawPauseWrapper(GameState_Play* play, s32 limbIndex, Gfx
     return 0;
 }
 
-int Player_OverrideLimbDrawGameplayFirstPersonWrapper(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Player* player)
+int Player_OverrideLimbDrawGameplayFirstPersonWrapper(PlayState* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Player* player)
 {
     if (!(gSave.age == AGE_CHILD && limbIndex == PLAYER_LIMB_R_FOREARM))
     {
@@ -729,9 +729,9 @@ static Color_RGB8 sGauntletColors[] = {
     { 254, 207, 15 },
 };
 
-void DrawChildGauntlets(GameState_Play* play);
+void DrawChildGauntlets(PlayState* play);
 
-void Player_DrawFlexLod(GameState_Play* play, void** skeleton, Vec3s* jointTable, s32 dListCount, void* overrideLimbDraw, void* postLimbDraw, void* arg, s32 lod)
+void Player_DrawFlexLod(PlayState* play, void** skeleton, Vec3s* jointTable, s32 dListCount, void* overrideLimbDraw, void* postLimbDraw, void* arg, s32 lod)
 {
     Color_RGB8* c;
     void* hookshotObj;
@@ -804,7 +804,7 @@ void Player_DrawFlexLod(GameState_Play* play, void** skeleton, Vec3s* jointTable
 
 PATCH_CALL(0x8007a0d0, Player_DrawFlexLod);
 
-static void Player_AddMasterSwordGanonFight(GameState_Play* play)
+static void Player_AddMasterSwordGanonFight(PlayState* play)
 {
     if (gSharedCustomSave.foundMasterSword)
         AddItem(play, ITEM_OOT_SWORD_MASTER);
@@ -833,7 +833,7 @@ static int Player_IsStrengthGoronBracelet(void)
 
 PATCH_CALL(0x8007a2b4, Player_IsStrengthGoronBracelet);
 
-static int Player_ItemAndArrowType(GameState_Play* play, Actor_Player* this, int* outItem, int* outArrow)
+static int Player_ItemAndArrowType(PlayState* play, Actor_Player* this, int* outItem, int* outArrow)
 {
     if (this->heldItemAction == 15 || (gSave.age == AGE_CHILD && play->sceneId == SCE_OOT_SHOOTING_GALLERY))
     {

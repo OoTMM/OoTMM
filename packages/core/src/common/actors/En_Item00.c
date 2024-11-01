@@ -14,7 +14,7 @@
 void EnItem00_AliasFreestandingRupee(Xflag* xflag);
 void EnItem00_AliasFreestandingHeart(Xflag* xflag);
 
-void EnItem00_InitWrapper(Actor_EnItem00* this, GameState_Play* play)
+void EnItem00_InitWrapper(Actor_EnItem00* this, PlayState* play)
 {
     /* Forward */
     EnItem00_Init(this, play);
@@ -27,7 +27,7 @@ void EnItem00_InitWrapper(Actor_EnItem00* this, GameState_Play* play)
     this->isExtendedMajor = 0;
 }
 
-static void EnItem00_DrawXflag(Actor_EnItem00* this, GameState_Play* play)
+static void EnItem00_DrawXflag(Actor_EnItem00* this, PlayState* play)
 {
     ComboItemOverride o;
     s16 gi;
@@ -47,7 +47,7 @@ static void EnItem00_DrawXflag(Actor_EnItem00* this, GameState_Play* play)
     Draw_Gi(play, &this->base, gi, 0);
 }
 
-static int EnItem00_XflagCanCollect(Actor_EnItem00* this, GameState_Play* play)
+static int EnItem00_XflagCanCollect(Actor_EnItem00* this, PlayState* play)
 {
     Actor_Player* link;
 
@@ -62,7 +62,7 @@ static int EnItem00_XflagCanCollect(Actor_EnItem00* this, GameState_Play* play)
     return 1;
 }
 
-static void EnItem00_UpdateXflagDrop(Actor_EnItem00* this, GameState_Play* play)
+static void EnItem00_UpdateXflagDrop(Actor_EnItem00* this, PlayState* play)
 {
     /* Artifically disable collisions if the items shouldn't be collected */
     if (!EnItem00_XflagCanCollect(this, play))
@@ -132,7 +132,7 @@ void EnItem00_XflagInit(Actor_EnItem00* this, const Xflag* xflag)
     this->base.params = 0;
 }
 
-void EnItem00_XflagInitFreestanding(Actor_EnItem00* this, GameState_Play* play, u8 actorIndex, u8 slice)
+void EnItem00_XflagInitFreestanding(Actor_EnItem00* this, PlayState* play, u8 actorIndex, u8 slice)
 {
     Xflag xflag;
 
@@ -161,7 +161,7 @@ void EnItem00_XflagInitFreestanding(Actor_EnItem00* this, GameState_Play* play, 
     EnItem00_XflagInit(this, &xflag);
 }
 
-static void EnItem00_XflagCollectedHandler(Actor_EnItem00* this, GameState_Play* play)
+static void EnItem00_XflagCollectedHandler(Actor_EnItem00* this, PlayState* play)
 {
     this->timer = 1;
     EnItem00_CollectedHandler(this, play);
@@ -189,7 +189,7 @@ void EnItem00_SetXflagCollectedHandler(Actor_EnItem00* this)
     this->handler = EnItem00_XflagCollectedHandler;
 }
 
-Actor_EnItem00* EnItem00_DropCustom(GameState_Play* play, const Vec3f* pos, const Xflag* xflag)
+Actor_EnItem00* EnItem00_DropCustom(PlayState* play, const Vec3f* pos, const Xflag* xflag)
 {
     Actor* actor;
     Actor_EnItem00* item;
@@ -226,7 +226,7 @@ Actor_EnItem00* EnItem00_DropCustom(GameState_Play* play, const Vec3f* pos, cons
     return item;
 }
 
-Actor_EnItem00* EnItem00_DropCustomNoInertia(GameState_Play* play, const Vec3f* pos, const Xflag* xflag)
+Actor_EnItem00* EnItem00_DropCustomNoInertia(PlayState* play, const Vec3f* pos, const Xflag* xflag)
 {
     Actor_EnItem00* item;
 

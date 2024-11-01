@@ -1,7 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 
-void EnGg_HandlerGiveItem(Actor* this, GameState_Play* play)
+void EnGg_HandlerGiveItem(Actor* this, PlayState* play)
 {
     if (Actor_HasParentZ(this))
     {

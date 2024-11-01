@@ -239,7 +239,7 @@ static int csmcPotId(s16 gi, int def)
     }
 }
 
-void csmcPotPreDraw(Actor* this, GameState_Play* play, s16 gi, int def)
+void csmcPotPreDraw(Actor* this, PlayState* play, s16 gi, int def)
 {
     int type;
 

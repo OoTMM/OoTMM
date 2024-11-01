@@ -13,13 +13,13 @@
 
 static u16 sMsgTimer;
 
-static void ItemDecoy_SetHandler(Actor_ItemDecoy* this, GameState_Play* play, Actor_ItemDecoyFunc handler)
+static void ItemDecoy_SetHandler(Actor_ItemDecoy* this, PlayState* play, Actor_ItemDecoyFunc handler)
 {
     this->handler = handler;
     handler(this, play);
 }
 
-static void ItemDecoy_Draw(Actor_ItemDecoy* this, GameState_Play* play)
+static void ItemDecoy_Draw(Actor_ItemDecoy* this, PlayState* play)
 {
     Actor_Player* link;
     Vec3f pos;
@@ -37,13 +37,13 @@ static void ItemDecoy_Draw(Actor_ItemDecoy* this, GameState_Play* play)
     Draw_Gi(play, &this->base, this->gi, 0);
 }
 
-static void ItemDecoy_HandlerTimer(Actor_ItemDecoy* this, GameState_Play* play)
+static void ItemDecoy_HandlerTimer(Actor_ItemDecoy* this, PlayState* play)
 {
     if (!this->timer)
         Actor_Kill(&this->base);
 }
 
-static int ItemDecoy_CanCollect(Actor_ItemDecoy* this, GameState_Play* play)
+static int ItemDecoy_CanCollect(Actor_ItemDecoy* this, PlayState* play)
 {
     Actor_Player* link;
 
@@ -62,7 +62,7 @@ static int ItemDecoy_CanCollect(Actor_ItemDecoy* this, GameState_Play* play)
     return 1;
 }
 
-static void ItemDecoy_HandlerMessageTimer(Actor_ItemDecoy* this, GameState_Play* play)
+static void ItemDecoy_HandlerMessageTimer(Actor_ItemDecoy* this, PlayState* play)
 {
     int end;
 
@@ -84,7 +84,7 @@ static void ItemDecoy_HandlerMessageTimer(Actor_ItemDecoy* this, GameState_Play*
     }
 }
 
-static void ItemDecoy_HandlerImportantItemConfirm(Actor_ItemDecoy* this, GameState_Play* play)
+static void ItemDecoy_HandlerImportantItemConfirm(Actor_ItemDecoy* this, PlayState* play)
 {
     if (Message_IsClosed(&this->base, play))
     {
@@ -97,7 +97,7 @@ static void ItemDecoy_HandlerImportantItemConfirm(Actor_ItemDecoy* this, GameSta
         Player_Freeze(play);
 }
 
-static void ItemDecoy_HandlerImportantItem(Actor_ItemDecoy* this, GameState_Play* play)
+static void ItemDecoy_HandlerImportantItem(Actor_ItemDecoy* this, PlayState* play)
 {
     ComboItemOverride o;
     Actor_Player* link;
@@ -129,7 +129,7 @@ static void ItemDecoy_HandlerImportantItem(Actor_ItemDecoy* this, GameState_Play
     }
 }
 
-static void ItemDecoy_HandlerInit(Actor_ItemDecoy* this, GameState_Play* play)
+static void ItemDecoy_HandlerInit(Actor_ItemDecoy* this, PlayState* play)
 {
     if (!isItemFastBuy(this->gi))
         ItemDecoy_SetHandler(this, play, ItemDecoy_HandlerImportantItem);
@@ -142,7 +142,7 @@ static void ItemDecoy_HandlerInit(Actor_ItemDecoy* this, GameState_Play* play)
     }
 }
 
-static void ItemDecoy_Init(Actor_ItemDecoy* this, GameState_Play* play)
+static void ItemDecoy_Init(Actor_ItemDecoy* this, PlayState* play)
 {
     this->base.room = 0xff;
     this->timer = 20;
@@ -153,7 +153,7 @@ static void ItemDecoy_Init(Actor_ItemDecoy* this, GameState_Play* play)
 #endif
 }
 
-static void ItemDecoy_Update(Actor_ItemDecoy* this, GameState_Play* play)
+static void ItemDecoy_Update(Actor_ItemDecoy* this, PlayState* play)
 {
     Actor_Player* link;
 

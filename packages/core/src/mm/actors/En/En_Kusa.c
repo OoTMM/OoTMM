@@ -44,7 +44,7 @@ void EnKusa_Aliases(Xflag* xflag)
     }
 }
 
-void EnKusa_InitWrapper(Actor_EnKusa* this, GameState_Play* play)
+void EnKusa_InitWrapper(Actor_EnKusa* this, PlayState* play)
 {
     ActorFunc init;
 
@@ -63,7 +63,7 @@ void EnKusa_InitWrapper(Actor_EnKusa* this, GameState_Play* play)
     init(&this->base, play);
 }
 
-void EnKusa_SpawnShuffledDrop(Actor_EnKusa* this, GameState_Play* play)
+void EnKusa_SpawnShuffledDrop(Actor_EnKusa* this, PlayState* play)
 {
     ActorFunc EnKusa_SpawnDrop;
 
@@ -79,7 +79,7 @@ void EnKusa_SpawnShuffledDrop(Actor_EnKusa* this, GameState_Play* play)
     EnItem00_DropCustom(play, &this->base.world.pos, &this->xflag);
 }
 
-void EnKusa_DrawWrapper(Actor_EnKusa* this, GameState_Play* play)
+void EnKusa_DrawWrapper(Actor_EnKusa* this, PlayState* play)
 {
     ActorFunc EnKusa_Draw;
     ComboItemOverride o;

@@ -18,7 +18,7 @@ static const BlueWarpData kBlueWarpData[] = {
     { GI_MM_REMAINS_TWINMOLD, NPC_MM_REMAINS_TWINMOLD, 3 },
 };
 
-static const int DoorWarp1_GetID(Actor* this, GameState_Play* play)
+static const int DoorWarp1_GetID(Actor* this, PlayState* play)
 {
     if ((this->params & 0xff) != 0x01)
         return -1;
@@ -36,7 +36,7 @@ static const int DoorWarp1_GetID(Actor* this, GameState_Play* play)
     return -1;
 }
 
-static const BlueWarpData* DoorWarp1_GetData(Actor* this, GameState_Play* play)
+static const BlueWarpData* DoorWarp1_GetData(Actor* this, PlayState* play)
 {
     int id;
 
@@ -59,7 +59,7 @@ static s16 DoorWarp1_GetGI(const BlueWarpData* data)
     return o.gi;
 }
 
-int DoorWarp1_Collide(Actor* this, GameState_Play* play)
+int DoorWarp1_Collide(Actor* this, PlayState* play)
 {
     float dist;
 
@@ -77,7 +77,7 @@ int DoorWarp1_Collide(Actor* this, GameState_Play* play)
     return 0;
 }
 
-int DoorWarp1_ShouldTrigger(Actor* this, GameState_Play* play)
+int DoorWarp1_ShouldTrigger(Actor* this, PlayState* play)
 {
     Actor_Player* link;
     int id;
@@ -136,7 +136,7 @@ int DoorWarp1_ShouldTrigger(Actor* this, GameState_Play* play)
     return 0;
 }
 
-void DoorWarp1_AfterDraw(Actor* this, GameState_Play* play)
+void DoorWarp1_AfterDraw(Actor* this, PlayState* play)
 {
     static const int kRotDivisor = 100;
     const BlueWarpData* data;
@@ -159,7 +159,7 @@ void DoorWarp1_AfterDraw(Actor* this, GameState_Play* play)
 
 PATCH_FUNC(0x808b866c, DoorWarp1_ShouldTrigger);
 
-static void DoorWarp1_TriggerBossWarpPad(Actor* this, GameState_Play* play)
+static void DoorWarp1_TriggerBossWarpPad(Actor* this, PlayState* play)
 {
     s32 entrance;
 

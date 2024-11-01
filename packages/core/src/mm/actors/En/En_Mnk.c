@@ -3,7 +3,7 @@
 #include <combo/player.h>
 
 /* TODO: Check for repeats */
-static void EnMnk_SongCutscene(Actor* actor, GameState_Play* play)
+static void EnMnk_SongCutscene(Actor* actor, PlayState* play)
 {
     Actor_Player* link;
 

@@ -3,7 +3,7 @@
 #include <combo/config.h>
 #include <combo/actor.h>
 
-void EnMaYto_WarpWrapper(Actor* this, GameState_Play* play)
+void EnMaYto_WarpWrapper(Actor* this, PlayState* play)
 {
     ActorFunc EnMaYto_Warp;
 
@@ -26,7 +26,7 @@ int EnMaYto_HasGivenItem(Actor* this)
 
 PATCH_CALL(0x80b900d4, EnMaYto_HasGivenItem);
 
-void EnMaYto_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnMaYto_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 {
     int npc;
 

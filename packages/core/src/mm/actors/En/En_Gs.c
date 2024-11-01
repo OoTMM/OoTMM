@@ -2,7 +2,7 @@
 #include <combo/item.h>
 #include <combo/hint.h>
 
-void EnGs_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnGs_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 {
     int npc;
 
@@ -15,7 +15,7 @@ void EnGs_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 PATCH_CALL(0x809989cc, EnGs_GiveItem);
 PATCH_CALL(0x80998a30, EnGs_GiveItem);
 
-void EnGs_MessageBox(GameState_Play* play, Actor* this)
+void EnGs_MessageBox(PlayState* play, Actor* this)
 {
     u16 tmp;
     u8 key;

@@ -6,7 +6,7 @@
 
 typedef struct Actor_EnWonderItem Actor_EnWonderItem;
 
-typedef void (*Actor_EnWonderItem_Func)(Actor_EnWonderItem*, GameState_Play*);
+typedef void (*Actor_EnWonderItem_Func)(Actor_EnWonderItem*, PlayState*);
 
 struct ALIGNED(4) Actor_EnWonderItem
 {

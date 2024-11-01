@@ -46,7 +46,7 @@ PATCH_CALL(0x808f4cb0, EnIn_CanBuy);
 PATCH_CALL(0x808f5030, EnIn_CanBuy);
 PATCH_CALL(0x808f53f0, EnIn_CanBuy);
 
-static void EnIn_DisplayBuy(GameState_Play* play)
+static void EnIn_DisplayBuy(PlayState* play)
 {
     ComboItemQuery q;
     ComboItemOverride o;
@@ -66,7 +66,7 @@ static void EnIn_DisplayBuy(GameState_Play* play)
     comboTextAutoLineBreaks(start);
 }
 
-static void EnIn_DisplayTextBox3(GameState_Play* play, Actor* this, s16 textId)
+static void EnIn_DisplayTextBox3(PlayState* play, Actor* this, s16 textId)
 {
     /* Display the original textbox */
     DisplayTextBox3(play, this, textId);
@@ -154,7 +154,7 @@ PATCH_CALL(0x808f3b50, EnIn_HasActorGivenItem);
 PATCH_CALL(0x808f3c50, EnIn_HasActorGivenItem);
 PATCH_CALL(0x808f3d50, EnIn_HasActorGivenItem);
 
-static void EnIn_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+static void EnIn_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b)
 {
     ComboItemQuery q;
 

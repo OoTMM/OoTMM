@@ -23,10 +23,10 @@
 # define GAMEPLAY_FIELD_KEEP_TEX_BUTTERFLY      0x05001f30
 #endif
 
-void EnButte_Init(Actor_EnButte* this, GameState_Play* play);
-void EnButte_Destroy(Actor_EnButte* this, GameState_Play* play);
-void EnButte_Update(Actor_EnButte* this, GameState_Play* play);
-void EnButte_Draw(Actor_EnButte* this, GameState_Play* play);
+void EnButte_Init(Actor_EnButte* this, PlayState* play);
+void EnButte_Destroy(Actor_EnButte* this, PlayState* play);
+void EnButte_Update(Actor_EnButte* this, PlayState* play);
+void EnButte_Draw(Actor_EnButte* this, PlayState* play);
 
 static ColliderJntSphElementInit sJntSphElementsInit[] = {
     { {
@@ -81,7 +81,7 @@ static f32 sTransformationEffectScale = 0.0f;
 static s16 sTransformationEffectAlpha = 0;
 
 void EnButte_SetupFlyAround(Actor_EnButte* this);
-void EnButte_FlyAround(Actor_EnButte* this, GameState_Play* play);
+void EnButte_FlyAround(Actor_EnButte* this, PlayState* play);
 
 void EnButte_SelectFlightParams(Actor_EnButte* this, EnButteFlightParams* flightParams)
 {
@@ -105,13 +105,13 @@ void EnButte_SelectFlightParams(Actor_EnButte* this, EnButteFlightParams* flight
 }
 
 void EnButte_SetupFollowLink(Actor_EnButte* this);
-void EnButte_FollowLink(Actor_EnButte* this, GameState_Play* play);
+void EnButte_FollowLink(Actor_EnButte* this, PlayState* play);
 void EnButte_SetupTransformIntoFairy(Actor_EnButte* this);
-void EnButte_TransformIntoFairy(Actor_EnButte* this, GameState_Play* play);
+void EnButte_TransformIntoFairy(Actor_EnButte* this, PlayState* play);
 void EnButte_SetupWaitToDie(Actor_EnButte* this);
-void EnButte_WaitToDie(Actor_EnButte* this, GameState_Play* play);
+void EnButte_WaitToDie(Actor_EnButte* this, PlayState* play);
 
-static int EnButte_IsShuffled(Actor_EnButte* this, GameState_Play* play)
+static int EnButte_IsShuffled(Actor_EnButte* this, PlayState* play)
 {
     ComboItemQuery q;
     ComboItemOverride o;
@@ -125,7 +125,7 @@ static int EnButte_IsShuffled(Actor_EnButte* this, GameState_Play* play)
     return TRUE;
 }
 
-static int EnButte_CanTransform(Actor_EnButte* this, GameState_Play* play)
+static int EnButte_CanTransform(Actor_EnButte* this, PlayState* play)
 {
     if (this->actor.params & 1)
         return TRUE;
@@ -146,7 +146,7 @@ void EnButte_UpdateTransformationEffect(void)
     sTransformationEffectAlpha += 4000;
 }
 
-void EnButte_DrawTransformationEffect(Actor_EnButte* this, GameState_Play* play)
+void EnButte_DrawTransformationEffect(Actor_EnButte* this, PlayState* play)
 {
     static Vec3f D_809CE3C4 = { 0.0f, 0.0f, -3.0f };
     Vec3f sp5C;
@@ -181,7 +181,7 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_F32(uncullZoneDownward, 600, ICHAIN_STOP),
 };
 
-void EnButte_Init(Actor_EnButte* this, GameState_Play* play)
+void EnButte_Init(Actor_EnButte* this, PlayState* play)
 {
     comboXflagInit(&this->xflag, &this->actor, play);
 
@@ -218,7 +218,7 @@ void EnButte_Init(Actor_EnButte* this, GameState_Play* play)
     this->drawSkelAnime = TRUE;
 }
 
-void EnButte_Destroy(Actor_EnButte* this, GameState_Play* play)
+void EnButte_Destroy(Actor_EnButte* this, PlayState* play)
 {
     Collider_DestroyJntSph(play, &this->collider);
 }
@@ -256,7 +256,7 @@ void EnButte_SetupFlyAround(Actor_EnButte* this)
     this->actionFunc = EnButte_FlyAround;
 }
 
-void EnButte_FlyAround(Actor_EnButte* this, GameState_Play* play)
+void EnButte_FlyAround(Actor_EnButte* this, PlayState* play)
 {
     EnButteFlightParams* flightParams = &sFlyAroundParams[this->flightParamsIdx];
     s16 yaw;
@@ -333,7 +333,7 @@ void EnButte_SetupFollowLink(Actor_EnButte* this)
     this->actionFunc = EnButte_FollowLink;
 }
 
-void EnButte_FollowLink(Actor_EnButte* this, GameState_Play* play) {
+void EnButte_FollowLink(Actor_EnButte* this, PlayState* play) {
     static s32 D_809CE410 = 1500;
     EnButteFlightParams* flightParams = &sFollowLinkParams[this->flightParamsIdx];
     f32 distSqFromHome;
@@ -406,7 +406,7 @@ void EnButte_SetupTransformIntoFairy(Actor_EnButte* this)
     this->actionFunc = EnButte_TransformIntoFairy;
 }
 
-static int EnButte_ShouldSpawnFairy(Actor_EnButte* this, GameState_Play* play)
+static int EnButte_ShouldSpawnFairy(Actor_EnButte* this, PlayState* play)
 {
     ComboItemQuery q;
     ComboItemOverride o;
@@ -423,7 +423,7 @@ static int EnButte_ShouldSpawnFairy(Actor_EnButte* this, GameState_Play* play)
     return TRUE;
 }
 
-static void EnButte_SpawnFairy(Actor_EnButte* this, GameState_Play* play)
+static void EnButte_SpawnFairy(Actor_EnButte* this, PlayState* play)
 {
     if (!EnButte_ShouldSpawnFairy(this, play))
         return;
@@ -434,7 +434,7 @@ static void EnButte_SpawnFairy(Actor_EnButte* this, GameState_Play* play)
     g.xflagOverride = FALSE;
 }
 
-void EnButte_TransformIntoFairy(Actor_EnButte* this, GameState_Play* play)
+void EnButte_TransformIntoFairy(Actor_EnButte* this, PlayState* play)
 {
     SkelAnime_Update(&this->skelAnime);
     EnButte_UpdateTransformationEffect();
@@ -461,13 +461,13 @@ void EnButte_SetupWaitToDie(Actor_EnButte* this)
     this->actor.draw = NULL;
 }
 
-void EnButte_WaitToDie(Actor_EnButte* this, GameState_Play* play)
+void EnButte_WaitToDie(Actor_EnButte* this, PlayState* play)
 {
     if (this->timer <= 0)
         Actor_Kill(&this->actor);
 }
 
-void EnButte_Update(Actor_EnButte* this, GameState_Play* play)
+void EnButte_Update(Actor_EnButte* this, PlayState* play)
 {
     sQuickTransform = (u8)EnButte_IsShuffled(this, play);
 
@@ -530,7 +530,7 @@ static Gfx sLoadTextureCustom[] =
     gsSPEndDisplayList(),
 };
 
-static void EnButte_DrawButterfly(Actor_EnButte* this, GameState_Play* play)
+static void EnButte_DrawButterfly(Actor_EnButte* this, PlayState* play)
 {
     const Color_RGB8* color;
     ComboItemQuery q;
@@ -580,7 +580,7 @@ static void EnButte_DrawButterfly(Actor_EnButte* this, GameState_Play* play)
     CLOSE_DISPS();
 }
 
-void EnButte_Draw(Actor_EnButte* this, GameState_Play* play)
+void EnButte_Draw(Actor_EnButte* this, PlayState* play)
 {
     if (this->drawSkelAnime)
     {

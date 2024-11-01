@@ -70,7 +70,7 @@ static void EnTab_TextItem(char** b, int index)
     }
 }
 
-static void EnTab_MessagePurchase(GameState_Play* play)
+static void EnTab_MessagePurchase(PlayState* play)
 {
     char* b;
 
@@ -83,7 +83,7 @@ static void EnTab_MessagePurchase(GameState_Play* play)
     comboTextAppendStr(&b, "No Thanks" TEXT_END);
 }
 
-void EnTab_AfterTextBox(Actor* this, GameState_Play* play, s16 messageId)
+void EnTab_AfterTextBox(Actor* this, PlayState* play, s16 messageId)
 {
     switch (messageId)
     {
@@ -93,7 +93,7 @@ void EnTab_AfterTextBox(Actor* this, GameState_Play* play, s16 messageId)
     }
 }
 
-void EnTab_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnTab_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 {
     ComboItemQuery q;
     ComboItemOverride o;

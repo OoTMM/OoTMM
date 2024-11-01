@@ -8,20 +8,20 @@
 #include <combo/inventory.h>
 #include <combo/multi.h>
 
-void EnGo_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
-void EnDnh_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
-void EnShn_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
-void EnPm_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b);
-void EnAn_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
-void EnPst_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
-void EnNb_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
-void EnAl_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
-void EnBjt_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
-void EnTab_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
+void EnGo_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b);
+void EnDnh_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b);
+void EnShn_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b);
+void EnPm_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b);
+void EnAn_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b);
+void EnPst_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b);
+void EnNb_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b);
+void EnAl_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b);
+void EnBjt_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b);
+void EnTab_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b);
 
-typedef void (*TextBoxCallback)(Actor*, GameState_Play*, s16);
-void EnGo_AfterTextBox(Actor* this, GameState_Play* play, s16 messageId);
-void EnTab_AfterTextBox(Actor* this, GameState_Play* play, s16 messageId);
+typedef void (*TextBoxCallback)(Actor*, PlayState*, s16);
+void EnGo_AfterTextBox(Actor* this, PlayState* play, s16 messageId);
+void EnTab_AfterTextBox(Actor* this, PlayState* play, s16 messageId);
 
 static Actor* sByteCodeActor;
 
@@ -57,9 +57,9 @@ static s16 convertGi(s16 initial)
     return initial;
 }
 
-static void Actor_ByteCode_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+static void Actor_ByteCode_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b)
 {
-    void (*func)(Actor*, GameState_Play*, s16, float, float);
+    void (*func)(Actor*, PlayState*, s16, float, float);
 
     gi = convertGi(gi);
 
@@ -174,7 +174,7 @@ static void Actor_ByteCode_RemoveItem(s16 item, s16 slot)
 
 PATCH_CALL(0x8010bc60, Actor_ByteCode_RemoveItem);
 
-int Actor_RunByteCodeWrapper(Actor* this, GameState_Play* play, void* bytecode, void* unk1, void* unk2)
+int Actor_RunByteCodeWrapper(Actor* this, PlayState* play, void* bytecode, void* unk1, void* unk2)
 {
     sByteCodeActor = this;
     return Actor_RunByteCode(this, play, bytecode, unk1, unk2);
@@ -201,7 +201,7 @@ PATCH_CALL(0x80bf2bf4, Actor_RunByteCodeWrapper);
 PATCH_CALL(0x80bfda74, Actor_RunByteCodeWrapper);
 PATCH_CALL(0x80c22a14, Actor_RunByteCodeWrapper);
 
-static void Actor_ByteCode_DispatchTextBox(GameState_Play* play, s16 messageId)
+static void Actor_ByteCode_DispatchTextBox(PlayState* play, s16 messageId)
 {
     Actor* this;
     TextBoxCallback cb;
@@ -223,7 +223,7 @@ static void Actor_ByteCode_DispatchTextBox(GameState_Play* play, s16 messageId)
     }
 }
 
-static void Actor_ByteCode_PlayerDisplayTextBox_Hook(GameState_Play* play, s16 messageId, void* unk)
+static void Actor_ByteCode_PlayerDisplayTextBox_Hook(PlayState* play, s16 messageId, void* unk)
 {
     PlayerDisplayTextBox(play, messageId, unk);
     Actor_ByteCode_DispatchTextBox(play, messageId);
@@ -231,7 +231,7 @@ static void Actor_ByteCode_PlayerDisplayTextBox_Hook(GameState_Play* play, s16 m
 
 PATCH_CALL(0x8010af04, Actor_ByteCode_PlayerDisplayTextBox_Hook);
 
-static void Actor_ByteCode_DisplayTextBox2_Hook(GameState_Play* play, s16 messageId)
+static void Actor_ByteCode_DisplayTextBox2_Hook(PlayState* play, s16 messageId)
 {
     DisplayTextBox2(play, messageId);
     Actor_ByteCode_DispatchTextBox(play, messageId);
@@ -239,7 +239,7 @@ static void Actor_ByteCode_DisplayTextBox2_Hook(GameState_Play* play, s16 messag
 
 PATCH_CALL(0x8010af50, Actor_ByteCode_DisplayTextBox2_Hook);
 
-static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
+static int canSpawnSoul(PlayState* play, s16 actorId, u16 variable)
 {
     if (g.isCredits)
         return 1;
@@ -535,7 +535,7 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
     }
 }
 
-static int canSpawnActor(GameState_Play* play, s16 actorId, u16 variable)
+static int canSpawnActor(PlayState* play, s16 actorId, u16 variable)
 {
     switch (actorId)
     {
@@ -550,7 +550,7 @@ static int canSpawnActor(GameState_Play* play, s16 actorId, u16 variable)
 
 static s16 sActorIdToSpawn;
 
-Actor* Actor_SpawnAsChildAndCutsceneWrapper(ActorContext* actorCtx, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int ex1, int ex2, int ex3)
+Actor* Actor_SpawnAsChildAndCutsceneWrapper(ActorContext* actorCtx, PlayState *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int ex1, int ex2, int ex3)
 {
     int ret;
 
@@ -572,7 +572,7 @@ Actor* Actor_SpawnAsChildAndCutsceneWrapper(ActorContext* actorCtx, GameState_Pl
     return _Actor_SpawnAsChildAndCutscene(actorCtx, play, actorId, x, y, z, rx, ry, rz, variable, ex1, ex2, ex3);
 }
 
-static int GetRoomClearFlagForActor(GameState_Play* play, int flag)
+static int GetRoomClearFlagForActor(PlayState* play, int flag)
 {
     int res;
 
@@ -589,7 +589,7 @@ static LightNode* D_8015BC10;
 static s32 D_8015BC14;
 static f32 D_8015BC18;
 
-void Actor_InitFaroresWind(GameState_Play* play) {
+void Actor_InitFaroresWind(PlayState* play) {
     Vec3f lightPos;
 
     RespawnData* fw = &gCustomSave.fw[gOotSave.age];
@@ -616,7 +616,7 @@ void Actor_InitFaroresWind(GameState_Play* play) {
     D_8015BC18 = 0.0f;
 }
 
-void Actor_DrawFaroresWindPointer(GameState_Play* play)
+void Actor_DrawFaroresWindPointer(PlayState* play)
 {
     s32 lightRadius = -1;
     s32 params;
@@ -817,7 +817,7 @@ void Actor_DrawFaroresWindPointer(GameState_Play* play)
     }
 }
 
-void Actor_AfterDrawAll(GameState_Play* play)
+void Actor_AfterDrawAll(PlayState* play)
 {
     /* Displaced code: */
     if (play->actorCtx.lensMaskSize != 0)

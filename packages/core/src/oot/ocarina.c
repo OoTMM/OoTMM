@@ -82,7 +82,7 @@ void OcarinaMaskButtons(void)
     gOcarinaPressedButtons &= mask;
 }
 
-static void changeAgeMessage(GameState_Play* play, s32 toChild)
+static void changeAgeMessage(PlayState* play, s32 toChild)
 {
     char* b;
 
@@ -95,7 +95,7 @@ static void changeAgeMessage(GameState_Play* play, s32 toChild)
     comboTextAppendStr(&b, TEXT_CZ "?" TEXT_NL TEXT_NL TEXT_COLOR_GREEN TEXT_CHOICE2 "OK" TEXT_NL "No" TEXT_END);
 }
 
-void Ocarina_HandleLastPlayedSong(GameState_Play* play, Actor_Player* player, s16 lastPlayedSong)
+void Ocarina_HandleLastPlayedSong(PlayState* play, Actor_Player* player, s16 lastPlayedSong)
 {
     s32 canChangeAge;
 
@@ -208,7 +208,7 @@ static const char* kSoarNames[] = {
     "Stone Tower"
 };
 
-static void soaringMessage(GameState_Play* play, u8 soaringIndex)
+static void soaringMessage(PlayState* play, u8 soaringIndex)
 {
     char* b;
 
@@ -219,7 +219,7 @@ static void soaringMessage(GameState_Play* play, u8 soaringIndex)
     comboTextAppendStr(&b, TEXT_CZ "?" TEXT_NL TEXT_NL TEXT_COLOR_GREEN TEXT_CHOICE2 "OK" TEXT_NL "No" TEXT_END);
 }
 
-static void soaringNoStatuesMessage(GameState_Play* play)
+static void soaringNoStatuesMessage(PlayState* play)
 {
     char* b;
 
@@ -231,7 +231,7 @@ static void soaringNoStatuesMessage(GameState_Play* play)
     comboTextAppendStr(&b, "some." TEXT_END);
 }
 
-static void HandleSoaring(GameState_Play* play)
+static void HandleSoaring(PlayState* play)
 {
     Actor_Player* link;
     int msgState;
@@ -277,7 +277,7 @@ static void HandleSoaring(GameState_Play* play)
     }
 }
 
-void ageSwap(GameState_Play* play)
+void ageSwap(PlayState* play)
 {
     /* Age swap */
     play->linkAgeOnLoad = !gSaveContext.save.age;
@@ -291,7 +291,7 @@ void ageSwap(GameState_Play* play)
     swapFarore();
 }
 
-static void HandleSongOfTime(GameState_Play* play)
+static void HandleSongOfTime(PlayState* play)
 {
     int msgState;
 
@@ -313,7 +313,7 @@ static void HandleSongOfTime(GameState_Play* play)
     }
 }
 
-static void PrepareSoaringScreen(GameState_Play* play)
+static void PrepareSoaringScreen(PlayState* play)
 {
     PauseContext* pauseCtx = &play->pauseCtx;
     s16 i;
@@ -345,7 +345,7 @@ static void PrepareSoaringScreen(GameState_Play* play)
     }
 }
 
-static void SetupSoaring(GameState_Play* play)
+static void SetupSoaring(PlayState* play)
 {
     PauseContext* pauseCtx = &play->pauseCtx;
 
@@ -388,7 +388,7 @@ static void SetupSoaring(GameState_Play* play)
 
 Actor_CustomEnTorch2* gElegyShell;
 
-static void HandleElegy(GameState_Play* play)
+static void HandleElegy(PlayState* play)
 {
     sInCustomSong = CUSTOM_SONG_NONE;
     Actor_Player* player = GET_PLAYER(play);
@@ -420,7 +420,7 @@ static void HandleElegy(GameState_Play* play)
     Message_Close(play);
 }
 
-static void songOfDoubleTimeMessage(GameState_Play* play)
+static void songOfDoubleTimeMessage(PlayState* play)
 {
     char* b;
 
@@ -438,7 +438,7 @@ static void songOfDoubleTimeMessage(GameState_Play* play)
     comboTextAppendStr(&b, TEXT_CZ "?" TEXT_NL TEXT_NL TEXT_COLOR_GREEN TEXT_CHOICE2 "Yes" TEXT_NL "No" TEXT_END);
 }
 
-static void songOfDoubleTimeFailMessage(GameState_Play* play)
+static void songOfDoubleTimeFailMessage(PlayState* play)
 {
     char* b;
 
@@ -447,7 +447,7 @@ static void songOfDoubleTimeFailMessage(GameState_Play* play)
     comboTextAppendStr(&b, "Your notes echoed far.... " TEXT_NL "but nothing happened." TEXT_FADE("\x28") TEXT_END);
 }
 
-static void SetupSongOfDoubleTime(GameState_Play* play)
+static void SetupSongOfDoubleTime(PlayState* play)
 {
     if (gSaveContext.sunSongState != 0 || (play->envCtx.sceneTimeSpeed == 0 && (play->roomCtx.curRoom.behaviorType1 == ROOM_BEHAVIOR_TYPE1_1 || play->interfaceCtx.restrictions.sunSong == 3)))
     {
@@ -463,7 +463,7 @@ static void SetupSongOfDoubleTime(GameState_Play* play)
     }
 }
 
-static void HandleSongOfDoubleTime(GameState_Play* play)
+static void HandleSongOfDoubleTime(PlayState* play)
 {
     int msgState;
 
@@ -525,7 +525,7 @@ static void HandleSongOfDoubleTime(GameState_Play* play)
     }
 }
 
-u8 Ocarina_BeforeSongPlayingProcessed(GameState_Play* play)
+u8 Ocarina_BeforeSongPlayingProcessed(PlayState* play)
 {
     u8 songPlayed = play->msgCtx.ocarinaStaff->state;
 
@@ -554,7 +554,7 @@ u8 Ocarina_BeforeSongPlayingProcessed(GameState_Play* play)
     return songPlayed;
 }
 
-void Ocarina_HandleCustomSongs(Actor_Player* player, GameState_Play* play)
+void Ocarina_HandleCustomSongs(Actor_Player* player, PlayState* play)
 {
     switch (sInCustomSong)
     {

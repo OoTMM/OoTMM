@@ -11,7 +11,7 @@
 #endif
 
 /* Original func */
-void _Interface_Update(GameState_Play* play);
+void _Interface_Update(PlayState* play);
 
 static void Interface_UpdateRupees(void)
 {
@@ -55,7 +55,7 @@ static void Interface_UpdateRupees(void)
     PlaySound(0x482f);
 }
 
-void Interface_Update(GameState_Play* play)
+void Interface_Update(PlayState* play)
 {
     Interface_UpdateRupees();
     _Interface_Update(play);

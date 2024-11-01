@@ -15,7 +15,7 @@ int EnStoneheishi_HasGivenItem(Actor* actor)
 
 PATCH_CALL(0x80bc9d4c, EnStoneheishi_HasGivenItem);
 
-void EnStoneheishi_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+void EnStoneheishi_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b)
 {
     int npc;
 

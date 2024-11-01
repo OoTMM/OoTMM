@@ -2,7 +2,7 @@
 #include <combo/interface.h>
 #include <combo/config.h>
 
-void Interface_UpdateButtonsPart2Wrapper(GameState_Play* play)
+void Interface_UpdateButtonsPart2Wrapper(PlayState* play)
 {
     u8* ptr;
     u8 itemId;
@@ -27,7 +27,7 @@ void Interface_UpdateButtonsPart2Wrapper(GameState_Play* play)
     }
 }
 
-void Interface_SkipMoonCrash(GameState_Play* play)
+void Interface_SkipMoonCrash(PlayState* play)
 {
     if(play->actorCtx.flags & (1 << 1))
         AudioSeq_QueueSeqCmd((14 << 28) | (1 << 8));

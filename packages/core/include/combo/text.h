@@ -61,7 +61,7 @@
 #define TFS_CONFIRM     (1 << 0)
 #define TFS_MUSHROOM    (1 << 1)
 
-typedef struct GameState_Play GameState_Play;
+typedef struct PlayState PlayState;
 typedef struct ComboItemQuery ComboItemQuery;
 typedef struct ComboItemOverride ComboItemOverride;
 
@@ -81,25 +81,25 @@ void comboTextAppendItemNameOverrideEx(char** b, const ComboItemOverride* o, int
 void comboTextAppendRegionName(char** b, u8 regionId, u8 world, int flags);
 int  comboTextAppendCheckName(char** b, u8 checkId, u8 world);
 void comboTextAppendNpcReward(char** b, s16 npcId, s16 gi, int importance);
-void comboTextMessageCantBuy(GameState_Play* play, int flags);
+void comboTextMessageCantBuy(PlayState* play, int flags);
 void comboTextAppendDungeonName(char** buffer, u8 dungeonId);
 void comboTextAppendBossName(char** buffer, u8 bossId);
 void comboTextAppendOrd(char** b, int num);
 void comboTextAppendItemImportance(char** b, s16 gi, int importance);
 
 int  comboMultibyteCharSize(u8 c);
-void comboTextExtra(char** b, GameState_Play* play, s16 gi);
-void comboTextHijackItem(GameState_Play* play, s16 gi, u8 fromPlayer, int count);
-void comboTextHijackItemEx(GameState_Play* play, const ComboItemOverride* o, int count);
-void comboTextHijackItemShop(GameState_Play* play, const ComboItemOverride* o, s16 price, int confirm);
+void comboTextExtra(char** b, PlayState* play, s16 gi);
+void comboTextHijackItem(PlayState* play, s16 gi, u8 fromPlayer, int count);
+void comboTextHijackItemEx(PlayState* play, const ComboItemOverride* o, int count);
+void comboTextHijackItemShop(PlayState* play, const ComboItemOverride* o, s16 price, int confirm);
 
 #if defined(GAME_OOT)
-void comboTextHijackDungeonRewardHints(GameState_Play* play, int base, int count);
-void comboTextHijackLightArrows(GameState_Play* play);
-void comboTextHijackFishCaught(GameState_Play* play, const ComboItemOverride* o);
+void comboTextHijackDungeonRewardHints(PlayState* play, int base, int count);
+void comboTextHijackLightArrows(PlayState* play);
+void comboTextHijackFishCaught(PlayState* play, const ComboItemOverride* o);
 #else
-void comboTextHijackDungeonRewardHints(GameState_Play* play, int hint);
-void comboTextHijackOathToOrder(GameState_Play* play);
+void comboTextHijackDungeonRewardHints(PlayState* play, int hint);
+void comboTextHijackOathToOrder(PlayState* play);
 #endif
 
 #endif

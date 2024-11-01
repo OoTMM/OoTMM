@@ -19,7 +19,7 @@ static void EnColMan_ItemOverride(ComboItemOverride* o)
     comboItemOverride(o, &q);
 }
 
-void EnColMan_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+void EnColMan_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b)
 {
     ComboItemQuery q;
 
@@ -29,7 +29,7 @@ void EnColMan_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, floa
 
 PATCH_CALL(0x80afdecc, EnColMan_GiveItem);
 
-void EnColMan_DrawHeartPiece(Actor* this, GameState_Play* play)
+void EnColMan_DrawHeartPiece(Actor* this, PlayState* play)
 {
     static const float scale = 35.f;
     ComboItemOverride o;

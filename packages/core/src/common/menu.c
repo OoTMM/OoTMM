@@ -427,7 +427,7 @@ static void color4(u8* r, u8* g, u8* b, u8* a, u32 color)
 
 static int gVtxBufferIndex;
 
-static Vtx* vtxAlloc(GameState_Play* play, int count)
+static Vtx* vtxAlloc(PlayState* play, int count)
 {
     Vtx* v;
 
@@ -437,7 +437,7 @@ static Vtx* vtxAlloc(GameState_Play* play, int count)
     return v;
 }
 
-static void drawBackground(GameState_Play* play, float x, float y, float w, float h)
+static void drawBackground(PlayState* play, float x, float y, float w, float h)
 {
     Vtx* v;
 
@@ -481,7 +481,7 @@ static void drawBackground(GameState_Play* play, float x, float y, float w, floa
     CLOSE_DISPS();
 }
 
-static void drawTexIA4_8x12(GameState_Play* play, const void* texPtr, float x, float y)
+static void drawTexIA4_8x12(PlayState* play, const void* texPtr, float x, float y)
 {
     Vtx* v;
     int xx[4];
@@ -532,7 +532,7 @@ static void drawTexIA4_8x12(GameState_Play* play, const void* texPtr, float x, f
     CLOSE_DISPS();
 }
 
-static void drawTexRGBA16_12x12(GameState_Play* play, const void* texPtr, float x, float y)
+static void drawTexRGBA16_12x12(PlayState* play, const void* texPtr, float x, float y)
 {
     Vtx* v;
     int xx[4];
@@ -583,12 +583,12 @@ static void drawTexRGBA16_12x12(GameState_Play* play, const void* texPtr, float 
     CLOSE_DISPS();
 }
 
-static void printChar(GameState_Play* play, char c, float x, float y)
+static void printChar(PlayState* play, char c, float x, float y)
 {
     drawTexIA4_8x12(play, CK_PTR(CUSTOM_KEEP_FONT + (c - ' ') * 0x30), x, y);
 }
 
-static void printStr(GameState_Play* play, const char* str, float x, float y)
+static void printStr(PlayState* play, const char* str, float x, float y)
 {
     int i;
     char c;
@@ -603,12 +603,12 @@ static void printStr(GameState_Play* play, const char* str, float x, float y)
     }
 }
 
-static void printDigit(GameState_Play* play, int digit, float x, float y)
+static void printDigit(PlayState* play, int digit, float x, float y)
 {
     printChar(play, '0' + digit, x, y);
 }
 
-static void printNum(GameState_Play* play, int num, int max, int digits, float x, float y, int showMax)
+static void printNum(PlayState* play, int num, int max, int digits, float x, float y, int showMax)
 {
     int d;
     int denum;
@@ -647,7 +647,7 @@ static void printNum(GameState_Play* play, int num, int max, int digits, float x
     }
 }
 
-static void printNumColored(GameState_Play* play, int num, int max, int digits, float x, float y, int showMax)
+static void printNumColored(PlayState* play, int num, int max, int digits, float x, float y, int showMax)
 {
     u8 r;
     u8 g;
@@ -701,7 +701,7 @@ static void dungeonDataMm(DungeonData* out, const DungeonDef* def)
     out->compass = gMmSave.inventory.dungeonItems[def->id].compass;
 }
 
-static void printDungeonSilverRupees(GameState_Play* play, float x, float y, int srBase, int srCount)
+static void printDungeonSilverRupees(PlayState* play, float x, float y, int srBase, int srCount)
 {
     const ComboSilverRupeeData* data;
     int sr;
@@ -730,7 +730,7 @@ static void printDungeonSilverRupees(GameState_Play* play, float x, float y, int
     CLOSE_DISPS();
 }
 
-static void printSoul(GameState_Play* play, const char* const* names, int soulBase, int base, int index, int mm)
+static void printSoul(PlayState* play, const char* const* names, int soulBase, int base, int index, int mm)
 {
     const char* name;
     float x;
@@ -757,7 +757,7 @@ static void printSoul(GameState_Play* play, const char* const* names, int soulBa
     CLOSE_DISPS();
 }
 
-static void printMoonSun(GameState_Play* play, float x, float y, int isNight)
+static void printMoonSun(PlayState* play, float x, float y, int isNight)
 {
     u32 icon;
     u8 id;
@@ -781,7 +781,7 @@ static void printMoonSun(GameState_Play* play, float x, float y, int isNight)
     CLOSE_DISPS();
 }
 
-static void printDungeonData(GameState_Play* play, int base, int index)
+static void printDungeonData(PlayState* play, int base, int index)
 {
     const DungeonDef* def;
     DungeonData data;
@@ -966,7 +966,7 @@ static void printDungeonData(GameState_Play* play, int base, int index)
     CLOSE_DISPS();
 }
 
-static void updateCursor(GameState_Play* play)
+static void updateCursor(PlayState* play)
 {
     static int delay;
     int change;
@@ -999,7 +999,7 @@ static void updateCursor(GameState_Play* play)
     }
 }
 
-void comboMenuUpdate(GameState_Play* play)
+void comboMenuUpdate(PlayState* play)
 {
     switch (g.menuScreen)
     {
@@ -1040,7 +1040,7 @@ static int min(int a, int b)
     return a < b ? a : b;
 }
 
-static void drawMenuSouls(GameState_Play* play, const char* title, const char* const* names, int soulBase, int mm)
+static void drawMenuSouls(PlayState* play, const char* title, const char* const* names, int soulBase, int mm)
 {
     OPEN_DISPS(play->gs.gfx);
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 0, 255);
@@ -1050,7 +1050,7 @@ static void drawMenuSouls(GameState_Play* play, const char* title, const char* c
     CLOSE_DISPS();
 }
 
-static void drawMenuInfo(GameState_Play* play)
+static void drawMenuInfo(PlayState* play)
 {
     OPEN_DISPS(play->gs.gfx);
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 0, 255);
@@ -1076,7 +1076,7 @@ void comboMenuTick(void)
     }
 }
 
-void comboMenuDraw(GameState_Play* play)
+void comboMenuDraw(PlayState* play)
 {
     if (!gMenuVtx)
     {

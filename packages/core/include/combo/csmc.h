@@ -63,7 +63,7 @@ typedef struct
 }
 CsmcDisplayList;
 
-typedef struct GameState_Play GameState_Play;
+typedef struct PlayState PlayState;
 typedef struct Actor Actor;
 
 /* Generic */
@@ -75,18 +75,18 @@ int     csmcEnabledSkulltula(void);
 int     csmcEnabledCow(void);
 
 /* Chest */
-void    csmcChestInit(Actor* this, GameState_Play* play, s16 gi);
-void    csmcChestPreDraw(Actor* this, GameState_Play* play, s16 gi);
+void    csmcChestInit(Actor* this, PlayState* play, s16 gi);
+void    csmcChestPreDraw(Actor* this, PlayState* play, s16 gi);
 int     csmcChestLarge(s16 gi);
 
 /* Pots */
-void csmcPotPreDraw(Actor* this, GameState_Play* play, s16 gi, int def);
+void csmcPotPreDraw(Actor* this, PlayState* play, s16 gi, int def);
 
 /* Grass */
-void csmcGrassPreDraw(GameState_Play* play, s16 gi, int def, int alt, int direct);
+void csmcGrassPreDraw(PlayState* play, s16 gi, int def, int alt, int direct);
 
 /* GS */
-void csmcGsPreDraw(GameState_Play* play, s16 gi);
+void csmcGsPreDraw(PlayState* play, s16 gi);
 
 const Color_RGB8* csmcTypeColor(int type);
 

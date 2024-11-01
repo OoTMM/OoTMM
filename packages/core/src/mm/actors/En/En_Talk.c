@@ -1,6 +1,6 @@
 #include <combo.h>
 
-int EnTalk_TalkedTo(Actor* this, GameState_Play* play)
+int EnTalk_TalkedTo(Actor* this, PlayState* play)
 {
     static int sHintNum;
     static int sInMessage;

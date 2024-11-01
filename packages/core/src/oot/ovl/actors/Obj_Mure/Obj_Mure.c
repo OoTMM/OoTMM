@@ -3,13 +3,13 @@
 
 #define FLAGS 0
 
-void ObjMure_Init(Actor_ObjMure* this, GameState_Play* play);
-void ObjMure_Destroy(Actor_ObjMure* this, GameState_Play* play);
-void ObjMure_Update(Actor_ObjMure* this, GameState_Play* play);
+void ObjMure_Init(Actor_ObjMure* this, PlayState* play);
+void ObjMure_Destroy(Actor_ObjMure* this, PlayState* play);
+void ObjMure_Update(Actor_ObjMure* this, PlayState* play);
 
-void ObjMure_InitialAction(Actor_ObjMure* this, GameState_Play* play);
-void ObjMure_CulledState(Actor_ObjMure* this, GameState_Play* play);
-void ObjMure_ActiveState(Actor_ObjMure* this, GameState_Play* play);
+void ObjMure_InitialAction(Actor_ObjMure* this, PlayState* play);
+void ObjMure_CulledState(Actor_ObjMure* this, PlayState* play);
+void ObjMure_ActiveState(Actor_ObjMure* this, PlayState* play);
 
 s32 ObjMure_GetMaxChildSpawns(Actor_ObjMure* this);
 
@@ -41,7 +41,7 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_F32(uncullZoneDownward, 1200, ICHAIN_STOP),
 };
 
-static Actor* ObjMure_SpawnActor(Actor_ObjMure* this, GameState_Play* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int index)
+static Actor* ObjMure_SpawnActor(Actor_ObjMure* this, PlayState* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int index)
 {
     Actor* tmp;
 
@@ -54,7 +54,7 @@ static Actor* ObjMure_SpawnActor(Actor_ObjMure* this, GameState_Play* play, s16 
     return tmp;
 }
 
-s32 ObjMure_SetCullingImpl(Actor_ObjMure* this, GameState_Play* play)
+s32 ObjMure_SetCullingImpl(Actor_ObjMure* this, PlayState* play)
 {
     s32 result;
 
@@ -71,14 +71,14 @@ s32 ObjMure_SetCullingImpl(Actor_ObjMure* this, GameState_Play* play)
     return result;
 }
 
-s32 ObjMure_SetCulling(Actor_ObjMure* thisx, GameState_Play* play)
+s32 ObjMure_SetCulling(Actor_ObjMure* thisx, PlayState* play)
 {
     if (!ObjMure_SetCullingImpl(thisx, play))
         return FALSE;
     return TRUE;
 }
 
-void ObjMure_Init(Actor_ObjMure* this, GameState_Play* play)
+void ObjMure_Init(Actor_ObjMure* this, PlayState* play)
 {
     comboXflagInit(&this->xflag, &this->actor, play);
 
@@ -100,7 +100,7 @@ void ObjMure_Init(Actor_ObjMure* this, GameState_Play* play)
     this->actionFunc = ObjMure_InitialAction;
 }
 
-void ObjMure_Destroy(Actor_ObjMure* this, GameState_Play* play) {
+void ObjMure_Destroy(Actor_ObjMure* this, PlayState* play) {
 }
 
 s32 ObjMure_GetMaxChildSpawns(Actor_ObjMure* this) {
@@ -115,7 +115,7 @@ void ObjMure_GetSpawnPos(Vec3f* outPos, Vec3f* inPos, s32 ptn, s32 idx)
     *outPos = *inPos;
 }
 
-void ObjMure_SpawnActors0(Actor_ObjMure* this, GameState_Play* play) {
+void ObjMure_SpawnActors0(Actor_ObjMure* this, PlayState* play) {
     Actor* actor = &this->actor;
     s32 i;
     Vec3f pos;
@@ -148,7 +148,7 @@ void ObjMure_SpawnActors0(Actor_ObjMure* this, GameState_Play* play) {
     }
 }
 
-void ObjMure_SpawnActors1(Actor_ObjMure* this, GameState_Play* play) {
+void ObjMure_SpawnActors1(Actor_ObjMure* this, PlayState* play) {
     Actor* actor = &this->actor;
     Vec3f spawnPos;
     s32 maxChildren = ObjMure_GetMaxChildSpawns(this);
@@ -168,7 +168,7 @@ void ObjMure_SpawnActors1(Actor_ObjMure* this, GameState_Play* play) {
     }
 }
 
-void ObjMure_SpawnActors(Actor_ObjMure* this, GameState_Play* play) {
+void ObjMure_SpawnActors(Actor_ObjMure* this, PlayState* play) {
     switch (this->svNum) {
         case 0:
             ObjMure_SpawnActors0(this, play);
@@ -179,7 +179,7 @@ void ObjMure_SpawnActors(Actor_ObjMure* this, GameState_Play* play) {
     }
 }
 
-void ObjMure_KillActorsImpl(Actor_ObjMure* this, GameState_Play* play) {
+void ObjMure_KillActorsImpl(Actor_ObjMure* this, PlayState* play) {
     s32 maxChildren = ObjMure_GetMaxChildSpawns(this);
     s32 i;
 
@@ -208,11 +208,11 @@ void ObjMure_KillActorsImpl(Actor_ObjMure* this, GameState_Play* play) {
     }
 }
 
-void ObjMure_KillActors(Actor_ObjMure* this, GameState_Play* play) {
+void ObjMure_KillActors(Actor_ObjMure* this, PlayState* play) {
     ObjMure_KillActorsImpl(this, play);
 }
 
-void ObjMure_CheckChildren(Actor_ObjMure* this, GameState_Play* play) {
+void ObjMure_CheckChildren(Actor_ObjMure* this, PlayState* play) {
     s32 maxChildren = ObjMure_GetMaxChildSpawns(this);
     s32 i;
 
@@ -235,11 +235,11 @@ void ObjMure_CheckChildren(Actor_ObjMure* this, GameState_Play* play) {
     }
 }
 
-void ObjMure_InitialAction(Actor_ObjMure* this, GameState_Play* play) {
+void ObjMure_InitialAction(Actor_ObjMure* this, PlayState* play) {
     this->actionFunc = ObjMure_CulledState;
 }
 
-void ObjMure_CulledState(Actor_ObjMure* this, GameState_Play* play) {
+void ObjMure_CulledState(Actor_ObjMure* this, PlayState* play) {
     if (fabsf(this->actor.projectedPos.z) < sZClip[this->type]) {
         this->actionFunc = ObjMure_ActiveState;
         this->actor.flags |= ACTOR_FLAG_OOT_4;
@@ -293,7 +293,7 @@ void ObjMure_SetChildToFollowPlayer(Actor_ObjMure* this, s32 idx1) {
 }
 
 // Fish, Bugs
-void ObjMure_GroupBehavior0(Actor_ObjMure* this, GameState_Play* play) {
+void ObjMure_GroupBehavior0(Actor_ObjMure* this, PlayState* play) {
     if (this->unk_1A4 <= 0) {
         if (this->unk_1A6) {
             this->unk_1A6 = FALSE;
@@ -327,7 +327,7 @@ void ObjMure_GroupBehavior0(Actor_ObjMure* this, GameState_Play* play) {
 }
 
 // Butterflies
-void ObjMure_GroupBehavior1(Actor_ObjMure* this, GameState_Play* play) {
+void ObjMure_GroupBehavior1(Actor_ObjMure* this, PlayState* play) {
     s32 maxChildren;
     s32 i;
 
@@ -361,7 +361,7 @@ static Actor_ObjMureFunc sTypeGroupBehaviorFunc[] = {
     NULL, NULL, ObjMure_GroupBehavior0, ObjMure_GroupBehavior0, ObjMure_GroupBehavior1,
 };
 
-void ObjMure_ActiveState(Actor_ObjMure* this, GameState_Play* play) {
+void ObjMure_ActiveState(Actor_ObjMure* this, PlayState* play) {
     ObjMure_CheckChildren(this, play);
     if (sZClip[this->type] + 40.0f <= fabsf(this->actor.projectedPos.z)) {
         this->actionFunc = ObjMure_CulledState;
@@ -372,7 +372,7 @@ void ObjMure_ActiveState(Actor_ObjMure* this, GameState_Play* play) {
     }
 }
 
-void ObjMure_Update(Actor_ObjMure* this, GameState_Play* play) {
+void ObjMure_Update(Actor_ObjMure* this, PlayState* play) {
     if (this->unk_1A4 > 0) {
         this->unk_1A4--;
     }

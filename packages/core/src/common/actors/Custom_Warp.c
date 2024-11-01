@@ -21,7 +21,7 @@ static void CustomWarp_Reload(void)
 
 #define SWITCH_LAKE_HYLIA_WATER 0
 
-static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
+static void CustomWarp_OnTrigger(Actor_CustomWarp* this, PlayState* play)
 {
     switch (this->base.params)
     {
@@ -46,7 +46,7 @@ static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
 #define SWITCH_OPEN_ST_NORMAL   5
 #define SWITCH_OPEN_ST_INVERTED 6
 
-static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
+static void CustomWarp_OnTrigger(Actor_CustomWarp* this, PlayState* play)
 {
     play->transitionTrigger = TRANS_TRIGGER_NORMAL;
     play->transitionType = TRANS_TYPE_FADE_BLACK;
@@ -89,12 +89,12 @@ static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
 }
 #endif
 
-static void CustomWarp_Init(Actor_CustomWarp* this, GameState_Play* play)
+static void CustomWarp_Init(Actor_CustomWarp* this, PlayState* play)
 {
     this->base.room = 0xff;
 }
 
-static void CustomWarp_Update(Actor_CustomWarp* this, GameState_Play* play)
+static void CustomWarp_Update(Actor_CustomWarp* this, PlayState* play)
 {
     if (ActorTalkedTo(&this->base))
     {
@@ -107,7 +107,7 @@ static void CustomWarp_Update(Actor_CustomWarp* this, GameState_Play* play)
 }
 
 /* TODO: Move this into a helper */
-static void shaderFlameEffect(GameState_Play* play)
+static void shaderFlameEffect(PlayState* play)
 {
 #if defined(GAME_OOT)
     static const u32 kFlameDlist = 0x52a10;
@@ -125,7 +125,7 @@ static void shaderFlameEffect(GameState_Play* play)
     CLOSE_DISPS();
 }
 
-static void CustomWarp_Draw(Actor_CustomWarp* this, GameState_Play* play)
+static void CustomWarp_Draw(Actor_CustomWarp* this, PlayState* play)
 {
     static const float scale = 0.003f;
 
@@ -152,7 +152,7 @@ ActorInit CustomWarp_gActorInit = {
     (ActorFunc)CustomWarp_Draw,
 };
 
-void comboSpawnCustomWarps(GameState_Play* play)
+void comboSpawnCustomWarps(PlayState* play)
 {
     int variable;
     float x;

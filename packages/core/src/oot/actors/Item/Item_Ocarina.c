@@ -19,7 +19,7 @@ static void ItemOcarina_ItemOverride(ComboItemOverride* o, int index)
     comboItemOverride(o, &q);
 }
 
-void ItemOcarina_HandlerItem2(Actor* this, GameState_Play* play)
+void ItemOcarina_HandlerItem2(Actor* this, PlayState* play)
 {
     if (Message_IsClosed(this, play))
     {
@@ -30,7 +30,7 @@ void ItemOcarina_HandlerItem2(Actor* this, GameState_Play* play)
     }
 }
 
-void ItemOcarina_HandlerItem(Actor* this, GameState_Play* play)
+void ItemOcarina_HandlerItem(Actor* this, PlayState* play)
 {
     ComboItemQuery q;
 
@@ -48,7 +48,7 @@ void ItemOcarina_HandlerItem(Actor* this, GameState_Play* play)
     comboGiveItem(this, play, &q, 30.f, 50.f);
 }
 
-void ItemOcarina_HandlerSong(Actor* this, GameState_Play* play)
+void ItemOcarina_HandlerSong(Actor* this, PlayState* play)
 {
     ComboItemQuery q;
 
@@ -63,7 +63,7 @@ void ItemOcarina_HandlerSong(Actor* this, GameState_Play* play)
     comboGiveItem(this, play, &q, 10000.f, 1000.f);
 }
 
-void ItemOcarina_Handler(Actor* this, GameState_Play* play)
+void ItemOcarina_Handler(Actor* this, PlayState* play)
 {
     /* We invert the two events or else the game will not respawn the ocarina */
     if (GetEventChk(EV_OOT_CHK_SONG_TIME))
@@ -77,7 +77,7 @@ void ItemOcarina_Handler(Actor* this, GameState_Play* play)
     }
 }
 
-void ItemOcarina_Draw(Actor* this, GameState_Play* play)
+void ItemOcarina_Draw(Actor* this, PlayState* play)
 {
     ComboItemOverride o;
 

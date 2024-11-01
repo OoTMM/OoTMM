@@ -2,7 +2,7 @@
 #include <combo/item.h>
 #include <combo/player.h>
 
-void EnZog_GiveItem(Actor* this, GameState_Play* play)
+void EnZog_GiveItem(Actor* this, PlayState* play)
 {
     if (Actor_HasParentZ(this))
     {
@@ -31,7 +31,7 @@ void EnZog_InitSetScaleHook(Actor* this, float scale)
 
 PATCH_CALL(0x80b935dc, EnZog_InitSetScaleHook);
 
-s32 EnZog_OfferGrab(Actor* actor, GameState_Play* play, s32 getItemId, f32 xzRange, f32 yRange)
+s32 EnZog_OfferGrab(Actor* actor, PlayState* play, s32 getItemId, f32 xzRange, f32 yRange)
 {
     if (comboIsLinkAdult())
     {

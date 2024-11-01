@@ -2,7 +2,7 @@
 #include <combo/item.h>
 #include <combo/player.h>
 
-int EnSyatekiMan_HasGivenItemSwamp(Actor* this, GameState_Play* play)
+int EnSyatekiMan_HasGivenItemSwamp(Actor* this, PlayState* play)
 {
     Actor_Player* link;
 
@@ -22,7 +22,7 @@ int EnSyatekiMan_HasGivenItemSwamp(Actor* this, GameState_Play* play)
 
 PATCH_CALL(0x809c7aa4, EnSyatekiMan_HasGivenItemSwamp);
 
-int EnSyatekiMan_HasGivenItemTown(Actor* this, GameState_Play* play)
+int EnSyatekiMan_HasGivenItemTown(Actor* this, PlayState* play)
 {
     Actor_Player* link;
 
@@ -43,7 +43,7 @@ int EnSyatekiMan_HasGivenItemTown(Actor* this, GameState_Play* play)
 
 PATCH_CALL(0x809c7d28, EnSyatekiMan_HasGivenItemTown);
 
-void EnSyatekiMan_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+void EnSyatekiMan_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b)
 {
     Actor_Player* link;
     int npcQuiver;

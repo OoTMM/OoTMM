@@ -5,7 +5,7 @@
 
 typedef struct Actor_ItemDecoy Actor_ItemDecoy;
 
-typedef void (*Actor_ItemDecoyFunc)(Actor_ItemDecoy* this, GameState_Play* play);
+typedef void (*Actor_ItemDecoyFunc)(Actor_ItemDecoy* this, PlayState* play);
 
 typedef struct Actor_ItemDecoy
 {

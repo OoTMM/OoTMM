@@ -524,7 +524,7 @@ _Static_assert(sizeof(DayTelopState) == 0x248, "MM DayTelopState Size is wrong")
         (state)->nextGameStateSize = nextSize;                        \
     } while (0)
 
-typedef struct GameState_Play
+typedef struct PlayState
 {
     GameState           gs;
     u16                 sceneId;
@@ -593,7 +593,7 @@ typedef struct GameState_Play
     u8                  transitionMode;
     char                unk_18b4b[0x70d];
 }
-GameState_Play;
+PlayState;
 
 typedef struct
 {
@@ -604,23 +604,23 @@ GameData;
 
 extern GameData* gGameData;
 
-ASSERT_OFFSET(GameState_Play, colCtx,                   0x00830);
-ASSERT_OFFSET(GameState_Play, actorCtx,                 0x01ca0);
-ASSERT_OFFSET(GameState_Play, csCtx,                    0x01f24);
-ASSERT_OFFSET(GameState_Play, sramCtx,                  0x046b8);
-ASSERT_OFFSET(GameState_Play, msgCtx,                   0x04908);
-ASSERT_OFFSET(GameState_Play, interfaceCtx,             0x169e8);
-ASSERT_OFFSET(GameState_Play, envCtx,                   0x17004);
-ASSERT_OFFSET(GameState_Play, roomCtx,                  0x186e0);
-ASSERT_OFFSET(GameState_Play, gameplayFrames,           0x18840);
-ASSERT_OFFSET(GameState_Play, setupExitList,            0x18860);
-ASSERT_OFFSET(GameState_Play, transitionType,           0x1887f);
-ASSERT_OFFSET(GameState_Play, transitionMode,           0x18b4a);
+ASSERT_OFFSET(PlayState, colCtx,                   0x00830);
+ASSERT_OFFSET(PlayState, actorCtx,                 0x01ca0);
+ASSERT_OFFSET(PlayState, csCtx,                    0x01f24);
+ASSERT_OFFSET(PlayState, sramCtx,                  0x046b8);
+ASSERT_OFFSET(PlayState, msgCtx,                   0x04908);
+ASSERT_OFFSET(PlayState, interfaceCtx,             0x169e8);
+ASSERT_OFFSET(PlayState, envCtx,                   0x17004);
+ASSERT_OFFSET(PlayState, roomCtx,                  0x186e0);
+ASSERT_OFFSET(PlayState, gameplayFrames,           0x18840);
+ASSERT_OFFSET(PlayState, setupExitList,            0x18860);
+ASSERT_OFFSET(PlayState, transitionType,           0x1887f);
+ASSERT_OFFSET(PlayState, transitionMode,           0x18b4a);
 
 #define TRANS_TRIGGER_NONE          0x00
 #define TRANS_TRIGGER_NORMAL        0x14
 
-_Static_assert(sizeof(GameState_Play) == 0x19258, "MM GameState_Play size is wrong");
+_Static_assert(sizeof(PlayState) == 0x19258, "MM PlayState size is wrong");
 
 typedef struct RegEditor {
     /* 0x00 */ u8  regPage; /* 0: no page selected (reg editor is not active); 1: first page; `REG_PAGES`: last page */

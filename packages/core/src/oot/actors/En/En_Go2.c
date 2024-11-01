@@ -6,11 +6,11 @@
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x180) = (h); } while (0)
 
-static void EnGo2_HandlerNull(Actor* this, GameState_Play* play)
+static void EnGo2_HandlerNull(Actor* this, PlayState* play)
 {
 }
 
-static void EnGo2_HandlerGiveBiggoronItem(Actor* this, GameState_Play* play)
+static void EnGo2_HandlerGiveBiggoronItem(Actor* this, PlayState* play)
 {
     int npc;
     s16 gi;
@@ -46,7 +46,7 @@ static void EnGo2_HandlerGiveBiggoronItem(Actor* this, GameState_Play* play)
     comboGiveItemNpc(this, play, gi, npc, 10000.f, 5000.f);
 }
 
-void EnGo2_SetBiggoronMessageId(Actor* this, GameState_Play* play, Actor* dst)
+void EnGo2_SetBiggoronMessageId(Actor* this, PlayState* play, Actor* dst)
 {
     u16 msgId;
     s16 gi;
@@ -87,7 +87,7 @@ void EnGo2_SetBiggoronMessageId(Actor* this, GameState_Play* play, Actor* dst)
 
 PATCH_FUNC(0x80b58c8c, EnGo2_SetBiggoronMessageId);
 
-void EnGo2_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnGo2_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 {
     int npc;
 
@@ -123,7 +123,7 @@ u16 EnGo2_GetMessageLinkGoron(void)
 
 PATCH_FUNC(0x80b57868, EnGo2_GetMessageLinkGoron);
 
-void EnGo2_InitWrapper(Actor* this, GameState_Play* play)
+void EnGo2_InitWrapper(Actor* this, PlayState* play)
 {
     ActorCallback callback;
 

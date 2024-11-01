@@ -19,17 +19,17 @@
 #define CHECK_BTN_ALL(buttons, mask) ((buttons & mask) == mask)
 #define FLAGS (ACTOR_FLAG_OOT_4 | ACTOR_FLAG_OOT_5)
 
-void EnMag_Init(Actor_EnMag* this, GameState_Play* play);
-void EnMag_Destroy(Actor_EnMag* this, GameState_Play* play);
-void EnMag_Update(Actor_EnMag* this, GameState_Play* play);
-void EnMag_Draw(Actor_EnMag* this, GameState_Play* play);
+void EnMag_Init(Actor_EnMag* this, PlayState* play);
+void EnMag_Destroy(Actor_EnMag* this, PlayState* play);
+void EnMag_Update(Actor_EnMag* this, PlayState* play);
+void EnMag_Draw(Actor_EnMag* this, PlayState* play);
 
 static s16 sDelayTimer = 0;
 
 static const s16 sMmEffectScrollVelocitySs[] = { -1, 1, 1, -1, 1, 1 };
 static const s16 sMmEffectScrollVelocityTs[] = { -2, -2, -2, 2, 2, 2 };
 
-void EnMag_Init(Actor_EnMag* this, GameState_Play* play)
+void EnMag_Init(Actor_EnMag* this, PlayState* play)
 {
     YREG(1) = 63;
     YREG(3) = 80;
@@ -110,11 +110,11 @@ void EnMag_Init(Actor_EnMag* this, GameState_Play* play)
     this->mmEffectEnvColor[2] = 155;
 }
 
-void EnMag_Destroy(Actor_EnMag* this, GameState_Play* play)
+void EnMag_Destroy(Actor_EnMag* this, PlayState* play)
 {
 }
 
-void EnMag_Update(Actor_EnMag* this, GameState_Play* play)
+void EnMag_Update(Actor_EnMag* this, PlayState* play)
 {
     if (gSaveContext.fileIndex != 0xfedc)
     {
@@ -520,7 +520,7 @@ static void EnMag_DrawTextWithShadow(Actor_EnMag* this, Gfx** gfx, const char* t
     EnMag_DrawText(this, gfx, text, x, y);
 }
 
-static void EnMag_DrawLogoOot(Actor_EnMag* this, GameState_Play* play, Gfx** gfxP, float centerX, float centerY)
+static void EnMag_DrawLogoOot(Actor_EnMag* this, PlayState* play, Gfx** gfxP, float centerX, float centerY)
 {
     static void* effectMaskTextures[] = {
         (void*)0x06019B00, (void*)0x0601A300, (void*)0x0601AB00, (void*)0x0601B300,
@@ -596,7 +596,7 @@ static void EnMag_DrawLogoOot(Actor_EnMag* this, GameState_Play* play, Gfx** gfx
     *gfxP = gfx;
 }
 
-static void EnMag_DrawLogoMm(Actor_EnMag* this, GameState_Play* play, Gfx** gfxP, float centerX, float centerY)
+static void EnMag_DrawLogoMm(Actor_EnMag* this, PlayState* play, Gfx** gfxP, float centerX, float centerY)
 {
     static const u32 sAppearEffectMaskTextures[] = {
         0x0600CF40, 0x0600D740, 0x0600EF40, 0x0600DF40,
@@ -709,7 +709,7 @@ static void EnMag_DrawLogoMm(Actor_EnMag* this, GameState_Play* play, Gfx** gfxP
     *gfxP = gfx;
 }
 
-void EnMag_DrawInner(Actor_EnMag* this, GameState_Play* play, Gfx** gfxP)
+void EnMag_DrawInner(Actor_EnMag* this, PlayState* play, Gfx** gfxP)
 {
     static const u32 kPressStartColor = 0xff1e1e;
     static s16 textAlpha = 0;
@@ -760,7 +760,7 @@ void EnMag_DrawInner(Actor_EnMag* this, GameState_Play* play, Gfx** gfxP)
     }
 }
 
-void EnMag_Draw(Actor_EnMag* this, GameState_Play* play)
+void EnMag_Draw(Actor_EnMag* this, PlayState* play)
 {
     Gfx* gfx;
     Gfx* gfxRef;

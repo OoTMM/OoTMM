@@ -45,8 +45,8 @@ void    Gfx_SetupDL_42Opa(GfxContext* gfx);
 void*   GetMatrixMV(GfxContext* gfx);
 u32     DisplaceTexture(GfxContext* gfx, int, int, int, int, int, int, int, int, int, int);
 Gfx*    Gfx_TexScroll(GfxContext* ctx, u32 x, u32 y, s32 width, s32 height);
-void    Gfx_DrawDListOpa(GameState_Play* play, Gfx* dlist);
-void    Gfx_DrawDListXlu(GameState_Play* play, Gfx* dlist);
-void    Gfx_DrawFlameColor(GameState_Play* play, u32 color, float scale, float offsetY);
+void    Gfx_DrawDListOpa(PlayState* play, Gfx* dlist);
+void    Gfx_DrawDListXlu(PlayState* play, Gfx* dlist);
+void    Gfx_DrawFlameColor(PlayState* play, u32 color, float scale, float offsetY);
 
 #endif

@@ -1,7 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 
-void EnPst_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+void EnPst_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b)
 {
     int npc;
 

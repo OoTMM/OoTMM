@@ -5,11 +5,11 @@
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x144) = (h); } while (0)
 
-void EnTimeTag_HandlerNull(Actor* this, GameState_Play* play)
+void EnTimeTag_HandlerNull(Actor* this, PlayState* play)
 {
 }
 
-void EnTimeTag_GiveItemSoaring(Actor* this, GameState_Play* play)
+void EnTimeTag_GiveItemSoaring(Actor* this, PlayState* play)
 {
     if (Actor_HasParentZ(this))
     {
@@ -21,7 +21,7 @@ void EnTimeTag_GiveItemSoaring(Actor* this, GameState_Play* play)
     comboGiveItemNpc(this, play, GI_MM_SONG_SOARING, NPC_MM_SONG_SOARING, 10000.f, 10000.f);
 }
 
-void EnTimeTag_HandlerSoaring(Actor* this, GameState_Play* play)
+void EnTimeTag_HandlerSoaring(Actor* this, PlayState* play)
 {
     this->messageId = 0xc02;
 
@@ -45,7 +45,7 @@ void EnTimeTag_HandlerSoaring(Actor* this, GameState_Play* play)
 
 PATCH_FUNC(0x80aca268, EnTimeTag_HandlerSoaring);
 
-void EnTimeTag_MoonCutscene(Actor* this, GameState_Play* play)
+void EnTimeTag_MoonCutscene(Actor* this, PlayState* play)
 {
     if (Config_SpecialCond(SPECIAL_MOON))
     {
@@ -72,9 +72,9 @@ static void EnTimeTag_AfterKick(void)
 
 PATCH_FUNC(0x80aca714, EnTimeTag_AfterKick);
 
-void EnTimeTag_KickOut_WaitForTime_Wrapper(Actor* this, GameState_Play* play)
+void EnTimeTag_KickOut_WaitForTime_Wrapper(Actor* this, PlayState* play)
 {
-    void (*EnTimeTag_KickOut_WaitForTime)(Actor*, GameState_Play*);
+    void (*EnTimeTag_KickOut_WaitForTime)(Actor*, PlayState*);
 
     if (play->sceneId == SCE_MM_STOCK_POT_INN && (gMmExtraTrade.trade2 & (1 << XITEM_MM_TRADE2_ROOM_KEY)))
         return;

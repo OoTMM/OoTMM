@@ -19,7 +19,7 @@ static const u8 kGreatFairyNPCs[] = {
     NPC_OOT_FAIRY_SPELL_LOVE,
 };
 
-void BgDyYoseizo_Update(Actor* this, GameState_Play* play)
+void BgDyYoseizo_Update(Actor* this, PlayState* play)
 {
     u8 index;
     u8 mask;

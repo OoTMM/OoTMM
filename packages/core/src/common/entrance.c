@@ -48,7 +48,7 @@ s32 comboEntranceOverride(u32 entranceId)
     }
 }
 
-void comboTransition(GameState_Play* play, u32 entrance)
+void comboTransition(PlayState* play, u32 entrance)
 {
 #if defined(GAME_OOT)
     g.nextEntrance = entrance;

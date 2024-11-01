@@ -10,7 +10,7 @@
 #define TRIGGER_OOT_WEIRD_EGG               0x104
 #define TRIGGER_OOT_POCKET_EGG              0x105
 
-void CustomTriggers_HandleTriggerGame(Actor_CustomTriggers* this, GameState_Play* play)
+void CustomTriggers_HandleTriggerGame(Actor_CustomTriggers* this, PlayState* play)
 {
     switch (gComboTriggersData.trigger)
     {
@@ -62,7 +62,7 @@ void CustomTriggers_HandleTriggerGame(Actor_CustomTriggers* this, GameState_Play
     }
 }
 
-void CustomTriggers_CheckTriggerGame(Actor_CustomTriggers* this, GameState_Play* play)
+void CustomTriggers_CheckTriggerGame(Actor_CustomTriggers* this, PlayState* play)
 {
     /* Sheik in colossus */
     if (comboHasSoulOot(GI_OOT_SOUL_NPC_SHEIK) && gSave.entrance == ENTR_OOT_DESERT_COLOSSUS_FROM_TEMPLE_SPIRIT && !GetEventChk(EV_OOT_CHK_SONG_TP_SPIRIT))

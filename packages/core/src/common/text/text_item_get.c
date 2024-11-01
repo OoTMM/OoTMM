@@ -4,7 +4,7 @@
 #include <combo/item.h>
 #include <combo/config.h>
 
-static int mapDungeonId(GameState_Play* play, s16 gi)
+static int mapDungeonId(PlayState* play, s16 gi)
 {
     switch (gi)
     {
@@ -44,7 +44,7 @@ static int mapDungeonId(GameState_Play* play, s16 gi)
     }
 }
 
-static int compassDungeonId(GameState_Play* play, s16 gi)
+static int compassDungeonId(PlayState* play, s16 gi)
 {
     switch (gi)
     {
@@ -102,7 +102,7 @@ static void appendDungeonEntrance(char** b, int dungeonId)
     }
 }
 
-static void comboTextMap(char** b, GameState_Play* play, s16 gi)
+static void comboTextMap(char** b, PlayState* play, s16 gi)
 {
     int dungeonId;
 
@@ -131,7 +131,7 @@ static void comboTextMap(char** b, GameState_Play* play, s16 gi)
 }
 
 
-static void comboTextCompass(char** b, GameState_Play* play, s16 gi)
+static void comboTextCompass(char** b, PlayState* play, s16 gi)
 {
     int dungeonId;
     int bossId;
@@ -154,7 +154,7 @@ static void comboTextCompass(char** b, GameState_Play* play, s16 gi)
     comboTextAppendStr(b, ".");
 }
 
-void comboTextExtra(char** b, GameState_Play* play, s16 gi)
+void comboTextExtra(char** b, PlayState* play, s16 gi)
 {
     if (gi < 0)
         gi = -gi;
@@ -163,7 +163,7 @@ void comboTextExtra(char** b, GameState_Play* play, s16 gi)
     comboTextCompass(b, play, gi);
 }
 
-void comboTextHijackItemEx(GameState_Play* play, const ComboItemOverride* o, int count)
+void comboTextHijackItemEx(PlayState* play, const ComboItemOverride* o, int count)
 {
     char* b;
     char* start;
@@ -197,7 +197,7 @@ void comboTextHijackItemEx(GameState_Play* play, const ComboItemOverride* o, int
     comboTextAutoLineBreaks(start);
 }
 
-void comboTextHijackItem(GameState_Play* play, s16 gi, u8 fromPlayer, int count)
+void comboTextHijackItem(PlayState* play, s16 gi, u8 fromPlayer, int count)
 {
     ComboItemOverride o;
     memset(&o, 0, sizeof(o));

@@ -17,7 +17,7 @@ int Fishing_HasGivenItem(Actor* this)
 
 PATCH_CALL(0x80a427ac, Fishing_HasGivenItem);
 
-void Fishing_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void Fishing_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 {
     int npc;
 
@@ -49,7 +49,7 @@ void Fishing_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float 
 PATCH_CALL(0x80a42644, Fishing_GiveItem);
 PATCH_CALL(0x80a427e0, Fishing_GiveItem);
 
-static void Fishing_Fish_ItemQuery(GameState_Play* play, ComboItemQuery* q, u16 variable)
+static void Fishing_Fish_ItemQuery(PlayState* play, ComboItemQuery* q, u16 variable)
 {
     int flag;
 
@@ -69,7 +69,7 @@ static void Fishing_Fish_ItemQuery(GameState_Play* play, ComboItemQuery* q, u16 
         q->ovFlags |= OVF_RENEW;
 }
 
-static void Fishing_Fish_ItemOverride(GameState_Play* playOrNull, ComboItemOverride* o, u16 variable)
+static void Fishing_Fish_ItemOverride(PlayState* playOrNull, ComboItemOverride* o, u16 variable)
 {
     ComboItemQuery q;
 
@@ -78,7 +78,7 @@ static void Fishing_Fish_ItemOverride(GameState_Play* playOrNull, ComboItemOverr
 }
 
 
-void Fishing_DrawFish_SkelAnime(GameState_Play* play, void** skeleton, Vec3s* jointTable, s32 dListCount,
+void Fishing_DrawFish_SkelAnime(PlayState* play, void** skeleton, Vec3s* jointTable, s32 dListCount,
                            void* overrideLimbDraw, void* postLimbDraw, Actor* this) {
     ComboItemOverride o;
 
@@ -159,7 +159,7 @@ void Fishing_SetCaughtId(Actor* actor, u16* sFishingCaughtTextId) {
     *sFishingCaughtTextId = actor->params;
 }
 
-void Fishing_HijackCaughtMessage(GameState_Play* play, u16 textId, Actor* this) {
+void Fishing_HijackCaughtMessage(PlayState* play, u16 textId, Actor* this) {
     if (textId >= 200) {
         PlayerDisplayTextBox(play, textId, this);
         return;
@@ -248,7 +248,7 @@ void Fishing_OverrideInitFishLength(u8 linkAge, f32 childMultiplier, Actor* this
     }
 }
 
-void Fishing_FishGiveItem(Actor* this, GameState_Play* play) {
+void Fishing_FishGiveItem(Actor* this, PlayState* play) {
     ComboItemQuery q;
     ComboItemOverride o;
     int major;

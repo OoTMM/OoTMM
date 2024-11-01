@@ -23,7 +23,7 @@
 #define KEY(sceneId, inGrotto, item) \
     (((inGrotto) << 24) | ((sceneId) << 16) | (item))
 
-static int scrubSceneKey(GameState_Play* play, int inGrotto)
+static int scrubSceneKey(PlayState* play, int inGrotto)
 {
     s8 roomId;
 
@@ -188,7 +188,7 @@ static int EnDns_CanBuy(Actor* this)
 
 PATCH_CALL(0x80a75620, EnDns_CanBuy);
 
-static void EnDns_ShopText(Actor* this, GameState_Play* play)
+static void EnDns_ShopText(Actor* this, PlayState* play)
 {
     ComboItemQuery q;
     char* b;
@@ -230,7 +230,7 @@ static void EnDns_ShopText(Actor* this, GameState_Play* play)
     comboTextAppendStr(&b, TEXT_CHOICE2 TEXT_COLOR_GREEN "Yes" TEXT_NL "No" TEXT_END);
 }
 
-static int EnDns_TalkedTo(Actor* this, GameState_Play* play)
+static int EnDns_TalkedTo(Actor* this, PlayState* play)
 {
     if (ActorTalkedTo(this))
     {
@@ -259,7 +259,7 @@ static int EnDns_HasGivenItem(Actor* this)
 
 PATCH_CALL(0x80a75878, EnDns_HasGivenItem);
 
-static void EnDns_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+static void EnDns_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b)
 {
     ComboItemQuery q;
 

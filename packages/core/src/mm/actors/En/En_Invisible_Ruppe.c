@@ -4,7 +4,7 @@
 #include <combo/draw.h>
 #include <combo/mm/actors/En_Invisible_Ruppe.h>
 
-static void EnInvisibleRupee_DrawGlitter(Actor_EnInvisibleRuppe* this, GameState_Play* play)
+static void EnInvisibleRupee_DrawGlitter(Actor_EnInvisibleRuppe* this, PlayState* play)
 {
     ComboItemOverride o;
 
@@ -19,7 +19,7 @@ static void EnInvisibleRupee_DrawGlitter(Actor_EnInvisibleRuppe* this, GameState
     Draw_GlitterGi(play, &this->base, o.gi);
 }
 
-void EnInvisibleRupee_HandleExtended(Actor_EnInvisibleRuppe* this, GameState_Play* play)
+void EnInvisibleRupee_HandleExtended(Actor_EnInvisibleRuppe* this, PlayState* play)
 {
     ComboItemQuery q;
     EnInvisibleRuppeFunc handleNormal;
@@ -47,7 +47,7 @@ void EnInvisibleRupee_HandleExtended(Actor_EnInvisibleRuppe* this, GameState_Pla
     }
 }
 
-void EnInvisibleRupee_InitWrapper(Actor_EnInvisibleRuppe* this, GameState_Play* play)
+void EnInvisibleRupee_InitWrapper(Actor_EnInvisibleRuppe* this, PlayState* play)
 {
     int switchFlag;
     ComboItemOverride o;

@@ -15,12 +15,12 @@
 #define MENU_SOULS_MM_MISC      9
 #define MENU_MAX                10
 
-typedef struct GameState_Play GameState_Play;
+typedef struct PlayState PlayState;
 
 /* Menu */
 void comboMenuTick(void);
-void comboMenuUpdate(GameState_Play* play);
-void comboMenuDraw(GameState_Play* play);
+void comboMenuUpdate(PlayState* play);
+void comboMenuDraw(PlayState* play);
 void comboMenuNext(void);
 
 #endif

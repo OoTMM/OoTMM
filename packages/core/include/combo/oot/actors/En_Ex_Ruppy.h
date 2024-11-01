@@ -5,7 +5,7 @@
 
 typedef struct Actor_EnExRuppy Actor_EnExRuppy;
 
-typedef void (*EnExRuppyActionFunc)(Actor_EnExRuppy*, GameState_Play*);
+typedef void (*EnExRuppyActionFunc)(Actor_EnExRuppy*, PlayState*);
 
 struct Actor_EnExRuppy
 {

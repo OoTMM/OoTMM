@@ -3,7 +3,7 @@
 #include <combo/player.h>
 #include <combo/inventory.h>
 
-void EnHs_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+void EnHs_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b)
 {
     if (!(GET_PLAYER(play)->state & PLAYER_ACTOR_STATE_GET_ITEM))
         Message_Close(play);

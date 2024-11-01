@@ -2,7 +2,7 @@
 #include <combo/item.h>
 #include <combo/draw.h>
 
-static void ItemBHeart_ItemQuery(ComboItemQuery* q, Actor* this, GameState_Play* play)
+static void ItemBHeart_ItemQuery(ComboItemQuery* q, Actor* this, PlayState* play)
 {
     bzero(q, sizeof(ComboItemQuery));
 
@@ -12,7 +12,7 @@ static void ItemBHeart_ItemQuery(ComboItemQuery* q, Actor* this, GameState_Play*
     q->id = 0x1f;
 }
 
-static void ItemBHeart_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+static void ItemBHeart_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 {
     ComboItemQuery q;
 
@@ -22,7 +22,7 @@ static void ItemBHeart_GiveItem(Actor* this, GameState_Play* play, s16 gi, float
 
 PATCH_CALL(0x80909518, ItemBHeart_GiveItem);
 
-static void ItemBHeart_Draw(Actor* this, GameState_Play* play)
+static void ItemBHeart_Draw(Actor* this, PlayState* play)
 {
     ComboItemQuery q;
     ComboItemOverride o;

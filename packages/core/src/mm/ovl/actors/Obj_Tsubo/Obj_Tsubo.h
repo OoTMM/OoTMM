@@ -6,7 +6,7 @@
 
 struct Actor_ObjTsubo;
 
-typedef void (*Actor_ObjTsubo_ActionFunc)(struct Actor_ObjTsubo*, GameState_Play*);
+typedef void (*Actor_ObjTsubo_ActionFunc)(struct Actor_ObjTsubo*, PlayState*);
 
 typedef struct Actor_ObjTsubo
 {

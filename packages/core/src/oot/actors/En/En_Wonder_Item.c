@@ -70,7 +70,7 @@ static void EnWonderItem_Alias(Actor_EnWonderItem* this)
     }
 }
 
-static void EnWonderItem_DrawGlitter(Actor_EnWonderItem* this, GameState_Play* play)
+static void EnWonderItem_DrawGlitter(Actor_EnWonderItem* this, PlayState* play)
 {
     ComboItemOverride o;
 
@@ -85,7 +85,7 @@ static void EnWonderItem_DrawGlitter(Actor_EnWonderItem* this, GameState_Play* p
     Draw_GlitterGi(play, &this->base, o.gi);
 }
 
-static void EnWonderItem_DropCustomDecoy(Actor_EnWonderItem* this, GameState_Play* play)
+static void EnWonderItem_DropCustomDecoy(Actor_EnWonderItem* this, PlayState* play)
 {
     ComboItemQuery q;
 
@@ -94,7 +94,7 @@ static void EnWonderItem_DropCustomDecoy(Actor_EnWonderItem* this, GameState_Pla
     comboXflagsSet(&this->xflag);
 }
 
-static void EnWonderItem_DropCustom(Actor_EnWonderItem* this, GameState_Play* play, s16 params)
+static void EnWonderItem_DropCustom(Actor_EnWonderItem* this, PlayState* play, s16 params)
 {
     if (params & 0x8000)
         EnWonderItem_DropCustomDecoy(this, play);
@@ -102,7 +102,7 @@ static void EnWonderItem_DropCustom(Actor_EnWonderItem* this, GameState_Play* pl
         EnItem00_DropCustom(play, &this->base.world.pos, &this->xflag);
 }
 
-static void EnWonderItem_ItemDropCollectible(GameState_Play* play, const Vec3f* pos, s16 params)
+static void EnWonderItem_ItemDropCollectible(PlayState* play, const Vec3f* pos, s16 params)
 {
     /* Check for vanilla */
     if (!sWonderItem->isExtended || comboXflagsGet(&sWonderItem->xflag))
@@ -114,7 +114,7 @@ static void EnWonderItem_ItemDropCollectible(GameState_Play* play, const Vec3f* 
 PATCH_CALL(0x80a662e4, EnWonderItem_ItemDropCollectible);
 PATCH_CALL(0x80a6630c, EnWonderItem_ItemDropCollectible);
 
-static void EnWonderItem_ItemDropCollectibleRandom(GameState_Play* play, Actor* from, const Vec3f* pos, s16 params)
+static void EnWonderItem_ItemDropCollectibleRandom(PlayState* play, Actor* from, const Vec3f* pos, s16 params)
 {
     /* Check for vanilla */
     if (!sWonderItem->isExtended || comboXflagsGet(&sWonderItem->xflag))
@@ -126,7 +126,7 @@ static void EnWonderItem_ItemDropCollectibleRandom(GameState_Play* play, Actor* 
 PATCH_CALL(0x80a66334, EnWonderItem_ItemDropCollectibleRandom);
 PATCH_CALL(0x80a66358, EnWonderItem_ItemDropCollectibleRandom);
 
-void EnWonderItem_InitWrapper(Actor_EnWonderItem* this, GameState_Play* play)
+void EnWonderItem_InitWrapper(Actor_EnWonderItem* this, PlayState* play)
 {
     int switchFlag;
     ComboItemOverride o;
@@ -167,7 +167,7 @@ void EnWonderItem_InitWrapper(Actor_EnWonderItem* this, GameState_Play* play)
         this->base.draw = EnWonderItem_DrawGlitter;
 }
 
-void EnWonderItem_UpdateWrapper(Actor_EnWonderItem* this, GameState_Play* play)
+void EnWonderItem_UpdateWrapper(Actor_EnWonderItem* this, PlayState* play)
 {
     Actor_EnWonderItem_Func EnWonderItem_Update;
 

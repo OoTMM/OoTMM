@@ -5,7 +5,7 @@
 
 typedef struct Actor_ObjMure Actor_ObjMure;
 
-typedef void (*Actor_ObjMureFunc)(Actor_ObjMure*, GameState_Play*);
+typedef void (*Actor_ObjMureFunc)(Actor_ObjMure*, PlayState*);
 
 #define OBJMURE_MAX_SPAWNS 15
 

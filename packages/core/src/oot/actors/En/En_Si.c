@@ -36,7 +36,7 @@ void EnSi_ItemOverride(ComboItemOverride* o, Actor* this)
     comboItemOverride(o, &q);
 }
 
-void EnSi_Draw(Actor* this, GameState_Play* play)
+void EnSi_Draw(Actor* this, PlayState* play)
 {
     ComboItemOverride o;
 
@@ -46,7 +46,7 @@ void EnSi_Draw(Actor* this, GameState_Play* play)
 
 PATCH_CALL(0x80b4b3f8, EnSi_Draw);
 
-void EnSi_GiveItem(GameState_Play* play, Actor* this)
+void EnSi_GiveItem(PlayState* play, Actor* this)
 {
     ComboItemQuery q;
     ComboItemOverride o;

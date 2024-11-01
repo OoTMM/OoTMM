@@ -65,58 +65,58 @@
 
 #endif
 
-void Boss01_Init(Actor_Boss01* this, GameState_Play* play);
-void Boss01_Destroy(Actor_Boss01* this, GameState_Play* play);
-void Boss01_Update(Actor_Boss01* this, GameState_Play* play);
-void Boss01_Draw(Actor_Boss01* this, GameState_Play* play);
+void Boss01_Init(Actor_Boss01* this, PlayState* play);
+void Boss01_Destroy(Actor_Boss01* this, PlayState* play);
+void Boss01_Update(Actor_Boss01* this, PlayState* play);
+void Boss01_Draw(Actor_Boss01* this, PlayState* play);
 
-void Boss01_SetupIntroCutscene(Actor_Boss01* this, GameState_Play* play);
-void Boss01_IntroCutscene(Actor_Boss01* this, GameState_Play* play);
-void Boss01_SummonBugsCutscene(Actor_Boss01* this, GameState_Play* play);
-void Boss01_Afterimage_SetupWaitToDespawn(Actor_Boss01* this, GameState_Play* play);
-void Boss01_Afterimage_WaitToDespawn(Actor_Boss01* this, GameState_Play* play);
-void Boss01_SetupWait(Actor_Boss01* this, GameState_Play* play, u8 waitType);
-void Boss01_Wait(Actor_Boss01* this, GameState_Play* play);
-void Boss01_Dazed(Actor_Boss01* this, GameState_Play* play);
-void Boss01_SetupSpinAttack(Actor_Boss01* this, GameState_Play* play);
-void Boss01_SpinAttack(Actor_Boss01* this, GameState_Play* play);
-void Boss01_SetupDanceBeforeAttack(Actor_Boss01* this, GameState_Play* play);
-void Boss01_DanceBeforeAttack(Actor_Boss01* this, GameState_Play* play);
-void Boss01_SetupRun(Actor_Boss01* this, GameState_Play* play);
-void Boss01_Run(Actor_Boss01* this, GameState_Play* play);
-void Boss01_SetupJump(Actor_Boss01* this, GameState_Play* play, u8 shouldPerformFallingSlash);
-void Boss01_JumpSquat(Actor_Boss01* this, GameState_Play* play);
-void Boss01_Jump(Actor_Boss01* this, GameState_Play* play);
-void Boss01_JumpLand(Actor_Boss01* this, GameState_Play* play);
-void Boss01_SetupVerticalSlash(Actor_Boss01* this, GameState_Play* play);
-void Boss01_VerticalSlash(Actor_Boss01* this, GameState_Play* play);
-void Boss01_SetupHorizontalSlash(Actor_Boss01* this, GameState_Play* play);
-void Boss01_HorizontalSlash(Actor_Boss01* this, GameState_Play* play);
-void Boss01_Guard(Actor_Boss01* this, GameState_Play* play);
-void Boss01_SetupKick(Actor_Boss01* this, GameState_Play* play);
-void Boss01_Kick(Actor_Boss01* this, GameState_Play* play);
-void Boss01_SetupShieldBash(Actor_Boss01* this, GameState_Play* play);
-void Boss01_ShieldBash(Actor_Boss01* this, GameState_Play* play);
-void Boss01_Damaged(Actor_Boss01* this, GameState_Play* play);
-void Boss01_SetupSummonMoths(Actor_Boss01* this, GameState_Play* play);
-void Boss01_SummonMoths(Actor_Boss01* this, GameState_Play* play);
-void Boss01_SetupDeathCutscene(Actor_Boss01* this, GameState_Play* play);
-void Boss01_DeathCutscene(Actor_Boss01* this, GameState_Play* play);
-void Boss01_SetupStunned(Actor_Boss01* this, GameState_Play* play);
-void Boss01_Stunned(Actor_Boss01* this, GameState_Play* play);
-void Boss01_Afterimage_Draw(Actor_Boss01* this, GameState_Play* play);
-void Boss01_GenShadowTex(u8* tex, Actor_Boss01* this, GameState_Play* play);
-void Boss01_DrawShadowTex(u8* tex, Actor_Boss01* this, GameState_Play* play);
-void Boss01_Bug_SetupCrawl(Actor_Boss01* this, GameState_Play* play);
-void Boss01_Bug_Crawl(Actor_Boss01* this, GameState_Play* play);
-void Boss01_Bug_Damaged(Actor_Boss01* this, GameState_Play* play);
-void Boss01_Bug_SetupDead(Actor_Boss01* this, GameState_Play* play);
-void Boss01_Bug_Stunned(Actor_Boss01* this, GameState_Play* play);
-void Boss01_Bug_Dead(Actor_Boss01* this, GameState_Play* play);
-void Boss01_Bug_Update(Actor_Boss01* this, GameState_Play* play);
-void Boss01_Bug_Draw(Actor_Boss01* this, GameState_Play* play);
-void Boss01_UpdateEffects(Actor_Boss01* this, GameState_Play* play);
-void Boss01_DrawEffects(GameState_Play* play);
+void Boss01_SetupIntroCutscene(Actor_Boss01* this, PlayState* play);
+void Boss01_IntroCutscene(Actor_Boss01* this, PlayState* play);
+void Boss01_SummonBugsCutscene(Actor_Boss01* this, PlayState* play);
+void Boss01_Afterimage_SetupWaitToDespawn(Actor_Boss01* this, PlayState* play);
+void Boss01_Afterimage_WaitToDespawn(Actor_Boss01* this, PlayState* play);
+void Boss01_SetupWait(Actor_Boss01* this, PlayState* play, u8 waitType);
+void Boss01_Wait(Actor_Boss01* this, PlayState* play);
+void Boss01_Dazed(Actor_Boss01* this, PlayState* play);
+void Boss01_SetupSpinAttack(Actor_Boss01* this, PlayState* play);
+void Boss01_SpinAttack(Actor_Boss01* this, PlayState* play);
+void Boss01_SetupDanceBeforeAttack(Actor_Boss01* this, PlayState* play);
+void Boss01_DanceBeforeAttack(Actor_Boss01* this, PlayState* play);
+void Boss01_SetupRun(Actor_Boss01* this, PlayState* play);
+void Boss01_Run(Actor_Boss01* this, PlayState* play);
+void Boss01_SetupJump(Actor_Boss01* this, PlayState* play, u8 shouldPerformFallingSlash);
+void Boss01_JumpSquat(Actor_Boss01* this, PlayState* play);
+void Boss01_Jump(Actor_Boss01* this, PlayState* play);
+void Boss01_JumpLand(Actor_Boss01* this, PlayState* play);
+void Boss01_SetupVerticalSlash(Actor_Boss01* this, PlayState* play);
+void Boss01_VerticalSlash(Actor_Boss01* this, PlayState* play);
+void Boss01_SetupHorizontalSlash(Actor_Boss01* this, PlayState* play);
+void Boss01_HorizontalSlash(Actor_Boss01* this, PlayState* play);
+void Boss01_Guard(Actor_Boss01* this, PlayState* play);
+void Boss01_SetupKick(Actor_Boss01* this, PlayState* play);
+void Boss01_Kick(Actor_Boss01* this, PlayState* play);
+void Boss01_SetupShieldBash(Actor_Boss01* this, PlayState* play);
+void Boss01_ShieldBash(Actor_Boss01* this, PlayState* play);
+void Boss01_Damaged(Actor_Boss01* this, PlayState* play);
+void Boss01_SetupSummonMoths(Actor_Boss01* this, PlayState* play);
+void Boss01_SummonMoths(Actor_Boss01* this, PlayState* play);
+void Boss01_SetupDeathCutscene(Actor_Boss01* this, PlayState* play);
+void Boss01_DeathCutscene(Actor_Boss01* this, PlayState* play);
+void Boss01_SetupStunned(Actor_Boss01* this, PlayState* play);
+void Boss01_Stunned(Actor_Boss01* this, PlayState* play);
+void Boss01_Afterimage_Draw(Actor_Boss01* this, PlayState* play);
+void Boss01_GenShadowTex(u8* tex, Actor_Boss01* this, PlayState* play);
+void Boss01_DrawShadowTex(u8* tex, Actor_Boss01* this, PlayState* play);
+void Boss01_Bug_SetupCrawl(Actor_Boss01* this, PlayState* play);
+void Boss01_Bug_Crawl(Actor_Boss01* this, PlayState* play);
+void Boss01_Bug_Damaged(Actor_Boss01* this, PlayState* play);
+void Boss01_Bug_SetupDead(Actor_Boss01* this, PlayState* play);
+void Boss01_Bug_Stunned(Actor_Boss01* this, PlayState* play);
+void Boss01_Bug_Dead(Actor_Boss01* this, PlayState* play);
+void Boss01_Bug_Update(Actor_Boss01* this, PlayState* play);
+void Boss01_Bug_Draw(Actor_Boss01* this, PlayState* play);
+void Boss01_UpdateEffects(Actor_Boss01* this, PlayState* play);
+void Boss01_DrawEffects(PlayState* play);
 
 typedef enum
 {
@@ -737,7 +737,7 @@ void Boss01_SetColliderSphere(s32 index, ColliderJntSph* collider, Vec3f* sphere
         collider->elements[index].dim.modelSphere.radius * collider->elements[index].dim.scale;
 }
 
-void Boss01_SelectAttack(Actor_Boss01* this, GameState_Play* play, u8 mustAttack)
+void Boss01_SelectAttack(Actor_Boss01* this, PlayState* play, u8 mustAttack)
 {
     Actor_Player* player = GET_PLAYER(play);
 
@@ -763,7 +763,7 @@ void Boss01_SelectAttack(Actor_Boss01* this, GameState_Play* play, u8 mustAttack
         Boss01_SetupVerticalSlash(this, play);
 }
 
-void Boss01_SpawnDustAtFeet(Actor_Boss01* this, GameState_Play* play, u8 dustSpawnFrameMask)
+void Boss01_SpawnDustAtFeet(Actor_Boss01* this, PlayState* play, u8 dustSpawnFrameMask)
 {
     u8 i;
     Vec3f pos;
@@ -788,7 +788,7 @@ void Boss01_SpawnDustAtFeet(Actor_Boss01* this, GameState_Play* play, u8 dustSpa
     }
 }
 
-void Boss01_Init(Actor_Boss01* this, GameState_Play* play)
+void Boss01_Init(Actor_Boss01* this, PlayState* play)
 {
     s16 i;
 
@@ -868,13 +868,13 @@ void Boss01_Init(Actor_Boss01* this, GameState_Play* play)
     this->animMorphFrames2 = -4.0f;
 }
 
-void Boss01_Destroy(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_Destroy(Actor_Boss01* this, PlayState* play) {
 }
 
 /**
  * Checks every explosive actor to see if Odolwa is close enough to any of them. If he is, then he'll jump.
  */
-void Boss01_JumpAwayFromExplosive(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_JumpAwayFromExplosive(Actor_Boss01* this, PlayState* play) {
     Actor* explosive = play->actorCtx.actors[ACTORCAT_EXPLOSIVE].first;
 
     while (explosive != NULL) {
@@ -892,7 +892,7 @@ void Boss01_JumpAwayFromExplosive(Actor_Boss01* this, GameState_Play* play) {
  * Note that this function will move Odolwa to (0, 2400, 0), regardless of where he was originally spawned. This is so
  * he can fall from the ceiling in his intro cutscene, and this is also why he's not visible until the cutscene starts.
  */
-void Boss01_SetupIntroCutscene(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_SetupIntroCutscene(Actor_Boss01* this, PlayState* play) {
     this->actionFunc = Boss01_IntroCutscene;
     this->actor.world.pos.x = 0.0f;
     this->actor.world.pos.z = 0.0f;
@@ -906,7 +906,7 @@ void Boss01_SetupIntroCutscene(Actor_Boss01* this, GameState_Play* play) {
  * Odolwa's title card, etc. It also handles waiting for the player to move forward from the door before actually
  * starting the cutscene.
  */
-void Boss01_IntroCutscene(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_IntroCutscene(Actor_Boss01* this, PlayState* play) {
     Actor_Player* player = GET_PLAYER(play);
 
     this->cutsceneTimer++;
@@ -1076,7 +1076,7 @@ void Boss01_IntroCutscene(Actor_Boss01* this, GameState_Play* play) {
     }
 }
 
-void Boss01_SetupSummonBugsCutscene(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_SetupSummonBugsCutscene(Actor_Boss01* this, PlayState* play) {
     this->actionFunc = Boss01_SummonBugsCutscene;
     Animation_MorphToLoop(&this->skelAnime, SEGADDR_ODOLWA_SIDE_TO_SIDE_DANCE_ANIM, -10.0f);
     this->cutsceneState = ODOLWA_BUG_SUMMONING_CS_STATE_STARTED;
@@ -1091,7 +1091,7 @@ void Boss01_SetupSummonBugsCutscene(Actor_Boss01* this, GameState_Play* play) {
 /**
  * Handles everything involving the bug summoning cutscene, including manipulating the camera, spawning the bugs, etc.
  */
-void Boss01_SummonBugsCutscene(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_SummonBugsCutscene(Actor_Boss01* this, PlayState* play) {
     Actor_Player* player = GET_PLAYER(play);
     Vec3f offset;
     Vec3f pos;
@@ -1165,14 +1165,14 @@ void Boss01_SummonBugsCutscene(Actor_Boss01* this, GameState_Play* play) {
     }
 }
 
-void Boss01_Afterimage_SetupWaitToDespawn(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_Afterimage_SetupWaitToDespawn(Actor_Boss01* this, PlayState* play) {
     this->actionFunc = Boss01_Afterimage_WaitToDespawn;
 }
 
 /**
  * Waits until the despawn timer reaches 0, then kills the actor.
  */
-void Boss01_Afterimage_WaitToDespawn(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_Afterimage_WaitToDespawn(Actor_Boss01* this, PlayState* play) {
     if (this->timers[TIMER_AFTERIMAGE_DESPAWN] == 0) {
         Actor_Kill(&this->actor);
     }
@@ -1203,7 +1203,7 @@ static AnimationHeader* sWaitAnimations[ODOLWA_WAIT_MAX] = {
  * If ODOLWA_WAIT_RANDOM is passed for the waitType, then Odolwa has a 30% chance of summoning moths instead of doing a
  * standard wait action. Otherwise, he will randomly choose his own wait type.
  */
-void Boss01_SetupWait(Actor_Boss01* this, GameState_Play* play, u8 waitType) {
+void Boss01_SetupWait(Actor_Boss01* this, PlayState* play, u8 waitType) {
     if (this->phaseFrameCounter > 1000) {
         if (!this->hasPlayedSummonBugCs) {
             Boss01_SetupSummonBugsCutscene(this, play);
@@ -1237,7 +1237,7 @@ void Boss01_SetupWait(Actor_Boss01* this, GameState_Play* play, u8 waitType) {
  * attack, jump, or start running. Because of the variety of actions this function handles, it has a large number of
  * responsibilities, including summoning the ring of fire and spawning more bugs and falling blocks.
  */
-void Boss01_Wait(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_Wait(Actor_Boss01* this, PlayState* play) {
     s16 i;
     Actor_Player* player = GET_PLAYER(play);
 
@@ -1356,7 +1356,7 @@ void Boss01_Wait(Actor_Boss01* this, GameState_Play* play) {
     }
 }
 
-void Boss01_SetupDazed(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_SetupDazed(Actor_Boss01* this, PlayState* play) {
     Animation_MorphToLoop(&this->skelAnime, SEGADDR_ODOLWA_STUN_ANIM, this->animMorphFrames2);
     if (this->actionFunc != Boss01_Dazed) {
         this->timers[TIMER_CURRENT_ACTION] = 70;
@@ -1373,7 +1373,7 @@ void Boss01_SetupDazed(Actor_Boss01* this, GameState_Play* play) {
  * consistently named "stunned" across all enemies in the codebase, so this function was given a different name to
  * signify it does something else.
  */
-void Boss01_Dazed(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_Dazed(Actor_Boss01* this, PlayState* play) {
     SkelAnime_Update(&this->skelAnime);
     Actor_PlaySfx(&this->actor, NA_SE_EN_COMMON_WEAKENED - SFX_FLAG);
     Math_ApproachZeroF(&this->actor.speed, 1.0f, 1.5f);
@@ -1385,7 +1385,7 @@ void Boss01_Dazed(Actor_Boss01* this, GameState_Play* play) {
     Boss01_SpawnDustAtFeet(this, play, 1);
 }
 
-void Boss01_SetupSpinAttack(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_SetupSpinAttack(Actor_Boss01* this, PlayState* play) {
     Animation_MorphToLoop(&this->skelAnime, SEGADDR_ODOLWA_SPIN_ATTACK_ANIM, this->animMorphFrames2);
     this->timers[TIMER_CURRENT_ACTION] = 120;
     this->actionFunc = Boss01_SpinAttack;
@@ -1396,7 +1396,7 @@ void Boss01_SetupSpinAttack(Actor_Boss01* this, GameState_Play* play) {
  * Rapidly spin around and approach the player for 120 frames, spawning a new afterimage every frame.
  * Transitions back to waiting once the attack completes.
  */
-void Boss01_SpinAttack(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_SpinAttack(Actor_Boss01* this, PlayState* play) {
     SkelAnime_Update(&this->skelAnime);
     Math_ApproachF(&this->actor.speed, 7.0f, 1.0f, 1.5f);
     Math_ApproachS(&this->actor.world.rot.y, this->actor.yawTowardsPlayer, 4, 0x1000);
@@ -1417,7 +1417,7 @@ void Boss01_SpinAttack(Actor_Boss01* this, GameState_Play* play) {
     this->afterimageSpawnFrameMask = 1;
 }
 
-void Boss01_SetupDanceBeforeAttack(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_SetupDanceBeforeAttack(Actor_Boss01* this, PlayState* play) {
     Animation_MorphToLoop(&this->skelAnime, SEGADDR_ODOLWA_JUMP_DANCE_ANIM, this->animMorphFrames2);
     this->timers[TIMER_CURRENT_ACTION] = 40;
     this->actionFunc = Boss01_DanceBeforeAttack;
@@ -1429,7 +1429,7 @@ void Boss01_SetupDanceBeforeAttack(Actor_Boss01* this, GameState_Play* play) {
  * instead of attack the last time Boss01_SelectAttack was called. This function calls Boss01_SelectAttack with the
  * mustAttack parameter set to 1, ensuring that he will not dance again immediately after this.
  */
-void Boss01_DanceBeforeAttack(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_DanceBeforeAttack(Actor_Boss01* this, PlayState* play) {
     SkelAnime_Update(&this->skelAnime);
     Math_ApproachZeroF(&this->actor.speed, 1.0f, 1.5f);
     Actor_PlaySfx(&this->actor, NA_SE_EN_MIBOSS_VOICE2_OLD - SFX_FLAG);
@@ -1443,7 +1443,7 @@ void Boss01_DanceBeforeAttack(Actor_Boss01* this, GameState_Play* play) {
     Boss01_SpawnDustAtFeet(this, play, 1);
 }
 
-void Boss01_SetupRun(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_SetupRun(Actor_Boss01* this, PlayState* play) {
     Animation_MorphToLoop(&this->skelAnime, SEGADDR_ODOLWA_RUN_ANIM, this->animMorphFrames2);
     this->actionFunc = Boss01_Run;
     this->timers[TIMER_CURRENT_ACTION] = Rand_ZeroFloat(100.0f) + 50.0f;
@@ -1459,7 +1459,7 @@ void Boss01_SetupRun(Actor_Boss01* this, GameState_Play* play) {
 /**
  * Run in a circle for 50-150 frames by chasing a rotating target around the room, then go back to waiting.
  */
-void Boss01_Run(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_Run(Actor_Boss01* this, PlayState* play) {
     Vec3f targetPos;
     f32 diffX;
     f32 diffZ;
@@ -1495,7 +1495,7 @@ void Boss01_Run(Actor_Boss01* this, GameState_Play* play) {
  * The shouldPerformFallingSlash parameter controls whether Odolwa should try to perform a falling slash during the
  * middle part of the jump or if he should just jump normally.
  */
-void Boss01_SetupJump(Actor_Boss01* this, GameState_Play* play, u8 shouldPerformFallingSlash) {
+void Boss01_SetupJump(Actor_Boss01* this, PlayState* play, u8 shouldPerformFallingSlash) {
     this->shouldPerformFallingSlash = shouldPerformFallingSlash;
     Animation_MorphToLoop(&this->skelAnime, SEGADDR_ODOLWA_CROUCH_ANIM, this->animMorphFrames2);
     this->actionFunc = Boss01_JumpSquat;
@@ -1505,7 +1505,7 @@ void Boss01_SetupJump(Actor_Boss01* this, GameState_Play* play, u8 shouldPerform
 /**
  * Plays the crouch animation for 5 frames, then jumps off.
  */
-void Boss01_JumpSquat(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_JumpSquat(Actor_Boss01* this, PlayState* play) {
     u8 i;
     Vec3f additionalVelocity;
     f32 magnitude;
@@ -1547,7 +1547,7 @@ void Boss01_JumpSquat(Actor_Boss01* this, GameState_Play* play) {
  * rotating him and transition him to the slash animation. Lastly, this function will transition Odolwa to his "landing"
  * action once he gets close enough to the ground.
  */
-void Boss01_Jump(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_Jump(Actor_Boss01* this, PlayState* play) {
     SkelAnime_Update(&this->skelAnime);
     Actor_PlaySfx(&this->actor, NA_SE_EN_MIBOSS_JUMP2 - SFX_FLAG);
 
@@ -1575,7 +1575,7 @@ void Boss01_Jump(Actor_Boss01* this, GameState_Play* play) {
  * Plays the crouch animation for five frames, then transitions either to selecting an attack or waiting based on
  * Odolwa's distance to the player.
  */
-void Boss01_JumpLand(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_JumpLand(Actor_Boss01* this, PlayState* play) {
     u8 i;
 
     SkelAnime_Update(&this->skelAnime);
@@ -1607,7 +1607,7 @@ void Boss01_JumpLand(Actor_Boss01* this, GameState_Play* play) {
     this->swordAndShieldCollisionEnabled = 1;
 }
 
-void Boss01_SetupVerticalSlash(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_SetupVerticalSlash(Actor_Boss01* this, PlayState* play) {
     Animation_MorphToPlayOnce(&this->skelAnime, SEGADDR_ODOLWA_VERTICAL_SLASH_ANIM, this->animMorphFrames2);
     this->animEndFrame = Animation_GetLastFrame(SEGADDR_ODOLWA_VERTICAL_SLASH_ANIM);
     this->actionFunc = Boss01_VerticalSlash;
@@ -1617,7 +1617,7 @@ void Boss01_SetupVerticalSlash(Actor_Boss01* this, GameState_Play* play) {
 /**
  * Charges forward and performs a vertical slash. Transitions back to waiting once the attack completes.
  */
-void Boss01_VerticalSlash(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_VerticalSlash(Actor_Boss01* this, PlayState* play) {
     Vec3f additionalVelocity;
 
     SkelAnime_Update(&this->skelAnime);
@@ -1672,7 +1672,7 @@ void Boss01_VerticalSlash(Actor_Boss01* this, GameState_Play* play) {
     this->swordAndShieldCollisionEnabled = 1;
 }
 
-void Boss01_SetupHorizontalSlash(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_SetupHorizontalSlash(Actor_Boss01* this, PlayState* play) {
     Animation_MorphToPlayOnce(&this->skelAnime, SEGADDR_ODOLWA_HORIZONTAL_SLASH_ANIM, this->animMorphFrames2);
     this->animEndFrame = Animation_GetLastFrame(SEGADDR_ODOLWA_HORIZONTAL_SLASH_ANIM);
     this->actionFunc = Boss01_HorizontalSlash;
@@ -1681,7 +1681,7 @@ void Boss01_SetupHorizontalSlash(Actor_Boss01* this, GameState_Play* play) {
 /**
  * Stands in place and performs a horizontal slash. Transitions back to waiting once the attack completes.
  */
-void Boss01_HorizontalSlash(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_HorizontalSlash(Actor_Boss01* this, PlayState* play) {
     Vec3f additionalVelocity;
 
     SkelAnime_Update(&this->skelAnime);
@@ -1745,7 +1745,7 @@ void Boss01_HorizontalSlash(Actor_Boss01* this, GameState_Play* play) {
  * Prepares Odolwa to guard using either his shield or sword depending on the supplied parameter. The difference is
  * entirely aesthetic, with him behaving in the exact same way regardless of which type of guard is chosen.
  */
-void Boss01_SetupGuard(Actor_Boss01* this, GameState_Play* play, u8 guardUsingSword) {
+void Boss01_SetupGuard(Actor_Boss01* this, PlayState* play, u8 guardUsingSword) {
     if (this->actionFunc != Boss01_Guard) {
         if (!guardUsingSword) {
             Animation_MorphToPlayOnce(&this->skelAnime, SEGADDR_ODOLWA_SHIELD_GUARD_ANIM, this->animMorphFrames1);
@@ -1765,7 +1765,7 @@ void Boss01_SetupGuard(Actor_Boss01* this, GameState_Play* play, u8 guardUsingSw
  * Plays a guard animation (either blocking with his shield or his sword) for five frames, then transitions back to
  * waiting.
  */
-void Boss01_Guard(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_Guard(Actor_Boss01* this, PlayState* play) {
     SkelAnime_Update(&this->skelAnime);
     Math_ApproachS(&this->actor.world.rot.y, this->actor.yawTowardsPlayer, 2, 0x500);
     Math_ApproachZeroF(&this->actor.speed, 1.0f, 1.0f);
@@ -1778,7 +1778,7 @@ void Boss01_Guard(Actor_Boss01* this, GameState_Play* play) {
     this->canGuardOrEvade = 1;
 }
 
-void Boss01_SetupKick(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_SetupKick(Actor_Boss01* this, PlayState* play) {
     Animation_MorphToPlayOnce(&this->skelAnime, SEGADDR_ODOLWA_KICK_ANIM, this->animMorphFrames2);
     this->animEndFrame = Animation_GetLastFrame(SEGADDR_ODOLWA_KICK_ANIM);
     this->actionFunc = Boss01_Kick;
@@ -1787,7 +1787,7 @@ void Boss01_SetupKick(Actor_Boss01* this, GameState_Play* play) {
 /**
  * Plays the kick animation to completion, then transitions back to waiting.
  */
-void Boss01_Kick(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_Kick(Actor_Boss01* this, PlayState* play) {
     SkelAnime_Update(&this->skelAnime);
     Math_ApproachZeroF(&this->actor.speed, 1.0f, 1.0f);
     if (Animation_OnFrame(&this->skelAnime, this->animEndFrame)) {
@@ -1797,7 +1797,7 @@ void Boss01_Kick(Actor_Boss01* this, GameState_Play* play) {
     this->kickAndShieldBashCollisionEnabled = 1;
 }
 
-void Boss01_SetupShieldBash(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_SetupShieldBash(Actor_Boss01* this, PlayState* play) {
     Animation_MorphToPlayOnce(&this->skelAnime, SEGADDR_ODOLWA_SHIELD_BASH_ANIM, this->animMorphFrames2);
     this->animEndFrame = Animation_GetLastFrame(SEGADDR_ODOLWA_SHIELD_BASH_ANIM);
     this->actionFunc = Boss01_ShieldBash;
@@ -1806,7 +1806,7 @@ void Boss01_SetupShieldBash(Actor_Boss01* this, GameState_Play* play) {
 /**
  * Plays the shield bash animation to completion, then transitions back to waiting.
  */
-void Boss01_ShieldBash(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_ShieldBash(Actor_Boss01* this, PlayState* play) {
     SkelAnime_Update(&this->skelAnime);
     Math_ApproachZeroF(&this->actor.speed, 1.0f, 1.0f);
     if (Animation_OnFrame(&this->skelAnime, this->animEndFrame)) {
@@ -1826,7 +1826,7 @@ void Boss01_ShieldBash(Actor_Boss01* this, GameState_Play* play) {
  * - If the attack hit while his current action timer is 6 or less, Odolwa will disable all of his collision for 20
  *   frames to ensure that the player cannot hit him with subsequent attacks.
  */
-void Boss01_SetupDamaged(Actor_Boss01* this, GameState_Play* play, u8 damageEffect) {
+void Boss01_SetupDamaged(Actor_Boss01* this, PlayState* play, u8 damageEffect) {
     if (this->actionFunc != Boss01_Damaged) {
         this->timers[TIMER_CURRENT_ACTION] = 20;
         Animation_MorphToPlayOnce(&this->skelAnime, SEGADDR_ODOLWA_DAMAGED_START_ANIM, 0.0f);
@@ -1846,7 +1846,7 @@ void Boss01_SetupDamaged(Actor_Boss01* this, GameState_Play* play, u8 damageEffe
  * attacks Odolwa while he's "downed" in this state, the current action timer can be manipulated in Boss01_SetupDamaged,
  * so it's possible for Odolwa to stay in this state for a long time with well-timed attacks.
  */
-void Boss01_Damaged(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_Damaged(Actor_Boss01* this, PlayState* play) {
     SkelAnime_Update(&this->skelAnime);
     Math_ApproachZeroF(&this->actor.speed, 1.0f, 1.0f);
 
@@ -1862,7 +1862,7 @@ void Boss01_Damaged(Actor_Boss01* this, GameState_Play* play) {
     Boss01_SpawnDustAtFeet(this, play, 1);
 }
 
-void Boss01_UpdateDamage(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_UpdateDamage(Actor_Boss01* this, PlayState* play) {
     Actor_Player* player = GET_PLAYER(play);
     u8 damage;
     s32 i;
@@ -1972,7 +1972,7 @@ void Boss01_UpdateDamage(Actor_Boss01* this, GameState_Play* play) {
     }
 }
 
-void Boss01_SetupSummonMoths(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_SetupSummonMoths(Actor_Boss01* this, PlayState* play) {
     Animation_MorphToLoop(&this->skelAnime, SEGADDR_ODOLWA_MOTH_SUMMON_DANCE_ANIM, -5.0f);
     this->animEndFrame = Animation_GetLastFrame(SEGADDR_ODOLWA_MOTH_SUMMON_DANCE_ANIM);
     this->actionFunc = Boss01_SummonMoths;
@@ -1984,7 +1984,7 @@ void Boss01_SetupSummonMoths(Actor_Boss01* this, GameState_Play* play) {
  * back to waiting; notably, this function always transitions him to a specific wait rather than choosing a random wait
  * action like every other non-cutscene function.
  */
-void Boss01_SummonMoths(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_SummonMoths(Actor_Boss01* this, PlayState* play) {
     this->summonMothsTimer++;
     SkelAnime_Update(&this->skelAnime);
     Actor_PlaySfx(&this->actor, NA_SE_EN_MIBOSS_VOICE3_OLD - SFX_FLAG);
@@ -2012,7 +2012,7 @@ void Boss01_SummonMoths(Actor_Boss01* this, GameState_Play* play) {
     }
 }
 
-void Boss01_SetupDeathCutscene(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_SetupDeathCutscene(Actor_Boss01* this, PlayState* play) {
     Animation_MorphToPlayOnce(&this->skelAnime, SEGADDR_ODOLWA_DEATH_ANIM, this->animMorphFrames1);
     this->animEndFrame = Animation_GetLastFrame(SEGADDR_ODOLWA_DEATH_ANIM);
     this->actionFunc = Boss01_DeathCutscene;
@@ -2032,7 +2032,7 @@ void Boss01_SetupDeathCutscene(Actor_Boss01* this, GameState_Play* play) {
  * instance is *not* killed in this function, and it stays in this state forever. Instead, Odolwa is teleported far
  * above the ceiling so the player cannot see or interact with him.
  */
-void Boss01_DeathCutscene(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_DeathCutscene(Actor_Boss01* this, PlayState* play) {
     Vec3f subCamOffset;
     f32 diffX;
     f32 diffZ;
@@ -2192,7 +2192,7 @@ void Boss01_DeathCutscene(Actor_Boss01* this, GameState_Play* play) {
     }
 }
 
-void Boss01_SetupStunned(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_SetupStunned(Actor_Boss01* this, PlayState* play) {
     this->actionFunc = Boss01_Stunned;
     this->timers[TIMER_CURRENT_ACTION] = 40;
     Actor_SetColorFilter(&this->actor, COLORFILTER_COLORFLAG_BLUE, 120, COLORFILTER_BUFFLAG_OPA, 40);
@@ -2204,7 +2204,7 @@ void Boss01_SetupStunned(Actor_Boss01* this, GameState_Play* play) {
  * stunned"; this form of stun, where the enemy turns blue and stops their animations, is very common among regular
  * enemies, but it's very rare to see on a boss, so the term "stunned" was used here for consistency with other enemies.
  */
-void Boss01_Stunned(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_Stunned(Actor_Boss01* this, PlayState* play) {
     Math_ApproachZeroF(&this->actor.speed, 1.0f, 1.0f);
     if (this->timers[TIMER_CURRENT_ACTION] == 0) {
         Boss01_SetupWait(this, play, ODOLWA_WAIT_RANDOM);
@@ -2214,7 +2214,7 @@ void Boss01_Stunned(Actor_Boss01* this, GameState_Play* play) {
 /**
  * Spawns two ice shards on all of Odolwa's body parts that fly off in random directions.
  */
-void Boss01_Thaw(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_Thaw(Actor_Boss01* this, PlayState* play) {
     static Color_RGBA8 sIcePrimColor = { 170, 255, 255, 255 };
     static Color_RGBA8 sIceEnvColor = { 200, 200, 255, 255 };
     static Vec3f sIceAccel = { 0.0f, -1.0f, 0.0f };
@@ -2242,7 +2242,7 @@ void Boss01_Thaw(Actor_Boss01* this, GameState_Play* play) {
  * Returns 1 if Odolwa's model is rotated such that he is looking at the player *and* if the player's model is
  * rotated such that they are looking at Odolwa.
  */
-s32 Boss01_ArePlayerAndOdolwaFacing(Actor_Boss01* this, GameState_Play* play) {
+s32 Boss01_ArePlayerAndOdolwaFacing(Actor_Boss01* this, PlayState* play) {
     Actor_Player* player = GET_PLAYER(play);
 
     if ((ABS_ALT(BINANG_SUB(this->actor.yawTowardsPlayer, this->actor.shape.rot.y)) < 0x3000) &&
@@ -2253,7 +2253,7 @@ s32 Boss01_ArePlayerAndOdolwaFacing(Actor_Boss01* this, GameState_Play* play) {
     return 0;
 }
 
-void Boss01_Update(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_Update(Actor_Boss01* this, PlayState* play) {
     s32 i;
     Actor_Player* player = GET_PLAYER(play);
     f32 diffX;
@@ -2514,7 +2514,7 @@ void Boss01_Update(Actor_Boss01* this, GameState_Play* play) {
 /**
  * Draws the sword trail that follows Odolwa's sword during horizontal and vertical slashes.
  */
-void Boss01_DrawSwordTrail(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_DrawSwordTrail(Actor_Boss01* this, PlayState* play) {
     static u8 sSwordTrailOuterVertexIndices[] = { 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20 };
     static u8 sSwordTrailInnerVertexIndices[] = { 1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21 };
     Vtx* vtx;
@@ -2553,7 +2553,7 @@ void Boss01_DrawSwordTrail(Actor_Boss01* this, GameState_Play* play) {
     CLOSE_DISPS();
 }
 
-s32 Boss01_OverrideLimbDraw(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Boss01* this) {
+s32 Boss01_OverrideLimbDraw(PlayState* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Boss01* this) {
 
     if (limbIndex == ODOLWA_LIMB_HEAD) {
         // The rot variable here is in model space, whereas the headRot variables are in world space.
@@ -2711,8 +2711,8 @@ static s8 sLimbToBodyParts[] = {
     BODYPART_NONE,                   // Doesn't correspond to a real limb on Odolwa
 };
 
-void Boss01_PostLimbDraw(GameState_Play* play2, s32 limbIndex, Gfx** dList, Vec3s* rot, Actor_Boss01* this) {
-    GameState_Play* play = play2;
+void Boss01_PostLimbDraw(PlayState* play2, s32 limbIndex, Gfx** dList, Vec3s* rot, Actor_Boss01* this) {
+    PlayState* play = play2;
     s8 index;
     Vec3f pos;
 
@@ -2789,7 +2789,7 @@ void Boss01_PostLimbDraw(GameState_Play* play2, s32 limbIndex, Gfx** dList, Vec3
     }
 }
 
-void Boss01_Draw(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_Draw(Actor_Boss01* this, PlayState* play) {
     static Vec3f sDefaultPelvisColliderOffset = { 10000.0f, 10000.0f, 10000.0f };
     u8* tex = GRAPH_ALLOC(play->gs.gfx, ODOLWA_SHADOW_TEX_SIZE);
 
@@ -2829,7 +2829,7 @@ void Boss01_Draw(Actor_Boss01* this, GameState_Play* play) {
     CLOSE_DISPS();
 }
 
-void Boss01_Afterimage_Draw(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_Afterimage_Draw(Actor_Boss01* this, PlayState* play) {
     Actor_Boss01* parent = (Actor_Boss01*)this->actor.parent;
 
     OPEN_DISPS(play->gs.gfx);
@@ -2986,7 +2986,7 @@ void Boss01_FillShadowTex(Actor_Boss01* this, u8* tex, f32 weight) {
     }
 }
 
-void Boss01_GenShadowTex(u8* tex, Actor_Boss01* this, GameState_Play* play) {
+void Boss01_GenShadowTex(u8* tex, Actor_Boss01* this, PlayState* play) {
     s32* iter = (s32*)tex;
     s16 i;
 
@@ -3004,7 +3004,7 @@ void Boss01_GenShadowTex(u8* tex, Actor_Boss01* this, GameState_Play* play) {
 /**
  * Draws Odolwa's dynamic shadow underneath him.
  */
-void Boss01_DrawShadowTex(u8* tex, Actor_Boss01* this, GameState_Play* play) {
+void Boss01_DrawShadowTex(u8* tex, Actor_Boss01* this, PlayState* play) {
     f32 alpha;
     GfxContext* gfxCtx = play->gs.gfx;
 
@@ -3030,7 +3030,7 @@ void Boss01_DrawShadowTex(u8* tex, Actor_Boss01* this, GameState_Play* play) {
     CLOSE_DISPS();
 }
 
-void Boss01_Bug_SetupCrawl(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_Bug_SetupCrawl(Actor_Boss01* this, PlayState* play) {
     this->actionFunc = Boss01_Bug_Crawl;
     Animation_MorphToLoop(&this->skelAnime, SEGADDR_ODOLWA_BUG_CRAWL_ANIM, -5.0f);
 }
@@ -3039,7 +3039,7 @@ void Boss01_Bug_SetupCrawl(Actor_Boss01* this, GameState_Play* play) {
  * If an explosive is present, the bug will crawl quickly towards it. Otherwise, it will crawl slowly towards the player
  * and chase them around.
  */
-void Boss01_Bug_Crawl(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_Bug_Crawl(Actor_Boss01* this, PlayState* play) {
     Actor_Player* player = GET_PLAYER(play);
     f32 targetSpeed = 3.0f;
     Actor* targetActor = &player->actor;
@@ -3071,7 +3071,7 @@ void Boss01_Bug_Crawl(Actor_Boss01* this, GameState_Play* play) {
     }
 }
 
-void Boss01_Bug_SetupDamaged(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_Bug_SetupDamaged(Actor_Boss01* this, PlayState* play) {
     if ((s8)this->actor.colChkInfo.health > 0) {
         this->actionFunc = Boss01_Bug_Damaged;
         this->timers[TIMER_BUG_CURRENT_ACTION] = 30;
@@ -3085,14 +3085,14 @@ void Boss01_Bug_SetupDamaged(Actor_Boss01* this, GameState_Play* play) {
 /**
  * Stops the bug's animations and makes it wait in place for 30 frames, then it starts crawling again.
  */
-void Boss01_Bug_Damaged(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_Bug_Damaged(Actor_Boss01* this, PlayState* play) {
     Math_ApproachZeroF(&this->actor.speed, 1.0f, 1.0f);
     if (this->timers[TIMER_BUG_CURRENT_ACTION] == 0) {
         Boss01_Bug_SetupCrawl(this, play);
     }
 }
 
-void Boss01_Bug_SetupDead(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_Bug_SetupDead(Actor_Boss01* this, PlayState* play) {
     this->actionFunc = Boss01_Bug_Dead;
     this->additionalVelocityZ = 0.0f;
     this->additionalVelocityX = 0.0f;
@@ -3103,7 +3103,7 @@ void Boss01_Bug_SetupDead(Actor_Boss01* this, GameState_Play* play) {
     this->actor.flags &= ~ACTOR_FLAG_MM_1;
 }
 
-void Boss01_Bug_SetupStunned(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_Bug_SetupStunned(Actor_Boss01* this, PlayState* play) {
     this->actionFunc = Boss01_Bug_Stunned;
     this->timers[TIMER_BUG_CURRENT_ACTION] = 40;
     Actor_SetColorFilter(&this->actor, COLORFILTER_COLORFLAG_BLUE, 120, COLORFILTER_BUFFLAG_OPA, 40);
@@ -3112,7 +3112,7 @@ void Boss01_Bug_SetupStunned(Actor_Boss01* this, GameState_Play* play) {
 /**
  * Turns the bug blue, stops its animations, and makes it wait in place for 40 frames, then it starts crawling again.
  */
-void Boss01_Bug_Stunned(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_Bug_Stunned(Actor_Boss01* this, PlayState* play) {
     Math_ApproachZeroF(&this->actor.speed, 1.0f, 1.0f);
     if (this->timers[TIMER_BUG_CURRENT_ACTION] == 0) {
         Boss01_Bug_SetupCrawl(this, play);
@@ -3123,7 +3123,7 @@ void Boss01_Bug_Stunned(Actor_Boss01* this, GameState_Play* play) {
  * Flings the bug backwards, spinning randomly, until it hits the ground. After it lands, it shrinks and spawns a single
  * blue flame. The bug will die and drop an item once the flame fades enough.
  */
-void Boss01_Bug_Dead(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_Bug_Dead(Actor_Boss01* this, PlayState* play) {
     if (this->actor.bgCheckFlags & BGCHECKFLAG_GROUND) {
         Actor_PlaySfx(&this->actor, NA_SE_EN_COMMON_EXTINCT_LEV - SFX_FLAG);
         Math_ApproachZeroF(&this->actor.speed, 1.0f, 2.0f);
@@ -3146,7 +3146,7 @@ void Boss01_Bug_Dead(Actor_Boss01* this, GameState_Play* play) {
     }
 }
 
-void Boss01_Bug_UpdateDamage(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_Bug_UpdateDamage(Actor_Boss01* this, PlayState* play) {
     Vec3f additionalVelocity;
     u8 damage;
     ColliderElement* acHitElem;
@@ -3206,7 +3206,7 @@ void Boss01_Bug_UpdateDamage(Actor_Boss01* this, GameState_Play* play) {
     }
 }
 
-void Boss01_Bug_Update(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_Bug_Update(Actor_Boss01* this, PlayState* play) {
     s32 i;
 
     this->frameCounter++;
@@ -3240,7 +3240,7 @@ void Boss01_Bug_Update(Actor_Boss01* this, GameState_Play* play) {
     }
 }
 
-s32 Boss01_Bug_OverrideLimbDraw(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Boss01* this) {
+s32 Boss01_Bug_OverrideLimbDraw(PlayState* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Boss01* this) {
     if ((limbIndex == ODOLWA_BUG_LIMB_BODY) && (sOdolwa->actionFunc == Boss01_SummonBugsCutscene)) {
         *dList = SEGADDR_ODOLWA_BUG_DARK_BODY_DL;
     }
@@ -3260,7 +3260,7 @@ s32 Boss01_Bug_OverrideLimbDraw(GameState_Play* play, s32 limbIndex, Gfx** dList
     return 0;
 }
 
-void Boss01_Bug_Draw(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_Bug_Draw(Actor_Boss01* this, PlayState* play) {
     OPEN_DISPS(play->gs.gfx);
 
     Gfx_SetupDL25_Opa(play->gs.gfx);
@@ -3283,7 +3283,7 @@ void Boss01_Bug_Draw(Actor_Boss01* this, GameState_Play* play) {
 /**
  * Spawns five dust clouds randomly around the block's current position.
  */
-void Boss01_SpawnDustForFallingBlock(GameState_Play* play, Vec3f* blockPos, f32 scale) {
+void Boss01_SpawnDustForFallingBlock(PlayState* play, Vec3f* blockPos, f32 scale) {
     s16 i;
     Vec3f velocity;
     Vec3f accel;
@@ -3307,7 +3307,7 @@ void Boss01_SpawnDustForFallingBlock(GameState_Play* play, Vec3f* blockPos, f32 
  * Responsible for updating the falling blocks and the ring of fire, including spawning block fragments when a block
  * hits the floor and damaging the player.
  */
-void Boss01_UpdateEffects(Actor_Boss01* this, GameState_Play* play) {
+void Boss01_UpdateEffects(Actor_Boss01* this, PlayState* play) {
     OdolwaEffect* effect = (OdolwaEffect*)play->specialEffects;
     Actor_Player* player = GET_PLAYER(play);
     s16 i;
@@ -3413,7 +3413,7 @@ void Boss01_UpdateEffects(Actor_Boss01* this, GameState_Play* play) {
 /**
  * Draws the falling blocks, the circle shadows that appear under the blocks as they fall, and the ring of fire.
  */
-void Boss01_DrawEffects(GameState_Play* play) {
+void Boss01_DrawEffects(PlayState* play) {
     s16 i;
     f32 alpha;
     OdolwaEffect* effect = play->specialEffects;

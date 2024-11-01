@@ -92,11 +92,11 @@
 #define ACTORCAT_MAX            0x0c
 
 typedef struct CollisionPoly CollisionPoly;
-typedef struct GameState_Play GameState_Play;
+typedef struct PlayState PlayState;
 typedef struct ActorContext ActorContext;
 typedef struct Actor Actor;
 
-typedef void (*ActorCallback)(Actor*, GameState_Play*);
+typedef void (*ActorCallback)(Actor*, PlayState*);
 
 typedef struct
 {
@@ -443,8 +443,8 @@ void DynaPolyActor_Init(DynaPolyActor* dynaActor, s32 transformFlags);
 void Actor_UpdatePos(Actor *actor);
 
 #if defined(GAME_MM)
-s32 func_800B90AC(GameState_Play* play, Actor* actor, CollisionPoly* polygon, s32 bgId, Vec3f* arg4);
-s32 Actor_SetPlayerImpact(GameState_Play* play, PlayerImpactType type, s32 timer, f32 dist, Vec3f* pos);
+s32 func_800B90AC(PlayState* play, Actor* actor, CollisionPoly* polygon, s32 bgId, Vec3f* arg4);
+s32 Actor_SetPlayerImpact(PlayState* play, PlayerImpactType type, s32 timer, f32 dist, Vec3f* pos);
 #endif
 
 #endif

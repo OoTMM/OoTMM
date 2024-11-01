@@ -3,7 +3,7 @@
 #include <combo/config.h>
 
 /* Warp songs */
-static void DemoKankyo_Warp(GameState_Play* play, void* unk, Actor* this)
+static void DemoKankyo_Warp(PlayState* play, void* unk, Actor* this)
 {
     comboTransition(play, gComboConfig.entrancesSong[play->msgCtx.lastSongPlayed]);
 }

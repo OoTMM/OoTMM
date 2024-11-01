@@ -4,7 +4,7 @@
 #include <combo/draw.h>
 #include <combo/actor.h>
 
-void EnExRuppy_ItemQuery(ComboItemQuery* q, Actor_EnExRuppy* this, GameState_Play* play)
+void EnExRuppy_ItemQuery(ComboItemQuery* q, Actor_EnExRuppy* this, PlayState* play)
 {
     memset(q, 0, sizeof(*q));
 
@@ -38,7 +38,7 @@ void EnExRuppy_ItemQuery(ComboItemQuery* q, Actor_EnExRuppy* this, GameState_Pla
     }
 }
 
-static int EnExRupy_IsShuffled(Actor_EnExRuppy* this, GameState_Play* play)
+static int EnExRupy_IsShuffled(Actor_EnExRuppy* this, PlayState* play)
 {
     ComboItemQuery q;
     ComboItemOverride o;
@@ -50,7 +50,7 @@ static int EnExRupy_IsShuffled(Actor_EnExRuppy* this, GameState_Play* play)
     return o.gi != GI_NONE;
 }
 
-void EnExRuppy_Draw(Actor_EnExRuppy* this, GameState_Play* play)
+void EnExRuppy_Draw(Actor_EnExRuppy* this, PlayState* play)
 {
     ComboItemQuery q;
     ComboItemOverride o;
@@ -61,7 +61,7 @@ void EnExRuppy_Draw(Actor_EnExRuppy* this, GameState_Play* play)
     Draw_Gi(play, &this->actor, o.gi, 0);
 }
 
-void EnExRuppy_HandlerCollected(Actor_EnExRuppy* this, GameState_Play* play)
+void EnExRuppy_HandlerCollected(Actor_EnExRuppy* this, PlayState* play)
 {
     Actor_EnDivingGame* divingGame;
     if (Message_IsClosed(&this->actor, play))
@@ -77,7 +77,7 @@ void EnExRuppy_HandlerCollected(Actor_EnExRuppy* this, GameState_Play* play)
     }
 }
 
-void EnExRuppy_GiveItem(Actor_EnExRuppy* this, GameState_Play* play, Actor_EnDivingGame* divingGame)
+void EnExRuppy_GiveItem(Actor_EnExRuppy* this, PlayState* play, Actor_EnDivingGame* divingGame)
 {
     Actor_Player* link;
     ComboItemQuery q;
@@ -119,7 +119,7 @@ void EnExRuppy_GiveItem(Actor_EnExRuppy* this, GameState_Play* play, Actor_EnDiv
     comboPlayItemFanfare(o.gi, 1);
 }
 
-void EnExRuppy_InitWrapper(Actor_EnExRuppy* this, GameState_Play* play)
+void EnExRuppy_InitWrapper(Actor_EnExRuppy* this, PlayState* play)
 {
     ActorCallback init;
 

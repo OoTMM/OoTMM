@@ -20,7 +20,7 @@ void EnAn_AfterGivingItem(Actor* this)
     sAnjuFlag = 0;
 }
 
-void EnAn_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnAn_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 {
     int npc;
 

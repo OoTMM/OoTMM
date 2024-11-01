@@ -1,6 +1,6 @@
 #include <combo.h>
 
-void EnTuboTrap_SpawnShuffledDrop(Actor_EnTuboTrap* this, GameState_Play* play)
+void EnTuboTrap_SpawnShuffledDrop(Actor_EnTuboTrap* this, PlayState* play)
 {
     u16 var;
     u16 unk;

@@ -4,7 +4,7 @@
 
 static u8 sIsSecondReward;
 
-void EnFsn_GiveNormalItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnFsn_GiveNormalItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 {
     int npc;
 
@@ -38,7 +38,7 @@ void EnFsn_GiveNormalItem(Actor* this, GameState_Play* play, s16 gi, float a, fl
 
 PATCH_CALL(0x80ae3cd4, EnFsn_GiveNormalItem);
 
-int EnFsn_HasGivenShopItem(Actor_EnFsn* this, GameState_Play* play)
+int EnFsn_HasGivenShopItem(Actor_EnFsn* this, PlayState* play)
 {
     if (!Actor_HasParentZ(&this->base))
         return 0;
@@ -60,7 +60,7 @@ int EnFsn_HasGivenShopItem(Actor_EnFsn* this, GameState_Play* play)
 
 PATCH_CALL(0x80ae3be0, EnFsn_HasGivenShopItem);
 
-static void EnFsn_GiveItem(Actor_EnFsn* this, GameState_Play* play, s16 gi, float a, float b)
+static void EnFsn_GiveItem(Actor_EnFsn* this, PlayState* play, s16 gi, float a, float b)
 {
     ComboItemQuery q;
     Actor_EnGirlA* girlA;

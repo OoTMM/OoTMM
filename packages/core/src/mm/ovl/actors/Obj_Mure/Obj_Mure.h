@@ -5,7 +5,7 @@
 
 typedef struct Actor_ObjMure Actor_ObjMure;
 
-typedef void (*Actor_ObjMureFunc)(Actor_ObjMure*, GameState_Play*);
+typedef void (*Actor_ObjMureFunc)(Actor_ObjMure*, PlayState*);
 
 #define OBJ_MURE_GET_CHNUM(thisx) (((thisx)->params >> 12) & 0xF)
 #define OBJ_MURE_GET_PTN(thisx) (((thisx)->params >> 8) & 0x7)

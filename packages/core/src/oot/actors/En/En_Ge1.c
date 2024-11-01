@@ -24,7 +24,7 @@ int EnGe1_IsPeaceful(void)
 PATCH_FUNC(0x80a8f554, EnGe1_IsPeaceful);
 PATCH_FUNC(0x80b23e68, EnGe1_IsPeaceful); /* En_Ge2 */
 
-int EnGe1_HasGivenItem(Actor* this, GameState_Play* play)
+int EnGe1_HasGivenItem(Actor* this, PlayState* play)
 {
     Actor_Player* link;
 
@@ -46,7 +46,7 @@ int EnGe1_HasGivenItem(Actor* this, GameState_Play* play)
 
 PATCH_CALL(0x80a90104, EnGe1_HasGivenItem);
 
-void EnGe1_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+void EnGe1_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b)
 {
     Actor_Player* link;
     int npc;

@@ -1,7 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 
-void EnAni_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnAni_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 {
     comboGiveItemNpc(this, play, gi, NPC_OOT_KAKARIKO_ROOF_MAN, a, b);
 }

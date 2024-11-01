@@ -2,7 +2,7 @@
 #include <combo/item.h>
 #include <combo/config.h>
 
-static void BgTokiSwd_GiveItem(Actor* this, GameState_Play* play, s16 gi, int npc, int event)
+static void BgTokiSwd_GiveItem(Actor* this, PlayState* play, s16 gi, int npc, int event)
 {
     if (Actor_HasParentZ(this))
     {
@@ -14,7 +14,7 @@ static void BgTokiSwd_GiveItem(Actor* this, GameState_Play* play, s16 gi, int np
     comboGiveItemNpc(this, play, gi, npc, 200.f, 50.f);
 }
 
-void BgTokiSwd_Handler(Actor* this, GameState_Play* play)
+void BgTokiSwd_Handler(Actor* this, PlayState* play)
 {
     if (gSave.age == AGE_CHILD && !GetEventChk(EV_OOT_CHK_MASTER_SWORD_CHAMBER))
     {

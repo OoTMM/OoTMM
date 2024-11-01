@@ -4,7 +4,7 @@
 #include <combo/util.h>
 #include <combo/math/vec.h>
 
-typedef struct GameState_Play GameState_Play;
+typedef struct PlayState PlayState;
 
 typedef struct SfxSource
 {
@@ -21,8 +21,8 @@ ASSERT_OFFSET(SfxSource, projectedPos, 0x10);
 
 #define SFX_SOURCE_COUNT 16
 
-void SfxSource_InitAll(GameState_Play* play);
-void SfxSource_UpdateAll(GameState_Play* play);
-void SfxSource_PlaySfxAtFixedWorldPos(GameState_Play* play, Vec3f* worldPos, s32 duration, u16 sfxId);
+void SfxSource_InitAll(PlayState* play);
+void SfxSource_UpdateAll(PlayState* play);
+void SfxSource_PlaySfxAtFixedWorldPos(PlayState* play, Vec3f* worldPos, s32 duration, u16 sfxId);
 
 #endif

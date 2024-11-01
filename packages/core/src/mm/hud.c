@@ -1,9 +1,9 @@
 #include <combo.h>
 #include <combo/dpad.h>
 
-void Play_DrawHudButtons(GameState_Play* play);
+void Play_DrawHudButtons(PlayState* play);
 
-void Play_DrawHudButtons_Wrapper(GameState_Play* play)
+void Play_DrawHudButtons_Wrapper(PlayState* play)
 {
     /* Fix a vanilla bug with the ammo outline is some cases */
     OPEN_DISPS(play->gs.gfx);

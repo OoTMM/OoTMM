@@ -8,19 +8,19 @@
 
 #define FLAGS (ACTOR_FLAG_MM_10 | ACTOR_FLAG_MM_20 | ACTOR_FLAG_MM_100000)
 
-void EnTest4_Init(Actor_EnTest4* this, GameState_Play* play);
-void EnTest4_Destroy(Actor_EnTest4* this, GameState_Play* play);
-void EnTest4_Update(Actor_EnTest4* this, GameState_Play* play);
+void EnTest4_Init(Actor_EnTest4* this, PlayState* play);
+void EnTest4_Destroy(Actor_EnTest4* this, PlayState* play);
+void EnTest4_Update(Actor_EnTest4* this, PlayState* play);
 
-void EnTest4_HandleEvents(Actor_EnTest4* this, GameState_Play* play);
-void EnTest4_HandleCutscene(Actor_EnTest4* this, GameState_Play* play);
+void EnTest4_HandleEvents(Actor_EnTest4* this, PlayState* play);
+void EnTest4_HandleCutscene(Actor_EnTest4* this, PlayState* play);
 
 static s32 sIsLoaded = 0;
 
 static s16 sCsIdList[THREEDAY_DAYTIME_MAX];
 static s16 sCurCsId;
 
-void EnTest4_HandleDayNightSwapFromInit(Actor_EnTest4* this, GameState_Play* play)
+void EnTest4_HandleDayNightSwapFromInit(Actor_EnTest4* this, PlayState* play)
 {
     static s16 sNightOfTextIds[] = { 0x1bb4, 0x1bb5, 0x1bb6 };
     static s16 sDawnOfTextIds[] = { 0x1bb2, 0x1bb2, 0x1bb3 };
@@ -76,7 +76,7 @@ void EnTest4_HandleDayNightSwapFromInit(Actor_EnTest4* this, GameState_Play* pla
     }
 }
 
-static void EnTest4_Reload(GameState_Play* play)
+static void EnTest4_Reload(PlayState* play)
 {
     Actor_Player* link;
 
@@ -87,7 +87,7 @@ static void EnTest4_Reload(GameState_Play* play)
     comboTransition(gPlay, gSave.entrance);
 }
 
-void EnTest4_HandleDayNightSwap(Actor_EnTest4* this, GameState_Play* play)
+void EnTest4_HandleDayNightSwap(Actor_EnTest4* this, PlayState* play)
 {
     static s16 sNightOfTextIds[] = { 0x1BB4, 0x1BB5, 0x1BB6 };
     static s16 sDawnOfTextIds[] = { 0x1BB2, 0x1BB2, 0x1BB3 };
@@ -249,7 +249,7 @@ void EnTest4_GetBellTimeOnDay3(Actor_EnTest4* this)
         this->nextBellTime = CLOCK_TIME(6, 0);
 }
 
-void EnTest4_GetBellTimeAndShrinkScreenBeforeDay3(Actor_EnTest4* this, GameState_Play* play)
+void EnTest4_GetBellTimeAndShrinkScreenBeforeDay3(Actor_EnTest4* this, PlayState* play)
 {
     if ((CURRENT_TIME >= CLOCK_TIME(6, 0)) && (CURRENT_TIME < CLOCK_TIME(18, 0)))
     {
@@ -285,7 +285,7 @@ void EnTest4_GetBellTimeAndShrinkScreenBeforeDay3(Actor_EnTest4* this, GameState
     }
 }
 
-void EnTest4_Init(Actor_EnTest4* this, GameState_Play* play)
+void EnTest4_Init(Actor_EnTest4* this, PlayState* play)
 {
     u32 eventDayCount;
     Actor_Player* player = GET_PLAYER(play);
@@ -368,9 +368,9 @@ void EnTest4_Init(Actor_EnTest4* this, GameState_Play* play)
     }
 }
 
-void EnTest4_Destroy(Actor_EnTest4* this, GameState_Play* play) {}
+void EnTest4_Destroy(Actor_EnTest4* this, PlayState* play) {}
 
-void EnTest4_HandleEvents(Actor_EnTest4* this, GameState_Play* play)
+void EnTest4_HandleEvents(Actor_EnTest4* this, PlayState* play)
 {
     static u16 sDayNightTransitionTimes[THREEDAY_DAYTIME_MAX] =
     { CLOCK_TIME(6, 0), CLOCK_TIME(18, 0) };
@@ -473,7 +473,7 @@ void EnTest4_HandleEvents(Actor_EnTest4* this, GameState_Play* play)
     }
 }
 
-void EnTest4_HandleCutscene(Actor_EnTest4* this, GameState_Play* play)
+void EnTest4_HandleCutscene(Actor_EnTest4* this, PlayState* play)
 {
     if (!this->transitionCsTimer)
     {
@@ -527,7 +527,7 @@ void EnTest4_HandleCutscene(Actor_EnTest4* this, GameState_Play* play)
     }
 }
 
-void EnTest4_UpdateWeatherClear(Actor_EnTest4* this, GameState_Play* play)
+void EnTest4_UpdateWeatherClear(Actor_EnTest4* this, PlayState* play)
 {
     if ((gMmSave.day == 2) && (CURRENT_TIME >= CLOCK_TIME(7, 0)) && (CURRENT_TIME < CLOCK_TIME(17, 30)) &&
         (play->envCtx.precipitation[PRECIP_SNOW_CUR] == 0))
@@ -548,7 +548,7 @@ void EnTest4_UpdateWeatherClear(Actor_EnTest4* this, GameState_Play* play)
         this->weather = THREEDAY_WEATHER_RAIN;
 }
 
-void EnTest4_UpdateWeatherRainy(Actor_EnTest4* this, GameState_Play* play)
+void EnTest4_UpdateWeatherRainy(Actor_EnTest4* this, PlayState* play)
 {
     if (((CURRENT_TIME >= CLOCK_TIME(17, 30)) && (CURRENT_TIME < CLOCK_TIME(23, 0)) &&
          (play->envCtx.precipitation[PRECIP_RAIN_MAX] != 0)) ||
@@ -562,7 +562,7 @@ void EnTest4_UpdateWeatherRainy(Actor_EnTest4* this, GameState_Play* play)
         this->weather = THREEDAY_WEATHER_CLEAR;
 }
 
-void EnTest4_SetSkyboxNumStars(Actor_EnTest4* this, GameState_Play* play)
+void EnTest4_SetSkyboxNumStars(Actor_EnTest4* this, PlayState* play)
 {
     s32 numStars = THREEDAY_GET_SKYBOX_NUM_STARS(&this->actor);
 
@@ -570,7 +570,7 @@ void EnTest4_SetSkyboxNumStars(Actor_EnTest4* this, GameState_Play* play)
         gSkyboxNumStars = numStars;
 }
 
-static int EnTest4_TimeSkip(GameState_Play* play, u8* day, u16* time)
+static int EnTest4_TimeSkip(PlayState* play, u8* day, u16* time)
 {
     int currentHalfDay;
     int nextHalfDay;
@@ -633,7 +633,7 @@ static int isNight(u16 time)
     return !!((time < 0x4000) || (time >= 0xc000));
 }
 
-static void EnTest4_CheckTimeSkip(Actor_EnTest4* this, GameState_Play* play)
+static void EnTest4_CheckTimeSkip(Actor_EnTest4* this, PlayState* play)
 {
     u8 day;
     u16 time;
@@ -672,7 +672,7 @@ static void EnTest4_CheckTimeSkip(Actor_EnTest4* this, GameState_Play* play)
     }
 }
 
-void EnTest4_Update(Actor_EnTest4* this, GameState_Play* play)
+void EnTest4_Update(Actor_EnTest4* this, PlayState* play)
 {
     if (!BITMAP8_GET(gSave.eventInf, 0x0f))
         EnTest4_CheckTimeSkip(this, play);

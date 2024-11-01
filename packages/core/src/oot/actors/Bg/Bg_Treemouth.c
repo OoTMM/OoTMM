@@ -3,7 +3,7 @@
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x15c) = (h); } while (0)
 
-static void BgTreemouth_HandlerNull(Actor* this, GameState_Play* play)
+static void BgTreemouth_HandlerNull(Actor* this, PlayState* play)
 {
 }
 

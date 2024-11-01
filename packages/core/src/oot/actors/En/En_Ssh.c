@@ -20,7 +20,7 @@ static void EnSsh_ItemQuery(ComboItemQuery* q, int index, int flags)
     q->ovFlags = flags;
 }
 
-static void EnSsh_Hint(GameState_Play* play, int index)
+static void EnSsh_Hint(PlayState* play, int index)
 {
     ComboItemQuery q;
     char* b;
@@ -40,7 +40,7 @@ static void EnSsh_Hint(GameState_Play* play, int index)
     comboTextAutoLineBreaks(play->msgCtx.textBuffer);
 }
 
-void EnSsh_TalkedTo(Actor* this, GameState_Play* play)
+void EnSsh_TalkedTo(Actor* this, PlayState* play)
 {
     /* Big skulltula */
     if (this->params == 0)

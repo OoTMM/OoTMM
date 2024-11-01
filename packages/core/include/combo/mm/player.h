@@ -8,7 +8,7 @@
 
 struct Actor_Player;
 
-int Player_GetMask(GameState_Play* play);
+int Player_GetMask(PlayState* play);
 
 typedef struct {
     /* 0x00 */ u8 unk_00;
@@ -411,11 +411,11 @@ typedef struct PlayerAgeProperties {
 
 #define PLAYER_LIMB_BUF_SIZE (ALIGN16(sizeof(PlayerAnimationFrame)) + 0xF)
 
-typedef void (*PlayerInitItemActionFunc)(struct GameState_Play* play, struct Actor_Player* this);
+typedef void (*PlayerInitItemActionFunc)(struct PlayState* play, struct Actor_Player* this);
 
-typedef void (*PlayerActionFunc)(struct Actor_Player* this, struct GameState_Play* play);
-typedef s32 (*PlayerUpperActionFunc)(struct Actor_Player* this, struct GameState_Play* play);
-typedef void (*PlayerFuncD58)(struct GameState_Play* play, struct Actor_Player* this);
+typedef void (*PlayerActionFunc)(struct Actor_Player* this, struct PlayState* play);
+typedef s32 (*PlayerUpperActionFunc)(struct Actor_Player* this, struct PlayState* play);
+typedef void (*PlayerFuncD58)(struct PlayState* play, struct Actor_Player* this);
 
 typedef struct Actor_Player
 {

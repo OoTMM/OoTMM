@@ -2,7 +2,7 @@
 #include <combo/item.h>
 #include <combo/actor.h>
 
-void EnKnight_OnDestroy(Actor* this, GameState_Play* play)
+void EnKnight_OnDestroy(Actor* this, PlayState* play)
 {
     Actor* knightMain;
     Actor* knightSide1;

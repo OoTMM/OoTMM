@@ -2,7 +2,7 @@
 #include <combo/item.h>
 #include <combo/inventory.h>
 
-void EnBjt_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+void EnBjt_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b)
 {
     int npc;
 

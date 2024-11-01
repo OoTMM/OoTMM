@@ -6,7 +6,7 @@
 
 typedef struct Actor_EnButte Actor_EnButte;
 
-typedef void (*Actor_EnButteFunc)(Actor_EnButte*, GameState_Play*);
+typedef void (*Actor_EnButteFunc)(Actor_EnButte*, PlayState*);
 
 #define BUTTERFLY_GET(thisx) ((thisx)->params)
 #define BUTTERFLY_GET_1(thisx) ((thisx)->params & 1)

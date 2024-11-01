@@ -42,7 +42,7 @@ static const char* pictoText(void)
     return "picture";
 }
 
-static void PictoHijackText(GameState_Play* play)
+static void PictoHijackText(PlayState* play)
 {
     char* b;
 
@@ -55,7 +55,7 @@ static void PictoHijackText(GameState_Play* play)
     comboTextAppendStr(&b, "?" TEXT_NL TEXT_NL TEXT_CHOICE2 TEXT_COLOR_GREEN "Yes" TEXT_NL "No" TEXT_END);
 }
 
-static void PictoDisplayTextBox(GameState_Play* play, s16 messageId, Actor* actor)
+static void PictoDisplayTextBox(PlayState* play, s16 messageId, Actor* actor)
 {
     if (gPictoboxPhotoTaken == 1)
     {

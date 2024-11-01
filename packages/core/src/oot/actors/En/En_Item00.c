@@ -4,7 +4,7 @@
 #include <combo/config.h>
 #include <combo/draw.h>
 
-static void EnItem00_ItemQuery(ComboItemQuery* q, Actor_EnItem00* this, GameState_Play* play, s16 gi)
+static void EnItem00_ItemQuery(ComboItemQuery* q, Actor_EnItem00* this, PlayState* play, s16 gi)
 {
     memset(q, 0, sizeof(*q));
 
@@ -29,7 +29,7 @@ static void EnItem00_ItemQuery(ComboItemQuery* q, Actor_EnItem00* this, GameStat
     }
 }
 
-void EnItem00_GiveItemDefaultRange(Actor_EnItem00* this, GameState_Play* play, s16 gi)
+void EnItem00_GiveItemDefaultRange(Actor_EnItem00* this, PlayState* play, s16 gi)
 {
     ComboItemQuery q;
     Actor_Player* link;
@@ -58,7 +58,7 @@ void EnItem00_GiveItemDefaultRange(Actor_EnItem00* this, GameState_Play* play, s
 
 PATCH_CALL(0x80012e4c, EnItem00_GiveItemDefaultRange);
 
-void EnItem00_DrawHeartPieceSmallKey(Actor_EnItem00* this, GameState_Play* play)
+void EnItem00_DrawHeartPieceSmallKey(Actor_EnItem00* this, PlayState* play)
 {
     ComboItemQuery q;
     ComboItemOverride o;

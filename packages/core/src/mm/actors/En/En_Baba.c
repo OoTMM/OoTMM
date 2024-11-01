@@ -13,7 +13,7 @@ int EnBaba_HasGiveItem(Actor* this)
 
 PATCH_CALL(0x80ba9ac8, EnBaba_HasGiveItem);
 
-void EnBaba_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnBaba_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 {
     int npc;
 

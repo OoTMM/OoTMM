@@ -10,7 +10,7 @@
 #include <combo/dpad.h>
 #include <combo/inventory.h>
 
-static int checkItemToggle(GameState_Play* play)
+static int checkItemToggle(PlayState* play)
 {
     PauseContext* p;
     Actor_Player* link;
@@ -104,7 +104,7 @@ static int checkItemToggle(GameState_Play* play)
     return ret;
 }
 
-void KaleidoSetCursorColor(GameState_Play* play)
+void KaleidoSetCursorColor(PlayState* play)
 {
     PauseContext* p;
     u8 r;
@@ -157,10 +157,10 @@ void KaleidoSetCursorColor(GameState_Play* play)
     CLOSE_DISPS();
 }
 
-typedef void (*KaleidoScopeHandler)(GameState_Play*);
-typedef void (*KaleidoScopeHandler2)(GameState_Play*, void*);
+typedef void (*KaleidoScopeHandler)(PlayState*);
+typedef void (*KaleidoScopeHandler2)(PlayState*, void*);
 
-static void KaleidoScope_HandleMapDungeonMenu(GameState_Play* play, void* unk, u32 overlayAddr)
+static void KaleidoScope_HandleMapDungeonMenu(PlayState* play, void* unk, u32 overlayAddr)
 {
     KaleidoScopeHandler2 handler;
     int onMenu;
@@ -182,7 +182,7 @@ static void KaleidoScope_HandleMapDungeonMenu(GameState_Play* play, void* unk, u
     }
 }
 
-static void KaleidoScope_HandleMapMenu(GameState_Play* play, void* unk)
+static void KaleidoScope_HandleMapMenu(PlayState* play, void* unk)
 {
     KaleidoScope_HandleMapDungeonMenu(play, unk, 0x8081ce54);
 }
@@ -190,7 +190,7 @@ static void KaleidoScope_HandleMapMenu(GameState_Play* play, void* unk)
 PATCH_CALL(0x80820850, KaleidoScope_HandleMapMenu);
 PATCH_CALL(0x80820b48, KaleidoScope_HandleMapMenu);
 
-static void KaleidoScope_HandleDungeonMenu(GameState_Play* play, void* unk)
+static void KaleidoScope_HandleDungeonMenu(PlayState* play, void* unk)
 {
     KaleidoScope_HandleMapDungeonMenu(play, unk, 0x8081b660);
 }
@@ -198,7 +198,7 @@ static void KaleidoScope_HandleDungeonMenu(GameState_Play* play, void* unk)
 PATCH_CALL(0x808207e4, KaleidoScope_HandleDungeonMenu);
 PATCH_CALL(0x80820ac4, KaleidoScope_HandleDungeonMenu);
 
-static void KaleidoScope_HandleDungeonChests(GameState_Play* play)
+static void KaleidoScope_HandleDungeonChests(PlayState* play)
 {
     KaleidoScopeHandler handler;
 
@@ -489,7 +489,7 @@ static u32 sCursorTexs[] = {
     0x08000000 + 0x5C2C0,
 };
 
-static void KaleidoScope_UpdateSoaringMapCursor(GameState_Play* play)
+static void KaleidoScope_UpdateSoaringMapCursor(PlayState* play)
 {
     PauseContext* pauseCtx = &play->pauseCtx;
     s16 oldCursorPoint;
@@ -551,7 +551,7 @@ static void LoadMapName(void* dst, u32 mapNameId)
     DmaCompressed(romAddr + headerSize + offsets[0], dst, size);
 }
 
-static void KaleidoScope_UpdateOwlWarpNamePanel(GameState_Play* play)
+static void KaleidoScope_UpdateOwlWarpNamePanel(PlayState* play)
 {
     PauseContext* pauseCtx;
     u16 texIndex;
@@ -578,7 +578,7 @@ static void KaleidoScope_UpdateOwlWarpNamePanel(GameState_Play* play)
 
 static u32 sMapPageBgTextures[15];
 
-void KaleidoScope_BeforeUpdate(GameState_Play* play)
+void KaleidoScope_BeforeUpdate(PlayState* play)
 {
     u32 size;
     static s16 sStickXRepeatTimer = 0;
@@ -790,7 +790,7 @@ void KaleidoScope_BeforeUpdate(GameState_Play* play)
     }
 }
 
-static void KaleidoScope_DrawWorldMap(GameState_Play* play) {
+static void KaleidoScope_DrawWorldMap(PlayState* play) {
     s16 n;
     s16 j;
     s16 k;
@@ -919,7 +919,7 @@ static void KaleidoScope_DrawWorldMap(GameState_Play* play) {
 
 typedef Gfx* (*KaleidoScope_DrawPageSections_Func)(Gfx*, Vtx*, void*);
 
-static void KaleidoScope_DrawOwlWarpMapPage(GameState_Play* play)
+static void KaleidoScope_DrawOwlWarpMapPage(PlayState* play)
 {
     PauseContext* pauseCtx = &play->pauseCtx;
 
@@ -947,7 +947,7 @@ static void KaleidoScope_DrawOwlWarpMapPage(GameState_Play* play)
     CLOSE_DISPS();
 }
 
-static void KaleidoScope_DrawOwlWarpInfoPanel(GameState_Play* play)
+static void KaleidoScope_DrawOwlWarpInfoPanel(PlayState* play)
 {
     static s16 sPauseLRCursorColorTargets[][4] = {
         { 180, 210, 255, 220 },
@@ -1155,7 +1155,7 @@ static void KaleidoScope_DrawOwlWarpInfoPanel(GameState_Play* play)
     CLOSE_DISPS();
 }
 
-static void KaleidoScope_DrawCursor(GameState_Play* play) {
+static void KaleidoScope_DrawCursor(PlayState* play) {
     PauseContext* pauseCtx = &play->pauseCtx;
     s16 i;
     s16 stepR;
@@ -1266,7 +1266,7 @@ static void KaleidoScope_DrawCursor(GameState_Play* play) {
     CLOSE_DISPS();
 }
 
-static void KaleidoScope_UpdateCursorSize(GameState_Play* play)
+static void KaleidoScope_UpdateCursorSize(PlayState* play)
 {
     PauseContext* pauseCtx = &play->pauseCtx;
 
@@ -1321,7 +1321,7 @@ static void KaleidoScope_UpdateCursorSize(GameState_Play* play)
     sCursorCirclesY[3] = Math_CosS(sCursorSpinPhase + 0xC000) * sCursorHeight;
 }
 
-static s16 KaleidoScope_SetPageVertices(GameState_Play* play, Vtx* vtx, s16 vtxPage, s16 numQuads) {
+static s16 KaleidoScope_SetPageVertices(PlayState* play, Vtx* vtx, s16 vtxPage, s16 numQuads) {
     PauseContext* pauseCtx = &play->pauseCtx;
     s16* quadsX;
     s16* quadsWidth;
@@ -1403,7 +1403,7 @@ static s16 KaleidoScope_SetPageVertices(GameState_Play* play, Vtx* vtx, s16 vtxP
     return k;
 }
 
-static void KaleidoScope_SetVertices(GameState_Play* play, GfxContext* gfxCtx)
+static void KaleidoScope_SetVertices(PlayState* play, GfxContext* gfxCtx)
 {
     PauseContext* pauseCtx = &play->pauseCtx;
     s16 i;
@@ -1499,7 +1499,7 @@ static void KaleidoScope_SetVertices(GameState_Play* play, GfxContext* gfxCtx)
 typedef void (*KaleidoScope_SetView_Func)(PauseContext*, f32, f32, f32);
 
 /* Returns true if called shouldn't draw menu */
-s32 KaleidoScope_BeforeDraw(GameState_Play* play)
+s32 KaleidoScope_BeforeDraw(PlayState* play)
 {
     PauseContext* pauseCtx = &play->pauseCtx;
     if (pauseCtx->debugState)
@@ -1595,7 +1595,7 @@ static Vtx* gVertex[4] = {
     &gVertexBufs[(4 * 3) * 2],
 };
 
-static Vtx* GetVtxBuffer(GameState_Play* play, u32 vertIdx, u32 slot) {
+static Vtx* GetVtxBuffer(PlayState* play, u32 vertIdx, u32 slot) {
     /* Get vertex of current icon drawing to Item Select screen */
     const Vtx* srcVtx = play->pauseCtx.itemVtx + vertIdx;
 
@@ -1697,13 +1697,13 @@ void KaleidoScope_LoadItemName(void* dst, s16 id)
     }
 }
 
-void KaleidoScope_DrawQuadEquipment(GameState_Play* play, u32 dlist, int w, int h, int flags)
+void KaleidoScope_DrawQuadEquipment(PlayState* play, u32 dlist, int w, int h, int flags)
 {
     static void* customKokiriSwordTexture;
     static u8 customKokiriSwordId;
     static u8 customKokiSwordAge;
 
-    void (*KaleidoScope_DrawQuadTextureRGBA32)(GameState_Play*, u32, int, int, int);
+    void (*KaleidoScope_DrawQuadTextureRGBA32)(PlayState*, u32, int, int, int);
 
     if (dlist == 0x0803b000 && gSharedCustomSave.extraSwordsOot)
     {

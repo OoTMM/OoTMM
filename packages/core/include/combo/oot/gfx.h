@@ -13,7 +13,7 @@ typedef struct PACKED ALIGNED(4) GfxContext
     DisplayListBuffer   polyXlu;
     u32                 displayListCounter;
     char                unk_2dc[0x14];
-    GameState_Play*     play;
+    PlayState*     play;
 }
 GfxContext;
 

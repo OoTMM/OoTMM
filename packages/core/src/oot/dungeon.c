@@ -2,7 +2,7 @@
 #include <combo/dungeon.h>
 #include <combo/config.h>
 
-int comboCurrentDungeon(GameState_Play* play)
+int comboCurrentDungeon(PlayState* play)
 {
     switch (play->sceneId)
     {

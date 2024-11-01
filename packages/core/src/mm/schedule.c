@@ -2,7 +2,7 @@
 
 u8 gScheduleXitemFlags;
 
-int Schedule_CheckMiscSWrapper(GameState_Play* play, void* unk)
+int Schedule_CheckMiscSWrapper(PlayState* play, void* unk)
 {
     gScheduleXitemFlags = 0;
     if (gMmExtraTrade.trade2 & (1 << XITEM_MM_TRADE2_ROOM_KEY))

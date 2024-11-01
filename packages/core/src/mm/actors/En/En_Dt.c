@@ -1,7 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 
-void EnDt_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnDt_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 {
     comboGiveItemNpc(this, play, gi, NPC_MM_MAYOR_HEART_PIECE, a, b);
 }

@@ -3,7 +3,7 @@
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x180) = (h); } while (0)
 
-static int EnWallmas_GetDestEr(Actor* this, GameState_Play* play)
+static int EnWallmas_GetDestEr(Actor* this, PlayState* play)
 {
     u8 room;
 
@@ -45,7 +45,7 @@ static int EnWallmas_GetDestEr(Actor* this, GameState_Play* play)
     }
 }
 
-void EnWallmas_TakePlayerEr(GameState_Play* play, Actor* this)
+void EnWallmas_TakePlayerEr(PlayState* play, Actor* this)
 {
     play->nextEntranceIndex = EnWallmas_GetDestEr(this, play);
     play->transitionTrigger = TRANS_TRIGGER_NORMAL;

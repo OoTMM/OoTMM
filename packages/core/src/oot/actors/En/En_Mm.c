@@ -6,13 +6,13 @@
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x180) = (h); } while (0)
 
-static void EnMm_AfterMaskTrade(Actor* this, GameState_Play* play)
+static void EnMm_AfterMaskTrade(Actor* this, PlayState* play)
 {
     gSave.eventsItem[3] |= 0x800;
     SET_HANDLER(this, actorAddr(AC_EN_MM, 0x80ad111c));
 }
 
-static void EnMm_MaskTradeCheck(Actor* this, GameState_Play* play)
+static void EnMm_MaskTradeCheck(Actor* this, PlayState* play)
 {
     Actor_Player* link;
 
@@ -30,13 +30,13 @@ static void EnMm_MaskTradeCheck(Actor* this, GameState_Play* play)
     comboGiveItemNpc(this, play, GI_OOT_RUPEE_RAINBOW, NPC_OOT_MASK_SELL_BUNNY, 16384.f, 16384.f);
 }
 
-static void EnMm_MaskTradeRupees(Actor* this, GameState_Play* play)
+static void EnMm_MaskTradeRupees(Actor* this, PlayState* play)
 {
     AddRupees(500);
     EnMm_AfterMaskTrade(this, play);
 }
 
-static void EnMm_InitMaskTrade(Actor* this, GameState_Play* play)
+static void EnMm_InitMaskTrade(Actor* this, PlayState* play)
 {
     ActorFunc func;
 

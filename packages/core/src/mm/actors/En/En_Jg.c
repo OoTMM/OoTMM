@@ -7,7 +7,7 @@ void EnJg_HandlerNull(void)
 {
 }
 
-void EnJg_LearnSongGoronIntro(Actor* this, GameState_Play* play)
+void EnJg_LearnSongGoronIntro(Actor* this, PlayState* play)
 {
     if (gMmExtraFlags.songGoronIntro)
     {

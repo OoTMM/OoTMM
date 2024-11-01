@@ -44,7 +44,7 @@ GameOverContext;
 
 ASSERT_SIZE(GameOverContext, 0x4);
 
-typedef struct GameState_Play
+typedef struct PlayState
 {
     GameState              gs;
     u16                    sceneId;
@@ -71,15 +71,15 @@ typedef struct GameState_Play
     RoomContext            roomCtx;
     TransitionActorContext transiActorCtx;
 
-    void (*playerInit)(Actor_Player* player, struct GameState_Play* play, FlexSkeletonHeader* skelHeader);
-    void (*playerUpdate)(Actor_Player* player, struct GameState_Play* play, Input* input);
-    int (*isPlayerDroppingFish)(struct GameState_Play* play);
-    s32 (*startPlayerFishing)(struct GameState_Play* play);
-    s32 (*grabPlayer)(struct GameState_Play* play, Actor_Player* player);
-    s32 (*tryPlayerCsAction)(struct GameState_Play* play, Actor* actor, s32 csAction);
-    void (*func_11D54)(Actor_Player* player, struct GameState_Play* play);
-    s32 (*damagePlayer)(struct GameState_Play* play, s32 damage);
-    void (*talkWithPlayer)(struct GameState_Play* play, Actor* actor);
+    void (*playerInit)(Actor_Player* player, struct PlayState* play, FlexSkeletonHeader* skelHeader);
+    void (*playerUpdate)(Actor_Player* player, struct PlayState* play, Input* input);
+    int (*isPlayerDroppingFish)(struct PlayState* play);
+    s32 (*startPlayerFishing)(struct PlayState* play);
+    s32 (*grabPlayer)(struct PlayState* play, Actor_Player* player);
+    s32 (*tryPlayerCsAction)(struct PlayState* play, Actor* actor, s32 csAction);
+    void (*func_11D54)(Actor_Player* player, struct PlayState* play);
+    s32 (*damagePlayer)(struct PlayState* play, s32 damage);
+    void (*talkWithPlayer)(struct PlayState* play, Actor* actor);
 
     MtxF                    viewProjectionMtxF;
     MtxF                    billboardMtxF;
@@ -111,59 +111,59 @@ typedef struct GameState_Play
     CollisionCheckContext   colChkCtx;
     char                    unk_120fc[0x41c];
 }
-GameState_Play;
+PlayState;
 
-ASSERT_SIZE(GameState_Play, 0x12518);
-ASSERT_OFFSET(GameState_Play, sceneSegment,             0x000b0);
-ASSERT_OFFSET(GameState_Play, colCtx,                   0x007c0);
-ASSERT_OFFSET(GameState_Play, actorCtx,                 0x01c24);
-ASSERT_OFFSET(GameState_Play, cutscene,                 0x01d64);
-ASSERT_OFFSET(GameState_Play, msgCtx,                   0x020d8);
-ASSERT_OFFSET(GameState_Play, interfaceCtx,             0x104f0);
-ASSERT_OFFSET(GameState_Play, pauseCtx,                 0x10760);
-ASSERT_OFFSET(GameState_Play, gameOverCtx,              0x10a20);
-ASSERT_OFFSET(GameState_Play, envCtx,                   0x10a24);
-ASSERT_OFFSET(GameState_Play, objectCtx,                0x117a4);
-ASSERT_OFFSET(GameState_Play, roomCtx,                  0x11cbc);
-ASSERT_OFFSET(GameState_Play, transiActorCtx,           0x11d34);
-ASSERT_OFFSET(GameState_Play, transitionTrigger,        0x11e15);
-ASSERT_OFFSET(GameState_Play, nextEntranceIndex,        0x11e1a);
-ASSERT_OFFSET(GameState_Play, playerInit,               0x11d3c);
-ASSERT_OFFSET(GameState_Play, playerUpdate,             0x11d40);
-ASSERT_OFFSET(GameState_Play, isPlayerDroppingFish,     0x11d44);
-ASSERT_OFFSET(GameState_Play, startPlayerFishing,       0x11d48);
-ASSERT_OFFSET(GameState_Play, grabPlayer,               0x11d4c);
-ASSERT_OFFSET(GameState_Play, tryPlayerCsAction,        0x11d50);
-ASSERT_OFFSET(GameState_Play, func_11D54,               0x11d54);
-ASSERT_OFFSET(GameState_Play, damagePlayer,             0x11d58);
-ASSERT_OFFSET(GameState_Play, talkWithPlayer,           0x11d5c);
-ASSERT_OFFSET(GameState_Play, viewProjectionMtxF,       0x11d60);
-ASSERT_OFFSET(GameState_Play, billboardMtxF,            0x11da0);
-ASSERT_OFFSET(GameState_Play, billboardMtx,             0x11de0);
-ASSERT_OFFSET(GameState_Play, gameplayFrames,           0x11de4);
-ASSERT_OFFSET(GameState_Play, linkAgeOnLoad,            0x11de8);
-ASSERT_OFFSET(GameState_Play, haltAllActors,            0x11de9);
-ASSERT_OFFSET(GameState_Play, spawn,                    0x11dea);
-ASSERT_OFFSET(GameState_Play, numActorEntries,          0x11deb);
-ASSERT_OFFSET(GameState_Play, numRooms,                 0x11dec);
-ASSERT_OFFSET(GameState_Play, roomList,                 0x11df0);
-ASSERT_OFFSET(GameState_Play, playerEntry,              0x11df4);
-ASSERT_OFFSET(GameState_Play, actorEntryList,           0x11df8);
-ASSERT_OFFSET(GameState_Play, unk_11DFC,                0x11dfc);
-ASSERT_OFFSET(GameState_Play, spawnList,                0x11e00);
-ASSERT_OFFSET(GameState_Play, exitList,                 0x11e04);
-ASSERT_OFFSET(GameState_Play, pathList,                 0x11e08);
-ASSERT_OFFSET(GameState_Play, naviQuestHints,           0x11e0c);
-ASSERT_OFFSET(GameState_Play, specialEffects,           0x11e10);
-ASSERT_OFFSET(GameState_Play, skyboxId,                 0x11e14);
-ASSERT_OFFSET(GameState_Play, transitionTrigger,        0x11e15);
-ASSERT_OFFSET(GameState_Play, unk_11E16,                0x11e16);
-ASSERT_OFFSET(GameState_Play, bgCoverAlpha,             0x11e18);
-ASSERT_OFFSET(GameState_Play, nextEntranceIndex,        0x11e1a);
-ASSERT_OFFSET(GameState_Play, unk_11E1C,                0x11e1c);
-ASSERT_OFFSET(GameState_Play, shootingGalleryStatus,    0x11e5c);
-ASSERT_OFFSET(GameState_Play, bombchuBowlingStatus,     0x11e5d);
-ASSERT_OFFSET(GameState_Play, transitionType,           0x11e5e);
+ASSERT_SIZE(PlayState, 0x12518);
+ASSERT_OFFSET(PlayState, sceneSegment,             0x000b0);
+ASSERT_OFFSET(PlayState, colCtx,                   0x007c0);
+ASSERT_OFFSET(PlayState, actorCtx,                 0x01c24);
+ASSERT_OFFSET(PlayState, cutscene,                 0x01d64);
+ASSERT_OFFSET(PlayState, msgCtx,                   0x020d8);
+ASSERT_OFFSET(PlayState, interfaceCtx,             0x104f0);
+ASSERT_OFFSET(PlayState, pauseCtx,                 0x10760);
+ASSERT_OFFSET(PlayState, gameOverCtx,              0x10a20);
+ASSERT_OFFSET(PlayState, envCtx,                   0x10a24);
+ASSERT_OFFSET(PlayState, objectCtx,                0x117a4);
+ASSERT_OFFSET(PlayState, roomCtx,                  0x11cbc);
+ASSERT_OFFSET(PlayState, transiActorCtx,           0x11d34);
+ASSERT_OFFSET(PlayState, transitionTrigger,        0x11e15);
+ASSERT_OFFSET(PlayState, nextEntranceIndex,        0x11e1a);
+ASSERT_OFFSET(PlayState, playerInit,               0x11d3c);
+ASSERT_OFFSET(PlayState, playerUpdate,             0x11d40);
+ASSERT_OFFSET(PlayState, isPlayerDroppingFish,     0x11d44);
+ASSERT_OFFSET(PlayState, startPlayerFishing,       0x11d48);
+ASSERT_OFFSET(PlayState, grabPlayer,               0x11d4c);
+ASSERT_OFFSET(PlayState, tryPlayerCsAction,        0x11d50);
+ASSERT_OFFSET(PlayState, func_11D54,               0x11d54);
+ASSERT_OFFSET(PlayState, damagePlayer,             0x11d58);
+ASSERT_OFFSET(PlayState, talkWithPlayer,           0x11d5c);
+ASSERT_OFFSET(PlayState, viewProjectionMtxF,       0x11d60);
+ASSERT_OFFSET(PlayState, billboardMtxF,            0x11da0);
+ASSERT_OFFSET(PlayState, billboardMtx,             0x11de0);
+ASSERT_OFFSET(PlayState, gameplayFrames,           0x11de4);
+ASSERT_OFFSET(PlayState, linkAgeOnLoad,            0x11de8);
+ASSERT_OFFSET(PlayState, haltAllActors,            0x11de9);
+ASSERT_OFFSET(PlayState, spawn,                    0x11dea);
+ASSERT_OFFSET(PlayState, numActorEntries,          0x11deb);
+ASSERT_OFFSET(PlayState, numRooms,                 0x11dec);
+ASSERT_OFFSET(PlayState, roomList,                 0x11df0);
+ASSERT_OFFSET(PlayState, playerEntry,              0x11df4);
+ASSERT_OFFSET(PlayState, actorEntryList,           0x11df8);
+ASSERT_OFFSET(PlayState, unk_11DFC,                0x11dfc);
+ASSERT_OFFSET(PlayState, spawnList,                0x11e00);
+ASSERT_OFFSET(PlayState, exitList,                 0x11e04);
+ASSERT_OFFSET(PlayState, pathList,                 0x11e08);
+ASSERT_OFFSET(PlayState, naviQuestHints,           0x11e0c);
+ASSERT_OFFSET(PlayState, specialEffects,           0x11e10);
+ASSERT_OFFSET(PlayState, skyboxId,                 0x11e14);
+ASSERT_OFFSET(PlayState, transitionTrigger,        0x11e15);
+ASSERT_OFFSET(PlayState, unk_11E16,                0x11e16);
+ASSERT_OFFSET(PlayState, bgCoverAlpha,             0x11e18);
+ASSERT_OFFSET(PlayState, nextEntranceIndex,        0x11e1a);
+ASSERT_OFFSET(PlayState, unk_11E1C,                0x11e1c);
+ASSERT_OFFSET(PlayState, shootingGalleryStatus,    0x11e5c);
+ASSERT_OFFSET(PlayState, bombchuBowlingStatus,     0x11e5d);
+ASSERT_OFFSET(PlayState, transitionType,           0x11e5e);
 
 typedef struct
 {

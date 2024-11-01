@@ -19,7 +19,7 @@ int EnKgy_HasGivenItem(Actor* this)
 
 PATCH_CALL(0x80b41d84, EnKgy_HasGivenItem);
 
-void EnKgy_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnKgy_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 {
     int npc;
 

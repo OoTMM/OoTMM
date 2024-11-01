@@ -5,7 +5,7 @@
 
 #define CLOCK_TIME(hr, min) ((s32)(((hr) * 60 + (min)) * (f32)0x10000 / (24 * 60) + 0.5f))
 
-typedef struct GameState_Play GameState_Play;
+typedef struct PlayState PlayState;
 
 u32     Time_Game2Linear(u8 day, u16 time);
 void    Time_Linear2Game(u8* day, u16* time, u32 linear);

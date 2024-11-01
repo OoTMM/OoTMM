@@ -2,7 +2,7 @@
 #include <combo/item.h>
 #include <combo/shop.h>
 
-static int EnOssan_HasGiveItem(Actor_EnOssan* this, GameState_Play* play)
+static int EnOssan_HasGiveItem(Actor_EnOssan* this, PlayState* play)
 {
     if (!Actor_HasParentZ(&this->base))
         return 0;
@@ -13,7 +13,7 @@ static int EnOssan_HasGiveItem(Actor_EnOssan* this, GameState_Play* play)
 
 PATCH_CALL(0x808aa2d8, EnOssan_HasGiveItem);
 
-static void EnOssan_GiveItem(Actor_EnOssan* this, GameState_Play* play, s16 gi, float a, float b)
+static void EnOssan_GiveItem(Actor_EnOssan* this, PlayState* play, s16 gi, float a, float b)
 {
     ComboItemQuery q;
     Actor_EnGirlA* girlA;

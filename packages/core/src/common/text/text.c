@@ -1086,7 +1086,7 @@ static int isSoldOut(s16 gi)
     return (gi == GI_MM_SOLD_OUT);
 }
 
-void comboTextHijackItemShop(GameState_Play* play, const ComboItemOverride* o, s16 price, int flags)
+void comboTextHijackItemShop(PlayState* play, const ComboItemOverride* o, s16 price, int flags)
 {
     char* b;
 
@@ -1125,7 +1125,7 @@ void comboTextHijackItemShop(GameState_Play* play, const ComboItemOverride* o, s
 }
 
 #if defined(GAME_OOT)
-void comboMessageCancel(GameState_Play* play)
+void comboMessageCancel(PlayState* play)
 {
     u8* ctx = (u8*)(void*)&play->msgCtx;
 
@@ -1139,7 +1139,7 @@ void comboMessageCancel(GameState_Play* play)
 #endif
 
 #if defined(GAME_MM)
-void comboTextHijackDungeonRewardHints(GameState_Play* play, int hint)
+void comboTextHijackDungeonRewardHints(PlayState* play, int hint)
 {
     const ItemHint* ih;
     char* b;
@@ -1156,7 +1156,7 @@ void comboTextHijackDungeonRewardHints(GameState_Play* play, int hint)
 #endif
 
 #if defined(GAME_OOT)
-void comboTextHijackLightArrows(GameState_Play* play)
+void comboTextHijackLightArrows(PlayState* play)
 {
     char* b;
 
@@ -1172,7 +1172,7 @@ void comboTextHijackLightArrows(GameState_Play* play)
 #endif
 
 #if defined(GAME_MM)
-void comboTextHijackOathToOrder(GameState_Play* play)
+void comboTextHijackOathToOrder(PlayState* play)
 {
     char* b;
     char* start;
@@ -1200,7 +1200,7 @@ void comboTextAppendNpcReward(char** b, s16 npcId, s16 gi, int importance)
     comboTextAppendItemNameQueryEx(b, &q, TF_PREPOS | TF_PROGRESSIVE, importance);
 }
 
-void comboTextMessageCantBuy(GameState_Play* play, int flags)
+void comboTextMessageCantBuy(PlayState* play, int flags)
 {
     char* b;
     char* start;
@@ -1269,7 +1269,7 @@ void comboTextAppendItemImportance(char** b, s16 gi, int importance)
 }
 
 #if defined(GAME_OOT)
-void comboTextHijackFishCaught(GameState_Play* play, const ComboItemOverride* o)
+void comboTextHijackFishCaught(PlayState* play, const ComboItemOverride* o)
 {
     char* b;
     char* start;

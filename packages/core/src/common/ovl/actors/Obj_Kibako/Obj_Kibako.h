@@ -6,7 +6,7 @@
 
 typedef struct Actor_ObjKibako Actor_ObjKibako;
 
-typedef void (*Actor_ObjKibakoFunc)(Actor_ObjKibako*, GameState_Play*);
+typedef void (*Actor_ObjKibakoFunc)(Actor_ObjKibako*, PlayState*);
 
 typedef struct Actor_ObjKibako
 {

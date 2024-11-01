@@ -12,7 +12,7 @@ void EnPm_AfterGivingItem(Actor* this)
     }
 }
 
-void EnPm_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnPm_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 {
     int npc;
 

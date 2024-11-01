@@ -6,7 +6,7 @@
 
 struct Actor_ArmsHook;
 
-typedef void (*ArmsHookActionFunc)(struct Actor_ArmsHook*, GameState_Play*);
+typedef void (*ArmsHookActionFunc)(struct Actor_ArmsHook*, PlayState*);
 
 typedef struct Actor_ArmsHook {
     /* 0x000 */ Actor actor;

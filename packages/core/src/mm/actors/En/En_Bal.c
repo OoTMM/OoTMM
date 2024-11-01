@@ -22,7 +22,7 @@ static u8 kTingleNpc[] = {
     NPC_MM_TINGLE_MAP_STONE_TOWER,
 };
 
-static int EnBal_GetTingleId(GameState_Play* play)
+static int EnBal_GetTingleId(PlayState* play)
 {
     switch (play->sceneId)
     {
@@ -66,7 +66,7 @@ static void EnBal_ItemOverride(ComboItemOverride* o, int mapId)
     comboItemOverride(o, &q);
 }
 
-static int EnBal_HasGivenItem(Actor* this, GameState_Play* play)
+static int EnBal_HasGivenItem(Actor* this, PlayState* play)
 {
     s16 mapId;
 
@@ -81,7 +81,7 @@ static int EnBal_HasGivenItem(Actor* this, GameState_Play* play)
 
 PATCH_CALL(0x80a6352c, EnBal_HasGivenItem);
 
-static void EnBal_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+static void EnBal_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 {
     ComboItemQuery q;
     s16 mapId;
@@ -93,11 +93,11 @@ static void EnBal_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, f
 
 PATCH_CALL(0x80a635c4, EnBal_GiveItem);
 
-static int EnBal_AlreadyBoughtItemWrapper(Actor* this, GameState_Play* play)
+static int EnBal_AlreadyBoughtItemWrapper(Actor* this, PlayState* play)
 {
     ComboItemQuery q;
     ComboItemOverride o;
-    int (*EnBal_AlreadyBoughtItem)(Actor*, GameState_Play*);
+    int (*EnBal_AlreadyBoughtItem)(Actor*, PlayState*);
     int precond;
     s16 mapId;
 
@@ -143,7 +143,7 @@ static void EnBal_OverrideTextMapName(char** b, int mapId, int price)
     }
 }
 
-static void EnBal_DisplayBuyTextBox(GameState_Play* play, u16 messageId, Actor* this)
+static void EnBal_DisplayBuyTextBox(PlayState* play, u16 messageId, Actor* this)
 {
     int tingleId;
     char* b;

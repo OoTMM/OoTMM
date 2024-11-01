@@ -4,7 +4,7 @@
 
 static u32 lastClimbFrame = 0;
 static u32 startClimbingTimer = 5;
-u32 Player_GetCollisionType(Actor_Player* link, GameState_Play* ctxt, u32 collisionType) {
+u32 Player_GetCollisionType(Actor_Player* link, PlayState* ctxt, u32 collisionType) {
     if (!Config_Flag(CFG_MM_CLIMB_MOST_SURFACES)) {
         return collisionType;
     }

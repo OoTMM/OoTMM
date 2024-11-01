@@ -5,7 +5,7 @@
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x144) = (h); } while (0)
 
-void EnSi_WaitForPlayerToCloseMessage(Actor* this, GameState_Play* play)
+void EnSi_WaitForPlayerToCloseMessage(Actor* this, PlayState* play)
 {
     if (Message_IsClosed(this, play))
     {
@@ -18,7 +18,7 @@ void EnSi_WaitForPlayerToCloseMessage(Actor* this, GameState_Play* play)
     }
 }
 
-static void EnSi_ItemQuery(ComboItemQuery* q, Actor* this, GameState_Play* play)
+static void EnSi_ItemQuery(ComboItemQuery* q, Actor* this, PlayState* play)
 {
     bzero(q, sizeof(*q));
     q->ovType = OV_CHEST;
@@ -27,7 +27,7 @@ static void EnSi_ItemQuery(ComboItemQuery* q, Actor* this, GameState_Play* play)
     q->gi = play->sceneId == SCE_MM_SPIDER_HOUSE_OCEAN ? GI_MM_GS_TOKEN_OCEAN : GI_MM_GS_TOKEN_SWAMP;
 }
 
-void EnSi_ItemOverride(ComboItemOverride* o, Actor* this, GameState_Play* play)
+void EnSi_ItemOverride(ComboItemOverride* o, Actor* this, PlayState* play)
 {
     ComboItemQuery q;
 
@@ -35,7 +35,7 @@ void EnSi_ItemOverride(ComboItemOverride* o, Actor* this, GameState_Play* play)
     comboItemOverride(o, &q);
 }
 
-void EnSi_AddItem(Actor* this, GameState_Play* play)
+void EnSi_AddItem(Actor* this, PlayState* play)
 {
     ComboItemOverride o;
     ComboItemQuery q;
@@ -53,7 +53,7 @@ void EnSi_AddItem(Actor* this, GameState_Play* play)
 
 PATCH_FUNC(0x8098cad0, EnSi_AddItem);
 
-void EnSi_Draw(Actor* this, GameState_Play* play)
+void EnSi_Draw(Actor* this, PlayState* play)
 {
     ComboItemOverride o;
 

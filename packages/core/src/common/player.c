@@ -1,7 +1,7 @@
 #include <combo.h>
 #include <combo/player.h>
 
-void Player_Freeze(GameState_Play* play)
+void Player_Freeze(PlayState* play)
 {
     Actor_Player* link;
     link = GET_PLAYER(play);
@@ -9,7 +9,7 @@ void Player_Freeze(GameState_Play* play)
     link->state |= PLAYER_ACTOR_STATE_FROZEN;
 }
 
-void Player_Unfreeze(GameState_Play* play)
+void Player_Unfreeze(PlayState* play)
 {
     Actor_Player* link;
     link = GET_PLAYER(play);

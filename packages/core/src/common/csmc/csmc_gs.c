@@ -91,7 +91,7 @@ static int csmcGsId(s16 gi)
     }
 }
 
-void csmcGsPreDraw(GameState_Play* play, s16 gi)
+void csmcGsPreDraw(PlayState* play, s16 gi)
 {
     int id;
 

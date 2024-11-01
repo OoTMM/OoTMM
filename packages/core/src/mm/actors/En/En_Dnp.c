@@ -1,6 +1,6 @@
 #include <combo.h>
 
-static void EnDnp_KingCutscene(Actor* this, GameState_Play* play)
+static void EnDnp_KingCutscene(Actor* this, PlayState* play)
 {
     play->nextEntrance = ((SCE_MM_DEKU_KING_CHAMBER - 3) << 9);
     play->transitionTrigger = TRANS_TRIGGER_NORMAL;

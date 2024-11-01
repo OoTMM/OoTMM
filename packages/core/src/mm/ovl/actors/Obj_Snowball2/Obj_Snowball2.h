@@ -6,7 +6,7 @@
 
 struct Actor_ObjSnowball2;
 
-typedef void (*Actor_ObjSnowball2ActionFunc)(struct Actor_ObjSnowball2*, GameState_Play*);
+typedef void (*Actor_ObjSnowball2ActionFunc)(struct Actor_ObjSnowball2*, PlayState*);
 
 typedef struct Actor_ObjSnowball2
 {

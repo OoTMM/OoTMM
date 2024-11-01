@@ -8,7 +8,7 @@
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x1ac) = (h); } while (0)
 
-static void sendNetOwl(GameState_Play* play, int owlId)
+static void sendNetOwl(PlayState* play, int owlId)
 {
     NetContext* net;
     int npc;
@@ -44,10 +44,10 @@ static void sendNetOwl(GameState_Play* play, int owlId)
     BITMAP8_SET(gSharedCustomSave.mm.npc, npc);
 }
 
-void ObjWarpstone_GiveItem(Actor* this, GameState_Play* play)
+void ObjWarpstone_GiveItem(Actor* this, PlayState* play)
 {
     Actor_Player* link;
-    void (*next)(Actor*, GameState_Play*);
+    void (*next)(Actor*, PlayState*);
     int npc;
     s16 gi;
     u8 id;
@@ -92,7 +92,7 @@ void ObjWarpstone_GiveItem(Actor* this, GameState_Play* play)
     comboGiveItemNpc(this, play, gi, npc, 9999.f, 9999.f);
 }
 
-static void ObjWarpstone_Text(GameState_Play* play)
+static void ObjWarpstone_Text(PlayState* play)
 {
     char* b;
 
@@ -101,7 +101,7 @@ static void ObjWarpstone_Text(GameState_Play* play)
     comboTextAppendStr(&b, "Save the game and keep playing?" TEXT_NL TEXT_NL TEXT_CHOICE2 TEXT_COLOR_GREEN "Yes" TEXT_NL "No" TEXT_END);
 }
 
-int ObjWarpstone_TalkedTo(Actor* this, GameState_Play* play)
+int ObjWarpstone_TalkedTo(Actor* this, PlayState* play)
 {
     if (ActorTalkedTo(this))
     {
@@ -113,7 +113,7 @@ int ObjWarpstone_TalkedTo(Actor* this, GameState_Play* play)
 
 PATCH_CALL(0x80b92ea8, ObjWarpstone_TalkedTo);
 
-void ObjWarpstone_Save(GameState_Play* play)
+void ObjWarpstone_Save(PlayState* play)
 {
     Save_DoSave(play, SF_OWL);
     PlaySound(0x4823);

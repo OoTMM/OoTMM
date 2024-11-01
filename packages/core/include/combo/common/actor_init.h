@@ -3,9 +3,9 @@
 
 #include <combo/types.h>
 
-typedef struct GameState_Play GameState_Play;
+typedef struct PlayState PlayState;
 typedef struct Actor Actor;
-typedef void (*ActorFunc)(Actor*, GameState_Play*);
+typedef void (*ActorFunc)(Actor*, PlayState*);
 
 typedef struct
 {

@@ -73,7 +73,7 @@ void OnRoomChange(void* arg1, void* arg2)
     OnRoomChangeOriginal(arg1, arg2);
 }
 
-Actor* SpawnRoomActor(ActorContext* actorCtx, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable)
+Actor* SpawnRoomActor(ActorContext* actorCtx, PlayState *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable)
 {
     Actor* a;
 

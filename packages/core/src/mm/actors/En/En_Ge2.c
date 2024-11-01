@@ -2,7 +2,7 @@
 #include <combo/entrance.h>
 #include <combo/dungeon.h>
 
-static void EnGe2_ThrowPlayerOut(Actor* this, GameState_Play* play)
+static void EnGe2_ThrowPlayerOut(Actor* this, PlayState* play)
 {
     s32 override;
     u32 entrance;

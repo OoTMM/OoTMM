@@ -1,6 +1,6 @@
 #include <combo.h>
 
-static int EnMd_ShouldSpawn(Actor* this, GameState_Play* play)
+static int EnMd_ShouldSpawn(Actor* this, PlayState* play)
 {
     int midoInHouse;
 

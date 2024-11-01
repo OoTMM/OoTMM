@@ -7,8 +7,8 @@
 
 typedef struct Actor_EnGirlA Actor_EnGirlA;
 
-typedef int  (*ShopPrecondFn)(GameState_Play*, Actor_EnGirlA*);
-typedef void (*ShopBuyFn)(GameState_Play*, Actor_EnGirlA*);
+typedef int  (*ShopPrecondFn)(PlayState*, Actor_EnGirlA*);
+typedef void (*ShopBuyFn)(PlayState*, Actor_EnGirlA*);
 
 struct Actor_EnGirlA
 {

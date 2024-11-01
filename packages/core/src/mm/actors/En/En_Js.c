@@ -20,7 +20,7 @@ static void EnJs_ItemQuery(ComboItemQuery* q)
     }
 }
 
-static void EnJs_AskForFight(GameState_Play* play, u16 unk, Actor* this)
+static void EnJs_AskForFight(PlayState* play, u16 unk, Actor* this)
 {
     char* b;
     char* start;
@@ -47,7 +47,7 @@ int EnJs_HasGivenItem(Actor* this)
 
 PATCH_CALL(0x8096a2fc, EnJs_HasGivenItem);
 
-void EnJs_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnJs_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 {
     ComboItemQuery q;
 
@@ -57,7 +57,7 @@ void EnJs_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 
 PATCH_CALL(0x8096a370, EnJs_GiveItem);
 
-static void EnJs_DisplayHint(GameState_Play* play, s16 messageId)
+static void EnJs_DisplayHint(PlayState* play, s16 messageId)
 {
     ComboItemQuery q;
     char* b;
@@ -77,7 +77,7 @@ static void EnJs_DisplayHint(GameState_Play* play, s16 messageId)
 
 PATCH_CALL(0x8096a4c8, EnJs_DisplayHint);
 
-static void EnJs_DisplayWeak(Actor* this, GameState_Play* play)
+static void EnJs_DisplayWeak(Actor* this, PlayState* play)
 {
     char* b;
 

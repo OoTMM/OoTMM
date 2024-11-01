@@ -26,7 +26,7 @@ static const ExtraSceneSetups kExtraSceneSetups[] = {
     { SCE_MM_CLOCK_TOWN_NORTH, 1 },
 };
 
-void updateSceneSetup(GameState_Play* play)
+void updateSceneSetup(PlayState* play)
 {
     for (int i = 0; i < ARRAY_SIZE(kExtraSceneSetups); ++i)
     {
@@ -43,7 +43,7 @@ void updateSceneSetup(GameState_Play* play)
     g.sceneSetupId = 0;
 }
 
-static void SpawnRoomActors_Wrapper(GameState_Play* play, int id)
+static void SpawnRoomActors_Wrapper(PlayState* play, int id)
 {
     /* Spawn the normal room actors */
     SpawnRoomActors(play, id);
@@ -52,9 +52,9 @@ static void SpawnRoomActors_Wrapper(GameState_Play* play, int id)
 PATCH_CALL(0x8012eb18, SpawnRoomActors_Wrapper);
 PATCH_CALL(0x8012ec30, SpawnRoomActors_Wrapper);
 
-void OnRoomChange(GameState_Play* play, void* arg2)
+void OnRoomChange(PlayState* play, void* arg2)
 {
-    void (*OnRoomChangeOriginal)(GameState_Play*, void*);
+    void (*OnRoomChangeOriginal)(PlayState*, void*);
 
     /* Clear some flags */
     g.silverRupee = 0;
@@ -77,7 +77,7 @@ static void ZeroActor(Actor* this, int size)
 
 PATCH_CALL(0x800baf54, ZeroActor);
 
-Actor* SpawnRoomActorEx(ActorContext* actorCtx, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int ex1, int ex2, int ex3)
+Actor* SpawnRoomActorEx(ActorContext* actorCtx, PlayState *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int ex1, int ex2, int ex3)
 {
     Actor* a;
 

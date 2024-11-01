@@ -1,6 +1,6 @@
 #include <combo.h>
 
-static void ElfMsg6_Update(Actor* this, GameState_Play* play)
+static void ElfMsg6_Update(Actor* this, PlayState* play)
 {
     ActorFunc handler;
 

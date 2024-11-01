@@ -1,7 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 
-void EnGb2_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnGb2_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 {
     int npc;
 

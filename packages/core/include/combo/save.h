@@ -54,7 +54,7 @@ void Save_Write(void);
 void Save_CreateMM(void);
 void Save_CopyMM(int dst, int src);
 void Save_OnLoad(void);
-void Save_DoSave(GameState_Play* play, int saveFlags);
+void Save_DoSave(PlayState* play, int saveFlags);
 
 void Flash_ReadWrite(u32 devAddr, void* dramAddr, u32 size, s32 direction);
 

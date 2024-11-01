@@ -5,8 +5,8 @@
 
 typedef struct Actor_EnElf Actor_EnElf;
 
-typedef void (*EnElfActionFunc)(Actor_EnElf*, GameState_Play*);
-typedef void (*EnElfUnkFunc)(Actor_EnElf*, GameState_Play*);
+typedef void (*EnElfActionFunc)(Actor_EnElf*, PlayState*);
+typedef void (*EnElfUnkFunc)(Actor_EnElf*, PlayState*);
 
 struct Actor_EnElf
 {

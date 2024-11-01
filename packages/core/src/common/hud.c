@@ -27,7 +27,7 @@ static void rupeesText(void)
     memcpy(gHudRupeesBuffer, tmp + (4 - digits), digits);
 }
 
-void DrawHUDWrapper(GameState_Play* play)
+void DrawHUDWrapper(PlayState* play)
 {
     rupeesText();
     DrawHUD(play);

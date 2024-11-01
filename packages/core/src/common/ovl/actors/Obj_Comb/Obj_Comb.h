@@ -6,7 +6,7 @@
 
 typedef struct Actor_ObjComb Actor_ObjComb;
 
-typedef void (*Actor_ObjCombFunc)(Actor_ObjComb*, GameState_Play*);
+typedef void (*Actor_ObjCombFunc)(Actor_ObjComb*, PlayState*);
 
 struct Actor_ObjComb
 {

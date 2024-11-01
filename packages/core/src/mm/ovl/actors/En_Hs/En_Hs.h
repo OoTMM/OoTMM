@@ -5,7 +5,7 @@
 
 struct Actor_EnHs;
 
-typedef void (*Actor_EnHs_ActionFunc)(struct Actor_EnHs*, GameState_Play*);
+typedef void (*Actor_EnHs_ActionFunc)(struct Actor_EnHs*, PlayState*);
 
 #define HS_GET_EXIT_INDEX(this) ((this)->params & 0xF)
 

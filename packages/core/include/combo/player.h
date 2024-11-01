@@ -25,27 +25,27 @@
 #define PLAYER_ACTOR_STATE_USE_ITEM             0x10000000
 #define PLAYER_ACTOR_STATE_CUTSCENE_FROZEN      0x20000000
 
-void Player_Update(Actor_Player* this, GameState_Play* play);
+void Player_Update(Actor_Player* this, PlayState* play);
 void Player_SetModels(Actor_Player* link, s32 modelGroup);
 int Player_UsingItem(Actor_Player* link);
-int Player_GetEnvironmentalHazard(GameState_Play* play);
-int Player_InCsMode(GameState_Play* play);
-void Player_Freeze(GameState_Play* play);
-void Player_Unfreeze(GameState_Play* play);
-void Player_UseItem(GameState_Play* play, Actor_Player* link, s16 itemId);
+int Player_GetEnvironmentalHazard(PlayState* play);
+int Player_InCsMode(PlayState* play);
+void Player_Freeze(PlayState* play);
+void Player_Unfreeze(PlayState* play);
+void Player_UseItem(PlayState* play, Actor_Player* link, s16 itemId);
 s32 Player_ActionToModelGroup(Actor_Player* link, s32 itemAction);
 void Player_PlaySfx(Actor_Player* player, u16 sfxId);
 float Player_GetHeight(Actor_Player* player);
-int Player_OverrideLimbDrawGameplayDefault(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Player* player);
-int Player_OverrideLimbDrawPause(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Player* player);
-int Player_OverrideLimbDrawGameplayFirstPerson(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, void*);
-void Player_SetBootData(GameState_Play* play, Actor_Player* player);
+int Player_OverrideLimbDrawGameplayDefault(PlayState* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Player* player);
+int Player_OverrideLimbDrawPause(PlayState* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Player* player);
+int Player_OverrideLimbDrawGameplayFirstPerson(PlayState* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, void*);
+void Player_SetBootData(PlayState* play, Actor_Player* player);
 int Player_GetStrength(void);
 
 #if defined(GAME_MM)
-void Player_DrawHookshotReticle(GameState_Play* play, Actor_Player* player, f32 distance);
-void Player_UpdateForm(Actor_Player* this, GameState_Play* play);
-void Player_TryUpdateForm(Actor_Player* this, GameState_Play* play);
+void Player_DrawHookshotReticle(PlayState* play, Actor_Player* player, f32 distance);
+void Player_UpdateForm(Actor_Player* this, PlayState* play);
+void Player_TryUpdateForm(Actor_Player* this, PlayState* play);
 #endif
 
 #endif

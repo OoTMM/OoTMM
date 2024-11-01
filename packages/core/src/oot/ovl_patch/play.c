@@ -13,7 +13,7 @@
 #include <combo/dungeon.h>
 #include <combo/audio.h>
 
-GameState_Play* gPlay;
+PlayState* gPlay;
 
 static int isRainbowBridgeOpen(void)
 {
@@ -40,7 +40,7 @@ static int isRainbowBridgeOpen(void)
     return 1;
 }
 
-static void eventFixes(GameState_Play* play)
+static void eventFixes(PlayState* play)
 {
     /* Skip forest temple cutscene */
     if (gSave.entrance == ENTR_OOT_TEMPLE_FOREST)
@@ -399,7 +399,7 @@ static void applyCustomEntrance(u32* entrance)
     }
 }
 
-static void playAdjustEntrance(GameState_Play* play)
+static void playAdjustEntrance(PlayState* play)
 {
     /* Handle custom entrance IDs */
     switch (gSave.entrance)
@@ -431,7 +431,7 @@ static void playAdjustEntrance(GameState_Play* play)
     applyCustomEntrance(&gSave.entrance);
 }
 
-static void masterSwordFix(GameState_Play* play)
+static void masterSwordFix(PlayState* play)
 {
     if (!gSharedCustomSave.foundMasterSword)
         return;
@@ -452,7 +452,7 @@ static void masterSwordFix(GameState_Play* play)
     EV_OOT_UNSET_SWORDLESS();
 }
 
-static void Play_AfterInit(GameState_Play* play)
+static void Play_AfterInit(PlayState* play)
 {
     gLastEntrance = gSave.entrance;
     g.inGrotto = (play->sceneId == SCE_OOT_GROTTOS || play->sceneId == SCE_OOT_FAIRY_FOUNTAIN);
@@ -466,7 +466,7 @@ static void Play_AfterInit(GameState_Play* play)
     comboSpawnCustomWarps(play);
 }
 
-void hookPlay_Init(GameState_Play* play)
+void hookPlay_Init(PlayState* play)
 {
     /* Init */
     gIsEntranceOverride = 0;
@@ -499,7 +499,7 @@ void hookPlay_Init(GameState_Play* play)
     }
 }
 
-void Play_UpdateWrapper(GameState_Play* play)
+void Play_UpdateWrapper(PlayState* play)
 {
     /* Auto-press A during credits */
     if (g.isCredits)
@@ -524,13 +524,13 @@ static void Play_LoadKaleidoScopeHook(void* unk)
 
 PATCH_CALL(0x8009a06c, Play_LoadKaleidoScopeHook);
 
-NORETURN static void Play_GameSwitch(GameState_Play* play, u32 entrance)
+NORETURN static void Play_GameSwitch(PlayState* play, u32 entrance)
 {
     Horse_ForceUnmount(play);
     comboGameSwitch(play, entrance);
 }
 
-static u32 entrGrottoExit(GameState_Play* play)
+static u32 entrGrottoExit(PlayState* play)
 {
     if (!Config_Flag(CFG_ER_GROTTOS))
         return ENTR_OOT_INTERNAL_EXIT_GROTTO;
@@ -605,7 +605,7 @@ static u32 entrGrottoExit(GameState_Play* play)
     return ENTR_OOT_INTERNAL_EXIT_GROTTO;
 }
 
-void Play_TransitionDone(GameState_Play* play)
+void Play_TransitionDone(PlayState* play)
 {
     u32 entrance;
     s32 override;
@@ -725,7 +725,7 @@ void Play_FastInit(GameState* gs)
 
     /* Set the next GameState */
     gs->nextGameStateInit = Play_Init;
-    gs->nextGameStateSize = sizeof(GameState_Play);
+    gs->nextGameStateSize = sizeof(PlayState);
 
     /* Load the save */
     gSaveContext.fileIndex = gComboCtx.saveIndex;

@@ -2,9 +2,9 @@
 #include <combo/souls.h>
 #include <combo/actor.h>
 
-static int ObjNozoki_CanOpenDoorForKafeiWrapper(Actor* actor, GameState_Play* play)
+static int ObjNozoki_CanOpenDoorForKafeiWrapper(Actor* actor, PlayState* play)
 {
-    int (*ObjNozoki_CanOpenDoorForKafei)(Actor*, GameState_Play*);
+    int (*ObjNozoki_CanOpenDoorForKafei)(Actor*, PlayState*);
     int checkMsgBox;
 
     /* We need to check for souls explicitely here, as this doesn't use the normal flags */

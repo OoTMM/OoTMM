@@ -12,17 +12,17 @@
 #define ENOBJFLOWERPOT_GET_3F(thisx) ((thisx)->actor.params & 0x3F)
 #define ENOBJFLOWERPOT_GET_7F00(thisx) (((thisx)->actor.params >> 8) & 0x7F)
 
-void ObjFlowerpot_Init(Actor_ObjFlowerpot* this, GameState_Play* play);
-void ObjFlowerpot_Destroy(Actor_ObjFlowerpot* this, GameState_Play* play);
-void ObjFlowerpot_Update(Actor_ObjFlowerpot* this, GameState_Play* play);
-void ObjFlowerpot_Draw(Actor_ObjFlowerpot* this, GameState_Play* play);
+void ObjFlowerpot_Init(Actor_ObjFlowerpot* this, PlayState* play);
+void ObjFlowerpot_Destroy(Actor_ObjFlowerpot* this, PlayState* play);
+void ObjFlowerpot_Update(Actor_ObjFlowerpot* this, PlayState* play);
+void ObjFlowerpot_Draw(Actor_ObjFlowerpot* this, PlayState* play);
 
 void func_80A1C818(Actor_ObjFlowerpot* this);
-void func_80A1C838(Actor_ObjFlowerpot* this, GameState_Play* play);
+void func_80A1C838(Actor_ObjFlowerpot* this, PlayState* play);
 void func_80A1CBF8(Actor_ObjFlowerpot* this);
-void func_80A1CC0C(Actor_ObjFlowerpot* this, GameState_Play* play);
+void func_80A1CC0C(Actor_ObjFlowerpot* this, PlayState* play);
 void func_80A1CD10(Actor_ObjFlowerpot* this);
-void func_80A1CEF4(Actor_ObjFlowerpot* this, GameState_Play* play);
+void func_80A1CEF4(Actor_ObjFlowerpot* this, PlayState* play);
 
 u32 D_80A1D830;
 MtxF D_80A1D838[8];
@@ -123,7 +123,7 @@ static void ObjFlowerpot_Alias(Xflag* xf)
     }
 }
 
-static void ObjFlowerpot_InitXflag(Actor_ObjFlowerpot* this, GameState_Play* play)
+static void ObjFlowerpot_InitXflag(Actor_ObjFlowerpot* this, PlayState* play)
 {
     Xflag* xflag;
 
@@ -144,7 +144,7 @@ static void ObjFlowerpot_InitXflag(Actor_ObjFlowerpot* this, GameState_Play* pla
     }
 }
 
-static int ObjFlowerpot_DropCustom(Actor_ObjFlowerpot* this, GameState_Play* play, int slice)
+static int ObjFlowerpot_DropCustom(Actor_ObjFlowerpot* this, PlayState* play, int slice)
 {
     Xflag xf;
 
@@ -244,12 +244,12 @@ void func_80A1B840(MtxF* matrix) {
     }
 }
 
-void ObjFlowerpot_PotSpawnCollectible(Actor_ObjFlowerpot* this, GameState_Play* play)
+void ObjFlowerpot_PotSpawnCollectible(Actor_ObjFlowerpot* this, PlayState* play)
 {
     ObjFlowerpot_DropCustom(this, play, SLICE_POT);
 }
 
-void ObjFlowerpot_GrassSpawnCollectible(Actor_ObjFlowerpot* this, GameState_Play* play)
+void ObjFlowerpot_GrassSpawnCollectible(Actor_ObjFlowerpot* this, PlayState* play)
 {
     if (ObjFlowerpot_DropCustom(this, play, SLICE_GRASS))
         return;
@@ -266,11 +266,11 @@ void ObjFlowerpot_GrassSpawnCollectible(Actor_ObjFlowerpot* this, GameState_Play
     }
 }
 
-void func_80A1B994(Actor_ObjFlowerpot* this, GameState_Play* play) {
+void func_80A1B994(Actor_ObjFlowerpot* this, PlayState* play) {
     SoundSource_PlaySfxAtFixedWorldPos(play, &this->actor.world.pos, 20, NA_SE_EV_POT_BROKEN);
 }
 
-void func_80A1B9CC(Actor_ObjFlowerpot* this, GameState_Play* play) {
+void func_80A1B9CC(Actor_ObjFlowerpot* this, PlayState* play) {
     SoundSource_PlaySfxAtFixedWorldPos(play, &this->actor.world.pos, 20, NA_SE_EV_PLANT_BROKEN);
 }
 
@@ -280,7 +280,7 @@ void func_80A1BA04(Actor_ObjFlowerpot* this, Vec3f* arg1) {
     Matrix_MultVec3f(&D_80A1D408, arg1);
 }
 
-void ObjFlowerpot_Break1(Actor_ObjFlowerpot* this, GameState_Play* play) {
+void ObjFlowerpot_Break1(Actor_ObjFlowerpot* this, PlayState* play) {
     s32 i;
     Vec3f spD0;
     Vec3f spC4;
@@ -330,7 +330,7 @@ void ObjFlowerpot_Break1(Actor_ObjFlowerpot* this, GameState_Play* play) {
     SpawnSomeDust(play, &spD0, 30.0f, 1, 10, 40, 1);
 }
 
-void ObjFlowerpot_Break2(Actor_ObjFlowerpot* this, GameState_Play* play) {
+void ObjFlowerpot_Break2(Actor_ObjFlowerpot* this, PlayState* play) {
     s32 i;
     Vec3f spC8;
     Vec3f spBC;
@@ -380,7 +380,7 @@ void ObjFlowerpot_Break2(Actor_ObjFlowerpot* this, GameState_Play* play) {
     EffectSsGRipple_Spawn(play, &spBC, 150, 650, 0);
 }
 
-void func_80A1C0FC(Actor_ObjFlowerpot* this, GameState_Play* play) {
+void func_80A1C0FC(Actor_ObjFlowerpot* this, PlayState* play) {
     Vec3f spC4;
     Vec3f spB8;
     Vec3f spAC;
@@ -407,7 +407,7 @@ void func_80A1C0FC(Actor_ObjFlowerpot* this, GameState_Play* play) {
     }
 }
 
-void func_80A1C328(Actor_ObjFlowerpot* this, GameState_Play* play) {
+void func_80A1C328(Actor_ObjFlowerpot* this, PlayState* play) {
     Vec3f spC4;
     Vec3f spB8;
     Vec3f spAC;
@@ -448,18 +448,18 @@ void func_80A1C554(Actor_ObjFlowerpot* this) {
     }
 }
 
-void func_80A1C5E8(Actor_ObjFlowerpot* this, GameState_Play* play) {
+void func_80A1C5E8(Actor_ObjFlowerpot* this, PlayState* play) {
     Actor_UpdateBgCheckInfo(play, &this->actor, 18.0f, 15.0f, 0.0f,
                             UPDBGCHECKINFO_FLAG_WALL | UPDBGCHECKINFO_FLAG_FLOOR | UPDBGCHECKINFO_FLAG_MM_40);
 }
 
-void func_80A1C62C(Actor_ObjFlowerpot* this, GameState_Play* play) {
+void func_80A1C62C(Actor_ObjFlowerpot* this, PlayState* play) {
     if (!(this->unk_1EA & 4) && (play->roomCtx.curRoom.num != this->unk_1EC)) {
         this->unk_1EA |= 4;
     }
 }
 
-void ObjFlowerpot_Init(Actor_ObjFlowerpot* this, GameState_Play* play)
+void ObjFlowerpot_Init(Actor_ObjFlowerpot* this, PlayState* play)
 {
     ObjFlowerpot_InitXflag(this, play);
     Actor_ProcessInitChain(&this->actor, sInitChain);
@@ -494,7 +494,7 @@ void ObjFlowerpot_Init(Actor_ObjFlowerpot* this, GameState_Play* play)
     D_80A1D400++;
 }
 
-void ObjFlowerpot_Destroy(Actor_ObjFlowerpot* this, GameState_Play* play)
+void ObjFlowerpot_Destroy(Actor_ObjFlowerpot* this, PlayState* play)
 {
     Collider_DestroyJntSph(play, &this->collider);
 }
@@ -505,7 +505,7 @@ void func_80A1C818(Actor_ObjFlowerpot* this)
     this->unk_1EA |= 1;
 }
 
-void func_80A1C838(Actor_ObjFlowerpot* this, GameState_Play* play)
+void func_80A1C838(Actor_ObjFlowerpot* this, PlayState* play)
 {
     if (Actor_HasParent(&this->actor, play))
     {
@@ -599,7 +599,7 @@ void func_80A1CBF8(Actor_ObjFlowerpot* this)
     this->actionFunc = func_80A1CC0C;
 }
 
-void func_80A1CC0C(Actor_ObjFlowerpot* this, GameState_Play* play)
+void func_80A1CC0C(Actor_ObjFlowerpot* this, PlayState* play)
 {
     func_80A1C62C(this, play);
 
@@ -654,7 +654,7 @@ void func_80A1CD10(Actor_ObjFlowerpot* this) {
     }
 }
 
-void func_80A1CEF4(Actor_ObjFlowerpot* this, GameState_Play* play)
+void func_80A1CEF4(Actor_ObjFlowerpot* this, PlayState* play)
 {
     s32 sp28 = this->collider.elements[0].elem.toucherFlags & TOUCH_HIT;
 
@@ -715,7 +715,7 @@ void func_80A1CEF4(Actor_ObjFlowerpot* this, GameState_Play* play)
     CollisionCheck_SetAT(play, &play->colChkCtx, &this->collider.base);
 }
 
-void ObjFlowerpot_Update(Actor_ObjFlowerpot* this, GameState_Play* play)
+void ObjFlowerpot_Update(Actor_ObjFlowerpot* this, PlayState* play)
 {
     this->actionFunc(this, play);
     func_80A1C554(this);
@@ -748,7 +748,7 @@ static const Gfx sListLoaderPotCustom[] = {
     gsSPEndDisplayList(),
 };
 
-static void ObjFlowerpot_DrawPot(Actor_ObjFlowerpot* this, GameState_Play* play)
+static void ObjFlowerpot_DrawPot(Actor_ObjFlowerpot* this, PlayState* play)
 {
     int type;
     u32 customTextureAddr;
@@ -796,7 +796,7 @@ static const Gfx sListLoaderGrassCustom[] = {
     gsSPEndDisplayList(),
 };
 
-static void ObjFlowerpot_DrawGrass(Actor_ObjFlowerpot* this, GameState_Play* play)
+static void ObjFlowerpot_DrawGrass(Actor_ObjFlowerpot* this, PlayState* play)
 {
     int type;
     void* customTexture;
@@ -831,7 +831,7 @@ static void ObjFlowerpot_DrawGrass(Actor_ObjFlowerpot* this, GameState_Play* pla
     CLOSE_DISPS();
 }
 
-void ObjFlowerpot_Draw(Actor_ObjFlowerpot* this, GameState_Play* play)
+void ObjFlowerpot_Draw(Actor_ObjFlowerpot* this, PlayState* play)
 {
     Gfx_SetupDL25_Opa(play->gs.gfx);
     ObjFlowerpot_DrawPot(this, play);

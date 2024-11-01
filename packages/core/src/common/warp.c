@@ -3,7 +3,7 @@
 #include <combo/dungeon.h>
 #include <combo/config.h>
 
-void comboTriggerWarp(GameState_Play* play, int bossId)
+void comboTriggerWarp(PlayState* play, int bossId)
 {
     int dungeonId;
     u32 dungeonExit;

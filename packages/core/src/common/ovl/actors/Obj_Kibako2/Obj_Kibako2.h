@@ -8,9 +8,9 @@
 #include <combo/xflags.h>
 
 typedef struct Actor_ObjKibako2 Actor_ObjKibako2;
-typedef struct GameState_Play GameState_Play;
+typedef struct PlayState PlayState;
 
-typedef void (*Actor_ObjKibako2Func)(Actor_ObjKibako2*, GameState_Play*);
+typedef void (*Actor_ObjKibako2Func)(Actor_ObjKibako2*, PlayState*);
 
 typedef struct Actor_ObjKibako2
 {

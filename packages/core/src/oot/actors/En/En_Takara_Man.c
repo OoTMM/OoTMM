@@ -4,7 +4,7 @@
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x13c) = (h); } while (0)
 
-void EnTakaraMan_InitHandler(Actor* this, GameState_Play* play)
+void EnTakaraMan_InitHandler(Actor* this, PlayState* play)
 {
     ActorFunc handler;
     u32 handlerAddr;
@@ -18,7 +18,7 @@ void EnTakaraMan_InitHandler(Actor* this, GameState_Play* play)
     handler(this, play);
 }
 
-void EnTakaraMan_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnTakaraMan_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 {
     comboGiveItemNpc(this, play, gi, NPC_OOT_CHEST_GAME_KEY, a, b);
 }

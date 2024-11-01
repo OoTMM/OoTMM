@@ -1,6 +1,6 @@
 #include <combo.h>
 
-void DmChar01_TempleRise(Actor* this, GameState_Play* play)
+void DmChar01_TempleRise(Actor* this, PlayState* play)
 {
     play->nextEntrance = ((SCE_MM_WOODFALL - 3) << 9) | (4 << 4);
     play->transitionTrigger = TRANS_TRIGGER_NORMAL;

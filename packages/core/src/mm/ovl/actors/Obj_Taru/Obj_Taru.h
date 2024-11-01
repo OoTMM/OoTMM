@@ -6,7 +6,7 @@
 
 typedef struct Actor_ObjTaru Actor_ObjTaru;
 
-typedef void (*Actor_ObjTaruFunc)(Actor_ObjTaru*, GameState_Play*);
+typedef void (*Actor_ObjTaruFunc)(Actor_ObjTaru*, PlayState*);
 
 struct Actor_ObjTaru
 {

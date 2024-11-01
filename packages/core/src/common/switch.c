@@ -72,7 +72,7 @@ static void waitSubsystems(void)
 NORETURN void comboGameSwitch2(void);
 NORETURN void comboGameSwitch4(u32);
 
-NORETURN void comboGameSwitch(GameState_Play* play, u32 entrance)
+NORETURN void comboGameSwitch(PlayState* play, u32 entrance)
 {
     gComboCtx.entrance = entrance;
 

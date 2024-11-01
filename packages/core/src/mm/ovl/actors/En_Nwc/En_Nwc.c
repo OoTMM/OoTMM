@@ -12,21 +12,21 @@
 # define SEGADDR_NWC_BODY_DL        ((void*)0x060002e8)
 #endif
 
-void EnNwc_Init(Actor_EnNwc* this, GameState_Play* play);
-void EnNwc_Destroy(Actor_EnNwc* this, GameState_Play* play);
-void EnNwc_Update(Actor_EnNwc* this, GameState_Play* play);
-void EnNwc_Draw(Actor_EnNwc* this, GameState_Play* play);
+void EnNwc_Init(Actor_EnNwc* this, PlayState* play);
+void EnNwc_Destroy(Actor_EnNwc* this, PlayState* play);
+void EnNwc_Update(Actor_EnNwc* this, PlayState* play);
+void EnNwc_Draw(Actor_EnNwc* this, PlayState* play);
 
-void EnNwc_LoadNiwSkeleton(Actor_EnNwc* this, GameState_Play* play);
-void EnNwc_CrowAtTheEnd(Actor_EnNwc* this, GameState_Play* play);
-void EnNwc_Follow(Actor_EnNwc* this, GameState_Play* play);
-void EnNwc_HopForward(Actor_EnNwc* this, GameState_Play* play);
-void EnNwc_RunAway(Actor_EnNwc* this, GameState_Play* play);
-void EnNwc_Turn(Actor_EnNwc* this, GameState_Play* play);
-void EnNwc_CheckForBreman(Actor_EnNwc* this, GameState_Play* play);
+void EnNwc_LoadNiwSkeleton(Actor_EnNwc* this, PlayState* play);
+void EnNwc_CrowAtTheEnd(Actor_EnNwc* this, PlayState* play);
+void EnNwc_Follow(Actor_EnNwc* this, PlayState* play);
+void EnNwc_HopForward(Actor_EnNwc* this, PlayState* play);
+void EnNwc_RunAway(Actor_EnNwc* this, PlayState* play);
+void EnNwc_Turn(Actor_EnNwc* this, PlayState* play);
+void EnNwc_CheckForBreman(Actor_EnNwc* this, PlayState* play);
 
-void EnNwc_DrawAdultBody(Actor_EnNwc* this, GameState_Play* play);
-Actor_EnHs* EnNwc_FindGrog(GameState_Play* play);
+void EnNwc_DrawAdultBody(Actor_EnNwc* this, PlayState* play);
+Actor_EnHs* EnNwc_FindGrog(PlayState* play);
 
 typedef enum EnNwcState
 {
@@ -39,7 +39,7 @@ typedef enum EnNwcState
 }
 EnNwcState;
 
-void EnNwc_Init(Actor_EnNwc* this, GameState_Play* play)
+void EnNwc_Init(Actor_EnNwc* this, PlayState* play)
 {
     s32 niwObjectSlot;
 
@@ -73,9 +73,9 @@ void EnNwc_Init(Actor_EnNwc* this, GameState_Play* play)
     this->actor.gravity = -1.0f;
 }
 
-void EnNwc_Destroy(Actor_EnNwc* this, GameState_Play* play) { }
+void EnNwc_Destroy(Actor_EnNwc* this, PlayState* play) { }
 
-void EnNwc_SpawnDust(Actor_EnNwc* this, GameState_Play* play)
+void EnNwc_SpawnDust(Actor_EnNwc* this, PlayState* play)
 {
     static Color_RGBA8 sPrimColor = { 255, 255, 255, 255 };
     static Color_RGBA8 sEnvColor = { 80, 80, 80, 255 };
@@ -110,7 +110,7 @@ void EnNwc_SpawnDust(Actor_EnNwc* this, GameState_Play* play)
     }
 }
 
-Actor_EnHs* EnNwc_FindGrog(GameState_Play* play)
+Actor_EnHs* EnNwc_FindGrog(PlayState* play)
 {
     Actor* grogSearch = play->actorCtx.actors[ACTORCAT_NPC].first;
 
@@ -124,7 +124,7 @@ Actor_EnHs* EnNwc_FindGrog(GameState_Play* play)
     return NULL;
 }
 
-s32 EnNwc_PlayerReleasedBremanMarch(Actor_EnNwc* this, GameState_Play* play)
+s32 EnNwc_PlayerReleasedBremanMarch(Actor_EnNwc* this, PlayState* play)
 {
     Actor_Player* player = GET_PLAYER(play);
 
@@ -143,7 +143,7 @@ s32 EnNwc_PlayerReleasedBremanMarch(Actor_EnNwc* this, GameState_Play* play)
  * Summary: Checks 1) if grog exists, 2) player is using breman mask, 3) and within range.
  *  Used to identify if the chick should be captured by breman mask.
  */
-s32 EnNwc_IsFound(Actor_EnNwc* this, GameState_Play* play)
+s32 EnNwc_IsFound(Actor_EnNwc* this, PlayState* play)
 {
     Actor_Player* player = GET_PLAYER(play);
 
@@ -212,7 +212,7 @@ void EnNwc_ToggleState(Actor_EnNwc* this)
         EnNwc_ChangeState(this, Rand_ZeroFloat(2.0f) + 1.0f);
 }
 
-void EnNwc_CheckFound(Actor_EnNwc* this, GameState_Play* play)
+void EnNwc_CheckFound(Actor_EnNwc* this, PlayState* play)
 {
     if (EnNwc_IsFound(this, play))
     {
@@ -233,7 +233,7 @@ void EnNwc_CheckFound(Actor_EnNwc* this, GameState_Play* play)
     }
 }
 
-void EnNwc_LoadNiwSkeleton(Actor_EnNwc* this, GameState_Play* play)
+void EnNwc_LoadNiwSkeleton(Actor_EnNwc* this, PlayState* play)
 {
     if (Object_IsLoaded(&play->objectCtx, this->niwObjectSlot))
     {
@@ -250,7 +250,7 @@ void EnNwc_LoadNiwSkeleton(Actor_EnNwc* this, GameState_Play* play)
     }
 }
 
-void EnNwc_CrowAtTheEnd(Actor_EnNwc* this, GameState_Play* play)
+void EnNwc_CrowAtTheEnd(Actor_EnNwc* this, PlayState* play)
 {
     // I guess grog handles the scene transit?
     Math_SmoothStepToS(&this->upperBodyRotY, 0x2710, 2, 0x1B58, 0x3E8);
@@ -263,7 +263,7 @@ void EnNwc_CrowAtTheEnd(Actor_EnNwc* this, GameState_Play* play)
  *
  * ActionFunc for NWC Type: NWC_STATE_FOLLOWING
  */
-void EnNwc_Follow(Actor_EnNwc* this, GameState_Play* play)
+void EnNwc_Follow(Actor_EnNwc* this, PlayState* play)
 {
     Vec3f* chickCoords = this->grog->nwcPos;
     Vec3f targetVector;
@@ -373,7 +373,7 @@ void EnNwc_Follow(Actor_EnNwc* this, GameState_Play* play)
  *
  * ActionFunc for NWC Type: NWC_STATE_HOPPING_FORWARD
  */
-void EnNwc_HopForward(Actor_EnNwc* this, GameState_Play* play)
+void EnNwc_HopForward(Actor_EnNwc* this, PlayState* play)
 {
     if (DECR(this->stateTimer) == 0)
     {
@@ -398,7 +398,7 @@ void EnNwc_HopForward(Actor_EnNwc* this, GameState_Play* play)
  *
  * ActionFunc for NWC Type: NWC_STATE_RUNNING
  */
-void EnNwc_RunAway(Actor_EnNwc* this, GameState_Play* play)
+void EnNwc_RunAway(Actor_EnNwc* this, PlayState* play)
 {
     if (DECR(this->stateTimer) == 0)
     {
@@ -421,7 +421,7 @@ void EnNwc_RunAway(Actor_EnNwc* this, GameState_Play* play)
  *
  * ActionFunc for NWC Type: NWC_STATE_TURNING
  */
-void EnNwc_Turn(Actor_EnNwc* this, GameState_Play* play)
+void EnNwc_Turn(Actor_EnNwc* this, PlayState* play)
 {
     if (DECR(this->stateTimer) == 0)
     {
@@ -449,7 +449,7 @@ void EnNwc_Turn(Actor_EnNwc* this, GameState_Play* play)
  *
  * ActionFunc for NWC Type: NWC_STATE_CHECK_BREMAN
  */
-void EnNwc_CheckForBreman(Actor_EnNwc* this, GameState_Play* play)
+void EnNwc_CheckForBreman(Actor_EnNwc* this, PlayState* play)
 {
     if (DECR(this->stateTimer) == 0)
         EnNwc_ToggleState(this);
@@ -457,7 +457,7 @@ void EnNwc_CheckForBreman(Actor_EnNwc* this, GameState_Play* play)
     EnNwc_CheckFound(this, play);
 }
 
-void EnNwc_Update(Actor_EnNwc* this, GameState_Play* play)
+void EnNwc_Update(Actor_EnNwc* this, PlayState* play)
 {
     Actor_MoveWithGravity(&this->actor);
     Actor_UpdateBgCheckInfo(play, &this->actor, 10.0f, 10.0f, 10.0f, 0x5);
@@ -485,7 +485,7 @@ void EnNwc_Update(Actor_EnNwc* this, GameState_Play* play)
         this->blinkState = 0;
 }
 
-void EnNwc_Draw(Actor_EnNwc* this, GameState_Play* play)
+void EnNwc_Draw(Actor_EnNwc* this, PlayState* play)
 {
     void* eyeTextures[] = { SEGADDR_NWC_OPEN_EYES, SEGADDR_NWC_CLOSED_EYES };
     Gfx* gfx;
@@ -502,7 +502,7 @@ void EnNwc_Draw(Actor_EnNwc* this, GameState_Play* play)
     CLOSE_DISPS();
 }
 
-s32 EnNwc_OverrideLimbDraw(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_EnNwc* this)
+s32 EnNwc_OverrideLimbDraw(PlayState* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_EnNwc* this)
 {
     if (limbIndex == 0x0d)
         rot->y += this->upperBodyRotY;
@@ -515,7 +515,7 @@ s32 EnNwc_OverrideLimbDraw(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec
     return 0;
 }
 
-void EnNwc_DrawAdultBody(Actor_EnNwc* this, GameState_Play* play)
+void EnNwc_DrawAdultBody(Actor_EnNwc* this, PlayState* play)
 {
     Gfx_SetupDL25_Opa(play->gs.gfx);
     SkelAnime_DrawFlexOpa(play, this->niwSkeleton.skeleton, this->niwSkeleton.jointTable, this->niwSkeleton.dListCount,

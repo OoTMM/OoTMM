@@ -6,7 +6,7 @@ static const u64 kInitListMedallion[] = {
     0xd900000000220405, 0xdf00000000000000,
 };
 
-void DrawGi_Opa10_Xlu2(GameState_Play* play, s16 index)
+void DrawGi_Opa10_Xlu2(PlayState* play, s16 index)
 {
     OPEN_DISPS(play->gs.gfx);
     Gfx_SetupDL25_Opa(play->gs.gfx);
@@ -19,7 +19,7 @@ void DrawGi_Opa10_Xlu2(GameState_Play* play, s16 index)
     CLOSE_DISPS();
 }
 
-void DrawGi_Opa10_Xlu234(GameState_Play* play, s16 index)
+void DrawGi_Opa10_Xlu234(PlayState* play, s16 index)
 {
     OPEN_DISPS(play->gs.gfx);
     Gfx_SetupDL25_Opa(play->gs.gfx);
@@ -34,7 +34,7 @@ void DrawGi_Opa10_Xlu234(GameState_Play* play, s16 index)
     CLOSE_DISPS();
 }
 
-void DrawGi_Medallion(GameState_Play* play, s16 index)
+void DrawGi_Medallion(PlayState* play, s16 index)
 {
     OPEN_DISPS(play->gs.gfx);
     gSPDisplayList(POLY_OPA_DISP++, (u32)(&kInitListMedallion));
@@ -44,7 +44,7 @@ void DrawGi_Medallion(GameState_Play* play, s16 index)
     CLOSE_DISPS();
 }
 
-void DrawGi_Spell(GameState_Play* play, s16 index)
+void DrawGi_Spell(PlayState* play, s16 index)
 {
     s32 fc = play->gs.frameCount;
 
@@ -58,7 +58,7 @@ void DrawGi_Spell(GameState_Play* play, s16 index)
     CLOSE_DISPS();
 }
 
-void DrawGi_Scale(GameState_Play* play, s16 index)
+void DrawGi_Scale(PlayState* play, s16 index)
 {
     s32 fc = play->gs.frameCount;
 
@@ -73,7 +73,7 @@ void DrawGi_Scale(GameState_Play* play, s16 index)
     CLOSE_DISPS();
 }
 
-void DrawGi_MirrorShield(GameState_Play* play, s16 index)
+void DrawGi_MirrorShield(PlayState* play, s16 index)
 {
     s32 fc = play->gs.frameCount;
 
@@ -88,7 +88,7 @@ void DrawGi_MirrorShield(GameState_Play* play, s16 index)
     CLOSE_DISPS();
 }
 
-void DrawGi_SoldOut(GameState_Play* play, s16 index)
+void DrawGi_SoldOut(PlayState* play, s16 index)
 {
     static const u32 kInitListSoldOut[] = {
         0xE7000000, 0x00000000, 0xD7000002, 0xFFFFFFFF,
@@ -105,7 +105,7 @@ void DrawGi_SoldOut(GameState_Play* play, s16 index)
     CLOSE_DISPS();
 }
 
-void DrawGi_BlueFire(GameState_Play* play, s16 index)
+void DrawGi_BlueFire(PlayState* play, s16 index)
 {
     const DrawGi* drawGi;
     s32 fc;

@@ -1,7 +1,7 @@
 #include <combo.h>
 #include <combo/actor.h>
 
-void EnChanger_Init(Actor* this, GameState_Play* play)
+void EnChanger_Init(Actor* this, PlayState* play)
 {
     int roomId;
     const float* kPosBottom;

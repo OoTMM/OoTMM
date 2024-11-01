@@ -20,7 +20,7 @@ static const u32 kDungeonEntrances[] =
     ENTR_MM_TEMPLE_STONE_TOWER_INVERTED,
 };
 
-void EnTest7_TriggerWarpWrapper(Actor* actor, GameState_Play* play)
+void EnTest7_TriggerWarpWrapper(Actor* actor, PlayState* play)
 {
     ActorFunc EnTest7_TriggerWarp;
     u32 entrance;

@@ -2,7 +2,7 @@
 #include <combo/player.h>
 #include <combo/item.h>
 
-static void EnToto_GiveTroupeLeaderMask(Actor* this, GameState_Play* play)
+static void EnToto_GiveTroupeLeaderMask(Actor* this, PlayState* play)
 {
     Actor_Player* link;
 
@@ -20,7 +20,7 @@ static void EnToto_GiveTroupeLeaderMask(Actor* this, GameState_Play* play)
     comboGiveItemNpc(this, play, GI_MM_MASK_TROUPE_LEADER, NPC_MM_MASK_TROUPE_LEADER, 16384.f, 16384.f);
 }
 
-void EnToto_UpdateWrapper(Actor* this, GameState_Play* play)
+void EnToto_UpdateWrapper(Actor* this, PlayState* play)
 {
     ActorFunc EnToto_Update;
 

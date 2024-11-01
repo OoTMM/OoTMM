@@ -16,14 +16,14 @@ extern u32 gMultiMarkSwitch1;
 # define Multi_IsMarked Multi_IsMarkedMm
 #endif
 
-typedef struct GameState_Play GameState_Play;
+typedef struct PlayState PlayState;
 
-void    Multi_DrawWisps(GameState_Play* play);
+void    Multi_DrawWisps(PlayState* play);
 void    Multi_ResetWisps(void);
-void    Multi_SetMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id);
-void    Multi_SetMarkedMm(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id);
-int     Multi_IsMarkedOot(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id);
-int     Multi_IsMarkedMm(GameState_Play* play, u8 ovType, u8 sceneId, u8 roomId, u8 id);
-void    Multi_Update(GameState_Play* play);
+void    Multi_SetMarkedOot(PlayState* play, u8 ovType, u8 sceneId, u8 roomId, u8 id);
+void    Multi_SetMarkedMm(PlayState* play, u8 ovType, u8 sceneId, u8 roomId, u8 id);
+int     Multi_IsMarkedOot(PlayState* play, u8 ovType, u8 sceneId, u8 roomId, u8 id);
+int     Multi_IsMarkedMm(PlayState* play, u8 ovType, u8 sceneId, u8 roomId, u8 id);
+void    Multi_Update(PlayState* play);
 
 #endif

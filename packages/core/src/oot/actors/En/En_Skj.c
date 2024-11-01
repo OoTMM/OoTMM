@@ -5,7 +5,7 @@
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x264) = (h); } while (0)
 
-void EnSkj_GiveItem_TreeHP(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+void EnSkj_GiveItem_TreeHP(Actor* actor, PlayState* play, s16 gi, float a, float b)
 {
     comboGiveItemNpc(actor, play, gi, NPC_OOT_LOST_WOODS_SKULL_KID, a, b);
 }
@@ -13,7 +13,7 @@ void EnSkj_GiveItem_TreeHP(Actor* actor, GameState_Play* play, s16 gi, float a, 
 PATCH_CALL(0x80a6e550, EnSkj_GiveItem_TreeHP);
 PATCH_CALL(0x80a6e5e8, EnSkj_GiveItem_TreeHP);
 
-void EnSkj_GiveItem_MemoryGame(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+void EnSkj_GiveItem_MemoryGame(Actor* actor, PlayState* play, s16 gi, float a, float b)
 {
     int npc;
 
@@ -26,13 +26,13 @@ void EnSkj_GiveItem_MemoryGame(Actor* actor, GameState_Play* play, s16 gi, float
 PATCH_CALL(0x80a6f7dc, EnSkj_GiveItem_MemoryGame);
 PATCH_CALL(0x80a6f860, EnSkj_GiveItem_MemoryGame);
 
-static void EnSkj_AfterMaskTrade(Actor* this, GameState_Play* play)
+static void EnSkj_AfterMaskTrade(Actor* this, PlayState* play)
 {
     gSave.eventsItem[3] |= 0x200;
     Actor_Kill(this);
 }
 
-static void EnSkj_MaskTradeCheck(Actor* this, GameState_Play* play)
+static void EnSkj_MaskTradeCheck(Actor* this, PlayState* play)
 {
     Actor_Player* link;
 
@@ -50,13 +50,13 @@ static void EnSkj_MaskTradeCheck(Actor* this, GameState_Play* play)
     comboGiveItemNpc(this, play, GI_OOT_RUPEE_RED, NPC_OOT_MASK_SELL_SKULL, 16384.f, 16384.f);
 }
 
-static void EnSkj_MaskTradeRupees(Actor* this, GameState_Play* play)
+static void EnSkj_MaskTradeRupees(Actor* this, PlayState* play)
 {
     AddRupees(10);
     EnSkj_AfterMaskTrade(this, play);
 }
 
-static void EnSkj_InitMaskTrade(Actor* this, GameState_Play* play)
+static void EnSkj_InitMaskTrade(Actor* this, PlayState* play)
 {
     ActorFunc func;
 

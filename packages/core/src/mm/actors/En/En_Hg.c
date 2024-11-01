@@ -1,7 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 
-void EnHg_HandlerGiveMask(Actor* this, GameState_Play* play)
+void EnHg_HandlerGiveMask(Actor* this, PlayState* play)
 {
     if (gMmExtraFlags.maskGibdo || Actor_HasParentZ(this))
     {

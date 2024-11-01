@@ -8,7 +8,7 @@
 
 struct Actor_EnTest4;
 
-typedef void (*Actor_EnTest4_ActionFunc)(struct Actor_EnTest4*, GameState_Play*);
+typedef void (*Actor_EnTest4_ActionFunc)(struct Actor_EnTest4*, PlayState*);
 
 #define THREEDAY_DAYTIME_NIGHT  0
 #define THREEDAY_DAYTIME_DAY    1

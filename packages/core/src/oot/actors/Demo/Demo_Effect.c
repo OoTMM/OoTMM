@@ -20,7 +20,7 @@ static void DemoEffect_SapphireItemOverride(ComboItemOverride* o)
     comboItemOverride(o, &q);
 }
 
-void DemoEffect_TextRutoSapphire(GameState_Play* play)
+void DemoEffect_TextRutoSapphire(PlayState* play)
 {
     ComboItemQuery q;
     char* b;
@@ -36,7 +36,7 @@ void DemoEffect_TextRutoSapphire(GameState_Play* play)
     comboTextAutoLineBreaks(start);
 }
 
-static void DemoEffect_DrawSapphireInJabu(Actor* this, GameState_Play* play)
+static void DemoEffect_DrawSapphireInJabu(Actor* this, PlayState* play)
 {
     ComboItemOverride o;
     static const int kRotDivisor = 100;
@@ -51,9 +51,9 @@ static void DemoEffect_DrawSapphireInJabu(Actor* this, GameState_Play* play)
     Draw_Gi(play, this, o.gi, 0);
 }
 
-void DemoEffect_DrawSpiritualLoader(Actor* this, GameState_Play* play)
+void DemoEffect_DrawSpiritualLoader(Actor* this, PlayState* play)
 {
-    void (*DemoEffect_DrawSpiritual)(Actor*, GameState_Play*);
+    void (*DemoEffect_DrawSpiritual)(Actor*, PlayState*);
 
     if (play->sceneId == SCE_OOT_INSIDE_JABU_JABU)
         DemoEffect_DrawSpiritual = DemoEffect_DrawSapphireInJabu;

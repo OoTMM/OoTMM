@@ -14,7 +14,7 @@ int EnZot_HasGivenItem(Actor* this)
 
 PATCH_CALL(0x80b98f40, EnZot_HasGivenItem);
 
-void EnZot_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnZot_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 {
     int npc;
 
@@ -38,7 +38,7 @@ static void EnZot_BeaverItemQuery(ComboItemQuery* q, int index, int flags)
     q->ovFlags = flags;
 }
 
-void EnZot_DisplayBeaverHint(Actor* this, GameState_Play* play)
+void EnZot_DisplayBeaverHint(Actor* this, PlayState* play)
 {
     ComboItemQuery q1;
     ComboItemQuery q2;

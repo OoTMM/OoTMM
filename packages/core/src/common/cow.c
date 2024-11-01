@@ -70,7 +70,7 @@ static const Gfx kDlistColoredRingRenewable[] = {
     gsSPBranchList((u32)kDlistColoredRing - 0x80000000),
 };
 
-static Actor* EnCow_GetNearestCow(GameState_Play* play)
+static Actor* EnCow_GetNearestCow(PlayState* play)
 {
     Actor* cow;
     Actor* tmp;
@@ -98,7 +98,7 @@ static Actor* EnCow_GetNearestCow(GameState_Play* play)
 }
 
 #if defined(GAME_OOT)
-static int EnCow_GetCowID(Actor* cow, GameState_Play* play)
+static int EnCow_GetCowID(Actor* cow, PlayState* play)
 {
     switch (play->sceneId)
     {
@@ -122,7 +122,7 @@ static int EnCow_GetCowID(Actor* cow, GameState_Play* play)
 #endif
 
 #if defined(GAME_MM)
-static int EnCow_GetCowID(Actor* cow, GameState_Play* play)
+static int EnCow_GetCowID(Actor* cow, PlayState* play)
 {
     s32 sceneId;
 
@@ -144,7 +144,7 @@ static int EnCow_GetCowID(Actor* cow, GameState_Play* play)
 }
 #endif
 
-static void EnCow_ItemQuery(GameState_Play* play, Actor* this, ComboItemQuery* q, s16 gi, int* outId)
+static void EnCow_ItemQuery(PlayState* play, Actor* this, ComboItemQuery* q, s16 gi, int* outId)
 {
     int id;
 
@@ -163,7 +163,7 @@ static void EnCow_ItemQuery(GameState_Play* play, Actor* this, ComboItemQuery* q
     }
 }
 
-static const Gfx* EnCow_RingList(GameState_Play* play, Actor* this)
+static const Gfx* EnCow_RingList(PlayState* play, Actor* this)
 {
     ComboItemQuery q;
     ComboItemOverride o;
@@ -222,7 +222,7 @@ static const Gfx* EnCow_RingList(GameState_Play* play, Actor* this)
     }
 }
 
-int EnCow_OverrideLimbDraw(GameState_Play* play, int limbIndex, Gfx** dlist, Vec3f* pos, Vec3s* rot, Actor* this)
+int EnCow_OverrideLimbDraw(PlayState* play, int limbIndex, Gfx** dlist, Vec3f* pos, Vec3s* rot, Actor* this)
 {
     const Vec3s* headRot;
 
@@ -241,7 +241,7 @@ int EnCow_OverrideLimbDraw(GameState_Play* play, int limbIndex, Gfx** dlist, Vec
     return FALSE;
 }
 
-static void EnCow_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+static void EnCow_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 {
     Actor* cow;
     ComboItemQuery q;
@@ -280,7 +280,7 @@ static int EnCow_HasGivenItem(Actor* this)
     return 0;
 }
 
-static int EnCow_TalkedTo(Actor* this, GameState_Play* play)
+static int EnCow_TalkedTo(Actor* this, PlayState* play)
 {
     return 1;
 }

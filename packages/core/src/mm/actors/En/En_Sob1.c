@@ -2,7 +2,7 @@
 #include <combo/item.h>
 #include <combo/shop.h>
 
-void EnSob1_AfterBuy(Actor_EnSob1* this, GameState_Play* play)
+void EnSob1_AfterBuy(Actor_EnSob1* this, PlayState* play)
 {
     if (!Actor_HasParentZ(&this->base))
         return;
@@ -11,7 +11,7 @@ void EnSob1_AfterBuy(Actor_EnSob1* this, GameState_Play* play)
     this->base.parent = NULL;
 }
 
-static void EnSob1_GiveItem(Actor_EnSob1* sob1, GameState_Play* play, s16 gi, float a, float b)
+static void EnSob1_GiveItem(Actor_EnSob1* sob1, PlayState* play, s16 gi, float a, float b)
 {
     ComboItemQuery q;
     Actor_EnGirlA* girlA;

@@ -72,7 +72,7 @@ void EnExItem_Reward(ComboItemQuery* q, const Actor* actor)
     EnExItem_RewardByIndex(q, actor->params & 0x1f);
 }
 
-void EnExItem_Draw(Actor* actor, GameState_Play* play)
+void EnExItem_Draw(Actor* actor, PlayState* play)
 {
     ComboItemQuery q;
     ComboItemOverride o;
@@ -85,7 +85,7 @@ void EnExItem_Draw(Actor* actor, GameState_Play* play)
     Draw_Gi(play, actor, o.gi, 0);
 }
 
-void EnExItem_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+void EnExItem_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b)
 {
     ComboItemQuery q;
 

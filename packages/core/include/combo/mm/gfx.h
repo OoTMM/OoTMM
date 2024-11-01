@@ -34,7 +34,7 @@ typedef struct PACKED ALIGNED(4) GfxContext
     /* 0x2D8 */ u8 pad2D8[0x3];
     /* 0x2DB */ u8 framebufferCounter;
     /* 0x2DC */ void* func2DC;
-    /* 0x2E0 */ GameState_Play* play;
+    /* 0x2E0 */ PlayState* play;
     /* 0x2E4 */ f32 viConfigXScale;
     /* 0x2E8 */ f32 viConfigYScale;
     /* 0x2EC */ u8 pad2EC[0x4];

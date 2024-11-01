@@ -57,7 +57,7 @@ static int csmcNaviId(s16 gi)
     }
 }
 
-void Actor_AfterSetNaviToActor(TargetContext* targetCtx, Actor* actor, s32 actorCategory, GameState_Play* play)
+void Actor_AfterSetNaviToActor(TargetContext* targetCtx, Actor* actor, s32 actorCategory, PlayState* play)
 {
     ComboItemQuery q = ITEM_QUERY_INIT;
     ComboItemOverride o;

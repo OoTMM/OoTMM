@@ -1,6 +1,6 @@
 #include <combo.h>
 
-void DrawGi_Opa01(GameState_Play* play, s16 drawGiId)
+void DrawGi_Opa01(PlayState* play, s16 drawGiId)
 {
     const DrawGi* drawGi;
     drawGi = &kDrawGi[drawGiId];
@@ -18,7 +18,7 @@ static Gfx kDummyList[] = {
 };
 
 /* Halo isn't animated */
-void DrawGi_MoonTear(GameState_Play* play, s16 drawGiId)
+void DrawGi_MoonTear(PlayState* play, s16 drawGiId)
 {
     const DrawGi* drawGi;
     drawGi = &kDrawGi[drawGiId];

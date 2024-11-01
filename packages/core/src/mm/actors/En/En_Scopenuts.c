@@ -10,7 +10,7 @@ static void EnScopenuts_ItemQuery(ComboItemQuery* q)
     q->id = NPC_MM_SCRUB_TELESCOPE;
 }
 
-static void EnScopenuts_AlterMessage(GameState_Play* play)
+static void EnScopenuts_AlterMessage(PlayState* play)
 {
     ComboItemQuery q;
     char* b;
@@ -26,7 +26,7 @@ static void EnScopenuts_AlterMessage(GameState_Play* play)
     comboTextAutoLineBreaks(start);
 }
 
-static void EnScopenuts_DisplayTextBox(GameState_Play* play, s16 messageId, Actor* this)
+static void EnScopenuts_DisplayTextBox(PlayState* play, s16 messageId, Actor* this)
 {
     PlayerDisplayTextBox(play, messageId, this);
 
@@ -37,7 +37,7 @@ static void EnScopenuts_DisplayTextBox(GameState_Play* play, s16 messageId, Acto
 PATCH_CALL(0x80bcb588, EnScopenuts_DisplayTextBox);
 PATCH_CALL(0x80bcb79c, EnScopenuts_DisplayTextBox);
 
-void EnScopenuts_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnScopenuts_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 {
     ComboItemQuery q;
 

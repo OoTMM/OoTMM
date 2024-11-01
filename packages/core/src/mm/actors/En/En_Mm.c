@@ -3,7 +3,7 @@
 #include <combo/config.h>
 #include <combo/actor.h>
 
-void EnMm_InitWrapper(Actor* this, GameState_Play* play)
+void EnMm_InitWrapper(Actor* this, PlayState* play)
 {
     ActorFunc EnMm_Init;
 

@@ -47,11 +47,11 @@
 # define MAGIC_CONSUME_DEITY_BEAM       0x07
 #endif
 
-typedef struct GameState_Play GameState_Play;
+typedef struct PlayState PlayState;
 
-void Magic_Reset(GameState_Play* play);
-void Magic_Update(GameState_Play* play);
-void Magic_Refill(GameState_Play* play);
-int Magic_RequestChange(GameState_Play* play, s16 amount, s16 type);
+void Magic_Reset(PlayState* play);
+void Magic_Update(PlayState* play);
+void Magic_Refill(PlayState* play);
+int Magic_RequestChange(PlayState* play, s16 amount, s16 type);
 
 #endif

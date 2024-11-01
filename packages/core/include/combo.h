@@ -104,7 +104,7 @@ extern u16 gBlastMaskDelayAcc;
 #endif
 
 /* Switch */
-NORETURN void comboGameSwitch(GameState_Play* play, u32 entrance);
+NORETURN void comboGameSwitch(PlayState* play, u32 entrance);
 
 #if defined(GAME_OOT)
 void swapFarore(void);
@@ -127,21 +127,21 @@ void                comboLoadCustomKeep(void);
 void                comboExObjectsReset(void);
 
 /* Custom_Warp */
-void comboSpawnCustomWarps(GameState_Play*);
+void comboSpawnCustomWarps(PlayState*);
 
 /* Util */
 int comboStrayFairyIndex(void);
-int comboOotDungeonScene(GameState_Play* play, int isBossKey);
+int comboOotDungeonScene(PlayState* play, int isBossKey);
 int comboMmDungeonIndex(void);
 int comboIsChateauActive(void);
 int comboIsLinkAdult(void);
 
-void comboSpawnItemGiver(GameState_Play* play, u16 npcId);
+void comboSpawnItemGiver(PlayState* play, u16 npcId);
 
 /* libc */
 int toupper(int c);
 
-int comboDoorIsUnlocked(GameState_Play* play, Actor* actor);
+int comboDoorIsUnlocked(PlayState* play, Actor* actor);
 
 /* Entrance */
 void comboInitEntrances(void);
@@ -153,15 +153,15 @@ extern s32 gLastEntrance;
 extern s32 gLastScene;
 
 /* Warp */
-void comboTriggerWarp(GameState_Play* play, int index);
+void comboTriggerWarp(PlayState* play, int index);
 
 /* MQ */
-void comboMqKaleidoHook(GameState_Play* play);
+void comboMqKaleidoHook(PlayState* play);
 
-extern GameState_Play* gPlay;
+extern PlayState* gPlay;
 
 #if defined(GAME_MM)
-void Ocarina_HandleWarp(Actor_Player* player, GameState_Play* ctxt);
+void Ocarina_HandleWarp(Actor_Player* player, PlayState* ctxt);
 #endif
 
 #if defined(GAME_MM)
@@ -171,7 +171,7 @@ extern int gNoTimeFlow;
 /* Ocarina */
 void comboCheckSong(const OcarinaSongButtons* songButtons, int songIndex);
 
-void comboCreditWarp(GameState_Play* play);
+void comboCreditWarp(PlayState* play);
 
 #if defined (GAME_OOT)
 extern u16 gPrevPageIndex;

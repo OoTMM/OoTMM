@@ -13,7 +13,7 @@ int EnSth_HasGivenItemMaskOfTruth(Actor* this)
 
 PATCH_CALL(0x80b67b70, EnSth_HasGivenItemMaskOfTruth);
 
-void EnSth_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnSth_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 {
     int npc;
 
@@ -38,7 +38,7 @@ void EnSth_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 PATCH_CALL(0x80b67524, EnSth_GiveItem);
 PATCH_CALL(0x80b67c00, EnSth_GiveItem);
 
-void EnSth_AfterInit(Actor* this, GameState_Play* play)
+void EnSth_AfterInit(Actor* this, PlayState* play)
 {
     /* Spawn the cursed skull if required */
     if ((this->params & 0xf) == 4 && gSave.skullCountOcean < 30)

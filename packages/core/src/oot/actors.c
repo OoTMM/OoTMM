@@ -15,7 +15,7 @@ static int opt(int x)
     return x > 0 ? 1 : -1;
 }
 
-static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
+static int canSpawnSoul(PlayState* play, s16 actorId, u16 variable)
 {
     if (g.isCredits)
         return 1;
@@ -275,7 +275,7 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
     }
 }
 
-static int canSpawnActor(GameState_Play* play, s16 actorId, u16 param)
+static int canSpawnActor(PlayState* play, s16 actorId, u16 param)
 {
     switch (actorId)
     {
@@ -307,7 +307,7 @@ static void ZeroActor(Actor* this, int size)
 
 PATCH_CALL(0x800252f8, ZeroActor);
 
-Actor* Actor_SpawnWrapper(ActorContext* actorCtx, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable)
+Actor* Actor_SpawnWrapper(ActorContext* actorCtx, PlayState *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable)
 {
     int ret;
     Actor* actor;
@@ -346,7 +346,7 @@ Actor* Actor_SpawnWrapper(ActorContext* actorCtx, GameState_Play *play, short ac
     return actor;
 }
 
-static int GetRoomClearFlagForActor(GameState_Play* play, int flag)
+static int GetRoomClearFlagForActor(PlayState* play, int flag)
 {
     int res;
 
@@ -469,7 +469,7 @@ static void Actor_UpdateDamageTable(Actor* this)
     }
 }
 
-void Actor_RunUpdate(Actor* this, GameState_Play* play, ActorFunc update)
+void Actor_RunUpdate(Actor* this, PlayState* play, ActorFunc update)
 {
     int ignorePlayer;
     s16 yawTowardsPlayer;

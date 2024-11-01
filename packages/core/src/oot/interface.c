@@ -61,7 +61,7 @@ void comboItemIcon(void* dst, int itemId)
     }
 }
 
-static void LoadCustomItemIconSlot(GameState_Play* play, int slot, int isInit)
+static void LoadCustomItemIconSlot(PlayState* play, int slot, int isInit)
 {
     Actor_Player* link;
     void* dst;
@@ -102,7 +102,7 @@ static void LoadCustomItemIconSlot(GameState_Play* play, int slot, int isInit)
     comboItemIcon(dst, itemId);
 }
 
-static void LoadCustomItemIcon(GameState_Play* play, int slot, int isInit)
+static void LoadCustomItemIcon(PlayState* play, int slot, int isInit)
 {
     LoadCustomItemIconSlot(play, slot, 0);
 }
@@ -141,7 +141,7 @@ PATCH_CALL(0x800e1e88, LoadCustomItemIcon_C_Right);
 void LoadEquipItemTexture(void)
 {
     u32 tex;
-    GameState_Play* play;
+    PlayState* play;
     PauseContext* pauseCtx;
 
     play = gPlay;
@@ -155,7 +155,7 @@ void LoadEquipItemTexture(void)
     CLOSE_DISPS();
 }
 
-void Interface_UpdateButtonsPart2Wrapper(GameState_Play* play)
+void Interface_UpdateButtonsPart2Wrapper(PlayState* play)
 {
     u8* ptr;
     u8 itemId;

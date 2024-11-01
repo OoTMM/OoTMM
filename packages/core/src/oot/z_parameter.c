@@ -75,7 +75,7 @@ s32 Magic_Decrement(void)
     return 1;
 }
 
-s32 Magic_RequestChangeCustom(GameState_Play* play, s16 amount, s16 type)
+s32 Magic_RequestChangeCustom(PlayState* play, s16 amount, s16 type)
 {
     if (type != MAGIC_CONSUME_WAIT_PREVIEW && type != MAGIC_ADD && comboIsChateauActive())
     {
@@ -84,7 +84,7 @@ s32 Magic_RequestChangeCustom(GameState_Play* play, s16 amount, s16 type)
     return Magic_RequestChange(play, amount, type);
 }
 
-void Magic_UpdateCustom(GameState_Play* play)
+void Magic_UpdateCustom(PlayState* play)
 {
     if (comboIsChateauActive())
     {

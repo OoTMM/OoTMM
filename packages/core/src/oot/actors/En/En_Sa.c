@@ -4,11 +4,11 @@
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x180) = (h); } while (0)
 
-void EnSa_HandlerNull(Actor* this, GameState_Play* play)
+void EnSa_HandlerNull(Actor* this, PlayState* play)
 {
 }
 
-void EnSa_HandlerMeadow_GiveItem(Actor* this, GameState_Play* play)
+void EnSa_HandlerMeadow_GiveItem(Actor* this, PlayState* play)
 {
     if (Actor_HasParentZ(this))
     {
@@ -19,7 +19,7 @@ void EnSa_HandlerMeadow_GiveItem(Actor* this, GameState_Play* play)
     comboGiveItemNpc(this, play, GI_OOT_SONG_SARIA, NPC_OOT_SARIA_SONG, 10000.f, 5000.f);
 }
 
-void EnSa_HandlerMeadow(Actor* this, GameState_Play* play)
+void EnSa_HandlerMeadow(Actor* this, PlayState* play)
 {
     if (GetEventChk(EV_OOT_CHK_SONG_SARIA))
     {

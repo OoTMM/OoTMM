@@ -2,7 +2,7 @@
 
 #define TRIGGER_SONG_HEALING 0x100
 
-void CustomTriggers_HandleTriggerGame(Actor_CustomTriggers* this, GameState_Play* play)
+void CustomTriggers_HandleTriggerGame(Actor_CustomTriggers* this, PlayState* play)
 {
     switch (gComboTriggersData.trigger)
     {
@@ -18,7 +18,7 @@ void CustomTriggers_HandleTriggerGame(Actor_CustomTriggers* this, GameState_Play
     }
 }
 
-void CustomTriggers_CheckTriggerGame(Actor_CustomTriggers* this, GameState_Play* play)
+void CustomTriggers_CheckTriggerGame(Actor_CustomTriggers* this, PlayState* play)
 {
     if (!gMmExtraFlags2.songHealing && gSave.entrance == ENTR_MM_CLOCK_TOWN)
     {

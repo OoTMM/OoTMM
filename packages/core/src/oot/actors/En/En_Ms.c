@@ -1,7 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 
-static void hintBeanSeller(GameState_Play* play)
+static void hintBeanSeller(PlayState* play)
 {
     char* b;
     char* start;
@@ -16,14 +16,14 @@ static void hintBeanSeller(GameState_Play* play)
     comboTextAutoLineBreaks(start);
 }
 
-void EnMs_TalkedTo(Actor* this, GameState_Play* play)
+void EnMs_TalkedTo(Actor* this, PlayState* play)
 {
     if (this->messageId != 0x405e)
         return;
     hintBeanSeller(play);
 }
 
-void EnMs_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+void EnMs_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b)
 {
     gSave.inventory.beans = 1;
     comboGiveItemNpc(actor, play, gi, NPC_OOT_BEAN_SELLER, a, b);

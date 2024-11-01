@@ -450,7 +450,7 @@ int Object_IsLoadedWrapper(ObjectContext* objectCtx, int slot)
         return (gExObjectsAddr[slot] != NULL);
 }
 
-static void comboActorSetObjectSegment(GameState_Play* play, Actor* actor)
+static void comboActorSetObjectSegment(PlayState* play, Actor* actor)
 {
     int slot;
     void* segment;
@@ -467,7 +467,7 @@ static void comboActorSetObjectSegment(GameState_Play* play, Actor* actor)
 
 PATCH_FUNC(0x80020fa4, comboActorSetObjectSegment);
 
-static void comboActorSetObjectSegmentWithRSP(GameState_Play* play, Actor* actor)
+static void comboActorSetObjectSegmentWithRSP(PlayState* play, Actor* actor)
 {
     comboActorSetObjectSegment(play, actor);
 

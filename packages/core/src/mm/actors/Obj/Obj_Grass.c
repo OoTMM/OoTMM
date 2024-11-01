@@ -40,7 +40,7 @@ void ObjGrass_GetXflag(Xflag* xflag, Actor_ObjGrass_PackBush* bush)
     xflag->sliceId = bushId;
 }
 
-void ObjGrass_SpawnBushDropWrapper(Actor_ObjGrass_PackBush* bush, GameState_Play* play)
+void ObjGrass_SpawnBushDropWrapper(Actor_ObjGrass_PackBush* bush, PlayState* play)
 {
     Xflag xflag;
 
@@ -58,7 +58,7 @@ void ObjGrass_SpawnBushDropWrapper(Actor_ObjGrass_PackBush* bush, GameState_Play
     }
 
     /* Forward */
-    void (*ObjGrass_SpawnBushDrop)(Actor_ObjGrass_PackBush*, GameState_Play*);
+    void (*ObjGrass_SpawnBushDrop)(Actor_ObjGrass_PackBush*, PlayState*);
     ObjGrass_SpawnBushDrop = actorAddr(AC_OBJ_GRASS, 0x809a92d0);
     ObjGrass_SpawnBushDrop(bush, play);
 }

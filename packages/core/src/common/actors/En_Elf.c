@@ -22,7 +22,7 @@
 # define EN_ELF_SFX_ICE_TRAP     0x31a4
 #endif
 
-void EnElf_Aliases(Actor_EnElf* this, GameState_Play* play)
+void EnElf_Aliases(Actor_EnElf* this, PlayState* play)
 {
     /* Set the extended properties */
     comboXflagInit(&this->xflag, &this->base, play);
@@ -83,7 +83,7 @@ static s16 EnElf_ItemGi(Actor_EnElf* this)
     return o.gi;
 }
 
-void EnElf_Draw(Actor_EnElf* this, GameState_Play* play)
+void EnElf_Draw(Actor_EnElf* this, PlayState* play)
 {
     ComboItemQuery q;
     ComboItemOverride o;
@@ -102,7 +102,7 @@ void EnElf_Draw(Actor_EnElf* this, GameState_Play* play)
 }
 
 #if defined(GAME_OOT)
-s32 EnElf_CantGiveItem(GameState_Play* play) {
+s32 EnElf_CantGiveItem(PlayState* play) {
     Actor_Player* link;
     link = GET_PLAYER(play);
 
@@ -117,7 +117,7 @@ s32 EnElf_CantGiveItem(GameState_Play* play) {
 }
 #endif
 
-void EnElf_UpdateWrapper(Actor_EnElf* this, GameState_Play* play)
+void EnElf_UpdateWrapper(Actor_EnElf* this, PlayState* play)
 {
     ActorCallback update = actorAddr(AC_EN_ELF, EN_ELF_UPDATE_VROM);
     update(&this->base, play);
@@ -138,7 +138,7 @@ void EnElf_UpdateWrapper(Actor_EnElf* this, GameState_Play* play)
     }
 }
 
-void EnElf_GiveItem(Actor_EnElf* this, GameState_Play* play)
+void EnElf_GiveItem(Actor_EnElf* this, PlayState* play)
 {
     ComboItemQuery q;
     ComboItemOverride o;
@@ -183,7 +183,7 @@ void EnElf_GiveItem(Actor_EnElf* this, GameState_Play* play)
     comboPlayItemFanfare(o.gi, 1);
 }
 
-static int EnElf_IsShuffled(Actor_EnElf* this, GameState_Play* play)
+static int EnElf_IsShuffled(Actor_EnElf* this, PlayState* play)
 {
     ComboItemQuery q;
     ComboItemOverride o;
@@ -195,7 +195,7 @@ static int EnElf_IsShuffled(Actor_EnElf* this, GameState_Play* play)
     return o.gi != GI_NONE;
 }
 
-void EnElf_InitWrapper(Actor_EnElf* this, GameState_Play* play)
+void EnElf_InitWrapper(Actor_EnElf* this, PlayState* play)
 {
     int type;
     ActorCallback init;
@@ -229,7 +229,7 @@ void EnElf_InitWrapper(Actor_EnElf* this, GameState_Play* play)
     }
 }
 
-void EnElf_SpawnFairyGroupMember(Actor_EnElf* spawner, GameState_Play* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, u8 count)
+void EnElf_SpawnFairyGroupMember(Actor_EnElf* spawner, PlayState* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, u8 count)
 {
     ComboItemQuery q;
     ComboItemOverride o;
@@ -256,13 +256,13 @@ void EnElf_SpawnFairyGroupMember(Actor_EnElf* spawner, GameState_Play* play, s16
     }
 }
 
-void EnElf_PlayItemSfx(Actor_EnElf* this, GameState_Play* play)
+void EnElf_PlayItemSfx(Actor_EnElf* this, PlayState* play)
 {
     Actor_PlaySfx(&this->base, EN_ELF_SFX_HEAL);
 }
 
 #if defined(GAME_MM)
-void Fairy_SetHealthAccumulator(Actor_EnElf* this, GameState_Play* play)
+void Fairy_SetHealthAccumulator(Actor_EnElf* this, PlayState* play)
 {
     /* Displaced code: */
     this->unk_246++;

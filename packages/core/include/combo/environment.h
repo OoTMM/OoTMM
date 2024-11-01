@@ -7,10 +7,10 @@ typedef struct EnvironmentContext EnvironmentContext;
 
 #if defined(GAME_MM)
 void Environment_NewDay(EnvironmentContext* ctxt);
-void Environment_PlaySceneSequence(struct GameState_Play* play);
-void Environment_PlayStormNatureAmbience(struct GameState_Play* play);
-void Environment_StopStormNatureAmbience(struct GameState_Play* play);
-u32 Environment_GetStormState(struct GameState_Play* play);
+void Environment_PlaySceneSequence(struct PlayState* play);
+void Environment_PlayStormNatureAmbience(struct PlayState* play);
+void Environment_StopStormNatureAmbience(struct PlayState* play);
+u32 Environment_GetStormState(struct PlayState* play);
 
 #define WEATHER_MODE_CLEAR 0
 #define WEATHER_MODE_RAIN 1

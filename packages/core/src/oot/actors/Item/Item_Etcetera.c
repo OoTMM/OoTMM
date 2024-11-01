@@ -40,7 +40,7 @@ static int ItemEtcetera_HasGivenItem(Actor* this)
 PATCH_CALL(0x80a5e1cc, ItemEtcetera_HasGivenItem);
 PATCH_CALL(0x80a5e268, ItemEtcetera_HasGivenItem);
 
-void ItemEtcetera_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void ItemEtcetera_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 {
     ComboItemQuery q;
 
@@ -51,7 +51,7 @@ void ItemEtcetera_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, f
 PATCH_CALL(0x80a5e230, ItemEtcetera_GiveItem);
 PATCH_CALL(0x80a5e2cc, ItemEtcetera_GiveItem);
 
-void ItemEtcetera_Draw(Actor_ItemEtcetera* this, GameState_Play* play)
+void ItemEtcetera_Draw(Actor_ItemEtcetera* this, PlayState* play)
 {
     ComboItemQuery q;
     ComboItemOverride o;
@@ -63,7 +63,7 @@ void ItemEtcetera_Draw(Actor_ItemEtcetera* this, GameState_Play* play)
 
 PATCH_FUNC(0x80a5e610, ItemEtcetera_Draw);
 
-void ItemEtcetera_DrawTreasureGame(Actor_ItemEtcetera* this, GameState_Play* play)
+void ItemEtcetera_DrawTreasureGame(Actor_ItemEtcetera* this, PlayState* play)
 {
     ComboItemQuery q;
     ComboItemOverride o;

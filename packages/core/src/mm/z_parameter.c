@@ -52,7 +52,7 @@ PATCH_CALL(0x80112BCC, Interface_LoadItemIconCustom)
 extern u32 gCustomIconAddr;
 extern size_t customIconSize;
 
-u32 Interface_GetCustomIconTexture(GameState_Play* play, PauseContext* pauseCtx)
+u32 Interface_GetCustomIconTexture(PlayState* play, PauseContext* pauseCtx)
 {
     u32* gItemIcons = (u32*)0x801c1e6c;
     u32 texture;
@@ -72,7 +72,7 @@ u32 Interface_GetCustomIconTexture(GameState_Play* play, PauseContext* pauseCtx)
 extern s8 gPlayerFormCustomItemRestrictions[5][8];
 
 /* button and item are stored in SP10 and SP14 by HOOK_SAVE */
-s8 Interface_GetItemRestriction(u8 playerForm, GameState_Play* play, s16* restoreHudVisibility, s32 nothing, u8 item, s16 button)
+s8 Interface_GetItemRestriction(u8 playerForm, PlayState* play, s16* restoreHudVisibility, s32 nothing, u8 item, s16 button)
 {
     s8 (*gPlayerFormItemRestrictions)[0x72] = (s8(*)[0x72])0x801c2410;
     if (item == ITEM_MM_MASK_GIANT && !comboHasSoulMm(GI_MM_SOUL_BOSS_TWINMOLD))
@@ -104,7 +104,7 @@ s8 Interface_GetItemRestriction(u8 playerForm, GameState_Play* play, s16* restor
     return result;
 }
 
-s32 Items_ShouldCheckItemUsabilityWhileSwimming(GameState_Play* play, u8 item)
+s32 Items_ShouldCheckItemUsabilityWhileSwimming(PlayState* play, u8 item)
 {
     if (item == ITEM_MM_MASK_ZORA)
     {

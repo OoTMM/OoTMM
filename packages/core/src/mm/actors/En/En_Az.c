@@ -1,7 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 
-void EnAz_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+void EnAz_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b)
 {
     int npc;
 

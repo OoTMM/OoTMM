@@ -5,7 +5,7 @@
 
 typedef struct Actor_ItemEtcetera Actor_ItemEtcetera;
 
-typedef void (*Actor_ItemEtcetera_Func)(Actor_ItemEtcetera*, GameState_Play*);
+typedef void (*Actor_ItemEtcetera_Func)(Actor_ItemEtcetera*, PlayState*);
 
 struct PACKED ALIGNED(0x4) Actor_ItemEtcetera
 {

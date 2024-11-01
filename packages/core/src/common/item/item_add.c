@@ -98,7 +98,7 @@ static const u8 kItemSlotsMasksMm[] = {
     ITS_MM_MASK_GIANT,
 };
 
-typedef int (*AddItemFunc)(GameState_Play* play, u8 itemId, s16 gi, u16 param);
+typedef int (*AddItemFunc)(PlayState* play, u8 itemId, s16 gi, u16 param);
 
 static void reloadSlotEquipsOot(OotItemEquips* equips, int slot)
 {
@@ -134,7 +134,7 @@ static void reloadSlotRawMm(int slot)
     reloadSlotEquipsMm(&gMmSave.itemEquips, slot);
 }
 
-void reloadSlotOot(GameState_Play* play, int slot)
+void reloadSlotOot(PlayState* play, int slot)
 {
     reloadSlotRawOot(slot);
 
@@ -147,7 +147,7 @@ void reloadSlotOot(GameState_Play* play, int slot)
 #endif
 }
 
-void reloadSlotMm(GameState_Play* play, int slot)
+void reloadSlotMm(PlayState* play, int slot)
 {
     reloadSlotRawMm(slot);
 
@@ -161,7 +161,7 @@ void reloadSlotMm(GameState_Play* play, int slot)
 }
 
 #if defined(GAME_MM)
-static void reloadHookshot(GameState_Play* play)
+static void reloadHookshot(PlayState* play)
 {
     Actor_Player* link;
 
@@ -197,7 +197,7 @@ static void addRupeesRawMm(s16 delta)
         gMmSave.playerData.rupees = 0;
 }
 
-static void addRupeesOot(GameState_Play* play, s16 delta)
+static void addRupeesOot(PlayState* play, s16 delta)
 {
 #if defined(GAME_MM)
     if (!Config_Flag(CFG_SHARED_WALLETS))
@@ -216,7 +216,7 @@ static void addRupeesOot(GameState_Play* play, s16 delta)
         addRupeesRawOot(delta);
 }
 
-static void addRupeesMm(GameState_Play* play, s16 delta)
+static void addRupeesMm(PlayState* play, s16 delta)
 {
 #if defined(GAME_OOT)
     if (!Config_Flag(CFG_SHARED_WALLETS))
@@ -235,13 +235,13 @@ static void addRupeesMm(GameState_Play* play, s16 delta)
         addRupeesRawMm(delta);
 }
 
-static int addItemRupeesOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemRupeesOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     addRupeesOot(play, param);
     return 0;
 }
 
-static int addItemRupeesMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemRupeesMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     addRupeesMm(play, param);
     return 0;
@@ -284,7 +284,7 @@ static void addWalletRawShared(u16 index)
     addWalletRawMm(index);
 }
 
-static int addItemWalletOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemWalletOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     if (Config_Flag(CFG_SHARED_WALLETS))
         addWalletRawShared(param);
@@ -297,7 +297,7 @@ static int addItemWalletOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static int addItemWalletMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemWalletMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     if (Config_Flag(CFG_SHARED_WALLETS))
         addWalletRawShared(param);
@@ -360,13 +360,13 @@ static void addBombsMm(u8 count)
         addBombsRawOot(count);
 }
 
-static int addItemBombsOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemBombsOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     addBombsOot(param);
     return 0;
 }
 
-static int addItemBombsMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemBombsMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     addBombsMm(param);
     return 0;
@@ -408,19 +408,19 @@ void addNutsMm(int count)
         addNutsRawOot(count);
 }
 
-static int addItemNutsOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemNutsOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     addNutsOot(param);
     return 0;
 }
 
-static int addItemNutsMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemNutsMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     addNutsMm(param);
     return 0;
 }
 
-static int addItemNutsUpgrade(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemNutsUpgrade(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     if (gOotSave.inventory.upgrades.dekuNut < param)
         gOotSave.inventory.upgrades.dekuNut = param;
@@ -466,13 +466,13 @@ static void addBombchuMm(u8 count)
         addBombchuRawOot(count);
 }
 
-static int addItemBombchuOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemBombchuOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     addBombchuOot(param);
     return 0;
 }
 
-static int addItemBombchuMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemBombchuMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     addBombchuMm(param);
     return 0;
@@ -512,13 +512,13 @@ static void addArrowsMm(u8 count)
         addArrowsRawOot(count);
 }
 
-static int addItemArrowsOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemArrowsOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     addArrowsOot(param);
     return 0;
 }
 
-static int addItemArrowsMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemArrowsMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     addArrowsMm(param);
     return 0;
@@ -538,7 +538,7 @@ static void addBowRawMm(u8 index)
     addArrowsRawMm(kMaxArrows[index]);
 }
 
-static int addItemBowOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemBowOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     addBowRawOot(param);
     if (Config_Flag(CFG_SHARED_BOWS))
@@ -546,7 +546,7 @@ static int addItemBowOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static int addItemBowMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemBowMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     addBowRawMm(param);
     if (Config_Flag(CFG_SHARED_BOWS))
@@ -565,13 +565,13 @@ static void addSeeds(u8 count)
     BITMAP16_SET(gOotSave.eventsItem, EV_OOT_ITEM_DEKU_SEEDS);
 }
 
-static int addItemSeeds(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemSeeds(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     addSeeds(param);
     return 0;
 }
 
-static int addItemSlingshot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemSlingshot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     if (gOotSave.inventory.upgrades.bulletBag < param)
         gOotSave.inventory.upgrades.bulletBag = param;
@@ -579,13 +579,13 @@ static int addItemSlingshot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static int addItemNormalOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemNormalOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     gOotSave.inventory.items[kItemSlotsOot[itemId]] = itemId;
     return 0;
 }
 
-static int addItemNormalMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemNormalMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     const u8* slots;
     u8 slotIndex;
@@ -640,19 +640,19 @@ void addSticksMm(int count)
         addSticksRawOot(count);
 }
 
-static int addItemSticksOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemSticksOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     addSticksOot(param);
     return 0;
 }
 
-static int addItemSticksMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemSticksMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     addSticksMm(param);
     return 0;
 }
 
-static int addItemSticksUpgrade(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemSticksUpgrade(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     if (gOotSave.inventory.upgrades.dekuStick < param)
         gOotSave.inventory.upgrades.dekuStick = param;
@@ -662,7 +662,7 @@ static int addItemSticksUpgrade(GameState_Play* play, u8 itemId, s16 gi, u16 par
     return 0;
 }
 
-static void addHookshotRawOot(GameState_Play* play, int level)
+static void addHookshotRawOot(PlayState* play, int level)
 {
     u16 itemId;
 
@@ -675,7 +675,7 @@ static void addHookshotRawOot(GameState_Play* play, int level)
     reloadSlotOot(play, ITS_OOT_HOOKSHOT);
 }
 
-static void addHookshotRawMm(GameState_Play* play, int level)
+static void addHookshotRawMm(PlayState* play, int level)
 {
     u8 itemId;
 
@@ -692,7 +692,7 @@ static void addHookshotRawMm(GameState_Play* play, int level)
 #endif
 }
 
-static void addHookshotOot(GameState_Play* play, int level)
+static void addHookshotOot(PlayState* play, int level)
 {
     addHookshotRawOot(play, level);
     if (Config_Flag(CFG_SHARED_HOOKSHOT))
@@ -704,7 +704,7 @@ static void addHookshotOot(GameState_Play* play, int level)
     }
 }
 
-static void addHookshotMm(GameState_Play* play, int level)
+static void addHookshotMm(PlayState* play, int level)
 {
     addHookshotRawMm(play, level);
     if (Config_Flag(CFG_SHARED_HOOKSHOT))
@@ -716,19 +716,19 @@ static void addHookshotMm(GameState_Play* play, int level)
     }
 }
 
-static int addItemHookshotOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemHookshotOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     addHookshotOot(play, param);
     return 0;
 }
 
-static int addItemHookshotMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemHookshotMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     addHookshotMm(play, param);
     return 0;
 }
 
-static int addItemTradeOotChild(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemTradeOotChild(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     u16 mask;
 
@@ -743,7 +743,7 @@ static int addItemTradeOotChild(GameState_Play* play, u8 itemId, s16 gi, u16 par
     return 0;
 }
 
-static int addItemTradeOotAdult(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemTradeOotAdult(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     u16 mask;
 
@@ -758,7 +758,7 @@ static int addItemTradeOotAdult(GameState_Play* play, u8 itemId, s16 gi, u16 par
     return 0;
 }
 
-static int addItemTradeMm1(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemTradeMm1(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     itemId = kMmTrade1[param];
     if (gMmSave.inventory.items[ITS_MM_TRADE1] == ITEM_NONE)
@@ -768,7 +768,7 @@ static int addItemTradeMm1(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static int addItemTradeMm2(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemTradeMm2(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     itemId = kMmTrade2[param];
     if (gMmSave.inventory.items[ITS_MM_TRADE2] == ITEM_NONE)
@@ -778,7 +778,7 @@ static int addItemTradeMm2(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static int addItemTradeMm3(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemTradeMm3(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     itemId = kMmTrade3[param];
     if (gMmSave.inventory.items[ITS_MM_TRADE3] == ITEM_NONE)
@@ -788,7 +788,7 @@ static int addItemTradeMm3(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static void addOcarinaRawOot(GameState_Play* play, int level)
+static void addOcarinaRawOot(PlayState* play, int level)
 {
     u16 itemId;
 
@@ -801,7 +801,7 @@ static void addOcarinaRawOot(GameState_Play* play, int level)
     reloadSlotOot(play, ITS_OOT_OCARINA);
 }
 
-static void addOcarinaRawMm(GameState_Play* play, int level)
+static void addOcarinaRawMm(PlayState* play, int level)
 {
     u8 itemId;
 
@@ -814,7 +814,7 @@ static void addOcarinaRawMm(GameState_Play* play, int level)
     reloadSlotMm(play, ITS_MM_OCARINA);
 }
 
-static int addItemOcarinaOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemOcarinaOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     addOcarinaRawOot(play, param);
     if (Config_Flag(CFG_SHARED_OCARINA))
@@ -825,7 +825,7 @@ static int addItemOcarinaOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static int addItemOcarinaMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemOcarinaMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     addOcarinaRawMm(play, param);
     if (Config_Flag(CFG_SHARED_OCARINA))
@@ -833,7 +833,7 @@ static int addItemOcarinaMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static int addItemBottleNewOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemBottleNewOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     if (itemId == ITEM_OOT_RUTO_LETTER)
         gOotExtraItems.rutoLetter = 1;
@@ -850,7 +850,7 @@ static int addItemBottleNewOot(GameState_Play* play, u8 itemId, s16 gi, u16 para
     return 0;
 }
 
-static int addItemBottleRefillOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemBottleRefillOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     for (int i = 0; i < 4; ++i)
     {
@@ -865,7 +865,7 @@ static int addItemBottleRefillOot(GameState_Play* play, u8 itemId, s16 gi, u16 p
     return 0;
 }
 
-static int addItemBottleNewMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemBottleNewMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     if (itemId == ITEM_MM_GOLD_DUST)
         gMmExtraItems.goldDust = 1;
@@ -882,7 +882,7 @@ static int addItemBottleNewMm(GameState_Play* play, u8 itemId, s16 gi, u16 param
     return 0;
 }
 
-static int addItemBottleRefillMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemBottleRefillMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     for (int i = 0; i < 6; ++i)
     {
@@ -897,19 +897,19 @@ static int addItemBottleRefillMm(GameState_Play* play, u8 itemId, s16 gi, u16 pa
     return 0;
 }
 
-static int addItemBeansOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemBeansOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     addAmmoOot(ITS_OOT_MAGIC_BEAN, ITEM_OOT_MAGIC_BEAN, 10, param);
     return 0;
 }
 
-static int addItemBeansMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemBeansMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     addAmmoMm(ITS_MM_BEANS, ITEM_MM_MAGIC_BEAN, 20, param);
     return 0;
 }
 
-static int addItemSwordOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemSwordOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     int base;
 
@@ -929,7 +929,7 @@ static int addItemSwordOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static int addItemSwordMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemSwordMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     int shouldChangeBtn;
 
@@ -968,7 +968,7 @@ static void addBombBagRawMm(u8 index)
     addBombsRawMm(kMaxBombs[index]);
 }
 
-static int addItemBombBagOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemBombBagOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     addBombBagRawOot(param);
     if (Config_Flag(CFG_SHARED_BOMB_BAGS))
@@ -976,7 +976,7 @@ static int addItemBombBagOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static int addItemBombBagMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemBombBagMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     addBombBagRawMm(param);
     if (Config_Flag(CFG_SHARED_BOMB_BAGS))
@@ -984,7 +984,7 @@ static int addItemBombBagMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static int addItemShieldOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemShieldOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     u8 shieldType;
     u8 isProgressive;
@@ -999,7 +999,7 @@ static int addItemShieldOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static int addItemShieldMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemShieldMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     u8 shieldType;
     u8 isProgressive;
@@ -1019,47 +1019,47 @@ static int addItemShieldMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static int addItemTunic(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemTunic(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     gOotSave.inventory.equipment.tunics |= (1 << (param - 1));
     return 0;
 }
 
-static int addItemBoots(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemBoots(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     gOotSave.inventory.equipment.boots |= (1 << (param - 1));
     return 0;
 }
 
-static int addItemStrengthOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemStrengthOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     if (param > gOotSave.inventory.upgrades.strength)
         gOotSave.inventory.upgrades.strength = param;
     return 0;
 }
 
-static int addItemStrengthMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemStrengthMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     if (param > gMmSave.inventory.upgrades.strength)
         gMmSave.inventory.upgrades.strength = param;
     return 0;
 }
 
-static int addItemScaleOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemScaleOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     if (param > gOotSave.inventory.upgrades.dive)
         gOotSave.inventory.upgrades.dive = param;
     return 0;
 }
 
-static int addItemScaleMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemScaleMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     if (param > gMmSave.inventory.upgrades.scale)
         gMmSave.inventory.upgrades.scale = param;
     return 0;
 }
 
-static int addItemQuestOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemQuestOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     gOotSave.inventory.quest.value |= (1 << param);
     if (param == QUEST_OOT_SONG_EPONA)
@@ -1067,7 +1067,7 @@ static int addItemQuestOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static int addItemQuestMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemQuestMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     gMmSave.inventory.quest.value |= (1 << param);
     return 0;
@@ -1092,7 +1092,7 @@ static void addHealthRawMm(u8 count)
         gMmSave.playerData.health = gMmSave.playerData.healthMax;
 }
 
-static void addHealthOot(GameState_Play* play, u8 count)
+static void addHealthOot(PlayState* play, u8 count)
 {
 #if defined(GAME_MM)
     if (!Config_Flag(CFG_SHARED_HEALTH))
@@ -1110,7 +1110,7 @@ static void addHealthOot(GameState_Play* play, u8 count)
     addHealthRawOot(count);
 }
 
-static void addHealthMm(GameState_Play* play, u8 count)
+static void addHealthMm(PlayState* play, u8 count)
 {
 #if defined(GAME_OOT)
     if (!Config_Flag(CFG_SHARED_HEALTH))
@@ -1128,13 +1128,13 @@ static void addHealthMm(GameState_Play* play, u8 count)
     addHealthRawMm(count);
 }
 
-static int addItemHeartOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemHeartOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     addHealthOot(play, param);
     return 0;
 }
 
-static int addItemHeartMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemHeartMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     addHealthMm(play, param);
     return 0;
@@ -1152,7 +1152,7 @@ static void addDefenseUpgradeRawMm(void)
     gMmSave.inventory.defenseHearts = 20;
 }
 
-static int addItemDefenseUpgradeOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemDefenseUpgradeOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     addDefenseUpgradeRawOot();
     if (Config_Flag(CFG_SHARED_HEALTH))
@@ -1161,7 +1161,7 @@ static int addItemDefenseUpgradeOot(GameState_Play* play, u8 itemId, s16 gi, u16
     return 0;
 }
 
-static int addItemDefenseUpgradeMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemDefenseUpgradeMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     addDefenseUpgradeRawMm();
     if (Config_Flag(CFG_SHARED_HEALTH))
@@ -1190,7 +1190,7 @@ static void addHeartPieceRawMm(void)
     }
 }
 
-static int addItemHeartPieceOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemHeartPieceOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     for (int i = 0; i < param; ++i)
     {
@@ -1202,7 +1202,7 @@ static int addItemHeartPieceOot(GameState_Play* play, u8 itemId, s16 gi, u16 par
     return param > 1 ? 0: gOotSave.inventory.quest.heartPieces;
 }
 
-static int addItemHeartPieceMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemHeartPieceMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     for (int i = 0; i < param; ++i)
     {
@@ -1253,7 +1253,7 @@ int addSmallKeyMm(u16 dungeonId)
     return gMmSave.inventory.dungeonItems[dungeonId].maxKeys;
 }
 
-static int addItemSmallKeyOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemSmallKeyOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
 #if defined(GAME_OOT)
     if (param == 0xffff)
@@ -1262,7 +1262,7 @@ static int addItemSmallKeyOot(GameState_Play* play, u8 itemId, s16 gi, u16 param
     return addSmallKeyOot(param);
 }
 
-static int addItemSmallKeyMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemSmallKeyMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
 #if defined(GAME_MM)
     if (param == 0xffff)
@@ -1271,7 +1271,7 @@ static int addItemSmallKeyMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return addSmallKeyMm(param);
 }
 
-static int addItemKeyRingOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemKeyRingOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
 #if defined(GAME_OOT)
     if (param == 0xffff)
@@ -1282,7 +1282,7 @@ static int addItemKeyRingOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static int addItemKeyRingMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemKeyRingMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
 #if defined(GAME_MM)
     if (param == 0xffff)
@@ -1293,7 +1293,7 @@ static int addItemKeyRingMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static int addItemSkeletonKeyOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemSkeletonKeyOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     for (int j = 0; j < ARRAY_SIZE(g.maxKeysOot); ++j)
     {
@@ -1303,7 +1303,7 @@ static int addItemSkeletonKeyOot(GameState_Play* play, u8 itemId, s16 gi, u16 pa
     return 0;
 }
 
-static int addItemSkeletonKeyMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemSkeletonKeyMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     for (int j = 0; j < ARRAY_SIZE(g.maxKeysMm); ++j)
     {
@@ -1313,7 +1313,7 @@ static int addItemSkeletonKeyMm(GameState_Play* play, u8 itemId, s16 gi, u16 par
     return 0;
 }
 
-static int addItemBossKeyOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemBossKeyOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
 #if defined(GAME_OOT)
     if (param == 0xffff)
@@ -1324,7 +1324,7 @@ static int addItemBossKeyOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static int addItemBossKeyMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemBossKeyMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
 #if defined(GAME_MM)
     if (param == 0xffff)
@@ -1335,7 +1335,7 @@ static int addItemBossKeyMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static int addItemCompassOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemCompassOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
 #if defined(GAME_OOT)
     if (param == 0xffff)
@@ -1346,7 +1346,7 @@ static int addItemCompassOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static int addItemCompassMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemCompassMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
 #if defined(GAME_MM)
     if (param == 0xffff)
@@ -1357,7 +1357,7 @@ static int addItemCompassMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static int addItemMapOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemMapOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
 #if defined(GAME_OOT)
     if (param == 0xffff)
@@ -1368,7 +1368,7 @@ static int addItemMapOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static int addItemMapMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemMapMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
 #if defined(GAME_MM)
     if (param == 0xffff)
@@ -1379,13 +1379,13 @@ static int addItemMapMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static int addSilverRupee(GameState_Play* play, int id)
+static int addSilverRupee(PlayState* play, int id)
 {
     addRupeesOot(play, 5);
     return comboSilverRupeesIncCount(play, id);
 }
 
-static void addSilverPouch(GameState_Play* play, int id)
+static void addSilverPouch(PlayState* play, int id)
 {
     int max;
 
@@ -1394,41 +1394,41 @@ static void addSilverPouch(GameState_Play* play, int id)
         addSilverRupee(play, id);
 }
 
-static int addItemSilverRupee(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemSilverRupee(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     return addSilverRupee(play, param);
 }
 
-static int addItemSilverPouch(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemSilverPouch(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     addSilverPouch(play, param);
     return 0;
 }
 
-static int addItemMagicalRupee(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemMagicalRupee(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     for (int i = 0; i < ARRAY_SIZE(gSilverRupeeData); ++i)
         addSilverPouch(play, i);
     return 0;
 }
 
-static int addItemGsToken(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemGsToken(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     gOotSave.inventory.quest.goldToken = 1;
     return ++gOotSave.inventory.goldTokens;
 }
 
-static int addItemGsTokenSwamp(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemGsTokenSwamp(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     return ++gMmSave.skullCountSwamp;
 }
 
-static int addItemGsTokenOcean(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemGsTokenOcean(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     return ++gMmSave.skullCountOcean;
 }
 
-static void fillMagicOot(GameState_Play* play)
+static void fillMagicOot(PlayState* play)
 {
     int level;
     int max;
@@ -1453,7 +1453,7 @@ static void fillMagicOot(GameState_Play* play)
     gOotSave.playerData.magicAmount = max;
 }
 
-static void fillMagicMm(GameState_Play* play)
+static void fillMagicMm(PlayState* play)
 {
     int level;
     int max;
@@ -1479,7 +1479,7 @@ static void fillMagicMm(GameState_Play* play)
     gMmSave.playerData.magicAmount = max;
 }
 
-static int addItemMagicUpgradeOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemMagicUpgradeOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     gOotSave.playerData.magicUpgrade = 1;
     if (param >= 2)
@@ -1488,7 +1488,7 @@ static int addItemMagicUpgradeOot(GameState_Play* play, u8 itemId, s16 gi, u16 p
     return 0;
 }
 
-static int addItemMagicUpgradeMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemMagicUpgradeMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     gMmSave.playerData.magicAcquired = 1;
     if (param >= 2)
@@ -1497,7 +1497,7 @@ static int addItemMagicUpgradeMm(GameState_Play* play, u8 itemId, s16 gi, u16 pa
     return 0;
 }
 
-static int addItemStrayFairy(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemStrayFairy(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
 #if defined(GAME_MM)
     if (param == 0xffff)
@@ -1517,53 +1517,53 @@ static int addItemStrayFairy(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     }
 }
 
-static int addItemTriforce(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemTriforce(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     return ++gTriforceCount;
 }
 
-static int addItemCoin(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemCoin(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     return ++gSharedCustomSave.coins[param];
 }
 
-static int addItemButtonOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemButtonOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     gSharedCustomSave.ocarinaButtonMaskOot |= kButtonMasks[param];
     return 0;
 }
 
-static int addItemButtonMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemButtonMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     gSharedCustomSave.ocarinaButtonMaskMm |= kButtonMasks[param];
     return 0;
 }
 
-static int addItemKeg(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemKeg(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     addAmmoMm(ITS_MM_KEG, ITEM_MM_POWDER_KEG, 1, param);
     return 0;
 }
 
-static int addItemSpinUpgrade(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemSpinUpgrade(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     MM_SET_EVENT_WEEK(EV_MM_WEEK_SPIN_UPGRADE);
     return 0;
 }
 
-static int addItemSoulOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemSoulOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     comboAddSoulOot(gi);
     return 0;
 }
 
-static int addItemSoulMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemSoulMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     comboAddSoulMm(gi);
     return 0;
 }
 
-static int addItemPondFish(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemPondFish(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     u8 caughtListCapacity;
     u8 caughtListLength;
@@ -1595,13 +1595,13 @@ static int addItemPondFish(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static int addItemWorldMap(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemWorldMap(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     Inventory_SetWorldMapCloudVisibility(param);
     return 0;
 }
 
-static int addItemOwl(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemOwl(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     gMmOwlFlags |= (1 << param);
     return 0;
@@ -1637,7 +1637,7 @@ static void addMagicRawMm(u8 count)
     gMmSave.playerData.magicAmount = acc;
 }
 
-static void addMagicEffect(GameState_Play* play, u8 count)
+static void addMagicEffect(PlayState* play, u8 count)
 {
 #if defined(GAME_OOT)
     Magic_Refill(play);
@@ -1647,7 +1647,7 @@ static void addMagicEffect(GameState_Play* play, u8 count)
 #endif
 }
 
-static void addMagicOot(GameState_Play* play, u8 count)
+static void addMagicOot(PlayState* play, u8 count)
 {
 #if defined(GAME_MM)
     if (!Config_Flag(CFG_SHARED_MAGIC))
@@ -1665,7 +1665,7 @@ static void addMagicOot(GameState_Play* play, u8 count)
     addMagicRawOot(count);
 }
 
-static void addMagicMm(GameState_Play* play, u8 count)
+static void addMagicMm(PlayState* play, u8 count)
 {
 #if defined(GAME_OOT)
     if (!Config_Flag(CFG_SHARED_MAGIC))
@@ -1683,13 +1683,13 @@ static void addMagicMm(GameState_Play* play, u8 count)
     addMagicRawMm(count);
 }
 
-static int addItemMagicOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemMagicOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     addMagicOot(play, param * (Config_Flag(CFG_SHARED_MAGIC) ? 0x18 : 0x0c));
     return 0;
 }
 
-static int addItemMagicMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemMagicMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     addMagicMm(play, param * 0x18);
     return 0;
@@ -1721,39 +1721,39 @@ static void addBombchuBagMm(u8 count)
     addBombchuMm(count);
 }
 
-static int addItemBombchuBagOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemBombchuBagOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     addBombchuBagOot(param);
     return 0;
 }
 
-static int addItemBombchuBagMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemBombchuBagMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     addBombchuBagMm(param);
     return 0;
 }
 
-static int addItemBigFairyOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemBigFairyOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     addHealthOot(play, 8);
     addMagicOot(play, 0x60);
     return 0;
 }
 
-static int addItemBigFairyMm(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemBigFairyMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     addHealthMm(play, 8);
     addMagicMm(play, 0x60);
     return 0;
 }
 
-static int addItemClock(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemClock(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     gSharedCustomSave.mm.halfDays |= (1 << param);
     return 0;
 }
 
-static int addItemEndgame(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemEndgame(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     switch (param)
     {
@@ -1771,13 +1771,13 @@ static int addItemEndgame(GameState_Play* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static int addElegyOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addElegyOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     gSharedCustomSave.oot.hasElegy = 1;
     return 0;
 }
 
-static int addItemSwordExtraOot(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemSwordExtraOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     if (gSharedCustomSave.extraSwordsOot < param)
         gSharedCustomSave.extraSwordsOot = (u8)param;
@@ -1789,7 +1789,7 @@ static int addItemSwordExtraOot(GameState_Play* play, u8 itemId, s16 gi, u16 par
     return 0;
 }
 
-static int addItemGFSHammer(GameState_Play* play, u8 itemId, s16 gi, u16 param)
+static int addItemGFSHammer(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     itemId = kMmGFSHammer[param];
     if (gMmSave.inventory.items[ITS_MM_GREAT_FAIRY_SWORD] == ITEM_NONE)
@@ -2023,7 +2023,7 @@ static const SharedItem kSimpleSharedItems[] = {
     { CFG_SHARED_HAMMER, GI_OOT_HAMMER, GI_MM_HAMMER },
 };
 
-static int addItem(GameState_Play* play, s16 gi)
+static int addItem(PlayState* play, s16 gi)
 {
     AddItemFunc func;
     int ret;
@@ -2042,7 +2042,7 @@ static int addItem(GameState_Play* play, s16 gi)
     return ret;
 }
 
-int comboAddItemRaw(GameState_Play* play, s16 gi)
+int comboAddItemRaw(PlayState* play, s16 gi)
 {
     const SharedItem* si;
     int count;

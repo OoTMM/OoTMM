@@ -11,10 +11,10 @@ static u8 sIsDeposit;
 
 static const u16 kRequiredRupeeReward[] = { 200, 500, 1000 };
 
-static void EnGinkoMan_CheckRewardHandler(Actor* this, GameState_Play* play);
-static void EnGinkoMan_DefaultHandler(Actor* this, GameState_Play* play);
+static void EnGinkoMan_CheckRewardHandler(Actor* this, PlayState* play);
+static void EnGinkoMan_DefaultHandler(Actor* this, PlayState* play);
 
-static void EnGinkoMan_DisplayMainBox(Actor* this, GameState_Play* play)
+static void EnGinkoMan_DisplayMainBox(Actor* this, PlayState* play)
 {
     char* b;
 
@@ -34,7 +34,7 @@ static void EnGinkoMan_DisplayMainBox(Actor* this, GameState_Play* play)
     comboTextAppendStr(&b, " Withdraw" TEXT_NL TEXT_COLOR_GREEN " Cancel" TEXT_END);
 }
 
-static int EnGinkoMan_ButtonPress(GameState_Play* play)
+static int EnGinkoMan_ButtonPress(PlayState* play)
 {
     u16 buttons;
     int msgState;
@@ -72,7 +72,7 @@ static s32 EnGinkoMan_CurrentRupees(void)
     return rupees;
 }
 
-static void EnGinkoMan_Deposit(GameState_Play* play, int amount)
+static void EnGinkoMan_Deposit(PlayState* play, int amount)
 {
     s32 rupees;
 
@@ -85,7 +85,7 @@ static void EnGinkoMan_Deposit(GameState_Play* play, int amount)
     AddRupeesRaw((s16)-amount);
 }
 
-static void EnGinkoMan_Withdraw(GameState_Play* play, int amount)
+static void EnGinkoMan_Withdraw(PlayState* play, int amount)
 {
     s32 currentRupees;
     s32 maxRupees;
@@ -112,7 +112,7 @@ static void EnGinkoMan_Withdraw(GameState_Play* play, int amount)
     }
 }
 
-static void EnGinkoMan_DoTransfer(GameState_Play* play, int amount)
+static void EnGinkoMan_DoTransfer(PlayState* play, int amount)
 {
     if (sIsDeposit)
         EnGinkoMan_Deposit(play, amount);
@@ -137,7 +137,7 @@ static int EnGinkoMan_Reward(void)
     return -1;
 }
 
-static void EnGinkoMan_GiveRewardHandler(Actor* this, GameState_Play* play)
+static void EnGinkoMan_GiveRewardHandler(Actor* this, PlayState* play)
 {
     Actor_Player* link;
 
@@ -155,7 +155,7 @@ static void EnGinkoMan_GiveRewardHandler(Actor* this, GameState_Play* play)
     comboGiveItemNpc(this, play, GI_MM_WALLET, NPC_MM_BANK_1 + sRewardId, 9999.f, 9999.f);
 }
 
-static void EnGinkoMan_CheckRewardHandler(Actor* this, GameState_Play* play)
+static void EnGinkoMan_CheckRewardHandler(Actor* this, PlayState* play)
 {
     int reward;
 
@@ -172,7 +172,7 @@ static void EnGinkoMan_CheckRewardHandler(Actor* this, GameState_Play* play)
     EnGinkoMan_GiveRewardHandler(this, play);
 }
 
-static void EnGinkoMan_TransferHandler(Actor* this, GameState_Play* play)
+static void EnGinkoMan_TransferHandler(Actor* this, PlayState* play)
 {
     int amount;
 
@@ -198,7 +198,7 @@ static void EnGinkoMan_TransferHandler(Actor* this, GameState_Play* play)
     EnGinkoMan_CheckRewardHandler(this, play);
 }
 
-static void EnGinkoMan_MainBoxHandler(Actor* this, GameState_Play* play)
+static void EnGinkoMan_MainBoxHandler(Actor* this, PlayState* play)
 {
     int action;
 
@@ -231,7 +231,7 @@ static void EnGinkoMan_MainBoxHandler(Actor* this, GameState_Play* play)
     }
 }
 
-static void EnGinkoMan_DefaultHandler(Actor* this, GameState_Play* play)
+static void EnGinkoMan_DefaultHandler(Actor* this, PlayState* play)
 {
     if (!ActorTalkedTo(this))
     {

@@ -13,7 +13,7 @@ int EnGeg_HasGivenItem(Actor* actor)
 
 PATCH_CALL(0x80bb3230, EnGeg_HasGivenItem);
 
-void EnGeg_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+void EnGeg_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b)
 {
     int npc;
 

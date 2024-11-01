@@ -131,7 +131,7 @@ static const ArrowInfo* GetNextArrowInfo(u16 variable)
     return NULL;
 }
 
-static void ReinitializeArrow(Actor* arrow, GameState_Play* play)
+static void ReinitializeArrow(Actor* arrow, PlayState* play)
 {
     ActorFunc init;
     ActorFunc destroy;
@@ -157,7 +157,7 @@ static int IsArrowItem(u8 item)
     }
 }
 
-static void UpdateCButton(Actor_Player* link, GameState_Play* play, const ArrowInfo* info)
+static void UpdateCButton(Actor_Player* link, PlayState* play, const ArrowInfo* info)
 {
     /* Update the icon */
     BUTTON(link->heldItemButton) = info->icon;
@@ -168,7 +168,7 @@ static void UpdateCButton(Actor_Player* link, GameState_Play* play, const ArrowI
     link->heldItemAction = info->action;
 }
 
-static int ActorHelper_DoesActorExist(Actor* actor, GameState_Play* play, int category)
+static int ActorHelper_DoesActorExist(Actor* actor, PlayState* play, int category)
 {
     Actor* list;
 
@@ -182,7 +182,7 @@ static int ActorHelper_DoesActorExist(Actor* actor, GameState_Play* play, int ca
     return 0;
 }
 
-static void HandleFrameDelay(Actor_Player* link, GameState_Play* play, Actor* arrow)
+static void HandleFrameDelay(Actor_Player* link, PlayState* play, Actor* arrow)
 {
     s16 prevEffectState;
     const ArrowInfo* curInfo;
@@ -248,7 +248,7 @@ static void HandleFrameDelay(Actor_Player* link, GameState_Play* play, Actor* ar
     }
 }
 
-static Actor* ArrowCycle_FindArrow(Actor_Player* link, GameState_Play* play)
+static Actor* ArrowCycle_FindArrow(Actor_Player* link, PlayState* play)
 {
     Actor* attached;
 
@@ -260,7 +260,7 @@ static Actor* ArrowCycle_FindArrow(Actor_Player* link, GameState_Play* play)
     }
 }
 
-void ArrowCycle_Handle(Actor_Player* link, GameState_Play* play)
+void ArrowCycle_Handle(Actor_Player* link, PlayState* play)
 {
     switch(play->sceneId)
     {

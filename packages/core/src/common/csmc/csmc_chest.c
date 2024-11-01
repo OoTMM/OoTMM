@@ -66,7 +66,7 @@ static int csmcChestId(s16 gi)
     }
 }
 
-static int csmcEnabledActor(Actor* this, GameState_Play* play)
+static int csmcEnabledActor(Actor* this, PlayState* play)
 {
     if (!csmcEnabled())
         return 0;
@@ -84,7 +84,7 @@ static int csmcEnabledActor(Actor* this, GameState_Play* play)
     return 1;
 }
 
-void csmcChestInit(Actor* this, GameState_Play* play, s16 gi)
+void csmcChestInit(Actor* this, PlayState* play, s16 gi)
 {
     int type;
 
@@ -125,7 +125,7 @@ void csmcChestInit(Actor* this, GameState_Play* play, s16 gi)
 
 }
 
-void csmcChestPreDraw(Actor* this, GameState_Play* play, s16 gi)
+void csmcChestPreDraw(Actor* this, PlayState* play, s16 gi)
 {
     int type;
     const void* listFront;

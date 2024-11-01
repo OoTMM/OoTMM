@@ -25,7 +25,7 @@ static void hintSingleDungeon(char** b, int index)
     comboTextAppendStr(b, "...");
 }
 
-static void hintDungeons(GameState_Play* play)
+static void hintDungeons(PlayState* play)
 {
     char* b;
     char* start;
@@ -72,7 +72,7 @@ static void hintDungeons(GameState_Play* play)
     comboTextAutoLineBreaks(start);
 }
 
-int EnWonderTalk_TalkedTo(Actor* this, GameState_Play* play)
+int EnWonderTalk_TalkedTo(Actor* this, PlayState* play)
 {
     if (ActorTalkedTo(this))
     {

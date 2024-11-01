@@ -18,7 +18,7 @@ static int checkSetEvent(Actor* actor, int event)
     return 0;
 }
 
-static void EnXc_Update_ForestMeadow(Actor* actor, GameState_Play* play)
+static void EnXc_Update_ForestMeadow(Actor* actor, PlayState* play)
 {
     if (checkSetEvent(actor, EV_OOT_CHK_SONG_TP_FOREST))
         return;
@@ -26,7 +26,7 @@ static void EnXc_Update_ForestMeadow(Actor* actor, GameState_Play* play)
         comboGiveItemNpc(actor, play, GI_OOT_SONG_TP_FOREST, NPC_OOT_SHEIK_FOREST, 10000.f, 50.f);
 }
 
-static void EnXc_Update_DeathMountainCrater(Actor* actor, GameState_Play* play)
+static void EnXc_Update_DeathMountainCrater(Actor* actor, PlayState* play)
 {
     float x;
     float y;
@@ -52,7 +52,7 @@ static void EnXc_Update_DeathMountainCrater(Actor* actor, GameState_Play* play)
     comboGiveItemNpc(actor, play, GI_OOT_SONG_TP_FIRE, NPC_OOT_SHEIK_FIRE, 10000.f, 50.f);
 }
 
-static void EnXc_Update_IceCavern(Actor* actor, GameState_Play* play)
+static void EnXc_Update_IceCavern(Actor* actor, PlayState* play)
 {
     Actor_Player* link;
     static int lagFrame = 0;
@@ -79,7 +79,7 @@ static void EnXc_Update_IceCavern(Actor* actor, GameState_Play* play)
     }
 }
 
-static void EnXc_Update_TempleOfTime(Actor* this, GameState_Play* play)
+static void EnXc_Update_TempleOfTime(Actor* this, PlayState* play)
 {
     if (!gSave.inventory.quest.medallionForest || GetEventChk(EV_OOT_CHK_SONG_TP_LIGHT))
         Actor_Kill(this);
@@ -90,7 +90,7 @@ static void EnXc_Update_TempleOfTime(Actor* this, GameState_Play* play)
     comboGiveItemNpc(this, play, GI_OOT_SONG_TP_LIGHT, NPC_OOT_SHEIK_LIGHT, 10000.f, 50.f);
 }
 
-static void EnXc_Init(Actor* this, GameState_Play* play)
+static void EnXc_Init(Actor* this, PlayState* play)
 {
     this->draw = NULL;
     if (gSave.age == AGE_CHILD && this->params != 0 && this->params != 0x8)
@@ -99,7 +99,7 @@ static void EnXc_Init(Actor* this, GameState_Play* play)
     }
 }
 
-void EnXc_Update(Actor* this, GameState_Play* play)
+void EnXc_Update(Actor* this, PlayState* play)
 {
     switch (this->params)
     {

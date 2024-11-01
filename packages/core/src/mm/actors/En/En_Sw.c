@@ -2,9 +2,9 @@
 #include <combo/csmc.h>
 #include <combo/item.h>
 
-void EnSi_ItemOverride(ComboItemOverride* o, Actor* this, GameState_Play* play);
+void EnSi_ItemOverride(ComboItemOverride* o, Actor* this, PlayState* play);
 
-static void EnSw_GoldPreDraw1(Actor* this, GameState_Play* play, int unk)
+static void EnSw_GoldPreDraw1(Actor* this, PlayState* play, int unk)
 {
     ComboItemOverride o;
 

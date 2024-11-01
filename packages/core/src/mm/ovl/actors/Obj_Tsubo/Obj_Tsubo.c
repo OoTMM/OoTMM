@@ -22,27 +22,27 @@ typedef enum
 }
 ObjTsuboType;
 
-void ObjTsubo_Init(Actor_ObjTsubo* this, GameState_Play* play);
-void ObjTsubo_Destroy(Actor_ObjTsubo* this, GameState_Play* play);
-void ObjTsubo_Update(Actor_ObjTsubo* this, GameState_Play* play);
-void ObjTsubo_Draw(Actor_ObjTsubo* this, GameState_Play* play);
+void ObjTsubo_Init(Actor_ObjTsubo* this, PlayState* play);
+void ObjTsubo_Destroy(Actor_ObjTsubo* this, PlayState* play);
+void ObjTsubo_Update(Actor_ObjTsubo* this, PlayState* play);
+void ObjTsubo_Draw(Actor_ObjTsubo* this, PlayState* play);
 
-void ObjTsubo_PotBreak1(Actor_ObjTsubo* this, GameState_Play* play);
-void ObjTsubo_MagicPotBreak1(Actor_ObjTsubo* this, GameState_Play* play);
-void ObjTsubo_PotBreak2(Actor_ObjTsubo* this, GameState_Play* play);
-void ObjTsubo_MagicPotBreak2(Actor_ObjTsubo* this, GameState_Play* play);
-void ObjTsubo_PotBreak3(Actor_ObjTsubo* this, GameState_Play* play);
-void ObjTsubo_MagicPotBreak3(Actor_ObjTsubo* this, GameState_Play* play);
+void ObjTsubo_PotBreak1(Actor_ObjTsubo* this, PlayState* play);
+void ObjTsubo_MagicPotBreak1(Actor_ObjTsubo* this, PlayState* play);
+void ObjTsubo_PotBreak2(Actor_ObjTsubo* this, PlayState* play);
+void ObjTsubo_MagicPotBreak2(Actor_ObjTsubo* this, PlayState* play);
+void ObjTsubo_PotBreak3(Actor_ObjTsubo* this, PlayState* play);
+void ObjTsubo_MagicPotBreak3(Actor_ObjTsubo* this, PlayState* play);
 void func_80928914(Actor_ObjTsubo* this);
-void func_80928928(Actor_ObjTsubo* this, GameState_Play* play);
+void func_80928928(Actor_ObjTsubo* this, PlayState* play);
 void func_809289B4(Actor_ObjTsubo* this);
-void func_809289E4(Actor_ObjTsubo* this, GameState_Play* play);
+void func_809289E4(Actor_ObjTsubo* this, PlayState* play);
 void func_80928D6C(Actor_ObjTsubo* this);
-void func_80928D80(Actor_ObjTsubo* this, GameState_Play* play);
+void func_80928D80(Actor_ObjTsubo* this, PlayState* play);
 void func_80928E74(Actor_ObjTsubo* this);
-void func_80928F18(Actor_ObjTsubo* this, GameState_Play* play);
+void func_80928F18(Actor_ObjTsubo* this, PlayState* play);
 void func_809291DC(Actor_ObjTsubo* this);
-void func_8092926C(Actor_ObjTsubo* this, GameState_Play* play);
+void func_8092926C(Actor_ObjTsubo* this, PlayState* play);
 
 s16 D_80929500 = 0;
 s16 D_80929504 = 0;
@@ -195,7 +195,7 @@ static int ObjTsubo_IsShuffled(Actor_ObjTsubo* this)
     return 1;
 }
 
-int func_809275C0(Actor_ObjTsubo* this, GameState_Play* play)
+int func_809275C0(Actor_ObjTsubo* this, PlayState* play)
 {
     s32 chestFlag = -1;
     s32 skulltulaParams = (OBJ_TSUBO_P001F(&this->actor) << 2) | 0xFF01;
@@ -208,7 +208,7 @@ int func_809275C0(Actor_ObjTsubo* this, GameState_Play* play)
     return ((chestFlag < 0) || !Flags_GetTreasure(play, chestFlag));
 }
 
-void ObjTsubo_SpawnCollectibleFlexible(Actor_ObjTsubo* this, GameState_Play* play)
+void ObjTsubo_SpawnCollectibleFlexible(Actor_ObjTsubo* this, PlayState* play)
 {
     if (ObjTsubo_IsShuffled(this))
     {
@@ -222,7 +222,7 @@ void ObjTsubo_SpawnCollectibleFlexible(Actor_ObjTsubo* this, GameState_Play* pla
     }
 }
 
-void ObjTsubo_SpawnCollectible(Actor_ObjTsubo* this, GameState_Play* play)
+void ObjTsubo_SpawnCollectible(Actor_ObjTsubo* this, PlayState* play)
 {
     s32 itemDrop;
 
@@ -243,12 +243,12 @@ void ObjTsubo_SpawnCollectible(Actor_ObjTsubo* this, GameState_Play* play)
     }
 }
 
-void ObjTsubo_SpawnBoes(Actor_ObjTsubo* this, GameState_Play* play, s32 arg2)
+void ObjTsubo_SpawnBoes(Actor_ObjTsubo* this, PlayState* play, s32 arg2)
 {
     Actor_Spawn(&play->actorCtx, play, AC_EN_MKK, this->actor.world.pos.x, this->actor.world.pos.y, this->actor.world.pos.z, 0, 0, 0, 2);
 }
 
-void ObjTsubo_SpawnGoldSkulltula(Actor_ObjTsubo* this, GameState_Play* play, s32 arg2)
+void ObjTsubo_SpawnGoldSkulltula(Actor_ObjTsubo* this, PlayState* play, s32 arg2)
 {
     Actor* child;
     s32 params;
@@ -265,7 +265,7 @@ void ObjTsubo_SpawnGoldSkulltula(Actor_ObjTsubo* this, GameState_Play* play, s32
     }
 }
 
-void func_80927818(Actor_ObjTsubo* this, GameState_Play* play, s32 arg2)
+void func_80927818(Actor_ObjTsubo* this, PlayState* play, s32 arg2)
 {
     if (OBJ_TSUBO_ZROT(&this->actor) == 1)
     {
@@ -277,12 +277,12 @@ void func_80927818(Actor_ObjTsubo* this, GameState_Play* play, s32 arg2)
     }
 }
 
-int ObjTsubo_IsSceneNotGohtOrTwinmold(Actor_ObjTsubo* this, GameState_Play* play)
+int ObjTsubo_IsSceneNotGohtOrTwinmold(Actor_ObjTsubo* this, PlayState* play)
 {
     return (play->sceneId != SCE_MM_LAIR_GOHT) && (play->sceneId != SCE_MM_LAIR_TWINMOLD);
 }
 
-void func_8092788C(Actor_ObjTsubo* this, GameState_Play* play)
+void func_8092788C(Actor_ObjTsubo* this, PlayState* play)
 {
     if (!this->unk_197 && (play->roomCtx.curRoom.num != this->homeRoom))
     {
@@ -290,7 +290,7 @@ void func_8092788C(Actor_ObjTsubo* this, GameState_Play* play)
     }
 }
 
-void ObjTsubo_Init(Actor_ObjTsubo* this, GameState_Play* play)
+void ObjTsubo_Init(Actor_ObjTsubo* this, PlayState* play)
 {
     ComboItemOverride o;
     s32 type;
@@ -346,12 +346,12 @@ void ObjTsubo_Init(Actor_ObjTsubo* this, GameState_Play* play)
     func_80928914(this);
 }
 
-void ObjTsubo_Destroy(Actor_ObjTsubo* this, GameState_Play* play)
+void ObjTsubo_Destroy(Actor_ObjTsubo* this, PlayState* play)
 {
     Collider_DestroyCylinder(play, &this->collider);
 }
 
-void ObjTsubo_PotBreak1(Actor_ObjTsubo* this, GameState_Play* play)
+void ObjTsubo_PotBreak1(Actor_ObjTsubo* this, PlayState* play)
 {
     s16 rot;
     s32 i;
@@ -390,7 +390,7 @@ void ObjTsubo_PotBreak1(Actor_ObjTsubo* this, GameState_Play* play)
     SpawnSomeDust(play, &this->actor.world.pos, 30.0f, 2, 10, 80, TRUE);
 }
 
-void ObjTsubo_MagicPotBreak1(Actor_ObjTsubo* this, GameState_Play* play)
+void ObjTsubo_MagicPotBreak1(Actor_ObjTsubo* this, PlayState* play)
 {
     s16 rot;
     s32 phi_s0;
@@ -428,8 +428,8 @@ void ObjTsubo_MagicPotBreak1(Actor_ObjTsubo* this, GameState_Play* play)
     SpawnSomeDust(play, &this->actor.world.pos, 50.0f, 2, 20, 80, TRUE);
 }
 
-void ObjTsubo_PotBreak2(Actor_ObjTsubo* this, GameState_Play* play2) {
-    GameState_Play* play = play2;
+void ObjTsubo_PotBreak2(Actor_ObjTsubo* this, PlayState* play2) {
+    PlayState* play = play2;
     s16 rot;
     s32 i;
     s32 phi_s0;
@@ -473,9 +473,9 @@ void ObjTsubo_PotBreak2(Actor_ObjTsubo* this, GameState_Play* play2) {
     }
 }
 
-void ObjTsubo_MagicPotBreak2(Actor_ObjTsubo* this, GameState_Play* play2)
+void ObjTsubo_MagicPotBreak2(Actor_ObjTsubo* this, PlayState* play2)
 {
-    GameState_Play* play = play2;
+    PlayState* play = play2;
     s16 rot;
     s32 i;
     Vec3f pos;
@@ -519,7 +519,7 @@ void ObjTsubo_MagicPotBreak2(Actor_ObjTsubo* this, GameState_Play* play2)
     }
 }
 
-void ObjTsubo_PotBreak3(Actor_ObjTsubo* this, GameState_Play* play)
+void ObjTsubo_PotBreak3(Actor_ObjTsubo* this, PlayState* play)
 {
     s16 rot;
     s32 phi_s0;
@@ -565,7 +565,7 @@ void ObjTsubo_PotBreak3(Actor_ObjTsubo* this, GameState_Play* play)
     }
 }
 
-void ObjTsubo_MagicPotBreak3(Actor_ObjTsubo* this, GameState_Play* play)
+void ObjTsubo_MagicPotBreak3(Actor_ObjTsubo* this, PlayState* play)
 {
 }
 
@@ -574,7 +574,7 @@ void func_80928914(Actor_ObjTsubo* this)
     this->actionFunc = func_80928928;
 }
 
-void func_80928928(Actor_ObjTsubo* this, GameState_Play* play)
+void func_80928928(Actor_ObjTsubo* this, PlayState* play)
 {
     Actor_MoveWithGravity(&this->actor);
     Actor_UpdateBgCheckInfo(play, &this->actor, 15.0f, 15.0f, 0.0f, 0x44);
@@ -593,7 +593,7 @@ void func_809289B4(Actor_ObjTsubo* this)
     this->actionFunc = func_809289E4;
 }
 
-void func_809289E4(Actor_ObjTsubo* this, GameState_Play* play)
+void func_809289E4(Actor_ObjTsubo* this, PlayState* play)
 {
     ObjTsuboData* typeData;
     s32 type;
@@ -688,7 +688,7 @@ void func_80928D6C(Actor_ObjTsubo* this)
     this->actionFunc = func_80928D80;
 }
 
-void func_80928D80(Actor_ObjTsubo* this, GameState_Play* play)
+void func_80928D80(Actor_ObjTsubo* this, PlayState* play)
 {
     Vec3f pos;
     s32 bgId;
@@ -719,7 +719,7 @@ void func_80928E74(Actor_ObjTsubo* this)
     this->actionFunc = func_80928F18;
 }
 
-void func_80928F18(Actor_ObjTsubo* this, GameState_Play* play)
+void func_80928F18(Actor_ObjTsubo* this, PlayState* play)
 {
     ObjTsuboData* typeData;
     s32 type = OBJ_TSUBO_GET_TYPE(&this->actor);
@@ -796,7 +796,7 @@ void func_809291DC(Actor_ObjTsubo* this) {
     this->actionFunc = func_8092926C;
 }
 
-void func_8092926C(Actor_ObjTsubo* this, GameState_Play* play) {
+void func_8092926C(Actor_ObjTsubo* this, PlayState* play) {
     f32 scale;
 
     if (this->unk_194 > 0) {
@@ -814,7 +814,7 @@ void func_8092926C(Actor_ObjTsubo* this, GameState_Play* play) {
     }
 }
 
-void ObjTsubo_Update(Actor_ObjTsubo* this, GameState_Play* play)
+void ObjTsubo_Update(Actor_ObjTsubo* this, PlayState* play)
 {
     this->actionFunc(this, play);
     if (this->actor.draw == NULL) {
@@ -852,7 +852,7 @@ void ObjTsubo_Update(Actor_ObjTsubo* this, GameState_Play* play)
     }
 }
 
-void ObjTsubo_Draw(Actor_ObjTsubo* this, GameState_Play* play)
+void ObjTsubo_Draw(Actor_ObjTsubo* this, PlayState* play)
 {
     ComboItemOverride o;
     int type;

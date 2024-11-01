@@ -13,7 +13,7 @@ int EnBomBowlMan_HasGivenItem(Actor* this)
 
 PATCH_CALL(0x809c59fc, EnBomBowlMan_HasGivenItem);
 
-void EnBomBowlMan_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnBomBowlMan_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 {
     int npc;
 

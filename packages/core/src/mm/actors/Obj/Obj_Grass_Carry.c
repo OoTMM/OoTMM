@@ -24,12 +24,12 @@ void ObjGrassCarry_SpawnDropsWrapper(Actor_ObjGrassCarry* this)
     }
 
     /* Run the default function */
-    void (*ObjGrassCarry_SpawnDrops)(Vec3f*, u16, GameState_Play*);
+    void (*ObjGrassCarry_SpawnDrops)(Vec3f*, u16, PlayState*);
     ObjGrassCarry_SpawnDrops = actorAddr(AC_OBJ_GRASS_CARRY, 0x809aaf9c);
     ObjGrassCarry_SpawnDrops(&this->base.world.pos, this->drop, gPlay);
 }
 
-static void ObjGrassCarry_Draw(Actor_ObjGrassCarry* this, GameState_Play* play)
+static void ObjGrassCarry_Draw(Actor_ObjGrassCarry* this, PlayState* play)
 {
     Xflag xflag;
     ComboItemOverride o;

@@ -9,15 +9,15 @@
 #define SC_ERR_CANNOTBUY    0x02
 #define SC_ERR_NORUPEES     0x04
 
-typedef struct GameState_Play GameState_Play;
+typedef struct PlayState PlayState;
 typedef struct Actor_EnGirlA Actor_EnGirlA;
 
-u8   Shop_ItemSlot(GameState_Play* play, Actor_EnGirlA* girlA);
-int  Shop_Precond(GameState_Play* play, Actor_EnGirlA* girlA);
-void Shop_DisplayTextBox(GameState_Play* play, Actor_EnGirlA* girlA);
-void Shop_DisplayTextBoxConfirm(GameState_Play* play, Actor_EnGirlA* girlA);
-void Shop_AfterBuy(GameState_Play* play, Actor_EnGirlA* girlA);
-void Shop_SetupItem(GameState_Play* play, Actor_EnGirlA* girlA);
-void Shop_UpdateItem(GameState_Play* play, Actor_EnGirlA* girlA);
+u8   Shop_ItemSlot(PlayState* play, Actor_EnGirlA* girlA);
+int  Shop_Precond(PlayState* play, Actor_EnGirlA* girlA);
+void Shop_DisplayTextBox(PlayState* play, Actor_EnGirlA* girlA);
+void Shop_DisplayTextBoxConfirm(PlayState* play, Actor_EnGirlA* girlA);
+void Shop_AfterBuy(PlayState* play, Actor_EnGirlA* girlA);
+void Shop_SetupItem(PlayState* play, Actor_EnGirlA* girlA);
+void Shop_UpdateItem(PlayState* play, Actor_EnGirlA* girlA);
 
 #endif

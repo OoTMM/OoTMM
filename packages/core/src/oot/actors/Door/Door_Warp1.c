@@ -22,7 +22,7 @@ static const BlueWarpData kBlueWarpData[] = {
     { NPC_OOT_BLUE_WARP_TWINROVA,       GI_OOT_MEDALLION_SPIRIT,    EV_OOT_CHK_MEDALLION_SPIRIT },
 };
 
-static const int DoorWarp1_GetID(GameState_Play* play)
+static const int DoorWarp1_GetID(PlayState* play)
 {
     int id;
 
@@ -58,7 +58,7 @@ static const int DoorWarp1_GetID(GameState_Play* play)
     return id;
 }
 
-static const BlueWarpData* DoorWarp1_GetData(GameState_Play* play)
+static const BlueWarpData* DoorWarp1_GetData(PlayState* play)
 {
     int id;
 
@@ -68,7 +68,7 @@ static const BlueWarpData* DoorWarp1_GetData(GameState_Play* play)
     return &kBlueWarpData[id];
 }
 
-int DoorWarp1_Collide(Actor* this, GameState_Play* play)
+int DoorWarp1_Collide(Actor* this, PlayState* play)
 {
     float dist;
 
@@ -99,7 +99,7 @@ static s16 DoorWarp1_GetGI(const BlueWarpData* data)
     return o.gi;
 }
 
-int DoorWarp1_ShouldTrigger(Actor* this, GameState_Play* play)
+int DoorWarp1_ShouldTrigger(Actor* this, PlayState* play)
 {
     int id;
     const BlueWarpData* data;
@@ -137,7 +137,7 @@ int DoorWarp1_ShouldTrigger(Actor* this, GameState_Play* play)
 
 PATCH_FUNC(0x809056e8, DoorWarp1_ShouldTrigger);
 
-void DoorWarp1_AfterDrawWarp(Actor* this, GameState_Play* play)
+void DoorWarp1_AfterDrawWarp(Actor* this, PlayState* play)
 {
     static const int kRotDivisor = 100;
     float angle;

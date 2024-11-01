@@ -4,11 +4,11 @@
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x204) = (h); } while (0)
 
-static void EnDntNormal_Noop(Actor* this, GameState_Play* play)
+static void EnDntNormal_Noop(Actor* this, PlayState* play)
 {
 }
 
-static void EnDntNormal_GiveReward(Actor* this, GameState_Play* play)
+static void EnDntNormal_GiveReward(Actor* this, PlayState* play)
 {
     Actor_Player* link;
 

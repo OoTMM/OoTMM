@@ -34,7 +34,7 @@ static int canShowDpad(void)
     return 1;
 }
 
-static int canUseDpad(GameState_Play* play)
+static int canUseDpad(PlayState* play)
 {
     Actor_Player* link;
 
@@ -46,7 +46,7 @@ static int canUseDpad(GameState_Play* play)
     return 1;
 }
 
-static int canUseDpadItem(GameState_Play* play, s16 itemId, int flags)
+static int canUseDpadItem(PlayState* play, s16 itemId, int flags)
 {
     Actor_Player* link;
     int isEquip;
@@ -96,7 +96,7 @@ static int canUseDpadItem(GameState_Play* play, s16 itemId, int flags)
     return 1;
 }
 
-static void reloadIcons(GameState_Play* play)
+static void reloadIcons(PlayState* play)
 {
     if (!sDpadIconBuffer)
     {
@@ -117,7 +117,7 @@ static void reloadIcons(GameState_Play* play)
     }
 }
 
-void Dpad_Draw(GameState_Play* play)
+void Dpad_Draw(PlayState* play)
 {
     s16 itemId;
     u8 alpha;
@@ -167,7 +167,7 @@ void Dpad_Draw(GameState_Play* play)
     CLOSE_DISPS();
 }
 
-static void dpadUseItem(GameState_Play* play, int index, int flags)
+static void dpadUseItem(PlayState* play, int index, int flags)
 {
     s16 itemId;
 
@@ -178,7 +178,7 @@ static void dpadUseItem(GameState_Play* play, int index, int flags)
 }
 
 #if defined(GAME_OOT)
-void Dpad_Update(GameState_Play* play)
+void Dpad_Update(PlayState* play)
 {
     /* Update the items */
     sDpadItems[DPAD_DOWN] = gSave.inventory.items[ITS_OOT_OCARINA];
@@ -200,7 +200,7 @@ void Dpad_Update(GameState_Play* play)
 #endif
 
 #if defined(GAME_MM)
-void Dpad_Update(GameState_Play* play)
+void Dpad_Update(PlayState* play)
 {
     /* Update the items */
     sDpadItems[DPAD_DOWN] = gSave.inventory.items[ITS_MM_OCARINA];
@@ -210,7 +210,7 @@ void Dpad_Update(GameState_Play* play)
 }
 #endif
 
-int Dpad_Use(GameState_Play* play, int flags)
+int Dpad_Use(PlayState* play, int flags)
 {
     u32 buttons;
     if (!canUseDpad(play))

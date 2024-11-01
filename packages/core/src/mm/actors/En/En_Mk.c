@@ -13,11 +13,11 @@ static void EnMk_ItemQuery(ComboItemQuery* q)
     q->id = NPC_MM_SONG_ZORA;
 }
 
-void EnMk_HandlerNull(Actor* this, GameState_Play* play)
+void EnMk_HandlerNull(Actor* this, PlayState* play)
 {
 }
 
-void EnMk_HandlerZoraEggs(Actor* this, GameState_Play* play)
+void EnMk_HandlerZoraEggs(Actor* this, PlayState* play)
 {
     ComboItemQuery q;
 
@@ -33,7 +33,7 @@ void EnMk_HandlerZoraEggs(Actor* this, GameState_Play* play)
 
 PATCH_FUNC(0x80959d28, EnMk_HandlerZoraEggs);
 
-static void hintZoraEggs(GameState_Play* play)
+static void hintZoraEggs(PlayState* play)
 {
     ComboItemQuery q;
     char* b;
@@ -51,7 +51,7 @@ static void hintZoraEggs(GameState_Play* play)
     comboTextAutoLineBreaks(start);
 }
 
-void EnMk_DisplayTextBox(GameState_Play* play, s16 messageId, Actor* this)
+void EnMk_DisplayTextBox(PlayState* play, s16 messageId, Actor* this)
 {
     switch (messageId)
     {

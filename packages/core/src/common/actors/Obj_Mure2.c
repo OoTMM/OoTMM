@@ -12,7 +12,7 @@
 
 void EnKusa_Aliases(Xflag* xflag);
 
-void ObjMure2_InitWrapper(Actor_ObjMure2* this, GameState_Play* play)
+void ObjMure2_InitWrapper(Actor_ObjMure2* this, PlayState* play)
 {
     ActorFunc init;
 
@@ -28,7 +28,7 @@ void ObjMure2_InitWrapper(Actor_ObjMure2* this, GameState_Play* play)
     init(&this->base, play);
 }
 
-void ObjMure2_SpawnChildrenWrapper(Actor_ObjMure2* this, GameState_Play* play)
+void ObjMure2_SpawnChildrenWrapper(Actor_ObjMure2* this, PlayState* play)
 {
     Actor_EnKusa* kusa;
     ActorFunc ObjMure2_SpawnChildren;

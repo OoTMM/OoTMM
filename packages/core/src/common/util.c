@@ -35,7 +35,7 @@ int comboStrayFairyIndex(void)
     return -1;
 }
 
-int comboOotDungeonScene(GameState_Play* play, int isBossKey)
+int comboOotDungeonScene(PlayState* play, int isBossKey)
 {
 #if defined(GAME_OOT)
     u16 mapIndex;

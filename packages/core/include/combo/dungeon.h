@@ -58,9 +58,9 @@
 #define MQ_GERUDO_TRAINING_GROUNDS  10
 #define MQ_GANON_CASTLE             11
 
-typedef struct GameState_Play GameState_Play;
+typedef struct PlayState PlayState;
 
-int comboCurrentDungeon(GameState_Play *play);
+int comboCurrentDungeon(PlayState *play);
 int comboBossDungeon(int dungeonId);
 void comboDungeonSetFlags(int dungeonId, int mmCycle);
 

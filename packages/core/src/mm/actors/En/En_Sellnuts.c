@@ -15,7 +15,7 @@ int EnSellnuts_HasGivenItem(Actor* this)
 
 PATCH_CALL(0x80adbbfc, EnSellnuts_HasGivenItem);
 
-void EnSellnuts_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnSellnuts_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 {
     int npc;
 

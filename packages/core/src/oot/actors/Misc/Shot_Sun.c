@@ -3,13 +3,13 @@
 #include <combo/global.h>
 #include <combo/actor.h>
 
-int ShotSun_GiveFireArrow(Actor* actor, GameState_Play* play)
+int ShotSun_GiveFireArrow(Actor* actor, PlayState* play)
 {
     PlaySound(0x4802);
     return gOotExtraFlags.fireArrow ? 0 : 1;
 }
 
-void ShotSun_Aliases(Actor_ShotSun* this, GameState_Play* play)
+void ShotSun_Aliases(Actor_ShotSun* this, PlayState* play)
 {
     /* Set the extended properties */
     this->xflag.sceneId = play->sceneId;
@@ -39,7 +39,7 @@ void ShotSun_Aliases(Actor_ShotSun* this, GameState_Play* play)
     }
 }
 
-void ShotSun_InitWrapper(Actor_ShotSun* this, GameState_Play* play)
+void ShotSun_InitWrapper(Actor_ShotSun* this, PlayState* play)
 {
     ActorCallback init;
     u16 variable = this->base.params & 0xFF;
@@ -53,7 +53,7 @@ void ShotSun_InitWrapper(Actor_ShotSun* this, GameState_Play* play)
     init(&this->base, play);
 }
 
-void ShotSun_SpawnFairy(Actor_ShotSun* this, GameState_Play* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable)
+void ShotSun_SpawnFairy(Actor_ShotSun* this, PlayState* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable)
 {
     ComboItemQuery q;
     ComboItemOverride o;

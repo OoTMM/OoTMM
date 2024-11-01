@@ -45,7 +45,7 @@
 # define MASK_DEKU               0x18
 #endif
 
-typedef struct GameState_Play GameState_Play;
+typedef struct PlayState PlayState;
 
 #if defined(GAME_OOT)
 # define MASK_REACTION_SET_CARPENTER_BOSS                 0x00
@@ -109,7 +109,7 @@ typedef struct GameState_Play GameState_Play;
 # define MASK_REACTION_SET_HAGGLING_TOWNSPEOPLE_1         0x3a
 # define MASK_REACTION_SET_HAGGLING_TOWNSPEOPLE_2         0x3b
 
-u16 MaskReaction_GetTextId(GameState_Play* play, int slot);
+u16 MaskReaction_GetTextId(PlayState* play, int slot);
 #endif
 
 

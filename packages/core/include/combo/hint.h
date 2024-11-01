@@ -12,11 +12,11 @@
 #define HINT_TYPE_ITEM_REGION   0x03
 #define HINT_TYPE_JUNK          0x04
 
-typedef struct GameState_Play GameState_Play;
+typedef struct PlayState PlayState;
 
 void Hint_Init(void);
-void Hint_Display(GameState_Play* play, u8 key);
-void Hint_DisplayJunk(GameState_Play* play, u32 key);
-void Hint_DisplayJunkRandom(GameState_Play* play);
+void Hint_Display(PlayState* play, u8 key);
+void Hint_DisplayJunk(PlayState* play, u32 key);
+void Hint_DisplayJunkRandom(PlayState* play);
 
 #endif

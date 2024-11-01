@@ -24,7 +24,7 @@ static void BgMoriHineri_ItemOverride(ComboItemOverride* o, int flags)
     comboItemOverride(o, &q);
 }
 
-void BgMoriHineri_DrawWrapper(Actor* this, GameState_Play* play)
+void BgMoriHineri_DrawWrapper(Actor* this, PlayState* play)
 {
     ComboItemOverride o;
     ActorCallback draw;

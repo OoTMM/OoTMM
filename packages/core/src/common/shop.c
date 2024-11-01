@@ -11,7 +11,7 @@
 # define PRICES_SHOPS PRICES_MM_SHOPS
 #endif
 
-int Shop_Precond(GameState_Play* play, Actor_EnGirlA* girlA)
+int Shop_Precond(PlayState* play, Actor_EnGirlA* girlA)
 {
     ComboItemQuery q;
 
@@ -19,13 +19,13 @@ int Shop_Precond(GameState_Play* play, Actor_EnGirlA* girlA)
     return comboItemPrecondEx(&q, girlA->price);
 }
 
-void Shop_AfterBuy(GameState_Play* play, Actor_EnGirlA* girlA)
+void Shop_AfterBuy(PlayState* play, Actor_EnGirlA* girlA)
 {
     BITMAP8_SET(gCustomSave.shops, girlA->shopId);
     Shop_UpdateItem(play, girlA);
 }
 
-static void quickBuyItem(GameState_Play* play, Actor_EnGirlA* girlA)
+static void quickBuyItem(PlayState* play, Actor_EnGirlA* girlA)
 {
     ComboItemQuery q;
 
@@ -35,12 +35,12 @@ static void quickBuyItem(GameState_Play* play, Actor_EnGirlA* girlA)
     Shop_AfterBuy(play, girlA);
 }
 
-static void postBuyItem(GameState_Play* play, Actor_EnGirlA* girlA)
+static void postBuyItem(PlayState* play, Actor_EnGirlA* girlA)
 {
     AddRupeesRaw(-girlA->price);
 }
 
-void Shop_UpdateItem(GameState_Play* play, Actor_EnGirlA* girlA)
+void Shop_UpdateItem(PlayState* play, Actor_EnGirlA* girlA)
 {
     ComboItemOverride o;
 
@@ -53,7 +53,7 @@ void Shop_UpdateItem(GameState_Play* play, Actor_EnGirlA* girlA)
     girlA->postBuy = postBuyItem;
 }
 
-void Shop_SetupItem(GameState_Play* play, Actor_EnGirlA* girlA)
+void Shop_SetupItem(PlayState* play, Actor_EnGirlA* girlA)
 {
 #if defined(GAME_MM)
     if (girlA->base.params == 2)
@@ -71,7 +71,7 @@ void Shop_SetupItem(GameState_Play* play, Actor_EnGirlA* girlA)
     Shop_UpdateItem(play, girlA);
 }
 
-void Shop_DisplayTextBox(GameState_Play* play, Actor_EnGirlA* girlA)
+void Shop_DisplayTextBox(PlayState* play, Actor_EnGirlA* girlA)
 {
     ComboItemOverride o;
     int flags;
@@ -92,7 +92,7 @@ void Shop_DisplayTextBox(GameState_Play* play, Actor_EnGirlA* girlA)
     comboTextHijackItemShop(play, &o, girlA->price, flags);
 }
 
-void Shop_DisplayTextBoxConfirm(GameState_Play* play, Actor_EnGirlA* girlA)
+void Shop_DisplayTextBoxConfirm(PlayState* play, Actor_EnGirlA* girlA)
 {
     ComboItemOverride o;
 

@@ -111,7 +111,7 @@ int comboItemPrecondEx(const ComboItemQuery* q, s16 price)
     return SC_OK;
 }
 
-static void comboGiveItemRaw(Actor* actor, GameState_Play* play, const ComboItemQuery* q, float a, float b)
+static void comboGiveItemRaw(Actor* actor, PlayState* play, const ComboItemQuery* q, float a, float b)
 {
     static ComboItemQuery sItemQ;
     static ComboItemQuery sItemQBox;
@@ -133,7 +133,7 @@ static void comboGiveItemRaw(Actor* actor, GameState_Play* play, const ComboItem
     }
 }
 
-void comboGiveItem(Actor* actor, GameState_Play* play, const ComboItemQuery* q, float a, float b)
+void comboGiveItem(Actor* actor, PlayState* play, const ComboItemQuery* q, float a, float b)
 {
     ComboItemQuery qNothing = ITEM_QUERY_INIT;
     const ComboItemQuery* qPtr;
@@ -148,12 +148,12 @@ void comboGiveItem(Actor* actor, GameState_Play* play, const ComboItemQuery* q, 
     comboGiveItemRaw(actor, play, qPtr, a, b);
 }
 
-void comboGiveItemNpc(Actor* actor, GameState_Play* play, s16 gi, int npc, float a, float b)
+void comboGiveItemNpc(Actor* actor, PlayState* play, s16 gi, int npc, float a, float b)
 {
     comboGiveItemNpcEx(actor, play, gi, npc, 0, a, b);
 }
 
-void comboGiveItemNpcEx(Actor* actor, GameState_Play* play, s16 gi, int npc, int flags, float a, float b)
+void comboGiveItemNpcEx(Actor* actor, PlayState* play, s16 gi, int npc, int flags, float a, float b)
 {
     ComboItemQuery q = ITEM_QUERY_INIT;
 
@@ -345,7 +345,7 @@ void comboItemOverride(ComboItemOverride* dst, const ComboItemQuery* q)
 }
 
 
-int comboAddItemRawEx(GameState_Play* play, const ComboItemQuery* q, int updateText)
+int comboAddItemRawEx(PlayState* play, const ComboItemQuery* q, int updateText)
 {
     ComboItemOverride o;
     NetContext* net;
@@ -408,7 +408,7 @@ int comboAddItemRawEx(GameState_Play* play, const ComboItemQuery* q, int updateT
     return count;
 }
 
-int comboAddItemEx(GameState_Play* play, const ComboItemQuery* q, int updateText)
+int comboAddItemEx(PlayState* play, const ComboItemQuery* q, int updateText)
 {
     ComboItemQuery qNothing = ITEM_QUERY_INIT;
     const ComboItemQuery* qPtr;
@@ -423,7 +423,7 @@ int comboAddItemEx(GameState_Play* play, const ComboItemQuery* q, int updateText
     return comboAddItemRawEx(play, qPtr, updateText);
 }
 
-void comboPlayerAddItem(GameState_Play* play, s16 gi)
+void comboPlayerAddItem(PlayState* play, s16 gi)
 {
 #if defined(GAME_MM)
 # define CHEST_OFF 0x388
@@ -477,7 +477,7 @@ u8 comboItemType(s16 gi)
     return kExtendedGetItems[gi - 1].type;
 }
 
-Actor_ItemDecoy* Item_AddWithDecoy(GameState_Play* play, const ComboItemQuery* q)
+Actor_ItemDecoy* Item_AddWithDecoy(PlayState* play, const ComboItemQuery* q)
 {
     int count;
     Actor_ItemDecoy* decoy;

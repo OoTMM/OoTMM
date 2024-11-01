@@ -91,17 +91,17 @@ _Static_assert(sizeof(Actor_EnItem00) == 0x1a4, "OoT Actor_EnItem00 size is wron
 _Static_assert(sizeof(Actor_EnItem00) == 0x1b0, "MM Actor_EnItem00 size is wrong");
 #endif
 
-typedef struct GameState_Play GameState_Play;
-void EnItem00_Init(Actor_EnItem00* this, GameState_Play* play);
-void EnItem00_Update(Actor_EnItem00* this, GameState_Play* play);
-void EnItem00_DrawRupee(Actor_EnItem00* this, GameState_Play* play);
-void EnItem00_CollectedHandler(Actor_EnItem00* this, GameState_Play* play);
+typedef struct PlayState PlayState;
+void EnItem00_Init(Actor_EnItem00* this, PlayState* play);
+void EnItem00_Update(Actor_EnItem00* this, PlayState* play);
+void EnItem00_DrawRupee(Actor_EnItem00* this, PlayState* play);
+void EnItem00_CollectedHandler(Actor_EnItem00* this, PlayState* play);
 void EnItem00_SetHandler(Actor_EnItem00* this, void* handler);
 s16  EnItem00_FixDrop(s16 dropType);
 
 void            EnItem00_XflagInit(Actor_EnItem00* this, const Xflag* xflag);
-void            EnItem00_XflagInitFreestanding(Actor_EnItem00* this, GameState_Play* play, u8 actorIndex, u8 slice);
-Actor_EnItem00* EnItem00_DropCustom(GameState_Play* play, const Vec3f* pos, const Xflag* xflag);
-Actor_EnItem00* EnItem00_DropCustomNoInertia(GameState_Play* play, const Vec3f* pos, const Xflag* xflag);
+void            EnItem00_XflagInitFreestanding(Actor_EnItem00* this, PlayState* play, u8 actorIndex, u8 slice);
+Actor_EnItem00* EnItem00_DropCustom(PlayState* play, const Vec3f* pos, const Xflag* xflag);
+Actor_EnItem00* EnItem00_DropCustomNoInertia(PlayState* play, const Vec3f* pos, const Xflag* xflag);
 
 #endif

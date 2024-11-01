@@ -29,7 +29,7 @@ static s16 EnBox_GetGI(Actor* this)
     return (s16)(-raw);
 }
 
-static void EnBox_ItemQuery(ComboItemQuery* q, Actor* this, GameState_Play* play)
+static void EnBox_ItemQuery(ComboItemQuery* q, Actor* this, PlayState* play)
 {
     s16 gi;
     memset(q, 0, sizeof(*q));
@@ -49,7 +49,7 @@ static void EnBox_ItemQuery(ComboItemQuery* q, Actor* this, GameState_Play* play
     }
 }
 
-static s16 EnBox_Item(Actor* this, GameState_Play* play)
+static s16 EnBox_Item(Actor* this, PlayState* play)
 {
     ComboItemQuery q;
     ComboItemOverride ov;
@@ -60,7 +60,7 @@ static s16 EnBox_Item(Actor* this, GameState_Play* play)
     return ov.giRaw;
 }
 
-void EnBox_GiveItemDefaultRange(Actor* actor, GameState_Play* play, s16 gi)
+void EnBox_GiveItemDefaultRange(Actor* actor, PlayState* play, s16 gi)
 {
     ComboItemQuery q;
 
@@ -70,7 +70,7 @@ void EnBox_GiveItemDefaultRange(Actor* actor, GameState_Play* play, s16 gi)
 
 PATCH_CALL(0x80868fe0, EnBox_GiveItemDefaultRange);
 
-void EnBox_InitWrapper(Actor* this, GameState_Play* play)
+void EnBox_InitWrapper(Actor* this, PlayState* play)
 {
     ActorCallback init;
     s16 gi;
@@ -84,7 +84,7 @@ void EnBox_InitWrapper(Actor* this, GameState_Play* play)
     csmcChestInit(this, play, gi);
 }
 
-void EnBox_DrawWrapper(Actor* this, GameState_Play* play)
+void EnBox_DrawWrapper(Actor* this, PlayState* play)
 {
     ActorCallback draw;
     s16 gi;

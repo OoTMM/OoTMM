@@ -6,7 +6,7 @@
 
 struct Actor_EnYb;
 
-typedef void (*Actor_EnYbActionFunc)(struct Actor_EnYb*, GameState_Play*);
+typedef void (*Actor_EnYbActionFunc)(struct Actor_EnYb*, PlayState*);
 
 typedef enum ObjectYbLimb
 {

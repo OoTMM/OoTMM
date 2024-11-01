@@ -6,7 +6,7 @@
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x274) = (h); } while (0)
 
-void EnMk_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnMk_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 {
     int npc;
 
@@ -34,7 +34,7 @@ PATCH_CALL(0x80aac840, EnMk_GiveItem);
 PATCH_CALL(0x80aacce8, EnMk_GiveItem);
 PATCH_CALL(0x80aacd48, EnMk_GiveItem);
 
-void EnMk_EyeballFrogHandler(Actor* this, GameState_Play* play)
+void EnMk_EyeballFrogHandler(Actor* this, PlayState* play)
 {
     if (Actor_HasParentZ(this))
     {

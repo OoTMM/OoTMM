@@ -425,7 +425,7 @@ void comboCreateSave(void* unk, void* buffer)
     memcpy((char*)buffer + base + 0x3cf0, &gOotSave, 0x1354);
 }
 
-static void DeathWarpWrapper(GameState_Play* play)
+static void DeathWarpWrapper(PlayState* play)
 {
     dungeonRespawn(play->sceneId, 0);
     DeathWarp(play);
@@ -438,7 +438,7 @@ void PrepareAndSave(void)
     Save_DoSave(gPlay, 0);
 }
 
-void Save_DoSave(GameState_Play* play, int saveFlags)
+void Save_DoSave(PlayState* play, int saveFlags)
 {
     /* Wait for net */
     netWaitSave();

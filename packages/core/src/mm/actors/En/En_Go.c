@@ -23,7 +23,7 @@ static void EnGo_ItemQuery(ComboItemQuery* q)
     }
 }
 
-void EnGo_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnGo_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 {
     ComboItemQuery q;
 
@@ -31,7 +31,7 @@ void EnGo_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
     comboGiveItem(this, play, &q, a, b);
 }
 
-static void powderKegHint(GameState_Play* play)
+static void powderKegHint(PlayState* play)
 {
     ComboItemQuery q;
     char* b;
@@ -47,7 +47,7 @@ static void powderKegHint(GameState_Play* play)
     comboTextAutoLineBreaks(start);
 }
 
-void EnGo_AfterTextBox(Actor* this, GameState_Play* play, s16 messageId)
+void EnGo_AfterTextBox(Actor* this, PlayState* play, s16 messageId)
 {
     if (messageId == 0x0c81)
     {

@@ -13,7 +13,7 @@ int EnGuruguru_HasGivenItem(Actor* this)
 
 PATCH_CALL(0x80bc7460, EnGuruguru_HasGivenItem);
 
-void EnGuruguru_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+void EnGuruguru_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b)
 {
     int npc;
 

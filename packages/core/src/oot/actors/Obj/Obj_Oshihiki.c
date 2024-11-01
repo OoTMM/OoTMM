@@ -2,7 +2,7 @@
 #include <combo/dungeon.h>
 #include <combo/config.h>
 
-static int ObjOshihiki_GetSwitchFlag(GameState_Play* play, int flag)
+static int ObjOshihiki_GetSwitchFlag(PlayState* play, int flag)
 {
     /* MQ Spirit fix */
     if (play->sceneId == SCE_OOT_TEMPLE_SPIRIT && (Config_IsMq(MQ_TEMPLE_SPIRIT)) && gSave.age == AGE_CHILD && flag == 0x09)

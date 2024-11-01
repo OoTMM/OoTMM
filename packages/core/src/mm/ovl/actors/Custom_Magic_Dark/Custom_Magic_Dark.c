@@ -7,14 +7,14 @@
 
 #define FLAGS (ACTOR_FLAG_OOT_4 | ACTOR_FLAG_OOT_25)
 
-void MagicDark_Init(Actor* thisx, GameState_Play* play);
-void MagicDark_Destroy(Actor* thisx, GameState_Play* play);
-void MagicDark_OrbUpdate(Actor* thisx, GameState_Play* play);
-void MagicDark_OrbDraw(Actor* thisx, GameState_Play* play);
-void MagicDark_DiamondUpdate(Actor* thisx, GameState_Play* play);
-void MagicDark_DiamondDraw(Actor* thisx, GameState_Play* play);
+void MagicDark_Init(Actor* thisx, PlayState* play);
+void MagicDark_Destroy(Actor* thisx, PlayState* play);
+void MagicDark_OrbUpdate(Actor* thisx, PlayState* play);
+void MagicDark_OrbDraw(Actor* thisx, PlayState* play);
+void MagicDark_DiamondUpdate(Actor* thisx, PlayState* play);
+void MagicDark_DiamondDraw(Actor* thisx, PlayState* play);
 
-void MagicDark_DimLighting(GameState_Play* play, f32 intensity);
+void MagicDark_DimLighting(PlayState* play, f32 intensity);
 
 static Vtx sDiamondVtx[20] = {
 #include "sDiamondVtx.vtx.inc"
@@ -65,7 +65,7 @@ static f32 MagicDark_GetScale(Actor_Player* player)
     return 0.0f;
 }
 
-void MagicDark_Init(Actor* thisx, GameState_Play* play) {
+void MagicDark_Init(Actor* thisx, PlayState* play) {
     MagicDark* this = (MagicDark*)thisx;
     Actor_Player* player = GET_PLAYER(play);
 
@@ -88,13 +88,13 @@ void MagicDark_Init(Actor* thisx, GameState_Play* play) {
     }
 }
 
-void MagicDark_Destroy(Actor* thisx, GameState_Play* play) {
+void MagicDark_Destroy(Actor* thisx, PlayState* play) {
     if (gSaveContext.nayrusLoveTimer == 0) {
         Magic_Reset(play);
     }
 }
 
-void MagicDark_DiamondUpdate(Actor* thisx, GameState_Play* play) {
+void MagicDark_DiamondUpdate(Actor* thisx, PlayState* play) {
     MagicDark* this = (MagicDark*)thisx;
     u8 phi_a0;
     Actor_Player* player = GET_PLAYER(play);
@@ -165,7 +165,7 @@ void MagicDark_DiamondUpdate(Actor* thisx, GameState_Play* play) {
     }
 }
 
-void MagicDark_DimLighting(GameState_Play* play, f32 intensity) {
+void MagicDark_DimLighting(PlayState* play, f32 intensity) {
     s32 i;
     f32 colorScale;
     f32 fogScale;
@@ -199,7 +199,7 @@ void MagicDark_DimLighting(GameState_Play* play, f32 intensity) {
     }
 }
 
-void MagicDark_OrbUpdate(Actor* thisx, GameState_Play* play) {
+void MagicDark_OrbUpdate(Actor* thisx, PlayState* play) {
     MagicDark* this = (MagicDark*)thisx;
     Actor_Player* player = GET_PLAYER(play);
 
@@ -226,7 +226,7 @@ void MagicDark_OrbUpdate(Actor* thisx, GameState_Play* play) {
     this->timer++;
 }
 
-void MagicDark_DiamondDraw(Actor* thisx, GameState_Play* play) {
+void MagicDark_DiamondDraw(Actor* thisx, PlayState* play) {
     MagicDark* this = (MagicDark*)thisx;
     u16 gameplayFrames = play->gameplayFrames;
 
@@ -280,7 +280,7 @@ void MagicDark_DiamondDraw(Actor* thisx, GameState_Play* play) {
     CLOSE_DISPS();
 }
 
-void MagicDark_OrbDraw(Actor* thisx, GameState_Play* play) {
+void MagicDark_OrbDraw(Actor* thisx, PlayState* play) {
     MagicDark* this = (MagicDark*)thisx;
     Vec3f pos;
     Actor_Player* player = GET_PLAYER(play);

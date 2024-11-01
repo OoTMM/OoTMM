@@ -13,7 +13,7 @@
 #include <combo/context.h>
 #include <combo/audio.h>
 
-GameState_Play* gPlay;
+PlayState* gPlay;
 int gNoTimeFlow;
 
 static u32 entranceForOverride(u32 entrance)
@@ -238,7 +238,7 @@ static void applyGrottoExit(u32* entrance, const GrottoExit* ge)
     *entrance = rs->entrance;
 }
 
-static u32 entrGrottoExit(GameState_Play* play)
+static u32 entrGrottoExit(PlayState* play)
 {
     if (!Config_Flag(CFG_ER_GROTTOS))
         return ENTR_MM_INTERNAL_EXIT_GROTTO;
@@ -324,7 +324,7 @@ static void applyCustomEntrance(u32* entrance)
     }
 }
 
-static void spawnSirloin(GameState_Play* play)
+static void spawnSirloin(PlayState* play)
 {
     if (!gSharedCustomSave.storedSirloin)
         return;
@@ -378,7 +378,7 @@ static void Play_FixupSpawnTime(void)
     }
 }
 
-void hookPlay_Init(GameState_Play* play)
+void hookPlay_Init(PlayState* play)
 {
     u32 entrance;
 
@@ -653,7 +653,7 @@ void hookPlay_Init(GameState_Play* play)
     }
 }
 
-void Play_UpdateWrapper(GameState_Play* play)
+void Play_UpdateWrapper(PlayState* play)
 {
     Actor_Player* link;
     /* Auto-press A during credits */
@@ -673,7 +673,7 @@ void Play_UpdateWrapper(GameState_Play* play)
     Debug_Update();
 }
 
-void Play_TransitionDone(GameState_Play* play)
+void Play_TransitionDone(PlayState* play)
 {
     u32 entrance;
     s32 override;
@@ -734,7 +734,7 @@ void Play_TransitionDone(GameState_Play* play)
     }
 }
 
-void Play_SetupRespawnPointRaw(GameState_Play* play, int respawnId, int playerParams)
+void Play_SetupRespawnPointRaw(PlayState* play, int respawnId, int playerParams)
 {
     Actor_Player* link;
 
@@ -742,7 +742,7 @@ void Play_SetupRespawnPointRaw(GameState_Play* play, int respawnId, int playerPa
     Play_SetRespawnData(play, respawnId, gSave.entrance, gPlay->roomCtx.curRoom.num, playerParams, &link->actor.world.pos, link->actor.shape.rot.y);
 }
 
-void Play_SetupRespawnPoint(GameState_Play* play, int respawnId, int playerParams)
+void Play_SetupRespawnPoint(PlayState* play, int respawnId, int playerParams)
 {
     if (!Config_Flag(CFG_ER_GROTTOS) && play->sceneId == SCE_MM_GROTTOS)
         return;
@@ -752,10 +752,10 @@ void Play_SetupRespawnPoint(GameState_Play* play, int respawnId, int playerParam
 
 PATCH_FUNC(0x80169e6c, Play_SetupRespawnPoint);
 
-void CutsceneTransitionHook(GameState_Play* play)
+void CutsceneTransitionHook(PlayState* play)
 {
     /* Default hook */
-    void (*DefaultHook)(GameState_Play*);
+    void (*DefaultHook)(PlayState*);
     DefaultHook = (void*)0x801306a4;
     DefaultHook(play);
 
@@ -776,7 +776,7 @@ void Play_FastInit(GameState* gs)
 
     /* Init the play state */
     gs->nextGameStateInit = Play_Init;
-    gs->nextGameStateSize = sizeof(GameState_Play);
+    gs->nextGameStateSize = sizeof(PlayState);
 
     /* Load the save file */
     gSaveContext.fileIndex = gComboCtx.saveIndex;

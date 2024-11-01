@@ -1,6 +1,6 @@
 #include <combo.h>
 
-static void BgHakaCurtain_HandlerRoomClear(Actor* this, GameState_Play* play)
+static void BgHakaCurtain_HandlerRoomClear(Actor* this, PlayState* play)
 {
     float max;
 

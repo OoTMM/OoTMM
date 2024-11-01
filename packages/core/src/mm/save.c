@@ -23,7 +23,7 @@ void Sram_AfterOpenSave(void)
 #endif
 }
 
-void Sram_SaveEndOfCycle(GameState_Play* play)
+void Sram_SaveEndOfCycle(PlayState* play)
 {
     /* Re-enable time */
     gNoTimeFlow = 0;
@@ -175,7 +175,7 @@ PATCH_CALL(0x80829218, PrepareSaveAndSave);
 PATCH_CALL(0x80829f08, PrepareSaveAndSave);
 PATCH_CALL(0x80146f10, PrepareSaveAndSave);
 
-void Save_DoSave(GameState_Play* play, int saveFlags)
+void Save_DoSave(PlayState* play, int saveFlags)
 {
     /* Wait for net */
     netWaitSave();

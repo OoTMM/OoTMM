@@ -4,7 +4,7 @@
 #include <combo/config.h>
 #include <combo/draw.h>
 
-static void EnItem00_ItemQuery(ComboItemQuery* q, Actor_EnItem00* this, GameState_Play* play, s16 gi)
+static void EnItem00_ItemQuery(ComboItemQuery* q, Actor_EnItem00* this, PlayState* play, s16 gi)
 {
     memset(q, 0, sizeof(*q));
 
@@ -22,7 +22,7 @@ static void EnItem00_ItemQuery(ComboItemQuery* q, Actor_EnItem00* this, GameStat
     }
 }
 
-void EnItem00_GiveItem(Actor_EnItem00* this, GameState_Play* play, s16 gi, float a, float b)
+void EnItem00_GiveItem(Actor_EnItem00* this, PlayState* play, s16 gi, float a, float b)
 {
     ComboItemQuery q;
     Actor_Player* link;
@@ -52,7 +52,7 @@ void EnItem00_GiveItem(Actor_EnItem00* this, GameState_Play* play, s16 gi, float
 PATCH_CALL(0x800a700c, EnItem00_GiveItem);
 PATCH_CALL(0x800a6a8c, EnItem00_GiveItem);
 
-void EnItem00_DrawHeartPiece(Actor_EnItem00* this, GameState_Play* play)
+void EnItem00_DrawHeartPiece(Actor_EnItem00* this, PlayState* play)
 {
     static const float scale = 17.5f;
 

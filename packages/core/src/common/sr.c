@@ -94,7 +94,7 @@ int comboSilverRupeesGetCount(int id)
     return ((*(kSilverRupeeCounts[id >> 2])) >> ((id & 3) * 8)) & 0xff;
 }
 
-int comboSilverRupeesIncCount(GameState_Play* play, int id)
+int comboSilverRupeesIncCount(PlayState* play, int id)
 {
     const ComboSilverRupeeData* data;
     int tmp;
@@ -135,7 +135,7 @@ int comboSilverRupeesIncCount(GameState_Play* play, int id)
 }
 
 /* Handle temp flags */
-void comboSrUpdate(GameState_Play* play)
+void comboSrUpdate(PlayState* play)
 {
     const ComboSilverRupeeData* data;
 

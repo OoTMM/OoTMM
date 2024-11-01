@@ -12,16 +12,16 @@
 
 #define FLAGS (ACTOR_FLAG_OOT_4 | ACTOR_FLAG_OOT_25)
 
-void MagicWind_Init(Actor* thisx, GameState_Play* play);
-void MagicWind_Destroy(Actor* thisx, GameState_Play* play);
-void MagicWind_Update(Actor* thisx, GameState_Play* play);
-void MagicWind_Draw(Actor* thisx, GameState_Play* play);
+void MagicWind_Init(Actor* thisx, PlayState* play);
+void MagicWind_Destroy(Actor* thisx, PlayState* play);
+void MagicWind_Update(Actor* thisx, PlayState* play);
+void MagicWind_Draw(Actor* thisx, PlayState* play);
 
-void MagicWind_Shrink(MagicWind* this, GameState_Play* play);
-void MagicWind_WaitForTimer(MagicWind* this, GameState_Play* play);
-void MagicWind_FadeOut(MagicWind* this, GameState_Play* play);
-void MagicWind_WaitAtFullSize(MagicWind* this, GameState_Play* play);
-void MagicWind_Grow(MagicWind* this, GameState_Play* play);
+void MagicWind_Shrink(MagicWind* this, PlayState* play);
+void MagicWind_WaitForTimer(MagicWind* this, PlayState* play);
+void MagicWind_FadeOut(MagicWind* this, PlayState* play);
+void MagicWind_WaitAtFullSize(MagicWind* this, PlayState* play);
+void MagicWind_Grow(MagicWind* this, PlayState* play);
 
 static Vtx sCylinderVtx[36] = {
 #include "sCylinderVtx.vtx.inc"
@@ -142,7 +142,7 @@ void MagicWind_SetupAction(MagicWind* this, MagicWindFunc actionFunc) {
     this->actionFunc = actionFunc;
 }
 
-void MagicWind_Init(Actor* thisx, GameState_Play* play) {
+void MagicWind_Init(Actor* thisx, PlayState* play) {
     MagicWind* this = (MagicWind*)thisx;
     Actor_Player* player = GET_PLAYER(play);
 
@@ -164,7 +164,7 @@ void MagicWind_Init(Actor* thisx, GameState_Play* play) {
     }
 }
 
-void MagicWind_Destroy(Actor* thisx, GameState_Play* play) {
+void MagicWind_Destroy(Actor* thisx, PlayState* play) {
     MagicWind* this = (MagicWind*)thisx;
     SkelCurve_Destroy(play, &this->skelCurve);
     Magic_Reset(play);
@@ -178,7 +178,7 @@ void MagicWind_UpdateAlpha(f32 alpha) {
     }
 }
 
-void MagicWind_WaitForTimer(MagicWind* this, GameState_Play* play) {
+void MagicWind_WaitForTimer(MagicWind* this, PlayState* play) {
     Actor_Player* player = GET_PLAYER(play);
 
     if (this->timer > 0) {
@@ -192,14 +192,14 @@ void MagicWind_WaitForTimer(MagicWind* this, GameState_Play* play) {
     SkelCurve_Update(play, &this->skelCurve);
 }
 
-void MagicWind_Grow(MagicWind* this, GameState_Play* play) {
+void MagicWind_Grow(MagicWind* this, PlayState* play) {
     if (SkelCurve_Update(play, &this->skelCurve)) {
         MagicWind_SetupAction(this, MagicWind_WaitAtFullSize);
         this->timer = 50;
     }
 }
 
-void MagicWind_WaitAtFullSize(MagicWind* this, GameState_Play* play) {
+void MagicWind_WaitAtFullSize(MagicWind* this, PlayState* play) {
     if (this->timer > 0) {
         this->timer--;
     } else {
@@ -208,7 +208,7 @@ void MagicWind_WaitAtFullSize(MagicWind* this, GameState_Play* play) {
     }
 }
 
-void MagicWind_FadeOut(MagicWind* this, GameState_Play* play) {
+void MagicWind_FadeOut(MagicWind* this, PlayState* play) {
     if (this->timer > 0) {
         MagicWind_UpdateAlpha((f32)this->timer * (1.0f / 30.0f));
         this->timer--;
@@ -217,13 +217,13 @@ void MagicWind_FadeOut(MagicWind* this, GameState_Play* play) {
     }
 }
 
-void MagicWind_Shrink(MagicWind* this, GameState_Play* play) {
+void MagicWind_Shrink(MagicWind* this, PlayState* play) {
     if (SkelCurve_Update(play, &this->skelCurve)) {
         Actor_Kill(&this->actor);
     }
 }
 
-void MagicWind_Update(Actor* thisx, GameState_Play* play) {
+void MagicWind_Update(Actor* thisx, PlayState* play) {
     MagicWind* this = (MagicWind*)thisx;
 
     /* See `ACTOROVL_ALLOC_ABSOLUTE` */
@@ -237,7 +237,7 @@ void MagicWind_Update(Actor* thisx, GameState_Play* play) {
     this->actionFunc(this, play);
 }
 
-s32 MagicWind_OverrideLimbDraw(GameState_Play* play, SkelCurve* skelCurve, s32 limbIndex, void* thisx)
+s32 MagicWind_OverrideLimbDraw(PlayState* play, SkelCurve* skelCurve, s32 limbIndex, void* thisx)
 {
     OPEN_DISPS(play->gs.gfx);
 
@@ -261,7 +261,7 @@ s32 MagicWind_OverrideLimbDraw(GameState_Play* play, SkelCurve* skelCurve, s32 l
     return 1;
 }
 
-void MagicWind_Draw(Actor* thisx, GameState_Play* play) {
+void MagicWind_Draw(Actor* thisx, PlayState* play) {
     GfxContext* gfxCtx = play->gs.gfx;
     MagicWind* this = (MagicWind*)thisx;
 

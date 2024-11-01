@@ -1,7 +1,7 @@
 #include <combo.h>
 #include <combo/player.h>
 
-void ArmsHook_SetTimerAndParent(Actor_ArmsHook* this, GameState_Play* play)
+void ArmsHook_SetTimerAndParent(Actor_ArmsHook* this, PlayState* play)
 {
     Actor_Player* player = GET_PLAYER(play);
     this->actor.parent = &player->actor;

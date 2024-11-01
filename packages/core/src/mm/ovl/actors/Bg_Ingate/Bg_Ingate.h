@@ -5,7 +5,7 @@
 
 struct Actor_BgIngate;
 
-typedef void (*Actor_BgIngate_ActionFunc)(struct Actor_BgIngate*, GameState_Play*);
+typedef void (*Actor_BgIngate_ActionFunc)(struct Actor_BgIngate*, PlayState*);
 
 #define BGINGATE_GET_PATH_INDEX(thisx) ((thisx)->params & 0xFF)
 

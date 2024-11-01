@@ -4,7 +4,7 @@
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x33c) = (h); } while (0)
 
-static void EnMa4_HandleLearnSongEpona(Actor* this, GameState_Play* play)
+static void EnMa4_HandleLearnSongEpona(Actor* this, PlayState* play)
 {
     Actor_Player* link;
     void* handler;

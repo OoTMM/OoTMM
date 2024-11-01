@@ -4,7 +4,7 @@
 #include <combo/config.h>
 #include <combo/actor.h>
 
-static void EnBox_ItemQuery(ComboItemQuery* q, Actor* this, GameState_Play* play, s16 gi)
+static void EnBox_ItemQuery(ComboItemQuery* q, Actor* this, PlayState* play, s16 gi)
 {
     memset(q, 0, sizeof(*q));
 
@@ -21,7 +21,7 @@ static void EnBox_ItemQuery(ComboItemQuery* q, Actor* this, GameState_Play* play
     }
 }
 
-static s16 EnBox_Item(Actor* this, GameState_Play* play, s16 gi)
+static s16 EnBox_Item(Actor* this, PlayState* play, s16 gi)
 {
     ComboItemQuery q;
     ComboItemOverride o;
@@ -37,7 +37,7 @@ static s16 EnBox_GetGI(Actor* this)
     return -((this->params >> 5) & 0x7f);
 }
 
-void EnBox_GiveItem(Actor* actor, GameState_Play* play, s16 gi)
+void EnBox_GiveItem(Actor* actor, PlayState* play, s16 gi)
 {
     ComboItemQuery q;
 
@@ -47,7 +47,7 @@ void EnBox_GiveItem(Actor* actor, GameState_Play* play, s16 gi)
 
 PATCH_CALL(0x808696bc, EnBox_GiveItem);
 
-void EnBox_InitWrapper(Actor* this, GameState_Play* play)
+void EnBox_InitWrapper(Actor* this, PlayState* play)
 {
     ActorCallback init;
     s16 gi;
@@ -61,7 +61,7 @@ void EnBox_InitWrapper(Actor* this, GameState_Play* play)
     csmcChestInit(this, play, gi);
 }
 
-void EnBox_DrawWrapper(Actor* this, GameState_Play* play)
+void EnBox_DrawWrapper(Actor* this, PlayState* play)
 {
     ActorCallback draw;
     s16 gi;

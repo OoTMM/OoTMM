@@ -5,10 +5,10 @@
 #include <combo/inventory.h>
 #include <combo/actor.h>
 
-static void EnKz_MaybeSetMovedPos(Actor* this, GameState_Play* play)
+static void EnKz_MaybeSetMovedPos(Actor* this, PlayState* play)
 {
     int isOpen;
-    void (*EnKz_SetMovedPos)(Actor*, GameState_Play*);
+    void (*EnKz_SetMovedPos)(Actor*, PlayState*);
 
     if (Config_Flag(CFG_OOT_KZ_OPEN))
         isOpen = 1;
@@ -41,7 +41,7 @@ int EnKz_HasGiveItem(Actor* this)
 
 PATCH_CALL(0x80ad6c5c, EnKz_HasGiveItem);
 
-void EnKz_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnKz_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 {
     int npc;
 

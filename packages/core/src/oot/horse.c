@@ -19,7 +19,7 @@ static int Horse_IsValidEntrance(u32 entranceId)
     }
 }
 
-void Horse_ForceUnmount(GameState_Play* play)
+void Horse_ForceUnmount(PlayState* play)
 {
     if (AREG(6) != 0)
     {
@@ -38,7 +38,7 @@ void Horse_ForceUnmount(GameState_Play* play)
     }
 }
 
-void Horse_SpawnWrapper(GameState_Play* play, Actor_Player* link)
+void Horse_SpawnWrapper(PlayState* play, Actor_Player* link)
 {
     if (!Horse_IsValidEntrance(gSave.entrance))
         Horse_ForceUnmount(play);

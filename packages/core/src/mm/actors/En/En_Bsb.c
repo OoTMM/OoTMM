@@ -1,6 +1,6 @@
 #include <combo.h>
 
-static void EnBsb_OnDeath(Actor* this, GameState_Play* play)
+static void EnBsb_OnDeath(Actor* this, PlayState* play)
 {
     /* Disable the fire ring */
     Flags_SetSwitch(play, 0xb);

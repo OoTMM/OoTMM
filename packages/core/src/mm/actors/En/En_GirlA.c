@@ -3,7 +3,7 @@
 #include <combo/shop.h>
 #include <combo/draw.h>
 
-void EnGirlA_Draw(Actor_EnGirlA* this, GameState_Play* play)
+void EnGirlA_Draw(Actor_EnGirlA* this, PlayState* play)
 {
     ComboItemOverride o;
 
@@ -15,7 +15,7 @@ void EnGirlA_Draw(Actor_EnGirlA* this, GameState_Play* play)
     Draw_Gi(play, &this->base, o.gi, 0);
 }
 
-void EnGirlA_AfterHandler(Actor_EnGirlA* this, GameState_Play* play)
+void EnGirlA_AfterHandler(Actor_EnGirlA* this, PlayState* play)
 {
     Shop_SetupItem(play, this);
 }

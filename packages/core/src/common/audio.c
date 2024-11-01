@@ -330,7 +330,7 @@ static void drawStr(int x, int y, const char* str)
     }
 }
 
-static void Audio_DrawMusicName(GameState_Play* play)
+static void Audio_DrawMusicName(PlayState* play)
 {
     u8 alpha;
     GfxContext* ctx;
@@ -364,7 +364,7 @@ static void Audio_DrawMusicName(GameState_Play* play)
     gSPDisplayList(ctx->overlay.append++, opaTarget);
 }
 
-void Audio_DisplayMusicName(GameState_Play* play)
+void Audio_DisplayMusicName(PlayState* play)
 {
     static u8 sIsInitialized;
     DmaEntry e;

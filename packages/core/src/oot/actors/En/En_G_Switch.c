@@ -11,7 +11,7 @@ static u16 EnGSwitch_LocalID(Actor* this)
     return *(u16*)((char*)this + 0x148);
 }
 
-static u16 EnGSwitch_ID(Actor* this, GameState_Play* play)
+static u16 EnGSwitch_ID(Actor* this, PlayState* play)
 {
     u16 base;
     u16 offset;
@@ -119,14 +119,14 @@ static u16 EnGSwitch_ID(Actor* this, GameState_Play* play)
     return base + offset;
 }
 
-static void EnGSwitch_ItemQuery(ComboItemQuery* q, Actor* this, GameState_Play* play)
+static void EnGSwitch_ItemQuery(ComboItemQuery* q, Actor* this, PlayState* play)
 {
     bzero(q, sizeof(*q));
     q->ovType = OV_SR;
     q->id = EnGSwitch_ID(this, play);
 }
 
-static void EnGSwitch_ItemOverride(ComboItemOverride* o, Actor* this, GameState_Play* play)
+static void EnGSwitch_ItemOverride(ComboItemOverride* o, Actor* this, PlayState* play)
 {
     ComboItemQuery q;
 
@@ -134,7 +134,7 @@ static void EnGSwitch_ItemOverride(ComboItemOverride* o, Actor* this, GameState_
     comboItemOverride(o, &q);
 }
 
-int EnGSwitch_AlreadyTaken(GameState_Play* play, Actor* this)
+int EnGSwitch_AlreadyTaken(PlayState* play, Actor* this)
 {
     u16 id;
 
@@ -146,7 +146,7 @@ int EnGSwitch_AlreadyTaken(GameState_Play* play, Actor* this)
     return BITMAP8_GET(gCustomSave.sr, EnGSwitch_ID(this, play));
 }
 
-void EnGSwitch_DrawSilverRupee(Actor* this, GameState_Play* play)
+void EnGSwitch_DrawSilverRupee(Actor* this, PlayState* play)
 {
     static const float scale = 12.5f;
     ComboItemOverride o;
@@ -166,7 +166,7 @@ static const Gfx kPotDrawListNormalSide[] = {
     gsSPEndDisplayList(),
 };
 
-void EnGSwitch_DrawArcheryPot(Actor* this, GameState_Play* play)
+void EnGSwitch_DrawArcheryPot(Actor* this, PlayState* play)
 {
     if ((*(u16*)((char*)this + 0x14a)) != 0)
         return;
@@ -182,7 +182,7 @@ void EnGSwitch_DrawArcheryPot(Actor* this, GameState_Play* play)
 
 PATCH_FUNC(0x80a71680, EnGSwitch_DrawArcheryPot);
 
-void EnGSwitch_HandlerAfterCollected(Actor* this, GameState_Play* play)
+void EnGSwitch_HandlerAfterCollected(Actor* this, PlayState* play)
 {
     if (Message_IsClosed(this, play))
     {

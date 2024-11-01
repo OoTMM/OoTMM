@@ -6,7 +6,7 @@
 
 typedef struct Actor_EnHitTag Actor_EnHitTag;
 
-typedef void (*EnHitTagFunc)(Actor_EnHitTag*, GameState_Play*);
+typedef void (*EnHitTagFunc)(Actor_EnHitTag*, PlayState*);
 
 struct ALIGNED(4) Actor_EnHitTag
 {

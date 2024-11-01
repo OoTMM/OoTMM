@@ -67,7 +67,7 @@ static void color4(u8* r, u8* g, u8* b, u8* a, u32 color)
 }
 
 /* Custom DrawGi */
-void DrawGi_Xlu0(GameState_Play* play, s16 drawGiId)
+void DrawGi_Xlu0(PlayState* play, s16 drawGiId)
 {
     const DrawGi* drawGi;
 
@@ -79,7 +79,7 @@ void DrawGi_Xlu0(GameState_Play* play, s16 drawGiId)
     CLOSE_DISPS();
 }
 
-void DrawGi_CustomNote(GameState_Play* play, s16 drawGiId, u8 param)
+void DrawGi_CustomNote(PlayState* play, s16 drawGiId, u8 param)
 {
     static const u32 kColors[] = {
         0x8000ffff /* Purple */,
@@ -113,7 +113,7 @@ void DrawGi_CustomNote(GameState_Play* play, s16 drawGiId, u8 param)
     CLOSE_DISPS();
 }
 
-void DrawGi_CustomHeartContainer(GameState_Play* play, s16 drawGiId)
+void DrawGi_CustomHeartContainer(PlayState* play, s16 drawGiId)
 {
     static const u32 colors[] = {
         /* Normal */
@@ -155,7 +155,7 @@ void DrawGi_CustomHeartContainer(GameState_Play* play, s16 drawGiId)
     CLOSE_DISPS();
 }
 
-void Gfx_DrawFlameColor(GameState_Play* play, u32 color, float scale, float offsetY)
+void Gfx_DrawFlameColor(PlayState* play, u32 color, float scale, float offsetY)
 {
 #if defined(GAME_OOT)
     static const u32 kFlameDlist = 0x52a10;
@@ -208,7 +208,7 @@ void Gfx_DrawFlameColor(GameState_Play* play, u32 color, float scale, float offs
     CLOSE_DISPS();
 }
 
-static void drawFire(GameState_Play* play, u32 primColor, u32 envColor, float scale, float offsetY)
+static void drawFire(PlayState* play, u32 primColor, u32 envColor, float scale, float offsetY)
 {
 #if defined(GAME_OOT)
     static const u32 kFlameDlist = 0x52a10;
@@ -246,7 +246,7 @@ static void drawFire(GameState_Play* play, u32 primColor, u32 envColor, float sc
     CLOSE_DISPS();
 }
 
-static void shaderFlameEffect(GameState_Play* play, int colorIndex, float scale, float offsetY)
+static void shaderFlameEffect(PlayState* play, int colorIndex, float scale, float offsetY)
 {
 #if defined(GAME_OOT)
     static const u32 kFlameDlist = 0x52a10;
@@ -300,7 +300,7 @@ static const u32 kNutStickEnvColors[] = {
     0xaaaa00ff,
 };
 
-void DrawGi_CustomStick(GameState_Play* play, s16 drawGiId)
+void DrawGi_CustomStick(PlayState* play, s16 drawGiId)
 {
     const DrawGi* drawGi;
     u8 r;
@@ -329,7 +329,7 @@ void DrawGi_CustomStick(GameState_Play* play, s16 drawGiId)
     CLOSE_DISPS();
 }
 
-void DrawGi_CustomNut(GameState_Play* play, s16 drawGiId)
+void DrawGi_CustomNut(PlayState* play, s16 drawGiId)
 {
     const DrawGi* drawGi;
     u8 r;
@@ -372,7 +372,7 @@ static void* pushMatrix(GfxContext* gfx, const float* mat)
     return end;
 }
 
-void DrawGi_BossRemains(GameState_Play* play, s16 drawGiId)
+void DrawGi_BossRemains(PlayState* play, s16 drawGiId)
 {
     static const float scale = 0.03f;
     static const float kMatrixScale[] = {
@@ -392,7 +392,7 @@ void DrawGi_BossRemains(GameState_Play* play, s16 drawGiId)
     CLOSE_DISPS();
 }
 
-void DrawGi_SpiritualStones(GameState_Play* play, s16 drawGiId)
+void DrawGi_SpiritualStones(PlayState* play, s16 drawGiId)
 {
     static const u32 kPrimColors[] = {
         0xffffa0ff,
@@ -447,7 +447,7 @@ void DrawGi_SpiritualStones(GameState_Play* play, s16 drawGiId)
     CLOSE_DISPS();
 }
 
-void DrawGi_MasterSword(GameState_Play* play, s16 drawGiId)
+void DrawGi_MasterSword(PlayState* play, s16 drawGiId)
 {
     static const float scale = 0.07f;
     const DrawGi* drawGi;
@@ -464,7 +464,7 @@ void DrawGi_MasterSword(GameState_Play* play, s16 drawGiId)
     CLOSE_DISPS();
 }
 
-void DrawGi_CustomSpin(GameState_Play* play, s16 drawGiId)
+void DrawGi_CustomSpin(PlayState* play, s16 drawGiId)
 {
     const DrawGi* drawGi;
 
@@ -487,7 +487,7 @@ void DrawGi_CustomSpin(GameState_Play* play, s16 drawGiId)
     CLOSE_DISPS();
 }
 
-void DrawGi_CustomOwl(GameState_Play* play, s16 drawGiId)
+void DrawGi_CustomOwl(PlayState* play, s16 drawGiId)
 {
     const DrawGi* drawGi;
     static const float scale = 0.01f;
@@ -581,7 +581,7 @@ CustomStrayFairyObj kStrayFairyObj =
     }
 };
 
-void DrawGi_CustomStrayFairy(GameState_Play* play, s16 drawGiId)
+void DrawGi_CustomStrayFairy(PlayState* play, s16 drawGiId)
 {
     static u32 kEnvColors[] = {
         0xba5084ff,
@@ -641,7 +641,7 @@ typedef struct
 }
 GsColors;
 
-void DrawGi_CustomBottlePotion(GameState_Play* play, s16 index, u8 param)
+void DrawGi_CustomBottlePotion(PlayState* play, s16 index, u8 param)
 {
     static const u32 kPrimColors[] = {
         0xff0000ff,
@@ -674,7 +674,7 @@ void DrawGi_CustomBottlePotion(GameState_Play* play, s16 index, u8 param)
     CLOSE_DISPS();
 }
 
-void DrawGi_CustomGS(GameState_Play* play, s16 index)
+void DrawGi_CustomGS(PlayState* play, s16 index)
 {
     static const GsColors kColors[] = {
         { 0x967800ff, 0xffffaaff, 0xffd86eff, 0xffd86eff }, /* GS Token */
@@ -724,7 +724,7 @@ void DrawGi_CustomGS(GameState_Play* play, s16 index)
     CLOSE_DISPS();
 }
 
-void DrawGi_CustomPotion(GameState_Play* play, s16 index)
+void DrawGi_CustomPotion(PlayState* play, s16 index)
 {
     static const u32 kPrimColors1[] = {
         0x326400ff,
@@ -871,7 +871,7 @@ ALIGNED(16) static u16 kSilverRupeeLUT[] = {
     0x0849, 0x3a15, 0x8ca7, 0x73a1,
 };
 
-static void drawColoredRupee(GameState_Play* play, u32 color)
+static void drawColoredRupee(PlayState* play, u32 color)
 {
     static const float scale = 0.04;
     u8 c[4];
@@ -887,12 +887,12 @@ static void drawColoredRupee(GameState_Play* play, u32 color)
     CLOSE_DISPS();
 }
 
-void DrawGi_SilverRupee(GameState_Play* play, s16 index)
+void DrawGi_SilverRupee(PlayState* play, s16 index)
 {
     drawColoredRupee(play, 0xffffffff);
 }
 
-void DrawGi_MagicalRupee(GameState_Play* play, s16 index)
+void DrawGi_MagicalRupee(PlayState* play, s16 index)
 {
     float h;
     u32 color;
@@ -902,7 +902,7 @@ void DrawGi_MagicalRupee(GameState_Play* play, s16 index)
     drawColoredRupee(play, color);
 }
 
-void DrawGi_RutosLetter(GameState_Play* play, s16 index)
+void DrawGi_RutosLetter(PlayState* play, s16 index)
 {
     const DrawGi* drawGi;
     drawGi = &kDrawGi[index];
@@ -920,7 +920,7 @@ void DrawGi_RutosLetter(GameState_Play* play, s16 index)
     CLOSE_DISPS();
 }
 
-void DrawGi_CustomSmallKey(GameState_Play* play, s16 index)
+void DrawGi_CustomSmallKey(PlayState* play, s16 index)
 {
     const DrawGi* drawGi;
 
@@ -945,7 +945,7 @@ void DrawGi_CustomSmallKey(GameState_Play* play, s16 index)
     CLOSE_DISPS();
 }
 
-void DrawGi_Coin(GameState_Play* play, s16 index)
+void DrawGi_Coin(PlayState* play, s16 index)
 {
     const DrawGi* drawGi;
     static const float scale = 2.f;
@@ -983,7 +983,7 @@ static const Gfx kMagicJarColorGold[] = {
     gsSPEndDisplayList(),
 };
 
-void DrawGi_MagicJar(GameState_Play* play, s16 index)
+void DrawGi_MagicJar(PlayState* play, s16 index)
 {
     const DrawGi* drawGi;
     int isUpgrade;
@@ -1020,7 +1020,7 @@ void DrawGi_MagicJar(GameState_Play* play, s16 index)
     }
 }
 
-void DrawGi_Triforce(GameState_Play* play, s16 index, u8 param)
+void DrawGi_Triforce(PlayState* play, s16 index, u8 param)
 {
     const DrawGi* drawGi;
     u32 color;
@@ -1056,7 +1056,7 @@ void DrawGi_Triforce(GameState_Play* play, s16 index, u8 param)
     Gfx_DrawFlameColor(play, color, 1.5f, 20.f);
 }
 
-void DrawGi_TriforceFull(GameState_Play* play, s16 index, u8 param)
+void DrawGi_TriforceFull(PlayState* play, s16 index, u8 param)
 {
     static const float scale = 0.8f;
     const DrawGi* drawGi;
@@ -1088,7 +1088,7 @@ void DrawGi_TriforceFull(GameState_Play* play, s16 index, u8 param)
     CLOSE_DISPS();
 }
 
-void DrawGi_MaskMajora(GameState_Play* play, s16 index, u8 param)
+void DrawGi_MaskMajora(PlayState* play, s16 index, u8 param)
 {
     static const float scale = 0.03f;
     const DrawGi* drawGi;
@@ -1177,7 +1177,7 @@ static const Gfx* const kWalletBody[] = {
     kWalletBodyGray,
 };
 
-void DrawGi_Wallet(GameState_Play* play, s16 index)
+void DrawGi_Wallet(PlayState* play, s16 index)
 {
     const DrawGi* drawGi;
     drawGi = &kDrawGi[index];
@@ -1196,7 +1196,7 @@ void DrawGi_Wallet(GameState_Play* play, s16 index)
     CLOSE_DISPS();
 }
 
-void DrawGi_Button(GameState_Play* play, s16 index)
+void DrawGi_Button(PlayState* play, s16 index)
 {
     const DrawGi* drawGi;
     drawGi = &kDrawGi[index];
@@ -1218,7 +1218,7 @@ void DrawGi_Button(GameState_Play* play, s16 index)
     CLOSE_DISPS();
 }
 
-void DrawGi_CustomBottleFairy(GameState_Play* play, s16 drawGiId, u8 param)
+void DrawGi_CustomBottleFairy(PlayState* play, s16 drawGiId, u8 param)
 {
     static const u32 kColors[] = {
         0xcd69cdff,
@@ -1246,7 +1246,7 @@ void DrawGi_CustomBottleFairy(GameState_Play* play, s16 drawGiId, u8 param)
     CLOSE_DISPS();
 }
 
-void DrawGi_BombchuBag(GameState_Play* play, s16 drawGiId, u8 param)
+void DrawGi_BombchuBag(PlayState* play, s16 drawGiId, u8 param)
 {
     static const u32 kPrimColor = 0xBA3F3AFF;
     static const u32 kEnvColor = 0xA5231EFF;
@@ -1277,7 +1277,7 @@ void DrawGi_BombchuBag(GameState_Play* play, s16 drawGiId, u8 param)
     CLOSE_DISPS();
 }
 
-void DrawGi_BigFairy(GameState_Play* play, s16 drawGiId)
+void DrawGi_BigFairy(PlayState* play, s16 drawGiId)
 {
     const DrawGi* drawGi;
     u32 tex;
@@ -1307,7 +1307,7 @@ void DrawGi_BigFairy(GameState_Play* play, s16 drawGiId)
     CLOSE_DISPS();
 }
 
-void DrawGi_BottleBlueFire(GameState_Play* play, s16 drawGiId)
+void DrawGi_BottleBlueFire(PlayState* play, s16 drawGiId)
 {
     const DrawGi* drawGi;
 
@@ -1328,7 +1328,7 @@ void DrawGi_BottleBlueFire(GameState_Play* play, s16 drawGiId)
     CLOSE_DISPS();
 }
 
-void DrawGi_Clock(GameState_Play* play, s16 index)
+void DrawGi_Clock(PlayState* play, s16 index)
 {
     static const float scale = 0.015f;
     const DrawGi* drawGi;
@@ -1351,7 +1351,7 @@ void DrawGi_Clock(GameState_Play* play, s16 index)
     CLOSE_DISPS();
 }
 
-void DrawGi_PondFish(GameState_Play* play, s16 index, u8 param)
+void DrawGi_PondFish(PlayState* play, s16 index, u8 param)
 {
     const DrawGi* drawGi;
     float scaleBase;
@@ -1403,7 +1403,7 @@ static const Gfx kDlistRupeeBlackXlu[] = {
  *   5 - Silver
  *   6 - Gold/Huge
  */
-void DrawGi_Rupee(GameState_Play* play, s16 index, u8 param)
+void DrawGi_Rupee(PlayState* play, s16 index, u8 param)
 {
     float h;
     u32 color;

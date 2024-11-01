@@ -2,7 +2,7 @@
 #include <combo/item.h>
 #include <combo/config.h>
 
-static void EnSsh_ItemQuery(ComboItemQuery* q, GameState_Play* play, int flags)
+static void EnSsh_ItemQuery(ComboItemQuery* q, PlayState* play, int flags)
 {
     bzero(q, sizeof(*q));
 
@@ -21,7 +21,7 @@ static void EnSsh_ItemQuery(ComboItemQuery* q, GameState_Play* play, int flags)
     }
 }
 
-static void EnSsh_DisplayHint(Actor* this, GameState_Play* play)
+static void EnSsh_DisplayHint(Actor* this, PlayState* play)
 {
     ComboItemQuery q;
     char* b;

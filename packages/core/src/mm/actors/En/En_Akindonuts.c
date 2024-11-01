@@ -117,7 +117,7 @@ PATCH_FUNC(0x80bed27c, EnAkindonuts_Precond);
 PATCH_FUNC(0x80bed2fc, EnAkindonuts_Precond);
 PATCH_FUNC(0x80bed35c, EnAkindonuts_Precond);
 
-static void EnAkindonuts_AlterMessageIntroSwamp(GameState_Play* play)
+static void EnAkindonuts_AlterMessageIntroSwamp(PlayState* play)
 {
     ComboItemOverride o;
     char* b;
@@ -138,7 +138,7 @@ static void EnAkindonuts_AlterMessageIntroSwamp(GameState_Play* play)
     comboTextAutoLineBreaks(start);
 }
 
-static void EnAkindonuts_AlterMessageIntroMountain(GameState_Play* play)
+static void EnAkindonuts_AlterMessageIntroMountain(PlayState* play)
 {
     ComboItemOverride o;
     char* b;
@@ -159,7 +159,7 @@ static void EnAkindonuts_AlterMessageIntroMountain(GameState_Play* play)
     comboTextAutoLineBreaks(start);
 }
 
-static void EnAkindonuts_AlterMessageIntroOcean(GameState_Play* play)
+static void EnAkindonuts_AlterMessageIntroOcean(PlayState* play)
 {
     ComboItemOverride o;
     char* b;
@@ -180,7 +180,7 @@ static void EnAkindonuts_AlterMessageIntroOcean(GameState_Play* play)
     comboTextAutoLineBreaks(start);
 }
 
-static void EnAkindonuts_AlterMessageIntroIkana(GameState_Play* play)
+static void EnAkindonuts_AlterMessageIntroIkana(PlayState* play)
 {
     ComboItemOverride o;
     char* b;
@@ -201,7 +201,7 @@ static void EnAkindonuts_AlterMessageIntroIkana(GameState_Play* play)
     comboTextAutoLineBreaks(start);
 }
 
-static void EnAkindonuts_AlterMessageBuy(Actor* this, GameState_Play* play)
+static void EnAkindonuts_AlterMessageBuy(Actor* this, PlayState* play)
 {
     ComboItemOverride o;
     int id;
@@ -223,7 +223,7 @@ static void EnAkindonuts_AlterMessageBuy(Actor* this, GameState_Play* play)
     comboTextAutoLineBreaks(start);
 }
 
-static void EnAkindonuts_AlterMessageNoRupees(GameState_Play* play)
+static void EnAkindonuts_AlterMessageNoRupees(PlayState* play)
 {
     char* b;
     char* start;
@@ -235,7 +235,7 @@ static void EnAkindonuts_AlterMessageNoRupees(GameState_Play* play)
     comboTextAutoLineBreaks(start);
 }
 
-static void EnAkindonuts_DisplayTextBox(GameState_Play* play, s16 messageId, Actor* this)
+static void EnAkindonuts_DisplayTextBox(PlayState* play, s16 messageId, Actor* this)
 {
     PlayerDisplayTextBox(play, messageId, this);
 
@@ -330,7 +330,7 @@ int EnAkindonuts_HasGivenItem(Actor* this)
 PATCH_CALL(0x80bef3f4, EnAkindonuts_HasGivenItem);
 PATCH_CALL(0x80bef38c, EnAkindonuts_HasGivenItem);
 
-void EnAkindonuts_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+void EnAkindonuts_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b)
 {
     ComboItemQuery q;
     int npc;

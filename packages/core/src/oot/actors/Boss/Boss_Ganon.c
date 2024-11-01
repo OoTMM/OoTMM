@@ -1,6 +1,6 @@
 #include <combo.h>
 
-void BossGanon_LightArrowHint(GameState_Play* play, s16 textId, void* unk)
+void BossGanon_LightArrowHint(PlayState* play, s16 textId, void* unk)
 {
     PlayerDisplayTextBox(play, textId, unk);
     comboTextHijackLightArrows(play);

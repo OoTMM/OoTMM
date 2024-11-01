@@ -2,7 +2,7 @@
 #include <combo/csmc.h>
 #include <combo/actor.h>
 
-void ObjHana_DrawWrapper(Actor* this, GameState_Play* play)
+void ObjHana_DrawWrapper(Actor* this, PlayState* play)
 {
     ActorFunc ObjHana_Draw;
 
