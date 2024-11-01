@@ -258,15 +258,6 @@ PATCH_END
 
 PATCH_GROUP_END
 
-/* Disable save options write */
-PATCH_START 0x8080a518
-  nop
-PATCH_END
-
-PATCH_START 0x8080a520
-  nop
-PATCH_END
-
 /* Make the town stray fairy a permanent item */
 PATCH_START 0x801c66e0
 .short 0xcc00

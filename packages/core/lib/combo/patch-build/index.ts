@@ -85,6 +85,13 @@ function asmPatchGroups(world: World, settings: Settings) {
   return keys.filter((k) => groups[k]);
 }
 
+const REMOVED_FILES = [
+  'mm/ovl_title',
+  'mm/ovl_select',
+  'mm/ovl_opening',
+  'mm/ovl_file_choose',
+]
+
 export async function buildPatchfiles(args: BuildPatchfileIn): Promise<Patchfile[]> {
   args.monitor.log("Building Patchfile");
   const patches: Patchfile[] = [];
@@ -188,6 +195,11 @@ export async function buildPatchfiles(args: BuildPatchfileIn): Promise<Patchfile
           const fileAddr = args.addresses[game].fileFromROM(base);
           p.addPatch(fileAddr.name, fileAddr.offset, patch);
         }
+      }
+
+      /* Remove some useless files */
+      for (const f of REMOVED_FILES) {
+        p.removedFiles.push(f);
       }
 
       /* Handle cosmetics */
