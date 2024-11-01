@@ -13,5 +13,6 @@ typedef signed long         s32;
 typedef signed long long    s64;
 
 typedef unsigned long       uintptr_t;
+typedef float               f32;
 
 #endif

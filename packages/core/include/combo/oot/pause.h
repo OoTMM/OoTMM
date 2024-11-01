@@ -2,7 +2,8 @@
 #define INCLUDED_COMBO_OOT_PAUSE_H
 
 #include <combo/util.h>
-#include <combo/oot/types.h>
+#include <combo/misc.h>
+#include <combo/view.h>
 
 typedef struct OcarinaStaff OcarinaStaff;
 

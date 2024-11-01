@@ -11,6 +11,7 @@
 
 # include <ultra64.h>
 # include <combo/environment.h>
+# include <combo/view.h>
 # include <combo/actor_ovl.h>
 # include <combo/collision.h>
 # include <combo/csmc.h>

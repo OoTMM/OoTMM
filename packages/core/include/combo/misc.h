@@ -1040,13 +1040,6 @@ typedef struct {
 
 #define LIMB_DONE 0xFF
 
-typedef struct Viewport {
-    /* 0x00 */ s32 topY;    /* uly (upper left y) */
-    /* 0x04 */ s32 bottomY; /* lry (lower right y) */
-    /* 0x08 */ s32 leftX;   /* ulx (upper left x) */
-    /* 0x0C */ s32 rightX;  /* lrx (lower right x) */
-} Viewport; /* size = 0x10 */
-
 typedef union {
     struct {
         /* 0x00 */ u16 id; /* "dousa" */

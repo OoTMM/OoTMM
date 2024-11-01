@@ -7,7 +7,6 @@
 #include <combo/mm/environment.h>
 #include <combo/actor.h>
 #include <combo/mm/regs.h>
-#include <combo/mm/types.h>
 #include <combo/common/ocarina.h>
 #include <combo/mm/object.h>
 #include <combo/mm/message.h>
