@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add MQ crates.
 - Add the Megaton Hammer to Majora's Mask.
 - Add butterfly shuffle, for both games.
 - Vanilla Small and Boss Keys setting.

@@ -90,6 +90,9 @@
     "MQ Spirit Temple Flying Pot Statue Room Upper": "soul_flying_pot && (can_play_time || has_hover_boots)"
     "MQ Spirit Temple Pot Statue Room Upper 1": "can_play_time || has_hover_boots"
     "MQ Spirit Temple Pot Statue Room Upper 2": "can_play_time || has_hover_boots"
+    "MQ Spirit Temple Giant Statue Room Large Crate 1": "true"
+    "MQ Spirit Temple Giant Statue Room Large Crate 2": "true"
+    "MQ Spirit Temple Giant Statue Room Small Crate": "true" #Can backflip onto block with playing Song of Time.
 "Spirit Temple Sun Block Room":
   dungeon: Spirit
   exits:
@@ -126,6 +129,7 @@
     "Spirit Temple Adult Climb": "small_keys_spirit(6)"
   locations:
     "MQ Spirit Temple Beamos Room Chest": "soul_beamos"
+    "MQ Spirit Temple Beamos Room Small Crate": "can_play_time" #Hook+Climb Anywhere can get ontop of time block over cieling to reach crate.
 "Spirit Temple Adult Upper 2":
   dungeon: Spirit
   exits:
@@ -170,3 +174,7 @@
     "MQ Spirit Temple Pot Top Near Lowering Platform 2": "can_play_zelda"
     "MQ Spirit Temple Pot Top Near Lowering Platform 3": "can_play_zelda"
     "MQ Spirit Temple Pot Top Near Lowering Platform 4": "can_play_zelda"
+    "MQ Spirit Temple Top Near Lowering Platform Large Crate 1": "can_play_zelda"
+    "MQ Spirit Temple Top Near Lowering Platform Large Crate 2": "can_play_zelda"
+    "MQ Spirit Temple Top Near Lowering Platform Large Crate 3": "can_play_zelda"
+    "MQ Spirit Temple Top Near Lowering Platform Large Crate 4": "can_play_zelda"

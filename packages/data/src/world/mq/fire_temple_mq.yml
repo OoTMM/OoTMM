@@ -22,6 +22,12 @@
     "MQ Fire Temple Pre-Boss Chest": "has_tunic_goron && has_fire && (can_use_bow || has_hover_boots || (has_tunic_goron_strict && is_adult))"
     "MQ Fire Temple Pot Pre-Boss 1": "has_tunic_goron && (has_hover_boots || can_hookshot)"
     "MQ Fire Temple Pot Pre-Boss 2": "has_tunic_goron && (has_hover_boots || can_hookshot)"
+    "MQ Fire Temple Pre-Boss Room Near Cage Large Crate 1": "has_tunic_goron"
+    "MQ Fire Temple Pre-Boss Room Near Cage Large Crate 2": "has_tunic_goron"
+    "MQ Fire Temple Pre-Boss Room Tall Ledge Low Large Crate 1": "has_tunic_goron && (has_hover_boots || can_hookshot)"
+    "MQ Fire Temple Pre-Boss Room Tall Ledge Low Large Crate 2": "has_tunic_goron && (has_hover_boots || can_hookshot)"
+    "MQ Fire Temple Pre-Boss Room Tall Ledge Middle Large Crate": "has_tunic_goron && (has_hover_boots || can_hookshot)" #Child can rach this by jumping off the hookshot platform that has the torch.
+    "MQ Fire Temple Pre-Boss Room Tall Ledge Top Large Crate": "has_tunic_goron && (has_hover_boots || can_hookshot)" #Child can rach this by using the middle crate as a platform.
 "Fire Temple Vanilla Hammer Loop":
   dungeon: Fire
   locations:
@@ -63,28 +69,46 @@
   dungeon: Fire
   exits:
     "Fire Temple 1f Lava Room": "true"
-    "Fire Temple Maze Upper": "can_hookshot && (trick(OOT_HAMMER_WALLS) || has_explosives)"
+    "Fire Temple Maze Upper": "can_hookshot && can_hammer && (trick(OOT_HAMMER_WALLS) || has_explosives)"
+  events:
+    MQ_FIRE_TEMPLE_MAZE_LOWER_GATE: "can_use_sword_kokiri || can_use_sword_master || can_use_sword_biggoron || can_use_sticks || can_hammer"
   locations:
-    "MQ Fire Temple Maze Lower Chest": "true"
-    "MQ Fire Temple Maze Side Room Chest": "can_play_elegy"
+    "MQ Fire Temple Maze Lower Chest": "event(MQ_FIRE_TEMPLE_MAZE_LOWER_GATE)"
+    "MQ Fire Temple Maze Side Room Chest": "has_explosives && can_play_elegy"
     "MQ Fire Temple Wonder Item East Maze": "can_hookshot"
+    "MQ Fire Temple Maze Room Lower Cage Large Crate 1": "event(MQ_FIRE_TEMPLE_MAZE_LOWER_GATE)"
+    "MQ Fire Temple Maze Room Lower Cage Large Crate 2": "event(MQ_FIRE_TEMPLE_MAZE_LOWER_GATE)"
+    "MQ Fire Temple Maze Room Lower Cage Large Crate 3": "event(MQ_FIRE_TEMPLE_MAZE_LOWER_GATE)"
 "Fire Temple Maze Upper":
   dungeon: Fire
   exits:
-    "Fire Temple Burning Block": "can_play_time || can_longshot"
+    "Fire Temple Burning Block": "(can_play_time && can_hookshot) || can_longshot"
     "Fire Temple 3f Lava Room": "small_keys_fire_mq(3)"
+  events:
+    MQ_FIRE_TEMPLE_MAZE_UPPER_GATE: "can_use_sword_or_sticks || can_hammer || has_explosives || can_hit_triggers_distance || can_boomerang"
   locations:
-    "MQ Fire Temple Maze Upper Chest": "true"
-    "MQ Fire Temple Maze Side Room Chest": "true"
+    "MQ Fire Temple Maze Upper Chest": "event(MQ_FIRE_TEMPLE_MAZE_UPPER_GATE)"
+    "MQ Fire Temple Maze Side Room Chest": "has_explosives"
     "MQ Fire Temple Compass Chest": "has_explosives"
-    "MQ Fire Temple Wonder Item East Climb First 1": "can_hookshot"
-    "MQ Fire Temple Wonder Item East Climb First 2": "can_hookshot"
-    "MQ Fire Temple Wonder Item East Climb Second 1": "can_hookshot"
-    "MQ Fire Temple Wonder Item East Climb Second 2": "can_hookshot"
+    "MQ Fire Temple Maze Room Upper Cage Large Crate 1": "event(MQ_FIRE_TEMPLE_MAZE_UPPER_GATE)"
+    "MQ Fire Temple Maze Room Upper Cage Large Crate 2": "event(MQ_FIRE_TEMPLE_MAZE_UPPER_GATE)"
+    "MQ Fire Temple Maze Room Upper Cage Large Crate 3": "event(MQ_FIRE_TEMPLE_MAZE_UPPER_GATE)"
+    "MQ Fire Temple Maze Room Upper Cage Small Crate 1": "event(MQ_FIRE_TEMPLE_MAZE_UPPER_GATE)"
+    "MQ Fire Temple Maze Room Upper Cage Small Crate 2": "event(MQ_FIRE_TEMPLE_MAZE_UPPER_GATE)"
+    "MQ Fire Temple Cell Below Maze Large Crate 1": "has_explosives"
+    "MQ Fire Temple Cell Below Maze Large Crate 2": "has_explosives"
+    "MQ Fire Temple Cell Below Maze Large Crate 3": "has_explosives"
+    "MQ Fire Temple Cell Below Maze Large Crate 4": "has_explosives"
+    "MQ Fire Temple Cell Below Maze Large Crate 5": "has_explosives"
+    "MQ Fire Temple Cell Below Maze Large Crate 6": "has_explosives"
 "Fire Temple Burning Block":
   dungeon: Fire
   locations:
     "MQ Fire Temple GS Burning Block": "gs"
+    "MQ Fire Temple Wonder Item East Climb First 1": "can_hookshot"
+    "MQ Fire Temple Wonder Item East Climb First 2": "can_hookshot"
+    "MQ Fire Temple Wonder Item East Climb Second 1": "can_hookshot"
+    "MQ Fire Temple Wonder Item East Climb Second 2": "can_hookshot"
 "Fire Temple 3f Lava Room":
   dungeon: Fire
   exits:
@@ -96,6 +120,16 @@
     "MQ Fire Temple Pot Bridge Above Lava Room 2": "true"
     "MQ Fire Temple Pot Bridge Above Lava Room 3": "true"
     "MQ Fire Temple Wonder Item Torch Room": "can_hookshot" # Unsure
+    "MQ Fire Temple 3F Lava Room Near Cage Large Crate": "can_hookshot || is_adult" #These three crates can possibly be exploded and boomeranged from below
+    "MQ Fire Temple 3F Lava Room Near Cage Small Crate 1": "can_hookshot || is_adult" #These three crates can possibly be exploded and boomeranged from below
+    "MQ Fire Temple 3F Lava Room Near Cage Small Crate 2": "can_hookshot || is_adult" #These three crates can possibly be exploded and boomeranged from below
+    "MQ Fire Temple 3F Lava Room High Ledge Large Crate": "can_hookshot || is_adult"
+    "MQ Fire Temple 3F Lava Room High Ledge Small Crate": "can_hookshot || is_adult"
+    "MQ Fire Temple 3F Lava Room Lower Large Crate 1": "true"
+    "MQ Fire Temple 3F Lava Room Lower Large Crate 2": "true"
+    "MQ Fire Temple 3F Lava Room Lower Large Crate 3": "true"
+    "MQ Fire Temple 3F Lava Room Lower Small Crate 1": "true"
+    "MQ Fire Temple 3F Lava Room Lower Small Crate 2": "true"
 "Fire Temple Fire Walls":
   dungeon: Fire
   exits:
