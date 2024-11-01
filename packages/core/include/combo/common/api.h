@@ -78,6 +78,7 @@ void    AudioSeq_QueueSeqCmd(u32 unk);
     AudioSeq_QueueSeqCmd((1 << 28) | 0xFF | ((u8)(seqPlayerIndex) << 24) | \
                          ((fadeOutDuration) << 16))
 
+typedef struct Lights Lights;
 void    ActorShadow_DrawCircle(Actor* actor, Lights* lights, PlayState* play);
 void    ActorShadow_DrawSquare(Actor* actor, Lights* lights, PlayState* play);
 
@@ -444,9 +445,6 @@ void SkelAnime_DrawOpa(PlayState* play, void** skeleton, Vec3s* jointTable, void
 void SkelAnime_DrawFlexOpa(PlayState* play, void** skeleton, Vec3s* jointTable, s32 dListCount, void* overrideLimbDraw, void* postLimbDraw, void* arg);
 void SkelAnime_DrawFlexLod(PlayState* play, void** skeleton, Vec3s* jointTable, s32 dListCount, void* overrideLimbDraw, void* postLimbDraw, Actor* actor, s32 lod);
 
-void Lights_PointNoGlowSetInfo(LightInfo* info, s16 x, s16 y, s16 z, u8 r, u8 g, u8 b, s16 radius);
-LightNode* LightContext_InsertLight(PlayState* play, LightContext* lightCtx, LightInfo* info);
-
 void Actor_DrawLensActors(PlayState* play, s32 numLensActors, Actor** lensActors);
 ActorInit* Actor_LoadOverlay(ActorContext* actorCtx, s16 index);
 
@@ -460,8 +458,6 @@ s32 SysFlashrom_ExecWrite(void* addr, u32 pageNum, u32 pageCount);
 
 EntranceTableEntry* Entrance_GetTableEntry(u16 entrance);
 
-void Environment_Init(PlayState* play, EnvironmentContext* envCtx, int unused);
-
 extern u8 gWeatherMode;
 
 /* Gamemodes */
@@ -469,7 +465,6 @@ void FileSelect_Init(GameState* this);
 
 #if defined(GAME_MM)
 extern u8 gSceneSeqState;
-extern s16 gSkyboxNumStars;
 extern Vec3f gZeroVec3f;
 
 Actor* SubS_FindActor(PlayState* play, Actor* actorListStart, u8 actorCategory, s16 actorId);

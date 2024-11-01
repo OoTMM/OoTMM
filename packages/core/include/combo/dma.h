@@ -32,6 +32,17 @@ typedef struct
 }
 DmaEntry;
 
+typedef struct
+{
+    u32     vromAddr;
+    void*   dramAddr;
+    u32     size;
+    char*   name;
+    s32     line;
+    u32     unk[3];
+}
+DmaRequest;
+
 extern DmaEntry gDmaData[DMA_COUNT];
 
 void comboDma(void* addr, u32 cartAddr, u32 size);
