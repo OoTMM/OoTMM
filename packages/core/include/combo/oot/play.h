@@ -165,25 +165,6 @@ ASSERT_OFFSET(PlayState, shootingGalleryStatus,    0x11e5c);
 ASSERT_OFFSET(PlayState, bombchuBowlingStatus,     0x11e5d);
 ASSERT_OFFSET(PlayState, transitionType,           0x11e5e);
 
-typedef struct
-{
-    s32  regPage;       /* 0: no page selected (reg editor is not active); 1: first page; `REG_PAGES`: last page */
-    s32  regGroup;      /* Indexed from 0 to `REG_GROUPS`-1. Each group has its own character to identify it. */
-    s32  regCur;        /* Selected reg, indexed from 0 as the page start */
-    s32  dPadInputPrev;
-    s32  inputRepeatTimer;
-    s16  data[REG_GROUPS * REGS_PER_GROUP]; /* Accessed through *REG macros, see regs.h */
-}
-RegEditor;
-
-ASSERT_SIZE(RegEditor, 0x15d4);
-ASSERT_OFFSET(RegEditor, regPage,           0x00);
-ASSERT_OFFSET(RegEditor, regGroup,          0x04);
-ASSERT_OFFSET(RegEditor, regCur,            0x08);
-ASSERT_OFFSET(RegEditor, dPadInputPrev,     0x0c);
-ASSERT_OFFSET(RegEditor, inputRepeatTimer,  0x10);
-ASSERT_OFFSET(RegEditor, data,              0x14);
-
 typedef struct FileSelectState {
     GameState           state;
     Vtx*                windowVtx;

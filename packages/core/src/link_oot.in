@@ -338,3 +338,5 @@ Collider_InitCylinder = 0x8004ab7c;
 Collider_SetCylinder = 0x8004acec;
 Collider_UpdateCylinder = 0x80050b00;
 Collider_DestroyCylinder = 0x8004abcc;
+
+gRegEditor = 0x8011ba00;
