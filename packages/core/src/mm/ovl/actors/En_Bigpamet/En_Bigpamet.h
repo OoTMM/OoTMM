@@ -5,7 +5,7 @@
 
 struct Actor_EnBigpamet;
 
-typedef void (*Actor_EnBigpametActionFunc)(struct Actor_EnBigpamet*, GameState_Play*);
+typedef void (*Actor_EnBigpametActionFunc)(struct Actor_EnBigpamet*, PlayState*);
 
 typedef enum SpikedSnapperLimb
 {

@@ -108,6 +108,8 @@ u32     Flags_SetSwitch(PlayState* play, int flag);
 void    ClearSwitchFlag(PlayState* play, int flag);
 void    SetRoomClear(PlayState* play, int flag);
 u32     GetRoomClearFlag(PlayState* play, int flag);
+s32     Flags_GetClear(PlayState* play, s32 roomNumber);
+
 
 void Sleep_Usec(u32 delay);
 
@@ -163,6 +165,8 @@ void OcarinaAction2(PlayState *play, u16 ocarinaAction);
 /* Matrix Ops */
 #define MAT_SET 0
 #define MAT_MUL 1
+#define MATRIX_FINALIZE_AND_LOAD(pkt, gfxCtx) \
+    gSPMatrix(pkt, Matrix_Finalize(gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW)
 
 extern float* gModelView;
 
@@ -183,7 +187,7 @@ void Matrix_Translate(float tx, float ty, float tz, int mode);
 void Matrix_Scale(float sx, float sy, float sz, int mode);
 void ModelViewMult(MtxF* mf, s32 mode);
 void Matrix_SetTranslateRotateYXZ(f32 translateX, f32 translateY, f32 translateZ, Vec3s* rot);
-
+Mtx* Matrix_Finalize(GfxContext* gfxCtx);
 void MatrixStackDup(void);
 void MatrixStackPop(void);
 void Matrix_MultVec3f(Vec3f* src, Vec3f* dest);
@@ -272,6 +276,7 @@ void* Lib_SegmentedToVirtual(void* ptr);
 #if defined(GAME_MM)
 void AudioOcarina_SetInstrument(u8 ocarinaInstrumentId);
 void Animation_PlayLoop(SkelAnime* skelAnime, AnimationHeader* animation);
+void Animation_PlayOnce(SkelAnime* skelAnime, AnimationHeader* animation);
 void ActorShape_Init(ActorShape* actorShape, f32 yOffset, ActorShadowFunc shadowDraw, f32 shadowScale);
 s32 Collider_InitAndSetCylinder(PlayState* play, ColliderCylinder* collider, struct Actor* actor, ColliderCylinderInit* src);
 void Message_BombersNotebookQueueEvent(PlayState* play, u8 event);
@@ -404,6 +409,7 @@ void    Animation_Change(SkelAnime* skelAnime, AnimationHeader* animation, f32 p
 
 void EffectSsIceSmoke_Spawn(PlayState* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, s16 scale);
 void EffectSsKiraKira_SpawnDispersed(PlayState* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, Color_RGBA8* primColor, Color_RGBA8* envColor, s16 scale, s32 life);
+void Actor_SpawnIceEffects(PlayState* play, Actor* actor, Vec3f bodyPartsPos[], s32 bodyPartsCount, s32 effectsPerBodyPart, f32 scale, f32 scaleRange);
 
 s32 PlayerAnimation_Update(PlayState* play, SkelAnime* skelAnime);
 void PlayerAnimation_PlayOnce(PlayState* play, SkelAnime* skelAnime, PlayerAnimationHeader* animation);
@@ -512,6 +518,7 @@ void Cutscene_StartManual(PlayState* play, CutsceneContext* csCtx);
 void Cutscene_StopManual(PlayState* play, CutsceneContext* csCtx);
 
 void Matrix_MultVecZ(f32 z, Vec3f* dest);
+void Matrix_MultVecY(f32 y, Vec3f* dest);
 void Matrix_RotateXS(s16 x, int mode);
 void Matrix_RotateXF(f32 x, int mode);
 void Matrix_RotateYS(s16 y, int mode);
@@ -538,6 +545,8 @@ void ShrinkWindow_Letterbox_SetSizeTarget(s32 target);
 
 void EffectSsKFire_Spawn(PlayState* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, s16 scaleMax, u8 type);
 void EffectSsEnIce_Spawn(PlayState* play, Vec3f* pos, f32 scale, Vec3f* velocity, Vec3f* accel, Color_RGBA8* primColor, Color_RGBA8* envColor, s32 life);
+void func_800B12F0(PlayState* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, s16 scale, s16 scaleStep, s16 life);
+void func_800B0DE0(PlayState* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, Color_RGBA8* primColor, Color_RGBA8* envColor, s16 scale, s16 scaleStep);
 
 void SoundSource_InitAll(PlayState* play);
 void SoundSource_UpdateAll(PlayState* play);
@@ -574,8 +583,14 @@ s16 Quake_Request(Camera* camera, u32 type);
 u32 Quake_SetSpeed(s16 index, s16 speed);
 u32 Quake_SetPerturbations(s16 index, s16 y, s16 x, s16 fov, s16 roll);
 u32 Quake_SetDuration(s16 index, s16 duration);
+void Rumble_Request(f32 distSq, u8 sourceIntensity, u8 decayTimer, u8 decayStep);
 f32 BgCheck_EntityRaycastFloor5_2(PlayState* play, CollisionContext* colCtx, CollisionPoly** outPoly, s32* bgId, Actor* actor, Vec3f* pos);
 s32 WaterBox_GetSurface1_2(PlayState* play, CollisionContext* colCtx, f32 x, f32 z, f32* ySurface, WaterBox** outWaterBox);
+s32 WaterBox_GetSurface1(PlayState* play, CollisionContext* colCtx, f32 x, f32 z, f32* ySurface, WaterBox** outWaterBox);
+void EffectSsHahen_Spawn(PlayState* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, s16 flags, s16 scale, s16 objectId, s16 life, Gfx* dList);
+s16 CutsceneManager_GetCurrentSubCamId(s16 csId);
+u32 Quake_RemoveRequest(s16 index);
+
 f32 Math3D_Vec3fMagnitudeSq(Vec3f* vec);
 void Math3D_Vec3f_Cross(Vec3f* a, Vec3f* b, Vec3f* ret);
 void Matrix_RotateAxisF(f32 angle, Vec3f* axis, int mode);
@@ -586,7 +601,12 @@ void Effect_Destroy(PlayState* play, s32 index);
 int SurfaceType_GetFloorType(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId);
 void* Effect_GetByIndex(s32 index);
 
+#define MATRIX_FINALIZE_AND_LOAD(pkt, gfxCtx) \
+    gSPMatrix(pkt, Matrix_Finalize(gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW)
+
+
 // TODO: rename
+void func_800BE5CC(Actor* actor, ColliderJntSph* jntSph, s32 elemIndex);
 void func_800AE930(CollisionContext* colCtx, void* this, Vec3f* pos, f32 arg3, s16 angle, CollisionPoly* colPoly, s32 bgId);
 void func_800AEF44(void* this);
 void func_80169EFC(PlayState* play);

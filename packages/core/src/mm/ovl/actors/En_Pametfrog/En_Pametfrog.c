@@ -1,6 +1,7 @@
 #include "En_Pametfrog.h"
 #include "../En_Bigpamet/En_Bigpamet.h"
 #include <combo.h>
+#include "../src/mm/actors.h"
 
 #define FLAGS (ACTOR_FLAG_MM_ATTENTION_ENABLED | ACTOR_FLAG_MM_HOSTILE | ACTOR_FLAG_MM_10 | ACTOR_FLAG_MM_20)
 
@@ -26,58 +27,58 @@
 #define gGekkoWiggleAnim        SEGADDR_FROM_OFFSET(6, 0x5694)
 #define gGekkoWindupPunchAnim   SEGADDR_FROM_OFFSET(6, 0xf048)
 
-void EnPametfrog_Init(Actor_EnPametfrog* this, GameState_Play* play);
-void EnPametfrog_Destroy(Actor_EnPametfrog* this, GameState_Play* play);
-void EnPametfrog_Update(Actor_EnPametfrog* this, GameState_Play* play);
-void EnPametfrog_Draw(Actor_EnPametfrog* this, GameState_Play* play);
+void EnPametfrog_Init(Actor_EnPametfrog* this, PlayState* play);
+void EnPametfrog_Destroy(Actor_EnPametfrog* this, PlayState* play);
+void EnPametfrog_Update(Actor_EnPametfrog* this, PlayState* play);
+void EnPametfrog_Draw(Actor_EnPametfrog* this, PlayState* play);
 
-void EnPametfrog_JumpWaterEffects(Actor_EnPametfrog* this, GameState_Play* play);
-void EnPametfrog_RearOnSnapper(Actor_EnPametfrog* this, GameState_Play* play);
-void EnPametfrog_RearOnSnapperWave(Actor_EnPametfrog* this, GameState_Play* play);
+void EnPametfrog_JumpWaterEffects(Actor_EnPametfrog* this, PlayState* play);
+void EnPametfrog_RearOnSnapper(Actor_EnPametfrog* this, PlayState* play);
+void EnPametfrog_RearOnSnapperWave(Actor_EnPametfrog* this, PlayState* play);
 void EnPametfrog_SetupRearOnSnapperWave(Actor_EnPametfrog* this);
-void EnPametfrog_RearOnSnapperWave(Actor_EnPametfrog* this, GameState_Play* play);
+void EnPametfrog_RearOnSnapperWave(Actor_EnPametfrog* this, PlayState* play);
 void EnPametfrog_SetupRearOnSnapperRise(Actor_EnPametfrog* this);
-void EnPametfrog_RearOnSnapperRise(Actor_EnPametfrog* this, GameState_Play* play);
-void EnPametfrog_FallOffSnapper(Actor_EnPametfrog* this, GameState_Play* play);
+void EnPametfrog_RearOnSnapperRise(Actor_EnPametfrog* this, PlayState* play);
+void EnPametfrog_FallOffSnapper(Actor_EnPametfrog* this, PlayState* play);
 void EnPametfrog_SetupJumpToWall(Actor_EnPametfrog* this);
-void EnPametfrog_JumpToWall(Actor_EnPametfrog* this, GameState_Play* play);
+void EnPametfrog_JumpToWall(Actor_EnPametfrog* this, PlayState* play);
 void EnPametfrog_SetupWallCrawl(Actor_EnPametfrog* this);
-void EnPametfrog_WallCrawl(Actor_EnPametfrog* this, GameState_Play* play);
+void EnPametfrog_WallCrawl(Actor_EnPametfrog* this, PlayState* play);
 void EnPametfrog_SetupWallPause(Actor_EnPametfrog* this);
-void EnPametfrog_WallPause(Actor_EnPametfrog* this, GameState_Play* play);
+void EnPametfrog_WallPause(Actor_EnPametfrog* this, PlayState* play);
 void EnPametfrog_SetupClimbDownWall(Actor_EnPametfrog* this);
-void EnPametfrog_ClimbDownWall(Actor_EnPametfrog* this, GameState_Play* play);
+void EnPametfrog_ClimbDownWall(Actor_EnPametfrog* this, PlayState* play);
 void EnPametfrog_SetupRunToSnapper(Actor_EnPametfrog* this);
-void EnPametfrog_RunToSnapper(Actor_EnPametfrog* this, GameState_Play* play);
+void EnPametfrog_RunToSnapper(Actor_EnPametfrog* this, PlayState* play);
 void EnPametfrog_SetupJumpOnSnapper(Actor_EnPametfrog* this);
-void EnPametfrog_JumpOnSnapper(Actor_EnPametfrog* this, GameState_Play* play);
+void EnPametfrog_JumpOnSnapper(Actor_EnPametfrog* this, PlayState* play);
 void EnPametfrog_SetupLandOnSnapper(Actor_EnPametfrog* this);
-void EnPametfrog_LandOnSnapper(Actor_EnPametfrog* this, GameState_Play* play);
-void EnPametfrog_FallInAir(Actor_EnPametfrog* this, GameState_Play* play);
-void EnPametfrog_FallOnGround(Actor_EnPametfrog* this, GameState_Play* play);
-void EnPametfrog_SetupFallOnGround(Actor_EnPametfrog* this, GameState_Play* play);
-void EnPametfrog_SetupDefeatGekko(Actor_EnPametfrog* this, GameState_Play* play);
-void EnPametfrog_DefeatGekko(Actor_EnPametfrog* this, GameState_Play* play);
-void EnPametfrog_SetupDefeatSnapper(Actor_EnPametfrog* this, GameState_Play* play);
-void EnPametfrog_DefeatSnapper(Actor_EnPametfrog* this, GameState_Play* play);
-void EnPametfrog_SetupSpawnFrog(Actor_EnPametfrog* this, GameState_Play* play);
-void EnPametfrog_SpawnFrog(Actor_EnPametfrog* this, GameState_Play* play);
-void EnPametfrog_PlayCutscene(Actor_EnPametfrog* this, GameState_Play* play);
+void EnPametfrog_LandOnSnapper(Actor_EnPametfrog* this, PlayState* play);
+void EnPametfrog_FallInAir(Actor_EnPametfrog* this, PlayState* play);
+void EnPametfrog_FallOnGround(Actor_EnPametfrog* this, PlayState* play);
+void EnPametfrog_SetupFallOnGround(Actor_EnPametfrog* this, PlayState* play);
+void EnPametfrog_SetupDefeatGekko(Actor_EnPametfrog* this, PlayState* play);
+void EnPametfrog_DefeatGekko(Actor_EnPametfrog* this, PlayState* play);
+void EnPametfrog_SetupDefeatSnapper(Actor_EnPametfrog* this, PlayState* play);
+void EnPametfrog_DefeatSnapper(Actor_EnPametfrog* this, PlayState* play);
+void EnPametfrog_SetupSpawnFrog(Actor_EnPametfrog* this, PlayState* play);
+void EnPametfrog_SpawnFrog(Actor_EnPametfrog* this, PlayState* play);
+void EnPametfrog_PlayCutscene(Actor_EnPametfrog* this, PlayState* play);
 void EnPametfrog_SetupLookAround(Actor_EnPametfrog* this);
-void EnPametfrog_LookAround(Actor_EnPametfrog* this, GameState_Play* play);
+void EnPametfrog_LookAround(Actor_EnPametfrog* this, PlayState* play);
 void EnPametfrog_SetupJumpToLink(Actor_EnPametfrog* this);
-void EnPametfrog_JumpToLink(Actor_EnPametfrog* this, GameState_Play* play);
+void EnPametfrog_JumpToLink(Actor_EnPametfrog* this, PlayState* play);
 void EnPametfrog_SetupMeleeAttack(Actor_EnPametfrog* this);
-void EnPametfrog_MeleeAttack(Actor_EnPametfrog* this, GameState_Play* play);
+void EnPametfrog_MeleeAttack(Actor_EnPametfrog* this, PlayState* play);
 void EnPametfrog_SetupCutscene(Actor_EnPametfrog* this);
-void EnPametfrog_Damage(Actor_EnPametfrog* this, GameState_Play* play);
-void EnPametfrog_Stun(Actor_EnPametfrog* this, GameState_Play* play);
-void EnPametfrog_SetupCallSnapper(Actor_EnPametfrog* this, GameState_Play* play);
-void EnPametfrog_CallSnapper(Actor_EnPametfrog* this, GameState_Play* play);
-void EnPametfrog_SetupSnapperSpawn(Actor_EnPametfrog* this, GameState_Play* play);
-void EnPametfrog_SnapperSpawn(Actor_EnPametfrog* this, GameState_Play* play);
-void EnPametfrog_SetupTransitionGekkoSnapper(Actor_EnPametfrog* this, GameState_Play* play);
-void EnPametfrog_TransitionGekkoSnapper(Actor_EnPametfrog* this, GameState_Play* play);
+void EnPametfrog_Damage(Actor_EnPametfrog* this, PlayState* play);
+void EnPametfrog_Stun(Actor_EnPametfrog* this, PlayState* play);
+void EnPametfrog_SetupCallSnapper(Actor_EnPametfrog* this, PlayState* play);
+void EnPametfrog_CallSnapper(Actor_EnPametfrog* this, PlayState* play);
+void EnPametfrog_SetupSnapperSpawn(Actor_EnPametfrog* this, PlayState* play);
+void EnPametfrog_SnapperSpawn(Actor_EnPametfrog* this, PlayState* play);
+void EnPametfrog_SetupTransitionGekkoSnapper(Actor_EnPametfrog* this, PlayState* play);
+void EnPametfrog_TransitionGekkoSnapper(Actor_EnPametfrog* this, PlayState* play);
 
 typedef enum {
     GEKKO_DMGEFF_NONE,
@@ -88,7 +89,7 @@ typedef enum {
     GEKKO_DMGEFF_ZORA_BARRIER
 } EnPametfrogDamageEffect;
 
-static DamageTable sDamageTable = {
+static DamageTable sDamageTable = {{
     /* Deku Nut       */ DMG_ENTRY(0, GEKKO_DMGEFF_STUN),
     /* Deku Stick     */ DMG_ENTRY(1, GEKKO_DMGEFF_NONE),
     /* Horse trample  */ DMG_ENTRY(0, GEKKO_DMGEFF_NONE),
@@ -121,7 +122,7 @@ static DamageTable sDamageTable = {
     /* Unblockable    */ DMG_ENTRY(0, GEKKO_DMGEFF_NONE),
     /* UNK_DMG_0x1E   */ DMG_ENTRY(0, GEKKO_DMGEFF_NONE),
     /* Powder Keg     */ DMG_ENTRY(1, GEKKO_DMGEFF_NONE),
-};
+}};
 
 static ColliderJntSphElementInit sJntSphElementsInit[2] = {
     {
@@ -178,7 +179,7 @@ static s32 sIsFrogReturnedFlags[] = {
     EV_MM_WEEK_RETURNED_FROG_WHITE,
 };
 
-void EnPametfrog_Init(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_Init(Actor_EnPametfrog* this, PlayState* play) {
     s32 i;
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
@@ -190,7 +191,7 @@ void EnPametfrog_Init(Actor_EnPametfrog* this, GameState_Play* play) {
     this->params = CLAMP(this->actor.params, 1, 4);
     if (Flags_GetClear(play, play->roomCtx.curRoom.num)) {
         Actor_Kill(&this->actor);
-        if (!CHECK_WEEKEVENTREG(sIsFrogReturnedFlags[this->actor.params - 1])) {
+        if (!MM_GET_EVENT_WEEK(sIsFrogReturnedFlags[this->actor.params - 1])) {
             Actor_Spawn(&play->actorCtx, play, AC_EN_MINIFROG, this->actor.world.pos.x, this->actor.world.pos.y,
                         this->actor.world.pos.z, 0, this->actor.shape.rot.y, 0, this->params);
         }
@@ -210,7 +211,7 @@ void EnPametfrog_Init(Actor_EnPametfrog* this, GameState_Play* play) {
     }
 }
 
-void EnPametfrog_Destroy(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_Destroy(Actor_EnPametfrog* this, PlayState* play) {
     Collider_DestroyJntSph(play, &this->collider);
 }
 
@@ -234,7 +235,7 @@ void EnPametfrog_Freeze(Actor_EnPametfrog* this) {
     this->drawDmgEffAlpha = 1.0f;
 }
 
-void EnPametfrog_Thaw(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_Thaw(Actor_EnPametfrog* this, PlayState* play) {
     this->freezeTimer = 0;
     if (this->drawDmgEffType == ACTOR_DRAW_DMGEFF_FROZEN_NO_SFX) {
         this->drawDmgEffType = ACTOR_DRAW_DMGEFF_FIRE;
@@ -245,7 +246,7 @@ void EnPametfrog_Thaw(Actor_EnPametfrog* this, GameState_Play* play) {
     }
 }
 
-void EnPametfrog_JumpWaterEffects(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_JumpWaterEffects(Actor_EnPametfrog* this, PlayState* play) {
     Vec3f pos;
 
     if (this->actor.depthInWater > 0.0f) {
@@ -258,7 +259,7 @@ void EnPametfrog_JumpWaterEffects(Actor_EnPametfrog* this, GameState_Play* play)
     }
 }
 
-void EnPametfrog_IdleWaterEffects(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_IdleWaterEffects(Actor_EnPametfrog* this, PlayState* play) {
     Vec3f pos;
 
     if ((this->actor.depthInWater > 0.0f) && ((play->gameplayFrames % 14) == 0)) {
@@ -319,7 +320,7 @@ s32 func_8086A2CC(Actor_EnPametfrog* this, CollisionPoly* floorPoly) {
     return TRUE;
 }
 
-void EnPametfrog_ShakeCamera(Actor_EnPametfrog* this, GameState_Play* play, f32 magShakeXZ, f32 magShakeY) {
+void EnPametfrog_ShakeCamera(Actor_EnPametfrog* this, PlayState* play, f32 magShakeXZ, f32 magShakeY) {
     Camera* subCam = Play_GetCamera(play, this->subCamId);
     s16 subCamYaw;
     Vec3f subCamEye;
@@ -331,7 +332,7 @@ void EnPametfrog_ShakeCamera(Actor_EnPametfrog* this, GameState_Play* play, f32 
     Play_SetCameraAtEye(play, this->subCamId, &subCam->at, &subCamEye);
 }
 
-void EnPametfrog_StopCutscene(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_StopCutscene(Actor_EnPametfrog* this, PlayState* play) {
     Camera* subCam;
 
     if (this->subCamId != SUB_CAM_ID_DONE) {
@@ -343,7 +344,7 @@ void EnPametfrog_StopCutscene(Actor_EnPametfrog* this, GameState_Play* play) {
     }
 }
 
-void EnPametfrog_PlaceSnapper(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_PlaceSnapper(Actor_EnPametfrog* this, PlayState* play) {
     CollisionPoly* poly;
     s32 bgId;
     Vec3f vec1;
@@ -371,7 +372,7 @@ void EnPametfrog_PlaceSnapper(Actor_EnPametfrog* this, GameState_Play* play) {
     child->world.pos.y = child->floorHeight - 60.0f;
 }
 
-void EnPametfrog_JumpOnGround(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_JumpOnGround(Actor_EnPametfrog* this, PlayState* play) {
     if (Animation_OnFrame(&this->skelAnime, 1.0f)) {
         Actor_PlaySfx(&this->actor, NA_SE_EN_FROG_JUMP);
     } else if (Animation_OnFrame(&this->skelAnime, 11.0f)) {
@@ -380,7 +381,7 @@ void EnPametfrog_JumpOnGround(Actor_EnPametfrog* this, GameState_Play* play) {
     }
 }
 
-void EnPametfrog_ApplyMagicArrowEffects(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_ApplyMagicArrowEffects(Actor_EnPametfrog* this, PlayState* play) {
     if (this->actor.colChkInfo.damageEffect == GEKKO_DMGEFF_FIRE) {
         this->drawDmgEffType = ACTOR_DRAW_DMGEFF_FIRE;
         this->drawDmgEffAlpha = 3.0f;
@@ -392,7 +393,7 @@ void EnPametfrog_ApplyMagicArrowEffects(Actor_EnPametfrog* this, GameState_Play*
         Actor_Spawn(&play->actorCtx, play, AC_EN_CLEAR_TAG, this->collider.elements[0].elem.acDmgInfo.hitPos.x,
                     this->collider.elements[0].elem.acDmgInfo.hitPos.y,
                     this->collider.elements[0].elem.acDmgInfo.hitPos.z, 0, 0, 0,
-                    CLEAR_TAG_PARAMS(CLEAR_TAG_LARGE_LIGHT_RAYS));
+                    CLEAR_TAG_LARGE_LIGHT_RAYS); // FIXME CLEAR_TAG_PARAMS(CLEAR_TAG_LARGE_LIGHT_RAYS)
     } else if (this->actor.colChkInfo.damageEffect == GEKKO_DMGEFF_ICE) {
         EnPametfrog_Freeze(this);
     }
@@ -427,10 +428,9 @@ void EnPametfrog_SetupRearOnSnapper(Actor_EnPametfrog* this) {
     this->actionFunc = EnPametfrog_RearOnSnapper;
 }
 
-void EnPametfrog_RearOnSnapper(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_RearOnSnapper(Actor_EnPametfrog* this, PlayState* play) {
     Actor* actor;
     Vec3f rearingPoint;
-    s32 pad;
 
     if (SkelAnime_Update(&this->skelAnime)) {
         if (Rand_ZeroOne() < 0.5f) {
@@ -459,7 +459,7 @@ void EnPametfrog_SetupRearOnSnapperWave(Actor_EnPametfrog* this) {
     this->actionFunc = EnPametfrog_RearOnSnapperWave;
 }
 
-void EnPametfrog_RearOnSnapperWave(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_RearOnSnapperWave(Actor_EnPametfrog* this, PlayState* play) {
     if (SkelAnime_Update(&this->skelAnime) && (this->timer > 0)) {
         this->timer--;
         if (this->timer == 0) {
@@ -478,7 +478,7 @@ void EnPametfrog_SetupRearOnSnapperRise(Actor_EnPametfrog* this) {
     this->actionFunc = EnPametfrog_RearOnSnapperRise;
 }
 
-void EnPametfrog_RearOnSnapperRise(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_RearOnSnapperRise(Actor_EnPametfrog* this, PlayState* play) {
     SkelAnime_Update(&this->skelAnime);
     this->timer--;
     if (this->timer == 0) {
@@ -489,7 +489,7 @@ void EnPametfrog_RearOnSnapperRise(Actor_EnPametfrog* this, GameState_Play* play
     }
 }
 
-void EnPametfrog_SetupFallOffSnapper(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_SetupFallOffSnapper(Actor_EnPametfrog* this, PlayState* play) {
     Vec3f subCamEye;
     s16 yaw;
 
@@ -511,7 +511,7 @@ void EnPametfrog_SetupFallOffSnapper(Actor_EnPametfrog* this, GameState_Play* pl
     this->actionFunc = EnPametfrog_FallOffSnapper;
 }
 
-void EnPametfrog_FallOffSnapper(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_FallOffSnapper(Actor_EnPametfrog* this, PlayState* play) {
     f32 sin;
 
     SkelAnime_Update(&this->skelAnime);
@@ -538,7 +538,7 @@ void EnPametfrog_SetupJumpToWall(Actor_EnPametfrog* this) {
     this->actionFunc = EnPametfrog_JumpToWall;
 }
 
-void EnPametfrog_JumpToWall(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_JumpToWall(Actor_EnPametfrog* this, PlayState* play) {
     SkelAnime_Update(&this->skelAnime);
     EnPametfrog_JumpOnGround(this, play);
     if ((this->actor.bgCheckFlags & BGCHECKFLAG_GROUND) && (this->actor.bgCheckFlags & BGCHECKFLAG_WALL) &&
@@ -583,7 +583,7 @@ void EnPametfrog_SetupWallCrawl(Actor_EnPametfrog* this) {
     this->actionFunc = EnPametfrog_WallCrawl;
 }
 
-void EnPametfrog_WallCrawl(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_WallCrawl(Actor_EnPametfrog* this, PlayState* play) {
     CollisionPoly* poly1 = NULL;
     CollisionPoly* poly2 = NULL;
     Vec3f vec1;
@@ -654,7 +654,6 @@ void EnPametfrog_WallCrawl(Actor_EnPametfrog* this, GameState_Play* play) {
 }
 
 void EnPametfrog_SetupWallPause(Actor_EnPametfrog* this) {
-    s32 pad;
     f32 randFloat;
 
     this->actor.speed = 0.0f;
@@ -670,7 +669,7 @@ void EnPametfrog_SetupWallPause(Actor_EnPametfrog* this) {
     this->actionFunc = EnPametfrog_WallPause;
 }
 
-void EnPametfrog_WallPause(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_WallPause(Actor_EnPametfrog* this, PlayState* play) {
     Vec3f vec;
 
     if (this->freezeTimer > 0) {
@@ -715,7 +714,7 @@ void EnPametfrog_SetupClimbDownWall(Actor_EnPametfrog* this) {
     this->actionFunc = EnPametfrog_ClimbDownWall;
 }
 
-void EnPametfrog_ClimbDownWall(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_ClimbDownWall(Actor_EnPametfrog* this, PlayState* play) {
     s16 yaw;
 
     if (this->actor.bgCheckFlags & BGCHECKFLAG_GROUND) {
@@ -736,7 +735,7 @@ void EnPametfrog_SetupRunToSnapper(Actor_EnPametfrog* this) {
     this->actionFunc = EnPametfrog_RunToSnapper;
 }
 
-void EnPametfrog_RunToSnapper(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_RunToSnapper(Actor_EnPametfrog* this, PlayState* play) {
     SkelAnime_Update(&this->skelAnime);
     EnPametfrog_JumpOnGround(this, play);
     this->actor.shape.rot.y = Actor_WorldYawTowardActor(&this->actor, this->actor.child);
@@ -768,7 +767,7 @@ void EnPametfrog_SetupJumpOnSnapper(Actor_EnPametfrog* this) {
     this->actionFunc = EnPametfrog_JumpOnSnapper;
 }
 
-void EnPametfrog_JumpOnSnapper(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_JumpOnSnapper(Actor_EnPametfrog* this, PlayState* play) {
     f32 lerp;
     Actor_EnBigpamet* bigpamet;
 
@@ -793,14 +792,14 @@ void EnPametfrog_SetupLandOnSnapper(Actor_EnPametfrog* this) {
     this->actionFunc = EnPametfrog_LandOnSnapper;
 }
 
-void EnPametfrog_LandOnSnapper(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_LandOnSnapper(Actor_EnPametfrog* this, PlayState* play) {
     if (SkelAnime_Update(&this->skelAnime)) {
         EnPametfrog_StopCutscene(this, play);
         EnPametfrog_SetupRearOnSnapper(this);
     }
 }
 
-void EnPametfrog_SetupFallInAir(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_SetupFallInAir(Actor_EnPametfrog* this, PlayState* play) {
     s16 yaw;
     Vec3f subCamEye;
     f32 xzDist;
@@ -843,7 +842,7 @@ void EnPametfrog_SetupFallInAir(Actor_EnPametfrog* this, GameState_Play* play) {
     this->actionFunc = EnPametfrog_FallInAir;
 }
 
-void EnPametfrog_FallInAir(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_FallInAir(Actor_EnPametfrog* this, PlayState* play) {
     SkelAnime_Update(&this->skelAnime);
     this->actor.colorFilterTimer = 16;
     if (this->timer > 0) {
@@ -865,7 +864,7 @@ void EnPametfrog_FallInAir(Actor_EnPametfrog* this, GameState_Play* play) {
     }
 }
 
-void EnPametfrog_SetupFallOnGround(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_SetupFallOnGround(Actor_EnPametfrog* this, PlayState* play) {
     Animation_PlayOnce(&this->skelAnime, gGekkoFallOnGroundAnim);
     this->actor.shape.rot.x = 0;
     this->actor.shape.rot.y += this->spinYaw;
@@ -878,7 +877,7 @@ void EnPametfrog_SetupFallOnGround(Actor_EnPametfrog* this, GameState_Play* play
     this->actionFunc = EnPametfrog_FallOnGround;
 }
 
-void EnPametfrog_FallOnGround(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_FallOnGround(Actor_EnPametfrog* this, PlayState* play) {
     if (SkelAnime_Update(&this->skelAnime)) {
         if (this->skelAnime.animation == gGekkoFallOnGroundAnim) {
             if (this->actor.colChkInfo.health == 0) {
@@ -895,7 +894,7 @@ void EnPametfrog_FallOnGround(Actor_EnPametfrog* this, GameState_Play* play) {
     }
 }
 
-void EnPametfrog_SetupDefeatGekko(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_SetupDefeatGekko(Actor_EnPametfrog* this, PlayState* play) {
     Vec3f subCamEye;
     s16 yaw = Actor_WorldYawTowardPoint(this->actor.child, &this->actor.home.pos);
     s16 yawDiff = this->actor.yawTowardsPlayer - yaw;
@@ -910,7 +909,7 @@ void EnPametfrog_SetupDefeatGekko(Actor_EnPametfrog* this, GameState_Play* play)
     this->actionFunc = EnPametfrog_DefeatGekko;
 }
 
-void EnPametfrog_DefeatGekko(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_DefeatGekko(Actor_EnPametfrog* this, PlayState* play) {
     this->actor.colorFilterTimer = 16;
     if (this->timer > 0) {
         this->timer--;
@@ -920,7 +919,7 @@ void EnPametfrog_DefeatGekko(Actor_EnPametfrog* this, GameState_Play* play) {
     }
 }
 
-void EnPametfrog_SetupDefeatSnapper(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_SetupDefeatSnapper(Actor_EnPametfrog* this, PlayState* play) {
     Vec3f subCamEye;
     s16 yaw = Actor_WorldYawTowardPoint(&this->actor, &this->actor.home.pos);
     s16 yawDiff = this->actor.yawTowardsPlayer - yaw;
@@ -934,7 +933,7 @@ void EnPametfrog_SetupDefeatSnapper(Actor_EnPametfrog* this, GameState_Play* pla
     this->actionFunc = EnPametfrog_DefeatSnapper;
 }
 
-void EnPametfrog_DefeatSnapper(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_DefeatSnapper(Actor_EnPametfrog* this, PlayState* play) {
     this->timer--;
     Actor_SetScale(&this->actor, this->timer * (0.35f * 0.001f));
     this->actor.colorFilterTimer = 16;
@@ -944,7 +943,7 @@ void EnPametfrog_DefeatSnapper(Actor_EnPametfrog* this, GameState_Play* play) {
     }
 }
 
-void EnPametfrog_SetupSpawnFrog(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_SetupSpawnFrog(Actor_EnPametfrog* this, PlayState* play) {
     static Vec3f sAccel = { 0.0f, -0.5f, 0.0f };
     static Color_RGBA8 sPrimColor = { 250, 250, 250, 255 };
     static Color_RGBA8 sEnvColor = { 180, 180, 180, 255 };
@@ -959,7 +958,7 @@ void EnPametfrog_SetupSpawnFrog(Actor_EnPametfrog* this, GameState_Play* play) {
     vec1.y = this->actor.world.pos.y + 25.0f;
     vec1.z = (Math_CosS(yaw) * 20.0f) + this->actor.world.pos.z;
     this->collider.base.ocFlags1 &= ~OC1_ON;
-    func_800B0DE0(play, &vec1, gZeroVec3f, gZeroVec3f, &sPrimColor, &sEnvColor, 800, 50);
+    func_800B0DE0(play, &vec1, &gZeroVec3f, &gZeroVec3f, &sPrimColor, &sEnvColor, 800, 50);
     SoundSource_PlaySfxAtFixedWorldPos(play, &this->actor.world.pos, 40, NA_SE_EN_NPC_APPEAR);
     Flags_SetClearTemp(play, play->roomCtx.curRoom.num);
 
@@ -975,7 +974,7 @@ void EnPametfrog_SetupSpawnFrog(Actor_EnPametfrog* this, GameState_Play* play) {
     this->actionFunc = EnPametfrog_SpawnFrog;
 }
 
-void EnPametfrog_SpawnFrog(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_SpawnFrog(Actor_EnPametfrog* this, PlayState* play) {
     f32 magShake;
 
     this->timer--;
@@ -1000,7 +999,7 @@ void EnPametfrog_SetupCutscene(Actor_EnPametfrog* this) {
     this->actor.velocity.y = 0.0f;
 }
 
-void EnPametfrog_PlayCutscene(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_PlayCutscene(Actor_EnPametfrog* this, PlayState* play) {
     if (CutsceneManager_IsNext(this->csId)) {
         CutsceneManager_Start(this->csId, &this->actor);
         this->subCamId = CutsceneManager_GetCurrentSubCamId(this->csId);
@@ -1027,7 +1026,7 @@ void EnPametfrog_SetupLookAround(Actor_EnPametfrog* this) {
     this->actionFunc = EnPametfrog_LookAround;
 }
 
-void EnPametfrog_LookAround(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_LookAround(Actor_EnPametfrog* this, PlayState* play) {
     EnPametfrog_IdleWaterEffects(this, play);
     Math_SmoothStepToS(&this->actor.world.rot.y, this->actor.yawTowardsPlayer, 5, 0x400, 0x80);
     this->actor.shape.rot.y = this->actor.world.rot.y;
@@ -1047,7 +1046,7 @@ void EnPametfrog_SetupJumpToLink(Actor_EnPametfrog* this) {
     this->actionFunc = EnPametfrog_JumpToLink;
 }
 
-void EnPametfrog_JumpToLink(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_JumpToLink(Actor_EnPametfrog* this, PlayState* play) {
     Math_SmoothStepToS(&this->actor.world.rot.y, this->actor.yawTowardsPlayer, 5, 0x1000, 0x80);
     this->actor.shape.rot.y = this->actor.world.rot.y;
     SkelAnime_Update(&this->skelAnime);
@@ -1080,7 +1079,7 @@ static AnimationHeader* sAttackAnimations[] = {
     gGekkoWindupPunchAnim,
 };
 
-void EnPametfrog_MeleeAttack(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_MeleeAttack(Actor_EnPametfrog* this, PlayState* play) {
     EnPametfrog_IdleWaterEffects(this, play);
     if (SkelAnime_Update(&this->skelAnime)) {
         this->timer--;
@@ -1121,7 +1120,7 @@ void EnPametfrog_SetupDamage(Actor_EnPametfrog* this) {
     this->actionFunc = EnPametfrog_Damage;
 }
 
-void EnPametfrog_Damage(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_Damage(Actor_EnPametfrog* this, PlayState* play) {
     SkelAnime_Update(&this->skelAnime);
     this->timer--;
     Math_StepToF(&this->actor.speed, 0.0f, 0.5f);
@@ -1150,7 +1149,7 @@ void EnPametfrog_SetupStun(Actor_EnPametfrog* this) {
     this->actionFunc = EnPametfrog_Stun;
 }
 
-void EnPametfrog_Stun(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_Stun(Actor_EnPametfrog* this, PlayState* play) {
     this->freezeTimer--;
     if (this->freezeTimer == 0) {
         EnPametfrog_Thaw(this, play);
@@ -1162,7 +1161,7 @@ void EnPametfrog_Stun(Actor_EnPametfrog* this, GameState_Play* play) {
     }
 }
 
-void EnPametfrog_SetupCallSnapper(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_SetupCallSnapper(Actor_EnPametfrog* this, PlayState* play) {
     Vec3f subCamEye;
     Vec3f subCamAt;
     s16 yawDiff;
@@ -1194,13 +1193,13 @@ void EnPametfrog_SetupCallSnapper(Actor_EnPametfrog* this, GameState_Play* play)
     this->actionFunc = EnPametfrog_CallSnapper;
 }
 
-void EnPametfrog_CallSnapper(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_CallSnapper(Actor_EnPametfrog* this, PlayState* play) {
     if (SkelAnime_Update(&this->skelAnime)) {
         EnPametfrog_SetupSnapperSpawn(this, play);
     }
 }
 
-void EnPametfrog_SetupSnapperSpawn(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_SetupSnapperSpawn(Actor_EnPametfrog* this, PlayState* play) {
     Vec3f subCamAt;
     Vec3f subCamEye;
     s16 yaw;
@@ -1233,7 +1232,7 @@ void EnPametfrog_SetupSnapperSpawn(Actor_EnPametfrog* this, GameState_Play* play
     this->actionFunc = EnPametfrog_SnapperSpawn;
 }
 
-void EnPametfrog_SnapperSpawn(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_SnapperSpawn(Actor_EnPametfrog* this, PlayState* play) {
     this->timer--;
     EnPametfrog_ShakeCamera(this, play, (f32)(this->timer * 7.5f) + 200.0f,
                             ((f32)(this->timer * 2) * (15.0f / 16.0f)) + -20.0f);
@@ -1244,7 +1243,7 @@ void EnPametfrog_SnapperSpawn(Actor_EnPametfrog* this, GameState_Play* play) {
     }
 }
 
-void EnPametfrog_SetupTransitionGekkoSnapper(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_SetupTransitionGekkoSnapper(Actor_EnPametfrog* this, PlayState* play) {
     this->actor.params = GEKKO_GET_SNAPPER;
 
     Quake_RemoveRequest(this->quakeIndex);
@@ -1259,14 +1258,14 @@ void EnPametfrog_SetupTransitionGekkoSnapper(Actor_EnPametfrog* this, GameState_
     this->actionFunc = EnPametfrog_TransitionGekkoSnapper;
 }
 
-void EnPametfrog_TransitionGekkoSnapper(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_TransitionGekkoSnapper(Actor_EnPametfrog* this, PlayState* play) {
     if (this->actor.params == GEKKO_INIT_SNAPPER) {
         Audio_PlayBgm_StorePrevBgm(NA_BGM_MINI_BOSS);
         EnPametfrog_SetupRunToSnapper(this);
     }
 }
 
-void EnPametfrog_ApplyDamageEffect(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_ApplyDamageEffect(Actor_EnPametfrog* this, PlayState* play) {
     if (this->collider.base.acFlags & AC_HIT) {
         this->collider.base.acFlags &= ~AC_HIT;
         if ((this->drawDmgEffType != ACTOR_DRAW_DMGEFF_FROZEN_NO_SFX) ||
@@ -1301,7 +1300,7 @@ void EnPametfrog_ApplyDamageEffect(Actor_EnPametfrog* this, GameState_Play* play
                                     this->collider.elements[0].elem.acDmgInfo.hitPos.x,
                                     this->collider.elements[0].elem.acDmgInfo.hitPos.y,
                                     this->collider.elements[0].elem.acDmgInfo.hitPos.z, 0, 0, 0,
-                                    CLEAR_TAG_PARAMS(CLEAR_TAG_LARGE_LIGHT_RAYS));
+                                    CLEAR_TAG_LARGE_LIGHT_RAYS); // FIXME CLEAR_TAG_PARAMS(CLEAR_TAG_LARGE_LIGHT_RAYS)
                     }
                     EnPametfrog_SetupDamage(this);
                 }
@@ -1324,7 +1323,7 @@ void EnPametfrog_ApplyDamageEffect(Actor_EnPametfrog* this, GameState_Play* play
     }
 }
 
-void EnPametfrog_Update(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_Update(Actor_EnPametfrog* this, PlayState* play) {
     f32 unk2C4;
     f32 wallCheckRadius;
 
@@ -1403,7 +1402,7 @@ static s8 sLimbToBodyParts[GEKKO_LIMB_MAX] = {
     BODYPART_NONE,                  // GEKKO_LIMB_RIGHT_EYE
 };
 
-void EnPametfrog_PostLimbDraw(GameState_Play* play, s32 limbIndex, Gfx** dList, Vec3s* rot, Actor_EnPametfrog* this) {
+void EnPametfrog_PostLimbDraw(PlayState* play, s32 limbIndex, Gfx** dList, Vec3s* rot, Actor_EnPametfrog* this) {
     Vec3f vec;
     Vec3s* center;
     s8 bodyPartIndex;
@@ -1428,7 +1427,7 @@ void EnPametfrog_PostLimbDraw(GameState_Play* play, s32 limbIndex, Gfx** dList, 
     }
 }
 
-void EnPametfrog_Draw(Actor_EnPametfrog* this, GameState_Play* play) {
+void EnPametfrog_Draw(Actor_EnPametfrog* this, PlayState* play) {
     Gfx_SetupDL25_Opa(play->gs.gfx);
     Matrix_RotateYS(this->spinYaw, MAT_MUL);
     SkelAnime_DrawFlexOpa(play, this->skelAnime.skeleton, this->skelAnime.jointTable, this->skelAnime.dListCount, NULL,
@@ -1449,4 +1448,4 @@ ActorInit En_Pametfrog_InitVars = {
     (ActorFunc)EnPametfrog_Draw,
 };
 
-OVL_ACTOR_INFO(AC_EN_PAMETFROG, En_Pametfrog_InitVars);
+OVL_INFO_ACTOR(AC_EN_PAMETFROG, En_Pametfrog_InitVars);

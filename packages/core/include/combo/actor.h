@@ -383,6 +383,12 @@ typedef enum {
 #define COLORFILTER_BUFFLAG_XLU    0x2000
 #define COLORFILTER_BUFFLAG_OPA    0x0000
 
+Actor* func_800BC270(PlayState* play, Actor* actor, f32 distance, u32 dmgFlags);
+s16 Actor_WorldPitchTowardPoint(Actor* actor, Vec3f* refPoint);
+void Flags_SetClearTemp(PlayState* play, s32 roomNumber);
+u8 Actor_ApplyDamage(Actor* actor);
+void Actor_MoveWithoutGravity(Actor* actor);
+s16 Actor_WorldYawTowardActor(Actor* actorA, Actor* actorB);
 #endif
 
 typedef enum AttentionRangeType

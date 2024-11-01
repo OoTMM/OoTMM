@@ -5,7 +5,7 @@
 
 struct Actor_EnPametfrog;
 
-typedef void (*Actor_EnPametfrogActionFunc)(struct Actor_EnPametfrog*, GameState_Play*);
+typedef void (*Actor_EnPametfrogActionFunc)(struct Actor_EnPametfrog*, PlayState*);
 
 typedef enum GekkoLimb
 {
