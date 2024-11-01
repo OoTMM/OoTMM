@@ -939,6 +939,7 @@ export const REQUIRED = new Set([
   Items.SHARED_SHIELD,
   Items.SHARED_SHIELD_HYLIAN,
   Items.SHARED_SHIELD_MIRROR,
+  Items.SHARED_HAMMER,
   Items.OOT_GS_TOKEN,
   Items.OOT_ARROW_FIRE,
   Items.OOT_ARROW_ICE,
@@ -1126,6 +1127,7 @@ export const REQUIRED = new Set([
   Items.MM_TUNIC_ZORA,
   Items.MM_SCALE,
   Items.MM_STRENGTH,
+  Items.MM_HAMMER,
   Items.SHARED_BOW,
   Items.SHARED_BOMB_BAG,
   Items.SHARED_MAGIC_UPGRADE,
@@ -1202,5 +1204,4 @@ export const REQUIRED = new Set([
   Items.SHARED_MASK_STONE,
   Items.OOT_SONG_EMPTINESS,
   Items.SHARED_SONG_EMPTINESS,
-  Items.SHARED_HAMMER,
 ]);
