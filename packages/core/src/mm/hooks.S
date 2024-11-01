@@ -30,16 +30,6 @@ PATCH_START 0x80080df8
    nop
 PATCH_END
 
-/* Skip the N64 logo */
-PATCH_START 0x808006cc
-  li t9, 1
-PATCH_END
-
-PATCH_START 0x80800134
-  jr ra
-  nop
-PATCH_END
-
 /* Disable normal flash handler - we use our own one */
 PATCH_START 0x80185d78
   li v0,0
