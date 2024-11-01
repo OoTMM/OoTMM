@@ -1760,8 +1760,6 @@ void Player_SetMeleeWeaponInfo(Actor_Player* this, PlayerMeleeWeaponAnimation me
         dmgInfo = &megatonHammerDmgInfo;
         dmgFlags = dmgInfo->dmgFlags;
 
-        if (gPlay->sceneId == SCE_MM_TEMPLE_WOODFALL && gPlay->roomCtx.curRoom.num == 0x08)
-            dmgFlags |= DMG_GORON_POUND; /* Hack for snapper miniboss */
     } else {
         dmgInfo = &D_8085D09C[(this->transformation == MM_PLAYER_FORM_GORON) ? PLAYER_MELEEWEAPON_NONE : Player_GetMeleeWeaponHeld(this)];
         dmgFlags = dmgInfo->dmgFlags;

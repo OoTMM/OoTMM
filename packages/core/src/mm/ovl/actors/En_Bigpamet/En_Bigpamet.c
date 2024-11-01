@@ -724,9 +724,10 @@ void func_80A28EE8(Actor_EnBigpamet* this, PlayState* play) {
 }
 
 void func_80A29028(Actor_EnBigpamet* this, PlayState* play) {
+    Actor_Player* player = GET_PLAYER(play);
     if (this->collider.base.acFlags & AC_HIT) {
         this->collider.base.acFlags &= ~AC_HIT;
-        if ((this->actor.colChkInfo.damageEffect == 0xF) && (this->actor.parent->params != GEKKO_JUMP_ON_SNAPPER) &&
+        if ((this->actor.colChkInfo.damageEffect == 0xF || player->heldItemAction == PLAYER_CUSTOM_IA_HAMMER) && (this->actor.parent->params != GEKKO_JUMP_ON_SNAPPER) &&
             (this->actionFunc != func_80A28E98)) {
             func_80A28B98(this, play);
         }
