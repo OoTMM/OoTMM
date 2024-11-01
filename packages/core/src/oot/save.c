@@ -124,6 +124,9 @@ void Sram_AfterOpenSave(void)
     gSave.entrance = DEBUG_OOT_ENTRANCE;
 #endif
 
+    /* Load options */
+    Save_LoadOptions();
+
     if (Config_Flag(CFG_ONLY_MM))
         comboGameSwitch(NULL, ENTR_MM_CLOCK_TOWN);
 

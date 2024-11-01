@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/audio.h>
 #include <combo/item.h>
 #include <combo/net.h>
 #include <combo/time.h>
@@ -38,6 +39,27 @@ void gracePeriod(void)
     }
 }
 #endif
+
+void Save_LoadOptions(void)
+{
+    u8 ootHeader[0x20];
+
+    Flash_ReadWrite(0x00000, ootHeader, sizeof(ootHeader), OS_READ);
+
+#if defined(GAME_OOT)
+    gSaveContext.audioSetting = ootHeader[0];
+    gSaveContext.zTargetSetting = ootHeader[1];
+    Audio_ApplySoundMode(gSaveContext.audioSetting);
+#endif
+
+#if defined(GAME_MM)
+    gSaveContext.options.optionId = 0xa51d;
+    gSaveContext.options.unk_02 = 1;
+    gSaveContext.options.audio = ootHeader[0];
+    gSaveContext.options.unk_04 = 0;
+    gSaveContext.options.zTarget = ootHeader[1];
+#endif
+}
 
 void Save_OnLoad(void)
 {

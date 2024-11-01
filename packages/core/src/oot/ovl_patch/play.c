@@ -399,67 +399,6 @@ static void applyCustomEntrance(u32* entrance)
     }
 }
 
-static void preInitTitleScreen(void)
-{
-    s16 magicCapacity;
-    u32 entrance;
-
-    if (gComboCtx.valid)
-    {
-        /* Disable Title screen */
-        gSaveContext.gameMode = GAMEMODE_NORMAL;
-        gSaveContext.showTitleCard = TRUE;
-
-        /* Set file and load */
-        gSaveContext.fileIndex = gComboCtx.saveIndex;
-        Sram_OpenSave(NULL);
-        if (gComboCtx.isFwSpawn)
-        {
-            gSaveContext.respawnFlag = 3;
-            gComboCtx.isFwSpawn = 0;
-
-            OotFaroreWind* fw = &gSave.fw;
-
-            if (fw->set)
-            {
-                gSaveContext.respawn[RESPAWN_MODE_TOP].data = 0x28;
-                gSaveContext.respawn[RESPAWN_MODE_TOP].pos.x = fw->pos.x;
-                gSaveContext.respawn[RESPAWN_MODE_TOP].pos.y = fw->pos.y;
-                gSaveContext.respawn[RESPAWN_MODE_TOP].pos.z = fw->pos.z;
-                gSaveContext.respawn[RESPAWN_MODE_TOP].yaw = fw->yaw;
-                gSaveContext.respawn[RESPAWN_MODE_TOP].playerParams = fw->playerParams;
-                gSaveContext.respawn[RESPAWN_MODE_TOP].entrance = fw->entrance;
-                gSaveContext.respawn[RESPAWN_MODE_TOP].roomIndex = fw->roomIndex;
-                gSaveContext.respawn[RESPAWN_MODE_TOP].tempSwitchFlags = fw->tempSwitchFlags;
-                gSaveContext.respawn[RESPAWN_MODE_TOP].tempCollectFlags = fw->tempCollectFlags;
-            }
-            else
-            {
-                gSaveContext.respawn[RESPAWN_MODE_TOP].data = 0;
-                gSaveContext.respawn[RESPAWN_MODE_TOP].pos.x = 0.0f;
-                gSaveContext.respawn[RESPAWN_MODE_TOP].pos.y = 0.0f;
-                gSaveContext.respawn[RESPAWN_MODE_TOP].pos.z = 0.0f;
-            }
-        }
-        gSave.cutscene = 0;
-
-        /* Set the entrance */
-        entrance = gComboCtx.entrance;
-        applyCustomEntrance(&entrance);
-        gSave.entrance = (s32)entrance;
-        gComboCtx.valid = 0;
-
-        /* Set magic */
-        magicCapacity = 0;
-        if (gSave.playerData.magicUpgrade)
-            magicCapacity = gSave.playerData.magicUpgrade2 ? 0x60 : 0x30;
-        gSaveContext.magicState = MAGIC_STATE_IDLE;
-        gSaveContext.magicCapacity = magicCapacity;
-        gSaveContext.magicFillTarget = gSave.playerData.magicAmount;
-        gSaveContext.magicTarget = gSave.playerData.magicAmount;
-    }
-}
-
 static void playAdjustEntrance(GameState_Play* play)
 {
     /* Handle custom entrance IDs */
@@ -529,12 +468,9 @@ static void Play_AfterInit(GameState_Play* play)
 
 void hookPlay_Init(GameState_Play* play)
 {
-    /* Pre-init */
+    /* Init */
     gIsEntranceOverride = 0;
     g.decoysCount = 0;
-    preInitTitleScreen();
-
-    /* Init */
     gActorCustomTriggers = NULL;
     gMultiMarkChests = 0;
     gMultiMarkCollectibles = 0;
@@ -774,3 +710,75 @@ static void TimeTravelUpdateEquipment(void)
 }
 
 PATCH_FUNC(0x8006f804, TimeTravelUpdateEquipment);
+
+void Play_FastInit(GameState* gs)
+{
+    u32 entrance;
+    u16 magicCapacity;
+
+    /* Normal boot if the game was actually cold-started */
+    if (!gComboCtx.valid)
+        return;
+
+    /* Enable audio */
+    R_AUDIOMGR_DEBUG_LEVEL = 0;
+
+    /* Set the next GameState */
+    gs->nextGameStateInit = Play_Init;
+    gs->nextGameStateSize = sizeof(GameState_Play);
+
+    /* Load the save */
+    gSaveContext.fileIndex = gComboCtx.saveIndex;
+    Sram_OpenSave(NULL);
+
+    /* Set game mode */
+    gSaveContext.gameMode = GAMEMODE_NORMAL;
+    gSaveContext.showTitleCard = TRUE;
+
+    if (gComboCtx.isFwSpawn)
+    {
+        gSaveContext.respawnFlag = 3;
+        gComboCtx.isFwSpawn = 0;
+
+        OotFaroreWind* fw = &gSave.fw;
+
+        if (fw->set)
+        {
+            gSaveContext.respawn[RESPAWN_MODE_TOP].data = 0x28;
+            gSaveContext.respawn[RESPAWN_MODE_TOP].pos.x = fw->pos.x;
+            gSaveContext.respawn[RESPAWN_MODE_TOP].pos.y = fw->pos.y;
+            gSaveContext.respawn[RESPAWN_MODE_TOP].pos.z = fw->pos.z;
+            gSaveContext.respawn[RESPAWN_MODE_TOP].yaw = fw->yaw;
+            gSaveContext.respawn[RESPAWN_MODE_TOP].playerParams = fw->playerParams;
+            gSaveContext.respawn[RESPAWN_MODE_TOP].entrance = fw->entrance;
+            gSaveContext.respawn[RESPAWN_MODE_TOP].roomIndex = fw->roomIndex;
+            gSaveContext.respawn[RESPAWN_MODE_TOP].tempSwitchFlags = fw->tempSwitchFlags;
+            gSaveContext.respawn[RESPAWN_MODE_TOP].tempCollectFlags = fw->tempCollectFlags;
+        }
+        else
+        {
+            gSaveContext.respawn[RESPAWN_MODE_TOP].data = 0;
+            gSaveContext.respawn[RESPAWN_MODE_TOP].pos.x = 0.0f;
+            gSaveContext.respawn[RESPAWN_MODE_TOP].pos.y = 0.0f;
+            gSaveContext.respawn[RESPAWN_MODE_TOP].pos.z = 0.0f;
+        }
+    }
+    gSave.cutscene = 0;
+
+    /* Set the entrance */
+    entrance = gComboCtx.entrance;
+    applyCustomEntrance(&entrance);
+    gSave.entrance = (s32)entrance;
+
+    /* Set magic */
+    magicCapacity = 0;
+    if (gSave.playerData.magicUpgrade)
+        magicCapacity = gSave.playerData.magicUpgrade2 ? 0x60 : 0x30;
+    gSaveContext.magicState = MAGIC_STATE_IDLE;
+    gSaveContext.magicCapacity = magicCapacity;
+    gSaveContext.magicFillTarget = gSave.playerData.magicAmount;
+    gSaveContext.magicTarget = gSave.playerData.magicAmount;
+
+    /* Done */
+    gComboCtx.valid = 0;
+}

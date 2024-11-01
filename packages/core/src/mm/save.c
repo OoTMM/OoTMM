@@ -3,22 +3,10 @@
 #include <combo/config.h>
 #include <combo/inventory.h>
 
-static void Sram_LoadOptions(void)
-{
-    u8 ootHeader[0x20];
-
-    Flash_ReadWrite(0x00000, ootHeader, sizeof(ootHeader), OS_READ);
-    gSaveContext.options.optionId = 0xa51d;
-    gSaveContext.options.unk_02 = 1;
-    gSaveContext.options.audio = ootHeader[0];
-    gSaveContext.options.unk_04 = 0;
-    gSaveContext.options.zTarget = ootHeader[1];
-}
-
 void Sram_AfterOpenSave(void)
 {
-    /* Patch MM options */
-    Sram_LoadOptions();
+    /* Load options */
+    Save_LoadOptions();
 
     /* Read the foreign save */
     Save_ReadForeign();

@@ -71,3 +71,9 @@ PATCH_START 0x8009ab88
   nop
   nop
 PATCH_END
+
+/* Fast OoT Load */
+PATCH_START 0x800a0734
+  j Play_FastInit
+   nop
+PATCH_END

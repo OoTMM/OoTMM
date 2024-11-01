@@ -47,6 +47,7 @@ extern SharedCustomSave gSharedCustomSave;
 #define SF_NOCOMMIT     0x02
 #define SF_PASSIVE      0x04
 
+void Save_LoadOptions(void);
 void Save_ReadOwn(void);
 void Save_ReadForeign(void);
 void Save_Write(void);
