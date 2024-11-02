@@ -150,7 +150,7 @@ void LoadEquipItemTexture(void)
 
     if (!tex) return;
 
-    OPEN_DISPS(play->state.gfx);
+    OPEN_DISPS(play->state.gfxCtx);
     gDPLoadTextureBlock(OVERLAY_DISP++, tex, G_IM_FMT_RGBA, G_IM_SIZ_32b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
     CLOSE_DISPS();
 }

@@ -366,10 +366,10 @@ void BgIngate_Update(Actor_BgIngate* this, PlayState* play) {
 }
 
 void BgIngate_Draw(Actor_BgIngate* this, PlayState* play) {
-    OPEN_DISPS(play->state.gfx);
+    OPEN_DISPS(play->state.gfxCtx);
 
-    Gfx_SetupDL25_Opa(play->state.gfx);
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    Gfx_SetupDL25_Opa(play->state.gfxCtx);
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_OPA_DISP++, SEGADDR_BG_INGATE_DL);
 
     CLOSE_DISPS();

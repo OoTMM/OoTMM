@@ -586,14 +586,14 @@ static void ObjKibako2_PreDraw(PlayState* play, const Gfx* loader, void* tex1, v
     Gfx* gfx;
     Gfx* gfxEnd;
 
-    gfx = GRAPH_ALLOC(play->state.gfx, sizeof(Gfx) * 4);
+    gfx = GRAPH_ALLOC(play->state.gfxCtx, sizeof(Gfx) * 4);
     gfxEnd = gfx;
     gSPSegment(gfxEnd++, 0x09, tex1);
     gSPBranchList(gfxEnd++, loader);
     gSPSegment(gfxEnd++, 0x09, tex2);
     gSPBranchList(gfxEnd++, loader);
 
-    OPEN_DISPS(play->state.gfx);
+    OPEN_DISPS(play->state.gfxCtx);
     gSPSegment(POLY_OPA_DISP++, 0x08, gfx);
     CLOSE_DISPS();
 }

@@ -261,7 +261,7 @@ void MagicFire_Draw(Actor_CustomMagicFire* this, PlayState* play)
     u8 alpha;
 
     if (this->action > 0) {
-        OPEN_DISPS(play->state.gfx);
+        OPEN_DISPS(play->state.gfxCtx);
         gSPSegment(POLY_XLU_DISP++, 0x08, g.customKeep);
         POLY_XLU_DISP = Gfx_SetupDL57(POLY_XLU_DISP);
         gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, (u8)(s32)(60 * this->screenTintIntensity),
@@ -270,11 +270,11 @@ void MagicFire_Draw(Actor_CustomMagicFire* this, PlayState* play)
         gDPSetAlphaDither(POLY_XLU_DISP++, G_AD_DISABLE);
         gDPSetColorDither(POLY_XLU_DISP++, G_CD_DISABLE);
         gDPFillRectangle(POLY_XLU_DISP++, 0, 0, 319, 239);
-        Gfx_SetupDL25_Xlu(play->state.gfx);
+        Gfx_SetupDL25_Xlu(play->state.gfxCtx);
         gDPSetPrimColor(POLY_XLU_DISP++, 0, 128, 255, 200, 0, (u8)(this->alphaMultiplier * 255));
         gDPSetEnvColor(POLY_XLU_DISP++, 255, 0, 0, (u8)(this->alphaMultiplier * 255));
         Matrix_Scale(0.15f, 0.15f, 0.15f, MAT_MUL);
-        gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfx),
+        gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx),
                   G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         gDPPipeSync(POLY_XLU_DISP++);
         gSPTexture(POLY_XLU_DISP++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON);
@@ -286,7 +286,7 @@ void MagicFire_Draw(Actor_CustomMagicFire* this, PlayState* play)
         gDPSetTileSize(POLY_XLU_DISP++, 1, 0, 0, 63 << 2, 63 << 2);
         gSPDisplayList(POLY_XLU_DISP++, sMaterialDL);
         gSPDisplayList(POLY_XLU_DISP++,
-                       DisplaceTexture(play->state.gfx, G_TX_RENDERTILE, (gameplayFrames * 2) % 512,
+                       DisplaceTexture(play->state.gfxCtx, G_TX_RENDERTILE, (gameplayFrames * 2) % 512,
                                         511 - ((gameplayFrames * 5) % 512), 64, 64, 1, (gameplayFrames * 2) % 256,
                                         255 - ((gameplayFrames * 20) % 256), 32, 32));
         gSPDisplayList(POLY_XLU_DISP++, sModelDL);

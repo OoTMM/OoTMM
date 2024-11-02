@@ -440,7 +440,7 @@ void EnYb_PostLimbDrawXlu(PlayState* play, s32 limbIndex, Gfx** dList, Vec3s* ro
 
 void EnYb_Draw(Actor* this, PlayState* play) {
     Actor_EnYb* thisx = (Actor_EnYb*)this;
-    OPEN_DISPS(play->state.gfx);
+    OPEN_DISPS(play->state.gfxCtx);
 
     if (thisx->alpha != 0) {
         if (thisx->alpha < 255) {
@@ -458,7 +458,7 @@ void EnYb_Draw(Actor* this, PlayState* play) {
                                    thisx->skelAnime.dListCount, NULL, EnYb_PostLimbDrawXlu, &thisx->actor, POLY_XLU_DISP);
 
         } else {
-            Gfx_SetupDL25_Opa(play->state.gfx);
+            Gfx_SetupDL25_Opa(play->state.gfxCtx);
             Scene_SetRenderModeXlu(play, 0, 1);
             SkelAnime_DrawFlexOpa(play, thisx->skelAnime.skeleton, thisx->skelAnime.jointTable,
                                   thisx->skelAnime.dListCount, NULL, EnYb_PostLimbDrawOpa, &thisx->actor);

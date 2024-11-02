@@ -832,8 +832,8 @@ static const Gfx sListLoadTextureCustom[] = {
 
 static void ObjComb_DrawImpl(Actor_ObjComb* this, PlayState* play)
 {
-    OPEN_DISPS(play->state.gfx);
-    Gfx_SetupDL25_Opa(play->state.gfx);
+    OPEN_DISPS(play->state.gfxCtx);
+    Gfx_SetupDL25_Opa(play->state.gfxCtx);
     Matrix_Translate(this->actor.world.pos.x, this->actor.world.pos.y + (118.0f * this->actor.scale.y), this->actor.world.pos.z, MAT_SET);
     Matrix_RotateY(BINANG_TO_RAD(this->actor.shape.rot.y), MAT_MUL);
     Matrix_RotateX(BINANG_TO_RAD(this->actor.shape.rot.x), MAT_MUL);
@@ -841,7 +841,7 @@ static void ObjComb_DrawImpl(Actor_ObjComb* this, PlayState* play)
     Matrix_Translate(0.0f, -(this->actor.scale.y * 118.0f), 0.0f, MAT_MUL);
     Matrix_Scale(this->actor.scale.x, this->actor.scale.y, this->actor.scale.z, MAT_MUL);
 
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_OPA_DISP++, HIVE_DL);
 
     Collider_UpdateSpheres(0, &this->collider);
@@ -869,7 +869,7 @@ static void ObjComb_Draw(Actor_ObjComb* this, PlayState* play)
     const void*         preList;
     const Color_RGB8*   color;
 
-    OPEN_DISPS(play->state.gfx);
+    OPEN_DISPS(play->state.gfxCtx);
     type = ObjComb_CsmcType(this, play);
     if (type == CSMC_NORMAL)
     {

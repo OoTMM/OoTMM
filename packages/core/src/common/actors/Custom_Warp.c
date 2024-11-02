@@ -115,10 +115,10 @@ static void shaderFlameEffect(PlayState* play)
     static const u32 kFlameDlist = 0x7d590;
 #endif
 
-    OPEN_DISPS(play->state.gfx);
+    OPEN_DISPS(play->state.gfxCtx);
     ModelViewUnkTransform(&play->billboardMtxF);
-    gSPSegment(POLY_XLU_DISP++, 0x08, DisplaceTexture(play->state.gfx, 0, 0, 0, 0x20, 0x40, 1, 0, (-play->state.frameCount & 0x7f) << 2, 0x20, 0x80));
-    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPSegment(POLY_XLU_DISP++, 0x08, DisplaceTexture(play->state.gfxCtx, 0, 0, 0, 0x20, 0x40, 1, 0, (-play->state.frameCount & 0x7f) << 2, 0x20, 0x80));
+    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gDPSetPrimColor(POLY_XLU_DISP++, 0x80, 0x80, 0xff, 0x00, 0xff, 0xff);
     gDPSetEnvColor(POLY_XLU_DISP++, 0xff, 0x00, 0x00, 0xff);
     gSPDisplayList(POLY_XLU_DISP++, 0x04000000 | kFlameDlist);
@@ -134,8 +134,8 @@ static void CustomWarp_Draw(Actor_CustomWarp* this, PlayState* play)
     Matrix_Scale(scale, scale, scale, MAT_MUL);
 
     /* Draw */
-    OPEN_DISPS(play->state.gfx);
-    Gfx_SetupDL25_Xlu(play->state.gfx);
+    OPEN_DISPS(play->state.gfxCtx);
+    Gfx_SetupDL25_Xlu(play->state.gfxCtx);
     shaderFlameEffect(play);
     CLOSE_DISPS();
 }

@@ -575,7 +575,7 @@ static const u32 kWispColors[] = {
 
 static void drawSingleWisp(PlayState* play, const PlayerWisp* wisp)
 {
-    OPEN_DISPS(play->state.gfx);
+    OPEN_DISPS(play->state.gfxCtx);
     Matrix_Translate(wisp->pos.x, wisp->pos.y, wisp->pos.z, MAT_SET);
     Gfx_DrawFlameColor(play, kWispColors[wisp->clientId & 0xf], 0.35f, -50.0f);
     CLOSE_DISPS();
@@ -586,7 +586,7 @@ void Multi_DrawWisps(PlayState* play)
     if (!Config_Flag(CFG_MULTIPLAYER))
         return;
 
-    Gfx_SetupDL25_Xlu(play->state.gfx);
+    Gfx_SetupDL25_Xlu(play->state.gfxCtx);
     for (int i = 0; i < ARRAY_SIZE(sPlayerWisps); ++i)
     {
         if (sPlayerWisps[i].ttl)

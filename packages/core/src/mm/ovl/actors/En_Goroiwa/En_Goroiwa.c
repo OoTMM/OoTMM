@@ -1555,9 +1555,9 @@ void func_80942B1C(Actor_EnGoroiwa* this, PlayState* play) {
             Gfx_DrawDListOpa(play, phi_fp);
 
             if ((ptr->unk_28 != 0) && (ptr->unk_2C > 0)) {
-                OPEN_DISPS(play->state.gfx);
+                OPEN_DISPS(play->state.gfxCtx);
 
-                Gfx_SetupDL44_Xlu(play->state.gfx);
+                Gfx_SetupDL44_Xlu(play->state.gfxCtx);
 
                 gDPSetCombineLERP(POLY_XLU_DISP++, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED, 0, 0,
                                   0, COMBINED);
@@ -1567,7 +1567,7 @@ void func_80942B1C(Actor_EnGoroiwa* this, PlayState* play) {
                 Matrix_Put(&sp88);
                 Matrix_Scale(this->actor.scale.x * 7.5f, 1.0f, this->actor.scale.z * 7.5f, MAT_MUL);
 
-                gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfx),
+                gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx),
                           G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
                 gSPDisplayList(POLY_XLU_DISP++, SEGADDR_CIRCLE_SHADOW_DL);
 
@@ -1589,7 +1589,7 @@ void EnGoroiwa_Draw(Actor_EnGoroiwa* this, PlayState* play) {
         func_80942B1C(this, play);
     } else if (this->actionFunc != func_80942604) {
         if(params == 2) {
-            OPEN_DISPS(play->state.gfx);
+            OPEN_DISPS(play->state.gfxCtx);
             gDPSetPrimColor(POLY_OPA_DISP++, 0, 0x80, 255, 255, 255, 255);
             CLOSE_DISPS();
         }

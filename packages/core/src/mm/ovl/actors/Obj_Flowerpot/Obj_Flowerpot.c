@@ -754,7 +754,7 @@ static void ObjFlowerpot_DrawPot(Actor_ObjFlowerpot* this, PlayState* play)
     u32 customTextureAddr;
     void* customTexture;
 
-    OPEN_DISPS(play->state.gfx);
+    OPEN_DISPS(play->state.gfxCtx);
     type = ObjFlowerpot_CsmcType(this, SLICE_POT);
     if (type == CSMC_NORMAL)
     {
@@ -781,7 +781,7 @@ static void ObjFlowerpot_DrawPot(Actor_ObjFlowerpot* this, PlayState* play)
         gSPSegment(POLY_OPA_DISP++, 0x08, sListLoaderPotCustom);
         gSPSegment(POLY_OPA_DISP++, 0x09, customTexture);
     }
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_OPA_DISP++, 0x060012e0);
     CLOSE_DISPS();
 }
@@ -802,7 +802,7 @@ static void ObjFlowerpot_DrawGrass(Actor_ObjFlowerpot* this, PlayState* play)
     void* customTexture;
     const Color_RGB8* color;
 
-    OPEN_DISPS(play->state.gfx);
+    OPEN_DISPS(play->state.gfxCtx);
     type = ObjFlowerpot_CsmcType(this, SLICE_GRASS);
     if (type == CSMC_NORMAL)
     {
@@ -824,7 +824,7 @@ static void ObjFlowerpot_DrawGrass(Actor_ObjFlowerpot* this, PlayState* play)
         if ((this->actor.projectedPos.z > -150.0f) && (this->actor.projectedPos.z < 400.0f))
         {
             func_80A1B840(&D_80A1D838[this->unk_1EB]);
-            gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+            gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         }
     }
     gSPDisplayList(POLY_OPA_DISP++, 0x06001408);
@@ -833,7 +833,7 @@ static void ObjFlowerpot_DrawGrass(Actor_ObjFlowerpot* this, PlayState* play)
 
 void ObjFlowerpot_Draw(Actor_ObjFlowerpot* this, PlayState* play)
 {
-    Gfx_SetupDL25_Opa(play->state.gfx);
+    Gfx_SetupDL25_Opa(play->state.gfxCtx);
     ObjFlowerpot_DrawPot(this, play);
 
     if ((this->actionFunc != func_80A1C838) || (this->unk_1EA & 1)) {

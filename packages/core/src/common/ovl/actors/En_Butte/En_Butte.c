@@ -153,8 +153,8 @@ void EnButte_DrawTransformationEffect(Actor_EnButte* this, PlayState* play)
     s32 alpha;
     Vec3s camDir;
 
-    OPEN_DISPS(play->state.gfx);
-    Gfx_SetupDL25_Xlu(play->state.gfx);
+    OPEN_DISPS(play->state.gfxCtx);
+    Gfx_SetupDL25_Xlu(play->state.gfxCtx);
 
     alpha = Math_SinS(sTransformationEffectAlpha) * 250;
     alpha = CLAMP(alpha, 0, 255);
@@ -166,7 +166,7 @@ void EnButte_DrawTransformationEffect(Actor_EnButte* this, PlayState* play)
     Matrix_MultVec3f(&D_809CE3C4, &sp5C);
     Matrix_SetTranslateRotateYXZ(this->actor.focus.pos.x + sp5C.x, this->actor.focus.pos.y + sp5C.y, this->actor.focus.pos.z + sp5C.z, &camDir);
     Matrix_Scale(sTransformationEffectScale, sTransformationEffectScale, sTransformationEffectScale, MAT_MUL);
-    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gDPSetPrimColor(POLY_XLU_DISP++, 0x80, 0x80, 200, 200, 180, alpha);
     gDPSetEnvColor(POLY_XLU_DISP++, 200, 200, 210, 255);
     gSPDisplayList(POLY_XLU_DISP++, SEGMENTED_TO_VIRTUAL(GAMEPLAY_KEEP_DL_EFFECT_FLASH1));
@@ -559,8 +559,8 @@ static void EnButte_DrawButterfly(Actor_EnButte* this, PlayState* play)
         csmcType = CSMC_MAJOR;
     }
 
-    Gfx_SetupDL25_Opa(play->state.gfx);
-    OPEN_DISPS(play->state.gfx);
+    Gfx_SetupDL25_Opa(play->state.gfxCtx);
+    OPEN_DISPS(play->state.gfxCtx);
     if (csmcType != CSMC_MAJOR)
     {
         customTexture = comboCacheGetFile(CUSTOM_BUTTERFLY_ADDR);

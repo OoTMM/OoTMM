@@ -230,10 +230,10 @@ void MagicDark_DiamondDraw(Actor* thisx, PlayState* play) {
     MagicDark* this = (MagicDark*)thisx;
     u16 gameplayFrames = play->gameplayFrames;
 
-    OPEN_DISPS(play->state.gfx);
+    OPEN_DISPS(play->state.gfxCtx);
     gSPSegment(POLY_XLU_DISP++, 0x08, g.customKeep);
 
-    Gfx_SetupDL25_Xlu(play->state.gfx);
+    Gfx_SetupDL25_Xlu(play->state.gfxCtx);
 
     {
         Actor_Player* player = GET_PLAYER(play);
@@ -266,13 +266,13 @@ void MagicDark_DiamondDraw(Actor* thisx, PlayState* play) {
         Matrix_Translate(this->actor.world.pos.x, this->actor.world.pos.y, this->actor.world.pos.z, MAT_SET);
         Matrix_Scale(this->actor.scale.x, this->actor.scale.y, this->actor.scale.z, MAT_MUL);
         Matrix_RotateY(BINANG_TO_RAD(this->actor.shape.rot.y), MAT_MUL);
-        gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfx),
+        gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx),
                   G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 170, 255, 255, (s32)(this->primAlpha * 0.6f) & 0xFF);
         gDPSetEnvColor(POLY_XLU_DISP++, 0, 100, 255, 128);
         gSPDisplayList(POLY_XLU_DISP++, sDiamondMaterialDL);
         gSPDisplayList(POLY_XLU_DISP++,
-                       DisplaceTexture(play->state.gfx, G_TX_RENDERTILE, gameplayFrames * 2, gameplayFrames * -4,
+                       DisplaceTexture(play->state.gfxCtx, G_TX_RENDERTILE, gameplayFrames * 2, gameplayFrames * -4,
                                         32, 32, 1, 0, gameplayFrames * -16, 64, 32));
         gSPDisplayList(POLY_XLU_DISP++, sDiamondModelDL);
     }
@@ -309,22 +309,22 @@ void MagicDark_OrbDraw(Actor* thisx, PlayState* play) {
     pos.z -= (this->actor.scale.x * 300.0f * Math_CosS(Camera_GetCamDirYaw(GET_ACTIVE_CAM(play))) *
               Math_CosS(Camera_GetCamDirPitch(GET_ACTIVE_CAM(play))));
 
-    OPEN_DISPS(play->state.gfx);
+    OPEN_DISPS(play->state.gfxCtx);
 
-    Gfx_SetupDL25_Xlu(play->state.gfx);
+    Gfx_SetupDL25_Xlu(play->state.gfxCtx);
     gDPSetPrimColor(POLY_XLU_DISP++, 0, 0x80, 170, 255, 255, 255);
     gDPSetEnvColor(POLY_XLU_DISP++, 0, 150, 255, 255);
     Matrix_Translate(pos.x, pos.y, pos.z, MAT_SET);
     Matrix_Scale(this->actor.scale.x, this->actor.scale.y, this->actor.scale.z, MAT_MUL);
     ModelViewMult(&play->billboardMtxF, MAT_MUL);
     MatrixStackDup();
-    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfx),
+    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     Matrix_RotateZ(sp6C * (M_PI / 32), MAT_MUL);
     gSPDisplayList(POLY_XLU_DISP++, 0x04000000 | 0x23210); /* gEffFlash1DL */
     MatrixStackPop();
     Matrix_RotateZ(-sp6C * (M_PI / 32), MAT_MUL);
-    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfx),
+    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_XLU_DISP++, 0x04000000 | 0x23210); /* gEffFlash1DL */
 

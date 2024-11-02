@@ -469,7 +469,7 @@ static Vtx* GetVtxBuffer(PlayState* play, u32 vertIdx, u32 slot) {
     const Vtx* srcVtx = play->pauseCtx.vtxBuf + vertIdx;
 
     /* Get dest Vtx (factor in frame counter) */
-    int framebufIdx = play->state.gfx->displayListCounter & 1;
+    int framebufIdx = play->state.gfxCtx->displayListCounter & 1;
     Vtx* dstVtx = gVertex[slot] + (framebufIdx * 4);
 
     /* Copy source Vtx over to dest Vtx */

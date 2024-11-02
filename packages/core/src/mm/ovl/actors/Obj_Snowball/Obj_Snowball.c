@@ -934,7 +934,7 @@ void ObjSnowball_Draw(Actor_ObjSnowball* this, PlayState* play) {
     const Color_RGB8* color;
     u8 gray;
 
-    OPEN_DISPS(play->state.gfx);
+    OPEN_DISPS(play->state.gfxCtx);
     type = ObjSnowball_CsmcType(this);
     switch(type)
     {
@@ -974,9 +974,9 @@ void func_80B04D34(Actor_ObjSnowball* this, PlayState* play) {
             Gfx_DrawDListOpa(play, SEGADDR_GOROIWA_DL_0082D0);
 
             if ((ptr->unk_28 != NULL) && (ptr->unk_2C > 0)) {
-                OPEN_DISPS(play->state.gfx);
+                OPEN_DISPS(play->state.gfxCtx);
 
-                Gfx_SetupDL44_Xlu(play->state.gfx);
+                Gfx_SetupDL44_Xlu(play->state.gfxCtx);
 
                 gDPSetCombineLERP(POLY_XLU_DISP++, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED, 0, 0,
                                   0, COMBINED);
@@ -986,7 +986,7 @@ void func_80B04D34(Actor_ObjSnowball* this, PlayState* play) {
                 Matrix_Put(&sp88);
                 Matrix_Scale(this->actor.scale.x * 7.5f, 1.0f, this->actor.scale.z * 7.5f, MAT_MUL);
 
-                gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfx),
+                gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx),
                           G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
                 gSPDisplayList(POLY_XLU_DISP++, SEGADDR_CIRCLE_SHADOW_DL);
 

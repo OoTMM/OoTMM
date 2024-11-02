@@ -947,7 +947,7 @@ static int prepareObject(PlayState* play, u16 objectId)
     if (!obj)
         return 0;
 
-    OPEN_DISPS(play->state.gfx);
+    OPEN_DISPS(play->state.gfxCtx);
     gSPSegment(POLY_OPA_DISP++, 0x0a, obj);
     CLOSE_DISPS();
 
@@ -959,7 +959,7 @@ static void DrawHammer(PlayState* play)
     if (!prepareObject(play, CUSTOM_OBJECT_ID_EQ_HAMMER))
         return;
 
-    OPEN_DISPS(play->state.gfx);
+    OPEN_DISPS(play->state.gfxCtx);
     gSPMatrix(POLY_OPA_DISP++, 0x0D000300, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_EQ_HAMMER_0);
     CLOSE_DISPS();
@@ -967,7 +967,7 @@ static void DrawHammer(PlayState* play)
 
 static void DrawBootsIron(PlayState* play, Actor_Player* link)
 {
-    OPEN_DISPS(play->state.gfx);
+    OPEN_DISPS(play->state.gfxCtx);
     if (comboIsLinkAdult())
     {
         if (!prepareObject(play, CUSTOM_OBJECT_ID_BOOTS_IRON))
@@ -986,7 +986,7 @@ static void DrawBootsIron(PlayState* play, Actor_Player* link)
 
 static void DrawBootsHover(PlayState* play, Actor_Player* link)
 {
-    OPEN_DISPS(play->state.gfx);
+    OPEN_DISPS(play->state.gfxCtx);
     if (comboIsLinkAdult())
     {
         if (!prepareObject(play, CUSTOM_OBJECT_ID_BOOTS_HOVER))
@@ -1007,7 +1007,7 @@ void DrawChildGauntlets(PlayState* play);
 
 static void DrawGauntlets(PlayState* play, Actor_Player* link)
 {
-    OPEN_DISPS(play->state.gfx);
+    OPEN_DISPS(play->state.gfxCtx);
     if (comboIsLinkAdult())
     {
         if (!prepareObject(play, CUSTOM_OBJECT_ID_GAUNTLETS))
@@ -1051,7 +1051,7 @@ COSMETIC(MM_COLOR_TUNIC_ZORA, sTunicColors[3]);
 
 void Player_SkelAnime_DrawFlexLod(PlayState* play, void** skeleton, Vec3s* jointTable, s32 dListCount, OverrideLimbDrawOpa overrideLimbDraw, PostLimbDrawOpa postLimbDraw, Actor_Player* player, s32 lod)
 {
-    OPEN_DISPS(play->state.gfx);
+    OPEN_DISPS(play->state.gfxCtx);
 
     if (player->transformation == MM_PLAYER_FORM_HUMAN)
     {
@@ -1132,9 +1132,9 @@ void Player_SkelAnime_DrawFlexLod(PlayState* play, void** skeleton, Vec3s* joint
                                          player->actor.world.pos.z, &sHoverBootsRot);
             Matrix_Scale(4.0f, 4.0f, 4.0f, MAT_MUL);
 
-            gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+            gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             gSPSegment(POLY_XLU_DISP++, 0x09,
-                       DisplaceTexture(play->state.gfx, G_TX_RENDERTILE, 0, 0, 16, 32, 1, 0,
+                       DisplaceTexture(play->state.gfxCtx, G_TX_RENDERTILE, 0, 0, 16, 32, 1, 0,
                                         (play->gameplayFrames * -15) % 128, 16, 32));
             gDPSetPrimColor(POLY_XLU_DISP++, 0x80, 0x80, 255, 255, 255, sHoverBootCircleAlpha);
             gDPSetEnvColor(POLY_XLU_DISP++, 120, 90, 30, 128);

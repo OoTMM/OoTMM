@@ -136,7 +136,7 @@ Gfx gLinkAdultRightGauntletPlate3DL[] = {
 
 void DrawChildGauntlets(PlayState* play)
 {
-    OPEN_DISPS(play->state.gfx);
+    OPEN_DISPS(play->state.gfxCtx);
     gSPSegment(POLY_OPA_DISP++, 0x08, g.customKeep);
     gSPDisplayList(POLY_OPA_DISP++, gLinkAdultLeftGauntletPlate1DL);
     gSPDisplayList(POLY_OPA_DISP++, gLinkAdultRightGauntletPlate1DL);

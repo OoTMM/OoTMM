@@ -710,7 +710,7 @@ void ObjSnowball2_Draw(Actor_ObjSnowball2* this, PlayState* play) {
     const Color_RGB8* color;
     u8 gray;
 
-    OPEN_DISPS(play->state.gfx);
+    OPEN_DISPS(play->state.gfxCtx);
     type = ObjSnowball2_CsmcType(this);
     switch(type)
     {

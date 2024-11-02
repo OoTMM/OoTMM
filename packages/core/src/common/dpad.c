@@ -136,7 +136,7 @@ void Dpad_Draw(PlayState* play)
 #endif
 
     /* Init */
-    OPEN_DISPS(play->state.gfx);
+    OPEN_DISPS(play->state.gfxCtx);
     gDPPipeSync(OVERLAY_DISP++);
     gSPSegment(OVERLAY_DISP++, 0x06, g.customKeep);
     gSPSegment(OVERLAY_DISP++, 0x07, sDpadIconBuffer);

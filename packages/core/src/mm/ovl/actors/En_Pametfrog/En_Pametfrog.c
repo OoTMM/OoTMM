@@ -1428,7 +1428,7 @@ void EnPametfrog_PostLimbDraw(PlayState* play, s32 limbIndex, Gfx** dList, Vec3s
 }
 
 void EnPametfrog_Draw(Actor_EnPametfrog* this, PlayState* play) {
-    Gfx_SetupDL25_Opa(play->state.gfx);
+    Gfx_SetupDL25_Opa(play->state.gfxCtx);
     Matrix_RotateYS(this->spinYaw, MAT_MUL);
     SkelAnime_DrawFlexOpa(play, this->skelAnime.skeleton, this->skelAnime.jointTable, this->skelAnime.dListCount, NULL,
                           EnPametfrog_PostLimbDraw, &this->actor);

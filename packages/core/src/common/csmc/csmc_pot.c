@@ -246,7 +246,7 @@ void csmcPotPreDraw(Actor* this, PlayState* play, s16 gi, int def)
     type = csmcPotId(gi, def);
     loadTexture(type);
 
-    OPEN_DISPS(play->state.gfx);
+    OPEN_DISPS(play->state.gfxCtx);
     gSPSegment(POLY_OPA_DISP++, 0x0a, kTexSide[type]);
     gSPSegment(POLY_OPA_DISP++, 0x0b, kTexTop[type]);
     CLOSE_DISPS();

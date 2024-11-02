@@ -772,7 +772,7 @@ void EnMag_Draw(Actor_EnMag* this, PlayState* play)
         return;
     this->mmMagData = mmMag;
 
-    OPEN_DISPS(play->state.gfx);
+    OPEN_DISPS(play->state.gfxCtx);
 
     gfxRef = POLY_OPA_DISP;
     gfx = Gfx_Open(gfxRef);

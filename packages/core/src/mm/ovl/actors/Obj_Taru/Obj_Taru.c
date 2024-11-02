@@ -325,7 +325,7 @@ static void ObjTaru_DrawBarrel(Actor_ObjTaru* this, PlayState* play)
     void* tex;
 
     type = ObjTaru_CsmcType(this);
-    OPEN_DISPS(play->state.gfx);
+    OPEN_DISPS(play->state.gfxCtx);
     if (type == CSMC_NORMAL)
     {
         gSPSegment(POLY_OPA_DISP++, 0x08, sListLoaderTextureDefault);

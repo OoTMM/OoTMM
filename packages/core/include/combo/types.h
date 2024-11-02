@@ -15,4 +15,7 @@ typedef signed long long    s64;
 typedef unsigned long       uintptr_t;
 typedef float               f32;
 
+#define true    1
+#define false   0
+
 #endif
