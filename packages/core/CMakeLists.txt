@@ -79,6 +79,7 @@ function(build game)
       DEPENDS $<TARGET_OBJECTS:${target_name}> "${LDSCRIPT_OVL}"
       COMMENT "Merging objects for ${name}"
       VERBATIM
+      COMMAND_EXPAND_LISTS
     )
 
     list(APPEND OVL_OBJECTS ${target_file})

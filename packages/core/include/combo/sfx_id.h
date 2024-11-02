@@ -548,6 +548,15 @@
 # define NA_SE_SY_CARROT_RECOVER             0x4845
 # define NA_SE_EV_FAIVE_LUPY_COUNT           0x4846
 # define NA_SE_SY_DUMMY_71                   0x4847
+
+# define NA_SE_OC_OCARINA                    0x5800
+# define NA_SE_OC_ABYSS                      0x5801
+# define NA_SE_OC_DOOR_OPEN                  0x5802
+# define NA_SE_OC_SECRET_WARP_IN             0x5803
+# define NA_SE_OC_SECRET_WARP_OUT            0x5804
+# define NA_SE_OC_SECRET_HOLE_OUT            0x5805
+# define NA_SE_OC_REVENGE                    0x5806
+# define NA_SE_OC_HINT_MOVIE                 0x5807
 #endif
 
 #if defined(GAME_MM)
