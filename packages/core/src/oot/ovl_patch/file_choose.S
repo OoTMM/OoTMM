@@ -1,6 +1,5 @@
 #include <combo.h>
 
-#if 0
 /* Hide slot 3 */
 PATCH_START 0x8080f178
   slti at,s3,0x2
@@ -175,4 +174,3 @@ PATCH_START 0x80805888
   jal FileEraseButtonIndexDecr
    nop
 PATCH_END
-#endif
