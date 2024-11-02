@@ -182,8 +182,6 @@ void ModelViewUnkTransform(MtxF* unk);
 void ModelViewMult(MtxF* mf, s32 mode);
 void Matrix_SetTranslateRotateYXZ(f32 translateX, f32 translateY, f32 translateZ, Vec3s* rot);
 Mtx* Matrix_Finalize(GraphicsContext* gfxCtx);
-void MatrixStackDup(void);
-void MatrixStackPop(void);
 void Matrix_MultVec3f(Vec3f* src, Vec3f* dest);
 
 void SpawnSomeDust(PlayState* play, Vec3f* pos, float unk1, int unk2, int unk3, int unk4, int unk5);

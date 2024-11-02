@@ -1169,11 +1169,9 @@ void FileSelect_DrawOptionsImpl(GameState* thisx) {
             gDPSetEnvColor(POLY_OPA_DISP++, 0, 0, 0, 255);
         }
 
-        //! @bug Mistakenly using sOptionsMenuHeaders instead of sOptionsMenuSettings for the height.
-        //! This works out anyway because all heights are 16.
         gDPLoadTextureBlock(POLY_OPA_DISP++, sOptionsMenuSettings[i].texture[gSaveContext.language], G_IM_FMT_IA,
                             G_IM_SIZ_8b, OPTIONS_MENU_TEXTURE_WIDTH(sOptionsMenuSettings[i]),
-                            OPTIONS_MENU_TEXTURE_HEIGHT(sOptionsMenuHeaders[i]), 0, G_TX_NOMIRROR | G_TX_WRAP,
+                            OPTIONS_MENU_TEXTURE_HEIGHT(sOptionsMenuSettings[i]), 0, G_TX_NOMIRROR | G_TX_WRAP,
                             G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
         gSP1Quadrangle(POLY_OPA_DISP++, vtx, vtx + 2, vtx + 3, vtx + 1, 0);
     }

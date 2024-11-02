@@ -163,6 +163,25 @@ Actor_PlaySfx = 0x80022fd0;
 PlayLoopingSfxAtActor = 0x8002313c;
 Horse_Spawn = 0x8005aefc;
 
+gScreenWidth = 0x800fe500;
+gScreenHeight = 0x800fe504;
+
+Gfx_SetupDL_39Opa = 0x8007e5e4;
+Environment_UpdateSkybox = 0x8005c9c8;
+View_Init = 0x80091858;
+View_LookAt = 0x80091918;
+View_Apply = 0x80091f94;
+Skybox_Init = 0x80096e40;
+
+Rumble_Request = 0x800915cc;
+Sram_InitSave = 0x80090c18;
+Sram_VerifyAndLoadAllSaves = 0x80090720;
+THA_AllocTailAlign16 = 0x800a01b8;
+gSramSlotOffsets = 0x800fbf00;
+gSfxDefaultPos = 0x80104394;
+gSfxDefaultFreqAndVolScale = 0x801043a0;
+gSfxDefaultReverb = 0x801043a8;
+
 Player_PlaySfx = 0x80022f84;
 
 EffectSsKakera_Spawn = 0x8001d998;
@@ -217,8 +236,8 @@ OcarinaAction2 = 0x800dd430;
 
 gModelView = 0x80121204;
 
-MatrixStackDup = 0x800AA6EC;
-MatrixStackPop = 0x800AA724;
+Matrix_Push = 0x800AA6EC;
+Matrix_Pop = 0x800AA724;
 ModelViewUnkTransform = 0x800abe54;
 Matrix_RotateXF = 0x800aa9e0;
 Matrix_RotateYF = 0x800aab94;

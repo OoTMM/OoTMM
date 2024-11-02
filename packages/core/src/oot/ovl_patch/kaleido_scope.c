@@ -1247,7 +1247,7 @@ static void KaleidoScope_DrawCursor(PlayState* play) {
         Matrix_Scale(1.0f, 1.0f, 1.0f, MTXMODE_APPLY);
 
         for (i = 0; i < 4; i++) {
-            MatrixStackDup();
+            Matrix_Push();
             Matrix_Translate(sCursorCirclesX[i], sCursorCirclesY[i], -50.0f, MTXMODE_APPLY);
             gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             gDPPipeSync(POLY_OPA_DISP++);
@@ -1256,7 +1256,7 @@ static void KaleidoScope_DrawCursor(PlayState* play) {
                                 G_TX_NOLOD, G_TX_NOLOD);
             gSPVertex(POLY_OPA_DISP++, &pauseCtx->cursorVtx[0], 4, 0);
             gSP1Quadrangle(POLY_OPA_DISP++, 0, 2, 3, 1, 0);
-            MatrixStackPop();
+            Matrix_Pop();
         }
 
         gDPPipeSync(POLY_OPA_DISP++);

@@ -791,7 +791,7 @@ void Actor_DrawFaroresWindPointer(PlayState* play)
             Matrix_Translate(gSaveContext.respawn[RESPAWN_MODE_HUMAN].pos.x, yPos, gSaveContext.respawn[RESPAWN_MODE_HUMAN].pos.z, MTXMODE_NEW);
             Matrix_Scale(scale, scale, scale, MTXMODE_APPLY);
             ModelViewMult(&play->billboardMtxF, MTXMODE_APPLY);
-            MatrixStackDup();
+            Matrix_Push();
 
             gDPPipeSync(POLY_XLU_DISP++);
             gDPSetPrimColor(POLY_XLU_DISP++, 128, 128, 255, 255, 200, alpha);
@@ -802,7 +802,7 @@ void Actor_DrawFaroresWindPointer(PlayState* play)
                       G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
             gSPDisplayList(POLY_XLU_DISP++, 0x04000000 | 0x23210); /* gEffFlash1DL */
 
-            MatrixStackPop();
+            Matrix_Pop();
             Matrix_RotateZ(BINANG_TO_RAD_ALT2(~((play->gameplayFrames * 1200) & 0xFFFF)), MTXMODE_APPLY);
 
             gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx),
