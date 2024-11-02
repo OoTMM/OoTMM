@@ -29,8 +29,21 @@ u16   Actor_Angle(Actor* a, Actor* b);
 Gfx* Gfx_Open(Gfx* gfx);
 void Gfx_Close(Gfx* gfxRef, Gfx* gfx);
 
+void Gfx_SetupDL_39Opa(GraphicsContext* gfxCtx);
 void Gfx_SetupDL_39Ptr(Gfx** gfxPtr);
 void Gfx_SetupDL_56Ptr(Gfx** gfxPtr);
+
+#if defined(GAME_MM)
+#define SEQCMD_PLAY_SEQUENCE(seqPlayerIndex, fadeInDuration, seqId)                                                   \
+    AudioSeq_QueueSeqCmd((0 << 28) | ((seqPlayerIndex) << 24) | ((u32)(fadeInDuration) << 16) | \
+                         (u32)(seqId))
+
+#define SEQCMD_STOP_SEQUENCE(seqPlayerIndex, fadeOutDuration)                                    \
+    AudioSeq_QueueSeqCmd((1 << 28) | 0xFF | ((u8)(seqPlayerIndex) << 24) | \
+                         ((fadeOutDuration) << 16))
+#endif
+
+void Gfx_SetupFrame(GraphicsContext* gfxCtx, u8 r, u8 g, u8 b);
 
 /* Unknown */
 void* UnkFuncActorCollision(PlayState* play, Actor* actor);
@@ -68,15 +81,7 @@ int Schedule_CheckMiscS(PlayState* play, void* unk);
 
 void Fault_AddHungupAndCrashImpl(const char* str1, const char* str2);
 
-void    AudioSeq_QueueSeqCmd(u32 unk);
-
-#define SEQCMD_PLAY_SEQUENCE(seqPlayerIndex, fadeInDuration, seqId)                             \
-    AudioSeq_QueueSeqCmd((0 << 28) | ((seqPlayerIndex) << 24) | ((u32)(fadeInDuration) << 16) | \
-                         (u32)(seqId))
-
-#define SEQCMD_STOP_SEQUENCE(seqPlayerIndex, fadeOutDuration)              \
-    AudioSeq_QueueSeqCmd((1 << 28) | 0xFF | ((u8)(seqPlayerIndex) << 24) | \
-                         ((fadeOutDuration) << 16))
+void AudioSeq_QueueSeqCmd(u32 unk);
 
 typedef struct Lights Lights;
 void    ActorShadow_DrawCircle(Actor* actor, Lights* lights, PlayState* play);

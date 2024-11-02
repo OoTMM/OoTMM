@@ -592,8 +592,8 @@ void KaleidoScope_BeforeUpdate(PlayState* play)
 
     if (pauseCtx->state >= PAUSE_STATE_OWLWARP_2 && pauseCtx->state <= PAUSE_STATE_OWLWARP_6)
     {
-        pauseCtx->stickAdjX = input->released.x;
-        pauseCtx->stickAdjY = input->released.y;
+        pauseCtx->stickAdjX = input->rel.stick_x;
+        pauseCtx->stickAdjY = input->rel.stick_y;
 
         if (pauseCtx->stickAdjX < -30) {
             if (sStickXRepeatState == -1) {

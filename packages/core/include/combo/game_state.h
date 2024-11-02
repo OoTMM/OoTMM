@@ -5,7 +5,7 @@
 #include <combo/controller.h>
 #include <combo/gfx.h>
 
-typedef struct
+typedef struct GameState
 {
     GraphicsContext*        gfxCtx;
     void*                   main;
