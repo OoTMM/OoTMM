@@ -552,7 +552,7 @@ s32 Player_CustomUseItem(Actor_Player* this, PlayState* play, s32 itemAction)
     {
         if (((magicSpell == PLAYER_MAGIC_SPELL_WIND) && (gSaveContext.respawn[RESPAWN_MODE_HUMAN].data > 0)) ||
             ((gSaveContext.magicCapacity != 0) && (gSaveContext.magicState == MAGIC_STATE_IDLE) &&
-             (gSaveContext.save.playerData.magicAmount >= sMagicSpellCosts[magicSpell])))
+             (gSaveContext.save.playerData.magic >= sMagicSpellCosts[magicSpell])))
         {
             this->unk_AA5 = 5;
             this->itemAction = itemAction;

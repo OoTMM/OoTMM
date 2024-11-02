@@ -1,6 +1,9 @@
 #ifndef COMBO_SAVE_H
 #define COMBO_SAVE_H
 
+#define BTN_ENABLED     0x00
+#define BTN_DISABLED    0xff
+
 #define GAMEMODE_NORMAL         0
 #define GAMEMODE_TITLE_SCREEN   1
 #define GAMEMODE_FILE_SELECT    2

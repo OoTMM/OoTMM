@@ -21,7 +21,7 @@ static int checkItemToggle(PlayState* play)
 
     p = &play->pauseCtx;
     ret = 0;
-    press = !!(play->state.input[0].pressed.buttons & (L_TRIG | U_CBUTTONS));
+    press = !!(play->state.input[0].press.button & (L_TRIG | U_CBUTTONS));
 
     itemId = ITEM_NONE;
     itemCursor = -1;
@@ -166,7 +166,7 @@ static void KaleidoScope_HandleMapDungeonMenu(PlayState* play, void* unk, u32 ov
     int onMenu;
 
     onMenu = play->pauseCtx.screen_idx == 1;
-    if (onMenu && play->state.input[0].pressed.buttons & (L_TRIG | U_CBUTTONS))
+    if (onMenu && play->state.input[0].press.button & (L_TRIG | U_CBUTTONS))
         comboMenuNext();
 
     if (g.menuScreen)
@@ -588,7 +588,7 @@ void KaleidoScope_BeforeUpdate(PlayState* play)
     PauseContext* pauseCtx = &play->pauseCtx;
     InterfaceContext* interfaceCtx = &play->interfaceCtx;
     MessageContext* msgCtx = &play->msgCtx;
-    ControllerInput* input = &play->state.input[0];
+    Input* input = &play->state.input[0];
 
     if (pauseCtx->state >= PAUSE_STATE_OWLWARP_2 && pauseCtx->state <= PAUSE_STATE_OWLWARP_6)
     {
@@ -736,7 +736,7 @@ void KaleidoScope_BeforeUpdate(PlayState* play)
 
         case PAUSE_STATE_OWLWARP_SELECT:
             /* TODO for some reason pressing START causes a "failed ocarina" sfx. */
-            if ((play->state.input[0].pressed.buttons & START_BUTTON) || (play->state.input[0].pressed.buttons & B_BUTTON))
+            if ((play->state.input[0].press.button & START_BUTTON) || (play->state.input[0].press.button & B_BUTTON))
             {
                 pauseCtx->state = PAUSE_STATE_OWLWARP_6;
                 WREG(2) = -6240;
@@ -744,7 +744,7 @@ void KaleidoScope_BeforeUpdate(PlayState* play)
                 gSoaringIndexSelected = -1;
                 gSaveContext.prevHudVisibilityMode = 50; /* HUD_VISIBILITY_ALL; */
             }
-            else if (play->state.input[0].pressed.buttons & A_BUTTON)
+            else if (play->state.input[0].press.button & A_BUTTON)
             {
                 msgCtx->msgLength = 0;
                 msgCtx->msgMode = 0; /* MSGMODE_NONE; */

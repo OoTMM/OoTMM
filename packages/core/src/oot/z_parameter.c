@@ -71,7 +71,7 @@ s32 Magic_Decrement(void)
         return 0;
     }
 
-    gSaveContext.save.playerData.magicAmount--;
+    gSaveContext.save.playerData.magic--;
     return 1;
 }
 

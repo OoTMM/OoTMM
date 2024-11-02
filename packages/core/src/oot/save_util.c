@@ -76,7 +76,7 @@ static void initCustomSave(void)
 
     bzero(buf, sizeof(buf));
     for (int i = 0; i < 0x4000 / sizeof(buf); ++i)
-        Flash_ReadWrite(0x18000 + 0x4000 * gSaveContext.fileIndex + i * sizeof(buf), buf, sizeof(buf), OS_WRITE);
+        Flash_ReadWrite(0x18000 + 0x4000 * gSaveContext.fileNum + i * sizeof(buf), buf, sizeof(buf), OS_WRITE);
 }
 
 void Save_CreateMM(void)
@@ -100,7 +100,7 @@ void Save_CreateMM(void)
     gMmSave.playerForm = 4;
     gMmSave.time = 0x3fff;
     gMmSave.playerData.health = 0x30;
-    gMmSave.playerData.healthMax = 0x30;
+    gMmSave.playerData.healthCapacity = 0x30;
     gMmSave.playerData.unk_20 = 0xff00;
     gMmSave.playerData.unk_24 = 0xff00;
     gMmSave.playerData.savedSceneNum = 8;

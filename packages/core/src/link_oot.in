@@ -158,7 +158,7 @@ Math_StepToF = 0x8006385c;
 Animation_Change = 0x8008d17c;
 
 PlaySound = 0x800646f0;
-PlaySound6 = 0x800c806c;
+Audio_PlaySfxGeneral = 0x800c806c;
 Actor_PlaySfx = 0x80022fd0;
 PlayLoopingSfxAtActor = 0x8002313c;
 Horse_Spawn = 0x8005aefc;

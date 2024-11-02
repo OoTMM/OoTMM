@@ -115,11 +115,11 @@ void EnMag_Destroy(Actor_EnMag* this, PlayState* play)
 
 void EnMag_Update(Actor_EnMag* this, PlayState* play)
 {
-    if (gSaveContext.fileIndex != 0xfedc)
+    if (gSaveContext.fileNum != 0xfedc)
     {
         if (this->globalState < MAG_STATE_DISPLAY)
         {
-            if (CHECK_BTN_ALL(play->state.input[0].pressed.buttons, START_BUTTON) || CHECK_BTN_ALL(play->state.input[0].pressed.buttons, A_BUTTON) || CHECK_BTN_ALL(play->state.input[0].pressed.buttons, B_BUTTON))
+            if (CHECK_BTN_ALL(play->state.input[0].press.button, START_BUTTON) || CHECK_BTN_ALL(play->state.input[0].press.button, A_BUTTON) || CHECK_BTN_ALL(play->state.input[0].press.button, B_BUTTON))
             {
                 PlaySound(NA_SE_SY_PIECE_OF_HEART);
 
@@ -146,9 +146,9 @@ void EnMag_Update(Actor_EnMag* this, PlayState* play)
         {
             if (sDelayTimer == 0)
             {
-                if (CHECK_BTN_ALL(play->state.input[0].pressed.buttons, START_BUTTON) ||
-                    CHECK_BTN_ALL(play->state.input[0].pressed.buttons, A_BUTTON) ||
-                    CHECK_BTN_ALL(play->state.input[0].pressed.buttons, B_BUTTON))
+                if (CHECK_BTN_ALL(play->state.input[0].press.button, START_BUTTON) ||
+                    CHECK_BTN_ALL(play->state.input[0].press.button, A_BUTTON) ||
+                    CHECK_BTN_ALL(play->state.input[0].press.button, B_BUTTON))
                 {
                     if (play->transitionTrigger != TRANS_TRIGGER_NORMAL)
                     {
@@ -724,7 +724,7 @@ void EnMag_DrawInner(Actor_EnMag* this, PlayState* play, Gfx** gfxP)
     if (textAlpha >= 255)
         textAlpha = 255;
 
-    if (gSaveContext.fileIndex == 0xfedc)
+    if (gSaveContext.fileNum == 0xfedc)
     {
         EnMag_DrawTextWithShadow(this, gfxP, "NO CONTROLLER", YREG(19), YREG(10) + 171, 0x64ffff, textAlpha);
     }

@@ -30,7 +30,7 @@ u8 gDebugMenuOpen;
 static s16 sCursor[3];
 static s16 sScroll[3];
 static u8 sDebugPage;
-static ControllerInput sInput;
+static Input sInput;
 static const DebugMenuEntry* sMenuWarp;
 
 #if defined(GAME_MM)
@@ -80,12 +80,12 @@ static const DebugMenuEntry kMenuMain[] = {
 
 int btnHeld(u16 but)
 {
-    return ((sInput.current.buttons & but) == but);
+    return ((sInput.cur.button & but) == but);
 }
 
 int btnPressed(u16 but)
 {
-    return ((sInput.pressed.buttons & but) == but);
+    return ((sInput.press.button & but) == but);
 }
 
 static const DebugMenuFunc kDebugMenuFuncs[];
@@ -449,12 +449,12 @@ static const DebugMenuFunc kDebugMenuFuncs[] = {
 
 void Debug_Input(void)
 {
-    ControllerInput* src;
+    Input* src;
 
     src = &gPlay->state.input[0];
-    memcpy(&sInput, src, sizeof(ControllerInput));
+    memcpy(&sInput, src, sizeof(Input));
     if (sDebugPage != DEBUGMENU_PAGE_NONE)
-        bzero(src, sizeof(ControllerInput));
+        bzero(src, sizeof(Input));
 }
 
 void Debug_Init(void)
@@ -556,7 +556,7 @@ static void cheatAllItems(PlayState* play)
 
     gMmSave.playerData.magicAcquired = 1;
     gMmSave.playerData.doubleMagic = 1;
-    gMmSave.playerData.magicAmount = 2 * 0x30;
+    gMmSave.playerData.magic = 2 * 0x30;
     gSaveContext.magicFillTarget = 0x60;
 
     gSave.inventory.ammo[ITS_MM_STICKS] = 30;
@@ -567,8 +567,8 @@ static void cheatAllItems(PlayState* play)
     gSave.inventory.ammo[ITS_MM_BOMBCHU] = 50;
     gSave.inventory.ammo[ITS_MM_BOMBS] = 40;
 
-    gSave.playerData.healthMax = 0x10 * 20;
-    gSave.playerData.health = gSave.playerData.healthMax;
+    gSave.playerData.healthCapacity = 0x10 * 20;
+    gSave.playerData.health = gSave.playerData.healthCapacity;
 
     gMmExtraTrade.trade1 = 0x3f;
     gMmExtraTrade.trade2 = 0x1f;
@@ -674,7 +674,7 @@ static void cheatAllItems(PlayState* play)
 
     gSave.playerData.magicUpgrade = 1;
     gSave.playerData.magicUpgrade2 = 1;
-    gOotSave.playerData.magicSize = 0;
+    gOotSave.playerData.magicLevel = 0;
     gSaveContext.magicFillTarget = 0x60;
 
     gSave.inventory.dungeonKeys[SCE_OOT_TEMPLE_FOREST] = 9;
@@ -690,7 +690,7 @@ static void cheatAllItems(PlayState* play)
 
     gSave.inventory.quest.stoneRuby = 1;
 
-    gSave.playerData.health = gSave.playerData.healthMax = 20 * 0x10;
+    gSave.playerData.health = gSave.playerData.healthCapacity = 20 * 0x10;
 
     gSave.playerData.rupees = 500;
 
@@ -720,14 +720,14 @@ static void debugApplyCheats(void)
     }
 
     if (CHEAT_ON(CHEAT_HEALTH))
-        gSave.playerData.health = gSave.playerData.healthMax;
+        gSave.playerData.health = gSave.playerData.healthCapacity;
 
     if (CHEAT_ON(CHEAT_MAGIC))
     {
 #if defined(GAME_OOT)
-        gSave.playerData.magicAmount = gSave.playerData.magicUpgrade2 ? 0x60 : gSave.playerData.magicUpgrade ? 0x30 : 0;
+        gSave.playerData.magic = gSave.playerData.magicUpgrade2 ? 0x60 : gSave.playerData.magicUpgrade ? 0x30 : 0;
 #else
-        gSave.playerData.magicAmount = gSave.playerData.doubleMagic ? 0x60 : gSave.playerData.magicAcquired ? 0x30 : 0;
+        gSave.playerData.magic = gSave.playerData.doubleMagic ? 0x60 : gSave.playerData.magicAcquired ? 0x30 : 0;
 #endif
     }
 

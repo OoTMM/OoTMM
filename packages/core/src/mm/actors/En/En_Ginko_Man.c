@@ -42,7 +42,7 @@ static int EnGinkoMan_ButtonPress(PlayState* play)
     msgState = Message_GetState(&play->msgCtx);
     if (msgState != 4 && msgState != 5 && msgState != 14)
         return 0;
-    buttons = play->state.input[0].pressed.buttons;
+    buttons = play->state.input[0].press.button;
     if (buttons & B_BUTTON)
         return B_BUTTON;
     else if (buttons & A_BUTTON)

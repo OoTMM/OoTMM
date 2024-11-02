@@ -420,7 +420,7 @@ void comboCreateSave(void* unk, void* buffer)
     Save_Write();
 
     /* Copy inside the buffer */
-    base = 0x20 + 0x1450 * gSaveContext.fileIndex;
+    base = 0x20 + 0x1450 * gSaveContext.fileNum;
     memcpy((char*)buffer + base, &gOotSave, 0x1354);
     memcpy((char*)buffer + base + 0x3cf0, &gOotSave, 0x1354);
 }
@@ -443,7 +443,7 @@ void Save_DoSave(PlayState* play, int saveFlags)
     /* Wait for net */
     netWaitSave();
 
-    gComboCtx.saveIndex = gSaveContext.fileIndex;
+    gComboCtx.saveIndex = gSaveContext.fileNum;
     if (!(saveFlags & SF_PASSIVE))
     {
         if (!(saveFlags & SF_NOCOMMIT))

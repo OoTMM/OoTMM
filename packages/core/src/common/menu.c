@@ -978,7 +978,7 @@ static void updateCursor(PlayState* play)
     }
     else
     {
-        float stickY = play->state.input[0].current.y / 128.f;
+        float stickY = play->state.input[0].cur.stick_y / 128.f;
         if (stickY > 0.5f && g.menuCursor > 0)
         {
             change = 1;

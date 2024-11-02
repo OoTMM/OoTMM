@@ -1,35 +1,20 @@
 #ifndef COMMON_GAME_STATE_H
 #define COMMON_GAME_STATE_H
 
+#include <combo/tha.h>
+#include <combo/controller.h>
 #include <combo/gfx.h>
-
-typedef struct PACKED
-{
-    u16 buttons;
-    s8  x;
-    s8  y;
-    u16 zero;
-}
-ControllerInputState;
-
-typedef struct PACKED
-{
-    ControllerInputState current;
-    ControllerInputState previous;
-    ControllerInputState pressed;
-    ControllerInputState released;
-}
-ControllerInput;
 
 typedef struct
 {
     GraphicsContext*        gfxCtx;
-    char                    unk_4[0x4];
+    void*                   main;
     void*                   destroy;
     void*                   nextGameStateInit;
     u32                     nextGameStateSize;
-    ControllerInput         input[4];
-    char                    unk_74[0x27];
+    Input                   input[4];
+    TwoHeadArena            tha;
+    char                    unk_84[0x17];
     u8                      running;
     u32                     frameCount;
     char                    unk_a0[0x4];

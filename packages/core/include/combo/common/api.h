@@ -455,6 +455,8 @@ extern u8 gWeatherMode;
 /* Gamemodes */
 void FileSelect_Init(GameState* this);
 
+void Rumble_Request(f32 distSq, u8 sourceIntensity, u8 decayTimer, u8 decayStep);
+
 #if defined(GAME_MM)
 extern u8 gSceneSeqState;
 extern Vec3f gZeroVec3f;
@@ -562,7 +564,6 @@ s16 Quake_Request(Camera* camera, u32 type);
 u32 Quake_SetSpeed(s16 index, s16 speed);
 u32 Quake_SetPerturbations(s16 index, s16 y, s16 x, s16 fov, s16 roll);
 u32 Quake_SetDuration(s16 index, s16 duration);
-void Rumble_Request(f32 distSq, u8 sourceIntensity, u8 decayTimer, u8 decayStep);
 f32 BgCheck_EntityRaycastFloor5_2(PlayState* play, CollisionContext* colCtx, CollisionPoly** outPoly, s32* bgId, Actor* actor, Vec3f* pos);
 s32 WaterBox_GetSurface1_2(PlayState* play, CollisionContext* colCtx, f32 x, f32 z, f32* ySurface, WaterBox** outWaterBox);
 s32 WaterBox_GetSurface1(PlayState* play, CollisionContext* colCtx, f32 x, f32 z, f32* ySurface, WaterBox** outWaterBox);

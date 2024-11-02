@@ -105,7 +105,7 @@ static u16 GetNextArrowVariable(u16 variable)
 
 static int HasEnoughMagicForArrow(s8 prevCost, s8 curCost)
 {
-    return gSave.playerData.magicAmount >= (curCost - prevCost);
+    return gSave.playerData.magic >= (curCost - prevCost);
 }
 
 static const ArrowInfo* GetNextArrowInfo(u16 variable)
@@ -229,19 +229,19 @@ static void HandleFrameDelay(Actor_Player* link, PlayState* play, Actor* arrow)
         if (!comboIsChateauActive())
         {
 #if defined(GAME_OOT)
-            gSave.playerData.magicAmount += sArrowCycleState.magicCost;
+            gSave.playerData.magic += sArrowCycleState.magicCost;
 #else
             if (prevEffectState >= 2)
             {
                 if (!MM_GET_EVENT_WEEK(EV_MM_WEEK_DRANK_CHATEAU_ROMANI))
-                    gSave.playerData.magicAmount += sArrowCycleState.magicCost;
+                    gSave.playerData.magic += sArrowCycleState.magicCost;
             }
 #endif
         }
 
 #if defined(GAME_OOT)
         if (!comboIsChateauActive())
-            gSave.playerData.magicAmount -= curInfo->magicCost;
+            gSave.playerData.magic -= curInfo->magicCost;
 #else
         gSaveContext.magicToConsume = curInfo->magicCost;
 #endif
@@ -300,10 +300,10 @@ void ArrowCycle_Handle(Actor_Player* link, PlayState* play)
         return;
     }
 
-    if (!(play->state.input[0].pressed.buttons & R_TRIG))
+    if (!(play->state.input[0].press.button & R_TRIG))
         return;
 
-    play->state.input[0].pressed.buttons &= ~R_TRIG;
+    play->state.input[0].press.button &= ~R_TRIG;
 
     /* get the various infos */
     curInfo = GetArrowInfo(arrow->params);

@@ -1,6 +1,8 @@
 #ifndef COMBO_CONTROLLER_H
 #define COMBO_CONTROLLER_H
 
+#include <ultra64.h>
+
 #define BTN_A           0x8000
 #define BTN_B           0x4000
 #define BTN_Z           0x2000

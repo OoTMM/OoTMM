@@ -369,12 +369,12 @@ static void Player_BlastMask(PlayState* play, Actor_Player* link)
 void Player_ProcessItemButtonsWrapper(Actor_Player* link, PlayState* play)
 {
     void (*Player_ProcessItemButtons)(Actor_Player* link, PlayState* play);
-    ControllerInput* input;
+    Input* input;
     int bPress;
 
-    input = *(ControllerInput**)(OverlayAddr(0x80856734));
+    input = *(Input**)(OverlayAddr(0x80856734));
     Player_ProcessItemButtons = OverlayAddr(0x80831e64);
-    bPress = !!(input->pressed.buttons & B_BUTTON);
+    bPress = !!(input->press.button & B_BUTTON);
 
     /* Handle masks that have B actions */
     if (bPress && !(link->state & (PLAYER_ACTOR_STATE_HOLD_ITEM | PLAYER_ACTOR_STATE_CUTSCENE_FROZEN)) && !Player_UsingItem(link))
@@ -383,7 +383,7 @@ void Player_ProcessItemButtonsWrapper(Actor_Player* link, PlayState* play)
         {
         case 9:
             Player_BlastMask(play, link);
-            input->pressed.buttons &= ~B_BUTTON;
+            input->press.button &= ~B_BUTTON;
             break;
         }
     }
