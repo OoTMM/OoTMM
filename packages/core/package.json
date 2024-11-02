@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "build": "tsx ./lib/build.ts",
+    "setup": "tsx ./lib/setup.ts",
     "start": "tsx ./lib/cli.ts",
     "start:debug": "tsx ./lib/cli.ts --debug --config config.yml",
     "test": "vitest run --reporter=dot",
@@ -22,6 +23,7 @@
     "@types/pngjs": "^6.0.5",
     "cross-env": "^7.0.3",
     "csv": "^6.3.10",
+    "fast-xml-parser": "^4.5.0",
     "type-fest": "^4.26.1"
   },
   "files": [
@@ -52,7 +54,8 @@
           "{workspaceRoot}/include/combo/custom.h"
         ],
         "dependsOn": [
-          "^build"
+          "^build",
+          "setup"
         ]
       },
       "test": {
@@ -61,17 +64,20 @@
         ],
         "outputs": [],
         "dependsOn": [
-          "^build"
+          "^build",
+          "setup"
         ]
       },
       "start": {
         "dependsOn": [
-          "^build"
+          "^build",
+          "setup"
         ]
       },
       "start:debug": {
         "dependsOn": [
-          "^build"
+          "^build",
+          "setup"
         ]
       }
     }

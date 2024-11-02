@@ -8,10 +8,12 @@ SECTIONS
 
 #ifdef GAME_OOT
 # include "link_oot.in"
+# include "link_assets_oot.ld"
 #endif
 
 #ifdef GAME_MM
 # include "link_mm.in"
+# include "link_assets_mm.ld"
 #endif
 
 #define OVL(name) \

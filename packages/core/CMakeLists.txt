@@ -87,7 +87,9 @@ function(build game)
 
   # Linker script
   set(ldscript_name "link_${game}.ld")
+  set(ldscript_assets_name "link_assets_${game}.ld")
   set(ldscript "${CMAKE_BINARY_DIR}/${ldscript_name}")
+  set(ldscript_assets "${CMAKE_SOURCE_DIR}/build/${ldscript_assets_name}")
   set(OVL_DEFINE "${OVL_NAMES}")
   list(TRANSFORM OVL_DEFINE PREPEND "OVL(")
   list(TRANSFORM OVL_DEFINE APPEND ")")
@@ -95,8 +97,8 @@ function(build game)
 
   add_custom_command(
     OUTPUT "${ldscript}"
-    COMMAND "${CMAKE_C_COMPILER}" ${game_define} "-D __OVERLAYS__=${OVL_DEFINE}" -I "${CMAKE_SOURCE_DIR}/include" -E -P -x c "${LDSCRIPT_IN}" -o "${ldscript}" -MMD -MF "${ldscript}.d" -MT "${ldscript_name}"
-    DEPENDS "${LDSCRIPT_IN}"
+    COMMAND "${CMAKE_C_COMPILER}" ${game_define} "-D __OVERLAYS__=${OVL_DEFINE}" -I "${CMAKE_SOURCE_DIR}/include" -I "${CMAKE_SOURCE_DIR}/build" -E -P -x c "${LDSCRIPT_IN}" -o "${ldscript}" -MMD -MF "${ldscript}.d" -MT "${ldscript_name}"
+    DEPENDS "${LDSCRIPT_IN}" "${ldscript_assets}"
     DEPFILE "${ldscript}.d"
     COMMENT "Generating linker script for ${game}"
     VERBATIM
