@@ -222,13 +222,10 @@ void RemoveItem(s16 item, s16 slot);
 void* ActorAlloc(u32 size);
 void  ActorFree(void* data);
 
-#if defined(GAME_OOT)
-void Sram_OpenSave(void*);
-#else
+#if defined(GAME_MM)
 void Sram_OpenSave(void*, void*);
-#endif
-
 void Sram_CopySave(void*, void*);
+#endif
 
 void Play_Init(PlayState*);
 void Play_Update(PlayState*);

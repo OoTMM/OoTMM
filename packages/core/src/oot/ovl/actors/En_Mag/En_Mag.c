@@ -16,7 +16,6 @@
                        ((height)-1) << G_TEXTURE_IMAGE_FRAC);                                                          \
     } while (0)
 
-#define CHECK_BTN_ALL(buttons, mask) ((buttons & mask) == mask)
 #define FLAGS (ACTOR_FLAG_OOT_4 | ACTOR_FLAG_OOT_5)
 
 void EnMag_Init(Actor_EnMag* this, PlayState* play);

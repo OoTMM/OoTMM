@@ -21,7 +21,7 @@ typedef struct PACKED
 }
 ControllerInput;
 
-typedef struct PACKED ALIGNED(4)
+typedef struct
 {
     GraphicsContext*        gfxCtx;
     char                    unk_4[0x4];

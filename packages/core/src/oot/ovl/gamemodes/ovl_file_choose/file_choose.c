@@ -173,11 +173,6 @@ void FileSelect_UpdateMainMenu(GameState* thisx) {
 
     if (CHECK_BTN_ALL(input->press.button, BTN_START) || CHECK_BTN_ALL(input->press.button, BTN_A)) {
         if (this->buttonIndex <= FS_BTN_MAIN_FILE_3) {
-            PRINTF("REGCK_ALL[%x]=%x,%x,%x,%x,%x,%x\n", this->buttonIndex, GET_NEWF(sramCtx, this->buttonIndex, 0),
-                   GET_NEWF(sramCtx, this->buttonIndex, 1), GET_NEWF(sramCtx, this->buttonIndex, 2),
-                   GET_NEWF(sramCtx, this->buttonIndex, 3), GET_NEWF(sramCtx, this->buttonIndex, 4),
-                   GET_NEWF(sramCtx, this->buttonIndex, 5));
-
             if (!SLOT_OCCUPIED(sramCtx, this->buttonIndex)) {
                 Audio_PlaySfxGeneral(NA_SE_SY_FSEL_DECIDE_L, &gSfxDefaultPos, 4, &gSfxDefaultFreqAndVolScale,
                                      &gSfxDefaultFreqAndVolScale, &gSfxDefaultReverb);
@@ -1971,16 +1966,6 @@ void FileSelect_InitContext(GameState* thisx) {
 
     this->n64ddFlags[0] = this->n64ddFlags[1] = this->n64ddFlags[2] = this->defense[0] = this->defense[1] =
         this->defense[2] = 0;
-
-#if PLATFORM_GC && OOT_PAL
-    SsSram_ReadWrite(OS_K1_TO_PHYSICAL(0xA8000000), sramCtx->readBuff, SRAM_SIZE, OS_READ);
-
-    gSaveContext.language = sramCtx->readBuff[SRAM_HEADER_LANGUAGE];
-
-    if (gSaveContext.language >= LANGUAGE_MAX) {
-        sramCtx->readBuff[SRAM_HEADER_LANGUAGE] = gSaveContext.language = LANGUAGE_ENG;
-    }
-#endif
 }
 
 void FileSelect_Destroy(GameState* thisx) {
@@ -1991,19 +1976,11 @@ void FileSelect_Init(GameState* thisx) {
     s32 pad;
     u32 size = (uintptr_t)_title_staticSegmentRomEnd - (uintptr_t)_title_staticSegmentRomStart;
 
-#if PLATFORM_N64
     if (D_80121212 != 0) {
         func_801C7268();
     }
-#endif
 
-#if !OOT_PAL_N64
     SREG(30) = 1;
-#else
-    SREG(30) = 2;
-#endif
-    PRINTF("SIZE=%x\n", size);
-
     this->staticSegment = GAME_STATE_ALLOC(&this->state, size, "../z_file_choose.c", 3392);
     ASSERT(this->staticSegment != NULL, "this->staticSegment != NULL", "../z_file_choose.c", 3393);
     DMA_REQUEST_SYNC(this->staticSegment, (uintptr_t)_title_staticSegmentRomStart, size, "../z_file_choose.c", 3394);
@@ -2011,14 +1988,7 @@ void FileSelect_Init(GameState* thisx) {
     size = (uintptr_t)_parameter_staticSegmentRomEnd - (uintptr_t)_parameter_staticSegmentRomStart;
     this->parameterSegment = GAME_STATE_ALLOC(&this->state, size, "../z_file_choose.c", 3398);
     ASSERT(this->parameterSegment != NULL, "this->parameterSegment != NULL", "../z_file_choose.c", 3399);
-    DMA_REQUEST_SYNC(this->parameterSegment, (uintptr_t)_parameter_staticSegmentRomStart, size, "../z_file_choose.c",
-                     3400);
-
-#if OOT_PAL_N64
-    size = gObjectTable[OBJECT_MAG].vromEnd - gObjectTable[OBJECT_MAG].vromStart;
-    this->objectMagSegment = GAME_STATE_ALLOC(&this->state, size, "../z_file_choose.c", 0);
-    DMA_REQUEST_SYNC(this->objectMagSegment, gObjectTable[OBJECT_MAG].vromStart, size, "../z_file_choose.c", 0);
-#endif
+    DMA_REQUEST_SYNC(this->parameterSegment, (uintptr_t)_parameter_staticSegmentRomStart, size, "../z_file_choose.c", 3400);
 
     Matrix_Init(&this->state);
     View_Init(&this->view, this->state.gfxCtx);
