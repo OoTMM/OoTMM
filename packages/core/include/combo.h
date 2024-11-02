@@ -32,6 +32,7 @@
 # include <combo/common/actors/En_Tubo_Trap.h>
 
 # if defined(GAME_OOT)
+#  include <combo/oot/sequence.h>
 #  include <combo/oot/play.h>
 #  include <combo/oot/pause_state.h>
 #  include <combo/oot/actors/Item_Etcetera.h>

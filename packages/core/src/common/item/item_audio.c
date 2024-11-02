@@ -2,7 +2,7 @@
 #include <combo/item.h>
 #include <combo/config.h>
 
-#define FANFARE_FOREIGN(x) ((x) | 0x80)
+#define FANFARE_FOREIGN(x) ((x) | MASK_FOREIGN_BGM)
 
 #if defined(GAME_OOT)
 # define FANFARE_OOT(x) (x)
