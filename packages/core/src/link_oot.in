@@ -107,7 +107,7 @@ Gfx_SetupDL25_Opa       = 0x8007e298;
 Gfx_SetupDL25_Xlu       = 0x8007e2c0;
 Gfx_SetupDL_42Opa       = 0x8007e868;
 Matrix_MultVec3f        = 0x800ab958;
-GetMatrixMV             = 0x800ab900;
+Matrix_Finalize             = 0x800ab900;
 Gfx_DrawDListOpa        = 0x80028048;
 Gfx_DrawDListXlu        = 0x800280c8;
 

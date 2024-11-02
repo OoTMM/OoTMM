@@ -283,7 +283,7 @@ void Draw_GlitterGi(PlayState* play, Actor* actor, s16 gi)
 
     /* Draw the display list */
     OPEN_DISPS(play->state.gfxCtx);
-    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPSegment(POLY_XLU_DISP++, 0x06, (u32)tex - 0x80000000);
     gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, r, g, b, (alpha * 0.90f) * 255);
     gSPDisplayList(POLY_XLU_DISP++, (u32)kDlistGlitter - 0x80000000);

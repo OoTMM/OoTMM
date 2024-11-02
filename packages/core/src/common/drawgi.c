@@ -74,7 +74,7 @@ void DrawGi_Xlu0(PlayState* play, s16 drawGiId)
     drawGi = &kDrawGi[drawGiId];
     OPEN_DISPS(play->state.gfxCtx);
     Gfx_SetupDL25_Xlu(play->state.gfxCtx);
-    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[0]);
     CLOSE_DISPS();
 }
@@ -107,7 +107,7 @@ void DrawGi_CustomNote(PlayState* play, s16 drawGiId, u8 param)
 
     OPEN_DISPS(play->state.gfxCtx);
     Gfx_SetupDL25_Xlu(play->state.gfxCtx);
-    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, a);
     gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[0]);
     CLOSE_DISPS();
@@ -141,7 +141,7 @@ void DrawGi_CustomHeartContainer(PlayState* play, s16 drawGiId)
 
     OPEN_DISPS(play->state.gfxCtx);
     Gfx_SetupDL25_Xlu(play->state.gfxCtx);
-    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     color4(&r, &g, &b, &a, colors[c * 4 + 0]);
     gDPSetPrimColor(POLY_XLU_DISP++, 0, 0x80, r, g, b, a);
     color4(&r, &g, &b, &a, colors[c * 4 + 1]);
@@ -199,7 +199,7 @@ void Gfx_DrawFlameColor(PlayState* play, u32 color, float scale, float offsetY)
     Matrix_Translate(0.f, -(30.f + offsetY), -15.f, MTXMODE_APPLY);
     Matrix_Scale(flameScale * 1.7f, flameScale, flameScale, MTXMODE_APPLY);
     gSPSegment(POLY_XLU_DISP++, 0x08, DisplaceTexture(play->state.gfxCtx, 0, 0, 0, 0x20, 0x40, 1, 0, (-play->state.frameCount & 0x7f) << 2, 0x20, 0x80));
-    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     color4(&r, &g, &b, &a, primColor);
     gDPSetPrimColor(POLY_XLU_DISP++, 0x80, 0x80, r, g, b, a);
     color4(&r, &g, &b, &a, envColor);
@@ -230,7 +230,7 @@ static void drawFire(PlayState* play, u32 primColor, u32 envColor, float scale, 
     Matrix_Translate(0.f, offsetY, 0.f, MTXMODE_APPLY);
     Matrix_Scale(flameScale * 1.7f, flameScale, flameScale, MTXMODE_APPLY);
     ModelViewUnkTransform(&play->billboardMtxF);
-    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     MatrixStackPop();
 
     /* Set the texture and color */
@@ -280,7 +280,7 @@ static void shaderFlameEffect(PlayState* play, int colorIndex, float scale, floa
     Matrix_Translate(0.f, -(30.f + offsetY), -15.f, MTXMODE_APPLY);
     Matrix_Scale(flameScale * 1.7f, flameScale, flameScale, MTXMODE_APPLY);
     gSPSegment(POLY_XLU_DISP++, 0x08, DisplaceTexture(play->state.gfxCtx, 0, 0, 0, 0x20, 0x40, 1, 0, (-play->state.frameCount & 0x7f) << 2, 0x20, 0x80));
-    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     color4(&r, &g, &b, &a, kPrimColors[colorIndex]);
     gDPSetPrimColor(POLY_XLU_DISP++, 0x80, 0x80, r, g, b, a);
     color4(&r, &g, &b, &a, kEnvColors[colorIndex]);
@@ -312,7 +312,7 @@ void DrawGi_CustomStick(PlayState* play, s16 drawGiId)
 
     OPEN_DISPS(play->state.gfxCtx);
     Gfx_SetupDL25_Opa(play->state.gfxCtx);
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     color4(&r, &g, &b, &a, kNutStickPrimColors[drawGi->lists[1]]);
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, r, g, b, a);
     color4(&r, &g, &b, &a, kNutStickEnvColors[drawGi->lists[1]]);
@@ -344,7 +344,7 @@ void DrawGi_CustomNut(PlayState* play, s16 drawGiId)
     OPEN_DISPS(play->state.gfxCtx);
     Gfx_SetupDL25_Opa(play->state.gfxCtx);
     gSPSegment(POLY_OPA_DISP++, 0x09, DisplaceTexture(play->state.gfxCtx, 0, fc, fc, 0x20, 0x20, 1, fc, fc, 0x20, 0x20));
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     color4(&r, &g, &b, &a, kNutStickPrimColors[drawGi->lists[1]]);
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, r, g, b, a);
     color4(&r, &g, &b, &a, kNutStickEnvColors[drawGi->lists[1]]);
@@ -385,7 +385,7 @@ void DrawGi_BossRemains(PlayState* play, s16 drawGiId)
 
     drawGi = &kDrawGi[drawGiId];
     OPEN_DISPS(play->state.gfxCtx);
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPMatrix(POLY_OPA_DISP++, pushMatrix(play->state.gfxCtx, kMatrixScale), G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     Gfx_SetupDL25_Opa(play->state.gfxCtx);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
@@ -423,9 +423,9 @@ void DrawGi_SpiritualStones(PlayState* play, s16 drawGiId)
     OPEN_DISPS(play->state.gfxCtx);
 
     /* Matrix setup */
-    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPMatrix(POLY_XLU_DISP++, pushMatrix(play->state.gfxCtx, kMatrixRot), G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPMatrix(POLY_OPA_DISP++, pushMatrix(play->state.gfxCtx, kMatrixRot), G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
     /* Segment setup */
@@ -457,7 +457,7 @@ void DrawGi_MasterSword(PlayState* play, s16 drawGiId)
     OPEN_DISPS(play->state.gfxCtx);
     Matrix_Scale(scale, scale, scale, MTXMODE_APPLY);
     Matrix_RotateZ(3.f * M_PI * 0.25f, MTXMODE_APPLY);
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPSegment(POLY_OPA_DISP++, 8, Gfx_TexScroll(play->state.gfxCtx, 0, -(play->gameplayFrames & 0x7f), 32, 32));
     Gfx_SetupDL25_Opa(play->state.gfxCtx);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
@@ -477,7 +477,7 @@ void DrawGi_CustomSpin(PlayState* play, s16 drawGiId)
     Matrix_RotateX(rot * 3, MTXMODE_APPLY);
     Matrix_RotateY(rot * 5, MTXMODE_APPLY);
     Matrix_RotateZ(rot * 7, MTXMODE_APPLY);
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     Gfx_SetupDL25_Opa(play->state.gfxCtx);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[1]);
@@ -495,7 +495,7 @@ void DrawGi_CustomOwl(PlayState* play, s16 drawGiId)
     drawGi = &kDrawGi[drawGiId];
     OPEN_DISPS(play->state.gfxCtx);
     Matrix_Scale(scale, scale, scale, MTXMODE_APPLY);
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     Gfx_SetupDL25_Opa(play->state.gfxCtx);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
     CLOSE_DISPS();
@@ -622,7 +622,7 @@ void DrawGi_CustomStrayFairy(PlayState* play, s16 drawGiId)
     gSPSegment(POLY_XLU_DISP++, 0x08, g.customKeep);
     Draw_SetObjectSegment(play->state.gfxCtx, &kStrayFairyObj);
     ModelViewUnkTransform(&play->billboardMtxF);
-    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     Gfx_SetupDL25_Xlu(play->state.gfxCtx);
     color4(&r, &gg, &b, &a, kEnvColors[index - 1]);
     gDPSetEnvColor(POLY_XLU_DISP++, r, gg, b, a);
@@ -664,7 +664,7 @@ void DrawGi_CustomBottlePotion(PlayState* play, s16 index, u8 param)
     drawGi = &kDrawGi[index];
     OPEN_DISPS(play->state.gfxCtx);
     Gfx_SetupDL25_Xlu(play->state.gfxCtx);
-    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     color4(&r, &g, &b, &a, kPrimColors[param]);
     gDPSetPrimColor(POLY_XLU_DISP++, 0, 0x80, r, g, b, a);
     color4(&r, &g, &b, &a, kEnvColors[param]);
@@ -700,7 +700,7 @@ void DrawGi_CustomGS(PlayState* play, s16 index)
 
     OPEN_DISPS(play->state.gfxCtx);
     Gfx_SetupDL25_Opa(play->state.gfxCtx);
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     color4(&r, &g, &b, &a, gsc->skullEnv);
     gDPSetEnvColor(POLY_OPA_DISP++, r, g, b, a);
     color4(&r, &g, &b, &a, gsc->skullPrimary);
@@ -708,7 +708,7 @@ void DrawGi_CustomGS(PlayState* play, s16 index)
     gSPDisplayList(POLY_OPA_DISP++, 0x06000330);
 
     Gfx_SetupDL25_Xlu(play->state.gfxCtx);
-    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPSegment(POLY_XLU_DISP++, 0x08, DisplaceTexture(play->state.gfxCtx, 0, 0, fc * -5, 0x20, 0x20, 1, 0, 0, 0x20, 0x40));
     color4(&r, &g, &b, &a, gsc->flameEnv);
     gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, a);
@@ -797,7 +797,7 @@ void DrawGi_CustomPotion(PlayState* play, s16 index)
     /* Opa */
     Gfx_SetupDL25_Opa(play->state.gfxCtx);
     gSPSegment(POLY_OPA_DISP++, 0x08, DisplaceTexture(play->state.gfxCtx, 0, -fc, fc, 0x20, 0x20, 1, -fc, fc, 0x20, 0x20));
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     color4(&r, &g, &b, &a, kPrimColors1[colorIndex]);
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, r, g, b, a);
     color4(&r, &g, &b, &a, kEnvColors1[colorIndex]);
@@ -816,7 +816,7 @@ void DrawGi_CustomPotion(PlayState* play, s16 index)
 
     /* Xlu */
     Gfx_SetupDL25_Xlu(play->state.gfxCtx);
-    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     color4(&r, &g, &b, &a, kPrimColors3[colorIndex]);
     gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, r, g, b, a);
     color4(&r, &g, &b, &a, kEnvColors3[colorIndex]);
@@ -880,7 +880,7 @@ static void drawColoredRupee(PlayState* play, u32 color)
     OPEN_DISPS(play->state.gfxCtx);
     Gfx_SetupDL25_Opa(play->state.gfxCtx);
     Matrix_Scale(scale, scale, scale, MTXMODE_APPLY);
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPSegment(POLY_OPA_DISP++, 0x08, &kSilverRupeeLUT);
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, c[0], c[1], c[2], c[3]);
     gSPDisplayList(POLY_OPA_DISP++, (u32)kRupeeList & 0xffffff);
@@ -911,11 +911,11 @@ void DrawGi_RutosLetter(PlayState* play, s16 index)
 
     Gfx_SetupDL25_Opa(play->state.gfxCtx);
 
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
 
     Gfx_SetupDL25_Xlu(play->state.gfxCtx);
-    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+    gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
     gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[1]);
     CLOSE_DISPS();
 }
@@ -927,7 +927,7 @@ void DrawGi_CustomSmallKey(PlayState* play, s16 index)
     drawGi = &kDrawGi[index];
     OPEN_DISPS(play->state.gfxCtx);
     Gfx_SetupDL25_Opa(play->state.gfxCtx);
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
     switch (drawGi->lists[1])
     {
     case 0:
@@ -955,12 +955,12 @@ void DrawGi_Coin(PlayState* play, s16 index)
     Gfx_SetupDL25_Opa(play->state.gfxCtx);
     Matrix_Scale(scale, scale, scale, MTXMODE_APPLY);
 
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[1]);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
 
     Gfx_SetupDL25_Xlu(play->state.gfxCtx);
-    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+    gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
     gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[2]);
     CLOSE_DISPS();
 }
@@ -1009,7 +1009,7 @@ void DrawGi_MagicJar(PlayState* play, s16 index)
     Gfx_SetupDL25_Opa(play->state.gfxCtx);
     gSPSegment(POLY_OPA_DISP++, 0x08, colorJar);
     gSPSegment(POLY_OPA_DISP++, 0x09, colorDetail);
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
     CLOSE_DISPS();
 
@@ -1029,7 +1029,7 @@ void DrawGi_Triforce(PlayState* play, s16 index, u8 param)
 
     OPEN_DISPS(play->state.gfxCtx);
     Gfx_SetupDL25_Opa(play->state.gfxCtx);
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
     CLOSE_DISPS();
 
@@ -1069,19 +1069,19 @@ void DrawGi_TriforceFull(PlayState* play, s16 index, u8 param)
 
     MatrixStackDup();
     Matrix_Translate(0.f, 40.f, 0.f, MTXMODE_APPLY);
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
     MatrixStackPop();
 
     MatrixStackDup();
     Matrix_Translate(-23.f, 0.f, 0.f, MTXMODE_APPLY);
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
     MatrixStackPop();
 
     MatrixStackDup();
     Matrix_Translate(23.f, 0.f, 0.f, MTXMODE_APPLY);
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
     MatrixStackPop();
 
@@ -1100,7 +1100,7 @@ void DrawGi_MaskMajora(PlayState* play, s16 index, u8 param)
     Matrix_Scale(scale, scale, scale, MTXMODE_APPLY);
     Matrix_RotateX(M_PI, MTXMODE_APPLY);
     Matrix_Translate(-300.f, 0.f, 0.f, MTXMODE_APPLY);
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
     CLOSE_DISPS();
 }
@@ -1184,7 +1184,7 @@ void DrawGi_Wallet(PlayState* play, s16 index)
 
     OPEN_DISPS(play->state.gfxCtx);
     Gfx_SetupDL25_Opa(play->state.gfxCtx);
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
     gSPDisplayList(POLY_OPA_DISP++, LIST_PTR(kWalletBody[drawGi->lists[1]]));
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[2]);
@@ -1205,7 +1205,7 @@ void DrawGi_Button(PlayState* play, s16 index)
     Gfx_SetupDL25_Opa(play->state.gfxCtx);
     if (drawGi->lists[1])
         Matrix_RotateZ(M_PI, 1);
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
     if (drawGi->lists[0])
     {
         gDPSetPrimColor(POLY_OPA_DISP++, 0, 0x80, 255, 255, 0, 255);
@@ -1233,13 +1233,13 @@ void DrawGi_CustomBottleFairy(PlayState* play, s16 drawGiId, u8 param)
     OPEN_DISPS(play->state.gfxCtx);
     Gfx_SetupDL25_Opa(play->state.gfxCtx);
     Gfx_SetupDL25_Xlu(play->state.gfxCtx);
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
-    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[1]);
     ModelViewUnkTransform(&play->billboardMtxF);
     Matrix_Translate(0.f, -8.f, 0.f, MTXMODE_APPLY);
-    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     color4(&c[0], &c[1], &c[2], &c[3], kColors[param]);
     gDPSetEnvColor(POLY_XLU_DISP++, c[0], c[1], c[2], c[3]);
     gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[2]);
@@ -1260,7 +1260,7 @@ void DrawGi_BombchuBag(PlayState* play, s16 drawGiId, u8 param)
 
     OPEN_DISPS(play->state.gfxCtx);
     Gfx_SetupDL25_Xlu(play->state.gfxCtx);
-    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     color4(&r, &g, &b, &a, kPrimColor2);
     gDPSetPrimColor(POLY_XLU_DISP++, 0, 0x80, r, g, b, a);
     color4(&r, &g, &b, &a, kEnvColor2);
@@ -1272,7 +1272,7 @@ void DrawGi_BombchuBag(PlayState* play, s16 drawGiId, u8 param)
     gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, a);
     gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[1]);
     Gfx_SetupDL25_Opa(play->state.gfxCtx);
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[2]);
     CLOSE_DISPS();
 }
@@ -1301,7 +1301,7 @@ void DrawGi_BigFairy(PlayState* play, s16 drawGiId)
     Matrix_Translate(0.0f, -6.0f, 0.0f, MTXMODE_APPLY);
     Matrix_Scale(2.0f, 2.0f, 2.0f, MTXMODE_APPLY);
     ModelViewUnkTransform(&play->billboardMtxF);
-    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[2]);
 
     CLOSE_DISPS();
@@ -1316,11 +1316,11 @@ void DrawGi_BottleBlueFire(PlayState* play, s16 drawGiId)
     OPEN_DISPS(play->state.gfxCtx);
 
     Gfx_SetupDL25_Opa(play->state.gfxCtx);
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
 
     Gfx_SetupDL25_Xlu(play->state.gfxCtx);
-    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[1]);
 
     drawFire(play, 0x00ffffe0, 0x0000ffe0, 0.5f, -30.f);
@@ -1339,14 +1339,14 @@ void DrawGi_Clock(PlayState* play, s16 index)
     Matrix_Scale(scale, scale, scale, MTXMODE_APPLY);
     MatrixStackDup();
     Matrix_RotateZ(M_PI, MTXMODE_APPLY);
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[1]);
     MatrixStackPop();
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[2]);
     Matrix_Translate(0.f, 1100.f, -50.f, MTXMODE_APPLY);
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[3]);
     CLOSE_DISPS();
 }
@@ -1366,7 +1366,7 @@ void DrawGi_PondFish(PlayState* play, s16 index, u8 param)
     OPEN_DISPS(play->state.gfxCtx);
     Gfx_SetupDL25_Opa(play->state.gfxCtx);
     Matrix_Scale(scale, scale, scale, MTXMODE_APPLY);
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
     CLOSE_DISPS();
 }
@@ -1427,7 +1427,7 @@ void DrawGi_Rupee(PlayState* play, s16 index, u8 param)
 
     OPEN_DISPS(play->state.gfxCtx);
     Gfx_SetupDL25_Opa(play->state.gfxCtx);
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     if (param < 7)
     {
         gSPDisplayList(POLY_OPA_DISP++, kColors[param].listColorOpa);
@@ -1446,7 +1446,7 @@ void DrawGi_Rupee(PlayState* play, s16 index, u8 param)
     gSPDisplayList(POLY_OPA_DISP++, kDrawGi[index].lists[0]);
 
     Gfx_SetupDL25_Xlu(play->state.gfxCtx);
-    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     if (param < 7)
     {
         gSPDisplayList(POLY_XLU_DISP++, kColors[param].listColorXlu);

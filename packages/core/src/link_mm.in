@@ -134,7 +134,6 @@ Gfx_SetupDL57 = 0x8012BFC4;
 Gfx_SetupDL25_Opa = 0x8012c28c;
 Gfx_SetupDL25_Xlu = 0x8012c2dc;
 Gfx_SetupDL_42Opa = 0x8012c8ac;
-GetMatrixMV     = 0x80181a40;
 Matrix_Put      = 0x8018020c;
 DisplaceTexture = 0x8012cbd0;
 Gfx_SetupDL = 0x8012BF78;

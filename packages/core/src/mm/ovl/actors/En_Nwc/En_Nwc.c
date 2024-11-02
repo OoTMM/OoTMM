@@ -495,7 +495,7 @@ void EnNwc_Draw(Actor_EnNwc* this, PlayState* play)
     Gfx_SetupDL25_Opa(play->state.gfxCtx);
     gfx = POLY_OPA_DISP;
     gSPSegment(&gfx[0], 0x08, Lib_SegmentedToVirtual(eyeTextures[this->blinkState]));
-    gSPMatrix(&gfx[1], GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(&gfx[1], Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(&gfx[2], SEGADDR_NWC_BODY_DL);
     POLY_OPA_DISP = &gfx[3];
 

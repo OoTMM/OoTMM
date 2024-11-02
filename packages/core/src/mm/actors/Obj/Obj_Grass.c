@@ -86,7 +86,7 @@ void ObjGrass_DrawBush(Actor_ObjGrass_PackBush* bush)
 
     /* Draw */
     OPEN_DISPS(gPlay->state.gfxCtx);
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(gPlay->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(gPlay->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_OPA_DISP++, (u32)dlist & 0xffffff);
     CLOSE_DISPS();
 }

@@ -10,11 +10,11 @@ void DrawGi_Opa10_Xlu2(PlayState* play, s16 index)
 {
     OPEN_DISPS(play->state.gfxCtx);
     Gfx_SetupDL25_Opa(play->state.gfxCtx);
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_OPA_DISP++, kDrawGi[index].lists[1]);
     gSPDisplayList(POLY_OPA_DISP++, kDrawGi[index].lists[0]);
     Gfx_SetupDL25_Xlu(play->state.gfxCtx);
-    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_XLU_DISP++, kDrawGi[index].lists[2]);
     CLOSE_DISPS();
 }
@@ -23,11 +23,11 @@ void DrawGi_Opa10_Xlu234(PlayState* play, s16 index)
 {
     OPEN_DISPS(play->state.gfxCtx);
     Gfx_SetupDL25_Opa(play->state.gfxCtx);
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_OPA_DISP++, kDrawGi[index].lists[1]);
     gSPDisplayList(POLY_OPA_DISP++, kDrawGi[index].lists[0]);
     Gfx_SetupDL25_Xlu(play->state.gfxCtx);
-    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_XLU_DISP++, kDrawGi[index].lists[2]);
     gSPDisplayList(POLY_XLU_DISP++, kDrawGi[index].lists[3]);
     gSPDisplayList(POLY_XLU_DISP++, kDrawGi[index].lists[4]);
@@ -38,7 +38,7 @@ void DrawGi_Medallion(PlayState* play, s16 index)
 {
     OPEN_DISPS(play->state.gfxCtx);
     gSPDisplayList(POLY_OPA_DISP++, (u32)(&kInitListMedallion));
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_OPA_DISP++, kDrawGi[index].lists[0]);
     gSPDisplayList(POLY_OPA_DISP++, kDrawGi[index].lists[1]);
     CLOSE_DISPS();
@@ -51,7 +51,7 @@ void DrawGi_Spell(PlayState* play, s16 index)
     OPEN_DISPS(play->state.gfxCtx);
     Gfx_SetupDL25_Xlu(play->state.gfxCtx);
     gSPSegment(POLY_XLU_DISP++, 8, DisplaceTexture(play->state.gfxCtx, 0, fc * 2, fc * -6, 0x20, 0x20, 1, fc, fc * -2, 0x20, 0x20));
-    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_XLU_DISP++, kDrawGi[index].lists[0]);
     gSPDisplayList(POLY_XLU_DISP++, kDrawGi[index].lists[1]);
     gSPDisplayList(POLY_XLU_DISP++, kDrawGi[index].lists[2]);
@@ -65,7 +65,7 @@ void DrawGi_Scale(PlayState* play, s16 index)
     OPEN_DISPS(play->state.gfxCtx);
     Gfx_SetupDL25_Xlu(play->state.gfxCtx);
     gSPSegment(POLY_XLU_DISP++, 8, DisplaceTexture(play->state.gfxCtx, 0, fc * 2, fc * -2, 0x40, 0x40, 1, fc * 4, fc * -4, 0x20, 0x20));
-    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_XLU_DISP++, kDrawGi[index].lists[2]);
     gSPDisplayList(POLY_XLU_DISP++, kDrawGi[index].lists[3]);
     gSPDisplayList(POLY_XLU_DISP++, kDrawGi[index].lists[1]);
@@ -80,10 +80,10 @@ void DrawGi_MirrorShield(PlayState* play, s16 index)
     OPEN_DISPS(play->state.gfxCtx);
     Gfx_SetupDL25_Opa(play->state.gfxCtx);
     gSPSegment(POLY_OPA_DISP++, 8, DisplaceTexture(play->state.gfxCtx, 0, 0, (fc & 0x7f) << 1, 0x40, 0x40, 1, 0, (fc & 0x7f), 0x20, 0x20));
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_OPA_DISP++, kDrawGi[index].lists[0]);
     Gfx_SetupDL25_Xlu(play->state.gfxCtx);
-    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_XLU_DISP++, kDrawGi[index].lists[1]);
     CLOSE_DISPS();
 }
@@ -100,7 +100,7 @@ void DrawGi_SoldOut(PlayState* play, s16 index)
 
     OPEN_DISPS(play->state.gfxCtx);
     gSPDisplayList(POLY_XLU_DISP++, (u32)kInitListSoldOut & 0xffffff);
-    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[0]);
     CLOSE_DISPS();
 }
@@ -115,7 +115,7 @@ void DrawGi_BlueFire(PlayState* play, s16 index)
 
     OPEN_DISPS(play->state.gfxCtx);
     Gfx_SetupDL25_Opa(play->state.gfxCtx);
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
 
     Gfx_SetupDL25_Xlu(play->state.gfxCtx);
@@ -123,7 +123,7 @@ void DrawGi_BlueFire(PlayState* play, s16 index)
     MatrixStackDup();
     Matrix_Translate(-8.f, -2.f, 0.f, MTXMODE_APPLY);
     ModelViewUnkTransform(&play->billboardMtxF);
-    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[1]);
     MatrixStackPop();
     CLOSE_DISPS();

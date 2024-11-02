@@ -781,7 +781,7 @@ static void ObjFlowerpot_DrawPot(Actor_ObjFlowerpot* this, PlayState* play)
         gSPSegment(POLY_OPA_DISP++, 0x08, sListLoaderPotCustom);
         gSPSegment(POLY_OPA_DISP++, 0x09, customTexture);
     }
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_OPA_DISP++, 0x060012e0);
     CLOSE_DISPS();
 }
@@ -824,7 +824,7 @@ static void ObjFlowerpot_DrawGrass(Actor_ObjFlowerpot* this, PlayState* play)
         if ((this->actor.projectedPos.z > -150.0f) && (this->actor.projectedPos.z < 400.0f))
         {
             func_80A1B840(&D_80A1D838[this->unk_1EB]);
-            gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+            gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         }
     }
     gSPDisplayList(POLY_OPA_DISP++, 0x06001408);
