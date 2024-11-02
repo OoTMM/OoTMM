@@ -617,3 +617,13 @@ Actor_WorldYawTowardActor = 0x800b6cd4;
 Actor_WorldYawTowardPoint = 0x800b6d2c;
 BgCheck_EntityLineTest1 = 0x800c55c4;
 Actor_WorldDistXZToActor = 0x800b6e1c;
+
+Play_EnableMotionBlur = 0x8016566c;
+Play_SetCameraFov = 0x80169940;
+Play_DisableMotionBlur = 0x80165690;
+
+Matrix_Pop = 0x801801cc;
+Matrix_Push = 0x8018019c;
+
+Math_Vec3s_Copy = 0x800ff52c;
+func_800BBFB0 = 0x800bbfb0;

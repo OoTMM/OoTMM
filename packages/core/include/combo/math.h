@@ -41,6 +41,7 @@ s32     Math_StepToF(float* pValue, float target, float step);
 s32     Math_StepToS(s16* pValue, s16 target, s16 step);
 float   Math_SmoothStepToF(float* pValue, float target, float fraction, float step, float minStep);
 void    Math_Vec3f_Copy(Vec3f* dest, Vec3f* src);
+void    Math_Vec3s_Copy(Vec3s* dest, Vec3s* src);
 void    Math_Vec3f_Sum(Vec3f* a, Vec3f* b, Vec3f* dest);
 void    Math_Vec3f_Diff(Vec3f* a, Vec3f* b, Vec3f* dest);
 s32     Math_ScaledStepToS(s16* pValue, s16 target, s16 step);

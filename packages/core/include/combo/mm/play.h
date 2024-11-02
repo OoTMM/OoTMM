@@ -543,4 +543,8 @@ typedef struct RegEditor {
     /* 0x14 */ s16 data[REG_GROUPS * REG_PER_GROUP]; /* Accessed through *REG macros */
 } RegEditor; /* size = 0x15D4 */
 
+void Play_EnableMotionBlur(u32 alpha);
+s32 Play_SetCameraFov(PlayState* this, s16 camId, f32 fov);
+void Play_DisableMotionBlur(void);
+
 #endif
