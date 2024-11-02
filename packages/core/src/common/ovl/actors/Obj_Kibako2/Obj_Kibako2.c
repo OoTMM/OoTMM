@@ -135,7 +135,7 @@ void ObjKibako2_Kill(Actor_ObjKibako2* this, PlayState* play) {
     if ((params & 0x8000) == 0)
     {
         Actor_Spawn(
-            &play->actorCtx, play, AC_EN_SW,
+            &play->actorCtx, play, ACTOR_EN_SW,
             this->dyna.actor.world.pos.x, this->dyna.actor.world.pos.y, this->dyna.actor.world.pos.z,
             0, this->dyna.actor.shape.rot.y, 0,
             params | 0x8000
@@ -269,7 +269,7 @@ void ObjKibako2_SpawnSkulltula(Actor_ObjKibako2* this, PlayState* play)
         actorSpawnParam = KIBAKO2_SKULLTULA_SPAWN_PARAM(this);
         yRotation = (Rand_Next() >> 0x11) + this->dyna.actor.yawTowardsPlayer + 0xC000;
         skulltula =
-            Actor_Spawn(&play->actorCtx, play, AC_EN_SW, this->dyna.actor.world.pos.x, this->dyna.actor.world.pos.y,
+            Actor_Spawn(&play->actorCtx, play, ACTOR_EN_SW, this->dyna.actor.world.pos.x, this->dyna.actor.world.pos.y,
                         this->dyna.actor.world.pos.z, 0, yRotation, 0, actorSpawnParam);
         if (skulltula != NULL) {
             skulltula->parent = &this->dyna.actor;
@@ -651,7 +651,7 @@ static void ObjKibako2_Draw(Actor_ObjKibako2* this, PlayState* play)
 }
 
 ActorInit Obj_Kibako2_InitVars = {
-    AC_OBJ_KIBAKO2,
+    ACTOR_OBJ_KIBAKO2,
     ACTORCAT_BG,
     FLAGS,
     OBJECT_KIBAKO2,
@@ -662,4 +662,4 @@ ActorInit Obj_Kibako2_InitVars = {
     (ActorFunc)ObjKibako2_Draw,
 };
 
-OVL_INFO_ACTOR(AC_OBJ_KIBAKO2, Obj_Kibako2_InitVars);
+OVL_INFO_ACTOR(ACTOR_OBJ_KIBAKO2, Obj_Kibako2_InitVars);

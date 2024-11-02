@@ -76,7 +76,7 @@ void EnBox_InitWrapper(Actor* this, PlayState* play)
     s16 gi;
 
     /* Init the chest */
-    init = actorAddr(AC_EN_BOX, 0x808680ac);
+    init = actorAddr(ACTOR_EN_BOX, 0x808680ac);
     init(this, play);
 
     /* Resize chest */
@@ -94,6 +94,6 @@ void EnBox_DrawWrapper(Actor* this, PlayState* play)
     csmcChestPreDraw(this, play, gi);
 
     /* Draw */
-    draw = actorAddr(AC_EN_BOX, 0x808698f4);
+    draw = actorAddr(ACTOR_EN_BOX, 0x808698f4);
     draw(this, play);
 }

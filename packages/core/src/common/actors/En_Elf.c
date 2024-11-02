@@ -119,7 +119,7 @@ s32 EnElf_CantGiveItem(PlayState* play) {
 
 void EnElf_UpdateWrapper(Actor_EnElf* this, PlayState* play)
 {
-    ActorCallback update = actorAddr(AC_EN_ELF, EN_ELF_UPDATE_VROM);
+    ActorCallback update = actorAddr(ACTOR_EN_ELF, EN_ELF_UPDATE_VROM);
     update(&this->base, play);
 
     if (Message_IsClosed(&this->base, play))
@@ -205,7 +205,7 @@ void EnElf_InitWrapper(Actor_EnElf* this, PlayState* play)
     if (type >= 2)
         EnElf_Aliases(this, play);
 
-    init = actorAddr(AC_EN_ELF, EN_ELF_INIT_VROM);
+    init = actorAddr(ACTOR_EN_ELF, EN_ELF_INIT_VROM);
     init(&this->base, play);
 
     if (this->fairyFlags & 0x200)

@@ -9,7 +9,7 @@
 static void EnMm_AfterMaskTrade(Actor* this, PlayState* play)
 {
     gSave.eventsItem[3] |= 0x800;
-    SET_HANDLER(this, actorAddr(AC_EN_MM, 0x80ad111c));
+    SET_HANDLER(this, actorAddr(ACTOR_EN_MM, 0x80ad111c));
 }
 
 static void EnMm_MaskTradeCheck(Actor* this, PlayState* play)

@@ -53,7 +53,7 @@ void EnNwc_Init(Actor_EnNwc* this, PlayState* play)
 
     if (MM_GET_EVENT_WEEK(EV_MM_WEEK_GROG_GROWN_CHICKEN))
     {
-        Actor_Spawn(&play->actorCtx, play, AC_EN_NIW, this->actor.world.pos.x, this->actor.world.pos.y,
+        Actor_Spawn(&play->actorCtx, play, ACTOR_EN_NIW, this->actor.world.pos.x, this->actor.world.pos.y,
                     this->actor.world.pos.z, 0, this->actor.world.rot.y, 0, 0);
         Actor_Kill(&this->actor);
         return;
@@ -116,7 +116,7 @@ Actor_EnHs* EnNwc_FindGrog(PlayState* play)
 
     while (grogSearch != NULL)
     {
-        if (grogSearch->id == AC_EN_HS)
+        if (grogSearch->id == ACTOR_EN_HS)
             return (Actor_EnHs*)grogSearch;
         grogSearch = grogSearch->next;
     }
@@ -524,7 +524,7 @@ void EnNwc_DrawAdultBody(Actor_EnNwc* this, PlayState* play)
 
 ActorInit EnNwc_InitVars =
 {
-    AC_EN_NWC,
+    ACTOR_EN_NWC,
     ACTORCAT_PROP,
     FLAGS,
     OBJECT_NWC,
@@ -535,4 +535,4 @@ ActorInit EnNwc_InitVars =
     (ActorFunc)EnNwc_Draw,
 };
 
-OVL_INFO_ACTOR(AC_EN_NWC, EnNwc_InitVars);
+OVL_INFO_ACTOR(ACTOR_EN_NWC, EnNwc_InitVars);

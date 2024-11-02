@@ -21,7 +21,7 @@ static void EnKz_MaybeSetMovedPos(Actor* this, PlayState* play)
 
     if (isOpen)
     {
-        EnKz_SetMovedPos = actorAddr(AC_EN_KZ, 0x80ad65ec);
+        EnKz_SetMovedPos = actorAddr(ACTOR_EN_KZ, 0x80ad65ec);
         EnKz_SetMovedPos(this, play);
     }
 }

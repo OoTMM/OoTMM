@@ -732,7 +732,7 @@ void ObjSnowball2_Draw(Actor_ObjSnowball2* this, PlayState* play) {
 }
 
 ActorInit Obj_Snowball2_InitVars = {
-    AC_OBJ_SNOWBALL2,
+    ACTOR_OBJ_SNOWBALL2,
     ACTORCAT_PROP,
     FLAGS,
     OBJECT_GOROIWA,
@@ -743,4 +743,4 @@ ActorInit Obj_Snowball2_InitVars = {
     (ActorFunc)ObjSnowball2_Draw,
 };
 
-OVL_INFO_ACTOR(AC_OBJ_SNOWBALL2, Obj_Snowball2_InitVars)
+OVL_INFO_ACTOR(ACTOR_OBJ_SNOWBALL2, Obj_Snowball2_InitVars)

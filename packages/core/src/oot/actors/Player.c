@@ -311,16 +311,16 @@ void Player_TalkDisplayTextBox(PlayState* play, s16 textId, Actor* actor)
     {
         switch (actor->id)
         {
-        case AC_EN_GS:
+        case ACTOR_EN_GS:
             EnGs_TalkedTo(actor, play);
             break;
-        case AC_EN_GM:
+        case ACTOR_EN_GM:
             EnGm_TalkedTo(actor, play);
             break;
-        case AC_EN_MS:
+        case ACTOR_EN_MS:
             EnMs_TalkedTo(actor, play);
             break;
-        case AC_EN_SSH:
+        case ACTOR_EN_SSH:
             EnSsh_TalkedTo(actor, play);
             break;
         }
@@ -357,7 +357,7 @@ static void Player_BlastMask(PlayState* play, Actor_Player* link)
 
     if (gBlastMaskDelayAcc)
         return;
-    bomb = Actor_Spawn(&play->actorCtx, play, AC_EN_BOM, link->actor.focus.pos.x, link->actor.focus.pos.y, link->actor.focus.pos.z, 0, 0, 0, 0);
+    bomb = Actor_Spawn(&play->actorCtx, play, ACTOR_EN_BOM, link->actor.focus.pos.x, link->actor.focus.pos.y, link->actor.focus.pos.z, 0, 0, 0, 0);
     if (!bomb)
         return;
     bombTimer = (void*)((char*)bomb + 0x1e8);

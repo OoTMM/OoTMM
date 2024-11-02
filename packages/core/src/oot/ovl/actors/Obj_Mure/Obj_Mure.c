@@ -31,7 +31,7 @@ static f32 sZClip[] = { 1600.0f, 1600.0f, 1000.0f, 1000.0f, 1000.0f };
 
 static s32 sMaxChildSpawns[] = { 12, 9, 8, 0 };
 
-static s16 sSpawnActorIds[] = { AC_EN_KUSA, 0, AC_EN_FISH, AC_EN_INSECT, AC_EN_BUTTE };
+static s16 sSpawnActorIds[] = { ACTOR_EN_KUSA, 0, ACTOR_EN_FISH, ACTOR_EN_INSECT, ACTOR_EN_BUTTE };
 
 static s16 sSpawnParams[] = { 0, 2, -1, 0, -1 };
 
@@ -381,7 +381,7 @@ void ObjMure_Update(Actor_ObjMure* this, PlayState* play) {
 
 ActorInit ObjMure_InitVars =
 {
-    AC_OBJ_MURE,
+    ACTOR_OBJ_MURE,
     ACTORCAT_ITEMACTION,
     FLAGS,
     OBJECT_GAMEPLAY_KEEP,
@@ -392,4 +392,4 @@ ActorInit ObjMure_InitVars =
     NULL,
 };
 
-OVL_INFO_ACTOR(AC_OBJ_MURE, ObjMure_InitVars);
+OVL_INFO_ACTOR(ACTOR_OBJ_MURE, ObjMure_InitVars);

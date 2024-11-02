@@ -21,7 +21,7 @@ static void EnMa4_HandleLearnSongEpona(Actor* this, PlayState* play)
 
     if (gMmExtraFlags.songEpona)
     {
-        handler = actorAddr(AC_EN_MA4, 0x80abe560);
+        handler = actorAddr(ACTOR_EN_MA4, 0x80abe560);
         SET_HANDLER(this, handler);
         return;
     }

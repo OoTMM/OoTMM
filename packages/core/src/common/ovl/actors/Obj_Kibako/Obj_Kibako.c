@@ -786,7 +786,7 @@ void ObjKibako_Draw(Actor_ObjKibako* this, PlayState* play)
 
 ActorInit Obj_Kibako_InitVars =
 {
-    AC_OBJ_KIBAKO,
+    ACTOR_OBJ_KIBAKO,
     ACTORCAT_PROP,
     FLAGS,
     OBJECT,
@@ -797,4 +797,4 @@ ActorInit Obj_Kibako_InitVars =
     NULL,
 };
 
-OVL_INFO_ACTOR(AC_OBJ_KIBAKO, Obj_Kibako_InitVars);
+OVL_INFO_ACTOR(ACTOR_OBJ_KIBAKO, Obj_Kibako_InitVars);

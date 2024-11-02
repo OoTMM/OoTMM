@@ -542,7 +542,7 @@ void ObjComb_SpawnBees(Actor_ObjComb* this, PlayState* play)
 
     for (i = 0; i < params; i++)
     {
-        if (Actor_Spawn(&play->actorCtx, play, AC_EN_BEE, this->actor.world.pos.x, this->actor.world.pos.y, this->actor.world.pos.z, 0, 0, 0, phi_s5))
+        if (Actor_Spawn(&play->actorCtx, play, ACTOR_EN_BEE, this->actor.world.pos.x, this->actor.world.pos.y, this->actor.world.pos.z, 0, 0, 0, phi_s5))
         {
             this->unk_1B6 = 1;
         }
@@ -557,7 +557,7 @@ void ObjComb_SpawnSkulltula(Actor_ObjComb* this, PlayState* play)
     if (func_8098CE40(this, play))
     {
         params = (OBJCOMB_GET_1F(this) << 2) | 0xFF01;
-        temp_v0 = Actor_Spawn(&play->actorCtx, play, AC_EN_SW, this->actor.world.pos.x, this->actor.world.pos.y, this->actor.world.pos.z, 0, this->actor.home.rot.y, 0, params);
+        temp_v0 = Actor_Spawn(&play->actorCtx, play, ACTOR_EN_SW, this->actor.world.pos.x, this->actor.world.pos.y, this->actor.world.pos.z, 0, this->actor.home.rot.y, 0, params);
 
         if (temp_v0 != NULL) {
             temp_v0->parent = &this->actor;
@@ -897,7 +897,7 @@ static void ObjComb_Destroy(Actor_ObjComb* this, PlayState* play)
 
 static const ActorInit ObjComb_InitVars =
 {
-    AC_OBJ_COMB,
+    ACTOR_OBJ_COMB,
     ACTORCAT_PROP,
     FLAGS,
     OBJECT,
@@ -908,4 +908,4 @@ static const ActorInit ObjComb_InitVars =
     (ActorFunc)ObjComb_Draw,
 };
 
-OVL_INFO_ACTOR(AC_OBJ_COMB, ObjComb_InitVars);
+OVL_INFO_ACTOR(ACTOR_OBJ_COMB, ObjComb_InitVars);

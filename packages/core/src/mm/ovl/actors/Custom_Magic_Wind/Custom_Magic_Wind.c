@@ -278,7 +278,7 @@ void MagicWind_Draw(Actor* thisx, PlayState* play) {
 }
 
 ActorInit Magic_Wind_InitVars = {
-    AC_CUSTOM_SPELL_WIND,
+    ACTOR_CUSTOM_SPELL_WIND,
     ACTORCAT_ITEMACTION,
     FLAGS,
     1,
@@ -289,4 +289,4 @@ ActorInit Magic_Wind_InitVars = {
     MagicWind_Draw,
 };
 
-OVL_INFO_ACTOR(AC_CUSTOM_SPELL_WIND, Magic_Wind_InitVars);
+OVL_INFO_ACTOR(ACTOR_CUSTOM_SPELL_WIND, Magic_Wind_InitVars);

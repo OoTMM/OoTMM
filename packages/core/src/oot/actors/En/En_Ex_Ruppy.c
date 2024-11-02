@@ -123,7 +123,7 @@ void EnExRuppy_InitWrapper(Actor_EnExRuppy* this, PlayState* play)
 {
     ActorCallback init;
 
-    init = actorAddr(AC_EN_EX_RUPPY, 0x80a8ab70);
+    init = actorAddr(ACTOR_EN_EX_RUPPY, 0x80a8ab70);
     init(&this->actor, play);
 
     if (this->type == 0 && EnExRupy_IsShuffled(this, play))

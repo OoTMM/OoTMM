@@ -30,7 +30,7 @@ void EnToto_UpdateWrapper(Actor* this, PlayState* play)
     }
     else
     {
-        EnToto_Update = actorAddr(AC_EN_TOTO, 0x80ba4e2c);
+        EnToto_Update = actorAddr(ACTOR_EN_TOTO, 0x80ba4e2c);
         EnToto_Update(this, play);
     }
 }

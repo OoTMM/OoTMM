@@ -64,9 +64,9 @@ static u8 sMagicSpellCosts[] =
 
 static s16 sMagicSpellActorIds[] =
 {
-    AC_CUSTOM_SPELL_WIND,
-    AC_CUSTOM_SPELL_LOVE,
-    AC_CUSTOM_SPELL_FIRE,
+    ACTOR_CUSTOM_SPELL_WIND,
+    ACTOR_CUSTOM_SPELL_LOVE,
+    ACTOR_CUSTOM_SPELL_FIRE,
 };
 
 typedef enum {
@@ -1485,7 +1485,7 @@ u8 Player_AfterMaskLoaded(Actor_Player* player)
 {
     player->maskObjectLoadState = 0;
 
-    if (player->actor.id == AC_PLAYER && comboIsLinkAdult())
+    if (player->actor.id == ACTOR_PLAYER && comboIsLinkAdult())
     {
         u32* maskObjectSegment;
         switch (player->currentMask)
@@ -1751,7 +1751,7 @@ void Player_SetMeleeWeaponInfo(Actor_Player* this, PlayerMeleeWeaponAnimation me
     u32 dmgFlags;
     s32 damage;
 
-    if (this->actor.id == AC_EN_TEST3) {
+    if (this->actor.id == ACTOR_EN_TEST3) {
         /* Was Kafei originally intended to be able to punch? (Part of the original function)*/
         meleeWeaponAnim = PLAYER_MWA_GORON_PUNCH_LEFT;
         this->meleeWeaponAnimation = -1;
@@ -1873,7 +1873,7 @@ Actor* Player_FindGrottoNearPos(PlayState* play, Vec3f* refPos, f32 distanceXZ, 
     Actor* actor = play->actorCtx.actors[ACTORCAT_ITEMACTION].first;
 
     while (actor != NULL) {
-        if (AC_DOOR_ANA != actor->id) {
+        if (ACTOR_DOOR_ANA != actor->id) {
             actor = actor->next;
             continue;
         }
@@ -1891,7 +1891,7 @@ Actor* Player_FindGrottoNearPos(PlayState* play, Vec3f* refPos, f32 distanceXZ, 
 /* This function hits all of the active colliders for all of the HakuginPost actors */
 /* This seems bad, but because these actors have a somewhat deranged check to make sure you're in front and facing it, I think this is okay. */
 void Player_HammerBonkHakuginPost(BgHakuginPost* hakuginPost) {
-    BgHakuginPostUnkStruct* hakuginPostCrazyStruct = actorAddr(AC_BG_HAKUGIN_POST, 0x80a9e028);
+    BgHakuginPostUnkStruct* hakuginPostCrazyStruct = actorAddr(ACTOR_BG_HAKUGIN_POST, 0x80a9e028);
     ColliderCylinder* collider;
     s32 i;
 
@@ -1933,7 +1933,7 @@ s32 Player_CollideMeleeWithWall(PlayState* play, Actor_Player* this) {
 
                     if (this->linearVelocity >= 0.0f) {
                         var_a1 = &this->meleeWeaponInfo[0].base;
-                        if ((this->transformation == MM_PLAYER_FORM_GORON) || (this->actor.id == AC_EN_TEST3)) {
+                        if ((this->transformation == MM_PLAYER_FORM_GORON) || (this->actor.id == ACTOR_EN_TEST3)) {
                             var_a1 = &this->unk_AF0[1];
                         }
 
@@ -1962,7 +1962,7 @@ s32 Player_CollideMeleeWithWall(PlayState* play, Actor_Player* this) {
                                                               &this->actor.world.pos);
                                         func_800C0094(poly, pos.x, pos.y, pos.z, &sp64);
                                         Matrix_MtxFToYXZRot(&sp64, &actorRot, 1);
-                                        Actor_Spawn(&play->actorCtx, play, AC_EN_TEST, pos.x, pos.y, pos.z,
+                                        Actor_Spawn(&play->actorCtx, play, ACTOR_EN_TEST, pos.x, pos.y, pos.z,
                                                     actorRot.x, actorRot.y, actorRot.z, 500);
                                     }
 
@@ -1987,7 +1987,7 @@ s32 Player_CollideMeleeWithWall(PlayState* play, Actor_Player* this) {
                                                 return 0;
                                             }
                                         } else if (temp_v0 != NULL) { /* hammer versus dynapoly object */
-                                            if (temp_v0->actor.id == AC_BG_HAKUGIN_POST) { /* inactive snowhead temple ice pillar */
+                                            if (temp_v0->actor.id == ACTOR_BG_HAKUGIN_POST) { /* inactive snowhead temple ice pillar */
                                                 Player_HammerBonkHakuginPost((BgHakuginPost*)temp_v0);
                                             }
                                         }
@@ -2040,7 +2040,7 @@ s32 Player_CollideMeleeWithWall(PlayState* play, Actor_Player* this) {
                 (this->transformation != MM_PLAYER_FORM_GORON)) {
                 Actor* temp_v1 = this->meleeWeaponQuads[temp_v0_3 ? 0 : 1].base.at;
 
-                if ((temp_v1 != NULL) && (temp_v1->id != AC_EN_KANBAN)) {
+                if ((temp_v1 != NULL) && (temp_v1->id != ACTOR_EN_KANBAN)) {
                     func_8082DF2C(play);
                 }
             }
@@ -2097,7 +2097,7 @@ void Player_HammerShockwaveCheck(PlayState* play, Actor_Player* this) {
                 if (bgId != BGCHECK_SCENE) {
                     DynaPolyActor* dynaActor = DynaPoly_GetActor(&play->colCtx, bgId);
 
-                    if (dynaActor != NULL && dynaActor->actor.id == AC_BG_HAKUGIN_SWITCH) {
+                    if (dynaActor != NULL && dynaActor->actor.id == ACTOR_BG_HAKUGIN_SWITCH) {
                         /* the cylinder collider for Bg_Hakugin_Switch is at Actor + 0x15C.
                             the purpose of this is to be able to press it with the hammer without there being a damage type for it. */
                         ColliderCylinder* hakuginSwitchCyl = (ColliderCylinder*)((void*)dynaActor + 0x15C);

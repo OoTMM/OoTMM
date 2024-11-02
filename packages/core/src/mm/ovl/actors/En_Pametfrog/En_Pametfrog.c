@@ -192,7 +192,7 @@ void EnPametfrog_Init(Actor_EnPametfrog* this, PlayState* play) {
     if (Flags_GetClear(play, play->roomCtx.curRoom.num)) {
         Actor_Kill(&this->actor);
         if (!MM_GET_EVENT_WEEK(sIsFrogReturnedFlags[this->actor.params - 1])) {
-            Actor_Spawn(&play->actorCtx, play, AC_EN_MINIFROG, this->actor.world.pos.x, this->actor.world.pos.y,
+            Actor_Spawn(&play->actorCtx, play, ACTOR_EN_MINIFROG, this->actor.world.pos.x, this->actor.world.pos.y,
                         this->actor.world.pos.z, 0, this->actor.shape.rot.y, 0, this->params);
         }
     } else {
@@ -200,7 +200,7 @@ void EnPametfrog_Init(Actor_EnPametfrog* this, PlayState* play) {
             this->collider.elements[i].dim.worldSphere.radius = this->collider.elements[i].dim.modelSphere.radius;
         }
 
-        if (Actor_SpawnAsChild(&play->actorCtx, &this->actor, play, AC_EN_BIGPAMET, this->actor.world.pos.x,
+        if (Actor_SpawnAsChild(&play->actorCtx, &this->actor, play, ACTOR_EN_BIGPAMET, this->actor.world.pos.x,
                                this->actor.world.pos.y, this->actor.world.pos.z, 0, 0, 0, 0) == NULL) {
             Actor_Kill(&this->actor);
             return;
@@ -390,7 +390,7 @@ void EnPametfrog_ApplyMagicArrowEffects(Actor_EnPametfrog* this, PlayState* play
         this->drawDmgEffType = ACTOR_DRAW_DMGEFF_LIGHT_ORBS;
         this->drawDmgEffScale = 0.75f;
         this->drawDmgEffAlpha = 3.0f;
-        Actor_Spawn(&play->actorCtx, play, AC_EN_CLEAR_TAG, this->collider.elements[0].elem.acDmgInfo.hitPos.x,
+        Actor_Spawn(&play->actorCtx, play, ACTOR_EN_CLEAR_TAG, this->collider.elements[0].elem.acDmgInfo.hitPos.x,
                     this->collider.elements[0].elem.acDmgInfo.hitPos.y,
                     this->collider.elements[0].elem.acDmgInfo.hitPos.z, 0, 0, 0,
                     CLEAR_TAG_LARGE_LIGHT_RAYS); // FIXME CLEAR_TAG_PARAMS(CLEAR_TAG_LARGE_LIGHT_RAYS)
@@ -952,7 +952,7 @@ void EnPametfrog_SetupSpawnFrog(Actor_EnPametfrog* this, PlayState* play) {
     Vec3f velocity;
     s32 i;
 
-    Actor_Spawn(&play->actorCtx, play, AC_EN_MINIFROG, this->actor.world.pos.x, this->actor.world.pos.y,
+    Actor_Spawn(&play->actorCtx, play, ACTOR_EN_MINIFROG, this->actor.world.pos.x, this->actor.world.pos.y,
                 this->actor.world.pos.z, 0, yaw, 0, this->params);
     vec1.x = (Math_SinS(yaw) * 20.0f) + this->actor.world.pos.x;
     vec1.y = this->actor.world.pos.y + 25.0f;
@@ -1296,7 +1296,7 @@ void EnPametfrog_ApplyDamageEffect(Actor_EnPametfrog* this, PlayState* play) {
                         this->drawDmgEffType = ACTOR_DRAW_DMGEFF_LIGHT_ORBS;
                         this->drawDmgEffScale = 0.75f;
                         this->drawDmgEffAlpha = 4.0f;
-                        Actor_Spawn(&play->actorCtx, play, AC_EN_CLEAR_TAG,
+                        Actor_Spawn(&play->actorCtx, play, ACTOR_EN_CLEAR_TAG,
                                     this->collider.elements[0].elem.acDmgInfo.hitPos.x,
                                     this->collider.elements[0].elem.acDmgInfo.hitPos.y,
                                     this->collider.elements[0].elem.acDmgInfo.hitPos.z, 0, 0, 0,
@@ -1437,7 +1437,7 @@ void EnPametfrog_Draw(Actor_EnPametfrog* this, PlayState* play) {
 }
 
 ActorInit En_Pametfrog_InitVars = {
-    AC_EN_PAMETFROG,
+    ACTOR_EN_PAMETFROG,
     ACTORCAT_BOSS,
     FLAGS,
     OBJECT_BIGSLIME,
@@ -1448,4 +1448,4 @@ ActorInit En_Pametfrog_InitVars = {
     (ActorFunc)EnPametfrog_Draw,
 };
 
-OVL_INFO_ACTOR(AC_EN_PAMETFROG, En_Pametfrog_InitVars);
+OVL_INFO_ACTOR(ACTOR_EN_PAMETFROG, En_Pametfrog_InitVars);

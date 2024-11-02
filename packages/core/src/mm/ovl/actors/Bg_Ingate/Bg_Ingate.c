@@ -308,7 +308,7 @@ void BgIngate_Init(Actor_BgIngate* this, PlayState* play) {
     Vec3f sp2C;
     Vec3f sp20;
 
-    if (BgIngate_FindActor(this, play, ACTORCAT_BG, AC_BG_INGATE) == NULL) {
+    if (BgIngate_FindActor(this, play, ACTORCAT_BG, ACTOR_BG_INGATE) == NULL) {
         DynaPolyActor_Init(&this->dyna, DYNA_TRANSFORM_POS | DYNA_TRANSFORM_ROT_Y);
         DynaPolyActor_LoadMesh(play, &this->dyna, SEGADDR_BG_INGATE_COL);
         this->flags = 0;
@@ -377,7 +377,7 @@ void BgIngate_Draw(Actor_BgIngate* this, PlayState* play) {
 
 ActorInit Actor_Bg_Ingate_InitVars =
 {
-    AC_BG_INGATE,
+    ACTOR_BG_INGATE,
     ACTORCAT_BG,
     FLAGS,
     OBJECT_SICHITAI_OBJ,
@@ -388,4 +388,4 @@ ActorInit Actor_Bg_Ingate_InitVars =
     (ActorFunc)BgIngate_Draw,
 };
 
-OVL_INFO_ACTOR(AC_BG_INGATE, Actor_Bg_Ingate_InitVars);
+OVL_INFO_ACTOR(ACTOR_BG_INGATE, Actor_Bg_Ingate_InitVars);

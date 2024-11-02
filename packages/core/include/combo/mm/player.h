@@ -667,7 +667,7 @@ typedef struct {
     /* 0x00 */ u32 maskDListEntry[24];
 } PlayerMaskDList; /* size = 0x60 */
 
-#define GET_PLAYER_CUSTOM_BOOTS(player) (player->actor.id == AC_PLAYER && player->transformation == MM_PLAYER_FORM_HUMAN ? (player->currentBoots == 6 ? PLAYER_BOOTS_IRON : (player->currentBoots == 0 ? PLAYER_BOOTS_HOVER : -1)) : -1)
+#define GET_PLAYER_CUSTOM_BOOTS(player) (player->actor.id == ACTOR_PLAYER && player->transformation == MM_PLAYER_FORM_HUMAN ? (player->currentBoots == 6 ? PLAYER_BOOTS_IRON : (player->currentBoots == 0 ? PLAYER_BOOTS_HOVER : -1)) : -1)
 
 // Relies on melee weapon related item actions to be contiguous
 #define GET_MELEE_WEAPON_FROM_IA(itemAction) ((itemAction) - PLAYER_IA_SWORD_MIN + 1)

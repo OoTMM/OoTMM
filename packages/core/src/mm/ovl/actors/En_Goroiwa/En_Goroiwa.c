@@ -1598,7 +1598,7 @@ void EnGoroiwa_Draw(Actor_EnGoroiwa* this, PlayState* play) {
 }
 
 ActorInit Actor_EnGoroiwa_InitVars = {
-    AC_EN_GOROIWA,
+    ACTOR_EN_GOROIWA,
     ACTORCAT_PROP,
     FLAGS,
     OBJECT_GOROIWA,
@@ -1609,4 +1609,4 @@ ActorInit Actor_EnGoroiwa_InitVars = {
     (ActorFunc)EnGoroiwa_Draw,
 };
 
-OVL_INFO_ACTOR(AC_EN_GOROIWA, Actor_EnGoroiwa_InitVars);
+OVL_INFO_ACTOR(ACTOR_EN_GOROIWA, Actor_EnGoroiwa_InitVars);

@@ -333,7 +333,7 @@ static void spawnSirloin(PlayState* play)
     if (MM_CHECK_EVENT_INF(EV_MM_WEEK_DUNGEON_SH))
         return;
 
-    Actor_Spawn(&play->actorCtx, play, AC_EN_MM, -1025.f, 8.f, 400.f, 0.f, 0.f, 0.f, 0x8000);
+    Actor_Spawn(&play->actorCtx, play, ACTOR_EN_MM, -1025.f, 8.f, 400.f, 0.f, 0.f, 0.f, 0x8000);
 }
 
 static void Play_FixupSpawnTime(void)

@@ -469,7 +469,7 @@ void EnYb_Draw(Actor* this, PlayState* play) {
 }
 
 ActorInit En_Yb_InitVars = {
-    AC_EN_YB,
+    ACTOR_EN_YB,
     ACTORCAT_NPC,
     FLAGS,
     OBJECT_YB,
@@ -480,4 +480,4 @@ ActorInit En_Yb_InitVars = {
     (ActorFunc)EnYb_Draw,
 };
 
-OVL_INFO_ACTOR(AC_EN_YB, En_Yb_InitVars);
+OVL_INFO_ACTOR(ACTOR_EN_YB, En_Yb_InitVars);

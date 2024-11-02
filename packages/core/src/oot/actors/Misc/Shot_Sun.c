@@ -49,7 +49,7 @@ void ShotSun_InitWrapper(Actor_ShotSun* this, PlayState* play)
         ShotSun_Aliases(this, play);
     }
 
-    init = actorAddr(AC_SHOT_SUN, 0x80b226c0);
+    init = actorAddr(ACTOR_SHOT_SUN, 0x80b226c0);
     init(&this->base, play);
 }
 

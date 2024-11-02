@@ -179,7 +179,7 @@ void CustomTriggers_Spawn(PlayState* play)
     gActorCustomTriggers = (Actor_CustomTriggers*)Actor_Spawn(
         &play->actorCtx,
         play,
-        AC_CUSTOM_TRIGGERS,
+        ACTOR_CUSTOM_TRIGGERS,
         0, 0, 0,
         0, 0, 0,
         0
@@ -191,7 +191,7 @@ void CustomTriggers_Draw(Actor* this, PlayState* play)
 }
 
 ActorInit CustomTriggers_gActorInit = {
-    AC_CUSTOM_TRIGGERS,
+    ACTOR_CUSTOM_TRIGGERS,
     0x8,
     0x10,
     0x1,

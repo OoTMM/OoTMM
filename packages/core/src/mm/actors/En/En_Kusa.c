@@ -59,7 +59,7 @@ void EnKusa_InitWrapper(Actor_EnKusa* this, PlayState* play)
     EnKusa_Aliases(&this->xflag);
 
     /* Forward init */
-    init = actorAddr(AC_EN_KUSA, 0x80935674);
+    init = actorAddr(ACTOR_EN_KUSA, 0x80935674);
     init(&this->base, play);
 }
 
@@ -70,7 +70,7 @@ void EnKusa_SpawnShuffledDrop(Actor_EnKusa* this, PlayState* play)
     if (comboXflagsGet(&this->xflag))
     {
         /* Already spawned */
-        EnKusa_SpawnDrop = actorAddr(AC_EN_KUSA, 0x80934ffc);
+        EnKusa_SpawnDrop = actorAddr(ACTOR_EN_KUSA, 0x80934ffc);
         EnKusa_SpawnDrop(&this->base, play);
         return;
     }
@@ -98,6 +98,6 @@ void EnKusa_DrawWrapper(Actor_EnKusa* this, PlayState* play)
     csmcGrassPreDraw(play, o.gi, CSMC_GRASS_NORMAL, alt, 0);
 
     /* Draw the actor */
-    EnKusa_Draw = actorAddr(AC_EN_KUSA, alt ? 0x809365cc : 0x80936414);
+    EnKusa_Draw = actorAddr(ACTOR_EN_KUSA, alt ? 0x809365cc : 0x80936414);
     EnKusa_Draw(&this->base, play);
 }

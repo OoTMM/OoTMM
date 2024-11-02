@@ -104,7 +104,7 @@ int DoorWarp1_ShouldTrigger(Actor* this, PlayState* play)
     int id;
     const BlueWarpData* data;
 
-    if (this->parent && this->parent->id != AC_PLAYER)
+    if (this->parent && this->parent->id != ACTOR_PLAYER)
         this->parent = NULL;
 
     if (DoorWarp1_Collide(this, play))

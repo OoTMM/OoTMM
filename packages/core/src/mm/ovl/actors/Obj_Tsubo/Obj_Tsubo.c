@@ -245,7 +245,7 @@ void ObjTsubo_SpawnCollectible(Actor_ObjTsubo* this, PlayState* play)
 
 void ObjTsubo_SpawnBoes(Actor_ObjTsubo* this, PlayState* play, s32 arg2)
 {
-    Actor_Spawn(&play->actorCtx, play, AC_EN_MKK, this->actor.world.pos.x, this->actor.world.pos.y, this->actor.world.pos.z, 0, 0, 0, 2);
+    Actor_Spawn(&play->actorCtx, play, ACTOR_EN_MKK, this->actor.world.pos.x, this->actor.world.pos.y, this->actor.world.pos.z, 0, 0, 0, 2);
 }
 
 void ObjTsubo_SpawnGoldSkulltula(Actor_ObjTsubo* this, PlayState* play, s32 arg2)
@@ -256,7 +256,7 @@ void ObjTsubo_SpawnGoldSkulltula(Actor_ObjTsubo* this, PlayState* play, s32 arg2
     if (func_809275C0(this, play))
     {
         params = (OBJ_TSUBO_P001F(&this->actor) << 2) | 0xFF01;
-        child = Actor_Spawn(&play->actorCtx, play, AC_EN_SW, this->actor.world.pos.x, this->actor.world.pos.y, this->actor.world.pos.z, 0, Rand_Next() >> 0x10, 0, params);
+        child = Actor_Spawn(&play->actorCtx, play, ACTOR_EN_SW, this->actor.world.pos.x, this->actor.world.pos.y, this->actor.world.pos.z, 0, Rand_Next() >> 0x10, 0, params);
         if (child != NULL) {
             child->parent = &this->actor;
             child->velocity.y = 0.0f;
@@ -883,7 +883,7 @@ void ObjTsubo_Draw(Actor_ObjTsubo* this, PlayState* play)
 
 ActorInit ObjTsubo_InitVars =
 {
-    AC_OBJ_TSUBO,
+    ACTOR_OBJ_TSUBO,
     ACTORCAT_PROP,
     FLAGS,
     1,
@@ -894,4 +894,4 @@ ActorInit ObjTsubo_InitVars =
     NULL,
 };
 
-OVL_INFO_ACTOR(AC_OBJ_TSUBO, ObjTsubo_InitVars);
+OVL_INFO_ACTOR(ACTOR_OBJ_TSUBO, ObjTsubo_InitVars);

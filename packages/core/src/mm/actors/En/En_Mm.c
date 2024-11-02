@@ -16,7 +16,7 @@ void EnMm_InitWrapper(Actor* this, PlayState* play)
         }
     }
 
-    EnMm_Init = actorAddr(AC_EN_MM, 0x80965c0c);
+    EnMm_Init = actorAddr(ACTOR_EN_MM, 0x80965c0c);
     EnMm_Init(this, play);
 }
 

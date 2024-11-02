@@ -171,7 +171,7 @@ static void ItemDecoy_Update(Actor_ItemDecoy* this, PlayState* play)
 }
 
 ActorInit ItemDecoy_gActorInit = {
-    AC_ITEM_DECOY,
+    ACTOR_ITEM_DECOY,
     0x8,
     0x10,
     0x1,

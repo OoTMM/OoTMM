@@ -430,7 +430,7 @@ static void EnButte_SpawnFairy(Actor_EnButte* this, PlayState* play)
 
     memcpy(&g.xflag, &this->xflag, sizeof(Xflag));
     g.xflagOverride = TRUE;
-    Actor_Spawn(&play->actorCtx, play, AC_EN_ELF, this->actor.focus.pos.x, this->actor.focus.pos.y, this->actor.focus.pos.z, 0, this->actor.shape.rot.y, 0, 0x0002);
+    Actor_Spawn(&play->actorCtx, play, ACTOR_EN_ELF, this->actor.focus.pos.x, this->actor.focus.pos.y, this->actor.focus.pos.z, 0, this->actor.shape.rot.y, 0, 0x0002);
     g.xflagOverride = FALSE;
 }
 
@@ -595,7 +595,7 @@ void EnButte_Draw(Actor_EnButte* this, PlayState* play)
 
 static ActorInit EnButte_ActorInit =
 {
-    AC_EN_BUTTE,
+    ACTOR_EN_BUTTE,
     ACTORCAT_ITEMACTION,
     FLAGS,
     OBJECT_GAMEPLAY_FIELD_KEEP,
@@ -606,4 +606,4 @@ static ActorInit EnButte_ActorInit =
     (ActorFunc)EnButte_Draw,
 };
 
-OVL_INFO_ACTOR(AC_EN_BUTTE, EnButte_ActorInit);
+OVL_INFO_ACTOR(ACTOR_EN_BUTTE, EnButte_ActorInit);

@@ -171,7 +171,7 @@ void Ocarina_HandleLastPlayedSong(PlayState* play, Actor_Player* player, s16 las
 
             while (actor)
             {
-                if (actor->id == AC_OBJ_TIMEBLOCK || actor->id == AC_OBJ_WARP2BLOCK)
+                if (actor->id == ACTOR_OBJ_TIMEBLOCK || actor->id == ACTOR_OBJ_WARP2BLOCK)
                 {
                     Actor_ObjTimeblockWarp2Block* timeblock;
 
@@ -402,11 +402,11 @@ static void HandleElegy(PlayState* play)
     }
     else
     {
-        gElegyShell = (Actor_CustomEnTorch2*)Actor_Spawn(&play->actorCtx, play, AC_CUSTOM_TORCH2, player->actor.world.pos.x,
+        gElegyShell = (Actor_CustomEnTorch2*)Actor_Spawn(&play->actorCtx, play, ACTOR_CUSTOM_TORCH2, player->actor.world.pos.x,
                                         player->actor.world.pos.y, player->actor.world.pos.z, 0, player->actor.shape.rot.y, 0, 0);
     }
 
-    Actor_DemoEffect* effect = (Actor_DemoEffect*)Actor_Spawn(&play->actorCtx, play, AC_DEMO_EFFECT, player->actor.world.pos.x, player->actor.world.pos.y,
+    Actor_DemoEffect* effect = (Actor_DemoEffect*)Actor_Spawn(&play->actorCtx, play, ACTOR_DEMO_EFFECT, player->actor.world.pos.x, player->actor.world.pos.y,
                                 player->actor.world.pos.z, 0, player->actor.shape.rot.y, 0, DEMO_EFFECT_TIMEWARP_TIMEBLOCK_SMALL);
 
     if (effect != NULL)

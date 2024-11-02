@@ -372,7 +372,7 @@ void ObjTaru_Draw(Actor_ObjTaru* this, PlayState* play)
 }
 
 ActorInit ObjTaru_InitVars = {
-    AC_OBJ_TARU,
+    ACTOR_OBJ_TARU,
     ACTORCAT_BG,
     FLAGS,
     OBJECT_TARU,
@@ -383,4 +383,4 @@ ActorInit ObjTaru_InitVars = {
     (ActorFunc)ObjTaru_Draw,
 };
 
-OVL_INFO_ACTOR(AC_OBJ_TARU, ObjTaru_InitVars);
+OVL_INFO_ACTOR(ACTOR_OBJ_TARU, ObjTaru_InitVars);

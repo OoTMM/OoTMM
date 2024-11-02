@@ -73,10 +73,10 @@ typedef struct {
 
 static ObjSnowballStruct2 D_80B04F84[] = {
     { -1, 0, ObjSnowball_DropCollectible },
-    { AC_EN_JG, 0, ObkSnowball_SpawnGoronElder },
-    { AC_EN_WF, 1, ObjSnowball_SpawnWolfos },
-    { AC_EN_TITE, -4, ObjSnowball_SpawnEnemy },
-    { AC_EN_KAME, 0, ObjSnowball_SpawnEnemy },
+    { ACTOR_EN_JG, 0, ObkSnowball_SpawnGoronElder },
+    { ACTOR_EN_WF, 1, ObjSnowball_SpawnWolfos },
+    { ACTOR_EN_TITE, -4, ObjSnowball_SpawnEnemy },
+    { ACTOR_EN_KAME, 0, ObjSnowball_SpawnEnemy },
     { -1, 0, ObjSnowball_DropCollectible },
 };
 
@@ -997,7 +997,7 @@ void func_80B04D34(Actor_ObjSnowball* this, PlayState* play) {
 }
 
 ActorInit Actor_Obj_Snowball_InitVars = {
-    AC_OBJ_SNOWBALL,
+    ACTOR_OBJ_SNOWBALL,
     ACTORCAT_PROP,
     FLAGS,
     OBJECT_GOROIWA,
@@ -1008,4 +1008,4 @@ ActorInit Actor_Obj_Snowball_InitVars = {
     (ActorFunc)ObjSnowball_Draw,
 };
 
-OVL_INFO_ACTOR(AC_OBJ_SNOWBALL, Actor_Obj_Snowball_InitVars);
+OVL_INFO_ACTOR(ACTOR_OBJ_SNOWBALL, Actor_Obj_Snowball_InitVars);

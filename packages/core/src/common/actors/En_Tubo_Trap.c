@@ -33,7 +33,7 @@ void EnTuboTrap_InitWrapper(Actor_EnTuboTrap* this, PlayState* play)
     this->isExtended = !!(o.gi && !comboXflagsGet(&this->xflag));
 
     /* Forward init */
-    EnTuboTrap_Init = actorAddr(AC_EN_TUBO_TRAP, ADDR_FUNC_INIT);
+    EnTuboTrap_Init = actorAddr(ACTOR_EN_TUBO_TRAP, ADDR_FUNC_INIT);
     EnTuboTrap_Init(&this->base, play);
 }
 

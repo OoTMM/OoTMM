@@ -12,7 +12,7 @@ static int doorType(PlayState* play, Actor* this)
 
     switch (this->id)
     {
-    case AC_DOOR_SHUTTER:
+    case ACTOR_DOOR_SHUTTER:
         tmp = (this->params >> 7) & 7;
         if (tmp == 0x04)
             return DOOR_SMALL_KEY;

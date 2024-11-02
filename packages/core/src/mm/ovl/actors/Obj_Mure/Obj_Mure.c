@@ -29,11 +29,11 @@ static s32 sMaxChildSpawns[] = {
 };
 
 static s16 sSpawnActorIds[OBJMURE_TYPE_MAX] = {
-    AC_EN_KUSA,
-    AC_PLAYER,
-    AC_EN_FISH,
-    AC_EN_INSECT,
-    AC_EN_BUTTE,
+    ACTOR_EN_KUSA,
+    ACTOR_PLAYER,
+    ACTOR_EN_FISH,
+    ACTOR_EN_INSECT,
+    ACTOR_EN_BUTTE,
 };
 
 static s16 sSpawnParams[] = { 0, 2, -1, 0, -1 };
@@ -430,7 +430,7 @@ void ObjMure_Update(Actor_ObjMure* this, PlayState* play)
 
 static ActorInit ObjMure_ActorInit =
 {
-    AC_OBJ_MURE,
+    ACTOR_OBJ_MURE,
     ACTORCAT_ITEMACTION,
     FLAGS,
     OBJECT_GAMEPLAY_KEEP,
@@ -441,4 +441,4 @@ static ActorInit ObjMure_ActorInit =
     NULL,
 };
 
-OVL_INFO_ACTOR(AC_OBJ_MURE, ObjMure_ActorInit);
+OVL_INFO_ACTOR(ACTOR_OBJ_MURE, ObjMure_ActorInit);

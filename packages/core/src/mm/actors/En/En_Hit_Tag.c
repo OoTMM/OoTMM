@@ -112,7 +112,7 @@ void EnHitTag_InitWrapper(Actor_EnHitTag* this, PlayState* play)
         ClearSwitchFlag(play, switchFlag);
 
     /* Forward */
-    init = actorAddr(AC_EN_HIT_TAG, 0x80be2030);
+    init = actorAddr(ACTOR_EN_HIT_TAG, 0x80be2030);
     init(this, play);
 
     if (this->isExtended)

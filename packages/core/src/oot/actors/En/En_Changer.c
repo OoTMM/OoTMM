@@ -17,12 +17,12 @@ void EnChanger_Init(Actor* this, PlayState* play)
     /* Spawn chests */
     if (roomId >= 5)
     {
-        Actor_Spawn(&play->actorCtx, play, AC_EN_BOX, 20.f, 20.f, -2500.f, 0, 0x7fff, 0, 0x402a);
+        Actor_Spawn(&play->actorCtx, play, ACTOR_EN_BOX, 20.f, 20.f, -2500.f, 0, 0x7fff, 0, 0x402a);
     }
     else
     {
-        Actor_Spawn(&play->actorCtx, play, AC_EN_BOX, kPosBottom[roomId * 3 + 0], kPosBottom[roomId * 3 + 1], kPosBottom[roomId * 3 + 2], 0, 0xc001, 0, 0x4020 | (roomId * 2 + 0));
-        Actor_Spawn(&play->actorCtx, play, AC_EN_BOX, kPosTop[roomId * 3 + 0], kPosTop[roomId * 3 + 1], kPosTop[roomId * 3 + 2], 0, 0x3fff, 0, 0x4020 | (roomId * 2 + 1));
+        Actor_Spawn(&play->actorCtx, play, ACTOR_EN_BOX, kPosBottom[roomId * 3 + 0], kPosBottom[roomId * 3 + 1], kPosBottom[roomId * 3 + 2], 0, 0xc001, 0, 0x4020 | (roomId * 2 + 0));
+        Actor_Spawn(&play->actorCtx, play, ACTOR_EN_BOX, kPosTop[roomId * 3 + 0], kPosTop[roomId * 3 + 1], kPosTop[roomId * 3 + 2], 0, 0x3fff, 0, 0x4020 | (roomId * 2 + 1));
     }
 
     Actor_Kill(this);

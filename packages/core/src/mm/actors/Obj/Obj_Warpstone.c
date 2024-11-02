@@ -64,7 +64,7 @@ void ObjWarpstone_GiveItem(Actor* this, PlayState* play)
     {
         gMmOwlFlags |= ((u32)1 << id);
         sendNetOwl(play, id);
-        next = actorAddr(AC_OBJ_WARPSTONE, 0x80b92c48);
+        next = actorAddr(ACTOR_OBJ_WARPSTONE, 0x80b92c48);
         SET_HANDLER(this, next);
         next(this, play);
         return;
@@ -79,7 +79,7 @@ void ObjWarpstone_GiveItem(Actor* this, PlayState* play)
         if (!(link->state & PLAYER_ACTOR_STATE_GET_ITEM))
         {
             this->parent = NULL;
-            next = actorAddr(AC_OBJ_WARPSTONE, 0x80b92c48);
+            next = actorAddr(ACTOR_OBJ_WARPSTONE, 0x80b92c48);
             SET_HANDLER(this, next);
             next(this, play);
         }

@@ -27,7 +27,7 @@ void EnInvisibleRupee_HandleExtended(Actor_EnInvisibleRuppe* this, PlayState* pl
     if (comboXflagsGet(&this->xflag) || !this->isExtended)
     {
         this->base.draw = NULL;
-        handleNormal = actorAddr(AC_EN_INVISIBLE_RUPPE, 0x80c2590c);
+        handleNormal = actorAddr(ACTOR_EN_INVISIBLE_RUPPE, 0x80c2590c);
         this->handler = handleNormal;
         handleNormal(this, play);
         return;
@@ -43,7 +43,7 @@ void EnInvisibleRupee_HandleExtended(Actor_EnInvisibleRuppe* this, PlayState* pl
             Flags_SetSwitch(play, this->switchFlag);
 
         this->base.draw = NULL;
-        this->handler = actorAddr(AC_EN_INVISIBLE_RUPPE, 0x80c259e8);
+        this->handler = actorAddr(ACTOR_EN_INVISIBLE_RUPPE, 0x80c259e8);
     }
 }
 
@@ -71,7 +71,7 @@ void EnInvisibleRupee_InitWrapper(Actor_EnInvisibleRuppe* this, PlayState* play)
     }
 
     /* Forward */
-    init = actorAddr(AC_EN_INVISIBLE_RUPPE, 0x80c25a0c);
+    init = actorAddr(ACTOR_EN_INVISIBLE_RUPPE, 0x80c25a0c);
     init(this, play);
 
     if (this->isExtended)

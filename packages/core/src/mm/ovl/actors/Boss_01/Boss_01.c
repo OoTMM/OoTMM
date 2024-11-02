@@ -820,9 +820,9 @@ void Boss01_Init(Actor_Boss01* this, PlayState* play)
         this->actor.flags &= ~ACTOR_FLAG_MM_ATTENTION_ENABLED;
     } else {
         if (gMmExtraBoss.bossCycle & (1 << 0)) {
-            Actor_SpawnAsChild(&play->actorCtx, &this->actor, play, AC_DOOR_WARP1, 0.0f, 0.0f, 0.0f, 0, 0, 0,
+            Actor_SpawnAsChild(&play->actorCtx, &this->actor, play, ACTOR_DOOR_WARP1, 0.0f, 0.0f, 0.0f, 0, 0, 0,
                                ENDOORWARP1_FF_1);
-            Actor_Spawn(&play->actorCtx, play, AC_ITEM_B_HEART, 0.0f, 0.0f, 250.0f, 0, 0, 0, BHEART_PARAM_NORMAL);
+            Actor_Spawn(&play->actorCtx, play, ACTOR_ITEM_B_HEART, 0.0f, 0.0f, 250.0f, 0, 0, 0, BHEART_PARAM_NORMAL);
             Actor_Kill(&this->actor);
             return;
         }
@@ -860,7 +860,7 @@ void Boss01_Init(Actor_Boss01* this, PlayState* play)
         this->actor.gravity = -2.5f;
         sOdolwaMusicStartTimer = KREG(15) + 20;
 
-        sMothSwarm = (struct Actor_EnTanron1*)Actor_SpawnAsChild(&play->actorCtx, &this->actor, play, AC_EN_TANRON1, 0.0f, 437.0f,
+        sMothSwarm = (struct Actor_EnTanron1*)Actor_SpawnAsChild(&play->actorCtx, &this->actor, play, ACTOR_EN_TANRON1, 0.0f, 437.0f,
                                                     -750.0f, 0, 0, 0, 0x100);
     }
 
@@ -1140,7 +1140,7 @@ void Boss01_SummonBugsCutscene(Actor_Boss01* this, PlayState* play) {
                     pos.x = Rand_CenteredFloat(200.0f) + (this->actor.world.pos.x + offset.x);
                     pos.z = Rand_CenteredFloat(200.0f) + (this->actor.world.pos.z + offset.z);
                     Audio_PlaySfx(NA_SE_PL_DEKUNUTS_DROP_BOMB);
-                    Actor_Spawn(&play->actorCtx, play, AC_BOSS_01, pos.x, 1200.0f, pos.z, 0, Rand_ZeroFloat(0x10000),
+                    Actor_Spawn(&play->actorCtx, play, ACTOR_BOSS_01, pos.x, 1200.0f, pos.z, 0, Rand_ZeroFloat(0x10000),
                                 0, ODOLWA_TYPE_BUG);
                 }
             }
@@ -1339,7 +1339,7 @@ void Boss01_Wait(Actor_Boss01* this, PlayState* play) {
             case ODOLWA_WAIT_VERTICAL_HOP:
             case ODOLWA_WAIT_ARM_SWING_DANCE:
             case ODOLWA_WAIT_THRUST_ATTACK:
-                Actor_Spawn(&play->actorCtx, play, AC_BOSS_01, pos.x, pos.y, pos.z, 0, Rand_ZeroFloat(0x10000), 0,
+                Actor_Spawn(&play->actorCtx, play, ACTOR_BOSS_01, pos.x, pos.y, pos.z, 0, Rand_ZeroFloat(0x10000), 0,
                             ODOLWA_TYPE_BUG);
                 break;
 
@@ -1873,7 +1873,7 @@ void Boss01_UpdateDamage(Actor_Boss01* this, PlayState* play) {
             ColliderElement* acHitElem = this->shieldCollider.elements[ODOLWA_SHIELD_COLLIDER_SHIELD].elem.acHitElem;
 
             if (acHitElem->atDmgInfo.dmgFlags == DMG_SWORD_BEAM) {
-                Actor_Spawn(&play->actorCtx, play, AC_EN_CLEAR_TAG, this->actor.focus.pos.x, this->actor.focus.pos.y,
+                Actor_Spawn(&play->actorCtx, play, ACTOR_EN_CLEAR_TAG, this->actor.focus.pos.x, this->actor.focus.pos.y,
                             this->actor.focus.pos.z, 0, 0, 3, CLEAR_TAG_LARGE_LIGHT_RAYS);
                 Actor_PlaySfx(&this->actor, NA_SE_IT_SHIELD_BOUND);
                 this->damagedTimer = 5;
@@ -1911,7 +1911,7 @@ void Boss01_UpdateDamage(Actor_Boss01* this, PlayState* play) {
 
                     case ODOLWA_DMGEFF_LIGHT_ORB:
                         this->drawDmgEffState = ODOLWA_DRAW_DMGEFF_STATE_LIGHT_ORB_INIT;
-                        Actor_Spawn(&play->actorCtx, play, AC_EN_CLEAR_TAG, this->actor.focus.pos.x,
+                        Actor_Spawn(&play->actorCtx, play, ACTOR_EN_CLEAR_TAG, this->actor.focus.pos.x,
                                     this->actor.focus.pos.y, this->actor.focus.pos.z, 0, 0, 0,
                                     CLEAR_TAG_LARGE_LIGHT_RAYS);
                         break;
@@ -1922,7 +1922,7 @@ void Boss01_UpdateDamage(Actor_Boss01* this, PlayState* play) {
 
                     case ODOLWA_DMGEFF_BLUE_LIGHT_ORB:
                         this->drawDmgEffState = ODOLWA_DRAW_DMGEFF_STATE_BLUE_LIGHT_ORB_INIT;
-                        Actor_Spawn(&play->actorCtx, play, AC_EN_CLEAR_TAG, this->actor.focus.pos.x,
+                        Actor_Spawn(&play->actorCtx, play, ACTOR_EN_CLEAR_TAG, this->actor.focus.pos.x,
                                     this->actor.focus.pos.y, this->actor.focus.pos.z, 0, 0, 3,
                                     CLEAR_TAG_LARGE_LIGHT_RAYS);
                         break;
@@ -2134,7 +2134,7 @@ void Boss01_DeathCutscene(Actor_Boss01* this, PlayState* play) {
             }
 
             if (this->cutsceneTimer == 71) {
-                Actor_Spawn(&play->actorCtx, play, AC_ITEM_B_HEART, this->actor.focus.pos.x, this->actor.focus.pos.y,
+                Actor_Spawn(&play->actorCtx, play, ACTOR_ITEM_B_HEART, this->actor.focus.pos.x, this->actor.focus.pos.y,
                             this->actor.focus.pos.z, 0, 0, 0, BHEART_PARAM_NORMAL);
             }
 
@@ -2159,7 +2159,7 @@ void Boss01_DeathCutscene(Actor_Boss01* this, PlayState* play) {
                     }
                 }
 
-                Actor_SpawnAsChild(&play->actorCtx, &this->actor, play, AC_DOOR_WARP1, warpX, 0.0f, warpZ, 0, 0, 0,
+                Actor_SpawnAsChild(&play->actorCtx, &this->actor, play, ACTOR_DOOR_WARP1, warpX, 0.0f, warpZ, 0, 0, 0,
                                    ENDOORWARP1_FF_1);
                 this->cutsceneState = ODOLWA_DEATH_CS_STATE_DONE;
                 mainCam->eye = this->subCamEye;
@@ -2370,7 +2370,7 @@ void Boss01_Update(Actor_Boss01* this, PlayState* play) {
     if (((this->frameCounter & (this->afterimageSpawnFrameMask - 1)) == 0) && (this->afterimageSpawnFrameMask != 0)) {
         s16 afterimageTimer = (this->actionFunc == Boss01_SpinAttack) ? 4 : 10;
         Actor_Boss01* child =
-            (Actor_Boss01*)Actor_SpawnAsChild(&play->actorCtx, &this->actor, play, AC_BOSS_01, this->actor.world.pos.x,
+            (Actor_Boss01*)Actor_SpawnAsChild(&play->actorCtx, &this->actor, play, ACTOR_BOSS_01, this->actor.world.pos.x,
                                         this->actor.world.pos.y, this->actor.world.pos.z, this->actor.world.rot.x,
                                         this->actor.world.rot.y, afterimageTimer, ODOLWA_TYPE_AFTERIMAGE);
 
@@ -3489,7 +3489,7 @@ void Boss01_DrawEffects(PlayState* play) {
 
 ActorInit Actor_Boss01_InitVars =
 {
-    AC_BOSS_01,
+    ACTOR_BOSS_01,
     ACTORCAT_BOSS,
     FLAGS,
     OBJECT_BOSS01,
@@ -3500,4 +3500,4 @@ ActorInit Actor_Boss01_InitVars =
     (ActorFunc)Boss01_Draw,
 };
 
-OVL_INFO_ACTOR(AC_BOSS_01, Actor_Boss01_InitVars);
+OVL_INFO_ACTOR(ACTOR_BOSS_01, Actor_Boss01_InitVars);

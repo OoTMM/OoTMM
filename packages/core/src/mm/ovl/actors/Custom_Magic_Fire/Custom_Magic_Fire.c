@@ -305,7 +305,7 @@ void MagicFire_Draw(Actor_CustomMagicFire* this, PlayState* play)
 }
 
 ActorInit Magic_Fire_InitVars = {
-    AC_CUSTOM_SPELL_FIRE,
+    ACTOR_CUSTOM_SPELL_FIRE,
     ACTORCAT_ITEMACTION,
     FLAGS,
     1,
@@ -317,4 +317,4 @@ ActorInit Magic_Fire_InitVars = {
 };
 
 
-OVL_INFO_ACTOR(AC_CUSTOM_SPELL_FIRE, Magic_Fire_InitVars);
+OVL_INFO_ACTOR(ACTOR_CUSTOM_SPELL_FIRE, Magic_Fire_InitVars);

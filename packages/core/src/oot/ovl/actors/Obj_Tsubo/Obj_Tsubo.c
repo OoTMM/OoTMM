@@ -481,7 +481,7 @@ void ObjTsubo_Draw(Actor_ObjTsubo* this, PlayState* play)
 
 static ActorInit ObjTsubo_InitVars =
 {
-    AC_OBJ_TSUBO,
+    ACTOR_OBJ_TSUBO,
     ACTORCAT_PROP,
     FLAGS,
     OBJECT_GAMEPLAY_KEEP,
@@ -492,4 +492,4 @@ static ActorInit ObjTsubo_InitVars =
     NULL,
 };
 
-OVL_INFO_ACTOR(AC_OBJ_TSUBO, ObjTsubo_InitVars);
+OVL_INFO_ACTOR(ACTOR_OBJ_TSUBO, ObjTsubo_InitVars);

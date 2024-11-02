@@ -59,7 +59,7 @@ void ObjGrass_SpawnBushDropWrapper(Actor_ObjGrass_PackBush* bush, PlayState* pla
 
     /* Forward */
     void (*ObjGrass_SpawnBushDrop)(Actor_ObjGrass_PackBush*, PlayState*);
-    ObjGrass_SpawnBushDrop = actorAddr(AC_OBJ_GRASS, 0x809a92d0);
+    ObjGrass_SpawnBushDrop = actorAddr(ACTOR_OBJ_GRASS, 0x809a92d0);
     ObjGrass_SpawnBushDrop(bush, play);
 }
 
@@ -82,7 +82,7 @@ void ObjGrass_DrawBush(Actor_ObjGrass_PackBush* bush)
 
     /* Prepare the draw */
     csmcGrassPreDraw(gPlay, o.gi, CSMC_GRASS_NORMAL, 0, 1);
-    dlist = actorAddr(AC_OBJ_GRASS, 0x809aaae0);
+    dlist = actorAddr(ACTOR_OBJ_GRASS, 0x809aaae0);
 
     /* Draw */
     OPEN_DISPS(gPlay->state.gfxCtx);

@@ -16,12 +16,12 @@ static int doorType(PlayState* play, Actor* this)
 
     switch (this->id)
     {
-    case AC_EN_DOOR:
+    case ACTOR_EN_DOOR:
         tmp = (this->params >> 7) & 7;
         if (tmp == 1)
             return DOOR_SMALL_KEY;
         break;
-    case AC_DOOR_SHUTTER:
+    case ACTOR_DOOR_SHUTTER:
         tmp = (this->params >> 6) & 0xf;
         if (tmp == 0x05)
             return DOOR_BOSS_KEY;

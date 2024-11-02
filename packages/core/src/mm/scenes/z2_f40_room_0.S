@@ -7,7 +7,7 @@ PATCH_GROUP PG_MM_OPEN_STT
 
 PATCH_VROM 0x02BA9000 + 0x480
 
-.short AC_BG_F40_BLOCK
+.short ACTOR_BG_F40_BLOCK
 .short 0x0002
 .short 0xF654
 .short 0x0869
@@ -16,7 +16,7 @@ PATCH_VROM 0x02BA9000 + 0x480
 .short 0x007F
 .short 0x00FC
 
-.short AC_BG_F40_BLOCK
+.short ACTOR_BG_F40_BLOCK
 .short 0x0004
 .short 0xF654
 .short 0x097F
@@ -29,7 +29,7 @@ PATCH_END
 
 PATCH_VROM 0x02BA9000 + 0x4B0
 
-.short AC_BG_F40_BLOCK
+.short ACTOR_BG_F40_BLOCK
 .short 0x0004
 .short 0xF654
 .short 0x0750

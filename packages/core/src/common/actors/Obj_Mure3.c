@@ -19,7 +19,7 @@ void ObjMure3_SetPostSpawnHandler(Actor_ObjMure3* this)
     int count;
 
     /* Default */
-    this->handler = actorAddr(AC_OBJ_MURE3, ADDR_HANDLER_POST_SPAWN);
+    this->handler = actorAddr(ACTOR_OBJ_MURE3, ADDR_HANDLER_POST_SPAWN);
 
     /* Upgrade spawns */
     count = ((this->base.params & 0xe000) == 0x4000) ? 7 : 5;

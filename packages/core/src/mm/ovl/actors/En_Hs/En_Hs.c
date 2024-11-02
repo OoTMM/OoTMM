@@ -376,7 +376,7 @@ void EnHs_Draw(Actor_EnHs* this, PlayState* play)
 
 ActorInit EnHs_InitVars =
 {
-    AC_EN_HS,
+    ACTOR_EN_HS,
     ACTORCAT_NPC,
     FLAGS,
     OBJECT_HS,
@@ -387,4 +387,4 @@ ActorInit EnHs_InitVars =
     (ActorFunc)EnHs_Draw,
 };
 
-OVL_INFO_ACTOR(AC_EN_HS, EnHs_InitVars);
+OVL_INFO_ACTOR(ACTOR_EN_HS, EnHs_InitVars);

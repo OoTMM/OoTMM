@@ -9,7 +9,7 @@
 static void EnCs_AfterMaskTrade(Actor* this, PlayState* play)
 {
     gSave.eventsItem[3] |= 0x400;
-    SET_HANDLER(this, actorAddr(AC_EN_CS, 0x80ae1ee8));
+    SET_HANDLER(this, actorAddr(ACTOR_EN_CS, 0x80ae1ee8));
 }
 
 static void EnCs_MaskTradeCheck(Actor* this, PlayState* play)

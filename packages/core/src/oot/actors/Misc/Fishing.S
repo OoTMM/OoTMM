@@ -46,7 +46,7 @@ EasierFishing:
 /* This doesn't work as intended, probably because of the hardcoded address */
 FishBite:
   /* T0 needs to point to the fishing BSS */
-  la        t0,(gActorOvl + 0x20 * AC_EN_FISHING)
+  la        t0,(gActorOvl + 0x20 * ACTOR_EN_FISHING)
   lw        t0,0x10(t0)
   li        at,0x139D0
   addu      t0,at

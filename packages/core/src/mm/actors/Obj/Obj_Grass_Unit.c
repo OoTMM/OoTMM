@@ -27,7 +27,7 @@ void ObjGrassUnit_AfterSpawn(Actor* this)
     Xflag* xflag;
 
     /* Obtain the grass manager */
-    grass = *(Actor_ObjGrass**)(actorAddr(AC_OBJ_GRASS_UNIT, 0x809ac418));
+    grass = *(Actor_ObjGrass**)(actorAddr(ACTOR_OBJ_GRASS_UNIT, 0x809ac418));
     grassPackId = grass->count - 1;
 
     /* Set the Xflag for the grass pack */

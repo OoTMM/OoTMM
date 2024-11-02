@@ -10,6 +10,6 @@ void ObjHana_DrawWrapper(Actor* this, PlayState* play)
         csmcGrassPreDraw(play, 0, CSMC_GRASS_NORMAL, 0, 0);
 
     /* Draw */
-    ObjHana_Draw = actorAddr(AC_OBJ_HANA, 0x80abc1c8);
+    ObjHana_Draw = actorAddr(ACTOR_OBJ_HANA, 0x80abc1c8);
     ObjHana_Draw(this, play);
 }

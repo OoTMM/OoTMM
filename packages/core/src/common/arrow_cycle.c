@@ -136,8 +136,8 @@ static void ReinitializeArrow(Actor* arrow, PlayState* play)
     ActorFunc init;
     ActorFunc destroy;
 
-    init = actorAddr(AC_EN_ARROW, EN_ARROW_CTOR);
-    destroy = actorAddr(AC_EN_ARROW, EN_ARROW_DTOR);
+    init = actorAddr(ACTOR_EN_ARROW, EN_ARROW_CTOR);
+    destroy = actorAddr(ACTOR_EN_ARROW, EN_ARROW_DTOR);
 
     destroy(arrow, play);
     init(arrow, play);
@@ -253,7 +253,7 @@ static Actor* ArrowCycle_FindArrow(Actor_Player* link, PlayState* play)
     Actor* attached;
 
     attached = link->actor.child;
-    if (attached && attached->id == AC_EN_ARROW && attached->parent == &link->actor) {
+    if (attached && attached->id == ACTOR_EN_ARROW && attached->parent == &link->actor) {
         return attached;
     } else {
         return NULL;

@@ -788,7 +788,7 @@ void EnMag_Draw(Actor_EnMag* this, PlayState* play)
 }
 
 ActorInit En_Mag_InitVars = {
-    AC_EN_MAG,
+    ACTOR_EN_MAG,
     ACTORCAT_PROP,
     FLAGS,
     OBJECT_MAG,
@@ -799,4 +799,4 @@ ActorInit En_Mag_InitVars = {
     (ActorFunc)EnMag_Draw,
 };
 
-OVL_INFO_ACTOR(AC_EN_MAG, En_Mag_InitVars);
+OVL_INFO_ACTOR(ACTOR_EN_MAG, En_Mag_InitVars);

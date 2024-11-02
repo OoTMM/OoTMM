@@ -159,7 +159,7 @@ void EnWonderItem_InitWrapper(Actor_EnWonderItem* this, PlayState* play)
     }
 
     /* Forward */
-    EnWonderItem_Init = actorAddr(AC_EN_WONDER_ITEM, 0x80a663b0);
+    EnWonderItem_Init = actorAddr(ACTOR_EN_WONDER_ITEM, 0x80a663b0);
     EnWonderItem_Init(this, play);
 
     /* Use draw if extended */
@@ -175,6 +175,6 @@ void EnWonderItem_UpdateWrapper(Actor_EnWonderItem* this, PlayState* play)
     sWonderItem = this;
 
     /* Forward */
-    EnWonderItem_Update = actorAddr(AC_EN_WONDER_ITEM, 0x80a66bcc);
+    EnWonderItem_Update = actorAddr(ACTOR_EN_WONDER_ITEM, 0x80a66bcc);
     EnWonderItem_Update(this, play);
 }

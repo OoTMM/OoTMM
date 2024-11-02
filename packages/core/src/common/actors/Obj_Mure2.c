@@ -24,7 +24,7 @@ void ObjMure2_InitWrapper(Actor_ObjMure2* this, PlayState* play)
     this->xflag.id = g.actorIndex;
 
     /* Forward init */
-    init = actorAddr(AC_OBJ_MURE2, ADDR_INIT);
+    init = actorAddr(ACTOR_OBJ_MURE2, ADDR_INIT);
     init(&this->base, play);
 }
 
@@ -35,7 +35,7 @@ void ObjMure2_SpawnChildrenWrapper(Actor_ObjMure2* this, PlayState* play)
     int count;
 
     /* Call the original function */
-    ObjMure2_SpawnChildren = actorAddr(AC_OBJ_MURE2, ADDR_SPAWN_CHILDREN);
+    ObjMure2_SpawnChildren = actorAddr(ACTOR_OBJ_MURE2, ADDR_SPAWN_CHILDREN);
     ObjMure2_SpawnChildren(&this->base, play);
 
     /* Check for type */

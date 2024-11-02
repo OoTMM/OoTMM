@@ -37,7 +37,7 @@ void func_80A28D80(Actor_EnBigpamet* this);
 void func_80A28ED4(Actor_EnBigpamet* this);
 
 ActorInit En_Bigpamet_Init = {
-    /**/ AC_EN_BIGPAMET,
+    /**/ ACTOR_EN_BIGPAMET,
     /**/ ACTORCAT_BOSS,
     /**/ FLAGS,
     /**/ OBJECT_TL,
@@ -874,7 +874,7 @@ void func_80A2966C(Actor_EnBigpamet* this, PlayState* play) {
 }
 
 ActorInit Actpr_EnBigpamet_InitVars = {
-    /**/ AC_EN_BIGPAMET,
+    /**/ ACTOR_EN_BIGPAMET,
     /**/ ACTORCAT_BOSS,
     /**/ FLAGS,
     /**/ OBJECT_TL,
@@ -885,4 +885,4 @@ ActorInit Actpr_EnBigpamet_InitVars = {
     /**/ (ActorFunc)EnBigpamet_Draw,
 };
 
-OVL_INFO_ACTOR(AC_EN_BIGPAMET, Actpr_EnBigpamet_InitVars);
+OVL_INFO_ACTOR(ACTOR_EN_BIGPAMET, Actpr_EnBigpamet_InitVars);

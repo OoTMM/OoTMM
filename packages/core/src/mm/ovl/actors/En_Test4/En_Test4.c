@@ -703,7 +703,7 @@ void EnTest4_Update(Actor_EnTest4* this, PlayState* play)
 
 ActorInit En_Test4_InitVars =
 {
-    AC_EN_TEST4,
+    ACTOR_EN_TEST4,
     ACTORCAT_SWITCH,
     FLAGS,
     OBJECT_GAMEPLAY_KEEP,
@@ -714,4 +714,4 @@ ActorInit En_Test4_InitVars =
     NULL,
 };
 
-OVL_INFO_ACTOR(AC_EN_TEST4, En_Test4_InitVars);
+OVL_INFO_ACTOR(ACTOR_EN_TEST4, En_Test4_InitVars);

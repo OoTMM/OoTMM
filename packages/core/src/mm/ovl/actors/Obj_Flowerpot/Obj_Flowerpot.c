@@ -849,7 +849,7 @@ void ObjFlowerpot_Draw(Actor_ObjFlowerpot* this, PlayState* play)
 
 ActorInit ObjFlowerpot_InitVars =
 {
-    AC_OBJ_FLOWERPOT,
+    ACTOR_OBJ_FLOWERPOT,
     ACTORCAT_PROP,
     FLAGS,
     OBJECT_FLOWERPOT,
@@ -860,4 +860,4 @@ ActorInit ObjFlowerpot_InitVars =
     (ActorFunc)ObjFlowerpot_Draw,
 };
 
-OVL_INFO_ACTOR(AC_OBJ_FLOWERPOT, ObjFlowerpot_InitVars);
+OVL_INFO_ACTOR(ACTOR_OBJ_FLOWERPOT, ObjFlowerpot_InitVars);

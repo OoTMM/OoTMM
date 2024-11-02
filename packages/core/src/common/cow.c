@@ -85,7 +85,7 @@ static Actor* EnCow_GetNearestCow(PlayState* play)
         tmp = play->actorCtx.actors[i].first;
         while (tmp && count)
         {
-            if (tmp->id == AC_EN_COW && tmp->params != 1 && (!cow || cowDist > tmp->xzDistToPlayer))
+            if (tmp->id == ACTOR_EN_COW && tmp->params != 1 && (!cow || cowDist > tmp->xzDistToPlayer))
             {
                 cow = tmp;
                 cowDist = tmp->xzDistToPlayer;

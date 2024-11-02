@@ -141,7 +141,7 @@ static void CustomWarp_Draw(Actor_CustomWarp* this, PlayState* play)
 }
 
 ActorInit CustomWarp_gActorInit = {
-    AC_CUSTOM_WARP,
+    ACTOR_CUSTOM_WARP,
     0x7,
     0x11,
     0x1,
@@ -235,7 +235,7 @@ void comboSpawnCustomWarps(PlayState* play)
     Actor_Spawn(
         &play->actorCtx,
         play,
-        AC_CUSTOM_WARP,
+        ACTOR_CUSTOM_WARP,
         x, y, z,
         0, 0, 0,
         variable

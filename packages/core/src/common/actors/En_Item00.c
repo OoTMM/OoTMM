@@ -198,7 +198,7 @@ Actor_EnItem00* EnItem00_DropCustom(PlayState* play, const Vec3f* pos, const Xfl
     /* Check if the xflag item is already spawned */
     for (actor = play->actorCtx.actors[0x08].first; actor != NULL; actor = actor->next)
     {
-        if (actor->id != AC_EN_ITEM00)
+        if (actor->id != ACTOR_EN_ITEM00)
             continue;
         item = (Actor_EnItem00*)actor;
         if (memcmp(&item->xflag, xflag, sizeof(Xflag)) == 0)

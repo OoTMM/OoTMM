@@ -439,7 +439,7 @@ void comboPlayerAddItem(PlayState* play, s16 gi)
     /* Check for a chest */
     player = GET_PLAYER(play);
     chest = *(Actor**)((char*)player + CHEST_OFF);
-    if (chest && chest->id == AC_EN_BOX)
+    if (chest && chest->id == ACTOR_EN_BOX)
     {
         if (g.itemQueryBox)
         {
@@ -485,7 +485,7 @@ Actor_ItemDecoy* Item_AddWithDecoy(PlayState* play, const ComboItemQuery* q)
 
     comboItemOverride(&o, q);
     count = comboAddItemEx(play, q, FALSE);
-    decoy = (Actor_ItemDecoy*)Actor_Spawn(&play->actorCtx, play, AC_ITEM_DECOY, 0, 0, 0, 0, 0, 0, 0);
+    decoy = (Actor_ItemDecoy*)Actor_Spawn(&play->actorCtx, play, ACTOR_ITEM_DECOY, 0, 0, 0, 0, 0, 0, 0);
     if (!decoy)
         return NULL;
     decoy->count = (s16)count;

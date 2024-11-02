@@ -451,7 +451,7 @@ static void processMessagesSendPlayerPos(PlayState* play, NetContext* net)
 
     /* We have a suitable index, send the message */
     link = GET_PLAYER(play);
-    if (!link || (link->actor.id != AC_PLAYER))
+    if (!link || (link->actor.id != ACTOR_PLAYER))
         return;
 
     msg = &net->msgBuffer[index];

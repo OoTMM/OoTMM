@@ -7,7 +7,7 @@ void EnMaYto_WarpWrapper(Actor* this, PlayState* play)
 {
     ActorFunc EnMaYto_Warp;
 
-    EnMaYto_Warp = actorAddr(AC_EN_MA_YTO, 0x80b905b0);
+    EnMaYto_Warp = actorAddr(ACTOR_EN_MA_YTO, 0x80b905b0);
     EnMaYto_Warp(this, play);
 
     if (Config_Flag(CFG_ER_REGIONS_OVERWORLD))

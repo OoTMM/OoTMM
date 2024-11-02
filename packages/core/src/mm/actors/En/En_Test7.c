@@ -43,7 +43,7 @@ void EnTest7_TriggerWarpWrapper(Actor* actor, PlayState* play)
         case SCE_MM_TEMPLE_STONE_TOWER_INVERTED:
         case SCE_MM_SAKON_HIDEOUT:
             /* TODO: Call the base func */
-            EnTest7_TriggerWarp = actorAddr(AC_EN_TEST7, 0x80af2350);
+            EnTest7_TriggerWarp = actorAddr(ACTOR_EN_TEST7, 0x80af2350);
             EnTest7_TriggerWarp(actor, play);
             return;
         case SCE_MM_LAIR_ODOLWA:
