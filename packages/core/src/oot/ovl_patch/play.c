@@ -15,6 +15,12 @@
 
 PlayState* gPlay;
 
+void Play_GoToFileSelect(GameState* gs)
+{
+    gs->nextGameStateInit = FileSelect_Init;
+    gs->nextGameStateSize = sizeof(FileSelectState);
+}
+
 static int isRainbowBridgeOpen(void)
 {
     if (Config_Flag(CFG_OOT_BRIDGE_CUSTOM) && !Config_SpecialCond(SPECIAL_BRIDGE))

@@ -105,3 +105,16 @@ PATCH_START 0x8009aaa8
   nop
   nop
 PATCH_END
+
+/* Use out file select hook */
+Play_GoToFileSelectTrampoline:
+  HOOK_CALL Play_GoToFileSelect
+  jr ra
+   nop
+
+PATCH_START 0x8009b4a4
+  move a0,s0
+  jal Play_GoToFileSelectTrampoline
+   nop
+  nop
+PATCH_END
