@@ -64,16 +64,16 @@ static void EnKusa2_Draw(PlayState* play)
     if (Config_Flag(CFG_MM_SHUFFLE_GRASS))
     {
         /* Compute a nice ID */
-        if (sLastFrameCount != play->gs.frameCount)
+        if (sLastFrameCount != play->state.frameCount)
         {
-            sLastFrameCount = play->gs.frameCount;
+            sLastFrameCount = play->state.frameCount;
             sDrawIndex = 0;
         }
 
         if (g.keatonGrassMax == -1)
         {
             id = sDrawIndex++;
-            id += (play->gs.frameCount / 5) % 9;
+            id += (play->state.frameCount / 5) % 9;
             id %= 9;
         }
         else

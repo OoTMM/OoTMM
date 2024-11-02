@@ -239,20 +239,20 @@ void MagicWind_Update(Actor* thisx, PlayState* play) {
 
 s32 MagicWind_OverrideLimbDraw(PlayState* play, SkelCurve* skelCurve, s32 limbIndex, void* thisx)
 {
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
 
     if (limbIndex == 1) {
         gSPSegment(POLY_XLU_DISP++, 8,
-                   DisplaceTexture(play->gs.gfx, G_TX_RENDERTILE, (play->gs.frameCount * 9) & 0xFF,
-                                    0xFF - ((play->gs.frameCount * 0xF) & 0xFF), 0x40, 0x40, 1,
-                                    (play->gs.frameCount * 0xF) & 0xFF, 0xFF - ((play->gs.frameCount * 0x1E) & 0xFF),
+                   DisplaceTexture(play->state.gfx, G_TX_RENDERTILE, (play->state.frameCount * 9) & 0xFF,
+                                    0xFF - ((play->state.frameCount * 0xF) & 0xFF), 0x40, 0x40, 1,
+                                    (play->state.frameCount * 0xF) & 0xFF, 0xFF - ((play->state.frameCount * 0x1E) & 0xFF),
                                     0x40, 0x40));
 
     } else if (limbIndex == 2) {
         gSPSegment(POLY_XLU_DISP++, 9,
-                   DisplaceTexture(play->gs.gfx, G_TX_RENDERTILE, (play->gs.frameCount * 3) & 0xFF,
-                                    0xFF - ((play->gs.frameCount * 5) & 0xFF), 0x40, 0x40, 1,
-                                    (play->gs.frameCount * 6) & 0xFF, 0xFF - ((play->gs.frameCount * 0xA) & 0xFF), 0x40,
+                   DisplaceTexture(play->state.gfx, G_TX_RENDERTILE, (play->state.frameCount * 3) & 0xFF,
+                                    0xFF - ((play->state.frameCount * 5) & 0xFF), 0x40, 0x40, 1,
+                                    (play->state.frameCount * 6) & 0xFF, 0xFF - ((play->state.frameCount * 0xA) & 0xFF), 0x40,
                                     0x40));
     }
 
@@ -262,7 +262,7 @@ s32 MagicWind_OverrideLimbDraw(PlayState* play, SkelCurve* skelCurve, s32 limbIn
 }
 
 void MagicWind_Draw(Actor* thisx, PlayState* play) {
-    GfxContext* gfxCtx = play->gs.gfx;
+    GraphicsContext* gfxCtx = play->state.gfx;
     MagicWind* this = (MagicWind*)thisx;
 
     OPEN_DISPS(gfxCtx);

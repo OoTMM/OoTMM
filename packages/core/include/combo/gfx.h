@@ -22,7 +22,7 @@ DisplayListBuffer;
 
 #define OPEN_DISPS(gfx)             \
     {                               \
-        GfxContext* __gfx = (gfx);  \
+        GraphicsContext* __gfx = (gfx);  \
         (void)__gfx;
 
 #define CLOSE_DISPS()               \
@@ -39,12 +39,12 @@ ALIGNED(16) extern const Gfx kDListEmpty[];
 
 Gfx*    Gfx_SetupDL(Gfx* gfx, u32 i);
 Gfx*    Gfx_SetupDL57(Gfx* gfx);
-void    Gfx_SetupDL25_Opa(GfxContext* gfx);
-void    Gfx_SetupDL25_Xlu(GfxContext* gfx);
-void    Gfx_SetupDL_42Opa(GfxContext* gfx);
-void*   GetMatrixMV(GfxContext* gfx);
-u32     DisplaceTexture(GfxContext* gfx, int, int, int, int, int, int, int, int, int, int);
-Gfx*    Gfx_TexScroll(GfxContext* ctx, u32 x, u32 y, s32 width, s32 height);
+void    Gfx_SetupDL25_Opa(GraphicsContext* gfx);
+void    Gfx_SetupDL25_Xlu(GraphicsContext* gfx);
+void    Gfx_SetupDL_42Opa(GraphicsContext* gfx);
+void*   GetMatrixMV(GraphicsContext* gfx);
+u32     DisplaceTexture(GraphicsContext* gfx, int, int, int, int, int, int, int, int, int, int);
+Gfx*    Gfx_TexScroll(GraphicsContext* ctx, u32 x, u32 y, s32 width, s32 height);
 void    Gfx_DrawDListOpa(PlayState* play, Gfx* dlist);
 void    Gfx_DrawDListXlu(PlayState* play, Gfx* dlist);
 void    Gfx_DrawFlameColor(PlayState* play, u32 color, float scale, float offsetY);

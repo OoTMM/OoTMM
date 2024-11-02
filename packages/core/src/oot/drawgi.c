@@ -5,9 +5,9 @@ void DrawGi_Opa01(PlayState* play, s16 drawGiId)
     const DrawGi* drawGi;
     drawGi = &kDrawGi[drawGiId];
 
-    OPEN_DISPS(play->gs.gfx);
-    Gfx_SetupDL25_Opa(play->gs.gfx);
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    OPEN_DISPS(play->state.gfx);
+    Gfx_SetupDL25_Opa(play->state.gfx);
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[1]);
     CLOSE_DISPS();
@@ -23,15 +23,15 @@ void DrawGi_MoonTear(PlayState* play, s16 drawGiId)
     const DrawGi* drawGi;
     drawGi = &kDrawGi[drawGiId];
 
-    OPEN_DISPS(play->gs.gfx);
-    Gfx_SetupDL25_Opa(play->gs.gfx);
-    Gfx_SetupDL25_Xlu(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
+    Gfx_SetupDL25_Opa(play->state.gfx);
+    Gfx_SetupDL25_Xlu(play->state.gfx);
     gSPSegment(POLY_OPA_DISP++, 0x09, kDummyList);
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
     gSPSegment(POLY_XLU_DISP++, 0x0a, kDummyList);
     ModelViewUnkTransform(&play->billboardMtxF);
-    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_XLU_DISP++, drawGi->lists[1]);
     CLOSE_DISPS();
 }

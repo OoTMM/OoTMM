@@ -95,7 +95,7 @@ static void ObjKibako_DrawWithTexture(Actor_ObjKibako* this, PlayState* play, u3
     }
 
     /* Draw */
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
     gSPSegment(POLY_OPA_DISP++, 0x08, data);
     CLOSE_DISPS();
     Gfx_DrawDListOpa(play, (void*)dlist);

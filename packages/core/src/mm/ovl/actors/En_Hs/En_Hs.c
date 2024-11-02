@@ -257,7 +257,7 @@ void func_809533A0(Actor_EnHs* this, PlayState* play)
 
 void func_8095345C(Actor_EnHs* this, PlayState* play)
 {
-    if (Actor_TalkOfferAccepted(&this->actor, &play->gs))
+    if (Actor_TalkOfferAccepted(&this->actor, &play->state))
     {
         this->actionFunc = func_80953180;
         func_809533A0(this, play);
@@ -370,7 +370,7 @@ void EnHs_PostLimbDraw(PlayState* play, s32 limbIndex, Gfx** dList, Vec3s* rot, 
 
 void EnHs_Draw(Actor_EnHs* this, PlayState* play)
 {
-    Gfx_SetupDL25_Opa(play->gs.gfx);
+    Gfx_SetupDL25_Opa(play->state.gfx);
     SkelAnime_DrawFlexOpa(play, this->skelAnime.skeleton, this->skelAnime.jointTable, this->skelAnime.dListCount, EnHs_OverrideLimbDraw, EnHs_PostLimbDraw, &this->actor);
 }
 

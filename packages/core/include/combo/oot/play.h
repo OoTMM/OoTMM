@@ -46,7 +46,7 @@ ASSERT_SIZE(GameOverContext, 0x4);
 
 typedef struct PlayState
 {
-    GameState              gs;
+    GameState              state;
     u16                    sceneId;
     char                   unk_000a6[0xa];
     void*                  sceneSegment;

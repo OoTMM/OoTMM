@@ -58,8 +58,8 @@ void* csmcLoadTexture(u8 custom, u32 addr, int fmt, int bpp, int w, int h, int m
     gSPEndDisplayList(dlist++);
 
     /* Alloc the new display list on the OPA */
-    dst = gPlay->gs.gfx->polyOpa.end - (dlist - buffer);
-    gPlay->gs.gfx->polyOpa.end = dst;
+    dst = gPlay->state.gfx->polyOpa.end - (dlist - buffer);
+    gPlay->state.gfx->polyOpa.end = dst;
     memcpy(dst, buffer, (dlist - buffer) * sizeof(Gfx));
 
     return dst;
@@ -107,8 +107,8 @@ void* csmcLoadTextureEx(const CsmcDisplayList* d)
     gSPEndDisplayList(dlist++);
 
     /* Alloc the new display list on the OPA */
-    dst = gPlay->gs.gfx->polyOpa.end - (dlist - buffer);
-    gPlay->gs.gfx->polyOpa.end = dst;
+    dst = gPlay->state.gfx->polyOpa.end - (dlist - buffer);
+    gPlay->state.gfx->polyOpa.end = dst;
     memcpy(dst, buffer, (dlist - buffer) * sizeof(Gfx));
 
     return dst;

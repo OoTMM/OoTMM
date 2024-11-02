@@ -19,7 +19,7 @@ void KaleidoScope_AfterSetCutsorColor(PlayState* play)
     Dpad_Update(play);
 
     cursorSlot = play->pauseCtx.cursorSlot[0];
-    press = !!(play->gs.input[0].pressed.buttons & (L_TRIG | U_CBUTTONS));
+    press = !!(play->state.input[0].pressed.buttons & (L_TRIG | U_CBUTTONS));
     effect = 0;
 
     u8* itemPtr;
@@ -223,7 +223,7 @@ static void KaleidoScope_UpdateMapDungeonMenu(PlayState* play, u32 overlayAddr)
 {
     KaleidoScopeHandler handler;
 
-    if (play->gs.input[0].pressed.buttons & (L_TRIG | U_CBUTTONS))
+    if (play->state.input[0].pressed.buttons & (L_TRIG | U_CBUTTONS))
         comboMenuNext();
 
     if (g.menuScreen)
@@ -330,7 +330,7 @@ static void KaleidoScope_UpdateSomeMenu(PlayState* play)
     handler = OverlayAddr(0x80817b5c);
     handler(play);
 
-    if (play->gs.input[0].pressed.buttons & (L_TRIG | U_CBUTTONS))
+    if (play->state.input[0].pressed.buttons & (L_TRIG | U_CBUTTONS))
     {
         menuSave(play);
     }
@@ -469,7 +469,7 @@ static Vtx* GetVtxBuffer(PlayState* play, u32 vertIdx, u32 slot) {
     const Vtx* srcVtx = play->pauseCtx.vtxBuf + vertIdx;
 
     /* Get dest Vtx (factor in frame counter) */
-    int framebufIdx = play->gs.gfx->displayListCounter & 1;
+    int framebufIdx = play->state.gfx->displayListCounter & 1;
     Vtx* dstVtx = gVertex[slot] + (framebufIdx * 4);
 
     /* Copy source Vtx over to dest Vtx */
@@ -488,7 +488,7 @@ static Vtx* GetVtxBuffer(PlayState* play, u32 vertIdx, u32 slot) {
     return dstVtx;
 }
 
-static void DrawIcon(GfxContext* gfxCtx, const Vtx* vtx, u32 segAddr, u16 width, u16 height, u16 qidx) {
+static void DrawIcon(GraphicsContext* gfxCtx, const Vtx* vtx, u32 segAddr, u16 width, u16 height, u16 qidx) {
     OPEN_DISPS(gfxCtx);
     /* Instructions that happen before function */
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0xFF, 0xFF, 0xFF, gfxCtx->play->pauseCtx.itemAlpha & 0xFF);
@@ -501,9 +501,9 @@ static void DrawIcon(GfxContext* gfxCtx, const Vtx* vtx, u32 segAddr, u16 width,
     CLOSE_DISPS();
 }
 
-typedef void (*KaleidoScope_DrawIcon)(GfxContext* gfxCtx, u32 texture, u16 width, u16 height, u16 point);
+typedef void (*KaleidoScope_DrawIcon)(GraphicsContext* gfxCtx, u32 texture, u16 width, u16 height, u16 point);
 
-void KaleidoScope_DrawIconCustom(GfxContext* gfxCtx, u8 item, u16 width, u16 height, u32 slot, u16 point, u16 vertIdx)
+void KaleidoScope_DrawIconCustom(GraphicsContext* gfxCtx, u8 item, u16 width, u16 height, u32 slot, u16 point, u16 vertIdx)
 {
     u32 texture = GetItemTexture(item);
 

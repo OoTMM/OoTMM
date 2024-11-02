@@ -21,7 +21,7 @@ static int checkItemToggle(PlayState* play)
 
     p = &play->pauseCtx;
     ret = 0;
-    press = !!(play->gs.input[0].pressed.buttons & (L_TRIG | U_CBUTTONS));
+    press = !!(play->state.input[0].pressed.buttons & (L_TRIG | U_CBUTTONS));
 
     itemId = ITEM_NONE;
     itemCursor = -1;
@@ -151,7 +151,7 @@ void KaleidoSetCursorColor(PlayState* play)
         }
     }
 
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, r, g, b, 0xff);
     gDPSetEnvColor(POLY_OPA_DISP++, 0, 0, 0, 0xff);
     CLOSE_DISPS();
@@ -166,7 +166,7 @@ static void KaleidoScope_HandleMapDungeonMenu(PlayState* play, void* unk, u32 ov
     int onMenu;
 
     onMenu = play->pauseCtx.screen_idx == 1;
-    if (onMenu && play->gs.input[0].pressed.buttons & (L_TRIG | U_CBUTTONS))
+    if (onMenu && play->state.input[0].pressed.buttons & (L_TRIG | U_CBUTTONS))
         comboMenuNext();
 
     if (g.menuScreen)
@@ -588,7 +588,7 @@ void KaleidoScope_BeforeUpdate(PlayState* play)
     PauseContext* pauseCtx = &play->pauseCtx;
     InterfaceContext* interfaceCtx = &play->interfaceCtx;
     MessageContext* msgCtx = &play->msgCtx;
-    ControllerInput* input = &play->gs.input[0];
+    ControllerInput* input = &play->state.input[0];
 
     if (pauseCtx->state >= PAUSE_STATE_OWLWARP_2 && pauseCtx->state <= PAUSE_STATE_OWLWARP_6)
     {
@@ -736,7 +736,7 @@ void KaleidoScope_BeforeUpdate(PlayState* play)
 
         case PAUSE_STATE_OWLWARP_SELECT:
             /* TODO for some reason pressing START causes a "failed ocarina" sfx. */
-            if ((play->gs.input[0].pressed.buttons & START_BUTTON) || (play->gs.input[0].pressed.buttons & B_BUTTON))
+            if ((play->state.input[0].pressed.buttons & START_BUTTON) || (play->state.input[0].pressed.buttons & B_BUTTON))
             {
                 pauseCtx->state = PAUSE_STATE_OWLWARP_6;
                 WREG(2) = -6240;
@@ -744,7 +744,7 @@ void KaleidoScope_BeforeUpdate(PlayState* play)
                 gSoaringIndexSelected = -1;
                 gSaveContext.prevHudVisibilityMode = 50; /* HUD_VISIBILITY_ALL; */
             }
-            else if (play->gs.input[0].pressed.buttons & A_BUTTON)
+            else if (play->state.input[0].pressed.buttons & A_BUTTON)
             {
                 msgCtx->msgLength = 0;
                 msgCtx->msgMode = 0; /* MSGMODE_NONE; */
@@ -801,7 +801,7 @@ static void KaleidoScope_DrawWorldMap(PlayState* play) {
     u32 gWorldMapImageTLUT = 0x0C006C00;
     u32 gWorldMapOwlFaceTex = 0x0C014668;
 
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
 
     /* KaleidoScope_SetCursorVtxPos(pauseCtx, pauseCtx->cursorSlot[PAUSE_MAP] * 4, pauseCtx->mapPageVtx); */
 
@@ -860,7 +860,7 @@ static void KaleidoScope_DrawWorldMap(PlayState* play) {
 
     gSP1Quadrangle(POLY_OPA_DISP++, j, j + 2, j + 3, j + 1, 0);
 
-    Gfx_SetupDL_42Opa(play->gs.gfx);
+    Gfx_SetupDL_42Opa(play->state.gfx);
 
     gDPPipeSync(POLY_OPA_DISP++);
 
@@ -893,7 +893,7 @@ static void KaleidoScope_DrawWorldMap(PlayState* play) {
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0, 0, 0, R_PAUSE_OWLWARP_ALPHA);
     gDPFillRectangle(POLY_OPA_DISP++, 50, 62, 270, 190);
 
-    Gfx_SetupDL_42Opa(play->gs.gfx);
+    Gfx_SetupDL_42Opa(play->state.gfx);
 
     /* Selecting an owl warp */
     gDPPipeSync(POLY_OPA_DISP++);
@@ -923,7 +923,7 @@ static void KaleidoScope_DrawOwlWarpMapPage(PlayState* play)
 {
     PauseContext* pauseCtx = &play->pauseCtx;
 
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
 
     gDPPipeSync(POLY_OPA_DISP++);
 
@@ -937,7 +937,7 @@ static void KaleidoScope_DrawOwlWarpMapPage(PlayState* play)
     Matrix_RotateZ(-pauseCtx->mapPageRoll / 100.0f, MAT_MUL);
     Matrix_RotateY(-1.57f, MAT_MUL);
 
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     KaleidoScope_DrawPageSections_Func KaleidoScope_DrawPageSections = OverlayAddr(0x8081FAD8);
     POLY_OPA_DISP = KaleidoScope_DrawPageSections(POLY_OPA_DISP, pauseCtx->mapPageVtx, sMapPageBgTextures);
@@ -968,7 +968,7 @@ static void KaleidoScope_DrawOwlWarpInfoPanel(PlayState* play)
     s16 i;
     s16 j;
 
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
 
     stepR =
         ABS_ALT(sPauseLRCursorRed - sPauseLRCursorColorTargets[sPauseLRCursorColorIndex][0]) / sPauseLRCursorColorTimer;
@@ -1104,7 +1104,7 @@ static void KaleidoScope_DrawOwlWarpInfoPanel(PlayState* play)
     Matrix_Translate(0.0f, 0.0f, -144.0f, MAT_SET);
     Matrix_Scale(1.0f, 1.0f, 1.0f, MAT_MUL);
 
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 150, 140, 90, 255);
     gSPVertex(POLY_OPA_DISP++, &pauseCtx->infoPanelVtx[0], 16, 0);
@@ -1233,7 +1233,7 @@ static void KaleidoScope_DrawCursor(PlayState* play) {
         sCursorColorTimer = 10;
     }
 
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
 
     if ((pauseCtx->changing == PAUSE_MAIN_STATE_IDLE) ||
         (pauseCtx->changing == PAUSE_MAIN_STATE_IDLE_CURSOR_ON_SONG)) {
@@ -1249,7 +1249,7 @@ static void KaleidoScope_DrawCursor(PlayState* play) {
         for (i = 0; i < 4; i++) {
             MatrixStackDup();
             Matrix_Translate(sCursorCirclesX[i], sCursorCirclesY[i], -50.0f, MAT_MUL);
-            gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+            gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             gDPPipeSync(POLY_OPA_DISP++);
             gDPLoadTextureBlock_4b(POLY_OPA_DISP++, sCursorTexs[i], G_IM_FMT_IA, 16, 16, 0,
                                 G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
@@ -1403,7 +1403,7 @@ static s16 KaleidoScope_SetPageVertices(PlayState* play, Vtx* vtx, s16 vtxPage, 
     return k;
 }
 
-static void KaleidoScope_SetVertices(PlayState* play, GfxContext* gfxCtx)
+static void KaleidoScope_SetVertices(PlayState* play, GraphicsContext* gfxCtx)
 {
     PauseContext* pauseCtx = &play->pauseCtx;
     s16 i;
@@ -1463,7 +1463,7 @@ static void KaleidoScope_SetVertices(PlayState* play, GfxContext* gfxCtx)
     pauseCtx->mapPageVtx[j - 2].v.tc[1] = pauseCtx->mapPageVtx[j - 1].v.tc[1] =
         (WORLD_MAP_IMAGE_HEIGHT % WORLD_MAP_IMAGE_FRAG_HEIGHT) * (1 << 5);
 
-    pauseCtx->cursorVtx = GRAPH_ALLOC(play->gs.gfx, (PAUSE_QUAD_CURSOR_MAX * 4) * sizeof(Vtx));
+    pauseCtx->cursorVtx = GRAPH_ALLOC(play->state.gfx, (PAUSE_QUAD_CURSOR_MAX * 4) * sizeof(Vtx));
 
     for (i = 0; i < (PAUSE_QUAD_CURSOR_MAX * 4); i++) {
         pauseCtx->cursorVtx[i].v.ob[0] = pauseCtx->cursorVtx[i].v.ob[1] = pauseCtx->cursorVtx[i].v.ob[2] = 0;
@@ -1509,18 +1509,18 @@ s32 KaleidoScope_BeforeDraw(PlayState* play)
 
     if (pauseCtx->state >= PAUSE_STATE_OWLWARP_2 && pauseCtx->state <= PAUSE_STATE_OWLWARP_6)
     {
-        OPEN_DISPS(play->gs.gfx);
+        OPEN_DISPS(play->state.gfx);
 
         KaleidoScope_SetView_Func KaleidoScope_SetView = OverlayAddr(0x80823120);
         KaleidoScope_SetView(pauseCtx, pauseCtx->eye.x, pauseCtx->eye.y, pauseCtx->eye.z);
 
-        KaleidoScope_SetVertices(play, play->gs.gfx);
+        KaleidoScope_SetVertices(play, play->state.gfx);
 
-        Gfx_SetupDL_42Opa(play->gs.gfx);
+        Gfx_SetupDL_42Opa(play->state.gfx);
 
         KaleidoScope_DrawOwlWarpMapPage(play);
 
-        Gfx_SetupDL_42Opa(play->gs.gfx);
+        Gfx_SetupDL_42Opa(play->state.gfx);
         gDPSetCombineLERP(POLY_OPA_DISP++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, PRIMITIVE, 0,
                             PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, PRIMITIVE, 0);
 
@@ -1600,7 +1600,7 @@ static Vtx* GetVtxBuffer(PlayState* play, u32 vertIdx, u32 slot) {
     const Vtx* srcVtx = play->pauseCtx.itemVtx + vertIdx;
 
     /* Get dest Vtx (factor in frame counter) */
-    int framebufIdx = play->gs.gfx->displayListCounter & 1;
+    int framebufIdx = play->state.gfx->displayListCounter & 1;
     Vtx* dstVtx = gVertex[slot] + (framebufIdx * 4);
 
     /* Copy source Vtx over to dest Vtx */
@@ -1619,7 +1619,7 @@ static Vtx* GetVtxBuffer(PlayState* play, u32 vertIdx, u32 slot) {
     return dstVtx;
 }
 
-static void DrawIcon(GfxContext* gfxCtx, const Vtx* vtx, u32 segAddr, u16 width, u16 height, u16 qidx) {
+static void DrawIcon(GraphicsContext* gfxCtx, const Vtx* vtx, u32 segAddr, u16 width, u16 height, u16 qidx) {
     OPEN_DISPS(gfxCtx);
     /* Instructions that happen before function */
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0xFF, 0xFF, 0xFF, gfxCtx->play->pauseCtx.alpha & 0xFF);
@@ -1632,9 +1632,9 @@ static void DrawIcon(GfxContext* gfxCtx, const Vtx* vtx, u32 segAddr, u16 width,
     CLOSE_DISPS();
 }
 
-void KaleidoScope_DrawItemHook(GfxContext* gfx, int slotId, int sizeX, int sizeY, int vertIdx)
+void KaleidoScope_DrawItemHook(GraphicsContext* gfx, int slotId, int sizeX, int sizeY, int vertIdx)
 {
-    void (*KaleidoScope_DrawItem)(GfxContext*, u32, int, int, int);
+    void (*KaleidoScope_DrawItem)(GraphicsContext*, u32, int, int, int);
     u32 icon;
     u8 item;
 

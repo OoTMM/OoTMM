@@ -1038,7 +1038,7 @@ void Boss01_IntroCutscene(Actor_Boss01* this, PlayState* play) {
             }
 
             if (this->cutsceneTimer == 50) {
-                TitleCard_InitBossName(&play->gs, &play->actorCtx.titleCtx,
+                TitleCard_InitBossName(&play->state, &play->actorCtx.titleCtx,
                                        Lib_SegmentedToVirtual(SEGADDR_ODOLWA_TITLE_CARD_TEX), 160, 180, 128, 40);
             }
 
@@ -2520,7 +2520,7 @@ void Boss01_DrawSwordTrail(Actor_Boss01* this, PlayState* play) {
     Vtx* vtx;
     u32 i;
 
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
 
     vtx = Lib_SegmentedToVirtual(SEGADDR_ODOLWA_SWORD_TRAIL_VTX);
 
@@ -2536,7 +2536,7 @@ void Boss01_DrawSwordTrail(Actor_Boss01* this, PlayState* play) {
 
     gSPSegment(
         POLY_XLU_DISP++, 0x08,
-        Gfx_TwoTexScroll(play->gs.gfx, G_TX_RENDERTILE, 0, 0, 32, 32, 1, play->gameplayFrames * 18, 0, 32, 32));
+        Gfx_TwoTexScroll(play->state.gfx, G_TX_RENDERTILE, 0, 0, 32, 32, 1, play->gameplayFrames * 18, 0, 32, 32));
     gDPPipeSync(POLY_XLU_DISP++);
     gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 255, 255, 255, (u8)sOdolwaSwordTrailAlpha);
 
@@ -2547,7 +2547,7 @@ void Boss01_DrawSwordTrail(Actor_Boss01* this, PlayState* play) {
     Matrix_RotateZF(sOdolwaSwordTrailRotZ, MAT_MUL);
     Matrix_RotateYF(sOdolwaSwordTrailRotY, MAT_MUL);
 
-    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_XLU_DISP++, SEGADDR_ODOLWA_SWORD_TRAIL_DL);
 
     CLOSE_DISPS();
@@ -2764,7 +2764,7 @@ void Boss01_PostLimbDraw(PlayState* play2, s32 limbIndex, Gfx** dList, Vec3s* ro
     }
 
     if (limbIndex == ODOLWA_LIMB_HEAD) {
-        OPEN_DISPS(play->gs.gfx);
+        OPEN_DISPS(play->state.gfx);
 
         gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 255, 0, 0, 255);
         gDPSetEnvColor(POLY_XLU_DISP++, 255, 0, 0, 0);
@@ -2773,7 +2773,7 @@ void Boss01_PostLimbDraw(PlayState* play2, s32 limbIndex, Gfx** dList, Vec3s* ro
         Matrix_Translate(1470.0f, 400.0f, 450.0f, MAT_MUL);
         Matrix_Scale(0.35f, 0.35f, 0.35f, MAT_MUL);
         Matrix_ReplaceRotation(&play->billboardMtxF);
-        gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         gSPDisplayList(POLY_XLU_DISP++, SEGADDR_ODOLWA_EYE_DL);
         MatrixStackPop();
 
@@ -2781,7 +2781,7 @@ void Boss01_PostLimbDraw(PlayState* play2, s32 limbIndex, Gfx** dList, Vec3s* ro
         Matrix_Translate(1470.0f, -360.0f, 450.0f, MAT_MUL);
         Matrix_Scale(0.35f, 0.35f, 0.35f, MAT_MUL);
         Matrix_ReplaceRotation(&play->billboardMtxF);
-        gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         gSPDisplayList(POLY_XLU_DISP++, SEGADDR_ODOLWA_EYE_DL);
         MatrixStackPop();
 
@@ -2791,9 +2791,9 @@ void Boss01_PostLimbDraw(PlayState* play2, s32 limbIndex, Gfx** dList, Vec3s* ro
 
 void Boss01_Draw(Actor_Boss01* this, PlayState* play) {
     static Vec3f sDefaultPelvisColliderOffset = { 10000.0f, 10000.0f, 10000.0f };
-    u8* tex = GRAPH_ALLOC(play->gs.gfx, ODOLWA_SHADOW_TEX_SIZE);
+    u8* tex = GRAPH_ALLOC(play->state.gfx, ODOLWA_SHADOW_TEX_SIZE);
 
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
 
     // When Odolwa is performing a horizontal slash, an additional collider offset from his pelvis will sweep across the
     // floor and damage the player. However, this collider should not be present all the time, so it is offset very far
@@ -2801,8 +2801,8 @@ void Boss01_Draw(Actor_Boss01* this, PlayState* play) {
     // in this function) will offset it properly for this frame.
     Boss01_SetColliderSphere(ODOLWA_SWORD_COLLIDER_PELVIS, &this->swordCollider, &sDefaultPelvisColliderOffset);
 
-    Gfx_SetupDL25_Opa(play->gs.gfx);
-    Gfx_SetupDL25_Xlu(play->gs.gfx);
+    Gfx_SetupDL25_Opa(play->state.gfx);
+    Gfx_SetupDL25_Xlu(play->state.gfx);
 
     if ((this->damagedFlashTimer % 2) != 0) {
         POLY_OPA_DISP = Gfx_SetFog(POLY_OPA_DISP, 255, 0, 0, 255, 900, 1099);
@@ -2832,10 +2832,10 @@ void Boss01_Draw(Actor_Boss01* this, PlayState* play) {
 void Boss01_Afterimage_Draw(Actor_Boss01* this, PlayState* play) {
     Actor_Boss01* parent = (Actor_Boss01*)this->actor.parent;
 
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
 
-    Gfx_SetupDL25_Opa(play->gs.gfx);
-    Gfx_SetupDL25_Xlu(play->gs.gfx);
+    Gfx_SetupDL25_Opa(play->state.gfx);
+    Gfx_SetupDL25_Xlu(play->state.gfx);
     POLY_OPA_DISP = Gfx_SetFog(POLY_OPA_DISP, 50, 0, 40, 255, 900, 1099);
     SkelAnime_DrawFlexOpa(play, parent->skelAnime.skeleton, this->skelAnime.jointTable, parent->skelAnime.dListCount,
                           NULL, NULL, &this->actor);
@@ -3006,11 +3006,11 @@ void Boss01_GenShadowTex(u8* tex, Actor_Boss01* this, PlayState* play) {
  */
 void Boss01_DrawShadowTex(u8* tex, Actor_Boss01* this, PlayState* play) {
     f32 alpha;
-    GfxContext* gfxCtx = play->gs.gfx;
+    GraphicsContext* gfxCtx = play->state.gfx;
 
     OPEN_DISPS(gfxCtx);
 
-    Gfx_SetupDL25_Opa(play->gs.gfx);
+    Gfx_SetupDL25_Opa(play->state.gfx);
 
     alpha = (400.0f - this->actor.world.pos.y) * (1.0f / 400.0f);
     alpha = CLAMP_MIN(alpha, 0.0f);
@@ -3020,7 +3020,7 @@ void Boss01_DrawShadowTex(u8* tex, Actor_Boss01* this, PlayState* play) {
     gDPSetEnvColor(POLY_OPA_DISP++, 0, 0, 0, 0);
     Matrix_Translate(this->actor.world.pos.x, this->actor.floorHeight, this->actor.world.pos.z - 20.0f, MAT_SET);
     Matrix_Scale(1.65f, 1.0f, 1.65f, MAT_MUL);
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_OPA_DISP++, SEGADDR_ODOLWA_SHADOW_MATERIAL_DL);
     gDPLoadTextureBlock(POLY_OPA_DISP++, tex, G_IM_FMT_I, G_IM_SIZ_8b, ODOLWA_SHADOW_TEX_WIDTH,
                         ODOLWA_SHADOW_TEX_HEIGHT, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 6, 6,
@@ -3246,7 +3246,7 @@ s32 Boss01_Bug_OverrideLimbDraw(PlayState* play, s32 limbIndex, Gfx** dList, Vec
     }
 
     if (limbIndex == ODOLWA_BUG_LIMB_FRONT_RIGHT_UPPER_LEG) {
-        OPEN_DISPS(play->gs.gfx);
+        OPEN_DISPS(play->state.gfx);
 
         if (sOdolwa->actionFunc == Boss01_SummonBugsCutscene) {
             gSPDisplayList(POLY_OPA_DISP++, SEGADDR_ODOLWA_BUG_BRIGHT_LEG_MATERIAL_DL);
@@ -3261,9 +3261,9 @@ s32 Boss01_Bug_OverrideLimbDraw(PlayState* play, s32 limbIndex, Gfx** dList, Vec
 }
 
 void Boss01_Bug_Draw(Actor_Boss01* this, PlayState* play) {
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
 
-    Gfx_SetupDL25_Opa(play->gs.gfx);
+    Gfx_SetupDL25_Opa(play->state.gfx);
 
     if ((this->damagedFlashTimer % 2) != 0) {
         POLY_OPA_DISP = Gfx_SetFog(POLY_OPA_DISP, 255, 0, 0, 255, 900, 1099);
@@ -3418,10 +3418,10 @@ void Boss01_DrawEffects(PlayState* play) {
     f32 alpha;
     OdolwaEffect* effect = play->specialEffects;
 
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
 
-    Gfx_SetupDL25_Opa(play->gs.gfx);
-    Gfx_SetupDL25_Xlu(play->gs.gfx);
+    Gfx_SetupDL25_Opa(play->state.gfx);
+    Gfx_SetupDL25_Xlu(play->state.gfx);
 
     for (i = 1; i < ODOLWA_EFFECT_COUNT; i++, effect++) {
         if (effect->type == ODOLWA_EFFECT_FALLING_BLOCK) {
@@ -3429,25 +3429,25 @@ void Boss01_DrawEffects(PlayState* play) {
             Matrix_RotateYS(effect->rotY, MAT_MUL);
             Matrix_RotateXS(effect->rotX, MAT_MUL);
             Matrix_Scale(effect->scale, effect->scale, effect->scale, MAT_MUL);
-            gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+            gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             gSPDisplayList(POLY_OPA_DISP++, SEGADDR_ODOLWA_FALLING_BLOCK_DL);
         }
     }
 
     effect = play->specialEffects;
-    Gfx_SetupDL44_Xlu(play->gs.gfx);
+    Gfx_SetupDL44_Xlu(play->state.gfx);
     gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 0, 0, 0, 100);
 
     for (i = 1; i < ODOLWA_EFFECT_COUNT; i++, effect++) {
         if (effect->type == ODOLWA_EFFECT_FALLING_BLOCK) {
             Matrix_Translate(effect->pos.x, 0.0f, effect->pos.z, MAT_SET);
             Matrix_Scale(effect->scale * 50.0f, 1.0f, effect->scale * 50.0f, MAT_MUL);
-            gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+            gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             gSPDisplayList(POLY_XLU_DISP++, SEGADDR_CIRCLE_SHADOW_DL); // gCircleShadowDL in gameplay_keep
         }
     }
 
-    Gfx_SetupDL25_Xlu(play->gs.gfx);
+    Gfx_SetupDL25_Xlu(play->state.gfx);
     effect = play->specialEffects;
     Boss01_InitRand(1, 0x71A5, 0x263A);
 
@@ -3464,7 +3464,7 @@ void Boss01_DrawEffects(PlayState* play) {
 
             gDPSetPrimColor(POLY_XLU_DISP++, 0x80, 0x80, 255, 255, 0, (u8)alpha);
             gSPSegment(POLY_XLU_DISP++, 0x08,
-                       Gfx_TwoTexScroll(play->gs.gfx, G_TX_RENDERTILE, 0, 0, 32, 64, 1, 0,
+                       Gfx_TwoTexScroll(play->state.gfx, G_TX_RENDERTILE, 0, 0, 32, 64, 1, 0,
                                         ((effect->timer + (i * 10)) * -20) & 0x1FF, 32, 128));
 
             Matrix_RotateYF(i * (M_PIf / 16), MAT_MUL);
@@ -3478,7 +3478,7 @@ void Boss01_DrawEffects(PlayState* play) {
                          ((0.007f + KREG(54) * 0.0001f) + (Boss01_RandZeroOne() * 30.0f * 0.0001f)) * effect->scale,
                          1.0f, MAT_MUL);
 
-            gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+            gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             gSPDisplayList(POLY_XLU_DISP++, SEGADDR_FROM_OFFSET(4, 0x7D590)); // gEffFire1DL in gameplay_keep
             MatrixStackPop();
         }

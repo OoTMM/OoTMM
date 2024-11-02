@@ -300,10 +300,10 @@ void ArrowCycle_Handle(Actor_Player* link, PlayState* play)
         return;
     }
 
-    if (!(play->gs.input[0].pressed.buttons & R_TRIG))
+    if (!(play->state.input[0].pressed.buttons & R_TRIG))
         return;
 
-    play->gs.input[0].pressed.buttons &= ~R_TRIG;
+    play->state.input[0].pressed.buttons &= ~R_TRIG;
 
     /* get the various infos */
     curInfo = GetArrowInfo(arrow->params);

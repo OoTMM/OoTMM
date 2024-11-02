@@ -43,7 +43,7 @@ static void DemoEffect_DrawSapphireInJabu(Actor* this, PlayState* play)
     float angle;
 
     DemoEffect_SapphireItemOverride(&o);
-    angle = (play->gs.frameCount % kRotDivisor) * (1.f / kRotDivisor) * M_PI * 2.f;
+    angle = (play->state.frameCount % kRotDivisor) * (1.f / kRotDivisor) * M_PI * 2.f;
 
     Matrix_Translate(this->world.pos.x, this->world.pos.y, this->world.pos.z, MAT_SET);
     Matrix_Scale(0.35f, 0.35f, 0.35f, MAT_MUL);

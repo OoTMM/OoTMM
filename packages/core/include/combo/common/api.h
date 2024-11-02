@@ -187,7 +187,7 @@ void Matrix_Translate(float tx, float ty, float tz, int mode);
 void Matrix_Scale(float sx, float sy, float sz, int mode);
 void ModelViewMult(MtxF* mf, s32 mode);
 void Matrix_SetTranslateRotateYXZ(f32 translateX, f32 translateY, f32 translateZ, Vec3s* rot);
-Mtx* Matrix_Finalize(GfxContext* gfxCtx);
+Mtx* Matrix_Finalize(GraphicsContext* gfxCtx);
 void MatrixStackDup(void);
 void MatrixStackPop(void);
 void Matrix_MultVec3f(Vec3f* src, Vec3f* dest);
@@ -553,10 +553,10 @@ void SoundSource_UpdateAll(PlayState* play);
 void SoundSource_PlaySfxAtFixedWorldPos(PlayState* play, Vec3f* worldPos, u32 duration, u16 sfxId);
 void SoundSource_PlaySfxEachFrameAtFixedWorldPos(PlayState* play, Vec3f* worldPos, u32 duration, u16 sfxId);
 
-Gfx* Gfx_TwoTexScroll(GfxContext* gfxCtx, s32 tile1, u32 x1, u32 y1, s32 width1, s32 height1, s32 tile2, u32 x2, u32 y2, s32 width2, s32 height2);
+Gfx* Gfx_TwoTexScroll(GraphicsContext* gfxCtx, s32 tile1, u32 x1, u32 y1, s32 width1, s32 height1, s32 tile2, u32 x2, u32 y2, s32 width2, s32 height2);
 Gfx* Gfx_SetFog(Gfx* gfx, s32 r, s32 g, s32 b, s32 a, s32 n, s32 f);
-void Gfx_SetupDL25_Xlu(GfxContext* gfxCtx);
-void Gfx_SetupDL44_Xlu(GfxContext* gfxCtx);
+void Gfx_SetupDL25_Xlu(GraphicsContext* gfxCtx);
+void Gfx_SetupDL44_Xlu(GraphicsContext* gfxCtx);
 Gfx* Gfx_SetupDL71(Gfx* gfx);
 Gfx* Gfx_SetupDL72(Gfx* gfx);
 

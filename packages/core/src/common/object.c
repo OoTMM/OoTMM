@@ -471,7 +471,7 @@ static void comboActorSetObjectSegmentWithRSP(PlayState* play, Actor* actor)
 {
     comboActorSetObjectSegment(play, actor);
 
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
     gSPSegment(POLY_OPA_DISP++, 0x06, gSegments[6] + 0x80000000);
     gSPSegment(POLY_XLU_DISP++, 0x06, gSegments[6] + 0x80000000);
     CLOSE_DISPS();

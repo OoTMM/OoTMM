@@ -120,7 +120,7 @@ void EnMag_Update(Actor_EnMag* this, PlayState* play)
     {
         if (this->globalState < MAG_STATE_DISPLAY)
         {
-            if (CHECK_BTN_ALL(play->gs.input[0].pressed.buttons, START_BUTTON) || CHECK_BTN_ALL(play->gs.input[0].pressed.buttons, A_BUTTON) || CHECK_BTN_ALL(play->gs.input[0].pressed.buttons, B_BUTTON))
+            if (CHECK_BTN_ALL(play->state.input[0].pressed.buttons, START_BUTTON) || CHECK_BTN_ALL(play->state.input[0].pressed.buttons, A_BUTTON) || CHECK_BTN_ALL(play->state.input[0].pressed.buttons, B_BUTTON))
             {
                 PlaySound(NA_SE_SY_PIECE_OF_HEART);
 
@@ -147,9 +147,9 @@ void EnMag_Update(Actor_EnMag* this, PlayState* play)
         {
             if (sDelayTimer == 0)
             {
-                if (CHECK_BTN_ALL(play->gs.input[0].pressed.buttons, START_BUTTON) ||
-                    CHECK_BTN_ALL(play->gs.input[0].pressed.buttons, A_BUTTON) ||
-                    CHECK_BTN_ALL(play->gs.input[0].pressed.buttons, B_BUTTON))
+                if (CHECK_BTN_ALL(play->state.input[0].pressed.buttons, START_BUTTON) ||
+                    CHECK_BTN_ALL(play->state.input[0].pressed.buttons, A_BUTTON) ||
+                    CHECK_BTN_ALL(play->state.input[0].pressed.buttons, B_BUTTON))
                 {
                     if (play->transitionTrigger != TRANS_TRIGGER_NORMAL)
                     {
@@ -772,7 +772,7 @@ void EnMag_Draw(Actor_EnMag* this, PlayState* play)
         return;
     this->mmMagData = mmMag;
 
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
 
     gfxRef = POLY_OPA_DISP;
     gfx = Gfx_Open(gfxRef);

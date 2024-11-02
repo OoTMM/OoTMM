@@ -658,7 +658,7 @@ void Play_UpdateWrapper(PlayState* play)
     Actor_Player* link;
     /* Auto-press A during credits */
     if (g.isCredits)
-        play->gs.input[0].pressed.buttons = (play->gs.frameCount & 1) ? A_BUTTON : 0;
+        play->state.input[0].pressed.buttons = (play->state.frameCount & 1) ? A_BUTTON : 0;
 
     comboMenuTick();
     Debug_Input();

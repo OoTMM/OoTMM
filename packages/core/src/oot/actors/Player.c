@@ -91,7 +91,7 @@ static int prepareMask(PlayState* play, u16 objectId, int needsMatrix)
     if (!obj)
         return 0;
 
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
     if (needsMatrix)
         gSPMatrix(POLY_OPA_DISP++, 0x0d0001c0, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPSegment(POLY_OPA_DISP++, 0x0a, obj);
@@ -104,7 +104,7 @@ static void DrawExtendedMaskKeaton(PlayState* play, Actor_Player* link)
 {
     if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_KEATON, 1))
         return;
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
     gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_MASK_OOT_KEATON_0);
     CLOSE_DISPS();
 }
@@ -113,7 +113,7 @@ static void DrawExtendedMaskSkull(PlayState* play, Actor_Player* link)
 {
     if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_SKULL, 1))
         return;
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
     gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_MASK_OOT_SKULL_0);
     CLOSE_DISPS();
 }
@@ -122,7 +122,7 @@ static void DrawExtendedMaskSpooky(PlayState* play, Actor_Player* link)
 {
     if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_SPOOKY, 1))
         return;
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
     gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_MASK_OOT_SPOOKY_0);
     CLOSE_DISPS();
 }
@@ -132,7 +132,7 @@ static void DrawExtendedMaskBunny(PlayState* play, Actor_Player* link)
     if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_BUNNY, 0))
         return;
 
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
     gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_MASK_OOT_BUNNY_0);
     CLOSE_DISPS();
 }
@@ -141,7 +141,7 @@ static void DrawExtendedMaskGoron(PlayState* play, Actor_Player* link)
 {
     if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_GORON, 1))
         return;
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
     gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_MASK_OOT_GORON_0);
     CLOSE_DISPS();
 }
@@ -150,7 +150,7 @@ static void DrawExtendedMaskZora(PlayState* play, Actor_Player* link)
 {
     if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_ZORA, 1))
         return;
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
     gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_MASK_OOT_ZORA_0);
     CLOSE_DISPS();
 }
@@ -159,7 +159,7 @@ static void DrawExtendedMaskGerudo(PlayState* play, Actor_Player* link)
 {
     if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_GERUDO, 1))
         return;
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
     gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_MASK_OOT_GERUDO_0);
     CLOSE_DISPS();
 }
@@ -168,7 +168,7 @@ static void DrawExtendedMaskTruth(PlayState* play, Actor_Player* link)
 {
     if (!prepareMask(play, CUSTOM_OBJECT_ID_MASK_OOT_TRUTH, 1))
         return;
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
     gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_MASK_OOT_TRUTH_0);
     CLOSE_DISPS();
 }
@@ -184,7 +184,7 @@ static void DrawExtendedMaskBlast(PlayState* play, Actor_Player* link)
     else
         opacity = 0xff - (gBlastMaskDelayAcc * 0x0f);
 
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
     gSPSegment(POLY_OPA_DISP++, 0x09, kDListEmpty);
 
     if (opacity)
@@ -206,7 +206,7 @@ static void DrawExtendedMaskStone(PlayState* play, Actor_Player* link)
     if (!prepareMask(play, 0x24e | MASK_FOREIGN_OBJECT, 1))
         return;
 
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
     gSPDisplayList(POLY_OPA_DISP++, 0x0a000820);
     CLOSE_DISPS();
 }
@@ -401,7 +401,7 @@ void Player_DrawDekuStick(void)
     if (!obj)
         return;
 
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
     gSPSegment(POLY_OPA_DISP++, 0x0a, obj);
     gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_EQ_DEKU_STICK_0);
     CLOSE_DISPS();
@@ -435,7 +435,7 @@ static void* Player_CustomHandEq(u32 handDlist, void* eqData, u32 eqDlist)
 
     if (!eqData) return (void*)kDListEmpty;
 
-    d = dlist = GRAPH_ALLOC(gPlay->gs.gfx, sizeof(Gfx) * 3);
+    d = dlist = GRAPH_ALLOC(gPlay->state.gfx, sizeof(Gfx) * 3);
     gSPDisplayList(d++, handDlist);
     gSPSegment(d++, 0x0a, eqData);
     gSPBranchList(d++, eqDlist);
@@ -456,7 +456,7 @@ static void* Player_CustomEq(void* eqData, u32 eqDlist)
 
     if (!eqData) return (void*)kDListEmpty;
 
-    d = dlist = GRAPH_ALLOC(gPlay->gs.gfx, sizeof(Gfx) * 2);
+    d = dlist = GRAPH_ALLOC(gPlay->state.gfx, sizeof(Gfx) * 2);
     gSPSegment(d++, 0x0a, eqData);
     gSPBranchList(d++, eqDlist);
 
@@ -475,7 +475,7 @@ static void* Player_CustomPair(void* a, void* b)
     Gfx* dlist;
     Gfx* d;
 
-    d = dlist = GRAPH_ALLOC(gPlay->gs.gfx, sizeof(Gfx) * 2);
+    d = dlist = GRAPH_ALLOC(gPlay->state.gfx, sizeof(Gfx) * 2);
     gSPDisplayList(d++, dlistOrNothing(a));
     gSPBranchList(d++, dlistOrNothing(b));
 
@@ -576,7 +576,7 @@ static void fixTunicColoLimb(PlayState* play, int limb)
     cr = kColors[index * 3 + 0];
     cg = kColors[index * 3 + 1];
     cb = kColors[index * 3 + 2];
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
     gDPSetEnvColor(POLY_OPA_DISP++, cr, cg, cb, 0xff);
     CLOSE_DISPS();
 }
@@ -783,7 +783,7 @@ void Player_DrawFlexLod(PlayState* play, void** skeleton, Vec3s* jointTable, s32
 
         if (bootsData)
         {
-            OPEN_DISPS(play->gs.gfx);
+            OPEN_DISPS(play->state.gfx);
             gSPSegment(POLY_OPA_DISP++, 0x0a, bootsData);
             gSPDisplayList(POLY_OPA_DISP++, bootsList);
             gSPDisplayList(POLY_OPA_DISP++, bootsList2);
@@ -793,7 +793,7 @@ void Player_DrawFlexLod(PlayState* play, void** skeleton, Vec3s* jointTable, s32
         if (Config_Flag(CFG_OOT_AGELESS_STRENGTH) && gSave.inventory.upgrades.strength > 1)
         {
             c = &sGauntletColors[gSave.inventory.upgrades.strength > 2 ? 1 : 0];
-            OPEN_DISPS(play->gs.gfx);
+            OPEN_DISPS(play->state.gfx);
             gDPPipeSync(POLY_OPA_DISP++);
             gDPSetEnvColor(POLY_OPA_DISP++, c->r, c->g, c->b, 0);
             CLOSE_DISPS();

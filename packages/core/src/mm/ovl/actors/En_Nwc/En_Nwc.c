@@ -490,12 +490,12 @@ void EnNwc_Draw(Actor_EnNwc* this, PlayState* play)
     void* eyeTextures[] = { SEGADDR_NWC_OPEN_EYES, SEGADDR_NWC_CLOSED_EYES };
     Gfx* gfx;
 
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
 
-    Gfx_SetupDL25_Opa(play->gs.gfx);
+    Gfx_SetupDL25_Opa(play->state.gfx);
     gfx = POLY_OPA_DISP;
     gSPSegment(&gfx[0], 0x08, Lib_SegmentedToVirtual(eyeTextures[this->blinkState]));
-    gSPMatrix(&gfx[1], GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(&gfx[1], GetMatrixMV(play->state.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(&gfx[2], SEGADDR_NWC_BODY_DL);
     POLY_OPA_DISP = &gfx[3];
 
@@ -517,7 +517,7 @@ s32 EnNwc_OverrideLimbDraw(PlayState* play, s32 limbIndex, Gfx** dList, Vec3f* p
 
 void EnNwc_DrawAdultBody(Actor_EnNwc* this, PlayState* play)
 {
-    Gfx_SetupDL25_Opa(play->gs.gfx);
+    Gfx_SetupDL25_Opa(play->state.gfx);
     SkelAnime_DrawFlexOpa(play, this->niwSkeleton.skeleton, this->niwSkeleton.jointTable, this->niwSkeleton.dListCount,
                           EnNwc_OverrideLimbDraw, NULL, &this->actor);
 }

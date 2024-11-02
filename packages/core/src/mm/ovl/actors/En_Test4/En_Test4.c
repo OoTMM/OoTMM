@@ -319,8 +319,8 @@ void EnTest4_Init(Actor_EnTest4* this, PlayState* play)
             {
                 gMmSave.time = CLOCK_TIME(6, 0);
                 gSaveContext.gameMode = GAMEMODE_NORMAL;
-                STOP_GAMESTATE(&play->gs);
-                SET_NEXT_GAMESTATE(&play->gs, DayTelop_Init, sizeof(DayTelopState));
+                STOP_GAMESTATE(&play->state);
+                SET_NEXT_GAMESTATE(&play->state, DayTelop_Init, sizeof(DayTelopState));
                 this->daytimeIndex = THREEDAY_DAYTIME_DAY;
                 gMmSave.time = CLOCK_TIME(6, 0);
                 Actor_Kill(&this->actor);

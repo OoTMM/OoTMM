@@ -456,7 +456,7 @@ static void processMessagesSendPlayerPos(PlayState* play, NetContext* net)
 
     msg = &net->msgBuffer[index];
     msg->op = NETMSG_PLAYER_POS;
-    msg->playerPos.frameCount = play->gs.frameCount;
+    msg->playerPos.frameCount = play->state.frameCount;
     msg->playerPos.sceneKey = play->sceneId;
 #if defined(GAME_MM)
     msg->playerPos.sceneKey |= 0x8000;
@@ -540,7 +540,7 @@ static void processMessageIn(PlayState* play, NetContext* net, NetMsg* msg, u16 
 static void Multi_ProcessMessages(PlayState* play, NetContext* net)
 {
     /* Send pos */
-    if ((play->gs.frameCount & 3) == 0)
+    if ((play->state.frameCount & 3) == 0)
         processMessagesSendPlayerPos(play, net);
 
     /* Decrement wisps ttl */
@@ -575,7 +575,7 @@ static const u32 kWispColors[] = {
 
 static void drawSingleWisp(PlayState* play, const PlayerWisp* wisp)
 {
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
     Matrix_Translate(wisp->pos.x, wisp->pos.y, wisp->pos.z, MAT_SET);
     Gfx_DrawFlameColor(play, kWispColors[wisp->clientId & 0xf], 0.35f, -50.0f);
     CLOSE_DISPS();
@@ -586,7 +586,7 @@ void Multi_DrawWisps(PlayState* play)
     if (!Config_Flag(CFG_MULTIPLAYER))
         return;
 
-    Gfx_SetupDL25_Xlu(play->gs.gfx);
+    Gfx_SetupDL25_Xlu(play->state.gfx);
     for (int i = 0; i < ARRAY_SIZE(sPlayerWisps); ++i)
     {
         if (sPlayerWisps[i].ttl)

@@ -247,7 +247,7 @@ void EnYb_Disappear(Actor_EnYb* this, PlayState* play) {
 
 void EnYb_SetupLeaving(Actor_EnYb* this, PlayState* play) {
     EnYb_UpdateAnimation(this, play);
-    if (Actor_TalkOfferAccepted(&this->actor, &play->gs)) {
+    if (Actor_TalkOfferAccepted(&this->actor, &play->state)) {
         this->actor.flags &= ~ACTOR_FLAG_MM_10000;
         this->actionFunc = EnYb_Talk;
         // I am counting on you
@@ -316,7 +316,7 @@ void EnYb_Talk(Actor_EnYb* this, PlayState* play) {
 
 void EnYb_TeachingDanceFinish(Actor_EnYb* this, PlayState* play) {
     EnYb_UpdateAnimation(this, play);
-    if (Actor_TalkOfferAccepted(&this->actor, &play->gs)) {
+    if (Actor_TalkOfferAccepted(&this->actor, &play->state)) {
         this->actionFunc = EnYb_Talk;
         // Spread my dance across the world
         PlayerDisplayTextBox(play, 0x147C, &this->actor);
@@ -352,7 +352,7 @@ void EnYb_Idle(Actor_EnYb* this, PlayState* play) {
         this->actionFunc = EnYb_TeachingDance;
         this->teachingCutsceneTimer = 0;
         EnYb_ChangeCutscene(this, 0);
-    } else if (Actor_TalkOfferAccepted(&this->actor, &play->gs)) {
+    } else if (Actor_TalkOfferAccepted(&this->actor, &play->state)) {
         func_80BFA2FC(play);
         this->actionFunc = EnYb_Talk;
         if (player->currentMask == PLAYER_MASK_KAMARO) {
@@ -440,7 +440,7 @@ void EnYb_PostLimbDrawXlu(PlayState* play, s32 limbIndex, Gfx** dList, Vec3s* ro
 
 void EnYb_Draw(Actor* this, PlayState* play) {
     Actor_EnYb* thisx = (Actor_EnYb*)this;
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
 
     if (thisx->alpha != 0) {
         if (thisx->alpha < 255) {
@@ -458,7 +458,7 @@ void EnYb_Draw(Actor* this, PlayState* play) {
                                    thisx->skelAnime.dListCount, NULL, EnYb_PostLimbDrawXlu, &thisx->actor, POLY_XLU_DISP);
 
         } else {
-            Gfx_SetupDL25_Opa(play->gs.gfx);
+            Gfx_SetupDL25_Opa(play->state.gfx);
             Scene_SetRenderModeXlu(play, 0, 1);
             SkelAnime_DrawFlexOpa(play, thisx->skelAnime.skeleton, thisx->skelAnime.jointTable,
                                   thisx->skelAnime.dListCount, NULL, EnYb_PostLimbDrawOpa, &thisx->actor);

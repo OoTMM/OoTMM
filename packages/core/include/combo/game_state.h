@@ -23,7 +23,7 @@ ControllerInput;
 
 typedef struct PACKED ALIGNED(4)
 {
-    GfxContext*             gfx;
+    GraphicsContext*             gfx;
     char                    unk_4[0x4];
     void*                   destroy;
     void*                   nextGameStateInit;

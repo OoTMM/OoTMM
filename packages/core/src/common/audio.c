@@ -299,7 +299,7 @@ static const float kScaleInv = 1.0f / kScale;
 
 static void drawChar(int x, int y, char c)
 {
-    OPEN_DISPS(gPlay->gs.gfx);
+    OPEN_DISPS(gPlay->state.gfx);
     gSPSegment(POLY_OPA_DISP++, 0x09, (char*)g.customKeep + CUSTOM_KEEP_FONT + ((c - ' ') * 0x30));
     gSPDisplayList(POLY_OPA_DISP++, kDlistLoadIA4_8x12);
     gSPTextureRectangle(
@@ -333,12 +333,12 @@ static void drawStr(int x, int y, const char* str)
 static void Audio_DrawMusicName(PlayState* play)
 {
     u8 alpha;
-    GfxContext* ctx;
+    GraphicsContext* ctx;
     Gfx* opaOriginal;
     Gfx* opaTarget;
     Gfx* opaNew;
 
-    ctx = gPlay->gs.gfx;
+    ctx = gPlay->state.gfx;
     opaOriginal = ctx->polyOpa.append;
     ctx->polyOpa.append++;
     opaTarget = ctx->polyOpa.append;
@@ -348,7 +348,7 @@ static void Audio_DrawMusicName(PlayState* play)
     else
         alpha = sAudioNameTTL * 0x19;
 
-    OPEN_DISPS(gPlay->gs.gfx);
+    OPEN_DISPS(gPlay->state.gfx);
     gDPPipeSync(POLY_OPA_DISP++);
     gDPSetCycleType(POLY_OPA_DISP++, G_CYC_1CYCLE);
     gDPSetRenderMode(POLY_OPA_DISP++, G_RM_XLU_SURF, G_RM_XLU_SURF2);

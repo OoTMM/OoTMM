@@ -791,9 +791,9 @@ void func_80A292A8(Actor_EnBigpamet* this, PlayState* play) {
     Actor_EnBigpametStruct* ptr;
 
     if (this->unk_2A2 > 0) {
-        OPEN_DISPS(play->gs.gfx);
+        OPEN_DISPS(play->state.gfx);
 
-        Gfx_SetupDL25_Opa(play->gs.gfx);
+        Gfx_SetupDL25_Opa(play->state.gfx);
 
         gDPSetPrimColor(POLY_OPA_DISP++, 0, 0x80, 255, 255, 255, 255);
         gDPSetEnvColor(POLY_OPA_DISP++, 255, 255, 255, 255);
@@ -802,7 +802,7 @@ void func_80A292A8(Actor_EnBigpamet* this, PlayState* play) {
             Matrix_SetTranslateRotateYXZ(ptr->unk_00.x, ptr->unk_00.y, ptr->unk_00.z, &ptr->unk_18);
             Matrix_Scale(ptr->unk_20, ptr->unk_20, ptr->unk_20, MAT_MUL);
 
-            MATRIX_FINALIZE_AND_LOAD(POLY_OPA_DISP++, play->gs.gfx);
+            MATRIX_FINALIZE_AND_LOAD(POLY_OPA_DISP++, play->state.gfx);
             gSPDisplayList(POLY_OPA_DISP++, gameplay_keep_DL_06AB30);
         }
 
@@ -829,9 +829,9 @@ void EnBigpamet_PostLimbDraw2(PlayState* play, s32 limbIndex, Gfx** dList, Vec3s
 }
 
 void EnBigpamet_Draw(Actor_EnBigpamet* this, PlayState* play) {
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
 
-    Gfx_SetupDL25_Opa(play->gs.gfx);
+    Gfx_SetupDL25_Opa(play->state.gfx);
 
     gSPSegment(POLY_OPA_DISP++, 0x08, SnapperEyeTextures[this->unk_29C]);
 
@@ -866,7 +866,7 @@ void EnBigpamet_PostLimbDraw1(PlayState* play, s32 limbIndex, Gfx** dList, Vec3s
 }
 
 void func_80A2966C(Actor_EnBigpamet* this, PlayState* play) {
-    Gfx_SetupDL25_Opa(play->gs.gfx);
+    Gfx_SetupDL25_Opa(play->state.gfx);
     SkelAnime_DrawFlexOpa(play, this->spikedSnapperSkelAnime.skeleton, this->spikedSnapperSkelAnime.jointTable,
                           this->spikedSnapperSkelAnime.dListCount, EnBigpamet_OverrideLimbDraw1,
                           EnBigpamet_PostLimbDraw1, &this->actor);

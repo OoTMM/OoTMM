@@ -621,7 +621,7 @@ void Actor_DrawFaroresWindPointer(PlayState* play)
     s32 lightRadius = -1;
     s32 params;
 
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
 
     params = gSaveContext.respawn[RESPAWN_MODE_HUMAN].data;
 
@@ -798,14 +798,14 @@ void Actor_DrawFaroresWindPointer(PlayState* play)
             gDPSetEnvColor(POLY_XLU_DISP++, 100, 200, 0, 255);
 
             Matrix_RotateZ(BINANG_TO_RAD_ALT2((play->gameplayFrames * 1500) & 0xFFFF), MAT_MUL);
-            gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx),
+            gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfx),
                       G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
             gSPDisplayList(POLY_XLU_DISP++, 0x04000000 | 0x23210); /* gEffFlash1DL */
 
             MatrixStackPop();
             Matrix_RotateZ(BINANG_TO_RAD_ALT2(~((play->gameplayFrames * 1200) & 0xFFFF)), MAT_MUL);
 
-            gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx),
+            gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfx),
                       G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
             gSPDisplayList(POLY_XLU_DISP++, 0x04000000 | 0x23210); /* gEffFlash1DL */
 

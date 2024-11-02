@@ -139,7 +139,7 @@ void csmcChestPreDraw(Actor* this, PlayState* play, s16 gi)
     listFront = csmcLoadTexture(kCsmcData[type].custom, kCsmcData[type].segFront, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 1);
     listSide = csmcLoadTexture(kCsmcData[type].custom, kCsmcData[type].segSide, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 1);
 
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
     gSPSegment(POLY_OPA_DISP++, 0x0a, listFront);
     gSPSegment(POLY_OPA_DISP++, 0x0b, listSide);
     gSPSegment(POLY_XLU_DISP++, 0x0a, listFront);

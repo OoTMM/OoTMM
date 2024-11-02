@@ -3,7 +3,7 @@
 
 #include <combo/types.h>
 
-typedef struct PACKED ALIGNED(4) GfxContext
+typedef struct PACKED ALIGNED(4) GraphicsContext
 {
     char                unk_000[0x1b4];
     DisplayListBuffer   work;
@@ -15,8 +15,8 @@ typedef struct PACKED ALIGNED(4) GfxContext
     char                unk_2dc[0x14];
     PlayState*     play;
 }
-GfxContext;
+GraphicsContext;
 
-_Static_assert(sizeof(GfxContext) == 0x2f4, "GfxContext is not the correct size");
+_Static_assert(sizeof(GraphicsContext) == 0x2f4, "GraphicsContext is not the correct size");
 
 #endif

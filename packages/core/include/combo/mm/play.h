@@ -437,20 +437,20 @@ _Static_assert(sizeof(DayTelopState) == 0x248, "MM DayTelopState Size is wrong")
 
 typedef struct PlayState
 {
-    GameState           gs;
+    GameState           state;
     u16                 sceneId;
-    /* 0x000A6 */ u8 sceneConfig;
-    /* 0x000A7 */ char unk_A7[0x9];
-    /* 0x000B0 */ void* sceneSegment;
-    /* 0x000B4 */ char unk_B4[0x4];
-    /* 0x000B8 */ View view;
-    /* 0x00220 */ Camera mainCamera;
-    /* 0x00398 */ Camera subCameras[3]; /* NUM_CAMS - CAM_ID_SUB_FIRST */
-    /* 0x00800 */ Camera* cameraPtrs[4]; /* NUM_CAMS */
-    /* 0x00810 */ s16 activeCamId;
-    /* 0x00812 */ s16 nextCamera;
-    /* 0x00814 */ SequenceContext sequenceCtx;
-    /* 0x00818 */ LightContext lightCtx;
+    u8                  sceneConfig;
+    char                unk_A7[0x9];
+    void*               sceneSegment;
+    char                unk_B4[0x4];
+    View                view;
+    Camera              mainCamera;
+    Camera              subCameras[3];
+    Camera*             cameraPtrs[4];
+    s16                 activeCamId;
+    s16                 nextCamera;
+    SequenceContext     sequenceCtx;
+    LightContext        lightCtx;
     char                unk_00828[0x08];
     CollisionContext    colCtx;
     ActorContext        actorCtx;

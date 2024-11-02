@@ -150,7 +150,7 @@ void DoorWarp1_AfterDraw(Actor* this, PlayState* play)
         return;
     gi = DoorWarp1_GetGI(data);
 
-    angle = (play->gs.frameCount % kRotDivisor) * (1.f / kRotDivisor) * M_PI * 2.f;
+    angle = (play->state.frameCount % kRotDivisor) * (1.f / kRotDivisor) * M_PI * 2.f;
     Matrix_Translate(this->world.pos.x, this->world.pos.y + 35.f, this->world.pos.z, MAT_SET);
     Matrix_Scale(0.35f, 0.35f, 0.35f, MAT_MUL);
     Matrix_RotateY(angle, MAT_MUL);

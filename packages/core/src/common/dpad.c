@@ -136,7 +136,7 @@ void Dpad_Draw(PlayState* play)
 #endif
 
     /* Init */
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
     gDPPipeSync(OVERLAY_DISP++);
     gSPSegment(OVERLAY_DISP++, 0x06, g.customKeep);
     gSPSegment(OVERLAY_DISP++, 0x07, sDpadIconBuffer);
@@ -217,7 +217,7 @@ int Dpad_Use(PlayState* play, int flags)
         return 0;
 
     /* Detect button press */
-    buttons = play->gs.input[0].pressed.buttons;
+    buttons = play->state.input[0].pressed.buttons;
     if (buttons & U_JPAD)
     {
         dpadUseItem(play, DPAD_UP, flags);

@@ -41,10 +41,10 @@ static void EnHitTag_DrawGlitter(Actor_EnHitTag* this, PlayState* play)
         gi = giList[0];
         break;
     case 2:
-        gi = giList[(play->gs.frameCount % 12) / 6];
+        gi = giList[(play->state.frameCount % 12) / 6];
         break;
     case 3:
-        gi = giList[(play->gs.frameCount % 12) / 4];
+        gi = giList[(play->state.frameCount % 12) / 4];
         break;
     default:
         UNREACHABLE();

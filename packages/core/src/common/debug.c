@@ -101,7 +101,7 @@ static void debugDrawChar(int x, int y, char c)
     x = DEBUG_X + (x * 8);
     y = DEBUG_Y + (y * 12);
 
-    OPEN_DISPS(gPlay->gs.gfx);
+    OPEN_DISPS(gPlay->state.gfx);
     gSPSegment(POLY_OPA_DISP++, 0x09, (char*)g.customKeep + CUSTOM_KEEP_FONT + ((c - ' ') * 0x30));
     gSPDisplayList(POLY_OPA_DISP++, kDlistLoadIA4_8x12);
     gSPTextureRectangle(
@@ -451,7 +451,7 @@ void Debug_Input(void)
 {
     ControllerInput* src;
 
-    src = &gPlay->gs.input[0];
+    src = &gPlay->state.input[0];
     memcpy(&sInput, src, sizeof(ControllerInput));
     if (sDebugPage != DEBUGMENU_PAGE_NONE)
         bzero(src, sizeof(ControllerInput));
@@ -754,7 +754,7 @@ static void debugApplyCheats(void)
 
 void Debug_Update(void)
 {
-    GfxContext* ctx;
+    GraphicsContext* ctx;
     Gfx* opaOriginal;
     Gfx* opaTarget;
     Gfx* opaNew;
@@ -763,12 +763,12 @@ void Debug_Update(void)
 
     if (sDebugPage)
     {
-        ctx = gPlay->gs.gfx;
+        ctx = gPlay->state.gfx;
         opaOriginal = ctx->polyOpa.append;
         ctx->polyOpa.append++;
         opaTarget = ctx->polyOpa.append;
 
-        OPEN_DISPS(gPlay->gs.gfx);
+        OPEN_DISPS(gPlay->state.gfx);
         gDPSetRenderMode(POLY_OPA_DISP++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
         gDPSetCombineMode(POLY_OPA_DISP++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
         gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0, 0, 0, 0xc0);

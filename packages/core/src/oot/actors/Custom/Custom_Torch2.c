@@ -174,7 +174,7 @@ void EnTorch2_Draw(Actor_CustomEnTorch2 *this, PlayState *play)
         gsSPEndDisplayList(),
     };
 
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
 
     if (this->alpha == 255)
     {

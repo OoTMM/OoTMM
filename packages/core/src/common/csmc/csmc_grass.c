@@ -83,7 +83,7 @@ void csmcGrassPreDraw(PlayState* play, s16 gi, int def, int alt, int direct)
     id = csmcGrassId(gi, def);
     list = csmcLoadTextureEx(&dlists[id]);
 
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
     if (direct)
     {
         gSPDisplayList(POLY_OPA_DISP++, list);

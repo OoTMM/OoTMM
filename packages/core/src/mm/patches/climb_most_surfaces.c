@@ -13,7 +13,7 @@ u32 Player_GetCollisionType(Actor_Player* link, PlayState* ctxt, u32 collisionTy
         return 8;
     }
 
-    u32 currentClimbFrame = ctxt->gs.frameCount;
+    u32 currentClimbFrame = ctxt->state.frameCount;
 
     if (currentClimbFrame == lastClimbFrame + 1) {
         startClimbingTimer--;

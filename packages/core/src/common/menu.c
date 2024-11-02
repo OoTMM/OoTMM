@@ -470,7 +470,7 @@ static void drawBackground(PlayState* play, float x, float y, float w, float h)
         v[i].v.cn[3] = 0xff;
     }
 
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
     gDPPipeSync(POLY_OPA_DISP++);
     gSPVertex(POLY_OPA_DISP++, (u32)v & 0xffffffff, 4, 0);
     gSP2Triangles(
@@ -525,7 +525,7 @@ static void drawTexIA4_8x12(PlayState* play, const void* texPtr, float x, float 
         v[i].v.cn[3] = 0xff;
     }
 
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
     gSPSegment(POLY_OPA_DISP++, SEG1, v);
     gSPSegment(POLY_OPA_DISP++, SEG2, texPtr);
     gSPDisplayList(POLY_OPA_DISP++, (u32)kDlistQuadIA4_8x12 & 0xffffff);
@@ -576,7 +576,7 @@ static void drawTexRGBA16_12x12(PlayState* play, const void* texPtr, float x, fl
         v[i].v.cn[3] = 0xff;
     }
 
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
     gSPSegment(POLY_OPA_DISP++, SEG1, v);
     gSPSegment(POLY_OPA_DISP++, SEG2, texPtr);
     gSPDisplayList(POLY_OPA_DISP++, (u32)kDlistQuadRGBA16_12x12 & 0xffffff);
@@ -671,7 +671,7 @@ static void printNumColored(PlayState* play, int num, int max, int digits, float
         g = 255;
         b = 255;
     }
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, r, g, b, 255);
     CLOSE_DISPS();
 
@@ -711,7 +711,7 @@ static void printDungeonSilverRupees(PlayState* play, float x, float y, int srBa
     if (gSilverRupeeData[srBase].count == 0)
         return;
 
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, 255);
     drawTexRGBA16_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_RUPEE), x, y);
     x += 12.f;
@@ -744,7 +744,7 @@ static void printSoul(PlayState* play, const char* const* names, int soulBase, i
     x = -110.f;
     y = 42.f - 12 * index;
 
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
     if (hasSoul)
     {
         gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, 255);
@@ -765,7 +765,7 @@ static void printMoonSun(PlayState* play, float x, float y, int isNight)
 
     icon = isNight ? CUSTOM_KEEP_SMALL_ICON_MOON : CUSTOM_KEEP_SMALL_ICON_SUN;
 
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, 255);
     drawTexRGBA16_12x12(play, CK_PTR(icon), x, y);
     for (int i = 0; i < 3; ++i)
@@ -800,7 +800,7 @@ static void printDungeonData(PlayState* play, int base, int index)
     triforceMax = Config_Flag(CFG_GOAL_TRIFORCE3) ? 3 : (gOotExtraFlags.triforceWin ? gComboConfig.triforcePieces : gComboConfig.triforceGoal);
     triforceDigits = digitCount(triforceMax);
 
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
     def = gDungeonDefs[base + index];
     offX = 0.f;
     if (Config_Flag(CFG_OOT_SILVER_RUPEE_SHUFFLE) && def->flags & DD_OOT)
@@ -978,7 +978,7 @@ static void updateCursor(PlayState* play)
     }
     else
     {
-        float stickY = play->gs.input[0].current.y / 128.f;
+        float stickY = play->state.input[0].current.y / 128.f;
         if (stickY > 0.5f && g.menuCursor > 0)
         {
             change = 1;
@@ -1042,7 +1042,7 @@ static int min(int a, int b)
 
 static void drawMenuSouls(PlayState* play, const char* title, const char* const* names, int soulBase, int mm)
 {
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 0, 255);
     printStr(play, title, -110.f, 54.f);
     for (int i = 0; i < min(LINES, g.menuCursorMax); ++i)
@@ -1052,7 +1052,7 @@ static void drawMenuSouls(PlayState* play, const char* title, const char* const*
 
 static void drawMenuInfo(PlayState* play)
 {
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 0, 255);
     printStr(play, "Information", -110.f, 54.f);
     for (int i = 0; i < min(LINES, g.menuCursorMax); ++i)
@@ -1087,7 +1087,7 @@ void comboMenuDraw(PlayState* play)
     }
 
     /* Draw the black background */
-    OPEN_DISPS(play->gs.gfx);
+    OPEN_DISPS(play->state.gfx);
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0, 0, 0, 255);
     gDPSetCombineMode(POLY_OPA_DISP++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
     drawBackground(play, -110.f, 59.f, 217.f, 128.f);

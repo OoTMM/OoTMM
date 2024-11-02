@@ -85,8 +85,8 @@ void ObjGrass_DrawBush(Actor_ObjGrass_PackBush* bush)
     dlist = actorAddr(AC_OBJ_GRASS, 0x809aaae0);
 
     /* Draw */
-    OPEN_DISPS(gPlay->gs.gfx);
-    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(gPlay->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    OPEN_DISPS(gPlay->state.gfx);
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(gPlay->state.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_OPA_DISP++, (u32)dlist & 0xffffff);
     CLOSE_DISPS();
 }
