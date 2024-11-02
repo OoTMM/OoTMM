@@ -221,8 +221,15 @@ void FileSelect_DrawOptions(GameState* thisx);
 void FileSelect_DrawNameEntry(GameState* thisx);
 void FileSelect_DrawCharacter(GraphicsContext* gfxCtx, void* texture, s16 vtx);
 
-#if OOT_VERSION == PAL_1_1
-extern s16 D_808124C0[];
-#endif
+extern Vtx gNameEntryVtx[];
+extern s16 gCharPageHira[];
+extern s16 gCharPageKata[];
+extern s16 gCharPageEng[];
+extern s16 gNextCharPage[];
+extern Vtx gOptionsMenuHeadersVtx[];
+extern Vtx gOptionsMenuSettingsVtx[];
+extern Vtx gOptionsDividerSoundVtx[];
+extern Vtx gOptionsDividerZTargetVtx[];
+extern Vtx gOptionsDividerBrightnessVtx[];
 
 #endif
