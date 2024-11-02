@@ -472,7 +472,7 @@ void ObjFlowerpot_Init(Actor_ObjFlowerpot* this, PlayState* play)
     Collider_SetJntSph(play, &this->collider, &this->actor, &sJntSphInit, this->colliderElements);
     Matrix_SetTranslateRotateYXZ(this->actor.home.pos.x, this->actor.home.pos.y, this->actor.home.pos.z,
                                  &this->actor.shape.rot);
-    Matrix_Scale(0.1f, 0.1f, 0.1f, MAT_MUL);
+    Matrix_Scale(0.1f, 0.1f, 0.1f, MTXMODE_APPLY);
     Collider_UpdateSpheres(0, &this->collider);
     Collider_UpdateSpheres(1, &this->collider);
 

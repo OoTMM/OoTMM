@@ -554,10 +554,10 @@ void func_8093FAA4(Actor_EnGoroiwa* this, PlayState* play) {
         sp64 = this->unk_1B4;
     }
 
-    Matrix_RotateAxisF(sp7C, &sp64, MAT_SET);
-    Matrix_RotateYS(this->actor.shape.rot.y, MAT_MUL);
-    Matrix_RotateXS(this->actor.shape.rot.x, MAT_MUL);
-    Matrix_RotateZS(this->actor.shape.rot.z, MAT_MUL);
+    Matrix_RotateAxisF(sp7C, &sp64, MTXMODE_NEW);
+    Matrix_RotateYS(this->actor.shape.rot.y, MTXMODE_APPLY);
+    Matrix_RotateXS(this->actor.shape.rot.x, MTXMODE_APPLY);
+    Matrix_RotateZS(this->actor.shape.rot.z, MTXMODE_APPLY);
     Matrix_Get(&sp24);
     Matrix_MtxFToYXZRot(&sp24, &this->actor.shape.rot, FALSE);
 }
@@ -1333,7 +1333,7 @@ void func_8094220C(Actor_EnGoroiwa* this, PlayState* play) {
             ptr->unk_18 = BgCheck_EntityRaycastFloor5(&play->colCtx, &ptr->unk_28, &spD0, &this->actor, &spC4);
 
             if (ptr->unk_10 <= 0.0f) {
-                Matrix_RotateZYX(ptr->unk_1C, ptr->unk_1E, ptr->unk_20, MAT_SET);
+                Matrix_RotateZYX(ptr->unk_1C, ptr->unk_1E, ptr->unk_20, MTXMODE_NEW);
                 Matrix_MultVec3f(&D_80942E6C, &spB8);
                 temp_f20 = this->unk_1DC * 0.9f;
 
@@ -1551,7 +1551,7 @@ void func_80942B1C(Actor_EnGoroiwa* this, PlayState* play) {
             sp80.z = ptr->unk_20;
 
             Matrix_SetTranslateRotateYXZ(ptr->unk_00.x, ptr->unk_00.y, ptr->unk_00.z, &sp80);
-            Matrix_Scale(this->actor.scale.x, this->actor.scale.y, this->actor.scale.z, MAT_MUL);
+            Matrix_Scale(this->actor.scale.x, this->actor.scale.y, this->actor.scale.z, MTXMODE_APPLY);
             Gfx_DrawDListOpa(play, phi_fp);
 
             if ((ptr->unk_28 != 0) && (ptr->unk_2C > 0)) {
@@ -1565,7 +1565,7 @@ void func_80942B1C(Actor_EnGoroiwa* this, PlayState* play) {
 
                 func_800C0094(ptr->unk_28, ptr->unk_00.x, ptr->unk_18, ptr->unk_00.z, &sp88);
                 Matrix_Put(&sp88);
-                Matrix_Scale(this->actor.scale.x * 7.5f, 1.0f, this->actor.scale.z * 7.5f, MAT_MUL);
+                Matrix_Scale(this->actor.scale.x * 7.5f, 1.0f, this->actor.scale.z * 7.5f, MTXMODE_APPLY);
 
                 gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx),
                           G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);

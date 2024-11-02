@@ -273,7 +273,7 @@ void MagicFire_Draw(Actor_CustomMagicFire* this, PlayState* play)
         Gfx_SetupDL25_Xlu(play->state.gfxCtx);
         gDPSetPrimColor(POLY_XLU_DISP++, 0, 128, 255, 200, 0, (u8)(this->alphaMultiplier * 255));
         gDPSetEnvColor(POLY_XLU_DISP++, 255, 0, 0, (u8)(this->alphaMultiplier * 255));
-        Matrix_Scale(0.15f, 0.15f, 0.15f, MAT_MUL);
+        Matrix_Scale(0.15f, 0.15f, 0.15f, MTXMODE_APPLY);
         gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx),
                   G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         gDPPipeSync(POLY_XLU_DISP++);

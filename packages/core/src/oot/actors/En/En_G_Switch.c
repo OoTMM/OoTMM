@@ -152,7 +152,7 @@ void EnGSwitch_DrawSilverRupee(Actor* this, PlayState* play)
     ComboItemOverride o;
 
     EnGSwitch_ItemOverride(&o, this, play);
-    Matrix_Scale(scale, scale, scale, MAT_MUL);
+    Matrix_Scale(scale, scale, scale, MTXMODE_APPLY);
     Draw_Gi(play, this, o.gi, 0);
 }
 

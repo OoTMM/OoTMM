@@ -35,7 +35,7 @@ void EnColMan_DrawHeartPiece(Actor* this, PlayState* play)
     ComboItemOverride o;
 
     EnColMan_ItemOverride(&o);
-    Matrix_Scale(scale, scale, scale, MAT_MUL);
+    Matrix_Scale(scale, scale, scale, MTXMODE_APPLY);
     Draw_Gi(play, this, o.gi, 0);
 }
 

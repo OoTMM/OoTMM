@@ -130,8 +130,8 @@ static void CustomWarp_Draw(Actor_CustomWarp* this, PlayState* play)
     static const float scale = 0.003f;
 
     /* Transform */
-    Matrix_Translate(this->base.world.pos.x, this->base.world.pos.y, this->base.world.pos.z, MAT_SET);
-    Matrix_Scale(scale, scale, scale, MAT_MUL);
+    Matrix_Translate(this->base.world.pos.x, this->base.world.pos.y, this->base.world.pos.z, MTXMODE_NEW);
+    Matrix_Scale(scale, scale, scale, MTXMODE_APPLY);
 
     /* Draw */
     OPEN_DISPS(play->state.gfxCtx);

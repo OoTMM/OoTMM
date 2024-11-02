@@ -97,7 +97,7 @@ void EnElf_Draw(Actor_EnElf* this, PlayState* play)
 
     static const float scale = 25.0f;
 
-    Matrix_Scale(scale, scale, scale, MAT_MUL);
+    Matrix_Scale(scale, scale, scale, MTXMODE_APPLY);
     Draw_Gi(play, &this->base, this->extendedGiDraw, 0);
 }
 

@@ -800,7 +800,7 @@ void func_80A292A8(Actor_EnBigpamet* this, PlayState* play) {
 
         for (ptr = &this->unk_2FC[0], i = 0; i < ARRAY_COUNT(this->unk_2FC); i++, ptr++) {
             Matrix_SetTranslateRotateYXZ(ptr->unk_00.x, ptr->unk_00.y, ptr->unk_00.z, &ptr->unk_18);
-            Matrix_Scale(ptr->unk_20, ptr->unk_20, ptr->unk_20, MAT_MUL);
+            Matrix_Scale(ptr->unk_20, ptr->unk_20, ptr->unk_20, MTXMODE_APPLY);
 
             MATRIX_FINALIZE_AND_LOAD(POLY_OPA_DISP++, play->state.gfxCtx);
             gSPDisplayList(POLY_OPA_DISP++, gameplay_keep_DL_06AB30);
@@ -813,10 +813,10 @@ void func_80A292A8(Actor_EnBigpamet* this, PlayState* play) {
 s32 EnBigpamet_OverrideLimbDraw2(PlayState* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_EnBigpamet* this) {
     if ((this->actionFunc == func_80A2855C) || (this->actionFunc == func_80A28A98)) {
         if (limbIndex == SNAPPER_LIMB_HEAD) {
-            Matrix_Scale(this->unk_2A4, this->unk_2A8, this->unk_2A4, MAT_MUL);
+            Matrix_Scale(this->unk_2A4, this->unk_2A8, this->unk_2A4, MTXMODE_APPLY);
         } else if ((limbIndex == SNAPPER_LIMB_BACK_RIGHT_LEG) || (limbIndex == SNAPPER_LIMB_BACK_LEFT_LEG) ||
                    (limbIndex == SNAPPER_LIMB_FRONT_RIGHT_LEG) || (limbIndex == SNAPPER_LIMB_FRONT_LEFT_LEG)) {
-            Matrix_Scale(this->unk_2A4, this->unk_2A8, this->unk_2A8, MAT_MUL);
+            Matrix_Scale(this->unk_2A4, this->unk_2A8, this->unk_2A8, MTXMODE_APPLY);
         }
     }
     return FALSE;
@@ -853,7 +853,7 @@ s32 EnBigpamet_OverrideLimbDraw1(PlayState* play, s32 limbIndex, Gfx** dList, Ve
     }
 
     if ((this->unk_2A8 != 1.0f) && (limbIndex == SPIKED_SNAPPER_LIMB_SPIKES)) {
-        Matrix_Scale(1.0f, this->unk_2A8, this->unk_2A8, MAT_MUL);
+        Matrix_Scale(1.0f, this->unk_2A8, this->unk_2A8, MTXMODE_APPLY);
     }
 
     return FALSE;

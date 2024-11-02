@@ -53,9 +53,9 @@ void BgMoriHineri_DrawWrapper(Actor* this, PlayState* play)
 void BgMoriHineri_TranslateLid(void)
 {
     if (sIsSmallChest)
-        Matrix_Translate(157.f, -231.5f, -453.f, MAT_MUL);
+        Matrix_Translate(157.f, -231.5f, -453.f, MTXMODE_APPLY);
     else
-        Matrix_Translate(167.f, -218.f, -453.f, MAT_MUL);
+        Matrix_Translate(167.f, -218.f, -453.f, MTXMODE_APPLY);
 }
 
 PATCH_CALL(0x80913c58, BgMoriHineri_TranslateLid);

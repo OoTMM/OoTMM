@@ -220,9 +220,9 @@ gModelView = 0x80121204;
 MatrixStackDup = 0x800AA6EC;
 MatrixStackPop = 0x800AA724;
 ModelViewUnkTransform = 0x800abe54;
-Matrix_RotateX = 0x800aa9e0;
-Matrix_RotateY = 0x800aab94;
-Matrix_RotateZ = 0x800aad4c;
+Matrix_RotateXF = 0x800aa9e0;
+Matrix_RotateYF = 0x800aab94;
+Matrix_RotateZF = 0x800aad4c;
 Matrix_Translate = 0x800aa7f4;
 Matrix_Scale = 0x800aa8fc;
 

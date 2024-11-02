@@ -17,7 +17,7 @@ void EnGirlA_Draw(Actor_EnGirlA* this, PlayState* play)
     EnGirlA_ItemOverride(&o, this);
 
     if (o.gi != GI_MM_SOLD_OUT)
-        Matrix_RotateY(((this->angle * 360.f) / 65536.f) * 0.017453292f, MAT_MUL);
+        Matrix_RotateY(((this->angle * 360.f) / 65536.f) * 0.017453292f, MTXMODE_APPLY);
     Draw_Gi(play, &this->base, o.gi, 0);
 }
 

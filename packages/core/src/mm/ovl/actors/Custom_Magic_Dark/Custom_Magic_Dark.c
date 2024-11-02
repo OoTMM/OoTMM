@@ -263,9 +263,9 @@ void MagicDark_DiamondDraw(Actor* thisx, PlayState* play) {
         } else if (heightDiff > 2.0f) {
             this->actor.world.pos.y = y - 2.0f;
         }
-        Matrix_Translate(this->actor.world.pos.x, this->actor.world.pos.y, this->actor.world.pos.z, MAT_SET);
-        Matrix_Scale(this->actor.scale.x, this->actor.scale.y, this->actor.scale.z, MAT_MUL);
-        Matrix_RotateY(BINANG_TO_RAD(this->actor.shape.rot.y), MAT_MUL);
+        Matrix_Translate(this->actor.world.pos.x, this->actor.world.pos.y, this->actor.world.pos.z, MTXMODE_NEW);
+        Matrix_Scale(this->actor.scale.x, this->actor.scale.y, this->actor.scale.z, MTXMODE_APPLY);
+        Matrix_RotateY(BINANG_TO_RAD(this->actor.shape.rot.y), MTXMODE_APPLY);
         gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx),
                   G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 170, 255, 255, (s32)(this->primAlpha * 0.6f) & 0xFF);
@@ -314,16 +314,16 @@ void MagicDark_OrbDraw(Actor* thisx, PlayState* play) {
     Gfx_SetupDL25_Xlu(play->state.gfxCtx);
     gDPSetPrimColor(POLY_XLU_DISP++, 0, 0x80, 170, 255, 255, 255);
     gDPSetEnvColor(POLY_XLU_DISP++, 0, 150, 255, 255);
-    Matrix_Translate(pos.x, pos.y, pos.z, MAT_SET);
-    Matrix_Scale(this->actor.scale.x, this->actor.scale.y, this->actor.scale.z, MAT_MUL);
-    ModelViewMult(&play->billboardMtxF, MAT_MUL);
+    Matrix_Translate(pos.x, pos.y, pos.z, MTXMODE_NEW);
+    Matrix_Scale(this->actor.scale.x, this->actor.scale.y, this->actor.scale.z, MTXMODE_APPLY);
+    ModelViewMult(&play->billboardMtxF, MTXMODE_APPLY);
     MatrixStackDup();
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    Matrix_RotateZ(sp6C * (M_PI / 32), MAT_MUL);
+    Matrix_RotateZ(sp6C * (M_PI / 32), MTXMODE_APPLY);
     gSPDisplayList(POLY_XLU_DISP++, 0x04000000 | 0x23210); /* gEffFlash1DL */
     MatrixStackPop();
-    Matrix_RotateZ(-sp6C * (M_PI / 32), MAT_MUL);
+    Matrix_RotateZ(-sp6C * (M_PI / 32), MTXMODE_APPLY);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_XLU_DISP++, 0x04000000 | 0x23210); /* gEffFlash1DL */

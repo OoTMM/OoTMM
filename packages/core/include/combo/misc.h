@@ -8,6 +8,9 @@
 
 #define ABS_ALT(x) ((x) < 0 ? -(x) : (x))
 
+typedef struct PlayState PlayState;
+typedef struct Actor Actor;
+
 typedef struct {
     /* 0x0 */ Vec3f center;
     /* 0xC */ f32   radius;

@@ -162,12 +162,6 @@ int  Message_IsClosed(Actor* actor, PlayState* play);
 void OcarinaAction(PlayState *play, u16 ocarinaAction);
 void OcarinaAction2(PlayState *play, u16 ocarinaAction);
 
-/* Matrix Ops */
-#define MAT_SET 0
-#define MAT_MUL 1
-#define MATRIX_FINALIZE_AND_LOAD(pkt, gfxCtx) \
-    gSPMatrix(pkt, Matrix_Finalize(gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW)
-
 extern float* gModelView;
 
 int     Collider_InitJntSph(PlayState* play, ColliderJntSph* jntSph);
@@ -180,11 +174,6 @@ int     Collider_SetJntSph(PlayState* play, ColliderJntSph* dest, Actor* actor, 
 void    Collider_UpdateSpheres(s32 limb, ColliderJntSph* jntSph);
 
 void ModelViewUnkTransform(MtxF* unk);
-void Matrix_RotateX(float angle, int mode);
-void Matrix_RotateY(float angle, int mode);
-void Matrix_RotateZ(float angle, int mode);
-void Matrix_Translate(float tx, float ty, float tz, int mode);
-void Matrix_Scale(float sx, float sy, float sz, int mode);
 void ModelViewMult(MtxF* mf, s32 mode);
 void Matrix_SetTranslateRotateYXZ(f32 translateX, f32 translateY, f32 translateZ, Vec3s* rot);
 Mtx* Matrix_Finalize(GraphicsContext* gfxCtx);
@@ -519,13 +508,6 @@ void Cutscene_StopManual(PlayState* play, CutsceneContext* csCtx);
 
 void Matrix_MultVecZ(f32 z, Vec3f* dest);
 void Matrix_MultVecY(f32 y, Vec3f* dest);
-void Matrix_RotateXS(s16 x, int mode);
-void Matrix_RotateXF(f32 x, int mode);
-void Matrix_RotateYS(s16 y, int mode);
-void Matrix_RotateYF(f32 y, int mode);
-void Matrix_RotateZS(s16 z, int mode);
-void Matrix_RotateZF(f32 z, int mode);
-void Matrix_RotateZYX(s16 x, s16 y, s16 z, int mode);
 void Matrix_MultZero(Vec3f* dest);
 void Matrix_RotateXFApply(f32 x);
 void Matrix_ReplaceRotation(MtxF* mf);
@@ -593,7 +575,6 @@ u32 Quake_RemoveRequest(s16 index);
 
 f32 Math3D_Vec3fMagnitudeSq(Vec3f* vec);
 void Math3D_Vec3f_Cross(Vec3f* a, Vec3f* b, Vec3f* ret);
-void Matrix_RotateAxisF(f32 angle, Vec3f* axis, int mode);
 void Matrix_Get(MtxF* dest);
 void Matrix_MtxFToYXZRot(MtxF* src, Vec3s* dest, s32 nonUniformScale);
 void Effect_Add(PlayState* play, s32* pIndex, int type, u8 arg3, u8 arg4, void* initParams);

@@ -160,12 +160,12 @@ void EnButte_DrawTransformationEffect(Actor_EnButte* this, PlayState* play)
     alpha = CLAMP(alpha, 0, 255);
 
     camDir = Camera_GetCamDir(GET_ACTIVE_CAM(play));
-    Matrix_RotateY(BINANG_TO_RAD(camDir.y), MAT_SET);
-    Matrix_RotateX(BINANG_TO_RAD(camDir.x), MAT_MUL);
-    Matrix_RotateZ(BINANG_TO_RAD(camDir.z), MAT_MUL);
+    Matrix_RotateY(BINANG_TO_RAD(camDir.y), MTXMODE_NEW);
+    Matrix_RotateX(BINANG_TO_RAD(camDir.x), MTXMODE_APPLY);
+    Matrix_RotateZ(BINANG_TO_RAD(camDir.z), MTXMODE_APPLY);
     Matrix_MultVec3f(&D_809CE3C4, &sp5C);
     Matrix_SetTranslateRotateYXZ(this->actor.focus.pos.x + sp5C.x, this->actor.focus.pos.y + sp5C.y, this->actor.focus.pos.z + sp5C.z, &camDir);
-    Matrix_Scale(sTransformationEffectScale, sTransformationEffectScale, sTransformationEffectScale, MAT_MUL);
+    Matrix_Scale(sTransformationEffectScale, sTransformationEffectScale, sTransformationEffectScale, MTXMODE_APPLY);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gDPSetPrimColor(POLY_XLU_DISP++, 0x80, 0x80, 200, 200, 180, alpha);
     gDPSetEnvColor(POLY_XLU_DISP++, 200, 200, 210, 255);

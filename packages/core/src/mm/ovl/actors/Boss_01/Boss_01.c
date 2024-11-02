@@ -1121,7 +1121,7 @@ void Boss01_SummonBugsCutscene(Actor_Boss01* this, PlayState* play) {
             // fallthrough
         case ODOLWA_BUG_SUMMONING_CS_STATE_PLAYING_OR_DONE:
             Actor_PlaySfx(&this->actor, NA_SE_EN_MIBOSS_VOICE1_OLD - SFX_FLAG);
-            Matrix_RotateYS(this->actor.shape.rot.y, MAT_SET);
+            Matrix_RotateYS(this->actor.shape.rot.y, MTXMODE_NEW);
             Matrix_MultVecZ(250.0f, &offset);
 
             this->subCamEye.x = this->actor.world.pos.x + offset.x;
@@ -1474,7 +1474,7 @@ void Boss01_Run(Actor_Boss01* this, PlayState* play) {
     }
 
     this->runTargetPosRotY += this->runTargetPosAngularVelocityY;
-    Matrix_RotateYF(this->runTargetPosRotY, MAT_SET);
+    Matrix_RotateYF(this->runTargetPosRotY, MTXMODE_NEW);
     Matrix_MultVecZ(450.0f, &targetPos);
     diffX = targetPos.x - this->actor.world.pos.x;
     diffZ = targetPos.z - this->actor.world.pos.z;
@@ -1517,7 +1517,7 @@ void Boss01_JumpSquat(Actor_Boss01* this, PlayState* play) {
         Animation_MorphToPlayOnce(&this->skelAnime, SEGADDR_ODOLWA_JUMP_ANIM, this->animMorphFrames1);
         this->actor.velocity.y = 35.0f;
         this->actor.gravity = -2.5f;
-        Matrix_RotateYS(this->actor.world.rot.y, MAT_SET);
+        Matrix_RotateYS(this->actor.world.rot.y, MTXMODE_NEW);
 
         if (!this->shouldPerformFallingSlash) {
             magnitude = Rand_ZeroFloat(10.0f) + 10.0f;
@@ -1627,7 +1627,7 @@ void Boss01_VerticalSlash(Actor_Boss01* this, PlayState* play) {
     }
 
     if ((this->timers[TIMER_CURRENT_ACTION] >= 7) && (this->timers[TIMER_CURRENT_ACTION] < 13)) {
-        Matrix_RotateYF(BINANG_TO_RAD_ALT(this->actor.world.rot.y), MAT_SET);
+        Matrix_RotateYF(BINANG_TO_RAD_ALT(this->actor.world.rot.y), MTXMODE_NEW);
         Matrix_MultVecZ(20.0f, &additionalVelocity);
         this->additionalVelocityX = additionalVelocity.x;
         this->additionalVelocityZ = additionalVelocity.z;
@@ -1701,7 +1701,7 @@ void Boss01_HorizontalSlash(Actor_Boss01* this, PlayState* play) {
     // a non-zero current action timer, potentially allowing this code to run. The only consequence of this is that
     // Odolwa will sometimes spawn dust at his feet during a horizontal slash when he was probably never supposed to.
     if ((this->timers[TIMER_CURRENT_ACTION] >= 7) && (this->timers[TIMER_CURRENT_ACTION] < 13)) {
-        Matrix_RotateYF(BINANG_TO_RAD_ALT(this->actor.world.rot.y), MAT_SET);
+        Matrix_RotateYF(BINANG_TO_RAD_ALT(this->actor.world.rot.y), MTXMODE_NEW);
         Matrix_MultZero(&additionalVelocity);
         this->additionalVelocityX = additionalVelocity.x;
         this->additionalVelocityZ = additionalVelocity.z;
@@ -2089,7 +2089,7 @@ void Boss01_DeathCutscene(Actor_Boss01* this, PlayState* play) {
             subCamOffset.x = 0.0f;
             subCamOffset.y = 30.0f;
             subCamOffset.z = 300.0f;
-            Matrix_RotateYF(this->deathCsInitialSubCamRot + this->deathCsSubCamRot, MAT_SET);
+            Matrix_RotateYF(this->deathCsInitialSubCamRot + this->deathCsSubCamRot, MTXMODE_NEW);
             Matrix_MultVec3f(&subCamOffset, &this->subCamEyeNext);
             this->subCamEyeNext.x += this->pelvisPos.x;
             this->subCamEyeNext.y += this->pelvisPos.y;
@@ -2541,11 +2541,11 @@ void Boss01_DrawSwordTrail(Actor_Boss01* this, PlayState* play) {
     gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 255, 255, 255, (u8)sOdolwaSwordTrailAlpha);
 
     Matrix_Translate(this->actor.world.pos.x + sOdolwaSwordTrailPosX, this->actor.world.pos.y + sOdolwaSwordTrailPosY,
-                     this->actor.world.pos.z + sOdolwaSwordTrailPosZ, MAT_SET);
-    Matrix_RotateYF(BINANG_TO_RAD(this->actor.shape.rot.y), MAT_MUL);
+                     this->actor.world.pos.z + sOdolwaSwordTrailPosZ, MTXMODE_NEW);
+    Matrix_RotateYF(BINANG_TO_RAD(this->actor.shape.rot.y), MTXMODE_APPLY);
     Matrix_RotateXFApply(sOdolwaSwordTrailRotX);
-    Matrix_RotateZF(sOdolwaSwordTrailRotZ, MAT_MUL);
-    Matrix_RotateYF(sOdolwaSwordTrailRotY, MAT_MUL);
+    Matrix_RotateZF(sOdolwaSwordTrailRotZ, MTXMODE_APPLY);
+    Matrix_RotateYF(sOdolwaSwordTrailRotY, MTXMODE_APPLY);
 
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_XLU_DISP++, SEGADDR_ODOLWA_SWORD_TRAIL_DL);
@@ -2770,16 +2770,16 @@ void Boss01_PostLimbDraw(PlayState* play2, s32 limbIndex, Gfx** dList, Vec3s* ro
         gDPSetEnvColor(POLY_XLU_DISP++, 255, 0, 0, 0);
 
         MatrixStackDup();
-        Matrix_Translate(1470.0f, 400.0f, 450.0f, MAT_MUL);
-        Matrix_Scale(0.35f, 0.35f, 0.35f, MAT_MUL);
+        Matrix_Translate(1470.0f, 400.0f, 450.0f, MTXMODE_APPLY);
+        Matrix_Scale(0.35f, 0.35f, 0.35f, MTXMODE_APPLY);
         Matrix_ReplaceRotation(&play->billboardMtxF);
         gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         gSPDisplayList(POLY_XLU_DISP++, SEGADDR_ODOLWA_EYE_DL);
         MatrixStackPop();
 
         MatrixStackDup();
-        Matrix_Translate(1470.0f, -360.0f, 450.0f, MAT_MUL);
-        Matrix_Scale(0.35f, 0.35f, 0.35f, MAT_MUL);
+        Matrix_Translate(1470.0f, -360.0f, 450.0f, MTXMODE_APPLY);
+        Matrix_Scale(0.35f, 0.35f, 0.35f, MTXMODE_APPLY);
         Matrix_ReplaceRotation(&play->billboardMtxF);
         gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         gSPDisplayList(POLY_XLU_DISP++, SEGADDR_ODOLWA_EYE_DL);
@@ -3018,8 +3018,8 @@ void Boss01_DrawShadowTex(u8* tex, Actor_Boss01* this, PlayState* play) {
 
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0, 0, 0, (s8)(alpha * 80.0f));
     gDPSetEnvColor(POLY_OPA_DISP++, 0, 0, 0, 0);
-    Matrix_Translate(this->actor.world.pos.x, this->actor.floorHeight, this->actor.world.pos.z - 20.0f, MAT_SET);
-    Matrix_Scale(1.65f, 1.0f, 1.65f, MAT_MUL);
+    Matrix_Translate(this->actor.world.pos.x, this->actor.floorHeight, this->actor.world.pos.z - 20.0f, MTXMODE_NEW);
+    Matrix_Scale(1.65f, 1.0f, 1.65f, MTXMODE_APPLY);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_OPA_DISP++, SEGADDR_ODOLWA_SHADOW_MATERIAL_DL);
     gDPLoadTextureBlock(POLY_OPA_DISP++, tex, G_IM_FMT_I, G_IM_SIZ_8b, ODOLWA_SHADOW_TEX_WIDTH,
@@ -3157,7 +3157,7 @@ void Boss01_Bug_UpdateDamage(Actor_Boss01* this, PlayState* play) {
         acHitElem = this->bugACCollider.elem.acHitElem;
 
         if (this->damagedTimer == 0) {
-            Matrix_RotateYS(this->actor.yawTowardsPlayer, MAT_SET);
+            Matrix_RotateYS(this->actor.yawTowardsPlayer, MTXMODE_NEW);
             if (acHitElem->acDmgInfo.dmgFlags & 0x300000) {
                 this->damagedTimer = 10;
                 Matrix_MultVecZ(-10.0f, &additionalVelocity);
@@ -3425,10 +3425,10 @@ void Boss01_DrawEffects(PlayState* play) {
 
     for (i = 1; i < ODOLWA_EFFECT_COUNT; i++, effect++) {
         if (effect->type == ODOLWA_EFFECT_FALLING_BLOCK) {
-            Matrix_Translate(effect->pos.x, effect->pos.y, effect->pos.z, MAT_SET);
-            Matrix_RotateYS(effect->rotY, MAT_MUL);
-            Matrix_RotateXS(effect->rotX, MAT_MUL);
-            Matrix_Scale(effect->scale, effect->scale, effect->scale, MAT_MUL);
+            Matrix_Translate(effect->pos.x, effect->pos.y, effect->pos.z, MTXMODE_NEW);
+            Matrix_RotateYS(effect->rotY, MTXMODE_APPLY);
+            Matrix_RotateXS(effect->rotX, MTXMODE_APPLY);
+            Matrix_Scale(effect->scale, effect->scale, effect->scale, MTXMODE_APPLY);
             gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             gSPDisplayList(POLY_OPA_DISP++, SEGADDR_ODOLWA_FALLING_BLOCK_DL);
         }
@@ -3440,8 +3440,8 @@ void Boss01_DrawEffects(PlayState* play) {
 
     for (i = 1; i < ODOLWA_EFFECT_COUNT; i++, effect++) {
         if (effect->type == ODOLWA_EFFECT_FALLING_BLOCK) {
-            Matrix_Translate(effect->pos.x, 0.0f, effect->pos.z, MAT_SET);
-            Matrix_Scale(effect->scale * 50.0f, 1.0f, effect->scale * 50.0f, MAT_MUL);
+            Matrix_Translate(effect->pos.x, 0.0f, effect->pos.z, MTXMODE_NEW);
+            Matrix_Scale(effect->scale * 50.0f, 1.0f, effect->scale * 50.0f, MTXMODE_APPLY);
             gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             gSPDisplayList(POLY_XLU_DISP++, SEGADDR_CIRCLE_SHADOW_DL); // gCircleShadowDL in gameplay_keep
         }
@@ -3453,7 +3453,7 @@ void Boss01_DrawEffects(PlayState* play) {
 
     if (effect->type == ODOLWA_EFFECT_RING_OF_FIRE) {
         gDPSetEnvColor(POLY_XLU_DISP++, 255, 10, 0, 0);
-        Matrix_Translate(effect->pos.x, 0.0f, effect->pos.z, MAT_SET);
+        Matrix_Translate(effect->pos.x, 0.0f, effect->pos.z, MTXMODE_NEW);
 
         for (i = 0; i < 32; i++) {
             MatrixStackDup();
@@ -3467,16 +3467,16 @@ void Boss01_DrawEffects(PlayState* play) {
                        Gfx_TwoTexScroll(play->state.gfxCtx, G_TX_RENDERTILE, 0, 0, 32, 64, 1, 0,
                                         ((effect->timer + (i * 10)) * -20) & 0x1FF, 32, 128));
 
-            Matrix_RotateYF(i * (M_PIf / 16), MAT_MUL);
-            Matrix_Translate(0.0f, 0.0f, KREG(49) + 200.0f, MAT_MUL);
+            Matrix_RotateYF(i * (M_PIf / 16), MTXMODE_APPLY);
+            Matrix_Translate(0.0f, 0.0f, KREG(49) + 200.0f, MTXMODE_APPLY);
             Matrix_ReplaceRotation(&play->billboardMtxF);
             if (Boss01_RandZeroOne() < 0.5f) {
-                Matrix_RotateYF(M_PIf, MAT_MUL);
+                Matrix_RotateYF(M_PIf, MTXMODE_APPLY);
             }
 
             Matrix_Scale(KREG(48) * 0.0001f + 0.018f,
                          ((0.007f + KREG(54) * 0.0001f) + (Boss01_RandZeroOne() * 30.0f * 0.0001f)) * effect->scale,
-                         1.0f, MAT_MUL);
+                         1.0f, MTXMODE_APPLY);
 
             gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             gSPDisplayList(POLY_XLU_DISP++, SEGADDR_FROM_OFFSET(4, 0x7D590)); // gEffFire1DL in gameplay_keep

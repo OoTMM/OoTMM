@@ -834,12 +834,12 @@ static void ObjComb_DrawImpl(Actor_ObjComb* this, PlayState* play)
 {
     OPEN_DISPS(play->state.gfxCtx);
     Gfx_SetupDL25_Opa(play->state.gfxCtx);
-    Matrix_Translate(this->actor.world.pos.x, this->actor.world.pos.y + (118.0f * this->actor.scale.y), this->actor.world.pos.z, MAT_SET);
-    Matrix_RotateY(BINANG_TO_RAD(this->actor.shape.rot.y), MAT_MUL);
-    Matrix_RotateX(BINANG_TO_RAD(this->actor.shape.rot.x), MAT_MUL);
-    Matrix_RotateZ(BINANG_TO_RAD(this->actor.shape.rot.z), MAT_MUL);
-    Matrix_Translate(0.0f, -(this->actor.scale.y * 118.0f), 0.0f, MAT_MUL);
-    Matrix_Scale(this->actor.scale.x, this->actor.scale.y, this->actor.scale.z, MAT_MUL);
+    Matrix_Translate(this->actor.world.pos.x, this->actor.world.pos.y + (118.0f * this->actor.scale.y), this->actor.world.pos.z, MTXMODE_NEW);
+    Matrix_RotateY(BINANG_TO_RAD(this->actor.shape.rot.y), MTXMODE_APPLY);
+    Matrix_RotateX(BINANG_TO_RAD(this->actor.shape.rot.x), MTXMODE_APPLY);
+    Matrix_RotateZ(BINANG_TO_RAD(this->actor.shape.rot.z), MTXMODE_APPLY);
+    Matrix_Translate(0.0f, -(this->actor.scale.y * 118.0f), 0.0f, MTXMODE_APPLY);
+    Matrix_Scale(this->actor.scale.x, this->actor.scale.y, this->actor.scale.z, MTXMODE_APPLY);
 
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_OPA_DISP++, HIVE_DL);
