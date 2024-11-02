@@ -5,6 +5,8 @@ _Interface_Update = 0x80078290;
 
 TitleCard_Clear = 0x80020e80;
 
+Sram_WriteSramHeader = 0x800911c0;
+AudioSeq_QueueSeqCmd = 0x800caa70;
 bzero = 0x80002e80;
 osRecvMesg = 0x80002030;
 osSendMesg = 0x80001e20;
@@ -162,9 +164,17 @@ Audio_PlaySfxGeneral = 0x800c806c;
 Actor_PlaySfx = 0x80022fd0;
 PlayLoopingSfxAtActor = 0x8002313c;
 Horse_Spawn = 0x8005aefc;
+gTimeSpeed = 0x800f1650;
+Audio_PlaySequenceWithSeqPlayerIO = 0x800c6b54;
+Matrix_Init = 0x800aa6b0;
 
 gScreenWidth = 0x800fe500;
 gScreenHeight = 0x800fe504;
+Skybox_Draw = 0x80096fd8;
+func_800F6964 = 0x800c7684;
+Gfx_SetupFrame = 0x8007ee5c;
+Sram_Alloc = 0x800912c4;
+Sram_EraseSave = 0x80090eb8;
 
 Gfx_SetupDL_39Opa = 0x8007e5e4;
 Environment_UpdateSkybox = 0x8005c9c8;
