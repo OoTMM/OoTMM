@@ -82,7 +82,7 @@ static const ArrowInfo kArrowsInfo[] = {
 
 static const ArrowInfo* GetArrowInfo(u16 variable)
 {
-    for (int i = 0; i < ARRAY_SIZE(kArrowsInfo); i++)
+    for (int i = 0; i < ARRAY_COUNT(kArrowsInfo); i++)
     {
         if (kArrowsInfo[i].var == variable)
             return &kArrowsInfo[i];
@@ -118,7 +118,7 @@ static const ArrowInfo* GetNextArrowInfo(u16 variable)
 
     magicCost = GetArrowInfo(variable)->magicCost;
     current = variable;
-    for (int i = 0; i < ARRAY_SIZE(kArrowsInfo); ++i)
+    for (int i = 0; i < ARRAY_COUNT(kArrowsInfo); ++i)
     {
         current = GetNextArrowVariable(current);
         info = GetArrowInfo(current);

@@ -56,19 +56,19 @@ extern u8 gAudioLoadStatusFontSample[0x30];
 
 void AudioHeap_ResetLoadStatus(void)
 {
-    for (int i = 0; i < ARRAY_SIZE(gAudioLoadStatusSeq); ++i)
+    for (int i = 0; i < ARRAY_COUNT(gAudioLoadStatusSeq); ++i)
     {
         if (gAudioLoadStatusSeq[i] != 5)
             gAudioLoadStatusSeq[i] = 0;
     }
 
-    for (int i = 0; i < ARRAY_SIZE(gAudioLoadStatusFont); ++i)
+    for (int i = 0; i < ARRAY_COUNT(gAudioLoadStatusFont); ++i)
     {
         if (gAudioLoadStatusFont[i] != 5)
             gAudioLoadStatusFont[i] = 0;
     }
 
-    for (int i = 0; i < ARRAY_SIZE(gAudioLoadStatusFontSample); ++i)
+    for (int i = 0; i < ARRAY_COUNT(gAudioLoadStatusFontSample); ++i)
     {
         if (gAudioLoadStatusFontSample[i] != 5)
             gAudioLoadStatusFontSample[i] = 0;

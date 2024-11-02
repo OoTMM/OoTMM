@@ -186,7 +186,7 @@ void comboLoadCustomKeep(void)
 #if defined(GAME_OOT)
 static u32 comboGetTextureOverride(u32 texture)
 {
-    for (int i = 0; i < ARRAY_SIZE(kObjectTexturePatches); ++i)
+    for (int i = 0; i < ARRAY_COUNT(kObjectTexturePatches); ++i)
     {
         if (kObjectTexturePatches[i].mm == texture)
             return kObjectTexturePatches[i].oot;
@@ -199,7 +199,7 @@ static u32 comboGetTextureOverride(u32 texture)
 #if defined(GAME_MM)
 static u32 comboGetTextureOverride(u32 texture)
 {
-    for (int i = 0; i < ARRAY_SIZE(kObjectTexturePatches); ++i)
+    for (int i = 0; i < ARRAY_COUNT(kObjectTexturePatches); ++i)
     {
         if (kObjectTexturePatches[i].oot == texture)
             return kObjectTexturePatches[i].mm;
@@ -216,7 +216,7 @@ static void comboPatchForeignObject(void* buffer, u16 objectId)
     u32* texture;
 
     patch = NULL;
-    for (u32 i = 0; i < ARRAY_SIZE(kObjectPatches); ++i)
+    for (u32 i = 0; i < ARRAY_COUNT(kObjectPatches); ++i)
     {
         if (kObjectPatches[i].objectId == objectId)
         {
@@ -228,7 +228,7 @@ static void comboPatchForeignObject(void* buffer, u16 objectId)
     if (patch == NULL)
         return;
 
-    for (u32 i = 0; i < ARRAY_SIZE(patch->offsets); ++i)
+    for (u32 i = 0; i < ARRAY_COUNT(patch->offsets); ++i)
     {
         offset = patch->offsets[i];
         if (!offset)

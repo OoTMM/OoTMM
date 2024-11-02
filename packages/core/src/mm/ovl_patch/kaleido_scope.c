@@ -376,7 +376,7 @@ void KaleidoScope_LoadIcons(u32 vrom, void* dst, size_t* size)
     comboDmaLookupForeignId(&dma, 8);
     u32 textureFileAddress = dma.pstart;
 
-    for (u32 i = 0; i < ARRAY_SIZE(sCustomIcons); i++)
+    for (u32 i = 0; i < ARRAY_COUNT(sCustomIcons); i++)
     {
         u32 icon = sCustomIcons[i];
         u32 foreignIcon;

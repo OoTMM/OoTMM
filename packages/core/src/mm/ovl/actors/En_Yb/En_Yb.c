@@ -94,7 +94,7 @@ void EnYb_Init(Actor_EnYb* this, PlayState* play) {
     EnYb_ChangeAnim(play, this, 2, ANIMMODE_LOOP, 0.0f);
 
     csId = this->actor.csId;
-    for (i = 0; i < ARRAY_SIZE(this->csIdList); i++) {
+    for (i = 0; i < ARRAY_COUNT(this->csIdList); i++) {
         this->csIdList[i] = csId;
         if (csId != CS_ID_NONE) {
             this->actor.csId = csId;

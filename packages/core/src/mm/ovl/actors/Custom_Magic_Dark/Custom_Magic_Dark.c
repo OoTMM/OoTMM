@@ -182,7 +182,7 @@ void MagicDark_DimLighting(PlayState* play, f32 intensity) {
         play->envCtx.adjLightSettings.fogNear = (850.0f - play->envCtx.lightSettings.fogNear) * fogScale;
 
         if (intensity == 0.0f) {
-            for (i = 0; i < ARRAY_SIZE(play->envCtx.adjLightSettings.fogColor); i++) {
+            for (i = 0; i < ARRAY_COUNT(play->envCtx.adjLightSettings.fogColor); i++) {
                 play->envCtx.adjLightSettings.fogColor[i] = 0;
             }
         } else {
@@ -192,7 +192,7 @@ void MagicDark_DimLighting(PlayState* play, f32 intensity) {
                 colorScale = 1.0f;
             }
 
-            for (i = 0; i < ARRAY_SIZE(play->envCtx.adjLightSettings.fogColor); i++) {
+            for (i = 0; i < ARRAY_COUNT(play->envCtx.adjLightSettings.fogColor); i++) {
                 play->envCtx.adjLightSettings.fogColor[i] = -(s16)(play->envCtx.lightSettings.fogColor[i] * colorScale);
             }
         }

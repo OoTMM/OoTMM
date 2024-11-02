@@ -156,7 +156,7 @@ void EnBigpamet_Init(Actor_EnBigpamet* this, PlayState* play) {
     CollisionCheck_SetInfo(&this->actor.colChkInfo, &sDamageTable, &sColChkInfoInit);
 
     if (!sTexturesDesegmented) {
-        for (i = 0; i < ARRAY_SIZE(SnapperEyeTextures); i++) {
+        for (i = 0; i < ARRAY_COUNT(SnapperEyeTextures); i++) {
             SnapperEyeTextures[i] = Lib_SegmentedToVirtual(SnapperEyeTextures[i]);
         }
         sTexturesDesegmented = TRUE;
@@ -203,7 +203,7 @@ void func_80A2778C(Actor_EnBigpamet* this) {
 
     this->unk_2A2 = 40;
 
-    for (ptr = &this->unk_2FC[0], i = 0; i < ARRAY_SIZE(this->unk_2FC); i++, ptr++) {
+    for (ptr = &this->unk_2FC[0], i = 0; i < ARRAY_COUNT(this->unk_2FC); i++, ptr++) {
         temp_s2 = (s32)Rand_Next() >> 0x10;
         temp_s1 = Rand_S16Offset(0x1800, 0x2800);
         temp_fs1 = Rand_ZeroFloat(5.0f) + 7.0f;
@@ -270,7 +270,7 @@ void func_80A27B58(Actor_EnBigpamet* this) {
 
     this->unk_2A2 = 40;
 
-    for (ptr = &this->unk_2FC[0], i = 0; i < ARRAY_SIZE(this->unk_2FC); i++, ptr++) {
+    for (ptr = &this->unk_2FC[0], i = 0; i < ARRAY_COUNT(this->unk_2FC); i++, ptr++) {
         temp_s1 = (s32)Rand_CenteredFloat(0x5000) + this->actor.wallYaw;
         temp_s2 = Rand_S16Offset(0x1000, 0x3000);
 
@@ -738,7 +738,7 @@ void func_80A29094(Actor_EnBigpamet* this) {
     Actor_EnBigpametStruct* ptr = &this->unk_2FC[0];
     s32 i;
 
-    for (i = 0; i < ARRAY_SIZE(this->unk_2FC); i++, ptr++) {
+    for (i = 0; i < ARRAY_COUNT(this->unk_2FC); i++, ptr++) {
         ptr->unk_0C.y -= 1.0f;
 
         Math_Vec3f_Sum(&ptr->unk_00, &ptr->unk_0C, &ptr->unk_00);
@@ -798,7 +798,7 @@ void func_80A292A8(Actor_EnBigpamet* this, PlayState* play) {
         gDPSetPrimColor(POLY_OPA_DISP++, 0, 0x80, 255, 255, 255, 255);
         gDPSetEnvColor(POLY_OPA_DISP++, 255, 255, 255, 255);
 
-        for (ptr = &this->unk_2FC[0], i = 0; i < ARRAY_SIZE(this->unk_2FC); i++, ptr++) {
+        for (ptr = &this->unk_2FC[0], i = 0; i < ARRAY_COUNT(this->unk_2FC); i++, ptr++) {
             Matrix_SetTranslateRotateYXZ(ptr->unk_00.x, ptr->unk_00.y, ptr->unk_00.z, &ptr->unk_18);
             Matrix_Scale(ptr->unk_20, ptr->unk_20, ptr->unk_20, MAT_MUL);
 

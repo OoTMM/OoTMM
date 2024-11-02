@@ -147,7 +147,7 @@ s32 Player_CustomItemToItemAction(Actor_Player* this, s32 item, s32 itemAction)
     {
         return itemAction;
     }
-    if (customItem >= ARRAY_SIZE(sCustomItemActions))
+    if (customItem >= ARRAY_COUNT(sCustomItemActions))
     {
         return 0;
     }
@@ -1447,7 +1447,7 @@ static u8 sDiveDoActions[] = { DO_ACTION_1, DO_ACTION_2, DO_ACTION_3, DO_ACTION_
 u8 Player_GetActionAWhileDiving(Actor_Player* this)
 {
     s32 diveIndex = (sDiveDepths[gSaveContext.save.inventory.upgrades.scale] - this->actor.depthInWater) / 40.0f;
-    diveIndex = CLAMP(diveIndex, 0, ARRAY_SIZE(sDiveDoActions) - 1);
+    diveIndex = CLAMP(diveIndex, 0, ARRAY_COUNT(sDiveDoActions) - 1);
     return sDiveDoActions[diveIndex];
 }
 

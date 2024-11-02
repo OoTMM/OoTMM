@@ -28,7 +28,7 @@ static const ExtraSceneSetups kExtraSceneSetups[] = {
 
 void updateSceneSetup(PlayState* play)
 {
-    for (int i = 0; i < ARRAY_SIZE(kExtraSceneSetups); ++i)
+    for (int i = 0; i < ARRAY_COUNT(kExtraSceneSetups); ++i)
     {
         if (play->sceneId == kExtraSceneSetups[i].sceneId)
         {

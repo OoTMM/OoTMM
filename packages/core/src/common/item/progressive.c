@@ -343,11 +343,11 @@ static s16 progressiveClock(void)
 
     index = popcount(gSharedCustomSave.mm.halfDays);
     if (Config_Flag(CFG_MM_CLOCKS_PROGRESSIVE_REVERSE))
-        index = ARRAY_SIZE(kClocks) - index - 1;
+        index = ARRAY_COUNT(kClocks) - index - 1;
     if (index < 0)
         index = 0;
-    if (index >= ARRAY_SIZE(kClocks))
-        index = ARRAY_SIZE(kClocks) - 1;
+    if (index >= ARRAY_COUNT(kClocks))
+        index = ARRAY_COUNT(kClocks) - 1;
 
     return kClocks[index];
 }

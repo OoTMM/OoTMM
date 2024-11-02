@@ -166,7 +166,7 @@ static void applyStartingItems(void)
     {
         comboDmaLoadFilePartial(gStartingItemsBuffer, COMBO_VROM_STARTING_ITEMS, slice * sizeof(gStartingItemsBuffer), sizeof(gStartingItemsBuffer));
         slice++;
-        for (int i = 0; i < ARRAY_SIZE(gStartingItemsBuffer); i += 2)
+        for (int i = 0; i < ARRAY_COUNT(gStartingItemsBuffer); i += 2)
         {
             gi = gStartingItemsBuffer[i];
             count = gStartingItemsBuffer[i + 1];

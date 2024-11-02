@@ -115,8 +115,8 @@ void menuInit()
 {
     gDungeonDefCount = 0;
 
-    if (!Config_Flag(CFG_ONLY_MM)) addDefs(kDungeonDefsOot, ARRAY_SIZE(kDungeonDefsOot));
-    if (!Config_Flag(CFG_ONLY_OOT)) addDefs(kDungeonDefsMm, ARRAY_SIZE(kDungeonDefsMm));
+    if (!Config_Flag(CFG_ONLY_MM)) addDefs(kDungeonDefsOot, ARRAY_COUNT(kDungeonDefsOot));
+    if (!Config_Flag(CFG_ONLY_OOT)) addDefs(kDungeonDefsMm, ARRAY_COUNT(kDungeonDefsMm));
     addDefs(&kDungeonDataTokens, 1);
 
     if (Config_Flag(CFG_MM_CLOCKS))
@@ -1007,28 +1007,28 @@ void comboMenuUpdate(PlayState* play)
         g.menuCursorMax = gDungeonDefCount;
         break;
     case MENU_SOULS_OOT_ENEMY:
-        g.menuCursorMax = ARRAY_SIZE(kSoulsEnemyOot);
+        g.menuCursorMax = ARRAY_COUNT(kSoulsEnemyOot);
         break;
     case MENU_SOULS_OOT_BOSS:
-        g.menuCursorMax = ARRAY_SIZE(kSoulsBossOot);
+        g.menuCursorMax = ARRAY_COUNT(kSoulsBossOot);
         break;
     case MENU_SOULS_OOT_NPC:
-        g.menuCursorMax = ARRAY_SIZE(kSoulsNpcOot);
+        g.menuCursorMax = ARRAY_COUNT(kSoulsNpcOot);
         break;
     case MENU_SOULS_OOT_MISC:
-        g.menuCursorMax = ARRAY_SIZE(kSoulsMiscOot);
+        g.menuCursorMax = ARRAY_COUNT(kSoulsMiscOot);
         break;
     case MENU_SOULS_MM_ENEMY:
-        g.menuCursorMax = ARRAY_SIZE(kSoulsEnemyMm);
+        g.menuCursorMax = ARRAY_COUNT(kSoulsEnemyMm);
         break;
     case MENU_SOULS_MM_BOSS:
-        g.menuCursorMax = ARRAY_SIZE(kSoulsBossMm);
+        g.menuCursorMax = ARRAY_COUNT(kSoulsBossMm);
         break;
     case MENU_SOULS_MM_NPC:
-        g.menuCursorMax = ARRAY_SIZE(kSoulsNpcMm);
+        g.menuCursorMax = ARRAY_COUNT(kSoulsNpcMm);
         break;
     case MENU_SOULS_MM_MISC:
-        g.menuCursorMax = ARRAY_SIZE(kSoulsMiscMm);
+        g.menuCursorMax = ARRAY_COUNT(kSoulsMiscMm);
         break;
     }
 

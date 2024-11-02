@@ -398,7 +398,7 @@ static void loadMqRoomMaybe(PlayState* play)
     /* Remove broken actors */
     if (Config_Flag(CFG_NO_BROKEN_ACTORS))
     {
-        for (int i = 0; i < ARRAY_SIZE(kMqBrokenActors); ++i)
+        for (int i = 0; i < ARRAY_COUNT(kMqBrokenActors); ++i)
         {
             const MqBrokenActor* ba = &kMqBrokenActors[i];
 

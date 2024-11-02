@@ -159,7 +159,7 @@ static void Hint_DisplayRaw(PlayState* play, const Hint* hint)
         comboTextAppendRegionName(&b, hint->region, hint->world, TF_PREPOS);
         break;
     case HINT_TYPE_JUNK:
-        comboTextAppendStr(&b, kJunkHints[((u16)hint->items[0]) % ARRAY_SIZE(kJunkHints)]);
+        comboTextAppendStr(&b, kJunkHints[((u16)hint->items[0]) % ARRAY_COUNT(kJunkHints)]);
         break;
     }
     comboTextAppendStr(&b, "." TEXT_END);
@@ -172,7 +172,7 @@ void Hint_DisplayJunk(PlayState* play, u32 index)
 
     memset(&h, 0, sizeof(h));
     h.type = HINT_TYPE_JUNK;
-    h.items[0] = (index % ARRAY_SIZE(kJunkHints));
+    h.items[0] = (index % ARRAY_COUNT(kJunkHints));
     Hint_DisplayRaw(play, &h);
 }
 

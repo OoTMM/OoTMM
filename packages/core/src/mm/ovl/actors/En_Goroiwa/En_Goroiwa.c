@@ -66,7 +66,7 @@ static ColliderJntSphInit sJntSphInit = {
         OC2_TYPE_2,
         COLSHAPE_JNTSPH,
     },
-    ARRAY_SIZE(sJntSphElementsInit),
+    ARRAY_COUNT(sJntSphElementsInit),
     sJntSphElementsInit,
 };
 
@@ -1025,7 +1025,7 @@ s32 func_8094156C(Actor_EnGoroiwa* this, PlayState* play) {
             this->unk_1E8[1].unk_1E = BINANG_ADD(this->actor.yawTowardsPlayer, 0x4000);
             this->unk_1E8[1].unk_24 = Rand_ZeroOne() * 600.0f;
 
-            for (i = 0; i < ARRAY_SIZE(this->unk_1E8); i++) {
+            for (i = 0; i < ARRAY_COUNT(this->unk_1E8); i++) {
                 ptr = &this->unk_1E8[i];
 
                 ptr->unk_00.x = this->actor.world.pos.x;
@@ -1310,7 +1310,7 @@ void func_8094220C(Actor_EnGoroiwa* this, PlayState* play) {
     Vec3f sp9C;
     s16 sp9A;
 
-    for (i = 0; i < ARRAY_SIZE(this->unk_1E8); i++) {
+    for (i = 0; i < ARRAY_COUNT(this->unk_1E8); i++) {
         ptr = &this->unk_1E8[i];
 
         if (!(ptr->unk_2D & 1)) {
@@ -1374,7 +1374,7 @@ void func_8094220C(Actor_EnGoroiwa* this, PlayState* play) {
     Math_StepToS(&sp9A, 0, 40);
     this->actor.shape.shadowAlpha = sp9A;
 
-    for (i = 0; i < ARRAY_SIZE(this->unk_1E8); i++) {
+    for (i = 0; i < ARRAY_COUNT(this->unk_1E8); i++) {
         ptr = &this->unk_1E8[i];
 
         if (ptr->unk_2D & 1) {
@@ -1542,7 +1542,7 @@ void func_80942B1C(Actor_EnGoroiwa* this, PlayState* play) {
         phi_fp = SEGADDR_OBJECT_GOROIWA_DL_0082D0;
     }
 
-    for (i = 0; i < ARRAY_SIZE(this->unk_1E8); i++) {
+    for (i = 0; i < ARRAY_COUNT(this->unk_1E8); i++) {
         ptr = &this->unk_1E8[i];
 
         if (!(ptr->unk_2D & 1)) {

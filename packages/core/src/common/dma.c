@@ -25,7 +25,7 @@ static int dmaLookupNative(DmaEntry* buf, u32 vromAddr)
 {
     DmaEntry* e;
 
-    for (int i = 0; i < ARRAY_SIZE(gDmaData); ++i)
+    for (int i = 0; i < ARRAY_COUNT(gDmaData); ++i)
     {
         e = gDmaData + i;
 
@@ -51,8 +51,8 @@ static int dmaLookupAlt(DmaEntry* buf, u32 dmaAddr, u32 dmaCount, u32 dmaFlag, u
     for (;;)
     {
         DMARomToRam((dmaAddr + offset * sizeof(DmaEntry)) | PI_DOM1_ADDR2, sTmpDmaEntries, sizeof(sTmpDmaEntries));
-        offset += ARRAY_SIZE(sTmpDmaEntries);
-        for (int i = 0; i < ARRAY_SIZE(sTmpDmaEntries); ++i)
+        offset += ARRAY_COUNT(sTmpDmaEntries);
+        for (int i = 0; i < ARRAY_COUNT(sTmpDmaEntries); ++i)
         {
             e = sTmpDmaEntries + i;
 

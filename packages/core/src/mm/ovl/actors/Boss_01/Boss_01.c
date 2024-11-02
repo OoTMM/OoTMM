@@ -348,7 +348,7 @@ static ColliderJntSphInit sSwordColliderJntSphInit = {
         OC2_TYPE_1,
         COLSHAPE_JNTSPH,
     },
-    ARRAY_SIZE(sSwordColliderJntSphElementsInit),
+    ARRAY_COUNT(sSwordColliderJntSphElementsInit),
     sSwordColliderJntSphElementsInit,
 };
 
@@ -375,7 +375,7 @@ static ColliderJntSphInit sShieldColliderJntSphInit = {
         OC2_TYPE_1,
         COLSHAPE_JNTSPH,
     },
-    ARRAY_SIZE(sShieldColliderJntSphElementsInit),
+    ARRAY_COUNT(sShieldColliderJntSphElementsInit),
     sShieldColliderJntSphElementsInit,
 };
 
@@ -512,7 +512,7 @@ static ColliderJntSphInit sBodyColliderJntSphInit = {
         OC2_TYPE_1,
         COLSHAPE_JNTSPH,
     },
-    ARRAY_SIZE(sBodyColliderJntSphElementsInit),
+    ARRAY_COUNT(sBodyColliderJntSphElementsInit),
     sBodyColliderJntSphElementsInit,
 };
 
@@ -550,7 +550,7 @@ static ColliderJntSphInit sKickAndShieldBashColliderJntSphInit = {
         OC2_TYPE_1,
         COLSHAPE_JNTSPH,
     },
-    ARRAY_SIZE(sKickAndShieldBashColliderJntSphElementsInit),
+    ARRAY_COUNT(sKickAndShieldBashColliderJntSphElementsInit),
     sKickAndShieldBashColliderJntSphElementsInit,
 };
 
@@ -773,7 +773,7 @@ void Boss01_SpawnDustAtFeet(Actor_Boss01* this, PlayState* play, u8 dustSpawnFra
     if (((this->frameCounter & dustSpawnFrameMask) == 0) &&
         ((this->additionalVelocityX > 1.0f) || (this->additionalVelocityZ > 1.0f) || (dustSpawnFrameMask == 0) ||
          (this->actor.speed > 1.0f))) {
-        for (i = 0; i < ARRAY_SIZE(this->feetPos); i++) {
+        for (i = 0; i < ARRAY_COUNT(this->feetPos); i++) {
             velocity.x = Rand_CenteredFloat(5.0f);
             velocity.y = Rand_ZeroFloat(2.0f) + 1.0f;
             velocity.z = Rand_CenteredFloat(5.0f);
@@ -2146,7 +2146,7 @@ void Boss01_DeathCutscene(Actor_Boss01* this, PlayState* play) {
                 f32 warpZ;
                 s32 i;
 
-                for (i = 0; i < ARRAY_SIZE(sBlueWarpSpawnsX); i++) {
+                for (i = 0; i < ARRAY_COUNT(sBlueWarpSpawnsX); i++) {
                     warpX = sBlueWarpSpawnsX[i];
                     warpZ = sBlueWarpSpawnsZ[i];
 
@@ -2291,7 +2291,7 @@ void Boss01_Update(Actor_Boss01* this, PlayState* play) {
         this->kickAndShieldBashCollisionEnabled = 0;
         this->swordState = ODOLWA_SWORD_STATE_INACTIVE;
 
-        for (i = 0; i < ARRAY_SIZE(this->timers); i++) {
+        for (i = 0; i < ARRAY_COUNT(this->timers); i++) {
             DECR(this->timers[i]);
         }
 
@@ -2524,7 +2524,7 @@ void Boss01_DrawSwordTrail(Actor_Boss01* this, PlayState* play) {
 
     vtx = Lib_SegmentedToVirtual(SEGADDR_ODOLWA_SWORD_TRAIL_VTX);
 
-    for (i = 0; i < ARRAY_SIZE(sSwordTrailOuterVertexIndices); i++) {
+    for (i = 0; i < ARRAY_COUNT(sSwordTrailOuterVertexIndices); i++) {
         vtx[sSwordTrailOuterVertexIndices[i]].v.ob[0] = cosf((i * M_PIf) / sSwordTrailAngularRangeDivisor) * 200.0f;
         vtx[sSwordTrailOuterVertexIndices[i]].v.ob[1] = 0;
         vtx[sSwordTrailOuterVertexIndices[i]].v.ob[2] = sinf((i * M_PIf) / sSwordTrailAngularRangeDivisor) * 200.0f;
@@ -2946,7 +2946,7 @@ void Boss01_FillShadowTex(Actor_Boss01* this, u8* tex, f32 weight) {
             baseY = (u16)((s32)startVec.y * 64);
 
             if (sShadowSizes[i] == ODOLWA_SHADOW_SIZE_EXTRA_LARGE) {
-                for (y = 0, addY = -0x180; y < ARRAY_SIZE(sShadowExtraLargeMap); y++, addY += 0x40) {
+                for (y = 0, addY = -0x180; y < ARRAY_COUNT(sShadowExtraLargeMap); y++, addY += 0x40) {
                     for (x = -sShadowExtraLargeMap[y]; x < sShadowExtraLargeMap[y]; x++) {
                         index = baseX + x + baseY + addY;
                         if ((index >= 0) && (index < ODOLWA_SHADOW_TEX_SIZE)) {
@@ -2955,7 +2955,7 @@ void Boss01_FillShadowTex(Actor_Boss01* this, u8* tex, f32 weight) {
                     }
                 }
             } else if (sShadowSizes[i] == ODOLWA_SHADOW_SIZE_LARGE) {
-                for (y = 0, addY = -0x100; y < ARRAY_SIZE(sShadowLargeMap); y++, addY += 0x40) {
+                for (y = 0, addY = -0x100; y < ARRAY_COUNT(sShadowLargeMap); y++, addY += 0x40) {
                     for (x = -sShadowLargeMap[y]; x < sShadowLargeMap[y]; x++) {
                         index = baseX + x + baseY + addY;
                         if ((index >= 0) && (index < ODOLWA_SHADOW_TEX_SIZE)) {
@@ -2964,7 +2964,7 @@ void Boss01_FillShadowTex(Actor_Boss01* this, u8* tex, f32 weight) {
                     }
                 }
             } else if (sShadowSizes[i] == ODOLWA_SHADOW_SIZE_MEDIUM) {
-                for (y = 0, addY = -0xC0; y < ARRAY_SIZE(sShadowMediumMap); y++, addY += 0x40) {
+                for (y = 0, addY = -0xC0; y < ARRAY_COUNT(sShadowMediumMap); y++, addY += 0x40) {
                     for (x = -sShadowMediumMap[y]; x < sShadowMediumMap[y] - 1; x++) {
                         index = baseX + x + baseY + addY;
                         if ((index >= 0) && (index < ODOLWA_SHADOW_TEX_SIZE)) {
@@ -2973,7 +2973,7 @@ void Boss01_FillShadowTex(Actor_Boss01* this, u8* tex, f32 weight) {
                     }
                 }
             } else {
-                for (y = 0, addY = -0x80; y < ARRAY_SIZE(sShadowSmallMap); y++, addY += 0x40) {
+                for (y = 0, addY = -0x80; y < ARRAY_COUNT(sShadowSmallMap); y++, addY += 0x40) {
                     for (x = -sShadowSmallMap[y]; x < sShadowSmallMap[y] - 1; x++) {
                         index = baseX + x + baseY + addY;
                         if ((index >= 0) && (index < ODOLWA_SHADOW_TEX_SIZE)) {
@@ -3211,7 +3211,7 @@ void Boss01_Bug_Update(Actor_Boss01* this, PlayState* play) {
 
     this->frameCounter++;
 
-    for (i = 0; i < ARRAY_SIZE(this->timers); i++) {
+    for (i = 0; i < ARRAY_COUNT(this->timers); i++) {
         DECR(this->timers[i]);
     }
 

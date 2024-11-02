@@ -329,7 +329,7 @@ static void PrepareSoaringScreen(PlayState* play)
     pauseCtx->screen_idx = 1 ; /* sKaleidoSetupKscpPos1[pauseCtx->pageIndex]; */
     pauseCtx->infoPanelOffsetY = -40;
 
-    for (i = 0; i < ARRAY_SIZE(pauseCtx->worldMapPoints); i++) {
+    for (i = 0; i < ARRAY_COUNT(pauseCtx->worldMapPoints); i++) {
         pauseCtx->worldMapPoints[i] = 0;
     }
 

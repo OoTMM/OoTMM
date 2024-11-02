@@ -61,7 +61,7 @@ static ColliderJntSphInit sJntSphInit = {
         OC2_TYPE_2,
         COLSHAPE_JNTSPH,
     },
-    ARRAY_SIZE(sJntSphElementsInit),
+    ARRAY_COUNT(sJntSphElementsInit),
     sJntSphElementsInit,
 };
 
@@ -545,7 +545,7 @@ void func_80B03E2C(Actor_ObjSnowball* this, PlayState* play) {
     this->unk_1A8[1].unk_1C.y = this->actor.yawTowardsPlayer + 0x4000;
     this->unk_1A8[1].unk_24 = Rand_ZeroOne() * 600.0f;
 
-    for (i = 0; i < ARRAY_SIZE(this->unk_1A8); i++) {
+    for (i = 0; i < ARRAY_COUNT(this->unk_1A8); i++) {
         ptr = &this->unk_1A8[i];
         ptr->unk_00.x = this->actor.home.pos.x;
         ptr->unk_00.y = this->actor.home.pos.y + (61.0f * this->unk_20C);
@@ -763,7 +763,7 @@ void func_80B046E4(Actor_ObjSnowball* this, PlayState* play) {
 
     func_80B03E2C(this, play);
 
-    for (i = 0; i < ARRAY_SIZE(this->unk_1A8); i++) {
+    for (i = 0; i < ARRAY_COUNT(this->unk_1A8); i++) {
         sp44.x = this->unk_1A8[i].unk_00.x;
         sp44.y = this->unk_1A8[i].unk_00.y - (60.0f * this->unk_20C);
         sp44.z = this->unk_1A8[i].unk_00.z;
@@ -789,7 +789,7 @@ void func_80B047C0(Actor_ObjSnowball* this, PlayState* play) {
     f32 sp7C;
     Vec3f sp70;
 
-    for (i = 0; i < ARRAY_SIZE(this->unk_1A8); i++) {
+    for (i = 0; i < ARRAY_COUNT(this->unk_1A8); i++) {
         ptr = &this->unk_1A8[i];
 
         if (!(ptr->unk_2D & 1)) {
@@ -856,7 +856,7 @@ void func_80B047C0(Actor_ObjSnowball* this, PlayState* play) {
             Actor_Kill(&this->actor);
         }
     } else {
-        for (i = 0; i < ARRAY_SIZE(this->unk_1A8); i++) {
+        for (i = 0; i < ARRAY_COUNT(this->unk_1A8); i++) {
             ptr = &this->unk_1A8[i];
 
             if (ptr->unk_2D & 1) {
@@ -961,7 +961,7 @@ void func_80B04D34(Actor_ObjSnowball* this, PlayState* play) {
     MtxF sp88;
     Vec3s sp80;
 
-    for (i = 0; i < ARRAY_SIZE(this->unk_1A8); i++) {
+    for (i = 0; i < ARRAY_COUNT(this->unk_1A8); i++) {
         ptr = &this->unk_1A8[i];
 
         if (!(ptr->unk_2D & 1)) {

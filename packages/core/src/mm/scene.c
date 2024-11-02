@@ -40,7 +40,7 @@ s32 Object_SpawnPersistentCustom(ObjectContext* objectCtx, s16 id)
     objectCtx->slots[objectCtx->num].id = id;
     size = comboLoadObject(objectCtx->slots[objectCtx->num].segment, id);
 
-    if (objectCtx->num < ARRAY_SIZE(objectCtx->slots) - 1)
+    if (objectCtx->num < ARRAY_COUNT(objectCtx->slots) - 1)
     {
         objectCtx->slots[objectCtx->num + 1].segment = (void*)ALIGN16((u32)objectCtx->slots[objectCtx->num].segment + size);
     }

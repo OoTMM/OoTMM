@@ -131,7 +131,7 @@ static SkelCurveLimb* sSkelLimbs[3] = {
 };
 
 static CurveSkeletonHeader sSkel = {
-    sSkelLimbs, ARRAY_SIZE(sSkelLimbs)
+    sSkelLimbs, ARRAY_COUNT(sSkelLimbs)
 };
 
 static u8 sAlphaUpdVals[] = {
@@ -173,7 +173,7 @@ void MagicWind_Destroy(Actor* thisx, PlayState* play) {
 void MagicWind_UpdateAlpha(f32 alpha) {
     s32 i;
 
-    for (i = 0; i < ARRAY_SIZE(sAlphaUpdVals); i++) {
+    for (i = 0; i < ARRAY_COUNT(sAlphaUpdVals); i++) {
         sCylinderVtx[sAlphaUpdVals[i]].n.a = alpha * 255.0f;
     }
 }

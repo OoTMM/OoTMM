@@ -257,7 +257,7 @@ static int overrideData(ComboOverrideData* data, u32 key)
 #endif
 
     /* Check the cache */
-    for (int i = 0; i < ARRAY_SIZE(sComboOverridesCache); ++i)
+    for (int i = 0; i < ARRAY_COUNT(sComboOverridesCache); ++i)
     {
         if (sComboOverridesCache[i].key == key)
         {
@@ -286,7 +286,7 @@ static int overrideData(ComboOverrideData* data, u32 key)
             /* Copy and add to cache */
             memcpy(data, &d, sizeof(*data));
             memcpy(&sComboOverridesCache[sComboOverridesCacheCursor], &d, sizeof(d));
-            sComboOverridesCacheCursor = (sComboOverridesCacheCursor + 1) % ARRAY_SIZE(sComboOverridesCache);
+            sComboOverridesCacheCursor = (sComboOverridesCacheCursor + 1) % ARRAY_COUNT(sComboOverridesCache);
             return 1;
         }
         if (key > d.key)
@@ -376,7 +376,7 @@ int comboAddItemRawEx(PlayState* play, const ComboItemQuery* q, int updateText)
             /* If the item was a renewable, add it to the GI skips */
             if (q->ovFlags & OVF_RENEW)
             {
-                for (int i = 0; i < ARRAY_SIZE(gSharedCustomSave.netGiSkip); ++i)
+                for (int i = 0; i < ARRAY_COUNT(gSharedCustomSave.netGiSkip); ++i)
                 {
                     if (gSharedCustomSave.netGiSkip[i] == GI_NONE)
                     {

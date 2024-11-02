@@ -699,7 +699,7 @@ void KaleidoScope_BeforeUpdate(PlayState* play)
             dest = PALIGN(dest + 0xA00, 16);
 
             u32* srcMapPageBgTextures = (u32*)OverlayAddr(0x80829B74);
-            for (u8 i = 0; i < ARRAY_SIZE(sMapPageBgTextures); i++)
+            for (u8 i = 0; i < ARRAY_COUNT(sMapPageBgTextures); i++)
             {
                 sMapPageBgTextures[i] = srcMapPageBgTextures[i];
             }

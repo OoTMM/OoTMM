@@ -229,7 +229,7 @@ static void DebugHandler_Cheats(int trigger)
     }
 
     /* Draw */
-    for (int i = 0; i < ARRAY_SIZE(kCheats); ++i)
+    for (int i = 0; i < ARRAY_COUNT(kCheats); ++i)
     {
         debugDrawChar(2, i, '[');
         if (BITMAP8_GET(gSharedCustomSave.cheats, i))
@@ -244,7 +244,7 @@ static void DebugHandler_Cheats(int trigger)
     if (btnPressed(R_JPAD)) sCursor[1] += 5;
     if (btnPressed(L_JPAD)) sCursor[1] -= 5;
     if (sCursor[1] < 0) sCursor[1] = 0;
-    if (sCursor[1] >= ARRAY_SIZE(kCheats)) sCursor[1] = ARRAY_SIZE(kCheats) - 1;
+    if (sCursor[1] >= ARRAY_COUNT(kCheats)) sCursor[1] = ARRAY_COUNT(kCheats) - 1;
 
     if (btnPressed(A_BUTTON))
     {

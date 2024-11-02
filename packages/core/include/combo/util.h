@@ -9,8 +9,7 @@
 #define UNREACHABLE __builtin_unreachable
 #define UNUSED(x)   ((void)x)
 
-#define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
-
+#define ARRAY_COUNT(x)           (sizeof(x) / sizeof((x)[0]))
 #define ASSERT_SIZE(s, sz)      _Static_assert(sizeof(s) == sz, #s " size is wrong")
 #define ASSERT_OFFSET(s,f,o)    _Static_assert(offsetof(s,f) == o, "Offset of " #f " in " #s " is not " #o)
 

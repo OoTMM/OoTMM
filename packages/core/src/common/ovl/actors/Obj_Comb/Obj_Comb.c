@@ -312,7 +312,7 @@ static ColliderJntSphInit sJntSphInit = {
         OC2_TYPE_2,
         COLSHAPE_JNTSPH,
     },
-    ARRAY_SIZE(sJntSphElementsInit),
+    ARRAY_COUNT(sJntSphElementsInit),
     sJntSphElementsInit,
 };
 

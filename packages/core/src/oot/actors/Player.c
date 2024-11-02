@@ -239,7 +239,7 @@ void comboDrawExtendedMask(void)
     if (link->mask == 0)
         return;
     index = link->mask - 1;
-    if (index >= ARRAY_SIZE(kMaskCallbacks))
+    if (index >= ARRAY_COUNT(kMaskCallbacks))
         return;
     cb = kMaskCallbacks[index];
     if (!cb)

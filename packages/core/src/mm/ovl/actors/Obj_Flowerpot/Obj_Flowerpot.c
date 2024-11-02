@@ -66,7 +66,7 @@ static ColliderJntSphInit sJntSphInit = {
         OC2_TYPE_2,
         COLSHAPE_JNTSPH,
     },
-    ARRAY_SIZE(sJntSphElementsInit),
+    ARRAY_COUNT(sJntSphElementsInit),
     sJntSphElementsInit,
 };
 
@@ -202,7 +202,7 @@ void func_80A1B3D0(void)
     sp74[6] = (temp_f30 - temp_f26) * temp_f26 * temp_f20 * temp_f0 * 0.0013f;
     sp74[7] = (spAC - temp_f20) * temp_f22 * temp_f24 * temp_f0 * 0.0013f;
 
-    for (i = 0; i < ARRAY_SIZE(D_80A1D838); i++) {
+    for (i = 0; i < ARRAY_COUNT(D_80A1D838); i++) {
         ptr = &D_80A1D838[i].xx;
 
         tempf1 = sp74[(i + 0) & 7];

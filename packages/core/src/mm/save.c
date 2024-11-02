@@ -139,7 +139,7 @@ void Sram_SaveEndOfCycle(PlayState* play)
     }
 
     /* Reset unk_14 and room flags, except for dungeons */
-    for (int i = 7; i < ARRAY_SIZE(gSave.permanentSceneFlags); ++i)
+    for (int i = 7; i < ARRAY_COUNT(gSave.permanentSceneFlags); ++i)
     {
         switch (i)
         {
@@ -207,7 +207,7 @@ static void MoonCrashReset(void)
     gSave.cutscene = cutscene;
 
     /* Reset flags */
-    for (int i = 0; i < ARRAY_SIZE(gSaveContext.cycleSceneFlags); ++i)
+    for (int i = 0; i < ARRAY_COUNT(gSaveContext.cycleSceneFlags); ++i)
     {
         gSaveContext.cycleSceneFlags[i].chest = gSave.permanentSceneFlags[i].chest;
         gSaveContext.cycleSceneFlags[i].collectible = gSave.permanentSceneFlags[i].collectible;

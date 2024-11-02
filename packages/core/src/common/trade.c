@@ -93,62 +93,62 @@ s32 comboGetSlotExtras(u32 slot, u8** outItemPtr, u32* outFlags, const u8** outT
     case ITS_MM_TRADE1:
         *outFlags = gMmExtraTrade.trade1;
         *outTable = kMmTrade1;
-        *outTableSize = ARRAY_SIZE(kMmTrade1);
+        *outTableSize = ARRAY_COUNT(kMmTrade1);
         result = 0;
         break;
     case ITS_MM_TRADE2:
         *outFlags = gMmExtraTrade.trade2;
         *outTable = kMmTrade2;
-        *outTableSize = ARRAY_SIZE(kMmTrade2);
+        *outTableSize = ARRAY_COUNT(kMmTrade2);
         result = 1;
         break;
     case ITS_MM_TRADE3:
         *outFlags = gMmExtraTrade.trade3;
         *outTable = kMmTrade3;
-        *outTableSize = ARRAY_SIZE(kMmTrade3);
+        *outTableSize = ARRAY_COUNT(kMmTrade3);
         result = 2;
         break;
     case ITS_MM_HOOKSHOT:
         *outFlags = gMmExtraItems.hookshot;
         *outTable = kMmHookshot;
-        *outTableSize = ARRAY_SIZE(kMmHookshot);
+        *outTableSize = ARRAY_COUNT(kMmHookshot);
         result = 3;
         break;
     case ITS_MM_OCARINA:
         *outFlags = gMmExtraItems.ocarina;
         *outTable = kMmOcarina;
-        *outTableSize = ARRAY_SIZE(kMmOcarina);
+        *outTableSize = ARRAY_COUNT(kMmOcarina);
         result = 4;
         break;
     case ITS_MM_GREAT_FAIRY_SWORD:
         *outFlags = gMmExtraItems.hammerGFS;
         *outTable = kMmGFSHammer;
-        *outTableSize = ARRAY_SIZE(kMmGFSHammer);
+        *outTableSize = ARRAY_COUNT(kMmGFSHammer);
         result = 5;
         break;
 #else
     case ITS_OOT_TRADE_ADULT:
         *outFlags = gOotExtraTrade.adult;
         *outTable = kOotTradeAdult;
-        *outTableSize = ARRAY_SIZE(kOotTradeAdult);
+        *outTableSize = ARRAY_COUNT(kOotTradeAdult);
         result = 0;
         break;
     case ITS_OOT_TRADE_CHILD:
         *outFlags = gOotExtraTrade.child;
         *outTable = kOotTradeChild;
-        *outTableSize = ARRAY_SIZE(kOotTradeChild);
+        *outTableSize = ARRAY_COUNT(kOotTradeChild);
         result = 1;
         break;
     case ITS_OOT_HOOKSHOT:
         *outFlags = gOotExtraItems.hookshot;
         *outTable = kOotHookshot;
-        *outTableSize = ARRAY_SIZE(kOotHookshot);
+        *outTableSize = ARRAY_COUNT(kOotHookshot);
         result = 2;
         break;
     case ITS_OOT_OCARINA:
         *outFlags = gOotExtraItems.ocarina;
         *outTable = kOotOcarina;
-        *outTableSize = ARRAY_SIZE(kOotOcarina);
+        *outTableSize = ARRAY_COUNT(kOotOcarina);
         result = 3;
         break;
 #endif

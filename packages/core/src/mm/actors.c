@@ -900,7 +900,7 @@ static void Actor_PatchAdultHorse(void* loadedRam)
         return;
     }
 
-    for (int i = 0; i < ARRAY_SIZE(adultEponaPatch); i++)
+    for (int i = 0; i < ARRAY_COUNT(adultEponaPatch); i++)
     {
         u16* patchPointer = (u16*)(((u8*)loadedRam) + adultEponaPatch[i].offset);
         *patchPointer = adultEponaPatch[i].value;

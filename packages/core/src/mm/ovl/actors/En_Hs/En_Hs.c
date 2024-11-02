@@ -55,7 +55,7 @@ void func_80952C50(Actor_EnHs* this, PlayState* play)
     Actor_Player* player = GET_PLAYER(play);
     s32 i;
 
-    for (i = 0; i < ARRAY_SIZE(this->nwcPos); i++)
+    for (i = 0; i < ARRAY_COUNT(this->nwcPos); i++)
         Math_Vec3f_Copy(&this->nwcPos[i], &player->actor.world.pos);
 
     this->actor.home.rot.x = 0; // reset adult transformed count
@@ -126,7 +126,7 @@ void func_80952F00(Actor_EnHs* this, PlayState* play)
 
     EnHs_UpdateChickPos(&this->nwcPos[0], player->actor.world.pos, offset);
 
-    for (i = 1; i < ARRAY_SIZE(this->nwcPos); i++)
+    for (i = 1; i < ARRAY_COUNT(this->nwcPos); i++)
         EnHs_UpdateChickPos(&this->nwcPos[i], this->nwcPos[i - 1], offset);
 }
 

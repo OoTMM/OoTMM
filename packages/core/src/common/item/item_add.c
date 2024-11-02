@@ -1295,7 +1295,7 @@ static int addItemKeyRingMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 
 static int addItemSkeletonKeyOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    for (int j = 0; j < ARRAY_SIZE(g.maxKeysOot); ++j)
+    for (int j = 0; j < ARRAY_COUNT(g.maxKeysOot); ++j)
     {
         for (int i = 0; i < g.maxKeysOot[j]; ++i)
             addSmallKeyOot(j);
@@ -1305,7 +1305,7 @@ static int addItemSkeletonKeyOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 
 static int addItemSkeletonKeyMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    for (int j = 0; j < ARRAY_SIZE(g.maxKeysMm); ++j)
+    for (int j = 0; j < ARRAY_COUNT(g.maxKeysMm); ++j)
     {
         for (int i = 0; i < g.maxKeysMm[j]; ++i)
             addSmallKeyMm(j);
@@ -1407,7 +1407,7 @@ static int addItemSilverPouch(PlayState* play, u8 itemId, s16 gi, u16 param)
 
 static int addItemMagicalRupee(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    for (int i = 0; i < ARRAY_SIZE(gSilverRupeeData); ++i)
+    for (int i = 0; i < ARRAY_COUNT(gSilverRupeeData); ++i)
         addSilverPouch(play, i);
     return 0;
 }
@@ -1576,12 +1576,12 @@ static int addItemPondFish(PlayState* play, u8 itemId, s16 gi, u16 param)
     if (param & 0x1000)
     {
         caughtList = gSharedCustomSave.caughtAdultFishWeight;
-        caughtListCapacity = (ARRAY_SIZE(gSharedCustomSave.caughtAdultFishWeight) - 1);
+        caughtListCapacity = (ARRAY_COUNT(gSharedCustomSave.caughtAdultFishWeight) - 1);
     }
     else
     {
         caughtList = gSharedCustomSave.caughtChildFishWeight;
-        caughtListCapacity = (ARRAY_SIZE(gSharedCustomSave.caughtChildFishWeight) - 1);
+        caughtListCapacity = (ARRAY_COUNT(gSharedCustomSave.caughtChildFishWeight) - 1);
     }
 
     caughtListLength = caughtList[0];
@@ -2049,7 +2049,7 @@ int comboAddItemRaw(PlayState* play, s16 gi)
     s16 otherGi;
 
     count = addItem(play, gi);
-    for (int i = 0; i < ARRAY_SIZE(kSimpleSharedItems); ++i)
+    for (int i = 0; i < ARRAY_COUNT(kSimpleSharedItems); ++i)
     {
         si = &kSimpleSharedItems[i];
         if (si->gi == gi)

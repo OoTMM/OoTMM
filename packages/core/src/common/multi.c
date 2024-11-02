@@ -504,7 +504,7 @@ static void processMessageInPlayerPos(PlayState* play, NetContext* net, NetMsgPl
         return;
 
     freeIndex = -1;
-    for (int i = 0; i < ARRAY_SIZE(sPlayerWisps); ++i)
+    for (int i = 0; i < ARRAY_COUNT(sPlayerWisps); ++i)
     {
         if (sPlayerWisps[i].ttl && sPlayerWisps[i].clientId == clientId)
         {
@@ -544,7 +544,7 @@ static void Multi_ProcessMessages(PlayState* play, NetContext* net)
         processMessagesSendPlayerPos(play, net);
 
     /* Decrement wisps ttl */
-    for (int i = 0; i < ARRAY_SIZE(sPlayerWisps); ++i)
+    for (int i = 0; i < ARRAY_COUNT(sPlayerWisps); ++i)
     {
         if (sPlayerWisps[i].ttl)
             --sPlayerWisps[i].ttl;
@@ -587,7 +587,7 @@ void Multi_DrawWisps(PlayState* play)
         return;
 
     Gfx_SetupDL25_Xlu(play->state.gfxCtx);
-    for (int i = 0; i < ARRAY_SIZE(sPlayerWisps); ++i)
+    for (int i = 0; i < ARRAY_COUNT(sPlayerWisps); ++i)
     {
         if (sPlayerWisps[i].ttl)
             drawSingleWisp(play, &sPlayerWisps[i]);
@@ -664,7 +664,7 @@ static void Multi_ReceiveItem(PlayState* play, NetContext* net)
         }
         else
         {
-            for (int i = 0; i < ARRAY_SIZE(gSharedCustomSave.netGiSkip); ++i)
+            for (int i = 0; i < ARRAY_COUNT(gSharedCustomSave.netGiSkip); ++i)
             {
                 if (gSharedCustomSave.netGiSkip[i] == gi)
                 {
