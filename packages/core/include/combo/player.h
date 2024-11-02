@@ -41,6 +41,7 @@ int Player_OverrideLimbDrawPause(PlayState* play, s32 limbIndex, Gfx** dList, Ve
 int Player_OverrideLimbDrawGameplayFirstPerson(PlayState* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, void*);
 void Player_SetBootData(PlayState* play, Actor_Player* player);
 int Player_GetStrength(void);
+s32 Player_SetCsAction(PlayState* play, Actor* csActor, u8 csAction);
 
 #if defined(GAME_MM)
 void Player_DrawHookshotReticle(PlayState* play, Actor_Player* player, f32 distance);

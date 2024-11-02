@@ -205,4 +205,8 @@ typedef struct {
     /* 0x1 */ u8 priority;
 } SeqRequest; // size = 0x2
 
+void Audio_PlayBgm_StorePrevBgm(u16 seqId);
+void Audio_RestorePrevBgm(void);
+s16 Actor_WorldYawTowardPoint(Actor* actor, Vec3f* refPoint);
+
 #endif

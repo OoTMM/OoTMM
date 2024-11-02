@@ -5,7 +5,7 @@
 #include <combo/mm/bombers_notebook.h>
 #include "En_Hs.h"
 
-#define FLAGS (ACTOR_FLAG_MM_1 | ACTOR_FLAG_MM_8 | ACTOR_FLAG_MM_10)
+#define FLAGS (ACTOR_FLAG_MM_ATTENTION_ENABLED | ACTOR_FLAG_MM_FRIENDLY | ACTOR_FLAG_MM_10)
 
 #define THIS ((Actor_EnHs*)thisx)
 

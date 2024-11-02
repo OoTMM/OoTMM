@@ -11,71 +11,71 @@
 #define PARAMS_GET_U(p, s, n)   (((p) >> (s)) & NBITS_TO_MASK(n))
 #define PARAMS_GET_S(p, s, n)   (((p) & (NBITS_TO_MASK(n) << (s))) >> (s))
 
-#define ACTOR_FLAG_OOT_0            (1 <<  0)
-#define ACTOR_FLAG_OOT_1            (1 <<  1)
-#define ACTOR_FLAG_OOT_2            (1 <<  2)
-#define ACTOR_FLAG_OOT_3            (1 <<  3)
-#define ACTOR_FLAG_OOT_4            (1 <<  4)
-#define ACTOR_FLAG_OOT_5            (1 <<  5)
-#define ACTOR_FLAG_OOT_6            (1 <<  6)
-#define ACTOR_FLAG_OOT_7            (1 <<  7)
-#define ACTOR_FLAG_OOT_8            (1 <<  8)
-#define ACTOR_FLAG_OOT_9            (1 <<  9)
-#define ACTOR_FLAG_OOT_10           (1 <<  10)
-#define ACTOR_FLAG_OOT_ENKUSA_CUT   (1 <<  11)
-#define ACTOR_FLAG_OOT_12           (1 <<  12)
-#define ACTOR_FLAG_OOT_13           (1 <<  13)
-#define ACTOR_FLAG_OOT_14           (1 <<  14)
-#define ACTOR_FLAG_OOT_15           (1 <<  15)
-#define ACTOR_FLAG_OOT_16           (1 <<  16)
-#define ACTOR_FLAG_OOT_17           (1 <<  17)
-#define ACTOR_FLAG_OOT_18           (1 <<  18)
-#define ACTOR_FLAG_OOT_19           (1 <<  19)
-#define ACTOR_FLAG_OOT_20           (1 <<  20)
-#define ACTOR_FLAG_OOT_21           (1 <<  21)
-#define ACTOR_FLAG_OOT_22           (1 <<  22)
-#define ACTOR_FLAG_OOT_23           (1 <<  23)
-#define ACTOR_FLAG_OOT_24           (1 <<  24)
-#define ACTOR_FLAG_OOT_25           (1 <<  25)
-#define ACTOR_FLAG_OOT_26           (1 <<  26)
-#define ACTOR_FLAG_OOT_27           (1 <<  27)
-#define ACTOR_FLAG_OOT_28           (1 <<  28)
-#define ACTOR_FLAG_OOT_29           (1 <<  29)
-#define ACTOR_FLAG_OOT_30           (1 <<  30)
-#define ACTOR_FLAG_OOT_31           (1 <<  31)
+#define ACTOR_FLAG_OOT_0            (1 << 0)
+#define ACTOR_FLAG_OOT_1            (1 << 1)
+#define ACTOR_FLAG_OOT_2            (1 << 2)
+#define ACTOR_FLAG_OOT_3            (1 << 3)
+#define ACTOR_FLAG_OOT_4            (1 << 4)
+#define ACTOR_FLAG_OOT_5            (1 << 5)
+#define ACTOR_FLAG_OOT_6            (1 << 6)
+#define ACTOR_FLAG_OOT_7            (1 << 7)
+#define ACTOR_FLAG_OOT_8            (1 << 8)
+#define ACTOR_FLAG_OOT_9            (1 << 9)
+#define ACTOR_FLAG_OOT_10           (1 << 10)
+#define ACTOR_FLAG_OOT_ENKUSA_CUT   (1 << 11)
+#define ACTOR_FLAG_OOT_12           (1 << 12)
+#define ACTOR_FLAG_OOT_13           (1 << 13)
+#define ACTOR_FLAG_OOT_14           (1 << 14)
+#define ACTOR_FLAG_OOT_15           (1 << 15)
+#define ACTOR_FLAG_OOT_16           (1 << 16)
+#define ACTOR_FLAG_OOT_17           (1 << 17)
+#define ACTOR_FLAG_OOT_18           (1 << 18)
+#define ACTOR_FLAG_OOT_19           (1 << 19)
+#define ACTOR_FLAG_OOT_20           (1 << 20)
+#define ACTOR_FLAG_OOT_21           (1 << 21)
+#define ACTOR_FLAG_OOT_22           (1 << 22)
+#define ACTOR_FLAG_OOT_23           (1 << 23)
+#define ACTOR_FLAG_OOT_24           (1 << 24)
+#define ACTOR_FLAG_OOT_25           (1 << 25)
+#define ACTOR_FLAG_OOT_26           (1 << 26)
+#define ACTOR_FLAG_OOT_27           (1 << 27)
+#define ACTOR_FLAG_OOT_28           (1 << 28)
+#define ACTOR_FLAG_OOT_29           (1 << 29)
+#define ACTOR_FLAG_OOT_30           (1 << 30)
+#define ACTOR_FLAG_OOT_31           (1 << 31)
 
-#define ACTOR_FLAG_MM_1                         (1 <<  0)
-#define ACTOR_FLAG_MM_2                         (1 <<  1)
-#define ACTOR_FLAG_MM_4                         (1 <<  2)
-#define ACTOR_FLAG_MM_8                         (1 <<  3)
-#define ACTOR_FLAG_MM_10                        (1 <<  4)
-#define ACTOR_FLAG_MM_20                        (1 <<  5)
-#define ACTOR_FLAG_MM_40                        (1 <<  6)
-#define ACTOR_FLAG_MM_80                        (1 <<  7)
-#define ACTOR_FLAG_MM_100                       (1 <<  8)
-#define ACTOR_FLAG_MM_200                       (1 <<  9)
-#define ACTOR_FLAG_MM_400                       (1 <<  10)
-#define ACTOR_FLAG_MM_800                       (1 <<  11)
-#define ACTOR_FLAG_MM_1000                      (1 <<  12)
-#define ACTOR_FLAG_MM_2000                      (1 <<  13)
-#define ACTOR_FLAG_MM_4000                      (1 <<  14)
-#define ACTOR_FLAG_MM_8000                      (1 <<  15)
-#define ACTOR_FLAG_MM_10000                     (1 <<  16)
-#define ACTOR_FLAG_MM_CAN_PRESS_HEAVY_SWITCH    (1 <<  17)
-#define ACTOR_FLAG_MM_40000                     (1 <<  18)
-#define ACTOR_FLAG_MM_80000                     (1 <<  19)
-#define ACTOR_FLAG_MM_100000                    (1 <<  20)
-#define ACTOR_FLAG_MM_200000                    (1 <<  21)
-#define ACTOR_FLAG_MM_400000                    (1 <<  22)
-#define ACTOR_FLAG_MM_800000                    (1 <<  23)
-#define ACTOR_FLAG_MM_1000000                   (1 <<  24)
-#define ACTOR_FLAG_MM_2000000                   (1 <<  25)
-#define ACTOR_FLAG_MM_CAN_PRESS_SWITCH          (1 <<  26)
-#define ACTOR_FLAG_MM_8000000                   (1 <<  27)
-#define ACTOR_FLAG_MM_10000000                  (1 <<  28)
-#define ACTOR_FLAG_MM_20000000                  (1 <<  29)
-#define ACTOR_FLAG_MM_40000000                  (1 <<  30)
-#define ACTOR_FLAG_MM_80000000                  (1 <<  31)
+#define ACTOR_FLAG_MM_ATTENTION_ENABLED         (1 << 0)
+#define ACTOR_FLAG_MM_2                         (1 << 1)
+#define ACTOR_FLAG_MM_HOSTILE                   (1 << 2)
+#define ACTOR_FLAG_MM_FRIENDLY                  (1 << 3)
+#define ACTOR_FLAG_MM_10                        (1 << 4)
+#define ACTOR_FLAG_MM_20                        (1 << 5)
+#define ACTOR_FLAG_MM_40                        (1 << 6)
+#define ACTOR_FLAG_MM_80                        (1 << 7)
+#define ACTOR_FLAG_MM_100                       (1 << 8)
+#define ACTOR_FLAG_MM_200                       (1 << 9)
+#define ACTOR_FLAG_MM_400                       (1 << 10)
+#define ACTOR_FLAG_MM_800                       (1 << 11)
+#define ACTOR_FLAG_MM_1000                      (1 << 12)
+#define ACTOR_FLAG_MM_2000                      (1 << 13)
+#define ACTOR_FLAG_MM_4000                      (1 << 14)
+#define ACTOR_FLAG_MM_8000                      (1 << 15)
+#define ACTOR_FLAG_MM_10000                     (1 << 16)
+#define ACTOR_FLAG_MM_CAN_PRESS_HEAVY_SWITCH    (1 << 17)
+#define ACTOR_FLAG_MM_40000                     (1 << 18)
+#define ACTOR_FLAG_MM_80000                     (1 << 19)
+#define ACTOR_FLAG_MM_100000                    (1 << 20)
+#define ACTOR_FLAG_MM_200000                    (1 << 21)
+#define ACTOR_FLAG_MM_400000                    (1 << 22)
+#define ACTOR_FLAG_MM_800000                    (1 << 23)
+#define ACTOR_FLAG_MM_1000000                   (1 << 24)
+#define ACTOR_FLAG_MM_2000000                   (1 << 25)
+#define ACTOR_FLAG_MM_CAN_PRESS_SWITCH          (1 << 26)
+#define ACTOR_FLAG_MM_8000000                   (1 << 27)
+#define ACTOR_FLAG_MM_10000000                  (1 << 28)
+#define ACTOR_FLAG_MM_20000000                  (1 << 29)
+#define ACTOR_FLAG_MM_40000000                  (1 << 30)
+#define ACTOR_FLAG_MM_80000000                  (1 << 31)
 
 #define ACTORCAT_SWITCH         0x00
 #define ACTORCAT_BG             0x01
@@ -383,7 +383,32 @@ typedef enum {
 #define COLORFILTER_BUFFLAG_XLU    0x2000
 #define COLORFILTER_BUFFLAG_OPA    0x0000
 
+Actor* func_800BC270(PlayState* play, Actor* actor, f32 distance, u32 dmgFlags);
+s16 Actor_WorldPitchTowardPoint(Actor* actor, Vec3f* refPoint);
+void Flags_SetClearTemp(PlayState* play, s32 roomNumber);
+u8 Actor_ApplyDamage(Actor* actor);
+void Actor_MoveWithoutGravity(Actor* actor);
+s16 Actor_WorldYawTowardActor(Actor* actorA, Actor* actorB);
 #endif
+
+typedef enum AttentionRangeType
+{
+    ATTENTION_RANGE_0,  // 70   / 140
+    ATTENTION_RANGE_1,  // 170  / 255
+    ATTENTION_RANGE_2,  // 280  / 5600
+    ATTENTION_RANGE_3,  // 350  / 525   (default)
+    ATTENTION_RANGE_4,  // 700  / 1050
+    ATTENTION_RANGE_5,  // 1000 / 1500
+    ATTENTION_RANGE_6,  // 100  / 105.36842
+    ATTENTION_RANGE_7,  // 140  / 163.33333
+    ATTENTION_RANGE_8,  // 240  / 576
+    ATTENTION_RANGE_9,  // 280  / 280000
+    #if defined(GAME_MM)
+    ATTENTION_RANGE_10, // 2500 / 3750
+    #endif
+    ATTENTION_RANGE_MAX
+}
+AttentionRangeType;
 
 #if defined(GAME_OOT)
 # define X(x) (x)
