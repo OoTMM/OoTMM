@@ -493,6 +493,16 @@
 # define NA_BGM_END_CREDITS_SECOND_HALF        NA_BGM_MM_END_CREDITS_SECOND_HALF
 # define NA_BGM_NO_MUSIC                       NA_BGM_MM_NO_MUSIC
 # define NA_BGM_DISABLED                       NA_BGM_MM_DISABLED
+
+/* Aliases for OoT compat */
+# define NA_BGM_ITEM_GET                       NA_BGM_GET_ITEM
+# define NA_BGM_SMALL_ITEM_GET                 NA_BGM_GET_SMALL_ITEM
+# define NA_BGM_HEART_GET                      NA_BGM_GET_HEART
+# define NA_BGM_OCA_FAIRY_GET                  NA_BGM_LEARNED_NEW_SONG
+# define NA_BGM_OCA_TIME                       NA_BGM_OCARINA_TIME
+# define NA_BGM_OCA_EPONA                      NA_BGM_OCARINA_EPONA
+# define NA_BGM_OCA_SUNS                       NA_BGM_OCARINA_SUNS
+# define NA_BGM_OCA_STORM                      NA_BGM_OCARINA_STORM
 #endif
 
 #endif
