@@ -1175,12 +1175,12 @@ const randomizerStartingItems = (world: number, logic: LogicResult): Uint8Array 
 };
 
 export function patchRandomizer(worldId: number, logic: LogicResult, settings: Settings, patchfile: Patchfile) {
-  patchfile.addNewFile(null, 0xf0200000, randomizerData(worldId, logic), true);
-  patchfile.addNewFile(null, 0xf0300000, randomizerStartingItems(worldId, logic), false);
-  patchfile.addNewFile(null, 0xf0400000, gameChecks(worldId, settings, 'oot', logic), false);
-  patchfile.addNewFile(null, 0xf0500000, gameChecks(worldId, settings, 'mm', logic), false);
-  patchfile.addNewFile(null, 0xf0600000, gameHints(settings, 'oot', logic.hints[worldId]), true);
-  patchfile.addNewFile(null, 0xf0700000, gameHints(settings, 'mm', logic.hints[worldId]), true);
-  patchfile.addNewFile(null, 0xf0800000, gameEntrances(worldId, 'oot', logic), true);
-  patchfile.addNewFile(null, 0xf0900000, gameEntrances(worldId, 'mm', logic), true);
+  patchfile.addNewFile({ vrom: 0xf0200000, data: randomizerData(worldId, logic), compressed: true });
+  patchfile.addNewFile({ vrom: 0xf0300000, data: randomizerStartingItems(worldId, logic), compressed: false });
+  patchfile.addNewFile({ vrom: 0xf0400000, data: gameChecks(worldId, settings, 'oot', logic), compressed: false });
+  patchfile.addNewFile({ vrom: 0xf0500000, data: gameChecks(worldId, settings, 'mm', logic), compressed: false });
+  patchfile.addNewFile({ vrom: 0xf0600000, data: gameHints(settings, 'oot', logic.hints[worldId]), compressed: true });
+  patchfile.addNewFile({ vrom: 0xf0700000, data: gameHints(settings, 'mm', logic.hints[worldId]), compressed: true });
+  patchfile.addNewFile({ vrom: 0xf0800000, data: gameEntrances(worldId, 'oot', logic), compressed: true });
+  patchfile.addNewFile({ vrom: 0xf0900000, data: gameEntrances(worldId, 'mm', logic), compressed: true });
 }

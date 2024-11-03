@@ -234,7 +234,7 @@ class CustomAssetsBuilder {
     const sizeAligned = (data.length + 0xf) & ~0xf;
     const vrom = this.vrom;
     this.vrom += sizeAligned;
-    this.patch.addNewFile(name, vrom, data, compressed);
+    this.patch.addNewFile({ name: name ?? undefined, vrom, data, compressed });
     return vrom;
   }
 

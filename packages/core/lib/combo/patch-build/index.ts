@@ -12,6 +12,7 @@ import { isEntranceShuffle } from '../logic/helpers';
 import { FileResolver, Options } from '../options';
 import { World } from '../logic/world';
 import { bufReadU32BE, bufWriteU32BE } from '../util/buffer';
+import { config } from 'process';
 
 export type BuildPatchfileIn = {
   opts: Options;
@@ -120,7 +121,10 @@ export async function buildPatchfiles(args: BuildPatchfileIn): Promise<Patchfile
       if (payload.length > (game === 'mm' ? 0x50000 : 0x80000)) {
         throw new Error(`Payload too large ${game}`);
       }
-      p.addNewFile(`${game}/payload`, game === 'oot' ? 0xf0000000 : 0xf0100000, payload, false);
+      const payloadVrom = game === 'oot' ? 0xf0000000 : 0xf0100000;
+      const payloadVram = game === 'oot' ? 0x80400000 : 0x80730000; /* TODO: Codegen this */
+      const payloadVramEnd = payloadVram + payload.length;
+      p.addNewFile({ name: `${game}/payload`, vrom: payloadVrom, vram: [payloadVram, payloadVramEnd], data: payload, compressed: false });
 
       /* Handle extra overlays */
       const allOverlays = await args.resolver.glob(/ovl\/(oot|mm)\/.+\.zovlx$/);
@@ -131,13 +135,12 @@ export async function buildPatchfiles(args: BuildPatchfileIn): Promise<Patchfile
         const headerSize = raw.subarray(0, 8);
         const header = raw.subarray(8, 64);
         const data = raw.subarray(64);
-        p.addNewFile(ov, ovlAddr, data, true);
+        const vramStart = bufReadU32BE(headerSize, 0x00);
+        const vramEnd = bufReadU32BE(headerSize, 0x04);
+        p.addNewFile({ name: ov, vram: [vramStart, vramEnd], vrom: ovlAddr, data, compressed: true });
         const vromStart = ovlAddr;
         const vromEnd = ovlAddr + data.length;
         ovlAddr = vromEnd;
-
-        const vramStart = bufReadU32BE(headerSize, 0x00);
-        const vramEnd = bufReadU32BE(headerSize, 0x04);
 
         const type = bufReadU32BE(header, 0x00);
 

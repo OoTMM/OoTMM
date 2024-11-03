@@ -141,7 +141,7 @@ export async function pack(args: PackArgs): Promise<PackOutput> {
     if (name === null) {
       name = `unk/${vaddr.toString(16)}`;
     }
-    romBuilder.addFile({ type, data, name, game: 'custom', vaddr });
+    romBuilder.addFile({ type, data, name, game: 'custom', vaddr, vram: newFile.vram });
   }
 
   /* Alias everything */

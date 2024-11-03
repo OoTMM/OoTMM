@@ -46,6 +46,7 @@ export type RomFile = {
   data: Uint8Array;
   paddr?: number;
   vaddr?: number;
+  vram?: [number, number];
   alias?: RomFile;
   dma?: DmaDataRecord;
 };
@@ -158,7 +159,7 @@ export class RomBuilder {
   }
 
   addFile(args: AddFileArgs) {
-    const file: RomFile = { ...args, injected: false };
+    const file: RomFile = { ...args, vram: args.vram ? [...args.vram] : undefined, injected: false };
     if (file.game === 'custom' && file.vaddr === undefined) {
       const size = file.data.length;
       const sizeAligned = (size + 0xf) & ~0xf;
@@ -205,6 +206,14 @@ export class RomBuilder {
     if (!file)
       throw new Error(`File not found: ${name}`);
     return file;
+  }
+
+  fileByVRAM(vram: number): RomFile | null {
+    for (const file of this.files) {
+      if (file.vram && vram >= file.vram[0] && vram < file.vram[1])
+        return file;
+    }
+    return null;
   }
 
   private fixChecksum() {

@@ -81,10 +81,15 @@ class CosmeticsPass {
   private patchSymbol(name: string, buffer: Uint8Array) {
     for (const game of GAMES) {
       const syms = this.meta[game] || {};
-      const addr = syms[name];
-      if (!addr) continue;
-      const payloadFile = this.builder.fileByNameRequired(`${game}/payload`);
-      payloadFile.data.set(buffer, addr);
+      const addrs = syms[name] || [];
+      for (const addr of addrs) {
+        const file = this.builder.fileByVRAM(addr);
+        if (!file) {
+          throw new Error(`Failed to find file for symbol ${name} at 0x${addr.toString(16)}`);
+        }
+        const offset = addr - file.vram![0];
+        file.data.set(buffer, offset);
+      }
     }
   }
 

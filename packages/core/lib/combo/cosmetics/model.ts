@@ -1,17 +1,5 @@
-import { Patchfile } from "../patch-build/patchfile";
-import { RomBuilder } from "../rom-builder";
-import { bufWriteU16BE, bufWriteU32BE } from "../util/buffer";
-
-const OOT_FILES = {
-  CODE:               0x00A87000,
-  PLAYER:             0x00BCDB70,
-  HOOK:               0x00CAD2C0,
-  SHIELD:             0x00DB1F40,
-  STICK:              0x00EAD0F0,
-  GRAVEYARD_KID:      0x00E60920,
-  GUARD:              0x00D1A690,
-  RUNNING_MAN:        0x00E50440,
-};
+import { RomBuilder } from '../rom-builder';
+import { bufWriteU16BE, bufWriteU32BE } from '../util/buffer';
 
 const OOT_LINK_CHILD_OFFSETS = {
   LUT_DL_SHIELD_DEKU: 0x060050D0,

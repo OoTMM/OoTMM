@@ -1,7 +1,7 @@
 import JSZip from 'jszip';
 import { concatUint8Arrays } from 'uint8array-extras';
 
-const VERSION = '1.0';
+const VERSION = '1.1';
 
 class BlobBuilder {
   private parts: Uint8Array[];
@@ -31,8 +31,9 @@ type Patch = {
 }
 
 type NewFile = {
-  name: string | null;
+  name?: string;
   vrom: number;
+  vram?: [number, number];
   data: Uint8Array;
   compressed: boolean;
 }
@@ -66,8 +67,8 @@ export class Patchfile {
     this.patches[file] = patches;
   }
 
-  addNewFile(name: string | null, vrom: number, data: Uint8Array, compressed: boolean) {
-    this.newFiles.push({ name, vrom, data, compressed });
+  addNewFile(args: NewFile) {
+    this.newFiles.push({ ...args, vram: args.vram ? [...args.vram] : undefined });
   }
 
   async deserialize(data: Uint8Array) {
@@ -96,7 +97,7 @@ export class Patchfile {
     /* Load new files */
     for (const f of meta.newFiles) {
       const data = blob.subarray(f.offset, f.offset + f.size);
-      this.newFiles.push({ name: f.name, vrom: f.vrom, data, compressed: f.compressed });
+      this.newFiles.push({ name: f.name, vrom: f.vrom, vram: f.vram, data, compressed: f.compressed });
     }
 
     /* Load patches */
@@ -125,6 +126,7 @@ export class Patchfile {
       nf.name = f.name;
       nf.compressed = f.compressed;
       nf.vrom = f.vrom;
+      nf.vram = f.vram;
       const { offset, size } = blobBuilder.append(f.data);
       nf.offset = offset;
       nf.size = size;
