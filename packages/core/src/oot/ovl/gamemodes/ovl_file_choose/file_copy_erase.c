@@ -91,13 +91,18 @@ void FileSelect_SelectCopySource(GameState* thisx) {
 
             if (this->stickAdjY >= 30) {
                 this->buttonIndex--;
-
+                if (this->buttonIndex == FS_BTN_COPY_FILE_3) {
+                    this->buttonIndex--;
+                }
                 if (this->buttonIndex < FS_BTN_COPY_FILE_1) {
                     this->buttonIndex = FS_BTN_COPY_QUIT;
                 }
             } else {
                 this->buttonIndex++;
 
+                if (this->buttonIndex == FS_BTN_COPY_FILE_3) {
+                    this->buttonIndex++;
+                }
                 if (this->buttonIndex > FS_BTN_COPY_QUIT) {
                     this->buttonIndex = FS_BTN_COPY_FILE_1;
                 }
@@ -208,6 +213,10 @@ void FileSelect_SelectCopyDest(GameState* thisx) {
             if (this->stickAdjY >= 30) {
                 this->buttonIndex--;
 
+                if (this->buttonIndex == FS_BTN_COPY_FILE_3) {
+                    this->buttonIndex--;
+                }
+
                 if (this->buttonIndex == this->selectedFileIndex) {
                     this->buttonIndex--;
 
@@ -221,6 +230,14 @@ void FileSelect_SelectCopyDest(GameState* thisx) {
                 }
             } else {
                 this->buttonIndex++;
+
+                if (this->buttonIndex == this->selectedFileIndex) {
+                    this->buttonIndex++;
+                }
+
+                if (this->buttonIndex == FS_BTN_COPY_FILE_3) {
+                    this->buttonIndex++;
+                }
 
                 if (this->buttonIndex > FS_BTN_COPY_QUIT) {
                     this->buttonIndex = FS_BTN_COPY_FILE_1;
@@ -719,11 +736,17 @@ void FileSelect_EraseSelect(GameState* thisx) {
 
             if (this->stickAdjY >= 30) {
                 this->buttonIndex--;
+                if (this->buttonIndex == FS_BTN_ERASE_FILE_3) {
+                    this->buttonIndex--;
+                }
                 if (this->buttonIndex < FS_BTN_ERASE_FILE_1) {
                     this->buttonIndex = FS_BTN_ERASE_QUIT;
                 }
             } else {
                 this->buttonIndex++;
+                if (this->buttonIndex == FS_BTN_ERASE_FILE_3) {
+                    this->buttonIndex++;
+                }
                 if (this->buttonIndex > FS_BTN_ERASE_QUIT) {
                     this->buttonIndex = FS_BTN_ERASE_FILE_1;
                 }

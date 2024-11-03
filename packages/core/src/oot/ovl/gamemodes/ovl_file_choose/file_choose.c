@@ -241,11 +241,17 @@ void FileSelect_UpdateMainMenu(GameState* thisx) {
 
             if (this->stickAdjY > 30) {
                 this->buttonIndex--;
+                if (this->buttonIndex == FS_BTN_MAIN_FILE_3) {
+                    this->buttonIndex--;
+                }
                 if (this->buttonIndex < FS_BTN_MAIN_FILE_1) {
                     this->buttonIndex = FS_BTN_MAIN_OPTIONS;
                 }
             } else {
                 this->buttonIndex++;
+                if (this->buttonIndex == FS_BTN_MAIN_FILE_3) {
+                    this->buttonIndex++;
+                }
                 if (this->buttonIndex > FS_BTN_MAIN_OPTIONS) {
                     this->buttonIndex = FS_BTN_MAIN_FILE_1;
                 }
@@ -921,7 +927,7 @@ void FileSelect_DrawWindowContents(GameState* thisx) {
     gDPPipeSync(POLY_OPA_DISP++);
 
     // draw file info box (large box when a file is selected)
-    for (fileIndex = 0; fileIndex < 3; fileIndex++, temp += 20) {
+    for (fileIndex = 0; fileIndex < 2; fileIndex++, temp += 20) {
         gDPPipeSync(POLY_OPA_DISP++);
         gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, this->windowColor[0], this->windowColor[1], this->windowColor[2],
                         this->fileInfoAlpha[fileIndex]);
@@ -934,8 +940,9 @@ void FileSelect_DrawWindowContents(GameState* thisx) {
             gSP1Quadrangle(POLY_OPA_DISP++, quadVtxIndex, quadVtxIndex + 2, quadVtxIndex + 3, quadVtxIndex + 1, 0);
         }
     }
+    temp += 20;
 
-    for (i = 0; i < 3; i++, temp += 20) {
+    for (i = 0; i < 2; i++, temp += 20) {
         // draw file button
         gSPVertex(POLY_OPA_DISP++, &this->windowContentVtx[temp], 20, 0);
 
@@ -978,9 +985,10 @@ void FileSelect_DrawWindowContents(GameState* thisx) {
             gSP1Quadrangle(POLY_OPA_DISP++, 16, 18, 19, 17, 0);
         }
     }
+    temp += 20;
 
     // draw file info
-    for (fileIndex = 0; fileIndex < 3; fileIndex++) {
+    for (fileIndex = 0; fileIndex < 2; fileIndex++) {
         isActive = ((this->n64ddFlag == this->n64ddFlags[fileIndex]) || (this->nameBoxAlpha[fileIndex] == 0)) ? 0 : 1;
         FileSelect_DrawFileInfo(&this->state, fileIndex, isActive);
     }
