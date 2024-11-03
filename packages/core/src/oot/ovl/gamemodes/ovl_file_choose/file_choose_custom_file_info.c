@@ -90,6 +90,8 @@ static void FileSelect_CustomFileInfoPrepareOotInventory(FileSelectState* this, 
 {
     s16 iconOcarina;
     s16 iconHookshot;
+    u8 itemId;
+    u8 hasBottle;
 
     /* Pre-compute complex icons */
     if (gOotExtraItems.ocarina & 2)
@@ -102,13 +104,25 @@ static void FileSelect_CustomFileInfoPrepareOotInventory(FileSelectState* this, 
     else
         iconHookshot = ITEM_OOT_HOOKSHOT;
 
+    hasBottle = 0;
+    for (int i = 0; i < 4; ++i)
+    {
+        itemId = gOotSave.inventory.items[ITS_OOT_BOTTLE + i];
+        if (itemId >= ITEM_OOT_BOTTLE_EMPTY && itemId <= ITEM_OOT_POE && itemId != ITEM_OOT_RUTO_LETTER)
+        {
+            hasBottle = 1;
+            break;
+        }
+    }
+
     /* Row 1 */
-    drawItemIconSimple(list, end, x, y, 0, 0, ITEM_OOT_STICK,       gOotSave.inventory.items[ITS_OOT_STICKS] == ITEM_OOT_STICK);
-    drawItemIconSimple(list, end, x, y, 1, 0, ITEM_OOT_NUT,         gOotSave.inventory.items[ITS_OOT_NUTS] == ITEM_OOT_NUT);
-    drawItemIconSimple(list, end, x, y, 2, 0, ITEM_OOT_BOMB,        gOotSave.inventory.items[ITS_OOT_BOMBS] == ITEM_OOT_BOMB);
-    drawItemIconSimple(list, end, x, y, 3, 0, ITEM_OOT_BOW,         gOotSave.inventory.items[ITS_OOT_BOW] == ITEM_OOT_BOW);
-    drawItemIconSimple(list, end, x, y, 4, 0, ITEM_OOT_ARROW_FIRE,  gOotSave.inventory.items[ITS_OOT_ARROW_FIRE] == ITEM_OOT_ARROW_FIRE);
-    drawItemIconSimple(list, end, x, y, 5, 0, ITEM_OOT_SPELL_FIRE,  gOotSave.inventory.items[ITS_OOT_SPELL_FIRE] == ITEM_OOT_SPELL_FIRE);
+    drawItemIconSimple(list, end, x, y, 0, 0, ITEM_OOT_STICK,           gOotSave.inventory.items[ITS_OOT_STICKS] == ITEM_OOT_STICK);
+    drawItemIconSimple(list, end, x, y, 1, 0, ITEM_OOT_NUT,             gOotSave.inventory.items[ITS_OOT_NUTS] == ITEM_OOT_NUT);
+    drawItemIconSimple(list, end, x, y, 2, 0, ITEM_OOT_BOMB,            gOotSave.inventory.items[ITS_OOT_BOMBS] == ITEM_OOT_BOMB);
+    drawItemIconSimple(list, end, x, y, 3, 0, ITEM_OOT_BOW,             gOotSave.inventory.items[ITS_OOT_BOW] == ITEM_OOT_BOW);
+    drawItemIconSimple(list, end, x, y, 4, 0, ITEM_OOT_ARROW_FIRE,      gOotSave.inventory.items[ITS_OOT_ARROW_FIRE] == ITEM_OOT_ARROW_FIRE);
+    drawItemIconSimple(list, end, x, y, 5, 0, ITEM_OOT_SPELL_FIRE,      gOotSave.inventory.items[ITS_OOT_SPELL_FIRE] == ITEM_OOT_SPELL_FIRE);
+    drawItemIconSimple(list, end, x, y, 6, 0, ITEM_OOT_BOTTLE_EMPTY,    hasBottle);
 
     /* Row 2 */
     drawItemIconSimple(list, end, x, y, 0, 1, ITEM_OOT_SLINGSHOT,   gOotSave.inventory.items[ITS_OOT_SLINGSHOT] == ITEM_OOT_SLINGSHOT);
@@ -117,6 +131,7 @@ static void FileSelect_CustomFileInfoPrepareOotInventory(FileSelectState* this, 
     drawItemIconSimple(list, end, x, y, 3, 1, iconHookshot,         gOotExtraItems.hookshot);
     drawItemIconSimple(list, end, x, y, 4, 1, ITEM_OOT_ARROW_ICE,   gOotSave.inventory.items[ITS_OOT_ARROW_ICE] == ITEM_OOT_ARROW_ICE);
     drawItemIconSimple(list, end, x, y, 5, 1, ITEM_OOT_SPELL_WIND,  gOotSave.inventory.items[ITS_OOT_SPELL_WIND] == ITEM_OOT_SPELL_WIND);
+    drawItemIconSimple(list, end, x, y, 6, 1, ITEM_OOT_RUTO_LETTER, gOotExtraItems.rutoLetter);
 
     /* Row 3 */
     drawItemIconSimple(list, end, x, y, 0, 2, ITEM_OOT_BOOMERANG,   gOotSave.inventory.items[ITS_OOT_BOOMERANG] == ITEM_OOT_BOOMERANG);
