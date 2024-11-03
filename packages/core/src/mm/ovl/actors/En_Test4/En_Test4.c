@@ -43,7 +43,7 @@ void EnTest4_HandleDayNightSwapFromInit(Actor_EnTest4* this, PlayState* play)
         }
 
         Interface_NewDay(play, gMmSave.day);
-        gSceneSeqState = 0xfe; // SCENESEQ_MORNING
+        gSceneSeqState = SCENESEQ_MORNING;
         Environment_PlaySceneSequence(play);
         Environment_NewDay(&play->envCtx);
         this->actionFunc = EnTest4_HandleEvents;
@@ -100,7 +100,7 @@ void EnTest4_HandleDayNightSwap(Actor_EnTest4* this, PlayState* play)
         gMmSave.time = CLOCK_TIME(6, 0);
         Interface_NewDay(play, gMmSave.day);
         Message_DisplaySceneTitleCard(play, sDawnOfTextIds[gMmSave.day - 1]);
-        gSceneSeqState = 0xfe; // SCENESEQ_MORNING
+        gSceneSeqState = SCENESEQ_MORNING;
         Environment_PlaySceneSequence(play);
         Environment_NewDay(&play->envCtx);
         this->actionFunc = EnTest4_HandleEvents;
@@ -679,7 +679,7 @@ void EnTest4_Update(Actor_EnTest4* this, PlayState* play)
 
     Actor_Player* player = GET_PLAYER(play);
 
-    if (player->state & (1 << 1)) return;
+    if (player->state & PLAYER_STATE1_MM_2) return;
 
     this->actionFunc(this, play);
 

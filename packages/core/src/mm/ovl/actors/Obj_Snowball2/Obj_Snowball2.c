@@ -1,22 +1,13 @@
-
-
-
-#define ENOBJSNOWBALL2_GET_3F(thisx) ((thisx)->params & 0x3F)
-#define ENOBJSNOWBALL2_GET_7F00(thisx) (((thisx)->params >> 8) & 0x7F)
-
 #include <combo.h>
 #include <combo/global.h>
 #include <combo/item.h>
 #include "Obj_Snowball2.h"
+#include <assets/mm/objects/object_goroiwa.h>
+
+#define ENOBJSNOWBALL2_GET_3F(thisx) ((thisx)->params & 0x3F)
+#define ENOBJSNOWBALL2_GET_7F00(thisx) (((thisx)->params >> 8) & 0x7F)
 
 #define FLAGS (ACTOR_FLAG_MM_800000)
-
-#if defined(GAME_MM)
-#define SEGADDR_GOROIWA_DL_0072F0 SEGADDR_FROM_OFFSET(6, 0x72f0)
-#define SEGADDR_GOROIWA_DL_0077D0 SEGADDR_FROM_OFFSET(6, 0x77d0)
-#define SEGADDR_GOROIWA_DL_007C60 SEGADDR_FROM_OFFSET(6, 0x7c60)
-#define SEGADDR_GOROIWA_DL_008B90 SEGADDR_FROM_OFFSET(6, 0x8b90)
-#endif
 
 void ObjSnowball2_Init(Actor_ObjSnowball2* this, PlayState* play);
 void ObjSnowball2_Destroy(Actor_ObjSnowball2* this, PlayState* play);
@@ -65,10 +56,10 @@ Color_RGBA8 D_80B3A914 = { 250, 250, 250, 255 };
 Color_RGBA8 D_80B3A918 = { 180, 180, 180, 255 };
 
 Gfx* D_80B3A91C[] = {
-    SEGADDR_GOROIWA_DL_0072F0,
-    SEGADDR_GOROIWA_DL_0077D0,
-    SEGADDR_GOROIWA_DL_007C60,
-    SEGADDR_GOROIWA_DL_007C60,
+    (void*)object_goroiwa_DL_0072F0,
+    (void*)object_goroiwa_DL_0077D0,
+    (void*)object_goroiwa_DL_007C60,
+    (void*)object_goroiwa_DL_007C60,
 };
 
 Vec3f D_80B3A92C = { 0.0f, 0.3f, 0.0f };
@@ -728,7 +719,7 @@ void ObjSnowball2_Draw(Actor_ObjSnowball2* this, PlayState* play) {
 
     }
     CLOSE_DISPS();
-    Gfx_DrawDListOpa(play, SEGADDR_GOROIWA_DL_008B90);
+    Gfx_DrawDListOpa(play, (void*)object_goroiwa_DL_008B90);
 }
 
 ActorInit Obj_Snowball2_InitVars = {

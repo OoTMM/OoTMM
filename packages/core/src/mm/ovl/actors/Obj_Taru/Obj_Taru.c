@@ -2,6 +2,7 @@
 #include <combo/global.h>
 #include <combo/item.h>
 #include <combo/custom.h>
+#include <assets/mm/objects/object_taru.h>
 #include "Obj_Taru.h"
 
 #define FLAGS 0
@@ -303,12 +304,12 @@ static int ObjTaru_CsmcType(Actor_ObjTaru* this)
 }
 
 static const Gfx sListLoaderTextureDefault[] = {
-    gsDPLoadTextureBlock(0x06000670, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 32, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 4, 5, 0, 0),
+    gsDPLoadTextureBlock(gObjTaruBarrelSideTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 32, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 4, 5, 0, 0),
     gsSPEndDisplayList(),
 };
 
 static const Gfx sListLoaderTopDefault[] = {
-    gsDPLoadTextureBlock(0x06000A70, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 16, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 5, 4, 0, 0),
+    gsDPLoadTextureBlock(gObjTaruBarrelTopTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 16, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_MIRROR | G_TX_CLAMP, 5, 4, 0, 0),
     gsSPEndDisplayList(),
 };
 
@@ -355,12 +356,12 @@ static void ObjTaru_DrawBarrel(Actor_ObjTaru* this, PlayState* play)
     }
     CLOSE_DISPS();
 
-    Gfx_DrawDListOpa(play, (Gfx*)0x06000420);
+    Gfx_DrawDListOpa(play, (void*)gObjTaruBarrelDL);
 }
 
 static void ObjTaru_DrawPlank(Actor_ObjTaru* this, PlayState* play)
 {
-    Gfx_DrawDListOpa(play, (Gfx*)0x06001140);
+    Gfx_DrawDListOpa(play, (void*)gObjTaruBreakablePiratePanelDL);
 }
 
 void ObjTaru_Draw(Actor_ObjTaru* this, PlayState* play)

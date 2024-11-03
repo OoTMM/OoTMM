@@ -1,16 +1,10 @@
 #include <combo.h>
 #include <combo/sfx.h>
+#include <assets/mm/objects/object_nwc.h>
+#include <assets/mm/objects/object_niw.h>
 #include "En_Nwc.h"
 
 #define FLAGS (ACTOR_FLAG_MM_10 | ACTOR_FLAG_MM_80000000)
-
-#if defined(GAME_MM)
-# define SEGADDR_NIW_SKEL           ((void*)0x06002530)
-# define SEGADDR_NIW_IDLE_ANIM      ((void*)0x060000e8)
-# define SEGADDR_NWC_OPEN_EYES      ((void*)0x060007d0)
-# define SEGADDR_NWC_CLOSED_EYES    ((void*)0x060009d0)
-# define SEGADDR_NWC_BODY_DL        ((void*)0x060002e8)
-#endif
 
 void EnNwc_Init(Actor_EnNwc* this, PlayState* play);
 void EnNwc_Destroy(Actor_EnNwc* this, PlayState* play);
@@ -239,9 +233,9 @@ void EnNwc_LoadNiwSkeleton(Actor_EnNwc* this, PlayState* play)
     {
         gSegments[0x06] = OS_K0_TO_PHYSICAL(play->objectCtx.slots[this->niwObjectSlot].segment);
 
-        SkelAnime_InitFlex(play, &this->niwSkeleton, SEGADDR_NIW_SKEL, SEGADDR_NIW_IDLE_ANIM, this->jointTable, this->morphTable,
+        SkelAnime_InitFlex(play, &this->niwSkeleton, (void*)gNiwSkel, (void*)gNiwIdleAnim, this->jointTable, this->morphTable,
                            NIW_LIMB_MAX);
-        Animation_Change(&this->niwSkeleton, SEGADDR_NIW_IDLE_ANIM, 1.0f, 0.0f, Animation_GetLastFrame(SEGADDR_NIW_IDLE_ANIM),
+        Animation_Change(&this->niwSkeleton, (void*)gNiwIdleAnim, 1.0f, 0.0f, Animation_GetLastFrame((void*)gNiwIdleAnim),
                          0, 0.0f);
 
         gSegments[0x06] = OS_K0_TO_PHYSICAL(play->objectCtx.slots[this->nwcObjectIndex].segment);
@@ -487,7 +481,7 @@ void EnNwc_Update(Actor_EnNwc* this, PlayState* play)
 
 void EnNwc_Draw(Actor_EnNwc* this, PlayState* play)
 {
-    void* eyeTextures[] = { SEGADDR_NWC_OPEN_EYES, SEGADDR_NWC_CLOSED_EYES };
+    void* eyeTextures[] = { gNwcEyeOpenTex, gNwcEyeClosedTex };
     Gfx* gfx;
 
     OPEN_DISPS(play->state.gfxCtx);
@@ -496,7 +490,7 @@ void EnNwc_Draw(Actor_EnNwc* this, PlayState* play)
     gfx = POLY_OPA_DISP;
     gSPSegment(&gfx[0], 0x08, Lib_SegmentedToVirtual(eyeTextures[this->blinkState]));
     gSPMatrix(&gfx[1], Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPDisplayList(&gfx[2], SEGADDR_NWC_BODY_DL);
+    gSPDisplayList(&gfx[2], gNwcBodyDL);
     POLY_OPA_DISP = &gfx[3];
 
     CLOSE_DISPS();

@@ -3,11 +3,10 @@
 #include <combo/global.h>
 #include <combo/math.h>
 #include <combo/mm/bombers_notebook.h>
+#include <assets/mm/objects/object_hs.h>
 #include "En_Hs.h"
 
 #define FLAGS (ACTOR_FLAG_MM_ATTENTION_ENABLED | ACTOR_FLAG_MM_FRIENDLY | ACTOR_FLAG_MM_10)
-
-#define THIS ((Actor_EnHs*)thisx)
 
 void EnHs_Init(Actor_EnHs* this, PlayState* play);
 void EnHs_Destroy(Actor_EnHs* this, PlayState* play);
@@ -21,11 +20,6 @@ void EnHs_DoNothing(Actor_EnHs* this, PlayState* play);
 void EnHs_SceneTransitToBunnyHoodDialogue(Actor_EnHs* this, PlayState* play);
 void func_80953354(Actor_EnHs* this, PlayState* play);
 void func_8095345C(Actor_EnHs* this, PlayState* play);
-
-#if defined(GAME_MM)
-# define SEGADDR_EN_HS_SKEL         ((void*)0x06006260)
-# define SEGADDR_EN_HS_IDLE_ANIM    ((void*)0x060005c0)
-#endif
 
 static ColliderCylinderInit sCylinderInit =
 {
@@ -65,9 +59,9 @@ void func_80952C50(Actor_EnHs* this, PlayState* play)
 void EnHs_Init(Actor_EnHs* this, PlayState* play)
 {
     ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawCircle, 36.0f);
-    SkelAnime_InitFlex(play, &this->skelAnime, SEGADDR_EN_HS_SKEL, SEGADDR_EN_HS_IDLE_ANIM, this->jointTable, this->morphTable,
+    SkelAnime_InitFlex(play, &this->skelAnime, (void*)gHsSkel, (void*)gHsIdleAnim, this->jointTable, this->morphTable,
                        OBJECT_HS_LIMB_MAX);
-    Animation_PlayLoop(&this->skelAnime, SEGADDR_EN_HS_IDLE_ANIM);
+    Animation_PlayLoop(&this->skelAnime, (void*)gHsIdleAnim);
     Collider_InitAndSetCylinder(play, &this->collider, &this->actor, &sCylinderInit);
     this->actor.colChkInfo.mass = MASS_IMMOVABLE;
     Actor_SetScale(&this->actor, 0.01f);

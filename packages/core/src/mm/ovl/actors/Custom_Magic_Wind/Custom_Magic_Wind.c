@@ -159,7 +159,7 @@ void MagicWind_Init(Actor* thisx, PlayState* play) {
         case 1:
             SkelCurve_SetAnim(&this->skelCurve, &sAnim, 60.0f, 0.0f, 60.0f, -1.0f);
             MagicWind_SetupAction(this, MagicWind_Shrink);
-            Player_PlaySfx(player, 0x87B); /* NA_SE_PL_MAGIC_WIND_WARP */
+            Player_PlaySfx(player, NA_SE_PL_MAGIC_WIND_WARP);
             break;
     }
 }
@@ -186,7 +186,7 @@ void MagicWind_WaitForTimer(MagicWind* this, PlayState* play) {
         return;
     }
 
-    Player_PlaySfx(player, 0x87A); /* NA_SE_PL_MAGIC_WIND_NORMAL */
+    Player_PlaySfx(player, NA_SE_PL_MAGIC_WIND_NORMAL);
     MagicWind_UpdateAlpha(1.0f);
     MagicWind_SetupAction(this, MagicWind_Grow);
     SkelCurve_Update(play, &this->skelCurve);
@@ -283,10 +283,10 @@ ActorInit Magic_Wind_InitVars = {
     FLAGS,
     1,
     sizeof(MagicWind),
-    MagicWind_Init,
-    MagicWind_Destroy,
-    MagicWind_Update,
-    MagicWind_Draw,
+    (ActorFunc)MagicWind_Init,
+    (ActorFunc)MagicWind_Destroy,
+    (ActorFunc)MagicWind_Update,
+    (ActorFunc)MagicWind_Draw,
 };
 
 OVL_INFO_ACTOR(ACTOR_CUSTOM_SPELL_WIND, Magic_Wind_InitVars);

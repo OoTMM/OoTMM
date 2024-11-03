@@ -1,6 +1,8 @@
 #include <combo.h>
 #include <combo/item.h>
 #include <combo/mm/bombers_notebook.h>
+#include <assets/mm/objects/object_yb.h>
+#include <assets/mm/objects/gameplay_keep.h>
 
 #include "En_Yb.h"
 
@@ -57,10 +59,10 @@ static ColliderCylinderInit sCylinderInit = {
 
 // crashes if I try to mod it in to look at it
 //  assumption: draw uses two different skeleton functions, might be incompatible
-static AnimationHeader* gYbUnusedAnimations[] = { SEGADDR_EN_YB_UNUSED_ANIM };
+static AnimationHeader* gYbUnusedAnimations[] = { (void*)gYbUnusedAnimations };
 
 static PlayerAnimationHeader* gPlayerAnimations[] = {
-    SEGADDR_EN_PLAYER_ANIM_WAIT,
+    (void*)gPlayerAnim_link_normal_wait_free,
     SEGADDR_EN_PLAYER_ANIM_DANCE_LOOP,
 };
 

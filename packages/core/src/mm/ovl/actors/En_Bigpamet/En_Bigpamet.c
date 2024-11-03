@@ -1,6 +1,9 @@
+#include <combo.h>
+#include <assets/mm/objects/gameplay_keep.h>
+#include <assets/mm/objects/object_tl.h>
+
 #include "En_Bigpamet.h"
 #include "../En_Pametfrog/En_Pametfrog.h"
-#include <combo.h>
 
 #define FLAGS (ACTOR_FLAG_MM_ATTENTION_ENABLED | ACTOR_FLAG_MM_HOSTILE | ACTOR_FLAG_MM_10 | ACTOR_FLAG_MM_20 | ACTOR_FLAG_MM_400)
 
@@ -37,30 +40,17 @@ void func_80A28D80(Actor_EnBigpamet* this);
 void func_80A28ED4(Actor_EnBigpamet* this);
 
 ActorInit En_Bigpamet_Init = {
-    /**/ ACTOR_EN_BIGPAMET,
-    /**/ ACTORCAT_BOSS,
-    /**/ FLAGS,
-    /**/ OBJECT_TL,
-    /**/ sizeof(Actor_EnBigpamet),
-    /**/ (ActorFunc)EnBigpamet_Init,
-    /**/ (ActorFunc)EnBigpamet_Destroy,
-    /**/ (ActorFunc)EnBigpamet_Update,
-    /**/ (ActorFunc)EnBigpamet_Draw,
+    ACTOR_EN_BIGPAMET,
+    ACTORCAT_BOSS,
+    FLAGS,
+    OBJECT_TL,
+    sizeof(Actor_EnBigpamet),
+    (ActorFunc)EnBigpamet_Init,
+    (ActorFunc)EnBigpamet_Destroy,
+    (ActorFunc)EnBigpamet_Update,
+    (ActorFunc)EnBigpamet_Draw,
 };
 
-#define gSnapperEyeOpenTex           SEGADDR_FROM_OFFSET(6, 0x55a0)
-#define gSnapperEyeHalfTex           SEGADDR_FROM_OFFSET(6, 0x57a0)
-#define gSnapperEyeClosedTex         SEGADDR_FROM_OFFSET(6, 0x59a0)
-#define gSnapperSkel                 SEGADDR_FROM_OFFSET(6, 0x7c70)
-#define gSnapperIdleAnim             SEGADDR_FROM_OFFSET(6, 0x4210)
-#define gSpikedSnapperSkel           SEGADDR_FROM_OFFSET(6, 0x1a50)
-#define gSpikedSnapperIdleAnim       SEGADDR_FROM_OFFSET(6, 0x0b30)
-#define gSnapperWalkAnim             SEGADDR_FROM_OFFSET(6, 0x823c)
-#define gSnapperRetreatIntoShellAnim SEGADDR_FROM_OFFSET(6, 0x1c68)
-#define gSnapperEmergeFromShellAnim  SEGADDR_FROM_OFFSET(6, 0x31dc)
-#define gSnapperDeathAnim            SEGADDR_FROM_OFFSET(6, 0x0af4)
-#define gSnapperRearUpAnim           SEGADDR_FROM_OFFSET(6, 0x0440)
-#define gameplay_keep_DL_06AB30      SEGADDR_FROM_OFFSET(4, 0x6ab30)
 #define QUAKE_TYPE_3                3
 
 static ColliderCylinderInit sCylinderInit = {
@@ -145,9 +135,9 @@ void EnBigpamet_Init(Actor_EnBigpamet* this, PlayState* play) {
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
 
-    SkelAnime_InitFlex(play, &this->snapperSkelAnime, gSnapperSkel, gSnapperIdleAnim, this->snapperJointTable,
+    SkelAnime_InitFlex(play, &this->snapperSkelAnime, (void*)gSnapperSkel, (void*)gSnapperIdleAnim, this->snapperJointTable,
                        this->snapperMorphTable, SNAPPER_LIMB_MAX);
-    SkelAnime_InitFlex(play, &this->spikedSnapperSkelAnime, gSpikedSnapperSkel, gSpikedSnapperIdleAnim,
+    SkelAnime_InitFlex(play, &this->spikedSnapperSkelAnime, (void*)gSpikedSnapperSkel, (void*)gSpikedSnapperIdleAnim,
                        this->spikedSnapperJointTable, this->spikedSnapperMorphTable, SPIKED_SNAPPER_LIMB_MAX);
 
     ActorShape_Init(&this->actor.shape, 0.0f, ActorShadow_DrawCircle, 55.0f);
@@ -391,7 +381,7 @@ void func_80A281DC(Actor_EnBigpamet* this, PlayState* play) {
 }
 
 void func_80A28274(Actor_EnBigpamet* this) {
-    Animation_PlayLoop(&this->snapperSkelAnime, gSnapperIdleAnim);
+    Animation_PlayLoop(&this->snapperSkelAnime, (void*)gSnapperIdleAnim);
     this->actor.draw = EnBigpamet_Draw;
     this->unk_29E = 20;
     this->actionFunc = func_80A282C8;
@@ -425,7 +415,7 @@ void func_80A283A0(Actor_EnBigpamet* this, PlayState* play) {
 }
 
 void func_80A283F0(Actor_EnBigpamet* this) {
-    Animation_PlayLoop(&this->snapperSkelAnime, gSnapperWalkAnim);
+    Animation_PlayLoop(&this->snapperSkelAnime, (void*)gSnapperWalkAnim);
     this->actor.speed = 1.0f;
     this->actor.world.rot.y = this->actor.shape.rot.y;
     this->actor.params = ENBIGPAMET_1;
@@ -447,7 +437,7 @@ void func_80A2844C(Actor_EnBigpamet* this, PlayState* play) {
 }
 
 void func_80A284E4(Actor_EnBigpamet* this) {
-    Animation_MorphToPlayOnce(&this->snapperSkelAnime, gSnapperRetreatIntoShellAnim, -3.0f);
+    Animation_MorphToPlayOnce(&this->snapperSkelAnime, (void*)gSnapperRetreatIntoShellAnim, -3.0f);
     this->unk_29E = 0;
     this->unk_2A8 = 1.0f;
     this->unk_2A4 = 1.0f;
@@ -580,7 +570,7 @@ void func_80A289C8(Actor_EnBigpamet* this, PlayState* play) {
 
 void func_80A28A28(Actor_EnBigpamet* this) {
     this->actor.draw = EnBigpamet_Draw;
-    Animation_MorphToPlayOnce(&this->snapperSkelAnime, gSnapperEmergeFromShellAnim, -3.0f);
+    Animation_MorphToPlayOnce(&this->snapperSkelAnime, (void*)gSnapperEmergeFromShellAnim, -3.0f);
     this->unk_2A8 = 0.1f;
     this->unk_2A4 = 1.0f;
     this->actor.world.rot.y = this->actor.shape.rot.y;
@@ -615,7 +605,7 @@ void func_80A28A98(Actor_EnBigpamet* this, PlayState* play) {
 void func_80A28B98(Actor_EnBigpamet* this, PlayState* play) {
     Actor_EnItem00* collectible;
 
-    Animation_PlayLoop(&this->snapperSkelAnime, gSnapperDeathAnim);
+    Animation_PlayLoop(&this->snapperSkelAnime, (void*)gSnapperDeathAnim);
 
     this->collider.base.atFlags &= ~AT_ON;
     this->collider.elem.acDmgInfo.dmgFlags = 0xF7CFFFFF;
@@ -684,7 +674,7 @@ void func_80A28DC0(Actor_EnBigpamet* this, PlayState* play) {
 }
 
 void func_80A28E40(Actor_EnBigpamet* this) {
-    Animation_MorphToPlayOnce(&this->snapperSkelAnime, gSnapperRearUpAnim, -2.0f);
+    Animation_MorphToPlayOnce(&this->snapperSkelAnime, (void*)gSnapperRearUpAnim, -2.0f);
     this->actor.flags |= ACTOR_FLAG_MM_ATTENTION_ENABLED;
     this->actor.speed = 0.0f;
     this->actionFunc = func_80A28E98;
@@ -803,7 +793,7 @@ void func_80A292A8(Actor_EnBigpamet* this, PlayState* play) {
             Matrix_Scale(ptr->unk_20, ptr->unk_20, ptr->unk_20, MTXMODE_APPLY);
 
             MATRIX_FINALIZE_AND_LOAD(POLY_OPA_DISP++, play->state.gfxCtx);
-            gSPDisplayList(POLY_OPA_DISP++, gameplay_keep_DL_06AB30);
+            gSPDisplayList(POLY_OPA_DISP++, (void*)gameplay_keep_DL_06AB30);
         }
 
         CLOSE_DISPS();

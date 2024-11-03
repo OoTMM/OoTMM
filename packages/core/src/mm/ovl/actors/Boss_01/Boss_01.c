@@ -4,6 +4,9 @@
 #include <combo/misc.h>
 #include <combo/environment.h>
 #include <combo/mm/actors/En_Tanron.h>
+#include <assets/mm/objects/gameplay_keep.h>
+#include <assets/mm/objects/object_boss01.h>
+
 
 #include "../src/mm/actors.h"
 #include "Boss_01.h"
@@ -16,54 +19,6 @@
 #define TIMER_CURRENT_ACTION 0
 #define TIMER_BUG_CURRENT_ACTION 0
 #define TIMER_AFTERIMAGE_DESPAWN 0
-
-#if defined(GAME_MM)
-# define SEGADDR_ODOLWA_ARM_SWING_DANCE_ANIM        SEGADDR_FROM_OFFSET(6, 0x1ce88)
-# define SEGADDR_ODOLWA_BUG_BRIGHT_LEG_MATERIAL_DL  SEGADDR_FROM_OFFSET(6, 0x22118)
-# define SEGADDR_ODOLWA_BUG_CRAWL_ANIM              SEGADDR_FROM_OFFSET(6, 0x22550)
-# define SEGADDR_ODOLWA_BUG_DARK_BODY_DL            SEGADDR_FROM_OFFSET(6, 0x213a8)
-# define SEGADDR_ODOLWA_BUG_DULL_LEG_MATERIAL_DL    SEGADDR_FROM_OFFSET(6, 0x220a0)
-# define SEGADDR_ODOLWA_BUG_SKEL                    SEGADDR_FROM_OFFSET(6, 0x222d0)
-# define SEGADDR_ODOLWA_CROUCH_ANIM                 SEGADDR_FROM_OFFSET(6, 0x12d10)
-# define SEGADDR_ODOLWA_DAMAGED_LOOP_ANIM           SEGADDR_FROM_OFFSET(6, 0x10980)
-# define SEGADDR_ODOLWA_DAMAGED_START_ANIM          SEGADDR_FROM_OFFSET(6, 0x0fdec)
-# define SEGADDR_ODOLWA_DEATH_ANIM                  SEGADDR_FROM_OFFSET(6, 0x124cc)
-# define SEGADDR_ODOLWA_DOUBLE_SLASH_ANIM           SEGADDR_FROM_OFFSET(6, 0x1e68c)
-# define SEGADDR_ODOLWA_EYE_DL                      SEGADDR_FROM_OFFSET(6, 0x0c5e0)
-# define SEGADDR_ODOLWA_FALLING_BLOCK_DL            SEGADDR_FROM_OFFSET(6, 0x0e3e8)
-# define SEGADDR_ODOLWA_FALLING_SLASH_ANIM          SEGADDR_FROM_OFFSET(6, 0x13480)
-# define SEGADDR_ODOLWA_HIP_SHAKE_DANCE_ANIM        SEGADDR_FROM_OFFSET(6, 0x1ba94)
-# define SEGADDR_ODOLWA_HORIZONTAL_SLASH_ANIM       SEGADDR_FROM_OFFSET(6, 0x01884)
-# define SEGADDR_ODOLWA_INTRO_SLASH_ANIM            SEGADDR_FROM_OFFSET(6, 0x19c10)
-# define SEGADDR_ODOLWA_JUMP_ANIM                   SEGADDR_FROM_OFFSET(6, 0x12ebc)
-# define SEGADDR_ODOLWA_JUMP_DANCE_ANIM             SEGADDR_FROM_OFFSET(6, 0x204ac)
-# define SEGADDR_ODOLWA_KICK_ANIM                   SEGADDR_FROM_OFFSET(6, 0x1407c)
-# define SEGADDR_ODOLWA_MOTH_SUMMON_DANCE_ANIM      SEGADDR_FROM_OFFSET(6, 0x12b70)
-# define SEGADDR_ODOLWA_READY_ANIM                  SEGADDR_FROM_OFFSET(6, 0x18438)
-# define SEGADDR_ODOLWA_RUN_ANIM                    SEGADDR_FROM_OFFSET(6, 0x16168)
-# define SEGADDR_ODOLWA_SHADOW_MATERIAL_DL          SEGADDR_FROM_OFFSET(6, 0x0c7a8)
-# define SEGADDR_ODOLWA_SHADOW_MODEL_DL             SEGADDR_FROM_OFFSET(6, 0x0c7c8)
-# define SEGADDR_ODOLWA_SHIELD_BASH_ANIM            SEGADDR_FROM_OFFSET(6, 0x15a30)
-# define SEGADDR_ODOLWA_SHIELD_GUARD_ANIM           SEGADDR_FROM_OFFSET(6, 0x0ff94)
-# define SEGADDR_ODOLWA_SIDE_TO_SIDE_DANCE_ANIM     SEGADDR_FROM_OFFSET(6, 0x1f6a4)
-# define SEGADDR_ODOLWA_SIDE_TO_SIDE_HOP_ANIM       SEGADDR_FROM_OFFSET(6, 0x1eea8)
-# define SEGADDR_ODOLWA_SKEL                        SEGADDR_FROM_OFFSET(6, 0x0f0a8)
-# define SEGADDR_ODOLWA_SPIN_ATTACK_ANIM            SEGADDR_FROM_OFFSET(6, 0x164cc)
-# define SEGADDR_ODOLWA_SPIN_DANCE_ANIM             SEGADDR_FROM_OFFSET(6, 0x1fc10)
-# define SEGADDR_ODOLWA_SPIN_SWORD_ANIM             SEGADDR_FROM_OFFSET(6, 0x1aaf4)
-# define SEGADDR_ODOLWA_STUN_ANIM                   SEGADDR_FROM_OFFSET(6, 0x14f14)
-# define SEGADDR_ODOLWA_SWORD_GUARD_ANIM            SEGADDR_FROM_OFFSET(6, 0x10150)
-# define SEGADDR_ODOLWA_SWORD_TRAIL_DL              SEGADDR_FROM_OFFSET(6, 0x0c498)
-# define SEGADDR_ODOLWA_SWORD_TRAIL_VTX             SEGADDR_FROM_OFFSET(6, 0x0c338)
-# define SEGADDR_ODOLWA_THURST_ATTACK_ANIM          SEGADDR_FROM_OFFSET(6, 0x1d8c8)
-# define SEGADDR_ODOLWA_TITLE_CARD_TEX              SEGADDR_FROM_OFFSET(6, 0x0c7f8)
-# define SEGADDR_ODOLWA_UP_AND_DOWN_DANCE_ANIM      SEGADDR_FROM_OFFSET(6, 0x1c700)
-# define SEGADDR_ODOLWA_VERTICAL_HOP_ANIM           SEGADDR_FROM_OFFSET(6, 0x1af18)
-# define SEGADDR_ODOLWA_VERTICAL_SLASH_ANIM         SEGADDR_FROM_OFFSET(6, 0x00c44)
-
-# define SEGADDR_EFF_FIRE1_DL                       SEGADDR_FROM_OFFSET(4, 0x7D590)
-
-#endif
 
 void Boss01_Init(Actor_Boss01* this, PlayState* play);
 void Boss01_Destroy(Actor_Boss01* this, PlayState* play);
@@ -794,7 +749,7 @@ void Boss01_Init(Actor_Boss01* this, PlayState* play)
 
     Actor_SetScale(&this->actor, 0.015f);
     if (ODOLWA_GET_TYPE(&this->actor) == ODOLWA_TYPE_BUG) {
-        SkelAnime_InitFlex(play, &this->skelAnime, SEGADDR_ODOLWA_BUG_SKEL, SEGADDR_ODOLWA_BUG_CRAWL_ANIM, this->jointTable,
+        SkelAnime_InitFlex(play, &this->skelAnime, (void*)gOdolwaBugSkel, (void*)gOdolwaBugCrawlAnim, this->jointTable,
                            this->morphTable, ODOLWA_BUG_LIMB_MAX);
         this->actor.update = Boss01_Bug_Update;
         this->actor.draw = Boss01_Bug_Draw;
@@ -811,7 +766,7 @@ void Boss01_Init(Actor_Boss01* this, PlayState* play)
         this->actor.colChkInfo.damageTable = &sBugDamageTable;
         sOdolwa->actor.hintId = TATL_HINT_ID_ODOLWA_PHASE_TWO;
     } else if (ODOLWA_GET_TYPE(&this->actor) == ODOLWA_TYPE_AFTERIMAGE) {
-        SkelAnime_InitFlex(play, &this->skelAnime, SEGADDR_ODOLWA_SKEL, SEGADDR_ODOLWA_READY_ANIM, this->jointTable, this->morphTable,
+        SkelAnime_InitFlex(play, &this->skelAnime, (void*)gOdolwaBugSkel, (void*)gOdolwaReadyAnim, this->jointTable, this->morphTable,
                            ODOLWA_LIMB_MAX);
         Boss01_Afterimage_SetupWaitToDespawn(this, play);
         this->timers[TIMER_AFTERIMAGE_DESPAWN] = ODOLWA_GET_AFTERIMAGE_DESPAWN_TIMER(&this->actor);
@@ -853,7 +808,7 @@ void Boss01_Init(Actor_Boss01* this, PlayState* play)
                                   this->bodyColliderElements);
         Collider_InitAndSetJntSph(play, &this->kickAndShieldBashCollider, &this->actor,
                                   &sKickAndShieldBashColliderJntSphInit, this->kickAndShieldBashColliderElements);
-        SkelAnime_InitFlex(play, &this->skelAnime, SEGADDR_ODOLWA_SKEL, SEGADDR_ODOLWA_READY_ANIM, this->jointTable, this->morphTable,
+        SkelAnime_InitFlex(play, &this->skelAnime, (void*)gOdolwaSkel, (void*)gOdolwaReadyAnim, this->jointTable, this->morphTable,
                            ODOLWA_LIMB_MAX);
 
         Boss01_SetupWait(this, play, ODOLWA_WAIT_READY);
@@ -898,7 +853,7 @@ void Boss01_SetupIntroCutscene(Actor_Boss01* this, PlayState* play) {
     this->actor.world.pos.z = 0.0f;
     this->actor.gravity = 0.0f;
     this->actor.world.pos.y = 2400.0f;
-    Animation_MorphToLoop(&this->skelAnime, SEGADDR_ODOLWA_CROUCH_ANIM, 0.0f);
+    Animation_MorphToLoop(&this->skelAnime, (void*)gOdolwaCrouchAnim, 0.0f);
 }
 
 /**
@@ -970,7 +925,7 @@ void Boss01_IntroCutscene(Actor_Boss01* this, PlayState* play) {
                 this->actor.gravity = -2.5f;
                 this->cutsceneState = ODOLWA_INTRO_CS_STATE_ODOLWA_FALLING;
                 this->cutsceneTimer = 0;
-                Animation_MorphToPlayOnce(&this->skelAnime, SEGADDR_ODOLWA_JUMP_ANIM, 0.0f);
+                Animation_MorphToPlayOnce(&this->skelAnime, (void*)gOdolwaJumpAnim, 0.0f);
                 this->subCamEye.x = this->actor.world.pos.x;
                 this->subCamAt.x = this->actor.world.pos.x;
                 this->subCamAt.y = 80.0f;
@@ -988,7 +943,7 @@ void Boss01_IntroCutscene(Actor_Boss01* this, PlayState* play) {
             this->afterimageSpawnFrameMask = 2;
             Math_ApproachF(&this->subCamAt.y, this->actor.world.pos.y + 80.0f, 0.25f, 30.0f);
             if (this->actor.world.pos.y < 40.0f) {
-                Animation_MorphToPlayOnce(&this->skelAnime, SEGADDR_ODOLWA_CROUCH_ANIM, -2.0f);
+                Animation_MorphToPlayOnce(&this->skelAnime, (void*)gOdolwaCrouchAnim, -2.0f);
                 this->cutsceneState = ODOLWA_INTRO_CS_STATE_ODOLWA_LANDED;
                 this->cutsceneTimer = 0;
             }
@@ -1012,7 +967,7 @@ void Boss01_IntroCutscene(Actor_Boss01* this, PlayState* play) {
             }
 
             if (this->cutsceneTimer == 5) {
-                Animation_MorphToLoop(&this->skelAnime, SEGADDR_ODOLWA_INTRO_SLASH_ANIM, -20.0f);
+                Animation_MorphToLoop(&this->skelAnime, (void*)gOdolwaIntroSlashAnim, -20.0f);
             }
 
             if ((this->cutsceneTimer >= 6) &&
@@ -1039,7 +994,7 @@ void Boss01_IntroCutscene(Actor_Boss01* this, PlayState* play) {
 
             if (this->cutsceneTimer == 50) {
                 TitleCard_InitBossName(&play->state, &play->actorCtx.titleCtx,
-                                       Lib_SegmentedToVirtual(SEGADDR_ODOLWA_TITLE_CARD_TEX), 160, 180, 128, 40);
+                                       Lib_SegmentedToVirtual(gOdolwaTitleCardTex), 160, 180, 128, 40);
             }
 
             if (this->cutsceneTimer == 140) {
@@ -1078,7 +1033,7 @@ void Boss01_IntroCutscene(Actor_Boss01* this, PlayState* play) {
 
 void Boss01_SetupSummonBugsCutscene(Actor_Boss01* this, PlayState* play) {
     this->actionFunc = Boss01_SummonBugsCutscene;
-    Animation_MorphToLoop(&this->skelAnime, SEGADDR_ODOLWA_SIDE_TO_SIDE_DANCE_ANIM, -10.0f);
+    Animation_MorphToLoop(&this->skelAnime, (void*)gOdolwaSideToSideDanceAnim, -10.0f);
     this->cutsceneState = ODOLWA_BUG_SUMMONING_CS_STATE_STARTED;
     this->cutsceneTimer = 0;
     this->hasPlayedSummonBugCs++;
@@ -1179,18 +1134,18 @@ void Boss01_Afterimage_WaitToDespawn(Actor_Boss01* this, PlayState* play) {
 }
 
 static AnimationHeader* sWaitAnimations[ODOLWA_WAIT_MAX] = {
-    SEGADDR_ODOLWA_READY_ANIM,              // ODOLWA_WAIT_READY,
-    SEGADDR_ODOLWA_SPIN_SWORD_ANIM,         // ODOLWA_WAIT_SPIN_SWORD,
-    SEGADDR_ODOLWA_VERTICAL_HOP_ANIM,       // ODOLWA_WAIT_VERTICAL_HOP,
-    SEGADDR_ODOLWA_HIP_SHAKE_DANCE_ANIM,    // ODOLWA_WAIT_SHAKE_DANCE,
-    SEGADDR_ODOLWA_UP_AND_DOWN_DANCE_ANIM,  // ODOLWA_WAIT_UP_AND_DOWN_DANCE,
-    SEGADDR_ODOLWA_ARM_SWING_DANCE_ANIM,    // ODOLWA_WAIT_ARM_SWING_DANCE,
-    SEGADDR_ODOLWA_THURST_ATTACK_ANIM,      // ODOLWA_WAIT_THRUST_ATTACK,
-    SEGADDR_ODOLWA_DOUBLE_SLASH_ANIM,       // ODOLWA_WAIT_DOUBLE_SLASH,
-    SEGADDR_ODOLWA_SIDE_TO_SIDE_HOP_ANIM,   // ODOLWA_WAIT_SIDE_TO_SIDE_HOP,
-    SEGADDR_ODOLWA_SIDE_TO_SIDE_DANCE_ANIM, // ODOLWA_WAIT_SIDE_TO_SIDE_DANCE,
-    SEGADDR_ODOLWA_SPIN_DANCE_ANIM,         // ODOLWA_WAIT_SPIN_DANCE
-    SEGADDR_ODOLWA_JUMP_DANCE_ANIM,         // ODOLWA_WAIT_JUMP_DANCE
+    (void*)gOdolwaReadyAnim,            // ODOLWA_WAIT_READY,
+    (void*)gOdolwaSpinSwordAnim,        // ODOLWA_WAIT_SPIN_SWORD,
+    (void*)gOdolwaVerticalHopAnim,      // ODOLWA_WAIT_VERTICAL_HOP,
+    (void*)gOdolwaHipShakeDanceAnim,    // ODOLWA_WAIT_SHAKE_DANCE,
+    (void*)gOdolwaUpAndDownDanceAnim,   // ODOLWA_WAIT_UP_AND_DOWN_DANCE,
+    (void*)gOdolwaArmSwingDanceAnim,    // ODOLWA_WAIT_ARM_SWING_DANCE,
+    (void*)gOdolwaThurstAttackAnim,     // ODOLWA_WAIT_THRUST_ATTACK,
+    (void*)gOdolwaDoubleSlashAnim,      // ODOLWA_WAIT_DOUBLE_SLASH,
+    (void*)gOdolwaSideToSideHopAnim,    // ODOLWA_WAIT_SIDE_TO_SIDE_HOP,
+    (void*)gOdolwaSideToSideDanceAnim,  // ODOLWA_WAIT_SIDE_TO_SIDE_DANCE,
+    (void*)gOdolwaSpinDanceAnim,        // ODOLWA_WAIT_SPIN_DANCE
+    (void*)gOdolwaJumpDanceAnim,        // ODOLWA_WAIT_JUMP_DANCE
 };
 
 /**
@@ -1357,7 +1312,7 @@ void Boss01_Wait(Actor_Boss01* this, PlayState* play) {
 }
 
 void Boss01_SetupDazed(Actor_Boss01* this, PlayState* play) {
-    Animation_MorphToLoop(&this->skelAnime, SEGADDR_ODOLWA_STUN_ANIM, this->animMorphFrames2);
+    Animation_MorphToLoop(&this->skelAnime, (void*)gOdolwaStunAnim, this->animMorphFrames2);
     if (this->actionFunc != Boss01_Dazed) {
         this->timers[TIMER_CURRENT_ACTION] = 70;
         this->actionFunc = Boss01_Dazed;
@@ -1386,7 +1341,7 @@ void Boss01_Dazed(Actor_Boss01* this, PlayState* play) {
 }
 
 void Boss01_SetupSpinAttack(Actor_Boss01* this, PlayState* play) {
-    Animation_MorphToLoop(&this->skelAnime, SEGADDR_ODOLWA_SPIN_ATTACK_ANIM, this->animMorphFrames2);
+    Animation_MorphToLoop(&this->skelAnime, (void*)gOdolwaSpinAttackAnim, this->animMorphFrames2);
     this->timers[TIMER_CURRENT_ACTION] = 120;
     this->actionFunc = Boss01_SpinAttack;
     this->canGuardOrEvade = 0;
@@ -1418,7 +1373,7 @@ void Boss01_SpinAttack(Actor_Boss01* this, PlayState* play) {
 }
 
 void Boss01_SetupDanceBeforeAttack(Actor_Boss01* this, PlayState* play) {
-    Animation_MorphToLoop(&this->skelAnime, SEGADDR_ODOLWA_JUMP_DANCE_ANIM, this->animMorphFrames2);
+    Animation_MorphToLoop(&this->skelAnime, (void*)gOdolwaJumpDanceAnim, this->animMorphFrames2);
     this->timers[TIMER_CURRENT_ACTION] = 40;
     this->actionFunc = Boss01_DanceBeforeAttack;
     this->canGuardOrEvade = 0;
@@ -1444,7 +1399,7 @@ void Boss01_DanceBeforeAttack(Actor_Boss01* this, PlayState* play) {
 }
 
 void Boss01_SetupRun(Actor_Boss01* this, PlayState* play) {
-    Animation_MorphToLoop(&this->skelAnime, SEGADDR_ODOLWA_RUN_ANIM, this->animMorphFrames2);
+    Animation_MorphToLoop(&this->skelAnime, (void*)gOdolwaRunAnim, this->animMorphFrames2);
     this->actionFunc = Boss01_Run;
     this->timers[TIMER_CURRENT_ACTION] = Rand_ZeroFloat(100.0f) + 50.0f;
     this->runTargetPosAngularVelocityY = 0.07f;
@@ -1497,7 +1452,7 @@ void Boss01_Run(Actor_Boss01* this, PlayState* play) {
  */
 void Boss01_SetupJump(Actor_Boss01* this, PlayState* play, u8 shouldPerformFallingSlash) {
     this->shouldPerformFallingSlash = shouldPerformFallingSlash;
-    Animation_MorphToLoop(&this->skelAnime, SEGADDR_ODOLWA_CROUCH_ANIM, this->animMorphFrames2);
+    Animation_MorphToLoop(&this->skelAnime, (void*)gOdolwaCrouchAnim, this->animMorphFrames2);
     this->actionFunc = Boss01_JumpSquat;
     this->timers[TIMER_CURRENT_ACTION] = 5;
 }
@@ -1514,7 +1469,7 @@ void Boss01_JumpSquat(Actor_Boss01* this, PlayState* play) {
 
     if (this->timers[TIMER_CURRENT_ACTION] == 0) {
         this->actionFunc = Boss01_Jump;
-        Animation_MorphToPlayOnce(&this->skelAnime, SEGADDR_ODOLWA_JUMP_ANIM, this->animMorphFrames1);
+        Animation_MorphToPlayOnce(&this->skelAnime, (void*)gOdolwaJumpAnim, this->animMorphFrames1);
         this->actor.velocity.y = 35.0f;
         this->actor.gravity = -2.5f;
         Matrix_RotateYS(this->actor.world.rot.y, MTXMODE_NEW);
@@ -1554,13 +1509,13 @@ void Boss01_Jump(Actor_Boss01* this, PlayState* play) {
     if (!this->shouldPerformFallingSlash) {
         Math_ApproachS(&this->actor.world.rot.y, this->actor.yawTowardsPlayer, 5, 0x1000);
     } else if ((this->actor.velocity.y < -5.0f) && (this->prevJumpVelocityY >= -5.0f)) {
-        Animation_MorphToPlayOnce(&this->skelAnime, SEGADDR_ODOLWA_FALLING_SLASH_ANIM, this->animMorphFrames1);
+        Animation_MorphToPlayOnce(&this->skelAnime, (void*)gOdolwaFallingSlashAnim, this->animMorphFrames1);
         Actor_PlaySfx(&this->actor, NA_SE_EN_MIBOSS_SWORD_OLD);
     }
 
     if (this->actor.world.pos.y < 40.0f) {
         this->actionFunc = Boss01_JumpLand;
-        Animation_MorphToPlayOnce(&this->skelAnime, SEGADDR_ODOLWA_CROUCH_ANIM, this->animMorphFrames1);
+        Animation_MorphToPlayOnce(&this->skelAnime, (void*)gOdolwaCrouchAnim, this->animMorphFrames1);
         this->timers[TIMER_CURRENT_ACTION] = 5;
         this->landedFromJump = 0;
     }
@@ -1608,8 +1563,8 @@ void Boss01_JumpLand(Actor_Boss01* this, PlayState* play) {
 }
 
 void Boss01_SetupVerticalSlash(Actor_Boss01* this, PlayState* play) {
-    Animation_MorphToPlayOnce(&this->skelAnime, SEGADDR_ODOLWA_VERTICAL_SLASH_ANIM, this->animMorphFrames2);
-    this->animEndFrame = Animation_GetLastFrame(SEGADDR_ODOLWA_VERTICAL_SLASH_ANIM);
+    Animation_MorphToPlayOnce(&this->skelAnime, (void*)gOdolwaVerticalSlashAnim, this->animMorphFrames2);
+    this->animEndFrame = Animation_GetLastFrame(gOdolwaVerticalSlashAnim);
     this->actionFunc = Boss01_VerticalSlash;
     this->timers[TIMER_CURRENT_ACTION] = 20;
 }
@@ -1673,8 +1628,8 @@ void Boss01_VerticalSlash(Actor_Boss01* this, PlayState* play) {
 }
 
 void Boss01_SetupHorizontalSlash(Actor_Boss01* this, PlayState* play) {
-    Animation_MorphToPlayOnce(&this->skelAnime, SEGADDR_ODOLWA_HORIZONTAL_SLASH_ANIM, this->animMorphFrames2);
-    this->animEndFrame = Animation_GetLastFrame(SEGADDR_ODOLWA_HORIZONTAL_SLASH_ANIM);
+    Animation_MorphToPlayOnce(&this->skelAnime, (void*)gOdolwaHorizontalSlashAnim, this->animMorphFrames2);
+    this->animEndFrame = Animation_GetLastFrame(gOdolwaHorizontalSlashAnim);
     this->actionFunc = Boss01_HorizontalSlash;
 }
 
@@ -1748,11 +1703,11 @@ void Boss01_HorizontalSlash(Actor_Boss01* this, PlayState* play) {
 void Boss01_SetupGuard(Actor_Boss01* this, PlayState* play, u8 guardUsingSword) {
     if (this->actionFunc != Boss01_Guard) {
         if (!guardUsingSword) {
-            Animation_MorphToPlayOnce(&this->skelAnime, SEGADDR_ODOLWA_SHIELD_GUARD_ANIM, this->animMorphFrames1);
-            this->animEndFrame = Animation_GetLastFrame(SEGADDR_ODOLWA_SHIELD_GUARD_ANIM);
+            Animation_MorphToPlayOnce(&this->skelAnime, (void*)gOdolwaShieldGuardAnim, this->animMorphFrames1);
+            this->animEndFrame = Animation_GetLastFrame(gOdolwaShieldGuardAnim);
         } else {
-            Animation_MorphToPlayOnce(&this->skelAnime, SEGADDR_ODOLWA_SWORD_GUARD_ANIM, this->animMorphFrames1);
-            this->animEndFrame = Animation_GetLastFrame(SEGADDR_ODOLWA_SWORD_GUARD_ANIM);
+            Animation_MorphToPlayOnce(&this->skelAnime, (void*)gOdolwaSwordGuardAnim, this->animMorphFrames1);
+            this->animEndFrame = Animation_GetLastFrame(gOdolwaSwordGuardAnim);
         }
 
         this->actionFunc = Boss01_Guard;
@@ -1779,8 +1734,8 @@ void Boss01_Guard(Actor_Boss01* this, PlayState* play) {
 }
 
 void Boss01_SetupKick(Actor_Boss01* this, PlayState* play) {
-    Animation_MorphToPlayOnce(&this->skelAnime, SEGADDR_ODOLWA_KICK_ANIM, this->animMorphFrames2);
-    this->animEndFrame = Animation_GetLastFrame(SEGADDR_ODOLWA_KICK_ANIM);
+    Animation_MorphToPlayOnce(&this->skelAnime, (void*)gOdolwaKickAnim, this->animMorphFrames2);
+    this->animEndFrame = Animation_GetLastFrame(gOdolwaKickAnim);
     this->actionFunc = Boss01_Kick;
 }
 
@@ -1798,8 +1753,8 @@ void Boss01_Kick(Actor_Boss01* this, PlayState* play) {
 }
 
 void Boss01_SetupShieldBash(Actor_Boss01* this, PlayState* play) {
-    Animation_MorphToPlayOnce(&this->skelAnime, SEGADDR_ODOLWA_SHIELD_BASH_ANIM, this->animMorphFrames2);
-    this->animEndFrame = Animation_GetLastFrame(SEGADDR_ODOLWA_SHIELD_BASH_ANIM);
+    Animation_MorphToPlayOnce(&this->skelAnime, (void*)gOdolwaShieldBashAnim, this->animMorphFrames2);
+    this->animEndFrame = Animation_GetLastFrame(gOdolwaShieldBashAnim);
     this->actionFunc = Boss01_ShieldBash;
 }
 
@@ -1829,8 +1784,8 @@ void Boss01_ShieldBash(Actor_Boss01* this, PlayState* play) {
 void Boss01_SetupDamaged(Actor_Boss01* this, PlayState* play, u8 damageEffect) {
     if (this->actionFunc != Boss01_Damaged) {
         this->timers[TIMER_CURRENT_ACTION] = 20;
-        Animation_MorphToPlayOnce(&this->skelAnime, SEGADDR_ODOLWA_DAMAGED_START_ANIM, 0.0f);
-        this->animEndFrame = Animation_GetLastFrame(SEGADDR_ODOLWA_DAMAGED_START_ANIM);
+        Animation_MorphToPlayOnce(&this->skelAnime, (void*)gOdolwaDamagedStartAnim, 0.0f);
+        this->animEndFrame = Animation_GetLastFrame(gOdolwaDamagedStartAnim);
         this->actionFunc = Boss01_Damaged;
     } else if (damageEffect == ODOLWA_DMGEFF_DAMAGE_TIMER_CHECK) {
         if (this->timers[TIMER_CURRENT_ACTION] > 5) {
@@ -1851,7 +1806,7 @@ void Boss01_Damaged(Actor_Boss01* this, PlayState* play) {
     Math_ApproachZeroF(&this->actor.speed, 1.0f, 1.0f);
 
     if (Animation_OnFrame(&this->skelAnime, this->animEndFrame)) {
-        Animation_MorphToLoop(&this->skelAnime, SEGADDR_ODOLWA_DAMAGED_LOOP_ANIM, this->animMorphFrames2);
+        Animation_MorphToLoop(&this->skelAnime, (void*)gOdolwaDamagedLoopAnim, this->animMorphFrames2);
         this->animEndFrame = 1000.0f;
     }
 
@@ -1973,8 +1928,8 @@ void Boss01_UpdateDamage(Actor_Boss01* this, PlayState* play) {
 }
 
 void Boss01_SetupSummonMoths(Actor_Boss01* this, PlayState* play) {
-    Animation_MorphToLoop(&this->skelAnime, SEGADDR_ODOLWA_MOTH_SUMMON_DANCE_ANIM, -5.0f);
-    this->animEndFrame = Animation_GetLastFrame(SEGADDR_ODOLWA_MOTH_SUMMON_DANCE_ANIM);
+    Animation_MorphToLoop(&this->skelAnime, (void*)gOdolwaMothSummonDanceAnim, -5.0f);
+    this->animEndFrame = Animation_GetLastFrame(gOdolwaMothSummonDanceAnim);
     this->actionFunc = Boss01_SummonMoths;
     this->summonMothsTimer = 0;
 }
@@ -2013,8 +1968,8 @@ void Boss01_SummonMoths(Actor_Boss01* this, PlayState* play) {
 }
 
 void Boss01_SetupDeathCutscene(Actor_Boss01* this, PlayState* play) {
-    Animation_MorphToPlayOnce(&this->skelAnime, SEGADDR_ODOLWA_DEATH_ANIM, this->animMorphFrames1);
-    this->animEndFrame = Animation_GetLastFrame(SEGADDR_ODOLWA_DEATH_ANIM);
+    Animation_MorphToPlayOnce(&this->skelAnime, (void*)gOdolwaDeathAnim, this->animMorphFrames1);
+    this->animEndFrame = Animation_GetLastFrame(gOdolwaDeathAnim);
     this->actionFunc = Boss01_DeathCutscene;
     Actor_PlaySfx(&this->actor, NA_SE_EN_DAIOCTA_DAMAGE);
     this->actor.flags &= ~ACTOR_FLAG_MM_ATTENTION_ENABLED;
@@ -2522,7 +2477,7 @@ void Boss01_DrawSwordTrail(Actor_Boss01* this, PlayState* play) {
 
     OPEN_DISPS(play->state.gfxCtx);
 
-    vtx = Lib_SegmentedToVirtual(SEGADDR_ODOLWA_SWORD_TRAIL_VTX);
+    vtx = Lib_SegmentedToVirtual((void*)gOdolwaSwordTrailVtx);
 
     for (i = 0; i < ARRAY_COUNT(sSwordTrailOuterVertexIndices); i++) {
         vtx[sSwordTrailOuterVertexIndices[i]].v.ob[0] = cosf((i * M_PIf) / sSwordTrailAngularRangeDivisor) * 200.0f;
@@ -2548,7 +2503,7 @@ void Boss01_DrawSwordTrail(Actor_Boss01* this, PlayState* play) {
     Matrix_RotateYF(sOdolwaSwordTrailRotY, MTXMODE_APPLY);
 
     gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPDisplayList(POLY_XLU_DISP++, SEGADDR_ODOLWA_SWORD_TRAIL_DL);
+    gSPDisplayList(POLY_XLU_DISP++, (void*)gOdolwaSwordTrailDL);
 
     CLOSE_DISPS();
 }
@@ -2774,7 +2729,7 @@ void Boss01_PostLimbDraw(PlayState* play2, s32 limbIndex, Gfx** dList, Vec3s* ro
         Matrix_Scale(0.35f, 0.35f, 0.35f, MTXMODE_APPLY);
         Matrix_ReplaceRotation(&play->billboardMtxF);
         gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-        gSPDisplayList(POLY_XLU_DISP++, SEGADDR_ODOLWA_EYE_DL);
+        gSPDisplayList(POLY_XLU_DISP++, (void*)gOdolwaEyeDL);
         Matrix_Pop();
 
         Matrix_Push();
@@ -2782,7 +2737,7 @@ void Boss01_PostLimbDraw(PlayState* play2, s32 limbIndex, Gfx** dList, Vec3s* ro
         Matrix_Scale(0.35f, 0.35f, 0.35f, MTXMODE_APPLY);
         Matrix_ReplaceRotation(&play->billboardMtxF);
         gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-        gSPDisplayList(POLY_XLU_DISP++, SEGADDR_ODOLWA_EYE_DL);
+        gSPDisplayList(POLY_XLU_DISP++, (void*)gOdolwaEyeDL);
         Matrix_Pop();
 
         CLOSE_DISPS();
@@ -3021,18 +2976,18 @@ void Boss01_DrawShadowTex(u8* tex, Actor_Boss01* this, PlayState* play) {
     Matrix_Translate(this->actor.world.pos.x, this->actor.floorHeight, this->actor.world.pos.z - 20.0f, MTXMODE_NEW);
     Matrix_Scale(1.65f, 1.0f, 1.65f, MTXMODE_APPLY);
     gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPDisplayList(POLY_OPA_DISP++, SEGADDR_ODOLWA_SHADOW_MATERIAL_DL);
+    gSPDisplayList(POLY_OPA_DISP++, (void*)gOdolwaShadowMaterialDL);
     gDPLoadTextureBlock(POLY_OPA_DISP++, tex, G_IM_FMT_I, G_IM_SIZ_8b, ODOLWA_SHADOW_TEX_WIDTH,
                         ODOLWA_SHADOW_TEX_HEIGHT, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 6, 6,
                         G_TX_NOLOD, G_TX_NOLOD);
-    gSPDisplayList(POLY_OPA_DISP++, SEGADDR_ODOLWA_SHADOW_MODEL_DL);
+    gSPDisplayList(POLY_OPA_DISP++, (void*)gOdolwaShadowModelDL);
 
     CLOSE_DISPS();
 }
 
 void Boss01_Bug_SetupCrawl(Actor_Boss01* this, PlayState* play) {
     this->actionFunc = Boss01_Bug_Crawl;
-    Animation_MorphToLoop(&this->skelAnime, SEGADDR_ODOLWA_BUG_CRAWL_ANIM, -5.0f);
+    Animation_MorphToLoop(&this->skelAnime, (void*)gOdolwaBugCrawlAnim, -5.0f);
 }
 
 /**
@@ -3242,16 +3197,16 @@ void Boss01_Bug_Update(Actor_Boss01* this, PlayState* play) {
 
 s32 Boss01_Bug_OverrideLimbDraw(PlayState* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Boss01* this) {
     if ((limbIndex == ODOLWA_BUG_LIMB_BODY) && (sOdolwa->actionFunc == Boss01_SummonBugsCutscene)) {
-        *dList = SEGADDR_ODOLWA_BUG_DARK_BODY_DL;
+        *dList = (void*)gOdolwaBugDarkBodyDL;
     }
 
     if (limbIndex == ODOLWA_BUG_LIMB_FRONT_RIGHT_UPPER_LEG) {
         OPEN_DISPS(play->state.gfxCtx);
 
         if (sOdolwa->actionFunc == Boss01_SummonBugsCutscene) {
-            gSPDisplayList(POLY_OPA_DISP++, SEGADDR_ODOLWA_BUG_BRIGHT_LEG_MATERIAL_DL);
+            gSPDisplayList(POLY_OPA_DISP++, (void*)gOdolwaBugBrightLegMaterialDL);
         } else {
-            gSPDisplayList(POLY_OPA_DISP++, SEGADDR_ODOLWA_BUG_DULL_LEG_MATERIAL_DL);
+            gSPDisplayList(POLY_OPA_DISP++, (void*)gOdolwaBugDullLegMaterialDL);
         }
 
         CLOSE_DISPS();
@@ -3430,7 +3385,7 @@ void Boss01_DrawEffects(PlayState* play) {
             Matrix_RotateXS(effect->rotX, MTXMODE_APPLY);
             Matrix_Scale(effect->scale, effect->scale, effect->scale, MTXMODE_APPLY);
             gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-            gSPDisplayList(POLY_OPA_DISP++, SEGADDR_ODOLWA_FALLING_BLOCK_DL);
+            gSPDisplayList(POLY_OPA_DISP++, (void*)gOdolwaFallingBlockDL);
         }
     }
 
@@ -3443,7 +3398,7 @@ void Boss01_DrawEffects(PlayState* play) {
             Matrix_Translate(effect->pos.x, 0.0f, effect->pos.z, MTXMODE_NEW);
             Matrix_Scale(effect->scale * 50.0f, 1.0f, effect->scale * 50.0f, MTXMODE_APPLY);
             gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-            gSPDisplayList(POLY_XLU_DISP++, SEGADDR_CIRCLE_SHADOW_DL); // gCircleShadowDL in gameplay_keep
+            gSPDisplayList(POLY_XLU_DISP++, (void*)gCircleShadowDL);
         }
     }
 
@@ -3479,7 +3434,7 @@ void Boss01_DrawEffects(PlayState* play) {
                          1.0f, MTXMODE_APPLY);
 
             gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-            gSPDisplayList(POLY_XLU_DISP++, SEGADDR_FROM_OFFSET(4, 0x7D590)); // gEffFire1DL in gameplay_keep
+            gSPDisplayList(POLY_XLU_DISP++, (void*)gEffFire1DL);
             Matrix_Pop();
         }
     }

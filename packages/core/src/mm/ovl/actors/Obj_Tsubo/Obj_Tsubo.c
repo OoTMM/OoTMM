@@ -1,6 +1,9 @@
 #include <combo.h>
 #include <combo/item.h>
 #include <combo/global.h>
+#include <assets/mm/objects/object_tsubo.h>
+#include <assets/mm/objects/object_racetsubo.h>
+#include <assets/mm/objects/gameplay_dangeon_keep.h>
 #include "Obj_Tsubo.h"
 
 #define FLAGS (ACTOR_FLAG_MM_10 | ACTOR_FLAG_MM_800000 | ACTOR_FLAG_MM_CAN_PRESS_SWITCH)
@@ -65,10 +68,10 @@ ObjTsuboData;
 
 ObjTsuboData sPotTypeData[4] =
 {
-    { OBJECT_GAMEPLAY_DANGEON_KEEP, 0.197f,         (Gfx*)0x05017ea0, (Gfx*)0x05018090, 12, 32, ObjTsubo_PotBreak1, ObjTsubo_PotBreak2, ObjTsubo_PotBreak3 },
-    { OBJECT_RACETSUBO,             0.29549998f,    (Gfx*)0x06000278, (Gfx*)0x06001610, 18, 45, ObjTsubo_MagicPotBreak1, ObjTsubo_MagicPotBreak2, ObjTsubo_MagicPotBreak3 },
-    { OBJECT_TSUBO,                 0.197f,         (Gfx*)0x060017c0, (Gfx*)0x06001960, 12, 32, ObjTsubo_PotBreak1, ObjTsubo_PotBreak2, ObjTsubo_PotBreak3 },
-    { OBJECT_GAMEPLAY_DANGEON_KEEP, 0.197f,         (Gfx*)0x05017ea0, (Gfx*)0x05018090, 12, 32, ObjTsubo_PotBreak1, ObjTsubo_PotBreak2, ObjTsubo_PotBreak3 },
+    { OBJECT_GAMEPLAY_DANGEON_KEEP, 0.197f,         (Gfx*)gameplay_dangeon_keep_DL_017EA0, (Gfx*)gameplay_dangeon_keep_DL_018090, 12, 32, ObjTsubo_PotBreak1, ObjTsubo_PotBreak2, ObjTsubo_PotBreak3 },
+    { OBJECT_RACETSUBO,             0.29549998f,    (Gfx*)gMagicPotDL, (Gfx*)gMagicPotShardDL, 18, 45, ObjTsubo_MagicPotBreak1, ObjTsubo_MagicPotBreak2, ObjTsubo_MagicPotBreak3 },
+    { OBJECT_TSUBO,                 0.197f,         (Gfx*)gPotDL, (Gfx*)gPotShardDL, 12, 32, ObjTsubo_PotBreak1, ObjTsubo_PotBreak2, ObjTsubo_PotBreak3 },
+    { OBJECT_GAMEPLAY_DANGEON_KEEP, 0.197f,         (Gfx*)gameplay_dangeon_keep_DL_017EA0, (Gfx*)gameplay_dangeon_keep_DL_018090, 12, 32, ObjTsubo_PotBreak1, ObjTsubo_PotBreak2, ObjTsubo_PotBreak3 },
 };
 
 static ColliderCylinderInit sCylinderInit =
@@ -577,7 +580,8 @@ void func_80928914(Actor_ObjTsubo* this)
 void func_80928928(Actor_ObjTsubo* this, PlayState* play)
 {
     Actor_MoveWithGravity(&this->actor);
-    Actor_UpdateBgCheckInfo(play, &this->actor, 15.0f, 15.0f, 0.0f, 0x44);
+    Actor_UpdateBgCheckInfo(play, &this->actor, 15.0f, 15.0f, 0.0f,
+        UPDBGCHECKINFO_FLAG_MM_4 | UPDBGCHECKINFO_FLAG_MM_40);
     if (Object_IsLoaded(&play->objectCtx, this->requiredObjectSlot))
     {
         this->actor.objectSlot = this->requiredObjectSlot;
@@ -657,7 +661,8 @@ void func_809289E4(Actor_ObjTsubo* this, PlayState* play)
     } else {
         if (!this->unk_195) {
             Actor_MoveWithGravity(&this->actor);
-            Actor_UpdateBgCheckInfo(play, &this->actor, 15.0f, 15.0f, 0.0f, 0x44);
+            Actor_UpdateBgCheckInfo(play, &this->actor, 15.0f, 15.0f, 0.0f,
+                UPDBGCHECKINFO_FLAG_MM_4 | UPDBGCHECKINFO_FLAG_MM_40);
             if ((this->actor.bgCheckFlags & BGCHECKFLAG_GROUND) && (DynaPoly_GetActor(&play->colCtx, this->actor.floorBgId) == NULL))
             {
                 this->unk_195 = TRUE;
@@ -698,7 +703,8 @@ void func_80928D80(Actor_ObjTsubo* this, PlayState* play)
         this->actor.room = play->roomCtx.curRoom.num;
         Actor_MoveWithGravity(&this->actor);
         this->actor.flags &= ~ACTOR_FLAG_MM_CAN_PRESS_SWITCH;
-        Actor_UpdateBgCheckInfo(play, &this->actor, 15.0f, 15.0f, 0.0f, 0x01 | 0x04 | 0x40 | 0x80);
+        Actor_UpdateBgCheckInfo(play, &this->actor, 15.0f, 15.0f, 0.0f,
+            UPDBGCHECKINFO_FLAG_MM_1 | UPDBGCHECKINFO_FLAG_MM_4 | UPDBGCHECKINFO_FLAG_MM_40 | UPDBGCHECKINFO_FLAG_MM_80);
         func_80928E74(this);
     } else {
         pos.x = this->actor.world.pos.x;
@@ -770,7 +776,8 @@ void func_80928F18(Actor_ObjTsubo* this, PlayState* play)
         Math_StepToS(&D_8092950C, D_80929508, 150);
         this->actor.shape.rot.x += D_80929504;
         this->actor.shape.rot.y += D_8092950C;
-        Actor_UpdateBgCheckInfo(play, &this->actor, 15.0f, 15.0f, 0.0f, 0x01 | 0x04 | 0x40 | 0x80);
+        Actor_UpdateBgCheckInfo(play, &this->actor, 15.0f, 15.0f, 0.0f,
+            UPDBGCHECKINFO_FLAG_MM_1 | UPDBGCHECKINFO_FLAG_MM_4 | UPDBGCHECKINFO_FLAG_MM_40 | UPDBGCHECKINFO_FLAG_MM_80);
         Collider_UpdateCylinder(&this->actor, &this->collider);
         CollisionCheck_SetOC(play, &play->colChkCtx, &this->collider.base);
         CollisionCheck_SetAT(play, &play->colChkCtx, &this->collider.base);

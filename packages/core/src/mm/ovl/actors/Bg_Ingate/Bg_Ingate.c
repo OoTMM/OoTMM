@@ -1,14 +1,10 @@
 #include <combo.h>
 #include <combo/play/collision_context.h>
 #include <combo/misc.h>
+#include <assets/mm/objects/object_sichitai_obj.h>
 #include "Bg_Ingate.h"
 
 #define FLAGS (ACTOR_FLAG_MM_10 | ACTOR_FLAG_MM_20)
-
-#if defined(GAME_MM)
-#define SEGADDR_BG_INGATE_DL    ((void*)(0x06000000+0x6b0))
-#define SEGADDR_BG_INGATE_COL   ((void*)(0x06000000+0x16dc))
-#endif
 
 void BgIngate_Init(Actor_BgIngate* this, PlayState* play);
 void BgIngate_Destroy(Actor_BgIngate* this, PlayState* play);
@@ -310,7 +306,7 @@ void BgIngate_Init(Actor_BgIngate* this, PlayState* play) {
 
     if (BgIngate_FindActor(this, play, ACTORCAT_BG, ACTOR_BG_INGATE) == NULL) {
         DynaPolyActor_Init(&this->dyna, DYNA_TRANSFORM_POS | DYNA_TRANSFORM_ROT_Y);
-        DynaPolyActor_LoadMesh(play, &this->dyna, SEGADDR_BG_INGATE_COL);
+        DynaPolyActor_LoadMesh(play, &this->dyna, (void*)gSichitaiBoatCol);
         this->flags = 0;
         this->flags |= 0x8;
         this->flags |= 0x10;
@@ -370,7 +366,7 @@ void BgIngate_Draw(Actor_BgIngate* this, PlayState* play) {
 
     Gfx_SetupDL25_Opa(play->state.gfxCtx);
     gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPDisplayList(POLY_OPA_DISP++, SEGADDR_BG_INGATE_DL);
+    gSPDisplayList(POLY_OPA_DISP++, (void*)gSichitaiBoatDL);
 
     CLOSE_DISPS();
 }

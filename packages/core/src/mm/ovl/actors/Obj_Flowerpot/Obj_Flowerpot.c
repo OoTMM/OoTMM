@@ -2,6 +2,7 @@
 #include <combo/item.h>
 #include <combo/global.h>
 #include <combo/custom.h>
+#include <assets/mm/objects/object_flowerpot.h>
 #include "Obj_Flowerpot.h"
 
 #define FLAGS 0
@@ -403,7 +404,7 @@ void func_80A1C0FC(Actor_ObjFlowerpot* this, PlayState* play) {
 
         Math_Vec3f_Sum(&spB8, &spC4, &spB8);
         EffectSsKakera_Spawn(play, &spB8, &spAC, &spB8, -100, 64, 40, 0, 0, (Rand_ZeroOne() * 16.0f) + 14.0f, 0, 0, 80,
-                             -1, OBJECT_FLOWERPOT, (Gfx*)0x060014F0);
+                             -1, OBJECT_FLOWERPOT, (void*)object_flowerpot_DL_0014F0);
     }
 }
 
@@ -430,7 +431,7 @@ void func_80A1C328(Actor_ObjFlowerpot* this, PlayState* play) {
 
         Math_Vec3f_Sum(&spB8, &spC4, &spB8);
         EffectSsKakera_Spawn(play, &spB8, &spAC, &spB8, -80, 64, 44, 0, 0, (Rand_ZeroOne() * 16.0f) + 14.0f, 0, 0, 80,
-                             -1, OBJECT_FLOWERPOT, (Gfx*)0x060014F0);
+                             -1, OBJECT_FLOWERPOT, (void*)object_flowerpot_DL_0014F0);
     }
 }
 

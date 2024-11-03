@@ -3,25 +3,9 @@
 #include <combo/misc.h>
 
 #include "En_Goroiwa.h"
+#include "assets/mm/objects/object_goroiwa.h"
 
 #define FLAGS (ACTOR_FLAG_MM_10 | ACTOR_FLAG_MM_80000000)
-
-#if defined(GAME_MM)
-# define SEGADDR_OBJECT_GOROIWA_DL_0042B0 SEGADDR_FROM_OFFSET(6, 0x42b0)
-# define SEGADDR_OBJECT_GOROIWA_DL_004960 SEGADDR_FROM_OFFSET(6, 0x4960)
-# define SEGADDR_OBJECT_GOROIWA_DL_004EF0 SEGADDR_FROM_OFFSET(6, 0x4ef0)
-# define SEGADDR_OBJECT_GOROIWA_DL_0003B0 SEGADDR_FROM_OFFSET(6, 0x03b0)
-# define SEGADDR_OBJECT_GOROIWA_DL_0028E0 SEGADDR_FROM_OFFSET(6, 0x28e0)
-# define SEGADDR_OBJECT_GOROIWA_DL_002D70 SEGADDR_FROM_OFFSET(6, 0x2d70)
-# define SEGADDR_OBJECT_GOROIWA_DL_0072F0 SEGADDR_FROM_OFFSET(6, 0x72f0)
-# define SEGADDR_OBJECT_GOROIWA_DL_0077D0 SEGADDR_FROM_OFFSET(6, 0x77d0)
-# define SEGADDR_OBJECT_GOROIWA_DL_007C60 SEGADDR_FROM_OFFSET(6, 0x7c60)
-# define SEGADDR_OBJECT_GOROIWA_DL_0032E0 SEGADDR_FROM_OFFSET(6, 0x32e0)
-# define SEGADDR_OBJECT_GOROIWA_DL_0082D0 SEGADDR_FROM_OFFSET(6, 0x82d0)
-# define SEGADDR_OBJECT_GOROIWA_DL_005C20 SEGADDR_FROM_OFFSET(6, 0x5c20)
-# define SEGADDR_OBJECT_GOROIWA_DL_003B40 SEGADDR_FROM_OFFSET(6, 0x3b40)
-# define SEGADDR_OBJECT_GOROIWA_DL_008B90 SEGADDR_FROM_OFFSET(6, 0x8b90)
-#endif
 
 void EnGoroiwa_Init(Actor_EnGoroiwa* this, PlayState* play);
 void EnGoroiwa_Destroy(Actor_EnGoroiwa* this, PlayState* play);
@@ -80,9 +64,9 @@ static f32 D_80942DFC[] = {
 };
 
 static Gfx* D_80942E0C[][3] = {
-    { SEGADDR_OBJECT_GOROIWA_DL_0042B0, SEGADDR_OBJECT_GOROIWA_DL_004960, SEGADDR_OBJECT_GOROIWA_DL_004EF0 },
-    { SEGADDR_OBJECT_GOROIWA_DL_0003B0, SEGADDR_OBJECT_GOROIWA_DL_0028E0, SEGADDR_OBJECT_GOROIWA_DL_002D70 },
-    { SEGADDR_OBJECT_GOROIWA_DL_0072F0, SEGADDR_OBJECT_GOROIWA_DL_0077D0, SEGADDR_OBJECT_GOROIWA_DL_007C60 },
+    { (void*)object_goroiwa_DL_0042B0, (void*)object_goroiwa_DL_004960, (void*)object_goroiwa_DL_004EF0 },
+    { (void*)object_goroiwa_DL_0003B0, (void*)object_goroiwa_DL_0028E0, (void*)object_goroiwa_DL_002D70 },
+    { (void*)object_goroiwa_DL_0072F0, (void*)object_goroiwa_DL_0077D0, (void*)object_goroiwa_DL_007C60 },
 };
 
 static Color_RGBA8 D_80942E30[] = {
@@ -1537,9 +1521,9 @@ void func_80942B1C(Actor_EnGoroiwa* this, PlayState* play) {
     Vec3s sp80;
 
     if (params == ENGOROIWA_C000_1) {
-        phi_fp = SEGADDR_OBJECT_GOROIWA_DL_0032E0;
+        phi_fp = (void*)object_goroiwa_DL_0032E0;
     } else {
-        phi_fp = SEGADDR_OBJECT_GOROIWA_DL_0082D0;
+        phi_fp = (void*)object_goroiwa_DL_0082D0;
     }
 
     for (i = 0; i < ARRAY_COUNT(this->unk_1E8); i++) {
@@ -1579,9 +1563,9 @@ void func_80942B1C(Actor_EnGoroiwa* this, PlayState* play) {
 
 void EnGoroiwa_Draw(Actor_EnGoroiwa* this, PlayState* play) {
     static Gfx* D_80942EB4[] = {
-        SEGADDR_OBJECT_GOROIWA_DL_005C20,
-        SEGADDR_OBJECT_GOROIWA_DL_003B40,
-        SEGADDR_OBJECT_GOROIWA_DL_008B90,
+        (void*)object_goroiwa_DL_005C20,
+        (void*)object_goroiwa_DL_003B40,
+        (void*)object_goroiwa_DL_008B90,
     };
     s32 params = ENGOROIWA_GET_C000(&this->actor);
 

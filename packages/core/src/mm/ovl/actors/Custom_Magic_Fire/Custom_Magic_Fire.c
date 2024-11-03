@@ -249,7 +249,7 @@ void MagicFire_UpdateBeforeCast(Actor_CustomMagicFire* this, PlayState* play)
     else
     {
         this->actor.update = (ActorFunc)MagicFire_Update;
-        Player_PlaySfx(player, 0x879); /* NA_SE_PL_MAGIC_FIRE */
+        Player_PlaySfx(player, NA_SE_PL_MAGIC_FIRE);
     }
     this->actor.world.pos = player->actor.world.pos;
 }

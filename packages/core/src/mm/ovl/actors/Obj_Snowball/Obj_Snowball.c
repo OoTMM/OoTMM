@@ -2,18 +2,11 @@
 #include <combo/global.h>
 #include <combo/item.h>
 #include <combo/config.h>
+#include <assets/mm/objects/object_goroiwa.h>
 #include "Obj_Snowball.h"
 
 #define OBJSNOWBALL_GET_SWITCH_FLAG(thisx) ((thisx)->params & 0x3F)
 #define OBJSNOWBALL_GET_7F00(thisx) (((thisx)->params >> 8) & 0x7F)
-
-#if defined(GAME_MM)
-# define SEGADDR_GOROIWA_DL_0072F0 SEGADDR_FROM_OFFSET(6, 0x72f0)
-# define SEGADDR_GOROIWA_DL_0077D0 SEGADDR_FROM_OFFSET(6, 0x77d0)
-# define SEGADDR_GOROIWA_DL_007C60 SEGADDR_FROM_OFFSET(6, 0x7c60)
-# define SEGADDR_GOROIWA_DL_0082D0 SEGADDR_FROM_OFFSET(6, 0x82d0)
-# define SEGADDR_GOROIWA_DL_008B90 SEGADDR_FROM_OFFSET(6, 0x8b90)
-#endif
 
 #define FLAGS 0x00000000
 
@@ -85,9 +78,9 @@ static Color_RGBA8 envColor = { 180, 180, 180, 255 };
 static Vec3f D_80B04FBC = { 0.0f, 0.3f, 0.0f };
 
 static Gfx* D_80B04FC8[] = {
-    SEGADDR_GOROIWA_DL_0072F0,
-    SEGADDR_GOROIWA_DL_0077D0,
-    SEGADDR_GOROIWA_DL_007C60,
+    (void*)object_goroiwa_DL_0072F0,
+    (void*)object_goroiwa_DL_0077D0,
+    (void*)object_goroiwa_DL_007C60,
 };
 
 static InitChainEntry sInitChain[] = {
@@ -952,7 +945,7 @@ void ObjSnowball_Draw(Actor_ObjSnowball* this, PlayState* play) {
 
     }
     CLOSE_DISPS();
-    Gfx_DrawDListOpa(play, SEGADDR_GOROIWA_DL_008B90);
+    Gfx_DrawDListOpa(play, (void*)object_goroiwa_DL_008B90);
 }
 
 void func_80B04D34(Actor_ObjSnowball* this, PlayState* play) {
@@ -971,7 +964,7 @@ void func_80B04D34(Actor_ObjSnowball* this, PlayState* play) {
 
             Matrix_SetTranslateRotateYXZ(ptr->unk_00.x, ptr->unk_00.y, ptr->unk_00.z, &sp80);
             Matrix_Scale(this->actor.scale.x, this->actor.scale.y, this->actor.scale.z, MTXMODE_APPLY);
-            Gfx_DrawDListOpa(play, SEGADDR_GOROIWA_DL_0082D0);
+            Gfx_DrawDListOpa(play, (void*)object_goroiwa_DL_0082D0);
 
             if ((ptr->unk_28 != NULL) && (ptr->unk_2C > 0)) {
                 OPEN_DISPS(play->state.gfxCtx);

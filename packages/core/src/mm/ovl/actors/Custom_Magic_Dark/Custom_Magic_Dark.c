@@ -4,6 +4,7 @@
 #include <combo/magic.h>
 #include <combo/math.h>
 #include <combo/global.h>
+#include <assets/mm/objects/gameplay_keep.h>
 
 #define FLAGS (ACTOR_FLAG_OOT_4 | ACTOR_FLAG_OOT_25)
 
@@ -24,7 +25,7 @@ static Gfx sDiamondMaterialDL[22] = {
     gsDPPipeSync(),
     gsDPSetTextureLUT(G_TT_NONE),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
-    gsDPLoadTextureBlock(0x04000000 | 0x28BB8, G_IM_FMT_I, G_IM_SIZ_8b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR
+    gsDPLoadTextureBlock(gameplay_keep_Tex_028BB8, G_IM_FMT_I, G_IM_SIZ_8b, 32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR
                          | G_TX_WRAP, 5, 5, G_TX_NOLOD, 1),
     gsDPLoadMultiBlock(0x08000000 | CUSTOM_KEEP_MAGIC_DARK_TEXTURE, 0x0100, 1, G_IM_FMT_I, G_IM_SIZ_8b, 32, 64, 0, G_TX_NOMIRROR | G_TX_WRAP,
                        G_TX_MIRROR | G_TX_WRAP, 5, 6, 13, 13),
@@ -159,9 +160,9 @@ void MagicDark_DiamondUpdate(Actor* thisx, PlayState* play) {
     gSaveContext.nayrusLoveTimer = nayrusLoveTimer + 1;
 
     if (nayrusLoveTimer < 1100) {
-        PlayLoopingSfxAtActor(thisx, 0x7C); /* NA_SE_PL_MAGIC_SOUL_NORMAL */
+        PlayLoopingSfxAtActor(thisx, NA_SE_PL_MAGIC_SOUL_NORMAL - SFX_FLAG);
     } else {
-        PlayLoopingSfxAtActor(thisx, 0xC0); /* NA_SE_PL_MAGIC_SOUL_FLASH */
+        PlayLoopingSfxAtActor(thisx, NA_SE_PL_MAGIC_SOUL_FLASH - SFX_FLAG);
     }
 }
 
@@ -203,7 +204,7 @@ void MagicDark_OrbUpdate(Actor* thisx, PlayState* play) {
     MagicDark* this = (MagicDark*)thisx;
     Actor_Player* player = GET_PLAYER(play);
 
-    PlayLoopingSfxAtActor(&this->actor, 0xC3); /* NA_SE_PL_MAGIC_SOUL_BALL */
+    PlayLoopingSfxAtActor(&this->actor, NA_SE_PL_MAGIC_SOUL_BALL - SFX_FLAG);
     if (this->timer < 35) {
         MagicDark_DimLighting(play, this->timer * (1 / 45.0f));
         Math_SmoothStepToF(&thisx->scale.x, this->scale * (1 / 12.000001f), 0.05f, 0.01f, 0.0001f);
@@ -244,7 +245,7 @@ void MagicDark_DiamondDraw(Actor* thisx, PlayState* play) {
         f32 y;
         if (player->transformation == MM_PLAYER_FORM_GORON)
         {
-            if (player->state3 & 0x00001000) /* PLAYER_STATE3_GORON_ROLL */
+            if (player->state3 & PLAYER_STATE3_MM_1000)
             {
                 y = player->actor.world.pos.y + Player_GetHeight(player) * 0.5f;
             }
@@ -321,12 +322,12 @@ void MagicDark_OrbDraw(Actor* thisx, PlayState* play) {
     gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     Matrix_RotateZ(sp6C * (M_PI / 32), MTXMODE_APPLY);
-    gSPDisplayList(POLY_XLU_DISP++, 0x04000000 | 0x23210); /* gEffFlash1DL */
+    gSPDisplayList(POLY_XLU_DISP++, gEffFlash1DL);
     Matrix_Pop();
     Matrix_RotateZ(-sp6C * (M_PI / 32), MTXMODE_APPLY);
     gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPDisplayList(POLY_XLU_DISP++, 0x04000000 | 0x23210); /* gEffFlash1DL */
+    gSPDisplayList(POLY_XLU_DISP++, gEffFlash1DL);
 
     CLOSE_DISPS();
 }
@@ -337,10 +338,10 @@ ActorInit Magic_Dark_InitVars = {
     FLAGS,
     1,
     sizeof(MagicDark),
-    MagicDark_Init,
-    MagicDark_Destroy,
-    MagicDark_OrbUpdate,
-    MagicDark_OrbDraw,
+    (ActorFunc)MagicDark_Init,
+    (ActorFunc)MagicDark_Destroy,
+    (ActorFunc)MagicDark_OrbUpdate,
+    (ActorFunc)MagicDark_OrbDraw,
 };
 
 OVL_INFO_ACTOR(ACTOR_CUSTOM_SPELL_LOVE, Magic_Dark_InitVars);

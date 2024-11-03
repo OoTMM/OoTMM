@@ -2,7 +2,7 @@
 #define COMBO_OVL_EN_NWC_H
 
 #include <combo/actor.h>
-#include "../src/mm/ovl/actors/En_Hs/En_Hs.h"
+#include <actors/En_Hs/En_Hs.h>
 
 struct Actor_EnNwc;
 
