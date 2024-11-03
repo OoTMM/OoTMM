@@ -106,7 +106,6 @@ PATCH_START 0x8009aaa8
   nop
 PATCH_END
 
-#if 0
 /* Use out file select hook */
 Play_GoToFileSelectTrampoline:
   HOOK_CALL Play_GoToFileSelect
@@ -118,13 +117,4 @@ PATCH_START 0x8009b4a4
   jal Play_GoToFileSelectTrampoline
    nop
   nop
-PATCH_END
-#endif
-
-PATCH_START 0x8009b454
-  lui t0,%HI(FileSelect_Init)
-PATCH_END
-
-PATCH_START 0x8009b45c
-  addiu t0,%LO(FileSelect_Init)
 PATCH_END
