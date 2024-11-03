@@ -1063,8 +1063,14 @@ void FileSelect_DrawWindowContents(GameState* thisx) {
         gSP1Quadrangle(POLY_OPA_DISP++, 16, 18, 19, 17, 0);
     }
 
+    /* Draw custom file info */
+    if (this->menuMode == FS_MENU_MODE_SELECT && this->selectMode == SM_CONFIRM_FILE && this->confirmButtonAlpha[0]) {
+        FileSelect_CustomFileInfoDraw(this);
+    }
+
     gDPPipeSync(POLY_OPA_DISP++);
     gDPSetCombineMode(POLY_OPA_DISP++, G_CC_MODULATEIDECALA, G_CC_MODULATEIDECALA);
+
 
     CLOSE_DISPS();
 }
@@ -1244,8 +1250,7 @@ void FileSelect_MoveSelectedFileToTop(GameState* thisx) {
 void FileSelect_FadeInFileInfo(GameState* thisx) {
     FileSelectState* this = (FileSelectState*)thisx;
 
-    this->fileInfoAlpha[this->buttonIndex] += 25;
-    this->nameBoxAlpha[this->buttonIndex] -= 50;
+    this->confirmButtonAlpha[FS_BTN_CONFIRM_YES] += 25;
 
     if (this->nameBoxAlpha[this->buttonIndex] <= 0) {
         this->nameBoxAlpha[this->buttonIndex] = 0;
@@ -1254,13 +1259,13 @@ void FileSelect_FadeInFileInfo(GameState* thisx) {
     this->actionTimer--;
 
     if (this->actionTimer == 0) {
-        this->fileInfoAlpha[this->buttonIndex] = 200;
+        FileSelect_CustomFileInfoPrepare(this, this->buttonIndex);
+        this->confirmButtonAlpha[FS_BTN_CONFIRM_YES] = 200;
         this->actionTimer = 8;
         this->selectMode++;
     }
 
-    this->confirmButtonAlpha[FS_BTN_CONFIRM_YES] = this->confirmButtonAlpha[FS_BTN_CONFIRM_QUIT] =
-        this->fileInfoAlpha[this->buttonIndex];
+    this->confirmButtonAlpha[FS_BTN_CONFIRM_QUIT] = this->confirmButtonAlpha[FS_BTN_CONFIRM_YES];
 }
 
 /**
@@ -1301,20 +1306,18 @@ void FileSelect_ConfirmFile(GameState* thisx) {
 void FileSelect_FadeOutFileInfo(GameState* thisx) {
     FileSelectState* this = (FileSelectState*)thisx;
 
-    this->fileInfoAlpha[this->buttonIndex] -= 25;
-    this->nameBoxAlpha[this->buttonIndex] += 25;
+    this->confirmButtonAlpha[FS_BTN_CONFIRM_YES] -= 25;
     this->actionTimer--;
 
     if (this->actionTimer == 0) {
         this->buttonYOffsets[FS_BTN_SELECT_YES] = this->buttonYOffsets[FS_BTN_SELECT_QUIT] = 0;
-        this->nameBoxAlpha[this->buttonIndex] = 200;
-        this->fileInfoAlpha[this->buttonIndex] = 0;
+        this->confirmButtonAlpha[FS_BTN_CONFIRM_YES] = 0;
         this->nextTitleLabel = FS_TITLE_SELECT_FILE;
         this->actionTimer = 8;
         this->selectMode++;
     }
 
-    this->confirmButtonAlpha[0] = this->confirmButtonAlpha[1] = this->fileInfoAlpha[this->buttonIndex];
+    this->confirmButtonAlpha[FS_BTN_CONFIRM_QUIT] = this->confirmButtonAlpha[FS_BTN_CONFIRM_YES];
 }
 
 /**
@@ -1779,6 +1782,9 @@ void FileSelect_InitContext(GameState* thisx) {
 }
 
 void FileSelect_Destroy(GameState* thisx) {
+    FileSelectState* this = (FileSelectState*)thisx;
+
+    FileSelect_CustomFileInfoFree(this);
 }
 
 #define VROM_TITLE_STATIC       0x01a02000
@@ -1797,6 +1803,8 @@ void FileSelect_Init(GameState* thisx) {
     size = comboDmaLoadFile(NULL, VROM_PARAMETER_STATIC);
     this->parameterSegment = GAME_STATE_ALLOC(&this->state, size);
     comboDmaLoadFile(this->parameterSegment, VROM_PARAMETER_STATIC);
+
+    FileSelect_CustomFileInfoInit(this);
 
     Matrix_Init(&this->state);
     View_Init(&this->view, this->state.gfxCtx);

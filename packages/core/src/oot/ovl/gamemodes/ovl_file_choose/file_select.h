@@ -221,6 +221,11 @@ void FileSelect_DrawOptions(GameState* thisx);
 void FileSelect_DrawNameEntry(GameState* thisx);
 void FileSelect_DrawCharacter(GraphicsContext* gfxCtx, void* texture, s16 vtx);
 
+void FileSelect_CustomFileInfoInit(FileSelectState* this);
+void FileSelect_CustomFileInfoFree(FileSelectState* this);
+void FileSelect_CustomFileInfoPrepare(FileSelectState* this, int slot);
+void FileSelect_CustomFileInfoDraw(FileSelectState* this);
+
 extern Vtx gNameEntryVtx[];
 extern s16 gCharPageHira[];
 extern s16 gCharPageKata[];

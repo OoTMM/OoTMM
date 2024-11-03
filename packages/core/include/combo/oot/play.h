@@ -240,6 +240,7 @@ typedef struct FileSelectState {
     s16                 kbdY;
     s16                 newFileNameCharCount;
     s16                 unk_1CAD6[5];
+    void*               customFileInfoBufs[2];
 }
 FileSelectState;
 
