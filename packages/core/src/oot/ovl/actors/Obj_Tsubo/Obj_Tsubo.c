@@ -7,16 +7,11 @@
 #include <combo/effect.h>
 #include <combo/csmc.h>
 #include <combo/global.h>
+#include <assets/oot/objects/gameplay_dangeon_keep.h>
+#include <assets/oot/objects/object_tsubo.h>
 #include "Obj_Tsubo.h"
 
 #define FLAGS (ACTOR_FLAG_OOT_4 | ACTOR_FLAG_OOT_23)
-
-#if defined(GAME_OOT)
-# define DL_WHOLE_KEEP          0x05017870
-# define DL_FRAGMENT_KEEP       0x05017a60
-# define DL_WHOLE_OBJ_TSUBO     0x060017c0
-# define DL_FRAGMENT_OBJ_TSUBO  0x06001960
-#endif
 
 void ObjTsubo_Init(Actor_ObjTsubo* this, PlayState* play);
 void ObjTsubo_Destroy(Actor_ObjTsubo* this, PlayState* play2);
@@ -45,9 +40,9 @@ static s16 D_80BA1B5C = 0;
 
 static s16 sObjectIds[] = { OBJECT_GAMEPLAY_DANGEON_KEEP, OBJECT_TSUBO };
 
-static Gfx* D_80BA1B84[] = { (Gfx*)DL_WHOLE_KEEP, (Gfx*)DL_WHOLE_OBJ_TSUBO };
+static Gfx* D_80BA1B84[] = { (Gfx*)gPotDL, (Gfx*)object_tsubo_DL_0017C0 };
 
-static Gfx* D_80BA1B8C[] = { (Gfx*)DL_FRAGMENT_KEEP, (Gfx*)DL_FRAGMENT_OBJ_TSUBO };
+static Gfx* D_80BA1B8C[] = { (Gfx*)gPotFragmentDL, (Gfx*)object_tsubo_DL_001960 };
 
 static ColliderCylinderInit sCylinderInit = {
     {

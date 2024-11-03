@@ -1,6 +1,8 @@
 #include <combo.h>
 #include <combo/sfx.h>
 #include <combo/audio.h>
+#include <assets/oot/objects/object_mag.h>
+
 #include "En_Mag.h"
 
 #define gDPSetTileCustom(pkt, fmt, siz, width, height, pal, cms, cmt, masks, maskt, shifts, shiftt)                    \
@@ -17,6 +19,33 @@
     } while (0)
 
 #define FLAGS (ACTOR_FLAG_OOT_4 | ACTOR_FLAG_OOT_5)
+
+
+// FIXME cross-game object metadata
+#define gTitleScreenZeldaLogoTex                  ((void*)(0x6000000|0x0))
+#define gTitleScreenMajorasMaskSubtitleTex        ((void*)(0x6000000|0x9000))
+#define gTitleScreenMajorasMaskSubtitleMaskTex    ((void*)(0x6000000|0x9680))
+#define gTitleScreenTheLegendOfTextTex            ((void*)(0x6000000|0x9d00))
+#define gTitleScreenDisplayEffectMask00Tex        ((void*)(0x6000000|0x9f40))
+#define gTitleScreenDisplayEffectMask01Tex        ((void*)(0x6000000|0xa740))
+#define gTitleScreenDisplayEffectMask10Tex        ((void*)(0x6000000|0xaf40))
+#define gTitleScreenDisplayEffectMask11Tex        ((void*)(0x6000000|0xb740))
+#define gTitleScreenDisplayEffectMask02Tex        ((void*)(0x6000000|0xbf40))
+#define gTitleScreenDisplayEffectMask12Tex        ((void*)(0x6000000|0xc740))
+#define gTitleScreenAppearEffectMask00Tex         ((void*)(0x6000000|0xcf40))
+#define gTitleScreenAppearEffectMask01Tex         ((void*)(0x6000000|0xd740))
+#define gTitleScreenAppearEffectMask10Tex         ((void*)(0x6000000|0xdf40))
+#define gTitleScreenAppearEffectMask11Tex         ((void*)(0x6000000|0xe740))
+#define gTitleScreenAppearEffectMask02Tex         ((void*)(0x6000000|0xef40))
+#define gTitleScreenAppearEffectMask12Tex         ((void*)(0x6000000|0xf740))
+#define gTitleScreenFlame0Tex                     ((void*)(0x6000000|0xff40))
+#define gTitleScreenFlame1Tex                     ((void*)(0x6000000|0x10340))
+#define gTitleScreenFlame2Tex                     ((void*)(0x6000000|0x10740))
+#define gTitleScreenFlame3Tex                     ((void*)(0x6000000|0x10b40))
+#define gTitleScreenCopyright2000NintendoTex      ((void*)(0x6000000|0x10f40))
+#define gTitleScreenControllerNotConnectedTextTex ((void*)(0x6000000|0x11740))
+#define gTitleScreenInsertControllerTextTex       ((void*)(0x6000000|0x11bc0))
+#define gTitleScreenMajorasMaskTex                ((void*)(0x6000000|0x11e48))
 
 void EnMag_Init(Actor_EnMag* this, PlayState* play);
 void EnMag_Destroy(Actor_EnMag* this, PlayState* play);
@@ -522,9 +551,9 @@ static void EnMag_DrawTextWithShadow(Actor_EnMag* this, Gfx** gfx, const char* t
 static void EnMag_DrawLogoOot(Actor_EnMag* this, PlayState* play, Gfx** gfxP, float centerX, float centerY)
 {
     static void* effectMaskTextures[] = {
-        (void*)0x06019B00, (void*)0x0601A300, (void*)0x0601AB00, (void*)0x0601B300,
-        (void*)0x0601BB00, (void*)0x0601C300, (void*)0x0601CB00, (void*)0x0601D300,
-        (void*)0x0601DB00
+        (void*)gTitleEffectMask00Tex, (void*)gTitleEffectMask01Tex, (void*)gTitleEffectMask02Tex,
+        (void*)gTitleEffectMask10Tex, (void*)gTitleEffectMask11Tex, (void*)gTitleEffectMask12Tex,
+        (void*)gTitleEffectMask20Tex, (void*)gTitleEffectMask21Tex, (void*)gTitleEffectMask22Tex,
     };
 
     Gfx* gfx;
@@ -566,7 +595,7 @@ static void EnMag_DrawLogoOot(Actor_EnMag* this, PlayState* play, Gfx** gfxP, fl
         /* Logo */
         Gfx_SetupDL_39Ptr(&gfx);
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, (s16)this->mainAlpha);
-        EnMag_BlitTextureRGBA32(&gfx, 0x06000300, 160, 160, baseX, baseY, LOGO_SCALE);
+        EnMag_BlitTextureRGBA32(&gfx, (u32)gTitleZeldaShieldLogoTex, 160, 160, baseX, baseY, LOGO_SCALE);
 
         /* Subtitles */
         Gfx_SetupDL_39Ptr(&gfx);
@@ -582,15 +611,15 @@ static void EnMag_DrawLogoOot(Actor_EnMag* this, PlayState* play, Gfx** gfxP, fl
 
         gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, (s16)this->mainAlpha);
         gDPSetEnvColor(gfx++, 100, 0, 100, 255);
-        EnMag_DrawTextureI8(&gfx, (void*)0x0601e700, 72, 8, baseX + 75 * LOGO_SCALE, baseY + 53 * LOGO_SCALE, 72 * LOGO_SCALE, 8 * LOGO_SCALE, 1024 * LOGO_SCALE_REVERSE, 1024 * LOGO_SCALE_REVERSE);
-        EnMag_DrawTextureI8(&gfx, (void*)0x0601e940, 96, 8, baseX + 71 * LOGO_SCALE, baseY + 107 * LOGO_SCALE, 96 * LOGO_SCALE, 8 * LOGO_SCALE, 1024 * LOGO_SCALE_REVERSE, 1024 * LOGO_SCALE_REVERSE);
+        EnMag_DrawTextureI8(&gfx, (void*)gTitleTheLegendOfTextTex, 72, 8, baseX + 75 * LOGO_SCALE, baseY + 53 * LOGO_SCALE, 72 * LOGO_SCALE, 8 * LOGO_SCALE, 1024 * LOGO_SCALE_REVERSE, 1024 * LOGO_SCALE_REVERSE);
+        EnMag_DrawTextureI8(&gfx, (void*)gTitleOcarinaOfTimeTMTextTex, 96, 8, baseX + 71 * LOGO_SCALE, baseY + 107 * LOGO_SCALE, 96 * LOGO_SCALE, 8 * LOGO_SCALE, 1024 * LOGO_SCALE_REVERSE, 1024 * LOGO_SCALE_REVERSE);
 
         gDPPipeSync(gfx++);
         gDPSetPrimColor(gfx++, 0, 0, 200, 200, 150, (s16)this->mainAlpha);
         gDPSetEnvColor(gfx++, 100, 100, 50, 255);
 
-        EnMag_DrawTextureI8(&gfx, (void*)0x0601e700, 72, 8, baseX + 74 * LOGO_SCALE, baseY + 52 * LOGO_SCALE, 72 * LOGO_SCALE, 8 * LOGO_SCALE, 1024 * LOGO_SCALE_REVERSE, 1024 * LOGO_SCALE_REVERSE);
-        EnMag_DrawTextureI8(&gfx, (void*)0x0601e940, 96, 8, baseX + 70 * LOGO_SCALE, baseY + 106 * LOGO_SCALE, 96 * LOGO_SCALE, 8 * LOGO_SCALE, 1024 * LOGO_SCALE_REVERSE, 1024 * LOGO_SCALE_REVERSE);
+        EnMag_DrawTextureI8(&gfx, (void*)gTitleTheLegendOfTextTex, 72, 8, baseX + 74 * LOGO_SCALE, baseY + 52 * LOGO_SCALE, 72 * LOGO_SCALE, 8 * LOGO_SCALE, 1024 * LOGO_SCALE_REVERSE, 1024 * LOGO_SCALE_REVERSE);
+        EnMag_DrawTextureI8(&gfx, (void*)gTitleOcarinaOfTimeTMTextTex, 96, 8, baseX + 70 * LOGO_SCALE, baseY + 106 * LOGO_SCALE, 96 * LOGO_SCALE, 8 * LOGO_SCALE, 1024 * LOGO_SCALE_REVERSE, 1024 * LOGO_SCALE_REVERSE);
     }
     *gfxP = gfx;
 }
@@ -598,18 +627,20 @@ static void EnMag_DrawLogoOot(Actor_EnMag* this, PlayState* play, Gfx** gfxP, fl
 static void EnMag_DrawLogoMm(Actor_EnMag* this, PlayState* play, Gfx** gfxP, float centerX, float centerY)
 {
     static const u32 sAppearEffectMaskTextures[] = {
-        0x0600CF40, 0x0600D740, 0x0600EF40, 0x0600DF40,
-        0x0600E740, 0x0600F740
+        (u32)gTitleScreenAppearEffectMask00Tex, (u32)gTitleScreenAppearEffectMask01Tex, (u32)gTitleScreenAppearEffectMask02Tex,
+        (u32)gTitleScreenAppearEffectMask10Tex, (u32)gTitleScreenAppearEffectMask11Tex, (u32)gTitleScreenAppearEffectMask12Tex
     };
 
     static const u32 sDisplayEffectMaskTextures[] = {
-        0x06009F40, 0x0600A740, 0x0600BF40, 0x0600AF40,
-        0x0600B740, 0x0600C740
+        (u32)gTitleScreenDisplayEffectMask00Tex, (u32)gTitleScreenDisplayEffectMask01Tex, (u32)gTitleScreenDisplayEffectMask02Tex,
+        (u32)gTitleScreenDisplayEffectMask10Tex, (u32)gTitleScreenDisplayEffectMask11Tex, (u32)gTitleScreenDisplayEffectMask12Tex
     };
 
     static const u32 sEffectTextures[] = {
-        0x0600FF40, 0x06010340, 0x06010340, 0x06010740,
-        0x06010B40, 0x06010B40
+        (u32)gTitleScreenFlame0Tex,
+        (u32)gTitleScreenFlame1Tex, (u32)gTitleScreenFlame1Tex,
+        (u32)gTitleScreenFlame2Tex,
+        (u32)gTitleScreenFlame3Tex, (u32)gTitleScreenFlame3Tex
     };
 
     Gfx* gfx;
@@ -652,7 +683,7 @@ static void EnMag_DrawLogoMm(Actor_EnMag* this, PlayState* play, Gfx** gfxP, flo
     {
         Gfx_SetupDL_39Ptr(&gfx);
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, (s16)this->mainAlpha);
-        EnMag_BlitTextureRGBA32(&gfx, 0x06011e48, 0x80, 0x70, baseX - 42 * LOGO_SCALE, baseY + 2 * LOGO_SCALE, LOGO_SCALE);
+        EnMag_BlitTextureRGBA32(&gfx, (u32)gTitleScreenMajorasMaskTex, 0x80, 0x70, baseX - 42 * LOGO_SCALE, baseY + 2 * LOGO_SCALE, LOGO_SCALE);
     }
 
     /* Full Effect */
@@ -683,7 +714,7 @@ static void EnMag_DrawLogoMm(Actor_EnMag* this, PlayState* play, Gfx** gfxP, flo
         /* Logo */
         Gfx_SetupDL_39Ptr(&gfx);
         gDPSetPrimColor(gfx++, 0, 0, 255, 255, 255, (s16)this->mainAlpha);
-        EnMag_BlitTextureRGBA32(&gfx, 0x06000000, 0x90, 0x40, baseX, baseY + 30 * LOGO_SCALE, LOGO_SCALE);
+        EnMag_BlitTextureRGBA32(&gfx, (u32)gTitleScreenZeldaLogoTex, 0x90, 0x40, baseX, baseY + 30 * LOGO_SCALE, LOGO_SCALE);
 
         /* Subtitles */
         gDPSetAlphaCompare(gfx++, G_AC_NONE);
@@ -699,11 +730,11 @@ static void EnMag_DrawLogoMm(Actor_EnMag* this, PlayState* play, Gfx** gfxP, flo
         }
 
         gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, this->mainAlpha);
-        EnMag_DrawTextureI8(&gfx, (void*)0x06009680, 104, 16, baseX + 46 * LOGO_SCALE, baseY + 80 * LOGO_SCALE, 104 * LOGO_SCALE, 16 * LOGO_SCALE, 1024 * LOGO_SCALE_REVERSE, 1024 * LOGO_SCALE_REVERSE);
+        EnMag_DrawTextureI8(&gfx, (void*)gTitleScreenMajorasMaskSubtitleMaskTex, 104, 16, baseX + 46 * LOGO_SCALE, baseY + 80 * LOGO_SCALE, 104 * LOGO_SCALE, 16 * LOGO_SCALE, 1024 * LOGO_SCALE_REVERSE, 1024 * LOGO_SCALE_REVERSE);
 
         gDPSetPrimColor(gfx++, 0, 120, 208, 102, 222, this->mainAlpha);
-        EnMag_DrawTextureI8(&gfx, (void*)0x06009d00, 72, 8, baseX + 55 * LOGO_SCALE, baseY + 28 * LOGO_SCALE, 72 * LOGO_SCALE, 8 * LOGO_SCALE, 1024 * LOGO_SCALE_REVERSE, 1024 * LOGO_SCALE_REVERSE);
-        EnMag_DrawTextureI8(&gfx, (void*)0x06009000, 104, 16, baseX + 46 * LOGO_SCALE, baseY + 80 * LOGO_SCALE, 104 * LOGO_SCALE, 16 * LOGO_SCALE, 1024 * LOGO_SCALE_REVERSE, 1024 * LOGO_SCALE_REVERSE);
+        EnMag_DrawTextureI8(&gfx, (void*)gTitleScreenTheLegendOfTextTex, 72, 8, baseX + 55 * LOGO_SCALE, baseY + 28 * LOGO_SCALE, 72 * LOGO_SCALE, 8 * LOGO_SCALE, 1024 * LOGO_SCALE_REVERSE, 1024 * LOGO_SCALE_REVERSE);
+        EnMag_DrawTextureI8(&gfx, (void*)gTitleScreenMajorasMaskSubtitleTex, 104, 16, baseX + 46 * LOGO_SCALE, baseY + 80 * LOGO_SCALE, 104 * LOGO_SCALE, 16 * LOGO_SCALE, 1024 * LOGO_SCALE_REVERSE, 1024 * LOGO_SCALE_REVERSE);
     }
     *gfxP = gfx;
 }
@@ -752,10 +783,10 @@ void EnMag_DrawInner(Actor_EnMag* this, PlayState* play, Gfx** gfxP)
         gDPSetPrimColor((*gfxP)++, 0, 0, (s16)this->copyrightAlpha, (s16)this->copyrightAlpha, (s16)this->copyrightAlpha, (s16)this->copyrightAlpha);
 
         gSPSegment((*gfxP)++, 0x06, play->objectCtx.status[this->actor.objectSlot].segment);
-        EnMag_DrawTextureIA8(gfxP, (void*)0x06019300, 128, 16, 94, 198, 128, 16, 1024, 1024);
+        EnMag_DrawTextureIA8(gfxP, (void*)gTitleCopyright1998Tex, 128, 16, 94, 198, 128, 16, 1024, 1024);
 
         gSPSegment((*gfxP)++, 0x06, this->mmMagData);
-        EnMag_DrawTextureIA8(gfxP, (void*)0x06010f40, 128, 16, 94, 210, 128, 16, 1024, 1024);
+        EnMag_DrawTextureIA8(gfxP, (void*)gTitleScreenCopyright2000NintendoTex, 128, 16, 94, 210, 128, 16, 1024, 1024);
     }
 }
 
