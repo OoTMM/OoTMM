@@ -1784,11 +1784,11 @@ void FileSelect_Init(GameState* thisx) {
 
     size = comboDmaLoadFile(NULL, VROM_TITLE_STATIC);
     this->staticSegment = GAME_STATE_ALLOC(&this->state, size);
-    comboLoadFile(this->staticSegment, VROM_TITLE_STATIC);
+    comboDmaLoadFile(this->staticSegment, VROM_TITLE_STATIC);
 
     size = comboDmaLoadFile(NULL, VROM_PARAMETER_STATIC);
     this->parameterSegment = GAME_STATE_ALLOC(&this->state, size);
-    comboLoadFile(this->parameterSegment, VROM_PARAMETER_STATIC);
+    comboDmaLoadFile(this->parameterSegment, VROM_PARAMETER_STATIC);
 
     Matrix_Init(&this->state);
     View_Init(&this->view, this->state.gfxCtx);

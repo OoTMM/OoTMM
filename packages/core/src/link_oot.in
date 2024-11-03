@@ -5,6 +5,7 @@ _Interface_Update = 0x80078290;
 
 TitleCard_Clear = 0x80020e80;
 
+gGameStateOverlayTable = 0x800f1340;
 Sram_WriteSramHeader = 0x800911c0;
 AudioSeq_QueueSeqCmd = 0x800caa70;
 bzero = 0x80002e80;
