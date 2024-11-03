@@ -14,7 +14,7 @@ function ensureArray<T>(value: T | T[]): T[] {
 
 type AddrMap = Map<string, number>;
 
-const RES_TYPES = ['DList', 'Texture', 'Collision', 'Skeleton', 'Animation'];
+const RES_TYPES = ['DList', 'Texture', 'Collision', 'Skeleton', 'Animation', 'PlayerAnimation', 'Array'];
 
 async function extractAssetsMetadata(game: Game, srcType: string, file: string, addrMap: AddrMap) {
   const outDir = path.join(DIR_OUT_INCLUDES, game, srcType);
