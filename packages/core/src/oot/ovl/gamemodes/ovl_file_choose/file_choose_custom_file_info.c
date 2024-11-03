@@ -1,7 +1,9 @@
 #include "file_select.h"
+#include <combo/config.h>
 
 #define CUSTOM_FILE_INFO_BUFFER_SIZE 0x40000
 
+#define ICON_NONE   0xffff
 #define ICONF_MM    0x8000
 #define ICONF_DIM   0x4000
 
@@ -9,6 +11,7 @@ void FileSelect_CustomFileInfoInit(FileSelectState* this)
 {
     this->customFileInfoBufs[0] = malloc(CUSTOM_FILE_INFO_BUFFER_SIZE);
     this->customFileInfoBufs[1] = malloc(CUSTOM_FILE_INFO_BUFFER_SIZE);
+    this->game = 0;
 }
 
 void FileSelect_CustomFileInfoFree(FileSelectState* this)
@@ -40,6 +43,13 @@ static void* allocItemIconOot(void** end, int itemId)
     return buf;
 }
 
+static void* allocItemIconMm(void** end, int itemId)
+{
+    void* buf = allocBuf(end, 0x1000);
+    LoadMmItemIcon(buf, itemId);
+    return buf;
+}
+
 static void quadRGBA8(Gfx** gfx, void* tex, s16 w, s16 h, s16 x, s16 y, float scale)
 {
     float revScale;
@@ -55,15 +65,21 @@ static void quadRGBA8(Gfx** gfx, void* tex, s16 w, s16 h, s16 x, s16 y, float sc
         (int)(revScale * (1 << 10)), (int)(revScale * (1 << 10)));
 }
 
-static void drawItemIcon(Gfx** list, void** end, s16 x, s16 y, s16 dx, s16 dy, s16 id)
+static void drawItemIcon(Gfx** list, void** end, s16 x, s16 y, s16 dx, s16 dy, u16 id)
 {
     float scale;
-    s16 itemId;
+    u16 itemId;
     void* tex;
+
+    if (id == ICON_NONE)
+        return;
 
     scale = 0.5f;
     itemId = id & 0x3fff;
-    tex = allocItemIconOot(end, itemId);
+    if (!(id & ICONF_MM))
+        tex = allocItemIconOot(end, itemId);
+    else
+        tex = allocItemIconMm(end, itemId);
 
     /* Dim */
     if (id & ICONF_DIM)
@@ -79,7 +95,7 @@ static void drawItemIcon(Gfx** list, void** end, s16 x, s16 y, s16 dx, s16 dy, s
     quadRGBA8(list, tex, 32, 32, x + 32 * dx * scale, y + 32 * dy * scale, scale);
 }
 
-static void drawItemIconSimple(Gfx** list, void** end, s16 x, s16 y, s16 dx, s16 dy, s16 id, int noDim)
+static void drawItemIconSimple(Gfx** list, void** end, s16 x, s16 y, s16 dx, s16 dy, u16 id, int noDim)
 {
     if (!noDim)
         id |= ICONF_DIM;
@@ -88,8 +104,8 @@ static void drawItemIconSimple(Gfx** list, void** end, s16 x, s16 y, s16 dx, s16
 
 static void FileSelect_CustomFileInfoPrepareOotInventory(FileSelectState* this, Gfx** list, void** end, int x, int y)
 {
-    s16 iconOcarina;
-    s16 iconHookshot;
+    u16 iconOcarina;
+    u16 iconHookshot;
     u8 itemId;
     u8 hasBottle;
 
@@ -147,6 +163,48 @@ static void FileSelect_CustomFileInfoPrepareOot(FileSelectState* this, Gfx** lis
     FileSelect_CustomFileInfoPrepareOotInventory(this, list, end, 130, 94);
 }
 
+static void FileSelect_CustomFileInfoPrepareMmInventory(FileSelectState* this, Gfx** list, void** end, int x, int y)
+{
+    u16 iconOcarina;
+    u16 iconHookshot;
+
+    /* Pre-compute complex icons */
+    iconOcarina = ITEM_OOT_OCARINA_TIME;
+    if (Config_Flag(CFG_MM_OCARINA_FAIRY) && !(gMmExtraItems.ocarina & 2))
+        iconOcarina = ITEM_OOT_OCARINA_FAIRY;
+
+    iconHookshot = ITEM_MM_HOOKSHOT | ICONF_MM;
+    if (Config_Flag(CFG_MM_HOOKSHOT_SHORT) && !(gMmExtraItems.hookshot & 2))
+        iconHookshot = ITEM_OOT_HOOKSHOT;
+
+    /* Row 1 */
+    drawItemIconSimple(list, end, x, y, 0, 0, iconOcarina,                  gMmExtraItems.ocarina);
+    drawItemIconSimple(list, end, x, y, 1, 0, ITEM_MM_BOW | ICONF_MM,       gMmSave.inventory.items[ITS_MM_BOW] == ITEM_MM_BOW);
+    drawItemIconSimple(list, end, x, y, 2, 0, ITEM_OOT_ARROW_FIRE,          gMmSave.inventory.items[ITS_MM_ARROW_FIRE] == ITEM_MM_ARROW_FIRE);
+    drawItemIconSimple(list, end, x, y, 3, 0, ITEM_OOT_ARROW_ICE,           gMmSave.inventory.items[ITS_MM_ARROW_ICE] == ITEM_MM_ARROW_ICE);
+    drawItemIconSimple(list, end, x, y, 4, 0, ITEM_OOT_ARROW_LIGHT,         gMmSave.inventory.items[ITS_MM_ARROW_LIGHT] == ITEM_MM_ARROW_LIGHT);
+
+    /* Row 2 */
+    drawItemIconSimple(list, end, x, y, 0, 1, ITEM_OOT_BOMB,                gMmSave.inventory.items[ITS_MM_BOMBS] == ITEM_MM_BOMB);
+    drawItemIconSimple(list, end, x, y, 1, 1, ITEM_OOT_BOMBCHU_10,          gMmSave.inventory.items[ITS_MM_BOMBCHU] == ITEM_MM_BOMBCHU);
+    drawItemIconSimple(list, end, x, y, 2, 1, ITEM_OOT_STICK,               gMmSave.inventory.items[ITS_MM_STICKS] == ITEM_MM_STICK);
+    drawItemIconSimple(list, end, x, y, 3, 1, ITEM_OOT_NUT,                 gMmSave.inventory.items[ITS_MM_NUTS] == ITEM_MM_NUT);
+    drawItemIconSimple(list, end, x, y, 4, 1, ITEM_OOT_MAGIC_BEAN,          gMmSave.inventory.items[ITS_MM_BEANS] == ITEM_MM_MAGIC_BEAN);
+
+    /* Row 3 */
+    drawItemIconSimple(list, end, x, y, 0, 2, ITEM_MM_POWDER_KEG | ICONF_MM,            gMmSave.inventory.items[ITS_MM_KEG] == ITEM_MM_POWDER_KEG);
+    drawItemIconSimple(list, end, x, y, 1, 2, ITEM_MM_PICTOGRAPH_BOX | ICONF_MM,        gMmSave.inventory.items[ITS_MM_PICTOBOX] == ITEM_MM_PICTOGRAPH_BOX);
+    drawItemIconSimple(list, end, x, y, 2, 2, ITEM_OOT_LENS,                            gMmSave.inventory.items[ITS_MM_LENS] == ITEM_MM_LENS_OF_TRUTH);
+    drawItemIconSimple(list, end, x, y, 3, 2, iconHookshot,                             gMmExtraItems.hookshot);
+    drawItemIconSimple(list, end, x, y, 4, 2, ITEM_MM_GREAT_FAIRY_SWORD | ICONF_MM,     gMmExtraItems.hammerGFS & 1);
+
+}
+
+static void FileSelect_CustomFileInfoPrepareMm(FileSelectState* this, Gfx** list, void** end)
+{
+    FileSelect_CustomFileInfoPrepareMmInventory(this, list, end, 130, 94);
+}
+
 void FileSelect_CustomFileInfoPrepare(FileSelectState* this, int slot)
 {
     Gfx* list;
@@ -165,7 +223,10 @@ void FileSelect_CustomFileInfoPrepare(FileSelectState* this, int slot)
     gDPSetCombineMode(list++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
     gDPSetPrimColor(list++, 0, 0, 255, 255, 255, 255);
 
-    FileSelect_CustomFileInfoPrepareOot(this, &list, &end);
+    if (!this->game)
+        FileSelect_CustomFileInfoPrepareOot(this, &list, &end);
+    else
+        FileSelect_CustomFileInfoPrepareMm(this, &list, &end);
 
     gSPEndDisplayList(list++);
 }
