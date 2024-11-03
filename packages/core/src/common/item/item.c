@@ -41,7 +41,7 @@ void comboSyncItems(void)
         gForeignSave.inventory.ammo[ITS_FOREIGN_BOMBCHU] = gSave.inventory.ammo[ITS_NATIVE_BOMBCHU];
 
     if (Config_Flag(CFG_SHARED_MAGIC))
-       gForeignSave.playerData.magicAmount = gSave.playerData.magicAmount;
+       gForeignSave.playerData.magic = gSave.playerData.magic;
 
     if (Config_Flag(CFG_SHARED_NUTS_STICKS))
     {
@@ -54,7 +54,7 @@ void comboSyncItems(void)
 
     if (Config_Flag(CFG_SHARED_HEALTH))
     {
-        gForeignSave.playerData.healthMax = gSave.playerData.healthMax;
+        gForeignSave.playerData.healthCapacity = gSave.playerData.healthCapacity;
         gForeignSave.playerData.health = gSave.playerData.health;
         gForeignSave.inventory.quest.heartPieces = gSave.inventory.quest.heartPieces;
     }

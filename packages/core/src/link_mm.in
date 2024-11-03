@@ -288,8 +288,8 @@ Gfx_DrawDListOpa = 0x800bdfc0;
 
 Actor_UpdateBgCheckInfo = 0x800b78b8;
 
-MatrixStackDup = 0x8018019c;
-MatrixStackPop = 0x801801cc;
+Matrix_Push = 0x8018019c;
+Matrix_Pop = 0x801801cc;
 
 _AddRupees = 0x801159ec;
 

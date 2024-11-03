@@ -35,5 +35,10 @@ void    Audio_ApplySoundMode(u8 mode);
 void    Audio_SetCutsceneFlag(int flag);
 u16     Audio_GetActiveSeqId(int channel);
 void    Audio_DisplayMusicName(PlayState* play);
+void    Audio_PlaySequenceWithSeqPlayerIO(u8 seqPlayerIndex, u16 seqId, u8 fadeInDuration, s8 ioPort, s8 ioData);
+
+#if defined(GAME_OOT)
+void func_800F6964(u16);
+#endif
 
 #endif

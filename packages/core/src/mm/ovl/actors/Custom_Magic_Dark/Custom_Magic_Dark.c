@@ -317,12 +317,12 @@ void MagicDark_OrbDraw(Actor* thisx, PlayState* play) {
     Matrix_Translate(pos.x, pos.y, pos.z, MTXMODE_NEW);
     Matrix_Scale(this->actor.scale.x, this->actor.scale.y, this->actor.scale.z, MTXMODE_APPLY);
     ModelViewMult(&play->billboardMtxF, MTXMODE_APPLY);
-    MatrixStackDup();
+    Matrix_Push();
     gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     Matrix_RotateZ(sp6C * (M_PI / 32), MTXMODE_APPLY);
     gSPDisplayList(POLY_XLU_DISP++, 0x04000000 | 0x23210); /* gEffFlash1DL */
-    MatrixStackPop();
+    Matrix_Pop();
     Matrix_RotateZ(-sp6C * (M_PI / 32), MTXMODE_APPLY);
     gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);

@@ -128,7 +128,7 @@ static void saveOot(void)
     gOotSave.checksum = computeChecksumOot(&gOotSave, sizeof(gOotSave));
 
     /* Write the save data to flash */
-    base = 0x20 + 0x1450 * gSaveContext.fileIndex;
+    base = 0x20 + 0x1450 * gSaveContext.fileNum;
     Flash_ReadWrite(base, &gOotSave, sizeof(gOotSave), OS_WRITE);
     Flash_ReadWrite(base + 0x3cf0, &gOotSave, sizeof(gOotSave), OS_WRITE);
 }
@@ -138,7 +138,7 @@ static void saveMm(void)
     u32 base;
 
     /* Compute save args */
-    base = 0x8000 + 0x8000 * gSaveContext.fileIndex;
+    base = 0x8000 + 0x8000 * gSaveContext.fileNum;
 
     /* Set the checksum */
     gMmSave.checksum = 0;
@@ -151,7 +151,7 @@ static void saveMm(void)
 
 void Save_ReadOwn(void)
 {
-    u32 fileIndex = gSaveContext.fileIndex;
+    u32 fileIndex = gSaveContext.fileNum;
 
 #if defined(GAME_OOT)
     Flash_ReadWrite(0x20 + 0x1450 * fileIndex, &gOotSave, sizeof(gOotSave), OS_READ);
@@ -164,7 +164,7 @@ void Save_ReadOwn(void)
 
 void Save_ReadForeign(void)
 {
-    u32 fileIndex = gSaveContext.fileIndex;
+    u32 fileIndex = gSaveContext.fileNum;
 
 #if !defined(GAME_OOT)
     Flash_ReadWrite(0x20 + 0x1450 * fileIndex, &gOotSave, sizeof(gOotSave), OS_READ);
@@ -181,14 +181,14 @@ static void saveFixup(void)
 {
     /* Instantly fill the magic bar */
     if (gSaveContext.magicState == MAGIC_STATE_FILL)
-        gSave.playerData.magicAmount = gSaveContext.magicFillTarget;
+        gSave.playerData.magic = gSaveContext.magicFillTarget;
 }
 
 void Save_Write(void)
 {
     NetContext* net;
 
-    if (gSaveContext.fileIndex == 0xff)
+    if (gSaveContext.fileNum == 0xff)
         return;
 
     /* Save the network part */
@@ -203,7 +203,7 @@ void Save_Write(void)
     saveMm();
 
     /* Write the custom save */
-    Flash_ReadWrite(0x18000 + 0x4000 * gSaveContext.fileIndex, &gSharedCustomSave, sizeof(gSharedCustomSave), OS_WRITE);
+    Flash_ReadWrite(0x18000 + 0x4000 * gSaveContext.fileNum, &gSharedCustomSave, sizeof(gSharedCustomSave), OS_WRITE);
 }
 
 static void copyRawSave(u32 dst, u32 src, int size)

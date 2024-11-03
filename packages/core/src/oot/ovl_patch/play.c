@@ -15,6 +15,12 @@
 
 PlayState* gPlay;
 
+void Play_GoToFileSelect(GameState* gs)
+{
+    gs->nextGameStateInit = FileSelect_Init;
+    gs->nextGameStateSize = sizeof(FileSelectState);
+}
+
 static int isRainbowBridgeOpen(void)
 {
     if (Config_Flag(CFG_OOT_BRIDGE_CUSTOM) && !Config_SpecialCond(SPECIAL_BRIDGE))
@@ -503,7 +509,7 @@ void Play_UpdateWrapper(PlayState* play)
 {
     /* Auto-press A during credits */
     if (g.isCredits)
-        play->state.input[0].pressed.buttons = (play->state.frameCount & 1) ? A_BUTTON : 0;
+        play->state.input[0].press.button = (play->state.frameCount & 1) ? A_BUTTON : 0;
 
     comboMenuTick();
     Debug_Input();
@@ -728,7 +734,7 @@ void Play_FastInit(GameState* gs)
     gs->nextGameStateSize = sizeof(PlayState);
 
     /* Load the save */
-    gSaveContext.fileIndex = gComboCtx.saveIndex;
+    gSaveContext.fileNum = gComboCtx.saveIndex;
     Sram_OpenSave(NULL);
 
     /* Set game mode */
@@ -776,8 +782,8 @@ void Play_FastInit(GameState* gs)
         magicCapacity = gSave.playerData.magicUpgrade2 ? 0x60 : 0x30;
     gSaveContext.magicState = MAGIC_STATE_IDLE;
     gSaveContext.magicCapacity = magicCapacity;
-    gSaveContext.magicFillTarget = gSave.playerData.magicAmount;
-    gSaveContext.magicTarget = gSave.playerData.magicAmount;
+    gSaveContext.magicFillTarget = gSave.playerData.magic;
+    gSaveContext.magicTarget = gSave.playerData.magic;
 
     /* Done */
     gComboCtx.valid = 0;

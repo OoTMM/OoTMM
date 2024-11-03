@@ -5,6 +5,9 @@ _Interface_Update = 0x80078290;
 
 TitleCard_Clear = 0x80020e80;
 
+gGameStateOverlayTable = 0x800f1340;
+Sram_WriteSramHeader = 0x800911c0;
+AudioSeq_QueueSeqCmd = 0x800caa70;
 bzero = 0x80002e80;
 osRecvMesg = 0x80002030;
 osSendMesg = 0x80001e20;
@@ -158,10 +161,37 @@ Math_StepToF = 0x8006385c;
 Animation_Change = 0x8008d17c;
 
 PlaySound = 0x800646f0;
-PlaySound6 = 0x800c806c;
+Audio_PlaySfxGeneral = 0x800c806c;
 Actor_PlaySfx = 0x80022fd0;
 PlayLoopingSfxAtActor = 0x8002313c;
 Horse_Spawn = 0x8005aefc;
+gTimeSpeed = 0x800f1650;
+Audio_PlaySequenceWithSeqPlayerIO = 0x800c6b54;
+Matrix_Init = 0x800aa6b0;
+
+gScreenWidth = 0x800fe500;
+gScreenHeight = 0x800fe504;
+Skybox_Draw = 0x80096fd8;
+func_800F6964 = 0x800c7684;
+Gfx_SetupFrame = 0x8007ee5c;
+Sram_Alloc = 0x800912c4;
+Sram_EraseSave = 0x80090eb8;
+
+Gfx_SetupDL_39Opa = 0x8007e5e4;
+Environment_UpdateSkybox = 0x8005c9c8;
+View_Init = 0x80091858;
+View_LookAt = 0x80091918;
+View_Apply = 0x80091f94;
+Skybox_Init = 0x80096e40;
+
+Rumble_Request = 0x800915cc;
+Sram_InitSave = 0x80090c18;
+Sram_VerifyAndLoadAllSaves = 0x80090720;
+THA_AllocTailAlign16 = 0x800a01b8;
+gSramSlotOffsets = 0x800fbf00;
+gSfxDefaultPos = 0x80104394;
+gSfxDefaultFreqAndVolScale = 0x801043a0;
+gSfxDefaultReverb = 0x801043a8;
 
 Player_PlaySfx = 0x80022f84;
 
@@ -217,8 +247,8 @@ OcarinaAction2 = 0x800dd430;
 
 gModelView = 0x80121204;
 
-MatrixStackDup = 0x800AA6EC;
-MatrixStackPop = 0x800AA724;
+Matrix_Push = 0x800AA6EC;
+Matrix_Pop = 0x800AA724;
 ModelViewUnkTransform = 0x800abe54;
 Matrix_RotateXF = 0x800aa9e0;
 Matrix_RotateYF = 0x800aab94;

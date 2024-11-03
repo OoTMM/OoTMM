@@ -2769,21 +2769,21 @@ void Boss01_PostLimbDraw(PlayState* play2, s32 limbIndex, Gfx** dList, Vec3s* ro
         gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 255, 0, 0, 255);
         gDPSetEnvColor(POLY_XLU_DISP++, 255, 0, 0, 0);
 
-        MatrixStackDup();
+        Matrix_Push();
         Matrix_Translate(1470.0f, 400.0f, 450.0f, MTXMODE_APPLY);
         Matrix_Scale(0.35f, 0.35f, 0.35f, MTXMODE_APPLY);
         Matrix_ReplaceRotation(&play->billboardMtxF);
         gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         gSPDisplayList(POLY_XLU_DISP++, SEGADDR_ODOLWA_EYE_DL);
-        MatrixStackPop();
+        Matrix_Pop();
 
-        MatrixStackDup();
+        Matrix_Push();
         Matrix_Translate(1470.0f, -360.0f, 450.0f, MTXMODE_APPLY);
         Matrix_Scale(0.35f, 0.35f, 0.35f, MTXMODE_APPLY);
         Matrix_ReplaceRotation(&play->billboardMtxF);
         gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         gSPDisplayList(POLY_XLU_DISP++, SEGADDR_ODOLWA_EYE_DL);
-        MatrixStackPop();
+        Matrix_Pop();
 
         CLOSE_DISPS();
     }
@@ -3456,7 +3456,7 @@ void Boss01_DrawEffects(PlayState* play) {
         Matrix_Translate(effect->pos.x, 0.0f, effect->pos.z, MTXMODE_NEW);
 
         for (i = 0; i < 32; i++) {
-            MatrixStackDup();
+            Matrix_Push();
             alpha = effect->alpha - (Boss01_RandZeroOne() * 50.0f);
             if (alpha < 0.0f) {
                 alpha = 0.0f;
@@ -3480,7 +3480,7 @@ void Boss01_DrawEffects(PlayState* play) {
 
             gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             gSPDisplayList(POLY_XLU_DISP++, SEGADDR_FROM_OFFSET(4, 0x7D590)); // gEffFire1DL in gameplay_keep
-            MatrixStackPop();
+            Matrix_Pop();
         }
     }
 

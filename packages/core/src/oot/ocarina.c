@@ -481,13 +481,13 @@ static void HandleSongOfDoubleTime(PlayState* play)
             {
                 if (gSave.isNight)
                 {
-                    gSaveContext.save.worldTime = CLOCK_TIME(6, 30);
+                    gSaveContext.save.dayTime = CLOCK_TIME(6, 30);
                 }
                 else
                 {
-                    gSaveContext.save.worldTime = CLOCK_TIME(18, 0) + 1;
+                    gSaveContext.save.dayTime = CLOCK_TIME(18, 0) + 1;
                 }
-                gSaveContext.skyboxTime = gSaveContext.save.worldTime;
+                gSaveContext.skyboxTime = gSaveContext.save.dayTime;
                 if (play->envCtx.timeSeqState == 4) {
                     play->envCtx.timeSeqState++;
                 }

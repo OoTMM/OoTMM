@@ -74,13 +74,13 @@ int Time_IsMoonCrash(u8 day, u16 time)
 #if defined(GAME_OOT)
 void Time_Set(u16 time)
 {
-    gSave.worldTime = time;
+    gSave.dayTime = time;
     gSaveContext.skyboxTime = time;
 }
 
 void Time_SwapDayNight(void)
 {
-    if (gSave.worldTime < CLOCK_TIME(6, 30) || gSave.worldTime > CLOCK_TIME(18, 0))
+    if (gSave.dayTime < CLOCK_TIME(6, 30) || gSave.dayTime > CLOCK_TIME(18, 0))
         Time_Set(CLOCK_TIME(6, 30));
     else
         Time_Set(CLOCK_TIME(18, 0) + 1);

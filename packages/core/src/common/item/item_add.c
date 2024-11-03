@@ -1081,15 +1081,15 @@ static void addHealthEffect(u8 count)
 static void addHealthRawOot(u8 count)
 {
     gOotSave.playerData.health += count * 0x10;
-    if (gOotSave.playerData.health > gOotSave.playerData.healthMax)
-        gOotSave.playerData.health = gOotSave.playerData.healthMax;
+    if (gOotSave.playerData.health > gOotSave.playerData.healthCapacity)
+        gOotSave.playerData.health = gOotSave.playerData.healthCapacity;
 }
 
 static void addHealthRawMm(u8 count)
 {
     gMmSave.playerData.health += count * 0x10;
-    if (gMmSave.playerData.health > gMmSave.playerData.healthMax)
-        gMmSave.playerData.health = gMmSave.playerData.healthMax;
+    if (gMmSave.playerData.health > gMmSave.playerData.healthCapacity)
+        gMmSave.playerData.health = gMmSave.playerData.healthCapacity;
 }
 
 static void addHealthOot(PlayState* play, u8 count)
@@ -1176,7 +1176,7 @@ static void addHeartPieceRawOot(void)
     if (gOotSave.inventory.quest.heartPieces >= 4)
     {
         gOotSave.inventory.quest.heartPieces -= 4;
-        gOotSave.playerData.healthMax += 0x10;
+        gOotSave.playerData.healthCapacity += 0x10;
     }
 }
 
@@ -1186,7 +1186,7 @@ static void addHeartPieceRawMm(void)
     if (gMmSave.inventory.quest.heartPieces >= 4)
     {
         gMmSave.inventory.quest.heartPieces -= 4;
-        gMmSave.playerData.healthMax += 0x10;
+        gMmSave.playerData.healthCapacity += 0x10;
     }
 }
 
@@ -1442,15 +1442,15 @@ static void fillMagicOot(PlayState* play)
 #if defined(GAME_OOT)
     if (play)
     {
-        gOotSave.playerData.magicSize = 0;
+        gOotSave.playerData.magicLevel = 0;
         gSaveContext.magicFillTarget = max;
         return;
     }
 #endif
 
     /* No effect - add the magic directly */
-    gOotSave.playerData.magicSize = level;
-    gOotSave.playerData.magicAmount = max;
+    gOotSave.playerData.magicLevel = level;
+    gOotSave.playerData.magic = max;
 }
 
 static void fillMagicMm(PlayState* play)
@@ -1468,7 +1468,7 @@ static void fillMagicMm(PlayState* play)
     if (play)
     {
         gMmSave.playerData.magicLevel = 0;
-        gMmSave.playerData.magicAmount = max;
+        gMmSave.playerData.magic = max;
         gSaveContext.magicFillTarget = max;
         return;
     }
@@ -1476,7 +1476,7 @@ static void fillMagicMm(PlayState* play)
 
     /* No effect - add the magic directly */
     gMmSave.playerData.magicLevel = level;
-    gMmSave.playerData.magicAmount = max;
+    gMmSave.playerData.magic = max;
 }
 
 static int addItemMagicUpgradeOot(PlayState* play, u8 itemId, s16 gi, u16 param)
@@ -1614,12 +1614,12 @@ static void addMagicRawOot(u8 count)
 
     if (!gOotSave.playerData.magicUpgrade)
         return;
-    acc = gOotSave.playerData.magicAmount;
+    acc = gOotSave.playerData.magic;
     acc += count;
     max = gOotSave.playerData.magicUpgrade2 ? 0x60 : 0x30;
     if (acc > max)
         acc = max;
-    gOotSave.playerData.magicAmount = acc;
+    gOotSave.playerData.magic = acc;
 }
 
 static void addMagicRawMm(u8 count)
@@ -1629,12 +1629,12 @@ static void addMagicRawMm(u8 count)
 
     if (!gMmSave.playerData.magicAcquired)
         return;
-    acc = gMmSave.playerData.magicAmount;
+    acc = gMmSave.playerData.magic;
     acc += count;
     max = gMmSave.playerData.doubleMagic ? 0x60 : 0x30;
     if (acc > max)
         acc = max;
-    gMmSave.playerData.magicAmount = acc;
+    gMmSave.playerData.magic = acc;
 }
 
 static void addMagicEffect(PlayState* play, u8 count)

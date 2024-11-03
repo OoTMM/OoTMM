@@ -2,9 +2,12 @@
 #define COMBO_MM_SEQUENCE_H
 
 #include <combo/types.h>
+#include <combo/math/vec.h>
 #include <combo/data/sequence.h>
 
 #define SEQ_FLAG_ASYNC 0x8000
+
+typedef struct Actor Actor;
 
 typedef enum SequencePlayerId {
     /*    0 */ SEQ_PLAYER_BGM_MAIN,

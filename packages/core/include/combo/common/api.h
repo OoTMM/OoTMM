@@ -29,8 +29,21 @@ u16   Actor_Angle(Actor* a, Actor* b);
 Gfx* Gfx_Open(Gfx* gfx);
 void Gfx_Close(Gfx* gfxRef, Gfx* gfx);
 
+void Gfx_SetupDL_39Opa(GraphicsContext* gfxCtx);
 void Gfx_SetupDL_39Ptr(Gfx** gfxPtr);
 void Gfx_SetupDL_56Ptr(Gfx** gfxPtr);
+
+#if defined(GAME_MM)
+#define SEQCMD_PLAY_SEQUENCE(seqPlayerIndex, fadeInDuration, seqId)                                                   \
+    AudioSeq_QueueSeqCmd((0 << 28) | ((seqPlayerIndex) << 24) | ((u32)(fadeInDuration) << 16) | \
+                         (u32)(seqId))
+
+#define SEQCMD_STOP_SEQUENCE(seqPlayerIndex, fadeOutDuration)                                    \
+    AudioSeq_QueueSeqCmd((1 << 28) | 0xFF | ((u8)(seqPlayerIndex) << 24) | \
+                         ((fadeOutDuration) << 16))
+#endif
+
+void Gfx_SetupFrame(GraphicsContext* gfxCtx, u8 r, u8 g, u8 b);
 
 /* Unknown */
 void* UnkFuncActorCollision(PlayState* play, Actor* actor);
@@ -68,15 +81,7 @@ int Schedule_CheckMiscS(PlayState* play, void* unk);
 
 void Fault_AddHungupAndCrashImpl(const char* str1, const char* str2);
 
-void    AudioSeq_QueueSeqCmd(u32 unk);
-
-#define SEQCMD_PLAY_SEQUENCE(seqPlayerIndex, fadeInDuration, seqId)                             \
-    AudioSeq_QueueSeqCmd((0 << 28) | ((seqPlayerIndex) << 24) | ((u32)(fadeInDuration) << 16) | \
-                         (u32)(seqId))
-
-#define SEQCMD_STOP_SEQUENCE(seqPlayerIndex, fadeOutDuration)              \
-    AudioSeq_QueueSeqCmd((1 << 28) | 0xFF | ((u8)(seqPlayerIndex) << 24) | \
-                         ((fadeOutDuration) << 16))
+void AudioSeq_QueueSeqCmd(u32 unk);
 
 typedef struct Lights Lights;
 void    ActorShadow_DrawCircle(Actor* actor, Lights* lights, PlayState* play);
@@ -177,8 +182,6 @@ void ModelViewUnkTransform(MtxF* unk);
 void ModelViewMult(MtxF* mf, s32 mode);
 void Matrix_SetTranslateRotateYXZ(f32 translateX, f32 translateY, f32 translateZ, Vec3s* rot);
 Mtx* Matrix_Finalize(GraphicsContext* gfxCtx);
-void MatrixStackDup(void);
-void MatrixStackPop(void);
 void Matrix_MultVec3f(Vec3f* src, Vec3f* dest);
 
 void SpawnSomeDust(PlayState* play, Vec3f* pos, float unk1, int unk2, int unk3, int unk4, int unk5);
@@ -222,13 +225,10 @@ void RemoveItem(s16 item, s16 slot);
 void* ActorAlloc(u32 size);
 void  ActorFree(void* data);
 
-#if defined(GAME_OOT)
-void Sram_OpenSave(void*);
-#else
+#if defined(GAME_MM)
 void Sram_OpenSave(void*, void*);
-#endif
-
 void Sram_CopySave(void*, void*);
+#endif
 
 void Play_Init(PlayState*);
 void Play_Update(PlayState*);
@@ -458,6 +458,8 @@ extern u8 gWeatherMode;
 /* Gamemodes */
 void FileSelect_Init(GameState* this);
 
+void Rumble_Request(f32 distSq, u8 sourceIntensity, u8 decayTimer, u8 decayStep);
+
 #if defined(GAME_MM)
 extern u8 gSceneSeqState;
 extern Vec3f gZeroVec3f;
@@ -565,7 +567,6 @@ s16 Quake_Request(Camera* camera, u32 type);
 u32 Quake_SetSpeed(s16 index, s16 speed);
 u32 Quake_SetPerturbations(s16 index, s16 y, s16 x, s16 fov, s16 roll);
 u32 Quake_SetDuration(s16 index, s16 duration);
-void Rumble_Request(f32 distSq, u8 sourceIntensity, u8 decayTimer, u8 decayStep);
 f32 BgCheck_EntityRaycastFloor5_2(PlayState* play, CollisionContext* colCtx, CollisionPoly** outPoly, s32* bgId, Actor* actor, Vec3f* pos);
 s32 WaterBox_GetSurface1_2(PlayState* play, CollisionContext* colCtx, f32 x, f32 z, f32* ySurface, WaterBox** outWaterBox);
 s32 WaterBox_GetSurface1(PlayState* play, CollisionContext* colCtx, f32 x, f32 z, f32* ySurface, WaterBox** outWaterBox);

@@ -658,7 +658,7 @@ void Play_UpdateWrapper(PlayState* play)
     Actor_Player* link;
     /* Auto-press A during credits */
     if (g.isCredits)
-        play->state.input[0].pressed.buttons = (play->state.frameCount & 1) ? A_BUTTON : 0;
+        play->state.input[0].press.button = (play->state.frameCount & 1) ? A_BUTTON : 0;
 
     comboMenuTick();
     Debug_Input();
@@ -779,7 +779,7 @@ void Play_FastInit(GameState* gs)
     gs->nextGameStateSize = sizeof(PlayState);
 
     /* Load the save file */
-    gSaveContext.fileIndex = gComboCtx.saveIndex;
+    gSaveContext.fileNum = gComboCtx.saveIndex;
     Sram_OpenSave(NULL, NULL);
 
     /* Set stuff */

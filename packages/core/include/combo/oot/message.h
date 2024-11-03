@@ -7,6 +7,22 @@
 #define FONT_CHAR_TEX_HEIGHT 16
 #define FONT_CHAR_TEX_SIZE ((FONT_CHAR_TEX_WIDTH * FONT_CHAR_TEX_HEIGHT) / 2)
 
+#define FILENAME_DIGIT(c)                   ((c) - '0')
+#define FILENAME_UPPERCASE(c)               ((c) - 'A' + 0xAB)
+#define FILENAME_LOWERCASE(c)               ((c) - 'a' + 0xC5)
+#define FILENAME_SPACE                      0xDF
+#define FILENAME_QUESTION_MARK              0xE1
+#define FILENAME_EXCLAMATION_MARK           0xE2
+#define FILENAME_COLON                      0xE3
+#define FILENAME_DASH                       0xE4
+#define FILENAME_LEFT_PARENTHESES           0xE5
+#define FILENAME_RIGHT_PARENTHESES          0xE6
+#define FILENAME_DAKUTEN                    0xE7
+#define FILENAME_HANDAKUTEN                 0xE8
+#define FILENAME_COMMA                      0xE9
+#define FILENAME_PERIOD                     0xEA
+#define FILENAME_SLASH                      0xEB
+
 typedef struct Font
 {
     u32 msgOffset;

@@ -6,7 +6,7 @@
 #include <combo/types.h>
 
 struct GraphicsContext;
-struct GameState;
+typedef struct GameState GameState;
 
 typedef enum {
     /* 0 */ MTXMODE_NEW,  // generates a new matrix
@@ -21,7 +21,7 @@ extern MtxF gIdentityMtxF;
 
 /* Stack operations */
 
-void Matrix_Init(struct GameState* gameState);
+void Matrix_Init(GameState* gameState);
 void Matrix_Push(void);
 void Matrix_Pop(void);
 void Matrix_Get(MtxF* dest);

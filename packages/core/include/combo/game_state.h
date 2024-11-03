@@ -1,41 +1,46 @@
 #ifndef COMMON_GAME_STATE_H
 #define COMMON_GAME_STATE_H
 
+#include <combo/tha.h>
+#include <combo/controller.h>
 #include <combo/gfx.h>
 
-typedef struct PACKED
-{
-    u16 buttons;
-    s8  x;
-    s8  y;
-    u16 zero;
-}
-ControllerInputState;
+typedef struct GameState GameState;
+typedef struct GameStateOverlay GameStateOverlay;
 
-typedef struct PACKED
-{
-    ControllerInputState current;
-    ControllerInputState previous;
-    ControllerInputState pressed;
-    ControllerInputState released;
-}
-ControllerInput;
-
-typedef struct PACKED ALIGNED(4)
+struct GameState
 {
     GraphicsContext*        gfxCtx;
-    char                    unk_4[0x4];
+    void*                   main;
     void*                   destroy;
     void*                   nextGameStateInit;
     u32                     nextGameStateSize;
-    ControllerInput         input[4];
-    char                    unk_74[0x27];
+    Input                   input[4];
+    TwoHeadArena            tha;
+    char                    unk_84[0x17];
     u8                      running;
     u32                     frameCount;
     char                    unk_a0[0x4];
-}
-GameState;
+};
 
 _Static_assert(sizeof(GameState) == 0xa4, "GameState size is wrong");
+
+struct GameStateOverlay
+{
+    void* ram;
+    u32   vromStart;
+    u32   vromEnd;
+    u32   vramStart;
+    u32   vramEnd;
+    u32   unk_14;
+    void* ctor;
+    void* dtor;
+    char  unk_20[0xc];
+    u32   size;
+};
+
+_Static_assert(sizeof(GameStateOverlay) == 0x30, "GameStateOverlay size is wrong");
+
+extern GameStateOverlay gGameStateOverlayTable[];
 
 #endif

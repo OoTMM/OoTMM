@@ -217,7 +217,7 @@ int Dpad_Use(PlayState* play, int flags)
         return 0;
 
     /* Detect button press */
-    buttons = play->state.input[0].pressed.buttons;
+    buttons = play->state.input[0].press.button;
     if (buttons & U_JPAD)
     {
         dpadUseItem(play, DPAD_UP, flags);

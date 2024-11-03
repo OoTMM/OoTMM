@@ -21,7 +21,7 @@ static int checkItemToggle(PlayState* play)
 
     p = &play->pauseCtx;
     ret = 0;
-    press = !!(play->state.input[0].pressed.buttons & (L_TRIG | U_CBUTTONS));
+    press = !!(play->state.input[0].press.button & (L_TRIG | U_CBUTTONS));
 
     itemId = ITEM_NONE;
     itemCursor = -1;
@@ -166,7 +166,7 @@ static void KaleidoScope_HandleMapDungeonMenu(PlayState* play, void* unk, u32 ov
     int onMenu;
 
     onMenu = play->pauseCtx.screen_idx == 1;
-    if (onMenu && play->state.input[0].pressed.buttons & (L_TRIG | U_CBUTTONS))
+    if (onMenu && play->state.input[0].press.button & (L_TRIG | U_CBUTTONS))
         comboMenuNext();
 
     if (g.menuScreen)
@@ -588,12 +588,12 @@ void KaleidoScope_BeforeUpdate(PlayState* play)
     PauseContext* pauseCtx = &play->pauseCtx;
     InterfaceContext* interfaceCtx = &play->interfaceCtx;
     MessageContext* msgCtx = &play->msgCtx;
-    ControllerInput* input = &play->state.input[0];
+    Input* input = &play->state.input[0];
 
     if (pauseCtx->state >= PAUSE_STATE_OWLWARP_2 && pauseCtx->state <= PAUSE_STATE_OWLWARP_6)
     {
-        pauseCtx->stickAdjX = input->released.x;
-        pauseCtx->stickAdjY = input->released.y;
+        pauseCtx->stickAdjX = input->rel.stick_x;
+        pauseCtx->stickAdjY = input->rel.stick_y;
 
         if (pauseCtx->stickAdjX < -30) {
             if (sStickXRepeatState == -1) {
@@ -736,7 +736,7 @@ void KaleidoScope_BeforeUpdate(PlayState* play)
 
         case PAUSE_STATE_OWLWARP_SELECT:
             /* TODO for some reason pressing START causes a "failed ocarina" sfx. */
-            if ((play->state.input[0].pressed.buttons & START_BUTTON) || (play->state.input[0].pressed.buttons & B_BUTTON))
+            if ((play->state.input[0].press.button & START_BUTTON) || (play->state.input[0].press.button & B_BUTTON))
             {
                 pauseCtx->state = PAUSE_STATE_OWLWARP_6;
                 WREG(2) = -6240;
@@ -744,7 +744,7 @@ void KaleidoScope_BeforeUpdate(PlayState* play)
                 gSoaringIndexSelected = -1;
                 gSaveContext.prevHudVisibilityMode = 50; /* HUD_VISIBILITY_ALL; */
             }
-            else if (play->state.input[0].pressed.buttons & A_BUTTON)
+            else if (play->state.input[0].press.button & A_BUTTON)
             {
                 msgCtx->msgLength = 0;
                 msgCtx->msgMode = 0; /* MSGMODE_NONE; */
@@ -1247,7 +1247,7 @@ static void KaleidoScope_DrawCursor(PlayState* play) {
         Matrix_Scale(1.0f, 1.0f, 1.0f, MTXMODE_APPLY);
 
         for (i = 0; i < 4; i++) {
-            MatrixStackDup();
+            Matrix_Push();
             Matrix_Translate(sCursorCirclesX[i], sCursorCirclesY[i], -50.0f, MTXMODE_APPLY);
             gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             gDPPipeSync(POLY_OPA_DISP++);
@@ -1256,7 +1256,7 @@ static void KaleidoScope_DrawCursor(PlayState* play) {
                                 G_TX_NOLOD, G_TX_NOLOD);
             gSPVertex(POLY_OPA_DISP++, &pauseCtx->cursorVtx[0], 4, 0);
             gSP1Quadrangle(POLY_OPA_DISP++, 0, 2, 3, 1, 0);
-            MatrixStackPop();
+            Matrix_Pop();
         }
 
         gDPPipeSync(POLY_OPA_DISP++);

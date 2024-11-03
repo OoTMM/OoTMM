@@ -36,7 +36,7 @@ void BgDyYoseizo_Update(Actor* this, PlayState* play)
             /* Refill */
             if (gSave.playerData.magicUpgrade)
             {
-                gSave.playerData.magicSize = 0;
+                gSave.playerData.magicLevel = 0;
                 gSaveContext.magicFillTarget = gSave.playerData.magicUpgrade2 ? 0x60 : 0x30;
             }
             gSaveContext.healthDelta += 20 * 0x10;

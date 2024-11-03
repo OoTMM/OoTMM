@@ -19,7 +19,7 @@ void KaleidoScope_AfterSetCutsorColor(PlayState* play)
     Dpad_Update(play);
 
     cursorSlot = play->pauseCtx.cursorSlot[0];
-    press = !!(play->state.input[0].pressed.buttons & (L_TRIG | U_CBUTTONS));
+    press = !!(play->state.input[0].press.button & (L_TRIG | U_CBUTTONS));
     effect = 0;
 
     u8* itemPtr;
@@ -223,7 +223,7 @@ static void KaleidoScope_UpdateMapDungeonMenu(PlayState* play, u32 overlayAddr)
 {
     KaleidoScopeHandler handler;
 
-    if (play->state.input[0].pressed.buttons & (L_TRIG | U_CBUTTONS))
+    if (play->state.input[0].press.button & (L_TRIG | U_CBUTTONS))
         comboMenuNext();
 
     if (g.menuScreen)
@@ -330,7 +330,7 @@ static void KaleidoScope_UpdateSomeMenu(PlayState* play)
     handler = OverlayAddr(0x80817b5c);
     handler(play);
 
-    if (play->state.input[0].pressed.buttons & (L_TRIG | U_CBUTTONS))
+    if (play->state.input[0].press.button & (L_TRIG | U_CBUTTONS))
     {
         menuSave(play);
     }
