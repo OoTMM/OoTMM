@@ -167,6 +167,7 @@ static void FileSelect_CustomFileInfoPrepareOotMedsStones(FileSelectState* this,
 static void FileSelect_CustomFileInfoPrepareOotInventory(FileSelectState* this, Gfx** list, void** end, int x, int y)
 {
     int dx;
+    int dy;
     u16 iconOcarina;
     u16 iconHookshot;
     u8 itemId;
@@ -195,49 +196,72 @@ static void FileSelect_CustomFileInfoPrepareOotInventory(FileSelectState* this, 
     }
 
     /* Row 1 */
-    drawItemIconSimple(list, end, x, y, 0, 0, ITEM_OOT_STICK,           gOotSave.inventory.items[ITS_OOT_STICKS] == ITEM_OOT_STICK);
-    drawItemIconSimple(list, end, x, y, 1, 0, ITEM_OOT_NUT,             gOotSave.inventory.items[ITS_OOT_NUTS] == ITEM_OOT_NUT);
-    drawItemIconSimple(list, end, x, y, 2, 0, ITEM_OOT_BOMB,            gOotSave.inventory.items[ITS_OOT_BOMBS] == ITEM_OOT_BOMB);
-    drawItemIconSimple(list, end, x, y, 3, 0, ITEM_OOT_BOW,             gOotSave.inventory.items[ITS_OOT_BOW] == ITEM_OOT_BOW);
-    drawItemIconSimple(list, end, x, y, 4, 0, ITEM_OOT_ARROW_FIRE,      gOotSave.inventory.items[ITS_OOT_ARROW_FIRE] == ITEM_OOT_ARROW_FIRE);
-    drawItemIconSimple(list, end, x, y, 5, 0, ITEM_OOT_SPELL_FIRE,      gOotSave.inventory.items[ITS_OOT_SPELL_FIRE] == ITEM_OOT_SPELL_FIRE);
-    drawItemIconSimple(list, end, x, y, 6, 0, ITEM_OOT_BOTTLE_EMPTY,    hasBottle);
+    dx = 0;
+    dy = 0;
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_STICK,           gOotSave.inventory.items[ITS_OOT_STICKS] == ITEM_OOT_STICK);
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_NUT,             gOotSave.inventory.items[ITS_OOT_NUTS] == ITEM_OOT_NUT);
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_BOMB,            gOotSave.inventory.items[ITS_OOT_BOMBS] == ITEM_OOT_BOMB);
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_BOW,             gOotSave.inventory.items[ITS_OOT_BOW] == ITEM_OOT_BOW);
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_ARROW_FIRE,      gOotSave.inventory.items[ITS_OOT_ARROW_FIRE] == ITEM_OOT_ARROW_FIRE);
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_SPELL_FIRE,      gOotSave.inventory.items[ITS_OOT_SPELL_FIRE] == ITEM_OOT_SPELL_FIRE);
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_BOTTLE_EMPTY,    hasBottle);
 
     /* Row 2 */
-    drawItemIconSimple(list, end, x, y, 0, 1, ITEM_OOT_SLINGSHOT,   gOotSave.inventory.items[ITS_OOT_SLINGSHOT] == ITEM_OOT_SLINGSHOT);
-    drawItemIconSimple(list, end, x, y, 1, 1, iconOcarina,          gOotExtraItems.ocarina);
-    drawItemIconSimple(list, end, x, y, 2, 1, ITEM_OOT_BOMBCHU_10,  gOotSave.inventory.items[ITS_OOT_BOMBCHU] == ITEM_OOT_BOMBCHU_10);
-    drawItemIconSimple(list, end, x, y, 3, 1, iconHookshot,         gOotExtraItems.hookshot);
-    drawItemIconSimple(list, end, x, y, 4, 1, ITEM_OOT_ARROW_ICE,   gOotSave.inventory.items[ITS_OOT_ARROW_ICE] == ITEM_OOT_ARROW_ICE);
-    drawItemIconSimple(list, end, x, y, 5, 1, ITEM_OOT_SPELL_WIND,  gOotSave.inventory.items[ITS_OOT_SPELL_WIND] == ITEM_OOT_SPELL_WIND);
-    drawItemIconSimple(list, end, x, y, 6, 1, ITEM_OOT_RUTO_LETTER, gOotExtraItems.rutoLetter);
+    dx = 0;
+    dy = 1;
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_SLINGSHOT,   gOotSave.inventory.items[ITS_OOT_SLINGSHOT] == ITEM_OOT_SLINGSHOT);
+    drawItemIconSimple(list, end, x, y, dx++, dy, iconOcarina,          gOotExtraItems.ocarina);
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_BOMBCHU_10,  gOotSave.inventory.items[ITS_OOT_BOMBCHU] == ITEM_OOT_BOMBCHU_10);
+    drawItemIconSimple(list, end, x, y, dx++, dy, iconHookshot,         gOotExtraItems.hookshot);
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_ARROW_ICE,   gOotSave.inventory.items[ITS_OOT_ARROW_ICE] == ITEM_OOT_ARROW_ICE);
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_SPELL_WIND,  gOotSave.inventory.items[ITS_OOT_SPELL_WIND] == ITEM_OOT_SPELL_WIND);
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_RUTO_LETTER, gOotExtraItems.rutoLetter);
 
     /* Row 3 */
-    drawItemIconSimple(list, end, x, y, 0, 2, ITEM_OOT_BOOMERANG,   gOotSave.inventory.items[ITS_OOT_BOOMERANG] == ITEM_OOT_BOOMERANG);
-    drawItemIconSimple(list, end, x, y, 1, 2, ITEM_OOT_LENS,        gOotSave.inventory.items[ITS_OOT_LENS] == ITEM_OOT_LENS);
-    drawItemIconSimple(list, end, x, y, 2, 2, ITEM_OOT_MAGIC_BEAN,  gOotSave.inventory.items[ITS_OOT_MAGIC_BEAN] == ITEM_OOT_MAGIC_BEAN);
-    drawItemIconSimple(list, end, x, y, 3, 2, ITEM_OOT_HAMMER,      gOotSave.inventory.items[ITS_OOT_HAMMER] == ITEM_OOT_HAMMER);
-    drawItemIconSimple(list, end, x, y, 4, 2, ITEM_OOT_ARROW_LIGHT, gOotSave.inventory.items[ITS_OOT_ARROW_LIGHT] == ITEM_OOT_ARROW_LIGHT);
-    drawItemIconSimple(list, end, x, y, 5, 2, ITEM_OOT_SPELL_LOVE,  gOotSave.inventory.items[ITS_OOT_SPELL_LOVE] == ITEM_OOT_SPELL_LOVE);
+    dx = 0;
+    dy = 2;
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_BOOMERANG,   gOotSave.inventory.items[ITS_OOT_BOOMERANG] == ITEM_OOT_BOOMERANG);
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_LENS,        gOotSave.inventory.items[ITS_OOT_LENS] == ITEM_OOT_LENS);
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_MAGIC_BEAN,  gOotSave.inventory.items[ITS_OOT_MAGIC_BEAN] == ITEM_OOT_MAGIC_BEAN);
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_HAMMER,      gOotSave.inventory.items[ITS_OOT_HAMMER] == ITEM_OOT_HAMMER);
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_ARROW_LIGHT, gOotSave.inventory.items[ITS_OOT_ARROW_LIGHT] == ITEM_OOT_ARROW_LIGHT);
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_SPELL_LOVE,  gOotSave.inventory.items[ITS_OOT_SPELL_LOVE] == ITEM_OOT_SPELL_LOVE);
 
     /* Row 4 - Child Trade */
     dx = 0;
+    dy = 4;
     if (Config_Flag(CFG_OOT_SHUFFLE_EGGS))
-        drawItemIconSimple(list, end, x, y, dx++, 4, ITEM_OOT_WEIRD_EGG,                gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_WEIRD_EGG));
-    drawItemIconSimple(list, end, x, y, dx++, 4, ITEM_OOT_CHICKEN,                  gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_CHICKEN));
-    drawItemIconSimple(list, end, x, y, dx++, 4, ITEM_OOT_ZELDA_LETTER,             gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_ZELDA_LETTER));
-    drawItemIconSimple(list, end, x, y, dx++, 4, ITEM_OOT_KEATON_MASK,              gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_KEATON_MASK));
-    drawItemIconSimple(list, end, x, y, dx++, 4, ITEM_OOT_SKULL_MASK,               gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_SKULL_MASK));
-    drawItemIconSimple(list, end, x, y, dx++, 4, ITEM_OOT_SPOOKY_MASK,              gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_SPOOKY_MASK));
-    drawItemIconSimple(list, end, x, y, dx++, 4, ITEM_OOT_BUNNY_HOOD,               gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_BUNNY_HOOD));
-    drawItemIconSimple(list, end, x, y, dx++, 4, ITEM_OOT_GORON_MASK,               gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_GORON_MASK));
-    drawItemIconSimple(list, end, x, y, dx++, 4, ITEM_OOT_ZORA_MASK,                gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_ZORA_MASK));
-    drawItemIconSimple(list, end, x, y, dx++, 4, ITEM_OOT_GERUDO_MASK,              gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_GERUDO_MASK));
-    drawItemIconSimple(list, end, x, y, dx++, 4, ITEM_OOT_MASK_OF_TRUTH,            gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_MASK_OF_TRUTH));
+        drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_WEIRD_EGG,                gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_WEIRD_EGG));
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_CHICKEN,                  gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_CHICKEN));
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_ZELDA_LETTER,             gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_ZELDA_LETTER));
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_KEATON_MASK,              gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_KEATON_MASK));
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_SKULL_MASK,               gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_SKULL_MASK));
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_SPOOKY_MASK,              gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_SPOOKY_MASK));
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_BUNNY_HOOD,               gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_BUNNY_HOOD));
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_GORON_MASK,               gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_GORON_MASK));
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_ZORA_MASK,                gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_ZORA_MASK));
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_GERUDO_MASK,              gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_GERUDO_MASK));
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_MASK_OF_TRUTH,            gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_MASK_OF_TRUTH));
     if (Config_Flag(CFG_OOT_MASK_BLAST))
-        drawItemIconSimple(list, end, x, y, dx++, 4, ITEM_MM_MASK_BLAST | ICONF_MM,     gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_MASK_BLAST));
+        drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_MASK_BLAST | ICONF_MM,     gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_MASK_BLAST));
     if (Config_Flag(CFG_OOT_MASK_STONE))
-        drawItemIconSimple(list, end, x, y, dx++, 4, ITEM_MM_MASK_STONE | ICONF_MM,     gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_MASK_STONE));
+        drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_MASK_STONE | ICONF_MM,     gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_MASK_STONE));
+
+    /* Row 5 - Adult Trade */
+    dx = 0;
+    dy = 5;
+    if (Config_Flag(CFG_OOT_SHUFFLE_EGGS))
+        drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_POCKET_EGG,                gOotExtraTradeSave.adult & (1 << XITEM_OOT_ADULT_POCKET_EGG));
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_POCKET_CUCCO,              gOotExtraTradeSave.adult & (1 << XITEM_OOT_ADULT_POCKET_CUCCO));
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_COJIRO,                    gOotExtraTradeSave.adult & (1 << XITEM_OOT_ADULT_COJIRO));
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_ODD_MUSHROOM,              gOotExtraTradeSave.adult & (1 << XITEM_OOT_ADULT_ODD_MUSHROOM));
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_ODD_POTION,                gOotExtraTradeSave.adult & (1 << XITEM_OOT_ADULT_ODD_POTION));
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_POACHER_SAW,               gOotExtraTradeSave.adult & (1 << XITEM_OOT_ADULT_POACHER_SAW));
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_GORON_SWORD_BROKEN,        gOotExtraTradeSave.adult & (1 << XITEM_OOT_ADULT_BROKEN_GORON_SWORD));
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_PRESCRIPTION,              gOotExtraTradeSave.adult & (1 << XITEM_OOT_ADULT_PRESCRIPTION));
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_EYEBALL_FROG,              gOotExtraTradeSave.adult & (1 << XITEM_OOT_ADULT_EYEBALL_FROG));
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_EYE_DROPS,                 gOotExtraTradeSave.adult & (1 << XITEM_OOT_ADULT_EYE_DROPS));
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_CLAIM_CHECK,               gOotExtraTradeSave.adult & (1 << XITEM_OOT_ADULT_CLAIM_CHECK));
 }
 
 static void FileSelect_CustomFileInfoPrepareOot(FileSelectState* this, Gfx** list, void** end)
