@@ -284,6 +284,7 @@ void FileSelect_CustomFileInfoPrepare(FileSelectState* this, int slot)
     /* Init */
     gDPSetCombineMode(list++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
     gDPSetPrimColor(list++, 0, 0, 255, 255, 255, 255);
+    gDPSetTexturePersp(list++, G_TP_NONE);
 
     if (!this->game)
         FileSelect_CustomFileInfoPrepareOot(this, &list, &end);
