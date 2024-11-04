@@ -88,7 +88,7 @@ static void drawItemIcon(Gfx** list, void** end, s16 x, s16 y, s16 dx, s16 dy, u
     if (id == ICON_NONE)
         return;
 
-    scale = 0.5f;
+    scale = 0.3333f;
     itemId = id & 0x3fff;
     if (!(id & ICONF_MM))
         tex = allocItemIconOot(end, itemId);
@@ -166,6 +166,7 @@ static void FileSelect_CustomFileInfoPrepareOotMedsStones(FileSelectState* this,
 
 static void FileSelect_CustomFileInfoPrepareOotInventory(FileSelectState* this, Gfx** list, void** end, int x, int y)
 {
+    int dx;
     u16 iconOcarina;
     u16 iconHookshot;
     u8 itemId;
@@ -218,6 +219,25 @@ static void FileSelect_CustomFileInfoPrepareOotInventory(FileSelectState* this, 
     drawItemIconSimple(list, end, x, y, 3, 2, ITEM_OOT_HAMMER,      gOotSave.inventory.items[ITS_OOT_HAMMER] == ITEM_OOT_HAMMER);
     drawItemIconSimple(list, end, x, y, 4, 2, ITEM_OOT_ARROW_LIGHT, gOotSave.inventory.items[ITS_OOT_ARROW_LIGHT] == ITEM_OOT_ARROW_LIGHT);
     drawItemIconSimple(list, end, x, y, 5, 2, ITEM_OOT_SPELL_LOVE,  gOotSave.inventory.items[ITS_OOT_SPELL_LOVE] == ITEM_OOT_SPELL_LOVE);
+
+    /* Row 4 - Child Trade */
+    dx = 0;
+    if (Config_Flag(CFG_OOT_SHUFFLE_EGGS))
+        drawItemIconSimple(list, end, x, y, dx++, 4, ITEM_OOT_WEIRD_EGG,                gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_WEIRD_EGG));
+    drawItemIconSimple(list, end, x, y, dx++, 4, ITEM_OOT_CHICKEN,                  gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_CHICKEN));
+    drawItemIconSimple(list, end, x, y, dx++, 4, ITEM_OOT_ZELDA_LETTER,             gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_ZELDA_LETTER));
+    drawItemIconSimple(list, end, x, y, dx++, 4, ITEM_OOT_KEATON_MASK,              gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_KEATON_MASK));
+    drawItemIconSimple(list, end, x, y, dx++, 4, ITEM_OOT_SKULL_MASK,               gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_SKULL_MASK));
+    drawItemIconSimple(list, end, x, y, dx++, 4, ITEM_OOT_SPOOKY_MASK,              gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_SPOOKY_MASK));
+    drawItemIconSimple(list, end, x, y, dx++, 4, ITEM_OOT_BUNNY_HOOD,               gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_BUNNY_HOOD));
+    drawItemIconSimple(list, end, x, y, dx++, 4, ITEM_OOT_GORON_MASK,               gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_GORON_MASK));
+    drawItemIconSimple(list, end, x, y, dx++, 4, ITEM_OOT_ZORA_MASK,                gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_ZORA_MASK));
+    drawItemIconSimple(list, end, x, y, dx++, 4, ITEM_OOT_GERUDO_MASK,              gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_GERUDO_MASK));
+    drawItemIconSimple(list, end, x, y, dx++, 4, ITEM_OOT_MASK_OF_TRUTH,            gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_MASK_OF_TRUTH));
+    if (Config_Flag(CFG_OOT_MASK_BLAST))
+        drawItemIconSimple(list, end, x, y, dx++, 4, ITEM_MM_MASK_BLAST | ICONF_MM,     gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_MASK_BLAST));
+    if (Config_Flag(CFG_OOT_MASK_STONE))
+        drawItemIconSimple(list, end, x, y, dx++, 4, ITEM_MM_MASK_STONE | ICONF_MM,     gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_MASK_STONE));
 }
 
 static void FileSelect_CustomFileInfoPrepareOot(FileSelectState* this, Gfx** list, void** end)
