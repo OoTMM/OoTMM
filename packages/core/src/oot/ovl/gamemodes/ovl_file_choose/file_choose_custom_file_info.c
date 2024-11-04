@@ -287,6 +287,8 @@ static void FileSelect_CustomFileInfoPrepareMmInventory(FileSelectState* this, G
     int dy;
     u16 iconOcarina;
     u16 iconHookshot;
+    u16 itemId;
+    u8  hasBottle;
 
     /* Pre-compute complex icons */
     iconOcarina = ITEM_OOT_OCARINA_TIME;
@@ -297,6 +299,18 @@ static void FileSelect_CustomFileInfoPrepareMmInventory(FileSelectState* this, G
     if (Config_Flag(CFG_MM_HOOKSHOT_SHORT) && !(gMmExtraItems.hookshot & 2))
         iconHookshot = ITEM_OOT_HOOKSHOT;
 
+    /* Bottle */
+    hasBottle = 0;
+    for (int i = 0; i < 6; ++i)
+    {
+        itemId = gMmSave.inventory.items[ITS_MM_BOTTLE + i];
+        if (itemId >= ITEM_MM_BOTTLE_EMPTY && itemId <= ITEM_MM_CHATEAU && itemId != ITEM_MM_GOLD_DUST)
+        {
+            hasBottle = 1;
+            break;
+        }
+    }
+
     /* Main Items */
     dx = 0;
     dy = 0;
@@ -305,6 +319,7 @@ static void FileSelect_CustomFileInfoPrepareMmInventory(FileSelectState* this, G
     drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_ARROW_FIRE,          gMmSave.inventory.items[ITS_MM_ARROW_FIRE] == ITEM_MM_ARROW_FIRE);
     drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_ARROW_ICE,           gMmSave.inventory.items[ITS_MM_ARROW_ICE] == ITEM_MM_ARROW_ICE);
     drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_ARROW_LIGHT,         gMmSave.inventory.items[ITS_MM_ARROW_LIGHT] == ITEM_MM_ARROW_LIGHT);
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_BOTTLE_EMPTY,        hasBottle);
     dx = 0;
     dy++;
     drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_BOMB,                gMmSave.inventory.items[ITS_MM_BOMBS] == ITEM_MM_BOMB);
@@ -312,6 +327,7 @@ static void FileSelect_CustomFileInfoPrepareMmInventory(FileSelectState* this, G
     drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_STICK,               gMmSave.inventory.items[ITS_MM_STICKS] == ITEM_MM_STICK);
     drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_NUT,                 gMmSave.inventory.items[ITS_MM_NUTS] == ITEM_MM_NUT);
     drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_MAGIC_BEAN,          gMmSave.inventory.items[ITS_MM_BEANS] == ITEM_MM_MAGIC_BEAN);
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_GOLD_DUST | ICONF_MM, gMmExtraItems.goldDust);
     dx = 0;
     dy++;
     drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_POWDER_KEG | ICONF_MM,            gMmSave.inventory.items[ITS_MM_KEG] == ITEM_MM_POWDER_KEG);
