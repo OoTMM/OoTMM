@@ -62,14 +62,14 @@
   events:
     SPIRIT_PARADOX: "can_hammer && small_keys_spirit(7)" #Adult needs to use up a key just to reach the switch.
   locations:
-    "MQ Spirit Temple Child Upper Ground Chest": "soul_like_like && soul_beamos && soul_enemy(SOUL_ENEMY_BABY_DODONGO) && has_weapon || has_explosives" #Explosives are enough for every enemy in this room | Fixed these rooms for the upcoming Door Rando as none of these rooms included ways of fighting indiviudally. 
+    "MQ Spirit Temple Child Upper Ground Chest": "soul_like_like && soul_beamos && soul_enemy(SOUL_ENEMY_BABY_DODONGO) && has_explosives" #Explosives are enough for every enemy in this room | Fixed these rooms for the upcoming Door Rando as none of these rooms included ways of fighting indiviudally. 
     "MQ Spirit Temple Child Upper Ledge Chest": "can_hookshot"
     "MQ Spirit Temple Pot Child Climb": "true"
 "Spirit Temple Statue":
   dungeon: Spirit
   exits:
-    "Spirit Temple Wallmaster Statue": "soul_wallmaster && has_weapon"
-    "Spirit Temple Wallmaster Adult Climb": "has_fire_arrows && can_reflect_light && soul_wallmaster && has_weapon" # TODO: Check this - Still need to be checked but fixed for weapon logic for door rando. No sense in leaving this unfixed. 
+    "Spirit Temple Wallmaster Statue": "soul_wallmaster"
+    "Spirit Temple Wallmaster Adult Climb": "has_fire_arrows && can_reflect_light && soul_wallmaster" # TODO: Check this - Still need to be checked but fixed for weapon logic for door rando. No sense in leaving this unfixed. 
     "Spirit Temple Child Upper": "small_keys_spirit(7)"
     "Spirit Temple Sun Block Room": "is_adult || (can_play_time || can_play_elegy) || has_hover_boots" #Adult's long legs make the jumps easy
     "Spirit Temple Adult Lower": "has_fire_arrows && can_reflect_light && soul_enemy(SOUL_ENEMY_STALFOS) && soul_wallmaster && has_weapon"
