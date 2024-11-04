@@ -1,8 +1,10 @@
 #include "file_select.h"
 #include <combo/config.h>
+#include <assets/oot/textures/parameter_static.h>
 
-#define CUSTOM_FILE_INFO_BUFFER_SIZE 0x40000
+#define CUSTOM_FILE_INFO_BUFFER_SIZE    0x40000
 
+#define ICON_SIZE   12
 #define ICON_NONE   0xffff
 #define ICONF_MM    0x8000
 #define ICONF_DIM   0x4000
@@ -64,6 +66,21 @@ static void* allocIconItem24Mm(void** end, int id)
     return buf;
 }
 
+static void quadIA8(Gfx** gfx, void* tex, s16 w, s16 h, float x, float y, float scale)
+{
+    float revScale;
+
+    revScale = 1.0f / scale;
+    gDPLoadTextureBlock((*gfx)++, tex, G_IM_FMT_IA, G_IM_SIZ_8b, w, h, 0, G_TX_NOMIRROR | G_TX_CLAMP,
+        G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+
+    gSPTextureRectangle((*gfx)++,
+        x * 4.f, y * 4.f,
+        (int)(x * 4.f + w * scale * 4.f), (int)(y * 4.f + h * scale * 4.f),
+        G_TX_RENDERTILE, 0, 0,
+        (int)(revScale * (1 << 10)), (int)(revScale * (1 << 10)));
+}
+
 static void quadRGBA8(Gfx** gfx, void* tex, s16 w, s16 h, float x, float y, float scale)
 {
     float revScale;
@@ -79,16 +96,66 @@ static void quadRGBA8(Gfx** gfx, void* tex, s16 w, s16 h, float x, float y, floa
         (int)(revScale * (1 << 10)), (int)(revScale * (1 << 10)));
 }
 
-static void drawItemIcon(Gfx** list, void** end, s16 x, s16 y, s16 dx, s16 dy, u16 id)
+static s16 drawDigit(Gfx** list, s16 x, s16 y, int digit)
 {
-    float scale;
+    void* tex;
+
+    tex = (void*)(((u32)&gAmmoDigit0Tex) + 0x40 * digit);
+    quadIA8(list, tex, 8, 8, x, y, 1.0f);
+    return 8;
+}
+
+static void drawNumber(Gfx** list, s16 x, s16 y, int num, int paddingZeroes)
+{
+    int divisor = 1000000000;
+    int paddingZeroesDivisor = 1;
+    int startPrint;
+    int digit;
+
+    startPrint = 0;
+    if (paddingZeroes)
+        paddingZeroes--;
+    while (paddingZeroes)
+    {
+        paddingZeroesDivisor *= 10;
+        paddingZeroes--;
+    }
+
+    for (;;)
+    {
+        if (num < divisor)
+        {
+            if (divisor <= paddingZeroesDivisor)
+                startPrint = 1;
+            digit = 0;
+        }
+        else
+        {
+            digit = num / divisor;
+            num -= digit * divisor;
+        }
+        divisor /= 10;
+
+        if (digit || startPrint)
+        {
+            startPrint = 1;
+            x += drawDigit(list, x, y, digit);
+        }
+
+        if (!num)
+            break;
+    }
+}
+
+static s16 drawItemIcon(Gfx** list, void** end, s16 x, s16 y, u16 id, int noDim)
+{
+    static const float scale = 0.375f;
     u16 itemId;
     void* tex;
 
     if (id == ICON_NONE)
-        return;
+        return 0;
 
-    scale = 0.3333f;
     itemId = id & 0x3fff;
     if (!(id & ICONF_MM))
         tex = allocItemIconOot(end, itemId);
@@ -96,7 +163,7 @@ static void drawItemIcon(Gfx** list, void** end, s16 x, s16 y, s16 dx, s16 dy, u
         tex = allocItemIconMm(end, itemId);
 
     /* Dim */
-    if (id & ICONF_DIM)
+    if (!noDim)
     {
         gDPSetPrimColor((*list)++, 0, 0, 30, 30, 30, 128);
     }
@@ -106,24 +173,18 @@ static void drawItemIcon(Gfx** list, void** end, s16 x, s16 y, s16 dx, s16 dy, u
     }
 
     /* Draw */
-    quadRGBA8(list, tex, 32, 32, x + 32 * dx * scale, y + 33 * dy * scale, scale);
+    quadRGBA8(list, tex, 32, 32, x, y, scale);
+    return ICON_SIZE;
 }
 
-static void drawItemIconSimple(Gfx** list, void** end, s16 x, s16 y, s16 dx, s16 dy, u16 id, int noDim)
+static float drawItemIcon24(Gfx** list, void** end, s16 x, s16 y, u16 id, int noDim)
 {
-    if (!noDim)
-        id |= ICONF_DIM;
-    drawItemIcon(list, end, x, y, dx, dy, id);
-}
-
-static void drawItemIcon24(Gfx** list, void** end, float scale, s16 x, s16 y, s16 dx, s16 dy, u16 id, int noDim)
-{
+    static const float scale = 0.5f;
     u16 itemId;
     void* tex;
 
-    scale *= 0.66667f;
     if (id == ICON_NONE)
-        return;
+        return 0;
 
     itemId = id & 0x3fff;
     if (!(id & ICONF_MM))
@@ -142,32 +203,32 @@ static void drawItemIcon24(Gfx** list, void** end, float scale, s16 x, s16 y, s1
     }
 
     /* Draw */
-    quadRGBA8(list, tex, 24, 24, x + 24 * dx * scale, y + 24 * dy * scale, scale);
+    quadRGBA8(list, tex, 24, 24, x, y, scale);
+    return ICON_SIZE;
 }
 
 static void FileSelect_CustomFileInfoPrepareOotMedsStones(FileSelectState* this, Gfx** list, void** end, int x, int y)
 {
-    static const float scale = 0.75f;
     static const float sqrt2_2 = 0.70710677f;
 
     /* Medallions */
-    drawItemIcon24(list, end, scale, x, y, 1, 0, 5, gOotSave.inventory.quest.medallionLight);
-    drawItemIcon24(list, end, scale, x, y + sqrt2_2 * scale * 16, 0, 0, 4, gOotSave.inventory.quest.medallionShadow);
-    drawItemIcon24(list, end, scale, x, y + sqrt2_2 * scale * 16, 2, 0, 0, gOotSave.inventory.quest.medallionForest);
-    drawItemIcon24(list, end, scale, x, y + sqrt2_2 * scale * 16, 0, 1, 3, gOotSave.inventory.quest.medallionSpirit);
-    drawItemIcon24(list, end, scale, x, y + sqrt2_2 * scale * 16, 2, 1, 1, gOotSave.inventory.quest.medallionFire);
-    drawItemIcon24(list, end, scale, x, y + sqrt2_2 * scale * 16 * 2, 1, 1, 2, gOotSave.inventory.quest.medallionWater);
+    drawItemIcon24(list, end, x + 1 * ICON_SIZE, y, 5, gOotSave.inventory.quest.medallionLight);
+    drawItemIcon24(list, end, x, y + sqrt2_2 * ICON_SIZE, 4, gOotSave.inventory.quest.medallionShadow);
+    drawItemIcon24(list, end, x + 2 * ICON_SIZE, y + sqrt2_2 * ICON_SIZE, 0, gOotSave.inventory.quest.medallionForest);
+    drawItemIcon24(list, end, x, y + sqrt2_2 * ICON_SIZE, 3, gOotSave.inventory.quest.medallionSpirit);
+    drawItemIcon24(list, end, x + 2 * ICON_SIZE, y + sqrt2_2 * ICON_SIZE, 1, gOotSave.inventory.quest.medallionFire);
+    drawItemIcon24(list, end, x + 1 * ICON_SIZE, y + sqrt2_2 * ICON_SIZE * 2, 2, gOotSave.inventory.quest.medallionWater);
 
     /* Stones */
-    drawItemIcon24(list, end, scale, x, y, 0, 4, 6, gOotSave.inventory.quest.stoneEmerald);
-    drawItemIcon24(list, end, scale, x, y, 1, 4, 7, gOotSave.inventory.quest.stoneRuby);
-    drawItemIcon24(list, end, scale, x, y, 2, 4, 8, gOotSave.inventory.quest.stoneSapphire);
+    drawItemIcon24(list, end, x + 0 * ICON_SIZE, y + ICON_SIZE * 4, 6, gOotSave.inventory.quest.stoneEmerald);
+    drawItemIcon24(list, end, x + 1 * ICON_SIZE, y + ICON_SIZE * 4, 7, gOotSave.inventory.quest.stoneRuby);
+    drawItemIcon24(list, end, x + 2 * ICON_SIZE, y + ICON_SIZE * 4, 8, gOotSave.inventory.quest.stoneSapphire);
 }
 
-static void FileSelect_CustomFileInfoPrepareOotInventory(FileSelectState* this, Gfx** list, void** end, int x, int y)
+static void FileSelect_CustomFileInfoPrepareOotInventory(FileSelectState* this, Gfx** list, void** end, float x, float y)
 {
-    int dx;
-    int dy;
+    float startX;
+    float startY;
     u16 iconOcarina;
     u16 iconHookshot;
     u8 itemId;
@@ -196,72 +257,73 @@ static void FileSelect_CustomFileInfoPrepareOotInventory(FileSelectState* this, 
     }
 
     /* Row 1 */
-    dx = 0;
-    dy = 0;
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_STICK,           gOotSave.inventory.items[ITS_OOT_STICKS] == ITEM_OOT_STICK);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_NUT,             gOotSave.inventory.items[ITS_OOT_NUTS] == ITEM_OOT_NUT);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_BOMB,            gOotSave.inventory.items[ITS_OOT_BOMBS] == ITEM_OOT_BOMB);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_BOW,             gOotSave.inventory.items[ITS_OOT_BOW] == ITEM_OOT_BOW);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_ARROW_FIRE,      gOotSave.inventory.items[ITS_OOT_ARROW_FIRE] == ITEM_OOT_ARROW_FIRE);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_SPELL_FIRE,      gOotSave.inventory.items[ITS_OOT_SPELL_FIRE] == ITEM_OOT_SPELL_FIRE);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_BOTTLE_EMPTY,    hasBottle);
+    startX = x;
+    startY = y;
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_STICK,           gOotSave.inventory.items[ITS_OOT_STICKS] == ITEM_OOT_STICK);
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_NUT,             gOotSave.inventory.items[ITS_OOT_NUTS] == ITEM_OOT_NUT);
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_BOMB,            gOotSave.inventory.items[ITS_OOT_BOMBS] == ITEM_OOT_BOMB);
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_BOW,             gOotSave.inventory.items[ITS_OOT_BOW] == ITEM_OOT_BOW);
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_ARROW_FIRE,      gOotSave.inventory.items[ITS_OOT_ARROW_FIRE] == ITEM_OOT_ARROW_FIRE);
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_SPELL_FIRE,      gOotSave.inventory.items[ITS_OOT_SPELL_FIRE] == ITEM_OOT_SPELL_FIRE);
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_BOTTLE_EMPTY,    hasBottle);
+    //drawNumber(list, x + 16 * dx, y + 16 * dy, 2, 0);
 
     /* Row 2 */
-    dx = 0;
-    dy = 1;
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_SLINGSHOT,   gOotSave.inventory.items[ITS_OOT_SLINGSHOT] == ITEM_OOT_SLINGSHOT);
-    drawItemIconSimple(list, end, x, y, dx++, dy, iconOcarina,          gOotExtraItems.ocarina);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_BOMBCHU_10,  gOotSave.inventory.items[ITS_OOT_BOMBCHU] == ITEM_OOT_BOMBCHU_10);
-    drawItemIconSimple(list, end, x, y, dx++, dy, iconHookshot,         gOotExtraItems.hookshot);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_ARROW_ICE,   gOotSave.inventory.items[ITS_OOT_ARROW_ICE] == ITEM_OOT_ARROW_ICE);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_SPELL_WIND,  gOotSave.inventory.items[ITS_OOT_SPELL_WIND] == ITEM_OOT_SPELL_WIND);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_RUTO_LETTER, gOotExtraItems.rutoLetter);
+    x = startX;
+    y += ICON_SIZE;
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_SLINGSHOT,   gOotSave.inventory.items[ITS_OOT_SLINGSHOT] == ITEM_OOT_SLINGSHOT);
+    x += drawItemIcon(list, end, x, y, iconOcarina,          gOotExtraItems.ocarina);
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_BOMBCHU_10,  gOotSave.inventory.items[ITS_OOT_BOMBCHU] == ITEM_OOT_BOMBCHU_10);
+    x += drawItemIcon(list, end, x, y, iconHookshot,         gOotExtraItems.hookshot);
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_ARROW_ICE,   gOotSave.inventory.items[ITS_OOT_ARROW_ICE] == ITEM_OOT_ARROW_ICE);
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_SPELL_WIND,  gOotSave.inventory.items[ITS_OOT_SPELL_WIND] == ITEM_OOT_SPELL_WIND);
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_RUTO_LETTER, gOotExtraItems.rutoLetter);
 
     /* Row 3 */
-    dx = 0;
-    dy = 2;
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_BOOMERANG,   gOotSave.inventory.items[ITS_OOT_BOOMERANG] == ITEM_OOT_BOOMERANG);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_LENS,        gOotSave.inventory.items[ITS_OOT_LENS] == ITEM_OOT_LENS);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_MAGIC_BEAN,  gOotSave.inventory.items[ITS_OOT_MAGIC_BEAN] == ITEM_OOT_MAGIC_BEAN);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_HAMMER,      gOotSave.inventory.items[ITS_OOT_HAMMER] == ITEM_OOT_HAMMER);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_ARROW_LIGHT, gOotSave.inventory.items[ITS_OOT_ARROW_LIGHT] == ITEM_OOT_ARROW_LIGHT);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_SPELL_LOVE,  gOotSave.inventory.items[ITS_OOT_SPELL_LOVE] == ITEM_OOT_SPELL_LOVE);
+    x = startX;
+    y += ICON_SIZE;
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_BOOMERANG,   gOotSave.inventory.items[ITS_OOT_BOOMERANG] == ITEM_OOT_BOOMERANG);
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_LENS,        gOotSave.inventory.items[ITS_OOT_LENS] == ITEM_OOT_LENS);
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_MAGIC_BEAN,  gOotSave.inventory.items[ITS_OOT_MAGIC_BEAN] == ITEM_OOT_MAGIC_BEAN);
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_HAMMER,      gOotSave.inventory.items[ITS_OOT_HAMMER] == ITEM_OOT_HAMMER);
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_ARROW_LIGHT, gOotSave.inventory.items[ITS_OOT_ARROW_LIGHT] == ITEM_OOT_ARROW_LIGHT);
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_SPELL_LOVE,  gOotSave.inventory.items[ITS_OOT_SPELL_LOVE] == ITEM_OOT_SPELL_LOVE);
 
     /* Row 4 - Child Trade */
-    dx = 0;
-    dy = 4;
+    x = startX;
+    y += ICON_SIZE;
     if (Config_Flag(CFG_OOT_SHUFFLE_EGGS))
-        drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_WEIRD_EGG,                gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_WEIRD_EGG));
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_CHICKEN,                  gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_CHICKEN));
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_ZELDA_LETTER,             gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_ZELDA_LETTER));
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_KEATON_MASK,              gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_KEATON_MASK));
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_SKULL_MASK,               gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_SKULL_MASK));
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_SPOOKY_MASK,              gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_SPOOKY_MASK));
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_BUNNY_HOOD,               gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_BUNNY_HOOD));
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_GORON_MASK,               gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_GORON_MASK));
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_ZORA_MASK,                gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_ZORA_MASK));
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_GERUDO_MASK,              gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_GERUDO_MASK));
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_MASK_OF_TRUTH,            gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_MASK_OF_TRUTH));
+        x += drawItemIcon(list, end, x, y, ITEM_OOT_WEIRD_EGG,                gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_WEIRD_EGG));
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_CHICKEN,                  gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_CHICKEN));
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_ZELDA_LETTER,             gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_ZELDA_LETTER));
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_KEATON_MASK,              gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_KEATON_MASK));
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_SKULL_MASK,               gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_SKULL_MASK));
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_SPOOKY_MASK,              gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_SPOOKY_MASK));
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_BUNNY_HOOD,               gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_BUNNY_HOOD));
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_GORON_MASK,               gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_GORON_MASK));
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_ZORA_MASK,                gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_ZORA_MASK));
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_GERUDO_MASK,              gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_GERUDO_MASK));
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_MASK_OF_TRUTH,            gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_MASK_OF_TRUTH));
     if (Config_Flag(CFG_OOT_MASK_BLAST))
-        drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_MASK_BLAST | ICONF_MM,     gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_MASK_BLAST));
+        x += drawItemIcon(list, end, x, y, ITEM_MM_MASK_BLAST | ICONF_MM,     gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_MASK_BLAST));
     if (Config_Flag(CFG_OOT_MASK_STONE))
-        drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_MASK_STONE | ICONF_MM,     gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_MASK_STONE));
+        x += drawItemIcon(list, end, x, y, ITEM_MM_MASK_STONE | ICONF_MM,     gOotExtraTradeSave.child & (1 << XITEM_OOT_CHILD_MASK_STONE));
 
     /* Row 5 - Adult Trade */
-    dx = 0;
-    dy = 5;
+    x = startX;
+    y += ICON_SIZE;
     if (Config_Flag(CFG_OOT_SHUFFLE_EGGS))
-        drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_POCKET_EGG,                gOotExtraTradeSave.adult & (1 << XITEM_OOT_ADULT_POCKET_EGG));
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_POCKET_CUCCO,              gOotExtraTradeSave.adult & (1 << XITEM_OOT_ADULT_POCKET_CUCCO));
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_COJIRO,                    gOotExtraTradeSave.adult & (1 << XITEM_OOT_ADULT_COJIRO));
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_ODD_MUSHROOM,              gOotExtraTradeSave.adult & (1 << XITEM_OOT_ADULT_ODD_MUSHROOM));
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_ODD_POTION,                gOotExtraTradeSave.adult & (1 << XITEM_OOT_ADULT_ODD_POTION));
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_POACHER_SAW,               gOotExtraTradeSave.adult & (1 << XITEM_OOT_ADULT_POACHER_SAW));
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_GORON_SWORD_BROKEN,        gOotExtraTradeSave.adult & (1 << XITEM_OOT_ADULT_BROKEN_GORON_SWORD));
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_PRESCRIPTION,              gOotExtraTradeSave.adult & (1 << XITEM_OOT_ADULT_PRESCRIPTION));
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_EYEBALL_FROG,              gOotExtraTradeSave.adult & (1 << XITEM_OOT_ADULT_EYEBALL_FROG));
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_EYE_DROPS,                 gOotExtraTradeSave.adult & (1 << XITEM_OOT_ADULT_EYE_DROPS));
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_CLAIM_CHECK,               gOotExtraTradeSave.adult & (1 << XITEM_OOT_ADULT_CLAIM_CHECK));
+        x += drawItemIcon(list, end, x, y, ITEM_OOT_POCKET_EGG,                gOotExtraTradeSave.adult & (1 << XITEM_OOT_ADULT_POCKET_EGG));
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_POCKET_CUCCO,              gOotExtraTradeSave.adult & (1 << XITEM_OOT_ADULT_POCKET_CUCCO));
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_COJIRO,                    gOotExtraTradeSave.adult & (1 << XITEM_OOT_ADULT_COJIRO));
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_ODD_MUSHROOM,              gOotExtraTradeSave.adult & (1 << XITEM_OOT_ADULT_ODD_MUSHROOM));
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_ODD_POTION,                gOotExtraTradeSave.adult & (1 << XITEM_OOT_ADULT_ODD_POTION));
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_POACHER_SAW,               gOotExtraTradeSave.adult & (1 << XITEM_OOT_ADULT_POACHER_SAW));
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_GORON_SWORD_BROKEN,        gOotExtraTradeSave.adult & (1 << XITEM_OOT_ADULT_BROKEN_GORON_SWORD));
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_PRESCRIPTION,              gOotExtraTradeSave.adult & (1 << XITEM_OOT_ADULT_PRESCRIPTION));
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_EYEBALL_FROG,              gOotExtraTradeSave.adult & (1 << XITEM_OOT_ADULT_EYEBALL_FROG));
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_EYE_DROPS,                 gOotExtraTradeSave.adult & (1 << XITEM_OOT_ADULT_EYE_DROPS));
+    x += drawItemIcon(list, end, x, y, ITEM_OOT_CLAIM_CHECK,               gOotExtraTradeSave.adult & (1 << XITEM_OOT_ADULT_CLAIM_CHECK));
 }
 
 static void FileSelect_CustomFileInfoPrepareOot(FileSelectState* this, Gfx** list, void** end)
@@ -275,10 +337,10 @@ static void FileSelect_CustomFileInfoPrepareMmRemains(FileSelectState* this, Gfx
     static const float scale = 0.75f;
     static const float sqrt2_2 = 0.70710677f;
 
-    drawItemIconSimple(list, end, x, y,                             1, 0,           ITEM_MM_REMAINS_ODOLWA | ICONF_MM,      gMmSave.inventory.quest.remainsOdolwa);
-    drawItemIconSimple(list, end, x, y + sqrt2_2 * scale * 16,      0, 0,           ITEM_MM_REMAINS_GYORG | ICONF_MM,       gMmSave.inventory.quest.remainsGyorg);
-    drawItemIconSimple(list, end, x, y + sqrt2_2 * scale * 16,      2, 0,           ITEM_MM_REMAINS_GOHT | ICONF_MM,        gMmSave.inventory.quest.remainsGoht);
-    drawItemIconSimple(list, end, x, y + sqrt2_2 * scale * 16 * 2,  1, 0,           ITEM_MM_REMAINS_TWINMOLD | ICONF_MM,    gMmSave.inventory.quest.remainsTwinmold);
+    drawItemIcon(list, end, x, y,                             1, 0,           ITEM_MM_REMAINS_ODOLWA | ICONF_MM,      gMmSave.inventory.quest.remainsOdolwa);
+    drawItemIcon(list, end, x, y + sqrt2_2 * scale * 16,      0, 0,           ITEM_MM_REMAINS_GYORG | ICONF_MM,       gMmSave.inventory.quest.remainsGyorg);
+    drawItemIcon(list, end, x, y + sqrt2_2 * scale * 16,      2, 0,           ITEM_MM_REMAINS_GOHT | ICONF_MM,        gMmSave.inventory.quest.remainsGoht);
+    drawItemIcon(list, end, x, y + sqrt2_2 * scale * 16 * 2,  1, 0,           ITEM_MM_REMAINS_TWINMOLD | ICONF_MM,    gMmSave.inventory.quest.remainsTwinmold);
 }
 
 static void FileSelect_CustomFileInfoPrepareMmInventory(FileSelectState* this, Gfx** list, void** end, int x, int y)
@@ -314,76 +376,76 @@ static void FileSelect_CustomFileInfoPrepareMmInventory(FileSelectState* this, G
     /* Main Items */
     dx = 0;
     dy = 0;
-    drawItemIconSimple(list, end, x, y, dx++, dy, iconOcarina,                  gMmExtraItems.ocarina);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_BOW | ICONF_MM,       gMmSave.inventory.items[ITS_MM_BOW] == ITEM_MM_BOW);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_ARROW_FIRE,          gMmSave.inventory.items[ITS_MM_ARROW_FIRE] == ITEM_MM_ARROW_FIRE);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_ARROW_ICE,           gMmSave.inventory.items[ITS_MM_ARROW_ICE] == ITEM_MM_ARROW_ICE);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_ARROW_LIGHT,         gMmSave.inventory.items[ITS_MM_ARROW_LIGHT] == ITEM_MM_ARROW_LIGHT);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_BOTTLE_EMPTY,        hasBottle);
+    drawItemIcon(list, end, x, y, dx++, dy, iconOcarina,                  gMmExtraItems.ocarina);
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_MM_BOW | ICONF_MM,       gMmSave.inventory.items[ITS_MM_BOW] == ITEM_MM_BOW);
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_OOT_ARROW_FIRE,          gMmSave.inventory.items[ITS_MM_ARROW_FIRE] == ITEM_MM_ARROW_FIRE);
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_OOT_ARROW_ICE,           gMmSave.inventory.items[ITS_MM_ARROW_ICE] == ITEM_MM_ARROW_ICE);
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_OOT_ARROW_LIGHT,         gMmSave.inventory.items[ITS_MM_ARROW_LIGHT] == ITEM_MM_ARROW_LIGHT);
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_OOT_BOTTLE_EMPTY,        hasBottle);
     dx = 0;
     dy++;
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_BOMB,                gMmSave.inventory.items[ITS_MM_BOMBS] == ITEM_MM_BOMB);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_BOMBCHU_10,          gMmSave.inventory.items[ITS_MM_BOMBCHU] == ITEM_MM_BOMBCHU);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_STICK,               gMmSave.inventory.items[ITS_MM_STICKS] == ITEM_MM_STICK);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_NUT,                 gMmSave.inventory.items[ITS_MM_NUTS] == ITEM_MM_NUT);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_MAGIC_BEAN,          gMmSave.inventory.items[ITS_MM_BEANS] == ITEM_MM_MAGIC_BEAN);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_GOLD_DUST | ICONF_MM, gMmExtraItems.goldDust);
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_OOT_BOMB,                gMmSave.inventory.items[ITS_MM_BOMBS] == ITEM_MM_BOMB);
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_OOT_BOMBCHU_10,          gMmSave.inventory.items[ITS_MM_BOMBCHU] == ITEM_MM_BOMBCHU);
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_OOT_STICK,               gMmSave.inventory.items[ITS_MM_STICKS] == ITEM_MM_STICK);
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_OOT_NUT,                 gMmSave.inventory.items[ITS_MM_NUTS] == ITEM_MM_NUT);
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_OOT_MAGIC_BEAN,          gMmSave.inventory.items[ITS_MM_BEANS] == ITEM_MM_MAGIC_BEAN);
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_MM_GOLD_DUST | ICONF_MM, gMmExtraItems.goldDust);
     dx = 0;
     dy++;
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_POWDER_KEG | ICONF_MM,            gMmSave.inventory.items[ITS_MM_KEG] == ITEM_MM_POWDER_KEG);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_PICTOGRAPH_BOX | ICONF_MM,        gMmSave.inventory.items[ITS_MM_PICTOBOX] == ITEM_MM_PICTOGRAPH_BOX);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_LENS,                            gMmSave.inventory.items[ITS_MM_LENS] == ITEM_MM_LENS_OF_TRUTH);
-    drawItemIconSimple(list, end, x, y, dx++, dy, iconHookshot,                             gMmExtraItems.hookshot);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_GREAT_FAIRY_SWORD | ICONF_MM,     gMmExtraItems.hammerGFS & 1);
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_MM_POWDER_KEG | ICONF_MM,            gMmSave.inventory.items[ITS_MM_KEG] == ITEM_MM_POWDER_KEG);
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_MM_PICTOGRAPH_BOX | ICONF_MM,        gMmSave.inventory.items[ITS_MM_PICTOBOX] == ITEM_MM_PICTOGRAPH_BOX);
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_OOT_LENS,                            gMmSave.inventory.items[ITS_MM_LENS] == ITEM_MM_LENS_OF_TRUTH);
+    drawItemIcon(list, end, x, y, dx++, dy, iconHookshot,                             gMmExtraItems.hookshot);
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_MM_GREAT_FAIRY_SWORD | ICONF_MM,     gMmExtraItems.hammerGFS & 1);
 
     /* Trade Items */
     dx = 0;
     dy++;
     y += 5;
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_MOON_TEAR | ICONF_MM,             gMmExtraTrade.tradeObtained1 & (1 << XITEM_MM_TRADE1_MOON_TEAR));
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_DEED_LAND | ICONF_MM,             gMmExtraTrade.tradeObtained1 & (1 << XITEM_MM_TRADE1_DEED_LAND));
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_DEED_SWAMP | ICONF_MM,            gMmExtraTrade.tradeObtained1 & (1 << XITEM_MM_TRADE1_DEED_SWAMP));
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_DEED_MOUNTAIN | ICONF_MM,         gMmExtraTrade.tradeObtained1 & (1 << XITEM_MM_TRADE1_DEED_MOUNTAIN));
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_DEED_OCEAN | ICONF_MM,            gMmExtraTrade.tradeObtained1 & (1 << XITEM_MM_TRADE1_DEED_OCEAN));
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_ROOM_KEY | ICONF_MM,              gMmExtraTrade.tradeObtained2 & (1 << XITEM_MM_TRADE2_ROOM_KEY));
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_LETTER_TO_MAMA | ICONF_MM,        gMmExtraTrade.tradeObtained2 & (1 << XITEM_MM_TRADE2_LETTER_TO_MAMA));
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_LETTER_TO_KAFEI | ICONF_MM,       gMmExtraTrade.tradeObtained3 & (1 << XITEM_MM_TRADE3_LETTER_TO_KAFEI));
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_PENDANT_OF_MEMORIES | ICONF_MM,   gMmExtraTrade.tradeObtained3 & (1 << XITEM_MM_TRADE3_PENDANT_OF_MEMORIES));
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_MM_MOON_TEAR | ICONF_MM,             gMmExtraTrade.tradeObtained1 & (1 << XITEM_MM_TRADE1_MOON_TEAR));
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_MM_DEED_LAND | ICONF_MM,             gMmExtraTrade.tradeObtained1 & (1 << XITEM_MM_TRADE1_DEED_LAND));
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_MM_DEED_SWAMP | ICONF_MM,            gMmExtraTrade.tradeObtained1 & (1 << XITEM_MM_TRADE1_DEED_SWAMP));
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_MM_DEED_MOUNTAIN | ICONF_MM,         gMmExtraTrade.tradeObtained1 & (1 << XITEM_MM_TRADE1_DEED_MOUNTAIN));
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_MM_DEED_OCEAN | ICONF_MM,            gMmExtraTrade.tradeObtained1 & (1 << XITEM_MM_TRADE1_DEED_OCEAN));
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_MM_ROOM_KEY | ICONF_MM,              gMmExtraTrade.tradeObtained2 & (1 << XITEM_MM_TRADE2_ROOM_KEY));
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_MM_LETTER_TO_MAMA | ICONF_MM,        gMmExtraTrade.tradeObtained2 & (1 << XITEM_MM_TRADE2_LETTER_TO_MAMA));
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_MM_LETTER_TO_KAFEI | ICONF_MM,       gMmExtraTrade.tradeObtained3 & (1 << XITEM_MM_TRADE3_LETTER_TO_KAFEI));
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_MM_PENDANT_OF_MEMORIES | ICONF_MM,   gMmExtraTrade.tradeObtained3 & (1 << XITEM_MM_TRADE3_PENDANT_OF_MEMORIES));
 
     /* Masks */
     dx = 0;
     dy++;
     y += 5;
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_MASK_POSTMAN | ICONF_MM,             gMmSave.inventory.items[ITS_MM_MASK_POSTMAN] == ITEM_MM_MASK_POSTMAN);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_MASK_ALL_NIGHT | ICONF_MM,           gMmSave.inventory.items[ITS_MM_MASK_ALL_NIGHT] == ITEM_MM_MASK_ALL_NIGHT);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_MASK_BLAST | ICONF_MM,               gMmSave.inventory.items[ITS_MM_MASK_BLAST] == ITEM_MM_MASK_BLAST);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_MASK_STONE | ICONF_MM,               gMmSave.inventory.items[ITS_MM_MASK_STONE] == ITEM_MM_MASK_STONE);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_MASK_GREAT_FAIRY | ICONF_MM,         gMmSave.inventory.items[ITS_MM_MASK_GREAT_FAIRY] == ITEM_MM_MASK_GREAT_FAIRY);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_MASK_DEKU | ICONF_MM,                gMmSave.inventory.items[ITS_MM_MASK_DEKU] == ITEM_MM_MASK_DEKU);
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_MM_MASK_POSTMAN | ICONF_MM,             gMmSave.inventory.items[ITS_MM_MASK_POSTMAN] == ITEM_MM_MASK_POSTMAN);
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_MM_MASK_ALL_NIGHT | ICONF_MM,           gMmSave.inventory.items[ITS_MM_MASK_ALL_NIGHT] == ITEM_MM_MASK_ALL_NIGHT);
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_MM_MASK_BLAST | ICONF_MM,               gMmSave.inventory.items[ITS_MM_MASK_BLAST] == ITEM_MM_MASK_BLAST);
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_MM_MASK_STONE | ICONF_MM,               gMmSave.inventory.items[ITS_MM_MASK_STONE] == ITEM_MM_MASK_STONE);
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_MM_MASK_GREAT_FAIRY | ICONF_MM,         gMmSave.inventory.items[ITS_MM_MASK_GREAT_FAIRY] == ITEM_MM_MASK_GREAT_FAIRY);
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_MM_MASK_DEKU | ICONF_MM,                gMmSave.inventory.items[ITS_MM_MASK_DEKU] == ITEM_MM_MASK_DEKU);
     dx = 0;
     dy++;
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_MASK_KEATON | ICONF_MM,               gMmSave.inventory.items[ITS_MM_MASK_KEATON] == ITEM_MM_MASK_KEATON);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_MASK_BREMEN | ICONF_MM,               gMmSave.inventory.items[ITS_MM_MASK_BREMEN] == ITEM_MM_MASK_BREMEN);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_MASK_BUNNY | ICONF_MM,                gMmSave.inventory.items[ITS_MM_MASK_BUNNY] == ITEM_MM_MASK_BUNNY);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_MASK_DON_GERO | ICONF_MM,             gMmSave.inventory.items[ITS_MM_MASK_DON_GERO] == ITEM_MM_MASK_DON_GERO);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_MASK_SCENTS | ICONF_MM,               gMmSave.inventory.items[ITS_MM_MASK_SCENTS] == ITEM_MM_MASK_SCENTS);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_MASK_GORON | ICONF_MM,                gMmSave.inventory.items[ITS_MM_MASK_GORON] == ITEM_MM_MASK_GORON);
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_MM_MASK_KEATON | ICONF_MM,               gMmSave.inventory.items[ITS_MM_MASK_KEATON] == ITEM_MM_MASK_KEATON);
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_MM_MASK_BREMEN | ICONF_MM,               gMmSave.inventory.items[ITS_MM_MASK_BREMEN] == ITEM_MM_MASK_BREMEN);
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_MM_MASK_BUNNY | ICONF_MM,                gMmSave.inventory.items[ITS_MM_MASK_BUNNY] == ITEM_MM_MASK_BUNNY);
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_MM_MASK_DON_GERO | ICONF_MM,             gMmSave.inventory.items[ITS_MM_MASK_DON_GERO] == ITEM_MM_MASK_DON_GERO);
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_MM_MASK_SCENTS | ICONF_MM,               gMmSave.inventory.items[ITS_MM_MASK_SCENTS] == ITEM_MM_MASK_SCENTS);
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_MM_MASK_GORON | ICONF_MM,                gMmSave.inventory.items[ITS_MM_MASK_GORON] == ITEM_MM_MASK_GORON);
     dx = 0;
     dy++;
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_MASK_ROMANI | ICONF_MM,               gMmSave.inventory.items[ITS_MM_MASK_ROMANI] == ITEM_MM_MASK_ROMANI);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_MASK_TROUPE_LEADER | ICONF_MM,        gMmSave.inventory.items[ITS_MM_MASK_TROUPE_LEADER] == ITEM_MM_MASK_TROUPE_LEADER);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_MASK_KAFEI | ICONF_MM,                gMmSave.inventory.items[ITS_MM_MASK_KAFEI] == ITEM_MM_MASK_KAFEI);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_MASK_COUPLE | ICONF_MM,               gMmSave.inventory.items[ITS_MM_MASK_COUPLE] == ITEM_MM_MASK_COUPLE);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_MASK_TRUTH | ICONF_MM,                gMmSave.inventory.items[ITS_MM_MASK_TRUTH] == ITEM_MM_MASK_TRUTH);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_MASK_ZORA | ICONF_MM,                 gMmSave.inventory.items[ITS_MM_MASK_ZORA] == ITEM_MM_MASK_ZORA);
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_MM_MASK_ROMANI | ICONF_MM,               gMmSave.inventory.items[ITS_MM_MASK_ROMANI] == ITEM_MM_MASK_ROMANI);
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_MM_MASK_TROUPE_LEADER | ICONF_MM,        gMmSave.inventory.items[ITS_MM_MASK_TROUPE_LEADER] == ITEM_MM_MASK_TROUPE_LEADER);
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_MM_MASK_KAFEI | ICONF_MM,                gMmSave.inventory.items[ITS_MM_MASK_KAFEI] == ITEM_MM_MASK_KAFEI);
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_MM_MASK_COUPLE | ICONF_MM,               gMmSave.inventory.items[ITS_MM_MASK_COUPLE] == ITEM_MM_MASK_COUPLE);
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_MM_MASK_TRUTH | ICONF_MM,                gMmSave.inventory.items[ITS_MM_MASK_TRUTH] == ITEM_MM_MASK_TRUTH);
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_MM_MASK_ZORA | ICONF_MM,                 gMmSave.inventory.items[ITS_MM_MASK_ZORA] == ITEM_MM_MASK_ZORA);
     dx = 0;
     dy++;
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_MASK_KAMARO | ICONF_MM,               gMmSave.inventory.items[ITS_MM_MASK_KAMARO] == ITEM_MM_MASK_KAMARO);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_MASK_GIBDO | ICONF_MM,                gMmSave.inventory.items[ITS_MM_MASK_GIBDO] == ITEM_MM_MASK_GIBDO);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_MASK_GARO | ICONF_MM,                 gMmSave.inventory.items[ITS_MM_MASK_GARO] == ITEM_MM_MASK_GARO);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_MASK_CAPTAIN | ICONF_MM,              gMmSave.inventory.items[ITS_MM_MASK_CAPTAIN] == ITEM_MM_MASK_CAPTAIN);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_MASK_GIANT | ICONF_MM,                gMmSave.inventory.items[ITS_MM_MASK_GIANT] == ITEM_MM_MASK_GIANT);
-    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_MASK_FIERCE_DEITY | ICONF_MM,         gMmSave.inventory.items[ITS_MM_MASK_FIERCE_DEITY] == ITEM_MM_MASK_FIERCE_DEITY);
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_MM_MASK_KAMARO | ICONF_MM,               gMmSave.inventory.items[ITS_MM_MASK_KAMARO] == ITEM_MM_MASK_KAMARO);
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_MM_MASK_GIBDO | ICONF_MM,                gMmSave.inventory.items[ITS_MM_MASK_GIBDO] == ITEM_MM_MASK_GIBDO);
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_MM_MASK_GARO | ICONF_MM,                 gMmSave.inventory.items[ITS_MM_MASK_GARO] == ITEM_MM_MASK_GARO);
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_MM_MASK_CAPTAIN | ICONF_MM,              gMmSave.inventory.items[ITS_MM_MASK_CAPTAIN] == ITEM_MM_MASK_CAPTAIN);
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_MM_MASK_GIANT | ICONF_MM,                gMmSave.inventory.items[ITS_MM_MASK_GIANT] == ITEM_MM_MASK_GIANT);
+    drawItemIcon(list, end, x, y, dx++, dy, ITEM_MM_MASK_FIERCE_DEITY | ICONF_MM,         gMmSave.inventory.items[ITS_MM_MASK_FIERCE_DEITY] == ITEM_MM_MASK_FIERCE_DEITY);
 }
 
 static void FileSelect_CustomFileInfoPrepareMm(FileSelectState* this, Gfx** list, void** end)
