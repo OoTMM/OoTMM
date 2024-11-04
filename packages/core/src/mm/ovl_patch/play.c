@@ -344,6 +344,9 @@ static void Play_FixupSpawnTime(void)
     if (!(gSave.day == 0 || (gSave.day == 1 && gSave.time == 0x4000)))
         return;
 
+    /* Set/clear 1st day events */
+    Sram_ClearFlagsAtDawnOfTheFirstDay();
+
     firstHalfDay = 6;
     for (int i = 0; i < 6; ++i)
     {

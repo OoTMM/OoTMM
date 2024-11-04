@@ -204,6 +204,7 @@ void Interface_LoadActionLabelB(PlayState* play, u16 action);
 void PrepareSave(SramContext* sram);
 void _Sram_SaveEndOfCycle(PlayState* play);
 void Sram_SaveEndOfCycle(PlayState* play);
+void Sram_ClearFlagsAtDawnOfTheFirstDay(void);
 void Sram_SaveNewDay(PlayState* play);
 #endif
 

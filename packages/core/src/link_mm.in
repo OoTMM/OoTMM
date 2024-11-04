@@ -262,6 +262,7 @@ Play_Update = 0x80168f64;
 
 Gfx_TexScroll = 0x8012cb4c;
 
+Sram_ClearFlagsAtDawnOfTheFirstDay = 0x80143ac4;
 Player_Update = 0x80160b80;
 LoadIcon = 0x80178e3c;
 CmpDma_LoadAllFiles = 0x80178E7C;

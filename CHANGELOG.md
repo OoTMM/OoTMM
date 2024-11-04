@@ -31,6 +31,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix a long-standing issue where Anju's reservation worked inconsistently (for real this time).
 - Fix precompleted Stone Tower not setting some flags correctly.
 - Fix possible softlock in Ice Cavern with shuffled silver rupees.
 - Logic for obtaining the Seahorse.
