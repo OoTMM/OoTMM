@@ -270,6 +270,17 @@ static void FileSelect_CustomFileInfoPrepareOot(FileSelectState* this, Gfx** lis
     FileSelect_CustomFileInfoPrepareOotInventory(this, list, end, 130, 94);
 }
 
+static void FileSelect_CustomFileInfoPrepareMmRemains(FileSelectState* this, Gfx** list, void** end, int x, int y)
+{
+    static const float scale = 0.75f;
+    static const float sqrt2_2 = 0.70710677f;
+
+    drawItemIconSimple(list, end, x, y,                             1, 0,           ITEM_MM_REMAINS_ODOLWA | ICONF_MM,      gMmSave.inventory.quest.remainsOdolwa);
+    drawItemIconSimple(list, end, x, y + sqrt2_2 * scale * 16,      0, 0,           ITEM_MM_REMAINS_GYORG | ICONF_MM,       gMmSave.inventory.quest.remainsGyorg);
+    drawItemIconSimple(list, end, x, y + sqrt2_2 * scale * 16,      2, 0,           ITEM_MM_REMAINS_GOHT | ICONF_MM,        gMmSave.inventory.quest.remainsGoht);
+    drawItemIconSimple(list, end, x, y + sqrt2_2 * scale * 16 * 2,  1, 0,           ITEM_MM_REMAINS_TWINMOLD | ICONF_MM,    gMmSave.inventory.quest.remainsTwinmold);
+}
+
 static void FileSelect_CustomFileInfoPrepareMmInventory(FileSelectState* this, Gfx** list, void** end, int x, int y)
 {
     int dx;
@@ -361,6 +372,7 @@ static void FileSelect_CustomFileInfoPrepareMmInventory(FileSelectState* this, G
 
 static void FileSelect_CustomFileInfoPrepareMm(FileSelectState* this, Gfx** list, void** end)
 {
+    FileSelect_CustomFileInfoPrepareMmRemains(this, list, end, 80, 94);
     FileSelect_CustomFileInfoPrepareMmInventory(this, list, end, 130, 94);
 }
 

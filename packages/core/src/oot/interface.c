@@ -45,8 +45,9 @@ void LoadIconItem24Oot(void* dst, int iconId)
     LoadFile(dst, 0x846000 + iconId * 0x900, 0x900);
 }
 
-void LoadIconItem24MM(void* dst, int iconId)
+void LoadIconItem24Mm(void* dst, int iconId)
 {
+    comboLoadMmIcon(dst, 0xa7bee0, iconId);
 }
 
 void LoadMmItemIcon(void* dst, int iconId)
