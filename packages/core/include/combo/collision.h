@@ -212,6 +212,13 @@ SurfaceMaterial SurfaceType_GetMaterial(CollisionContext* colCtx, CollisionPoly*
 void CollisionCheck_SpawnShieldParticlesWood(PlayState* play, Vec3f* v, Vec3f* pos);
 s32 BgCheck_EntityLineTest2(CollisionContext* colCtx, Vec3f* posA, Vec3f* posB, Vec3f* posResult, CollisionPoly** outPoly, s32 checkWall, s32 checkFloor, s32 checkCeil, s32 checkOneFace, s32* bgId, Actor* actor);
 void EffectSsBlast_SpawnWhiteShockwave(PlayState* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel);
+s32 Collider_InitAndSetTris(PlayState* play, ColliderTris* dest, Actor* actor, ColliderTrisInit* src, ColliderTrisElement* trisElements);
+s32 Collider_InitAndSetQuad(PlayState* play, ColliderQuad* dest, Actor* actor, ColliderQuadInit* src);
+s32 Collider_DestroyQuad(PlayState* play, ColliderQuad* quad);
+s32 Collider_DestroyTris(PlayState* play, ColliderTris* tris);
+void func_800BE504(Actor* actor, ColliderCylinder* cyl);
+void Collider_SetTrisVertices(ColliderTris* tris, s32 elemIndex, Vec3f* a, Vec3f* b, Vec3f* c);
+void Collider_SetQuadVertices(ColliderQuad* quad, Vec3f* a, Vec3f* b, Vec3f* c, Vec3f* d);
 
 #endif
 

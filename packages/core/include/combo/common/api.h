@@ -579,6 +579,10 @@ void* Effect_GetByIndex(s32 index);
 #define MATRIX_FINALIZE_AND_LOAD(pkt, gfxCtx) \
     gSPMatrix(pkt, Matrix_Finalize(gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW)
 
+extern Gfx gSetupDLs[73][6]; // FIXME SETUPDL_MAX
+
+s32 Camera_AddQuake(Camera* camera, s32 arg1, s16 y, s32 countdown);
+s16 CutsceneManager_StartWithPlayerCsAndSetFlag(s16 csId, struct Actor* actor);
 
 // TODO: rename
 void func_800BE5CC(Actor* actor, ColliderJntSph* jntSph, s32 elemIndex);

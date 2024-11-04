@@ -628,3 +628,22 @@ Matrix_Push = 0x8018019c;
 
 Math_Vec3s_Copy = 0x800ff52c;
 func_800BBFB0 = 0x800bbfb0;
+
+Collider_InitAndSetTris = 0x800e1a24;
+Collider_InitAndSetQuad = 0x800e1f88;
+Collider_DestroyTris = 0x800e17b4;
+Collider_DestroyQuad = 0x800e1e68;
+func_800BE184 = 0x800be184;
+Camera_AddQuake = 0x800dfd04;
+func_800BE504 = 0x800be504;
+CutsceneManager_StartWithPlayerCsAndSetFlag = 0x800f1ce0;
+Actor_SetDropFlag = 0x800be258;
+Collider_SetTrisVertices = 0x800e7ecc;
+Collider_SetQuadVertices = 0x800e7e5c;
+EffectBlure_AddVertex = 0x800a81f0;
+func_800B8050 = 0x800b8050;
+func_800B8118 = 0x800b8118;
+func_800AE5A0 = 0x800ae5a0;
+func_800BC620 = 0x800bc620;
+SoundSource_PlaySfxEachFrameAtFixedWorldPos = 0x800f0590;
+gSetupDLs = 0x801c0ef0;
