@@ -64,7 +64,7 @@ static void* allocIconItem24Mm(void** end, int id)
     return buf;
 }
 
-static void quadRGBA8(Gfx** gfx, void* tex, s16 w, s16 h, s16 x, s16 y, float scale)
+static void quadRGBA8(Gfx** gfx, void* tex, s16 w, s16 h, float x, float y, float scale)
 {
     float revScale;
 
@@ -73,7 +73,7 @@ static void quadRGBA8(Gfx** gfx, void* tex, s16 w, s16 h, s16 x, s16 y, float sc
         G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
     gSPTextureRectangle((*gfx)++,
-        x << 2, y << 2,
+        x * 4.f, y * 4.f,
         (int)(x * 4.f + w * scale * 4.f), (int)(y * 4.f + h * scale * 4.f),
         G_TX_RENDERTILE, 0, 0,
         (int)(revScale * (1 << 10)), (int)(revScale * (1 << 10)));
@@ -106,7 +106,7 @@ static void drawItemIcon(Gfx** list, void** end, s16 x, s16 y, s16 dx, s16 dy, u
     }
 
     /* Draw */
-    quadRGBA8(list, tex, 32, 32, x + 32 * dx * scale, y + 32 * dy * scale, scale);
+    quadRGBA8(list, tex, 32, 32, x + 32 * dx * scale, y + 33 * dy * scale, scale);
 }
 
 static void drawItemIconSimple(Gfx** list, void** end, s16 x, s16 y, s16 dx, s16 dy, u16 id, int noDim)
