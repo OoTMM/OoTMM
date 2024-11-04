@@ -272,6 +272,8 @@ static void FileSelect_CustomFileInfoPrepareOot(FileSelectState* this, Gfx** lis
 
 static void FileSelect_CustomFileInfoPrepareMmInventory(FileSelectState* this, Gfx** list, void** end, int x, int y)
 {
+    int dx;
+    int dy;
     u16 iconOcarina;
     u16 iconHookshot;
 
@@ -285,25 +287,45 @@ static void FileSelect_CustomFileInfoPrepareMmInventory(FileSelectState* this, G
         iconHookshot = ITEM_OOT_HOOKSHOT;
 
     /* Row 1 */
-    drawItemIconSimple(list, end, x, y, 0, 0, iconOcarina,                  gMmExtraItems.ocarina);
-    drawItemIconSimple(list, end, x, y, 1, 0, ITEM_MM_BOW | ICONF_MM,       gMmSave.inventory.items[ITS_MM_BOW] == ITEM_MM_BOW);
-    drawItemIconSimple(list, end, x, y, 2, 0, ITEM_OOT_ARROW_FIRE,          gMmSave.inventory.items[ITS_MM_ARROW_FIRE] == ITEM_MM_ARROW_FIRE);
-    drawItemIconSimple(list, end, x, y, 3, 0, ITEM_OOT_ARROW_ICE,           gMmSave.inventory.items[ITS_MM_ARROW_ICE] == ITEM_MM_ARROW_ICE);
-    drawItemIconSimple(list, end, x, y, 4, 0, ITEM_OOT_ARROW_LIGHT,         gMmSave.inventory.items[ITS_MM_ARROW_LIGHT] == ITEM_MM_ARROW_LIGHT);
+    dx = 0;
+    dy = 0;
+    drawItemIconSimple(list, end, x, y, dx++, dy, iconOcarina,                  gMmExtraItems.ocarina);
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_BOW | ICONF_MM,       gMmSave.inventory.items[ITS_MM_BOW] == ITEM_MM_BOW);
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_ARROW_FIRE,          gMmSave.inventory.items[ITS_MM_ARROW_FIRE] == ITEM_MM_ARROW_FIRE);
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_ARROW_ICE,           gMmSave.inventory.items[ITS_MM_ARROW_ICE] == ITEM_MM_ARROW_ICE);
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_ARROW_LIGHT,         gMmSave.inventory.items[ITS_MM_ARROW_LIGHT] == ITEM_MM_ARROW_LIGHT);
 
     /* Row 2 */
-    drawItemIconSimple(list, end, x, y, 0, 1, ITEM_OOT_BOMB,                gMmSave.inventory.items[ITS_MM_BOMBS] == ITEM_MM_BOMB);
-    drawItemIconSimple(list, end, x, y, 1, 1, ITEM_OOT_BOMBCHU_10,          gMmSave.inventory.items[ITS_MM_BOMBCHU] == ITEM_MM_BOMBCHU);
-    drawItemIconSimple(list, end, x, y, 2, 1, ITEM_OOT_STICK,               gMmSave.inventory.items[ITS_MM_STICKS] == ITEM_MM_STICK);
-    drawItemIconSimple(list, end, x, y, 3, 1, ITEM_OOT_NUT,                 gMmSave.inventory.items[ITS_MM_NUTS] == ITEM_MM_NUT);
-    drawItemIconSimple(list, end, x, y, 4, 1, ITEM_OOT_MAGIC_BEAN,          gMmSave.inventory.items[ITS_MM_BEANS] == ITEM_MM_MAGIC_BEAN);
+    dx = 0;
+    dy = 1;
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_BOMB,                gMmSave.inventory.items[ITS_MM_BOMBS] == ITEM_MM_BOMB);
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_BOMBCHU_10,          gMmSave.inventory.items[ITS_MM_BOMBCHU] == ITEM_MM_BOMBCHU);
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_STICK,               gMmSave.inventory.items[ITS_MM_STICKS] == ITEM_MM_STICK);
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_NUT,                 gMmSave.inventory.items[ITS_MM_NUTS] == ITEM_MM_NUT);
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_MAGIC_BEAN,          gMmSave.inventory.items[ITS_MM_BEANS] == ITEM_MM_MAGIC_BEAN);
 
     /* Row 3 */
-    drawItemIconSimple(list, end, x, y, 0, 2, ITEM_MM_POWDER_KEG | ICONF_MM,            gMmSave.inventory.items[ITS_MM_KEG] == ITEM_MM_POWDER_KEG);
-    drawItemIconSimple(list, end, x, y, 1, 2, ITEM_MM_PICTOGRAPH_BOX | ICONF_MM,        gMmSave.inventory.items[ITS_MM_PICTOBOX] == ITEM_MM_PICTOGRAPH_BOX);
-    drawItemIconSimple(list, end, x, y, 2, 2, ITEM_OOT_LENS,                            gMmSave.inventory.items[ITS_MM_LENS] == ITEM_MM_LENS_OF_TRUTH);
-    drawItemIconSimple(list, end, x, y, 3, 2, iconHookshot,                             gMmExtraItems.hookshot);
-    drawItemIconSimple(list, end, x, y, 4, 2, ITEM_MM_GREAT_FAIRY_SWORD | ICONF_MM,     gMmExtraItems.hammerGFS & 1);
+    dx = 0;
+    dy = 2;
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_POWDER_KEG | ICONF_MM,            gMmSave.inventory.items[ITS_MM_KEG] == ITEM_MM_POWDER_KEG);
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_PICTOGRAPH_BOX | ICONF_MM,        gMmSave.inventory.items[ITS_MM_PICTOBOX] == ITEM_MM_PICTOGRAPH_BOX);
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_OOT_LENS,                            gMmSave.inventory.items[ITS_MM_LENS] == ITEM_MM_LENS_OF_TRUTH);
+    drawItemIconSimple(list, end, x, y, dx++, dy, iconHookshot,                             gMmExtraItems.hookshot);
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_GREAT_FAIRY_SWORD | ICONF_MM,     gMmExtraItems.hammerGFS & 1);
+
+    /* Row 4 - Trade Items */
+    dx = 0;
+    dy = 4;
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_MOON_TEAR | ICONF_MM,             gMmExtraTrade.tradeObtained1 & (1 << XITEM_MM_TRADE1_MOON_TEAR));
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_DEED_LAND | ICONF_MM,             gMmExtraTrade.tradeObtained1 & (1 << XITEM_MM_TRADE1_DEED_LAND));
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_DEED_SWAMP | ICONF_MM,            gMmExtraTrade.tradeObtained1 & (1 << XITEM_MM_TRADE1_DEED_SWAMP));
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_DEED_MOUNTAIN | ICONF_MM,         gMmExtraTrade.tradeObtained1 & (1 << XITEM_MM_TRADE1_DEED_MOUNTAIN));
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_DEED_OCEAN | ICONF_MM,            gMmExtraTrade.tradeObtained1 & (1 << XITEM_MM_TRADE1_DEED_OCEAN));
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_ROOM_KEY | ICONF_MM,              gMmExtraTrade.tradeObtained2 & (1 << XITEM_MM_TRADE2_ROOM_KEY));
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_LETTER_TO_MAMA | ICONF_MM,        gMmExtraTrade.tradeObtained2 & (1 << XITEM_MM_TRADE2_LETTER_TO_MAMA));
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_LETTER_TO_KAFEI | ICONF_MM,       gMmExtraTrade.tradeObtained3 & (1 << XITEM_MM_TRADE3_LETTER_TO_KAFEI));
+    drawItemIconSimple(list, end, x, y, dx++, dy, ITEM_MM_PENDANT_OF_MEMORIES | ICONF_MM,   gMmExtraTrade.tradeObtained3 & (1 << XITEM_MM_TRADE3_PENDANT_OF_MEMORIES));
+
 }
 
 static void FileSelect_CustomFileInfoPrepareMm(FileSelectState* this, Gfx** list, void** end)
