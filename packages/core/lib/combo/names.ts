@@ -308,7 +308,7 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   OOT_MEDALLION_SPIRIT: "Spirit Medallion",
   OOT_MEDALLION_WATER: "Water Medallion",
   OOT_MILK: "Lon Lon Milk (OoT)",
-  OOT_NUT_UPGRADE: "Deku Nut Upgrade",
+  OOT_NUT_UPGRADE: "Deku Nut Upgrade (OoT)",
   OOT_NUTS_10: "10 Deku Nuts (OoT)",
   OOT_NUTS_5_ALT: "5 Deku Nuts (OoT)",
   OOT_NUTS_5: "5 Deku Nuts (OoT)",
@@ -457,7 +457,7 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   OOT_SPELL_FIRE: "Din's Fire (OoT)",
   OOT_SPELL_LOVE: "Nayru's Love (OoT)",
   OOT_SPELL_WIND: "Farore's Wind (OoT)",
-  OOT_STICK_UPGRADE: "Deku Stick Upgrade",
+  OOT_STICK_UPGRADE: "Deku Stick Upgrade (OoT)",
   OOT_STICK: "Deku Stick (OoT)",
   OOT_STICKS_10: "10 Deku Sticks (OoT)",
   OOT_STICKS_5: "5 Deku Sticks (OoT)",
@@ -827,7 +827,11 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   SHARED_SOUL_NPC_THIEVES: 'Soul of the Patrolling Thieves and their Chief',
   SHARED_SOUL_ENEMY_THIEVES: 'Soul of Fighting Thieves',
   MM_HAMMER: 'Megaton Hammer (MM)',
-  SHARED_HAMMER: 'Megaton Hammer'
+  SHARED_HAMMER: 'Megaton Hammer',
+  MM_STICK_UPGRADE: "Deku Stick Upgrade (MM)",
+  MM_NUT_UPGRADE: "Deku Nut Upgrade (MM)",
+  SHARED_STICK_UPGRADE: "Deku Stick Upgrade",
+  SHARED_NUT_UPGRADE: "Deku Nut Upgrade",
 };
 
 export function itemName(item: string) {

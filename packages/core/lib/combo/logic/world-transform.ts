@@ -68,6 +68,10 @@ const ITEM_POOL_SCARCE_NOLIMIT = new Set([
   Items.OOT_NUT_UPGRADE,
   Items.OOT_SWORD,
   Items.OOT_SWORD_GORON,
+  Items.MM_STICK_UPGRADE,
+  Items.MM_NUT_UPGRADE,
+  Items.SHARED_STICK_UPGRADE,
+  Items.SHARED_NUT_UPGRADE,
 ]);
 
 const ITEM_POOL_PLENTIFUL = new Set([
@@ -692,6 +696,13 @@ export class LogicPassWorldTransform {
       this.replaceItem(Items.OOT_STICKS_5,    Items.SHARED_STICKS_5);
       this.replaceItem(Items.OOT_STICKS_10,   Items.SHARED_STICKS_10);
       this.replaceItem(Items.MM_STICK,        Items.SHARED_STICK);
+
+      /* Upgrades */
+      this.replaceItem(Items.OOT_STICK_UPGRADE, Items.SHARED_STICK_UPGRADE);
+      this.replaceItem(Items.OOT_NUT_UPGRADE,   Items.SHARED_NUT_UPGRADE);
+    } else if (settings.sticksNutsUpgradesMm) {
+      this.addItem(Items.MM_STICK_UPGRADE, 2);
+      this.addItem(Items.MM_NUT_UPGRADE, 2);
     }
 
     if (settings.sharedHookshot) {

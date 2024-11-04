@@ -238,6 +238,11 @@ static int isItemAmbiguous(s16 gi)
     case GI_OOT_SONG_EMPTINESS:
     case GI_MM_SONG_EMPTINESS:
         return !(Config_Flag(CFG_SHARED_SONG_EMPTINESS) || !Config_Flag(CFG_OOT_SONG_EMPTINESS));
+    case GI_OOT_STICK_UPGRADE:
+    case GI_OOT_STICK_UPGRADE2:
+    case GI_MM_STICK_UPGRADE:
+    case GI_MM_STICK_UPGRADE2:
+        return Config_Flag(CFG_MM_UPGRADES_STICKS_NUTS) && !Config_Flag(CFG_SHARED_NUTS_STICKS);
     case GI_OOT_STICK:
     case GI_OOT_STICKS_5:
     case GI_OOT_STICKS_10:

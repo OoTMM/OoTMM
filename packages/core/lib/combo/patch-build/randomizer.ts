@@ -103,6 +103,8 @@ const SHARED_ITEMS_OOT = new Map([
   ['SHARED_TRAP_RUPOOR',      'OOT_TRAP_RUPOOR'],
   ['SHARED_SONG_EMPTINESS',   'OOT_SONG_EMPTINESS'],
   ['SHARED_HAMMER',           'OOT_HAMMER'],
+  ['SHARED_STICK_UPGRADE',    'OOT_STICK_UPGRADE'],
+  ['SHARED_NUT_UPGRADE',      'OOT_NUT_UPGRADE'],
 ]);
 
 const SHARED_ITEMS_MM = new Map([
@@ -176,6 +178,8 @@ const SHARED_ITEMS_MM = new Map([
   ['SHARED_TRAP_RUPOOR',      'MM_TRAP_RUPOOR'],
   ['SHARED_SONG_EMPTINESS',   'MM_SONG_EMPTINESS'],
   ['SHARED_HAMMER',           'MM_HAMMER'],
+  ['SHARED_STICK_UPGRADE',    'MM_STICK_UPGRADE'],
+  ['SHARED_NUT_UPGRADE',      'MM_NUT_UPGRADE'],
 ]);
 
 const SHARED_ITEMS = {
@@ -1025,7 +1029,8 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MM_PRE_ACTIVATED_OWL_ST: world.resolvedFlags.mmPreActivatedOwls.has('tower'),
     MM_WELL_OPEN: settings.beneathWell === 'open',
     MM_HAMMER: settings.hammerMm,
-    SHARED_HAMMER: settings.sharedHammer
+    SHARED_HAMMER: settings.sharedHammer,
+    MM_UPGRADES_STICKS_NUTS: settings.sticksNutsUpgradesMm,
   };
 
   for (const v in exprs) {

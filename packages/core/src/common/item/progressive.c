@@ -274,18 +274,32 @@ static s16 progressiveMagicMm(void)
     }
 }
 
-static s16 progressiveUpgradeNut(void)
+static s16 progressiveUpgradeNutOot(void)
 {
     if (gOotSave.inventory.upgrades.dekuNut < 2)
         return GI_OOT_NUT_UPGRADE;
     return GI_OOT_NUT_UPGRADE2;
 }
 
-static s16 progressiveUpgradeStick(void)
+static s16 progressiveUpgradeStickOot(void)
 {
     if (gOotSave.inventory.upgrades.dekuStick < 2)
         return GI_OOT_STICK_UPGRADE;
     return GI_OOT_STICK_UPGRADE2;
+}
+
+static s16 progressiveUpgradeNutMm(void)
+{
+    if (gMmSave.inventory.upgrades.dekuNut < 2)
+        return GI_MM_NUT_UPGRADE;
+    return GI_MM_NUT_UPGRADE2;
+}
+
+static s16 progressiveUpgradeStickMm(void)
+{
+    if (gMmSave.inventory.upgrades.dekuStick < 2)
+        return GI_MM_STICK_UPGRADE;
+    return GI_MM_STICK_UPGRADE2;
 }
 
 static s16 progressiveSongLullaby(void)
@@ -446,11 +460,19 @@ s16 comboProgressive(s16 gi, int ovflags)
         break;
     case GI_OOT_NUT_UPGRADE:
     case GI_OOT_NUT_UPGRADE2:
-        gi = progressiveUpgradeNut();
+        gi = progressiveUpgradeNutOot();
         break;
     case GI_OOT_STICK_UPGRADE:
     case GI_OOT_STICK_UPGRADE2:
-        gi = progressiveUpgradeStick();
+        gi = progressiveUpgradeStickOot();
+        break;
+    case GI_MM_NUT_UPGRADE:
+    case GI_MM_NUT_UPGRADE2:
+        gi = progressiveUpgradeNutMm();
+        break;
+    case GI_MM_STICK_UPGRADE:
+    case GI_MM_STICK_UPGRADE2:
+        gi = progressiveUpgradeStickMm();
         break;
     case GI_OOT_RUTO_LETTER:
         gi = progressiveRutoLetter();

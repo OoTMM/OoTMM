@@ -208,6 +208,7 @@ export const CONFVARS = [
   'MM_WELL_OPEN',
   'MM_HAMMER',
   'SHARED_HAMMER',
+  'MM_UPGRADES_STICKS_NUTS',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

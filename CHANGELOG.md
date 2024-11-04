@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add MM stick/nut upgrades as items in the pool.
 - Add MQ crates.
 - Add the Megaton Hammer to Majora's Mask.
 - Add butterfly shuffle, for both games.

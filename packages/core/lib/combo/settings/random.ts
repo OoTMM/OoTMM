@@ -366,6 +366,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
   case 0:
     break;
   case 1:
+    base.sticksNutsUpgradesMm = true; /* Required for shared nuts & sticks */
     base.sharedNutsSticks = true;
     base.sharedBows = true;
     base.sharedBombBags = true;
@@ -525,6 +526,7 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
   base.blastMaskOot = booleanWeighted(random, 0.25);
   base.stoneMaskOot = booleanWeighted(random, 0.25);
   base.hammerMm = booleanWeighted(random, 0.25);
+  base.sticksNutsUpgradesMm = booleanWeighted(random, 0.5);
 
   /* Boots - 50% disabled, 25% enabled, 25% individual */
   switch (randomInt(random, 4)) {

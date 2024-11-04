@@ -4,6 +4,7 @@ import { makeTestSeed } from '../helper';
 
 test("Can make a seed - Shared Items", async () => {
   const res = await makeTestSeed("SHARED-ITEMS", {
+    sticksNutsUpgradesMm: true,
     sharedBows: true,
     sharedBombBags: true,
     sharedMagic: true,

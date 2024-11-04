@@ -14,7 +14,7 @@
 #define IA_MM_BOMBS             0x05
 #define IA_OOT_NUTS             0x06
 #define IA_MM_NUTS              0x07
-#define IA_NUT_UPGRADE          0x08
+#define IA_OOT_NUT_UPGRADE      0x08
 #define IA_OOT_BOMBCHU          0x09
 #define IA_MM_BOMBCHU           0x0a
 #define IA_OOT_ARROWS           0x0b
@@ -27,7 +27,7 @@
 #define IA_MM_NORMAL            0x12
 #define IA_OOT_STICKS           0x13
 #define IA_MM_STICKS            0x14
-#define IA_STICK_UPGRADE        0x15
+#define IA_OOT_STICK_UPGRADE    0x15
 #define IA_OOT_HOOKSHOT         0x16
 #define IA_MM_HOOKSHOT          0x17
 #define IA_OOT_TRADE_CHILD      0x18
@@ -106,6 +106,8 @@
 #define IA_OOT_SONG_EMPTINESS   0x61
 #define IA_OOT_SWORD_EXTRA      0x62
 #define IA_MM_GFS_HAMMER        0x63
+#define IA_MM_STICK_UPGRADE     0x64
+#define IA_MM_NUT_UPGRADE       0x65
 #define IA_NONE                 0xff
 
 #define ITT_NONE        0x00

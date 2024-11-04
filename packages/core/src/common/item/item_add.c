@@ -420,13 +420,19 @@ static int addItemNutsMm(PlayState* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static int addItemNutsUpgrade(PlayState* play, u8 itemId, s16 gi, u16 param)
+static int addItemNutsUpgradeOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     if (gOotSave.inventory.upgrades.dekuNut < param)
         gOotSave.inventory.upgrades.dekuNut = param;
-    if (Config_Flag(CFG_SHARED_NUTS_STICKS))
-        gMmSave.inventory.upgrades.dekuNut = gOotSave.inventory.upgrades.dekuNut;
     addNutsOot(kMaxNuts[param]);
+    return 0;
+}
+
+static int addItemNutsUpgradeMm(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    if (gMmSave.inventory.upgrades.dekuNut < param)
+        gMmSave.inventory.upgrades.dekuNut = param;
+    addNutsMm(kMaxNuts[param]);
     return 0;
 }
 
@@ -652,13 +658,19 @@ static int addItemSticksMm(PlayState* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
-static int addItemSticksUpgrade(PlayState* play, u8 itemId, s16 gi, u16 param)
+static int addItemSticksUpgradeOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     if (gOotSave.inventory.upgrades.dekuStick < param)
         gOotSave.inventory.upgrades.dekuStick = param;
-    if (Config_Flag(CFG_SHARED_NUTS_STICKS))
-        gMmSave.inventory.upgrades.dekuStick = gOotSave.inventory.upgrades.dekuStick;
     addSticksOot(kMaxSticks[param]);
+    return 0;
+}
+
+static int addItemSticksUpgradeMm(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    if (gMmSave.inventory.upgrades.dekuStick < param)
+        gMmSave.inventory.upgrades.dekuStick = param;
+    addSticksMm(kMaxSticks[param]);
     return 0;
 }
 
@@ -1807,7 +1819,7 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemBombsMm,
     addItemNutsOot,
     addItemNutsMm,
-    addItemNutsUpgrade,
+    addItemNutsUpgradeOot,
     addItemBombchuOot,
     addItemBombchuMm,
     addItemArrowsOot,
@@ -1820,7 +1832,7 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemNormalMm,
     addItemSticksOot,
     addItemSticksMm,
-    addItemSticksUpgrade,
+    addItemSticksUpgradeOot,
     addItemHookshotOot,
     addItemHookshotMm,
     addItemTradeOotChild,
@@ -1899,6 +1911,8 @@ static const AddItemFunc kAddItemHandlers[] = {
     addElegyOot,
     addItemSwordExtraOot,
     addItemGFSHammer,
+    addItemSticksUpgradeMm,
+    addItemNutsUpgradeMm,
 };
 
 extern const u8 kAddItemFuncs[];
@@ -2021,6 +2035,10 @@ static const SharedItem kSimpleSharedItems[] = {
     { CFG_SHARED_SOULS_NPC, GI_OOT_SOUL_NPC_THIEVES, GI_MM_SOUL_NPC_THIEVES },
     { CFG_SHARED_SOULS_ENEMY, GI_OOT_SOUL_ENEMY_THIEVES, GI_MM_SOUL_ENEMY_THIEVES },
     { CFG_SHARED_HAMMER, GI_OOT_HAMMER, GI_MM_HAMMER },
+    { CFG_SHARED_NUTS_STICKS, GI_OOT_STICK_UPGRADE, GI_MM_STICK_UPGRADE },
+    { CFG_SHARED_NUTS_STICKS, GI_OOT_STICK_UPGRADE2, GI_MM_STICK_UPGRADE2 },
+    { CFG_SHARED_NUTS_STICKS, GI_OOT_NUT_UPGRADE,  GI_MM_NUT_UPGRADE },
+    { CFG_SHARED_NUTS_STICKS, GI_OOT_NUT_UPGRADE2, GI_MM_NUT_UPGRADE2 },
 };
 
 static int addItem(PlayState* play, s16 gi)

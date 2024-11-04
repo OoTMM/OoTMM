@@ -1548,6 +1548,14 @@ export const SETTINGS = [{
   description: 'Randomize the content of the bottles',
   default: false
 }, {
+  key: 'sticksNutsUpgradesMm',
+  name: 'Sticks & Nuts Upgrades in MM',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Enables sticks and nuts upgrades in MM',
+  default: false,
+  cond: hasMM,
+}, {
   key: 'sunSongMm',
   name: 'Sun\'s Song in MM',
   category: 'items.extensions',
@@ -1941,7 +1949,7 @@ export const SETTINGS = [{
   category: 'items.shared',
   type: 'boolean',
   default: false,
-  cond: hasOoTMM,
+  cond: (s: any) => hasOoTMM(s) && s.sticksNutsUpgradesMm,
 }, {
   key: 'sharedBows',
   name: 'Shared Bows',
