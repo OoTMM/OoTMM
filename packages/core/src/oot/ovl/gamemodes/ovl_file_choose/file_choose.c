@@ -760,10 +760,10 @@ static s16 sQuestItemFlags[] = {
 };
 
 static s16 sNamePrimColors[2][3] = { { 255, 255, 255 }, { 100, 100, 100 } };
-static void* sHeartTextures[] = { gHeartFullTex, gDefenseHeartFullTex };
 
-static s16 sHeartPrimColors[2][3] = { { 255, 70, 50 }, { 200, 0, 0 } };
-static s16 sHeartEnvColors[2][3] = { { 50, 40, 60 }, { 255, 255, 255 } };
+void* gHeartTextures[] = { gHeartFullTex, gDefenseHeartFullTex };
+s16 gHeartPrimColors[2][3] = { { 255, 70, 50 }, { 200, 0, 0 } };
+s16 gHeartEnvColors[2][3] = { { 50, 40, 60 }, { 255, 255, 255 } };
 
 void FileSelect_DrawFileInfo(GameState* thisx, s16 fileIndex, s16 isActive) {
     FileSelectState* this = (FileSelectState*)thisx;
@@ -815,17 +815,17 @@ void FileSelect_DrawFileInfo(GameState* thisx, s16 fileIndex, s16 isActive) {
         gDPPipeSync(POLY_OPA_DISP++);
         gDPSetCombineLERP(POLY_OPA_DISP++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, PRIMITIVE, 0,
                           PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, PRIMITIVE, 0);
-        gDPSetPrimColor(POLY_OPA_DISP++, 0x00, 0x00, sHeartPrimColors[heartType][0], sHeartPrimColors[heartType][1],
-                        sHeartPrimColors[heartType][2], this->fileInfoAlpha[fileIndex]);
-        gDPSetEnvColor(POLY_OPA_DISP++, sHeartEnvColors[heartType][0], sHeartEnvColors[heartType][1],
-                       sHeartEnvColors[heartType][2], 255);
+        gDPSetPrimColor(POLY_OPA_DISP++, 0x00, 0x00, gHeartPrimColors[heartType][0], gHeartPrimColors[heartType][1],
+                        gHeartPrimColors[heartType][2], this->fileInfoAlpha[fileIndex]);
+        gDPSetEnvColor(POLY_OPA_DISP++, gHeartEnvColors[heartType][0], gHeartEnvColors[heartType][1],
+                       gHeartEnvColors[heartType][2], 255);
 
         k = this->healthCapacities[fileIndex] / 0x10;
 
         // draw hearts
         for (vtxOffset = 0, j = 0; j < k; j++, vtxOffset += 4) {
             gSPVertex(POLY_OPA_DISP++, &this->windowContentVtx[D_8081284C[fileIndex] + vtxOffset] + 0x30, 4, 0);
-            POLY_OPA_DISP = FileSelect_QuadTextureIA8(POLY_OPA_DISP, sHeartTextures[heartType], 0x10, 0x10, 0);
+            POLY_OPA_DISP = FileSelect_QuadTextureIA8(POLY_OPA_DISP, gHeartTextures[heartType], 0x10, 0x10, 0);
         }
 
         gDPPipeSync(POLY_OPA_DISP++);

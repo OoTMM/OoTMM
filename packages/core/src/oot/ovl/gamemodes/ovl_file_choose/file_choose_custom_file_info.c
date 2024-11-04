@@ -102,7 +102,7 @@ static s16 drawDigit(Gfx** list, s16 x, s16 y, int digit)
 
     tex = (void*)(((u32)&gAmmoDigit0Tex) + 0x40 * digit);
     quadIA8(list, tex, 8, 8, x, y, 1.0f);
-    return 8;
+    return 6;
 }
 
 static void drawNumber(Gfx** list, s16 x, s16 y, int num, int paddingZeroes)
@@ -142,7 +142,7 @@ static void drawNumber(Gfx** list, s16 x, s16 y, int num, int paddingZeroes)
             x += drawDigit(list, x, y, digit);
         }
 
-        if (!num)
+        if (!divisor)
             break;
     }
 }
@@ -205,6 +205,45 @@ static float drawItemIcon24(Gfx** list, void** end, s16 x, s16 y, u16 id, int no
     /* Draw */
     quadRGBA8(list, tex, 24, 24, x, y, scale);
     return ICON_SIZE;
+}
+
+static void drawInfoHeart(Gfx** list, int x, int y, int isDefense, int count)
+{
+    gDPSetCombineLERP((*list)++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, PRIMITIVE, 0, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, PRIMITIVE, 0);
+    gDPSetPrimColor((*list)++, 0, 0, gHeartPrimColors[isDefense][0], gHeartPrimColors[isDefense][1], gHeartPrimColors[isDefense][2], 255);
+    gDPSetEnvColor((*list)++, gHeartEnvColors[isDefense][0], gHeartEnvColors[isDefense][1], gHeartEnvColors[isDefense][2], 255);
+    quadIA8(list, &gHeartFullTex, 16, 16, x, y, ICON_SIZE / 16.f);
+    gDPSetCombineMode((*list)++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
+    gDPSetPrimColor((*list)++, 0, 0, 255, 255, 255, 255);
+    drawNumber(list, x + ICON_SIZE - 1, y + 3, count, 2);
+}
+
+static void drawInfoRupees(Gfx** list, int x, int y, int index, int count)
+{
+    u32 c;
+
+    if (index == 0)
+        return;
+
+    c = kRupeeColor[index];
+    gDPSetPrimColor((*list)++, 0, 0, (c >> 24) & 0xff, (c >> 16) & 0xff, (c >> 8) & 0xff, 255);
+    quadIA8(list, &gRupeeCounterIconTex, 16, 16, x, y, ICON_SIZE / 16.f);
+    gDPSetPrimColor((*list)++, 0, 0, 255, 255, 255, 255);
+    drawNumber(list, x + ICON_SIZE - 1, y + 3, count, kRupeeDigits[index]);
+}
+
+static void FileSelect_CustomFileInfoPrepareOotInfos(FileSelectState* this, Gfx** list, void** end, int x, int y)
+{
+    /* Draw heart */
+    drawInfoHeart(list, x, y, !gOotSave.playerData.doubleDefense, gOotSave.playerData.healthCapacity / 0x10);
+    drawInfoRupees(list, x, y + ICON_SIZE, Wallet_IndexOot(), gOotSave.playerData.rupees);
+}
+
+static void FileSelect_CustomFileInfoPrepareMmInfos(FileSelectState* this, Gfx** list, void** end, int x, int y)
+{
+    /* Draw heart */
+    drawInfoHeart(list, x, y, !gMmSave.playerData.doubleDefense, gMmSave.playerData.healthCapacity / 0x10);
+    drawInfoRupees(list, x, y + ICON_SIZE, Wallet_IndexMm(), gMmSave.playerData.rupees);
 }
 
 static void FileSelect_CustomFileInfoPrepareOotMedsStones(FileSelectState* this, Gfx** list, void** end, int x, int y)
@@ -324,8 +363,9 @@ static void FileSelect_CustomFileInfoPrepareOotInventory(FileSelectState* this, 
 
 static void FileSelect_CustomFileInfoPrepareOot(FileSelectState* this, Gfx** list, void** end)
 {
-    FileSelect_CustomFileInfoPrepareOotMedsStones(this, list, end, 80, 94);
-    FileSelect_CustomFileInfoPrepareOotInventory(this, list, end, 130, 94);
+    FileSelect_CustomFileInfoPrepareOotInfos(this, list, end, 56, 94);
+    FileSelect_CustomFileInfoPrepareOotMedsStones(this, list, end, 96, 94);
+    FileSelect_CustomFileInfoPrepareOotInventory(this, list, end, 140, 94);
 }
 
 static void FileSelect_CustomFileInfoPrepareMmRemains(FileSelectState* this, Gfx** list, void** end, int x, int y)
@@ -443,8 +483,9 @@ static void FileSelect_CustomFileInfoPrepareMmInventory(FileSelectState* this, G
 
 static void FileSelect_CustomFileInfoPrepareMm(FileSelectState* this, Gfx** list, void** end)
 {
-    FileSelect_CustomFileInfoPrepareMmRemains(this, list, end, 80, 94);
-    FileSelect_CustomFileInfoPrepareMmInventory(this, list, end, 130, 94);
+    FileSelect_CustomFileInfoPrepareMmInfos(this, list, end, 56, 94);
+    FileSelect_CustomFileInfoPrepareMmRemains(this, list, end, 96, 94);
+    FileSelect_CustomFileInfoPrepareMmInventory(this, list, end, 140, 94);
 }
 
 void FileSelect_CustomFileInfoPrepare(FileSelectState* this, int slot)

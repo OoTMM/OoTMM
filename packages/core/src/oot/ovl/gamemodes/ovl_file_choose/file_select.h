@@ -237,4 +237,8 @@ extern Vtx gOptionsDividerSoundVtx[];
 extern Vtx gOptionsDividerZTargetVtx[];
 extern Vtx gOptionsDividerBrightnessVtx[];
 
+extern void* gHeartTextures[];
+extern s16 gHeartPrimColors[][3];
+extern s16 gHeartEnvColors[][3];
+
 #endif
