@@ -278,7 +278,7 @@ void Player_UpdateWrapper(Actor_Player* this, PlayState* play)
     Dpad_Update(play);
     Dpad_Use(play, DPF_EQUIP);
 
-    if (!(this->state & (PLAYER_ACTOR_STATE_CLIMB | PLAYER_ACTOR_STATE_CLIMB2)))
+    if (!(this->state & (PLAYER_ACTOR_STATE_CLIMB | PLAYER_ACTOR_STATE_CLIMB2)) || Message_GetState(&play->msgCtx) == TEXT_STATE_NONE)
     {
         if (g.delayedSwitchFlag != 0xff)
         {
