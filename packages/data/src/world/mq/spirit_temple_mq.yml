@@ -2,7 +2,7 @@
   dungeon: Spirit
   exits:
     "Desert Colossus Spirit Exit": "true"
-    "Spirit Temple Child Side": "is_child || time_travel_at_will"
+    "Spirit Temple Child Side": "is_child"
     "Spirit Temple Statue": "can_longshot && has_bombchu && can_lift_silver"
   events:
     SPIRIT_LOBBY_BOULDERS: "has_explosives_or_hammer"
