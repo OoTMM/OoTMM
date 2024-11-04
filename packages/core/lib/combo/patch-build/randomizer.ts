@@ -1031,6 +1031,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MM_HAMMER: settings.hammerMm,
     SHARED_HAMMER: settings.sharedHammer,
     MM_UPGRADES_STICKS_NUTS: settings.sticksNutsUpgradesMm,
+    OOT_SHUFFLE_EGGS: settings.eggShuffle,
   };
 
   for (const v in exprs) {

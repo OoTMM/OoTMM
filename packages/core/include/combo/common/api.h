@@ -231,6 +231,12 @@ void Sram_OpenSave(void*, void*);
 void Sram_CopySave(void*, void*);
 #endif
 
+extern const u32 kRupeeColor[];
+extern const u8 kRupeeDigits[];
+
+int Wallet_IndexOot(void);
+int Wallet_IndexMm(void);
+
 void Play_Init(PlayState*);
 void Play_Update(PlayState*);
 

@@ -14,13 +14,35 @@ u32 gInterfaceRupeeColor;
 # define HAS_WALLET_BOTTOMLESS()    (!!(gMmExtraFlags3.bottomlessWallet))
 #endif
 
-static const u32 kRupeeColor[] = {
+int Wallet_IndexOot(void)
+{
+    if (!gOotExtraFlags.childWallet)
+        return 0;
+    if (gOotExtraFlags.bottomlessWallet)
+        return 5;
+    return gOotSave.inventory.upgrades.wallet + 1;
+}
+
+int Wallet_IndexMm(void)
+{
+    if (!gMmExtraFlags2.childWallet)
+        return 0;
+    if (gMmExtraFlags3.bottomlessWallet)
+        return 5;
+    return gMmSave.inventory.upgrades.wallet + 1;
+}
+
+const u32 kRupeeColor[] = {
     0x00000000, /* invisible - no wallet */
     0xc8ff6400, /* green     - child wallet */
     0x8282ff00, /* blue      - adult wallet */
     0xff646400, /* red       - giant wallet */
     0xff5aff00, /* purple    - colossal wallet */
     0xe0e0e000, /* silver    - bottomless wallet */
+};
+
+const u8 kRupeeDigits[] = {
+    0, 2, 3, 3, 3, 4,
 };
 
 static void updateRupeeColor(void)

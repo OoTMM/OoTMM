@@ -760,10 +760,10 @@ static s16 sQuestItemFlags[] = {
 };
 
 static s16 sNamePrimColors[2][3] = { { 255, 255, 255 }, { 100, 100, 100 } };
-static void* sHeartTextures[] = { gHeartFullTex, gDefenseHeartFullTex };
 
-static s16 sHeartPrimColors[2][3] = { { 255, 70, 50 }, { 200, 0, 0 } };
-static s16 sHeartEnvColors[2][3] = { { 50, 40, 60 }, { 255, 255, 255 } };
+void* gHeartTextures[] = { gHeartFullTex, gDefenseHeartFullTex };
+s16 gHeartPrimColors[2][3] = { { 255, 70, 50 }, { 200, 0, 0 } };
+s16 gHeartEnvColors[2][3] = { { 50, 40, 60 }, { 255, 255, 255 } };
 
 void FileSelect_DrawFileInfo(GameState* thisx, s16 fileIndex, s16 isActive) {
     FileSelectState* this = (FileSelectState*)thisx;
@@ -815,17 +815,17 @@ void FileSelect_DrawFileInfo(GameState* thisx, s16 fileIndex, s16 isActive) {
         gDPPipeSync(POLY_OPA_DISP++);
         gDPSetCombineLERP(POLY_OPA_DISP++, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, PRIMITIVE, 0,
                           PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, PRIMITIVE, 0);
-        gDPSetPrimColor(POLY_OPA_DISP++, 0x00, 0x00, sHeartPrimColors[heartType][0], sHeartPrimColors[heartType][1],
-                        sHeartPrimColors[heartType][2], this->fileInfoAlpha[fileIndex]);
-        gDPSetEnvColor(POLY_OPA_DISP++, sHeartEnvColors[heartType][0], sHeartEnvColors[heartType][1],
-                       sHeartEnvColors[heartType][2], 255);
+        gDPSetPrimColor(POLY_OPA_DISP++, 0x00, 0x00, gHeartPrimColors[heartType][0], gHeartPrimColors[heartType][1],
+                        gHeartPrimColors[heartType][2], this->fileInfoAlpha[fileIndex]);
+        gDPSetEnvColor(POLY_OPA_DISP++, gHeartEnvColors[heartType][0], gHeartEnvColors[heartType][1],
+                       gHeartEnvColors[heartType][2], 255);
 
         k = this->healthCapacities[fileIndex] / 0x10;
 
         // draw hearts
         for (vtxOffset = 0, j = 0; j < k; j++, vtxOffset += 4) {
             gSPVertex(POLY_OPA_DISP++, &this->windowContentVtx[D_8081284C[fileIndex] + vtxOffset] + 0x30, 4, 0);
-            POLY_OPA_DISP = FileSelect_QuadTextureIA8(POLY_OPA_DISP, sHeartTextures[heartType], 0x10, 0x10, 0);
+            POLY_OPA_DISP = FileSelect_QuadTextureIA8(POLY_OPA_DISP, gHeartTextures[heartType], 0x10, 0x10, 0);
         }
 
         gDPPipeSync(POLY_OPA_DISP++);
@@ -1063,8 +1063,14 @@ void FileSelect_DrawWindowContents(GameState* thisx) {
         gSP1Quadrangle(POLY_OPA_DISP++, 16, 18, 19, 17, 0);
     }
 
+    /* Draw custom file info */
+    if (this->menuMode == FS_MENU_MODE_SELECT && this->selectMode == SM_CONFIRM_FILE && this->confirmButtonAlpha[0]) {
+        FileSelect_CustomFileInfoDraw(this);
+    }
+
     gDPPipeSync(POLY_OPA_DISP++);
     gDPSetCombineMode(POLY_OPA_DISP++, G_CC_MODULATEIDECALA, G_CC_MODULATEIDECALA);
+
 
     CLOSE_DISPS();
 }
@@ -1244,8 +1250,7 @@ void FileSelect_MoveSelectedFileToTop(GameState* thisx) {
 void FileSelect_FadeInFileInfo(GameState* thisx) {
     FileSelectState* this = (FileSelectState*)thisx;
 
-    this->fileInfoAlpha[this->buttonIndex] += 25;
-    this->nameBoxAlpha[this->buttonIndex] -= 50;
+    this->confirmButtonAlpha[FS_BTN_CONFIRM_YES] += 25;
 
     if (this->nameBoxAlpha[this->buttonIndex] <= 0) {
         this->nameBoxAlpha[this->buttonIndex] = 0;
@@ -1254,13 +1259,14 @@ void FileSelect_FadeInFileInfo(GameState* thisx) {
     this->actionTimer--;
 
     if (this->actionTimer == 0) {
-        this->fileInfoAlpha[this->buttonIndex] = 200;
+        this->game = 0;
+        FileSelect_CustomFileInfoPrepare(this, this->selectedFileIndex);
+        this->confirmButtonAlpha[FS_BTN_CONFIRM_YES] = 200;
         this->actionTimer = 8;
         this->selectMode++;
     }
 
-    this->confirmButtonAlpha[FS_BTN_CONFIRM_YES] = this->confirmButtonAlpha[FS_BTN_CONFIRM_QUIT] =
-        this->fileInfoAlpha[this->buttonIndex];
+    this->confirmButtonAlpha[FS_BTN_CONFIRM_QUIT] = this->confirmButtonAlpha[FS_BTN_CONFIRM_YES];
 }
 
 /**
@@ -1270,6 +1276,12 @@ void FileSelect_FadeInFileInfo(GameState* thisx) {
 void FileSelect_ConfirmFile(GameState* thisx) {
     FileSelectState* this = (FileSelectState*)thisx;
     Input* input = &this->state.input[0];
+
+    if (CHECK_BTN_ANY(input->rel.button, BTN_L | BTN_CUP)) {
+        Audio_PlaySfxGeneral(NA_SE_SY_FSEL_DECIDE_L, &gSfxDefaultPos, 4, &gSfxDefaultFreqAndVolScale, &gSfxDefaultFreqAndVolScale, &gSfxDefaultReverb);
+        this->game ^= 1;
+        FileSelect_CustomFileInfoPrepare(this, this->selectedFileIndex);
+    }
 
     if (CHECK_BTN_ALL(input->press.button, BTN_START) || (CHECK_BTN_ALL(input->press.button, BTN_A))) {
         if (this->confirmButtonIndex == FS_BTN_CONFIRM_YES) {
@@ -1301,20 +1313,18 @@ void FileSelect_ConfirmFile(GameState* thisx) {
 void FileSelect_FadeOutFileInfo(GameState* thisx) {
     FileSelectState* this = (FileSelectState*)thisx;
 
-    this->fileInfoAlpha[this->buttonIndex] -= 25;
-    this->nameBoxAlpha[this->buttonIndex] += 25;
+    this->confirmButtonAlpha[FS_BTN_CONFIRM_YES] -= 25;
     this->actionTimer--;
 
     if (this->actionTimer == 0) {
         this->buttonYOffsets[FS_BTN_SELECT_YES] = this->buttonYOffsets[FS_BTN_SELECT_QUIT] = 0;
-        this->nameBoxAlpha[this->buttonIndex] = 200;
-        this->fileInfoAlpha[this->buttonIndex] = 0;
+        this->confirmButtonAlpha[FS_BTN_CONFIRM_YES] = 0;
         this->nextTitleLabel = FS_TITLE_SELECT_FILE;
         this->actionTimer = 8;
         this->selectMode++;
     }
 
-    this->confirmButtonAlpha[0] = this->confirmButtonAlpha[1] = this->fileInfoAlpha[this->buttonIndex];
+    this->confirmButtonAlpha[FS_BTN_CONFIRM_QUIT] = this->confirmButtonAlpha[FS_BTN_CONFIRM_YES];
 }
 
 /**
@@ -1779,6 +1789,9 @@ void FileSelect_InitContext(GameState* thisx) {
 }
 
 void FileSelect_Destroy(GameState* thisx) {
+    FileSelectState* this = (FileSelectState*)thisx;
+
+    FileSelect_CustomFileInfoFree(this);
 }
 
 #define VROM_TITLE_STATIC       0x01a02000
@@ -1797,6 +1810,8 @@ void FileSelect_Init(GameState* thisx) {
     size = comboDmaLoadFile(NULL, VROM_PARAMETER_STATIC);
     this->parameterSegment = GAME_STATE_ALLOC(&this->state, size);
     comboDmaLoadFile(this->parameterSegment, VROM_PARAMETER_STATIC);
+
+    FileSelect_CustomFileInfoInit(this);
 
     Matrix_Init(&this->state);
     View_Init(&this->view, this->state.gfxCtx);
