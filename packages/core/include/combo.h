@@ -110,6 +110,9 @@ void comboInitData(void);
 void comboItemIcon(void* dst, int itemId);
 void comboLoadMmIcon(void* dst, u32 iconBank, int iconId);
 
+void LoadIconItem24Oot(void* dst, int id);
+void LoadIconItem24Mm(void* dst, int id);
+
 #if defined(GAME_OOT)
 extern u16 gBlastMaskDelayAcc;
 #endif

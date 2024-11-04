@@ -50,6 +50,20 @@ static void* allocItemIconMm(void** end, int itemId)
     return buf;
 }
 
+static void* allocIconItem24Oot(void** end, int id)
+{
+    void* buf = allocBuf(end, 0x900);
+    LoadIconItem24Oot(buf, id);
+    return buf;
+}
+
+static void* allocIconItem24Mm(void** end, int id)
+{
+    void* buf = allocBuf(end, 0x900);
+    LoadIconItem24Mm(buf, id);
+    return buf;
+}
+
 static void quadRGBA8(Gfx** gfx, void* tex, s16 w, s16 h, s16 x, s16 y, float scale)
 {
     float revScale;
@@ -100,6 +114,54 @@ static void drawItemIconSimple(Gfx** list, void** end, s16 x, s16 y, s16 dx, s16
     if (!noDim)
         id |= ICONF_DIM;
     drawItemIcon(list, end, x, y, dx, dy, id);
+}
+
+static void drawItemIcon24(Gfx** list, void** end, float scale, s16 x, s16 y, s16 dx, s16 dy, u16 id, int noDim)
+{
+    u16 itemId;
+    void* tex;
+
+    scale *= 0.66667f;
+    if (id == ICON_NONE)
+        return;
+
+    itemId = id & 0x3fff;
+    if (!(id & ICONF_MM))
+        tex = allocIconItem24Oot(end, itemId);
+    else
+        tex = allocIconItem24Mm(end, itemId);
+
+    /* Dim */
+    if (!noDim)
+    {
+        gDPSetPrimColor((*list)++, 0, 0, 30, 30, 30, 128);
+    }
+    else
+    {
+        gDPSetPrimColor((*list)++, 0, 0, 255, 255, 255, 255);
+    }
+
+    /* Draw */
+    quadRGBA8(list, tex, 24, 24, x + 24 * dx * scale, y + 24 * dy * scale, scale);
+}
+
+static void FileSelect_CustomFileInfoPrepareOotMedsStones(FileSelectState* this, Gfx** list, void** end, int x, int y)
+{
+    static const float scale = 0.75f;
+    static const float sqrt2_2 = 0.70710677f;
+
+    /* Medallions */
+    drawItemIcon24(list, end, scale, x, y, 1, 0, 5, gOotSave.inventory.quest.medallionLight);
+    drawItemIcon24(list, end, scale, x, y + sqrt2_2 * scale * 16, 0, 0, 4, gOotSave.inventory.quest.medallionShadow);
+    drawItemIcon24(list, end, scale, x, y + sqrt2_2 * scale * 16, 2, 0, 0, gOotSave.inventory.quest.medallionForest);
+    drawItemIcon24(list, end, scale, x, y + sqrt2_2 * scale * 16, 0, 1, 3, gOotSave.inventory.quest.medallionSpirit);
+    drawItemIcon24(list, end, scale, x, y + sqrt2_2 * scale * 16, 2, 1, 1, gOotSave.inventory.quest.medallionFire);
+    drawItemIcon24(list, end, scale, x, y + sqrt2_2 * scale * 16 * 2, 1, 1, 2, gOotSave.inventory.quest.medallionWater);
+
+    /* Stones */
+    drawItemIcon24(list, end, scale, x, y, 0, 4, 6, gOotSave.inventory.quest.stoneEmerald);
+    drawItemIcon24(list, end, scale, x, y, 1, 4, 7, gOotSave.inventory.quest.stoneRuby);
+    drawItemIcon24(list, end, scale, x, y, 2, 4, 8, gOotSave.inventory.quest.stoneSapphire);
 }
 
 static void FileSelect_CustomFileInfoPrepareOotInventory(FileSelectState* this, Gfx** list, void** end, int x, int y)
@@ -160,6 +222,7 @@ static void FileSelect_CustomFileInfoPrepareOotInventory(FileSelectState* this, 
 
 static void FileSelect_CustomFileInfoPrepareOot(FileSelectState* this, Gfx** list, void** end)
 {
+    FileSelect_CustomFileInfoPrepareOotMedsStones(this, list, end, 80, 94);
     FileSelect_CustomFileInfoPrepareOotInventory(this, list, end, 130, 94);
 }
 
@@ -197,7 +260,6 @@ static void FileSelect_CustomFileInfoPrepareMmInventory(FileSelectState* this, G
     drawItemIconSimple(list, end, x, y, 2, 2, ITEM_OOT_LENS,                            gMmSave.inventory.items[ITS_MM_LENS] == ITEM_MM_LENS_OF_TRUTH);
     drawItemIconSimple(list, end, x, y, 3, 2, iconHookshot,                             gMmExtraItems.hookshot);
     drawItemIconSimple(list, end, x, y, 4, 2, ITEM_MM_GREAT_FAIRY_SWORD | ICONF_MM,     gMmExtraItems.hammerGFS & 1);
-
 }
 
 static void FileSelect_CustomFileInfoPrepareMm(FileSelectState* this, Gfx** list, void** end)
