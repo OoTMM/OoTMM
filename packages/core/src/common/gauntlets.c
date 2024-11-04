@@ -6,14 +6,14 @@ const Vtx sGauntletVtx[] = {
 #include "data/gauntlets.vtx.inc"
 };
 
-const u32 gLinkAdultGauntletPlate1Tex = 0x08000000 | CUSTOM_KEEP_GAUNTLET1_TEXTURE;
+const u32 gCustomLinkAdultGauntletPlate1Tex = 0x08000000 | CUSTOM_KEEP_GAUNTLET1_TEXTURE;
 
-Gfx gLinkAdultLeftGauntletPlate1DL[] = {
+Gfx gCustomLinkAdultLeftGauntletPlate1DL[] = {
     gsSPMatrix(0x0D0002C0, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW),
     gsDPPipeSync(),
     gsDPSetTextureLUT(G_TT_NONE),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
-    gsDPLoadTextureBlock(gLinkAdultGauntletPlate1Tex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gsDPLoadTextureBlock(gCustomLinkAdultGauntletPlate1Tex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD),
     gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, COMBINED, 0, ENVIRONMENT, 0, 0, 0, 0, COMBINED),
     gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_TEX_EDGE2),
@@ -30,18 +30,24 @@ Gfx gLinkAdultLeftGauntletPlate1DL[] = {
     gsSPEndDisplayList(),
 };
 
-const u32 gLinkAdultGauntletPlate2Tex = 0x08000000 | CUSTOM_KEEP_GAUNTLET2_TEXTURE;
+const u32 gCustomLinkAdultGauntletPlate2Tex = 0x08000000 | CUSTOM_KEEP_GAUNTLET2_TEXTURE;
 
-const u32 gHilite2Tex = 0x04000000 | 0xca30;
+#if defined(GAME_MM)
+const u32 gCustomHilite2Tex = 0x04000000 | 0xca30;
+#endif
+
+#if defined(GAME_OOT)
+const u32 gCustomHilite2Tex = 0x04000000 | 0x0200;
+#endif
 
 /* gLinkAdultLeftGauntletPlate2DL is omitted because we always render the "closed hand" variant so it doesn't clip into the link's hand */
 
-Gfx gLinkAdultLeftGauntletPlate3DL[] = {
+Gfx gCustomLinkAdultLeftGauntletPlate3DL[] = {
     gsSPMatrix(0x0D000300, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW),
     gsDPPipeSync(),
     gsDPSetTextureLUT(G_TT_NONE),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
-    gsDPLoadTextureBlock(gLinkAdultGauntletPlate2Tex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR |
+    gsDPLoadTextureBlock(gCustomLinkAdultGauntletPlate2Tex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR |
                          G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD),
     gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, COMBINED, 0, ENVIRONMENT, 0, 0, 0, 0, COMBINED),
     gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_TEX_EDGE2),
@@ -58,7 +64,7 @@ Gfx gLinkAdultLeftGauntletPlate3DL[] = {
     gsSP2Triangles(22, 23, 24, 0, 24, 25, 22, 0),
     gsDPPipeSync(),
     gsSPTexture(0x2710, 0x2710, 0, G_TX_RENDERTILE, G_ON),
-    gsDPLoadTextureBlock(gHilite2Tex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR |
+    gsDPLoadTextureBlock(gCustomHilite2Tex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR |
                          G_TX_WRAP, 4, 4, 1, 15),
     gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, 1, COMBINED, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED),
     gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_OPA_SURF2),
@@ -73,12 +79,12 @@ Gfx gLinkAdultLeftGauntletPlate3DL[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx gLinkAdultRightGauntletPlate1DL[] = {
+Gfx gCustomLinkAdultRightGauntletPlate1DL[] = {
     gsSPMatrix(0x0D000380, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW),
     gsDPPipeSync(),
     gsDPSetTextureLUT(G_TT_NONE),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
-    gsDPLoadTextureBlock(gLinkAdultGauntletPlate1Tex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
+    gsDPLoadTextureBlock(gCustomLinkAdultGauntletPlate1Tex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 32, 0, G_TX_MIRROR | G_TX_CLAMP,
                          G_TX_MIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD),
     gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, COMBINED, 0, ENVIRONMENT, 0, 0, 0, 0, COMBINED),
     gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_TEX_EDGE2),
@@ -97,12 +103,12 @@ Gfx gLinkAdultRightGauntletPlate1DL[] = {
 
 /* gLinkAdultRightGauntletPlate2DL is omitted because we always render the "closed hand" variant so it doesn't clip into the link's hand */
 
-Gfx gLinkAdultRightGauntletPlate3DL[] = {
+Gfx gCustomLinkAdultRightGauntletPlate3DL[] = {
     gsSPMatrix(0x0D0003C0, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW),
     gsDPPipeSync(),
     gsDPSetTextureLUT(G_TT_NONE),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
-    gsDPLoadTextureBlock(gLinkAdultGauntletPlate2Tex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR |
+    gsDPLoadTextureBlock(gCustomLinkAdultGauntletPlate2Tex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_NOMIRROR |
                          G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD),
     gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, COMBINED, 0, ENVIRONMENT, 0, 0, 0, 0, COMBINED),
     gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_TEX_EDGE2),
@@ -119,7 +125,7 @@ Gfx gLinkAdultRightGauntletPlate3DL[] = {
     gsSP2Triangles(22, 23, 24, 0, 24, 25, 22, 0),
     gsDPPipeSync(),
     gsSPTexture(0x2710, 0x2710, 0, G_TX_RENDERTILE, G_ON),
-    gsDPLoadTextureBlock(gHilite2Tex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR |
+    gsDPLoadTextureBlock(gCustomHilite2Tex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR |
                          G_TX_WRAP, 4, 4, 1, 15),
     gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, 1, COMBINED, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED),
     gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_OPA_SURF2),
@@ -138,9 +144,9 @@ void DrawChildGauntlets(PlayState* play)
 {
     OPEN_DISPS(play->state.gfxCtx);
     gSPSegment(POLY_OPA_DISP++, 0x08, g.customKeep);
-    gSPDisplayList(POLY_OPA_DISP++, gLinkAdultLeftGauntletPlate1DL);
-    gSPDisplayList(POLY_OPA_DISP++, gLinkAdultRightGauntletPlate1DL);
-    gSPDisplayList(POLY_OPA_DISP++, gLinkAdultLeftGauntletPlate3DL);
-    gSPDisplayList(POLY_OPA_DISP++, gLinkAdultRightGauntletPlate3DL);
+    gSPDisplayList(POLY_OPA_DISP++, gCustomLinkAdultLeftGauntletPlate1DL);
+    gSPDisplayList(POLY_OPA_DISP++, gCustomLinkAdultRightGauntletPlate1DL);
+    gSPDisplayList(POLY_OPA_DISP++, gCustomLinkAdultLeftGauntletPlate3DL);
+    gSPDisplayList(POLY_OPA_DISP++, gCustomLinkAdultRightGauntletPlate3DL);
     CLOSE_DISPS();
 }
