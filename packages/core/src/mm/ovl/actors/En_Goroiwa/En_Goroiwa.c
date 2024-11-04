@@ -34,7 +34,7 @@ static ColliderJntSphElementInit sJntSphElementsInit[1] = {
             { 0x20000000, 0x00, 0x04 },
             { 0x01C37BB6, 0x00, 0x00 },
             TOUCH_ON | TOUCH_SFX_NONE,
-            BUMP_ON,
+            AC_ON,
             OCELEM_ON,
         },
         { 0, { { 0, 0, 0 }, 58 }, 100 },
@@ -136,13 +136,13 @@ void func_8093E9B0(Actor_EnGoroiwa* this, PlayState* play) {
     this->collider.elements[0].dim.worldSphere.radius = this->unk_1DC - 1.0f;
 
     if ((params == ENGOROIWA_C000_1) || (params == ENGOROIWA_C000_2)) {
-        this->collider.elements[0].elem.acDmgInfo.dmgFlags |= (0x4000 | 0x400 | 0x100);
+        this->collider.elements[0].base.acDmgInfo.dmgFlags |= (0x4000 | 0x400 | 0x100);
         if (params == ENGOROIWA_C000_1) {
-            this->collider.base.colType = COLTYPE_WOOD;
+            this->collider.base.colMaterial = COLTYPE_WOOD;
         } else {
-            this->collider.elements[0].elem.acDmgInfo.dmgFlags &= ~(0x400000 | 0x200 | 0x2);
-            this->collider.elements[0].elem.acDmgInfo.dmgFlags |= (0x80000000 | 0x800 | 0x8);
-            this->collider.base.colType = COLTYPE_NONE;
+            this->collider.elements[0].base.acDmgInfo.dmgFlags &= ~(0x400000 | 0x200 | 0x2);
+            this->collider.elements[0].base.acDmgInfo.dmgFlags |= (0x80000000 | 0x800 | 0x8);
+            this->collider.base.colMaterial = COLTYPE_NONE;
         }
     }
 }
@@ -896,7 +896,7 @@ void func_80941060(Actor_EnGoroiwa* this, PlayState* play) {
     Vec3f spAC;
     Vec3f spA0;
     Vec3f sp94;
-    Vec3s* vec = &this->collider.elements[0].elem.acDmgInfo.hitPos;
+    Vec3s* vec = &this->collider.elements[0].base.acDmgInfo.hitPos;
     s32 i;
 
     for (i = 0; i < 4; i++) {
@@ -997,7 +997,7 @@ s32 func_8094156C(Actor_EnGoroiwa* this, PlayState* play) {
     Vec3f sp80;
 
     if ((this->collider.base.acFlags & AC_HIT) && ((params == ENGOROIWA_C000_1) || (params == ENGOROIWA_C000_2))) {
-        if (this->collider.elements->elem.acHitElem->atDmgInfo.dmgFlags & 0x4000) {
+        if (this->collider.elements->base.acHitElem->atDmgInfo.dmgFlags & 0x4000) {
             s16 sp7E = BINANG_SUB(actor->yawTowardsPlayer, this->actor.world.rot.y);
             f32 temp;
             f32 temp2;
@@ -1051,11 +1051,11 @@ s32 func_8094156C(Actor_EnGoroiwa* this, PlayState* play) {
             func_80941274(this, play);
             phi_s0_2 = TRUE;
         } else if (((params == ENGOROIWA_C000_1) &&
-                    (this->collider.elements->elem.acHitElem->atDmgInfo.dmgFlags & (0x400 | 0x100))) ||
-                   ((params == ENGOROIWA_C000_2) && (this->collider.elements->elem.acHitElem->atDmgInfo.dmgFlags &
+                    (this->collider.elements->base.acHitElem->atDmgInfo.dmgFlags & (0x400 | 0x100))) ||
+                   ((params == ENGOROIWA_C000_2) && (this->collider.elements->base.acHitElem->atDmgInfo.dmgFlags &
                                                      (0x80000000 | 0x800 | 0x400 | 0x100 | 0x8)))) {
             this->unk_1CC = 50;
-            if ((params == ENGOROIWA_C000_2) && (this->collider.elements->elem.acHitElem->atDmgInfo.dmgFlags & 0x800)) {
+            if ((params == ENGOROIWA_C000_2) && (this->collider.elements->base.acHitElem->atDmgInfo.dmgFlags & 0x800)) {
                 this->unk_1E6 = TRUE;
             }
             func_80940090(this, play);

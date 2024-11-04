@@ -237,7 +237,7 @@ void ObjComb_Wait(Actor_ObjComb* this, PlayState* play)
 
     if (this->collider.base.acFlags & AC_HIT) {
         this->collider.base.acFlags &= ~AC_HIT;
-        dmgFlags = this->collider.elements[0].elem.acHitElem->atDmgInfo.dmgFlags;
+        dmgFlags = this->collider.elements[0].base.acHitElem->atDmgInfo.dmgFlags;
         if (dmgFlags & (DMG_HAMMER | DMG_ARROW | DMG_SLINGSHOT | DMG_DEKU_STICK))
         {
             this->unk_1B0 = 1500;
@@ -296,7 +296,7 @@ static ColliderJntSphElementInit sJntSphElementsInit[1] = {
             { 0x00000000, 0x00, 0x00 },
             { 0x05CBFFBE, 0x00, 0x00 },
             TOUCH_NONE | TOUCH_SFX_NORMAL,
-            BUMP_ON,
+            AC_ON,
             OCELEM_ON,
         },
         { 0, { { 0, 0, 0 }, 15 }, 100 },
@@ -642,7 +642,7 @@ void func_8098DC60(Actor_ObjComb* this, PlayState* play)
 
     if (this->unk_1B3)
     {
-        if (this->collider.elements->elem.acHitElem->atDmgInfo.dmgFlags & 0x0182C29C)
+        if (this->collider.elements->base.acHitElem->atDmgInfo.dmgFlags & 0x0182C29C)
         {
             func_8098CEAC(this, play);
             func_8098DA74(this, play);
@@ -650,7 +650,7 @@ void func_8098DC60(Actor_ObjComb* this, PlayState* play)
         }
         else
         {
-            s32 dmgFlags = this->collider.elements->elem.acHitElem->atDmgInfo.dmgFlags;
+            s32 dmgFlags = this->collider.elements->base.acHitElem->atDmgInfo.dmgFlags;
 
             if (dmgFlags & 0x13820) {
                 this->unk_1A8 = 0xDAC;

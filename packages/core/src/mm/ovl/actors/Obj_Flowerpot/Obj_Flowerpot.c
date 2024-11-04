@@ -40,7 +40,7 @@ static ColliderJntSphElementInit sJntSphElementsInit[2] = {
             { 0x00400000, 0x00, 0x02 },
             { 0x05CBFFBE, 0x00, 0x00 },
             TOUCH_ON | TOUCH_SFX_NORMAL,
-            BUMP_ON,
+            AC_ON,
             OCELEM_ON,
         },
         { 0, { { 0, 100, 0 }, 12 }, 100 },
@@ -51,7 +51,7 @@ static ColliderJntSphElementInit sJntSphElementsInit[2] = {
             { 0x00000000, 0x00, 0x00 },
             { 0x0580C71C, 0x00, 0x00 },
             TOUCH_NONE | TOUCH_SFX_NORMAL,
-            BUMP_ON,
+            AC_ON,
             OCELEM_NONE,
         },
         { 1, { { 0, 300, 0 }, 12 }, 100 },
@@ -533,8 +533,8 @@ void func_80A1C838(Actor_ObjFlowerpot* this, PlayState* play)
         ObjFlowerpot_Break2(this, play);
         func_80A1B994(this, play);
         Actor_Kill(&this->actor);
-    } else if ((this->collider.elements[0].elem.bumperFlags & BUMP_HIT) &&
-               (this->collider.elements[0].elem.acHitElem->atDmgInfo.dmgFlags & 0x058BFFBC)) {
+    } else if ((this->collider.elements[0].base.acElemFlags & AC_HIT) &&
+               (this->collider.elements[0].base.acHitElem->atDmgInfo.dmgFlags & 0x058BFFBC)) {
         if (!(this->unk_1EA & 2)) {
             ObjFlowerpot_GrassSpawnCollectible(this, play);
             func_80A1C0FC(this, play);
@@ -546,10 +546,10 @@ void func_80A1C838(Actor_ObjFlowerpot* this, PlayState* play)
         func_80A1B994(this, play);
         Actor_Kill(&this->actor);
     } else {
-        if (this->collider.elements[1].elem.bumperFlags & BUMP_HIT) {
+        if (this->collider.elements[1].base.acElemFlags & AC_HIT) {
             if (!(this->unk_1EA & 2)) {
                 this->unk_1EA |= 2;
-                this->collider.elements[1].elem.bumperFlags &= ~BUMP_ON;
+                this->collider.elements[1].base.acElemFlags &= ~AC_ON;
                 func_80A1C0FC(this, play);
                 ObjFlowerpot_GrassSpawnCollectible(this, play);
                 func_80A1B9CC(this, play);
@@ -657,10 +657,10 @@ void func_80A1CD10(Actor_ObjFlowerpot* this) {
 
 void func_80A1CEF4(Actor_ObjFlowerpot* this, PlayState* play)
 {
-    s32 sp28 = this->collider.elements[0].elem.toucherFlags & TOUCH_HIT;
+    s32 sp28 = this->collider.elements[0].base.atElemFlags & TOUCH_HIT;
 
     if (sp28) {
-        this->collider.elements[0].elem.toucherFlags &= ~TOUCH_ON;
+        this->collider.elements[0].base.atElemFlags &= ~TOUCH_ON;
     }
 
     if (this->unk_1E8 > 0) {

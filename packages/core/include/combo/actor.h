@@ -1,6 +1,7 @@
 #ifndef COMBO_ACTOR_H
 #define COMBO_ACTOR_H
 
+#include <combo/collision_check.h>
 #include <combo/types.h>
 #include <combo/actor_id.h>
 #include <combo/util.h>

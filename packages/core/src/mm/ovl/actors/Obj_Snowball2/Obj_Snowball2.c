@@ -31,7 +31,7 @@ static ColliderJntSphElementInit sJntSphElementsInit[1] = {
             { 0x00400000, 0x00, 0x02 },
             { 0x0583FFBE, 0x00, 0x00 },
             TOUCH_ON | TOUCH_SFX_NONE,
-            BUMP_ON,
+            AC_ON,
             OCELEM_ON,
         },
         { 0, { { 0, 0, 0 }, 15 }, 100 },
@@ -345,8 +345,8 @@ void func_80B39908(Actor_ObjSnowball2* this, PlayState* play) {
     Vec3f sp94;
     s32 i;
 
-    if (this->collider.elements[0].elem.bumperFlags & BUMP_HIT) {
-        Vec3s* hitPos = &this->collider.elements[0].elem.acDmgInfo.hitPos;
+    if (this->collider.elements[0].base.acElemFlags & AC_HIT) {
+        Vec3s* hitPos = &this->collider.elements[0].base.acDmgInfo.hitPos;
 
         for (i = 0; i < 4; i++) {
             sp94.x = ((Rand_ZeroOne() * 14.0f) - 7.0f) + hitPos->x;
@@ -428,14 +428,14 @@ void func_80B39C9C(Actor_ObjSnowball2* this, PlayState* play) {
     } else if ((this->actor.bgCheckFlags & BGCHECKFLAG_WATER) &&
                ((this->actor.shape.yOffset * this->actor.scale.y) < this->actor.depthInWater)) {
         func_80B3A498(this);
-    } else if (sp38 && (this->collider.elements->elem.acHitElem->atDmgInfo.dmgFlags & 0x0583FFBC)) {
+    } else if (sp38 && (this->collider.elements->base.acHitElem->atDmgInfo.dmgFlags & 0x0583FFBC)) {
         ObjSnowball2_DropCollectible(this, play);
         func_80B39108(this, play);
         func_80B39B5C(this, play);
         Actor_Kill(&this->actor);
         return;
     } else {
-        if (sp38 && (this->collider.elements->elem.acHitElem->atDmgInfo.dmgFlags & 2)) {
+        if (sp38 && (this->collider.elements->base.acHitElem->atDmgInfo.dmgFlags & 2)) {
             func_80B39908(this, play);
         }
 

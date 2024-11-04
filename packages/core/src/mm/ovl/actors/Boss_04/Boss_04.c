@@ -543,8 +543,8 @@ void func_809ED2A0(Actor_Boss04* this, PlayState* play) {
 void func_809ED45C(Actor_Boss04* this, PlayState* play) {
     u8 damage;
 
-    if ((this->unk_1FE == 0) && (this->collider1.elements[0].elem.bumperFlags & ACELEM_HIT)) {
-        this->collider1.elements[0].elem.bumperFlags &= ~ACELEM_HIT;
+    if ((this->unk_1FE == 0) && (this->collider1.elements[0].base.acElemFlags & ACELEM_HIT)) {
+        this->collider1.elements[0].base.acElemFlags &= ~ACELEM_HIT;
         Actor_PlaySfx(&this->actor, NA_SE_EN_ME_DAMAGE);
         damage = this->actor.colChkInfo.damage;
         this->actor.colChkInfo.health -= damage;

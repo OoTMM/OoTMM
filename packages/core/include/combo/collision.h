@@ -1,6 +1,7 @@
 #ifndef COMBO_COLLISION_H
 #define COMBO_COLLISION_H
 
+#include <combo/collision_check.h>
 #include <combo/types.h>
 #include <combo/math/vec.h>
 
@@ -142,13 +143,11 @@ typedef enum SurfaceMaterial {
 
 typedef struct Actor Actor;
 typedef struct Collider Collider;
-typedef struct CollisionCheckContext CollisionCheckContext;
 typedef struct CollisionCheckInfo CollisionCheckInfo;
 typedef struct PlayState PlayState;
 typedef struct CollisionContext CollisionContext;
 typedef struct CollisionHeader CollisionHeader;
 typedef struct CollisionPoly CollisionPoly;
-typedef struct OcLine OcLine;
 typedef struct CollisionCheckInfoInit CollisionCheckInfoInit;
 typedef struct DamageTable DamageTable;
 typedef struct CollisionCheckInfoInit2 CollisionCheckInfoInit2;

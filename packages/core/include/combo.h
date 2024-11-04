@@ -33,6 +33,7 @@
 # include <combo/player.h>
 # include <combo/rand.h>
 # include <combo/text.h>
+# include <combo/collision_check.h>
 # include <combo/common/ocarina.h>
 # include <combo/common/color.h>
 # include <combo/common/actors/Obj_Mure2.h>

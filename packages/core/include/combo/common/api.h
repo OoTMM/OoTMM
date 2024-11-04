@@ -100,7 +100,6 @@ void    ActorEnableTalkEx(Actor* actor, PlayState* play, float range, u32 unk);
 void    Actor_UpdateBgCheckInfo(PlayState* play, Actor* actor, float unk_3, float unk_4, float unk_5, u32 unk_6);
 void    Actor_MoveWithGravity(Actor* actor);
 int     ActorTalkedTo(Actor* actor);
-u8      CollisionCheck_GetSwordDamage(u32 dmgFlags);
 
 void    EnableOwl(u8 owlId);
 
@@ -169,15 +168,7 @@ void OcarinaAction2(PlayState *play, u16 ocarinaAction);
 
 extern float* gModelView;
 
-int     Collider_InitJntSph(PlayState* play, ColliderJntSph* jntSph);
-int     Collider_FreeJntSph(PlayState* play, ColliderJntSph* jntSph);
-int     Collider_DestroyJntSph(PlayState* play, ColliderJntSph* jntSph);
-int     Collider_SetJntSphToActor(PlayState* play, ColliderJntSph* dest, ColliderJntSphInitToActor* src);
-int     Collider_SetJntSphAllocType1(PlayState* play, ColliderJntSph* dest, Actor* actor, ColliderJntSphInitType1* src);
-int     Collider_SetJntSphAlloc(PlayState* play, ColliderJntSph* dest, Actor* actor, ColliderJntSphInit* src);
-int     Collider_SetJntSph(PlayState* play, ColliderJntSph* dest, Actor* actor, ColliderJntSphInit* src, ColliderJntSphElement* jntSphElements);
-void    Collider_UpdateSpheres(s32 limb, ColliderJntSph* jntSph);
-
+void Collider_UpdateSpheres(s32 limb, ColliderJntSph* jntSph);
 void ModelViewUnkTransform(MtxF* unk);
 void ModelViewMult(MtxF* mf, s32 mode);
 void Matrix_SetTranslateRotateYXZ(f32 translateX, f32 translateY, f32 translateZ, Vec3s* rot);
@@ -423,11 +414,6 @@ void    Camera_SetCameraData(Camera* camera, s16 setDataFlags, void* data0, void
 s32 Collider_InitCylinder(struct PlayState* play, ColliderCylinder* collider);
 s32 Collider_SetCylinder(struct PlayState* play, ColliderCylinder* collider, struct Actor* actor, ColliderCylinderInit* src);
 void Collider_UpdateCylinder(struct Actor* actor, ColliderCylinder* collider);
-void Collider_DestroyCylinder(struct PlayState* play, ColliderCylinder* collider);
-
-s32 CollisionCheck_SetAT(PlayState* play, CollisionCheckContext* colCtxt, Collider* collider);
-s32 CollisionCheck_SetOC(PlayState* play, CollisionCheckContext* colCtxt, Collider* collider);
-
 void Map_SetAreaEntrypoint(PlayState* play);
 
 typedef s32 (*OverrideCurveLimbDraw)(struct PlayState* play, SkelCurve* skelCuve, s32 limbIndex, struct Actor* actor);

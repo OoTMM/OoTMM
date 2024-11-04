@@ -38,7 +38,7 @@ static ColliderJntSphElementInit sJntSphElementsInit[1] = {
             { 0x00000000, 0x00, 0x00 },
             { 0x81837FBE, 0x00, 0x00 },
             TOUCH_NONE | TOUCH_SFX_NORMAL,
-            BUMP_ON,
+            AC_ON,
             OCELEM_ON,
         },
         { 0, { { 0, 0, 0 }, 73 }, 100 },
@@ -269,7 +269,7 @@ void func_80B02EE4(Actor_ObjSnowball* this, PlayState* play) {
     Vec3f spAC;
     Vec3f spA0;
     Vec3f sp94;
-    Vec3s* hitPos = &this->collider.elements->elem.acDmgInfo.hitPos;
+    Vec3s* hitPos = &this->collider.elements->base.acDmgInfo.hitPos;
     s32 i;
 
     for (i = 0; i < 4; i++) {
@@ -655,17 +655,17 @@ void func_80B04350(Actor_ObjSnowball* this, PlayState* play) {
     }
 
     if (flag && (this->unk_211 == 0) &&
-        (this->collider.elements->elem.acHitElem->atDmgInfo.dmgFlags &
+        (this->collider.elements->base.acHitElem->atDmgInfo.dmgFlags &
          (0x80000000 | 0x4000 | 0x800 | 0x400 | 0x100 | 0x8))) {
         this->actor.flags |= ACTOR_FLAG_MM_10;
         if (this->actor.home.rot.y == 1) {
             this->actor.flags &= ~(ACTOR_FLAG_MM_ATTENTION_ENABLED | ACTOR_FLAG_MM_FRIENDLY);
         }
 
-        if (this->collider.elements->elem.acHitElem->atDmgInfo.dmgFlags & 0x4000) {
+        if (this->collider.elements->base.acHitElem->atDmgInfo.dmgFlags & 0x4000) {
             this->unk_20A = 1;
         } else {
-            if (this->collider.elements->elem.acHitElem->atDmgInfo.dmgFlags & 0x800) {
+            if (this->collider.elements->base.acHitElem->atDmgInfo.dmgFlags & 0x800) {
                 this->unk_210 = 1;
             }
             this->unk_20A = 0;
@@ -685,10 +685,10 @@ void func_80B04350(Actor_ObjSnowball* this, PlayState* play) {
     }
 
     if (flag &&
-        !(this->collider.elements->elem.acHitElem->atDmgInfo.dmgFlags & (0x10000 | 0x2000 | 0x1000 | 0x800 | 0x20))) {
+        !(this->collider.elements->base.acHitElem->atDmgInfo.dmgFlags & (0x10000 | 0x2000 | 0x1000 | 0x800 | 0x20))) {
         if (this->unk_209 <= 0) {
             func_80B02EE4(this, play);
-            if (this->collider.elements->elem.acHitElem->atDmgInfo.dmgFlags & 0x1000000) {
+            if (this->collider.elements->base.acHitElem->atDmgInfo.dmgFlags & 0x1000000) {
                 this->unk_209 = 25;
             } else {
                 this->unk_209 = 10;
