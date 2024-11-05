@@ -156,6 +156,19 @@ function applyBaseSettings(dest: SettingsBase, src: PartialDeep<SettingsBase>) {
   }
 }
 
+function sortCopyArray<T>(arr: T[]): T[] {
+  return [ ...arr ].sort();
+}
+
+function sortCopyObject<T extends {[k: string]: any}>(obj: T): T {
+  const result = {} as {[k: string]: any};
+  for (const key of Object.keys(obj).sort()) {
+    const data = obj[key];
+    result[key] = data;
+  }
+  return result as T;
+}
+
 export function makeSettings(arg: PartialDeep<Settings>): Settings {
   /* Clone the base setting to avoid mutating it */
   const result = cloneDeep(DEFAULT_SETTINGS);
@@ -165,17 +178,17 @@ export function makeSettings(arg: PartialDeep<Settings>): Settings {
 
   /* Apply the starting items */
   if (arg.startingItems !== undefined && typeof arg.startingItems === 'object') {
-    result.startingItems = { ...arg.startingItems } as Settings['startingItems'];
+    result.startingItems = sortCopyObject(arg.startingItems) as Settings['startingItems'];
   }
 
   /* Apply the junkLocations */
   if (arg.junkLocations !== undefined && Array.isArray(arg.junkLocations)) {
-    result.junkLocations = [ ...arg.junkLocations ];
+    result.junkLocations = sortCopyArray(arg.junkLocations);
   }
 
   /* Apply the tricks */
   if (arg.tricks !== undefined && Array.isArray(arg.tricks)) {
-    result.tricks = [ ...arg.tricks ];
+    result.tricks = sortCopyArray(arg.tricks);
   }
 
   /* Apply dungeon settings */
@@ -195,7 +208,9 @@ export function makeSettings(arg: PartialDeep<Settings>): Settings {
 
   /* Apply plando */
   if (arg.plando !== undefined) {
-    result.plando = { ...arg.plando } as Settings['plando'];
+    if (arg.plando.locations !== undefined) {
+      result.plando.locations = sortCopyObject({ ...arg.plando.locations }) as Settings['plando']['locations'];
+    }
   }
 
   if (arg.hints !== undefined) {
