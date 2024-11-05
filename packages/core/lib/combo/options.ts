@@ -38,7 +38,7 @@ export const options = (opts: OptionsInput): Options => {
   newOpts.patch = opts.patch;
 
   if (opts.seed) {
-    newOpts.seed = opts.seed;
+    newOpts.seed = opts.seed.trim();
   } else {
     if (newOpts.debug) {
       newOpts.seed = 'DEBUG';
