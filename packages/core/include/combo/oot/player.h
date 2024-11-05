@@ -4,6 +4,81 @@
 #include <ultra64.h>
 #include <combo/actor.h>
 
+#define PLAYER_STATE1_0 (1 << 0)
+#define PLAYER_STATE1_SWINGING_BOTTLE (1 << 1) // Bottle is swung; Bottle is active and can catch things
+#define PLAYER_STATE1_2 (1 << 2)
+#define PLAYER_STATE1_3 (1 << 3)
+#define PLAYER_STATE1_HOSTILE_LOCK_ON (1 << 4) // Currently locked onto a hostile actor. Triggers a "battle" variant of many actions.
+#define PLAYER_STATE1_5 (1 << 5)
+#define PLAYER_STATE1_TALKING (1 << 6) // Currently talking to an actor. This includes item exchanges.
+#define PLAYER_STATE1_DEAD (1 << 7) // Player has died. Note that this gets set when the death cutscene has started, after landing from the air.
+#define PLAYER_STATE1_START_CHANGING_HELD_ITEM (1 << 8) // Item change process has begun
+#define PLAYER_STATE1_9 (1 << 9)
+#define PLAYER_STATE1_10 (1 << 10)
+#define PLAYER_STATE1_CARRYING_ACTOR (1 << 11) // Currently carrying an actor
+#define PLAYER_STATE1_CHARGING_SPIN_ATTACK (1 << 12) // Currently charing a spin attack (by holding down the B button)
+#define PLAYER_STATE1_13 (1 << 13)
+#define PLAYER_STATE1_14 (1 << 14)
+#define PLAYER_STATE1_Z_TARGETING (1 << 15) // Either lock-on or parallel is active. This flag is never checked for and is practically unused.
+#define PLAYER_STATE1_FRIENDLY_ACTOR_FOCUS (1 << 16) // Currently focusing on a friendly actor. Includes friendly lock-on, talking, and more. Usually does not include hostile actor lock-on, see `PLAYER_STATE1_HOSTILE_LOCK_ON`.
+#define PLAYER_STATE1_PARALLEL (1 << 17) // "Parallel" mode, Z-Target without an actor lock-on
+#define PLAYER_STATE1_18 (1 << 18)
+#define PLAYER_STATE1_19 (1 << 19)
+#define PLAYER_STATE1_20 (1 << 20)
+#define PLAYER_STATE1_21 (1 << 21)
+#define PLAYER_STATE1_SHIELDING (1 << 22) // Shielding in any form (regular, hylian shield as child, "shielding" with a two handed sword, etc.)
+#define PLAYER_STATE1_23 (1 << 23)
+#define PLAYER_STATE1_USING_BOOMERANG (1 << 24) // Currently using the boomerang. This includes all phases (aiming, throwing, and catching).
+#define PLAYER_STATE1_BOOMERANG_THROWN (1 << 25) // Boomerang has been thrown and is flying in the air
+#define PLAYER_STATE1_26 (1 << 26)
+#define PLAYER_STATE1_27 (1 << 27)
+#define PLAYER_STATE1_28 (1 << 28)
+#define PLAYER_STATE1_29 (1 << 29)
+#define PLAYER_STATE1_LOCK_ON_FORCED_TO_RELEASE (1 << 30) // Lock-on was released automatically, for example by leaving the lock-on leash range
+#define PLAYER_STATE1_31 (1 << 31)
+
+#define PLAYER_STATE2_0 (1 << 0)
+#define PLAYER_STATE2_CAN_ACCEPT_TALK_OFFER (1 << 1) // Can accept a talk offer. "Speak" or "Check" is shown on the A button.
+#define PLAYER_STATE2_2 (1 << 2)
+#define PLAYER_STATE2_3 (1 << 3)
+#define PLAYER_STATE2_4 (1 << 4)
+#define PLAYER_STATE2_5 (1 << 5)
+#define PLAYER_STATE2_6 (1 << 6)
+#define PLAYER_STATE2_7 (1 << 7)
+#define PLAYER_STATE2_8 (1 << 8)
+#define PLAYER_STATE2_FORCE_SAND_FLOOR_SOUND (1 << 9) // Forces sand footstep sounds regardless of current floor type
+#define PLAYER_STATE2_10 (1 << 10)
+#define PLAYER_STATE2_11 (1 << 11)
+#define PLAYER_STATE2_12 (1 << 12)
+#define PLAYER_STATE2_LOCK_ON_WITH_SWITCH (1 << 13) // Actor lock-on is active, specifically with Switch Targeting. Hold Targeting checks the state of the Z button instead of this flag.
+#define PLAYER_STATE2_14 (1 << 14)
+#define PLAYER_STATE2_15 (1 << 15)
+#define PLAYER_STATE2_DO_ACTION_ENTER (1 << 16) // Sets the "Enter On A" DoAction
+#define PLAYER_STATE2_17 (1 << 17)
+#define PLAYER_STATE2_CRAWLING (1 << 18) // Crawling through a crawlspace
+#define PLAYER_STATE2_19 (1 << 19)
+#define PLAYER_STATE2_NAVI_ACTIVE (1 << 20) // Navi is visible and active. Could be hovering idle near Link or hovering over other actors.
+#define PLAYER_STATE2_21 (1 << 21)
+#define PLAYER_STATE2_22 (1 << 22)
+#define PLAYER_STATE2_23 (1 << 23)
+#define PLAYER_STATE2_24 (1 << 24)
+#define PLAYER_STATE2_25 (1 << 25)
+#define PLAYER_STATE2_26 (1 << 26)
+#define PLAYER_STATE2_USING_OCARINA (1 << 27) // Playing the ocarina or warping out from an ocarina warp song
+#define PLAYER_STATE2_IDLE_FIDGET (1 << 28) // Playing a fidget idle animation (under typical circumstances, see `Player_ChooseNextIdleAnim` for more info)
+#define PLAYER_STATE2_29 (1 << 29)
+#define PLAYER_STATE2_30 (1 << 30)
+#define PLAYER_STATE2_31 (1 << 31)
+
+#define PLAYER_STATE3_0 (1 << 0)
+#define PLAYER_STATE3_1 (1 << 1)
+#define PLAYER_STATE3_2 (1 << 2)
+#define PLAYER_STATE3_3 (1 << 3)
+#define PLAYER_STATE3_4 (1 << 4)
+#define PLAYER_STATE3_5 (1 << 5)
+#define PLAYER_STATE3_RESTORE_NAYRUS_LOVE (1 << 6) // Set by ocarina effects actors when destroyed to signal Nayru's Love may be restored (see `ACTOROVL_ALLOC_ABSOLUTE`)
+#define PLAYER_STATE3_FLYING_WITH_HOOKSHOT (1 << 7) // Flying in the air with the hookshot as it pulls Player toward its destination
+
 #define PLAYER_LIMB_NONE             0x00
 #define PLAYER_LIMB_ROOT             0x01
 #define PLAYER_LIMB_WAIST            0x02
