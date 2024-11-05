@@ -178,7 +178,7 @@ class CosmeticsPass {
     icon.set(newIcon);
 
     /* Patch the GI */
-    if (index !== 0) {
+    if (index !== 0 && this.opts.cosmetics.applyFreestandings) {
       const file = this.builder.fileByNameRequired('oot/objects/object_gi_clothes');
       let off = 0x14e0 + (index - 1) * 0x20;
       const colorPrim1 = colorBufferRGB(brightness(color, 0.76));
@@ -212,10 +212,12 @@ class CosmeticsPass {
     icon.set(newIcon);
 
     /* Patch gi */
-    const primColor = colorBufferRGB(color);
-    const envColor = colorBufferRGB(brightness(color, 0.2));
-    fileGi.data.set(primColor, 0xfc8 + 4);
-    fileGi.data.set(envColor, 0xfd0 + 4);
+    if (this.opts.cosmetics.applyFreestandings) {
+      const primColor = colorBufferRGB(color);
+      const envColor = colorBufferRGB(brightness(color, 0.2));
+      fileGi.data.set(primColor, 0xfc8 + 4);
+      fileGi.data.set(envColor, 0xfd0 + 4);
+    }
 
     /* Patch the ageless shield (sheath) */
     const fileAgeless1 = this.builder.fileByName('custom/eq_shield_mirror');

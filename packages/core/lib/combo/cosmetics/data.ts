@@ -2,6 +2,12 @@ export const COSMETICS = [{
   key: 'defaultHold',
   name: 'Default Hold Target',
   type: 'boolean',
+  default: false,
+}, {
+  key: 'applyFreestandings',
+  name: 'Apply Cosmetics to Freestanding Items',
+  type: 'boolean',
+  default: true,
 }, {
   key: 'ootTunicKokiri',
   name: 'OoT Kokiri Tunic',
@@ -61,4 +67,5 @@ export const COSMETICS = [{
   key: 'musicNames',
   name: 'Display Music Names',
   type: 'boolean',
+  default: true,
 },] as const;

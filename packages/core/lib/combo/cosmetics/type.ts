@@ -14,6 +14,7 @@ type CosmeticsDataColor = CosmeticsDataCommon & {
 
 type CosmeticsDataBoolean = CosmeticsDataCommon & {
   readonly type: 'boolean';
+  readonly default: boolean;
 }
 
 type CosmeticsDataFile = CosmeticsDataCommon & {
