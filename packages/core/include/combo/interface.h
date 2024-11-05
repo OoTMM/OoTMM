@@ -4,6 +4,9 @@
 typedef struct PlayState PlayState;
 
 void Interface_Update(PlayState* play);
+void Interface_AgonyIconTick(void);
+void Interface_AgonyIconDraw(PlayState* play);
+void Interface_AfterDraw(void);
 
 #if defined(GAME_MM)
 void Interface_NewDay(PlayState* play, int day);

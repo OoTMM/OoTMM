@@ -198,3 +198,11 @@ void Interface_UpdateButtonsPart2Wrapper(PlayState* play)
     if (EV_OOT_IS_SWORDLESS() && gSave.info.equips.buttonItems[0] == 0)
         gSave.info.equips.buttonItems[0] = ITEM_NONE;
 }
+
+void Interface_AfterDraw(void)
+{
+    PlayState* play;
+
+    play = gPlay;
+    Interface_AgonyIconDraw(play);
+}
