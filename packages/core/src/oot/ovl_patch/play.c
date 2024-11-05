@@ -778,8 +778,8 @@ void Play_FastInit(GameState* gs)
 
     /* Set magic */
     magicCapacity = 0;
-    if (gSave.info.playerData.magicUpgrade)
-        magicCapacity = gSave.info.playerData.magicUpgrade2 ? 0x60 : 0x30;
+    if (gSave.info.playerData.isMagicAcquired)
+        magicCapacity = gSave.info.playerData.isDoubleMagicAcquired ? 0x60 : 0x30;
     gSaveContext.magicState = MAGIC_STATE_IDLE;
     gSaveContext.magicCapacity = magicCapacity;
     gSaveContext.magicFillTarget = gSave.info.playerData.magic;

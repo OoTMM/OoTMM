@@ -16,8 +16,8 @@ typedef struct
     s16     rupees;
     u16     swordHealth;
     u16     tatlTimer;
-    u8      magicAcquired;
-    u8      doubleMagic;
+    u8      isMagicAcquired;
+    u8      isDoubleMagicAcquired;
     u8      doubleDefense;
     u8      unk_1F;
     u16     unk_20;

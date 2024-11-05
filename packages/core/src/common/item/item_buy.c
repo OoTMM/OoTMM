@@ -30,11 +30,11 @@ int isItemBuyable(s16 gi)
         return gOotSave.info.playerData.health < gOotSave.info.playerData.healthCapacity;
     case GI_OOT_MAGIC_JAR_SMALL:
     case GI_OOT_MAGIC_JAR_LARGE:
-        return (gOotSave.info.playerData.magicUpgrade && (gOotSave.info.playerData.magic < (gOotSave.info.playerData.magicUpgrade2 ? 0x60 : 0x30)));
+        return (gOotSave.info.playerData.isMagicAcquired && (gOotSave.info.playerData.magic < (gOotSave.info.playerData.isDoubleMagicAcquired ? 0x60 : 0x30)));
     case GI_OOT_FAIRY_BIG:
-        return gOotSave.info.playerData.health < gOotSave.info.playerData.healthCapacity || (gOotSave.info.playerData.magicUpgrade && (gOotSave.info.playerData.magic < (gOotSave.info.playerData.magicUpgrade2 ? 0x60 : 0x30)));
+        return gOotSave.info.playerData.health < gOotSave.info.playerData.healthCapacity || (gOotSave.info.playerData.isMagicAcquired && (gOotSave.info.playerData.magic < (gOotSave.info.playerData.isDoubleMagicAcquired ? 0x60 : 0x30)));
     case GI_MM_FAIRY_BIG:
-        return gMmSave.info.playerData.health < gMmSave.info.playerData.healthCapacity || (gMmSave.info.playerData.magicAcquired && (gMmSave.info.playerData.magic < (gMmSave.info.playerData.doubleMagic ? 0x60 : 0x30)));
+        return gMmSave.info.playerData.health < gMmSave.info.playerData.healthCapacity || (gMmSave.info.playerData.isMagicAcquired && (gMmSave.info.playerData.magic < (gMmSave.info.playerData.isDoubleMagicAcquired ? 0x60 : 0x30)));
     case GI_OOT_STICK:
     case GI_OOT_STICKS_5:
     case GI_OOT_STICKS_10:
@@ -85,7 +85,7 @@ int isItemBuyable(s16 gi)
         return gMmSave.info.playerData.health < gMmSave.info.playerData.healthCapacity;
     case GI_MM_MAGIC_JAR_SMALL:
     case GI_MM_MAGIC_JAR_LARGE:
-        return (gMmSave.info.playerData.magicAcquired && (gMmSave.info.playerData.magic < (gMmSave.info.playerData.doubleMagic ? 0x60 : 0x30)));
+        return (gMmSave.info.playerData.isMagicAcquired && (gMmSave.info.playerData.magic < (gMmSave.info.playerData.isDoubleMagicAcquired ? 0x60 : 0x30)));
     case GI_MM_STICK:
         return (gMmSave.info.inventory.upgrades.dekuStick == 0) || (gMmSave.info.inventory.ammo[ITS_MM_STICKS] < kMaxSticks[gMmSave.info.inventory.upgrades.dekuStick]);
     case GI_MM_NUT:

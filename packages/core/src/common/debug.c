@@ -554,8 +554,8 @@ static void cheatAllItems(PlayState* play)
     gSave.info.inventory.quest.songSun = 1;
     gSave.info.inventory.quest.songSaria = 1;
 
-    gMmSave.info.playerData.magicAcquired = 1;
-    gMmSave.info.playerData.doubleMagic = 1;
+    gMmSave.info.playerData.isMagicAcquired = 1;
+    gMmSave.info.playerData.isDoubleMagicAcquired = 1;
     gMmSave.info.playerData.magic = 2 * 0x30;
     gSaveContext.magicFillTarget = 0x60;
 
@@ -672,8 +672,8 @@ static void cheatAllItems(PlayState* play)
     gSave.info.inventory.quest.stoneRuby = 1;
     gSave.info.inventory.quest.stoneSapphire = 1;
 
-    gSave.info.playerData.magicUpgrade = 1;
-    gSave.info.playerData.magicUpgrade2 = 1;
+    gSave.info.playerData.isMagicAcquired = 1;
+    gSave.info.playerData.isDoubleMagicAcquired = 1;
     gOotSave.info.playerData.magicLevel = 0;
     gSaveContext.magicFillTarget = 0x60;
 
@@ -725,9 +725,9 @@ static void debugApplyCheats(void)
     if (CHEAT_ON(CHEAT_MAGIC))
     {
 #if defined(GAME_OOT)
-        gSave.info.playerData.magic = gSave.info.playerData.magicUpgrade2 ? 0x60 : gSave.info.playerData.magicUpgrade ? 0x30 : 0;
+        gSave.info.playerData.magic = gSave.info.playerData.isDoubleMagicAcquired ? 0x60 : gSave.info.playerData.isMagicAcquired ? 0x30 : 0;
 #else
-        gSave.info.playerData.magic = gSave.info.playerData.doubleMagic ? 0x60 : gSave.info.playerData.magicAcquired ? 0x30 : 0;
+        gSave.info.playerData.magic = gSave.info.playerData.isDoubleMagicAcquired ? 0x60 : gSave.info.playerData.isMagicAcquired ? 0x30 : 0;
 #endif
     }
 

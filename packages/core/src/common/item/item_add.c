@@ -1445,9 +1445,9 @@ static void fillMagicOot(PlayState* play)
     int level;
     int max;
 
-    if (!gOotSave.info.playerData.magicUpgrade)
+    if (!gOotSave.info.playerData.isMagicAcquired)
         return;
-    level = gOotSave.info.playerData.magicUpgrade2 ? 2 : 1;
+    level = gOotSave.info.playerData.isDoubleMagicAcquired ? 2 : 1;
     max = level * 0x30;
 
     /* Handle the effect */
@@ -1470,9 +1470,9 @@ static void fillMagicMm(PlayState* play)
     int level;
     int max;
 
-    if (!gMmSave.info.playerData.magicAcquired)
+    if (!gMmSave.info.playerData.isMagicAcquired)
         return;
-    level = gMmSave.info.playerData.doubleMagic ? 2 : 1;
+    level = gMmSave.info.playerData.isDoubleMagicAcquired ? 2 : 1;
     max = level * 0x30;
 
     /* Handle the effect */
@@ -1493,18 +1493,18 @@ static void fillMagicMm(PlayState* play)
 
 static int addItemMagicUpgradeOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    gOotSave.info.playerData.magicUpgrade = 1;
+    gOotSave.info.playerData.isMagicAcquired = 1;
     if (param >= 2)
-        gOotSave.info.playerData.magicUpgrade2 = 1;
+        gOotSave.info.playerData.isDoubleMagicAcquired = 1;
     fillMagicOot(play);
     return 0;
 }
 
 static int addItemMagicUpgradeMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    gMmSave.info.playerData.magicAcquired = 1;
+    gMmSave.info.playerData.isMagicAcquired = 1;
     if (param >= 2)
-        gMmSave.info.playerData.doubleMagic = 1;
+        gMmSave.info.playerData.isDoubleMagicAcquired = 1;
     fillMagicMm(play);
     return 0;
 }
@@ -1624,11 +1624,11 @@ static void addMagicRawOot(u8 count)
     s16 acc;
     s16 max;
 
-    if (!gOotSave.info.playerData.magicUpgrade)
+    if (!gOotSave.info.playerData.isMagicAcquired)
         return;
     acc = gOotSave.info.playerData.magic;
     acc += count;
-    max = gOotSave.info.playerData.magicUpgrade2 ? 0x60 : 0x30;
+    max = gOotSave.info.playerData.isDoubleMagicAcquired ? 0x60 : 0x30;
     if (acc > max)
         acc = max;
     gOotSave.info.playerData.magic = acc;
@@ -1639,11 +1639,11 @@ static void addMagicRawMm(u8 count)
     s16 acc;
     s16 max;
 
-    if (!gMmSave.info.playerData.magicAcquired)
+    if (!gMmSave.info.playerData.isMagicAcquired)
         return;
     acc = gMmSave.info.playerData.magic;
     acc += count;
-    max = gMmSave.info.playerData.doubleMagic ? 0x60 : 0x30;
+    max = gMmSave.info.playerData.isDoubleMagicAcquired ? 0x60 : 0x30;
     if (acc > max)
         acc = max;
     gMmSave.info.playerData.magic = acc;

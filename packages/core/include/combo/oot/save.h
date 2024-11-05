@@ -21,9 +21,9 @@ typedef struct
     s16         rupees;
     u16         swordHealth;
     u16         naviTimer;
-    u8          magicUpgrade;
+    u8          isMagicAcquired;
     char        unk_3b[1];
-    u8          magicUpgrade2;
+    u8          isDoubleMagicAcquired;
     u8          doubleDefense;
 }
 OotSavePlayerData;

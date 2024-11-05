@@ -258,14 +258,14 @@ static s16 progressiveWalletMm(void)
 
 static s16 progressiveMagicOot(void)
 {
-    if (gOotSave.info.playerData.magicUpgrade)
+    if (gOotSave.info.playerData.isMagicAcquired)
         return GI_OOT_MAGIC_UPGRADE2;
     return GI_OOT_MAGIC_UPGRADE;
 }
 
 static s16 progressiveMagicMm(void)
 {
-    switch (gMmSave.info.playerData.magicAcquired)
+    switch (gMmSave.info.playerData.isMagicAcquired)
     {
     case 0:
         return GI_MM_MAGIC_UPGRADE;
