@@ -604,7 +604,9 @@ static void cheatAllItems(PlayState* play)
     //MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_GB);
     //MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_ST);
 
-    /*gSave.info.inventory.quest.gerudoCard = 1; */
+    gSave.info.inventory.quest.gerudoCard = 1;
+    gSave.info.inventory.quest.agonyStone = 1;
+
     gSave.info.inventory.dungeonKeys[SCE_OOT_TEMPLE_FIRE] = 8;
     gSave.info.inventory.dungeonKeys[SCE_OOT_TREASURE_SHOP] = 6;
     gSave.info.inventory.items[ITS_OOT_STICKS] = ITEM_OOT_STICK;
