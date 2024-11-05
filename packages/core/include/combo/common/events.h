@@ -265,14 +265,14 @@
 #define EVENTINF_THREEDAYRESET_LOST_STICK_AMMO 0x73
 #define EVENTINF_THREEDAYRESET_LOST_ARROW_AMMO 0x74
 
-#define EV_OOT_IS_SWORDLESS()                               (!!(gOotSave.eventsMisc[29]))
-#define EV_OOT_SET_SWORDLESS()                              do { gOotSave.eventsMisc[29] = 1; } while (0)
-#define EV_OOT_UNSET_SWORDLESS()                            do { gOotSave.eventsMisc[29] = 0; } while (0)
+#define EV_OOT_IS_SWORDLESS()                               (!!(gOotSave.info.eventsMisc[29]))
+#define EV_OOT_SET_SWORDLESS()                              do { gOotSave.info.eventsMisc[29] = 1; } while (0)
+#define EV_OOT_UNSET_SWORDLESS()                            do { gOotSave.info.eventsMisc[29] = 0; } while (0)
 
 #if !defined(__ASSEMBLER__)
-# define MM_SET_EVENT_WEEK(x)       (gMmSave.weekEventReg[(x) / 8] |= (1 << ((x) % 8)))
-# define MM_CLEAR_EVENT_WEEK(x)     (gMmSave.weekEventReg[(x) / 8] &= ~(1 << ((x) % 8)))
-# define MM_GET_EVENT_WEEK(x)       (gMmSave.weekEventReg[(x) / 8] & (1 << ((x) % 8)))
+# define MM_SET_EVENT_WEEK(x)       (gMmSave.info.weekEventReg[(x) / 8] |= (1 << ((x) % 8)))
+# define MM_CLEAR_EVENT_WEEK(x)     (gMmSave.info.weekEventReg[(x) / 8] &= ~(1 << ((x) % 8)))
+# define MM_GET_EVENT_WEEK(x)       (gMmSave.info.weekEventReg[(x) / 8] & (1 << ((x) % 8)))
 # define MM_CHECK_EVENT_INF(x)      (gMmSave.eventInf[(x) >> 4] & (1 << ((x) & 0xf)))
 # define MM_SET_EVENT_INF(x)        (gMmSave.eventInf[(x) >> 4] |= (1 << ((x) & 0xf)))
 # define MM_CLEAR_EVENT_INF(x)      (gMmSave.eventInf[(x) >> 4] &= ~(1 << ((x) & 0xf)))

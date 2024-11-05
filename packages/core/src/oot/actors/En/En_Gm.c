@@ -14,7 +14,7 @@ int EnGm_HasGivenItem(Actor* this)
 {
     if (Actor_HasParentZ(this))
     {
-        BITMAP16_SET(gSave.eventsMisc, EV_OOT_INF_MEDIGORON);
+        BITMAP16_SET(gSave.info.eventsMisc, EV_OOT_INF_MEDIGORON);
         return 1;
     }
     return 0;
@@ -38,7 +38,7 @@ int EnGm_GetState(void)
     if (gSave.age == AGE_CHILD)
         return 0;
 
-    if (BITMAP16_GET(gSave.eventsMisc, EV_OOT_INF_MEDIGORON))
+    if (BITMAP16_GET(gSave.info.eventsMisc, EV_OOT_INF_MEDIGORON))
         return 3;
 
     return 1;

@@ -86,9 +86,9 @@ void Inventory_SetWorldMapCloudVisibility(s16 tingleId)
         sceneId = *tingleMapSceneIds;
         if (sceneId == 0xff)
             break;
-        BITMAP32_SET(gMmSave.scenesVisible, sceneId);
+        BITMAP32_SET(gMmSave.info.scenesVisible, sceneId);
         tingleMapSceneIds++;
     }
 
-    gMmSave.worldMapCloudVisibility |= kTingleMapCloudMasks[tingleId];
+    gMmSave.info.worldMapCloudVisibility |= kTingleMapCloudMasks[tingleId];
 }

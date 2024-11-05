@@ -28,9 +28,9 @@ void Horse_ForceUnmount(PlayState* play)
 
         /* Reset the TempB */
         if (EV_OOT_IS_SWORDLESS())
-            gSave.equips.buttonItems[0] = ITEM_NONE;
+            gSave.info.equips.buttonItems[0] = ITEM_NONE;
         else
-            gSave.equips.buttonItems[0] = gSaveContext.buttonStatus[0];
+            gSave.info.equips.buttonItems[0] = gSaveContext.buttonStatus[0];
         gSaveContext.buttonStatus[0] = ITEM_NONE;
 
         /* Reload the B button icon */

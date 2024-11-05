@@ -188,22 +188,6 @@ typedef struct RespawnData {
 
 typedef struct
 {
-    s32                     entrance;
-    u8                      equippedMask;
-    u8                      isFirstCycle;
-    char                    unk_006;
-    u8                      linkAge;
-    s32                     cutscene;
-    u16                     time;
-    u16                     owlLocation;
-    s32                     isNight;
-    s32                     daySpeed;
-    u32                     day;
-    u32                     daysElapsed;
-    u8                      playerForm;
-    u8                      snowheadCleared;
-    u8                      hasTatl;
-    u8                      isOwlSave;
     MmSavePlayerData        playerData;
     MmItemEquips            itemEquips;
     MmInventory             inventory;
@@ -244,6 +228,28 @@ typedef struct
     s8                      bomberCode[5];
     MmHorseData             horseData;
     u16                     checksum;
+}
+MmSaveInfo;
+
+typedef struct
+{
+    s32                     entrance;
+    u8                      equippedMask;
+    u8                      isFirstCycle;
+    char                    unk_006;
+    u8                      linkAge;
+    s32                     cutscene;
+    u16                     time;
+    u16                     owlLocation;
+    s32                     isNight;
+    s32                     daySpeed;
+    u32                     day;
+    u32                     daysElapsed;
+    u8                      playerForm;
+    u8                      snowheadCleared;
+    u8                      hasTatl;
+    u8                      isOwlSave;
+    MmSaveInfo              info;
     u8                      eventInf[8];
     u8                      hasSirloin;
     u8                      unk_1015;

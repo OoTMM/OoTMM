@@ -8,7 +8,7 @@
 
 static void EnMm_AfterMaskTrade(Actor* this, PlayState* play)
 {
-    gSave.eventsItem[3] |= 0x800;
+    gSave.info.eventsItem[3] |= 0x800;
     SET_HANDLER(this, actorAddr(ACTOR_EN_MM, 0x80ad111c));
 }
 
@@ -63,7 +63,7 @@ static int EnMm_ActorTalkedTo(Actor* this)
 
     link = GET_PLAYER(gPlay);
     ret = ActorTalkedTo(this);
-    if (ret && link->mask == MASK_BUNNY && !(gSave.eventsItem[3] & 0x800))
+    if (ret && link->mask == MASK_BUNNY && !(gSave.info.eventsItem[3] & 0x800))
     {
         SET_HANDLER(this, EnMm_InitMaskTrade);
         EnMm_InitMaskTrade(this, gPlay);

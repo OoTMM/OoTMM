@@ -22,15 +22,15 @@ static void EnGinkoMan_DisplayMainBox(Actor* this, PlayState* play)
     b = play->msgCtx.font.textBuffer.schar;
     comboTextAppendHeader(&b);
     comboTextAppendStr(&b, "You have " TEXT_COLOR_PINK);
-    comboTextAppendNum(&b, gSave.bankRupees);
+    comboTextAppendNum(&b, gSave.info.bankRupees);
     comboTextAppendStr(&b, " Rupee");
-    if (gSave.bankRupees != 1)
+    if (gSave.info.bankRupees != 1)
         comboTextAppendStr(&b, "s");
     comboTextAppendClearColor(&b);
     comboTextAppendStr(&b, " in the bank." TEXT_NL TEXT_CHOICE3);
-    comboTextAppendStr(&b, gSave.bankRupees == BANK_MAX ? TEXT_COLOR_RED : TEXT_COLOR_GREEN);
+    comboTextAppendStr(&b, gSave.info.bankRupees == BANK_MAX ? TEXT_COLOR_RED : TEXT_COLOR_GREEN);
     comboTextAppendStr(&b, " Deposit" TEXT_NL);
-    comboTextAppendStr(&b, gSave.bankRupees <= BANK_FEE ? TEXT_COLOR_RED : TEXT_COLOR_GREEN);
+    comboTextAppendStr(&b, gSave.info.bankRupees <= BANK_FEE ? TEXT_COLOR_RED : TEXT_COLOR_GREEN);
     comboTextAppendStr(&b, " Withdraw" TEXT_NL TEXT_COLOR_GREEN " Cancel" TEXT_END);
 }
 
@@ -54,7 +54,7 @@ static int EnGinkoMan_ButtonPress(PlayState* play)
 
 static s32 EnGinkoMan_MaxRupees(void)
 {
-    return gMaxRupees[gSave.inventory.upgrades.wallet];
+    return gMaxRupees[gSave.info.inventory.upgrades.wallet];
 }
 
 static s32 EnGinkoMan_CurrentRupees(void)
@@ -62,7 +62,7 @@ static s32 EnGinkoMan_CurrentRupees(void)
     s32 rupees;
     s32 maxRupees;
 
-    rupees = gSave.playerData.rupees;
+    rupees = gSave.info.playerData.rupees;
     rupees += gSave.rupeesDelta;
     maxRupees = EnGinkoMan_MaxRupees();
     if (rupees < 0)
@@ -77,11 +77,11 @@ static void EnGinkoMan_Deposit(PlayState* play, int amount)
     s32 rupees;
 
     rupees = EnGinkoMan_CurrentRupees();
-    if (gSave.bankRupees + amount > BANK_MAX)
-        amount = BANK_MAX - gSave.bankRupees;
+    if (gSave.info.bankRupees + amount > BANK_MAX)
+        amount = BANK_MAX - gSave.info.bankRupees;
     if (amount > rupees)
         amount = rupees;
-    gSave.bankRupees += amount;
+    gSave.info.bankRupees += amount;
     AddRupeesRaw((s16)-amount);
 }
 
@@ -93,22 +93,22 @@ static void EnGinkoMan_Withdraw(PlayState* play, int amount)
     /* Deduct the main amount */
     currentRupees = EnGinkoMan_CurrentRupees();
     maxRupees = EnGinkoMan_MaxRupees();
-    if (amount > gSave.bankRupees)
-        amount = gSave.bankRupees;
+    if (amount > gSave.info.bankRupees)
+        amount = gSave.info.bankRupees;
     if (amount > maxRupees - currentRupees)
         amount = maxRupees - currentRupees;
     if (amount == 0)
         return;
-    gSave.bankRupees -= amount;
+    gSave.info.bankRupees -= amount;
     AddRupeesRaw((s16)amount);
 
     /* Deduct the fee */
-    if (gSave.bankRupees > BANK_FEE)
-        gSave.bankRupees -= BANK_FEE;
+    if (gSave.info.bankRupees > BANK_FEE)
+        gSave.info.bankRupees -= BANK_FEE;
     else
     {
-        AddRupeesRaw(-(BANK_FEE - gSave.bankRupees));
-        gSave.bankRupees = 0;
+        AddRupeesRaw(-(BANK_FEE - gSave.info.bankRupees));
+        gSave.info.bankRupees = 0;
     }
 }
 
@@ -129,7 +129,7 @@ static int EnGinkoMan_Reward(void)
         npc = NPC_MM_BANK_1 + i;
         if (BITMAP8_GET(gSharedCustomSave.mm.npc, npc))
             continue;
-        if (gSave.bankRupees < kRequiredRupeeReward[i])
+        if (gSave.info.bankRupees < kRequiredRupeeReward[i])
             return -1;
         return i;
     }

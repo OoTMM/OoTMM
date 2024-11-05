@@ -106,16 +106,16 @@ static void reloadSlotEquipsOot(OotItemEquips* equips, int slot)
     {
         if (equips->cButtonSlots[i] == slot)
         {
-            equips->buttonItems[1 + i] = gOotSave.inventory.items[slot];
+            equips->buttonItems[1 + i] = gOotSave.info.inventory.items[slot];
         }
     }
 }
 
 void reloadSlotRawOot(int slot)
 {
-    reloadSlotEquipsOot(&gOotSave.equips, slot);
-    reloadSlotEquipsOot(&gOotSave.childEquips, slot);
-    reloadSlotEquipsOot(&gOotSave.adultEquips, slot);
+    reloadSlotEquipsOot(&gOotSave.info.equips, slot);
+    reloadSlotEquipsOot(&gOotSave.info.childEquips, slot);
+    reloadSlotEquipsOot(&gOotSave.info.adultEquips, slot);
 }
 
 static void reloadSlotEquipsMm(MmItemEquips* equips, int slot)
@@ -124,14 +124,14 @@ static void reloadSlotEquipsMm(MmItemEquips* equips, int slot)
     {
         if (equips->cButtonSlots[0][1 + i] == slot)
         {
-            equips->buttonItems[0][1 + i] = gMmSave.inventory.items[slot];
+            equips->buttonItems[0][1 + i] = gMmSave.info.inventory.items[slot];
         }
     }
 }
 
 static void reloadSlotRawMm(int slot)
 {
-    reloadSlotEquipsMm(&gMmSave.itemEquips, slot);
+    reloadSlotEquipsMm(&gMmSave.info.itemEquips, slot);
 }
 
 void reloadSlotOot(PlayState* play, int slot)
@@ -177,24 +177,24 @@ static void addRupeesRawOot(s16 delta)
 {
     u16 max;
 
-    max = gOotMaxRupees[gOotSave.inventory.upgrades.wallet];
-    gOotSave.playerData.rupees += RupeeValueOot(delta);
-    if (gOotSave.playerData.rupees > max)
-        gOotSave.playerData.rupees = max;
-    if (gOotSave.playerData.rupees < 0)
-        gOotSave.playerData.rupees = 0;
+    max = gOotMaxRupees[gOotSave.info.inventory.upgrades.wallet];
+    gOotSave.info.playerData.rupees += RupeeValueOot(delta);
+    if (gOotSave.info.playerData.rupees > max)
+        gOotSave.info.playerData.rupees = max;
+    if (gOotSave.info.playerData.rupees < 0)
+        gOotSave.info.playerData.rupees = 0;
 }
 
 static void addRupeesRawMm(s16 delta)
 {
     u16 max;
 
-    max = gMmMaxRupees[gMmSave.inventory.upgrades.wallet];
-    gMmSave.playerData.rupees += RupeeValueMm(delta);
-    if (gMmSave.playerData.rupees > max)
-        gMmSave.playerData.rupees = max;
-    if (gMmSave.playerData.rupees < 0)
-        gMmSave.playerData.rupees = 0;
+    max = gMmMaxRupees[gMmSave.info.inventory.upgrades.wallet];
+    gMmSave.info.playerData.rupees += RupeeValueMm(delta);
+    if (gMmSave.info.playerData.rupees > max)
+        gMmSave.info.playerData.rupees = max;
+    if (gMmSave.info.playerData.rupees < 0)
+        gMmSave.info.playerData.rupees = 0;
 }
 
 static void addRupeesOot(PlayState* play, s16 delta)
@@ -259,7 +259,7 @@ static void addWalletRawOot(u16 index)
         gOotExtraFlags.bottomlessWallet = 1;
     }
     else
-        gOotSave.inventory.upgrades.wallet = (index - 1);
+        gOotSave.info.inventory.upgrades.wallet = (index - 1);
     comboWalletRefresh();
 }
 
@@ -274,7 +274,7 @@ static void addWalletRawMm(u16 index)
         gMmExtraFlags3.bottomlessWallet = 1;
     }
     else
-        gMmSave.inventory.upgrades.wallet = (index - 1);
+        gMmSave.info.inventory.upgrades.wallet = (index - 1);
     comboWalletRefresh();
 }
 
@@ -292,7 +292,7 @@ static int addItemWalletOot(PlayState* play, u8 itemId, s16 gi, u16 param)
         addWalletRawOot(param);
 
     if (Config_Flag(CFG_FILL_WALLETS))
-        addRupeesOot(play, gOotMaxRupees[gOotSave.inventory.upgrades.wallet]);
+        addRupeesOot(play, gOotMaxRupees[gOotSave.info.inventory.upgrades.wallet]);
 
     return 0;
 }
@@ -305,34 +305,34 @@ static int addItemWalletMm(PlayState* play, u8 itemId, s16 gi, u16 param)
         addWalletRawMm(param);
 
     if (Config_Flag(CFG_FILL_WALLETS))
-        addRupeesMm(play, gMmMaxRupees[gMmSave.inventory.upgrades.wallet]);
+        addRupeesMm(play, gMmMaxRupees[gMmSave.info.inventory.upgrades.wallet]);
 
     return 0;
 }
 
 static void addAmmoOot(u8 slot, u16 item, u8 max, u8 count)
 {
-    gOotSave.inventory.items[slot] = item;
-    gOotSave.inventory.ammo[slot] += count;
-    if (gOotSave.inventory.ammo[slot] > max)
-        gOotSave.inventory.ammo[slot] = max;
+    gOotSave.info.inventory.items[slot] = item;
+    gOotSave.info.inventory.ammo[slot] += count;
+    if (gOotSave.info.inventory.ammo[slot] > max)
+        gOotSave.info.inventory.ammo[slot] = max;
 }
 
 static void addAmmoMm(u8 slot, u16 item, u8 max, u8 count)
 {
-    gMmSave.inventory.items[slot] = item;
-    gMmSave.inventory.ammo[slot] += count;
-    if (gMmSave.inventory.ammo[slot] > max)
-        gMmSave.inventory.ammo[slot] = max;
+    gMmSave.info.inventory.items[slot] = item;
+    gMmSave.info.inventory.ammo[slot] += count;
+    if (gMmSave.info.inventory.ammo[slot] > max)
+        gMmSave.info.inventory.ammo[slot] = max;
 }
 
 static void addBombsRawOot(u8 count)
 {
     u8 max;
 
-    if (gOotSave.inventory.upgrades.bombBag == 0)
+    if (gOotSave.info.inventory.upgrades.bombBag == 0)
         return;
-    max = kMaxBombs[gOotSave.inventory.upgrades.bombBag];
+    max = kMaxBombs[gOotSave.info.inventory.upgrades.bombBag];
     addAmmoOot(ITS_OOT_BOMBS, ITEM_OOT_BOMB, max, count);
 }
 
@@ -340,9 +340,9 @@ static void addBombsRawMm(u8 count)
 {
     u8 max;
 
-    if (gMmSave.inventory.upgrades.bombBag == 0)
+    if (gMmSave.info.inventory.upgrades.bombBag == 0)
         return;
-    max = kMaxBombs[gMmSave.inventory.upgrades.bombBag];
+    max = kMaxBombs[gMmSave.info.inventory.upgrades.bombBag];
     addAmmoMm(ITS_MM_BOMBS, ITEM_MM_BOMB, max, count);
 }
 
@@ -376,10 +376,10 @@ void addNutsRawOot(int count)
 {
     u8 max;
 
-    if (gOotSave.inventory.upgrades.dekuNut == 0)
-        gOotSave.inventory.upgrades.dekuNut = 1;
+    if (gOotSave.info.inventory.upgrades.dekuNut == 0)
+        gOotSave.info.inventory.upgrades.dekuNut = 1;
 
-    max = kMaxNuts[gOotSave.inventory.upgrades.dekuNut];
+    max = kMaxNuts[gOotSave.info.inventory.upgrades.dekuNut];
     addAmmoOot(ITS_OOT_NUTS, ITEM_OOT_NUT, max, count);
 }
 
@@ -387,10 +387,10 @@ void addNutsRawMm(int count)
 {
     u8 max;
 
-    if (gMmSave.inventory.upgrades.dekuNut == 0)
-        gMmSave.inventory.upgrades.dekuNut = 1;
+    if (gMmSave.info.inventory.upgrades.dekuNut == 0)
+        gMmSave.info.inventory.upgrades.dekuNut = 1;
 
-    max = kMaxNuts[gMmSave.inventory.upgrades.dekuNut];
+    max = kMaxNuts[gMmSave.info.inventory.upgrades.dekuNut];
     addAmmoMm(ITS_MM_NUTS, ITEM_MM_NUT, max, count);
 }
 
@@ -422,23 +422,23 @@ static int addItemNutsMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 
 static int addItemNutsUpgradeOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    if (gOotSave.inventory.upgrades.dekuNut < param)
-        gOotSave.inventory.upgrades.dekuNut = param;
+    if (gOotSave.info.inventory.upgrades.dekuNut < param)
+        gOotSave.info.inventory.upgrades.dekuNut = param;
     addNutsOot(kMaxNuts[param]);
     return 0;
 }
 
 static int addItemNutsUpgradeMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    if (gMmSave.inventory.upgrades.dekuNut < param)
-        gMmSave.inventory.upgrades.dekuNut = param;
+    if (gMmSave.info.inventory.upgrades.dekuNut < param)
+        gMmSave.info.inventory.upgrades.dekuNut = param;
     addNutsMm(kMaxNuts[param]);
     return 0;
 }
 
 static void addBombchuRawOot(u8 count)
 {
-    if (Config_Flag(CFG_OOT_BOMBCHU_BAG) && gOotSave.inventory.items[ITS_OOT_BOMBCHU] != ITEM_OOT_BOMBCHU_10)
+    if (Config_Flag(CFG_OOT_BOMBCHU_BAG) && gOotSave.info.inventory.items[ITS_OOT_BOMBCHU] != ITEM_OOT_BOMBCHU_10)
         return;
 
     addAmmoOot(ITS_OOT_BOMBCHU, ITEM_OOT_BOMBCHU_10, 50, count);
@@ -448,13 +448,13 @@ static void addBombchuRawMm(u8 count)
 {
     if (Config_Flag(CFG_MM_BOMBCHU_BAG))
     {
-        if (gMmSave.inventory.items[ITS_MM_BOMBCHU] == ITEM_MM_BOMBCHU)
+        if (gMmSave.info.inventory.items[ITS_MM_BOMBCHU] == ITEM_MM_BOMBCHU)
             addAmmoMm(ITS_MM_BOMBCHU, ITEM_MM_BOMBCHU, 50, count);
     }
     else
     {
-        if (gMmSave.inventory.upgrades.bombBag)
-            addAmmoMm(ITS_MM_BOMBCHU, ITEM_MM_BOMBCHU, kMaxBombs[gMmSave.inventory.upgrades.bombBag], count);
+        if (gMmSave.info.inventory.upgrades.bombBag)
+            addAmmoMm(ITS_MM_BOMBCHU, ITEM_MM_BOMBCHU, kMaxBombs[gMmSave.info.inventory.upgrades.bombBag], count);
     }
 }
 
@@ -488,9 +488,9 @@ static void addArrowsRawOot(u8 count)
 {
     u8 max;
 
-    if (gOotSave.inventory.upgrades.quiver == 0)
+    if (gOotSave.info.inventory.upgrades.quiver == 0)
         return;
-    max = kMaxArrows[gOotSave.inventory.upgrades.quiver];
+    max = kMaxArrows[gOotSave.info.inventory.upgrades.quiver];
     addAmmoOot(ITS_OOT_BOW, ITEM_OOT_BOW, max, count);
 }
 
@@ -498,9 +498,9 @@ static void addArrowsRawMm(u8 count)
 {
     u8 max;
 
-    if (gMmSave.inventory.upgrades.quiver == 0)
+    if (gMmSave.info.inventory.upgrades.quiver == 0)
         return;
-    max = kMaxArrows[gMmSave.inventory.upgrades.quiver];
+    max = kMaxArrows[gMmSave.info.inventory.upgrades.quiver];
     addAmmoMm(ITS_MM_BOW, ITEM_MM_BOW, max, count);
 }
 
@@ -532,15 +532,15 @@ static int addItemArrowsMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 
 static void addBowRawOot(u8 index)
 {
-    if (index > gOotSave.inventory.upgrades.quiver)
-        gOotSave.inventory.upgrades.quiver = index;
+    if (index > gOotSave.info.inventory.upgrades.quiver)
+        gOotSave.info.inventory.upgrades.quiver = index;
     addArrowsRawOot(kMaxArrows[index]);
 }
 
 static void addBowRawMm(u8 index)
 {
-    if (index > gMmSave.inventory.upgrades.quiver)
-        gMmSave.inventory.upgrades.quiver = index;
+    if (index > gMmSave.info.inventory.upgrades.quiver)
+        gMmSave.info.inventory.upgrades.quiver = index;
     addArrowsRawMm(kMaxArrows[index]);
 }
 
@@ -564,11 +564,11 @@ static void addSeeds(u8 count)
 {
     u8 max;
 
-    if (gOotSave.inventory.upgrades.bulletBag == 0)
+    if (gOotSave.info.inventory.upgrades.bulletBag == 0)
         return;
-    max = kMaxSeeds[gOotSave.inventory.upgrades.bulletBag];
+    max = kMaxSeeds[gOotSave.info.inventory.upgrades.bulletBag];
     addAmmoOot(ITS_OOT_SLINGSHOT, ITEM_OOT_SLINGSHOT, max, count);
-    BITMAP16_SET(gOotSave.eventsItem, EV_OOT_ITEM_DEKU_SEEDS);
+    BITMAP16_SET(gOotSave.info.eventsItem, EV_OOT_ITEM_DEKU_SEEDS);
 }
 
 static int addItemSeeds(PlayState* play, u8 itemId, s16 gi, u16 param)
@@ -579,15 +579,15 @@ static int addItemSeeds(PlayState* play, u8 itemId, s16 gi, u16 param)
 
 static int addItemSlingshot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    if (gOotSave.inventory.upgrades.bulletBag < param)
-        gOotSave.inventory.upgrades.bulletBag = param;
+    if (gOotSave.info.inventory.upgrades.bulletBag < param)
+        gOotSave.info.inventory.upgrades.bulletBag = param;
     addSeeds(kMaxSeeds[param]);
     return 0;
 }
 
 static int addItemNormalOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    gOotSave.inventory.items[kItemSlotsOot[itemId]] = itemId;
+    gOotSave.info.inventory.items[kItemSlotsOot[itemId]] = itemId;
     return 0;
 }
 
@@ -606,7 +606,7 @@ static int addItemNormalMm(PlayState* play, u8 itemId, s16 gi, u16 param)
         slots = kItemSlotsMm;
         slotIndex = itemId;
     }
-    gMmSave.inventory.items[slots[slotIndex]] = itemId;
+    gMmSave.info.inventory.items[slots[slotIndex]] = itemId;
     return 0;
 }
 
@@ -614,10 +614,10 @@ void addSticksRawOot(int count)
 {
     u8 max;
 
-    if (gOotSave.inventory.upgrades.dekuStick == 0)
-        gOotSave.inventory.upgrades.dekuStick = 1;
+    if (gOotSave.info.inventory.upgrades.dekuStick == 0)
+        gOotSave.info.inventory.upgrades.dekuStick = 1;
 
-    max = kMaxSticks[gOotSave.inventory.upgrades.dekuStick];
+    max = kMaxSticks[gOotSave.info.inventory.upgrades.dekuStick];
     addAmmoOot(ITS_OOT_STICKS, ITEM_OOT_STICK, max, count);
 }
 
@@ -625,10 +625,10 @@ void addSticksRawMm(int count)
 {
     u8 max;
 
-    if (gMmSave.inventory.upgrades.dekuStick == 0)
-        gMmSave.inventory.upgrades.dekuStick = 1;
+    if (gMmSave.info.inventory.upgrades.dekuStick == 0)
+        gMmSave.info.inventory.upgrades.dekuStick = 1;
 
-    max = kMaxSticks[gMmSave.inventory.upgrades.dekuStick];
+    max = kMaxSticks[gMmSave.info.inventory.upgrades.dekuStick];
     addAmmoMm(ITS_MM_STICKS, ITEM_MM_STICK, max, count);
 }
 
@@ -660,16 +660,16 @@ static int addItemSticksMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 
 static int addItemSticksUpgradeOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    if (gOotSave.inventory.upgrades.dekuStick < param)
-        gOotSave.inventory.upgrades.dekuStick = param;
+    if (gOotSave.info.inventory.upgrades.dekuStick < param)
+        gOotSave.info.inventory.upgrades.dekuStick = param;
     addSticksOot(kMaxSticks[param]);
     return 0;
 }
 
 static int addItemSticksUpgradeMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    if (gMmSave.inventory.upgrades.dekuStick < param)
-        gMmSave.inventory.upgrades.dekuStick = param;
+    if (gMmSave.info.inventory.upgrades.dekuStick < param)
+        gMmSave.info.inventory.upgrades.dekuStick = param;
     addSticksMm(kMaxSticks[param]);
     return 0;
 }
@@ -682,7 +682,7 @@ static void addHookshotRawOot(PlayState* play, int level)
         itemId = ITEM_OOT_LONGSHOT;
     else
         itemId = ITEM_OOT_HOOKSHOT;
-    gOotSave.inventory.items[ITS_OOT_HOOKSHOT] = itemId;
+    gOotSave.info.inventory.items[ITS_OOT_HOOKSHOT] = itemId;
     gOotExtraItems.hookshot |= (1 << (level - 1));
     reloadSlotOot(play, ITS_OOT_HOOKSHOT);
 }
@@ -695,7 +695,7 @@ static void addHookshotRawMm(PlayState* play, int level)
         itemId = ITEM_MM_HOOKSHOT;
     else
         itemId = 0x11; /* ITEM_MM_BOTTLE_POTION_RED but that enum is wrong */
-    gMmSave.inventory.items[ITS_MM_HOOKSHOT] = itemId;
+    gMmSave.info.inventory.items[ITS_MM_HOOKSHOT] = itemId;
     gMmExtraItems.hookshot |= (1 << (level - 1));
     reloadSlotMm(play, ITS_MM_HOOKSHOT);
 #if defined(GAME_MM)
@@ -748,8 +748,8 @@ static int addItemTradeOotChild(PlayState* play, u8 itemId, s16 gi, u16 param)
     mask = 1 << (u16)param;
     if (gOotExtraTradeSave.child & mask)
         return 0;
-    if (gOotSave.inventory.items[ITS_OOT_TRADE_CHILD] == ITEM_NONE)
-        gOotSave.inventory.items[ITS_OOT_TRADE_CHILD] = itemId;
+    if (gOotSave.info.inventory.items[ITS_OOT_TRADE_CHILD] == ITEM_NONE)
+        gOotSave.info.inventory.items[ITS_OOT_TRADE_CHILD] = itemId;
     gOotExtraTrade.child |= mask;
     gOotExtraTradeSave.child |= mask;
     return 0;
@@ -763,8 +763,8 @@ static int addItemTradeOotAdult(PlayState* play, u8 itemId, s16 gi, u16 param)
     mask = 1 << (u16)param;
     if (gOotExtraTradeSave.adult & mask)
         return 0;
-    if (gOotSave.inventory.items[ITS_OOT_TRADE_ADULT] == ITEM_NONE)
-        gOotSave.inventory.items[ITS_OOT_TRADE_ADULT] = itemId;
+    if (gOotSave.info.inventory.items[ITS_OOT_TRADE_ADULT] == ITEM_NONE)
+        gOotSave.info.inventory.items[ITS_OOT_TRADE_ADULT] = itemId;
     gOotExtraTrade.adult |= mask;
     gOotExtraTradeSave.adult |= mask;
     return 0;
@@ -773,8 +773,8 @@ static int addItemTradeOotAdult(PlayState* play, u8 itemId, s16 gi, u16 param)
 static int addItemTradeMm1(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     itemId = kMmTrade1[param];
-    if (gMmSave.inventory.items[ITS_MM_TRADE1] == ITEM_NONE)
-        gMmSave.inventory.items[ITS_MM_TRADE1] = itemId;
+    if (gMmSave.info.inventory.items[ITS_MM_TRADE1] == ITEM_NONE)
+        gMmSave.info.inventory.items[ITS_MM_TRADE1] = itemId;
     gMmExtraTrade.trade1 |= (1 << (u16)param);
     gMmExtraTrade.tradeObtained1 |= (1 << (u16)param);
     return 0;
@@ -783,8 +783,8 @@ static int addItemTradeMm1(PlayState* play, u8 itemId, s16 gi, u16 param)
 static int addItemTradeMm2(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     itemId = kMmTrade2[param];
-    if (gMmSave.inventory.items[ITS_MM_TRADE2] == ITEM_NONE)
-        gMmSave.inventory.items[ITS_MM_TRADE2] = itemId;
+    if (gMmSave.info.inventory.items[ITS_MM_TRADE2] == ITEM_NONE)
+        gMmSave.info.inventory.items[ITS_MM_TRADE2] = itemId;
     gMmExtraTrade.trade2 |= (1 << (u16)param);
     gMmExtraTrade.tradeObtained2 |= (1 << (u16)param);
     return 0;
@@ -793,8 +793,8 @@ static int addItemTradeMm2(PlayState* play, u8 itemId, s16 gi, u16 param)
 static int addItemTradeMm3(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     itemId = kMmTrade3[param];
-    if (gMmSave.inventory.items[ITS_MM_TRADE3] == ITEM_NONE)
-        gMmSave.inventory.items[ITS_MM_TRADE3] = itemId;
+    if (gMmSave.info.inventory.items[ITS_MM_TRADE3] == ITEM_NONE)
+        gMmSave.info.inventory.items[ITS_MM_TRADE3] = itemId;
     gMmExtraTrade.trade3 |= (1 << (u16)param);
     gMmExtraTrade.tradeObtained3 |= (1 << (u16)param);
     return 0;
@@ -808,7 +808,7 @@ static void addOcarinaRawOot(PlayState* play, int level)
         itemId = ITEM_OOT_OCARINA_TIME;
     else
         itemId = ITEM_OOT_OCARINA_FAIRY;
-    gOotSave.inventory.items[ITS_OOT_OCARINA] = itemId;
+    gOotSave.info.inventory.items[ITS_OOT_OCARINA] = itemId;
     gOotExtraItems.ocarina |= (1 << (level - 1));
     reloadSlotOot(play, ITS_OOT_OCARINA);
 }
@@ -821,7 +821,7 @@ static void addOcarinaRawMm(PlayState* play, int level)
         itemId = ITEM_MM_OCARINA_OF_TIME;
     else
         itemId = ITEM_MM_OCARINA_FAIRY;
-    gMmSave.inventory.items[ITS_MM_OCARINA] = itemId;
+    gMmSave.info.inventory.items[ITS_MM_OCARINA] = itemId;
     gMmExtraItems.ocarina |= (1 << (level - 1));
     reloadSlotMm(play, ITS_MM_OCARINA);
 }
@@ -852,9 +852,9 @@ static int addItemBottleNewOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 
     for (int i = 0; i < 4; ++i)
     {
-        if (gOotSave.inventory.items[ITS_OOT_BOTTLE + i] == ITEM_NONE)
+        if (gOotSave.info.inventory.items[ITS_OOT_BOTTLE + i] == ITEM_NONE)
         {
-            gOotSave.inventory.items[ITS_OOT_BOTTLE + i] = itemId;
+            gOotSave.info.inventory.items[ITS_OOT_BOTTLE + i] = itemId;
             break;
         }
     }
@@ -866,9 +866,9 @@ static int addItemBottleRefillOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     for (int i = 0; i < 4; ++i)
     {
-        if (gOotSave.inventory.items[ITS_OOT_BOTTLE + i] == ITEM_OOT_BOTTLE_EMPTY)
+        if (gOotSave.info.inventory.items[ITS_OOT_BOTTLE + i] == ITEM_OOT_BOTTLE_EMPTY)
         {
-            gOotSave.inventory.items[ITS_OOT_BOTTLE + i] = itemId;
+            gOotSave.info.inventory.items[ITS_OOT_BOTTLE + i] = itemId;
             reloadSlotOot(play, ITS_OOT_BOTTLE + i);
             break;
         }
@@ -884,9 +884,9 @@ static int addItemBottleNewMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 
     for (int i = 0; i < 6; ++i)
     {
-        if (gMmSave.inventory.items[ITS_MM_BOTTLE + i] == ITEM_NONE)
+        if (gMmSave.info.inventory.items[ITS_MM_BOTTLE + i] == ITEM_NONE)
         {
-            gMmSave.inventory.items[ITS_MM_BOTTLE + i] = itemId;
+            gMmSave.info.inventory.items[ITS_MM_BOTTLE + i] = itemId;
             break;
         }
     }
@@ -898,9 +898,9 @@ static int addItemBottleRefillMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     for (int i = 0; i < 6; ++i)
     {
-        if (gMmSave.inventory.items[ITS_MM_BOTTLE + i] == ITEM_MM_BOTTLE_EMPTY)
+        if (gMmSave.info.inventory.items[ITS_MM_BOTTLE + i] == ITEM_MM_BOTTLE_EMPTY)
         {
-            gMmSave.inventory.items[ITS_MM_BOTTLE + i] = itemId;
+            gMmSave.info.inventory.items[ITS_MM_BOTTLE + i] = itemId;
             reloadSlotMm(play, ITS_MM_BOTTLE + i);
             break;
         }
@@ -928,14 +928,14 @@ static int addItemSwordOot(PlayState* play, u8 itemId, s16 gi, u16 param)
     base = param;
     if (base > 3)
         base = 3;
-    gOotSave.inventory.equipment.swords |= (1 << (base - 1));
+    gOotSave.info.inventory.equipment.swords |= (1 << (base - 1));
     if (param >= 3)
     {
-        gOotSave.playerData.swordHealth = 8;
-        gOotSave.inventory.equipment.swords &= ~EQ_OOT_SWORD_KNIFE_BROKEN;
+        gOotSave.info.playerData.swordHealth = 8;
+        gOotSave.info.inventory.equipment.swords &= ~EQ_OOT_SWORD_KNIFE_BROKEN;
     }
     if (param >= 4)
-        gOotSave.isBiggoronSword = 1;
+        gOotSave.info.isBiggoronSword = 1;
     if (param == 2)
         gSharedCustomSave.foundMasterSword = 1;
     return 0;
@@ -952,11 +952,11 @@ static int addItemSwordMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 #endif
 
     if (shouldChangeBtn)
-        gMmSave.itemEquips.buttonItems[0][0] = kMmSwords[param];
-    gMmSave.itemEquips.sword = param;
+        gMmSave.info.itemEquips.buttonItems[0][0] = kMmSwords[param];
+    gMmSave.info.itemEquips.sword = param;
 
     if (param == 2)
-        gMmSave.playerData.swordHealth = 100;
+        gMmSave.info.playerData.swordHealth = 100;
 
 #if defined(GAME_MM)
     if (play)
@@ -968,15 +968,15 @@ static int addItemSwordMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 
 static void addBombBagRawOot(u8 index)
 {
-    if (index > gOotSave.inventory.upgrades.bombBag)
-        gOotSave.inventory.upgrades.bombBag = index;
+    if (index > gOotSave.info.inventory.upgrades.bombBag)
+        gOotSave.info.inventory.upgrades.bombBag = index;
     addBombsRawOot(kMaxBombs[index]);
 }
 
 static void addBombBagRawMm(u8 index)
 {
-    if (index > gMmSave.inventory.upgrades.bombBag)
-        gMmSave.inventory.upgrades.bombBag = index;
+    if (index > gMmSave.info.inventory.upgrades.bombBag)
+        gMmSave.info.inventory.upgrades.bombBag = index;
     addBombsRawMm(kMaxBombs[index]);
 }
 
@@ -1005,7 +1005,7 @@ static int addItemShieldOot(PlayState* play, u8 itemId, s16 gi, u16 param)
     shieldType = (param & 0xff);
     isProgressive = !!((param >> 8) & 0xff);
     mask = 1 << (shieldType - 1);
-    gOotSave.inventory.equipment.shields |= mask;
+    gOotSave.info.inventory.equipment.shields |= mask;
     if (isProgressive)
         gOotExtraItems.shield |= mask;
     return 0;
@@ -1018,8 +1018,8 @@ static int addItemShieldMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 
     shieldType = (param & 0xff);
     isProgressive = !!((param >> 8) & 0xff);
-    if (shieldType > gMmSave.itemEquips.shield)
-        gMmSave.itemEquips.shield = shieldType;
+    if (shieldType > gMmSave.info.itemEquips.shield)
+        gMmSave.info.itemEquips.shield = shieldType;
     if (isProgressive)
         gMmExtraFlags2.progressiveShield = 1;
 
@@ -1033,55 +1033,55 @@ static int addItemShieldMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 
 static int addItemTunic(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    gOotSave.inventory.equipment.tunics |= (1 << (param - 1));
+    gOotSave.info.inventory.equipment.tunics |= (1 << (param - 1));
     return 0;
 }
 
 static int addItemBoots(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    gOotSave.inventory.equipment.boots |= (1 << (param - 1));
+    gOotSave.info.inventory.equipment.boots |= (1 << (param - 1));
     return 0;
 }
 
 static int addItemStrengthOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    if (param > gOotSave.inventory.upgrades.strength)
-        gOotSave.inventory.upgrades.strength = param;
+    if (param > gOotSave.info.inventory.upgrades.strength)
+        gOotSave.info.inventory.upgrades.strength = param;
     return 0;
 }
 
 static int addItemStrengthMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    if (param > gMmSave.inventory.upgrades.strength)
-        gMmSave.inventory.upgrades.strength = param;
+    if (param > gMmSave.info.inventory.upgrades.strength)
+        gMmSave.info.inventory.upgrades.strength = param;
     return 0;
 }
 
 static int addItemScaleOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    if (param > gOotSave.inventory.upgrades.dive)
-        gOotSave.inventory.upgrades.dive = param;
+    if (param > gOotSave.info.inventory.upgrades.dive)
+        gOotSave.info.inventory.upgrades.dive = param;
     return 0;
 }
 
 static int addItemScaleMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    if (param > gMmSave.inventory.upgrades.scale)
-        gMmSave.inventory.upgrades.scale = param;
+    if (param > gMmSave.info.inventory.upgrades.scale)
+        gMmSave.info.inventory.upgrades.scale = param;
     return 0;
 }
 
 static int addItemQuestOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    gOotSave.inventory.quest.value |= (1 << param);
+    gOotSave.info.inventory.quest.value |= (1 << param);
     if (param == QUEST_OOT_SONG_EPONA)
-        BITMAP16_SET(gOotSave.eventsChk, EV_OOT_CHK_EPONA);
+        BITMAP16_SET(gOotSave.info.eventsChk, EV_OOT_CHK_EPONA);
     return 0;
 }
 
 static int addItemQuestMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    gMmSave.inventory.quest.value |= (1 << param);
+    gMmSave.info.inventory.quest.value |= (1 << param);
     return 0;
 }
 
@@ -1092,16 +1092,16 @@ static void addHealthEffect(u8 count)
 
 static void addHealthRawOot(u8 count)
 {
-    gOotSave.playerData.health += count * 0x10;
-    if (gOotSave.playerData.health > gOotSave.playerData.healthCapacity)
-        gOotSave.playerData.health = gOotSave.playerData.healthCapacity;
+    gOotSave.info.playerData.health += count * 0x10;
+    if (gOotSave.info.playerData.health > gOotSave.info.playerData.healthCapacity)
+        gOotSave.info.playerData.health = gOotSave.info.playerData.healthCapacity;
 }
 
 static void addHealthRawMm(u8 count)
 {
-    gMmSave.playerData.health += count * 0x10;
-    if (gMmSave.playerData.health > gMmSave.playerData.healthCapacity)
-        gMmSave.playerData.health = gMmSave.playerData.healthCapacity;
+    gMmSave.info.playerData.health += count * 0x10;
+    if (gMmSave.info.playerData.health > gMmSave.info.playerData.healthCapacity)
+        gMmSave.info.playerData.health = gMmSave.info.playerData.healthCapacity;
 }
 
 static void addHealthOot(PlayState* play, u8 count)
@@ -1154,14 +1154,14 @@ static int addItemHeartMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 
 static void addDefenseUpgradeRawOot(void)
 {
-    gOotSave.playerData.doubleDefense = 1;
-    gOotSave.inventory.doubleDefenseHearts = 20;
+    gOotSave.info.playerData.doubleDefense = 1;
+    gOotSave.info.inventory.doubleDefenseHearts = 20;
 }
 
 static void addDefenseUpgradeRawMm(void)
 {
-    gMmSave.playerData.doubleDefense = 1;
-    gMmSave.inventory.defenseHearts = 20;
+    gMmSave.info.playerData.doubleDefense = 1;
+    gMmSave.info.inventory.defenseHearts = 20;
 }
 
 static int addItemDefenseUpgradeOot(PlayState* play, u8 itemId, s16 gi, u16 param)
@@ -1184,21 +1184,21 @@ static int addItemDefenseUpgradeMm(PlayState* play, u8 itemId, s16 gi, u16 param
 
 static void addHeartPieceRawOot(void)
 {
-    gOotSave.inventory.quest.heartPieces++;
-    if (gOotSave.inventory.quest.heartPieces >= 4)
+    gOotSave.info.inventory.quest.heartPieces++;
+    if (gOotSave.info.inventory.quest.heartPieces >= 4)
     {
-        gOotSave.inventory.quest.heartPieces -= 4;
-        gOotSave.playerData.healthCapacity += 0x10;
+        gOotSave.info.inventory.quest.heartPieces -= 4;
+        gOotSave.info.playerData.healthCapacity += 0x10;
     }
 }
 
 static void addHeartPieceRawMm(void)
 {
-    gMmSave.inventory.quest.heartPieces++;
-    if (gMmSave.inventory.quest.heartPieces >= 4)
+    gMmSave.info.inventory.quest.heartPieces++;
+    if (gMmSave.info.inventory.quest.heartPieces >= 4)
     {
-        gMmSave.inventory.quest.heartPieces -= 4;
-        gMmSave.playerData.healthCapacity += 0x10;
+        gMmSave.info.inventory.quest.heartPieces -= 4;
+        gMmSave.info.playerData.healthCapacity += 0x10;
     }
 }
 
@@ -1211,7 +1211,7 @@ static int addItemHeartPieceOot(PlayState* play, u8 itemId, s16 gi, u16 param)
             addHeartPieceRawMm();
     }
     addHealthOot(play, 20);
-    return param > 1 ? 0: gOotSave.inventory.quest.heartPieces;
+    return param > 1 ? 0: gOotSave.info.inventory.quest.heartPieces;
 }
 
 static int addItemHeartPieceMm(PlayState* play, u8 itemId, s16 gi, u16 param)
@@ -1223,7 +1223,7 @@ static int addItemHeartPieceMm(PlayState* play, u8 itemId, s16 gi, u16 param)
             addHeartPieceRawOot();
     }
     addHealthMm(play, 20);
-    return param > 1 ? 0: gMmSave.inventory.quest.heartPieces;
+    return param > 1 ? 0: gMmSave.info.inventory.quest.heartPieces;
 }
 
 static int addSmallKeyOot(u16 dungeonId)
@@ -1231,19 +1231,19 @@ static int addSmallKeyOot(u16 dungeonId)
     s8 keyCount;
 
     /* Check for max keys */
-    if ((dungeonId != SCE_OOT_TREASURE_SHOP || Config_Flag(CFG_OOT_CHEST_GAME_SHUFFLE)) && gOotSave.inventory.dungeonItems[dungeonId].maxKeys >= g.maxKeysOot[dungeonId])
+    if ((dungeonId != SCE_OOT_TREASURE_SHOP || Config_Flag(CFG_OOT_CHEST_GAME_SHUFFLE)) && gOotSave.info.inventory.dungeonItems[dungeonId].maxKeys >= g.maxKeysOot[dungeonId])
         return 0;
 
-    keyCount = gOotSave.inventory.dungeonKeys[dungeonId];
+    keyCount = gOotSave.info.inventory.dungeonKeys[dungeonId];
     if (keyCount < 0)
         keyCount = 1;
     else
         keyCount++;
-    gOotSave.inventory.dungeonKeys[dungeonId] = keyCount;
+    gOotSave.info.inventory.dungeonKeys[dungeonId] = keyCount;
     if (dungeonId == SCE_OOT_TREASURE_SHOP && !Config_Flag(CFG_OOT_CHEST_GAME_SHUFFLE))
         return 0;
     else
-        return ++gOotSave.inventory.dungeonItems[dungeonId].maxKeys;
+        return ++gOotSave.info.inventory.dungeonItems[dungeonId].maxKeys;
 }
 
 int addSmallKeyMm(u16 dungeonId)
@@ -1251,18 +1251,18 @@ int addSmallKeyMm(u16 dungeonId)
     s8 keyCount;
 
     /* Max keys */
-    if (gMmSave.inventory.dungeonItems[dungeonId].maxKeys >= g.maxKeysMm[dungeonId])
+    if (gMmSave.info.inventory.dungeonItems[dungeonId].maxKeys >= g.maxKeysMm[dungeonId])
         return 0;
 
-    keyCount = gMmSave.inventory.dungeonKeys[dungeonId];
+    keyCount = gMmSave.info.inventory.dungeonKeys[dungeonId];
     if (keyCount < 0)
         keyCount = 1;
     else
         keyCount++;
-    gMmSave.inventory.dungeonKeys[dungeonId] = keyCount;
-    gMmSave.inventory.dungeonItems[dungeonId].maxKeys++;
+    gMmSave.info.inventory.dungeonKeys[dungeonId] = keyCount;
+    gMmSave.info.inventory.dungeonItems[dungeonId].maxKeys++;
 
-    return gMmSave.inventory.dungeonItems[dungeonId].maxKeys;
+    return gMmSave.info.inventory.dungeonItems[dungeonId].maxKeys;
 }
 
 static int addItemSmallKeyOot(PlayState* play, u8 itemId, s16 gi, u16 param)
@@ -1332,7 +1332,7 @@ static int addItemBossKeyOot(PlayState* play, u8 itemId, s16 gi, u16 param)
         param = comboOotDungeonScene(play, 1);
 #endif
 
-    gOotSave.inventory.dungeonItems[param].bossKey = 1;
+    gOotSave.info.inventory.dungeonItems[param].bossKey = 1;
     return 0;
 }
 
@@ -1343,7 +1343,7 @@ static int addItemBossKeyMm(PlayState* play, u8 itemId, s16 gi, u16 param)
         param = gSaveContext.dungeonId;
 #endif
 
-    gMmSave.inventory.dungeonItems[param].bossKey = 1;
+    gMmSave.info.inventory.dungeonItems[param].bossKey = 1;
     return 0;
 }
 
@@ -1354,7 +1354,7 @@ static int addItemCompassOot(PlayState* play, u8 itemId, s16 gi, u16 param)
         param = comboOotDungeonScene(play, 0);
 #endif
 
-    gOotSave.inventory.dungeonItems[param].compass = 1;
+    gOotSave.info.inventory.dungeonItems[param].compass = 1;
     return 0;
 }
 
@@ -1365,7 +1365,7 @@ static int addItemCompassMm(PlayState* play, u8 itemId, s16 gi, u16 param)
         param = gSaveContext.dungeonId;
 #endif
 
-    gMmSave.inventory.dungeonItems[param].compass = 1;
+    gMmSave.info.inventory.dungeonItems[param].compass = 1;
     return 0;
 }
 
@@ -1376,7 +1376,7 @@ static int addItemMapOot(PlayState* play, u8 itemId, s16 gi, u16 param)
         param = comboOotDungeonScene(play, 0);
 #endif
 
-    gOotSave.inventory.dungeonItems[param].map = 1;
+    gOotSave.info.inventory.dungeonItems[param].map = 1;
     return 0;
 }
 
@@ -1387,7 +1387,7 @@ static int addItemMapMm(PlayState* play, u8 itemId, s16 gi, u16 param)
         param = gSaveContext.dungeonId;
 #endif
 
-    gMmSave.inventory.dungeonItems[param].map = 1;
+    gMmSave.info.inventory.dungeonItems[param].map = 1;
     return 0;
 }
 
@@ -1426,18 +1426,18 @@ static int addItemMagicalRupee(PlayState* play, u8 itemId, s16 gi, u16 param)
 
 static int addItemGsToken(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    gOotSave.inventory.quest.goldToken = 1;
-    return ++gOotSave.inventory.goldTokens;
+    gOotSave.info.inventory.quest.goldToken = 1;
+    return ++gOotSave.info.inventory.goldTokens;
 }
 
 static int addItemGsTokenSwamp(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    return ++gMmSave.skullCountSwamp;
+    return ++gMmSave.info.skullCountSwamp;
 }
 
 static int addItemGsTokenOcean(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    return ++gMmSave.skullCountOcean;
+    return ++gMmSave.info.skullCountOcean;
 }
 
 static void fillMagicOot(PlayState* play)
@@ -1445,24 +1445,24 @@ static void fillMagicOot(PlayState* play)
     int level;
     int max;
 
-    if (!gOotSave.playerData.magicUpgrade)
+    if (!gOotSave.info.playerData.magicUpgrade)
         return;
-    level = gOotSave.playerData.magicUpgrade2 ? 2 : 1;
+    level = gOotSave.info.playerData.magicUpgrade2 ? 2 : 1;
     max = level * 0x30;
 
     /* Handle the effect */
 #if defined(GAME_OOT)
     if (play)
     {
-        gOotSave.playerData.magicLevel = 0;
+        gOotSave.info.playerData.magicLevel = 0;
         gSaveContext.magicFillTarget = max;
         return;
     }
 #endif
 
     /* No effect - add the magic directly */
-    gOotSave.playerData.magicLevel = level;
-    gOotSave.playerData.magic = max;
+    gOotSave.info.playerData.magicLevel = level;
+    gOotSave.info.playerData.magic = max;
 }
 
 static void fillMagicMm(PlayState* play)
@@ -1470,41 +1470,41 @@ static void fillMagicMm(PlayState* play)
     int level;
     int max;
 
-    if (!gMmSave.playerData.magicAcquired)
+    if (!gMmSave.info.playerData.magicAcquired)
         return;
-    level = gMmSave.playerData.doubleMagic ? 2 : 1;
+    level = gMmSave.info.playerData.doubleMagic ? 2 : 1;
     max = level * 0x30;
 
     /* Handle the effect */
 #if defined(GAME_MM)
     if (play)
     {
-        gMmSave.playerData.magicLevel = 0;
-        gMmSave.playerData.magic = max;
+        gMmSave.info.playerData.magicLevel = 0;
+        gMmSave.info.playerData.magic = max;
         gSaveContext.magicFillTarget = max;
         return;
     }
 #endif
 
     /* No effect - add the magic directly */
-    gMmSave.playerData.magicLevel = level;
-    gMmSave.playerData.magic = max;
+    gMmSave.info.playerData.magicLevel = level;
+    gMmSave.info.playerData.magic = max;
 }
 
 static int addItemMagicUpgradeOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    gOotSave.playerData.magicUpgrade = 1;
+    gOotSave.info.playerData.magicUpgrade = 1;
     if (param >= 2)
-        gOotSave.playerData.magicUpgrade2 = 1;
+        gOotSave.info.playerData.magicUpgrade2 = 1;
     fillMagicOot(play);
     return 0;
 }
 
 static int addItemMagicUpgradeMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    gMmSave.playerData.magicAcquired = 1;
+    gMmSave.info.playerData.magicAcquired = 1;
     if (param >= 2)
-        gMmSave.playerData.doubleMagic = 1;
+        gMmSave.info.playerData.doubleMagic = 1;
     fillMagicMm(play);
     return 0;
 }
@@ -1524,8 +1524,8 @@ static int addItemStrayFairy(PlayState* play, u8 itemId, s16 gi, u16 param)
     }
     else
     {
-        gMmSave.inventory.strayFairies[param]++;
-        return gMmSave.inventory.strayFairies[param];
+        gMmSave.info.inventory.strayFairies[param]++;
+        return gMmSave.info.inventory.strayFairies[param];
     }
 }
 
@@ -1624,14 +1624,14 @@ static void addMagicRawOot(u8 count)
     s16 acc;
     s16 max;
 
-    if (!gOotSave.playerData.magicUpgrade)
+    if (!gOotSave.info.playerData.magicUpgrade)
         return;
-    acc = gOotSave.playerData.magic;
+    acc = gOotSave.info.playerData.magic;
     acc += count;
-    max = gOotSave.playerData.magicUpgrade2 ? 0x60 : 0x30;
+    max = gOotSave.info.playerData.magicUpgrade2 ? 0x60 : 0x30;
     if (acc > max)
         acc = max;
-    gOotSave.playerData.magic = acc;
+    gOotSave.info.playerData.magic = acc;
 }
 
 static void addMagicRawMm(u8 count)
@@ -1639,14 +1639,14 @@ static void addMagicRawMm(u8 count)
     s16 acc;
     s16 max;
 
-    if (!gMmSave.playerData.magicAcquired)
+    if (!gMmSave.info.playerData.magicAcquired)
         return;
-    acc = gMmSave.playerData.magic;
+    acc = gMmSave.info.playerData.magic;
     acc += count;
-    max = gMmSave.playerData.doubleMagic ? 0x60 : 0x30;
+    max = gMmSave.info.playerData.doubleMagic ? 0x60 : 0x30;
     if (acc > max)
         acc = max;
-    gMmSave.playerData.magic = acc;
+    gMmSave.info.playerData.magic = acc;
 }
 
 static void addMagicEffect(PlayState* play, u8 count)
@@ -1709,12 +1709,12 @@ static int addItemMagicMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 
 static void addBombchuBagRawOot(void)
 {
-    gOotSave.inventory.items[ITS_OOT_BOMBCHU] = ITEM_OOT_BOMBCHU_10;
+    gOotSave.info.inventory.items[ITS_OOT_BOMBCHU] = ITEM_OOT_BOMBCHU_10;
 }
 
 static void addBombchuBagRawMm(void)
 {
-    gMmSave.inventory.items[ITS_MM_BOMBCHU] = ITEM_MM_BOMBCHU;
+    gMmSave.info.inventory.items[ITS_MM_BOMBCHU] = ITEM_MM_BOMBCHU;
 }
 
 static void addBombchuBagOot(u8 count)
@@ -1804,8 +1804,8 @@ static int addItemSwordExtraOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 static int addItemGFSHammer(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     itemId = kMmGFSHammer[param];
-    if (gMmSave.inventory.items[ITS_MM_GREAT_FAIRY_SWORD] == ITEM_NONE)
-        gMmSave.inventory.items[ITS_MM_GREAT_FAIRY_SWORD] = itemId;
+    if (gMmSave.info.inventory.items[ITS_MM_GREAT_FAIRY_SWORD] == ITEM_NONE)
+        gMmSave.info.inventory.items[ITS_MM_GREAT_FAIRY_SWORD] = itemId;
     gMmExtraItems.hammerGFS |= (1 << (u8)param);
     return 0;
 }

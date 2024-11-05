@@ -181,13 +181,13 @@ static void dpadUseItem(PlayState* play, int index, int flags)
 void Dpad_Update(PlayState* play)
 {
     /* Update the items */
-    sDpadItems[DPAD_DOWN] = gSave.inventory.items[ITS_OOT_OCARINA];
-    sDpadItems[DPAD_LEFT] = (gSave.inventory.equipment.boots & EQ_OOT_BOOTS_IRON) ? ITEM_OOT_BOOTS_IRON : ITEM_NONE;
-    sDpadItems[DPAD_RIGHT] = (gSave.inventory.equipment.boots & EQ_OOT_BOOTS_HOVER) ? ITEM_OOT_BOOTS_HOVER : ITEM_NONE;
-    sDpadItems[DPAD_UP] = gSave.inventory.items[ITS_OOT_TRADE_ADULT];
+    sDpadItems[DPAD_DOWN] = gSave.info.inventory.items[ITS_OOT_OCARINA];
+    sDpadItems[DPAD_LEFT] = (gSave.info.inventory.equipment.boots & EQ_OOT_BOOTS_IRON) ? ITEM_OOT_BOOTS_IRON : ITEM_NONE;
+    sDpadItems[DPAD_RIGHT] = (gSave.info.inventory.equipment.boots & EQ_OOT_BOOTS_HOVER) ? ITEM_OOT_BOOTS_HOVER : ITEM_NONE;
+    sDpadItems[DPAD_UP] = gSave.info.inventory.items[ITS_OOT_TRADE_ADULT];
     if (gSave.age == AGE_CHILD)
     {
-        sDpadItems[DPAD_UP] = gSave.inventory.items[ITS_OOT_TRADE_CHILD];
+        sDpadItems[DPAD_UP] = gSave.info.inventory.items[ITS_OOT_TRADE_CHILD];
         if (!Config_Flag(CFG_OOT_AGELESS_BOOTS))
         {
             sDpadItems[DPAD_LEFT] = ITEM_NONE;
@@ -195,7 +195,7 @@ void Dpad_Update(PlayState* play)
         }
     }
     else if(Config_Flag(CFG_OOT_AGELESS_CHILD_TRADE))
-        sDpadItems[DPAD_UP] = gSave.inventory.items[ITS_OOT_TRADE_CHILD];
+        sDpadItems[DPAD_UP] = gSave.info.inventory.items[ITS_OOT_TRADE_CHILD];
 }
 #endif
 
@@ -203,10 +203,10 @@ void Dpad_Update(PlayState* play)
 void Dpad_Update(PlayState* play)
 {
     /* Update the items */
-    sDpadItems[DPAD_DOWN] = gSave.inventory.items[ITS_MM_OCARINA];
-    sDpadItems[DPAD_UP] = gSave.inventory.items[ITS_MM_MASK_DEKU];
-    sDpadItems[DPAD_LEFT] = gSave.inventory.items[ITS_MM_MASK_GORON];
-    sDpadItems[DPAD_RIGHT] = gSave.inventory.items[ITS_MM_MASK_ZORA];
+    sDpadItems[DPAD_DOWN] = gSave.info.inventory.items[ITS_MM_OCARINA];
+    sDpadItems[DPAD_UP] = gSave.info.inventory.items[ITS_MM_MASK_DEKU];
+    sDpadItems[DPAD_LEFT] = gSave.info.inventory.items[ITS_MM_MASK_GORON];
+    sDpadItems[DPAD_RIGHT] = gSave.info.inventory.items[ITS_MM_MASK_ZORA];
 }
 #endif
 

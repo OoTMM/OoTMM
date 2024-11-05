@@ -466,109 +466,109 @@ void Debug_Init(void)
 static void cheatAllItems(PlayState* play)
 {
     /* Notebook */
-    gSave.weekEventReg[66] = 0xff;
-    gSave.weekEventReg[67] = 0xff;
-    gSave.weekEventReg[68] = 0xff;
-    gSave.weekEventReg[69] = 0xff;
-    gSave.weekEventReg[70] = 0xff;
-    gSave.weekEventReg[71] = 0xff;
-    gSave.weekEventReg[72] = 0x7f;
+    gSave.info.weekEventReg[66] = 0xff;
+    gSave.info.weekEventReg[67] = 0xff;
+    gSave.info.weekEventReg[68] = 0xff;
+    gSave.info.weekEventReg[69] = 0xff;
+    gSave.info.weekEventReg[70] = 0xff;
+    gSave.info.weekEventReg[71] = 0xff;
+    gSave.info.weekEventReg[72] = 0x7f;
 
-    gSave.itemEquips.sword = 1;
-    gSave.itemEquips.shield = 2;
+    gSave.info.itemEquips.sword = 1;
+    gSave.info.itemEquips.shield = 2;
     gMmExtraFlags2.progressiveShield = 1;
-    gSave.inventory.upgrades.quiver = 3;
-    gSave.inventory.upgrades.dekuStick = 3;
-    gSave.inventory.upgrades.dekuNut = 3;
-    gSave.inventory.upgrades.strength = 3;
+    gSave.info.inventory.upgrades.quiver = 3;
+    gSave.info.inventory.upgrades.dekuStick = 3;
+    gSave.info.inventory.upgrades.dekuNut = 3;
+    gSave.info.inventory.upgrades.strength = 3;
     gMmExtraFlags2.childWallet = 1;
-    gSave.inventory.upgrades.wallet = 3;
+    gSave.info.inventory.upgrades.wallet = 3;
     //gMmExtraFlags3.bottomlessWallet = 1;
-    gSave.inventory.upgrades.bombBag = 3;
+    gSave.info.inventory.upgrades.bombBag = 3;
 
-    gSave.itemEquips.buttonItems[0][0] = ITEM_MM_SWORD_KOKIRI;
-    gSave.inventory.items[ITS_MM_OCARINA] = ITEM_MM_OCARINA_OF_TIME;
-    gSave.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
-    gSave.inventory.items[ITS_MM_ARROW_FIRE] = ITEM_MM_ARROW_FIRE;
-    gSave.inventory.items[ITS_MM_ARROW_ICE] = ITEM_MM_ARROW_ICE;
-    gSave.inventory.items[ITS_MM_ARROW_LIGHT] = ITEM_MM_ARROW_LIGHT;
-    gSave.inventory.items[ITS_MM_BOMBS] = ITEM_MM_BOMB;
-    gSave.inventory.items[ITS_MM_BOMBCHU] = ITEM_MM_BOMBCHU;
-    gSave.inventory.items[ITS_MM_STICKS] = ITEM_MM_STICK;
-    gSave.inventory.items[ITS_MM_NUTS] = ITEM_MM_NUT;
-    gSave.inventory.items[ITS_MM_BEANS] = ITEM_MM_MAGIC_BEAN;
-    gSave.inventory.items[ITS_MM_KEG] = ITEM_MM_POWDER_KEG;
-    gSave.inventory.items[ITS_MM_PICTOBOX] = ITEM_MM_PICTOGRAPH_BOX;
-    gSave.inventory.items[ITS_MM_LENS] = ITEM_MM_LENS_OF_TRUTH;
-    gSave.inventory.items[ITS_MM_HOOKSHOT] = ITEM_MM_HOOKSHOT;
-    gSave.inventory.items[ITS_MM_GREAT_FAIRY_SWORD] = ITEM_MM_GREAT_FAIRY_SWORD;
-    gSave.inventory.items[ITS_MM_BOTTLE + 0] = ITEM_MM_DEKU_PRINCESS;
-    gSave.inventory.items[ITS_MM_BOTTLE + 1] = ITEM_MM_SPRING_WATER_HOT;
-    gSave.inventory.items[ITS_MM_BOTTLE + 2] = ITEM_MM_MAGIC_MUSHROOM;
-    gSave.inventory.items[ITS_MM_BOTTLE + 3] = ITEM_MM_POE;
-    gSave.inventory.items[ITS_MM_BOTTLE + 4] = ITEM_MM_FISH;
-    gSave.inventory.items[ITS_MM_BOTTLE + 5] = ITEM_MM_POTION_RED;
+    gSave.info.itemEquips.buttonItems[0][0] = ITEM_MM_SWORD_KOKIRI;
+    gSave.info.inventory.items[ITS_MM_OCARINA] = ITEM_MM_OCARINA_OF_TIME;
+    gSave.info.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
+    gSave.info.inventory.items[ITS_MM_ARROW_FIRE] = ITEM_MM_ARROW_FIRE;
+    gSave.info.inventory.items[ITS_MM_ARROW_ICE] = ITEM_MM_ARROW_ICE;
+    gSave.info.inventory.items[ITS_MM_ARROW_LIGHT] = ITEM_MM_ARROW_LIGHT;
+    gSave.info.inventory.items[ITS_MM_BOMBS] = ITEM_MM_BOMB;
+    gSave.info.inventory.items[ITS_MM_BOMBCHU] = ITEM_MM_BOMBCHU;
+    gSave.info.inventory.items[ITS_MM_STICKS] = ITEM_MM_STICK;
+    gSave.info.inventory.items[ITS_MM_NUTS] = ITEM_MM_NUT;
+    gSave.info.inventory.items[ITS_MM_BEANS] = ITEM_MM_MAGIC_BEAN;
+    gSave.info.inventory.items[ITS_MM_KEG] = ITEM_MM_POWDER_KEG;
+    gSave.info.inventory.items[ITS_MM_PICTOBOX] = ITEM_MM_PICTOGRAPH_BOX;
+    gSave.info.inventory.items[ITS_MM_LENS] = ITEM_MM_LENS_OF_TRUTH;
+    gSave.info.inventory.items[ITS_MM_HOOKSHOT] = ITEM_MM_HOOKSHOT;
+    gSave.info.inventory.items[ITS_MM_GREAT_FAIRY_SWORD] = ITEM_MM_GREAT_FAIRY_SWORD;
+    gSave.info.inventory.items[ITS_MM_BOTTLE + 0] = ITEM_MM_DEKU_PRINCESS;
+    gSave.info.inventory.items[ITS_MM_BOTTLE + 1] = ITEM_MM_SPRING_WATER_HOT;
+    gSave.info.inventory.items[ITS_MM_BOTTLE + 2] = ITEM_MM_MAGIC_MUSHROOM;
+    gSave.info.inventory.items[ITS_MM_BOTTLE + 3] = ITEM_MM_POE;
+    gSave.info.inventory.items[ITS_MM_BOTTLE + 4] = ITEM_MM_FISH;
+    gSave.info.inventory.items[ITS_MM_BOTTLE + 5] = ITEM_MM_POTION_RED;
 
-    gSave.inventory.items[ITS_MM_STICKS] = ITEM_MM_STICK;
-    gSave.inventory.ammo[ITS_MM_STICKS] = 30;
+    gSave.info.inventory.items[ITS_MM_STICKS] = ITEM_MM_STICK;
+    gSave.info.inventory.ammo[ITS_MM_STICKS] = 30;
 
-    gSave.inventory.items[ITS_MM_MASK_POSTMAN] = ITEM_MM_MASK_POSTMAN;
-    gSave.inventory.items[ITS_MM_MASK_ALL_NIGHT] = ITEM_MM_MASK_ALL_NIGHT;
-    gSave.inventory.items[ITS_MM_MASK_BLAST] = ITEM_MM_MASK_BLAST;
-    gSave.inventory.items[ITS_MM_MASK_STONE] = ITEM_MM_MASK_STONE;
-    gSave.inventory.items[ITS_MM_MASK_GREAT_FAIRY] = ITEM_MM_MASK_GREAT_FAIRY;
-    gSave.inventory.items[ITS_MM_MASK_DEKU] = ITEM_MM_MASK_DEKU;
-    gSave.inventory.items[ITS_MM_MASK_KEATON] = ITEM_MM_MASK_KEATON;
-    gSave.inventory.items[ITS_MM_MASK_BREMEN] = ITEM_MM_MASK_BREMEN;
-    gSave.inventory.items[ITS_MM_MASK_BUNNY] = ITEM_MM_MASK_BUNNY;
-    gSave.inventory.items[ITS_MM_MASK_DON_GERO] = ITEM_MM_MASK_DON_GERO;
-    gSave.inventory.items[ITS_MM_MASK_SCENTS] = ITEM_MM_MASK_SCENTS;
-    gSave.inventory.items[ITS_MM_MASK_GORON] = ITEM_MM_MASK_GORON;
-    gSave.inventory.items[ITS_MM_MASK_ROMANI] = ITEM_MM_MASK_ROMANI;
-    gSave.inventory.items[ITS_MM_MASK_TROUPE_LEADER] = ITEM_MM_MASK_TROUPE_LEADER;
-    gSave.inventory.items[ITS_MM_MASK_KAFEI] = ITEM_MM_MASK_KAFEI;
-    gSave.inventory.items[ITS_MM_MASK_COUPLE] = ITEM_MM_MASK_COUPLE;
-    gSave.inventory.items[ITS_MM_MASK_TRUTH] = ITEM_MM_MASK_TRUTH;
-    gSave.inventory.items[ITS_MM_MASK_ZORA] = ITEM_MM_MASK_ZORA;
-    gSave.inventory.items[ITS_MM_MASK_KAMARO] = ITEM_MM_MASK_KAMARO;
-    gSave.inventory.items[ITS_MM_MASK_GIBDO] = ITEM_MM_MASK_GIBDO;
-    gSave.inventory.items[ITS_MM_MASK_GARO] = ITEM_MM_MASK_GARO;
-    gSave.inventory.items[ITS_MM_MASK_CAPTAIN] = ITEM_MM_MASK_CAPTAIN;
-    gSave.inventory.items[ITS_MM_MASK_GIANT] = ITEM_MM_MASK_GIANT;
-    gSave.inventory.items[ITS_MM_MASK_FIERCE_DEITY] = ITEM_MM_MASK_FIERCE_DEITY;
+    gSave.info.inventory.items[ITS_MM_MASK_POSTMAN] = ITEM_MM_MASK_POSTMAN;
+    gSave.info.inventory.items[ITS_MM_MASK_ALL_NIGHT] = ITEM_MM_MASK_ALL_NIGHT;
+    gSave.info.inventory.items[ITS_MM_MASK_BLAST] = ITEM_MM_MASK_BLAST;
+    gSave.info.inventory.items[ITS_MM_MASK_STONE] = ITEM_MM_MASK_STONE;
+    gSave.info.inventory.items[ITS_MM_MASK_GREAT_FAIRY] = ITEM_MM_MASK_GREAT_FAIRY;
+    gSave.info.inventory.items[ITS_MM_MASK_DEKU] = ITEM_MM_MASK_DEKU;
+    gSave.info.inventory.items[ITS_MM_MASK_KEATON] = ITEM_MM_MASK_KEATON;
+    gSave.info.inventory.items[ITS_MM_MASK_BREMEN] = ITEM_MM_MASK_BREMEN;
+    gSave.info.inventory.items[ITS_MM_MASK_BUNNY] = ITEM_MM_MASK_BUNNY;
+    gSave.info.inventory.items[ITS_MM_MASK_DON_GERO] = ITEM_MM_MASK_DON_GERO;
+    gSave.info.inventory.items[ITS_MM_MASK_SCENTS] = ITEM_MM_MASK_SCENTS;
+    gSave.info.inventory.items[ITS_MM_MASK_GORON] = ITEM_MM_MASK_GORON;
+    gSave.info.inventory.items[ITS_MM_MASK_ROMANI] = ITEM_MM_MASK_ROMANI;
+    gSave.info.inventory.items[ITS_MM_MASK_TROUPE_LEADER] = ITEM_MM_MASK_TROUPE_LEADER;
+    gSave.info.inventory.items[ITS_MM_MASK_KAFEI] = ITEM_MM_MASK_KAFEI;
+    gSave.info.inventory.items[ITS_MM_MASK_COUPLE] = ITEM_MM_MASK_COUPLE;
+    gSave.info.inventory.items[ITS_MM_MASK_TRUTH] = ITEM_MM_MASK_TRUTH;
+    gSave.info.inventory.items[ITS_MM_MASK_ZORA] = ITEM_MM_MASK_ZORA;
+    gSave.info.inventory.items[ITS_MM_MASK_KAMARO] = ITEM_MM_MASK_KAMARO;
+    gSave.info.inventory.items[ITS_MM_MASK_GIBDO] = ITEM_MM_MASK_GIBDO;
+    gSave.info.inventory.items[ITS_MM_MASK_GARO] = ITEM_MM_MASK_GARO;
+    gSave.info.inventory.items[ITS_MM_MASK_CAPTAIN] = ITEM_MM_MASK_CAPTAIN;
+    gSave.info.inventory.items[ITS_MM_MASK_GIANT] = ITEM_MM_MASK_GIANT;
+    gSave.info.inventory.items[ITS_MM_MASK_FIERCE_DEITY] = ITEM_MM_MASK_FIERCE_DEITY;
 
-    gSave.playerData.rupees = 999;
+    gSave.info.playerData.rupees = 999;
 
-    gSave.inventory.quest.notebook = 1;
-    gSave.inventory.quest.songHealing = 1;
-    gSave.inventory.quest.songTime = 1;
-    gSave.inventory.quest.songSoaring = 1;
-    gSave.inventory.quest.songEpona = 1;
-    gSave.inventory.quest.songStorms = 1;
-    gSave.inventory.quest.songAwakening = 1;
-    gSave.inventory.quest.songLullabyIntro = 1;
-    gSave.inventory.quest.songLullaby = 1;
-    gSave.inventory.quest.songNewWave = 1;
-    gSave.inventory.quest.songEmpty = 1;
-    gSave.inventory.quest.songOrder = 1;
-    gSave.inventory.quest.songSun = 1;
-    gSave.inventory.quest.songSaria = 1;
+    gSave.info.inventory.quest.notebook = 1;
+    gSave.info.inventory.quest.songHealing = 1;
+    gSave.info.inventory.quest.songTime = 1;
+    gSave.info.inventory.quest.songSoaring = 1;
+    gSave.info.inventory.quest.songEpona = 1;
+    gSave.info.inventory.quest.songStorms = 1;
+    gSave.info.inventory.quest.songAwakening = 1;
+    gSave.info.inventory.quest.songLullabyIntro = 1;
+    gSave.info.inventory.quest.songLullaby = 1;
+    gSave.info.inventory.quest.songNewWave = 1;
+    gSave.info.inventory.quest.songEmpty = 1;
+    gSave.info.inventory.quest.songOrder = 1;
+    gSave.info.inventory.quest.songSun = 1;
+    gSave.info.inventory.quest.songSaria = 1;
 
-    gMmSave.playerData.magicAcquired = 1;
-    gMmSave.playerData.doubleMagic = 1;
-    gMmSave.playerData.magic = 2 * 0x30;
+    gMmSave.info.playerData.magicAcquired = 1;
+    gMmSave.info.playerData.doubleMagic = 1;
+    gMmSave.info.playerData.magic = 2 * 0x30;
     gSaveContext.magicFillTarget = 0x60;
 
-    gSave.inventory.ammo[ITS_MM_STICKS] = 30;
-    gSave.inventory.ammo[ITS_MM_NUTS] = 40;
-    gSave.inventory.ammo[ITS_MM_KEG] = 1;
-    gSave.inventory.ammo[ITS_MM_BEANS] = 10;
-    gSave.inventory.ammo[ITS_MM_BOW] = 50;
-    gSave.inventory.ammo[ITS_MM_BOMBCHU] = 50;
-    gSave.inventory.ammo[ITS_MM_BOMBS] = 40;
+    gSave.info.inventory.ammo[ITS_MM_STICKS] = 30;
+    gSave.info.inventory.ammo[ITS_MM_NUTS] = 40;
+    gSave.info.inventory.ammo[ITS_MM_KEG] = 1;
+    gSave.info.inventory.ammo[ITS_MM_BEANS] = 10;
+    gSave.info.inventory.ammo[ITS_MM_BOW] = 50;
+    gSave.info.inventory.ammo[ITS_MM_BOMBCHU] = 50;
+    gSave.info.inventory.ammo[ITS_MM_BOMBS] = 40;
 
-    gSave.playerData.healthCapacity = 0x10 * 20;
-    gSave.playerData.health = gSave.playerData.healthCapacity;
+    gSave.info.playerData.healthCapacity = 0x10 * 20;
+    gSave.info.playerData.health = gSave.info.playerData.healthCapacity;
 
     gMmExtraTrade.trade1 = 0x3f;
     gMmExtraTrade.trade2 = 0x1f;
@@ -577,9 +577,9 @@ static void cheatAllItems(PlayState* play)
     gMmExtraItems.ocarina = 3;
     gMmExtraItems.hammerGFS = 3;
 
-    gSave.inventory.items[ITS_MM_TRADE1] = ITEM_MM_DEED_LAND;
-    gSave.inventory.items[ITS_MM_TRADE2] = ITEM_MM_ROOM_KEY;
-    gSave.inventory.items[ITS_MM_TRADE3] = ITEM_MM_PENDANT_OF_MEMORIES;
+    gSave.info.inventory.items[ITS_MM_TRADE1] = ITEM_MM_DEED_LAND;
+    gSave.info.inventory.items[ITS_MM_TRADE2] = ITEM_MM_ROOM_KEY;
+    gSave.info.inventory.items[ITS_MM_TRADE3] = ITEM_MM_PENDANT_OF_MEMORIES;
 
     gMmOwlFlags = 0x3ff; /* all owls statues */
 
@@ -591,12 +591,12 @@ static void cheatAllItems(PlayState* play)
 #if defined(GAME_OOT)
 static void cheatAllItems(PlayState* play)
 {
-    // gSave.inventory.quest.gerudoCard = 1;
+    // gSave.info.inventory.quest.gerudoCard = 1;
     MM_SET_EVENT_WEEK(EV_MM_WEEK_DRANK_CHATEAU_ROMANI);
     SetEventChk(EV_OOT_CHK_MASTER_SWORD_PULLED);
     SetEventChk(EV_OOT_CHK_MASTER_SWORD_CHAMBER);
-    gSave.playerData.swordHealth = 8;
-    gSave.isBiggoronSword = 1;
+    gSave.info.playerData.swordHealth = 8;
+    gSave.info.isBiggoronSword = 1;
     gSharedCustomSave.extraSwordsOot = 2;
 
     //MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF);
@@ -604,108 +604,108 @@ static void cheatAllItems(PlayState* play)
     //MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_GB);
     //MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_ST);
 
-    /*gSave.inventory.quest.gerudoCard = 1; */
-    gSave.inventory.dungeonKeys[SCE_OOT_TEMPLE_FIRE] = 8;
-    gSave.inventory.dungeonKeys[SCE_OOT_TREASURE_SHOP] = 6;
-    gSave.inventory.items[ITS_OOT_STICKS] = ITEM_OOT_STICK;
-    gSave.inventory.items[ITS_OOT_NUTS] = ITEM_OOT_NUT;
-    gSave.inventory.items[ITS_OOT_BOMBS] = ITEM_OOT_BOMB;
-    gSave.inventory.items[ITS_OOT_BOW] = ITEM_OOT_BOW;
-    gSave.inventory.items[ITS_OOT_ARROW_FIRE] = ITEM_OOT_ARROW_FIRE;
-    gSave.inventory.items[ITS_OOT_ARROW_ICE] = ITEM_OOT_ARROW_ICE;
-    gSave.inventory.items[ITS_OOT_ARROW_LIGHT] = ITEM_OOT_ARROW_LIGHT;
-    gSave.inventory.items[ITS_OOT_SLINGSHOT] = ITEM_OOT_SLINGSHOT;
-    gSave.inventory.items[ITS_OOT_OCARINA] = ITEM_OOT_OCARINA_TIME;
-    gSave.inventory.items[ITS_OOT_BOOMERANG] = ITEM_OOT_BOOMERANG;
-    gSave.inventory.items[ITS_OOT_BOTTLE] = ITEM_OOT_RUTO_LETTER;
-    gSave.inventory.items[ITS_OOT_BOTTLE2] = ITEM_OOT_FISH;
-    gSave.inventory.items[ITS_OOT_BOTTLE3] = ITEM_OOT_BIG_POE;
-    gSave.inventory.items[ITS_OOT_BOTTLE4] = ITEM_OOT_BIG_POE;
-    gSave.inventory.items[ITS_OOT_BOMBCHU] = ITEM_OOT_BOMBCHU_10;
-    gSave.inventory.items[ITS_OOT_TRADE_CHILD] = ITEM_OOT_ZELDA_LETTER;
-    gSave.inventory.items[ITS_OOT_HAMMER] = ITEM_OOT_HAMMER;
-    gSave.inventory.items[ITS_OOT_HOOKSHOT] = ITEM_OOT_LONGSHOT;
-    gSave.inventory.items[ITS_OOT_LENS] = ITEM_OOT_LENS;
-    gSave.inventory.items[ITS_OOT_SPELL_WIND] = ITEM_OOT_SPELL_WIND;
-    gSave.inventory.items[ITS_OOT_SPELL_FIRE] = ITEM_OOT_SPELL_FIRE;
-    gSave.inventory.items[ITS_OOT_SPELL_LOVE] = ITEM_OOT_SPELL_LOVE;
+    /*gSave.info.inventory.quest.gerudoCard = 1; */
+    gSave.info.inventory.dungeonKeys[SCE_OOT_TEMPLE_FIRE] = 8;
+    gSave.info.inventory.dungeonKeys[SCE_OOT_TREASURE_SHOP] = 6;
+    gSave.info.inventory.items[ITS_OOT_STICKS] = ITEM_OOT_STICK;
+    gSave.info.inventory.items[ITS_OOT_NUTS] = ITEM_OOT_NUT;
+    gSave.info.inventory.items[ITS_OOT_BOMBS] = ITEM_OOT_BOMB;
+    gSave.info.inventory.items[ITS_OOT_BOW] = ITEM_OOT_BOW;
+    gSave.info.inventory.items[ITS_OOT_ARROW_FIRE] = ITEM_OOT_ARROW_FIRE;
+    gSave.info.inventory.items[ITS_OOT_ARROW_ICE] = ITEM_OOT_ARROW_ICE;
+    gSave.info.inventory.items[ITS_OOT_ARROW_LIGHT] = ITEM_OOT_ARROW_LIGHT;
+    gSave.info.inventory.items[ITS_OOT_SLINGSHOT] = ITEM_OOT_SLINGSHOT;
+    gSave.info.inventory.items[ITS_OOT_OCARINA] = ITEM_OOT_OCARINA_TIME;
+    gSave.info.inventory.items[ITS_OOT_BOOMERANG] = ITEM_OOT_BOOMERANG;
+    gSave.info.inventory.items[ITS_OOT_BOTTLE] = ITEM_OOT_RUTO_LETTER;
+    gSave.info.inventory.items[ITS_OOT_BOTTLE2] = ITEM_OOT_FISH;
+    gSave.info.inventory.items[ITS_OOT_BOTTLE3] = ITEM_OOT_BIG_POE;
+    gSave.info.inventory.items[ITS_OOT_BOTTLE4] = ITEM_OOT_BIG_POE;
+    gSave.info.inventory.items[ITS_OOT_BOMBCHU] = ITEM_OOT_BOMBCHU_10;
+    gSave.info.inventory.items[ITS_OOT_TRADE_CHILD] = ITEM_OOT_ZELDA_LETTER;
+    gSave.info.inventory.items[ITS_OOT_HAMMER] = ITEM_OOT_HAMMER;
+    gSave.info.inventory.items[ITS_OOT_HOOKSHOT] = ITEM_OOT_LONGSHOT;
+    gSave.info.inventory.items[ITS_OOT_LENS] = ITEM_OOT_LENS;
+    gSave.info.inventory.items[ITS_OOT_SPELL_WIND] = ITEM_OOT_SPELL_WIND;
+    gSave.info.inventory.items[ITS_OOT_SPELL_FIRE] = ITEM_OOT_SPELL_FIRE;
+    gSave.info.inventory.items[ITS_OOT_SPELL_LOVE] = ITEM_OOT_SPELL_LOVE;
 
     gOotExtraItems.ocarina = 3;
 
-    gSave.inventory.equipment.swords = 0x7;
-    gSave.inventory.equipment.shields = 0x7;
-    gSave.inventory.equipment.tunics = 0x7;
-    gSave.inventory.equipment.boots = 0x7;
+    gSave.info.inventory.equipment.swords = 0x7;
+    gSave.info.inventory.equipment.shields = 0x7;
+    gSave.info.inventory.equipment.tunics = 0x7;
+    gSave.info.inventory.equipment.boots = 0x7;
 
-    gSave.inventory.upgrades.dekuStick = 3;
-    gSave.inventory.upgrades.dekuNut = 3;
-    gSave.inventory.upgrades.bulletBag = 3;
-    gSave.inventory.upgrades.bombBag = 3;
-    gSave.inventory.upgrades.quiver = 3;
-    gSave.inventory.upgrades.dive = 2;
-    gSave.inventory.upgrades.wallet = 3;
-    gSave.inventory.upgrades.strength = 3;
+    gSave.info.inventory.upgrades.dekuStick = 3;
+    gSave.info.inventory.upgrades.dekuNut = 3;
+    gSave.info.inventory.upgrades.bulletBag = 3;
+    gSave.info.inventory.upgrades.bombBag = 3;
+    gSave.info.inventory.upgrades.quiver = 3;
+    gSave.info.inventory.upgrades.dive = 2;
+    gSave.info.inventory.upgrades.wallet = 3;
+    gSave.info.inventory.upgrades.strength = 3;
     gOotExtraFlags.bottomlessWallet = 1;
     gOotMaxRupees[3] = 9999;
     gWalletDigits[3] = 4;
 
-    gSave.inventory.ammo[ITS_OOT_STICKS] = 10;
-    gSave.inventory.ammo[ITS_OOT_SLINGSHOT] = 50;
-    gSave.inventory.ammo[ITS_OOT_NUTS] = 40;
-    gSave.inventory.ammo[ITS_OOT_BOMBS] = 40;
-    gSave.inventory.ammo[ITS_OOT_BOW] = 50;
-    gSave.inventory.ammo[ITS_OOT_BOMBCHU] = 50;
-    gSave.inventory.quest.songZelda = 1;
-    gSave.inventory.quest.songSaria = 1;
-    gSave.inventory.quest.songTime = 1;
-    gSave.inventory.quest.songSun = 1;
-    gSave.inventory.quest.songEpona = 1;
-    gSave.inventory.quest.songStorms = 1;
-    gSave.inventory.quest.songTpLight = 1;
-    gSave.inventory.quest.songTpShadow = 1;
-    gSave.inventory.quest.songTpWater = 1;
-    gSave.inventory.quest.songTpFire = 1;
-    gSave.inventory.quest.songTpForest = 1;
-    gSave.inventory.quest.songTpSpirit = 1;
+    gSave.info.inventory.ammo[ITS_OOT_STICKS] = 10;
+    gSave.info.inventory.ammo[ITS_OOT_SLINGSHOT] = 50;
+    gSave.info.inventory.ammo[ITS_OOT_NUTS] = 40;
+    gSave.info.inventory.ammo[ITS_OOT_BOMBS] = 40;
+    gSave.info.inventory.ammo[ITS_OOT_BOW] = 50;
+    gSave.info.inventory.ammo[ITS_OOT_BOMBCHU] = 50;
+    gSave.info.inventory.quest.songZelda = 1;
+    gSave.info.inventory.quest.songSaria = 1;
+    gSave.info.inventory.quest.songTime = 1;
+    gSave.info.inventory.quest.songSun = 1;
+    gSave.info.inventory.quest.songEpona = 1;
+    gSave.info.inventory.quest.songStorms = 1;
+    gSave.info.inventory.quest.songTpLight = 1;
+    gSave.info.inventory.quest.songTpShadow = 1;
+    gSave.info.inventory.quest.songTpWater = 1;
+    gSave.info.inventory.quest.songTpFire = 1;
+    gSave.info.inventory.quest.songTpForest = 1;
+    gSave.info.inventory.quest.songTpSpirit = 1;
 
-    gSave.inventory.quest.stoneEmerald = 1;
-    gSave.inventory.quest.stoneRuby = 1;
-    gSave.inventory.quest.stoneSapphire = 1;
+    gSave.info.inventory.quest.stoneEmerald = 1;
+    gSave.info.inventory.quest.stoneRuby = 1;
+    gSave.info.inventory.quest.stoneSapphire = 1;
 
-    gSave.playerData.magicUpgrade = 1;
-    gSave.playerData.magicUpgrade2 = 1;
-    gOotSave.playerData.magicLevel = 0;
+    gSave.info.playerData.magicUpgrade = 1;
+    gSave.info.playerData.magicUpgrade2 = 1;
+    gOotSave.info.playerData.magicLevel = 0;
     gSaveContext.magicFillTarget = 0x60;
 
-    gSave.inventory.dungeonKeys[SCE_OOT_TEMPLE_FOREST] = 9;
-    gSave.inventory.dungeonKeys[SCE_OOT_INSIDE_GANON_CASTLE] = 9;
-    gSave.inventory.dungeonKeys[SCE_OOT_THIEVES_HIDEOUT] = 9;
+    gSave.info.inventory.dungeonKeys[SCE_OOT_TEMPLE_FOREST] = 9;
+    gSave.info.inventory.dungeonKeys[SCE_OOT_INSIDE_GANON_CASTLE] = 9;
+    gSave.info.inventory.dungeonKeys[SCE_OOT_THIEVES_HIDEOUT] = 9;
 
-    gSave.inventory.quest.medallionShadow = 1;
-    gSave.inventory.quest.medallionSpirit = 1;
-    gSave.inventory.quest.medallionForest = 1;
-    gSave.inventory.quest.medallionFire = 1;
-    gSave.inventory.quest.medallionWater = 1;
-    gSave.inventory.quest.medallionLight = 1;
+    gSave.info.inventory.quest.medallionShadow = 1;
+    gSave.info.inventory.quest.medallionSpirit = 1;
+    gSave.info.inventory.quest.medallionForest = 1;
+    gSave.info.inventory.quest.medallionFire = 1;
+    gSave.info.inventory.quest.medallionWater = 1;
+    gSave.info.inventory.quest.medallionLight = 1;
 
-    gSave.inventory.quest.stoneRuby = 1;
+    gSave.info.inventory.quest.stoneRuby = 1;
 
-    gSave.playerData.health = gSave.playerData.healthCapacity = 20 * 0x10;
+    gSave.info.playerData.health = gSave.info.playerData.healthCapacity = 20 * 0x10;
 
-    gSave.playerData.rupees = 500;
+    gSave.info.playerData.rupees = 500;
 
     gOotExtraTrade.child = 0xffff;
     gOotExtraTrade.adult = 0xffff;
     gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_EYEBALL_FROG);
     gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_EYE_DROPS);
     gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_CLAIM_CHECK);
-    gSave.inventory.items[ITS_OOT_TRADE_ADULT] = ITEM_OOT_POCKET_EGG;
-    gSave.inventory.items[ITS_OOT_TRADE_CHILD] = ITEM_OOT_MASK_STONE;
+    gSave.info.inventory.items[ITS_OOT_TRADE_ADULT] = ITEM_OOT_POCKET_EGG;
+    gSave.info.inventory.items[ITS_OOT_TRADE_CHILD] = ITEM_OOT_MASK_STONE;
 
     SetEventChk(EV_OOT_CHK_EPONA);
 
-    // gSave.equips.buttonItems[1] = ITEM_OOT_MASK_STONE;
-    // gSave.equips.cButtonSlots[0] = ITS_OOT_TRADE_CHILD;
+    // gSave.info.equips.buttonItems[1] = ITEM_OOT_MASK_STONE;
+    // gSave.info.equips.cButtonSlots[0] = ITS_OOT_TRADE_CHILD;
 
     gCustomSave.hasElegy = 1;
 }
@@ -720,34 +720,34 @@ static void debugApplyCheats(void)
     }
 
     if (CHEAT_ON(CHEAT_HEALTH))
-        gSave.playerData.health = gSave.playerData.healthCapacity;
+        gSave.info.playerData.health = gSave.info.playerData.healthCapacity;
 
     if (CHEAT_ON(CHEAT_MAGIC))
     {
 #if defined(GAME_OOT)
-        gSave.playerData.magic = gSave.playerData.magicUpgrade2 ? 0x60 : gSave.playerData.magicUpgrade ? 0x30 : 0;
+        gSave.info.playerData.magic = gSave.info.playerData.magicUpgrade2 ? 0x60 : gSave.info.playerData.magicUpgrade ? 0x30 : 0;
 #else
-        gSave.playerData.magic = gSave.playerData.doubleMagic ? 0x60 : gSave.playerData.magicAcquired ? 0x30 : 0;
+        gSave.info.playerData.magic = gSave.info.playerData.doubleMagic ? 0x60 : gSave.info.playerData.magicAcquired ? 0x30 : 0;
 #endif
     }
 
     if (CHEAT_ON(CHEAT_AMMO))
     {
 #if defined(GAME_OOT)
-        gSave.inventory.ammo[ITS_OOT_STICKS] = 30;
-        gSave.inventory.ammo[ITS_OOT_NUTS] = 40;
-        gSave.inventory.ammo[ITS_OOT_SLINGSHOT] = 50;
-        gSave.inventory.ammo[ITS_OOT_BOMBS] = 40;
-        gSave.inventory.ammo[ITS_OOT_BOW] = 50;
-        gSave.inventory.ammo[ITS_OOT_BOMBCHU] = 50;
+        gSave.info.inventory.ammo[ITS_OOT_STICKS] = 30;
+        gSave.info.inventory.ammo[ITS_OOT_NUTS] = 40;
+        gSave.info.inventory.ammo[ITS_OOT_SLINGSHOT] = 50;
+        gSave.info.inventory.ammo[ITS_OOT_BOMBS] = 40;
+        gSave.info.inventory.ammo[ITS_OOT_BOW] = 50;
+        gSave.info.inventory.ammo[ITS_OOT_BOMBCHU] = 50;
 #else
-        gSave.inventory.ammo[ITS_MM_STICKS] = 30;
-        gSave.inventory.ammo[ITS_MM_NUTS] = 40;
-        gSave.inventory.ammo[ITS_MM_KEG] = 1;
-        gSave.inventory.ammo[ITS_MM_BEANS] = 10;
-        gSave.inventory.ammo[ITS_MM_BOW] = 50;
-        gSave.inventory.ammo[ITS_MM_BOMBCHU] = 50;
-        gSave.inventory.ammo[ITS_MM_BOMBS] = 40;
+        gSave.info.inventory.ammo[ITS_MM_STICKS] = 30;
+        gSave.info.inventory.ammo[ITS_MM_NUTS] = 40;
+        gSave.info.inventory.ammo[ITS_MM_KEG] = 1;
+        gSave.info.inventory.ammo[ITS_MM_BEANS] = 10;
+        gSave.info.inventory.ammo[ITS_MM_BOW] = 50;
+        gSave.info.inventory.ammo[ITS_MM_BOMBCHU] = 50;
+        gSave.info.inventory.ammo[ITS_MM_BOMBS] = 40;
 #endif
     }
 }

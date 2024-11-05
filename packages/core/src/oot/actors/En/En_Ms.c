@@ -25,7 +25,7 @@ void EnMs_TalkedTo(Actor* this, PlayState* play)
 
 void EnMs_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b)
 {
-    gSave.inventory.beans = 1;
+    gSave.info.inventory.beans = 1;
     comboGiveItemNpc(actor, play, gi, NPC_OOT_BEAN_SELLER, a, b);
 }
 

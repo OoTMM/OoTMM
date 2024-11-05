@@ -78,7 +78,7 @@ static void LoadCustomItemIconSlot(PlayState* play, int slot, int isInit)
     u8 itemId;
 
     dst = (*(char**)((char*)&play->interfaceCtx + 0x138)) + 0x1000 * slot;
-    itemId = gSave.equips.buttonItems[slot];
+    itemId = gSave.info.equips.buttonItems[slot];
 
     if (slot == 0 && !isInit)
     {
@@ -173,7 +173,7 @@ void Interface_UpdateButtonsPart2Wrapper(PlayState* play)
 
     for (int i = 0; i < 3; ++i)
     {
-        ptr = &gSave.equips.buttonItems[i + 1];
+        ptr = &gSave.info.equips.buttonItems[i + 1];
         itemId = *ptr;
         buttons[i] = itemId;
 
@@ -190,11 +190,11 @@ void Interface_UpdateButtonsPart2Wrapper(PlayState* play)
 
     for (int i = 0; i < 3; ++i)
     {
-        ptr = &gSave.equips.buttonItems[i + 1];
+        ptr = &gSave.info.equips.buttonItems[i + 1];
         *ptr = buttons[i];
     }
 
     /* Fix for wrong tempB restores */
-    if (EV_OOT_IS_SWORDLESS() && gSave.equips.buttonItems[0] == 0)
-        gSave.equips.buttonItems[0] = ITEM_NONE;
+    if (EV_OOT_IS_SWORDLESS() && gSave.info.equips.buttonItems[0] == 0)
+        gSave.info.equips.buttonItems[0] = ITEM_NONE;
 }

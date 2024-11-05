@@ -481,9 +481,9 @@ void Player_CheckCustomBoots(PlayState* play)
         player->actor.flags &= ~ACTOR_FLAG_MM_CAN_PRESS_HEAVY_SWITCH;
         player->actor.flags |= ACTOR_FLAG_MM_CAN_PRESS_SWITCH;
 
-        if (gSaveContext.save.itemEquips.boots > 0 || isAdult)
+        if (gSaveContext.save.info.itemEquips.boots > 0 || isAdult)
         {
-            s32 currentBoots = gSaveContext.save.itemEquips.boots;
+            s32 currentBoots = gSaveContext.save.info.itemEquips.boots;
             s16* bootRegs;
 
             REG(27) = 2000;
@@ -540,8 +540,8 @@ void Player_CheckCustomBoots(PlayState* play)
     }
     else
     {
-        gSaveContext.save.itemEquips.boots = 0;
-        gSaveContext.save.itemEquips.tunic = 0;
+        gSaveContext.save.info.itemEquips.boots = 0;
+        gSaveContext.save.info.itemEquips.tunic = 0;
     }
 }
 
@@ -552,7 +552,7 @@ s32 Player_CustomUseItem(Player* this, PlayState* play, s32 itemAction)
     {
         if (((magicSpell == PLAYER_MAGIC_SPELL_WIND) && (gSaveContext.respawn[RESPAWN_MODE_HUMAN].data > 0)) ||
             ((gSaveContext.magicCapacity != 0) && (gSaveContext.magicState == MAGIC_STATE_IDLE) &&
-             (gSaveContext.save.playerData.magic >= sMagicSpellCosts[magicSpell])))
+             (gSaveContext.save.info.playerData.magic >= sMagicSpellCosts[magicSpell])))
         {
             this->unk_AA5 = 5;
             this->itemAction = itemAction;
@@ -570,11 +570,11 @@ s32 Player_CustomUseItem(Player* this, PlayState* play, s32 itemAction)
     {
         if (this->transformation == MM_PLAYER_FORM_HUMAN)
         {
-            if (gSaveContext.save.itemEquips.boots == boots)
+            if (gSaveContext.save.info.itemEquips.boots == boots)
             {
                 boots = 0;
             }
-            gSaveContext.save.itemEquips.boots = boots;
+            gSaveContext.save.info.itemEquips.boots = boots;
 
             if (!boots)
             {
@@ -595,11 +595,11 @@ s32 Player_CustomUseItem(Player* this, PlayState* play, s32 itemAction)
         if (this->transformation == MM_PLAYER_FORM_HUMAN)
         {
             u16 newTunic = tunic;
-            if (gSaveContext.save.itemEquips.tunic == newTunic)
+            if (gSaveContext.save.info.itemEquips.tunic == newTunic)
             {
                 newTunic = 0;
             }
-            gSaveContext.save.itemEquips.tunic = newTunic;
+            gSaveContext.save.info.itemEquips.tunic = newTunic;
 
             Player_PlaySfx(this, 0x835); /* NA_SE_PL_CHANGE_ARMS */
         }
@@ -1058,7 +1058,7 @@ void Player_SkelAnime_DrawFlexLod(PlayState* play, void** skeleton, Vec3s* joint
         Color_RGB8* tunicColor;
         u16 tunic;
 
-        tunic = CLAMP(gSaveContext.save.itemEquips.tunic, 0, 3);
+        tunic = CLAMP(gSaveContext.save.info.itemEquips.tunic, 0, 3);
         tunicColor = &sTunicColors[tunic];
         gDPSetEnvColor(POLY_OPA_DISP++, tunicColor->r, tunicColor->g, tunicColor->b, 0xFF);
     }
@@ -1085,7 +1085,7 @@ void Player_SkelAnime_DrawFlexLod(PlayState* play, void** skeleton, Vec3s* joint
         if (player->transformation == MM_PLAYER_FORM_HUMAN && Config_Flag(CFG_MM_STRENGTH))
         {
             Color_RGB8* gauntletColor;
-            s32 strength = gSaveContext.save.inventory.upgrades.strength;
+            s32 strength = gSaveContext.save.info.inventory.upgrades.strength;
             switch (strength)
             {
                 case 1:
@@ -1154,7 +1154,7 @@ void Player_ColorAfterMask(GraphicsContext* gfxCtx, s32 maskIDMinusOne, PlayerMa
         Color_RGB8 tunicColor;
         u16 tunic;
 
-        tunic = CLAMP(gSaveContext.save.itemEquips.tunic, 0, 3);
+        tunic = CLAMP(gSaveContext.save.info.itemEquips.tunic, 0, 3);
         tunicColor = sTunicColors[tunic];
         gDPSetEnvColor(gfxCtx->polyOpa.append++, tunicColor.r, tunicColor.g, tunicColor.b, 0xFF);
     }
@@ -1341,7 +1341,7 @@ s32 Player_IsFloorSlippery(Player* player, s32 floorType)
 
 s32 Player_IsGoronOrGoronTunic(Player* player)
 {
-    return player->transformation == MM_PLAYER_FORM_GORON || gSaveContext.save.itemEquips.tunic == PLAYER_TUNIC_GORON;
+    return player->transformation == MM_PLAYER_FORM_GORON || gSaveContext.save.info.itemEquips.tunic == PLAYER_TUNIC_GORON;
 }
 
 static u8 sFloorDamageDelay[] = { 120, 60 };
@@ -1362,7 +1362,7 @@ s32 Player_ShouldTakeFloorDamage(Player* player, s32 isWallDamaging, s32 floorDa
         return 0;
     }
 
-    if (gSaveContext.save.itemEquips.tunic != PLAYER_TUNIC_GORON || player->floorTypeTimer >= sFloorDamageDelay[floorDamageType])
+    if (gSaveContext.save.info.itemEquips.tunic != PLAYER_TUNIC_GORON || player->floorTypeTimer >= sFloorDamageDelay[floorDamageType])
     {
         player->floorTypeTimer = 0;
         player->actor.colChkInfo.damage = 4;
@@ -1446,21 +1446,21 @@ static u8 sDiveDoActions[] = { DO_ACTION_1, DO_ACTION_2, DO_ACTION_3, DO_ACTION_
 
 u8 Player_GetActionAWhileDiving(Player* this)
 {
-    s32 diveIndex = (sDiveDepths[gSaveContext.save.inventory.upgrades.scale] - this->actor.depthInWater) / 40.0f;
+    s32 diveIndex = (sDiveDepths[gSaveContext.save.info.inventory.upgrades.scale] - this->actor.depthInWater) / 40.0f;
     diveIndex = CLAMP(diveIndex, 0, ARRAY_COUNT(sDiveDoActions) - 1);
     return sDiveDoActions[diveIndex];
 }
 
 f32 Player_GetMaxDiveDepth()
 {
-    return sDiveDepths[gSaveContext.save.inventory.upgrades.scale];
+    return sDiveDepths[gSaveContext.save.info.inventory.upgrades.scale];
 }
 
 u8 Player_GetStrengthCustom(u8 formStrength)
 {
     if (Config_Flag(CFG_MM_STRENGTH) && gSaveContext.save.playerForm == MM_PLAYER_FORM_HUMAN) /* || gSaveContext.save.playerForm == MM_PLAYER_FORM_FIERCE_DEITY) */
     {
-        return gSaveContext.save.inventory.upgrades.strength;
+        return gSaveContext.save.info.inventory.upgrades.strength;
     }
     return formStrength;
 }

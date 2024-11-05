@@ -77,8 +77,8 @@ static s16 bombDrop(s16 dropId)
     if (!Config_Flag(CFG_MM_BOMBCHU_BAG))
         return dropId;
 
-    hasChuBag = (gMmSave.inventory.items[ITS_MM_BOMBCHU] == ITEM_MM_BOMBCHU);
-    hasBombBag = (gMmSave.inventory.upgrades.bombBag > 0);
+    hasChuBag = (gMmSave.info.inventory.items[ITS_MM_BOMBCHU] == ITEM_MM_BOMBCHU);
+    hasBombBag = (gMmSave.info.inventory.upgrades.bombBag > 0);
 
     if (!hasChuBag)
     {
@@ -91,8 +91,8 @@ static s16 bombDrop(s16 dropId)
         return ITEM00_BOMBCHU;
 
     /* We have both, check for ammo */
-    bombCount = gMmSave.inventory.ammo[ITS_MM_BOMBS];
-    bombchuCount = gMmSave.inventory.ammo[ITS_MM_BOMBCHU];
+    bombCount = gMmSave.info.inventory.ammo[ITS_MM_BOMBS];
+    bombchuCount = gMmSave.info.inventory.ammo[ITS_MM_BOMBCHU];
 
     /* Low on ammo */
     if (bombCount < 15 || bombchuCount < 15)

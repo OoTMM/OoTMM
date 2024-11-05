@@ -92,7 +92,7 @@ int csmcFromItem(s16 gi)
 
 int csmcEnabled(void)
 {
-    return (Config_Flag(CFG_CSMC) || (Config_Flag(CFG_CSMC_AGONY) && gOotSave.inventory.quest.agonyStone));
+    return (Config_Flag(CFG_CSMC) || (Config_Flag(CFG_CSMC_AGONY) && gOotSave.info.inventory.quest.agonyStone));
 }
 
 int csmcEnabledSkulltula(void)

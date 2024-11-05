@@ -7,13 +7,13 @@ void comboDungeonSetFlags(int dungeonId, int mmCycle)
     switch (dungeonId)
     {
     case DUNGEONID_DEKU_TREE:
-        BITMAP16_SET(gOotSave.eventsChk, EV_OOT_CHK_EMERALD_TREE_DEAD);
-        BITMAP16_SET(gOotSave.eventsChk, EV_OOT_CHK_GOHMA);
-        BITMAP16_SET(gOotSave.eventsChk, EV_OOT_CHK_TREE_DEAD);
-        BITMAP16_SET(gOotSave.eventsChk, EV_OOT_CHK_MIDO_TREE_DEAD);
+        BITMAP16_SET(gOotSave.info.eventsChk, EV_OOT_CHK_EMERALD_TREE_DEAD);
+        BITMAP16_SET(gOotSave.info.eventsChk, EV_OOT_CHK_GOHMA);
+        BITMAP16_SET(gOotSave.info.eventsChk, EV_OOT_CHK_TREE_DEAD);
+        BITMAP16_SET(gOotSave.info.eventsChk, EV_OOT_CHK_MIDO_TREE_DEAD);
         break;
     case DUNGEONID_TEMPLE_WATER:
-        BITMAP16_SET(gOotSave.eventsChk, EV_OOT_CHK_LAKE_HYLIA_WATER);
+        BITMAP16_SET(gOotSave.info.eventsChk, EV_OOT_CHK_LAKE_HYLIA_WATER);
         gMiscFlags.erWaterBeaten = 1;
         break;
     case DUNGEONID_TEMPLE_WOODFALL:

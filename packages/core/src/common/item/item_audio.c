@@ -161,40 +161,40 @@ void comboPlayItemFanfare(s16 gi, int isShort)
         break;
     case GI_OOT_HEART_PIECE:
     case GI_OOT_TC_HEART_PIECE:
-        if (gOotSave.inventory.quest.heartPieces)
+        if (gOotSave.info.inventory.quest.heartPieces)
             fanfare = FANFARE_HEART_PIECE;
         break;
     case GI_MM_HEART_PIECE:
-        if (gMmSave.inventory.quest.heartPieces)
+        if (gMmSave.info.inventory.quest.heartPieces)
             fanfare = FANFARE_HEART_PIECE;
         break;
     case GI_MM_GS_TOKEN_SWAMP:
-        if (gMmSave.skullCountSwamp >= 30)
+        if (gMmSave.info.skullCountSwamp >= 30)
             fanfare = FANFARE_MAJOR;
         break;
     case GI_MM_GS_TOKEN_OCEAN:
-        if (gMmSave.skullCountOcean >= 30)
+        if (gMmSave.info.skullCountOcean >= 30)
             fanfare = FANFARE_MAJOR;
         break;
     case GI_OOT_GS_TOKEN:
-        tmp = gOotSave.inventory.goldTokens;
+        tmp = gOotSave.info.inventory.goldTokens;
         if (tmp == 10 || tmp == 20 || tmp == 30 || tmp == 40 || tmp == 50 || tmp >= 100)
             fanfare = FANFARE_MAJOR;
         break;
     case GI_MM_STRAY_FAIRY_WF:
-        if (gMmSave.inventory.strayFairies[0] == gComboConfig.strayFairyRewardCount)
+        if (gMmSave.info.inventory.strayFairies[0] == gComboConfig.strayFairyRewardCount)
             fanfare = FANFARE_MAJOR;
         break;
     case GI_MM_STRAY_FAIRY_SH:
-        if (gMmSave.inventory.strayFairies[1] == gComboConfig.strayFairyRewardCount)
+        if (gMmSave.info.inventory.strayFairies[1] == gComboConfig.strayFairyRewardCount)
             fanfare = FANFARE_MAJOR;
         break;
     case GI_MM_STRAY_FAIRY_GB:
-        if (gMmSave.inventory.strayFairies[2] == gComboConfig.strayFairyRewardCount)
+        if (gMmSave.info.inventory.strayFairies[2] == gComboConfig.strayFairyRewardCount)
             fanfare = FANFARE_MAJOR;
         break;
     case GI_MM_STRAY_FAIRY_ST:
-        if (gMmSave.inventory.strayFairies[3] == gComboConfig.strayFairyRewardCount)
+        if (gMmSave.info.inventory.strayFairies[3] == gComboConfig.strayFairyRewardCount)
             fanfare = FANFARE_MAJOR;
         break;
     case GI_MM_STRAY_FAIRY_TOWN:

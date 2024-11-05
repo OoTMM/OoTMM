@@ -20,7 +20,7 @@ int Wallet_IndexOot(void)
         return 0;
     if (gOotExtraFlags.bottomlessWallet)
         return 5;
-    return gOotSave.inventory.upgrades.wallet + 1;
+    return gOotSave.info.inventory.upgrades.wallet + 1;
 }
 
 int Wallet_IndexMm(void)
@@ -29,7 +29,7 @@ int Wallet_IndexMm(void)
         return 0;
     if (gMmExtraFlags3.bottomlessWallet)
         return 5;
-    return gMmSave.inventory.upgrades.wallet + 1;
+    return gMmSave.info.inventory.upgrades.wallet + 1;
 }
 
 const u32 kRupeeColor[] = {
@@ -54,7 +54,7 @@ static void updateRupeeColor(void)
     else if (HAS_WALLET_BOTTOMLESS())
         index = 5;
     else
-        index = gSave.inventory.upgrades.wallet + 1;
+        index = gSave.info.inventory.upgrades.wallet + 1;
     gInterfaceRupeeColor = kRupeeColor[index];
 }
 
@@ -95,12 +95,12 @@ s16 RupeeValueRaw(s16 count, int extraWallets)
 
 s16 RupeeValueOot(s16 count)
 {
-    return RupeeValueRaw(count, (!!(gOotSave.inventory.upgrades.wallet == 3)) + gOotExtraFlags.bottomlessWallet);
+    return RupeeValueRaw(count, (!!(gOotSave.info.inventory.upgrades.wallet == 3)) + gOotExtraFlags.bottomlessWallet);
 }
 
 s16 RupeeValueMm(s16 count)
 {
-    return RupeeValueRaw(count, (!!(gMmSave.inventory.upgrades.wallet == 3)) + gMmExtraFlags3.bottomlessWallet);
+    return RupeeValueRaw(count, (!!(gMmSave.info.inventory.upgrades.wallet == 3)) + gMmExtraFlags3.bottomlessWallet);
 }
 
 #if defined(GAME_OOT)

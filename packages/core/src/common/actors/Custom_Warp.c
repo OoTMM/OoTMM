@@ -27,10 +27,10 @@ static void CustomWarp_OnTrigger(Actor_CustomWarp* this, PlayState* play)
     {
     case SWITCH_LAKE_HYLIA_WATER:
         CustomWarp_Reload();
-        if(BITMAP16_GET(gOotSave.eventsChk, EV_OOT_CHK_LAKE_HYLIA_WATER))
-            BITMAP16_CLEAR(gOotSave.eventsChk, EV_OOT_CHK_LAKE_HYLIA_WATER);
+        if(BITMAP16_GET(gOotSave.info.eventsChk, EV_OOT_CHK_LAKE_HYLIA_WATER))
+            BITMAP16_CLEAR(gOotSave.info.eventsChk, EV_OOT_CHK_LAKE_HYLIA_WATER);
         else
-            BITMAP16_SET(gOotSave.eventsChk, EV_OOT_CHK_LAKE_HYLIA_WATER);
+            BITMAP16_SET(gOotSave.info.eventsChk, EV_OOT_CHK_LAKE_HYLIA_WATER);
         break;
     }
 }

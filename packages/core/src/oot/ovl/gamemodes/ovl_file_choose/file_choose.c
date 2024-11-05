@@ -1442,11 +1442,11 @@ void FileSelect_LoadGame(GameState* thisx) {
         gSaveContext.hudVisibilityModeTimer = gSaveContext.magicCapacity = 0; // false, HUD_VISIBILITY_NO_CHANGE
 
     // Set the fill target to be the saved magic amount
-    gSaveContext.magicFillTarget = gSaveContext.save.playerData.magic;
+    gSaveContext.magicFillTarget = gSaveContext.save.info.playerData.magic;
     // Set `magicLevel` and `magic` to 0 so `magicCapacity` then `magic` grows from nothing to respectively the full
     // capacity and `magicFillTarget`
-    gSaveContext.save.playerData.magicLevel = gSaveContext.save.playerData.magic = 0;
-    gSaveContext.save.playerData.naviTimer = 0;
+    gSaveContext.save.info.playerData.magicLevel = gSaveContext.save.info.playerData.magic = 0;
+    gSaveContext.save.info.playerData.naviTimer = 0;
 }
 
 static void (*sSelectModeUpdateFuncs[])(GameState*) = {

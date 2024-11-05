@@ -41,7 +41,7 @@ PATCH_CALL(0x80b67c00, EnSth_GiveItem);
 void EnSth_AfterInit(Actor* this, PlayState* play)
 {
     /* Spawn the cursed skull if required */
-    if ((this->params & 0xf) == 4 && gSave.skullCountOcean < 30)
+    if ((this->params & 0xf) == 4 && gSave.info.skullCountOcean < 30)
     {
         Actor_Spawn(
             &play->actorCtx,

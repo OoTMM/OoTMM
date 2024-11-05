@@ -69,7 +69,7 @@ static int EnElfgrp_GetFairyCount(PlayState* play, int type)
 {
     if (type == 0 || type > 4)
         return 0;
-    if (gSave.inventory.strayFairies[type - 1] >= gComboConfig.strayFairyRewardCount)
+    if (gSave.info.inventory.strayFairies[type - 1] >= gComboConfig.strayFairyRewardCount)
         return 25;
     return 0;
 }

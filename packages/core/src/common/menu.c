@@ -681,24 +681,24 @@ static void printNumColored(PlayState* play, int num, int max, int digits, float
 static void dungeonDataOot(DungeonData* out, const DungeonDef* def)
 {
     out->maxKeys = g.maxKeysOot[def->id];
-    out->keys = gOotSave.inventory.dungeonItems[def->id].maxKeys;
+    out->keys = gOotSave.info.inventory.dungeonItems[def->id].maxKeys;
     out->fairies = 0;
-    out->map = gOotSave.inventory.dungeonItems[def->id].map;
-    out->compass = gOotSave.inventory.dungeonItems[def->id].compass;
+    out->map = gOotSave.info.inventory.dungeonItems[def->id].map;
+    out->compass = gOotSave.info.inventory.dungeonItems[def->id].compass;
     if (def->id == SCE_OOT_INSIDE_GANON_CASTLE)
-        out->bossKey = gOotSave.inventory.dungeonItems[SCE_OOT_GANON_TOWER].bossKey;
+        out->bossKey = gOotSave.info.inventory.dungeonItems[SCE_OOT_GANON_TOWER].bossKey;
     else
-        out->bossKey = gOotSave.inventory.dungeonItems[def->id].bossKey;
+        out->bossKey = gOotSave.info.inventory.dungeonItems[def->id].bossKey;
 }
 
 static void dungeonDataMm(DungeonData* out, const DungeonDef* def)
 {
     out->maxKeys = g.maxKeysMm[def->id];
-    out->keys = gMmSave.inventory.dungeonItems[def->id].maxKeys;
-    out->bossKey = gMmSave.inventory.dungeonItems[def->id].bossKey;
-    out->fairies = gMmSave.inventory.strayFairies[def->id];
-    out->map = gMmSave.inventory.dungeonItems[def->id].map;
-    out->compass = gMmSave.inventory.dungeonItems[def->id].compass;
+    out->keys = gMmSave.info.inventory.dungeonItems[def->id].maxKeys;
+    out->bossKey = gMmSave.info.inventory.dungeonItems[def->id].bossKey;
+    out->fairies = gMmSave.info.inventory.strayFairies[def->id];
+    out->map = gMmSave.info.inventory.dungeonItems[def->id].map;
+    out->compass = gMmSave.info.inventory.dungeonItems[def->id].compass;
 }
 
 static void printDungeonSilverRupees(PlayState* play, float x, float y, int srBase, int srCount)
@@ -876,7 +876,7 @@ static void printDungeonData(PlayState* play, int base, int index)
                 /* OoT skulls */
                 gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 0, 255);
                 drawTexRGBA16_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_SKULL), x + 104.f, y);
-                printNumColored(play, gOotSave.inventory.goldTokens, 100, 3, x + 116.f, y, 0);
+                printNumColored(play, gOotSave.info.inventory.goldTokens, 100, 3, x + 116.f, y, 0);
             }
 
             if (!Config_Flag(CFG_ONLY_OOT))
@@ -884,12 +884,12 @@ static void printDungeonData(PlayState* play, int base, int index)
                 /* MM skulls - swamp */
                 gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0, 255, 0, 255);
                 drawTexRGBA16_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_SKULL), x + 144.f, y);
-                printNumColored(play, gMmSave.skullCountSwamp, 30, 2, x + 156.f, y, 0);
+                printNumColored(play, gMmSave.info.skullCountSwamp, 30, 2, x + 156.f, y, 0);
 
                 /* MM skulls - ocean */
                 gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0, 0, 255, 255);
                 drawTexRGBA16_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_SKULL), x + 184.f, y);
-                printNumColored(play, gMmSave.skullCountOcean, 30, 2, x + 196.f, y, 0);
+                printNumColored(play, gMmSave.info.skullCountOcean, 30, 2, x + 196.f, y, 0);
             }
             break;
         case 2:
@@ -1129,7 +1129,7 @@ void comboMenuDraw(PlayState* play)
 
 void comboMenuNext(void)
 {
-    if (Config_Flag(CFG_MENU_NOTEBOOK) && !gMmSave.inventory.quest.notebook)
+    if (Config_Flag(CFG_MENU_NOTEBOOK) && !gMmSave.info.inventory.quest.notebook)
     {
         PlaySound(0x4806);
         return;

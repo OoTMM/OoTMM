@@ -82,11 +82,11 @@ static void fixSpawn(void)
     s32 override;
 
     /* If the player saved in a boss, don't touch it */
-    if (dungeonRespawn(gSave.sceneId, 1))
+    if (dungeonRespawn(gSave.info.sceneId, 1))
         return;
 
     /* If the player saved in a dungeon, don't touch it */
-    switch (gSave.sceneId)
+    switch (gSave.info.sceneId)
     {
     case SCE_OOT_INSIDE_DEKU_TREE:
     case SCE_OOT_DODONGO_CAVERN:
@@ -105,7 +105,7 @@ static void fixSpawn(void)
     }
 
     /* If the player saved in link's house, and it's not ER, honor that */
-    if (gSave.sceneId == SCE_OOT_LINK_HOUSE && !Config_Flag(CFG_ER_ANY))
+    if (gSave.info.sceneId == SCE_OOT_LINK_HOUSE && !Config_Flag(CFG_ER_ANY))
     {
         gSave.entrance = ENTR_OOT_SPAWN_CHILD;
         return;
@@ -134,8 +134,8 @@ void Sram_AfterOpenSave(void)
     Save_ReadForeign();
 
     /* Met deku tree - deku tree open - met mido */
-    gSave.eventsChk[0] |= 0x102c;
-    gSave.eventsMisc[0] |= 0x000b;
+    gSave.info.eventsChk[0] |= 0x102c;
+    gSave.info.eventsMisc[0] |= 0x000b;
 
     if (Config_Flag(CFG_OOT_OPEN_DEKU))
         SetEventChk(EV_OOT_CHK_DEKU_MIDO_SWORD_SHIELD);
@@ -204,7 +204,7 @@ static void applyStartingEvents(void)
 
     if (Config_Flag(CFG_OOT_OPEN_KAKARIKO_GATE))
     {
-        BITMAP16_SET(gSave.eventsMisc, EV_OOT_INF_KAKARIKO_GATE_OPEN);
+        BITMAP16_SET(gSave.info.eventsMisc, EV_OOT_INF_KAKARIKO_GATE_OPEN);
     }
 
     if (Config_Flag(CFG_OOT_KZ_OPEN))
@@ -214,7 +214,7 @@ static void applyStartingEvents(void)
 
     if (Config_IsMq(MQ_TEMPLE_SHADOW))
     {
-        gSave.perm[SCE_OOT_TEMPLE_SHADOW].switches |= (1 << 7);
+        gSave.info.perm[SCE_OOT_TEMPLE_SHADOW].switches |= (1 << 7);
     }
 
     /* Carpenters */
@@ -224,14 +224,14 @@ static void applyStartingEvents(void)
         SetEventChk(EV_OOT_CHK_CARPENTER_3);
         SetEventChk(EV_OOT_CHK_CARPENTER_4);
 
-        gSave.perm[SCE_OOT_THIEVES_HIDEOUT].switches |= (1 << 2);
-        gSave.perm[SCE_OOT_THIEVES_HIDEOUT].switches |= (1 << 3);
-        gSave.perm[SCE_OOT_THIEVES_HIDEOUT].switches |= (1 << 4);
+        gSave.info.perm[SCE_OOT_THIEVES_HIDEOUT].switches |= (1 << 2);
+        gSave.info.perm[SCE_OOT_THIEVES_HIDEOUT].switches |= (1 << 3);
+        gSave.info.perm[SCE_OOT_THIEVES_HIDEOUT].switches |= (1 << 4);
 
         if (Config_Flag(CFG_OOT_CARPENTERS_NONE))
         {
             SetEventChk(EV_OOT_CHK_CARPENTER_1);
-            gSave.perm[SCE_OOT_THIEVES_HIDEOUT].switches |= (1 << 1);
+            gSave.info.perm[SCE_OOT_THIEVES_HIDEOUT].switches |= (1 << 1);
         }
     }
 
@@ -283,34 +283,34 @@ static void applyStartingEvents(void)
 
     if (Config_Flag(CFG_MM_REMOVED_FAIRIES))
     {
-        gMmSave.permanentSceneFlags[SCE_MM_TEMPLE_WOODFALL].switch1 |= 0x0007fc00;
-        gMmSave.permanentSceneFlags[SCE_MM_TEMPLE_WOODFALL].collectible |= 0x70000000;
+        gMmSave.info.permanentSceneFlags[SCE_MM_TEMPLE_WOODFALL].switch1 |= 0x0007fc00;
+        gMmSave.info.permanentSceneFlags[SCE_MM_TEMPLE_WOODFALL].collectible |= 0x70000000;
 
-        gMmSave.permanentSceneFlags[SCE_MM_TEMPLE_SNOWHEAD].switch1 |= 0x0007b800;
-        gMmSave.permanentSceneFlags[SCE_MM_TEMPLE_SNOWHEAD].collectible |= 0x40000000;
+        gMmSave.info.permanentSceneFlags[SCE_MM_TEMPLE_SNOWHEAD].switch1 |= 0x0007b800;
+        gMmSave.info.permanentSceneFlags[SCE_MM_TEMPLE_SNOWHEAD].collectible |= 0x40000000;
 
-        gMmSave.permanentSceneFlags[SCE_MM_TEMPLE_GREAT_BAY].switch1 |= 0x00078000;
-        gMmSave.permanentSceneFlags[SCE_MM_TEMPLE_GREAT_BAY].collectible |= 0x7c000000;
+        gMmSave.info.permanentSceneFlags[SCE_MM_TEMPLE_GREAT_BAY].switch1 |= 0x00078000;
+        gMmSave.info.permanentSceneFlags[SCE_MM_TEMPLE_GREAT_BAY].collectible |= 0x7c000000;
     }
 
-    if (Config_Flag(CFG_MM_PRE_ACTIVATED_OWL_GB)) gMmSave.playerData.owlActivationFlags |= (1 << 0);
-    if (Config_Flag(CFG_MM_PRE_ACTIVATED_OWL_ZC)) gMmSave.playerData.owlActivationFlags |= (1 << 1);
-    if (Config_Flag(CFG_MM_PRE_ACTIVATED_OWL_SH)) gMmSave.playerData.owlActivationFlags |= (1 << 2);
-    if (Config_Flag(CFG_MM_PRE_ACTIVATED_OWL_MV)) gMmSave.playerData.owlActivationFlags |= (1 << 3);
-    if (Config_Flag(CFG_MM_PRE_ACTIVATED_OWL_CT)) gMmSave.playerData.owlActivationFlags |= (1 << 4);
-    if (Config_Flag(CFG_MM_PRE_ACTIVATED_OWL_MR)) gMmSave.playerData.owlActivationFlags |= (1 << 5);
-    if (Config_Flag(CFG_MM_PRE_ACTIVATED_OWL_WF)) gMmSave.playerData.owlActivationFlags |= (1 << 6);
-    if (Config_Flag(CFG_MM_PRE_ACTIVATED_OWL_SS)) gMmSave.playerData.owlActivationFlags |= (1 << 7);
-    if (Config_Flag(CFG_MM_PRE_ACTIVATED_OWL_IC)) gMmSave.playerData.owlActivationFlags |= (1 << 8);
-    if (Config_Flag(CFG_MM_PRE_ACTIVATED_OWL_ST)) gMmSave.playerData.owlActivationFlags |= (1 << 9);
+    if (Config_Flag(CFG_MM_PRE_ACTIVATED_OWL_GB)) gMmSave.info.playerData.owlActivationFlags |= (1 << 0);
+    if (Config_Flag(CFG_MM_PRE_ACTIVATED_OWL_ZC)) gMmSave.info.playerData.owlActivationFlags |= (1 << 1);
+    if (Config_Flag(CFG_MM_PRE_ACTIVATED_OWL_SH)) gMmSave.info.playerData.owlActivationFlags |= (1 << 2);
+    if (Config_Flag(CFG_MM_PRE_ACTIVATED_OWL_MV)) gMmSave.info.playerData.owlActivationFlags |= (1 << 3);
+    if (Config_Flag(CFG_MM_PRE_ACTIVATED_OWL_CT)) gMmSave.info.playerData.owlActivationFlags |= (1 << 4);
+    if (Config_Flag(CFG_MM_PRE_ACTIVATED_OWL_MR)) gMmSave.info.playerData.owlActivationFlags |= (1 << 5);
+    if (Config_Flag(CFG_MM_PRE_ACTIVATED_OWL_WF)) gMmSave.info.playerData.owlActivationFlags |= (1 << 6);
+    if (Config_Flag(CFG_MM_PRE_ACTIVATED_OWL_SS)) gMmSave.info.playerData.owlActivationFlags |= (1 << 7);
+    if (Config_Flag(CFG_MM_PRE_ACTIVATED_OWL_IC)) gMmSave.info.playerData.owlActivationFlags |= (1 << 8);
+    if (Config_Flag(CFG_MM_PRE_ACTIVATED_OWL_ST)) gMmSave.info.playerData.owlActivationFlags |= (1 << 9);
 
-    BITMAP16_SET(gSave.eventsMisc, EV_OOT_INF_OWL_LAKE_HYLIA_SPOKEN);
-    BITMAP16_SET(gSave.eventsMisc, EV_OOT_INF_MALON_RANCH_SAVED);
+    BITMAP16_SET(gSave.info.eventsMisc, EV_OOT_INF_OWL_LAKE_HYLIA_SPOKEN);
+    BITMAP16_SET(gSave.info.eventsMisc, EV_OOT_INF_MALON_RANCH_SAVED);
 
     if (Config_Flag(CFG_MM_WELL_OPEN))
     {
-        gMmSave.permanentSceneFlags[SCE_MM_BENEATH_THE_WELL].switch0 |= 0xc0000082;
-        gMmSave.permanentSceneFlags[SCE_MM_BENEATH_THE_WELL].switch1 |= 0x000007ff;
+        gMmSave.info.permanentSceneFlags[SCE_MM_BENEATH_THE_WELL].switch0 |= 0xc0000082;
+        gMmSave.info.permanentSceneFlags[SCE_MM_BENEATH_THE_WELL].switch1 |= 0x000007ff;
     }
 }
 
@@ -322,7 +322,7 @@ void comboCreateSave(void* unk, void* buffer)
     Save_CreateMM();
 
     /* Move epona in a dummy scene */
-    gSave.horseData.sceneId = -1;
+    gSave.info.horseData.sceneId = -1;
 
     /* Apply some early settings */
     if (!Config_Flag(CFG_CHILD_WALLET))
@@ -367,20 +367,20 @@ void comboCreateSave(void* unk, void* buffer)
         gSharedCustomSave.mm.halfDays = 0x3f;
 
     /* Set initial equips */
-    gOotSave.childEquips.buttonItems[0] = ITEM_NONE;
-    gOotSave.childEquips.equipment.boots = 0x01;
-    gOotSave.childEquips.equipment.tunics = 0x01;
+    gOotSave.info.childEquips.buttonItems[0] = ITEM_NONE;
+    gOotSave.info.childEquips.equipment.boots = 0x01;
+    gOotSave.info.childEquips.equipment.tunics = 0x01;
 
-    gOotSave.adultEquips.equipment.boots = 0x01;
-    gOotSave.adultEquips.equipment.tunics = 0x01;
+    gOotSave.info.adultEquips.equipment.boots = 0x01;
+    gOotSave.info.adultEquips.equipment.tunics = 0x01;
 
     if (!Config_Flag(CFG_OOT_SWORDLESS_ADULT))
     {
-        gOotSave.adultEquips.buttonItems[0] = ITEM_OOT_SWORD_MASTER;
-        gOotSave.adultEquips.equipment.swords = 0x02;
+        gOotSave.info.adultEquips.buttonItems[0] = ITEM_OOT_SWORD_MASTER;
+        gOotSave.info.adultEquips.equipment.swords = 0x02;
     }
     else
-        gOotSave.adultEquips.buttonItems[0] = ITEM_NONE;
+        gOotSave.info.adultEquips.buttonItems[0] = ITEM_NONE;
 
     /* Apply starting age */
     if (Config_Flag(CFG_OOT_START_ADULT))
@@ -388,18 +388,18 @@ void comboCreateSave(void* unk, void* buffer)
         /* Spawn as adult in ToT */
         gOotSave.age = AGE_ADULT;
         gOotSave.entrance = ENTR_OOT_WARP_SONG_TEMPLE;
-        gOotSave.sceneId = SCE_OOT_TEMPLE_OF_TIME;
+        gOotSave.info.sceneId = SCE_OOT_TEMPLE_OF_TIME;
 
         if (!Config_Flag(CFG_OOT_SWORDLESS_ADULT))
         {
             /* Force Master Sword */
-            gOotSave.equips.buttonItems[0] = ITEM_OOT_SWORD_MASTER;
-            gOotSave.inventory.equipment.swords |= EQ_OOT_SWORD_MASTER;
-            gOotSave.equips.equipment.swords = 2;
+            gOotSave.info.equips.buttonItems[0] = ITEM_OOT_SWORD_MASTER;
+            gOotSave.info.inventory.equipment.swords |= EQ_OOT_SWORD_MASTER;
+            gOotSave.info.equips.equipment.swords = 2;
             gSharedCustomSave.foundMasterSword = 1;
 
             /* Unset the swordless flag */
-            gSave.eventsMisc[29] = 0;
+            gSave.info.eventsMisc[29] = 0;
         }
     }
 
@@ -448,7 +448,7 @@ void Save_DoSave(PlayState* play, int saveFlags)
     {
         if (!(saveFlags & SF_NOCOMMIT))
             PlayStoreFlags(play);
-        gSave.sceneId = play->sceneId;
+        gSave.info.sceneId = play->sceneId;
     }
 
     if (!(saveFlags & SF_NOCOMMIT))

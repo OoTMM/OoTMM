@@ -46,7 +46,7 @@ static int getChestMarkOot(PlayState* play, int sceneId, int flagId)
         return !!(gMultiMarkChests & (1 << flagId));
 #endif
 
-    return !!(gOotSave.perm[sceneId].chests & (1 << flagId));
+    return !!(gOotSave.info.perm[sceneId].chests & (1 << flagId));
 }
 
 static int getChestMarkMm(PlayState* play, int sceneId, int flagId)
@@ -60,7 +60,7 @@ static int getChestMarkMm(PlayState* play, int sceneId, int flagId)
         return 1;
 #endif
 
-    return !!(gMmSave.permanentSceneFlags[sceneId].chest & (1 << flagId));
+    return !!(gMmSave.info.permanentSceneFlags[sceneId].chest & (1 << flagId));
 }
 
 static void setChestMarkOot(PlayState* play, int sceneId, int flagId)
@@ -74,7 +74,7 @@ static void setChestMarkOot(PlayState* play, int sceneId, int flagId)
     }
 #endif
 
-    gOotSave.perm[sceneId].chests |= (1 << flagId);
+    gOotSave.info.perm[sceneId].chests |= (1 << flagId);
 }
 
 static void setChestMarkMm(PlayState* play, int sceneId, int flagId)
@@ -91,7 +91,7 @@ static void setChestMarkMm(PlayState* play, int sceneId, int flagId)
     gSaveContext.cycleSceneFlags[sceneId].chest |= (1 << flagId);
 #endif
 
-    gMmSave.permanentSceneFlags[sceneId].chest |= (1 << flagId);
+    gMmSave.info.permanentSceneFlags[sceneId].chest |= (1 << flagId);
 }
 
 static int getCollectibleMarkOot(PlayState* play, int sceneId, int flagId)
@@ -101,7 +101,7 @@ static int getCollectibleMarkOot(PlayState* play, int sceneId, int flagId)
         return !!(gMultiMarkCollectibles & (1 << flagId));
 #endif
 
-    return !!(gOotSave.perm[sceneId].collectibles & (1 << flagId));
+    return !!(gOotSave.info.perm[sceneId].collectibles & (1 << flagId));
 }
 
 static int getCollectibleMarkMm(PlayState* play, int sceneId, int flagId)
@@ -115,7 +115,7 @@ static int getCollectibleMarkMm(PlayState* play, int sceneId, int flagId)
         return 1;
 #endif
 
-    return !!(gMmSave.permanentSceneFlags[sceneId].collectible & (1 << flagId));
+    return !!(gMmSave.info.permanentSceneFlags[sceneId].collectible & (1 << flagId));
 }
 
 static void setCollectibleMarkOot(PlayState* play, int sceneId, int flagId)
@@ -129,7 +129,7 @@ static void setCollectibleMarkOot(PlayState* play, int sceneId, int flagId)
     }
 #endif
 
-    gOotSave.perm[sceneId].collectibles |= (1 << flagId);
+    gOotSave.info.perm[sceneId].collectibles |= (1 << flagId);
 }
 
 static void setCollectibleMarkMm(PlayState* play, int sceneId, int flagId)
@@ -146,7 +146,7 @@ static void setCollectibleMarkMm(PlayState* play, int sceneId, int flagId)
     gSaveContext.cycleSceneFlags[sceneId].collectible |= (1 << flagId);
 #endif
 
-    gMmSave.permanentSceneFlags[sceneId].collectible |= (1 << flagId);
+    gMmSave.info.permanentSceneFlags[sceneId].collectible |= (1 << flagId);
 }
 
 static int getSwitch0MarkMm(PlayState* play, int sceneId, int flagId)
@@ -160,7 +160,7 @@ static int getSwitch0MarkMm(PlayState* play, int sceneId, int flagId)
         return 1;
 #endif
 
-    return !!(gMmSave.permanentSceneFlags[sceneId].switch0 & (1 << flagId));
+    return !!(gMmSave.info.permanentSceneFlags[sceneId].switch0 & (1 << flagId));
 }
 
 static int getSwitch1MarkMm(PlayState* play, int sceneId, int flagId)
@@ -174,7 +174,7 @@ static int getSwitch1MarkMm(PlayState* play, int sceneId, int flagId)
         return 1;
 #endif
 
-    return !!(gMmSave.permanentSceneFlags[sceneId].switch1 & (1 << flagId));
+    return !!(gMmSave.info.permanentSceneFlags[sceneId].switch1 & (1 << flagId));
 }
 
 static void setSwitch0MarkMm(PlayState* play, int sceneId, int flagId)
@@ -191,7 +191,7 @@ static void setSwitch0MarkMm(PlayState* play, int sceneId, int flagId)
     gSaveContext.cycleSceneFlags[sceneId].switch0 |= (1 << flagId);
 #endif
 
-    gMmSave.permanentSceneFlags[sceneId].switch0 |= (1 << flagId);
+    gMmSave.info.permanentSceneFlags[sceneId].switch0 |= (1 << flagId);
 }
 
 static void setSwitch1MarkMm(PlayState* play, int sceneId, int flagId)
@@ -208,7 +208,7 @@ static void setSwitch1MarkMm(PlayState* play, int sceneId, int flagId)
     gSaveContext.cycleSceneFlags[sceneId].switch1 |= (1 << flagId);
 #endif
 
-    gMmSave.permanentSceneFlags[sceneId].switch1 |= (1 << flagId);
+    gMmSave.info.permanentSceneFlags[sceneId].switch1 |= (1 << flagId);
 }
 
 static int getStrayFairyMarkMm(PlayState* play, int sceneId, int id)
@@ -292,7 +292,7 @@ void Multi_SetMarkedOot(PlayState* play, u8 ovType, u8 sceneId, u8 roomId, u8 id
         BITMAP8_SET(gSharedCustomSave.oot.npc, id);
         break;
     case OV_GS:
-        BITMAP32_SET(gOotSave.gsFlags, id - 8);
+        BITMAP32_SET(gOotSave.info.gsFlags, id - 8);
         break;
     case OV_SF:
         break;
@@ -374,7 +374,7 @@ int Multi_IsMarkedOot(PlayState* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
     case OV_NPC:
         return BITMAP8_GET(gSharedCustomSave.oot.npc, id);
     case OV_GS:
-        return BITMAP32_GET(gOotSave.gsFlags, id - 8);
+        return BITMAP32_GET(gOotSave.info.gsFlags, id - 8);
     case OV_SF:
         break;
     case OV_COW:

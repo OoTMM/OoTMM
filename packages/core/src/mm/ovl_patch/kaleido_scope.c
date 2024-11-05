@@ -36,12 +36,12 @@ void KaleidoScope_AfterSetCutsorColor(PlayState* play)
         }
     }
 
-    if (cursorSlot >= ITS_MM_BOTTLE && cursorSlot <= ITS_MM_BOTTLE6 && gSave.inventory.items[cursorSlot] == ITEM_MM_SPRING_WATER_HOT)
+    if (cursorSlot >= ITS_MM_BOTTLE && cursorSlot <= ITS_MM_BOTTLE6 && gSave.info.inventory.items[cursorSlot] == ITEM_MM_SPRING_WATER_HOT)
     {
         play->pauseCtx.cursorColorIndex = 4;
         if (press)
         {
-            gSave.inventory.items[cursorSlot] = ITEM_MM_SPRING_WATER;
+            gSave.info.inventory.items[cursorSlot] = ITEM_MM_SPRING_WATER;
             reloadSlotMm(gPlay, cursorSlot);
             effect = 1;
         }

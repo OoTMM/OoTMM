@@ -32,38 +32,38 @@ static int isPlayerSelf(u8 playerId)
 void comboSyncItems(void)
 {
     if (Config_Flag(CFG_SHARED_BOWS))
-        gForeignSave.inventory.ammo[ITS_FOREIGN_BOW] = gSave.inventory.ammo[ITS_NATIVE_BOW];
+        gForeignSave.info.inventory.ammo[ITS_FOREIGN_BOW] = gSave.info.inventory.ammo[ITS_NATIVE_BOW];
 
     if (Config_Flag(CFG_SHARED_BOMB_BAGS))
-        gForeignSave.inventory.ammo[ITS_FOREIGN_BOMBS] = gSave.inventory.ammo[ITS_NATIVE_BOMBS];
+        gForeignSave.info.inventory.ammo[ITS_FOREIGN_BOMBS] = gSave.info.inventory.ammo[ITS_NATIVE_BOMBS];
 
     if (Config_Flag(CFG_SHARED_BOMBCHU))
-        gForeignSave.inventory.ammo[ITS_FOREIGN_BOMBCHU] = gSave.inventory.ammo[ITS_NATIVE_BOMBCHU];
+        gForeignSave.info.inventory.ammo[ITS_FOREIGN_BOMBCHU] = gSave.info.inventory.ammo[ITS_NATIVE_BOMBCHU];
 
     if (Config_Flag(CFG_SHARED_MAGIC))
-       gForeignSave.playerData.magic = gSave.playerData.magic;
+       gForeignSave.info.playerData.magic = gSave.info.playerData.magic;
 
     if (Config_Flag(CFG_SHARED_NUTS_STICKS))
     {
-        gForeignSave.inventory.ammo[ITS_FOREIGN_NUTS] = gSave.inventory.ammo[ITS_NATIVE_NUTS];
-        gForeignSave.inventory.ammo[ITS_FOREIGN_STICKS] = gSave.inventory.ammo[ITS_NATIVE_STICKS];
+        gForeignSave.info.inventory.ammo[ITS_FOREIGN_NUTS] = gSave.info.inventory.ammo[ITS_NATIVE_NUTS];
+        gForeignSave.info.inventory.ammo[ITS_FOREIGN_STICKS] = gSave.info.inventory.ammo[ITS_NATIVE_STICKS];
     }
 
     if (Config_Flag(CFG_SHARED_WALLETS))
-        gForeignSave.playerData.rupees = gSave.playerData.rupees;
+        gForeignSave.info.playerData.rupees = gSave.info.playerData.rupees;
 
     if (Config_Flag(CFG_SHARED_HEALTH))
     {
-        gForeignSave.playerData.healthCapacity = gSave.playerData.healthCapacity;
-        gForeignSave.playerData.health = gSave.playerData.health;
-        gForeignSave.inventory.quest.heartPieces = gSave.inventory.quest.heartPieces;
+        gForeignSave.info.playerData.healthCapacity = gSave.info.playerData.healthCapacity;
+        gForeignSave.info.playerData.health = gSave.info.playerData.health;
+        gForeignSave.info.inventory.quest.heartPieces = gSave.info.inventory.quest.heartPieces;
     }
 
     if (Config_Flag(CFG_CROSS_GAME_FW))
     {
 #if defined(GAME_MM)
         RespawnData* fw = &gCustomSave.fw[gOotSave.age];
-        OotFaroreWind* foreignFw = &gForeignSave.fw;
+        OotFaroreWind* foreignFw = &gForeignSave.info.fw;
 
         if (fw->data <= 0 || fw->entrance != ENTR_FW_CROSS)
         {
@@ -77,7 +77,7 @@ void comboSyncItems(void)
         }
 #else
         RespawnData* foreignFw = &gSharedCustomSave.mm.fw[gSave.age];
-        OotFaroreWind* fw = &gSave.fw;
+        OotFaroreWind* fw = &gSave.info.fw;
 
         if (fw->set <= 0 || fw->entrance != ENTR_FW_CROSS)
         {
@@ -102,7 +102,7 @@ int comboItemPrecondEx(const ComboItemQuery* q, s16 price)
     if (isPlayerSelf(o.player) && (!isItemBuyable(o.gi) || !isItemLicensed(o.gi)))
         return SC_ERR_CANNOTBUY;
 
-    if (gSave.playerData.rupees < price)
+    if (gSave.info.playerData.rupees < price)
         return SC_ERR_NORUPEES;
 
     if (isItemFastBuy(o.gi))

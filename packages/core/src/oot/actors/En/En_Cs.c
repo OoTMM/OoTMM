@@ -8,7 +8,7 @@
 
 static void EnCs_AfterMaskTrade(Actor* this, PlayState* play)
 {
-    gSave.eventsItem[3] |= 0x400;
+    gSave.info.eventsItem[3] |= 0x400;
     SET_HANDLER(this, actorAddr(ACTOR_EN_CS, 0x80ae1ee8));
 }
 
@@ -63,7 +63,7 @@ static int EnCs_ActorTalkedTo(Actor* this)
 
     link = GET_PLAYER(gPlay);
     ret = ActorTalkedTo(this);
-    if (ret && link->mask == MASK_SPOOKY && !(gSave.eventsItem[3] & 0x400))
+    if (ret && link->mask == MASK_SPOOKY && !(gSave.info.eventsItem[3] & 0x400))
     {
         SET_HANDLER(this, EnCs_InitMaskTrade);
         EnCs_InitMaskTrade(this, gPlay);

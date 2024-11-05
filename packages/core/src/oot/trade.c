@@ -6,10 +6,10 @@ static void removeButtonItem(u16 itemId)
 {
     for (int i = 1; i < 4; ++i)
     {
-        if (gSave.equips.buttonItems[i] == itemId)
+        if (gSave.info.equips.buttonItems[i] == itemId)
         {
-            gSave.equips.buttonItems[i] = ITEM_NONE;
-            gSave.equips.cButtonSlots[i - 1] = 0xff;
+            gSave.info.equips.buttonItems[i] = ITEM_NONE;
+            gSave.info.equips.cButtonSlots[i - 1] = 0xff;
         }
     }
 }
@@ -25,7 +25,7 @@ void comboRemoveTradeItemAdult(u16 xitemId)
         if (gOotExtraTrade.adult)
             comboToggleSlot(ITS_OOT_TRADE_ADULT);
         else
-            gSave.inventory.items[ITS_OOT_TRADE_ADULT] = ITEM_NONE;
+            gSave.info.inventory.items[ITS_OOT_TRADE_ADULT] = ITEM_NONE;
         removeButtonItem(kOotTradeAdult[xitemId]);
     }
 }
@@ -41,7 +41,7 @@ void comboRemoveTradeItemChild(u16 xitemId)
         if (gOotExtraTrade.child)
             comboToggleSlot(ITS_OOT_TRADE_CHILD);
         else
-            gSave.inventory.items[ITS_OOT_TRADE_CHILD] = ITEM_NONE;
+            gSave.info.inventory.items[ITS_OOT_TRADE_CHILD] = ITEM_NONE;
         removeButtonItem(kOotTradeChild[xitemId]);
     }
 }

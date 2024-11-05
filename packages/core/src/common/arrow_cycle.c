@@ -24,7 +24,7 @@
 #define EN_ARROW_CTOR   0x8088441c
 #define EN_ARROW_DTOR   0x80884624
 
-#define BUTTON(x)   (gSave.equips.buttonItems[(x)])
+#define BUTTON(x)   (gSave.info.equips.buttonItems[(x)])
 #endif
 
 #if defined(GAME_MM)
@@ -49,7 +49,7 @@
 #define EN_ARROW_CTOR   0x8088a240
 #define EN_ARROW_DTOR   0x8088a464
 
-#define BUTTON(x)   (gSave.itemEquips.buttonItems[0][(x)])
+#define BUTTON(x)   (gSave.info.itemEquips.buttonItems[0][(x)])
 #endif
 
 typedef struct
@@ -105,7 +105,7 @@ static u16 GetNextArrowVariable(u16 variable)
 
 static int HasEnoughMagicForArrow(s8 prevCost, s8 curCost)
 {
-    return gSave.playerData.magic >= (curCost - prevCost);
+    return gSave.info.playerData.magic >= (curCost - prevCost);
 }
 
 static const ArrowInfo* GetNextArrowInfo(u16 variable)
@@ -124,7 +124,7 @@ static const ArrowInfo* GetNextArrowInfo(u16 variable)
         info = GetArrowInfo(current);
         magic = info->magicCost;
         hasMagic = HasEnoughMagicForArrow(magicCost, magic);
-        if (info && info->item == gSave.inventory.items[info->slot] && hasMagic)
+        if (info && info->item == gSave.info.inventory.items[info->slot] && hasMagic)
             return info;
     }
 
@@ -229,19 +229,19 @@ static void HandleFrameDelay(Player* link, PlayState* play, Actor* arrow)
         if (!comboIsChateauActive())
         {
 #if defined(GAME_OOT)
-            gSave.playerData.magic += sArrowCycleState.magicCost;
+            gSave.info.playerData.magic += sArrowCycleState.magicCost;
 #else
             if (prevEffectState >= 2)
             {
                 if (!MM_GET_EVENT_WEEK(EV_MM_WEEK_DRANK_CHATEAU_ROMANI))
-                    gSave.playerData.magic += sArrowCycleState.magicCost;
+                    gSave.info.playerData.magic += sArrowCycleState.magicCost;
             }
 #endif
         }
 
 #if defined(GAME_OOT)
         if (!comboIsChateauActive())
-            gSave.playerData.magic -= curInfo->magicCost;
+            gSave.info.playerData.magic -= curInfo->magicCost;
 #else
         gSaveContext.magicToConsume = curInfo->magicCost;
 #endif
@@ -313,7 +313,7 @@ void ArrowCycle_Handle(Player* link, PlayState* play)
     if (!curInfo || !nextInfo || curInfo->var == nextInfo->var)
     {
         item = BUTTON(link->heldItemButton);
-        if (curInfo->var == 2 && item != ITEM_BOW && gSave.inventory.items[ITS_BOW] == ITEM_BOW)
+        if (curInfo->var == 2 && item != ITEM_BOW && gSave.info.inventory.items[ITS_BOW] == ITEM_BOW)
         {
             BUTTON(link->heldItemButton) = ITEM_BOW;
             Interface_LoadItemIconImpl(play, link->heldItemButton);

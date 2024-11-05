@@ -34,10 +34,10 @@ void BgDyYoseizo_Update(Actor* this, PlayState* play)
         if (Actor_HasParentZ(this) || gOotExtraFlags.greatFairies & mask)
         {
             /* Refill */
-            if (gSave.playerData.magicUpgrade)
+            if (gSave.info.playerData.magicUpgrade)
             {
-                gSave.playerData.magicLevel = 0;
-                gSaveContext.magicFillTarget = gSave.playerData.magicUpgrade2 ? 0x60 : 0x30;
+                gSave.info.playerData.magicLevel = 0;
+                gSaveContext.magicFillTarget = gSave.info.playerData.magicUpgrade2 ? 0x60 : 0x30;
             }
             gSaveContext.healthDelta += 20 * 0x10;
             gOotExtraFlags.greatFairies |= mask;

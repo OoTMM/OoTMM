@@ -3,13 +3,13 @@
 void EnTk_AfterInit(void)
 {
     /* Unset the "won game" flag is the HP was not collected */
-    if (!(gSave.perm[SCE_OOT_GRAVEYARD].collectibles & (1 << 0x1f)))
-        BITMAP16_CLEAR(gSave.eventsItem, EV_OOT_ITEM_DAMPE_GRAVEYARD_HP);
+    if (!(gSave.info.perm[SCE_OOT_GRAVEYARD].collectibles & (1 << 0x1f)))
+        BITMAP16_CLEAR(gSave.info.eventsItem, EV_OOT_ITEM_DAMPE_GRAVEYARD_HP);
 }
 
 float EnTk_RandFloat(void)
 {
-    if (BITMAP16_GET(gSave.eventsItem, EV_OOT_ITEM_DAMPE_GRAVEYARD_HP))
+    if (BITMAP16_GET(gSave.info.eventsItem, EV_OOT_ITEM_DAMPE_GRAVEYARD_HP))
         return Rand_ZeroOne();
     return 1.f;
 }

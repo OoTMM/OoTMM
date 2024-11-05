@@ -12,7 +12,7 @@ static void rupeesText(void)
     u16 rupees;
 
     bzero(tmp, sizeof(tmp));
-    rupees = gSave.playerData.rupees;
+    rupees = gSave.info.playerData.rupees;
     for (int i = 0; i < 4; ++i)
     {
         divisor = kDivisors[i];
@@ -23,7 +23,7 @@ static void rupeesText(void)
         }
     }
 
-    digits = gWalletDigits[gSave.inventory.upgrades.wallet];
+    digits = gWalletDigits[gSave.info.inventory.upgrades.wallet];
     memcpy(gHudRupeesBuffer, tmp + (4 - digits), digits);
 }
 

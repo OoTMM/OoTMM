@@ -15,8 +15,8 @@ PATCH_CALL(0x8097e120, EnHeishi2_AfterZeldaLetter);
 
 static void EnHeishi2_AfterMaskTrade(Actor* this, PlayState* play)
 {
-    gSave.eventsMisc[7] |= 0x80;
-    gSave.eventsItem[3] |= 0x100;
+    gSave.info.eventsMisc[7] |= 0x80;
+    gSave.info.eventsItem[3] |= 0x100;
     SET_HANDLER(this, actorAddr(ACTOR_EN_HEISHI2, 0x8097d9b0));
 }
 

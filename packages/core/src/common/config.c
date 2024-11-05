@@ -71,49 +71,49 @@ int Config_SpecialCond(int special)
 
     if (cond->flags & SPF_STONES)
     {
-        count += gOotSave.inventory.quest.stoneEmerald;
-        count += gOotSave.inventory.quest.stoneRuby;
-        count += gOotSave.inventory.quest.stoneSapphire;
+        count += gOotSave.info.inventory.quest.stoneEmerald;
+        count += gOotSave.info.inventory.quest.stoneRuby;
+        count += gOotSave.info.inventory.quest.stoneSapphire;
     }
 
     if (cond->flags & SPF_MEDALLIONS)
     {
-        count += gOotSave.inventory.quest.medallionForest;
-        count += gOotSave.inventory.quest.medallionFire;
-        count += gOotSave.inventory.quest.medallionWater;
-        count += gOotSave.inventory.quest.medallionSpirit;
-        count += gOotSave.inventory.quest.medallionShadow;
-        count += gOotSave.inventory.quest.medallionLight;
+        count += gOotSave.info.inventory.quest.medallionForest;
+        count += gOotSave.info.inventory.quest.medallionFire;
+        count += gOotSave.info.inventory.quest.medallionWater;
+        count += gOotSave.info.inventory.quest.medallionSpirit;
+        count += gOotSave.info.inventory.quest.medallionShadow;
+        count += gOotSave.info.inventory.quest.medallionLight;
     }
 
     if (cond->flags & SPF_REMAINS)
     {
-        count += gMmSave.inventory.quest.remainsOdolwa;
-        count += gMmSave.inventory.quest.remainsGoht;
-        count += gMmSave.inventory.quest.remainsGyorg;
-        count += gMmSave.inventory.quest.remainsTwinmold;
+        count += gMmSave.info.inventory.quest.remainsOdolwa;
+        count += gMmSave.info.inventory.quest.remainsGoht;
+        count += gMmSave.info.inventory.quest.remainsGyorg;
+        count += gMmSave.info.inventory.quest.remainsTwinmold;
     }
 
     if (cond->flags & SPF_SKULLS_GOLD)
-        count += gOotSave.inventory.goldTokens;
+        count += gOotSave.info.inventory.goldTokens;
 
     if (cond->flags & SPF_SKULLS_SWAMP)
-        count += gMmSave.skullCountSwamp;
+        count += gMmSave.info.skullCountSwamp;
 
     if (cond->flags & SPF_SKULLS_OCEAN)
-        count += gMmSave.skullCountOcean;
+        count += gMmSave.info.skullCountOcean;
 
     if (cond->flags & SPF_FAIRIES_WF)
-        count += gMmSave.inventory.strayFairies[0];
+        count += gMmSave.info.inventory.strayFairies[0];
 
     if (cond->flags & SPF_FAIRIES_SH)
-        count += gMmSave.inventory.strayFairies[1];
+        count += gMmSave.info.inventory.strayFairies[1];
 
     if (cond->flags & SPF_FAIRIES_GB)
-        count += gMmSave.inventory.strayFairies[2];
+        count += gMmSave.info.inventory.strayFairies[2];
 
     if (cond->flags & SPF_FAIRIES_ST)
-        count += gMmSave.inventory.strayFairies[3];
+        count += gMmSave.info.inventory.strayFairies[3];
 
     if (cond->flags & SPF_FAIRY_TOWN)
         count += !!MM_GET_EVENT_WEEK(EV_MM_WEEK_TOWN_FAIRY);
@@ -122,88 +122,88 @@ int Config_SpecialCond(int special)
     {
         if (Config_Flag(CFG_SHARED_MASK_KEATON))
         {
-            if (gMmSave.inventory.items[ITS_MM_MASK_KEATON] == ITEM_MM_MASK_KEATON) hasMaskKeaton = 1;
+            if (gMmSave.info.inventory.items[ITS_MM_MASK_KEATON] == ITEM_MM_MASK_KEATON) hasMaskKeaton = 1;
         }
         else
         {
-            if (gMmSave.inventory.items[ITS_MM_MASK_KEATON] == ITEM_MM_MASK_KEATON) count++;
+            if (gMmSave.info.inventory.items[ITS_MM_MASK_KEATON] == ITEM_MM_MASK_KEATON) count++;
         }
 
         if (Config_Flag(CFG_SHARED_MASK_BUNNY))
         {
-            if (gMmSave.inventory.items[ITS_MM_MASK_BUNNY] == ITEM_MM_MASK_BUNNY) hasMaskBunny = 1;
+            if (gMmSave.info.inventory.items[ITS_MM_MASK_BUNNY] == ITEM_MM_MASK_BUNNY) hasMaskBunny = 1;
         }
         else
         {
-            if (gMmSave.inventory.items[ITS_MM_MASK_BUNNY] == ITEM_MM_MASK_BUNNY) count++;
+            if (gMmSave.info.inventory.items[ITS_MM_MASK_BUNNY] == ITEM_MM_MASK_BUNNY) count++;
         }
 
         if (Config_Flag(CFG_SHARED_MASK_TRUTH))
         {
-            if (gMmSave.inventory.items[ITS_MM_MASK_TRUTH] == ITEM_MM_MASK_TRUTH) hasMaskTruth = 1;
+            if (gMmSave.info.inventory.items[ITS_MM_MASK_TRUTH] == ITEM_MM_MASK_TRUTH) hasMaskTruth = 1;
         }
         else
         {
-            if (gMmSave.inventory.items[ITS_MM_MASK_TRUTH] == ITEM_MM_MASK_TRUTH) count++;
+            if (gMmSave.info.inventory.items[ITS_MM_MASK_TRUTH] == ITEM_MM_MASK_TRUTH) count++;
         }
 
         if (Config_Flag(CFG_SHARED_MASK_BLAST))
         {
-            if (gMmSave.inventory.items[ITS_MM_MASK_BLAST] == ITEM_MM_MASK_BLAST) hasMaskBlast = 1;
+            if (gMmSave.info.inventory.items[ITS_MM_MASK_BLAST] == ITEM_MM_MASK_BLAST) hasMaskBlast = 1;
         }
         else
         {
-            if (gMmSave.inventory.items[ITS_MM_MASK_BLAST] == ITEM_MM_MASK_BLAST) count++;
+            if (gMmSave.info.inventory.items[ITS_MM_MASK_BLAST] == ITEM_MM_MASK_BLAST) count++;
         }
 
         if (Config_Flag(CFG_SHARED_MASK_STONE))
         {
-            if (gMmSave.inventory.items[ITS_MM_MASK_STONE] == ITEM_MM_MASK_STONE) hasMaskStone = 1;
+            if (gMmSave.info.inventory.items[ITS_MM_MASK_STONE] == ITEM_MM_MASK_STONE) hasMaskStone = 1;
         }
         else
         {
-            if (gMmSave.inventory.items[ITS_MM_MASK_STONE] == ITEM_MM_MASK_STONE) count++;
+            if (gMmSave.info.inventory.items[ITS_MM_MASK_STONE] == ITEM_MM_MASK_STONE) count++;
         }
 
-        if (gMmSave.inventory.items[ITS_MM_MASK_POSTMAN] == ITEM_MM_MASK_POSTMAN) count++;
-        if (gMmSave.inventory.items[ITS_MM_MASK_ALL_NIGHT] == ITEM_MM_MASK_ALL_NIGHT) count++;
-        if (gMmSave.inventory.items[ITS_MM_MASK_GREAT_FAIRY] == ITEM_MM_MASK_GREAT_FAIRY) count++;
-        if (gMmSave.inventory.items[ITS_MM_MASK_BREMEN] == ITEM_MM_MASK_BREMEN) count++;
-        if (gMmSave.inventory.items[ITS_MM_MASK_DON_GERO] == ITEM_MM_MASK_DON_GERO) count++;
-        if (gMmSave.inventory.items[ITS_MM_MASK_SCENTS] == ITEM_MM_MASK_SCENTS) count++;
-        if (gMmSave.inventory.items[ITS_MM_MASK_ROMANI] == ITEM_MM_MASK_ROMANI) count++;
-        if (gMmSave.inventory.items[ITS_MM_MASK_TROUPE_LEADER] == ITEM_MM_MASK_TROUPE_LEADER) count++;
-        if (gMmSave.inventory.items[ITS_MM_MASK_KAFEI] == ITEM_MM_MASK_KAFEI) count++;
-        if (gMmSave.inventory.items[ITS_MM_MASK_COUPLE] == ITEM_MM_MASK_COUPLE) count++;
-        if (gMmSave.inventory.items[ITS_MM_MASK_KAMARO] == ITEM_MM_MASK_KAMARO) count++;
-        if (gMmSave.inventory.items[ITS_MM_MASK_GIBDO] == ITEM_MM_MASK_GIBDO) count++;
-        if (gMmSave.inventory.items[ITS_MM_MASK_GARO] == ITEM_MM_MASK_GARO) count++;
-        if (gMmSave.inventory.items[ITS_MM_MASK_CAPTAIN] == ITEM_MM_MASK_CAPTAIN) count++;
-        if (gMmSave.inventory.items[ITS_MM_MASK_GIANT] == ITEM_MM_MASK_GIANT) count++;
+        if (gMmSave.info.inventory.items[ITS_MM_MASK_POSTMAN] == ITEM_MM_MASK_POSTMAN) count++;
+        if (gMmSave.info.inventory.items[ITS_MM_MASK_ALL_NIGHT] == ITEM_MM_MASK_ALL_NIGHT) count++;
+        if (gMmSave.info.inventory.items[ITS_MM_MASK_GREAT_FAIRY] == ITEM_MM_MASK_GREAT_FAIRY) count++;
+        if (gMmSave.info.inventory.items[ITS_MM_MASK_BREMEN] == ITEM_MM_MASK_BREMEN) count++;
+        if (gMmSave.info.inventory.items[ITS_MM_MASK_DON_GERO] == ITEM_MM_MASK_DON_GERO) count++;
+        if (gMmSave.info.inventory.items[ITS_MM_MASK_SCENTS] == ITEM_MM_MASK_SCENTS) count++;
+        if (gMmSave.info.inventory.items[ITS_MM_MASK_ROMANI] == ITEM_MM_MASK_ROMANI) count++;
+        if (gMmSave.info.inventory.items[ITS_MM_MASK_TROUPE_LEADER] == ITEM_MM_MASK_TROUPE_LEADER) count++;
+        if (gMmSave.info.inventory.items[ITS_MM_MASK_KAFEI] == ITEM_MM_MASK_KAFEI) count++;
+        if (gMmSave.info.inventory.items[ITS_MM_MASK_COUPLE] == ITEM_MM_MASK_COUPLE) count++;
+        if (gMmSave.info.inventory.items[ITS_MM_MASK_KAMARO] == ITEM_MM_MASK_KAMARO) count++;
+        if (gMmSave.info.inventory.items[ITS_MM_MASK_GIBDO] == ITEM_MM_MASK_GIBDO) count++;
+        if (gMmSave.info.inventory.items[ITS_MM_MASK_GARO] == ITEM_MM_MASK_GARO) count++;
+        if (gMmSave.info.inventory.items[ITS_MM_MASK_CAPTAIN] == ITEM_MM_MASK_CAPTAIN) count++;
+        if (gMmSave.info.inventory.items[ITS_MM_MASK_GIANT] == ITEM_MM_MASK_GIANT) count++;
     }
 
     if (cond->flags & SPF_MASKS_TRANSFORM)
     {
         if (Config_Flag(CFG_SHARED_MASK_ZORA))
         {
-            if (gMmSave.inventory.items[ITS_MM_MASK_ZORA] == ITEM_MM_MASK_ZORA) hasMaskZora = 1;
+            if (gMmSave.info.inventory.items[ITS_MM_MASK_ZORA] == ITEM_MM_MASK_ZORA) hasMaskZora = 1;
         }
         else
         {
-            if (gMmSave.inventory.items[ITS_MM_MASK_ZORA] == ITEM_MM_MASK_ZORA) count++;
+            if (gMmSave.info.inventory.items[ITS_MM_MASK_ZORA] == ITEM_MM_MASK_ZORA) count++;
         }
 
         if (Config_Flag(CFG_SHARED_MASK_GORON))
         {
-            if (gMmSave.inventory.items[ITS_MM_MASK_GORON] == ITEM_MM_MASK_GORON) hasMaskGoron = 1;
+            if (gMmSave.info.inventory.items[ITS_MM_MASK_GORON] == ITEM_MM_MASK_GORON) hasMaskGoron = 1;
         }
         else
         {
-            if (gMmSave.inventory.items[ITS_MM_MASK_GORON] == ITEM_MM_MASK_GORON) count++;
+            if (gMmSave.info.inventory.items[ITS_MM_MASK_GORON] == ITEM_MM_MASK_GORON) count++;
         }
 
-        if (gMmSave.inventory.items[ITS_MM_MASK_DEKU] == ITEM_MM_MASK_DEKU) count++;
-        if (gMmSave.inventory.items[ITS_MM_MASK_FIERCE_DEITY] == ITEM_MM_MASK_FIERCE_DEITY) count++;
+        if (gMmSave.info.inventory.items[ITS_MM_MASK_DEKU] == ITEM_MM_MASK_DEKU) count++;
+        if (gMmSave.info.inventory.items[ITS_MM_MASK_FIERCE_DEITY] == ITEM_MM_MASK_FIERCE_DEITY) count++;
     }
 
     if (cond->flags & SPF_MASKS_OOT)

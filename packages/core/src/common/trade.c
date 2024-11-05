@@ -86,7 +86,7 @@ const u8 kMmGFSHammer[] = {
 s32 comboGetSlotExtras(u32 slot, u8** outItemPtr, u32* outFlags, const u8** outTable, u32* outTableSize)
 {
     s32 result = -1;
-    *outItemPtr = gSave.inventory.items + slot;
+    *outItemPtr = gSave.info.inventory.items + slot;
     switch (slot)
     {
 #if defined(GAME_MM)

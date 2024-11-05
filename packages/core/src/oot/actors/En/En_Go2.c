@@ -114,9 +114,9 @@ u16 EnGo2_GetMessageLinkGoron(void)
 {
     if (!gOotExtraFlags.tunicGoron)
     {
-        return BITMAP16_GET(gSave.eventsMisc, EV_OOT_INF_GORON_LINK) ? 0x3033: 0x3030;
+        return BITMAP16_GET(gSave.info.eventsMisc, EV_OOT_INF_GORON_LINK) ? 0x3033: 0x3030;
     }
-    if (gSave.inventory.quest.medallionFire)
+    if (gSave.info.inventory.quest.medallionFire)
         return 0x3042;
     return 0x3038;
 }

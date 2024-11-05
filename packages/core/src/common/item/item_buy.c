@@ -6,7 +6,7 @@ static int hasFreeBottleOot(void)
 {
     for (int i = 0; i < 4; ++i)
     {
-        if (gOotSave.inventory.items[ITS_OOT_BOTTLE + i] == ITEM_OOT_BOTTLE_EMPTY)
+        if (gOotSave.info.inventory.items[ITS_OOT_BOTTLE + i] == ITEM_OOT_BOTTLE_EMPTY)
             return 1;
     }
     return 0;
@@ -16,7 +16,7 @@ static int hasFreeBottleMm(void)
 {
     for (int i = 0; i < 6; ++i)
     {
-        if (gMmSave.inventory.items[ITS_MM_BOTTLE + i] == ITEM_MM_BOTTLE_EMPTY)
+        if (gMmSave.info.inventory.items[ITS_MM_BOTTLE + i] == ITEM_MM_BOTTLE_EMPTY)
             return 1;
     }
     return 0;
@@ -27,45 +27,45 @@ int isItemBuyable(s16 gi)
     switch (gi)
     {
     case GI_OOT_RECOVERY_HEART:
-        return gOotSave.playerData.health < gOotSave.playerData.healthCapacity;
+        return gOotSave.info.playerData.health < gOotSave.info.playerData.healthCapacity;
     case GI_OOT_MAGIC_JAR_SMALL:
     case GI_OOT_MAGIC_JAR_LARGE:
-        return (gOotSave.playerData.magicUpgrade && (gOotSave.playerData.magic < (gOotSave.playerData.magicUpgrade2 ? 0x60 : 0x30)));
+        return (gOotSave.info.playerData.magicUpgrade && (gOotSave.info.playerData.magic < (gOotSave.info.playerData.magicUpgrade2 ? 0x60 : 0x30)));
     case GI_OOT_FAIRY_BIG:
-        return gOotSave.playerData.health < gOotSave.playerData.healthCapacity || (gOotSave.playerData.magicUpgrade && (gOotSave.playerData.magic < (gOotSave.playerData.magicUpgrade2 ? 0x60 : 0x30)));
+        return gOotSave.info.playerData.health < gOotSave.info.playerData.healthCapacity || (gOotSave.info.playerData.magicUpgrade && (gOotSave.info.playerData.magic < (gOotSave.info.playerData.magicUpgrade2 ? 0x60 : 0x30)));
     case GI_MM_FAIRY_BIG:
-        return gMmSave.playerData.health < gMmSave.playerData.healthCapacity || (gMmSave.playerData.magicAcquired && (gMmSave.playerData.magic < (gMmSave.playerData.doubleMagic ? 0x60 : 0x30)));
+        return gMmSave.info.playerData.health < gMmSave.info.playerData.healthCapacity || (gMmSave.info.playerData.magicAcquired && (gMmSave.info.playerData.magic < (gMmSave.info.playerData.doubleMagic ? 0x60 : 0x30)));
     case GI_OOT_STICK:
     case GI_OOT_STICKS_5:
     case GI_OOT_STICKS_10:
-        return (gOotSave.inventory.upgrades.dekuStick == 0) || (gOotSave.inventory.ammo[ITS_OOT_STICKS] < kMaxSticks[gOotSave.inventory.upgrades.dekuStick]);
+        return (gOotSave.info.inventory.upgrades.dekuStick == 0) || (gOotSave.info.inventory.ammo[ITS_OOT_STICKS] < kMaxSticks[gOotSave.info.inventory.upgrades.dekuStick]);
     case GI_OOT_NUTS_5:
     case GI_OOT_NUTS_5_ALT:
     case GI_OOT_NUTS_10:
-        return (gOotSave.inventory.upgrades.dekuNut == 0) || (gOotSave.inventory.ammo[ITS_OOT_NUTS] < kMaxNuts[gOotSave.inventory.upgrades.dekuNut]);
+        return (gOotSave.info.inventory.upgrades.dekuNut == 0) || (gOotSave.info.inventory.ammo[ITS_OOT_NUTS] < kMaxNuts[gOotSave.info.inventory.upgrades.dekuNut]);
     case GI_OOT_BOMB:
     case GI_OOT_BOMBS_5:
     case GI_OOT_BOMBS_10:
     case GI_OOT_BOMBS_20:
     case GI_OOT_BOMBS_30:
-        return (gOotSave.inventory.upgrades.bombBag > 0) && (gOotSave.inventory.ammo[ITS_OOT_BOMBS] < kMaxBombs[gOotSave.inventory.upgrades.bombBag]);
+        return (gOotSave.info.inventory.upgrades.bombBag > 0) && (gOotSave.info.inventory.ammo[ITS_OOT_BOMBS] < kMaxBombs[gOotSave.info.inventory.upgrades.bombBag]);
     case GI_OOT_BOMBCHU_5:
     case GI_OOT_BOMBCHU_10:
     case GI_OOT_BOMBCHU_20:
-        return (gOotSave.inventory.ammo[ITS_OOT_BOMBCHU] < 50);
+        return (gOotSave.info.inventory.ammo[ITS_OOT_BOMBCHU] < 50);
     case GI_OOT_ARROWS_5:
     case GI_OOT_ARROWS_10:
     case GI_OOT_ARROWS_30:
-        return (gOotSave.inventory.upgrades.quiver > 0) && (gOotSave.inventory.ammo[ITS_OOT_BOW] < kMaxArrows[gOotSave.inventory.upgrades.quiver]);
+        return (gOotSave.info.inventory.upgrades.quiver > 0) && (gOotSave.info.inventory.ammo[ITS_OOT_BOW] < kMaxArrows[gOotSave.info.inventory.upgrades.quiver]);
     case GI_OOT_DEKU_SEEDS_5:
     case GI_OOT_DEKU_SEEDS_30:
-        return (gOotSave.inventory.upgrades.bulletBag > 0) && (gOotSave.inventory.ammo[ITS_OOT_SLINGSHOT] < kMaxSeeds[gOotSave.inventory.upgrades.bulletBag]);
+        return (gOotSave.info.inventory.upgrades.bulletBag > 0) && (gOotSave.info.inventory.ammo[ITS_OOT_SLINGSHOT] < kMaxSeeds[gOotSave.info.inventory.upgrades.bulletBag]);
     case GI_OOT_RUPEE_GREEN:
     case GI_OOT_RUPEE_BLUE:
     case GI_OOT_RUPEE_RED:
     case GI_OOT_RUPEE_PURPLE:
     case GI_OOT_RUPEE_HUGE:
-        return gOotSave.playerData.rupees < gMaxRupees[gOotSave.inventory.upgrades.wallet];
+        return gOotSave.info.playerData.rupees < gMaxRupees[gOotSave.info.inventory.upgrades.wallet];
     case GI_OOT_POTION_RED:
     case GI_OOT_POTION_GREEN:
     case GI_OOT_POTION_BLUE:
@@ -78,43 +78,43 @@ int isItemBuyable(s16 gi)
     case GI_OOT_MILK:
         return hasFreeBottleOot();
     case GI_OOT_SHIELD_DEKU:
-        return !(gOotSave.inventory.equipment.shields & EQ_OOT_SHIELD_DEKU);
+        return !(gOotSave.info.inventory.equipment.shields & EQ_OOT_SHIELD_DEKU);
     case GI_OOT_SHIELD_HYLIAN:
-        return !(gOotSave.inventory.equipment.shields & EQ_OOT_SHIELD_HYLIAN);
+        return !(gOotSave.info.inventory.equipment.shields & EQ_OOT_SHIELD_HYLIAN);
     case GI_MM_RECOVERY_HEART:
-        return gMmSave.playerData.health < gMmSave.playerData.healthCapacity;
+        return gMmSave.info.playerData.health < gMmSave.info.playerData.healthCapacity;
     case GI_MM_MAGIC_JAR_SMALL:
     case GI_MM_MAGIC_JAR_LARGE:
-        return (gMmSave.playerData.magicAcquired && (gMmSave.playerData.magic < (gMmSave.playerData.doubleMagic ? 0x60 : 0x30)));
+        return (gMmSave.info.playerData.magicAcquired && (gMmSave.info.playerData.magic < (gMmSave.info.playerData.doubleMagic ? 0x60 : 0x30)));
     case GI_MM_STICK:
-        return (gMmSave.inventory.upgrades.dekuStick == 0) || (gMmSave.inventory.ammo[ITS_MM_STICKS] < kMaxSticks[gMmSave.inventory.upgrades.dekuStick]);
+        return (gMmSave.info.inventory.upgrades.dekuStick == 0) || (gMmSave.info.inventory.ammo[ITS_MM_STICKS] < kMaxSticks[gMmSave.info.inventory.upgrades.dekuStick]);
     case GI_MM_NUT:
     case GI_MM_NUTS_5:
     case GI_MM_NUTS_10:
-        return (gMmSave.inventory.upgrades.dekuNut == 0) || (gMmSave.inventory.ammo[ITS_MM_NUTS] < kMaxNuts[gMmSave.inventory.upgrades.dekuNut]);
+        return (gMmSave.info.inventory.upgrades.dekuNut == 0) || (gMmSave.info.inventory.ammo[ITS_MM_NUTS] < kMaxNuts[gMmSave.info.inventory.upgrades.dekuNut]);
     case GI_MM_BOMB:
     case GI_MM_BOMBS_5:
     case GI_MM_BOMBS_10:
     case GI_MM_BOMBS_20:
     case GI_MM_BOMBS_30:
-        return (gMmSave.inventory.upgrades.bombBag > 0) && (gMmSave.inventory.ammo[ITS_MM_BOMBS] < kMaxBombs[gMmSave.inventory.upgrades.bombBag]);
+        return (gMmSave.info.inventory.upgrades.bombBag > 0) && (gMmSave.info.inventory.ammo[ITS_MM_BOMBS] < kMaxBombs[gMmSave.info.inventory.upgrades.bombBag]);
     case GI_MM_BOMBCHU_5:
     case GI_MM_BOMBCHU_10:
     case GI_MM_BOMBCHU_20:
-        return (gMmSave.inventory.ammo[ITS_MM_BOMBCHU] < (Config_Flag(CFG_MM_BOMBCHU_BAG) ? 50 : kMaxBombs[gMmSave.inventory.upgrades.bombBag]));
+        return (gMmSave.info.inventory.ammo[ITS_MM_BOMBCHU] < (Config_Flag(CFG_MM_BOMBCHU_BAG) ? 50 : kMaxBombs[gMmSave.info.inventory.upgrades.bombBag]));
     case GI_MM_ARROWS_10:
     case GI_MM_ARROWS_30:
     case GI_MM_ARROWS_40:
-        return (gMmSave.inventory.upgrades.quiver > 0) && (gMmSave.inventory.ammo[ITS_MM_BOW] < kMaxArrows[gMmSave.inventory.upgrades.quiver]);
+        return (gMmSave.info.inventory.upgrades.quiver > 0) && (gMmSave.info.inventory.ammo[ITS_MM_BOW] < kMaxArrows[gMmSave.info.inventory.upgrades.quiver]);
     case GI_MM_RUPEE_GREEN:
     case GI_MM_RUPEE_BLUE:
     case GI_MM_RUPEE_RED:
     case GI_MM_RUPEE_PURPLE:
     case GI_MM_RUPEE_SILVER:
     case GI_MM_RUPEE_GOLD:
-        return gMmSave.playerData.rupees < gMaxRupees[gMmSave.inventory.upgrades.wallet];
+        return gMmSave.info.playerData.rupees < gMaxRupees[gMmSave.info.inventory.upgrades.wallet];
     case GI_MM_MAGIC_BEAN:
-        return gMmSave.inventory.items[ITS_MM_BEANS] < 20;
+        return gMmSave.info.inventory.items[ITS_MM_BEANS] < 20;
     case GI_MM_POTION_RED:
     case GI_MM_POTION_GREEN:
     case GI_MM_POTION_BLUE:
@@ -127,7 +127,7 @@ int isItemBuyable(s16 gi)
     case GI_MM_BIG_POE:
         return hasFreeBottleMm();
     case GI_MM_SHIELD_HERO:
-        return gMmSave.itemEquips.shield == 0;
+        return gMmSave.info.itemEquips.shield == 0;
     case GI_NOTHING:
         return 0;
     default:

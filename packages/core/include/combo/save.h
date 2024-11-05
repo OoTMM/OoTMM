@@ -83,7 +83,7 @@ void Flash_ReadWrite(u32 devAddr, void* dramAddr, u32 size, s32 direction);
 # endif
 # define SAVE_EXTRA_RECORD(type, index) (gOotSave + 0xd4 + 0x1c * (index) + 0x10)
 #else
-# define SAVE_EXTRA_RECORD(type, index) (*((type*)(gOotSave.perm[index].raw + 0x10)))
+# define SAVE_EXTRA_RECORD(type, index) (*((type*)(gOotSave.info.perm[index].raw + 0x10)))
 typedef struct
 {
     u32 erSpring:1;

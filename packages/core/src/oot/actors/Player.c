@@ -37,10 +37,10 @@ static void maskToggle(PlayState* play, Player* player, u8 maskId)
 
 static void Player_UseBoots(PlayState* play, Player* this, int bootsId)
 {
-    if (gSave.equips.equipment.boots == bootsId)
-        gSave.equips.equipment.boots = 1;
+    if (gSave.info.equips.equipment.boots == bootsId)
+        gSave.info.equips.equipment.boots = 1;
     else
-        gSave.equips.equipment.boots = bootsId;
+        gSave.info.equips.equipment.boots = bootsId;
     UpdateEquipment(play, GET_PLAYER(play));
     PlaySound(0x835);
 }
@@ -505,7 +505,7 @@ static void Player_OverrideCustomSheath(PlayState* play, Player* this, Gfx** dli
     if (isPause)
     {
         shieldOnBack = 0;
-        if (gSave.age == AGE_CHILD && gSave.equips.equipment.shields > 1)
+        if (gSave.age == AGE_CHILD && gSave.info.equips.equipment.shields > 1)
             shieldOnBack = 1;
     }
     else
@@ -513,7 +513,7 @@ static void Player_OverrideCustomSheath(PlayState* play, Player* this, Gfx** dli
     if (shieldOnBack)
     {
         /* Shield on back */
-        switch (gSave.equips.equipment.shields)
+        switch (gSave.info.equips.equipment.shields)
         {
         case 1:
             shield = Player_CustomEq(comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_DEKU), CUSTOM_OBJECT_EQ_SHIELD_DEKU_1);
@@ -530,7 +530,7 @@ static void Player_OverrideCustomSheath(PlayState* play, Player* this, Gfx** dli
         }
     }
 
-    switch (gSave.equips.equipment.swords)
+    switch (gSave.info.equips.equipment.swords)
     {
     case 1:
         switch (gSharedCustomSave.extraSwordsOot)
@@ -572,7 +572,7 @@ static void fixTunicColoLimb(PlayState* play, int limb)
     if (limb != PLAYER_LIMB_R_SHOULDER && limb != PLAYER_LIMB_TORSO)
         return;
 
-    index = gSave.equips.equipment.tunics - 1;
+    index = gSave.info.equips.equipment.tunics - 1;
     cr = kColors[index * 3 + 0];
     cg = kColors[index * 3 + 1];
     cb = kColors[index * 3 + 2];
@@ -587,7 +587,7 @@ static void Player_OverrideAdult(PlayState* play, Player* this, int limb, Gfx** 
 
     if (limb == PLAYER_LIMB_L_HAND)
     {
-        if ((this->leftHandType == PLAYER_MODELTYPE_LH_SWORD || isPause) && gSave.equips.equipment.swords == 1)
+        if ((this->leftHandType == PLAYER_MODELTYPE_LH_SWORD || isPause) && gSave.info.equips.equipment.swords == 1)
         {
             if (gSharedCustomSave.extraSwordsOot == 0)
                 *dlist = Player_CustomHandEq(DLIST_ADULT_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_KOKIRI_SWORD), CUSTOM_OBJECT_EQ_KOKIRI_SWORD_0);
@@ -603,7 +603,7 @@ static void Player_OverrideAdult(PlayState* play, Player* this, int limb, Gfx** 
 
     if (limb == PLAYER_LIMB_R_HAND)
     {
-        if ((this->rightHandType == PLAYER_MODELTYPE_RH_SHIELD) && gSave.equips.equipment.shields == 1)
+        if ((this->rightHandType == PLAYER_MODELTYPE_RH_SHIELD) && gSave.info.equips.equipment.shields == 1)
             *dlist = Player_CustomHandEq(DLIST_ADULT_RHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_DEKU), CUSTOM_OBJECT_EQ_SHIELD_DEKU_0);
 
         if (this->rightHandType == PLAYER_MODELTYPE_RH_OCARINA)
@@ -618,7 +618,7 @@ static void Player_OverrideAdult(PlayState* play, Player* this, int limb, Gfx** 
 
     if (limb == PLAYER_LIMB_SHEATH)
     {
-        if (gSave.equips.equipment.shields == 1 || gSave.equips.equipment.swords <= 1)
+        if (gSave.info.equips.equipment.shields == 1 || gSave.info.equips.equipment.swords <= 1)
             Player_OverrideCustomSheath(play, this, dlist, isPause);
     }
 }
@@ -631,21 +631,21 @@ static void Player_OverrideChild(PlayState* play, Player* this, int limb, Gfx** 
     {
         if (this->leftHandType == PLAYER_MODELTYPE_LH_SWORD || this->leftHandType == PLAYER_MODELTYPE_LH_SWORD_2 || isPause)
         {
-            if (gSave.equips.equipment.swords == 1)
+            if (gSave.info.equips.equipment.swords == 1)
             {
                 if (gSharedCustomSave.extraSwordsOot == 1)
                     *dlist = Player_CustomHandEq(DLIST_CHILD_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_RAZOR_SWORD), CUSTOM_OBJECT_EQ_RAZOR_SWORD_0);
                 else if (gSharedCustomSave.extraSwordsOot == 2)
                     *dlist = Player_CustomHandEq(DLIST_CHILD_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_GILDED_SWORD), CUSTOM_OBJECT_EQ_GILDED_SWORD_0);
             }
-            else if (gSave.equips.equipment.swords == 2)
+            else if (gSave.info.equips.equipment.swords == 2)
             {
                 *dlist = Player_CustomHandEq(DLIST_CHILD_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_MASTER_SWORD), CUSTOM_OBJECT_EQ_MASTER_SWORD_0);
             }
         }
-        else if ((this->leftHandType == PLAYER_MODELTYPE_LH_BGS || isPause) && gSave.equips.equipment.swords == 3)
+        else if ((this->leftHandType == PLAYER_MODELTYPE_LH_BGS || isPause) && gSave.info.equips.equipment.swords == 3)
         {
-            if (gSave.playerData.swordHealth)
+            if (gSave.info.playerData.swordHealth)
                 *dlist = Player_CustomHandEq(DLIST_CHILD_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_BIGGORON_SWORD), CUSTOM_OBJECT_EQ_BIGGORON_SWORD_0);
             else
                 *dlist = Player_CustomHandEq(DLIST_CHILD_LHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_BIGGORON_SWORD_BROKEN), CUSTOM_OBJECT_EQ_BIGGORON_SWORD_BROKEN_0);
@@ -659,7 +659,7 @@ static void Player_OverrideChild(PlayState* play, Player* this, int limb, Gfx** 
         if (this->rightHandType == PLAYER_MODELTYPE_RH_HOOKSHOT)
             *dlist = (Gfx*)gDlistHookshotBodyTP;
 
-        if ((this->rightHandType == PLAYER_MODELTYPE_RH_SHIELD) && gSave.equips.equipment.shields == 3)
+        if ((this->rightHandType == PLAYER_MODELTYPE_RH_SHIELD) && gSave.info.equips.equipment.shields == 3)
             *dlist = Player_CustomHandEq(DLIST_CHILD_RHAND_CLOSED, comboGetObject(CUSTOM_OBJECT_ID_EQ_SHIELD_MIRROR), CUSTOM_OBJECT_EQ_SHIELD_MIRROR_0);
 
         if (this->rightHandType == PLAYER_MODELTYPE_RH_BOW_SLINGSHOT || this->rightHandType == PLAYER_MODELTYPE_RH_BOW_SLINGSHOT_2)
@@ -671,7 +671,7 @@ static void Player_OverrideChild(PlayState* play, Player* this, int limb, Gfx** 
 
     if (limb == PLAYER_LIMB_SHEATH)
     {
-        if (gSave.equips.equipment.shields == 3 || gSave.equips.equipment.swords != 1 || gSharedCustomSave.extraSwordsOot)
+        if (gSave.info.equips.equipment.shields == 3 || gSave.info.equips.equipment.swords != 1 || gSharedCustomSave.extraSwordsOot)
             Player_OverrideCustomSheath(play, this, dlist, isPause);
     }
 }
@@ -768,13 +768,13 @@ void Player_DrawFlexLod(PlayState* play, void** skeleton, Vec3s* jointTable, s32
     if (gSave.age == AGE_CHILD)
     {
         bootsData = NULL;
-        if (gSave.equips.equipment.boots == 2)
+        if (gSave.info.equips.equipment.boots == 2)
         {
             bootsData = comboGetObject(CUSTOM_OBJECT_ID_BOOTS_IRON);
             bootsList = CUSTOM_OBJECT_BOOTS_IRON_0;
             bootsList2 = CUSTOM_OBJECT_BOOTS_IRON_1;
         }
-        else if (gSave.equips.equipment.boots == 3)
+        else if (gSave.info.equips.equipment.boots == 3)
         {
             bootsData = comboGetObject(CUSTOM_OBJECT_ID_BOOTS_HOVER);
             bootsList = CUSTOM_OBJECT_BOOTS_HOVER_0;
@@ -790,9 +790,9 @@ void Player_DrawFlexLod(PlayState* play, void** skeleton, Vec3s* jointTable, s32
             CLOSE_DISPS();
         }
 
-        if (Config_Flag(CFG_OOT_AGELESS_STRENGTH) && gSave.inventory.upgrades.strength > 1)
+        if (Config_Flag(CFG_OOT_AGELESS_STRENGTH) && gSave.info.inventory.upgrades.strength > 1)
         {
-            c = &sGauntletColors[gSave.inventory.upgrades.strength > 2 ? 1 : 0];
+            c = &sGauntletColors[gSave.info.inventory.upgrades.strength > 2 ? 1 : 0];
             OPEN_DISPS(play->state.gfxCtx);
             gDPPipeSync(POLY_OPA_DISP++);
             gDPSetEnvColor(POLY_OPA_DISP++, c->r, c->g, c->b, 0);
@@ -816,7 +816,7 @@ int Player_GetStrength(void)
 {
     int level;
 
-    level = gSave.inventory.upgrades.strength;
+    level = gSave.info.inventory.upgrades.strength;
     if (level > 3)
         level = 3;
     if (gSave.age == AGE_CHILD && level > 1 && !Config_Flag(CFG_OOT_AGELESS_STRENGTH))
@@ -855,7 +855,7 @@ static int Player_ItemAndArrowType(PlayState* play, Player* this, int* outItem, 
         return play->interfaceCtx.hbaAmmo;
     else if (play->shootingGalleryStatus != 0)
         return play->shootingGalleryStatus;
-    return gSave.inventory.ammo[*outItem];
+    return gSave.info.inventory.ammo[*outItem];
 }
 
 PATCH_FUNC(0x808323dc, Player_ItemAndArrowType);

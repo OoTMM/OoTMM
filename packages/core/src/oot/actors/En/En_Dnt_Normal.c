@@ -14,7 +14,7 @@ static void EnDntNormal_GiveReward(Actor* this, PlayState* play)
 
     if (Actor_HasParentZ(this))
     {
-        gSave.eventsItem[1] |= 0x2000;
+        gSave.info.eventsItem[1] |= 0x2000;
         SET_HANDLER(this, EnDntNormal_Noop);
         return;
     }

@@ -28,7 +28,7 @@ PATCH_CALL(0x80a6f860, EnSkj_GiveItem_MemoryGame);
 
 static void EnSkj_AfterMaskTrade(Actor* this, PlayState* play)
 {
-    gSave.eventsItem[3] |= 0x200;
+    gSave.info.eventsItem[3] |= 0x200;
     Actor_Kill(this);
 }
 

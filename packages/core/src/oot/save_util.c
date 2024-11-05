@@ -99,59 +99,59 @@ void Save_CreateMM(void)
     gMmSave.hasTatl = 1;
     gMmSave.playerForm = 4;
     gMmSave.time = 0x3fff;
-    gMmSave.playerData.health = 0x30;
-    gMmSave.playerData.healthCapacity = 0x30;
-    gMmSave.playerData.unk_20 = 0xff00;
-    gMmSave.playerData.unk_24 = 0xff00;
-    gMmSave.playerData.savedSceneNum = 8;
-    gMmSave.horseData.scene = 53;
-    gMmSave.horseData.pos.x = -1420;
-    gMmSave.horseData.pos.y = 257;
-    gMmSave.horseData.pos.z = -1285;
-    gMmSave.horseData.yaw = -0x7554;
+    gMmSave.info.playerData.health = 0x30;
+    gMmSave.info.playerData.healthCapacity = 0x30;
+    gMmSave.info.playerData.unk_20 = 0xff00;
+    gMmSave.info.playerData.unk_24 = 0xff00;
+    gMmSave.info.playerData.savedSceneNum = 8;
+    gMmSave.info.horseData.scene = 53;
+    gMmSave.info.horseData.pos.x = -1420;
+    gMmSave.info.horseData.pos.y = 257;
+    gMmSave.info.horseData.pos.z = -1285;
+    gMmSave.info.horseData.yaw = -0x7554;
 
     /* Set the defaults */
-    memcpy(&gMmSave.itemEquips, &kDefaultItemEquips, sizeof(gMmSave.itemEquips));
-    memcpy(&gMmSave.inventory, &kDefaultInventory, sizeof(gMmSave.inventory));
+    memcpy(&gMmSave.info.itemEquips, &kDefaultItemEquips, sizeof(gMmSave.info.itemEquips));
+    memcpy(&gMmSave.info.inventory, &kDefaultInventory, sizeof(gMmSave.info.inventory));
 
     /* Set the magic */
-    memcpy(gMmSave.playerData.newf, "ZELDA3", 6);
+    memcpy(gMmSave.info.playerData.newf, "ZELDA3", 6);
 
     /* Copy the player name */
-    copyName(gMmSave.playerData.playerName, gSave.playerData.playerName);
+    copyName(gMmSave.info.playerData.playerName, gSave.info.playerData.playerName);
 
     /* Set some events */
     MM_SET_EVENT_WEEK(EV_MM_WEEK_FIRST_CYCLE);
 
     /* Set the high scores */
-    gMmSave.dekuPlaygroundHighScores[0] = 7500;
-    gMmSave.dekuPlaygroundHighScores[1] = 7500;
-    gMmSave.dekuPlaygroundHighScores[2] = 7600;
-    gMmSave.unk_ee8 = 0x13000a;
-    gMmSave.horseBackBalloonHighScore = 6000;
-    gMmSave.shootingGalleryHighScoreSwamp = 0x000a;
-    gMmSave.shootingGalleryHighScoreTown = 0x0027;
+    gMmSave.info.dekuPlaygroundHighScores[0] = 7500;
+    gMmSave.info.dekuPlaygroundHighScores[1] = 7500;
+    gMmSave.info.dekuPlaygroundHighScores[2] = 7600;
+    gMmSave.info.unk_ee8 = 0x13000a;
+    gMmSave.info.horseBackBalloonHighScore = 6000;
+    gMmSave.info.shootingGalleryHighScoreSwamp = 0x000a;
+    gMmSave.info.shootingGalleryHighScoreTown = 0x0027;
 
     /* Set the lottery codes */
     for (i = 0; i < 3; ++i)
     {
         for (j = 0; j < 3; ++j)
-            gMmSave.lotteryCodes[i][j] = Rand_S16Offset(0, 10);
+            gMmSave.info.lotteryCodes[i][j] = Rand_S16Offset(0, 10);
     }
 
     /* Set the bomber code */
-    gMmSave.bomberCode[0] = 1;
-    gMmSave.bomberCode[1] = 2;
-    gMmSave.bomberCode[2] = 3;
-    gMmSave.bomberCode[3] = 4;
-    gMmSave.bomberCode[4] = 5;
+    gMmSave.info.bomberCode[0] = 1;
+    gMmSave.info.bomberCode[1] = 2;
+    gMmSave.info.bomberCode[2] = 3;
+    gMmSave.info.bomberCode[3] = 4;
+    gMmSave.info.bomberCode[4] = 5;
 
     for (i = 0; i < 5; ++i)
     {
         j = Rand_S16Offset(0, 5);
-        tmp = gMmSave.bomberCode[i];
-        gMmSave.bomberCode[i] = gMmSave.bomberCode[j];
-        gMmSave.bomberCode[j] = tmp;
+        tmp = gMmSave.info.bomberCode[i];
+        gMmSave.info.bomberCode[i] = gMmSave.info.bomberCode[j];
+        gMmSave.info.bomberCode[j] = tmp;
     }
 
     /* Set the spider house masks order */
@@ -160,10 +160,10 @@ void Save_CreateMM(void)
     {
         do
         {
-            gMmSave.spiderHouseMaskOrder[i] = Rand_S16Offset(0, 0x10) & 3;
+            gMmSave.info.spiderHouseMaskOrder[i] = Rand_S16Offset(0, 0x10) & 3;
         }
-        while (gMmSave.spiderHouseMaskOrder[i] == tmp);
-        tmp = gMmSave.spiderHouseMaskOrder[i];
+        while (gMmSave.info.spiderHouseMaskOrder[i] == tmp);
+        tmp = gMmSave.info.spiderHouseMaskOrder[i];
     }
 
     comboHandleAutoInvertClockSpeed();

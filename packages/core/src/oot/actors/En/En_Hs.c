@@ -21,6 +21,6 @@ void EnHs_InitHook(Actor* actor)
     u32 adultBits;
 
     adultBits = gOotExtraTrade.adult;
-    if (((adultBits & maskOddPotion) || !(adultBits & maskCojiro)) && gSave.inventory.items[ITS_OOT_TRADE_ADULT] != ITEM_OOT_COJIRO)
+    if (((adultBits & maskOddPotion) || !(adultBits & maskCojiro)) && gSave.info.inventory.items[ITS_OOT_TRADE_ADULT] != ITEM_OOT_COJIRO)
         Actor_Kill(actor);
 }

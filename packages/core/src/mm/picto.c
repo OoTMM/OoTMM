@@ -17,7 +17,7 @@ static const char* pictoText(void)
     static const u32 luluMask = PICTOBOX_LULU1 | PICTOBOX_LULU2 | PICTOBOX_LULU3;
     u32 f;
 
-    f = gSave.pictoFlags0;
+    f = gSave.info.pictoFlags0;
 
     if (f & PICTOBOX_MONKEY)
         return "picture of a monkey";

@@ -6,7 +6,7 @@ int EnSyatekiMan_HasGivenItemSwamp(Actor* this, PlayState* play)
 {
     Player* link;
 
-    if (gSave.shootingGalleryHighScoreSwamp >= 2180 && !MM_GET_EVENT_WEEK(EV_MM_WEEK_ARCHERY_SWAMP_QUIVER))
+    if (gSave.info.shootingGalleryHighScoreSwamp >= 2180 && !MM_GET_EVENT_WEEK(EV_MM_WEEK_ARCHERY_SWAMP_QUIVER))
     {
         /* Give two items */
         link = GET_PLAYER(play);
@@ -26,7 +26,7 @@ int EnSyatekiMan_HasGivenItemTown(Actor* this, PlayState* play)
 {
     Player* link;
 
-    if (gSave.shootingGalleryHighScoreTown >= 50 && !MM_GET_EVENT_WEEK(EV_MM_WEEK_ARCHERY_TOWN_QUIVER))
+    if (gSave.info.shootingGalleryHighScoreTown >= 50 && !MM_GET_EVENT_WEEK(EV_MM_WEEK_ARCHERY_TOWN_QUIVER))
     {
         /* Give two items */
         link = GET_PLAYER(play);

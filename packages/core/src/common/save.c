@@ -124,8 +124,8 @@ static void saveOot(void)
     u32 base;
 
     /* Set the checksum */
-    gOotSave.checksum = 0;
-    gOotSave.checksum = computeChecksumOot(&gOotSave, sizeof(gOotSave));
+    gOotSave.info.checksum = 0;
+    gOotSave.info.checksum = computeChecksumOot(&gOotSave, sizeof(gOotSave));
 
     /* Write the save data to flash */
     base = 0x20 + 0x1450 * gSaveContext.fileNum;
@@ -141,8 +141,8 @@ static void saveMm(void)
     base = 0x8000 + 0x8000 * gSaveContext.fileNum;
 
     /* Set the checksum */
-    gMmSave.checksum = 0;
-    gMmSave.checksum = computeChecksumMm(&gMmSave, sizeof(gMmSave));
+    gMmSave.info.checksum = 0;
+    gMmSave.info.checksum = computeChecksumMm(&gMmSave, sizeof(gMmSave));
 
     /* Write the save data to flash */
     Flash_ReadWrite(base, &gMmSave, sizeof(gMmSave), OS_WRITE);
@@ -181,7 +181,7 @@ static void saveFixup(void)
 {
     /* Instantly fill the magic bar */
     if (gSaveContext.magicState == MAGIC_STATE_FILL)
-        gSave.playerData.magic = gSaveContext.magicFillTarget;
+        gSave.info.playerData.magic = gSaveContext.magicFillTarget;
 }
 
 void Save_Write(void)
@@ -244,6 +244,6 @@ void comboHandleAutoInvertClockSpeed(void)
     if(Config_Flag(CFG_MM_CLOCK_SPEED_SUPERFAST))
         invertSpeed = -12;
 
-    if (Config_Flag(CFG_MM_AUTO_INVERT_ALWAYS) || (Config_Flag(CFG_MM_AUTO_INVERT_FIRST_CYCLE) && gMmSave.playerData.songOfTimeCount == 0))
+    if (Config_Flag(CFG_MM_AUTO_INVERT_ALWAYS) || (Config_Flag(CFG_MM_AUTO_INVERT_FIRST_CYCLE) && gMmSave.info.playerData.songOfTimeCount == 0))
         gMmSave.daySpeed = invertSpeed;
 }

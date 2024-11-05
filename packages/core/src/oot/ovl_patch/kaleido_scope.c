@@ -64,34 +64,34 @@ static int checkItemToggle(PlayState* play)
         ret = 1;
         if (press)
         {
-            gSave.inventory.items[itemCursor] = ITEM_OOT_BOTTLE_EMPTY;
+            gSave.info.inventory.items[itemCursor] = ITEM_OOT_BOTTLE_EMPTY;
             reloadSlotOot(play, itemCursor);
 
             /* Reset one big poe */
             if (play->sceneId == SCE_OOT_HYRULE_FIELD)
                 ClearSwitchFlag(play, 0x18);
             else
-                gSave.perm[SCE_OOT_HYRULE_FIELD].switches &= ~(1 << 0x18);
+                gSave.info.perm[SCE_OOT_HYRULE_FIELD].switches &= ~(1 << 0x18);
         }
     }
 
-    if (itemId >= ITEM_OOT_SHIELD_DEKU && itemId <= ITEM_OOT_SHIELD_MIRROR && gSave.equips.equipment.shields == ((itemId - ITEM_OOT_SHIELD_DEKU) + 1))
+    if (itemId >= ITEM_OOT_SHIELD_DEKU && itemId <= ITEM_OOT_SHIELD_MIRROR && gSave.info.equips.equipment.shields == ((itemId - ITEM_OOT_SHIELD_DEKU) + 1))
     {
         ret = 1;
         if (press)
-            gSave.equips.equipment.shields = 0;
+            gSave.info.equips.equipment.shields = 0;
     }
 
-    if (gSave.age == AGE_CHILD && itemId == ITEM_OOT_SWORD_KOKIRI && gSave.equips.equipment.swords == 1)
+    if (gSave.age == AGE_CHILD && itemId == ITEM_OOT_SWORD_KOKIRI && gSave.info.equips.equipment.swords == 1)
     {
         if (!(GET_PLAYER(play)->stateFlags2 & PLAYER_ACTOR_STATE_WATER))
         {
             ret = 1;
             if (press)
             {
-                gSave.equips.equipment.swords = 0;
-                gSave.equips.buttonItems[0] = ITEM_NONE;
-                gSave.eventsMisc[29] = 1;
+                gSave.info.equips.equipment.swords = 0;
+                gSave.info.equips.buttonItems[0] = ITEM_NONE;
+                gSave.info.eventsMisc[29] = 1;
             }
         }
     }
@@ -875,7 +875,7 @@ static void KaleidoScope_DrawWorldMap(PlayState* play) {
     /* Draw clouds over the world map */
     /* Iterate over cloud bits (n) */
     for (n = 0; n < WORLD_MAP_NUM_CLOUDS; n++) {
-        if (!(((void)0, gMmSave.worldMapCloudVisibility) & (1 << n))) {
+        if (!(((void)0, gMmSave.info.worldMapCloudVisibility) & (1 << n))) {
 
             gSPVertex(POLY_OPA_DISP++, &pauseCtx->mapPageVtx[(QUAD_MAP_PAGE_WORLD_CLOUDS_FIRST + n) * 4], 4, 0);
 
@@ -1638,7 +1638,7 @@ void KaleidoScope_DrawItemHook(GraphicsContext* gfx, int slotId, int sizeX, int 
     u32 icon;
     u8 item;
 
-    item = gSave.inventory.items[slotId];
+    item = gSave.info.inventory.items[slotId];
 
     KaleidoScope_DrawItem = OverlayAddr(0x8081f1e8);
 

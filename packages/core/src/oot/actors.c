@@ -289,10 +289,10 @@ static int canSpawnActor(PlayState* play, s16 actorId, u16 param)
     case ACTOR_BG_JYA_BLOCK:
         return !Config_Flag(CFG_OOT_AGELESS_STRENGTH);
     case ACTOR_ITEM_OCARINA:
-        return gSave.inventory.quest.stoneEmerald && gSave.inventory.quest.stoneRuby && gSave.inventory.quest.stoneSapphire && comboHasSoulOot(GI_OOT_SOUL_NPC_ZELDA);
+        return gSave.info.inventory.quest.stoneEmerald && gSave.info.inventory.quest.stoneRuby && gSave.info.inventory.quest.stoneSapphire && comboHasSoulOot(GI_OOT_SOUL_NPC_ZELDA);
     case ACTOR_EN_MM:
         if (param == 0x01)
-            return gSave.inventory.quest.stoneEmerald && gSave.inventory.quest.stoneRuby && gSave.inventory.quest.stoneSapphire;
+            return gSave.info.inventory.quest.stoneEmerald && gSave.info.inventory.quest.stoneRuby && gSave.info.inventory.quest.stoneSapphire;
         return 1;
     default:
         return 1;

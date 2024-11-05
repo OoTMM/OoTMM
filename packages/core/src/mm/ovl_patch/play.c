@@ -689,7 +689,7 @@ void Play_TransitionDone(PlayState* play)
         entrance = g.nextEntrance;
         break;
     case ENTR_FW_CROSS:
-        entrance = gForeignSave.fw.entrance | MASK_FOREIGN_ENTRANCE;
+        entrance = gForeignSave.info.fw.entrance | MASK_FOREIGN_ENTRANCE;
         gComboCtx.isFwSpawn = 1;
         break;
     }

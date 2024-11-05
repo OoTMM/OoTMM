@@ -189,7 +189,7 @@ void Ocarina_HandleWarp(Player* player, PlayState* play)
 
 void Ocarina_CheckCustomSongs(void)
 {
-    u32 enabledWarpSongs = (gOotSave.inventory.quest.value >> 6) & 0x3f;
+    u32 enabledWarpSongs = (gOotSave.info.inventory.quest.value >> 6) & 0x3f;
     u8 songIndex;
 
     if (!Config_Flag(CFG_OOT_CROSS_WARP))

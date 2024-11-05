@@ -10,7 +10,7 @@ void Interface_UpdateButtonsPart2Wrapper(PlayState* play)
 
     for (int i = 0; i < 3; ++i)
     {
-        ptr = &gSave.itemEquips.buttonItems[0][i + 1];
+        ptr = &gSave.info.itemEquips.buttonItems[0][i + 1];
         itemId = *ptr;
         buttons[i] = itemId;
 
@@ -22,7 +22,7 @@ void Interface_UpdateButtonsPart2Wrapper(PlayState* play)
 
     for (int i = 0; i < 3; ++i)
     {
-        ptr = &gSave.itemEquips.buttonItems[0][i + 1];
+        ptr = &gSave.info.itemEquips.buttonItems[0][i + 1];
         *ptr = buttons[i];
     }
 }

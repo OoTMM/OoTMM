@@ -18,9 +18,9 @@ static s16 progressiveGoldDustBottle(void)
 
 static s16 progressiveBombBagOot(void)
 {
-    if (gOotSave.inventory.items[ITS_OOT_BOMBS] == ITEM_NONE)
+    if (gOotSave.info.inventory.items[ITS_OOT_BOMBS] == ITEM_NONE)
         return GI_OOT_BOMB_BAG;
-    switch (gOotSave.inventory.upgrades.bombBag)
+    switch (gOotSave.info.inventory.upgrades.bombBag)
     {
     case 0:
         return GI_OOT_BOMB_BAG; /* Redundent */
@@ -33,7 +33,7 @@ static s16 progressiveBombBagOot(void)
 
 static s16 progressiveBombBagMm(void)
 {
-    switch (gMmSave.inventory.upgrades.bombBag)
+    switch (gMmSave.info.inventory.upgrades.bombBag)
     {
     case 0:
         return GI_MM_BOMB_BAG;
@@ -46,9 +46,9 @@ static s16 progressiveBombBagMm(void)
 
 static s16 progressiveBowOot(void)
 {
-    if (gOotSave.inventory.items[ITS_OOT_BOW] == ITEM_NONE)
+    if (gOotSave.info.inventory.items[ITS_OOT_BOW] == ITEM_NONE)
         return GI_OOT_BOW;
-    switch (gOotSave.inventory.upgrades.quiver)
+    switch (gOotSave.info.inventory.upgrades.quiver)
     {
     case 0:
     case 1:
@@ -60,7 +60,7 @@ static s16 progressiveBowOot(void)
 
 static s16 progressiveBowMm(void)
 {
-    switch (gMmSave.inventory.upgrades.quiver)
+    switch (gMmSave.info.inventory.upgrades.quiver)
     {
     case 0:
         return GI_MM_BOW;
@@ -73,9 +73,9 @@ static s16 progressiveBowMm(void)
 
 static s16 progressiveSlingshot(void)
 {
-    if (gOotSave.inventory.items[ITS_OOT_SLINGSHOT] == ITEM_NONE)
+    if (gOotSave.info.inventory.items[ITS_OOT_SLINGSHOT] == ITEM_NONE)
         return GI_OOT_SLINGSHOT;
-    switch (gOotSave.inventory.upgrades.bulletBag)
+    switch (gOotSave.info.inventory.upgrades.bulletBag)
     {
     case 0:
         return GI_OOT_BULLET_BAG; /* Not used */
@@ -132,23 +132,23 @@ static s16 progressiveHookshotMm(s16 gi)
 
 static s16 progressiveSwordGoron(void)
 {
-    if (!(gOotSave.inventory.equipment.swords & (EQ_OOT_SWORD_KNIFE | EQ_OOT_SWORD_KNIFE_BROKEN)))
+    if (!(gOotSave.info.inventory.equipment.swords & (EQ_OOT_SWORD_KNIFE | EQ_OOT_SWORD_KNIFE_BROKEN)))
         return GI_OOT_SWORD_KNIFE;
     return GI_OOT_SWORD_BIGGORON;
 }
 
 static s16 progressiveSwordOot(void)
 {
-    if (!(gOotSave.inventory.equipment.swords & EQ_OOT_SWORD_KOKIRI))
+    if (!(gOotSave.info.inventory.equipment.swords & EQ_OOT_SWORD_KOKIRI))
         return GI_OOT_SWORD_KOKIRI;
-    if (!(gOotSave.inventory.equipment.swords & EQ_OOT_SWORD_MASTER))
+    if (!(gOotSave.info.inventory.equipment.swords & EQ_OOT_SWORD_MASTER))
         return GI_OOT_SWORD_MASTER;
     return progressiveSwordGoron();
 }
 
 static s16 progressiveSwordMm(void)
 {
-    switch (gMmSave.itemEquips.sword)
+    switch (gMmSave.info.itemEquips.sword)
     {
     case 0:
         return GI_MM_SWORD_KOKIRI;
@@ -192,7 +192,7 @@ static s16 progressiveShieldMm(void)
 
 static s16 progressiveStrengthOot(void)
 {
-    switch (gOotSave.inventory.upgrades.strength)
+    switch (gOotSave.info.inventory.upgrades.strength)
     {
     case 0:
         return GI_OOT_GORON_BRACELET;
@@ -205,7 +205,7 @@ static s16 progressiveStrengthOot(void)
 
 static s16 progressiveStrengthMm(void)
 {
-    switch (gMmSave.inventory.upgrades.strength)
+    switch (gMmSave.info.inventory.upgrades.strength)
     {
     case 0:
         return GI_MM_GORON_BRACELET;
@@ -218,14 +218,14 @@ static s16 progressiveStrengthMm(void)
 
 static s16 progressiveDiveOot(void)
 {
-    if (gOotSave.inventory.upgrades.dive)
+    if (gOotSave.info.inventory.upgrades.dive)
         return GI_OOT_SCALE_GOLDEN;
     return GI_OOT_SCALE_SILVER;
 }
 
 static s16 progressiveDiveMm(void)
 {
-    if (gMmSave.inventory.upgrades.scale)
+    if (gMmSave.info.inventory.upgrades.scale)
         return GI_MM_SCALE_GOLDEN;
     return GI_MM_SCALE_SILVER;
 }
@@ -234,7 +234,7 @@ static s16 progressiveWalletOot(void)
 {
     if (!gOotExtraFlags.childWallet)
         return GI_OOT_WALLET;
-    switch (gOotSave.inventory.upgrades.wallet)
+    switch (gOotSave.info.inventory.upgrades.wallet)
     {
     case 0: return GI_OOT_WALLET2;
     case 1: return GI_OOT_WALLET3;
@@ -247,7 +247,7 @@ static s16 progressiveWalletMm(void)
 {
     if (!gMmExtraFlags2.childWallet)
         return GI_MM_WALLET;
-    switch (gMmSave.inventory.upgrades.wallet)
+    switch (gMmSave.info.inventory.upgrades.wallet)
     {
     case 0: return GI_MM_WALLET2;
     case 1: return GI_MM_WALLET3;
@@ -258,14 +258,14 @@ static s16 progressiveWalletMm(void)
 
 static s16 progressiveMagicOot(void)
 {
-    if (gOotSave.playerData.magicUpgrade)
+    if (gOotSave.info.playerData.magicUpgrade)
         return GI_OOT_MAGIC_UPGRADE2;
     return GI_OOT_MAGIC_UPGRADE;
 }
 
 static s16 progressiveMagicMm(void)
 {
-    switch (gMmSave.playerData.magicAcquired)
+    switch (gMmSave.info.playerData.magicAcquired)
     {
     case 0:
         return GI_MM_MAGIC_UPGRADE;
@@ -276,35 +276,35 @@ static s16 progressiveMagicMm(void)
 
 static s16 progressiveUpgradeNutOot(void)
 {
-    if (gOotSave.inventory.upgrades.dekuNut < 2)
+    if (gOotSave.info.inventory.upgrades.dekuNut < 2)
         return GI_OOT_NUT_UPGRADE;
     return GI_OOT_NUT_UPGRADE2;
 }
 
 static s16 progressiveUpgradeStickOot(void)
 {
-    if (gOotSave.inventory.upgrades.dekuStick < 2)
+    if (gOotSave.info.inventory.upgrades.dekuStick < 2)
         return GI_OOT_STICK_UPGRADE;
     return GI_OOT_STICK_UPGRADE2;
 }
 
 static s16 progressiveUpgradeNutMm(void)
 {
-    if (gMmSave.inventory.upgrades.dekuNut < 2)
+    if (gMmSave.info.inventory.upgrades.dekuNut < 2)
         return GI_MM_NUT_UPGRADE;
     return GI_MM_NUT_UPGRADE2;
 }
 
 static s16 progressiveUpgradeStickMm(void)
 {
-    if (gMmSave.inventory.upgrades.dekuStick < 2)
+    if (gMmSave.info.inventory.upgrades.dekuStick < 2)
         return GI_MM_STICK_UPGRADE;
     return GI_MM_STICK_UPGRADE2;
 }
 
 static s16 progressiveSongLullaby(void)
 {
-    switch (gMmSave.inventory.quest.songLullabyIntro)
+    switch (gMmSave.info.inventory.quest.songLullabyIntro)
     {
     case 0:
         return GI_MM_SONG_GORON_HALF;
@@ -315,7 +315,7 @@ static s16 progressiveSongLullaby(void)
 
 static s16 progressiveBombchuBagOot(s16 gi, int ovflags)
 {
-    if (!Config_Flag(CFG_OOT_BOMBCHU_BAG) || (gOotSave.inventory.items[ITS_OOT_BOMBCHU] == ITEM_OOT_BOMBCHU_10) || (ovflags & OVF_PRECOND))
+    if (!Config_Flag(CFG_OOT_BOMBCHU_BAG) || (gOotSave.info.inventory.items[ITS_OOT_BOMBCHU] == ITEM_OOT_BOMBCHU_10) || (ovflags & OVF_PRECOND))
         return gi;
 
     switch (gi)
@@ -329,7 +329,7 @@ static s16 progressiveBombchuBagOot(s16 gi, int ovflags)
 
 static s16 progressiveBombchuBagMm(s16 gi, int ovflags)
 {
-    if (!Config_Flag(CFG_MM_BOMBCHU_BAG) || (gMmSave.inventory.items[ITS_MM_BOMBCHU] == ITEM_MM_BOMBCHU) || (ovflags & OVF_PRECOND))
+    if (!Config_Flag(CFG_MM_BOMBCHU_BAG) || (gMmSave.info.inventory.items[ITS_MM_BOMBCHU] == ITEM_MM_BOMBCHU) || (ovflags & OVF_PRECOND))
         return gi;
 
     switch (gi)
@@ -368,7 +368,7 @@ static s16 progressiveClock(void)
 
 static s16 progressiveExtraSwordOot(void)
 {
-    if (!(gOotSave.inventory.equipment.swords & EQ_OOT_SWORD_KOKIRI))
+    if (!(gOotSave.info.inventory.equipment.swords & EQ_OOT_SWORD_KOKIRI))
         return GI_OOT_SWORD_KOKIRI;
     if (gSharedCustomSave.extraSwordsOot == 0)
         return GI_OOT_SWORD_RAZOR;

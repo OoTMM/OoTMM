@@ -3,7 +3,7 @@
 
 #include <combo.h>
 
-#define GET_NEWF(sramCtx, slotNum, index) (sramCtx->readBuff[gSramSlotOffsets[slotNum] + offsetof(OotSaveContext, save.playerData.newf[index])])
+#define GET_NEWF(sramCtx, slotNum, index) (sramCtx->readBuff[gSramSlotOffsets[slotNum] + offsetof(OotSaveContext, save.info.playerData.newf[index])])
 
 #define SLOT_OCCUPIED(sramCtx, slotNum) \
     ((GET_NEWF(sramCtx, slotNum, 0) == 'Z') || \

@@ -8,7 +8,7 @@ int EnNiwLady_GetActiveItem(PlayState* play)
     int itemAction;
 
     itemAction = GetActiveItem(play);
-    if (itemAction == 6 && !BITMAP16_GET(gSave.eventsItem, EV_OOT_ITEM_ANJU_POCKET_EGG))
+    if (itemAction == 6 && !BITMAP16_GET(gSave.info.eventsItem, EV_OOT_ITEM_ANJU_POCKET_EGG))
     {
         itemAction = -1;
     }

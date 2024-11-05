@@ -19,7 +19,7 @@ static void EnGo_ItemQuery(ComboItemQuery* q)
     else
     {
         q->ovType = OV_NONE;
-        q->gi = (gMmSave.inventory.items[ITS_MM_KEG] == ITEM_MM_POWDER_KEG) ? GI_MM_POWDER_KEG : GI_MM_RECOVERY_HEART;
+        q->gi = (gMmSave.info.inventory.items[ITS_MM_KEG] == ITEM_MM_POWDER_KEG) ? GI_MM_POWDER_KEG : GI_MM_RECOVERY_HEART;
     }
 }
 

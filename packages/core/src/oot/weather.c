@@ -43,7 +43,7 @@ static void PatchWeather(PlayState* play)
         }
     }
 
-    if (gSave.inventory.quest.medallionForest && gSave.inventory.quest.medallionFire && gSave.inventory.quest.medallionWater && !GetEventChk(EV_OOT_CHK_MEDALLION_SHADOW))
+    if (gSave.info.inventory.quest.medallionForest && gSave.info.inventory.quest.medallionFire && gSave.info.inventory.quest.medallionWater && !GetEventChk(EV_OOT_CHK_MEDALLION_SHADOW))
     {
         switch (play->sceneId)
         {

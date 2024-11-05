@@ -55,7 +55,7 @@ static OcarinaSongButtons sSongDoubleTime = {
 
 void Ocarina_CheckCustomSongs(void)
 {
-    if (gMmSave.inventory.quest.songSoaring
+    if (gMmSave.info.inventory.quest.songSoaring
         && Config_Flag(CFG_MM_CROSS_WARP)
         && (Config_Flag(CFG_MM_CROSS_WARP_ADULT) || gSave.age == AGE_CHILD))
     {
@@ -67,7 +67,7 @@ void Ocarina_CheckCustomSongs(void)
         comboCheckSong(&sSongElegy, CUSTOM_SONG_ELEGY);
     }
 
-    if (gSave.inventory.quest.songTime && Config_Flag(CFG_OOT_SONG_OF_DOUBLE_TIME))
+    if (gSave.info.inventory.quest.songTime && Config_Flag(CFG_OOT_SONG_OF_DOUBLE_TIME))
     {
         comboCheckSong(&sSongDoubleTime, CUSTOM_SONG_DOUBLE_TIME);
     }
@@ -109,7 +109,7 @@ void Ocarina_HandleLastPlayedSong(PlayState* play, Player* player, s16 lastPlaye
     /* End displaced code. */
     case OCARINA_SONG_TIME:
         canChangeAge = Config_Flag(CFG_OOT_AGE_CHANGE) && GetEventChk(EV_OOT_CHK_MASTER_SWORD_CHAMBER) && GetEventChk(EV_OOT_CHK_MASTER_SWORD_PULLED);
-        if (canChangeAge && Config_Flag(CFG_OOT_AGE_CHANGE_NEEDS_OOT) && gSave.inventory.items[ITS_OOT_OCARINA] != ITEM_OOT_OCARINA_TIME)
+        if (canChangeAge && Config_Flag(CFG_OOT_AGE_CHANGE_NEEDS_OOT) && gSave.info.inventory.items[ITS_OOT_OCARINA] != ITEM_OOT_OCARINA_TIME)
             canChangeAge = 0;
 #if defined(DEBUG)
         canChangeAge = 1;

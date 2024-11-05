@@ -214,14 +214,6 @@ _Static_assert(sizeof(OotHorseData) == 0x0a, "OotHorseData size is wrong");
 
 typedef struct
 {
-    u32                     entrance;
-    u32                     age;
-    u32                     cutscene;
-    u16                     dayTime;
-    u16                     unk_0e;
-    u32                     isNight;
-    char                    unk_14[0x4];
-    u32                     tradeQuestFlag;
     OotSavePlayerData       playerData;
     u8                      isBiggoronSword;
     u8                      ocarinaGameRound;
@@ -253,22 +245,36 @@ typedef struct
     OotHorseData            horseData;
     u16                     checksum;
 }
+OotSaveInfo;
+
+typedef struct
+{
+    u32                     entrance;
+    u32                     age;
+    u32                     cutscene;
+    u16                     dayTime;
+    u16                     unk_0e;
+    u32                     isNight;
+    char                    unk_14[0x4];
+    u32                     tradeQuestFlag;
+    OotSaveInfo             info;
+}
 OotSave;
 
-ASSERT_OFFSET(OotSave, childEquips,             0x40);
-ASSERT_OFFSET(OotSave, adultEquips,             0x4a);
-ASSERT_OFFSET(OotSave, unk_54,                  0x54);
-ASSERT_OFFSET(OotSave, sceneId,                 0x66);
-ASSERT_OFFSET(OotSave, equips,                  0x68);
-ASSERT_OFFSET(OotSave, inventory.equipment,     0x9c);
-ASSERT_OFFSET(OotSave, perm,                    0xd4);
-ASSERT_OFFSET(OotSave, eventsMisc,              0xef8);
-ASSERT_OFFSET(OotSave, unk_f34,                 0xf34);
-ASSERT_OFFSET(OotSave, unk_f3c,                 0xf3c);
-ASSERT_OFFSET(OotSave, unk_12a1,                0x12a1);
-ASSERT_OFFSET(OotSave, unk_1346,                0x1346);
-ASSERT_OFFSET(OotSave, horseData,               0x1348);
-ASSERT_OFFSET(OotSave, checksum,                0x1352);
+ASSERT_OFFSET(OotSave, info.childEquips,             0x40);
+ASSERT_OFFSET(OotSave, info.adultEquips,             0x4a);
+ASSERT_OFFSET(OotSave, info.unk_54,                  0x54);
+ASSERT_OFFSET(OotSave, info.sceneId,                 0x66);
+ASSERT_OFFSET(OotSave, info.equips,                  0x68);
+ASSERT_OFFSET(OotSave, info.inventory.equipment,     0x9c);
+ASSERT_OFFSET(OotSave, info.perm,                    0xd4);
+ASSERT_OFFSET(OotSave, info.eventsMisc,              0xef8);
+ASSERT_OFFSET(OotSave, info.unk_f34,                 0xf34);
+ASSERT_OFFSET(OotSave, info.unk_f3c,                 0xf3c);
+ASSERT_OFFSET(OotSave, info.unk_12a1,                0x12a1);
+ASSERT_OFFSET(OotSave, info.unk_1346,                0x1346);
+ASSERT_OFFSET(OotSave, info.horseData,               0x1348);
+ASSERT_OFFSET(OotSave, info.checksum,                0x1352);
 
 typedef struct
 {

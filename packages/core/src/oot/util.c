@@ -6,7 +6,7 @@ void swapFarore(void)
     OotFaroreWind* prev;
     OotFaroreWind tmp;
 
-    current = &gOotSave.fw;
+    current = &gOotSave.info.fw;
     prev = current - 1;
 
     memcpy(&tmp, current, sizeof(tmp));
