@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add an icon to simulate the stone of agony rumble feature.
 - Add an option to not apply cosmetics to freestanding models.
 - Add a custom file select with more informations.
 - Add MM stick/nut upgrades as items in the pool.
