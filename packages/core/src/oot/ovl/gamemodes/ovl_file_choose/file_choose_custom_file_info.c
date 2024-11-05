@@ -235,14 +235,14 @@ static void drawInfoRupees(Gfx** list, int x, int y, int index, int count)
 static void FileSelect_CustomFileInfoPrepareOotInfos(FileSelectState* this, Gfx** list, void** end, int x, int y)
 {
     /* Draw heart */
-    drawInfoHeart(list, x, y, !gOotSave.info.playerData.doubleDefense, gOotSave.info.playerData.healthCapacity / 0x10);
+    drawInfoHeart(list, x, y, gOotSave.info.playerData.doubleDefense, gOotSave.info.playerData.healthCapacity / 0x10);
     drawInfoRupees(list, x, y + ICON_SIZE, Wallet_IndexOot(), gOotSave.info.playerData.rupees);
 }
 
 static void FileSelect_CustomFileInfoPrepareMmInfos(FileSelectState* this, Gfx** list, void** end, int x, int y)
 {
     /* Draw heart */
-    drawInfoHeart(list, x, y, !gMmSave.info.playerData.doubleDefense, gMmSave.info.playerData.healthCapacity / 0x10);
+    drawInfoHeart(list, x, y, gMmSave.info.playerData.doubleDefense, gMmSave.info.playerData.healthCapacity / 0x10);
     drawInfoRupees(list, x, y + ICON_SIZE, Wallet_IndexMm(), gMmSave.info.playerData.rupees);
 }
 
