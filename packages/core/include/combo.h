@@ -131,6 +131,7 @@ void    comboWalletRefresh(void);
 void    comboCacheClear(void);
 void    comboCacheGarbageCollect(void);
 void*   comboCacheGetFile(u32 vrom);
+void*   comboCacheGetFilePartial(u32 vrom, u32 offset, s32 size);
 
 /* Objects */
 void                comboObjectsReset(void);

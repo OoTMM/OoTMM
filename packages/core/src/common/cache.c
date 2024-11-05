@@ -5,6 +5,7 @@
 #define CACHE_TTL      6
 
 static u32   sCacheVroms[CACHE_COUNT];
+static s32   sCacheSizes[CACHE_COUNT];
 static void* sCacheAddrs[CACHE_COUNT];
 static u8    sCacheTTLs[CACHE_COUNT];
 
@@ -15,6 +16,7 @@ void comboCacheClear(void)
         free(sCacheAddrs[i]);
         sCacheAddrs[i] = NULL;
         sCacheVroms[i] = 0;
+        sCacheSizes[i] = 0;
         sCacheTTLs[i] = 0;
     }
 }
@@ -36,7 +38,7 @@ void comboCacheGarbageCollect(void)
     }
 }
 
-static void* loadCacheFile(u32 vrom)
+static void* loadCacheFile(u32 vrom, u32 offset, s32 size)
 {
     size_t sz;
     void* addr;
@@ -55,26 +57,30 @@ static void* loadCacheFile(u32 vrom)
     if (slot == -1)
         return NULL;
 
-    sz = comboDmaLoadFile(NULL, vrom);
+    if (size == -1)
+        sz = comboDmaLoadFile(NULL, vrom);
+    else
+        sz = (size_t)size;
     addr = malloc(sz);
     if (!addr)
         return NULL;
-    comboDmaLoadFile(addr, vrom);
-    sCacheVroms[slot] = vrom;
+    comboDmaLoadFilePartial(addr, vrom, offset, sz);
+    sCacheVroms[slot] = vrom + offset;
+    sCacheSizes[slot] = size;
     sCacheAddrs[slot] = addr;
     sCacheTTLs[slot] = CACHE_TTL;
 
     return addr;
 }
 
-void* comboCacheGetFile(u32 vrom)
+void* comboCacheGetFilePartial(u32 vrom, u32 offset, s32 size)
 {
     void* addr;
 
     addr = NULL;
     for (int i = 0; i < CACHE_COUNT; ++i)
     {
-        if (sCacheVroms[i] == vrom)
+        if (sCacheVroms[i] == (vrom + offset) && sCacheSizes[i] == size)
         {
             sCacheTTLs[i] = CACHE_TTL;
             addr = sCacheAddrs[i];
@@ -82,7 +88,12 @@ void* comboCacheGetFile(u32 vrom)
         }
     }
     if (!addr)
-        addr = loadCacheFile(vrom);
+        addr = loadCacheFile(vrom, offset, size);
 
     return addr;
+}
+
+void* comboCacheGetFile(u32 vrom)
+{
+    return comboCacheGetFilePartial(vrom, 0, -1);
 }
