@@ -56,7 +56,9 @@ typedef struct PlayState
     Camera*                cameraPtrs[4];
     s16                    activeCamId;
     s16                    nextCamId;
-    char                   unk_007a4[0x1c];
+    char                   unk_007a4[4];
+    LightContext           lightCtx;
+    char                   unk_007b8[0x08];
     CollisionContext       colCtx;
     ActorContext           actorCtx;
     CutsceneContext        cutscene;
