@@ -911,3 +911,9 @@ const BowSlingshotString* Player_GetBowSlingshotStringData(void)
 
     return &bss;
 }
+
+void Player_RumbleAgony(void)
+{
+    Interface_AgonyIconTick();
+    Rumble_Request(120, 20, 10, 0);
+}

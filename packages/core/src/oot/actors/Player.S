@@ -243,3 +243,13 @@ PATCH_START 0x8007bbdc
   nop
   nop
 PATCH_END
+
+/* Use our Agony handler */
+PATCH_START 0x808470a4
+  jal Player_RumbleAgony
+PATCH_END
+
+/* Reloc */
+PATCH_START 0x808554c4
+.int 0
+PATCH_END

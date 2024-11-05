@@ -70,3 +70,8 @@ PATCH_END
 PATCH_START 0x8009bef8
   jal Interface_Update
 PATCH_END
+
+/* Hook for after draw */
+PATCH_START 0x80078288
+  j Interface_AfterDraw
+PATCH_END
