@@ -115,7 +115,7 @@ void ObjKibako_Thrown(Actor_ObjKibako* this, PlayState* play);
 
 static ColliderCylinderInit sCylinderInit = {
     {
-        COLTYPE_NONE,
+        COL_MATERIAL_NONE,
         AT_ON | AT_TYPE_PLAYER,
         AC_ON | AC_TYPE_PLAYER,
         OC1_ON | OC1_TYPE_ALL,
@@ -123,7 +123,7 @@ static ColliderCylinderInit sCylinderInit = {
         COLSHAPE_CYLINDER,
     },
     {
-        ELEMTYPE_UNK0,
+        ELEM_MATERIAL_UNK0,
         { 0x00000002, 0x00, 0x01 },
         { 0x4FC00748, 0x00, 0x00 },
         ATELEM_ON | ATELEM_SFX_NORMAL,
@@ -403,7 +403,7 @@ static s16 D_8092738C = 0;
 
 static ColliderCylinderInit sCylinderInit = {
     {
-        COLTYPE_NONE,
+        COL_MATERIAL_NONE,
         AT_ON | AT_TYPE_PLAYER,
         AC_ON | AC_TYPE_PLAYER,
         OC1_ON | OC1_TYPE_ALL,
@@ -411,11 +411,11 @@ static ColliderCylinderInit sCylinderInit = {
         COLSHAPE_CYLINDER,
     },
     {
-        ELEMTYPE_UNK0,
+        ELEM_MATERIAL_UNK0,
         { 0x00400000, 0x00, 0x02 },
         { 0x058BC79C, 0x00, 0x00 },
-        TOUCH_ON | TOUCH_SFX_NONE,
-        AC_ON,
+        ATELEM_ON | ATELEM_SFX_NONE,
+        ACELEM_ON,
         OCELEM_ON,
     },
     { 15, 30, 0, { 0, 0, 0 } },

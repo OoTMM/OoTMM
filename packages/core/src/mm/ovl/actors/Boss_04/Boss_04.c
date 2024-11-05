@@ -58,7 +58,7 @@ static DamageTable sDamageTable = {{
 static ColliderJntSphElementInit sJntSphElementsInit1[1] = {
     {
         {
-            ELEMTYPE_UNK3,
+            ELEM_MATERIAL_UNK3,
             { 0xF7CFFFFF, 0x00, 0x08 },
             { 0xF7CFFFFF, 0x00, 0x00 },
             ATELEM_ON | ATELEM_SFX_NORMAL,
@@ -71,7 +71,7 @@ static ColliderJntSphElementInit sJntSphElementsInit1[1] = {
 
 static ColliderJntSphInit sJntSphInit1 = {
     {
-        COLTYPE_HIT3,
+        COL_MATERIAL_HIT3,
         AT_ON | AT_TYPE_ENEMY,
         AC_ON | AC_TYPE_PLAYER,
         OC1_ON | OC1_TYPE_PLAYER,
@@ -85,7 +85,7 @@ static ColliderJntSphInit sJntSphInit1 = {
 static ColliderJntSphElementInit sJntSphElementsInit2[1] = {
     {
         {
-            ELEMTYPE_UNK3,
+            ELEM_MATERIAL_UNK3,
             { 0xF7CFFFFF, 0x00, 0x08 },
             { 0xF7CFFFFF, 0x00, 0x00 },
             ATELEM_ON | ATELEM_SFX_NORMAL,
@@ -98,7 +98,7 @@ static ColliderJntSphElementInit sJntSphElementsInit2[1] = {
 
 static ColliderJntSphInit sJntSphInit2 = {
     {
-        COLTYPE_METAL,
+        COL_MATERIAL_METAL,
         AT_ON | AT_TYPE_ENEMY,
         AC_ON | AC_TYPE_PLAYER,
         OC1_ON | OC1_TYPE_PLAYER,

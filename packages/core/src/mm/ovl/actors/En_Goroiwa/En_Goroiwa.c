@@ -30,11 +30,11 @@ void func_809420F0(Actor_EnGoroiwa* this, PlayState* play);
 static ColliderJntSphElementInit sJntSphElementsInit[1] = {
     {
         {
-            ELEMTYPE_UNK0,
+            ELEM_MATERIAL_UNK0,
             { 0x20000000, 0x00, 0x04 },
             { 0x01C37BB6, 0x00, 0x00 },
-            TOUCH_ON | TOUCH_SFX_NONE,
-            AC_ON,
+            ATELEM_ON | ATELEM_SFX_NONE,
+            ACELEM_ON,
             OCELEM_ON,
         },
         { 0, { { 0, 0, 0 }, 58 }, 100 },
@@ -43,7 +43,7 @@ static ColliderJntSphElementInit sJntSphElementsInit[1] = {
 
 static ColliderJntSphInit sJntSphInit = {
     {
-        COLTYPE_METAL,
+        COL_MATERIAL_METAL,
         AT_ON | AT_TYPE_ENEMY,
         AC_ON | AC_HARD | AC_TYPE_PLAYER,
         OC1_ON | OC1_TYPE_ALL,
@@ -138,11 +138,11 @@ void func_8093E9B0(Actor_EnGoroiwa* this, PlayState* play) {
     if ((params == ENGOROIWA_C000_1) || (params == ENGOROIWA_C000_2)) {
         this->collider.elements[0].base.acDmgInfo.dmgFlags |= (0x4000 | 0x400 | 0x100);
         if (params == ENGOROIWA_C000_1) {
-            this->collider.base.colMaterial = COLTYPE_WOOD;
+            this->collider.base.colMaterial = COL_MATERIAL_WOOD;
         } else {
             this->collider.elements[0].base.acDmgInfo.dmgFlags &= ~(0x400000 | 0x200 | 0x2);
             this->collider.elements[0].base.acDmgInfo.dmgFlags |= (0x80000000 | 0x800 | 0x8);
-            this->collider.base.colMaterial = COLTYPE_NONE;
+            this->collider.base.colMaterial = COL_MATERIAL_NONE;
         }
     }
 }
