@@ -168,7 +168,7 @@ static void reloadHookshot(PlayState* play)
     if (play)
     {
         link = GET_PLAYER(play);
-        link->state &= ~(PLAYER_ACTOR_STATE_HOLD_ITEM | PLAYER_ACTOR_STATE_USE_ITEM);
+        link->stateFlags1 &= ~(PLAYER_ACTOR_STATE_HOLD_ITEM | PLAYER_ACTOR_STATE_USE_ITEM);
     }
 }
 #endif

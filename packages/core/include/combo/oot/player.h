@@ -112,8 +112,8 @@ typedef struct Actor_Player
     char            unk_1a4[0x280];
     s16             gi; /* Extended to s16 */
     char            unk_426[0x246];
-    u32             state;
-    u32             state2;
+    u32             stateFlags1;
+    u32             stateFlags2;
     Actor*          unk_674;
     Actor*          boomerangActor;
     Actor*          naviActor;

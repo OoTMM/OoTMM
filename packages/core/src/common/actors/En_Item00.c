@@ -52,7 +52,7 @@ static int EnItem00_XflagCanCollect(Actor_EnItem00* this, PlayState* play)
     Actor_Player* link;
 
     link = GET_PLAYER(play);
-    if (link->state & (PLAYER_ACTOR_STATE_FROZEN | PLAYER_ACTOR_STATE_EPONA))
+    if (link->stateFlags1 & (PLAYER_ACTOR_STATE_FROZEN | PLAYER_ACTOR_STATE_EPONA))
         return 0;
 
     /* Check for textbox */

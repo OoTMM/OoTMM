@@ -85,7 +85,7 @@ void EnExRuppy_GiveItem(Actor_EnExRuppy* this, PlayState* play, Actor_EnDivingGa
     int major;
 
     link = GET_PLAYER(play);
-    if (link->state & (PLAYER_ACTOR_STATE_FROZEN | PLAYER_ACTOR_STATE_EPONA))
+    if (link->stateFlags1 & (PLAYER_ACTOR_STATE_FROZEN | PLAYER_ACTOR_STATE_EPONA))
         return;
 
     /* Check for textbox */

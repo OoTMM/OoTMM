@@ -245,7 +245,7 @@ void MagicDark_DiamondDraw(Actor* thisx, PlayState* play) {
         f32 y;
         if (player->transformation == MM_PLAYER_FORM_GORON)
         {
-            if (player->state3 & PLAYER_STATE3_MM_1000)
+            if (player->stateFlags3 & PLAYER_STATE3_MM_1000)
             {
                 y = player->actor.world.pos.y + Player_GetHeight(player) * 0.5f;
             }

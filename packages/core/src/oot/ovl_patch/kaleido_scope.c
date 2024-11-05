@@ -84,7 +84,7 @@ static int checkItemToggle(PlayState* play)
 
     if (gSave.age == AGE_CHILD && itemId == ITEM_OOT_SWORD_KOKIRI && gSave.equips.equipment.swords == 1)
     {
-        if (!(GET_PLAYER(play)->state2 & PLAYER_ACTOR_STATE_WATER))
+        if (!(GET_PLAYER(play)->stateFlags2 & PLAYER_ACTOR_STATE_WATER))
         {
             ret = 1;
             if (press)

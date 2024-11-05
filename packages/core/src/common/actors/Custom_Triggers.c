@@ -27,7 +27,7 @@ int CustomTriggers_GiveItem(Actor_CustomTriggers* this, PlayState* play, const C
     Actor_Player* link;
 
     link = GET_PLAYER(play);
-    if (link->state & PLAYER_ACTOR_STATE_GET_ITEM)
+    if (link->stateFlags1 & PLAYER_ACTOR_STATE_GET_ITEM)
         return 0;
 
     if (Actor_HasParentZ(&this->base))
@@ -63,7 +63,7 @@ int CustomTrigger_ItemSafe(Actor_CustomTriggers* this, PlayState* play)
     Actor_Player* link;
 
     link = GET_PLAYER(play);
-    if (link->state & (PLAYER_ACTOR_STATE_GET_ITEM | PLAYER_ACTOR_STATE_CUTSCENE_FROZEN))
+    if (link->stateFlags1 & (PLAYER_ACTOR_STATE_GET_ITEM | PLAYER_ACTOR_STATE_CUTSCENE_FROZEN))
     {
         gComboTriggersData.acc = 0;
         return 0;

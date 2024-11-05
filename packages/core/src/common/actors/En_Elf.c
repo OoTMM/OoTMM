@@ -106,7 +106,7 @@ s32 EnElf_CantGiveItem(PlayState* play) {
     Actor_Player* link;
     link = GET_PLAYER(play);
 
-    if (link->state & (PLAYER_ACTOR_STATE_FROZEN | PLAYER_ACTOR_STATE_EPONA))
+    if (link->stateFlags1 & (PLAYER_ACTOR_STATE_FROZEN | PLAYER_ACTOR_STATE_EPONA))
         return 1;
 
     /* Check for textbox */

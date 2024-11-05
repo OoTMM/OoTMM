@@ -32,7 +32,7 @@ int EnGe1_HasGivenItem(Actor* this, PlayState* play)
     {
         /* Give two items */
         link = GET_PLAYER(play);
-        if (link->state & PLAYER_ACTOR_STATE_GET_ITEM)
+        if (link->stateFlags1 & PLAYER_ACTOR_STATE_GET_ITEM)
         {
             this->parent = NULL;
             BITMAP16_SET(gSave.eventsItem, EV_OOT_ITEM_HBA_1500);
@@ -53,7 +53,7 @@ void EnGe1_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b)
 
     link = GET_PLAYER(play);
     npc = -1;
-    if (link->state & PLAYER_ACTOR_STATE_GET_ITEM)
+    if (link->stateFlags1 & PLAYER_ACTOR_STATE_GET_ITEM)
         return;
 
     switch (gi)

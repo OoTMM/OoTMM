@@ -52,7 +52,7 @@ static int ItemDecoy_CanCollect(Actor_ItemDecoy* this, PlayState* play)
     if (gSaveContext.gameMode || (gSaveContext.minigameState == 1))
         return 0;
     link = GET_PLAYER(play);
-    if (link->state & (PLAYER_ACTOR_STATE_FROZEN | PLAYER_ACTOR_STATE_GET_ITEM | PLAYER_ACTOR_STATE_CUTSCENE_FROZEN))
+    if (link->stateFlags1 & (PLAYER_ACTOR_STATE_FROZEN | PLAYER_ACTOR_STATE_GET_ITEM | PLAYER_ACTOR_STATE_CUTSCENE_FROZEN))
         return 0;
 
     /* Check for textbox */
@@ -117,7 +117,7 @@ static void ItemDecoy_HandlerImportantItem(Actor_ItemDecoy* this, PlayState* pla
     comboTextHijackItemEx(play, &o, this->count);
 
     link = GET_PLAYER(play);
-    if (link->state & PLAYER_ACTOR_STATE_EPONA)
+    if (link->stateFlags1 & PLAYER_ACTOR_STATE_EPONA)
     {
         sMsgTimer = 60;
         this->handler = ItemDecoy_HandlerMessageTimer;

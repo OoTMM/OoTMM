@@ -51,7 +51,7 @@ void DmChar02_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
     int npc;
 
     link = GET_PLAYER(play);
-    if (link->state & PLAYER_ACTOR_STATE_GET_ITEM)
+    if (link->stateFlags1 & PLAYER_ACTOR_STATE_GET_ITEM)
         return;
 
     if (!gMmExtraFlags2.ocarina)

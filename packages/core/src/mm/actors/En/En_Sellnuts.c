@@ -21,7 +21,7 @@ void EnSellnuts_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 
     npc = -1;
     /* Unfreeze player */
-    GET_PLAYER(play)->state &= ~PLAYER_ACTOR_STATE_CUTSCENE_FROZEN;
+    GET_PLAYER(play)->stateFlags1 &= ~PLAYER_ACTOR_STATE_CUTSCENE_FROZEN;
 
     comboRemoveTradeItem1(XITEM_MM_TRADE1_MOON_TEAR);
     if (gMmExtraFlags.scrubTown)

@@ -20,7 +20,7 @@ static void EnDntNormal_GiveReward(Actor* this, PlayState* play)
     }
 
     link = GET_PLAYER(play);
-    link->state &= ~(0x00100008);
+    link->stateFlags1 &= ~(0x00100008);
     comboGiveItemNpc(this, play, GI_OOT_SLINGSHOT, NPC_OOT_LOST_WOODS_TARGET, 16384.f, 16384.f);
 }
 

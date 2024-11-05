@@ -40,7 +40,7 @@ static void EnGo2_HandlerGiveBiggoronItem(Actor* this, PlayState* play)
         break;
     }
 
-    if (!(GET_PLAYER(play)->state & PLAYER_ACTOR_STATE_GET_ITEM))
+    if (!(GET_PLAYER(play)->stateFlags1 & PLAYER_ACTOR_STATE_GET_ITEM))
         Message_Close(play);
 
     comboGiveItemNpc(this, play, gi, npc, 10000.f, 5000.f);

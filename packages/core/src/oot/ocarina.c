@@ -255,7 +255,7 @@ static void HandleSoaring(PlayState* play)
                     if (play->msgCtx.choice == 0)
                     {
                         link = GET_PLAYER(play);
-                        link->state |= (PLAYER_ACTOR_STATE_CUTSCENE_FROZEN | PLAYER_ACTOR_STATE_FROZEN);
+                        link->stateFlags1 |= (PLAYER_ACTOR_STATE_CUTSCENE_FROZEN | PLAYER_ACTOR_STATE_FROZEN);
                         link->actor.freezeTimer = 10000;
                         u32 entrance = gComboConfig.entrancesOwl[songId] ^ MASK_FOREIGN_ENTRANCE;
                         comboTransition(play, entrance);

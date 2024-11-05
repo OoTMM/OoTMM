@@ -161,14 +161,14 @@ void Ocarina_HandleWarp(Actor_Player* player, PlayState* play)
             Actor* actor = Actor_Spawn(&play->actorCtx, play, ACTOR_EN_TEST7, player->actor.world.pos.x, player->actor.world.pos.y, player->actor.world.pos.z, 0, 0, 0, 0x8000 | sWarpSongPlayed);
             if (actor)
             {
-                player->state &= ~0x20000000; /* PLAYER_STATE1_TIME_STOP */
+                player->stateFlags1 &= ~0x20000000; /* PLAYER_STATE1_TIME_STOP */
                 player->csMode = 0; /* csMode = PLAYER_CSMODE_0; */
 
                 void (*Player_func_8085B28C)(PlayState* play, Actor_Player* link, s32 csMode);
                 Player_func_8085B28C = OverlayAddr(0x8085B28C);
                 Player_func_8085B28C(play, NULL, 19);
 
-                player->state |= 0x30000000; /* PLAYER_STATE1_SPECIAL_2 | PLAYER_STATE1_TIME_STOP */
+                player->stateFlags1 |= 0x30000000; /* PLAYER_STATE1_SPECIAL_2 | PLAYER_STATE1_TIME_STOP */
             }
             else
             {

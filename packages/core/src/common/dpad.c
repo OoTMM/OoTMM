@@ -41,7 +41,7 @@ static int canUseDpad(PlayState* play)
     link = GET_PLAYER(play);
     if (!canShowDpad())
         return 0;
-    if (link->state & (PLAYER_ACTOR_STATE_CLIMB | PLAYER_ACTOR_STATE_CLIMB2 | PLAYER_ACTOR_STATE_EPONA | PLAYER_ACTOR_STATE_USE_ITEM | PLAYER_ACTOR_STATE_CUTSCENE_FROZEN | PLAYER_ACTOR_STATE_GET_ITEM | PLAYER_ACTOR_STATE_DEATH | PLAYER_ACTOR_STATE_TRANSITION | PLAYER_ACTOR_STATE_TRANSFORM))
+    if (link->stateFlags1 & (PLAYER_ACTOR_STATE_CLIMB | PLAYER_ACTOR_STATE_CLIMB2 | PLAYER_ACTOR_STATE_EPONA | PLAYER_ACTOR_STATE_USE_ITEM | PLAYER_ACTOR_STATE_CUTSCENE_FROZEN | PLAYER_ACTOR_STATE_GET_ITEM | PLAYER_ACTOR_STATE_DEATH | PLAYER_ACTOR_STATE_TRANSITION | PLAYER_ACTOR_STATE_TRANSFORM))
         return 0;
     return 1;
 }
@@ -80,12 +80,12 @@ static int canUseDpadItem(PlayState* play, s16 itemId, int flags)
         return 0;
 
     /* These states seem to handle minigames - and everything should be disabled during these */
-    if(link->state3 & (1 << 22) || link->state & (1 << 5))
+    if(link->stateFlags3 & (1 << 22) || link->stateFlags1 & (1 << 5))
         return 0;
 #endif
 
     /* Underwater - disable everything except zora mask */
-    if (link->state & PLAYER_ACTOR_STATE_WATER)
+    if (link->stateFlags1 & PLAYER_ACTOR_STATE_WATER)
     {
 #if defined(GAME_MM)
         if (itemId != ITEM_MM_MASK_ZORA && !(gSave.playerForm == MM_PLAYER_FORM_ZORA && (itemId == ITEM_MM_OCARINA_FAIRY || itemId == ITEM_MM_OCARINA_OF_TIME)))

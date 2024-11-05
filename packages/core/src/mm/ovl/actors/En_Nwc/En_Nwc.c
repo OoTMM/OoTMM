@@ -127,7 +127,7 @@ s32 EnNwc_PlayerReleasedBremanMarch(Actor_EnNwc* this, PlayState* play)
     if (this->grog->actor.home.rot.x >= 20)
         return 0;
 
-    if (player->state3 & (1 << 29))
+    if (player->stateFlags3 & (1 << 29))
         return 0;
 
     return 1;
@@ -144,7 +144,7 @@ s32 EnNwc_IsFound(Actor_EnNwc* this, PlayState* play)
     if (this->grog == NULL)
         return 0;
 
-    if ((player->state3 & (1 << 29)) && (this->actor.xzDistToPlayer < 100.0f))
+    if ((player->stateFlags3 & (1 << 29)) && (this->actor.xzDistToPlayer < 100.0f))
         return 1;
 
     return 0;

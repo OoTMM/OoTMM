@@ -10,7 +10,7 @@ static void EnTest3_GivePendantOfMemories(Actor* this, PlayState* play)
     s16 gi;
     int npc;
 
-    if (!(GET_PLAYER(play)->state & PLAYER_ACTOR_STATE_GET_ITEM))
+    if (!(GET_PLAYER(play)->stateFlags1 & PLAYER_ACTOR_STATE_GET_ITEM))
         Message_Close(play);
 
     if (Actor_HasParentZ(this))

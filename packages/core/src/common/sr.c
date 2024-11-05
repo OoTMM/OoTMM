@@ -121,7 +121,7 @@ int comboSilverRupeesIncCount(PlayState* play, int id)
         if (play && play->sceneId == data->sceneId)
         {
             link = GET_PLAYER(play);
-            if ((Message_GetState(&play->msgCtx) != TEXT_STATE_NONE) || (link->state & (PLAYER_ACTOR_STATE_CLIMB | PLAYER_ACTOR_STATE_CLIMB2)))
+            if ((Message_GetState(&play->msgCtx) != TEXT_STATE_NONE) || (link->stateFlags1 & (PLAYER_ACTOR_STATE_CLIMB | PLAYER_ACTOR_STATE_CLIMB2)))
             {
                 g.delayedSwitchFlag = data->flag;
             }

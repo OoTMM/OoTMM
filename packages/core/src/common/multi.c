@@ -610,7 +610,7 @@ static int Multi_CanReceiveItem(PlayState* play)
     if (Message_GetState(&play->msgCtx) != 0)
         return 0;
     link = GET_PLAYER(play);
-    if (link->state & (PLAYER_ACTOR_STATE_GET_ITEM | PLAYER_ACTOR_STATE_FROZEN | PLAYER_ACTOR_STATE_CUTSCENE_FROZEN | PLAYER_ACTOR_STATE_EPONA))
+    if (link->stateFlags1 & (PLAYER_ACTOR_STATE_GET_ITEM | PLAYER_ACTOR_STATE_FROZEN | PLAYER_ACTOR_STATE_CUTSCENE_FROZEN | PLAYER_ACTOR_STATE_EPONA))
         return 0;
 
     return 1;

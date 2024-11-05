@@ -111,7 +111,7 @@ int DoorWarp1_ShouldTrigger(Actor* this, PlayState* play)
 
     /* Check if we are obtaining an item */
     link = GET_PLAYER(play);
-    if (link->state & PLAYER_ACTOR_STATE_GET_ITEM)
+    if (link->stateFlags1 & PLAYER_ACTOR_STATE_GET_ITEM)
         return 0;
 
     /* Check if we already have the item */

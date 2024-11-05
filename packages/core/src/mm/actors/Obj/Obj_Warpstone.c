@@ -76,7 +76,7 @@ void ObjWarpstone_GiveItem(Actor* this, PlayState* play)
         /* Prevents duping */
         EnableOwl(id);
 
-        if (!(link->state & PLAYER_ACTOR_STATE_GET_ITEM))
+        if (!(link->stateFlags1 & PLAYER_ACTOR_STATE_GET_ITEM))
         {
             this->parent = NULL;
             next = actorAddr(ACTOR_OBJ_WARPSTONE, 0x80b92c48);

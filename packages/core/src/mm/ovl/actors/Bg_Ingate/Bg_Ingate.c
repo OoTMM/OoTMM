@@ -199,11 +199,11 @@ void BgIngate_EndCruise(Actor_BgIngate* this, PlayState* play) {
     if (CutsceneManager_GetCurrentCsId() != this->csId) {
         if (CutsceneManager_GetCurrentCsId() != CS_ID_NONE) {
             Camera_ChangeSetting(mainCam, CAM_SET_NORMAL0);
-            player->state |= (1 << 5); /* PLAYER_STATE1_20 */
+            player->stateFlags1 |= (1 << 5); /* PLAYER_STATE1_20 */
             play->actorCtx.flags &= ~ACTORCTX_FLAG_PICTO_BOX_ON;
         } else {
             Camera_ChangeSetting(mainCam, CAM_SET_BOAT_CRUISE);
-            player->state &= ~(1 << 5); /* PLAYER_STATE1_20 */
+            player->stateFlags1 &= ~(1 << 5); /* PLAYER_STATE1_20 */
         }
     }
     this->csId = CutsceneManager_GetCurrentCsId();

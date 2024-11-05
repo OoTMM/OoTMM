@@ -341,7 +341,7 @@ void EnTest4_Init(Actor_EnTest4* this, PlayState* play)
             EnTest4_HandleDayNightSwapFromInit(this, play);
             if ((gSaveContext.cutsceneTrigger == 0) && (sCsIdList[this->daytimeIndex] > -1) &&
                 !(play->actorCtx.flags & ACTORCTX_FLAG_TELESCOPE_ON))
-                    player->state |= (1 << 9);
+                    player->stateFlags1 |= (1 << 9);
         }
         else
         {
@@ -421,7 +421,7 @@ void EnTest4_HandleEvents(Actor_EnTest4* this, PlayState* play)
                     Play_SetRespawnData(play, RESPAWN_MODE_DOWN, Entrance_CreateFromSpawn(0), player->unk_3CE,
                                         PLAYER_PARAMS(0xFF, PLAYER_INITMODE_B), &player->unk_3C0, player->unk_3CC);
                     func_80169EFC(play);
-                    if (player->state & (1 << 23))
+                    if (player->stateFlags1 & (1 << 23))
                     {
                         EnHorse* rideActor = (EnHorse*)player->rideActor;
                         if ((rideActor->type == HORSE_TYPE_EPONA) || (rideActor->type == HORSE_TYPE_2))
@@ -441,7 +441,7 @@ void EnTest4_HandleEvents(Actor_EnTest4* this, PlayState* play)
 
             if ((sCsIdList[this->daytimeIndex] > -1) && !(play->actorCtx.flags & ACTORCTX_FLAG_TELESCOPE_ON))
             {
-                player->state |= (1 << 9);
+                player->stateFlags1 |= (1 << 9);
                 this->prevTime = CURRENT_TIME;
             }
             else
@@ -507,7 +507,7 @@ void EnTest4_HandleCutscene(Actor_EnTest4* this, PlayState* play)
             gMmSave.time += CLOCK_TIME(0, 1);
             this->prevTime = CURRENT_TIME;
             play->numSetupActors = -play->numSetupActors;
-            player->state &= ~(1 << 9);
+            player->stateFlags1 &= ~(1 << 9);
         }
     }
     else
@@ -679,7 +679,7 @@ void EnTest4_Update(Actor_EnTest4* this, PlayState* play)
 
     Actor_Player* player = GET_PLAYER(play);
 
-    if (player->state & PLAYER_STATE1_MM_2) return;
+    if (player->stateFlags1 & PLAYER_STATE1_MM_2) return;
 
     this->actionFunc(this, play);
 

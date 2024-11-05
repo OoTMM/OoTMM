@@ -10,7 +10,7 @@ int EnSyatekiMan_HasGivenItemSwamp(Actor* this, PlayState* play)
     {
         /* Give two items */
         link = GET_PLAYER(play);
-        if (link->state & PLAYER_ACTOR_STATE_GET_ITEM)
+        if (link->stateFlags1 & PLAYER_ACTOR_STATE_GET_ITEM)
         {
             this->parent = NULL;
             MM_SET_EVENT_WEEK(EV_MM_WEEK_ARCHERY_SWAMP_QUIVER);
@@ -30,7 +30,7 @@ int EnSyatekiMan_HasGivenItemTown(Actor* this, PlayState* play)
     {
         /* Give two items */
         link = GET_PLAYER(play);
-        if (link->state & PLAYER_ACTOR_STATE_GET_ITEM)
+        if (link->stateFlags1 & PLAYER_ACTOR_STATE_GET_ITEM)
         {
             this->parent = NULL;
             MM_SET_EVENT_WEEK(EV_MM_WEEK_ARCHERY_TOWN_QUIVER);
@@ -51,7 +51,7 @@ void EnSyatekiMan_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float
     int npc;
 
     link = GET_PLAYER(play);
-    if (link->state & PLAYER_ACTOR_STATE_GET_ITEM)
+    if (link->stateFlags1 & PLAYER_ACTOR_STATE_GET_ITEM)
         return;
 
     if (play->sceneId == SCE_MM_SHOOTING_GALLERY)

@@ -1103,7 +1103,7 @@ void func_80941A10(Actor_EnGoroiwa* this, PlayState* play) {
     s16 y;
 
     if (!func_8094156C(this, play)) {
-        if ((this->collider.base.atFlags & AT_HIT) && !(player->state3 & (1 << 19))) {
+        if ((this->collider.base.atFlags & AT_HIT) && !(player->stateFlags3 & (1 << 19))) {
             s32 sp34 = this->actor.home.rot.z & 3;
 
             if (sp34 == 2) {
@@ -1233,7 +1233,7 @@ void func_80941FA4(Actor_EnGoroiwa* this, PlayState* play) {
     Actor_Player* player = GET_PLAYER(play);
 
     if (func_8094156C(this, play) == 0) {
-        if ((this->collider.base.atFlags & AT_HIT) && !(player->state3 & (1 << 19))) {
+        if ((this->collider.base.atFlags & AT_HIT) && !(player->stateFlags3 & (1 << 19))) {
             func_800B8D50(play, &this->actor, 2.0f, this->actor.yawTowardsPlayer, 0.0f, 0);
             Player_PlaySfx(player, NA_SE_PL_BODY_HIT);
             if (((this->actor.home.rot.z & 3) == 1) || ((this->actor.home.rot.z & 3) == 2)) {
@@ -1261,7 +1261,7 @@ void func_809420F0(Actor_EnGoroiwa* this, PlayState* play) {
     Actor_Player* player = GET_PLAYER(play);
 
     if (func_8094156C(this, play) == 0) {
-        if ((this->collider.base.atFlags & AT_HIT) && !(player->state3 & (1 << 19))) {
+        if ((this->collider.base.atFlags & AT_HIT) && !(player->stateFlags3 & (1 << 19))) {
             func_800B8D50(play, &this->actor, 2.0f, this->actor.yawTowardsPlayer, 0.0f, 0);
             Player_PlaySfx(player, NA_SE_PL_BODY_HIT);
             if (((this->actor.home.rot.z & 3) == 1) || ((this->actor.home.rot.z & 3) == 2)) {
@@ -1399,7 +1399,7 @@ void EnGoroiwa_Update(Actor_EnGoroiwa* this, PlayState* play) {
     int floorType;
     CollisionPoly* tmp;
 
-    if (!(player->state &
+    if (!(player->stateFlags1 &
           ((1 << 6) | (1 << 7) | (1 << 28) | (1 << 29)))) {
         if (this->unk_1CC > 0) {
             this->unk_1CC--;
@@ -1485,7 +1485,7 @@ void EnGoroiwa_Update(Actor_EnGoroiwa* this, PlayState* play) {
                 func_8093E938(this);
 
                 if ((this->unk_1E5 & 1) && (this->unk_1CC <= 0) &&
-                    (!(player->state3 & (1 << 25)) || (player->transformation != MM_PLAYER_FORM_GORON) ||
+                    (!(player->stateFlags3 & (1 << 25)) || (player->transformation != MM_PLAYER_FORM_GORON) ||
                      ((params != ENGOROIWA_C000_1) && (params != ENGOROIWA_C000_2)))) {
                     CollisionCheck_SetAT(play, &play->colChkCtx, &this->collider.base);
                 } else {

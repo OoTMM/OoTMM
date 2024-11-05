@@ -63,7 +63,7 @@ static void EnXc_Update_IceCavern(Actor* actor, PlayState* play)
     link = GET_PLAYER(play);
     if (Flags_GetTreasure(play, 0x02))
     {
-        if (link->state & PLAYER_ACTOR_STATE_GET_ITEM)
+        if (link->stateFlags1 & PLAYER_ACTOR_STATE_GET_ITEM)
         {
             lagFrame = 0;
         }

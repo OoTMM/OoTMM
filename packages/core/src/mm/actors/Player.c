@@ -237,7 +237,7 @@ void Player_Action_CastingSpell(Actor_Player* this, PlayState* play)
 
                 if (Player_SpawnMagicSpellActor(play, this, this->av1.actionVar1) != NULL)
                 {
-                    this->state |= 0x30000000; /* PLAYER_STATE1_20000000 | PLAYER_STATE1_10000000 */
+                    this->stateFlags1 |= 0x30000000; /* PLAYER_STATE1_20000000 | PLAYER_STATE1_10000000 */
                     if ((this->av1.actionVar1 != 0) || (gSaveContext.respawn[RESPAWN_MODE_HUMAN].data <= 0))
                     {
                         gSaveContext.magicState = MAGIC_STATE_CONSUME_SETUP;
@@ -299,7 +299,7 @@ void Player_Action_CastingSpell(Actor_Player* this, PlayState* play)
                 Player_PlayAnimSfx(this, sMagicSpellSfx[spellSfxIndex]);
                 if ((this->av1.actionVar1 == 2) && PlayerAnimation_OnFrame(&this->skelAnime, 30.0f))
                 {
-                    this->state &= ~0x30000000; /* PLAYER_STATE1_20000000 | PLAYER_STATE1_10000000 */
+                    this->stateFlags1 &= ~0x30000000; /* PLAYER_STATE1_20000000 | PLAYER_STATE1_10000000 */
                 }
             }
             else if (sMagicSpellLoopTimer[this->av1.actionVar1] < this->av2.actionVar2++)
@@ -338,7 +338,7 @@ void Player_CastSpell(PlayState* play, Actor_Player* this, s32 magicSpell)
         Player_func_8083249C = OverlayAddr(0x8083249c);
         Player_func_8083249C(this);
 
-        this->state3 |= 0x80; /* PLAYER_STATE3_80 */
+        this->stateFlags3 |= 0x80; /* PLAYER_STATE3_80 */
     }
 }
 
@@ -352,7 +352,7 @@ void Player_Action_FaroresWindText(Actor_Player* this, PlayState* play)
     Player_func_8085B384 Player_func_8085B384;
     char* b;
 
-    this->state3 |= 0x80; /* PLAYER_STATE3_80 */
+    this->stateFlags3 |= 0x80; /* PLAYER_STATE3_80 */
 
     PlayerAnimation_Update(play, &this->skelAnime);
     Player_UpdateUpperBody(this, play);
@@ -426,7 +426,7 @@ s32 Player_CustomCsItem(Actor_Player* this, PlayState* play)
         {
             Player_SetAction = OverlayAddr(0x80831494);
             Player_SetAction(play, this, Player_Action_FaroresWindText, 1);
-            this->state |= 0x30000000; /* PLAYER_STATE1_20000000 | PLAYER_STATE1_10000000 */
+            this->stateFlags1 |= 0x30000000; /* PLAYER_STATE1_20000000 | PLAYER_STATE1_10000000 */
             Player_GetWaitAnimation = OverlayAddr(0x8082ED20);
             PlayerAnimation_PlayOnce(play, &this->skelAnime, Player_GetWaitAnimation(this));
             this->csId = 0x7B; /* CS_ID_GLOBAL_TALK */
@@ -494,7 +494,7 @@ void Player_CheckCustomBoots(PlayState* play)
             case PLAYER_BOOTS_IRON:
                 player->currentBoots = 6; /* PLAYER_BOOTS_GORON */
                 player->actor.flags |= ACTOR_FLAG_MM_CAN_PRESS_HEAVY_SWITCH;
-                if (player->state & PLAYER_ACTOR_STATE_WATER)
+                if (player->stateFlags1 & PLAYER_ACTOR_STATE_WATER)
                 {
                     currentBoots = 3; /* Iron Underwater */
                 }
@@ -649,7 +649,7 @@ void Player_InitFaroresWindRespawn(PlayState* play, Actor_Player* this)
     Player_SetAction Player_SetAction = OverlayAddr(0x80831494);
     this->actor.draw = NULL;
     Player_SetAction(play, this, Player_Action_FaroresWindSpawning, 0);
-    this->state |= 0x20000000; /* PLAYER_STATE1_20000000 */
+    this->stateFlags1 |= 0x20000000; /* PLAYER_STATE1_20000000 */
 }
 
 void Player_AfterInit(PlayState* play)
@@ -1107,7 +1107,7 @@ void Player_SkelAnime_DrawFlexLod(PlayState* play, void** skeleton, Vec3s* joint
     gSPSegment(POLY_XLU_DISP++, 0x08, g.customKeep);
 
     if (GET_PLAYER_CUSTOM_BOOTS(player) == PLAYER_BOOTS_HOVER && !(player->actor.bgCheckFlags & BGCHECKFLAG_GROUND)
-        && !(player->state & (1 << 23)) && player->hoverBootsTimer != 0)
+        && !(player->stateFlags1 & (1 << 23)) && player->hoverBootsTimer != 0)
     {
         s32 sp5C;
         s32 hoverBootsTimer = player->hoverBootsTimer;
@@ -1302,7 +1302,7 @@ s32 Player_UpdateHoverBoots(Actor_Player* this)
         return 0;
     }
 
-    if (!(this->state & 0x8000000)) /* PLAYER_STATE1_8000000 // Swimming */
+    if (!(this->stateFlags1 & 0x8000000)) /* PLAYER_STATE1_8000000 // Swimming */
     {
         *sPlayerFloorType = 0; /* FLOOR_TYPE_0; */
     }
@@ -1329,7 +1329,7 @@ s32 Player_CheckHoverBoots(Actor_Player* player)
 
 s32 Player_IsFloorSlippery(Actor_Player* player, s32 floorType)
 {
-    if (GET_PLAYER_CUSTOM_BOOTS(player) == PLAYER_BOOTS_HOVER && !(player->state & ((1 < 27) | (1 << 29))))
+    if (GET_PLAYER_CUSTOM_BOOTS(player) == PLAYER_BOOTS_HOVER && !(player->stateFlags1 & ((1 < 27) | (1 << 29))))
     {
         return 1;
     }
@@ -1389,7 +1389,7 @@ s32 Player_GetEnvironmentalHazardCustom(PlayState* play) {
         }
         return PLAYER_ENV_HAZARD_UNDERWATER_FREE;
     }
-    else if (player->state & 0x08000000) /* PLAYER_STATE1_SWIM */
+    else if (player->stateFlags1 & 0x08000000) /* PLAYER_STATE1_SWIM */
     {
         if ((player->transformation == MM_PLAYER_FORM_ZORA)
             && (player->currentBoots >= 5) /* PLAYER_BOOTS_ZORA_UNDERWATER */
@@ -1412,7 +1412,7 @@ PATCH_FUNC(0x801242dc, Player_GetEnvironmentalHazardCustom);
 
 s32 Player_CanSurface(Actor_Player* player)
 {
-    return player->state & 0x08000000 /* PLAYER_STATE1_SWIM */
+    return player->stateFlags1 & 0x08000000 /* PLAYER_STATE1_SWIM */
         && player->transformation == MM_PLAYER_FORM_ZORA;
 }
 
@@ -1420,7 +1420,7 @@ s32 Player_GetItemCamMode(Actor_Player* this)
 {
     if (this->transformation == MM_PLAYER_FORM_HUMAN)
     {
-        if ((this->heldItemAction == PLAYER_IA_HOOKSHOT && (this->state & 0x8000000)) || (comboIsLinkAdult())) /* PLAYER_IA_HOOKSHOT // PLAYER_STATE1_8000000 // Swimming */
+        if ((this->heldItemAction == PLAYER_IA_HOOKSHOT && (this->stateFlags1 & 0x8000000)) || (comboIsLinkAdult())) /* PLAYER_IA_HOOKSHOT // PLAYER_STATE1_8000000 // Swimming */
         {
             return CAM_MODE_BOWARROW;
         }
@@ -1526,7 +1526,7 @@ s32 Player_OverrideLimbDrawGameplayDefault_Custom(PlayState* play, s32 limbIndex
         switch (limbIndex)
         {
         case PLAYER_LIMB_ROOT:
-            if (player->state3 & 0x20000000 && comboIsLinkAdult()) /* PLAYER_STATE3_20000000 */
+            if (player->stateFlags3 & 0x20000000 && comboIsLinkAdult()) /* PLAYER_STATE3_20000000 */
             {
                 pos->y += 1280.0f;
             }
@@ -1567,8 +1567,8 @@ static void Player_FormChangeResetState(Actor_Player* this)
      * KLUDGE: This is a workaround for various glitches related to fast-masking
      * quickly on a shore. Should be fixed properly someday.
      */
-    this->state ^= 0x08000000;
-    this->state3 &= ~0x8000;
+    this->stateFlags1 ^= 0x08000000;
+    this->stateFlags3 &= ~0x8000;
 
     Player_FormChangeDeleteEffects();
 }
@@ -1580,9 +1580,9 @@ static void Player_ToggleForm(PlayState* play, Actor_Player* link, int form)
         return;
     if (Player_InCsMode(play))
         return;
-    if (link->state & 0x207c7080)
+    if (link->stateFlags1 & 0x207c7080)
         return;
-    if (link->state3 & 0x1000)
+    if (link->stateFlags3 & 0x1000)
         return;
 
     /* Toggle form */
@@ -1618,7 +1618,7 @@ void Player_TryUpdateForm(Actor_Player* this, PlayState* play)
         Player_FormChangeResetState(this);
         Player_UpdateForm(this, play);
         if (this->actor.update != Player_UpdateForm)
-            this->state &= ~PLAYER_ACTOR_STATE_FROZEN;
+            this->stateFlags1 &= ~PLAYER_ACTOR_STATE_FROZEN;
     }
 }
 
@@ -1824,7 +1824,7 @@ void Player_SpecialMeleeWeaponAnim(Actor_Player* this, void* a1, PlayerMeleeWeap
         *animation = sHammerAttackAnims[temp_a1];
         /* no combo and no lunge */
         this->unk_ADD = 0;
-        this->state2 &= ~(1 << 30);
+        this->stateFlags2 &= ~(1 << 30);
     } else if (this->heldItemAction == PLAYER_IA_DEKU_STICK) {
         *animation = PLAYER_MWA_FORWARD_SLASH_1H;
     }

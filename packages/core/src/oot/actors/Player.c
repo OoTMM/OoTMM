@@ -278,7 +278,7 @@ void Player_UpdateWrapper(Actor_Player* this, PlayState* play)
     Dpad_Update(play);
     Dpad_Use(play, DPF_EQUIP);
 
-    if (!(this->state & (PLAYER_ACTOR_STATE_CLIMB | PLAYER_ACTOR_STATE_CLIMB2)) || Message_GetState(&play->msgCtx) == TEXT_STATE_NONE)
+    if (!(this->stateFlags1 & (PLAYER_ACTOR_STATE_CLIMB | PLAYER_ACTOR_STATE_CLIMB2)) || Message_GetState(&play->msgCtx) == TEXT_STATE_NONE)
     {
         if (g.delayedSwitchFlag != 0xff)
         {
@@ -377,7 +377,7 @@ void Player_ProcessItemButtonsWrapper(Actor_Player* link, PlayState* play)
     bPress = !!(input->press.button & B_BUTTON);
 
     /* Handle masks that have B actions */
-    if (bPress && !(link->state & (PLAYER_ACTOR_STATE_HOLD_ITEM | PLAYER_ACTOR_STATE_CUTSCENE_FROZEN)) && !Player_UsingItem(link))
+    if (bPress && !(link->stateFlags1 & (PLAYER_ACTOR_STATE_HOLD_ITEM | PLAYER_ACTOR_STATE_CUTSCENE_FROZEN)) && !Player_UsingItem(link))
     {
         switch (link->mask)
         {
@@ -845,7 +845,7 @@ static int Player_ItemAndArrowType(PlayState* play, Actor_Player* this, int* out
     {
         /* Bow, maybe with magical arrow */
         *outItem = ITEM_OOT_BOW;
-        if (this->state & (1 << 23))
+        if (this->stateFlags1 & (1 << 23))
             *outArrow = 1;
         else
             *outArrow = this->heldItemAction - 6;

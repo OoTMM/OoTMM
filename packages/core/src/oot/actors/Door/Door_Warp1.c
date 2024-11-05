@@ -127,7 +127,7 @@ int DoorWarp1_ShouldTrigger(Actor* this, PlayState* play)
             return 0;
         }
 
-        if ((GET_PLAYER(play)->state & 0x400) != 0)
+        if ((GET_PLAYER(play)->stateFlags1 & 0x400) != 0)
             return 0;
 
         comboTriggerWarp(play, id);

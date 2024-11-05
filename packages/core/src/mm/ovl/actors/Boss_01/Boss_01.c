@@ -3293,7 +3293,7 @@ void Boss01_UpdateEffects(Actor_Boss01* this, PlayState* play) {
 
                     // The ring of fire has no collision, so this code is responsible for checking to see if the player
                     // is touching it. If they are, then it will set them on fire and damage them manually.
-                    if (!(player->state3 & (1 << 12)) && (player->actor.world.pos.y < 70.0f)) {
+                    if (!(player->stateFlags3 & (1 << 12)) && (player->actor.world.pos.y < 70.0f)) {
                         diffX = effect->pos.x - player->actor.world.pos.x;
                         diffZ = effect->pos.z - player->actor.world.pos.z;
                         temp2 = sqrtf(SQ(diffX) + SQ(diffZ));

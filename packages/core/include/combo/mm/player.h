@@ -525,9 +525,9 @@ typedef struct Actor_Player
     /* 0x929 */ u8 jointTableUpperBuffer[PLAYER_LIMB_BUF_SIZE];
     /* 0x9C8 */ u8 morphTableUpperBuffer[PLAYER_LIMB_BUF_SIZE];
     /* 0xA68 */ PlayerAgeProperties* ageProperties;
-    /* 0xA6C */ u32 state;
-    /* 0xA70 */ u32 state2;
-    /* 0xA74 */ u32 state3;
+    /* 0xA6C */ u32 stateFlags1;
+    /* 0xA70 */ u32 stateFlags2;
+    /* 0xA74 */ u32 stateFlags3;
     /* 0xA78 */ Actor* unk_a78;
     /* 0xA7C */ Actor* boomerangActor;
     /* 0xA80 */ Actor* tatlActor;

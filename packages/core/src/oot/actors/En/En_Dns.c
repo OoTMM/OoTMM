@@ -248,7 +248,7 @@ static int EnDns_HasGivenItem(Actor* this)
     int id;
 
     link = GET_PLAYER(gPlay);
-    if (Actor_HasParentZ(this) && !(link->state & PLAYER_ACTOR_STATE_GET_ITEM))
+    if (Actor_HasParentZ(this) && !(link->stateFlags1 & PLAYER_ACTOR_STATE_GET_ITEM))
     {
         id = EnDns_GetID(this);
         BITMAP8_SET(gCustomSave.scrubs, id);

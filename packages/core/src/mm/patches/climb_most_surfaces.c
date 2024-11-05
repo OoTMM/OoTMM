@@ -9,7 +9,7 @@ u32 Player_GetCollisionType(Actor_Player* link, PlayState* ctxt, u32 collisionTy
         return collisionType;
     }
 
-    if ((link->state & (1 << 27)) && !(link->state2 & (1 << 10))) {
+    if ((link->stateFlags1 & (1 << 27)) && !(link->stateFlags2 & (1 << 10))) {
         return 8;
     }
 

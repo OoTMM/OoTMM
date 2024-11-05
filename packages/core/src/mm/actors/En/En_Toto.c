@@ -7,7 +7,7 @@ static void EnToto_GiveTroupeLeaderMask(Actor* this, PlayState* play)
     Actor_Player* link;
 
     link = GET_PLAYER(play);
-    if (link->state & PLAYER_ACTOR_STATE_GET_ITEM)
+    if (link->stateFlags1 & PLAYER_ACTOR_STATE_GET_ITEM)
         return;
 
     if (Actor_HasParentZ(this))

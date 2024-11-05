@@ -102,7 +102,7 @@ void EnTab_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 
     link = GET_PLAYER(play);
 
-    if (link->state & PLAYER_ACTOR_STATE_GET_ITEM)
+    if (link->stateFlags1 & PLAYER_ACTOR_STATE_GET_ITEM)
         return;
 
     switch (gi)

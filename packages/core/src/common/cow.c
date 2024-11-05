@@ -252,7 +252,7 @@ static void EnCow_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float 
 
     /* Make sure any dialog is closed */
     link = GET_PLAYER(play);
-    if (link->state & PLAYER_ACTOR_STATE_GET_ITEM)
+    if (link->stateFlags1 & PLAYER_ACTOR_STATE_GET_ITEM)
         return;
     Message_Close(play);
 
@@ -268,7 +268,7 @@ static int EnCow_HasGivenItem(Actor* this)
     Actor_Player* link;
 
     link = GET_PLAYER(gPlay);
-    if (Actor_HasParentZ(this) && !(link->state & PLAYER_ACTOR_STATE_GET_ITEM))
+    if (Actor_HasParentZ(this) && !(link->stateFlags1 & PLAYER_ACTOR_STATE_GET_ITEM))
     {
         if (sCowID != -1)
         {
