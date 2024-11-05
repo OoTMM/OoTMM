@@ -60,3 +60,11 @@ void Interface_Update(PlayState* play)
     Interface_UpdateRupees();
     _Interface_Update(play);
 }
+
+void Interface_AfterDraw(void)
+{
+    PlayState* play;
+
+    play = gPlay;
+    Interface_AgonyIconDraw(play);
+}
