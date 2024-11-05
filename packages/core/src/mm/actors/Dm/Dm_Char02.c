@@ -47,7 +47,7 @@ PATCH_CALL(0x80aab1d4, DmChar02_HasGivenItem);
 void DmChar02_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 {
     ComboItemQuery q;
-    Actor_Player* link;
+    Player* link;
     int npc;
 
     link = GET_PLAYER(play);

@@ -76,7 +76,7 @@ void comboPlayerDrawGI(PlayState* play, int drawGiMinusOne)
     drawGiParamDrawId(play, (u8)(drawGiMinusOne + 1), playerDrawGiParam);
 }
 
-void comboPlayerSetDrawGi(Actor_Player* link)
+void comboPlayerSetDrawGi(Player* link)
 {
     playerDrawGiParam = paramForGi(link->gi);
     link->drawGiId = kExtendedGetItems[link->gi - 1].drawGiId;

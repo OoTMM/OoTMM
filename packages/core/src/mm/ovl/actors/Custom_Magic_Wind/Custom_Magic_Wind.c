@@ -144,7 +144,7 @@ void MagicWind_SetupAction(MagicWind* this, MagicWindFunc actionFunc) {
 
 void MagicWind_Init(Actor* thisx, PlayState* play) {
     MagicWind* this = (MagicWind*)thisx;
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
 
     if (!SkelCurve_Init(play, &this->skelCurve, &sSkel, &sAnim)) {
         /* "Magic_Wind_Actor_ct (): Construct failed" */
@@ -179,7 +179,7 @@ void MagicWind_UpdateAlpha(f32 alpha) {
 }
 
 void MagicWind_WaitForTimer(MagicWind* this, PlayState* play) {
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
 
     if (this->timer > 0) {
         this->timer--;

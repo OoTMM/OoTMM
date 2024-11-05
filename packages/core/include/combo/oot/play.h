@@ -22,7 +22,7 @@
 #define AGE_ADULT 0
 #define AGE_CHILD 1
 
-typedef struct Actor_Player Actor_Player;
+typedef struct Player Player;
 
 #define TRANS_TRIGGER_NONE     0x00
 #define TRANS_TRIGGER_NORMAL   0x14
@@ -71,13 +71,13 @@ typedef struct PlayState
     RoomContext            roomCtx;
     TransitionActorContext transiActorCtx;
 
-    void (*playerInit)(Actor_Player* player, struct PlayState* play, FlexSkeletonHeader* skelHeader);
-    void (*playerUpdate)(Actor_Player* player, struct PlayState* play, Input* input);
+    void (*playerInit)(Player* player, struct PlayState* play, FlexSkeletonHeader* skelHeader);
+    void (*playerUpdate)(Player* player, struct PlayState* play, Input* input);
     int (*isPlayerDroppingFish)(struct PlayState* play);
     s32 (*startPlayerFishing)(struct PlayState* play);
-    s32 (*grabPlayer)(struct PlayState* play, Actor_Player* player);
+    s32 (*grabPlayer)(struct PlayState* play, Player* player);
     s32 (*tryPlayerCsAction)(struct PlayState* play, Actor* actor, s32 csAction);
-    void (*func_11D54)(Actor_Player* player, struct PlayState* play);
+    void (*func_11D54)(Player* player, struct PlayState* play);
     s32 (*damagePlayer)(struct PlayState* play, s32 damage);
     void (*talkWithPlayer)(struct PlayState* play, Actor* actor);
 

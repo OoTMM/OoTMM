@@ -32,7 +32,7 @@ static void EnItem00_ItemQuery(ComboItemQuery* q, Actor_EnItem00* this, PlayStat
 void EnItem00_GiveItemDefaultRange(Actor_EnItem00* this, PlayState* play, s16 gi)
 {
     ComboItemQuery q;
-    Actor_Player* link;
+    Player* link;
     s16 itemId;
 
     EnItem00_ItemQuery(&q, this, play, gi);

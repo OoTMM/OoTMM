@@ -265,7 +265,7 @@ void EnButte_FlyAround(Actor_EnButte* this, PlayState* play)
     f32 minAnimSpeed;
     f32 animSpeed;
     s16 rotStep;
-    Actor_Player* player;
+    Player* player;
 
     player = GET_PLAYER(play);
     distSqFromHome = Math3D_Dist2DSq(this->actor.world.pos.x, this->actor.world.pos.z, this->actor.home.pos.x, this->actor.home.pos.z);
@@ -342,7 +342,7 @@ void EnButte_FollowLink(Actor_EnButte* this, PlayState* play) {
     f32 minAnimSpeed;
     f32 distSqFromSword;
     s16 yaw;
-    Actor_Player* player;
+    Player* player;
 
     player = GET_PLAYER(play);
     func_809CD634(this);

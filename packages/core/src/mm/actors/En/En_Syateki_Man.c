@@ -4,7 +4,7 @@
 
 int EnSyatekiMan_HasGivenItemSwamp(Actor* this, PlayState* play)
 {
-    Actor_Player* link;
+    Player* link;
 
     if (gSave.shootingGalleryHighScoreSwamp >= 2180 && !MM_GET_EVENT_WEEK(EV_MM_WEEK_ARCHERY_SWAMP_QUIVER))
     {
@@ -24,7 +24,7 @@ PATCH_CALL(0x809c7aa4, EnSyatekiMan_HasGivenItemSwamp);
 
 int EnSyatekiMan_HasGivenItemTown(Actor* this, PlayState* play)
 {
-    Actor_Player* link;
+    Player* link;
 
     if (gSave.shootingGalleryHighScoreTown >= 50 && !MM_GET_EVENT_WEEK(EV_MM_WEEK_ARCHERY_TOWN_QUIVER))
     {
@@ -45,7 +45,7 @@ PATCH_CALL(0x809c7d28, EnSyatekiMan_HasGivenItemTown);
 
 void EnSyatekiMan_GiveItem(Actor* actor, PlayState* play, s16 gi, float a, float b)
 {
-    Actor_Player* link;
+    Player* link;
     int npcQuiver;
     int npcHeartPiece;
     int npc;

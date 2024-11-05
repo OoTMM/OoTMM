@@ -12,9 +12,9 @@
 #include <combo/effect.h>
 #include "../actors.h"
 
-void ArrowCycle_Handle(Actor_Player* link, PlayState* play);
+void ArrowCycle_Handle(Player* link, PlayState* play);
 
-void Player_UpdateWrapper(Actor_Player* this, PlayState* play)
+void Player_UpdateWrapper(Player* this, PlayState* play)
 {
     ArrowCycle_Handle(this, play);
     Player_Update(this, play);
@@ -22,14 +22,14 @@ void Player_UpdateWrapper(Actor_Player* this, PlayState* play)
     Ocarina_HandleWarp(this, play);
 }
 
-int Player_DpadHook(Actor_Player* this, PlayState* play)
+int Player_DpadHook(Player* this, PlayState* play)
 {
     if (Player_UsingItem(this))
         return 1;
     return Dpad_Use(play, DPF_ITEMS);
 }
 
-void Player_DrawHookshotReticleCustom(PlayState* play, Actor_Player* player)
+void Player_DrawHookshotReticleCustom(PlayState* play, Player* player)
 {
     Player_DrawHookshotReticle(play, player, player->heldItemId == 0xF ? 77600.0f : 38600.0f);
 }
@@ -140,7 +140,7 @@ static PlayerAnimationHeader* sMagicSpellThirdAnimation[] =
 
 static u8 sMagicSpellLoopTimer[] = { 70, 10, 10 };
 
-s32 Player_CustomItemToItemAction(Actor_Player* this, s32 item, s32 itemAction)
+s32 Player_CustomItemToItemAction(Player* this, s32 item, s32 itemAction)
 {
     s32 customItem = item - ITEM_MM_CUSTOM_MIN;
     if (customItem < 0)
@@ -154,7 +154,7 @@ s32 Player_CustomItemToItemAction(Actor_Player* this, s32 item, s32 itemAction)
     return sCustomItemActions[customItem];
 }
 
-static s32 Player_ActionToMagicSpell(Actor_Player* this, s32 itemAction)
+static s32 Player_ActionToMagicSpell(Player* this, s32 itemAction)
 {
     s32 magicSpell = itemAction - PLAYER_CUSTOM_IA_SPELL_MIN;
 
@@ -168,7 +168,7 @@ static s32 Player_ActionToMagicSpell(Actor_Player* this, s32 itemAction)
     }
 }
 
-static s32 Player_ActionToBoots(Actor_Player* this, s32 itemAction)
+static s32 Player_ActionToBoots(Player* this, s32 itemAction)
 {
     s32 boots = itemAction - PLAYER_CUSTOM_IA_BOOTS_MIN + 1;
 
@@ -182,7 +182,7 @@ static s32 Player_ActionToBoots(Actor_Player* this, s32 itemAction)
     }
 }
 
-static s32 Player_ActionToTunic(Actor_Player* this, s32 itemAction)
+static s32 Player_ActionToTunic(Player* this, s32 itemAction)
 {
     s32 tunic = itemAction - PLAYER_CUSTOM_IA_TUNIC_MIN + PLAYER_TUNIC_MIN;
 
@@ -196,19 +196,19 @@ static s32 Player_ActionToTunic(Actor_Player* this, s32 itemAction)
     }
 }
 
-Actor* Player_SpawnMagicSpellActor(PlayState* play, Actor_Player* this, s8 magicSpell)
+Actor* Player_SpawnMagicSpellActor(PlayState* play, Player* this, s8 magicSpell)
 {
     return Actor_Spawn(&play->actorCtx, play, sMagicSpellActorIds[magicSpell], this->actor.world.pos.x, this->actor.world.pos.y, this->actor.world.pos.z, 0, 0, 0, 0);
 }      /* size = 0x4 */
 
-typedef void (*Player_PlayAnimSfx)(Actor_Player*, AnimSfxEntry*);
-typedef void (*Player_func_80832F24)(Actor_Player*);
-typedef void (*Player_func_8083249C)(Actor_Player*);
-typedef void (*Player_StopCutscene)(Actor_Player*);
+typedef void (*Player_PlayAnimSfx)(Player*, AnimSfxEntry*);
+typedef void (*Player_func_80832F24)(Player*);
+typedef void (*Player_func_8083249C)(Player*);
+typedef void (*Player_StopCutscene)(Player*);
 
 extern Vec3f gFwPointerPos;
 
-void Player_Action_CastingSpell(Actor_Player* this, PlayState* play)
+void Player_Action_CastingSpell(Player* this, PlayState* play)
 {
     PlayerActionFunc func_808369F4;
     Player_PlayAnimSfx Player_PlayAnimSfx;
@@ -318,9 +318,9 @@ void Player_Action_CastingSpell(Actor_Player* this, PlayState* play)
     Player_func_8083249C(this);
 }
 
-typedef void (*Player_SetAction_PreserveItemAction)(PlayState*, Actor_Player*, PlayerActionFunc, s32);
+typedef void (*Player_SetAction_PreserveItemAction)(PlayState*, Player*, PlayerActionFunc, s32);
 
-void Player_CastSpell(PlayState* play, Actor_Player* this, s32 magicSpell)
+void Player_CastSpell(PlayState* play, Player* this, s32 magicSpell)
 {
     Player_SetAction_PreserveItemAction Player_SetAction_PreserveItemAction;
     Player_func_8083249C Player_func_8083249C;
@@ -342,10 +342,10 @@ void Player_CastSpell(PlayState* play, Actor_Player* this, s32 magicSpell)
     }
 }
 
-typedef void (*Player_UpdateUpperBody)(Actor_Player*, PlayState*);
-typedef void (*Player_func_8085B384)(Actor_Player*, PlayState*);
+typedef void (*Player_UpdateUpperBody)(Player*, PlayState*);
+typedef void (*Player_func_8085B384)(Player*, PlayState*);
 
-void Player_Action_FaroresWindText(Actor_Player* this, PlayState* play)
+void Player_Action_FaroresWindText(Player* this, PlayState* play)
 {
     Player_UpdateUpperBody Player_UpdateUpperBody = OverlayAddr(0x8083216c);
     Player_StopCutscene Player_StopCutscene;
@@ -405,11 +405,11 @@ void Player_Action_FaroresWindText(Actor_Player* this, PlayState* play)
     }
 }
 
-typedef void (*Player_func_8082DAD4)(Actor_Player*);
-typedef PlayerAnimationHeader* (*Player_GetWaitAnimation)(Actor_Player*);
-typedef void (*Player_SetAction)(PlayState*, Actor_Player*, PlayerActionFunc, s32);
+typedef void (*Player_func_8082DAD4)(Player*);
+typedef PlayerAnimationHeader* (*Player_GetWaitAnimation)(Player*);
+typedef void (*Player_SetAction)(PlayState*, Player*, PlayerActionFunc, s32);
 
-s32 Player_CustomCsItem(Actor_Player* this, PlayState* play)
+s32 Player_CustomCsItem(Player* this, PlayState* play)
 {
     Player_func_8082DAD4 func_8082DAD4;
     Player_func_8083249C Player_func_8083249C;
@@ -445,7 +445,7 @@ s32 Player_CustomCsItem(Actor_Player* this, PlayState* play)
 }
 
 /* Written as a function because there are several uses for this */
-u8 Player_IsHumanChild(Actor_Player* player) {
+u8 Player_IsHumanChild(Player* player) {
     return (player->transformation == MM_PLAYER_FORM_HUMAN && !comboIsLinkAdult());
 }
 
@@ -474,7 +474,7 @@ s16 sBootData[7][18] = {
 
 void Player_CheckCustomBoots(PlayState* play)
 {
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
     if (player->transformation == MM_PLAYER_FORM_HUMAN)
     {
         s32 isAdult = comboIsLinkAdult();
@@ -545,7 +545,7 @@ void Player_CheckCustomBoots(PlayState* play)
     }
 }
 
-s32 Player_CustomUseItem(Actor_Player* this, PlayState* play, s32 itemAction)
+s32 Player_CustomUseItem(Player* this, PlayState* play, s32 itemAction)
 {
     s32 magicSpell = Player_ActionToMagicSpell(this, itemAction);
     if (magicSpell >= 0)
@@ -620,10 +620,10 @@ s32 Player_CustomUseItem(Actor_Player* this, PlayState* play, s32 itemAction)
     return 0;
 }
 
-typedef void (*Player_func_80833AA0)(Actor_Player*, PlayState*);
-typedef void (*Player_Draw)(Actor_Player*, PlayState*);
+typedef void (*Player_func_80833AA0)(Player*, PlayState*);
+typedef void (*Player_Draw)(Player*, PlayState*);
 
-void Player_Action_FaroresWindSpawning(Actor_Player* this, PlayState* play)
+void Player_Action_FaroresWindSpawning(Player* this, PlayState* play)
 {
     Player_func_80833AA0 Player_func_80833AA0;
     Player_Draw Player_Draw;
@@ -644,7 +644,7 @@ void Player_Action_FaroresWindSpawning(Actor_Player* this, PlayState* play)
     }
 }
 
-void Player_InitFaroresWindRespawn(PlayState* play, Actor_Player* this)
+void Player_InitFaroresWindRespawn(PlayState* play, Player* this)
 {
     Player_SetAction Player_SetAction = OverlayAddr(0x80831494);
     this->actor.draw = NULL;
@@ -657,7 +657,7 @@ void Player_AfterInit(PlayState* play)
     /* Displaced code: */
     Map_SetAreaEntrypoint(play);
 
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
 
     if (gSaveContext.nayrusLoveTimer != 0)
     {
@@ -965,7 +965,7 @@ static void DrawHammer(PlayState* play)
     CLOSE_DISPS();
 }
 
-static void DrawBootsIron(PlayState* play, Actor_Player* link)
+static void DrawBootsIron(PlayState* play, Player* link)
 {
     OPEN_DISPS(play->state.gfxCtx);
     if (comboIsLinkAdult())
@@ -984,7 +984,7 @@ static void DrawBootsIron(PlayState* play, Actor_Player* link)
     CLOSE_DISPS();
 }
 
-static void DrawBootsHover(PlayState* play, Actor_Player* link)
+static void DrawBootsHover(PlayState* play, Player* link)
 {
     OPEN_DISPS(play->state.gfxCtx);
     if (comboIsLinkAdult())
@@ -1005,7 +1005,7 @@ static void DrawBootsHover(PlayState* play, Actor_Player* link)
 
 void DrawChildGauntlets(PlayState* play);
 
-static void DrawGauntlets(PlayState* play, Actor_Player* link)
+static void DrawGauntlets(PlayState* play, Player* link)
 {
     OPEN_DISPS(play->state.gfxCtx);
     if (comboIsLinkAdult())
@@ -1049,7 +1049,7 @@ COSMETIC(MM_COLOR_TUNIC_KOKIRI, sTunicColors[0]);
 COSMETIC(MM_COLOR_TUNIC_GORON, sTunicColors[2]);
 COSMETIC(MM_COLOR_TUNIC_ZORA, sTunicColors[3]);
 
-void Player_SkelAnime_DrawFlexLod(PlayState* play, void** skeleton, Vec3s* jointTable, s32 dListCount, OverrideLimbDrawOpa overrideLimbDraw, PostLimbDrawOpa postLimbDraw, Actor_Player* player, s32 lod)
+void Player_SkelAnime_DrawFlexLod(PlayState* play, void** skeleton, Vec3s* jointTable, s32 dListCount, OverrideLimbDrawOpa overrideLimbDraw, PostLimbDrawOpa postLimbDraw, Player* player, s32 lod)
 {
     OPEN_DISPS(play->state.gfxCtx);
 
@@ -1145,7 +1145,7 @@ void Player_SkelAnime_DrawFlexLod(PlayState* play, void** skeleton, Vec3s* joint
     CLOSE_DISPS();
 }
 
-void Player_ColorAfterMask(GraphicsContext* gfxCtx, s32 maskIDMinusOne, PlayerMaskDList* maskDList, Actor_Player* player) {
+void Player_ColorAfterMask(GraphicsContext* gfxCtx, s32 maskIDMinusOne, PlayerMaskDList* maskDList, Player* player) {
     u32 dl = maskDList->maskDListEntry[maskIDMinusOne];
     gSPDisplayList(gfxCtx->polyOpa.append++, dl);
 
@@ -1162,7 +1162,7 @@ void Player_ColorAfterMask(GraphicsContext* gfxCtx, s32 maskIDMinusOne, PlayerMa
 
 PATCH_CALL(0x80124858, Player_SkelAnime_DrawFlexLod);
 
-u16 Player_GetFloorSfxByAge(Actor_Player* this, u16 sfxId) {
+u16 Player_GetFloorSfxByAge(Player* this, u16 sfxId) {
     if (GET_PLAYER_CUSTOM_BOOTS(this) == PLAYER_BOOTS_IRON)
     {
         switch (sfxId)
@@ -1179,7 +1179,7 @@ u16 Player_GetFloorSfxByAge(Actor_Player* this, u16 sfxId) {
 
 PATCH_FUNC(0x8082e0cc, Player_GetFloorSfxByAge);
 
-s32 Player_ShouldCheckItemUsabilityWhileSwimming(Actor_Player* player, u8 itemAction)
+s32 Player_ShouldCheckItemUsabilityWhileSwimming(Player* player, u8 itemAction)
 {
     switch (itemAction)
     {
@@ -1196,7 +1196,7 @@ s32 Player_ShouldCheckItemUsabilityWhileSwimming(Actor_Player* player, u8 itemAc
 
 f32 Player_GetEnvironmentWindSpeed(PlayState* play)
 {
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
     if (GET_PLAYER_CUSTOM_BOOTS(player) == PLAYER_BOOTS_IRON)
     {
         return 0.0f;
@@ -1206,7 +1206,7 @@ f32 Player_GetEnvironmentWindSpeed(PlayState* play)
     return play->envCtx.windSpeed;
 }
 
-s32 Player_IsBeingPushed(Actor_Player* this, PlayState* play)
+s32 Player_IsBeingPushed(Player* this, PlayState* play)
 {
     if (GET_PLAYER_CUSTOM_BOOTS(this) == PLAYER_BOOTS_IRON)
     {
@@ -1217,7 +1217,7 @@ s32 Player_IsBeingPushed(Actor_Player* this, PlayState* play)
     return this->pushedSpeed != 0.0f || this->windSpeed != 0.0f || play->envCtx.windSpeed >= 50.0f;
 }
 
-s32 Player_PlayHoverSound(Actor_Player* this, f32* arg1Ptr)
+s32 Player_PlayHoverSound(Player* this, f32* arg1Ptr)
 {
     /* Displaced code: */
     f32 arg1 = *arg1Ptr;
@@ -1245,9 +1245,9 @@ s32 Player_PlayHoverSound(Actor_Player* this, f32* arg1Ptr)
 
 typedef s32 (*Player_func_808340AC)(s32);
 typedef s32 (*Player_func_808340D4)(s32);
-typedef s32 (*Player_func_8083784C)(Actor_Player*);
+typedef s32 (*Player_func_8083784C)(Player*);
 
-static void Player_IncrementFloorTypeTimer(Actor_Player* this, s32* sPlayerFloorType)
+static void Player_IncrementFloorTypeTimer(Player* this, s32* sPlayerFloorType)
 {
     if (this->prevFloorType == *sPlayerFloorType)
     {
@@ -1260,7 +1260,7 @@ static void Player_IncrementFloorTypeTimer(Actor_Player* this, s32* sPlayerFloor
     }
 }
 
-s32 Player_UpdateHoverBoots(Actor_Player* this)
+s32 Player_UpdateHoverBoots(Player* this)
 {
     s32* sPlayerFloorType = OverlayAddr(0x80862B08);
     s16* sPlayerFloorPitchShape = OverlayAddr(0x80862B28);
@@ -1315,7 +1315,7 @@ s32 Player_UpdateHoverBoots(Actor_Player* this)
 
 PATCH_FUNC(0x808430E0, Player_UpdateHoverBoots);
 
-s32 Player_CheckHoverBoots(Actor_Player* player)
+s32 Player_CheckHoverBoots(Player* player)
 {
     if (player->hoverBootsTimer != 0)
     {
@@ -1327,7 +1327,7 @@ s32 Player_CheckHoverBoots(Actor_Player* player)
     return 0;
 }
 
-s32 Player_IsFloorSlippery(Actor_Player* player, s32 floorType)
+s32 Player_IsFloorSlippery(Player* player, s32 floorType)
 {
     if (GET_PLAYER_CUSTOM_BOOTS(player) == PLAYER_BOOTS_HOVER && !(player->stateFlags1 & ((1 < 27) | (1 << 29))))
     {
@@ -1339,13 +1339,13 @@ s32 Player_IsFloorSlippery(Actor_Player* player, s32 floorType)
     /* End displaced code */
 }
 
-s32 Player_IsGoronOrGoronTunic(Actor_Player* player)
+s32 Player_IsGoronOrGoronTunic(Player* player)
 {
     return player->transformation == MM_PLAYER_FORM_GORON || gSaveContext.save.itemEquips.tunic == PLAYER_TUNIC_GORON;
 }
 
 static u8 sFloorDamageDelay[] = { 120, 60 };
-s32 Player_ShouldTakeFloorDamage(Actor_Player* player, s32 isWallDamaging, s32 floorDamageType, s32 isFloorDamaging)
+s32 Player_ShouldTakeFloorDamage(Player* player, s32 isWallDamaging, s32 floorDamageType, s32 isFloorDamaging)
 {
     /* (floorDamageType < 0 && !isWallDamaging) never enters this code */
 
@@ -1374,7 +1374,7 @@ s32 Player_ShouldTakeFloorDamage(Actor_Player* player, s32 isWallDamaging, s32 f
 
 /* This skips the environment hazard text for hot rooms, but there are no hot rooms in MM. */
 s32 Player_GetEnvironmentalHazardCustom(PlayState* play) {
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
 
     if (play->roomCtx.curRoom.behaviorType2 == ROOM_BEHAVIOR_TYPE2_HOT)
     {
@@ -1410,13 +1410,13 @@ s32 Player_GetEnvironmentalHazardCustom(PlayState* play) {
 
 PATCH_FUNC(0x801242dc, Player_GetEnvironmentalHazardCustom);
 
-s32 Player_CanSurface(Actor_Player* player)
+s32 Player_CanSurface(Player* player)
 {
     return player->stateFlags1 & 0x08000000 /* PLAYER_STATE1_SWIM */
         && player->transformation == MM_PLAYER_FORM_ZORA;
 }
 
-s32 Player_GetItemCamMode(Actor_Player* this)
+s32 Player_GetItemCamMode(Player* this)
 {
     if (this->transformation == MM_PLAYER_FORM_HUMAN)
     {
@@ -1444,7 +1444,7 @@ static f32 sDiveDepths[] = { 120.0f, 240.0f, 360.0f };
 static u8 sDiveDoActions[] = { DO_ACTION_1, DO_ACTION_2, DO_ACTION_3, DO_ACTION_4,
                                DO_ACTION_5, DO_ACTION_6, DO_ACTION_7, DO_ACTION_8 };
 
-u8 Player_GetActionAWhileDiving(Actor_Player* this)
+u8 Player_GetActionAWhileDiving(Player* this)
 {
     s32 diveIndex = (sDiveDepths[gSaveContext.save.inventory.upgrades.scale] - this->actor.depthInWater) / 40.0f;
     diveIndex = CLAMP(diveIndex, 0, ARRAY_COUNT(sDiveDoActions) - 1);
@@ -1481,7 +1481,7 @@ void Player_PlaySfx_GiantsMask(u16 sfxId, Vec3f* pos, u8 token, f32* freqScale, 
 
 PATCH_CALL(0x8019f874, Player_PlaySfx_GiantsMask);
 
-u8 Player_AfterMaskLoaded(Actor_Player* player)
+u8 Player_AfterMaskLoaded(Player* player)
 {
     player->maskObjectLoadState = 0;
 
@@ -1519,7 +1519,7 @@ u8 Player_AfterMaskLoaded(Actor_Player* player)
     return player->currentMask;
 }
 
-s32 Player_OverrideLimbDrawGameplayDefault_Custom(PlayState* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor_Player* player)
+s32 Player_OverrideLimbDrawGameplayDefault_Custom(PlayState* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Player* player)
 {
     if (!Player_OverrideLimbDrawGameplayDefault(play, limbIndex, dList, pos, rot, player))
     {
@@ -1553,7 +1553,7 @@ static void Player_FormChangeDeleteEffects(void)
 
 static Vec3f sTransformPos;
 
-static void Player_FormChangeResetState(Actor_Player* this)
+static void Player_FormChangeResetState(Player* this)
 {
     this->actor.speed = 0.f;
     this->actor.velocity.x = 0.f;
@@ -1573,7 +1573,7 @@ static void Player_FormChangeResetState(Actor_Player* this)
     Player_FormChangeDeleteEffects();
 }
 
-static void Player_ToggleForm(PlayState* play, Actor_Player* link, int form)
+static void Player_ToggleForm(PlayState* play, Player* link, int form)
 {
     /* Sanity checks */
     if (link->actor.draw == NULL)
@@ -1603,7 +1603,7 @@ static void Player_ToggleForm(PlayState* play, Actor_Player* link, int form)
 
 static s8 sNextForm = -1;
 
-void Player_TryUpdateForm(Actor_Player* this, PlayState* play)
+void Player_TryUpdateForm(Player* this, PlayState* play)
 {
     if (!Config_Flag(CFG_MM_FAST_MASKS))
         return;
@@ -1628,9 +1628,9 @@ static void Player_ToggleFormDelayed(int form)
     Player_FormChangeDeleteEffects();
 }
 
-void Player_UseItem(PlayState* play, Actor_Player* this, s16 itemId)
+void Player_UseItem(PlayState* play, Player* this, s16 itemId)
 {
-    void (*Player_UseItemImpl)(PlayState* play, Actor_Player* this, s16 itemId);
+    void (*Player_UseItemImpl)(PlayState* play, Player* this, s16 itemId);
     u8 useDefault;
 
     useDefault = 1;
@@ -1667,7 +1667,7 @@ void Player_UseItem(PlayState* play, Actor_Player* this, s16 itemId)
 
 /* Hammer Stuff */
 
-s32 Player_CustomActionToModelGroup(Actor_Player* player, s32 itemAction) {
+s32 Player_CustomActionToModelGroup(Player* player, s32 itemAction) {
     if (itemAction == PLAYER_CUSTOM_IA_HAMMER) return 10; /* uses deku stick model group but does not draw deku stick because of the way the original draw code for it works */
 
     u8* sActionModelGroups = (u8*)0x801BFF3C; /* using original table also means original glitches, if that matters */
@@ -1685,9 +1685,9 @@ PATCH_FUNC(0x80123960, Player_CustomActionToModelGroup)
 /*
     first two arguments match Player_SetUpperAction which allows it to replace relevant calls in which the third argument would always be this->heldItemAction
 */
-void Player_SetCustomItemActionUpperFunc(PlayState* play, Actor_Player* player) {
+void Player_SetCustomItemActionUpperFunc(PlayState* play, Player* player) {
     PlayerUpperActionFunc* sPlayerUpperActionUpdateFuncs = (PlayerUpperActionFunc*)OverlayAddr(0x8085c9f0);
-    void (*Player_SetUpperAction)(PlayState* play, Actor_Player* this, PlayerUpperActionFunc upperActionFunc) = OverlayAddr(0x8082f43c);
+    void (*Player_SetUpperAction)(PlayState* play, Player* this, PlayerUpperActionFunc upperActionFunc) = OverlayAddr(0x8082f43c);
     s8 upperItemAction = player->heldItemAction;
 
     if (upperItemAction == PLAYER_CUSTOM_IA_HAMMER) {
@@ -1698,7 +1698,7 @@ void Player_SetCustomItemActionUpperFunc(PlayState* play, Actor_Player* player) 
     Player_SetUpperAction(play, player, sPlayerUpperActionUpdateFuncs[upperItemAction]);
 }
 
-void Player_RunCustomItemActionInitFunc(PlayState* play, Actor_Player* player, s32 itemAction) {
+void Player_RunCustomItemActionInitFunc(PlayState* play, Player* player, s32 itemAction) {
     PlayerInitItemActionFunc* sPlayerItemActionInitFuncs = (PlayerInitItemActionFunc*)OverlayAddr(0x8085cb3c);
 
     if (itemAction == PLAYER_CUSTOM_IA_HAMMER) {
@@ -1726,10 +1726,10 @@ PlayerMeleeWeapon Player_CustomMeleeWeaponFromIA(PlayerItemAction itemAction) {
 
 PATCH_FUNC(0x80124168, Player_CustomMeleeWeaponFromIA);
 
-void Player_GetCustomSwordLength(PlayState* play, Actor_Player* player) {
+void Player_GetCustomSwordLength(PlayState* play, Player* player) {
     Vec3f* D_801C0994 = (Vec3f*)0x801C0994;
     f32* sMeleeWeaponLengths = (f32*)0x801C0D78;
-    PlayerMeleeWeapon (*Player_GetMeleeWeaponHeld)(Actor_Player* this) = (void*)0x80124190;
+    PlayerMeleeWeapon (*Player_GetMeleeWeaponHeld)(Player* this) = (void*)0x80124190;
 
     if (player->itemAction == PLAYER_CUSTOM_IA_HAMMER) {
         D_801C0994->x = 2500.0f;
@@ -1742,11 +1742,11 @@ void Player_GetCustomSwordLength(PlayState* play, Actor_Player* player) {
 
 static MeleeWeaponDamageInfo megatonHammerDmgInfo = { DMG_GORON_PUNCH, 2, 4, 2, 4 };
 
-void Player_SetMeleeWeaponInfo(Actor_Player* this, PlayerMeleeWeaponAnimation meleeWeaponAnim) {
+void Player_SetMeleeWeaponInfo(Player* this, PlayerMeleeWeaponAnimation meleeWeaponAnim) {
     MeleeWeaponDamageInfo* D_8085D09C = OverlayAddr(0x8085D09C);
     MeleeWeaponDamageInfo* dmgInfo = &D_8085D09C[0];
-    PlayerMeleeWeapon (*Player_GetMeleeWeaponHeld)(Actor_Player* this) = (void*)0x80124190;
-    void (*func_80833728)(Actor_Player* this, s32 index, u32 dmgFlags, s32 damage) = OverlayAddr(0x80833728);
+    PlayerMeleeWeapon (*Player_GetMeleeWeaponHeld)(Player* this) = (void*)0x80124190;
+    void (*func_80833728)(Player* this, s32 index, u32 dmgFlags, s32 damage) = OverlayAddr(0x80833728);
 
     u32 dmgFlags;
     s32 damage;
@@ -1785,7 +1785,7 @@ static AttackAnimInfo sHammerAttackAnimInfo[] = {
     { (PlayerAnimationHeader*)0x0400E4D8, (PlayerAnimationHeader*)0x0400E4D0, (PlayerAnimationHeader*)0x0400E4C8, 2, 11 },
 };
 
-AttackAnimInfo* Player_GetMeleeAttackAnimInfo(void* a0, Actor_Player* player, PlayerMeleeWeaponAnimation meleeWeaponAnim) {
+AttackAnimInfo* Player_GetMeleeAttackAnimInfo(void* a0, Player* player, PlayerMeleeWeaponAnimation meleeWeaponAnim) {
     AttackAnimInfo* sMeleeAttackAnimInfo = OverlayAddr(0x8085cd30);
     AttackAnimInfo* ret = &sMeleeAttackAnimInfo[meleeWeaponAnim];
 
@@ -1800,7 +1800,7 @@ AttackAnimInfo* Player_GetMeleeAttackAnimInfo(void* a0, Actor_Player* player, Pl
     return ret;
 }
 
-s32 Player_IsHoldingTwoHandedWeapon(Actor_Player* player) {
+s32 Player_IsHoldingTwoHandedWeapon(Player* player) {
     if (((player->heldItemAction >= PLAYER_IA_SWORD_TWO_HANDED) && (player->heldItemAction <= PLAYER_IA_DEKU_STICK)) || (player->heldItemAction == PLAYER_CUSTOM_IA_HAMMER)) {
         return 1;
     }
@@ -1817,7 +1817,7 @@ static s8 sHammerAttackAnims[] = {
     PLAYER_MWA_RIGHT_SLASH_1H,
 };
 
-void Player_SpecialMeleeWeaponAnim(Actor_Player* this, void* a1, PlayerMeleeWeaponAnimation* animation) {
+void Player_SpecialMeleeWeaponAnim(Player* this, void* a1, PlayerMeleeWeaponAnimation* animation) {
     s32 temp_a1 = this->unk_AE3[this->unk_ADE];
 
     if (this->heldItemAction == PLAYER_CUSTOM_IA_HAMMER) {
@@ -1830,7 +1830,7 @@ void Player_SpecialMeleeWeaponAnim(Actor_Player* this, void* a1, PlayerMeleeWeap
     }
 }
 
-s32 Player_CanQuickspin(Actor_Player* this) {
+s32 Player_CanQuickspin(Player* this) {
     s8 sp3C[4];
     s8* iter;
     s8* iter2;
@@ -1905,15 +1905,15 @@ void Player_HammerBonkHakuginPost(BgHakuginPost* hakuginPost) {
     }
 }
 
-s32 Player_CollideMeleeWithWall(PlayState* play, Actor_Player* this) {
-    void (*func_808400CC)(PlayState* play, Actor_Player* this) = OverlayAddr(0x808400CC);
-    void (*func_80840094)(PlayState* play, Actor_Player* this) = OverlayAddr(0x80840094);
-    void (*Player_RequestRumble)(PlayState* play, Actor_Player* this, s32 sourceIntensity, s32 decayTimer, s32 decayStep, s32 distSq) = OverlayAddr(0x8082df48);
-    u8 (*func_8083FF30)(PlayState* play, Actor_Player* this) = OverlayAddr(0x8083FF30);
-    u8 (*func_8083FFEC)(PlayState* play, Actor_Player* this) = OverlayAddr(0x8083FFEC);
-    void (*func_80833B18)(PlayState* play, Actor_Player* this, s32 arg2, f32 speed, f32 velocityY, s16 arg5, s32 invincibilityTimer) = OverlayAddr(0x80833B18);
+s32 Player_CollideMeleeWithWall(PlayState* play, Player* this) {
+    void (*func_808400CC)(PlayState* play, Player* this) = OverlayAddr(0x808400CC);
+    void (*func_80840094)(PlayState* play, Player* this) = OverlayAddr(0x80840094);
+    void (*Player_RequestRumble)(PlayState* play, Player* this, s32 sourceIntensity, s32 decayTimer, s32 decayStep, s32 distSq) = OverlayAddr(0x8082df48);
+    u8 (*func_8083FF30)(PlayState* play, Player* this) = OverlayAddr(0x8083FF30);
+    u8 (*func_8083FFEC)(PlayState* play, Player* this) = OverlayAddr(0x8083FFEC);
+    void (*func_80833B18)(PlayState* play, Player* this, s32 arg2, f32 speed, f32 velocityY, s16 arg5, s32 invincibilityTimer) = OverlayAddr(0x80833B18);
     void (*func_8082DF2C)(PlayState* play) = OverlayAddr(0x8082DF2C);
-    void (*Player_RequestQuakeAndRumble)(PlayState* play, Actor_Player* this, u16 sfxId) = OverlayAddr(0x8083fe90);
+    void (*Player_RequestQuakeAndRumble)(PlayState* play, Player* this, u16 sfxId) = OverlayAddr(0x8083fe90);
 
     if (this->meleeWeaponState >= 1) {
         s32 temp_v0_3;
@@ -2059,11 +2059,11 @@ s32 Player_CollideMeleeWithWall(PlayState* play, Actor_Player* this) {
     return 0;
 }
 
-void Player_HammerShockwaveCheck(PlayState* play, Actor_Player* this) {
+void Player_HammerShockwaveCheck(PlayState* play, Player* this) {
     /* Can be moved */
-    void (*Player_RequestQuakeAndRumble)(PlayState* play, Actor_Player* this, u16 sfxId) = OverlayAddr(0x8083fe90);
-    f32 (*func_80835CD8)(PlayState* play, Actor_Player* this, Vec3f* arg2, Vec3f* pos, CollisionPoly** outPoly, s32* outBgId) = OverlayAddr(0x80835CD8);
-    s32 (*func_80832754)(Actor_Player* this, s32 arg1) = OverlayAddr(0x80832754);
+    void (*Player_RequestQuakeAndRumble)(PlayState* play, Player* this, u16 sfxId) = OverlayAddr(0x8083fe90);
+    f32 (*func_80835CD8)(PlayState* play, Player* this, Vec3f* arg2, Vec3f* pos, CollisionPoly** outPoly, s32* outBgId) = OverlayAddr(0x80835CD8);
+    s32 (*func_80832754)(Player* this, s32 arg1) = OverlayAddr(0x80832754);
 
     if (!PlayerAnimation_OnFrame(&this->skelAnime, this->skelAnime.endFrame) && this->heldItemAction == PLAYER_CUSTOM_IA_HAMMER) { // OoT floor bonk function, originally somewhere else completely
         if ((this->meleeWeaponAnimation == PLAYER_MWA_FORWARD_SLASH_2H) ||

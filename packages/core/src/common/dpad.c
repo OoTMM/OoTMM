@@ -36,7 +36,7 @@ static int canShowDpad(void)
 
 static int canUseDpad(PlayState* play)
 {
-    Actor_Player* link;
+    Player* link;
 
     link = GET_PLAYER(play);
     if (!canShowDpad())
@@ -48,7 +48,7 @@ static int canUseDpad(PlayState* play)
 
 static int canUseDpadItem(PlayState* play, s16 itemId, int flags)
 {
-    Actor_Player* link;
+    Player* link;
     int isEquip;
 
     link = GET_PLAYER(play);

@@ -133,7 +133,7 @@ u8 Ocarina_BeforeSongPlayingProcessed(PlayState* ctxt)
     return songPlayed;
 }
 
-void Ocarina_HandleWarp(Actor_Player* player, PlayState* play)
+void Ocarina_HandleWarp(Player* player, PlayState* play)
 {
     int messageState;
     if (sWarpSongPlayed >= 0 && sWarpSongPlayed <= 5)
@@ -164,7 +164,7 @@ void Ocarina_HandleWarp(Actor_Player* player, PlayState* play)
                 player->stateFlags1 &= ~0x20000000; /* PLAYER_STATE1_TIME_STOP */
                 player->csMode = 0; /* csMode = PLAYER_CSMODE_0; */
 
-                void (*Player_func_8085B28C)(PlayState* play, Actor_Player* link, s32 csMode);
+                void (*Player_func_8085B28C)(PlayState* play, Player* link, s32 csMode);
                 Player_func_8085B28C = OverlayAddr(0x8085B28C);
                 Player_func_8085B28C(play, NULL, 19);
 

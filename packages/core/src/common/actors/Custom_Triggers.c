@@ -24,7 +24,7 @@ ComboTriggersData gComboTriggersData;
 
 int CustomTriggers_GiveItem(Actor_CustomTriggers* this, PlayState* play, const ComboItemQuery* q)
 {
-    Actor_Player* link;
+    Player* link;
 
     link = GET_PLAYER(play);
     if (link->stateFlags1 & PLAYER_ACTOR_STATE_GET_ITEM)
@@ -60,7 +60,7 @@ int CustomTriggers_GiveItemDirect(Actor_CustomTriggers* this, PlayState* play, s
 
 int CustomTrigger_ItemSafe(Actor_CustomTriggers* this, PlayState* play)
 {
-    Actor_Player* link;
+    Player* link;
 
     link = GET_PLAYER(play);
     if (link->stateFlags1 & (PLAYER_ACTOR_STATE_GET_ITEM | PLAYER_ACTOR_STATE_CUTSCENE_FROZEN))
@@ -154,7 +154,7 @@ static void CustomTriggers_Fini(Actor_CustomTriggers* this, PlayState* play)
 static void CustomTriggers_Update(Actor_CustomTriggers* this, PlayState* play)
 {
     /* Always be near link */
-    Actor_Player* link;
+    Player* link;
     link = GET_PLAYER(play);
     if (link)
     {

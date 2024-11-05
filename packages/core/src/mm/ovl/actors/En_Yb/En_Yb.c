@@ -345,7 +345,7 @@ void EnYb_TeachingDance(Actor_EnYb* this, PlayState* play) {
 }
 
 void EnYb_Idle(Actor_EnYb* this, PlayState* play) {
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
 
     EnYb_UpdateAnimation(this, play);
     if ((this->actor.xzDistToPlayer < 180.0f) && (fabsf(this->actor.yDistanceFromLink) < 50.0f) &&

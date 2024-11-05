@@ -54,7 +54,7 @@ static void EnXc_Update_DeathMountainCrater(Actor* actor, PlayState* play)
 
 static void EnXc_Update_IceCavern(Actor* actor, PlayState* play)
 {
-    Actor_Player* link;
+    Player* link;
     static int lagFrame = 0;
 
     if (checkSetEvent(actor, EV_OOT_CHK_SONG_TP_WATER))

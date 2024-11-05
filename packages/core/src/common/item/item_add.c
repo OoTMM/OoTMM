@@ -163,7 +163,7 @@ void reloadSlotMm(PlayState* play, int slot)
 #if defined(GAME_MM)
 static void reloadHookshot(PlayState* play)
 {
-    Actor_Player* link;
+    Player* link;
 
     if (play)
     {

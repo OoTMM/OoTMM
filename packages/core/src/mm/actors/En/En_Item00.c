@@ -25,7 +25,7 @@ static void EnItem00_ItemQuery(ComboItemQuery* q, Actor_EnItem00* this, PlayStat
 void EnItem00_GiveItem(Actor_EnItem00* this, PlayState* play, s16 gi, float a, float b)
 {
     ComboItemQuery q;
-    Actor_Player* link;
+    Player* link;
     s16 itemId;
 
     EnItem00_ItemQuery(&q, this, play, gi);

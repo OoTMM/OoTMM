@@ -244,7 +244,7 @@ PATCH_CALL(0x80a75510, EnDns_TalkedTo);
 
 static int EnDns_HasGivenItem(Actor* this)
 {
-    Actor_Player* link;
+    Player* link;
     int id;
 
     link = GET_PLAYER(gPlay);

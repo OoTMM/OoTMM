@@ -432,7 +432,7 @@ void comboPlayerAddItem(PlayState* play, s16 gi)
 #endif
 
     Actor* chest;
-    Actor_Player* player;
+    Player* player;
     ComboItemQuery q = ITEM_QUERY_INIT;
     ComboItemOverride o;
 

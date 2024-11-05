@@ -116,7 +116,7 @@ int comboSilverRupeesIncCount(PlayState* play, int id)
         gOotSave.perm[data->sceneId].switches |= (1 << data->flag);
 
 #if defined(GAME_OOT)
-        Actor_Player* link;
+        Player* link;
 
         if (play && play->sceneId == data->sceneId)
         {

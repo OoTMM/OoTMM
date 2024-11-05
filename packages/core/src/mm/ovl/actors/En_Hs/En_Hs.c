@@ -46,7 +46,7 @@ Vec3f D_8095393C = { 300.0f, 1000.0f, 0.0f };
 
 void func_80952C50(Actor_EnHs* this, PlayState* play)
 {
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(this->nwcPos); i++)
@@ -109,7 +109,7 @@ void EnHs_UpdateChickPos(Vec3f* dst, Vec3f src, f32 offset)
 
 void func_80952F00(Actor_EnHs* this, PlayState* play)
 {
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
     s32 i;
     f32 offset;
 

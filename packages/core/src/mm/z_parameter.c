@@ -111,7 +111,7 @@ s32 Items_ShouldCheckItemUsabilityWhileSwimming(PlayState* play, u8 item)
         return 0;
     }
 
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
     if (player->transformation == MM_PLAYER_FORM_HUMAN)
     {
         switch (item)
@@ -134,7 +134,7 @@ s32 Items_ShouldCheckItemUsabilityWhileSwimming(PlayState* play, u8 item)
     return 1;
 }
 
-s32 Interface_ShouldStartHazardTimer(Actor_Player* player, s16 envHazard)
+s32 Interface_ShouldStartHazardTimer(Player* player, s16 envHazard)
 {
     return envHazard == PLAYER_ENV_HAZARD_HOTROOM
         || envHazard == PLAYER_ENV_HAZARD_UNDERWATER_FREE

@@ -313,7 +313,7 @@ static void DebugHandler_Reload(int trigger)
 #else
 static void DebugHandler_Reload(int trigger)
 {
-    Actor_Player* link;
+    Player* link;
 
     link = GET_PLAYER(gPlay);
     setPage(DEBUGMENU_PAGE_NONE);

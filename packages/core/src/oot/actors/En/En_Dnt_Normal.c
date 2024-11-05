@@ -10,7 +10,7 @@ static void EnDntNormal_Noop(Actor* this, PlayState* play)
 
 static void EnDntNormal_GiveReward(Actor* this, PlayState* play)
 {
-    Actor_Player* link;
+    Player* link;
 
     if (Actor_HasParentZ(this))
     {

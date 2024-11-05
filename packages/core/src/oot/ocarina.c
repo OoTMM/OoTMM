@@ -95,7 +95,7 @@ static void changeAgeMessage(PlayState* play, s32 toChild)
     comboTextAppendStr(&b, TEXT_CZ "?" TEXT_NL TEXT_NL TEXT_COLOR_GREEN TEXT_CHOICE2 "OK" TEXT_NL "No" TEXT_END);
 }
 
-void Ocarina_HandleLastPlayedSong(PlayState* play, Actor_Player* player, s16 lastPlayedSong)
+void Ocarina_HandleLastPlayedSong(PlayState* play, Player* player, s16 lastPlayedSong)
 {
     s32 canChangeAge;
 
@@ -233,7 +233,7 @@ static void soaringNoStatuesMessage(PlayState* play)
 
 static void HandleSoaring(PlayState* play)
 {
-    Actor_Player* link;
+    Player* link;
     int msgState;
     int songId;
     if (play->pauseCtx.state == 0)
@@ -391,7 +391,7 @@ Actor_CustomEnTorch2* gElegyShell;
 static void HandleElegy(PlayState* play)
 {
     sInCustomSong = CUSTOM_SONG_NONE;
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
 
     if (gElegyShell != NULL)
     {
@@ -554,7 +554,7 @@ u8 Ocarina_BeforeSongPlayingProcessed(PlayState* play)
     return songPlayed;
 }
 
-void Ocarina_HandleCustomSongs(Actor_Player* player, PlayState* play)
+void Ocarina_HandleCustomSongs(Player* player, PlayState* play)
 {
     switch (sInCustomSong)
     {

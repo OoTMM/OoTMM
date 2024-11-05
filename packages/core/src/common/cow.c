@@ -245,7 +245,7 @@ static void EnCow_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float 
 {
     Actor* cow;
     ComboItemQuery q;
-    Actor_Player* link;
+    Player* link;
 
     /* Get the nearest cow */
     cow = EnCow_GetNearestCow(play);
@@ -265,7 +265,7 @@ static void EnCow_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float 
 
 static int EnCow_HasGivenItem(Actor* this)
 {
-    Actor_Player* link;
+    Player* link;
 
     link = GET_PLAYER(gPlay);
     if (Actor_HasParentZ(this) && !(link->stateFlags1 & PLAYER_ACTOR_STATE_GET_ITEM))

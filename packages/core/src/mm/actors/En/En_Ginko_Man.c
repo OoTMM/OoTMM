@@ -139,7 +139,7 @@ static int EnGinkoMan_Reward(void)
 
 static void EnGinkoMan_GiveRewardHandler(Actor* this, PlayState* play)
 {
-    Actor_Player* link;
+    Player* link;
 
     link = GET_PLAYER(play);
     if (link->stateFlags1 & PLAYER_ACTOR_STATE_GET_ITEM)

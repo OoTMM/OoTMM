@@ -432,7 +432,7 @@ int Multi_IsMarkedMm(PlayState* play, u8 ovType, u8 sceneId, u8 roomId, u8 id)
 
 static void processMessagesSendPlayerPos(PlayState* play, NetContext* net)
 {
-    Actor_Player* link;
+    Player* link;
     int index;
     NetMsg* msg;
 
@@ -603,7 +603,7 @@ void Multi_ResetWisps(void)
 
 static int Multi_CanReceiveItem(PlayState* play)
 {
-    Actor_Player* link;
+    Player* link;
 
     if (gSaveContext.gameMode || (gSaveContext.minigameState == 1))
         return 0;

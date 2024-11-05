@@ -658,7 +658,7 @@ void hookPlay_Init(PlayState* play)
 
 void Play_UpdateWrapper(PlayState* play)
 {
-    Actor_Player* link;
+    Player* link;
     /* Auto-press A during credits */
     if (g.isCredits)
         play->state.input[0].press.button = (play->state.frameCount & 1) ? A_BUTTON : 0;
@@ -739,7 +739,7 @@ void Play_TransitionDone(PlayState* play)
 
 void Play_SetupRespawnPointRaw(PlayState* play, int respawnId, int playerParams)
 {
-    Actor_Player* link;
+    Player* link;
 
     link = GET_PLAYER(play);
     Play_SetRespawnData(play, respawnId, gSave.entrance, gPlay->roomCtx.curRoom.num, playerParams, &link->actor.world.pos, link->actor.shape.rot.y);

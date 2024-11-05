@@ -358,7 +358,7 @@ static int GetRoomClearFlagForActor(PlayState* play, int flag)
 
 PATCH_CALL(0x80025284, GetRoomClearFlagForActor);
 
-static int shouldActorIgnorePlayer(Actor* this, Actor_Player* link)
+static int shouldActorIgnorePlayer(Actor* this, Player* link)
 {
     u16 variable;
 

@@ -3,7 +3,7 @@
 
 void EnDekubaba_GiveItemDefaultRange(Actor* this, PlayState* play, s16 gi)
 {
-    Actor_Player* link;
+    Player* link;
     float dist;
 
     link = GET_PLAYER(play);

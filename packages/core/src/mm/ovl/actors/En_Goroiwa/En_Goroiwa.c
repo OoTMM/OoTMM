@@ -1097,7 +1097,7 @@ void func_80941A10(Actor_EnGoroiwa* this, PlayState* play) {
         { NA_SE_EV_BIGBALL_ROLL_3 - SFX_FLAG, NA_SE_EV_BIGBALL_ROLL_SR_3 - SFX_FLAG },
         { NA_SE_EV_BIGBALL_ROLL - SFX_FLAG, NA_SE_EV_BIGBALL_ROLL_SR - SFX_FLAG },
     };
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
     s32 sp44 = ENGOROIWA_GET_400(&this->actor);
     s32 sp40 = ENGOROIWA_GET_3000(&this->actor);
     s16 y;
@@ -1230,7 +1230,7 @@ void func_80941F54(Actor_EnGoroiwa* this) {
 }
 
 void func_80941FA4(Actor_EnGoroiwa* this, PlayState* play) {
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
 
     if (func_8094156C(this, play) == 0) {
         if ((this->collider.base.atFlags & AT_HIT) && !(player->stateFlags3 & (1 << 19))) {
@@ -1258,7 +1258,7 @@ void func_80942084(Actor_EnGoroiwa* this) {
 }
 
 void func_809420F0(Actor_EnGoroiwa* this, PlayState* play) {
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
 
     if (func_8094156C(this, play) == 0) {
         if ((this->collider.base.atFlags & AT_HIT) && !(player->stateFlags3 & (1 << 19))) {
@@ -1390,7 +1390,7 @@ void func_80942604(Actor_EnGoroiwa* this, PlayState* play) {
 }
 
 void EnGoroiwa_Update(Actor_EnGoroiwa* this, PlayState* play) {
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
     s32 bgId;
     s32 sp5C = FALSE;
     Vec3f sp50;

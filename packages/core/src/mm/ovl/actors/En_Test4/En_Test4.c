@@ -78,7 +78,7 @@ void EnTest4_HandleDayNightSwapFromInit(Actor_EnTest4* this, PlayState* play)
 
 static void EnTest4_Reload(PlayState* play)
 {
-    Actor_Player* link;
+    Player* link;
 
     link = GET_PLAYER(play);
     Play_SetRespawnData(gPlay, 1, gSave.entrance, gPlay->roomCtx.curRoom.num, 0xdff, &link->actor.world.pos, link->actor.shape.rot.y);
@@ -288,7 +288,7 @@ void EnTest4_GetBellTimeAndShrinkScreenBeforeDay3(Actor_EnTest4* this, PlayState
 void EnTest4_Init(Actor_EnTest4* this, PlayState* play)
 {
     u32 eventDayCount;
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
     s8 csId = this->actor.csId;
 
     sCsIdList[THREEDAY_DAYTIME_NIGHT] = csId;
@@ -374,7 +374,7 @@ void EnTest4_HandleEvents(Actor_EnTest4* this, PlayState* play)
 {
     static u16 sDayNightTransitionTimes[THREEDAY_DAYTIME_MAX] =
     { CLOCK_TIME(6, 0), CLOCK_TIME(18, 0) };
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
 
     if ((play->transitionMode == 0) && !Play_InCsMode(play) && (play->numSetupActors <= 0) &&
         (play->roomCtx.status == 0) && !Play_IsDebugCamEnabled())
@@ -502,7 +502,7 @@ void EnTest4_HandleCutscene(Actor_EnTest4* this, PlayState* play)
         }
         if (this->transitionCsTimer == 60)
         {
-            Actor_Player* player = GET_PLAYER(play);
+            Player* player = GET_PLAYER(play);
 
             gMmSave.time += CLOCK_TIME(0, 1);
             this->prevTime = CURRENT_TIME;
@@ -677,7 +677,7 @@ void EnTest4_Update(Actor_EnTest4* this, PlayState* play)
     if (!BITMAP8_GET(gSave.eventInf, 0x0f))
         EnTest4_CheckTimeSkip(this, play);
 
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
 
     if (player->stateFlags1 & PLAYER_STATE1_MM_2) return;
 

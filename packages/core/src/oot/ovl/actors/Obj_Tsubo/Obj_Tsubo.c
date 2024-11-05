@@ -393,7 +393,7 @@ void ObjTsubo_SetupLiftedUp(Actor_ObjTsubo* this)
     this->actionFunc = ObjTsubo_LiftedUp;
     this->actor.room = -1;
     //! @bug: This is an unsafe cast, although the sound effect will still play
-    Player_PlaySfx((Actor_Player*)&this->actor, NA_SE_PL_PULL_UP_POT);
+    Player_PlaySfx((Player*)&this->actor, NA_SE_PL_PULL_UP_POT);
     this->actor.flags |= ACTOR_FLAG_OOT_4;
 }
 

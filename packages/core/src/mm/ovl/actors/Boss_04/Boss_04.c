@@ -213,7 +213,7 @@ void func_809EC544(Actor_Boss04* this) {
 }
 
 void func_809EC568(Actor_Boss04* this, PlayState* play) {
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
     f32 x;
     f32 y;
     f32 z;
@@ -399,7 +399,7 @@ void func_809ECD00(Actor_Boss04* this, PlayState* play) {
 }
 
 void func_809ECD18(Actor_Boss04* this, PlayState* play) {
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
 
     if (this->unk_1F4 >= 0x500) {
         this->unk_1F4 -= 0x300;

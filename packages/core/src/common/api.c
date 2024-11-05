@@ -1,9 +1,9 @@
 #include <combo.h>
 
 extern int Player_AddItemWithIcon[];
-typedef u8 (*AddItemWithIconFn)(PlayState*, Actor_Player*, const GetItem*);
+typedef u8 (*AddItemWithIconFn)(PlayState*, Player*, const GetItem*);
 
-u8 AddItemWithIcon(PlayState* play, Actor_Player* link, const GetItem* giEntry)
+u8 AddItemWithIcon(PlayState* play, Player* link, const GetItem* giEntry)
 {
     AddItemWithIconFn fn;
 

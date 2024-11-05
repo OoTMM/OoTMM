@@ -14,7 +14,7 @@ static void EnMm_AfterMaskTrade(Actor* this, PlayState* play)
 
 static void EnMm_MaskTradeCheck(Actor* this, PlayState* play)
 {
-    Actor_Player* link;
+    Player* link;
 
     link = GET_PLAYER(play);
     if (link->stateFlags1 & PLAYER_ACTOR_STATE_GET_ITEM)
@@ -58,7 +58,7 @@ static void EnMm_InitMaskTrade(Actor* this, PlayState* play)
 
 static int EnMm_ActorTalkedTo(Actor* this)
 {
-    Actor_Player* link;
+    Player* link;
     int ret;
 
     link = GET_PLAYER(gPlay);

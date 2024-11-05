@@ -176,7 +176,7 @@ void comboMqKaleidoHook(PlayState* play);
 extern PlayState* gPlay;
 
 #if defined(GAME_MM)
-void Ocarina_HandleWarp(Actor_Player* player, PlayState* ctxt);
+void Ocarina_HandleWarp(Player* player, PlayState* ctxt);
 #endif
 
 #if defined(GAME_MM)

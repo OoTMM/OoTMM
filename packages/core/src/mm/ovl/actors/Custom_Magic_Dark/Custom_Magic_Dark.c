@@ -48,7 +48,7 @@ static Gfx sDiamondModelDL[8] = {
     gsSPEndDisplayList(),
 };
 
-static f32 MagicDark_GetScale(Actor_Player* player)
+static f32 MagicDark_GetScale(Player* player)
 {
     switch (player->transformation)
     {
@@ -68,7 +68,7 @@ static f32 MagicDark_GetScale(Actor_Player* player)
 
 void MagicDark_Init(Actor* thisx, PlayState* play) {
     MagicDark* this = (MagicDark*)thisx;
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
 
     this->scale = MagicDark_GetScale(player);
 
@@ -98,7 +98,7 @@ void MagicDark_Destroy(Actor* thisx, PlayState* play) {
 void MagicDark_DiamondUpdate(Actor* thisx, PlayState* play) {
     MagicDark* this = (MagicDark*)thisx;
     u8 phi_a0;
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
     s16 nayrusLoveTimer = gSaveContext.nayrusLoveTimer;
     /* s32 msgMode = play->msgCtx.msgMode; */
 
@@ -202,7 +202,7 @@ void MagicDark_DimLighting(PlayState* play, f32 intensity) {
 
 void MagicDark_OrbUpdate(Actor* thisx, PlayState* play) {
     MagicDark* this = (MagicDark*)thisx;
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
 
     PlayLoopingSfxAtActor(&this->actor, NA_SE_PL_MAGIC_SOUL_BALL - SFX_FLAG);
     if (this->timer < 35) {
@@ -237,7 +237,7 @@ void MagicDark_DiamondDraw(Actor* thisx, PlayState* play) {
     Gfx_SetupDL25_Xlu(play->state.gfxCtx);
 
     {
-        Actor_Player* player = GET_PLAYER(play);
+        Player* player = GET_PLAYER(play);
         f32 heightDiff;
 
         this->actor.world.pos.x = player->bodyPartsPos[PLAYER_BODYPART_WAIST].x;
@@ -284,7 +284,7 @@ void MagicDark_DiamondDraw(Actor* thisx, PlayState* play) {
 void MagicDark_OrbDraw(Actor* thisx, PlayState* play) {
     MagicDark* this = (MagicDark*)thisx;
     Vec3f pos;
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
     f32 sp6C = play->state.frameCount & 0x1F;
 
     if (this->timer < 32) {

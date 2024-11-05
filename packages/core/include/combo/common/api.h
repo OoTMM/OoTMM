@@ -10,7 +10,7 @@ typedef struct PlayState PlayState;
 typedef struct ActorContext ActorContext;
 typedef struct TitleCardContext TitleCardContext;
 typedef struct Actor Actor;
-typedef struct Actor_Player Actor_Player;
+typedef struct Player Player;
 typedef struct DynaCollisionContext DynaCollisionContext;
 typedef struct AnimationHeader AnimationHeader;
 typedef enum PlayerItemAction PlayerItemAction;
@@ -186,7 +186,7 @@ void AddMagic(PlayState* play, s16 amount);
 #endif
 
 u8 AddItem(PlayState* play, u8 itemId);
-u8 AddItemWithIcon(PlayState* play, Actor_Player* link, const GetItem* giEntry);
+u8 AddItemWithIcon(PlayState* play, Player* link, const GetItem* giEntry);
 u8 GetItemCollectBehavior(s16 itemId);
 void Interface_SetDoAction(PlayState* play, u16 action);
 void Interface_LoadActionLabelB(PlayState* play, u16 action);
@@ -205,7 +205,7 @@ extern u32 gSegments[16];
 
 #define SEGMENTED_TO_VIRTUAL(addr)  (void*)(gSegments[SEGMENT_NUMBER(addr)] + SEGMENT_OFFSET(addr) + K0BASE)
 
-#define GET_PLAYER(play) ((Actor_Player*)(play->actorCtx.actors[2].first))
+#define GET_PLAYER(play) ((Player*)(play->actorCtx.actors[2].first))
 
 int  ActorCutscene_GetCanPlayNext(int cutscene);
 s16  ActorCutscene_GetCurrentIndex(void);
@@ -232,7 +232,7 @@ void Play_Init(PlayState*);
 void Play_Update(PlayState*);
 
 void Interface_LoadItemIconImpl(PlayState* play, int slot);
-void UpdateEquipment(PlayState* play, Actor_Player* link);
+void UpdateEquipment(PlayState* play, Player* link);
 
 void PlayStoreFlags(PlayState* play);
 Camera* Play_GetCamera(PlayState* this, s16 camId);
@@ -336,8 +336,8 @@ void Inventory_SetWorldMapCloudVisibility(s16 tingleId);
 void Font_LoadOrderedFont(Font* font);
 
 void Horse_ForceUnmount(PlayState* play);
-void Horse_Spawn(PlayState* play, Actor_Player* link);
-void Horse_SpawnOverworld(PlayState* play, Actor_Player* link);
+void Horse_Spawn(PlayState* play, Player* link);
+void Horse_SpawnOverworld(PlayState* play, Player* link);
 
 #if defined(GAME_MM)
 extern int gHorseIsMounted;

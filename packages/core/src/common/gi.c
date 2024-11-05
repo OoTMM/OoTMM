@@ -2,7 +2,7 @@
 #include <combo/custom.h>
 #include <combo/player.h>
 
-void comboLoadObjectGi(Actor_Player* player, u16 objectId)
+void comboLoadObjectGi(Player* player, u16 objectId)
 {
     if (objectId & ~MASK_FOREIGN_OBJECT)
     {

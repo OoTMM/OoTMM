@@ -10,7 +10,7 @@ static void Message_ForceCancel(PlayState* play)
 
 void EnRz_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 {
-    Actor_Player* link;
+    Player* link;
 
     link = GET_PLAYER(play);
     if (link->stateFlags1 & PLAYER_ACTOR_STATE_GET_ITEM)

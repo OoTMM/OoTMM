@@ -79,7 +79,7 @@ int DoorWarp1_Collide(Actor* this, PlayState* play)
 
 int DoorWarp1_ShouldTrigger(Actor* this, PlayState* play)
 {
-    Actor_Player* link;
+    Player* link;
     int id;
     const BlueWarpData* data;
     s16 gi;

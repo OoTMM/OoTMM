@@ -139,7 +139,7 @@ void MagicFire_Destroy(Actor_CustomMagicFire* this, PlayState* play)
 
 void MagicFire_Update(Actor_CustomMagicFire* this, PlayState* play)
 {
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
 
     this->actor.world.pos = player->actor.world.pos;
 
@@ -232,7 +232,7 @@ void MagicFire_Update(Actor_CustomMagicFire* this, PlayState* play)
 
 void MagicFire_UpdateBeforeCast(Actor_CustomMagicFire* this, PlayState* play)
 {
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
 
     /* See `ACTOROVL_ALLOC_ABSOLUTE` */
     /*! @bug This condition is too broad, the actor will also be killed by warp songs. But warp songs do not use an */

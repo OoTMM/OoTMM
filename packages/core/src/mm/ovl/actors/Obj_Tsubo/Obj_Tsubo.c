@@ -625,7 +625,7 @@ void func_809289E4(Actor_ObjTsubo* this, PlayState* play)
         func_80927818(this, play, 0);
         //! @bug: This function should only pass Player*: it uses *(this + 0x153), which is meant to be
         //! player->currentMask, but in this case is garbage in the collider
-        Player_PlaySfx((Actor_Player*)&this->actor, NA_SE_PL_PULL_UP_POT);
+        Player_PlaySfx((Player*)&this->actor, NA_SE_PL_PULL_UP_POT);
         func_80928D6C(this);
     }
     else if ((this->unk_19b != 0) || (acHit && (this->collider.elem.acHitElem->atDmgInfo.dmgFlags & 0x058BFFBC)))

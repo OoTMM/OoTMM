@@ -49,7 +49,7 @@ static void EnItem00_DrawXflag(Actor_EnItem00* this, PlayState* play)
 
 static int EnItem00_XflagCanCollect(Actor_EnItem00* this, PlayState* play)
 {
-    Actor_Player* link;
+    Player* link;
 
     link = GET_PLAYER(play);
     if (link->stateFlags1 & (PLAYER_ACTOR_STATE_FROZEN | PLAYER_ACTOR_STATE_EPONA))

@@ -6,7 +6,7 @@
 
 static void EnMa4_HandleLearnSongEpona(Actor* this, PlayState* play)
 {
-    Actor_Player* link;
+    Player* link;
     void* handler;
 
     link = GET_PLAYER(play);

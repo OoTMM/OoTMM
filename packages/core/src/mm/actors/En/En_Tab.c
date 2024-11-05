@@ -97,7 +97,7 @@ void EnTab_GiveItem(Actor* this, PlayState* play, s16 gi, float a, float b)
 {
     ComboItemQuery q;
     ComboItemOverride o;
-    Actor_Player* link;
+    Player* link;
     int sc;
 
     link = GET_PLAYER(play);

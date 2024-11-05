@@ -38,7 +38,7 @@ void Horse_ForceUnmount(PlayState* play)
     }
 }
 
-void Horse_SpawnWrapper(PlayState* play, Actor_Player* link)
+void Horse_SpawnWrapper(PlayState* play, Player* link)
 {
     if (!Horse_IsValidEntrance(gSave.entrance))
         Horse_ForceUnmount(play);

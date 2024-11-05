@@ -132,7 +132,7 @@ void func_80953E38(PlayState* play) {
 }
 
 void func_80953EA4(Actor_BgIngate* this, PlayState* play) {
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
 
     Player_SetCsActionWithHaltedActors(play, &this->dyna.actor, PLAYER_CSACTION_58);
     player->unk_3A0.x = this->dyna.actor.world.pos.x;
@@ -143,7 +143,7 @@ void func_80953EA4(Actor_BgIngate* this, PlayState* play) {
 }
 
 void func_80953F14(Actor_BgIngate* this, PlayState* play) {
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
 
     player->actor.shape.rot.y = this->dyna.actor.shape.rot.y;
     player->actor.world.rot.y = player->actor.shape.rot.y;
@@ -162,7 +162,7 @@ void func_80953F8C(Actor_BgIngate* this, PlayState* play) {
 }
 
 void BgIngate_EndCruise(Actor_BgIngate* this, PlayState* play) {
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
     Camera* mainCam = Play_GetCamera(play, CAM_ID_MAIN);
 
     if (!MM_CHECK_EVENT_INF(EVENTINF_40)) {
@@ -210,7 +210,7 @@ void BgIngate_EndCruise(Actor_BgIngate* this, PlayState* play) {
 }
 
 void func_809541B8(Actor_BgIngate* this, PlayState* play) {
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
 
     if (this->flags & 0x4) {
         if ((player->transformation == MM_PLAYER_FORM_HUMAN) && (player->actor.bgCheckFlags & BGCHECKFLAG_GROUND) &&

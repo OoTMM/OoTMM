@@ -120,7 +120,7 @@ Actor_EnHs* EnNwc_FindGrog(PlayState* play)
 
 s32 EnNwc_PlayerReleasedBremanMarch(Actor_EnNwc* this, PlayState* play)
 {
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
 
     // Weird: home.rot.x holds count of chicks having transformed into adult.
     // Weird: Its incremented by 1 unlike chicks following, so it should max at 10.
@@ -139,7 +139,7 @@ s32 EnNwc_PlayerReleasedBremanMarch(Actor_EnNwc* this, PlayState* play)
  */
 s32 EnNwc_IsFound(Actor_EnNwc* this, PlayState* play)
 {
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
 
     if (this->grog == NULL)
         return 0;

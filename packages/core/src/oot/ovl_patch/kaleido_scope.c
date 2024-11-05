@@ -13,7 +13,7 @@
 static int checkItemToggle(PlayState* play)
 {
     PauseContext* p;
-    Actor_Player* link;
+    Player* link;
     s16 itemId;
     s16 itemCursor;
     int ret;

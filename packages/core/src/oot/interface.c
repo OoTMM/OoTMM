@@ -73,7 +73,7 @@ void comboItemIcon(void* dst, int itemId)
 
 static void LoadCustomItemIconSlot(PlayState* play, int slot, int isInit)
 {
-    Actor_Player* link;
+    Player* link;
     void* dst;
     u8 itemId;
 

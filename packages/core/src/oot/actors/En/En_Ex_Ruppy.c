@@ -79,7 +79,7 @@ void EnExRuppy_HandlerCollected(Actor_EnExRuppy* this, PlayState* play)
 
 void EnExRuppy_GiveItem(Actor_EnExRuppy* this, PlayState* play, Actor_EnDivingGame* divingGame)
 {
-    Actor_Player* link;
+    Player* link;
     ComboItemQuery q;
     ComboItemOverride o;
     int major;

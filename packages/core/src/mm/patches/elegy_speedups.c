@@ -15,7 +15,7 @@ f32 Elegy_BlockSpeed(Actor* actor, PlayState* play, int type)
     return 40.0;
 }
 
-u32 Elegy_LockParams(Actor_Player* player, PlayState* play)
+u32 Elegy_LockParams(Player* player, PlayState* play)
 {
     union ElegyLockParams result = {
         .frameCount = 0x01,
@@ -24,12 +24,12 @@ u32 Elegy_LockParams(Actor_Player* player, PlayState* play)
     return result.value;
 }
 
-u16 Elegy_DespawnCounter(PlayState* play, Actor_Player* player)
+u16 Elegy_DespawnCounter(PlayState* play, Player* player)
 {
     return 0x1;
 }
 
-u16 Elegy_FadeSpeed(PlayState* play, Actor_Player* player)
+u16 Elegy_FadeSpeed(PlayState* play, Player* player)
 {
     return 0x20;
 }

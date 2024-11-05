@@ -22,7 +22,7 @@ void EnMm_InitWrapper(Actor* this, PlayState* play)
 
 static int EnMm_ActorHasParent(Actor* this)
 {
-    Actor_Player* link;
+    Player* link;
 
     if (!Actor_HasParentZ(this))
         return 0;

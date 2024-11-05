@@ -694,7 +694,7 @@ void Boss01_SetColliderSphere(s32 index, ColliderJntSph* collider, Vec3f* sphere
 
 void Boss01_SelectAttack(Actor_Boss01* this, PlayState* play, u8 mustAttack)
 {
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
 
     if (player->actor.world.pos.y > 200.0f)
         Boss01_SetupWait(this, play, ODOLWA_WAIT_RANDOM);
@@ -862,7 +862,7 @@ void Boss01_SetupIntroCutscene(Actor_Boss01* this, PlayState* play) {
  * starting the cutscene.
  */
 void Boss01_IntroCutscene(Actor_Boss01* this, PlayState* play) {
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
 
     this->cutsceneTimer++;
     SkelAnime_Update(&this->skelAnime);
@@ -1047,7 +1047,7 @@ void Boss01_SetupSummonBugsCutscene(Actor_Boss01* this, PlayState* play) {
  * Handles everything involving the bug summoning cutscene, including manipulating the camera, spawning the bugs, etc.
  */
 void Boss01_SummonBugsCutscene(Actor_Boss01* this, PlayState* play) {
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
     Vec3f offset;
     Vec3f pos;
 
@@ -1194,7 +1194,7 @@ void Boss01_SetupWait(Actor_Boss01* this, PlayState* play, u8 waitType) {
  */
 void Boss01_Wait(Actor_Boss01* this, PlayState* play) {
     s16 i;
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
 
     this->lookAtPlayer = 1;
 
@@ -1278,7 +1278,7 @@ void Boss01_Wait(Actor_Boss01* this, PlayState* play) {
     if (((this->timers[TIMER_CURRENT_ACTION] % 16) == 0) && (this->waitType != ODOLWA_WAIT_READY) &&
         (sOdolwaBugCount < 5)) {
         Vec3f pos;
-        Actor_Player* player2 = GET_PLAYER(play);
+        Player* player2 = GET_PLAYER(play);
 
         if (Rand_ZeroOne() < 0.2f) {
             pos = player2->actor.world.pos;
@@ -1818,7 +1818,7 @@ void Boss01_Damaged(Actor_Boss01* this, PlayState* play) {
 }
 
 void Boss01_UpdateDamage(Actor_Boss01* this, PlayState* play) {
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
     u8 damage;
     s32 i;
 
@@ -2096,7 +2096,7 @@ void Boss01_DeathCutscene(Actor_Boss01* this, PlayState* play) {
             if (this->cutsceneTimer == 180) {
                 static f32 sBlueWarpSpawnsX[] = { 0.0f, 350.0f, -350.0f, 350.0f, -350.0f };
                 static f32 sBlueWarpSpawnsZ[] = { 0.0f, 350.0f, 350.0f, -350.0f, -350.0f };
-                Actor_Player* player = GET_PLAYER(play);
+                Player* player = GET_PLAYER(play);
                 f32 warpX;
                 f32 warpZ;
                 s32 i;
@@ -2198,7 +2198,7 @@ void Boss01_Thaw(Actor_Boss01* this, PlayState* play) {
  * rotated such that they are looking at Odolwa.
  */
 s32 Boss01_ArePlayerAndOdolwaFacing(Actor_Boss01* this, PlayState* play) {
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
 
     if ((ABS_ALT(BINANG_SUB(this->actor.yawTowardsPlayer, this->actor.shape.rot.y)) < 0x3000) &&
         (ABS_ALT(BINANG_SUB(this->actor.yawTowardsPlayer, BINANG_ROT180(player->actor.shape.rot.y))) < 0x3000)) {
@@ -2210,7 +2210,7 @@ s32 Boss01_ArePlayerAndOdolwaFacing(Actor_Boss01* this, PlayState* play) {
 
 void Boss01_Update(Actor_Boss01* this, PlayState* play) {
     s32 i;
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
     f32 diffX;
     f32 diffY;
     f32 diffZ;
@@ -2995,7 +2995,7 @@ void Boss01_Bug_SetupCrawl(Actor_Boss01* this, PlayState* play) {
  * and chase them around.
  */
 void Boss01_Bug_Crawl(Actor_Boss01* this, PlayState* play) {
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
     f32 targetSpeed = 3.0f;
     Actor* targetActor = &player->actor;
     Actor* explosive = play->actorCtx.actors[ACTORCAT_EXPLOSIVE].first;
@@ -3264,7 +3264,7 @@ void Boss01_SpawnDustForFallingBlock(PlayState* play, Vec3f* blockPos, f32 scale
  */
 void Boss01_UpdateEffects(Actor_Boss01* this, PlayState* play) {
     OdolwaEffect* effect = (OdolwaEffect*)play->specialEffects;
-    Actor_Player* player = GET_PLAYER(play);
+    Player* player = GET_PLAYER(play);
     s16 i;
     s16 j;
     s16 temp;

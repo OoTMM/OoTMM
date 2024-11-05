@@ -287,7 +287,7 @@ PATCH_CALL(0x80822f68, KaleidoScope_DrawDungeonUnk2);
 
 static int canSave(PlayState* play)
 {
-    Actor_Player* link;
+    Player* link;
 
     link = GET_PLAYER(play);
     if (link->stateFlags1 & PLAYER_ACTOR_STATE_EPONA)

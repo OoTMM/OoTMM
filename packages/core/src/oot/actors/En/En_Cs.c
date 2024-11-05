@@ -14,7 +14,7 @@ static void EnCs_AfterMaskTrade(Actor* this, PlayState* play)
 
 static void EnCs_MaskTradeCheck(Actor* this, PlayState* play)
 {
-    Actor_Player* link;
+    Player* link;
 
     link = GET_PLAYER(play);
     if (link->stateFlags1 & PLAYER_ACTOR_STATE_GET_ITEM)
@@ -58,7 +58,7 @@ static void EnCs_InitMaskTrade(Actor* this, PlayState* play)
 
 static int EnCs_ActorTalkedTo(Actor* this)
 {
-    Actor_Player* link;
+    Player* link;
     int ret;
 
     link = GET_PLAYER(gPlay);

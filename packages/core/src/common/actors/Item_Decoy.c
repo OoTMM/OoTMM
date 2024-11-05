@@ -21,7 +21,7 @@ static void ItemDecoy_SetHandler(Actor_ItemDecoy* this, PlayState* play, Actor_I
 
 static void ItemDecoy_Draw(Actor_ItemDecoy* this, PlayState* play)
 {
-    Actor_Player* link;
+    Player* link;
     Vec3f pos;
 
     if (this->gi == GI_NONE)
@@ -45,7 +45,7 @@ static void ItemDecoy_HandlerTimer(Actor_ItemDecoy* this, PlayState* play)
 
 static int ItemDecoy_CanCollect(Actor_ItemDecoy* this, PlayState* play)
 {
-    Actor_Player* link;
+    Player* link;
 
     if (Player_InCsMode(play))
         return 0;
@@ -100,7 +100,7 @@ static void ItemDecoy_HandlerImportantItemConfirm(Actor_ItemDecoy* this, PlaySta
 static void ItemDecoy_HandlerImportantItem(Actor_ItemDecoy* this, PlayState* play)
 {
     ComboItemOverride o;
-    Actor_Player* link;
+    Player* link;
 
     if (!ItemDecoy_CanCollect(this, play))
         return;
@@ -155,7 +155,7 @@ static void ItemDecoy_Init(Actor_ItemDecoy* this, PlayState* play)
 
 static void ItemDecoy_Update(Actor_ItemDecoy* this, PlayState* play)
 {
-    Actor_Player* link;
+    Player* link;
 
     link = GET_PLAYER(play);
     this->base.world.pos.x = link->actor.world.pos.x;

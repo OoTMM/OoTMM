@@ -4,7 +4,7 @@
 
 void comboCreditWarp(PlayState* play)
 {
-    Actor_Player* link;
+    Player* link;
 
     g.isCreditWarp = 1;
     g.isCredits = 1;

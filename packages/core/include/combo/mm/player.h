@@ -6,7 +6,7 @@
 #include <combo/actor.h>
 #include <combo/dma.h>
 
-struct Actor_Player;
+struct Player;
 
 int Player_GetMask(PlayState* play);
 
@@ -411,13 +411,13 @@ typedef struct PlayerAgeProperties {
 
 #define PLAYER_LIMB_BUF_SIZE (ALIGN16(sizeof(PlayerAnimationFrame)) + 0xF)
 
-typedef void (*PlayerInitItemActionFunc)(struct PlayState* play, struct Actor_Player* this);
+typedef void (*PlayerInitItemActionFunc)(struct PlayState* play, struct Player* this);
 
-typedef void (*PlayerActionFunc)(struct Actor_Player* this, struct PlayState* play);
-typedef s32 (*PlayerUpperActionFunc)(struct Actor_Player* this, struct PlayState* play);
-typedef void (*PlayerFuncD58)(struct PlayState* play, struct Actor_Player* this);
+typedef void (*PlayerActionFunc)(struct Player* this, struct PlayState* play);
+typedef s32 (*PlayerUpperActionFunc)(struct Player* this, struct PlayState* play);
+typedef void (*PlayerFuncD58)(struct PlayState* play, struct Player* this);
 
-typedef struct Actor_Player
+typedef struct Player
 {
     /* 0x000 */ Actor actor;
     /* 0x144 */ s8 currentShield;
@@ -649,19 +649,19 @@ typedef struct Actor_Player
     /* 0xD6B */ u8 unk_D6B;
     /* 0xD6C */ Vec3f unk_D6C; /* previous body part 0 position */
 }
-Actor_Player;
+Player;
 
-_Static_assert(sizeof(Actor_Player) == 0xd78, "MM Actor_Player size is wrong");
+_Static_assert(sizeof(Player) == 0xd78, "MM Player size is wrong");
 
-ASSERT_OFFSET(Actor_Player, objMsgQueue,         0x1dc);
-ASSERT_OFFSET(Actor_Player, maskObjectLoadState, 0x1fc);
-ASSERT_OFFSET(Actor_Player, gi,                  0x384);
-ASSERT_OFFSET(Actor_Player, getItemDirection,    0x386);
-ASSERT_OFFSET(Actor_Player, csMode,              0x394);
-ASSERT_OFFSET(Actor_Player, prevCsAction,        0x395);
-ASSERT_OFFSET(Actor_Player, unk_a78,             0xa78);
-ASSERT_OFFSET(Actor_Player, drawGiId,            0xb2a);
-ASSERT_OFFSET(Actor_Player, unk_b2b,             0xb2b);
+ASSERT_OFFSET(Player, objMsgQueue,         0x1dc);
+ASSERT_OFFSET(Player, maskObjectLoadState, 0x1fc);
+ASSERT_OFFSET(Player, gi,                  0x384);
+ASSERT_OFFSET(Player, getItemDirection,    0x386);
+ASSERT_OFFSET(Player, csMode,              0x394);
+ASSERT_OFFSET(Player, prevCsAction,        0x395);
+ASSERT_OFFSET(Player, unk_a78,             0xa78);
+ASSERT_OFFSET(Player, drawGiId,            0xb2a);
+ASSERT_OFFSET(Player, unk_b2b,             0xb2b);
 
 typedef struct {
     /* 0x00 */ u32 maskDListEntry[24];

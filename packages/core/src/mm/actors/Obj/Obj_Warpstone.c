@@ -46,7 +46,7 @@ static void sendNetOwl(PlayState* play, int owlId)
 
 void ObjWarpstone_GiveItem(Actor* this, PlayState* play)
 {
-    Actor_Player* link;
+    Player* link;
     void (*next)(Actor*, PlayState*);
     int npc;
     s16 gi;
