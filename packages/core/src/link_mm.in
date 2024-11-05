@@ -647,3 +647,7 @@ func_800AE5A0 = 0x800ae5a0;
 func_800BC620 = 0x800bc620;
 SoundSource_PlaySfxEachFrameAtFixedWorldPos = 0x800f0590;
 gSetupDLs = 0x801c0ef0;
+
+Actor_SetClosestSecretDistance = 0x800b8c50;
+CutsceneFlags_Get = 0x800f13e8;
+Gfx_DrawDListXlu = 0x800be03c;
