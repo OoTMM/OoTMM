@@ -43,6 +43,11 @@ export const TRICKS: Tricks = {
     tooltip: 'All hidden grottos will no longer require the Stone of Agony for logic.',
     linkText: 'https://www.zeldadungeon.net/wiki/Ocarina_of_Time_Secret_Grottos',
   },
+  MM_HIDDEN_GROTTOS: {
+    game: 'mm',
+    name: 'Hidden Grottos (MM) without Stone of Agony',
+    tooltip: 'All hidden grottos will no longer require the Stone of Agony for logic.',
+  },
   OOT_MIDO_SKIP: {
     game: 'oot',
     name: 'Backflip Over Mido',

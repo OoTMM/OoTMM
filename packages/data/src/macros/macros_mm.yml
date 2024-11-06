@@ -37,6 +37,8 @@
 
 "midnight": "between(NIGHT1_AM_12_00, DAY2_AM_06_00) || between(NIGHT2_AM_12_00, DAY3_AM_06_00) || after(NIGHT3_AM_12_00)"
 
+"stone_of_agony": "!setting(stoneAgonyMm) || (cond(setting(sharedStoneAgony), has(SHARED_STONE_OF_AGONY), has(STONE_OF_AGONY))) || trick(MM_HIDDEN_GROTTOS)"
+
 # Region State
 "is_winter": "flag_on(MM_REGION_NORTH_CURSED) && flag_off(MM_REGION_NORTH_CLEARED)"
 "is_spring": "flag_on(MM_REGION_NORTH_CLEARED) && flag_off(MM_REGION_NORTH_CURSED) && event(BOSS_SNOWHEAD)"
