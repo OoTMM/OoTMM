@@ -232,7 +232,7 @@
 "Ganon Castle Shadow Trial Entrance Side":
   dungeon: Ganon
   exits:
-    "Ganon Castle Shadow Trial Middle Beamos Area 1": "event(GANON_MQ_SHADOW_PROGRESSION)"
+    "Ganon Castle Shadow Trial Middle Beamos Area 1": "event(GANON_MQ_SHADOW_PROGRESSION_FROM_ENTRANCE)"
     "Ganon Castle Main Room": "true"
     "Ganon Castle Shadow Trial Ending Side": "climb_anywhere"
   events:
