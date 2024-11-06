@@ -2064,7 +2064,7 @@
     MAGIC: "true"
   exits:
     "Twin Islands": "true"
-    "Twin Islands Ramp Grotto": "has_explosives || trick_keg_explosives || (trick(MM_KEG_EXPLOSIVES) && event(POWDER_KEG_TRIAL)) || can_hammer"
+    "Twin Islands Ramp Grotto": "stone_of_agony && (has_explosives || trick_keg_explosives || (trick(MM_KEG_EXPLOSIVES) && event(POWDER_KEG_TRIAL)) || can_hammer)"
   locations:
     "Twin Islands Small Snowball Ramp 1": "is_winter"
     "Twin Islands Small Snowball Ramp 2": "is_winter"
@@ -2245,7 +2245,7 @@
   exits:
     "Path to Snowhead Middle": "goron_fast_roll || hookshot_anywhere || (has_hover_boots && trick(MM_PATH_SNOWHEAD_HOVERS))"
     "Snowhead Entrance": "true"
-    "Path to Snowhead Grotto": "has_explosives || trick_keg_explosives || can_hammer"
+    "Path to Snowhead Grotto": "stone_of_agony && (has_explosives || trick_keg_explosives || can_hammer)"
   locations:
     "Path to Snowhead Big Snowball Back 1": "is_winter && can_break_snowballs"
     "Path to Snowhead Big Snowball Back 2": "is_winter && can_break_snowballs"
