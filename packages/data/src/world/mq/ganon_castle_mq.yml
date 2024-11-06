@@ -50,13 +50,13 @@
   dungeon: Ganon
   exits:
     "Ganon Castle Light Trial Entrance": "true"
-    "Ganon Castle Light Trial Round Boulder Room Before Flame Walls": "small_keys_ganon(3)"
+    "Ganon Castle Light Trial Round Boulder Room Before Flame Walls": "small_keys_ganon(2)"
   locations:
     "MQ Ganon Castle Light Trial Chest": "can_play_zelda"
 "Ganon Castle Light Trial Round Boulder Room Before Flame Walls":
   dungeon: Ganon
   exits:
-    "Ganon Castle Light Trial Lullaby Hallway": "small_keys_ganon(3)"
+    "Ganon Castle Light Trial Lullaby Hallway": "small_keys_ganon(2)"
     "Ganon Castle Light Trial Round Boulder Room After Flame Walls": "can_hookshot || climb_anywhere"
 "Ganon Castle Light Trial Round Boulder Room After Flame Walls":
   dungeon: Ganon
