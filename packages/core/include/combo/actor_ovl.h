@@ -49,7 +49,7 @@ typedef struct
 {
     OvlInfoMeta         base;
     u32                 id;
-    const ActorInit*    init;
+    const ActorProfile*    init;
 }
 OvlInfoMetaActor;
 

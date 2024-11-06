@@ -39,7 +39,7 @@ void func_80A28A28(Actor_EnBigpamet* this);
 void func_80A28D80(Actor_EnBigpamet* this);
 void func_80A28ED4(Actor_EnBigpamet* this);
 
-ActorInit En_Bigpamet_Init = {
+ActorProfile En_Bigpamet_Init = {
     ACTOR_EN_BIGPAMET,
     ACTORCAT_BOSS,
     FLAGS,
@@ -863,7 +863,7 @@ void func_80A2966C(Actor_EnBigpamet* this, PlayState* play) {
     func_80A292A8(this, play);
 }
 
-ActorInit Actpr_EnBigpamet_InitVars = {
+ActorProfile Actpr_EnBigpamet_InitVars = {
     /**/ ACTOR_EN_BIGPAMET,
     /**/ ACTORCAT_BOSS,
     /**/ FLAGS,

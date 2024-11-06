@@ -434,7 +434,7 @@ void SkelAnime_DrawFlexOpa(PlayState* play, void** skeleton, Vec3s* jointTable, 
 void SkelAnime_DrawFlexLod(PlayState* play, void** skeleton, Vec3s* jointTable, s32 dListCount, void* overrideLimbDraw, void* postLimbDraw, Actor* actor, s32 lod);
 
 void Actor_DrawLensActors(PlayState* play, s32 numLensActors, Actor** lensActors);
-ActorInit* Actor_LoadOverlay(ActorContext* actorCtx, s16 index);
+ActorProfile* Actor_LoadOverlay(ActorContext* actorCtx, s16 index);
 
 s32 Entrance_GetSceneIdAbsolute(u16 entrance);
 

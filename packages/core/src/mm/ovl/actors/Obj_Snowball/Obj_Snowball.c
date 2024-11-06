@@ -989,7 +989,7 @@ void func_80B04D34(Actor_ObjSnowball* this, PlayState* play) {
     }
 }
 
-ActorInit Actor_Obj_Snowball_InitVars = {
+ActorProfile Actor_Obj_Snowball_InitVars = {
     ACTOR_OBJ_SNOWBALL,
     ACTORCAT_PROP,
     FLAGS,

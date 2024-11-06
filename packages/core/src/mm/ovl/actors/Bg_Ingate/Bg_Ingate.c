@@ -371,7 +371,7 @@ void BgIngate_Draw(Actor_BgIngate* this, PlayState* play) {
     CLOSE_DISPS();
 }
 
-ActorInit Actor_Bg_Ingate_InitVars =
+ActorProfile Actor_Bg_Ingate_InitVars =
 {
     ACTOR_BG_INGATE,
     ACTORCAT_BG,

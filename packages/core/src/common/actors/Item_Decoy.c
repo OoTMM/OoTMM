@@ -170,7 +170,7 @@ static void ItemDecoy_Update(Actor_ItemDecoy* this, PlayState* play)
     this->handler(this, play);
 }
 
-ActorInit ItemDecoy_gActorInit = {
+ActorProfile ItemDecoy_gActorProfile = {
     ACTOR_ITEM_DECOY,
     0x8,
     0x10,

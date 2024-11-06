@@ -368,7 +368,7 @@ void EnHs_Draw(Actor_EnHs* this, PlayState* play)
     SkelAnime_DrawFlexOpa(play, this->skelAnime.skeleton, this->skelAnime.jointTable, this->skelAnime.dListCount, EnHs_OverrideLimbDraw, EnHs_PostLimbDraw, &this->actor);
 }
 
-ActorInit EnHs_InitVars =
+ActorProfile EnHs_InitVars =
 {
     ACTOR_EN_HS,
     ACTORCAT_NPC,

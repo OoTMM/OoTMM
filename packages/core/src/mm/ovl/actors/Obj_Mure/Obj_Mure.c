@@ -428,7 +428,7 @@ void ObjMure_Update(Actor_ObjMure* this, PlayState* play)
     this->actionFunc(this, play);
 }
 
-static ActorInit ObjMure_ActorInit =
+static ActorProfile ObjMure_ActorProfile =
 {
     ACTOR_OBJ_MURE,
     ACTORCAT_ITEMACTION,
@@ -441,4 +441,4 @@ static ActorInit ObjMure_ActorInit =
     NULL,
 };
 
-OVL_INFO_ACTOR(ACTOR_OBJ_MURE, ObjMure_ActorInit);
+OVL_INFO_ACTOR(ACTOR_OBJ_MURE, ObjMure_ActorProfile);

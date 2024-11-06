@@ -470,7 +470,7 @@ void EnYb_Draw(Actor* this, PlayState* play) {
     CLOSE_DISPS();
 }
 
-ActorInit En_Yb_InitVars = {
+ActorProfile En_Yb_InitVars = {
     ACTOR_EN_YB,
     ACTORCAT_NPC,
     FLAGS,

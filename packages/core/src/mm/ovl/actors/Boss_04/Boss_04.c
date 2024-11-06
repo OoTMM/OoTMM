@@ -817,7 +817,7 @@ void Boss04_Draw(Actor_Boss04* this, PlayState* play) {
     CLOSE_DISPS();
 }
 
-ActorInit Actor_Boss04_InitVars = {
+ActorProfile Actor_Boss04_InitVars = {
     ACTOR_BOSS_04,
     ACTORCAT_BOSS,
     FLAGS,

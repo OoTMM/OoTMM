@@ -3442,7 +3442,7 @@ void Boss01_DrawEffects(PlayState* play) {
     CLOSE_DISPS();
 }
 
-ActorInit Actor_Boss01_InitVars =
+ActorProfile Actor_Boss01_InitVars =
 {
     ACTOR_BOSS_01,
     ACTORCAT_BOSS,

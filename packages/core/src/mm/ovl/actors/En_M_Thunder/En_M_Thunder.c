@@ -552,7 +552,7 @@ void EnMThunder_Draw(EnMThunder* this, PlayState* play) {
 }
 
 
-ActorInit EnMThunder_InitVars = {
+ActorProfile EnMThunder_InitVars = {
     ACTOR_EN_M_THUNDER,
     ACTORCAT_ITEMACTION,
     FLAGS,

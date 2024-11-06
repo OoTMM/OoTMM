@@ -332,7 +332,7 @@ void MagicDark_OrbDraw(Actor* thisx, PlayState* play) {
     CLOSE_DISPS();
 }
 
-ActorInit Magic_Dark_InitVars = {
+ActorProfile Magic_Dark_InitVars = {
     ACTOR_CUSTOM_SPELL_LOVE,
     ACTORCAT_ITEMACTION,
     FLAGS,

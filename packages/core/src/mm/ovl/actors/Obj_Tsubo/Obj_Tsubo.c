@@ -888,7 +888,7 @@ void ObjTsubo_Draw(Actor_ObjTsubo* this, PlayState* play)
     Gfx_DrawDListOpa(play, sPotTypeData[OBJ_TSUBO_GET_TYPE(&this->actor)].modelDL);
 }
 
-ActorInit ObjTsubo_InitVars =
+ActorProfile ObjTsubo_InitVars =
 {
     ACTOR_OBJ_TSUBO,
     ACTORCAT_PROP,

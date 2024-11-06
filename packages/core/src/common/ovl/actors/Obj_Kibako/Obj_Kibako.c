@@ -784,7 +784,7 @@ void ObjKibako_Draw(Actor_ObjKibako* this, PlayState* play)
 }
 #endif
 
-ActorInit Obj_Kibako_InitVars =
+ActorProfile Obj_Kibako_InitVars =
 {
     ACTOR_OBJ_KIBAKO,
     ACTORCAT_PROP,

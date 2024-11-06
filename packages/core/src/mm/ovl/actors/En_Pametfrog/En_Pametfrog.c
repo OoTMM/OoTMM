@@ -1415,7 +1415,7 @@ void EnPametfrog_Draw(Actor_EnPametfrog* this, PlayState* play) {
                             this->drawDmgEffFrozenSteamScale, this->drawDmgEffAlpha, this->drawDmgEffType);
 }
 
-ActorInit En_Pametfrog_InitVars = {
+ActorProfile En_Pametfrog_InitVars = {
     ACTOR_EN_PAMETFROG,
     ACTORCAT_BOSS,
     FLAGS,

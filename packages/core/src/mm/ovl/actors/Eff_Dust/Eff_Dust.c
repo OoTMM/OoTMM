@@ -347,7 +347,7 @@ void EffDust_Draw(EffDust* this, PlayState* play) {
     this->drawFunc(this, play);
 }
 
-ActorInit EffDust_InitVars = {
+ActorProfile EffDust_InitVars = {
     ACTOR_EFF_DUST,
     ACTORCAT_NPC,
     FLAGS,
