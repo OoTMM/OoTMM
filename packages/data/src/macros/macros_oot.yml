@@ -125,7 +125,7 @@
 
 #Equipment Use Macros
 "has_rupees": "event(RUPEES) || (setting(sharedWallets) && event(MM_RUPEES))"
-"stone_of_agony": "has(STONE_OF_AGONY) || trick(OOT_HIDDEN_GROTTOS)"
+"stone_of_agony": "cond(setting(sharedStoneAgony), has(SHARED_STONE_OF_AGONY), has(STONE_OF_AGONY)) || trick(OOT_HIDDEN_GROTTOS)"
 
 "has_tunic_goron_strict": "age_tunics && has_tunic_goron_raw"
 "has_tunic_zora_strict": "age_tunics && has_tunic_zora_raw"

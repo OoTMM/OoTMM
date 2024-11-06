@@ -989,6 +989,8 @@ export const REQUIRED = new Set([
   Items.OOT_MAGIC_BEAN,
   Items.OOT_BOTTLE_MILK,
   Items.OOT_STONE_OF_AGONY,
+  Items.MM_STONE_OF_AGONY,
+  Items.SHARED_STONE_OF_AGONY,
   Items.OOT_WALLET,
   Items.OOT_POCKET_CUCCO,
   Items.OOT_COJIRO,

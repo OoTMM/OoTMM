@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add Stone of Agony in MM as a setting, with Shared as an extra setting.
 - Add an icon to simulate the stone of agony rumble feature.
 - Add an option to not apply cosmetics to freestanding models.
 - Add a custom file select with more informations.

@@ -105,6 +105,7 @@ const SHARED_ITEMS_OOT = new Map([
   ['SHARED_HAMMER',           'OOT_HAMMER'],
   ['SHARED_STICK_UPGRADE',    'OOT_STICK_UPGRADE'],
   ['SHARED_NUT_UPGRADE',      'OOT_NUT_UPGRADE'],
+  ['SHARED_STONE_OF_AGONY',   'SHARED_STONE_OF_AGONY'],
 ]);
 
 const SHARED_ITEMS_MM = new Map([
@@ -180,6 +181,7 @@ const SHARED_ITEMS_MM = new Map([
   ['SHARED_HAMMER',           'MM_HAMMER'],
   ['SHARED_STICK_UPGRADE',    'MM_STICK_UPGRADE'],
   ['SHARED_NUT_UPGRADE',      'MM_NUT_UPGRADE'],
+  ['SHARED_STONE_OF_AGONY',   'MM_STONE_OF_AGONY'],
 ]);
 
 const SHARED_ITEMS = {
@@ -1032,6 +1034,8 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     SHARED_HAMMER: settings.sharedHammer,
     MM_UPGRADES_STICKS_NUTS: settings.sticksNutsUpgradesMm,
     OOT_SHUFFLE_EGGS: settings.eggShuffle,
+    MM_STONE_OF_AGONY: settings.stoneAgonyMm,
+    SHARED_STONE_OF_AGONY: settings.sharedStoneAgony,
   };
 
   for (const v in exprs) {

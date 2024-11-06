@@ -108,6 +108,7 @@
 #define IA_MM_GFS_HAMMER        0x63
 #define IA_MM_STICK_UPGRADE     0x64
 #define IA_MM_NUT_UPGRADE       0x65
+#define IA_MM_STONE_AGONY       0x66
 #define IA_NONE                 0xff
 
 #define ITT_NONE        0x00

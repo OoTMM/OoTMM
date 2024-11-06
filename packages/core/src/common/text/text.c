@@ -258,6 +258,9 @@ static int isItemAmbiguous(s16 gi)
     case GI_MM_NUTS_5:
     case GI_MM_NUTS_10:
         return !Config_Flag(CFG_SHARED_NUTS_STICKS);
+    case GI_OOT_STONE_OF_AGONY:
+    case GI_MM_STONE_OF_AGONY:
+        return Config_Flag(CFG_MM_STONE_OF_AGONY) && !Config_Flag(CFG_SHARED_STONE_OF_AGONY);
     case GI_OOT_HOOKSHOT:
     case GI_MM_HOOKSHOT:
     case GI_MM_HOOKSHOT_SHORT:

@@ -90,9 +90,19 @@ int csmcFromItem(s16 gi)
     }
 }
 
+static int hasStoneAgonyForCsmc(void)
+{
+#if defined(GAME_MM)
+    if (Config_Flag(CFG_MM_STONE_OF_AGONY))
+        return gMmExtraFlags3.stoneAgony;
+#endif
+
+    return gOotSave.info.inventory.quest.agonyStone;
+}
+
 int csmcEnabled(void)
 {
-    return (Config_Flag(CFG_CSMC) || (Config_Flag(CFG_CSMC_AGONY) && gOotSave.info.inventory.quest.agonyStone));
+    return (Config_Flag(CFG_CSMC) || (Config_Flag(CFG_CSMC_AGONY) && hasStoneAgonyForCsmc()));
 }
 
 int csmcEnabledSkulltula(void)
