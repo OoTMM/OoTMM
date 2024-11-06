@@ -919,7 +919,7 @@ export class LogicPassWorldTransform {
 
     if (settings.sharedStoneAgony) {
       this.replaceItem(Items.OOT_STONE_OF_AGONY, Items.SHARED_STONE_OF_AGONY);
-    } else if (settings.hammerMm) {
+    } else if (settings.stoneAgonyMm) {
       this.addItem(Items.MM_STONE_OF_AGONY);
     }
 
