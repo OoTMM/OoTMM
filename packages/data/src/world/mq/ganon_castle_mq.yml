@@ -234,6 +234,7 @@
   exits:
     "Ganon Castle Shadow Trial Middle Beamos Area 1": "event(GANON_MQ_SHADOW_PROGRESSION)"
     "Ganon Castle Main Room": "true"
+    "Ganon Castle Shadow Trial Ending Side": "climb_anywhere"
   events:
     GANON_MQ_SHADOW_BOMBFLOWER: "can_use_bow || ((longshot_anywhere || (has_lens && (has_hover_boots || hookshot_anywhere))) && (can_use_din || has_bombflowers))"
     GANON_MQ_SHADOW_PROGRESSION_FROM_ENTRANCE: "longshot_anywhere || (has_lens && hookshot_anywhere) || (has_lens && ((can_hookshot && event(GANON_MQ_SHADOW_BOMBFLOWER)) || has_hover_boots))"
@@ -269,6 +270,7 @@
   exits:
     "Ganon Castle Shadow Trial Middle Beamos Area 2": "has_lens || hookshot_anywhere"
     "Ganon Castle Shadow Trial Ending Room": "silver_rupees_ganon_shadow"
+    "Ganon Castle Shadow Trial Entrance Side": "climb_anywhere"
 "Ganon Castle Shadow Trial Ending Room":
   dungeon: Ganon
   exits:
