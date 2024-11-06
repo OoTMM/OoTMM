@@ -57,7 +57,7 @@ void comboTriggerWarp(PlayState* play, int bossId)
         dungeonExit = ENTR_OOT_WARP_SONG_GRAVE; /* Normal exit crashes as child */
         break;
     case ENTR_OOT_DESERT_COLOSSUS_FROM_TEMPLE_SPIRIT:
-        dungeonExit = 0x01e1; /* Normal exit crashes as child */
+        dungeonExit = ENTR_OOT_DESERT_COLOSSUS_FROM_TEMPLE_SPIRIT; /* Normal exit crashes as child */
         break;
     case (ENTR_MM_WOODFALL_FROM_TEMPLE | MASK_FOREIGN_ENTRANCE):
         if (MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF) && MM_GET_EVENT_WEEK(EV_MM_WEEK_WOODFALL_TEMPLE_RISE))
@@ -66,10 +66,7 @@ void comboTriggerWarp(PlayState* play, int bossId)
             dungeonExit = 0x8600 | MASK_FOREIGN_ENTRANCE;
         break;
     case (ENTR_MM_SNOWHEAD_FROM_TEMPLE | MASK_FOREIGN_ENTRANCE):
-        if (MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH))
-            dungeonExit = 0xae70 | MASK_FOREIGN_ENTRANCE;
-        else
-            dungeonExit = 0x9a70 | MASK_FOREIGN_ENTRANCE;
+        dungeonExit = 0x9a70 | MASK_FOREIGN_ENTRANCE;
         break;
     case (ENTR_MM_GREAT_BAY_FROM_TEMPLE | MASK_FOREIGN_ENTRANCE):
         dungeonExit = 0x6a70 | MASK_FOREIGN_ENTRANCE;
