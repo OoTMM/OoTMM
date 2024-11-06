@@ -83,7 +83,7 @@
   events:
     GANON_MQ_FOREST_ENEMIES: "soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon"
   locations:
-    "MQ Ganon Castle Forest Trial Key": "can_hookshot || climb_anywhere"
+    "MQ Ganon Castle Forest Trial Key": "can_hookshot || can_boomerang || climb_anywhere"
 "Ganon Castle Forest Trial Wind Room Starting Side":
   dungeon: Ganon
   exits:
