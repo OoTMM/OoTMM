@@ -236,13 +236,13 @@
     "Ganon Castle Main Room": "true"
     "Ganon Castle Shadow Trial Ending Side": "climb_anywhere"
   events:
-    GANON_MQ_SHADOW_BOMBFLOWER: "can_use_bow || ((longshot_anywhere || (has_lens && (has_hover_boots || hookshot_anywhere))) && (can_use_din || has_bombflowers))"
-    GANON_MQ_SHADOW_PROGRESSION_FROM_ENTRANCE: "longshot_anywhere || (has_lens && hookshot_anywhere) || (has_lens && ((can_hookshot && event(GANON_MQ_SHADOW_BOMBFLOWER)) || has_hover_boots))"
+    GANON_MQ_SHADOW_BOMBFLOWER_FROM_ENTRANCE: "can_use_bow || ((longshot_anywhere || (has_lens && (has_hover_boots || hookshot_anywhere))) && (can_use_din || has_bombflowers))"
+    GANON_MQ_SHADOW_PROGRESSION_FROM_ENTRANCE: "longshot_anywhere || (has_lens && hookshot_anywhere) || (has_lens && ((can_hookshot && event(GANON_MQ_SHADOW_BOMBFLOWER_FROM_ENTRANCE)) || has_hover_boots))"
   locations:
-    "MQ Ganon Castle Shadow Trial Bomb Flower Chest": "event(GANON_MQ_SHADOW_BOMBFLOWER) && (can_hookshot || has_hover_boots)"
+    "MQ Ganon Castle Shadow Trial Bomb Flower Chest": "event(GANON_MQ_SHADOW_BOMBFLOWER_FROM_ENTRANCE) && (can_hookshot || has_hover_boots)"
     "MQ Ganon Castle SR Shadow Front-Right": "event(GANON_MQ_SHADOW_PROGRESSION_FROM_ENTRANCE)"
     "MQ Ganon Castle SR Shadow Front-Center": "event(GANON_MQ_SHADOW_PROGRESSION_FROM_ENTRANCE)"
-    "MQ Ganon Castle Wonder Item": "event(GANON_MQ_SHADOW_BOMBFLOWER) && event(GANON_MQ_SHADOW_PROGRESSION_FROM_ENTRANCE)"
+    "MQ Ganon Castle Wonder Item": "event(GANON_MQ_SHADOW_BOMBFLOWER_FROM_ENTRANCE) && event(GANON_MQ_SHADOW_PROGRESSION_FROM_ENTRANCE)"
 "Ganon Castle Shadow Trial Middle Beamos Area 1":
   dungeon: Ganon
   exits:
@@ -251,8 +251,13 @@
   events:
     GANON_MQ_SHADOW_TORCH_ICE_BLOCK: "has_fire"
     GANON_MQ_SHADOW_PROGRESSION_FROM_BEAMOS_1: "(has_lens && (can_longshot || hookshot_anywhere || (has_hover_boots && climb_anywhere))) || longshot_anywhere"
+    GANON_MQ_SHADOW_BOMBFLOWER_FROM_BEAMOS_1: "can_use_bow || ((can_use_din || has_bombflowers) && (has_lens || longshot_anywhere))"
   locations:
     "MQ Ganon Castle SR Shadow Middle": "true"
+    "MQ Ganon Castle Shadow Trial Bomb Flower Chest": "event(GANON_MQ_SHADOW_BOMBFLOWER_FROM_BEAMOS_1) && (is_adult || has_hover_boots || hookshot_anywhere)"
+    "MQ Ganon Castle Wonder Item": "event(GANON_MQ_SHADOW_BOMBFLOWER_FROM_BEAMOS_1)"
+    "MQ Ganon Castle SR Shadow Front-Right": "has_lens || longshot_anywhere"
+    "MQ Ganon Castle SR Shadow Front-Center": "has_lens"
 "Ganon Castle Shadow Trial Middle Beamos Area 2":
   dungeon: Ganon
   exits:
