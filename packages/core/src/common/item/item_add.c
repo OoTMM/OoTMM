@@ -1810,6 +1810,12 @@ static int addItemGFSHammer(PlayState* play, u8 itemId, s16 gi, u16 param)
     return 0;
 }
 
+static int addItemStoneAgonyMm(PlayState* play, u8 itemId, s16 gi, u16 param)
+{
+    gMmExtraFlags3.stoneAgony = 1;
+    return 0;
+}
+
 static const AddItemFunc kAddItemHandlers[] = {
     addItemRupeesOot,
     addItemRupeesMm,
@@ -1913,6 +1919,7 @@ static const AddItemFunc kAddItemHandlers[] = {
     addItemGFSHammer,
     addItemSticksUpgradeMm,
     addItemNutsUpgradeMm,
+    addItemStoneAgonyMm,
 };
 
 extern const u8 kAddItemFuncs[];
@@ -2039,6 +2046,7 @@ static const SharedItem kSimpleSharedItems[] = {
     { CFG_SHARED_NUTS_STICKS, GI_OOT_STICK_UPGRADE2, GI_MM_STICK_UPGRADE2 },
     { CFG_SHARED_NUTS_STICKS, GI_OOT_NUT_UPGRADE,  GI_MM_NUT_UPGRADE },
     { CFG_SHARED_NUTS_STICKS, GI_OOT_NUT_UPGRADE2, GI_MM_NUT_UPGRADE2 },
+    { CFG_SHARED_STONE_OF_AGONY, GI_OOT_STONE_OF_AGONY, GI_MM_STONE_OF_AGONY },
 };
 
 static int addItem(PlayState* play, s16 gi)

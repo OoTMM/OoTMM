@@ -832,6 +832,8 @@ const ITEM_IDS = [
   'SHARED_SOUL_ENEMY_THIEVES',
   'MM_HAMMER',
   'SHARED_HAMMER',
+  'MM_STONE_OF_AGONY',
+  'SHARED_STONE_OF_AGONY',
 ] as const;
 
 export type ItemID = typeof ITEM_IDS[number];

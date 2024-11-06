@@ -113,6 +113,8 @@ const ITEM_POOL_PLENTIFUL = new Set([
   Items.OOT_ZELDA_LETTER,
   Items.OOT_MAGIC_BEAN,
   Items.OOT_STONE_OF_AGONY,
+  Items.MM_STONE_OF_AGONY,
+  Items.SHARED_STONE_OF_AGONY,
   Items.OOT_WALLET,
   Items.OOT_POCKET_CUCCO,
   Items.OOT_COJIRO,
@@ -909,10 +911,16 @@ export class LogicPassWorldTransform {
       this.replaceItem(Items.MM_SHIELD_HERO,    Items.SHARED_SHIELD_HYLIAN);
     }
 
-    if(settings.sharedHammer) {
+    if (settings.sharedHammer) {
       this.replaceItem(Items.OOT_HAMMER, Items.SHARED_HAMMER);
     } else if (settings.hammerMm) {
       this.addItem(Items.MM_HAMMER);
+    }
+
+    if (settings.sharedStoneAgony) {
+      this.replaceItem(Items.OOT_STONE_OF_AGONY, Items.SHARED_STONE_OF_AGONY);
+    } else if (settings.hammerMm) {
+      this.addItem(Items.MM_STONE_OF_AGONY);
     }
 
     /* Triforce hunt */
@@ -942,11 +950,6 @@ export class LogicPassWorldTransform {
       if (settings.coinsYellow)
         this.pool.set(makePlayerItem(Items.OOT_COIN_YELLOW, i), settings.coinsYellow);
     }
-
-    if(settings.games === 'mm') {
-      this.addItem(Items.OOT_STONE_OF_AGONY);
-    }
-
   }
 
   private removeLocations(locs: string[]) {

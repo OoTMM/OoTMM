@@ -1548,6 +1548,14 @@ export const SETTINGS = [{
   description: 'Randomize the content of the bottles',
   default: false
 }, {
+  key: 'stoneAgonyMm',
+  name: 'Stone of Agony in MM',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Enables stone of agony in MM',
+  default: false,
+  cond: hasMM,
+}, {
   key: 'sticksNutsUpgradesMm',
   name: 'Sticks & Nuts Upgrades in MM',
   category: 'items.extensions',
@@ -1943,6 +1951,13 @@ export const SETTINGS = [{
   description: 'Enables using Song of Double Time in OoT when you have Song of Time in OoT',
   default: false,
   cond: hasOoT
+}, {
+  key: 'sharedStoneAgony',
+  name: 'Shared Stone of Agony',
+  category: 'items.shared',
+  type: 'boolean',
+  default: false,
+  cond: (s: any) => hasOoTMM(s) && s.stoneAgonyMm,
 }, {
   key: 'sharedNutsSticks',
   name: 'Shared Nuts & Sticks',

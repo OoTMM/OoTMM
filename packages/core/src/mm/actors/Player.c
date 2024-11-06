@@ -2123,6 +2123,9 @@ PATCH_FUNC(0x808401F4, Player_CollideMeleeWithWall)
 
 void Player_RumbleAgony(void)
 {
+    if (Config_Flag(CFG_MM_STONE_OF_AGONY) && !gMmExtraFlags3.stoneAgony)
+        return;
+
     Interface_AgonyIconTick();
     Rumble_Request(120, 20, 10, 0);
 }
