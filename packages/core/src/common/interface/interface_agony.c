@@ -38,9 +38,6 @@ void Interface_AgonyIconDraw(PlayState* play)
     float amplitude;
     void* tex;
 
-    /* DEBUG */
-    sAgonyAlpha = 300;
-
     /* Compute alpha */
     val = sAgonyAlpha;
     alpha = val;
