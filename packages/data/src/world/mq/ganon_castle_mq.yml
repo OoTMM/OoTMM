@@ -164,7 +164,7 @@
   locations:
     "MQ Ganon Castle SR Water Shallow Hole": "true"
     "MQ Ganon Castle SR Water Above Ground": "is_adult || climb_anywhere || hookshot_anywhere" #Check this one.
-    "MQ Ganon Castle SR Water Alcove": "is_adult && has_blue_fire"
+    "MQ Ganon Castle SR Water Alcove": "has_blue_fire && (is_adult || climb_anywhere || hookshot_anywhere)"
     "MQ Ganon Castle SR Water Deep Hole": "true"
     "MQ Ganon Castle SR Water Under Alcove": "true"
 "Ganon Castle Water Trial Silver Rupee Room Behind Red Ice":
