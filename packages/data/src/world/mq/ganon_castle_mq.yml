@@ -131,6 +131,12 @@
   exits:
     "Ganon Castle Fire Trial Entrance Ledge": "has_tunic_goron_strict && longshot_anywhere"
     "Ganon Castle Fire Trial Ending Room": "silver_rupees_ganon_fire"
+  locations: #Needs checking.
+    "MQ Ganon Castle SR Fire Under Pillar": "longshot_anywhere && has_tunic_goron_strict && can_lift_gold"
+    "MQ Ganon Castle SR Fire Center-Left": "longshot_anywhere && has_tunic_goron_strict"
+    "MQ Ganon Castle SR Fire Back-Left": "longshot_anywhere && has_tunic_goron_strict"
+    "MQ Ganon Castle SR Fire High Above Lava": "longshot_anywhere && has_tunic_goron_strict"
+    "MQ Ganon Castle SR Fire Front-Left": "longshot_anywhere && has_tunic_goron_strict"
 "Ganon Castle Fire Trial Ending Room":
   dungeon: Ganon
   exits:
