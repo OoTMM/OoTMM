@@ -16,6 +16,7 @@ import { Item, ItemGroups, ItemHelpers, Items, ItemsCount } from '../items';
 import { SharedItemGroups } from '../logic/shared';
 import { bufReadU32BE, bufWriteI8, bufWriteU16BE, bufWriteU32BE, bufWriteU8 } from '../util/buffer';
 import { concatUint8Arrays } from 'uint8array-extras';
+import { mustStartWithMasterSword } from '../settings/util';
 
 const DUNGEON_REWARD_LOCATIONS = [
   'OOT Deku Tree Boss',
@@ -1036,6 +1037,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     OOT_SHUFFLE_EGGS: settings.eggShuffle,
     MM_STONE_OF_AGONY: settings.stoneAgonyMm,
     SHARED_STONE_OF_AGONY: settings.sharedStoneAgony,
+    OOT_MUST_START_WITH_MS: mustStartWithMasterSword(settings),
   };
 
   for (const v in exprs) {

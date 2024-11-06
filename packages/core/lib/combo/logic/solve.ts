@@ -11,6 +11,7 @@ import { exprTrue } from './expr';
 import { ItemProperties } from './item-properties';
 import { optimizeWorld } from './optimizer';
 import { isDungeonReward } from '../items/helpers';
+import { mustStartWithMasterSword } from '../settings/util';
 
 const VALIDATION_CRITICAL_ITEMS = [
   Items.MM_SONG_TIME,
@@ -1121,8 +1122,8 @@ export class LogicPassSolver {
 
   private placeJunkLocations() {
     const { settings } = this.input;
-    let locs = this.makePlayerLocations(this.input.settings.junkLocations);
-    if (!settings.shuffleMasterSword && settings.startingAge === 'adult' && !settings.swordlessAdult) {
+    let locs = this.makePlayerLocations(settings.junkLocations);
+    if (!settings.shuffleMasterSword && mustStartWithMasterSword(settings)) {
       locs = [...locs, ...this.makePlayerLocations(['OOT Temple of Time Master Sword'])];
     }
     this.fillJunk(locs);

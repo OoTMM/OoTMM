@@ -12,6 +12,7 @@ import { ItemSharedDef, SharedItemGroups } from './shared';
 import { World } from './world';
 import { ItemProperties } from './item-properties';
 import { CLOCKS } from '../items/groups';
+import { mustStartWithMasterSword } from '../settings/util';
 
 const BROKEN_ACTORS_CHECKS = [
   'OOT Dodongo Cavern Grass East Corridor Side Room',
@@ -1424,7 +1425,7 @@ export class LogicPassWorldTransform {
     }
 
     /* Handle OoT swords */
-    if (settings.startingAge === 'adult' && !settings.swordlessAdult) {
+    if (mustStartWithMasterSword(settings)) {
       this.removeItem(Items.OOT_SWORD_MASTER);
     }
     if (settings.progressiveSwordsOot === 'progressive') {

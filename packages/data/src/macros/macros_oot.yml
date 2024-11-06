@@ -94,7 +94,7 @@
 "age_bow": "is_adult || setting(agelessBow) || glitch_equip_swap"
 
 # Swords
-"starts_with_master_sword": "setting(startingAge, adult) && !setting(swordlessAdult)"
+"starts_with_master_sword": "setting(startingAge, adult) && (!setting(swordlessAdult) || (!setting(shuffleMasterSword) && setting(timeTravelSword)))"
 "has_sword_child(n)": "setting(extraChildSwordsOot) && cond(setting(sharedSwords), has(SHARED_SWORD, n), has(SWORD, n))"
 "has_sword_kokiri": "cond(setting(progressiveSwordsOot, progressive), has(SWORD), cond(setting(extraChildSwordsOot), has_sword_child(1), has(SWORD_KOKIRI)))"
 "has_sword_razor": "has_sword_child(2)"

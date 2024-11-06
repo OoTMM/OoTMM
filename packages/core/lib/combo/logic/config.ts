@@ -2,6 +2,7 @@ import { ItemGroups, Items, PlayerItems, itemByID, makePlayerItem } from '../ite
 import { Monitor } from '../monitor';
 import { Random, sample } from '../random';
 import { Settings } from '../settings';
+import { mustStartWithMasterSword } from '../settings/util';
 import { countMapAdd, countMapRemove } from '../util';
 
 /* This pass pre-computes things from the settings */
@@ -69,7 +70,7 @@ export class LogicPassConfig {
       const piSword = makePlayerItem(Items.OOT_SWORD, playerId);
       const piSwordMaster = makePlayerItem(Items.OOT_SWORD_MASTER, playerId);
 
-      if (settings.startingAge === 'adult' && !settings.swordlessAdult) {
+      if (mustStartWithMasterSword(settings)) {
         if (settings.progressiveSwordsOot === 'progressive') {
           if ((this.startingItems.get(piSword) || 0) > 1) {
             countMapRemove(this.startingItems, piSword, 1);
