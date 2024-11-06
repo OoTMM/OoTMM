@@ -275,4 +275,4 @@
   region: GANON_CASTLE
   exits:
     "Ganon Castle Main Room": "true"
-    "Ganon Castle Tower": "true"
+    "Ganon Castle Tower": "ganon_barrier"
