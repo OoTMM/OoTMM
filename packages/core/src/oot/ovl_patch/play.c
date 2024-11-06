@@ -530,9 +530,24 @@ static void Play_LoadKaleidoScopeHook(void* unk)
 
 PATCH_CALL(0x8009a06c, Play_LoadKaleidoScopeHook);
 
+void ReloadSword(PlayState* play);
+
+static void Minigame_Fix(PlayState* play)
+{
+    int shouldReload;
+
+    shouldReload = 0;
+    if (play->sceneId == SCE_OOT_BOMBCHU_BOWLING_ALLEY && Flags_GetSwitch(play, 0x38))
+        shouldReload = 1;
+
+    if (shouldReload)
+        ReloadSword(play);
+}
+
 NORETURN static void Play_GameSwitch(PlayState* play, u32 entrance)
 {
     Horse_ForceUnmount(play);
+    Minigame_Fix(play);
     comboGameSwitch(play, entrance);
 }
 

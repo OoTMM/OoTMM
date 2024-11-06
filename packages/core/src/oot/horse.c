@@ -19,6 +19,24 @@ static int Horse_IsValidEntrance(u32 entranceId)
     }
 }
 
+void ReloadSword(PlayState* play)
+{
+    static const u8 kSwords[] = { ITEM_NONE, ITEM_OOT_SWORD_KOKIRI, ITEM_OOT_SWORD_MASTER, ITEM_OOT_SWORD_KNIFE_BIGGORON };
+
+    u8 itemId;
+
+    /* Reload the sword */
+    itemId = kSwords[gSave.info.equips.equipment.swords];
+    if (itemId == ITEM_NONE)
+        EV_OOT_SET_SWORDLESS();
+    else
+        EV_OOT_UNSET_SWORDLESS();
+    if (itemId == ITEM_OOT_SWORD_KNIFE_BIGGORON && !gSave.info.isBiggoronSword && !gSave.info.playerData.swordHealth)
+        itemId = ITEM_OOT_SWORD_KNIFE_BROKEN;
+    gSave.info.equips.buttonItems[0] = itemId;
+    Interface_LoadItemIconImpl(play, 0);
+}
+
 void Horse_ForceUnmount(PlayState* play)
 {
     if (AREG(6) != 0)
@@ -26,15 +44,8 @@ void Horse_ForceUnmount(PlayState* play)
         /* Link is on Epona, needs to dismount */
         AREG(6) = 0;
 
-        /* Reset the TempB */
-        if (EV_OOT_IS_SWORDLESS())
-            gSave.info.equips.buttonItems[0] = ITEM_NONE;
-        else
-            gSave.info.equips.buttonItems[0] = gSaveContext.buttonStatus[0];
-        gSaveContext.buttonStatus[0] = ITEM_NONE;
-
-        /* Reload the B button icon */
-        Interface_LoadItemIconImpl(play, 0);
+        /* Reload the sword */
+        ReloadSword(play);
     }
 }
 
