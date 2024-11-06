@@ -145,7 +145,7 @@ static const CheckName kCheckNamesMm[] = {
     { TEXT_COLOR_PINK "Anju and Kafei", TF_NONE },
     { TEXT_COLOR_BLUE "Don Gero's Choir", TF_NONE },
     { "the " TEXT_COLOR_RED "Goron Race", TF_NONE },
-    { "the " TEXT_COLOR_PINK "Graveyard Big Poe", TF_NONE },
+    { "the " TEXT_COLOR_PINK "Beneath the Graveyard Night 3 Chest", TF_NONE },
     { "the " TEXT_COLOR_PINK "Termina Field Musical Stones", TF_PLURAL },
     { "the " TEXT_COLOR_TEAL "Bank's Final Reward", TF_NONE },
     { "the " TEXT_COLOR_TEAL "Milk Bar Performance", TF_NONE },
