@@ -35,9 +35,9 @@ static s16 sChildCounts[OBJMURE2_CHILDTYPE_MAX] = {
 };
 
 static s16 sActorIds[OBJMURE2_CHILDTYPE_MAX] = {
-    AC_EN_KUSA, // OBJMURE2_CHILDTYPE_BUSH_RING
-    AC_EN_KUSA, // OBJMURE2_CHILDTYPE_BUSH_SCATTERED
-    AC_EN_ISHI, // OBJMURE2_CHILDTYPE_ROCK_RING
+    ACTOR_EN_KUSA, // OBJMURE2_CHILDTYPE_BUSH_RING
+    ACTOR_EN_KUSA, // OBJMURE2_CHILDTYPE_BUSH_SCATTERED
+    ACTOR_EN_ISHI, // OBJMURE2_CHILDTYPE_ROCK_RING
 };
 
 static VecPolarS sScatteredBushSpawnInfo[OBJ_MURE2_CHILD_MAX] = {
@@ -45,14 +45,14 @@ static VecPolarS sScatteredBushSpawnInfo[OBJ_MURE2_CHILD_MAX] = {
     { 80, 0x4000 }, { 80, 0x6CCC }, { 80, -0x6CCD }, { 80, -0x5334 }, { 80, -0x399A }, { 60, -0x2000 },
 };
 
-void ObjMure2_Init(Actor_ObjMure2* this, GameState_Play* play);
-void ObjMure2_Update(Actor_ObjMure2* this, GameState_Play* play);
+void ObjMure2_Init(Actor_ObjMure2* this, PlayState* play);
+void ObjMure2_Update(Actor_ObjMure2* this, PlayState* play);
 
-void ObjMure2_SpawnChildren(Actor_ObjMure2* this, GameState_Play* play);
-void ObjMure2_Wait(Actor_ObjMure2* this, GameState_Play* play);
-void ObjMure2_WaitForPlayerInRange(Actor_ObjMure2* this, GameState_Play* play);
-void ObjMure2_WaitForPlayerOutOfRange(Actor_ObjMure2* this, GameState_Play* play);
-void ObjMure2_KillChildren(Actor_ObjMure2* this, GameState_Play* play);
+void ObjMure2_SpawnChildren(Actor_ObjMure2* this, PlayState* play);
+void ObjMure2_Wait(Actor_ObjMure2* this, PlayState* play);
+void ObjMure2_WaitForPlayerInRange(Actor_ObjMure2* this, PlayState* play);
+void ObjMure2_WaitForPlayerOutOfRange(Actor_ObjMure2* this, PlayState* play);
+void ObjMure2_KillChildren(Actor_ObjMure2* this, PlayState* play);
 void ObjMure2_SetupWait(Actor_ObjMure2* this);
 void ObjMure2_SetupWaitForPlayerInRange(Actor_ObjMure2* this);
 void ObjMure2_SetupWaitForPlayerOutOfRange(Actor_ObjMure2* this);
@@ -117,7 +117,7 @@ void ObjMure2_GetChildParams(s16* childParams, Actor_ObjMure2* this)
 }
 #endif
 
-Actor* ObjMure2_ActorSpawn(Actor_ObjMure2* this, GameState_Play* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable)
+Actor* ObjMure2_ActorSpawn(Actor_ObjMure2* this, PlayState* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable)
 {
 #if defined(GAME_OOT)
     return Actor_Spawn(&play->actorCtx, play, actorId, x, y, z, rx, ry, rz, variable);
@@ -128,7 +128,7 @@ Actor* ObjMure2_ActorSpawn(Actor_ObjMure2* this, GameState_Play* play, s16 actor
 #endif
 }
 
-Actor* ObjMure2_ActorSpawnEx(Actor_ObjMure2* this, GameState_Play* play, int i, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable)
+Actor* ObjMure2_ActorSpawnEx(Actor_ObjMure2* this, PlayState* play, int i, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable)
 {
     Actor* tmp;
 
@@ -149,7 +149,7 @@ static ObjMure2SpawnPosFunc sSpawnPosFuncs[OBJMURE2_CHILDTYPE_MAX] =
     ObjMure2_GetRocksSpawnPos,
 };
 
-void ObjMure2_SpawnChildren(Actor_ObjMure2* this, GameState_Play* play)
+void ObjMure2_SpawnChildren(Actor_ObjMure2* this, PlayState* play)
 {
     Vec3f* pos;
     Mure2ChildType childType;
@@ -175,7 +175,7 @@ void ObjMure2_SpawnChildren(Actor_ObjMure2* this, GameState_Play* play)
     }
 }
 
-void ObjMure2_KillChildren(Actor_ObjMure2* this, GameState_Play* play)
+void ObjMure2_KillChildren(Actor_ObjMure2* this, PlayState* play)
 {
     for (int i = 0; i < sChildCounts[OBJ_MURE2_GET_CHILD_TYPE(&this->actor)]; i++)
     {
@@ -274,7 +274,7 @@ void ObjMure2_AliasRocks(Xflag* xf)
 #endif
 }
 
-void ObjMure2_Alias(Actor_ObjMure2* this, GameState_Play* play)
+void ObjMure2_Alias(Actor_ObjMure2* this, PlayState* play)
 {
     Xflag* xf;
 
@@ -285,7 +285,7 @@ void ObjMure2_Alias(Actor_ObjMure2* this, GameState_Play* play)
         ObjMure2_AliasGrass(xf);
 }
 
-void ObjMure2_Init(Actor_ObjMure2* this, GameState_Play* play)
+void ObjMure2_Init(Actor_ObjMure2* this, PlayState* play)
 {
     comboXflagInit(&this->xflag, &this->actor, play);
     ObjMure2_Alias(this, play);
@@ -301,7 +301,7 @@ void ObjMure2_SetupWait(Actor_ObjMure2* this)
     this->actionFunc = ObjMure2_Wait;
 }
 
-void ObjMure2_Wait(Actor_ObjMure2* this, GameState_Play* play)
+void ObjMure2_Wait(Actor_ObjMure2* this, PlayState* play)
 {
     ObjMure2_SetupWaitForPlayerInRange(this);
 }
@@ -311,7 +311,7 @@ void ObjMure2_SetupWaitForPlayerInRange(Actor_ObjMure2* this)
     this->actionFunc = ObjMure2_WaitForPlayerInRange;
 }
 
-void ObjMure2_WaitForPlayerInRange(Actor_ObjMure2* this, GameState_Play* play)
+void ObjMure2_WaitForPlayerInRange(Actor_ObjMure2* this, PlayState* play)
 {
     if (Math3D_Dist1DSq(this->actor.projectedPos.x, this->actor.projectedPos.z) <
         sActivationRangesSq[OBJ_MURE2_GET_CHILD_TYPE(&this->actor)] * this->rangeMultiplier) {
@@ -326,7 +326,7 @@ void ObjMure2_SetupWaitForPlayerOutOfRange(Actor_ObjMure2* this)
     this->actionFunc = ObjMure2_WaitForPlayerOutOfRange;
 }
 
-void ObjMure2_WaitForPlayerOutOfRange(Actor_ObjMure2* this, GameState_Play* play)
+void ObjMure2_WaitForPlayerOutOfRange(Actor_ObjMure2* this, PlayState* play)
 {
     ObjMure2_ClearChildrenList(this);
 
@@ -338,7 +338,7 @@ void ObjMure2_WaitForPlayerOutOfRange(Actor_ObjMure2* this, GameState_Play* play
     }
 }
 
-void ObjMure2_Update(Actor_ObjMure2* this, GameState_Play* play)
+void ObjMure2_Update(Actor_ObjMure2* this, PlayState* play)
 {
     if (play->csCtx.state == CS_STATE_IDLE)
     {
@@ -353,7 +353,7 @@ void ObjMure2_Update(Actor_ObjMure2* this, GameState_Play* play)
 
 ActorProfile ObjMure2_Profile =
 {
-    AC_OBJ_MURE2,
+    ACTOR_OBJ_MURE2,
     ACTORCAT_PROP,
     FLAGS,
     OBJECT_GAMEPLAY_KEEP,
@@ -364,4 +364,4 @@ ActorProfile ObjMure2_Profile =
     NULL,
 };
 
-OVL_ACTOR_INFO(AC_OBJ_MURE2, ObjMure2_Profile);
+OVL_INFO_ACTOR(ACTOR_OBJ_MURE2, ObjMure2_Profile);

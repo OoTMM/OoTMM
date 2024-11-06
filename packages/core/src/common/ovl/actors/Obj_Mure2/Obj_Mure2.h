@@ -6,7 +6,7 @@
 
 typedef struct Actor_ObjMure2 Actor_ObjMure2;
 
-typedef void (*Actor_ObjMure2Func)(Actor_ObjMure2*, GameState_Play*);
+typedef void (*Actor_ObjMure2Func)(Actor_ObjMure2*, PlayState*);
 
 #define OBJ_MURE2_CHILD_MAX                     12
 #define OBJ_MURE2_GET_CHILD_TYPE(thisx)         ((thisx)->params & 3)
