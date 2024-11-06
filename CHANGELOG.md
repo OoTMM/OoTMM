@@ -35,6 +35,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+- Fix an old bug where swords could get deleted leaving bombchu bowling into MM while playing the minigame.
 - Fix a long-standing issue where Anju's reservation worked inconsistently (for real this time).
 - Fix precompleted Stone Tower not setting some flags correctly.
 - Fix possible softlock in Ice Cavern with shuffled silver rupees.
