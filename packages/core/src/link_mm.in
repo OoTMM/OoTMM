@@ -651,3 +651,10 @@ gSetupDLs = 0x801c0ef0;
 Actor_SetClosestSecretDistance = 0x800b8c50;
 CutsceneFlags_Get = 0x800f13e8;
 Gfx_DrawDListXlu = 0x800be03c;
+
+Audio_PlaySfx_SwordCharge = 0x8019f900;
+gSfxDefaultFreqAndVolScale = 0x801db4b0;
+gSfxDefaultReverb = 0x801db4b8;
+Matrix_Mult = 0x80180244;
+Environment_AdjustLights = 0x800fd2b4;
+LightContext_RemoveLight = 0x80102684;

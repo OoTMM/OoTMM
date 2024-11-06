@@ -13,6 +13,21 @@
 #define SQXZ(vec) ((vec.x) * (vec.x) + (vec.z) * (vec.z))
 #define DOTXYZ(vec1, vec2) ((vec1.x) * (vec2.x) + (vec1.y) * (vec2.y) + (vec1.z) * (vec2.z))
 
+#define LERPIMP(v0, v1, t) ((v0) + (((v1) - (v0)) * (t)))
+#define LERPIMP_ALT(v0, v1, t) (((v1) - (v0)) * (t) + (v0))
+#define S16_LERP(v0, v1, t) ((s16)(((v1) - (v0)) * (t)) + (v0))
+#define F32_LERP(v0, v1, t) ((1.0f - (t)) * (f32)(v0) + (t) * (f32)(v1))
+#define F32_LERP_ALT(v0, v1, t) ((f32)(v0) * (1.0f - (t)) + (t) * (f32)(v1))
+#define F32_LERPIMP(v0, v1, t) ((f32)(v0) + (((f32)(v1) - (f32)(v0)) * (t)))
+#define F32_LERPIMPINV(v0, v1, t) ((f32)(v0) + (((f32)(v1) - (f32)(v0)) / (t)))
+#define BINANG_LERPIMP(v0, v1, t) ((v0) + (s16)(BINANG_SUB((v1), (v0)) * (t)))
+#define BINANG_LERPIMPINV(v0, v1, t) ((v0) + BINANG_SUB((v1), (v0)) / (t))
+
+#define LERPWEIGHT(val, prev, next) (((val) - (prev)) / ((next) - (prev)))
+#define F32_LERPWEIGHT(val, prev, next) (((f32)(val) - (f32)(prev)) / ((f32)(next) - (f32)(prev)))
+
+#define IS_ZERO(f) (fabsf(f) < 0.008f)
+
 #define M_PIf 3.14159265358979323846f
 
 #define VEC3F_LERPIMPDST(dst, v0, v1, t)                \

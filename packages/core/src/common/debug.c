@@ -584,6 +584,7 @@ static void cheatAllItems(PlayState* play)
     gMmOwlFlags = 0x3ff; /* all owls statues */
 
     MM_SET_EVENT_WEEK(EV_MM_WEEK_HEALED_WITCH_WOODS);
+    MM_SET_EVENT_WEEK(EV_MM_WEEK_SPIN_UPGRADE);
 
 }
 #endif

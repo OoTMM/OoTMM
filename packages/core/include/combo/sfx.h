@@ -26,5 +26,6 @@ void Audio_ProcessSfxRequests(void);
 void func_800F8F88(void);
 u8 Audio_IsSfxPlaying(u32 sfxId);
 void Audio_ResetSfx(void);
+void Audio_PlaySfx_SwordCharge(Vec3f* pos, u8 chargeLevel);
 
 #endif
