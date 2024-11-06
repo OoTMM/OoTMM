@@ -250,7 +250,7 @@
     "Ganon Castle Shadow Trial Middle Beamos Area 2": "event(GANON_MQ_SHADOW_TORCH_ICE_BLOCK) || has_hover_boots || hookshot_anywhere || (event(GANON_MQ_SHADOW_EYE_CHEST) && can_hookshot)"
   events:
     GANON_MQ_SHADOW_TORCH_ICE_BLOCK: "has_fire"
-    GANON_MQ_SHADOW_PROGRESSION_FROM_BEAMOS_1: "(has_lens && (can_longshot || hookshot_anywhere || (has_hover_boots && climb_anywhere))) || longshot_anywhere"
+    GANON_MQ_SHADOW_PROGRESSION_FROM_BEAMOS_1: "(has_lens && (can_longshot || hookshot_anywhere || (has_hover_boots && (is_adult || climb_anywhere)))) || longshot_anywhere"
     GANON_MQ_SHADOW_BOMBFLOWER_FROM_BEAMOS_1: "can_use_bow || ((can_use_din || has_bombflowers) && (has_lens || longshot_anywhere))"
   locations:
     "MQ Ganon Castle SR Shadow Middle": "true"
