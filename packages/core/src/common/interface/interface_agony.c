@@ -3,6 +3,14 @@
 
 #define ICON_SIZE 16
 
+#if defined(GAME_OOT)
+# define VROM_FILE 0x846000
+#endif
+
+#if defined(GAME_MM)
+# define VROM_FILE 0x846000 | VROM_FOREIGN_OFFSET
+#endif
+
 static Gfx gDListLoadStoneAgonyIcon[] = {
     gsDPLoadTextureBlock(0, G_IM_FMT_RGBA, G_IM_SIZ_32b, 24, 24, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD),
     gsSPEndDisplayList(),
@@ -45,7 +53,7 @@ void Interface_AgonyIconDraw(PlayState* play)
         return;
     }
 
-    tex = comboCacheGetFilePartial(0x846000, 9 * 0x900, 0x900);
+    tex = comboCacheGetFilePartial(VROM_FILE, 9 * 0x900, 0x900);
     if (!tex)
         return;
     gDListLoadStoneAgonyIcon[0].words.w1 = (u32)tex;

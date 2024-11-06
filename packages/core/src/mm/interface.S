@@ -36,3 +36,8 @@ PATCH_END
 PATCH_START 0x80167c78
   jal Interface_Update
 PATCH_END
+
+/* Use our after draw */
+PATCH_START 0x80120f88
+  j Interface_AfterDraw
+PATCH_END

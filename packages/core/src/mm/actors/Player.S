@@ -1330,7 +1330,7 @@ Player_HammerShockwaveCheck_Hook:
   lw	      a0, 0x0044 (sp)
   sw        ra, 0x0024 (sp)
   jal       Player_HammerShockwaveCheck
-  lw        a1, 0x0020 (sp)     
+  lw        a1, 0x0020 (sp)
   lw        ra, 0x0024 (sp)
   jr ra
   addiu     sp, sp, 0x40
@@ -1338,4 +1338,14 @@ Player_HammerShockwaveCheck_Hook:
 PATCH_START 0x80854C64
   j Player_HammerShockwaveCheck_Hook
   nop
-PATCH_END 
+PATCH_END
+
+/* Use our Agony handler */
+PATCH_START 0x8084476c
+  jal Player_RumbleAgony
+PATCH_END
+
+/* Reloc 16cdc */
+PATCH_START 0x8086059c
+.int 0
+PATCH_END
