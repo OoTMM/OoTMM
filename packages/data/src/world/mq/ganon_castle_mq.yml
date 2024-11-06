@@ -88,19 +88,24 @@
   dungeon: Ganon
   exits:
     "Ganon Castle Forest Trial Entrance": "true"
-    "Ganon Castle Forest Trial Wind Room Ending Side": "true"
+    "Ganon Castle Forest Trial Wind Room Ending Side": "true" #Can use wind to jump to the other side.
+  events:
+    GANON_CASTLE_MQ_FOREST_WIND_FROZEN_EYE: "has_fire_arrows"
+    GANON_CASTLE_MQ_FOREST_WIND_OPEN_EYE: "can_hit_triggers_distance"
   locations:
-    "MQ Ganon Castle Forest Trial First Chest": "can_hit_triggers_distance"
-    "MQ Ganon Castle Forest Trial Second Chest": "has_fire_arrows"
+    "MQ Ganon Castle Forest Trial First Chest": "event(GANON_CASTLE_MQ_FOREST_WIND_OPEN_EYE)"
+    "MQ Ganon Castle Forest Trial Second Chest": "event(GANON_CASTLE_MQ_FOREST_WIND_FROZEN_EYE)"
 "Ganon Castle Forest Trial Wind Room Ending Side":
   dungeon: Ganon
   exits:
-    "Ganon Castle Forest Trial Wind Room Starting Side": "hookshot_anywhere || (has_hover_boots && climb_anywhere)"
+    "Ganon Castle Forest Trial Wind Room Starting Side": "hookshot_anywhere || (has_hover_boots && climb_anywhere) || (can_longshot && event(GANON_CASTLE_MQ_FOREST_WIND_OPEN_EYE))"
     "Ganon Castle Forest Trial Ending Room": "event(GANON_MQ_FOREST_SWITCH)"
   events:
+    GANON_CASTLE_MQ_FOREST_WIND_FROZEN_EYE: "has_fire"
+    GANON_CASTLE_MQ_FOREST_WIND_OPEN_EYE: "can_hit_triggers_distance"
     GANON_MQ_FOREST_SWITCH: "can_play_time || can_play_elegy"
   locations:
-    "MQ Ganon Castle Forest Trial Second Chest": "has_fire"
+    "MQ Ganon Castle Forest Trial Second Chest": "event(GANON_CASTLE_MQ_FOREST_WIND_FROZEN_EYE)"
 "Ganon Castle Forest Trial Ending Room":
   dungeon: Ganon
   exits:
