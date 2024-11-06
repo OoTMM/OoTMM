@@ -15,7 +15,6 @@ All notable changes to this project will be documented in this file.
 - Add the Megaton Hammer to Majora's Mask.
 - Add butterfly shuffle, for both games.
 - Vanilla Small and Boss Keys setting.
-- Stone of Agony in MM only mode.
 - Skipped the camera pan out over Ganon's Castle being demolished.
 - New entrance option for Pirate Fortress that includes all the currently shuffled entrances.
 - Gerudo souls
