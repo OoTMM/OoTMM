@@ -131,8 +131,9 @@
 "can_play_cross_tp_spirit": "can_play_cross(OOT_SONG_TP_SPIRIT) && ocarina_button_a && ocarina_button_right && ocarina_button_down"
 
 # Misc
+"has_spin_upgrade": "cond(setting(sharedSpinUpgrade), has(SHARED_SPIN_UPGRADE), has(SPIN_UPGRADE))"
 "keaton_grass_easy": "has_sword && has_magic"
-"keaton_grass_hard": "keaton_grass_easy && (has(SPIN_UPGRADE) || has(GREAT_FAIRY_SWORD) || has_sword_level(3))"
+"keaton_grass_hard": "keaton_grass_easy && (has_spin_upgrade || has(GREAT_FAIRY_SWORD) || has_sword_level(3))"
 
 "break_hive": "has_weapon_range"
 
