@@ -105,4 +105,6 @@ typedef struct
 }
 TransitionActorContext; /* size = 0x8 */
 
+#define PARAMS_GET_NOSHIFT(p, s, n) ((p) & (NBITS_TO_MASK(n) << (s)))
+
 #endif

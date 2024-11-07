@@ -382,3 +382,5 @@ LightContext_InsertLight = 0x800665b0;
 Lights_PointNoGlowSetInfo = 0x80065bcc;
 LightContext_RemoveLight = 0x80066610;
 Environment_AdjustLights = 0x800631d8;
+Actor_SetClosestSecretDistance = 0x80022d94;
+Camera_GetCamDirYaw = 0x8004977c;
