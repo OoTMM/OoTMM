@@ -247,4 +247,6 @@ typedef struct FileSelectState {
 }
 FileSelectState;
 
+int Play_InCsMode(PlayState* this);
+
 #endif

@@ -53,5 +53,6 @@ void Magic_Reset(PlayState* play);
 void Magic_Update(PlayState* play);
 void Magic_Refill(PlayState* play);
 int Magic_RequestChange(PlayState* play, s16 amount, s16 type);
+s32 Magic_RequestChangeCustom(PlayState* play, s16 amount, s16 type);
 
 #endif

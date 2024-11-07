@@ -166,7 +166,7 @@ typedef struct Player
     u8              heldItemId;
     u8              boots;
     u8              heldItemAction;
-    char            unk_155[0x003];
+    char            unk_165[0x003];
     u8              modelGroup;
     u8              nextModelGroup;
     s8              itemChangeType;
@@ -184,12 +184,12 @@ typedef struct Player
     OSMesgQueue     objMsgQueue;
     OSMesg          objMsg;
     void*           objBuffer;
-    char            unk_1a4[0x280];
+    char            unk_1b4[0x280];
     s16             gi; /* Extended to s16 */
-    char            unk_426[0x246];
+    char            unk_436[0x246];
     u32             stateFlags1;
     u32             stateFlags2;
-    Actor*          unk_674;
+    Actor*          unk_684;
     Actor*          boomerangActor;
     Actor*          naviActor;
     s16             naviTextId;
@@ -197,18 +197,18 @@ typedef struct Player
     s8              exchangeItemId;
     Actor*          talkActor;
     float           talkActorDistance;
-    char            unk_68c[0x004];
-    float           unk_690;
+    char            unk_69c[0x004];
+    float           unk_6a0;
     float           closestSecretDistSq;
-    Actor*          unk_698;
-    char            unk_69c[0x1c];
+    Actor*          unk_6a8;
+    char            unk_6ac[0x1c];
     SkelAnime       upperSkelAnime;
     Vec3s           upperJointTable[PLAYER_LIMB_BUF_COUNT];
     Vec3s           upperMorphTable[PLAYER_LIMB_BUF_COUNT];
     void*           upperActionFunc;
     f32             upperAnimInterpWeight;
-    s16             unk_824;
-    s8              unk_826;
+    s16             unk_834;
+    s8              unk_836;
     u8              putAwayCooldownTimer;
     f32             speedXZ;
     s16             yaw;
@@ -216,8 +216,8 @@ typedef struct Player
     u16             underwaterTimer;
     s8              meleeWeaponAnimation;
     s8              meleeWeaponState;
-    s8              unk_834;
-    u8              unk_835;
+    s8              unk_844;
+    u8              unk_845;
     u8              controlStickDataIndex;
     s8              controlStickSpinAngles[4];
     s8              controlStickDirections[4];
@@ -232,35 +232,35 @@ typedef struct Player
         s16 bonked;
     }
     av2;
-    float           unk_844;
-    float           unk_848;
-    float           unk_84C;
-    s16             unk_850;
-    u8              drawGiId;
     float           unk_854;
     float           unk_858;
     float           unk_85C;
-    float           unk_860;
+    s16             unk_860;
+    u8              drawGiId;
     float           unk_864;
     float           unk_868;
-    s16             unk_86C;
-    s16             unk_86E;
+    float           unk_86C;
     float           unk_870;
+    float           unk_874;
+    float           unk_878;
+    s16             unk_87C;
+    s16             unk_87E;
+    float           unk_880;
     float           yDistToLedge;
     float           distToInteractWall;
     u8              ledgeClimbType;
     u8              ledgeClimbDelayTimer;
-    u8              unk_87e;
+    u8              unk_88e;
     u8              damageFlickerAnimCounter;
-    u8              unk_880;
+    u8              unk_890;
     u8              bodyShockTimer;
-    u8              unk_882;
+    u8              unk_892;
     u8              hoverBootsTimer;
     s16             fallStartHeight;
     s16             fallDistance;
     s16             floorPitch;
     s16             floorPitchAlt;
-    s16             unk_88c;
+    s16             unk_89c;
     u16             floorSfxOffset;
     u8              knockbackDamage;
     u8              knockbackType;
@@ -275,7 +275,7 @@ typedef struct Player
     MtxF            shieldMf;
     u8              bodyIsBurning;
     u8              bodyFlameTimers[PLAYER_BODYPART_MAX];
-    u8              unk_a63;
+    u8              unk_a73;
     void*           afterPutAwayFunc;
     s8              invincibilityTimer;
     u8              floorTypeTimer;
@@ -284,10 +284,10 @@ typedef struct Player
     float           prevControlStickMagnitude;
     s16             prevControlStickAngle;
     u16             prevFloorSfxOffset;
-    s16             unk_a74;
-    s8              unk_a76;
-    u8              unk_a77;
-    Vec3f           unk_a78;
+    s16             unk_a84;
+    s8              unk_a86;
+    u8              unk_a87;
+    Vec3f           unk_a88;
 }
 Player;
 
@@ -306,15 +306,47 @@ ASSERT_OFFSET(Player, sheathDLists,       0x158);
 ASSERT_OFFSET(Player, waistDLists,        0x15c);
 ASSERT_OFFSET(Player, giObjectLoading,    0x160);
 ASSERT_OFFSET(Player, giObjectDmaRequest, 0x164);
-ASSERT_OFFSET(Player, unk_1a4,            0x1a4);
+ASSERT_OFFSET(Player, unk_1b4,            0x1a4);
 ASSERT_OFFSET(Player, gi,                 0x424);
-ASSERT_OFFSET(Player, unk_426,            0x426);
-ASSERT_OFFSET(Player, unk_674,            0x674);
+ASSERT_OFFSET(Player, unk_436,            0x426);
+ASSERT_OFFSET(Player, unk_684,            0x674);
 ASSERT_OFFSET(Player, boomerangActor,     0x678);
 ASSERT_OFFSET(Player, naviActor,          0x67c);
 ASSERT_OFFSET(Player, naviTextId,         0x680);
 ASSERT_OFFSET(Player, state3,             0x682);
 ASSERT_OFFSET(Player, exchangeItemId,     0x683);
 ASSERT_OFFSET(Player, drawGiId,           0x852);
+
+typedef enum PlayerMeleeWeaponAnimation {
+    /*  0 */ PLAYER_MWA_FORWARD_SLASH_1H,
+    /*  1 */ PLAYER_MWA_FORWARD_SLASH_2H,
+    /*  2 */ PLAYER_MWA_FORWARD_COMBO_1H,
+    /*  3 */ PLAYER_MWA_FORWARD_COMBO_2H,
+    /*  4 */ PLAYER_MWA_RIGHT_SLASH_1H,
+    /*  5 */ PLAYER_MWA_RIGHT_SLASH_2H,
+    /*  6 */ PLAYER_MWA_RIGHT_COMBO_1H,
+    /*  7 */ PLAYER_MWA_RIGHT_COMBO_2H,
+    /*  8 */ PLAYER_MWA_LEFT_SLASH_1H,
+    /*  9 */ PLAYER_MWA_LEFT_SLASH_2H,
+    /* 10 */ PLAYER_MWA_LEFT_COMBO_1H,
+    /* 11 */ PLAYER_MWA_LEFT_COMBO_2H,
+    /* 12 */ PLAYER_MWA_STAB_1H,
+    /* 13 */ PLAYER_MWA_STAB_2H,
+    /* 14 */ PLAYER_MWA_STAB_COMBO_1H,
+    /* 15 */ PLAYER_MWA_STAB_COMBO_2H,
+    /* 16 */ PLAYER_MWA_FLIPSLASH_START,
+    /* 17 */ PLAYER_MWA_JUMPSLASH_START,
+    /* 18 */ PLAYER_MWA_FLIPSLASH_FINISH,
+    /* 19 */ PLAYER_MWA_JUMPSLASH_FINISH,
+    /* 20 */ PLAYER_MWA_BACKSLASH_RIGHT,
+    /* 21 */ PLAYER_MWA_BACKSLASH_LEFT,
+    /* 22 */ PLAYER_MWA_HAMMER_FORWARD,
+    /* 23 */ PLAYER_MWA_HAMMER_SIDE,
+    /* 24 */ PLAYER_MWA_SPIN_ATTACK_1H,
+    /* 25 */ PLAYER_MWA_SPIN_ATTACK_2H,
+    /* 26 */ PLAYER_MWA_BIG_SPIN_1H,
+    /* 27 */ PLAYER_MWA_BIG_SPIN_2H,
+    /* 28 */ PLAYER_MWA_MAX
+} PlayerMeleeWeaponAnimation;
 
 #endif

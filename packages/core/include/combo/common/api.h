@@ -366,6 +366,7 @@ void PreDraw2(Actor* actor, PlayState* play, int unk);
 Actor* ActorFind(void* actorCtx, s32 actorId, s32 actorCategory);
 void Play_InitEnvironment(PlayState *play, u16 skyboxId);
 extern u8 gFogState;
+void func_800C4F94(Vec3f* pos, u8 level);
 #endif
 
 #if defined(GAME_MM)
@@ -452,6 +453,8 @@ extern u8 gWeatherMode;
 void FileSelect_Init(GameState* this);
 
 void Rumble_Request(f32 distSq, u8 sourceIntensity, u8 decayTimer, u8 decayStep);
+Actor* Actor_SpawnAsChild(ActorContext* actorCtx, Actor* parent, PlayState* play, s16 actorId, f32 posX, f32 posY, f32 posZ, s16 rotX, s16 rotY, s16 rotZ, s32 params);
+
 
 #if defined(GAME_MM)
 extern u8 gSceneSeqState;
@@ -492,7 +495,6 @@ s16 CutsceneManager_GetCutsceneCustomValue(s16 csId);
 CutsceneEntry* CutsceneManager_GetCutsceneEntry(s16 csId);
 
 void Actor_ChangeCategory(PlayState* play, ActorContext* actorCtx, Actor* actor, u8 actorCategory);
-Actor* Actor_SpawnAsChild(ActorContext* actorCtx, Actor* parent, PlayState* play, s16 actorId, f32 posX, f32 posY, f32 posZ, s16 rotX, s16 rotY, s16 rotZ, s32 params);
 void Animation_MorphToLoop(SkelAnime* skelAnime, AnimationHeader* animation, f32 morphFrames);
 void Animation_MorphToPlayOnce(SkelAnime* skelAnime, AnimationHeader* animation, f32 morphFrames);
 s32 Animation_OnFrame(SkelAnime* skelAnime, f32 frame);

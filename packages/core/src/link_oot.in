@@ -370,3 +370,15 @@ Collider_UpdateCylinder = 0x80050b00;
 Collider_DestroyCylinder = 0x8004abcc;
 
 gRegEditor = 0x8011ba00;
+
+Magic_Reset = 0x80072548;
+Actor_SpawnAsChild = 0x800253f0;
+Play_InCsMode = 0x8009cb08;
+Gfx_SetupDL_25Xlu = 0x8007e2c0;
+Gfx_TwoTexScroll = 0x8007eb84;
+Matrix_Mult = 0x800aa79c;
+func_800C4F94 = 0x800c4f94;
+LightContext_InsertLight = 0x800665b0;
+Lights_PointNoGlowSetInfo = 0x80065bcc;
+LightContext_RemoveLight = 0x80066610;
+Environment_AdjustLights = 0x800631d8;
