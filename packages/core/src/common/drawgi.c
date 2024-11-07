@@ -471,18 +471,17 @@ void DrawGi_CustomSpin(PlayState* play, s16 drawGiId, u8 param)
     drawGi = &kDrawGi[drawGiId];
     float rot;
 
-
     rot = (play->state.frameCount * 0.01f);
     OPEN_DISPS(play->state.gfxCtx);
+    Gfx_SetupDL25_Opa(play->state.gfxCtx);
     Matrix_RotateX(rot * 3, MTXMODE_APPLY);
     Matrix_RotateY(rot * 5, MTXMODE_APPLY);
     Matrix_RotateZ(rot * 7, MTXMODE_APPLY);
     gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    Gfx_SetupDL25_Opa(play->state.gfxCtx);
     if (param == 0)
     {
         /* MM */
-        gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
+    gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[0]);
         gSPDisplayList(POLY_OPA_DISP++, drawGi->lists[1]);
     }
     else
