@@ -33,6 +33,8 @@ void comboXflagsSetOot(const Xflag* xf);
 void comboXflagsSetMm(const Xflag* xf);
 void comboXflagItemQuery(ComboItemQuery* q, const Xflag* xf, s16 gi);
 void comboXflagItemOverride(ComboItemOverride* o, const Xflag* xf, s16 gi);
-void comboXflagInit(Xflag* xf, Actor* actor, PlayState* play);
+int  comboXflagInit(Xflag* xf, Actor* actor, PlayState* play);
+int  Xflag_IsValid(Xflag* xf);
+int  Xflag_IsShuffled(Xflag* xf);
 
 #endif /* COMBO_XFLAGS_H */
