@@ -75,6 +75,9 @@ Gfx_TexScroll = 0x8007eb00;
 Actor_WorldDistXZToActor = 0x800214fc;
 Actor_HeightDiff = 0x800215ec;
 
+Rand_ZeroFloat = 0x80026d64;
+EffectSsGRipple_Spawn = 0x8001cf3c;
+
 DrawGi_Opa0_Xlu1        = 0x800582c0;
 DrawGi_Opa0_Xlu12       = 0x80058584;
 DrawGi_Opa0             = 0x80058228;
