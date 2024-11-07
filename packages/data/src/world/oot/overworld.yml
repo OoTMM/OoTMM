@@ -164,6 +164,14 @@
     "Kokiri Forest Grass Adult 10": "true"
     "Kokiri Forest Grass Adult 11": "true"
     "Kokiri Forest Grass Adult 12": "true"
+    "Kokiri Forest Grass Adult Near Crawl 1": "true"
+    "Kokiri Forest Grass Adult Near Crawl 2": "true"
+    "Kokiri Forest Grass Adult Near Crawl 3": "true"
+    "Kokiri Forest Grass Adult Near Crawl 4": "true"
+    "Kokiri Forest Grass Adult Near Crawl 5": "true"
+    "Kokiri Forest Grass Adult Near Crawl 6": "true"
+    "Kokiri Forest Grass Adult Near Crawl 7": "true"
+    "Kokiri Forest Grass Adult Near Crawl 8": "true"
 "Kokiri Forest Adult Rupees":
   region: KOKIRI_FOREST
   age_change: false

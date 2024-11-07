@@ -258,6 +258,13 @@ void ObjMure2_AliasGrass(Xflag* xf)
             xf->id -= 4;
         }
         break;
+    case SCE_OOT_KOKIRI_FOREST:
+        if (xf->setupId == 3)
+        {
+            xf->setupId = 2;
+            xf->id -= 7;
+        }
+        break;
     }
 #endif
 
