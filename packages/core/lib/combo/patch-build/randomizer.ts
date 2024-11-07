@@ -1038,6 +1038,8 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MM_STONE_OF_AGONY: settings.stoneAgonyMm,
     SHARED_STONE_OF_AGONY: settings.sharedStoneAgony,
     OOT_MUST_START_WITH_MS: mustStartWithMasterSword(settings),
+    OOT_SPIN_UPGRADE: settings.spinUpgradeOot,
+    SHARED_SPIN_UPGRADE: settings.sharedSpinUpgrade,
   };
 
   for (const v in exprs) {
