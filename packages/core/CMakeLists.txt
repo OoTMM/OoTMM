@@ -51,39 +51,49 @@ function(build game)
   set(game_define "-DGAME_${game_upper}=1")
 
   # Overlays
-  file(GLOB ovls "src/${game}/ovl/actors/*" "src/common/ovl/actors/*" "src/${game}/ovl/gamemodes/*")
   set(OVL_OBJECTS "")
   set(OVL_NAMES "")
-  foreach(ovl ${ovls})
-    get_filename_component(name "${ovl}" NAME)
-    file(GLOB_RECURSE OVL_SOURCES "${ovl}/*.c" "${ovl}/*.S")
+  foreach(ovl_category actors gamemodes)
+    # Extract the list of OVLs for the current category
+    set(ovls "")
+    file(GLOB ovl_dirs "src/${game}/ovl/${ovl_category}/*" "src/common/ovl/${ovl_category}/*")
+    foreach (ovl_dir ${ovl_dirs})
+      get_filename_component(ovl_name "${ovl_dir}" NAME)
+      list(APPEND ovls "${ovl_name}")
+    endforeach()
+    list(REMOVE_DUPLICATES ovls)
 
-    # Compile the OVL into objects
-    set(target_name "${game}_ovl_${name}")
-    add_library(${target_name} OBJECT ${OVL_SOURCES})
-    target_compile_options(${target_name} PRIVATE "-fno-merge-constants" "-mno-explicit-relocs" "-mno-split-addresses")
-    target_compile_definitions(${target_name} PRIVATE ${game_define})
+    # Process the OVLs
+    foreach(ovl ${ovls})
+      file(GLOB_RECURSE OVL_SOURCES "src/${game}/ovl/${ovl_category}/${ovl}/*.c" "src/${game}/ovl/${ovl_category}/${ovl}/*.S" "src/common/ovl/${ovl_category}/${ovl}/*.c" "src/common/ovl/${ovl_category}/${ovl}/*.S")
 
-    # Merge the objects into a single file, with fixed segments
-    set(target_file "${CMAKE_BINARY_DIR}/${game}_ovl_${name}.o")
-    add_custom_command(
-      OUTPUT "${target_file}"
-      COMMAND "${ARCH}-ld" -r -o "${target_file}" "-T${LDSCRIPT_OVL}" $<TARGET_OBJECTS:${target_name}>
-      COMMAND "${ARCH}-objcopy"
-        --rename-section .text=.${name}.text
-        --rename-section .data=.${name}.data
-        --rename-section .rodata=.${name}.rodata
-        --rename-section .bss=.${name}.bss
-        --rename-section .meta=.${name}.meta
-        "${target_file}"
-      DEPENDS $<TARGET_OBJECTS:${target_name}> "${LDSCRIPT_OVL}"
-      COMMENT "Merging objects for ${name}"
-      VERBATIM
-      COMMAND_EXPAND_LISTS
-    )
+      # Compile the OVL into objects
+      set(target_name "${game}_ovl_${ovl}")
+      add_library(${target_name} OBJECT ${OVL_SOURCES})
+      target_compile_options(${target_name} PRIVATE "-fno-merge-constants" "-mno-explicit-relocs" "-mno-split-addresses")
+      target_compile_definitions(${target_name} PRIVATE ${game_define})
 
-    list(APPEND OVL_OBJECTS ${target_file})
-    list(APPEND OVL_NAMES ${name})
+      # Merge the objects into a single file, with fixed segments
+      set(target_file "${CMAKE_BINARY_DIR}/${game}_ovl_${ovl}.o")
+      add_custom_command(
+        OUTPUT "${target_file}"
+        COMMAND "${ARCH}-ld" -r -o "${target_file}" "-T${LDSCRIPT_OVL}" $<TARGET_OBJECTS:${target_name}>
+        COMMAND "${ARCH}-objcopy"
+          --rename-section .text=.${ovl}.text
+          --rename-section .data=.${ovl}.data
+          --rename-section .rodata=.${ovl}.rodata
+          --rename-section .bss=.${ovl}.bss
+          --rename-section .meta=.${ovl}.meta
+          "${target_file}"
+        DEPENDS $<TARGET_OBJECTS:${target_name}> "${LDSCRIPT_OVL}"
+        COMMENT "Merging objects for ${ovl}"
+        VERBATIM
+        COMMAND_EXPAND_LISTS
+      )
+
+      list(APPEND OVL_OBJECTS ${target_file})
+      list(APPEND OVL_NAMES ${ovl})
+    endforeach()
   endforeach()
 
   # Linker script
