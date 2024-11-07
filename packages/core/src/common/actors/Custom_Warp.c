@@ -48,7 +48,7 @@ static void CustomWarp_OnTrigger(Actor_CustomWarp* this, PlayState* play)
 
 static void CustomWarp_OnTrigger(Actor_CustomWarp* this, PlayState* play)
 {
-    play->transitionTrigger = TRANS_TRIGGER_NORMAL;
+    play->transitionTrigger = TRANS_TRIGGER_START;
     play->transitionType = TRANS_TYPE_FADE_BLACK;
 
     switch (this->base.params)

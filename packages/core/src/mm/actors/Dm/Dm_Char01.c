@@ -3,7 +3,7 @@
 void DmChar01_TempleRise(Actor* this, PlayState* play)
 {
     play->nextEntrance = ((SCE_MM_WOODFALL - 3) << 9) | (4 << 4);
-    play->transitionTrigger = TRANS_TRIGGER_NORMAL;
+    play->transitionTrigger = TRANS_TRIGGER_START;
     play->transitionType = TRANS_TYPE_FADE_BLACK;
 }
 

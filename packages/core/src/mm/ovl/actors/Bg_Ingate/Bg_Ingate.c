@@ -235,7 +235,7 @@ void func_809542A0(Actor_BgIngate* this, PlayState* play) {
         play->nextEntrance = 0xa810;
     }
     gSaveContext.nextCutscene = 0;
-    play->transitionTrigger = TRANS_TRIGGER_NORMAL;
+    play->transitionTrigger = TRANS_TRIGGER_START;
     play->transitionType = TRANS_TYPE_FADE_WHITE;
     gSaveContext.nextTransitionType = TRANS_TYPE_FADE_WHITE;
     this->actionFunc = func_80953F8C;

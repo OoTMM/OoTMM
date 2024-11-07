@@ -23,7 +23,7 @@ void ItemOcarina_HandlerItem2(Actor* this, PlayState* play)
 {
     if (Message_IsClosed(this, play))
     {
-        play->transitionTrigger = TRANS_TRIGGER_NORMAL;
+        play->transitionTrigger = TRANS_TRIGGER_START;
         play->transitionType = TRANS_GFX_SHORTCUT;
         play->nextEntranceIndex = 0x050f;
         Actor_Kill(this);

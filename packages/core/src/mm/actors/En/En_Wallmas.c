@@ -26,7 +26,7 @@ static int EnWallmas_GetDestEr(Actor* this, PlayState* play)
 void EnWallmas_TakePlayerEr(PlayState* play, Actor* this)
 {
     play->nextEntrance = EnWallmas_GetDestEr(this, play);
-    play->transitionTrigger = TRANS_TRIGGER_NORMAL;
+    play->transitionTrigger = TRANS_TRIGGER_START;
     play->transitionType = TRANS_TYPE_FADE_BLACK;
     gIsEntranceOverride = 1;
 }

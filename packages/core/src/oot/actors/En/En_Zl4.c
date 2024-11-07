@@ -7,7 +7,7 @@ void EnZl4_Update6(Actor* actor, PlayState* play)
     SetEventChk(EV_OOT_CHK_SONG_ZELDA);
     Actor_Kill(actor);
 
-    play->transitionTrigger = TRANS_TRIGGER_NORMAL;
+    play->transitionTrigger = TRANS_TRIGGER_START;
     play->transitionType = TRANS_GFX_SHORTCUT;
     play->nextEntranceIndex = ENTR_OOT_CASTLE_CAUGHT;
 }

@@ -10,7 +10,7 @@ static void EnPoComposer_HandlerStorms(Actor* this, PlayState* play)
 
     /* Reload the room */
     play->nextEntrance = ((SCE_MM_IKANA_CANYON - 3) << 9) | (14 << 4);
-    play->transitionTrigger = TRANS_TRIGGER_NORMAL;
+    play->transitionTrigger = TRANS_TRIGGER_START;
     play->transitionType = TRANS_TYPE_FADE_BLACK;
 }
 

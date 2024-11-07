@@ -24,8 +24,9 @@
 
 typedef struct Player Player;
 
-#define TRANS_TRIGGER_NONE     0x00
-#define TRANS_TRIGGER_NORMAL   0x14
+#define TRANS_TRIGGER_OFF     0x00
+#define TRANS_TRIGGER_START   0x14
+#define TRANS_TRIGGER_END    -0x14
 
 #define TRANS_GFX_TRIFORCE          0x01
 #define TRANS_GFX_BLACK             0x02

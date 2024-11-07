@@ -46,7 +46,7 @@ void Interface_SkipMoonCrash(PlayState* play)
     }
     gSave.cutscene = 0;
     gSave.time = CLOCK_TIME(6, 0) + 10;
-    play->transitionTrigger = TRANS_TRIGGER_NORMAL;
+    play->transitionTrigger = TRANS_TRIGGER_START;
     play->transitionType = TRANS_TYPE_FADE_WHITE;
 }
 

@@ -10,7 +10,7 @@ static void EnBsb_OnDeath(Actor* this, PlayState* play)
 
     /* Warp on top of the bridge */
     play->nextEntrance = ((SCE_MM_IKANA_GRAVEYARD - 3) << 9) | (5 << 4);
-    play->transitionTrigger = TRANS_TRIGGER_NORMAL;
+    play->transitionTrigger = TRANS_TRIGGER_START;
     play->transitionType = TRANS_TYPE_FADE_BLACK;
 }
 

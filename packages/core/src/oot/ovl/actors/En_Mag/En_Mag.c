@@ -179,13 +179,13 @@ void EnMag_Update(Actor_EnMag* this, PlayState* play)
                     CHECK_BTN_ALL(play->state.input[0].press.button, A_BUTTON) ||
                     CHECK_BTN_ALL(play->state.input[0].press.button, B_BUTTON))
                 {
-                    if (play->transitionTrigger != TRANS_TRIGGER_NORMAL)
+                    if (play->transitionTrigger != TRANS_TRIGGER_START)
                     {
                         Audio_SetCutsceneFlag(0);
                         PlaySound(NA_SE_SY_PIECE_OF_HEART);
 
                         gSaveContext.gameMode = GAMEMODE_FILE_SELECT;
-                        play->transitionTrigger = TRANS_TRIGGER_NORMAL;
+                        play->transitionTrigger = TRANS_TRIGGER_START;
                         play->transitionType = TRANS_TYPE_FADE_BLACK;
                     }
 

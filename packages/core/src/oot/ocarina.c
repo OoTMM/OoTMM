@@ -283,7 +283,7 @@ void ageSwap(PlayState* play)
     play->linkAgeOnLoad = !gSaveContext.save.age;
     Play_SetupRespawnPoint(play, 1, 0xdff);
     gSaveContext.respawnFlag = 2;
-    play->transitionTrigger = TRANS_TRIGGER_NORMAL;
+    play->transitionTrigger = TRANS_TRIGGER_START;
     play->nextEntranceIndex = gSaveContext.save.entrance;
     play->transitionType = TRANS_GFX_SHORTCUT;
 
@@ -516,7 +516,7 @@ static void HandleSongOfDoubleTime(PlayState* play)
 
                 gSaveContext.respawnFlag = -2;
                 play->nextEntranceIndex = gSaveContext.save.entrance;
-                play->transitionTrigger = TRANS_TRIGGER_NORMAL;
+                play->transitionTrigger = TRANS_TRIGGER_START;
                 gSaveContext.sunSongState = 0; /* SUNSSONG_INACTIVE */
                 gSaveContext.seqId = 0xff; /* NA_BGM_DISABLED */
                 gSaveContext.natureAmbienceId = 0xff; /* NATURE_ID_DISABLED */

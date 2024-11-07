@@ -15,7 +15,7 @@ static void EnMnk_SongCutscene(Actor* actor, PlayState* play)
     {
         MM_SET_EVENT_WEEK(EV_MM_WEEK_MONKEY_PUNISHED);
         play->nextEntrance = ((SCE_MM_DEKU_PALACE - 3) << 9) | (1 << 4);
-        play->transitionTrigger = TRANS_TRIGGER_NORMAL;
+        play->transitionTrigger = TRANS_TRIGGER_START;
         play->transitionType = TRANS_TYPE_FADE_BLACK;
         return;
     }

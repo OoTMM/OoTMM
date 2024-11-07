@@ -528,8 +528,9 @@ ASSERT_OFFSET(PlayState, setupExitList,            0x18860);
 ASSERT_OFFSET(PlayState, transitionType,           0x1887f);
 ASSERT_OFFSET(PlayState, transitionMode,           0x18b4a);
 
-#define TRANS_TRIGGER_NONE          0x00
-#define TRANS_TRIGGER_NORMAL        0x14
+#define TRANS_TRIGGER_OFF          0x00
+#define TRANS_TRIGGER_START        0x14
+#define TRANS_TRIGGER_END         -0x14
 
 _Static_assert(sizeof(PlayState) == 0x19258, "MM PlayState size is wrong");
 

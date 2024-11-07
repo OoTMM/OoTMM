@@ -380,7 +380,7 @@ void Player_Action_FaroresWindText(Player* this, PlayState* play)
         if (play->msgCtx.choiceIndex == 0)
         {
             gSaveContext.respawnFlag = 8;
-            play->transitionTrigger = TRANS_TRIGGER_NORMAL;
+            play->transitionTrigger = TRANS_TRIGGER_START;
             play->nextEntrance = gSaveContext.respawn[RESPAWN_MODE_HUMAN].entrance;
             play->transitionType = TRANS_TYPE_FADE_WHITE_FAST;
             gNoTimeFlow = 0;

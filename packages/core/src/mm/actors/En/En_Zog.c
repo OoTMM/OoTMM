@@ -10,7 +10,7 @@ void EnZog_GiveItem(Actor* this, PlayState* play)
         if (!(GET_PLAYER(play)->stateFlags1 & PLAYER_ACTOR_STATE_GET_ITEM))
         {
             play->nextEntrance = ENTR_MM_COAST_FROM_MIKAU_CS;
-            play->transitionTrigger = TRANS_TRIGGER_NORMAL;
+            play->transitionTrigger = TRANS_TRIGGER_START;
             play->transitionType = TRANS_TYPE_FADE_BLACK;
             Actor_Kill(this);
         }

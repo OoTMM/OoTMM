@@ -648,7 +648,7 @@ void hookPlay_Init(PlayState* play)
             Sram_SaveNewDay(play);
             play->nextEntrance = ENTR_EXTENDED;
             g.nextEntrance = g.initialEntrance;
-            play->transitionTrigger = TRANS_TRIGGER_NORMAL;
+            play->transitionTrigger = TRANS_TRIGGER_START;
             play->transitionType = TRANS_TYPE_FADE_BLACK;
             return;
         }

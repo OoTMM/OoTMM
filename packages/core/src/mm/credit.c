@@ -20,7 +20,7 @@ void comboCreditWarp(PlayState* play)
     link = GET_PLAYER(play);
     link->stateFlags1 |= PLAYER_ACTOR_STATE_FROZEN;
     play->nextEntrance = ENTR_MM_TERMINA_FIELD_FROM_CLOCK_TOWN_WEST;
-    play->transitionTrigger = TRANS_TRIGGER_NORMAL;
+    play->transitionTrigger = TRANS_TRIGGER_START;
     play->transitionType = TRANS_TYPE_FADE_BLACK;
     gSaveContext.nextCutscene = 0xfff7;
 }

@@ -184,7 +184,7 @@ static void DoorWarp1_TriggerBossWarpPad(Actor* this, PlayState* play)
     }
 
     play->nextEntrance = entrance;
-    play->transitionTrigger = TRANS_TRIGGER_NORMAL;
+    play->transitionTrigger = TRANS_TRIGGER_START;
     play->transitionType = TRANS_TYPE_FADE_BLACK;
 
     gIsEntranceOverride = 1;

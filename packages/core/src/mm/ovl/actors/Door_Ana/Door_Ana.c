@@ -121,7 +121,7 @@ void DoorAna_WaitOpen(DoorAna* this, PlayState* play) {
     s32 grottoType = DOORANA_GET_TYPE(&this->actor);
 
     if (Math_StepToF(&this->actor.scale.x, 0.01f, 0.001f)) {
-        if ((this->actor.targetMode != ATTENTION_RANGE_0) && (play->transitionTrigger == TRANS_TRIGGER_NONE) &&
+        if ((this->actor.targetMode != ATTENTION_RANGE_0) && (play->transitionTrigger == TRANS_TRIGGER_OFF) &&
             (play->transitionMode == 0) && (player->stateFlags1 & PLAYER_STATE1_MM_80000000) &&
             (player->av1.actionVar1 == 0)) {
 
