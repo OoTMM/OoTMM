@@ -917,3 +917,17 @@ void Player_RumbleAgony(void)
     Interface_AgonyIconTick();
     Rumble_Request(120, 20, 10, 0);
 }
+
+void Player_ChargeSword(Player* this)
+{
+    float max;
+
+    if (!Config_Flag(CFG_OOT_SPIN_UPGRADE) || gOotExtraFlags.spinUpgrade)
+        max = 1.f;
+    else
+        max = 0.5f;
+
+    Math_StepToF(&this->unk_858, max, 0.02f);
+}
+
+PATCH_FUNC(0x80842ef8, Player_ChargeSword);

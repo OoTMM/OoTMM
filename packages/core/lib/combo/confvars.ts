@@ -213,6 +213,8 @@ export const CONFVARS = [
   'MM_STONE_OF_AGONY',
   'SHARED_STONE_OF_AGONY',
   'OOT_MUST_START_WITH_MS',
+  'OOT_SPIN_UPGRADE',
+  'SHARED_SPIN_UPGRADE',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

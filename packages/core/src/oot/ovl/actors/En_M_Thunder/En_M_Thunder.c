@@ -75,13 +75,24 @@ void EnMThunder_Init(EnMThunder* this, PlayState* play) {
             return;
         }
 
-        player->stateFlags2 &= ~PLAYER_STATE2_17;
+        if (gOotExtraFlags.spinUpgrade)
+        {
+            player->unk_858 = 1.f;
+            this->unk_1C6 = 0;
+            this->unk_1C9 = ((this->unk_1C7 == 1) ? 4 : 8);
+            this->collider.elem.atDmgInfo.dmgFlags = D_80AA0458[this->unk_1C7];
+        }
+        else
+        {
+            this->unk_1C6 = 1;
+            this->unk_1C9 = ((this->unk_1C7 == 1) ? 2 : 4);
+            this->collider.elem.atDmgInfo.dmgFlags = D_80AA044C[this->unk_1C7];
+        }
+
         this->unk_1CA = 1;
-        this->collider.elem.atDmgInfo.dmgFlags = D_80AA044C[this->unk_1C7];
-        this->unk_1C6 = 1;
-        this->unk_1C9 = ((this->unk_1C7 == 1) ? 2 : 4);
-        func_808FF0C0(this, func_80A9F9B4);
+        player->stateFlags2 &= ~PLAYER_STATE2_17;
         this->unk_1C4 = 8;
+        func_808FF0C0(this, func_80A9F9B4);
         Audio_PlaySfxGeneral(NA_SE_IT_ROLLING_CUT_LV1, &player->actor.projectedPos, 4, &gSfxDefaultFreqAndVolScale,
                              &gSfxDefaultFreqAndVolScale, &gSfxDefaultReverb);
         this->unk_1AC = 1.0f;

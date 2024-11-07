@@ -1754,6 +1754,14 @@ export const SETTINGS = [{
   default: false,
   cond: hasMM,
 }, {
+  key: 'spinUpgradeOot',
+  name: "Spin Attack Upgrade (OoT)",
+  category: 'items.extensions',
+  type: 'boolean',
+  description: "Add the spin attack upgrade as an item in OoT.",
+  default: false,
+  cond: hasOoT,
+}, {
   key: 'extraChildSwordsOot',
   name: "Extra Child Swords (OoT)",
   category: 'items.extensions',
@@ -1958,6 +1966,13 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false,
   cond: (s: any) => hasOoTMM(s) && s.stoneAgonyMm,
+}, {
+  key: 'sharedSpinUpgrade',
+  name: 'Shared Spin Upgrade',
+  category: 'items.shared',
+  type: 'boolean',
+  default: false,
+  cond: (s: any) => hasOoTMM(s) && s.spinUpgradeOot,
 }, {
   key: 'sharedNutsSticks',
   name: 'Shared Nuts & Sticks',

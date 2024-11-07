@@ -1100,6 +1100,8 @@ export const REQUIRED = new Set([
   Items.MM_WALLET,
   Items.MM_GREAT_FAIRY_SWORD,
   Items.MM_SPIN_UPGRADE,
+  Items.OOT_SPIN_UPGRADE,
+  Items.SHARED_SPIN_UPGRADE,
   Items.MM_POTION_BLUE,
   Items.MM_POTION_RED,
   Items.MM_POTION_GREEN,

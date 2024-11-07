@@ -59,7 +59,7 @@ void DrawGi_CustomNut(PlayState* play, s16 drawGiId);
 void DrawGi_BossRemains(PlayState* play, s16 drawGiId);
 void DrawGi_SpiritualStones(PlayState* play, s16 drawGiId);
 void DrawGi_MasterSword(PlayState* play, s16 drawGiId);
-void DrawGi_CustomSpin(PlayState* play, s16 drawGiId);
+void DrawGi_CustomSpin(PlayState* play, s16 drawGiId, u8 param);
 void DrawGi_CustomOwl(PlayState* play, s16 drawGiId);
 void DrawGi_CustomStrayFairy(PlayState* play, s16 drawGiId);
 void DrawGi_CustomBottlePotion(PlayState* play, s16 index, u8 param);

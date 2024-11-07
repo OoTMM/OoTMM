@@ -87,7 +87,7 @@
 #define IA_OOT_BUTTON           0x4e
 #define IA_MM_BUTTON            0x4f
 #define IA_KEG                  0x50
-#define IA_SPIN_UPGRADE         0x51
+#define IA_MM_SPIN_UPGRADE      0x51
 #define IA_OOT_SOUL             0x52
 #define IA_MM_SOUL              0x53
 #define IA_POND_FISH            0x54
@@ -109,6 +109,7 @@
 #define IA_MM_STICK_UPGRADE     0x64
 #define IA_MM_NUT_UPGRADE       0x65
 #define IA_MM_STONE_AGONY       0x66
+#define IA_OOT_SPIN_UPGRADE     0x67
 #define IA_NONE                 0xff
 
 #define ITT_NONE        0x00

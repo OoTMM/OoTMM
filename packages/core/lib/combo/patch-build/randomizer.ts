@@ -107,6 +107,7 @@ const SHARED_ITEMS_OOT = new Map([
   ['SHARED_STICK_UPGRADE',    'OOT_STICK_UPGRADE'],
   ['SHARED_NUT_UPGRADE',      'OOT_NUT_UPGRADE'],
   ['SHARED_STONE_OF_AGONY',   'OOT_STONE_OF_AGONY'],
+  ['SHARED_SPIN_UPGRADE',     'OOT_SPIN_UPGRADE'],
 ]);
 
 const SHARED_ITEMS_MM = new Map([
@@ -183,6 +184,7 @@ const SHARED_ITEMS_MM = new Map([
   ['SHARED_STICK_UPGRADE',    'MM_STICK_UPGRADE'],
   ['SHARED_NUT_UPGRADE',      'MM_NUT_UPGRADE'],
   ['SHARED_STONE_OF_AGONY',   'MM_STONE_OF_AGONY'],
+  ['SHARED_SPIN_UPGRADE',     'MM_SPIN_UPGRADE'],
 ]);
 
 const SHARED_ITEMS = {
@@ -1038,6 +1040,8 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MM_STONE_OF_AGONY: settings.stoneAgonyMm,
     SHARED_STONE_OF_AGONY: settings.sharedStoneAgony,
     OOT_MUST_START_WITH_MS: mustStartWithMasterSword(settings),
+    OOT_SPIN_UPGRADE: settings.spinUpgradeOot,
+    SHARED_SPIN_UPGRADE: settings.sharedSpinUpgrade,
   };
 
   for (const v in exprs) {

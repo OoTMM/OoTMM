@@ -247,6 +247,9 @@ static int isItemAmbiguous(s16 gi)
     case GI_MM_NUT_UPGRADE:
     case GI_MM_NUT_UPGRADE2:
         return Config_Flag(CFG_MM_UPGRADES_STICKS_NUTS) && !Config_Flag(CFG_SHARED_NUTS_STICKS);
+    case GI_OOT_SPIN_UPGRADE:
+    case GI_MM_SPIN_UPGRADE:
+        return Config_Flag(CFG_OOT_SPIN_UPGRADE) && !Config_Flag(CFG_SHARED_SPIN_UPGRADE);
     case GI_OOT_STICK:
     case GI_OOT_STICKS_5:
     case GI_OOT_STICKS_10:
