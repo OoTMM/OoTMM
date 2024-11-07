@@ -50,7 +50,7 @@ Kokiri Forest Grass Adult Near Crawl 4,                     grass,          NONE
 Kokiri Forest Grass Adult Near Crawl 5,                     grass,          NONE,                 KOKIRI_FOREST,                  0x08013,                    RANDOM
 Kokiri Forest Grass Adult Near Crawl 6,                     grass,          NONE,                 KOKIRI_FOREST,                  0x08014,                    RANDOM
 Kokiri Forest Grass Adult Near Crawl 7,                     grass,          NONE,                 KOKIRI_FOREST,                  0x08015,                    RANDOM
-Kokiri Forest Grass Adult Near Crawl 8,                     grass,          NONE,                 KOKIRI_FOREST,                  0x08016,
+Kokiri Forest Grass Adult Near Crawl 8,                     grass,          NONE,                 KOKIRI_FOREST,                  0x08016,                    RANDOM
 Kokiri Forest Cow,                                          cow,            COW_LINK,             KOKIRI_FOREST,                  0x00,                       MILK
 Kokiri Forest Storms Grotto Grass 1,                        grass,          NONE,                 GROTTOS,                        0x02c02,                    RANDOM
 Kokiri Forest Storms Grotto Grass 2,                        grass,          NONE,                 GROTTOS,                        0x02c03,                    RANDOM
