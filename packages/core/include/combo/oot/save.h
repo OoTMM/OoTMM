@@ -440,7 +440,8 @@ typedef struct
     u32 unused2:7;
     u32 bottomlessWallet:1;
     u32 chestGameKey:1;
-    u32 unused:6;
+    u32 spinUpgrade:1;
+    u32 unused:5;
 }
 OotExtraFlags;
 

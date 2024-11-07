@@ -170,7 +170,7 @@
 - { id: OOT_STICK_UPGRADE2, func: CustomStick, params: [0x60004d0, 2] }
 - { id: OOT_NUT_UPGRADE, func: CustomNut, params: [0x6000e90, 1] }
 - { id: OOT_NUT_UPGRADE2, func: CustomNut, params: [0x6000e90, 2] }
-- { id: MM_SPIN_UPGRADE, func: CustomSpin, params: [0x6000998, 0x6000850] }
+- { id: SPIN_UPGRADE, func: CustomSpin, params: [0x6000998, 0x6000850, 0x6000960] }
 - { id: MM_STRAY_FAIRY, func: CustomStrayFairy, params: [0] }
 - { id: MM_GS_TOKEN_SWAMP, func: CustomGS, params: [1] }
 - { id: MM_GS_TOKEN_OCEAN, func: CustomGS, params: [2] }

@@ -421,6 +421,7 @@
 - { id: OOT_BOMBCHU_BAG_20, type: MAJOR, add: [OOT_BOMBCHU_BAG, 20], flags: 0x80, draw: BOMBCHU_BAG, object: BOMBCHU_BAG, name: "the <C1>Bombchu Bag" }
 - { id: OOT_SWORD_RAZOR, type: MAJOR, add: [OOT_SWORD_EXTRA, 1], flags: 0x80, draw: MM_SWORD_RAZOR, object: [mm, 0x01f9], name: "the <C1>Razor Sword" }
 - { id: OOT_SWORD_GILDED, type: MAJOR, add: [OOT_SWORD_EXTRA, 2], flags: 0x80, draw: MM_SWORD_GILDED, object: [mm, 0x01fa], name: "the <C1>Gilded Sword" }
+- { id: OOT_SPIN_UPGRADE, type: MAJOR, add: OOT_SPIN_UPGRADE, flags: 0xa0, draw: [SPIN_UPGRADE, 0], object: [oot, 0x018d], name: "the <C1>Spin Attack Upgrade" }
 - { id: OOT_TRIFORCE_FULL, type: MAJOR, add: [ENDGAME, 0], flags: 0x80, draw: TRIFORCE_FULL, object: TRIFORCE, name: "the <C3>Triforce" }
 - { id: OOT_FAIRY_BIG, type: MINOR, add: OOT_FAIRY_BIG, flags: 0x80, draw: FAIRY_BIG, object: [oot, 0x0177], name: "a <C0>Big Fairy" }
 - { id: OOT_MASK_BLAST, type: MASK, add: [OOT_TRADE_CHILD, XITEM_OOT_CHILD_MASK_BLAST], flags: 0x80, draw: MM_MASK_BLAST, object: [mm, 0x026d], name: "the <C1>Blast Mask" }
@@ -550,7 +551,7 @@
 - { id: MM_MAGIC_UPGRADE, type: MAJOR, add: [MM_MAGIC_UPGRADE, 1], flags: 0xa0, draw: MAGIC_UPGRADE, object: [mm, 0x00a4], name: "the <C1>Magic Upgrade" }
 - { id: MM_MAGIC_UPGRADE2, type: MAJOR, add: [MM_MAGIC_UPGRADE, 2], flags: 0xa0, draw: MAGIC_UPGRADE2, object: [mm, 0x00a4], name: "the <C1>Larger Magic Upgrade" }
 - { id: MM_DEFENSE_UPGRADE, type: MAJOR, add: MM_DEFENSE_UPGRADE, flags: 0xa0, draw: DEFENSE_UPGRADE, object: [mm, 0x0096], name: "the <C1>Defense Upgrade" }
-- { id: MM_SPIN_UPGRADE, type: MAJOR, add: SPIN_UPGRADE, flags: 0xa0, draw: MM_SPIN_UPGRADE, object: [mm, 0x0148], name: "the <C1>Spin Attack Upgrade" }
+- { id: MM_SPIN_UPGRADE, type: MAJOR, add: MM_SPIN_UPGRADE, flags: 0xa0, draw: [SPIN_UPGRADE, 0], object: [mm, 0x0148], name: "the <C1>Spin Attack Upgrade" }
 - { id: MM_SONG_AWAKENING, type: MAJOR, add: [MM_QUEST, QUEST_MM_SONG_AWAKENING], flags: 0xa0, draw: [NOTE, 0x82], object: [mm, 0x008f], name: "the <C2>Sonata of Awakening" }
 - { id: MM_SONG_GORON, type: MAJOR, add: [MM_QUEST, QUEST_MM_SONG_GORON], flags: 0xa0, draw: [NOTE, 0x85], object: [mm, 0x008f], name: "the <C2>Goron Lullaby" }
 - { id: MM_SONG_ZORA, type: MAJOR, add: [MM_QUEST, QUEST_MM_SONG_ZORA], flags: 0xa0, draw: [NOTE, 0x81], object: [mm, 0x008f], name: "the <C2>New Wave Bossa Nova" }
