@@ -140,7 +140,7 @@ typedef struct Actor
     u8          room;
     s32         flags;
     PosRot      home;
-    u16         params;
+    s16         params;
     s8          objectSlot;
     s8          targetMode;
 
