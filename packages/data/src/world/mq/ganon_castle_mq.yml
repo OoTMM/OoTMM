@@ -131,7 +131,7 @@
 "Ganon Castle Fire Trial Ending Ledge":
   dungeon: Ganon
   exits:
-    "Ganon Castle Fire Trial Entrance Ledge": "has_tunic_goron && (longshot_anywhere || (hookshot_anywhere && event(GANON_MQ_FIRE_MONOLITH)))"
+    "Ganon Castle Fire Trial Entrance Ledge": "(has_tunic_goron && longshot_anywhere) || (climb_anywhere && has_tunic_goron_strict)"
     "Ganon Castle Fire Trial Ending Room": "silver_rupees_ganon_fire"
   locations: #Needs checking.
     "MQ Ganon Castle SR Fire Under Pillar": "longshot_anywhere && has_tunic_goron_strict && can_lift_gold" #Needs further testing if actually strict.
