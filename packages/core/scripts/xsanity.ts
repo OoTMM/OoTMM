@@ -427,6 +427,7 @@ type Check = {
   name: string;
   name2?: string;
   type: string;
+  subtype?: string;
   item: string;
   roomActor: RoomActor;
   sliceId?: number;
@@ -1178,13 +1179,13 @@ function actorHandlerMmEnKusa(checks: Check[], ra: RoomActor) {
     item = (altGrassAcc & 1) ? 'RECOVERY_HEART' : 'ARROWS_5';
     altGrassAcc++;
   }
-  checks.push({ roomActor: ra, item, name: 'Grass', type: 'grass' });
+  checks.push({ roomActor: ra, item, name: 'Grass', type: 'grass', subtype: 'normal' });
 }
 
 function actorHandlerMmEnKusa2(checks: Check[], ra: RoomActor) {
   for (let i = 0; i < 9; ++i) {
     const item = (i == 8) ? 'RUPEE_RED' : 'RUPEE_GREEN';
-    checks.push({ roomActor: ra, item, name: 'Keaton Grass', type: 'grass', sliceId: i, name2: `Grass ${i + 1}` });
+    checks.push({ roomActor: ra, item, name: 'Keaton Grass', type: 'grass', subtype: 'keaton', sliceId: i, name2: `Grass ${i + 1}` });
   }
 }
 
@@ -1226,7 +1227,7 @@ function actorHandlerMmObjMure2(checks: Check[], ra: RoomActor) {
   }
   const item = 'RANDOM';
   for (let i = 0; i < count; ++i) {
-    checks.push({ roomActor: ra, item, name: 'Grass Pack', type: 'grass', sliceId: i, name2: `Grass ${i + 1}` });
+    checks.push({ roomActor: ra, item, name: 'Grass Pack', type: 'grass', subtype: 'pack', sliceId: i, name2: `Grass ${i + 1}` });
   }
 }
 
@@ -1234,7 +1235,7 @@ function actorHandlerMmObjGrassUnit(checks: Check[], ra: RoomActor) {
   const count = (ra.actor.params & 1) ? 12 : 9;
   const item = 'RANDOM';
   for (let i = 0; i < count; ++i) {
-    checks.push({ roomActor: ra, item, name: 'Grass Unit Pack', type: 'grass', sliceId: i, name2: `Grass ${i + 1}` });
+    checks.push({ roomActor: ra, item, name: 'Grass Unit Pack', type: 'grass', subtype: 'unit', sliceId: i, name2: `Grass ${i + 1}` });
   }
 }
 
@@ -1400,12 +1401,14 @@ function makeChecks(rooms: RoomActors[], handlers: ActorHandlers): Check[] {
   return checks;
 }
 
-function outputChecks(game: 'oot' | 'mm', checks: Check[], filter?: string) {
+function outputChecks(game: 'oot' | 'mm', checks: Check[], filter?: string, filterSubtype?: string) {
   let lastSceneId = -1;
   let lastSetupId = -1;
 
   for (const check of checks) {
     if (filter && check.type !== filter)
+      continue;
+    if (filterSubtype && (check.subtype === undefined || check.subtype !== filterSubtype))
       continue;
     const ra = check.roomActor;
 
@@ -1486,6 +1489,7 @@ async function run() {
   const rooms = await build();
   const argGame = process.argv[2];
   const argFilter = process.argv[3];
+  const argFilterSubtype = process.argv[4];
 
   let gameWithMq: Game;
   let game: 'oot' | 'mm';
@@ -1506,7 +1510,7 @@ async function run() {
 
   const gameRooms = rooms[gameWithMq];
   const checks = makeChecks(gameRooms, ACTORS_HANDLERS[game]);
-  outputChecks(game, checks, argFilter);
+  outputChecks(game, checks, argFilter, argFilterSubtype);
 }
 
 run().catch(e => {

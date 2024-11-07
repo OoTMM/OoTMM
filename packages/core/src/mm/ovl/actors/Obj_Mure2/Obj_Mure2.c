@@ -2,7 +2,7 @@
 
 void ObjMure2_AliasGrass(Xflag* xf)
 {
-
+    /* Nothing to alias in MM */
 }
 
 void ObjMure2_AliasRocks(Xflag* xf)

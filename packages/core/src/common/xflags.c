@@ -152,6 +152,10 @@ int comboXflagInit(Xflag* xf, Actor* actor, PlayState* play)
     {
         switch (xf->roomId)
         {
+        case 0x04:
+            /* Generic Grottos */
+            xflag->roomId = 0x20 | (gGrottoData & 0x1f);
+            break;
         case 0x0a:
             /* Cow grottos */
             if (gLastScene == SCE_MM_GREAT_BAY_COAST)
