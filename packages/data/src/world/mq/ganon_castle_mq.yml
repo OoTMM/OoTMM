@@ -119,9 +119,11 @@
   dungeon: Ganon
   exits:
     "Ganon Castle Main Room": "true"
-    "Ganon Castle Fire Trial Ending Ledge": "has_tunic_goron_strict && (can_longshot || has_hover_boots)"
+    "Ganon Castle Fire Trial Ending Ledge": "has_tunic_goron && ((can_longshot && silver_rupees_ganon_fire) || has_hover_boots || (hookshot_anywhere && event(GANON_MQ_FIRE_MONOLITH))"
+  events:
+    GANON_MQ_FIRE_MONOLITH: "has_tunic_goron && can_lift_gold"
   locations:
-    "MQ Ganon Castle SR Fire Under Pillar": "has_tunic_goron && can_lift_gold"
+    "MQ Ganon Castle SR Fire Under Pillar": "event(GANON_MQ_FIRE_MONOLITH)"
     "MQ Ganon Castle SR Fire Center-Left": "has_tunic_goron_strict"
     "MQ Ganon Castle SR Fire Back-Left": "has_tunic_goron_strict"
     "MQ Ganon Castle SR Fire High Above Lava": "has_tunic_goron"
@@ -129,7 +131,7 @@
 "Ganon Castle Fire Trial Ending Ledge":
   dungeon: Ganon
   exits:
-    "Ganon Castle Fire Trial Entrance Ledge": "has_tunic_goron_strict && longshot_anywhere"
+    "Ganon Castle Fire Trial Entrance Ledge": "has_tunic_goron && (longshot_anywhere || (hookshot_anywhere && event(GANON_MQ_FIRE_MONOLITH)))"
     "Ganon Castle Fire Trial Ending Room": "silver_rupees_ganon_fire"
   locations: #Needs checking.
     "MQ Ganon Castle SR Fire Under Pillar": "longshot_anywhere && has_tunic_goron_strict && can_lift_gold" #Needs further testing if actually strict.
