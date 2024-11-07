@@ -11,6 +11,7 @@
 
 # include <ultra64.h>
 # include <combo/seqcmd.h>
+# include <combo/config.h>
 # include <combo/audio.h>
 # include <combo/main.h>
 # include <combo/tha.h>
@@ -32,6 +33,9 @@
 # include <combo/patch.h>
 # include <combo/player.h>
 # include <combo/rand.h>
+# include <combo/xflags.h>
+# include <combo/global.h>
+# include <combo/csmc.h>
 # include <combo/text.h>
 # include <combo/collision_check.h>
 # include <combo/interface.h>
