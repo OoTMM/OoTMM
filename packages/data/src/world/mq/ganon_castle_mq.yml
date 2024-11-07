@@ -255,7 +255,7 @@
   locations:
     "MQ Ganon Castle SR Shadow Middle": "true"
     "MQ Ganon Castle Shadow Trial Bomb Flower Chest": "event(GANON_MQ_SHADOW_BOMBFLOWER_FROM_BEAMOS_1) && (is_adult || has_hover_boots || hookshot_anywhere)"
-    "MQ Ganon Castle Wonder Item": "event(GANON_MQ_SHADOW_BOMBFLOWER_FROM_BEAMOS_1)"
+    "MQ Ganon Castle Wonder Item": "event(GANON_MQ_SHADOW_BOMBFLOWER_FROM_BEAMOS_1) && (has_lens || longshot_anywhere)"
     "MQ Ganon Castle SR Shadow Front-Right": "has_lens || longshot_anywhere"
     "MQ Ganon Castle SR Shadow Front-Center": "has_lens"
 "Ganon Castle Shadow Trial Middle Beamos Area 2":
