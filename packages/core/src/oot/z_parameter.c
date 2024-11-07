@@ -110,6 +110,6 @@ void Magic_UpdateCustom(PlayState* play)
 }
 
 PATCH_CALL(0x80832578, Magic_RequestChangeCustom) /* Player - Magic Arrows */
-PATCH_CALL(0x808FF258, Magic_RequestChangeCustom) /* Spin Attack - Weird Check in Initializer */
+// PATCH_CALL(0x808FF258, Magic_RequestChangeCustom) /* Spin Attack - Weird Check in Initializer */
 
 PATCH_CALL(0x80078B78, Magic_UpdateCustom)
