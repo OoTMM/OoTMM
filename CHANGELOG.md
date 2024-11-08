@@ -48,6 +48,7 @@ All notable changes to this project will be documented in this file.
 - Logic no longer thinks you can swap ages in the Deku Theater.
 - Logic now accounts for the Hylian Guard Soul for the Keaton Mask sale in Kakariko.
 - The Light Trial Wallmaster warp now goes to the correct location, and logic for it fixed.
+- Fix logic issue for getting sticks in Forest Temple not requiring the Deku Baba Soul.
 
 ## [25.0] - 2024-09-08
 

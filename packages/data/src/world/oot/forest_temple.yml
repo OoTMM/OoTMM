@@ -48,7 +48,7 @@
     "Forest Temple Well": "event(FOREST_WELL) || can_dive_big"
     "Forest Temple Garden West Ledge": "climb_anywhere || hookshot_anywhere"
   events:
-    STICKS: "can_hookshot || can_hammer || can_boomerang || (has_nuts && can_use_sword)"
+    STICKS: "soul_deku_baba && (can_hookshot || can_hammer || can_boomerang || (has_nuts && can_use_sword))"
     NUTS: "can_use_sword || has_explosives || can_use_slingshot"
   locations:
     "Forest Temple GS Garden West": "gs && ((can_longshot || (climb_anywhere && has_bombchu)) || (event(FOREST_LEDGE_REACHED) && (can_collect_distance || (climb_anywhere && has_ranged_weapon))))"
@@ -89,7 +89,7 @@
     "Forest Temple Garden East Ledge": "can_longshot || (can_hookshot && trick(OOT_FOREST_HOOK)) || climb_anywhere"
     "Forest Temple Checkerboard": "climb_anywhere || hookshot_anywhere"
   events:
-    STICKS: "can_hookshot || can_hammer || can_boomerang || (has_nuts && can_use_sword)"
+    STICKS: "soul_deku_baba && (can_hookshot || can_hammer || can_boomerang || (has_nuts && can_use_sword))"
     NUTS: "can_use_sword || has_explosives || can_use_slingshot"
   locations:
     "Forest Temple Garden": "can_hookshot || climb_anywhere"
