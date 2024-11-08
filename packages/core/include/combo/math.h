@@ -54,6 +54,7 @@ float   Math_CosS(s16 angle);
 float   Math_SinS(s16 angle);
 s16     Math_Atan2S(f32 y, f32 x);
 f32     Math_Atan2F(f32 y, f32 x);
+#define Math_FAtan2F Math_Atan2F
 s16     Math_Atan2S_XY(f32 x, f32 y);
 f32     Math_Atan2F_XY(f32 x, f32 y);
 s32     Math_StepToF(float* pValue, float target, float step);

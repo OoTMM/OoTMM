@@ -82,12 +82,18 @@ ASSERT_SIZE(TitleCardContext, 0x10);
 
 typedef struct ActorContext
 {
-    char                    unk_000[0xc];
+    u8                      freezeFlashTimer;
+    char                    unk_01[0x01];
+    u8                      unk_02;
+    u8                      lensActive;
+    char                    unk_04[0x04];
+    u8                      total; // total number of actors loaded
     ActorList               actors[12];
     TargetContext           targetCtx;
     ActorContextSceneFlags  flags;
     TitleCardContext        titleCtx;
-    char                    unk_138[0x08];
+    char                    unk_138[0x04];
+    void*                   absoluteSpace;
 }
 ActorContext;
 
@@ -119,5 +125,8 @@ void Actor_SpawnFloorDustRing(PlayState* play, Actor* actor, Vec3f* posXZ, f32 r
 void Actor_PlaySfx_Flagged2(Actor* actor, u16 sfxId);
 void Actor_MoveXYZ(Actor* actor);
 #define func_8002EBCC PreDraw1
+s32 Actor_TalkOfferAccepted(Actor* actor, PlayState* play);
+s32 Actor_OfferTalk(Actor* actor, PlayState* play, f32 radius);
+u32 Actor_TextboxIsClosing(Actor* actor, PlayState* play);
 
 #endif

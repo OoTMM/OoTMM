@@ -30,6 +30,25 @@ typedef struct OcarinaStaff
 }
 OcarinaStaff;
 
+typedef enum OcarinaMode {
+    /* 0x00 */ OCARINA_MODE_00,
+    /* 0x01 */ OCARINA_MODE_01,
+    /* 0x02 */ OCARINA_MODE_02,
+    /* 0x03 */ OCARINA_MODE_03,
+    /* 0x04 */ OCARINA_MODE_04,
+    /* 0x05 */ OCARINA_MODE_05,
+    /* 0x06 */ OCARINA_MODE_06,
+    /* 0x07 */ OCARINA_MODE_07,
+    /* 0x08 */ OCARINA_MODE_08,
+    /* 0x09 */ OCARINA_MODE_09,
+    /* 0x0A */ OCARINA_MODE_0A,
+    /* 0x0B */ OCARINA_MODE_0B,
+    /* 0x0C */ OCARINA_MODE_0C,
+    /* 0x0D */ OCARINA_MODE_0D,
+    /* 0x0E */ OCARINA_MODE_0E,
+    /* 0x0F */ OCARINA_MODE_0F
+} OcarinaMode;
+
 #if defined(GAME_MM)
 # define OCARINA_MODE_NONE                      0x00
 # define OCARINA_MODE_ACTIVE                    0x01

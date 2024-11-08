@@ -64,7 +64,8 @@ typedef struct PACKED
     u16  lastSongPlayed;
     u16  ocarinaMode;
     u16  ocarinaAction;
-    char unk_e3f2[0x26];
+    u16  unk_e3f2;
+    char unk_e3f4[0x24];
 }
 MessageContext;
 
