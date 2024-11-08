@@ -930,8 +930,6 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MM_SOULS_MISC: settings.soulsMiscMm,
     MM_REMOVED_FAIRIES: settings.strayFairyOtherShuffle === 'removed',
     SHARED_SKELETON_KEY: settings.sharedSkeletonKey,
-    OOT_SHUFFLE_GRASS: settings.shuffleGrassOot !== 'none',
-    MM_SHUFFLE_GRASS: settings.shuffleGrassMm !== 'none',
     OOT_SHUFFLE_MASK_TRADES: settings.shuffleMaskTrades,
     MENU_NOTEBOOK: settings.menuNotebook,
     OOT_AGELESS_CHILD_TRADE: settings.agelessChildTrade,

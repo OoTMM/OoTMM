@@ -434,7 +434,6 @@ void hookPlay_Init(PlayState* play)
     gMultiMarkCollectibles = 0;
     gMultiMarkSwitch0 = 0;
     gMultiMarkSwitch1 = 0;
-    g.keatonGrassMax = -1;
     Multi_ResetWisps();
 
     if (Config_Flag(CFG_ER_OVERWORLD) || Config_Flag(CFG_ER_INDOORS))
