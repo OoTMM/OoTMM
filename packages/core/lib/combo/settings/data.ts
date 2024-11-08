@@ -617,8 +617,8 @@ export const SETTINGS = [{
   values: [
     { value: 'none', name: 'None' },
     { value: 'all', name: 'All' },
-    { value: 'overworld', name: 'Overworld', cond: (s: any) => s.shuffleGrassOot === 'overworld' },
-    { value: 'dungeons', name: 'Dungeons only', cond: (s: any) => s.shuffleGrassOot === 'overworld' },
+    { value: 'overworld', name: 'Overworld' },
+    { value: 'dungeons', name: 'Dungeons only' },
   ],
   cond: hasOoT,
   default: 'none'
