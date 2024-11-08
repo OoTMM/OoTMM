@@ -60,8 +60,7 @@
 "Owl Clock Town":
   region: CLOCK_TOWN_SOUTH
   exits:
-    "Clock Town South": "can_reset_time"
-    "Clock Tower Platform": "true"
+    "Clock Town Near Clock Tower": "true"
   locations:
     "Clock Town Owl Statue": "has_sticks || has_sword"
 "Owl Milk Road":
@@ -202,16 +201,15 @@
   region: CLOCK_TOWN_SOUTH
   exits:
     "GLOBAL": "true"
-    "Clock Tower": "can_reset_time"
+    "Clock Tower": "cond(setting(erIndoorsGameLinks), can_reset_time, true)"
     "Clock Town South": "can_reset_time"
     "Clock Tower Platform": "true"
     "Owl Clock Town": "true"
 "Clock Tower Platform":
   region: CLOCK_TOWN_SOUTH
   exits:
-    "Clock Town South": "can_reset_time"
+    "Clock Town Near Clock Tower": "true"
     "Clock Tower Roof": "after(NIGHT3_AM_12_00) && cond(setting(erMoon), trick(MM_CLOCK_TOWER_WAIT) || can_play_time || can_play_sun, true)"
-    "Owl Clock Town": "true"
   locations:
     "Clock Town Platform HP": "true"
 "Clock Town South":
