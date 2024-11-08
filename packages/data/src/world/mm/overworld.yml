@@ -209,7 +209,7 @@
   region: CLOCK_TOWN_SOUTH
   exits:
     "Clock Town Near Clock Tower": "true"
-    "Clock Tower Roof": "after(NIGHT3_AM_12_00) && cond(setting(erMoon), trick(MM_CLOCK_TOWER_WAIT) || can_play_time || can_play_sun, true)"
+    "Clock Tower Roof": "after(NIGHT3_AM_12_00) && cond(setting(erMoon), can_play_time || (can_reset_time && (trick(MM_CLOCK_TOWER_WAIT) || can_play_sun)), true)"
   locations:
     "Clock Town Platform HP": "true"
 "Clock Town South":
