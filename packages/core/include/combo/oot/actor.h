@@ -107,4 +107,17 @@ TransitionActorContext; /* size = 0x8 */
 
 #define PARAMS_GET_NOSHIFT(p, s, n) ((p) & (NBITS_TO_MASK(n) << (s)))
 
+Actor* Actor_FindNearby(PlayState* play, Actor* refActor, s16 actorId, u8 actorCategory, f32 range);
+u8 Actor_ApplyDamage(Actor* actor);
+void Actor_ChangeCategory(PlayState* play, ActorContext* actorCtx, Actor* actor, u8 actorCategory);
+void Actor_PlaySfx_SurfaceBomb(PlayState* play, Actor* actor);
+void Actor_SetColorFilter(Actor* actor, s16 colorFlag, s16 colorIntensityMax, s16 bufFlag, s16 duration);
+void Actor_SetDropFlagJntSph(Actor* actor, ColliderJntSph* jntSph, s32 freezeFlag);
+void Actor_SetScale(Actor* actor, f32 scale);
+void func_8002F5C4(Actor* actorA, Actor* actorB, PlayState* play);
+void Actor_SpawnFloorDustRing(PlayState* play, Actor* actor, Vec3f* posXZ, f32 radius, s32 amountMinusOne, f32 randAccelWeight, s16 scale, s16 scaleStep, u8 useLighting);
+void Actor_PlaySfx_Flagged2(Actor* actor, u16 sfxId);
+void Actor_MoveXYZ(Actor* actor);
+#define func_8002EBCC PreDraw1
+
 #endif

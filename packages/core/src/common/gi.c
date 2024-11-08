@@ -11,7 +11,7 @@ void comboLoadObjectGi(Player* player, u16 objectId)
         /* MM: *((u8*)player + 0x1b8) = 1; */
 
         osCreateMesgQueue(&player->objMsgQueue, &player->objMsg, 1);
-        comboLoadObject(player->objBuffer, objectId);
+        comboLoadObject(player->giObjectSegment, objectId);
         osSendMesg(&player->objMsgQueue, NULL, OS_MESG_NOBLOCK);
     }
 }

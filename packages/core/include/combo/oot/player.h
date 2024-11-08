@@ -15,7 +15,7 @@
 #define PLAYER_STATE1_START_CHANGING_HELD_ITEM (1 << 8) // Item change process has begun
 #define PLAYER_STATE1_9 (1 << 9)
 #define PLAYER_STATE1_10 (1 << 10)
-#define PLAYER_STATE1_CARRYING_ACTOR (1 << 11) // Currently carrying an actor
+#define PLAYER_STATE1_ACTOR_CARRY (1 << 11) // Currently carrying an actor
 #define PLAYER_STATE1_CHARGING_SPIN_ATTACK (1 << 12) // Currently charing a spin attack (by holding down the B button)
 #define PLAYER_STATE1_13 (1 << 13)
 #define PLAYER_STATE1_14 (1 << 14)
@@ -183,10 +183,52 @@ typedef struct Player
     DmaRequest      giObjectDmaRequest;
     OSMesgQueue     objMsgQueue;
     OSMesg          objMsg;
-    void*           objBuffer;
-    char            unk_1b4[0x280];
-    s16             gi; /* Extended to s16 */
-    char            unk_436[0x246];
+    void*           giObjectSegment; // also used for title card textures
+    SkelAnime       skelAnime;
+    Vec3s           jointTable[PLAYER_LIMB_BUF_COUNT];
+    Vec3s           morphTable[PLAYER_LIMB_BUF_COUNT];
+    Vec3s           blendTable[PLAYER_LIMB_BUF_COUNT];
+    char            faceChange[0x4];
+    Actor*          heldActor;
+    Vec3f           leftHandPos;
+    Vec3s           unk_3BC;
+    Actor*          unk_3C4;
+    Vec3f           unk_3C8;
+    char            unk_3D4[0x058];
+    s8              doorType;
+    s8              doorDirection;
+    s16             doorTimer;
+    Actor*          doorActor;
+    s16             gi; /* Extended to s16 */ // 0x424
+    u16             getItemDirection;
+    Actor*          interactRangeActor;
+    s8              mountSide;
+    char            unk_43D[0x003];
+    Actor*          rideActor;
+    u8              csAction;
+    u8              prevCsAction;
+    u8              cueId;
+    u8              unk_447;
+    Actor*          csActor; // Actor involved in a `csAction`. Typically the actor that invoked the cutscene.
+    char            unk_44C[0x004];
+    Vec3f           unk_450;
+    Vec3f           unk_45C;
+    char            unk_468[0x002];
+    union {
+        s16 haltActorsDuringCsAction; // If true, halt actors belonging to certain categories during a `csAction`
+        s16 slidingDoorBgCamIndex; // `BgCamIndex` used during a sliding door cutscene
+    } cv; // "Cutscene Variable": context dependent variable that has different meanings depending on what function is called
+    s16             subCamId;
+    char            unk_46E[0x02A];
+    ColliderCylinder cylinder;
+    ColliderQuad    meleeWeaponQuads[2];
+    ColliderQuad    shieldQuad;
+    Actor*          focusActor; // Actor that Player and the camera are looking at; Used for lock-on, talking, and more
+    char            unk_668[0x004];
+    s32             unk_66C;
+    s32             meleeWeaponEffectIndex;
+    void*           actionFunc;
+    void*           ageProperties;
     u32             stateFlags1;
     u32             stateFlags2;
     Actor*          unk_684;
@@ -306,9 +348,8 @@ ASSERT_OFFSET(Player, sheathDLists,       0x158);
 ASSERT_OFFSET(Player, waistDLists,        0x15c);
 ASSERT_OFFSET(Player, giObjectLoading,    0x160);
 ASSERT_OFFSET(Player, giObjectDmaRequest, 0x164);
-ASSERT_OFFSET(Player, unk_1b4,            0x1a4);
 ASSERT_OFFSET(Player, gi,                 0x424);
-ASSERT_OFFSET(Player, unk_436,            0x426);
+ASSERT_OFFSET(Player, getItemDirection,   0x426);
 ASSERT_OFFSET(Player, unk_684,            0x674);
 ASSERT_OFFSET(Player, boomerangActor,     0x678);
 ASSERT_OFFSET(Player, naviActor,          0x67c);
@@ -348,5 +389,7 @@ typedef enum PlayerMeleeWeaponAnimation {
     /* 27 */ PLAYER_MWA_BIG_SPIN_2H,
     /* 28 */ PLAYER_MWA_MAX
 } PlayerMeleeWeaponAnimation;
+
+int Player_IsBurningStickInRange(PlayState* play, Vec3f* pos, f32 xzRange, f32 yRange);
 
 #endif

@@ -141,7 +141,7 @@ void Boss04_Init(Actor_Boss04* this, PlayState* play) {
 
     this->actor.params = 0x64;
     Actor_SetScale(&this->actor, 0.1f);
-    this->actor.targetMode = ATTENTION_RANGE_5;
+    this->actor.attentionRangeType = ATTENTION_RANGE_5;
     this->actor.hintId = TATL_HINT_ID_WART;
     this->actor.colChkInfo.health = 20;
     this->actor.colChkInfo.damageTable = &sDamageTable;

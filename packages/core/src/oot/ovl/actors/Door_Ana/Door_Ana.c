@@ -82,7 +82,7 @@ void DoorAna_Init(Actor* thisx, PlayState* play) {
     } else {
         DoorAna_SetupAction(this, DoorAna_WaitOpen);
     }
-    this->actor.targetMode = ATTENTION_RANGE_0;
+    this->actor.attentionRangeType = ATTENTION_RANGE_0;
 }
 
 void DoorAna_Destroy(Actor* thisx, PlayState* play) {
@@ -131,7 +131,7 @@ void DoorAna_WaitOpen(DoorAna* this, PlayState* play) {
 
     player = GET_PLAYER(play);
     if (Math_StepToF(&this->actor.scale.x, 0.01f, 0.001f)) {
-        if ((this->actor.targetMode != 0) && (play->transitionTrigger == TRANS_TRIGGER_OFF) &&
+        if ((this->actor.attentionRangeType != ATTENTION_RANGE_0) && (play->transitionTrigger == TRANS_TRIGGER_OFF) &&
             (player->stateFlags1 & PLAYER_STATE1_31) && (player->av1.actionVar1 == 0)) {
             destinationIdx = PARAMS_GET_U(this->actor.params, 12, 3) - 1;
             gIsEntranceOverride = 1;
@@ -149,9 +149,9 @@ void DoorAna_WaitOpen(DoorAna* this, PlayState* play) {
                 this->actor.xzDistToPlayer <= 15.0f && -50.0f <= this->actor.yDistanceFromLink &&
                 this->actor.yDistanceFromLink <= 15.0f) {
                 player->stateFlags1 |= PLAYER_STATE1_31;
-                this->actor.targetMode = ATTENTION_RANGE_1;
+                this->actor.attentionRangeType = ATTENTION_RANGE_1;
             } else {
-                this->actor.targetMode = ATTENTION_RANGE_0;
+                this->actor.attentionRangeType = ATTENTION_RANGE_0;
             }
         }
     }

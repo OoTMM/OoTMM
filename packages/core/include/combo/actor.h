@@ -12,14 +12,14 @@
 #define PARAMS_GET_U(p, s, n)   (((p) >> (s)) & NBITS_TO_MASK(n))
 #define PARAMS_GET_S(p, s, n)   (((p) & (NBITS_TO_MASK(n) << (s))) >> (s))
 
-#define ACTOR_FLAG_OOT_0            (1 << 0)
+#define ACTOR_FLAG_OOT_ATTENTION_ENABLED (1 << 0)
 #define ACTOR_FLAG_OOT_1            (1 << 1)
-#define ACTOR_FLAG_OOT_2            (1 << 2)
-#define ACTOR_FLAG_OOT_3            (1 << 3)
+#define ACTOR_FLAG_OOT_HOSTILE      (1 << 2)
+#define ACTOR_FLAG_OOT_NEUTRAL      (1 << 3)
 #define ACTOR_FLAG_OOT_4            (1 << 4)
 #define ACTOR_FLAG_OOT_5            (1 << 5)
 #define ACTOR_FLAG_OOT_6            (1 << 6)
-#define ACTOR_FLAG_OOT_7            (1 << 7)
+#define ACTOR_FLAG_OOT_REACT_TO_LENS (1 << 7)
 #define ACTOR_FLAG_OOT_8            (1 << 8)
 #define ACTOR_FLAG_OOT_9            (1 << 9)
 #define ACTOR_FLAG_OOT_10           (1 << 10)
@@ -148,7 +148,7 @@ typedef struct Actor
     PosRot      home;
     s16         params;
     s8          objectSlot;
-    s8          targetMode;
+    s8          attentionRangeType;
 
 #if defined(GAME_OOT)
     u16        sfx;
@@ -227,6 +227,15 @@ typedef struct DynaPolyActor
 }
 DynaPolyActor;
 
+#define COLORFILTER_COLORFLAG_GRAY 0x8000
+#define COLORFILTER_COLORFLAG_RED  0x4000
+#define COLORFILTER_COLORFLAG_BLUE 0x0000
+
+#define COLORFILTER_INTENSITY_FLAG 0x8000
+
+#define COLORFILTER_BUFFLAG_XLU    0x2000
+#define COLORFILTER_BUFFLAG_OPA    0x0000
+
 #if defined(GAME_MM)
 typedef struct
 {
@@ -235,23 +244,6 @@ typedef struct
     char    unk_8[0x4];
 }
 ActorList;
-
-typedef enum TargetMode
-{
-    TARGET_MODE_0,
-    TARGET_MODE_1,
-    TARGET_MODE_2,
-    TARGET_MODE_3,
-    TARGET_MODE_4,
-    TARGET_MODE_5,
-    TARGET_MODE_6,
-    TARGET_MODE_7,
-    TARGET_MODE_8,
-    TARGET_MODE_9,
-    TARGET_MODE_10,
-    TARGET_MODE_MAX
-}
-TargetMode;
 
 typedef enum
 {
@@ -381,14 +373,6 @@ typedef enum {
 } PlayerImpactType;
 
 #define COLORFILTER_COLORFLAG_NONE 0xC000
-#define COLORFILTER_COLORFLAG_GRAY 0x8000
-#define COLORFILTER_COLORFLAG_RED  0x4000
-#define COLORFILTER_COLORFLAG_BLUE 0x0000
-
-#define COLORFILTER_INTENSITY_FLAG 0x8000
-
-#define COLORFILTER_BUFFLAG_XLU    0x2000
-#define COLORFILTER_BUFFLAG_OPA    0x0000
 
 Actor* func_800BC270(PlayState* play, Actor* actor, f32 distance, u32 dmgFlags);
 s16 Actor_WorldPitchTowardPoint(Actor* actor, Vec3f* refPoint);
@@ -481,5 +465,104 @@ s32 Actor_SetPlayerImpact(PlayState* play, PlayerImpactType type, s32 timer, f32
 void Actor_RequestQuakeAndRumble(Actor* actor, PlayState* play, s16 quakeY, s16 quakeDuration);
 #endif
 void Actor_SetClosestSecretDistance(Actor* actor, PlayState* play);
+
+#if defined(GAME_OOT)
+typedef enum NaviEnemy {
+    /* 0x00 */ NAVI_ENEMY_DEFAULT,
+    /* 0x01 */ NAVI_ENEMY_GOHMA,
+    /* 0x02 */ NAVI_ENEMY_GOHMA_EGG,
+    /* 0x03 */ NAVI_ENEMY_GOHMA_LARVA,
+    /* 0x04 */ NAVI_ENEMY_SKULLTULA,
+    /* 0x05 */ NAVI_ENEMY_BIG_SKULLTULA,
+    /* 0x06 */ NAVI_ENEMY_TAILPASARAN,
+    /* 0x07 */ NAVI_ENEMY_DEKU_BABA,
+    /* 0x08 */ NAVI_ENEMY_BIG_DEKU_BABA,
+    /* 0x09 */ NAVI_ENEMY_WITHERED_DEKU_BABA,
+    /* 0x0A */ NAVI_ENEMY_DEKU_SCRUB,
+    /* 0x0B */ NAVI_ENEMY_UNUSED_B,
+    /* 0x0C */ NAVI_ENEMY_KING_DODONGO,
+    /* 0x0D */ NAVI_ENEMY_DODONGO,
+    /* 0x0E */ NAVI_ENEMY_BABY_DODONGO,
+    /* 0x0F */ NAVI_ENEMY_LIZALFOS,
+    /* 0x10 */ NAVI_ENEMY_DINOLFOS,
+    /* 0x11 */ NAVI_ENEMY_FIRE_KEESE,
+    /* 0x12 */ NAVI_ENEMY_KEESE,
+    /* 0x13 */ NAVI_ENEMY_ARMOS,
+    /* 0x14 */ NAVI_ENEMY_BARINADE,
+    /* 0x15 */ NAVI_ENEMY_PARASITIC_TENTACLE,
+    /* 0x16 */ NAVI_ENEMY_SHABOM,
+    /* 0x17 */ NAVI_ENEMY_BIRI,
+    /* 0x18 */ NAVI_ENEMY_BARI,
+    /* 0x19 */ NAVI_ENEMY_STINGER,
+    /* 0x1A */ NAVI_ENEMY_PHANTOM_GANON_PHASE_2,
+    /* 0x1B */ NAVI_ENEMY_STALFOS,
+    /* 0x1C */ NAVI_ENEMY_BLUE_BUBBLE,
+    /* 0x1D */ NAVI_ENEMY_WHITE_BUBBLE,
+    /* 0x1E */ NAVI_ENEMY_GREEN_BUBBLE,
+    /* 0x1F */ NAVI_ENEMY_SKULLWALLTULA,
+    /* 0x20 */ NAVI_ENEMY_GOLD_SKULLTULA,
+    /* 0x21 */ NAVI_ENEMY_VOLVAGIA,
+    /* 0x22 */ NAVI_ENEMY_FLARE_DANCER,
+    /* 0x23 */ NAVI_ENEMY_TORCH_SLUG,
+    /* 0x24 */ NAVI_ENEMY_RED_BUBBLE,
+    /* 0x25 */ NAVI_ENEMY_MORPHA,
+    /* 0x26 */ NAVI_ENEMY_DARK_LINK,
+    /* 0x27 */ NAVI_ENEMY_SHELL_BLADE,
+    /* 0x28 */ NAVI_ENEMY_SPIKE,
+    /* 0x29 */ NAVI_ENEMY_BONGO_BONGO,
+    /* 0x2A */ NAVI_ENEMY_REDEAD,
+    /* 0x2B */ NAVI_ENEMY_PHANTOM_GANON_PHASE_1,
+    /* 0x2C */ NAVI_ENEMY_UNUSED_2C,
+    /* 0x2D */ NAVI_ENEMY_GIBDO,
+    /* 0x2E */ NAVI_ENEMY_DEAD_HANDS_HAND,
+    /* 0x2F */ NAVI_ENEMY_DEAD_HAND,
+    /* 0x30 */ NAVI_ENEMY_WALLMASTER,
+    /* 0x31 */ NAVI_ENEMY_FLOORMASTER,
+    /* 0x32 */ NAVI_ENEMY_TWINROVA_KOUME,
+    /* 0x33 */ NAVI_ENEMY_TWINROVA_KOTAKE,
+    /* 0x34 */ NAVI_ENEMY_IRON_KNUCKLE_NABOORU,
+    /* 0x35 */ NAVI_ENEMY_IRON_KNUCKLE,
+    /* 0x36 */ NAVI_ENEMY_SKULL_KID_ADULT,
+    /* 0x37 */ NAVI_ENEMY_LIKE_LIKE,
+    /* 0x38 */ NAVI_ENEMY_UNUSED_38,
+    /* 0x39 */ NAVI_ENEMY_BEAMOS,
+    /* 0x3A */ NAVI_ENEMY_ANUBIS,
+    /* 0x3B */ NAVI_ENEMY_FREEZARD,
+    /* 0x3C */ NAVI_ENEMY_UNUSED_3C,
+    /* 0x3D */ NAVI_ENEMY_GANONDORF,
+    /* 0x3E */ NAVI_ENEMY_GANON,
+    /* 0x3F */ NAVI_ENEMY_SKULL_KID,
+    /* 0x40 */ NAVI_ENEMY_SKULL_KID_FRIENDLY,
+    /* 0x41 */ NAVI_ENEMY_SKULL_KID_MASK,
+    /* 0x42 */ NAVI_ENEMY_OCTOROK,
+    /* 0x43 */ NAVI_ENEMY_POE_COMPOSER,
+    /* 0x44 */ NAVI_ENEMY_POE,
+    /* 0x45 */ NAVI_ENEMY_RED_TEKTITE,
+    /* 0x46 */ NAVI_ENEMY_BLUE_TEKTITE,
+    /* 0x47 */ NAVI_ENEMY_LEEVER,
+    /* 0x48 */ NAVI_ENEMY_PEAHAT,
+    /* 0x49 */ NAVI_ENEMY_PEAHAT_LARVA,
+    /* 0x4A */ NAVI_ENEMY_MOBLIN,
+    /* 0x4B */ NAVI_ENEMY_MOBLIN_CLUB,
+    /* 0x4C */ NAVI_ENEMY_WOLFOS,
+    /* 0x4D */ NAVI_ENEMY_MAD_SCRUB,
+    /* 0x4E */ NAVI_ENEMY_BUSINESS_SCRUB,
+    /* 0x4F */ NAVI_ENEMY_DAMPES_GHOST,
+    /* 0x50 */ NAVI_ENEMY_POE_SISTER_MEG,
+    /* 0x51 */ NAVI_ENEMY_POE_SISTER_JOELLE,
+    /* 0x52 */ NAVI_ENEMY_POE_SISTER_BETH,
+    /* 0x53 */ NAVI_ENEMY_POE_SISTER_AMY,
+    /* 0x54 */ NAVI_ENEMY_GERUDO_THIEF,
+    /* 0x55 */ NAVI_ENEMY_STALCHILD,
+    /* 0x56 */ NAVI_ENEMY_ICE_KEESE,
+    /* 0x57 */ NAVI_ENEMY_WHITE_WOLFOS,
+    /* 0x58 */ NAVI_ENEMY_GUAY,
+    /* 0x59 */ NAVI_ENEMY_BIGOCTO,
+    /* 0x5A */ NAVI_ENEMY_BIG_POE,
+    /* 0x5B */ NAVI_ENEMY_TWINROVA,
+    /* 0x5C */ NAVI_ENEMY_POE_WASTELAND,
+    /* 0xFF */ NAVI_ENEMY_NONE = 0xFF
+} NaviEnemy;
+#endif
 
 #endif

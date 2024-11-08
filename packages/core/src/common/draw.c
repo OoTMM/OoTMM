@@ -53,7 +53,7 @@ static void drawGiParam(PlayState* play, s16 gi)
 void Draw_Gi(PlayState* play, Actor* actor, s16 gi, int flags)
 {
     const GetItem* giEntry;
-    void* objBuffer;
+    void* giObjectSegment;
     u16 objectId;
 
     giEntry = kExtendedGetItems + gi - 1;
@@ -61,8 +61,8 @@ void Draw_Gi(PlayState* play, Actor* actor, s16 gi, int flags)
 
     if (objectId & ~MASK_FOREIGN_OBJECT)
     {
-        objBuffer = comboGetObject(objectId);
-        Draw_SetObjectSegment(play->state.gfxCtx, objBuffer);
+        giObjectSegment = comboGetObject(objectId);
+        Draw_SetObjectSegment(play->state.gfxCtx, giObjectSegment);
     }
     if (!(flags & DRAW_NO_PRE1))
         PreDraw1(actor, play, 0);

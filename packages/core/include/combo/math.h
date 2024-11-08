@@ -29,6 +29,10 @@
 #define IS_ZERO(f) (fabsf(f) < 0.008f)
 
 #define M_PIf 3.14159265358979323846f
+#define M_SQRT2 1.41421356237309504880f
+#define MAXFLOAT 3.40282347e+38f
+#define SHT_MAX 32767.0f
+#define SHT_MINV (1.0f / SHT_MAX)
 
 #define VEC3F_LERPIMPDST(dst, v0, v1, t)                \
     {                                                   \
@@ -55,6 +59,7 @@ f32     Math_Atan2F_XY(f32 x, f32 y);
 s32     Math_StepToF(float* pValue, float target, float step);
 s32     Math_StepToS(s16* pValue, s16 target, s16 step);
 float   Math_SmoothStepToF(float* pValue, float target, float fraction, float step, float minStep);
+s16     Math_SmoothStepToS(s16* pValue, s16 target, s16 scale, s16 step, s16 minStep);
 void    Math_Vec3f_Copy(Vec3f* dest, Vec3f* src);
 void    Math_Vec3s_Copy(Vec3s* dest, Vec3s* src);
 void    Math_Vec3f_Sum(Vec3f* a, Vec3f* b, Vec3f* dest);
@@ -68,6 +73,7 @@ s16     Math_Vec3f_Yaw(Vec3f* origin, Vec3f* point);
 s16     Math_Vec3f_Pitch(Vec3f* origin, Vec3f* point);
 f32     Math_FAcosF(f32 angle);
 f32     Math_SinF(f32 rad);
+f32     Math_Vec3f_DistXZ(Vec3f* a, Vec3f* b);
 
 
 #endif

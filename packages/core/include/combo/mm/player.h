@@ -451,7 +451,7 @@ typedef struct Player
     /* 0x1BC */ DmaRequest giObjectDmaRequest;
     /* 0x1DC */ OSMesgQueue objMsgQueue;
     /* 0x1F4 */ OSMesg objMsg;
-    /* 0x1F8 */ void* objBuffer;
+    /* 0x1F8 */ void* giObjectSegment;
     /* 0x1FC */ u8 maskObjectLoadState;
     /* 0x1FD */ s8 maskId;
     /* 0x200 */ DmaRequest maskDmaRequest;

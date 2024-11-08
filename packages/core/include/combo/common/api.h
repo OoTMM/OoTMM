@@ -100,6 +100,8 @@ void    ActorEnableTalk(Actor* actor, PlayState* play, float range);
 void    ActorEnableTalkEx(Actor* actor, PlayState* play, float range, u32 unk);
 void    Actor_UpdateBgCheckInfo(PlayState* play, Actor* actor, float unk_3, float unk_4, float unk_5, u32 unk_6);
 void    Actor_MoveWithGravity(Actor* actor);
+#define Actor_MoveXZGravity Actor_MoveWithGravity
+
 int     ActorTalkedTo(Actor* actor);
 
 void    EnableOwl(u8 owlId);
@@ -261,12 +263,28 @@ void AudioSfx_PlaySfx(u16 sfxId, Vec3f* pos, u8 token, f32* freqScale, f32* volu
 
 void* Lib_SegmentedToVirtual(void* ptr);
 
-#if defined(GAME_MM)
-void AudioOcarina_SetInstrument(u8 ocarinaInstrumentId);
+typedef void (*ActorShadowFunc)(Actor*, Lights*, PlayState*);
+void ActorShape_Init(ActorShape* actorShape, f32 yOffset, ActorShadowFunc shadowDraw, f32 shadowScale);
 void Animation_PlayLoop(SkelAnime* skelAnime, AnimationHeader* animation);
 void Animation_PlayOnce(SkelAnime* skelAnime, AnimationHeader* animation);
-void ActorShape_Init(ActorShape* actorShape, f32 yOffset, ActorShadowFunc shadowDraw, f32 shadowScale);
-s32 Collider_InitAndSetCylinder(PlayState* play, ColliderCylinder* collider, struct Actor* actor, ColliderCylinderInit* src);
+void Animation_PlayLoop(SkelAnime* skelAnime, AnimationHeader* animation);
+void Animation_Change(SkelAnime* skelAnime, AnimationHeader* animation, f32 playSpeed, f32 startFrame, f32 endFrame, u8 mode, f32 morphFrames);
+void Animation_ChangeImpl(SkelAnime* skelAnime, AnimationHeader* animation, f32 playSpeed, f32 startFrame, f32 endFrame, u8 mode, f32 morphFrames, s8 taper);
+void Animation_PlayOnceSetSpeed(SkelAnime* skelAnime, AnimationHeader* animation, f32 playSpeed);
+void Animation_MorphToPlayOnce(SkelAnime* skelAnime, AnimationHeader* animation, f32 morphFrames);
+void Animation_PlayLoopSetSpeed(SkelAnime* skelAnime, AnimationHeader* animation, f32 playSpeed);
+void Animation_MorphToLoop(SkelAnime* skelAnime, AnimationHeader* animation, f32 morphFrames);
+
+void Animation_EndLoop(SkelAnime* skelAnime);
+void Animation_Reverse(SkelAnime* skelAnime);
+void Animation_SetMorph(struct PlayState* play, SkelAnime* skelAnime, f32 morphFrames);
+s32 Animation_OnFrame(SkelAnime* skelAnime, f32 frame);
+s16 Animation_GetLength(void* animation);
+s16 Animation_GetLastFrame(void* animation);
+
+#if defined(GAME_MM)
+void AudioOcarina_SetInstrument(u8 ocarinaInstrumentId);
+s32 Collider_InitAndSetCylinder(PlayState* play, ColliderCylinder* collider, Actor* actor, ColliderCylinderInit* src);
 void Message_BombersNotebookQueueEvent(PlayState* play, u8 event);
 s32 Player_IsFacingActor(Actor* actor, s16 maxAngleDiff, PlayState* play);
 s32 Actor_TrackPlayer(PlayState* play, Actor* actor, Vec3s* headRot, Vec3s* torsoRot, Vec3f focusPos);
@@ -386,7 +404,6 @@ f32 VectDist(Vec3f* vec1, Vec3f* vec2);
 f32 Math_Vec3f_DistXYZ(Vec3f* a, Vec3f* b);
 f32 Math_Vec3f_DistXYZAndStoreDiff(Vec3f* a, Vec3f* b, Vec3f* dest);
 void Audio_PlaySfx_AtPosWithAllChannelsIO(Vec3f* pos, u16 sfxId, u8 ioData);
-s16 Math_SmoothStepToS(s16* pValue, s16 target, s16 scale, s16 step, s16 minStep);
 void EffectSsDust_Spawn_2_Normal(PlayState* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, Color_RGBA8* primColor, Color_RGBA8* envColor, s16 scale, s16 scaleStep, s16 life);
 
 void SkelAnime_InitFlex(PlayState* play, SkelAnime* skelAnime, FlexSkeletonHeader* skeletonHeaderSeg, AnimationHeader* animation, Vec3s* jointTable, Vec3s* morphTable, s32 limbCount);
@@ -412,6 +429,7 @@ Vec3s   Camera_GetCamDir(Camera* camera);
 s16     Camera_GetCamDirPitch(Camera* camera);
 s16     Camera_GetCamDirYaw(Camera* camera);
 void    Camera_SetCameraData(Camera* camera, s16 setDataFlags, void* data0, void* data1, s16 data2, s16 data3, s32 arg6);
+s32     Camera_RequestQuake(Camera* camera, s32 unused, s16 y, s32 duration);
 
 s32 Collider_InitCylinder(struct PlayState* play, ColliderCylinder* collider);
 s32 Collider_SetCylinder(struct PlayState* play, ColliderCylinder* collider, struct Actor* actor, ColliderCylinderInit* src);
@@ -463,6 +481,12 @@ void FileSelect_Init(GameState* this);
 
 void Rumble_Request(f32 distSq, u8 sourceIntensity, u8 decayTimer, u8 decayStep);
 Actor* Actor_SpawnAsChild(ActorContext* actorCtx, Actor* parent, PlayState* play, s16 actorId, f32 posX, f32 posY, f32 posZ, s16 rotX, s16 rotY, s16 rotZ, s32 params);
+
+s32 SurfaceType_GetWallFlags(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId);
+s32 SurfaceType_IsIgnoredByProjectiles(CollisionContext* colCtx, CollisionPoly* poly, s32 bgId);
+s32 DynaPolyActor_TransformCarriedActor(CollisionContext* colCtx, s32 bgId, Actor* carriedActor);
+s32 WaterBox_GetSurface1(PlayState* play, CollisionContext* colCtx, f32 x, f32 z, f32* ySurface, WaterBox** outWaterBox);
+f32 Math3D_Vec3fMagnitude(Vec3f* vec);
 
 
 #if defined(GAME_MM)
@@ -563,7 +587,6 @@ typedef void (*PostLimbDraw)(PlayState* play, s32 limbIndex, Gfx** dList, Vec3s*
 
 Gfx* SkelAnime_DrawFlex(PlayState* play, void** skeleton, Vec3s* jointTable, s32 dListCount, OverrideLimbDraw overrideLimbDraw, PostLimbDraw postLimbDraw, struct Actor* actor, Gfx* gfx);
 
-f32 Math3D_Vec3fMagnitude(Vec3f* vec);
 f32 Math3D_Vec3f_DistXYZ(Vec3f* a, Vec3f* b);
 void Actor_UpdateVelocityWithGravity(Actor* actor);
 void Math_Vec3f_Scale(Vec3f* vec, f32 scale);
@@ -573,7 +596,6 @@ u32 Quake_SetPerturbations(s16 index, s16 y, s16 x, s16 fov, s16 roll);
 u32 Quake_SetDuration(s16 index, s16 duration);
 f32 BgCheck_EntityRaycastFloor5_2(PlayState* play, CollisionContext* colCtx, CollisionPoly** outPoly, s32* bgId, Actor* actor, Vec3f* pos);
 s32 WaterBox_GetSurface1_2(PlayState* play, CollisionContext* colCtx, f32 x, f32 z, f32* ySurface, WaterBox** outWaterBox);
-s32 WaterBox_GetSurface1(PlayState* play, CollisionContext* colCtx, f32 x, f32 z, f32* ySurface, WaterBox** outWaterBox);
 void EffectSsHahen_Spawn(PlayState* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, s16 flags, s16 scale, s16 objectId, s16 life, Gfx* dList);
 s16 CutsceneManager_GetCurrentSubCamId(s16 csId);
 u32 Quake_RemoveRequest(s16 index);

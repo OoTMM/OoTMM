@@ -794,7 +794,7 @@ void Boss01_Init(Actor_Boss01* this, PlayState* play)
         }
 
         this->actor.hintId = TATL_HINT_ID_ODOLWA_PHASE_ONE;
-        this->actor.targetMode = TARGET_MODE_5;
+        this->actor.attentionRangeType = ATTENTION_RANGE_5;
         this->actor.colChkInfo.mass = MASS_HEAVY;
         this->actor.colChkInfo.damageTable = &sOdolwaDamageTable;
         this->actor.colChkInfo.health = 20;

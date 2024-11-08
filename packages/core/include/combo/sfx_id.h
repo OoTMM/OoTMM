@@ -1,6 +1,8 @@
 #ifndef COMBO_SFX_ID_H
 #define COMBO_SFX_ID_H
 
+# define SFX_FLAG 0x800
+
 #if defined(GAME_OOT)
 # define NA_SE_PL_WALK_GROUND                   0x800
 # define NA_SE_PL_WALK_SAND                     0x801
@@ -1142,7 +1144,6 @@
 
 #if defined(GAME_MM)
 # define NA_SE_NONE 0
-# define SFX_FLAG 0x800
 # define SFX_FLAG_MASK 0xC00
 # define NA_SE_PL_WALK_GROUND 0x800
 # define NA_SE_PL_WALK_SAND 0x801

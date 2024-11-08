@@ -80,7 +80,12 @@ void Matrix_Transpose(MtxF* mf);
 void Matrix_ReplaceRotation(MtxF* mf);
 void Matrix_MtxFToYXZRot(MtxF* src, Vec3s* dest, s32 nonUniformScale);
 void Matrix_MtxFToZYXRot(MtxF* src, Vec3s* dest, s32 nonUniformScale);
+#if defined(GAME_OOT)
+void Matrix_MtxFToYXZRotS(MtxF* mf, Vec3s* rotDest, s32 flag);
+void Matrix_MtxFToZYXRotS(MtxF* mf, Vec3s* rotDest, s32 flag);
+#endif
 void Matrix_RotateAxisF(f32 angle, Vec3f* axis, MatrixMode mode);
 void Matrix_RotateAxisS(s16 angle, Vec3f* axis, MatrixMode mode);
 
+void Matrix_RotateAxis(f32 angle, Vec3f* axis, u8 mode);
 #endif

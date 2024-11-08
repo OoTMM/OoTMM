@@ -71,7 +71,7 @@ void EnHs_Init(Actor_EnHs* this, PlayState* play)
         this->actor.flags |= ACTOR_FLAG_MM_10000;
 
     this->stateFlags = 0;
-    this->actor.targetMode = 6;
+    this->actor.attentionRangeType = ATTENTION_RANGE_6;
     func_80952C50(this, play);
 }
 

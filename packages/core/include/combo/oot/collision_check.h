@@ -278,6 +278,18 @@ typedef struct CollisionCheckContext {
 #define DMG_RANGED (DMG_ARROW | DMG_HOOKSHOT | DMG_SLINGSHOT)
 #define DMG_DEFAULT ~(DMG_SHIELD | DMG_MIR_RAY)
 
+#define WALL_FLAG_0 (1 << 0)
+#define WALL_FLAG_1 (1 << 1)
+#define WALL_FLAG_2 (1 << 2)
+#define WALL_FLAG_3 (1 << 3)
+#define WALL_FLAG_CRAWLSPACE_1 (1 << 4)
+#define WALL_FLAG_CRAWLSPACE_2 (1 << 5)
+#define WALL_FLAG_6 (1 << 6)
+#define WALL_FLAG_CRAWLSPACE (WALL_FLAG_CRAWLSPACE_1 | WALL_FLAG_CRAWLSPACE_2)
+
+#define COLPOLY_NORMAL_FRAC (1.0f / SHT_MAX)
+#define COLPOLY_GET_NORMAL(n) ((n)*COLPOLY_NORMAL_FRAC)
+
 typedef struct CollisionCheckInfoInit {
     /* 0x00 */ u8 health;
     /* 0x02 */ s16 cylRadius;

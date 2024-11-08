@@ -606,7 +606,7 @@ void ObjSnowball_Init(Actor_ObjSnowball* this, PlayState* play) {
         this->actor.flags |= ACTOR_FLAG_MM_ATTENTION_ENABLED;
         this->actor.targetArrowOffset = 1400.0f / 3.0f;
         Actor_SetFocus(&this->actor, 24.0f);
-        this->actor.targetMode = TARGET_MODE_3;
+        this->actor.attentionRangeType = ATTENTION_RANGE_3;
     }
 
     Collider_InitJntSph(play, &this->collider);
