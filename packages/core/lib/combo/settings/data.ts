@@ -2400,13 +2400,19 @@ export const SETTINGS = [{
   description: 'Shuffle grottos and graves.',
   default: 'none'
 }, {
+  key: 'erNoPolarity',
+  name: 'No Entrance Polarity',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'Some entrances have a polarity (e.g. dungeons entrances and exits). Normally, they\'re shuffled respecting that polarity, so a dungeon entrance will always lead to another dungeon entrance, never to an exit. This option disables that.',
+  default: false,
+}, {
   key: 'erSelfLoops',
   name: 'Allow Self-Loops',
   category: 'entrances',
   type: 'boolean',
   description: 'Allow entrances to loop back to the same map. Might make the topology of the world very confusing.',
   default: false,
-  cond: (x: any) => !x.erDecoupled,
 }, {
   key: 'erDecoupled',
   name: 'Decoupled Entrances',
