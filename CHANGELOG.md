@@ -49,6 +49,7 @@ All notable changes to this project will be documented in this file.
 - Logic now accounts for the Hylian Guard Soul for the Keaton Mask sale in Kakariko.
 - The Light Trial Wallmaster warp now goes to the correct location, and logic for it fixed.
 - Fix logic issue for getting sticks and nuts in Forest Temple not requiring the Deku Baba Soul.
+- Fix time logic for entering the Clock Tower Roof when it is shuffled.
 
 ## [25.0] - 2024-09-08
 
