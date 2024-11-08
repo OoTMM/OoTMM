@@ -52,6 +52,8 @@ All notable changes to this project will be documented in this file.
 - The Light Trial Wallmaster warp now goes to the correct location, and logic for it fixed.
 - Fix logic issue for getting sticks and nuts in Forest Temple not requiring the Deku Baba Soul.
 - Fix time logic for entering the Clock Tower Roof when it is shuffled.
+- Crash when feeding a Bombchu to Dodongo.
+- Spin attack culling when collecting an item.
 
 ## [25.0] - 2024-09-08
 

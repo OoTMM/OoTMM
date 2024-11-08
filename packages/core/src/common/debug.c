@@ -593,7 +593,7 @@ static void cheatAllItems(PlayState* play)
 static void cheatAllItems(PlayState* play)
 {
     // gSave.info.inventory.quest.gerudoCard = 1;
-    // MM_SET_EVENT_WEEK(EV_MM_WEEK_DRANK_CHATEAU_ROMANI);
+    MM_SET_EVENT_WEEK(EV_MM_WEEK_DRANK_CHATEAU_ROMANI);
     SetEventChk(EV_OOT_CHK_MASTER_SWORD_PULLED);
     SetEventChk(EV_OOT_CHK_MASTER_SWORD_CHAMBER);
     gSave.info.playerData.swordHealth = 8;
@@ -711,6 +711,7 @@ static void cheatAllItems(PlayState* play)
     // gSave.info.equips.cButtonSlots[0] = ITS_OOT_TRADE_CHILD;
 
     gCustomSave.hasElegy = 1;
+    gOotExtraFlags.spinUpgrade = 1;
 }
 #endif
 

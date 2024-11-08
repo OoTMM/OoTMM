@@ -272,6 +272,10 @@ void func_80A9F938(EnMThunder* this, PlayState* play) {
 void func_80A9F9B4(EnMThunder* this, PlayState* play) {
     Player* player = GET_PLAYER(play);
 
+    if(player->stateFlags1 & PLAYER_ACTOR_STATE_FROZEN) {
+        return;
+    }
+
     if (Math_StepToF(&this->unk_1AC, 0.0f, 1 / 16.0f)) {
         Actor_Kill(&this->actor);
     } else {
