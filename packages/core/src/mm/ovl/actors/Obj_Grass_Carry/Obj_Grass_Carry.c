@@ -104,9 +104,20 @@ void ObjGrassCarry_UpdateBgCheckInfo(ObjGrassCarry* this, PlayState* play) {
                                 UPDBGCHECKINFO_FLAG_MM_80);
 }
 
-void ObjGrassCarry_DropCollectible(Vec3f* pos, s16 dropTable, PlayState* play) {
+void ObjGrass_GetID(int* dstPackId, int* dstBushId, ObjGrassElement* grass);
+void ObjGrass_GetXflag(Xflag* xflag, ObjGrassElement* grassElem);
+
+void ObjGrassCarry_DropCollectible(ObjGrassCarry* this, s16 dropTable, PlayState* play) {
+    Xflag xflag;
+
+    ObjGrass_GetXflag(&xflag, this->grassElem);
+    if (Xflag_IsShuffled(&xflag)) {
+        EnItem00_DropCustom(play, &this->actor.world.pos, &xflag);
+        return;
+    }
+
     if ((dropTable & 0x10) == 0) {
-        Item_DropCollectibleRandom(play, NULL, pos, dropTable * 0x10);
+        Item_DropCollectibleRandom(play, NULL, &this->actor.world.pos, dropTable * 0x10);
     }
 }
 
@@ -281,7 +292,7 @@ void ObjGrassCarry_Fall(ObjGrassCarry* this, PlayState* play) {
     if ((this->actor.bgCheckFlags & (BGCHECKFLAG_GROUND | BGCHECKFLAG_GROUND_TOUCH | BGCHECKFLAG_WALL)) || atHit ||
         (this->fallTimer <= 0)) {
         ObjGrassCarry_SpawnFragments(&this->actor.world.pos, play);
-        ObjGrassCarry_DropCollectible(&this->actor.world.pos, this->dropTable, play);
+        ObjGrassCarry_DropCollectible(this, this->dropTable, play);
 
         this->actor.draw = NULL;
         this->actor.shape.shadowDraw = NULL;
@@ -351,6 +362,21 @@ void ObjGrassCarry_Update(Actor* thisx, PlayState* play) {
     this->actionFunc(this, play);
 }
 
-void ObjGrassCarry_Draw(Actor* this, PlayState* play) {
+void ObjGrassCarry_PreDraw(ObjGrassElement* grassElem, PlayState* play)
+{
+    Xflag xflag;
+    ComboItemOverride o;
+
+    ObjGrass_GetXflag(&xflag, grassElem);
+    if (Xflag_IsShuffled(&xflag))
+        comboXflagItemOverride(&o, &xflag, 0);
+    else
+        o.gi = 0;
+    csmcGrassPreDraw(play, o.gi, CSMC_GRASS_NORMAL, 0, 0);
+}
+
+void ObjGrassCarry_Draw(Actor* thisx, PlayState* play) {
+    ObjGrassCarry* this = THIS;
+    ObjGrassCarry_PreDraw(this->grassElem, play);
     Gfx_DrawDListOpa(play, gKusaBushType1DL);
 }
