@@ -1,3 +1,4 @@
+#if 0
 #include <combo.h>
 #include <combo/item.h>
 #include <combo/csmc.h>
@@ -46,10 +47,12 @@ static void ObjGrassCarry_Draw(Actor_ObjGrassCarry* this, PlayState* play)
     }
 
     /* Prepare the draw */
-    csmcGrassPreDraw(play, o.gi, CSMC_GRASS_NORMAL, 0, 0, FALSE);
+    csmcGrassPreDraw(play, o.gi, CSMC_GRASS_NORMAL, 0, 0);
 
     /* Draw */
     Gfx_DrawDListOpa(play, (void*)0x50078a0);
 }
 
 PATCH_FUNC(0x809abb7c, ObjGrassCarry_Draw);
+
+#endif

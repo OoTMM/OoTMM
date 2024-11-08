@@ -86,7 +86,7 @@ static void EnKusa2_Draw(PlayState* play)
     }
 
     /* Prepare */
-    csmcGrassPreDraw(play, o.gi, CSMC_GRASS_NORMAL, 0, 0, FALSE);
+    csmcGrassPreDraw(play, o.gi, CSMC_GRASS_NORMAL, 0, 0);
 
     /* Draw */
     Gfx_DrawDListOpa(play, (void*)0x50078a0);

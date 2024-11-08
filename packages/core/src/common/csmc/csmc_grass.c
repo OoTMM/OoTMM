@@ -68,12 +68,11 @@ static int csmcGrassId(s16 gi, int def)
     }
 }
 
-void csmcGrassPreDraw(PlayState* play, s16 gi, int def, int alt, int direct, int isXlu)
+void csmcGrassPreDraw(PlayState* play, s16 gi, int def, int alt, int direct)
 {
     const CsmcDisplayList* dlists;
     int id;
     const void* list;
-    Gfx** targetList;
 
     if (alt)
         dlists = kGrassAltDlist;
@@ -84,17 +83,13 @@ void csmcGrassPreDraw(PlayState* play, s16 gi, int def, int alt, int direct, int
     list = csmcLoadTextureEx(&dlists[id]);
 
     OPEN_DISPS(play->state.gfxCtx);
-    if (isXlu)
-        targetList = &POLY_XLU_DISP;
-    else
-        targetList = &POLY_OPA_DISP;
     if (direct)
     {
-        gSPDisplayList((*targetList)++, list);
+        gSPDisplayList(POLY_OPA_DISP++, list);
     }
     else
     {
-        gSPSegment((*targetList)++, 0x0a, list);
+        gSPSegment(POLY_OPA_DISP++, 0x0a, list);
     }
     CLOSE_DISPS();
 }
