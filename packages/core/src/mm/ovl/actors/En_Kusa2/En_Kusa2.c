@@ -1355,7 +1355,8 @@ void func_80A5E6F0(Actor* thisx, PlayState* play) {
 
 static void EnKusa2_DrawImpl(EnKusa2* this, PlayState* play)
 {
-    Xflag xflag;
+    Xflag xflagBuffer;
+    Xflag* xflag;
     ComboItemOverride o;
     int id;
 
@@ -1371,16 +1372,15 @@ static void EnKusa2_DrawImpl(EnKusa2* this, PlayState* play)
         id = sDrawIndex++;
         id += (play->state.frameCount / 5) % 9;
         id %= 9;
+        memcpy(&xflagBuffer, &sXflagBase, sizeof(Xflag));
+        xflagBuffer.sliceId = id;
+        xflag = &xflagBuffer;
     }
     else
-        id = this->unk_1BC;
+        xflag = &sXflagCurrent;
 
-    /* Get the xflag and check  */
-    memcpy(&xflag, &sXflagBase, sizeof(Xflag));
-    xflag.sliceId = id;
-
-    if (Xflag_IsShuffled(&xflag))
-        comboXflagItemOverride(&o, &xflag, GI_NONE);
+    if (Xflag_IsShuffled(xflag))
+        comboXflagItemOverride(&o, xflag, GI_NONE);
     else
         o.gi = GI_NONE;
 
