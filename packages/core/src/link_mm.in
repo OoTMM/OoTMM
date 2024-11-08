@@ -348,6 +348,9 @@ CutsceneManager_GetCutsceneScriptIndex = 0x800f2138;
 
 WaterBox_GetSurfaceImpl = 0x800c9ebc;
 
+Actor_UpdatePos = 0x800B69AC;
+Actor_OfferCarry = 0x800B8BB0;
+
 Item_CollectibleDropTable = 0x800a8150;
 Item_CollectibleDropTable2 = 0x800a817c;
 Item_DropCollectible = 0x800a7730;
