@@ -59,6 +59,7 @@ const POLARITY_OUT = new Set<string>([
 
 class WorldShuffler {
   private world: World;
+  private worldChanged: boolean;
   private overrides: EntranceOverrides;
   private backtrackCount: number;
   private readonly allEntrances: Entrance[];
@@ -73,6 +74,7 @@ class WorldShuffler {
   ) {
     this.backtrackCount = 0;
     this.world = worlds[worldId];
+    this.worldChanged = false;
     this.overrides = {};
     this.allEntrances = this.computeAllEntrances();
   }
@@ -296,7 +298,7 @@ class WorldShuffler {
         newOverrides[revDst] = revSrc;
         newAssumed.delete(revSrc);
       }
-      if (!this.isValidShuffle(newOverrides, newAssumed)) {
+      if (!this.isValidShuffle({ ...this.overrides, ...newOverrides }, newAssumed)) {
         continue;
       }
 
@@ -331,7 +333,7 @@ class WorldShuffler {
 
   private placePools(pools: EntrancePools) {
     this.backtrackCount = 0;
-    const overrides = { ...this.overrides };
+    const overrides: EntranceOverrides = {};
     const poolEntrances: PoolEntrances = {};
 
     /* Get entrances */
@@ -375,7 +377,10 @@ class WorldShuffler {
     if (!finalOverrides) {
       throw new LogicEntranceError('Unable to place pools');
     }
-    this.overrides = finalOverrides;
+
+    for (const [src, dst] of Object.entries(finalOverrides)) {
+      this.overrideEntrance(src as Entrance, dst!);
+    }
   }
 
   private entrancesForTypes(aTypes: Iterable<string>, reverse: boolean) {
@@ -385,6 +390,11 @@ class WorldShuffler {
       return entrances;
     const entrancesReverse = entrances.map(x => this.reverseEntranceRaw(x)).filter(x => x) as Entrance[];
     return [...entrances, ...entrancesReverse];
+  }
+
+  private overrideEntrance(src: Entrance, dst: Entrance) {
+    this.overrides[src] = dst;
+    this.worldChanged = true;
   }
 
   private placeWallmasters() {
@@ -410,7 +420,7 @@ class WorldShuffler {
         dstCandidates = dstCandidates.filter(x => ENTRANCES[x].game === ENTRANCES[src].game);
       }
       const dst = sample(this.random, dstCandidates);
-      this.overrides[src] = dst;
+      this.overrideEntrance(src, dst);
       entrancesSrc.delete(src);
       entrancesDst.delete(dst);
     }
@@ -438,7 +448,7 @@ class WorldShuffler {
     while (entrancesSrc!.size > 0) {
       const src = sample(this.random, entrancesSrc!);
       const dst = sample(this.random, entrancesDst);
-      this.overrides[src] = dst;
+      this.overrideEntrance(src, dst);
       entrancesSrc!.delete(src);
       entrancesDst.delete(dst);
     }
@@ -468,7 +478,7 @@ class WorldShuffler {
         dstCandidates = dstCandidates.filter(x => ENTRANCES[x].game === ENTRANCES[src].game);
       }
       const dst = sample(this.random, dstCandidates);
-      this.overrides[src] = dst;
+      this.overrideEntrance(src, dst);
       entrancesSrc.delete(src);
     }
   }
@@ -821,8 +831,28 @@ class WorldShuffler {
     return [...new Set(types)];
   }
 
-  run(): World {
+  private connectGamesDefault() {
+    switch (this.settings.games) {
+    case 'oot':
+      this.overrideEntrance('OOT_SHOP_MASKS', 'OOT_MARKET_FROM_MASK_SHOP');
+      break;
+    case 'mm':
+      this.overrideEntrance('MM_CLOCK_TOWER_FROM_CLOCK_TOWN', 'MM_CLOCK_TOWN_FROM_CLOCK_TOWER');
+      break;
+    case 'ootmm':
+      this.overrideEntrance('OOT_SHOP_MASKS', 'MM_CLOCK_TOWN_FROM_CLOCK_TOWER');
+      this.overrideEntrance('MM_CLOCK_TOWER_FROM_CLOCK_TOWN', 'OOT_MARKET_FROM_MASK_SHOP');
+      break;
+    }
+
+    this.worldChanged = false;
+  }
+
+  run() {
     this.overrides = {};
+
+    /* Connect the games */
+    this.connectGamesDefault();
 
     if (this.settings.erWallmasters !== 'none') {
       this.placeWallmasters();
@@ -841,9 +871,10 @@ class WorldShuffler {
     let world = this.changedWorld(this.overrides);
     if (this.settings.erBoss !== 'none') {
       world = this.legacyFixBosses(world);
+      this.worldChanged = true;
     }
 
-    return world;
+    return { world, changed: this.worldChanged };
   }
 };
 
@@ -997,25 +1028,28 @@ export class LogicPassEntrances {
 
   private runAttempt() {
     this.worlds = [];
+    let changed = false;
 
     if (this.input.settings.distinctWorlds) {
       /* Distinct worlds */
       for (let i = 0; i < this.input.worlds.length; ++i) {
         const shuffler = new WorldShuffler(this.input.random, i, this.input.worlds, this.input.settings, this.input.startingItems, this.input.allItems);
-        const newWorld = shuffler.run();
-        this.worlds.push(newWorld);
+        const result = shuffler.run();
+        this.worlds.push(result.world);
+        changed = changed || result.changed;
       }
     } else {
       /* Shared world */
       const shuffler = new WorldShuffler(this.input.random, 0, this.input.worlds, this.input.settings, this.input.startingItems, this.input.allItems);
-      const newWorld = shuffler.run();
+      const result = shuffler.run();
+      changed = result.changed;
       for (let i = 0; i < this.input.worlds.length; ++i) {
-        this.worlds.push(cloneWorld(newWorld));
+        this.worlds.push(cloneWorld(result.world));
       }
     }
 
     /* Validate */
-    if (this.worlds[0].entranceOverrides.size) {
+    if (changed) {
       this.validate();
     }
 

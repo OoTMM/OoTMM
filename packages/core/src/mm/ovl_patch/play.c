@@ -397,7 +397,7 @@ static void Play_FixupSpawnTime(void)
     if (firstHalfDay == 0)
     {
         /* Work around a vanilla bug */
-        if (gSave.entrance != ENTR_MM_CLOCK_TOWN)
+        if (gSave.entrance != ENTR_MM_CLOCK_TOWN_FROM_CLOCK_TOWER)
         {
             gSave.day = 1;
             gSave.time = CLOCK_TIME(6, 1);
@@ -591,7 +591,7 @@ void hookPlay_Init(PlayState* play)
         isEndOfGame = 1;
     }
 
-    if ((gSave.entrance == ENTR_MM_CLOCK_TOWN && gLastEntrance == ENTR_MM_CLOCK_TOWN_FROM_SONG_OF_TIME) || gSave.entrance == ENTR_MM_CLOCK_TOWER_MOON_CRASH)
+    if ((gSave.entrance == ENTR_MM_CLOCK_TOWN_FROM_CLOCK_TOWER && gLastEntrance == ENTR_MM_CLOCK_TOWN_FROM_SONG_OF_TIME) || gSave.entrance == ENTR_MM_CLOCK_TOWER_MOON_CRASH)
     {
         /* Song of Time / Moon crash */
         gNoTimeFlow = 0;
@@ -730,15 +730,6 @@ void Play_TransitionDone(PlayState* play)
         break;
     }
 
-    /* Game switch */
-    if (entrance == ENTR_MM_CLOCK_TOWER_FROM_CLOCK_TOWN)
-    {
-        if (!Config_Flag(CFG_ONLY_MM))
-            entrance = ENTR_OOT_MARKET_FROM_MASK_SHOP | MASK_FOREIGN_ENTRANCE;
-        else
-            entrance = ENTR_MM_CLOCK_TOWN;
-    }
-
     /* Handle grotto exits */
     if (entrance == ENTR_MM_INTERNAL_EXIT_GROTTO)
     {
@@ -853,7 +844,7 @@ void Play_FastInit(GameState* gs)
     if (Config_Flag(CFG_ER_ANY))
         g.initialEntrance = entrance;
     else
-        g.initialEntrance = ENTR_MM_CLOCK_TOWN;
+        g.initialEntrance = ENTR_MM_CLOCK_TOWN_FROM_CLOCK_TOWER;
     applyCustomEntrance(&entrance);
     gSave.entrance = entrance;
 

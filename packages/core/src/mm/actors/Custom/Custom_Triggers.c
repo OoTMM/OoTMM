@@ -20,7 +20,7 @@ void CustomTriggers_HandleTriggerGame(Actor_CustomTriggers* this, PlayState* pla
 
 void CustomTriggers_CheckTriggerGame(Actor_CustomTriggers* this, PlayState* play)
 {
-    if (!gMmExtraFlags2.songHealing && gSave.entrance == ENTR_MM_CLOCK_TOWN)
+    if (!gMmExtraFlags2.songHealing && gSave.entrance == ENTR_MM_CLOCK_TOWN_FROM_CLOCK_TOWER)
     {
         gComboTriggersData.trigger = TRIGGER_SONG_HEALING;
         return;

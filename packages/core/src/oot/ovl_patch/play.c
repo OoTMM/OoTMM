@@ -644,15 +644,6 @@ void Play_TransitionDone(PlayState* play)
         break;
     }
 
-    /* Handle game switch */
-    if (entrance == ENTR_OOT_SHOP_MASKS)
-    {
-        if (!Config_Flag(CFG_ONLY_OOT))
-            entrance = ENTR_MM_CLOCK_TOWN | MASK_FOREIGN_ENTRANCE;
-        else
-            entrance = ENTR_OOT_MARKET_FROM_MASK_SHOP;
-    }
-
     /* Handle grottos */
     if (entrance == ENTR_OOT_INTERNAL_EXIT_GROTTO)
     {

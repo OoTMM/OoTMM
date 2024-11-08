@@ -61,7 +61,6 @@
   region: CLOCK_TOWN_SOUTH
   exits:
     "Clock Town South": "can_reset_time"
-    "OOT Market": "true"
     "Clock Tower Platform": "true"
   locations:
     "Clock Town Owl Statue": "has_sticks || has_sword"
@@ -189,29 +188,36 @@
   region: GIANT_DREAM
   locations:
     "Oath to Order": "true"
-"Clock Town":
+"Clock Tower":
+  region: ENTRANCE
+  exits:
+    "Clock Town From Clock Tower": "true"
+"Clock Town From Clock Tower":
+  region: CLOCK_TOWN_SOUTH
+  exits:
+    "Clock Town Near Clock Tower": "true"
+  locations:
+    "Initial Song of Healing": "true"
+"Clock Town Near Clock Tower":
   region: CLOCK_TOWN_SOUTH
   exits:
     "GLOBAL": "true"
+    "Clock Tower": "can_reset_time"
     "Clock Town South": "can_reset_time"
     "Clock Tower Platform": "true"
     "Owl Clock Town": "true"
-  locations:
-    "Initial Song of Healing": "true"
 "Clock Tower Platform":
   region: CLOCK_TOWN_SOUTH
   exits:
     "Clock Town South": "can_reset_time"
     "Clock Tower Roof": "after(NIGHT3_AM_12_00) && cond(setting(erMoon), trick(MM_CLOCK_TOWER_WAIT) || can_play_time || can_play_sun, true)"
     "Owl Clock Town": "true"
-    "OOT Market": "true"
   locations:
     "Clock Town Platform HP": "true"
 "Clock Town South":
   region: CLOCK_TOWN_SOUTH
   exits:
-    "OOT Market": "true"
-    "Clock Tower Platform": "true"
+    "Clock Town Near Clock Tower": "true"
     "Termina Field": "true"
     "Clock Town South Upper West": "true"
     "Clock Town South Lower West": "true"
@@ -219,7 +225,6 @@
     "Clock Town South Lower East": "true"
     "Clock Town North": "true"
     "Laundry Pool": "true"
-    "Owl Clock Town": "true"
   events:
     CLOCK_TOWN_SCRUB: "has(MOON_TEAR)"
     MAIL_LETTER: "has(LETTER_TO_KAFEI) && before(DAY2_AM_11_30)"

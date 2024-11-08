@@ -16,7 +16,7 @@ void Sram_AfterOpenSave(void)
 
     gSave.playerForm = MM_PLAYER_FORM_HUMAN;
     gSave.equippedMask = 0;
-    gSave.entrance = ENTR_MM_CLOCK_TOWN;
+    gSave.entrance = ENTR_MM_CLOCK_TOWN_FROM_CLOCK_TOWER;
 
 #if defined(DEBUG) && defined(DEBUG_MM_ENTRANCE)
     gSave.entrance = DEBUG_MM_ENTRANCE;
