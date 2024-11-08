@@ -70,7 +70,7 @@
 #define ACTOR_FLAG_MM_400000                    (1 << 22)
 #define ACTOR_FLAG_MM_800000                    (1 << 23)
 #define ACTOR_FLAG_MM_1000000                   (1 << 24)
-#define ACTOR_FLAG_MM_2000000                   (1 << 25)
+#define ACTOR_FLAG_MM_UPDATE_DURING_OCARINA     (1 << 25)
 #define ACTOR_FLAG_MM_CAN_PRESS_SWITCH          (1 << 26)
 #define ACTOR_FLAG_MM_8000000                   (1 << 27)
 #define ACTOR_FLAG_MM_10000000                  (1 << 28)

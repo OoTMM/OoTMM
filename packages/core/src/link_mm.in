@@ -671,3 +671,5 @@ gSfxDefaultReverb = 0x801db4b8;
 Matrix_Mult = 0x80180244;
 Environment_AdjustLights = 0x800fd2b4;
 LightContext_RemoveLight = 0x80102684;
+
+func_800B0F18 = 0x800b0f18;
