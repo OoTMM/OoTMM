@@ -25,6 +25,13 @@ type PoolEntrances = {[k: string]: { src: Set<Entrance>; dst: Set<Entrance>; }};
 
 type EntranceOverrides = {[k in Entrance]?: Entrance | null};
 
+const POLARITY_ANY_OVERWORLD = new Set<string>([
+  'region',
+  'region-extra',
+  'region-shortcut',
+  'region-exit',
+]);
+
 const POLARITY_IN = new Set<string>([
   'boss',
   'dungeon',
@@ -80,10 +87,14 @@ class WorldShuffler {
   }
 
   private entrancePolarity(entrance: Entrance): EntrancePolarity {
-    if (POLARITY_IN.has(ENTRANCES[entrance].type)) {
+    const type = ENTRANCES[entrance].type;
+    if (this.settings.erOverworld !== 'none' && POLARITY_ANY_OVERWORLD.has(type)) {
+      return 'any';
+    }
+    if (POLARITY_IN.has(type)) {
       return 'in';
     }
-    if (POLARITY_OUT.has(ENTRANCES[entrance].type)) {
+    if (POLARITY_OUT.has(type)) {
       return 'out';
     }
     return 'any';
@@ -231,13 +242,8 @@ class WorldShuffler {
     return this.reverseEntranceRaw(entrance);
   }
 
-  private entrances(entrance: Entrance) {
-    const entrs: Entrance[] = [entrance];
-    const rev = this.reverseEntranceRaw(entrance);
-    if (rev) {
-      entrs.push(rev);
-    }
-    return entrs;
+  private unbalancedPool(name: string) {
+    throw new LogicEntranceError(`Unbalanced pool: ${name}`);
   }
 
   private placePoolsRecursive(pools: EntrancePools, entrances: PoolEntrances, overrides: EntranceOverrides, assumed: Set<Entrance>): EntranceOverrides | null {
@@ -315,7 +321,7 @@ class WorldShuffler {
 
       if (newEntrances[poolName].src.size === 0) {
         if (newEntrances[poolName].dst.size !== 0) {
-          throw new LogicEntranceError(`Unbalanced pool: ${poolName}`);
+          this.unbalancedPool(poolName);
         }
         delete newEntrances[poolName];
       }
@@ -365,9 +371,7 @@ class WorldShuffler {
     /* Remove any empty pools */
     for (const name of poolNames) {
       if (poolEntrances[name].src.size === 0) {
-        if (poolEntrances[name].dst.size !== 0) {
-          throw new LogicEntranceError(`Unbalanced pool: ${name}`);
-        }
+        this.unbalancedPool(name);
         delete poolEntrances[name];
       }
     }
