@@ -346,6 +346,11 @@ DynaPoly_DisableCollision = 0x800c62bc;
 Actor_PlaySfx_Flagged = 0x800B9010;
 CutsceneManager_GetCutsceneScriptIndex = 0x800f2138;
 
+Actor_HeightDiff = 0x800B6F0C;
+Lights_BindAll = 0x801022F0;
+Lights_Draw = 0x80101BC8;
+LightContext_NewLights = 0x80102580;
+SkinMatrix_Vec3fMtxFMultXYZW = 0x80138ba0;
 WaterBox_GetSurfaceImpl = 0x800c9ebc;
 
 Actor_UpdatePos = 0x800B69AC;

@@ -12,6 +12,43 @@
 #include <combo/multi.h>
 #include <combo/context.h>
 #include <combo/audio.h>
+#include <actors/Obj_Grass/Obj_Grass.h>
+
+/* Grass hooks */
+ObjGrass* gObjGrass;
+
+void ObjGrass_GetID(int* dstPackId, int* dstBushId, ObjGrassElement* grass)
+{
+    u32 offset;
+    u32 offsetPack;
+    u32 offsetBush;
+    int packId;
+    int bushId;
+
+    /* Extract the pack ID */
+    offset = (u32)grass - (u32)gObjGrass;
+    offsetPack = (offset - offsetof(ObjGrassGroup, elements) - offsetof(ObjGrass, grassGroups));
+    packId = offsetPack / sizeof(ObjGrassGroup);
+
+    /* Extract the bush ID */
+    offset = (u32)grass - ((u32)&gObjGrass->grassGroups[packId]);
+    offsetBush = offset - offsetof(ObjGrassGroup, elements);
+    bushId = offsetBush / sizeof(ObjGrassElement);
+
+    /* Store the IDs */
+    *dstPackId = packId;
+    *dstBushId = bushId;
+}
+
+void ObjGrass_GetXflag(Xflag* xflag, ObjGrassElement* grassElem)
+{
+    int packId;
+    int bushId;
+
+    ObjGrass_GetID(&packId, &bushId, grassElem);
+    memcpy(xflag, &gObjGrass->xflag[packId], sizeof(Xflag));
+    xflag->sliceId = bushId;
+}
 
 PlayState* gPlay;
 int gNoTimeFlow;

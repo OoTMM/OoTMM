@@ -731,7 +731,7 @@ void EnKusa_Update(Actor* thisx, PlayState* play2) {
     }
 }
 
-void EnKusa_PreDraw(EnKusa* this, PlayState* play, int isXlu)
+void EnKusa_PreDraw(EnKusa* this, PlayState* play)
 {
     ComboItemOverride o;
     int alt;
@@ -746,45 +746,29 @@ void EnKusa_PreDraw(EnKusa* this, PlayState* play, int isXlu)
         alt = 0;
     else
         alt = 1;
-    csmcGrassPreDraw(play, o.gi, CSMC_GRASS_NORMAL, alt, 0, isXlu);
+    csmcGrassPreDraw(play, o.gi, CSMC_GRASS_NORMAL, alt, 0);
 }
 
 void EnKusa_DrawBush(Actor* thisx, PlayState* play2) {
     PlayState* play = play2;
     EnKusa* this = THIS;
 
-    if ((this->actor.projectedPos.z <= 1200.0f) || ((this->isInWater & 1) && (this->actor.projectedPos.z < 1300.0f))) {
-
+    if (this->actor.projectedPos.z < 1300.0f) {
         if ((play->roomCtx.curRoom.behaviorType1 == ROOM_BEHAVIOR_TYPE1_0) &&
             (this->actionFunc == EnKusa_WaitForInteract) && (this->actor.projectedPos.z > -150.0f) &&
             (this->actor.projectedPos.z < 400.0f)) {
             EnKusa_ApplySway(&D_80936AD8[this->kusaMtxIdx]);
         }
 
-        EnKusa_PreDraw(this, play, FALSE);
+        EnKusa_PreDraw(this, play);
         Gfx_DrawDListOpa(play, gKusaBushType1DL);
-
-    } else if (this->actor.projectedPos.z < 1300.0f) {
-        s32 alpha;
-
-        OPEN_DISPS(play->state.gfxCtx);
-
-        alpha = (1300.0f - this->actor.projectedPos.z) * 2.55f;
-        Gfx_SetupDL25_Xlu(play->state.gfxCtx);
-
-        MATRIX_FINALIZE_AND_LOAD(POLY_XLU_DISP++, play->state.gfxCtx);
-        gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 255, 255, 255, alpha);
-        EnKusa_PreDraw(this, play, TRUE);
-        gSPDisplayList(POLY_XLU_DISP++, gKusaBushType2DL);
-
-        CLOSE_DISPS();
     }
 }
 
 void EnKusa_DrawGrass(Actor* thisx, PlayState* play) {
     EnKusa* this = THIS;
 
-    EnKusa_PreDraw(this, play, FALSE);
+    EnKusa_PreDraw(this, play);
     if (this->isCut) {
         Gfx_DrawDListOpa(play, gKusaStumpDL);
     } else {

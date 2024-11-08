@@ -452,6 +452,7 @@ extern u8 gWeatherMode;
 
 #if defined(GAME_MM)
 # define func_800A8150 Item_CollectibleDropTable
+void SkinMatrix_Vec3fMtxFMultXYZW(MtxF* mf, Vec3f* src, Vec3f* xyzDest, f32* wDest);
 #endif
 
 s32 WaterBox_GetSurfaceImpl(struct PlayState* play, CollisionContext* colCtx, f32 x, f32 z, f32* ySurface, WaterBox** outWaterBox, s32* bgId);
