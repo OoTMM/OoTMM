@@ -730,15 +730,6 @@ void Play_TransitionDone(PlayState* play)
         break;
     }
 
-    /* Game switch */
-    if (entrance == ENTR_MM_CLOCK_TOWER_FROM_CLOCK_TOWN)
-    {
-        if (!Config_Flag(CFG_ONLY_MM))
-            entrance = ENTR_OOT_MARKET_FROM_MASK_SHOP | MASK_FOREIGN_ENTRANCE;
-        else
-            entrance = ENTR_MM_CLOCK_TOWN_FROM_CLOCK_TOWER;
-    }
-
     /* Handle grotto exits */
     if (entrance == ENTR_MM_INTERNAL_EXIT_GROTTO)
     {
