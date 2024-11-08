@@ -216,6 +216,7 @@ class WorldShuffler {
   private reverseEntranceRaw(entrance: Entrance): Entrance | null {
     const e = ENTRANCES[entrance];
     const rr = (e as any).reverse as Entrance | undefined;
+
     if (!rr) {
       return null;
     }
@@ -346,16 +347,14 @@ class WorldShuffler {
       for (const t of types) {
         entrancesTypes.add(t);
       }
-      const entrances = this.allEntrances.filter(x => types.includes(ENTRANCES[x].type)).flatMap(x => this.entrances(x));
-      const entrancesReverse = entrances.map(x => this.reverseEntrance(x)).filter(x => x) as Entrance[];
-      const entrancesAll = [...entrances, ...entrancesReverse];
+      const pe = this.poolEntrancesForTypes(types, true);
+      poolEntrances[name] = pe;
 
-      const src = new Set([...entrances]);
-      const dst = new Set([...entrances]);
-      poolEntrances[name] = { src, dst };
-
-      for (const name of entrancesAll) {
+      for (const name of pe.src) {
         overrides[name] = null;
+      }
+
+      for (const name of pe.dst) {
         const e = ENTRANCES[name];
         if (!(['dungeon-exit', 'grotto-exit', 'grave-exit'].includes(e.type)) || name === 'OOT_DESERT_COLOSSUS_FROM_TEMPLE_SPIRIT' || this.settings.erNoPolarity) {
           entrancesAssumed.add(name);
@@ -392,6 +391,20 @@ class WorldShuffler {
     return [...entrances, ...entrancesReverse];
   }
 
+  private poolEntrancesForTypes(aTypes: Iterable<string>, reverse: boolean) {
+    const entrances = this.entrancesForTypes(aTypes, reverse);
+    const src = new Set(entrances);
+    const dst = new Set(entrances);
+
+    /* Fixup for game links */
+    src.delete('OOT_MARKET_FROM_MASK_SHOP');
+    src.delete('MM_CLOCK_TOWN_FROM_CLOCK_TOWER');
+    dst.delete('OOT_SHOP_MASKS');
+    dst.delete('MM_CLOCK_TOWER_FROM_CLOCK_TOWN');
+
+    return { src, dst };
+  }
+
   private overrideEntrance(src: Entrance, dst: Entrance) {
     this.overrides[src] = dst;
     this.worldChanged = true;
@@ -409,9 +422,8 @@ class WorldShuffler {
     }
 
     /* Compute entrances */
-    const entrances = this.entrancesForTypes(types, this.settings.erNoPolarity);
     const entrancesSrc = new Set(this.allEntrances.filter(x => ENTRANCES[x].type === 'wallmaster' && this.world.areas.hasOwnProperty(ENTRANCES[x].from)));
-    const entrancesDst = new Set(entrances);
+    const entrancesDst = this.poolEntrancesForTypes(types, this.settings.erNoPolarity).dst;
 
     while (entrancesSrc.size > 0) {
       const src = sample(this.random, entrancesSrc);
@@ -436,14 +448,13 @@ class WorldShuffler {
     types.add('region');
 
     /* Compute entrances */
-    const entrances = this.entrancesForTypes(types, true).filter(x => ENTRANCES[x].game === 'oot');
     let entrancesSrc: Set<Entrance>;
     if(this.settings.erSpawns === 'child' || this.settings.erSpawns === 'adult') {
       entrancesSrc = new Set((Object.keys(ENTRANCES) as Entrance[]).filter(x => ENTRANCES[x].type === `spawn-${this.settings.erSpawns}`));
     } else if(this.settings.erSpawns === 'both') {
       entrancesSrc = new Set((Object.keys(ENTRANCES) as Entrance[]).filter(x => ENTRANCES[x].type.includes('spawn')));
     }
-    const entrancesDst = new Set(entrances);
+    const entrancesDst = new Set([...this.poolEntrancesForTypes(types, true).dst].filter(x => ENTRANCES[x].game === 'oot'));
 
     while (entrancesSrc!.size > 0) {
       const src = sample(this.random, entrancesSrc!);
@@ -466,10 +477,9 @@ class WorldShuffler {
     }
 
     /* Compute entrances */
-    const entrances = this.entrancesForTypes(types, this.settings.erNoPolarity);
     const oneWays = this.poolOneWays();
     const entrancesSrc = new Set(this.allEntrances.filter(x => oneWays.pool.includes(ENTRANCES[x].type) && this.world.areas.hasOwnProperty(ENTRANCES[x].from)));
-    const entrancesDst = new Set(entrances);
+    const entrancesDst = this.poolEntrancesForTypes(types, this.settings.erNoPolarity).dst;
 
     while (entrancesSrc.size > 0) {
       const src = sample(this.random, entrancesSrc);
@@ -526,6 +536,9 @@ class WorldShuffler {
     }
     if (this.settings.erIndoorsExtra && this.settings.erPiratesWorld) {
       pool.add('indoors-pf');
+    }
+    if (this.settings.erIndoorsGameLinks) {
+      pool.add('indoors-link');
     }
     return { pool: Array.from(pool), opts: { ownGame: this.settings.erIndoors === 'ownGame' } };
   }
@@ -852,7 +865,9 @@ class WorldShuffler {
     this.overrides = {};
 
     /* Connect the games */
-    this.connectGamesDefault();
+    if (!this.settings.erIndoorsGameLinks) {
+      this.connectGamesDefault();
+    }
 
     if (this.settings.erWallmasters !== 'none') {
       this.placeWallmasters();

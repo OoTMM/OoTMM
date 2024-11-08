@@ -273,7 +273,7 @@ OOT_CASTLE_STEALTH:                             { game: oot, id: 0x07a, type: no
 OOT_CASTLE_STEALTH_FROM_COURTYARD:              { game: oot, id: 0x296, type: none }
 OOT_CASTLE_COURTYARD:                           { game: oot, id: 0x400, type: none, debug: ['SPECIAL', 'Castle Courtyard'] }
 OOT_CASTLE_CAUGHT:                              { game: oot, id: 0x47e, type: none }
-OOT_MARKET_FROM_MASK_SHOP:                      { game: oot, id: 0x1d1, type: none, maps: [NONE, OOT_MARKET], areas: ["OOT Market Mask Shop", "OOT Market"], reverse: OOT_SHOP_MASKS }
+OOT_MARKET_FROM_MASK_SHOP:                      { game: oot, id: 0x1d1, type: indoors-link, maps: [NONE, OOT_MARKET], areas: ["OOT Market Mask Shop", "OOT Market"], reverse: OOT_SHOP_MASKS }
 OOT_SHOP_MASKS:                                 { game: oot, id: 0x530, type: none, maps: [OOT_MARKET, NONE], areas: ["OOT Market", "OOT Market Mask Shop"], reverse: OOT_MARKET_FROM_MASK_SHOP }
 OOT_SAGES_CHAMBER_END:                          { game: oot, id: 0x06b, type: none }
 OOT_TEMPLE_OF_TIME_MASTER_SWORD_CS:             { game: oot, id: 0x2ca, type: none }
@@ -574,7 +574,7 @@ MM_VOID_PINNACLE_ROCK:                          { game: mm, id: 0x4410, type: on
 MM_MOON:                                        { game: mm, id: 0xc800, type: none, debug: ['COMMON', 'Moon'] }
 MM_CLOCK_TOWN_FROM_SONG_OF_TIME:                { game: mm, id: 0x1c00, type: none }
 MM_CLOCK_TOWER_MOON_CRASH:                      { game: mm, id: 0xc030, type: none }
-MM_CLOCK_TOWN_FROM_CLOCK_TOWER:                 { game: mm, id: 0xd800, type: none, maps: [NONE, MM_CLOCK_TOWN], areas: ["MM Clock Tower", "MM Clock Town From Clock Tower"], flags: [no-sot], reverse: MM_CLOCK_TOWER_FROM_CLOCK_TOWN, debug: ['COMMON', 'Clock Town'] }
+MM_CLOCK_TOWN_FROM_CLOCK_TOWER:                 { game: mm, id: 0xd800, type: indoors-link, maps: [NONE, MM_CLOCK_TOWN], areas: ["MM Clock Tower", "MM Clock Town From Clock Tower"], flags: [no-sot], reverse: MM_CLOCK_TOWER_FROM_CLOCK_TOWN, debug: ['COMMON', 'Clock Town'] }
 MM_CLOCK_TOWER_FROM_CLOCK_TOWN:                 { game: mm, id: 0xc010, type: none, maps: [MM_CLOCK_TOWN, NONE], areas: ["MM Clock Town Near Clock Tower", "MM Clock Tower"], reverse: MM_CLOCK_TOWN_FROM_CLOCK_TOWER }
 MM_COAST_FROM_MIKAU_CS:                         { game: mm, id: 0x68a0, type: none }
 MM_GROTTO_TYPE_GENERIC:                         { game: mm, id: 0x1440, type: none } # Multiple uses

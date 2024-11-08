@@ -2650,6 +2650,14 @@ export const SETTINGS = [{
   default: false,
   cond: (x: any) => x.erIndoors !== 'none'
 }, {
+  key: 'erIndoorsGameLinks',
+  name: 'Shuffle Mask Shop/Clock Tower Entrances',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'Shuffle the Mask Shop & Clock Tower exits among the other indoors.',
+  default: false,
+  cond: (x: any) => x.erIndoors === 'full' && (!x.erMixedIndoors || x.erMixed === 'full'),
+}, {
   key: 'erWarps',
   name: 'Shuffle Warp Songs and Soaring',
   category: 'entrances',
