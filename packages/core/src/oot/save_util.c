@@ -93,7 +93,7 @@ void Save_CreateMM(void)
     bzero(&gMmSave, sizeof(MmSave));
 
     /* Create some save data */
-    gMmSave.entrance = ENTR_MM_CLOCK_TOWN;
+    gMmSave.entrance = ENTR_MM_CLOCK_TOWN_FROM_CLOCK_TOWER;
     gMmSave.cutscene = 0;
     gMmSave.isFirstCycle = 1;
     gMmSave.hasTatl = 1;

@@ -128,7 +128,7 @@ void Sram_AfterOpenSave(void)
     Save_LoadOptions();
 
     if (Config_Flag(CFG_ONLY_MM))
-        comboGameSwitch(NULL, ENTR_MM_CLOCK_TOWN);
+        comboGameSwitch(NULL, ENTR_MM_CLOCK_TOWN_FROM_CLOCK_TOWER);
 
     /* Read the other save */
     Save_ReadForeign();

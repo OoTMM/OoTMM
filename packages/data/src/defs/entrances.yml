@@ -273,7 +273,8 @@ OOT_CASTLE_STEALTH:                             { game: oot, id: 0x07a, type: no
 OOT_CASTLE_STEALTH_FROM_COURTYARD:              { game: oot, id: 0x296, type: none }
 OOT_CASTLE_COURTYARD:                           { game: oot, id: 0x400, type: none, debug: ['SPECIAL', 'Castle Courtyard'] }
 OOT_CASTLE_CAUGHT:                              { game: oot, id: 0x47e, type: none }
-OOT_SHOP_MASKS:                                 { game: oot, id: 0x530, type: none }
+OOT_MARKET_FROM_MASK_SHOP:                      { game: oot, id: 0x1d1, type: none, maps: [NONE, OOT_MARKET], areas: ["OOT Mask Shop", "OOT Market"], reverse: OOT_SHOP_MASKS }
+OOT_SHOP_MASKS:                                 { game: oot, id: 0x530, type: none, maps: [OOT_MARKET, NONE], areas: ["OOT Market", "OOT Mask Shop"], reverse: OOT_MARKET_FROM_MASK_SHOP }
 OOT_SAGES_CHAMBER_END:                          { game: oot, id: 0x06b, type: none }
 OOT_TEMPLE_OF_TIME_MASTER_SWORD_CS:             { game: oot, id: 0x2ca, type: none }
 OOT_ZORA_RIVER_FROM_FIELD_WATER:                { game: oot, id: 0x1d9, type: none }
@@ -282,7 +283,6 @@ OOT_GROTTO_TYPE_GENERIC:                        { game: oot, id: 0x03f, type: no
 OOT_GROTTO_TYPE_FAIRY:                          { game: oot, id: 0x36d, type: none } # Multiple uses
 OOT_GROTTO_TYPE_SCRUB2:                         { game: oot, id: 0x5bc, type: none } # Multiple uses
 OOT_GROTTO_TYPE_SCRUB3:                         { game: oot, id: 0x5a4, type: none } # Multiple uses
-OOT_MARKET_FROM_MASK_SHOP:                      { game: oot, id: 0x1d1, type: none }
 OOT_INTERNAL_EXIT_GROTTO:                       { game: oot, id: 0x7fff, type: none }
 MM_BOSS_TEMPLE_WOODFALL:                        { game: mm, id: 0x3800, type: boss, maps: [MM_TEMPLE_WOODFALL, MM_TEMPLE_WOODFALL_BOSS], flags: [no-sot, no-global], areas: ["MM Woodfall Temple Boss Access", "MM Woodfall Temple Boss"], debug: ['BOSS', 'Odolwa'] }
 MM_BOSS_TEMPLE_SNOWHEAD:                        { game: mm, id: 0x8200, type: boss, maps: [MM_TEMPLE_SNOWHEAD, MM_TEMPLE_SNOWHEAD_BOSS], flags: [no-sot, no-global], areas: ["MM Snowhead Temple Boss Access", "MM Snowhead Temple Boss"], debug: ['BOSS', 'Goht'] }
@@ -300,7 +300,7 @@ MM_BENEATH_THE_WELL_BACK:                       { game: mm, id: 0x9010, type: du
 MM_IKANA_CASTLE:                                { game: mm, id: 0x3430, type: dungeon-acoi, flags: [no-sot], maps: [MM_IKANA_CASTLE, MM_IKANA_CASTLE_INTERIOR], areas: ["MM Ikana Castle Exterior", "MM Ancient Castle of Ikana"], reverse: MM_IKANA_CASTLE_EXTERIOR_FROM_CASTLE, debug: ['DUNGEON', 'ACoI'] }
 MM_SECRET_SHRINE:                               { game: mm, id: 0xba00, type: dungeon-ss, flags: [no-sot], maps: [MM_IKANA_VALLEY, MM_SECRET_SHRINE], areas: ["MM Ikana Valley", "MM Secret Shrine"], reverse: MM_IKANA_VALLEY_FROM_SHRINE, debug: ['DUNGEON', 'SS'] }
 MM_PIRATE_FORTRESS:                             { game: mm, id: 0x7000, type: dungeon-pf, flags: [no-sot], maps: [MM_GREAT_BAY_COAST, MM_PIRATE_ENTRANCE], areas: ["MM Great Bay Coast Fortress", "MM Pirate Fortress"], reverse: MM_GREAT_BAY_FROM_PIRATE_FORTRESS, debug: ['DUNGEON', 'PFE'] }
-MM_CLOCK_TOWER:                                 { game: mm, id: 0x2c00, type: dungeon-ctr, flags: [no-sot, no-global], maps: [MM_CLOCK_TOWN, MM_CLOCK_TOWER_ROOF], areas: ["MM Clock Tower Platform", "MM Clock Tower Roof"], reverse: MM_CLOCK_TOWN_FROM_CLOCK_TOWER }
+MM_CLOCK_TOWER_ROOF:                            { game: mm, id: 0x2c00, type: dungeon-ctr, flags: [no-sot, no-global], maps: [MM_CLOCK_TOWN, MM_CLOCK_TOWER_ROOF], areas: ["MM Clock Tower Platform", "MM Clock Tower Roof"], reverse: MM_CLOCK_TOWN_FROM_CLOCK_TOWER_ROOF }
 MM_WOODFALL_FROM_TEMPLE:                        { game: mm, id: 0x8610, type: dungeon-exit, maps: [MM_TEMPLE_WOODFALL, MM_WOODFALL], areas: ["MM Woodfall Temple", "MM Woodfall Front of Temple"], reverse: MM_TEMPLE_WOODFALL }
 MM_SNOWHEAD_FROM_TEMPLE:                        { game: mm, id: 0xb210, type: dungeon-exit, maps: [MM_TEMPLE_SNOWHEAD, MM_SNOWHEAD], areas: ["MM Snowhead Temple", "MM Snowhead"], reverse: MM_TEMPLE_SNOWHEAD }
 MM_GREAT_BAY_FROM_TEMPLE:                       { game: mm, id: 0x6a70, type: dungeon-exit, maps: [MM_TEMPLE_GREAT_BAY, MM_ZORA_CAPE], areas: ["MM Great Bay Temple", "MM Zora Cape Peninsula"], reverse: MM_TEMPLE_GREAT_BAY }
@@ -313,7 +313,7 @@ MM_IKANA_CASTLE_EXTERIOR_FROM_WELL:             { game: mm, id: 0x3400, type: du
 MM_IKANA_CASTLE_EXTERIOR_FROM_CASTLE:           { game: mm, id: 0x3420, type: dungeon-exit, maps: [MM_IKANA_CASTLE_INTERIOR, MM_IKANA_CASTLE], areas: ["MM Ancient Castle of Ikana", "MM Ikana Castle Exterior"], reverse: MM_IKANA_CASTLE }
 MM_IKANA_VALLEY_FROM_SHRINE:                    { game: mm, id: 0x20c0, type: dungeon-exit, maps: [MM_SECRET_SHRINE, MM_IKANA_VALLEY], areas: ["MM Secret Shrine", "MM Ikana Valley"], reverse: MM_SECRET_SHRINE }
 MM_GREAT_BAY_FROM_PIRATE_FORTRESS:              { game: mm, id: 0x6850, type: dungeon-exit, flags: [no-sot, no-global], maps: [MM_PIRATE_ENTRANCE, MM_GREAT_BAY_COAST], areas: ["MM Pirate Fortress", "MM Great Bay Coast Fortress"], reverse: MM_PIRATE_FORTRESS }
-MM_CLOCK_TOWN_FROM_CLOCK_TOWER:                 { game: mm, id: 0xd880, type: dungeon-exit, maps: [MM_CLOCK_TOWER_ROOF, MM_CLOCK_TOWN], areas: ["MM Clock Tower Roof", "MM Clock Tower Platform"], reverse: MM_CLOCK_TOWER }
+MM_CLOCK_TOWN_FROM_CLOCK_TOWER_ROOF:            { game: mm, id: 0xd880, type: dungeon-exit, maps: [MM_CLOCK_TOWER_ROOF, MM_CLOCK_TOWN], areas: ["MM Clock Tower Roof", "MM Clock Tower Platform"], reverse: MM_CLOCK_TOWER_ROOF }
 MM_SWAMP_FROM_ROAD:                             { game: mm, id: 0x8400, type: region, maps: [MM_ROAD_SWAMP, MM_SWAMP], areas: ["MM Road to Southern Swamp", "MM Swamp Front"], reverse: MM_SWAMP_ROAD_FROM_SWAMP }
 MM_MOUNTAIN_VILLAGE_FROM_PATH:                  { game: mm, id: 0x9a60, type: region, maps: [MM_ROAD_MOUNTAIN_VILLAGE, MM_MOUNTAIN_VILLAGE], areas: ["MM Mountain Village Path Upper", "MM Mountain Village"], reverse: MM_PATH_FROM_MOUNTAIN_VILLAGE }
 MM_GREAT_BAY_COAST_FROM_FIELD:                  { game: mm, id: 0x6800, type: region, maps: [MM_TERMINA_FIELD, MM_GREAT_BAY_COAST], areas: ["MM Great Bay Fence", "MM Great Bay Coast"], reverse: MM_TERMINA_FIELD_FROM_GREAT_BAY_COAST }
@@ -571,11 +571,11 @@ MM_VOID_GREAT_BAY:                              { game: mm, id: 0x6820, type: on
 MM_VOID_GREAT_BAY_BY_PINNACLE_ROCK:             { game: mm, id: 0x6860, type: one-way-water-void, maps: [NONE, MM_GREAT_BAY_COAST], areas: ["MM Great Bay Coast Near Pinnacle Water Void", "MM VOID"]}
 MM_VOID_ZORA_CAPE:                              { game: mm, id: 0x6a30, type: one-way-water-void, maps: [NONE, MM_ZORA_CAPE], areas: ["MM Zora Cape Water Void", "MM VOID"]}
 MM_VOID_PINNACLE_ROCK:                          { game: mm, id: 0x4410, type: one-way-water-void, maps: [NONE, MM_PINNACLE_ROCK], areas: ["MM Pinnacle Rock Water Void", "MM VOID"]}
-MM_CLOCK_TOWN:                                  { game: mm, id: 0xd800, type: none, debug: ['COMMON', 'Clock Town'] }
 MM_MOON:                                        { game: mm, id: 0xc800, type: none, debug: ['COMMON', 'Moon'] }
 MM_CLOCK_TOWN_FROM_SONG_OF_TIME:                { game: mm, id: 0x1c00, type: none }
 MM_CLOCK_TOWER_MOON_CRASH:                      { game: mm, id: 0xc030, type: none }
-MM_CLOCK_TOWER_FROM_CLOCK_TOWN:                 { game: mm, id: 0xc010, type: none }
+MM_CLOCK_TOWN_FROM_CLOCK_TOWER:                 { game: mm, id: 0xd800, type: none, maps: [NONE, MM_CLOCK_TOWN], areas: ["MM Clock Tower", "MM Clock Town From Clock Tower"], flags: [no-sot], reverse: MM_CLOCK_TOWER_FROM_CLOCK_TOWN, debug: ['COMMON', 'Clock Town'] }
+MM_CLOCK_TOWER_FROM_CLOCK_TOWN:                 { game: mm, id: 0xc010, type: none, maps: [MM_CLOCK_TOWN, NONE], areas: ["MM Clock Town Near Clock Tower", "MM Clock Tower"], reverse: MM_CLOCK_TOWN_FROM_CLOCK_TOWER }
 MM_COAST_FROM_MIKAU_CS:                         { game: mm, id: 0x68a0, type: none }
 MM_GROTTO_TYPE_GENERIC:                         { game: mm, id: 0x1440, type: none } # Multiple uses
 MM_GROTTO_TYPE_COW:                             { game: mm, id: 0x14a0, type: none } # Multiple uses

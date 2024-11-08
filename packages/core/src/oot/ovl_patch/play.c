@@ -648,7 +648,7 @@ void Play_TransitionDone(PlayState* play)
     if (entrance == ENTR_OOT_SHOP_MASKS)
     {
         if (!Config_Flag(CFG_ONLY_OOT))
-            entrance = ENTR_MM_CLOCK_TOWN | MASK_FOREIGN_ENTRANCE;
+            entrance = ENTR_MM_CLOCK_TOWN_FROM_CLOCK_TOWER | MASK_FOREIGN_ENTRANCE;
         else
             entrance = ENTR_OOT_MARKET_FROM_MASK_SHOP;
     }
