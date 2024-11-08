@@ -78,6 +78,12 @@
 #define ACTOR_FLAG_MM_40000000                  (1 << 30)
 #define ACTOR_FLAG_MM_80000000                  (1 << 31)
 
+#if defined(GAME_OOT)
+# define ACTOR_FLAG_GRASS_DESTROYED     (1 << 11)
+#endif
+
+#define ACTOR_FLAG_THROW_ONLY   (1 << 23)
+
 #define ACTORCAT_SWITCH         0x00
 #define ACTORCAT_BG             0x01
 #define ACTORCAT_PLAYER         0x02

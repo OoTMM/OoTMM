@@ -75,6 +75,9 @@ Gfx_TexScroll = 0x8007eb00;
 Actor_WorldDistXZToActor = 0x800214fc;
 Actor_HeightDiff = 0x800215ec;
 
+Rand_ZeroFloat = 0x80026d64;
+EffectSsGRipple_Spawn = 0x8001cf3c;
+
 DrawGi_Opa0_Xlu1        = 0x800582c0;
 DrawGi_Opa0_Xlu12       = 0x80058584;
 DrawGi_Opa0             = 0x80058228;
@@ -150,8 +153,10 @@ SkelAnime_Init = 0x8008c684;
 SkelAnime_Update = 0x8008c9c0;
 Camera_GetCamDir = 0x80049730;
 Matrix_SetTranslateRotateYXZ = 0x800ab510;
+Actor_Noop = 0x80027ef4;
 
 sinf = 0x800cf470;
+Math3D_Dist1DSq = 0x800a5434;
 Math3D_Dist2DSq = 0x800a5470;
 Math_ScaledStepToS = 0x80063704;
 Math_SmoothStepToF = 0x80064178;

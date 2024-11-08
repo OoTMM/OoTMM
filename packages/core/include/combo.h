@@ -11,6 +11,7 @@
 
 # include <ultra64.h>
 # include <combo/seqcmd.h>
+# include <combo/config.h>
 # include <combo/audio.h>
 # include <combo/main.h>
 # include <combo/tha.h>
@@ -27,17 +28,20 @@
 # include <combo/effect.h>
 # include <combo/equipment.h>
 # include <combo/math.h>
+# include <combo/item.h>
 # include <combo/npc.h>
 # include <combo/object.h>
 # include <combo/patch.h>
 # include <combo/player.h>
 # include <combo/rand.h>
+# include <combo/xflags.h>
+# include <combo/global.h>
+# include <combo/csmc.h>
 # include <combo/text.h>
 # include <combo/collision_check.h>
 # include <combo/interface.h>
 # include <combo/common/ocarina.h>
 # include <combo/common/color.h>
-# include <combo/common/actors/Obj_Mure2.h>
 # include <combo/common/actors/Obj_Mure3.h>
 # include <combo/common/actors/En_Tubo_Trap.h>
 
@@ -47,7 +51,6 @@
 #  include <combo/oot/pause_state.h>
 #  include <combo/oot/actors/Item_Etcetera.h>
 #  include <combo/oot/actors/Obj_Timeblock_Warp2Block.h>
-#  include <combo/oot/actors/En_Kusa.h>
 #  include <combo/oot/actors/En_Ossan.h>
 #  include <combo/oot/actors/En_Ex_Ruppy.h>
 #  include <combo/oot/actors/En_Diving_Game.h>
@@ -68,9 +71,6 @@
 #  include <combo/mm/actor_bgingate.h>
 #  include <combo/mm/actor_objboat.h>
 #  include <combo/mm/sequence.h>
-#  include <combo/mm/actors/Obj_Grass.h>
-#  include <combo/mm/actors/Obj_Grass_Carry.h>
-#  include <combo/mm/actors/En_Kusa.h>
 #  include <combo/mm/actors/En_Elf.h>
 #  include <combo/mm/actors/Bg_Hakugin_Post.h>
 # endif

@@ -15,14 +15,14 @@ Kokiri Forest Storms Grotto,                                chest,          NONE
 Kokiri Forest GS Soil,                                      gs,             NONE,                 KOKIRI_FOREST,                  0x68,                       GS_TOKEN
 Kokiri Forest GS Night Child,                               gs,             NONE,                 KOKIRI_FOREST,                  0x69,                       GS_TOKEN
 Kokiri Forest GS Night Adult,                               gs,             NONE,                 KOKIRI_FOREST,                  0x6a,                       GS_TOKEN
-Kokiri Forest Grass 1,                                      grass,          NONE,                 KOKIRI_FOREST,                  0x0003c,                    RANDOM
-Kokiri Forest Grass 2,                                      grass,          NONE,                 KOKIRI_FOREST,                  0x0003d,                    RANDOM
-Kokiri Forest Grass 3,                                      grass,          NONE,                 KOKIRI_FOREST,                  0x0003e,                    RANDOM
-Kokiri Forest Grass 4,                                      grass,          NONE,                 KOKIRI_FOREST,                  0x0003f,                    RANDOM
-Kokiri Forest Grass 5,                                      grass,          NONE,                 KOKIRI_FOREST,                  0x00040,                    RANDOM
-Kokiri Forest Grass 6,                                      grass,          NONE,                 KOKIRI_FOREST,                  0x00041,                    RANDOM
-Kokiri Forest Grass 7,                                      grass,          NONE,                 KOKIRI_FOREST,                  0x00042,                    RANDOM
-Kokiri Forest Grass 8,                                      grass,          NONE,                 KOKIRI_FOREST,                  0x00043,                    RANDOM
+Kokiri Forest Grass Child Near Crawl 1,                     grass,          NONE,                 KOKIRI_FOREST,                  0x0003c,                    RANDOM
+Kokiri Forest Grass Child Near Crawl 2,                     grass,          NONE,                 KOKIRI_FOREST,                  0x0003d,                    RANDOM
+Kokiri Forest Grass Child Near Crawl 3,                     grass,          NONE,                 KOKIRI_FOREST,                  0x0003e,                    RANDOM
+Kokiri Forest Grass Child Near Crawl 4,                     grass,          NONE,                 KOKIRI_FOREST,                  0x0003f,                    RANDOM
+Kokiri Forest Grass Child Near Crawl 5,                     grass,          NONE,                 KOKIRI_FOREST,                  0x00040,                    RANDOM
+Kokiri Forest Grass Child Near Crawl 6,                     grass,          NONE,                 KOKIRI_FOREST,                  0x00041,                    RANDOM
+Kokiri Forest Grass Child Near Crawl 7,                     grass,          NONE,                 KOKIRI_FOREST,                  0x00042,                    RANDOM
+Kokiri Forest Grass Child Near Crawl 8,                     grass,          NONE,                 KOKIRI_FOREST,                  0x00043,                    RANDOM
 Kokiri Forest Grass Child 1,                                grass,          NONE,                 KOKIRI_FOREST,                  0x00044,                    RANDOM
 Kokiri Forest Grass Child 2,                                grass,          NONE,                 KOKIRI_FOREST,                  0x00045,                    RANDOM
 Kokiri Forest Grass Child 3,                                grass,          NONE,                 KOKIRI_FOREST,                  0x00046,                    RANDOM
@@ -43,6 +43,14 @@ Kokiri Forest Grass Adult 09,                               grass,          NONE
 Kokiri Forest Grass Adult 10,                               grass,          NONE,                 KOKIRI_FOREST,                  0x98017,                    RANDOM
 Kokiri Forest Grass Adult 11,                               grass,          NONE,                 KOKIRI_FOREST,                  0xa8017,                    RANDOM
 Kokiri Forest Grass Adult 12,                               grass,          NONE,                 KOKIRI_FOREST,                  0xb8017,                    RANDOM
+Kokiri Forest Grass Adult Near Crawl 1,                     grass,          NONE,                 KOKIRI_FOREST,                  0x0800f,                    RANDOM
+Kokiri Forest Grass Adult Near Crawl 2,                     grass,          NONE,                 KOKIRI_FOREST,                  0x08010,                    RANDOM
+Kokiri Forest Grass Adult Near Crawl 3,                     grass,          NONE,                 KOKIRI_FOREST,                  0x08011,                    RANDOM
+Kokiri Forest Grass Adult Near Crawl 4,                     grass,          NONE,                 KOKIRI_FOREST,                  0x08012,                    RANDOM
+Kokiri Forest Grass Adult Near Crawl 5,                     grass,          NONE,                 KOKIRI_FOREST,                  0x08013,                    RANDOM
+Kokiri Forest Grass Adult Near Crawl 6,                     grass,          NONE,                 KOKIRI_FOREST,                  0x08014,                    RANDOM
+Kokiri Forest Grass Adult Near Crawl 7,                     grass,          NONE,                 KOKIRI_FOREST,                  0x08015,                    RANDOM
+Kokiri Forest Grass Adult Near Crawl 8,                     grass,          NONE,                 KOKIRI_FOREST,                  0x08016,                    RANDOM
 Kokiri Forest Cow,                                          cow,            COW_LINK,             KOKIRI_FOREST,                  0x00,                       MILK
 Kokiri Forest Storms Grotto Grass 1,                        grass,          NONE,                 GROTTOS,                        0x02c02,                    RANDOM
 Kokiri Forest Storms Grotto Grass 2,                        grass,          NONE,                 GROTTOS,                        0x02c03,                    RANDOM

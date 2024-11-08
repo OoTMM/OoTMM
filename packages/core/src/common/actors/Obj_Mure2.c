@@ -1,3 +1,4 @@
+#if 0
 #include <combo.h>
 #include <combo/global.h>
 #include <combo/actor.h>
@@ -9,6 +10,8 @@
 # define ADDR_INIT              0x80961350
 # define ADDR_SPAWN_CHILDREN    0x8096104c
 #endif
+
+#if defined(GAME_MM)
 
 void EnKusa_Aliases(Xflag* xflag);
 
@@ -68,3 +71,6 @@ void ObjMure2_SpawnChildrenWrapper(Actor_ObjMure2* this, PlayState* play)
         EnKusa_Aliases(&kusa->xflag);
     }
 }
+
+#endif
+#endif

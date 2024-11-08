@@ -128,19 +128,18 @@
   exits:
     "Kokiri Forest Grass Child": "is_child"
     "Kokiri Forest Grass Adult": "is_adult"
-  locations:
-    "Kokiri Forest Grass 1": "true"
-    "Kokiri Forest Grass 2": "true"
-    "Kokiri Forest Grass 3": "true"
-    "Kokiri Forest Grass 4": "true"
-    "Kokiri Forest Grass 5": "true"
-    "Kokiri Forest Grass 6": "true"
-    "Kokiri Forest Grass 7": "true"
-    "Kokiri Forest Grass 8": "true"
 "Kokiri Forest Grass Child":
   region: KOKIRI_FOREST
   age_change: false
   locations:
+    "Kokiri Forest Grass Child Near Crawl 1": "true"
+    "Kokiri Forest Grass Child Near Crawl 2": "true"
+    "Kokiri Forest Grass Child Near Crawl 3": "true"
+    "Kokiri Forest Grass Child Near Crawl 4": "true"
+    "Kokiri Forest Grass Child Near Crawl 5": "true"
+    "Kokiri Forest Grass Child Near Crawl 6": "true"
+    "Kokiri Forest Grass Child Near Crawl 7": "true"
+    "Kokiri Forest Grass Child Near Crawl 8": "true"
     "Kokiri Forest Grass Child 1": "true"
     "Kokiri Forest Grass Child 2": "true"
     "Kokiri Forest Grass Child 3": "true"
@@ -165,6 +164,14 @@
     "Kokiri Forest Grass Adult 10": "true"
     "Kokiri Forest Grass Adult 11": "true"
     "Kokiri Forest Grass Adult 12": "true"
+    "Kokiri Forest Grass Adult Near Crawl 1": "true"
+    "Kokiri Forest Grass Adult Near Crawl 2": "true"
+    "Kokiri Forest Grass Adult Near Crawl 3": "true"
+    "Kokiri Forest Grass Adult Near Crawl 4": "true"
+    "Kokiri Forest Grass Adult Near Crawl 5": "true"
+    "Kokiri Forest Grass Adult Near Crawl 6": "true"
+    "Kokiri Forest Grass Adult Near Crawl 7": "true"
+    "Kokiri Forest Grass Adult Near Crawl 8": "true"
 "Kokiri Forest Adult Rupees":
   region: KOKIRI_FOREST
   age_change: false

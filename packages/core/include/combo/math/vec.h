@@ -42,6 +42,13 @@ typedef struct
 }
 VecPolar;
 
+typedef struct
+{
+    s16 distance;
+    s16 angle;
+}
+VecPolarS;
+
 /* TODO: Move this */
 typedef struct
 {

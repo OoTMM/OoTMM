@@ -67,6 +67,7 @@ void    Interface_UpdateButtonsPart2(PlayState* play);
 
 int    LoadFile(void* dst, u32 vromAddr, u32 size);
 
+void    Actor_Noop(Actor* actor, PlayState* play);
 Actor*  Actor_Spawn(ActorContext* actorCtx, PlayState* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable);
 
 #if defined(GAME_OOT)
@@ -448,6 +449,14 @@ s32 SysFlashrom_ExecWrite(void* addr, u32 pageNum, u32 pageCount);
 EntranceTableEntry* Entrance_GetTableEntry(u16 entrance);
 
 extern u8 gWeatherMode;
+
+#if defined(GAME_MM)
+# define func_800A8150 Item_CollectibleDropTable
+void SkinMatrix_Vec3fMtxFMultXYZW(MtxF* mf, Vec3f* src, Vec3f* xyzDest, f32* wDest);
+void func_800B1210(struct PlayState* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, s16 scale, s16 scaleStep);
+#endif
+
+s32 WaterBox_GetSurfaceImpl(struct PlayState* play, CollisionContext* colCtx, f32 x, f32 z, f32* ySurface, WaterBox** outWaterBox, s32* bgId);
 
 /* Gamemodes */
 void FileSelect_Init(GameState* this);

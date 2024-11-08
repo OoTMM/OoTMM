@@ -120,19 +120,19 @@ void comboXflagItemOverride(ComboItemOverride* o, const Xflag* xf, s16 gi)
     comboItemOverride(o, &q);
 }
 
-void comboXflagInit(Xflag* xf, Actor* actor, PlayState* play)
+int comboXflagInit(Xflag* xf, Actor* actor, PlayState* play)
 {
     if (g.xflagOverride)
     {
         memcpy(xf, &g.xflag, sizeof(*xf));
+        return false;
     }
-    else
-    {
-        xf->sceneId = play->sceneId;
-        xf->setupId = g.sceneSetupId;
-        xf->roomId = actor->room;
-        xf->sliceId = 0;
-        xf->id = actor->actorIndex;
+
+    xf->sceneId = play->sceneId;
+    xf->setupId = g.sceneSetupId;
+    xf->roomId = actor->room;
+    xf->sliceId = 0;
+    xf->id = actor->actorIndex;
 
 #if defined(GAME_OOT)
     if (xf->sceneId == SCE_OOT_GROTTOS)
@@ -152,6 +152,10 @@ void comboXflagInit(Xflag* xf, Actor* actor, PlayState* play)
     {
         switch (xf->roomId)
         {
+        case 0x04:
+            /* Generic Grottos */
+            xf->roomId = 0x20 | (gGrottoData & 0x1f);
+            break;
         case 0x0a:
             /* Cow grottos */
             if (gLastScene == SCE_MM_GREAT_BAY_COAST)
@@ -161,5 +165,28 @@ void comboXflagInit(Xflag* xf, Actor* actor, PlayState* play)
     }
 #endif
 
+    return TRUE;
+}
+
+int Xflag_IsValid(Xflag* xf)
+{
+    ComboItemOverride o;
+
+    /* Fast check */
+    if (xf->sceneId == 0xff)
+        return FALSE;
+
+    comboXflagItemOverride(&o, xf, GI_NONE);
+    if (o.gi == GI_NONE)
+    {
+        xf->sceneId = 0xff;
+        return FALSE;
     }
+
+    return TRUE;
+}
+
+int Xflag_IsShuffled(Xflag* xf)
+{
+    return Xflag_IsValid(xf) && !comboXflagsGet(xf);
 }

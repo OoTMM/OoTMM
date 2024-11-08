@@ -74,7 +74,6 @@ void csmcGrassPreDraw(PlayState* play, s16 gi, int def, int alt, int direct)
     int id;
     const void* list;
 
-
     if (alt)
         dlists = kGrassAltDlist;
     else

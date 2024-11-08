@@ -28,7 +28,6 @@ typedef struct
     u8                      maxKeysMm[4];
     u8                      actorIndex;
     u8                      sceneSetupId;
-    s8                      keatonGrassMax;
     u32                     nextEntrance;
     Xflag                   xflag;
 }

@@ -41,7 +41,12 @@ async function extractAssetsMetadata(game: Game, srcType: string, file: string, 
         const name = node['@_Name'];
         const offset = Number(node['@_Offset']);
         const addr = (seg << 24 | offset) >>> 0;
-        const cType = 'u8';
+        let cType = 'u8';
+        switch (type) {
+        case 'DList':
+          cType = 'Gfx';
+          break;
+        }
         cg.raw(`extern ${cType} ${name}[];`);
         if (addrMap.has(name)) {
           console.error(`Duplicate asset name: ${name}`);

@@ -3,6 +3,8 @@
 
 #include <combo/types.h>
 
+#define OBJECT_SLOT_NONE -1
+
 typedef struct
 {
     u32 vromStart;
