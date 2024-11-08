@@ -61,8 +61,6 @@ function asmPatchGroups(world: World, settings: Settings) {
     OOT_SILVER_RUPEE_SHUFFLE: settings.silverRupeeShuffle !== 'vanilla',
     OOT_FREE_SCARECROW: settings.freeScarecrowOot,
     MM_FREE_SCARECROW: settings.freeScarecrowMm,
-    OOT_SHUFFLE_GRASS: settings.shuffleGrassOot !== 'none',
-    MM_SHUFFLE_GRASS: settings.shuffleGrassMm !== 'none',
     MM_LENIENT_SPIKES: settings.lenientSpikes,
     OOT_CHEST_GAME_SHUFFLE: settings.smallKeyShuffleChestGame !== 'vanilla',
     MM_CLIMB_MOST_SURFACES: settings.climbMostSurfacesMm,

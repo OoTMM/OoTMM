@@ -1,29 +1,9 @@
+#if 0
 #include <combo.h>
 #include <combo/item.h>
 #include <combo/csmc.h>
 #include <combo/config.h>
 #include <combo/global.h>
-
-static void EnKusa2_GetXflag(Xflag* xflag, int id)
-{
-    xflag->sceneId = gPlay->sceneId;
-    xflag->setupId = 0;
-    xflag->roomId = 0;
-    switch (xflag->sceneId)
-    {
-    case SCE_MM_MILK_ROAD:
-        xflag->id = 6;
-        break;
-    case SCE_MM_MOUNTAIN_VILLAGE_SPRING:
-        xflag->id = 44;
-        break;
-    case SCE_MM_CLOCK_TOWN_NORTH:
-        xflag->id = 16;
-        break;
-    }
-
-    xflag->sliceId = id;
-}
 
 static void EnKusa2_SpawnDrop(PlayState* play, Vec3f* pos, u16 dropIndex)
 {
@@ -95,3 +75,4 @@ static void EnKusa2_Draw(PlayState* play)
 PATCH_CALL(0x80a5e95c, EnKusa2_Draw);
 PATCH_CALL(0x80a5ea30, EnKusa2_Draw);
 PATCH_CALL(0x80a5ea70, EnKusa2_Draw);
+#endif

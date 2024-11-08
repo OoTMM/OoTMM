@@ -1,3 +1,4 @@
+#if 0
 #include <combo.h>
 
 /* Forward the index */
@@ -14,3 +15,4 @@ PATCH_START 0x80a5e80c
   jr ra
    nop
 PATCH_END
+#endif

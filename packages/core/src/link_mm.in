@@ -343,6 +343,7 @@ BgCheck_EntityRaycastDown4 = 0x800c411c;
 
 DynaPoly_DisableCollision = 0x800c62bc;
 
+func_800B1210 = 0x800b1210;
 Actor_PlaySfx_Flagged = 0x800B9010;
 CutsceneManager_GetCutsceneScriptIndex = 0x800f2138;
 
