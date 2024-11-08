@@ -450,6 +450,12 @@ EntranceTableEntry* Entrance_GetTableEntry(u16 entrance);
 
 extern u8 gWeatherMode;
 
+#if defined(GAME_MM)
+# define func_800A8150 Item_CollectibleDropTable
+#endif
+
+s32 WaterBox_GetSurfaceImpl(struct PlayState* play, CollisionContext* colCtx, f32 x, f32 z, f32* ySurface, WaterBox** outWaterBox, s32* bgId);
+
 /* Gamemodes */
 void FileSelect_Init(GameState* this);
 

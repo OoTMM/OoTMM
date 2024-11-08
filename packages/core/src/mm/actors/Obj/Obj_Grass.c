@@ -81,7 +81,7 @@ void ObjGrass_DrawBush(Actor_ObjGrass_PackBush* bush)
     }
 
     /* Prepare the draw */
-    csmcGrassPreDraw(gPlay, o.gi, CSMC_GRASS_NORMAL, 0, 1);
+    csmcGrassPreDraw(gPlay, o.gi, CSMC_GRASS_NORMAL, 0, 1, FALSE);
     dlist = actorAddr(ACTOR_OBJ_GRASS, 0x809aaae0);
 
     /* Draw */

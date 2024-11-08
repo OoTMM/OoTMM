@@ -44,7 +44,9 @@ set(LDSCRIPT_OVL "${CMAKE_SOURCE_DIR}/src/link_ovl.ld")
 
 function(build game)
   # Includes for OVLs
-  include_directories("${CMAKE_SOURCE_DIR}/src/common/ovl" "${CMAKE_SOURCE_DIR}/src/${game}/ovl")
+  set(OVL_INCLUDE_DIRS "")
+  list(APPEND OVL_INCLUDE_DIRS "${CMAKE_SOURCE_DIR}/src/common/ovl")
+  list(APPEND OVL_INCLUDE_DIRS "${CMAKE_SOURCE_DIR}/src/${game}/ovl")
 
   # Common stuff
   string(TOUPPER ${game} game_upper)
@@ -72,6 +74,7 @@ function(build game)
       add_library(${target_name} OBJECT ${OVL_SOURCES})
       target_compile_options(${target_name} PRIVATE "-fno-merge-constants" "-mno-explicit-relocs" "-mno-split-addresses")
       target_compile_definitions(${target_name} PRIVATE ${game_define})
+      target_include_directories(${target_name} PRIVATE ${OVL_INCLUDE_DIRS})
 
       # Merge the objects into a single file, with fixed segments
       set(target_file "${CMAKE_BINARY_DIR}/${game}_ovl_${ovl}.o")
@@ -129,6 +132,7 @@ function(build game)
   target_compile_definitions(${game} PRIVATE ${game_define})
   target_link_libraries(${game})
   target_link_options(${game} PRIVATE "-Wl,--emit-relocs" "-T${ldscript}")
+  target_include_directories(${game} PRIVATE ${OVL_INCLUDE_DIRS})
 
   # Extract main sections
   set(game_payload "${CMAKE_BINARY_DIR}/${game}_payload.bin")

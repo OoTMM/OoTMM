@@ -80,8 +80,9 @@
 
 #if defined(GAME_OOT)
 # define ACTOR_FLAG_GRASS_DESTROYED     (1 << 11)
-# define ACTOR_FLAG_THROW_ONLY          (1 << 23)
 #endif
+
+#define ACTOR_FLAG_THROW_ONLY   (1 << 23)
 
 #define ACTORCAT_SWITCH         0x00
 #define ACTORCAT_BG             0x01
