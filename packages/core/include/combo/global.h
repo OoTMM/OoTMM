@@ -20,6 +20,7 @@ typedef struct
     u8                      roomEnemyLackSoul:1;
     u8                      spawnExtended:1;
     u8                      xflagOverride:1;
+    u8                      isNextEntranceInitialSong:1;
     u8                      decoysCount;
     u8                      menuScreen;
     u8                      menuCursor;

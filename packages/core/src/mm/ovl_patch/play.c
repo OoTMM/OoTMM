@@ -749,6 +749,7 @@ void Play_TransitionDone(PlayState* play)
         override = comboEntranceOverride(entranceForOverride(entrance));
         if (override != -1)
             entrance = (u32)override;
+        g.isNextEntranceInitialSong = (entrance == ENTR_MM_CLOCK_TOWN_FROM_CLOCK_TOWER);
     }
 
     applyCustomEntrance(&entrance);
@@ -847,9 +848,11 @@ void Play_FastInit(GameState* gs)
         g.initialEntrance = ENTR_MM_CLOCK_TOWN_FROM_CLOCK_TOWER;
     applyCustomEntrance(&entrance);
     gSave.entrance = entrance;
+    g.isNextEntranceInitialSong = (entrance == ENTR_MM_CLOCK_TOWN_FROM_CLOCK_TOWER);
 
     /* Fixup the scene/setup */
     fixupOriginalSceneSetup();
+
 
     /* Handle shuffled entrance */
     switch (gSave.entrance)
