@@ -346,6 +346,8 @@ DynaPoly_DisableCollision = 0x800c62bc;
 Actor_PlaySfx_Flagged = 0x800B9010;
 CutsceneManager_GetCutsceneScriptIndex = 0x800f2138;
 
+WaterBox_GetSurfaceImpl = 0x800c9ebc;
+
 Item_CollectibleDropTable = 0x800a8150;
 Item_CollectibleDropTable2 = 0x800a817c;
 Item_DropCollectible = 0x800a7730;

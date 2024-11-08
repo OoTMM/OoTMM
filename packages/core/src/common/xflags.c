@@ -154,7 +154,7 @@ int comboXflagInit(Xflag* xf, Actor* actor, PlayState* play)
         {
         case 0x04:
             /* Generic Grottos */
-            xflag->roomId = 0x20 | (gGrottoData & 0x1f);
+            xf->roomId = 0x20 | (gGrottoData & 0x1f);
             break;
         case 0x0a:
             /* Cow grottos */
