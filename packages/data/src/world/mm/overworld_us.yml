@@ -1,0 +1,16 @@
+"Deku Palace Near US Beans Grotto":
+  region: DEKU_PALACE
+  exits:
+    "Deku Palace Near Beans Grotto": "true"
+    "Deku Palace Main": "true"
+"Deku Palace Near Beans Grotto":
+  region: DEKU_PALACE
+  exits:
+    "Deku Palace Near US Beans Grotto": "true"
+    "Deku Palace Beans Grotto": "true"
+
+# JP Stubs
+"Deku Palace Near JP Grotto Climb Left":
+  region: DEKU_PALACE
+"Deku Palace Near JP Grotto Climb Right":
+  region: DEKU_PALACE

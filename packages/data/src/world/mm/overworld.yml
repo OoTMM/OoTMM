@@ -1530,9 +1530,11 @@
 "Deku Palace Main":
   region: DEKU_PALACE
   exits:
+    "Deku Palace Near JP Grotto Climb Left": "true"
+    "Deku Palace Near JP Grotto Climb Right": "true"
     "Deku Palace Throne": "true"
     "Deku Palace Front": "true"
-    "Deku Palace Grotto": "is_child || has(MASK_DEKU) || trick(MM_PALACE_BEAN_SKIP)"
+    "Deku Palace Near US Beans Grotto": "is_child || has(MASK_DEKU) || trick(MM_PALACE_BEAN_SKIP)"
     "Deku Palace Upper": "trick(MM_PALACE_BEAN_SKIP) || short_hook_anywhere"
   locations:
     "Deku Palace HP": "is_child || has(MASK_DEKU) || trick(MM_PALACE_BEAN_SKIP)"
@@ -1591,11 +1593,11 @@
     "Deku Palace Throne": "short_hook_anywhere && trick(MM_ESCAPE_CAGE) && has(MASK_DEKU)"
   locations:
     "Deku Palace Sonata of Awakening": "is_swamp_poisoned && has(MASK_DEKU) && has_ocarina"
-"Deku Palace Grotto":
+"Deku Palace Beans Grotto":
   region: ENTRANCE
   exits:
-    "Deku Palace Main": "true"
-    "Deku Palace Grotto Butterflies": "has_sticks"
+    "Deku Palace Near Beans Grotto": "true"
+    "Deku Palace Beans Grotto Butterflies": "has_sticks"
   events:
     MAGIC_BEANS_PALACE: "soul_bean_salesman && can_use_wallet(1)"
     ARROWS: "true"
@@ -1618,7 +1620,7 @@
     "Deku Palace Grotto Grass 12": "true"
 #    "Deku Palace Free Bean": "true"
 #    "Deku Palace Bean Purchase": "can_use_wallet(1)"
-"Deku Palace Grotto Butterflies":
+"Deku Palace Beans Grotto Butterflies":
   region: ENTRANCE
   locations:
     "Deku Palace Grotto Butterfly 1": "true"

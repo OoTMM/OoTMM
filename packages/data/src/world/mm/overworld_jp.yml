@@ -1,0 +1,30 @@
+# Shortcut grotto
+"Deku Palace Near JP Grotto Climb Left":
+  region: DEKU_PALACE
+  exits:
+    "JP Grotto Climb Left": "true"
+    "Deku Palace Main": "true"
+"Deku Palace Near JP Grotto Climb Right":
+  region: DEKU_PALACE
+  exits:
+    "JP Grotto Climb Right": "true"
+    "Deku Palace Main": "true"
+"JP Grotto Climb":
+  region: ENTRANCE
+  exits:
+    "JP Grotto Climb Left": "true"
+    "JP Grotto Climb Right": "true"
+"JP Grotto Climb Left":
+  region: ENTRANCE
+  exits:
+    "JP Grotto Climb": "true"
+    "Deku Palace Near JP Grotto Climb Left": "true"
+"JP Grotto Climb Right":
+  region: ENTRANCE
+  exits:
+    "JP Grotto Climb": "true"
+    "Deku Palace Near JP Grotto Climb Right": "true"
+
+# US stubs
+"Deku Palace Near US Beans Grotto":
+  region: DEKU_PALACE

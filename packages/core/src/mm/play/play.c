@@ -418,6 +418,22 @@ static void Play_FixupSpawnTime(void)
     }
 }
 
+void ComboPlay_JpLayout(PlayState* play);
+
+void Play_RoomChangeHook(PlayState* play)
+{
+    ComboPlay_JpLayout(play);
+}
+
+void Play_CheckRoomChangeHook(PlayState* play)
+{
+    if (g.prevRoom != play->roomCtx.curRoom.num)
+    {
+        g.prevRoom = play->roomCtx.curRoom.num;
+        Play_RoomChangeHook(play);
+    }
+}
+
 void hookPlay_Init(PlayState* play)
 {
     u32 entrance;
@@ -426,6 +442,7 @@ void hookPlay_Init(PlayState* play)
     int isEndOfGame;
 
     /* Init */
+    g.prevRoom = -1;
     gIsEntranceOverride = 0;
     g.decoysCount = 0;
     isEndOfGame = 0;
@@ -651,6 +668,7 @@ void hookPlay_Init(PlayState* play)
     comboSpawnCustomWarps(play);
     spawnSirloin(play);
     ComboPlay_SpawnExtraSigns(play);
+    Play_CheckRoomChangeHook(play);
 
     if (Config_Flag(CFG_ER_ANY))
     {
@@ -709,6 +727,7 @@ void Play_UpdateWrapper(PlayState* play)
     Player_TryUpdateForm(link, play);
     Multi_Update(play);
     Play_Update(play);
+    Play_CheckRoomChangeHook(play);
     Audio_DisplayMusicName(play);
     Debug_Update();
 }
