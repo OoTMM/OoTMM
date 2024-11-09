@@ -650,6 +650,7 @@ void hookPlay_Init(PlayState* play)
     CustomTriggers_Spawn(play);
     comboSpawnCustomWarps(play);
     spawnSirloin(play);
+    ComboPlay_SpawnExtraSigns(play);
 
     if (Config_Flag(CFG_ER_ANY))
     {
