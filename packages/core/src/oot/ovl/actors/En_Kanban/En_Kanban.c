@@ -195,46 +195,98 @@ void EnKanban_SetFloorRot(EnKanban* this) {
     }
 }
 
-static void EnKanban_GrottoText(PlayState* play)
+static const char* EnKanban_LocName(PlayState* play)
+{
+    switch (play->sceneId)
+    {
+    case SCE_OOT_GROTTOS:
+        switch (play->roomCtx.curRoom.num)
+        {
+        case 0x00:
+            /* Generic Grottos */
+            switch (gGrottoData & 0x1f)
+            {
+            case 0x00: return "Hyrule Field Market Generic Grotto";
+            case 0x02: return "Hyrule Field Southeast Generic Grotto";
+            case 0x03: return "Hyrule Field Open Generic Grotto";
+            case 0x08: return "Kakariko Generic Grotto";
+            case 0x09: return "Zora River Generic Grotto";
+            case 0x0c: return "Kokiri Forest Generic Grotto";
+            case 0x14: return "Lost Woods Generic Grotto";
+            case 0x17: return "Death Mountain Trail Generic Grotto";
+            case 0x1a: return "Death Mountain Crater Generic Grotto";
+            }
+            break;
+        case 0x06: return "Lost Woods Scrub Grotto";
+        case 0x09:
+            switch (gLastScene)
+            {
+            case SCE_OOT_SACRED_FOREST_MEADOW: return "Sacred Forest Meadow Scrub Grotto";
+            case SCE_OOT_ZORA_RIVER: return "Zora River Scrub Grotto";
+            case SCE_OOT_GERUDO_VALLEY: return "Gerudo Valley Scrub Grotto";
+            case SCE_OOT_DESERT_COLOSSUS: return "Desert Colossus Scrub Grotto";
+            }
+            break;
+        case 0x0c:
+            switch (gLastScene)
+            {
+            case SCE_OOT_LON_LON_RANCH: return "Lon Lon Ranch Scrub Grotto";
+            case SCE_OOT_GORON_CITY: return "Goron City Scrub Grotto";
+            case SCE_OOT_DEATH_MOUNTAIN_CRATER: return "Death Mountain Crater Scrub Grotto";
+            case SCE_OOT_LAKE_HYLIA: return "Lake Hylia Scrub Grotto";
+            }
+            break;
+        }
+        break;
+    case SCE_OOT_FAIRY_FOUNTAIN:
+        switch (gLastScene)
+        {
+        case SCE_OOT_SACRED_FOREST_MEADOW: return "Sacred Forest Meadow Fairy Fountain";
+        case SCE_OOT_HYRULE_FIELD: return "Hyrule Field Fairy Fountain";
+        case SCE_OOT_ZORA_RIVER: return "Zora River Fairy Fountain";
+        case SCE_OOT_ZORA_DOMAIN: return "Zora Domain Fairy Fountain";
+        case SCE_OOT_GERUDO_FORTRESS: return "Gerudo Fortress Fairy Fountain";
+        }
+        break;
+    case SCE_OOT_GREAT_FAIRY_FOUNTAIN_UPGRADES:
+        switch (play->spawn)
+        {
+        case 0: return "Death Mountain Trail Great Fairy Fountain";
+        case 1: return "Death Mountain Crater Great Fairy Fountain";
+        case 2: return "Outside Ganon Castle Great Fairy Fountain";
+        }
+        break;
+    case SCE_OOT_GREAT_FAIRY_FOUNTAIN_SPELLS:
+        switch (play->spawn)
+        {
+        case 0: return "Zora Fountain Great Fairy Fountain";
+        case 1: return "Hyrule Castle Great Fairy Fountain";
+        case 2: return "Desert Colossus Great Fairy Fountain";
+        }
+        break;
+    }
+
+    return "Unknown Location";
+}
+
+static void EnKanban_LocText(PlayState* play)
 {
     char* b;
     char* start;
-    const char* name;
 
     b = play->msgCtx.textBuffer;
 
     comboTextAppendHeader(&b);
     start = b;
-
-    name = "Unknown Grotto";
-    switch (play->roomCtx.curRoom.num)
-    {
-    case 0x00:
-        /* Generic Grottos */
-        switch (gGrottoData & 0x1f)
-        {
-        case 0x00: name = "Hyrule Field Market Grotto"; break;
-        case 0x02: name = "Hyrule Field Southwest Grotto"; break;
-        case 0x03: name = "Hyrule Field Open Grotto"; break;
-        case 0x08: name = "Kakariko Grotto"; break;
-        case 0x09: name = "Zora River Grotto"; break;
-        case 0x0c: name = "Kokiri Forest Grotto"; break;
-        case 0x14: name = "Lost Woods Grotto"; break;
-        case 0x17: name = "Death Mountain Trail Grotto"; break;
-        case 0x1a: name = "Death Mountain Crater Grotto"; break;
-        }
-        break;
-    }
-
-    comboTextAppendStr(&b, name);
+    comboTextAppendStr(&b, EnKanban_LocName(play));
     comboTextAppendStr(&b, TEXT_END);
     comboTextAutoLineBreaks(start);
 }
 
 void EnKanban_TalkedTo(Actor* thisx, PlayState* play)
 {
-    if (thisx->params == ENKANBAN_EXTRA_GROTTOS) {
-        EnKanban_GrottoText(play);
+    if (thisx->params == ENKANBAN_LOCATION_NAME) {
+        EnKanban_LocText(play);
     }
 }
 
@@ -258,7 +310,7 @@ void EnKanban_Init(Actor* thisx, PlayState* play) {
         } else {
             this->actor.messageId = this->actor.params | 0x300;
         }
-        if (this->actor.params == ENKANBAN_EXTRA_GROTTOS) {
+        if (this->actor.params == ENKANBAN_LOCATION_NAME) {
             this->actor.messageId = 0x300;
         }
         this->bounceX = 1;
