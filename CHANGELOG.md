@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [26.1] - 2024-11-09
+
 ### Added
 
 - Add signs in ambiguous logcations in ER, such as generic grottos.
@@ -1403,7 +1405,8 @@ All notable changes to this project will be documented in this file.
 
 - Initial stable release.
 
-[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v26.0...HEAD
+[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v26.1...HEAD
+[26.1]: https://github.com/OoTMM/OoTMM/compare/v26.0...v26.1
 [26.0]: https://github.com/OoTMM/OoTMM/compare/v25.0...v26.0
 [25.0]: https://github.com/OoTMM/OoTMM/compare/v24.1...v25.0
 [24.1]: https://github.com/OoTMM/OoTMM/compare/v24.0...v24.1
