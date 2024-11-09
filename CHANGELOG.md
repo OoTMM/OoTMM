@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+
+- Add signs in ambiguous logcations in ER, such as generic grottos.
+
+### Fixed
+
+- Fix a bug where some ER seeds would not generate correctly.
+
 ## [26.0] - 2024-11-09
 
 ### Added
