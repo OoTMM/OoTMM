@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [26.0] - 2024-11-09
+
 ### Added
 
 - Add a setting to shuffle the Mask Shop <-> Clock Tower link between the games.
@@ -1393,7 +1395,8 @@ All notable changes to this project will be documented in this file.
 
 - Initial stable release.
 
-[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v25.0...HEAD
+[Unreleased]: https://github.com/OoTMM/OoTMM/compare/v26.0...HEAD
+[26.0]: https://github.com/OoTMM/OoTMM/compare/v25.0...v26.0
 [25.0]: https://github.com/OoTMM/OoTMM/compare/v24.1...v25.0
 [24.1]: https://github.com/OoTMM/OoTMM/compare/v24.0...v24.1
 [24.0]: https://github.com/OoTMM/OoTMM/compare/v23.1...v24.0
