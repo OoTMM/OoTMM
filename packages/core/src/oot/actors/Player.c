@@ -10,6 +10,7 @@
 #include <combo/multi.h>
 #include <combo/actor.h>
 #include <combo/hint.h>
+#include <actors/En_Kanban/En_Kanban.h>
 
 void ArrowCycle_Handle(Player* link, PlayState* play);
 void Ocarina_HandleCustomSongs(Player* link, PlayState* play);
@@ -304,6 +305,8 @@ void EnSsh_TalkedTo(Actor*, PlayState*);
 
 void DemoEffect_TextRutoSapphire(PlayState*);
 
+void (*gEnKanban_TalkedTo)(Actor*, PlayState*);
+
 void Player_TalkDisplayTextBox(PlayState* play, s16 textId, Actor* actor)
 {
     PlayerDisplayTextBox(play, textId, actor);
@@ -322,6 +325,9 @@ void Player_TalkDisplayTextBox(PlayState* play, s16 textId, Actor* actor)
             break;
         case ACTOR_EN_SSH:
             EnSsh_TalkedTo(actor, play);
+            break;
+        case ACTOR_EN_KANBAN:
+            gEnKanban_TalkedTo(actor, play);
             break;
         }
     }

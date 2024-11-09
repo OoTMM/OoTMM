@@ -470,6 +470,9 @@ static void Play_AfterInit(PlayState* play)
     /* Spawn Custom Triggers */
     CustomTriggers_Spawn(play);
     comboSpawnCustomWarps(play);
+
+    /* Signs */
+    ComboPlay_SpawnExtraSigns(play);
 }
 
 void hookPlay_Init(PlayState* play)

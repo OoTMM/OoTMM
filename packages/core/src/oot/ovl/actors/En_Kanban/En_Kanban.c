@@ -195,8 +195,53 @@ void EnKanban_SetFloorRot(EnKanban* this) {
     }
 }
 
+static void EnKanban_GrottoText(PlayState* play)
+{
+    char* b;
+    char* start;
+    const char* name;
+
+    b = play->msgCtx.textBuffer;
+
+    comboTextAppendHeader(&b);
+    start = b;
+
+    name = "Unknown Grotto";
+    switch (play->roomCtx.curRoom.num)
+    {
+    case 0x00:
+        /* Generic Grottos */
+        switch (gGrottoData & 0x1f)
+        {
+        case 0x00: name = "Hyrule Field Market Grotto"; break;
+        case 0x02: name = "Hyrule Field Southwest Grotto"; break;
+        case 0x03: name = "Hyrule Field Open Grotto"; break;
+        case 0x08: name = "Kakariko Grotto"; break;
+        case 0x09: name = "Zora River Grotto"; break;
+        case 0x0c: name = "Kokiri Forest Grotto"; break;
+        case 0x14: name = "Lost Woods Grotto"; break;
+        case 0x17: name = "Death Mountain Trail Grotto"; break;
+        case 0x1a: name = "Death Mountain Crater Grotto"; break;
+        }
+        break;
+    }
+
+    comboTextAppendStr(&b, name);
+    comboTextAppendStr(&b, TEXT_END);
+    comboTextAutoLineBreaks(start);
+}
+
+void EnKanban_TalkedTo(Actor* thisx, PlayState* play)
+{
+    if (thisx->params == ENKANBAN_EXTRA_GROTTOS) {
+        EnKanban_GrottoText(play);
+    }
+}
+
 void EnKanban_Init(Actor* thisx, PlayState* play) {
     EnKanban* this = (EnKanban*)thisx;
+
+    gEnKanban_TalkedTo = EnKanban_TalkedTo;
 
     Actor_SetScale(&this->actor, 0.01f);
     if (this->actor.params != ENKANBAN_PIECE) {
@@ -212,6 +257,9 @@ void EnKanban_Init(Actor* thisx, PlayState* play) {
             }
         } else {
             this->actor.messageId = this->actor.params | 0x300;
+        }
+        if (this->actor.params == ENKANBAN_EXTRA_GROTTOS) {
+            this->actor.messageId = 0x300;
         }
         this->bounceX = 1;
         this->partFlags = 0xFFFF;
