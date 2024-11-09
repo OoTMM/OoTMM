@@ -673,3 +673,7 @@ Environment_AdjustLights = 0x800fd2b4;
 LightContext_RemoveLight = 0x80102684;
 
 func_800B0F18 = 0x800b0f18;
+DynaPoly_EnableCollision = 0x800c6314;
+Collider_InitTris = 0x800e16d0;
+Collider_SetTris = 0x800e1958;
+

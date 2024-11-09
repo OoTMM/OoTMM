@@ -238,7 +238,7 @@ s32 Collider_DestroyTris(PlayState* play, ColliderTris* tris);
 void func_800BE504(Actor* actor, ColliderCylinder* cyl);
 void Collider_SetTrisVertices(ColliderTris* tris, s32 elemIndex, Vec3f* a, Vec3f* b, Vec3f* c);
 void Collider_SetQuadVertices(ColliderQuad* quad, Vec3f* a, Vec3f* b, Vec3f* c, Vec3f* d);
-
+s32 Collider_InitTris(PlayState* play, ColliderTris* tris);
 #endif
 
 DynaPolyActor* DynaPoly_GetActor(CollisionContext* colCtx, s32 bgId);

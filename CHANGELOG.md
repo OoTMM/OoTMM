@@ -10,6 +10,10 @@ All notable changes to this project will be documented in this file.
 
 - Add signs in ambiguous logcations in ER, such as generic grottos.
 
+### Changed
+
+- Removed the cutscenes from the Skull Kid paintings and the Skulltula spawning from the jars in Ocean Spider House.
+
 ### Fixed
 
 - Fix a bug where some ER seeds would not generate correctly.
