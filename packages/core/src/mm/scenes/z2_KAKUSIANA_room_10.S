@@ -1,5 +1,6 @@
 #include <combo.h>
 
+.balign 8
 kKakusiabaRoom10Objects:
 .short 0x0146
 .short 0x01B9
