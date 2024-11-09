@@ -25,6 +25,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Make OoT spin attacks scale with the MM swords.
 - Grass/Barrels/Pots/Snowballs/Hearts/Rupees/Wonder Items settings were broken up by All/None/Overworld/Dungeons.
 - Moon Crash cutscene is skipped in Cycle behavior.
 - Hint section now shows the hint importance.
