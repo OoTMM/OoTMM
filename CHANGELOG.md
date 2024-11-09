@@ -4,15 +4,15 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Changed
+
+- Removed the cutscenes from the Skull Kid paintings and the Skulltula spawning from the jars in Ocean Spider House.
+
 ## [26.1] - 2024-11-09
 
 ### Added
 
 - Add signs in ambiguous logcations in ER, such as generic grottos.
-
-### Changed
-
-- Removed the cutscenes from the Skull Kid paintings and the Skulltula spawning from the jars in Ocean Spider House.
 
 ### Fixed
 
