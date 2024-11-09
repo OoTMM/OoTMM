@@ -102,7 +102,10 @@ typedef struct EnKanban {
     /* 0x1A4 */ ColliderCylinder collider;
 } EnKanban; // size = 0x1F0
 
-#define ENKANBAN_PIECE ((s16)0xFFDD)
-#define ENKANBAN_FISHING 0x300
+#define ENKANBAN_PIECE          ((s16)0xFFDD)
+#define ENKANBAN_FISHING        0x300
+#define ENKANBAN_LOCATION_NAME  0x1000
+
+extern void (*gEnKanban_TalkedTo)(Actor*, PlayState*);
 
 #endif // Z_EN_KANBAN_H

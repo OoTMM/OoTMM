@@ -40,4 +40,8 @@ typedef struct EnKanban {
 #define ENKANBAN_PIECE ((s16)0xFFDD)
 #define ENKANBAN_FISHING 0x300
 
+#define ENKANBAN_LOCATION_NAME 0x1000
+
+extern void (*gEnKanban_TalkedTo)(Actor*, PlayState*);
+
 #endif

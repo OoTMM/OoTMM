@@ -749,3 +749,5 @@ void func_800B0E48(PlayState* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, C
 void func_800C0094(CollisionPoly* poly, f32 tx, f32 ty, f32 tz, MtxF* dest);
 
 #endif
+
+void ComboPlay_SpawnExtraSigns(PlayState* play);
