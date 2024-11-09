@@ -2748,4 +2748,17 @@ export const SETTINGS = [{
   description: 'Makes it so one-ways can take you to any place also shuffled.<br>This also affect warp songs and soaring locations if they are included in one-ways.',
   default: false,
   cond: (x: any) => x.erOneWays !== 'none'
+}, {
+  key: 'worldLayoutMm',
+  name: 'World Layout (MM)',
+  category: 'world.layout',
+  type: 'enum',
+  description: 'Choose the world layout for Majora\'s Mask.',
+  values: [
+    { value: 'us', name: 'US', description: 'The classic US layout.' },
+    { value: 'jp', name: 'JP', description: 'The original JP layout, where deku palace has quite different grottos.' },
+    { value: 'random', name: 'Random', description: 'US or JP at random.' },
+  ],
+  default: 'us',
+  cond: hasMM,
 }] as const;

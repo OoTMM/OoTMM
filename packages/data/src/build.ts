@@ -59,6 +59,8 @@ const DATA_WORLD = {
   },
   mm: {
     overworld: loadYaml('world/mm/overworld.yml'),
+    overworld_us: loadYaml('world/mm/overworld_us.yml'),
+    overworld_jp: loadYaml('world/mm/overworld_jp.yml'),
     WF: loadYaml('world/mm/woodfall_temple.yml'),
     SH: loadYaml('world/mm/snowhead_temple.yml'),
     GB: loadYaml('world/mm/great_bay_temple.yml'),
