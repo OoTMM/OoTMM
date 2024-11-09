@@ -128,10 +128,24 @@ class WorldShuffler {
   }
 
   private computeAllEntrances() {
-    let entrances = Object.keys(ENTRANCES) as Entrance[];
-    if (this.settings.games !== 'ootmm') {
-      entrances = entrances.filter(x => ENTRANCES[x].game === this.settings.games);
+    let entrances: Entrance[] = [];
+    for (const key in ENTRANCES) {
+      const name = key as Entrance;
+      const e = ENTRANCES[name];
+
+      if (this.settings.games !== 'ootmm' && e.game !== this.settings.games) {
+        continue;
+      }
+
+      for (const a of [e.from, e.to]) {
+        if (a !== 'NONE' && !this.world.areas.hasOwnProperty(a)) {
+          continue;
+        }
+      }
+
+      entrances.push(name);
     }
+
     return entrances;
   }
 
