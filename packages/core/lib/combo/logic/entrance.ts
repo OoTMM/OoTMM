@@ -371,7 +371,9 @@ class WorldShuffler {
     /* Remove any empty pools */
     for (const name of poolNames) {
       if (poolEntrances[name].src.size === 0) {
-        this.unbalancedPool(name);
+        if (poolEntrances[name].dst.size !== 0) {
+          this.unbalancedPool(name);
+        }
         delete poolEntrances[name];
       }
     }
