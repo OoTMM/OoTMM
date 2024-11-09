@@ -16,4 +16,11 @@ PATCH_VROM DEKUCITY_SCENE + 0x90 + 0x10 * 9 + 2
 .short 0x7f
 PATCH_END
 
+/* Rupee circle */
+PATCH_VROM DEKUCITY_ROOM_01 + 0x176
+.short 405
+.short 0
+.short 1554
+PATCH_END
+
 PATCH_GROUP_END
