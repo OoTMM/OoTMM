@@ -1532,6 +1532,8 @@
   exits:
     "Deku Palace Near JP Grotto Climb Left": "true"
     "Deku Palace Near JP Grotto Climb Right": "true"
+    "Deku Palace Corner Ledge Bottom": "true"
+    "Deku Palace Near JP Grotto Line Start": "true"
     "Deku Palace Throne": "true"
     "Deku Palace Front": "true"
     "Deku Palace Near US Beans Grotto": "is_child || has(MASK_DEKU) || trick(MM_PALACE_BEAN_SKIP)"
@@ -1569,6 +1571,7 @@
   exits:
     "Deku Palace Main": "true"
     "Deku Palace Near Cage": "has(MASK_DEKU) || short_hook_anywhere"
+    "Deku Palace Corner Ledge Top": "has(MASK_DEKU)"
   locations:
     "Deku Palace Pot 1": "true"
     "Deku Palace Pot 2": "true"

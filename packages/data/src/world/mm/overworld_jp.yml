@@ -1,4 +1,4 @@
-# Shortcut grotto
+# Climb grotto
 "Deku Palace Near JP Grotto Climb Left":
   region: DEKU_PALACE
   exits:
@@ -24,6 +24,52 @@
   exits:
     "JP Grotto Climb": "true"
     "Deku Palace Near JP Grotto Climb Right": "true"
+
+# Line Grotto
+"Deku Palace Near JP Grotto Line Start":
+  region: DEKU_PALACE
+  exits:
+    "JP Grotto Line Start": "true"
+    "Deku Palace Main": "true"
+"JP Grotto Line":
+  region: ENTRANCE
+  exits:
+    "JP Grotto Line Start": "true"
+    "JP Grotto Line End": "true"
+"JP Grotto Line Start":
+  region: ENTRANCE
+  exits:
+    "JP Grotto Line": "true"
+    "Deku Palace Near JP Grotto Line Start": "true"
+"JP Grotto Line End":
+  region: ENTRANCE
+  exits:
+    "JP Grotto Line": "true"
+    "Deku Palace Corner Ledge Top": "true"
+
+# Beans Grotto
+"Deku Palace Near Beans Grotto":
+  region: DEKU_PALACE
+  exits:
+    "Deku Palace Corner Ledge Middle": "true"
+    "Deku Palace Beans Grotto": "true"
+
+"Deku Palace Corner Ledge Top":
+  region: DEKU_PALACE
+  exits:
+    "Deku Palace Corner Ledge Middle": "true"
+    "JP Grotto Line End": "true"
+"Deku Palace Corner Ledge Middle":
+  region: DEKU_PALACE
+  exits:
+    "Deku Palace Near Beans Grotto": "true"
+    "Deku Palace Corner Ledge Bottom": "true"
+    "Deku Palace Corner Ledge Top": "can_hookshot_short"
+"Deku Palace Corner Ledge Bottom":
+  region: DEKU_PALACE
+  exits:
+    "Deku Palace Main": "true"
+    "Deku Palace Corner Ledge Middle": "can_hookshot_short"
 
 # US stubs
 "Deku Palace Near US Beans Grotto":
