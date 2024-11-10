@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+
+- Add the Japanese version of Deku Palace & the matching grottos, as a setting.
+
 ### Changed
 
 - Removed the cutscenes from the Skull Kid paintings and the Skulltulas spawning from big jars, tree or chandelier in MM Spider Houses.

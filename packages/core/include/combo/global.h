@@ -30,6 +30,7 @@ typedef struct
     u8                      actorIndex;
     u8                      sceneSetupId;
     u32                     nextEntrance;
+    s8                      prevRoom;
     Xflag                   xflag;
 }
 ComboGlobal;

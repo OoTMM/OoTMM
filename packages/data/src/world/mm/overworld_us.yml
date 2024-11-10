@@ -1,0 +1,27 @@
+"Deku Palace Near US Beans Grotto":
+  region: DEKU_PALACE
+  exits:
+    "Deku Palace Near Beans Grotto": "true"
+    "Deku Palace Main": "true"
+"Deku Palace Near Beans Grotto":
+  region: DEKU_PALACE
+  exits:
+    "Deku Palace Near US Beans Grotto": "true"
+    "Deku Palace Beans Grotto": "true"
+
+# JP Stubs
+"Deku Palace Near JP Grotto Climb Left":
+  region: DEKU_PALACE
+  locations:
+    "Deku Palace Rupee Layout-Dependant 1": "true"
+    "Deku Palace Rupee Layout-Dependant 2": "true"
+"Deku Palace Near JP Grotto Climb Right":
+  region: DEKU_PALACE
+"Deku Palace Near JP Grotto Line Start":
+  region: DEKU_PALACE
+"Deku Palace Corner Ledge Top":
+  region: DEKU_PALACE
+"Deku Palace Corner Ledge Middle":
+  region: DEKU_PALACE
+"Deku Palace Corner Ledge Bottom":
+  region: DEKU_PALACE

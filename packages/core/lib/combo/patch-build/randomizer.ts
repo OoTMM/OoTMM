@@ -1040,6 +1040,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     OOT_MUST_START_WITH_MS: mustStartWithMasterSword(settings),
     OOT_SPIN_UPGRADE: settings.spinUpgradeOot,
     SHARED_SPIN_UPGRADE: settings.sharedSpinUpgrade,
+    MM_JP_LAYOUT: world.mmIsJP,
   };
 
   for (const v in exprs) {

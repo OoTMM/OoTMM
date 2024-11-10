@@ -165,6 +165,7 @@ export type World = {
   warpLocations: Set<string>;
   prices: number[];
   mq: Set<string>;
+  mmIsJP: boolean;
   bossIds: number[];
   entranceOverrides: Map<string, string>;
   preCompleted: Set<string>;
@@ -275,6 +276,7 @@ export function cloneWorld(world: World): World {
     warpLocations: new Set(world.warpLocations),
     prices: [...world.prices],
     mq: new Set(world.mq),
+    mmIsJP: world.mmIsJP,
     preCompleted: new Set(world.preCompleted),
     bossIds: [...world.bossIds],
     entranceOverrides: new Map(world.entranceOverrides),
@@ -380,6 +382,14 @@ export class LogicPassWorld {
       }
     }
 
+    /* MM JP layout */
+    let mmIsJP = false;
+    if (this.state.settings.worldLayoutMm === 'jp') {
+      mmIsJP = true;
+    } else if (this.state.settings.worldLayoutMm === 'random') {
+      mmIsJP = this.state.random.next() & 0x10000 ? true : false;
+    }
+
     /* Prices */
     const prices = defaultPrices(mq);
 
@@ -395,6 +405,7 @@ export class LogicPassWorld {
       warpLocations: new Set(),
       prices,
       mq,
+      mmIsJP,
       preCompleted: new Set(),
       bossIds: Object.values(BOSS_INDEX_BY_DUNGEON),
       entranceOverrides: new Map,
@@ -458,6 +469,10 @@ export class LogicPassWorld {
       if (game === 'oot' && this.world.mq.has(areaSetName)) {
         areaSet = (WORLD.mq as any)[areaSetName];
       }
+      if (areaSetName === 'overworld_us' && this.world.mmIsJP)
+        continue;
+      if (areaSetName === 'overworld_jp' && !this.world.mmIsJP)
+        continue;
       for (let name in areaSet) {
         const area = areaSet[name];
         name = gameId(game, name, ' ');

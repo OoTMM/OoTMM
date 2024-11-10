@@ -1530,9 +1530,13 @@
 "Deku Palace Main":
   region: DEKU_PALACE
   exits:
+    "Deku Palace Near JP Grotto Climb Left": "true"
+    "Deku Palace Near JP Grotto Climb Right": "true"
+    "Deku Palace Corner Ledge Bottom": "true"
+    "Deku Palace Near JP Grotto Line Start": "is_child || has(MASK_DEKU) || trick(MM_PALACE_BEAN_SKIP)"
     "Deku Palace Throne": "true"
     "Deku Palace Front": "true"
-    "Deku Palace Grotto": "is_child || has(MASK_DEKU) || trick(MM_PALACE_BEAN_SKIP)"
+    "Deku Palace Near US Beans Grotto": "is_child || has(MASK_DEKU) || trick(MM_PALACE_BEAN_SKIP)"
     "Deku Palace Upper": "trick(MM_PALACE_BEAN_SKIP) || short_hook_anywhere"
   locations:
     "Deku Palace HP": "is_child || has(MASK_DEKU) || trick(MM_PALACE_BEAN_SKIP)"
@@ -1549,17 +1553,15 @@
     "Deku Palace Rupee Right 11": "is_child || has(MASK_DEKU) || trick(MM_PALACE_BEAN_SKIP)"
     "Deku Palace Rupee Right 12": "is_child || has(MASK_DEKU) || trick(MM_PALACE_BEAN_SKIP)"
     "Deku Palace Rupee Right 13": "is_child || has(MASK_DEKU) || trick(MM_PALACE_BEAN_SKIP)"
-    "Deku Palace Rupee Left 01": "true"
-    "Deku Palace Rupee Left 02": "true"
-    "Deku Palace Rupee Left 03": "true"
-    "Deku Palace Rupee Left 05": "true"
-    "Deku Palace Rupee Left 06": "true"
-    "Deku Palace Rupee Left 07": "true"
-    "Deku Palace Rupee Left 08": "true"
-    "Deku Palace Rupee Left 09": "true"
-    "Deku Palace Rupee Left 10": "is_child || has(MASK_DEKU) || trick(MM_PALACE_BEAN_SKIP)"
-    "Deku Palace Rupee Left 11": "is_child || has(MASK_DEKU) || trick(MM_PALACE_BEAN_SKIP)"
-    "Deku Palace Rupee Left 12": "is_child || has(MASK_DEKU) || trick(MM_PALACE_BEAN_SKIP)"
+    "Deku Palace Rupee Left 1": "true"
+    "Deku Palace Rupee Left 2": "true"
+    "Deku Palace Rupee Left 3": "true"
+    "Deku Palace Rupee Left 5": "true"
+    "Deku Palace Rupee Left 6": "true"
+    "Deku Palace Rupee Left 7": "true"
+    "Deku Palace Rupee Left Far 1": "is_child || has(MASK_DEKU) || trick(MM_PALACE_BEAN_SKIP)"
+    "Deku Palace Rupee Left Far 2": "is_child || has(MASK_DEKU) || trick(MM_PALACE_BEAN_SKIP)"
+    "Deku Palace Rupee Left Far 3": "is_child || has(MASK_DEKU) || trick(MM_PALACE_BEAN_SKIP)"
 "Deku Palace Upper":
   region: DEKU_PALACE
   events:
@@ -1567,6 +1569,7 @@
   exits:
     "Deku Palace Main": "true"
     "Deku Palace Near Cage": "has(MASK_DEKU) || short_hook_anywhere"
+    "Deku Palace Corner Ledge Top": "has(MASK_DEKU)"
   locations:
     "Deku Palace Pot 1": "true"
     "Deku Palace Pot 2": "true"
@@ -1591,11 +1594,11 @@
     "Deku Palace Throne": "short_hook_anywhere && trick(MM_ESCAPE_CAGE) && has(MASK_DEKU)"
   locations:
     "Deku Palace Sonata of Awakening": "is_swamp_poisoned && has(MASK_DEKU) && has_ocarina"
-"Deku Palace Grotto":
+"Deku Palace Beans Grotto":
   region: ENTRANCE
   exits:
-    "Deku Palace Main": "true"
-    "Deku Palace Grotto Butterflies": "has_sticks"
+    "Deku Palace Near Beans Grotto": "true"
+    "Deku Palace Beans Grotto Butterflies": "has_sticks"
   events:
     MAGIC_BEANS_PALACE: "soul_bean_salesman && can_use_wallet(1)"
     ARROWS: "true"
@@ -1618,7 +1621,7 @@
     "Deku Palace Grotto Grass 12": "true"
 #    "Deku Palace Free Bean": "true"
 #    "Deku Palace Bean Purchase": "can_use_wallet(1)"
-"Deku Palace Grotto Butterflies":
+"Deku Palace Beans Grotto Butterflies":
   region: ENTRANCE
   locations:
     "Deku Palace Grotto Butterfly 1": "true"
