@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - Removed the cutscenes from the Skull Kid paintings and the Skulltulas spawning from big jars, tree or chandelier in MM Spider Houses.
+- Bombchu are now accounted in logic for the SSH Gold Room hives.
 
 ## [26.1] - 2024-11-09
 
