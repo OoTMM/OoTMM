@@ -5,7 +5,7 @@ static void ComboPlay_SpawnLayoutDependantRupee(PlayState* play, float x, float 
     Actor_EnItem00* item;
     Xflag xflag;
 
-    item = (Actor_EnItem00*)Actor_Spawn(&play->actorCtx, play, ACTOR_EN_ITEM00, x, y, z, 0x7, 0x7f, 0x7f, params);
+    item = (Actor_EnItem00*)Actor_Spawn(&play->actorCtx, play, ACTOR_EN_ITEM00, x, y, z, 0, 0, 0, params);
     if (item)
     {
         memset(&xflag, 0, sizeof(xflag));
@@ -21,14 +21,13 @@ static void ComboPlay_SpawnLayoutDependantRupee(PlayState* play, float x, float 
 
 static void ComboPlay_SpawnLayoutDependantTorch(PlayState* play, float x, float y, float z)
 {
+    s16 params;
+
+    params = 0x207f;
     if (gSave.isNight)
-    {
-        Actor_Spawn(&play->actorCtx, play, ACTOR_OBJ_SYOKUDAI, x, y, z, 0x2, 0x7f, 0x55, 0x287f);
-    }
-    else
-    {
-        Actor_Spawn(&play->actorCtx, play, ACTOR_OBJ_SYOKUDAI, x, y, z, 0x5, 0x7f, 0x2a, 0x207f);
-    }
+        params |= 0x8000;
+
+    Actor_Spawn(&play->actorCtx, play, ACTOR_OBJ_SYOKUDAI, x, y, z, 0, 0, 0, params);
 }
 
 void ComboPlay_JpLayout(PlayState* play)
@@ -40,10 +39,10 @@ void ComboPlay_JpLayout(PlayState* play)
     {
     case 0x01:
         /* Top grotto */
-        Actor_Spawn(&play->actorCtx, play, ACTOR_DOOR_ANA, 354, 160, 712, 0x7, 0xf, 0x7f, 0x305);
+        Actor_Spawn(&play->actorCtx, play, ACTOR_DOOR_ANA, 354, 160, 712, 0, 0, 0, 0x305);
 
         /* Right Climb Grotto */
-        Actor_Spawn(&play->actorCtx, play, ACTOR_DOOR_ANA, 423, 0, 1340, 0x7, 0x11, 0x7f, 0x304);
+        Actor_Spawn(&play->actorCtx, play, ACTOR_DOOR_ANA, 423, 0, 1340, 0, 0, 0, 0x304);
         ComboPlay_SpawnLayoutDependantTorch(play, 421, 0, 1296);
 
         /* Rupees */
