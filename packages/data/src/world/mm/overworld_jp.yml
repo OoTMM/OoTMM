@@ -42,6 +42,11 @@
     "Deku Palace JP Line Grotto Butterfly 3": "has_sticks"
     "Deku Palace JP Line Grotto Butterfly 4": "has_sticks"
     "Deku Palace JP Line Grotto Butterfly 5": "has_sticks"
+    "Deku Palace JP Line Grotto Grass 1": "true"
+    "Deku Palace JP Line Grotto Grass 2": "true"
+    "Deku Palace JP Line Grotto Grass 3": "true"
+    "Deku Palace JP Line Grotto Grass 4": "true"
+    "Deku Palace JP Line Grotto Grass 5": "true"
 "JP Grotto Line Start":
   region: ENTRANCE
   exits:
