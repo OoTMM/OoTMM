@@ -1533,7 +1533,7 @@
     "Deku Palace Near JP Grotto Climb Left": "true"
     "Deku Palace Near JP Grotto Climb Right": "true"
     "Deku Palace Corner Ledge Bottom": "true"
-    "Deku Palace Near JP Grotto Line Start": "true"
+    "Deku Palace Near JP Grotto Line Start": "is_child || has(MASK_DEKU) || trick(MM_PALACE_BEAN_SKIP)"
     "Deku Palace Throne": "true"
     "Deku Palace Front": "true"
     "Deku Palace Near US Beans Grotto": "is_child || has(MASK_DEKU) || trick(MM_PALACE_BEAN_SKIP)"

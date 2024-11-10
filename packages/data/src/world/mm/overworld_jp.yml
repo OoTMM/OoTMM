@@ -30,7 +30,7 @@
   region: DEKU_PALACE
   exits:
     "JP Grotto Line Start": "true"
-    "Deku Palace Main": "true"
+    "Deku Palace Main": "is_child" # TODO: Refactor Deku Palace
 "JP Grotto Line":
   region: ENTRANCE
   exits:
