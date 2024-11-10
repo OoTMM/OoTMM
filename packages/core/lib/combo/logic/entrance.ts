@@ -137,10 +137,12 @@ class WorldShuffler {
         continue;
       }
 
-      for (const a of [e.from, e.to]) {
-        if (a !== 'NONE' && !this.world.areas.hasOwnProperty(a)) {
-          continue;
-        }
+      if (e.from !== 'NONE' && !this.world.areas.hasOwnProperty(e.from)) {
+        continue;
+      }
+
+      if (e.to !== 'NONE' && !this.world.areas.hasOwnProperty(e.to)) {
+        continue;
       }
 
       entrances.push(name);
@@ -903,6 +905,7 @@ class WorldShuffler {
 
     this.placePools(this.makePools());
 
+    console.log(this.overrides);
     let world = this.changedWorld(this.overrides);
     if (this.settings.erBoss !== 'none') {
       world = this.legacyFixBosses(world);
