@@ -25,7 +25,7 @@ static void ComboPlay_SpawnLayoutDependantTorch(PlayState* play, float x, float 
 
     params = 0x207f;
     if (gSave.isNight)
-        params |= 0x8000;
+        params |= 0x800;
 
     Actor_Spawn(&play->actorCtx, play, ACTOR_OBJ_SYOKUDAI, x, y, z, 0, 0, 0, params);
 }
