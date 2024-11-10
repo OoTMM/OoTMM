@@ -676,6 +676,11 @@ Deku Palace Grotto Butterfly 1,                         butterfly,      NONE,   
 Deku Palace Grotto Butterfly 2,                         butterfly,      NONE,                   GROTTOS,                      0x10c04,                    NOTHING
 Deku Palace Grotto Butterfly 3,                         butterfly,      NONE,                   GROTTOS,                      0x20c04,                    NOTHING
 Deku Palace Grotto Butterfly 4,                         butterfly,      NONE,                   GROTTOS,                      0x30c04,                    NOTHING
+Deku Palace JP Line Grotto Butterfly 1,                 butterfly,      NONE,                   GROTTOS,                      0x00603,                    FAIRY
+Deku Palace JP Line Grotto Butterfly 2,                 butterfly,      NONE,                   GROTTOS,                      0x10603,                    NOTHING
+Deku Palace JP Line Grotto Butterfly 3,                 butterfly,      NONE,                   GROTTOS,                      0x20603,                    NOTHING
+Deku Palace JP Line Grotto Butterfly 4,                 butterfly,      NONE,                   GROTTOS,                      0x30603,                    NOTHING
+Deku Palace JP Line Grotto Butterfly 5,                 butterfly,      NONE,                   GROTTOS,                      0x40603,                    NOTHING
 Deku Palace Rupee Right 01,                             rupee,          NONE,                   DEKU_PALACE,                  0x00100,                    RUPEE_GREEN
 Deku Palace Rupee Right 02,                             rupee,          NONE,                   DEKU_PALACE,                  0x00101,                    RUPEE_GREEN
 Deku Palace Rupee Right 03,                             rupee,          NONE,                   DEKU_PALACE,                  0x00102,                    RUPEE_GREEN

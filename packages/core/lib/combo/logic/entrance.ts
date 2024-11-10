@@ -905,7 +905,6 @@ class WorldShuffler {
 
     this.placePools(this.makePools());
 
-    console.log(this.overrides);
     let world = this.changedWorld(this.overrides);
     if (this.settings.erBoss !== 'none') {
       world = this.legacyFixBosses(world);

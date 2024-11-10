@@ -36,6 +36,12 @@
   exits:
     "JP Grotto Line Start": "true"
     "JP Grotto Line End": "true"
+  locations:
+    "Deku Palace JP Line Grotto Butterfly 1": "has_sticks"
+    "Deku Palace JP Line Grotto Butterfly 2": "has_sticks"
+    "Deku Palace JP Line Grotto Butterfly 3": "has_sticks"
+    "Deku Palace JP Line Grotto Butterfly 4": "has_sticks"
+    "Deku Palace JP Line Grotto Butterfly 5": "has_sticks"
 "JP Grotto Line Start":
   region: ENTRANCE
   exits:
