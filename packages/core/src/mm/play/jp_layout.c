@@ -50,5 +50,9 @@ void ComboPlay_JpLayout(PlayState* play)
         ComboPlay_SpawnLayoutDependantRupee(play, 406, 80, 876, 0x1101, 0x0a);
         ComboPlay_SpawnLayoutDependantRupee(play, 439, 80, 825, 0x1201, 0x0b);
         break;
+    case 0x02:
+        ComboPlay_SpawnLayoutDependantTorch(play, -1040, 0, 656);
+        ComboPlay_SpawnLayoutDependantTorch(play, -420, 0, 1295);
+        break;
     }
 }
