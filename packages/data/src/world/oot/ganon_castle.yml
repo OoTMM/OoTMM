@@ -11,11 +11,11 @@
     "Ganon Castle Stairs": "true"
     "Ganon Castle Fairy Fountain": "has_lens"
 "Ganon Castle Spirit Wallmaster":
-  region: NONE
+  region: BUFFER_DELAYED
   exits:
     "VOID": "true"
 "Ganon Castle Light Wallmaster":
-  region: NONE
+  region: BUFFER_DELAYED
   exits:
     "VOID": "true"
 "Ganon Castle Fairy Fountain":

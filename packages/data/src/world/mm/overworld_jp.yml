@@ -15,7 +15,7 @@
     "JP Grotto Climb Left": "true"
     "JP Grotto Climb Right": "true"
 "JP Grotto Climb Left":
-  region: ENTRANCE
+  region: BUFFER
   exits:
     "JP Grotto Climb": "true"
     "Deku Palace Near JP Grotto Climb Left": "true"
@@ -48,7 +48,7 @@
     "JP Grotto Line": "true"
     "Deku Palace Near JP Grotto Line Start": "true"
 "JP Grotto Line End":
-  region: ENTRANCE
+  region: BUFFER
   exits:
     "JP Grotto Line": "true"
     "Deku Palace Corner Ledge Top": "true"

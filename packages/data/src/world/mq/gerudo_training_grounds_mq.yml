@@ -16,7 +16,7 @@
     "MQ Gerudo Training Grounds Pot 3": "true"
     "MQ Gerudo Training Grounds Pot 4": "true"
 "Gerudo Training Grounds Wallmaster":
-  region: NONE
+  region: BUFFER_DELAYED
   exits:
     "VOID": "true"
 "Gerudo Training Grounds Maze Entrance Fork":

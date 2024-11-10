@@ -6,7 +6,7 @@
   events:
     MQ_GANON_OPEN_MAIN: "soul_iron_knuckle && soul_armos && soul_bubble && (can_use_sword_master || can_use_sword_goron || (can_use_sticks && (has_ranged_weapon_child || can_use_bow)) || has_explosives_or_hammer)"
 "Ganon Castle Spirit Wallmaster":
-  region: NONE
+  region: BUFFER_DELAYED
   exits:
     "VOID": "true"
 "Ganon Castle Main Room":
@@ -74,7 +74,7 @@
     GANON_TRIAL_LIGHT: "can_use_light_arrows && has_lens"
   locations:
     "MQ Ganon Pot Light End 1": "true"
-    "MQ Ganon Pot Light End 2": "true"   
+    "MQ Ganon Pot Light End 2": "true"
 "Ganon Castle Forest Trial Entrance":
   dungeon: Ganon
   exits:
@@ -286,7 +286,7 @@
     GANON_TRIAL_SHADOW: "can_use_light_arrows"
   locations:
     "MQ Ganon Pot Shadow End 1": "true"
-    "MQ Ganon Pot Shadow End 2": "true" 
+    "MQ Ganon Pot Shadow End 2": "true"
 "Ganon Castle Stairs":
   region: GANON_CASTLE
   exits:

@@ -5,15 +5,15 @@
     "Beneath The Well North Section": "(setting(beneathWell, open) || (can_pass_gibdo && has_blue_potion)) && can_reset_time_dungeon"
     "Beneath The Well East Section": "(setting(beneathWell, open) || (can_pass_gibdo && has_beans)) && can_reset_time_dungeon"
 "Beneath The Well Wallmaster Near Entrance":
-  region: NONE
+  region: BUFFER_DELAYED
   exits:
     "VOID": "true"
 "Beneath The Well Wallmaster Near Fountain":
-  region: NONE
+  region: BUFFER_DELAYED
   exits:
     "VOID": "true"
 "Beneath The Well Wallmaster Near Exit":
-  region: NONE
+  region: BUFFER_DELAYED
   exits:
     "VOID": "true"
 "Beneath The Well North Section":

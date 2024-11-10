@@ -14,11 +14,11 @@
     "Spirit Temple Flying Pot Lobby 1": "soul_flying_pot"
     "Spirit Temple Flying Pot Lobby 2": "soul_flying_pot"
 "Spirit Temple Wallmaster Child Rupees":
-  region: NONE
+  region: BUFFER_DELAYED
   exits:
     "VOID": "true"
 "Spirit Temple Wallmaster Adult Climb":
-  region: NONE
+  region: BUFFER_DELAYED
   exits:
     "VOID": "true"
 "Spirit Temple Child Entrance":

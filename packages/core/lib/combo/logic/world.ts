@@ -480,7 +480,7 @@ export class LogicPassWorld {
         const ageChange = area.age_change ?? (game === 'oot' ? true : false);
         const dungeon = area.dungeon || null;
         let region = area.region;
-        if (region !== 'NONE' && region !== 'ENTRANCE') {
+        if (region !== 'NONE' && region !== 'ENTRANCE' && region !== 'BUFFER' && region !== 'BUFFER_DELAYED') {
           region = region ? gameId(game, region, '_') : undefined;
         }
         if (dungeon) {
@@ -506,7 +506,7 @@ export class LogicPassWorld {
           throw new Error(`Undefined region for area ${name}`);
         }
 
-        if (region !== 'ENTRANCE' && REGIONS[region as keyof typeof REGIONS] === undefined) {
+        if (region !== 'ENTRANCE' && region !== 'BUFFER' && region !== 'BUFFER_DELAYED' && REGIONS[region as keyof typeof REGIONS] === undefined) {
           throw new Error(`Unknown region ${region}`);
         }
 

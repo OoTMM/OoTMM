@@ -24,15 +24,15 @@
     "MQ Spirit Temple Pot Entrance 3": "true"
     "MQ Spirit Temple Pot Entrance 4": "true"
 "Spirit Temple Wallmaster Child Sun":
-  region: NONE
+  region: BUFFER_DELAYED
   exits:
     "VOID": "true"
 "Spirit Temple Wallmaster Adult Climb":
-  region: NONE
+  region: BUFFER_DELAYED
   exits:
     "VOID": "true"
 "Spirit Temple Wallmaster Statue":
-  region: NONE
+  region: BUFFER_DELAYED
   exits:
     "VOID": "true"
 "Spirit Temple Child Side":
@@ -43,7 +43,7 @@
     SPIRIT_PARADOX: "has_bombchu && can_hammer"
   locations:
     "MQ Spirit Temple Map Chest": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (!setting(restoreBrokenActors) || soul_keese) && (can_use_sticks || has_weapon || (has_explosives && has_nuts))"
-    "MQ Spirit Temple Map Room Back Chest": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (!setting(restoreBrokenActors) || soul_keese) && soul_redead_gibdo && soul_enemy(SOUL_ENEMY_STALFOS) && soul_keese && soul_enemy(SOUL_ENEMY_ANUBIS) && has_weapon && has_bombchu && can_use_slingshot && has_fire" 
+    "MQ Spirit Temple Map Room Back Chest": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (!setting(restoreBrokenActors) || soul_keese) && soul_redead_gibdo && soul_enemy(SOUL_ENEMY_STALFOS) && soul_keese && soul_enemy(SOUL_ENEMY_ANUBIS) && has_weapon && has_bombchu && can_use_slingshot && has_fire"
     "MQ Spirit Temple Paradox Chest": "event(SPIRIT_PARADOX)"
     "MQ Spirit Temple Pot Child Entrance": "true"
     "MQ Spirit Temple Pot Child Boulders 1": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (!setting(restoreBrokenActors) || soul_keese) && (can_use_sticks || has_weapon || (has_explosives && has_nuts)) && has_bombchu && can_use_slingshot"
@@ -62,14 +62,14 @@
   events:
     SPIRIT_PARADOX: "can_hammer && small_keys_spirit(7)" #Adult needs to use up a key just to reach the switch.
   locations:
-    "MQ Spirit Temple Child Upper Ground Chest": "soul_like_like && soul_beamos && soul_enemy(SOUL_ENEMY_BABY_DODONGO) && has_explosives" #Explosives are enough for every enemy in this room 
+    "MQ Spirit Temple Child Upper Ground Chest": "soul_like_like && soul_beamos && soul_enemy(SOUL_ENEMY_BABY_DODONGO) && has_explosives" #Explosives are enough for every enemy in this room
     "MQ Spirit Temple Child Upper Ledge Chest": "can_hookshot"
     "MQ Spirit Temple Pot Child Climb": "true"
 "Spirit Temple Statue":
   dungeon: Spirit
   exits:
     "Spirit Temple Wallmaster Statue": "soul_wallmaster"
-    "Spirit Temple Wallmaster Adult Climb": "has_fire_arrows && can_reflect_light && soul_wallmaster" # TODO: Check this 
+    "Spirit Temple Wallmaster Adult Climb": "has_fire_arrows && can_reflect_light && soul_wallmaster" # TODO: Check this
     "Spirit Temple Child Upper": "small_keys_spirit(7)"
     "Spirit Temple Sun Block Room": "is_adult || (can_play_time || can_play_elegy) || has_hover_boots" #Adult's long legs make the jumps easy
     "Spirit Temple Adult Lower": "has_fire_arrows && can_reflect_light && soul_enemy(SOUL_ENEMY_STALFOS) && soul_wallmaster && has_weapon"
@@ -115,7 +115,7 @@
   locations:
     "MQ Spirit Temple Purple Leever Chest": "can_longshot && soul_leever && has_weapon"
     "MQ Spirit Temple Symphony Room Chest": "small_keys_spirit(7) && can_hammer && can_play_time && can_play_epona && can_play_sun && can_play_storms && can_play_zelda"
-    "MQ Spirit Temple GS Leever Room": "gs && can_collect_distance" 
+    "MQ Spirit Temple GS Leever Room": "gs && can_collect_distance"
     "MQ Spirit Temple GS Symphony Room": "gs && can_collect_distance && small_keys_spirit(7) && can_hammer && can_play_time && can_play_epona && can_play_sun && can_play_storms && can_play_zelda"
     "MQ Spirit Temple SR Lobby In Water": "can_hammer"
     "MQ Spirit Temple SR Lobby After Water Near Stairs": "true"

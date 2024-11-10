@@ -3202,7 +3202,7 @@
     "Beneath The Graveyard Pot Dampe 09": "true"
     "Beneath The Graveyard Pot Dampe 10": "true"
 "Beneath The Graveyard Night 3 Wallmaster":
-  region: NONE
+  region: BUFFER_DELAYED
   exits:
     "VOID": "true"
 "Road to Ikana Top":

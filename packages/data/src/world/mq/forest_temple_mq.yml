@@ -7,11 +7,11 @@
     "MQ Forest Temple First Room Chest": "can_hit_triggers_distance || can_hookshot || has_explosives || has_hover_boots || can_use_din || (has_weapon && (has(MAGIC_UPGRADE) || has(SHARED_MAGIC_UPGRADE)))" #Many ways to deal with the Skulltula in the way.
     "MQ Forest Temple GS Entryway": "gs && can_collect_distance"
 "Forest Temple Wallmaster West":
-  region: NONE
+  region: BUFFER_DELAYED
   exits:
     "VOID": "true"
 "Forest Temple Wallmaster East":
-  region: NONE
+  region: BUFFER_DELAYED
   exits:
     "VOID": "true"
 "Forest Temple Main":

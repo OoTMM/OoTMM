@@ -950,7 +950,7 @@ export class LogicPassEntrances {
     let changed = false;
     for (const areaName of Object.keys(world.areas)) {
       const a = world.areas[areaName];
-      if (a.region === 'NONE' || a.region === 'ENTRANCE')
+      if (a.region === 'NONE' || a.region === 'ENTRANCE' || a.region === 'BUFFER' || a.region === 'BUFFER_DELAYED')
         continue;
       /* We need to propagate the region */
       for (const exitName of Object.keys(a.exits)) {
@@ -965,6 +965,14 @@ export class LogicPassEntrances {
       }
     }
     return changed;
+  }
+
+  private propagateRegions(i: number) {
+    for (;;) {
+      if (!this.propagateRegionsStep(i)) {
+        break;
+      }
+    }
   }
 
   private replaceAllRegions(worldId: number, oldRegion: string, newRegion: string) {
@@ -984,32 +992,19 @@ export class LogicPassEntrances {
     this.replaceAllRegions(worldId, 'MM_GORON_RACETRACK', 'ENTRANCE');
   }
 
-  private propagateRegions() {
-    /* Simplify */
-    if (!this.input.settings.extraHintRegions) {
-      for (let i = 0; i < this.worlds.length; ++i) {
+  private processRegions() {
+    for (let i = 0; i < this.worlds.length; ++i) {
+      /* Simplify */
+      if (!this.input.settings.extraHintRegions) {
         this.simplifyRegions(i);
       }
-    }
 
-    /* Propagate regions */
-    for (let i = 0; i < this.worlds.length; ++i) {
-      for (;;) {
-        if (!this.propagateRegionsStep(i)) {
-          break;
-        }
-      }
-    }
-
-    /* Check for unassigned regions */
-    for (let i = 0; i < this.worlds.length; ++i) {
-      const world = this.worlds[i];
-      for (const areaName of Object.keys(world.areas)) {
-        const a = world.areas[areaName];
-        if (a.region === 'ENTRANCE') {
-          this.changeRegion(i, areaName, 'NAMELESS');
-        }
-      }
+      this.propagateRegions(i);
+      this.replaceAllRegions(i, 'BUFFER', 'ENTRANCE');
+      this.propagateRegions(i);
+      this.replaceAllRegions(i, 'BUFFER_DELAYED', 'ENTRANCE');
+      this.propagateRegions(i);
+      this.replaceAllRegions(i, 'ENTRANCE', 'NAMELESS');
     }
   }
 
@@ -1090,7 +1085,8 @@ export class LogicPassEntrances {
       this.validate();
     }
 
-    this.propagateRegions();
+    this.processRegions();
+
     for (let i = 0; i < this.worlds.length; ++i) {
       const w = this.worlds[i];
       optimizeStartingAndPool(w, i, this.input.startingItems, this.input.allItems);

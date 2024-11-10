@@ -14,7 +14,7 @@
     "Gerudo Training Grounds Entrance Big Fairy": "can_play_storms"
     "Gerudo Training Grounds Wonder Item Beamos Room": "can_use_bow"
 "Gerudo Training Grounds Wallmaster":
-  region: NONE
+  region: BUFFER_DELAYED
   exits:
     "VOID": "true"
 "Gerudo Training Grounds Slopes":

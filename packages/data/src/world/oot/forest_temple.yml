@@ -7,11 +7,11 @@
     "Forest Temple Tree Small Key": "true"
     "Forest Temple GS Entrance": "gs && (has_ranged_weapon || has_explosives || can_use_din)"
 "Forest Temple Wallmaster West":
-  region: NONE
+  region: BUFFER_DELAYED
   exits:
     "VOID": "true"
 "Forest Temple Wallmaster East":
-  region: NONE
+  region: BUFFER_DELAYED
   exits:
     "VOID": "true"
 "Forest Temple Main":

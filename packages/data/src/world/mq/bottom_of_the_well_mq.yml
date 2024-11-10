@@ -9,15 +9,15 @@
     "Bottom of the Well": "true"
     "Bottom of the Well Main": "is_child"
 "Bottom of the Well Wallmaster Main":
-  region: NONE
+  region: BUFFER_DELAYED
   exits:
     "VOID": "true"
 "Bottom of the Well Wallmaster Basement":
-  region: NONE
+  region: BUFFER_DELAYED
   exits:
     "VOID": "true"
 "Bottom of the Well Wallmaster Pit":
-  region: NONE
+  region: BUFFER_DELAYED
   exits:
     "VOID": "true"
 "Bottom of the Well Main":

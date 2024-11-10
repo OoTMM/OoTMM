@@ -4,7 +4,7 @@
     "Graveyard Upper": "true"
     "Shadow Temple Pit": "has_hover_boots || can_hookshot || climb_anywhere || glitch_megaflip"
 "Shadow Temple Wallmaster":
-  region: NONE
+  region: BUFFER_DELAYED
   exits:
     "VOID": "true"
 "Shadow Temple Pit":
