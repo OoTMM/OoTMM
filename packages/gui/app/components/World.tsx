@@ -35,7 +35,7 @@ export function World() {
             )}
           </form>
         </div>}
-        {settings.games !== 'mm' && <div>
+        {settings.games !== 'oot' && <div>
           <h2>Other</h2>
           <form>
             <Setting setting='worldLayoutMm'/>
