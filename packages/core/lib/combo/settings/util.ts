@@ -3,7 +3,6 @@ import type { PartialDeep } from 'type-fest';
 import type { Settings, SettingsBase } from './type';
 import { SETTINGS } from './data';
 import { DEFAULT_TRICKS, TRICKS } from './tricks';
-import { DEFAULT_DUNGEONS } from './dungeons';
 import { DEFAULT_SPECIAL_COND, DEFAULT_SPECIAL_CONDS, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS } from './special-conds';
 import { SettingsPatch, patchArray } from './patch';
 import { SETTINGS_DEFAULT_HINTS } from './hints';
@@ -18,7 +17,6 @@ export const DEFAULT_SETTINGS: Settings = { ...SETTINGS.map(s => {
   startingItems: {},
   junkLocations: [] as string[],
   tricks: [ ...DEFAULT_TRICKS ],
-  dungeon: { ...DEFAULT_DUNGEONS },
   specialConds: { ...DEFAULT_SPECIAL_CONDS },
   plando: { locations: {} },
   hints: [ ...SETTINGS_DEFAULT_HINTS ],
@@ -191,11 +189,6 @@ export function makeSettings(arg: PartialDeep<Settings>): Settings {
     result.tricks = sortCopyArray(arg.tricks);
   }
 
-  /* Apply dungeon settings */
-  if (arg.dungeon !== undefined) {
-    result.dungeon = { ...DEFAULT_DUNGEONS, ...arg.dungeon };
-  }
-
   /* Apply special conds */
   if (arg.specialConds !== undefined) {
     for (const k in arg.specialConds) {
@@ -237,11 +230,6 @@ export function mergeSettings(settings: Settings, patch: SettingsPatch): Setting
   /* Apply tricks */
   if (patch.tricks !== undefined)
     s.tricks = patchArray(s.tricks, patch.tricks);
-
-  /* Apply dungeons */
-  if (patch.dungeon) {
-    s.dungeon = { ...s.dungeon, ...patch.dungeon };
-  }
 
   /* Apply special conds */
   if (patch.specialConds !== undefined) {

@@ -49,20 +49,7 @@ test("Can make a seed - MQ Extrasanity", async () => {
     shuffleWonderItemsOot: 'all',
     shuffleWonderItemsMm: true,
     fairySpotShuffleOot: true,
-    dungeon: {
-      DT: 'mq',
-      DC: 'mq',
-      JJ: 'mq',
-      Forest: 'mq',
-      Fire: 'mq',
-      Water: 'mq',
-      Spirit: 'mq',
-      Shadow: 'mq',
-      BotW: 'mq',
-      IC: 'mq',
-      GTG: 'mq',
-      Ganon: 'mq',
-    }
+    mqDungeons: { type: 'all' },
   });
   expect(res).toBeDefined();
 });

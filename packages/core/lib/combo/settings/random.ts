@@ -634,21 +634,15 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
 
   /* MQ - 25% Disabled, 25% Enabled, 50% Individual */
   if (rnd.mq) {
-    let f: () => 'vanilla' | 'mq';
-
     switch (randomInt(random, 4)) {
     case 0:
-      f = () => 'vanilla';
       break;
     case 1:
-      f = () => 'mq';
+      base.mqDungeons = { type: 'all' };
       break;
     default:
-      f = () => booleanWeighted(random, 0.5) ? 'vanilla' : 'mq';
-    }
-
-    for (let k in base.dungeon) {
-      base.dungeon[k as keyof typeof base.dungeon] = f();
+      base.mqDungeons = { type: 'random' };
+      break;
     }
   }
 

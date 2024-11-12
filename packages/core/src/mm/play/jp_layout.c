@@ -32,7 +32,7 @@ static void ComboPlay_SpawnLayoutDependantTorch(PlayState* play, float x, float 
 
 void ComboPlay_JpLayout(PlayState* play)
 {
-    if (!Config_Flag(CFG_MM_JP_LAYOUT) || play->sceneId != SCE_MM_DEKU_PALACE)
+    if (!Config_Flag(CFG_MM_JP_LAYOUT_DEKU_PALACE) || play->sceneId != SCE_MM_DEKU_PALACE)
         return;
 
     switch (play->roomCtx.curRoom.num)

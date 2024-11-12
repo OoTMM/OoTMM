@@ -213,7 +213,7 @@ export const CONFVARS = [
   'OOT_MUST_START_WITH_MS',
   'OOT_SPIN_UPGRADE',
   'SHARED_SPIN_UPGRADE',
-  'MM_JP_LAYOUT',
+  'MM_JP_LAYOUT_DEKU_PALACE',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

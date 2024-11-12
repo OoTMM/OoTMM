@@ -6,7 +6,7 @@ import { gameId } from '../util';
 import { Expr, exprTrue, MM_TIME_SLICES } from './expr';
 import { ExprParser } from './expr-parser';
 import { DATA_HINTS_POOL } from '../data';
-import { DUNGEONS, SETTINGS, Settings } from '../settings';
+import { SETTINGS, Settings } from '../settings';
 import { Monitor } from '../monitor';
 import { defaultPrices } from './price';
 import { Item, itemByID, ItemHelpers, Items } from '../items';
@@ -19,7 +19,9 @@ export const WORLD_FLAGS = [
   'silverRupeePouches',
   'openDungeonsMm',
   'openDungeonsOot',
-  'mmPreActivatedOwls'
+  'mmPreActivatedOwls',
+  'mqDungeons',
+  'jpLayouts',
 ] as const;
 
 type WorldFlag = typeof WORLD_FLAGS[number];
@@ -164,8 +166,6 @@ export type World = {
   songLocations: Set<string>;
   warpLocations: Set<string>;
   prices: number[];
-  mq: Set<string>;
-  mmIsJP: boolean;
   bossIds: number[];
   entranceOverrides: Map<string, string>;
   preCompleted: Set<string>;
@@ -275,8 +275,6 @@ export function cloneWorld(world: World): World {
     songLocations: new Set(world.songLocations),
     warpLocations: new Set(world.warpLocations),
     prices: [...world.prices],
-    mq: new Set(world.mq),
-    mmIsJP: world.mmIsJP,
     preCompleted: new Set(world.preCompleted),
     bossIds: [...world.bossIds],
     entranceOverrides: new Map(world.entranceOverrides),
@@ -369,29 +367,8 @@ export class LogicPassWorld {
     /* Expr parser settings */
     exprParsers.mm.addVar('STRAY_FAIRY_COUNT', this.state.settings.strayFairyRewardCount);
 
-    /* MQ */
-    const mq = new Set<string>;
-    let d: keyof typeof DUNGEONS;
-    for (d in DUNGEONS) {
-      if (this.state.settings.dungeon[d] === 'mq') {
-        mq.add(d);
-      } else if (this.state.settings.dungeon[d] === 'random') {
-        if (this.state.random.next() & 0x10000) {
-          mq.add(d);
-        }
-      }
-    }
-
-    /* MM JP layout */
-    let mmIsJP = false;
-    if (this.state.settings.worldLayoutMm === 'jp') {
-      mmIsJP = true;
-    } else if (this.state.settings.worldLayoutMm === 'random') {
-      mmIsJP = this.state.random.next() & 0x10000 ? true : false;
-    }
-
     /* Prices */
-    const prices = defaultPrices(mq);
+    const prices = defaultPrices(resolvedFlags);
 
     return {
       areas: {},
@@ -404,8 +381,6 @@ export class LogicPassWorld {
       songLocations: new Set(),
       warpLocations: new Set(),
       prices,
-      mq,
-      mmIsJP,
       preCompleted: new Set(),
       bossIds: Object.values(BOSS_INDEX_BY_DUNGEON),
       entranceOverrides: new Map,
@@ -466,13 +441,18 @@ export class LogicPassWorld {
     for (let areaSetName in data) {
       let areaSet = (data as any)[areaSetName];
       /* Handle MQ */
-      if (game === 'oot' && this.world.mq.has(areaSetName)) {
+      if (game === 'oot' && WORLD.mq.hasOwnProperty(areaSetName) && this.world.resolvedFlags.mqDungeons.has(areaSetName)) {
         areaSet = (WORLD.mq as any)[areaSetName];
       }
-      if (areaSetName === 'overworld_us' && this.world.mmIsJP)
-        continue;
-      if (areaSetName === 'overworld_jp' && !this.world.mmIsJP)
-        continue;
+      /* Handle JP layouts */
+      if (game === 'mm') {
+        const areaSetUs = (WORLD.mm_us as any)[areaSetName];
+        const areaSetJp = (WORLD.mm_jp as any)[areaSetName];
+        if (areaSetUs !== undefined && areaSetJp !== undefined) {
+          const areaSetPatch = this.world.resolvedFlags.jpLayouts.has(areaSetName) ? areaSetJp : areaSetUs;
+          areaSet = { ...areaSet, ...areaSetPatch };
+        }
+      }
       for (let name in areaSet) {
         const area = areaSet[name];
         name = gameId(game, name, ' ');

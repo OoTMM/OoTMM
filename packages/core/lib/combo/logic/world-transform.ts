@@ -1325,7 +1325,7 @@ export class LogicPassWorldTransform {
     if (settings.smallKeyShuffleOot !== 'anywhere') {
       for (let i = 0; i < this.state.worlds.length; ++i) {
         const world = this.state.worlds[i];
-        if (!world.mq.has('Fire')) {
+        if (!world.resolvedFlags.mqDungeons.has('Fire')) {
           this.removePlayerItem(makePlayerItem(Items.OOT_SMALL_KEY_FIRE, i), 1);
         }
       }

@@ -498,20 +498,7 @@ const PRESET_HELL = makeSettings({
       masksOot: true
     }
   },
-  dungeon: {
-    DT: 'mq',
-    DC: 'mq',
-    JJ: 'mq',
-    BotW: 'mq',
-    Forest: 'mq',
-    Fire: 'mq',
-    Water: 'mq',
-    Shadow: 'mq',
-    Spirit: 'mq',
-    IC: 'mq',
-    GTG: 'mq',
-    Ganon: 'mq'
-  },
+  mqDungeons: { type: 'all' },
   hints: [
     { type: 'foolish', amount: 'max', extra: 2 },
   ],

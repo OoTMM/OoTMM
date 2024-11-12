@@ -5,7 +5,6 @@ import { SettingsEditor } from './SettingsEditor';
 import { StartingItems } from './StartingItems';
 import { Tricks } from './Tricks';
 import { JunkLocations } from './JunkLocations';
-import { World } from './World';
 import { SpecialConds } from './SpecialConds';
 import { Plando } from './Plando';
 import { CosmeticsEditor } from './Cosmetics';
@@ -35,7 +34,7 @@ export function Generator() {
         <TabSettingsEditor name="Price" category="main.prices"/>
         <TabSettingsEditor name="Events" category="main.events"/>
         <TabSettingsEditor name="Cross-Game" category="main.cross"/>
-        <Tab name="World"><World/></Tab>
+        <TabSettingsEditor name="World" category="main.world"/>
         <Tab name="Special Conditions"><SpecialConds/></Tab>
         <Tab name="Starting Items"><StartingItems/></Tab>
         <TabSettingsEditor name="Misc." category="main.misc"/>

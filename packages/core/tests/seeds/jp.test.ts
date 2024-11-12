@@ -4,7 +4,7 @@ import { makeTestSeed } from '../helper';
 
 test("Can make a seed - JP Layout", async () => {
   const res = await makeTestSeed("JP", {
-    worldLayoutMm: 'jp',
+    jpLayouts: { type: 'all' },
   });
   expect(res).toBeDefined();
 });

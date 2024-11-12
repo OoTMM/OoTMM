@@ -1,6 +1,6 @@
-import { Random, randomInt } from "../random";
-import { Settings } from "../settings";
-import { World } from "./world";
+import { Random, randomInt } from '../random';
+import { Settings } from '../settings';
+import { ResolvedWorldFlags, World } from './world';
 
 const OOT_SHOP_KOKIRI = [ 10, 20, 60, 30, 15, 30, 10, 40 ];
 const OOT_SHOP_BOMBCHU = [ 180, 180, 180, 180, 100, 100, 100, 100 ];
@@ -87,8 +87,9 @@ export const PRICE_RANGES: {[k: string]: number} = {};
 
 export type PriceRandoType = 'vanilla' | 'affordable' | 'random' | 'weighted';
 
-export function defaultPrices(mq: Set<string>) {
+export function defaultPrices(flags: ResolvedWorldFlags) {
   const p = [...DEFAULT_PRICES];
+  const mq = flags.mqDungeons;
 
   /* Handle MQ */
   const ootScrubs: number[][] = [];

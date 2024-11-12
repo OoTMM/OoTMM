@@ -5,7 +5,7 @@ import { isEntranceShuffle } from '../logic/helpers';
 import { GI, DATA_HINTS_POOL } from '../data';
 import { Game } from '../config';
 import { World, WorldCheck } from '../logic/world';
-import { DUNGEONS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS } from '../settings';
+import { SETTINGS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS } from '../settings';
 import { HINTS_PATHS, HintGossip, WorldHints } from '../logic/hints';
 import { countMapAdd, gameId, padBuffer16, toI8Buffer, toU16Buffer, toU32Buffer, toU8Buffer } from '../util';
 import { Patchfile } from './patchfile';
@@ -772,11 +772,11 @@ const randomizerDungeonsBits = (worldId: number, logic: LogicResult): Uint8Array
   ]
   let mq = 0;
   let preCompleted = 0;
-  const dungeons = Object.keys(DUNGEONS);
   const world = logic.worlds[worldId];
-  for (let i = 0; i < dungeons.length; ++i) {
-    const dungeon = dungeons[i];
-    if (world.mq.has(dungeon)) {
+  const settingDataMQ = SETTINGS.find(x => x.key === 'mqDungeons')!;
+  for (let i = 0; i < settingDataMQ.values.length; ++i) {
+    const dungeon = settingDataMQ.values[i].value;
+    if (world.resolvedFlags.mqDungeons.has(dungeon)) {
       mq |= 1 << i;
     }
   }
@@ -1040,7 +1040,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     OOT_MUST_START_WITH_MS: mustStartWithMasterSword(settings),
     OOT_SPIN_UPGRADE: settings.spinUpgradeOot,
     SHARED_SPIN_UPGRADE: settings.sharedSpinUpgrade,
-    MM_JP_LAYOUT: world.mmIsJP,
+    MM_JP_LAYOUT_DEKU_PALACE: world.resolvedFlags.jpLayouts.has('DekuPalace'),
   };
 
   for (const v in exprs) {

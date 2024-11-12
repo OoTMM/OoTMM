@@ -70,7 +70,7 @@ export class LogicPassSpoiler {
   private writeSettings() {
     this.writer.indent('Settings');
     for (const s in this.state.settings) {
-      if (s === 'startingItems' || s === 'tricks' || s === 'junkLocations' || s === 'dungeon' || s === 'specialConds' || s === 'plando' || s === 'hints') {
+      if (s === 'startingItems' || s === 'tricks' || s === 'junkLocations' || s === 'specialConds' || s === 'plando' || s === 'hints') {
         continue;
       }
       if (this.state.settings.goal !== 'triforce' && (s === 'triforceGoal' || s === 'triforcePieces')) {
@@ -155,32 +155,6 @@ export class LogicPassSpoiler {
     this.writer.indent('Junk Locations');
     for (const location of junkLocations) {
       this.writer.write(`${location}`);
-    }
-    this.writer.unindent('');
-  }
-
-  private writeMQ() {
-    let worlds = this.state.worlds;
-    if (!this.state.settings.distinctWorlds) {
-      worlds = [this.state.worlds[0]];
-    }
-    if (!worlds.some(world => world.mq.size > 0)) {
-      return;
-    }
-
-    this.writer.indent('MQ Dungeons');
-    for (let i = 0; i < worlds.length; ++i) {
-      if (worlds.length > 1) {
-        this.writer.indent(`World ${i + 1}`);
-      }
-
-      for (const d of worlds[i].mq) {
-        this.writer.write(`${d}`);
-      }
-
-      if (worlds.length > 1) {
-        this.writer.unindent('');
-      }
     }
     this.writer.unindent('');
   }
@@ -464,7 +438,6 @@ export class LogicPassSpoiler {
     this.writeStartingItems();
     this.writeJunkLocations();
     this.writeWorldFlags();
-    this.writeMQ();
     this.writePreCompleted();
     this.writeEntrances();
     this.writeHints();

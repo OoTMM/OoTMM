@@ -12,20 +12,7 @@ test("Can make a seed - MQ Boss/Dungeon ER", async () => {
     erMinorDungeons: true,
     erSpiderHouses: true,
     erIkanaCastle: true,
-    dungeon: {
-      DT: 'mq',
-      DC: 'mq',
-      JJ: 'mq',
-      Forest: 'mq',
-      Fire: 'mq',
-      Water: 'mq',
-      Spirit: 'mq',
-      Shadow: 'mq',
-      BotW: 'mq',
-      IC: 'mq',
-      GTG: 'mq',
-      Ganon: 'mq',
-    }
+    mqDungeons: { type: 'all' }
   });
   expect(res).toBeDefined();
 });
