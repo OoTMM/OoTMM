@@ -13,6 +13,10 @@ All notable changes to this project will be documented in this file.
 - Removed the cutscenes from the Skull Kid paintings and the Skulltulas spawning from big jars, tree or chandelier in MM Spider Houses.
 - Bombchu are now accounted in logic for the SSH Gold Room hives.
 
+### Fixed
+
+- Spin attack with child sword being ridiculously small. Gilded sword spin is now as big as Biggoron sword spin.
+
 ## [26.1] - 2024-11-09
 
 ### Added

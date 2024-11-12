@@ -79,13 +79,13 @@ void EnMThunder_Init(EnMThunder* this, PlayState* play) {
         {
             player->unk_858 = 1.f;
             this->unk_1C6 = 0;
-            this->unk_1C9 = ((this->unk_1C7 == 1) ? (1 + gSharedCustomSave.extraSwordsOot) * 2 : 8);
+            this->unk_1C9 = ((this->unk_1C7 == 1) ? (2 + gSharedCustomSave.extraSwordsOot) * 2 : 8);
             this->collider.elem.atDmgInfo.dmgFlags = D_80AA0458[this->unk_1C7];
         }
         else
         {
             this->unk_1C6 = 1;
-            this->unk_1C9 = ((this->unk_1C7 == 1) ? (1 + gSharedCustomSave.extraSwordsOot) : 4);
+            this->unk_1C9 = ((this->unk_1C7 == 1) ? (2 + gSharedCustomSave.extraSwordsOot) : 4);
             this->collider.elem.atDmgInfo.dmgFlags = D_80AA044C[this->unk_1C7];
         }
 
@@ -187,11 +187,11 @@ void func_808FF4F0(EnMThunder* this, PlayState* play) {
             if (player->unk_858 < 0.85f) {
                 this->collider.elem.atDmgInfo.dmgFlags = D_80AA044C[this->unk_1C7];
                 this->unk_1C6 = 1;
-                this->unk_1C9 = ((this->unk_1C7 == 1) ? (1 + gSharedCustomSave.extraSwordsOot) : 4);
+                this->unk_1C9 = ((this->unk_1C7 == 1) ? (2 + gSharedCustomSave.extraSwordsOot) : 4);
             } else {
                 this->collider.elem.atDmgInfo.dmgFlags = D_80AA0458[this->unk_1C7];
                 this->unk_1C6 = 0;
-                this->unk_1C9 = ((this->unk_1C7 == 1) ? (1 + gSharedCustomSave.extraSwordsOot) * 2 : 8);
+                this->unk_1C9 = ((this->unk_1C7 == 1) ? (2 + gSharedCustomSave.extraSwordsOot) * 2 : 8);
             }
 
             func_808FF0C0(this, func_80A9F9B4);
