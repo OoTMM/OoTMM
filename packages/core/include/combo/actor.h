@@ -12,77 +12,61 @@
 #define PARAMS_GET_U(p, s, n)   (((p) >> (s)) & NBITS_TO_MASK(n))
 #define PARAMS_GET_S(p, s, n)   (((p) & (NBITS_TO_MASK(n) << (s))) >> (s))
 
-#define ACTOR_FLAG_OOT_ATTENTION_ENABLED (1 << 0)
-#define ACTOR_FLAG_OOT_1            (1 << 1)
-#define ACTOR_FLAG_OOT_HOSTILE      (1 << 2)
-#define ACTOR_FLAG_OOT_NEUTRAL      (1 << 3)
 #define ACTOR_FLAG_OOT_4            (1 << 4)
 #define ACTOR_FLAG_OOT_5            (1 << 5)
 #define ACTOR_FLAG_OOT_6            (1 << 6)
-#define ACTOR_FLAG_OOT_REACT_TO_LENS (1 << 7)
-#define ACTOR_FLAG_OOT_8            (1 << 8)
 #define ACTOR_FLAG_OOT_9            (1 << 9)
 #define ACTOR_FLAG_OOT_10           (1 << 10)
-#define ACTOR_FLAG_OOT_ENKUSA_CUT   (1 << 11)
-#define ACTOR_FLAG_OOT_12           (1 << 12)
 #define ACTOR_FLAG_OOT_13           (1 << 13)
-#define ACTOR_FLAG_OOT_14           (1 << 14)
-#define ACTOR_FLAG_OOT_15           (1 << 15)
-#define ACTOR_FLAG_OOT_16           (1 << 16)
-#define ACTOR_FLAG_OOT_17           (1 << 17)
-#define ACTOR_FLAG_OOT_18           (1 << 18)
-#define ACTOR_FLAG_OOT_19           (1 << 19)
-#define ACTOR_FLAG_OOT_20           (1 << 20)
-#define ACTOR_FLAG_OOT_21           (1 << 21)
-#define ACTOR_FLAG_OOT_22           (1 << 22)
-#define ACTOR_FLAG_OOT_23           (1 << 23)
-#define ACTOR_FLAG_OOT_24           (1 << 24)
-#define ACTOR_FLAG_OOT_25           (1 << 25)
-#define ACTOR_FLAG_OOT_26           (1 << 26)
-#define ACTOR_FLAG_OOT_27           (1 << 27)
-#define ACTOR_FLAG_OOT_28           (1 << 28)
 #define ACTOR_FLAG_OOT_29           (1 << 29)
 #define ACTOR_FLAG_OOT_30           (1 << 30)
 #define ACTOR_FLAG_OOT_31           (1 << 31)
 
-#define ACTOR_FLAG_MM_ATTENTION_ENABLED         (1 << 0)
-#define ACTOR_FLAG_MM_2                         (1 << 1)
-#define ACTOR_FLAG_MM_HOSTILE                   (1 << 2)
-#define ACTOR_FLAG_MM_FRIENDLY                  (1 << 3)
 #define ACTOR_FLAG_MM_10                        (1 << 4)
 #define ACTOR_FLAG_MM_20                        (1 << 5)
 #define ACTOR_FLAG_MM_40                        (1 << 6)
-#define ACTOR_FLAG_MM_80                        (1 << 7)
-#define ACTOR_FLAG_MM_100                       (1 << 8)
 #define ACTOR_FLAG_MM_200                       (1 << 9)
 #define ACTOR_FLAG_MM_400                       (1 << 10)
 #define ACTOR_FLAG_MM_800                       (1 << 11)
-#define ACTOR_FLAG_MM_1000                      (1 << 12)
 #define ACTOR_FLAG_MM_2000                      (1 << 13)
-#define ACTOR_FLAG_MM_4000                      (1 << 14)
-#define ACTOR_FLAG_MM_8000                      (1 << 15)
-#define ACTOR_FLAG_MM_10000                     (1 << 16)
-#define ACTOR_FLAG_MM_CAN_PRESS_HEAVY_SWITCH    (1 << 17)
-#define ACTOR_FLAG_MM_40000                     (1 << 18)
-#define ACTOR_FLAG_MM_80000                     (1 << 19)
 #define ACTOR_FLAG_MM_100000                    (1 << 20)
 #define ACTOR_FLAG_MM_200000                    (1 << 21)
 #define ACTOR_FLAG_MM_400000                    (1 << 22)
-#define ACTOR_FLAG_MM_800000                    (1 << 23)
-#define ACTOR_FLAG_MM_1000000                   (1 << 24)
-#define ACTOR_FLAG_MM_UPDATE_DURING_OCARINA     (1 << 25)
-#define ACTOR_FLAG_MM_CAN_PRESS_SWITCH          (1 << 26)
-#define ACTOR_FLAG_MM_8000000                   (1 << 27)
 #define ACTOR_FLAG_MM_10000000                  (1 << 28)
 #define ACTOR_FLAG_MM_20000000                  (1 << 29)
-#define ACTOR_FLAG_MM_40000000                  (1 << 30)
 #define ACTOR_FLAG_MM_80000000                  (1 << 31)
 
 #if defined(GAME_OOT)
-# define ACTOR_FLAG_GRASS_DESTROYED     (1 << 11)
+# define ACTOR_FLAG_GRASS_DESTROYED             (1 << 11)
+# define ACTOR_FLAG_CARRY_X_ROT_INFLUENCE       (1 << 17)
+# define ACTOR_FLAG_SFX_ACTOR_POS_2             (1 << 19)
+# define ACTOR_AUDIO_FLAG_SFX_CENTERED_1        (1 << 20)
+# define ACTOR_AUDIO_FLAG_SFX_CENTERED_2        (1 << 21)
+# define ACTOR_FLAG_IGNORE_POINT_LIGHTS         (1 << 22)
+# define ACTOR_FLAG_SFX_TIMER                   (1 << 28)
 #endif
 
-#define ACTOR_FLAG_THROW_ONLY   (1 << 23)
+#if defined(GAME_MM)
+# define ACTOR_FLAG_CAN_PRESS_HEAVY_SWITCHES     (1 << 17)
+# define ACTOR_FLAG_FOCUS_ACTOR_REFINDABLE       (1 << 19)
+# define ACTOR_FLAG_CAMERA_DRIFT_ENABLED         (1 << 30)
+#endif
+
+#define ACTOR_FLAG_ATTENTION_ENABLED            (1 << 0)
+#define ACTOR_FLAG_HOSTILE                      (1 << 2)
+#define ACTOR_FLAG_FRIENDLY                     (1 << 3)
+#define ACTOR_FLAG_REACT_TO_LENS                (1 << 7)
+#define ACTOR_FLAG_TALK                         (1 << 8)
+#define ACTOR_FLAG_IGNORE_QUAKE                 (1 << 12)
+#define ACTOR_FLAG_CAN_ATTACH_TO_ARROW          (1 << 14)
+#define ACTOR_FLAG_ATTACHED_TO_ARROW            (1 << 15)
+#define ACTOR_FLAG_TALK_OFFER_AUTO_ACCEPTED     (1 << 16)
+#define ACTOR_FLAG_TALK_WITH_C_UP               (1 << 18)
+#define ACTOR_FLAG_THROW_ONLY                   (1 << 23)
+#define ACTOR_FLAG_SFX_FOR_PLAYER_BODY_HIT      (1 << 24)
+#define ACTOR_FLAG_UPDATE_DURING_OCARINA        (1 << 25)
+#define ACTOR_FLAG_CAN_PRESS_SWITCHES           (1 << 26)
+#define ACTOR_FLAG_LOCK_ON_DISABLED             (1 << 27)
 
 #define ACTORCAT_SWITCH         0x00
 #define ACTORCAT_BG             0x01
@@ -452,8 +436,8 @@ void* actorAddr(u16 actorId, u32 addr);
 #define DYNA_INTERACT_ACTOR_ON_TOP (1 << 0) // There is an actor standing on the collision of the dynapoly actor
 #define DYNA_INTERACT_PLAYER_ON_TOP (1 << 1) // The player actor is standing on the collision of the dynapoly actor
 #define DYNA_INTERACT_PLAYER_ABOVE (1 << 2) // The player is directly above the collision of the dynapoly actor (any distance above)
-#define DYNA_INTERACT_ACTOR_ON_SWITCH (1 << 3) // Like the ACTOR_ON_TOP flag but only actors with ACTOR_FLAG_CAN_PRESS_SWITCH
-#define DYNA_INTERACT_ACTOR_ON_HEAVY_SWITCH (1 << 4) // Like the ACTOR_ON_TOP flag but only actors with ACTOR_FLAG_CAN_PRESS_HEAVY_SWITCH
+#define DYNA_INTERACT_ACTOR_ON_SWITCH (1 << 3) // Like the ACTOR_ON_TOP flag but only actors with ACTOR_FLAG_CAN_PRESS_SWITCHES
+#define DYNA_INTERACT_ACTOR_ON_HEAVY_SWITCH (1 << 4) // Like the ACTOR_ON_TOP flag but only actors with ACTOR_FLAG_CAN_PRESS_HEAVY_SWITCHES
 
 void DynaPolyActor_Init(DynaPolyActor* dynaActor, s32 transformFlags);
 void Actor_UpdatePos(Actor *actor);
@@ -564,5 +548,32 @@ typedef enum NaviEnemy {
     /* 0xFF */ NAVI_ENEMY_NONE = 0xFF
 } NaviEnemy;
 #endif
+
+typedef enum NpcTalkState {
+    /* 0x0 */ NPC_TALK_STATE_IDLE, // NPC not currently talking to player
+    /* 0x1 */ NPC_TALK_STATE_TALKING, // NPC is currently talking to player
+    /* 0x2 */ NPC_TALK_STATE_ACTION, // An NPC-defined action triggered in the conversation
+    /* 0x3 */ NPC_TALK_STATE_ITEM_GIVEN // NPC finished giving an item and text box is done
+} NpcTalkState;
+
+typedef enum NpcTrackingMode {
+    /* 0x0 */ NPC_TRACKING_PLAYER_AUTO_TURN, // Determine tracking mode based on player position, see Npc_UpdateAutoTurn
+    /* 0x1 */ NPC_TRACKING_NONE, // Don't track the target (usually the player)
+    /* 0x2 */ NPC_TRACKING_HEAD_AND_TORSO, // Track target by turning the head and the torso
+    /* 0x3 */ NPC_TRACKING_HEAD, // Track target by turning the head
+    /* 0x4 */ NPC_TRACKING_FULL_BODY // Track target by turning the body, torso and head
+} NpcTrackingMode;
+
+typedef struct NpcInteractInfo {
+    /* 0x00 */ s16 talkState;
+    /* 0x02 */ s16 trackingMode;
+    /* 0x04 */ s16 autoTurnTimer;
+    /* 0x06 */ s16 autoTurnState;
+    /* 0x08 */ Vec3s headRot;
+    /* 0x0E */ Vec3s torsoRot;
+    /* 0x14 */ f32 yOffset; // Y position offset to add to actor position when calculating angle to target
+    /* 0x18 */ Vec3f trackPos;
+    /* 0x24 */ char unk_24[0x4];
+} NpcInteractInfo;
 
 #endif

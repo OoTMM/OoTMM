@@ -5,7 +5,7 @@
 #include "En_Bigpamet.h"
 #include "../En_Pametfrog/En_Pametfrog.h"
 
-#define FLAGS (ACTOR_FLAG_MM_ATTENTION_ENABLED | ACTOR_FLAG_MM_HOSTILE | ACTOR_FLAG_MM_10 | ACTOR_FLAG_MM_20 | ACTOR_FLAG_MM_400)
+#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_HOSTILE | ACTOR_FLAG_MM_10 | ACTOR_FLAG_MM_20 | ACTOR_FLAG_MM_400)
 
 void EnBigpamet_Init(Actor_EnBigpamet* this, PlayState* play);
 void EnBigpamet_Destroy(Actor_EnBigpamet* this, PlayState* play);
@@ -358,7 +358,7 @@ void func_80A2811C(Actor_EnBigpamet* this, PlayState* play) {
 
 void func_80A281B4(Actor_EnBigpamet* this) {
     this->actor.draw = NULL;
-    this->actor.flags &= ~ACTOR_FLAG_MM_ATTENTION_ENABLED;
+    this->actor.flags &= ~ACTOR_FLAG_ATTENTION_ENABLED;
     this->actionFunc = func_80A281DC;
 }
 
@@ -623,7 +623,7 @@ void func_80A28B98(Actor_EnBigpamet* this, PlayState* play) {
 
     this->actor.shape.rot.y = this->actor.world.rot.y;
     this->actor.bgCheckFlags &= ~BGCHECKFLAG_GROUND;
-    this->actor.flags &= ~ACTOR_FLAG_MM_ATTENTION_ENABLED;
+    this->actor.flags &= ~ACTOR_FLAG_ATTENTION_ENABLED;
     this->actor.params = ENBIGPAMET_0;
 
     if ((this->actor.parent->params == GEKKO_ON_SNAPPER) || (this->actor.parent->params == GEKKO_REAR_ON_SNAPPER) ||
@@ -675,7 +675,7 @@ void func_80A28DC0(Actor_EnBigpamet* this, PlayState* play) {
 
 void func_80A28E40(Actor_EnBigpamet* this) {
     Animation_MorphToPlayOnce(&this->snapperSkelAnime, (void*)gSnapperRearUpAnim, -2.0f);
-    this->actor.flags |= ACTOR_FLAG_MM_ATTENTION_ENABLED;
+    this->actor.flags |= ACTOR_FLAG_ATTENTION_ENABLED;
     this->actor.speed = 0.0f;
     this->actionFunc = func_80A28E98;
 }

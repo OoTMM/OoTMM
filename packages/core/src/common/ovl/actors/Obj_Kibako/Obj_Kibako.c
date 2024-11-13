@@ -4,7 +4,7 @@
 #include <combo/custom.h>
 #include "Obj_Kibako.h"
 
-#define FLAGS (ACTOR_FLAG_OOT_4 | ACTOR_FLAG_OOT_26)
+#define FLAGS (ACTOR_FLAG_OOT_4 | ACTOR_FLAG_CAN_PRESS_SWITCHES)
 
 void ObjKibako_Init(Actor_ObjKibako* this, PlayState* play);
 void ObjKibako_Destroy(Actor_ObjKibako* this, PlayState* play);
@@ -708,7 +708,7 @@ void ObjKibako_Held(Actor_ObjKibako* this, PlayState* play)
         } else {
             Actor_MoveWithGravity(&this->actor);
             ObjKibako_SetupThrown(this);
-            this->actor.flags &= ~ACTOR_FLAG_MM_CAN_PRESS_SWITCH;
+            this->actor.flags &= ~ACTOR_FLAG_CAN_PRESS_SWITCHES;
         }
         Actor_UpdateBgCheckInfo(play, &this->actor, 18.0f, 15.0f, 0.0f, UPDBGCHECKINFO_FLAG_WALL | UPDBGCHECKINFO_FLAG_FLOOR | UPDBGCHECKINFO_FLAG_MM_40);
     } else {

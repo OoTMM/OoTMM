@@ -131,7 +131,7 @@ void ObjMure_SpawnActors0(Actor_ObjMure* this, PlayState* play) {
                     ObjMure_SpawnActor(this, play, sSpawnActorIds[this->type], pos.x, pos.y, pos.z,
                                 actor->world.rot.x, actor->world.rot.y, actor->world.rot.z, sSpawnParams[this->type], i);
                 if (this->children[i] != NULL) {
-                    this->children[i]->flags |= ACTOR_FLAG_OOT_ENKUSA_CUT;
+                    this->children[i]->flags |= ACTOR_FLAG_GRASS_DESTROYED;
                     this->children[i]->room = actor->room;
                 }
                 break;
@@ -220,7 +220,7 @@ void ObjMure_CheckChildren(Actor_ObjMure* this, PlayState* play) {
         if (this->children[i] != NULL) {
             if (this->childrenStates[i] == OBJMURE_CHILD_STATE_0) {
                 if (this->children[i]->update != NULL) {
-                    if (this->children[i]->flags & ACTOR_FLAG_OOT_ENKUSA_CUT) {
+                    if (this->children[i]->flags & ACTOR_FLAG_GRASS_DESTROYED) {
                         this->childrenStates[i] = OBJMURE_CHILD_STATE_2;
                     }
                 } else {

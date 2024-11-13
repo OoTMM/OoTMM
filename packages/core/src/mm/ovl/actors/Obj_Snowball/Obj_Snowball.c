@@ -603,7 +603,7 @@ void ObjSnowball_Init(Actor_ObjSnowball* this, PlayState* play) {
 
     if (sp34) {
         this->actor.messageId = 0x238;
-        this->actor.flags |= ACTOR_FLAG_MM_ATTENTION_ENABLED;
+        this->actor.flags |= ACTOR_FLAG_ATTENTION_ENABLED;
         this->actor.targetArrowOffset = 1400.0f / 3.0f;
         Actor_SetFocus(&this->actor, 24.0f);
         this->actor.attentionRangeType = ATTENTION_RANGE_3;
@@ -659,7 +659,7 @@ void func_80B04350(Actor_ObjSnowball* this, PlayState* play) {
          (0x80000000 | 0x4000 | 0x800 | 0x400 | 0x100 | 0x8))) {
         this->actor.flags |= ACTOR_FLAG_MM_10;
         if (this->actor.home.rot.y == 1) {
-            this->actor.flags &= ~(ACTOR_FLAG_MM_ATTENTION_ENABLED | ACTOR_FLAG_MM_FRIENDLY);
+            this->actor.flags &= ~(ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_FRIENDLY);
         }
 
         if (this->collider.elements->base.acHitElem->atDmgInfo.dmgFlags & 0x4000) {

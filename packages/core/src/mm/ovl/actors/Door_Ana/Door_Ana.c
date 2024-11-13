@@ -2,7 +2,7 @@
 #include "Door_Ana.h"
 #include <assets/mm/objects/gameplay_field_keep.h>
 
-#define FLAGS (ACTOR_FLAG_MM_UPDATE_DURING_OCARINA)
+#define FLAGS (ACTOR_FLAG_UPDATE_DURING_OCARINA)
 
 void DoorAna_Init(DoorAna* this, PlayState* play);
 void DoorAna_Destroy(DoorAna* this, PlayState* play);

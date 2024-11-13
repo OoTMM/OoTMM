@@ -11,7 +11,7 @@
 #include <assets/oot/objects/object_tsubo.h>
 #include "Obj_Tsubo.h"
 
-#define FLAGS (ACTOR_FLAG_OOT_4 | ACTOR_FLAG_OOT_23)
+#define FLAGS (ACTOR_FLAG_OOT_4 | ACTOR_FLAG_THROW_ONLY)
 
 void ObjTsubo_Init(Actor_ObjTsubo* this, PlayState* play);
 void ObjTsubo_Destroy(Actor_ObjTsubo* this, PlayState* play2);

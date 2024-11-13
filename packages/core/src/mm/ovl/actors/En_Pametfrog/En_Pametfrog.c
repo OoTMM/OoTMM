@@ -4,7 +4,7 @@
 #include "En_Pametfrog.h"
 #include "../src/mm/actors.h"
 
-#define FLAGS (ACTOR_FLAG_MM_ATTENTION_ENABLED | ACTOR_FLAG_MM_HOSTILE | ACTOR_FLAG_MM_10 | ACTOR_FLAG_MM_20)
+#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_HOSTILE | ACTOR_FLAG_MM_10 | ACTOR_FLAG_MM_20)
 
 void EnPametfrog_Init(Actor_EnPametfrog* this, PlayState* play);
 void EnPametfrog_Destroy(Actor_EnPametfrog* this, PlayState* play);
@@ -402,7 +402,7 @@ void EnPametfrog_SetupRearOnSnapper(Actor_EnPametfrog* this) {
         Animation_PlayOnce(&this->skelAnime, (void*)gGekkoStandingIdleAnim);
     }
 
-    this->actor.flags &= ~ACTOR_FLAG_MM_ATTENTION_ENABLED;
+    this->actor.flags &= ~ACTOR_FLAG_ATTENTION_ENABLED;
     this->actor.params = GEKKO_ON_SNAPPER;
     this->actionFunc = EnPametfrog_RearOnSnapper;
 }
@@ -478,7 +478,7 @@ void EnPametfrog_SetupFallOffSnapper(Actor_EnPametfrog* this, PlayState* play) {
     this->actor.velocity.y = 15.0f;
     this->actor.world.rot.y = BINANG_ROT180(this->actor.child->world.rot.y);
     this->actor.shape.rot.y = this->actor.world.rot.y;
-    this->actor.flags |= ACTOR_FLAG_MM_ATTENTION_ENABLED;
+    this->actor.flags |= ACTOR_FLAG_ATTENTION_ENABLED;
     this->timer = 30;
     this->collider.base.ocFlags1 |= OC1_ON;
     yaw = Actor_WorldYawTowardPoint(&this->actor, &this->actor.home.pos);
@@ -1147,7 +1147,7 @@ void EnPametfrog_SetupCallSnapper(Actor_EnPametfrog* this, PlayState* play) {
 
     Animation_MorphToPlayOnce(&this->skelAnime, (void*)gGekkoCallAnim, 3.0f);
     Actor_PlaySfx(&this->actor, NA_SE_EN_FROG_GREET);
-    this->actor.flags &= ~ACTOR_FLAG_MM_ATTENTION_ENABLED;
+    this->actor.flags &= ~ACTOR_FLAG_ATTENTION_ENABLED;
     this->actor.colChkInfo.health = 6;
     this->actor.world.rot.y = Actor_WorldYawTowardPoint(&this->actor, &this->actor.home.pos);
     yawDiff = this->actor.yawTowardsPlayer - this->actor.world.rot.y;
@@ -1287,7 +1287,7 @@ void EnPametfrog_ApplyDamageEffect(Actor_EnPametfrog* this, PlayState* play) {
                 this->collider.base.acFlags &= ~AC_ON;
                 EnPametfrog_ApplyMagicArrowEffects(this, play);
                 Enemy_StartFinishingBlow(play, &this->actor);
-                this->actor.flags &= ~ACTOR_FLAG_MM_ATTENTION_ENABLED;
+                this->actor.flags &= ~ACTOR_FLAG_ATTENTION_ENABLED;
                 Audio_RestorePrevBgm();
                 EnPametfrog_SetupCutscene(this);
             } else if (this->actor.colChkInfo.damageEffect == GEKKO_DMGEFF_ZORA_BARRIER) {

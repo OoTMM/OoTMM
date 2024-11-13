@@ -11,7 +11,7 @@
 #include "../src/mm/actors.h"
 #include "Boss_01.h"
 
-#define FLAGS (ACTOR_FLAG_MM_ATTENTION_ENABLED | ACTOR_FLAG_MM_HOSTILE | ACTOR_FLAG_MM_10 | ACTOR_FLAG_MM_20)
+#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_HOSTILE | ACTOR_FLAG_MM_10 | ACTOR_FLAG_MM_20)
 
 #define ODOLWA_EFFECT_COUNT 100
 
@@ -772,7 +772,7 @@ void Boss01_Init(Actor_Boss01* this, PlayState* play)
         this->timers[TIMER_AFTERIMAGE_DESPAWN] = ODOLWA_GET_AFTERIMAGE_DESPAWN_TIMER(&this->actor);
         this->actor.world.rot.z = 0;
         this->actor.draw = Boss01_Afterimage_Draw;
-        this->actor.flags &= ~ACTOR_FLAG_MM_ATTENTION_ENABLED;
+        this->actor.flags &= ~ACTOR_FLAG_ATTENTION_ENABLED;
     } else {
         if (gMmExtraBoss.bossCycle & (1 << 0)) {
             Actor_SpawnAsChild(&play->actorCtx, &this->actor, play, ACTOR_DOOR_WARP1, 0.0f, 0.0f, 0.0f, 0, 0, 0,
@@ -878,7 +878,7 @@ void Boss01_IntroCutscene(Actor_Boss01* this, PlayState* play) {
             this->subCamId = Play_CreateSubCamera(play);
             Play_ChangeCameraStatus(play, CAM_ID_MAIN, CAM_STATUS_WAIT);
             Play_ChangeCameraStatus(play, this->subCamId, CAM_STATUS_ACTIVE);
-            this->actor.flags &= ~ACTOR_FLAG_MM_ATTENTION_ENABLED;
+            this->actor.flags &= ~ACTOR_FLAG_ATTENTION_ENABLED;
             this->cutsceneTimer = 0;
             this->cutsceneState = ODOLWA_INTRO_CS_STATE_LOOK_AT_PLAYER;
             this->subCamUp.x = 0.0f;
@@ -1010,7 +1010,7 @@ void Boss01_IntroCutscene(Actor_Boss01* this, PlayState* play) {
                 this->subCamId = SUB_CAM_ID_DONE;
                 Cutscene_StopManual(play, &play->csCtx);
                 Player_SetCsActionWithHaltedActors(play, &this->actor, PLAYER_CSACTION_END);
-                this->actor.flags |= ACTOR_FLAG_MM_ATTENTION_ENABLED;
+                this->actor.flags |= ACTOR_FLAG_ATTENTION_ENABLED;
                 MM_SET_EVENT_INF(EVENTINF_INTRO_CS_WATCHED_ODOLWA);
             }
             break;
@@ -1066,7 +1066,7 @@ void Boss01_SummonBugsCutscene(Actor_Boss01* this, PlayState* play) {
             this->subCamId = Play_CreateSubCamera(play);
             Play_ChangeCameraStatus(play, CAM_ID_MAIN, CAM_STATUS_WAIT);
             Play_ChangeCameraStatus(play, this->subCamId, CAM_STATUS_ACTIVE);
-            this->actor.flags &= ~ACTOR_FLAG_MM_ATTENTION_ENABLED;
+            this->actor.flags &= ~ACTOR_FLAG_ATTENTION_ENABLED;
             this->cutsceneState = ODOLWA_BUG_SUMMONING_CS_STATE_PLAYING_OR_DONE;
             this->actor.shape.rot.y = 0;
             this->actor.world.pos.z = 0.0f;
@@ -1106,7 +1106,7 @@ void Boss01_SummonBugsCutscene(Actor_Boss01* this, PlayState* play) {
                 this->subCamId = SUB_CAM_ID_DONE;
                 Cutscene_StopManual(play, &play->csCtx);
                 Player_SetCsActionWithHaltedActors(play, &this->actor, PLAYER_CSACTION_END);
-                this->actor.flags |= ACTOR_FLAG_MM_ATTENTION_ENABLED;
+                this->actor.flags |= ACTOR_FLAG_ATTENTION_ENABLED;
                 player->actor.world.rot.y = player->actor.shape.rot.y = -0x8000;
                 player->actor.world.pos.x = 0.0f;
                 player->actor.world.pos.z = -600.0f;
@@ -1972,7 +1972,7 @@ void Boss01_SetupDeathCutscene(Actor_Boss01* this, PlayState* play) {
     this->animEndFrame = Animation_GetLastFrame(gOdolwaDeathAnim);
     this->actionFunc = Boss01_DeathCutscene;
     Actor_PlaySfx(&this->actor, NA_SE_EN_DAIOCTA_DAMAGE);
-    this->actor.flags &= ~ACTOR_FLAG_MM_ATTENTION_ENABLED;
+    this->actor.flags &= ~ACTOR_FLAG_ATTENTION_ENABLED;
     this->disableCollisionTimer = 1000;
     this->cutsceneTimer = 0;
     this->cutsceneState = ODOLWA_DEATH_CS_STATE_STARTED;
@@ -1994,7 +1994,7 @@ void Boss01_DeathCutscene(Actor_Boss01* this, PlayState* play) {
     Camera* mainCam = Play_GetCamera(play, CAM_ID_MAIN);
 
     this->disableCollisionTimer = 1000;
-    this->actor.flags &= ~ACTOR_FLAG_MM_ATTENTION_ENABLED;
+    this->actor.flags &= ~ACTOR_FLAG_ATTENTION_ENABLED;
     SkelAnime_Update(&this->skelAnime);
     this->cutsceneTimer++;
     Math_ApproachZeroF(&this->actor.speed, 1.0f, 1.0f);
@@ -2124,7 +2124,7 @@ void Boss01_DeathCutscene(Actor_Boss01* this, PlayState* play) {
                 this->subCamId = SUB_CAM_ID_DONE;
                 Cutscene_StopManual(play, &play->csCtx);
                 Player_SetCsActionWithHaltedActors(play, &this->actor, PLAYER_CSACTION_END);
-                this->actor.flags &= ~ACTOR_FLAG_MM_ATTENTION_ENABLED;
+                this->actor.flags &= ~ACTOR_FLAG_ATTENTION_ENABLED;
             }
             break;
 
@@ -2253,7 +2253,7 @@ void Boss01_Update(Actor_Boss01* this, PlayState* play) {
         DECR(this->damagedTimer);
         DECR(this->damagedFlashTimer);
 
-        this->actor.flags |= ACTOR_FLAG_MM_ATTENTION_ENABLED;
+        this->actor.flags |= ACTOR_FLAG_ATTENTION_ENABLED;
         this->actionFunc(this, play);
         Actor_MoveWithGravity(&this->actor);
         this->actor.world.pos.x += this->additionalVelocityX;
@@ -3055,7 +3055,7 @@ void Boss01_Bug_SetupDead(Actor_Boss01* this, PlayState* play) {
     this->actor.speed = -15.0f;
     this->actor.velocity.y = 12.0f;
     this->actor.world.rot.y = this->actor.yawTowardsPlayer;
-    this->actor.flags &= ~ACTOR_FLAG_MM_ATTENTION_ENABLED;
+    this->actor.flags &= ~ACTOR_FLAG_ATTENTION_ENABLED;
 }
 
 void Boss01_Bug_SetupStunned(Actor_Boss01* this, PlayState* play) {

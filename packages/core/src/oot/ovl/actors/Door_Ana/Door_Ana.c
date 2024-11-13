@@ -8,7 +8,7 @@
 #include <assets/oot/objects/gameplay_field_keep.h>
 #include <combo/oot/play.h>
 
-#define FLAGS ACTOR_FLAG_OOT_25
+#define FLAGS ACTOR_FLAG_UPDATE_DURING_OCARINA
 
 void DoorAna_Init(Actor* thisx, PlayState* play);
 void DoorAna_Destroy(Actor* thisx, PlayState* play);

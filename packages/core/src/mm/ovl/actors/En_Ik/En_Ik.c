@@ -6,7 +6,7 @@
 
 // #include "overlays/actors/ovl_En_Clear_Tag/z_en_clear_tag.h"
 
-#define FLAGS (ACTOR_FLAG_MM_ATTENTION_ENABLED | ACTOR_FLAG_MM_HOSTILE | ACTOR_FLAG_MM_400)
+#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_HOSTILE | ACTOR_FLAG_MM_400)
 
 void EnIk_Init(Actor_EnIk* this, PlayState* play);
 void EnIk_Destroy(Actor_EnIk* this, PlayState* play);

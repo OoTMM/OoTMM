@@ -6,7 +6,7 @@
 #include <assets/mm/objects/object_hs.h>
 #include "En_Hs.h"
 
-#define FLAGS (ACTOR_FLAG_MM_ATTENTION_ENABLED | ACTOR_FLAG_MM_FRIENDLY | ACTOR_FLAG_MM_10)
+#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_FRIENDLY | ACTOR_FLAG_MM_10)
 
 void EnHs_Init(Actor_EnHs* this, PlayState* play);
 void EnHs_Destroy(Actor_EnHs* this, PlayState* play);
@@ -68,7 +68,7 @@ void EnHs_Init(Actor_EnHs* this, PlayState* play)
     this->actionFunc = func_8095345C;
 
     if (play->curSpawn == 1)
-        this->actor.flags |= ACTOR_FLAG_MM_10000;
+        this->actor.flags |= ACTOR_FLAG_TALK_OFFER_AUTO_ACCEPTED;
 
     this->stateFlags = 0;
     this->actor.attentionRangeType = ATTENTION_RANGE_6;
@@ -147,7 +147,7 @@ void func_80953098(Actor_EnHs* this, PlayState* play)
         gMmExtraFlags.maskBunny = 1;
         this->actor.parent = NULL;
         this->actionFunc = func_8095345C;
-        this->actor.flags |= ACTOR_FLAG_MM_10000;
+        this->actor.flags |= ACTOR_FLAG_TALK_OFFER_AUTO_ACCEPTED;
         this->stateFlags |= 0x10;
         Actor_OfferTalkExchange(&this->actor, play, 1000.0f, 1000.0f, PLAYER_IA_MINUS1);
     }
@@ -174,14 +174,14 @@ void func_80953180(Actor_EnHs* this, PlayState* play)
                 break;
 
             case 0x33F7: // notice his chicks are grown up, happy, wants to give you bunny hood
-                this->actor.flags &= ~ACTOR_FLAG_MM_10000;
+                this->actor.flags &= ~ACTOR_FLAG_TALK_OFFER_AUTO_ACCEPTED;
                 Message_Close(play);
                 this->actionFunc = func_80953098;
                 func_80953098(this, play);
                 break;
 
             case 0x33F9: // laughing that they are all roosters (.)
-                this->actor.flags &= ~ACTOR_FLAG_MM_10000;
+                this->actor.flags &= ~ACTOR_FLAG_TALK_OFFER_AUTO_ACCEPTED;
                 Message_Close(play);
                 this->actionFunc = func_8095345C;
                 break;
@@ -266,7 +266,7 @@ void func_8095345C(Actor_EnHs* this, PlayState* play)
         this->actionFunc = func_80953354;
         this->stateTimer = 40;
     }
-    else if (this->actor.flags & ACTOR_FLAG_MM_10000)
+    else if (this->actor.flags & ACTOR_FLAG_TALK_OFFER_AUTO_ACCEPTED)
     {
         Actor_OfferTalkExchange(&this->actor, play, 1000.0f, 1000.0f, -1);
         this->stateFlags |= 1;

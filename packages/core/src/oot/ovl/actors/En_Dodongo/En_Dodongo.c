@@ -4,7 +4,7 @@
 #include <actors/En_Bom_Chu/En_Bom_Chu.h>
 #include "assets/oot/objects/object_dodongo.h"
 
-#define FLAGS (ACTOR_FLAG_OOT_ATTENTION_ENABLED | ACTOR_FLAG_OOT_HOSTILE | ACTOR_FLAG_OOT_4)
+#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_HOSTILE | ACTOR_FLAG_OOT_4)
 
 typedef enum EnDodongoActionState {
     DODONGO_SWEEP_TAIL,
@@ -551,12 +551,12 @@ void EnDodongo_Walk(EnDodongo* this, PlayState* play) {
 
     if (Math_Vec3f_DistXZ(&this->actor.home.pos, &player->actor.world.pos) < 400.0f) {
         Math_SmoothStepToS(&this->actor.world.rot.y, this->actor.yawTowardsPlayer, 1, 0x1F4, 0);
-        this->actor.flags |= ACTOR_FLAG_OOT_ATTENTION_ENABLED;
+        this->actor.flags |= ACTOR_FLAG_ATTENTION_ENABLED;
         if ((this->actor.xzDistToPlayer < 100.0f) && (yawDiff < 0x1388) && (this->actor.yDistanceFromLink < 60.0f)) {
             EnDodongo_SetupBreatheFire(this);
         }
     } else {
-        this->actor.flags &= ~ACTOR_FLAG_OOT_ATTENTION_ENABLED;
+        this->actor.flags &= ~ACTOR_FLAG_ATTENTION_ENABLED;
         if ((Math_Vec3f_DistXZ(&this->actor.world.pos, &this->actor.home.pos) > 150.0f) || (this->retreatTimer != 0)) {
             s16 yawToHome = Math_Vec3f_Yaw(&this->actor.world.pos, &this->actor.home.pos);
 
@@ -651,7 +651,7 @@ void EnDodongo_SetupDeath(EnDodongo* this, PlayState* play) {
     this->timer = 0;
     Actor_PlaySfx(&this->actor, NA_SE_EN_DODO_J_DEAD);
     this->actionState = DODONGO_DEATH;
-    this->actor.flags &= ~ACTOR_FLAG_OOT_ATTENTION_ENABLED;
+    this->actor.flags &= ~ACTOR_FLAG_ATTENTION_ENABLED;
     this->actor.speed = 0.0f;
     EnDodongo_SetupAction(this, EnDodongo_Death);
 }

@@ -63,7 +63,7 @@ void EnTorch2_Init(Actor_CustomEnTorch2 *this, PlayState *play)
     Collider_InitCylinder(play, &this->collider);
     Collider_SetCylinder(play, &this->collider, &this->base, &sCylinderInit);
 
-    this->base.flags |= ACTOR_FLAG_OOT_26;
+    this->base.flags |= ACTOR_FLAG_CAN_PRESS_SWITCHES;
 
     this->framesUntilNextState = 20;
 }

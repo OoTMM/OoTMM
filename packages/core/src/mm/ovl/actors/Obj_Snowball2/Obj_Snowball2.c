@@ -7,7 +7,7 @@
 #define ENOBJSNOWBALL2_GET_3F(thisx) ((thisx)->params & 0x3F)
 #define ENOBJSNOWBALL2_GET_7F00(thisx) (((thisx)->params >> 8) & 0x7F)
 
-#define FLAGS (ACTOR_FLAG_MM_800000)
+#define FLAGS (ACTOR_FLAG_THROW_ONLY)
 
 void ObjSnowball2_Init(Actor_ObjSnowball2* this, PlayState* play);
 void ObjSnowball2_Destroy(Actor_ObjSnowball2* this, PlayState* play);

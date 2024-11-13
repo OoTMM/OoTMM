@@ -14,6 +14,7 @@
 # include <combo/config.h>
 # include <combo/audio.h>
 # include <combo/main.h>
+# include <combo/time.h>
 # include <combo/tha.h>
 # include <combo/sfx.h>
 # include <combo/controller.h>

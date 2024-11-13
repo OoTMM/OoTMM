@@ -1,6 +1,6 @@
 #include "Boss_04.h"
 
-#define FLAGS (ACTOR_FLAG_MM_ATTENTION_ENABLED | ACTOR_FLAG_MM_HOSTILE | ACTOR_FLAG_MM_10 | ACTOR_FLAG_MM_20)
+#define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_HOSTILE | ACTOR_FLAG_MM_10 | ACTOR_FLAG_MM_20)
 
 #define THIS ((Actor_Boss04*)thisx)
 
@@ -209,7 +209,7 @@ void Boss04_Destroy(Actor_Boss04* this, PlayState* play) {
 
 void func_809EC544(Actor_Boss04* this) {
     this->actionFunc = func_809EC568;
-    this->actor.flags &= ~ACTOR_FLAG_MM_ATTENTION_ENABLED;
+    this->actor.flags &= ~ACTOR_FLAG_ATTENTION_ENABLED;
 }
 
 void func_809EC568(Actor_Boss04* this, PlayState* play) {
@@ -498,7 +498,7 @@ void func_809ED224(Actor_Boss04* this) {
     this->unk_2D0 = 10000.0f;
     this->unk_2C8 = 200;
     Actor_PlaySfx(&this->actor, NA_SE_EN_ME_DEAD);
-    this->actor.flags &= ~ACTOR_FLAG_MM_ATTENTION_ENABLED;
+    this->actor.flags &= ~ACTOR_FLAG_ATTENTION_ENABLED;
     Audio_RestorePrevBgm();
     this->unk_1F6 = 10;
 }
@@ -519,7 +519,7 @@ void func_809ED2A0(Actor_Boss04* this, PlayState* play) {
     }
 
     if (this->unk_1F8 == 3) {
-        this->actor.flags &= ~ACTOR_FLAG_MM_ATTENTION_ENABLED;
+        this->actor.flags &= ~ACTOR_FLAG_ATTENTION_ENABLED;
         this->unk_700 = 0.0f;
         this->unk_6FC = 0.0f;
         this->unk_6F8 = 0.0f;
@@ -721,9 +721,9 @@ void Boss04_Update(Actor_Boss04* this, PlayState* play) {
         func_809ED45C(this, play);
         if (this->unk_2CC > 3000.0f) {
             CollisionCheck_SetAC(play, &play->colChkCtx, &this->collider1.base);
-            this->actor.flags |= ACTOR_FLAG_MM_ATTENTION_ENABLED;
+            this->actor.flags |= ACTOR_FLAG_ATTENTION_ENABLED;
         } else {
-            this->actor.flags &= ~ACTOR_FLAG_MM_ATTENTION_ENABLED;
+            this->actor.flags &= ~ACTOR_FLAG_ATTENTION_ENABLED;
         }
         CollisionCheck_SetOC(play, &play->colChkCtx, &this->collider2.base);
         CollisionCheck_SetAC(play, &play->colChkCtx, &this->collider2.base);

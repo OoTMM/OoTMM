@@ -6,7 +6,7 @@
 #include <combo/global.h>
 #include "Custom_Magic_Fire.h"
 
-#define FLAGS (ACTOR_FLAG_OOT_4 | ACTOR_FLAG_OOT_25)
+#define FLAGS (ACTOR_FLAG_OOT_4 | ACTOR_FLAG_UPDATE_DURING_OCARINA)
 
 void MagicFire_UpdateBeforeCast(Actor_CustomMagicFire* this, PlayState* play);
 
