@@ -2779,6 +2779,7 @@ export const SETTINGS = [{
   values: [
     { value: 'DekuPalace',  name: 'Deku Palace' },
     { value: 'StoneTower',  name: 'Stone Tower' },
+    { value: 'ST',          name: 'Stone Tower Temple' },
   ],
   default: 'none',
   cond: hasMM,

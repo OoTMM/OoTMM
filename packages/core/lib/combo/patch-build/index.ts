@@ -80,6 +80,7 @@ function asmPatchGroups(world: World, settings: Settings) {
     MM_WELL_OPEN_OR_REMORSELESS: settings.beneathWell !== 'vanilla',
     MM_JP_LAYOUT_DEKU_PALACE: world.resolvedFlags.jpLayouts.has('DekuPalace'),
     MM_JP_LAYOUT_STONE_TOWER: world.resolvedFlags.jpLayouts.has('StoneTower') && !world.resolvedFlags.openDungeonsMm.has('ST'),
+    MM_JP_LAYOUT_STONE_TOWER_TEMPLE: world.resolvedFlags.jpLayouts.has('ST'),
   };
   const keys = Object.keys(groups) as PatchGroup[];
   return keys.filter((k) => groups[k]);

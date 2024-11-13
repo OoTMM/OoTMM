@@ -141,15 +141,15 @@
 "Stone Tower Temple Wind Room":
   dungeon: ST
   exits:
-    "Stone Tower Temple Light Arrow Room": "has(MASK_DEKU) || can_use_light_arrows || (short_hook_anywhere && has_weapon && trick(MM_ST_UPDRAFTS)) || hookshot_anywhere"
+    "Stone Tower Temple Light Arrow Room": "has(MASK_DEKU) || (!setting(jpLayouts, ST) && can_use_light_arrows) || (short_hook_anywhere && has_weapon && trick(MM_ST_UPDRAFTS)) || hookshot_anywhere"
     "WARP_SONGS": "true"
   locations:
     "Stone Tower Temple Wind Room Ledge Chest": "has(MASK_DEKU) || (trick(MM_ST_UPDRAFTS) && (short_hook_anywhere || (has_hover_boots && has_iron_boots))) || hookshot_anywhere"
-    "Stone Tower Temple Wind Room Jail Chest": "(has(MASK_DEKU) || can_use_light_arrows || (short_hook_anywhere && has_weapon && trick(MM_ST_UPDRAFTS)) || hookshot_anywhere) && (has_mask_goron || (can_hammer && has_iron_boots && has_mask_bunny && trick(MM_STT_LAVA_SWITCH_HAMMER)))"
-    "Stone Tower Temple Pot Wind Room 1": "has(MASK_DEKU) || can_use_light_arrows || (short_hook_anywhere && has_weapon && trick(MM_ST_UPDRAFTS)) || hookshot_anywhere"
-    "Stone Tower Temple Pot Wind Room 2": "has(MASK_DEKU) || can_use_light_arrows || (short_hook_anywhere && has_weapon && trick(MM_ST_UPDRAFTS)) || hookshot_anywhere"
-    "Stone Tower Temple Pot Wind Room 3": "has(MASK_DEKU) || can_use_light_arrows || (short_hook_anywhere && has_weapon && trick(MM_ST_UPDRAFTS)) || hookshot_anywhere"
-    "Stone Tower Temple Pot Wind Room 4": "has(MASK_DEKU) || can_use_light_arrows || (short_hook_anywhere && has_weapon && trick(MM_ST_UPDRAFTS)) || hookshot_anywhere"
+    "Stone Tower Temple Wind Room Jail Chest": "(has(MASK_DEKU) || (!setting(jpLayouts, ST) && can_use_light_arrows) || (short_hook_anywhere && has_weapon && trick(MM_ST_UPDRAFTS)) || hookshot_anywhere) && (has_mask_goron || (can_hammer && has_iron_boots && has_mask_bunny && trick(MM_STT_LAVA_SWITCH_HAMMER)))"
+    "Stone Tower Temple Pot Wind Room 1": "has(MASK_DEKU) || (!setting(jpLayouts, ST) && can_use_light_arrows) || (short_hook_anywhere && has_weapon && trick(MM_ST_UPDRAFTS)) || hookshot_anywhere"
+    "Stone Tower Temple Pot Wind Room 2": "has(MASK_DEKU) || (!setting(jpLayouts, ST) && can_use_light_arrows) || (short_hook_anywhere && has_weapon && trick(MM_ST_UPDRAFTS)) || hookshot_anywhere"
+    "Stone Tower Temple Pot Wind Room 3": "has(MASK_DEKU) || (!setting(jpLayouts, ST) && can_use_light_arrows) || (short_hook_anywhere && has_weapon && trick(MM_ST_UPDRAFTS)) || hookshot_anywhere"
+    "Stone Tower Temple Pot Wind Room 4": "has(MASK_DEKU) || (!setting(jpLayouts, ST) && can_use_light_arrows) || (short_hook_anywhere && has_weapon && trick(MM_ST_UPDRAFTS)) || hookshot_anywhere"
     "Stone Tower Temple Rupee Wind Room 1": "has(MASK_DEKU) || (trick(MM_ST_UPDRAFTS) && (short_hook_anywhere || (has_hover_boots && has_iron_boots))) || hookshot_anywhere"
     "Stone Tower Temple Rupee Wind Room 2": "has(MASK_DEKU) || (trick(MM_ST_UPDRAFTS) && (short_hook_anywhere || (has_hover_boots && has_iron_boots))) || hookshot_anywhere"
     "Stone Tower Temple Rupee Wind Room 3": "has(MASK_DEKU) || (trick(MM_ST_UPDRAFTS) && (short_hook_anywhere || (has_hover_boots && has_iron_boots))) || hookshot_anywhere"
