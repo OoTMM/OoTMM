@@ -1,6 +1,6 @@
 import ReactGA from 'react-ga4';
 
-import { useGenerator, useIsPatch, useRandomSettings, useRomConfig } from '../contexts/GeneratorContext';
+import { useGenerator, useIsPatch, useRandomSettings, useRomConfig, useSettings } from '../contexts/GeneratorContext';
 import { Checkbox } from './Checkbox';
 import { FileSelect } from './FileSelect';
 import { PresetSelector } from './PresetSelector';
@@ -13,6 +13,7 @@ export function RomConfig() {
   const [isPatch, setIsPatch] = useIsPatch();
   const { error, result, warnings, archive, generate } = useGenerator();
   const [randomSettings, setRandomSettings] = useRandomSettings();
+  const [settings] = useSettings();
 
   const isRandomSettings = randomSettings.enabled;
   let isReady = !!romConfig.files.oot && !!romConfig.files.mm;
@@ -56,7 +57,8 @@ export function RomConfig() {
         {isRandomSettings && (
           <>
             <Setting setting='games'/>
-            <Checkbox label="Random Settings: MQ" checked={randomSettings.mq} onInput={(x) => setRandomSettings({ mq: x })} />
+            {settings.games !== 'mm' && <Checkbox label="Random Settings: Master Quest" checked={randomSettings.mq} onInput={(x) => setRandomSettings({ mq: x })} />}
+            {settings.games !== 'oot' && <Checkbox label="Random Settings: MM JP Layouts" checked={randomSettings.jp} onInput={(x) => setRandomSettings({ jp: x })} />}
             <Checkbox label="Random Settings: Entrances" checked={randomSettings.er} onInput={(x) => setRandomSettings({ er: x })} />
             <Checkbox label="Random Settings: Extra Shuffles" checked={randomSettings.extraShuffles} onInput={(x) => setRandomSettings({ extraShuffles: x })} />
           </>

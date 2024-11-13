@@ -5,6 +5,7 @@ import { makeSettings, validateSettings } from './util';
 export const DEFAULT_RANDOM_SETTINGS = {
   enabled: false,
   mq: false,
+  jp: false,
   er: false,
   extraShuffles: false,
 };
@@ -642,6 +643,20 @@ export async function applyRandomSettings(rnd: OptionRandomSettings, oldSettings
       break;
     default:
       base.mqDungeons = { type: 'random' };
+      break;
+    }
+  }
+
+  /* JP - 25% Disabled, 25% Enabled, 50% Individual */
+  if (rnd.jp) {
+    switch (randomInt(random, 4)) {
+    case 0:
+      break;
+    case 1:
+      base.jpLayouts = { type: 'all' };
+      break;
+    default:
+      base.jpLayouts = { type: 'random' };
       break;
     }
   }
