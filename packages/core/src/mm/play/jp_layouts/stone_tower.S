@@ -1,0 +1,52 @@
+#include <combo.h>
+
+#define F40_SCENE   0x2B94000
+#define F40_ROOM_00 0x2BA9000
+
+PATCH_GROUP PG_MM_JP_LAYOUT_STONE_TOWER
+
+/* Blocks locations */
+PATCH_VROM F40_ROOM_00 + 0x5b2
+.short 164, -600, 1510
+PATCH_END
+
+PATCH_VROM F40_ROOM_00 + 0x602
+.short -156, -600, 1512
+PATCH_END
+
+/* Disable switches */
+PATCH_VROM F40_ROOM_00 + 0x5c0
+.short 0xffff
+PATCH_END
+
+PATCH_VROM F40_ROOM_00 + 0x610
+.short 0xffff
+PATCH_END
+
+PATCH_VROM F40_ROOM_00 + 0x620
+.short 0xffff
+PATCH_END
+
+/* Paths */
+PATCH_VROM F40_SCENE + 0x5d4
+.byte 0x06
+PATCH_END
+
+PATCH_VROM F40_SCENE + 0x4fc
+.short 0x00a4, 0xfe06, 0x05e7
+.short 0x00a4, 0xfe06, 0x06af
+.short 0x0004, 0xfe06, 0x06af
+.short 0x0004, 0xfd58, 0x06af
+.short 0x0004, 0xfd58, 0x074f
+PATCH_END
+
+PATCH_VROM F40_SCENE + 0x528
+.short 0xFF64, 0xFE06, 0x05E7
+.short 0xFF64, 0xFE06, 0x074F
+.short 0x0004, 0xFE06, 0x074F
+.short 0x0004, 0xFE06, 0x0867
+.short 0x0004, 0xFD58, 0x0867
+.short 0x0004, 0xFD58, 0x097F
+PATCH_END
+
+PATCH_GROUP_END

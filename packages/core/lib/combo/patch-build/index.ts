@@ -12,7 +12,6 @@ import { isEntranceShuffle } from '../logic/helpers';
 import { FileResolver, Options } from '../options';
 import { World } from '../logic/world';
 import { bufReadU32BE, bufWriteU32BE } from '../util/buffer';
-import { config } from 'process';
 
 export type BuildPatchfileIn = {
   opts: Options;
@@ -80,6 +79,7 @@ function asmPatchGroups(world: World, settings: Settings) {
     OOT_FAST_BOAT: settings.shadowFastBoat,
     MM_WELL_OPEN_OR_REMORSELESS: settings.beneathWell !== 'vanilla',
     MM_JP_LAYOUT_DEKU_PALACE: world.resolvedFlags.jpLayouts.has('DekuPalace'),
+    MM_JP_LAYOUT_STONE_TOWER: world.resolvedFlags.jpLayouts.has('StoneTower') && !world.resolvedFlags.openDungeonsMm.has('ST'),
   };
   const keys = Object.keys(groups) as PatchGroup[];
   return keys.filter((k) => groups[k]);
@@ -114,7 +114,6 @@ export async function buildPatchfiles(args: BuildPatchfileIn): Promise<Patchfile
       for (const f of files) {
         patchedFiles.add(f);
       }
-
       /* Pack the payload */
       const payload = await args.resolver.fetch(`${game}_payload.bin`);
       if (payload.length > (game === 'mm' ? 0x50000 : 0x80000)) {

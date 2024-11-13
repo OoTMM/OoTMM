@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add the Japanese version of Stone Tower.
 - Add the Japanese version of Deku Palace & the matching grottos, as a setting.
 
 ### Changed

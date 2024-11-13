@@ -2778,6 +2778,7 @@ export const SETTINGS = [{
   description: 'Choose which parts of Majora\'s Mask use their Japanese version, when different.',
   values: [
     { value: 'DekuPalace',  name: 'Deku Palace' },
+    { value: 'StoneTower',  name: 'Stone Tower' },
   ],
   default: 'none',
   cond: hasMM,

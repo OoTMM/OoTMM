@@ -3373,8 +3373,8 @@
   region: STONE_TOWER
   exits:
     "Stone Tower": "true"
-    "Stone Tower Top": "can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER) && short_hook_anywhere) || can_hookshot || setting(openDungeonsMm, ST)"
-    "Stone Tower Top Inverted": "(can_use_elegy && can_use_light_arrows) || setting(openDungeonsMm, ST)"
+    "Stone Tower Top": "(!setting(jpLayouts, StoneTower) && (can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER) && short_hook_anywhere))) || can_hookshot || setting(openDungeonsMm, ST)"
+    "Stone Tower Top Inverted": "(can_use_elegy && can_use_light_arrows && !setting(jpLayouts, StoneTower)) || setting(openDungeonsMm, ST)"
     "Stone Tower Temple": "true"
     "Stone Tower Lower Scarecrow Ledge": "has_mask_goron || is_tall || scarecrow_hookshot || hookshot_anywhere || has_hover_boots || (short_hook_anywhere && trick(MM_OOB_MOVEMENT))" # || (can_jumpslash) # Can simply backwalk off the ledge, jumpslash and recoil down to the ledge, but that should be a trick.
     "Stone Tower Upper Scarecrow Ledge": "scarecrow_hookshot || short_hook_anywhere"
