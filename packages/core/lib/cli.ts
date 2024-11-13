@@ -24,6 +24,8 @@ function parseSettings(data: any): any {
     case 'set':
       if (data[key] instanceof Array) {
         result[key] = { type: 'specific', values: Array.from(new Set(data[key])) };
+      } else if (data[key] instanceof Object) {
+        result[key] = { ...data[key] };
       } else {
         result[key] = { type: data[key] };
       }

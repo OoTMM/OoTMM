@@ -11,6 +11,7 @@ const SET_OPTIONS = [
   { value: 'all', name: 'All' },
   { value: 'specific', name: 'Specific' },
   { value: 'random', name: 'Random' },
+  { value: 'random-mixed', name: 'Mixed Random' },
 ];
 
 function SettingTooltip({ setting }: { setting: string }) {
@@ -74,17 +75,35 @@ function SettingSet({ setting }: { setting: string }) {
   const data = SETTINGS.find(x => x.key === setting)!;
   const s = settings[data.key] as any;
 
-  let options: { value: string, label: string }[] = [];
-  let values: typeof options = [];
+  let valuesSet: typeof options = [];
+  let valuesUnset: typeof options = [];
+
+  const options: { value: string, label: string }[] = (data as any).values.map((x: any) => ({ value: x.value, label: x.name }));
 
   if (s.type === 'specific') {
-    options = (data as any).values.map((x: any) => ({ value: x.value, label: x.name }));
-    values = options.filter(x => s.values.includes(x.value));
+    valuesSet = options.filter(x => s.values.includes(x.value));
+    valuesUnset = [];
+  } else if (s.type === 'random-mixed') {
+    valuesSet = options.filter(x => s.set.includes(x.value));
+    valuesUnset = options.filter(x => s.unset.includes(x.value));
   }
 
-  const handleChange = (v: MultiValue<{ value: string, label: string }>) => {
+  const optionsSet = options.filter(x => !valuesUnset.map(x => x.value).includes(x.value));
+  const optionsUnset = options.filter(x => !valuesSet.map(x => x.value).includes(x.value));
+
+  const handleChangeSpecific = (v: MultiValue<{ value: string, label: string }>) => {
     const newValues = Array.from(new Set(v.map(x => x.value)));
     setSettings({ [data.key]: { type: 'specific', values: newValues } as any });
+  };
+
+  const handleChangeRandomMixedSet = (v: MultiValue<{ value: string, label: string }>) => {
+    const newValues = Array.from(new Set(v.map(x => x.value)));
+    setSettings({ [data.key]: { type: 'random-mixed', set: newValues, unset: valuesUnset.map(x => x.value) } as any });
+  };
+
+  const handleChangeRandomMixedUnset = (v: MultiValue<{ value: string, label: string }>) => {
+    const newValues = Array.from(new Set(v.map(x => x.value)));
+    setSettings({ [data.key]: { type: 'random-mixed', set: valuesSet.map(x => x.value), unset: newValues } as any });
   };
 
   return (
@@ -99,10 +118,24 @@ function SettingSet({ setting }: { setting: string }) {
       {s.type === 'specific' &&
         <Select
           isMulti
-          options={options} value={values}
-          onChange={(v) => handleChange(v)}
+          options={options} value={valuesSet}
+          onChange={(v) => handleChangeSpecific(v)}
         />
       }
+      {s.type === 'random-mixed' && <>
+        <label>Disabled</label>
+        <Select
+          isMulti
+          options={optionsUnset} value={valuesUnset}
+          onChange={(v) => handleChangeRandomMixedUnset(v)}
+        />
+        <label>Enabled</label>
+        <Select
+          isMulti
+          options={optionsSet} value={valuesSet}
+          onChange={(v) => handleChangeRandomMixedSet(v)}
+        />
+      </>}
     </span>
   );
 }

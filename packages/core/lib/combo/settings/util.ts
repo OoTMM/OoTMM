@@ -132,10 +132,15 @@ function applyBaseSettings(dest: SettingsBase, src: PartialDeep<SettingsBase>) {
         }
         break;
       case 'set':
-        if (newValue instanceof Object && (['all', 'none', 'random', 'specific'].includes(newValue.type!))) {
+        if (newValue instanceof Object && (['all', 'none', 'random', 'specific', 'random-mixed'].includes(newValue.type!))) {
           (dest as any)[key] = { ...newValue };
           if (newValue.type === 'specific') {
             (dest[key] as any).values = Array.from(new Set(Array.from(newValue.values || []).filter(x => setting.values.some(v => v.value === x))));
+          } else if (newValue.type === 'random-mixed') {
+            const set = Array.from(new Set(Array.from(newValue.set || []).filter(x => setting.values.some(v => v.value === x))));
+            const unset = Array.from(new Set(Array.from(newValue.unset || []).filter(x => setting.values.some(v => v.value === x) && !set.includes(x))));
+            (dest[key] as any).set = set;
+            (dest[key] as any).unset = unset;
           }
         }
         break;

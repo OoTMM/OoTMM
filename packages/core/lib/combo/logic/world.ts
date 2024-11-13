@@ -54,19 +54,26 @@ export type ResolvedWorldFlags = {[k in WorldFlag]: ResolvedWorldFlag};
 
 function resolveWorldFlag<T extends WorldFlag>(settings: Settings, random: Random, flag: T): ResolvedWorldFlag {
   const v = settings[flag];
-  let type = v.type;
   let wf: ResolvedWorldFlag;
-  if (type === 'random') {
-    wf = new ResolvedWorldFlag(flag, 'specific');
+  if (v.type === 'random-mixed' || v.type === 'random') {
     const setting = SETTINGS.find(x => x.key === flag)!;
     const values = ((setting as any).values as any[]).map(x => x.value) as string[];
+    let set: string[] = [];
+    let unset: string[] = [];
+    if (v.type === 'random-mixed') {
+      set = v.set;
+      unset = v.unset;
+    }
+    wf = new ResolvedWorldFlag(flag, 'specific');
     for (const v of values) {
-      if (random.next() & 0x1000) {
+      if (set.includes(v)) {
+        wf.add(v);
+      } else if (!unset.includes(v) && random.next() & 0x1000) {
         wf.add(v);
       }
     }
   } else {
-    wf = new ResolvedWorldFlag(flag, type);
+    wf = new ResolvedWorldFlag(flag, v.type);
     if (v.type === 'specific') {
       for (const k of v.values) {
         wf.add(k);

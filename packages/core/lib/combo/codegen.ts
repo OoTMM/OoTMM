@@ -187,7 +187,7 @@ async function genDefaultConfig() {
       else
         defaultConfig.raw(`  # ${setting.min} - ${setting.max}`)
     if (setting.type == 'set')
-      for (const v of ['all', 'none', 'random', ...setting.values.map(v => v.value)])
+      for (const v of ['all', 'none', 'random', 'mixed', ...setting.values.map(v => v.value)])
         defaultConfig.raw(`  # ${v}`)
     defaultConfig.raw('');
   }

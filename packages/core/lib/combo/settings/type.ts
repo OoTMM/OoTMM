@@ -43,7 +43,11 @@ type SettingDataNumber = SettingDataCommon & {
 };
 
 type InputToShape<T> = T extends SettingDataEnum ? { [K in T['key']]: T['values'][number]['value'] }
-  : T extends SettingDataSet ? { [K in T['key']]: { type: 'all' | 'none' | 'random' } | { type: 'specific', values: T['values'][number]['value'][] } }
+  : T extends SettingDataSet ? { [K in T['key']]:
+    { type: 'all' | 'none' | 'random' }
+    | { type: 'specific', values: T['values'][number]['value'][] }
+    | { type: 'random-mixed', set: T['values'][number]['value'][], unset: T['values'][number]['value'][] }
+  }
   : T extends SettingDataBoolean ? { [K in T['key']]: boolean }
   : T extends SettingDataNumber ? { [K in T['key']]: number }
   : never;
