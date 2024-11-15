@@ -77,7 +77,7 @@ jobs:
           tag_name: ${{ env.RELEASE_VERSION }}
           prerelease: ${{ env.RELEASE_VERSION == 'dev' }}
           files: dist/static/static.zip
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PAT_TOKEN }}
           repository: OoTMM/static
 
       - name: Deploy to netlify (stable)
