@@ -11,6 +11,7 @@
 /config*.yml
 /local
 /.env
+/tmp
 
 /.vscode/settings.json
 /.nx
