@@ -2,6 +2,9 @@ name: Continuous Integration Workflow
 
 on: [push, pull_request, workflow_dispatch]
 
+env:
+  GH_TOKEN: ${{ secrets.PAT_TOKEN }}
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -79,6 +82,11 @@ jobs:
           files: packages/web-static/dist/static.zip
           token: ${{ secrets.PAT_TOKEN }}
           repository: OoTMM/static
+          target_commitish: releases
+
+      - name: Trigger OoTMM-static workflow
+        run: |
+          gh workflow run -R OoTMM/static ci.yml
 
       - name: Deploy to netlify (stable)
         if: ${{ contains(github.ref, 'refs/tags/') }}
