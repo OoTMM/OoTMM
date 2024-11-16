@@ -18,5 +18,5 @@ export default defineConfig({
     alias: {
       lodash: 'lodash-es',
     }
-  }
+  },
 });

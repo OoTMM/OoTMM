@@ -1,0 +1,28 @@
+{
+  "name": "@ootmm/web-static",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "build": "./build.sh"
+  },
+  "author": "Nax",
+  "license": "MIT",
+  "dependencies": {
+    "@ootmm/gui": "*"
+  },
+  "nx": {
+    "targets": {
+      "build": {
+        "inputs": [
+          "{projectRoot}/build.sh"
+        ],
+        "outputs": [
+          "{projectRoot}/dist/**/*"
+        ],
+        "dependsOn": [
+          "^build"
+        ]
+      }
+    }
+  }
+}

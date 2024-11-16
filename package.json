@@ -2,14 +2,14 @@
   "name": "root",
   "private": true,
   "scripts": {
+    "nx": "nx",
     "preinstall": "npx only-allow pnpm",
     "start:core": "nx run @ootmm/core:start",
     "start:core:debug": "nx run @ootmm/core:start:debug",
     "build": "nx run @ootmm/gui:build",
     "test": "nx run-many --output-style=stream --target=test",
     "serve": "nx run-many -t serve",
-    "typecheck": "nx run-many -t typecheck",
-    "build:static": "pnpm run build && ./scripts/build-static.sh"
+    "typecheck": "nx run-many -t typecheck"
   },
   "dependencies": {
     "jszip": "^3.10.1",

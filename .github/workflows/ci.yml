@@ -68,7 +68,7 @@ jobs:
 
       - name: Build
         run: |
-          pnpm run build:static
+          pnpm nx run @ootmm/web-static:build
 
       - name: Deploy the static data
         uses: softprops/action-gh-release@v2
@@ -76,7 +76,7 @@ jobs:
           name: ${{ env.RELEASE_VERSION }}
           tag_name: ${{ env.RELEASE_VERSION }}
           prerelease: ${{ env.RELEASE_VERSION == 'dev' }}
-          files: dist/static/static.zip
+          files: packages/web-static/dist/static.zip
           token: ${{ secrets.PAT_TOKEN }}
           repository: OoTMM/static
 
