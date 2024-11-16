@@ -167,6 +167,12 @@ importers:
 
   packages/tools: {}
 
+  packages/web-static:
+    dependencies:
+      '@ootmm/gui':
+        specifier: '*'
+        version: link:../gui
+
 packages:
 
   '@ampproject/remapping@2.3.0':
