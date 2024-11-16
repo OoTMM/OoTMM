@@ -376,7 +376,7 @@
   exits:
     "Fire Temple Fire Walls Room Outside Side Room": "true"
   locations:
-    "Fire Temple GS Fire Walls Side Room": "gs && can_damage_skull"
+    "MQ Fire Temple GS Fire Walls Side Room": "gs && can_damage_skull"
 "Fire Temple Fire Walls Middle Hallway Lower":
   dungeon: Fire
   exits:
