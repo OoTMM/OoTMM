@@ -5,6 +5,10 @@ import { visualizer } from 'rollup-plugin-visualizer';
 const VERSION = process.env.VERSION || 'XXX';
 
 export default defineConfig({
+  base: '/static',
+  build: {
+    outDir: 'dist/static',
+  },
   plugins: [
     preact(),
     visualizer({ open: true, filename: 'bundle-visualization.html' }),

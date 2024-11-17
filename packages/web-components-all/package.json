@@ -1,0 +1,29 @@
+{
+  "name": "@ootmm/web-components-all",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "build": "tsx ./build.ts"
+  },
+  "main": "dist/index.js",
+  "author": "Nax",
+  "license": "MIT",
+  "dependencies": {
+    "@ootmm/web-components": "*"
+  },
+  "nx": {
+    "targets": {
+      "build": {
+        "inputs": [
+          "{projectRoot}/build.sh"
+        ],
+        "outputs": [
+          "{projectRoot}/dist/**/*"
+        ],
+        "dependsOn": [
+          "^build"
+        ]
+      }
+    }
+  }
+}
