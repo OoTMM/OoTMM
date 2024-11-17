@@ -38,7 +38,6 @@ jobs:
           echo "RELEASE_VERSION=${{ github.ref_name }}" >> $GITHUB_ENV
           echo "ENV_KEYS=${{ github.ref_name }},stable" >> $GITHUB_ENV
           echo "VERSION=${{ github.ref_name }}" >> $GITHUB_ENV
-          echo "NETLIFY_SITE_ID=${{ secrets.NETLIFY_SITE_ID_STABLE }}" >> $GITHUB_ENV
 
       - name: Extract Version (Commit)
         if: ${{ !contains(github.ref, 'refs/tags/') }}
@@ -47,7 +46,6 @@ jobs:
           echo "ENV_KEYS=dev" >> $GITHUB_ENV
           short_sha=$(echo ${{ github.sha }} | cut -c1-7)
           echo "VERSION=dev-${short_sha}" >> $GITHUB_ENV
-          echo "NETLIFY_SITE_ID=${{ secrets.NETLIFY_SITE_ID_DEV }}" >> $GITHUB_ENV
 
       - name: Add n64 toolchain repo
         uses: myci-actions/add-deb-repo@10
@@ -89,21 +87,3 @@ jobs:
       - name: Trigger OoTMM-static workflow
         run: |
           gh workflow run -R OoTMM/static ci.yml
-
-      - name: Deploy to netlify (stable)
-        if: ${{ contains(github.ref, 'refs/tags/') }}
-        run: |
-          npm i -g netlify-cli@17.36.1
-          cd packages/gui/dist && netlify deploy --filter @ootmm/gui --prod --dir ./
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_STABLE }}
-
-      - name: Deploy to netlify (dev)
-        if: ${{ github.ref == 'refs/heads/master' }}
-        run: |
-          npm i -g netlify-cli@17.36.1
-          cd packages/gui/dist && netlify deploy --filter @ootmm/gui --prod --dir ./
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_DEV }}
