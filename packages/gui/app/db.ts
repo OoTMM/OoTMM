@@ -1,3 +1,5 @@
+import { ENV_KEYS } from './util';
+
 const dbPromise = openDatabase();
 
 function openDatabase(): Promise<IDBDatabase> {
@@ -48,4 +50,18 @@ export async function loadFile(name: string): Promise<File | null> {
       reject(e);
     };
   });
+}
+
+export async function saveFileLocal(name: string, file: File | null): Promise<void[]> {
+  return Promise.all(ENV_KEYS.map(x => saveFile(`local:generator:${x}:${name}`, file)));
+}
+
+export async function loadFileLocal(name: string): Promise<File | null> {
+  for (const e of ENV_KEYS) {
+    const file = await loadFile(`local:generator:${e}:${name}`);
+    if (file) {
+      return file;
+    }
+  }
+  return null;
 }

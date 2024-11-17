@@ -3,6 +3,7 @@ import CreatableSelect from 'react-select/creatable';
 
 import { PRESETS, Settings } from '@ootmm/core';
 import { useOverrideSettings, useSettings } from '../contexts/GeneratorContext';
+import { localStoragePrefixedGet, localStoragePrefixedSet } from '../util';
 
 const NO_PRESET = "-----";
 
@@ -11,7 +12,7 @@ type Option = {
   value: Settings | null;
 };
 
-const customPresets = JSON.parse(localStorage.getItem("customPresets") || "{}");
+const customPresets = localStoragePrefixedGet("customPresets", {});
 
 export const PresetSelector = () => {
   const overrideSettings = useOverrideSettings();
@@ -34,7 +35,7 @@ export const PresetSelector = () => {
     if (!o || o.value === null) {
       /* Clear */
       delete customPresets[value.label];
-      localStorage.setItem("customPresets", JSON.stringify(customPresets));
+      localStoragePrefixedSet("customPresets", customPresets);
       setValue(options[0]);
       return;
     }
@@ -48,7 +49,7 @@ export const PresetSelector = () => {
 
     /* Also triggers a redraw */
     customPresets[newOptionLabel] = settings;
-    localStorage.setItem("customPresets", JSON.stringify(customPresets));
+    localStoragePrefixedSet("customPresets", customPresets);
     setValue(newOption);
   }
 

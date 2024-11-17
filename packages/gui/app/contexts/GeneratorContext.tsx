@@ -5,7 +5,8 @@ import { mergeSettings, makeSettings, COSMETICS } from '@ootmm/core';
 import { merge } from 'lodash';
 
 import * as API from '../api';
-import { loadFile, saveFile } from '../db';
+import { loadFile, loadFileLocal, saveFile, saveFileLocal } from '../db';
+import { localStoragePrefixedSet } from '../util';
 
 let settingsTicket = 0;
 
@@ -106,7 +107,7 @@ export function GeneratorContextProvider({ children }: { children: ComponentChil
   const overrideSettings = (settings: Settings) => {
     const ticket = ++settingsTicket;
     setState(state => ({ ...state, settings }));
-    localStorage.setItem('settings', JSON.stringify(settings));
+    localStoragePrefixedSet('settings', settings);
     Promise.all([
       API.itemPool(settings),
       API.locationList(settings),
@@ -117,7 +118,7 @@ export function GeneratorContextProvider({ children }: { children: ComponentChil
       setState((state) => {
         const startingItems = API.restrictItemsByPool(state.settings.startingItems, itemPool);
         const newSettings = { ...state.settings, startingItems };
-        localStorage.setItem('settings', JSON.stringify(newSettings));
+        localStoragePrefixedSet('settings', newSettings);
         return { ...state, settings: makeSettings(newSettings), itemPool, locations };
       });
     });
@@ -146,12 +147,12 @@ export function GeneratorContextProvider({ children }: { children: ComponentChil
         delete (savedCosmetics as any)[key];
       }
     }
-    localStorage.setItem('cosmetics', JSON.stringify(savedCosmetics));
+    localStoragePrefixedSet('cosmetics', savedCosmetics);
 
     /* Save new file */
     const cosmeticData = COSMETICS.find(c => c.key === key);
     if (cosmeticData && (cosmeticData.type === 'file')) {
-      saveFile(`cosmetics:${key}`, value).catch(console.error);
+      saveFileLocal(`cosmetics:${key}`, value).catch(console.error);
     }
 
     return newCosmetics;
@@ -175,7 +176,7 @@ export function GeneratorContextProvider({ children }: { children: ComponentChil
     /* Cosmetics */
     for (const c of COSMETICS) {
       if (c.type === 'file') {
-        loadFile(`cosmetics:${c.key}`).then(x => setCosmeticRaw(c.key, x)).catch(console.error);
+        loadFileLocal(`cosmetics:${c.key}`).then(x => setCosmeticRaw(c.key, x)).catch(console.error);
       }
     }
   }, []);
@@ -245,7 +246,7 @@ export function useRandomSettings() {
   const ctx = useContext(GeneratorContext);
   const setRandomSettings = (patch: Partial<OptionRandomSettings>) => {
     const newRandomSettings = ctx.setRandomSettings(patch);
-    localStorage.setItem('randomSettings', JSON.stringify(newRandomSettings));
+    localStoragePrefixedSet('randomSettings', newRandomSettings);
     return newRandomSettings;
   };
   return [ctx.state.random, setRandomSettings] as const;
@@ -282,14 +283,14 @@ export function useStartingItems() {
         newStartingItems[item] = value;
       }
       const newSettings = { ...state.settings, startingItems: newStartingItems };
-      localStorage.setItem('settings', JSON.stringify(newSettings));
+      localStoragePrefixedSet('settings', newSettings);
       return { ...state, settings: newSettings };
     });
   };
 
   const reset = () => {
     const newSettings = { ...state.settings, startingItems: {} };
-    localStorage.setItem('settings', JSON.stringify(newSettings));
+    localStoragePrefixedSet('settings', newSettings);
     setState(state => ({ ...state, settings: newSettings }));
   };
 

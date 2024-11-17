@@ -2,6 +2,7 @@ import { Items, Settings, OptionsInput, GeneratorOutput, makeCosmetics, makeSett
 import type { WorkerResult, WorkerResultGenerate, WorkerResultGenerateError } from './worker';
 import Worker from './worker?worker';
 import JSZip from 'jszip';
+import { localStoragePrefixedGet } from './util';
 
 export type ResultFile = {
   name: string;
@@ -80,18 +81,15 @@ export const locationList = (settings: Partial<Settings>) => workerCall<string[]
 //export const mergeSettings = (settings: Settings, patch: SettingsPatch) => workerCall<Settings>('mergeSettings', [settings, patch]);
 
 export function initialSettings() {
-  const oldSettings = JSON.parse(localStorage.getItem('settings') ?? "{}");
-  return makeSettings(oldSettings);
+  return makeSettings(localStoragePrefixedGet('settings'));
 };
 
 export function initialRandomSettings() {
-  const oldRandomSettings = JSON.parse(localStorage.getItem('randomSettings') ?? "{}");
-  return makeRandomSettings(oldRandomSettings);
+  return makeRandomSettings(localStoragePrefixedGet('randomSettings'));
 }
 
 export function initialCosmetics() {
-  const oldCosmetics = JSON.parse(localStorage.getItem('cosmetics') ?? "{}");
-  return makeCosmetics(oldCosmetics);
+  return makeCosmetics(localStoragePrefixedGet('cosmetics'));
 }
 
 export async function generate(files: { oot: File, mm: File, patch?: File }, options: OptionsInput, log: (msg: string) => void, progress: (current: number, total: number) => void) {
