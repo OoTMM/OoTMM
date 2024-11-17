@@ -167,11 +167,17 @@ importers:
 
   packages/tools: {}
 
-  packages/web-static:
+  packages/web-components:
     dependencies:
       '@ootmm/gui':
         specifier: '*'
         version: link:../gui
+
+  packages/web-components-all:
+    dependencies:
+      '@ootmm/web-components':
+        specifier: '*'
+        version: link:../web-components
 
 packages:
 
