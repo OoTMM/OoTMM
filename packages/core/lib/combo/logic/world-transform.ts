@@ -1014,7 +1014,7 @@ export class LogicPassWorldTransform {
     for (const locId of loc) {
       for (const world of this.state.worlds) {
         world.areas['OOT SPAWN'].locations[locId] = exprTrue();
-        world.regions[locId] = 'NONE';
+        world.regions[locId] = 'POCKET';
       }
     }
   }

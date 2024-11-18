@@ -290,6 +290,10 @@ export class LogicPassHints {
     const region = world.regions[locD.id];
     const playerRegion = makeRegion(region, locD.world as number);
 
+    /* Special regions */
+    if (region === 'POCKET' || region === 'NONE')
+        return false;
+
     /* Ignored region */
     if (this.ignoredRegions.has(playerRegion)) {
       return false;
