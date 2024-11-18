@@ -28,7 +28,7 @@
         ],
         "dependsOn": [
           "^build",
-          { "projects": ["@ootmm/web-components-all"], "target": "build:dev" }
+          { "projects": ["@ootmm/web-components"], "target": "build:dev" }
         ]
       },
       "build": {

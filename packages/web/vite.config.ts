@@ -9,7 +9,7 @@ const isProd = env === 'production';
 const assetsDirs = ['public/**'];
 
 if (!isProd) {
-  assetsDirs.push('node_modules/@ootmm/web-components-all/dist/**');
+  assetsDirs.push('../web-components/dist/tree/**');
 }
 
 // https://vitejs.dev/config/
