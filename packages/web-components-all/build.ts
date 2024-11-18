@@ -8,7 +8,7 @@ async function buildImportFromConfig(manifest: any) {
 async function buildDev() {
   /* Copy files */
   await fs.rm('dist', { recursive: true, force: true });
-  await fs.cp('../web-components/dist/tree', 'dist', { recursive: true });
+  await fs.cp('node_modules/@ootmm/web-components/dist', 'dist', { recursive: true });
 
   /* Read config */
   const config = JSON.parse(await fs.readFile('dist/config.json', 'utf8'));
@@ -17,7 +17,7 @@ async function buildDev() {
   await fs.unlink('dist/config.json');
 
   /* Build import */
-  await buildImportFromConfig({ dev: config });
+  await fs.writeFile('dist/config.json', JSON.stringify({ dev: config }));
 }
 
 async function buildProd() {
