@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "build": "./build.sh"
+    "build": "tsx ./build.ts"
   },
   "author": "Nax",
   "license": "MIT",
@@ -14,7 +14,7 @@
     "targets": {
       "build": {
         "inputs": [
-          "{projectRoot}/build.sh"
+          "{projectRoot}/build.ts"
         ],
         "outputs": [
           "{projectRoot}/dist/**/*"

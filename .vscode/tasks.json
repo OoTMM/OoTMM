@@ -15,7 +15,15 @@
 			"problemMatcher": {
         "base": "$gcc",
       },
-			"label": "Start Web",
+			"label": "Start Web Generator",
+		},
+    {
+			"type": "npm",
+			"script": "web:dev",
+			"problemMatcher": {
+        "base": "$gcc",
+      },
+			"label": "Start Website",
 		}
 	]
 }

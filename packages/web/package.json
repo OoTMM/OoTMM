@@ -1,0 +1,46 @@
+{
+  "name": "@ootmm/web",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "NODE_ENV=development vite",
+		"build": "NODE_ENV=production vite build",
+		"preview": "vite preview"
+	},
+	"dependencies": {
+    "@ootmm/web-components-all": "*",
+		"preact": "^10.22.1",
+		"preact-iso": "^2.8.1",
+		"reset-css": "^5.0.2"
+	},
+	"devDependencies": {
+		"@mdx-js/rollup": "^3.1.0",
+		"@preact/preset-vite": "^2.9.0",
+		"typescript": "^5.6.3",
+		"vite": "^5.3.3",
+    "vite-multiple-assets": "^2.2.0"
+	},
+  "nx": {
+    "targets": {
+      "dev": {
+        "inputs": [
+          "{projectRoot}/**/*"
+        ],
+        "dependsOn": [
+          "^build"
+        ]
+      },
+      "build": {
+        "inputs": [
+          "{projectRoot}/**/*"
+        ],
+        "outputs": [
+          "{projectRoot}/dist/**/*"
+        ],
+        "dependsOn": [
+          "^builld"
+        ]
+      }
+    }
+  }
+}
