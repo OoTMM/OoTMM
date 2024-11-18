@@ -48,16 +48,13 @@
         "{projectRoot}/**/*"
       ],
       "env": [
-        {
-          "env": "VERSION"
-        },
-        {
-          "env": "STATIC_URL"
-        }
+        {"env": "VERSION"},
+        {"env": "STATIC_URL"}
       ]
     },
     "targets": {
       "build": {
+        "configurations": {"production": {}},
         "inputs": [
           "default",
           "env"
