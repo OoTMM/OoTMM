@@ -9,7 +9,8 @@
     "build": "nx run @ootmm/gui:build",
     "test": "nx run-many --output-style=stream --target=test",
     "serve": "nx run-many -t serve",
-    "typecheck": "nx run-many -t typecheck"
+    "typecheck": "nx run-many -t typecheck",
+    "web:dev": "nx run @ootmm/web:dev"
   },
   "dependencies": {
     "jszip": "^3.10.1",

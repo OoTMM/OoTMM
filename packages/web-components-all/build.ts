@@ -24,16 +24,23 @@ async function buildProd() {
   throw new Error('Not implemented');
 }
 
-async function build() {
+async function build(env: string) {
   /* Build */
-  if (process.env.NODE_ENV === 'production') {
-    await buildProd();
-  } else {
+  switch (env) {
+  case 'dev':
     await buildDev();
+    break;
+  case 'prod':
+    await buildProd();
+    break;
+  default:
+    throw new Error('Invalid environment: ' + env);
   }
 }
 
-build().catch(err => {
+const arg = process.argv[2];
+
+build(arg).catch(err => {
   console.error(err);
   process.exit(1);
 });

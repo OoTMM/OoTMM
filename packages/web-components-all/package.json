@@ -3,9 +3,10 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "build": "tsx ./build.ts"
+    "build": "tsx ./build.ts",
   },
   "main": "dist/index.js",
+  "types": "index.d.ts",
   "author": "Nax",
   "license": "MIT",
   "dependencies": {
