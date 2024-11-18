@@ -8,7 +8,6 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
-    "@ootmm/web-components-all": "*",
 		"preact": "^10.22.1",
 		"preact-iso": "^2.8.1",
 		"reset-css": "^5.0.2"
@@ -24,21 +23,27 @@
     "targets": {
       "dev": {
         "inputs": [
-          "{projectRoot}/**/*"
+          "{projectRoot}/**/*",
+          { "env": "STATIC_URL" }
         ],
         "dependsOn": [
-          "^build"
+          "^build",
+          { "projects": ["@ootmm/web-components-all"], "target": "build:dev" }
         ]
       },
       "build": {
+        "configurations": {
+          "production": {}
+        },
         "inputs": [
-          "{projectRoot}/**/*"
+          "{projectRoot}/**/*",
+          { "env": "STATIC_URL" }
         ],
         "outputs": [
           "{projectRoot}/dist/**/*"
         ],
         "dependsOn": [
-          "^builld"
+          "^build"
         ]
       }
     }

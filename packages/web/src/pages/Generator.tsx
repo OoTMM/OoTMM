@@ -1,7 +1,6 @@
 import { useRoute } from 'preact-iso';
 
 import { useManifestVersion } from '../lib/hooks';
-import { STATIC_URL } from '../lib/config';
 
 export function Generator() {
   const { params } = useRoute();
@@ -12,6 +11,6 @@ export function Generator() {
   } else if (!isReady) {
     return <div>Loading...</div>;
   } else {
-    return <iframe className="generator" src={`${STATIC_URL}/${data.generator.path}`}></iframe>;
+    return <iframe className="generator" src={`${process.env.STATIC_URL}/${data.generator.iframe.path}`}></iframe>;
   }
 }

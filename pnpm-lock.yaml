@@ -169,9 +169,6 @@ importers:
 
   packages/web:
     dependencies:
-      '@ootmm/web-components-all':
-        specifier: '*'
-        version: link:../web-components-all
       preact:
         specifier: ^10.22.1
         version: 10.24.3

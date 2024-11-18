@@ -3,26 +3,35 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "build": "tsx ./build.ts",
+    "build": "tsx ./build.ts prod",
+    "build:dev": "tsx ./build.ts dev"
   },
   "main": "dist/index.js",
-  "types": "index.d.ts",
   "author": "Nax",
   "license": "MIT",
-  "dependencies": {
-    "@ootmm/web-components": "*"
-  },
   "nx": {
     "targets": {
       "build": {
         "inputs": [
-          "{projectRoot}/build.sh"
+          "{projectRoot}/**/*"
         ],
         "outputs": [
           "{projectRoot}/dist/**/*"
         ],
         "dependsOn": [
           "^build"
+        ]
+      },
+      "build:dev": {
+        "inputs": [
+          "{projectRoot}/**/*"
+        ],
+        "outputs": [
+          "{projectRoot}/dist/**/*"
+        ],
+        "dependsOn": [
+          "^build",
+          { "projects": ["@ootmm/web-components"], "target": "build" }
         ]
       }
     }

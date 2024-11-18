@@ -1,11 +1,9 @@
-import { STATIC_URL } from './config';
-
 let promiseManifest: Promise<any> | null = null;
 
 export async function getManifest() {
   if (!promiseManifest) {
     promiseManifest = new Promise((resolve, reject) => {
-      fetch(`${STATIC_URL}/config.json`)
+      fetch(`${process.env.STATIC_URL}/config.json`)
         .then((response) => response.json())
         .then((data) => resolve(data))
         .catch((error) => { promiseManifest = null; reject(error) });
@@ -17,12 +15,19 @@ export async function getManifest() {
 
 export async function getManifestForVersion(version: string) {
   const manifest = await getManifest();
+  let data: {} | undefined = undefined;
   if (version === 'stable') {
     const keys = Object.keys(manifest);
     const versions = keys.filter((key) => key.match(/^v\d+\.\d+(\.\d+)?$/));
     const latest = versions.sort((a, b) => a.localeCompare(b, undefined, { numeric: true })).pop()!;
-    return manifest[latest];
+    data = manifest[latest];
   } else {
-    return manifest[version];
+    data = manifest[version];
   }
+
+  if (!data) {
+    throw new Error('Version not found: ' + version);
+  }
+
+  return data;
 }
