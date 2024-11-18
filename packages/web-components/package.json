@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "build": "tsx ./build.ts"
+    "build": "tsx ./build.ts",
+    "deploy": "./deploy.sh"
   },
   "author": "Nax",
   "license": "MIT",
@@ -12,6 +13,9 @@
   },
   "nx": {
     "targets": {
+      "deploy": {
+        "dependsOn": ["build"]
+      },
       "build": {
         "inputs": [
           "{projectRoot}/**/*"
