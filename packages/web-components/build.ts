@@ -1,4 +1,4 @@
-import { promises as fs, statSync } from 'fs';
+import { promises as fs, mkdir, statSync } from 'fs';
 import path from 'path';
 
 const VERSION = process.env.VERSION || 'dev';
@@ -42,37 +42,22 @@ async function buildCurrentVersion(dstName: string) {
   await fs.writeFile(path.resolve(dst, 'config.json'), JSON.stringify(globalConfig));
 }
 
-async function buildDev() {
-  console.log('Building Web Components for development');
-  await buildCurrentVersion('dist/tree');
-  const config = JSON.parse(await fs.readFile(path.resolve(__dirname, 'dist/tree/config.json'), 'utf8'));
-  const newConfig = { dev: config };
-  await fs.writeFile(path.resolve(__dirname, 'dist/tree/config.json'), JSON.stringify(newConfig));
-}
-
-async function buildProd() {
-  console.log('Building Web Components for production');
-  throw new Error('Not implemented');
-}
-
-async function build(env: string) {
+async function build() {
   /* Clean dist folder & tmp folder */
   await fs.rm(path.resolve(__dirname, 'dist'), { recursive: true, force: true });
   await fs.rm(path.resolve(__dirname, 'tmp'), { recursive: true, force: true });
 
-  switch (env) {
-  case 'prod':
-    await buildProd();
-    break;
-  case 'dev':
-    await buildDev();
-    break;
-  default:
-    throw new Error('Invalid environment');
-  }
+  /* Build the current version */
+  await buildCurrentVersion(`dist/versions/${VERSION}`);
+
+  /* Build a tree for development */
+  await fs.cp(path.resolve(__dirname, `dist/versions/${VERSION}`), path.resolve(__dirname, 'dist/tree'), { recursive: true });
+  const config = JSON.parse(await fs.readFile(path.resolve(__dirname, 'dist/tree/config.json'), 'utf8'));
+  const newConfig = { [VERSION]: config };
+  await fs.writeFile(path.resolve(__dirname, 'dist/tree/config.json'), JSON.stringify(newConfig));
 }
 
-build(process.argv[2]).catch(err => {
+build().catch(err => {
   console.error(err);
   process.exit(1);
 });

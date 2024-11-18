@@ -49,6 +49,7 @@
       ],
       "env": [
         {"env": "VERSION"},
+        {"env": "VERSION_SUFFIX"},
         {"env": "STATIC_URL"}
       ]
     },

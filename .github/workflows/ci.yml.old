@@ -35,17 +35,16 @@ jobs:
       - name: Extract Version (Tag)
         if: ${{ contains(github.ref, 'refs/tags/') }}
         run: |
-          echo "RELEASE_VERSION=${{ github.ref_name }}" >> $GITHUB_ENV
-          echo "ENV_KEYS=${{ github.ref_name }},stable" >> $GITHUB_ENV
           echo "VERSION=${{ github.ref_name }}" >> $GITHUB_ENV
+          echo "ENV_KEYS=${{ github.ref_name }},stable" >> $GITHUB_ENV
 
       - name: Extract Version (Commit)
         if: ${{ !contains(github.ref, 'refs/tags/') }}
         run: |
-          echo "RELEASE_VERSION=dev" >> $GITHUB_ENV
-          echo "ENV_KEYS=dev" >> $GITHUB_ENV
           short_sha=$(echo ${{ github.sha }} | cut -c1-7)
-          echo "VERSION=dev-${short_sha}" >> $GITHUB_ENV
+          echo "VERSION=dev" >> $GITHUB_ENV
+          echo "VERSION_SUFFIX=${short_sha}" >> $GITHUB_ENV
+          echo "ENV_KEYS=dev" >> $GITHUB_ENV
 
       - name: Add n64 toolchain repo
         uses: myci-actions/add-deb-repo@10
@@ -76,9 +75,9 @@ jobs:
       - name: Deploy the static data
         uses: softprops/action-gh-release@v2
         with:
-          name: ${{ env.RELEASE_VERSION }}
-          tag_name: ${{ env.RELEASE_VERSION }}
-          prerelease: ${{ env.RELEASE_VERSION == 'dev' }}
+          name: ${{ env.VERSION }}
+          tag_name: ${{ env.VERSION }}
+          prerelease: ${{ env.VERSION == 'dev' }}
           files: packages/web-static/dist/static.zip
           token: ${{ secrets.PAT_TOKEN }}
           repository: OoTMM/static

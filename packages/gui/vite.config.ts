@@ -3,6 +3,9 @@ import preact from '@preact/preset-vite';
 import { visualizer } from 'rollup-plugin-visualizer';
 
 const VERSION = process.env.VERSION || 'XXX';
+const VERSION_SUFFIX = process.env.VERSION_SUFFIX || '';
+const VERSION_FULL = [VERSION, VERSION_SUFFIX].filter(Boolean).join('-');
+
 const STATIC_URL = process.env.STATIC_URL || '/';
 
 export default defineConfig({
@@ -12,7 +15,7 @@ export default defineConfig({
     visualizer({ open: true, filename: 'bundle-visualization.html' }),
   ],
   define: {
-    'process.env.VERSION': JSON.stringify(VERSION),
+    'process.env.VERSION': JSON.stringify(VERSION_FULL),
     'process.env.BROWSER': JSON.stringify(true),
     global: 'globalThis',
   },
