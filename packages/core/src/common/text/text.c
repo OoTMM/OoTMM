@@ -1266,16 +1266,21 @@ void comboTextAppendItemImportance(char** b, s16 gi, int importance)
     switch (importance)
     {
     case 0:
-        comboTextAppendStr(b, " (" TEXT_COLOR_PINK "not required");
+        comboTextAppendStr(b, " (" TEXT_COLOR_RED "unreachable");
         comboTextAppendClearColor(b);
         comboTextAppendStr(b, ")");
         break;
     case 1:
-        comboTextAppendStr(b, " (" TEXT_COLOR_TEAL "sometimes required");
+        comboTextAppendStr(b, " (" TEXT_COLOR_PINK "not required");
         comboTextAppendClearColor(b);
         comboTextAppendStr(b, ")");
         break;
     case 2:
+        comboTextAppendStr(b, " (" TEXT_COLOR_TEAL "sometimes required");
+        comboTextAppendClearColor(b);
+        comboTextAppendStr(b, ")");
+        break;
+    case 3:
         comboTextAppendStr(b, " (" TEXT_COLOR_YELLOW "required");
         comboTextAppendClearColor(b);
         comboTextAppendStr(b, ")");

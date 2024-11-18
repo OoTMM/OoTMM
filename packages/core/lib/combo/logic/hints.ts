@@ -410,15 +410,19 @@ export class LogicPassHints {
       return -1;
     }
 
-    if (this.state.analysis.unreachable.has(loc) || this.state.analysis.useless.has(loc)) {
+    if (this.state.analysis.unreachable.has(loc)) {
       return 0;
     }
 
-    if (this.state.analysis.required.has(loc)) {
-      return 2;
+    if (this.state.analysis.useless.has(loc)) {
+      return 1;
     }
 
-    return 1;
+    if (this.state.analysis.required.has(loc)) {
+      return 3;
+    }
+
+    return 2;
   }
 
   private placeGossipItemExact(worldId: number, checkWorldId: number, checkHint: string, extra: number, isMoon: boolean) {
