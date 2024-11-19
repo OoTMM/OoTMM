@@ -12,7 +12,7 @@ export async function itemPool(settings: Settings): Promise<Items> {
   const cosmetics = makeCosmetics({});
   const monitor = new Monitor({ onLog: () => {} });
   const random = makeRandomSettings({});
-  const { pool, worlds, itemProperties } = await worldState(monitor, { settings, cosmetics, debug: false, seed: "--- INTERNAL ---", random });
+  const { pool, worlds, itemProperties } = await worldState(monitor, { settings, cosmetics, seed: "--- INTERNAL ---", random });
 
   /* Extract relevant items from the pool */
   for (const pi of pool.keys()) {

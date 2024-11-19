@@ -1,5 +1,3 @@
-import { promises as fs } from 'fs';
-import path from 'path';
 import JSZip from 'jszip';
 
 let dataZipPromise: Promise<JSZip> | null = null;
@@ -8,9 +6,11 @@ async function makeDataZipPromise(): Promise<JSZip> {
   let data: Uint8Array;
 
   if (!process.env.BROWSER) {
+    const fs = await import('fs/promises');
+    const path = await import('path');
     data = await fs.readFile(path.resolve(__dirname, '..', '..', 'dist', 'data.zip'));
   } else {
-    const dataZipUrl = await import('@ootmm/core/dist/data.zip?url');
+    const dataZipUrl = new URL('../../dist/data.zip', import.meta.url).href;
     const response = await fetch(dataZipUrl);
     data = new Uint8Array(await response.arrayBuffer());
   }

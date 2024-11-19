@@ -80,7 +80,7 @@ function readFileUint8(path: string): Promise<Uint8Array> {
   return fs.readFile(path).then((x) => new Uint8Array(x.buffer, x.byteOffset, x.byteLength));
 }
 
-async function codegenCustomAssets(opts: Options, monitor: Monitor) {
+async function codegenCustomAssets(monitor: Monitor) {
   /* We can't run that during CI because it requires the ROMs */
   if (process.env.CI)
     return;
@@ -91,7 +91,7 @@ async function codegenCustomAssets(opts: Options, monitor: Monitor) {
   ]);
 
   const roms = await decompressGames(monitor, { oot, mm });
-  const customDefines = await custom(opts, monitor, roms, new Patchfile());
+  const customDefines = await custom(monitor, roms, new Patchfile());
   const cg = new CodeGen('build/include/custom.h', 'CUSTOM_H');
   for (const [key, value] of customDefines) {
     cg.define(key, value);
@@ -100,16 +100,15 @@ async function codegenCustomAssets(opts: Options, monitor: Monitor) {
 }
 
 async function build() {
-  const opts = {} as any;
   const dummyMonitor = new Monitor({});
 
   /* Clone dependencies */
   await cloneDependencies();
 
   await Promise.all([
-    codegenCustomAssets(opts, dummyMonitor),
+    codegenCustomAssets(dummyMonitor),
     comboCodegen(dummyMonitor),
-    cosmeticsAssets(opts),
+    cosmeticsAssets(),
     setupAssetsMap(),
   ]);
 
@@ -123,8 +122,8 @@ async function build() {
   await Promise.all(files.map(async (filename) => zip.file(filename, await fs.readFile(path.join(installDir, filename)))));
 
   /* Add the extra assets */
-  await customAssetsKeep(opts);
-  await customFiles(opts);
+  await customAssetsKeep();
+  await customFiles();
 
   for (const basePath of ["build/assets", "data/static"]) {
     const matches = globSync(['**/*.bin', '**/*.zobj'], { cwd: basePath });

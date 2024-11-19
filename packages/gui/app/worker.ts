@@ -1,33 +1,4 @@
-import JSZip from 'jszip';
 import { itemPool, OptionsInput, GeneratorOutput, generate, locationList, makeSettings, makeRandomSettings, mergeSettings } from '@ootmm/core';
-import dataVersionZipFile from '@ootmm/core/dist/data.zip?url';
-
-async function makeDataPromise(path: string) {
-  const reply = await fetch(path);
-  if (reply.ok) {
-    const ab = await reply.arrayBuffer();
-    return new Uint8Array(ab);
-  } else {
-    throw new Error(`Failed to download ${path}`);
-  }
-}
-
-const dataPromise = makeDataPromise(dataVersionZipFile).then(data => JSZip.loadAsync(data));
-
-async function resolverFetchFunc(path: string) {
-  const zip = await dataPromise;
-  const file = zip.file(path);
-  if (file) {
-    return file.async('uint8array');
-  } else {
-    throw new Error(`Failed to unzip file ${path}`);
-  }
-}
-
-async function resolverGlobFunc(pattern: RegExp) {
-  const zip = await dataPromise;
-  return zip.file(pattern).map(f => f.name);
-}
 
 export type WorkerTaskCall = {
   type: 'call',
@@ -126,8 +97,7 @@ async function onTaskGenerate(task: WorkerTaskGenerate) {
   if (patch) {
     patchData = await readFile(patch);
   }
-  const resolver = { fetch: resolverFetchFunc, glob: resolverGlobFunc };
-  const generator = generate({ oot: ootData, mm: mmData, opts: { ...options, patch: patchData, resolver }, monitor: { onLog, onProgress, onWarn } });
+  const generator = generate({ oot: ootData, mm: mmData, opts: { ...options, patch: patchData }, monitor: { onLog, onProgress, onWarn } });
   generator.run().then(result => {
     postMessage({
       type: 'generate',

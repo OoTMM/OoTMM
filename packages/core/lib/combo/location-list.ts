@@ -11,7 +11,7 @@ export async function locationList(aSettings: Partial<Settings>) {
   const cosmetics = makeCosmetics({});
   const monitor = new Monitor({ onLog: () => {} });
   const random = makeRandomSettings({});
-  const { worlds, fixedLocations } = await worldState(monitor, { settings, cosmetics, debug: false, seed: "--- INTERNAL ---", random });
+  const { worlds, fixedLocations } = await worldState(monitor, { settings, cosmetics, seed: "--- INTERNAL ---", random });
 
   // Precalculate this to avoid doing it more than once in the gui
   const dungeonLocations = Object.values(worlds[0].dungeons).reduce((acc, x) => new Set([...acc, ...x]));

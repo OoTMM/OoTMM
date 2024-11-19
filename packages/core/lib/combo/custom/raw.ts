@@ -1,10 +1,10 @@
 import fs from 'fs';
 
-import { Options } from '../options';
+import { FileResolver } from '../file-resolver';
 
-export const raw = async (opts: Options, filename: string) => {
+export const raw = async (filename: string) => {
   if (process.env.BROWSER) {
-    return opts.resolver!.fetch(`${filename}`);
+    return new FileResolver().fetch(`${filename}`);
   } else {
     const data = await fs.promises.readFile(__dirname + '/../../../data/static/' + filename);
     return data;
