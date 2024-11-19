@@ -237,15 +237,20 @@ export class LogicPassSpoiler {
         this.writer.indent(`World ${i + 1}`);
       }
 
-      const niceEntrances = new Array();
+      const niceEntrances: {[key: string]: string} = {};
+      let longestEntranceEntry = 0;
       for (const [src, dst] of world.entranceOverrides) {
         const srcEntry = ENTRANCES[src as keyof typeof ENTRANCES];
         const dstEntry = ENTRANCES[dst as keyof typeof ENTRANCES];
-        niceEntrances.push(`${srcEntry.from} to ${srcEntry.to} (${src}) -> ${dstEntry.to} from ${dstEntry.from} (${dst})`);
+        let key = `${srcEntry.from} to ${srcEntry.to} (${src})`;
+        let value = `${dstEntry.to} from ${dstEntry.from} (${dst})`;
+        niceEntrances[key] = value;
+        longestEntranceEntry = Math.max(longestEntranceEntry, key.length);
       }
-      for (const niceE of niceEntrances.sort()) {
-        this.writer.write(`${niceE}`);
-      }
+      Object.keys(niceEntrances).sort().forEach(key => {
+        let value = niceEntrances[key];
+        this.writer.write(`${key.padEnd(longestEntranceEntry)} -> ${value}`);
+      });
 
       if (worlds.length > 1) {
         this.writer.unindent('');
