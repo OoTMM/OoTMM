@@ -4,7 +4,7 @@
   "scripts": {
     "build": "tsx ./lib/build.ts",
     "start": "tsx ./lib/cli.ts",
-    "start:debug": "tsx ./lib/cli.ts --debug --config config.yml",
+    "start:config": "tsx ./lib/cli.ts --config config.yml",
     "test": "vitest run --reporter=dot",
     "typecheck": "tsc --noEmit"
   },
@@ -33,23 +33,18 @@
   "nx": {
     "namedInputs": {
       "default": [
-        "{projectRoot}/**/*"
-      ],
-      "version": [
-        {
-          "env": "VERSION"
-        }
+        "{projectRoot}/**/*",
+        { "env": "VERSION" },
+        { "env": "NODE_ENV" }
       ]
     },
     "targets": {
       "build": {
         "inputs": [
-          "default",
-          "version"
+          "default"
         ],
         "outputs": [
-          "{workspaceRoot}/build",
-          "{workspaceRoot}/dist",
+          "{workspaceRoot}/dist/**/*",
           "{workspaceRoot}/include/combo/custom.h"
         ],
         "dependsOn": [
@@ -65,16 +60,8 @@
           "^build"
         ]
       },
-      "start": {
-        "dependsOn": [
-          "^build"
-        ]
-      },
-      "start:debug": {
-        "dependsOn": [
-          "^build"
-        ]
-      }
+      "start": {"dependsOn": ["build"]},
+      "start:config": {"dependsOn": ["build"]}
     }
   }
 }

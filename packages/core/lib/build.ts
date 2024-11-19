@@ -19,6 +19,9 @@ import { fileExists } from './combo/util';
 
 import { setupAssetsMap } from './build/build-assets-map';
 
+const env = process.env.NODE_ENV || 'development';
+const isProd = (env === 'production');
+
 const cloneDependencies = async () => {
   const thirdPartyDir = path.resolve('third_party');
   const stampFile = path.resolve(thirdPartyDir, '.stamp');
@@ -48,10 +51,12 @@ async function runCommand(cmd: string, args: string[]) {
   });
 }
 
-export async function buildNative(opts: Options) {
+export async function buildNative() {
+  const cmakeBuildType = isProd ? 'Release' : 'Debug';
+
   /* Resolve paths */
   const installDir = path.resolve(__dirname, '..', 'build');
-  const buildDir = path.resolve(installDir, 'tree', opts.debug ? 'Debug' : 'Release');
+  const buildDir = path.resolve(installDir, 'tree', cmakeBuildType);
   const sourceDir = path.resolve(__dirname, '..');
   const binDir = path.resolve(installDir, 'bin');
   const ovlDir = path.resolve(binDir, 'ovl');
@@ -64,7 +69,7 @@ export async function buildNative(opts: Options) {
   await fs.mkdir(installDir, { recursive: true });
 
   /* Build and install with CMake */
-  await runCommand('cmake', ['-B', buildDir, '-S', sourceDir, '-G', 'Ninja', `-DCMAKE_BUILD_TYPE=${opts.debug ? 'Debug' : 'Release'}`]);
+  await runCommand('cmake', ['-B', buildDir, '-S', sourceDir, '-G', 'Ninja', `-DCMAKE_BUILD_TYPE=${cmakeBuildType}`]);
   await runCommand('cmake', ['--build', buildDir]);
   await runCommand('cmake', ['--install', buildDir, '--prefix', installDir]);
 
@@ -108,7 +113,7 @@ async function build() {
     setupAssetsMap(),
   ]);
 
-  const installDir = await buildNative({ debug: false, seed: 'BUILD', settings: DEFAULT_SETTINGS, cosmetics: DEFAULT_COSMETICS, random: DEFAULT_RANDOM_SETTINGS });
+  const installDir = await buildNative();
 
   /* Create the zip */
   const zip = new JSZip();

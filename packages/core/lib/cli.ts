@@ -45,9 +45,6 @@ const makeOptions = async (args: string[]): Promise<OptionsInput> => {
   for (let i = 0; i < args.length; i++) {
     const opt = args[i];
     switch (opt) {
-    case '--debug':
-      opts.debug = true;
-      break;
     case '--seed':
       opts.seed = args[++i];
       break;
