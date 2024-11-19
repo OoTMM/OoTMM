@@ -1,8 +1,7 @@
-import { Options } from '../options';
 import { png } from '../util/png';
 
-export const font = async (opts: Options, filename: string) => {
-  const original = await png(opts, filename, 'i4');
+export const font = async (filename: string) => {
+  const original = await png(filename, 'i4');
   const newBuffer = new Uint8Array(original.byteLength);
   const indexMax = original.byteLength / ((8 * 12) / 2);
 

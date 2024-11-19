@@ -127,53 +127,53 @@ export const customExtractedFiles = async (roms: DecompressedRoms): Promise<{[k:
   BUTTERFLY: await extractFileData(roms, 'oot', 'objects/gameplay_field_keep', 0x2680, 32 * 64 * 2).then(t => grayscale(t, 'rgba16', 0.25)),
 });
 
-export const customFiles = async (opts: Options): Promise<{[k: string]: Uint8Array}> => ({
-  CHEST_MAJOR_FRONT: await png(opts, 'chests/major_front', 'rgba16'),
-  CHEST_MAJOR_SIDE: await png(opts, 'chests/major_side', 'rgba16'),
-  CHEST_KEY_FRONT: await png(opts, 'chests/key_front', 'rgba16'),
-  CHEST_KEY_SIDE: await png(opts, 'chests/key_side', 'rgba16'),
-  CHEST_SPIDER_FRONT: await png(opts, 'chests/spider_front', 'rgba16'),
-  CHEST_SPIDER_SIDE: await png(opts, 'chests/spider_side', 'rgba16'),
-  CHEST_FAIRY_FRONT: await png(opts, 'chests/fairy_front', 'rgba16'),
-  CHEST_FAIRY_SIDE: await png(opts, 'chests/fairy_side', 'rgba16'),
-  CHEST_HEART_FRONT: await png(opts, 'chests/heart_front', 'rgba16'),
-  CHEST_HEART_SIDE: await png(opts, 'chests/heart_side', 'rgba16'),
-  CHEST_SOUL_FRONT: await png(opts, 'chests/soul_front', 'rgba16'),
-  CHEST_SOUL_SIDE: await png(opts, 'chests/soul_side', 'rgba16'),
-  CHEST_MAP_FRONT: await png(opts, 'chests/map_front', 'rgba16'),
-  CHEST_MAP_SIDE: await png(opts, 'chests/map_side', 'rgba16'),
-  CRATE_BOSS_KEY: await png(opts, 'crates/boss_key', 'rgba16'),
-  POT_MAJOR_SIDE: await png(opts, 'pots/major_side', 'rgba16'),
-  POT_MAJOR_TOP: await png(opts, 'pots/major_top', 'rgba16'),
-  POT_SPIDER_SIDE: await png(opts, 'pots/spider_side', 'rgba16'),
-  POT_SPIDER_TOP: await png(opts, 'pots/spider_top', 'rgba16'),
-  POT_KEY_SIDE: await png(opts, 'pots/key_side', 'rgba16'),
-  POT_FAIRY_SIDE: await png(opts, 'pots/fairy_side', 'rgba16'),
-  POT_FAIRY_TOP: await png(opts, 'pots/fairy_top', 'rgba16'),
-  POT_HEART_SIDE: await png(opts, 'pots/heart_side', 'rgba16'),
-  POT_HEART_TOP: await png(opts, 'pots/heart_top', 'rgba16'),
-  POT_BOSSKEY_SIDE: await png(opts, 'pots/bosskey_side', 'rgba16'),
-  POT_BOSSKEY_TOP: await png(opts, 'pots/bosskey_top', 'rgba16'),
-  POT_SOUL_SIDE: await png(opts, 'pots/soul_side', 'rgba16'),
-  POT_SOUL_TOP: await png(opts, 'pots/soul_top', 'rgba16'),
-  POT_MAP_SIDE: await png(opts, 'pots/map_side', 'rgba16'),
-  GLITTER: await png(opts, 'glitter', 'i4'),
+export const customFiles = async (): Promise<{[k: string]: Uint8Array}> => ({
+  CHEST_MAJOR_FRONT: await png('chests/major_front', 'rgba16'),
+  CHEST_MAJOR_SIDE: await png('chests/major_side', 'rgba16'),
+  CHEST_KEY_FRONT: await png('chests/key_front', 'rgba16'),
+  CHEST_KEY_SIDE: await png('chests/key_side', 'rgba16'),
+  CHEST_SPIDER_FRONT: await png('chests/spider_front', 'rgba16'),
+  CHEST_SPIDER_SIDE: await png('chests/spider_side', 'rgba16'),
+  CHEST_FAIRY_FRONT: await png('chests/fairy_front', 'rgba16'),
+  CHEST_FAIRY_SIDE: await png('chests/fairy_side', 'rgba16'),
+  CHEST_HEART_FRONT: await png('chests/heart_front', 'rgba16'),
+  CHEST_HEART_SIDE: await png('chests/heart_side', 'rgba16'),
+  CHEST_SOUL_FRONT: await png('chests/soul_front', 'rgba16'),
+  CHEST_SOUL_SIDE: await png('chests/soul_side', 'rgba16'),
+  CHEST_MAP_FRONT: await png('chests/map_front', 'rgba16'),
+  CHEST_MAP_SIDE: await png('chests/map_side', 'rgba16'),
+  CRATE_BOSS_KEY: await png('crates/boss_key', 'rgba16'),
+  POT_MAJOR_SIDE: await png('pots/major_side', 'rgba16'),
+  POT_MAJOR_TOP: await png('pots/major_top', 'rgba16'),
+  POT_SPIDER_SIDE: await png('pots/spider_side', 'rgba16'),
+  POT_SPIDER_TOP: await png('pots/spider_top', 'rgba16'),
+  POT_KEY_SIDE: await png('pots/key_side', 'rgba16'),
+  POT_FAIRY_SIDE: await png('pots/fairy_side', 'rgba16'),
+  POT_FAIRY_TOP: await png('pots/fairy_top', 'rgba16'),
+  POT_HEART_SIDE: await png('pots/heart_side', 'rgba16'),
+  POT_HEART_TOP: await png('pots/heart_top', 'rgba16'),
+  POT_BOSSKEY_SIDE: await png('pots/bosskey_side', 'rgba16'),
+  POT_BOSSKEY_TOP: await png('pots/bosskey_top', 'rgba16'),
+  POT_SOUL_SIDE: await png('pots/soul_side', 'rgba16'),
+  POT_SOUL_TOP: await png('pots/soul_top', 'rgba16'),
+  POT_MAP_SIDE: await png('pots/map_side', 'rgba16'),
+  GLITTER: await png('glitter', 'i4'),
 });
 
-export const customAssetsKeep = async (opts: Options): Promise<{[k: string]: Uint8Array}> => ({
-  DPAD: await png(opts, 'dpad', 'rgba16'),
-  FONT: await font(opts, 'font_8x12'),
-  SMALL_ICON_KEY: await png(opts, 'small_icon_key', 'rgba16'),
-  SMALL_ICON_BOSS_KEY: await png(opts, 'small_icon_boss_key', 'rgba16'),
-  SMALL_ICON_MAP: await png(opts, 'small_icon_map', 'rgba16'),
-  SMALL_ICON_COMPASS: await png(opts, 'small_icon_compass', 'rgba16'),
-  SMALL_ICON_FAIRY: await png(opts, 'small_icon_fairy', 'rgba16'),
-  SMALL_ICON_SKULL: await png(opts, 'small_icon_skull', 'rgba16'),
-  SMALL_ICON_TRIFORCE: await png(opts, 'small_icon_triforce', 'rgba16'),
-  SMALL_ICON_RUPEE: await png(opts, 'small_icon_rupee', 'rgba16'),
-  SMALL_ICON_COIN: await png(opts, 'small_icon_coin', 'rgba16'),
-  SMALL_ICON_SUN: await png(opts, 'small_icon_sun', 'rgba16'),
-  SMALL_ICON_MOON: await png(opts, 'small_icon_moon', 'rgba16'),
+export const customAssetsKeep = async (): Promise<{[k: string]: Uint8Array}> => ({
+  DPAD: await png('dpad', 'rgba16'),
+  FONT: await font('font_8x12'),
+  SMALL_ICON_KEY: await png('small_icon_key', 'rgba16'),
+  SMALL_ICON_BOSS_KEY: await png('small_icon_boss_key', 'rgba16'),
+  SMALL_ICON_MAP: await png('small_icon_map', 'rgba16'),
+  SMALL_ICON_COMPASS: await png('small_icon_compass', 'rgba16'),
+  SMALL_ICON_FAIRY: await png('small_icon_fairy', 'rgba16'),
+  SMALL_ICON_SKULL: await png('small_icon_skull', 'rgba16'),
+  SMALL_ICON_TRIFORCE: await png('small_icon_triforce', 'rgba16'),
+  SMALL_ICON_RUPEE: await png('small_icon_rupee', 'rgba16'),
+  SMALL_ICON_COIN: await png('small_icon_coin', 'rgba16'),
+  SMALL_ICON_SUN: await png('small_icon_sun', 'rgba16'),
+  SMALL_ICON_MOON: await png('small_icon_moon', 'rgba16'),
 });
 
 const extractRaw = async (roms: DecompressedRoms, game: Game, file: string, offset: number, size: number) => {
@@ -206,17 +206,18 @@ type ObjectRef = {
 }
 
 class CustomAssetsBuilder {
+  private defines: Map<string, number>;
   private cg: CodeGen;
   private vrom: number;
   private objectId: number;
   private objectVroms: ObjectRef[];
 
   constructor(
-    private opts: Options,
     private monitor: Monitor,
     private roms: DecompressedRoms,
     private patch: Patchfile,
   ) {
+    this.defines = new Map();
     const cgPath = process.env.BROWSER ? '' : path.resolve('include', 'combo', 'custom.h');
     this.cg = new CodeGen(cgPath, 'CUSTOM_H');
     this.vrom = 0x08000000;
@@ -239,7 +240,7 @@ class CustomAssetsBuilder {
   }
 
   async addFile(define: string, filename: string, compressed: boolean) {
-    const data = await raw(this.opts, filename);
+    const data = await raw(filename);
     const vrom = this.addRawData(null, data, compressed);
     this.cg.define('CUSTOM_' + define + '_ADDR', vrom);
     return vrom;
@@ -255,7 +256,7 @@ class CustomAssetsBuilder {
   }
 
   async addObjectFile(name: string, filename: string, defines: number[]) {
-    const file = await raw(this.opts, filename);
+    const file = await raw(filename);
     await this.addCustomObject(name, file, defines);
   }
 
@@ -266,7 +267,7 @@ class CustomAssetsBuilder {
 
   async addCustomKeepFiles() {
     const keep = new KeepFile();
-    const cAssets = await customAssetsKeep(this.opts);
+    const cAssets = await customAssetsKeep();
     const eAssets = await extractedAssets(this.roms);
     const assets = { ...cAssets, ...eAssets };
     for (const k in assets) {
@@ -279,7 +280,7 @@ class CustomAssetsBuilder {
   }
 
   async addCustomFiles() {
-    const cfiles = await customFiles(this.opts);
+    const cfiles = await customFiles();
     for (const [name, data] of Object.entries(cfiles)) {
       const vrom = this.addRawData(null, data, true);
       this.cg.define('CUSTOM_' + name + '_ADDR', vrom);
@@ -467,10 +468,12 @@ class CustomAssetsBuilder {
     if (!process.env.BROWSER) {
       await this.cg.emit();
     }
+
+    return this.defines;
   }
 }
 
-export function custom(opts: Options, monitor: Monitor, roms: DecompressedRoms, patch: Patchfile) {
-  const builder = new CustomAssetsBuilder(opts, monitor, roms, patch);
+export function custom(monitor: Monitor, roms: DecompressedRoms, patch: Patchfile) {
+  const builder = new CustomAssetsBuilder(monitor, roms, patch);
   return builder.run();
 }

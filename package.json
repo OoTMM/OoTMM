@@ -5,7 +5,7 @@
     "nx": "nx",
     "preinstall": "npx only-allow pnpm",
     "start:core": "nx run @ootmm/core:start",
-    "start:core:debug": "nx run @ootmm/core:start:debug",
+    "start:core:config": "nx run @ootmm/core:start:config",
     "build": "nx run @ootmm/gui:build",
     "test": "nx run-many --output-style=stream --target=test",
     "serve": "nx run-many -t serve",
@@ -30,6 +30,7 @@
     "tslib": "^2.8.0",
     "tsx": "^4.19.1",
     "typescript": "^5.6.3",
+    "vite": "^5.4.11",
     "vitest": "^2.1.4",
     "yaml": "^2.6.0"
   },

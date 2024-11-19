@@ -56,7 +56,7 @@ export class Patcher {
   }
 
   private rangeCheck(start: number, size: number) {
-    if (!this.opts.debug)
+    if (process.env.NODE_ENV === 'production')
       return;
 
     /* Check for an overlap with an existing range, in any order */

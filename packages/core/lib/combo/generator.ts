@@ -9,7 +9,9 @@ import { buildPatchfiles } from './patch-build';
 import { Patchfile } from './patch-build/patchfile';
 import { makeAddresses } from './addresses';
 import { applyRandomSettings } from './settings/random';
-import { makeResolver } from './resolve';
+
+const env = process.env.NODE_ENV || 'development';
+const isDev = (env !== 'production');
 
 export type GeneratorOutputFile = {
   name: string;
@@ -57,7 +59,7 @@ export class Generator {
     this.oot = oot;
     this.mm = mm;
     this.opts = opts;
-    this.monitor = new Monitor(monitorCallbacks, opts.debug);
+    this.monitor = new Monitor(monitorCallbacks, (process.env.NODE_ENV !== 'production'));
   }
 
   async run(): Promise<GeneratorOutput> {
@@ -75,8 +77,7 @@ export class Generator {
         await codegen(this.monitor);
       }
       const patchfile = new Patchfile;
-      await custom(this.opts, this.monitor, roms, patchfile);
-      const resolver = await makeResolver(this.opts);
+      await custom(this.monitor, roms, patchfile);
 
       /* Run logic */
       const logicResult = await logic(this.monitor, this.opts);
@@ -87,7 +88,6 @@ export class Generator {
         monitor: this.monitor,
         roms,
         addresses,
-        resolver,
         logic: logicResult,
         settings: this.opts.settings,
       });
@@ -99,12 +99,12 @@ export class Generator {
     }
 
     const hash = patchfiles[0].hash;
-    const hashFileName = this.opts.debug ? undefined : hash;
+    const hashFileName = isDev ? undefined : hash;
     const files: GeneratorOutputFile[] = [];
     const playerNumber = (id: number) => patchfiles.length === 1 ? undefined : id + 1;
 
     /* Build ROM(s) */
-    if (patchfiles.length === 1 || this.opts.debug) {
+    if (patchfiles.length === 1 || isDev) {
       for (let i = 0; i < patchfiles.length; i++) {
         const { rom, cosmeticLog } = await pack({ opts: this.opts, monitor: this.monitor, roms, patchfile: patchfiles[i], addresses });
         files.push(makeFile({ hash: hashFileName, data: rom, mime: 'application/octet-stream', world: playerNumber(i), ext: 'z64' }));
