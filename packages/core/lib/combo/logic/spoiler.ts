@@ -52,11 +52,11 @@ export class LogicPassSpoiler {
   private getImportanceSuffix(importance: number): string {
     if(this.state.opts.settings.logic === 'none') return ""; // No need for importance in no-logic
     switch (importance) {
-      case -1:
-      case  0: return "";
-      case  1: return "(sometimes required)";
-      case  2: return "(REQUIRED)";
-      default: return "Unreachable";
+      case  0: return "(unreachable)";
+      case  1: return "(not required)";
+      case  2: return "(sometimes required)";
+      case  3: return "(required)";
+      default: return "";
     }
   }
 
