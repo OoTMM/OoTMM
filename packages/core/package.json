@@ -33,7 +33,7 @@
   "nx": {
     "namedInputs": {
       "default": [
-        "{projectRoot}/**/*",
+        "{workspaceRoot}/**/*",
         { "env": "VERSION" },
         { "env": "NODE_ENV" }
       ]
