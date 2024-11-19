@@ -1,4 +1,4 @@
-import { promises as fs, mkdir, statSync } from 'fs';
+import { promises as fs, statSync } from 'fs';
 import path from 'path';
 
 const VERSION = process.env.VERSION || 'dev';
@@ -45,13 +45,12 @@ async function buildCurrentVersion(dstName: string) {
 async function build() {
   /* Clean dist folder & tmp folder */
   await fs.rm(path.resolve(__dirname, 'dist'), { recursive: true, force: true });
-  await fs.rm(path.resolve(__dirname, 'tmp'), { recursive: true, force: true });
 
   /* Build the current version */
-  await buildCurrentVersion(`dist/versions/${VERSION}`);
+  await buildCurrentVersion(`dist/current`);
 
   /* Build a tree for development */
-  await fs.cp(path.resolve(__dirname, `dist/versions/${VERSION}`), path.resolve(__dirname, 'dist/tree'), { recursive: true });
+  await fs.cp(path.resolve(__dirname, `dist/current`), path.resolve(__dirname, 'dist/tree'), { recursive: true });
   const config = JSON.parse(await fs.readFile(path.resolve(__dirname, 'dist/tree/config.json'), 'utf8'));
   const newConfig = { [VERSION]: config };
   await fs.writeFile(path.resolve(__dirname, 'dist/tree/config.json'), JSON.stringify(newConfig));
