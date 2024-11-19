@@ -566,6 +566,7 @@ typedef struct ALIGNED(16)
     u8 halfDays;
     RespawnData fw[2];
     RespawnData fwRespawnTop[2];
+    RespawnData fwRespawnDungeonEntrance[2];
 }
 MmCustomSave;
 

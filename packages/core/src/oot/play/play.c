@@ -794,6 +794,9 @@ void Play_FastInit(GameState* gs)
         gSaveContext.respawnFlag = 3;
         gComboCtx.isFwSpawn = 0;
 
+        /* Restore dungeon entrance respawn data. */
+        memcpy(&gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE], &gCustomSave.fwRespawnDungeonEntrance[gOotSave.age], sizeof(OotRespawnData));
+
         OotFaroreWind* fw = &gSave.info.fw;
 
         if (fw->set)
@@ -828,7 +831,7 @@ void Play_FastInit(GameState* gs)
             gSaveContext.respawnFlag = 2;
         }
     }
-    
+
     gSave.cutscene = 0;
 
     /* Set the entrance */

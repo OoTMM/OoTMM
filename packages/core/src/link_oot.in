@@ -108,6 +108,7 @@ DrawGi_Spell            = 0x80058698;
 Health_ChangeBy         = 0x800720bc;
 Magic_RequestChange     = 0x80072588;
 Magic_Update            = 0x80072840;
+Interface_SetSubTimerToFinalSecond = 0x80073938;
 
 Gfx_SetupDL25_Opa       = 0x8007e298;
 Gfx_SetupDL25_Xlu       = 0x8007e2c0;
