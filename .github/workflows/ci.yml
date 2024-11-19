@@ -49,6 +49,8 @@ jobs:
 
       - name: Find references for NX
         uses: nrwl/nx-set-shas@v4
+        with:
+          main-branch-name: master
 
       - name: Test
         run: npx nx affected -t test
