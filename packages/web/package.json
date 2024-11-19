@@ -33,9 +33,7 @@
         ]
       },
       "build": {
-        "configurations": {
-          "production": {}
-        },
+        "configurations": {"production": {}},
         "inputs": [
           "{projectRoot}/**/*",
           { "env": "STATIC_URL" }
