@@ -3,9 +3,10 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"dev": "NODE_ENV=development vite",
-		"build": "NODE_ENV=production vite build",
-		"preview": "vite preview"
+		"dev": "vite",
+		"build": "vite build",
+		"preview": "vite preview",
+    "deploy": "./deploy.sh"
 	},
 	"dependencies": {
 		"preact": "^10.22.1",
@@ -22,6 +23,7 @@
   "nx": {
     "targets": {
       "dev": {
+        "cache": false,
         "inputs": [
           "{projectRoot}/**/*",
           { "env": "STATIC_URL" }
@@ -44,6 +46,12 @@
         ],
         "dependsOn": [
           "^build"
+        ]
+      },
+      "deploy": {
+        "cache": false,
+        "dependsOn": [
+          "build"
         ]
       }
     }
