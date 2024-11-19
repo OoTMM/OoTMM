@@ -52,6 +52,10 @@ export async function build(opts: Options) {
   await fs.promises.mkdir(buildDir, { recursive: true });
   await fs.promises.mkdir(installDir, { recursive: true });
 
+  /* Build the asset map */
+  const bam = await import('./build-assets-map');
+  await bam.setupAssetsMap();
+
   /* Build and install with CMake */
   await runCommand('cmake', ['-B', buildDir, '-S', sourceDir, '-G', 'Ninja', `-DCMAKE_BUILD_TYPE=${opts.debug ? 'Debug' : 'Release'}`]);
   await runCommand('cmake', ['--build', buildDir]);

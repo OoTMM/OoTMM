@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "scripts": {
     "build": "tsx ./lib/build.ts",
-    "setup": "tsx ./lib/setup.ts",
     "start": "tsx ./lib/cli.ts",
     "start:debug": "tsx ./lib/cli.ts --debug --config config.yml",
     "test": "vitest run --reporter=dot",
@@ -54,8 +53,7 @@
           "{workspaceRoot}/include/combo/custom.h"
         ],
         "dependsOn": [
-          "^build",
-          "setup"
+          "^build"
         ]
       },
       "test": {
@@ -64,20 +62,17 @@
         ],
         "outputs": [],
         "dependsOn": [
-          "^build",
-          "setup"
+          "^build"
         ]
       },
       "start": {
         "dependsOn": [
-          "^build",
-          "setup"
+          "^build"
         ]
       },
       "start:debug": {
         "dependsOn": [
-          "^build",
-          "setup"
+          "^build"
         ]
       }
     }
