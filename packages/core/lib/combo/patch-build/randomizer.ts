@@ -934,7 +934,7 @@ function worldConfig(world: World, settings: Settings): Set<Confvar> {
     MENU_NOTEBOOK: settings.menuNotebook,
     OOT_AGELESS_CHILD_TRADE: settings.agelessChildTrade,
     OOT_START_ADULT: settings.startingAge === 'adult',
-    HINT_IMPORTANCE: settings.hintImportance,
+    HINT_IMPORTANCE: settings.hintImportance && settings.logic !== 'none',
     OOT_OCARINA_BUTTONS: settings.ocarinaButtonsShuffleOot,
     MM_OCARINA_BUTTONS: settings.ocarinaButtonsShuffleMm,
     OOT_AGE_CHANGE: settings.ageChange !== 'none',
